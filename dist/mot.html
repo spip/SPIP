@@ -27,7 +27,7 @@
 		<INCLURE{fond=inc-entete}{lang}>
 
 		[(#REM) Fil d'Ariane ]
-		<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:mots_clefs:><BOUCLE_ariane(GROUPES_MOTS){id_groupe}> &gt; [(#TITRE|supprimer_numero|couper{80})]</BOUCLE_ariane>[ &gt; (#TITRE|supprimer_numero|couper{80})]</div>
+		<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:mots_clefs:><BOUCLE_ariane(GROUPES_MOTS){id_groupe}> &gt; #TITRE</BOUCLE_ariane>[ &gt; (#TITRE|supprimer_numero|couper{80})]</div>
 
 		<div id="conteneur">
 
@@ -51,8 +51,8 @@
 					<ul>
 						<BOUCLE_articles(ARTICLES) {id_mot} {par popularite}{inverse}>
 						<li class="extrait">
-						<h3 class="titre"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero|couper{80})]</a></h3>
-						<small>[(#DATE|affdate)]<B_auteurs>, <:par_auteur:> <BOUCLE_auteurs(AUTEURS) {id_article} {", "}>[(#NOM|supprimer_numero)]</BOUCLE_auteurs></small></li>
+						<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
+						<small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small></li>
 						</BOUCLE_articles>
 					</ul>
 				</div><!-- fin contre-encart --></B_articles>
@@ -65,7 +65,7 @@
 					<h2 class="titre"><:rubriques:></h2>
 					<ul>
 						<BOUCLE_rubriques(RUBRIQUES) {id_mot} {par titre}>
-						<li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></li>
+						<li><a href="#URL_RUBRIQUE">#TITRE</a></li>
 						</BOUCLE_rubriques>
 					</ul>
 				</div>
@@ -77,7 +77,7 @@
 					<h2 class="titre"><:breves:></h2>
 					<ul>
 						<BOUCLE_breves(BREVES) {id_mot} {par titre}>
-						<li><a href="#URL_BREVE">[(#TITRE|supprimer_numero|couper{80})]</a></li>
+						<li><a href="#URL_BREVE">#TITRE</a></li>
 						</BOUCLE_breves>
 					</ul>
 				</div>
@@ -89,7 +89,7 @@
 					<h2 class="titre"><:messages_forum:></h2>
 					<ul>
 						<BOUCLE_forums_liens(FORUMS) {id_mot} {plat} {par date}{inverse}>
-						<li>[(#DATE|affdate_court) : ]<a href="#URL_FORUM">[(#TITRE|supprimer_numero|couper{80})]</a></li>
+						<li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_FORUM">#TITRE</a></li>
 						</BOUCLE_forums_liens>
 					</ul>
 				</div>
@@ -101,7 +101,7 @@
 					<h2 class="titre"><:sites_web:></h2>
 					<ul>
 						<BOUCLE_sites(SITES) {id_mot} {par nom_site}>
-						<li><a href="[(#ID_SYNDIC|generer_url_site)]">[(#NOM_SITE|supprimer_numero|couper{80})]</a></li>
+						<li><a href="[(#ID_SYNDIC|generer_url_site)]">#NOM_SITE</a></li>
 						</BOUCLE_sites>
 					</ul>
 				</div>
@@ -123,10 +123,10 @@
 				[(#REM) Menu de navigation mots-cles : les autres mots cles du meme groupe ]
 				<B_mots_freres>
 				<div class="divers">
-					<BOUCLE_groupe(GROUPES_MOTS) {id_groupe} {doublons}><h2 class="titre"[ title="(#TITRE|supprimer_numero|couper{80}|texte_backend)"]><:mots_clefs_meme_groupe:></h2></BOUCLE_groupe>
+					<BOUCLE_groupe(GROUPES_MOTS) {id_groupe} {doublons}><h2 class="titre"[ title="(#TITRE|couper{80}|texte_backend)"]><:mots_clefs_meme_groupe:></h2></BOUCLE_groupe>
 					<ul>
 						<BOUCLE_mots_freres(MOTS) {type} {par titre}>
-						<li><a href="#URL_MOT"[ class="(#EXPOSE)"]>[(#TITRE|supprimer_numero|couper{80})]</a></li>
+						<li><a href="#URL_MOT"[ class="(#EXPOSE)"]>#TITRE</a></li>
 						</BOUCLE_mots_freres>
 					</ul>
 				</div>
@@ -139,7 +139,7 @@
 					<ul>
 						<BOUCLE_groupes_freres(GROUPES_MOTS) {par titre} {doublons}>
 						<BOUCLE_mot_cousin(MOTS) {id_groupe} {par titre} {0,1}>
-						<li><a href="#URL_MOT">[(#TYPE|supprimer_numero)]</a></li>
+						<li><a href="#URL_MOT">#TYPE</a></li>
 						</BOUCLE_mot_cousin>
 						</BOUCLE_groupes_freres>
 					</ul>

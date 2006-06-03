@@ -27,7 +27,7 @@
 	<INCLURE{fond=inc-entete}{lang}>
 
 	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|supprimer_numero|couper{80})]</div>
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|couper{80})]</div>
 
 	<div id="conteneur">
 
@@ -36,8 +36,8 @@
 		<div id="contenu">
 			<div class="cartouche">
 				[(#LOGO_RUBRIQUE||reduire_image{200,200})]
-				<h1 class="titre">[(#TITRE|supprimer_numero)]</h1>
-				<small><:dernier_ajout:> : [(#DATE|nom_jour) ][(#DATE|affdate).]</small>
+				<h1 class="titre">#TITRE</h1>
+				<small><:dernier_ajout:> &ndash; [(#DATE|nom_jour) ][(#DATE|affdate).]</small>
 			</div>
 
 			[<div class="chapo">(#TEXTE)</div>]
@@ -56,8 +56,9 @@
 				<ul>
 					<BOUCLE_articles(ARTICLES) {id_rubrique} {par date}{inverse}{pagination}>
 					<li class="extrait">
-					<h3 class="titre"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero|couper{80})]</a></h3>
-					<small>[(#DATE|affdate)]<B_auteurs>, <:par_auteur:> <BOUCLE_auteurs(AUTEURS) {id_article} {", "}>[(#NOM|supprimer_numero)]</BOUCLE_auteurs></small>
+					<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
+					<small>[(#DATE|affdate)][,
+						<:par_auteur:> (#LESAUTEURS)]</small>
 					</li>
 					</BOUCLE_articles>
 				</ul>
@@ -88,7 +89,7 @@
 					<h2 class="titre"><:breves:></h2>
 					<ul>
 						<BOUCLE_breves(BREVES) {id_secteur} {par date}{inverse} {0,5}>
-						<li>[(#DATE|affdate_court) : ]<a href="#URL_BREVE">[(#TITRE|supprimer_numero|couper{80})]</a></li>
+						<li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_BREVE">#TITRE</a></li>
 						</BOUCLE_breves>
 					</ul>
 				</div>
@@ -100,11 +101,11 @@
 					<h2 class="titre"><:sur_web:></h2>
 					<ul>
 						<BOUCLE_sites(SITES) {id_rubrique} {par nom_site}>
-						<li><a href="[(#ID_SYNDIC|generer_url_site)]">[(#NOM_SITE|supprimer_numero|couper{80})]</a>
+						<li><a href="[(#ID_SYNDIC|generer_url_site)]">#NOM_SITE</a>
 							<B_syndic>
 							<ul>
 								<BOUCLE_syndic(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {0,3}>
-								<li><a href="#URL_ARTICLE" class="spip_out">[(#TITRE|supprimer_numero|couper{80})]</a></li>
+								<li><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></li>
 								</BOUCLE_syndic>
 							</ul>
 							</B_syndic>
@@ -136,7 +137,7 @@
 				<h2 class="titre"><:mots_clefs:></h2>
 				<ul>
 					<BOUCLE_mots(MOTS) {id_rubrique} {par titre}>
-					<li><a href="#URL_MOT" rel="tag">[(#TITRE|supprimer_numero|couper{80})]</a></li>
+					<li><a href="#URL_MOT" rel="tag">#TITRE</a></li>
 					</BOUCLE_mots>
 				</ul>
 			</div>

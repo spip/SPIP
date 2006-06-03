@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
-	<title>[(#TITRE|supprimer_numero|textebrut)][ - (#NOM_SITE_SPIP|textebrut)]</title>
+	<title>[(#TITRE|textebrut)][ - (#NOM_SITE_SPIP|textebrut)]</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
 	[<meta name="description" content="(#INTRODUCTION|couper{150}|attribut_html)" />]
 	<meta name="generator" content="SPIP" />
@@ -27,7 +27,7 @@
 	<INCLURE{fond=inc-entete}{lang}>
 
 	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><a href="#URL_SITE_SPIP/" ><:accueil_site:></a><BOUCLE_ariane(RUBRIQUES){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|supprimer_numero|couper{80})]</div>
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/" ><:accueil_site:></a><BOUCLE_ariane(RUBRIQUES){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|couper{80})]</div>
 
 	<div id="conteneur">
 
@@ -37,11 +37,11 @@
 
 			<div class="cartouche">
 				[(#LOGO_BREVE||reduire_image{200,200})]
-				<h1 class="titre">[(#TITRE|supprimer_numero)]</h1>
+				<h1 class="titre">#TITRE</h1>
 				<small>[(#DATE|nom_jour) ][(#DATE|affdate)]</small>
 			</div>
 
-			[<div class="texte">(#TEXTE|lignes_longues)</div>]
+			[<div class="texte">(#TEXTE)</div>]
 			[<p class="lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
 			[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
 
@@ -65,7 +65,7 @@
 				<h2 class="titre"><:autres_breves:></h2>
 				<ul>
 					<BOUCLE_breves(BREVES) {id_rubrique} {par date}{inverse}>
-					<li>[(#DATE|affdate_court) : ]<a href="#URL_BREVE"[ class="(#EXPOSE)"]>[(#TITRE|supprimer_numero|couper{80})]</a></li>
+					<li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_BREVE"[ class="(#EXPOSE)"]>#TITRE</a></li>
 					</BOUCLE_breves>
 				</ul>
 			</div>
@@ -77,7 +77,7 @@
 				<h2 class="titre"><:mots_clefs:></h2>
 				<ul>
 				<BOUCLE_mots(MOTS) {id_breve} {par titre}>
-					<li><a href="#URL_MOT" rel="tag">[(#TITRE|supprimer_numero|couper{80})]</a></li>
+					<li><a href="#URL_MOT" rel="tag">#TITRE</a></li>
 				</BOUCLE_mots>
 				</ul>
 			</div>

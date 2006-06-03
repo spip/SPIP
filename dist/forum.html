@@ -27,36 +27,43 @@
 	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
 
 		<BOUCLE_contexte_article(ARTICLES) {id_article}>
-			<BOUCLE_ariane_article(HIERARCHIE) {id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></BOUCLE_ariane_article>
-			[ &gt; <a href="#URL_ARTICLE">(#TITRE|supprimer_numero|couper{80})</a>]
+		<BOUCLE_ariane_article(HIERARCHIE) {id_article}>
+		&gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
+		</BOUCLE_ariane_article>
+		&gt; <a href="#URL_ARTICLE">[(#TITRE|couper{80})]</a>
 		</BOUCLE_contexte_article>
 		</B_contexte_article>
 
 		<BOUCLE_contexte_breve(BREVES) {id_breve}>
-			<BOUCLE_ariane_breve(RUBRIQUES) {id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></BOUCLE_ariane_breve>
-			[ &gt; <a href="#URL_BREVE">(#TITRE|supprimer_numero|couper{80})</a>]
+		<BOUCLE_ariane_breve(RUBRIQUES) {id_rubrique}>
+		&gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
+		</BOUCLE_ariane_breve>
+		&gt; <a href="#URL_BREVE">[(#TITRE|couper{80})]</a>
 		</BOUCLE_contexte_breve>
 
 		<BOUCLE_contexte_rubrique(RUBRIQUES) {id_rubrique}>
-			<BOUCLE_ariane_rubrique(HIERARCHIE) {id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></BOUCLE_ariane_rubrique>
-			[ &gt; <a href="#URL_RUBRIQUE">(#TITRE|supprimer_numero|couper{80})</a>]
+		<BOUCLE_ariane_rubrique(HIERARCHIE) {id_rubrique}>
+		&gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
+		</BOUCLE_ariane_rubrique>
+		&gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
 		</BOUCLE_contexte_rubrique>
 
 		<BOUCLE_contexte_site(SITES) {id_syndic}>
-			<BOUCLE_ariane_site(HIERARCHIE) {id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#NOM_SITE|supprimer_numero|couper{80})]</a></BOUCLE_ariane_site>
-			[ &gt; <a href="[(#ID_SYNDIC|generer_url_site)]">(#TITRE|supprimer_numero|couper{80})</a>]
+		<BOUCLE_ariane_site(HIERARCHIE) {id_rubrique}>
+		&gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
+		</BOUCLE_ariane_site>
+		&gt; <a href="[(#ID_SYNDIC|generer_url_site)]">[(#TITRE|couper{80})</a>
 		</BOUCLE_contexte_site>
-
-		<BOUCLE_contexte_forum(FORUMS) {id_forum}>
-			<BOUCLE_ariane_forum(HIERARCHIE) {id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></BOUCLE_ariane_forum>
-			[ &gt; <a href="#URL_FORUM">(#TITRE|supprimer_numero|couper{80})</a>]
-		</BOUCLE_contexte_forum>
 
 		<//B_contexte_site>
 		<//B_contexte_rubrique>
 		<//B_contexte_breve>
 		<//B_contexte_article>
-		
+
+		<BOUCLE_contexte_forum(FORUMS) {id_forum}>
+		&gt; <a href="#URL_FORUM">[(#TITRE|couper{80})]</a>
+		</BOUCLE_contexte_forum>
+
 		 &gt; <:poster_message:>
 		
 		</div>
@@ -73,9 +80,11 @@
 				<BOUCLE_forum_parent(FORUMS) {id_forum}>
 				<div class="extrait">
 					<h2 class="surtitre"><:en_reponse:></h2>
-					<p class="titre"><a href="#URL_FORUM">[(#TITRE|supprimer_numero|couper{80})]</a></p>
-					<small>[(#DATE|affdate)][&nbsp;(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> (#NOM)]</small>
-					[<div class="texte">(#INTRODUCTION|lignes_longues)</div>]
+					<p class="titre"><a href="#URL_FORUM">#TITRE</a></p>
+					<small>[(#DATE|affdate)][
+					(#DATE|heures)][:(#DATE|minutes)][,
+					<:par_auteur:> (#NOM)]</small>
+					[<div class="texte">(#INTRODUCTION)</div>]
 				</div>
 				</BOUCLE_forum_parent>
 
@@ -83,9 +92,10 @@
 				<div class="extrait">
 					<h2 class="surtitre"><:en_reponse:></h2>
 					[(#LOGO_ARTICLE||reduire_image{120,120})]
-					<p class="titre"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero|couper{80})]</a></p>
-					<small>[(#DATE|affdate)]<B_auteurs>, <:par_auteur:> <BOUCLE_auteurs(AUTEURS) {id_article} {", "}><a href="#URL_AUTEUR">[(#NOM|supprimer_numero|couper{80})]</a></BOUCLE_auteurs></small>
-					[<div class="texte">(#INTRODUCTION|lignes_longues)</div>]
+					<p class="titre"><a href="#URL_ARTICLE">#TITRE</a></p>
+					<small>[(#DATE|affdate)][,
+					<:par_auteur:> (#LESAUTEURS)]</small>
+					[<div class="texte">(#INTRODUCTION)</div>]
 				</div>
 				</BOUCLE_article>
 
@@ -93,28 +103,28 @@
 				<div class="extrait">
 					<h2 class="surtitre"><:en_reponse:></h2>
 					[(#LOGO_BREVE||reduire_image{120,120})]
-					<p class="titre"><a href="#URL_BREVE">[(#TITRE|supprimer_numero|couper{80})]</a></p>
+					<p class="titre"><a href="#URL_BREVE">#TITRE</a></p>
 					<small>[(#DATE|affdate)]</small>
-					[<div class="texte">(#INTRODUCTION|lignes_longues)</div>]
+					[<div class="texte">(#INTRODUCTION)</div>]
 				</div>
 				</BOUCLE_breve>
 
 				<BOUCLE_rubrique(RUBRIQUES) {id_rubrique}>
 				<div class="extrait">
 					<h2 class="surtitre"><:en_reponse:></h2>
-					<p class="titre"><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></p>
-					[<div class="texte">(#TEXTE|lignes_longues)</div>]
+					<p class="titre"><a href="#URL_RUBRIQUE">#TITRE</a></p>
+					[<div class="texte">(#TEXTE)</div>]
 				</div>
 				</BOUCLE_rubrique>
 
 				<BOUCLE_syndic(SITES) {id_syndic}>
 				<div class="extrait">
 					<h2 class="surtitre"><:en_reponse:></h2>
-					<p class="titre"><a href="[(#ID_SYNDIC|generer_url_site)]">[(#NOM_SITE|supprimer_numero|couper{80})]</a></p>
-					[<div class="texte">(#DESCRIPTIF|lignes_longues)</div>]
+					<p class="titre"><a
+						href="[(#ID_SYNDIC|generer_url_site)]">#NOM_SITE</a></p>
+					[<div class="texte">(#DESCRIPTIF)</div>]
 				</div>
 				</BOUCLE_syndic>
-
 
 				<//B_forum_parent>
 
