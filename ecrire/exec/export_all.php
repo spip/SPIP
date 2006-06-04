@@ -30,26 +30,28 @@ if ($f = include_spip('mes_fonctions', false)) {
 }
 
 // par defaut tout est exporte sauf les tables ci-dessous
-// possibiliter de definir cela tables via la meta
+
 global $EXPORT_tables_noexport;
-if (isset($GLOBALS['meta']['EXPORT_tables_noexport']))
-	$EXPORT_tables_noexport = unserialize($GLOBALS['meta']['EXPORT_tables_noexport']);
-else{
-	include_spip('inc/meta');
-	$EXPORT_tables_noexport[]='spip_ajax_fonc';
-	$EXPORT_tables_noexport[]='spip_caches';
-	$EXPORT_tables_noexport[]='spip_meta';
-	$EXPORT_tables_noexport[]='spip_index';
-	$EXPORT_tables_noexport[]='spip_index_dico';
-	$EXPORT_tables_noexport[]='spip_referers';
-	$EXPORT_tables_noexport[]='spip_referers_articles';
-	$EXPORT_tables_noexport[]='spip_visites';
-	$EXPORT_tables_noexport[]='spip_visites_articles';
-	$EXPORT_tables_noexport[]='spip_ortho_cache';
-	$EXPORT_tables_noexport[]='spip_ortho_dico';
-	ecrire_meta('EXPORT_tables_noexport',serialize($EXPORT_tables_noexport));
-	ecrire_metas();
-}
+
+if (!isset($EXPORT_tables_noexport))
+  {
+	$EXPORT_tables_noexport= array(
+		'spip_ajax_fonc',
+		'spip_caches',
+		'spip_meta',
+		'spip_index',
+		'spip_index_dico',
+		'spip_referers',
+		'spip_referers_articles',
+		'spip_visites',
+		'spip_visites_articles',
+		'spip_ortho_cache',
+		'spip_ortho_dico'
+		);
+	if (!$GLOBALS['connect_toutes_rubriques'])
+		$EXPORT_tables_noexport[]='spip_messages';
+		$EXPORT_tables_noexport[]='spip_auteurs_messages';
+  }
 
 function exec_export_all_dist()
 {
