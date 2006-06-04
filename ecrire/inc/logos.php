@@ -520,9 +520,11 @@ function reduire_image_logo($img, $taille = -1, $taille_y = -1) {
 
 	$attributs .= $attributs_alt;
 
+	$style = extraire_attribut($img, 'style');
+
 	// attributs deprecies. Transformer en CSS
 	if ($espace = extraire_attribut($img, 'hspace'))
-		$attributs .= " style='margin: ${espace}px;'";
+		$style .= "margin:${espace}px;";
 	else
 		if ($class = extraire_attribut($img, 'class'))
 			$attributs .=  " class='$class'";
@@ -531,6 +533,13 @@ function reduire_image_logo($img, $taille = -1, $taille_y = -1) {
 	// attribut deprecie mais equivalent CSS pas clair
 	if ($align = extraire_attribut($img, 'align'))
 		$attributs .= " align='$align'";
+
+var_dump($style);
+	$style = trim(
+		preg_replace(',(^|[[:space:]])width:[^;]+;?,ims', '', $style)
+	);
+	if ($style)
+		$attributs .= " style='$style'";
 
 	if (eregi("(.*)\.(jpg|gif|png)$", $logo, $regs)) {
 		if ($i = cherche_image_nommee($regs[1], array($regs[2]))) {
