@@ -126,7 +126,7 @@ function texte_backend($texte) {
 		$texte = str_replace(chr(159), '&#159;', $texte);
 	}
 
-	// nettoyer l'apostrophe curly qui semble poser probleme a certains rss-readers¡
+	// nettoyer l'apostrophe curly qui semble poser probleme a certains rss-readers
 	$texte = str_replace("&#8217;","'",$texte);
 
 	return $texte;

@@ -2740,19 +2740,18 @@ function debut_droite($rubrique="") {
 	if ($options == "avancees") {
 		// liste des articles bloques
 		if ($GLOBALS['meta']["articles_modif"] != "non") {
-			$result = spip_query("SELECT id_article, titre, id_rubrique FROM spip_articles WHERE auteur_modif = '$connect_id_auteur' AND date_modif > DATE_SUB(NOW(), INTERVAL 1 HOUR) ORDER BY date_modif DESC");
-			$num_articles_ouverts = spip_num_rows($result);
-			if ($num_articles_ouverts) {
+			include_spip('inc/drapeau_edition');
+			$articles_ouverts = liste_drapeau_edition ($connect_id_auteur, 'article');
+			if (count($articles_ouverts)) {
 				echo "<p>";
 				debut_cadre_enfonce('article-24.gif');
 				//echo "<font face='Verdana,Arial,Sans,sans-serif' size='2'>";
 				echo "<div class='verdana2' style='padding: 2px; background-color:$couleur_foncee; color: white; font-weight: bold;'>";
 					echo _T('info_cours_edition')."&nbsp;:".aide('artmodif');
 				echo "</div>";
-				while ($row = @spip_fetch_array($result)) {
+				foreach ($articles_ouverts as $row) {
 					$ze_article = $row['id_article'];
-					$ze_titre = typo($row['titre']);
-
+					$ze_titre = $row['titre'];
 
 					if ($ifond == 1) {
 						$couleur = $couleur_claire;

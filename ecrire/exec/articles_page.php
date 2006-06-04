@@ -81,17 +81,4 @@ echo "</p>";
 fin_page();
 }
 
-// Debloquer articles
-
-function changer_statut_articles_page($debloquer_article)
-{
-	global $connect_id_auteur;
-	if ($debloquer_article) {
-		if ($debloquer_article <> 'tous')
-			$where_id = "AND id_article=".intval($debloquer_article);
-		spip_query("UPDATE spip_articles SET auteur_modif='0' WHERE auteur_modif=$connect_id_auteur $where_id");
-
-	}
-}
-
 ?>

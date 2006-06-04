@@ -34,7 +34,6 @@ $spip_articles = array(
 		"referers"	=> "INTEGER DEFAULT '0' NOT NULL",
 		"popularite"	=> "DOUBLE DEFAULT '0' NOT NULL",
 		"accepter_forum"	=> "CHAR(3) NOT NULL",
-		"auteur_modif"	=> "bigint(21) DEFAULT '0' NOT NULL",
 		"date_modif"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 		"lang"		=> "VARCHAR(10) DEFAULT '' NOT NULL",
 		"langue_choisie"	=> "VARCHAR(3) DEFAULT 'non'",

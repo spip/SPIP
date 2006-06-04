@@ -98,7 +98,13 @@ else if ($new=='oui') {
 
 	if (!$flag_editable) return false;
 
-	spip_query("UPDATE spip_articles SET date_modif=NOW(), auteur_modif=$connect_id_auteur WHERE id_article=$id_article");
+	// marquer le fait que l'article est ouvert en edition par toto a telle date
+	// une alerte sera donnee aux autres redacteurs sur exec=articles
+	if ($GLOBALS['meta']['articles_modif'] != 'non') {
+		include_spip('inc/drapeau_edition');
+		if ($id_article)
+			signale_edition ($id_article, $connect_id_auteur, 'article');
+	}
 
 	return $row;
 }
