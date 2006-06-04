@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
-	<title>[(#TITRE|supprimer_numero|textebrut)][ - (#NOM_SITE_SPIP|textebrut)]</title>
+	<title>[(#TITRE|textebrut)][ - (#NOM_SITE_SPIP|textebrut)]</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
 	[<meta name="description" content="(#DESCRIPTIF|sinon{#TEXTE}|couper{150}|attribut_html)" />]
 	<meta name="generator" content="SPIP" />
@@ -27,7 +27,7 @@
 		<INCLURE{fond=inc-entete}{lang}>
 
 		[(#REM) Fil d'Ariane ]
-		<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:mots_clefs:><BOUCLE_ariane(GROUPES_MOTS){id_groupe}> &gt; #TITRE</BOUCLE_ariane>[ &gt; (#TITRE|supprimer_numero|couper{80})]</div>
+		<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:mots_clefs:><BOUCLE_ariane(GROUPES_MOTS){id_groupe}> &gt; [(#TITRE|couper{80})]</BOUCLE_ariane>[ &gt; (#TITRE|couper{80})]</div>
 
 		<div id="conteneur">
 
@@ -37,7 +37,7 @@
 
 				<div class="cartouche">
 					[(#LOGO_MOT||reduire_image{200,200})]
-					<h1 class="titre">[(#TITRE|supprimer_numero)]</h1>
+					<h1 class="titre">#TITRE</h1>
 				</div>
 
 				[<div class="chapo">(#TEXTE)</div>]

@@ -49,7 +49,7 @@
 					<BOUCLE_articles(ARTICLES) {recherche}
 					{par points} {inverse} {pagination}>
 					<li class="extrait">
-					<h3 class="titre"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></h3>
+					<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
 					<small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small>
 					</li>
 					</BOUCLE_articles>
@@ -68,7 +68,7 @@
 					<h2 class="titre"><:rubriques:></h2>
 					<ul>
 						<BOUCLE_rubriques(RUBRIQUES) {recherche} {par points}{inverse} {pagination 5}>
-						<li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+						<li><a href="#URL_RUBRIQUE">#TITRE</a></li>
 						</BOUCLE_rubriques>
 					</ul>
 					[<p class="pagination">(#PAGINATION)</p>]
@@ -82,7 +82,7 @@
 					<h2 class="titre"><:mots_clefs:></h2>
 					<ul>
 						<BOUCLE_mots(MOTS) {recherche} {par points}{inverse} {pagination 5}>
-						<li><a href="#URL_MOT">[(#TITRE|supprimer_numero)]</a></li>
+						<li><a href="#URL_MOT">#TITRE</a></li>
 						</BOUCLE_mots>
 					</ul>
 					[<p class="pagination">(#PAGINATION)</p>]
@@ -96,7 +96,7 @@
 					<h2 class="titre"><:breves:></h2>
 					<ul>
 						<BOUCLE_breves(BREVES) {recherche} {par points}{inverse} {pagination 5}>
-						<li>[(#DATE|affdate_court) : ]<a href="#URL_BREVE">[(#TITRE|supprimer_numero)]</a></li>
+						<li>[(#DATE|affdate_court) : ]<a href="#URL_BREVE">#TITRE</a></li>
 						</BOUCLE_breves>
 					</ul>
 					[<p class="pagination">(#PAGINATION)</p>]
@@ -124,7 +124,7 @@
 					<h2 class="titre"><:sites_web:></h2>
 					<ul>
 						<BOUCLE_sites(SITES) {recherche} {par points}{inverse} {pagination 5}>
-						<li><a href="[(#ID_SYNDIC|generer_url_site)]">[(#NOM_SITE|supprimer_numero)]</a></li>
+						<li><a href="[(#ID_SYNDIC|generer_url_site)]">#NOM_SITE</a></li>
 						</BOUCLE_sites>
 					</ul>
 					[<p class="pagination">(#PAGINATION)</p>]
