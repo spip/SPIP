@@ -33,8 +33,7 @@ if ($f = include_spip('mes_fonctions', false)) {
 
 global $EXPORT_tables_noexport;
 
-if (!isset($EXPORT_tables_noexport))
-  {
+if (!isset($EXPORT_tables_noexport)){
 	$EXPORT_tables_noexport= array(
 		'spip_ajax_fonc',
 		'spip_caches',
@@ -48,10 +47,11 @@ if (!isset($EXPORT_tables_noexport))
 		'spip_ortho_cache',
 		'spip_ortho_dico'
 		);
-	if (!$GLOBALS['connect_toutes_rubriques'])
+	if (!$GLOBALS['connect_toutes_rubriques']){
 		$EXPORT_tables_noexport[]='spip_messages';
 		$EXPORT_tables_noexport[]='spip_auteurs_messages';
-  }
+	}
+}
 
 function exec_export_all_dist()
 {
