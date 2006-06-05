@@ -794,7 +794,7 @@ in a colour indicating their status:',
 'texte_admin_effacer_01' => 'This command deletes <i>all</i> the content of the database,
 including <i>all</i> the access parameters for editors and administrators. After executing it, you should
 reinstall SPIP in order to recreate a new database and the first administrator\'s access.',
-'texte_admin_tech_01' => 'This option allows you to save the content of the database in a file stored in the directory @dossier@. Also, remember to retrieve the whole <i>IMG/</i>, directory, which contains the images and the documents used in the articles and sections.',
+'texte_admin_tech_01' => 'This option allows you to save the content of the database in a file stored in the directory @dossier@. Also, remember to retrieve the whole @img@, directory, which contains the images and the documents used in the articles and sections.',
 'texte_admin_tech_02' => 'Warning: this backup can ONLY be restored in a site installed under the same version of SPIP. You should certainly not "empty the database" and expect to re-install the backup after the upgrade... For more information refer to <a href=\'http://www.spip.net/en_article2428.html\'>SPIP documentation</a>.',
 'texte_admin_tech_03' => 'You can choose to save the file in a compressed form, to 
 	speed up its transfer to your machine or to a backup server and save some disk space.',

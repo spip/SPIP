@@ -87,10 +87,10 @@ H&#7891; s&#417; SPIP</a>.',
 'bouton_radio_pas_petition' => 'Kh&ocirc;ng d&ugrave;ng',
 'bouton_radio_petition_activee' => 'Th&#7881;nh nguy&#7879;n th&#432; &#273;&#432;&#7907;c m&#7903; l&ecirc;n',
 'bouton_radio_publication_immediate' => 'Ph&aacute;t h&agrave;nh th&#432; t&iacute;n ngay l&#7853;p t&#7913;c (th&#432; g&#7917;i &#273;i s&#7869; hi&#7879;n l&ecirc;n ngay, qu&#7843;n tr&#7883; vi&ecirc;n c&oacute; th&#7875; x&oacute;a ch&uacute;ng sau &#273;&oacute;).',
-'bouton_radio_sauvegarde_compressee' => 'l&#432;u tr&#7919; l&#7841;i d&#432;&#7899;i d&#7841;ng n&eacute;n trong
-<b>ecrire/data/dump.xml.gz</b>',
-'bouton_radio_sauvegarde_non_compressee' => 'l&#432;u tr&#7919; l&#7841;i d&#432;&#7899;i d&#7841;ng th&#432;&#7901;ng trong
-<b>ecrire/data/dump.xml</b>',
+'bouton_radio_sauvegarde_compressee' => '<MODIF>l&#432;u tr&#7919; l&#7841;i d&#432;&#7899;i d&#7841;ng n&eacute;n trong
+@fichier@',
+'bouton_radio_sauvegarde_non_compressee' => '<MODIF>l&#432;u tr&#7919; l&#7841;i d&#432;&#7899;i d&#7841;ng th&#432;&#7901;ng trong
+@fichier@',
 'bouton_radio_supprimer_petition' => 'X&oacute;a th&#7881;nh nguy&#7879;n th&#432;',
 'bouton_radio_syndication' => 'Syndication:',
 'bouton_redirection' => 'CHUY&#7874;N T&#7898;I',
@@ -452,7 +452,7 @@ H&#7891; s&#417; SPIP</a>.',
 'info_principaux_correspondants' => 'Nh&#7919;ng ng&#432;&#7901;i li&ecirc;n l&#7841;c ch&iacute;nh',
 'info_procedez_par_etape' => 'Xin ti&#7871;p di&#7877;n t&#7915;ng b&#432;&#7899;c m&#7897;t',
 'info_procedure_maj_version' => 'Quy tr&#236;nh n&#226;ng c&#7845;p c&#7847;n &#273;&#432;&#7907;c ch&#7841;y &#273;&#7875; database th&#237;ch &#7913;ng v&#7899;i &#7845;n b&#7843;n SPIP m&#7899;i.',
-'info_ps' => 'T&#225;i b&#250;t.',
+'info_ps' => '<MODIF>T&#225;i b&#250;t.',
 'info_publier' => '&#273;&#259;ng t&#7843;i',
 'info_publies' => 'B&agrave;i c&#7911;a b&#7841;n &#273;&#432;&#7907;c &#273;&#259;ng online',
 'info_question_accepter_visiteurs' => 'N&#7871;u trang web cho ph&eacute;p kh&aacute;ch ghi danh m&agrave; kh&ocirc;ng c&#7847;n ph&#7843;i v&agrave;o v&ugrave;ng ri&ecirc;ng, th&igrave; xin h&atilde;y m&#7903; l&ecirc;n nh&#7919;ng ch&#7885;n l&#7921;a sau:',
@@ -501,7 +501,7 @@ H&#7891; s&#417; SPIP</a>.',
 'info_sauvegarde_petitions' => 'D&#7921; tr&#7919; c&#225;c th&#7881;nh nguy&#7879;n th&#432;',
 'info_sauvegarde_refers' => 'D&#7921; tr&#7919; referrers',
 'info_sauvegarde_reussi_01' => 'D&#7921; tr&#7919; th&#224;nh c&#244;ng.',
-'info_sauvegarde_reussi_02' => 'Database &#273;&#432;&#7907;c l&#432;u tr&#7919; trong <b>ecrire/data/@archive@</b>. B&#7841;n c&#243; th&#7875; ',
+'info_sauvegarde_reussi_02' => '<MODIF>Database &#273;&#432;&#7907;c l&#432;u tr&#7919; trong @archive@. B&#7841;n c&#243; th&#7875; ',
 'info_sauvegarde_reussi_03' => 'tr&#7903; l&#7841;i vi&#7879;c qu&#7843;n tr&#7883;',
 'info_sauvegarde_reussi_04' => 'website c&#7911;a b&#7841;n.',
 'info_sauvegarde_rubriques' => 'D&#7921; tr&#7919; c&#225;c &#273;&#7873; m&#7909;c',
@@ -740,15 +740,15 @@ v&agrave; hi&#7875;n ra v&#7899;i nh&#7919;ng m&agrave;u kh&aacute;c nhau t&ugra
 
 // T
 'taille_cache_image' => 'C&aacute;c h&igrave;nh &#273;&#432;&#7907;c t&iacute;nh to&aacute;n t&#7921; &#273;&#7897;ng b&#7903;i SPIP (h&igrave;nh nh&#7887;, t&#7921;a &#273;&#7873; &#273;&#432;&#7907;c &#273;&#7893;i th&agrave;nh h&igrave;nh, c&ocirc;ng th&#7913;c to&aacute;n h&#7885;c d&#432;&#7899;i d&#7841;ng TeX, v.v...) chi&#7871;m t&#7893;ng c&#7897;ng @taille@ trong ng&#259;n @dir@.',
-'taille_cache_infinie' => 'Trang web kh&ocirc;ng c&oacute; gi&#7899;i h&#7841;n kh&#7893; c&#7911;a ng&#259;n <code>CACHE/</code>.',
-'taille_cache_maxi' => 'SPIP s&#7869; gi&#7899;i h&#7841;n kh&#7893; c&#7911;a ng&#259;n <code>CACHE/</code> v&agrave;o kho&#7843;ng <b>@octets@</b> d&#7919; li&#7879;u.',
+'taille_cache_infinie' => '<MODIF>Trang web kh&ocirc;ng c&oacute; gi&#7899;i h&#7841;n kh&#7893; c&#7911;a ng&#259;n <code>CACHE/</code>.',
+'taille_cache_maxi' => '<MODIF>SPIP s&#7869; gi&#7899;i h&#7841;n kh&#7893; c&#7911;a ng&#259;n <code>CACHE/</code> v&agrave;o kho&#7843;ng <b>@octets@</b> d&#7919; li&#7879;u.',
 'taille_cache_octets' => 'Kh&#7893; c&#7911;a cache hi&#7879;n th&#7901;i l&agrave; @octets@.',
 'taille_cache_vide' => 'Cache tr&#7889;ng r&#7895;ng.',
 'taille_repertoire_cache' => 'Kh&#7893; hi&#7879;n th&#7901;i c&#7911;a cache',
 'text_article_propose_publication' => 'B&agrave;i n&#7897;p &#273;&#7875; chu&#7849;n b&#7883; ph&aacute;t h&agrave;nh. Xin &#273;&#7915;ng ng&#7847;n ng&#7841;i cho &yacute; ki&#7871;n c&#7911;a b&#7841;n qua di&#7877;n &#273;&agrave;n &#273;&iacute;nh k&egrave;m theo b&agrave;i n&agrave;y (&#7903; cu&#7889;i trang).',
 'texte_acces_ldap_anonyme_1' => 'M&#7897;t s&#7889; server LDAP kh&#244;ng cho ph&#233;p v&#224;o &#7849;n danh. Trong tr&#432;&#7901;ng h&#7907;p n&#224;y b&#7841;n ph&#7843;i d&#249;ng m&#7897;t k&#253; danh &#273;&#7847;u ti&#234;n &#273;&#7875; c&#243; th&#7875; &#273;i t&#236;m t&#242;i d&#7919; ki&#7879;n trong danh b&#7841; sau &#273;&#243;. Tuy nhi&#234;n, trong h&#7847;u h&#7871;t tr&#432;&#7901;ng h&#7907;p, nh&#7919;ng kho&#7843;ng sau &#273;&#226;y c&#243; th&#7875; &#273;&#7875; tr&#7889;ng.',
 'texte_admin_effacer_01' => 'M&#7879;nh l&#7879;nh n&agrave;y x&oacute;a <i>t&#7845;t c&#7843;</i> n&#7897;i dung c&#7911;a database, lu&ocirc;n c&#7843; login/m&#7853;t m&atilde; c&#7911;a c&aacute;c ch&#7911; b&uacute;t v&agrave; qu&#7843;n l&yacute;. Sau khi ch&#7841;y m&#7879;nh l&#7879;nh n&agrave;y xong, b&#7841;n n&ecirc;n thi&#7871;t tr&iacute; l&#7841;i SPIP &#273;&#7875; t&aacute;i l&#7853;p l&#7841;i m&#7897;t database m&#7899;i c&ugrave;ng v&#7899;i login/m&#7853;t m&atilde; c&#7911;a qu&#7843;n tr&#7883; vi&ecirc;n &#273;&#7847;u ti&ecirc;n.',
-'texte_admin_tech_01' => 'Ch&#7885;n l&#7921;a n&agrave;y cho ph&eacute;p b&#7841;n gi&#7919; l&#7841;i n&#7897;i dung c&#7911;a database v&agrave;o trong m&#7897;t h&#7891; s&#417; &#273;&#7921;ng trong ng&#259;n <i>ecrire/data/</i>. V&agrave; c&#361;ng &#273;&#7915;ng qu&ecirc;n c&#7845;t gi&#7919; l&#7841;i l&#7841;i to&agrave;n b&#7897; ng&#259;n <i>IMG/</i>, ch&#7913;a &#273;&#7921;ng c&aacute;c h&igrave;nh &#7843;nh d&ugrave;ng trong c&aacute;c b&agrave;i v&#7903; v&agrave; &#273;&#7873; m&#7909;c.',
+'texte_admin_tech_01' => '<MODIF>Ch&#7885;n l&#7921;a n&agrave;y cho ph&eacute;p b&#7841;n gi&#7919; l&#7841;i n&#7897;i dung c&#7911;a database v&agrave;o trong m&#7897;t h&#7891; s&#417; &#273;&#7921;ng trong ng&#259;n @dossier@. V&agrave; c&#361;ng &#273;&#7915;ng qu&ecirc;n c&#7845;t gi&#7919; l&#7841;i l&#7841;i to&agrave;n b&#7897; ng&#259;n <i>IMG/</i>, ch&#7913;a &#273;&#7921;ng c&aacute;c h&igrave;nh &#7843;nh d&ugrave;ng trong c&aacute;c b&agrave;i v&#7903; v&agrave; &#273;&#7873; m&#7909;c.',
 'texte_admin_tech_02' => '<B>C&#7843;nh b&aacute;o</b>: CH&#7880; C&Oacute; TH&#7874; ph&#7909;c h&#7891;i b&#7843;n d&#7921; tr&#7919; n&agrave;y trong m&#7897;t website c&oacute; c&ugrave;ng &#7845;n b&#7843;n SPIP.
  L&#7895;i l&#7847;m th&#432;&#7901;ng hay v&#7845;p ph&#7843;i l&agrave; th&#7921;c hi&#7879;n vi&#7879;c d&#7921; tr&#7919; database tr&#432;&#7899;c khi n&acirc;ng c&#7845;p SPIP...
  &#272;&#7875; bi&#7871;t th&ecirc;m, xin &#273;&#7885;c [t&agrave;i li&#7879;u SPIP->http://www.spip.net/fr_article1489.html].',
@@ -790,7 +790,7 @@ v&agrave; hi&#7875;n ra v&#7899;i nh&#7919;ng m&agrave;u kh&aacute;c nhau t&ugra
 'texte_effacer_donnees_indexation' => 'X&#243;a d&#7919; ki&#7879;n indexing',
 'texte_en_cours_validation' => 'B&agrave;i v&#7903; v&agrave; tin ng&#7855;n sau &#273;&acirc;y &#273;&#432;&#7907;c n&#7897;p &#273;&#7875; ch&#7901; ph&aacute;t h&agrave;nh. Xin g&oacute;p &yacute; qua di&#7877;n &#273;&agrave;n &#273;&iacute;nh k&egrave;m. ',
 'texte_enrichir_mise_a_jour' => 'B&#7841;n c&oacute; th&#7875; tr&igrave;nh b&agrave;y v&#259;n b&#7843;n g&#7885;n &#273;&#7865;p h&#417;n b&#7857;ng c&aacute;ch d&ugrave;ng nh&#7919;ng <B>&laquo;l&#7889;i x&#7871;p b&agrave;i t&#7855;t&raquo;</B>.',
-'texte_fichier_authent' => 'SPIP c&oacute; n&ecirc;n l&#7853;p ra h&#7891; s&#417; &#273;&#7863;c bi&#7879;t <tt>.htpasswd</tt> v&agrave; <tt>.htpasswd-admin</tt> trong th&#432; m&#7909;c <tt>ecrire/data/</tt>?</b><p> Hai h&#7891; s&#417; n&agrave;y d&ugrave;ng &#273;&#7875; gi&#7899;i h&#7841;n c&aacute;c t&aacute;c gi&#7843; v&agrave; qu&#7843;n l&yacute; vi&ecirc;n ra/v&agrave;o c&aacute;c n&#417;i kh&aacute;c trong website.<p>N&#7871;u b&#7841;n ch&#432;a t&#7915;ng s&#7917; d&#7909;ng &#273;&#7863;c t&iacute;nh n&agrave;y, h&atilde;y &#273;&#7875; nguy&ecirc;n l&#7921;a ch&#7885;n n&agrave;y v&#7899;i c&aacute;c gi&aacute; tr&#7883; &#273;&#7883;nh s&#7861;n (kh&ocirc;ng l&#7853;p ra h&#7891; s&#417;). ',
+'texte_fichier_authent' => '<MODIF>SPIP c&oacute; n&ecirc;n l&#7853;p ra h&#7891; s&#417; &#273;&#7863;c bi&#7879;t <tt>.htpasswd</tt> v&agrave; <tt>.htpasswd-admin</tt> trong th&#432; m&#7909;c @dossier@?</b><p> Hai h&#7891; s&#417; n&agrave;y d&ugrave;ng &#273;&#7875; gi&#7899;i h&#7841;n c&aacute;c t&aacute;c gi&#7843; v&agrave; qu&#7843;n l&yacute; vi&ecirc;n ra/v&agrave;o c&aacute;c n&#417;i kh&aacute;c trong website.<p>N&#7871;u b&#7841;n ch&#432;a t&#7915;ng s&#7917; d&#7909;ng &#273;&#7863;c t&iacute;nh n&agrave;y, h&atilde;y &#273;&#7875; nguy&ecirc;n l&#7921;a ch&#7885;n n&agrave;y v&#7899;i c&aacute;c gi&aacute; tr&#7883; &#273;&#7883;nh s&#7861;n (kh&ocirc;ng l&#7853;p ra h&#7891; s&#417;). ',
 'texte_informations_personnelles_1' => 'H&#7879; th&#7889;ng s&#7869; cung c&#7845;p cho b&#7841;n l&#7889;i ra/v&#224;o website.',
 'texte_informations_personnelles_2' => '(Ghi ch&#250;: n&#7871;u &#273;&#226;y l&#224; t&#225;i thi&#7871;t tr&#237;, v&#224; vi&#7879;c ra/v&#224;o c&#7911;a b&#7841;n v&#7851;n b&#236;nh th&#432;&#7901;ng, b&#7841;n ti&#7871;p t&#7909;c v&#7853;y ',
 'texte_introductif_article' => '(L&#7901;i m&#7903; &#273;&#7847;u cho b&#224;i vi&#7871;t.) ',
@@ -845,10 +845,10 @@ v&agrave; hi&#7875;n ra v&#7899;i nh&#7919;ng m&agrave;u kh&aacute;c nhau t&ugra
 'texte_referencement_automatique' => '<MODIF><B>N&#7889;i k&#7871;t website t&#7921; &#273;&#7897;ng</B> B&#7841;n c&#243; th&#7875; n&#7889;i k&#7871;t m&#7897;t website nhanh ch&#243;ng b&#7857;ng c&#225;ch cho v&#224;o d&#432;&#7899;i &#273;&#226;y &#273;&#7883;a ch&#7881; URL, hay &#273;&#7883;a ch&#7881; c&#7911;a h&#7891; s&#417; backend. SPIP s&#7869; t&#7921; &#273;&#7897;ng thu th&#7853;p l&#7845;y c&#225;c d&#7919; ki&#7879;n li&#234;n h&#7879; &#273;&#7871;n website &#273;&#243; (t&#7921;a &#273;&#7873;, m&#244; t&#7843; ...).',
 'texte_requetes_echouent' => '<B>Khi m&#7897;t s&#7889; h&#7887;i-&#273;&aacute;p MySQL tr&#432;&#7907;t h&agrave;ng lo&#7841;t v&agrave; c&oacute; v&#7867; nh&#432; kh&ocirc;ng c&oacute; l&yacute; do g&igrave; c&#7843;, &#273;i&#7873;u &#273;&oacute; cho th&#7845;y c&oacute; th&#7875; ch&iacute;nh database l&agrave; th&#7911; ph&#7841;m. </b><p>MySQL c&oacute; m&#7897;t &#273;&#7863;c &#273;i&#7875;m s&#7917;a ch&#7919;a c&aacute;c b&#7843;n c&#7911;a n&oacute; khi ch&uacute;ng b&#7883; h&#432; h&#7841;i. B&#7841;n c&oacute; th&#7875; th&#7917; d&ugrave;ng &#273;&#7863;c &#273;i&#7875;m s&#7917;a ch&#7919;a n&agrave;y, trong tr&#432;&#7901;ng h&#7907;p th&#7845;t b&#7841;i, b&#7841;n n&ecirc;n gi&#7919; l&#7841;i m&#7897;t b&#7843;n sao c&#7911;a m&agrave;n &#7843;nh &#273;&#7875; gi&uacute;p soi s&aacute;ng v&#7845;n &#273;&#7873; ... <P> N&#7871;u v&#7845;n &#273;&#7873; v&#7851;n ti&#7871;p t&#7909;c x&#7843;y ra, li&ecirc;n l&#7841;c v&#7899;i ch&#7911; nh&acirc;n c&#7911;a m&aacute;y.',
 'texte_restaurer_base' => 'Ph&#7909;c h&#7891;i n&#7897;i dung c&#7911;a kho d&#7921; tr&#7919; database',
-'texte_restaurer_sauvegarde' => 'Ch&#7885;n l&#7921;a n&#224;y cho ph&#233;p b&#7841;n ph&#7909;c h&#7891;i m&#7897;t h&#7891; s&#417; d&#7921; tr&#7919; tr&#432;&#7899;c &#273;&#243; c&#7911;a database. &#272;&#7875; th&#7921;c hi&#7879;n &#273;i&#7873;u n&#224;y, h&#7891; s&#417; ch&#7913;a ph&#7847;n d&#7921; tr&#7919; ph&#7843;i &#273;&#432;&#7907;c n&#234;n gi&#7919; &#7903; th&#432; m&#7909;c <i>ecrire/data/</i>. C&#7849;n th&#7853;n v&#7899;i &#273;&#7863;c &#273;i&#7875;m n&#224;y: <B>B&#7845;t c&#7913; s&#7917;a &#273;&#7893;i hay th&#7845;t tho&#225;t n&#224;o x&#7843;y ra l&#224; kh&#244;ng l&#224;m ng&#432;&#7907;c l&#7841;i &#273;&#432;&#7907;c.</b>',
+'texte_restaurer_sauvegarde' => '<MODIF>Ch&#7885;n l&#7921;a n&#224;y cho ph&#233;p b&#7841;n ph&#7909;c h&#7891;i m&#7897;t h&#7891; s&#417; d&#7921; tr&#7919; tr&#432;&#7899;c &#273;&#243; c&#7911;a database. &#272;&#7875; th&#7921;c hi&#7879;n &#273;i&#7873;u n&#224;y, h&#7891; s&#417; ch&#7913;a ph&#7847;n d&#7921; tr&#7919; ph&#7843;i &#273;&#432;&#7907;c n&#234;n gi&#7919; &#7903; th&#432; m&#7909;c @dossier@. C&#7849;n th&#7853;n v&#7899;i &#273;&#7863;c &#273;i&#7875;m n&#224;y: <B>B&#7845;t c&#7913; s&#7917;a &#273;&#7893;i hay th&#7845;t tho&#225;t n&#224;o x&#7843;y ra l&#224; kh&#244;ng l&#224;m ng&#432;&#7907;c l&#7841;i &#273;&#432;&#7907;c.</b>',
 'texte_sauvegarde' => 'D&#7921; tr&#7919; n&#7897;i dung c&#7911;a database',
 'texte_sauvegarde_base' => 'D&#7921; tr&#7919; database',
-'texte_sauvegarde_compressee' => 'D&#7921; tr&#7919; s&#7869; ch&#7913;a trong h&#7891; s&#417; kh&#244;ng n&#233;n <b>ecrire/data/dump.xml</b>.',
+'texte_sauvegarde_compressee' => '<MODIF>D&#7921; tr&#7919; s&#7869; ch&#7913;a trong h&#7891; s&#417; kh&#244;ng n&#233;n @fichier@.',
 'texte_selection_langue_principale' => 'B&#7841;n ch&#7885;n m&#7897;t "ng&ocirc;n ng&#7919; ch&iacute;nh" sau &#273;&acirc;y cho website. &#272;i&#7873;u n&agrave;y kh&ocirc;ng c&oacute; ngh&#297;a l&agrave; b&#7841;n ch&#7881; c&oacute; th&#7875; d&ugrave;ng ng&ocirc;n ng&#7919; &#273;&oacute; cho c&aacute;c b&agrave;i v&#7903;, m&agrave; b&#7841;n mu&#7889;n d&ugrave;ng ng&ocirc;n ng&#7919; n&agrave;o trong b&agrave;i c&#361;ng &#273;&#432;&#7907;c. Ch&#7885;n ng&ocirc;n ng&#7919; ch&iacute;nh cho web site ch&#7881; &#273;&#7875;
 <ul>
 <li> ch&#7885;n c&aacute;ch ghi ng&agrave;y th&aacute;ng cho ph&ugrave; h&#7907;p v&#7899;i ng&ocirc;n ng&#7919; &#273;&atilde; ch&#7885;n</li>

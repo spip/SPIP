@@ -86,8 +86,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_publication_immediate' => 'Publicarea imediat&#259; a mesajelor
  (contribu&#355;iile sunt afi&#351;ate imediat, un administrator poate
  s&#259; le &#351;tearg&#259; ulterior).',
-'bouton_radio_sauvegarde_compressee' => 'salvare comprimat&#259; &icirc;n <b>ecrire/data/dump.xml.gz</b>',
-'bouton_radio_sauvegarde_non_compressee' => 'salvare necomprimat&#259; &icirc;n <b>ecrire/data/dump.xml</b>',
+'bouton_radio_sauvegarde_compressee' => 'salvare comprimat&#259; &icirc;n @fichier@',
+'bouton_radio_sauvegarde_non_compressee' => 'salvare necomprimat&#259; &icirc;n @fichier@',
 'bouton_radio_supprimer_petition' => '&#350;terge&#355;i peti&#355;ia',
 'bouton_radio_syndication' => 'Sindicalizare :',
 'bouton_redirection' => 'REDIRIJARE',
@@ -526,7 +526,7 @@ trebuie s&#259; crea&#355;i cel pu&#355;in o rubric&#259;.
 'info_sauvegarde_petitions' => 'Salva&#355;i peti&#355;iile',
 'info_sauvegarde_refers' => 'Salva&#355;i referers',
 'info_sauvegarde_reussi_01' => 'Salvare reu&#351;it&#259;.',
-'info_sauvegarde_reussi_02' => 'Baza de date a fost salvat&#259; &icirc;n <b>ecrire/data/@archive@</b>. Pute&#355;i',
+'info_sauvegarde_reussi_02' => 'Baza de date a fost salvat&#259; &icirc;n @archive@. Pute&#355;i',
 'info_sauvegarde_reussi_03' => '&nbsp;s&#259; v&#259; &icirc;ntoarce&#355;i la gestionarea',
 'info_sauvegarde_reussi_04' => '&nbsp;site-ului dumneavoastr&#259;.',
 'info_sauvegarde_rubriques' => 'Salva&#355;i rubricile',
@@ -766,7 +766,7 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 // T
 'taille_cache_image' => 'Imaginile calculate automat de c&#259;tre SPIP (viniete de documente, titluri prezentate sub form&#259; grafic&#259;, func&#355;ii matematice &icirc;n format TeX...) ocup&#259; &icirc;n directorul @dir@ un total de @taille@.',
 'taille_cache_infinie' => 'Acest site nu prevede limitarea m&#259;rimii directorului <code>CACHE/</code>.',
-'taille_cache_maxi' => 'SPIP &icirc;ncearc&#259; s&#259; limiteze m&#259;rimea directorului <code>CACHE/</code> al acestui site la aproximativ <b>@octets@</b> de date.',
+'taille_cache_maxi' => 'SPIP &icirc;ncearc&#259; s&#259; limiteze m&#259;rimea directorului <code>CACHE/</code> al acestui site la aproximativ <b>@octets@</b> octe&#355;i de date.',
 'taille_cache_octets' => 'M&#259;rimea tamponului este acum de @octets@.',
 'taille_cache_vide' => 'Tamponul este gol.',
 'taille_repertoire_cache' => 'M&#259;rimea directorului de tampon',
@@ -775,7 +775,7 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'texte_admin_effacer_01' => 'Aceast&#259; comand&#259; &#351;terge <i>tot</i> con&#355;inutul bazei de date,
 incluz&acirc;nd <i>toate</i> informa&#355;iile referitoare la redactori sau administratori. Dup&#259; execu&#355;ia acestei comenzi va trebui s&#259; relansa&#355;i procedura de
 reinstalare a SPIP pentru a recrea o nou&#259; baz&#259; de date c&acirc;t &#351;i un nou acces administrator.',
-'texte_admin_tech_01' => 'Aceast&#259; op&#355;iune v&#259; permite s&#259; salva&#355;i con&#355;inutul bazei de date intr-un fi&#351;ier care va fi pus &icirc;n directorul <i>ecrire/data/</i>. Nu uita&#355;i, de asemenea, s&#259; recupera&#355;i directorul <i>IMG/</i> &icirc;n integralitatea lui - acesta con&#355;ine imaginile &#351;i documentele folosite &icirc;n articole &#351;i rubrici.',
+'texte_admin_tech_01' => 'Aceast&#259; op&#355;iune v&#259; permite s&#259; salva&#355;i con&#355;inutul bazei de date intr-un fi&#351;ier care va fi pus &icirc;n directorul @dossier@. Nu uita&#355;i, de asemenea, s&#259; recupera&#355;i directorul <i>IMG/</i> &icirc;n integralitatea lui - acesta con&#355;ine imaginile &#351;i documentele folosite &icirc;n articole &#351;i rubrici.',
 'texte_admin_tech_02' => 'Aten&#355;ie: aceast&#259; salvare nu va putea fi restaurat&#259; DEC&Acirc;T pe un site folosing ACEEA&#350;I versiune de SPIP. Mai ales, nu trebuie sa &laquo;&nbsp;goli&#355;i baza de date&nbsp;&raquo; sper&acirc;nd c&#259;, dup&#259; o aducere la zi, ve&#355;i putea reinstala ceea ce a&#355;i salvat ... Consulta&#355;i <a href="http://www.spip.net/fr_article1489.html">documenta&#355;ia SPIP</a>.',
 'texte_admin_tech_03' => 'Pute&#355;i s&#259; alege&#355;i s&#259; salva&#355;i fi&#351;ierul sub o form&#259; comprimat&#259;, at&acirc;t pentru
  a mic&#351;ora durata transferului c&#259;tre dumneavoastr&#259; sau spre un server de siguran&#355;&#259;, c&acirc;t &#351;i pentru a face economie de spa&#355;iu de disc.',
@@ -830,7 +830,7 @@ reinstalare a SPIP pentru a recrea o nou&#259; baz&#259; de date c&acirc;t &#351
 'texte_en_cours_validation' => 'Articolele &#351;i &#351;tirile de mai jos sunt propuse pentru publicare. Nu ezita&#355;i s&#259; v&#259; exprima&#355;i p&#259;rerea folosind forum-urile care le sunt ata&#351;ate.',
 'texte_enrichir_mise_a_jour' => 'Pute&#355;i &icirc;mbog&#259;&#355;i aranjarea &icirc;n pagin&#259; a textului dumneavoastr&#259; prin folosirea &laquo;&nbsp;scurt&#259;turilor tipografice&nbsp;&raquo;.',
 'texte_fichier_authent' => 'Trebuie ca SPIP s&#259; creeze fi&#351;ierele speciale <tt>.htpasswd</tt>
-  &#351;i <tt>.htpasswd-admin</tt> &icirc;n directorul <tt>ecrire/data/</tt> ?
+  &#351;i <tt>.htpasswd-admin</tt> &icirc;n directorul @dossier@ ?
   Aceste fi&#351;iere v&#259; pot servi pentru a rest&acirc;nge accesul autorilor &#351;i administratorilor &icirc;n alte locuri ale site-ului dumneavoastr&#259;
   (programe externe de statistici, de exemplu).
   Dac&#259; nu vede&#355;i utilitatea unui astfel de mecanism de protec&#355;ie, pute&#355;i l&#259;sa aceast&#259; op&#355;iune
@@ -907,13 +907,13 @@ Pute&#355;i s&#259; referen&#355;ia&#355;i rapid un site Web indic&acirc;nd mai 
   caz de e&#351;ec, conserva&#355;i o copie de ecran, care poate c&#259; con&#355;ine indicii referitor la ceea ce nu merge...
   Dac&#259; problema persist&#259;, v&#259; rug&#259;m s&#259;-l contacta&#355;i pe furnizorul dumneavoastr&#259; de hosting.',
 'texte_restaurer_base' => 'Restaura&#355;i con&#355;inutul bazei de date plec&acirc;nd de la o salvare',
-'texte_restaurer_sauvegarde' => 'Aceast&#259; op&#355;iune v&#259; permite s&#259; restaura&#355;i o copie de siguran&#355;&#259; a bazei de date pe care a&#355;i f&#259;cut-o anterior. Pentru aceasta. v&#259; rug&#259;m s&#259; v&#259; asigura&#355;i ca fi&#351;ierul de copie de siguran&#355;&#259;
-  se afl&#259; &icirc;n directorul <i>ecrire/data/</i>.
+'texte_restaurer_sauvegarde' => 'Aceast&#259; op&#355;iune v&#259; permite s&#259; restaura&#355;i o copie de siguran&#355;&#259; a bazei de date pe care a&#355;i f&#259;cut-o anterior. Pentru aceasta v&#259; rug&#259;m s&#259; v&#259; asigura&#355;i ca fi&#351;ierul de copie de siguran&#355;&#259;
+  se afl&#259; &icirc;n directorul @dossier@.
   Fi&#355;i prudent cu aceast&#259; func&#355;ionalitate&nbsp;: <b>modific&#259;rile, pierderile eventuale, sunt
   ireversibile.</b>',
 'texte_sauvegarde' => 'Salva&#355;i con&#355;inutul bazei de date',
 'texte_sauvegarde_base' => 'Salva&#355;i baza de date',
-'texte_sauvegarde_compressee' => 'Salvarea va fi f&#259;cut&#259; &icirc;ntr-un fi&#351;ier necomprimat <b>ecrire/data/dump.xml</b>.',
+'texte_sauvegarde_compressee' => 'Salvarea va fi f&#259;cut&#259; &icirc;ntr-un fi&#351;ier necomprimat @fichier@.',
 'texte_selection_langue_principale' => 'Pute&#355;i s&#259; selec&#355;iona&#355;i aici &laquo;&nbsp;limba principal&#259;&nbsp;&raquo; a site-ului. Aceast&#259; alegere nu v&#259; oblig&#259; - din fericire&nbsp;! - s&#259; scrie&#355;i articolele &icirc;n limba selec&#355;ionat&#259;, dar permite determinarea&nbsp;:
  <ul><li> formatul implicit al afi&#351;&#259;rii datelor pe site-ul public;</li>
  <li> natura motorului tipografic pe care SPIP &icirc;l folose&#351;te pentru afi&#351;area site-ului public;</li>

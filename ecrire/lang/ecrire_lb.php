@@ -87,8 +87,8 @@ der Dokumentatioun vu SPIP</a>.',
 'bouton_radio_pas_petition' => 'Keng Petitioun',
 'bouton_radio_petition_activee' => 'Petitioun ageschalt',
 'bouton_radio_publication_immediate' => 'Direkt Publikatioun vun de Messagen (d\'Beitr&auml;g ginn direkt nom Sch&eacute;cken sichtbar, d\'Administrateuren k&euml;nnen se duerno l&auml;schen).',
-'bouton_radio_sauvegarde_compressee' => 'Backup komprim&eacute;iert gesp&auml;ichert &euml;nner <b>ecrire/data/dump.xml.gz</b>',
-'bouton_radio_sauvegarde_non_compressee' => 'Backup n&euml;t komprim&eacute;iert gesp&auml;ichert &euml;nner <b>ecrire/data/dump.xml</b>',
+'bouton_radio_sauvegarde_compressee' => 'Backup ass komprim&eacute;iert &euml;nner @fichier@',
+'bouton_radio_sauvegarde_non_compressee' => 'Backup ass n&euml;t komprim&eacute;iert &euml;nner @fichier@',
 'bouton_radio_supprimer_petition' => 'D\'Petitioun l&auml;schen',
 'bouton_radio_syndication' => 'Syndicatioun:',
 'bouton_redirection' => '&Euml;MLEEDUNG',
@@ -502,7 +502,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'info_sauvegarde_petitions' => 'Petitiounen sp&auml;icheren',
 'info_sauvegarde_refers' => 'Referer\'en sp&auml;icheren',
 'info_sauvegarde_reussi_01' => 'Backup f&auml;rdeg.',
-'info_sauvegarde_reussi_02' => 'De Backup vun der Datebank ass <b>ecrire/data/@archive@</b>. Dir k&euml;nnt',
+'info_sauvegarde_reussi_02' => 'De Backup vun der Datebank ass @archive@. Dir k&euml;nnt',
 'info_sauvegarde_reussi_03' => 'zer&euml;ck bei d\'Gestioun',
 'info_sauvegarde_reussi_04' => 'vun &auml;rem Site.',
 'info_sauvegarde_rubriques' => 'Rubriken sp&auml;icheren',
@@ -739,15 +739,15 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 
 // T
 'taille_cache_image' => 'D&eacute;i automat&euml;sch berechent Biller (Vignetten vun Dokumenter, graphesch Titelen, mathematesch Formelen am TeX-Format...) brauchen am R&eacute;pertoire @dir@ eng Plaz vun @taille@.',
-'taille_cache_infinie' => 'D&euml;se Site huet keng Limite fir d\'Gr&eacute;isst vum Dossier <code>CACHE/</code>.',
-'taille_cache_maxi' => 'SPIP prob&eacute;iert d\'Gr&eacute;isst vum Dossier <code>CACHE/</code> vun d&euml;sem Site op ongef&eacute;ier <b>@octets@</b> ze limit&eacute;ieren.',
+'taille_cache_infinie' => 'De Cache vun d&euml;sem Site ass n&euml;t an der Gr&eacute;isst limit&eacute;iert.',
+'taille_cache_maxi' => 'SPIP prob&eacute;iert d\'Gr&eacute;isst vum Cache vun d&euml;sem Site op ongef&eacute;ier <b>@octets@</b> ze limit&eacute;ieren.',
 'taille_cache_octets' => 'D\'Gr&eacute;isst vum Cache ass elo @octets@.',
 'taille_cache_vide' => 'De Cache ass eidel.',
 'taille_repertoire_cache' => 'Gr&eacute;isst vum Cache-Dossier',
 'text_article_propose_publication' => 'Fir d\'Publikatioun propos&eacute;ierten Artikel. Gidd &auml;ren Avis iwwer de Forum vun d&euml;sem Artikel (&euml;nnen op der S&auml;it).',
 'texte_acces_ldap_anonyme_1' => 'Verschidden LDAP-Serveren erlaben keen anonymen Zougang. An deem Fall musst dir en initialen Zougang uginn fir Informatiounen am Annuaire k&euml;nnen ze sichen. An deenen meeschten F&auml;ll k&euml;nnt d&euml;r d&euml;s Felder eidel loossen.',
 'texte_admin_effacer_01' => 'D&euml;s Prozedur l&auml;scht <i>alles</i> aus der Datebank, och <i>all</i> Zoug&auml;ng vun de Redakteren an Administrateuren. Duerno musst dir SPIP nei install&eacute;ieren fir eng nei Datebank an den &eacute;ischten Administrateur-Zougang derb&auml;i ze setzen.',
-'texte_admin_tech_01' => 'D&euml;s Optioun erlaabt den Inhalt vun der Datebank am Dossier <i>ecrire/data/</i> ze sp&auml;icheren. Vergiesst n&euml;t och de ganzen Inhalt vum Dossier <i>IMG/</i> erofzelueden, do sinn all d\'Biller an d\'Dokumenter d&eacute;i an den Artikelen an an de Rubriken gebraucht ginn.',
+'texte_admin_tech_01' => 'D&euml;s Optioun erlaabt den Inhalt vun der Datebank am Dossier @dossier@ ze sp&auml;icheren. Vergiesst n&euml;t och de ganzen Inhalt vum Dossier <i>IMG/</i> erofzelueden, wou d\'Biller an d\'Dokumenter vun den Artikelen an an de Rubrike sinn.',
 'texte_admin_tech_02' => 'Opgepasst: d&euml;se Backup kann n&euml;mmen op e Site mat ders&euml;lwechter SPIP-Versioun restaur&eacute;iert ginn. Versicht also nie "&nbsp;Datebank eidel maachen&nbsp;" an der Hoffnung dir kinnt se nei no engem Update install&eacute;ieren... Kuckt <a href="http://www.spip.net/fr_article1489.html">an der SPIP-Dokumentatioun</a>.',
 'texte_admin_tech_03' => 'Dir k&euml;nnt de Fichier komprim&eacute;iert sp&auml;icheren fir m&eacute;i e s&eacute;ieren Downlued oder Transfert op e Backup-Server, a fir Disk-Plaz ze spueren.',
 'texte_adresse_annuaire_1' => '(Wann &auml;ren Annuaire op ders&euml;lwechter Maschinn install&eacute;iert ass, dann as et hei warscheinl&euml;ch "localhost".)',
@@ -788,9 +788,9 @@ Benotzt d\'L&euml;scht hei dr&euml;nner fir unzegin w&eacute;i eng Elementer e k
 'texte_effacer_donnees_indexation' => 'Den Index l&auml;schen',
 'texte_en_cours_validation' => 'D&euml;s Artikelen a Kuerzmeldungen sinn fir d\'Publikatioun propos&eacute;iert. Gidd &auml;ren Avis am Forum deen dozou geheiert.',
 'texte_enrichir_mise_a_jour' => 'Dir k&euml;nnt de Layout verbesseren mat "typographeschen Ofkiirzungen".',
-'texte_fichier_authent' => '<b>Soll SPIP d&eacute;i speziell Fichier\'en <tt>.htpasswd</tt> an <tt>.htpasswd-admin</tt> am Dossier <tt>ecrire/data/</tt> maachen?</b><p />
+'texte_fichier_authent' => '<b>Soll SPIP d&eacute;i speziell Fichier\'en <tt>.htpasswd</tt> an <tt>.htpasswd-admin</tt> am Dossier @dossier@ maachen?</b><p />
 D&euml;s Fichier\'en k&euml;nnen den Zougang vun den Auteuren an den Administrateuren op verschidden Deeler vum Site kontroll&eacute;ieren (externen Statistik-Programm z.B.).<p />
-Wann dir dat n&euml;t braucht, da loosst d&euml;s Optioun op senger Default-Valeur (Fichier\'en n&euml;t maachen).',
+Wann dir dat n&euml;t braucht, da loosst d&euml;s Optioun op sengem Default (Fichier\'en n&euml;t maachen).',
 'texte_informations_personnelles_1' => 'De System g&euml;t Iech elo e personnalis&eacute;ierten Zougang zum Site.',
 'texte_informations_personnelles_2' => '(N.B.: wann &euml;t eng Re-Installatioun ass, a wann &auml;ren Zougang nach fonktionn&eacute;iert,',
 'texte_introductif_article' => '(Aleedung vum Artikel.)',
@@ -841,11 +841,11 @@ An deem Fall, gidd hei seng Adress un, &euml;nner der Form
 MySQL kann seng Tabellen fl&eacute;cken wann se futti sinn. Dir k&euml;nnt hei eng Reparatur prob&eacute;ieren; wann &euml;t n&euml;t geet, kop&eacute;iert den Affichage, do sinn vill&auml;icht Hinweiser op dat wat n&euml;t fonktionn&eacute;iert...<p />
 Wann de Problem weider besteet, kontakt&eacute;iert &auml;ren Provider.<p />',
 'texte_restaurer_base' => 'E Backup restaur&eacute;ieren',
-'texte_restaurer_sauvegarde' => 'D&euml;s Fonktioun erlaabt d\'Restauratioun vun engem Backup vun der Datebank. Duerfir muss de Backup-Fichier am Dossier <i>ecrire/data/</i> sinn.
+'texte_restaurer_sauvegarde' => 'D&euml;s Fonktioun erlaabt d\'Restauratioun vun engem Backup vun der Datebank. Duerfir muss de Backup-Fichier am Dossier @dossier@ sinn.
 Passt op mat d&euml;ser Prozedur: <b>d\'&Auml;nnerungen k&euml;nnen n&euml;t r&euml;ckg&auml;ngeg gemaach ginn.</b>',
 'texte_sauvegarde' => 'E Backup vun der Datebank maachen',
 'texte_sauvegarde_base' => 'Backup vun der Datebank maachen',
-'texte_sauvegarde_compressee' => 'De Backup g&euml;t den n&euml;t komprim&eacute;ierten Fichier <b>ecrire/data/dump.xml</b>.',
+'texte_sauvegarde_compressee' => 'De Backup g&euml;t den n&euml;t komprim&eacute;ierten Fichier @fichier@.',
 'texte_selection_langue_principale' => 'Hei k&euml;nnt der "d\'Haapt-Sprooch" vum Site wielen. D&euml;s Wiel forc&eacute;iert Iech n&euml;t n&euml;mmen an d&auml;r Sprooch ze schreiwen, mais:
 <ul><li>s&auml;tzt den Default-Format vun den Datumen um &ouml;ffentl&euml;chen Site;</li>
 <li>s&auml;tzt den typographesche Motor deen SPIP benotzen soll fir Texter ze weisen;</li>

@@ -107,7 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'sites_web' => 'Llocs Web',
 'sous_rubriques' => 'Subseccions',
 'suite' => 'Seguiment',
-'sur_web' => 'Sobre la p&agrave;gina Web',
+'sur_web' => 'Sobre la Web',
 'syndiquer_rubrique' => 'Sindicar aquesta secci&oacute;',
 'syndiquer_site' => 'Sindicar tot el lloc Web',
 
