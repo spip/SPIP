@@ -58,6 +58,12 @@ function exec_admin_tech_dist()
 
  debut_cadre_relief();
 
+ // a passer en fonction
+ if (substr(_DIR_IMG, 0, strlen(_DIR_RACINE)) === _DIR_RACINE)
+   $dir_img = substr(_DIR_IMG,strlen(_DIR_RACINE));
+ else
+   $dir_img = _DIR_IMG;
+
  echo "<TABLE BORDER='0' CELLSPACING='0' CELLPADDING='5' WIDTH=\"100%\">",
    "<tr><td BGCOLOR='", $couleur_foncee, "' background=''><b>",
    "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#FFFFFF'>",
@@ -66,7 +72,8 @@ function exec_admin_tech_dist()
    generer_url_post_ecrire("export_all", "reinstall=non"),
    "\n<p align='justify'>",
    http_img_pack('warning.gif', _T('info_avertissement'), "width='48' height='48' align='right'"),
-   _T('texte_admin_tech_01', array('dossier' => '<i>'.$dir.'</i>')),
+   _T('texte_admin_tech_01',
+     array('dossier' => '<i>'.$dir.'</i>', 'img'=>'<i>'.$dir_img.'</i>')),
    "<p>",
    _T('texte_admin_tech_02');
 
