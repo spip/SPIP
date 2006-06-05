@@ -23,8 +23,6 @@ include_spip('inc/documents');
 include_spip('inc/forum');
 include_spip('base/abstract_sql');
 
-  // 28 paremetres, qui dit mieux ?
-  // moi ! elle en avait 61 en premiere approche
 
 function exec_affiche_articles_dist($id_article, $ajout_auteur, $change_accepter_forum, $change_petition, $changer_virtuel, $cherche_auteur, $cherche_mot, $debut, $email_unique, $flag_auteur, $flag_editable, $langue_article, $message, $nom_select, $nouv_auteur, $nouv_mot, $rubrique_article, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre_article, $lier_trad,  $id_trad_new)
 {
@@ -1370,7 +1368,9 @@ function revisions_articles ($id_article, $id_secteur, $id_rubrique, $id_rubriqu
 		'descriptif' => corriger_caracteres(_request('descriptif')),
 		'nom_site' => corriger_caracteres(_request('nom_site')),
 		'url_site' => corriger_caracteres(_request('url_site')),
-		'chapo' => corriger_caracteres(_request('chapo')),
+		'chapo' => corriger_caracteres(
+		_request('changer_virtuel')?'='._request('virtuel') : _request('chapo')
+		),
 		'texte' => corriger_caracteres($texte),
 		'ps' => corriger_caracteres(_request('ps')))  ;
 
