@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // pour le support des vieux dump
 // pff ou vous l'avez trouve ce dump ?
 function inc_import_0_0_dist($f, $gz=false) {
-	global $import_ok, $pos, $abs_pos, $my_pos;
+	global $import_ok, $abs_pos, $my_pos;
 
 	// detruire les tables a restaurer
 	$tables = (!$my_pos) ? import_init_tables() : import_table_choix();

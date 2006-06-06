@@ -23,7 +23,7 @@ $IMPORT_tables_noerase[]='spip_ajax_fonc';
 $IMPORT_tables_noerase[]='spip_meta';
 
 function xml_fetch_tag($f, &$before, $gz=false, $skip_comment=true) {
-	global $buf, $pos, $abs_pos;
+	global $buf, $abs_pos;
 	static $buf_len = 500;
 	static $_fread,$_feof,$_ftell;
 	if (!$_fread){
@@ -154,7 +154,7 @@ function import_init_tables()
 }
 
 function import_tables($f, $gz=false) {
-	global $import_ok, $my_pos;
+	global $import_ok, $abs_pos, $my_pos;
 	static $time_javascript;
 
 	list($my_date) = spip_fetch_array(spip_query("SELECT UNIX_TIMESTAMP(maj) AS d FROM spip_meta WHERE nom='debut_restauration'"));
@@ -190,16 +190,15 @@ function import_tables($f, $gz=false) {
 		$_fseek($f, $my_pos);
 		$version_archive = $GLOBALS['meta']['version_archive_restauration'];
 		$tag_archive = $GLOBALS['meta']['tag_archive_restauration'];
-		$fimport = import_charge_version($version_archivee);
+		$fimport = import_charge_version($version_archive);
 		$tables = import_table_choix();
 	}
 
 	while ($table = $fimport($f, $gz)) {
-		$p = $pos + $abs_pos;
 	// Pas d'ecriture SQL car sinon le temps double.
 	// Il faut juste faire attention a bien lire_metas()
 	// au debut de la restauration
-		ecrire_meta("status_restauration", "$p");
+		ecrire_meta("status_restauration", "$abs_pos");
 
 		if (time() - $time_javascript > 3) {	// 3 secondes
 			affiche_progression_javascript($abs_pos,$table);
@@ -325,7 +324,7 @@ function import_table_choix()
 
 function import_all_continue()
 {
-  global $meta, $flag_gz, $buf, $pos, $abs_pos, $my_pos;
+  global $meta, $flag_gz, $buf, $abs_pos, $my_pos;
 	global $affiche_progression_pourcent;
 	ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
 	// utiliser une version fraiche des metas (ie pas le cache)
@@ -393,7 +392,6 @@ function import_all_continue()
 
 	$_fopen = ($gz) ? 'gzopen' : 'fopen';
 	$f = $_fopen($archive, "rb");
-	$pos = 0;
 	$buf = "";
 	$r = import_tables($f, $gz);
 	if ($r) {
