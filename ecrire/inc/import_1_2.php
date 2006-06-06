@@ -37,11 +37,11 @@ function description_table($nom){
 
 // pour le support des vieux dump
 function inc_import_1_2_dist($f, $gz=false) {
-	global $import_ok, $pos, $abs_pos;
+  global $import_ok, $pos, $abs_pos, $my_pos;
 	static $field_desc = array ();
 
 	// detruire les tables a restaurer
-	if (!$abs_pos) import_init_tables();
+	if (!$my_pos) import_init_tables();
 
 	static $tables;
 	if (!$tables) $tables = array(
