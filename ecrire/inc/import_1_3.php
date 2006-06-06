@@ -12,9 +12,34 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function description_table($nom){
+	global $tables_principales, $tables_auxiliaires, $table_des_tables, $tables_des_serveurs_sql;
+
+	$nom_table = $nom;
+	if (in_array($nom, $table_des_tables))
+	   $nom_table = 'spip_' . $nom;
+
+	include_spip('base/serial');
+	if (isset($tables_principales[$nom_table]))
+		return array($nom_table, $tables_principales[$nom_table]);
+
+	include_spip('base/auxiliaires');
+	$nom_table = 'spip_' . $nom;
+	if (isset($tables_auxiliaires[$nom_table]))
+		return array($nom_table, $tables_auxiliaires[$nom_table]);
+
+	if ($desc = spip_abstract_showtable($nom, '', true))
+	  if (isset($desc['field'])) {
+	    return array($nom, $desc);
+	  }
+	return array($nom,array());
+}
+
+
 function inc_import_1_3_dist($f, $gz=false) {
   global $import_ok, $pos, $abs_pos, $my_pos;
 	static $tables = '';
+	static $field_desc = array ();
 
 	global $tables_trans;
 	static $primary_table;
@@ -36,12 +61,16 @@ function inc_import_1_3_dist($f, $gz=false) {
 	if (!($table = xml_fetch_tag($f, $b, $gz))) return false;
 	if ($table == ('/'.$tag_fermant)) return !($import_ok = true);
 	#spip_log("import_objet_1_3 : table $table");
-	if (!isset($primary_table[$table]))
-		$primary_table[$table]=primary_index_table($table);
 
-	$primary = $primary_table[$table];
-	$id_objet = 0;
-	$liens = array();
+	if (!isset($field_desc[$table])){
+		// recuperer la description de la table pour connaitre ses champs valides
+		list($nom,$desc) = description_table($table);
+		if (isset($desc['field']))
+			$field_desc[$table] = $desc['field'];
+		else
+			$field_desc[$table] = NULL;
+	}
+	$fields = $field_desc[$table];
 
 	// Lire les champs de l'objet
 	for (;;) {
@@ -56,12 +85,11 @@ function inc_import_1_3_dist($f, $gz=false) {
 		$value = '';
 		if (!xml_fetch_tag($f, $value, $gz)) return false;
 
-		if ($col != 'maj') {
+		if ( ($col != 'maj')
+			&& ($fields==NULL or isset($fields[$col])) ) {
 			if ($phpmyadmin)
 				$value = str_replace(array('&quot;','&gt;'),array('"','>'),$value);
-			$cols[] = $col;
-			$values[] = spip_abstract_quote($value);
-			if ($col == $primary) $id_objet = $value;
+			$values[$col] = spip_abstract_quote($value);
 		}
 	}
 	
@@ -69,8 +97,7 @@ function inc_import_1_3_dist($f, $gz=false) {
 #	spip_log("import_objet_1_3 : $table " . in_array($table,$tables));
 	if (in_array($table,$tables)){
 
-
-		if (!spip_query("REPLACE $table (" . join(',', $cols) . ') VALUES (' . join(',', $values) . ')')) {
+		if (!spip_query("REPLACE $table (" . join(',', array_keys($values)) . ') VALUES (' . join(',', $values) . ')')) {
 			echo "--><br><font color='red'><b>"._T('avis_erreur_mysql')."</b></font>\n<font color='black'><tt>".spip_sql_error()."</tt></font>\n<!--";
 			$GLOBALS['erreur_restauration'] = true;
 		}
