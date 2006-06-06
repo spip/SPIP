@@ -193,7 +193,7 @@ function spip_connect_db($host, $port, $login, $pass, $db) {
 function spip_mysql_showtable($nom_table)
 {
 	$a = spip_query("SHOW TABLES LIKE '$nom_table'");
-	if (!a) return "";
+	if (!$a) return "";
 	if (!spip_fetch_array($a)) return "";
 	list(,$a) = spip_fetch_array(spip_query("SHOW CREATE TABLE $nom_table"));
 	if (!preg_match("/^[^(),]*\((([^()]*\([^()]*\)[^()]*)*)\)[^()]*$/", $a, $r))
