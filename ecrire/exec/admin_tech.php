@@ -28,8 +28,6 @@ function exec_admin_tech_dist()
 	exit;
  }
 
- if  ($options == "avancees")
- {
 	echo "<br /><br />";
 	gros_titre(_T('titre_admin_tech'));
 	if ($connect_toutes_rubriques) {
@@ -48,7 +46,6 @@ function exec_admin_tech_dist()
 		$zfile = joli_repertoire($dir . _SPIP_DUMP . '.gz');
 		$dir = joli_repertoire($dir);
 	}
-}
 
  debut_droite();
 
