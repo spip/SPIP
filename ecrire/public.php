@@ -75,7 +75,7 @@ if (defined('_INC_PUBLIC')) {
 	//
 
 	$tableau_des_erreurs = array();
-	$f = charger_fonction('assembler', _DIR_COMPIL);
+	$f = charger_fonction('assembler', 'public');
 	$page = $f($fond);
 
 	if (isset($page['status'])) {
@@ -157,7 +157,7 @@ if (defined('_INC_PUBLIC')) {
 
 	// Gestion des statistiques du site public
 	if ($GLOBALS['meta']["activer_statistiques"] != "non") {
-		$f = charger_fonction('decompter', _DIR_COMPIL);
+		$f = charger_fonction('decompter', 'public');
 		$f();
 	}
 

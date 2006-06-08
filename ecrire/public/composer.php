@@ -19,7 +19,7 @@ include_spip('inc/documents');
 include_spip('inc/forum');
 include_spip('inc/distant');
 include_spip('inc/rubriques'); # pour calcul_branche (cf critere branche)
-include_spip(_DIR_COMPIL . 'debug'); # toujours prevoir le pire
+include_spip('public/debug'); # toujours prevoir le pire
 
 # Charge et retourne un composeur, i.e. la fonction principale d'un squelette
 # ou '' s'il est inconnu. Le compile au besoin
@@ -55,7 +55,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $sourcefile) {
 
 	// charger le source, si possible, et compiler 
 	if (lire_fichier ($sourcefile, $skel)) {
-		$f = charger_fonction('compiler', _DIR_COMPIL);
+		$f = charger_fonction('compiler', 'public');
 		$skel_code = $f($skel, $nom, $gram, $sourcefile);
 	}
 

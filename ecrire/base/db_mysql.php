@@ -42,7 +42,7 @@ function spip_mysql_trace($query, $start, $result)
 		if ($GLOBALS['mysql_debug']
 		AND (($GLOBALS['connect_statut'] == '0minirezo')
 		  OR ($GLOBALS['auteur_session']['statut'] == '0minirezo'))) {
-			include_spip(_DIR_COMPIL . 'debug');
+			include_spip('public/debug');
 			echo _T('info_erreur_requete'),
 			  " ",
 			  htmlentities($query),
@@ -92,12 +92,12 @@ function spip_mysql_select($select, $from, $where,
 	// Erreur ? C'est du debug de squelette, ou une erreur du serveur
 
 	if ($GLOBALS['var_mode'] == 'debug') {
-		include_spip(_DIR_COMPIL . 'debug');
+		include_spip('public/debug');
 		boucle_debug_resultat($id, 'requete', "SELECT " . $query);
 	}
 
 	if (!($res = @spip_query("SELECT ". $query))) {
-		include_spip(_DIR_COMPIL . 'debug');
+		include_spip('public/debug');
 		erreur_requete_boucle($query, $id, $table,
 				      spip_sql_errno(),
 				      spip_sql_error());
