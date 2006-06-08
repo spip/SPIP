@@ -22,19 +22,19 @@ define('CODE_MONOTONE', "^(\n//[^\n]*\n)?\(?'([^'])*'\)?$");
 
 // Definition de la structure $p, et fonctions de recherche et de reservation
 // dans l'arborescence des boucles
-include_spip('public/references');
+include_spip(_DIR_COMPIL . 'references');
 
 // definition des boucles
-include_spip('public/boucles');
+include_spip(_DIR_COMPIL . 'boucles');
 
 // definition des criteres
-include_spip('public/criteres');
+include_spip(_DIR_COMPIL . 'criteres');
 
 // definition des balises
-include_spip('public/balises');
+include_spip(_DIR_COMPIL . 'balises');
 
 // definition de l'API
-include_spip('public/interfaces');
+include_spip(_DIR_COMPIL . 'interfaces');
 
 # definition des tables
 include_spip('base/serial');
@@ -620,7 +620,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 	$boucles = array();
 	spip_timer('calcul_skel');
 
-	$f = charger_fonction('phraser_'.$gram, 'public');
+	$f = charger_fonction('phraser_'.$gram, _DIR_COMPIL);
 
 	$racine = $f($squelette, '',$boucles, $nom);
 

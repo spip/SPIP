@@ -259,6 +259,7 @@ if (defined('_FILE_OPTIONS')) {
 # des definitions (notamment de $auteur_session)
 define('_DIR_INCLUDE', _DIR_RESTREINT);
 require_once(_DIR_INCLUDE . 'inc/utils.php');
+define('_DIR_COMPIL', 'public/');
 
 
 // chargement des plugins : doit arriver en dernier

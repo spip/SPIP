@@ -48,6 +48,7 @@ function charger_fonction($nom, $dossier='exec', $continue=false) {
 	if (!preg_match(',^[\w-]+$,', $nom))
 		redirige_par_entete('./');
 
+	if (substr($dossier,-1) == '/') $dossier = substr($dossier,0,-1);
 	// Si la fonction existe deja (definie par mes_options, par exemple)
 	if (function_exists($f = $dossier.'_'.$nom)
 	OR function_exists($f = $dossier.'_'.$nom.'_dist'))
