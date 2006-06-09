@@ -30,7 +30,7 @@ body {
 	text-align: center;
 	font-family: "Trebuchet MS", Tahoma, Arial, Helvetica, sans-serif;
 	font-size: 1em;
-	color: #333333;
+	color: #333;
 }
 
 img, table { margin: 0; padding: 0; border: 0; }
@@ -92,7 +92,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 #hierarchie {
 	clear: both;
 	margin-bottom: 16px;
-	border-top: 2px solid #333333;
+	border-top: 2px solid #333;
 	font-size: 0.77em; }
 
 /* * Pied de page */
@@ -100,7 +100,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	clear: both;
 	width: 100%;
 	margin-top: 4em;
-	border-top: 1px dotted #CCCCCC;
+	border-top: 1px dotted #CCC;
 	padding: 2px;
 	text-align: center; }
 #pied small { font-size: 0.77em; }
@@ -113,7 +113,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 ---------------------------------------------- */
 .rubriques, .breves, .syndic, .forums, .divers {
 	text-align: left;
-	border: 1px solid #CCCCCC;
+	border: 1px solid #CCC;
 	margin-bottom: 1em;
 	min-width: 10em;
 	font-size: 0.77em;
@@ -121,7 +121,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 
 .rubriques .titre, .breves .titre, .syndic .titre, .forums .titre, .divers .titre {
 	padding: 3px 4px 2px 4px;
-	border-bottom: 1px dotted #CCCCCC;
+	border-bottom: 1px dotted #CCC;
 	text-align: center;
 	font-size: 1.2em;
 	font-weight: bold;
@@ -194,7 +194,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	margin: 1em;
 	margin-bottom: 1.5em;
 	padding: 0.82em;
-	border: 1px solid #CCCCCC;
+	border: 1px solid #CCC;
 	font-size: 0.82em;
 	font-weight: bold; }
 
@@ -203,7 +203,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 .ps, .notes {
 	margin-top: 1.4em;
 	padding-top: 2px;
-	border-top: 2px solid #CCCCCC; }
+	border-top: 2px solid #CCC; }
 .ps { font-size: 0.82em; }
 .notes { clear: both; font-size: 0.77em; }
 .ps h2, .notes h2 { font-size: 1.19em; font-weight: bold; }
@@ -214,7 +214,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	clear: both;
 	margin-top: 1.4em;
 	padding-top: 2px;
-	border-top: 2px solid #CCCCCC; }
+	border-top: 2px solid #CCC; }
 #documents_portfolio h2 { margin-bottom: 0.4em; font-size: 0.88em; font-weight: bold; }
 
 #document_actif { margin-top: 1em; }
@@ -224,7 +224,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 #documents_joints {
 	margin-top: 1.4em;
 	padding-top: 2px;
-	border-top: 2px solid #CCCCCC; }
+	border-top: 2px solid #CCC; }
 #documents_joints h2 { margin-bottom: 0.4em; font-size: 0.88em; font-weight: bold; }
 #documents_joints li { margin-bottom: 0.4em; }
 #documents_joints li .spip_doc_titre {}
@@ -260,7 +260,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 .extrait .texte {
 	margin-top: 5px;
 	margin-bottom: 2em;
-	border: 1px solid #CCCCCC;
+	border: 1px solid #CCC;
 	padding: 0.9em;
 	font-size: 0.82em;
 	line-height: 1.4em; }
@@ -275,8 +275,8 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 
 #page_plan #contenu h2 {
 	clear: both;
-	background: #e0ffe0;
-	border: 1px solid #CCCCCC;
+	background: #E0FFE0;
+	border: 1px solid #CCC;
 	padding: 0.5em;
 	margin-bottom: 1em;
 	font-weight: bold;
@@ -298,7 +298,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	clear: both;
 	margin-top: 2.5em;
 	padding-top: 2px;
-	border-top: 2px solid #CCCCCC;
+	border-top: 2px solid #CCC;
 	font-size: 0.88em;
 	font-weight: bold; }
 
@@ -306,17 +306,17 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 ul.forum { display: block; clear: both; margin: 0; padding: 0; }
 .forum-fil { margin-top: 1.5em; }
 .forum-fil ul { display: block; margin: 0; padding: 0; margin-left: 1em; }
-.forum-chapo .forum-titre, .forum-chapo .forum-titre a { display: block; margin: 0; padding: 0; font-weight: bold; text-decoration: none; color: #333333; }
+.forum-chapo .forum-titre, .forum-chapo .forum-titre a { display: block; margin: 0; padding: 0; font-weight: bold; text-decoration: none; color: #333; }
 .forum-chapo small {}
-.forum-texte { margin: 0; padding: 0.5em 1em 0 1em; color: #333333; font-size: 0.82em; }
+.forum-texte { margin: 0; padding: 0.5em 1em 0 1em; color: #333; font-size: 0.82em; }
 .forum-texte .forum-lien {}
 .forum-texte .forum-repondre-message { margin: 0; padding: 1px 0; text-align: right; }
 
 /* Boite d'un forum : eclaircissement progressif des bords */
-ul .message { border: 1px solid #666666; margin: 0; padding: 0; margin-bottom: 1em; }
+ul .message { border: 1px solid #666; margin: 0; padding: 0; margin-bottom: 1em; }
 ul ul .message { border: 1px solid #A4A4A4; }
 ul ul ul .message { border: 1px solid #B8B8B8; }
-ul ul ul ul .message { border: 1px solid #CCCCCC; }
+ul ul ul ul .message { border: 1px solid #CCC; }
 ul ul ul ul ul .message { border: 1px solid #E0E0E0; }
 ul ul ul ul ul ul .message { border: 1px dotted #E0E0E0; }
 
@@ -367,6 +367,6 @@ ul ul ul ul ul .forum-chapo { background: #FFF; }
 /*  ------------------------------------------
 /*  Couleurs des liens
 /*  ------------------------------------------ */
-a { text-decoration: none; color: #333333; }
+a { text-decoration: none; color: #333; }
 .on { font-weight: bold; }
 a:hover { text-decoration: underline; color: #000; }

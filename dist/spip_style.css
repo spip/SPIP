@@ -46,17 +46,17 @@ table.spip {
 	margin-bottom: 1em;
 	border: 1px solid;
 	border-collapse: collapse;
-	font-size: 0.71em; }
+	font-size: 0.77em; }
 table.spip caption {
 	caption-side: top; /* bottom pas pris en compte par IE */
 	text-align: center;
 	margin: auto;
 	padding: 3px;
 	font-weight: bold; }
-table.spip tr.row_first { background-color: #FCF4D0; }
-table.spip tr.row_odd { background-color: #d0d0d0; }
-table.spip tr.row_even { background-color: #F0F0F0; }
-table.spip td { padding: 3px; text-align: left; vertical-align: middle; }
+table.spip tr.row_first { background: #FFC; }
+table.spip tr.row_odd { background: #DDD; }
+table.spip tr.row_even { background: #EEE; }
+table.spip th, table.spip td { padding: 3px; text-align: left; vertical-align: middle; }
 
 /* Logos, documents et images */
 img, .spip_logos { margin: 0; padding: 0; border: 0; }
@@ -74,7 +74,7 @@ img, .spip_logos { margin: 0; padding: 0; border: 0; }
 /* * Habillage des formulaires */
 
 /* Correction des styles HTML par defaut */
-.formulaire_spip form, .formulaire_spip fieldset, .formulaire_spip legend, .formulaire_spip label, .formulaire_spip input, .formulaire_spip textarea, .formulaire_spip select, .formulaire_spip option { margin: 0; padding: 0; border: 0; }
+.formulaire_spip form, .formulaire_spip fieldset, .formulaire_spip legend, .formulaire_spip label, .formulaire_spip input, .formulaire_spip textarea, .formulaire_spip select, .formulaire_spip option { margin: 0; padding: 0; border: 0; background: none; }
 
 /* Styles de Spip */
 .formulaire_spip {
@@ -111,7 +111,7 @@ input.spip_bouton {
 	font-weight: bold; }
 
 /* Reponse du formulaire */
-.reponse_formulaire { font-weight: bold; color: #FF0000; }
+.reponse_formulaire { font-weight: bold; color: #F00; }
 fieldset.reponse_formulaire { border: 1px dotted; font-weight: normal; }
 
 /* Previsualisation du message */
@@ -119,22 +119,22 @@ fieldset.previsu {
 	padding: 1em;
 	border: 1px solid; }
 
-/* Barre de raccourcis */
+/* Barre de raccourcis typographiques */
 table.spip_barre { width: 100%; }
 
 table.spip_barre a img {
+	background: #FDA;
+	padding: 3px;
 	border-left: 1px solid #FFF;
 	border-top: 1px solid #FFF;
-	border-right: 1px solid #AA9966;
-	border-bottom: 1px solid #AA9966;
-	padding: 3px;
-	background: #FFDDAA; }
+	border-right: 1px solid #999;
+	border-bottom: 1px solid #999; }
 
 table.spip_barre a:hover img {
-	border: 1px solid #808080;
-	background: #F8F8F4; }
+	background: #FFF;
+	border: 1px solid #999; }
 
-table.spip_barre .barre { width: 100%; background: #E4E4E4; padding: 0 1px; border: 0px solid #DEDEDE; }
+table.spip_barre .barre { width: 100%; background: #EEE; }
 
 /* Formulaire de forum */
 
@@ -146,7 +146,7 @@ div.choix_mots label { display: inline; }
 .formulaire_recherche { text-align: left; width: 12em; }
 .formulaire_recherche label { display: none; }
 
-.spip_surligne { background: #FFFF66; }
+.spip_surligne { background: #FF6; }
 
 /* Formulaire menu de langues */
 .formulaire_menu_lang { text-align: left; width: 12em; }
@@ -159,7 +159,7 @@ div.choix_mots label { display: inline; }
 #page_login .formulaire_login .spip_logos, .formulaire_login_forum .spip_logos { float: right; padding-left: 10px; }
 
 /*  Couleurs des liens de Spip */
-a.spip_in { color: #A02020; } /* liens internes */
-a.spip_out { color: #2020A0; } /* liens sortants */
-a.spip_url { color: #2020A0; } /* liens url sortants */
-a.spip_glossaire { color: #20A020; } /* liens vers encyclopedie */
+a.spip_in { color: #900; } /* liens internes */
+a.spip_out { color: #009; } /* liens sortants */
+a.spip_url { color: #009; } /* liens url sortants */
+a.spip_glossaire { color: #060; } /* liens vers encyclopedie */

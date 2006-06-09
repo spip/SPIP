@@ -32,14 +32,14 @@ a:hover.spip-admin-boutons {
 }
 
 a:active.spip-admin-boutons {
-	background-color: #CCCCCC;
+	background-color: #CCC;
 	border-bottom: 2px solid #f00;
 }
 
 
 /* Style pour le mode debug */
 #spip-debug {
-	background-color: #f0f0f0;
+	background-color: #F0F0F0;
 	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
 }
 
@@ -98,7 +98,7 @@ a:active.spip-admin-boutons {
 	overflow: -moz-scrollbars-vertical;
 	overflow-y: auto;
 	border-top: 1px solid #3399FF;
-	border-bottom: 2px solid #666666;
+	border-bottom: 2px solid #666;
 }
 
 .spip-env fieldset {
