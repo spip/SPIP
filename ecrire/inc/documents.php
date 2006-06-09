@@ -504,7 +504,7 @@ function afficher_formulaire_taille($document, $type_inclus='AUTO') {
 	AND $document['largeur']
 	AND $document['distant']!='oui')
 		return '';
-
+	$id_document = $document['id_document'];
 	// Si on n'a pas le type_inclus, on va le chercher dans spip_types_documents
 	if ($type_inclus == 'AUTO'
 	AND $type = @spip_abstract_fetsel('inclus', 'spip_types_documents', "id_type=".$document['id_type']))
@@ -518,8 +518,8 @@ function afficher_formulaire_taille($document, $type_inclus='AUTO') {
 	    OR $document['id_type']==12 // mov dont la taille ne peut etre lue par getimagesize
 	    )) {
 		echo "<br /><b>"._T('entree_dimensions')."</b><br />\n";
-		echo "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"".$document['largeur']."\" size='5'>";
-		echo " &#215; <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"".$document['hauteur']."\" size='5'> "._T('info_pixels');
+		echo "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"".$document['largeur']."\" size='5' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" />";
+		echo " &#215; <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"".$document['hauteur']."\" size='5' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /> "._T('info_pixels');
 	}
 }
 
