@@ -53,12 +53,7 @@
 						<ul>
 							<li>[(#LANG|traduire_nom_langue)]</li>
 							<BOUCLE_traductions(ARTICLES){traduction}{exclus}>
-							<li><a[ href="(#URL_ARTICLE|url_absolue)"]
-							rel="alternate" hreflang="#LANG"[
-							title="(#TITRE|couper{80}|texte_backend)"]><span
-							lang="#LANG" xml:lang="#LANG"
-							dir="#LANG_DIR">[(#LANG
-								|traduire_nom_langue)]</span></a></li>
+							<li><a[ href="(#URL_ARTICLE|url_absolue)"] rel="alternate" hreflang="#LANG"[ title="(#TITRE|couper{80}|texte_backend)"]><span lang="#LANG" xml:lang="#LANG" dir="#LANG_DIR">[(#LANG|traduire_nom_langue)]</span></a></li>
 							</BOUCLE_traductions>
 						</ul>
 					</div>
@@ -69,9 +64,7 @@
 
 			#DEBUT_SURLIGNE
 			[<div class="chapo">(#CHAPO)</div>]
-			[<p class="lien"><:voir_en_ligne:> &mdash;
-				<a href="(#URL_SITE)"
-				class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+			[<p class="lien"><:voir_en_ligne:> &mdash; <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
 			[<div class="texte">(#TEXTE|reduire_image{520,0})</div>]
 			#FIN_SURLIGNE
 
@@ -109,17 +102,14 @@
 			</div>
 			</B_documents_joints>
 
-			[(#REM) Petition
-				la petition ayant une PAGINATION il faut absolument
-				lui passer SELF en argument. ]
+			[(#REM) Petition :
+			La petition ayant une PAGINATION il faut absolument lui passer SELF en argument. ]
 			[ #REM Conserver cet invalideur : (#PETITION|?{'',''}) ]
 			<INCLURE{fond=inc-petition}{id_article}{self=#SELF}>
 
 			[<div class="notes">
 			<h2><:info_notes:></h2>
-			#DEBUT_SURLIGNE
-			(#NOTES)
-			#FIN_SURLIGNE
+			#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE
 			</div>]
 
 			[(#REM) Forum de l'article ]
@@ -140,9 +130,11 @@
 			[(#REM) Articles dans la meme rubrique ]
 			<B_articles_rubrique>
 			<div class="breves">
-				<h2 class="titre"><a href="#URL_RUBRIQUE"><:meme_rubrique:></a></h2>
+				#ANCRE_PAGINATION
+				<h2 class="menu-titre"><a href="#URL_RUBRIQUE"><:meme_rubrique:></a></h2>
+				[<p class="pagination">(#PAGINATION)</p>]
 				<ul>
-					<BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {par date}{inverse}{0,10}>
+					<BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {par date}{inverse} {pagination 20}>
 					<li><a href="#URL_ARTICLE"[ class="(#EXPOSE)"]>#TITRE</a></li>
 					</BOUCLE_articles_rubrique>
 				</ul>
@@ -152,7 +144,7 @@
 			[(#REM) Menu de navigation mots-cles ]
 			<B_mots>
 			<div class="divers">
-			<h2 class="titre"><:mots_clefs:></h2>
+				<h2 class="menu-titre"><:mots_clefs:></h2>
 			<ul>
 				<BOUCLE_mots(MOTS) {id_article} {par titre}>
 				<li><a href="#URL_MOT" rel="tag">#TITRE</a></li>

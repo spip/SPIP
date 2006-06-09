@@ -79,7 +79,7 @@
 				[(#REM) Breves ]
 				<B_breves>
 				<div class="breves">
-					<h3 class="titre"><:breves:></h3>
+					<h3 class="menu-titre"><:breves:></h3>
 					<ul>
 						<BOUCLE_breves(BREVES) {id_secteur} {par date}{inverse}>
 						<li><a href="#URL_BREVE">#TITRE</a></li>
@@ -91,7 +91,7 @@
 				[(#REM) Sur le Web ]
 				<B_sites>
 				<div class="syndic">
-					<h3 class="titre"><:sites_web:></h3>
+					<h3 class="menu-titre"><:sites_web:></h3>
 					<ul>
 						<BOUCLE_sites(SITES) {id_secteur} {par nom_site}>
 						<li><a href="[(#ID_SYNDIC|generer_url_site)]">#NOM_SITE</a></li>

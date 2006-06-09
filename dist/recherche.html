@@ -65,13 +65,13 @@
 				<B_rubriques>
 				<div class="rubriques">
 					#ANCRE_PAGINATION
-					<h2 class="titre"><:rubriques:></h2>
+					<h2 class="menu-titre"><:rubriques:></h2>
+					[<p class="pagination">(#PAGINATION)</p>]
 					<ul>
 						<BOUCLE_rubriques(RUBRIQUES) {recherche} {par points}{inverse} {pagination 5}>
 						<li><a href="#URL_RUBRIQUE">#TITRE</a></li>
 						</BOUCLE_rubriques>
 					</ul>
-					[<p class="pagination">(#PAGINATION)</p>]
 				</div>
 				</B_rubriques>
 
@@ -79,13 +79,13 @@
 				<B_mots>
 				<div class="divers">
 					#ANCRE_PAGINATION
-					<h2 class="titre"><:mots_clefs:></h2>
+					<h2 class="menu-titre"><:mots_clefs:></h2>
+					[<p class="pagination">(#PAGINATION)</p>]
 					<ul>
 						<BOUCLE_mots(MOTS) {recherche} {par points}{inverse} {pagination 5}>
 						<li><a href="#URL_MOT">#TITRE</a></li>
 						</BOUCLE_mots>
 					</ul>
-					[<p class="pagination">(#PAGINATION)</p>]
 				</div>
 				</B_mots>
 
@@ -93,13 +93,13 @@
 				<B_breves>
 				<div class="breves">
 					#ANCRE_PAGINATION
-					<h2 class="titre"><:breves:></h2>
+					<h2 class="menu-titre"><:breves:></h2>
+					[<p class="pagination">(#PAGINATION)</p>]
 					<ul>
 						<BOUCLE_breves(BREVES) {recherche} {par points}{inverse} {pagination 5}>
 						<li>[(#DATE|affdate_court) : ]<a href="#URL_BREVE">#TITRE</a></li>
 						</BOUCLE_breves>
 					</ul>
-					[<p class="pagination">(#PAGINATION)</p>]
 				</div>
 				</B_breves>
 
@@ -107,13 +107,13 @@
 				<B_messages>
 				<div class="forums">
 					#ANCRE_PAGINATION
-					<h2 class="titre"><:messages_forum:></h2>
+					<h2 class="menu-titre"><:messages_forum:></h2>
+					[<p class="pagination">(#PAGINATION)</p>]
 					<ul>
 						<BOUCLE_messages(FORUMS) {recherche} {par points}{inverse} {pagination 5}>
 						<li>[(#DATE|affdate_court) : ]<a href="#URL_FORUM">#TITRE</a></li>
 						</BOUCLE_messages>
 					</ul>
-					[<p class="pagination">(#PAGINATION)</p>]
 				</div>
 				</B_messages>
 
@@ -121,13 +121,13 @@
 				<B_sites>
 				<div class="syndic">
 					#ANCRE_PAGINATION
-					<h2 class="titre"><:sites_web:></h2>
+					<h2 class="menu-titre"><:sites_web:></h2>
+					[<p class="pagination">(#PAGINATION)</p>]
 					<ul>
 						<BOUCLE_sites(SITES) {recherche} {par points}{inverse} {pagination 5}>
 						<li><a href="[(#ID_SYNDIC|generer_url_site)]">#NOM_SITE</a></li>
 						</BOUCLE_sites>
 					</ul>
-					[<p class="pagination">(#PAGINATION)</p>]
 				</div>
 				</B_sites>
 

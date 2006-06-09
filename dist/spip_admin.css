@@ -11,10 +11,10 @@
 /* Couleurs et design des boutons d'admin */
 
 a.spip-admin-boutons {
-	border-top: 1px solid #cecece;
-	border-bottom: 2px solid #4a4a4a;
-	border-left: 1px solid #cecece;
-	border-right: 1px solid #cecece;
+	border-top: 1px solid #CECECE;
+	border-bottom: 2px solid #4A4A4A;
+	border-left: 1px solid #CECECE;
+	border-right: 1px solid #CECECE;
 	text-decoration: none;
 	text-align: center;
 	margin: 0;
@@ -23,12 +23,12 @@ a.spip-admin-boutons {
 	font-size: 10px;
 	font-weight: bold;
 	background-color: #FFF;
-	color: #0c479d;
+	color: #0C479D;
 }
 
 a:hover.spip-admin-boutons {
 	background-color: #fc3;
-	border-bottom: 2px solid #36f;
+	border-bottom: 2px solid #36F;
 }
 
 a:active.spip-admin-boutons {
@@ -92,12 +92,12 @@ a:active.spip-admin-boutons {
 
 #spip-boucles {
 	min-height: 200px;
-	max-height:50%;
+	max-height: 50%;
 	margin: 0 0 1em 0;
 	padding: .5em 0;
 	overflow: -moz-scrollbars-vertical;
 	overflow-y: auto;
-	border-top: 1px solid #3399FF;
+	border-top: 1px solid #39F;
 	border-bottom: 2px solid #666;
 }
 

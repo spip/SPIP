@@ -85,7 +85,7 @@
 				[(#REM) Breves du secteur ]
 				<B_breves>
 				<div class="breves">
-					<h2 class="titre"><:breves:></h2>
+					<h2 class="menu-titre"><:breves:></h2>
 					<ul>
 						<BOUCLE_breves(BREVES) {id_secteur} {par date}{inverse} {0,5}>
 						<li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_BREVE">#TITRE</a></li>
@@ -96,8 +96,8 @@
 
 				[(#REM) Sites de la rubrique ]
 				<B_sites>
-				<div class="syndic">
-					<h2 class="titre"><:sur_web:></h2>
+				<div class="forums">
+					<h2 class="menu-titre"><:sur_web:></h2>
 					<ul>
 						<BOUCLE_sites(SITES) {id_rubrique} {par nom_site}>
 						<li><a href="[(#ID_SYNDIC|generer_url_site)]">#NOM_SITE</a>
@@ -133,7 +133,7 @@
 			[(#REM) Menu de navigation mots-cles ]
 			<B_mots>
 			<div class="divers">
-				<h2 class="titre"><:mots_clefs:></h2>
+				<h2 class="menu-titre"><:mots_clefs:></h2>
 				<ul>
 					<BOUCLE_mots(MOTS) {id_rubrique} {par titre}>
 					<li><a href="#URL_MOT" rel="tag">#TITRE</a></li>
