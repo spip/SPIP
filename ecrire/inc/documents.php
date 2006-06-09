@@ -161,6 +161,7 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 	$hauteur = $row['hauteur'];
 	$taille = $row['taille'];
 	$mode = $row['mode'];
+	$largeur_vignette = $largeur;
 
 	if ($row_type = @spip_abstract_fetsel('*', 'spip_types_documents',
 					      "id_type=" . intval($id_type)))
@@ -234,12 +235,12 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 	if (!$afficher_titre) return $vignette;
 
 	if ($largeur_vignette < 120) $largeur_vignette = 120;
-	$forcer_largeur = " width = '$largeur_vignette'";
+	$forcer_largeur = " width: ".$largeur_vignette."px;";
 
 	if ($align) {
 		$class_align = " spip_documents_".$align;
 		if ($align <> 'center')
-			$float = " style='float: $align;'";
+			$float = " style='float: $align;$forcer_largeur'";
 	}
 
 	$retour .= "<div class='spip_document_$id_document spip_documents$class_align'$float>\n";
@@ -830,7 +831,7 @@ function block_document($id, $id_document, $type, $titre, $descriptif, $date, $d
 
 
 	// bloc mettre a jour la vignette
-	echo "<hr />";
+	echo "<hr style='margin-left: -5px; margin-right: -5px; height: 1px; border: 0px; color: ".$GLOBALS['couleur_foncee']."; background-color: ".$GLOBALS['couleur_foncee'].";' />";
 	bloc_gerer_vignette($document, $id, $type, $album);
 
 	echo "</div>";
@@ -900,16 +901,16 @@ function bloc_gerer_vignette($document, $id_article, $type, $album) {
 	$id_document = $document['id_document'];
 	$id_vignette = $document['id_vignette'];
 
-	echo bouton_block_invisible("gerer_vignette$id_document");
-	echo "<b>"._T('info_vignette_personnalisee')."</b>\n";
-	echo debut_block_invisible("gerer_vignette$id_document");
+//	echo bouton_block_invisible("gerer_vignette$id_document");
+//	echo "<b>"._T('info_vignette_personnalisee')."</b>\n";
+//	echo debut_block_invisible("gerer_vignette$id_document");
 	if ($id_vignette) {
 	  icone_horizontale (_T('info_supprimer_vignette'), bouton_supprime_document_et_vignette($id_article,	$type, $id_vignette, $album, $id_document), "vignette-24.png", "supprimer.gif");
 	} else {
 
-	  echo afficher_upload($id_article,'portfolio', false, 'vignette', $type, $album, $id_document);
+	  echo afficher_upload($id_article,_T('info_vignette_personnalisee'), false, 'vignette', $type, $album, $id_document);
 	}
-	echo fin_block();
+//	echo fin_block();
 }
 
 function afficher_documents_non_inclus($id_article, $type = "article", $flag_modif) {
@@ -1201,18 +1202,9 @@ function afficher_case_document($id_document, $id, $type, $deplier = false) {
 		echo "</div>\n";
 		echo "</form>";
 
-		echo "</div>";
-		echo fin_block();
-		// Fin edition des champs
-
-		echo "<p /><div align='center'>";
-		icone_horizontale(_T('icone_supprimer_document'), bouton_supprime_document_et_vignette($id, $type, $id_document, 'documents'), "doc-24.gif", "supprimer.gif");
-		echo "</div>";
-
-
 		// Bloc edition de la vignette
 		if ($options == 'avancees') {
-			echo "<div class='verdana1' style='color: $couleur_foncee; border: 1px solid $couleur_foncee; padding: 5px; margin-top: 3px;'>";
+			echo "<hr style='margin-left: -5px; margin-right: -5px; height: 1px; border: 0px; color: ".$GLOBALS['couleur_foncee']."; background-color: ".$GLOBALS['couleur_foncee'].";' />";
 			# 'extension', a ajouter dans la base quand on supprimera spip_types_documents
 			switch ($id_type) {
 				case 1:
@@ -1226,8 +1218,18 @@ function afficher_case_document($id_document, $id, $type, $deplier = false) {
 					break;
 			}
 			bloc_gerer_vignette($document, $id, $type, 'documents');
-			echo "</div>\n";
 		}
+
+
+		echo "</div>";
+		echo fin_block();
+		// Fin edition des champs
+
+		echo "<p /><div align='center'>";
+		icone_horizontale(_T('icone_supprimer_document'), bouton_supprime_document_et_vignette($id, $type, $id_document, 'documents'), "doc-24.gif", "supprimer.gif");
+		echo "</div>";
+
+
 
 		fin_cadre_enfonce();
 	}
