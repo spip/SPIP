@@ -3,22 +3,21 @@
 /*  ----------------------------------------------------------- */
 
 /* taille typo
- * Base              100%
+ * Base				100%
  * -------------------------------------
- * 20px             1.27em
- * 19px             1.21em
- * 18px             1.15em
- * 17px             1.09em
- * 16px             1.03em
- * 15px              0.96em
- * 14px              0.88em
- * 13px              0.82em
- * 12px              0.77em
- * 11px              0.71em
- * 10px              0.65em
- *  9px              0.59em
- * attention en dessous de 0.71em le texte devient illisible
- * en text smallest sur ie
+ * 20px				1.27em
+ * 19px				1.21em
+ * 18px				1.15em
+ * 17px				1.09em
+ * 16px				1.03em
+ * 15px				0.96em
+ * 14px				0.88em
+ * 13px				0.82em
+ * 12px				0.77em
+ * 11px				0.71em
+ * 10px				0.65em
+ *  9px             0.59em
+ * Attention : en dessous de 0.71em le texte devient illisible en text smallest sur IE
  */
 
 /*  ------------------------------------------
@@ -48,7 +47,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	margin-right: auto;
 }
 
-#conteneur { width: 100%; } /* Particularisme IE/PC */
+#conteneur { width: 100%; }
 
 #conteneur #contenu {
 	float: left;
@@ -125,12 +124,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 }
 
 .rubriques p, .breves p, .syndic p, .forums p, .divers p { margin: 0; padding: 0.2em 0.7em;  }
-
-.rubriques ul, .breves ul, .syndic ul, .forums ul, .divers ul {
-	display: block;
-	padding: 0.2em 0;
-}
-
+.rubriques ul, .breves ul, .syndic ul, .forums ul, .divers ul { padding: 0.2em 0; }
 .rubriques li, .breves li, .syndic li, .forums li, .divers li { padding: 0 0.7em; }
 
 /*  Des couleurs specifiques selon les types de menus
@@ -186,7 +180,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	line-height: 1.4em; }
 
 .lien {
-	background: #FAFAFA;
+	background: #EEE;
 	margin: 1em;
 	margin-bottom: 1.5em;
 	padding: 0.82em;
@@ -261,7 +255,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	font-size: 0.82em;
 	line-height: 1.4em; }
 
-.pagination { font-size: 0.90em; margin-top: 0; padding-top: 0; }
+.pagination { font-size: 0.90em; }
 
 /*  ------------------------------------------
 /*  Habillage specifique du plan du site
@@ -271,7 +265,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 
 #page_plan #contenu h2 {
 	clear: both;
-	background: #E0FFE0;
+	background: #EEE;
 	border: 1px solid #CCC;
 	padding: 0.5em;
 	margin-bottom: 1em;
@@ -364,5 +358,5 @@ ul ul ul ul ul .forum-chapo { background: #FFF; }
 /*  Couleurs des liens
 /*  ------------------------------------------ */
 a { text-decoration: none; color: #333; }
-.on { font-weight: bold; }
+.on { font-weight: bold; color: #000; }
 a:hover { text-decoration: underline; color: #000; }
