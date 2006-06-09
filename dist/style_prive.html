@@ -1189,8 +1189,24 @@ div.brouteur_rubrique_on div a {
 
 
 /*
- * Styles generes par les raccourcis de mis en page
+ * Styles generes par les raccourcis de mise en page
  */
+
+i.spip {}
+strong.spip {}
+hr.spip {}
+
+.spip_puce { list-style-position: outside; }
+
+ul.spip {}
+ol.spip {}
+li.spip {}
+
+h3.spip {
+	text-align: center; 
+	margin: 2em 0 1.4em 0;
+	font: 1.15em Verdana,Arial,Sans,sans-serif;
+	font-weight: bold; }
 
 p.spip {
 	line-height: 140%;
@@ -1227,14 +1243,10 @@ a.spip_glossaire:hover {
 	background-color: ##ENV{couleur_foncee,3874b0};
 	color: #FFF;
 }
-.spip_cadre {
-	width: 100%;
-	background-color: #EEE;
-	margin-top: 10px;
-	padding: 5px;
-	border: 1px solid #666;
-	behavior: url([(#CHEMIN{win_width.htc}|url_absolue)]);
-}
+
+/* Citations, code et poesie */
+q, blockquote.spip, .spip_poesie, .spip_serif { font-family: Georgia, Garamond, Times, serif; }
+
 blockquote.spip {
 	margin-[(#ENV{ltr}|choixsiegal{left,left,right})]: 40px;
 	margin-[(#ENV{ltr}|choixsiegal{left,right,left})]: 0;
@@ -1255,6 +1267,45 @@ div.spip_poesie div {
 	text-indent: -60px;
 	margin-[(#ENV{ltr}|choixsiegal{left,left,right})]: 60px;
 }
+
+.spip_code, .spip_cadre { font-family: monospace; font-style: normal; font-size: 1.1em; }
+.spip_cadre {
+	width: 100%;
+	background-color: #EEE;
+	margin-top: 10px;
+	padding: 5px;
+	border: 1px solid #666;
+	behavior: url([(#CHEMIN{win_width.htc}|url_absolue)]);
+}
+
+/* Tableaux */
+table.spip {
+	margin: auto;
+	margin-bottom: 1em;
+	border: 1px solid;
+	border-collapse: collapse;
+	font-family: Verdana,Arial,Sans,sans-serif;
+	font-size: 0.90em; }
+table.spip caption {
+	caption-side: top; /* bottom pas pris en compte par IE */
+	text-align: center;
+	margin: auto;
+	padding: 3px;
+	font-weight: bold; }
+table.spip tr.row_first { background-color: #FCF4D0; }
+table.spip tr.row_odd { background-color: #d0d0d0; }
+table.spip tr.row_even { background-color: #F0F0F0; }
+table.spip th, table.spip td { padding: 3px; text-align: left; vertical-align: middle; }
+
+/* Logos, documents et images */
+img, .spip_logos { margin: 0; padding: 0; border: 0; }
+
+.spip_documents { text-align: center; font-family: Verdana,Arial,Sans,sans-serif; font-size: 0.90em; }
+.spip_documents_center { clear: both; width: 100%; margin: auto; }
+.spip_documents_left { float: left; margin-right: 15px; margin-bottom: 5px; }
+.spip_documents_right { float: right; margin-left: 15px; margin-bottom: 5px; }
+.spip_doc_titre { font-weight: bold; }
+.spip_doc_descriptif { clear: both; }
 
 /* pour le plugin "revision_nbsp" */
 .spip-nbsp {
