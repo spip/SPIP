@@ -70,6 +70,7 @@ function _generer_url_propre($type, $id_objet) {
 	// 1) il n'existe pas, ou
 	// 2) l'objet n'est pas 'publie' et on est admin connecte, ou
 	// 3) on le demande explicitement (preview) et on est admin connecte
+	$modif_url_propre = false;
 	if (function_exists('action_redirect_dist') AND
 	($GLOBALS['preview'] OR ($row['statut'] <> 'publie'))
 	AND $GLOBALS['auteur_session']['statut'] == '0minirezo')
@@ -195,6 +196,7 @@ function generer_url_document($id_document) {
 
 function recuperer_parametres_url(&$fond, $url) {
 	global $contexte;
+	$id_objet = 0;
 
 	// Migration depuis anciennes URLs ?
 	if ($GLOBALS['_SERVER']['REQUEST_METHOD'] != 'POST' AND
@@ -235,10 +237,11 @@ function recuperer_parametres_url(&$fond, $url) {
 
 
 	// Chercher les valeurs d'environnement qui indiquent l'url-propre
-	$url_propre = $GLOBALS['_SERVER']['REDIRECT_url_propre'];
-	if (!$url_propre)
+	if (isset($GLOBALS['_SERVER']['REDIRECT_url_propre']))
+		$url_propre = $GLOBALS['_SERVER']['REDIRECT_url_propre'];
+	elseif (isset($GLOBALS['HTTP_ENV_VARS']['url_propre']))
 		$url_propre = $GLOBALS['HTTP_ENV_VARS']['url_propre'];
-	if (!$url_propre) {
+	else {
 		$url = substr($url, strrpos($url, '/') + 1);
 		$url_propre = preg_replace(',[?].*,', '', $url);
 	}
