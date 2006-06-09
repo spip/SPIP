@@ -35,7 +35,7 @@ td {
 	width: 100%;
 	display: block;
 	padding: 3px; 
-	background-color: #e4e4e4; 
+	background-color: #E4E4E4; 
 	border: 1px solid ##ENV{couleur_claire,edf3fe}; 
 	background-position: center bottom; 
 	float: none;
@@ -56,7 +56,7 @@ td {
 }
 .fondl { 
 	padding: 3px; 
-	background-color: #e4e4e4; 
+	background-color: #E4E4E4; 
 	border: 1px solid ##ENV{couleur_claire,edf3fe}; 
 	background-position: center bottom; 
 	float: none;
@@ -379,7 +379,7 @@ a.icone26:hover img {
 	margin: 0; 
 	display: inline;
 	padding: 3px;
-	background-color: #e4e4e4;
+	background-color: #E4E4E4;
 	background: url(#EVAL{_DIR_IMG_PACK}fond-gris-anim.gif);
 	border: 1px solid ##ENV{couleur_foncee,3874b0};
 	-moz-border-radius: 5px;
@@ -550,7 +550,7 @@ a.cellule-h-texte:hover {
 
 .fondgris { cursor: pointer; padding: 4px; margin: 1px; }
 .fondgrison {
-	cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: #e4e4e4; 
+	cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: #E4E4E4; 
 }
 .fondgrison2 {
 	cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: #FFF;
@@ -777,6 +777,7 @@ a.ortho-dico:hover {
  */
 
 table.spip_barre {
+	width: 100%;
 	border-[(#ENV{ltr}|choixsiegal{left,right,left})]: 1px solid ##ENV{couleur_claire,edf3fe};
 }
 
@@ -786,13 +787,13 @@ table.spip_barre td {
 	border-[(#ENV{ltr}|choixsiegal{left,left,right})]: 1px solid ##ENV{couleur_claire,edf3fe};
 }
 
-a.spip_barre img {
+table.spip_barre a img {
 	padding: 3px;
 	margin: 0;
 	background-color: #eeeeee;
 	border-[(#ENV{ltr}|choixsiegal{left,right,left})]: 1px solid ##ENV{couleur_claire,edf3fe};
 }
-a.spip_barre:hover img {
+table.spip_barre a:hover img {
 	background-color: #FFF;
 }
 
