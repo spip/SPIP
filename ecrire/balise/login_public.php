@@ -82,15 +82,17 @@ function login_pour_tous($login, $cible, $action) {
 	// et pas un echec cookie.
 	if (_request('var_echec_cookie'))
 		$echec_cookie = ($_COOKIE['spip_session'] != 'test_echec_cookie');
+	else $echec_cookie = '';
+
 	$pose_cookie = generer_url_public('spip_cookie');
-	
+	$auth_http = '';	
 	if ($echec_cookie AND !$ignore_auth_http) {
 		include_spip('inc/headers');
 		if (php_module()) $auth_http = $pose_cookie;
 	}
 	// Attention dans le cas 'intranet' la proposition de se loger
 	// par auth_http peut conduire a l'echec.
-	if ($_SERVER['PHP_AUTH_USER'] AND $_SERVER['PHP_AUTH_PW'])
+	if (isset($_SERVER['PHP_AUTH_USER']) AND isset($_SERVER['PHP_AUTH_PW']))
 		$auth_http = '';
 
 	// Le login est memorise dans le cookie d'admin eventuel
@@ -147,7 +149,7 @@ function login_pour_tous($login, $cible, $action) {
 					'auth_http' => $auth_http,
 					'echec_cookie' => ($echec_cookie ? ' ' : ''),
 					'login' => $login,
-					'login_alt' => ($login_alt ? $login_alt : $login),
+					'login_alt' => (isset($login_alt) ? $login_alt : $login),
 					'self' => str_replace('&amp;', '&', self())
 					)
 				)

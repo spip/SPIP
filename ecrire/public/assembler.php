@@ -200,8 +200,8 @@ function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 	// Si on a inclus sans fixer le critere de lang, de deux choses l'une :
 	// - on est dans la langue du site, et pas besoin d'inclure inc_lang
 	// - on n'y est pas, et alors il faut revenir dans la langue par defaut
-	if (($lang = $contexte_inclus['lang'])
-	|| ($GLOBALS['spip_lang'] != ($lang = $GLOBALS['meta']['langue_site']))) {
+	$lang = isset($contexte_inclus['lang']) ? $contexte_inclus['lang']:'';
+	if ($lang || ($GLOBALS['spip_lang'] != ($lang = $GLOBALS['meta']['langue_site']))) {
 		include_spip('inc/lang');
 		lang_select($lang);
 		$lang_select = true; // pour lang_dselect en sortie
@@ -245,7 +245,8 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 		($GLOBALS['spip_lang'] != $GLOBALS['meta']['langue_site']))
 			$contexte_inclus['lang'] = $GLOBALS['spip_lang'];
 
-		$d = $GLOBALS['delais'];
+		// delais a l'ancienne, c'est pratiquement mort
+		$d = isset($GLOBALS['delais']) ? $GLOBALS['delais'] : 0;
 		$GLOBALS['delais'] = $delainc;
 		$page = inclure_page($fond, $contexte_inclus);
 		$GLOBALS['delais'] = $d;

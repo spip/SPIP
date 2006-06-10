@@ -83,14 +83,16 @@ function recuperer_parametres_url($fond, $url) {
 	 */
 	// Si on est revenu en mode html, mais c'est une ancienne url_propre
 	// on ne redirige pas, on assume le nouveau contexte (si possible)
-	if ($url_propre = $GLOBALS['_SERVER']['REDIRECT_url_propre']
-	OR $url_propre = $GLOBALS['HTTP_ENV_VARS']['url_propre']
-	AND preg_match(',^(article|breve|rubrique|mot|auteur|site)$,', $fond)) {
-	  $url_propre = (preg_replace('/^[_+-]{0,2}(.*?)[_+-]{0,2}(\.html)?$/',
+	$url_propre = isset($GLOBALS['_SERVER']['REDIRECT_url_propre']) ?
+		$GLOBALS['_SERVER']['REDIRECT_url_propre'] :
+		(isset($GLOBALS['HTTP_ENV_VARS']['url_propre']) ?
+			$GLOBALS['HTTP_ENV_VARS']['url_propre'] :
+			'');
+	if ($url_propre AND preg_match(',^(article|breve|rubrique|mot|auteur|site)$,', $fond)) {
+		$url_propre = (preg_replace('/^[_+-]{0,2}(.*?)[_+-]{0,2}(\.html)?$/',
 			'$1', $url_propre));
-		$r = "spip_" . table_objet($fond);
 		$id = id_table_objet($fond);
-		$r = spip_query("SELECT $id AS id FROM $r WHERE url_propre = " . spip_abstract_quote($url_propre));
+		$r = spip_query("SELECT $id AS id FROM spip_" . table_objet($fond) . " WHERE url_propre = " . spip_abstract_quote($url_propre));
 		if ($r AND $r = spip_fetch_array($r))
 			$contexte[$id] = $r['id'];
 	}
