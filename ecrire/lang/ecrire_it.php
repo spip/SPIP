@@ -789,7 +789,7 @@ Le traduzioni sono associate all\'originale,
 'texte_admin_effacer_01' => 'Questo commando cancella <i>tutto</i> il contenuto del database,
  compresi <i>tutti</i> i login dei redattori e degli amministratori. Dopo averlo eseguito, dovrai riavviare la procedura di installazione per ricreare un nuovo database e un primo ID amministrativo.',
 'texte_admin_tech_01' => 'Questa opzione permette di salvare il contenuto del database in un file che sar&agrave; conservato nella cartella @dossier@.
-Non dimenticare di recuperare integralmente anche la cartella <i>IMG/</i>, che contiene le immagini e i documentii utilizzati negli articoli e nelle rubriche.',
+Non dimenticare di recuperare integralmente anche la cartella @img@, che contiene le immagini e i documentii utilizzati negli articoli e nelle rubriche.',
 'texte_admin_tech_02' => 'Attenzione: questo salvaggio potr&agrave; essere ripristinato SOLO in un sito installato con la stessa versione di SPIP.
 In particolare &egrave; sbagliato cancellare il database pensando di ripristinare questo salvataggio su una nuova versione di SPIP...
 Per maggiori informazioni consulta <a href="http://www.spip.net/it_article2827.html">la documentazione di SPIP</a>.',

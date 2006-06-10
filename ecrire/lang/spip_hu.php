@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_rubrique' => 'Rovat m&oacute;dos&iacute;t&aacute;sa',
 'admin_recalculer' => 'Oldal friss&iacute;t&eacute;se',
 'alerte_maj_impossible' => '<b>Hiba&nbsp;!</b> A MySQL adatb&aacute;zis friss&iacute;t&eacute;se a @version@ verzi&oacute; fel&eacute; nem lehts&eacute;ges, tal&aacute;n adatb&aacute;zishoz val&oacute; m&oacute;dos&iacute;t&aacute;si jogosults&aacute;g miatt.Ilyenkor a t&aacute;rhely adminisztr&aacute;tor&aacute;hoz kell fordulni.',
+'analyse_xml' => 'XML elemz&eacute;s',
 'avis_archive_incorrect' => 'Az archiv&aacute;l&aacute;si f&aacute;jl nem SPIP t&iacute;pus&uacute; f&aacute;jl',
 'avis_archive_invalide' => 'Az archv&aacute;l&aacute;si f&aacute;jl &eacute;rv&eacute;nytelen',
 'avis_attention' => 'Vigy&aacute;zat&nbsp;!',
@@ -77,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_mois' => 'havi napt&aacute;r',
 'cal_par_semaine' => 'heti napt&aacute;r',
 'confirm_changer_statut' => 'Vigy&aacute;zat, az elem st&aacute;tusz&aacute;nak v&aacute;ltoztat&aacute;s&aacute;t k&eacute;rte. Kiv&aacute;n-e folytatni?',
+'correcte' => 'helyes',
 
 
 // D
@@ -199,7 +201,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_pass' => 'jelsz&oacute; :',
 'form_forum_probleme_mail' => 'email probl&eacute;ma&nbsp;: az azonos&iacute;t&oacute; nem k&uuml;ldhet&#337; el.',
 'form_forum_voici1' => '&Iacute;me az azonos&iacute;t&oacute;i a honlap "@nom_site_spip@" (@adresse_site@) f&oacute;rumai hozz&aacute;f&eacute;r&eacute;s&eacute;hez :',
-'form_forum_voici2' => '&Iacute;me az azonos&iacute;t&oacute;i a javasolt cikkek k&uuml;ld&eacute;s&eacute;hez arra a honlapra
+'form_forum_voici2' => '&Iacute;me az azonos&iacute;t&oacute;i javasolt cikkek k&uuml;ld&eacute;s&eacute;hez arra a honlapra
  "@nom_site_spip@" (@adresse_login@) :',
 'form_indiquer_email' => 'Jelezze az email c&iacute;m&eacute;t.',
 'form_indiquer_nom' => 'Jelezze a nev&eacute;t.',
@@ -210,19 +212,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_pet_deja_enregistre' => 'Ez a honlap m&aacute;r fel van v&eacute;ve',
 'form_pet_deja_signe' => 'M&aacute;r al&aacute;&iacute;rta ezt a sz&ouml;veget.',
 'form_pet_envoi_mail_confirmation' => 'Egy meger&#337;s&iacute;t&eacute;si email lett elk&uuml;ldve. Majd az &uuml;zenetben szerepl&#337; honlapc&iacute;met kell l&aacute;togatni ahhoz, hogy j&oacute;v&aacute;hagyja az al&aacute;&iacute;r&aacute;s&aacute;t.',
-'form_pet_mail_confirmation' => 'J&oacute; napot,
+'form_pet_mail_confirmation' => 'J&oacute; napot!
 
-K&eacute;rte, al&aacute;&iacute;rja ezt a petici&oacute;t:
+K&eacute;rte, hogy al&aacute;&iacute;rja ezt a petici&oacute;t:
 @titre@.
 
 A k&ouml;vetkez&#337; adatokat adta :
     N&eacute;v: @nom_email@
     Honlap: @nom_site@ - @url_site@
-
+    @message@
 
 FONTOS...
 Az al&aacute;&iacute;r&aacute;s &eacute;rv&eacute;nyes&iacute;t&eacute;s&eacute;re a
-lenti c&iacute;mhez kell csatlakozni (ellenkez&#337; esetben az &Ouml;n k&eacute;r&eacute;se el lesz uats&iacute;tva) :
+lenti c&iacute;mhez kell csatlakozni (ellenkez&#337; esetben az &Ouml;n k&eacute;r&eacute;se el lesz utas&iacute;tva) :
 
     @url@
 
@@ -342,6 +344,7 @@ amit kapott. Amennyiben nincs be&iacute;ratkozva  akkor &Ouml;nnek kell',
 'image_tourner_droite' => 'Fordul&aacute;s 90&deg; jobbra',
 'image_tourner_gauche' => 'Fordul&aacute;s 90&deg; balra',
 'img_indisponible' => 'hi&aacute;nyz&oacute; k&eacute;p',
+'impossible' => 'nem lehets&eacute;ges',
 'info_a_suivre' => 'FOLYTATNI&nbsp;&raquo;',
 'info_a_valider' => '[&eacute;rv&eacute;nyes&iacute;tend&#337;]',
 'info_acces_interdit' => 'Hozz&aacute;f&eacute;r&eacute;s tilos',
@@ -397,7 +400,7 @@ amit kapott. Amennyiben nincs be&iacute;ratkozva  akkor &Ouml;nnek kell',
 'info_erreur_systeme' => 'Rendszer hiba (errno @errsys@)',
 'info_erreur_systeme2' => 'A merevlemez tal&aacute;n tele van, vagy megs&eacute;r&uuml;lt az adatb&aacute;zis. <br>
  <font color=\'red\'>prob&aacute;ljon <a href=\'@script@\'>jav&iacute;tani az adatb&aacute;zis</a>,
- vagy keresse a rendszergazd&aacute;t.</font>',
+ vagy keresse fel a rendszergazd&aacute;t.</font>',
 'info_fini' => 'K&eacute;szen van !',
 'info_format_image' => 'Haszn&aacute;lhat&oacute; k&eacute;pform&aacute;tumok a b&eacute;lyegk&eacute;pek k&eacute;sz&iacute;t&eacute;s&eacute;re&nbsp;: @gd_formats@.',
 'info_format_non_defini' => 'Hat&aacute;rozatlan form&aacute;tum',
@@ -408,8 +411,8 @@ amit kapott. Amennyiben nincs be&iacute;ratkozva  akkor &Ouml;nnek kell',
 'info_inclusion_directe' => 'K&ouml;zvetlen besz&uacute;r&aacute;s&nbsp;:',
 'info_inclusion_vignette' => 'B&eacute;lyegk&eacute;p besz&uacute;r&aacute;sa&nbsp;:',
 'info_installation_systeme_publication' => 'A publik&aacute;l&aacute;si rendszer telep&iacute;t&eacute;se...',
-'info_installer_documents' => 'Automatikusan telep&iacute;theti az &ouml;sszes dokumentumot, ami szerepel az @upload@ mapp&aacute;ban.',
-'info_installer_ftp' => 'Mint adminisztr&aacute;tor, az @upload@ mapp&aacute;ban f&aacute;jlokat m&aacute;solhat (FTP-vel), &eacute;s k&eacute;s&#337;bb k&ouml;zvetlen&uuml;l kijel&ouml;lni itt.',
+'info_installer_documents' => 'Automatikusan telep&iacute;theti az &ouml;sszes dokumentumot, amit tartalmaz az @upload@ nev&#369; mappa.',
+'info_installer_ftp' => 'Mint adminisztr&aacute;tor, az @upload@ mapp&aacute;ba m&aacute;solhat (FTP-vel) f&aacute;jlokat, &eacute;s k&eacute;s&#337;bb k&ouml;zvetlen&uuml;l kijel&ouml;lheti &#337;ket itt.',
 'info_installer_images' => 'JPEG, GIF &eacute;s PNG tipus&uacute; k&eacute;pek telep&iacute;thet&#337;k.',
 'info_installer_images_dossier' => 'K&eacute;peket m&aacute;solni a @upload@ mapp&aacute;ba ahhoz, hogy itt lehessen kijel&ouml;lni.',
 'info_installer_tous_documents' => 'Az &ouml;sszes dokumentum telep&iacute;t&eacute;se',
@@ -473,7 +476,7 @@ amit kapott. Amennyiben nincs be&iacute;ratkozva  akkor &Ouml;nnek kell',
 'info_retirer_mot' => 'A sz&oacute; t&ouml;rl&eacute;se',
 'info_retirer_mots' => 'Az &ouml;sszes sz&oacute; t&ouml;rl&eacute;se',
 'info_sans_titre_2' => 'c&iacute;m n&eacute;lk&uuml;l',
-'info_selectionner_fichier' => 'Egy f&aacute;jlt v&aacute;laszhat az @upload@ mapp&aacute;b&oacute;l',
+'info_selectionner_fichier' => 'Kijel&ouml;lhet egy f&aacute;jlt az @upload@ mapp&aacute;b&oacute;l',
 'info_selectionner_fichier_2' => 'V&aacute;lasszon egy f&aacute;jlt&nbsp;:',
 'info_site_attente' => 'J&oacute;vahagy&aacute;s alatti honlap',
 'info_site_reference' => 'Felvett honlap',
@@ -609,7 +612,7 @@ Menjen a k&ouml;vetkez&#337; c&iacute;mre :
     @sendcookie@
 
 Akkor &uacute;jabb jelsz&oacute;t tud be&iacute;rni
-&eacute;s csatlakozhat a honlapra.
+&eacute;s &uacute;jra csatlakozhat a honlapra.
 
 ',
 'pass_mot_oublie' => 'Elfelejtett jelsz&oacute;',
@@ -629,6 +632,9 @@ Akkor &uacute;jabb jelsz&oacute;t tud be&iacute;rni
 
 
 // S
+'squelette' => 'v&aacute;zlat',
+'squelette_inclus_ligne' => 'v&aacute;zlatot bele&eacute;rtve, sor',
+'squelette_ligne' => 'v&aacute;zlat, sor',
 'stats_visites_et_popularite' => '@visites@ l&aacute;togat&aacute;s&nbsp;; n&eacute;pszer&#369;s&eacute;g&nbsp;: @popularite@',
 'suivant' => 'k&ouml;vetkez&#337;',
 
@@ -658,9 +664,9 @@ Pr&oacute;b&aacute;ljon',
  honlap m&#369;k&ouml;d&eacute;s&eacute;t. Javasoljuk, hogy ne  avatkozzon bele, amig &Ouml;n nem j&aacute;r&aacute;tos
  az SPIP m&#369;k&ouml;d&eacute;s&eacute;ben. <P align="justify"><B>&Aacute;ltal&aacute;ban nagyon tan&aacute;csos b&iacute;zni ezeket az oldalakat
  a honlap f&#337; webmester&eacute;re.</B>',
-'texte_inc_meta_1' => 'A rendszer &eacute;szlelt egy hib&aacute;t a <code>@fichier@</code> f&aacute;jl &iacute;r&aacute;s&aacute;kor. Mint honlap adminisztr&aacute;tor, legyen sz&iacute;ves',
+'texte_inc_meta_1' => 'A rendszer hib&aacute;t &eacute;szlelt a <code>@fichier@</code> f&aacute;jl &iacute;r&aacute;s&aacute;kor. Mint honlap adminisztr&aacute;tor, legyen sz&iacute;ves',
 'texte_inc_meta_2' => 'ellen&#337;rizni a ir&aacute;si jogokat',
-'texte_inc_meta_3' => 'az <code>@repertoire@</code> mapp&aacute;ban.',
+'texte_inc_meta_3' => 'a <code>@repertoire@</code> nev&#369; mapp&aacute;n.',
 'texte_statut_en_cours_redaction' => 'szerkeszt&eacute;s alatt',
 'texte_statut_poubelle' => 'szemetesbe',
 'texte_statut_propose_evaluation' => 'felm&eacute;r&eacute;sre javasolt',

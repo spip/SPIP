@@ -554,7 +554,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_site' => 'Lugar',
 'info_site_2' => 'lugar:',
 'info_site_min' => 'Lugar',
-'info_site_propose' => 'Lugar proposto o:',
+'info_site_propose' => 'Web proposto o:',
 'info_site_reference_2' => 'Lugar referido',
 'info_site_syndique' => 'Este web est&aacute; afiliado...',
 'info_site_valider' => 'Webs por validar',
@@ -790,7 +790,7 @@ cunha cor que indica o seu estado&nbsp;:',
 		incluindo <i>todos</i> os accesos dos equipos de xesti&oacute;n e de redacci&oacute;n.
 		Logo de executa.lo, ter&aacute;s que lanzar de novo a instalaci&oacute;n do SPIP para crear unha
 		nova base e un novo acceso de administraci&oacute;n.',
-'texte_admin_tech_01' => 'Esta opci&oacute;n permite gardar o contido da base nun ficheiro que ser&aacute; almaceado no directorio @dossier@. Non esqueza tam&eacute;n gardar o directorio <i>IMG/</i> &iacute;ntegro, que &eacute; o que cont&eacute;n as imaxes e os documentos anexos empregados nos artigos e nas secci&oacute;ns.',
+'texte_admin_tech_01' => 'Esta opci&oacute;n permite gardar o contido da base nun ficheiro que ser&aacute; almaceado no directorio @dossier@. Non esqueza tam&eacute;n gardar o directorio @img@ &iacute;ntegro, que &eacute; o que cont&eacute;n as imaxes e os documentos anexos empregados nos artigos e nas secci&oacute;ns.',
 'texte_admin_tech_02' => '&iexcl;Atenci&oacute;n!: esta copia de seguridade s&oacute; poder&aacute; ser restaurada  nun web que te&ntilde;a instalada a MESMA versi&oacute;n de SPIP. Daquela de ningunha maneira &eacute; conveniente &laquo;&nbsp;baleirar a base&nbsp;&raquo; coa esperanza de reinstalar a copia de seguridade logo da actualizaci&oacute;n...Consulte
   <a href="http://www.spip.net/fr_article1489.html">a documentaci&oacute;n de SPIP</a>.',
 'texte_admin_tech_03' => 'Podes escoller gardar o ficheiro en formato, para optimizar
@@ -1051,7 +1051,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'titre_rendez_vous' => 'CITA:',
 'titre_reparation' => 'Reparaci&oacute;n',
 'titre_site_numero' => 'LUGAR N&Uacute;MERO:',
-'titre_sites_proposes' => 'Os lugares propostos',
+'titre_sites_proposes' => 'Os webs propostos',
 'titre_sites_references_rubrique' => 'Os webs referenciados neste tema',
 'titre_sites_syndiques' => 'Os lugares afiliados',
 'titre_sites_tous' => 'Os lugares referidos',

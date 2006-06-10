@@ -6,7 +6,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
+'activer_plugin' => 'Plugin aktiv&aacute;l&aacute;sa',
 'aide_non_disponible' => 'Ez a r&eacute;sze a s&uacute;g&oacute;nak m&eacute;g nincs leford&iacute;tva arra a nyelvre.',
+'auteur' => 'Szerz&#337;r&nbsp;:',
 'avis_acces_interdit' => 'Hozz&aacute;f&eacute;r&eacute;s nincs enged&eacute;lyezve',
 'avis_article_modifie' => 'Vigy&aacute;zat, @nom_auteur_modif@ dolgozott ezen a cikken @date_diff@ perccel ezel&#337;tt',
 'avis_aucun_resultat' => 'Nincs eredm&eacute;ny.',
@@ -59,11 +61,12 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.',
 'bouton_checkbox_signature_unique_email' => 'csak egy al&aacute;&iacute;r&aacute;s emailc&iacute;menk&eacute;nt',
 'bouton_checkbox_signature_unique_site' => 'csak egy al&aacute;&iacute;r&aacute;s honlaponk&eacute;nt',
 'bouton_demande_publication' => 'K&eacute;rni e cikk publik&aacute;l&aacute;s&aacute;t',
+'bouton_desactive_tout' => 'Minden tilt&aacute;sa',
 'bouton_effacer_index' => 'T&ouml;r&ouml;lni az indexeket',
 'bouton_effacer_tout' => 'MINDENT t&ouml;r&ouml;lni',
 'bouton_envoi_message_02' => '&Uuml;ZENET K&Uuml;LD&Eacute;S',
 'bouton_envoyer_message' => 'V&eacute;gleges &uuml;zenet: k&uuml;ld&eacute;s',
-'bouton_forum_petition' => 'F&Oacute;RUM &Eacute;S AL&Aacute;&Iacute;R&Aacute;SGY&Uacute;JT&Eacute;S',
+'bouton_forum_petition' => 'F&Oacute;RUM &Eacute;S AL&Aacute;&Iacute;R&Aacute;SGY&#368;JT&Eacute;S (Petici&oacute;)',
 'bouton_modifier' => 'M&oacute;dos&iacute;t&aacute;s',
 'bouton_pense_bete' => 'EML&Eacute;KEZTET&#336; SZEM&Eacute;LYES HASZN&Aacute;LATHOZ',
 'bouton_radio_activer_messagerie' => 'A bels&#337; &uuml;zenetek aktiv&aacute;l&aacute;sa',
@@ -84,22 +87,18 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.',
  k&uuml;ld&ouml;tt anyagok csak az adminisztr&aacute;torok adta jov&aacute;hagy&aacute;st ker&uuml;lnek nyilv&aacute;noss&aacute;gra).',
 'bouton_radio_modere_abonnement' => 'moder&aacute;lva beiratkoz&aacute;sn&aacute;l',
 'bouton_radio_modere_posteriori' => 'ut&oacute;lag moder&aacute;lt',
-'bouton_radio_modere_priori' => 'eleve moder&aacute;lt',
+'bouton_radio_modere_priori' => 'el&ouml;z&#337;leg moder&aacute;lva',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Nem szerepelni a szerz&#337;k list&aacute;ban',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Ne legyen szerkeszt&#337;i h&iacute;rk&uuml;ld&eacute;s',
 'bouton_radio_non_syndication' => 'Nincs szindik&aacute;l&aacute;s',
-'bouton_radio_occidental' => 'Nyugat-eur&oacute;pai ab&eacute;c&eacute;(<tt>iso-8859-1</tt>)&nbsp;: a nyugat-eur&oacute;pai nyelvek (angol, francia, n&eacute;met...) megjelen&iacute;t&eacute;s&eacute;t teszi lehet&#337;v&eacute;&nbsp;;
-  Azonban SPIP viszonylag j&oacute;l kezeli a t&ouml;bbi nyelvet.',
 'bouton_radio_pas_petition' => 'Nincs al&aacute;&iacute;r&aacute;sgy&#369;jt&eacute;s',
-'bouton_radio_personnalise' => 'K&uuml;l&ouml;n karakter t&aacute;bla&nbsp;: ezt az opci&oacute;t v&aacute;lassza, ha specifikus karaktert&aacute;bl&aacute;t akar haszn&aacute;lni',
 'bouton_radio_petition_activee' => 'Al&aacute;&iacute;r&aacute;sgy&#369;jt&eacute;s aktiv&aacute;l&aacute;sa',
 'bouton_radio_publication_immediate' => '&Uuml;zenetek azonnali publik&aacute;l&aacute;sa
  (a k&uuml;ld&ouml;tt anyagok m&aacute;r k&uuml;ld&eacute;skor megjelennek, az adminisztr&aacute;torok k&eacute;s&#337;b tudj&aacute;k t&ouml;r&ouml;lni).',
-'bouton_radio_sauvegarde_compressee' => 'ment&eacute;s t&ouml;m&ouml;r&iacute;tve a k&ouml;vetkez&ouml;n: <b>ecrire/data/dump.xml.gz</b>',
-'bouton_radio_sauvegarde_non_compressee' => 'ment&eacute;s nincs t&ouml;m&ouml;r&iacute;tve a k&ouml;vetkez&#337;n:<b>ecrire/data/dump.xml</b>',
+'bouton_radio_sauvegarde_compressee' => 't&ouml;m&ouml;r&iacute;tett ment&eacute;s a k&ouml;vetkez&ouml;n: @fichier@',
+'bouton_radio_sauvegarde_non_compressee' => 'nem t&ouml;m&ouml;r&iacute;tett ment&eacute;s a k&ouml;vetkez&#337;n: @fichier@',
 'bouton_radio_supprimer_petition' => 'T&ouml;r&ouml;lni az al&aacute;&iacute;r&aacute;sgy&#369;jt&eacute;st',
 'bouton_radio_syndication' => 'Szindik&aacute;l&aacute;s :',
-'bouton_radio_universel' => 'Univerz&aacute;lis ab&eacute;c&eacute;&nbsp; (<tt>utf-8</tt>): az &ouml;sszes nyelv megjelen&iacute;t&eacute;s&eacute;t teszi lehet&#337;v&eacute;, de kompatibilit&aacute;s jelleg&#369; probl&eacute;m&aacute;kat okozhat a templateket m&oacute;dos&iacute;t&oacute; haszn&aacute;lt szoftverekkel, illetve bizonyos levelez&#337; progamokkal.',
 'bouton_redirection' => '&Aacute;TIR&Aacute;NY&Iacute;T&Aacute;S',
 'bouton_relancer_installation' => 'Telep&iacute;t&eacute;s &uacute;jrakezd&eacute;se',
 'bouton_restaurer_base' => 'Adatb&aacute;zis resztaur&aacute;l&aacute;sa',
@@ -167,6 +166,13 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.',
 'entree_texte_breve' => 'H&iacute;r sz&ouml;vege',
 'entree_titre_obligatoire' => '<B>C&iacute;m</B> [K&ouml;telez&#337;]<BR>',
 'entree_url' => 'A honlapja c&iacute;me (URL)',
+'erreur_plugin_fichier_absent' => 'Nem l&eacute;tez&#337; f&aacute;jl',
+'erreur_plugin_fichier_def_absent' => 'Nem l&eacute;tez&#337; defini&aacute;l&oacute; f&aacute;jl',
+'erreur_plugin_nom_fonction_interdit' => 'Tilos f&uuml;ggv&eacute;nyn&eacute;v',
+'erreur_plugin_nom_manquant' => 'Hi&aacute;nyz&oacute; plugin n&eacute;v',
+'erreur_plugin_prefix_manquant' => 'Nem defini&aacute;lt plugin n&eacute;v ter&uuml;let',
+'erreur_plugin_tag_plugin_absent' => 'hi&aacute;nyz&oacute; &lt;plugin&gt; a defini&aacute;l&oacute; f&aacute;jlban',
+'erreur_plugin_version_manquant' => 'Hi&aacute;nyz&oacute; plugin verzi&oacute;',
 
 
 // I
@@ -181,8 +187,9 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.',
 'ical_texte_rss' => '&Ouml;n a honlap ujdons&aacute;gait szindik&aacute;lhatja b&aacute;rmilyen XML/RSS (Rich Site Summary)tipus&uacute; f&aacute;jlolvas&oacute;val. Valamint ez a form&aacute;tum SPIP r&eacute;sz&eacute;re teszi lehet&#337;v&eacute; m&aacute;s honlapok publik&aacute;lt &uacute;jdons&aacute;gok olvas&aacute;s&aacute;t (szindik&aacute;lt honlapok).',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Levelez&#337; lista',
-'ical_titre_rss' => '&laquo; backend &raquo; f&aacute;jlok',
+'ical_titre_rss' => '&laquo; backend &raquo; f&aacute;jlok (rss)',
 'icone_activer_cookie' => 'A hivatkoz&aacute;si s&uuml;ti (cookie) aktiv&aacute;l&aacute;sa',
+'icone_admin_plugin' => 'Plugin-ek be&aacute;ll&iacute;t&aacute;sa',
 'icone_afficher_auteurs' => 'Megjelen&iacute;teni a szerz&#337;ket',
 'icone_afficher_visiteurs' => 'Megjelen&iacute;teni a l&aacute;togat&oacute;kat',
 'icone_arret_discussion' => 'Megsz&uuml;ntetni a vitahoz val&oacute; r&eacute;szv&eacute;telt ',
@@ -263,6 +270,7 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.',
 'info_avertissement' => 'Figyelmeztet&eacute;s',
 'info_base_installee' => 'Az &Ouml;n adatb&aacute;zis&aacute;nak strukt&uacute;r&aacute;ja telep&iacute;tve van.',
 'info_base_restauration' => 'Az adatb&aacute;zis resztaur&aacute;l&aacute;s alatt van.',
+'info_bloquer' => 'blokkol',
 'info_breves' => 'Az &Ouml;n honlapja haszn&aacute;lja-e a h&iacute;rek rendszer&eacute;t&nbsp;?',
 'info_breves_03' => 'h&iacute;rek',
 'info_breves_liees_mot' => 'A kulcssz&oacute;hoz k&ouml;t&ouml;tt h&iacute;rek',
@@ -462,6 +470,7 @@ a t&ouml;r&ouml;lt szerz&#337;k pedig kuk&aacute;val vannak jel&ouml;lve.',
 'info_procedure_maj_version' => 'A naprak&eacute;szt&eacute;teles elj&aacute;r&aacute;st kell ind&iacute;tani ahhoz, hogy
  adapt&aacute;ljuk az adatb&aacute;zist az SPIP &uacute;j v&aacute;ltozat&aacute;hoz.',
 'info_ps' => 'U.&Iacute;',
+'info_publier' => 'publik&aacute;l',
 'info_publies' => 'Az &Ouml;n publik&aacute;lt cikkei',
 'info_question_accepter_visiteurs' => 'Amennyiben a honlapja v&aacute;zaiban a l&aacute;t&oacute;gat&oacute;k be&iacute;ratkozhatnak priv&aacute;t r&eacute;szre val&oacute; hozz&aacute;f&eacute;r&eacute;s n&eacute;lk&uuml;l, akkor a lenti opci&oacute;t kell kijel&ouml;lni&nbsp;:',
 'info_question_gerer_statistiques' => 'A honlap kezeljen-e st&aacute;tisztik&aacute;kat a l&aacute;t&oacute;gat&aacute;sokr&oacute;l&nbsp;?',
@@ -514,7 +523,7 @@ a felhaszn&aacute;l&oacute;k automatikus emailt kapnak,
 'info_sauvegarde_petitions' => 'Az al&aacute;&iacute;r&aacute;sgy&#369;jt&eacute;sek ment&eacute;se',
 'info_sauvegarde_refers' => 'A "referers" ment&eacute;se',
 'info_sauvegarde_reussi_01' => 'Ment&eacute;s sikeres.',
-'info_sauvegarde_reussi_02' => 'Az adatb&aacute;zis lett mentve a <b>ecrire/data/@archive@</b> mapp&aacute;ban. Lehet',
+'info_sauvegarde_reussi_02' => 'Az adatb&aacute;zis mentve lett a @archive@ nev&#369; mapp&aacute;ba. Lehet',
 'info_sauvegarde_reussi_03' => 'visszat&eacute;rni',
 'info_sauvegarde_reussi_04' => 'honlapja &uuml;zemeltet&eacute;s&eacute;hez.',
 'info_sauvegarde_rubriques' => 'A rovatok ment&eacute;se',
@@ -542,6 +551,8 @@ a felhaszn&aacute;l&oacute;k automatikus emailt kapnak,
 'info_sous_titre' => 'Alc&iacute;m :',
 'info_statut_administrateur' => 'Adminisztr&aacute;tor',
 'info_statut_auteur' => 'A szerz&#337; st&aacute;tusza :',
+'info_statut_auteur_a_confirmer' => 'Meger&#337;s&iacute;tend&#337; be&iacute;ratkoz&aacute;s',
+'info_statut_auteur_autre' => 'Egy&eacute;b st&aacute;tusz&nbsp;:',
 'info_statut_efface' => 'T&ouml;r&ouml;lt',
 'info_statut_redacteur' => 'Szerz&#337;',
 'info_statut_site_1' => 'Ez a honlap&nbsp;:',
@@ -553,6 +564,8 @@ a felhaszn&aacute;l&oacute;k automatikus emailt kapnak,
 'info_suivi_activite' => 'A szerkeszt&#337;i tev&eacute;kenys&eacute;g k&ouml;vet&eacute;se',
 'info_supprimer_mot' => 'a&nbsp;sz&oacute;&nbsp;t&ouml;rl&eacute;se',
 'info_surtitre' => 'El&#337;c&iacute;m :',
+'info_syndication_integrale_1' => 'Az &#336;n honlapja szidik&aacute;l&aacute;si (RSS) f&aacute;jlokat javasol (l&aacute;sd &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
+'info_syndication_integrale_2' => 'A cikkek teljes tartalm&aacute;t kiv&aacute;n-e &aacute;tadni, vagy csak egy n&eacute;h&aacute;nysz&aacute;z karakteres &ouml;sszefoglal&aacute;st?',
 'info_taille_maximale_vignette' => 'A rendszer &aacute;ltal gener&aacute;lt b&eacute;lyegk&eacute;pek legnagyobb m&eacute;rete&nbsp;:',
 'info_terminer_installation' => 'Most bejefezheti a szabv&aacute;nyos telep&iacute;t&eacute;si elj&aacute;r&aacute;st.',
 'info_texte' => 'Sz&ouml;veg',
@@ -605,6 +618,7 @@ ami &aacute;llapot&aacute;t jelzi&nbsp;:',
 'item_ajout_mots_cles' => 'F&oacute;rumokhoz k&ouml;t&ouml;tt kulcsszavak hozz&aacute;ad&aacute;sa enged&eacute;lyez&eacute;se',
 'item_autoriser_documents_joints' => 'Cikkekhez csatolt dokumentumok enged&eacute;lyez&eacute;se',
 'item_autoriser_documents_joints_rubriques' => 'Rovatokban l&eacute;v&#337; dokumentumok enged&eacute;lyez&eacute;se',
+'item_autoriser_syndication_integrale' => 'A cikkek teljes tartalma a szindik&aacute;l&aacute;si f&aacute;jlokban',
 'item_bloquer_liens_syndiques' => 'Szindik&aacute;lt linkek tilt&aacute;sa j&oacute;v&aacute;hagy&aacute;s &eacute;rdek&eacute;ben',
 'item_breve_refusee' => 'NEM - Elutas&iacute;tott h&iacute;r',
 'item_breve_validee' => 'IGEN - Elfogadott h&iacute;r',
@@ -630,6 +644,7 @@ ami &aacute;llapot&aacute;t jelzi&nbsp;:',
 'item_non_ajout_mots_cles' => 'Kulcsszavak haszn&aacute;lat&aacute;nak tilt&aacute;sa a f&oacute;rumokban',
 'item_non_autoriser_documents_joints' => 'Dokumentumok tilt&aacute;sa a cikkekben',
 'item_non_autoriser_documents_joints_rubriques' => 'Dokumentumok tilt&aacute;sa a rovatokban',
+'item_non_autoriser_syndication_integrale' => 'Csak egy &ouml;sszefoglal&aacute;st &aacute;tadni',
 'item_non_bloquer_liens_syndiques' => 'Nem blokkolni a szindik&aacute;l&aacute;sb&oacute;l ered&#337; linkeket',
 'item_non_creer_fichiers_authent' => 'Nem kell l&eacute;trehozni ezeket a f&aacute;jlokat',
 'item_non_gerer_annuaire_site_web' => 'A honlap c&iacute;mt&aacute;r inaktiv&aacute;l&aacute;sa',
@@ -720,8 +735,29 @@ ami &aacute;llapot&aacute;t jelzi&nbsp;:',
 'ortho_verifier' => 'Helyes&iacute;r&aacute;s ellen&#337;rz&eacute;s ind&iacute;t&aacute;sa',
 
 
+// P
+'plugin_etat_developpement' => 'Fejleszt&eacute;s alatt',
+'plugin_etat_experimental' => 'kis&eacute;rlet jelleg&#369;',
+'plugin_etat_stable' => 'stabil',
+'plugin_etat_test' => 'tesztel&eacute;s alatt',
+'plugins_liste' => 'plugin lista',
+
+
+// R
+'repertoire_plugins' => 'Mappa&nbsp;:',
+
+
 // S
 'statut_admin_restreint' => '(korl&aacute;tolt admin)',
+'syndic_choix_moderation' => 'Mi legyen azokkal a linkekkel, melyek j&ouml;nnek err&#337;l a honlapr&oacute;l&nbsp;?',
+'syndic_choix_oublier' => 'Mi legyen azekkel a linkekkel, melyek nem szerepelnek a szindik&aacute;l&aacute;si (RSS) f&aacute;jlban&nbsp;?',
+'syndic_choix_resume' => 'Bizonyos honlapok a cikkek teljes tartalm&aacute;t tov&aacute;bb&iacute;tj&aacute;k. Ha rendelkez&eacute;sre &aacute;ll, kiv&aacute;nja-e szindik&aacute;lni&nbsp;:',
+'syndic_lien_obsolete' => 'Elavult hivatkoz&aacute;s',
+'syndic_option_miroir' => 'automatikusan blokkolni',
+'syndic_option_oubli' => 't&ouml;r&ouml;lni (@mois@&nbsp;h&oacute;nap ut&aacute;n)',
+'syndic_option_resume_non' => 'a cikkek teljes tartalm&aacute;t (HTML form&aacute;tumban)',
+'syndic_option_resume_oui' => 'egy egyszer&#369; &ouml;sszefoglal&aacute;s (sz&ouml;veges form&aacute;tumban)',
+'syndic_options' => 'Szindik&aacute;l&aacute;si opci&oacute;k&nbsp;:',
 
 
 // T
@@ -736,7 +772,7 @@ ami &aacute;llapot&aacute;t jelzi&nbsp;:',
 'texte_admin_effacer_01' => 'Ez a parancs az adatb&aacute;zis <i>eg&eacute;sz</i> tartalm&aacute;t t&ouml;rli,
 bele &eacute;rtve az <i>&ouml;sszes</i> szerz&#337;i, illetve adminisztr&aacute;tori hozz&aacute;f&eacute;r&eacute;st. Miut&aacute;n futtata, akkor ind&iacute;tani kell az
 SPIP &uacute;jrat&eacute;l&eacute;p&iacute;t&eacute;s&eacute;t egy &uacute;jabb adatb&aacute;zis l&eacute;trehoz&aacute;s&aacute;ra, valamint egy els&#337; adminisztr&aacute;tori hozz&aacute;f&eacute;r&eacute;st.',
-'texte_admin_tech_01' => 'Ez az opci&oacute; lehet&#337;v&eacute; teszi az adatb&aacute;zis tartalm&aacute;nak a ment&eacute;s&eacute;t egy f&aacute;jlban, ami az <i>ecrire/data/</i> mapp&aacute;ban tal&aacute;lhat&oacute;. Ne felejtse el menteni az <i>IMG/</i> mappa teljes tartalm&aacute;t, ami a cikkekben &eacute;s a rovatokban haszn&aacute;lt dokumentumokat, illetve k&eacute;peket tartalmazza.',
+'texte_admin_tech_01' => 'Ez az opci&oacute; lehet&#337;v&eacute; teszi az adatb&aacute;zis tartalm&aacute;nak a ment&eacute;s&eacute;t egy f&aacute;jlban, ami az @dossier@ mapp&aacute;ban tal&aacute;lhat&oacute;. Ne felejtse el megmenteni az @img@ mappa teljes tartalm&aacute;t, ami a cikkekben &eacute;s a rovatokban haszn&aacute;lt dokumentumokat, illetve k&eacute;peket tartalmazza.',
 'texte_admin_tech_02' => 'Vigy&aacute;zat: ezt a ment&eacute;st lehet resztaur&aacute;lni CSAK egy azonos verzi&oacute;j&#369; SPIP honlapon. Teh&aacute;t nem szabad  &laquo;&nbsp;&uuml;r&iacute;teni az adatb&aacute;zis&nbsp;&raquo; abban a rem&eacute;nyben, hogy &uacute;jratelep&iacute;theti a ment&eacute;st egy verzi&oacute;i fejleszt&eacute;s ut&aacute;n... &Eacute;rdekl&#337;dj&ouml;n <a href="http://www.spip.net/fr_article1489.html">az SPIP dokument&aacute;ci&oacute;ja (Fr)</a>.',
 'texte_admin_tech_03' => 'T&ouml;m&ouml;r&iacute;tett form&aacute;ban is lehet menteni a f&aacute;jlt, a r&ouml;videbb let&ouml;lt&eacute;si id&#337; &eacute;s a kisebb foglalt hely &eacute;rdek&eacute;ben.',
 'texte_adresse_annuaire_1' => '(Ha az &Ouml;n c&iacute;mt&aacute;ra ugyanazon a g&eacute;pen van telep&iacute;tve, mint ez a honlap, akkor val&oacute;sz&iacute;n&#369;leg &laquo;localhost&raquo;-r&oacute;l van sz&oacute;.)',
@@ -787,22 +823,20 @@ SPIP &uacute;jrat&eacute;l&eacute;p&iacute;t&eacute;s&eacute;t egy &uacute;jabb 
 'texte_effacer_donnees_indexation' => 'Az index&aacute;l&aacute;si adatok t&ouml;rl&eacute;se',
 'texte_en_cours_validation' => 'Az al&aacute;bbi h&iacute;reket &eacute;s cikkeket javasolt&aacute;k publik&aacute;l&aacute;sra. Sz&oacute;ljon hozz&aacute; a hozz&aacute;juk csatolt f&oacute;rumokban.',
 'texte_enrichir_mise_a_jour' => 'A szerkeszt&eacute;st lehet sz&eacute;p&iacute;teni a &laquo;&nbsp;nyomdai jelek&nbsp;&raquo; seg&iacute;ts&eacute;g&eacute;vel.',
-'texte_fichier_authent' => '<b>SPIP-nek kell-e l&eacute;trehozni sp&eacute;ci&aacute;lis <tt>.htpasswd</tt>
-  &eacute;s <tt>.htpasswd-admin</tt> f&aacute;jlokat a <tt>ecrire/data/</tt> mapp&aacute;ban?</b><p />
-  Azok a f&aacute;jlok haszn&aacute;lhat&oacute;ak a szerz&#337;i &eacute;s adminisztr&aacute;tori hozz&aacute;f&eacute;r&eacute;s korl&aacute;toz&aacute;s&aacute;ra bizonyos helyeken
+'texte_fichier_authent' => '<b>SPIP-nek kell-e l&eacute;trehoznia sp&eacute;ci&aacute;lis <tt>.htpasswd</tt>
+  &eacute;s <tt>.htpasswd-admin</tt> f&aacute;jlokat a @dossier@ mapp&aacute;ban?</b><p />
+  Azok a f&aacute;jlok haszn&aacute;lhat&oacute;k a szerz&#337;i &eacute;s adminisztr&aacute;tori hozz&aacute;f&eacute;r&eacute;s korl&aacute;toz&aacute;s&aacute;ra bizonyos helyeken
   (p&eacute;ld&aacute;ul k&uuml;ls&#337; statistikai program).<p />
   Ha nem kell, ezt az opci&oacute;t ki lehet hagyni
-  az alap&eacute;rtelmezett &eacute;rt&eacute;kkel (nincs f&aacute;jll&eacute;trehoz&aacute;s ).',
+  az alap&eacute;rtelmezett &eacute;rt&eacute;kkel (nincs f&aacute;jll&eacute;trehoz&aacute;s).',
 'texte_informations_personnelles_1' => 'Most a rendszer fog l&eacute;trehozni egy szem&eacute;lyes hozz&aacute;f&eacute;r&eacute;st &Ouml;nnek.',
 'texte_informations_personnelles_2' => '(Megjegyz&eacute;s : ha &uacute;jratelep&iacute;t&eacute;sr&oacute;l van sz&oacute;, &eacute;s m&eacute;g mindig megy a hozz&aacute;f&eacute;r&eacute;se, akkor',
 'texte_introductif_article' => '(A cikk bevezet&#337; sz&ouml;vege.)',
-'texte_jeu_caractere' => 'Ez az opci&oacute; hasznos, ha a honlapja m&aacute;s karaktereket jelen&iacute;t meg, mint a r&oacute;mai ab&eacute;c&eacute; (vagyis &laquo;&nbsp;nyugati&nbsp;&raquo;) &eacute;s hasonl&oacute;k.
- Ilyen esetben, tal&aacute;n jobb v&aacute;ltoztatni az alap&eacute;rtelmezett be&aacute;ll&iacute;t&aacute;st egy
- megfelel&#337; karakter t&aacute;bl&aacute;ra&nbsp;; mindenesetre tan&aacute;csoljuk, hogy tesztelgessen a j&oacute; megold&aacute;s megtal&aacute;las&aacute;ra. Ha ezt a param&eacute;tert m&oacute;dos&iacute;tja, ne felejtse annak megfelel&#337;en adapt&aacute;lni
- a nyilv&aacute;nos r&eacute;szt (<tt>#CHARSET</tt> marker).',
-'texte_jeu_caractere_2' => 'Annak a be&aacute;ll&iacute;t&aacute;snak nincs utolagos hat&aacute;sa. Teh&aacute;t
- a m&aacute;r be&iacute;rt sz&ouml;vegek rosszul jelenhetnek meg
- egy be&aacute;ll&iacute;t&aacute;s m&oacute;dos&iacute;t&aacute;s k&ouml;vet&#337;en. Minden esetben k&aacute;r n&eacute;lk&uuml;l lehet vissza t&eacute;rni az el&ouml;z&#337; be&aacute;ll&iacute;t&aacute;sra.',
+'texte_jeu_caractere' => 'Az &#336;n honlapj&aacute;n aj&aacute;nlott az univerz&aacute;lis ab&eacute;c&eacute; (<tt>utf-8</tt>) haszn&aacute;lata&nbsp;:az &ouml;sszes nyelv megjelen&iacute;t&eacute;s&eacute;t teszi lehet&#337;v&eacute;, &eacute;s m&aacute;r nem okoz kompatibilit&aacute;si problem&aacute;t a korszer&#369; b&ouml;ng&eacute;sz&#337;kkel.',
+'texte_jeu_caractere_2' => 'Vigy&aacute;zat: E be&aacute;ll&iacute;t&aacute;s nem v&eacute;gzi az adatb&aacute;zisban m&aacute;r megl&eacute;v&#337; sz&ouml;vegek konvert&aacute;l&aacute;s&aacute;t.',
+'texte_jeu_caractere_3' => 'Az &#336;n honlapja jelenleg a kovetkez&#337; karaktert&aacute;bl&aacute;t haszn&aacute;lja&nbsp;:',
+'texte_jeu_caractere_4' => '<NEW>Si cela ne correspond pas &agrave; la r&eacute;alit&eacute; de vos donn&eacute;es (suite, par exemple, &agrave; une restauration de base de donn&eacute;es), ou si <em>vous d&eacute;marrez ce site</em> et souhaitez partir sur un autre jeu de caract&egrave;res, veuillez indiquer ce dernier ici&nbsp;:',
+'texte_jeu_caractere_conversion' => '<NEW>Note&nbsp;: vous pouvez d&eacute;cider de convertir une fois pour toutes l\'ensemble des textes de votre site (articles, br&egrave;ves, forums, etc.) vers l\'alphabet <tt>utf-8</tt>, en vous rendant sur <a href="@url@">la page de conversion vers l\'utf-8</a>.',
 'texte_lien_hypertexte' => '(Ha az &Ouml;n &uuml;zenete egy publik&aacute;lt cikkre, vagy egy t&ouml;bb inform&aacute;ci&oacute;t tartalmaz&oacute; oldara hivatkozik, lejjeb jelezze az oldal nev&eacute;t, illetve c&iacute;m&eacute;t.)',
 'texte_liens_sites_syndiques' => 'A szindik&aacute;lt honlapokr&oacute;l sz&aacute;rmaz&oacute; linkeket lehetnek eleve tiltva&nbsp;; a lenti be&aacute;ll&iacute;t&aacute;s jelzi a szindik&aacute;lt honlapok alap&eacute;rtelmezett be&aacute;ll&iacute;t&aacute;s&aacute;t l&eacute;trehoz&aacute;suk ut&aacute;n.
 Egy&eacute;bkent minden linket lehet ut&oacute;lag enged&eacute;lyezni egyenk&eacute;nt, vagy honlap szerint tiltani a leend&#337; linkeket.
@@ -830,11 +864,12 @@ Egy&eacute;bkent minden linket lehet ut&oacute;lag enged&eacute;lyezni egyenk&ea
 'texte_nouveau_message' => '&Uacute;j &uuml;zenet',
 'texte_nouveau_mot' => '&Uacute;j sz&oacute;',
 'texte_nouvelle_version_spip_1' => 'Az SPIP egyik &uacute;jabb verzi&oacute;j&aacute;t telep&iacute;tette.',
-'texte_nouvelle_version_spip_2' => 'Ez az &uacute;j verzi&oacute; a szok&aacute;sosn&aacute;l teljesebb friss&iacute;t&eacute;st ig&eacute;nyel, t&ouml;r&ouml;lje az <tt>inc_connect.php3</tt> nev&#369; f&aacute;jlt a  <tt>ecrire</tt> mapp&aacute;b&#337;l &eacute;s folytatni a telep&iacute;t&eacute;st az adatb&aacute;zishoz val&oacute; csatlakoz&aacute;s param&eacute;tereinek friss&iacute;t&eacute;s&eacute;re.<p /> (Megjegyz&eacute;s.&nbsp;: ha ezeket elfelejtette, tekintse meg a <tt>inc_connect.php3</tt> f&aacute;jlt, miel&#337;bb t&ouml;rli...)',
+'texte_nouvelle_version_spip_2' => '<MODIF>Ez az &uacute;j verzi&oacute; a szok&aacute;sosn&aacute;l teljesebb friss&iacute;t&eacute;st ig&eacute;nyel, t&ouml;r&ouml;lje az <tt>inc_connect.php3</tt> nev&#369; f&aacute;jlt a  <tt>ecrire</tt> mapp&aacute;b&#337;l &eacute;s folytatni a telep&iacute;t&eacute;st az adatb&aacute;zishoz val&oacute; csatlakoz&aacute;s param&eacute;tereinek friss&iacute;t&eacute;s&eacute;re.<p /> (Megjegyz&eacute;s.&nbsp;: ha ezeket elfelejtette, tekintse meg a <tt>inc_connect.php3</tt> f&aacute;jlt, miel&#337;bb t&ouml;rli...)',
 'texte_operation_echec' => 'Menjen az el&ouml;z&#337; oldalra, jel&ouml;lj&ouml;n ki egy m&aacute;sik adatb&aacute;zist, vagy hozzon l&eacute;tre egy ujat. Ellen&#337;rizze az &Ouml;n szolg&aacute;ltat&oacute;ja &aacute;ltal adott inform&aacute;ci&oacute;kat.',
 'texte_plus_trois_car' => 't&ouml;bb, mint 3 karakter',
 'texte_plusieurs_articles' => 'T&ouml;bb szerz&#337; tal&aacute;lt "@cherche_auteur@" szerint:',
 'texte_port_annuaire' => '(Az alap&eacute;rtelmezett &eacute;rt&eacute;k &aacute;ltal&aacute;ban megfelel.)',
+'texte_presente_plugin' => '<NEW>Cette page liste les plugins disponibles sur le site. Vous pouvez activer les plugins n&eacute;cessaires en cochant la case correspondante.',
 'texte_proposer_publication' => 'Ha a cikk be van fejezve,<br> akkor a publik&aacute;l&aacute;s&aacute;t javasolhatja.',
 'texte_proxy' => 'Bizonyos esetekben (intranet, biztons&aacute;gos h&aacute;l&oacute;zatok...),
   sz&uuml;ks&eacute;ges haszn&aacute;lni egy <I>HTTP proxy</I>-t a szindik&aacute;lt honlapok el&eacute;r&eacute;s&eacute;re.
@@ -849,7 +884,7 @@ szeretne friss&iacute;teni, akkor menjen ink&aacute;bb a nyilv&aacute;nos r&eacu
 'texte_recapitiule_liste_documents' => 'Ez az oldal felsorolja ezeket a dokumentumokat, melyeket helyezte a rovatokba. Minden egyes dokumentum m&oacute;dos&iacute;t&aacute;s&aacute;ra, k&ouml;vesse a rovata oldal&aacute;hoz vezet&#337; linket.',
 'texte_recuperer_base' => 'Adatb&aacute;zis jav&iacute;t&aacute;sa',
 'texte_reference_mais_redirige' => 'a cikke fel van v&eacute;ve az &Ouml;n SPIP honlapj&aacute;n, de &aacute;t lett ir&aacute;ny&iacute;tva egy m&aacute;sik URL fel&eacute;.',
-'texte_referencement_automatique' => '<b>egy honlap aztomatikus felv&eacute;tele</b><br>Gyorsan felvehet egy honlapot, ha lejjebb jelzi a kiv&aacute;nt URL-t, vagy a backend f&aacute;jl c&iacute;m&eacute;t. SPIP automatikusan fogja megszerezni az erre vonatkoz&oacute; inform&aacute;ci&oacute;kat (neve, le&iacute;r&aacute;s...).',
+'texte_referencement_automatique' => '<MODIF><b>egy honlap aztomatikus felv&eacute;tele</b><br>Gyorsan felvehet egy honlapot, ha lejjebb jelzi a kiv&aacute;nt URL-t, vagy a backend f&aacute;jl c&iacute;m&eacute;t. SPIP automatikusan fogja megszerezni az erre vonatkoz&oacute; inform&aacute;ci&oacute;kat (neve, le&iacute;r&aacute;s...).',
 'texte_requetes_echouent' => '<b>Ha bizonyos MySQL lek&eacute;rdez&eacute;sek rendszeresen &eacute;s oktalanul hib&aacute;sak,
  lehets&eacute;ges, hogy maga az adatb&aacute;zis az  oka.</b><p />
   MySQL ad lehet&#337;s&eacute;get a t&aacute;bl&aacute;k jav&iacute;t&aacute;s&aacute;ra, ha v&eacute;letlen&uuml;l lett s&eacute;r&uuml;lved.
@@ -858,12 +893,12 @@ szeretne friss&iacute;teni, akkor menjen ink&aacute;bb a nyilv&aacute;nos r&eacu
   ami tal&aacute;n nyomokat tartalmaz...<p />
  Ha a probl&eacute;ma fenn&aacute;ll, keresse a szolg&aacute;ltat&oacute;j&aacute;t.<p />',
 'texte_restaurer_base' => 'Egy megmentett adatb&aacute;zis tartalm&aacute;nak resztaur&aacute;l&aacute;sa',
-'texte_restaurer_sauvegarde' => 'Ez az opci&oacute; lehet&#337;v&eacute; teszi egy m&aacute;r megmentett adatb&aacute;zis resztaur&aacute;l&aacute;s&aacute;t.
-  Az&eacute;rt a ment&eacute;st tartalmaz&oacute; f&aacute;jlt kell helyezni a <i>ecrire/data/</i> mapp&aacute;ba.
+'texte_restaurer_sauvegarde' => '<MODIF>Ez az opci&oacute; lehet&#337;v&eacute; teszi egy m&aacute;r megmentett adatb&aacute;zis resztaur&aacute;l&aacute;s&aacute;t.
+  Az&eacute;rt a ment&eacute;st tartalmaz&oacute; f&aacute;jlt kell helyezni a @dossier@ mapp&aacute;ba.
   Legyen &oacute;vatos azzal a lehet&#337;s&eacute;ggel&nbsp;: <b>a m&oacute;dos&iacute;t&aacute;sok, esetleges veszt&eacute;sek visszavonhatatlanok.</b>',
 'texte_sauvegarde' => 'Az adatb&aacute;zis tartalm&aacute;nak ment&eacute;se',
 'texte_sauvegarde_base' => 'Adatb&aacute;zis ment&eacute;se',
-'texte_sauvegarde_compressee' => 'A ment&eacute;s a nem t&ouml;m&ouml;r&iacute;tett <b>ecrire/data/dump.xml</b> f&aacute;jlba fog t&ouml;rtenni.',
+'texte_sauvegarde_compressee' => '<MODIF>A ment&eacute;s a nem t&ouml;m&ouml;r&iacute;tett @fichier@ f&aacute;jlba fog t&ouml;rtenni.',
 'texte_selection_langue_principale' => 'Lejjebb kijel&ouml;lhet&#337; a honlap &laquo;&nbsp;f&#337; nyelve&nbsp;&raquo;. Ez a v&aacute;laszt&aacute;s - szerencs&eacute;re&nbsp;! - nem k&ouml;telez &iacute;rni cikkeket a v&aacute;lasztott nyelven, de meghat&aacute;rozhatja&nbsp;:
  <ul><li> a nyilv&aacute;nos r&eacute;szen az alap&eacute;rtelmezett d&aacute;tumform&aacute;tumot&nbsp;;</li>
  <li> milyen nyomdai motort haszn&aacute;lhasson az SPIP a sz&ouml;vegekre&nbsp;;</li>
@@ -899,7 +934,7 @@ dans le cache SPIP. Ez p&eacute;ld&aacute;ul er&ouml;ltethet az &ouml;sszes olda
 ',
 'texte_trop_resultats_auteurs' => 'T&uacute;l sok tal&aacute;lat erre "@cherche_auteur@" ; sz&uuml;k&iacute;tse a k&eacute;r&eacute;s&eacute;st.',
 'texte_unpack' => 'Leg&uacute;jabb verzi&oacute; let&ouml;lt&eacute;se',
-'texte_utilisation_moteur_syndiques' => 'Ha a bels&#337; SPIP keres&#337; motort haszn&aacute;lja 
+'texte_utilisation_moteur_syndiques' => '<MODIF>Ha a bels&#337; SPIP keres&#337; motort haszn&aacute;lja 
     , k&eacute;tf&eacute;le m&oacute;don lehet keresni a szindik&aacute;lt cikkekben, illetve honlapokon.
     <br><img src=\'puce.gif\'> Az egyszer&#369;bb korl&aacute;t&oacute;zodik a cikkek c&iacute;meire &eacute;s r&ouml;vid ismertet&#337;ire.
     <br><img src=\'puce.gif\'>
@@ -993,7 +1028,20 @@ dans le cache SPIP. Ez p&eacute;ld&aacute;ul er&ouml;ltethet az &ouml;sszes olda
 'trad_new' => '&Iacute;rni egy &uacute;jabb ford&iacute;t&aacute;st err&#337;l a cikkr&#337;l',
 
 
+// U
+'utf8_convert_attendez' => '<NEW>Attendez quelques instants et rechargez cette page.',
+'utf8_convert_avertissement' => '<NEW>Vous vous appr&ecirc;tez &agrave; convertir le contenu de votre base de donn&eacute;es (articles, br&egrave;ves, etc) du jeu de caract&egrave;res <b>@orig@</b> vers le jeu de caract&egrave;res <b>@charset@</b>.',
+'utf8_convert_backup' => '<NEW>N\'oubliez pas de faire auparavant une sauvegarde compl&egrave;te de votre site. Vous devrez aussi v&eacute;rifier que vos squelettes et fichiers de langue sont compatibles @charset@. D\'autre part le suivi des r&eacute;visions, s\'il est activ&eacute;, sera endommag&eacute;.',
+'utf8_convert_erreur_deja' => '<NEW>Votre site est d&eacute;j&agrave; en @charset@, inutile de le convertir...',
+'utf8_convert_erreur_orig' => '<NEW>Erreur&nbsp;: le jeu de caract&egrave;res @charset@ n\'est pas support&eacute;.',
+'utf8_convert_termine' => '<NEW>C\'est termin&eacute;&nbsp;!',
+'utf8_convert_timeout' => '<NEW><b>Important&nbsp;:</b> en cas de <i>timeout</i> du serveur, veuillez recharger la page jusqu\'&agrave; ce qu\'elle indique &laquo;&nbsp;termin&eacute;&nbsp;&raquo;.',
+'utf8_convert_verifier' => '<NEW>Vous devez maintenant aller vider le cache, et v&eacute;rifier que tout se passe bien sur les pages publiques du site. En cas de gros probl&egrave;me, une sauvegarde de vos donn&eacute;es a &eacute;t&eacute; r&eacute;alis&eacute;e (au format SQL) dans le r&eacute;pertoire @rep@.',
+'utf8_convertir_votre_site' => '<NEW>Convertir votre site en utf-8',
+
+
 // V
+'version' => '<NEW>Version&nbsp;:',
 'version_initiale' => 'Eredeti verzi&oacute;'
 
 );
