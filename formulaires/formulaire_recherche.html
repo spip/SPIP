@@ -3,6 +3,7 @@
 
 <form action="[(#ENV{lien})]" method="get">
 	[(#ENV{lien}|form_hidden)]
+	[<input type="hidden" name="lang" value="(#ENV{lang})" />]
 	<label for="recherche" style="display: none;"><:info_rechercher:></label>
 	<input type="text" class="forml" name="recherche" id="recherche"
 	value="[(#ENV{recherche}|sinon{<:info_rechercher:>"
