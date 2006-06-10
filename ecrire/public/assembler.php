@@ -115,10 +115,12 @@ function assembler_page ($fond) {
 		$page['entetes']["Connection"] = "close";
 		$page['texte'] = "";
 	} else {
-	  if (!$use_cache && isset($page['contexte']))  {
-// Remplir les globals pour les boutons d'admin
-			foreach ($page['contexte'] as $var=>$val)
-				$GLOBALS[$var] = $val;
+		if (!$use_cache )  {
+			if (isset($page['contexte'])){
+				// Remplir les globals pour les boutons d'admin
+				foreach ($page['contexte'] as $var=>$val)
+					$GLOBALS[$var] = $val;
+			}
 		} else {
 			$f = charger_fonction('parametrer', 'public');
 			$page = $f($fond, '', $chemin_cache);
