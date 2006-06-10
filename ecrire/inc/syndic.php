@@ -451,11 +451,6 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	// Ne pas oublier de liberer le verrou
 	spip_release_lock($url_syndic);
 
-	if ($liens_ajoutes) {
-		spip_log("Syndication: $liens_ajoutes nouveau(x) lien(s)");
-		include_spip('inc/rubriques');
-		calculer_rubriques();
-	}
 
 	// Renvoyer l'erreur le cas echeant
 	if (!is_array($articles))

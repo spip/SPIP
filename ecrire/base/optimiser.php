@@ -13,10 +13,12 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function optimiser_base() {
+// heure de reference pour le garbage collector = 24h auparavant
+function optimiser_base($attente = 24*3600) {
 	spip_log ("optimisation de la base");
 
-	$mydate = date("YmdHis", time() - 24 * 3600);
+	# format = 20060610110141, si on veut forcer une optimisation tout de suite
+	$mydate = date("YmdHis", time() - $attente);
 
 
 	//
