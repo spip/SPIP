@@ -591,13 +591,13 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	  $col = $boucle->primary;
 
 	// Cas particulier : id_secteur pour certaines tables
-	else if ($col == 'id_secteur') {
-		if ($type == 'breves')
-		    $col = 'id_rubrique';
-		else if ($type == 'forums') {
-		  $table = critere_secteur_forum($idb, $boucles, $val, $crit);
-		}
+	else if (($col == 'id_secteur')&&($type == 'breves')) {
+		$col = 'id_rubrique';
 	}
+	else if (($col == 'id_secteur')&& ($type == 'forums')) {
+		$table = critere_secteur_forum($idb, $boucles, $val, $crit);
+	}
+	
 	// Cas particulier : expressions de date
 	else if ($table_date[$type]
 	AND preg_match(",^((age|jour|mois|annee)_relatif|date|mois|annee|jour|heure|age)(_[a-z]+)?$,",
