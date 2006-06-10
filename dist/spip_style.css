@@ -45,8 +45,7 @@ table.spip {
 	margin: auto;
 	margin-bottom: 1em;
 	border: 1px solid;
-	border-collapse: collapse;
-	font-size: 0.77em; }
+	border-collapse: collapse; }
 table.spip caption {
 	caption-side: top; /* bottom pas pris en compte par IE */
 	text-align: center;
