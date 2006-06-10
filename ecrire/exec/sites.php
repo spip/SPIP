@@ -104,11 +104,12 @@ if ($analyser_site == 'oui' AND $flag_editable) {
 
 	if ($v) {
 		$nom_site = ($v['nom_site']);
-		if (!$nom_site) $nom_site = $url_site;
+		if (!$nom_site) $nom_site = $url;
 		$url_syndic = trim($v['url_syndic']);
 		$descriptif = $v['descriptif'];
 		$syndication = $v[syndic] ? 'oui' : 'non';
-		$result = spip_query("UPDATE spip_syndic SET nom_site=" . spip_abstract_quote($nom_site) . ", url_site=" . spip_abstract_quote($url_site) . ", url_syndic=" . spip_abstract_quote($url_syndic) . ", descriptif=" . spip_abstract_quote($descriptif) . ", syndication='$syndication', statut='$statut' WHERE id_syndic=$id_syndic");
+spip_log ("UPDATE spip_syndic SET nom_site=" . spip_abstract_quote($nom_site) . ", url_site=" . spip_abstract_quote($url) . ", url_syndic=" . spip_abstract_quote($url_syndic) . ", descriptif=" . spip_abstract_quote($descriptif) . ", syndication='$syndication', statut='$statut' WHERE id_syndic=$id_syndic");
+		$result = spip_query("UPDATE spip_syndic SET nom_site=" . spip_abstract_quote($nom_site) . ", url_site=" . spip_abstract_quote($url) . ", url_syndic=" . spip_abstract_quote($url_syndic) . ", descriptif=" . spip_abstract_quote($descriptif) . ", syndication='$syndication', statut='$statut' WHERE id_syndic=$id_syndic");
 		if ($syndication == 'oui') syndic_a_jour($id_syndic);
 		$redirect = generer_url_ecrire('sites',("id_syndic=$id_syndic". ($redirect ?  "&redirect=$redirect" : "")), true);
 		$redirect_ok = 'oui';
