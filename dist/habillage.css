@@ -223,31 +223,33 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 
 /* Listes d'articles et extraits introductifs
 ----------------------------------------------- */
-.extrait { margin-bottom: 1em; }
+.liste-articles {}
 
-.extrait .titre {
+.liste-articles li.extrait { margin-bottom: 1em; }
+
+.liste-articles li.extrait .titre {
 	font-size: 1.03em;
 	font-weight: bold; }
 
-.extrait .spip_logos {
+.liste-articles li.extrait .spip_logos {
 	float: right;
 	margin-left: 16px;
 	margin-bottom: 16px;
 	clear: right; }
 
-.extrait p { margin: 0; padding: 0; }
+.liste-articles li.extrait p { margin: 0; padding: 0; }
 
-.extrait .enclosures {
+.liste-articles li.extrait .enclosures {
 	float: right;
 	text-align: right;
 	max-width: 60%;
 	margin: 0; }
 
-.extrait small {
+.liste-articles li.extrait small {
 	display: block;
 	font-size: 0.71em; }
 
-.extrait .texte {
+.liste-articles li.extrait .texte {
 	margin-top: 5px;
 	margin-bottom: 2em;
 	border: 1px solid #CCC;

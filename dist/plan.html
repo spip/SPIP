@@ -18,21 +18,21 @@
 </head>
 
 <body id="page_plan">
-	<div id="page">
+<div id="page">
 
-		[(#REM) Entete de la page + titre du site ]
-		<INCLURE{fond=inc-entete}{lang}>
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}{lang}>
 
-		[(#REM) Fil d'Ariane ]
-		<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:plan_site:></div>
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:plan_site:></div>
 
-		<div id="conteneur">
+	<div id="conteneur">
 
-			[(#REM) Le plan de site ci-dessous est a adapter selon les besoins. En particulier, on n'aura pas necessairement besoin de tous les elements (sous-rubriques, articles, breves et sites) ]
+		[(#REM) Le plan de site ci-dessous est a adapter selon les besoins. En particulier, on n'aura pas necessairement besoin de tous les elements (sous-rubriques, articles, breves et sites) ]
 
-			<div id="contenu">
+		<div id="contenu">
 
-				<h1 class="invisible"><:plan_site:></h1>
+			<h1 class="invisible"><:plan_site:></h1>
 
 				<BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}>
 
@@ -100,26 +100,26 @@
 				</div>
 				</B_sites>
 
-				</div>
+				</div><!-- fin encart -->
 
 				</BOUCLE_secteurs>
 
-			</div><!-- fin contenu -->
+		</div><!-- fin contenu -->
 
-			[(#REM) Menu de navigation laterale ]
-			<div id="navigation">
-				<h1 class="invisible"><:navigation:></h1>
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+			<h1 class="invisible"><:navigation:></h1>
 
-				[(#REM) Menu de navigation par rubriques ]
-				<INCLURE{fond=inc-rubriques}{lang}>
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}{lang}>
 
-			</div><!-- fin navigation -->
+		</div><!-- fin navigation -->
 
-		</div><!-- fin conteneur -->
+	</div><!-- fin conteneur -->
 
-		[(#REM) Pied de page ]
-		<INCLURE{fond=inc-pied}{lang}>
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{lang}>
 
-	</div><!-- fin page -->
+</div><!-- fin page -->
 </body>
 </html>

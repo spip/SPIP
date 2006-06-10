@@ -21,32 +21,34 @@
 </head>
 
 <body id="page_mot">
-	<div id="page">
+<div id="page">
 
-		[(#REM) Entete de la page + titre du site ]
-		<INCLURE{fond=inc-entete}{lang}>
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}{lang}>
 
-		[(#REM) Fil d'Ariane ]
-		<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:mots_clefs:><BOUCLE_ariane(GROUPES_MOTS){id_groupe}> &gt; [(#TITRE|couper{80})]</BOUCLE_ariane>[ &gt; (#TITRE|couper{80})]</div>
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:mots_clefs:><BOUCLE_ariane(GROUPES_MOTS){id_groupe}> &gt; [(#TITRE|couper{80})]</BOUCLE_ariane>[ &gt; (#TITRE|couper{80})]</div>
 
-		<div id="conteneur">
+	<div id="conteneur">
 
-			[(#REM) Contenu principal : contenu du mot-cle ]
+		[(#REM) Contenu principal : contenu du mot-cle ]
 
-			<div id="contenu">
+		<div id="contenu">
 
-				<div class="cartouche">
-					[(#LOGO_MOT||reduire_image{200,200})]
-					<h1 class="titre">#TITRE</h1>
-				</div>
+			<div class="cartouche">
+				[(#LOGO_MOT||reduire_image{200,200})]
+				<h1 class="titre">#TITRE</h1>
+			</div>
 
-				[<div class="chapo">(#TEXTE)</div>]
+			[<div class="chapo">(#TEXTE)</div>]
 
-				<br class="nettoyeur" />
+			<br class="nettoyeur" />
 
-				[(#REM) Articles lies au mot-cle ]
-				<B_articles>
-				<div class="contre-encart">
+			[(#REM) Articles lies au mot-cle ]
+			<B_articles>
+			<div class="contre-encart">
+
+				<div class="liste-articles">
 					<h2 class="invisible"><:articles:></h2>
 					<ul>
 						<BOUCLE_articles(ARTICLES) {id_mot} {par popularite}{inverse}>
@@ -55,9 +57,12 @@
 						<small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small></li>
 						</BOUCLE_articles>
 					</ul>
-				</div><!-- fin contre-encart --></B_articles>
+				</div>
 
-				<div class="encart">
+			</div><!-- fin contre-encart -->
+			</B_articles>
+
+			<div class="encart">
 
 				[(#REM) Rubriques liees au mot-cle ]
 				<B_rubriques>
@@ -107,55 +112,55 @@
 				</div>
 				</B_sites>
 
-				</div>
+			</div><!-- fin encart -->
 
-				[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+			[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
 
-			</div><!-- fin contenu -->
+		</div><!-- fin contenu -->
 
-			[(#REM) Menu de navigation laterale ]
-			<div id="navigation">
-				<h1 class="invisible"><:navigation:></h1>
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+			<h1 class="invisible"><:navigation:></h1>
 
-				[(#REM) Menu de navigation par rubriques ]
-				<INCLURE{fond=inc-rubriques}{lang}>
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}{lang}>
 
-				[(#REM) Menu de navigation mots-cles : les autres mots cles du meme groupe ]
-				<B_mots_freres>
-				<div class="divers">
-					#ANCRE_PAGINATION
-					<h2 class="menu-titre"><:mots_clefs_meme_groupe:></h2>
-					[<p class="pagination">(#PAGINATION)</p>]
-					<ul>
-						<BOUCLE_mots_freres(MOTS) {type} {par titre} {pagination 20}>
-						<li><a href="#URL_MOT"[ class="(#EXPOSE)"]>#TITRE</a></li>
-						</BOUCLE_mots_freres>
-					</ul>
-				</div>
-				</B_mots_freres>
+			[(#REM) Menu de navigation mots-cles : les autres mots cles du meme groupe ]
+			<B_mots_freres>
+			<div class="divers">
+				#ANCRE_PAGINATION
+				<h2 class="menu-titre"><:mots_clefs_meme_groupe:></h2>
+				[<p class="pagination">(#PAGINATION)</p>]
+				<ul>
+					<BOUCLE_mots_freres(MOTS) {type} {par titre} {pagination 20}>
+					<li><a href="#URL_MOT"[ class="(#EXPOSE)"]>#TITRE</a></li>
+					</BOUCLE_mots_freres>
+				</ul>
+			</div>
+			</B_mots_freres>
 
-				[(#REM) Menu de navigation mots-cles : les autres groupes avec un lien sur le premier mot du groupe ]
-				<B_groupes_freres>
-				<div class="divers">
-					<h2 class="menu-titre"><:autres_groupes_mots_clefs:></h2>
-					<ul>
-						<BOUCLE_groupes_freres(GROUPES_MOTS) {par titre} {doublons}>
-						<BOUCLE_mot_cousin(MOTS) {id_groupe} {par titre} {0,1}>
-						<li><a href="#URL_MOT">#TYPE</a></li>
-						</BOUCLE_mot_cousin>
-						</BOUCLE_groupes_freres>
-					</ul>
-				</div>
-				</B_groupes_freres>
+			[(#REM) Menu de navigation mots-cles : les autres groupes avec un lien sur le premier mot du groupe ]
+			<B_groupes_freres>
+			<div class="divers">
+				<h2 class="menu-titre"><:autres_groupes_mots_clefs:></h2>
+				<ul>
+					<BOUCLE_groupes_freres(GROUPES_MOTS) {par titre} {doublons}>
+					<BOUCLE_mot_cousin(MOTS) {id_groupe} {par titre} {0,1}>
+					<li><a href="#URL_MOT">#TYPE</a></li>
+					</BOUCLE_mot_cousin>
+					</BOUCLE_groupes_freres>
+				</ul>
+			</div>
+			</B_groupes_freres>
 
-			</div><!-- fin navigation -->
+		</div><!-- fin navigation -->
 
-		</div><!-- fin conteneur -->
+	</div><!-- fin conteneur -->
 
-		[(#REM) Pied de page ]
-		<INCLURE{fond=inc-pied}{lang}>
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{lang}>
 
-	</div><!-- fin page -->
+</div><!-- fin page -->
 </body>
 </html>
 </BOUCLE_mot_principal>

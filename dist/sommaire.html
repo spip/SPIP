@@ -39,41 +39,43 @@
 
 			[(#REM) Les deux derniers articles ]
 			<B_articles_recents>
-			<h2 class="invisible"><:derniers_articles:></h2>
-			<ul>
-				<BOUCLE_articles_recents(ARTICLES) {par date}{inverse}
-				{0,2}{doublons}>
-				<li class="extrait">
-					[(#LOGO_ARTICLE_RUBRIQUE|#URL_ARTICLE|reduire_image{120,100})]
-					[<p class="surtitre">(#SURTITRE)</p>]
-					<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
-					[<p class="soustitre">(#SOUSTITRE)</p>]
-					<small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small>
-					[<div class="texte">(#INTRODUCTION)</div>]
-				</li>
-				</BOUCLE_articles_recents>
-			</ul>
+			<div class="liste-articles">
+				<h2 class="invisible"><:derniers_articles:></h2>
+				<ul>
+					<BOUCLE_articles_recents(ARTICLES) {par date}{inverse} {0,2} {doublons}>
+					<li class="extrait">
+						[(#LOGO_ARTICLE_RUBRIQUE|#URL_ARTICLE|reduire_image{120,100})]
+						[<p class="surtitre">(#SURTITRE)</p>]
+						<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
+						[<p class="soustitre">(#SOUSTITRE)</p>]
+						<small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small>
+						[<div class="texte">(#INTRODUCTION)</div>]
+					</li>
+					</BOUCLE_articles_recents>
+				</ul>
+			</div>
 			</B_articles_recents>
 
 			<br class="nettoyeur" />
 
 			[(#REM) Articles suivants ]
-			<B_articles><div class="contre-encart">
+			<B_articles>
+			<div class="contre-encart">
 
-			[(#ANCRE_PAGINATION)]
-			[(#ENV{debut_articles}|?{'',' '})
-			<h2 class="invisible"><:articles_recents:></h2>
-			]
-			<ul>
-			<BOUCLE_articles(ARTICLES) {par date}{inverse}
-			{doublons}{pagination}>
-				<li class="extrait">
-					<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
-					<small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small>
-				</li>
-			</BOUCLE_articles>
-			</ul>
-			[<p class="pagination">(#PAGINATION)</p>]
+				<div class="liste-articles">
+					[(#ANCRE_PAGINATION)]
+					[(#ENV{debut_articles}|?{'',' '})<h2 class="invisible"><:articles_recents:></h2>]
+					<ul>
+						<BOUCLE_articles(ARTICLES) {par date}{inverse} {doublons} {pagination}>
+						<li class="extrait">
+							<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
+							<small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small>
+						</li>
+						</BOUCLE_articles>
+					</ul>
+					[<p class="pagination">(#PAGINATION)</p>]
+				</div>
+
 			</div><!-- fin contre-encart -->
 			</B_articles>
 
@@ -116,7 +118,7 @@
 				</div>
 				</B_syndic>
 
-			</div>
+			</div><!-- fin encart -->
 
 		</div><!-- fin contenu -->
 

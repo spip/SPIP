@@ -68,7 +68,7 @@ h3.spip { text-align: center; font-weight: bold; margin: 1.4em; font-size: 1.15e
 q, blockquote, .spip_poesie { font-family: Georgia, Garamond, Times, serif; }
 .spip_code, .spip_cadre { font-family: monospace; }
 
-.lien, blockquote, .spip_poesie, .spip_cadre, .extrait .texte {
+.lien, blockquote, .spip_poesie, .spip_cadre, .liste-articles li.extrait .texte {
 	margin: 1em;
 	padding: 1em;
 	border: 1pt dotted #CCC; }
@@ -89,10 +89,10 @@ ul .message { background: #EEE; border: 1pt solid #CCC; padding: 1em; margin-bot
 
 /*  Listes et extraits introductifs 
 ---------------------------------------------- */
-.extrait { margin-bottom: 1em; padding-top: 0.3em; }
-.extrait .titre { font-size: 1.03em; font-weight: bold; }
-.extrait p { margin: 0; padding: 0; }
-.extrait small { display: block; font-size: 0.71em; }
+.liste-articles li.extrait { margin-bottom: 1em; padding-top: 0.3em; }
+.liste-articles li.extrait .titre { font-size: 1.03em; font-weight: bold; }
+.liste-articles li.extrait p { margin: 0; padding: 0; }
+.liste-articles li.extrait small { display: block; font-size: 0.71em; }
 
 /*  Plan du site
 ---------------------------------------------- */

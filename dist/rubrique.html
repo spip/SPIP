@@ -49,18 +49,18 @@
 				[(#REM) Articles de la rubrique ]
 				
 				<B_articles>
-
-				[<p class="pagination">(#PAGINATION)</p>]
-
-				<h2 class="invisible"><:articles_rubrique:></h2>
-				<ul>
-					<BOUCLE_articles(ARTICLES) {id_rubrique} {par date}{inverse} {pagination}>
-					<li class="extrait">
-					<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
-					<small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small>
-					</li>
-					</BOUCLE_articles>
-				</ul>
+				<div class="liste-articles">
+					[<p class="pagination">(#PAGINATION)</p>]
+					<h2 class="invisible"><:articles_rubrique:></h2>
+					<ul>
+						<BOUCLE_articles(ARTICLES) {id_rubrique} {par date}{inverse} {pagination}>
+						<li class="extrait">
+							<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
+							<small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small>
+						</li>
+						</BOUCLE_articles>
+					</ul>
+				</div>
 				</B_articles>
 
 				[(#REM) Documents joints a la rubrique ]
@@ -117,7 +117,7 @@
 				[(#REM) Proposer un site ]
 				#FORMULAIRE_SITE
 
-			</div>
+			</div><!-- fin encart -->
 
 			[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
 
@@ -144,10 +144,10 @@
 
 		</div><!-- fin navigation -->
 
-</div><!-- fin conteneur -->
+	</div><!-- fin conteneur -->
 
-[(#REM) Pied de page ]
-<INCLURE{fond=inc-pied}{lang}>
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{lang}>
 
 </div><!-- fin page -->
 </body>
