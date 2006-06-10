@@ -43,18 +43,24 @@
 				[<div class="chapo">(#DESCRIPTIF)</div>]
 
 				[(#REM) Articles issus de la syndication ]
+				<B_articles>
+				#ANCRE_PAGINATION
 				<h2 class="invisible"><:articles:></h2>
+				<ul>
 
-				<BOUCLE_articles(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {0,10}>
-				<div class="extrait">
+				<BOUCLE_articles(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {pagination 10}>
+				<li class="extrait">
 					<h3 class="titre"><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></h3>
 					[<div class="enclosures">(#TAGS|afficher_enclosures)</div>]
 					<small>[(#DATE|affdate_court)][, <:par_auteur:> (#LESAUTEURS)]</small>
 					[<small>&mdash; <em>(#TAGS|afficher_tags{'directory'})</em></small>]
 					[<small>&mdash; <em>(#TAGS|afficher_tags{'tag'})</em></small>]
 					[<div class="texte">(#DESCRIPTIF)</div>]
-				</div>
+				</li>
 				</BOUCLE_articles>
+				</ul>
+				[<p class="pagination">(#PAGINATION)</p>]
+				</B_articles>
 
 				[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
 
