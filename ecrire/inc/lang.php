@@ -294,19 +294,26 @@ function liste_options_langues($nom_select, $default='', $herit='') {
 
 	if ($default == '') $default = $GLOBALS['spip_lang'];
 	switch($nom_select) {
-		# menu de l'interface (privee, installation et panneau de login)
-		case 'var_lang_ecrire':
-			$langues = explode(',', $GLOBALS['all_langs']);
-			break;
 		# #MENU_LANG
+		# les langues rellement utilisees sur le site
 		case 'var_lang':
 			$langues = explode(',', $GLOBALS['meta']['langues_utilisees']);
 			break;
 		# menu de changement de la langue d'un article
+		# les langues selectionnees dans la configuration "multilinguisme"
 		case 'changer_lang':
+			$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
+			break;
+		# menu de l'interface (privee, installation et panneau de login)
+		# les langues presentes sous forme de fichiers de langue
+		case 'var_lang_ecrire':
 		default:
 			$langues = explode(',', $GLOBALS['meta']['langues_proposees']);
 			break;
+
+# dernier choix possible : toutes les langues = langues_proposees 
+# + langues_multilingues ; mais, ne sert pas
+#			$langues = explode(',', $GLOBALS['all_langs']);
 	}
 
 	if (count($langues) <= 1) return '';
