@@ -574,7 +574,7 @@ function afficher_groupe_mots($id_groupe) {
 	echo "<div class='liste'>";
 	echo "<table border=0 cellspacing=0 cellpadding=3 width=\"100%\">";
 
-	echo ereg_replace("\:\:id\_ajax\_fonc\:\:", $id_ajax_fonc, $tranches);
+	echo str_replace("::id_ajax_fonc::", "$id_ajax_fonc", $tranches);
 
 	$table = array();
 	$result = spip_query("SELECT $select FROM $from WHERE $where ORDER BY multi LIMIT  $limit");
