@@ -157,7 +157,7 @@ if (defined('_INC_PUBLIC')) {
 
 	// Gestion des statistiques du site public
 	if ($GLOBALS['meta']["activer_statistiques"] != "non") {
-		$f = charger_fonction('decompter', 'public');
+		$f = charger_fonction('stats', 'public');
 		$f();
 	}
 
