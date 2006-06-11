@@ -197,7 +197,8 @@ function exec_export_all_dist()
 
 	if ($etape >= count($tables_for_dump)){
 		foreach($tables_for_dump as $i=>$table){
-			export_objets($table, primary_index_table($table), $tables_for_link[$table],$fpart, false, $i, _T("info_sauvegarde").", $table");
+			// appel simplement pour l'affichage. Rien n'est fait puisqu'on a fini
+			export_objets($table, primary_index_table($table), $tables_for_link[$table], 0, false, $i, _T("info_sauvegarde").", $table");
 		}
 
 		ob_flush();flush();
@@ -322,7 +323,7 @@ function export_objets($table, $primary, $liens, $file = 0, $gz = false, $etape_
 				$string .= build_begin_tag($table) . "\n";
 				// Exporter les champs de la table
 				for ($i = 0; $i < $nfields; ++$i) {
-					$string .= '<'.$fields[$i].'>' . text_to_xml($row[$fields[$i]]) . '</'.$fields[$i].'>' . "\n";
+					$string .= '<'.$table_fields[$table][$i].'>' . text_to_xml($row[$table_fields[$table][$i]]) . '</'.$table_fields[$table][$i].'>' . "\n";
 				}
 					
 				$string .= build_end_tag($table) . "\n\n";
