@@ -330,16 +330,18 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 				return;
 			}
 
-			$memoryNeeded = round(($srcsize[0] * $srcsize[1] * $srcsize['bits'] * $srcsize['channels'] / 8 + 65536) * 1.65); 
+			# calcul de memoire desactive car pas fiable
+			#$memoryNeeded = round(($srcsize[0] * $srcsize[1] * $srcsize['bits'] * $srcsize['channels'] / 8 + 65536) * 1.65); 
 			#spip_log("GD : memory need $memoryNeeded");
 			#if (function_exists('memory_get_usage'))
 				#spip_log("GD : memory usage ".memory_get_usage());
 			#spip_log("GD : memory_limit ".ini_get('memory_limit'));
-			if (function_exists('memory_get_usage') && memory_get_usage() + $memoryNeeded > (integer) ini_get('memory_limit') * 1048576){
-				spip_log("vignette gd1/gd2 impossible : memoire insuffisante $memoryNeeded necessaire");
-				return;
-			}
-			else{ 
+			#if (function_exists('memory_get_usage') && memory_get_usage() + $memoryNeeded > (integer) ini_get('memory_limit') * 1048576){
+			#	spip_log("vignette gd1/gd2 impossible : memoire insuffisante $memoryNeeded necessaire");
+			#	return;
+			#}
+			#else
+			{
 				// Recuperer l'image d'origine 
 				if ($format == "jpg") { 
 					$srcImage = @ImageCreateFromJPEG($image);
