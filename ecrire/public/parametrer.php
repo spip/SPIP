@@ -163,10 +163,17 @@ function sql_chapo($id_article) {
 # retourne le parent d'une rubrique
 
 function sql_parent($id_rubrique) {
+	if (!$id_rubrique = intval($id_rubrique))
+		return 0;
+
 	$id_parent = spip_abstract_fetsel(array('id_parent'),
-			array('spip_rubriques'), 
-			array("id_rubrique=" . intval($id_rubrique)));
-	return intval($id_parent['id_parent']);
+		array('spip_rubriques'), 
+		array("id_rubrique=" . $id_rubrique));
+
+	if ($id_parent['id_parent']!=$id_rubrique)
+		return intval($id_parent['id_parent']);
+	else
+		spip_log("erreur: la rubrique $id_rubrique est son propre parent");
 }
 
 # retourne la profondeur d'une rubrique
