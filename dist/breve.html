@@ -62,11 +62,9 @@
 			[(#REM) Breves dans la meme rubrique ]
 			<B_breves>
 			<div class="breves">
-				#ANCRE_PAGINATION
 				<h2 class="menu-titre"><:autres_breves:></h2>
-				[<p class="pagination">(#PAGINATION)</p>]
 				<ul>
-					<BOUCLE_breves(BREVES) {id_rubrique} {par date}{inverse} {pagination 20}>
+					<BOUCLE_breves(BREVES) {id_rubrique} {par date}{inverse} {0,10}>
 					<li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_BREVE"[ class="(#EXPOSE)"]>#TITRE</a></li>
 					</BOUCLE_breves>
 				</ul>
