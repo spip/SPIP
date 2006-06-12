@@ -21,6 +21,7 @@ include_spip('inc/auxbase');
 global $IMPORT_tables_noerase;
 $IMPORT_tables_noerase[]='spip_ajax_fonc';
 $IMPORT_tables_noerase[]='spip_meta';
+$GLOBALS['flag_ob_flush'] = function_exists('ob_flush');
 
 function xml_fetch_tag($f, &$before, $gz=false, $skip_comment=true) {
 	global $buf, $abs_pos;
@@ -234,7 +235,8 @@ function detruit_restaurateur()
 function affiche_progression_javascript($abs_pos,$table="") {
 	global $affiche_progression_pourcent;
 	include_ecrire('inc_charsets');
-	ob_flush();flush();
+	if ($GLOBALS['flag_ob_flush']) ob_flush();
+	flush();
 	echo " -->\n<script type='text/javascript'><!--\n";
 
 	if ($abs_pos == '100 %') {
@@ -258,7 +260,8 @@ function affiche_progression_javascript($abs_pos,$table="") {
 		echo "//--></script>\n<!--\n";
 	}
 
-	ob_flush();flush();
+	if ($GLOBALS['flag_ob_flush']) ob_flush();
+	flush();
 }
 
 
@@ -386,7 +389,8 @@ function import_all_continue()
 	echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".self()."\";',$max_time);</script>\n");
 
 	fin_page();
-	ob_flush();flush();
+	if ($GLOBALS['flag_ob_flush']) ob_flush();
+	flush();
 
 	echo "<font color='white'>\n<!--";
 
