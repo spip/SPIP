@@ -1074,22 +1074,6 @@ function spip_initialisation() {
 	verifier_visiteur();
 }
 
-//
-// Gerer les variables de personnalisation, qui peuvent provenir
-// des fichiers d'appel, en verifiant qu'elles n'ont pas ete passees
-// par le visiteur (sinon, pas de cache)
-//
-function tester_variable($var, $val){
-	if (!isset($GLOBALS[$var]))
-		$GLOBALS[$var] = $val;
-
-	if (
-		isset($_REQUEST[$var])
-		AND $GLOBALS[$var] == $_REQUEST[$var]
-	)
-		die ("tester_variable: $var interdite");
-}
-
 // Annuler les magic quotes \' sur GET POST COOKIE et GLOBALS ;
 // supprimer aussi les eventuels caracteres nuls %00, qui peuvent tromper
 // la commande is_readable('chemin/vers/fichier/interdit%00truc_normal')

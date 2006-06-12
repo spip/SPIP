@@ -18,6 +18,23 @@ include_spip('inc/filtres');
 include_spip('inc/charsets');
 include_spip('inc/lang');
 
+
+//
+// Gerer les variables de personnalisation, qui peuvent provenir
+// des fichiers d'appel, en verifiant qu'elles n'ont pas ete passees
+// par le visiteur (sinon, pas de cache)
+//
+function tester_variable($var, $val){
+	if (!isset($GLOBALS[$var]))
+		$GLOBALS[$var] = $val;
+
+	if (
+		isset($_REQUEST[$var])
+		AND $GLOBALS[$var] == $_REQUEST[$var]
+	)
+		die ("tester_variable: $var interdite");
+}
+
 // Verifier les variables de personnalisation
 tester_variable('debut_intertitre', "\n<h3 class=\"spip\">");
 tester_variable('fin_intertitre', "</h3>\n");
