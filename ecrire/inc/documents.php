@@ -310,29 +310,35 @@ function integre_image($id_document, $align, $type_aff) {
 		$alt_infos_doc .= ", ".$url_fichier;
 	if ($alt_titre_doc) $alt_sep = ', ';
 
+	$alt = "";
+	$title = "";
 	// documents presentes en mode <DOC> : alt et title "JPEG, 54 ko"
 	// mais pas de titre puisqu'il est en dessous
 	if ($mode == 'document' AND $type_aff == 'DOC') {
-		$alt = " alt=\"$alt_infos_doc\" title=\"$alt_infos_doc\"";
+		$alt = "$alt_infos_doc";
+		$title = "$alt_infos_doc";
 	}
 	// document en mode <IMG> : alt + title detailles
 	else if ($mode == 'document' AND $type_aff == 'IMG') {
-		$alt = " alt=\"$alt_titre_doc$alt_sep$alt_infos_doc\"
-			title=\"$alt_titre_doc$alt_sep$alt_infos_doc\"";
+		$alt = "$alt_titre_doc$alt_sep$alt_infos_doc";
+		$title = "$alt_titre_doc$alt_sep$alt_infos_doc";
 	}
 	// vignette en mode <DOC> : alt disant "JPEG", pas de title
 	else if ($mode == 'vignette' AND $type_aff == 'DOC') {
-		$alt = " alt=\"($type)\"";
+		$alt = "($type)";
 	}
 	// vignette en mode <IMG> : alt + title s'il y a un titre
 	else if ($mode == 'vignette' AND $type_aff == 'IMG') {
-		if (strlen($titre))
-			$alt = " alt=\"$alt_titre_doc ($type)\" title=\"$alt_titre_doc\"";
+		if (strlen($titre)){
+			$alt = "$alt_titre_doc ($type)";
+			$title = "$alt_titre_doc";
+		}
 		else
 			$alt = " alt=\"($type)\"";
 	}
 
-	$vignette = str_replace(' />', "$alt />", $vignette); # inserer l'attribut
+	$vignette = inserer_attribut($vignette, 'alt', $alt);
+	$vignette = $title?inserer_attribut($vignette, 'title', $title):$vignette;
 
 	// Preparer le texte sous l'image pour les <DOC>
 	if ($type_aff == 'DOC') {
