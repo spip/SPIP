@@ -174,7 +174,7 @@ if (($GLOBALS['meta']['multi_articles'] == 'oui') AND ($flag_editable)) {
 
 echo justifier(propre($texte))."\n";
 
-$texte_case = ($lien_titre.$lien_url) ? "{{"._T('lien_voir_en_ligne')."}} [".$lien_titre."->".$lien_url."]" : '';
+$texte_case = ($lien_titre.vider_url($lien_url)) ? "{{"._T('lien_voir_en_ligne')."}} [".$lien_titre."->".$lien_url."]" : '';
 	echo propre($texte_case);
 
 if ($les_notes) {
