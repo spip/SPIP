@@ -52,7 +52,6 @@
 				<div class="liste-articles">
 					#ANCRE_PAGINATION
 					<h2 class="invisible"><:articles_rubrique:></h2>
-					[<p class="pagination">(#PAGINATION)</p>]
 					<ul>
 						<BOUCLE_articles(ARTICLES) {id_rubrique} {par date}{inverse} {pagination}>
 						<li>
@@ -61,6 +60,7 @@
 						</li>
 						</BOUCLE_articles>
 					</ul>
+					[<p class="pagination">(#PAGINATION)</p>]
 				</div>
 				</B_articles>
 
