@@ -15,7 +15,12 @@
 
 [(#ENV*{previsu})]
 
-<BOUCLE_G(GROUPES_MOTS){forum=oui}{articles==(#ENV{table}|choixsiegal{articles,'oui','.*'})}{breves==(#ENV{table}|choixsiegal{breves,'oui','.*'})}{rubriques==(#ENV{table}|choixsiegal{rubriques,'oui','.*'})}{syndic==(#ENV{table}|choixsiegal{syndic,'oui','.*'})}
+<BOUCLE_G(GROUPES_MOTS)
+	{forum=(#CONFIG{mots_cles_forums}|choixsiegal{oui,oui,jamais})}
+	{articles==(#ENV{table}|choixsiegal{articles,'oui','.*'})}
+	{breves==(#ENV{table}|choixsiegal{breves,'oui','.*'})}
+	{rubriques==(#ENV{table}|choixsiegal{rubriques,'oui','.*'})}
+	{syndic==(#ENV{table}|choixsiegal{syndic,'oui','.*'})}
 >
 [(#ID_GROUPE|in_any{#ENV**{ajouter_groupe},' '})
 	<fieldset class="spip_encadrer">
