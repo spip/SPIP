@@ -79,54 +79,42 @@
 
 			<div class="liste-articles">
 
-				<BOUCLE_forum_parent(FORUMS) {id_forum}>
-				<div class="extrait">
+				<ul><li>
 					<h2 class="surtitre"><:en_reponse:></h2>
-					<p class="titre"><a href="#URL_FORUM">#TITRE</a></p>
-					<small>[(#DATE|affdate)][
-					(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> (#NOM)]</small>
-					[<div class="texte">(#INTRODUCTION|lignes_longues)</div>]
-				</div>
-				</BOUCLE_forum_parent>
 
-				<BOUCLE_article(ARTICLES) {id_article}>
-				<div class="extrait">
-					<h2 class="surtitre"><:en_reponse:></h2>
+					<BOUCLE_forum_parent(FORUMS) {id_forum}>
+					<h3 class="titre"><a href="#URL_FORUM">#TITRE</a></h3>
+					<small>[(#DATE|affdate)][(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> (#NOM)]</small>
+					[<div class="texte">(#INTRODUCTION|lignes_longues)</div>]
+					</BOUCLE_forum_parent>
+
+					<BOUCLE_article(ARTICLES) {id_article}>
 					[(#LOGO_ARTICLE||reduire_image{120,120})]
-					<p class="titre"><a href="#URL_ARTICLE">#TITRE</a></p>
+					<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
 					<small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small>
 					[<div class="texte">(#INTRODUCTION)</div>]
-				</div>
-				</BOUCLE_article>
+					</BOUCLE_article>
 
-				<BOUCLE_breve(BREVES) {id_breve}>
-				<div class="extrait">
-					<h2 class="surtitre"><:en_reponse:></h2>
+					<BOUCLE_breve(BREVES) {id_breve}>
 					[(#LOGO_BREVE||reduire_image{120,120})]
-					<p class="titre"><a href="#URL_BREVE">#TITRE</a></p>
+					<h3 class="titre"><a href="#URL_BREVE">#TITRE</a></h3>
 					<small>[(#DATE|affdate)]</small>
 					[<div class="texte">(#INTRODUCTION)</div>]
-				</div>
-				</BOUCLE_breve>
+					</BOUCLE_breve>
 
-				<BOUCLE_rubrique(RUBRIQUES) {id_rubrique}>
-				<div class="extrait">
-					<h2 class="surtitre"><:en_reponse:></h2>
-					<p class="titre"><a href="#URL_RUBRIQUE">#TITRE</a></p>
+					<BOUCLE_rubrique(RUBRIQUES) {id_rubrique}>
+					<h3 class="titre"><a href="#URL_RUBRIQUE">#TITRE</a></h3>
 					[<div class="texte">(#TEXTE)</div>]
-				</div>
-				</BOUCLE_rubrique>
+					</BOUCLE_rubrique>
 
-				<BOUCLE_syndic(SITES) {id_syndic}>
-				<div class="extrait">
-					<h2 class="surtitre"><:en_reponse:></h2>
-					<p class="titre"><a
-						href="[(#ID_SYNDIC|generer_url_site)]">#NOM_SITE</a></p>
+					<BOUCLE_syndic(SITES) {id_syndic}>
+					<h3 class="titre"><a href="[(#ID_SYNDIC|generer_url_site)]">#NOM_SITE</a></h3>
 					[<div class="texte">(#DESCRIPTIF)</div>]
-				</div>
-				</BOUCLE_syndic>
+					</BOUCLE_syndic>
 
-				<//B_forum_parent>
+					<//B_forum_parent>
+
+				</li></ul>
 
 			</div>
 
