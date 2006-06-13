@@ -46,10 +46,10 @@ function fichier_session($id_session, $alea) {
 //
 function ajouter_session($auteur, $id_session, $lang='') {
 
-	global $connect_id_auteur, $auteur_session;
+	global $auteur_session;
 
 	if ($lang) {
-		spip_query("UPDATE spip_auteurs SET lang = " . spip_abstract_quote($lang) . " WHERE id_auteur = $connect_id_auteur");
+		spip_query("UPDATE spip_auteurs SET lang = " . spip_abstract_quote($lang) . " WHERE id_auteur = " . intval($auteur['id_auteur']));
 		$auteur_session['lang'] = $lang;
 	}
 
