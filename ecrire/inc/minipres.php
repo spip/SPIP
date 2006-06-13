@@ -98,8 +98,7 @@ function version_svn_courante($dir) {
 	if (!$dir) $dir = '.';
 	if (!lire_fichier($dir . '/.svn/entries', $c)) return 0;
 	preg_match_all(',committed-rev="([0-9]+)",', $c, $r1, PREG_PATTERN_ORDER);
-	preg_match_all(',name="([^"]+)[^>]*kind="dir",',$c, $r2, PREG_PATTERN_ORDER);
-	return max(max($r1[1]), @max(array_map('version_svn_courante', $r2[1])));
+	return max($r1[1]);
 }
 
 function info_copyright() {
@@ -110,7 +109,7 @@ function info_copyright() {
 	//
 	// Mention, le cas echeant, de la revision SVN courante
 	//
-	if ($svn_revision = version_svn_courante(_DIR_INCLUDE))
+	if ($svn_revision = version_svn_courante(_DIR_RACINE))
 		$version .= " SVN [<a href='http://trac.rezo.net/trac/spip/changeset/$svn_revision' target='_blank'>$svn_revision</a>]";
 
 	echo _T('info_copyright', 
