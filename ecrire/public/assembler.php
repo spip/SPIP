@@ -101,7 +101,7 @@ function assembler_page ($fond) {
 			$since = preg_replace('/;.*/', '',
 				$GLOBALS['HTTP_IF_MODIFIED_SINCE']);
 			$since = str_replace('GMT', '', $since);
-			if (trim($since) == http_gmoddate($lastmodified)) {
+			if (trim($since) == gmdate("D, d M Y H:i:s", $lastmodified)) {
 				$page['status'] = 304;
 				$headers_only = true;
 			}
@@ -160,7 +160,7 @@ function assembler_page ($fond) {
 	}
 
 	if ($lastmodified)
-		$page['entetes']["Last-Modified"]=http_gmoddate($lastmodified)." GMT";
+		$page['entetes']["Last-Modified"]=gmdate("D, d M Y H:i:s", $lastmodified)." GMT";
 		
 
 	return $page;
