@@ -64,6 +64,22 @@
 				</div>
 				</B_articles>
 
+				[(#REM) Si aucun article, on affiche les sous-rubriques ]
+
+				<B_sous_rubriques>
+				<div class="rubriques">
+					<h2 class="menu-titre"><:sous_rubriques:></h2>
+					<ul>
+						<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}>
+						<li><a href="#URL_RUBRIQUE">[(#TITRE)]</a></li>
+						</BOUCLE_sous_rubriques>
+					</ul>
+					</div>
+				</B_sous_rubriques>
+
+				<//B_articles>
+
+
 				[(#REM) Documents joints a la rubrique ]
 				<B_documents_joints>
 				<div id="documents_joints">
