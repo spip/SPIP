@@ -24,46 +24,49 @@ global
   $id_article,
   $visites_today;
 
-
-// Gestion d'expiration de ce jaja
-$date = date("U");
-$expire = $date + 2 * 3600;
-$headers_only = http_last_modified($expire);
-
-$date = gmdate("D, d M Y H:i:s", $date);
-$expire = gmdate("D, d M Y H:i:s", $expire);
-if ($headers_only) exit;
-@Header ("Last-Modified: ".$date." GMT");
-@Header ("Expires: ".$expire." GMT");
-
 if ($connect_statut != '0minirezo') {
 	echo _T('avis_non_acces_page');
 	fin_page();
 	exit;
 }
-header("Content-type: image/svg+xml");
-echo "<?xml version=\"1.0\" standalone=\"no\"?>\n";
-echo "<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n";
-echo "<svg  xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"450\" height=\"310\" x=\"0\" y=\"0\">\n";
+	$date = date("U");
+	$expire = gmdate("D, d M Y H:i:s", $date + 2 * 3600);
+	if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
+	AND !preg_match(',IIS/,', $_SERVER['SERVER_SOFTWARE'])) # MSoft IIS is dumb
+	{
+		$if_modified_since = preg_replace('/;.*/', '',
+			$_SERVER['HTTP_IF_MODIFIED_SINCE']);
+		$if_modified_since = trim(str_replace('GMT', '', $if_modified_since));
+		if ($if_modified_since == $expire) {
+			include_spip('inc/headers');
+			http_status(304);
+			exit;
+		}
+	}
+	$date = gmdate("D, d M Y H:i:s", $date);
+	header("Last-Modified: ".$date." GMT");
+	header("Expires: ".$expire." GMT");
+	header("Content-type: image/svg+xml");
+
+	echo "<?xml version=\"1.0\" standalone=\"no\"?>\n";
+	echo "<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n";
+	echo "<svg  xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"450\" height=\"310\" x=\"0\" y=\"0\">\n";
 	echo "<style type='text/css'>\n";
 	echo ".gris {fill: #aaaaaa; fill-opacity: 0.2;}\n";
 	echo ".trait {stroke:black;stroke-width:1;}\n";
 	echo "</style>\n";
-echo '<defs>';
-echo '<linearGradient id="orange_red" x1="0%" y1="0%" x2="0%" y2="150%">';
-echo '<stop offset="0%" style="stop-color:rgb(255,255,0); stop-opacity:1" />';
-echo '<stop offset="100%" style="stop-color:rgb(255,0,0); stop-opacity:1" />';
-echo '</linearGradient>';
-echo '</defs>';
+	echo '<defs>';
+	echo '<linearGradient id="orange_red" x1="0%" y1="0%" x2="0%" y2="150%">';
+	echo '<stop offset="0%" style="stop-color:rgb(255,255,0); stop-opacity:1" />';
+	echo '<stop offset="100%" style="stop-color:rgb(255,0,0); stop-opacity:1" />';
+	echo '</linearGradient>';
+	echo '</defs>';
 	echo "<defs>\n";
 	echo '<linearGradient id="claire" x1="0%" y1="0%" x2="0%" y2="100%">';
 	echo '<stop offset="0%" style="stop-color:'.$couleur_claire.'; stop-opacity:0.3"/>';
 	echo '<stop offset="100%" style="stop-color:'.$couleur_foncee.'; stop-opacity:1"/>';
 	echo "</linearGradient>\n";
 	echo "</defs>\n";
-	
-
-
 
 	if (!($aff_jours = intval($aff_jours))) $aff_jours = 105;
 	if ($id_article = intval($id_article)){
@@ -168,8 +171,8 @@ echo '</defs>';
 					$decal ++;
 					$tab_moyenne[$decal] = $value;
 
-                    $ce_jour=date("Y-m-d", $jour_prec+(3600*24*($i+1)));
-			        $jour = nom_jour($ce_jour).' '.affdate_court($ce_jour);
+					$ce_jour=date("Y-m-d", $jour_prec+(3600*24*($i+1)));
+					$jour = nom_jour($ce_jour).' '.affdate_court($ce_jour);
 
 					reset($tab_moyenne);
 					$moyenne = 0;
