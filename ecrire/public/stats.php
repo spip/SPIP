@@ -38,15 +38,16 @@ function public_stats_dist() {
 	), 0,10);
 
 	// Analyse du referer
-	if ($log_referer = $_SERVER['HTTP_REFERER']) {
+	$log_referer = '';
+	if (isset($_SERVER['HTTP_REFERER'])) {
 		$url_site_spip = preg_replace(',^((https?|ftp)://)?(www\.)?,i', '',
 			$GLOBALS['meta']['adresse_site']);
-		if (($url_site_spip<>'')
-		AND strpos('-'.strtolower($log_referer), strtolower($url_site_spip))
-		AND !isset($_GET['var_recherche']))
-			$log_referer = '';
-		else
+		if (!(($url_site_spip<>'')
+		AND strpos('-'.strtolower($_SERVER['HTTP_REFERER']), strtolower($url_site_spip))
+		AND !isset($_GET['var_recherche']))) {
+			$log_referer = $_SERVER['HTTP_REFERER'];
 			$referer_md5 = '0x'.substr(md5($log_referer), 0, 15);
+		}
 	}
 
 	//
@@ -80,7 +81,7 @@ function public_stats_dist() {
 			$log_type .= "\t" . intval($GLOBALS["id_$log_type"]);
 		else    $log_type = "autre\t0";
 
-		$log_type .= trim("\t$log_referer");
+		$log_type .= "\t" . trim($log_referer);
 		if (isset($content[$log_type]))
 			$content[$log_type]++;
 		else	$content[$log_type] = 1; // bienvenue au club
