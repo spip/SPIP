@@ -50,12 +50,13 @@ function charger_fonction($nom, $dossier='exec', $continue=false) {
 
 	if (substr($dossier,-1) == '/') $dossier = substr($dossier,0,-1);
 	// Si la fonction existe deja (definie par mes_options, par exemple)
-	;
+	
 	if (function_exists($f = $dossier.'_'.$nom)) return $f;
 	if (function_exists($g = $f . '_dist'))	return $g;
 
 	// Sinon charger le fichier de declaration
-	$inc = include_spip($dossier.'/'. $nom);
+	// passer en minuscules (cf les balises de formulaires)
+	$inc = include_spip($dossier.'/'. strtolower($nom));
 
 	if (function_exists($f)) return $f;
 	if (function_exists($g)) return $g;
