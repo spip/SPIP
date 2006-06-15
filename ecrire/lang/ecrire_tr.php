@@ -91,7 +91,7 @@ Bu ithal istemini onaylamay&#305;n.
 'bouton_radio_publication_immediate' => '&#304;letilerin an&#305;nda yay&#305;nlanmas&#305; 
 (kat&#305;l&#305;mlar g&ouml;nderildiklerinde an&#305;nda g&ouml;r&uuml;nt&uuml;lenir, y&ouml;neticiler onlar&#305; 
 sonradan yok edebilir).',
-'bouton_radio_sauvegarde_compressee' => '<b>ecrire/data/dump.xml.gz</b> alt&#305;nda s&#305;k&#305;&#351;t&#305;r&#305;lm&#305;&#351; olarak sakla',
+'bouton_radio_sauvegarde_compressee' => '@fichier@ alt&#305;nda s&#305;k&#305;&#351;t&#305;r&#305;lm&#305;&#351; olarak sakla',
 'bouton_radio_sauvegarde_non_compressee' => '<b>ecrire/data/dump.xml.gz</b> alt&#305;nda s&#305;k&#305;&#351;t&#305;r&#305;lmam&#305;&#351; olarak sakla',
 'bouton_radio_supprimer_petition' => 'Dilek&ccedil;eyi sil',
 'bouton_radio_syndication' => 'Payla&#351;&#305;m :',
@@ -769,8 +769,8 @@ yaratabilir. Bu da otomatik olarak bir galeri
 
 // T
 'taille_cache_image' => 'SPIP taraf&#305;ndan otomatik olarak hesaplanan resimler (dok&uuml;man ikonlar&#305;, grafik olarak g&ouml;sterilen ba&#351;l&#305;klar, TeX bi&ccedil;imindeki matematik i&#351;levler...) @dir@ dizininde toplam @taille@ yer tutuyor.',
-'taille_cache_infinie' => 'Bu site <code>CACHE/</code> dizini i&ccedil;in boyut s&#305;n&#305;r&#305; &ouml;ng&ouml;rm&uuml;yor.',
-'taille_cache_maxi' => 'SPIP, bu sitenin <code>CACHE/</code> dizini boyutunu yakla&#351;&#305;k @octets@ lik veriyle s&#305;n&#305;rlamaya &ccedil;al&#305;&#351;&#305;yor.',
+'taille_cache_infinie' => 'Bu site <code>&ouml;nbellek (CACHE)</code> dizininin boyutu i&ccedil;in herhangi bir s&#305;n&#305;r &ouml;ng&ouml;rm&uuml;yor.',
+'taille_cache_maxi' => 'SPIP, bu sitenin <code>&ouml;nbellek (CACHE)</code> dizininin boyutunu yakla&#351;&#305;k @octets@ lik veriyle s&#305;n&#305;rlamaya &ccedil;al&#305;&#351;&#305;yor.',
 'taille_cache_octets' => '&Ouml;nbelle&#287;in &ouml;l&ccedil;&uuml;s&uuml; &#351;u anda @octets@ dir.',
 'taille_cache_vide' => '&Ouml;n bellek bo&#351;.',
 'taille_repertoire_cache' => '&Ouml;n bellek dizininin boyutu',
@@ -781,7 +781,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
   Bu komuttan sonra, yeni bir veritaban&#305; ve bir y&ouml;netici 
   eri&#351;imi yaratmak &uuml;zere SPIP\'i 
   yeniden y&uuml;klemelisiniz. ',
-'texte_admin_tech_01' => 'Bu se&ccedil;enek, veritaban&#305;n&#305;n i&ccedil;eri&#287;ini, ecrire/data/ dizininde depolanacak bir dosyaya yedeklemenizi sa&#287;lar. Makale ve b&ouml;l&uuml;mlerde kullan&#305;lan resim ve dok&uuml;manlar&#305; i&ccedil;eren IMG/ dizininin t&uuml;m&uuml;n&uuml; almay&#305; da unutmay&#305;n&#305;z. ',
+'texte_admin_tech_01' => 'Bu se&ccedil;enek, veritaban&#305;n&#305;n i&ccedil;eri&#287;ini, @dossier@ dizininde depolanacak bir dosyaya yedeklemenizi sa&#287;lar. Makale ve b&ouml;l&uuml;mlerde kullan&#305;lan resim ve dok&uuml;manlar&#305; i&ccedil;eren @img@ dizininin tamam&#305;n&#305; almay&#305; da unutmay&#305;n&#305;z. ',
 'texte_admin_tech_02' => 'Dikkat : bu yedekleme ANCAK, SPIP\'in ayn&#305; uyarlamas&#305;yla kurulabilecek bir sitede eski haline getirilebilir. Dolay&#305;s&#305;yla, sak&#305;n yedekleneni g&uuml;ncelleme i&#351;leminden sonra yeniden kurmay&#305; umarak  &laquo;&nbsp;veritaban&#305;n&#305;n bo&#351;alt&#305;lmas&#305;&nbsp;&raquo; i&#351;lemini yapmay&#305;n&#305;z...  SPIP dok&uuml;manlar&#305;na ba&#351;vurunuz.',
 'texte_admin_tech_03' => 'Sizin sunucunuza ya da bir yedekleme sunucusuna transferini h&#305;zland&#305;rmak,
     ve disk alan&#305;n&#305; bo&#351;a harcamamak i&ccedil;in, isterseniz dosyay&#305; s&#305;k&#305;&#351;t&#305;r&#305;lm&#305;&#351; bi&ccedil;imde saklamay&#305; se&ccedil;ebilirsiniz. ',
@@ -838,7 +838,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'texte_effacer_donnees_indexation' => 'Endeksleme verilerini sil',
 'texte_en_cours_validation' => 'A&#351;a&#287;&#305;daki makale ve k&#305;sa haberler yay&#305;n i&ccedil;in &ouml;nerilmi&#351;tir. Bunlara ba&#287;l&#305; olan forumlar arac&#305;l&#305;&#287;&#305;yla fikrinizi belirtmekten &ccedil;ekinmeyiniz. ',
 'texte_enrichir_mise_a_jour' => 'Metninizin sayfa d&uuml;zenini &laquo;&nbsp;tipografi k&#305;saltmalar&#305;&nbsp;&raquo; kullanarak zenginle&#351;tirebilirsiniz.',
-'texte_fichier_authent' => 'SPIP, .htpasswd et .htpasswd-admin &ouml;zel dosyalar&#305;n&#305;  ecrire/data/ dizininde yaratmal&#305; m&#305;?  Bu dosyalar sizin, sitenizin ba&#351;ka yerlerine sadece yazar ve y&ouml;neticilerin eri&#351;mesini s&#305;n&#305;rlaman&#305;z&#305; sa&#287;layabilir (&ouml;rne&#287;in, d&#305;&#351; istatistik program&#305;). Bu size cazip gelmediyse bu se&ccedil;ene&#287;i varsay&#305;lan de&#287;erinde b&#305;rakabilirsiniz (dosya yaratma).',
+'texte_fichier_authent' => 'SPIP, .htpasswd et .htpasswd-admin &ouml;zel dosyalar&#305;n&#305;  @dossier@ dizininde yaratmal&#305; m&#305;?  Bu dosyalar sizin, sitenizin ba&#351;ka yerlerine sadece yazar ve y&ouml;neticilerin eri&#351;mesini s&#305;n&#305;rlaman&#305;z&#305; sa&#287;layabilir (&ouml;rne&#287;in, d&#305;&#351;sal istatistik program&#305;). Bunun bir yarar&#305; olmad&#305;&#287;&#305;n&#305; d&uuml;&#351;&uuml;n&uuml;yorsan&#305;z bu se&ccedil;ene&#287;i varsay&#305;lan de&#287;erinde b&#305;rakabilirsiniz (dosya yaratma i&#351;lemi yap&#305;lmaz).',
 'texte_informations_personnelles_1' => 'Sistem &#351;imdi size ki&#351;iselle&#351;tirilmi&#351; bir eri&#351;im (hesap) yaratacakt&#305;r.',
 'texte_informations_personnelles_2' => '(Not : e&#287;er yeniden kurulum s&ouml;zkonusu ise ve eri&#351;iminiz halen &ccedil;al&#305;&#351;&#305;yorsa, yapabilece&#287;iniz :',
 'texte_introductif_article' => '(Makalenin giri&#351; metni.)',
@@ -885,10 +885,10 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'texte_requetes_echouent' => '<b>Baz&#305; MySQL talepleri sistematik olarak ve g&ouml;r&uuml;n&uuml;rde bir neden olmaks&#305;z&#305;n ba&#351;ar&#305;s&#305;z oluyorsa bunun nedeni veritaban&#305;n&#305;n kendisi olabilir.</b> <p />
 MySQL\'in, kazayla zarar g&ouml;ren tablolar&#305;n&#305; tamir yetene&#287;i vard&#305;r. Burada bu tamiri deneyebilirsiniz ; ba&#351;ar&#305;s&#305;zl&#305;k durumunda, g&ouml;r&uuml;nt&uuml;n&uuml;n bir kopyas&#305;n&#305; saklay&#305;n&#305;z, belki orada aksayan &#351;eylerin ipu&ccedil;lar&#305;n&#305; bulabilirsiniz... E&#287;er sorun devam ediyorsa servis sa&#287;lay&#305;c&#305;n&#305;zla temasa ge&ccedil;iniz.',
 'texte_restaurer_base' => 'Veritaban&#305; yede&#287;ini geri y&uuml;kle',
-'texte_restaurer_sauvegarde' => 'Bu se&ccedil;enek, daha &ouml;nce yap&#305;lan bir veritaban&#305; yede&#287;inin geri y&uuml;klenmesini sa&#287;lar. Bunun i&ccedil;in, yedeklemeyi i&ccedil;eren dosyan&#305;n ecrire/data/ dizinine yerle&#351;tirilmi&#351; olmas&#305; gerekir. Bu i&#351;levi kullan&#305;rken dikkatli olunuz : de&#287;i&#351;iklikler, olas&#305; kay&#305;plar, geri getirilemez.',
+'texte_restaurer_sauvegarde' => 'Bu se&ccedil;enek, daha &ouml;nce yap&#305;lan bir veritaban&#305; yede&#287;inin geri y&uuml;klenmesini sa&#287;lar. Bunun i&ccedil;in, yedeklemeyi i&ccedil;eren dosyan&#305;n @dossier@ dizinine yerle&#351;tirilmi&#351; olmas&#305; gerekir. Bu i&#351;levi kullan&#305;rken dikkatli olunuz : <b>de&#287;i&#351;iklikler, olas&#305; kay&#305;plar, geri getirilemez.</b>',
 'texte_sauvegarde' => 'Veritaban&#305;n&#305;n i&ccedil;eri&#287;ini yedekle',
 'texte_sauvegarde_base' => 'Veritaban&#305;n&#305; yedekle',
-'texte_sauvegarde_compressee' => 'Yedekleme s&#305;k&#305;&#351;t&#305;r&#305;lmam&#305;&#351; bi&ccedil;imde ecrire/data/dump.xml dosyas&#305;na yap&#305;lacakt&#305;r.',
+'texte_sauvegarde_compressee' => 'Yedekleme s&#305;k&#305;&#351;t&#305;r&#305;lmam&#305;&#351; bi&ccedil;imde @fichier@ dosyas&#305;na yap&#305;lacakt&#305;r.',
 'texte_selection_langue_principale' => 'A&#351;a&#287;&#305;da sitenin &laquo;&nbsp;ba&#351;l&#305;ca dil&nbsp;&raquo; ini se&ccedil;ebilirsiniz. Bu se&ccedil;im, sizin makalelerinizi se&ccedil;ilen dilde yazman&#305;z&#305; gerektirmez, buna kar&#351;&#305;l&#305;k :
 <ul><li> kamu sitesindeki tarihlerin varsay&#305;lan format&#305;n&#305; ;</li>
 <li> SPIP\'in metinler i&ccedil;in kullanaca&#287;&#305; tipografi motorunun cinsini ;</li>
