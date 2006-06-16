@@ -171,9 +171,9 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 
 	echo "</font>";
 	if ($descriptif) {
-		echo "<p><div align='left' border: 1px dashed #aaaaaa;'>";
-		echo "<font size=2 face='Verdana,Arial,Sans,sans-serif'>";
-		echo "<b>"._T('info_descriptif')."</b> ";
+		echo "<p><div style='border: 1px dashed #aaaaaa;'>";
+		echo "<font size='2' face='Verdana,Arial,Sans,sans-serif'>";
+		echo "<b>",_T('info_descriptif'),"</b> ";
 		echo propre($descriptif);
 		echo "&nbsp; ";
 		echo "</font>";
@@ -192,7 +192,7 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 	$supprimer_groupe = afficher_groupe_mots($id_groupe);
 
 	if ($connect_statut =="0minirezo" AND $connect_toutes_rubriques AND !$conf_mot){
-		echo "\n<table cellpadding=0 cellspacing=0 border=0 width=100%>";
+		echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
 		echo "<tr>";
 		echo "<td>";
 		icone(_T('icone_modif_groupe_mots'), generer_url_ecrire("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.gif", "edit.gif");

@@ -163,16 +163,16 @@ debut_droite();
 debut_cadre_relief("mot-cle-24.gif");
 
 
-echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
+echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
 echo "<tr width='100%'>";
 echo "<td width='100%' valign='top'>";
 gros_titre($titre_mot);
 
 
 if ($descriptif) {
-	echo "<p><div align='left' border: 1px dashed #aaaaaa;'>";
-	echo "<font size=2 face='Verdana,Arial,Sans,sans-serif'>";
-	echo "<b>"._T('info_descriptif')."</b> ";
+	echo "<p><div style='border: 1px dashed #aaaaaa;'>";
+	echo "<font size='2' face='Verdana,Arial,Sans,sans-serif'>";
+	echo "<b>",_T('info_descriptif'),"</b> ";
 	echo propre($descriptif);
 	echo "&nbsp; ";
 	echo "</font>";
