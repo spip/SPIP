@@ -33,6 +33,7 @@ global
   $redirect,
   $redirect_ok,
   $supp_mot,
+  $spip_display,
   $table,
   $texte,
   $titre,
@@ -102,17 +103,18 @@ if ($redirect_ok == 'oui' && $redirect) {
 //
 // Recupere les donnees
 //
-$result = spip_query("SELECT * FROM spip_mots WHERE id_mot='$id_mot'");
-
-if ($row = spip_fetch_array($result)) {
-	$id_mot = $row['id_mot'];
-	$titre_mot = $row['titre'];
-	$descriptif = $row['descriptif'];
-	$texte = $row['texte'];
-	$type = $row['type'];
-	$extra = $row['extra'];
-	$id_groupe = $row['id_groupe'];
- } else $id_mot = 0;
+ if ($id_mot) {
+	$row = spip_fetch_array(spip_query("SELECT * FROM spip_mots WHERE id_mot=$id_mot"));
+	 if ($row) {
+		$id_mot = $row['id_mot'];
+		$titre_mot = $row['titre'];
+		$descriptif = $row['descriptif'];
+		$texte = $row['texte'];
+		$type = $row['type'];
+		$extra = $row['extra'];
+		$id_groupe = $row['id_groupe'];
+	 } else $id_mot = 0;
+ }
 
 debut_page("&laquo; $titre_mot &raquo;", "documents", "mots");
 debut_gauche();
@@ -147,13 +149,11 @@ if ($id_mot > 0 AND $connect_statut == '0minirezo'  AND $connect_toutes_rubrique
 //
 debut_raccourcis();
 
-if ($connect_statut == '0minirezo'  AND $connect_toutes_rubriques) {
-		icone_horizontale(_T('icone_modif_groupe_mots'), generer_url_ecrire("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.gif", "edit.gif");
-		icone_horizontale(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit", "new=oui&id_groupe=$id_groupe&redirect=" . rawurlencode(generer_url_ecrire('mots_tous'))), 
-				  "mot-cle-24.gif",
-				  "creer.gif");
+ if ($connect_statut == '0minirezo'  AND $connect_toutes_rubriques AND $id_groupe) {
+	icone_horizontale(_T('icone_modif_groupe_mots'), generer_url_ecrire("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.gif", "edit.gif");
+	icone_horizontale(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit", "new=oui&id_groupe=$id_groupe&redirect=" . rawurlencode(generer_url_ecrire('mots_tous'))),  "mot-cle-24.gif",  "creer.gif");
  }
-icone_horizontale(_T('icone_voir_tous_mots_cles'), generer_url_ecrire("mots_tous",""), "mot-cle-24.gif", "rien.gif");
+ icone_horizontale(_T('icone_voir_tous_mots_cles'), generer_url_ecrire("mots_tous",""), "mot-cle-24.gif", "rien.gif");
 
 fin_raccourcis();
 
@@ -243,30 +243,7 @@ if ($connect_statut =="0minirezo"  AND $connect_toutes_rubriques){
 
 	echo "<BR><input type='text' NAME='titre_mot' CLASS='formo' VALUE=\"$titre_mot\" SIZE='40' $onfocus />";
 
-	// dans le groupe...
-	$result = spip_query("SELECT id_groupe, titre FROM spip_groupes_mots ORDER BY titre");
-
-	if (spip_num_rows($result)>1) {
-		debut_cadre_relief("groupe-mot-24.gif");
-		echo  _T('info_dans_groupe')."</label>\n";
-		echo aide ("motsgroupes");
-		echo  " &nbsp; <SELECT NAME='id_groupe' class='fondl'>\n";
-		while ($row_groupes = spip_fetch_array($result)){
-			$groupe = $row_groupes['id_groupe'];
-			$titre_groupe = texte_backend(supprimer_tags(typo($row_groupes['titre'])));
-			echo  "<OPTION".mySel($groupe, $id_groupe).">$titre_groupe</OPTION>\n";
-		}			
-		echo  "</SELECT>";
-		fin_cadre_relief();
-	} else {
-		$row_groupes = spip_fetch_array($result);
-		if (!$row_groupes) {
-			// il faut creer un groupe de mots (cas d'un mot cree depuis le script articles)
-		  $titre = _T('info_mot_sans_groupe');
-		  $row_groupes['id_groupe'] = spip_abstract_insert("spip_groupes_mots", "(titre, unseul, obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum)", "(" . spip_abstract_quote($titre) . ", 'non',  'non', 'oui', 'oui', 'non', 'oui', 'oui', 'non', 'non'" . ")");
-		}
-		echo "<input type='hidden' name='id_groupe' value='".$row_groupes['id_groupe']."'>";
-	}
+	determine_groupe_mots($table, $id_groupe);
 
 	if ($options == 'avancees' OR $descriptif) {
 		echo "<B>"._T('texte_descriptif_rapide')."</B><BR>";
@@ -297,12 +274,40 @@ if ($connect_statut =="0minirezo"  AND $connect_toutes_rubriques){
 	echo "</FORM>";
 
 	fin_cadre_formulaire();
-}
-
+ }
 
 fin_page();
 }
 
+
+function determine_groupe_mots($table, $id_groupe) {
+
+	$result = spip_query("SELECT id_groupe, titre FROM spip_groupes_mots ". ($table ? "WHERE $table='oui'" : '') . " ORDER BY titre");
+
+	echo  _T('info_dans_groupe'), aide("motsgroupes");
+	debut_cadre_relief("groupe-mot-24.gif");
+	if (spip_num_rows($result)>1) {
+
+		echo  " &nbsp; <SELECT NAME='id_groupe' class='fondl'>\n";
+		while ($row_groupes = spip_fetch_array($result)){
+			$groupe = $row_groupes['id_groupe'];
+			$titre_groupe = texte_backend(supprimer_tags(typo($row_groupes['titre'])));
+			echo  "<OPTION".mySel($groupe, $id_groupe).">$titre_groupe</OPTION>\n";
+		}			
+		echo  "</SELECT>";
+	} else {
+		$row_groupes = spip_fetch_array($result);
+		if (!$row_groupes) {
+			// il faut creer un groupe de mots (cas d'un mot cree depuis le script articles)
+
+			$titre = _T('info_mot_sans_groupe');
+		  	$row_groupes['id_groupe'] = spip_abstract_insert("spip_groupes_mots", "(titre, unseul, obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum)", "(" . spip_abstract_quote($titre) . ", 'non',  'non', '" . (($table=='articles') ? 'oui' : 'non') ."', '" . (($table=='breves') ? 'oui' : 'non') ."','" . (($table=='rubriques') ? 'oui' : 'non') ."','" . (($table=='syndic') ? 'oui' : 'non') ."', 'oui', 'non', 'non'" . ")");
+		} else $titre = $row_groupes['titre'];
+		echo $titre, '<br />';
+		echo "<input type='hidden' name='id_groupe' value='".$row_groupes['id_groupe']."' />";
+	}
+	fin_cadre_relief();
+}
 
 function un_seul_mot_dans_groupe($id_groupe)
 {
