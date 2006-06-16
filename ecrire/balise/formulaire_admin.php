@@ -130,7 +130,23 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 		  $preview = spip_num_rows(spip_query("SELECT id_$objet_affiche FROM spip_".table_objet($objet_affiche)." WHERE ".id_table_objet($objet_affiche)."=".$$id_type." AND ((statut IN ('prop', 'prive')) " . (!$p ? '' : "OR (statut='publie' AND date>NOW())") .")"));
 	}
 
-	return array('formulaire_admin', 0, 
+	//
+	// Regler les boutons dans la langue de l'admin (sinon tant pis)
+	//
+	include_spip('inc/lang');
+	include_spip('base/abstract_sql');
+	$login = preg_replace(',^@,','',$GLOBALS['spip_admin']);
+	$alang = spip_abstract_fetsel(array('lang'), array('spip_auteurs'),
+		array("login=" . spip_abstract_quote($login)));
+	if ($alang['lang']) {
+		lang_select($alang['lang']);
+		$lang = $GLOBALS['spip_lang'];
+		lang_dselect();
+	} else
+		$lang = '';
+
+
+	return array('formulaire_admin', 0,
 		array(
 			'id_article' => $id_article,
 			'id_rubrique' => $id_rubrique,
@@ -154,8 +170,10 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 			'use_cache' => ($use_cache ? '' : ' *'),
 			'divclass' => $float,
 			'analyser' => $analyser,
+			'lang' => $lang,
 			'xhtml_error' => isset($GLOBALS['xhtml_error']) ? $GLOBALS['xhtml_error'] : ''
 			)
 		     );
 }
+
 ?>
