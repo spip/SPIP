@@ -840,6 +840,19 @@ function reduire_image($texte, $taille = -1, $taille_y = -1) {
 	return $texte;
 }
 
+// Reduire une image d'un certain facteur
+function reduire_image_par ($img, $val=1) {
+	$l = round(largeur($img)/$val);
+	$h = round(hauteur($img)/$val);
+	
+	if ($l > $h) $h = 0;
+	else $l = 0;
+	
+	$img = reduire_image($img, $l, $h);
+
+	return $img;
+}
+
 function largeur($img) {
 	if (!$img) return;
 	include_spip('inc/logos');
@@ -1818,6 +1831,75 @@ function image_sepia($im, $rgb = "896f5e")
 	
 	return "<img src='$dest'$tags />";
 }
+
+
+// 1/ Aplatir une image semi-transparente (supprimer couche alpha)
+// en remplissant la transparence avec couleur choisir $coul.
+// 2/ Forcer le format de sauvegarde (jpg, png, gif)
+function image_aplatir($im, $format='jpg', $coul='000000')
+{
+	$image = valeurs_image_trans($im, "aplatir-$coul", $format);
+	if (!$image) return("");
+
+	include_ecrire("filtres");
+	$couleurs = couleur_hex_to_dec($coul);
+	$dr= $couleurs["red"];
+	$dv= $couleurs["green"];
+	$db= $couleurs["blue"];
+	
+	$x_i = $image["largeur"];
+	$y_i = $image["hauteur"];
+	
+	$im = $image["fichier"];
+	$dest = $image["fichier_dest"];
+	
+	$creer = $image["creer"];
+
+	if ($creer) {
+		$im = $image["fonction_imagecreatefrom"]($im);
+		$im_ = imagecreatetruecolor($x_i, $y_i);
+		@imagealphablending($im_, false);
+		@imagesavealpha($im_,true);
+		$color_t = ImageColorAllocateAlpha( $im_, $dr, $dv, $db , 0 );
+		imagefill ($im_, 0, 0, $color_t);
+
+		$dist = abs($trait);
+		for ($x = 0; $x < $x_i; $x++) {
+			for ($y=0; $y < $y_i; $y++) {
+			
+				$rgb = ImageColorAt($im, $x, $y);
+				$a = ($rgb >> 24) & 0xFF;
+				$r = ($rgb >> 16) & 0xFF;
+				$g = ($rgb >> 8) & 0xFF;
+				$b = $rgb & 0xFF;
+				
+				$a = (127-$a) / 127;
+				
+				if ($a == 1) { // Limiter calculs
+					$r = $r;
+					$g = $g;
+					$b = $b;
+				} else {
+					$r = round($a * $r + $dr * (1-$a));
+					$g = round($a * $g + $dv * (1-$a));
+					$b = round($a * $b + $db * (1-$a));
+				}
+								
+				$color = ImageColorAllocateAlpha( $im_, $r, $g, $b , 0 );
+				imagesetpixel ($im_, $x, $y, $color);	
+			}
+		}
+		$image["fonction_image"]($im_, "$dest");
+	}
+
+	$class = $image["class"];
+	if (strlen($class) > 1) $tags=" class='$class'";
+	$tags = "$tags alt='".$image["alt"]."'";
+	$style = $image["style"];
+	
+	return "<img src='$dest'$tags />";
+}
+
 
 // A partir d'une image,
 // recupere une couleur
