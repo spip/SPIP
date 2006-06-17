@@ -313,6 +313,7 @@ function couper($texte, $taille=50) {
 // prendre <intro>...</intro> sinon couper a la longueur demandee
 function couper_intro($texte, $long) {
 	$texte = extraire_multi(eregi_replace("(</?)intro>", "\\1intro>", $texte)); // minuscules
+	$intro = '';
 	while ($fin = strpos($texte, "</intro>")) {
 		$zone = substr($texte, 0, $fin);
 		$texte = substr($texte, $fin + strlen("</intro>"));
@@ -328,9 +329,7 @@ function couper_intro($texte, $long) {
 	}
 
 	// supprimer un eventuel chapo redirecteur =http:/.....
-	$intro = preg_replace(',^=[^[:space:]]+,','',$intro);
-
-	return $intro;
+	return preg_replace(',^=[^[:space:]]+,','',$intro);
 }
 
 

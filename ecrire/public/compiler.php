@@ -631,12 +631,12 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 	foreach($boucles as $idb => $boucle) {
 		if (($boucle->type_requete == 'documents') && $boucle->doublons)
 			{ $descr['documents'] = true; break; }
-		$boucles[$idb]->descr = &$descr;
 	}
 	// Commencer par reperer les boucles appelees explicitement 
 	// car elles indexent les arguments de maniere derogatoire
 	foreach($boucles as $id => $boucle) { 
 		if ($boucle->type_requete == 'boucle') {
+			$boucles[$id]->descr = &$descr;
 			$rec = &$boucles[$boucle->param[0]];
 			if (!$rec) {
 				return array(_T('zbug_info_erreur_squelette'),
@@ -656,6 +656,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 	foreach($boucles as $id => $boucle) { 
 		$type = $boucle->type_requete;
 		if ($type != 'boucle') {
+		  $boucles[$id]->descr = &$descr;
 		  if ($x = $table_des_tables[$type]) {
 		    $boucles[$id]->id_table = $x;
 		    $boucles[$id]->primary = $tables_principales["spip_$x"]['key']["PRIMARY KEY"];
