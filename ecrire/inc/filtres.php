@@ -839,9 +839,14 @@ function reduire_image($texte, $taille = -1, $taille_y = -1) {
 	
 	return $texte;
 }
+// Renommer en "image_reduire", pour que toutes fonctions graphiques
+// commencent par "image_"
+function image_reduire($texte, $taille = -1, $taille_y = -1) {
+	return reduire_image($texte, $taille, $taille_y);
+}
 
 // Reduire une image d'un certain facteur
-function reduire_image_par ($img, $val=1) {
+function image_reduire_par ($img, $val=1) {
 	$l = round(largeur($img)/$val);
 	$h = round(hauteur($img)/$val);
 	
