@@ -30,7 +30,6 @@ function exec_brouteur_dist()
 		$nb_col = 3;
 	}
 	$largeur_col = round($largeur_table/$nb_col);
-	
 
 	debut_page(_T('titre_page_articles_tous'), "asuivre", "tout-site", " hauteurFrame($nb_col);");
 
@@ -41,14 +40,13 @@ function exec_brouteur_dist()
 	if ($id_rubrique) {
 		$j = $nb_col;
 		while ($id_rubrique > 0) {
-			$result=spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_rubrique' ORDER BY 0+titre, titre");
+			$result=spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_rubrique'");
 			if ($row=spip_fetch_array($result)){
 				$j--;
 				$dest[$j] = $id_rubrique;
 				$id_rubrique =$row['id_parent'];
 			}
 		}
-		
 		$dest[$j-1] = 0;
 		
 		while (!$dest[1]) {
@@ -66,6 +64,8 @@ function exec_brouteur_dist()
 				$la_rubrique =$row['id_parent'];
 			}
 			
+			$compteur = 0;
+			$ret = '';
 			while ($la_rubrique > 0) {
 				$result = spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique ='$la_rubrique'");
 				if ($row = spip_fetch_array($result)) {
@@ -108,11 +108,11 @@ function exec_brouteur_dist()
 		echo "\n<td valign='top' width='$largeur_col'>";
 		
 		echo "<iframe width='100%' id='iframe$i' name='iframe$i'",
-		  "src='", generer_url_ecrire('brouteur_frame',"rubrique=".$dest[$i]."&frame=$i"), "' class='iframe-bouteur' height='",
+			(" src='" . generer_url_ecrire('brouteur_frame',"rubrique=".$dest[$i]."&frame=$i'")),
+		  " class='iframe-bouteur' height='",
 		  $hauteur_table,
 		  "'></iframe>";
-		
-		
+
 		echo "</td>";
 	}
 	echo "\n</tr></table>";
