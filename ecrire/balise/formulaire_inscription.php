@@ -29,7 +29,9 @@ function balise_FORMULAIRE_INSCRIPTION_stat($args, $filtres) {
 	if ($GLOBALS['meta']['accepter_inscriptions'] != 'oui')
 		return '';
 	else
-	  return array('redac', $args[0], $args[1]);
+		return array('redac', 
+			(isset($args[0]) ? $args[0] : ''),
+			(isset($args[1]) ? $args[1] : ''));
 }
 
 // Si inscriptions pas autorisees, retourner une chaine d'avertissement
@@ -157,7 +159,8 @@ function inscription_nouveau($declaration)
 // fonction redefinissable
 
 function envoyer_inscription_dist($ids, $nom, $mode, $id_rubrique) {
-	$nom_site_spip = $GLOBALS['meta']["nom_site"];
+	include_spip('inc/mail');
+	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
 	$adresse_site = $GLOBALS['meta']["adresse_site"];
 	
 	$message = _T('form_forum_message_auto')."\n\n"
@@ -171,7 +174,6 @@ function envoyer_inscription_dist($ids, $nom, $mode, $id_rubrique) {
 	  . "\n\n- "._T('form_forum_login')." " . $ids['login']
 	  . "\n- ".  _T('form_forum_pass'). " " . $ids['pass'] . "\n\n";
 
-	include_spip('inc/mail');
 	if (envoyer_mail($ids['email'],
 			 "[$nom_site_spip] "._T('form_forum_identifiants'),
 			 $message))
