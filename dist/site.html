@@ -52,9 +52,10 @@
 					<li>
 						<h3 class="titre"><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></h3>
 						[<div class="enclosures">(#TAGS|afficher_enclosures)</div>]
-						<small>[(#DATE|affdate_court)][, <:par_auteur:> (#LESAUTEURS)]</small>
-						[<small>&mdash; <em>(#TAGS|afficher_tags{'directory'})</em></small>]
-						[<small>&mdash; <em>(#TAGS|afficher_tags{'tag'})</em></small>]
+						<small>[(#DATE|affdate_court)][,
+							<:par_auteur:> (#LESAUTEURS)]
+							[&mdash; <em>(#TAGS|afficher_tags)</em>]
+						</small>
 						[<div class="texte">(#DESCRIPTIF)</div>]
 					</li>
 					</BOUCLE_articles>
