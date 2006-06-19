@@ -271,8 +271,8 @@ function integre_image($id_document, $align, $type_aff) {
 	if (!$row) return '';
 
 	$id_type = $row['id_type'];
-	$titre = typo($row['titre']);
-	$descriptif = propre($row['descriptif']);
+	$titre = !$row['titre'] ? '' : 	typo($row['titre']);
+	$descriptif = !$row['descriptif'] ? '' : propre($row['descriptif']);
 	$fichier = $row['fichier'];
 	$url_fichier = generer_url_document($id_document);
 	$largeur = $row['largeur'];
@@ -315,8 +315,8 @@ function integre_image($id_document, $align, $type_aff) {
 	// documents presentes en mode <DOC> : alt et title "JPEG, 54 ko"
 	// mais pas de titre puisqu'il est en dessous
 	if ($mode == 'document' AND $type_aff == 'DOC') {
-		$alt = "$alt_infos_doc";
-		$title = "$alt_infos_doc";
+		$alt = $alt_infos_doc;
+		$title = $alt_infos_doc;
 	}
 	// document en mode <IMG> : alt + title detailles
 	else if ($mode == 'document' AND $type_aff == 'IMG') {
@@ -334,11 +334,11 @@ function integre_image($id_document, $align, $type_aff) {
 			$title = "$alt_titre_doc";
 		}
 		else
-			$alt = " alt=\"($type)\"";
+			$alt = "($type)";
 	}
 
 	$vignette = inserer_attribut($vignette, 'alt', $alt);
-	$vignette = strlen($title)?inserer_attribut($vignette, 'title', $title):$vignette;
+	if ($title) $vignette = inserer_attribut($vignette, 'title', $title);
 
 	// Preparer le texte sous l'image pour les <DOC>
 	if ($type_aff == 'DOC') {
@@ -1013,7 +1013,7 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 		$docs_exclus = ereg_replace('^,','',join(',', $vignettes).','.join(',', $documents_lies));
 
 		if ($docs_exclus) $docs_exclus = "AND l.id_document NOT IN ($docs_exclus) ";
-	}
+	} else $docs_exclus = '';
 
 	//// Images sans documents
 	$images_liees = spip_query("SELECT docs.id_document FROM spip_documents AS docs, spip_documents_".$type."s AS l "."WHERE l.id_".$type."=$id AND l.id_document=docs.id_document ".$docs_exclus."AND docs.mode='vignette' ORDER BY docs.id_document");
