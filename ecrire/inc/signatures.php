@@ -97,7 +97,8 @@ function controle_signatures($script, $id, $debut, $where, $order, $limit='') {
 
 function tronconne_signatures($script, $id_article, $debut, $where, $limit=10)
 {
-	$where .= ($where ? " AND " : "") . "date_time>DATE_SUB(NOW(),INTERVAL 180 DAY)";
+	# filtre de duree (a remplacer par une vraie pagination)
+	#$where .= ($where ? " AND " : "") . "date_time>DATE_SUB(NOW(),INTERVAL 180 DAY)";
 	if ($id_article) { 
 		$args = "id_article=$id_article&";
 		$where .= " AND id_article=$id_article";

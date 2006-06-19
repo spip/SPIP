@@ -69,6 +69,7 @@ if ($connect_statut == "0minirezo") {
 
 	if (!$debut) $debut = 0;
 
+	# cette requete devrait figurer dans l'optimisation
 	spip_query("DELETE FROM spip_signatures WHERE NOT (statut='publie' OR statut='poubelle') AND date_time<DATE_SUB(NOW(),INTERVAL 10 DAY)");
 
 	controle_signatures('controle_petition',
