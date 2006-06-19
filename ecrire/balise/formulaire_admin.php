@@ -69,11 +69,16 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 		}
 	}
 
+	$statut = isset($GLOBALS['auteur_session']['statut']) ?
+		$GLOBALS['auteur_session']['statut'] : '';
+
 	// Bouton statistiques
 	$visites = $popularite = $statistiques = '';
 	if ($GLOBALS['meta']["activer_statistiques"] != "non" 
 	AND $id_article
-	AND !$var_preview) {
+	AND !$var_preview
+	AND $statut == '0minirezo'
+	) {
 		$result = spip_query("SELECT visites, popularite FROM spip_articles WHERE id_article=$id_article AND statut='publie'");
 
 		if ($row = @spip_fetch_array($result)) {
@@ -82,7 +87,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 			$statistiques = str_replace('&amp;', '&', generer_url_ecrire_statistiques($id_article));
 		}
 	}
-	$statut = isset($GLOBALS['auteur_session']['statut']) ? $GLOBALS['auteur_session']['statut'] : '';
+
 	// Bouton de debug
 	$debug =
 	(
@@ -164,7 +169,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 			'action' => self(),
 			'preview' => $preview?parametre_url(self(),'var_mode','preview','&'):'',
 			'debug' => $debug,
-			'popularite' => ($popularite),
+			'popularite' => $popularite,
 			'statistiques' => $statistiques,
 			'visites' => $visites,
 			'use_cache' => ($use_cache ? '' : ' *'),
