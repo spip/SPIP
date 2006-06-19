@@ -84,7 +84,7 @@ img, .spip_logos { margin: 0; padding: 0; border: 0; }
 	margin: 0.5em 0;
 	padding: 0; }
 
-.formulaire_spip fieldset, .spip_encadrer {
+.formulaire_spip fieldset {
     display: block;
 	margin: 0.77em 0;
 	padding: 0.77em;
