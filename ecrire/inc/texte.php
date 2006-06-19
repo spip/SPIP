@@ -161,8 +161,8 @@ $preg=',<(html|code|cadre|frame)>(.*)</\1>,Uims') {
 					.$echap."</code></div>");
 					$mode = 'div';
 				} else
-					$echap = "<span class='spip_code' "
-					."dir='ltr'><code>".$echap."</code></span>";
+					$echap = "<code class='spip_code' "
+					."dir='ltr'>".$echap."</code>";
 
 				$echap = str_replace("\t",
 					"&nbsp; &nbsp; &nbsp; &nbsp; ", $echap);
