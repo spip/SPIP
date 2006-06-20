@@ -304,12 +304,12 @@ ul.forum { display: block; clear: both; margin: 0; padding: 0; }
 .forum-texte .forum-repondre-message { margin: 0; padding: 1px 0; text-align: right; }
 
 /* Boite d'un forum : eclaircissement progressif des bords */
-ul .message { border: 1px solid #666; margin: 0; padding: 0; margin-bottom: 1em; }
-ul ul .message { border: 1px solid #A4A4A4; }
-ul ul ul .message { border: 1px solid #B8B8B8; }
-ul ul ul ul .message { border: 1px solid #CCC; }
-ul ul ul ul ul .message { border: 1px solid #E0E0E0; }
-ul ul ul ul ul ul .message { border: 1px dotted #E0E0E0; }
+ul .forum-message { border: 1px solid #666; margin: 0; padding: 0; margin-bottom: 1em; }
+ul ul .forum-message { border: 1px solid #A4A4A4; }
+ul ul ul .forum-message { border: 1px solid #B8B8B8; }
+ul ul ul ul .forum-message { border: 1px solid #CCC; }
+ul ul ul ul ul .forum-message { border: 1px solid #E0E0E0; }
+ul ul ul ul ul ul .forum-message { border: 1px dotted #E0E0E0; }
 
 /* Boite de titre d'un forum : mise en couleur selon la profondeur du forum */
 ul .forum-chapo { border: 0; border-bottom: 1px dotted #B8B8B8; margin: 0; padding: 3px 6px 2px 6px; font-size: 0.88em; background: #C4E0E0; }

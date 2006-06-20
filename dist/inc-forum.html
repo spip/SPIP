@@ -12,7 +12,7 @@
 
 	<li class="forum-fil">
 
-		<div class="message">
+		<div class="forum-message">
 			<div class="forum-chapo">
 				<h3 class="forum-titre"><a href="#forum#ID_FORUM" name="forum#ID_FORUM" id="forum#ID_FORUM">#TITRE</a></h3>
 				<small>[(#DATE|affdate)][&nbsp;(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> (#NOM|couper{80})]</small>
@@ -29,7 +29,7 @@
 			<BOUCLE_forums_fils(FORUMS){id_parent}{par date}>
 
 			<li>
-				<div class="message">
+				<div class="forum-message">
 					<div class="forum-chapo">
 						<strong class="forum-titre"><a href="#forum#ID_FORUM" name="forum#ID_FORUM" id="forum#ID_FORUM">#TITRE</a></strong>
 						<small>[(#DATE|affdate)][&nbsp;(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> (#NOM|couper{80})]</small>

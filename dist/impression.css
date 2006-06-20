@@ -85,7 +85,7 @@ table td, table th { padding: 4pt; text-align: left; vertical-align: top; border
 .forum { margin: 2em 0; font-size: 0.82em; }
 .forum-fil ul { margin-left: 0.5em; }
 .forum-chapo .forum-titre { display: block; font-weight: bold; }
-ul .message { background: #EEE; border: 1pt solid #CCC; padding: 1em; margin-bottom: 1em; }
+ul .forum-message { background: #EEE; border: 1pt solid #CCC; padding: 1em; margin-bottom: 1em; }
 
 /* Listes d'articles et extraits introductifs
 ----------------------------------------------- */
