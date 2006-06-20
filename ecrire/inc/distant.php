@@ -303,8 +303,9 @@ function recuperer_infos_distantes($source, $max=0) {
 	}
 	
 	if ($mime_type == 'text/html') {
+		include_spip('inc/filtres');
 		$page = recuperer_page($source, true, false, 1024*1024);
-		if(preg_match(',<title>(.*?)</title>,ims', $page, $regs))
+		if(preg_match(',<title>(.*?)</title>,ims', $page, $regs)) 
 			$a['titre'] = corriger_caracteres(trim($regs[1]));
 			if (!$a['taille']) $a['taille'] = strlen($page); # a peu pres
 	}
