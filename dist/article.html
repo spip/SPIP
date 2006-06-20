@@ -38,7 +38,7 @@
 
 			<div class="cartouche">
 				#DEBUT_SURLIGNE
-				[(#LOGO_ARTICLE||reduire_image{200,200})]
+				[(#LOGO_ARTICLE||image_reduire{200,200})]
 				[<p class="surtitre">(#SURTITRE)</p>]
 				<h1 class="titre">#TITRE</h1>
 				[<p class="soustitre">(#SOUSTITRE)</p>]
@@ -65,7 +65,7 @@
 			#DEBUT_SURLIGNE
 			[<div class="chapo">(#CHAPO)</div>]
 			[<p class="lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-			[<div class="texte">(#TEXTE|reduire_image{520,0})</div>]
+			[<div class="texte">(#TEXTE|image_reduire{520,0})</div>]
 			#FIN_SURLIGNE
 
 			[(#REM) Portfolio : album d'images ]
@@ -73,7 +73,7 @@
 			<div id="documents_portfolio">
 				<h2><:info_portfolio:></h2>
 				<BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {mode=document}{extension==(png|jpg|gif)$} {doublons}>
-				[<a href="[(#URL_ARTICLE|parametre_url{id_document,#ID_DOCUMENT})]#documents_portfolio"[ title="(#TITRE|couper{80}|texte_backend)"]>(#LOGO_DOCUMENT||reduire_image{0,60}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})</a>]
+				[<a href="[(#URL_ARTICLE|parametre_url{id_document,#ID_DOCUMENT})]#documents_portfolio"[ title="(#TITRE|couper{80}|texte_backend)"]>(#LOGO_DOCUMENT||image_reduire{0,60}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})</a>]
 				</BOUCLE_documents_portfolio>
 			</div>
 			</B_documents_portfolio>

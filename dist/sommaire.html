@@ -44,7 +44,7 @@
 				<ul>
 					<BOUCLE_articles_recents(ARTICLES) {par date}{inverse} {0,2} {doublons}>
 					<li>
-						[(#LOGO_ARTICLE_RUBRIQUE|#URL_ARTICLE|reduire_image{120,100})]
+						[(#LOGO_ARTICLE_RUBRIQUE|#URL_ARTICLE|image_reduire{150,100})]
 						[<p class="surtitre">(#SURTITRE)</p>]
 						<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
 						[<p class="soustitre">(#SOUSTITRE)</p>]
