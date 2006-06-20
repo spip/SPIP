@@ -14,13 +14,13 @@ function extracteur_rtf($fichier, &$charset) {
 
 	$charset = 'iso-8859-1';
 
-	exec('metamail -d -q -b -c application/rtf '.escapeshellarg($fichier), $r, $e);
+	@exec('metamail -d -q -b -c application/rtf '.escapeshellarg($fichier), $r, $e);
 	if (!$e) return @join(' ', $r);
 
 	# wvText
 	# http://wvware.sourceforge.net/
 	$temp = tempnam(_DIR_CACHE, 'rtf');
-	exec('wvText '.escapeshellarg($fichier).'> '.$temp, $r, $e);
+	@exec('wvText '.escapeshellarg($fichier).'> '.$temp, $r, $e);
 	lire_fichier($temp, $contenu);
 	@unlink($temp);
 	if (!$e) return $contenu;
@@ -29,12 +29,12 @@ function extracteur_rtf($fichier, &$charset) {
 	# unrtf
 	# http://www.gnu.org/software/unrtf/unrtf.html
 	# --html car avec --text les accents sont perdus :(
-	exec('unrtf --html '.escapeshellarg($fichier), $r, $e);
+	@exec('unrtf --html '.escapeshellarg($fichier), $r, $e);
 	if (!$e) return join(' ', $r);
 
 	# catdoc
 	# http://www.45.free.net/~vitus/ice/catdoc/
-	exec('catdoc '.escapeshellarg($fichier), $r, $e);
+	@exec('catdoc '.escapeshellarg($fichier), $r, $e);
 	if (!$e) return join(' ', $r);
 
 }
