@@ -827,10 +827,11 @@ function reduire_image($texte, $taille = -1, $taille_y = -1) {
 				// En cas de span spip_documents, modifier le style=...width:
 				if($tag[1]
 				AND $w = extraire_attribut($reduit, 'width')) {
-					$texte = str_replace($tag[1],
-						inserer_attribut($tag[1], 'style', 
-						preg_replace(", width: *\d+px,", " width: ${w}px",
-						extraire_attribut($tag[1], 'style'))), $texte);
+					$style = preg_replace(", width: *\d+px,", " width: ${w}px",
+						extraire_attribut($tag[1], 'style'));
+					$replace = inserer_attribut($tag[1], 'style', $style);
+					$replace = str_replace(" style=''", '', $replace);
+					$texte = str_replace($tag[1], $replace, $texte);
 				}
 
 				$texte = str_replace($tag[3], $reduit, $texte);
