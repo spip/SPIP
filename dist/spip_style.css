@@ -68,7 +68,7 @@ img, .spip_logos { margin: 0; padding: 0; border: 0; }
 .spip_doc_descriptif { clear: both; font-size: 0.71em; }
 
 /* Images typographiques (via image_typo), URL a revoir... */
-.format_png { behavior: dist/win_width.htc; }
+.format_png { behavior: url(../win_png.htc); }
 
 /* * Habillage des formulaires */
 
