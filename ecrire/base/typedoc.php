@@ -46,7 +46,8 @@ $tables_sequences = array(
 			  'rm' => 'RealAudio',
 			  'swf' => 'Flash',
 			  'wav' => 'WAV',
-			  'wmv' => 'Windows Media'
+			  'wmv' => 'Windows Media',
+			  'svg' => 'Scalable Vector Graphics'
 			  );
 
 // Documents varies
@@ -115,6 +116,7 @@ $tables_mime = array(
 		'swf'=>'application/x-shockwave-flash',
 		'wav'=>'audio/x-wav',
 		'wmv'=>'video/x-ms-wmv',
+		'svg'=>'image/svg+xml',
 
 		// Documents varies
 		'ai' =>'application/illustrator',

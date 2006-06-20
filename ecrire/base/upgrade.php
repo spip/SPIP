@@ -1167,6 +1167,13 @@ function maj_base() {
 		maj_version(1.913);
 	}
 
+	// Ajout de SVG
+	if ($version_installee < 1.914) {
+		spip_query("INSERT IGNORE INTO spip_types_documents (extension, titre, inclus) VALUES ('svg', 'Scalable Vector Graphics', 'embed')");
+		spip_query("UPDATE spip_types_documents	SET mime_type='image/svg+xml' WHERE extension='svg'");
+		maj_version(1.914);
+	}
+
 }
 
 ?>

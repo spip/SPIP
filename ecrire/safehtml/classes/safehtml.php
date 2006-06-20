@@ -123,7 +123,7 @@ class SafeHTML
     if (in_array($name, $this->attributes)) {
      continue;
     }
-    if (!preg_match("/^[a-z0-9]+$/i", $name)) {
+    if (!preg_match("/^[a-z0-9-]+$/i", $name)) {
       if (!in_array($name, $this->attributesNS))
       {
        continue;
