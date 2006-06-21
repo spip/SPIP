@@ -91,7 +91,7 @@ table.spip th, table.spip td { padding: 3px; text-align: left; vertical-align: m
 .formulaire_spip legend { 
 	font-weight: bold; 
 	padding: 3px;
-	background: #FFF; /* Sinon, superposition dans MSIE */
+	background: white; /* Sinon, superposition dans MSIE */
 }
 
 .formulaire_spip label {}
@@ -103,12 +103,13 @@ table.spip th, table.spip td { padding: 3px; text-align: left; vertical-align: m
 	font-size: inherit; }
 
 input.spip_bouton {
-	float: right;
 	margin: 3px 0;
 	padding: 1px 2px;
 	border: 2px outset;
 	font-weight: bold; }
-
+div.spip_bouton_div {
+	text-align: right;
+}
 /* Reponse du formulaire */
 .reponse_formulaire { font-weight: bold; color: #F00; }
 fieldset.reponse_formulaire { border: 1px dotted; font-weight: normal; }
