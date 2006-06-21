@@ -281,6 +281,14 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	list-style: square; }
 #page_plan #contenu .contre-encart li { list-style: inherit; }
 
+/* Styles des formulaires de Spip */
+.formulaire_spip {
+	text-align: left;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: small;
+}
+
+
 /*  ------------------------------------------
 /*  Habillage des forums
 /*  ------------------------------------------ */
