@@ -232,12 +232,13 @@ function exec_controle_forum_dist()
   }
   list($from,$where) = critere_statut_controle_forum($page, $id_rubrique);
 
-// Si un id_controle_forum est demande, on adapte le debut
-  if ($debut_id_forum = intval($debut_id_forum)) {
-    $d = spip_fetch_array(spip_query("SELECT date_heure FROM spip_forum WHERE id_forum=$debut_id_forum"));
-    $debut = spip_query("SELECT COUNT(*) AS n FROM $from " . (!$where ? '' : "WHERE $where ") . (!$d ? '' : (" AND F.date_heure > '".$d['date_heure']."'")));
-    $debut = $debut['n'];
-}
+	// Si un id_controle_forum est demande, on adapte le debut
+	if ($debut_id_forum = intval($debut_id_forum)
+	AND $d = spip_fetch_array(spip_query("SELECT date_heure FROM spip_forum WHERE id_forum=$debut_id_forum"))) {
+		$debut = spip_fetch_array(spip_query($q = "SELECT COUNT(*) AS n FROM $from " . (!$where ? '' : "WHERE $where ") . (!$d ? '' : (" AND F.date_heure > '".$d['date_heure']."'"))));
+		$debut = $debut['n'];
+	}
+
  $debut= intval($debut);
 
  $pack = 20;	// nb de forums affiches par page
