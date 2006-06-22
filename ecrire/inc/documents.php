@@ -172,49 +172,8 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 	}
 	else $type = 'fichier';
 
-	// Pour RealVideo
-	$real = ((!ereg("^controls", $les_parametres)) AND (ereg("^(rm|ra|ram)$", $extension)));
-	// Pour Flash
-	$flash = ((!ereg("^controls", $les_parametres)) AND (ereg("^(swf)$", $extension)));
-
-	if ($inclus == "embed" AND !$real) {
-		
-				for ($i = 0; $i < count($params); $i++) {
-					if (ereg("([^\=]*)\=([^\=]*)", $params[$i], $vals)){
-						$nom = $vals[1];
-						$valeur = $vals[2];
-						$inserer_vignette .= "<param name='$nom' value='$valeur' />";
-						$param_emb .= " $nom='$valeur'";
-						if ($nom == "controls" AND $valeur == "PlayButton") { 
-							$largeur = 40;
-							$hauteur = 25;
-						}
-						else if ($nom == "controls" AND $valeur == "PositionSlider") { 
-							$largeur = $largeur - 40;
-							$hauteur = 25;
-						}
-					}
-				}
-				
-				$vignette = "<object ";
-				if ($flash)
-					$vignette .=
-					"type='application/x-shockwave-flash' data='$fichier' ";
-
-				$vignette .= "width='$largeur' height='$hauteur'>\n";
-				$vignette .= "<param name='movie' value='$fichier' />\n";
-				$vignette .= "<param name='src' value='$fichier' />\n";
-				$vignette .= $inserer_vignette;
-
-				if (!$flash)
-					$vignette .= "<embed src='$fichier' $param_emb width='$largeur' height='$hauteur'></embed>\n";
-				$vignette .= "</object>\n";
-	}
-	else if ($inclus == "embed" AND $real) {
-			$vignette .= "<div>".embed_document ($id_document, "controls=ImageWindow|type=audio/x-pn-realaudio-plugin|console=Console$id_document|nojava=true|$les_parametres", false)."</div>";
-			$vignette .= embed_document ($id_document, "controls=PlayButton|type=audio/x-pn-realaudio-plugin|console=Console$id_document|nojava=true|$les_parametres", false);
-			$vignette .= embed_document ($id_document, "controls=PositionSlider|type=audio/x-pn-realaudio-plugin|console=Console$id_document|nojava=true|$les_parametres", false);
-		}
+	if ($inclus == "embed") 
+		$vignette = parametrer_embed_document($fichier, $id_document, $hauteur, $largeur, $extension, $les_parametres, $params);
 	else if ($inclus == "image") {
 		$fichier_vignette = $fichier;
 		$largeur_vignette = $largeur;
@@ -257,6 +216,59 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 	return $retour;
 }
 
+function parametrer_embed_document($fichier, $id_document, $hauteur, $largeur, $extension, $les_parametres, $params)
+{
+	if ((!ereg("^controls", $les_parametres)) AND (ereg("^(rm|ra|ram)$", $extension)))
+	// Pour RealVideo (??? -- c'est toujours irreel la video. [esj])
+	 {
+		$param = "|type=audio/x-pn-realaudio-plugin|console=Console$id_document|nojava=true|$les_parametres";
+
+		return "<div>" .
+		  embed_document($id_document, "controls=ImageWindow$param", false) . 
+		  "</div>" .
+		  embed_document($id_document, "controls=PlayButton$param", false) .
+		  embed_document($id_document, "controls=PositionSlider$param", false);
+	 } else {
+		$inserer_vignette = '';
+
+		for ($i = 0; $i < count($params); $i++) {
+			if (ereg("([^\=]*)\=([^\=]*)", $params[$i], $vals)){
+				$nom = $vals[1];
+				$valeur = $vals[2];
+				$inserer_vignette .= "<param name='$nom' value='$valeur' />";
+				$param_emb .= " $nom='$valeur'";
+				if ($nom == "controls" AND $valeur == "PlayButton") { 
+					$largeur = 40;
+					$hauteur = 25;
+				} else if ($nom == "controls" AND $valeur == "PositionSlider") { 
+					$largeur = $largeur - 40;
+					$hauteur = 25;
+				}
+			}
+		}
+				
+		$params = "<param name='movie' value='$fichier' />\n"
+		  . "<param name='src' value='$fichier' />\n"
+		  . $inserer_vignette;
+
+	// Pour Flash
+		if ((!ereg("^controls", $les_parametres)) AND ($extension=='swf'))
+
+			return "<object "
+			  . "type='application/x-shockwave-flash' data='$fichier' "
+			  . "width='$largeur' height='$hauteur'>\n"
+			  . $params
+			  . "</object>\n";
+		else {
+			$emb = "<embed src='$fichier' $param_emb width='$largeur' height='$hauteur'></embed>\n";
+			if ($extension == 'svg') return $emb;
+			return "<object width='$largeur' height='$hauteur'>\n"
+			  . $params
+			  . $emb
+			  . "</object>\n";
+		}
+	}
+}
 
 //
 // Integration des images et documents

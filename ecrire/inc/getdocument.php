@@ -413,23 +413,33 @@ function traite_svg($file)
 {
 	include_spip('inc/texte');
 	$texte = spip_file_get_contents($file);
-	$new = safehtml($texte);
 
 	// securite: virer les scripts et les references externes
+	// trop expeditif, a ameliorer
+	$new = safehtml($texte);
 	if ($new != $texte) ecrire_fichier($file, $new);
-	$width = $height = 150;
 
+	$width = $height = 150;
 	if (preg_match(',<svg[^>]+>,', $new, $s)) {
 		$s = $s[0];
+		if (preg_match(',\WviewBox\s*=\s*.\s*(\d+)\s+(\d+)\s+(\d+)\s+(\d+),i', $s, $r)){
+			$width = $r[3];
+                	$height = $r[4];
+		} else {
 	// si la taille est en centimetre, estimer le pixel a 1/64 de cm
-		if (preg_match(',\Wwidth\s*=\s*.(\d+)([^"\']*),', $s, $r)){
-			$width = $r[1];
-			if ($r[2] == 'cm') $width <<=6;
+		if (preg_match(',\Wwidth\s*=\s*.(\d+)([^"\']*),i', $s, $r)){
+			if ($r[2] != '%') {
+				$width = $r[1];
+				if ($r[2] == 'cm') $width <<=6;
+			}	
 		}
-		if (preg_match(',\Wheight\s*=\s*.(\d+)([^"\']*),', $s, $r)){
-                	$height = $r[1];
-			if ($r[2] == 'cm') $height <<=6;
+		if (preg_match(',\Wheight\s*=\s*.(\d+)([^"\']*),i', $s, $r)){
+			if ($r[2] != '%') {
+	                	$height = $r[1];
+				if ($r[2] == 'cm') $height <<=6;
+			}
 		}
+	   }
 	}
 	return array($width, $height);
 }
