@@ -102,12 +102,12 @@ table.spip th, table.spip td { padding: 3px; text-align: left; vertical-align: m
 	font-family: inherit;
 	font-size: inherit; }
 
-input.spip_bouton {
+.spip_bouton input {
 	margin: 3px 0;
 	padding: 1px 2px;
 	border: 2px outset;
 	font-weight: bold; }
-div.spip_bouton_div {
+.spip_bouton {
 	text-align: right;
 }
 /* Reponse du formulaire */

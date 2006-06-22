@@ -287,7 +287,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: small;
 }
-input.spip_bouton {
+.spip_bouton input {
 	float: right;
 }
 
