@@ -91,7 +91,7 @@ table.spip th, table.spip td { padding: 3px; text-align: left; vertical-align: m
 .formulaire_spip legend { 
 	font-weight: bold; 
 	padding: 3px;
-	background: white; /* Sinon, superposition dans MSIE */
+	background: #FFF; /* Sinon, superposition dans MSIE */
 }
 
 .formulaire_spip label {}
