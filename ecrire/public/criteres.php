@@ -536,12 +536,12 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 
 	// inserer la negation (cf !...)
 	if (!$crit->not) {
-			$boucles[$idb]->default_order[] = "'cpt'";
+			$boucles[$idb]->default_order[] = "'cpt$cpt'";
 			$op = '<>';
 	} else $op = '=';
 
-	$boucles[$idb]->select[]=  "FIELD($arg,\" . join(',',array_map('spip_abstract_quote', $var)) . \") AS cpt";
-	$op = array("'$op'", "'cpt'", 0);
+	$boucles[$idb]->select[]=  "FIELD($arg,\" . join(',',array_map('spip_abstract_quote', $var)) . \") AS cpt$cpt";
+	$op = array("'$op'", "'cpt$cpt'", 0);
 
 //	inserer la condition; exemple: {id_mot ?IN (66, 62, 64)}
 
