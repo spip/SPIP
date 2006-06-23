@@ -187,6 +187,21 @@ $spip_pipeline = array(
 	'affichage_final' => '|f_surligne|f_tidy|f_admin', # cf. public/assembler
 	'taches_generales_cron' => ''
 );
+
+$tableau_raccourcis = array(
+	'' => 'article',
+	'art' => 'article',
+	'rub' => 'rubrique',
+	'br' => 'breve',
+	'brève' => 'breve',
+	'aut' => 'auteur',
+	'doc' => 'document',
+	'im' => 'document',
+	'img' => 'document',
+	'image' => 'document',
+	'spip' => array(19 => 3368) // num article sur spipnet. A completer
+);
+
 # la matrice standard (fichiers definissant les fonctions a inclure)
 $spip_matrice = array ();
 # les plugins a activer

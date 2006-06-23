@@ -226,7 +226,7 @@ function nettoyer_raccourcis_typo($texte){
 			if (strlen($reg[1]))
 				$titre = $reg[1];
 			else
-				list(,,$titre) = extraire_lien($reg);
+				$titre= calculer_url($reg[3], $reg[1], 'titre');
 			$texte = str_replace($reg[0], $titre, $texte);
 		}
 
@@ -545,121 +545,151 @@ function typo($letexte, $echapper=true) {
 	return $letexte;
 }
 
+// obsolete, utiliser calculer_url
 
-// cette fonction est tordue : on lui passe un tableau correspondant au match
-// de la regexp ci-dessous, et elle retourne le texte a inserer a la place
-// et le lien "brut" a usage eventuel de redirection...
 function extraire_lien ($regs) {
-	$lien_texte = $regs[1];
-
-	$lien_url = entites_html(vider_url($regs[3]));
-	$lien_interne = false;
-	if (ereg('^[[:space:]]*(art(icle)?|rub(rique)?|br(.ve)?|aut(eur)?|mot|site|doc(ument)?|im(age|g))?[[:space:]]*([[:digit:]]+)(#.*)?[[:space:]]*$', $lien_url, $match)) {
-		$id_lien = $match[8];
-		$ancre = $match[9];
-		$type_lien = substr($match[1], 0, 2);
-		$lien_interne=true;
-		$class_lien = "in";
-		charger_generer_url();
-		switch ($type_lien) {
-			case 'ru':
-				$lien_url = generer_url_rubrique($id_lien);
-				if (!$lien_texte) {
-					$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_lien"));
-
-					$lien_texte = $row['titre'];
-				}
-				break;
-			case 'br':
-				$lien_url = generer_url_breve($id_lien);
-				if (!$lien_texte) {
-					$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_breves WHERE id_breve=$id_lien"));
-
-					$lien_texte = $row['titre'];
-				}
-				break;
-			case 'au':
-				$lien_url = generer_url_auteur($id_lien);
-				if (!$lien_texte) {
-					$row = @spip_fetch_array(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur = $id_lien"));
-
-					$lien_texte = $row['nom'];
-				}
-				break;
-			case 'mo':
-				$lien_url = generer_url_mot($id_lien);
-				if (!$lien_texte) {
-					$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_mots WHERE id_mot=$id_lien"));
-
-					$lien_texte = $row['titre'];
-				}
-				break;
-			case 'im':
-			case 'do':
-				$lien_url = generer_url_document($id_lien);
-				if (!$lien_texte) {
-					$row = @spip_fetch_array(spip_query("SELECT titre,fichier FROM spip_documents WHERE id_document=$id_lien"));
-
-					$lien_texte = $row['titre'];
-					if (!$lien_texte)
-						$lien_texte = ereg_replace("^.*/","",$row['fichier']);
-				}
-				break;
-			case 'si':
-				# attention dans le cas des sites le lien pointe non pas sur
-				# la page locale du site, mais directement sur le site lui-meme
-				$row = @spip_fetch_array(spip_query("SELECT nom_site,url_site	FROM spip_syndic WHERE id_syndic=$id_lien"));
-				if ($row) {
-					$lien_url = $row['url_site'];
-					if (!$lien_texte)
-						$lien_texte = typo($row['nom_site']);
-				}
-				break;
-			default:
-				$lien_url = generer_url_article($id_lien);
-				if (!$lien_texte) {
-					$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_articles WHERE id_article=$id_lien"));
-
-					$lien_texte = $row['titre'];
-
-				}
-				break;
-		}
-
-		$lien_url .= $ancre;
-
-		// supprimer les numeros des titres
-		$lien_texte = supprimer_numero($lien_texte);
-	}
-	else if (preg_match(',^\?(.*)$,s', $lien_url, $regs)) {
-		// Liens glossaire
-		$lien_url = substr($lien_url, 1);
-		$class_lien = "glossaire";
-	}
-	else {
-		// Liens non automatiques
-		$class_lien = "out";
-		// texte vide ?
-		if ((!$lien_texte) and (!$lien_interne)) {
-			$lien_texte = str_replace('"', '', $lien_url);
-			if (strlen($lien_texte)>40)
-				$lien_texte = substr($lien_texte,0,35).'...';
-			$class_lien = "url";
-			$lien_texte = "<html>$lien_texte</html>";
-		}
-		// petites corrections d'URL
-		if (preg_match(",^www\.[^@]+$,",$lien_url))
-			$lien_url = "http://".$lien_url;
-		else if (strpos($lien_url, "@") && email_valide($lien_url))
-			$lien_url = "mailto:".$lien_url;
-	}
-
+	list($lien, $class, $texte) = calculer_url($regs[3], $regs[1],'tout');
 	// Preparer le texte du lien ; attention s'il contient un <div>
 	// (ex: [<docXX|right>->lien]), il faut etre smart
-	$insert = typo("<a href=\"$lien_url\" class=\"spip_$class_lien\""
-		.">$lien_texte</a>");
+	$ref = "<a href=\"$lien\" class=\"$class\">$texte</a>";
+	return array($ref, $lien, $texte);
+}
 
-	return array($insert, $lien_url, $lien_texte);
+// traitement des raccourcis issus de [TITRE->RACCOURCInnn] et connexes
+//
+// Valeur retournee selon le parametre $pour:
+// 'tout' : <a href="L">T</a>
+// 'titre': seulement T ci-dessus (i.e. le TITRE ci-dessus ou dans table SQL)
+// 'url':   seulement L (i.e. generer_url_RACCOURCI)
+
+function calculer_url ($lien, $texte='', $pour='url') {
+	global $tableau_raccourcis;
+	if (preg_match(',^\s*(\w*?)\s*(\d+)(#[^\s]*)?\s*$,', $lien, $match)) {
+		$ancre = isset($match[3]) ? $match[3] :'';
+		$f =  $match[1];
+		if (isset($tableau_raccourcis[$f])
+		AND is_string($tableau_raccourcis[$f]))
+			$f = $tableau_raccourcis[$f];
+		$f=(($pour == 'url') ? 'generer' : 'calculer') . '_url_' . $f;
+		if (function_exists($f)) {
+			charger_generer_url();
+			if ($pour == 'url') return $f($match[2]) . $ancre;
+			$res = $f($match[2], $texte, $ancre);
+			return ($pour == 'titre') ? $res[2] : $res;
+		}
+	}
+  
+	$lien = ltrim($lien);
+	if ($lien[0] == '?') {
+		if ($pour == 'titre') return $texte;
+		$lien = entites_html(substr($lien, 1));
+		return ($pour == 'url') ? $lien :
+			array($lien, "glossaire", $texte);
+	}
+	// Liens explicites
+	if (!$texte) {
+		$texte = str_replace('"', '', $lien);
+		if (strlen($texte)>40)
+				$texte = substr($texte,0,35).'...';
+		$texte = "<html>$texte</html>";
+		$class = "spip_url";
+	} else 	$class = "spip_out";
+
+	if ($pour == 'titre') return $texte;
+
+	$lien = entites_html(vider_url($lien));
+
+	// petites corrections d'URL
+	if (preg_match(",^www\.[^@]+$,",$lien))
+		$lien = "http://".$lien;
+	else if (strpos($lien, "@") && email_valide($lien))
+		$lien = "mailto:".$lien;
+
+	return ($pour == 'url') ? $lien : array($lien, $class, $texte);
+}
+
+function calculer_url_article($id, $texte, $ancre)
+{
+	$lien = generer_url_article($id) . $ancre;
+	if (!$texte) {
+		$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_articles WHERE id_article=$id"));
+		$texte = $row['titre'];
+	}
+	return array($lien, 'spip_in', $texte);
+}
+
+function calculer_url_rubrique($id, $texte, $ancre)
+{
+	$lien = generer_url_rubrique($id) . $ancre;
+	if (!$texte) {
+		$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id"));
+		$texte = $row['titre'];
+	}
+	return array($lien, 'spip_in', $texte);
+}
+
+function calculer_url_mot($id, $texte, $ancre)
+{
+	$lien = generer_url_mot($id) . $ancre;
+	if (!$texte) {
+		$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_mots WHERE id_mot=$id"));
+		$texte = $row['titre'];
+	}
+	return array($lien, 'spip_in', $texte);
+}
+
+function calculer_url_breve($id, $texte, $ancre)
+{
+	$lien = generer_url_breve($id) . $ancre;
+	if (!$texte) {
+		$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_breves WHERE id_breve=$id"));
+		$texte = $row['titre'];
+	}
+	return array($lien, 'spip_in', $texte);
+}
+
+function calculer_url_auteur($id, $texte, $ancre)
+{
+	$lien = generer_url_auteur($id) . $ancre;
+	if (!$texte) {
+		$row = @spip_fetch_array(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$id"));
+		$texte = $row['nom'];
+	}
+	return array($lien, 'spip_in', $texte);
+}
+
+function calculer_url_document($id, $texte, $ancre)
+{
+	$lien = generer_url_document($id) . $ancre;
+	if (!$texte) {
+		$row = @spip_fetch_array(spip_query("SELECT titre,fichier FROM spip_documents WHERE id_document=$id"));
+		$texte = $row['titre'];
+		if (!$texte)
+			$texte = ereg_replace("^.*/","",$row['fichier']);
+	}
+	return array($lien, 'spip_in', $texte);
+}
+
+function calculer_url_site($id, $texte, $ancre)
+{
+	# attention dans le cas des sites le lien pointe non pas sur
+	# la page locale du site, mais directement sur le site lui-meme
+	$row = @spip_fetch_array(spip_query("SELECT nom_site,url_site FROM spip_syndic WHERE id_syndic=$id"));
+	if ($row) {
+		$lien = $row['url_site'];
+		if (!$texte)
+			$texte = $row['nom_site'];
+	}
+	return array($lien, 'spip_in', $texte);
+}
+
+function calculer_url_spip($id, $texte, $ancre)
+{
+	global $tableau_raccourcis;
+	if (is_numeric($tableau_raccourcis['spip'][$id]))
+		$p= "spip.php?page=article&amp;id_article=" . $tableau_raccourcis['spip'][$id];
+	else $p = '';
+	return array("http://www.spip.net/$p$ancre", 'spip_in', "SPIP $id");
 }
 
 //
@@ -1048,7 +1078,7 @@ function traiter_raccourcis($letexte) {
 
 
 	//
-	// Raccourcis liens [xxx->url] (cf. fonction extraire_lien ci-dessus)
+	// Raccourcis liens [xxx->url] 
 	// Note : complique car c'est ici qu'on applique typo() !
 	//
 	$regexp = "|\[([^][]*)->(>?)([^]]*)\]|ms";
@@ -1056,8 +1086,11 @@ function traiter_raccourcis($letexte) {
 	if (preg_match_all($regexp, $letexte, $matches, PREG_SET_ORDER)) {
 		$i = 0;
 		foreach ($matches as $regs) {
-			list($insert) = extraire_lien($regs);
-			$inserts[++$i] = $insert;
+			list($lien, $class, $texte) = calculer_url($regs[3], $regs[1], 'tout');
+			$inserts[++$i] = "<a href=\"$lien\" class=\"$class\">"
+				.  typo(supprimer_numero($texte))
+				. "</a>";
+
 			$letexte = str_replace($regs[0], "@@SPIP_ECHAPPE_LIEN_$i@@", $letexte);
 		}
 	}

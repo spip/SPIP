@@ -277,13 +277,6 @@ function vider_url($url) {
 	return $url;
 }
 
-// urls des liens spip [->article1]
-// voir la definition tordue de extraire_lien() dans inc_texte
-function calculer_url($url) {
-	list(,$l) = extraire_lien(array('','','',vider_url($url)));
-	return $l;
-}
-
 //
 // Ajouter le &var_recherche=toto dans les boucles de recherche
 //
