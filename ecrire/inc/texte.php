@@ -584,7 +584,7 @@ function calculer_url ($lien, $texte='', $pour='url') {
 		if ($pour == 'titre') return $texte;
 		$lien = entites_html(substr($lien, 1));
 		return ($pour == 'url') ? $lien :
-			array($lien, "glossaire", $texte);
+			array($lien, 'spip_glossaire', $texte);
 	}
 	// Liens explicites
 	if (!$texte) {
