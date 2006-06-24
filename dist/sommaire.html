@@ -112,7 +112,7 @@
 					<h2 class="menu-titre"><:nouveautes_web:></h2>
 					<ul>
 					<BOUCLE_syndic(SYNDIC_ARTICLES) {age<180} {par date}{inverse} {0,6}>
-						<li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_ARTICLE"[ title="(#NOM_SITE|texte_backend)"] class="spip_out">[(#TITRE|supprimer_tags)]</a></li>
+						<li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_ARTICLE"[ title="(#NOM_SITE|texte_backend)"] class="spip_out">#TITRE</a></li>
 					</BOUCLE_syndic>
 					</ul>
 				</div>
