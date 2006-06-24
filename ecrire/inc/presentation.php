@@ -670,7 +670,7 @@ function afficher_script_statut($id, $type, $n, $img, $statut, $title, $act)
   return http_href_img("javascript:selec_statut('$id', '$type', -1, '" .
 		      _DIR_IMG_PACK . $img .
 		      "', '" .
-		       generer_action_auteur('instituer', "$type $id $statut") .
+		       generer_action_auteur('instituer', "$type-$id-$statut") .
 		      "');",
 		      $img,
 			"title=\"".$title."\"",
@@ -2852,7 +2852,7 @@ function fin_page($credits='') {
 
 function debloquer_article($arg, $texte) {
 	$lien = _DIR_RESTREINT_ABS . parametre_url(self(), 'debloquer_article', $arg, '&');
-	return "<a href='" . generer_action_auteur('instituer', "collaboration $arg", $lien) .
+	return "<a href='" . generer_action_auteur('instituer', "collaboration-$arg", $lien) .
 	  "' title=\"" .
 	  entites_html($texte) .
 	  "\">$texte&nbsp;" .

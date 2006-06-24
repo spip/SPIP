@@ -287,7 +287,7 @@ function verifier_action_auteur($action, $valeur, $id_auteur = 0) {
 function generer_action_auteur($action, $arg, $redirect="", $no_entites=false)
 {
 	global $connect_id_auteur;
-	$hash = calculer_action_auteur("$action $arg");
+	$hash = calculer_action_auteur("$action-$arg");
 	if ($redirect) $redirect = "&redirect=" . rawurlencode($redirect);
 
 	return generer_url_action($action, "arg=$arg&id_auteur=$connect_id_auteur&hash=$hash$redirect", $no_entites);

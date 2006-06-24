@@ -19,15 +19,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_instituer_dist() {
 	global $action, $arg, $hash, $id_auteur;
 	include_spip('inc/session');
-	if (!verifier_action_auteur("$action $arg", $hash, $id_auteur)) {
+	if (!verifier_action_auteur("$action-$arg", $hash, $id_auteur)) {
 		include_spip('inc/minipres');
 		minipres(_T('info_acces_interdit'));
 	}
 
-	ereg("^([^ ]*) (.*)$", $arg, $r);
+	preg_match('/^(\w+)\W(.*)$/', $arg, $r);
 	$var_nom = 'instituer_' . $r[1];
 	if (function_exists($var_nom)) {
-		spip_log("$var_nom $r[2]");
+		spip_log("$var_nom '$r[2]'");
 		$var_nom($r[2]);
 	}
 	else
@@ -46,7 +46,7 @@ function instituer_collaboration($debloquer_article) {
 }
 
 function instituer_forum($arg) {
-	list($id_forum, $statut) = split(' ', $arg);
+	list($id_forum, $statut) = preg_split('/\W/', $arg);
 	$id_forum = intval($id_forum);
 	$result = spip_query("SELECT * FROM spip_forum WHERE id_forum=$id_forum");
 	if (!($row = spip_fetch_array($result)))
@@ -80,7 +80,7 @@ function instituer_forum($arg) {
 }
 
 function instituer_article($arg) {
-	list($id_article, $statut) = split(' ', $arg);
+	list($id_article, $statut) = preg_split('/\W/', $arg);
 	if (!$statut) $statut = _request('statut_nouv'); // cas POST
 	if (!$statut) return; // impossible mais sait-on jamais
 
@@ -123,7 +123,7 @@ function instituer_article($arg) {
 }
 
 function instituer_syndic_article($arg) {
-	list($id_syndic_article, $statut) = split(' ', $arg);
+	list($id_syndic_article, $statut) = preg_split('/\W/', $arg);
 
 	$id_syndic_article = intval($id_syndic_article);
 	spip_query("UPDATE spip_syndic_articles SET statut='$statut' WHERE id_syndic_article=$id_syndic_article");
@@ -131,7 +131,7 @@ function instituer_syndic_article($arg) {
 }
 
 function instituer_breve($arg) {
-	list($id_breve, $statut) = split(' ', $arg);
+	list($id_breve, $statut) = preg_split('/\W/', $arg);
 
 	$id_breve = intval($id_breve);
 	$result = spip_query("SELECT statut FROM spip_breves WHERE id_breve=$id_breve");
@@ -152,7 +152,7 @@ function instituer_breve($arg) {
 function instituer_langue($arg)
 {
 	$changer_lang = _request('changer_lang');
-	list($id_rubrique, $id_parent) = split(' ', $arg);
+	list($id_rubrique, $id_parent) = preg_split('/\W/', $arg);
 
 	if ($changer_lang
 	AND $id_rubrique>0

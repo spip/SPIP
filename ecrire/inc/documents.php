@@ -594,7 +594,7 @@ function afficher_upload($id, $intitule, $inclus = '', $mode, $type="", $ancre='
 	return construire_upload($res,
 				array(
 				'redirect' => $redirect,
-				'hash' => calculer_action_auteur("joindre $mode"),
+				'hash' => calculer_action_auteur("joindre-$mode"),
 				'id' => $id, 
 				'id_auteur' => $connect_id_auteur,
 				'arg' => $mode,
@@ -911,7 +911,7 @@ function bouton_tourner_document($id_article, $id, $album, $rot, $type)
 function bouton_supprime_document_et_vignette($id_article, $type, $id_v, $album, $id_document=0)
 {
 
-	return generer_action_auteur('supprimer', "document $id_v", generer_url_ecrire($GLOBALS['exec'], ("id_$type=$id_article"), true) . "#$album");
+	return generer_action_auteur('supprimer', "document-$id_v", generer_url_ecrire($GLOBALS['exec'], ("id_$type=$id_article"), true) . "#$album");
 
 
 }

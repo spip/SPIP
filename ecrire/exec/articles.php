@@ -206,7 +206,7 @@ if ($flag_auteur AND $statut_article == 'prepa') {
 		"<B>"._T('texte_proposer_publication')."</B>",
 		aide ("artprop"),
 		"\n<form method='post' action='",
-		generer_action_auteur("instituer", "article $id_article prop", generer_url_ecrire('articles', "id_article=$id_article", true)),
+		generer_action_auteur("instituer", "article-$id_article-prop", generer_url_ecrire('articles', "id_article=$id_article", true)),
       "'>",
 		"<input type='submit' class='fondo' value=\"", 
 		_T('bouton_demande_publication'),
@@ -1275,7 +1275,7 @@ function afficher_statut_articles($id_article, $rubrique_article, $statut_articl
   if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
   	
     echo "\n<form method='post' action='",
-      generer_action_auteur("instituer", "article $id_article", generer_url_ecrire('articles', "id_article=$id_article", true)),
+      generer_action_auteur("instituer", "article-$id_article", generer_url_ecrire('articles', "id_article=$id_article", true)),
       "'>",
 	  debut_cadre_relief("", true),
       "\n<center>", "<B>",_T('texte_article_statut'),"</B>",

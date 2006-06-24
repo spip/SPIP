@@ -193,14 +193,14 @@ if ($connect_statut=="0minirezo" AND acces_rubrique($id_rubrique) AND ($statut==
 	echo "<table>";
 	echo "<td  align='right'>";
 	icone(_T('icone_publier_breve'), 
-	      generer_action_auteur('instituer', "breve $id_breve publie",
+	      generer_action_auteur('instituer', "breve-$id_breve-publie",
 				    generer_url_ecrire("breves_voir","id_breve=$id_breve", true)), "breve-24.gif", "racine-24.gif");
 	echo "</td>";
 	
 	echo "<td>", http_img_pack("rien.gif", ' ', "width='5'") ."</td>\n";
 	echo "<td  align='right'>";
 	icone(_T('icone_refuser_breve'), 
-	      generer_action_auteur('instituer', "breve $id_breve refuse",
+	      generer_action_auteur('instituer', "breve-$id_breve-refuse",
 				    generer_url_ecrire("breves_voir","id_breve=$id_breve", true)), "breve-24.gif", "supprimer.gif");
 	echo "</td>";
 	echo "</table>";	
