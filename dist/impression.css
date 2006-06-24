@@ -20,7 +20,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 /*  on affiche l'URL cible a la suite des liens sortants (!)
 ---------------------------------------------- */
 a, a:visited, a.spip_in, a.spip_out, a.spip_url, a.spip_glossaire { color: #520; text-decoration: underline; }
-a.spip_out:after, a.spip_url:after { display: inline; content: " [" attr(href) "]"; }
+a.spip_out:after, a.spip_glossaire:after { display: inline; content: " [" attr(href) "]"; }
 
 
 /*  Disposition : on choisit un affichage de base
@@ -72,13 +72,6 @@ q, blockquote, .spip_poesie { font-family: Georgia, Garamond, Times, serif; }
 	margin: 1em;
 	padding: 1em;
 	border: 1pt dotted #CCC; }
-
-table {
- 	width: 99%; background: #FFF; margin-bottom: 1em;
- 	border-collapse: collapse; table-layout: fixed;
- 	border-top: 1pt solid #CCC; border-left: 1pt solid #CCC;
- 	font-size: 0.88em; }
-table td, table th { padding: 4pt; text-align: left; vertical-align: top; border-bottom: 1pt solid #CCC; border-right: 1pt solid #CCC; }
 
 /*  Messages de forums
 ---------------------------------------------- */
