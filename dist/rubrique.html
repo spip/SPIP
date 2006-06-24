@@ -69,16 +69,14 @@
 				<div class="rubriques">
 					<h2 class="menu-titre"><:sous_rubriques:></h2>
 					<ul>
-						<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent}
-						{par num titre, titre}>
+						<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}>
 						<li>
 							<a href="#URL_RUBRIQUE">[(#TITRE)]</a>
 
 							[(#REM) Une boucle recursive pour le mini plan]
 							<B_miniplan>
 							<ul>
-								<BOUCLE_miniplan(RUBRIQUES)
-								{id_parent} {par num titre, titre}>
+								<BOUCLE_miniplan(RUBRIQUES) {id_parent} {par num titre, titre}>
 								<li>
 									<a href="#URL_RUBRIQUE">[(#TITRE)]</a>
 									<BOUCLE_m2(BOUCLE_miniplan)></BOUCLE_m2>
