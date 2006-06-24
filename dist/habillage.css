@@ -339,6 +339,10 @@ fieldset.previsu {
 	padding: 1em;
 	border: 1px solid; }
 
+/* Formulaire de login au forum */
+.formulaire_login_forum .forml { width: 12em; }
+.formulaire_login_forum .spip_logos { float: right; padding-left: 10px; }
+
 /* Choix des mots-clefs */
 .choix_mots { width: 47%; float: left; } 
 .choix_mots label { display: inline; }
@@ -346,16 +350,6 @@ fieldset.previsu {
 /* Formulaire de recherche */
 .formulaire_recherche { text-align: left; width: 12em; }
 .formulaire_recherche label { display: none; }
-
-/* Formulaire menu de langues */
-.formulaire_menu_lang { text-align: left; width: 12em; }
-.formulaire_menu_lang label { display: none; }
-.formulaire_menu_lang select.forml { margin: 0; padding: 0; background: #FFF; }
-
-/* Formulaire de login */
-#page_login .formulaire_menu_lang { float: right; }
-#page_login .formulaire_login .forml, .formulaire_login_forum .forml { width: 12em; }
-#page_login .formulaire_login .spip_logos, .formulaire_login_forum .spip_logos { float: right; padding-left: 10px; }
 
 /*  ------------------------------------------
 /*  Habillage des forums
