@@ -20,7 +20,7 @@ que vous pourriez avoir mis dans ce fichier) ; si votre site est en
 "sous-repertoire", vous devrez aussi editer la ligne "RewriteBase" ce fichier.
 Les URLs definies seront alors redirigees vers les fichiers de SPIP.
 
-Definissez ensuite dans ecrire/mes_options.php3 :
+Definissez ensuite dans ecrire/mes_options.php :
 	type_urls = 'html';
 
 SPIP calculera alors ses liens sous la forme "article123.html".

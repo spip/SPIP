@@ -10,6 +10,9 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+
+## type d'URLs obsolete
+
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 if (!function_exists('generer_url_article')) { // si la place n'est pas prise
 
