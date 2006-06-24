@@ -21,7 +21,7 @@ que vous pourriez avoir mis dans ce fichier) ; si votre site est en
 Les URLs definies seront alors redirigees vers les fichiers de SPIP.
 
 Definissez ensuite dans ecrire/mes_options.php :
-	type_urls = 'html';
+	< ?php $type_urls = 'html'; ? >
 
 SPIP calculera alors ses liens sous la forme "article123.html".
 
