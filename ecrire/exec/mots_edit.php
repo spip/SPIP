@@ -19,7 +19,7 @@ include_spip('base/abstract_sql');
 function exec_mots_edit_dist()
 {
 global
-  $ajouter_id_article,
+  $ajouter_id_article, // attention, ce n'est pas forcement un id d'article
   $champs_extra,
   $connect_statut,
   $connect_toutes_rubriques,
@@ -58,13 +58,11 @@ if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		if ($new == 'oui' && $id_groupe) {
 			$id_mot = spip_abstract_insert("spip_mots", '(id_groupe)', "($id_groupe)");
 
-			$ajouter_id_article = intval($ajouter_id_article);
+			if($ajouter_id_article = intval($ajouter_id_article))
 			// heureusement que c'est pour les admin complet,
 			// sinon bonjour le XSS
-			if ($ajouter_id_article) {
-				supprime_mot_de_groupe($id_groupe, $table);
-				spip_abstract_insert("spip_mots_$table", "(id_mot, $table_id)", "($id_mot, $ajouter_id_article)");
-			}
+				ajouter_nouveau_mot($id_groupe, $table, $table_id, $id_mot, $ajouter_id_article);
+
 		}
 
 		$result = spip_query("SELECT titre FROM spip_groupes_mots WHERE id_groupe=$id_groupe");
@@ -315,13 +313,14 @@ function un_seul_mot_dans_groupe($id_groupe)
 	return ($u['unseul'] == 'oui');
 }
 
-function supprime_mot_de_groupe($id_groupe, $table)
+function ajouter_nouveau_mot($id_groupe, $table, $table_id, $id_mot, $id)
 {
 	if (un_seul_mot_dans_groupe($id_groupe)) {
 		$mots = spip_query("SELECT id_mot FROM spip_mots WHERE id_groupe = $id_groupe");
 		while ($r = spip_fetch_array($mots))
-			spip_query("DELETE FROM spip_mots_$table WHERE id_mot=" . $r['id_mot']);
+			spip_query("DELETE FROM spip_mots_$table WHERE id_mot=" . $r['id_mot'] ." AND $table_id=$id");
 	}
+	spip_abstract_insert("spip_mots_$table", "(id_mot, $table_id)", "($id_mot, $id)");
 }
 
 ?>
