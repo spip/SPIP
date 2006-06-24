@@ -294,7 +294,7 @@ q, blockquote { font-family: Georgia, Garamond, Times, serif; }
 .formulaire_spip {
 	text-align: left;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: small;
+	font-size: 0.77em;
 }
 
 .formulaire_spip p {
