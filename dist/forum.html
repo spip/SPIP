@@ -75,12 +75,14 @@
 
 		<div id="contenu">
 
-			<h1 class="invisible"><:poster_message:></h1>
+			<div class="cartouche">
+				<h1 class="titre"><:poster_message:></h1>
+				<p class="surtitre"><:en_reponse:></p>
+			</div>
 
 			<div class="liste-articles">
 
 				<ul><li>
-					<h2 class="surtitre"><:en_reponse:></h2>
 
 					<BOUCLE_forum_parent(FORUMS) {id_forum}>
 					<h3 class="titre"><a href="#URL_FORUM">#TITRE</a></h3>
@@ -118,8 +120,7 @@
 
 			</div>
 
-			[<h3 class="spip"><:envoyer_message:></h3>
-			(#FORMULAIRE_FORUM)]
+			#FORMULAIRE_FORUM
 
 		</div><!-- fin contenu -->
 
