@@ -104,12 +104,7 @@
 						<BOUCLE_documents_joints(DOCUMENTS) {id_rubrique}
 						{mode=document} {par date} {doublons}>
 						<li>
-						<div class="spip_doc_titre"><a href="#URL_DOCUMENT"
-							title="<:bouton_telecharger:>"
-							>[(#TITRE|sinon{<:info_document:>})]</a>
-							<small>(#TYPE_DOCUMENT[ -
-							(#TAILLE|taille_en_octets)])</small>
-						</div>
+						<div class="spip_doc_titre"><a href="#URL_DOCUMENT" title="<:bouton_telecharger:>">[(#TITRE|sinon{<:info_document:>})]</a> <small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small></div>
 						[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
 						</li>
 						</BOUCLE_documents_joints>
@@ -128,11 +123,8 @@
 					<h2 class="menu-titre"><:breves:></h2>
 					[<p class="pagination">(#PAGINATION)</p>]
 					<ul>
-						<BOUCLE_breves(BREVES) {id_secteur}
-						{par date}{inverse} {pagination 5}>
-						<li>[(#DATE|affdate_court) &ndash;
-						]<a href="#URL_BREVE">#TITRE</a>
-						</li>
+						<BOUCLE_breves(BREVES) {id_secteur} {par date}{inverse} {pagination 5}>
+						<li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_BREVE">#TITRE</a></li>
 						</BOUCLE_breves>
 					</ul>
 				</div>
