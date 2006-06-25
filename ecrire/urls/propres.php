@@ -85,13 +85,16 @@ function _generer_url_propre($type, $id_objet) {
 	$url = translitteration(corriger_caracteres(
 		supprimer_tags(supprimer_numero(extraire_multi($row['titre'])))
 		));
+
 	$url = @preg_replace(',[[:punct:][:space:]]+,u', ' ', $url);
-	// S'il reste des caracteres non latins, utiliser l'id a la place
-	if (preg_match(",[^a-zA-Z0-9 ],", $url)) {
+	// S'il reste trop de caracteres non latins, ou trop peu
+	// de caracteres latins, utiliser l'id a la place
+	if (preg_match(",([^a-zA-Z0-9 ].*){5},", $url, $r)
+	OR strlen($url)<3) {
 		$url = $type.$id_objet;
 	}
 	else {
-		$mots = explode(' ', $url);
+		$mots = preg_split(",[^a-zA-Z0-9]+,", $url);
 		$url = '';
 		foreach ($mots as $mot) {
 			if (!$mot) continue;
@@ -219,8 +222,8 @@ function recuperer_parametres_url(&$fond, $url) {
 	if ($id_objet) {
 		$func = "generer_url_$type";
 		$url_propre = $func($id_objet);
-		if ($url_propre
-		AND ($url_propre<>$regs[2])) {
+		if (strlen($url_propre)
+		AND !strstr($url,$url_propre)) {
 			include_spip('inc/headers');
 			http_status(301);
 			// recuperer les arguments supplementaires (&debut_xxx=...)
@@ -228,7 +231,6 @@ function recuperer_parametres_url(&$fond, $url) {
 				preg_replace("/[?&]$id_table_objet=$id_objet/",'',$regs[5]));
 			redirige_par_entete("$url_propre$reste");
 		}
-		return;
 	}
 	/* Fin compatibilite anciennes urls */
 
