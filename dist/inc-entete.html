@@ -2,18 +2,20 @@
 
 [(#REM) Afficher le logo ou le titre du site ]
 
+<div id="nom_site_spip"><a rel="start" href="#URL_SITE_SPIP/">
 [(#LOGO_SITE_SPIP||?{
 
-	<a rel="start" href="#URL_SITE_SPIP/">[(#LOGO_SITE_SPIP
+	[(#LOGO_SITE_SPIP
 		||image_reduire{770,200}
 		|inserer_attribut{alt,[(#NOM_SITE_SPIP|textebrut)]}
 		|inserer_attribut{title,[(#NOM_SITE_SPIP|textebrut)]}
-		)]</a>
+		)]
 
 	,
 
-	<div id="nom_site_spip"><a rel="start" href="#URL_SITE_SPIP/">#NOM_SITE_SPIP</a></div>
+	#NOM_SITE_SPIP
 })]
+</a></div>
 
 
 #FORMULAIRE_RECHERCHE

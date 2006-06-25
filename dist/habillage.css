@@ -83,7 +83,6 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	font-weight: bold;
 	font-size: 1.5em; }
 #entete a { text-decoration: none; }
-#entete a .spip_logos { display: block; float: left; }
 #entete .formulaire_recherche { float: right; }
 
 /* * Fil d'Ariane */
