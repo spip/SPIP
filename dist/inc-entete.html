@@ -2,7 +2,7 @@
 
 [(#REM) Afficher le logo ou le titre du site ]
 
-<div id="nom_site_spip"><a rel="start" href="#URL_SITE_SPIP/">
+<a rel="start" href="#URL_SITE_SPIP/">
 [(#LOGO_SITE_SPIP||?{
 
 	[(#LOGO_SITE_SPIP
@@ -13,9 +13,9 @@
 
 	,
 
-	#NOM_SITE_SPIP
+	<span id="nom_site_spip">#NOM_SITE_SPIP</span>
 })]
-</a></div>
+</a>
 
 
 #FORMULAIRE_RECHERCHE
