@@ -904,14 +904,13 @@ function  afficher_rotateurs($album, $document, $type, $id_article, $id_document
 
 function bouton_tourner_document($id_article, $id, $album, $rot, $type)
 {
-	return generer_action_auteur('tourner', $id, generer_url_ecrire($GLOBALS['exec'], ("id_$type=$id_article&show_docs=$id"), true) . "#$album") .
+	return redirige_action_auteur('tourner', $id, $GLOBALS['exec'], "id_$type=$id_article&show_docs=$id#$album") .
 		"&amp;var_rot=$rot";
 }
 
 function bouton_supprime_document_et_vignette($id_article, $type, $id_v, $album, $id_document=0)
 {
-
-	return generer_action_auteur('supprimer', "document-$id_v", generer_url_ecrire($GLOBALS['exec'], ("id_$type=$id_article"), true) . "#$album");
+	return redirige_action_auteur('supprimer', "document-$id_v", $GLOBALS['exec'], "id_$type=$id_article#$album");
 
 
 }

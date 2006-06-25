@@ -300,8 +300,7 @@ function appliquer_modifs_config() {
 	}
 
 	if ($purger_skel)
-		redirige_par_entete(generer_action_auteur('purger', 'squelettes',
-			_DIR_RESTREINT_ABS . self(), true));
+		redirige_par_entete(generer_action_auteur('purger', 'squelettes', _DIR_RESTREINT_ABS . self(), true));
 
 }
 

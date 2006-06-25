@@ -110,7 +110,7 @@ function afficher_syndic_articles($titre_table, $requete, $id = 0) {
 	$col = (($connect_statut == '0minirezo') ? 3 :  2) + ($id==0);
 	$tmp_var = substr(md5(join(' ',$requete)), 0, 4);
 	$deb_aff = intval(_request('t_' .$tmp_var));
-	$redirect = generer_url_ecrire($GLOBALS['exec'], ('t_' .$tmp_var . '=' . $deb_aff) . (!$id ? '' : "&id_syndic=$id"), true);
+	$redirect = ('t_' .$tmp_var . '=' . $deb_aff) . (!$id ? '' : "&id_syndic=$id");
 	if (!$requete['FROM']) $requete['FROM']= 'spip_syndic_articles';
 
 	if (!$id) {
@@ -208,11 +208,11 @@ function afficher_syndic_articles_boucle($row, &$my_sites, $bof, $redirect)
 				
 	if ($connect_statut == '0minirezo'){
 		if ($statut == "publie"){
-		  $s =  "[<a href='". generer_action_auteur("instituer", "syndic_article-$id_syndic_article-refuse", $redirect) . "'><font color='black'>"._T('info_bloquer_lien')."</font></a>]";
+			$s =  "[<a href='". redirige_action_auteur("instituer", "syndic_article-$id_syndic_article-refuse", $GLOBALS['exec'], $redirect) . "'><font color='black'>"._T('info_bloquer_lien')."</font></a>]";
 		
 		}
 		else if ($statut == "refuse"){
-			$s =  "[<a href='". generer_action_auteur("instituer", "syndic_article-$id_syndic_article-publie", $redirect) . "'>"._T('info_retablir_lien')."</a>]";
+			$s =  "[<a href='". redirige_action_auteur("instituer", "syndic_article-$id_syndic_article-publie", $GLOBALS['exec'], $redirect) . "'>"._T('info_retablir_lien')."</a>]";
 		}
 		else if ($statut == "off"
 		AND $my_sites[$id_syndic]['miroir'] == 'oui') {
@@ -220,7 +220,7 @@ function afficher_syndic_articles_boucle($row, &$my_sites, $bof, $redirect)
 		}
 		else /* 'dispo' ou 'off' (dans le cas ancien site 'miroir') */
 		{
-			$s = "[<a href='". generer_action_auteur("instituer", "syndic_article-$id_syndic_article-publie", $redirect) . "'>"._T('info_valider_lien')."</a>]";
+			$s = "[<a href='". redirige_action_auteur("instituer", "syndic_article-$id_syndic_article-publie", $GLOBALS['exec'], $redirect) . "'>"._T('info_valider_lien')."</a>]";
 		}
 		$vals[] = $s;
 	}

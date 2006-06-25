@@ -722,7 +722,7 @@ function url_de_base() {
 function generer_url_ecrire($script, $args="", $no_entities=false, $rel=false) {
 	if (!$rel)
 		$rel = url_de_base() . _DIR_RESTREINT_ABS;
-	else
+	else if (!is_string($rel))
 		$rel = _DIR_RESTREINT ? _DIR_RESTREINT : './';
 
 	if ($script AND $script<>'accueil') 
