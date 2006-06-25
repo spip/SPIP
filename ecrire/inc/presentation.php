@@ -421,7 +421,7 @@ function afficher_liste($largeurs, $table, $styles = '') {
 			$res .= "\n</tr>";
 		}
 	} else {
-	  	$res = "\n<ul style='text-align: $spip_lang_left;'>";
+	  	$res = "\n<ul style='text-align: $spip_lang_left; background-color: white;'>";
 		while (list(, $t) = each($table)) {
 			$res .= "<li>";
 			reset($largeurs);
