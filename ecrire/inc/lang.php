@@ -381,13 +381,11 @@ function verifier_lang_url() {
 	if (isset($_GET['lang']))
 		$lang_demandee = $_GET['lang'];
 
-	// Verifier que la langue demandee existe
-	lang_select($lang_demandee);
-
-	// Renvoyer si besoin
-	if ($spip_lang != $lang_demandee)
-	{
-		$destination = parametre_url(self(),'lang', $spip_lang, '&');
+	// Renvoyer si besoin (et si la langue demandee existe)
+	if ($spip_lang != $lang_demandee
+	AND changer_langue($lang_demandee)
+	AND $lang_demandee != $_GET['lang']) {
+		$destination = parametre_url(self(),'lang', $lang_demandee, '&');
 		if (isset($GLOBALS['var_mode']))
 			$destination = parametre_url($destination, 'var_mode', $GLOBALS['var_mode'], '&');
 		redirige_par_entete($destination);
