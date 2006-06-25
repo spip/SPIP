@@ -20,7 +20,7 @@ function action_iconifier_dist()
 		include_spip('inc/minipres');
 		minipres(_T('info_acces_interdit'));
 	}
-	$arg = urldecode($arg);
+	$arg = rawurldecode($arg);
 	if (!preg_match(',^unlink\s,',$arg))
 		action_spip_image_ajouter_dist();
 	else	action_spip_image_effacer_dist();
@@ -29,7 +29,7 @@ function action_iconifier_dist()
 function action_spip_image_effacer_dist() {
 
 	global $arg;
-	$arg = preg_replace(',^unlink\s*,','',urldecode($arg));
+	$arg = preg_replace(',^unlink\s*,','',rawurldecode($arg));
 	if (!strstr($arg, ".."))
 		@unlink(_DIR_LOGOS . $arg);
 }

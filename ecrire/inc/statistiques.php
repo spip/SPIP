@@ -133,7 +133,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 			// supprimer l'eventuelle entite finale mal coupee
 			$keywords = preg_replace('/&#?[a-z0-9]*$/', '', $keywords);
 		}
-		$buffer["keywords"] = trim(entites_html(urldecode(stripslashes($keywords))));
+		$buffer["keywords"] = trim(entites_html(rawurldecode(stripslashes($keywords))));
 	}
 
 	return $buffer;
@@ -177,7 +177,7 @@ function aff_referers ($result, $limit, $plus) {
 			}
 
 			if ($tmp)
-				$lesreferers[$numero][] = "<a href='".quote_amp($referer)."'>".quote_amp(urldecode($tmp))."</a>" . (($visites > 1)?" ($visites)":"");
+				$lesreferers[$numero][] = "<a href='".quote_amp($referer)."'>".quote_amp(rawurldecode($tmp))."</a>" . (($visites > 1)?" ($visites)":"");
 			else
 				$lesliensracine[$numero] += $visites;
 			$lesdomaines[$numero] = $buff["hostname"];

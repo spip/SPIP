@@ -28,7 +28,7 @@ function balise_URL_LOGOUT_dyn($cible) {
 		$cible = self();
 
 	return generer_url_public('spip_cookie',
-		"logout_public=".urlencode($login)."&amp;url=" . urlencode($cible)
+		"logout_public=".rawurlencode($login)."&amp;url=" . rawurlencode($cible)
 	);
 }
 ?>

@@ -108,7 +108,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 		(parametre_url(self(), 'var_mode', 'debug', '&')
 			.'&var_mode_affiche=validation') :
 		('http://validator.w3.org/check?uri='
-		. urlencode("http://" . $_SERVER['HTTP_HOST'] . nettoyer_uri())));
+		. rawurlencode("http://" . $_SERVER['HTTP_HOST'] . nettoyer_uri())));
 
 	// hack - ne pas avoir la rubrique si un autre bouton est deja present
 	if ($id_article OR $id_breve) unset ($id_rubrique);
