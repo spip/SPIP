@@ -993,7 +993,7 @@ function spip_initialisation() {
 
 	// Compatibilite avec serveurs ne fournissant pas $REQUEST_URI
 	if (!$GLOBALS['REQUEST_URI']) {
-		$GLOBALS['REQUEST_URI'] = $PHP_SELF;
+		$GLOBALS['REQUEST_URI'] = $_SERVER['PHP_SELF'];
 		if ($_SERVER['QUERY_STRING'] AND !strpos($_SERVER['REQUEST_URI'], '?'))
 			$GLOBALS['REQUEST_URI'] .= '?'.$_SERVER['QUERY_STRING'];
 	}
