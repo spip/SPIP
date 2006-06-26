@@ -958,7 +958,7 @@ Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf
 // U
 'utf8_convert_attendez' => 'Warten sie einen Augenblick und laden sie diese Seite erneut.',
 'utf8_convert_avertissement' => 'Sie werden ihre Datenbank (Artikel, Meldungen, etc.) vom Zeichensatz <b>@orig@</b> nach <b>@charset@</b> zu konvertieren.',
-'utf8_convert_backup' => 'Vergessen sie nicht, zun&auml;chst eine Sicherung ihrer Website anzulegen. Sie sollten ebenfalls &uuml;berpr&uuml;fen, ob ihre Skeltte und Sprachdateien zum Zeichensatz @charset@ kompatibel sind. Anderenfalls wird die Versionskontrolle, sollte sie aktiviert sein, nicht mehr richtig funktionieren.',
+'utf8_convert_backup' => 'Vergessen sie nicht, zun&auml;chst eine Sicherung ihrer Website anzulegen. Sie sollten ebenfalls &uuml;berpr&uuml;fen, ob ihre Skeltte und Sprachdateien zum Zeichensatz @charset@ kompatibel sind.',
 'utf8_convert_erreur_deja' => 'Ihre website verwendet bereits den zeichensatz @charset@. Die Konvertierung ist &uuml;berfl&uuml;ssig.',
 'utf8_convert_erreur_orig' => 'Fehler: Der Zeichensatz @charset@ wird nicht unterst&uuml;tzt.',
 'utf8_convert_termine' => 'Fertig!',

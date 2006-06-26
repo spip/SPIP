@@ -1094,7 +1094,7 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 // U
 'utf8_convert_attendez' => 'Attendez quelques instants et rechargez cette page.',
 'utf8_convert_avertissement' => 'Vous vous appr&ecirc;tez &agrave; convertir le contenu de votre base de donn&eacute;es (articles, br&egrave;ves, etc) du jeu de caract&egrave;res <b>@orig@</b> vers le jeu de caract&egrave;res <b>@charset@</b>.',
-'utf8_convert_backup' => 'N\'oubliez pas de faire auparavant une sauvegarde compl&egrave;te de votre site. Vous devrez aussi v&eacute;rifier que vos squelettes et fichiers de langue sont compatibles @charset@. D\'autre part le suivi des r&eacute;visions, s\'il est activ&eacute;, sera endommag&eacute;.',
+'utf8_convert_backup' => 'N\'oubliez pas de faire auparavant une sauvegarde compl&egrave;te de votre site. Vous devrez aussi v&eacute;rifier que vos squelettes et fichiers de langue sont compatibles @charset@.',
 'utf8_convert_erreur_deja' => 'Votre site est d&eacute;j&agrave; en @charset@, inutile de le convertir...',
 'utf8_convert_erreur_orig' => 'Erreur&nbsp;: le jeu de caract&egrave;res @charset@ n\'est pas support&eacute;.',
 'utf8_convert_termine' => 'C\'est termin&eacute;&nbsp;!',

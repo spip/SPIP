@@ -969,7 +969,7 @@ t&iacute;tulos y las descripciones de los art&iacute;culos. <br>- Un segundo m&e
 // U
 'utf8_convert_attendez' => 'Espera unos instantes y vuelve a cargar esta p&aacute;gina.',
 'utf8_convert_avertissement' => 'Te aprontas a convertir el contenido de tu base de datos (art&iacute;culos, breves, etc) del juego de caracteres <b>@orig@</b> hacia el juego de caracteres <b>@charset@</b>.',
-'utf8_convert_backup' => 'No te olvides de hacer primero un respaldo completo de tu sitio Tambi&eacute;n conviene verificar que tus esqueletos y archivos de idioma son compatibles @charset@. Por otro lado el seguimiento de revisiones, su est&aacute; activado, se ver&aacute; da&ntilde;ado.',
+'utf8_convert_backup' => 'No te olvides de hacer primero un respaldo completo de tu sitio Tambi&eacute;n conviene verificar que tus esqueletos y archivos de idioma son compatibles @charset@.',
 'utf8_convert_erreur_deja' => 'Tu sitio ya est&aacute; en @charset@, in&uacute;til convertirlo...',
 'utf8_convert_erreur_orig' => 'Error: el juego de caracteres no est&aacute; soportado.',
 'utf8_convert_termine' => '&iexcl;Se termin&oacute;!',

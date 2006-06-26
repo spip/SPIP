@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_recalculer' => 'D&euml;s S&auml;it nei berechnen',
 'alerte_maj_impossible' => '<b>Alarm&nbsp;!</b> Den Update vun der MySQL-Datekank op d\'Versioun @version@ ass onm&eacute;iglech, vill&auml;icht w&eacute;int engem Problem mat den &Auml;nnerungs-Rechter vun der Datebank. Kontakt&eacute;iert weg &auml;ren Provider.',
 'analyse_xml' => 'XML-Analyse',
+'antispam_champ_vide' => 'Loosst d&euml;st Feld eidel:',
 'avis_archive_incorrect' => 'de Backup-Fichier ass kee SPIP-Fichier',
 'avis_archive_invalide' => 'de Backup-Fichier ass ong&uuml;lteg',
 'avis_attention' => 'OPGEPASST!',
