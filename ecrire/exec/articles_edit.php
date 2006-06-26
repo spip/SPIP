@@ -287,8 +287,25 @@ function exec_articles_edit_dist()
 	if (!$row) die ("<h3>"._T('info_acces_interdit')."</h3>");
 
 	$id_article = $row['id_article'];
+
+	// si une ancienne revision est demandee, la charger
+	// en lieu et place de l'actuelle ; attention les champs
+	// qui etaient vides ne sont pas vide's. Ca permet de conserver
+	// des complements ajoutes "orthogonalement", et ca fait un code
+	// plus generique.
+	if ($id_version = intval(_request('id_version'))) {
+		include_spip('inc/revisions');
+		if ($textes = recuperer_version($id_article, $id_version)) {
+			foreach ($textes as $champ => $contenu)
+				$row[$champ] = $contenu;
+		}
+	}
+
+
 	$id_rubrique = $row['id_rubrique'];
 	$titre = $row['titre'];
+
+	if ($id_version) $titre.= ' ('._T('version')." $id_version)";
 
 	debut_page(_T('titre_page_articles_edit', array('titre' => $titre)),
 		   "documents", "articles", "hauteurTextarea();", 
