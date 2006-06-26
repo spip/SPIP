@@ -40,8 +40,9 @@ function public_stats_dist() {
 	// Analyse du referer
 	$log_referer = '';
 	if (isset($_SERVER['HTTP_REFERER'])) {
-		$url_site_spip = preg_replace(',^((https?|ftp)://)?(www\.)?,i', '',
-			$GLOBALS['meta']['adresse_site']);
+		$url_site_spip = preg_replace(',/$,', '',
+			preg_replace(',^(https?://)?(www\.)?,i', '',
+			url_de_base()));
 		if (!(($url_site_spip<>'')
 		AND strpos('-'.strtolower($_SERVER['HTTP_REFERER']), strtolower($url_site_spip))
 		AND !isset($_GET['var_recherche']))) {
