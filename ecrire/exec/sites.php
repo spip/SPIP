@@ -45,7 +45,6 @@ function exec_sites_dist()
   $old_syndic,
   $oubli,
   $redirect,
-  $redirect_ok,
   $reload,
   $resume,
   $spip_display,
@@ -58,7 +57,7 @@ function exec_sites_dist()
 
   $id_rubrique = intval($id_parent); // pas toujours present, mais tant pis.
   $id_syndic = intval($id_syndic);
-
+  $redirect_args = '';
 //
 // Creation d'un site
 //
@@ -110,8 +109,7 @@ if ($analyser_site == 'oui' AND $flag_editable) {
 		$syndication = $v[syndic] ? 'oui' : 'non';
 		$result = spip_query("UPDATE spip_syndic SET nom_site=" . spip_abstract_quote($nom_site) . ", url_site=" . spip_abstract_quote($url) . ", url_syndic=" . spip_abstract_quote($url_syndic) . ", descriptif=" . spip_abstract_quote($descriptif) . ", syndication='$syndication', statut='$statut' WHERE id_syndic=$id_syndic");
 		if ($syndication == 'oui') syndic_a_jour($id_syndic);
-		$redirect = generer_url_ecrire('sites',("id_syndic=$id_syndic". ($redirect ?  "&redirect=$redirect" : "")), true);
-		$redirect_ok = 'oui';
+		$redirect_args = "id_syndic=$id_syndic";
 	}
 }
 
@@ -168,8 +166,8 @@ if (strval($nom_site)!='' AND $modifier_site == 'oui' AND $flag_editable) {
 			marquer_indexer('syndic', $id_syndic);
 		}
 	}
-	$redirect = generer_url_ecrire('sites',("id_syndic=$id_syndic". ($redirect ?  "&redirect=$redirect" : "") . ($reload ? "&reload=$reload" : '')), true);
-	$redirect_ok = 'oui';
+
+	$redirect_args = "id_syndic=$id_syndic" .($reload ? "&reload=$reload" : '');
  }
 
 
@@ -180,8 +178,8 @@ if ($jour AND $flag_administrable) {
 	calculer_rubriques();
 }
 
-if ($redirect AND $redirect_ok == 'oui') {
-	redirige_par_entete($redirect);
+if ($redirect AND $redirect_args) {
+	redirige_par_entete(generer_url_ecrire('sites', $redirect_args . "&redirect=$redirect", true));
 }
 
 // Appliquer le choix resume/fulltexte (necessite un reload)
@@ -526,18 +524,14 @@ fin_cadre_relief();
 // Forums
 //
 
-echo "<br><br>\n";
+ echo "<br /><br />\n<div align='center'>";
 
- $forum_retour = generer_url_ecrire("sites","id_syndic=$id_syndic", '&');
+ icone (_T('icone_poster_message'), generer_url_ecrire('forum_envoi',"id_syndic=$id_syndic&statut=prive&titre_message=$nom_site&url=".generer_url_retour("sites","id_syndic=$id_syndic")), "forum-interne-24.gif", "creer.gif");
 
-echo "<div align='center'>";
- icone (_T('icone_poster_message'), generer_url_ecrire('forum_envoi',"id_syndic=$id_syndic&statut=prive&adresse_retour=".rawurlencode($forum_retour)."&titre_message=$nom_site"), "forum-interne-24.gif", "creer.gif");
-echo "</div>";
-
-echo "<p align='left'>\n";
+ echo "</div><p align='left'>\n";
 
 $result_forum = spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_syndic=$id_syndic AND id_parent=0 ORDER BY date_heure DESC LIMIT 20");
-afficher_forum($result_forum, $forum_retour);
+afficher_forum($result_forum, "sites","id_syndic=$id_syndic");
 
 
 fin_page();
