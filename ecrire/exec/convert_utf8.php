@@ -126,6 +126,8 @@ function exec_convert_utf8_dist() {
 	// commencer (ou continuer apres un timeout et reload)
 
 	install_debut_html($action);
+	
+	echo "<p>" . _T('utf8_convert_timeout') . "<hr />\n";
 
 	if (!spip_get_lock('conversion_charset'))
 		die(_T('utf8_convert_attendez'));
