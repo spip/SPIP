@@ -216,7 +216,7 @@ fin_page();
 
 function requete_auteurs($tri, $visiteurs)
 {
-  global $connect_statut, $spip_lang;
+  global $connect_statut, $spip_lang, $connect_id_auteur;
 
 //
 // Construire la requete
@@ -236,6 +236,7 @@ if ($connect_statut == '0minirezo') {
 	$sql_visible = "(
 		aut.statut = '0minirezo'
 		OR art.statut IN ('prop', 'publie')
+		OR aut.id_auteur=$connect_id_auteur
 	)";
 }
 
