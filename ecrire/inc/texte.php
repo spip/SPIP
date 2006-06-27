@@ -571,8 +571,8 @@ function calculer_url ($lien, $texte='', $pour='url') {
 		AND is_string($tableau_raccourcis[$f]))
 			$f = $tableau_raccourcis[$f];
 		$f=(($pour == 'url') ? 'generer' : 'calculer') . '_url_' . $f;
+		charger_generer_url();
 		if (function_exists($f)) {
-			charger_generer_url();
 			if ($pour == 'url') return $f($match[2]) . $ancre;
 			$res = $f($match[2], $texte, $ancre);
 			return ($pour == 'titre') ? $res[2] : $res;
