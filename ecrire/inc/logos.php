@@ -342,16 +342,7 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 			#}
 			#else
 			{
-				// Recuperer l'image d'origine 
-				if ($format == "jpg") { 
-					$srcImage = @ImageCreateFromJPEG($image);
-				}
-				else if ($format == "gif"){ 
-					$srcImage = @ImageCreateFromGIF($image); 				
-				}
-				else if ($format == "png"){ 
-					$srcImage = @ImageCreateFromPNG($image); 
-				} 
+				$srcImage = recupere_image_originale($image, $format);
 				if (!$srcImage) { 
 					spip_log("echec gd1/gd2"); 
 					return; 
@@ -419,6 +410,18 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 	return $retour;
 }
 
+function recupere_image_originale($image, $format)
+{
+	if ($format == "jpg") { 
+		return function_exists('ImageCreateFromJPEG') ? @ImageCreateFromJPEG($image) : '';
+	}
+	else if ($format == "gif"){ 
+		return function_exists('ImageCreateFromGIF') ? @ImageCreateFromGIF($image) : '';
+	}
+	else if ($format == "png"){ 
+		return function_exists('ImageCreateFromPNG') ? @ImageCreateFromPNG($image) : '' ;
+	} 
+}
 
 
 //
