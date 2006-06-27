@@ -127,7 +127,7 @@ function exec_naviguer_dist()
 /// Mots-cles
 	    if ($GLOBALS['meta']["articles_mots"] != 'non' AND $id_rubrique > 0) {
 		echo "\n<p>";
-		formulaire_mots('rubriques', $id_rubrique,  $nouv_mot, $supp_mot, $cherche_mot, $flag_editable, generer_url_ecrire("naviguer","id_rubrique=$id_rubrique&id_parent=$id_parent"));
+		formulaire_mots('rubriques', $id_rubrique,  $nouv_mot, $supp_mot, $cherche_mot, $flag_editable);
 	    }
 
 
