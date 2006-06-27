@@ -18,6 +18,17 @@ include_spip('inc/indexation'); // pour la fonction primary_index_table
 include_spip('inc/serialbase');
 include_spip('inc/auxbase');
 
+// NB: Ce fichier peut ajouter des tables (old-style)
+// donc il faut l'inclure "en globals"
+if ($f = include_spip('mes_fonctions', false)) {
+	global $dossier_squelettes;
+	@include_once ($f); 
+}
+if (@is_readable(_DIR_SESSIONS."charger_plugins_fonctions.php")){
+	// chargement optimise precompile
+	include_once(_DIR_SESSIONS."charger_plugins_fonctions.php");
+}
+
 global $IMPORT_tables_noerase;
 $IMPORT_tables_noerase[]='spip_ajax_fonc';
 $IMPORT_tables_noerase[]='spip_meta';
