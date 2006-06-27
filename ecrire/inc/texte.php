@@ -566,7 +566,7 @@ function calculer_url ($lien, $texte='', $pour='url') {
 	global $tableau_raccourcis;
 	if (preg_match(',^\s*(\w*?)\s*(\d+)(#[^\s]*)?\s*$,', $lien, $match)) {
 		$ancre = isset($match[3]) ? $match[3] :'';
-		$f =  $match[1];
+		if (!$f =  $match[1]) $f='article';
 		if (isset($tableau_raccourcis[$f])
 		AND is_string($tableau_raccourcis[$f]))
 			$f = $tableau_raccourcis[$f];
