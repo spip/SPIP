@@ -226,7 +226,7 @@ function critere_par_dist($idb, &$boucles, $crit) {
 }
 
 function critere_parinverse($idb, &$boucles, $crit, $sens) {
-	global  $exceptions_des_jointures;
+	global $table_des_tables, $tables_des_serveurs_sql,  $exceptions_des_jointures;
 	$boucle = &$boucles[$idb];
 	if ($crit->not) $sens = $sens ? "" : " . ' DESC'";
 
@@ -274,12 +274,18 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 		  $order = "'alea'";
 		}
 	// par date_thread
+	// (date la plus recente d'un message dans un fil de discussion)
 		else if ($par == 'date_thread') {
-			//date_thread est la date la plus recente d'un message dans un fil de discussion
-			$boucle->select[] = "MAX(".$boucle->id_table.".".
-				$GLOBALS['table_date'][$boucle->type_requete]
+			if ($boucle->type_requete == 'forums') {
+			  $t = 'forum';
+			} else {
+			  $t = critere_par_jointure($boucle, array('spip_forum','id_thread'));
+			  $t = substr($t, 1, strpos($t,'.')-1);
+			}
+			$boucle->select[] = "MAX($t" . ".".
+				$GLOBALS['table_date']['forums']
 				.") AS date_thread";
-			$boucle->group[] = $boucle->id_table.".id_thread";
+			$boucle->group[] = $t . ".id_thread";
 			$order = "'date_thread'";
 			$boucle->plat = true;
 		}
@@ -294,7 +300,6 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 		}
 		// par champ. Verifier qu'ils sont presents.
 		else {
-  global $table_des_tables, $tables_des_serveurs_sql;
 		  $r = $boucle->type_requete;
 		  $s = $boucles[$idb]->sql_serveur;
 		  if (!$s) $s = 'localhost';
