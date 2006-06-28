@@ -72,7 +72,7 @@
 			<B_documents_portfolio>
 			<div id="documents_portfolio">
 				<h2><:info_portfolio:></h2>
-				<BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {mode=document}{extension==(png|jpg|gif)$} {doublons}>
+				<BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {mode=document}{extension==(png|jpg|gif)$} {par date} {doublons}>
 				[<a href="[(#URL_ARTICLE|parametre_url{id_document,#ID_DOCUMENT})]#documents_portfolio"[ title="(#TITRE|couper{80}|texte_backend)"]>(#LOGO_DOCUMENT||image_reduire{0,60}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})</a>]
 				</BOUCLE_documents_portfolio>
 			</div>
