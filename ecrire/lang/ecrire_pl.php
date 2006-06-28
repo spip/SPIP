@@ -98,8 +98,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_publication_immediate' => 'Natychmiastowa publikacja wiadomo&#347;ci
  (posty b&#281;d&#261; si&#281; ukazywa&#263; w momencie ich wys&#322;ania, administratorzy mog&#261;
  je p&oacute;&#378;niej usun&#261;&#263;).',
-'bouton_radio_sauvegarde_compressee' => 'zapisz w postaci skompresowanej w <b>ecrire/data/dump.xml.gz</b>',
-'bouton_radio_sauvegarde_non_compressee' => 'Zapisz w postaci nieskompresowanej w <b>ecrire/data/dump.xml</b>',
+'bouton_radio_sauvegarde_compressee' => 'zapisz w postaci skompresowanej w @fichier@',
+'bouton_radio_sauvegarde_non_compressee' => '<MODIF>Zapisz w postaci nieskompresowanej w @fichier@',
 'bouton_radio_supprimer_petition' => 'Usu&#324; og&#322;oszenia',
 'bouton_radio_syndication' => 'Syndykacja:',
 'bouton_redirection' => 'PRZEKIERUJ',
@@ -488,7 +488,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_procedez_par_etape' => 'etap za etapem',
 'info_procedure_maj_version' => 'powinna zosta&#263; procedura uaktualniania w celu dostosowania
  bazy danych do nowej wersji SPIP.',
-'info_ps' => 'P.S.',
+'info_ps' => '<MODIF>P.S.',
 'info_publier' => 'opublikuj',
 'info_publies' => 'Twoje artyku&#322;y opublikowane online',
 'info_question_accepter_visiteurs' => 'Je&#347;li szkielety Twojego serwisu przewiduj&#261; dla odwiedzaj&#261;cych zapisy bez dost&#281;pu do panelu administracyjnego, w&#322;&#261;cz poni&#380;sz&#261; opcj&#281;:',
@@ -546,7 +546,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_sauvegarde_petitions' => 'Zapisz og&#322;oszenia',
 'info_sauvegarde_refers' => 'Zapisz odno&#347;niki',
 'info_sauvegarde_reussi_01' => 'Backup zako&#324;czy&#322; si&#281; pomy&#347;lnie.',
-'info_sauvegarde_reussi_02' => 'Baza danych zosta&#322;a zapisana w <b>ecrire/data/@archive@</b>. Mo&#380;esz',
+'info_sauvegarde_reussi_02' => '<MODIF>Baza danych zosta&#322;a zapisana w @archive@. Mo&#380;esz',
 'info_sauvegarde_reussi_03' => 'powr&oacute;t do zarz&#261;dzania',
 'info_sauvegarde_reussi_04' => 'Twojej strony.',
 'info_sauvegarde_rubriques' => 'Kopia bezpiecze&#324;stwa dzia&#322;&oacute;w',
@@ -784,8 +784,8 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 
 // T
 'taille_cache_image' => 'Obrazki maj&#261; automatycznie zmieniany rozmiar przez SPIP (miniaturki dokument&oacute;w, tytu&#322;y przedstawiane w postaci graficznej, funkcje matematyczne w formacie TeX...) zajmuj&#261; w katalogu @dir@ obszar @taille@.',
-'taille_cache_infinie' => 'Serwis nie ma w&#322;&#261;czonego ograniczenia dla wielko&#347;ci katalogu <code>CACHE/</code>.',
-'taille_cache_maxi' => 'SPIP pr&oacute;buje ograniczy&#263; wielko&#347;&#263; katalogu   <code>CACHE/</code> tej strony do oko&#322;o <b>@octets@</b> danych.',
+'taille_cache_infinie' => '<MODIF>Serwis nie ma w&#322;&#261;czonego ograniczenia dla wielko&#347;ci katalogu <code>CACHE/</code>.',
+'taille_cache_maxi' => '<MODIF>SPIP pr&oacute;buje ograniczy&#263; wielko&#347;&#263; katalogu   <code>CACHE/</code> tej strony do oko&#322;o <b>@octets@</b> danych.',
 'taille_cache_octets' => 'W tym momencie wielko&#347;&#263; cache to: @octets@.',
 'taille_cache_vide' => 'Cache jest pusty.',
 'taille_repertoire_cache' => 'Wielko&#347;&#263; katalogu cache',
@@ -794,7 +794,7 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 'texte_admin_effacer_01' => 'Ta komenda usuwa <i>ca&#322;&#261;</i> zawarto&#347;&#263; bazy danych,
 w&#322;&#261;cznie z <i>wszystkimi</i> parametrami dost&#281;pu dla redaktor&oacute;w i administartor&oacute;w. Po jej zastosowaniu powiniene&#347;
 zreinstalowa&#263; SPIP w celu utworzenia nowej bazy danych i dost&#281;pu pierwszego administratora.',
-'texte_admin_tech_01' => 'Ta opcja pozwala Ci zapisa&#263; zawarto&#347;&#263; bazy danych w pliku, kt&oacute;ry zostanie zachowany w katalogu <i>ecrire/data/</i>.Pami&#281;taj tak&#380;e o skopiowaniu ca&#322;ego katalogu <i>IMG/</i>, kt&oacute;ry zawiera obrazki i dokumenty u&#380;ywane w artyku&#322;ach i dzia&#322;ach.',
+'texte_admin_tech_01' => '<MODIF>Ta opcja pozwala Ci zapisa&#263; zawarto&#347;&#263; bazy danych w pliku, kt&oacute;ry zostanie zachowany w katalogu @dossier@.Pami&#281;taj tak&#380;e o skopiowaniu ca&#322;ego katalogu <i>IMG/</i>, kt&oacute;ry zawiera obrazki i dokumenty u&#380;ywane w artyku&#322;ach i dzia&#322;ach.',
 'texte_admin_tech_02' => 'Uwaga: t&#261; kopi&#281; bezpiecze&#324;stwa b&#281;dzie mo&#380;na odtworzy&#263;
  TYLKO I WY&#321;&#260;CZNIE w serwisie opartym na tej samej wersji SPIP. Nie wolno  "opr&oacute;znia&#263; bazy danych" s&#261;dz&#261;c, &#380;e po zaktualizowaniu SPIP b&#281;dzie mo&#380;na odtworzy&#263; baz&#281; z backupu. Wi&#281;cej informacji w <a href="http://www.spip.net/fr_article1489.html">dokumentacji SPIP</a>.',
 'texte_admin_tech_03' => 'Mo&#380;esz wybra&#263; wykonanie kopii bezpiecze&#324;&#347;twa pod postaci&#261; skompresowan&#261;, w celu
@@ -852,8 +852,8 @@ multimedi&oacute;w, itd.) do artyku&#322;&oacute;w b&#261;d&#378; dzia&#322;&oac
 'texte_effacer_donnees_indexation' => 'Wyma&#380; dane pochodz&#261;ce z indeksowania',
 'texte_en_cours_validation' => 'Nast&#281;puj&#261;ce artyku&#322;y i newsy zosta&#322;y zatwierdzone do publikacji. Nie wahaj si&#281; wyrazi&#263; swoj&#261; opini&#281; na do&#322;&#261;czonych do nich forach.',
 'texte_enrichir_mise_a_jour' => 'Mo&#380;esz wzbogaci&#263; uk&#322;ad Twojego tekstu &laquo;&nbsp;skr&oacute;tami typograficznymi&nbsp;&raquo;.',
-'texte_fichier_authent' => '<b>Czy SPIP ma stworzy&#263; specjalne pliki <tt>.htpasswd</tt>
-  i <tt>.htpasswd-admin</tt> w katalogu <tt>ecrire/data/</tt> ?</b><p />
+'texte_fichier_authent' => '<MODIF><b>Czy SPIP ma stworzy&#263; specjalne pliki <tt>.htpasswd</tt>
+  i <tt>.htpasswd-admin</tt> w katalogu @dossier@ ?</b><p />
   Te pliki mog&#261; s&#322;u&#380;y&#263; jako ograniczenie dost&#281;pu dla autor&oacute;w
   i administrator&oacute;w do innych cz&#281;&#347;ci Twojego serwisu
   (np. zewn&#281;trznych statystyk).<p>
@@ -931,14 +931,14 @@ od&#347;wie&#380;y&#263; tylko jedn&#261; stron&#281;, zr&oacute;b to z obszaru 
   zachcowaj kopi&#281; wy&#347;wietlanego komunikatu, poniewa&#380; mo&#380;e on zawiera&#263; wskaz&oacute;wki w czym tkwi poroblem.
 <p>  Je&#347;li problem b&#281;dzie si&#281; pojawia&#322; cz&#281;sto skontaktuj si&#281; z administratorem Twojego serwera.',
 'texte_restaurer_base' => 'Odtw&oacute;rz zawarto&#347;&#263; kopii bezpiecze&#324;stwa bazy',
-'texte_restaurer_sauvegarde' => 'Ta opcja pozwala Ci odtworzy&#263; poprzedni&#261; kopi&#281; bezpiecze&#324;stwa
+'texte_restaurer_sauvegarde' => '<MODIF>Ta opcja pozwala Ci odtworzy&#263; poprzedni&#261; kopi&#281; bezpiecze&#324;stwa
   bazy danych. Aby m&oacute;c to uczyni&#263; plik - kopia bezpiecze&#324;stwa powienien by&#263;
-  umieszczony w katalogu <i>ecrire/data/</i>.
+  umieszczony w katalogu @dossier@.
   B&#261;d&#378; ostro&#380;ny korzystaj&#261;c z tej funkcji&nbsp;: <b> modyfikacje i ewentualne straty, s&#261;
   nieodwracalne.</b>',
 'texte_sauvegarde' => 'Backup zawarto&#347;ci bazy danych',
 'texte_sauvegarde_base' => 'Backup bazy danych',
-'texte_sauvegarde_compressee' => 'Backup zostanie zrobiony w nieskompresowanym pliku <b>ecrire/data/dump.xml</b>.',
+'texte_sauvegarde_compressee' => '<MODIF>Backup zostanie zrobiony w nieskompresowanym pliku @fichier@.',
 'texte_selection_langue_principale' => 'Mo&#380;esz poni&#380;ej wybra&#263; &laquo;&nbsp;g&#322;&oacute;wny j&#281;zyk&nbsp;&raquo; serwisu. Ten wyb&oacute;r nie zmusza Ci&#281; - na szcz&#281;&#347;cie&nbsp;! - do pisania artyku&#322;&oacute;w w wybranym j&#281;zyku, ale pozwala okre&#347;li&#263;&nbsp;:
  <ul><li> domy&#347;lny format dat na stronach publicznych&nbsp;;</li>
  <li> rodzaj kodowania tekstu, kt&oacute;ry ma u&#380;ywa&#263; SPIP&nbsp;;</li>
@@ -1075,7 +1075,7 @@ wyszukiwania w do&#322;&#261;czonej stronie.',
 // U
 'utf8_convert_attendez' => 'Poczekaj chwil&#281; i od&#347;wie&#380; stron&#281;.',
 'utf8_convert_avertissement' => 'Zamierzasz przekonwertowa&#263; zawarto&#347;&#263; Twojej bazy danych (artyku&#322;y, aktualno&#347;ci, etc.) z kodowania <b>@orig@</b> na kodowanie <b>@charset@</b>.',
-'utf8_convert_backup' => 'Nie zapomnij wykona&#263; wcze&#347;niej kopi&#281; bezpiecze&#324;stwa Twojej strony. Powiniene&#347; tak&#380;e zweryfikowa&#263; czy Twoje szkielety i pliki j&#281;zykowe s&#261; zgodne z @charset@. W innym wypadku przegl&#261;d zmian - je&#347;li jest aktywny - zostanie zniszczony.',
+'utf8_convert_backup' => '<MODIF>Nie zapomnij wykona&#263; wcze&#347;niej kopi&#281; bezpiecze&#324;stwa Twojej strony. Powiniene&#347; tak&#380;e zweryfikowa&#263; czy Twoje szkielety i pliki j&#281;zykowe s&#261; zgodne z @charset@. W innym wypadku przegl&#261;d zmian - je&#347;li jest aktywny - zostanie zniszczony.',
 'utf8_convert_erreur_deja' => 'Twoja strona ju&#380; jest w kodowaniu @charset@, nie ma potrzeby konwertowania...',
 'utf8_convert_erreur_orig' => 'B&#322;&#261;d&nbsp;: kodowanie @charset@ nie jest wspierane.',
 'utf8_convert_termine' => 'Zako&#324;czone&nbsp;!',
