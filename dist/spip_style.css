@@ -1,4 +1,4 @@
-/* SPIP-STYLE                                               version 1.9 */
+/* SPIP-STYLE                                              version 1.9  */
 /* Cette feuille contient les styles associes au code genere par SPIP.  */
 /* Ces styles sont indispensables et doivent necessairement etre        */
 /* definis pour le bon fonctionnement de votre squelette                */
@@ -27,6 +27,8 @@ h3.spip {
 p.spip {}
 p.spip_note {}
 
+blockquote.spip, div.spip_poesie, .spip_serif { font-family: "Bitstream Vera Serif", Georgia, Times, serif; }
+
 blockquote.spip { 
 	margin: 1em; 
 	padding-left: 1em;
@@ -36,11 +38,8 @@ blockquote.spip {
 div.spip_poesie { 
 	margin: 1em; 
 	padding-left: 1em; 
-	border-left: 1px solid;
-	font-family: Georgia, Garamond, Times, serif; }
+	border-left: 1px solid; }
 div.spip_poesie div { text-indent: -60px; margin-left: 60px; }
-
-.spip_serif { font-family: Georgia, Garamond, Times, serif; }
 
 .spip_code, .spip_cadre { font-family: monospace; font-style: normal; font-size: 1.1em; }
 .spip_cadre { width: 99%; border: 1px solid; }

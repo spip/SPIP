@@ -27,7 +27,7 @@ body {
 	background: #FFF;
 	margin: 1.5em;
 	text-align: center;
-	font-family: "Trebuchet MS", Tahoma, Arial, Helvetica, sans-serif;
+	font-family: "Bitstream Vera Sans", Verdana, Tahoma, Arial, Helvetica, sans-serif;
 	font-size: 1em;
 	color: #333;
 }
@@ -191,7 +191,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 
 .texte { color: #000; font-size: 0.96em; }
 
-q, blockquote { font-family: Georgia, Garamond, Times, serif; }
+q, blockquote { font-family: "Bitstream Vera Serif", Georgia, Times, serif; }
 
 .ps, .notes {
 	margin-top: 1.4em;
@@ -293,7 +293,6 @@ q, blockquote { font-family: Georgia, Garamond, Times, serif; }
 /* Styles des formulaires de Spip */
 .formulaire_spip {
 	text-align: left;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 0.77em;
 }
 
@@ -320,15 +319,13 @@ q, blockquote { font-family: Georgia, Garamond, Times, serif; }
 	font-family: inherit;
 	font-size: inherit; }
 
+.spip_bouton { text-align: right; }
 .spip_bouton input {
 	margin: 3px 0;
 	padding: 1px 2px;
 	border: 2px outset;
 	font-weight: bold;
 	float: right; }
-.spip_bouton {
-	text-align: right;
-}
 
 /* Reponse du formulaire */
 .reponse_formulaire { font-weight: bold; color: #F00; }

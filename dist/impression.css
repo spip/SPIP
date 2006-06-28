@@ -4,7 +4,7 @@
 
 /*  Correction des styles HTML par defaut
 ---------------------------------------------- */
-body { background: #FFF; margin: 15pt; text-align: left; font: 12pt "Trebuchet MS", Tahoma, Arial, Helvetica, sans-serif; color: #000; }
+body { background: #FFF; margin: 15pt; text-align: left; font: 12pt "Bitstream Vera Sans", Verdana, Tahoma, Arial, Helvetica, sans-serif; color: #000; }
 
 img, table { margin: 0; padding: 0; border: 0; }
 ul, ol, li { margin: 0; padding: 0; list-style: none; }
@@ -63,8 +63,7 @@ h3.spip { text-align: center; font-weight: bold; margin: 1.4em; font-size: 1.15e
 
 /*  Citations, tableaux, etc...
 ---------------------------------------------- */
-q, blockquote.spip, .spip_poesie { font-family: Georgia, Garamond, Times, serif; }
-.spip_code, .spip_cadre { font-family: monospace; }
+q, blockquote { font-family: "Bitstream Vera Serif", Georgia, Times, serif; }
 
 .lien, blockquote.spip, .spip_poesie, .spip_cadre, .liste-articles li .texte {
 	background: #FFF;
