@@ -4,7 +4,7 @@
 
 /*  Correction des styles HTML par defaut
 ---------------------------------------------- */
-body { background: #FFF; margin: 15pt; text-align: left; font: 12pt "Lucida Grande", "Lucida Sans Unicode", Verdana, sans-serif; color: #000; }
+body { background: #FFF; margin: 15pt; text-align: left; font: 12pt "Trebuchet MS", Tahoma, Arial, Helvetica, sans-serif; color: #000; }
 
 img, table { margin: 0; padding: 0; border: 0; }
 ul, ol, li { margin: 0; padding: 0; list-style: none; }
