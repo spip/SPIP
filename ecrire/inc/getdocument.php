@@ -558,6 +558,7 @@ function decoder_type_image($type, $strict = false) {
 
 //
 // Corrige l'extension du fichier dans quelques cas particuliers
+// (a passer dans ecrire/base/typedoc)
 //
 
 function corriger_extension($ext) {
