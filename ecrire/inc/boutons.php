@@ -181,7 +181,7 @@ function definir_barre_boutons() {
 			new Bouton("cache-24.gif", "onglet_vider_cache");
   	if ((@file_exists(_DIR_PLUGINS))&&(is_dir(_DIR_PLUGINS)))
 			$sousmenu['admin_plugin']=
-				new Bouton("plugin-24.png", "icone_admin_plugin");
+				new Bouton("plugin-24.gif", "icone_admin_plugin");
 	} else {
 		$sousmenu['admin_tech']=
 			new Bouton("base-24.gif", "icone_sauver_site");
