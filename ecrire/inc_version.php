@@ -338,11 +338,12 @@ OR _request('action') == 'test_dirs')) {
 
 //
 // Reglage de l'output buffering : si possible, generer une sortie
-// compressee pour economiser de la bande passante
+// compressee pour economiser de la bande passante ; sauf dans l'espace
+// prive car sinon ca rame a l'affichage (a revoir...)
 //
 
 // si un buffer est deja ouvert, stop
-if ($flag_ob AND strlen(ob_get_contents())==0 AND !headers_sent()) {
+if (_DIR_RESTREINT AND $flag_ob AND strlen(ob_get_contents())==0 AND !headers_sent()) {
 	@header("Vary: Cookie, Accept-Encoding");
 
 	if (
@@ -364,6 +365,8 @@ if ($flag_ob AND strlen(ob_get_contents())==0 AND !headers_sent()) {
 	)
 		ob_start('ob_gzhandler');
 }
+else
+	@header("Vary: Cookie");
 
 // Vanter notre art de la composition typographique
 
