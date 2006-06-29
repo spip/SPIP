@@ -248,7 +248,12 @@ function afficher_rubriques_filles($id_parent) {
 	global $enfant, $article;
 	global $spip_lang_left, $spip_lang_right, $spip_lang;
 	global $couleur_claire;
+	global $browser_name;
 	static $decal = 0;
+	if ($browser_name=="MSIE")
+		$wrapper = file_exists($w = _DIR_IMG_PACK ."wrapper.php");
+	else
+		$wrapper = false;
 
 	$decal = $decal + 1;
 	$droite = 500 - (10 * $decal);
@@ -264,6 +269,8 @@ function afficher_rubriques_filles($id_parent) {
 				$icone = "rubrique-24.gif";
 				$bgcolor = "";
 			}
+			if ($wrapper)
+				$icone = "wrapper.php?file=".urlencode($icone);
 			
 			echo "<div style='padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(" . _DIR_IMG_PACK . "$icone) $spip_lang_left center no-repeat;$bgcolor'>";
 			

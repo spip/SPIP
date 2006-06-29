@@ -102,8 +102,15 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 	//else $image = "rubrique-12.gif";
 	else $image = '';
 	
-	if (strlen($image) > 1) $image = " style='background-image:url(" . _DIR_IMG_PACK . $image .");'";
-
+	if (strlen($image) > 1) {
+		global $browser_name;
+		include_spip('inc/layer');
+		verif_butineur();
+		if ($browser_name=="MSIE" && file_exists($w = dirname(_DIR_IMG_PACK.$image)."/wrapper.php"))
+	  	$image = " style='background-image:url($w?file=".urlencode($image) .  ");'";
+		else
+			$image = " style='background-image:url(" . _DIR_IMG_PACK . $image .");'";
+	}
 
 	$arr_rub = extraire_article($id_rubrique);
 

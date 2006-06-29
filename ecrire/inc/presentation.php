@@ -1944,14 +1944,19 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = tr
 
 
 	if ($spip_display != 4) {
-		if (!$fonction) $fonction = "rien.gif";
+		//if (!$fonction) $fonction = "rien.gif";
 	
 		if ($spip_display != 1) {
 			$retour .= "<a href='$lien' class='cellule-h' $javascript>";
 			$retour .= "<table cellpadding='0' valign='middle'><tr>\n";
-			$retour .= "<td><a href='$lien' class='cellule-h'><div class='cell-i'>" .
-			  http_img_pack($fonction, "", http_style_background($fond, "center center no-repeat")) .
-			  "</div></a></td>\n" .
+			$retour .= "<td><a href='$lien' class='cellule-h'><div class='cell-i'>" ;
+			if ($fonction){
+			  $retour .= http_img_pack($fonction, "", http_style_background($fond, "center center no-repeat"));
+			}
+			else {
+				$retour .= http_img_pack($fond, "", "");
+			}
+			$retour .= "</div></a></td>\n" .
 			  "<td class='cellule-h-lien'><a href='$lien' class='cellule-h'>$texte</a></td>\n";
 			$retour .= "</tr></table>\n";
 			$retour .= "</a>\n";
@@ -2135,7 +2140,10 @@ function init_body($rubrique='asuivre', $sous_rubrique='asuivre', $onLoad='', $i
 
 		$sousmenu= $detail->sousmenu;
 		if($sousmenu) {
-			echo "<div class='$class' id='bandeau$page' style='position: absolute; $spip_lang_left: ".$decal."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
+			$offset = $decal;
+			$offset -= max(0,($offset+count($sousmenu)*80-($largeur-100)));
+			$offset = max($offset,0);
+			echo "<div class='$class' id='bandeau$page' style='position: absolute; $spip_lang_left: ".$offset."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
 		
 			foreach($sousmenu as $souspage => $sousdetail) {
 				if($souspage=='espacement') {

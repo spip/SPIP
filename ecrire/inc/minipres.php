@@ -166,7 +166,14 @@ function http_href($href, $clic, $title='', $style='', $class='', $evt='') {
 // attention le htmlentities et la traduction doivent etre appliques avant.
 
 function http_img_pack($img, $alt, $att, $title='') {
-	return "<img src='" . _DIR_IMG_PACK . $img
+	global $browser_name;
+	if (!strlen($browser_name)){
+		include_spip('inc/layer');
+	}
+	$f = _DIR_IMG_PACK.$img;
+	if ($browser_name=="MSIE" && file_exists($w = dirname($f)."/wrapper.php"))
+		$f = "$w?file=".urlencode($img);
+	return "<img src='" . $f
 	  . ("'\nalt=\"" .
 	     ($alt ? str_replace('"','',$alt) : ($title ? $title : ereg_replace('\..*$','',$img)))
 	     . '" ')
@@ -181,8 +188,15 @@ function http_href_img($href, $img, $att, $title='', $style='', $class='', $evt=
 
 function http_style_background($img, $att='')
 {
-  return " style='background: url(\"" . _DIR_IMG_PACK . $img .  '")' .
-    ($att ? (' ' . $att) : '') . ";'";
+	global $browser_name;
+	if (!strlen($browser_name)){
+		include_spip('inc/layer');
+	}
+	$f = _DIR_IMG_PACK.$img;
+	if ($browser_name=="MSIE" && file_exists($w = dirname($f)."/wrapper.php"))
+		$f = "$w?file=".urlencode($img);
+  return " style='background: url(\"$f\")" .
+	    ($att ? (' ' . $att) : '') . ";'";
 }
 
 // Pour les formulaires en methode POST,

@@ -92,6 +92,10 @@ function bouton_block_visible($nom_block){
 
 function produire_acceder_couche($couches, $nom, $icone) {
 	global $spip_lang_rtl;
+	global $browser_name;
+	$f = _DIR_IMG_PACK.$icone;
+	if ($browser_name=="MSIE" && file_exists($w = dirname($f)."/wrapper.php"))
+		$icone = "wrapper.php?file=".urlencode($icone);
 	return http_script("acceder_couche([" . join(',',$couches) . '], ' .
 			   $nom .
 			   ", '" .
