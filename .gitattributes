@@ -175,6 +175,7 @@ ecrire/img_pack/icones/defaut-dist.png -text
 ecrire/img_pack/icones/doc-dist.png -text
 ecrire/img_pack/icones/dvi-dist.png -text
 ecrire/img_pack/icones/eps-dist.png -text
+ecrire/img_pack/icones/flv-dist.png -text
 ecrire/img_pack/icones/gif-dist.png -text
 ecrire/img_pack/icones/gz-dist.png -text
 ecrire/img_pack/icones/html-dist.png -text
@@ -211,6 +212,7 @@ ecrire/img_pack/icones/rtf-dist.png -text
 ecrire/img_pack/icones/sdd-dist.png -text
 ecrire/img_pack/icones/sdw-dist.png -text
 ecrire/img_pack/icones/sit-dist.png -text
+ecrire/img_pack/icones/svg-dist.png -text
 ecrire/img_pack/icones/sxc-dist.png -text
 ecrire/img_pack/icones/sxi-dist.png -text
 ecrire/img_pack/icones/sxw-dist.png -text
