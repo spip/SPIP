@@ -183,7 +183,7 @@ function http_wrapper($img){
 				$wrapper_table[$d] = "$d/wrapper.php?file=";
 		}
 		if ($wrapper_table[$d])
-			$f = $wrapper_table[$d] . urlencode($img);
+			$f = $wrapper_table[$d] . urlencode(basename($img));
 	}
 	return $f;
 }
