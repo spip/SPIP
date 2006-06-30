@@ -16,8 +16,9 @@ rien=
 
 [Google]
 (q|as_q)=
-(www|ww)\.google\.(.*)
+(www|ww)\.(google|gogole)\.(.*)
 (web|www).toile.com
+www\.cegetel\.net
 
 [Voila]
 (kw|rdata)=
@@ -144,7 +145,7 @@ q=
 www\.francesurf\.net
 
 [n9uf]
-Keywords=
+(K|k)eywords=
 (www\.)?neuf\.fr
 
 [MozBot]
@@ -159,6 +160,7 @@ q=
 searchfor=
 kf\.mysearch\.myway\.com
 www\.mywebsearch\.com
+(.*)\.mysearch\.com
 
 [MonGenie]
 Keywords=
@@ -188,6 +190,21 @@ arianna\.libero\.it
 rien=
 (.*\.)?dmoz\.org
 
+[FoxRef]
+key=
+www\.foxref\.org
+
+[OneBigWorld]
+Keywords=
+fr\.onebigworld\.com
+
+[BlueWin]
+query=
+search\.bluewin\.ch
+
+[EO]
+q=
+www\.eo\.st
 
 #
 # Services de mail
