@@ -984,13 +984,19 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 	if ($GLOBALS['meta']["documents_$type"] != 'non' AND $flag_modif) {
 		/// Ajouter nouveau document/image
 
+		global $browser_name;
 		echo "<p>&nbsp;</p>";
-		echo "<div align='right'>";
-		echo "<table width='50%' cellpadding='0' cellspacing='0' border='0'><tr><td style='text-align: $spip_lang_left;'>";
+		if ($browser_name=="MSIE") // eviter le formulaire upload qui se promene sur la page a cause des position:relative
+			echo "<div >";
+		else 	 {
+			echo "<div align='right'>";
+			echo "<table width='50%' cellpadding='0' cellspacing='0' border='0'><tr><td style='text-align: $spip_lang_left;'>";
+		}
 		echo debut_cadre_relief("image-24.gif", false, "", _T('titre_joindre_document'));
 		echo afficher_upload($id_article, _T('info_telecharger_ordinateur'), '', 'document', $type);
 		echo fin_cadre_relief();
-		echo "</td></tr></table>";
+		if ($browser_name!=="MSIE") // eviter le formulaire upload qui se promene sur la page a cause des position:relative
+			echo "</td></tr></table>";
 		echo "</div>";
 	}
 }
