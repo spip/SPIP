@@ -14,7 +14,7 @@ hr.spip {}
 ul.spip { list-style: disc; }
 ol.spip { list-style: decimal; }
 ul.spip li, ol.spip li { list-style: inherit; }
-li.spip { margin-left: 0.8em; list-style-position: outside; }
+li.spip { margin: 0.3em 0 0.3em 0.8em; list-style-position: outside; }
 
 h3.spip {
 	text-align: center; 
