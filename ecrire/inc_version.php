@@ -189,39 +189,6 @@ $spip_pipeline = array(
 	'taches_generales_cron' => ''
 );
 
-$tableau_raccourcis = array(
-	'' => 'article',
-	'art' => 'article',
-	'rub' => 'rubrique',
-	'br' => 'breve',
-	'brève' => 'breve',
-	'aut' => 'auteur',
-	'doc' => 'document',
-	'im' => 'document',
-	'img' => 'document',
-	'image' => 'document',
-	// articles de reference sur www.spip.net
-	'spip' => array( 
-		1 => 1309,
-		10 => 1309,
-		103 => 1309,
-		104 => 1309,
-		105 => 1309,
-		12 => 1310,
-		121 => 1310,
-		13 => 1253,
-		14 => 1832,
-		15 => 1911,
-		16 => 1965,
-		17 => 2102,
-		171 => 2102,
-		172 => 2102,
-		18 => 2991,
-		181 => 2991,
-		182 => 3173,
-		183 => 3333,
-		19 => 3368)
-);
 
 # la matrice standard (fichiers definissant les fonctions a inclure)
 $spip_matrice = array ();
