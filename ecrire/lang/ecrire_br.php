@@ -1014,7 +1014,7 @@ Ar re-se a c\'hell beza&ntilde; listennet er pennad, pe e-kichen.<p />',
 // U
 'utf8_convert_attendez' => 'Gortozit un tammig, hag adkargit ar bajenn-ma&ntilde;',
 'utf8_convert_avertissement' => 'Emaoc\'h war-nes amdrei&ntilde; endalc\'had ho tiaz-titouro&ugrave; (pennado&ugrave;, berrskrido&ugrave;, h.a.), eus al lizherennaoueg <b>@orig@</b> d\'an hini <b>@charset@</b>.',
-'utf8_convert_backup' => 'N\'ankouait ket savetei&ntilde; ho lec\'hienn penn-da-benn en a-raok. Rankout a rafec\'h ivez gwiriekaat eo heglot ho frammo&ugrave; gant @charset@. Heulia&ntilde; ar che&ntilde;chamanto&ugrave;, ma vez enaouet, a vo mazaouet.',
+'utf8_convert_backup' => 'N\'ankouait ket savetei&ntilde; ho lec\'hienn penn-da-benn en a-raok. Rankout a rafec\'h ivez gwiriekaat eo heglot ho frammo&ugrave; gant @charset@.',
 'utf8_convert_erreur_deja' => 'Dija ema&ntilde; ho lec\'hienn e @charset@, n\'eus netra d\'ober...',
 'utf8_convert_erreur_orig' => 'Fazi&nbsp;: ne vez ket gouza&ntilde;vet al lizherennaoueg @charset@',
 'utf8_convert_termine' => 'Echu eo&nbsp;!',

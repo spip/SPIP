@@ -542,7 +542,7 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_supprimer_mot' => 'Suprimir esta palabra',
 'info_surtitre' => 'Antet&iacute;tulo',
 'info_syndication_integrale_1' => 'Tu sitio propone archivos de sindicaci&oacute;n (ver &laquo;<a href="@url@">@titre@</a>&raquo;).',
-'info_syndication_integrale_2' => '&iquest;Deseas transmitir &iacute;ntegramente los art&iacute;culos, o s&oacute;lo un resumen de unos cientos de caracteres?',
+'info_syndication_integrale_2' => '&iquest;Deseas transmitir &iacute;ntegramente los art&iacute;culos, o s&oacute;lo un resumen compuesto por unos cientos de caracteres?',
 'info_taille_maximale_vignette' => 'Dimensiones m&aacute;ximas de los iconos generados :',
 'info_terminer_installation' => 'Terminar la instalaci&oacute;n.',
 'info_texte' => 'Texto',
@@ -594,7 +594,7 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'item_ajout_mots_cles' => 'Autorizar las palabres claves en los foros',
 'item_autoriser_documents_joints' => 'Autorizar los documentos adjuntos a los art&iacute;culos',
 'item_autoriser_documents_joints_rubriques' => 'Autorizar los documentos en las secciones',
-'item_autoriser_syndication_integrale' => 'Difundir &iacute;ntegramente los art&iacute;culos en en los archivos de sindicaci&oacute;n',
+'item_autoriser_syndication_integrale' => 'Difundir &iacute;ntegramente los art&iacute;culos en los archivos de sindicaci&oacute;n',
 'item_bloquer_liens_syndiques' => 'Bloquear los enlaces sindicados en validaci&oacute;n',
 'item_breve_refusee' => 'Breve rechazada',
 'item_breve_validee' => 'Breve validada',
@@ -802,7 +802,14 @@ Si no le ves utilidad, puedes dejar esta opci&oacute;n con su valor por omisi&oa
 'texte_jeu_caractere_4' => 'Si no corresponde a la realidad de tus datos (por ejemplo, despu&eacute;s de una restauraci&oacute;n de base de datos), o si <em>empiezas este sitio</em> y deseas hacerlo con otro juego de caracteres, ind&iacute;calo aqu&iacute;:',
 'texte_jeu_caractere_conversion' => 'Nota: puedes decidir de convertir una vez por todas el conjunto de los textos de tu sitio (art&iacute;culos, breves, foros, etc.) haciael alfabeto <tt>utf-8</tt>, visitando <a href="@url@">la p&aacute;gina de conversi&oacute;n hacia el l\'utf-8</a>.',
 'texte_lien_hypertexte' => '(Si tu mensaje se refiere a un art&iacute;culo publicado en la Web, o a una p&aacute;gina que contiene m&aacute;s informaciones, indica a continuaci&oacute;n el t&iacute;tulo de la p&aacute;gina y su direcci&oacute;n URL.)',
-'texte_liens_sites_syndiques' => 'Los enlaces salidos de los sitios sindicados pueden ser bloqueados a priori; el ajuste indicado a continuaci&oacute;n se refiere al ajuste por defecto de los sitios sindicados despu&eacute;s de su creaci&oacute;n. De todos modos, posteriormente se puede desbloquear cada enlace individualmente, o escoger, sitio a sitio, bloquear los enlaces que viene de tal o cual sitio.',
+'texte_liens_sites_syndiques' => 'Los enlaces salidos de los sitios sindicados pueden
+ ser bloqueados a priori&nbsp;; el ajuste indicado
+ a continuaci&oacute;n se refiere al ajuste
+ predeterminado de los sitios sindicados despu&eacute;s
+ de su creaci&oacute;n. De todos modos, posteriormente
+ se puede desbloquear cada enlace individualmente, o
+ escoger, sitio a sitio, el bloqueo de los
+ enlaces que vienen de tal o cual sitio.',
 'texte_login_ldap_1' => '(Dejar en blanco para un acceso an&oacute;nimo, o indicar la ruta completa, por ejemplo "<tt>uid=perez, ou=users, dc=mi-dominio, dc=com</tt>".)',
 'texte_login_precaution' => '&iexcl;Atenci&oacute;n! Este es el nombre de usuario con el cual est&aacute;s conectado actualmente.
 Utiliza este formulario con precauci&oacute;n...',
@@ -826,7 +833,7 @@ Utiliza este formulario con precauci&oacute;n...',
 'texte_operation_echec' => 'Regresa a la p&aacute;gina anterior, selecciona otra base o crea una nueva. Verifica las informaciones facilitadas por tu proveedor de hospedaje.',
 'texte_plus_trois_car' => 'm&aacute;s de 3 caracteres',
 'texte_plusieurs_articles' => 'Se han encontrado varios autores o autoras para "@cherche_auteur@":',
-'texte_port_annuaire' => '(El valor indicado por defecto es correcto en general.)',
+'texte_port_annuaire' => '(En general, es adecuado el valor predeterminado.)',
 'texte_presente_plugin' => 'Esta p&aacute;gina lista los plugins disponibles en el sitio. Puedes activar los plugin necesarios seleccionando la casilla correspondiente. ',
 'texte_proposer_publication' => 'Cuando tu art&iacute;culo est&eacute; terminado, <br> puedes proponer su publicaci&oacute;n',
 'texte_proxy' => 'En algunos casos (Intranet, redes protegidas...), puede ser necesario utilizar un <I>proxy HTTP</i> para llegar a los sitios sindicados.
@@ -848,10 +855,10 @@ Prudencia con esta funcionalidad: <b>las modificaciones o p&eacute;rdidas eventu
 'texte_sauvegarde_base' => 'Crear una copia de respaldo de la base',
 'texte_sauvegarde_compressee' => 'La copia de respaldo ser&aacute; realizada en un archivo no comprimido @fichier@.',
 'texte_selection_langue_principale' => 'A continuaci&oacute;n puedes seleccionar el &laquo;idioma principal&raquo; del sitio. Esta selecci&oacute;n no obliga - &iexcl;afortunadamente! - a escribir los art&iacute;culos en el idioma elegido, pero permite determinar:
-<ul><li> el formato por defecto de las fechas en el sitio p&uacute;blico;</li>
+<ul><li> el formato predeterminado de las fechas en el sitio p&uacute;blico;</li>
 <li> la naturaleza del motor tipogr&aacute;fico que SPIP debe utilizar para reproducir los textos;</li>
 <li> el idioma utilizado en los formularios del sitio p&uacute;blico;</li>
-<li> el idioma mostrado por defecto en el espacio privado.</li></ul>',
+<li> el idioma predeterminado para el espacio privado.</li></ul>',
 'texte_signification' => 'Las barras oscuras representan las entradas acumuladas (total de las subsecciones), las barras claras el n&uacute;mero de visitas de cada secci&oacute;n.',
 'texte_sous_titre' => 'Subt&iacute;tulo',
 'texte_statistiques_visites' => '(Barras oscuras: domingo / curva oscura: evoluci&oacute;n del promedio)',
