@@ -27,7 +27,6 @@ body {
 	background: #FFF;
 	margin: 1.5em;
 	text-align: center;
-	font-family: "Bitstream Vera Sans", Verdana, Tahoma, Arial, Helvetica, sans-serif;
 	font-size: 1em;
 	color: #333;
 }
@@ -105,6 +104,19 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 
 /* Non visible a l'ecran */
 .invisible { position: absolute; top: -3000em; height: 1%; }
+
+
+/*  ------------------------------------------
+/*  Typographie generale du site
+/*  ------------------------------------------ */
+body {
+	font-family: "Bitstream Vera Sans", Verdana, Tahoma, Helvetica, sans-serif; }
+#contenu {
+	font-family: "Trebuchet MS", Helvetica, sans-serif; }
+#navigation, .encart,.formulaire_spip {
+	font-family: "Bitstream Vera Sans", Verdana, Tahoma, Arial, sans-serif; }
+q, blockquote, .liste-articles li .texte, h3.spip {
+	font-family: "Bitstream Vera Serif", Georgia, Times, serif; }
 
 
 /*  ------------------------------------------
@@ -192,8 +204,6 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	font-weight: bold; }
 
 .texte { color: #000; font-size: 0.96em; }
-
-q, blockquote { font-family: "Bitstream Vera Serif", Georgia, Times, serif; }
 
 .ps, .notes {
 	margin-top: 1.4em;
