@@ -815,8 +815,7 @@ function reduire_image($texte, $taille = -1, $taille_y = -1) {
 	',(<(span|div) [^<>]*spip_documents[^<>]*>)?(<img\s.*>),Uims',
 	$texte, $tags, PREG_SET_ORDER)) {
 		foreach ($tags as $tag) {
-			if ($reduit = reduire_une_image($tag[3], $taille, $taille_y))
-
+			if ($reduit = reduire_une_image($tag[3], $taille, $taille_y)) {
 				// En cas de span spip_documents, modifier le style=...width:
 				if($tag[1]
 				AND $w = extraire_attribut($reduit, 'width')) {
@@ -828,6 +827,7 @@ function reduire_image($texte, $taille = -1, $taille_y = -1) {
 				}
 
 				$texte = str_replace($tag[3], $reduit, $texte);
+			}
 		}
 	}
 	
