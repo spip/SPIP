@@ -668,7 +668,7 @@ function puce_statut_breve($id, $statut, $type, $droit) {
 function afficher_script_statut($id, $type, $n, $img, $statut, $title, $act)
 {
   return http_href_img("javascript:selec_statut('$id', '$type', -1, '" .
-		      _DIR_IMG_PACK . $img .
+		      http_wrapper($img) .
 		      "', '" .
 		       generer_action_auteur('instituer', "$type-$id-$statut") .
 		      "');",
