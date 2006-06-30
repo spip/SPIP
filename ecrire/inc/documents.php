@@ -105,7 +105,6 @@ function document_et_vignette($document, $url, $portfolio=false) {
 	AND $GLOBALS['meta']['creer_preview'] == 'oui') {
 		include_spip('inc/distant');
 		include_spip('inc/logos');
-		#var_dump($document);
 		$local = copie_locale($document['fichier']);
 		if ($portfolio)
 			$image = reduire_image_logo($local, 110, 120);

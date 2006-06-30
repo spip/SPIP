@@ -73,7 +73,6 @@ function public_composer_dist($squelette, $mime_type, $gram, $sourcefile) {
 			return $nom;
 		} else {
 			erreur_squelette($sourcefile, _L('Erreur de compilation'));
-			#var_dump($skel_code);
 		}
 	}
 }

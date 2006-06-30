@@ -385,7 +385,6 @@ function indexer_contenu_document ($row) {
 
 
 function indexer_les_champs(&$row,&$index_desc,$ponderation = 1){
-	//echo "Indexation :";var_dump($row);var_dump($index_desc);echo"<br/>";
 	reset($index_desc);
 	while (list($quoi,$poids) = each($index_desc)){
 		$pipe=array();

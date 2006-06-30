@@ -2146,7 +2146,6 @@ function init_body($rubrique='asuivre', $sous_rubrique='asuivre', $onLoad='', $i
 
 		$sousmenu= $detail->sousmenu;
 		if($sousmenu) {
-			//var_dump($decal-$coeff_decalage*max(0,($decal+count($sousmenu)*$largitem_moy-$largeur_maxi_menu)));
 			$offset = (int)round($decal-$coeff_decalage*max(0,($decal+count($sousmenu)*$largitem_moy-$largeur_maxi_menu)));
 			if ($offset<0){	$offset = 0; }
 			echo "<div class='$class' id='bandeau$page' style='position: absolute; $spip_lang_left: ".$offset."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
