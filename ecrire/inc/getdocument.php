@@ -338,9 +338,18 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 		}
 
 		// Si on veut uploader une vignette, il faut qu'elle ait ete bien lue
-		if ($mode == 'vignette' AND !($largeur * $hauteur)) {
-			@unlink($fichier);
-			return;
+		if ($mode == 'vignette') {
+			if (!$type_inclus_image) {
+				spip_log ("le format de $fichier ne convient pas pour une image"); # SVG
+				@unlink($fichier);
+				return;
+			}
+
+			if (!($largeur * $hauteur)) {
+				spip_log('erreur upload vignette '.$fichier);
+				@unlink($fichier);
+				return;
+			}
 		}
 	}
 
