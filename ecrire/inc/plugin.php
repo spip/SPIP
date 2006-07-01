@@ -297,7 +297,7 @@ function applatit_arbre($arbre,$separateur = " "){
 		else
 			$s.="$feuille$separateur";
 	}
-	return $s;
+	return substr($s,0,strlen($s)-strlen($separateur));
 }
 function chaines_lang($texte){
 	// TODO : prendre en charge le fichier langue specifique du plugin
