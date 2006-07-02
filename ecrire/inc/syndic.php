@@ -257,11 +257,11 @@ function analyser_backend($rss, $url_syndic='') {
 		// Description
 		if (preg_match(',<((description|summary)([:[:space:]][^>]*)?)'
 		.'>(.*)</\2[:>[:space:]],Uims',$item,$match)) {
-			$data['descriptif'] = $match[4];
+			$data['descriptif'] = trim($match[4]);
 		}
 		if (preg_match(',<((content)([:[:space:]][^>]*)?)'
 		.'>(.*)</\2[:>[:space:]],Uims',$item,$match)) {
-			$data['content'] = $match[4];
+			$data['content'] = trim($match[4]);
 		}
 
 		// lang
