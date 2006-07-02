@@ -19,7 +19,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // mode = 'force' - charger toujours (mettre a jour)
 //
 function copie_locale($source, $mode='auto') {
-
 	// Si copie_locale() est appele depuis l'espace prive
 	if (!_DIR_RESTREINT
 	AND strpos(_DIR_RACINE . $source, _DIR_IMG) === 0)
@@ -30,6 +29,11 @@ function copie_locale($source, $mode='auto') {
 	// test d'existence du fichier
 	if ($mode == 'test')
 		return @file_exists(_DIR_RACINE.$local) ? $local : '';
+
+	// si $local = '' c'est un fichier refuse par fichier_copie_locale(),
+	// par exemple un fichier qui ne figure pas dans nos documents ;
+	// dans ce cas on n'essaie pas de le telecharger pour ensuite echouer
+	if (!$local) return false;
 
 	// sinon voir si on doit le telecharger
 	if (($source != $local) AND (preg_match(',^\w+://,', $source))) {

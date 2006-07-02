@@ -171,8 +171,17 @@ function afficher_syndic_articles_boucle($row, &$my_sites, $bof, $redirect)
 		$s .= ' '.$e;
 
 	// descriptif
-	if (strlen($descriptif) > 0)
-		$s .= "<div class='arial1'>".safehtml($descriptif)."</div>";
+	if (strlen($descriptif) > 0) {
+		// couper un texte vraiment tres long
+		if (strlen($descriptif) > 10000)
+			$descriptif = safehtml(spip_substr($descriptif, 0, 6000)).' (...)';
+		else
+			$descriptif = safehtml($descriptif);
+		$s .= '<div class="arial1">'
+			# 385px = largeur de la colonne ou s'affiche le texte
+			. image_reduire($descriptif, 385, 550)
+			. '</div>';
+	}
 
 	// tags
 	if ($tags = afficher_tags($row['tags']))

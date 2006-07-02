@@ -502,11 +502,25 @@ function reduire_image_logo($img, $taille = -1, $taille_y = -1) {
 		$logo = $img;
 	if (!$logo) return '';
 
-	// Si c'est une image distante, la recuperer (si possible)
+	// Si c'est une image distante, la recuperer
 	include_spip('inc/distant');
+
 	if (!$local = copie_locale($logo)) {
 		spip_log("pas de version locale de $logo");
-		return $img;
+		// on peut resizer en mode html si on dispose des elements
+		if ($srcw = extraire_attribut($img, 'width')
+		AND $srch = extraire_attribut($img, 'height')) {
+			list($w,$h) = image_ratio($srcw, $srch, $taille, $taille_y);
+			$img = inserer_attribut(
+				inserer_attribut($img, 'width', $w),
+				'height', $h);
+			return $img;
+		}
+
+		// la on n'a pas d'infos sur l'image source... on refile le truc a css
+		// sous la forme style='max-width: NNpx;'
+		return inserer_attribut($img, 'style',
+			"max-width: ${taille}px; max-height: ${taille_y}px");
 	}
 	$logo = $local;
 

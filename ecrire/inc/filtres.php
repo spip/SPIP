@@ -830,7 +830,7 @@ function reduire_image($texte, $taille = -1, $taille_y = -1) {
 			}
 		}
 	}
-	
+
 	return $texte;
 }
 // Renommer en "image_reduire", pour que toutes fonctions graphiques
