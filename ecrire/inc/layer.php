@@ -91,6 +91,7 @@ function bouton_block_visible($nom_block){
 }
 
 function produire_acceder_couche($couches, $nom, $icone) {
+	include_spip('inc/minipres'); # pour http_wrapper
 	global $spip_lang_rtl;
 	return http_script("acceder_couche([" . join(',',$couches) . '], ' .
 			   $nom .
