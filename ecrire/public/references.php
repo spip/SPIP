@@ -382,10 +382,15 @@ function compose_filtres($p, $code) {
 	foreach($p->param as $filtre) {
 		$fonc = array_shift($filtre);
 		if ($fonc) {
-			// recuperer les arguments du filtre, en les separant par des
-			// virgules, *sauf* dans le cas du filtre "?" qui demande un ":"
-			$arglist = compose_filtres_args($p, $filtre,
-				($fonc == '?' ? ':' : ','));
+			// recuperer les arguments du filtre, les separer par des virgules
+			// *sauf* dans le cas du filtre "?" qui demande un ":"
+			if ($fonc == '?') {
+				// |?{a,b} *doit* avoir exactement 2 arguments ; on les force
+				if (count($filtre) != 2)
+					$filtre = array($filtre[0], $filtre[1]);
+				$arglist = compose_filtres_args($p, $filtre, ':');
+			} else
+				$arglist = compose_filtres_args($p, $filtre, ',');
 
 			// le filtre est defini dans la matrice ? il faut alors l'appeler
 			// de maniere indirecte, pour charger au prealable sa definition
