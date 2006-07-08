@@ -333,11 +333,14 @@ function message_erreur_404 ($erreur= "") {
 		else if (isset($GLOBALS['id_syndic']))
 		$erreur = 'public:aucun_site';
 	}
-	return array('texte' => '<'.'?php
+	return array(
+		'texte' => '<'.'?php
 			$contexte_inclus = array("fond" => 404,
- 				"erreur" => _T("' . $erreur  . '"));
+			"erreur" => _T("' . $erreur  . '"));
 			include(\'spip.php\'); ?'.'>',
-		     'process_ins' => 'php');
+		'process_ins' => 'php',
+		'entetes' => array('Content-Type' => 'text/html')
+	);
 }
 
 ?>
