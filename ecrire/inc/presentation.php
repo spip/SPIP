@@ -2758,6 +2758,38 @@ function debut_droite($rubrique="") {
 			include_spip('inc/drapeau_edition');
 			$articles_ouverts = liste_drapeau_edition ($connect_id_auteur, 'article');
 			if (count($articles_ouverts)) {
+
+
+
+		//	$vos_articles = spip_query("SELECT id_article, id_rubrique, titre, statut FROM spip_articles WHERE statut='prop' ORDER BY date DESC LIMIT 5");
+		//	if (spip_num_rows($vos_articles) > 0) {
+				echo "<div>&nbsp;</div>";
+				echo "<div class='bandeau_rubriques' style='z-index: 1;'>";
+				echo bandeau_titre_boite2(_T('info_cours_edition'), "article-24.gif", $couleur_foncee, 'white', false);
+				echo "<div class='plan-articles-bloques'>";
+
+
+				foreach ($articles_ouverts as $row) {
+					$ze_article = $row['id_article'];
+					$ze_titre = $row['titre'];
+					$statut = $row["statut"];
+					
+					echo "<div class='$statut'><a style='font-size: 10px;' href='" . generer_url_ecrire("articles","id_article=$ze_article") . "'>$ze_titre</a>";
+
+					if ($ze_article != $GLOBALS['id_article_bloque']) {
+						$nb_liberer ++;
+						echo "<div style='text-align:right; font-size: 9px;'>", debloquer_article($ze_article,_T('lien_liberer')), "</div>";
+					}
+
+					echo "</div>";	
+						
+				
+				}
+				echo "</div></div>";
+
+				/*
+
+
 				echo "<p>";
 				debut_cadre_enfonce('article-24.gif');
 				//echo "<font face='Verdana,Arial,Sans,sans-serif' size='2'>";
@@ -2792,6 +2824,8 @@ function debut_droite($rubrique="") {
 				}
 				//echo "</font>";
 				fin_cadre_enfonce();
+				
+				*/
 			}
 		}
 		
@@ -2876,7 +2910,7 @@ function debloquer_article($arg, $texte) {
 	  entites_html($texte) .
 	  "\">$texte&nbsp;" .
 	  http_img_pack("croix-rouge.gif", ($arg=='tous' ? "" : "X"),
-			"width='7' height='7' align='middle'") .
+			"width='7' height='7' align='baseline'") .
 	  "</a>";
 }
 
