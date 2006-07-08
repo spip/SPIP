@@ -344,7 +344,7 @@ if (flag_svg()) {
 } else {
 	
 	echo "<table cellpadding=0 cellspacing=0 border=0><tr>",
-	  "<td style='background-image:", _DIR_IMG_PACK, "fond-stats.gif'>";
+	  "<td ".http_style_background("fond-stats.gif").">";
 	echo "<table cellpadding=0 cellspacing=0 border=0><tr>";
 	
 	echo "<td bgcolor='black'>", http_img_rien(1,200), "</td>";
@@ -483,7 +483,7 @@ if (flag_svg()) {
 			echo "<td bgcolor='black'>",http_img_rien(1, 1),"</td>";
 			echo "</tr></table>";
 			echo "</td>",
-			  "<td style='background-image:", _DIR_IMG_PACK, "fond-stats.gif' valign='bottom'>", http_img_rien(3, 1, 'background-color:black;'),"</td>";
+			  "<td ".http_style_background("fond-stats.gif")."  valign='bottom'>", http_img_rien(3, 1, 'background-color:black;'),"</td>";
 			echo "<td>", http_img_rien(5, 1),"</td>";
 			echo "<td valign='top'><div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;'>";
 			echo "<table cellpadding=0 cellspacing=0 border=0>";
@@ -607,7 +607,7 @@ if (flag_svg()) {
 		}
 		
 		echo "<table cellpadding=0 cellspacing=0 border=0><tr>",
-		  "<td style='background-image:", _DIR_IMG_PACK, "fond-stats.gif'>";
+		  "<td ".http_style_background("fond-stats.gif").">";
 		echo "<table cellpadding=0 cellspacing=0 border=0><tr>";
 		echo "<td bgcolor='black'>", http_img_rien(1, 200),"</td>";
 	
@@ -681,7 +681,7 @@ if (flag_svg()) {
 		echo "<td bgcolor='black'>", http_img_rien(1, 1),"</td>";
 		echo "</tr></table>";
 		echo "</td>",
-		  "<td style='background-image:", _DIR_IMG_PACK, "fond-stats.gif' valign='bottom'>", http_img_rien(3, 1, 'background-color:black;'),"</td>";
+		  "<td ".http_style_background("fond-stats.gif")." valign='bottom'>", http_img_rien(3, 1, 'background-color:black;'),"</td>";
 		echo "<td>", http_img_rien(5, 1),"</td>";
 		echo "<td valign='top'><div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;'>";
 		echo "<table cellpadding=0 cellspacing=0 border=0>";
