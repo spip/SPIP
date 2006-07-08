@@ -161,6 +161,8 @@ function verif_butineur() {
 }
 
 
+// teste si accepte le SVG et pose un cookie en cas de demande explicite
+// (fonction a appeler en debut de page, avant l'envoi de contenu)
 function flag_svg() {
 	global $browser_name, $browser_rev;
 
