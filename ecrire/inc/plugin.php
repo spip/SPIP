@@ -286,17 +286,18 @@ function parse_plugin_xml($texte){
 
 function applatit_arbre($arbre,$separateur = " "){
 	$s = "";
-	foreach($arbre as $tag=>$feuille){
-		if (is_array($feuille)){
-			if ($tag!==intval($tag))
-				$s.="<$tag>".applatit_arbre($feuille)."</$tag>";
+	if (is_array($arbre))
+		foreach($arbre as $tag=>$feuille){
+			if (is_array($feuille)){
+				if ($tag!==intval($tag))
+					$s.="<$tag>".applatit_arbre($feuille)."</$tag>";
+				else
+					$s.=applatit_arbre($feuille);
+				$s .= $separateur;
+			}				
 			else
-				$s.=applatit_arbre($feuille);
-			$s .= $separateur;
-		}				
-		else
-			$s.="$feuille$separateur";
-	}
+				$s.="$feuille$separateur";
+		}
 	return substr($s,0,strlen($s)-strlen($separateur));
 }
 function chaines_lang($texte){
