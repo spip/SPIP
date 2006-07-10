@@ -15,8 +15,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip ("inc/acces");
 include_spip('inc/indexation'); // pour la fonction primary_index_table 
-include_spip('inc/serialbase');
-include_spip('inc/auxbase');
+include_spip('base/serial');
+include_spip('base/auxiliaires');
 
 // NB: Ce fichier peut ajouter des tables (old-style)
 // donc il faut l'inclure "en globals"
