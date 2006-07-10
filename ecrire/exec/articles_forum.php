@@ -77,6 +77,9 @@ function articles_forum_cadres($id_rubrique, $titre, $script, $args)
 
 	fin_boite_info();
 
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'articles_forum','id_article'=>$id_article),'data'=>''));
+	creer_colonne_droite();
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'articles_forum','id_article'=>$id_article),'data'=>''));
 	debut_droite();
 
 	echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";

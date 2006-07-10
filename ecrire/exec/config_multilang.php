@@ -49,6 +49,9 @@ debut_gauche();
 
 	
 	
+echo pipeline('affiche_gauche',array('args'=>array('exec'=>'config_multilang'),'data'=>''));
+creer_colonne_droite();
+echo pipeline('affiche_droite',array('args'=>array('exec'=>'config_multilang'),'data'=>''));
 debut_droite();
 
 echo generer_url_post_ecrire('config_multilang');

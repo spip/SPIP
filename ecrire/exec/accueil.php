@@ -443,6 +443,9 @@ function exec_accueil_dist()
 
   personnel_accueil();
   etat_base_accueil();
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
+	creer_colonne_droite();
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
   debut_droite();
 
 //

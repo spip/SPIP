@@ -74,6 +74,9 @@ if ($new != 'oui' AND ($connect_statut=="0minirezo" OR $statut=="prop")) {
 	if (isset($texte)) document_a_voir($texte);
 	afficher_documents_colonne($id_breve, "breve", true);
 }
+echo pipeline('affiche_gauche',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''));
+creer_colonne_droite();
+echo pipeline('affiche_droite',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''));
 debut_droite();
 debut_cadre_formulaire();
 

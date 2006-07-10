@@ -48,6 +48,9 @@ afficher_hierarchie($id_rubrique);
 fin_grand_cadre();
 
 debut_gauche();
+echo pipeline('affiche_gauche',array('args'=>array('exec'=>'sites_edit','id_syndic'=>$id_syndic),'data'=>''));
+creer_colonne_droite();
+echo pipeline('affiche_droite',array('args'=>array('exec'=>'sites_edit','id_syndic'=>$id_syndic),'data'=>''));	  
 debut_droite();
 debut_cadre_formulaire();
 

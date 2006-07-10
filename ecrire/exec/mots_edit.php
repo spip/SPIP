@@ -157,6 +157,9 @@ debut_raccourcis();
 fin_raccourcis();
 
 
+echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
+creer_colonne_droite();
+echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
 debut_droite();
 
 debut_cadre_relief("mot-cle-24.gif");

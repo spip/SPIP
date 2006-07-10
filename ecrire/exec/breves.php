@@ -23,6 +23,9 @@ function exec_breves_dist()
 	
 	debut_page(_T('titre_page_breves'), "documents", "breves");
 	debut_gauche();
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'breves'),'data'=>''));
+	creer_colonne_droite();
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'breves'),'data'=>''));
 	debut_droite();
 
  	$result=spip_query("SELECT * FROM spip_rubriques WHERE id_parent=0 ORDER BY 0+titre, titre");

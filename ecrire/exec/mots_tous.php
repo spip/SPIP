@@ -81,6 +81,9 @@ pipeline('exec_init',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
 debut_page(_T('titre_page_mots_tous'), "documents", "mots");
 debut_gauche();
 
+echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
+creer_colonne_droite();
+echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
 debut_droite();
 
 gros_titre(_T('titre_mots_tous'));

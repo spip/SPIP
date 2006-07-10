@@ -86,6 +86,9 @@ if ($text_article)
 
 formulaire_affiche_tous($aff_art, $aff_statut, $sel_lang);
 
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'articles_tous'),'data'=>''));
+	creer_colonne_droite();
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'articles_tous'),'data'=>''));
 debut_droite();
 
 if ($enfant AND $browser_layer)

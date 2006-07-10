@@ -79,6 +79,9 @@ debut_raccourcis();
 icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui&id_rubrique=$id_rubrique"), "breve-24.gif","creer.gif");
 fin_raccourcis();
 
+echo pipeline('affiche_gauche',array('args'=>array('exec'=>'breves_voir','id_breve'=>$id_breve),'data'=>''));
+creer_colonne_droite();
+echo pipeline('affiche_droite',array('args'=>array('exec'=>'breves_voir','id_breve'=>$id_breve),'data'=>''));
 debut_droite();
 
 debut_cadre_relief("breve-24.gif");

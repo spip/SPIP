@@ -37,6 +37,9 @@ function exec_config_fonctions_dist()
 	barre_onglets("configuration", "fonctions");
 
 	debut_gauche();
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'config_fonctions'),'data'=>''));
+	creer_colonne_droite();
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'config_fonctions'),'data'=>''));
 	debut_droite();
 	lire_metas();
 

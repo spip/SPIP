@@ -113,8 +113,11 @@ function exec_naviguer_dist()
 //
 		raccourcis_naviguer($id_rubrique, $id_parent);
 	  }
-
-	  debut_droite();
+		
+		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''));
+		creer_colonne_droite();
+		echo pipeline('affiche_droite',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''));	  
+		debut_droite();
 
 	  debut_cadre_relief($ze_logo);
 
