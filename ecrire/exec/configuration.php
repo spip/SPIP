@@ -46,6 +46,7 @@ else {
  }
 lire_metas();
 
+pipeline('exec_init',array('args'=>array('exec'=>'configuration'),'data'=>''));
 
 debut_page(_T('titre_page_configuration'), "administration", "configuration");
 

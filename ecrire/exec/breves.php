@@ -19,6 +19,8 @@ function exec_breves_dist()
 	global $spip_lang_left, $spip_lang_right;
 
 	charger_generer_url();
+ 	pipeline('exec_init',array('args'=>array('exec'=>'breves'),'data'=>''));
+	
 	debut_page(_T('titre_page_breves'), "documents", "breves");
 	debut_gauche();
 	debut_droite();

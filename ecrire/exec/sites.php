@@ -219,6 +219,7 @@ if ($nom_site)
 else
 	$titre_page = _T('info_site');
 
+pipeline('exec_init',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
 
 
 debut_page("$titre_page","documents","sites", "", "", $id_rubrique);

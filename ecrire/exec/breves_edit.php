@@ -58,6 +58,7 @@ else {
 	$id_rubrique = $row['id_secteur'];
 }
 
+pipeline('exec_init',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''));
 
 debut_page(_T('titre_page_breves_edit', array('titre' => $titre)), "documents", "breves", "", "", $id_rubrique);
 

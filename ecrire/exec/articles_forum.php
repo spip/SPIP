@@ -32,6 +32,8 @@ function exec_articles_forum_dist()
 		$titre = $row["titre"];
 		$id_rubrique = $row["id_rubrique"];
 	}
+	
+ 	pipeline('exec_init',array('args'=>array('exec'=>'articles_forum','id_article'=>$id_article),'data'=>''));
 
 	debut_page($titre, "documents", "articles", "", "", $id_rubrique);
 

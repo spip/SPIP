@@ -21,6 +21,7 @@ function exec_articles_page_dist()
 {
   global $connect_statut, $connect_id_auteur;
 
+ 	pipeline('exec_init',array('args'=>array('exec'=>'articles_page'),'data'=>''));
 	debut_page(_T('titre_page_articles_page'), "documents", "articles");
 
 	debut_gauche();

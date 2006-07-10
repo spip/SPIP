@@ -37,6 +37,7 @@ else {
 		$id_rubrique = $row['id_rubrique'];
 	}
 }
+pipeline('exec_init',array('args'=>array('exec'=>'sites_edit','id_syndic'=>$id_syndic),'data'=>''));
 
 debut_page(_T('info_site_reference_2'), "documents", "sites", "", "", $id_rubrique);
 

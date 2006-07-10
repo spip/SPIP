@@ -21,6 +21,7 @@ function exec_articles_tous_dist()
 
 	if (!is_array($aff_art)) $aff_art = array('prop','publie');
 
+ 	pipeline('exec_init',array('args'=>array('exec'=>'articles_tous'),'data'=>''));
 	list($enfant, $first_couche, $last_couche) = arbo_articles_tous();
 	debut_page(_T('titre_page_articles_tous'), "asuivre", "tout-site");
 	debut_gauche();

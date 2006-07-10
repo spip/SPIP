@@ -55,6 +55,7 @@ while ($auteur = spip_fetch_array($result)) {
 		$lettre_prec = $premiere_lettre;
 	}
  }
+ pipeline('exec_init',array('args'=>array('exec'=>'auteurs'),'data'=>''));
 
 affiche_auteurs($auteurs, $lettre, $max_par_page, $nombre_auteurs);
 }
