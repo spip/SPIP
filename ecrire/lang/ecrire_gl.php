@@ -1069,7 +1069,7 @@ cunha cor que indica o seu estado&nbsp;:',
 // U
 'utf8_convert_attendez' => 'Agarde un pouco de tempo e recargue esta p&aacute;xina.',
 'utf8_convert_avertissement' => 'Vai converter o contido da s&uacute;a base de datos (artigos, breves, etc) do xogo de car&aacute;cteres <b>@orig@</b> ao xogo de car&aacute;cteres <b>@charset@</b>.',
-'utf8_convert_backup' => 'Non esqueza antes de nada de facer unha salvagarda completa do seu web.  Debe tam&eacute;n comprobar que os seus esqueletos e ficheiros de lingua sexan compatibles con @charset@. Doutro xeito o seguimento das revisi&oacute;ns, se est&aacute; activado, danarase.',
+'utf8_convert_backup' => 'Non esqueza antes de nada de facer unha salvagarda completa do seu web.  D&eacute;bese tam&eacute;n comprobar que os esqueletos e ficheiros de lingua sexan compatibles con @charset@.',
 'utf8_convert_erreur_deja' => 'O seu web xa est&aacute; en car&aacute;cter @charset@, &eacute; in&uacute;til convertelo...',
 'utf8_convert_erreur_orig' => 'Erro&nbsp;: o xogo de car&aacute;cteres @charset@ non est&aacute; soportado.',
 'utf8_convert_termine' => 'Rematou!',
