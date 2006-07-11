@@ -436,28 +436,6 @@ function inserer_documents($letexte) {
 		else
 			$rempl = integre_image($match[2], $match[4], $type);
 
-		// XHTML : remplacer par une <div onclick> le lien
-		// dans le cas [<docXX>->lien] (en fait, on recherche
-		// <a href="lien"><docXX></a> ; sachant qu'il n'existe
-		// pas de bonne solution en XHTML pour produire un lien
-		// sur une div (!!)...)
-		if (preg_match(',<div ,', $rempl)
-		AND preg_match_all(
-		',<a\s[^>]*>([^>]*'.preg_quote($match[0]).'[^>]*)</a>,ims',
-		$letexte, $mm, PREG_SET_ORDER)) {
-			foreach ($mm as $m) {
-				$url = extraire_attribut($m[0],'href');
-				$re = '<div style="cursor:pointer;cursor:hand;" '
-					.'onclick="document.location=\''.$url
-					.'\'"'
-##					.' href="'.$url.'"' # note: href deviendrait legal en XHTML2
-					.'>'
-					.$rempl # on pourrait eliminer le <a> (tidy le fait)
-					.'</div>';
-				$letexte = str_replace($m[0], $re, $letexte);
-			}
-		}
-
 		// Installer le document ; les <div> sont suivies de deux \n de maniere
 		// a provoquer un paragraphe a la suite ; les span, non, sinon les liens
 		// [<img|left>->URL] ne fonctionnent pas.
