@@ -16,22 +16,24 @@ include_spip('base/abstract_sql');
 
 // Balise independante du contexte
 
-
 function balise_FORMULAIRE_INSCRIPTION ($p) {
 
 	return calculer_balise_dynamique($p, 'FORMULAIRE_INSCRIPTION', array());
 }
 
-// args[0] indique le focus eventuel
+// args[0] peut valoir "redac" ou "forum" 
 // args[1] indique la rubrique eventuelle de proposition
+// args[2] indique le focus eventuel
 // [(#FORMULAIRE_INSCRIPTION{nom_inscription, #ID_RUBRIQUE})]
+
 function balise_FORMULAIRE_INSCRIPTION_stat($args, $filtres) {
-	if ($GLOBALS['meta']['accepter_inscriptions'] != 'oui')
+	$mode = isset($args[0]) ? $args[0] : 'redac';
+	if (!test_mode_inscription($mode))
 		return '';
 	else
-		return array('redac', 
-			(isset($args[0]) ? $args[0] : ''),
-			(isset($args[1]) ? $args[1] : ''));
+		return array($mode, 
+			     (isset($args[2]) ? $args[2] : ''),
+			     (isset($args[1]) ? $args[1] : ''));
 }
 
 // Si inscriptions pas autorisees, retourner une chaine d'avertissement
@@ -40,41 +42,32 @@ function balise_FORMULAIRE_INSCRIPTION_stat($args, $filtres) {
 // Autrement 2e appel, envoyer un mail et le squelette ne produira pas de
 // formulaire.
 
+function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus, $id=0) {
 
-function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus, $id_rubrique=0) {
-
-	if (!(($mode == 'redac' AND $GLOBALS['meta']['accepter_inscriptions'] == 'oui')
-	OR ($mode == 'forum' AND (
-		$GLOBALS['meta']['accepter_visiteurs'] == 'oui'
-		OR $GLOBALS['meta']['forums_publics'] == 'abo'
-		)
-	    )))
-		return _T('pass_rien_a_faire_ici');
+	if (!test_mode_inscription($mode)) return _T('pass_rien_a_faire_ici');
 
 	$nom = _request('nom_inscription');
 	$mail = _request('mail_inscription');
-	if (!$mail)
-		$message = '';
-	else {
+	$commentaire = ($mode=='redac') ? _T('pass_espace_prive_bla') : _T('pass_forum_bla');
+
+	if ($mail) {
 		include_spip('inc/filtres'); // pour email_valide
-		$message = message_inscription($mail, $nom, $mode, $id_rubrique);
-		if (is_array($message)) {
+		$commentaire = message_inscription($mail, $nom, $mode, $id);
+		if (is_array($commentaire)) {
 			if (function_exists('envoyer_inscription'))
 				$f = 'envoyer_inscription';
 			else 
 				$f = 'envoyer_inscription_dist';
-			$message = $f($message, $nom, $mode, $id_rubrique);
+			$commentaire = $f($commentaire, $nom, $mode, $id);
 		}
 	}
 
-	// #ENV*{message} est le message d'erreur
-	// #ENV*{commentaire} explique si on s'inscrit a l'espce public ou prive
-	// il disparait s'il y a un message d'erreur (pour faire moins verbeux)
-	$commentaire = '';
-	if (!$message) {
-		if ($mode=='redac') $commentaire = _T('pass_espace_prive_bla');
-		if ($mode=='forum') $commentaire = _T('pass_forum_bla');
-	}
+	$message = $commentaire ? '' : _T('form_forum_identifiant_mail');
+
+	// #ENV*{message} doit etre non vide lorsque tout s'est bien passé
+	// #ENV*{commentaire} doit etre non vide pour afficher le formulaire
+	// et il indique si on s'inscrit a l'espace public ou prive 
+	// ou donne un message d'erreur aux appels suivants si pb
 
 	return array("formulaire_inscription", $GLOBALS['delais'],
 			array('focus' => $focus,
@@ -86,14 +79,22 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus, $id_rubrique=0) {
 				'self' => str_replace('&amp;','&',(self()))));
 }
 
+function test_mode_inscription($mode) {
+
+	return (($mode == 'redac' AND $GLOBALS['meta']['accepter_inscriptions'] == 'oui')
+		OR ($mode == 'forum'
+		AND ($GLOBALS['meta']['accepter_visiteurs'] == 'oui'
+			OR $GLOBALS['meta']['forums_publics'] == 'abo')));
+}
+
 // fonction qu'on peut redefinir pour filtrer les adresses mail et les noms,
 // et donner des infos supplémentaires
-// Std: controler que le nom (qui sert a calculer le login) est assez long
+// Std: controler que le nom (qui sert a calculer le login) est plausible
 // et que l'adresse est valide (et on la normalise)
 // Retour: une chaine message d'erreur 
 // ou un tableau avec au minimum email, nom, mode (redac / forum)
 
-function test_inscription_dist($mode, $mail, $nom, $id_rubrique=0) {
+function test_inscription_dist($mode, $mail, $nom, $id=0) {
 
 	include_spip('inc/filtres');
 	$nom = trim(corriger_caracteres($nom));
@@ -103,16 +104,16 @@ function test_inscription_dist($mode, $mail, $nom, $id_rubrique=0) {
 	return array('email' => $r, 'nom' => $nom, 'bio' => $mode);
 }
 
-// cree un nouvel utilisateur et renvoie un message d'impossibilite ou la
-// ligne SQL le decrivant.
+// cree un nouvel utilisateur et renvoie un message d'impossibilite 
+// ou le tableau representant la ligne SQL le decrivant.
 
-function message_inscription($mail, $nom, $mode, $id_rubrique=0) {
+function message_inscription($mail, $nom, $mode, $id=0) {
 
 	if (function_exists('test_inscription'))
 		$f = 'test_inscription';
 	else 
 		$f = 'test_inscription_dist';
-	$declaration = $f($mode, $mail, $nom, $id_rubrique);
+	$declaration = $f($mode, $mail, $nom, $id);
 
 	if (is_string($declaration))
 		return  $declaration;
@@ -156,9 +157,10 @@ function inscription_nouveau($declaration)
 }
 
 // envoyer identifiants par mail
-// fonction redefinissable
+// fonction redefinissable qui doit retourner false si tout est ok
+// ou une chaine non vide expliquant pourquoi le mail n'a pas ete envoye
 
-function envoyer_inscription_dist($ids, $nom, $mode, $id_rubrique) {
+function envoyer_inscription_dist($ids, $nom, $mode, $id) {
 	include_spip('inc/mail');
 	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
 	$adresse_site = $GLOBALS['meta']["adresse_site"];
@@ -177,7 +179,7 @@ function envoyer_inscription_dist($ids, $nom, $mode, $id_rubrique) {
 	if (envoyer_mail($ids['email'],
 			 "[$nom_site_spip] "._T('form_forum_identifiants'),
 			 $message))
-		return _T('form_forum_identifiant_mail');
+		return false;
 	else
 		return _T('form_forum_probleme_mail');
 }
