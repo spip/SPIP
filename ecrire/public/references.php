@@ -74,7 +74,7 @@ function description_type_requete($type, $serveur='') {
 		$s = 'localhost';
     	// indirection (pour les rares cas ou le nom de la table!=type)
 		$t = $table_des_tables[$type];
-	}
+	} else $s = $serveur;
 	// pour les tables non Spip
 	if (!$t) {
 		$nom_table = $t = $type;
