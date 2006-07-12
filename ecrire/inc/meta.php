@@ -19,9 +19,9 @@ function lire_metas() {
 	else
 		$noyau = array();
 
-	$GLOBALS['meta'] = array();
 	$result = spip_query("SELECT nom,valeur FROM spip_meta");
 	if($GLOBALS['db_ok']) {
+		$GLOBALS['meta'] = array();
 		while ($row = spip_fetch_array($result))
 			$GLOBALS['meta'][$row['nom']] = $row['valeur'];
 	}

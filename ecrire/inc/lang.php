@@ -315,7 +315,6 @@ function liste_options_langues($nom_select, $default='', $herit='') {
 # + langues_multilingues ; mais, ne sert pas
 #			$langues = explode(',', $GLOBALS['all_langs']);
 	}
-
 	if (count($langues) <= 1) return '';
 	$ret = '';
 	sort($langues);
@@ -457,21 +456,18 @@ function init_langues() {
 		closedir($d);
 		sort($toutes_langs);
 		$all_langs2 = join(',', $toutes_langs);
-
 		// Si les langues n'ont pas change, ne rien faire
 		if ($all_langs2 != $all_langs) {
+			include_spip('inc/meta');
 			$all_langs = $all_langs2;
 			if (!$langue_site) {
 				// Initialisation : le francais par defaut, sinon la premiere langue trouvee
 				if (ereg(',fr,', ",$all_langs,")) $langue_site = 'fr';
 				else list(, $langue_site) = each($toutes_langs);
-				if (function_exists('ecrire_meta'))
-					ecrire_meta('langue_site', $langue_site);
+				ecrire_meta('langue_site', $langue_site);
 			}
-			if (function_exists('ecrire_meta')) {
-				ecrire_meta('langues_proposees', $all_langs);
-				ecrire_metas();
-			}
+			ecrire_meta('langues_proposees', $all_langs);
+			ecrire_metas();
 		}
 	}
 }
