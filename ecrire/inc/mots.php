@@ -134,7 +134,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		if (!$flag_editable) return;
 		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_groupes_mots WHERE $table = 'oui'	AND ".substr($connect_statut,1)." = 'oui'"));
 
-		if (!$cpt['n'] AND !$flag_editable) return;
+		if (!$cpt['n']) return;
 	}
 
 	echo "<a name='mots'></a>";
