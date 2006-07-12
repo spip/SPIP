@@ -46,7 +46,7 @@ function install_debut_html($titre = 'AUTO') {
 	  "\n\n]]>\n--></style>\n\n
 </head>
 <body bgcolor='#FFFFFF' text='#000000' link='#E86519' vlink='#6E003A' alink='#FF9900'>
-<center><table style='margin-top:50px; width: 450px'>
+<table style='margin-top:50px; width: 450px;' align='center'>
 <tr><th style='color: #970038;text-align: left;font-family: Verdana; font-weigth: bold; font-size: 18px'>",
 	  $titre ,
 	  "</th></tr>

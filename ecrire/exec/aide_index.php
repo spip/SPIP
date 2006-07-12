@@ -44,8 +44,8 @@ function help_frame ($aide) {
 // Erreur aide non disponible
 function erreur_aide_indisponible() {
 	global $help_server;
-	install_debut_html(_T('forum_titre_erreur')); echo "<div>$help_server: "._T('aide_non_disponible')."</div><div align='right'>".menu_langues('var_lang_ecrire')."</div>";install_fin_html();
-	exit;
+	minipres(_T('forum_titre_erreur'),
+		 "<div>$help_server: "._T('aide_non_disponible')."</div><div align='right'>".menu_langues('var_lang_ecrire')."</div>");
 }
 
 // Selection de l'aide correspondant a la langue demandee
@@ -55,7 +55,7 @@ function fichier_aide($lang_aide = '') {
 	if (!$lang_aide) $lang_aide = $GLOBALS['spip_lang'];
 	$fichier_aide = _DIR_CACHE . "aide-$lang_aide-aide.html";
 	$lastm = @filemtime($fichier_aide);
-	$lastversion = @filemtime(_DIR_INCLUDE . 'inc_version.php');
+	$lastversion = @filemtime(_DIR_RESTREINT . 'inc_version.php');
 
 	// en cache et a jour ?
 	if (@is_readable($fichier_aide) AND ($lastm >= $lastversion)) {
