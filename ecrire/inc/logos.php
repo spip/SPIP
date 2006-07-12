@@ -148,12 +148,13 @@ function afficher_logo($titre, $id_objet, $mode, $id, $script) {
 		}
 
 		if (!$afficher) {
-		  echo _T('info_installer_images_dossier',
-			  array('upload' => '<b>' . $dir_ftp . '</b>'));
+		  if ($dir_ftp) 
+			echo _T('info_installer_images_dossier',
+				array('upload' => '<b>' . $dir_ftp . '</b>'));
 		} else {
 		  echo "\n<div style='text-align: left'>",
 		    _T('info_selectionner_fichier',
-		       array('upload' => '<b>' . _DIR_TRANSFERT . '</b>')),
+		       array('upload' => '<b>' . $dir_ftp . '</b>')),
 		    ":</div>";
 			echo "\n<select name='source' CLASS='forml' size='1'>";
 			echo $afficher;
