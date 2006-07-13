@@ -860,7 +860,6 @@ function spip_initialisation() {
 
 	define('_IMG_GD_MAX_PIXELS', 0); # nombre de pixels maxi pour calcul de la vignette avec gd
 
-	define('_DIR_POLICES', "polices/");
 	// Icones
 	# le chemin http (relatif) vers les images standard
 	define('_DIR_IMG_PACK', (_DIR_RESTREINT . 'img_pack/'));

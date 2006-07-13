@@ -8,6 +8,9 @@ dist/inc-forum.html -text
 dist/inc-petition.html -text
 dist/inc-pied.html -text
 dist/inc-rubriques.html -text
+dist/polices/dustismo-license.txt -text svneol=unset#application/octet-stream
+dist/polices/dustismo.ttf -text
+dist/polices/dustismo_bold.ttf -text
 dist/puce.gif -text
 dist/puce_rtl.gif -text
 dist/spip.png -text
@@ -398,9 +401,6 @@ ecrire/lang/spip_br.php -text
 ecrire/lang/spip_bs.php -text
 ecrire/lang/spip_cs.php -text
 ecrire/lang/spip_ru.php -text
-ecrire/polices/dustismo-license.txt -text svneol=unset#application/octet-stream
-ecrire/polices/dustismo.ttf -text
-ecrire/polices/dustismo_bold.ttf -text
 ecrire/rien.gif -text
 ecrire/safehtml/classes/HTMLSax3.php -text
 ecrire/safehtml/classes/HTMLSax3/Decorators.php -text
