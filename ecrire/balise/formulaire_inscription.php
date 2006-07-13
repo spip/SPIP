@@ -69,7 +69,7 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus, $id=0) {
 	// et il indique si on s'inscrit a l'espace public ou prive 
 	// ou donne un message d'erreur aux appels suivants si pb
 
-	return array("formulaire_inscription", $GLOBALS['delais'],
+	return array("formulaires/formulaire_inscription", $GLOBALS['delais'],
 			array('focus' => $focus,
 				'message' => $message,
 				'mode' => $mode,

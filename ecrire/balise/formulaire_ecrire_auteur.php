@@ -83,7 +83,7 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_dyn($id_auteur, $id_article, $mail) {
 	}
 
 	return 
-		array('formulaire_ecrire_auteur', 0,
+		array('formulaires/formulaire_ecrire_auteur', 0,
 			array(
 			'id' => $id,
 			'mailko' => $mailko ? _T('form_prop_indiquer_email') : '',

@@ -174,7 +174,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 	foreach ($ids as $id => $v)
 		$script_hidden = parametre_url($script_hidden, $id, $v, '&');
 
-	return array('formulaire_forum', 0,
+	return array('formulaires/formulaire_forum', 0,
 	array(
 		'auteur' => $auteur,
 		'readonly' => ($type == "abo")? "readonly" : '',

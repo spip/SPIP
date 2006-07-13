@@ -151,7 +151,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 		$lang = '';
 
 
-	return array('formulaire_admin', 0,
+	return array('formulaires/formulaire_admin', 0,
 		array(
 			'id_article' => $id_article,
 			'id_rubrique' => $id_rubrique,
