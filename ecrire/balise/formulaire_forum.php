@@ -214,7 +214,7 @@ function inclure_previsu($texte,$titre, $email_auteur, $auteur, $url_site, $nom_
 	// (sinon on ne peut pas faire <cadre>...</cadre> dans les forums)
 	return preg_replace("@<(/?)f(orm[>[:space:]])@ism",
 			    "<\\1no-f\\2",
-		inclure_balise_dynamique(array('formulaire_forum_previsu',
+		inclure_balise_dynamique(array('formulaires/formulaire_forum_previsu',
 		      0,
 		      array(
 			'titre' => safehtml(typo($titre)),
