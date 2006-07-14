@@ -133,6 +133,59 @@ function plage_punct_unicode() {
 	return '\xE2(\x80[\x80-\xBF]|\x81[\x80-\xAF])';
 }
 
+// corriger caracteres non-conformes : 128-159
+// cf. charsets/iso-8859-1.php (qu'on recopie ici pour aller plus vite)
+function corriger_caracteres_windows($texte, $charset='AUTO') {
+	static $trans;
+
+	if ($charset=='AUTO') $charset = $GLOBALS['meta']['charset'];
+	if ($charset == 'utf-8') {
+		$p = chr(194);
+	} else if ($charset == 'iso-8859-1') {
+		$p = '';
+	} else
+		return $texte;
+
+	if (!isset($trans[$charset])) {
+		$trans[$charset] = array(
+			$p.chr(128) => "&#8364;",
+			$p.chr(129) => ' ', # pas affecte
+			$p.chr(130) => "&#8218;",
+			$p.chr(131) => "&#402;",
+			$p.chr(132) => "&#8222;",
+			$p.chr(133) => "&#8230;",
+			$p.chr(134) => "&#8224;",
+			$p.chr(135) => "&#8225;",
+			$p.chr(136) => "&#710;",
+			$p.chr(137) => "&#8240;",
+			$p.chr(138) => "&#352;",
+			$p.chr(139) => "&#8249;",
+			$p.chr(140) => "&#338;",
+			$p.chr(141) => ' ', # pas affecte
+			$p.chr(142) => "&#381;",
+			$p.chr(143) => ' ', # pas affecte
+			$p.chr(144) => ' ', # pas affecte
+			$p.chr(145) => "&#8216;",
+			$p.chr(146) => "&#8217;",
+			$p.chr(147) => "&#8220;",
+			$p.chr(148) => "&#8221;",
+			$p.chr(149) => "&#8226;",
+			$p.chr(150) => "&#8211;",
+			$p.chr(151) => "&#8212;",
+			$p.chr(152) => "&#732;",
+			$p.chr(153) => "&#8482;", 
+			$p.chr(154) => "&#353;",
+			$p.chr(155) => "&#8250;",
+			$p.chr(156) => "&#339;",
+			$p.chr(157) => ' ', # pas affecte
+			$p.chr(158) => "&#382;",
+			$p.chr(159) => "&#376;",
+		);
+	}
+	return strtr($texte, $trans[$charset]);
+}
+
+
 //
 // Transformer les &eacute; en &#123;
 // $secure = true pour *ne pas convertir* les caracteres malins &lt; &amp; etc.
@@ -191,16 +244,7 @@ function charset2unicode($texte, $charset='AUTO' /* $forcer: obsolete*/) {
 		return utf_8_to_unicode($texte);
 
 	case 'iso-8859-1':
-		// corriger caracteres non-conformes issus de Windows (CP-1252)
-		$faux_latin = array(
-			chr(138) => "&#352;", // Scaron
-			chr(140) => "&#338;", // OElig
-			chr(142) => "&#381;", // Zcaron
-			chr(154) => "&#353;", // scaron
-			chr(156) => "&#339;", // oelig
-			chr(158) => "&#382;" // zcaron
-		);
-		$texte = strtr($texte, $faux_latin);
+		$texte = corriger_caracteres_windows($texte, 'iso-8859-1');
 		// pas de break; ici, on suit sur default:
 
 	default:
@@ -268,9 +312,12 @@ function unicode2charset($texte, $charset='AUTO') {
 		$texte, $regs, PREG_PATTERN_ORDER)) {
 			$entites = array_flip($regs[1]);
 			foreach ($entites as $e => $v) {
-				if (intval($e)>127
-				AND $s = $CHARSET_REVERSE[$charset][intval($e)])
-					$trans['&#'.$e.';'] = chr($s);
+				if (intval($e)>127) {
+					if ($s = $CHARSET_REVERSE[$charset][intval($e)])
+						$trans['&#'.$e.';'] = chr($s);
+					else if (intval($e)<255)
+						$trans['&#'.$e.';'] = chr(intval($e));
+				}
 			}
 		}
 		// 2. Entites hexadecimales (type "&#xd0a;")
