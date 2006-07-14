@@ -24,7 +24,7 @@ include_spip('base/typedoc');
 // si $autoinc, c'est une auto-increment (i.e. serial) sur la Primary Key
 // Le nom des caches doit etre inferieur a 64 caracteres
 
-function spip_create_table($nom, $champs, $cles, $autoinc=false) {
+function spip_create_table($nom, $champs, $cles, $autoinc=false, $temporary=false) {
 	$query = ''; $keys = ''; $s = ''; $p='';
 
 	foreach($cles as $k => $v) {
@@ -40,8 +40,8 @@ function spip_create_table($nom, $champs, $cles, $autoinc=false) {
 		(($autoinc && ($p == $k)) ? " auto_increment" : '');
 		$s = ",";
 	}
-
-	spip_query_db("CREATE TABLE IF NOT EXISTS $nom ($query" . ($keys ? ",$keys" : '') . ")\n");
+	$temporary = $temporary ? 'TEMPORARY':'';
+	spip_query_db("CREATE $temporary TABLE IF NOT EXISTS $nom ($query" . ($keys ? ",$keys" : '') . ")\n");
 }
 
 
