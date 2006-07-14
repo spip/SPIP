@@ -88,7 +88,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 	// verifier l'identite des posteurs pour les forums sur abo
 	if ($type == "abo") {
 		if (!$GLOBALS["auteur_session"]) {
-			return array('formulaire_login_forum', 0,
+			return array('formulaires/formulaire_login_forum', 0,
 				array('inscription' => generer_url_public('spip_inscription'),
 					'oubli' => generer_url_public('spip_pass')));
 		} else {
