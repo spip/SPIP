@@ -12,128 +12,101 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-class Auth_ldap {
-	var $user_dn;
-	var $nom, $login, $email, $pass, $statut, $bio;
+// Authentifie via LDAP et retourne la ligne SQL decrivant l'utilisateur si ok
 
-	function init() {
-		// Verifier la presence de LDAP
-		if (!$GLOBALS['ldap_present']) return false;
-		return spip_connect_ldap();
-	}
+function inc_auth_ldap_dist ($login, $pass) {
 
-	function verifier_challenge_md5($login, $mdpass_actuel, $mdpass_futur) {
-		return false;
-	}
+	// Securite contre un serveur LDAP laxiste
+	if (!$login || !$pass) return array();
 
-	function verifier($login, $pass) {
-		global $ldap_link, $ldap_base;
+	// Serveur joignable ?
+	if (!@spip_connect_ldap()) return array();
 
-		// Securite, au cas ou le serveur LDAP est tres laxiste
-		if (!$login || !$pass) return false;
+	// Utilisateur connu ?
+	if (!($dn = auth_ldap_search($login, $pass))) return array();
 
-		// Attributs testes pour egalite avec le login
-		$atts = array('sAMAccountName', 'uid', 'login', 'userid', 'cn', 'sn');
-		$login_search = ereg_replace("[^-@._[:space:][:alnum:]]", "", $login); // securite
+	// Si l'utilisateur figure deja dans la base, y recuperer les infos
+	$result = spip_query("SELECT * FROM spip_auteurs WHERE login=" . spip_abstract_quote($login) . " AND source='ldap'");
 
-		// Tenter une recherche pour essayer de retrouver le DN
-		reset($atts);
-		while (list(, $att) = each($atts)) {
-			$filter = "$att=$login_search";
-			$result = @ldap_search($ldap_link, $ldap_base, $filter, array("dn"));
-			$info = @ldap_get_entries($ldap_link, $result);
+	// sinon importer les infos depuis LDAP, 
+	// avec le statut par defaut a l'install
+	if (!spip_num_rows($result))
+		$result = auth_ldap_inserer($dn, $GLOBALS['meta']["ldap_statut_import"]);
+	return $result ? spip_fetch_array($result) : array(); 
+}
+
+function auth_ldap_search($login, $pass)
+{
+	global $ldap_link, $ldap_base;
+
+	// Attributs testes pour egalite avec le login
+	$atts = array('sAMAccountName', 'uid', 'login', 'userid', 'cn', 'sn');
+	$login_search = ereg_replace("[^-@._[:space:][:alnum:]]", "", $login); // securite
+
+	// Tenter une recherche pour essayer de retrouver le DN
+	reset($atts);
+	while (list(, $att) = each($atts)) {
+		$result = @ldap_search($ldap_link, $ldap_base, "$att=$login_search", array("dn"));
+		$info = @ldap_get_entries($ldap_link, $result);
 			// Ne pas accepter les resultats si plus d'une entree
 			// (on veut un attribut unique)
-			if (is_array($info) AND $info['count'] == 1) {
-				$dn = $info[0]['dn'];
-				if (@ldap_bind($ldap_link, $dn, $pass)) {
-					$this->user_dn = $dn;
-					$this->login = $login;
-					return true;
-				}
-			}
+		if (is_array($info) AND $info['count'] == 1) {
+			$dn = $info[0]['dn'];
+			if (@ldap_bind($ldap_link, $dn, $pass)) return $dn;
 		}
+	}
 
+	if (!isset($dn)) {
 		// Si echec, essayer de deviner le DN
 		reset($atts);
 		while (list(, $att) = each($atts)) {
-			$dn = "$att=$login_search, $ldap_base";
-			if (@ldap_bind($ldap_link, $dn, $pass)) {
-				$this->user_dn = $dn;
-				$this->login = $login;
-				return true;
-			}
+			if (@ldap_bind($ldap_link, $dn, $pass))
+				return "$att=$login_search, $ldap_base";
 		}
-		return false;
 	}
+	return '';
+}
 
-	function lire() {
-		global $ldap_link, $ldap_base;
-		$this->nom = $this->email = $this->pass = $this->statut = '';
+function auth_ldap_inserer($dn, $statut)
+{
+	global $ldap_link, $ldap_base;
 
-		if (!$this->login) return false;
+	// refuser d'importer n'importe qui 
+	if (!$statut) return false;
 
-		// Si l'auteur existe dans la base, y recuperer les infos
-		$row = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE login=" . spip_abstract_quote($this->login) . " AND source='ldap'"));
-
-
-		if ($row) {
-			$this->nom = $row['nom'];
-			$this->email = $row['email'];
-			$this->statut = $row['statut'];
-			$this->bio = $row['bio'];
-			return true;
-		}
-
-		// Lire les infos sur l'auteur depuis LDAP
-		$result = @ldap_read($ldap_link, $this->user_dn, "objectClass=*", array("uid", "cn", "mail", "description"));
+	// Lire les infos sur l'utilisateur depuis LDAP
+	$result = @ldap_read($ldap_link, $dn, "objectClass=*", array("uid", "cn", "mail", "description"));
 		
-		// Si l'utilisateur ne peut lire ses infos, se reconnecter avec le compte principal
-		if (!$result) {
-			if (spip_connect_ldap())
-				$result = @ldap_read($ldap_link, $this->user_dn, "objectClass=*", array("uid", "cn", "mail", "description"));
-			else
-				return false;
+	// Si l'utilisateur ne peut lire ses infos, 
+	// se reconnecter avec le compte principal
+	if (!$result AND spip_connect_ldap())
+		$result = @ldap_read($ldap_link, $dn, "objectClass=*", array("uid", "cn", "mail", "description"));
+
+	if (!$result) return array();
+
+	    // Recuperer les donnees de l'auteur
+	$info = @ldap_get_entries($ldap_link, $result);
+	if (!is_array($info)) return array();
+	for ($i = 0; $i < $info["count"]; $i++) {
+		$val = $info[$i];
+		if (is_array($val)) {
+				if (!$nom) $nom = $val['cn'][0];
+				if (!$email) $email = $val['mail'][0];
+				if (!$login) $login = $val['uid'][0];
+				if (!$bio) $bio = $val['description'][0];
 		}
-		if (!$result) return false;
-
-		// Recuperer les donnees de l'auteur
-		$info = @ldap_get_entries($ldap_link, $result);
-		if (!is_array($info)) return false;
-		for ($i = 0; $i < $info["count"]; $i++) {
-			$val = $info[$i];
-			if (is_array($val)) {
-				if (!$this->nom) $this->nom = $val['cn'][0];
-				if (!$this->email) $this->email = $val['mail'][0];
-				if (!$this->login) $this->login = $val['uid'][0];
-				if (!$this->bio) $this->bio = $val['description'][0];
-			}
-		}
-
-		// Convertir depuis UTF-8 (jeu de caracteres par defaut)
-		include_spip('inc/charsets');
-		$this->nom = importer_charset($this->nom, 'utf-8');
-		$this->email = importer_charset($this->email, 'utf-8');
-		$this->login = importer_charset($this->login, 'utf-8');
-		$this->bio = importer_charset($this->bio, 'utf-8');
-
-		return true;
 	}
 
-	function activer() {
-		$login = strtolower(($this->login));
-		$statut = $GLOBALS['meta']["ldap_statut_import"];
+	// Convertir depuis UTF-8 (jeu de caracteres par defaut)
+	include_spip('inc/charsets');
+	$nom = importer_charset($nom, 'utf-8');
+	$email = importer_charset($email, 'utf-8');
+	$bio = importer_charset($bio, 'utf-8');
+	$login = strtolower(importer_charset($login, 'utf-8'));
 
-		if (!$statut) return false;
+	include_spip('base/abstract_sql');
+	$n = spip_abstract_insert('spip_auteurs', '(source, nom, login, email, bio, statut, pass)', "('ldap', " . spip_abstract_quote($nom) . ", " . spip_abstract_quote($login) . ", " . spip_abstract_quote($email) . ", " . spip_abstract_quote($bio) . ", " . spip_abstract_quote($statut) . ", '')");
 
-		// Si l'auteur n'existe pas, l'inserer avec le statut par defaut (defini a l'install)
-
-		$n = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE login=" . spip_abstract_quote($login)));
-		if ($n) return false;
-
-		$n = spip_query("INSERT IGNORE INTO spip_auteurs (source, nom, login, email, bio, statut, pass) VALUES ('ldap', " . spip_abstract_quote($this->nom) . ", " . spip_abstract_quote($login) . ", " . spip_abstract_quote($this->email) . ", " . spip_abstract_quote($this->bio) . ", '$statut', '')");
-		return $n;
-
-	}
+	return spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$n");
 }
 ?>
