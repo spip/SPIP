@@ -202,8 +202,6 @@ function analyser_backend($rss, $url_syndic='') {
 		else
 			$data['url'] = '';
 
-		$data['url'] = url_absolue(filtrer_entites($data['url']), $url_syndic);
-
 		// Titre (semi-obligatoire)
 		if (preg_match(",<title[^>]*>(.*?)</title>,ims",$item,$match))
 			$data['titre'] = $match[1];
@@ -315,6 +313,9 @@ function analyser_backend($rss, $url_syndic='') {
 		// Nettoyer les donnees et remettre les CDATA en place
 		cdata_echappe_retour($data, $echappe_cdata);
 		cdata_echappe_retour($tags, $echappe_cdata);
+
+		// passer l'url en absolue
+		$data['url'] = url_absolue(filtrer_entites($data['url']), $url_syndic);
 
 		// Trouver les microformats (ecrase les <category> et <dc:subject>)
 		if (preg_match_all(
