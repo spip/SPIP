@@ -1081,7 +1081,7 @@ entered important modifications on the graphics or the structure of the site.',
 'utf8_convert_erreur_orig' => 'Error: the character set @charset@ is not supported.',
 'utf8_convert_termine' => 'Finished!',
 'utf8_convert_timeout' => '<b>Important:</b> If the server  indicates <i>timeout</i>, please reload the page you receive the message &laquo;Finished!&raquo;.',
-'utf8_convert_verifier' => 'You now need to empty the site cache and then check if all is well on the public pages of the site. If you are stuck with a major problem, a backup of your original data (in SQL format) has been made int the @rep@ directory.',
+'utf8_convert_verifier' => 'You now need to empty the site cache and then check if all is well on the public pages of the site. If you are stuck with a major problem, a backup of your original data (in SQL format) has been made in the @rep@ directory.',
 'utf8_convertir_votre_site' => 'Convert your site to utf-8',
 
 

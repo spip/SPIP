@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_recalculer' => 'Rekalkulu tiun &#265;i pa&#285;on',
 'alerte_maj_impossible' => '<b>Alarmo&nbsp;!</b> La &#285;isdatigo de la MySQL-datenbazo al versio @version@ ne eblas pro datenbazo-modif-rajtaj kialoj. Bonvolu kontakti vian retgastiganton.',
 'analyse_xml' => 'XML analizo',
+'antispam_champ_vide' => '<NEW>Veuillez laisser ce champ vide&nbsp;:',
 'avis_archive_incorrect' => 'Tiu arkivo ne estas SPIP-dosiero',
 'avis_archive_invalide' => 'Tiu arkiva dosiero ne validas',
 'avis_attention' => 'ATENTU&nbsp;!',
