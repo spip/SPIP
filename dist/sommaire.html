@@ -2,21 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
-	<title>[(#NOM_SITE_SPIP|textebrut)]</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
-	[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|attribut_html)" />]
-	<meta name="generator" content="SPIP" />
-	[<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
-
-	<!-- Lien vers le backend pour navigateurs eclaires -->
-	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="#URL_PAGE{backend}" />
-
-	<!-- Ceci est la feuille de style par defaut pour le code genere par SPIP -->
-	<link rel="stylesheet" href="[(#CHEMIN{spip_style.css}|direction_css)]" type="text/css" media="all" />
-	<!-- Feuille de styles CSS pour l'affichage du site sur ecran -->
-	<link rel="stylesheet" href="[(#CHEMIN{habillage.css}|direction_css)]" type="text/css" media="projection, screen, tv" />
-	<!-- Feuille de styles CSS pour l'impression -->
-	<link rel="stylesheet" href="[(#CHEMIN{impression.css}|direction_css)]" type="text/css" media="print" />
+	<INCLURE{fond=inc-head}{descriptif=#DESCRIPTIF_SITE_SPIP}>
 </head>
 
 <body class="page_sommaire">

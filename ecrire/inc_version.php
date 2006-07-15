@@ -168,24 +168,25 @@ $controler_dates_rss = true;
 # note: un pipeline non reference se compile aussi, mais uniquement
 # lorsqu'il est rencontre
 $spip_pipeline = array(
-	'pre_typo' => '|extraire_multi',
-	'post_typo' => '|quote_amp',
-	'pre_propre' => '|extraire_multi',
-	'post_propre' => '',
-	'nettoyer_raccourcis_typo' => '',
-	'pre_indexation' => '',
-	'pre_syndication' => '',
-	'post_syndication' => '',
+	'affichage_final' => '|f_surligne|f_tidy|f_admin', # cf. public/assembler
+	'affiche_droite' => '',
+	'affiche_gauche' => '',
+	'affiche_milieu' => '',
 	'ajouter_boutons' => '',
 	'ajouter_onglets' => '',
-	'header_prive' => '',
 	'body_prive' => '',
 	'exec_init' => '',
-	'affiche_gauche' => '',
-	'affiche_droite' => '',
-	'affiche_milieu' => '',
+	'header_prive' => '',
+	'insert_head' => '',
+	'nettoyer_raccourcis_typo' => '',
+	'pre_indexation' => '',
+	'pre_propre' => '|extraire_multi',
+	'pre_syndication' => '',
+	'pre_typo' => '|extraire_multi',
+	'post_propre' => '',
+	'post_syndication' => '',
+	'post_typo' => '|quote_amp',
 	'rendu_evenement' => '',
-	'affichage_final' => '|f_surligne|f_tidy|f_admin', # cf. public/assembler
 	'taches_generales_cron' => ''
 );
 
