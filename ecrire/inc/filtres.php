@@ -2425,20 +2425,20 @@ function url_absolue($url, $base='') {
 // un filtre pour transformer les URLs relatives en URLs absolues ;
 // ne s'applique qu'aux textes contenant des liens
 function liens_absolus($texte, $base='') {
-	if (preg_match_all(',(<a[[:space:]]+[^<>]*href=["\']?)([^"\' ><[:space:]]+)([^<>]*>),ims', 
+	if (preg_match_all(',(<(a|link)[[:space:]]+[^<>]*href=["\']?)([^"\' ><[:space:]]+)([^<>]*>),ims', 
 	$texte, $liens, PREG_SET_ORDER)) {
 		foreach ($liens as $lien) {
-			$abs = url_absolue($lien[2], $base);
-			if ($abs <> $lien[2])
-				$texte = str_replace($lien[0], $lien[1].$abs.$lien[3], $texte);
+			$abs = url_absolue($lien[3], $base);
+			if ($abs <> $lien[3])
+				$texte = str_replace($lien[0], $lien[1].$abs.$lien[4], $texte);
 		}
 	}
-	if (preg_match_all(',(<img[[:space:]]+[^<>]*src=["\']?)([^"\' ><[:space:]]+)([^<>]*>),ims', 
+	if (preg_match_all(',(<(img|script)[[:space:]]+[^<>]*src=["\']?)([^"\' ><[:space:]]+)([^<>]*>),ims', 
 	$texte, $liens, PREG_SET_ORDER)) {
 		foreach ($liens as $lien) {
-			$abs = url_absolue($lien[2], $base);
-			if ($abs <> $lien[2])
-				$texte = str_replace($lien[0], $lien[1].$abs.$lien[3], $texte);
+			$abs = url_absolue($lien[3], $base);
+			if ($abs <> $lien[3])
+				$texte = str_replace($lien[0], $lien[1].$abs.$lien[4], $texte);
 		}
 	}
 	return $texte;
