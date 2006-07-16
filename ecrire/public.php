@@ -34,13 +34,9 @@ if (defined('_INC_PUBLIC')) {
 	//
 
 	// Faut-il initialiser SPIP ? (oui dans le cas general)
-	if (defined('_DIR_RESTREINT_ABS') AND
-	@file_exists(_DIR_RESTREINT_ABS.'inc_version.php')) {
-		include _DIR_RESTREINT_ABS.'inc_version.php';
-	}
-	else
-		if (defined('_DIR_RESTREINT') AND
-		@file_exists(_DIR_RESTREINT.'inc_version.php')) {
+	if (!defined('_DIR_RESTREINT_ABS'))
+		if (defined('_DIR_RESTREINT')
+		AND @file_exists(_DIR_RESTREINT.'inc_version.php')) {
 			include_once _DIR_RESTREINT.'inc_version.php';
 		}
 		else
