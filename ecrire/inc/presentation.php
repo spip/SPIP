@@ -120,7 +120,7 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 	
 	$ret .= "</div>";
 	
-	$ret .= "<div class='cadre-padding'>";
+	$ret .= "<div class='cadre-padding' style='overflow:hidden;'>";
 
 
 	return $ret;
@@ -2598,7 +2598,7 @@ function debut_corps_page($rubrique='') {
 	}
 	
 			if ($activer_imessage != "non") {
-				$result_auteurs = spip_query("SELECT id_auteur, nom FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND imessage!='non' AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE)");
+				$result_auteurs = spip_query("SELECT id_auteur, nom FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND imessage!='non' AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE) AND statut IN ('0minirezo','1comite')");
 
 				$nb_connectes = spip_num_rows($result_auteurs);
 			}
