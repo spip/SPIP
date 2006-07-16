@@ -75,8 +75,8 @@ function charger_fonction($nom, $dossier='exec', $continue=false) {
 function include_spip($f, $include = true) {
 
 	// deja charge (nom) ?
-	if (isset($GLOBALS['meta']['noyau'][_DIR_RESTREINT][$f])) {
-		$s = $GLOBALS['meta']['noyau'][_DIR_RESTREINT][$f];
+	if (isset($GLOBALS['meta']['noyau'][_NOYAU][$f])) {
+		$s = $GLOBALS['meta']['noyau'][_NOYAU][$f];
 		if ($include && $s) {
 			include_once $s;
 		}
@@ -84,10 +84,10 @@ function include_spip($f, $include = true) {
 	}
 	if (!$s = find_in_path($f . '.php')
 	AND (!_EXTENSION_PHP OR !$s = find_in_path($f . '.php3'))) {
-		return $GLOBALS['meta']['noyau'][_DIR_RESTREINT][$f] = false;
+		return $GLOBALS['meta']['noyau'][_NOYAU][$f] = false;
 	}
 
-	$GLOBALS['meta']['noyau'][_DIR_RESTREINT][$f] = $s;
+	$GLOBALS['meta']['noyau'][_NOYAU][$f] = $s;
 	if (!defined('ecrire_noyau'))
 		define('ecrire_noyau', 1);
 
@@ -607,6 +607,7 @@ function find_in_path ($filename) {
 				$dir .= "/";
 			$path_a[] = $dir;
 		}
+		define('_NOYAU', md5(join(':', $path_a)));
 	}
 
 	// Parcourir le chemin
