@@ -65,7 +65,7 @@ function calculer_visites($t) {
 	// et faire les calculs correspondants
 
 	// Traiter jusqu'a 100 sessions datant d'au moins 30 minutes
-	$sessions = preg_files(sous_repertoire(_DIR_SESSIONS, 'visites'));
+	$sessions = preg_files(sous_repertoire(_DIR_TMP, 'visites'));
 
 	$compteur = 100;
 	$date_init = time()-30*60;

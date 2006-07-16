@@ -71,7 +71,7 @@ function spip_cron($taches = array()) {
 	$tmin = $t;
 	clearstatcache();
 	foreach ($taches as $nom => $periode) {
-		$lock = _DIR_SESSIONS . $nom . '.lock';
+		$lock = _DIR_TMP . $nom . '.lock';
 		$date_lock = @filemtime($lock);
 		if ($date_lock + $periode < $tmin) {
 			$tmin = $date_lock + $periode;
@@ -98,8 +98,8 @@ function spip_cron($taches = array()) {
 		return;
 	}
 
-	// Un autre lock dans _DIR_SESSIONS, pour plus de securite
-	$lock = _DIR_SESSIONS . $tache . '.lock';
+	// Un autre lock dans _DIR_TMP, pour plus de securite
+	$lock = _DIR_TMP . $tache . '.lock';
 	if (spip_touch($lock, $taches[$tache])) {
 		// preparer la tache
 		spip_timer('tache');

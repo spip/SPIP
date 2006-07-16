@@ -247,7 +247,7 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 				spip_log("Extension $ext interdite a l'upload");
 				return;
 			}
-			if (!$tmp_dir = tempnam(_DIR_SESSIONS, 'tmp_upload')) return;
+			if (!$tmp_dir = tempnam(_DIR_TMP, 'tmp_upload')) return;
 			@unlink($tmp_dir); @mkdir($tmp_dir);
 			if (!is_dir(_DIR_IMG.'tmp')) @mkdir(_DIR_IMG.'tmp');
 			$tmp = $tmp_dir.'/'.translitteration($nom_envoye);

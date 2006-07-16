@@ -84,7 +84,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false){
 				}
 			}
 		}
-		ecrire_fichier(_DIR_SESSIONS."charger_plugins_$charge.php",
+		ecrire_fichier(_DIR_TMP."charger_plugins_$charge.php",
 			$start_file . $splugs . $s . $end_file);
 	}
 
@@ -163,7 +163,7 @@ function pipeline_precompile(){
 		$content .= $s_call;
 		$content .= "return \$val;\n}\n\n";
 	}
-	ecrire_fichier(_DIR_SESSIONS."charger_pipelines.php",
+	ecrire_fichier(_DIR_TMP."charger_pipelines.php",
 		$start_file . $content . $end_file);
 	return $liste_fichier_verif;
 }
@@ -180,7 +180,7 @@ function verification_precompile($liste_fichier_verif){
 		$content .= "
 		\$ok = \$ok & @is_readable($fichier);";
 	}
-	ecrire_fichier(_DIR_SESSIONS."verifier_presence_plugins.php",
+	ecrire_fichier(_DIR_TMP."verifier_presence_plugins.php",
 		$start_file . $content . $end_file);
 }
 
@@ -445,9 +445,9 @@ function verifie_include_plugins(){
 	global $auteur_session;
 	if ($auteur_session['statut']!='0minirezo') return;
 	// verifier la presence des plugins (on a pu en deplacer un)
-	if (@is_readable(_DIR_SESSIONS."verifier_presence_plugins.php")){
+	if (@is_readable(_DIR_TMP."verifier_presence_plugins.php")){
 		// verification precompile
-		include_once(_DIR_SESSIONS."verifier_presence_plugins.php");
+		include_once(_DIR_TMP."verifier_presence_plugins.php");
 		$ok = verifier_presence_plugins();
 		if ($ok) return;
 	}

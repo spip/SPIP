@@ -247,15 +247,16 @@ function spip_initialisation_parametree($dir1, $dir2) {
 	define('_DIR_CACHE', $dir1 ."CACHE/");
 	define('_DIR_PLUGINS', $dir1 . "plugins/");
 
-	define('_DIR_SESSIONS', $dir2 . "data/");
+	define('_DIR_TMP', $dir2 . "data/");
 	define('_DIR_DUMP', $dir2 . "data/");
+	define('_DIR_SESSIONS', $dir2 . "data/");
 	define('_DIR_TRANSFERT', $dir2 . "upload/");
 
 	// les fichiers qu'on y met, entre autres
-	define('_FILE_CRON_LOCK', _DIR_SESSIONS . 'cron.lock');
-	define('_FILE_MYSQL_OUT', _DIR_SESSIONS . 'mysql_out');
-	define('_FILE_GARBAGE', _DIR_SESSIONS . '.poubelle');
-	define('_FILE_META', _DIR_SESSIONS . 'meta_cache.txt');
+	define('_FILE_CRON_LOCK', _DIR_TMP . 'cron.lock');
+	define('_FILE_MYSQL_OUT', _DIR_TMP . 'mysql_out');
+	define('_FILE_GARBAGE', _DIR_TMP . '.poubelle');
+	define('_FILE_META', _DIR_TMP . 'meta_cache.txt');
 
 	// sous-repertoires d'images 
 	define('_DIR_TeX', _DIR_IMG . "cache-TeX/");
@@ -311,16 +312,16 @@ spip_initialisation();
 // car dans les plugins on peut inclure inc-version
 // qui ne sera pas execute car _ECRIRE_INC_VERSION est defini
 // donc il faut avoir tout fini ici avant de charger les plugins
-if (@is_readable(_DIR_SESSIONS."charger_plugins_options.php")){
+if (@is_readable(_DIR_TMP."charger_plugins_options.php")){
 	// chargement optimise precompile
-	include_once(_DIR_SESSIONS."charger_plugins_options.php");
+	include_once(_DIR_TMP."charger_plugins_options.php");
 } else {
 	include_spip('inc/plugin');
 	// generer les fichiers php precompiles
 	// de chargement des plugins et des pipelines
 	verif_plugin();
-	if (@is_readable(_DIR_SESSIONS."charger_plugins_options.php")){
-		include_once(_DIR_SESSIONS."charger_plugins_options.php");
+	if (@is_readable(_DIR_TMP."charger_plugins_options.php")){
+		include_once(_DIR_TMP."charger_plugins_options.php");
 	}
 	else
 		spip_log("generation de charger_plugins_options.php impossible; pipeline desactives");

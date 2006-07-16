@@ -111,7 +111,7 @@ function exec_convert_utf8_dist() {
 		demander_conversion($tables_a_convertir, $action);
 
 		// si on est la c'est que l'autorisation ftp vient d'etre donnee
-		@unlink(_DIR_SESSIONS.'convert_utf8_backup.sql');
+		@unlink(_DIR_TMP.'convert_utf8_backup.sql');
 
 		// convertir spip_meta
 		$charset_source = $GLOBALS['meta']['conversion_charset'];
@@ -134,7 +134,7 @@ function exec_convert_utf8_dist() {
 
 	// preparer un fichier de sauvegarde au cas ou
 	// on met 'a' car ca peut demander plusieurs rechargements
-	$f = @fopen(_DIR_SESSIONS.'convert_utf8_backup.sql', 'a');
+	$f = @fopen(_DIR_TMP.'convert_utf8_backup.sql', 'a');
 
 
 	foreach ($tables_a_convertir as $table => $champ) {
@@ -201,7 +201,7 @@ function exec_convert_utf8_dist() {
 	if ($f) fclose($f);
 
 	echo "<p><b>"._T('utf8_convert_termine')."</b>";
-	echo "<p> "._T('utf8_convert_verifier', array('rep' => joli_repertoire(_DIR_SESSIONS)));
+	echo "<p> "._T('utf8_convert_verifier', array('rep' => joli_repertoire(_DIR_TMP)));
 	effacer_meta('conversion_charset');
 	ecrire_metas();
 

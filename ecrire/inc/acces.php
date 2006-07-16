@@ -104,7 +104,7 @@ function ecrire_logins($fichier, $tableau_logins) {
 
 function ecrire_acces() {
 	$htaccess = _DIR_RESTREINT . _ACCESS_FILE_NAME;
-	$htpasswd = _DIR_SESSIONS . _AUTH_USER_FILE;
+	$htpasswd = _DIR_TMP . _AUTH_USER_FILE;
 
 	// si .htaccess existe, outrepasser spip_meta
 	if (($GLOBALS['meta']['creer_htpasswd'] == 'non') AND !@file_exists($htaccess)) {
@@ -193,7 +193,7 @@ function gerer_htaccess() {
 }
 
 // En profiter pour verifier la securite de ecrire/data/
-verifier_htaccess(_DIR_SESSIONS);
+verifier_htaccess(_DIR_TMP);
 
 initialiser_sel();
 

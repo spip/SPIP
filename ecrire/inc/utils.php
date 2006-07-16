@@ -131,7 +131,7 @@ function pipeline($action,$val) {
 
 	// chargement initial des fonctions mises en cache, ou generation du cache
 	if (!$charger) {
-		if (!($ok = @is_readable($charger = _DIR_SESSIONS."charger_pipelines.php"))) {
+		if (!($ok = @is_readable($charger = _DIR_TMP."charger_pipelines.php"))) {
 			include_spip('inc/plugin');
 			// generer les fichiers php precompiles
 			// de chargement des plugins et des pipelines
@@ -177,7 +177,7 @@ function spip_log($message, $logname='spip') {
 	$message = date("M d H:i:s").' '.$GLOBALS['ip'].' '.$pid.' '
 		.preg_replace("/\n*$/", "\n", $message);
 
-	$logfile = _DIR_SESSIONS . $logname . '.log';
+	$logfile = _DIR_TMP . $logname . '.log';
 	if (@is_readable($logfile)
 	AND (!$s = @filesize($logfile) OR $s > 10*1024)) {
 		$rotate = true;
@@ -879,7 +879,7 @@ function spip_initialisation() {
 	define('_DEFAULT_CHARSET', 'utf-8');
 
 	// les repertoires devant etre TOUJOURS accessibles en ecriture
-	$GLOBALS['test_dirs'] = array(_DIR_CACHE, _DIR_IMG, _DIR_SESSIONS);
+	$GLOBALS['test_dirs'] = array(_DIR_CACHE, _DIR_IMG, _DIR_TMP);
 
 	// qq chaines standard
 	define('_ACCESS_FILE_NAME', '.htaccess');
@@ -982,7 +982,7 @@ function spip_initialisation() {
 
 
 	// Lire les meta cachees
-	if (lire_fichier(_DIR_SESSIONS . 'meta_cache.txt', $meta))
+	if (lire_fichier(_DIR_TMP . 'meta_cache.txt', $meta))
 		$GLOBALS['meta'] = @unserialize($meta);
 	// en cas d'echec refaire le fichier
 	if (!is_array($GLOBALS['meta']) AND _FILE_CONNECT) {
@@ -1027,11 +1027,12 @@ function spip_desinfecte(&$t) {
 }
 
 // Authentifier le visiteur s'il s'annonce
-// Rq: pour que cette fonction marche depuis mes_options elle a besoin
-// que quelques petites constantes soient deja initialisees
+
 function verifier_visiteur() {
-	if (!defined('_DIR_SESSIONS'))
-		define('_DIR_SESSIONS', _DIR_RESTREINT . "data/");
+// Rq: pour que cette fonction marche depuis mes_options elle a besoin
+// que les constantes principale soient deja initialisees
+	@spip_initialisation_parametree(_DIR_RACINE, _DIR_RESTREINT) ;
+
 	if (isset($_COOKIE['spip_session']) OR
 	(isset($_SERVER['PHP_AUTH_USER'])  AND !$GLOBALS['ignore_auth_http'])) {
 		include_spip('inc/session');
