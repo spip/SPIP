@@ -117,26 +117,6 @@ function afficher_logo($titre, $id_objet, $mode, $id, $script) {
 	  echo $logo;
 	}
 	else {
-		$type = $GLOBALS['table_logos'][$id_objet];
-		$hash = calculer_action_auteur("iconifier-$type$mode$id");
-		echo debut_block_invisible(md5($titre));
-
-		echo "\n\n<form action='" . generer_url_action('iconifier') . "' method='POST'
-			ENCTYPE='multipart/form-data'>
-			<div>";
-		echo "\n<input name='redirect' type='hidden' value='",
-		  generer_url_ecrire($script, "$id_objet=$id"), 
-		  "' />";
-		echo "\n<input name='id_auteur' type='hidden' value='$connect_id_auteur' />";
-		echo "\n<input name='hash' type='hidden' value='$hash' />";
-		echo "\n<input name='action' type='hidden' value='iconifier' />";
-		echo "\n<input name='arg' type='hidden' value='$type$mode$id' />";
-		echo "\n"._T('info_telecharger_nouveau_logo')."<br />";
-		echo "\n<input name='image' type='File' class='forml' style='font-size:9px;' size='15'>";
-		echo "<div align='",  $GLOBALS['spip_lang_right'], "'>";
-		echo "\n<input name='sousaction1' type='submit' value='",
-		  _T('bouton_telecharger'),
-		  "' class='fondo' style='font-size:9px' /></div>";
 		$afficher = "";
 		$dir_ftp = determine_upload();
 		if ($dir_ftp
@@ -146,27 +126,41 @@ function afficher_logo($titre, $id_objet, $mode, $id, $script) {
 				$afficher .= "\n<option value='$f'>$f</option>";
 			}
 		}
-
 		if (!$afficher) {
 		  if ($dir_ftp) 
-			echo _T('info_installer_images_dossier',
+			$afficher = _T('info_installer_images_dossier',
 				array('upload' => '<b>' . $dir_ftp . '</b>'));
 		} else {
-		  echo "\n<div style='text-align: left'>",
-		    _T('info_selectionner_fichier',
-		       array('upload' => '<b>' . $dir_ftp . '</b>')),
-		    ":</div>";
-			echo "\n<select name='source' CLASS='forml' size='1'>";
-			echo $afficher;
-			echo "\n</select>";
-			echo "<div align='",  $GLOBALS['spip_lang_right'], "'>";
-			echo "\n<input name='sousaction2' type='submit' value='"._T('bouton_choisir')."' CLASS='fondo'  style='font-size:9px' /></div>";
+		$afficher = "\n<div style='text-align: left'>" .
+			_T('info_selectionner_fichier',
+				array('upload' => '<b>' . $dir_ftp . '</b>')) .
+			":</div>" .
+			"\n<select name='source' CLASS='forml' size='1'>$afficher\n</select>" .
+			"\n<div align='" .
+			$GLOBALS['spip_lang_right'] .
+			"'><input name='sousaction2' type='submit' value='".
+			_T('bouton_choisir') .
+			"' CLASS='fondo'  style='font-size:9px' /></div>";
 		}
+		$afficher = "\n" .
+			_T('info_telecharger_nouveau_logo') .
+			"<br />" .
+			"\n<input name='image' type='File' class='forml' style='font-size:9px;' size='15'>" .
+			"<div align='" .  $GLOBALS['spip_lang_right'] . "'>" .
+			"\n<input name='sousaction1' type='submit' value='" .
+			_T('bouton_telecharger') .
+			"' class='fondo' style='font-size:9px' /></div>" .
+			$afficher;
+
+		$type = $GLOBALS['table_logos'][$id_objet];
+		echo debut_block_invisible(md5($titre));
+		echo generer_action_auteur('iconifier',
+			"$type$mode$id",
+			generer_url_ecrire($script, "$id_objet=$id"), 
+			$afficher,
+			" method='POST' ENCTYPE='multipart/form-data'");
 		echo fin_block();
-		echo "</div></FORM>\n";
 	}
-
-
 	return $logo;
 }
 

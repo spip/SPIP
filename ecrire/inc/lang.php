@@ -261,14 +261,14 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	} else {
 		if (_DIR_RESTREINT) {
 			$cible = $lien;
+			$lien = generer_url_action('cookie');
 		} else {
 			$cible = _DIR_RESTREINT_ABS . $lien;
 			if (_FILE_CONNECT) {
 				include_spip('inc/session');
-				$args = "id_auteur=$connect_id_auteur&valeur=".calculer_action_auteur('var_lang_ecrire', $connect_id_auteur);
-			}
+				$lien = generer_action_auteur('cookie','var_lang_ecrire');
+			} else $lien = generer_url_action('cookie');
 		}
-		$lien = generer_url_action('cookie', $args);
 	}
 
 	return "<form action='$lien' method='post' style='margin:0px; padding:0px;'>"

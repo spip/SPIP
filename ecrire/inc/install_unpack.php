@@ -20,17 +20,15 @@ function inc_install_unpack()
  
   debut_admin(generer_url_post_ecrire("install"),$action);
 
-  $hash = calculer_action_auteur("unpack");
-
   fin_admin($action);
 
 	## ??????? a verifier
   if (@file_exists(_DIR_RACINE . "spip_loader" . '.php'))
-    redirige_par_entete(generer_url_public("spip_loader"), "?hash=$hash&id_auteur=$connect_id_auteur");
-  else if (@file_exists(_DIR_RACINE . "spip_unpack" . '.php'))
-    redirige_par_entete(generer_url_public("spip_unpack"), "?hash=$hash&id_auteur=$connect_id_auteur");
-  else
-    redirige_par_entete(generer_url_public("spip_loader"), "?hash=$hash&id_auteur=$connect_id_auteur");
+	redirige_par_entete(generer_action_auteur('loader','','',true));
+  else if (@file_exists(_DIR_RESTREINT . 'inc/install_unpack.php'))
+	redirige_par_entete(generer_action_auteur('unpack','','',true));
+  else // c'est qui lui ???? 
+	redirige_par_entete(generer_action_auteur('loader','','',true)
 }
 
 ?>

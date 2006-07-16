@@ -47,7 +47,6 @@ function fichier_session($id_session, $alea) {
 function ajouter_session($auteur, $id_session, $lang='') {
 
 	global $auteur_session;
-
 	if ($lang) {
 		spip_query("UPDATE spip_auteurs SET lang = " . spip_abstract_quote($lang) . " WHERE id_auteur = " . intval($auteur['id_auteur']));
 		$auteur_session['lang'] = $lang;
@@ -69,7 +68,7 @@ function ajouter_session($auteur, $id_session, $lang='') {
 
 function update_prefs_session($prefs, $id_auteur)
 {
-  $prefs = serialize($prefs);
+	$prefs = serialize($prefs);
 	spip_query("UPDATE spip_auteurs SET prefs = " . spip_abstract_quote($prefs) . " WHERE id_auteur = $id_auteur");
 }
 
@@ -197,15 +196,10 @@ function verifier_php_auth() {
 			return false;
 		$row = spip_fetch_array($result);
 		if (($row['source'] != 'ldap' OR !$GLOBALS['ldap_present'])
-		AND $row['pass'] != md5($row['alea_actuel'] . $_SERVER['PHP_AUTH_PW'])) {
+                AND $row['pass'] != md5($row['alea_actuel'] . $_SERVER['PHP_AUTH_PW'])) {
 			return false;
 		} else {
-			$GLOBALS['auteur_session']['id_auteur'] = $row['id_auteur'];
-			$GLOBALS['auteur_session']['nom'] = $row['nom'];
-			$GLOBALS['auteur_session']['login'] = $row['login'];
-			$GLOBALS['auteur_session']['email'] = $row['email'];
-			$GLOBALS['auteur_session']['statut'] = $row['statut'];
-			$GLOBALS['auteur_session']['lang'] = $row['lang'];
+			$GLOBALS['auteur_session'] = $row;
 			$GLOBALS['auteur_session']['hash_env'] = hash_env();
 			return true;
 		}
@@ -233,11 +227,7 @@ function ask_php_auth($pb, $raison, $retour, $url='', $re='', $lien='') {
 // et charge ses valeurs dans $GLOBALS['auteur_session']
 //
 function verifier_session_visiteur() {
-	if (verifier_session($_COOKIE['spip_session']))
-		return true;
-	if (verifier_php_auth())
-		return true;
-	return false;
+	return verifier_session($_COOKIE['spip_session']) ? true : verifier_php_auth();
 }
 
 //
@@ -256,10 +246,10 @@ function renouvelle_alea()
 	}
 }
 
-function caracteriser_auteur($id_auteur) {
+function caracteriser_auteur($id_auteur=0) {
+	global $auteur_session;
 	if (!($id_auteur = intval($id_auteur))) {
-		global $connect_id_auteur, $connect_pass;
-		return array($connect_id_auteur, $connect_pass);
+		return array($auteur_session['id_auteur'], $auteur_session['pass']); 
 	}
 	else {
 		$result = spip_query("SELECT id_auteur, pass FROM spip_auteurs WHERE id_auteur=$id_auteur");
@@ -288,15 +278,28 @@ function verifier_action_auteur($action, $valeur, $id_auteur = 0) {
 	return false;
 }
 
-function generer_action_auteur($action, $arg, $redirect="", $no_entites=false)
+function generer_action_auteur($action, $arg, $redirect="", $mode=false, $att='')
 {
-	renouvelle_alea();
-	list($id_auteur, $pass) = 
-		caracteriser_auteur($GLOBALS['connect_id_auteur']);
+	static $id_auteur=0, $pass;
+	if (!$id_auteur) {
+		renouvelle_alea();
+		list($id_auteur, $pass) =  caracteriser_auteur();
+	}
 	$hash = _action_auteur("$action-$arg", $id_auteur, $pass, 'alea_ephemere');
-	if ($redirect) $redirect = "&redirect=" . rawurlencode($redirect);
-
-	return generer_url_action($action, "arg=$arg&id_auteur=$id_auteur&hash=$hash$redirect", $no_entites);
+	if (!is_string($mode))
+	  return generer_url_action($action, "arg=$arg&id_auteur=$id_auteur&hash=$hash" . (!$redirect ? '' : ("&redirect=" . rawurlencode($redirect))), $mode);
+	if ($redirect)
+		$redirect = "\n\t\t<input name='redirect' type='hidden' value='$redirect' />";
+	return "\n<form action='" .
+		generer_url_action($action,'') .
+		"'$att>\n\t<div>
+		<input name='id_auteur' type='hidden' value='$id_auteur' />
+		<input name='hash' type='hidden' value='$hash' />
+		<input name='action' type='hidden' value='$action' />
+		<input name='arg' type='hidden' value='$arg' />" .
+		$redirect .  
+		$mode .
+		"\n\t</div>\n</form>\n";
 }
 
 function redirige_action_auteur($action, $arg, $ret, $gra)

@@ -562,60 +562,65 @@ function afficher_formulaire_taille($document, $type_inclus='AUTO') {
 // Afficher un formulaire d'upload
 //
 
-function afficher_upload($id, $intitule, $inclus = '', $mode, $type="", $ancre='', $document=0) {
-  global   $spip_lang_right,$connect_id_auteur;
+function afficher_upload($id, $intitule='', $inclus = '', $mode='', $type="", $ancre='', $id_document=0) {
+	global $spip_lang_right;
 	static $num_form = 0; $num_form ++;
 
-	$res = "\n<div>" . bouton_block_invisible("ftp$num_form") .
-		$intitule . "</div>\n<div>" .
-		"\n<input name='fichier' type='file' style='font-size: 10px;' class='forml' size='15' />" .
-		"\n<div align='" .
+	if (!_DIR_RESTREINT) {
+		$dir_ftp = determine_upload();
+		$debut = "\n" . bouton_block_invisible("ftp$num_form");
+		$milieu = "<div>" . debut_block_invisible("ftp$num_form");
+		$fin = "\n" . fin_block();
+	} else $dir_ftp = $debut = $fin = '';
+
+	$res =  "\n$debut" .
+		(!$intitule ? '' : "\n\t<div>$intitule</div>") .
+		"\n\t\t<input name='fichier' type='file' style='font-size: 10px;' class='forml' size='15' />" .
+		"\n\t\t<div align='" .
 		$GLOBALS['spip_lang_right'] . 
-		"'><input name='sousaction1' type='Submit' VALUE='" .
+		"'><input name='sousaction1' type='submit' value='" .
 		_T('bouton_telecharger') .
-		"' CLASS='fondo'></div>\n";
+		"' class='fondo' /></div>";
 
 	// Un menu depliant si on a une possibilite supplementaire
-	$dir_ftp = determine_upload();
+
 	$test_distant = ($mode == 'document' AND $type);
 	if ($dir_ftp OR $test_distant)
-		$res .= "<div>" . debut_block_invisible("ftp$num_form");
+		$res .= $milieu;
 
 	if ($dir_ftp)
 		$res .= afficher_transferer_upload($type, texte_upload_manuel($dir_ftp,$inclus));
 
 	// Lien document distant, jamais en mode image
 	if ($test_distant) {
-		$res .=
-			"<p /><div style='border: 1px #303030 solid; padding: 4px; color: #505050;'>" .
-			"<img src='"._DIR_IMG_PACK.'attachment.gif' .
+		$res .=	"<p />\n<div style='border: 1px #303030 solid; padding: 4px; color: #505050;'>" .
+			"\n\t<img src='"._DIR_IMG_PACK.'attachment.gif' .
 			"' style='float: $spip_lang_right;' alt=\"\" />\n" .
-			"\n"._T('info_referencer_doc_distant')."<br />" .
-			"\n<input name='url' class='fondo' value='http://' />" .
-			"\n<div align='".$GLOBALS['spip_lang_right'].
-			"'><input name='sousaction2' type='Submit' value='"._T('bouton_choisir')."' class='fondo'></div>" .
-			"</div>\n";
+			_T('info_referencer_doc_distant') .
+			"<br />\n\t<input name='url' class='fondo' value='http://' />" .
+			"\n\t<div align='" .
+			$GLOBALS['spip_lang_right'] .
+			"'><input name='sousaction2' type='Submit' value='".
+			_T('bouton_choisir').
+			"' class='fondo'></div>" .
+			"\n</div>";
 	}
 
 	if ($dir_ftp OR $test_distant)
-		$res .= "</div>\n";
+		$res .= $fin;
 	// Fin menu depliant
 
-	$res .= "</div>\n" . fin_block();
+	$res .= "\n\t\t<input type='hidden' name='id' value='$id' />" .
+		"\n\t\t<input type='hidden' name='id_document' value='$id_document' />" .
+		"\n\t\t<input type='hidden' name='type' value='$type' />" .
+		"\n\t\t<input type='hidden' name='ancre' value='$ancre' />" .
+		"\n\t$fin";
 
-	$redirect = generer_url_ecrire($GLOBALS['exec'], "id_$type=$id");
-
-	return construire_upload($res,
-				array(
-				'redirect' => $redirect,
-				'hash' => calculer_action_auteur("joindre-$mode"),
-				'id' => $id, 
-				'id_auteur' => $connect_id_auteur,
-				'arg' => $mode,
-				'type' => $type,
-				'id_document' => $document,
-				'ancre' => $ancre),
-				'multipart/form-data');
+	return generer_action_auteur('joindre', 
+		$mode,
+		generer_url_ecrire($GLOBALS['exec'], "id_$type=$id"),
+		$res,
+		" method='POST' enctype='multipart/form-data' style='border: 0px; margin: 0px;'");
 }
 
 function construire_upload($corps, $args, $enctype='')
@@ -629,7 +634,7 @@ function construire_upload($corps, $args, $enctype='')
 	return "\n<form method='post' action='" . generer_url_action('joindre') .
 	  "'" .
 	  (!$enctype ? '' : " enctype='$enctype'") .
-	  " style='border: 0px; margin: 0px;'
+	  " 
 	  >\n" .
 	  "<div>" .
   	  "\n<input type='hidden' name='action' value='joindre' />" .
