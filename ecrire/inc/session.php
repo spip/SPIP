@@ -196,8 +196,8 @@ function verifier_php_auth() {
 		if (!$GLOBALS['db_ok'])
 			return false;
 		$row = spip_fetch_array($result);
-		$auth_mdpass = md5($row['alea_actuel'] . $_SERVER['PHP_AUTH_PW']);
-		if ($auth_mdpass != $row['pass']) {
+		if (($row['source'] != 'ldap' OR !$GLOBALS['ldap_present'])
+		AND $row['pass'] != md5($row['alea_actuel'] . $_SERVER['PHP_AUTH_PW'])) {
 			return false;
 		} else {
 			$GLOBALS['auteur_session']['id_auteur'] = $row['id_auteur'];
