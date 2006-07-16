@@ -236,8 +236,10 @@ $hash_recherche = '';
 $hash_recherche_strict = '';
 $profondeur_url = 0;
 
-// Fonction definissant les repertoires et fichiers indispensables
-// et non mutualisables
+// Fonction definissant les repertoires et fichiers non mutualisables. 
+// Elle indique dans $test_dirs ceux devant etre accessibles en ecriture
+// mais ne touche pas a cette variable si elle est deja definie
+// afin que mes_options.php puisse en specifier d'autres
 
 function spip_initialisation_parametree($dir1, $dir2) {
 
@@ -258,8 +260,9 @@ function spip_initialisation_parametree($dir1, $dir2) {
 	define('_FILE_GARBAGE', _DIR_TMP . '.poubelle');
 	define('_FILE_META', _DIR_TMP . 'meta_cache.txt');
 
-	// sous-repertoires d'images 
+	// sous-repertoires d'images et d'icones
 	define('_DIR_TeX', _DIR_IMG . "cache-TeX/");
+	define('_DIR_IMG_ICONES', _DIR_IMG . "icones/");
 
 	// Le fichier de connexion a la base de donnees
 	define('_FILE_CONNECT_INS', ($dir2 . "inc_connect"));
@@ -267,6 +270,9 @@ function spip_initialisation_parametree($dir1, $dir2) {
 		(@is_readable($f = _FILE_CONNECT_INS . '.php') ? $f
 	:	(@is_readable($f = _FILE_CONNECT_INS . '.php3') ? $f
 	:	false)));
+
+	if (!isset($GLOBALS['test_dirs']))
+	    $GLOBALS['test_dirs'] =  array(_DIR_CACHE, _DIR_IMG, _DIR_TMP);
 }
 
 //
@@ -294,6 +300,7 @@ if (defined('_FILE_OPTIONS')) {
 //
 // 
 // mais cette fonction a peut-etre deja ete appelee par mes_options
+
 @spip_initialisation_parametree(_DIR_RACINE, _DIR_RESTREINT) ;
 
 //
