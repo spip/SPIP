@@ -39,14 +39,19 @@ if ($f = include_spip('mes_fonctions', false)) {
 
 function verifier_version_sauvegarde ($archive) {
 	global $spip_version;
-	global $flag_gz;
+	global $flag_gz, $connect_toutes_rubriques;
 
+	if ($connect_toutes_rubriques) {
+		$dir = _DIR_DUMP;
+	} else {
+		$dir = _DIR_TRANSFERT . $connect_login . '/';
+	}
 	$_fopen = ($flag_gz) ? gzopen : fopen;
 	$_fread = ($flag_gz) ? gzread : fread;
 	$buf_len = 1024; // la version doit etre dans le premier ko
 
-	if (@file_exists(_DIR_SESSIONS . $archive)) {
-		$f = $_fopen(_DIR_SESSIONS . $archive, "rb");
+	if (@file_exists($f = $dir . $archive)) {
+		$f = $_fopen($f, "rb");
 		$buf = $_fread($f, $buf_len);
 
 		if (ereg('<SPIP [^>]* version_base="([0-9.]+)".*version_archive="([^"]+)"', $buf, $regs)

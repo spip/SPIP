@@ -248,6 +248,7 @@ function spip_initialisation_parametree($dir1, $dir2) {
 	define('_DIR_PLUGINS', $dir1 . "plugins/");
 
 	define('_DIR_SESSIONS', $dir2 . "data/");
+	define('_DIR_DUMP', $dir2 . "data/");
 	define('_DIR_TRANSFERT', $dir2 . "upload/");
 
 	// les fichiers qu'on y met, entre autres
