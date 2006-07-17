@@ -2997,4 +2997,12 @@ function direction_css ($css) {
 ### fonction depreciee, laissee ici pour compat ascendante 1.9
 function entites_unicode($texte) { return charset2unicode($texte); }
 
+// filtre table_valeur
+// permet de recuperer la valeur d'un tableau pour une cle donnee
+// prend en entree un tableau serialise ou non (ce qui permet d'enchainer le filtre)
+function table_valeur($table,$cle,$defaut=''){
+	$table= is_string($table)?unserialize($table):$table;
+	$table= is_array($table)?$table:array();
+	return isset($table[$cle])?$table[$cle]:$defaut;
+}
 ?>
