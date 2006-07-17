@@ -13,12 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function lire_metas() {
-	// preserver le noyau
-	if (_DIR_RESTREINT)
-		$noyau = $GLOBALS['meta']['noyau'];
-	else
-		$noyau = array();
-
 	$result = spip_query("SELECT nom,valeur FROM spip_meta");
 	if($GLOBALS['db_ok']) {
 		$GLOBALS['meta'] = array();
@@ -28,7 +22,8 @@ function lire_metas() {
 	if (!$GLOBALS['meta']['charset'])
 		ecrire_meta('charset', _DEFAULT_CHARSET);
 
-	$GLOBALS['meta']['noyau'] = $noyau;
+	if (isset($GLOBALS['noyau']))
+		$GLOBALS['meta']['noyau'] = $GLOBALS['noyau'];
 }
 
 function ecrire_meta($nom, $valeur) {
