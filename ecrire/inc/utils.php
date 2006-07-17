@@ -981,8 +981,10 @@ function spip_initialisation() {
 		$GLOBALS['meta'] = @unserialize($meta);
 		if (_DIR_RESTREINT
 		AND isset($GLOBALS['meta']['noyau'])
-		AND is_array($GLOBALS['meta']['noyau']))
+		AND is_array($GLOBALS['meta']['noyau'])) {
 			$GLOBALS['noyau'] = $GLOBALS['meta']['noyau'];
+			unset ($GLOBALS['meta']['noyau']);
+		}
 	}
 	// en cas d'echec refaire le fichier
 	if (!is_array($GLOBALS['meta']) AND _FILE_CONNECT) {
