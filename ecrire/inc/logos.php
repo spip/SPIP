@@ -37,10 +37,11 @@ function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
 	}
 }
 
-function cherche_logo($id, $type, $mode, $formats = array ('gif', 'jpg', 'png')) {
+function cherche_logo($id, $type, $mode) {
+	global $formats_logos;
 	# attention au cas $id = '0' pour LOGO_SITE_SPIP : utiliser intval()
 	$nom = $type . $mode . intval($id);
-	foreach ($formats as $format) {
+	foreach ($formats_logos as $format) {
 		if (@file_exists($d = (_DIR_LOGOS . $nom . '.' . $format)))
 			return array($d, _DIR_LOGOS, $nom, $format);
 	}
@@ -59,14 +60,16 @@ function decrire_logo($id_objet, $mode, $id, $width, $height, $titre="", $script
 	if (!$titre)
 		return $res;
 	else {
-		if ($taille = @getimagesize($fid))
-			$xy = _T('info_largeur_vignette', array('largeur_vignette' => $taille[0], 'hauteur_vignette' => $taille[1]));
-		return "<p><center><div><a href='" .
-		$fid .
-		"'>$res</a></div>" .
+	  if ($res)
+	    $res = "<div><a href='" .	$fid . "'>$res</a></div>";
+	  else
+	    $res = "<img src='$fid' width='$width' height='$height' alt='" . htmlentities($titre) . "' />";
+	  if ($taille = @getimagesize($fid))
+			$taille = _T('info_largeur_vignette', array('largeur_vignette' => $taille[0], 'hauteur_vignette' => $taille[1]));
+	  return "<p><center>$res" .
 		debut_block_invisible(md5($titre)) .
 		"<font size='1'>" .
-		$xy .
+		$taille .
 		"\n<br />[<a href='" .
 		redirige_action_auteur("iconifier", "unlink $nom.$format", $script, "$id_objet=$id") .
 		"'>".
@@ -519,7 +522,6 @@ function reduire_image_logo($img, $taille = -1, $taille_y = -1) {
 	}
 	$logo = $local;
 
-
 	$attributs = '';
 
 	// preserver le name='...' et le mettre en alt le cas echant
@@ -567,27 +569,24 @@ function reduire_image_logo($img, $taille = -1, $taille_y = -1) {
 
 function ratio_image($logo, $nom, $format, $taille, $taille_y, $attributs)
 {
-	if ($taille_origine = @getimagesize($logo)) {
-		list ($destWidth,$destHeight, $ratio) = image_ratio(
-			$taille_origine[0], $taille_origine[1], $taille, $taille_y);
+	if (!$taille_origine = @getimagesize($logo)) return '';
+	list ($destWidth,$destHeight, $ratio) = image_ratio($taille_origine[0], $taille_origine[1], $taille, $taille_y);
 
 		// Creer effectivement la vignette reduite
-		$suffixe = '-'.$destWidth.'x'.$destHeight;
-		$preview = creer_vignette($logo, $taille, $taille_y,
-			 $format, ('cache'.$suffixe), $nom.$suffixe);
-		if ($preview) {
+	$suffixe = '-'.$destWidth.'x'.$destHeight;
+	$preview = creer_vignette($logo, $taille, $taille_y, $format, ('cache'.$suffixe), $nom.$suffixe);
+	if ($preview) {
 			$logo = $preview['fichier'];
 			$destWidth = $preview['width'];
 			$destHeight = $preview['height'];
-		}
+	}
 
 		// dans l'espace prive mettre un timestamp sur l'adresse 
 		// de l'image, de facon a tromper le cache du navigateur
 		// quand on fait supprimer/reuploader un logo
 		// (pas de filemtime si SAFE MODE)
-		$date = _DIR_RESTREINT ? '' : ('?date='.@filemtime($logo));
-		return "<img src='$logo$date' width='".$destWidth."' height='".$destHeight."'$attributs />";
-	}
+	$date = _DIR_RESTREINT ? '' : ('?date='.@filemtime($logo));
+	return "<img src='$logo$date' width='".$destWidth."' height='".$destHeight."'$attributs />";
 }
 
 ?>

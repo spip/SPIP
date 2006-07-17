@@ -156,6 +156,7 @@ $source_vignettes = "http://open.thumbshots.org/image.pxf?url=http://";
 // $source_vignettes = "http://msnsearch.srv.girafa.com/srv/i?s=MSNSEARCH&r=http://";
 // $source_vignettes = "http://pthumbnails.alexa.com/image_server.cgi?id=www.monsite.net&size=small&url=http://";
 
+$formats_logos =  array ('gif', 'jpg', 'png');
 
 // Controler les dates des item dans les flux RSS ?
 $controler_dates_rss = true;
