@@ -1,18 +1,30 @@
 #CACHE{86400}
-	<title>[(#ENV{titre}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
-	[<meta name="description" content="(#ENV{descriptif}|couper{150}|attribut_html)" />]
-	<meta name="generator" content="SPIP" />
-	[<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
 
-	<!-- Lien vers le backend pour navigateurs eclaires -->
-	<link rel="alternate" type="application/rss+xml" title="[(#ID_RUBRIQUE|?{<:syndiquer_rubrique:>,<:syndiquer_site:>})]" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
+[(#REM)
+	Entete standard de toutes les pages ; les elements specifiques
+	(title, description) figurent dans le squelette article.html
+]
 
-	<!-- Ceci est la feuille de style par defaut pour le code genere par SPIP -->
-	<link rel="stylesheet" href="[(#CHEMIN{spip_style.css}|direction_css)]" type="text/css" media="all" />
-	<!-- Feuille de styles CSS pour l'affichage du site sur ecran -->
-	<link rel="stylesheet" href="[(#CHEMIN{habillage.css}|direction_css)]" type="text/css" media="projection, screen, tv" />
-	<!-- Feuille de styles CSS pour l'impression -->
-	<link rel="stylesheet" href="[(#CHEMIN{impression.css}|direction_css)]" type="text/css" media="print" />
+[(#REM) Preciser le charset ]
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
 
-	#INSERT_HEAD
+[(#REM) Fierement fabrique avec SPIP ]
+<meta name="generator" content="SPIP" />
+
+[(#REM) Lien vers l'icone destinee a la barre de bookmarks ]
+[<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
+
+[(#REM) Lien vers le flux RSS du site ]
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="#URL_PAGE{backend}" />
+
+[(#REM) Feuille de style par defaut pour le code genere par SPIP ]
+<link rel="stylesheet" href="[(#CHEMIN{spip_style.css}|direction_css)]" type="text/css" media="all" />
+
+[(#REM) Feuille de style CSS pour l'affichage du site a l'ecran ]
+<link rel="stylesheet" href="[(#CHEMIN{habillage.css}|direction_css)]" type="text/css" media="projection, screen, tv" />
+
+[(#REM) Feuille de style CSS pour l'impression ]
+<link rel="stylesheet" href="[(#CHEMIN{impression.css}|direction_css)]" type="text/css" media="print" />
+
+[(#REM) Balise permettant aux plugins d'inserer des appels javascript ou css ]
+#INSERT_HEAD
