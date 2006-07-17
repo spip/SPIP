@@ -24,8 +24,8 @@ function liste_plugin_files(){
 	$plugin_files=array();
 	foreach (preg_files(_DIR_PLUGINS, '/plugin[.]xml$') as $plugin) {
 		$infos = plugin_get_infos(substr(dirname($plugin), strlen(_DIR_PLUGINS)));
-		if (!isset($infos['erreur']))
-			$plugin_files[]=substr(dirname($plugin), strlen(_DIR_PLUGINS));
+		#if (!isset($infos['erreur'])) // on affiche les erreurs c'est utile aux developpeurs
+		$plugin_files[]=substr(dirname($plugin), strlen(_DIR_PLUGINS));
 	}
 	sort($plugin_files);
 	return $plugin_files;
