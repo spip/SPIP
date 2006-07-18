@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-include_spip('inc/logos');
 include_spip('base/abstract_sql');
 
 function exec_mots_edit_dist()
@@ -139,9 +138,10 @@ if ($id_mot) {
 // Logos du mot-clef
 //
 
-if ($id_mot > 0 AND $connect_statut == '0minirezo'  AND $connect_toutes_rubriques AND ($spip_display != 4))
-  afficher_boite_logo('id_mot', $id_mot, _T('logo_mot_cle').aide("breveslogo"), _T('logo_survol'), 'mots_edit');
-
+ if ($id_mot > 0 AND $connect_statut == '0minirezo'  AND $connect_toutes_rubriques AND ($spip_display != 4)) {
+	include_spip('inc/chercher_logo');
+	echo afficher_boite_logo('id_mot', $id_mot, _T('logo_mot_cle').aide("breveslogo"), _T('logo_survol'), 'mots_edit');
+ }
 
 //
 // Afficher les boutons de creation d'article et de breve

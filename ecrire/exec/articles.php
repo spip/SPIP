@@ -16,7 +16,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/texte');
 include_spip('inc/rubriques');
-include_spip('inc/logos');
 include_spip('inc/mots');
 include_spip('inc/date');
 include_spip('inc/documents');
@@ -270,10 +269,11 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 
 // Logos de l'article
 
-	if ($id_article AND $flag_editable AND ($spip_display != 4))
-	  afficher_boite_logo('id_article', $id_article,
+  if ($id_article AND $flag_editable AND ($spip_display != 4)) {
+	  include_spip('inc/chercher_logo');
+	  echo afficher_boite_logo('id_article', $id_article,
 			      _T('logo_article').aide ("logoart"), _T('logo_survol'), 'articles');
-
+  }
 
 //
 // Boites de configuration avancee

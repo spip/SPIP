@@ -16,7 +16,6 @@ include_spip('inc/presentation');
 include_spip('inc/texte');
 include_spip('inc/rubriques');
 include_spip('inc/forum');
-include_spip('inc/logos');
 include_spip('inc/mots');
 include_spip('inc/documents');
 include_spip('base/abstract_sql');
@@ -105,8 +104,10 @@ function exec_naviguer_dist()
 //
 // Logos de la rubrique
 //
-		if ($flag_editable AND ($spip_display != 4)) 
-			afficher_boite_logo('id_rubrique', $id_rubrique, ($id_rubrique ? _T('logo_rubrique') : _T('logo_standard_rubrique'))." ".aide ("rublogo"), _T('logo_survol'), 'naviguer');
+		if ($flag_editable AND ($spip_display != 4)) {
+			include_spip('inc/chercher_logo');
+			echo afficher_boite_logo('id_rubrique', $id_rubrique, ($id_rubrique ? _T('logo_rubrique') : _T('logo_standard_rubrique'))." ".aide ("rublogo"), _T('logo_survol'), 'naviguer');
+		}
 
 //
 // Afficher les boutons de creation d'article et de breve

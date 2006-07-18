@@ -14,7 +14,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/rubriques');
-include_spip('inc/logos');
 include_spip('inc/mots');
 include_spip('inc/date');
 include_spip('base/abstract_sql');
@@ -69,11 +68,12 @@ fin_boite_info();
 // Logos de la breve
 //
 
-if (($spip_display != 4) AND $id_breve>0 AND ($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique)))
-	afficher_boite_logo('id_breve', $id_breve,
+ if (($spip_display != 4) AND $id_breve>0 AND ($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique))) {
+	include_spip('inc/chercher_logo');
+	echo afficher_boite_logo('id_breve', $id_breve,
 			    _T('logo_breve').aide ("breveslogo"),
 			    _T('logo_survol'), 'breves_voir'); 
-
+ }
 
 debut_raccourcis();
 icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui&id_rubrique=$id_rubrique"), "breve-24.gif","creer.gif");

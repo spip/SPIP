@@ -229,7 +229,7 @@ function enfant_rub($collection){
 		
 	if ($voir_logo) {
 		$voir_logo = "float: $spip_lang_right; margin-$spip_lang_right: -6px; margin-top: -6px;";
-		include_spip('inc/logos');
+		$logo_f = charger_fonction('chercher_logo', 'inc');
 	}
 
 	$les_enfants = "";
@@ -250,8 +250,8 @@ function enfant_rub($collection){
 		if ($spip_display == 4) $les_enfants .= "<li>";
 
 		if ($voir_logo) {
-			$logo = decrire_logo("id_rubrique", 'on', $id_rubrique, 48, 36);
-			if ($logo)
+			if ($logo = $logo_f($id_rubrique, $id_rubrique, 'on'))
+				if ($logo = decrire_logo("id_rubrique", 'on', $id_rubrique, 48, 36))
 				$logo =  "<div style='$voir_logo'>$logo</div>";
 		}
 		$les_enfants .= "<div class='enfants'>" .

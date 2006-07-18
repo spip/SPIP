@@ -69,11 +69,10 @@ function afficher_sites_boucle($row, &$tous_id, $voir_logo, $bof)
 	$s = "<a href=\"".generer_url_ecrire("sites","id_syndic=$id_syndic")."\" title=\"$title\">";
 
 	if ($voir_logo) {
-
-		include_spip('inc/logos');
-		$logo = decrire_logo("id_syndic", 'on', $id_syndic, 26, 20);
-		if ($logo)
-			$s .= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</div>";
+		$logo_f = charger_fonction('chercher_logo', 'inc');
+		if ($logo = $logo_f($id_syndic, $id_syndic, 'on'))
+			if ($logo = decrire_logo("id_syndic", 'on', $id_syndic, 26, 20))
+				$s .= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</div>";
 	}
 
 	$s .= http_img_pack($puce, $statut, "width='7' height='7'") ."&nbsp;&nbsp;";

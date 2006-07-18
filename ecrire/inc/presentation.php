@@ -501,7 +501,6 @@ function affiche_tranche_bandeau($requete, $icone, $col, $fg, $bg, $tmp_var, $de
 	global $spip_display ;
 
 	$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
-	if ($voir_logo) include_spip('inc/logos');
 
 	$tous_id = array();
 
@@ -791,7 +790,6 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 		
 	$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
 		
-	if ($voir_logo) include_spip('inc/logos');
 
 	//echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
 	echo afficher_liste_debut_tableau(), str_replace("::id_ajax_fonc::", $id_ajax_fonc, $tranches);
@@ -890,11 +888,10 @@ function afficher_articles_boucle($row, &$tous_id, $afficher_auteurs, $afficher_
 		"'$descriptif$dir_lang style=\"display:block;\">";
 
 	if ($voir_logo) {
-
-		include_spip('inc/logos');
-		$logo = decrire_logo("id_article", 'on', $id_article, 26, 20);
-		if ($logo)
-			$s .= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</div>";
+		$logo_f = charger_fonction('chercher_logo', 'inc');
+		if ($logo = $logo_f($id_article, 'id_article', 'on'))
+			if ($logo = decrire_logo("id_article", 'on', $id_article, 26, 20, $logo))
+				$s .= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</div>";
 	}
 
 	$s .= typo($titre);
@@ -1179,11 +1176,10 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 	$s .= "<a href='" . generer_url_ecrire("breves_voir","id_breve=$id_breve") . "' style=\"display:block;\">";
 
 	if ($voir_logo) {
-
-		include_spip('inc/logos');
-		$logo = decrire_logo("id_breve", 'on', $id_breve, 26, 20);
-		if ($logo)
-			$s .= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</div>";
+		$logo_f = charger_fonction('chercher_logo', 'inc');
+		if ($logo = $logo_f($id_breve, 'id_breve', 'on'))
+			if ($logo = decrire_logo("id_breve", 'on', $id_breve, 26, 20))
+				$s .= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</div>";
 	}
 
 	$s .= typo($titre);
@@ -1418,7 +1414,6 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 		$voir_logo = (($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non") ? 
 		      "position: absolute; $spip_lang_right: 0px; margin: 0px; margin-top: -3px; margin-$spip_lang_right: 0px;" 
 		      : '');
-		if ($voir_logo) include_spip('inc/logos');
 	}
 
 	$id_forum=$row['id_forum'];
@@ -1446,10 +1441,10 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	}
 	$titre_boite = '';
 	if ($id_auteur AND $voir_logo) {
-		include_spip('inc/logos');
-		$titre_boite = decrire_logo("id_auteur", 'on', $id_auteur, 48, 48);
-		if ($titre_boite)
-			$titre_boite = "<div style='$voir_logo'>$titre_boite</div>" ;
+		$logo_f = charger_fonction('chercher_logo', 'inc');
+		if ($logo = $logo_f($id_auteur, 'id_auteur', 'on'))
+			if ($logo = decrire_logo("id_auteur", 'on', $id_auteur, 48, 48))
+			    $titre_boite = "<div style='$voir_logo'>$$logo</div>" ;
 	} 
 
 	$titre_boite .= typo($titre);
