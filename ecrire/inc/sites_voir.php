@@ -71,7 +71,7 @@ function afficher_sites_boucle($row, &$tous_id, $voir_logo, $bof)
 	if ($voir_logo) {
 		$logo_f = charger_fonction('chercher_logo', 'inc');
 		if ($logo = $logo_f($id_syndic, $id_syndic, 'on'))
-			if ($logo = decrire_logo("id_syndic", 'on', $id_syndic, 26, 20))
+		  if ($logo = decrire_logo("id_syndic", 'on', $id_syndic, 26, 20, $logo))
 				$s .= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</div>";
 	}
 

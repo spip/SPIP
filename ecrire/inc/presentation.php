@@ -1178,7 +1178,7 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 	if ($voir_logo) {
 		$logo_f = charger_fonction('chercher_logo', 'inc');
 		if ($logo = $logo_f($id_breve, 'id_breve', 'on'))
-			if ($logo = decrire_logo("id_breve", 'on', $id_breve, 26, 20))
+		  if ($logo = decrire_logo("id_breve", 'on', $id_breve, 26, 20, $logo))
 				$s .= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</div>";
 	}
 
@@ -1443,7 +1443,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	if ($id_auteur AND $voir_logo) {
 		$logo_f = charger_fonction('chercher_logo', 'inc');
 		if ($logo = $logo_f($id_auteur, 'id_auteur', 'on'))
-			if ($logo = decrire_logo("id_auteur", 'on', $id_auteur, 48, 48))
+		  if ($logo = decrire_logo("id_auteur", 'on', $id_auteur, 48, 48, $logo))
 			    $titre_boite = "<div style='$voir_logo'>$$logo</div>" ;
 	} 
 
