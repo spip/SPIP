@@ -530,7 +530,7 @@ function texte_upload_manuel($dir, $inclus = '') {
 
 
 // Bloc d'edition de la taille du doc (pour embed)
-function afficher_formulaire_taille($document, $type_inclus='AUTO') {
+function afficher_formulaire_taille($document) {
 
 	// (on ne le propose pas pour les images qu'on sait
 	// lire, id_type<=3), sauf bug, ou document distant
@@ -540,18 +540,23 @@ function afficher_formulaire_taille($document, $type_inclus='AUTO') {
 	AND $document['distant']!='oui')
 		return '';
 	$id_document = $document['id_document'];
-	// Si on n'a pas le type_inclus, on va le chercher dans spip_types_documents
-	if ($type_inclus == 'AUTO'
-	AND $type = @spip_abstract_fetsel('inclus', 'spip_types_documents', "id_type=".$document['id_type']))
-			$type_inclus = $type['inclus'];
 
-	if (($type_inclus == "embed"  #meme pour le MP3 : "l x h pixels"? 
-	OR $type_inclus == "image")
-	    AND ($document['largeur'] * $document['hauteur']
-	    OR $document['distant'] == 'oui'
-	    OR $document['id_type']==19 // rm dont la taille ne peut etre lue par getimagesize
-	    OR $document['id_type']==12 // mov dont la taille ne peut etre lue par getimagesize
-	    )) {
+	// Donnees sur le type de document
+	$t = @spip_abstract_fetsel('inclus,extension',
+		'spip_types_documents', "id_type=".$document['id_type']);
+	$type_inclus = $t['type_inclus'];
+	$extension = $t['extension'];
+
+	# TODO -- pour le MP3 "l x h pixels" ne va pas
+	if (($type_inclus == "embed" OR $type_inclus == "image")
+	AND (
+		// documents dont la taille est definie
+		$document['largeur'] * $document['hauteur']
+		// ou distants
+		OR $document['distant'] == 'oui'
+		// ou formats dont la taille ne peut etre lue par getimagesize
+		OR $extension=='rm' OR $extension=='mov'
+	)) {
 		echo "<br /><b>"._T('entree_dimensions')."</b><br />\n";
 		echo "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"".$document['largeur']."\" size='5' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" />";
 		echo " &#215; <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"".$document['hauteur']."\" size='5' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /> "._T('info_pixels');
