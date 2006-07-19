@@ -2857,17 +2857,7 @@ function debut_droite($rubrique="") {
 
 function fin_html() {
 
-	echo "</font>";
-
-	// rejouer le cookie de session si l'IP a change
-	if ($GLOBALS['spip_session'] && $GLOBALS['auteur_session']['ip_change']) {
-		echo 
-		  http_img_pack('rien.gif', " ", "name='img_session' width='0' height='0'"),
-		  http_script("\ndocument.img_session.src='" . generer_url_public('spip_cookie','change_session=oui') . "'");
-	}
-
-	echo "</body></html>\n";
-
+	echo "</font>", $GLOBALS['rejoue_session'], "</body></html>\n";
 }
 
 

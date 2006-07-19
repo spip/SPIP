@@ -105,10 +105,8 @@ if (strval($nom)!='') {
 	}
 
 	if ($modif_login) {
-		include_spip('inc/session');
-		zap_sessions ($auteur['id_auteur'], true);
-		if ($connect_id_auteur == $auteur['id_auteur'])
-			supprimer_session($GLOBALS['spip_session']);
+		$var_f = charger_fonction('session', 'inc');
+		$var_f($auteur['id_auteur']);
 	}
 
 	// email
