@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
+@ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
 
 $GLOBALS['version_archive'] = '1.3';
 

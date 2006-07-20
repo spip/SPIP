@@ -222,14 +222,18 @@ function preg_files($dir, $pattern=-1 /* AUTO */, $maxfiles = 10000, $recurs=arr
 						$fichiers[] = "$dir/$f";
 						$nbfiles++;
 					}
-				} else if (is_dir("$dir/$f")
-				AND !in_array(realpath("$dir/$f"), $recurs)) {
-					array_push($recurs, realpath("$dir/$f"));
-					$beginning = $fichiers;
-					$end = preg_files("$dir/$f/", $pattern,
-						$maxfiles-$nbfiles, $recurs);
-					$fichiers = array_merge((array)$beginning, (array)$end);
-					$nbfiles = count($fichiers);
+				} 
+				else if (is_dir("$dir/$f")){
+					$rp = @realpath("$dir/$f");
+					if (!is_string($rp) OR !strlen($rp)) $rp="$dir/$f"; # realpath n'est peut etre pas autorise
+					if (!in_array($rp, $recurs)) {
+						array_push($recurs, $rp);
+						$beginning = $fichiers;
+						$end = preg_files("$dir/$f/", $pattern,
+							$maxfiles-$nbfiles, $recurs);
+						$fichiers = array_merge((array)$beginning, (array)$end);
+						$nbfiles = count($fichiers);
+					}
 				}
 			}
 		}
