@@ -1049,7 +1049,7 @@ function maj_base() {
 	if ($version_installee < 1.905) {
 		// agrandir le champ "valeur" de spip_meta pour pouvoir y stocker
 		// des choses plus sympa
-		spip_query("ALTER TABLE `spip_meta` CHANGE `valeur` `valeur` TEXT");
+		spip_query("ALTER TABLE spip_meta CHANGE `valeur` `valeur` TEXT");
 		// table des correspondances table->id_table
 		$liste_tables = array();
 		$liste_tables[1]='spip_articles';
@@ -1177,6 +1177,15 @@ function maj_base() {
 	// Ajout de plein de type mime
 	if ($version_installee < 1.915) {
 		maj_version(1.915);
+	}
+	// refaire l'upgrade 1.905 qui a pu foirer en partie a cause de la requete ALTER sur `spip_meta`
+	if ($version_installee < 1.916) {
+		// agrandir le champ "valeur" de spip_meta pour pouvoir y stocker
+		// des choses plus sympa
+		spip_query("ALTER TABLE spip_meta CHANGE `valeur` `valeur` TEXT");
+		include_spip('inc/indexation');
+		update_index_tables();
+		maj_version(1.916);
 	}
 
 }
