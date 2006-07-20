@@ -67,4 +67,10 @@ function ecrire_metas() {
 if (!isset($GLOBALS['meta']))
 	lire_metas();
 
+// On force le renouvellement de l'alea de l'espace prive tous les 2 jours
+
+if (!_DIR_RESTREINT AND abs(time() -  $GLOBALS['meta']['alea_ephemere_date']) > 2 * 24*3600) {
+	include_spip('inc/acces');
+	renouvelle_alea();
+ }
 ?>

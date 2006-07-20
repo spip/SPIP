@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_iconifier_dist()
 {
 	global $action, $arg, $hash, $id_auteur;
-	include_spip('inc/session');
+	include_spip('inc/actions');
 	if (!verifier_action_auteur("$action-$arg", $hash, $id_auteur)) {
 		include_spip('inc/minipres');
 		minipres(_T('info_acces_interdit'));

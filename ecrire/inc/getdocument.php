@@ -426,7 +426,6 @@ function traite_svg($file)
 	// Securite si pas guru: virer les scripts et les references externes
 	// Trop expeditif, a ameliorer
 
-        include_spip('inc/session');
         $var_auth = charger_fonction('auth', 'inc');
 	$var_auth();
 

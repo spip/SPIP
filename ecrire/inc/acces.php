@@ -10,10 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-//
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
 
 function creer_pass_aleatoire($longueur = 8, $sel = "") {
 	$seed = (double) (microtime() + 1) * time();
@@ -43,6 +40,38 @@ function creer_pass_aleatoire($longueur = 8, $sel = "") {
 	return $pass;
 }
 
+//
+// Creer un identifiant aleatoire (a fusionnner avec le precedent ?)
+//
+
+function creer_uniqid() {
+	static $seeded;
+
+	if (!$seeded) {
+		$seed = (double) (microtime() + 1) * time();
+		mt_srand($seed);
+		srand($seed);
+		$seeded = true;
+	}
+
+	$s = mt_rand();
+	if (!$s) $s = rand();
+	return uniqid($s, 1);
+}
+
+//
+// Renouvellement de l'alea utilise pour sécuriser les scripts dans action/
+//
+
+function renouvelle_alea()
+{
+	$alea = md5(creer_uniqid());
+	ecrire_meta('alea_ephemere_ancien',$GLOBALS['meta']['alea_ephemere']);
+	ecrire_meta('alea_ephemere', $alea);
+	ecrire_meta('alea_ephemere_date', time());
+	ecrire_metas();
+  	spip_log("renouvellement de l'alea_ephemere: $alea");
+}
 
 //
 // low-security : un ensemble de fonctions pour gerer de l'identification

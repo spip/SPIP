@@ -45,8 +45,8 @@ function inc_auth_spip_dist ($login, $pass) {
 
 	// fait tourner le codage du pass dans la base
 	if ($md5next) {
-			include_spip('inc/session');
-			@spip_query("UPDATE spip_auteurs SET alea_actuel = alea_futur, pass = " . spip_abstract_quote($md5next) . ", alea_futur = '" . creer_uniqid() ."' WHERE id_auteur=" . $row['id_auteur']);
+		include_spip('inc/acces'); // pour creer_uniqid
+		@spip_query("UPDATE spip_auteurs SET alea_actuel = alea_futur, pass = " . spip_abstract_quote($md5next) . ", alea_futur = '" . creer_uniqid() ."' WHERE id_auteur=" . $row['id_auteur']);
 
 	}
 	return $row;

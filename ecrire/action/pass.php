@@ -12,7 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/session'); # pour creer_uniq_id
 include_spip('inc/minipres'); # charge lang et execute utiliser_lang
 include_spip('inc/mail'); # pour envoyer_mail
 include_spip('inc/acces'); # pour generer_htpass
@@ -50,6 +49,7 @@ function message_oubli($email, $param)
 	if ($row['statut'] == '5poubelle' OR $row['pass'] == '')
 		return  _T('pass_erreur_acces_refuse');
 
+	include_spip('inc/acces'); # pour creer_uniqid
 	$cookie = creer_uniqid();
 	spip_query("UPDATE spip_auteurs SET cookie_oubli = '$cookie' WHERE id_auteur=" . $row['id_auteur']);
 

@@ -81,7 +81,6 @@ if (autoriser_sans_cookie($exec)) {
 	if (!isset($reinstall)) $reinstall = 'non';
 	$var_auth = true;
 } else {
-	include_spip('inc/session');
 	$var_auth = charger_fonction('auth', 'inc');
 	$var_auth = $var_auth();
 	if ($var_auth) redirige_par_entete($var_auth);

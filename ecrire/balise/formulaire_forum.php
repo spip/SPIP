@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 include_spip('inc/meta');
-include_spip('inc/session');
 include_spip('inc/acces');
 include_spip('inc/texte');
 include_spip('inc/lang');
@@ -155,6 +154,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 
 		$alea = forum_fichier_tmp();
 
+		include_spip('inc/actions');
 		$hash = calculer_action_auteur('ajout_forum'.join(' ', $ids).' '.$alea);
 	}
 

@@ -1041,7 +1041,10 @@ function verifier_visiteur() {
 	if (isset($_COOKIE['spip_session']) OR
 	(isset($_SERVER['PHP_AUTH_USER'])  AND !$GLOBALS['ignore_auth_http'])) {
 		$var_f = charger_fonction('session', 'inc');
-		if (!$var_f()) verifier_php_auth();
+		if (!$var_f()) {
+		  include_spip('inc/actions');
+		  verifier_php_auth();
+		}
 	}
 }
 

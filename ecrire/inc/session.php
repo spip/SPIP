@@ -21,13 +21,13 @@ include_spip('inc/meta');
  *
  */
 
-$GLOBALS['auteur_session'] = '';
-$GLOBALS['rejoue_session'] = '';
+$GLOBALS['auteur_session'] = ''; # gloable decrivant l'auteur
+$GLOBALS['rejoue_session'] = ''; # globale pour insertion de JS en fin de page
 
 //
 // 3 actions sur les sessions, selon le type de l'argument:
 //
-// - numérique: efface toutes les sessions de l'id_auteur (retour quelconque)
+// - numérique: efface toutes les sessions de l'auteur (retour quelconque)
 // - tableau: cree une session pour l'auteur decrit et retourne l'identifiant
 // - autre: predicat de validite de la session indiquee par le cookie
 
@@ -47,9 +47,9 @@ function inc_session_dist($auteur=false)
 function ajouter_session($auteur) {
 
 	global $spip_session;
-	renouvelle_alea();
+
 	if (!$spip_session) 
-		$spip_session = $auteur['id_auteur'].'_'.md5(creer_uniqid());
+		$spip_session = $auteur['id_auteur'].'_'.md5(uniqid(rand(),true));
 
 	$fichier_session = fichier_session($spip_session, $GLOBALS['meta']['alea_ephemere']);
 
@@ -77,7 +77,6 @@ function supprimer_sessions($id_auteur) {
 	$dir = opendir(_DIR_SESSIONS);
 	$t = time()  - (48 * 3600);
 	while(($f = readdir($dir)) !== false) {
-
 		if (ereg("^session_([0-9]+)_[a-z0-9]+\.php[3]?$", $f, $regs)){
 			$f = _DIR_SESSIONS . $f;
 			if (($regs[1] == $id_auteur) OR ($t > filemtime($f)))
@@ -164,154 +163,6 @@ function hash_env() {
   static $res ='';
   if ($res) return $res;
   return $res = md5($GLOBALS['ip'] . $_SERVER['HTTP_USER_AGENT']);
-}
-
-//
-// Creer un identifiant aleatoire
-//
-function creer_uniqid() {
-	static $seeded;
-
-	if (!$seeded) {
-		$seed = (double) (microtime() + 1) * time();
-		mt_srand($seed);
-		srand($seed);
-		$seeded = true;
-	}
-
-	$s = mt_rand();
-	if (!$s) $s = rand();
-	return uniqid($s, 1);
-}
-
-
-
-//
-// reconnaitre un utilisateur authentifie en php_auth
-//
-function verifier_php_auth() {
-	if ($_SERVER['PHP_AUTH_USER'] && $_SERVER['PHP_AUTH_PW']
-	&& !$GLOBALS['ignore_auth_http']) {
-		$result = spip_query("SELECT * FROM spip_auteurs WHERE login=" . spip_abstract_quote($_SERVER['PHP_AUTH_USER']));
-		if (!$GLOBALS['db_ok'])
-			return false;
-		$row = spip_fetch_array($result);
-		if (($row['source'] != 'ldap' OR !$GLOBALS['ldap_present'])
-                AND $row['pass'] != md5($row['alea_actuel'] . $_SERVER['PHP_AUTH_PW'])) {
-			return false;
-		} else {
-			$GLOBALS['auteur_session'] = $row;
-			$GLOBALS['auteur_session']['hash_env'] = hash_env();
-			return true;
-		}
-	}
-}
-
-//
-// entete php_auth (est-encore utilise ?)
-//
-function ask_php_auth($pb, $raison, $retour, $url='', $re='', $lien='') {
-	@Header("WWW-Authenticate: Basic realm=\"espace prive\"");
-	@Header("HTTP/1.0 401 Unauthorized");
-	echo "<b>$pb</b><p>$raison</p>[<a href='./'>$retour</a>] ";
-	if ($url) {
-		echo "[<a href='", generer_url_public('spip_cookie',"essai_auth_http=oui&$url"), "'>$re</a>]";
-	}
-	
-	if ($lien)
-		echo " [<a href='" . _DIR_RESTREINT_ABS . "'>"._T('login_espace_prive')."</a>]";
-	exit;
-}
-
-//
-// Renouvellement de l'alea utilise pour valider certaines operations
-// (session, ajouter une image, etc.)
-//
-function renouvelle_alea()
-{
-	if (abs(time() -  $GLOBALS['meta']['alea_ephemere_date']) > 2 * 24*3600) {
-	  	spip_log("renouvellement de l'alea_ephemere");
-		$alea = md5(creer_uniqid());
-		ecrire_meta('alea_ephemere_ancien', $GLOBALS['meta']['alea_ephemere']);
-		ecrire_meta('alea_ephemere', $alea);
-		ecrire_meta('alea_ephemere_date', time());
-		ecrire_metas();
-	}
-}
-
-function caracteriser_auteur($id_auteur=0) {
-	global $auteur_session;
-	if (!($id_auteur = intval($id_auteur))) {
-		return array($auteur_session['id_auteur'], $auteur_session['pass']); 
-	}
-	else {
-		$result = spip_query("SELECT id_auteur, pass FROM spip_auteurs WHERE id_auteur=$id_auteur");
-		return spip_fetch_array($result);
-	}
-}
-
-function _action_auteur($action, $id_auteur, $pass, $nom_alea) {
-	return md5($action.$id_auteur.$pass .$GLOBALS['meta'][$nom_alea]);
-}
-
-function calculer_action_auteur($action, $id_auteur = 0) {
-	renouvelle_alea();
-	list($id_auteur, $pass) = caracteriser_auteur($id_auteur);
-	return _action_auteur($action, $id_auteur, $pass, 'alea_ephemere');
-}
-
-function verifier_action_auteur($action, $valeur, $id_auteur = 0) {
-	list($id_auteur, $pass) = caracteriser_auteur($id_auteur);
-
-	if ($valeur == _action_auteur($action, $id_auteur, $pass, 'alea_ephemere'))
-		return true;
-	if ($valeur == _action_auteur($action, $id_auteur, $pass, 'alea_ephemere_ancien'))
-		return true;
-	spip_log("verifier action $action $id_auteur : echec");
-	return false;
-}
-
-function generer_action_auteur($action, $arg, $redirect="", $mode=false, $att='')
-{
-	static $id_auteur=0, $pass;
-	if (!$id_auteur) {
-		renouvelle_alea();
-		list($id_auteur, $pass) =  caracteriser_auteur();
-	}
-	$hash = _action_auteur("$action-$arg", $id_auteur, $pass, 'alea_ephemere');
-	if (!is_string($mode))
-	  return generer_url_action($action, "arg=$arg&id_auteur=$id_auteur&hash=$hash" . (!$redirect ? '' : ("&redirect=" . rawurlencode($redirect))), $mode);
-	if ($redirect)
-		$redirect = "\n\t\t<input name='redirect' type='hidden' value='$redirect' />";
-	return "\n<form action='" .
-		generer_url_action($action,'') .
-		"'$att>\n\t<div>
-		<input name='id_auteur' type='hidden' value='$id_auteur' />
-		<input name='hash' type='hidden' value='$hash' />
-		<input name='action' type='hidden' value='$action' />
-		<input name='arg' type='hidden' value='$arg' />" .
-		$redirect .  
-		$mode .
-		"\n\t</div>\n</form>\n";
-}
-
-function redirige_action_auteur($action, $arg, $ret, $gra)
-{
-	return generer_action_auteur($action, $arg, generer_url_ecrire($ret, $gra, true, _DIR_RESTREINT_ABS));
-}
-
-function determine_upload()
-{
-	global $connect_toutes_rubriques, $connect_login, $connect_statut ;
-
-	if (!$GLOBALS['flag_upload']) return false;
-	if (!$connect_statut) {
-		$var_auth = charger_fonction('auth', 'inc');
-		$var_auth = $var_auth();
-	}
-	if ($connect_statut != '0minirezo') return false;
- 	return _DIR_TRANSFERT . 
-	  ($connect_toutes_rubriques ? '' : ($connect_login . '/'));
 }
 
 ?>

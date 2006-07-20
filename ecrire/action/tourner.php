@@ -19,7 +19,7 @@ function action_tourner_dist() {
 	
 	global $var_rot, $convert_command, $redirect;
 	global $action, $arg, $hash, $id_auteur;
-	include_spip('inc/session');
+	include_spip('inc/actions');
 	if (!verifier_action_auteur("$action-$arg", $hash, $id_auteur)) {
 		include_spip('inc/minipres');
 		minipres(_T('info_acces_interdit'));
