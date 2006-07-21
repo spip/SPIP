@@ -95,16 +95,25 @@ function verifier_php_auth() {
 	if ($_SERVER['PHP_AUTH_USER'] && $_SERVER['PHP_AUTH_PW']
 	&& !$GLOBALS['ignore_auth_http']) {
 		$result = spip_query("SELECT * FROM spip_auteurs WHERE login=" . spip_abstract_quote($_SERVER['PHP_AUTH_USER']));
-		if (!$GLOBALS['db_ok'])
-			return false;
+
+		if (!$GLOBALS['db_ok'])	return false;
+
 		$row = spip_fetch_array($result);
-		if (($row['source'] != 'ldap' OR !$GLOBALS['ldap_present'])
-                AND $row['pass'] != md5($row['alea_actuel'] . $_SERVER['PHP_AUTH_PW'])) {
-			return false;
-		} else {
+		if ($row AND $row['source'] != 'ldap') {
+		  if ($row['pass'] != md5($row['alea_actuel'] . $_SERVER['PHP_AUTH_PW'])) {
 			$GLOBALS['auteur_session'] = $row;
-			$GLOBALS['auteur_session']['hash_env'] = hash_env();
 			return true;
+		  } else return false;
+		} else {
+		  if (!$row AND !$GLOBALS['ldap_present'])
+		    return false;
+		  else {
+			$f = charger_fonction('auth_ldap', 'inc', true);
+			if ($f) {
+			  $GLOBALS['auteur_session'] =  $f($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']);
+			  return true;
+			}
+		  }
 		}
 	}
 }
