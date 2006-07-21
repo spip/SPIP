@@ -88,7 +88,7 @@ if ($logout_public) {
 // tentative de logout
 if ($logout) {
 	if ($auteur_session['login'] == $logout) { // init verifier_visiteur
-		spip_query("UPDATE spip_auteurs SET en_ligne = DATE_SUB(NOW(),INTERVAL 6 MINUTE) WHERE id_auteur = ".$auteur_session['id_auteur']);
+		spip_query("UPDATE spip_auteurs SET en_ligne = DATE_SUB(NOW(),INTERVAL 15 MINUTE) WHERE id_auteur = ".$auteur_session['id_auteur']);
 		if ($spip_session) {
 			$var_f = charger_fonction('session', 'inc');
 			$var_f($auteur_session['id_auteur']);
@@ -101,7 +101,7 @@ if ($logout) {
 		}
 	}
 	spip_log("logout: $logout");
-	spip_setcookie('spip_session', $spip_session, 0);
+	spip_setcookie('spip_session', '', 0);
 	redirige_par_entete($url ? $url : generer_url_public('login'));
 }
 
@@ -157,10 +157,8 @@ if ($essai_login == "oui") {
 		if ($row_auteur['statut'] == '0minirezo')
 			$cookie_admin = "@".$session_login;
 	        
-		if (!$_COOKIE['spip_session']) {
-			$var_f = charger_fonction('session', 'inc');
-			$cookie_session = $var_f($row_auteur);
-		}
+		$var_f = charger_fonction('session', 'inc');
+		$cookie_session = $var_f($row_auteur);
 
 		if ($session_remember == 'oui')
 			spip_setcookie('spip_session', $cookie_session, time() + 3600 * 24 * 14);
