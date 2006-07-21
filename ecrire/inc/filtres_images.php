@@ -77,7 +77,7 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 
 
 // fonctions individuelles qui s'appliquent a une image
-function image_reduire($img, $taille, $taille_y) {
+function image_reduire($img, $taille=-1, $taille_y=-1) {
 	include_spip('inc/logos');
 
 	$image = reduire_image_logo($img, $taille, $taille_y);
