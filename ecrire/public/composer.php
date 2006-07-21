@@ -46,8 +46,10 @@ function public_composer_dist($squelette, $mime_type, $gram, $sourcefile) {
 	array('critique' => 'oui', 'phpcheck' => 'oui'))) 
 		eval('?'.'>'.$contenu);
 
-	@include_once($squelette . '_fonctions'.'.php3'); # compatibilite
-	@include_once($squelette . '_fonctions'.'.php');
+	if (@file_exists($fonc = $squelette . '_fonctions'.'.php')
+	OR @file_exists($fonc = $squelette . '_fonctions'.'.php3')) {
+		include_once $fonc;
+	}
 
 	// tester si le eval ci-dessus a mis le squelette en memoire
 
@@ -82,9 +84,12 @@ function squelette_obsolete($skel, $squelette) {
 	return (
 		($GLOBALS['var_mode'] AND $GLOBALS['var_mode']<>'calcul')
 		OR !@file_exists($skel)
-		OR (@filemtime($squelette) > ($date = @filemtime($skel)))
-		OR (@filemtime('mes_fonctions.php') > $date)
-		OR (@filemtime('mes_fonctions.php3') > $date)  # compatibilite
+		OR ((@file_exists($squelette)?@filemtime($squelette):0)
+			> ($date = @filemtime($skel)))
+		OR (
+			(@file_exists($fonc = 'mes_fonctions.php')
+			OR @file_exists($fonc = 'mes_fonctions.php3'))
+			AND @filemtime($fonc) > $date) # compatibilite
 		OR (defined('_FILE_OPTIONS') AND @filemtime(_FILE_OPTIONS) > $date)
 	);
 }
