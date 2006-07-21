@@ -290,6 +290,8 @@ function charset2unicode($texte, $charset='AUTO' /* $forcer: obsolete*/) {
 // ont ete encodees ainsi c'est a dessein
 function unicode2charset($texte, $charset='AUTO') {
 	static $CHARSET_REVERSE;
+	static $trans = array();
+	
 	if ($charset == 'AUTO')
 		$charset = $GLOBALS['meta']['charset'];
 
@@ -305,32 +307,23 @@ function unicode2charset($texte, $charset='AUTO') {
 			$CHARSET_REVERSE[$charset] = array_flip($GLOBALS['CHARSET'][$charset]);
 		}
 
-		$trans = array();
-		// Construire la table de remplacements
-		// 1. Entites decimales (type "&#123;")
-		if (preg_match_all(',&#(0*[1-9][0-9][0-9]+);,',
-		$texte, $regs, PREG_PATTERN_ORDER)) {
-			$entites = array_flip($regs[1]);
-			foreach ($entites as $e => $v) {
-				if (intval($e)>127) {
-					if ($s = $CHARSET_REVERSE[$charset][intval($e)])
-						$trans['&#'.$e.';'] = chr($s);
-					else if (intval($e)<255)
-						$trans['&#'.$e.';'] = chr(intval($e));
+		if (!isset($trans[$charset])){
+			$trans[$charset]=array();
+			$t = &$trans[$charset];
+			for($e=128;$e<255;$e++){
+				$h = dechex($e);
+				if ($s = isset($CHARSET_REVERSE[$charset][$e])){
+					$s = $CHARSET_REVERSE[$charset][$e];
+					$t['&#'.$e.';'] = $t['&#0'.$e.';'] = $t['&#00'.$e.';'] = chr($s);
+					$t['&#x'.$h.';'] = $t['&#x0'.$h.';'] = $t['&#x00'.$h.';'] = chr($s);
+				}
+				else{
+					$t['&#'.$e.';'] = $t['&#0'.$e.';'] = $t['&#00'.$e.';'] = chr($e);
+					$t['&#x'.$h.';'] = $t['&#x0'.$h.';'] = $t['&#x00'.$h.';'] = chr($e);
 				}
 			}
 		}
-		// 2. Entites hexadecimales (type "&#xd0a;")
-		if (preg_match_all(',&#x(0*[1-9a-f][0-9a-f][0-9a-f]+);,i',
-		$texte, $regs, PREG_PATTERN_ORDER)) {
-			$entites = array_flip($regs[1]);
-			foreach ($entites as $e => $v) {
-				$h = hexdec($e);
-				if ($s = $CHARSET_REVERSE[$charset][$h])
-					$trans['&#x'.$e.';'] = chr($s);
-			}
-		}
-		$texte = strtr($texte, $trans);
+		$texte = strtr($texte, $trans[$charset]);
 		return $texte;
 	}
 }

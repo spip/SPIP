@@ -395,12 +395,13 @@ function typo_fr($letexte) {
 			"&deg;" => "&#176;"
 		);
 		$chars = array(160 => '~', 187 => '&#187;', 171 => '&#171;', 148 => '&#148;', 147 => '&#147;', 176 => '&#176;');
-
-		#include_spip('inc/charsets');
-		while (list($c, $r) = each($chars)) {
-			$c = unicode2charset(charset2unicode(chr($c), 'iso-8859-1', 'forcer'));
-			$trans[$c] = $r;
-		}
+		$chars_trans = array_keys($chars);
+		$chars = array_values($chars);
+		$chars_trans = implode(' ',array_map('chr',$chars_trans));
+		$chars_trans = unicode2charset(charset2unicode($chars_trans, 'iso-8859-1', 'forcer'));
+		$chars_trans = explode(" ",$chars_trans);
+		foreach($chars as $k=>$r)
+			$trans[$chars_trans[$k]] = $r;
 	}
 
 	$letexte = strtr($letexte, $trans);
