@@ -1141,6 +1141,21 @@ function traiter_raccourcis($letexte) {
 		$puce = definir_puce();
 	else $puce = '';
 
+
+	// Proteger les caracteres actifs a l'interieur des tags html
+	$protege = "{}-";
+	$illegal = "\x1\x2\x3";
+	if (preg_match_all(",</?[a-z!][^<>]*[!':;\?~][^<>]*>,ims",
+	$letexte, $regs, PREG_SET_ORDER)) {
+		foreach ($regs as $reg) {
+			$insert = $reg[0];
+			// hack: on transforme les caracteres a proteger en les remplacant
+			// par des caracteres "illegaux". (cf corriger_caracteres())
+			$insert = strtr($insert, $protege, $illegal);
+			$letexte = str_replace($reg[0], $insert, $letexte);
+		}
+	}
+
 	// autres raccourcis
 	$cherche1 = array(
 		/* 0 */ 	"/\n(----+|____+)/",
@@ -1179,6 +1194,8 @@ function traiter_raccourcis($letexte) {
 	$letexte = preg_replace($cherche1, $remplace1, $letexte);
 	$letexte = preg_replace("@^ <br />@", "", $letexte);
 
+	// Retablir les caracteres proteges
+	$letexte = strtr($letexte, $illegal, $protege);
 
 	// Fermer les paragraphes
 	$letexte = paragrapher($letexte);
