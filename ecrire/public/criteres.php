@@ -560,7 +560,7 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 			$op = '<>';
 	} else $op = '=';
 
-	$boucles[$idb]->select[]=  "FIELD($arg,\" . join(',',array_map('spip_abstract_quote', $var)) . \") AS cpt$cpt";
+	$boucles[$idb]->select[]=  "SUM(FIELD($arg,\" . join(',',array_map('spip_abstract_quote', $var)) . \")) AS cpt$cpt";
 	$op = array("'$op'", "'cpt$cpt'", 0);
 
 //	inserer la condition; exemple: {id_mot ?IN (66, 62, 64)}
@@ -936,7 +936,7 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit)
 	  $fct = $m[1];
 	  preg_match('/^\(([^,]*)(.*)\)$/', $m[2], $a);
 	  $col = $a[1];
-	  if (preg_match('/^([^ ]*)( AS .*)$/i', $col, $m)) {
+	  if (preg_match('/^(\S*)(\s+AS\s+.*)$/i', $col, $m)) {
 	    $col=$m[1];
 	    $args_sql = $m[2];
 	  }
