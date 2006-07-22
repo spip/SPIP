@@ -1035,17 +1035,17 @@ function spip_desinfecte(&$t) {
 
 function verifier_visiteur() {
 // Rq: pour que cette fonction marche depuis mes_options elle a besoin
-// que les constantes principale soient deja initialisees
-	@spip_initialisation_parametree(_DIR_RACINE, _DIR_RESTREINT) ;
+// que les constantes principales soient initialisees
+	spip_initialisation_parametree(_DIR_RACINE, _DIR_RESTREINT) ;
 
 	if (isset($_COOKIE['spip_session']) OR
 	(isset($_SERVER['PHP_AUTH_USER'])  AND !$GLOBALS['ignore_auth_http'])) {
 		$var_f = charger_fonction('session', 'inc');
-		if (!$var_f()) {
-		  include_spip('inc/actions');
-		  verifier_php_auth();
-		}
+		if ($var_f()) return true;
+		include_spip('inc/actions');
+		return verifier_php_auth();
 	}
+	return false;
 }
 
 ?>
