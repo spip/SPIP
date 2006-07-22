@@ -932,9 +932,12 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit)
 	  $fct = $m[1];
 	  preg_match('/^\(([^,]*)(.*)\)$/', $m[2], $a);
 	  $col = $a[1];
-	  $args_sql = $a[2];
+	  if (preg_match('/^([^ ]*)( AS .*)$/i', $col, $m)) {
+	    $col=$m[1];
+	    $args_sql = $m[2];
+	  }
+	  $args_sql .= $a[2];;
 	}
-
 	return array($fct, $col, $op, $val, $args_sql);
 }
 
