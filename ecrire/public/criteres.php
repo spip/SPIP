@@ -924,7 +924,9 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit)
 			else 
 				foreach ((($op != 'IN') ? $params : calculer_vieux_in($params)) as $p) {
 					$a = calculer_liste($p, $desc, $boucles, $parent);
-					$val[]=($op == 'IN') ? $a : kwote(str_replace("\\'","'",$a));
+					if ($op == 'IN') $val[]= $a;
+					else if ($op == 'REGEXP') $val[]=kwote($a); // garder les echappements des ' dans les REGEXP
+					else $val[]=kwote(str_replace("\\'","'",$a));
 				}
 	}
 
