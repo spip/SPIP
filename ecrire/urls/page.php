@@ -70,15 +70,15 @@ function recuperer_parametres_url(&$fond, $url) {
 	// Ce bloc gere les urls page et la compatibilite avec les "urls standard"
 	if ($fond=='sommaire'
 	AND preg_match(
-	',^[^?]*([?]|/)(article|rubrique|breve|mot|site|auteur)(\.php3?)?.*?([0-9]+),',
+	',^[^?]*[?/](article|rubrique|breve|mot|site|auteur)(\.php3?)?.*?([0-9]+),',
 	$url, $regs)) {
-		$fond = $regs[2];
-		if ($regs[2] == 'site') {
+		$fond = $regs[1];
+		if ($regs[1] == 'site') {
 			if (!isset($contexte['id_syndic']))
-				$contexte['id_syndic'] = $regs[4];
+				$contexte['id_syndic'] = $regs[3];
 		} else {
 			if (!isset($contexte['id_'.$fond]))
-				$contexte['id_'.$fond] = $regs[4];
+				$contexte['id_'.$fond] = $regs[3];
 		}
 
 		return;
