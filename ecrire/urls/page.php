@@ -68,7 +68,8 @@ function recuperer_parametres_url(&$fond, $url) {
 	global $contexte;
 
 	// Ce bloc gere les urls page et la compatibilite avec les "urls standard"
-	if (preg_match(
+	if ($fond=='sommaire'
+	AND preg_match(
 	',.*([?]|/)(article|rubrique|breve|mot|site|auteur)(\.php3?)?.*?([0-9]+),',
 	$url, $regs)) {
 		$fond = $regs[2];
