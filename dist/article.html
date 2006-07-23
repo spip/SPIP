@@ -60,16 +60,12 @@
 			<B_documents_portfolio>
 			<div id="documents_portfolio">
 				<h2><:info_portfolio:></h2>
-				<BOUCLE_documents_portfolio(DOCUMENTS) {id_article}
-				{mode=document} {extension IN png,jpg,gif} {par date}
-				{doublons}>
-				[<a href="#URL_DOCUMENT" type="#MIME_TYPE"
-				onclick="location.href='[(#URL_ARTICLE|parametre_url{id_document,#ID_DOCUMENT})]#documents_portfolio';return false;"[ title="(#TITRE|couper{80}|texte_backend)"]>(#LOGO_DOCUMENT||image_reduire{0,60}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})</a>]
+				<BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {mode=document} {extension IN png,jpg,gif} {par date} {doublons}>
+				[<a href="#URL_DOCUMENT" type="#MIME_TYPE" onclick="location.href='[(#URL_ARTICLE|parametre_url{id_document,#ID_DOCUMENT})]#documents_portfolio';return false;"[ title="(#TITRE|couper{80}|texte_backend)"]>(#LOGO_DOCUMENT||image_reduire{0,60}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})</a>]
 				</BOUCLE_documents_portfolio>
 			</div>
 			</B_documents_portfolio>
-			<BOUCLE_afficher_document(DOCUMENTS) {id_document}
-			{mode=document}{extension IN png,jpg,gif}>
+			<BOUCLE_afficher_document(DOCUMENTS) {id_document} {mode=document}{extension IN png,jpg,gif}>
 			<div class="spip_documents spip_documents_center" id="document_actif">
 				#EMBED_DOCUMENT
 				[<div class="spip_doc_titre">(#TITRE)</div>]
@@ -103,6 +99,7 @@
 			[<div class="notes"><h2><:info_notes:></h2>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
 
 			[(#REM) Forum de l'article ]
+			<a href="#forum" name="forum" id="forum"></a>
 			[<h2 class="forum-repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:></a></h2>]
 			<INCLURE{fond=inc-forum}{id_article}>
 
