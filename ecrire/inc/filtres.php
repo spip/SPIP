@@ -161,8 +161,9 @@ function hauteur($img) {
 // Attention on limite cette correction aux caracteres "hauts" (en fait > 99
 // pour aller plus vite que le > 127 qui serait logique), de maniere a
 // preserver des echappements de caracteres "bas" (par exemple [ ou ")
+// et au cas particulier de &amp; qui devient &amp;amp; dans les url
 function corriger_entites_html($texte) {
-	return preg_replace(',&amp;(#[0-9][0-9][0-9]+;),i', '&\1', $texte);
+	return preg_replace(',&amp;(#[0-9][0-9][0-9]+;|amp;),i', '&\1', $texte);
 }
 // idem mais corriger aussi les &amp;eacute; en &eacute;
 function corriger_toutes_entites_html($texte) {
