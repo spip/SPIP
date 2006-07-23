@@ -495,13 +495,13 @@ function heures_minutes($numdate) {
 
 function recup_date($numdate){
 	if (!$numdate) return '';
-	if (ereg('([0-9]{1,2})/([0-9]{1,2})/([0-9]{1,2})', $numdate, $regs)) {
+	if (ereg('([0-9]{1,2})/([0-9]{1,2})/([0-9]{1,2}|[0-9]{4})', $numdate, $regs)) {
 		$jour = $regs[1];
 		$mois = $regs[2];
 		$annee = $regs[3];
 		if ($annee < 90){
 			$annee = 2000 + $annee;
-		} else {
+		} elseif ($annee<100) {
 			$annee = 1900 + $annee ;
 		}
 	}
@@ -1515,6 +1515,14 @@ function table_valeur($table,$cle,$defaut=''){
 	$table= is_string($table)?unserialize($table):$table;
 	$table= is_array($table)?$table:array();
 	return isset($table[$cle])?$table[$cle]:$defaut;
+}
+
+// filtre match pour faire des tests avec expression reguliere
+// [(#TEXTE|match{^ceci$,Uims})]
+function match($texte,$expression,$modif="Uims"){
+	$expression=str_replace("\/","/",$expression);
+	$expression=str_replace("/","\/",$expression);
+  return preg_match("/$expression/$modif",$texte);
 }
 
 ?>
