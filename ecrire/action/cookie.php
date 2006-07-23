@@ -16,24 +16,17 @@ function action_cookie_dist() {
 	action_spip_cookie_dist();
 }
 
-function auth_http($url, $essai_auth_http) {
-	global $_SERVER;
-	if ($essai_auth_http == 'oui') {
-		if (verifier_php_auth())
-			redirige_par_entete($url);
-		else {
-			ask_php_auth(_T('login_connexion_refusee'),
-			_T('login_login_pass_incorrect'), _T('login_retour_site'),
-			"url=".rawurlencode($url), _T('login_nouvelle_tentative'),
-			(ereg(_DIR_RESTREINT_ABS, $url)));
-			exit;
-		}
-	}
-	// si demande logout auth_http
-	else if ($essai_auth_http == 'logout') {
-		ask_php_auth(_T('login_deconnexion_ok'),
-		_T('login_verifiez_navigateur'), _T('login_retour_public'),
-		"redirect="._DIR_RESTREINT_ABS, _T('login_test_navigateur'), true);
+function auth_http($url) {
+
+	if (verifier_php_auth())
+		redirige_par_entete($url);
+	else {
+		ask_php_auth(_T('login_connexion_refusee'),
+			     _T('login_login_pass_incorrect'),
+			     _T('login_retour_site'),
+			     "url=".rawurlencode($url),
+			     _T('login_nouvelle_tentative'),
+			     (ereg(_DIR_RESTREINT_ABS, $url)));
 		exit;
 	}
 }
@@ -78,31 +71,6 @@ function action_spip_cookie_dist()
 if ($essai_auth_http AND !$ignore_auth_http) {
 	auth_http(($url ? $url : _DIR_RESTREINT_ABS), $essai_auth_http);
 	exit;
-}
-
-// cas particulier, logout dans l'espace public
-if ($logout_public) {
-	$logout = $logout_public;
-	if (!$url)  $url = $GLOBALS['meta']['adresse_site'];
- }
-// tentative de logout
-if ($logout) {
-	if ($auteur_session['login'] == $logout) { // init verifier_visiteur
-		spip_query("UPDATE spip_auteurs SET en_ligne = DATE_SUB(NOW(),INTERVAL 15 MINUTE) WHERE id_auteur = ".$auteur_session['id_auteur']);
-		if ($spip_session) {
-			$var_f = charger_fonction('session', 'inc');
-			$var_f($auteur_session['id_auteur']);
-		}
-		
-		if ($_SERVER['PHP_AUTH_USER']
-		AND !$ignore_auth_http
-		AND verifier_php_auth()) {
-			auth_http(($url ? $url : _DIR_RESTREINT_ABS), 'logout');
-		}
-	}
-	spip_log("logout: $logout");
-	spip_setcookie('spip_session', '', 0);
-	redirige_par_entete($url ? $url : generer_url_public('login'));
 }
 
 // en cas de login sur bonjour=oui, on tente de poser un cookie

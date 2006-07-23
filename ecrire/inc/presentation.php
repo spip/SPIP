@@ -2289,9 +2289,12 @@ if (true /*$bandeau_colore*/) {
 
 		echo "<td class='bandeau_couleur' style='text-align: $spip_lang_right; width: 28px;' valign='middle'>";
 
-			if ($auth_can_disconnect) {	
-				echo "<a href='" . generer_url_public("spip_cookie","logout=$connect_login") . "' class='icone26' onmouseover=\"changestyle('bandeaudeconnecter','visibility', 'visible');\">" .
-				  http_img_pack("deconnecter-24.gif", "", "") . "</a>";
+		if ($auth_can_disconnect) {
+			echo "<a href='",
+			  generer_url_action("logout","logout=prive"),
+			  "' class='icone26' onmouseover=\"changestyle('bandeaudeconnecter','visibility', 'visible');\">",
+			  http_img_pack("deconnecter-24.gif", "", ""),
+			  "</a>";
 			}
 		echo "</td>";
 	
@@ -2525,7 +2528,7 @@ function bandeau_gadgets($largeur, $simple, $id_rubrique)
 	
 		// Deconnection
 	echo "<div class='bandeau_couleur_sous' id='bandeaudeconnecter' style='$spip_lang_right: 0px;'>";
-	echo "<a href='" . generer_url_public("spip_cookie","logout=$connect_login") . "' class='lien_sous'>"._T('icone_deconnecter')."</a>".aide("deconnect");
+	echo "<a href='" . generer_url_action("logout","logout=prive") . "' class='lien_sous'>"._T('icone_deconnecter')."</a>".aide("deconnect");
 	echo "</div>";
 	
 	$decal = 0;
