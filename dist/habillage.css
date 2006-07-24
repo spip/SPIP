@@ -73,7 +73,9 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 }
 
 /* Entete */
-#entete { width: 100%; }
+#entete {
+	width: 100%;
+	border-bottom: 2px solid #333; }
 #entete #nom_site_spip, #entete a .spip_logos {
 	display: block;
 	float: left;
@@ -85,8 +87,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 /* Fil d'Ariane */
 #hierarchie {
 	clear: both;
-	margin-bottom: 16px;
-	border-top: 2px solid #333;
+	margin-bottom: 2em;
 	font-size: 0.77em; }
 
 /* Pied de page */
@@ -243,7 +244,7 @@ q, blockquote, .liste-articles li .texte, h3.spip {
 
 /* Listes d'articles et extraits introductifs
 ----------------------------------------------- */
-.liste-articles li { margin-bottom: 1em; }
+.liste-articles li { margin-bottom: 1em; clear: both; }
 
 .liste-articles li .titre {
 	font-size: 1.03em;
