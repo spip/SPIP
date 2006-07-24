@@ -37,7 +37,7 @@ function action_purger_dist()
       break;
 
   case 'squelettes':
-	purger_repertoire(_DIR_CACHE, 0, '^skel_');
+	purger_repertoire(_DIR_SKELS);
 	break;
 
   case 'vignettes':
