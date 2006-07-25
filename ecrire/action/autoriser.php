@@ -23,14 +23,19 @@ include_spip('base/abstract_sql');
 
 function action_autoriser_dist()
 {
-  global $file, $arg, $toujours;
+  global $auteur_session; // positionne par verifier_visiteur dans inc_version
+  if ($auteur_session['statut'] == '0minirezo' 
+      OR $auteur_session['statut'] == '1comite') 
+	      $auth_login = $auteur_session['login'];
+  else $auth_login = "";
 
-  $file = rawurldecode($file);
+    $file = rawurldecode(_request('file'));
+    $arg = rawurldecode(_request('arg'));
 
-  $refus = $dcc = false;
-  if (strpos($file,'../') !== false)
-    $refus = 1;
-  else
+    $refus = $dcc = false;
+    if (strpos($file,'../') !== false)
+      $refus = 1;
+    else
   {
     if (!$arg) {
       $arg =spip_query("SELECT id_document, descriptif FROM spip_documents AS documents WHERE documents.fichier=" . spip_abstract_quote($file));
@@ -47,7 +52,10 @@ function action_autoriser_dist()
       $file = $file['fichier'];
     }
   }
-if (!$refus) { 
+
+    // Si le document existe et que le visiteur n'est pas redacteur
+    // chercher un objet publié le referencant
+if (!$refus AND !$auth_login) { 
   $n = spip_num_rows(spip_query("SELECT articles.id_article FROM spip_documents_articles AS rel_articles, spip_articles AS articles WHERE rel_articles.id_article = articles.id_article AND articles.statut = 'publie' AND rel_articles.id_document = $arg  LIMIT 1"));
   if (!$n) {
     $n = spip_num_rows(spip_query("SELECT rubriques.id_rubrique FROM spip_documents_rubriques AS rel_rubriques, spip_rubriques AS rubriques WHERE rel_rubriques.id_rubrique = rubriques.id_rubrique AND rubriques.statut = 'publie' AND rel_rubriques.id_document =  $arg  LIMIT 1"));
@@ -57,7 +65,7 @@ if (!$refus) {
 	$refus = 4; } } }
 
   if (is_int($refus)) {
-    spip_log("Acces refuse ($refus) au document " . $arg . ': ' . $file);
+    spip_log("Acces refuse (erreur $refus) au document " . $arg . ': ' . $file);
     redirige_par_entete('./?page=404');
   }
   else
