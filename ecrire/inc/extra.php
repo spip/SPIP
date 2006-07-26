@@ -87,11 +87,15 @@ $GLOBALS['champs_extra_proposes'] = Array (
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // a partir de la liste des champs, generer la liste des input
-function extra_saisie($extra, $type, $ensemble='') {
+function extra_saisie($extra, $type, $ensemble='', $aff=true) {
 	if ($affiche = extra_form($extra, $type, $ensemble)) {
+	  if ($aff) {
 		debut_cadre_enfonce();
 		echo $affiche;
 		fin_cadre_enfonce();
+	  } else {
+	    return debut_cadre_enfonce('',false) . $affiche . fin_cadre_enfonce('',false);
+	  }
 	}
 }
 

@@ -2619,17 +2619,18 @@ function debut_corps_page($rubrique='') {
 }
 
 
-function gros_titre($titre, $ze_logo=''){
+function gros_titre($titre, $ze_logo='', $aff=true){
 	global $couleur_foncee, $spip_display;
 	if ($spip_display == 4) {
-		echo "\n<h1>".typo($titre)."</h1>&nbsp;\n";
+		$res = "\n<h1>".typo($titre)."</h1>&nbsp;\n";
 	}
 	else {
-		echo "<div class='verdana2' style='font-size: 18px; color: $couleur_foncee; font-weight: bold;'>";
-		if (strlen($ze_logo) > 3) echo http_img_pack("$ze_logo", "", "align='middle'") . " &nbsp; ";
-		echo typo($titre);
-		echo "</div>\n";
+		$res = "<div class='verdana2' style='font-size: 18px; color: $couleur_foncee; font-weight: bold;'>" .
+		  (strlen($ze_logo) <= 3 ? '':  (http_img_pack($ze_logo, "", "align='middle'") . " &nbsp; ")) .
+		  typo($titre) .
+		  "</div>\n";
 	}
+	if ($aff) echo $res; else return $res;
 }
 
 
