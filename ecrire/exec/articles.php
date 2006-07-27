@@ -23,7 +23,7 @@ include_spip('inc/forum');
 include_spip('base/abstract_sql');
 
 
-function exec_affiche_articles_dist($id_article, $ajout_auteur, $change_accepter_forum, $change_petition, $changer_virtuel, $cherche_auteur, $cherche_mot, $debut, $email_unique, $flag_auteur, $flag_editable, $langue_article, $message, $nom_select, $nouv_auteur, $nouv_mot, $rubrique_article, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre_article, $lier_trad,  $id_trad_new)
+function exec_affiche_articles_dist($id_article, $ajout_auteur, $change_accepter_forum, $change_petition, $changer_virtuel, $cherche_auteur, $cherche_mot, $debut, $flag_auteur, $flag_editable, $langue_article, $nom_select, $nouv_auteur, $nouv_mot, $rubrique_article, $supp_auteur, $supp_mot, $titre_article, $lier_trad,  $id_trad_new)
 {
 	global $connect_statut, $options, $spip_display, $spip_lang_left, $spip_lang_right, $dir_lang;
 
@@ -100,8 +100,6 @@ if (substr($chapo, 0, 1) == '=') {
 
 boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 			  $change_accepter_forum, $change_petition,
-			  $email_unique, $site_obli, $site_unique,
-			  $message, $texte_petition,
 			  $changer_virtuel, $virtuel);
  
  echo pipeline('affiche_gauche',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
@@ -260,10 +258,88 @@ function boite_info_articles($id_article, $statut_article, $visites, $id_version
 	fin_boite_info();
 }
 
+function formulaire_petition($id_article, $nb_signatures)
+{
+	global $spip_lang_right;
+
+	$petition = spip_fetch_array(spip_query("SELECT * FROM spip_petitions WHERE id_article=$id_article"));
+
+	$email_unique=$petition["email_unique"];
+	$site_obli=$petition["site_obli"];
+	$site_unique=$petition["site_unique"];
+	$message=$petition["message"];
+	$texte_petition=$petition["texte"];
+
+	if ($petition) {
+		$menu = array(
+			'on' => _T('bouton_radio_petition_activee'),
+			'off'=> _T('bouton_radio_supprimer_petition')
+		);
+		$val_menu = 'on';
+	} else {
+		$menu = array(
+			'off'=> _T('bouton_radio_pas_petition'),
+			'on' => _T('bouton_radio_activer_petition')
+		);
+		$val_menu = 'off';
+	}
+
+	$res = '';
+	foreach ($menu as $val => $desc) {
+		$res .= "<option" . (($val_menu == $val) ? " selected" : '') . " value='$val'>".$desc."</option>\n";
+	}
+
+	$res = "<select name='change_petition'
+		class='fondl' style='font-size:10px;'
+		onChange=\"setvisibility('valider_petition', 'visible');\"
+		>\n$res</select>\n";
+
+
+	if ($petition) {
+		if ($nb_signatures) {
+			$res .= "<br />\n" .
+			icone_horizontale($nb_signatures.'&nbsp;'. _T('info_signatures'), generer_url_ecrire("controle_petition","id_article=$id_article",'', false), "suivi-petition-24.gif", "");
+		}
+
+		$res .= "<br />\n";
+
+		if ($email_unique=="oui")
+			$res .= "<input type='checkbox' name='email_unique' value='oui' id='emailunique' checked>";
+		else
+			$res .="<input type='checkbox' name='email_unique' value='oui' id='emailunique'>";
+		$res .=" <label for='emailunique'>"._T('bouton_checkbox_signature_unique_email')."</label><BR>";
+		if ($site_obli=="oui")
+			$res .="<input type='checkbox' name='site_obli' value='oui' id='siteobli' checked>";
+		else
+			$res .="<input type='checkbox' name='site_obli' value='oui' id='siteobli'>";
+		$res .=" <label for='siteobli'>"._T('bouton_checkbox_indiquer_site')."</label><BR>";
+		if ($site_unique=="oui")
+			$res .="<input type='checkbox' name='site_unique' value='oui' id='siteunique' checked>";
+		else
+			$res .="<input type='checkbox' name='site_unique' value='oui' id='siteunique'>";
+		$res .=" <label for='siteunique'>"._T('bouton_checkbox_signature_unique_site')."</label><BR>";
+		if ($message=="oui")
+			$res .="<input type='checkbox' name='message' value='oui' id='message' checked>";
+		else
+			$res .="<input type='checkbox' name='message' value='oui' id='message' />";
+		$res .=" <label for='message'>"._T('bouton_checkbox_envoi_message')."</label>";
+
+		$res .=_T('texte_descriptif_petition')."&nbsp;:<BR />";
+		$res .="<TEXTAREA NAME='texte_petition' CLASS='forml' ROWS='4' COLS='10' wrap=soft>";
+		$res .=entites_html($texte_petition);
+		$res .="</TEXTAREA>\n";
+
+		$res .="<span align='$spip_lang_right'>";
+	} else $res .="<span class='visible_au_chargement' id='valider_petition'>";
+	$res .="<INPUT TYPE='submit' CLASS='fondo' VALUE='"._T('bouton_changer')."' STYLE='font-size:10px' />";
+	$res .="</span>";
+
+	return generer_action_auteur('petitionner', $id_article, generer_url_ecrire('articles', "id_article=$id_article&change_petition=oui"), $res," method='POST'");
+
+}
+
 function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 				   $change_accepter_forum, $change_petition,
-				   $email_unique, $site_obli, $site_unique,
-				   $message, $texte_petition,
 				   $changer_virtuel, $virtuel)
 {
   global $connect_statut, $options, $spip_lang_right, $spip_display;
@@ -306,9 +382,7 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 	else
 		echo debut_block_invisible("forumpetition");
 
-
 	echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'>\n";
-
 
 	// Forums
 
@@ -330,104 +404,10 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 	// Afficher le formulaire de modification du reglage
 	echo formulaire_modification_forums_publics($id_article, $forums_publics, generer_url_ecrire("articles","id_article=$id_article"));
 
-
 	// Petitions
 
-	if ($change_petition) {
-		if ($change_petition == "on") {
-			if (!$email_unique) $email_unique = "non";
-			if (!$site_obli) $site_obli = "non";
-			if (!$site_unique) $site_unique = "non";
-			if (!$message) $message = "non";
+	echo formulaire_petition($id_article, $nb_signatures);
 
-			$result_pet = spip_query("REPLACE spip_petitions (id_article, email_unique, site_obli, site_unique, message, texte) VALUES ($id_article, '$email_unique', '$site_obli', '$site_unique', '$message', " . spip_abstract_quote($texte_petition) . ")");
-		}
-		else if ($change_petition == "off") {
-			$result_pet = spip_query("DELETE FROM spip_petitions WHERE id_article=$id_article");
-		}
-	}
-
-	$petition = spip_fetch_array(spip_query("SELECT * FROM spip_petitions WHERE id_article=$id_article"));
-
-	$email_unique=$petition["email_unique"];
-	$site_obli=$petition["site_obli"];
-	$site_unique=$petition["site_unique"];
-	$message=$petition["message"];
-	$texte_petition=$petition["texte"];
-
-	echo generer_url_post_ecrire("articles","id_article=$id_article");
-
-	echo "<select name='change_petition'
-		class='fondl' style='font-size:10px;'
-		onChange=\"setvisibility('valider_petition', 'visible');\"
-		>\n";
-
-	if ($petition) {
-		$menu = array(
-			'on' => _T('bouton_radio_petition_activee'),
-			'off'=> _T('bouton_radio_supprimer_petition')
-		);
-		$val_menu = 'on';
-	} else {
-		$menu = array(
-			'off'=> _T('bouton_radio_pas_petition'),
-			'on' => _T('bouton_radio_activer_petition')
-		);
-		$val_menu = 'off';
-	}
-
-
-	foreach ($menu as $val => $desc) {
-		echo "<option";
-		if ($val_menu == $val)
-			echo " selected";
-		echo " value='$val'>".$desc."</option>\n";
-	}
-	echo "</select>\n";
-
-	if ($petition) {
-		if ($nb_signatures) {
-			echo "<br />\n";
-			icone_horizontale($nb_signatures.'&nbsp;'. _T('info_signatures'), generer_url_ecrire("controle_petition","id_article=$id_article"), "suivi-petition-24.gif", "");
-		}
-
-		echo "<br />\n";
-
-		if ($email_unique=="oui")
-			echo "<input type='checkbox' name='email_unique' value='oui' id='emailunique' checked>";
-		else
-			echo "<input type='checkbox' name='email_unique' value='oui' id='emailunique'>";
-		echo " <label for='emailunique'>"._T('bouton_checkbox_signature_unique_email')."</label><BR>";
-		if ($site_obli=="oui")
-			echo "<input type='checkbox' name='site_obli' value='oui' id='siteobli' checked>";
-		else
-			echo "<input type='checkbox' name='site_obli' value='oui' id='siteobli'>";
-		echo " <label for='siteobli'>"._T('bouton_checkbox_indiquer_site')."</label><BR>";
-		if ($site_unique=="oui")
-			echo "<input type='checkbox' name='site_unique' value='oui' id='siteunique' checked>";
-		else
-			echo "<input type='checkbox' name='site_unique' value='oui' id='siteunique'>";
-		echo " <label for='siteunique'>"._T('bouton_checkbox_signature_unique_site')."</label><BR>";
-		if ($message=="oui")
-			echo "<input type='checkbox' name='message' value='oui' id='message' checked>";
-		else
-			echo "<input type='checkbox' name='message' value='oui' id='message'>";
-		echo " <label for='message'>"._T('bouton_checkbox_envoi_message')."</label>";
-
-		echo "<P>"._T('texte_descriptif_petition')."&nbsp;:<BR>";
-		echo "<TEXTAREA NAME='texte_petition' CLASS='forml' ROWS='4' COLS='10' wrap=soft>";
-		echo entites_html($texte_petition);
-		echo "</TEXTAREA><P>\n";
-
-		echo "<P align='$spip_lang_right'>";
-	}
-
-	if (!$petition) echo "<span class='visible_au_chargement' id='valider_petition'>";
-	echo "<INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."' STYLE='font-size:10px'>";
-	if (!$petition)  echo "</span>";
-	echo "</FORM>";
-
-	echo "</font>";
 	echo fin_block();
 
 	fin_cadre_relief();
@@ -1447,7 +1427,7 @@ function insert_article($id_parent)
 
 function exec_articles_dist()
 {
-  global $ajout_auteur, $annee, $annee_redac, $avec_redac, $change_accepter_forum, $change_petition, $changer_lang, $changer_virtuel, $chapo, $cherche_auteur, $cherche_mot, $connect_id_auteur, $date, $date_redac, $debut, $email_unique, $heure, $heure_redac, $id_article, $id_article_bloque, $id_parent, $id_rubrique_old, $id_secteur, $id_trad_new, $jour, $jour_redac, $langue_article, $lier_trad, $message, $minute, $minute_redac, $mois, $mois_redac, $new, $nom_select, $nouv_auteur, $nouv_mot, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre, $titre_article, $virtuel; 
+  global $ajout_auteur, $annee, $annee_redac, $avec_redac, $change_accepter_forum, $change_petition, $changer_lang, $changer_virtuel, $chapo, $cherche_auteur, $cherche_mot, $connect_id_auteur, $date, $date_redac, $debut, $heure, $heure_redac, $id_article, $id_article_bloque, $id_parent, $id_rubrique_old, $id_secteur, $id_trad_new, $jour, $jour_redac, $langue_article, $lier_trad, $minute, $minute_redac, $mois, $mois_redac, $new, $nom_select, $nouv_auteur, $nouv_mot, $supp_auteur, $supp_mot, $titre, $titre_article, $virtuel; 
 
 
  $id_parent = intval($id_parent);
@@ -1541,7 +1521,7 @@ if (isset($_POST['titre'])) {
 		redirige_par_entete(
 			generer_url_ecrire('articles', 'id_article='.$id_article, '&'));
 
-	exec_affiche_articles_dist($id_article, $ajout_auteur, $change_accepter_forum, $change_petition, $changer_virtuel, $cherche_auteur, $cherche_mot, $debut, $email_unique, $flag_auteur, $flag_editable, $langue_article, $message, $nom_select, $nouv_auteur, $nouv_mot, $id_rubrique, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre_article, $lier_trad, $id_trad_new);
+	exec_affiche_articles_dist($id_article, $ajout_auteur, $change_accepter_forum, $change_petition, $changer_virtuel, $cherche_auteur, $cherche_mot, $debut, $flag_auteur, $flag_editable, $langue_article, $nom_select, $nouv_auteur, $nouv_mot, $id_rubrique, $supp_auteur, $supp_mot, $titre_article, $lier_trad, $id_trad_new);
 
 }
 ?>

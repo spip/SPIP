@@ -23,6 +23,7 @@ ecrire/action/iconifier.php -text
 ecrire/action/instituer.php -text
 ecrire/action/joindre.php -text
 ecrire/action/logout.php -text
+ecrire/action/petitionner.php -text
 ecrire/action/purger.php -text
 ecrire/action/redirect.php -text
 ecrire/action/supprimer.php -text
