@@ -16,7 +16,6 @@
 
 RewriteEngine On
 
-
 ################ CONFIGURATION ######################
 
 ### Configuration sous-repertoire
@@ -41,7 +40,8 @@ RewriteEngine On
 ################ REGLAGES PERSONNALISES ######################
 # Inscrivez ci-dessous vos reglages supplementaires
 
-
+# Permettre a IE de reconnaitre le win_png.htc de retraitement des png transparents
+AddType text/x-component .htc
 
 
 ################ GESTIONS DES URLS SPIP #######################
