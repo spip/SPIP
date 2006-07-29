@@ -346,7 +346,7 @@ function critere_par_jointure(&$boucle, $join)
     list($nom, $desc) = trouver_def_table($nom ? $nom : $type, $boucle);
 
     $cle = trouver_champ_exterieur($champ, $boucle->jointures, $boucle);
-    if ($cle) 
+    if ($cle)
       $cle = calculer_jointure($boucle, array($boucle->id_table, $desc), $cle, false);
     if ($cle) $t = "L$cle"; 
     else  erreur_squelette(_T('zbug_info_erreur_squelette'),  "{par ?} BOUCLE$idb");
@@ -639,7 +639,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 		if (isset($exceptions_des_jointures[$col]))
 		  // on ignore la table, quel luxe!
 			list($t, $col) = $exceptions_des_jointures[$col];
-		$table = calculer_critere_externe_init($boucle, $boucle->jointures, $col, $desc, $crit, $t);
+		$table = calculer_critere_externe_init($boucle, $boucle->jointures, $col, $desc, ($crit->cond OR $op !='='), $t);
 	  }
 	}
 	// ajout pour le cas special d'une condition sur le champ statut:
@@ -681,7 +681,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 function critere_secteur_forum($idb, &$boucles, $val, $crit)
 {
 	list($nom, $desc) = trouver_def_table('articles', $boucles[$idb]);
-	return calculer_critere_externe_init($boucles[$idb], array($nom), 'id_secteur', $desc, $crit, true);
+	return calculer_critere_externe_init($boucles[$idb], array($nom), 'id_secteur', $desc, $crit->cond, true);
 }
 
 // Champ hors table, ca ne peut etre qu'une jointure.
@@ -692,7 +692,7 @@ function critere_secteur_forum($idb, &$boucles, $val, $crit)
 // (Exemple: criteres {type_mot=...}{type_mot=...} donne 2 jointures
 // pour selectioner ce qui a exactement ces 2 mots-cles.
 
-function calculer_critere_externe_init(&$boucle, $joints, $col, $desc, $crit, $checkarrivee = false)
+function calculer_critere_externe_init(&$boucle, $joints, $col, $desc, $eg, $checkarrivee = false)
 {
 	$cle = trouver_champ_exterieur($col, $joints, $boucle, $checkarrivee);
 	if ($cle) {
@@ -705,7 +705,7 @@ function calculer_critere_externe_init(&$boucle, $joints, $col, $desc, $crit, $c
 		    if (!trouver_champ($c, $boucle->select)) return $t;
 		  }
 		}
-		$cle = calculer_jointure($boucle, array($boucle->id_table, $desc), $cle, $col, $crit->cond);
+		$cle = calculer_jointure($boucle, array($boucle->id_table, $desc), $cle, $col, $eg);
 		if ($cle) return "L$cle";
 	}
 
@@ -750,9 +750,10 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
   }
 
   // pas besoin de group by 
+  // (cf http://article.gmane.org/gmane.comp.web.spip.devel/30555)
   // si une seule jointure et sur une table avec primary key formee
   // de l'index principal et de l'index de jointure (non conditionnel! [6031])
-  // cf http://article.gmane.org/gmane.comp.web.spip.devel/30555
+  // et operateur d'egalite (http://trac.rezo.net/trac/spip/ticket/477)
 
   if ($pk = (count($boucle->from) == 1) && !$cond) {
     if ($pk = $a[1]['key']['PRIMARY KEY']) {
