@@ -628,7 +628,24 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 	$descr = array('nom' => $nom, 'sourcefile' => $sourcefile);
 
 	// une boucle documents est conditionnee par tout le reste!
-	foreach($boucles as $idb => $boucle) {
+	foreach($boucles as $id => $boucle) {
+		$type = $boucle->type_requete;
+		if ($type != 'boucle') {
+		  $boucles[$id]->descr = &$descr;
+		  if ($x = $table_des_tables[$type]) {
+		    $boucles[$id]->id_table = $x;
+		    $boucles[$id]->primary = $tables_principales["spip_$x"]['key']["PRIMARY KEY"];
+		    if ((!$boucles[$id]->jointures)
+			AND (is_array($x = $tables_jointures['spip_' . $x])))
+		      $boucles[$id]->jointures = $x;
+		  } else {
+			// table non Spip.
+		    $boucles[$id]->id_table = $type;
+		    $serveur = $boucle->sql_serveur;
+		    $x = $tables_des_serveurs_sql[$serveur ? $serveur : 'localhost'][$type]['key'];		
+		    $boucles[$id]->primary = ($x["PRIMARY KEY"] ? $x["PRIMARY KEY"] : $x["KEY"]);
+		  }
+		}
 		if (($boucle->type_requete == 'documents') && $boucle->doublons)
 			{ $descr['documents'] = true; break; }
 	}
@@ -656,20 +673,6 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 	foreach($boucles as $id => $boucle) { 
 		$type = $boucle->type_requete;
 		if ($type != 'boucle') {
-		  $boucles[$id]->descr = &$descr;
-		  if ($x = $table_des_tables[$type]) {
-		    $boucles[$id]->id_table = $x;
-		    $boucles[$id]->primary = $tables_principales["spip_$x"]['key']["PRIMARY KEY"];
-		    if ((!$boucles[$id]->jointures)
-			AND (is_array($x = $tables_jointures['spip_' . $x])))
-		      $boucles[$id]->jointures = $x;
-		  } else {
-			// table non Spip.
-		    $boucles[$id]->id_table = $type;
-		    $serveur = $boucle->sql_serveur;
-		    $x = $tables_des_serveurs_sql[$serveur ? $serveur : 'localhost'][$type]['key'];		
-		    $boucles[$id]->primary = ($x["PRIMARY KEY"] ? $x["PRIMARY KEY"] : $x["KEY"]);
-		  }
 		  if ($boucle->param) {
 				$res = calculer_criteres($id, $boucles);
 				if (is_array($res)) return $res; # erreur
