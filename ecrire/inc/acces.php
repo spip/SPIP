@@ -221,9 +221,6 @@ function gerer_htaccess() {
 	return $mode;
 }
 
-// En profiter pour verifier la securite de ecrire/data/
-verifier_htaccess(_DIR_TMP);
-
 initialiser_sel();
 
 ?>

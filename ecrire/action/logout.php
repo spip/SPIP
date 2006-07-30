@@ -16,7 +16,7 @@ include_spip('inc/cookie');
 
 function action_logout_dist()
 {
-	global $auteur_session, $ignore_auth_httpa;
+	global $auteur_session, $ignore_auth_http;
 	$logout =_request('logout');
 	$url = _request('url');
 	spip_log("logout $logout $url" . $auteur_session['id_auteur']);
