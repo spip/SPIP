@@ -17,6 +17,7 @@ dist/puce_rtl.gif -text
 dist/spip.png -text
 dist/style_prive.html -text
 dist/win_width.htc -text
+ecrire/action/ajouter.php -text
 ecrire/action/autoriser.php -text
 ecrire/action/ical.php -text
 ecrire/action/iconifier.php -text
