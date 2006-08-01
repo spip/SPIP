@@ -165,8 +165,7 @@ function http_last_modified($lastmodified, $expire = 0) {
 
 function exec_js_menu_rubriques_dist()
 {
-	if (http_last_modified(@filemtime(__FILE__), time() + 24 * 3600)) 
-		exit;
+	if (http_last_modified(_request('date'))) exit;
 	header('Content-type: text/javascript; charset='.$GLOBALS['meta']['charset']);
 	include_spip('inc/texte');
 	echo "document.write(\"";
