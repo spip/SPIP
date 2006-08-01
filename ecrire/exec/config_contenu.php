@@ -156,16 +156,19 @@ if ($options == "avancees") {
 		array('oui' => _T('item_accepter_inscriptions'),
 			'non' => _T('item_non_accepter_inscriptions')), " &nbsp; ");
 
-	// Cas tres specifique : si on n'accepte pas les inscriptions,
-	// ET si on n'a pas de forums sur abonnement, on peut vouloir
-	// tout de meme ouvrir les inscriptions aux *visiteurs*
-	if ($accepter_inscriptions == 'non') {
+	echo "</td></tr>\n";
+	echo "<tr><td style='text-align:$spip_lang_right;'>";
+	echo "<input type='submit' value='"._T('bouton_valider')."' CLASS='fondo' />";
+	echo "</TD></TR>";
+	echo "</TABLE>\n";
+
+	fin_cadre_trait_couleur();
+
+// Idem pour les visiteurs
+// (la balise FORMULAIRE_INSCRIPTION sert au deux)
+
+	debut_cadre_trait_couleur("redacteurs-24.gif", false, "", _T('info_visiteurs'));
 		$accepter_visiteurs = $GLOBALS['meta']['accepter_visiteurs'];
-		echo "<br /><br />\n";
-		debut_cadre_relief("", false, "",
-		bouton_block_invisible("accepter_visiteurs") . ' ' .
-		_T('info_visiteurs'));
-		echo debut_block_invisible("accepter_visiteurs");
 		echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 		echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
 
@@ -180,24 +183,16 @@ if ($options == "avancees") {
 			afficher_choix('accepter_visiteurs', $accepter_visiteurs,
 				array('oui' => _T('info_option_accepter_visiteurs'),
 					'non' => _T('info_option_ne_pas_accepter_visiteurs')));
+			echo "</td></tr>\n";
+			echo "<tr><td style='text-align:$spip_lang_right;'>";
+			echo "<input type='submit' value='"._T('bouton_valider')."' CLASS='fondo' />";
 		} else {
 			echo _T('info_forums_abo_invites');
 		}
 
 		echo "</TD></TR></table>\n";
-		echo fin_block();
-		fin_cadre_relief();
-	} else {
-	
-	}
+		fin_cadre_trait_couleur();
 
-	echo "</TD></TR>\n";
-	echo "<TR><td style='text-align:$spip_lang_right;'>";
-	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
-	echo "</TD></TR>";
-	echo "</TABLE>\n";
-
-	fin_cadre_trait_couleur();
 	echo "<p>";
 }
 
