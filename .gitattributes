@@ -378,6 +378,7 @@ ecrire/inc/article_select.php -text
 ecrire/inc/auteur_voir.php -text
 ecrire/inc/boutons.php -text
 ecrire/inc/chercher_logo.php -text
+ecrire/inc/chercher_rubrique.php -text
 ecrire/inc/cookie.php -text
 ecrire/inc/distant.php -text
 ecrire/inc/drapeau_edition.php -text

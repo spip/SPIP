@@ -127,9 +127,9 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 
 	debut_cadre_couleur("$logo_parent", false, "",_T('entree_interieur_rubrique').aide ("brevesrub"));
 
-	// selecteur de rubrique (pas d'ajax car toujours racine)
-	include_spip('inc/rubriques');
-	echo selecteur_rubrique_html($id_rubrique, 'breve', ($statut == 'publie'));
+	// selecteur de rubrique (en general pas d'ajax car toujours racine)
+	$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');
+	echo $selecteur_rubrique($id_rubrique, 'breve', ($statut == 'publie'));
 
 	fin_cadre_couleur();
 	

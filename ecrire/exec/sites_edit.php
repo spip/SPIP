@@ -118,9 +118,9 @@ echo "<input type='text' class='formo' name='url_site' value=\"$url_site\" size=
 	debut_cadre_couleur("$logo_parent", false, "", _T('entree_interieur_rubrique'));
 
 	// selecteur de rubriques
-	include_spip('inc/rubriques');
+	$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');
 	$restreint = ($GLOBALS['statut'] == 'publie');
-	echo selecteur_rubrique($id_rubrique, 'site', $restreint);
+	echo $selecteur_rubrique($id_rubrique, 'site', $restreint);
 
 	fin_cadre_couleur();
 
