@@ -256,7 +256,7 @@ if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
 
  echo pipeline('affiche_milieu',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
 
- if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) 
+ if (acces_rubrique($rubrique_article))
    echo debut_cadre_relief('', true),
      afficher_statut_articles($id_article, $rubrique_article, $statut_article),
      fin_cadre_relief('', true);
@@ -276,7 +276,7 @@ if ($flag_editable) {
  if ($spip_display != 4)
  afficher_documents_non_inclus($id_article, "article", $flag_editable);
 
- if ($flag_auteur AND $statut_article == 'prepa')
+ if ($flag_auteur AND  $statut_article == 'prepa' AND !acces_rubrique($rubrique_article))
 	echo demande_publication($id_article);
 
  echo "</div>";
