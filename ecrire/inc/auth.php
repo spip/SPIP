@@ -31,6 +31,12 @@ function acces_restreint_rubrique($id_rubrique) {
 	return ($connect_statut == "0minirezo" AND isset($connect_id_rubrique[$id_rubrique]));
 }
 
+function acces_mots() {
+	global $connect_toutes_rubriques;
+
+	return $connect_toutes_rubriques;
+}
+
 function auth_rubrique()
 {
 	global $connect_id_auteur, $connect_toutes_rubriques, $connect_id_rubrique;
@@ -39,6 +45,7 @@ function auth_rubrique()
 
 	$connect_toutes_rubriques = (@spip_num_rows($result) == 0);
 	if (!$connect_toutes_rubriques) {
+		$connect_id_rubrique = array();
 		for (;;) {
 			$r = array();
 			while ($row = spip_fetch_array($result)) {
@@ -70,7 +77,7 @@ function acces_statut($id_auteur, $statut, $bio)
 function inc_auth_dist() {
 	global $auth_can_disconnect, $ignore_auth_http, $ignore_remote_user;
 	global $prefs, $connect_id_auteur, $connect_login;
-	global $connect_statut, $connect_toutes_rubriques, $connect_id_rubrique;
+	global $connect_statut, $connect_toutes_rubriques;
 
 	//
 	// Initialiser variables (eviter hacks par URL)
@@ -78,9 +85,7 @@ function inc_auth_dist() {
 
 	$connect_login = '';
 	$connect_id_auteur = 0;
-	$connect_id_rubrique = array();
 	$auth_can_disconnect = false;
-	$connect_toutes_rubriques = false;
 
 	//
 	// Recuperer les donnees d'identification

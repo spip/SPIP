@@ -251,7 +251,7 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $id_objet,$nouv_mot, $tabl
 		}
 		else affiche_mots_ressemblant($cherche_mot, $id_objet, $resultat, $table_id, $url_base);
 
-		if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques ) {
+		if (acces_mots()) {
 			echo "<div style='width: 200px;'>";
 			$titre = rawurlencode($cherche_mot);
 			icone_horizontale(_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&table_id=$table_id&titre=$titre&redirect=" . generer_url_retour($url_base, "$table_id=$id_objet")), "mot-cle-24.gif", "creer.gif");
@@ -405,7 +405,7 @@ function afficher_mots_cles($flag_editable, $id_objet, $table, $table_id, $url_b
 				$message_ajouter_mot = "";
 		}
 		
-		if ($connect_statut == '0minirezo' AND $options == "avancees" AND $connect_toutes_rubriques) {
+		if (acces_mots()) {
 			echo "<tr><td></td><td colspan='2'>";
 			echo "<div style='width: 200px;'>";
 			icone_horizontale(_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&table_id=$table_id&redirect=" . generer_url_retour($url_base, "$table_id=$id_objet")), "mot-cle-24.gif", "creer.gif");
@@ -642,7 +642,7 @@ function afficher_groupe_mots_boucle($row, $occurrences)
 	$vals[] = $texte_lie;
 
 
-	if ($connect_statut=="0minirezo"  AND $connect_toutes_rubriques) {
+	if (acces_mots()) {
 		$vals[] = "<div style='text-align:right;'><a href='" . generer_url_ecrire("mots_tous","conf_mot=$id_mot") . "'>"._T('info_supprimer_mot')."&nbsp;<img src='" . _DIR_IMG_PACK . "croix-rouge.gif' alt='X' width='7' height='7' align='bottom' /></a></div>";
 	} 
 	
