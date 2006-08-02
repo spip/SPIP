@@ -21,7 +21,6 @@ include_spip('inc/documents');
 include_spip('inc/forum');
 include_spip('base/abstract_sql');
 
-
 function exec_articles_dist()
 {
 	global $change_accepter_forum, $change_petition, $changer_virtuel,  $cherche_auteur, $ids, $cherche_mot, $debut, $id_article, $id_article_bloque, $id_parent, $id_rubrique_old, $id_trad_new,  $langue_article, $lier_trad, $new, $nom_select, $nouv_mot, $supp_mot, $virtuel; 
@@ -37,32 +36,36 @@ function exec_articles_dist()
 
 	pipeline('exec_init',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
 
-	 $row = spip_fetch_array(spip_query("SELECT statut, id_rubrique FROM spip_articles WHERE id_article=$id_article"));
-	 if ($row) {
-		$statut_article = $row['statut'];
-		$id_rubrique = $row['id_rubrique'];
-		$statut_rubrique = acces_rubrique($id_rubrique);
-		// aucun doc implicitement inclus au départ.
-		inclus_non_articles($id_article);
-	 } else {
-	   // en cas de numero farfelu
-		$statut_article = '';
-		$statut_rubrique = false;
-		$id_rubrique = '0';
+	$row = spip_fetch_array(spip_query("SELECT statut, id_rubrique FROM spip_articles WHERE id_article=$id_article"));
+
+	if (!$row) {
+	   // cas du numero hors table
+		$titre = _T('public:aucun_article');
+		debut_page("&laquo; $titre &raquo;", "documents", "articles");
+		debut_grand_cadre();
+		fin_grand_cadre();
+		echo $titre;
+		exit;
 	}
- 
+
+	$id_rubrique = $row['id_rubrique'];
+	$statut_article = $row['statut'];
+	$statut_rubrique = acces_rubrique($id_rubrique);
+
 	$flag_auteur = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur LIMIT 1"));
 
+	$flag_modifiable = $flag_auteur OR $statut_rubrique;
+
+	if ($flag_modifiable AND $id_parent)
  // Les redacteurs ont le droit de changer la rubrique destination
  // avant la publication de l'article, mais plus apres
-	if ($id_parent AND ($flag_auteur OR $statut_rubrique))
-		$id_rubrique = $id_parent;
+			$id_rubrique = $id_parent;
 
-	$flag_editable = ($statut_rubrique OR ($flag_auteur AND ($statut_article == 'prepa' OR $statut_article == 'prop' OR $statut_article == 'poubelle')));
+	$flag_editable = $flag_modifiable OR ($flag_auteur AND ($statut_article == 'prepa' OR $statut_article == 'prop' OR $statut_article == 'poubelle'));
 
 	if ($flag_editable) {
    // id_article_bloque,  globale dans inc/presentation 
-		$id_article_bloque =  articles_set($id_article, $id_rubrique, ($flag_auteur||$statut_rubrique));
+		$id_article_bloque =  articles_set($id_article, $id_rubrique, $flag_modifiable);
 
 	// renvoyer vers la page de l'article
 		if ($new == 'oui'
@@ -71,10 +74,10 @@ function exec_articles_dist()
 			redirige_par_entete(
 				generer_url_ecrire('articles', 'id_article='.$id_article, '&'));
 	}
- 
+
+	// recharger apres mise a jour de articles_set
 	$row = spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article='$id_article'"));
 
-	if ($row) {
 	$id_article = $row["id_article"];
 	$surtitre = $row["surtitre"];
 	$titre = $row["titre"];
@@ -95,34 +98,19 @@ function exec_articles_dist()
 	$extra = $row["extra"];
 	$id_trad = $row["id_trad"];
 	$id_version = $row["id_version"];
+	
+	// aucun doc implicitement inclus au départ.
+	inclus_non_articles($id_article);
+	
+	debut_page("&laquo; $titre &raquo;", "documents", "articles", "", "", $id_rubrique);
 
-	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})", $date_redac, $regs)) {
-		$annee_redac = $regs[1];
-		$mois_redac = $regs[2];
-		$jour_redac = $regs[3];
-		$heure_redac = $regs[4];
-		$minute_redac = $regs[5];
-		if ($annee_redac > 4000) $annee_redac -= 9000;
-	}
+	debut_grand_cadre();
 
-	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})", $date, $regs)) {
-		$annee = $regs[1];
-		$mois = $regs[2];
-		$jour = $regs[3];
-		$heure = $regs[4];
-		$minute = $regs[5];
-	}
-	}
+	afficher_hierarchie($id_rubrique);
 
-debut_page("&laquo; $titre &raquo;", "documents", "articles", "", "", $id_rubrique);
+	fin_grand_cadre();
 
-debut_grand_cadre();
-
-afficher_hierarchie($id_rubrique);
-
-fin_grand_cadre();
-
-if (!$row) {echo _T('public:aucun_article'); exit;}
+	if (!$row) {echo $titre; exit;}
 
 //
 // Affichage de la colonne de gauche
@@ -172,7 +160,7 @@ debut_cadre_relief();
  echo "<div class='serif' align='$spip_lang_left'>";
 
  debut_cadre_couleur();
- dates_articles($id_article, $id_rubrique, $flag_editable, $statut_article, $date,$annee, $mois, $jour, $heure, $minute, $date_redac, $annee_redac, $mois_redac, $jour_redac, $heure_redac, $minute_redac);
+ dates_articles($id_article, $id_rubrique, $flag_editable, $statut_article, $date, $date_redac);
  fin_cadre_couleur();
 
 //
@@ -256,9 +244,9 @@ if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
 
  echo pipeline('affiche_milieu',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
 
- if (acces_rubrique($rubrique_article))
+ if ($statut_rubrique)
    echo debut_cadre_relief('', true),
-     afficher_statut_articles($id_article, $rubrique_article, $statut_article),
+     afficher_statut_articles($id_article, $id_rubrique, $statut_article),
      fin_cadre_relief('', true);
 
  afficher_corps_articles($virtuel, $chapo, $texte, $ps, $extra);
@@ -276,7 +264,7 @@ if ($flag_editable) {
  if ($spip_display != 4)
  afficher_documents_non_inclus($id_article, "article", $flag_editable);
 
- if ($flag_auteur AND  $statut_article == 'prepa' AND !acces_rubrique($rubrique_article))
+ if ($flag_auteur AND  $statut_article == 'prepa' AND !$statut_rubrique)
 	echo demande_publication($id_article);
 
  echo "</div>";
@@ -639,13 +627,29 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 }
 
 
-function dates_articles($id_article, $id_rubrique, $flag_editable, $statut_article, $date, $annee, $mois, $jour, $heure, $minute, $date_redac, $annee_redac, $mois_redac, $jour_redac, $heure_redac, $minute_redac)
+function dates_articles($id_article, $id_rubrique, $flag_editable, $statut_article, $date, $date_redac)
 {
 
-  global $spip_lang_left, $spip_lang_right, $options;
+	global $spip_lang_left, $spip_lang_right, $options;
+
+	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})", $date_redac, $regs)) {
+		$annee_redac = $regs[1];
+		$mois_redac = $regs[2];
+		$jour_redac = $regs[3];
+		$heure_redac = $regs[4];
+		$minute_redac = $regs[5];
+		if ($annee_redac > 4000) $annee_redac -= 9000;
+	}
+
+	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})", $date, $regs)) {
+		$annee = $regs[1];
+		$mois = $regs[2];
+		$jour = $regs[3];
+		$heure = $regs[4];
+		$minute = $regs[5];
+	}
 
   if ($flag_editable AND $options == 'avancees') {
-
 
 	if ($statut_article == 'publie') {
 
