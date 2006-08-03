@@ -70,7 +70,7 @@ afficher_hierarchie($id_rubrique);
 fin_grand_cadre();
 debut_gauche();
 if ($new != 'oui' AND ($connect_statut=="0minirezo" OR $statut=="prop")) {
-	maj_documents($id_breve, 'breve');
+
 	if (isset($texte)) document_a_voir($texte);
 	afficher_documents_colonne($id_breve, "breve", true);
 }

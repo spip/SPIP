@@ -1408,9 +1408,6 @@ function insert_article($id_parent)
 
 function articles_set($id_article, $id_rubrique, $statut)
 {
-   if  (isset($_POST['modif_document']))
-     maj_documents($id_article, 'article');
-
    if ($_POST['changer_virtuel']) {
      if ($virtuel = eregi_replace("^http://$", "", trim($_POST['virtuel'])))
 		$chapo = corriger_caracteres("=$virtuel");

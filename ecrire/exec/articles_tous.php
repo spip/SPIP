@@ -208,7 +208,7 @@ if (($GLOBALS['meta']['multi_rubriques'] == 'oui' OR $GLOBALS['meta']['multi_art
 	if (count($langues) > 1) {
 		sort($langues);
 		echo "<br /><div class='verdana2'><b>"._T('titre_cadre_afficher_traductions')."</b><br />";
-		echo "<SELECT STYLE='width:100%' NAME='sel_lang[]' size='".count($langues)."' multiple='multiple>";
+		echo "<select style='width:100%' NAME='sel_lang[]' size='".count($langues)."' multiple='multiple'>";
 		while (list(, $l) = each ($langues)) {
 		  echo "<option value='$l'",
 		    (in_array($l,$sel_lang) ? " selected='selected'" : ""),
