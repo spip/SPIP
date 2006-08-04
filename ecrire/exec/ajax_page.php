@@ -259,4 +259,12 @@ function ajax_page_aff_info($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 		echo "</div>";
 
 }
+
+function ajax_page_document($id, $bof, $id_document, $script, $type, $ancre)
+{
+	include_spip('inc/documents');
+	include_spip('inc/presentation');
+
+	echo formulaire_document($id_document, array(), $script, $type, $id, $ancre);
+}
 ?>
