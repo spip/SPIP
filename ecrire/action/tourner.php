@@ -21,18 +21,18 @@ function action_tourner_dist() {
 
 	include_spip('inc/actions');
 
-	$arg = $_REQUEST['arg'];
-	$hash = $_REQUEST['hash'];
-	$action = $_REQUEST['action'];
-	$redirect = $_REQUEST['redirect'];
-	$id_auteur = $_REQUEST['id_auteur'];
+	$arg = _request('arg');
+	$hash = _request('hash');
+	$action = _request('action');
+	$redirect = _request('redirect');
+	$id_auteur = _request('id_auteur');
 
 	if (!verifier_action_auteur("$action-$arg", $hash, $id_auteur)) {
 		include_spip('inc/minipres');
 		minipres(_T('info_acces_interdit'));
 	}
 
-	if (!preg_match(",^\W*(\d+)\\W+(\d+)$,", $arg, $r)) {
+	if (!preg_match(",^\W*(\d+)\W?(-?\d+)$,", $arg, $r)) {
 		 spip_log("action_tourner_dist $arg pas compris");
 	} else {
 	$var_rot = $r[2];

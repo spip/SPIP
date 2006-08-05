@@ -194,13 +194,17 @@ function AjaxSqueeze(trig, id)
 	var noeud = document.getElementById(id);
 	if (!noeud) return true;
 
+	if (typeof ajax_image_searching != 'undefined') {
+		noeud.innerHTML = ajax_image_searching + noeud.innerHTML;
+	}
+
 	if (typeof(trig) == 'string')
 	  return ajah('GET', trig, null, function(r) { noeud.innerHTML = r;});
 
 	s = trig.getAttribute('action');
 	for (i=0;i < trig.elements.length;i++) {
 		n = trig.elements[i].name;
-		if (n)  u += n+"="+escape(trig.elements[i].value) + '&';
+		if (n)  u += n+"="+ encodeURIComponent(trig.elements[i].value) + '&';
 	}
 
 	return !ajah('POST', // ou 'GET'

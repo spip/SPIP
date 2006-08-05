@@ -1650,6 +1650,7 @@ function debut_javascript($admin, $stat)
 	 	http_script(
 	# tester la capacite ajax si ce n'est pas deja fait
 			$ajax . 
+			"\nvar ajax_image_searching = '<div style=\"float: ".$GLOBALS['spip_lang_right'].";\"><img src=\"".url_absolue(_DIR_IMG_PACK."searching.gif")."\" /></div>';" .
 			"\nvar admin = " . ($admin ? 1 : 0) .
 			"\nvar stat = " . ($stat ? 1 : 0) .
 			"\nvar largeur_icone = " .
