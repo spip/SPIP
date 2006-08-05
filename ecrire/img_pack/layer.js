@@ -176,25 +176,31 @@ function ajahReady(xhr, f) {
         }
 }
 
-// Si Ajax est disponible, cette fonction envoie le formulaire avec lui.
-// Elle renvoie False pour empecher l'envoi du formulaire en mode normal.
+// Si Ajax est disponible, cette fonction envoie la requete en Ajax.
+// Si le premier argument n'est pas une url, ce doit etre un formulaire.
+// Le deuxieme argument doit etre l'ID du noeud a affecter avec la reponse.
+// En cas de formulaire, la fonction retourne False pour empecher son envoi
 // Le cas True ne devrait pas se produire car le cookie spip_accepte_ajax
 // a du anticiper la situation.
 // Toutefois il y toujours un coup de retard dans la pose d'un cookie:
 // eviter de se loger avec redirection vers un telle page
 
-function AjaxSqueeze(form, div)
+function AjaxSqueeze(trig, id)
 {
-	var i;
+	var i, s;
 	var u = '';
-	var s = form.getAttribute('action');
-	// pere du formulaire (le donner direct serait mieux)
-	var noeud = document.getElementById(div);
+	
+	// pere du demandeur dans le DOM (le donner direct serait mieux)
+	var noeud = document.getElementById(id);
 	if (!noeud) return true;
 
-	for (i=0;i < form.elements.length;i++) {
-		n = form.elements[i].name;
-		if (n)  u += n+"="+escape(form.elements[i].value) + '&';
+	if (typeof(trig) == 'string')
+	  return ajah('GET', trig, null, function(r) { noeud.innerHTML = r;});
+
+	s = trig.getAttribute('action');
+	for (i=0;i < trig.elements.length;i++) {
+		n = trig.elements[i].name;
+		if (n)  u += n+"="+escape(trig.elements[i].value) + '&';
 	}
 
 	return !ajah('POST', // ou 'GET'
