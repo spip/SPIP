@@ -104,7 +104,8 @@ function action_spip_image_ajouter_dist() {
 		}
 		else {
 			@unlink ($f);
-			check_upload_error(6,_T('info_logo_format_interdit', $formats_logos));
+			check_upload_error(6,_T('info_logo_format_interdit',
+						array('formats' => join(', ', $formats_logos))));
 		}
 	
 	}
