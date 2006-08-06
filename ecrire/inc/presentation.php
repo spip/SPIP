@@ -287,13 +287,15 @@ function fin_boite_alerte() {
 //
 // une boite info
 //
-function debut_boite_info() {
-	echo "<div class='cadre-info verdana1'>";
+function debut_boite_info($return=false) {
+	$r ="<div class='cadre-info verdana1'>";
+	if ($return) return $r; else echo $r;
 }
 
-function fin_boite_info() {
+function fin_boite_info($return=false) {
 	//echo "</font></td></tr></table></div>\n\n";
-	echo "</div>";
+	$r = "</div>";
+	if ($return) return $r; else echo $r;
 }
 
 //

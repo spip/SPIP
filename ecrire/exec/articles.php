@@ -237,7 +237,7 @@ fin_cadre_enfonce(false);
 //
 
 if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
-  formulaire_mots('articles', $id_article, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable);
+  echo formulaire_mots('articles', $id_article, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable);
 }
 
  langues_articles($id_article, $langue_article, $flag_editable, $id_rubrique, $id_trad, $dir_lang, $nom_select, $lier_trad,  $id_trad_new);

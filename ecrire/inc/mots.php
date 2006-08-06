@@ -10,8 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-//
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // ne pas faire d'erreur si les chaines sont > 254 caracteres
@@ -139,7 +137,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		if (!$cpt['n']) return;
 	}
 
-	echo "<a name='mots'></a>";
+	$res = "<a name='mots'></a>";
 
 	if ($flag_editable){
 		if ($visible)
@@ -148,12 +146,13 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			$bouton =  bouton_block_invisible("lesmots");
 	} else $bouton = '';
 
-	debut_cadre_enfonce("mot-cle-24.gif", false, "", $bouton._T('titre_mots_cles').aide ("artmots"));
+	$res .= debut_cadre_enfonce("mot-cle-24.gif", true, "", $bouton._T('titre_mots_cles').aide ("artmots"));
 
 	if ($flag_editable) {
 		$reindexer = false;
 		if ($cherche_mot) {
-			$nouveaux_mots = recherche_mot_cle($cherche_mot, intval($GLOBALS['select_groupe']), $id_objet,$nouv_mot, $table, $table_id, $url_base);
+			list($choix, $nouveaux_mots) = recherche_mot_cle($cherche_mot, intval($GLOBALS['select_groupe']), $id_objet,$nouv_mot, $table, $table_id, $url_base);
+			$res .= $choix;
 			while ((list(,$nouv_mot) = each($nouveaux_mots)) AND $nouv_mot!='x') {
 			  $reindexer |= inserer_mot("spip_mots_$table", $table_id, $id_objet, $nouv_mot);
 			}
@@ -171,8 +170,9 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		}
 	}
 
-	afficher_mots_cles($flag_editable, $id_objet, $table, $table_id, $url_base, $visible);
-	fin_cadre_enfonce();
+	$res .= afficher_mots_cles($flag_editable, $id_objet, $table, $table_id, $url_base, $visible);
+	$res .= fin_cadre_enfonce(true);
+	return $res;
 }
 
 function inserer_mot($table, $table_id, $id_objet, $id_mot)
@@ -188,33 +188,34 @@ function inserer_mot($table, $table_id, $id_objet, $id_mot)
 
 function affiche_mots_ressemblant($cherche_mot, $id_objet, $resultat, $table_id, $url_base)
 {
+	$res = '';
 	if (count($resultat) > 17)
-		echo "<br /><b>",_T('info_trop_resultat', array('cherche_mot' => $cherche_mot)),"</b><p />\n";
+		$res .="<br /><b>" ._T('info_trop_resultat', array('cherche_mot' => $cherche_mot)) ."</b><p />\n";
 				
 	$les_mots = join(',', $resultat);
-	echo "<B>",_T('info_plusieurs_mots_trouves', array('cherche_mot' => $cherche_mot)),"</B><BR>";
+	$res .="<B>" ._T('info_plusieurs_mots_trouves', array('cherche_mot' => $cherche_mot)) ."</B><BR>";
 	$result = spip_query("SELECT * FROM spip_mots WHERE id_mot IN ($les_mots) ORDER BY titre LIMIT 17");
 
-	echo "<UL>";
+	$res .="<UL>";
 	while ($row = spip_fetch_array($result)) {
 		$id_mot = $row['id_mot'];
 		$titre_mot = $row['titre'];
 		$type_mot = typo($row['type']);
 		$descriptif_mot = $row['descriptif'];
 
-		echo "<li><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE='2'><B><FONT SIZE='3'>",typo($titre_mot),"</FONT></B>";
+		$res .="<li><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE='2'><B><FONT SIZE='3'>" .typo($titre_mot) ."</FONT></B>";
 
-		if ($type_mot) echo " ($type_mot)";
-		echo " | <A href='", generer_url_ecrire($url_base, "$table_id=$id_objet&nouv_mot=$id_mot#mots"), "'>",_T('info_ajouter_mot'),"</A>";
+		if ($type_mot) $res .=" ($type_mot)";
+		$res .=" | <A href='" . generer_url_ecrire($url_base, "$table_id=$id_objet&nouv_mot=$id_mot#mots") . "'>" ._T('info_ajouter_mot') ."</A>";
 
 		if (strlen($descriptif_mot) > 1) {
-			echo "<br /><FONT SIZE=1>".propre(couper($descriptif_mot, 100))."</FONT>\n";
+			$res .="<br /><FONT SIZE=1>".propre(couper($descriptif_mot, 100))."</FONT>\n";
 		}
-		echo "</FONT></li>\n";
+		$res .="</FONT></li>\n";
 	}
-	echo "</UL>";
+	$res .="</UL>";
+	return $res;
 }
-
 
 function recherche_mot_cle($cherche_mots, $id_groupe, $id_objet,$nouv_mot, $table, $table_id, $url_base)
 {
@@ -234,49 +235,46 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $id_objet,$nouv_mot, $tabl
 	}
 
 	$nouveaux_mots = $nouv_mot ? array($nouv_mot) : array();
+	$res = '';
+
 	foreach (split(" *[,;] *", $cherche_mots) as $cherche_mot) {
 	  if  ($cherche_mot) {
 		$resultat = mots_ressemblants($cherche_mot, $table_mots, $table_ids);
-		echo "<P>";
-		debut_boite_info();
+		$res .= "<P>" . debut_boite_info(true);
 		if (!$resultat) {
-			echo "<B>"._T('info_non_resultat', array('cherche_mot' => $cherche_mot))."</B><BR>";
+			$res .= "<B>"._T('info_non_resultat', array('cherche_mot' => $cherche_mot))."</B><BR>";
 		}
 		else if (count($resultat) == 1) {
 			$nouveaux_mots[] = $resultat[0];
 			$row = spip_fetch_array(spip_query("SELECT titre FROM spip_mots WHERE id_mot=$resultat[0]"));
-			echo "<B>"._T('info_mot_cle_ajoute')." $ou : </B><BR><UL>";
-			echo "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE='2'><B><FONT SIZE='3'>".typo($row['titre'])."</FONT></B></FONT></LI>\n";
-			echo "</UL>";
+			$res .= "<B>"._T('info_mot_cle_ajoute')." $ou : </B><BR><UL>";
+			$res .= "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE='2'><B><FONT SIZE='3'>".typo($row['titre'])."</FONT></B></FONT></LI>\n";
+			$res .= "</UL>";
 		}
-		else affiche_mots_ressemblant($cherche_mot, $id_objet, $resultat, $table_id, $url_base);
+		else $res .= affiche_mots_ressemblant($cherche_mot, $id_objet, $resultat, $table_id, $url_base);
 
 		if (acces_mots()) {
-			echo "<div style='width: 200px;'>";
 			$titre = rawurlencode($cherche_mot);
-			icone_horizontale(_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&table_id=$table_id&titre=$titre&redirect=" . generer_url_retour($url_base, "$table_id=$id_objet")), "mot-cle-24.gif", "creer.gif");
-			echo "</div> ";
+			$res .= "<div style='width: 200px;'>";
+			$res .= icone_horizontale(_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&table_id=$table_id&titre=$titre&redirect=" . generer_url_retour($url_base, "$table_id=$id_objet")), "mot-cle-24.gif", "creer.gif", false);
+			$res .= "</div> ";
 		}
 
-		fin_boite_info();
-		echo "<P>";
+		$res .= fin_boite_info(true) . "<p>";
 	  }
 	}
-	return $nouveaux_mots;
+	return array($res, $nouveaux_mots);
 }
 
 function afficher_mots_cles($flag_editable, $id_objet, $table, $table_id, $url_base, $visible)
 {
 	global $spip_lang_rtl, $spip_lang, $spip_lang_right, $connect_statut, $connect_toutes_rubriques, $options;
 
-
 	$les_mots = array();
 	$id_groupes_vus = array();
 	$groupes_vus = array();
 	$result = spip_query("SELECT mots.id_mot, mots.titre, mots.descriptif, mots.id_groupe FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot ORDER BY mots.type, mots.titre");
 	if (spip_num_rows($result) > 0) {
-		echo "<div class='liste'>";
-		echo "<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>";
 	
 		$tableau= array();
 		$cle = http_img_pack('petite-cle.gif', "", "width='23' height='12'");
@@ -344,9 +342,22 @@ function afficher_mots_cles($flag_editable, $id_objet, $table, $table_id, $url_b
 	
 		$largeurs = array('25', '', '', '');
 		$styles = array('arial11', 'arial2', 'arial2', 'arial1');
-		echo afficher_liste($largeurs, $tableau, $styles);
-		echo "</table></div>";
-	}
+
+		$res = "<div class='liste'>"
+		. "<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>"
+		. afficher_liste($largeurs, $tableau, $styles)
+		. "</table></div>";
+	} else $res ='';
+
+	if ($flag_editable)
+		$res .= formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $table_id, $url_base, $visible);
+
+	return $res;
+}
+
+function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $table_id, $url_base, $visible)
+{
+	global $connect_statut, $spip_lang, $spip_lang_right, $spip_lang_rtl;
 
 	if ($les_mots) {
 		$nombre_mots_associes = count($les_mots);
@@ -355,77 +366,76 @@ function afficher_mots_cles($flag_editable, $id_objet, $table, $table_id, $url_b
 		$les_mots = "0";
 		$nombre_mots_associes = 0;
 	}
+	if ($id_groupes_vus) $id_groupes_vus = join($id_groupes_vus, ",");
+	else $id_groupes_vus = "0";
+	
+	$nb_groupes = spip_num_rows(spip_query("SELECT * FROM spip_groupes_mots WHERE $table = 'oui' AND ".substr($connect_statut,1)." = 'oui' AND obligatoire = 'oui' AND id_groupe NOT IN ($id_groupes_vus)"));
 
-	//
-	// Afficher le formulaire d'ajout de mots-cles
-	//
+	$res = '';
 
-	if ($flag_editable) {
-		if ($id_groupes_vus) $id_groupes_vus = join($id_groupes_vus, ",");
-		else $id_groupes_vus = "0";
-		$nb_groupes = spip_num_rows(spip_query("SELECT * FROM spip_groupes_mots WHERE $table = 'oui' AND ".substr($connect_statut,1)." = 'oui' AND obligatoire = 'oui' AND id_groupe NOT IN ($id_groupes_vus)"));
-
-		if ($visible)
-			echo debut_block_visible("lesmots");
-		else if ($nb_groupes > 0) {
-			echo debut_block_visible("lesmots");
+	if ($visible)
+		$res .= debut_block_visible("lesmots");
+	else if ($nb_groupes > 0) {
+		$res .= debut_block_visible("lesmots");
 			// vilain hack pour redresser un triangle
-			$couche_a_redresser = $GLOBALS['numero_block']['lesmots'];
-			if ($GLOBALS['browser_layer']) echo http_script("
+		$couche_a_redresser = $GLOBALS['numero_block']['lesmots'];
+		if ($GLOBALS['browser_layer'])
+			$res .= http_script("
 				triangle = findObj('triangle' + $couche_a_redresser);
 				if (triangle) triangle.src = '" . _DIR_IMG_PACK . "deplierbas$spip_lang_rtl.gif';");
-		}
-		else
-			echo debut_block_invisible("lesmots");
+	} else $res .= debut_block_invisible("lesmots");
 
-		if ($nombre_mots_associes > 3) {
-			echo "<div align='right' class='arial1'>";
-			echo "<a href='", generer_url_ecrire($url_base, "$table_id=$id_objet&supp_mot=-1#mots"), "'>",_T('info_retirer_mots'),"</a>";
-			echo "</div><br />\n";
-		}
-
-		// il faudrait rajouter STYLE='margin:1px;' qq part
-
-		$form_mot = generer_url_post_ecrire($url_base,"$table_id=$id_objet", '', "#mots");
-
-		if ($table == 'rubriques') $form_mot .= "<input type='hidden' name='id_rubrique' value='$id_objet' />";
-
-
-		echo "<table border='0' width='100%' style='text-align: $spip_lang_right'>";
-
-		$result_groupes = spip_query("SELECT id_groupe,unseul,obligatoire,titre, ".creer_objet_multi ("titre", $spip_lang)." FROM spip_groupes_mots WHERE $table = 'oui' AND ".substr($connect_statut,1)." = 'oui' AND (unseul != 'oui'  OR (unseul = 'oui' AND id_groupe NOT IN ($id_groupes_vus))) ORDER BY multi");
-
-
-		// Afficher un menu par groupe de mots
-
-		$message_ajouter_mot = "<span class='verdana1'><b>"._T('titre_ajouter_mot_cle')."</b></span> &nbsp;\n";
-
-		while ($row_groupes = spip_fetch_array($result_groupes)) {
-			if (menu_mots($row_groupes, $form_mot, $groupes_vus, $les_mots, $message_ajouter_mot))
-				$message_ajouter_mot = "";
-		}
-		
-		if (acces_mots()) {
-			echo "<tr><td></td><td colspan='2'>";
-			echo "<div style='width: 200px;'>";
-			icone_horizontale(_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&table_id=$table_id&redirect=" . generer_url_retour($url_base, "$table_id=$id_objet")), "mot-cle-24.gif", "creer.gif");
-			echo "</div> ";
-			echo "</td></tr>";
-		}
-		
-		echo "</table>";
-		echo fin_block();
+	if ($nombre_mots_associes > 3) {
+		$res .= "<div align='right' class='arial1'>"
+		. "<a href='"
+		. generer_url_ecrire($url_base, "$table_id=$id_objet&supp_mot=-1#mots")
+		. "'>"
+		. _T('info_retirer_mots')
+		. "</a>"
+		. "</div><br />\n";
 	}
+
+	// il faudrait rajouter STYLE='margin:1px;' qq part
+
+	$form_mot = generer_url_post_ecrire($url_base,"$table_id=$id_objet", '', "#mots");
+
+	if ($table == 'rubriques') $form_mot .= "<input type='hidden' name='id_rubrique' value='$id_objet' />";
+
+	$result_groupes = spip_query("SELECT id_groupe,unseul,obligatoire,titre, ".creer_objet_multi ("titre", $spip_lang)." FROM spip_groupes_mots WHERE $table = 'oui' AND ".substr($connect_statut,1)." = 'oui' AND (unseul != 'oui'  OR (unseul = 'oui' AND id_groupe NOT IN ($id_groupes_vus))) ORDER BY multi");
+
+
+	// Afficher un menu par groupe de mots
+
+	$message = "<span class='verdana1'><b>"._T('titre_ajouter_mot_cle')."</b></span> &nbsp;\n";
+
+	$res .=  "<table border='0' width='100%' style='text-align: $spip_lang_right'>";
+	while ($row_groupes = spip_fetch_array($result_groupes)) {
+		$g = menu_mots($row_groupes, $groupes_vus, $les_mots);
+		if ($g) {
+			$res .= "$form_mot\n<tr><td>$message</td>\n<td>$g</td></tr></form>\n";
+			$message = "";
+		}
+	}
+		
+	if (acces_mots()) {
+		$res .= "<tr><td></td><td colspan='2'>"
+		. "<div style='width: 200px;'>"
+		. icone_horizontale(_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&table_id=$table_id&redirect=" . generer_url_retour($url_base, "$table_id=$id_objet")), "mot-cle-24.gif", "creer.gif", false)
+		. "</div> "
+		. "</td></tr>";
+	}
+		
+	return $res . "</table>" . fin_block();
 }
 
-function menu_mots($row, $form_mot, $groupes_vus, $les_mots, $message_ajouter_mot)
+function menu_mots($row, $groupes_vus, $les_mots)
 {
 	$id_groupe = $row['id_groupe'];
 
 	$result = spip_query("SELECT id_mot, type, titre FROM spip_mots WHERE id_groupe =$id_groupe " . ($les_mots ? "AND id_mot NOT IN ($les_mots) " : '') .  "ORDER BY type, titre");
 
 	$n = spip_num_rows($result);
-	if (!$n) return false;
+	if (!$n) return '';
 
 	$titre = textebrut(typo($row['titre']));
 	$titre_groupe = entites_html($titre_groupe);
@@ -433,50 +443,49 @@ function menu_mots($row, $form_mot, $groupes_vus, $les_mots, $message_ajouter_mo
 	$obligatoire = $row['obligatoire']=='oui' AND !$groupes_vus[$id_groupe];
 
 	// faudrait rendre ca validable quand meme
-	echo $form_mot, "\n<tr><td>", $message_ajouter_mot, "</td>\n<td>";
+
+	$res = '';
 
 	if ($n > 50) {
 		$jscript = "onfocus=\"setvisibility('valider_groupe_$id_groupe', 'visible'); if(!antifocus_mots[$id_groupe]){this.value='';antifocus_mots[$id_groupe]=true;}\"";
 
 		if ($obligatoire)
-			echo "<input type='text' name='cherche_mot' class='fondl' style='width: 180px; background-color:#E86519;' value=\"$titre_groupe\" size='20' $jscript>";
+			$res .= "<input type='text' name='cherche_mot' class='fondl' style='width: 180px; background-color:#E86519;' value=\"$titre_groupe\" size='20' $jscript>";
 		else if ($unseul)
-			echo "<input type='text' name='cherche_mot' class='fondl' style='width: 180px; background-color:#cccccc;' value=\"$titre_groupe\" size='20' $jscript>";
+			$res .= "<input type='text' name='cherche_mot' class='fondl' style='width: 180px; background-color:#cccccc;' value=\"$titre_groupe\" size='20' $jscript>";
 		else
-			echo "<input type='text' name='cherche_mot'  class='fondl' style='width: 180px; ' value=\"$titre_groupe\" size='20' $jscript>";
+			$res .= "<input type='text' name='cherche_mot'  class='fondl' style='width: 180px; ' value=\"$titre_groupe\" size='20' $jscript>";
 
-		echo "</td>\n<td>";
-		echo "<input type='hidden' name='select_groupe'  value='$id_groupe'>";
-		echo "<span class='visible_au_chargement' id='valider_groupe_$id_groupe'>";
-		echo " <input type='submit' value='"._T('bouton_chercher')."' class='fondo' style='font-size:10px'>";
-		echo "</span>"; 
+		$res .= "</td>\n<td>";
+		$res .= "<input type='hidden' name='select_groupe'  value='$id_groupe'>";
+		$res .= "<span class='visible_au_chargement' id='valider_groupe_$id_groupe'>";
+		$res .= " <input type='submit' value='"._T('bouton_chercher')."' class='fondo' style='font-size:10px'>";
+		$res .= "</span>"; 
 	} else {
 
 		if ($obligatoire)
-			echo "<SELECT NAME='nouv_mot' SIZE='1' onChange=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" STYLE='width: 180px; background-color:#E86519;' CLASS='fondl'>";
+			$res .= "<SELECT NAME='nouv_mot' SIZE='1' onChange=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" STYLE='width: 180px; background-color:#E86519;' CLASS='fondl'>";
 		else if ($unseul)
-			echo "<SELECT NAME='nouv_mot' SIZE='1' onChange=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" STYLE='width: 180px; background-color:#cccccc;' CLASS='fondl'>";
+			$res .= "<SELECT NAME='nouv_mot' SIZE='1' onChange=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" STYLE='width: 180px; background-color:#cccccc;' CLASS='fondl'>";
 		else
-			echo "<SELECT NAME='nouv_mot' SIZE='1' onChange=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" STYLE='width: 180px; ' CLASS='fondl'>";
+			$res .= "<SELECT NAME='nouv_mot' SIZE='1' onChange=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" STYLE='width: 180px; ' CLASS='fondl'>";
 
-		echo "\n<option value='x' style='font-variant: small-caps;'>$titre</option>";
+		$res .= "\n<option value='x' style='font-variant: small-caps;'>$titre</option>";
 		while($row = spip_fetch_array($result)) {
-			echo "\n<option value='",$row['id_mot'],
-				"'>&nbsp;&nbsp;&nbsp;",
-				textebrut(typo($row['titre'])),
+			$res .= "\n<option value='" .$row['id_mot'] .
+				"'>&nbsp;&nbsp;&nbsp;" .
+				textebrut(typo($row['titre'])) .
 				"</option>";
 		}
-		echo "</SELECT>";
-		echo "</td>\n<td>";
-		echo "<span class='visible_au_chargement' id='valider_groupe_$id_groupe'>";
-		echo " &nbsp; <input type='submit' value='"._T('bouton_choisir')."' CLASS='fondo'>";
-		echo "</span>";
+		$res .= "</SELECT>";
+		$res .= "</td>\n<td>";
+		$res .= "<span class='visible_au_chargement' id='valider_groupe_$id_groupe'>";
+		$res .= " &nbsp; <input type='submit' value='"._T('bouton_choisir')."' CLASS='fondo'>";
+		$res .= "</span>";
 	}
-	echo "</td></tr></form>\n";
 
-	return true;
+	return $res;
 }
-
 
 //
 // Calculer les nombres d'elements (articles, etc.) lies a chaque mot
@@ -540,7 +549,7 @@ function afficher_groupe_mots($id_groupe) {
 
 	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM $from WHERE $where"));
 
-	if (! ($cpt = $cpt['n'])) return true ;
+	if (! ($cpt = $cpt['n'])) return '' ;
 
 	$occurrences = calculer_liens_mots();
 
@@ -561,20 +570,13 @@ function afficher_groupe_mots($id_groupe) {
 		$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, $javascript, $nb_aff);
 	} else $tranches = '';
 
-	if (!$deb_aff) echo "<div id='$tmp_var' style='position: relative;'>";
-
-	echo http_img_pack("searching.gif", "*", "style='visibility: hidden; position: absolute; $spip_lang_right: 0px; top: -20px;' id = 'img_$tmp_var'");
-
-	echo "<div class='liste'>";
-	echo "<table border=0 cellspacing=0 cellpadding=3 width=\"100%\">";
-
-	echo str_replace("::id_ajax_fonc::", "$id_ajax_fonc", $tranches);
 
 	$table = array();
 	$result = spip_query("SELECT $select FROM $from WHERE $where ORDER BY multi LIMIT  $limit");
 	while ($row = spip_fetch_array($result)) {
 		$table[] = afficher_groupe_mots_boucle($row, $occurrences);
 	}
+
 	if ($connect_statut=="0minirezo") {
 			$largeurs = array('', 100, 130);
 			$styles = array('arial11', 'arial1', 'arial1');
@@ -583,15 +585,18 @@ function afficher_groupe_mots($id_groupe) {
 			$largeurs = array('', 100);
 			$styles = array('arial11', 'arial1');
 	}
-	echo afficher_liste($largeurs, $table, $styles);
 
-	echo "</table>";
-//		fin_cadre_relief();
-	echo "</div>";
+	$res = http_img_pack("searching.gif", "*", "style='visibility: hidden; position: absolute; $spip_lang_right: 0px; top: -20px;' id='img_$tmp_var'") 
+	  . "<div class='liste'>"
+	  . "<table border='0' cellspacing='0' cellpadding='3' width='100%'>"
+	  . str_replace("::id_ajax_fonc::", "$id_ajax_fonc", $tranches)
+	  . afficher_liste($largeurs, $table, $styles)
+	  . "</table>"
+	  . "</div>";
 		
-	if (!$deb_aff) echo "</div>";
+	if ($deb_aff) return $res;
 
-	return false;
+	return "<div id='$tmp_var' style='position: relative;'>$res</div>";
 }
 
 function afficher_groupe_mots_boucle($row, $occurrences)
