@@ -27,6 +27,11 @@ include_spip('base/typedoc');
 function spip_create_table($nom, $champs, $cles, $autoinc=false, $temporary=false) {
 	$query = ''; $keys = ''; $s = ''; $p='';
 
+	// certains plugins declarent les tables  (permet leur inclusion dans le dump)
+	// sans les renseigner (laisse le compilo recuperer la description)
+	if (!is_array($champs) || !is_array($cles)) 
+		return;
+
 	foreach($cles as $k => $v) {
 		$keys .= "$s\n\t\t$k ($v)";
 		if ($k == "PRIMARY KEY")
