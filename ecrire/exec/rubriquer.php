@@ -12,15 +12,16 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function inc_ajax_petitionner_dist()
+# petit moteur de recherche sur les rubriques
+
+function exec_rubriquer_dist()
 {
-	global $id_article, $script;
-	$id_article = intval($id_article);
+	global $id;
+	$id = intval($id);
 
-	include_spip('inc/petition');
-	include_spip('inc/presentation');
-	include_spip('inc/actions');
-
-	echo formulaire_petitionner($id_article, $script, "&id_article=$id_article", true);
+	include_spip('inc/texte');
+	include_spip('inc/mini_nav');
+	return mini_nav ($id, "aff_nav_recherche", 
+			"document.location.href='" . generer_url_ecrire('naviguer', "id_rubrique=::sel::") .
+			"';", 0, true);
 }
-?>

@@ -134,7 +134,7 @@ function aff_selection (type, rac, id) {
 	
 	findObj_forcer(rac+"_selection").style.display = "none";
 	
-	charger_id_url("./?exec=ajax_page&fonction=informer&type="+type+"&id="+id+"&rac="+rac, rac+"_selection");
+	charger_id_url("./?exec=informer&var_ajax=1&type="+type+"&id="+id+"&rac="+rac, rac+"_selection");
 }
 
 //

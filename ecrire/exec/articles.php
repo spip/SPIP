@@ -20,7 +20,7 @@ include_spip('inc/date');
 include_spip('inc/documents');
 include_spip('inc/forum');
 include_spip('inc/petition');
-include_spip('inc/ajax_virtualiser');
+include_spip('exec/virtualiser');
 include_spip('base/abstract_sql');
 
 function exec_articles_dist()

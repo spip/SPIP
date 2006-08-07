@@ -216,11 +216,11 @@ function verifForm() {
 
 function lancer_recherche(champ, cible) {
 	// Desactive pour l'instant (bouffe trop de ressources)
-	/*
+	/* et a reprendre suite au cght d'interface Ajax du 7/8/06
 	valeur = findObj(champ).value;
 	if (valeur.length > 3) {
-		charger_id_url('./?exec=ajax_page&recherche_sugg='+valeur,'sugg_recherche');
-		charger_id_url('./?exec=ajax_page&recherche='+valeur,'resultats_recherche');
+		charger_id_url('./?exec=recherche_sugg='+valeur,'sugg_recherche');
+		charger_id_url('./?exec=recherche='+valeur,'resultats_recherche');
 	}
 	*/
 }
@@ -228,7 +228,7 @@ function lancer_recherche(champ, cible) {
 function lancer_recherche_rub(champ, rac, exclus) {
 	valeur = findObj(champ).value;
 	if (valeur.length > 0) {
-		charger_id_url('./?exec=ajax_page&fonction=rechercher&type='+valeur+'&exclus='+exclus+'&rac='+rac, rac+'_col_1');
+		charger_id_url('./?exec=rechercher&var_ajax=1&type='+valeur+'&exclus='+exclus+'&rac='+rac, rac+'_col_1');
 	}
 }
 

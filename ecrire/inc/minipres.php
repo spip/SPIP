@@ -119,18 +119,18 @@ function info_copyright() {
 
 }
 
-// normalement il faudrait creer inc/info.php, mais pour mettre juste ca:
+// normalement il faudrait creer exec/info.php, mais pour mettre juste ca:
 
 function exec_info_dist() {
 	global $connect_statut;
 	if ($connect_statut == '0minirezo') phpinfo();
 }
 
-// idem faudrait creer inc/ajax_test, mais c'est si court.
+// Idem faudrait creer exec/test_ajax, mais c'est si court.
 // Tester si Ajax fonctionne pour ce brouteur
 // (si on arrive la c'est que c'est bon, donc poser le cookie)
 
-function inc_ajax_test_dist()
+function exec_test_ajax_dist()
 {
 	spip_setcookie('spip_accepte_ajax', 1);
 }

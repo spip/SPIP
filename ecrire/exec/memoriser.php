@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function inc_ajax_memoriser_dist()
+function exec_memoriser_dist()
 {
 	global $flag_ob;
 

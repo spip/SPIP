@@ -743,7 +743,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	$hash = "0x".substr(md5($connect_id_auteur.$jjscript), 0, 16);
 
 	$tmp_var = substr($hash, 2, 6);
-	$javascript = "charger_id_url('" . generer_url_ecrire("ajax_page","fonction=memoriser&id_ajax_fonc=::id_ajax_fonc::::deb::", true) . "','$tmp_var')";
+	$javascript = "charger_id_url('" . generer_url_ecrire('memoriser',"&var_ajax=1&id_ajax_fonc=::id_ajax_fonc::::deb::", true) . "','$tmp_var')";
 
 	if (!isset($requete['GROUP BY'])) $requete['GROUP BY'] = '';
 	$tous_id = array();
@@ -783,7 +783,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 			if ($afficher_trad) {
 				$texte_img .= http_img_pack("searching.gif", "*", "style='visibility: hidden; float: $spip_lang_right' id = 'img_$div_trad'");
-				$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"javascript:charger_id_url('" . generer_url_ecrire("ajax_page", "fonction=memoriser&id_ajax_fonc=$id_ajax_trad"). "','$div_trad');\"><img src='". _DIR_IMG_PACK . "langues-12.gif' /></a></div>";
+				$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"javascript:charger_id_url('" . generer_url_ecrire('memoriser',"&var_ajax=1&id_ajax_fonc=$id_ajax_trad"). "','$div_trad');\"><img src='". _DIR_IMG_PACK . "langues-12.gif' /></a></div>";
 			}
 			bandeau_titre_boite2($texte_img.$titre_table, "article-24.gif");
 
@@ -972,7 +972,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 	$jjscript = (serialize($jjscript));
 	$hash = "0x".substr(md5($connect_id_auteur.$jjscript), 0, 16);
 	$tmp_var = substr($hash, 2, 6);	
-	$javascript = "charger_id_url('" . generer_url_ecrire("ajax_page", 'fonction=memoriser&id_ajax_fonc=::id_ajax_fonc::::deb::') . "','$tmp_var')";
+	$javascript = "charger_id_url('" . generer_url_ecrire('memoriser', '&var_ajax=1&id_ajax_fonc=::id_ajax_fonc::::deb::') . "','$tmp_var')";
 
 	$tous_id = array();
 	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
@@ -1005,7 +1005,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 			
 			$texte_img .= http_img_pack("searching.gif", "*", "style='visibility: hidden; float: $spip_lang_right' id = 'img_$div_trad'");
 
-			$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"javascript:charger_id_url('" . generer_url_ecrire("ajax_page", "fonction=memoriser&id_ajax_fonc=$id_ajax_trad") . "','$div_trad');\"><img src='". _DIR_IMG_PACK . "langues-off-12.gif' /></a></div>";
+			$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"javascript:charger_id_url('" . generer_url_ecrire('memoriser',"&var_ajax=1&id_ajax_fonc=$id_ajax_trad") . "','$div_trad');\"><img src='". _DIR_IMG_PACK . "langues-off-12.gif' /></a></div>";
 
 			bandeau_titre_boite2($texte_img.$titre_table, "article-24.gif");
 
@@ -1640,7 +1640,7 @@ function debut_javascript($admin, $stat)
 	if (!isset($GLOBALS['_COOKIE']['spip_accepte_ajax'])) {
 		spip_setcookie('spip_accepte_ajax', -1);
 		$ajax = "if (a = createXmlHttp()) {
-	a.open('GET', '" . generer_url_ecrire("ajax_page","fonction=test", true) .
+	a.open('GET', '" . generer_url_ecrire('test_ajax', true) .
 		  "', true) ;
 	a.send(null);
 }";
@@ -2199,7 +2199,7 @@ if (true /*$bandeau_colore*/) {
 //		echo "<a href='" . generer_url_ecrire("articles_tous","") . "' class='icone26' onMouseOver=\"changestyle('bandeautoutsite','visibility','visible');\">" .
 //		  http_img_pack("tout-site.png", "", "width='26' height='20'") . "</a>";
 
-		echo "<a href='" . generer_url_ecrire("articles_tous") . "' class='icone26' onmouseover=\"changestyle('bandeautoutsite','visibility','visible'); charger_id_url_si_vide('" . generer_url_ecrire("ajax_page", "fonction=naviguer&id=$id_rubrique") . "','nav-recherche');\">",
+	echo "<a href='" . generer_url_ecrire("articles_tous") . "' class='icone26' onmouseover=\"changestyle('bandeautoutsite','visibility','visible'); charger_id_url_si_vide('" . generer_url_ecrire('rubriquer',"&var_ajax=1&id=$id_rubrique") . "','nav-recherche');\">",
 		  http_img_pack("tout-site.png", "", "width='26' height='20'") . "</a>";
 		if ($id_rubrique > 0) echo "<a href='" . generer_url_ecrire("brouteur","id_rubrique=$id_rubrique") . "' class='icone26' onmouseover=\"changestyle('bandeaunavrapide','visibility','visible');\">" .
 		  http_img_pack("naviguer-site.png", "", "width='26' height='20'") ."</a>";
