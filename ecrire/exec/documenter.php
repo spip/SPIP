@@ -21,6 +21,6 @@ function exec_documenter_dist()
 	include_spip('inc/documents');
 	include_spip('inc/presentation');
 
-	echo formulaire_documenter($id_document, array(), $script, $type, $id, $ancre);
+	return formulaire_documenter($id_document, array(), $script, $type, $id, $ancre);
 }
 ?>

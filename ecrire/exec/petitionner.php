@@ -21,6 +21,6 @@ function exec_petitionner_dist()
 	include_spip('inc/presentation');
 	include_spip('inc/actions');
 
-	echo formulaire_petitionner($id_article, $script, "&id_article=$id_article", true);
+	return formulaire_petitionner($id_article, $script, "&id_article=$id_article", true);
 }
 ?>

@@ -21,7 +21,7 @@ function exec_tourner_dist()
 	include_spip('inc/documents');
 	include_spip('inc/presentation');
 
-	echo formulaire_tourner($id_document, array(), $script, 'ajax', $type);
+	return formulaire_tourner($id_document, array(), $script, 'ajax', $type);
 }
 
 ?>

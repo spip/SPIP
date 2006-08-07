@@ -49,7 +49,7 @@ function exec_virtualiser_dist()
 
 	include_spip('inc/actions');
 
-	echo formulaire_virtualiser($id_article, 'ajax', $script, "&id_article=$id_article");
+	return formulaire_virtualiser($id_article, 'ajax', $script, "&id_article=$id_article");
 }
 
 ?>

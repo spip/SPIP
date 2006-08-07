@@ -20,6 +20,6 @@ function exec_poster_dist()
 	include_spip('inc/forum');
 	include_spip('inc/actions');
 
-	echo formulaire_poster($id_article, $script, "&id_article=$id_article", true);
+	return formulaire_poster($id_article, $script, "&id_article=$id_article", true);
 }
 ?>
