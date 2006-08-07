@@ -328,4 +328,14 @@ function ajax_page_poster()
 	echo formulaire_poster($id_article, $script, "&id_article=$id_article", true);
 }
 
+function ajax_page_virtualiser()
+{
+	global $id_article, $script;
+	$id_article = intval($id_article);
+
+	include_spip('inc/virtualite');
+	include_spip('inc/actions');
+
+	echo formulaire_virtualiser($id_article, 'ajax', $script, "&id_article=$id_article");
+}
 ?>
