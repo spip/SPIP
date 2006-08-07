@@ -53,7 +53,6 @@ ecrire/exec/admin_repair.php -text
 ecrire/exec/admin_tech.php -text
 ecrire/exec/admin_vider.php -text
 ecrire/exec/aide_index.php -text
-ecrire/exec/ajax_page.php -text
 ecrire/exec/articles.php -text
 ecrire/exec/articles_edit.php -text
 ecrire/exec/articles_forum.php -text
@@ -377,6 +376,17 @@ ecrire/img_pack/xml.gif -text
 ecrire/inc/actions.php -text
 ecrire/inc/agenda.php -text
 ecrire/inc/ajax.php -text
+ecrire/inc/ajax_documenter.php -text
+ecrire/inc/ajax_informer.php -text
+ecrire/inc/ajax_memoriser.php -text
+ecrire/inc/ajax_naviguer.php -text
+ecrire/inc/ajax_petitionner.php -text
+ecrire/inc/ajax_plonger.php -text
+ecrire/inc/ajax_poster.php -text
+ecrire/inc/ajax_rechercher.php -text
+ecrire/inc/ajax_selectionner.php -text
+ecrire/inc/ajax_tourner.php -text
+ecrire/inc/ajax_virtualiser.php -text
 ecrire/inc/article_select.php -text
 ecrire/inc/auteur_voir.php -text
 ecrire/inc/boutons.php -text
@@ -416,7 +426,6 @@ ecrire/inc/sites_voir.php -text
 ecrire/inc/suivi_versions.php -text
 ecrire/inc/syndic.php -text
 ecrire/inc/utils.php -text
-ecrire/inc/virtualite.php -text
 ecrire/lang/ecrire_br.php -text
 ecrire/lang/ecrire_bs.php -text
 ecrire/lang/ecrire_cs.php -text

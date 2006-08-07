@@ -182,7 +182,25 @@ else
 		verifie_include_plugins();
 	}
 
-$var_f = charger_fonction($exec);
-$var_f();
+if ($exec != 'ajax_page') {
+	$var_f = charger_fonction($exec);
+	$var_f();
+ } else {
+	$var_f = 'ajax_' . _request('fonction');
+	$var_f = charger_fonction($var_f, 'inc');
+	
+// recuperer le resulat pour reencodage et envoi du prefixe
+// (attention: ca peut envoyer des entetes ==> envoyer le prefixe apres)
+	$r = $var_f(); 
 
+	include_spip('inc/charsets');
+	$charset = $GLOBALS['meta']["charset"];
+
+// Curieux: le content-type bloque MSIE!
+//		@header('Content-type: text/html; charset=$charset');
+
+	echo "<"."?xml version='1.0' encoding='$charset'?".">\n";
+# gerer un charset minimaliste en convertissant tout en unicode &#xxx;
+	echo charset2unicode($r, 'AUTO', true);
+ }
 ?>
