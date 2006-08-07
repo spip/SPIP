@@ -20,7 +20,7 @@ include_spip('inc/date');
 include_spip('inc/documents');
 include_spip('inc/forum');
 include_spip('inc/petition');
-include_spip('inc/virtualite');
+include_spip('inc/ajax_virtualiser');
 include_spip('base/abstract_sql');
 
 function exec_articles_dist()
@@ -114,8 +114,6 @@ function exec_articles_dist()
 	afficher_hierarchie($id_rubrique);
 
 	fin_grand_cadre();
-
-	if (!$row) {echo $titre; exit;}
 
 //
 // Affichage de la colonne de gauche
@@ -407,6 +405,7 @@ function boites_de_config_articles($id_article)
 
 function boite_article_virtuel($id_article, $virtuel)
 {
+
 	debut_cadre_relief("site-24.gif");
 
 	echo "\n<div class='verdana1' style='text-align: center;'>";
