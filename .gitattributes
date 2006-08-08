@@ -86,7 +86,6 @@ ecrire/exec/forum_envoi.php -text
 ecrire/exec/import_all.php -text
 ecrire/exec/informer.php -text
 ecrire/exec/install.php -text
-ecrire/exec/js_menu_rubriques.php -text
 ecrire/exec/lang_raccourcis.php -text
 ecrire/exec/memoriser.php -text
 ecrire/exec/message.php -text
@@ -397,6 +396,7 @@ ecrire/inc/distant.php -text
 ecrire/inc/drapeau_edition.php -text
 ecrire/inc/filtres_images.php -text
 ecrire/inc/forum_insert.php -text
+ecrire/inc/gadgets.php -text
 ecrire/inc/headers.php -text
 ecrire/inc/import_0_0.php -text
 ecrire/inc/import_1_2.php -text
