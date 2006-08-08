@@ -78,7 +78,7 @@ function exec_mots_tous_dist()
 
 
 pipeline('exec_init',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
-debut_page(_T('titre_page_mots_tous'), "documents", "mots");
+debut_page(_T('titre_page_mots_tous'), "naviguer", "mots");
 debut_gauche();
 
 echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_tous'),'data'=>''));

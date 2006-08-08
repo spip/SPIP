@@ -18,7 +18,7 @@ function exec_admin_effacer_dist()
 {
   global $connect_statut, $connect_toutes_rubriques, $couleur_foncee;
 
-debut_page(_T('titre_page_admin_effacer'), "administration", "base");
+debut_page(_T('titre_page_admin_effacer'), "configuration", "base");
 
 
 echo "<br><br><br>";

@@ -34,7 +34,7 @@ if ($detruire_message) {
 	spip_query("DELETE FROM spip_forum WHERE id_message=$detruire_message");
 }
 
-debut_page(_T('titre_page_messagerie'), "redacteurs", "messagerie");
+debut_page(_T('titre_page_messagerie'), "accueil", "messagerie");
 
 debut_gauche("messagerie");
 

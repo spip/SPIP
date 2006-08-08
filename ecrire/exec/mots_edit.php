@@ -114,7 +114,7 @@ if ($redirect_ok == 'oui' && $redirect) {
  }
 pipeline('exec_init',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
 
-debut_page("&laquo; $titre_mot &raquo;", "documents", "mots");
+debut_page("&laquo; $titre_mot &raquo;", "naviguer", "mots");
 debut_gauche();
 
 

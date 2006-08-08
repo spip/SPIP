@@ -43,7 +43,7 @@ function exec_articles_dist()
 	if (!$row) {
 	   // cas du numero hors table
 		$titre = _T('public:aucun_article');
-		debut_page("&laquo; $titre &raquo;", "documents", "articles");
+		debut_page("&laquo; $titre &raquo;", "naviguer", "articles");
 		debut_grand_cadre();
 		fin_grand_cadre();
 		echo $titre;
@@ -104,10 +104,10 @@ function exec_articles_dist()
 	$id_trad = $row["id_trad"];
 	$id_version = $row["id_version"];
 	
-	// aucun doc implicitement inclus au départ.
+	// aucun doc implicitement inclus au depart.
 	inclus_non_articles($id_article);
 	
-	debut_page("&laquo; $titre &raquo;", "documents", "articles", "", "", $id_rubrique);
+	debut_page("&laquo; $titre &raquo;", "naviguer", "articles", "", "", $id_rubrique);
 
 	debut_grand_cadre();
 

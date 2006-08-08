@@ -1635,23 +1635,28 @@ function debut_javascript($admin, $stat)
 	include_spip('inc/charsets');
 
 
-	# teste la capacite ajax : on envoie un cookie -1
-	# et un script ajax ; si le script reussit le cookie passera a +1
-	if (!isset($GLOBALS['_COOKIE']['spip_accepte_ajax'])) {
-		spip_setcookie('spip_accepte_ajax', -1);
-		$ajax = "if (a = createXmlHttp()) {
-	a.open('GET', '" . generer_url_ecrire('test_ajax', true) .
+	// tester les capacites JS :
+
+	// On envoie un script ajah ; si le script reussit le cookie passera a +1
+	// on installe egalement un <noscript></noscript> qui charge une image qui
+	// pose un cookie valant -1
+	if ($_COOKIE['spip_accepte_ajax'] < 1) {
+		$tester_javascript = "if (a = createXmlHttp()) {
+	a.open('GET', '" . generer_url_ecrire('test_ajax', 'js=1') .
 		  "', true) ;
 	a.send(null);
 }";
-	} else $ajax = "";
+	}
+	if ($_COOKIE['spip_accepte_ajax'] != -1) {
+		define('_TESTER_NOSCRIPT',
+			"<noscript><div style='display:none;'><img src='".generer_url_ecrire('test_ajax', 'js=-1')."' width='1' height='1' alt='' /></div></noscript>\n"); // pour le pied de page
+	}
 
 	return 
 	// envoi le fichier JS de config si browser ok.
 		$GLOBALS['browser_layer'] .
 	 	http_script(
-	# tester la capacite ajax si ce n'est pas deja fait
-			$ajax . 
+			$tester_javascript . 
 			"\nvar ajax_image_searching = '<div style=\"float: ".$GLOBALS['spip_lang_right'].";\"><img src=\"".url_absolue(_DIR_IMG_PACK."searching.gif")."\" /></div>';" .
 			"\nvar admin = " . ($admin ? 1 : 0) .
 			"\nvar stat = " . ($stat ? 1 : 0) .
@@ -1990,7 +1995,7 @@ function lien_change_var($lien, $set, $couleur, $coords, $titre, $mouseOver="") 
 // Presentation de l'interface privee, debut du HTML
 //
 
-function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivre", $onLoad = "", $css="", $id_rubrique = "") {
+function debut_page($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $onLoad = "", $css="", $id_rubrique = "") {
 
 	init_entete($titre, $rubrique, $css);
 	definir_barre_boutons();
@@ -2023,7 +2028,7 @@ function init_entete($titre, $rubrique, $css='') {
 }
 
 // fonction envoyant la double serie d'icones de redac
-function init_body($rubrique='asuivre', $sous_rubrique='asuivre', $onLoad='', $id_rubrique='') {
+function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $id_rubrique='') {
 	global $couleur_foncee, $couleur_claire, $adresse_site;
 	global $connect_id_auteur;
 	global $connect_statut;
@@ -2116,8 +2121,9 @@ function init_body($rubrique='asuivre', $sous_rubrique='asuivre', $onLoad='', $i
 	$decal=0;
 	$largitem_moy = 85;
 	$largeur_maxi_menu = $largeur-100;
+
 	foreach($GLOBALS['boutons_admin'] as $page => $detail) {
-		if ($rubrique == $page) {
+		if (($rubrique == $page) AND ($_COOKIE['spip_accepte_ajax']==-1)) {
 			$class = "visible_au_chargement";
 		} else {
 			$class = "invisible_au_chargement";
@@ -2146,12 +2152,6 @@ function init_body($rubrique='asuivre', $sous_rubrique='asuivre', $onLoad='', $i
 		
 		$decal += largeur_icone_bandeau_principal(_T($detail->libelle));
 	}
-
-	// Refermer tout de suite le bandeau deroule par defaut
-	echo "
-	<script type='text/javascript'><!--
-		changestyle('-', '-', '-');
-	// --></script>\n";
 
 	echo "</div>";
 	
@@ -2401,7 +2401,7 @@ function fin_cadre_formulaire(){
 // Debut de la colonne de gauche
 //
 
-function debut_gauche($rubrique = "asuivre") {
+function debut_gauche($rubrique = "accueil") {
 	global $connect_statut;
 	global $options, $spip_display;
 	global $connect_id_auteur;
@@ -2555,6 +2555,8 @@ function fin_html() {
 
 	if (function_exists('dessiner_gadgets'))
 		echo dessiner_gadgets($GLOBALS['id_rubrique_gadgets']);
+	if (defined('_TESTER_NOSCRIPT'))
+		echo _TESTER_NOSCRIPT;
 
 	echo "</body></html>\n";
 }

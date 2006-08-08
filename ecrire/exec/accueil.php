@@ -437,7 +437,7 @@ function exec_accueil_dist()
   $id_rubrique =  intval($id_rubrique);
  	pipeline('exec_init',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
  
-  debut_page(_T('titre_page_index'), "asuivre", "asuivre");
+  debut_page(_T('titre_page_index'), "accueil", "accueil");
 
   debut_gauche();
 

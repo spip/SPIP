@@ -21,7 +21,7 @@ function exec_config_lang_dist()
 global $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_right, $all_langs, $changer_config;
 
 pipeline('exec_init',array('args'=>array('exec'=>'config_lang'),'data'=>''));
-debut_page(_T('titre_page_config_contenu'), "administration", "langues");
+debut_page(_T('titre_page_config_contenu'), "configuration", "langues");
 
 echo "<br><br><br>";
 gros_titre(_T('info_langues'));

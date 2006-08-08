@@ -68,16 +68,19 @@ function definir_barre_boutons() {
 		$boutons_admin['statistiques_visites']=
 		  new Bouton('statistiques-48.png', 'icone_statistiques_visites');
 	}
-	if ($GLOBALS['connect_statut'] == '0minirezo') {
 
+	if ($GLOBALS['connect_statut'] == '0minirezo') {
 		$boutons_admin['configuration']=
 		  new Bouton('administration-48.png', 'icone_configuration_site');
 	}
+
 	$boutons_admin['espacement']=null;
+
 	$urlAide= generer_url_ecrire('aide_index')."&amp;var_lang=$spip_lang";
 	$boutons_admin['aide_index']=
 		  new Bouton('aide-48'.$spip_lang_rtl.'.png', 'icone_aide_ligne',
 					 $urlAide, null, "javascript:window.open('$urlAide', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580');", 'aide_spip');
+
 	$boutons_admin['visiter']=
 	  new Bouton("visiter-48$spip_lang_rtl.png", 'icone_visiter_site',
 				 "$adresse_site/");

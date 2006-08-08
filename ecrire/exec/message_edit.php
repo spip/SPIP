@@ -93,7 +93,7 @@ $statut = $row["statut"];
 $rv = $row["rv"];
 $expediteur = $row["id_auteur"];
 
-debut_page(_T('titre_page_message_edit'), "redacteurs", "messagerie");
+debut_page(_T('titre_page_message_edit'), "accueil", "messagerie");
 
 if (!($expediteur = $connect_id_auteur OR ($type == 'affich' AND $connect_statut == '0minirezo'))) die();
 

@@ -21,7 +21,7 @@ function exec_documents_liste_dist()
 // Recupere les donnees
 //
 
-debut_page(_T('titre_page_documents_liste'), "documents", "documents");
+debut_page(_T('titre_page_documents_liste'), "naviguer", "documents");
 debut_gauche();
 
 

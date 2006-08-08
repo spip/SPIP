@@ -32,9 +32,11 @@ function debut_block_invisible($nom_block){
 
 	if (!$a = debut_block_visible($nom_block)) return '';
 
-	return $a .
-	http_script("vis['".$numero_block[$nom_block]."'] = 'hide';
-	document.getElementById('Layer".$numero_block["$nom_block"]."').style.display=\"none\";",'','');
+	// si on n'accepte pas js, ne pas fermer
+	if ($_COOKIE['spip_accepte_ajax'] == -1)
+		return $a;
+	else
+		return inserer_attribut($a, 'style', 'display:none;');
 }
 
 function fin_block() {

@@ -40,7 +40,7 @@ function exec_calendrier_dist()
 		    array('nom_mois' => nom_mois($date), 'annee' => annee($date)));
 	  }
 
-  debut_page($titre, "redacteurs", "calendrier","",$css);
+  debut_page($titre, "accueil", "calendrier","",$css);
   echo "<div>&nbsp;</div>" ;
   echo http_calendrier_init('', $type, '','',generer_url_ecrire('calendrier', ($type ? "type=$type" : '')));
   fin_page();

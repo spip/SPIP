@@ -29,7 +29,7 @@ function exec_controle_petition_dist()
 	$supp_petition =  intval($supp_petition);
 	$debut =  intval($debut);
 
-	debut_page(_T('titre_page_controle_petition'), "redacteurs", "suivi-petition");
+	debut_page(_T('titre_page_controle_petition'), "forum", "suivi-petition");
 	debut_gauche();
 
 //
