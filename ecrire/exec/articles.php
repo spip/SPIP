@@ -265,7 +265,9 @@ if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
 
  if ($statut_rubrique)
    echo debut_cadre_relief('', true),
-     afficher_statut_articles($id_article, $id_rubrique, $statut_article),
+     "<div id='instituer_article-$id_article'>",     
+     formulaire_instituer_article($id_article, $statut_article, 'articles', "id_article=$id_article"),
+     '</div>',
      fin_cadre_relief('', true);
 
  afficher_corps_articles($virtuel, $chapo, $texte, $ps, $extra);
@@ -302,8 +304,7 @@ function demande_publication($id_article)
 		"<center>" .
 		"<b>" ._T('texte_proposer_publication') . "</b>" .
 		aide ("artprop") .
-		redirige_action_auteur("instituer", 
-			"article-$id_article-prop",
+			redirige_action_auteur('instituer_article', "$id_article-prop",
 			'articles',
 			"id_article=$id_article",
 			("<input type='submit' class='fondo' value=\"" . 
@@ -385,7 +386,6 @@ function boites_de_config_articles($id_article)
 		icone_horizontale(_T('icone_suivi_forum', array('nb_forums' => $nb_forums)), generer_url_ecrire("articles_forum","id_article=$id_article"), "suivi-forum-24.gif", "");
 	}
 
-	// Afficher le formulaire de modification du reglage
 	echo "<div id='poster-$id_article'>",
 	  formulaire_poster($id_article,"articles","&id_article=$id_article#poster-$id_article"),
 	  '</div>';
@@ -708,8 +708,8 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 			$langue_article = $langue_parent;
 
 		debut_cadre_couleur();
-		echo "<div style='text-align: center;'>",
-			menu_langues('changer_lang', $langue_article, _T('info_multi_cet_article').' ', $langue_parent, redirige_action_auteur('instituer', "langue_article-$id_article-$id_rubrique","articles","id_article=$id_article")),
+		echo "<div style='text-align: center;' id='instituer_langue_article-$id_article'>",
+			menu_langues('changer_lang', $langue_article, _T('info_multi_cet_article').' ', $langue_parent, redirige_action_auteur('instituer_langue_article', "$id_article-$id_rubrique","articles","id_article=$id_article")),
 			"</div>\n";
 		fin_cadre_couleur();
 
@@ -1158,9 +1158,9 @@ function affiche_forums_article($id_article, $id_rubrique, $titre, $debut, $mute
 	echo "</div>\n";
 }
 
-function afficher_statut_articles($id_article, $rubrique_article, $statut_article)
+function formulaire_instituer_article($id_article, $statut, $script, $args)
 {
-  return redirige_action_auteur("instituer", "article-$id_article",'articles', "id_article=$id_article",
+  $res =
 	("\n<center>" . 
 	"<b>" ._T('texte_article_statut') ."</b>" .
 	"\n<select name='statut_nouv' size='1' class='fondl'\n" .
@@ -1168,23 +1168,29 @@ function afficher_statut_articles($id_article, $rubrique_article, $statut_articl
 	_DIR_IMG_PACK .
 	"' + puce_statut(options[selectedIndex].value);" .
 	" setvisibility('valider_statut', 'visible');\">\n" .
-	"<option"  . mySel("prepa", $statut_article)  ." style='background-color: white'>" ._T('texte_statut_en_cours_redaction') ."</option>\n" .
-	"<option"  . mySel("prop", $statut_article)  . " style='background-color: #FFF1C6'>" ._T('texte_statut_propose_evaluation') ."</option>\n" .
-	"<option"  . mySel("publie", $statut_article)  . " style='background-color: #B4E8C5'>" ._T('texte_statut_publie') ."</option>\n" .
-	"<option"  . mySel("poubelle", $statut_article) .
+	"<option"  . mySel("prepa", $statut)  ." style='background-color: white'>" ._T('texte_statut_en_cours_redaction') ."</option>\n" .
+	"<option"  . mySel("prop", $statut)  . " style='background-color: #FFF1C6'>" ._T('texte_statut_propose_evaluation') ."</option>\n" .
+	"<option"  . mySel("publie", $statut)  . " style='background-color: #B4E8C5'>" ._T('texte_statut_publie') ."</option>\n" .
+	"<option"  . mySel("poubelle", $statut) .
 	http_style_background('rayures-sup.gif')  . '>'  ._T('texte_statut_poubelle') ."</option>\n" .
-	"<option"  . mySel("refuse", $statut_article)  . " style='background-color: #FFA4A4'>" ._T('texte_statut_refuse') ."</option>\n" .
+	"<option"  . mySel("refuse", $statut)  . " style='background-color: #FFA4A4'>" ._T('texte_statut_refuse') ."</option>\n" .
 	"</select>" .
 	" &nbsp; " .
-	http_img_pack("puce-".puce_statut($statut_article).'.gif', "", "border='0' NAME='statut'") .
+	http_img_pack("puce-".puce_statut($statut).'.gif', "", "border='0' NAME='statut'") .
 	"  &nbsp;\n" .
 	"<span class='visible_au_chargement' id='valider_statut'>" .
 	"<input type='submit' value='"._T('bouton_valider')."' CLASS='fondo' />" .
 	"</span>" .
 	aide("artstatut") .
-	"</center>"), 
-			   " method='post'");
+	 "</center>");
+  
+  return redirige_action_auteur('instituer_article',$id_article,'articles', "id_article=$id_article", $res, " method='post'");
+
+  /* pour plus tard
+  return ajax_action_auteur("instituer_article", $id_article, $res, $script, $args, $args);
+  */
 }
+
 
 //
 // Reunit les textes decoupes parce que trop longs
