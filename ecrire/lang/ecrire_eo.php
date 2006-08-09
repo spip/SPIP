@@ -94,7 +94,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  forigi ilin poste).',
 'bouton_radio_sauvegarde_compressee' => 'savkopio kompaktita en @fichier@',
 'bouton_radio_sauvegarde_non_compressee' => 'savkopio nekompaktita en @fichier@',
-'bouton_radio_supprimer_petition' => 'Forigi la petsbribon',
+'bouton_radio_supprimer_petition' => 'Forigi la petskribon',
 'bouton_radio_syndication' => 'Abonrilato:',
 'bouton_redirection' => 'ALIDIREKTO',
 'bouton_relancer_installation' => 'Relan&#265;i la instaladon',
@@ -166,7 +166,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_fichier_def_absent' => 'Difina dosiero forestas',
 'erreur_plugin_nom_fonction_interdit' => 'Malpermesata funkcio-nomo',
 'erreur_plugin_nom_manquant' => 'Kromprogramo-nomo mankas',
-'erreur_plugin_prefix_manquant' => '<NEW>Espace de nommage du plugin non d&eacute;fini',
+'erreur_plugin_prefix_manquant' => 'Nedifinita nom-spaco de kromprogramo',
 'erreur_plugin_tag_plugin_absent' => '&lt;kromprogramo&gt; mankas en tiu difina dosiero',
 'erreur_plugin_version_manquant' => 'Kromprogramo-versio mankas',
 
@@ -523,7 +523,7 @@ La publikaj forumoj estos unu post la alia permesitaj
 'info_sauvegarde_groupe_mots' => 'Konservi la vortogrupojn',
 'info_sauvegarde_messages' => 'Konservi la mesa&#285;ojn',
 'info_sauvegarde_mots_cles' => 'Konservi la &#349;losilvortojn',
-'info_sauvegarde_petitions' => 'Savkopii subskriblistojn',
+'info_sauvegarde_petitions' => 'Savkopii la petskribojn',
 'info_sauvegarde_refers' => 'Savkopii referencojn',
 'info_sauvegarde_reussi_01' => 'Savkopio sukcesis.',
 'info_sauvegarde_reussi_02' => 'Datenbazo estas konservita en @archive@. Vi povas',
@@ -824,7 +824,7 @@ NUR por retejo starigita per la sama versio de SPIP. Nepre ne "&nbsp;malplenigu 
 'texte_date_publication_anterieure' => 'DATO DE ANTA&#364;A REDAKTO&nbsp;:',
 'texte_date_publication_anterieure_nonaffichee' => 'Ne afi&#349;i daton de anta&#365;a redakto.',
 'texte_date_publication_article' => 'DATO DE RETA PUBLIKIGO&nbsp;:',
-'texte_descriptif_petition' => 'Priskribo de subskriblisto',
+'texte_descriptif_petition' => 'Priskribo de petskribo',
 'texte_descriptif_rapide' => 'Konciza priskribo',
 'texte_documents_joints' => 'Vi povas permesi la aldonon de dokumentoj (oficikajn dosierojn, bildojn,
  a&#365;d-vida&#309;ojn, ktp.) al la artikoloj kaj/a&#365; al la rubrikoj. Tiuj dosieroj
@@ -845,20 +845,13 @@ NUR por retejo starigita per la sama versio de SPIP. Nepre ne "&nbsp;malplenigu 
 'texte_informations_personnelles_1' => 'La sistemo kreos por vi nun personan alireblon al la retejo.',
 'texte_informations_personnelles_2' => '(Noto: se temas pri reinstalo kaj se via aliro da&#365;re funkcias, vi povas',
 'texte_introductif_article' => '(Enkonduka teksto al la artikolo.)',
-'texte_jeu_caractere' => '<MODIF>Tiu opcio utilas se via retejo devas afi&#349;i alfabetojn kiuj diferencas
- de la latina (a&#365; &laquo;&nbsp;okcidenta&nbsp;&raquo;) alfabeto kaj ties deriva&#309;ojn.
- Tiukaze, eble necesas &#349;an&#285;i la defa&#365;ltan aran&#285;on por uzi
- ta&#365;gan litertiparon&nbsp;; ni konsilas al vi en &#265;iuj kazoj, testi por eltrovi bonan solvon. Se vi &#349;an&#285;as tiun opcion, anka&#365; ne forgesu adapti
- la&#365; tio la publikan spacon (signo <tt>#CHARSET</tt>).',
-'texte_jeu_caractere_2' => '<MODIF>Tiu aran&#285;o ne havas retroaktivan efikon. Do,
- la jam enigitaj tekstoj povas afi&#349;i sin mal&#285;uste
- post modifo de la aran&#285;o. &#264;iukaze,
- vi povas senprobleme reveni al la anta&#365;a aran&#285;o.',
+'texte_jeu_caractere' => 'Ni konsilas al vi uzi, en via retejo, universalan alfabeton (<tt>utf-8</tt>)&nbsp;: tio ebligas afi&#349;adon de textoj en &#265;iuj lingvoj kaj solvas problemojn de kongrueco se vi uzas modernajn krozilojn.',
+'texte_jeu_caractere_2' => 'Atentu : tiu aran&#285;o ne konvertas tekstojn jam registrintaj en datenbazo.',
 'texte_jeu_caractere_3' => 'Via retejo estas nune instalita la&#365; la litertiparo&nbsp;:',
 'texte_jeu_caractere_4' => 'Se tio ne kongruas kun la realo de viaj datenoj (ekzemple, sekve de datenbazo-resta&#365;ro), a&#365; se <em>vi &#309;us ekkreis tiun retejon</em> kaj deziras ekuzi novan litertiparon, bonvolu indiki &#285;in &#265;i tie&nbsp;:',
 'texte_jeu_caractere_conversion' => 'Noto&nbsp;: vi povas decidi konverti definitive &#265;iujn tekstojn de via retejo (artikoloj, fulm-informoj, forumoj, ktp...) en alfabeton <tt>utf-8</tt>, irante &#265;e <a href="@url@"> la al-utf-8-konvertan pa&#285;on</a>.',
 'texte_lien_hypertexte' => 'Se via mesa&#285;o rilatas al artikolo publikigita &#265;e la reto, a&#365; al pa&#285;o donanta pli da informoj, bonvolu indiki &#265;i-poste la titolon de la pa&#285;o kaj ties URL-adreson.)',
-'texte_liens_sites_syndiques' => '<MODIF>Ligoj el kunligitaj retejoj povas
+'texte_liens_sites_syndiques' => 'Ligoj el kunligitaj retejoj povas
    esti blokataj apriore; la &#265;i-suba &#285;ustigo
    indikas la defa&#365;ltan &#285;ustigon de la
    abonrilatigitaj retejoj je ties kreo. Poste
@@ -892,14 +885,14 @@ ligilojn al jena a&#365; alia retejo.',
 'texte_nouveau_message' => 'Nova mesa&#285;o',
 'texte_nouveau_mot' => 'Nova vorto',
 'texte_nouvelle_version_spip_1' => 'Vi instalis novan version de SPIP.',
-'texte_nouvelle_version_spip_2' => '<MODIF>Tiu nova versio bezonas pli kompletan &#285;isdatigon ol kutime. Se vi estas teksestro de la teksejo, bonvolu forigi la dosieron <tt>inc_connect.php3</tt> de la dosierujo <tt>ecrire</tt> kaj rekomenci la instaladon por &#285;isdatigi viajn parametrojn de konektado al la datenbazo.<p> (Notu&nbsp;: se vi forgesis viajn konekto-parametrojn, rigardu la dosieron <tt>inc_connect.php3</tt> anta&#365; ol forigi &#285;in...)',
+'texte_nouvelle_version_spip_2' => 'Tiu nova versio bezonas pli kompletan &#285;isdatigon ol kutime. Se vi estas administranto de la teksejo, bonvolu forigi la dosieron @connect@ kaj restarigi la instaladon por &#285;isdatigi viajn parametrojn de konektado al la datenbazo.<p> (Notu&nbsp;: se vi forgesis viajn konekto-parametrojn, rigardu la dosieron @connect@ anta&#365; ol forigi &#285;in...)',
 'texte_operation_echec' => 'Reiru al anta&#365;a pa&#285;o, elektu alian bazon a&#365; kreu novan. Kontrolu la informojn donitajn de via gastiganto.',
 'texte_plus_trois_car' => 'pli ol 3 literoj',
 'texte_plusieurs_articles' => 'Pluraj a&#365;toroj trovitaj por"@cherche_auteur@":',
 'texte_port_annuaire' => 'La defa&#365;lte indikita valoro &#285;enerale ta&#365;gas.)',
 'texte_presente_plugin' => 'Tiu pa&#285;o listigas kromprogramojn disponeblajn &#265;e tiu retejo. Vi povas aktivigi la necesajn kromprogramojn no&#265;ante la kongruan no&#265;ujon.',
 'texte_proposer_publication' => 'Kiam via artikolo estas finita,<br> vi povas proponi &#285;ian publikigon.',
-'texte_proxy' => '<MODIF>En iuj okazoj (intrareto, protektitaj retoj...),
+'texte_proxy' => 'En iuj okazoj (intrareto, protektitaj retoj...),
   povas necesigi uzon de <I>proxy HTTP</I> por atingi la abonrilatajn retejojn.
   Eventuale, indiku &#265;i-sube ties retadreson, en la formo
   <tt><html>http://proxy:8080</html></tt>. &#284;enerale,
@@ -907,13 +900,13 @@ ligilojn al jena a&#365; alia retejo.',
 'texte_publication_articles_post_dates' => 'Kian konduton SPIP adoptu rilate la artikolojn
   kies publikig-dato estis fiksita
   por estonta templimo&nbsp;?',
-'texte_rappel_selection_champs' => '<MODIF>[Ne forgesu &#285;uste elekti tiun kampon.]',
+'texte_rappel_selection_champs' => '[Ne forgesu &#285;uste elekti tiun kampon.]',
 'texte_recalcul_page' => 'Se vi volas
 rekalkuli ununuran pa&#285;on, pasu prefere tra la publika spaco kaj tie uzu la butonon &laquo; rekalkuli &raquo;.',
 'texte_recapitiule_liste_documents' => 'Tiu &#265;i pa&#285;o montras la liston de dokumentoj kiujn vi metis en la rubrikojn. Por modifi la informojn de &#265;iu dokumento, sekvu la ligon al la pa&#285;o de ties rubriko.',
 'texte_recuperer_base' => 'Ripari la datenbazon',
 'texte_reference_mais_redirige' => 'artikolo referencita en via SPIP-retejo, sed redirektita al alia URL.',
-'texte_referencement_automatique' => '<MODIF><b>A&#365;tomata referencado de teksejo</b><br>Vi povas rapide referenci teksejon indikante &#265;i-sube la deziratan URL-adreson a&#365; la adreson de &#285;ia backend-dosiero. SPIP a&#365;tomate prenos la informojn kiuj koncernas tiun teksejon (titolon, priskribon...).',
+'texte_referencement_automatique' => '<b>A&#365;tomata referencado de teksejo</b><br>Vi povas rapide referenci teksejon indikante &#265;i-sube la deziratan URL-adreson a&#365; la adreson de &#285;ia backend-dosiero. SPIP a&#365;tomate prenos la informojn kiuj koncernas tiun teksejon (titolon, priskribon...).',
 'texte_requetes_echouent' => '<b>Kiam iuj MySQL-ser&#265;petoj sisteme
 kaj senkiale malsukcesas, estas eble
 ke tio okazas pro la datenbazo
@@ -926,14 +919,14 @@ entenas eble indicojn pri la misfunkcio...<p>
 Se la problemo da&#365;ras, kontaktu
 vian gastiganton.<p>',
 'texte_restaurer_base' => 'Resta&#365;ri la enhavon de datenbaza savkopio',
-'texte_restaurer_sauvegarde' => '<MODIF>Tiu opcio ebligas al vi restarigi anta&#365;e faritan savkopion de la bazo.
+'texte_restaurer_sauvegarde' => 'Tiu opcio ebligas al vi restarigi anta&#365;e faritan savkopion de la bazo.
   Por tio, la dosiero entenanta la savkopion devas esti lokita
   en la dosierujo @dossier@.
   Estu zorgema pri tiu funkcio&nbsp;: <b>la modifoj, eventualaj perdoj, estas
   neinversigeblaj.</b>',
 'texte_sauvegarde' => 'Konservi la enhavon de la bazo',
 'texte_sauvegarde_base' => 'Konservi la bazon',
-'texte_sauvegarde_compressee' => '<MODIF>La savkopio estos farita en la nedensigita dosiero @fichier@.',
+'texte_sauvegarde_compressee' => 'La savkopio estos farita en la nedensigita dosiero @fichier@.',
 'texte_selection_langue_principale' => 'Vi povas &#265;i-sube elekti la &laquo;&nbsp;&#265;efan lingvon&nbsp;&raquo; de la retejo. Tiu elekto ne devigas vin - bon&#349;ance&nbsp;! - verki viajn artikolojn en la elektita lingvo, sed ebligas determini&nbsp;:
  <ul><li> la defa&#365;ltan formaton de la datenoj en la publika spaco&nbsp;;</li>
  <li> kian tipografiilon SPIP devas uzi pri tekst-aspektigo&nbsp;;</li>
@@ -958,12 +951,12 @@ faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
 'texte_tables_indexation_vides' => 'La indeksaj tabeloj de la ser&#265;ilo estas malplenaj.',
 'texte_tentative_recuperation' => 'Ripar-provo',
 'texte_tenter_reparation' => 'Provi riparon de la datenbazo',
-'texte_test_proxy' => '<MODIF>Por testi tiun prokuran servilon, indiku tie la adreson de teksejo kiu vi volus testi.',
+'texte_test_proxy' => 'Por testi tiun prokuran servilon, indiku tie la adreson de teksejo kiun vi volas testi.',
 'texte_titre_02' => 'Titolo:',
 'texte_titre_obligatoire' => '<B>Titolo</B> [Deviga]',
 'texte_travail_article' => '@nom_auteur_modif@ prilaboris tiun artikolon anta&#365; @date_diff@ minutoj',
-'texte_travail_collaboratif' => '<MODIF>Se pluraj redaktantoj laboras ofte
-  pri la sama artikolo, la sistemo
+'texte_travail_collaboratif' => 'Se pluraj redaktantoj laboras ofte
+  pri sama artikolo, la sistemo
   povas afi&#349;i la &#309;us &laquo;&nbsp;malfermitajn&nbsp;&raquo; artikolojn
   por eviti la sammomentajn modifojn.
   Tiu opcio estas defa&#365;lte malaktivigita
@@ -971,7 +964,7 @@ faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
   averto-mesa&#285;ojn.',
 'texte_trop_resultats_auteurs' => 'Tro da rezultoj por "@cherche_auteur@" ; bonvolu fajnigi la ser&#265;okriteriojn.',
 'texte_unpack' => 'El&#349;uto de la lasta versio',
-'texte_utilisation_moteur_syndiques' => '<MODIF>Kiam vi uzas la SPIP-internan ser&#265;ilon,
+'texte_utilisation_moteur_syndiques' => 'Kiam vi uzas la SPIP-internan ser&#265;ilon,
     vi povas fari ser&#265;adojn en la kunligitaj teksejoj kaj artikoloj
     per du diversaj manieroj.
     <br><img src=\'puce.gif\'> La plej simpla
@@ -1004,7 +997,7 @@ faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
 'titre_config_fonctions' => 'Konfiguro de la retejo',
 'titre_config_groupe_mots_cles' => 'Konfiguro de la &#349;losilvortaj grupoj',
 'titre_configuration' => 'Konfiguro de la retejo',
-'titre_connexion_ldap' => '<MODIF>Opcioj: <b>Via konekto LDAP</b>',
+'titre_connexion_ldap' => 'Opcioj: <b>Via konekto LDAP</b>',
 'titre_dernier_article_syndique' => 'Lastaj abonrilatigitaj artikoloj',
 'titre_documents_joints' => 'Alkro&#265;itaj dokumentoj',
 'titre_evolution_visite' => 'Evoluo de la vizitoj',
@@ -1034,7 +1027,7 @@ faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
 'titre_page_config_contenu' => 'Konfiguro de la retejo',
 'titre_page_config_fonctions' => 'Konfiguro de la retejo',
 'titre_page_configuration' => 'Konfiguro de la retejo',
-'titre_page_controle_petition' => '<MODIF>Kontrolo de la subskriblistoj',
+'titre_page_controle_petition' => 'Kontrolo de petskriboj',
 'titre_page_delete_all' => 'Totala kaj neriparebla forigo',
 'titre_page_documents_liste' => 'La dokumentoj de la rubrikoj',
 'titre_page_forum' => 'Forumo de la mastrumantoj',
@@ -1060,7 +1053,7 @@ faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
 'titre_sites_references_rubrique' => 'La retejoj referencitaj en tiu &#265;i rubriko',
 'titre_sites_syndiques' => 'La abonrilatigitaj retejoj',
 'titre_sites_tous' => 'La referencitaj retejoj',
-'titre_suivi_petition' => '<MODIF>Kontrolo de la subskriblistoj',
+'titre_suivi_petition' => 'Kontrolo de la petskriboj',
 'titre_syndication' => 'Reteja abonrilatigo',
 'tout_dossier_upload' => 'La tuta dosierujo @upload@',
 'trad_article_inexistant' => 'Neniu artikolo kun tiu numero.',
@@ -1074,7 +1067,7 @@ faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
 // U
 'utf8_convert_attendez' => 'Atendu kelkajn momentojn kaj refre&#349;igu tiun pa&#285;on.',
 'utf8_convert_avertissement' => 'Vi estas konvertonta la enhavon de via datenbazo (artikoloj, fulm-informoj, ktp...) de la litertiparo <b>@orig@</b> al la litertiparo <b>@charset@</b>.',
-'utf8_convert_backup' => '<MODIF>Ne forgesu anta&#365;e kompletan savkopion de via retejo. Vi devos anka&#365; kontroli, ke viaj skeletoj kaj lingvaj dosieroj kungruas kun @charset@. Aliflanke, la superrigardo de revizioj, se aktivigita, estos dama&#285;ita.',
+'utf8_convert_backup' => 'Anta&#365;e, ne forgesu fari kompletan savkopion de via retejo. Vi devos anka&#365; kontroli, ke viaj skeletoj kaj lingvaj dosieroj kungruas kun @charset@.',
 'utf8_convert_erreur_deja' => 'Via retejo jam estas je @charset@, estas senutile konverti &#285;in...',
 'utf8_convert_erreur_orig' => 'Eraro&nbsp;: la litertiparo @charset@ ne estas eltenata.',
 'utf8_convert_termine' => 'Farite&nbsp;!',
