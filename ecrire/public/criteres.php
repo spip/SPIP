@@ -105,14 +105,14 @@ function critere_pagination_dist($idb, &$boucles, $crit) {
 	$boucle->mode_partie = 'p+';
 	$boucle->partie = 'intval(_request("debut'.$idb.'"))';
 	$boucle->total_parties = $pas;
-	if (!isset($boucle->fragment)) $boucle->fragment = $idb;
+	$boucle->fragment = 'fragment_'.$boucle->descr['nom'].$idb;
 }
 
 // {fragment}
 // http://www.spip.net/@fragment
 function critere_fragment_dist($idb, &$boucles, $crit) {
 	if (!($param = $crit->param[0][0]->texte))
-		$param = 'fragment'.$idb;
+		$param = 'fragment_'.$boucle->descr['nom'].$idb;
 	if ($crit->not)
 		$param = false;
 	$boucle = &$boucles[$idb];
