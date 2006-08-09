@@ -547,13 +547,12 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 				static $nombre_fragments = array();
 				$fragment = $p->fragment;
 				$fragment .= $nombre_fragments[$p->fragment]++;
-				$code = '(($fragment = '.$code.')?
-				\'<div id="'.$fragment.'" class="fragment">\'
-				.$fragment
-				."</div>":"").
-				(($Pile[0]["fragment"]=="'.$fragment.'")?
-					exporter_fragment($fragment):""
-				)';
+				
+				$code = "\n'<div id=\"".$fragment."\" class=\"fragment\">' . '<".
+		"?php\n\t\$fragments[\'$fragment\'] = <<<code_$fragment\n' ." .
+		$code . ". '\ncode_$fragment;
+		echo \$fragments[\'$fragment\'];
+		\n?'." . "'>' . '</div>'";
 			}
 
 		}
@@ -759,6 +758,12 @@ function " . $nom . '($Cache, $Pile, $doublons=array(), $Numrows=array(), $SP=0)
 	// c'est pourquoi on l'affecte a cette variable auxiliaire
 	// avant de referencer $Cache
 	$corps . ";
+	if(isset(\$Pile[0]['fragment']))
+		\$page .= '<'.'?php
+		if (isset(\$fragments[\"'.\$Pile[0]['fragment'].'\"]))
+			return \$fragments;
+		?'.'>';
+				
 	return analyse_resultat_skel('$nom', \$Cache, \$page);
 }
 

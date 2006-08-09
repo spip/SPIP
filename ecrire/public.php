@@ -133,7 +133,16 @@ if (defined('_INC_PUBLIC')) {
 			$res = eval('?' . '>' . $page['texte']);
 			$page['texte'] = ob_get_contents(); 
 			ob_end_clean();
-
+			
+			// recuperer le fragment qui nous interesse si c'est possible
+			if (($fragment=_request('fragment'))!==NULL){ // un fragment est demande
+				if (is_array($res) 								// le squelette nous a renvoye des fragments
+						AND (isset($res[$fragment]))){	// et celui qu'on cherche est la
+					$page['texte'] = $res[$fragment]; // le fragment
+				}
+				else
+					$page['texte'] = ""; // fragment vide a priori
+			}
 			foreach($page['entetes'] as $k => $v) @header("$k: $v");
 			// en cas d'erreur lors du eval,
 			// la memoriser dans le tableau des erreurs
