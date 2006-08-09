@@ -111,7 +111,7 @@ function code_echappement($rempl, $source='') {
 	$base64 = base64_encode($rempl);
 
 	// Tester si on echappe en span ou en div
-	$mode = preg_match(',</?('._BALISES_BLOCS.')[>[:space:]],i', $rempl) ?
+	$mode = preg_match(',</?('._BALISES_BLOCS.')[>[:space:]],iS', $rempl) ?
 		'div' : 'span';
 	$nn = ($mode == 'div') ? "\n\n" : '';
 
@@ -123,7 +123,7 @@ function code_echappement($rempl, $source='') {
 // - pour $source voir commentaire infra (echappe_retour)
 // - pour $no_transform voir le filtre post_autobr dans inc_filtres.php3
 function echappe_html($letexte, $source='', $no_transform=false,
-$preg=',<(html|code|cadre|frame)>(.*)</\1>,Uims') {
+$preg=',<(html|code|cadre|frame)>(.*)</\1>,UimsS') {
 	if (preg_match_all(
 	$preg,
 	$letexte, $matches, PREG_SET_ORDER))
@@ -207,7 +207,7 @@ function echappe_retour($letexte, $source='') {
 	if (strpos($letexte,"base64$source")) {
 		# echo htmlspecialchars($letexte);  ## pour les curieux
 		if (preg_match_all(
-		',<(span|div) class=[\'"]base64'.$source.'[\'"]\s.*></\1>,Ums',
+		',<(span|div) class=[\'"]base64'.$source.'[\'"]\s.*></\1>,UmsS',
 		$letexte, $regs, PREG_SET_ORDER)) {
 			foreach ($regs as $reg) {
 				$rempl = base64_decode(extraire_attribut($reg[0], 'title'));
@@ -221,7 +221,7 @@ function echappe_retour($letexte, $source='') {
 function nettoyer_raccourcis_typo($texte){
 	$texte = pipeline('nettoyer_raccourcis_typo',$texte);
 	// remplacer les liens
-	if (preg_match_all(',[[]([^][]*)->(>?)([^][]*)[]],', $texte, $regs, PREG_SET_ORDER))
+	if (preg_match_all(',[[]([^][]*)->(>?)([^][]*)[]],S', $texte, $regs, PREG_SET_ORDER))
 		foreach ($regs as $reg) {
 			if (strlen($reg[1]))
 				$titre = $reg[1];
@@ -277,7 +277,7 @@ function couper($texte, $taille=50) {
 	if ($GLOBALS['meta']['charset']=='utf-8'){
 		$long = charset2unicode($texte);
 		$long = spip_substr($long, 0, max($taille,1));
-		$nbcharutf = preg_match_all("/(&#[0-9]{3,5};)/",$long,$matches);
+		$nbcharutf = preg_match_all("/(&#[0-9]{3,5};)/S",$long,$matches);
 		$taille += $nbcharutf;
 	}
 	
@@ -305,7 +305,7 @@ function couper($texte, $taille=50) {
 	$texte = ereg_replace("\r+", "\n\n", $texte);
 
 	// supprimer l'eventuelle entite finale mal coupee
-	$texte = preg_replace('/&#?[a-z0-9]*$/', '', $texte);
+	$texte = preg_replace('/&#?[a-z0-9]*$/S', '', $texte);
 
 	return quote_amp(trim($texte)).$points;
 }
@@ -325,11 +325,11 @@ function couper_intro($texte, $long) {
 	if ($intro)
 		$intro = $intro.'&nbsp;(...)';
 	else {
-		$intro = preg_replace(',([|]\s*)+,', '; ', couper($texte, $long));
+		$intro = preg_replace(',([|]\s*)+,S', '; ', couper($texte, $long));
 	}
 
 	// supprimer un eventuel chapo redirecteur =http:/.....
-	return preg_replace(',^=[^[:space:]]+,','',$intro);
+	return preg_replace(',^=[^[:space:]]+,S','',$intro);
 }
 
 
@@ -339,7 +339,7 @@ function couper_intro($texte, $long) {
 
 // Securite : empecher l'execution de code PHP ou javascript ou autre malice
 function interdire_scripts($source) {
-	$source = preg_replace(",<(\%|\?|/?[[:space:]]*(script|base)),ims", "&lt;\\1", $source);
+	$source = preg_replace(",<(\%|\?|/?[[:space:]]*(script|base)),imsS", "&lt;\\1", $source);
 	return $source;
 }
 
@@ -407,10 +407,10 @@ function typo_fr($letexte) {
 	$letexte = strtr($letexte, $trans);
 
 	$cherche1 = array(
-		/* 1 */ 	'/((^|[^\#0-9a-zA-Z\&])[\#0-9a-zA-Z]*)\;/',
-		/* 2 */		'/&#187;| --?,|:([^0-9]|$)/',
-		/* 3 */		'/([^[<!?])([!?])/',
-		/* 4 */		'/&#171;|(M(M?\.|mes?|r\.?)|[MnN]&#176;) /'
+		/* 1 */ 	'/((^|[^\#0-9a-zA-Z\&])[\#0-9a-zA-Z]*)\;/S',
+		/* 2 */		'/&#187;| --?,|:([^0-9]|$)/S',
+		/* 3 */		'/([^[<!?])([!?])/S',
+		/* 4 */		'/&#171;|(M(M?\.|mes?|r\.?)|[MnN]&#176;) /S'
 	);
 	$remplace1 = array(
 		/* 1 */		'\1~;',
@@ -419,11 +419,11 @@ function typo_fr($letexte) {
 		/* 4 */		'\0~'
 	);
 	$letexte = preg_replace($cherche1, $remplace1, $letexte);
-	$letexte = ereg_replace(" *~+ *", "~", $letexte);
+	$letexte = preg_replace("/ *~+ */S", "~", $letexte);
 
 	$cherche2 = array(
-		'/([^-\n]|^)--([^-]|$)/',
-		'/(http|https|ftp|mailto)~:/',
+		'/([^-\n]|^)--([^-]|$)/S',
+		'/(http|https|ftp|mailto)~:/S',
 		'/~/'
 	);
 	$remplace2 = array(
@@ -440,7 +440,7 @@ function typo_fr($letexte) {
 function typo_en($letexte) {
 
 	$cherche1 = array(
-		'/ --?,/'
+		'/ --?,/S'
 	);
 	$remplace1 = array(
 		'~\0'
@@ -486,7 +486,7 @@ function typo($letexte, $echapper=true) {
 	// Proteger les caracteres typographiques a l'interieur des tags html
 	$protege = "!':;?~";
 	$illegal = "\x1\x2\x3\x4\x5\x6";
-	if (preg_match_all(",</?[a-z!][^<>]*[!':;\?~][^<>]*>,ims",
+	if (preg_match_all(",</?[a-z!][^<>]*[!':;\?~][^<>]*>,imsS",
 	$letexte, $regs, PREG_SET_ORDER)) {
 		foreach ($regs as $reg) {
 			$insert = $reg[0];
@@ -567,7 +567,7 @@ function calculer_url ($lien, $texte='', $pour='url') {
 
 	// Cherche un lien du type [->raccourci 123]
 	// associe a une fonction generer_url_raccourci()
-	if (preg_match(',^(\S*?)\s*(\d+)(#[^\s]*)?$,', trim($lien), $match)) {
+	if (preg_match(',^(\S*?)\s*(\d+)(#[^\s]*)?$,S', trim($lien), $match)) {
 		$ancre = isset($match[3]) ? $match[3] :'';
 
 		// valeur par defaut
@@ -581,7 +581,7 @@ function calculer_url ($lien, $texte='', $pour='url') {
 		else if ($f == 'aut') $f = 'auteur';
 		else if ($f == 'doc' OR $f == 'im' OR $f == 'img' OR $f == 'image')
 			$f = 'document';
-		else if (preg_match(',^br..?ve$,', $f)) $f = 'breve'; # accents :(
+		else if (preg_match(',^br..?ve$,S', $f)) $f = 'breve'; # accents :(
 
 		// chercher la fonction nommee generer_url_$raccourci
 		// ou calculer_url_raccourci si on n'a besoin que du lien
@@ -615,7 +615,7 @@ function calculer_url ($lien, $texte='', $pour='url') {
 	$lien = entites_html(vider_url($lien));
 
 	// petites corrections d'URL
-	if (preg_match(",^www\.[^@]+$,",$lien))
+	if (preg_match(",^www\.[^@]+$,S",$lien))
 		$lien = "http://".$lien;
 	else if (strpos($lien, "@") && email_valide($lien))
 		$lien = "mailto:".$lien;
@@ -704,7 +704,7 @@ function calculer_url_site($id, $texte, $ancre)
 function traiter_tableau($bloc) {
 
 	// Decouper le tableau en lignes
-	preg_match_all(',([|].*)[|]\n,Ums', $bloc, $regs, PREG_PATTERN_ORDER);
+	preg_match_all(',([|].*)[|]\n,UmsS', $bloc, $regs, PREG_PATTERN_ORDER);
 	$lignes = array();
 
 	// Traiter chaque ligne
@@ -715,7 +715,7 @@ function traiter_tableau($bloc) {
 		if ($l == 1) {
 		// - <caption> et summary dans la premiere ligne :
 		//   || caption | summary || (|summary est optionnel)
-			if (preg_match(',^\|\|([^|]*)(\|(.*))?\|$,s', $ligne, $cap)) {
+			if (preg_match(',^\|\|([^|]*)(\|(.*))?\|$,sS', $ligne, $cap)) {
 				$l = 0;
 				if ($caption = trim($cap[1]))
 					$debut_table .= "<caption>".$caption."</caption>\n";
@@ -723,9 +723,9 @@ function traiter_tableau($bloc) {
 			}
 		// - <thead> sous la forme |{{titre}}|{{titre}}|
 		//   Attention thead oblige a avoir tbody
-			else if (preg_match(',^(\|([[:space:]]*{{[^}]+}}[[:space:]]*|<))+$,s',
+			else if (preg_match(',^(\|([[:space:]]*{{[^}]+}}[[:space:]]*|<))+$,sS',
 				$ligne, $thead)) {
-			  	preg_match_all("/\|([^|]*)/", $ligne, $cols);
+			  	preg_match_all("/\|([^|]*)/S", $ligne, $cols);
 				$ligne='';$cols= $cols[1];
 				$colspan=1;
 				for($c=count($cols)-1; $c>=0; $c--) {
@@ -754,10 +754,10 @@ function traiter_tableau($bloc) {
 				$ligne = traiter_listes($ligne);
 
 			// Pas de paragraphes dans les cellules
-			$ligne = preg_replace(",\n\n+,", "<br />\n", $ligne);
+			$ligne = preg_replace("/\n{2,}/", "<br />\n", $ligne);
 
 			// tout mettre dans un tableau 2d
-			preg_match_all("/\|([^|]*)/", $ligne, $cols);
+			preg_match_all("/\|([^|]*)/S", $ligne, $cols);
 			$lignes[]= $cols[1];
 		}
 	}
@@ -815,7 +815,7 @@ function traiter_tableau($bloc) {
 // Traitement des listes (merci a Michael Parienti)
 //
 function traiter_listes ($texte) {
-	$parags = preg_split(",\n[[:space:]]*\n,", $texte);
+	$parags = preg_split(",\n[[:space:]]*\n,S", $texte);
 	$texte ='';
 
 	// chaque paragraphe est traite a part
@@ -830,7 +830,7 @@ function traiter_listes ($texte) {
 		// chaque item a sa profondeur = nb d'etoiles
 		$type ='';
 		while (list(,$item) = each($lignes)) {
-			preg_match(",^([*]*|[#]*)([^*#].*)$,s", $item, $regs);
+			preg_match(",^([*]*|[#]*)([^*#].*)$,sS", $item, $regs);
 			$profond = strlen($regs[1]);
 
 			if ($profond > 0) {
@@ -893,7 +893,7 @@ function traiter_listes ($texte) {
 }
 
 // Definition de la regexp des images/documents
-define('__preg_img', ',<(img|doc|emb)([0-9]+)(\|([^>]*))?'.'>,i');
+define('__preg_img', ',<(img|doc|emb)([0-9]+)(\|([^>]*))?'.'>,iS');
 
 // fonction en cas de texte extrait d'un serveur distant:
 // on ne sait pas (encore) rapatrier les documents joints
@@ -912,16 +912,16 @@ function supprime_img($letexte) {
 //
 function paragrapher($letexte) {
 
-	if (preg_match(',<p[>[:space:]],i',$letexte)) {
+	if (preg_match(',<p[>[:space:]],iS',$letexte)) {
 
 		// Ajouter un espace aux <p> et un "STOP P"
 		// transformer aussi les </p> existants en <p>, nettoyes ensuite
-		$letexte = preg_replace(',</?p(\s([^>]*))?'.'>,i', '<STOP P><p \2>',
+		$letexte = preg_replace(',</?p(\s([^>]*))?'.'>,iS', '<STOP P><p \2>',
 			'<p>'.$letexte.'<STOP P>');
 
 		// Fermer les paragraphes (y compris sur "STOP P")
 		$letexte = preg_replace(
-			',(<p\s.*)(</?(STOP P|'._BALISES_BLOCS.')[>[:space:]]),Uims',
+			',(<p\s.*)(</?(STOP P|'._BALISES_BLOCS.')[>[:space:]]),UimsS',
 			"\n\\1</p>\n\\2", $letexte);
 
 		// Supprimer les marqueurs "STOP P"
@@ -929,11 +929,11 @@ function paragrapher($letexte) {
 
 		// Reduire les blancs dans les <p>
 		$letexte = preg_replace(
-		',(<p(>|\s[^>]*)>)\s*|\s*(</p[>[:space:]]),i', '\1\3',
+		',(<p(>|\s[^>]*)>)\s*|\s*(</p[>[:space:]]),iS', '\1\3',
 			$letexte);
 
 		// Supprimer les <p xx></p> vides
-		$letexte = preg_replace(',<p\s[^>]*></p>\s*,i', '',
+		$letexte = preg_replace(',<p\s[^>]*></p>\s*,iS', '',
 			$letexte);
 
 		// Renommer les paragraphes normaux avec class="spip"
@@ -965,10 +965,10 @@ function traiter_raccourcis($letexte) {
 
 
 	// Gestion de la <poesie>
-	if (preg_match_all(",<(poesie|poetry)>(.*)<\/(poesie|poetry)>,Uims",
+	if (preg_match_all(",<(poesie|poetry)>(.*)<\/(poesie|poetry)>,UimsS",
 	$letexte, $regs, PREG_SET_ORDER)) {
 		foreach ($regs as $reg) {
-			$lecode = preg_replace(",\r\n?,", "\n", $reg[2]);
+			$lecode = preg_replace(",\r\n?,S", "\n", $reg[2]);
 			$lecode = ereg_replace("\n[[:space:]]*\n", "\n&nbsp;\n",$lecode);
 			$lecode = "<div class=\"spip_poesie\">\n<div>".ereg_replace("\n+", "</div>\n<div>", trim($lecode))."</div>\n</div>\n\n";
 			$letexte = str_replace($reg[0], $lecode, $letexte);
@@ -976,17 +976,17 @@ function traiter_raccourcis($letexte) {
 	}
 
 	// Harmoniser les retours chariot
-	$letexte = preg_replace(",\r\n?,", "\n", $letexte);
+	$letexte = preg_replace(",\r\n?,S", "\n", $letexte);
 
 	// Recuperer les para HTML
-	$letexte = preg_replace(",<p[>[:space:]],i", "\n\n\\0", $letexte);
-	$letexte = preg_replace(",</p[>[:space:]],i", "\\0\n\n", $letexte);
+	$letexte = preg_replace(",<p[>[:space:]],iS", "\n\n\\0", $letexte);
+	$letexte = preg_replace(",</p[>[:space:]],iS", "\\0\n\n", $letexte);
 
 	//
 	// Notes de bas de page
 	//
 	$mes_notes = '';
-	$regexp = ', *\[\[(.*?)\]\],ms';
+	$regexp = ', *\[\[(.*?)\]\],msS';
 	if (preg_match_all($regexp, $letexte, $matches, PREG_SET_ORDER))
 	foreach ($matches as $regs) {
 		$note_source = $regs[0];
@@ -1076,7 +1076,7 @@ function traiter_raccourcis($letexte) {
 	//
 	// Raccourcis ancre [#ancre<-]
 	//
-	$regexp = "|\[#?([^][]*)<-\]|";
+	$regexp = "|\[#?([^][]*)<-\]|S";
 	if (preg_match_all($regexp, $letexte, $matches, PREG_SET_ORDER))
 	foreach ($matches as $regs)
 		$letexte = str_replace($regs[0],
@@ -1115,12 +1115,12 @@ function traiter_raccourcis($letexte) {
 	//
 
 	// ne pas oublier les tableaux au debut ou a la fin du texte
-	$letexte = preg_replace(",^\n?[|],", "\n\n|", $letexte);
-	$letexte = preg_replace(",\n\n+[|],", "\n\n\n\n|", $letexte);
-	$letexte = preg_replace(",[|](\n\n+|\n?$),", "|\n\n\n\n", $letexte);
+	$letexte = preg_replace(",^\n?[|],S", "\n\n|", $letexte);
+	$letexte = preg_replace(",\n\n+[|],S", "\n\n\n\n|", $letexte);
+	$letexte = preg_replace(",[|](\n\n+|\n?$),S", "|\n\n\n\n", $letexte);
 
 	// traiter chaque tableau
-	if (preg_match_all(',[^|](\n[|].*[|]\n)[^|],Ums', $letexte,
+	if (preg_match_all(',[^|](\n[|].*[|]\n)[^|],UmsS', $letexte,
 	$regs, PREG_SET_ORDER))
 	foreach ($regs as $tab) {
 		$letexte = str_replace($tab[1], traiter_tableau($tab[1]), $letexte);
@@ -1146,7 +1146,7 @@ function traiter_raccourcis($letexte) {
 	// Proteger les caracteres actifs a l'interieur des tags html
 	$protege = "{}-";
 	$illegal = "\x1\x2\x3";
-	if (preg_match_all(",</?[a-z!][^<>]*[!':;\?~][^<>]*>,ims",
+	if (preg_match_all(",</?[a-z!][^<>]*[!':;\?~][^<>]*>,imsS",
 	$letexte, $regs, PREG_SET_ORDER)) {
 		foreach ($regs as $reg) {
 			$insert = $reg[0];
@@ -1159,21 +1159,21 @@ function traiter_raccourcis($letexte) {
 
 	// autres raccourcis
 	$cherche1 = array(
-		/* 0 */ 	"/\n(----+|____+)/",
-		/* 1 */ 	"/\n-- */",
-		/* 2 */ 	"/\n- */",
-		/* 3 */ 	"/\n_ +/",
-		/* 4 */   "/(^|[^{])[{][{][{]/",
-		/* 5 */   "/[}][}][}]($|[^}])/",
- 		/* 6 */ 	"/(( *)\n){2,}(<br[[:space:]]*\/?".">)?/",
-		/* 7 */ 	"/[{][{]/",
-		/* 8 */ 	"/[}][}]/",
-		/* 9 */ 	"/[{]/",
-		/* 10 */	"/[}]/",
-		/* 11 */	"/(<br[[:space:]]*\/?".">){2,}/",
-		/* 12 */	"/<p>([\n]*(<br[[:space:]]*\/?".">)*)*/",
-		/* 13 */	"/<quote>/",
-		/* 14 */	"/<\/quote>/"
+		/* 0 */ 	"/\n(----+|____+)/S",
+		/* 1 */ 	"/\n-- */S",
+		/* 2 */ 	"/\n- */S",
+		/* 3 */ 	"/\n_ +/S",
+		/* 4 */   "/(^|[^{])[{][{][{]/S",
+		/* 5 */   "/[}][}][}]($|[^}])/S",
+		/* 6 */ 	"/(( *)\n){2,}(<br[[:space:]]*\/?".">)?/S",
+		/* 7 */ 	"/[{][{]/S",
+		/* 8 */ 	"/[}][}]/S",
+		/* 9 */ 	"/[{]/S",
+		/* 10 */	"/[}]/S",
+		/* 11 */	"/(<br[[:space:]]*\/?".">){2,}/S",
+		/* 12 */	"/<p>([\n]*(<br[[:space:]]*\/?".">)*)*/S",
+		/* 13 */	"/<quote>S/",
+		/* 14 */	"/<\/quote>S/"
 	);
 	$remplace1 = array(
 		/* 0 */ 	"\n\n$ligne_horizontale\n\n",
@@ -1193,7 +1193,7 @@ function traiter_raccourcis($letexte) {
 		/* 14 */	"</blockquote><p>"
 	);
 	$letexte = preg_replace($cherche1, $remplace1, $letexte);
-	$letexte = preg_replace("@^ <br />@", "", $letexte);
+	$letexte = preg_replace("@^ <br />@S", "", $letexte);
 
 	// Retablir les caracteres proteges
 	$letexte = strtr($letexte, $illegal, $protege);
@@ -1222,6 +1222,9 @@ function traiter_les_notes($mes_notes) {
 
 // Filtre a appliquer aux champs du type #TEXTE*
 function propre($letexte) {
+
+	spip_timer('propre');
+
 	// Echapper les <a href>, <html>...< /html>, <code>...< /code>
 	$letexte = echappe_html($letexte);
 
@@ -1238,7 +1241,7 @@ function propre($letexte) {
 	if (!_DIR_RESTREINT)
 		$letexte = interdire_scripts($letexte);
 
-	return $letexte;
+	return ($letexte!=='') ? spip_timer('propre').$letexte : '';
 }
 
 ?>
