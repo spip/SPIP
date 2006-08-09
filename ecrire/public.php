@@ -103,6 +103,7 @@ if (defined('_INC_PUBLIC')) {
 	isset($_COOKIE['spip_admin']) 
 	AND !$flag_preserver
 	AND ($html OR ($var_mode == 'debug') OR count($tableau_des_erreurs))
+	AND !_request('fragment')
 	))
 		include_spip('balise/formulaire_admin');
 

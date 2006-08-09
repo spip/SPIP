@@ -96,7 +96,9 @@ function assembler_page ($fond) {
 	// une perennite valide a meme reponse qu'une requete HEAD
 
 	if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) AND !$var_mode
-	AND $chemin_cache AND !$flag_dynamique AND !$_COOKIE['spip_admin']) {
+	AND $chemin_cache AND !$flag_dynamique
+	// l'admin connecte veut voir ses boutons a jour
+	AND (!$_COOKIE['spip_admin'] OR (_request('fragment')!==null))) {
 		if (!strstr('IIS/', $_SERVER['SERVER_SOFTWARE'])) {
 			$since = preg_replace('/;.*/', '',
 				$_SERVER['HTTP_IF_MODIFIED_SINCE']);
