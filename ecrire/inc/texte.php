@@ -695,7 +695,7 @@ function calculer_url_site($id, $texte, $ancre)
 		if (!$texte)
 			$texte = $row['nom_site'];
 	}
-	return array($lien, 'spip_in', $texte);
+	return array($lien, 'spip_out', $texte);
 }
 
 //
