@@ -40,7 +40,7 @@ div.navigation-calendrier img {
 	margin: 1px;
 }
 
-a.calendrier-annee {
+.calendrier-annee {
 	background: #AAA;
 	padding: 3px;
 	margin: 1px;
@@ -51,7 +51,7 @@ a.calendrier-annee {
 	-moz-border-radius: 5px;
 }
 
-a.calendrier-annee:hover {
+.calendrier-annee:hover {
 	color: #000;
 	background-color: #FFF;
 }
