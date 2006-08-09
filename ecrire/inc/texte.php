@@ -1223,8 +1223,6 @@ function traiter_les_notes($mes_notes) {
 // Filtre a appliquer aux champs du type #TEXTE*
 function propre($letexte) {
 
-	spip_timer('propre');
-
 	// Echapper les <a href>, <html>...< /html>, <code>...< /code>
 	$letexte = echappe_html($letexte);
 
@@ -1241,7 +1239,7 @@ function propre($letexte) {
 	if (!_DIR_RESTREINT)
 		$letexte = interdire_scripts($letexte);
 
-	return ($letexte!=='') ? spip_timer('propre').$letexte : '';
+	return $letexte;
 }
 
 ?>
