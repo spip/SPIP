@@ -186,8 +186,22 @@ function auto_expire($page)
 	}
 }
 
+function stop_inclure($fragment) {
+	if ($fragment == _request('var_fragment')) {
+		define('_STOP_INCLURE', 1);
+		#spip_log("fin du fragment $fragment, on arrete d'inclure");
+	}
+}
 function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 	global $lastmodified;
+
+	// Si un fragment est demande et deja obtenu, inutile de continuer a inclure
+	if (defined('_STOP_INCLURE')) {
+		return array(
+		'texte' => '',
+		'process_ins' => 'html'
+		);
+	}
 
 	$fcache = charger_fonction('cacher', 'public');
 	// Garnir ces quatre parametres avec les infos sur le cache
