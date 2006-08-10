@@ -69,18 +69,21 @@ function generer_action_auteur($action, $arg, $redirect="", $mode=false, $att=''
 		"\n\t</div>\n</form>\n";
 }
 
-function redirige_action_auteur($action, $arg, $ret, $gra, $mode=false, $atts='')
-{
-	if (!$ret) $ret = _request('exec');
-	$gra = preg_replace(',^&,', '', $gra);
+function redirige_action_auteur($action, $arg, $ret, $gra, $mode=false, $atts='') {
+	if (!$redirect = _request('redirect')) {
+		$gra = preg_replace(',^&,', '', $gra);
+		$redirect = generer_url_ecrire($ret ? $ret : _request('exec'),
+			$gra, '&', _DIR_RESTREINT_ABS);
+	}
 
 	return generer_action_auteur(
 		$action,
 		$arg,
-		generer_url_ecrire($ret, $gra, true, _DIR_RESTREINT_ABS),
+		$redirect,
 		$mode,
 		$atts);
 }
+
 
 // Retourne un formulaire d'execution de $action sur $id,
 // revenant a l'envoyeur $script d'arguments $args.
@@ -89,6 +92,7 @@ function redirige_action_auteur($action, $arg, $ret, $gra, $mode=false, $atts=''
 
 function ajax_action_auteur($action, $id, $corps, $script, $args_ajax, $args)
 {
+
 	// Methode traditionnelle
 	if ($_COOKIE['spip_accepte_ajax'] != 1) {
 		if (is_string($corps)) {

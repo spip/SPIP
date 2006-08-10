@@ -17,7 +17,8 @@ $numero_block = array();
 
 $compteur_block = 0;
 
-$compteur_block = rand(1,250)*200;	// astuce idiote pour que les blocs ahah n'aient pas les memes numeros de triangle que la page principale (sinon le triangle d'un bloc importe par ahah agit sur un autre triangle... vivement jquery...).
+if (_request('var_ajax'))
+$compteur_block = rand(1,2500)*500;	// astuce idiote pour que les blocs ahah n'aient pas les memes numeros de triangle que la page principale (sinon le triangle d'un bloc importe par ahah agit sur un autre triangle... vivement jquery...).
 
 
 function debut_block_visible($nom_block){
