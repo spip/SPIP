@@ -379,9 +379,9 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 	$bandeau .= "<div id='bandeaudisplay' class='bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>";
 
 	if ($options != 'avancees') {
-		$bandeau .= "<b>"._T('icone_interface_simple')."</b>/<a href='$lien' class='lien_sous'>"._T('icone_interface_complet')."</a>";
+		$bandeau .= "<b>"._T('icone_interface_simple')."</b>/<a href='".parametre_url(self(),'set_options', 'avancees')."' class='lien_sous'>"._T('icone_interface_complet')."</a>";
 	} else {
-		$bandeau .= "<a href='$lien' class='lien_sous'>"._T('icone_interface_simple')."</a>/<b>"._T('icone_interface_complet')."</b>";
+		$bandeau .= "<a href='".parametre_url(self(),'set_options', 'basiques')."' class='lien_sous'>"._T('icone_interface_simple')."</a>/<b>"._T('icone_interface_complet')."</b>";
 	}
 
 	if ($options != "avancees") {
