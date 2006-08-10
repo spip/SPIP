@@ -20,6 +20,8 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 
 	
 	$fichier = extraire_attribut($img, 'src');
+	if (($p=strpos($fichier,'?'))!==FALSE)
+		$fichier=substr($fichier,0,$p);
 	if (strlen($fichier) < 1) $fichier = $img;
 
 	if (!file_exists($fichier)) return false;
@@ -322,6 +324,7 @@ function image_masque($im, $masque, $pos="") {
 	
 		$masque = find_in_path($masque);
 		$mask = image_valeurs_trans($masque,"");
+		if (!is_array($mask)) return("");
 		$im_m = $mask["fichier"];
 		$x_m = $mask["largeur"];
 		$y_m = $mask["hauteur"];
@@ -427,6 +430,7 @@ function image_masque($im, $masque, $pos="") {
 
 
 		$nouveau = image_valeurs_trans(image_reduire($im, $x_d, $y_d),"");
+		if (!is_array($nouveau)) return("");
 		$im_n = $nouveau["fichier"];
 		
 	
