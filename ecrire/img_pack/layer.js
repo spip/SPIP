@@ -172,12 +172,14 @@ function AjaxSqueeze(trig, id)
 	var noeud = document.getElementById(id);
 	if (!noeud) return true;
 
+	// vivement jquery !
 	if (typeof ajax_image_searching != 'undefined') {
-		g = ajax_image_searching + noeud.innerHTML;
+		g = document.createElement('div');
+		g.innerHTML = ajax_image_searching;
+		noeud.insertBefore(g, noeud.firstChild);
 	}
 
 	if (typeof(trig) == 'string') {
-		noeud.innerHTML = g;
 		return ajah('GET', trig, null, function(r) { noeud.innerHTML = r;});
 	}
 
@@ -188,8 +190,7 @@ function AjaxSqueeze(trig, id)
 			u += n.name+"="+ encodeURIComponent(n.value) + '&';
 		}
 	}
-	
-	noeud.innerHTML = g;
+
 	s = trig.getAttribute('action');
 	return !ajah('POST', // ou 'GET'
 		     s ,     // s + '?'+ u,
