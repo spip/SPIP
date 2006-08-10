@@ -825,7 +825,6 @@ function boutons_rotateurs($document, $type, $id, $id_document, $script, $id_vig
 		bouton_tourner_document($id, $id_document, $script, 180, $type, 'tourner-180.gif', _T('image_tourner_180')) .
 		"</div>\n";
 	}
-	return '';
 }
 
 function bouton_tourner_document($id, $id_document, $script, $rot, $type, $img, $title)
@@ -834,10 +833,9 @@ function bouton_tourner_document($id, $id_document, $script, $rot, $type, $img, 
 			    "$id_document-$rot",
 			    array(http_img_pack($img, $title, ''),
 				  'bouton_rotation'),
-			    $sript,
+			    $script,
 "&id_document=$id_document&id=$id&type=$type",
-"&show_docs=$id_document&id_$type=$id#tourner-$id_document") .
-    "<br />";
+"&show_docs=$id_document&id_$type=$id#tourner-$id_document");
 }
 
 function afficher_documents_non_inclus($id_article, $type = "article", $flag_modif) {
