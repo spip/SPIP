@@ -1172,8 +1172,8 @@ function traiter_raccourcis($letexte) {
 		/* 10 */	"/[}]/S",
 		/* 11 */	"/(<br[[:space:]]*\/?".">){2,}/S",
 		/* 12 */	"/<p>([\n]*(<br[[:space:]]*\/?".">)*)*/S",
-		/* 13 */	"/<quote>S/",
-		/* 14 */	"/<\/quote>S/"
+		/* 13 */	"/<quote>/S",
+		/* 14 */	"/<\/quote>/S"
 	);
 	$remplace1 = array(
 		/* 0 */ 	"\n\n$ligne_horizontale\n\n",
