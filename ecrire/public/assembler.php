@@ -291,9 +291,9 @@ function f_surligne ($texte) {
 function f_tidy ($texte) {
 	global $xhtml;
 
-	if (strlen($texte)
-	AND $xhtml # tidy demande
+	if ($xhtml # tidy demande
 	AND $GLOBALS['html'] # verifie que la page avait l'entete text/html
+	AND strlen($texte)
 	AND !headers_sent()) {
 		# Compatibilite ascendante
 		if ($xhtml === true) $xhtml ='tidy';
