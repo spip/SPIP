@@ -91,7 +91,7 @@
 					<h2><:titre_documents_joints:></h2>
 					<ul>
 						<BOUCLE_documents_joints(DOCUMENTS) {id_rubrique}
-						{mode=document} {par date} {doublons}>
+						{mode=document} {par num titre, date} {doublons}>
 						<li>
 						<div class="spip_doc_titre"><a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a> <small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small></div>
 						[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]

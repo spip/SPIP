@@ -850,7 +850,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 
 	$doublons = document_vu();
 
-	$images_liees = spip_query("SELECT docs.*,l.id_$type FROM spip_documents AS docs, spip_documents_".$type."s AS l, spip_types_documents AS lestypes WHERE l.id_$type=$id_article AND l.id_document=docs.id_document AND docs.mode='document' AND docs.id_type=lestypes.id_type AND lestypes.extension IN ('gif', 'jpg', 'png')" . (!$doublons ?'':" AND docs.id_document NOT IN ($doublons) ") . " ORDER BY 0+docs.titre, docs.titre, docs.id_document");
+	$images_liees = spip_query("SELECT docs.*,l.id_$type FROM spip_documents AS docs, spip_documents_".$type."s AS l, spip_types_documents AS lestypes WHERE l.id_$type=$id_article AND l.id_document=docs.id_document AND docs.mode='document' AND docs.id_type=lestypes.id_type AND lestypes.extension IN ('gif', 'jpg', 'png')" . (!$doublons ?'':" AND docs.id_document NOT IN ($doublons) ") . " ORDER BY 0+docs.titre, docs.date");
 
 	//
 	// recuperer tout le tableau des images du portfolio
@@ -874,7 +874,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 	$doublons = document_vu();
 
 	//// Documents associes
-	$documents_lies = spip_query("SELECT docs.*,l.id_$type FROM spip_documents AS docs, spip_documents_".$type."s AS l WHERE l.id_$type=$id_article AND l.id_document=docs.id_document AND docs.mode='document'" . (!$doublons ? '' : " AND docs.id_document NOT IN ($doublons) ") . " ORDER BY 0+docs.titre, docs.titre, docs.id_document");
+	$documents_lies = spip_query("SELECT docs.*,l.id_$type FROM spip_documents AS docs, spip_documents_".$type."s AS l WHERE l.id_$type=$id_article AND l.id_document=docs.id_document AND docs.mode='document'" . (!$doublons ? '' : " AND docs.id_document NOT IN ($doublons) ") . " ORDER BY 0+docs.titre, docs.date");
 
 	$documents = array();
 	while ($document = spip_fetch_array($documents_lies))
