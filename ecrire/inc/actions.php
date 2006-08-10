@@ -71,7 +71,15 @@ function generer_action_auteur($action, $arg, $redirect="", $mode=false, $att=''
 
 function redirige_action_auteur($action, $arg, $ret, $gra, $mode=false, $atts='')
 {
-	return generer_action_auteur($action, $arg, generer_url_ecrire($ret, $gra, true, _DIR_RESTREINT_ABS), $mode, $atts);
+	if (!$ret) $ret = _request('exec');
+	$gra = preg_replace(',^&,', '', $gra);
+
+	return generer_action_auteur(
+		$action,
+		$arg,
+		generer_url_ecrire($ret, $gra, true, _DIR_RESTREINT_ABS),
+		$mode,
+		$atts);
 }
 
 // Retourne un formulaire d'execution de $action sur $id,
@@ -81,30 +89,47 @@ function redirige_action_auteur($action, $arg, $ret, $gra, $mode=false, $atts=''
 
 function ajax_action_auteur($action, $id, $corps, $script, $args_ajax, $args)
 {
-	if ($_COOKIE['spip_accepte_ajax'] != 1 ) 
-		return redirige_action_auteur($action, 
+	// Methode traditionnelle
+	if ($_COOKIE['spip_accepte_ajax'] != 1) {
+		if (is_string($corps)) {
+			return redirige_action_auteur($action,
 				$id,
 				$script,
 				$args,
 				$corps,
 				"\nmethod='post'");
+		} else {
+			list($clic, $class) = $corps;
+			$href = redirige_action_auteur($action,
+				$id,
+				$script,
+				$args,
+				null,
+				"\nmethod='post'");
+			return "<div class='$class'><a href='$href'>$clic</a></div>";
+		}
+	}
 
+	//
+	// Ajax
+	//
 	$pere = '"' . "$action-" . intval($id) . '"';
 
-	if (is_string($corps))
+	if (is_string($corps)) {
 		return redirige_action_auteur($action,
 				$id,
 				$action,
 				"var_ajax=1&script=$script$args_ajax",
 				$corps,
 				"\nmethod='post' onsubmit='return AjaxSqueeze(this, $pere)'");
-	list($clic, $class) = $corps;
-	$href = redirige_action_auteur($action,
+	} else {
+		list($clic, $class) = $corps;
+		$href = redirige_action_auteur($action,
 				$id,
 				$action,
 				"var_ajax=1&script=$script$args_ajax");
-	return "<div class='$class' onclick='AjaxSqueeze(\"$href\",$pere)'>$clic</div>";
-			
+		return "<div class='$class' onclick='AjaxSqueeze(\"$href\",$pere)'>$clic</div>";
+	}
 }
 
 function determine_upload()
