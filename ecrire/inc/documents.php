@@ -596,7 +596,7 @@ function formulaire_upload($id, $intitule='', $inclus = '', $mode='', $type="", 
 		$res .= $milieu;
 
 	if ($dir_ftp) {
-	  	$l = texte_upload_manuel($dir_ftp,$inclus);
+	  	$l = texte_upload_manuel(joli_repertoire($dir_ftp),$inclus);
 		// pour ne pas repeter l'aide en ligne dans le portolio
 		if ($l OR ($mode != 'vignette'))
 			$res .= afficher_transferer_upload($type, $l);
@@ -654,7 +654,7 @@ function construire_upload($corps, $args, $enctype='')
 
 function afficher_transferer_upload($type, $texte_upload)
 {
-	$doc = array('upload' => '<b>' . determine_upload() . '</b>');
+	$doc = array('upload' => '<b>' . joli_repertoire(determine_upload()) . '</b>');
 	if (!$texte_upload) {
 		return "<div style='border: 1px #303030 solid; padding: 4px; color: #505050;'>" .
 			_T('info_installer_ftp', $doc) .
