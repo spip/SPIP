@@ -1132,4 +1132,53 @@ function balise_INSERT_HEAD_dist($p) {
 	return $p;
 }
 
+//
+// #INCLURE statique
+// l'inclusion est realisee au calcul du squelette, pas au service
+// corrolairement, le produit du squelette peut etre utilise en entree de filtres a suivre
+//
+function balise_INCLUDE_dist($p) {
+	return balise_INCLURE_dist($p);
+}
+function balise_INCLURE_dist($p) {
+	$champ = new Inclure;
+	// on assimile {var=val} a une liste de un argument sans fonction
+	foreach ($p->param as $k => $v) {
+	  $var = $v[1][0];
+	  if ($var==NULL) break; // on est arrive sur un filtre
+	  if ($var->type != 'texte')
+		erreur_squelette(_T('zbug_parametres_inclus_incorrects'),
+				 $match[0]);
+	  else {
+	  	$champ->param[$k] = $v;
+	    ereg("^([^=]*)(=)?(.*)$", $var->texte,$m);
+	    if ($m[2]) {
+	      $champ->param[$k][0] = $m[1];
+	      $val = $m[3];
+	      if (ereg('^[\'"](.*)[\'"]$', $val, $m)) $val = $m[1];
+	      $champ->param[$k][1][0]->texte = $val;
+	    }
+	    else
+	      $champ->param[$k] = array($m[1]);
+	  }
+	}
+	$texte = substr($champ->apres,1);
+	$champ->apres = "";
+	$result[] = $champ;
+
+	$l = array();
+	foreach($champ->param as $val) {
+		$var = array_shift($val);
+		$l[] = "'$var' => " . 
+		  ($val ? calculer_liste($val[0], $p->descr, $p->boucles, $p->id_boucle) :(($var =='lang') ? '$GLOBALS["spip_lang"]' : index_pile($p->id_boucle, $var, $p->boucles)))
+		  ;
+	}
+	$code = "recuperer_fond('',array(".implode(',',$l)."))";
+
+	$commentaire = '#INCLURE ' . str_replace("\n", ' ', $code);
+	
+	$p->code = "\n//$commentaire.\n$code";
+	$p->interdire_scripts = false;
+	return $p;
+}
 ?>

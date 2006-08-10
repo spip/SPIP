@@ -357,6 +357,8 @@ function message_erreur_404 ($erreur= "") {
 function recuperer_fond($fond, $contexte=array()) {
 	// on est peut etre dans l'espace prive au moment de l'appel
 	define ('_INC_PUBLIC', 1);
+	if (($fond=='')&&isset($contexte['fond']))
+		$fond = $contexte['fond'];
 
 	$page = inclure_page($fond, $contexte);
 
