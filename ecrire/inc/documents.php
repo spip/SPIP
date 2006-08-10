@@ -480,11 +480,11 @@ function inserer_documents($letexte) {
 // Retourner le code HTML d'utilisation de fichiers envoyes
 //
 
-function texte_upload_manuel($dir, $inclus = '') {
+function texte_upload_manuel($dir, $inclus = '', $mode = 'document') {
 	$fichiers = preg_files($dir);
 	$exts = array();
 	$dirs = array(); 
-	$texte_upload = '';
+	$texte_upload = array();
 	foreach ($fichiers as $f) {
 		$f = preg_replace(",^$dir,",'',$f);
 		if (ereg("\.([^.]+)$", $f, $match)) {
@@ -504,7 +504,7 @@ function texte_upload_manuel($dir, $inclus = '') {
 			  $lefichier = substr($f, $n+1, strlen($f));
 			  $ledossier = substr($f, 0, $n);
 			  if (!in_array($ledossier, $dirs)) {
-				$texte_upload .= "\n<option value=\"$ledossier\">"
+				$texte_upload[] = "\n<option value=\"$ledossier\">"
 				. str_repeat("&nbsp;",$k) 
 				._T('tout_dossier_upload', array('upload' => $ledossier))
 				."</option>";
@@ -513,20 +513,22 @@ function texte_upload_manuel($dir, $inclus = '') {
 			}
 
 			if ($exts[$ext] == 'oui')
-			  $texte_upload .= "\n<option value=\"$f\">" .
+			  $texte_upload[] = "\n<option value=\"$f\">" .
 			    str_repeat("&nbsp;",$k+2) .
 			    $lefichier .
 			    "</option>";
 		}
 	} 
 
-	if ($texte_upload) {
-		$texte_upload = "\n<option value=\"/\" style='font-weight: bold;'>"
+	$texte = join('', $texte_upload);
+
+	if ($mode == "document" AND count($texte_upload)>1) {
+		$texte = "\n<option value=\"/\" style='font-weight: bold;'>"
 				._T('info_installer_tous_documents')
-				."</option>" . $texte_upload;
+				."</option>" . $texte;
 	}
 
-	return $texte_upload;
+	return $texte;
 }
 
 
@@ -596,7 +598,7 @@ function formulaire_upload($id, $intitule='', $inclus = '', $mode='', $type="", 
 		$res .= $milieu;
 
 	if ($dir_ftp) {
-	  	$l = texte_upload_manuel(joli_repertoire($dir_ftp),$inclus);
+		$l = texte_upload_manuel($dir_ftp,$inclus, $mode);
 		// pour ne pas repeter l'aide en ligne dans le portolio
 		if ($l OR ($mode != 'vignette'))
 			$res .= afficher_transferer_upload($type, $l);
