@@ -574,7 +574,9 @@ function formulaire_upload($id, $intitule='', $inclus = '', $mode='', $type="", 
 	global $spip_lang_right;
 	static $num_form = 0; $num_form ++;
 
-	if (!_DIR_RESTREINT)
+	$vignette_de_doc = ($mode == 'vignette' AND $id_document>0);
+
+	if (!_DIR_RESTREINT AND !$vignette_de_doc)
 		$dir_ftp = determine_upload();
 	else $dir_ftp = '';
 
@@ -588,13 +590,13 @@ function formulaire_upload($id, $intitule='', $inclus = '', $mode='', $type="", 
 	// Un menu depliant si on a une possibilite supplementaire
 
 	$test_distant = ($mode == 'document' AND $type);
-	if ($dir_ftp OR $test_distant OR ($mode == 'vignette')) {
+	if ($dir_ftp OR $test_distant OR $vignette_de_doc) {
 		$debut = "<div style='float:".$GLOBALS['spip_lang_left'].";'>"
 			. bouton_block_invisible("ftp$num_form") ."</div>\n";
 		$milieu = debut_block_invisible("ftp$num_form");
 		$fin = fin_block();
 
-		if ($mode == 'vignette')
+		if ($vignette_de_doc)
 			$res = $milieu . $res;
 		else
 			$res = $res . $milieu;
@@ -604,9 +606,7 @@ function formulaire_upload($id, $intitule='', $inclus = '', $mode='', $type="", 
 
 	if ($dir_ftp) {
 		$l = texte_upload_manuel($dir_ftp,$inclus, $mode);
-		// pour ne pas repeter l'aide en ligne dans le portolio
-		if ($l OR ($mode != 'vignette'))
-			$res .= afficher_transferer_upload($type, $l);
+		$res .= afficher_transferer_upload($type, $l);
 	}
 
 	// Lien document distant, jamais en mode image
@@ -624,14 +624,11 @@ function formulaire_upload($id, $intitule='', $inclus = '', $mode='', $type="", 
 			"\n</div>";
 	}
 
-	$res .= $fin;
-	// Fin eventuel menu depliant
-
 	$res .= "\n\t\t<input type='hidden' name='id' value='$id' />" .
 		"\n\t\t<input type='hidden' name='id_document' value='$id_document' />" .
 		"\n\t\t<input type='hidden' name='type' value='$type' />" .
 		"\n\t\t<input type='hidden' name='ancre' value='$ancre' />" .
-		"\n\t$fin";
+		"\n\t$fin</div>";
 
 	// a cause d'ajax, on ne peut pas faire confiance au script "documenter"
 	// pour reafficher la page apres upload de la vignette... donc il faut
