@@ -1,0 +1,74 @@
+#ENV{bloc_ancre}
+[<a href='[(#ENV{url}|parametre_url{#ENV{debut},''})]##ENV{ancre}' class='lien_pagination'>(#ENV{premiere}|>{1}|?{'...',''})</a> |]
+
+[(#ENV{premiere}|<={#ENV{derniere}}|?{' ',''})[
+	(#ENV{premiere}|=={#ENV{page_courante}}|?{' ',''})
+		[<span class="on">(#ENV{premiere}|moins{1}|mult{#ENV{pas}})</span>]
+	][(#ENV{premiere}|=={#ENV{page_courante}}|?{'',' '})
+		[<a href='[(#ENV{url}|parametre_url{#ENV{debut},#ENV{premiere}|moins{1}|mult{#ENV{pas}} })]##ENV{ancre}' class='lien_pagination'>(#ENV{premiere}|moins{1}|mult{#ENV{pas}})</a>]
+	][(#ENV{premiere}|<{#ENV{derniere}}|?{'|',''})]
+]
+[(#ENV{premiere}|plus{1}|<={#ENV{derniere}}|?{' ',''})[
+	(#ENV{premiere}|plus{1}|=={#ENV{page_courante}}|?{' ',''})
+		[<span class="on">(#ENV{premiere}|plus{1}|moins{1}|mult{#ENV{pas}})</span>]
+	][(#ENV{premiere}|plus{1}|=={#ENV{page_courante}}|?{'',' '})
+		[<a href='[(#ENV{url}|parametre_url{#ENV{debut},#ENV{premiere}|plus{1}|moins{1}|mult{#ENV{pas}} })]##ENV{ancre}' class='lien_pagination'>(#ENV{premiere}|plus{1}|moins{1}|mult{#ENV{pas}})</a>]
+	][(#ENV{premiere}|plus{1}|<{#ENV{derniere}}|?{'|',''})]
+]
+[(#ENV{premiere}|plus{2}|<={#ENV{derniere}}|?{' ',''})[
+	(#ENV{premiere}|plus{2}|=={#ENV{page_courante}}|?{' ',''})
+		[<span class="on">(#ENV{premiere}|plus{2}|moins{1}|mult{#ENV{pas}})</span>]
+	][(#ENV{premiere}|plus{2}|=={#ENV{page_courante}}|?{'',' '})
+		[<a href='[(#ENV{url}|parametre_url{#ENV{debut},#ENV{premiere}|plus{2}|moins{1}|mult{#ENV{pas}} })]##ENV{ancre}' class='lien_pagination'>(#ENV{premiere}|plus{2}|moins{1}|mult{#ENV{pas}})</a>]
+	][(#ENV{premiere}|plus{2}|<{#ENV{derniere}}|?{'|',''})]
+]
+[(#ENV{premiere}|plus{3}|<={#ENV{derniere}}|?{' ',''})[
+	(#ENV{premiere}|plus{3}|=={#ENV{page_courante}}|?{' ',''})
+		[<span class="on">(#ENV{premiere}|plus{3}|moins{1}|mult{#ENV{pas}})</span>]
+	][(#ENV{premiere}|plus{3}|=={#ENV{page_courante}}|?{'',' '})
+		[<a href='[(#ENV{url}|parametre_url{#ENV{debut},#ENV{premiere}|plus{3}|moins{1}|mult{#ENV{pas}} })]##ENV{ancre}' class='lien_pagination'>(#ENV{premiere}|plus{3}|moins{1}|mult{#ENV{pas}})</a>]
+	][(#ENV{premiere}|plus{3}|<{#ENV{derniere}}|?{'|',''})]
+]
+[(#ENV{premiere}|plus{4}|<={#ENV{derniere}}|?{' ',''})[
+	(#ENV{premiere}|plus{4}|=={#ENV{page_courante}}|?{' ',''})
+		[<span class="on">(#ENV{premiere}|plus{4}|moins{1}|mult{#ENV{pas}})</span>]
+	][(#ENV{premiere}|plus{4}|=={#ENV{page_courante}}|?{'',' '})
+		[<a href='[(#ENV{url}|parametre_url{#ENV{debut},#ENV{premiere}|plus{4}|moins{1}|mult{#ENV{pas}} })]##ENV{ancre}' class='lien_pagination'>(#ENV{premiere}|plus{4}|moins{1}|mult{#ENV{pas}})</a>]
+	][(#ENV{premiere}|plus{4}|<{#ENV{derniere}}|?{'|',''})]
+]
+[(#ENV{premiere}|plus{5}|<={#ENV{derniere}}|?{' ',''})[
+	(#ENV{premiere}|plus{5}|=={#ENV{page_courante}}|?{' ',''})
+		[<span class="on">(#ENV{premiere}|plus{5}|moins{1}|mult{#ENV{pas}})</span>]
+	][(#ENV{premiere}|plus{5}|=={#ENV{page_courante}}|?{'',' '})
+		[<a href='[(#ENV{url}|parametre_url{#ENV{debut},#ENV{premiere}|plus{5}|moins{1}|mult{#ENV{pas}} })]##ENV{ancre}' class='lien_pagination'>(#ENV{premiere}|plus{5}|moins{1}|mult{#ENV{pas}})</a>]
+	][(#ENV{premiere}|plus{5}|<{#ENV{derniere}}|?{'|',''})]
+]
+[(#ENV{premiere}|plus{6}|<={#ENV{derniere}}|?{' ',''})[
+	(#ENV{premiere}|plus{6}|=={#ENV{page_courante}}|?{' ',''})
+		[<span class="on">(#ENV{premiere}|plus{6}|moins{1}|mult{#ENV{pas}})</span>]
+	][(#ENV{premiere}|plus{6}|=={#ENV{page_courante}}|?{'',' '})
+		[<a href='[(#ENV{url}|parametre_url{#ENV{debut},#ENV{premiere}|plus{6}|moins{1}|mult{#ENV{pas}} })]##ENV{ancre}' class='lien_pagination'>(#ENV{premiere}|plus{6}|moins{1}|mult{#ENV{pas}})</a>]
+	][(#ENV{premiere}|plus{6}|<{#ENV{derniere}}|?{'|',''})]
+]
+[(#ENV{premiere}|plus{7}|<={#ENV{derniere}}|?{' ',''})[
+	(#ENV{premiere}|plus{7}|=={#ENV{page_courante}}|?{' ',''})
+		[<span class="on">(#ENV{premiere}|plus{7}|moins{1}|mult{#ENV{pas}})</span>]
+	][(#ENV{premiere}|plus{7}|=={#ENV{page_courante}}|?{'',' '})
+		[<a href='[(#ENV{url}|parametre_url{#ENV{debut},#ENV{premiere}|plus{7}|moins{1}|mult{#ENV{pas}} })]##ENV{ancre}' class='lien_pagination'>(#ENV{premiere}|plus{7}|moins{1}|mult{#ENV{pas}})</a>]
+	][(#ENV{premiere}|plus{7}|<{#ENV{derniere}}|?{'|',''})]
+]
+[(#ENV{premiere}|plus{8}|<={#ENV{derniere}}|?{' ',''})[
+	(#ENV{premiere}|plus{8}|=={#ENV{page_courante}}|?{' ',''})
+		[<span class="on">(#ENV{premiere}|plus{8}|moins{1}|mult{#ENV{pas}})</span>]
+	][(#ENV{premiere}|plus{8}|=={#ENV{page_courante}}|?{'',' '})
+		[<a href='[(#ENV{url}|parametre_url{#ENV{debut},#ENV{premiere}|plus{8}|moins{1}|mult{#ENV{pas}} })]##ENV{ancre}' class='lien_pagination'>(#ENV{premiere}|plus{8}|moins{1}|mult{#ENV{pas}})</a>]
+	][(#ENV{premiere}|plus{8}|<{#ENV{derniere}}|?{'|',''})]
+]
+[(#ENV{premiere}|plus{9}|<={#ENV{derniere}}|?{' ',''})[
+	(#ENV{premiere}|plus{9}|=={#ENV{page_courante}}|?{' ',''})
+		[<span class="on">(#ENV{premiere}|plus{9}|moins{1}|mult{#ENV{pas}})</span>]
+	][(#ENV{premiere}|plus{9}|=={#ENV{page_courante}}|?{'',' '})
+		[<a href='[(#ENV{url}|parametre_url{#ENV{debut},#ENV{premiere}|plus{9}|moins{1}|mult{#ENV{pas}} })]##ENV{ancre}' class='lien_pagination'>(#ENV{premiere}|plus{9}|moins{1}|mult{#ENV{pas}})</a>]
+	][(#ENV{premiere}|plus{9}|<{#ENV{derniere}}|?{'|',''})]
+]
+[| <a href='[(#ENV{url}|parametre_url{#ENV{debut},#ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}})]##ENV{ancre}' class='lien_pagination'>(#ENV{derniere}|<{#ENV{nombre_pages}}|?{'...',''})</a>]
