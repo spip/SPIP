@@ -1146,7 +1146,10 @@ function balise_INSERT_HEAD_dist($p) {
 // corrolairement, le produit du squelette peut etre utilise en entree de filtres a suivre
 //
 function balise_INCLUDE_dist($p) {
-	return balise_INCLURE_dist($p);
+	if(function_exists('balise_INCLURE'))
+		return balise_INCLURE($p);
+	else
+		return balise_INCLURE_dist($p);
 }
 function balise_INCLURE_dist($p) {
 	$champ = new Inclure;
@@ -1188,5 +1191,47 @@ function balise_INCLURE_dist($p) {
 	$p->code = "\n//$commentaire.\n$code";
 	$p->interdire_scripts = false;
 	return $p;
+}
+
+//
+// #SET
+// Affecte une variable locale au squelette
+// #SET{nom,valeur}
+// la balise renvoie la valeur
+function balise_SET_dist($p){
+	if ($p->param && !$p->param[0][0]) {
+		$_nom =  calculer_liste($p->param[0][1],
+					$p->descr,
+					$p->boucles,
+					$p->id_boucle);
+
+		$_valeur =  calculer_liste($p->param[0][2],
+					$p->descr,
+					$p->boucles,
+					$p->id_boucle);
+
+		if ($args != "''")
+			$p->code .= ','.$args;
+
+		// autres filtres (???)
+		array_shift($p->param);
+	}
+
+	$p->code = "(\$Pile['vars'][$_nom] = $_valeur)";
+
+	#$p->interdire_scripts = true;
+	return $p;
+}
+
+//
+// #GET
+// Recupere une variable locale au squelette
+// #GET{nom,defaut} renvoie defaut si la variable nom n'a pas ete affectee
+//
+function balise_GET_dist($p) {
+	if(function_exists('balise_ENV'))
+		return balise_ENV($p, '$Pile["vars"]');
+	else
+		return balise_ENV_dist($p, '$Pile["vars"]');
 }
 ?>
