@@ -196,7 +196,7 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
 }
 
 function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
-      preg_match(",^(\|?[^{)|]*)(.*)$,ms", $texte, $match);
+      preg_match(",^(\|?[^}{)|]*)(.*)$,ms", $texte, $match);
       $suite = ltrim($match[2]);
       $fonc = trim($match[1]);
       if ($fonc && $fonc[0] == "|") $fonc = ltrim(substr($fonc,1));
