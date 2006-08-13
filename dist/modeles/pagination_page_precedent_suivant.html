@@ -1,7 +1,10 @@
 #ENV{bloc_ancre}
 [(#SET{separateur,'|'}|rien)]
-[<a href='[(#ENV{url}|parametre_url{#ENV{debut},''})]##ENV{ancre}' class='lien_pagination'>(#ENV{premiere}|>{1}|?{'...',''})</a> #GET{separateur}]
-
+[<a href='[(#ENV{url}|parametre_url{#ENV{debut},''})]##ENV{ancre}' class='lien_pagination'>(#ENV{premiere}|>{1}|?{'&lt;&lt;',''})</a> #GET{separateur}]
+[(#SET{i,#ENV{page_courante}|moins{#ENV{pas}}}|>{0}|?{' ',''})[
+	(#SET{item, #GET{i}|moins{1}|mult{#ENV{pas}} }|rien)
+	][(#INCLURE{fond=modeles/paginationitem}{num=#GET{i}}{texte='&lt;'}{separateur=#GET{separateur}}{url=#ENV{url}|parametre_url{#ENV{debut},#GET{item}}|ancre_url{#ENV{ancre}}}{page_courante=#ENV{page_courante}}{derniere=#ENV{derniere}})]
+]
 [(#SET{i,#ENV{premiere}}|<={#ENV{derniere}}|?{' ',''})[
 	(#SET{item, #GET{i}|moins{1}|mult{#ENV{pas}} }|rien)
 	][(#INCLURE{fond=modeles/paginationitem}{num=#GET{i}}{texte=#GET{i}}{separateur=#GET{separateur}}{url=#ENV{url}|parametre_url{#ENV{debut},#GET{item}}|ancre_url{#ENV{ancre}}}{page_courante=#ENV{page_courante}}{derniere=#ENV{derniere}})]
@@ -42,4 +45,8 @@
 	(#SET{item, #GET{i}|moins{1}|mult{#ENV{pas}} }|rien)
 	][(#INCLURE{fond=modeles/paginationitem}{num=#GET{i}}{texte=#GET{i}}{separateur=#GET{separateur}}{url=#ENV{url}|parametre_url{#ENV{debut},#GET{item}}|ancre_url{#ENV{ancre}}}{page_courante=#ENV{page_courante}}{derniere=#ENV{derniere}})]
 ]
-[#GET{separateur} <a href='[(#ENV{url}|parametre_url{#ENV{debut},#ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}})]##ENV{ancre}' class='lien_pagination'>(#ENV{derniere}|<{#ENV{nombre_pages}}|?{'...',''})</a>]
+[(#SET{i,#ENV{page_courante}|plus{#ENV{pas}}}|<{#ENV{nombre_pages}}|?{' ',''})[
+	(#SET{item, #GET{i}|moins{1}|mult{#ENV{pas}} }|rien)
+	][#GET{separateur} (#INCLURE{fond=modeles/paginationitem}{num=#GET{i}}{texte='&gt;'}{separateur=''}{url=#ENV{url}|parametre_url{#ENV{debut},#GET{item}}|ancre_url{#ENV{ancre}}}{page_courante=#ENV{page_courante}}{derniere=#ENV{derniere}})]
+]
+[#GET{separateur} <a href='[(#ENV{url}|parametre_url{#ENV{debut},#ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}})]##ENV{ancre}' class='lien_pagination'>(#ENV{derniere}|<{#ENV{nombre_pages}}|?{'&gt;&gt;',''})</a>]
