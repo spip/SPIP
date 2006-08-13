@@ -518,17 +518,10 @@ function balise_LESAUTEURS_dist ($p) {
 	if ($_lesauteurs AND $_lesauteurs != '$Pile[0][\'lesauteurs\']') {
 		$p->code = $_lesauteurs;
 	} else {
-		$nom = $p->id_boucle;
-	# On pourrait mieux faire qu'utiliser cette fonction assistante ?
-		$p->code = "sql_auteurs(" .
-			champ_sql('id_article', $p) .
-			",'" .
-			$nom .
-			"','" .
-			$p->boucles[$nom]->type_requete .
-			"','" .
-			$p->boucles[$nom]->sql_serveur .
-			"')";
+		$p->code = "recuperer_fond(
+   'modeles/lesauteurs',
+   array('id_article' => ".champ_sql('id_article', $p).")
+  )";
 	}
 
 	#$p->interdire_scripts = true;
