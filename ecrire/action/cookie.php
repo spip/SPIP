@@ -10,11 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-function action_cookie_dist() {
-	include_spip('inc/actions');
-	include_spip('inc/cookie');
-	action_spip_cookie_dist();
-}
 
 function auth_http($url) {
 
@@ -31,8 +26,11 @@ function auth_http($url) {
 	}
 }
 
-function action_spip_cookie_dist()
+
+function action_cookie_dist()
 {
+  include_spip('inc/actions');
+  include_spip('inc/cookie');
   global
     $auteur_session,
     $change_session,
@@ -42,9 +40,6 @@ function action_spip_cookie_dist()
     $essai_login,
     $id_auteur,
     $ignore_auth_http,
-    $logout,
-    $logout_public,
-    $next_session_password_md5,
     $retour,
     $session_login,
     $session_login_hidden,
@@ -52,7 +47,6 @@ function action_spip_cookie_dist()
     $session_password_md5,
     $session_remember,
     $spip_admin,
-    $spip_session,
     $test_echec_cookie,
     $url,
     $hash,
@@ -83,9 +77,7 @@ if ($test_echec_cookie == 'oui') {
 			    . ($url ? rawurlencode($url) : _DIR_RESTREINT_ABS), true);
 }
 
-// Tentative de login
 unset ($cookie_session);
-
 $redirect = ($url ? $url : _DIR_RESTREINT_ABS);
 if ($essai_login == "oui") {
 	// Recuperer le login en champ hidden
@@ -154,8 +146,7 @@ if ($cookie_admin == "non") {
 }
 else if ($cookie_admin AND $spip_admin != $cookie_admin) {
 	spip_setcookie('spip_admin', $cookie_admin, time() + 3600 * 24 * 14);
-}
-
+ }
 
 // changement de langue espace public
 if ($var_lang) {
@@ -166,7 +157,7 @@ if ($var_lang) {
 		$redirect = ereg_replace("[?&]lang=[^&]*", '', $redirect);
 		$redirect .= (strpos($redirect, "?")!==false ? "&" : "?") . "lang=$var_lang";
 	}
-}
+ }
 
 // changer de langue espace prive (ou login)
 if ($var_lang_ecrire) {
@@ -186,7 +177,7 @@ if ($var_lang_ecrire) {
 
 	$redirect = ereg_replace("[?&]lang=[^&]*", '', $redirect);
 	$redirect .= (strpos($redirect, "?")!==false ? "&" : "?") . "lang=$var_lang_ecrire";
-}
+ }
 
 // Redirection
 // Sous Apache, les cookies avec une redirection fonctionnent
