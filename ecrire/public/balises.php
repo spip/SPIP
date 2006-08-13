@@ -236,7 +236,7 @@ function balise_NOM_SITE_dist($p) {
 # Il n'existe pas de balise pour afficher generer_url_site($id_syndic),
 # a part [(#ID_SYNDIC|generer_url_site)]
 
-function balise_URL_FORUM_dist($p) {
+function balise_URL_FORUM_dist($p, $show_thread = 'false') {
 	$_id_forum = '';
 	if ($p->param && !$p->param[0][0]){
 		$_id_forum =  calculer_liste($p->param[0][1],
@@ -246,7 +246,7 @@ function balise_URL_FORUM_dist($p) {
 	}
 	if (!$_id_forum)
 		$_id_forum = champ_sql('id_forum',$p);
-	$p->code = "generer_url_forum($_id_forum)";
+	$p->code = "generer_url_forum($_id_forum, $show_thread)";
 
 	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
