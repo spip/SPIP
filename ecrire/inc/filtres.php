@@ -1354,7 +1354,7 @@ function form_hidden($action) {
 	return $hidden;
 }
 
-function calcul_bornes_pagination($max, $nombre, $courante) {
+function calcul_bornes_pagination($courante, $nombre, $max = 10) {
 	if (function_exists("bornes_pagination"))
 		return bornes_pagination($max, $nombre, $courante);
 
@@ -1372,8 +1372,6 @@ function calcul_bornes_pagination($max, $nombre, $courante) {
 // on peut la surcharger en definissant dans mes_fonctions :
 // function pagination($total, $nom, $pas, $liste) {...}
 //
-
-define('PAGINATION_MAX', 10);
 
 function calcul_pagination($total, $nom, $pas, $liste = true, $modele='dist') {
 	static $ancres = array();
@@ -1403,8 +1401,6 @@ function calcul_pagination($total, $nom, $pas, $liste = true, $modele='dist') {
 		'pas' => $pas,
 		'nombre_pages' => $nombre_pages,
 		'page_courante' => floor(intval(_request($debut))/$pas)+1,
-		'lien_pagination' => '<a href="@url@" class="lien_pagination">@item@</a>',
-		'lien_item_courant' => '<span class="on">@item@</span>',
 		'ancre' => $ancre,
 		'bloc_ancre' => $bloc_ancre
 	);
@@ -1417,18 +1413,6 @@ function calcul_pagination($total, $nom, $pas, $liste = true, $modele='dist') {
 	if (!$liste)
 		return $bloc_ancre;
 
-	// liste  = true : on retourne tout (ancre + bloc de navigation)
-
-	list ($premiere, $derniere) = calcul_bornes_pagination(
-		PAGINATION_MAX,
-		$pagination['nombre_pages'],
-		$pagination['page_courante']);
-		
-	if ($premiere == 2) $premiere = 1; # '...' inutile quand on peut mettre 0
-	
-	$pagination['premiere'] = $premiere;
-	$pagination['derniere'] = $derniere;
-	
 	return recuperer_fond("modeles/pagination_$modele",$pagination);
 }
 
@@ -1493,8 +1477,8 @@ function match($texte,$expression,$modif="UimsS"){
   return preg_match("/$expression/$modif",$texte);
 }
 
-// filtre rien qui ne renvoie rien
-function rien($texte){
+// filtre vide qui ne renvoie rien
+function vide($texte){
 	return "";
 }
 
