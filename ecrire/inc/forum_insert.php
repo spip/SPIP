@@ -252,10 +252,10 @@ function inc_forum_insert_dist() {
 	// Entrer les mots-cles associes
 	if (is_array($ajouter_mot)) mots_du_forum($ajouter_mot, $id_message);
 
-	if ($statut == 'publie') {
 	//
 	// INVALIDATION DES CACHES LIES AUX FORUMS
 	//
+	if ($statut == 'publie') {
 		include_spip('inc/invalideur');
 		suivre_invalideur ("id='id_forum/" .
 			calcul_index_forum($id_article,
@@ -271,7 +271,12 @@ function inc_forum_insert_dist() {
 			prevenir_auteurs($auteur, $email_auteur, $id_message, $id_article, $texte, $titre, $statut);
 	}
 
-	if (!$calculer_retour) 	return $retour_forum;
+	// En cas de retour sur (par exemple) {#SELF}, on ajoute quand
+	// meme #forum12 a la fin de l'url, sauf si un #ancre est explicite
+	if (!$calculer_retour)
+		return strstr('#', $retour_forum) ?
+			$retour_forum
+			: $retour_forum.'#forum'.$id_message;
 
 	// le retour automatique envoie sur le thread, ce qui permet
 	// de traiter elegamment le cas des forums moderes a priori.

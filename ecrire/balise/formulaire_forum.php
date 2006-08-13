@@ -98,7 +98,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 	}
 	// Tableau des valeurs servant au calcul d'une signature de securite.
 	// Elles seront placees en Input Hidden pour que inc/forum_insert
-	// recalcule la meme chose et verifie l'identité des resultats.
+	// recalcule la meme chose et verifie l'identite des resultats.
 	// Donc ne pas changer la valeur de ce tableau entre le calcul de
 	// la signature et la fabrication des Hidden
 	// Faire attention aussi a 0 != ''
@@ -116,7 +116,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 	$previsu = ' ';
 
 	// au premier appel (pas de Post-var nommee "retour_forum")
-	// memoriser evntuellement l'URL de retour pour y revenir apres
+	// memoriser eventuellement l'URL de retour pour y revenir apres
 	// envoi du message ; aux appels suivants, reconduire la valeur.
 	// Initialiser aussi l'auteur
 	if (!$retour_forum = rawurldecode(_request('retour_forum'))) {
@@ -126,7 +126,9 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 			// par defaut, on veut prendre url_forum(), mais elle ne sera connue
 			// qu'en sortie, on inscrit donc une valeur absurde ("!")
 			$retour_forum = "!";
-			
+			// sauf si on a passe un parametre en argument (exemple : {#SELF})
+			if ($url_param_retour)
+				$retour_forum = str_replace('&amp;', '&', $url_param_retour);
 		}
 		if (isset($_COOKIE['spip_forum_user'])
 		AND is_array($cookie_user = unserialize($_COOKIE['spip_forum_user']))) {
@@ -156,17 +158,12 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 
 		include_spip('inc/actions');
 		$hash = calculer_action_auteur('ajout_forum'.join(' ', $ids).' '.$alea);
-	}
 
-	// Poser un cookie pour ne pas retaper les infos invariables
-	include_spip('inc/cookie');
-	spip_setcookie('spip_forum_user',
-		       serialize(array('nom' => $auteur, 
-				       'email' => $email_auteur)));
-
-	// sauf si on a passe un parametre en argument (exemple : {#SELF})
-	if ($url_param_retour) {
-			$script = $url_param_retour;
+		// Poser un cookie pour ne pas retaper les infos invariables
+		include_spip('inc/cookie');
+		spip_setcookie('spip_forum_user',
+			serialize(array('nom' => $auteur,
+				'email' => $email_auteur)));
 	}
 
 	// pour la chaine de hidden
