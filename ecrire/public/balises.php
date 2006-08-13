@@ -524,7 +524,7 @@ function balise_LESAUTEURS_dist ($p) {
   )";
 	}
 
-	#$p->interdire_scripts = true;
+	$p->interdire_scripts = false; // securite apposee par recuperer_fond()
 	return $p;
 }
 
@@ -1148,23 +1148,23 @@ function balise_INCLURE_dist($p) {
 	$champ = new Inclure;
 	// on assimile {var=val} a une liste de un argument sans fonction
 	foreach ($p->param as $k => $v) {
-	  $var = $v[1][0];
-	  if ($var==NULL) break; // on est arrive sur un filtre
-	  if ($var->type != 'texte')
-		erreur_squelette(_T('zbug_parametres_inclus_incorrects'),
+		$var = $v[1][0];
+		if ($var==NULL) break; // on est arrive sur un filtre
+		if ($var->type != 'texte')
+			erreur_squelette(_T('zbug_parametres_inclus_incorrects'),
 				 $match[0]);
-	  else {
-	  	$champ->param[$k] = $v;
-	    ereg("^([^=]*)(=)?(.*)$", $var->texte,$m);
-	    if ($m[2]) {
-	      $champ->param[$k][0] = $m[1];
-	      $val = $m[3];
-	      if (ereg('^[\'"](.*)[\'"]$', $val, $m)) $val = $m[1];
-	      $champ->param[$k][1][0]->texte = $val;
-	    }
-	    else
-	      $champ->param[$k] = array($m[1]);
-	  }
+		else {
+			$champ->param[$k] = $v;
+			ereg("^([^=]*)(=)?(.*)$", $var->texte,$m);
+			if ($m[2]) {
+				$champ->param[$k][0] = $m[1];
+				$val = $m[3];
+				if (ereg('^[\'"](.*)[\'"]$', $val, $m)) $val = $m[1];
+				$champ->param[$k][1][0]->texte = $val;
+			}
+			else
+				$champ->param[$k] = array($m[1]);
+		}
 	}
 	$texte = substr($champ->apres,1);
 	$champ->apres = "";
@@ -1174,13 +1174,12 @@ function balise_INCLURE_dist($p) {
 	foreach($champ->param as $val) {
 		$var = array_shift($val);
 		$l[] = "'$var' => " . 
-		  ($val ? calculer_liste($val[0], $p->descr, $p->boucles, $p->id_boucle) :(($var =='lang') ? '$GLOBALS["spip_lang"]' : index_pile($p->id_boucle, $var, $p->boucles)))
-		  ;
+			($val ? calculer_liste($val[0], $p->descr, $p->boucles, $p->id_boucle) :(($var =='lang') ? '$GLOBALS["spip_lang"]' : index_pile($p->id_boucle, $var, $p->boucles)));
 	}
 	$code = "recuperer_fond('',array(".implode(',',$l)."))";
 
 	$commentaire = '#INCLURE ' . str_replace("\n", ' ', $code);
-	
+
 	$p->code = "\n//$commentaire.\n$code";
 	$p->interdire_scripts = false;
 	return $p;
@@ -1222,7 +1221,7 @@ function balise_SET_dist($p){
 // #GET{nom,defaut} renvoie defaut si la variable nom n'a pas ete affectee
 //
 function balise_GET_dist($p) {
-	if(function_exists('balise_ENV'))
+	if (function_exists('balise_ENV'))
 		return balise_ENV($p, '$Pile["vars"]');
 	else
 		return balise_ENV_dist($p, '$Pile["vars"]');
