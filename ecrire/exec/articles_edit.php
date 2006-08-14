@@ -99,7 +99,7 @@ function chapo_articles_edit($chapo, $articles_chapeau)
 			else $rows = 5;
 			return "<br /><B>"._T('info_chapeau')."</B>" .
 				aide ("artchap") .
-				"<BR>"._T('texte_introductif_article')."<BR>" .
+				"\n<br />"._T('texte_introductif_article')."<br />\n" .
 				"<textarea name='chapo' class='forml' rows='$rows' COLS='40' wrap=soft>" .
 				$chapo .
 				"</textarea><P>\n";
@@ -157,38 +157,23 @@ function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 	if ($champs_extra) include_spip('inc/extra');
 
 	$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');
-	return
-		"\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>" .
-		"<tr width='100%'>" .
-		"<td>" .
-		($lier_trad ?
-		 icone(_T('icone_retour'), generer_url_ecrire("articles","id_article=$lier_trad"), "article-24.gif", "rien.gif", '',false) :
-		 icone(_T('icone_retour'), generer_url_ecrire("articles","id_article=$id_trad"), "article-24.gif", "rien.gif",'',false)) .
-		"</td>\n<td>" .
-		http_img_pack('rien.gif', " ", "width='10'") .
-		"</td>\n" .
-		"<td width='100%'>" .
-	 	_T('texte_modifier_article') .
-		gros_titre($gros_titre,'',false) . 
-		"</td></tr></table><p><hr /><p>" .
+	$redirect = generer_url_ecrire("articles");
 
-		generer_url_post_ecrire("articles", ($id_article ? "id_article=$id_article" : ""),'formulaire','',' onchange="disable_other_forms(this);"') .
-		(!$new ? '' : "<input type='hidden' name='new' value='oui' />") .
-		(!$lier_trad ? '' :
-		 ("<input type='hidden' name='lier_trad' value='" .
+	$form = (!$lier_trad ? '' :
+		 ("\n<input type='hidden' name='lier_trad' value='" .
 		  $lier_trad .
 		  "' />" .
-		  "<input type='hidden' name='changer_lang' value='" .
+		  "\n<input type='hidden' name='changer_lang' value='" .
 		  $spip_lang .
 		  "' />")) .
 
 		(!(($options == "avancees" AND $articles_surtitre) OR $surtitre)?
-			("<input type='hidden' name='surtitre' value=\"$surtitre\" />") :
+			("\n<input type='hidden' name='surtitre' value=\"$surtitre\" />") :
 			( "<b>" .
 			  _T('texte_sur_titre') .
 			  "</b>" .
 			  aide ("arttitre") .
-			  "<br /><input type='text' name='surtitre' class='forml' value=\"" .
+			  "<br />\n<input type='text' name='surtitre' class='forml' value=\"" .
 			  $surtitre .
 			  "\" size='40'" .
 // Pour faire fonctionner le onchange sur Safari il faudrait modifier
@@ -208,10 +193,10 @@ function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 		  _T('texte_sous_titre') .
 		  "</b>" .
 		  aide ("arttitre") .
-		  "<br /><input type='text' name='soustitre' class='forml' value=\"" .
+		  "\n<br /><input type='text' name='soustitre' class='forml' value=\"" .
 		  $soustitre .
-		  "\" size='40' /><br /><br />") :
-		 ("<input type='hidden' name='soustitre' value=\"$soustitre\" />")) .
+		  "\" size='40' /><br /><br />\n") :
+		 ("\n<input type='hidden' name='soustitre' value=\"$soustitre\" />")) .
 
 		debut_cadre_couleur($logo, true, "", _T('titre_cadre_interieur_rubrique'). aide("artrub")) .
 
@@ -219,28 +204,28 @@ function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 
 		fin_cadre_couleur(true) .
 	
-		($new ? '' : "<input type='hidden' name='id_rubrique_old' value='$id_rubrique'>") .
+		($new ? '' : "\n<input type='hidden' name='id_rubrique_old' value='$id_rubrique'>") .
 
 		((($options == "avancees" AND $articles_descriptif) OR $descriptif)?
-		 ("<P><B>" ._T('texte_descriptif_rapide') ."</B>" .
+		 ("\n<P><B>" ._T('texte_descriptif_rapide') ."</B>" .
 		  aide ("artdesc") .
-		  "</p><br />" ._T('texte_contenu_article') ."<br />" .
+		  "</p>\n<br />" ._T('texte_contenu_article') ."<br />\n" .
 		  "<textarea name='descriptif' class='forml' rows='2' cols='40' wrap=soft>" .
 		  $descriptif .
 		  "</textarea>\n") :
-		 ("<INPUT TYPE='hidden' NAME='descriptif' VALUE=\"$descriptif\" />")) .
+		 ("<input type='hidden' name='descriptif' value=\"$descriptif\" />")) .
 
 		((($options == "avancees" AND $articles_urlref) OR $nom_site OR $url_site) ?
 		 (_T('entree_liens_sites') ."<br />\n" .
 		  _T('info_titre') ." " .
-		  "<input type='text' name='nom_site' class='forml' width='40' value=\"$nom_site\"/><br />\n" .
-		  _T('info_url') ." " .
-		  "<input type='text' name='url_site' class='forml' width='40' value=\"$url_site\"/>") : '') .
+		  "\n<input type='text' name='nom_site' class='forml' width='40' value=\"$nom_site\"/><br />\n" .
+		  _T('info_url') .
+		  "\n<input type='text' name='url_site' class='forml' width='40' value=\"$url_site\"/>\n") : '') .
 
 		chapo_articles_edit($chapo, $articles_chapeau) .
 
 		"<b>" ._T('info_texte') ."</b>" . 
-		aide ("arttexte") . "<br />" .
+		aide ("arttexte") . "<br />\n" .
 		_T('texte_enrichir_mise_a_jour') .
 		aide("raccourcis") .
 		$sup .
@@ -248,16 +233,33 @@ function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 		"<textarea id='text_area' name='texte'$att_text>$texte</textarea>\n" .
 
 		((($articles_ps AND $options == "avancees") OR $ps) ?
-		 ("<p><b>" . _T('info_post_scriptum') ."</b><br />" . "<textarea name='ps' class='forml' rows='5' cols='40' wrap=soft>" . $ps . "</textarea></p><p>\n") :
+		 ("\n<p><b>" . _T('info_post_scriptum') ."</b><br />" . "<textarea name='ps' class='forml' rows='5' cols='40' wrap=soft>" . $ps . "</textarea></p><p>\n") :
 		 ("<input type='hidden' name='ps' value=\"" . $ps . "\">")) .
 
 		(!$champs_extra ? '': extra_saisie($extra, 'articles', $id_secteur, false)) .
 
-		(!$date ? '' : ("<input type='hidden' name='date' value=\"$date\" size='40'><P>")) .
+		(!$date ? '' : ("\n<input type='hidden' name='date' value=\"$date\" size='40'><P>")) .
 
-		(!$new ? '' : ("<input type='hidden' name='statut_nouv' value=\"prepa\" SIZE='40' /><p>")) .
+		(!$new ? '' : ("\n<input type='hidden' name='statut_nouv' value=\"prepa\" SIZE='40' /><p>")) .
 
-		"<div align='right'><input class='fondo' type='submit' value='" . _T('bouton_enregistrer') . "'></div></form>";
+		"<div align='right'><input class='fondo' type='submit' value='" . _T('bouton_enregistrer') . "'></div>";
+
+	return
+		"\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>" .
+		"<tr width='100%'>" .
+		"\n<td>" .
+		($lier_trad ?
+		 icone(_T('icone_retour'), generer_url_ecrire("articles","id_article=$lier_trad"), "article-24.gif", "rien.gif", '',false) :
+		 icone(_T('icone_retour'), generer_url_ecrire("articles","id_article=$id_trad"), "article-24.gif", "rien.gif",'',false)) .
+		"</td>\n<td>" .
+		http_img_pack('rien.gif', " ", "width='10'") .
+		"</td>\n" .
+		"<td width='100%'>" .
+	 	_T('texte_modifier_article') .
+		gros_titre($gros_titre,'',false) . 
+		"</td></tr></table><p><hr />\n<p>" .
+	  generer_action_auteur("editer_article", $new ? $new : $id_article, $redirect, $form, " method='post' name='formulaire' onchange='disable_other_forms(this);'");
+
 }
 
 function exec_articles_edit_dist()
