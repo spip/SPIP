@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_editer_article_dist() {
 
+
 	include_spip('inc/actions');
 	$var_f = charger_fonction('controler_action_auteur', 'inc');
 	$var_f();
@@ -25,17 +26,21 @@ function action_editer_article_dist() {
 	if (!$id_article = intval($arg)) {
 		if ($arg != 'oui') redirige_par_entete('./');
 	        $id_article = insert_article($id_parent);
-	}
+	} 
+	  
+	$err = false;
+
+	// Enregistre l'envoi dans la BD et positionne $err si pb
+
+	articles_set($id_article, $id_parent, $lier_trad, $arg=='oui');
 
 	// id_article_bloque,  globale dans inc/presentation 
-	$redirect = _request('redirect')
-	. "&id_article=$id_article&id_article_bloque=$id_article"
-	  . ($arg=='oui' ? '&new=oui' : '')
-	  . ($lier_trad ? "&lier_trad=$lier_trad" : '') ;  
 
-	articles_set($id_article, $id_parent, $arg=='oui');
+	$redirect = urldecode(_request('redirect'))
+		. "&id_article=$id_article&id_article_bloque=$id_article"
+		. ($GLOBALS['err'] ? '&trad_err=1' : '');
 
-	redirige_par_entete(urldecode($redirect));
+	redirige_par_entete($redirect);
 }
 
 function insert_article($id_parent)
@@ -63,23 +68,30 @@ function insert_article($id_parent)
 	return $id_article;
 }
 
-function articles_set($id_article, $id_rubrique, $new)
+function articles_set($id_article, $id_rubrique, $lier_trad, $new)
 {
-
 	include_spip('inc/filtres');
 	include_spip('inc/rubriques');
-	if (!strlen($titre_article=corriger_caracteres($_POST['titre'])))
-		$titre_article = _T('info_sans_titre');
 
-	revisions_articles($id_article, $id_rubrique, $titre_article, $new);
+	$row = spip_fetch_array(spip_query("SELECT id_trad FROM spip_articles WHERE id_article=$id_article"));
+
+	$id_trad = (!$lier_trad) ? 0 : article_referent ($id_article, $row['id_trad'], $lier_trad);
+
+	if (_request('titre')) // retour de articles_edit.php
+	  revisions_articles($id_article, $id_rubrique, $id_trad, $new);
+	else // retour articles.php
+		spip_query("UPDATE spip_articles SET id_trad = $id_trad WHERE id_article = $id_article");
 }
 
-function revisions_articles ($id_article, $id_rubrique, $titre_article) {
+function revisions_articles ($id_article, $id_rubrique, $id_trad) {
 {
 	global $flag_revisions, $champs_extra;
 
 	$id_auteur =  _request('id_auteur');
 	$texte = trop_longs_articles(_request('texte_plus')) . _request('texte');
+	if (!strlen($titre_article=corriger_caracteres(_request('titre'))))
+		$titre_article = _T('info_sans_titre');
+
 	$champs = array(
 		'surtitre' => corriger_caracteres(_request('surtitre')),
 		'titre' => $titre_article,
@@ -114,7 +126,10 @@ function revisions_articles ($id_article, $id_rubrique, $titre_article) {
 		$champs_extra = extra_recup_saisie("articles", _request('id_secteur'));
 	}
 
-	spip_query("UPDATE spip_articles SET surtitre=" . spip_abstract_quote($champs['surtitre']) . ", titre=" . spip_abstract_quote($champs['titre']) . ", soustitre=" . spip_abstract_quote($champs['soustitre']) . ", id_rubrique=" .			   intval($id_rubrique) .		   ", descriptif=" . spip_abstract_quote($champs['descriptif']) . ", chapo=" . spip_abstract_quote($champs['chapo']) . ", texte=" . spip_abstract_quote($champs['texte']) . ", ps=" . spip_abstract_quote($champs['ps']) . ", url_site=" . spip_abstract_quote($champs['url_site']) . ", nom_site=" . spip_abstract_quote($champs['nom_site']) . ", date_modif=NOW() " . ($champs_extra ? (", extra = " . spip_abstract_quote($champs_extra)) : '') . " WHERE id_article=$id_article");
+	spip_query("UPDATE spip_articles SET id_trad = $id_trad WHERE id_article = $id_article");
+
+
+	spip_query("UPDATE spip_articles SET id_rubrique=$id_rubrique, id_trad=$id_trad, surtitre=" . spip_abstract_quote($champs['surtitre']) . ", titre=" . spip_abstract_quote($champs['titre']) . ", soustitre=" . spip_abstract_quote($champs['soustitre']) . ", descriptif=" . spip_abstract_quote($champs['descriptif']) . ", chapo=" . spip_abstract_quote($champs['chapo']) . ", texte=" . spip_abstract_quote($champs['texte']) . ", ps=" . spip_abstract_quote($champs['ps']) . ", url_site=" . spip_abstract_quote($champs['url_site']) . ", nom_site=" . spip_abstract_quote($champs['nom_site']) . ", date_modif=NOW() " . ($champs_extra ? (", extra = " . spip_abstract_quote($champs_extra)) : '') . " WHERE id_article=$id_article");
 
 	// Stockage des versions
 	if (($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions) {
@@ -162,6 +177,32 @@ function trop_longs_articles($texte_plus)
 					     $texte_plus[$nb_texte]);
 	}
 	return $texte_ajout;
+}
+
+function article_referent ($id_article, $id_trad, $lier_trad)
+{ 
+	global $err; // pour avertir l'appelant
+
+	$row = spip_fetch_array(spip_query("SELECT id_trad FROM spip_articles WHERE id_article=$lier_trad"));
+
+	$id_lier = $row['id_trad'];
+
+	spip_log("$id_article, $id_trad, $lier_trad, $id_lier");
+// Si l'article vise n'a pas deja de traduction, creer nouveau id_trad
+	if ($id_lier == 0) {
+			$nouveau_trad = $lier_trad;
+			spip_query("UPDATE spip_articles SET id_trad = $lier_trad WHERE id_article = $lier_trad");
+	} else {
+	  // insuffisant pour prevenir les traductions redondantes a mon avis
+		if ($id_lier == $id_trad) $err = true;
+		$nouveau_trad = $id_lier;
+		spip_query("UPDATE spip_articles SET id_trad = $id_lier WHERE id_trad = $id_lier");
+	}
+
+	if ($id_trad > 0)
+		  spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad WHERE id_trad = $id_trad");
+
+	return $nouveau_trad;
 }
 
 ?>
