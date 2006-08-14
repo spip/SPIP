@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@formulaire_petitionner
 function formulaire_petitionner($id_article, $script, $args, $ajax=false)
 {
 	global $spip_lang_right;

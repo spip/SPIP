@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 // Modifier le reglage des forums publics de l'article x
+// http://doc.spip.org/@action_poster_dist
 function action_poster_dist()
 {
 	include_spip('inc/actions');

@@ -16,6 +16,7 @@ include_spip('inc/presentation');
 include_spip('inc/mots');
 include_spip('base/abstract_sql');
 
+// http://doc.spip.org/@exec_mots_tous_dist
 function exec_mots_tous_dist()
 {
   global $acces_comite, $acces_forum, $acces_minirezo, $new, $articles, $breves, $change_type, $conf_mot, $connect_statut, $connect_toutes_rubriques, $descriptif, $id_groupe, $modifier_groupe, $obligatoire, $rubriques, $spip_lang, $spip_lang_right, $supp_group, $syndic, $texte, $unseul;

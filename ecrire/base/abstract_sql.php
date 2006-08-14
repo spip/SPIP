@@ -32,6 +32,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // - le nom de la boucle (pour le message d'erreur e'ventuel)
 // - le serveur sollicite (pour retrouver la connexion)
 
+// http://doc.spip.org/@spip_abstract_select
 function spip_abstract_select (
 	$select = array(), $from = array(), $where = array(),
 	$groupby = '', $orderby = array(), $limit = '',
@@ -59,6 +60,7 @@ function spip_abstract_select (
 		  $table, $id, $serveur);
 }
 
+// http://doc.spip.org/@spip_abstract_serveur
 function spip_abstract_serveur($f, $serveur) {
 	if (function_exists($f))
 		return $f;
@@ -72,12 +74,14 @@ function spip_abstract_serveur($f, $serveur) {
 // Les 3 fonctions suivantes exploitent le resultat de la precedente,
 // si l'include ne les a pas definies, erreur immediate
 
+// http://doc.spip.org/@spip_abstract_fetch
 function spip_abstract_fetch($res, $serveur='') {
 	if (!$serveur) return spip_fetch_array($res, SPIP_ASSOC);
 	$f = spip_abstract_serveur('spip_' . $serveur . '_fetch', $serveur);
 	return $f($res);
 }
 
+// http://doc.spip.org/@spip_abstract_count
 function spip_abstract_count($res, $serveur='')
 {
   if (!$serveur) return spip_num_rows($res);
@@ -85,6 +89,7 @@ function spip_abstract_count($res, $serveur='')
   return $f($res);
 }
 
+// http://doc.spip.org/@spip_abstract_free
 function spip_abstract_free($res, $serveur='')
 {
   if (!$serveur) return spip_free_result($res);
@@ -92,6 +97,7 @@ function spip_abstract_free($res, $serveur='')
   return $f($res);
 }
 
+// http://doc.spip.org/@spip_abstract_insert
 function spip_abstract_insert($table, $noms, $valeurs, $serveur='')
 {
   $f = (!$serveur ? 'spip_mysql_insert' :
@@ -99,6 +105,7 @@ function spip_abstract_insert($table, $noms, $valeurs, $serveur='')
   return $f($table, $noms, $valeurs);
 }
 
+// http://doc.spip.org/@spip_abstract_showtable
 function spip_abstract_showtable($table, $serveur='', $table_spip = false)
 {
 	if ($table_spip){
@@ -113,6 +120,7 @@ function spip_abstract_showtable($table, $serveur='', $table_spip = false)
 }
 
 # une composition tellement frequente...
+// http://doc.spip.org/@spip_abstract_fetsel
 function spip_abstract_fetsel(
 	$select = array(), $from = array(), $where = array(),
 	$groupby = '', $orderby = array(), $limit = '',
@@ -128,6 +136,7 @@ $sousrequete, $having, $table, $id, $serveur),
 //
 // IN (...) est limite a 255 elements, d'ou cette fonction assistante
 //
+// http://doc.spip.org/@calcul_mysql_in
 function calcul_mysql_in($val, $valeurs, $not='') {
 	if (!$valeurs) return ($not ? "0=0" : '0=1');
 

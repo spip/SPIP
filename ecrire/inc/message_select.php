@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // $messages_vus en reference pour interdire l'affichage de message en double
 
+// http://doc.spip.org/@afficher_messages
 function afficher_messages($titre, $from, $where, &$messages_vus, $afficher_auteurs = true, $important = false) {
 	global $connect_id_auteur, $couleur_foncee, $spip_lang_rtl, $spip_lang_left;
 
@@ -41,6 +42,7 @@ function afficher_messages($titre, $from, $where, &$messages_vus, $afficher_aute
 	if ($important) echo '</div></div>';#fin_cadre_couleur();
 }
 
+// http://doc.spip.org/@afficher_message_boucles
 function afficher_message_boucles($row, &$messages_vus, $voir_logo, $afficher_auteurs)
 {
 	global $connect_id_auteur, $spip_lang_left, $spip_lang_rtl;

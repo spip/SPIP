@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/meta');
 
 // Tester nos capacites
+// http://doc.spip.org/@action_tester_dist
 function action_tester_dist() {
 	global $pnmscale_command,$arg;
 

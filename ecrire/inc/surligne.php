@@ -20,6 +20,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 define("MARQUEUR_SURLIGNE",  '!-- debut_surligneconditionnel -->');
 define("MARQUEUR_FSURLIGNE", '!-- finde_surligneconditionnel -->');
 
+// http://doc.spip.org/@surligner_sans_accents
 function surligner_sans_accents ($mot) {
 	$accents =
 		/* A */ chr(192).chr(193).chr(194).chr(195).chr(196).chr(197).
@@ -44,6 +45,7 @@ function surligner_sans_accents ($mot) {
 }
 
 // tres sale
+// http://doc.spip.org/@split_by_char
 function split_by_char($str) {
 $len = strlen($str);
 $streturn = array();
@@ -53,6 +55,7 @@ $streturn[$i] = substr($str, $i, 1);
 return $streturn;
 }
 
+// http://doc.spip.org/@surligner_regexp_accents
 function surligner_regexp_accents ($mot) {
 	$accents_regexp = array(
 		"a" => "[a".chr(224).chr(225).chr(226).chr(227).chr(228).chr(229). chr(192).chr(193).chr(194).chr(195).chr(196).chr(197)."]",
@@ -80,6 +83,7 @@ function surligner_regexp_accents ($mot) {
 
 
 // mettre en rouge les mots passes dans $var_recherche
+// http://doc.spip.org/@surligner_mots
 function surligner_mots($page, $mots) {
 	global $nombre_surligne;
 	include_spip('inc/texte'); // pour le reglage de $nombre_surligne
@@ -131,6 +135,7 @@ function surligner_mots($page, $mots) {
 	}
 }
 
+// http://doc.spip.org/@trouve_surligne
 function trouve_surligne($page, $regexp) {
 	// Remplacer une occurrence de mot maxi par espace inter-tag
 	// (max 1 par paragraphe, sauf italiques etc.)

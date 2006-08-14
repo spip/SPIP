@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/suivi_versions');
 
+// http://doc.spip.org/@exec_suivi_revisions_dist
 function exec_suivi_revisions_dist()
 {
   global

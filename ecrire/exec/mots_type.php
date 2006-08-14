@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
+// http://doc.spip.org/@exec_mots_type_dist
 function exec_mots_type_dist()
 {
   global $connect_statut, $descriptif, $id_groupe, $new, $options, $texte, $titre;

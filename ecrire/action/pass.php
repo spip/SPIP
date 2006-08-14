@@ -23,6 +23,7 @@ include_spip('inc/filtres'); # pour email_valide()
 
 // fonction qu'on peut redefinir pour filtrer les adresses mail 
 
+// http://doc.spip.org/@test_oubli
 function test_oubli($email)
 {
 	if (!email_valide($email) ) 
@@ -30,6 +31,7 @@ function test_oubli($email)
 	return array('mail' => $email);
 }
 
+// http://doc.spip.org/@message_oubli
 function message_oubli($email, $param)
 {
 	if (function_exists('test_oubli'))
@@ -67,6 +69,7 @@ function message_oubli($email, $param)
 }
 
 
+// http://doc.spip.org/@formulaire_oubli_dyn
 function formulaire_oubli_dyn($p, $oubli)
 {
 
@@ -100,6 +103,7 @@ $message = '';
 		    'action' => generer_url_action('pass')));
 }
 
+// http://doc.spip.org/@action_pass_dist
 function action_pass_dist()
 {
 	install_debut_html( _T('pass_mot_oublie'));

@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@mini_afficher_rubrique
 function mini_afficher_rubrique ($id_rubrique, $rac="", $liste="", $col = 1, $rub_exclus=0) {
 	global  $spip_lang_left;
 	
@@ -108,12 +109,14 @@ function mini_afficher_rubrique ($id_rubrique, $rac="", $liste="", $col = 1, $ru
 }
 
 
+// http://doc.spip.org/@mini_hierarchie_rub
 function mini_hierarchie_rub ($id_rubrique) {
 	$row = spip_fetch_array(spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique = " . intval($id_rubrique)));
 	return $row["id_parent"];
 }
 
 
+// http://doc.spip.org/@mini_afficher_hierarchie
 function mini_afficher_hierarchie ($id_rubrique, $rac="", $rub_exclus=0) {
 	
 	$id_parent = $id_rubrique;
@@ -129,6 +132,7 @@ function mini_afficher_hierarchie ($id_rubrique, $rac="", $rub_exclus=0) {
 	
 }
 
+// http://doc.spip.org/@mini_nav_principal
 function mini_nav_principal ($id_rubrique, $rac="", $rub_exclus=0) {
 	global $couleur_foncee;
 	$ret = "<div id='".$rac."_principal' style='position: relative; height: 170px; background-color: white; border: 1px solid $couleur_foncee; overflow: auto;'>";
@@ -141,6 +145,7 @@ function mini_nav_principal ($id_rubrique, $rac="", $rub_exclus=0) {
 //
 // Affiche un mini-navigateur ajax positionne sur la rubrique $sel
 //
+// http://doc.spip.org/@mini_nav
 function mini_nav ($sel, $rac="",$fonction="", $rub_exclus=0, $aff_racine=false) {
 
 	if (!$fonction)

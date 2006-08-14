@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 # afficher un mini-navigateur de rubriques
 
+// http://doc.spip.org/@exec_selectionner_dist
 function exec_selectionner_dist()
 {
 	global $id, $exclus, $rac;

@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@formulaire_virtualiser
 function formulaire_virtualiser($id_article, $virtuel, $script, $args)
 {
 	global $spip_lang_right, $spip_lang_left;
@@ -42,6 +43,7 @@ function formulaire_virtualiser($id_article, $virtuel, $script, $args)
 	return ajax_action_auteur('virtualiser', $id_article, $r, $script, $args, $args);
 }
 
+// http://doc.spip.org/@exec_virtualiser_dist
 function exec_virtualiser_dist()
 {
 	global $id_article, $script;

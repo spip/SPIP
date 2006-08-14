@@ -18,6 +18,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Gestion du raccourci <math>...</math> en client-serveur
 //
 
+// http://doc.spip.org/@image_math
 function image_math($tex) {
 	global $traiter_math;
 	switch ($traiter_math) {
@@ -78,6 +79,7 @@ function image_math($tex) {
 
 
 // Fonction appelee par propre() s'il repere un mode <math>
+// http://doc.spip.org/@traiter_math
 function traiter_math($letexte, $source='') {
 
 	$texte_a_voir = $letexte;

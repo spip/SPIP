@@ -18,6 +18,7 @@ include_spip('inc/acces');
 include_spip('inc/texte'); // utile pour l'espace public, deja fait sinon
 
 // mais d'abord un tri par date (inverse)
+// http://doc.spip.org/@trier_par_date
 function trier_par_date($a, $b) {
 	return ($a['date'] < $b['date']);
 }
@@ -29,6 +30,7 @@ function trier_par_date($a, $b) {
 // A completer (il manque des tests, des valeurs par defaut, les enclosures,
 // differents formats de sortie, etc.)
 //
+// http://doc.spip.org/@affiche_rss
 function affiche_rss($rss, $intro = '', $fmt='') {
 	if (!$fmt) $fmt = 'rss';
 	if (function_exists($f = 'affiche_rss_'.$fmt)) {
@@ -38,6 +40,7 @@ function affiche_rss($rss, $intro = '', $fmt='') {
 		spip_log("Format $fmt inconnu");
 }
 
+// http://doc.spip.org/@affiche_rss_rss
 function affiche_rss_rss($rss, $intro = '') {
 	// entetes
 	$u = '<'.'?xml version="1.0" encoding="'.$GLOBALS['meta']['charset'].'"?'.">\n";
@@ -87,6 +90,7 @@ function affiche_rss_rss($rss, $intro = '') {
 	return array($u, 'Content-Type: text/xml; charset='.$GLOBALS['meta']['charset']);
 }
 
+// http://doc.spip.org/@affiche_rss_atom
 function affiche_rss_atom($rss, $intro = '') {
 	// entetes
 	$u = '<'.'?xml version="1.0" encoding="'.$GLOBALS['meta']['charset']
@@ -137,6 +141,7 @@ function affiche_rss_atom($rss, $intro = '') {
 	return array($u, 'Content-Type: text/xml; charset='.$GLOBALS['meta']['charset']);
 }
 
+// http://doc.spip.org/@affiche_rss_ical
 function affiche_rss_ical($rss, $intro = '') {
 
 	// entetes
@@ -191,6 +196,7 @@ END:'.$type.'
 
 
 // Suivi des revisions d'articles
+// http://doc.spip.org/@rss_suivi_versions
 function rss_suivi_versions($a) {
 	include_spip('inc/suivi_versions');
 	return  afficher_suivi_versions (0, $a['id_secteur'], $a['id_auteur'], $a['lang_choisie'], true, true);
@@ -198,6 +204,7 @@ function rss_suivi_versions($a) {
 }
 
 // Suivi des forums
+// http://doc.spip.org/@rss_suivi_forums
 function rss_suivi_forums($a, $from, $where, $lien_moderation=false) {
 	$rss = array();
 
@@ -236,6 +243,7 @@ function rss_suivi_forums($a, $from, $where, $lien_moderation=false) {
 
 
 // Suivi de la messagerie privee
+// http://doc.spip.org/@rss_suivi_messagerie
 function rss_suivi_messagerie($a) {
 	$rss = array();
 
@@ -276,6 +284,7 @@ function rss_suivi_messagerie($a) {
 }
 
 // Suivi de la page "a suivre" : articles, breves, sites proposes et publies
+// http://doc.spip.org/@rss_a_suivre
 function rss_a_suivre($a) {
 	$rss_articles = rss_articles("statut = 'prop'");
 	$rss_breves = rss_breves("statut = 'prop'");
@@ -284,6 +293,7 @@ function rss_a_suivre($a) {
 	return array_merge($rss_articles, $rss_breves, $rss_sites);
 }
 
+// http://doc.spip.org/@rss_articles
 function rss_articles($critere) {
 	$rss = array();
 	$s = spip_query("SELECT * FROM spip_articles WHERE $critere ORDER BY date DESC LIMIT 10");
@@ -305,6 +315,7 @@ function rss_articles($critere) {
 }
 
 
+// http://doc.spip.org/@rss_breves
 function rss_breves($critere) {
 	$rss = array();
 	$s = spip_query("SELECT * FROM spip_breves WHERE $critere ORDER BY date_heure DESC LIMIT 10");
@@ -323,6 +334,7 @@ function rss_breves($critere) {
 }
 
 
+// http://doc.spip.org/@rss_sites
 function rss_sites($critere) {
 	$rss = array();
 	$s = spip_query("SELECT * FROM spip_syndic WHERE $critere ORDER BY date DESC LIMIT 10");
@@ -346,6 +358,7 @@ function rss_sites($critere) {
 // On cree ensuite le RSS correspondant a l'operation
 
 
+// http://doc.spip.org/@action_rss_dist
 function action_rss_dist()
 {
   global $args, $cle, $fmt, $id, $lang, $op;

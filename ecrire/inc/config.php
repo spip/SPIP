@@ -17,6 +17,7 @@ include_spip('inc/meta');
 //
 // Appliquer les valeurs par defaut pour les options non initialisees
 //
+// http://doc.spip.org/@init_config
 function init_config() {
 	// langue par defaut du site = langue d'installation (cookie spip_lang) sinon francais
 	if (!$lang = $GLOBALS['spip_lang'])
@@ -95,6 +96,7 @@ function init_config() {
 }
 
 
+// http://doc.spip.org/@avertissement_config
 function avertissement_config() {
 	global $spip_lang_right, $spip_lang_left;
 	debut_boite_info();
@@ -112,6 +114,7 @@ function avertissement_config() {
 }
 
 
+// http://doc.spip.org/@bouton_radio
 function bouton_radio($nom, $valeur, $titre, $actif = false, $onClick="") {
 	static $id_label = 0;
 	
@@ -127,6 +130,7 @@ function bouton_radio($nom, $valeur, $titre, $actif = false, $onClick="") {
 }
 
 
+// http://doc.spip.org/@afficher_choix
 function afficher_choix($nom, $valeur_actuelle, $valeurs, $sep = "<br />") {
 	while (list($valeur, $titre) = each($valeurs)) {
 		$choix[] = bouton_radio($nom, $valeur, $titre, $valeur == $valeur_actuelle);
@@ -139,6 +143,7 @@ function afficher_choix($nom, $valeur_actuelle, $valeurs, $sep = "<br />") {
 // Gestion des modifs
 //
 
+// http://doc.spip.org/@appliquer_modifs_config
 function appliquer_modifs_config() {
 	global $adresse_site, $email_webmaster, $descriptif_site, $email_envoi, $post_dates, $tester_proxy, $test_proxy, $http_proxy, $activer_moteur;
 	global $forums_publics, $forums_publics_appliquer;
@@ -307,6 +312,7 @@ function appliquer_modifs_config() {
 
 // faudrait essayer d'etre plus malin
 
+// http://doc.spip.org/@cache_post
 function cache_post()
 {
   $res = "";
@@ -316,6 +322,7 @@ function cache_post()
     
 
 // Ne pas afficher la partie 'password' du proxy
+// http://doc.spip.org/@no_password_proxy_url
 function no_password_proxy_url($http_proxy) {
 	if ($p = @parse_url($http_proxy)
 	AND $p['pass']) {
@@ -327,6 +334,7 @@ function no_password_proxy_url($http_proxy) {
 
 
 // Function glue_url : le pendant de parse_url 
+// http://doc.spip.org/@glue_url
 function glue_url ($url){
 	if (!is_array($url)){
 		return false;

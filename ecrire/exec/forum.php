@@ -17,6 +17,7 @@ include_spip('inc/texte');
 charger_generer_url();
 include_spip('inc/rubriques');
 
+// http://doc.spip.org/@liste_numeros_forum
 function liste_numeros_forum($script, $debut, $total)
 {
 	echo "\n<p>";
@@ -30,6 +31,7 @@ function liste_numeros_forum($script, $debut, $total)
 	echo "\n</p>\n";
 }
 
+// http://doc.spip.org/@exec_forum_dist
 function exec_forum_dist()
 {
   global $connect_statut, $debut, $admin;

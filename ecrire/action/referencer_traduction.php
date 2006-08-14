@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/filtres');
 
 
+// http://doc.spip.org/@action_referencer_traduction_dist
 function action_referencer_traduction_dist() {
 	
 	include_spip('inc/actions');

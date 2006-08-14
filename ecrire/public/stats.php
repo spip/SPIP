@@ -13,8 +13,10 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 # interface obsolete (?)
+// http://doc.spip.org/@ecrire_stats
 function ecrire_stats() {public_stats_dist();}
 
+// http://doc.spip.org/@public_stats_dist
 function public_stats_dist() {
 
 	// Rejet des robots (qui sont pourtant des humains comme les autres)

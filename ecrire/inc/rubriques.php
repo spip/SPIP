@@ -16,6 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Recalculer l'ensemble des donnees associees a l'arborescence des rubriques
 // (cette fonction est a appeler a chaque modification sur les rubriques)
 //
+// http://doc.spip.org/@calculer_rubriques
 function calculer_rubriques() {
 	if (!spip_get_lock("calcul_rubriques")) return;
 
@@ -112,6 +113,7 @@ function calculer_rubriques() {
 	calculer_langues_utilisees();
 }
 
+// http://doc.spip.org/@propager_les_secteurs
 function propager_les_secteurs()
 {
 	// fixer les id_secteur des rubriques racines
@@ -157,6 +159,7 @@ function propager_les_secteurs()
 //
 // Calculer la langue des sous-rubriques et des articles
 //
+// http://doc.spip.org/@calculer_langues_rubriques_etape
 function calculer_langues_rubriques_etape() {
 	$s = spip_query("SELECT fille.id_rubrique AS id_rubrique, mere.lang AS lang
 		FROM spip_rubriques AS fille, spip_rubriques AS mere
@@ -172,6 +175,7 @@ function calculer_langues_rubriques_etape() {
 	return $t;
 }
 
+// http://doc.spip.org/@calculer_langues_rubriques
 function calculer_langues_rubriques() {
 
 	// rubriques (recursivite)
@@ -218,6 +222,7 @@ function calculer_langues_rubriques() {
 }
 
 
+// http://doc.spip.org/@enfant_rub
 function enfant_rub($collection){
 	global $couleur_foncee, $lang_dir;
 	global $spip_display, $spip_lang_left, $spip_lang_right, $spip_lang;
@@ -278,6 +283,7 @@ function enfant_rub($collection){
 
 }
 
+// http://doc.spip.org/@sous_enfant_rub
 function sous_enfant_rub($collection2){
 	global $lang_dir, $spip_lang_dir, $spip_lang_left;
 
@@ -299,6 +305,7 @@ function sous_enfant_rub($collection2){
 	return $retour;
 }
 
+// http://doc.spip.org/@afficher_enfant_rub
 function afficher_enfant_rub($id_rubrique, $afficher_bouton_creer=false) {
 	global  $spip_lang_right;
 	
@@ -341,6 +348,7 @@ function afficher_enfant_rub($id_rubrique, $afficher_bouton_creer=false) {
 	echo "</div></td></tr></table>";
 }
 
+// http://doc.spip.org/@calcul_generation
 function calcul_generation ($generation) {
 	include_spip('base/abstract_sql');
 	$lesfils = array();
@@ -354,6 +362,7 @@ function calcul_generation ($generation) {
 	return join(",",$lesfils);
 }
 
+// http://doc.spip.org/@calcul_branche
 function calcul_branche ($generation) {
 	if (!$generation) 
 		return '0';
@@ -365,6 +374,7 @@ function calcul_branche ($generation) {
 	}
 }
 
+// http://doc.spip.org/@cron_rubriques
 function cron_rubriques($t) {
 	calculer_rubriques();
 	return 1;

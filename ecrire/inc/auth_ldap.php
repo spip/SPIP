@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Authentifie via LDAP et retourne la ligne SQL decrivant l'utilisateur si ok
 
+// http://doc.spip.org/@inc_auth_ldap_dist
 function inc_auth_ldap_dist ($login, $pass) {
 
 	// Securite contre un serveur LDAP laxiste
@@ -35,6 +36,7 @@ function inc_auth_ldap_dist ($login, $pass) {
 	return $result ? spip_fetch_array($result) : array(); 
 }
 
+// http://doc.spip.org/@auth_ldap_search
 function auth_ldap_search($login, $pass)
 {
 	global $ldap_link, $ldap_base;
@@ -67,6 +69,7 @@ function auth_ldap_search($login, $pass)
 	return '';
 }
 
+// http://doc.spip.org/@auth_ldap_inserer
 function auth_ldap_inserer($dn, $statut)
 {
 	global $ldap_link, $ldap_base;

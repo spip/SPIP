@@ -17,6 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 // Appliquer le prefixe cookie
 //
+// http://doc.spip.org/@spip_setcookie
 function spip_setcookie ($name='', $value='', $expire=0, $path='AUTO', $domain='', $secure='') {
 	$name = ereg_replace ('^spip_', $GLOBALS['cookie_prefix'].'_', $name);
 	if ($path == 'AUTO') $path=$GLOBALS['cookie_path'];
@@ -33,6 +34,7 @@ function spip_setcookie ($name='', $value='', $expire=0, $path='AUTO', $domain='
 		@setcookie ($name, $value);
 }
 
+// http://doc.spip.org/@recuperer_cookies_spip
 function recuperer_cookies_spip($cookie_prefix) {
 	global $_COOKIE;
 	$prefix_long = strlen($cookie_prefix);

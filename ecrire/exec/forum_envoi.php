@@ -17,6 +17,7 @@ include_spip('inc/barre');
 include_spip('inc/forum');
 include_spip('base/abstract_sql');
 
+// http://doc.spip.org/@exec_forum_envoi_dist
 function exec_forum_envoi_dist()
 {
 global

@@ -20,6 +20,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //    mais pas dans elle-meme, les articles et sites peuvent aller
 //    n'importe ou (defaut), et les breves dans les secteurs.
 // $idem : en mode rubrique = la rubrique soi-meme
+// http://doc.spip.org/@inc_chercher_rubrique_dist
 function inc_chercher_rubrique_dist ($id_rubrique, $type, $restreint, $idem=0) {
 	global $_COOKIE;
 	global $browser_name, $browser_version;
@@ -43,6 +44,7 @@ function inc_chercher_rubrique_dist ($id_rubrique, $type, $restreint, $idem=0) {
 // compatibilite pour extensions qui utilisaient l'ancien nom
 $GLOBALS['selecteur_rubrique'] = 'inc_chercher_rubrique_dist';
 
+// http://doc.spip.org/@style_menu_rubriques
 function style_menu_rubriques($i) {
 	global $browser_name, $browser_version;
 	global $couleur_claire, $spip_lang_left;
@@ -93,6 +95,7 @@ function style_menu_rubriques($i) {
 	return array($style,$espace);
 }
 
+// http://doc.spip.org/@sous_menu_rubriques
 function sous_menu_rubriques($id_rubrique, $root, $niv, &$data, &$enfants, $exclus, $restreint, $type) {
 	global $browser_name, $browser_version;
 	static $decalage_secteur;
@@ -143,6 +146,7 @@ function sous_menu_rubriques($id_rubrique, $root, $niv, &$data, &$enfants, $excl
 }
 
 // Le selecteur de rubriques en mode classique (menu)
+// http://doc.spip.org/@selecteur_rubrique_html
 function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem=0) {
 	$data = array();
 	if ($type == 'rubrique')
@@ -187,6 +191,7 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem=0) {
 // Le selecteur de rubriques en mode Ajax
 //
 
+// http://doc.spip.org/@selecteur_rubrique_ajax
 function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0) {
 
 	## $restreint indique qu'il faut limiter les rubriques affichees

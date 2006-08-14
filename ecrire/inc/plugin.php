@@ -20,6 +20,7 @@ define('_FILE_PLUGIN_CONFIG', "plugin.xml");
 include_spip('inc/meta');
 
 // lecture des sous repertoire plugin existants
+// http://doc.spip.org/@liste_plugin_files
 function liste_plugin_files(){
 	$plugin_files=array();
 	foreach (preg_files(_DIR_PLUGINS, '/plugin[.]xml$') as $plugin) {
@@ -32,6 +33,7 @@ function liste_plugin_files(){
 }
 
 //  à utiliser pour initialiser ma variable globale $plugin
+// http://doc.spip.org/@liste_plugin_actifs
 function liste_plugin_actifs(){
   $meta_plugin = isset($GLOBALS['meta']['plugin'])?$GLOBALS['meta']['plugin']:'';
   if (strlen($meta_plugin)>0)
@@ -40,6 +42,7 @@ function liste_plugin_actifs(){
 		return array();
 }
 
+// http://doc.spip.org/@ecrire_plugin_actifs
 function ecrire_plugin_actifs($plugin,$pipe_recherche=false){
 	static $liste_pipe_manquants=array();
 	$liste_fichier_verif = array();
@@ -123,6 +126,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false){
 }
 
 // precompilation des pipelines
+// http://doc.spip.org/@pipeline_precompile
 function pipeline_precompile(){
 	global $spip_pipeline, $spip_matrice;
 	$liste_fichier_verif = array();
@@ -168,8 +172,10 @@ function pipeline_precompile(){
 	return $liste_fichier_verif;
 }
 
+// http://doc.spip.org/@verification_precompile
 function verification_precompile($liste_fichier_verif){
 	$start_file = "<"."?php\nif (!defined('_ECRIRE_INC_VERSION')) return;
+	// http://doc.spip.org/@verifier_presence_plugins
 	function verifier_presence_plugins(){
 		\$ok = true;";
 	$end_file = "
@@ -185,6 +191,7 @@ function verification_precompile($liste_fichier_verif){
 }
 
 // pas sur que ça serve juste au cas où
+// http://doc.spip.org/@liste_plugin_inactifs
 function liste_plugin_inactifs(){
 	return array_diff (liste_plugin_files(),liste_plugin_actifs());
 }
@@ -193,6 +200,7 @@ function liste_plugin_inactifs(){
 // penser à faire une maj du cache =>  ecrire_meta()
 // en principe cela doit aussi initialiser la valeur à vide si elle n'esite pas 
 // risque de pb en php5 à cause du typage ou de null (vérifier dans la doc php)
+// http://doc.spip.org/@verif_plugin
 function verif_plugin($pipe_recherche = false){
 	$plugin_actifs = liste_plugin_actifs();
 	$plugin_liste = liste_plugin_files();
@@ -202,6 +210,7 @@ function verif_plugin($pipe_recherche = false){
 }
 
 // mise à jour des données si envoi via formulaire
+// http://doc.spip.org/@enregistre_modif_plugin
 function enregistre_modif_plugin(){
   // recuperer les plugins dans l'ordre des $_POST
   $test = array();
@@ -232,6 +241,7 @@ function enregistre_modif_plugin(){
 	//echo "mise à jour ok";
 }
 
+// http://doc.spip.org/@ordonne_plugin
 function ordonne_plugin(){
 	$liste = liste_plugin_actifs();
 	$liste_triee = array();
@@ -248,6 +258,7 @@ function ordonne_plugin(){
 	ecrire_metas();
 }
 
+// http://doc.spip.org/@parse_plugin_xml
 function parse_plugin_xml($texte){
 	$out = array();
   // enlever les commentaires
@@ -293,6 +304,7 @@ function parse_plugin_xml($texte){
 		return $texte;
 }
 
+// http://doc.spip.org/@applatit_arbre
 function applatit_arbre($arbre,$separateur = " "){
 	$s = "";
 	if (is_array($arbre))
@@ -312,6 +324,7 @@ function applatit_arbre($arbre,$separateur = " "){
 		}
 	return substr($s,0,strlen($s)-strlen($separateur));
 }
+// http://doc.spip.org/@chaines_lang
 function chaines_lang($texte){
 	// TODO : prendre en charge le fichier langue specifique du plugin
 	// meme si pas encore charge
@@ -324,6 +337,7 @@ function chaines_lang($texte){
 }
 
 // lecture du fichier de configuration d'un plugin
+// http://doc.spip.org/@plugin_get_infos
 function plugin_get_infos($plug){
   $ret = array();
   if ((@file_exists(_DIR_PLUGINS))&&(is_dir(_DIR_PLUGINS))){
@@ -363,6 +377,7 @@ function plugin_get_infos($plug){
 	return $ret;
 }
 
+// http://doc.spip.org/@plugin_verifie_conformite
 function plugin_verifie_conformite($plug,&$arbre){
 	$silence = false;
 	if (isset($arbre['plugin'])&&is_array($arbre['plugin']))
@@ -442,6 +457,7 @@ function plugin_verifie_conformite($plug,&$arbre){
 	}
 }
 
+// http://doc.spip.org/@verifie_include_plugins
 function verifie_include_plugins(){
 	global $auteur_session;
 	if ($auteur_session['statut']!='0minirezo') return;

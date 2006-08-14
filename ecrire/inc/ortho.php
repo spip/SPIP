@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Mettre a jour la liste locale des miroirs
+// http://doc.spip.org/@maj_miroirs_ortho
 function maj_miroirs_ortho() {
 	$liste = explode(" ", $GLOBALS['meta']["liste_miroirs_ortho"]);
 	$miroirs_old = array();
@@ -51,6 +52,7 @@ function maj_miroirs_ortho() {
 }
 
 // Lire la liste des miroirs et les langues associees
+// http://doc.spip.org/@lire_miroirs_ortho
 function lire_miroirs_ortho() {
 	global $miroirs_ortho, $index_miroirs_ortho, $duree_cache_miroirs_ortho;
 
@@ -91,6 +93,7 @@ function lire_miroirs_ortho() {
 }
 
 // Sauvegarder les infos de langues pour le miroir
+// http://doc.spip.org/@ecrire_miroir_ortho
 function ecrire_miroir_ortho($url, $langs) {
 	global $index_miroirs_ortho;
 
@@ -100,6 +103,7 @@ function ecrire_miroir_ortho($url, $langs) {
 	ecrire_meta("miroir_ortho_$index", join(" ", $s));
 }
 
+// http://doc.spip.org/@ajouter_langue_miroir
 function ajouter_langue_miroir($url, $lang) {
 	global $miroirs_ortho;
 	$langs = $miroirs_ortho[$url];
@@ -108,6 +112,7 @@ function ajouter_langue_miroir($url, $lang) {
 	ecrire_miroir_ortho($url, $langs);
 }
 
+// http://doc.spip.org/@enlever_langue_miroir
 function enlever_langue_miroir($url, $lang) {
 	global $miroirs_ortho;
 	$langs = $miroirs_ortho[$url];
@@ -116,6 +121,7 @@ function enlever_langue_miroir($url, $lang) {
 	ecrire_miroir_ortho($url, $langs);
 }
 
+// http://doc.spip.org/@reset_miroir
 function reset_miroir($url) {
 	global $miroirs_ortho;
 	ecrire_miroir_ortho($url, array());
@@ -124,6 +130,7 @@ function reset_miroir($url) {
 //
 // Renvoie la liste des miroirs utilisables pour une langue donnee
 //
+// http://doc.spip.org/@chercher_miroirs_ortho
 function chercher_miroirs_ortho($lang) {
 	global $miroirs_ortho;
 	
@@ -143,6 +150,7 @@ function chercher_miroirs_ortho($lang) {
 	return $result;
 }
 
+// http://doc.spip.org/@choisir_miroirs_ortho
 function choisir_miroirs_ortho($lang) {
 	$liste = chercher_miroirs_ortho($lang);
 	if (!count($liste)) return false;
@@ -156,6 +164,7 @@ function choisir_miroirs_ortho($lang) {
 //
 // Envoyer une requete a un serveur d'orthographe
 //
+// http://doc.spip.org/@post_ortho
 function post_ortho($url, $texte, $lang) {
 
 	$gz = ($GLOBALS['flag_gz'] && strlen($texte) >= 200);
@@ -200,6 +209,7 @@ function post_ortho($url, $texte, $lang) {
 //
 // Verifier si un serveur gere une langue donnee
 //
+// http://doc.spip.org/@verifier_langue_miroir
 function verifier_langue_miroir($url, $lang) {
 	// Envoyer une requete bidon
 	$result = post_ortho($url, " ", $lang);
@@ -219,6 +229,7 @@ function verifier_langue_miroir($url, $lang) {
 //
 // Gestion du dictionnaire local
 //
+// http://doc.spip.org/@suggerer_dico_ortho
 function suggerer_dico_ortho(&$mots, $lang) {
 	$result = spip_query("SELECT mot FROM spip_ortho_dico WHERE lang=" . spip_abstract_quote($lang) . " AND mot IN (".join(", ", array_map('spip_abstract_quote', $mots)).")");
 
@@ -238,6 +249,7 @@ function suggerer_dico_ortho(&$mots, $lang) {
 	return $bons;
 }
 
+// http://doc.spip.org/@ajouter_dico_ortho
 function ajouter_dico_ortho($mot, $lang) {
 	global $connect_id_auteur;
 
@@ -245,11 +257,13 @@ function ajouter_dico_ortho($mot, $lang) {
 
 }
 
+// http://doc.spip.org/@supprimer_dico_ortho
 function supprimer_dico_ortho($mot, $lang) {
 	spip_query("DELETE FROM spip_ortho_dico WHERE lang=" . spip_abstract_quote($lang) . " AND mot=" . spip_abstract_quote($mot));
 
 }
 
+// http://doc.spip.org/@gerer_dico_ortho
 function gerer_dico_ortho($lang) {
 	global $ajout_ortho, $supp_ortho;
 	if ($mot = strval($ajout_ortho)) {
@@ -264,6 +278,7 @@ function gerer_dico_ortho($lang) {
 //
 // Gestion du cache de corrections
 //
+// http://doc.spip.org/@suggerer_cache_ortho
 function suggerer_cache_ortho(&$mots, $lang) {
 	global $duree_cache_ortho;
 
@@ -290,6 +305,7 @@ function suggerer_cache_ortho(&$mots, $lang) {
 	return $suggest;
 }
 
+// http://doc.spip.org/@ajouter_cache_ortho
 function ajouter_cache_ortho($tous, $mauvais, $lang) {
 	global $duree_cache_ortho;
 
@@ -318,6 +334,7 @@ function ajouter_cache_ortho($tous, $mauvais, $lang) {
 //
 // Cette fonction doit etre appelee pour reecrire le texte en utf-8 "propre"
 //
+// http://doc.spip.org/@preparer_ortho
 function preparer_ortho($texte, $lang) {
 	include_spip('inc/charsets');
 
@@ -329,6 +346,7 @@ function preparer_ortho($texte, $lang) {
 		return unicode_to_utf_8(html2unicode(charset2unicode($texte, $charset, true)));
 }
 
+// http://doc.spip.org/@afficher_ortho
 function afficher_ortho($texte) {
 	$charset = $GLOBALS['meta']['charset'];
 	if ($charset == 'utf-8') return $texte;
@@ -344,6 +362,7 @@ function afficher_ortho($texte) {
 // Cette fonction envoie le texte prepare a un serveur d'orthographe
 // et retourne un tableau de mots mal orthographies associes chacun a un tableau de mots suggeres
 //
+// http://doc.spip.org/@corriger_ortho
 function corriger_ortho($texte, $lang, $charset = 'AUTO') {
 	include_spip('inc/charsets');
 	include_spip("inc/indexation");
@@ -465,6 +484,7 @@ function corriger_ortho($texte, $lang, $charset = 'AUTO') {
 // Fonctions d'affichage HTML
 //
 
+// http://doc.spip.org/@panneau_ortho
 function panneau_ortho($ortho_result) {
 	global $id_suggest;
 
@@ -478,6 +498,7 @@ function panneau_ortho($ortho_result) {
 
 	echo "<script type='text/javascript'><!--
 	var curr_suggest = null;
+	// http://doc.spip.org/@suggest
 	function suggest(id) {
 		var menu_box;
 		if (curr_suggest)
@@ -556,6 +577,7 @@ function panneau_ortho($ortho_result) {
 }
 
 
+// http://doc.spip.org/@souligner_match_ortho
 function souligner_match_ortho(&$texte, $cherche, $remplace) {
 	// Eviter les &mdash;, etc.
 	if ($cherche{0} == '&' AND $cherche{strlen($cherche) - 1} == ';') return;
@@ -587,6 +609,7 @@ function souligner_match_ortho(&$texte, $cherche, $remplace) {
 	}
 }
 
+// http://doc.spip.org/@souligner_ortho
 function souligner_ortho($texte, $lang, $ortho_result) {
 	global $id_suggest;
 	$vu = array();
@@ -633,6 +656,7 @@ function souligner_ortho($texte, $lang, $ortho_result) {
 	return $texte;
 }
 
+// http://doc.spip.org/@init_ortho
 function init_ortho() {
 	global $duree_cache_ortho, $duree_cache_miroirs_ortho;
  

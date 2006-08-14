@@ -17,6 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Fonctions de gestion de l'acces restreint aux rubriques
 //
 
+// http://doc.spip.org/@acces_rubrique
 function acces_rubrique($id_rubrique) {
 	global $connect_toutes_rubriques;
 	global $connect_id_rubrique;
@@ -24,6 +25,7 @@ function acces_rubrique($id_rubrique) {
 	return ($connect_toutes_rubriques OR isset($connect_id_rubrique[$id_rubrique]));
 }
 
+// http://doc.spip.org/@acces_restreint_rubrique
 function acces_restreint_rubrique($id_rubrique) {
 	global $connect_id_rubrique;
 	global $connect_statut;
@@ -31,12 +33,14 @@ function acces_restreint_rubrique($id_rubrique) {
 	return ($connect_statut == "0minirezo" AND isset($connect_id_rubrique[$id_rubrique]));
 }
 
+// http://doc.spip.org/@acces_mots
 function acces_mots() {
 	global $connect_toutes_rubriques;
 
 	return $connect_toutes_rubriques;
 }
 
+// http://doc.spip.org/@auth_rubrique
 function auth_rubrique()
 {
 	global $connect_id_auteur, $connect_toutes_rubriques, $connect_id_rubrique;
@@ -64,6 +68,7 @@ function auth_rubrique()
 // Si vide se rabattre sur le mode d'inscription 
 // (compatibilite vieille version ou redac/forum etait mutuellement exclusif)
 
+// http://doc.spip.org/@acces_statut
 function acces_statut($id_auteur, $statut, $bio)
 {
 	if ($statut == 'nouveau') {
@@ -74,6 +79,7 @@ function acces_statut($id_auteur, $statut, $bio)
 	return $statut;
 }
 
+// http://doc.spip.org/@inc_auth_dist
 function inc_auth_dist() {
 	global $auth_can_disconnect, $ignore_auth_http, $ignore_remote_user;
 	global $prefs, $connect_id_auteur, $connect_login;
@@ -174,6 +180,7 @@ function inc_auth_dist() {
 	return "";
 }
 
+// http://doc.spip.org/@auth_prefs
 function auth_prefs()
 {
 	if (!$GLOBALS['set_disp'] = $_COOKIE['spip_display'])
@@ -189,6 +196,7 @@ function auth_prefs()
 // soit parce que la table des auteurs a changee (restauration etc)
 // Pas la peine d'insister.  Envoyer un message clair au client.
 
+// http://doc.spip.org/@auth_areconnecter
 function auth_areconnecter($auth_login)
 {
 	include_spip('inc/minipres');
@@ -203,6 +211,7 @@ function auth_areconnecter($auth_login)
 
 // redemande login, avec nettoyage
 
+// http://doc.spip.org/@auth_arefaire
 function auth_arefaire()
 {
 	$url = rawurlencode(str_replace('/./', '/',

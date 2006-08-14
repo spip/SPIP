@@ -11,6 +11,7 @@
 \***************************************************************************/
 
 
+// http://doc.spip.org/@inc_install_ldap3
 function inc_install_ldap3()
 {
 	global $adresse_ldap, $login_ldap, $pass_ldap, $port_ldap, $tls_ldap, $protocole_ldap, $spip_lang_right;

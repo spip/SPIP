@@ -13,6 +13,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@afficher_debug_contexte
 function afficher_debug_contexte($env) {
 	static $n;
 	$n++;
@@ -42,6 +43,7 @@ function afficher_debug_contexte($env) {
 // Si le code php produit des erreurs, on les affiche en surimpression
 // sauf pour un visiteur non admin (lui ne voit rien de special)
 // ajouter &var_mode=debug pour voir les erreurs et en parler sur spip@rezo.net
+// http://doc.spip.org/@affiche_erreurs_page
 function affiche_erreurs_page($tableau_des_erreurs) {
 
 	$GLOBALS['bouton_admin_debug'] = true;
@@ -66,6 +68,7 @@ function affiche_erreurs_page($tableau_des_erreurs) {
 // Si une boucle cree des soucis, on peut afficher la requete fautive
 // avec son code d'erreur
 //
+// http://doc.spip.org/@erreur_requete_boucle
 function erreur_requete_boucle($query, $id_boucle, $type, $errno, $erreur) {
 
 	$GLOBALS['bouton_admin_debug'] = true;
@@ -108,6 +111,7 @@ function erreur_requete_boucle($query, $id_boucle, $type, $errno, $erreur) {
 //
 // Erreur de syntaxe des squelettes : memoriser le code fautif
 //
+// http://doc.spip.org/@erreur_squelette
 function erreur_squelette($message='', $lieu='') {
 	global $tableau_des_erreurs;
 	global $auteur_session;
@@ -148,6 +152,7 @@ function erreur_squelette($message='', $lieu='') {
 // appelee a chaque sortie de boucle (cf compilo.php) et a chaque requete
 // dans ce derniers cas on n'a pas le nom du squelette
 
+// http://doc.spip.org/@boucle_debug_resultat
 function boucle_debug_resultat ($id, $type, $resultat) {
 	global $debug_objets;
 
@@ -164,6 +169,7 @@ function boucle_debug_resultat ($id, $type, $resultat) {
 }
 
 // appelee a chaque sortie de sequence (compilo.php)
+// http://doc.spip.org/@debug_sequence
 function debug_sequence($id, $nom, $niv, $sequence) {
 	global $debug_objets;
 
@@ -177,6 +183,7 @@ function debug_sequence($id, $nom, $niv, $sequence) {
 }
 
 // appelee a chaque compilation de boucle (compilo.php)
+// http://doc.spip.org/@boucle_debug_compile
 function boucle_debug_compile ($id, $nom, $code) {
 	global $debug_objets;
 
@@ -184,6 +191,7 @@ function boucle_debug_compile ($id, $nom, $code) {
 }
 
 // appelee a chaque compilation de squelette (compilo.php)
+// http://doc.spip.org/@squelette_debug_compile
 function squelette_debug_compile($nom, $sourcefile, $code, $squelette) {
 	global $debug_objets;
 
@@ -200,6 +208,7 @@ function squelette_debug_compile($nom, $sourcefile, $code, $squelette) {
 }
 
 // appelee a chaque analyse syntaxique de squelette
+// http://doc.spip.org/@boucle_debug
 function boucle_debug ($nom, $id_parent, $id, $type, $crit, $avant, $milieu, $apres, $altern) {
 	global $debug_objets;
 	$debug_objets['courant'] = $nom;
@@ -217,6 +226,7 @@ function boucle_debug ($nom, $id_parent, $id, $type, $crit, $avant, $milieu, $ap
 	  (!$altern ? "" : "$altern<//B$id>");
 }
 
+// http://doc.spip.org/@trouve_boucle_debug
 function trouve_boucle_debug($n, $nom, $debut=0, $boucle = "")
 {
 	global $debug_objets;
@@ -250,6 +260,7 @@ function trouve_boucle_debug($n, $nom, $debut=0, $boucle = "")
 	return array($nom, $boucle, $n-$debut);
 }	  
 
+// http://doc.spip.org/@trouve_squelette_inclus
 function trouve_squelette_inclus($script)
 {
   global $debug_objets;
@@ -270,6 +281,7 @@ function trouve_squelette_inclus($script)
   return "";
 }
 
+// http://doc.spip.org/@reference_boucle_debug
 function reference_boucle_debug($n, $nom, $self)
 {
   list($skel, $boucle, $ligne) = trouve_boucle_debug($n, $nom);
@@ -290,6 +302,7 @@ function reference_boucle_debug($n, $nom, $self)
 
 // affiche un texte avec numero de ligne et ancre.
 
+// http://doc.spip.org/@ancre_texte
 function ancre_texte($texte, $fautifs=array())
 {
 	global $var_mode_ligne;
@@ -318,6 +331,7 @@ function ancre_texte($texte, $fautifs=array())
 }
 
 // l'environnement graphique du debuggueur 
+// http://doc.spip.org/@debug_dumpfile
 function debug_dumpfile ($texte, $fonc, $type) {
 	global $debug_objets, $var_mode_objet, $var_mode_affiche;
 	global $auteur_session;

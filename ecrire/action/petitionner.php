@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@action_petitionner_dist
 function action_petitionner_dist() {
 
 	include_spip('inc/actions');

@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 // Charger un fichier langue
 //
+// http://doc.spip.org/@chercher_module_lang
 function chercher_module_lang($module, $lang = '') {
 	if ($lang)
 		$lang = '_'.$lang;
@@ -27,6 +28,7 @@ function chercher_module_lang($module, $lang = '') {
 	return include_spip($module.$lang, false);
 }
 
+// http://doc.spip.org/@charger_langue
 function charger_langue($lang, $module = 'spip') {
 	if ($fichier_lang = chercher_module_lang($module, $lang)) {
 		$GLOBALS['idx_lang']='i18n_'.$module.'_'.$lang;
@@ -53,6 +55,7 @@ function charger_langue($lang, $module = 'spip') {
 //
 // Surcharger le fichier de langue courant avec un autre (tordu, hein...)
 //
+// http://doc.spip.org/@surcharger_langue
 function surcharger_langue($fichier) {
 
 	$idx_lang_normal = $GLOBALS['idx_lang'];
@@ -74,6 +77,7 @@ function surcharger_langue($fichier) {
 //
 // Changer la langue courante
 //
+// http://doc.spip.org/@changer_langue
 function changer_langue($lang) {
 	global $all_langs, $spip_lang_rtl, $spip_lang_right, $spip_lang_left, $spip_lang_dir, $spip_dir_lang;
 
@@ -105,6 +109,7 @@ function changer_langue($lang) {
 //
 // Regler la langue courante selon les infos envoyees par le brouteur
 //
+// http://doc.spip.org/@regler_langue_navigateur
 function regler_langue_navigateur() {
 	$accept_langs = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
 	if (is_array($accept_langs)) {
@@ -122,6 +127,7 @@ function regler_langue_navigateur() {
 //
 // Traduire une chaine internationalisee
 //
+// http://doc.spip.org/@traduire_chaine
 function traduire_chaine($code) {
 	global $spip_lang;
 
@@ -173,6 +179,7 @@ function traduire_chaine($code) {
 }
 
 
+// http://doc.spip.org/@traduire_nom_langue
 function traduire_nom_langue($lang) {
 	include_spip('inc/lang_liste');
 	include_spip('inc/charsets');
@@ -188,6 +195,7 @@ function traduire_nom_langue($lang) {
 // alphabet arabe a priori), hebreu, yiddish (langues ecrites en alphabet
 // hebreu a priori), 'droitier' sinon.
 // C'est utilise par #LANG_DIR, #LANG_LEFT, #LANG_RIGHT.
+// http://doc.spip.org/@lang_dir
 function lang_dir($lang, $droitier='ltr', $gaucher='rtl') {
 	if ($lang=='ar' OR $lang=='fa' OR $lang == 'ku' OR $lang == 'ps'
 	OR $lang == 'ur' OR $lang == 'he' OR $lang == 'yi')
@@ -196,6 +204,7 @@ function lang_dir($lang, $droitier='ltr', $gaucher='rtl') {
 		return $droitier;
 }
 
+// http://doc.spip.org/@lang_typo
 function lang_typo($lang) {
 	if ($lang == 'eo' OR $lang == 'fr' OR substr($lang, 0, 3) == 'fr_' OR $lang == 'cpf')
 		return 'fr';
@@ -206,6 +215,7 @@ function lang_typo($lang) {
 }
 
 // service pour que l'espace prive reflete la typo et la direction des objets affiches
+// http://doc.spip.org/@changer_typo
 function changer_typo($lang = '', $source = '') {
 	global $lang_typo, $lang_dir, $dir_lang;
 
@@ -223,6 +233,7 @@ function changer_typo($lang = '', $source = '') {
 }
 
 // selectionner une langue
+// http://doc.spip.org/@lang_select
 function lang_select ($lang='') {
 	global $pile_langues, $spip_lang;
 	array_push($pile_langues, $spip_lang);
@@ -230,6 +241,7 @@ function lang_select ($lang='') {
 }
 
 // revenir a la langue precedente
+// http://doc.spip.org/@lang_dselect
 function lang_dselect ($rien='') {
 	global $pile_langues;
 	changer_langue(array_pop($pile_langues));
@@ -242,6 +254,7 @@ function lang_dselect ($rien='') {
 // - 'var_lang' = langue de l'article, espace public
 // - 'changer_lang' = langue de l'article, espace prive
 // 
+// http://doc.spip.org/@menu_langues
 function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $herit = '', $lien='') {
 	global $couleur_foncee, $connect_id_auteur;
 
@@ -290,6 +303,7 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	  . "</form>\n";
 }
 
+// http://doc.spip.org/@liste_options_langues
 function liste_options_langues($nom_select, $default='', $herit='') {
 
 	if ($default == '') $default = $GLOBALS['spip_lang'];
@@ -334,6 +348,7 @@ function liste_options_langues($nom_select, $default='', $herit='') {
 
 // Cette fonction calcule la liste des langues reellement utilisees dans le
 // site public
+// http://doc.spip.org/@calculer_langues_utilisees
 function calculer_langues_utilisees () {
 	$langues_utilisees = array();
 
@@ -368,6 +383,7 @@ function calculer_langues_utilisees () {
 // la variable de personnalisation $forcer_lang ; elle renvoie le brouteur
 // si necessaire vers l'URL xxxx?lang=ll
 //
+// http://doc.spip.org/@verifier_lang_url
 function verifier_lang_url() {
 	global $_GET, $_COOKIE, $spip_lang;
 
@@ -400,10 +416,12 @@ function verifier_lang_url() {
 //
 // Selection de langue haut niveau
 //
+// http://doc.spip.org/@utiliser_langue_site
 function utiliser_langue_site() {
 	changer_langue($GLOBALS['langue_site']);
 }
 
+// http://doc.spip.org/@utiliser_langue_visiteur
 function utiliser_langue_visiteur() {
 	global $_COOKIE;
 
@@ -421,6 +439,7 @@ function utiliser_langue_visiteur() {
 
 // Une fonction qui donne le repertoire ou trouver des fichiers de langue
 // note : pourrait en donner une liste... complique
+// http://doc.spip.org/@repertoire_lang
 function repertoire_lang($module='spip', $lang='fr') {
 	# valeur forcee (par ex.sur spip.net), old style, a faire disparaitre
 	if (defined('_DIR_LANG'))
@@ -437,6 +456,7 @@ function repertoire_lang($module='spip', $lang='fr') {
 //
 // Initialisation
 //
+// http://doc.spip.org/@init_langues
 function init_langues() {
 	global $all_langs, $langue_site;
 	global $pile_langues, $lang_typo, $lang_dir;

@@ -10,6 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+// http://doc.spip.org/@inc_install_
 function inc_install_()
 {
 	global $spip_lang_right;

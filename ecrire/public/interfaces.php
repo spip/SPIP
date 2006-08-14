@@ -16,6 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Definition des noeuds de l'arbre de syntaxe abstraite
 
+// http://doc.spip.org/@Texte
 class Texte {
 	var $type = 'texte';
 	var $texte;
@@ -23,6 +24,7 @@ class Texte {
 	var $ligne = 0; 
 }
 
+// http://doc.spip.org/@Inclure
 class Inclure {
 	var $type = 'include';
 	var $texte;
@@ -34,6 +36,7 @@ class Inclure {
 //
 // encodage d'une boucle SPIP en un objet PHP
 //
+// http://doc.spip.org/@Boucle
 class Boucle {
 	var $type = 'boucle';
 	var $id_boucle;
@@ -82,6 +85,7 @@ class Boucle {
 
 // sous-noeud du precedent
 
+// http://doc.spip.org/@Critere
 class Critere {
 	var $op;
 	var $not;	
@@ -89,6 +93,7 @@ class Critere {
 	var $ligne = 0; 
 }
 
+// http://doc.spip.org/@Champ
 class Champ {
 	var $type = 'champ';
 	var $nom_champ;
@@ -113,6 +118,7 @@ class Champ {
 }
 
 
+// http://doc.spip.org/@Idiome
 class Idiome {
 	var $type = 'idiome';
 	var $nom_champ = ""; // la chaine a traduire
@@ -130,6 +136,7 @@ class Idiome {
 	var $ligne = 0; 
 }
 
+// http://doc.spip.org/@Polyglotte
 class Polyglotte {
 	var $type = 'polyglotte';
 	var $traductions = array(); // les textes ou choisir

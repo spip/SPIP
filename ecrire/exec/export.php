@@ -14,6 +14,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Conversion timestamp MySQL (format ascii) en Unix (format integer)
+// http://doc.spip.org/@mysql_timestamp_to_time
 function mysql_timestamp_to_time($maj)
 {
 	$t_an = substr($maj, 0, 4);
@@ -29,6 +30,7 @@ function mysql_timestamp_to_time($maj)
 
 // Liste un sommaire d'objets de n'importe quel type
 // a la condition d'etre publics et plus recents que $maj
+// http://doc.spip.org/@liste_objets
 function liste_objets($result, $type, $maj) {
 
 	$res = array();
@@ -50,6 +52,7 @@ function liste_objets($result, $type, $maj) {
 
 // Liste un sommaire recursif de rubriques
 // a condition que la mise a jour soit plus recente que $maj
+// http://doc.spip.org/@liste_rubriques
 function liste_rubriques($id_rubrique) {
 	global $maj;
 	static $rubriques = array();
@@ -80,6 +83,7 @@ function liste_rubriques($id_rubrique) {
 	return $rubriques;
 }
 
+// http://doc.spip.org/@exec_export_dist
 function exec_export_dist()
 {
 

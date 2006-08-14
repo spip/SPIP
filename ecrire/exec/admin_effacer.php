@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
+// http://doc.spip.org/@exec_admin_effacer_dist
 function exec_admin_effacer_dist()
 {
   global $connect_statut, $connect_toutes_rubriques, $couleur_foncee;

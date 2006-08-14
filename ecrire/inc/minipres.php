@@ -19,6 +19,7 @@ utiliser_langue_visiteur();
 // Presentation des pages d'installation et d'erreurs
 //
 
+// http://doc.spip.org/@install_debut_html
 function install_debut_html($titre = 'AUTO') {
 	include_spip('inc/filtres');
 	include_spip('inc/headers');
@@ -53,11 +54,13 @@ function install_debut_html($titre = 'AUTO') {
 <tr><td  class='serif'>";
 }
 
+// http://doc.spip.org/@install_fin_html
 function install_fin_html() {
 
 	echo '</td></tr></table></body></html>';
 }
 
+// http://doc.spip.org/@minipres
 function minipres($titre, $corps="")
 {
 	install_debut_html($titre);
@@ -71,10 +74,12 @@ function minipres($titre, $corps="")
 //
 
 // en hebreu le ? ne doit pas etre inverse
+// http://doc.spip.org/@aide_lang_dir
 function aide_lang_dir($spip_lang,$spip_lang_rtl) {
 	return ($spip_lang<>'he') ? $spip_lang_rtl : '';
 }
 
+// http://doc.spip.org/@aide
 function aide($aide='') {
 	global $spip_lang, $spip_lang_rtl, $spip_display;
 
@@ -94,6 +99,7 @@ function aide($aide='') {
 //
 // Mention de la revision SVN courante de l'espace restreint standard
 // (numero non garanti pour l'espace public et en cas de mutualisation)
+// http://doc.spip.org/@version_svn_courante
 function version_svn_courante($dir) {
 	if (!$dir) $dir = '.';
 	if (!lire_fichier($dir . '/.svn/entries', $c)) return 0;
@@ -101,6 +107,7 @@ function version_svn_courante($dir) {
 	return max($r1[1]);
 }
 
+// http://doc.spip.org/@info_copyright
 function info_copyright() {
 	global $spip_version_affichee, $spip_lang;
 
@@ -121,6 +128,7 @@ function info_copyright() {
 
 // normalement il faudrait creer exec/info.php, mais pour mettre juste ca:
 
+// http://doc.spip.org/@exec_info_dist
 function exec_info_dist() {
 	global $connect_statut;
 	if ($connect_statut == '0minirezo') phpinfo();
@@ -130,6 +138,7 @@ function exec_info_dist() {
 // Tester si Ajax fonctionne pour ce brouteur
 // (si on arrive la c'est que c'est bon, donc poser le cookie)
 
+// http://doc.spip.org/@exec_test_ajax_dist
 function exec_test_ajax_dist() {
 	switch (_request('js')) {
 		// on est appele par <noscript>
@@ -147,6 +156,7 @@ function exec_test_ajax_dist() {
 }
 
 // Afficher le bouton "preview" dans l'espace public
+// http://doc.spip.org/@afficher_bouton_preview
 function afficher_bouton_preview() {
 		$x = _T('previsualisation');
 		return '<div style="
@@ -169,6 +179,7 @@ function afficher_bouton_preview() {
 // attention au cas ou la href est du Javascript avec des "'"
 // pour un href conforme au validateur W3C, faire & --> &amp; avant
 
+// http://doc.spip.org/@http_href
 function http_href($href, $clic, $title='', $style='', $class='', $evt='') {
 	return '<a href="' .
 		$href .
@@ -185,6 +196,7 @@ function http_href($href, $clic, $title='', $style='', $class='', $evt='') {
 // produit une balise img avec un champ alt d'office si vide
 // attention le htmlentities et la traduction doivent etre appliques avant.
 
+// http://doc.spip.org/@http_wrapper
 function http_wrapper($img){
 	static $wrapper_state=NULL;
 	static $wrapper_table = array();
@@ -207,6 +219,7 @@ function http_wrapper($img){
 	}
 	return $f;
 }
+// http://doc.spip.org/@http_img_pack
 function http_img_pack($img, $alt, $att, $title='') {
 	return "<img src='" . http_wrapper($img)
 	  . ("'\nalt=\"" .
@@ -216,11 +229,13 @@ function http_img_pack($img, $alt, $att, $title='') {
 	  . $att . " />";
 }
 
+// http://doc.spip.org/@http_href_img
 function http_href_img($href, $img, $att, $title='', $style='', $class='', $evt='') {
 	return  http_href($href, http_img_pack($img, $title, $att), $title, $style, $class, $evt);
 }
 
 
+// http://doc.spip.org/@http_style_background
 function http_style_background($img, $att='')
 {
   return " style='background: url(\"".http_wrapper($img)."\")" .
@@ -234,6 +249,7 @@ function http_style_background($img, $att='')
 
 // Attention: generer_url_ecrire peut rajouter des args
 
+// http://doc.spip.org/@generer_url_post_ecrire
 function generer_url_post_ecrire($script, $args='', $name='', $ancre='', $onchange='') {
 	include_spip('inc/filtres');
 	$action = generer_url_ecrire($script, $args);

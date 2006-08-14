@@ -42,6 +42,7 @@ include_spip('base/serial');
 //
 // Calculer un <INCLURE()>
 //
+// http://doc.spip.org/@calculer_inclure
 function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
 	$fichier = $struct->texte;
 
@@ -88,6 +89,7 @@ function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
 // Ici on distingue boucles recursives et boucle a requete SQL
 // et on insere le code d'envoi au debusqueur du resultat de la fonction.
 
+// http://doc.spip.org/@calculer_boucle
 function calculer_boucle($id_boucle, &$boucles) {
  
   if ($boucles[$id_boucle]->type_requete == 'boucle')  {
@@ -112,6 +114,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 // c'est un "while (fetch_sql)" dans le cas général,
 // qu'on essaye d'optimiser un max.
 
+// http://doc.spip.org/@calculer_boucle_nonrec
 function calculer_boucle_nonrec($id_boucle, &$boucles) {
 
 	$boucle = &$boucles[$id_boucle];
@@ -250,6 +253,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 }
 
 
+// http://doc.spip.org/@calculer_requete_sql
 function calculer_requete_sql(&$boucle)
 {
 	if (!$order = $boucle->order
@@ -289,6 +293,7 @@ function calculer_requete_sql(&$boucle)
 }
 
 
+// http://doc.spip.org/@calculer_dump_array
 function calculer_dump_array($a)
 {
   if (!is_array($a)) return $a ;
@@ -304,6 +309,7 @@ function calculer_dump_array($a)
   }
 }
 
+// http://doc.spip.org/@calculer_dump_join
 function calculer_dump_join($a)
 {
   $res = "";
@@ -311,6 +317,7 @@ function calculer_dump_join($a)
   return 'array(' . substr($res,2) . ')';
 }
 
+// http://doc.spip.org/@calculer_from
 function calculer_from(&$boucle)
 {
   $res = "";
@@ -322,6 +329,7 @@ function calculer_from(&$boucle)
 // fonction traitant les criteres {1,n} (analyses dans inc-criteres)
 //
 ## a deplacer dans inc-criteres ??
+// http://doc.spip.org/@calculer_parties
 function calculer_parties($boucles, $id_boucle) {
 
 	$boucle = &$boucles[$id_boucle];
@@ -403,6 +411,7 @@ function calculer_parties($boucles, $id_boucle) {
 // Retourne une expression PHP,
 // (qui sera argument d'un Return ou la partie droite d'une affectation).
 
+// http://doc.spip.org/@calculer_liste
 function calculer_liste($tableau, $descr, &$boucles, $id_boucle='') {
 	if (!$tableau) return "''";
 	if (!isset($descr['niv'])) $descr['niv'] = 0;
@@ -423,6 +432,7 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='') {
 	  join(" ,\n$tab", $codes) . "))";
 }
 
+// http://doc.spip.org/@compile_cas
 function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
         $codes = array();
 	// cas de la boucle recursive
@@ -564,6 +574,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 
 // affichage du code produit
 
+// http://doc.spip.org/@code_boucle
 function code_boucle(&$boucles, $id, $nom)
 {
 	$boucle = &$boucles[$id];
@@ -616,6 +627,7 @@ function code_boucle(&$boucles, $id, $nom)
 // - 'entetes' => tableau des entetes http
 // En cas d'erreur, elle retourne un tableau des 2 premiers elements seulement
 
+// http://doc.spip.org/@public_compiler_dist
 function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
   global  $table_des_tables, $tables_des_serveurs_sql, $tables_principales,
     $tables_jointures;

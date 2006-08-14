@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 charger_generer_url();
 
+// http://doc.spip.org/@controle_signatures
 function controle_signatures($script, $id, $debut, $where, $order, $limit='') {
 	global $couleur_foncee;
 	
@@ -95,6 +96,7 @@ function controle_signatures($script, $id, $debut, $where, $order, $limit='') {
 	}
 }
 
+// http://doc.spip.org/@tronconne_signatures
 function tronconne_signatures($script, $id_article, $debut, $where, $limit=10)
 {
 	# filtre de duree (a remplacer par une vraie pagination)

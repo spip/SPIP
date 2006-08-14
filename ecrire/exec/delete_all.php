@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/admin');
 
+// http://doc.spip.org/@exec_delete_all_dist
 function exec_delete_all_dist()
 {
 $action = _T('titre_page_delete_all');

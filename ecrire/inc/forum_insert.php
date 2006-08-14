@@ -20,6 +20,7 @@ spip_connect();
 // Ce fichier est inclus lorsqu'on appelle un script de l'espace public
 // avec une variable d'URL nommee confirmer_forum 
 // Voir commentaires dans balise/formulaire_forum
+// http://doc.spip.org/@prevenir_auteurs
 function prevenir_auteurs($auteur, $email_auteur, $id_forum, $id_article, $texte, $titre, $statut) {
 	global $nom_site_forum, $url_site;
 	include_spip('inc/texte');
@@ -67,6 +68,7 @@ function prevenir_auteurs($auteur, $email_auteur, $id_forum, $id_article, $texte
 }
 
 
+// http://doc.spip.org/@controler_forum_abo
 function controler_forum_abo($retour)
 {
 	global $auteur_session;
@@ -86,6 +88,7 @@ function controler_forum_abo($retour)
 		}
 }
 
+// http://doc.spip.org/@controler_forum
 function controler_forum($id) {
 
 	// Reglage forums d'article
@@ -101,6 +104,7 @@ function controler_forum($id) {
 
 }
 
+// http://doc.spip.org/@mots_du_forum
 function mots_du_forum($ajouter_mot, $id_message)
 {
 	foreach ($ajouter_mot as $id_mot)
@@ -112,6 +116,7 @@ function mots_du_forum($ajouter_mot, $id_message)
 // en fonction des input POST (ne pas se fier aux parametres d'URL)
 // Retourne le fichier verrouillant si correct
 
+// http://doc.spip.org/@forum_insert_secure
 function forum_insert_secure($alea, $hash)
 {
 	$ids = array();
@@ -131,12 +136,14 @@ function forum_insert_secure($alea, $hash)
 	return  file_exists($file) ? $file : '';
 }
 
+// http://doc.spip.org/@reduce_strlen
 function reduce_strlen($n, $c) 
 {
   return $n - strlen($c);
 }
 
 
+// http://doc.spip.org/@tracer_erreur_forum
 function tracer_erreur_forum($type='') {
 	spip_log("erreur forum ($type): ".print_r($_POST, true));
 	include_spip('inc/mail');
@@ -146,6 +153,7 @@ function tracer_erreur_forum($type='') {
 		'$_SERVER = '.print_r($_SERVER, true));
 }
 
+// http://doc.spip.org/@inc_forum_insert_dist
 function inc_forum_insert_dist() {
 
 	// Ne pas se laisser polluer par les pollueurs de globales

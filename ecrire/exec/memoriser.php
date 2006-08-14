@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@exec_memoriser_dist
 function exec_memoriser_dist()
 {
 	global $flag_ob;
@@ -29,6 +30,7 @@ function exec_memoriser_dist()
 
 # Une fonction stockee en base de donnees 
 
+// http://doc.spip.org/@ajax_page_sql
 function ajax_page_sql()
 {
 	global $connect_id_auteur;

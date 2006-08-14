@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@article_select
 function article_select($id_article, $id_rubrique, $lier_trad, $new)
 {
   global $connect_id_auteur, $spip_lang; 

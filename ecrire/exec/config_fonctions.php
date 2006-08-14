@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/config');
 
+// http://doc.spip.org/@exec_config_fonctions_dist
 function exec_config_fonctions_dist()
 {
   global $connect_statut, $connect_toutes_rubriques, $changer_config;
@@ -103,6 +104,7 @@ function exec_config_fonctions_dist()
 }
 
 
+// http://doc.spip.org/@afficher_choix_vignette
 function afficher_choix_vignette($process) {
 	global $couleur_foncee;
 	//global $taille_preview;
@@ -126,6 +128,7 @@ function afficher_choix_vignette($process) {
 	echo "</div></td>\n";
 }
 
+// http://doc.spip.org/@vignettes_config
 function vignettes_config()
 {
   global $image_process, $convert_command, $spip_lang_left, $spip_lang_right;
@@ -243,6 +246,7 @@ function vignettes_config()
 	echo "<p>";
 }
 
+// http://doc.spip.org/@moteur_config
 function moteur_config()
 {
 	global $spip_lang_right;
@@ -268,6 +272,7 @@ function moteur_config()
 	echo "<p>";
 }
 
+// http://doc.spip.org/@statistiques_config
 function statistiques_config()
 {
 	global $spip_lang_right;
@@ -292,6 +297,7 @@ afficher_choix('activer_statistiques', $activer_statistiques,
 	echo "<p>";
 }
 
+// http://doc.spip.org/@notification_config
 function notification_config()
 {
 	global $spip_lang_right;
@@ -316,6 +322,7 @@ function notification_config()
 	echo "<p>";
 }
 
+// http://doc.spip.org/@versions_config
 function versions_config()
  {
 	global $spip_lang_right;
@@ -341,6 +348,7 @@ function versions_config()
 }
 
 
+// http://doc.spip.org/@correcteur_config
 function correcteur_config()
 {
 
@@ -370,6 +378,7 @@ function correcteur_config()
 	echo "<p>";
 }
 
+// http://doc.spip.org/@previsu_config
 function previsu_config()
 {
 	global $spip_lang_right;
@@ -399,6 +408,7 @@ fin_cadre_trait_couleur();
 	echo "<p>";
 }
 
+// http://doc.spip.org/@proxy_config
 function proxy_config()
 {
 	global $spip_lang_right, $spip_lang_left;
@@ -438,6 +448,7 @@ function proxy_config()
 	echo "<p>";
 }
 
+// http://doc.spip.org/@htpasswd_config
 function htpasswd_config()
 {
 	global $spip_lang_right;
@@ -466,6 +477,7 @@ function htpasswd_config()
 }
 
 ##### n'est pas encore utilise #######
+// http://doc.spip.org/@htaccess_config
 function htaccess_config()
  {
 

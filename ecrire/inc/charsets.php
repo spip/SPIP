@@ -20,6 +20,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * les autres charsets sont supportes via mbstring()
  */
 
+// http://doc.spip.org/@load_charset
 function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 	if ($charset == 'AUTO')
 		$charset = $GLOBALS['meta']['charset'];
@@ -53,6 +54,7 @@ function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 //
 // Verifier qu'on peut utiliser mb_string
 //
+// http://doc.spip.org/@init_mb_string
 function init_mb_string() {
 	static $mb;
 
@@ -78,6 +80,7 @@ function init_mb_string() {
 }
 
 // Detecter les versions buggees d'iconv
+// http://doc.spip.org/@test_iconv
 function test_iconv() {
 	static $iconv_ok;
 
@@ -96,6 +99,7 @@ function test_iconv() {
 
 // Test de fonctionnement du support UTF-8 dans PCRE
 // (contournement bug Debian Woody)
+// http://doc.spip.org/@test_pcre_unicode
 function test_pcre_unicode() {
 	static $pcre_ok = 0;
 
@@ -108,6 +112,7 @@ function test_pcre_unicode() {
 }
 
 // Plages alphanumeriques (incomplet...)
+// http://doc.spip.org/@pcre_lettres_unicode
 function pcre_lettres_unicode() {
 	static $plage_unicode;
 
@@ -129,12 +134,14 @@ function pcre_lettres_unicode() {
 
 // Plage ponctuation de 0x2000 a 0x206F
 // (i.e. de 226-128-128 a 226-129-176)
+// http://doc.spip.org/@plage_punct_unicode
 function plage_punct_unicode() {
 	return '\xE2(\x80[\x80-\xBF]|\x81[\x80-\xAF])';
 }
 
 // corriger caracteres non-conformes : 128-159
 // cf. charsets/iso-8859-1.php (qu'on recopie ici pour aller plus vite)
+// http://doc.spip.org/@corriger_caracteres_windows
 function corriger_caracteres_windows($texte, $charset='AUTO') {
 	static $trans;
 
@@ -190,6 +197,7 @@ function corriger_caracteres_windows($texte, $charset='AUTO') {
 // Transformer les &eacute; en &#123;
 // $secure = true pour *ne pas convertir* les caracteres malins &lt; &amp; etc.
 //
+// http://doc.spip.org/@html2unicode
 function html2unicode($texte, $secure=false) {
 	static $trans;
 	if (!$trans) {
@@ -211,6 +219,7 @@ function html2unicode($texte, $secure=false) {
 //
 // Transformer les &eacute; en &#123;
 //
+// http://doc.spip.org/@mathml2unicode
 function mathml2unicode($texte) {
 	static $trans;
 	if (!$trans) {
@@ -230,6 +239,7 @@ function mathml2unicode($texte) {
 //
 // Note: l'argument $forcer est obsolete : il visait a ne pas
 // convertir les accents iso-8859-1
+// http://doc.spip.org/@charset2unicode
 function charset2unicode($texte, $charset='AUTO' /* $forcer: obsolete*/) {
 	static $trans;
 
@@ -288,6 +298,7 @@ function charset2unicode($texte, $charset='AUTO' /* $forcer: obsolete*/) {
 // Transforme les entites unicode &#129; dans le charset specifie
 // Attention on ne transforme pas les entites < &#128; car si elles
 // ont ete encodees ainsi c'est a dessein
+// http://doc.spip.org/@unicode2charset
 function unicode2charset($texte, $charset='AUTO') {
 	static $CHARSET_REVERSE;
 	static $trans = array();
@@ -331,11 +342,13 @@ function unicode2charset($texte, $charset='AUTO') {
 
 // Importer un texte depuis un charset externe vers le charset du site
 // (les caracteres non resolus sont transformes en &#123;)
+// http://doc.spip.org/@importer_charset
 function importer_charset($texte, $charset = 'AUTO') {
 	return unicode2charset(charset2unicode($texte, $charset, true));
 }
 
 // UTF-8
+// http://doc.spip.org/@utf_8_to_unicode
 function utf_8_to_unicode($source) {
 
 	// mb_string : methode rapide
@@ -427,6 +440,7 @@ function utf_8_to_unicode($source) {
 // mb_string est absente ou ne connait pas notre charset
 // mais on l'optimise quand meme par mb_string
 // => tout ca sera osolete quand on sera surs d'avoir mb_string
+// http://doc.spip.org/@utf_32_to_unicode
 function utf_32_to_unicode($source) {
 
 	// mb_string : methode rapide
@@ -454,6 +468,7 @@ function utf_32_to_unicode($source) {
 }
 
 // Ce bloc provient de php.net, auteur Ronen
+// http://doc.spip.org/@caractere_utf_8
 function caractere_utf_8($num) {
 	if($num<128)
 		return chr($num);
@@ -466,6 +481,7 @@ function caractere_utf_8($num) {
 	return '';
 }
 
+// http://doc.spip.org/@unicode_to_utf_8
 function unicode_to_utf_8($texte) {
 
 	// 1. Entites &#128; et suivantes
@@ -491,6 +507,7 @@ function unicode_to_utf_8($texte) {
 }
 
 // convertit les &#264; en \u0108
+// http://doc.spip.org/@unicode_to_javascript
 function unicode_to_javascript($texte) {
 	$vu = array();
 	while (preg_match(',&#0*([0-9]+);,S', $texte, $regs) AND !isset($vu[$regs[1]])) {
@@ -503,12 +520,14 @@ function unicode_to_javascript($texte) {
 }
 
 // convertit les %uxxxx (envoyes par javascript)
+// http://doc.spip.org/@javascript_to_unicode
 function javascript_to_unicode ($texte) {
 	while (ereg("%u([0-9A-F][0-9A-F][0-9A-F][0-9A-F])", $texte, $regs))
 		$texte = str_replace($regs[0],"&#".hexdec($regs[1]).";", $texte);
 	return $texte;
 }
 // convertit les %E9 (envoyes par le browser) en chaine du charset du site (binaire)
+// http://doc.spip.org/@javascript_to_binary
 function javascript_to_binary ($texte) {
 	while (ereg("%([0-9A-F][0-9A-F])", $texte, $regs))
 		$texte = str_replace($regs[0],chr(hexdec($regs[1])), $texte);
@@ -520,6 +539,7 @@ function javascript_to_binary ($texte) {
 // Translitteration charset => ascii (pour l'indexation)
 // Attention les caracteres non reconnus sont renvoyes en utf-8
 //
+// http://doc.spip.org/@translitteration
 function translitteration($texte, $charset='AUTO', $complexe='') {
 	static $trans;
 	if ($charset == 'AUTO')
@@ -547,6 +567,7 @@ function translitteration($texte, $charset='AUTO', $complexe='') {
 
 // &agrave; est retourne sous la forme "a`" et pas "a"
 // mais si $chiffre=true, on retourne "a8" (vietnamien)
+// http://doc.spip.org/@translitteration_complexe
 function translitteration_complexe($texte, $chiffres=false) {
 	$texte = translitteration($texte,'AUTO','complexe');
 
@@ -557,12 +578,14 @@ function translitteration_complexe($texte, $chiffres=false) {
 	
 	return $texte;
 }
+// http://doc.spip.org/@translitteration_chiffree
 function translitteration_chiffree($car) {
 	return strtr($car, "'`?~.^+(-", "123456789");
 }
 
 
 // Reconnaitre le BOM utf-8 (0xEFBBBF)
+// http://doc.spip.org/@bom_utf8
 function bom_utf8($texte) {
 	return (substr($texte, 0,3) == chr(0xEF).chr(0xBB).chr(0xBF));
 }
@@ -570,6 +593,7 @@ function bom_utf8($texte) {
 // http://us2.php.net/manual/fr/function.mb-detect-encoding.php#50087
 // http://w3.org/International/questions/qa-forms-utf-8.html
 // note: preg_replace permet de contourner un "stack overflow" sur PCRE
+// http://doc.spip.org/@is_utf8
 function is_utf8($string) {
 	return !strlen(
 	preg_replace(
@@ -584,6 +608,7 @@ function is_utf8($string) {
 	. ',sS',
 	'', $string));
 }
+// http://doc.spip.org/@is_ascii
 function is_ascii($string) {
 	return !strlen(
 	preg_replace(
@@ -593,6 +618,7 @@ function is_ascii($string) {
 
 // Transcode une page (attrapee sur le web, ou un squelette) en essayant
 // par tous les moyens de deviner son charset (y compris headers HTTP)
+// http://doc.spip.org/@transcoder_page
 function transcoder_page($texte, $headers='') {
 
 	// Si tout est < 128 pas la peine d'aller plus loin
@@ -644,6 +670,7 @@ function transcoder_page($texte, $headers='') {
 //
 // Gerer les outils mb_string
 //
+// http://doc.spip.org/@spip_substr
 function spip_substr($c, $start=0, $end='') {
 	if (init_mb_string()) {
 		if ($end)
@@ -661,6 +688,7 @@ function spip_substr($c, $start=0, $end='') {
 	}
 }
 
+// http://doc.spip.org/@spip_strlen
 function spip_strlen($c) {
 	if (init_mb_string())
 		return mb_strlen($c);

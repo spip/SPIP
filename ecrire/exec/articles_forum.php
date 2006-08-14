@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/forum'); // pour boutons_controle_forum 
 
+// http://doc.spip.org/@exec_articles_forum_dist
 function exec_articles_forum_dist()
 {
   global $connect_statut, $debut, $id_article, $pack, $enplus;
@@ -57,6 +58,7 @@ function exec_articles_forum_dist()
 	fin_page();
 }
 
+// http://doc.spip.org/@articles_forum_cadres
 function articles_forum_cadres($id_rubrique, $titre, $script, $args)
 {
 	debut_grand_cadre();
@@ -97,6 +99,7 @@ function articles_forum_cadres($id_rubrique, $titre, $script, $args)
 	echo "<p>";
 }
 
+// http://doc.spip.org/@articles_forum_liens
 function articles_forum_liens($n, $script, $args, $curseur, $pack, $i)
 {
 	echo "<div class='serif2'>";

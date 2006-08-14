@@ -18,6 +18,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Popularite, modele logarithmique
 //
 
+// http://doc.spip.org/@calculer_popularites
 function calculer_popularites() {
 
 	// Si c'est le premier appel, ne pas calculer
@@ -70,6 +71,7 @@ function calculer_popularites() {
 //
 // Applique la regle de decroissance des popularites
 //
+// http://doc.spip.org/@cron_popularites
 function cron_popularites($t) {
 	calculer_popularites();
 	return 1;

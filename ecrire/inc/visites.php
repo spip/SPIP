@@ -20,6 +20,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 // prendre en compte un fichier de visite
 //
+// http://doc.spip.org/@compte_fichier_visite
 function compte_fichier_visite($fichier,
 &$visites, &$visites_a, &$referers, &$referers_a, &$articles) {
 
@@ -51,6 +52,7 @@ function compte_fichier_visite($fichier,
 }
 
 
+// http://doc.spip.org/@calculer_visites
 function calculer_visites($t) {
 	include_spip('base/abstract_sql');
 
@@ -176,6 +178,7 @@ function calculer_visites($t) {
 //
 // Calcule les stats en plusieurs etapes
 //
+// http://doc.spip.org/@cron_visites
 function cron_visites($t) {
 	$encore = calculer_visites($t);
 

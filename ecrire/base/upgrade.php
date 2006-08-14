@@ -13,6 +13,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@maj_version
 function maj_version ($version, $test = true) {
 	if ($test) {
 		include_spip('inc/meta');
@@ -25,6 +26,7 @@ function maj_version ($version, $test = true) {
 	}
 }
 
+// http://doc.spip.org/@maj_base
 function maj_base() {
 	global $spip_version;
 

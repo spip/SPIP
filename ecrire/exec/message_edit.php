@@ -16,6 +16,7 @@ include_spip('inc/presentation');
 include_spip('inc/date');
 include_spip('base/abstract_sql');
 
+// http://doc.spip.org/@exec_message_edit_dist
 function exec_message_edit_dist()
 {
 global
@@ -163,6 +164,7 @@ debut_droite();
 fin_page();
 }
 
+// http://doc.spip.org/@afficher_si_rdv
 function afficher_si_rdv($date_heure, $date_fin, $choix)
 {
 	global $spip_lang_rtl;

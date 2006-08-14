@@ -20,6 +20,7 @@ include_spip('inc/minipres');
 //
 // Tente d'ecrire
 //
+// http://doc.spip.org/@test_ecrire
 function test_ecrire($my_dir) {
 	$ok = true;
 	$nom_fich = "$my_dir/test.txt";
@@ -35,6 +36,7 @@ function test_ecrire($my_dir) {
 // rajouter celui passer dans l'url ou celui du source (a l'installation)
 //
 
+// http://doc.spip.org/@action_test_dirs_dist
 function action_test_dirs_dist()
 {
   global $test_dir, $test_dirs;

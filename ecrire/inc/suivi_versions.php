@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/revisions');
 include_spip('inc/diff');
 
+// http://doc.spip.org/@afficher_para_modifies
 function afficher_para_modifies ($texte, $court = false) {
 	// Limiter la taille de l'affichage
 	if ($court) $max = 200;
@@ -28,6 +29,7 @@ function afficher_para_modifies ($texte, $court = false) {
 	return $texte;
 }
 
+// http://doc.spip.org/@afficher_suivi_versions
 function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = false, $lang = "", $court = false, $rss = false) {
 	global $dir_lang;
 	

@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@inc_chercher_logo_dist
 function inc_chercher_logo_dist($id, $type, $mode='on') {
 	global $formats_logos;
 	# attention au cas $id = '0' pour LOGO_SITE_SPIP : utiliser intval()
@@ -37,6 +38,7 @@ $table_logos = array(
 		     'id_rubrique' => 'rub'
 		     );
 
+// http://doc.spip.org/@decrire_logo
 function decrire_logo($id_objet, $mode, $id, $width, $height, $img, $titre="", $script="") {
 
 	list($fid, $dir, $nom, $format) = $img;
@@ -66,6 +68,7 @@ function decrire_logo($id_objet, $mode, $id, $width, $height, $img, $titre="", $
 }
 
 
+// http://doc.spip.org/@afficher_boite_logo
 function afficher_boite_logo($id_objet, $id, $texteon, $texteoff, $script) {
 
 	$logo_f = charger_fonction('chercher_logo', 'inc');
@@ -99,6 +102,7 @@ function afficher_boite_logo($id_objet, $id, $texteon, $texteoff, $script) {
 	return $res;
 }
 
+// http://doc.spip.org/@indiquer_logo
 function indiquer_logo($titre, $id_objet, $mode, $id, $script) {
 
 	global $formats_logos;
@@ -152,6 +156,7 @@ function indiquer_logo($titre, $id_objet, $mode, $id, $script) {
 
 
 // Calculer le ratio
+// http://doc.spip.org/@image_ratio
 function image_ratio ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
 	$ratioWidth = $srcWidth/$maxWidth;
 	$ratioHeight = $srcHeight/$maxHeight;
@@ -171,6 +176,7 @@ function image_ratio ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
 		max($ratioWidth,$ratioHeight));
 }
 
+// http://doc.spip.org/@ratio_image
 function ratio_image($logo, $nom, $format, $taille, $taille_y, $attributs)
 {
 	if (!$taille_origine = @getimagesize($logo)) return '';

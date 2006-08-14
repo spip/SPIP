@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@cron_ajax
 function cron_ajax ($t) {
 	spip_query("DELETE FROM spip_ajax_fonc WHERE date < DATE_SUB(NOW(), INTERVAL 2 HOUR)");
 	return 1;

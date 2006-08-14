@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // ne pas faire d'erreur si les chaines sont > 254 caracteres
+// http://doc.spip.org/@levenshtein255
 function levenshtein255 ($a, $b) {
 	$a = substr($a, 0, 254);
 	$b = substr($b, 0, 254);
@@ -20,6 +21,7 @@ function levenshtein255 ($a, $b) {
 }
 
 // reduit un mot a sa valeur translitteree et en minuscules
+// http://doc.spip.org/@reduire_mot
 function reduire_mot($mot) {
 	return strtr(
 		translitteration(trim($mot)),
@@ -28,6 +30,7 @@ function reduire_mot($mot) {
 		);
 }
 
+// http://doc.spip.org/@mots_ressemblants
 function mots_ressemblants($mot, $table_mots, $table_ids='') {
 	$lim = 2;
 	$nb = 0;
@@ -99,6 +102,7 @@ function mots_ressemblants($mot, $table_mots, $table_ids='') {
  * specifie, plus le formulaire d'ajout de mot-cle
  */
 
+// http://doc.spip.org/@formulaire_mots
 function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable) {
 	global $connect_statut, $connect_toutes_rubriques, $options;
 	global $spip_lang_rtl, $spip_lang_right, $spip_lang;
@@ -175,6 +179,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	return $res;
 }
 
+// http://doc.spip.org/@inserer_mot
 function inserer_mot($table, $table_id, $id_objet, $id_mot)
 {
 	$result = spip_num_rows(spip_query("SELECT id_mot FROM $table WHERE id_mot=$id_mot AND $table_id=$id_objet"));
@@ -186,6 +191,7 @@ function inserer_mot($table, $table_id, $id_objet, $id_mot)
 }
 
 
+// http://doc.spip.org/@affiche_mots_ressemblant
 function affiche_mots_ressemblant($cherche_mot, $id_objet, $resultat, $table_id, $url_base)
 {
 	$res = '';
@@ -217,6 +223,7 @@ function affiche_mots_ressemblant($cherche_mot, $id_objet, $resultat, $table_id,
 	return $res;
 }
 
+// http://doc.spip.org/@recherche_mot_cle
 function recherche_mot_cle($cherche_mots, $id_groupe, $id_objet,$nouv_mot, $table, $table_id, $url_base)
 {
 	if ($table == 'articles') $ou = _T('info_l_article');
@@ -264,6 +271,7 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $id_objet,$nouv_mot, $tabl
 	return array($res, $nouveaux_mots);
 }
 
+// http://doc.spip.org/@afficher_mots_cles
 function afficher_mots_cles($flag_editable, $id_objet, $table, $table_id, $url_base, $visible)
 {
 	global $spip_lang_rtl, $spip_lang, $spip_lang_right, $connect_statut, $connect_toutes_rubriques, $options;
@@ -352,6 +360,7 @@ function afficher_mots_cles($flag_editable, $id_objet, $table, $table_id, $url_b
 	return $res;
 }
 
+// http://doc.spip.org/@formulaire_mots_cles
 function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $table_id, $url_base, $visible)
 {
 	global $connect_statut, $spip_lang, $spip_lang_right, $spip_lang_rtl;
@@ -425,6 +434,7 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 	return $res . "</table>" . fin_block();
 }
 
+// http://doc.spip.org/@menu_mots
 function menu_mots($row, $id_groupes_vus, $les_mots)
 {
 	$id_groupe = $row['id_groupe'];
@@ -488,6 +498,7 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 // Calculer les nombres d'elements (articles, etc.) lies a chaque mot
 //
 
+// http://doc.spip.org/@calculer_liens_mots
 function calculer_liens_mots()
 {
 
@@ -528,6 +539,7 @@ else $aff_articles = "'prop','publie'";
 	      'syndic' => $syndic);
 }
 
+// http://doc.spip.org/@afficher_groupe_mots
 function afficher_groupe_mots($id_groupe) {
 	global $connect_id_auteur, $connect_statut;
 	global $spip_lang_right, $couleur_claire, $spip_lang;
@@ -596,6 +608,7 @@ function afficher_groupe_mots($id_groupe) {
 	return "<div id='$tmp_var' style='position: relative;'>$res</div>";
 }
 
+// http://doc.spip.org/@afficher_groupe_mots_boucle
 function afficher_groupe_mots_boucle($row, $occurrences)
 {
 	global $connect_statut, $connect_toutes_rubriques;

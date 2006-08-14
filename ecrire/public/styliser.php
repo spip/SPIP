@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Ce fichier doit imperativement definir la fonction ci-dessous:
 
+// http://doc.spip.org/@public_styliser_dist
 function public_styliser_dist($fond, $id_rubrique, $lang) {
 	
   // Actuellement tous les squelettes se terminent par .html

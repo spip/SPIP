@@ -14,6 +14,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // heure de reference pour le garbage collector = 24h auparavant
+// http://doc.spip.org/@optimiser_base
 function optimiser_base($attente = 86400) {
 	spip_log ("optimisation de la base");
 

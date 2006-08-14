@@ -17,6 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 charger_generer_url();
 
+// http://doc.spip.org/@action_redirect_dist
 function action_redirect_dist()
 {
   global $id_article, $id_auteur, $id_breve, $id_forum, $id_mot, $id_rubrique, $id_site, $id_syndic, $var_mode;

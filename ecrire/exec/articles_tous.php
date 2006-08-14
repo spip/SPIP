@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
+// http://doc.spip.org/@exec_articles_tous_dist
 function exec_articles_tous_dist()
 {
 	global $aff_art, $sel_lang, $article, $enfant, $text_article;
@@ -102,6 +103,7 @@ fin_page();
 
 // Voir inc_layer pour les 2 globales utilisees
 
+// http://doc.spip.org/@arbo_articles_tous
 function arbo_articles_tous()
 {
 	global $numero_block, $compteur_block;
@@ -128,6 +130,7 @@ function arbo_articles_tous()
 
 //  checkbox avec image
 
+// http://doc.spip.org/@http_label_img
 function http_label_img($statut, $etat, $var, $img, $texte) {
   return "<label for='$statut'>". 
     boutonne('checkbox',
@@ -142,6 +145,7 @@ function http_label_img($statut, $etat, $var, $img, $texte) {
     "</label><br />";
 }
 
+// http://doc.spip.org/@formulaire_affiche_tous
 function formulaire_affiche_tous($aff_art, $aff_statut,$sel_lang)
 {
 global $spip_lang_right;
@@ -227,6 +231,7 @@ fin_boite_info();
 echo "</form>";
 }
 
+// http://doc.spip.org/@couche_formulaire_tous
 function couche_formulaire_tous($first_couche, $last_couche)
 {
 	global $spip_lang_rtl;
@@ -248,6 +253,7 @@ function couche_formulaire_tous($first_couche, $last_couche)
 	echo "<div>&nbsp;</div>";
 }
 
+// http://doc.spip.org/@afficher_rubriques_filles
 function afficher_rubriques_filles($id_parent) {
 	global $enfant, $article;
 	global $spip_lang_left, $spip_lang_right, $spip_lang;
@@ -302,6 +308,7 @@ function afficher_rubriques_filles($id_parent) {
 	
 }
 
+// http://doc.spip.org/@article_tous_rubrique
 function article_tous_rubrique($tous, $id_rubrique) 
 {
 	global $text_article;
@@ -339,6 +346,7 @@ $statuts= puce_statut_article($zarticle, $attarticle['statut'], $id_rubrique);
 	}
 }
 
+// http://doc.spip.org/@trouve_auteurs_articles
 function trouve_auteurs_articles($id_article)
 {
 	$result = spip_query("SELECT nom FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE auteurs.id_auteur=lien.id_auteur AND lien.id_article=$id_article ORDER BY auteurs.nom");

@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/minipres');
 
 // Creer IMG/pdf/
+// http://doc.spip.org/@creer_repertoire_documents
 function creer_repertoire_documents($ext) {
 	$rep = sous_repertoire(_DIR_DOC, $ext);
 
@@ -32,6 +33,7 @@ function creer_repertoire_documents($ext) {
 }
 
 // Efface le repertoire de maniere recursive !
+// http://doc.spip.org/@effacer_repertoire_temporaire
 function effacer_repertoire_temporaire($nom) {
 	$d = opendir($nom);
 	while (($f = readdir($d)) !== false) {
@@ -44,6 +46,7 @@ function effacer_repertoire_temporaire($nom) {
 	@rmdir($nom);
 }
 
+// http://doc.spip.org/@copier_document
 function copier_document($ext, $orig, $source) {
 
 	$dir = creer_repertoire_documents($ext);
@@ -68,6 +71,7 @@ function copier_document($ext, $orig, $source) {
 // Deplacer un fichier
 //
 
+// http://doc.spip.org/@deplacer_fichier_upload
 function deplacer_fichier_upload($source, $dest) {
 	// Securite
 	## !! interdit pour le moment d'uploader depuis l'espace prive (UPLOAD_DIRECT)
@@ -97,6 +101,7 @@ function deplacer_fichier_upload($source, $dest) {
 // renvoie false si pas d'erreur
 // et true si erreur = pas de fichier
 // pour les autres erreurs affiche le message d'erreur et meurt
+// http://doc.spip.org/@check_upload_error
 function check_upload_error($error, $msg='') {
 	global $spip_lang_right;
 	switch ($error) {
@@ -135,6 +140,7 @@ function check_upload_error($error, $msg='') {
 //
 // Gestion des fichiers ZIP
 //
+// http://doc.spip.org/@accepte_fichier_upload
 function accepte_fichier_upload ($f) {
 	if (!ereg(".*__MACOSX/", $f)
 	AND !ereg("^\.", basename($f))) {
@@ -146,6 +152,7 @@ function accepte_fichier_upload ($f) {
 
 # callback pour le deballage d'un zip telecharge
 # http://www.phpconcept.net/pclzip/man/en/?options-pclzip_cb_pre_extractfunction
+// http://doc.spip.org/@callback_deballe_fichier
 function callback_deballe_fichier($p_event, &$p_header) {
 	if (accepte_fichier_upload($p_header['filename'])) {
 		$p_header['filename'] = _tmp_dir . basename($p_header['filename']);
@@ -155,6 +162,7 @@ function callback_deballe_fichier($p_event, &$p_header) {
 	}
 }
 
+// http://doc.spip.org/@verifier_compactes
 function verifier_compactes($zip) {
 	if (!$list = $zip->listContent()) return array();
 	// si pas possible de decompacter: installer comme fichier zip joint
@@ -183,6 +191,7 @@ function verifier_compactes($zip) {
 # $id_document,	# pour une vignette, l'id_document de maman
 # $actifs	# les documents dont il faudra ouvrir la boite de dialogue
 
+// http://doc.spip.org/@ajouter_un_document
 function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode, $id_document, &$documents_actifs) {
 
 // Documents distants : pas trop de verifications bloquantes, mais un test
@@ -418,6 +427,7 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 	return true;
 }
 
+// http://doc.spip.org/@traite_svg
 function traite_svg($file)
 {
 	global $connect_statut;
@@ -464,6 +474,7 @@ function traite_svg($file)
 }
 
 
+// http://doc.spip.org/@afficher_compactes
 function afficher_compactes($action) {
 	minipres(_T('upload_fichier_zip'),
 	  "<p>" .
@@ -478,6 +489,7 @@ function afficher_compactes($action) {
 // Traiter la liste des fichiers (action joindre3)
 //
 
+// http://doc.spip.org/@examiner_les_fichiers
 function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $id_auteur, $redirect, &$actifs)
 {
 	if (function_exists('gzopen') 
@@ -542,6 +554,7 @@ function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $
 // Convertit le type numerique retourne par getimagesize() en extension fichier
 //
 
+// http://doc.spip.org/@decoder_type_image
 function decoder_type_image($type, $strict = false) {
 	switch ($type) {
 	case 1:
@@ -570,6 +583,7 @@ function decoder_type_image($type, $strict = false) {
 // (a passer dans ecrire/base/typedoc)
 //
 
+// http://doc.spip.org/@corriger_extension
 function corriger_extension($ext) {
 	switch ($ext) {
 	case 'htm':

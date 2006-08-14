@@ -17,6 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Attention a modifier simultanement le sanity check de
 // la fonction retire_cache()
 //
+// http://doc.spip.org/@generer_nom_fichier_cache
 function generer_nom_fichier_cache($contexte) {
 
 	if ($contexte === NULL) {
@@ -60,6 +61,7 @@ function generer_nom_fichier_cache($contexte) {
 }
 
 // Faut-il compresser ce cache ? A partir de 16ko ca vaut le coup
+// http://doc.spip.org/@cache_gz
 function cache_gz($page) {
 	if ($GLOBALS['flag_gz'] AND strlen($page['texte']) > 16*1024)
 		return '.gz';
@@ -72,6 +74,7 @@ function cache_gz($page) {
 //
 
 // Securite : est sur que c'est un cache
+// http://doc.spip.org/@retire_cache
 function retire_cache($cache) {
 
 	if (preg_match(
@@ -84,6 +87,7 @@ function retire_cache($cache) {
 }
 
 // Supprimer les caches marques "x"
+// http://doc.spip.org/@retire_caches
 function retire_caches($chemin = '') {
 
 	include_spip('base/abstract_sql');
@@ -134,6 +138,7 @@ function retire_caches($chemin = '') {
 
 // gestion des delais par specification a l'exterieur du squelette
 
+// http://doc.spip.org/@cache_valide
 function cache_valide($chemin_cache, $date) {
 
 	if (!isset($GLOBALS['delais']))
@@ -154,6 +159,7 @@ function cache_valide($chemin_cache, $date) {
 
 // gestion des delais par specification a l'interieur du squelette
 
+// http://doc.spip.org/@cache_valide_autodetermine
 function cache_valide_autodetermine($chemin_cache, $page, $date) {
 
 	if (!$page) return 1;
@@ -175,6 +181,7 @@ function cache_valide_autodetermine($chemin_cache, $page, $date) {
 
 // Creer le fichier cache
 # Passage par reference de $page par souci d'economie
+// http://doc.spip.org/@creer_cache
 function creer_cache(&$page, &$chemin_cache, $duree) {
 	// Entrer dans la base les invalideurs calcules par le compilateur
 	// (et supprimer les anciens)
@@ -213,6 +220,7 @@ function creer_cache(&$page, &$chemin_cache, $duree) {
 	verifier_htaccess(_DIR_CACHE);
 }
 
+// http://doc.spip.org/@restaurer_meta_donnees
 function restaurer_meta_donnees ($contenu) {
 
 	if (preg_match("/^<!-- ([^\n]*) -->\n/ms", $contenu, $match)) {
@@ -231,6 +239,7 @@ function restaurer_meta_donnees ($contenu) {
 
 // purger un petit cache (tidy ou recherche) qui ne doit pas contenir de
 // vieux fichiers
+// http://doc.spip.org/@nettoyer_petit_cache
 function nettoyer_petit_cache($prefix, $duree = 300) {
 	// determiner le repertoire a purger : 'CACHE/rech/'
 	$dircache = sous_repertoire(_DIR_CACHE,$prefix);
@@ -255,6 +264,7 @@ function nettoyer_petit_cache($prefix, $duree = 300) {
 // - page qui est le tableau decrivant la page, si le cache la contenait
 // - lastmodifed qui vaut la date de derniere modif du fichier.
 
+// http://doc.spip.org/@public_cacher_dist
 function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmodified) {
 
 	if ($chemin_cache) return creer_cache($page, $chemin_cache, $use_cache);

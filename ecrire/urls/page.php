@@ -25,35 +25,43 @@ define ('_debut_urls_page', get_spip_script('./').'?');
 #######
 
 
+// http://doc.spip.org/@composer_url_page
 function composer_url_page($page,$id) {
 	return _debut_urls_page . $page . _separateur_urls_page
 	. $id . _terminaison_urls_page;
 }
 
+// http://doc.spip.org/@generer_url_article
 function generer_url_article($id_article) {
 	return composer_url_page('article', $id_article);
 }
 
+// http://doc.spip.org/@generer_url_rubrique
 function generer_url_rubrique($id_rubrique) {
 	return composer_url_page('rubrique', $id_rubrique);
 }
 
+// http://doc.spip.org/@generer_url_breve
 function generer_url_breve($id_breve) {
 	return composer_url_page('breve', $id_breve);
 }
 
+// http://doc.spip.org/@generer_url_mot
 function generer_url_mot($id_mot) {
 	return composer_url_page('mot', $id_mot);
 }
 
+// http://doc.spip.org/@generer_url_site
 function generer_url_site($id_syndic) {
 	return composer_url_page('site', $id_syndic);
 }
 
+// http://doc.spip.org/@generer_url_auteur
 function generer_url_auteur($id_auteur) {
 	return composer_url_page('auteur', $id_auteur);
 }
 
+// http://doc.spip.org/@generer_url_document
 function generer_url_document($id_document) {
 	if (($id_document = intval($id_document)) <= 0)
 		return '';
@@ -64,6 +72,7 @@ function generer_url_document($id_document) {
 	return '';
 }
 
+// http://doc.spip.org/@recuperer_parametres_url
 function recuperer_parametres_url(&$fond, $url) {
 	global $contexte;
 
@@ -111,6 +120,7 @@ function recuperer_parametres_url(&$fond, $url) {
 // URLs des forums
 //
 
+// http://doc.spip.org/@generer_url_forum
 function generer_url_forum($id_forum, $show_thread=false) {
 	include_spip('inc/forum');
 	return generer_url_forum_dist($id_forum, $show_thread);

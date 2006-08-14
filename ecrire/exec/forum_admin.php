@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@exec_forum_admin_dist
 function exec_forum_admin_dist() {
 	include_spip('exec/forum');
 	$GLOBALS['admin'] = 'oui';

@@ -31,6 +31,7 @@ $GLOBALS['rejoue_session'] = ''; # globale pour insertion de JS en fin de page
 // - tableau: cree une session pour l'auteur decrit et retourne l'identifiant
 // - autre: predicat de validite de la session indiquee par le cookie
 
+// http://doc.spip.org/@inc_session_dist
 function inc_session_dist($auteur=false)
 {
 	if (is_numeric($auteur))
@@ -44,6 +45,7 @@ function inc_session_dist($auteur=false)
 // Ajoute une session pour l'auteur decrit par un tableau issu d'un SELECT-SQL
 //
 
+// http://doc.spip.org/@ajouter_session
 function ajouter_session($auteur) {
 
 	global $spip_session;
@@ -72,6 +74,7 @@ function ajouter_session($auteur) {
 // On en profite pour effacer toutes les sessions creees il y a plus de 48 h
 //
 
+// http://doc.spip.org/@supprimer_sessions
 function supprimer_sessions($id_auteur) {
 
 	$dir = opendir(_DIR_SESSIONS);
@@ -91,6 +94,7 @@ function supprimer_sessions($id_auteur) {
 // La rejoue si IP change puis accepte le changement si $change=true
 //
 
+// http://doc.spip.org/@verifier_session
 function verifier_session($change=false) {
 
 	global $auteur_session, $spip_session; 
@@ -141,6 +145,7 @@ function verifier_session($change=false) {
 // Code a inserer par inc/presentation pour rejouer la session
 // Voir action/cookie qui sera appele.
 
+// http://doc.spip.org/@rejouer_session
 function rejouer_session()
 {
 	include_spip('inc/minipres');
@@ -151,6 +156,7 @@ function rejouer_session()
 //
 // Calcule le nom du fichier session
 //
+// http://doc.spip.org/@fichier_session
 function fichier_session($id_session, $alea) {
 	if (ereg("^([0-9]+_)", $id_session, $regs))
 		$id_auteur = $regs[1];
@@ -161,6 +167,7 @@ function fichier_session($id_session, $alea) {
 // On verifie l'IP et le nom du navigateur
 //
 
+// http://doc.spip.org/@hash_env
 function hash_env() {
   static $res ='';
   if ($res) return $res;

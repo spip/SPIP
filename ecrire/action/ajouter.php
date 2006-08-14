@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('base/abstract_sql');
 
+// http://doc.spip.org/@action_ajouter_dist
 function action_ajouter_dist() {
 	
 	include_spip('inc/actions');
@@ -49,6 +50,7 @@ function action_ajouter_dist() {
 	} else spip_log("ajouter $arg pas compris");
 }
 
+// http://doc.spip.org/@ajouter_auteur_et_rediriger
 function ajouter_auteur_et_rediriger($id_article, $id_auteur, $redirect)
 {
 	$res = spip_query("SELECT id_article FROM spip_auteurs_articles WHERE id_auteur=" . $id_auteur . " AND id_article=" . $id_article);
@@ -64,6 +66,7 @@ function ajouter_auteur_et_rediriger($id_article, $id_auteur, $redirect)
 	exit;
 }
 
+// http://doc.spip.org/@rechercher_auteurs
 function rechercher_auteurs($cherche_auteur)
 {
 	include_spip('inc/mots');

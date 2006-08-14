@@ -16,6 +16,7 @@ include_spip('inc/presentation');
 include_spip('inc/auteur_voir');
 include_spip('inc/message_select');
 
+// http://doc.spip.org/@exec_auteurs_edit_dist
 function exec_auteurs_edit_dist()
 {
   global $connect_id_auteur, $spip_display;
@@ -51,6 +52,7 @@ function exec_auteurs_edit_dist()
 	fin_page();
 }
 
+// http://doc.spip.org/@table_auteurs_edit
 function table_auteurs_edit($auteur)
 {
 	global $connect_statut, $connect_id_auteur, $champs_extra, $options  ;

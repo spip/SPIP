@@ -13,11 +13,13 @@
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@my_sel
 function my_sel($num, $tex, $comp) {
   return "<option value='$num'" . (($num != $comp) ? '' : " selected='selected'") .
     ">$tex</option>\n";
 }
 
+// http://doc.spip.org/@format_mysql_date
 function format_mysql_date($annee=0, $mois=0, $jour=0, $h=0, $m=0, $s=0) {
 	$annee = sprintf("%04s",$annee);
 	$mois = sprintf("%02s",$mois);
@@ -31,6 +33,7 @@ function format_mysql_date($annee=0, $mois=0, $jour=0, $h=0, $m=0, $s=0) {
 }
 
 
+// http://doc.spip.org/@afficher_mois
 function afficher_mois($mois, $attributs, $autre=false){
   return
 	"<select $attributs>\n" .
@@ -50,6 +53,7 @@ function afficher_mois($mois, $attributs, $autre=false){
 	"</select>\n";
 }
 
+// http://doc.spip.org/@afficher_annee
 function afficher_annee($annee, $attributs, $debut=1996) {
 	$res = ($annee > 1996) ? '' : my_sel($annee,$annee,$annee);
 	for ($i=$debut; $i < date("Y") + 3; $i++) {
@@ -58,6 +62,7 @@ function afficher_annee($annee, $attributs, $debut=1996) {
 	return "<select $attributs>\n$res</select>\n";
 }
 
+// http://doc.spip.org/@afficher_jour
 function afficher_jour($jour, $attributs, $autre=false){
 
 	$res = (!$autre ? "" : my_sel("00",_T('jour_non_connu_nc'),$jour));
@@ -68,6 +73,7 @@ function afficher_jour($jour, $attributs, $autre=false){
 	return "<select $attributs>\n$res</select>\n";
 }
 
+// http://doc.spip.org/@afficher_heure
 function afficher_heure($heure, $attributs, $autre=false){
 	$res = '';
 	for($i=0;$i<=23;$i++){
@@ -77,6 +83,7 @@ function afficher_heure($heure, $attributs, $autre=false){
 	return "<select $attributs>\n$res</select>\n";
 }
 
+// http://doc.spip.org/@afficher_minute
 function afficher_minute($minute, $attributs, $autre=false){
 	$res = '';
 	for($i=0;$i<=59;$i+=5){
@@ -90,6 +97,7 @@ function afficher_minute($minute, $attributs, $autre=false){
 }
 
 
+// http://doc.spip.org/@afficher_jour_mois_annee_h_m
 function afficher_jour_mois_annee_h_m($date, $heures, $minutes, $suffixe='')
 {
   return 
@@ -100,6 +108,7 @@ function afficher_jour_mois_annee_h_m($date, $heures, $minutes, $suffixe='')
     "<input type='text' class='fondl verdana1' name='minutes$suffixe' value=\"$minutes\" size='3'/>";
 }
 
+// http://doc.spip.org/@afficher_formulaire_date
 function afficher_formulaire_date($script, $args, $texte, $jour, $mois, $annee)
 {
   global $couleur_foncee;

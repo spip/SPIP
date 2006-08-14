@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/filtres');
 
+// http://doc.spip.org/@action_virtualiser_dist
 function action_virtualiser_dist() {
 	
 	global $convert_command;

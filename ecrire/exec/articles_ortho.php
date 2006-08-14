@@ -16,6 +16,7 @@ include_spip('inc/presentation');
 include_spip('inc/distant');
 include_spip('inc/ortho');
 
+// http://doc.spip.org/@exec_articles_ortho_dist
 function exec_articles_ortho_dist()
 {
   global
@@ -85,6 +86,7 @@ $ortho = "";
 // Affichage HTML
 //
 
+// http://doc.spip.org/@debut_html
 function debut_html($titre = "", $rubrique="") {
 	include_spip('inc/headers');
 

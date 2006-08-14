@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@action_editer_article_dist
 function action_editer_article_dist() {
 
 
@@ -43,6 +44,7 @@ function action_editer_article_dist() {
 	redirige_par_entete($redirect);
 }
 
+// http://doc.spip.org/@insert_article
 function insert_article($id_parent)
 {
 	include_spip('base/abstract_sql');
@@ -68,6 +70,7 @@ function insert_article($id_parent)
 	return $id_article;
 }
 
+// http://doc.spip.org/@articles_set
 function articles_set($id_article, $id_rubrique, $lier_trad, $new)
 {
 	include_spip('inc/filtres');
@@ -83,6 +86,7 @@ function articles_set($id_article, $id_rubrique, $lier_trad, $new)
 		spip_query("UPDATE spip_articles SET id_trad = $id_trad WHERE id_article = $id_article");
 }
 
+// http://doc.spip.org/@revisions_articles
 function revisions_articles ($id_article, $id_rubrique, $id_trad) {
 {
 	global $flag_revisions, $champs_extra;
@@ -169,6 +173,7 @@ function revisions_articles ($id_article, $id_rubrique, $id_trad) {
 // Reunit les textes decoupes parce que trop longs
 //
 
+// http://doc.spip.org/@trop_longs_articles
 function trop_longs_articles($texte_plus)
 {
 	$nb_texte = 0;
@@ -179,6 +184,7 @@ function trop_longs_articles($texte_plus)
 	return $texte_ajout;
 }
 
+// http://doc.spip.org/@article_referent
 function article_referent ($id_article, $id_trad, $lier_trad)
 { 
 	global $err; // pour avertir l'appelant

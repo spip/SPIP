@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 
+// http://doc.spip.org/@action_purger_dist
 function action_purger_dist()
 {
 	include_spip('inc/actions');

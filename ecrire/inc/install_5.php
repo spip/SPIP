@@ -10,6 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+// http://doc.spip.org/@inc_install_5
 function inc_install_5()
 {
 	global $email, $ldap_present, $login, $nom, $pass, $spip_lang_right;

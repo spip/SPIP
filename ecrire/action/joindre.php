@@ -16,6 +16,7 @@ include_spip('inc/charsets');	# pour le nom de fichier
 include_spip('inc/getdocument');
 include_spip('base/abstract_sql');
 
+// http://doc.spip.org/@action_joindre_dist
 function action_joindre_dist()
 {
 	global $hash, $id_auteur, $url, $chemin, $ancre, $type, $id, $id_document,
@@ -72,6 +73,7 @@ function action_joindre_dist()
 
 // Cas d'un document distant reference sur internet
 
+// http://doc.spip.org/@spip_action_joindre2
 function spip_action_joindre2($arg, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
 {
 	examiner_les_fichiers(array(
@@ -83,6 +85,7 @@ function spip_action_joindre2($arg, $mode, $type, $id, $id_document,$hash, $id_a
 
 // Cas d'un fichier transmis
 
+// http://doc.spip.org/@spip_action_joindre1
 function spip_action_joindre1($arg, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
 {
 	$files = array();
@@ -98,6 +101,7 @@ function spip_action_joindre1($arg, $mode, $type, $id, $id_document,$hash, $id_a
 
 // copie de tout ou partie du repertoire upload
 
+// http://doc.spip.org/@spip_action_joindre3
 function spip_action_joindre3($arg, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
 {
 	if (!$arg || strstr($arg, '..')) return;
@@ -127,6 +131,7 @@ function spip_action_joindre3($arg, $mode, $type, $id, $id_document,$hash, $id_a
 
 //  Zip avec confirmation "tel quel"
 
+// http://doc.spip.org/@spip_action_joindre5
 function spip_action_joindre5($arg, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
 {
   	ajouter_un_document($arg, basename($arg), $type, $id, $mode, $id_document, $actifs);
@@ -134,6 +139,7 @@ function spip_action_joindre5($arg, $mode, $type, $id, $id_document,$hash, $id_a
 
 // cas du zip a deballer. On ressort la bibli 
 
+// http://doc.spip.org/@spip_action_joindre6
 function spip_action_joindre6($arg, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
 {
 	    define('_tmp_dir', creer_repertoire_documents($hash));

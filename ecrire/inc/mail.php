@@ -45,6 +45,7 @@ else if (function_exists('email')) {
 
 $GLOBALS['queue_mails'] = '';
 
+// http://doc.spip.org/@envoyer_queue_mails
 function envoyer_queue_mails() {
 	global $queue_mails;
 	if (!$queue_mails) return;
@@ -64,12 +65,14 @@ if ($GLOBALS['hebergeur'] == 'lycos') {
 
 // Apparemment free etait le dernier hebergeur connu a ne pas offrir de mail
 // cette fonction va donc pouvoir disparaitre
+// http://doc.spip.org/@tester_mail
 function tester_mail() {
 	global $hebergeur;
 	$test_mail = true;
 	return $test_mail;
 }
 
+// http://doc.spip.org/@nettoyer_caracteres_mail
 function nettoyer_caracteres_mail($t) {
 
 	$t = filtrer_entites($t);
@@ -89,6 +92,7 @@ function nettoyer_caracteres_mail($t) {
 	return $t;
 }
 
+// http://doc.spip.org/@envoyer_mail
 function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 	global $hebergeur, $queue_mails;
 	include_spip('inc/charsets');
@@ -159,6 +163,7 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 	}
 }
 
+// http://doc.spip.org/@extrait_article
 function extrait_article($row) {
 	include_spip('inc/texte');
 	
@@ -188,10 +193,12 @@ function extrait_article($row) {
 	return $extrait;
 }
 
+// http://doc.spip.org/@nettoyer_titre_email
 function nettoyer_titre_email($titre) {
 	return ereg_replace("\n", ' ', supprimer_tags(extraire_multi($titre)));
 }
 
+// http://doc.spip.org/@envoyer_mail_publication
 function envoyer_mail_publication($id_article) {
 	$adresse_suivi = $GLOBALS['meta']["adresse_suivi"];
 	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
@@ -223,6 +230,7 @@ function envoyer_mail_publication($id_article) {
 	}
 }
 
+// http://doc.spip.org/@envoyer_mail_proposition
 function envoyer_mail_proposition($id_article) {
 	$adresse_suivi = $GLOBALS['meta']["adresse_suivi"];
 	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
@@ -260,6 +268,7 @@ function envoyer_mail_proposition($id_article) {
 //
 // Mail des nouveautes
 //
+// http://doc.spip.org/@cron_mail
 function cron_mail($t) {
 	$adresse_neuf = $GLOBALS['meta']['adresse_neuf'];
 	$jours_neuf = $GLOBALS['meta']['jours_neuf'];

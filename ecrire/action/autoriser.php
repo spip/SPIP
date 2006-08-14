@@ -21,6 +21,7 @@ include_spip('base/abstract_sql');
 //  il verifie soit que le demandeur est authentifie
 // soit que le fichier est joint a au moins 1 article, breve ou rubrique publie
 
+// http://doc.spip.org/@action_autoriser_dist
 function action_autoriser_dist()
 {
   global $auteur_session; // positionne par verifier_visiteur dans inc_version
@@ -71,6 +72,7 @@ if (!$refus AND !$auth_login) {
   else
     {
       if (!function_exists('mime_content_type')) {
+	// http://doc.spip.org/@mime_content_type
 	function mime_content_type($f) {preg_match("/\.(\w+)/",$f,$r); return $r[1];}
  }
       $ct = mime_content_type($file);

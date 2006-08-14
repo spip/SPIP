@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('base/serial');
 
+// http://doc.spip.org/@supprime_invalideurs
 function supprime_invalideurs() {
 	spip_query("DELETE FROM spip_caches");
 }
@@ -22,6 +23,7 @@ function supprime_invalideurs() {
 //
 // Calcul des pages : noter dans la base les liens d'invalidation
 //
+// http://doc.spip.org/@maj_invalideurs
 function maj_invalideurs ($fichier, &$page, $duree) {
 	// ne pas noter les POST et les delais=0
 	if ($fichier == '') return;
@@ -45,6 +47,7 @@ function maj_invalideurs ($fichier, &$page, $duree) {
 // pour les forums l'invalideur est : 'id_forum/a23'
 // pour les petitions et autres, l'invalideur est par exemple :
 // 'varia/pet60'
+// http://doc.spip.org/@insere_invalideur
 function insere_invalideur($inval, $fichier) {
 	if ($inval)
 	foreach ($inval as $type => $a) {
@@ -61,6 +64,7 @@ function insere_invalideur($inval, $fichier) {
 //
 // Invalider les caches lies a telle condition
 //
+// http://doc.spip.org/@suivre_invalideur
 function suivre_invalideur($cond) {
 	$result = spip_query("SELECT DISTINCT fichier FROM spip_caches WHERE $cond");
 	$tous = array();
@@ -75,6 +79,7 @@ function suivre_invalideur($cond) {
 //
 // Supprimer les vieux caches
 //
+// http://doc.spip.org/@retire_vieux_caches
 function retire_vieux_caches() {
 	$condition = "type='t' AND id<".time();
 	suivre_invalideur($condition);
@@ -84,6 +89,7 @@ function retire_vieux_caches() {
 //
 // Marquer les fichiers caches invalides comme etant a supprimer
 //
+// http://doc.spip.org/@applique_invalideur
 function applique_invalideur($depart) {
 
 	if ($depart) {
@@ -110,6 +116,7 @@ function applique_invalideur($depart) {
 
 // Utilisee pour vider le cache depuis l'espace prive
 // (ou juste les squelettes si un changement de config le necessite)
+// http://doc.spip.org/@purger_repertoire
 function purger_repertoire($dir, $age='ignore', $regexp = '') {
 	$handle = @opendir($dir);
 	if (!$handle) return;
@@ -131,6 +138,7 @@ function purger_repertoire($dir, $age='ignore', $regexp = '') {
 // Fonctions pour le cache des images (vues reduites)
 
 
+// http://doc.spip.org/@calculer_taille_dossier
 function calculer_taille_dossier ($dir) {
 	$handle = @opendir($dir);
 	if (!$handle) return;
@@ -148,6 +156,7 @@ function calculer_taille_dossier ($dir) {
 }
 
 
+// http://doc.spip.org/@cron_invalideur
 function cron_invalideur($t) {
 	//
 	// menage des vieux fichiers du cache
