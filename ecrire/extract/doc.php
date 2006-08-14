@@ -10,6 +10,7 @@
 // voulu ; dans le cas contraire le document sera lu comme s'il etait
 // dans le charset iso-8859-1
 
+// http://doc.spip.org/@extracteur_doc
 function extracteur_doc($fichier, &$charset) {
 
 	$charset = 'iso-8859-1';
