@@ -14,21 +14,19 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_iconifier_dist()
 {
-	global $action, $arg, $hash, $id_auteur;
 	include_spip('inc/actions');
-	if (!verifier_action_auteur("$action-$arg", $hash, $id_auteur)) {
-		include_spip('inc/minipres');
-		minipres(_T('info_acces_interdit'));
-	}
+	$var_f = charger_fonction('controler_action_auteur', 'inc');
+	$var_f();
+	$arg = _request('arg');
+
 	$arg = rawurldecode($arg);
 	if (!preg_match(',^unlink\s,',$arg))
-		action_spip_image_ajouter_dist();
-	else	action_spip_image_effacer_dist();
+		action_spip_image_ajouter_dist($arg);
+	else	action_spip_image_effacer_dist($arg);
 }
 
-function action_spip_image_effacer_dist() {
+function action_spip_image_effacer_dist($arg) {
 
-	global $arg;
 	$arg = preg_replace(',^unlink\s*,','',rawurldecode($arg));
 	if (!strstr($arg, ".."))
 		@unlink(_DIR_LOGOS . $arg);
@@ -40,8 +38,8 @@ function action_spip_image_effacer_dist() {
 
 // $source = $_FILES[0]
 // $dest = arton12.xxx
-function action_spip_image_ajouter_dist() {
-	global $sousaction2, $source, $arg, $formats_logos;
+function action_spip_image_ajouter_dist($arg) {
+	global $sousaction2, $source, $formats_logos;
 
 	include_spip('inc/getdocument');
 	if (!$sousaction2) {

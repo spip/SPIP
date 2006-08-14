@@ -19,18 +19,11 @@ function action_virtualiser_dist() {
 	global $convert_command;
 
 	include_spip('inc/actions');
+	$var_f = charger_fonction('controler_action_auteur', 'inc');
+	$var_f();
 
 	$arg = _request('arg');
-	$hash = _request('hash');
-	$action = _request('action');
-	$redirect = _request('redirect');
-	$id_auteur = _request('id_auteur');
 	$url = _request('virtuel');
-
-	if (!verifier_action_auteur("$action-$arg", $hash, $id_auteur)) {
-		include_spip('inc/minipres');
-		minipres(_T('info_acces_interdit'));
-	}
 
 	if (!preg_match(",^\W*(\d+)$,", $arg, $r)) {
 		 spip_log("action_virtualiser_dist $arg $url pas compris");

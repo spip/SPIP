@@ -14,24 +14,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/filtres');
 
-// Utiliser $_REQUEST car en Ajax on utilise GET et sinon POST.
-// et en plus Ajax en POST ne remplit pas $_POST 
+// En Ajax on utilise GET et sinon POST.
+// De plus Ajax en POST ne remplit pas $_POST 
 // spip_register_globals ne fournira donc pas les globales esperees
+// ==> passer par _request() qui simule $_REQUEST sans $_COOKIE
 
 function action_documenter_dist() {
 	
 	include_spip('inc/actions');
+	$var_f = charger_fonction('controler_action_auteur', 'inc');
+	$var_f();
 
-	$arg = $_REQUEST['arg'];
-	$hash = $_REQUEST['hash'];
-	$action = $_REQUEST['action'];
-	$redirect = $_REQUEST['redirect'];
-	$id_auteur = $_REQUEST['id_auteur'];
-
-	if (!verifier_action_auteur("$action-$arg", $hash, $id_auteur)) {
-		include_spip('inc/minipres');
-		minipres(_T('info_acces_interdit'));
-	}
+	$arg = _request('arg');
 
 	if (!preg_match(",^\W*(\d+)$,", $arg, $r)) {
 		 spip_log("action_documenter_dist $arg pas compris");

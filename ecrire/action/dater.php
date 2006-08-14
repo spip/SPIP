@@ -14,12 +14,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_dater_dist() {
 	
-	global $action, $arg, $hash, $id_auteur, $redirect;
+
+
 	include_spip('inc/actions');
-	if (!verifier_action_auteur("$action-$arg", $hash, $id_auteur)) {
-		include_spip('inc/minipres');
-		minipres(_T('info_acces_interdit'));
-	}
+	$var_f = charger_fonction('controler_action_auteur', 'inc');
+	$var_f();
+
+	$arg = _request('arg');
 
 	if (!preg_match(",^\W*(\d+)$,", $arg, $r)) {
 		spip_log("action_dater_dist $arg pas compris");

@@ -757,6 +757,7 @@ function afficher_portfolio(
 
 function formulaire_tourner($id_document, $document, $script, $flag_modif, $type)
 {
+	include_spip('inc/filtres');
 	global $spip_lang_right;
 
 	if (!$document) {
