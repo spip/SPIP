@@ -715,8 +715,10 @@ function calculer_balise_logo ($p) {
 
 				// double || signifie "on passe aux vrais filtres"
 				if ($nom == '') {
-					if ($couple[1])
+					if ($couple[1]) {
 						$params = $couple[1]; // recuperer #LOGO_DOCUMENT{20,30}
+						array_shift($p->param);
+					}
 					else
 						$flag_stop = true;
 				} else {
@@ -800,6 +802,7 @@ function calculer_balise_logo ($p) {
 			(($type_objet == 'RUBRIQUE') ? "sql_parent($_id_objet)" : "''")) .
 			",  '$flag_fichier'), $code_lien)";
 	}
+
 	$p->interdire_scripts = false;
 	return $p;
 }
