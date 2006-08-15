@@ -706,7 +706,7 @@ function calculer_balise_logo ($p) {
 	}
 
 	// analyser les faux filtres
-	$flag_fichier = $flag_stop = $flag_lien_auto = $code_lien = $filtres = $align = $lien = '';
+	$flag_fichier = $flag_stop = $flag_lien_auto = $code_lien = $filtres = $align = $lien = $params = '';
 
 	if (is_array($p->fonctions)) {
 		foreach($p->fonctions as $couple) {
@@ -715,7 +715,9 @@ function calculer_balise_logo ($p) {
 
 				// double || signifie "on passe aux vrais filtres"
 				if ($nom == '') {
-					if (!$params = $couple[1])
+					if ($couple[1])
+						$params = $couple[1]; // recuperer #LOGO_DOCUMENT{20,30}
+					else
 						$flag_stop = true;
 				} else {
 					// faux filtres

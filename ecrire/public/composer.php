@@ -369,9 +369,6 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 	$fichier = $row['fichier'];
 	$mode = $row['mode'];
 
-	// Lien par defaut = l'adresse du document
-	## if (!$lien) $lien = $fichier;
-
 	// Y a t il une vignette personnalisee ?
 	if ($id_vignette) {
 		if ($res = spip_abstract_select(array('fichier'),
@@ -388,8 +385,20 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 	}
 
 	// taille maximum [(#LOGO_DOCUMENT{300,52})]
-	list($x,$y) = split(',', ereg_replace("[}{]", "", $params)); 
+	if ($params
+	AND preg_match('/{\s*(\d+),\s*(\d+)\s*}/', $params, $r)) {
+		$x = intval($r[1]);
+		$y = intval($r[2]);
+	}
 
+	// Retrouver l'extension et le type mime
+	$ex = spip_abstract_fetch(spip_abstract_select(
+		array('extension', 'mime_type'),
+		array('spip_types_documents'),
+		array("id_type = " . intval($id_type))));
+	$extension = $ex['extension'];
+	$mime = $ex['mime_type'];
+	if (!$extension) $extension = 'txt';
 
 	if ($logo AND @file_exists($logo)) {
 		if ($x OR $y)
@@ -400,13 +409,6 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 		}
 	}
 	else {
-		// Retrouver l'extension
-		$extension = spip_abstract_fetch(spip_abstract_select(array('extension'),
-			array('spip_types_documents'),
-			array("id_type = " . intval($id_type))));
-		$extension = $extension['extension'];
-		if (!$extension) $extension = 'txt';
-
 		// Pas de vignette, mais un fichier image -- creer la vignette
 		if (strstr($GLOBALS['meta']['formats_graphiques'], $extension)) {
 		  if ($img = copie_locale($fichier)
@@ -445,7 +447,7 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 		$logo = inserer_attribut($logo, 'align', $align);
 
 	if ($lien)
-		$logo = "<a href='$lien'>$logo</a>";
+		$logo = "<a href='$lien' type='$mime'>$logo</a>";
 
 	return $logo;
 }
