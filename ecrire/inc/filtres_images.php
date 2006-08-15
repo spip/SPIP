@@ -70,6 +70,8 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 	$ret["fonction_imagecreatefrom"] = $fonction_imagecreatefrom;
 	$ret["fonction_image"] = $fonction_image;
 	$ret["fichier_dest"] = $fichier_dest;
+	$ret["format_source"] = $terminaison;
+	$ret["format_dest"] = $terminaison_dest;
 	$ret["creer"] = $creer;
 	$ret["class"] = $class;
 	$ret["alt"] = $alt;
@@ -337,6 +339,18 @@ function image_masque($im, $masque, $pos="") {
 		$y_m = $mask["hauteur"];
 	
 		$im2 = $mask["fonction_imagecreatefrom"]($masque);
+		if ($mask["format_source"] == "gif" AND function_exists('ImageCopyResampled')) { 
+			$im2_ = imagecreatetruecolor($x_m, $y_m);
+			// Si un GIF est transparent, 
+			// fabriquer un PNG transparent  
+			// Conserver la transparence 
+			if (function_exists("imageAntiAlias")) imageAntiAlias($im2_,true); 
+			@imagealphablending($im2_, false); 
+			@imagesavealpha($im2_,true); 
+			@ImageCopyResampled($im2_, $im2, 0, 0, 0, 0, $x_m, $y_m, $x_m, $y_m);
+			imagedestroy($im2);
+			$im2 = $im2_;
+		}
 		
 		if ($placer) {
 			// On fabriquer une version "agrandie" du masque,
@@ -442,6 +456,18 @@ function image_masque($im, $masque, $pos="") {
 		
 	
 		$im = $nouveau["fonction_imagecreatefrom"]($im_n);
+		if ($nouveau["format_source"] == "gif" AND function_exists('ImageCopyResampled')) { 
+			$im_ = imagecreatetruecolor($x_dest, $y_dest);
+			// Si un GIF est transparent, 
+			// fabriquer un PNG transparent  
+			// Conserver la transparence 
+			if (function_exists("imageAntiAlias")) imageAntiAlias($im_,true); 
+			@imagealphablending($im_, false); 
+			@imagesavealpha($im_,true); 
+			@ImageCopyResampled($im_, $im, 0, 0, 0, 0, $x_dest, $y_dest, $x_dest, $y_dest);
+			imagedestroy($im);
+			$im = $im_;
+		}
 		$im_ = imagecreatetruecolor($x_dest, $y_dest);
 		@imagealphablending($im_, false);
 		@imagesavealpha($im_,true);
@@ -1169,6 +1195,18 @@ function image_aplatir($im, $format='jpg', $coul='000000')
 	if ($creer) {
 		$im = $image["fonction_imagecreatefrom"]($im);
 		$im_ = imagecreatetruecolor($x_i, $y_i);
+		if ($image["format_source"] == "gif" AND function_exists('ImageCopyResampled')) { 
+			// Si un GIF est transparent, 
+			// fabriquer un PNG transparent  
+			// Conserver la transparence 
+			if (function_exists("imageAntiAlias")) imageAntiAlias($im_,true); 
+			@imagealphablending($im_, false); 
+			@imagesavealpha($im_,true); 
+			@ImageCopyResampled($im_, $im, 0, 0, 0, 0, $x_i, $y_i, $x_i, $y_i);
+			imagedestroy($im);
+			$im = $im_;
+			$im_ = imagecreatetruecolor($x_i, $y_i);
+		}
 		@imagealphablending($im_, false);
 		@imagesavealpha($im_,true);
 		$color_t = ImageColorAllocateAlpha( $im_, $dr, $dv, $db , 0 );
