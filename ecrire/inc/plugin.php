@@ -22,13 +22,13 @@ include_spip('inc/meta');
 // lecture des sous repertoire plugin existants
 // http://doc.spip.org/@liste_plugin_files
 function liste_plugin_files(){
-	$plugin_files=array();
-	foreach (preg_files(_DIR_PLUGINS, '/plugin[.]xml$') as $plugin) {
-		$infos = plugin_get_infos(substr(dirname($plugin), strlen(_DIR_PLUGINS)));
-		#if (!isset($infos['erreur'])) // on affiche les erreurs c'est utile aux developpeurs
-		$plugin_files[]=substr(dirname($plugin), strlen(_DIR_PLUGINS));
+	static $plugin_files=array();
+	if (!count($plugin_files)){
+		foreach (preg_files(_DIR_PLUGINS, '/plugin[.]xml$') as $plugin) {
+			$plugin_files[]=substr(dirname($plugin), strlen(_DIR_PLUGINS));
+		}
+		sort($plugin_files);
 	}
-	sort($plugin_files);
 	return $plugin_files;
 }
 
@@ -259,17 +259,20 @@ function ordonne_plugin(){
 }
 
 // http://doc.spip.org/@parse_plugin_xml
-function parse_plugin_xml($texte){
+function parse_plugin_xml($texte, $clean=true){
 	$out = array();
   // enlever les commentaires
-  $texte = preg_replace(',<!--(.*?)-->,is','',$texte);
-  $texte = preg_replace(',<\?(.*?)\?>,is','',$texte);
+  if ($clean){
+	  $texte = preg_replace(',<!--(.*?)-->,is','',$texte);
+	  $texte = preg_replace(',<\?(.*?)\?>,is','',$texte);
+  }
   $txt = $texte;
 
 	// tant qu'il y a des tags
-	while(preg_match("{<([^>]*?)>}s",$txt)){
+	$chars = preg_split("{<([^>]*?)>}s",$txt,2,PREG_SPLIT_DELIM_CAPTURE);
+	while(count($chars)>=2){
 		// tag ouvrant
-		$chars = preg_split("{<([^>]*?)>}s",$txt,2,PREG_SPLIT_DELIM_CAPTURE);
+		//$chars = preg_split("{<([^>]*?)>}s",$txt,2,PREG_SPLIT_DELIM_CAPTURE);
 	
 		// $before doit etre vide ou des espaces uniquements!
 		$before = trim($chars[0]);
@@ -295,8 +298,12 @@ function parse_plugin_xml($texte){
 			}
 			$content = $chars[0];
 			$txt = trim($chars[2]);
-			$out[$tag][]=parse_plugin_xml($content);
+			if (strpos($content,"<")===FALSE) // eviter une recursion si pas utile
+				$out[$tag][] = $content;
+			else
+				$out[$tag][]=parse_plugin_xml($content, false);
 		}
+		$chars = preg_split("{<([^>]*?)>}s",$txt,2,PREG_SPLIT_DELIM_CAPTURE);
 	}
 	if (count($out)&&(strlen($txt)==0))
 		return $out;
@@ -339,42 +346,46 @@ function chaines_lang($texte){
 // lecture du fichier de configuration d'un plugin
 // http://doc.spip.org/@plugin_get_infos
 function plugin_get_infos($plug){
-  $ret = array();
-  if ((@file_exists(_DIR_PLUGINS))&&(is_dir(_DIR_PLUGINS))){
-		if (@file_exists(_DIR_PLUGINS."$plug/plugin.xml")) {
-			lire_fichier(_DIR_PLUGINS."$plug/plugin.xml", $texte);
-			$arbre = parse_plugin_xml($texte);
-			if (!isset($arbre['plugin'])&&is_array($arbre['plugin']))
-				$arbre = array('erreur' => array(_T('erreur_plugin_fichier_def_incorrect')." : $plug/plugin.xml"));
+	static $infos=array();
+	if (!isset($infos[$plug])){
+	  $ret = array();
+	  if ((@file_exists(_DIR_PLUGINS))&&(is_dir(_DIR_PLUGINS))){
+			if (@file_exists(_DIR_PLUGINS."$plug/plugin.xml")) {
+				lire_fichier(_DIR_PLUGINS."$plug/plugin.xml", $texte);
+				$arbre = parse_plugin_xml($texte);
+				if (!isset($arbre['plugin'])&&is_array($arbre['plugin']))
+					$arbre = array('erreur' => array(_T('erreur_plugin_fichier_def_incorrect')." : $plug/plugin.xml"));
+			}
+			else {
+				// pour arriver ici on l'a vraiment cherche...
+				$arbre = array('erreur' => array(_T('erreur_plugin_fichier_def_absent')." : $plug/plugin.xml"));
+			}
+	
+			plugin_verifie_conformite($plug,$arbre);
+			
+			$ret['nom'] = applatit_arbre($arbre['nom']);
+			$ret['version'] = trim(end($arbre['version']));
+			if (isset($arbre['auteur']))
+				$ret['auteur'] = applatit_arbre($arbre['auteur']);
+			if (isset($arbre['description']))
+				$ret['description'] = chaines_lang(applatit_arbre($arbre['description']));
+			if (isset($arbre['lien']))
+				$ret['lien'] = join(' ',$arbre['lien']);
+			if (isset($arbre['etat']))
+				$ret['etat'] = trim(end($arbre['etat']));
+			if (isset($arbre['options']))
+				$ret['options'] = $arbre['options'];
+			if (isset($arbre['fonctions']))
+				$ret['fonctions'] = $arbre['fonctions'];
+			$ret['prefix'] = $arbre['prefix'];
+			if (isset($arbre['pipeline']))
+				$ret['pipeline'] = $arbre['pipeline'];
+			if (isset($arbre['erreur']))
+				$ret['erreur'] = $arbre['erreur'];
 		}
-		else {
-			// pour arriver ici on l'a vraiment cherche...
-			$arbre = array('erreur' => array(_T('erreur_plugin_fichier_def_absent')." : $plug/plugin.xml"));
-		}
-
-		plugin_verifie_conformite($plug,$arbre);
-		
-		$ret['nom'] = applatit_arbre($arbre['nom']);
-		$ret['version'] = trim(end($arbre['version']));
-		if (isset($arbre['auteur']))
-			$ret['auteur'] = applatit_arbre($arbre['auteur']);
-		if (isset($arbre['description']))
-			$ret['description'] = chaines_lang(applatit_arbre($arbre['description']));
-		if (isset($arbre['lien']))
-			$ret['lien'] = join(' ',$arbre['lien']);
-		if (isset($arbre['etat']))
-			$ret['etat'] = trim(end($arbre['etat']));
-		if (isset($arbre['options']))
-			$ret['options'] = $arbre['options'];
-		if (isset($arbre['fonctions']))
-			$ret['fonctions'] = $arbre['fonctions'];
-		$ret['prefix'] = $arbre['prefix'];
-		if (isset($arbre['pipeline']))
-			$ret['pipeline'] = $arbre['pipeline'];
-		if (isset($arbre['erreur']))
-			$ret['erreur'] = $arbre['erreur'];
+		$infos[$plug] = $ret;
 	}
-	return $ret;
+	return $infos[$plug];
 }
 
 // http://doc.spip.org/@plugin_verifie_conformite
@@ -408,7 +419,7 @@ function plugin_verifie_conformite($plug,&$arbre){
 		$prefix = trim(end($arbre['prefix']));
 		if (isset($arbre['etat'])){
 			$etat = trim(end($arbre['etat']));
-			if (!preg_match(',^(dev|experimental|test|stable)$,',$etat))
+			if (!in_array($etat,array('dev','experimental','test','stable')))
 				$arbre['erreur'][] = _T('erreur_plugin_etat_inconnu')." : $etat";
 		}
 		if (isset($arbre['options'])){

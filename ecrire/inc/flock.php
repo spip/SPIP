@@ -222,21 +222,21 @@ function preg_files($dir, $pattern=-1 /* AUTO */, $maxfiles = 10000, $recurs=arr
 			if ($f[0] != '.' # ignorer . .. .svn etc
 			AND $f != 'CVS'
 			AND $f != 'remove.txt'
-			AND is_readable("$dir/$f")) {
-				if (is_file("$dir/$f")) {
-					if (preg_match(",$pattern,i", "$dir/$f"))
+			AND is_readable($f = "$dir/$f")) {
+				if (is_file($f)) {
+					if (preg_match(",$pattern,iS", $f))
 					{
-						$fichiers[] = "$dir/$f";
+						$fichiers[] = $f;
 						$nbfiles++;
 					}
 				} 
-				else if (is_dir("$dir/$f")){
-					$rp = @realpath("$dir/$f");
-					if (!is_string($rp) OR !strlen($rp)) $rp="$dir/$f"; # realpath n'est peut etre pas autorise
-					if (!in_array($rp, $recurs)) {
-						array_push($recurs, $rp);
+				else if (is_dir($f)){
+					$rp = @realpath($f);
+					if (!is_string($rp) OR !strlen($rp)) $rp=$f; # realpath n'est peut etre pas autorise
+					if (!isset($recurs[$rp])) {
+						$recurs[$rp] = true;
 						$beginning = $fichiers;
-						$end = preg_files("$dir/$f/", $pattern,
+						$end = preg_files("$f/", $pattern,
 							$maxfiles-$nbfiles, $recurs);
 						$fichiers = array_merge((array)$beginning, (array)$end);
 						$nbfiles = count($fichiers);
@@ -245,7 +245,6 @@ function preg_files($dir, $pattern=-1 /* AUTO */, $maxfiles = 10000, $recurs=arr
 			}
 		}
 		closedir($d);
-		sort($fichiers);
 	}
 	else {
 		spip_log("repertoire $dir absent ou illisible");
