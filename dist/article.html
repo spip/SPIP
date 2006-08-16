@@ -34,18 +34,7 @@
 
 				<p><small>[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small></p>
 
-				[(#REM) Traductions de l'article ]
-				<B_traductions>
-				<div class="traductions">
-					<p><:trad_article_traduction:></p>
-					<ul>
-						<BOUCLE_traductions(ARTICLES) {traduction} {par lang}>
-						<li lang="#LANG" xml:lang="#LANG" dir="#LANG_DIR"[ class="(#EXPOSE)"]>&#91;<#EXPOSE{span,a href="#URL_ARTICLE"} rel="alternate" hreflang="#LANG" title="[(#LANG|traduire_nom_langue)][ : (#TITRE|couper{80}|texte_backend)]">#LANG</#EXPOSE{span,a}>&#93;</li>
-						</BOUCLE_traductions>
-					</ul>
-				</div>
-				</B_traductions>
-
+   #TRADUCTIONS
 			</div>
 
 

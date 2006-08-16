@@ -15,6 +15,7 @@ dist/modeles/pagination_page.html -text
 dist/modeles/pagination_page_precedent_suivant.html -text
 dist/modeles/pagination_precedent_suivant.html -text
 dist/modeles/paginationitem.html -text
+dist/modeles/traductions.html -text
 dist/polices/dustismo-license.txt -text svneol=unset#application/octet-stream
 dist/polices/dustismo.ttf -text
 dist/polices/dustismo_bold.ttf -text
