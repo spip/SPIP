@@ -331,17 +331,6 @@ function applatit_arbre($arbre,$separateur = " "){
 		}
 	return substr($s,0,strlen($s)-strlen($separateur));
 }
-// http://doc.spip.org/@chaines_lang
-function chaines_lang($texte){
-	// TODO : prendre en charge le fichier langue specifique du plugin
-	// meme si pas encore charge
-	$regexp = "|<:([^>]*):>|";
-	if (preg_match_all($regexp, $texte, $matches, PREG_SET_ORDER))
-	foreach ($matches as $regs)
-		$texte = str_replace($regs[0],
-		_T($regs[1]), $texte);
-	return $texte;
-}
 
 // lecture du fichier de configuration d'un plugin
 // http://doc.spip.org/@plugin_get_infos
@@ -368,7 +357,7 @@ function plugin_get_infos($plug){
 			if (isset($arbre['auteur']))
 				$ret['auteur'] = applatit_arbre($arbre['auteur']);
 			if (isset($arbre['description']))
-				$ret['description'] = chaines_lang(applatit_arbre($arbre['description']));
+				$ret['description'] = applatit_arbre($arbre['description']);
 			if (isset($arbre['lien']))
 				$ret['lien'] = join(' ',$arbre['lien']);
 			if (isset($arbre['etat']))
