@@ -1483,7 +1483,7 @@ function calcul_bornes_pagination($courante, $nombre, $max = 10) {
 //
 
 // http://doc.spip.org/@calcul_pagination
-function calcul_pagination($total, $nom, $pas, $liste = true, $modele='dist') {
+function calcul_pagination($total, $nom, $pas, $liste = true, $modele='') {
 	static $ancres = array();
 	$bloc_ancre = "";
 	
@@ -1519,7 +1519,8 @@ function calcul_pagination($total, $nom, $pas, $liste = true, $modele='dist') {
 	if (!$liste)
 		return $bloc_ancre;
 
-	return recuperer_fond("modeles/pagination_$modele",$pagination);
+	if ($modele) $modele = '_'.$modele;
+	return recuperer_fond("modeles/pagination$modele",$pagination);
 }
 
 // recuperere le chemin d'une css existante et :
