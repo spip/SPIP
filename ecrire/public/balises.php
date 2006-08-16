@@ -569,6 +569,27 @@ function balise_LESAUTEURS_dist ($p) {
 	return $p;
 }
 
+/*function balise_TRADUCTIONS_dist($p){
+	$p->code = "recuperer_fond(
+	 'modeles/traductions',
+   array('id_article' => ".champ_sql('id_article', $p).")
+ )";
+
+	#$p->interdire_scripts = true;
+	return $p;
+}*/
+
+function balise_MODELE_dist($p){
+
+ $nom = strtolower($p->nom_champ);
+	$p->code = "recuperer_fond(
+  'modeles/".$nom."',
+  \$GLOBALS['contexte']
+ )";
+
+	#$p->interdire_scripts = true;
+	return $p;
+}
 
 // #PETITION 
 // retourne '' si l'article courant n'a pas de petition 
