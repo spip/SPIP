@@ -67,7 +67,11 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_dyn($id_auteur, $id_article, $mail) {
 	$texte = _request('texte_message_auteur'.$id);
 	$adres = _request('email_message_auteur'.$id);
 
-	$mailko = $texte && !email_valide($adres);
+	if (_request('valide')) {
+		$mailko = !email_valide($adres);
+		$sujetko = !$sujet;
+		$texteko = !$texte;
+	}
 
 	$validable = $texte && $sujet && (!$mailko);
 
@@ -88,9 +92,10 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_dyn($id_auteur, $id_article, $mail) {
 			'id' => $id,
 			'mailko' => $mailko ? _T('form_prop_indiquer_email') : '',
 			'mail' => $adres,
-			'sujetko' => ($texte && !$sujet) ? _T('form_prop_indiquer_sujet') : '',
+			'sujetko' => $sujetko ? _T('form_prop_indiquer_sujet') : '',
 			'mailenvoye' => $mailenvoye,
 			'sujet' => $sujet,
+			'texteko' => $texteko ? _L('Veuillez indiquer un message') : '',
 			'texte' => $texte,
 			'valide' => $validable ? $id : '',
 			'bouton' => _T('form_prop_envoyer'),
