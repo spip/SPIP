@@ -535,6 +535,7 @@ function typo($letexte, $echapper=true) {
 	//
 	// NOTE : dans propre() ceci s'execute avant les tableaux a cause du "|",
 	// et apres les liens a cause du traitement de [<imgXX|right>->URL]
+	$letexte = pipeline('modeles', $letexte); # temporaire avant integration des modeles
 	if (preg_match(__preg_img, $letexte)) {
 		include_spip('inc/documents');
 		$letexte = inserer_documents($letexte);
