@@ -204,32 +204,6 @@ function sql_rubrique($id_article) {
 	return $id_rubrique['id_rubrique'];
 }
 
-// http://doc.spip.org/@sql_auteurs
-function sql_auteurs($id_article, $table, $id_boucle, $serveur='') {
-	$auteurs = "";
-	if ($id_article) {
-		$result_auteurs = spip_abstract_select(
-			array('auteurs.id_auteur', 'auteurs.nom'),
-			array('auteurs' => 'spip_auteurs',
-				'lien' => 'spip_auteurs_articles'), 
-			array("lien.id_article=$id_article",
-				"auteurs.id_auteur=lien.id_auteur"),
-			'',array(),'','', array(),
-			$table, $id_boucle, $serveur);
-
-		while($row_auteur = spip_abstract_fetch($result_auteurs, $serveur)) {
-			$nom_auteur = typo($row_auteur['nom']);
-			$url_auteur = generer_url_auteur($row_auteur['id_auteur']);
-			if ($url_auteur) {
-				$auteurs[] = "<a href=\"$url_auteur\">$nom_auteur</a>";
-			} else {
-				$auteurs[] = "$nom_auteur";
-			}
-		}
-	}
-	return (!$auteurs) ? "" : join($auteurs, ", ");
-}
-
 // http://doc.spip.org/@sql_petitions
 function sql_petitions($id_article, $table, $id_boucle, $serveur, &$cache) {
 	$retour = spip_abstract_fetsel(
