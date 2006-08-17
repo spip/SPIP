@@ -394,8 +394,8 @@ function creer_contexte_de_modele($args) {
 		$contexte[$var] = $val;
 		$params[] = "$var=$val";
 	}
-	if ($params = join('|', $params))
-		$contexte['params'] = $params;
+	if ($params)
+		$contexte['params'] = serialize($params);
 
 	return $contexte;
 }
