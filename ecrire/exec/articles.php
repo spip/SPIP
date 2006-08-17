@@ -75,9 +75,6 @@ function exec_articles_dist()
 
 	$flag_editable = ($flag_modifiable OR ($flag_auteur AND ($statut_article == 'prepa' OR $statut_article == 'prop' OR $statut_article == 'poubelle')));
 
-	// aucun doc implicitement inclus au depart.
-	inclus_non_articles($id_article);
-	
 	debut_page("&laquo; $titre &raquo;", "naviguer", "articles", "", "", $id_rubrique);
 
 	debut_grand_cadre();
@@ -1126,25 +1123,6 @@ function formulaire_instituer_article($id_article, $statut, $script, $args)
   /* pour plus tard
   return ajax_action_auteur("instituer_article", $id_article, $res, $script, $args, $args);
   */
-}
-
-// Passer les images/docs en "inclus=non"
-
-// http://doc.spip.org/@inclus_non_articles
-function inclus_non_articles($id_article)
-{
-  $result = spip_query("SELECT docs.id_document FROM spip_documents AS docs, spip_documents_articles AS lien WHERE lien.id_article=$id_article AND lien.id_document=docs.id_document");
-
-  $ze_doc = array();
-  while($row=spip_fetch_array($result)){
-	$ze_doc[]=$row['id_document'];
-}
-
-if (count($ze_doc)>0){
-	$ze_docs = join($ze_doc,",");
-	spip_query("UPDATE spip_documents SET inclus='non' WHERE id_document IN ($ze_docs)");
-}
-
 }
 
 ?>

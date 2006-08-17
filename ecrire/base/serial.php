@@ -207,7 +207,6 @@ $spip_documents = array(
 		"largeur"	=> "integer NOT NULL",
 		"hauteur"	=> "integer NOT NULL",
 		"mode"	=> "ENUM('vignette', 'document') NOT NULL",
-		"inclus"	=> "VARCHAR(3) DEFAULT 'non'",
 		"distant"	=> "VARCHAR(3) DEFAULT 'non'",
 		"idx"		=> "ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL",
 		"maj"	=> "TIMESTAMP");

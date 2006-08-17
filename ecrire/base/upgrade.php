@@ -1189,6 +1189,10 @@ function maj_base() {
 		update_index_tables();
 		maj_version(1.916);
 	}
+	if ($version_installee < 1.917) { // apres 1.415 pui 1.732 nouvelle tentative ...
+		spip_query("ALTER TABLE spip_documents DROP inclus");
+		maj_version(1.917);
+	}
 
 }
 
