@@ -36,6 +36,7 @@ define('BALISE_INCLURE','<INCLU[DR]E[[:space:]]*(\(([^)]*)\))?');
 define('SQL_ARGS', '(\([^)]*\))');
 define('CHAMP_SQL_PLUS_FONC', '`?([A-Za-z_][A-Za-z_0-9]*)' . SQL_ARGS . '?`?');
 
+// http://doc.spip.org/@phraser_arguments_inclure
 function phraser_arguments_inclure($p,$rejet_filtres = false){
 	$champ = new Inclure;
 	// on assimile {var=val} a une liste de un argument sans fonction

@@ -381,6 +381,7 @@ function recuperer_fond($fond, $contexte=array()) {
 
 // temporairement ici : a mettre dans le futur inc/modeles
 // creer_contexte_de_modele('left', 'autostart=true', ...) renvoie un array()
+// http://doc.spip.org/@creer_contexte_de_modele
 function creer_contexte_de_modele($args) {
 	$contexte = array();
 	$params = array();
