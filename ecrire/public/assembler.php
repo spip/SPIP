@@ -384,18 +384,20 @@ function recuperer_fond($fond, $contexte=array()) {
 function creer_contexte_de_modele($args) {
 	$contexte = array();
 	$params = array();
-	foreach ($args as $arg) {
-		if (in_array($arg, array('left', 'right', 'center'))) {
-			$var = 'align';
-			$val = $arg;
-		} else {
-			list($var, $val) = split('=', $arg);
+	foreach ($args as $var=>$val) {
+		if (is_int($var)){ // argument pas formate
+			if (in_array($val, array('left', 'right', 'center'))) {
+				$var = 'align';
+				$contexte[$var] = $val;
+			} else {
+				$args = explode('=', $val);
+				if (count($args)==2)
+					$contexte[$args[0]] = $args[1];
+			}
 		}
-		$contexte[$var] = $val;
-		$params[] = "$var=$val";
+		else
+			$contexte[$var] = $val;
 	}
-	if ($params)
-		$contexte['params'] = serialize($params);
 
 	return $contexte;
 }
