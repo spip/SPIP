@@ -5,7 +5,7 @@
 <head>
 	<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
 	[<meta name="description" content="(#DESCRIPTIF|couper{150}|textebrut)" />]
-	<INCLURE{fond=inc-head}{lang}>
+	<INCLURE{fond=inc-head}>
 
 	[(#REM) Lien vers le flux RSS du mot cle ]
 	<link rel="alternate" type="application/rss+xml" title="[(#TITRE|textebrut|texte_backend)]" href="[(#URL_PAGE{backend}|parametre_url{id_mot,#ID_MOT})]" />
@@ -15,7 +15,7 @@
 <div id="page">
 
 	[(#REM) Entete de la page + titre du site ]
-	<INCLURE{fond=inc-entete}{lang}>
+	<INCLURE{fond=inc-entete}>
 
 	[(#REM) Fil d'Ariane ]
 	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:mots_clefs:><BOUCLE_ariane(GROUPES_MOTS){id_groupe}> &gt; [(#TITRE|couper{80})]</BOUCLE_ariane>[ &gt; (#TITRE|couper{80})]</div>
@@ -116,7 +116,7 @@
 			<h1 class="invisible"><:navigation:></h1>
 
 			[(#REM) Menu de navigation par rubriques ]
-			<INCLURE{fond=inc-rubriques}{lang}>
+			<INCLURE{fond=inc-rubriques}>
 
 			[(#REM) Menu de navigation mots-cles : les autres mots cles du meme groupe ]
 			<B_mots_freres>
@@ -151,7 +151,7 @@
 	</div><!-- fin conteneur -->
 
 	[(#REM) Pied de page ]
-	<INCLURE{fond=inc-pied}{lang}>
+	<INCLURE{fond=inc-pied}>
 
 </div><!-- fin page -->
 </body>

@@ -5,7 +5,7 @@
 <head>
 	<title>[(#NOM|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
 	[<meta name="description" content="(#BIO|couper{150}|textebrut)" />]
-	<INCLURE{fond=inc-head}{lang}>
+	<INCLURE{fond=inc-head}>
 
 </head>
 
@@ -13,7 +13,7 @@
 <div id="page">
 
 	[(#REM) Entete de la page + titre du site ]
-	<INCLURE{fond=inc-entete}{lang}>
+	<INCLURE{fond=inc-entete}>
 
 	[(#REM) Fil d'Ariane ]
 	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:info_auteurs:>[ &gt; (#NOM|couper{80})]</div>
@@ -68,7 +68,7 @@
 		<h1 class="invisible"><:navigation:></h1>
 
 		[(#REM) Menu de navigation par rubriques ]
-		<INCLURE{fond=inc-rubriques}{lang}>
+		<INCLURE{fond=inc-rubriques}>
 
 		[(#REM) Autres auteurs ]
 		<B_auteurs>
@@ -89,7 +89,7 @@
 	</div><!-- fin conteneur -->
 
 	[(#REM) Pied de page ]
-	<INCLURE{fond=inc-pied}{lang}>
+	<INCLURE{fond=inc-pied}>
 
 </div><!-- fin page -->
 </body>

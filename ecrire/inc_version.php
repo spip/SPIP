@@ -234,9 +234,9 @@ $spip_version = 1.917;
 // et en numerique a incrementer sur les evolutions qui cassent la compatibilite descendante
 // 1.xxyy : xx00 versions stables publiees, xxyy versions de dev
 // (ce qui marche pour yy ne marchera pas forcement sur une version plus ancienne)
-// type nouvelles fonctionnalités, deplacement de fonctions ...
+// type nouvelles fonctionnalites, deplacement de fonctions ...
 $spip_version_affichee = '1.9';
-$spip_version_code=1.9001;
+$spip_version_code=1.9002;
 
 // ** Securite **
 $auteur_session = $connect_statut = $connect_toutes_rubriques = $connect_id_rubrique = $hash_recherche = $hash_recherche_strict = '';

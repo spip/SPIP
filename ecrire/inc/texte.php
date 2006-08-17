@@ -484,6 +484,9 @@ function typo_en($letexte) {
 // http://doc.spip.org/@typo
 function typo($letexte, $echapper=true) {
 
+	// Plus vite !
+	if (!strlen($letexte)) return '';
+
 	// Echapper les codes <html> etc
 	if ($echapper)
 		$letexte = echappe_html($letexte, 'TYPO');
@@ -515,17 +518,20 @@ function typo($letexte, $echapper=true) {
 	$letexte = str_replace("'", "&#8217;", $letexte);
 
 	// typo francaise ou anglaise ?
-	// $lang_typo est fixee dans l'interface privee pour editer
+	// $lang_objet est fixee dans l'interface privee pour editer
 	// un texte anglais en interface francaise (ou l'inverse) ;
 	// sinon determiner la typo en fonction de la langue
-	if (!$lang = $GLOBALS['lang_typo']) {
-		#include_spip('inc/lang');
-		$lang = lang_typo($GLOBALS['spip_lang']);
+	if (!$lang = $GLOBALS['lang_objet'])
+		$lang = $GLOBALS['spip_lang'];
+	lang_select($lang);
+	switch (lang_typo($lang)) {
+		case 'fr':
+			$letexte = typo_fr($letexte);
+			break;
+		default:
+			$letexte = typo_en($letexte);
+			break;
 	}
-	if ($lang == 'fr')
-		$letexte = typo_fr($letexte);
-	else
-		$letexte = typo_en($letexte);
 
 	// Retablir les caracteres proteges
 	$letexte = strtr($letexte, $illegal, $protege);
@@ -546,6 +552,9 @@ function typo($letexte, $echapper=true) {
 	// old style
 	if (function_exists('apres_typo'))
 		$letexte = apres_typo($letexte);
+
+	// remettre la langue precedente
+	lang_dselect();
 
 	// reintegrer les echappements
 	if ($echapper)

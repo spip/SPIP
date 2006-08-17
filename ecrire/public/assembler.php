@@ -209,19 +209,19 @@ function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 		);
 	}
 
-	$fcache = charger_fonction('cacher', 'public');
-	// Garnir ces quatre parametres avec les infos sur le cache
-	$fcache($contexte_inclus, $use_cache, $chemin_cache, $page, $lastinclude);
+	// Si on a inclus sans fixer le critere de lang, on prend la langue courante
+	if (!isset($contexte_inclus['lang']))
+		$contexte_inclus['lang'] = ($langue_courante ? $langue_courante :  $GLOBALS['spip_lang']);
 
-	// Si on a inclus sans fixer le critere de lang, de deux choses l'une :
-	// - on est dans la langue du site, et pas besoin d'inclure inc_lang
-	// - on n'y est pas, et alors il faut revenir dans la langue par defaut
-	$lang = isset($contexte_inclus['lang']) ? $contexte_inclus['lang']:'';
-	if ($lang || ($GLOBALS['spip_lang'] != ($lang = $GLOBALS['meta']['langue_site']))) {
+	if ($contexte_inclus['lang'] != $GLOBALS['meta']['langue_site']) {
 		include_spip('inc/lang');
 		lang_select($lang);
 		$lang_select = true; // pour lang_dselect en sortie
-	} else $lang_select = false;
+	}
+
+	$fcache = charger_fonction('cacher', 'public');
+	// Garnir ces quatre parametres avec les infos sur le cache
+	$fcache($contexte_inclus, $use_cache, $chemin_cache, $page, $lastinclude);
 
 	// Une fois le chemin-cache decide, on ajoute la date (et date_redac)
 	// dans le contexte inclus, pour que les criteres {age} etc fonctionnent
@@ -240,7 +240,8 @@ function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 		if ($chemin_cache) 
 			$fcache($contexte_inclus, $use_cache, $chemin_cache, $page, $lastmodified);
 	}
-	$page['lang_select'] = $lang_select;
+	if($lang_select)
+		lang_dselect();
 
 	return $page;
 }
@@ -257,10 +258,6 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 	if (is_array($texte)) {
 
 		list($fond, $delainc, $contexte_inclus) = $texte;
-
-		if ((!isset($contexte_inclus['lang'])) AND
-		($GLOBALS['spip_lang'] != $GLOBALS['meta']['langue_site']))
-			$contexte_inclus['lang'] = $GLOBALS['spip_lang'];
 
 		// delais a l'ancienne, c'est pratiquement mort
 		$d = isset($GLOBALS['delais']) ? $GLOBALS['delais'] : 0;
@@ -283,10 +280,6 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 				$texte = ob_get_contents();
 				ob_end_clean();
 		}
-
-		if ($page['lang_select'])
-			lang_dselect();
-
 	}
 
 	if ($GLOBALS['var_mode'] == 'debug')
@@ -356,7 +349,8 @@ function message_erreur_404 ($erreur= "") {
 		$erreur = 'public:aucun_site';
 	}
 	$contexte_inclus = array(
-		'erreur' => _T($erreur)
+		'erreur' => _T($erreur),
+		'lang' => $GLOBALS['spip_lang']
 	);
 	$page = inclure_page('404', $contexte_inclus);
 	$page['status'] = 404;
@@ -367,6 +361,7 @@ function message_erreur_404 ($erreur= "") {
 // pour une inclusion dans un flux
 // http://doc.spip.org/@recuperer_fond
 function recuperer_fond($fond, $contexte=array()) {
+
 	// on est peut etre dans l'espace prive au moment de l'appel
 	define ('_INC_PUBLIC', 1);
 	if (($fond=='')&&isset($contexte['fond']))
@@ -381,26 +376,27 @@ function recuperer_fond($fond, $contexte=array()) {
 		ob_end_clean();
 	}
 
-	if ($page['lang_select'] === true)
-		lang_dselect();
-
 	return $page['texte'];
 }
 
 // temporairement ici : a mettre dans le futur inc/modeles
 // creer_contexte_de_modele('left', 'autostart=true', ...) renvoie un array()
-function creer_contexte_de_modele($args = array()) {
+function creer_contexte_de_modele($args) {
 	$contexte = array();
 	$params = array();
 	foreach ($args as $arg) {
-		if (in_array($arg, array('left', 'right', 'center')))
-			$arg = 'align='.$arg;
-
-		list($var, $val) = split('=', $arg);
+		if (in_array($arg, array('left', 'right', 'center'))) {
+			$var = 'align';
+			$val = $arg;
+		} else {
+			list($var, $val) = split('=', $arg);
+		}
 		$contexte[$var] = $val;
 		$params[] = "$var=$val";
 	}
-	$contexte['params'] = join('|', $params);
+	if ($params = join('|', $params))
+		$contexte['params'] = $params;
+
 	return $contexte;
 }
 

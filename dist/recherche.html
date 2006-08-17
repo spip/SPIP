@@ -4,7 +4,7 @@
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
 	<title><:resultats_recherche:> - [(#NOM_SITE_SPIP|textebrut)]</title>
-	<INCLURE{fond=inc-head}{lang}>
+	<INCLURE{fond=inc-head}>
 	<meta name="robots" content="none" />
 </head>
 
@@ -12,7 +12,7 @@
 <div id="page">
 
 	[(#REM) Entete de la page + titre du site ]
-	<INCLURE{fond=inc-entete}{lang}>
+	<INCLURE{fond=inc-entete}>
 
 	[(#REM) Fil d'Ariane ]
 	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:info_rechercher:>[ &gt; (#RECHERCHE)]</div>
@@ -131,14 +131,14 @@
 			<h1 class="invisible"><:navigation:></h1>
 
 			[(#REM) Menu de navigation par rubriques ]
-			<INCLURE{fond=inc-rubriques}{lang}>
+			<INCLURE{fond=inc-rubriques}>
 
 		</div><!-- fin navigation -->
 
 	</div><!-- fin conteneur -->
 	
 	[(#REM) Pied de page ]
-	<INCLURE{fond=inc-pied}{lang}>
+	<INCLURE{fond=inc-pied}>
 
 </div><!-- fin page -->
 </body>
