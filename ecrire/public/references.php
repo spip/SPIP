@@ -199,16 +199,24 @@ function calculer_champ($p) {
 function calculer_balise($nom, $p) {
 
 	// S'agit-t-il d'une balise_XXXX[_dist]() ?
-	if ($f = charger_fonction($nom, 'balise', true))
-		return $f($p);
+	if ($f = charger_fonction($nom, 'balise', true)) {
+		$res = $f($p);
+		if ($res !== NULL)
+			return $res;
+	}
 
 	// S'agit-t-il d'un modele ?
-	if (find_in_path('modeles/'.strtolower($nom).'.html'))
-		return balise_MODELE_dist($p);
+	if (find_in_path('modeles/'.strtolower($nom).'.html')) {
+		if (!function_exists($f = 'calculer_balise_modele')) $f .= '_dist';
+		$res = $f($p);
+		if ($res !== NULL)
+			return $res;
+	}
 
 	// S'agit-il d'un logo ? Une fonction speciale les traite tous
 	if (ereg('^LOGO_', $nom)) {
-		$res = calculer_balise_logo($p);
+		if (!function_exists($f = 'calculer_balise_logo')) $f .= '_dist';
+		$res = $f($p);
 		if ($res !== NULL)
 			return $res;
 	}
@@ -239,6 +247,41 @@ function calculer_balise($nom, $p) {
 		$p->code = "'#$nom'";
 		$p->interdire_scripts = false;
 	}
+
+	return $p;
+}
+
+
+// fonction speciale d'appel a un modele modeles/truc.html pour la balise #TRUC
+// exemples : #LESAUTEURS, #TRADUCTIONS, #DOC, #IMG...
+// http://doc.spip.org/@calculer_balise_modele_dist
+function calculer_balise_modele_dist($p){
+	$nom = strtolower($p->nom_champ);
+	$contexte = array();
+
+	// Si le champ existe dans la pile, on le met dans le contexte
+	// (exemple : #LESAUTEURS dans spip_syndic_articles)
+	$code_contexte[] = "'$nom='.".champ_sql($nom, $p);
+
+	// Reserver la cle primaire de la boucle courante
+	if ($primary = $p->boucles[$p->id_boucle]->primary) {
+		$id = champ_sql($primary, $p);
+		$code_contexte[] = "'$primary='.".$id;
+	}
+
+	// Preparer le code du contexte (id + champ + params)
+	foreach ($p->param as $param)
+	foreach ($param as $elem)
+	if (strlen($elem)) {
+		$code_contexte[] = calculer_liste($elem,
+			$p->descr,
+			$p->boucles,
+			$p->id_boucle);
+	}
+
+	$p->code = "recuperer_fond('modeles/".$nom."',
+		creer_contexte_de_modele(array(".join(',', $code_contexte).")))";
+	$p->interdire_scripts = false; // securite assuree par le squelette
 
 	return $p;
 }

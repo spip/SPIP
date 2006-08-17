@@ -387,4 +387,21 @@ function recuperer_fond($fond, $contexte=array()) {
 	return $page['texte'];
 }
 
+// temporairement ici : a mettre dans le futur inc/modeles
+// creer_contexte_de_modele('left', 'autostart=true', ...) renvoie un array()
+function creer_contexte_de_modele($args = array()) {
+	$contexte = array();
+	$params = array();
+	foreach ($args as $arg) {
+		if (in_array($arg, array('left', 'right', 'center')))
+			$arg = 'align='.$arg;
+
+		list($var, $val) = split('=', $arg);
+		$contexte[$var] = $val;
+		$params[] = "$var=$val";
+	}
+	$contexte['params'] = join('|', $params);
+	return $contexte;
+}
+
 ?>
