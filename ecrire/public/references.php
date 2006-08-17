@@ -270,13 +270,31 @@ function calculer_balise_modele_dist($p){
 	}
 
 	// Preparer le code du contexte (id + champ + params)
-	foreach ($p->param as $param)
-	foreach ($param as $elem)
-	if (strlen($elem)) {
-		$code_contexte[] = calculer_liste($elem,
-			$p->descr,
-			$p->boucles,
-			$p->id_boucle);
+	// on assimile {var=val} a une liste de un argument sans fonction
+	$champ = new Inclure;
+	foreach ($p->param as $k => $v) {
+		$var = $v[1][0];
+		if ($var==NULL) break; // on est arrive sur un filtre
+		if ($var->type != 'texte')
+			erreur_squelette(_T('zbug_parametres_inclus_incorrects'),
+				 $match[0]);
+		else {
+			$champ->param[$k] = $v;
+			ereg("^([^=]*)(=)?(.*)$", $var->texte,$m);
+			if ($m[2]) {
+				$champ->param[$k][0] = $m[1];
+				$val = $m[3];
+				if (ereg('^[\'"](.*)[\'"]$', $val, $m)) $val = $m[1];
+				$champ->param[$k][1][0]->texte = $val;
+			}
+			else
+				$champ->param[$k] = array($m[1]);
+		}
+	}	
+	foreach($champ->param as $val) {
+		$var = array_shift($val);
+		$code_contexte[] = "'$var' => " . 
+			($val ? calculer_liste($val[0], $p->descr, $p->boucles, $p->id_boucle) :(($var =='lang') ? '$GLOBALS["spip_lang"]' : index_pile($p->id_boucle, $var, $p->boucles)));
 	}
 
 	$p->code = "recuperer_fond('modeles/".$nom."',
