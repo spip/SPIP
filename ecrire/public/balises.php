@@ -543,44 +543,32 @@ function balise_RANG_dist ($p) {
 }
 
 
-// #LESAUTEURS
-// les auteurs d'un article (ou d'un article syndique)
-// http://www.spip.net/fr_article902.html
-// http://www.spip.net/fr_article911.html
-// http://doc.spip.org/@balise_LESAUTEURS_dist
-function balise_LESAUTEURS_dist ($p) {
-	// Cherche le champ 'lesauteurs' dans la pile
-	$_lesauteurs = champ_sql('lesauteurs', $p); 
-
-	// Si le champ n'existe pas (cas de spip_articles), on donne la
-	// construction speciale sql_auteurs(id_article) ;
-	// dans le cas contraire on prend le champ 'les_auteurs' (cas de
-	// spip_syndic_articles)
-	if ($_lesauteurs AND $_lesauteurs != '$Pile[0][\'lesauteurs\']') {
-		$p->code = $_lesauteurs;
-	} else {
-		$p->code = "recuperer_fond(
-   'modeles/lesauteurs',
-   array('id_article' => ".champ_sql('id_article', $p).")
-  )";
-	}
-
-	$p->interdire_scripts = false; // securite apposee par recuperer_fond()
-	return $p;
-}
-
 // #MODELE
 // fonction speciale d'appel a un modele modeles/truc.html pour la balise #TRUC
+// exemples : #LESAUTEURS, #TRADUCTIONS, #DOC, #IMG...
 // http://doc.spip.org/@balise_MODELE_dist
 function balise_MODELE_dist($p){
+	$nom = strtolower($p->nom_champ);
+	$contexte = array();
 
- $nom = strtolower($p->nom_champ);
-	$p->code = "recuperer_fond(
-  'modeles/".$nom."',
-  \$GLOBALS['contexte']
- )";
+	// Si le champ existe dans la pile, on le met dans le contexte
+	// (exemple : #LESAUTEURS dans spip_syndic_articles)
+	$contexte[$nom] = champ_sql($nom, $p);
 
-	#$p->interdire_scripts = true;
+	// Reserver la cle primaire de la boucle courante
+	if ($primary = $p->boucles[$p->id_boucle]->primary) {
+		$id = champ_sql($primary, $p);
+		$contexte[$primary] = $id;
+	}
+
+	// Preparer le code du contexte (id + champ)
+	foreach($contexte as $var=>$code)
+		$contexte[$var] = "'$var' => $code";
+
+	$p->code = "recuperer_fond('modeles/".$nom."',
+		array(".join(',', $contexte)."))";
+	$p->interdire_scripts = false; // securite assuree par le squelette
+
 	return $p;
 }
 
