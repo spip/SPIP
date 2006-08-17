@@ -47,11 +47,11 @@ function xml_fetch_tag($f, &$before, $gz=false, $skip_comment=true) {
 	
 	while (preg_match("{<([^>]*?)>}s",$buf)==FALSE)
 		$buf .= $_fread($f, $buf_len);
-	$chars = preg_split("{<([^>]*?)>}s",$buf,2,PREG_SPLIT_OFFSET_CAPTURE|PREG_SPLIT_DELIM_CAPTURE);
+	$chars = preg_split("{<([^>]*?)>}s",$buf,2,PREG_SPLIT_DELIM_CAPTURE);
 
-	$before .= str_replace(array('&amp;','&lt;'),array('&','<'),$chars[0][0]);
-	$tag = $chars[1][0];
-	$buf = $chars[2][0];
+	$before .= str_replace(array('&amp;','&lt;'),array('&','<'),$chars[0]);
+	$tag = $chars[1];
+	$buf = $chars[2];
 
 	$abs_pos = $_ftell($f) - strlen($buf);
 
