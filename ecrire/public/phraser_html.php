@@ -84,11 +84,11 @@ function phraser_inclure($texte, $ligne, $result) {
 		$texte = substr($texte, $p+strlen($match[0]));
 		// on assimile {var=val} a une liste de un argument sans fonction
 		phraser_args($texte,">","",$result,$champ);
-		$champ = phraser_arguments_inclure($champ);
+		$champ_ = phraser_arguments_inclure($champ);
 		
 		$texte = substr($champ->apres,1);
-		$champ->apres = "";
-		$result[] = $champ;
+		$champ_->apres = "";
+		$result[] = $champ_;
 	}
 	return (($texte==="") ? $result : phraser_idiomes($texte, $ligne, $result));
 }
