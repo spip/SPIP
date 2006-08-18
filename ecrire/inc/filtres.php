@@ -1581,11 +1581,34 @@ function table_valeur($table,$cle,$defaut=''){
 
 // filtre match pour faire des tests avec expression reguliere
 // [(#TEXTE|match{^ceci$,Uims})]
+// retourne le fragment de chaine qui "matche"
 // http://doc.spip.org/@match
-function match($texte,$expression,$modif="UimsS"){
+function match($texte, $expression, $modif="UimsS") {
 	$expression=str_replace("\/","/",$expression);
 	$expression=str_replace("/","\/",$expression);
-  return preg_match("/$expression/$modif",$texte);
+	return preg_match("/$expression/$modif",$texte, $r) ? $r[0] : false;
+}
+
+// filtre replace pour faire des operations avec expression reguliere
+// [(#TEXTE|replace{^ceci$,cela,Uims})]
+// http://doc.spip.org/@replace
+function replace($texte, $expression, $replace='', $modif="UimsS") {
+	$expression=str_replace("\/","/",$expression);
+	$expression=str_replace("/","\/",$expression);
+	return preg_replace("/$expression/$modif",$replace,$texte);
+}
+
+
+// cherche les documents numerotes dans un texte traite par propre()
+// et affecte les doublons['documents']
+// http://doc.spip.org/@traiter_doublons_documents
+function traiter_doublons_documents(&$doublons, $letexte) {
+	if (strstr($letexte, 'spip_document_') // evite le preg_match_all si inutile
+	AND preg_match_all(
+	',<[^>]+\sclass=["\']spip_document_([0-9]+)[\s"\'],imsS',
+	$letexte, $matches, PREG_PATTERN_ORDER))
+		$doublons['documents'] .= "," . join(',', $matches[1]);
+	return $letexte;
 }
 
 // filtre vide qui ne renvoie rien

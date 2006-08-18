@@ -9,6 +9,10 @@ dist/inc-head.html -text
 dist/inc-petition.html -text
 dist/inc-pied.html -text
 dist/inc-rubriques.html -text
+dist/modeles/doc.html -text
+dist/modeles/emb.html -text
+dist/modeles/fromage.html -text
+dist/modeles/img.html -text
 dist/modeles/lesauteurs.html -text
 dist/modeles/pagination.html -text
 dist/modeles/pagination_page.html -text

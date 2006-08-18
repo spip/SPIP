@@ -1,0 +1,57 @@
+[(#REM)
+
+	Voici un modele de fromage inspire de
+	http://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Mod%C3%A8les/Infobox#Fromage
+
+	Le modele wikipedia est :
+	http://fr.wikipedia.org/wiki/Mod%C3%A8le:Fromage
+
+	On reprend ici le meme code, on ajoute un peu de magie SPIP autour,
+	et on entre dans n'importe quel champ d'un article :
+
+	<fromage1020|lait=brebis|pays=France|region=Poitou|date_appellation=1923>
+
+	ou 1020 est le numero du document qui contient la photo, le nom du
+	fromage (titre), et le commentaire du critique culinaire (descriptif).
+]
+
+<BOUCLE_doc(DOCUMENTS){id_document=#ENV{id_fromage}}>
+[(#REM) Code pour {doublons}]
+<table class='spip_document_#ID_DOCUMENT' border="1" align="right" cellpadding="4" cellspacing="0" style="margin: 0 0 1em 1em; border: 1px solid #999; border-right-width: 2px; border-bottom-width: 2px; background-color: #FFFFDD; font-size: 90%; border-collapse: collapse;">
+<tr>
+<th colspan="2" style="background-color: #F6E396">
+<table style="background: #F6E396" align="center" width="100%">
+<tr>
+<td></td>
+<td style="background: #F6E396" align="center" width="100%"><font color="peru" size="4"><b>#TITRE</b></font></td>
+<td></td>
+</tr>
+</table>
+</th>
+</tr>
+[<tr>
+<td align="center" colspan="2" style="background: #FFFFFF">(#LOGO_DOCUMENT)</td>
+</tr>
+]
+[<tr>
+<td><b>Pays d'origine</b></td>
+<td align="center" style="background: #FFFFFF">(#ENV{pays})</td>
+</tr>]
+[<tr>
+<td><b>R&eacute;gion, ville</b></td>
+<td align="center" style="background: #FFFFFF">(#ENV{region})</td>
+</tr>]
+[<tr>
+<td><b>Lait de</b></td>
+<td align="center" style="background: #FFFFFF">(#ENV{lait})</td>
+</tr>]
+[<tr>
+<td><b>Appellation, depuis</b></td>
+<td align="center" style="background: #FFFFFF">(#ENV{date_appellation})</td>
+</tr>]
+[<tr>
+<td><b>Commentaire</b></td>
+<td align="center" style="background: #FFFFFF">(#DESCRIPTIF)</td>
+</tr>]
+</table>
+</BOUCLE_doc>

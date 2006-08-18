@@ -372,7 +372,7 @@ function recuperer_fond($fond, $contexte=array()) {
 	if ($GLOBALS['flag_ob'] AND ($page['process_ins'] != 'html')) {
 		ob_start();
 		eval('?' . '>' . $page['texte']);
-		$page['texte'] = ob_get_contents(); 
+		$page['texte'] = ob_get_contents();
 		ob_end_clean();
 	}
 
@@ -401,6 +401,54 @@ function creer_contexte_de_modele($args) {
 	}
 
 	return $contexte;
+}
+
+// Calcule le modele et retourne la mini-page ainsi calculee
+function inclure_modele($squelette, $type, $id) {
+	static $compteur;
+	if (++$compteur>10) return ''; # ne pas boucler indefiniment
+
+	$type = strtolower($type);
+
+	$fond = 'modeles/'.$type;
+	if (preg_match(',^([a-z_0-9-]+)([|]|$),i', $squelette, $sub)) {
+		if (in_array(strtolower($sub[1]),
+		array('left', 'right', 'center')))
+			$align = $sub[0];
+
+		$fond = 'modeles/'.$type.'_'.$sub[1];
+
+		if (!find_in_path($fond.'.html')) {
+			$fond = 'modeles/'.$type;
+			if (!$align)
+				$class = $sub[1];
+		}
+	}
+
+	// en cas d'echec on passe la main au suivant
+	if (!find_in_path($fond.'.html'))
+		return false;
+
+	$contexte = array(
+		'id_'.$type => $id,
+		'fond' => $fond,
+		'lang' => $GLOBALS['spip_lang']
+	);
+	if ($align)
+		$contexte['align'] = $align;
+
+	if ($class)
+		$contexte['class'] = $class;
+
+	// Traiter les parametres
+	// par exemple : <img1|center>, <emb12|autostart=true> ou <doc1|lang=en>
+	$contexte = array_merge($contexte, 
+		creer_contexte_de_modele(explode('|', $squelette))); 
+
+	// Appliquer le modele avec le contexte
+	$retour = recuperer_fond($fond, $contexte);
+	$compteur--;
+	return $retour;
 }
 
 ?>
