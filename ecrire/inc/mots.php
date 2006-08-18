@@ -163,7 +163,9 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			
 		} elseif ($nouv_mot) {
 		  $reindexer = inserer_mot("spip_mots_$table", $table_id, $id_objet, $nouv_mot);
-		} elseif ($supp_mot) {
+		} 
+
+		if ($supp_mot) {
 			$result = spip_query("DELETE FROM spip_mots_$table WHERE $table_id=$id_objet" . (($supp_mot == -1) ?  "" :  " AND id_mot=" . intval($supp_mot) ));
 			$reindexer = true;
 		}
@@ -174,7 +176,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		}
 	}
 
-	$res .= afficher_mots_cles($flag_editable, $id_objet, $table, $table_id, $url_base, $visible);
+	$res .= afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id, $url_base, $visible);
 	$res .= fin_cadre_enfonce(true);
 	return $res;
 }
@@ -272,7 +274,7 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $id_objet,$nouv_mot, $tabl
 }
 
 // http://doc.spip.org/@afficher_mots_cles
-function afficher_mots_cles($flag_editable, $id_objet, $table, $table_id, $url_base, $visible)
+function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id, $url_base, $visible)
 {
 	global $spip_lang_rtl, $spip_lang, $spip_lang_right, $connect_statut, $connect_toutes_rubriques, $options;
 
@@ -300,42 +302,28 @@ function afficher_mots_cles($flag_editable, $id_objet, $table, $table_id, $url_b
 			$row_groupe = spip_fetch_array(spip_query("SELECT titre, unseul, obligatoire, minirezo, comite FROM spip_groupes_mots WHERE id_groupe = $id_groupe"));
 	// On recupere le typo_mot ici, et non dans le mot-cle lui-meme; sinon bug avec arabe
 			$type_mot = typo($row_groupe['titre']);
-			$flag_groupe = (($connect_statut == '1comite' AND $row_groupe['comite'] == 'oui') OR ($connect_statut == '0minirezo' AND $row_groupe['minirezo'] == 'oui'));
+			$flag_groupe = $flag_editable AND (($connect_statut == '1comite' AND $row_groupe['comite'] == 'oui') OR ($connect_statut == '0minirezo' AND $row_groupe['minirezo'] == 'oui'));
 			// Changer
-			if (($row_groupe['unseul'] == "oui") AND ($flag_editable AND $flag_groupe)) {
-
-				$s =  generer_url_post_ecrire($url_base,"$table_id=$id_objet", '', "#mots") . 
-					"<select name='nouv_mot' onChange=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" CLASS='fondl' STYLE='font-size:10px; width:90px;'>";
-				$result_autres_mots = spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe = $id_groupe ORDER by titre");
-
-				while ($row_autres = spip_fetch_array($result_autres_mots)) {
-					$le_mot = $row_autres['id_mot'];
-					$le_titre_mot = supprimer_tags(typo($row_autres['titre']));
-	
-					if ($le_mot == $id_mot) $selected = "SELECTED";
-					else $selected = "";
-					$s .= "<option value='$le_mot' $selected> $le_titre_mot</option>";
-				}
-				$s .= "</select>".
-				"<input type='hidden' name='supp_mot' VALUE='$id_mot' />".
-				"<span class='visible_au_chargement' id='valider_groupe_$id_groupe'>".
-				" &nbsp; <input type='submit' value='"._T('bouton_changer')."' CLASS='fondo' style='font-size: 10px';>".
-				"</span>".
-				"</form>";
-	
+			if (($row_groupe['unseul'] == "oui") AND $flag_groupe) {
+				$vals[]= formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_id, $objet, $id_objet);
 			} else {
-				$s = "<A href='$url'>".typo($titre_mot)."</A>";
+				$vals[]= "<A href='$url'>".typo($titre_mot)."</A>";
 			}
-			$vals[] = $s;
-	
-			if ($connect_statut == '0minirezo'  AND $connect_toutes_rubriques)
+
+			if ($connect_toutes_rubriques)
 				$vals[]= "<a href='" . generer_url_ecrire("mots_type","id_groupe=$id_groupe") . "'>$type_mot</a>";
 
-			  else	$vals[] = $type_mot;
+			else	$vals[] = $type_mot;
 	
 			if ($flag_editable){
 				if ($flag_groupe)
-				  $s = "<A href='" . generer_url_ecrire($url_base, "$table_id=$id_objet&supp_mot=$id_mot#mots") . "'>"._T('info_retirer_mot')."&nbsp;" . http_img_pack('croix-rouge.gif', "X", "width='7' height='7' align='middle'") ."</A>";
+					$s = "<A href='"
+					. redirige_action_auteur('editer_mot', "$id_mot,$id_objet,$table,$table_id,$objet", $url_base, "$table_id=$id_objet#mots")
+					. "'>"
+					. _T('info_retirer_mot')
+					. "&nbsp;"
+					. http_img_pack('croix-rouge.gif', "X", "width='7' height='7' align='middle'")
+					. "</A>";
 				else $s = "&nbsp;";
 				$vals[] = $s;
 			} else $vals[]= "";
@@ -355,13 +343,37 @@ function afficher_mots_cles($flag_editable, $id_objet, $table, $table_id, $url_b
 	} else $res ='';
 
 	if ($flag_editable)
-		$res .= formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $table_id, $url_base, $visible);
+	  $res .= formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $table_id, $url_base, $visible, $objet);
 
 	return $res;
 }
 
+function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_id, $objet, $id_objet)
+{
+	$result = spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe = $id_groupe ORDER by titre");
+
+	$s = '';
+
+	while ($row_autres = spip_fetch_array($result)) {
+		$id = $row_autres['id_mot'];
+		$le_titre_mot = supprimer_tags(typo($row_autres['titre']));
+		$selected = ($id == $id_mot) ? " selected='selected'" : "";
+		$s .= "<option value='$id'$selected> $le_titre_mot</option>";
+	}
+
+	return redirige_action_auteur('editer_mot', "$id_mot,$id_objet,$table,$table_id,$objet", $url_base, "$table_id=$id_objet#mots", (
+	"<select name='nouv_mot' onchange=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" CLASS='fondl' STYLE='font-size:10px; width:90px;'>"
+	. $s
+	. "</select>"
+	. "<span class='visible_au_chargement' id='valider_groupe_$id_groupe'>"
+	. " &nbsp; <input type='submit' value='"._T('bouton_changer')."' CLASS='fondo' style='font-size: 10px';>"
+	. "</span>"),
+				      " method='post'");
+}
+
+
 // http://doc.spip.org/@formulaire_mots_cles
-function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $table_id, $url_base, $visible)
+function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $table_id, $url_base, $visible,$objet)
 {
 	global $connect_statut, $spip_lang, $spip_lang_right, $spip_lang_rtl;
 
@@ -394,7 +406,7 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 	if ($nombre_mots_associes > 3) {
 		$res .= "<div align='right' class='arial1'>"
 		. "<a href='"
-		. generer_url_ecrire($url_base, "$table_id=$id_objet&supp_mot=-1#mots")
+		. redirige_action_auteur('editer_mot', "-1,$id_objet,$table,$table_id,$objet", $url_base, "$table_id=$id_objet#mots")
 		. "'>"
 		. _T('info_retirer_mots')
 		. "</a>"
