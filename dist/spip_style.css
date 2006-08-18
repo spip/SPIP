@@ -68,7 +68,7 @@ table.spip th, table.spip td { padding: 3px; text-align: left; vertical-align: m
 img, .spip_logos { margin: 0; padding: 0; border: none; }
 
 .spip_documents { text-align: center; }
-.spip_documents_center { clear: both; width: 100%; margin: auto; }
+.spip_documents_center { clear: both; display:block; width: 100%; margin: auto;margin-top:1em; }
 .spip_documents_left { float: left; margin-right: 15px; margin-bottom: 5px; }
 .spip_documents_right { float: right; margin-left: 15px; margin-bottom: 5px; }
 .spip_doc_titre { font-weight: bold; font-size: 0.8em; }
