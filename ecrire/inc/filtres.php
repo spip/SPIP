@@ -1635,7 +1635,7 @@ function env_to_params ($texte){
 // A partir d'un #ENV, retourne des attributs
 // http://doc.spip.org/@env_to_attributs
 function env_to_attributs ($texte){
-	$ignore_params = array('id_document','date','date_redac','align','fond','','recurs');
+	$ignore_params = array('id_document','date','date_redac','align','fond','','recurs','emb');
 	$tableau = unserialize($texte);
 	$texte = "";
 	foreach ($tableau as $i => $j)
