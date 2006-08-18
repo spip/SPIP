@@ -275,7 +275,7 @@ function calculer_balise_modele_dist($p){
 		$code_contexte[] = "'$primary='.".$id;
 	}
 
-print_r($code_contexte);
+#print_r($code_contexte);
 
 	$p->code = "recuperer_fond('modeles/".$nom."',
 		creer_contexte_de_modele(array(".join(',', $code_contexte)."), \$GLOBALS['spip_lang']))";
