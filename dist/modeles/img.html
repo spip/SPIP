@@ -1,11 +1,11 @@
-<BOUCLE_document (DOCUMENTS) {id_document=#ENV{id_img}} {mode=document}>
+<BOUCLE_document (DOCUMENTS) {id_document} {mode=document}>
 [(#CONFIG{creer_preview}=={oui}|?{
 #SET{fichier,#FICHIER|reduire_image{#CONFIG{taille_preview}}||extraire_attribut{src}},#SET{fichier,#FICHIER}})]
 <span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})]' 
  style='[(#ENV{align}=={left}|?{float:left; })][(#ENV{align}=={right}|?{float:right; })]width: [(#GET|{fichier}|largeur)];'>
  [(#CONFIG{creer_preview}=={oui}|?{<a href='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' type='#MIME_TYPE'>,''})]<img src='#GET{fichier}' width='[(#GET{fichier}|largeur)]' height='[(#GET{fichier}|hauteur)]' alt='[(#TITRE|texte_backend)] (#TYPE_DOCUMENT)'  title='[(#TITRE|texte_backend)]' />[(#CONFIG{creer_preview}|=={oui}|?{</a>,''})]
 </span>
-</BOUCLE_document><BOUCLE_vignette (DOCUMENTS) {id_document=#ENV{id_img}} {mode=vignette}>
+</BOUCLE_document><BOUCLE_vignette (DOCUMENTS) {id_document} {mode=vignette}>
 #SET{fichier,#FICHIER}
 <span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})]'
  style='[(#ENV{align}=={left}|?{float:left; })][(#ENV{align}=={right}|?{float:right; })]width: [(#GET|{fichier}|largeur)];'>

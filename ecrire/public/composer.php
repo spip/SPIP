@@ -453,25 +453,17 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 }
 
 
-// fonction appelee par la balise #EMBED
-// http://doc.spip.org/@calcule_embed_document
-function calcule_embed_document($id_document, $filtres, &$doublons, $doubdoc) {
-	if ($doubdoc && $id_document) $doublons["documents"] .= ', ' . $id_document;
-	return embed_document($id_document, $filtres, false);
-}
-
-
-// les balises dynamiques et EMBED ont des filtres sans arguments 
+// les balises dynamiques et EMBED ont des filtres sans arguments
 // car en fait ce sont des arguments pas des filtres.
-// Si le besoin s'en fait sentir, il faudra recuperer la 2e moitie du tableau 
+// Si le besoin s'en fait sentir, il faudra recuperer la 2e moitie du tableau
 
 // http://doc.spip.org/@argumenter_balise
 function argumenter_balise($fonctions, $sep) {
-  $res = array();
-  if ($fonctions)
-    foreach ($fonctions as $f) $res[] =
-      str_replace('\'', '\\\'', str_replace('\\', '\\\\',$f[0]));
-  return ("'" . join($sep, $res) . "'");
+	$res = array();
+	if ($fonctions)
+		foreach ($fonctions as $f)
+			$res[] = str_replace('\'', '\\\'', str_replace('\\', '\\\\',$f[0]));
+	return ("'" . join($sep, $res) . "'");
 }
 
 // fonction appelee par la balise #NOTES

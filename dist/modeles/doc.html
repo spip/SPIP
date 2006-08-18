@@ -1,4 +1,4 @@
-<BOUCLE_doc (DOCUMENTS) {id_document=#ENV{id_doc}}>
+<BOUCLE_doc (DOCUMENTS) {id_document}>
 <div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})]' 
  style='[(#ENV{align}|=={left}|?{float:left; })][(#ENV{align}=={right}|?{float:right; })]width: [(#LOGO_DOCUMENT||largeur|max{120})]px;'>
 <a href='#EVAL{_DIR_RACINE}#FICHIER' type='#MIME_TYPE'><img src='[(#LOGO_DOCUMENT||extraire_attribut{src})]' width='[(#LOGO_DOCUMENT||largeur)]' heigth='[(#LOGO_DOCUMENT||hauteur)]' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets)]' title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets)]' /></a>[
