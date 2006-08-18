@@ -1622,6 +1622,7 @@ function vide($texte){
 //
 
 // A partir d'un #ENV, retourne des <param ...>
+// http://doc.spip.org/@env_to_params
 function env_to_params ($texte){
 	$ignore_params = array('id_document','date','date_redac','align','fond','');
 	$tableau = unserialize($texte);
@@ -1632,6 +1633,7 @@ function env_to_params ($texte){
 	return $texte;
 }
 // A partir d'un #ENV, retourne des attributs
+// http://doc.spip.org/@env_to_attributs
 function env_to_attributs ($texte){
 	$ignore_params = array('id_document','date','date_redac','align','fond','');
 	$tableau = unserialize($texte);
