@@ -259,6 +259,11 @@ function calculer_balise_modele_dist($p){
 	$nom = strtolower($p->nom_champ);
 	$contexte = array();
 
+	if (isset($p->param[0])){
+		while (count($p->param[0])>2){
+			$p->param[]=array($p->param[0][0],array_pop($p->param[0]));
+		}
+	}
 	$champ = phraser_arguments_inclure($p, true); 
 	// a priori true
 	// si false, le compilo va bloquer sur des syntaxes avec un filtre sans argument qui suit la balise
