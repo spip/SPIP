@@ -277,8 +277,9 @@ function calculer_balise_modele_dist($p){
 
 #print_r($code_contexte);
 
-	$p->code = "recuperer_fond('modeles/".$nom."',
-		creer_contexte_de_modele(array(".join(',', $code_contexte)."), \$GLOBALS['spip_lang']))";
+	$p->code = "( ((\$recurs=(isset(\$Pile[0]['recurs'])?\$Pile[0]['recurs']:0))<5)?
+	recuperer_fond('modeles/".$nom."',
+		creer_contexte_de_modele(array(".join(',', $code_contexte).",'recurs='.++\$recurs, \$GLOBALS['spip_lang']))):'')";
 	$p->interdire_scripts = false; // securite assuree par le squelette
 
 	return $p;
