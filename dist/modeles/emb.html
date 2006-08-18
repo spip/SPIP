@@ -1,29 +1,23 @@
-<BOUCLE_tous (DOCUMENTS spip_types_documents) {id_document=#ENV{id_emb}}>
-
-[(#REM) on trouvera plusieurs variable de hauteur/largeur
+<BOUCLE_tous (DOCUMENTS spip_types_documents) {id_document=#ENV{id_emb}}>[
+(#REM) on trouvera plusieurs variable de hauteur/largeur
 - les balises #HAUTEUR et #LARGEUR
 - #ENV{hauteur} et {largeur} correspondant <emb|hauteur=xx...>
 - #GET{hauteur} et #GET{largeur} correspondent prioritairemnt a #ENV,
   puis #LARGEUR/HAUTEUR sauf si il y a un controleur
 ]
-#SET{hauteur,#ENV{hauteur}|sinon{#HAUTEUR}}
-#SET{largeur,#ENV{largeur}|sinon{#LARGEUR}}
-[(#ENV{controls}=={PlayButton}|?{#SET{hauteur,25},''})]
-[(#ENV{controls}=={PlayButton}|?{#SET{largeur,40},''})]
-[(#ENV{controls}=={PositionSlider}|?{#SET{hauteur,25},''})]
-[(#ENV{controls}=={PositionSlider}|?{#SET{largeur,#ENV{largeur}|moins{40}},''})]
-
-[(#INCLUS|=={embed}|?{
-<div class='spip_document_#ID_DOCUMENT spip_documents[ spip_document_(#ENV{align})]' style='[(#ENV{align}=={left}|?{float:left; })][(#ENV{align}=={right}|?{float:right; })]width:[(#LARGEUR|<{120}|?{120,#LARGEUR})[(#REM)<!--ligne 196 de inc/documents-->]]px'>
-})]
-
-<BOUCLE_svg (DOCUMENTS) {id_document} {doublons} {extension==svg}>
-
+#SET{hauteur,#ENV{hauteur}|sinon{#HAUTEUR}} #SET{largeur,#ENV{largeur}|sinon{#LARGEUR}}
+[(#ENV{controls}=={PlayButton}|?{#SET{hauteur,25},''})][
+ (#ENV{controls}=={PlayButton}|?{#SET{largeur,40},''})][
+ (#ENV{controls}=={PositionSlider}|?{#SET{hauteur,25},''})][
+ (#ENV{controls}=={PositionSlider}|?{#SET{largeur,#ENV{largeur}|moins{40}},''})
+][(#INCLUS|=={embed}|?{
+<div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})]'[
+style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align}|=={center}|?{'',' '})[width:(#LARGEUR|max{120})px]']>
+})
+][(#EXTENSION|=={svg}|?{' '})
 <embed src='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' [(#ENV*|env_to_attributs)] width='#LARGEUR' height='#HAUTEUR' />
-
-</BOUCLE_svg>
-
-<BOUCLE_real (DOCUMENTS) {id_document}{doublons} {extension==rm|ram|ra}>
+#SET{done,1}
+][(#EXTENSION|match{^(rm|ram|ra)$}|?{' '})
 <div><object width='0' height='0'>
 <param name='movie' value='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' />
 <param name='src' value='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' />
@@ -36,50 +30,38 @@
 </object>
 <object width='-40' height='25'>
 <param name='movie' value='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' />
-
 <param name='src' value='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' />
 <param name='controls' value='PositionSlider' /><param name='type' value='audio/x-pn-realaudio-plugin' /><param name='console' value='Console#ID_DOCUMENT' /><param name='nojava' value='true' /><inclus src='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER'  controls='PositionSlider' type='audio/x-pn-realaudio-plugin' console='Console#ID_DOCUMENT' nojava='true' width='-40' height='25'></inclus>
 </object>
-
-</BOUCLE_real>
-
-<BOUCLE_flash(DOCUMENTS) {id_document}{doublons} {extension=swf}>
-<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" 
- codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" 
+#SET{done,1}
+][(#EXTENSION|=={swf}|?{' '})
+<object classid='clsid:d27cdb6e-ae6d-11cf-96b8-444553540000' 
+ codebase='http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=#ENV{version,'6,0,0,0'}' 
  width='#GET{largeur}' height='#GET{hauteur}'>
 	<param name='movie' value='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' />
 	[(#ENV{quality,''}|?{'',' '})<param name="quality" value="high" />]
 	[(#ENV*|env_to_params)]
-
-	<!--[if !IE]> <-->
+	<!--#EVAL**{chr(91)}if !IE#EVAL**{chr(93)}> <-->
 	<object data="[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER" width='#GET{largeur}' height='#GET{hauteur}' type="application/x-shockwave-flash">
 		[(#ENV{quality,''}|?{'',' '})<param name="quality" value="high" />]
 		[(#ENV*|env_to_params)]
 		<param name="pluginurl" value="http://www.macromedia.com/go/getflashplayer" />
-   	
 	</object>
-	<!--> <![endif]-->
+	<!--> <!#EVAL**{chr(91)}endif#EVAL**{chr(93)}-->
 </object>
-</BOUCLE_flash>
-
-<BOUCLE_inclus (DOCUMENTS) {id_document} {doublons} {inclus=embed}>
-
+#SET{done,1}
+][(#GET{done,0}|?{'',' '})
+[(#INCLUS|=={embed}|?{' '})
 <object width='#GET{largeur}' height='#GET{hauteur}'>
 <param name='movie' value='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' />
 <param name='src' value='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' />
 [(#ENV*|env_to_params)]
 <embed src='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' [(#ENV*|env_to_attributs)] width='#GET{largeur}' height='#GET{hauteur}'></embed></object>
 
-</BOUCLE_inclus>
-
-<BOUCLE_image (DOCUMENTS) {id_document}{inclus=image} {doublons}>
-[(#INCLUDE{fond=modeles/img}{id_document}{align=#ENV{align}})]
-</BOUCLE_image>
-[(#INCLUS|=={embed}|?{
-	[<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>][<div class='spip_doc_descriptif'>(#DESCRIPTIF)</div>]</div>
-})]
-
-
+][(#INCLUS)|=={image}|?{' '})
+[(#INCLURE{fond=modeles/img}{id_document}{align=#ENV{align}})]
+]
+][(#INCLUS|=={embed}|?{' '})
+[<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>][<div class='spip_doc_descriptif'>(#DESCRIPTIF)</div>]</div>
+]
 </BOUCLE_tous>
-
-
