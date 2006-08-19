@@ -938,9 +938,10 @@ function supprime_img($letexte) {
 // traite les modeles (dans la fonction typo), en remplacant
 // le raccourci <modeleN|parametres> par la page calculee a
 // partir du squelette modeles/modele.html
+// Le nom du modele doit faire au moins trois caracteres (evite <h2>)
 // http://doc.spip.org/@traiter_modeles
 function traiter_modeles($texte) {
-	if (preg_match_all(',<([a-z_-]+)([0-9]+)([|]([^>]+))?'.'>,iS',
+	if (preg_match_all('/<([a-z_-]{3,})([0-9]+)([|]([^>]+))?'.'>/iS',
 	$texte, $matches, PREG_SET_ORDER)) {
 		include_spip('public/assembler');
 		foreach ($matches as $regs) {

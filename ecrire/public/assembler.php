@@ -458,7 +458,7 @@ function inclure_modele($squelette, $type, $id) {
 	$GLOBALS['compt_note'] = 0;
 
 	// Appliquer le modele avec le contexte
-	$retour = recuperer_fond($fond, $contexte);
+	$retour = trim(recuperer_fond($fond, $contexte));
 
 	// Si le modele n'a pas affiche ses notes, les supprimer (elles *doivent*
 	// etre dans le cache du modele, autrement elles ne seraient pas prises en
