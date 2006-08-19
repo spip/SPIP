@@ -95,8 +95,8 @@ function action_tester_dist() {
 		if ($taille = @getimagesize($dest)) {
 			if ($taille[1] == 10) $netpbm_formats[] = "jpg";
 		}
-		$giftopnm_command = ereg_replace("pnmscale", "giftopnm", $pnmscale_command);
-		$pnmtojpeg_command = ereg_replace("pnmscale", "pnmtojpeg", $pnmscale_command);
+		$giftopnm_command = str_replace("pnmscale", "giftopnm", $pnmscale_command);
+		$pnmtojpeg_command = str_replace("pnmscale", "pnmtojpeg", $pnmscale_command);
 		$vignette = _ROOT_IMG_PACK."test.gif";
 		$dest = _DIR_IMG . "test-gif.jpg";
 		$commande = "$giftopnm_command $vignette | $pnmscale_command -width 10 | $pnmtojpeg_command > $dest";
@@ -106,7 +106,7 @@ function action_tester_dist() {
 			if ($taille[1] == 10) $netpbm_formats[] = "gif";
 		}
 
-		$pngtopnm_command = ereg_replace("pnmscale", "pngtopnm", $pnmscale_command);
+		$pngtopnm_command = str_replace("pnmscale", "pngtopnm", $pnmscale_command);
 		$vignette = _ROOT_IMG_PACK."test.png";
 		$dest = _DIR_IMG . "test-gif.jpg";
 		$commande = "$pngtopnm_command $vignette | $pnmscale_command -width 10 | $pnmtojpeg_command > $dest";
