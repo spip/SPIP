@@ -651,6 +651,7 @@ function affiche_raccourci_doc($doc, $id, $align) {
 
 
 // Est-ce que le document est inclus dans le texte ?
+// http://doc.spip.org/@est_inclus
 function est_inclus($id_document) {
 	return is_array($GLOBALS['doublons_documents_inclus']) ?
 		in_array($id_document,$GLOBALS['doublons_documents_inclus']) : false;
