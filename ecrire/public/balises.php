@@ -137,6 +137,14 @@ function balise_DOSSIER_SQUELETTE_dist($p) {
 	return $p;
 }
 
+function balise_SQUELETTE_dist($p) {
+	$code = addslashes($p->descr['sourcefile']);
+	$p->code = "'$code'" . 
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+
 // http://doc.spip.org/@balise_URL_SITE_SPIP_dist
 function balise_URL_SITE_SPIP_dist($p) {
 	$p->code = "\$GLOBALS['meta']['adresse_site']";
