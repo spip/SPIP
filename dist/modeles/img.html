@@ -1,14 +1,22 @@
-<BOUCLE_document (DOCUMENTS) {id_document} {mode=document}>
-[(#CONFIG{creer_preview}=={oui}|?{
-#SET{fichier,#FICHIER|reduire_image{#CONFIG{taille_preview}}||extraire_attribut{src}},#SET{fichier,#FICHIER}})]
-<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})]' 
- style='[(#ENV{align}=={left}|?{float:left; })][(#ENV{align}=={right}|?{float:right; })]width: [(#GET|{fichier}|largeur)];'>
- [(#CONFIG{creer_preview}=={oui}|?{<a href='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' type='#MIME_TYPE'>,''})]<img src='#GET{fichier}' width='[(#GET{fichier}|largeur)]' height='[(#GET{fichier}|hauteur)]' alt='[(#TITRE|texte_backend)] (#TYPE_DOCUMENT)'  title='[(#TITRE|texte_backend)]' />[(#CONFIG{creer_preview}|=={oui}|?{</a>,''})]
-</span>
-</BOUCLE_document><BOUCLE_vignette (DOCUMENTS) {id_document} {mode=vignette}>
-#SET{fichier,#FICHIER}
-<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})]'
- style='[(#ENV{align}=={left}|?{float:left; })][(#ENV{align}=={right}|?{float:right; })]width: [(#GET|{fichier}|largeur)];'>
- <img src='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#GET{fichier}' width='[(#GET{fichier}|largeur)]' height='[(#GET{fichier}|hauteur)]' alt='[(#TITRE|texte_backend)] (#TYPE_DOCUMENT)'  title='[(#TITRE|texte_backend)]' />
-</span>
-</BOUCLE_vignette><//B_document>
+[(#REM)
+
+	Mode <img>
+
+	Si on est en mode "vignette", ou appele avec embed=oui,
+	on affiche l'image complete ; sinon le logo
+
+]<BOUCLE_document (DOCUMENTS) {id_document}>
+<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})]'[ style='float:(#ENV{align}|match{left|right});']>[(#SET{
+	image,
+		#MODE|=={vignette}
+		|sinon{#ENV{embed}}
+		|?{' '}
+})][
+	(#REM) image complete ?
+][(#GET{image})
+<img src='#URL_DOCUMENT'[ width="(#LARGEUR)"][ height="(#HAUTEUR)"][ alt="(#TITRE|texte_backend)"][ title="(#TITRE|texte_backend)"] />
+][
+	(#REM) sinon logo document + lien + alt + title etc
+][(#GET{image}|?{'',' '})
+[(#LOGO_DOCUMENT|#URL_DOCUMENT|inserer_attribut{alt,#TITRE|strlen|?{#TITRE {#TYPE_DOCUMENT},#TYPE_DOCUMENT}}|inserer_attribut{title,#TITRE})]
+]</span></BOUCLE_document>

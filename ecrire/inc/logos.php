@@ -398,9 +398,11 @@ function reduire_image_logo($img, $taille = -1, $taille_y = -1) {
 	if ($espace = extraire_attribut($img, 'hspace'))
 		$style .= "margin:${espace}px;";
 
-	// Conserver la class
+	// Conserver la class et le title
 	if ($class = extraire_attribut($img, 'class'))
 		$attributs .=  " class='$class'";
+	if (strlen($title = extraire_attribut($img, 'title')))
+		$attributs .=  ' title="'.texte_backend($title).'"';
 
 	// attribut deprecie mais equivalent CSS pas clair
 	if ($align = extraire_attribut($img, 'align'))

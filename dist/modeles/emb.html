@@ -51,7 +51,7 @@ style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{alig
 <embed src='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' [(#ENV*|env_to_attributs)] width='#GET{largeur}' height='#GET{hauteur}'></embed></object>
 
 ][(#INCLUS|=={image}|?{' '})
-[(#INCLURE{fond=modeles/img}{id_document}{align=#ENV{align}})]
+[(#INCLURE{fond=modeles/img}{id_document}{align=#ENV{align}}{embed=oui})]
 ]
 ][(#INCLUS|=={embed}|?{' '})[(#ENV{controls,''}|?{'',' '})
 [<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>][<div class='spip_doc_descriptif'>(#DESCRIPTIF)</div>]</div>
