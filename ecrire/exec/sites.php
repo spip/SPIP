@@ -40,14 +40,12 @@ function exec_sites_dist()
   $mois,
   $new,
   $nom_site,
-  $nouv_mot,
   $nouveau_statut,
   $old_syndic,
   $oubli,
   $reload,
   $resume,
   $spip_display,
-  $supp_mot,
   $syndication,
   $syndication_old,
   $url,
@@ -332,7 +330,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
  echo "\n";
 
 if ($flag_editable AND $options == 'avancees') {
-  echo formulaire_mots('syndic', $id_syndic, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable);
+  echo formulaire_mots('syndic', $id_syndic,  $cherche_mot, $flag_editable);
 }
 echo pipeline('affiche_milieu',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
 

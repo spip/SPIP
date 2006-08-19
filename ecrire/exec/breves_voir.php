@@ -20,7 +20,7 @@ include_spip('base/abstract_sql');
 include_spip("inc/indexation");
 
 // http://doc.spip.org/@afficher_breves_voir
-function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $supp_mot, $nouv_mot )
+function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot)
 {
 	global $champs_extra, $options, $connect_statut, $les_notes,$spip_display;
 	$result = spip_query("SELECT * FROM spip_breves WHERE id_breve='$id_breve'");
@@ -129,7 +129,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 
 
 if ($GLOBALS['meta']["articles_mots"]!='non' AND $flag_editable AND $options == 'avancees') {
-  echo formulaire_mots('breves', $id_breve, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable);
+  echo formulaire_mots('breves', $id_breve, $cherche_mot, $flag_editable);
 }
 
 
@@ -243,7 +243,7 @@ function exec_breves_voir_dist()
 {
 global $id_breve, $id_parent, $texte, $titre, $statut,
   $annee, $mois, $jour, $lien_titre, $lien_url,$champs_extra,
-  $new, $modifier_breve, $changer_lang, $cherche_mot, $nouv_mot,$supp_mot,
+  $new, $modifier_breve, $changer_lang, $cherche_mot, 
   $connect_statut;
 
 $id_breve = intval($id_breve);
@@ -315,6 +315,6 @@ if ($jour AND $connect_statut == '0minirezo') {
 	if ($new == 'oui')
 		redirige_par_entete(
 			generer_url_ecrire('breves_voir', 'id_breve='.$id_breve, '&'));
- afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $supp_mot, $nouv_mot);
+ afficher_breves_voir($id_breve, $changer_lang, $cherche_mot);
 }
 ?>
