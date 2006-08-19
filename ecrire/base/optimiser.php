@@ -33,7 +33,7 @@ function optimiser_base($attente = 86400) {
 	// on ne va OPTIMIZE qu'une seule des tables a chaque fois,
 	// pour ne pas vautrer le systeme
 	// lire http://dev.mysql.com/doc/refman/5.0/fr/optimize-table.html
-	while ($row = spip_fetch_array($result)) $tables[] = $row[0];
+	while ($row = spip_fetch_array($result,SPIP_NUM)) $tables[] = $row[0];
 
 	if ($tables) {
 		$table_op = intval($GLOBALS['meta']['optimiser_table']+1) % sizeof($tables);
@@ -452,11 +452,11 @@ function optimiser_base($attente = 86400) {
 		$suppr = '';
 		$s = spip_query("SELECT $col_id FROM $table_objet
 			WHERE idx='' $critere");
-		while ($t = spip_fetch_array($s))
+		while ($t = spip_fetch_array($s,SPIP_NUM))
 			$suppr .= ','.$t[0];
 		$s = spip_query("SELECT $col_id FROM $table_objet
 			WHERE idx='non'");
-		while ($t = spip_fetch_array($s))
+		while ($t = spip_fetch_array($s,SPIP_NUM))
 			$suppr .= ','.$t[0];
 		if ($suppr)
 			spip_query("DELETE FROM spip_index
