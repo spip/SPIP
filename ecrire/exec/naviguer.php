@@ -408,7 +408,7 @@ if ($relief) {
 /// Documents associes a la rubrique
 	if ($id_rubrique > 0) {
 
-	  afficher_documents_non_inclus($id_rubrique, "rubrique", $flag_editable);
+	  afficher_documents_et_portfolio($id_rubrique, "rubrique", $flag_editable);
 	}
 
 ////// Supprimer cette rubrique (si vide)

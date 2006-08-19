@@ -140,7 +140,7 @@ debut_cadre_relief();
 // Titre, surtitre, sous-titre
 //
 
- $modif = titres_articles($titre, $statut_article,$surtitre, $soustitre, $descriptif, $url_site, $nom_site, $flag_editable, $id_article, $id_rubrique);
+$modif = titres_articles($titre, $statut_article,$surtitre, $soustitre, $descriptif, $url_site, $nom_site, $flag_editable, $id_article, $id_rubrique);
 
 
  echo "<div class='serif' align='$spip_lang_left'>";
@@ -256,7 +256,7 @@ if ($flag_editable) {
 //
 
  if ($spip_display != 4)
- afficher_documents_non_inclus($id_article, "article", $flag_editable);
+ afficher_documents_et_portfolio($id_article, "article", $flag_editable);
 
  if ($flag_auteur AND  $statut_article == 'prepa' AND !$statut_rubrique)
 	echo demande_publication($id_article);
@@ -451,6 +451,8 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 {
 	global  $dir_lang, $spip_lang_left, $connect_id_auteur;
 
+	$tout = '';
+
 	$logo_statut = "puce-".puce_statut($statut_article).".gif";
 	
 	echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
@@ -460,7 +462,7 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 		echo "<span $dir_lang><font face='arial,helvetica' size=3><b>";
 		echo typo($surtitre);
 		echo "</b></font></span>\n";
-	 }
+	}
 	 
 	gros_titre($titre, $logo_statut);
 	
