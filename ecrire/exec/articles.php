@@ -49,7 +49,7 @@ function exec_articles_dist()
 	$id_rubrique = $row['id_rubrique'];
 	$statut_article = $row['statut'];
 	$surtitre = $row["surtitre"];
-	$titre = $row["titre"];
+	$titre = sinon($row["titre"],_T('info_sans_titre'));
 	$soustitre = $row["soustitre"];
 	$descriptif = $row["descriptif"];
 	$nom_site = $row["nom_site"];

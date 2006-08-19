@@ -78,12 +78,23 @@ function articles_set($id_article, $id_rubrique, $lier_trad, $new)
 
 	$row = spip_fetch_array(spip_query("SELECT id_trad FROM spip_articles WHERE id_article=$id_article"));
 
-	$id_trad = (!$lier_trad) ? 0 : article_referent ($id_article, $row['id_trad'], $lier_trad);
-
-	if (_request('titre')) // retour de articles_edit.php
-	  revisions_articles($id_article, $id_rubrique, $id_trad, $new);
-	else // retour articles.php
-		spip_query("UPDATE spip_articles SET id_trad = $id_trad WHERE id_article = $id_article");
+	// retour de articles_edit
+	if (_request('titre') !== NULL) {
+		revisions_articles($id_article, $id_rubrique, $id_trad, $new);
+	}
+	// retour articles.php, pour gestion des liens de trad (ou autre)
+	else {
+		if ($lier_trad) {
+			$id_trad = article_referent($id_article, $row['id_trad'], $lier_trad);
+			spip_query("UPDATE spip_articles SET id_trad = $id_trad WHERE id_article = $id_article");
+		}
+		else
+			spip_log("erreur sur action/editer_article"); // ne devrait pas se produire
+	}
+return;
+print_r($_GET);
+print_r($_POST);
+exit;
 }
 
 // http://doc.spip.org/@revisions_articles
@@ -184,6 +195,7 @@ function trop_longs_articles($texte_plus)
 	return $texte_ajout;
 }
 
+//
 // http://doc.spip.org/@article_referent
 function article_referent ($id_article, $id_trad, $lier_trad)
 { 
