@@ -262,12 +262,13 @@ function nettoyer_petit_cache($prefix, $duree = 300) {
 //	> 0 s'il faut calculer la page et la mette en cache use_cache secondes
 // - chemin_cache qui est le chemin d'acces au fichier ou vide si pas cachable
 // - page qui est le tableau decrivant la page, si le cache la contenait
-// - lastmodifed qui vaut la date de derniere modif du fichier.
+// - lastmodified qui vaut la date de derniere modif du fichier.
 
 // http://doc.spip.org/@public_cacher_dist
 function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmodified) {
 
 	if ($chemin_cache) return creer_cache($page, $chemin_cache, $use_cache);
+
 	// cas ignorant le cache car complement dynamique
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$use_cache = -1;
@@ -308,20 +309,17 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 		 || @file_exists(_ACCESS_FILE_NAME))) {
 			supprimer_fichier(_DIR_CACHE . $chemin_cache);
 	}
-	// cas sans jamais de cache car calul d'un fond depuis l'espace prive
-	if ((_DIR_RESTREINT!=_DIR_RESTREINT_ABS)&&
-	    (isset($_COOKIE['spip_session'])
-	    || isset($_COOKIE['spip_admin']) )){
-			supprimer_fichier(_DIR_CACHE . $chemin_cache);
-	}
-	
-	$ok = lire_fichier(_DIR_CACHE . $chemin_cache, $page);
-	$lastmodified = @file_exists(_DIR_CACHE . $chemin_cache) ?
-		@filemtime(_DIR_CACHE . $chemin_cache) : 0;
-	$page = restaurer_meta_donnees ($page);
-	$use_cache = cache_valide_autodetermine($chemin_cache, $page, $lastmodified);
 
-	if (!$use_cache AND $ok) return;
+	if ($ok = lire_fichier(_DIR_CACHE . $chemin_cache, $page)) {
+		$lastmodified = @file_exists(_DIR_CACHE . $chemin_cache) ?
+			@filemtime(_DIR_CACHE . $chemin_cache) : 0;
+		$page = restaurer_meta_donnees ($page);
+		$use_cache = cache_valide_autodetermine($chemin_cache, $page, $lastmodified);
+		if (!$use_cache) return;
+	} else {
+		$use_cache = 1;
+	}
+
 
 	// tester si la base est dispo
 	spip_connect();
