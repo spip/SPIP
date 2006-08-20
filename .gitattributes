@@ -9,6 +9,8 @@ dist/inc-head.html -text
 dist/inc-petition.html -text
 dist/inc-pied.html -text
 dist/inc-rubriques.html -text
+dist/modeles/article.html -text
+dist/modeles/breve.html -text
 dist/modeles/doc.html -text
 dist/modeles/emb.html -text
 dist/modeles/fromage.html -text
@@ -19,6 +21,7 @@ dist/modeles/pagination_page.html -text
 dist/modeles/pagination_page_precedent_suivant.html -text
 dist/modeles/pagination_precedent_suivant.html -text
 dist/modeles/paginationitem.html -text
+dist/modeles/rubrique.html -text
 dist/modeles/traductions.html -text
 dist/polices/dustismo-license.txt -text svneol=unset#application/octet-stream
 dist/polices/dustismo.ttf -text
