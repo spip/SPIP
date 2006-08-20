@@ -440,22 +440,25 @@ function joli_repertoire($rep) {
 // http://doc.spip.org/@table_objet
 function table_objet($type) {
 	static $surnoms = array(
-                'article' => 'articles',
-                'auteur' => 'auteurs',
-                'breve' => 'breves',
-                'document' => 'documents',
-                'forum' => 'forum', # hum
-                'groupe_mots' => 'groupes_mots', # hum
-                'message' => 'messages',
-                'mot' => 'mots',
-                'petition' => 'petitions',
-                'rubrique' => 'rubriques',
-                'signature' => 'signatures',
-                'syndic' => 'syndic',
-                'site' => 'syndic', # hum hum
-                'syndic_article' => 'syndic_articles',
-                'type_document' => 'types_documents' # hum
-		);
+		'article' => 'articles',
+		'auteur' => 'auteurs',
+		'breve' => 'breves',
+		'document' => 'documents',
+		'doc' => 'documents', # pour les modeles
+		'img' => 'documents',
+		'emb' => 'documents',
+		'forum' => 'forum', # hum
+		'groupe_mots' => 'groupes_mots', # hum
+		'message' => 'messages',
+		'mot' => 'mots',
+		'petition' => 'petitions',
+		'rubrique' => 'rubriques',
+		'signature' => 'signatures',
+		'syndic' => 'syndic',
+		'site' => 'syndic', # hum hum
+		'syndic_article' => 'syndic_articles',
+		'type_document' => 'types_documents' # hum
+	);
 	return $surnoms[$type];
 }
 
@@ -465,6 +468,8 @@ function id_table_objet($type) {
 		return 'id_syndic';
 	else if ($type == 'forum')
 		return 'id_forum';
+	else if ($type=='doc' OR $type=='img' OR $type=='emb') # pour les modeles
+		return 'id_document';
 	else
 		return 'id_'.$type;
 }
