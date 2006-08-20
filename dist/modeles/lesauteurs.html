@@ -1,13 +1,7 @@
 [(#REM)
 
-	Modele pour #LESAUTEURS :
-	* s'il s'agit d'un article normal, on boucle sur les auteurs de l'article
-	* s'il s'agit d'un article syndique, on affiche la valeur du champ,
-	  passee dans #ENV par le compilo, en la securisant avec safehtml.
-
+	Modele pour la balise # LESAUTEURS, dans le cas des auteurs d'un article
+	(pour un article syndique, la balise affiche directement la valeur du champ)
 ]
-
 <BOUCLE_auteurs(AUTEURS) {id_article} {par nom} {", "}>
 <a href="#URL_AUTEUR">#NOM</a></BOUCLE_auteurs>
-
-[(#ID_SYNDIC_ARTICLE|?{#ENV**{lesauteurs}|safehtml})]
