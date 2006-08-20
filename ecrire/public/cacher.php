@@ -270,7 +270,9 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	if ($chemin_cache) return creer_cache($page, $chemin_cache, $use_cache);
 
 	// cas ignorant le cache car complement dynamique
-	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	if (($_SERVER['REQUEST_METHOD'] == 'POST')
+		OR (isset($contexte['fond']) AND (substr($contexte['fond'],0,7)=='modeles'))
+	) {
 		$use_cache = -1;
 		$lastmodified = 0;
 		$chemin_cache = "";
