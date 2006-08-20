@@ -137,6 +137,7 @@ function balise_DOSSIER_SQUELETTE_dist($p) {
 	return $p;
 }
 
+// http://doc.spip.org/@balise_SQUELETTE_dist
 function balise_SQUELETTE_dist($p) {
 	$code = addslashes($p->descr['sourcefile']);
 	$p->code = "'$code'" . 
