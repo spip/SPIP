@@ -38,7 +38,8 @@ function caracteriser_auteur($id_auteur=0) {
 	}
 	else {
 		$result = spip_query("SELECT id_auteur, pass FROM spip_auteurs WHERE id_auteur=$id_auteur");
-		return spip_fetch_array($result, SPIP_BOTH);
+		if ($t = spip_fetch_array($result))
+			return array($t['id_auteur'], $t['pass']);
 	}
 }
 
