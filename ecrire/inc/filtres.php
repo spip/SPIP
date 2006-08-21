@@ -38,7 +38,7 @@ $GLOBALS['spip_matrice']['image_aplatir'] = '';
 $GLOBALS['spip_matrice']['image_couleur_extraire'] = '';
 
 
-$inc_filtres_images = _DIR_RESTREINT."inc/filtres_images"; # find_in_path('inc/filtres_images');
+$inc_filtres_images = _DIR_RESTREINT."inc/filtres_images.php"; # find_in_path('inc/filtres_images');
 $GLOBALS['spip_matrice']['couleur_dec_to_hex'] = $inc_filtres_images;
 $GLOBALS['spip_matrice']['couleur_hex_to_dec'] = $inc_filtres_images;
 $GLOBALS['spip_matrice']['couleur_extreme'] = $inc_filtres_images;
