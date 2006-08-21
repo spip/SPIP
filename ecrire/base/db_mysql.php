@@ -207,7 +207,7 @@ function spip_mysql_showtable($nom_table)
 	$a = spip_query("SHOW TABLES LIKE '$nom_table'");
 	if (!$a) return "";
 	if (!spip_fetch_array($a)) return "";
-	list(,$a) = spip_fetch_array(spip_query("SHOW CREATE TABLE $nom_table"));
+	list(,$a) = spip_fetch_array(spip_query("SHOW CREATE TABLE $nom_table"),SPIP_NUM);
 	if (!preg_match("/^[^(),]*\((([^()]*\([^()]*\)[^()]*)*)\)[^()]*$/", $a, $r))
 		return "";
 	else {
@@ -293,7 +293,7 @@ function spip_get_lock($nom, $timeout = 0) {
 	$nom .= _LOCK_TIME;
 
 	$q = spip_query("SELECT GET_LOCK(" . spip_abstract_quote($nom) . ", $timeout)");
-	list($lock_ok) = spip_fetch_array($q);
+	list($lock_ok) = spip_fetch_array($q,SPIP_NUM);
 
 	if (!$lock_ok) spip_log("pas de lock sql pour $nom");
 	return $lock_ok;
