@@ -1,6 +1,6 @@
 <BOUCLE_doc (DOCUMENTS) {id_document}>
 <div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok' style='[(#ENV{align}|=={left}|?{float:left; })][(#ENV{align}=={right}|?{float:right; })]width: [(#LOGO_DOCUMENT||largeur|max{120})]px;'>
-<a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]" type="#MIME_TYPE"[ class="(#ENV{lien_class})"]><img src='[(#LOGO_DOCUMENT||extraire_attribut{src})]' width='[(#LOGO_DOCUMENT||largeur)]' heigth='[(#LOGO_DOCUMENT||hauteur)]' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets)]' title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets)]' /></a>[
+<a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]" type="#MIME_TYPE"[ class="(#ENV{lien_class})"]><img src='[(#LOGO_DOCUMENT||extraire_attribut{src})]' width='[(#LOGO_DOCUMENT||largeur)]' height='[(#LOGO_DOCUMENT||hauteur)]' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets)]' title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets)]' /></a>[
 <div class='spip_doc_titre'><strong>(#TITRE)</strong></div>][
 <div class='spip_doc_descriptif'>(#DESCRIPTIF)#NOTES</div>]</div>
 </BOUCLE_doc>
