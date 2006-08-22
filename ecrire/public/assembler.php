@@ -379,7 +379,7 @@ function recuperer_fond($fond, $contexte=array()) {
 		ob_end_clean();
 	}
 
-	return $page['texte'];
+	return trim($page['texte']);
 }
 
 // temporairement ici : a mettre dans le futur inc/modeles
