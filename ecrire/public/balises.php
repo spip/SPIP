@@ -1269,6 +1269,7 @@ function balise_INCLURE_dist($p) {
 }
 
 // Inclure un modele : #MODELE{modele, params}
+// http://doc.spip.org/@balise_MODELE_dist
 function balise_MODELE_dist($p) {
 	$contexte = array();
 
