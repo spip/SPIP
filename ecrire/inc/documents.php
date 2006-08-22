@@ -391,7 +391,7 @@ function formulaire_tourner($id_document, $document, $script, $flag_modif, $type
 	global $spip_lang_right;
 
 	if (!$document) {
-	  	// retour d'Ajax
+		// retour d'Ajax
 		$document = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document)));
 	}
 
@@ -609,8 +609,9 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 	$images_liees = spip_query("SELECT docs.id_document FROM spip_documents AS docs, spip_documents_".$type."s AS l "."WHERE l.id_".$type."=$id AND l.id_document=docs.id_document ".$docs_exclus."AND docs.mode='vignette' ORDER BY docs.id_document");
 
 	echo "\n<p />";
-	while (list($doc) = spip_fetch_array($images_liees, SPIP_NUM)) {
-		afficher_case_document($doc, $id, $script, $type, $id_doc_actif == $doc);
+	while ($doc = spip_fetch_array($images_liees)) {
+		$id_document = $doc['id_document'];
+		afficher_case_document($id_document, $id, $script, $type, $id_doc_actif == $id_document);
 	}
 
 	/// Ajouter nouveau document
@@ -688,7 +689,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier = fa
 	$cadre = strlen($titre) ? $titre : basename($document['fichier']);
 
 	$result = spip_query("SELECT * FROM spip_types_documents WHERE id_type=$id_type");
-	if ($letype = @spip_fetch_array($result))	{
+	if ($letype = @spip_fetch_array($result)) {
 		$type_extension = $letype['extension'];
 		$type_inclus = $letype['inclus'];
 		$type_titre = $letype['titre'];

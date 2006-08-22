@@ -71,10 +71,10 @@ afficher_hierarchie($id_rubrique);
 fin_grand_cadre();
 debut_gauche();
 if ($new != 'oui' AND ($connect_statut=="0minirezo" OR $statut=="prop")) {
-	$GLOBALS['doublons']['documents'] = '0';
-	$GLOBALS['doublons']['documents'] = '0';
-	traiter_doublons_documents($GLOBALS['doublons'],
-		echappe_retour(pipeline('modeles', "$titre$texte")));
+	# affichage sur le cote des images, en reperant les inserees
+	# note : traiter_modeles($texte, true) repere les doublons
+	# aussi efficacement que propre(), mais beaucoup plus rapidement
+	traiter_modeles("$titre$texte", true);
 	afficher_documents_colonne($id_breve, "breve", true);
 }
 echo pipeline('affiche_gauche',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''));

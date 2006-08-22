@@ -81,7 +81,7 @@ function formulaire_petitionner($id_article, $script, $args, $ajax=false)
 			$res .="<input type='checkbox' name='message'  id='message' />";
 		$res .=" <label for='message'>"._T('bouton_checkbox_envoi_message')."</label>";
 
-		$res .=_T('texte_descriptif_petition')."&nbsp;:<BR />";
+		$res .= "<br />"._T('texte_descriptif_petition')."&nbsp;:<BR />";
 		$res .="<TEXTAREA NAME='texte_petition' CLASS='forml' ROWS='4' COLS='10' wrap=soft>";
 		$res .=entites_html($texte_petition);
 		$res .="</TEXTAREA>\n";

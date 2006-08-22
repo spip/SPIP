@@ -32,13 +32,8 @@ function action_editer_article_dist() {
 	// Enregistre l'envoi dans la BD
 	$err = articles_set($id_article, $id_parent, $lier_trad, $arg=='oui');
 
-	// id_article_bloque,  globale dans inc/presentation 
-
-	$redirect = parametre_url(
-		parametre_url(urldecode(_request('redirect')),
-			'id_article', $id_article),
-			'id_article_bloque', $id_article, '&')
-		. ($err ? '&trad_err=1' : '');
+	$redirect = parametre_url(urldecode(_request('redirect')),
+		'id_article', $id_article, '&') . ($err ? '&trad_err=1' : '');
 
 	redirige_par_entete($redirect);
 }

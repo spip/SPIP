@@ -336,9 +336,6 @@ function couper_intro($texte, $long) {
 	else {
 		$intro = preg_replace(',([|]\s*)+,S', '; ', couper($texte, $long));
 	}
-
-	// supprimer un eventuel chapo redirecteur =http:/.....
-	return preg_replace(',^=[^[:space:]]+,S','',$intro);
 }
 
 
@@ -937,44 +934,49 @@ function supprime_img($letexte) {
 // le raccourci <modeleN|parametres> par la page calculee a
 // partir du squelette modeles/modele.html
 // Le nom du modele doit faire au moins trois caracteres (evite <h2>)
+// Si $doublons==true, on repere les documents sans calculer les modeles
 // http://doc.spip.org/@traiter_modeles
-function traiter_modeles($texte) {
-	if (preg_match_all('/<([a-z_-]{3,})([0-9]+)([|]([^>]+))?'.'>/iS',
+function traiter_modeles($texte, $doublons=false) {
+	// detecter les modeles (rapide)
+	if (preg_match_all('/<[a-z_-]{3,}[0-9|]+/iS',
 	$texte, $matches, PREG_SET_ORDER)) {
 		include_spip('public/assembler');
-		foreach ($matches as $regs) {
-			$modele = inclure_modele($regs[4], $regs[1], $regs[2]);
+		foreach ($matches as $match) {
+			// Recuperer l'appel complet (y compris un eventuel lien)
+			// $regs : 1 => modele, 2 => type, 3 => id, 5 => params, 6 => a
+			$a = strpos($texte,$match[0]);
+			preg_match(
+			'/^(<([a-z_-]{3,})([0-9]*)([|](.*?))?'.'>)\s*(<\/a>)?/isS',
+			substr($texte, $a), $regs);
+
+			if ($regs[6] AND preg_match(
+			',<a\s.*>\s*$,Uis', substr($texte, 0, $a), $r)) {
+				$lien = array(
+					extraire_attribut($r[0],'href'),
+					extraire_attribut($r[0],'class')
+				);
+				$a -= strlen($r[0]);
+				$cherche = $r[0].$regs[0];
+			} else {
+				$lien = false;
+				$cherche = $regs[1];
+			}
+
+			// calculer le modele
+			if ($doublons) $modele = ''; else # hack articles_edit, breves_edit
+			$modele = inclure_modele($regs[2], $regs[3], $regs[5], $lien);
+
+			// le remplacer dans le texte
 			if ($modele !== false) {
 				$rempl = code_echappement($modele);
-				$cherche = $regs[0];
-
-				// XHTML : remplacer par une <div onclick> le lien
-				// dans le cas [<docXX>->lien] ; sachant qu'il n'existe
-				// pas de bonne solution en XHTML pour produire un lien
-				// sur une div (!!)...
-				if (substr($rempl, 0, 5) == '<div '
-				AND preg_match(
-				',(<a [^>]+>)\s*'.preg_quote($regs[0]).'\s*</a>,Uims',
-				$texte, $r)) {
-					$lien = extraire_attribut($r[1], 'href');
-					$cherche = $r[0];
-					$rempl = '<div style="cursor:pointer;cursor:hand;" '
-					.'onclick="document.location=\''.$lien
-					.'\'"'
-##						.' href="'.$lien.'"' # href deviendra legal en XHTML2
-					.'>'
-					.$rempl
-					.'</div>';
-				}
-
-				$texte = str_replace($cherche, $rempl, $texte);
-
-				// Hack: dans l'espace prive on veut savoir quels sont les 
-				// docs inclus sans se repayer l'analyse du texte complet:
-				if (!_DIR_RESTREINT
-				AND strstr($modele, 'spip_document_'.$regs[2]))
-					$GLOBALS['doublons_documents_inclus'][] = $regs[2];
+				$texte = substr($texte, 0, $a)
+					. $rempl
+					. substr($texte, $a+strlen($cherche));
 			}
+
+			// hack pour tout l'espace prive
+			if (!_DIR_RESTREINT)
+			$GLOBALS['doublons_documents_inclus'][] = $regs[3];
 		}
 	}
 

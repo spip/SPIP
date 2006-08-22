@@ -315,14 +315,11 @@ function exec_articles_edit_dist()
 	if (!$new){
 
 		# affichage sur le cote des pieces jointes, en reperant les inserees
-		# note : typo() repere les doublons aussi eficacement que propre(),
-		# mais beaucoup plus rapidement
-		$GLOBALS['doublons']['documents'] = '0';
-		traiter_doublons_documents($GLOBALS['doublons'],
-			echappe_retour(pipeline('modeles', join('',$row))));
+		# note : traiter_modeles($texte, true) repere les doublons
+		# aussi efficacement que propre(), mais beaucoup plus rapidement
+		traiter_modeles(join('',$row), true);
 		afficher_documents_colonne($id_article, 'article', true);
 	}
-	$GLOBALS['id_article_bloque'] = $id_article;	// globale dans debut_droite
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));
 	creer_colonne_droite();
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));

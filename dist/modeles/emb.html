@@ -15,7 +15,7 @@
 style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})[width:(#LARGEUR|max{120})px]']>
 ]})
 ][(#EXTENSION|=={svg}|?{' '})
-<embed src='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' [(#ENV*|env_to_attributs)] width='#LARGEUR' height='#HAUTEUR' />
+<embed src='#URL_DOCUMENT' [(#ENV*|env_to_attributs)] width='#LARGEUR' height='#HAUTEUR' />
 #SET{done,1}
 ][(#EXTENSION|match{^(rm|ram|ra)$}|?{' '})
 [(#ENV{controls,''}|?{'',' '})
@@ -30,28 +30,30 @@ style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{alig
 <object classid='clsid:d27cdb6e-ae6d-11cf-96b8-444553540000' 
  codebase='http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=#ENV{version,'6,0,0,0'}' 
  width='#GET{largeur}' height='#GET{hauteur}'>
-	<param name='movie' value='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' />
+	<param name='movie' value='#URL_DOCUMENT' />
 	[(#ENV{quality,''}|?{'',' '})<param name="quality" value="high" />]
 	[(#ENV*|env_to_params)]
 	<!--#EVAL**{chr(91)}if !IE#EVAL**{chr(93)}> <-->
-	<object data="[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER" width='#GET{largeur}' height='#GET{hauteur}' type="application/x-shockwave-flash">
+	<object data="#URL_DOCUMENT" width='#GET{largeur}' height='#GET{hauteur}' type="application/x-shockwave-flash">
 		[(#ENV{quality,''}|?{'',' '})<param name="quality" value="high" />]
 		[(#ENV*|env_to_params)]
 		<param name="pluginurl" value="http://www.macromedia.com/go/getflashplayer" />
 	</object>
 	<!--> <!#EVAL**{chr(91)}endif#EVAL**{chr(93)}-->
 </object>
+[(#REM) Activer les documents flash dans IE]
+[<script src="(#CHEMIN{activate_ie_object.js})" type="text/javascript"></script>]
 #SET{done,1}
 ][(#GET{done,0}|?{'',' '})
 [(#INCLUS|=={embed}|?{' '})
 <object width='#GET{largeur}' height='#GET{hauteur}'>
-<param name='movie' value='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' />
-<param name='src' value='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' />
+<param name='movie' value='#URL_DOCUMENT' />
+<param name='src' value='#URL_DOCUMENT' />
 [(#ENV*|env_to_params)]
-<embed src='[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' [(#ENV*|env_to_attributs)] width='#GET{largeur}' height='#GET{hauteur}'></embed></object>
+<embed src='#URL_DOCUMENT' [(#ENV*|env_to_attributs)] width='#GET{largeur}' height='#GET{hauteur}'></embed></object>
 
 ][(#INCLUS|=={image}|?{' '})
-[(#INCLURE{fond=modeles/img}{id_document}{align=#ENV{align}}{embed=oui})]
+[(#INCLURE{fond=modeles/img}{id_document}{align=#ENV{align}}{embed=oui}{lien=#ENV{lien}}{lien_class=#ENV{lien_class}})]
 ]
 ][(#INCLUS|=={embed}|?{' '})[(#ENV{controls,''}|?{'',' '})
 [<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>][<div class='spip_doc_descriptif'>(#DESCRIPTIF)</div>]</div>
