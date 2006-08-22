@@ -583,6 +583,7 @@ function extraire_lien ($regs) {
 
 // http://doc.spip.org/@calculer_url
 function calculer_url ($lien, $texte='', $pour='url') {
+	$lien = vider_url($lien); # supprimer 'http://' ou 'mailto:'
 
 	// Cherche un lien du type [->raccourci 123]
 	// associe a une fonction generer_url_raccourci()
