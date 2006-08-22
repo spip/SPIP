@@ -595,6 +595,7 @@ function calculer_url ($lien, $texte='', $pour='url') {
 
 		// aliases (historique)
 		if ($f == 'art') $f = 'article';
+		else if ($f == 'br') $f = 'breve';
 		else if ($f == 'rub') $f = 'rubrique';
 		else if ($f == 'aut') $f = 'auteur';
 		else if ($f == 'doc' OR $f == 'im' OR $f == 'img' OR $f == 'image' OR $f == 'emb')
