@@ -33,7 +33,8 @@
 
 				<p><small>[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small></p>
 
-   			#ARTICLE_TRADUCTIONS
+				[(#REM) Inclure le modele des liens de traductions ]
+				#MODELE{article_traductions}
 			</div>
 			
 			#DEBUT_SURLIGNE
@@ -71,7 +72,6 @@
 					<li>
 					<div class="spip_doc_titre"><a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a> <small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small></div>
 					[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]</li>
-					<br class="nettoyeur" />
 					</BOUCLE_documents_joints>
 				</ul>
 			</div>

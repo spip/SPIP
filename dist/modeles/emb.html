@@ -20,10 +20,10 @@ style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{alig
 ][(#EXTENSION|match{^(rm|ram|ra)$}|?{' '})
 [(#ENV{controls,''}|?{'',' '})
 	<div>
-	[(#EMB{controls=ImageWindow,type=audio/x-pn-realaudio-plugin,console=Console#ID_DOCUMENT,nojava=true})]
+	[(#MODELE{emb,controls=ImageWindow,type=audio/x-pn-realaudio-plugin,console=Console#ID_DOCUMENT,nojava=true})]
 	</div>
-	[(#EMB{controls=PlayButton,type=audio/x-pn-realaudio-plugin,console=Console#ID_DOCUMENT,nojava=true})]
-	[(#EMB{controls=PositionSlider,type=audio/x-pn-realaudio-plugin,console=Console#ID_DOCUMENT,nojava=true})]
+	[(#MODELE{emb,controls=PlayButton,type=audio/x-pn-realaudio-plugin,console=Console#ID_DOCUMENT,nojava=true})]
+	[(#MODELE{emb,controls=PositionSlider,type=audio/x-pn-realaudio-plugin,console=Console#ID_DOCUMENT,nojava=true})]
 	#SET{done,1}
 ]
 ][(#EXTENSION|=={swf}|?{' '})
