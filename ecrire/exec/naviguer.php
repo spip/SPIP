@@ -24,7 +24,7 @@ charger_generer_url();
 // http://doc.spip.org/@exec_naviguer_dist
 function exec_naviguer_dist()
 {
-	global $new, $id_parent, $id_rubrique, $spip_display,  $connect_statut, $champs_extra, $cherche_mot, $descriptif, $texte, $titre;
+	global $new, $id_parent, $id_rubrique, $spip_display,  $connect_statut, $champs_extra, $cherche_mot,  $select_groupe, $descriptif, $texte, $titre;
 
 
 	$flag_editable = ($connect_statut == '0minirezo' AND (acces_rubrique($id_parent) OR acces_rubrique($id_rubrique))); // id_parent necessaire en cas de creation de sous-rubrique
@@ -132,7 +132,7 @@ function exec_naviguer_dist()
 /// Mots-cles
 	    if ($GLOBALS['meta']["articles_mots"] != 'non' AND $id_rubrique > 0) {
 	      echo "\n<p>",
-		formulaire_mots('rubriques', $id_rubrique,  $cherche_mot, $flag_editable);
+		formulaire_mots('rubrique', $id_rubrique,  $cherche_mot,  $select_groupe, $flag_editable);
 	    }
 
 

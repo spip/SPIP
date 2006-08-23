@@ -91,6 +91,6 @@ function formulaire_petitionner($id_article, $script, $args, $ajax=false)
 	$res .="<input type='submit' CLASS='fondo' VALUE='"._T('bouton_changer')."' STYLE='font-size:10px' />";
 	$res .="</span>";
 
-	return ajax_action_auteur('petitionner', $id_article, $res, $script, $args, $args);
+	return ajax_action_auteur('petitionner', $id_article, $script, $args, $res);
 }
 ?>
