@@ -11,10 +11,18 @@
 
 	<fromage1020|lait=brebis|pays=France|region=Poitou|date_appellation=1923>
 
+	ou encore avec des espaces et des tags html :
+
+	<fromage 1020
+	|lait=brebis
+	|pays={France}
+	|region=<b>Poitou</b>
+	|date_appellation=1923
+	>
+
 	ou 1020 est le numero du document qui contient la photo, le nom du
 	fromage (titre), et le commentaire du critique culinaire (descriptif).
 ]
-
 <BOUCLE_doc(DOCUMENTS){id_document=#ENV{id_fromage}}>
 [(#REM) Code pour {doublons}]
 <table class='spip_document_#ID_DOCUMENT' border="1" align="right" cellpadding="4" cellspacing="0" style="margin: 0 0 1em 1em; border: 1px solid #999; border-right-width: 2px; border-bottom-width: 2px; background-color: #FFFFDD; font-size: 90%; border-collapse: collapse;">
@@ -35,15 +43,15 @@
 ]
 [<tr>
 <td><b>Pays d'origine</b></td>
-<td align="center" style="background: #FFFFFF">(#ENV{pays})</td>
+<td align="center" style="background: #FFFFFF">(#ENV*{pays}|propre)</td>
 </tr>]
 [<tr>
 <td><b>R&eacute;gion, ville</b></td>
-<td align="center" style="background: #FFFFFF">(#ENV{region})</td>
+<td align="center" style="background: #FFFFFF">(#ENV*{region}|propre)</td>
 </tr>]
 [<tr>
 <td><b>Lait de</b></td>
-<td align="center" style="background: #FFFFFF">(#ENV{lait})</td>
+<td align="center" style="background: #FFFFFF">(#ENV*{lait}|propre)</td>
 </tr>]
 [<tr>
 <td><b>Appellation, depuis</b></td>
