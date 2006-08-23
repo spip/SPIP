@@ -444,11 +444,13 @@ function inclure_modele($type, $id, $params, $lien) {
 
 
 	// Creer le contexte
-	$contexte = array(
-		'lang' => $GLOBALS['spip_lang'],
-		'fond' => $fond,
-		'dir_racine' => _DIR_RACINE # eviter de mixer un cache racine et un cache ecrire (meme si pour l'instant les modeles ne sont pas caches, le resultat etant different il faut que le contexte en tienne compte
-	);
+	$contexte = array();
+	if (_DIR_RESTREINT)
+		$contexte = calculer_contexte();
+	$contexte['lang'] = $GLOBALS['spip_lang'];
+	$contexte['fond'] = $fond;
+	$contexte['dir_racine'] = _DIR_RACINE; # eviter de mixer un cache racine et un cache ecrire (meme si pour l'instant les modeles ne sont pas caches, le resultat etant different il faut que le contexte en tienne compte
+
 	// Fixer l'identifiant qu'on passe dans #ENV ;
 	// pour le modele <site1> on veut id_syndic => 1
 	// par souci de systematisme on ajoute aussi
@@ -466,7 +468,7 @@ function inclure_modele($type, $id, $params, $lien) {
 		$contexte['lien'] = $lien[0];
 		$contexte['lien_class'] = $lien[1];
 	}
-
+	
 	// Traiter les parametres
 	// par exemple : <img1|center>, <emb12|autostart=true> ou <doc1|lang=en>
 	$contexte = array_merge($contexte,
