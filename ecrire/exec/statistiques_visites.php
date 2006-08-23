@@ -346,7 +346,44 @@ if ($GLOBALS['accepte_svg']) {
 	echo "<embed src='", generer_url_ecrire('statistiques_svg',"id_article=$id_article&aff_jours=$aff_jours"), "' width='450' height='310' type='image/svg+xml' />";
 	echo "</object>";
 	echo "\n</div>";
-	$moyenne =  round($total_absolu / ((date("U")-$date_premier)/(3600*24)));
+	$total_absolu = $total_absolu + $visites_today;
+	$test_agreg = $decal = $jour_prec = $val_prec = $total_loc =0;
+	foreach ($log as $key => $value) {
+		# quand on atteint aujourd'hui, stop
+		if ($key == $date_today) break; 
+		$test_agreg ++;
+		if ($test_agreg == $agreg) {	
+			$test_agreg = 0;
+			if ($decal == 30) $decal = 0;
+			$decal ++;
+			$tab_moyenne[$decal] = $value;
+			// Inserer des jours vides si pas d'entrees	
+			if ($jour_prec > 0) {
+				$ecart = floor(($key-$jour_prec)/((3600*24)*$agreg)-1);
+				for ($i=0; $i < $ecart; $i++){
+					if ($decal == 30) $decal = 0;
+					$decal ++;
+					$tab_moyenne[$decal] = $value;
+					reset($tab_moyenne);
+					$moyenne = 0;
+					while (list(,$val_tab) = each($tab_moyenne))
+						$moyenne += $val_tab;
+					$moyenne = $moyenne / count($tab_moyenne);
+					$moyenne = round($moyenne,2); // Pour affichage harmonieux
+				}
+			}
+			$total_loc = $total_loc + $value;
+			reset($tab_moyenne);
+
+			$moyenne = 0;
+			while (list(,$val_tab) = each($tab_moyenne))
+				$moyenne += $val_tab;
+			$moyenne = $moyenne / count($tab_moyenne);
+			$moyenne = round($moyenne,2); // Pour affichage harmonieux
+			$jour_prec = $key;
+			$val_prec = $value;
+		}
+	}
 } else {
 	
 	echo "<table cellpadding=0 cellspacing=0 border=0><tr>",

@@ -173,7 +173,7 @@ if ($connect_statut != '0minirezo') {
 					$tab_moyenne[$decal] = $value;
 
 					$ce_jour=date("Y-m-d", $jour_prec+(3600*24*($i+1)));
-					$jour = nom_jour($ce_jour).' '.affdate_court($ce_jour);
+						$jour = nom_jour($ce_jour).' '.affdate_jourcourt($ce_jour);
 
 					reset($tab_moyenne);
 					$moyenne = 0;
@@ -206,7 +206,7 @@ if ($connect_statut != '0minirezo') {
 			}
 
 			$ce_jour=date("Y-m-d", $key);
-			$jour = nom_jour($ce_jour).' '.affdate_court($ce_jour);
+				$jour = nom_jour($ce_jour).' '.affdate_jourcourt($ce_jour);
 
 			$total_loc = $total_loc + $value;
 			reset($tab_moyenne);
