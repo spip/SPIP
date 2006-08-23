@@ -40,7 +40,7 @@ function formulaire_virtualiser($id_article, $virtuel, $script, $args)
 	. _T('bouton_changer')
 	. "' style='font-size:10px' /></div>";
 
-	return ajax_action_auteur('virtualiser', $id_article, $r, $script, $args, $args);
+	return ajax_action_auteur('virtualiser', $id_article, $script, $args, $r);
 }
 
 // http://doc.spip.org/@exec_virtualiser_dist
@@ -49,9 +49,15 @@ function exec_virtualiser_dist()
 	global $id_article, $script;
 	$id_article = intval($id_article);
 
+	if (!acces_article($id_article)) {
+		spip_log("Tentative d'intrusion de " . $GLOBALS['auteur_session']['nom'] . " dans " . $GLOBALS['exec']);
+		include_spip('inc/minipres');
+		minipres(_T('info_acces_interdit'));
+	}
+
 	include_spip('inc/actions');
 
-	return formulaire_virtualiser($id_article, 'ajax', $script, "&id_article=$id_article");
+	return formulaire_virtualiser($id_article, 'ajax', $script, "id_article=$id_article");
 }
 
 ?>

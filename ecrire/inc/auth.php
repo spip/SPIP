@@ -40,6 +40,23 @@ function acces_mots() {
 	return $connect_toutes_rubriques;
 }
 
+function acces_article($id_article)
+{
+	global $connect_id_auteur;
+
+	$row = spip_fetch_array(spip_query("SELECT id_rubrique, statut FROM spip_articles WHERE id_article=$id_article"));
+
+	if (acces_rubrique($row['id_rubrique'])) return true;
+
+	$s = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur LIMIT 1"));
+
+	if (!$s) return false;
+
+	$s = $row['statut'];
+
+	return ($s == 'prepa' OR $s == 'prop' OR $s == 'poubelle');
+}
+
 // http://doc.spip.org/@auth_rubrique
 function auth_rubrique()
 {

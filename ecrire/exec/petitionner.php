@@ -18,6 +18,12 @@ function exec_petitionner_dist()
 	global $id_article, $script;
 	$id_article = intval($id_article);
 
+	if (!acces_article($id_article)) {
+		spip_log("Tentative d'intrusion de " . $GLOBALS['auteur_session']['nom'] . " dans " . $GLOBALS['exec']);
+		include_spip('inc/minipres');
+		minipres(_T('info_acces_interdit'));
+	}
+
 	include_spip('inc/petition');
 	include_spip('inc/presentation');
 	include_spip('inc/actions');
