@@ -25,13 +25,13 @@
 ]
 <BOUCLE_doc(DOCUMENTS){id_document=#ENV{id_fromage}}>
 [(#REM) Code pour {doublons}]
-<table class='spip_document_#ID_DOCUMENT' border="1" align="right" cellpadding="4" cellspacing="0" style="margin: 0 0 1em 1em; border: 1px solid #999; border-right-width: 2px; border-bottom-width: 2px; background-color: #FFFFDD; font-size: 90%; border-collapse: collapse;">
+<table class='spip_document_#ID_DOCUMENT spip_lien_ok' border="1" align="right" cellpadding="4" cellspacing="0" style="margin: 0 0 1em 1em; border: 1px solid #999; border-right-width: 2px; border-bottom-width: 2px; background-color: #FFFFDD; font-size: 90%; border-collapse: collapse;">
 <tr>
 <th colspan="2" style="background-color: #F6E396">
 <table style="background: #F6E396" align="center" width="100%">
 <tr>
 <td></td>
-<td style="background: #F6E396" align="center" width="100%"><font color="peru" size="4"><b>#TITRE</b></font></td>
+<td style="background: #F6E396" align="center" width="100%"><font color="peru" size="4"><b>[<a href="(#ENV{lien})">]#TITRE[(#ENV{lien}|?{</a>})]</b></font></td>
 <td></td>
 </tr>
 </table>
