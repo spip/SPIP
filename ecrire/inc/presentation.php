@@ -913,8 +913,9 @@ function afficher_articles_boucle($row, &$tous_id, $afficher_auteurs, $afficher_
 
 
 			$les_auteurs .= ", <a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "'$bio>$nom_auteur</a>";
-			if ($id_auteur != $connect_id_auteur AND $auteur_messagerie != "non") {
-				$les_auteurs .= "&nbsp;".bouton_imessage($id_auteur, $row);
+			if ($id_auteur != $connect_id_auteur AND $auteur_messagerie != "non"
+			AND $bouton = bouton_imessage($id_auteur, $row)) {
+				$les_auteurs .= "&nbsp;".$bouton;
 			}
 		}
 		$les_auteurs = substr($les_auteurs, 2);
@@ -1188,8 +1189,8 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 	$deb_aff = intval(_request('t_' .$tmp_var));
 	$col = ($options == "avancees") ? 4 : 3;
 	if ($options == "avancees") {
-		if ($affrub) $largeurs = array('7', '', '188', '35');
-		else  $largeurs = array('7','', '100', '35');
+		if ($affrub) $largeurs = array('7', '', '188', '38');
+		else $largeurs = array('7','', '100', '38');
 		$styles = array('', 'arial11', 'arial1', 'arial1');
 	} else {
 		if ($affrub) $largeurs = array('7','', '188');
@@ -1197,7 +1198,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 		$styles = array('','arial11', 'arial1');
 	}
 
-	return affiche_tranche_bandeau($requete, "breve-24.gif", 3, $couleur_foncee, "white", $tmp_var, $deb_aff, $titre_table, false, $largeurs, $styles, 'afficher_breves_boucle', array( $afficher_langue, $affrub, $langue_defaut));
+	return affiche_tranche_bandeau($requete, "breve-24.gif", count($largeurs), $couleur_foncee, "white", $tmp_var, $deb_aff, $titre_table, false, $largeurs, $styles, 'afficher_breves_boucle', array( $afficher_langue, $affrub, $langue_defaut));
 
 }
 
@@ -1528,7 +1529,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	//	echo ", ";
 	//	echo heures($date_heure).":".minutes($date_heure);
 	
-	echo date_relative($date_heure);
+	echo date_interface($date_heure);
 	
 	echo "</span> ";
 	

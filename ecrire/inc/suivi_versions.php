@@ -113,7 +113,7 @@ echo "<a href='", generer_url_ecrire('suivi_revisions', "debut=$next&id_secteur=
 				echo "<a class='$statut' style='font-weight: bold;' href='" . generer_url_ecrire("articles_versions","id_article=$id_article") . "'>$titre</a>";
 				echo "</span>";
 				echo "<span class='arial1'$dir_lang>";
-				echo " ".date_relative($date)." ";
+				echo " ".date_relative($date)." "; # laisser un peu de privacy aux redacteurs
 				if (strlen($nom)>0) echo "($nom)";
 				echo "</span>";
 			} else {
