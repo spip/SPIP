@@ -169,7 +169,7 @@ debut_cadre_enfonce("auteur-24.gif", false, "", $bouton._T('texte_auteurs').aide
 
 	echo "<p align='$spip_lang_left'>";
 	debut_boite_info();
-	rechercher_auteurs_articles($cherche_auteur, $ids,  $id_article);
+	echo rechercher_auteurs_articles($cherche_auteur, $ids,  $id_article);
 
 	if ($bouton_creer_auteur) {
 
@@ -828,41 +828,48 @@ function articles_traduction($id_article, $id_trad)
 function rechercher_auteurs_articles($cherche_auteur, $ids, $id_article)
 {
 	if (!$ids) {
-		echo "<B>"._T('texte_aucun_resultat_auteur', array('cherche_auteur' => $cherche_auteur)).".</B><BR />";
+		return "<B>"._T('texte_aucun_resultat_auteur', array('cherche_auteur' => $cherche_auteur)).".</B><BR />";
 	}
 	elseif ($ids == -1) {
-		echo "<B>"._T('texte_trop_resultats_auteurs', array('cherche_auteur' => $cherche_auteur))."</B><BR />";
+		return "<B>"._T('texte_trop_resultats_auteurs', array('cherche_auteur' => $cherche_auteur))."</B><BR />";
 	}
 	elseif (!strpos($ids,',')) {
 
 		$row = spip_fetch_array(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$ids"));
-		echo "<B>"._T('texte_ajout_auteur')."</B><BR /><UL><LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><B><FONT SIZE=3>".typo($row['nom'])."</FONT></B></UL>";
+		return "<B>"._T('texte_ajout_auteur')."</B><BR /><UL><LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><B><FONT SIZE=3>".typo($row['nom'])."</FONT></B></UL>";
 	}
 	else {
 		$ids = preg_replace('/[^0-9,]/','',$ids); // securite
 		$result = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur IN ($ids) ORDER BY nom");
 
-		echo "<B>"._T('texte_plusieurs_articles', array('cherche_auteur' => $cherche_auteur))."</B><BR />";
-		echo "<UL class='verdana1'>";
+		$res = "<B>"
+		. _T('texte_plusieurs_articles', array('cherche_auteur' => $cherche_auteur))
+		. "</B><BR />"
+		.  "<UL class='verdana1'>";
 		while ($row = spip_fetch_array($result)) {
 				$id_auteur = $row['id_auteur'];
 				$nom_auteur = $row['nom'];
 				$email_auteur = $row['email'];
 				$bio_auteur = $row['bio'];
 
-				echo "<li><b>".typo($nom_auteur)."</b>";
+				$res .= "<li><b>".typo($nom_auteur)."</b>";
 
-				if ($email_auteur) echo " ($email_auteur)";
-				echo " | <A href='", redirige_action_auteur('ajouter', "$id_article-$id_auteur","articles","id_article=$id_article#auteurs") . "'>",_T('lien_ajouter_auteur'),"</A>";
+				if ($email_auteur) $res .= " ($email_auteur)";
+
+				$res .= " | <A href='"
+				.  redirige_action_auteur('ajouter', "$id_article-$id_auteur","articles","id_article=$id_article#auteurs")
+				. "'>"
+				. _T('lien_ajouter_auteur')
+				. "</A>";
 
 				if (trim($bio_auteur)) {
-					echo "<br />".couper(propre($bio_auteur), 100)."\n";
+					$res .= "<br />".couper(propre($bio_auteur), 100)."\n";
 				}
-				echo "</li>\n";
+				$res .= "</li>\n";
 			}
-		echo "</UL>";
+		$res .= "</UL>";
+		return $res;
 	}
-
 }
 
 // http://doc.spip.org/@afficher_auteurs_articles
