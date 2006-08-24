@@ -44,7 +44,7 @@ function exec_calendrier_dist()
 
   $r = http_calendrier_init('', $type, '','',generer_url_ecrire('calendrier', ($type ? "type=$type" : '')) . "#$ancre");
 
-  if (_request(var_ajax)) return $r;
+  if (_request('var_ajax')) return $r;
 
   debut_page($titre, "accueil", "calendrier","",$css);
   echo "<div>&nbsp;</div><div id='", $ancre, "'>",$r,'</div>';

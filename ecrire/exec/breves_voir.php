@@ -222,18 +222,16 @@ fin_cadre_relief();
 
  $tm = rawurlencode($titre);
 
-echo "<BR><BR>";
+ echo "<br /><br />";
 
-echo "\n<div align='center'>";
+ echo "\n<div align='center'>";
  icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=prive&id_breve=$id_breve&titre_message=$tm&url=".generer_url_retour("breves_voir", "id_breve=$id_breve")),
        "forum-interne-24.gif", "creer.gif");
-echo "</div>";
+ echo "</div>";
 
+ echo "<br />";
 
-echo "<P align='left'>";
-
-
- afficher_forum(spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_breve='$id_breve' AND id_parent=0 ORDER BY date_heure DESC LIMIT 20"), "breves_voir", "id_breve=$id_breve");
+ echo afficher_forum(spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_breve='$id_breve' AND id_parent=0 ORDER BY date_heure DESC LIMIT 20"), "breves_voir", "id_breve=$id_breve");
 
 fin_page();
 }

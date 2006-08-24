@@ -522,11 +522,11 @@ fin_cadre_relief();
 
  echo "</div><p align='left'>\n";
 
-$result_forum = spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_syndic=$id_syndic AND id_parent=0 ORDER BY date_heure DESC LIMIT 20");
-afficher_forum($result_forum, "sites","id_syndic=$id_syndic");
+ $result_forum = spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_syndic=$id_syndic AND id_parent=0 ORDER BY date_heure DESC LIMIT 20");
 
+ echo afficher_forum($result_forum, "sites","id_syndic=$id_syndic");
 
-fin_page();
+ fin_page();
 }
 
 // http://doc.spip.org/@analyser_site
