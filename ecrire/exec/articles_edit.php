@@ -190,7 +190,7 @@ function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 		$onfocus .
 		" />\n<P>" .
 
-		(($articles_soustitre OR $soustitre) ?
+		(($articles_soustitre OR strlen($soustitre)) ?
 		 ("<b>" .
 		  _T('texte_sous_titre') .
 		  "</b>" .
@@ -198,7 +198,7 @@ function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 		  "\n<br /><input type='text' name='soustitre' class='forml' value=\"" .
 		  $soustitre .
 		  "\" size='40' /><br /><br />\n") :
-		 ("\n<input type='hidden' name='soustitre' value=\"$soustitre\" />")) .
+		 '') .
 
 		debut_cadre_couleur($logo, true, "", _T('titre_cadre_interieur_rubrique'). aide("artrub")) .
 
@@ -208,14 +208,14 @@ function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 	
 		($new ? '' : "\n<input type='hidden' name='id_rubrique_old' value='$id_rubrique'>") .
 
-		((($options == "avancees" AND $articles_descriptif) OR $descriptif)?
+		((($options == "avancees" AND $articles_descriptif) OR strlen($descriptif))?
 		 ("\n<P><B>" ._T('texte_descriptif_rapide') ."</B>" .
 		  aide ("artdesc") .
 		  "</p>\n<br />" ._T('texte_contenu_article') ."<br />\n" .
 		  "<textarea name='descriptif' class='forml' rows='2' cols='40' wrap=soft>" .
 		  $descriptif .
 		  "</textarea>\n") :
-		 ("<input type='hidden' name='descriptif' value=\"$descriptif\" />")) .
+		 '') .
 
 		((($options == "avancees" AND $articles_urlref) OR $nom_site OR $url_site) ?
 		 (_T('entree_liens_sites') ."<br />\n" .
@@ -234,9 +234,9 @@ function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 		($spip_display==4 ? '' : afficher_barre('document.formulaire.texte')) .
 		"<textarea id='text_area' name='texte'$att_text>$texte</textarea>\n" .
 
-		((($articles_ps AND $options == "avancees") OR $ps) ?
+		((($articles_ps AND $options == "avancees") OR strlen($ps)) ?
 		 ("\n<p><b>" . _T('info_post_scriptum') ."</b><br />" . "<textarea name='ps' class='forml' rows='5' cols='40' wrap=soft>" . $ps . "</textarea></p><p>\n") :
-		 ("<input type='hidden' name='ps' value=\"" . $ps . "\">")) .
+		 '') .
 
 		(!$champs_extra ? '': extra_saisie($extra, 'articles', $id_secteur, false)) .
 

@@ -86,21 +86,22 @@ function revisions_articles ($id_article, $id_rubrique, $new) {
 {
 	global $flag_revisions, $champs_extra;
 
-	$id_auteur =  _request('id_auteur');
-	$texte = trop_longs_articles(_request('texte_plus')) . _request('texte');
-	if (!strlen($titre_article=corriger_caracteres(_request('titre'))))
-		$titre_article = _T('info_sans_titre');
+	$id_auteur = _request('id_auteur');
 
-	$champs = array(
-		'surtitre' => corriger_caracteres(_request('surtitre')),
-		'titre' => $titre_article,
-		'soustitre' => corriger_caracteres(_request('soustitre')),
-		'descriptif' => corriger_caracteres(_request('descriptif')),
-		'nom_site' => corriger_caracteres(_request('nom_site')),
-		'url_site' => corriger_caracteres(_request('url_site')),
-		'chapo' => corriger_caracteres( _request('chapo')),
-		'texte' => corriger_caracteres($texte),
-		'ps' => corriger_caracteres(_request('ps')))  ;
+	// unifier $texte en cas de texte trop long
+	trop_longs_articles();
+
+	// ne pas accepter de titre vide
+	if (_request('titre') === '')
+		$_POST['titre'] = _T('ecrire:info_sans_titre');
+
+	foreach (array(
+	'surtitre', 'titre', 'soustitre', 'descriptif',
+	'nom_site', 'url_site', 'chapo', 'texte', 'ps') as $champ) {
+		if (($val = _request($champ)) !== NULL) {
+			$champs[$champ] = corriger_caracteres($val);
+		}
+	}
 
 	// Stockage des versions : creer une premier version si non-existante
 	if (($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions) {
@@ -125,7 +126,11 @@ function revisions_articles ($id_article, $id_rubrique, $new) {
 		$champs_extra = extra_recup_saisie("articles", _request('id_secteur'));
 	}
 
-	spip_query("UPDATE spip_articles SET id_rubrique=$id_rubrique, surtitre=" . spip_abstract_quote($champs['surtitre']) . ", titre=" . spip_abstract_quote($champs['titre']) . ", soustitre=" . spip_abstract_quote($champs['soustitre']) . ", descriptif=" . spip_abstract_quote($champs['descriptif']) . ", chapo=" . spip_abstract_quote($champs['chapo']) . ", texte=" . spip_abstract_quote($champs['texte']) . ", ps=" . spip_abstract_quote($champs['ps']) . ", url_site=" . spip_abstract_quote($champs['url_site']) . ", nom_site=" . spip_abstract_quote($champs['nom_site']) . ", date_modif=NOW() " . ($champs_extra ? (", extra = " . spip_abstract_quote($champs_extra)) : '') . " WHERE id_article=$id_article");
+	$update = '';
+	foreach ($champs as $champ => $val)
+		$update .= $champ . '=' . spip_abstract_quote($val).', ';
+
+	spip_query("UPDATE spip_articles SET id_rubrique=$id_rubrique, $update date_modif=NOW() " . ($champs_extra ? (", extra = " . spip_abstract_quote($champs_extra)) : '') . " WHERE id_article=$id_article");
 
 	// Stockage des versions
 	if (($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions) {
@@ -166,14 +171,14 @@ function revisions_articles ($id_article, $id_rubrique, $new) {
 //
 
 // http://doc.spip.org/@trop_longs_articles
-function trop_longs_articles($texte_plus)
-{
-	$nb_texte = 0;
-	while ($nb_texte ++ < count($texte_plus)+1){
-		$texte_ajout .= ereg_replace("<!--SPIP-->[\n\r]*","",
-					     $texte_plus[$nb_texte]);
+function trop_longs_articles() {
+#	print_r($_POST);exit;
+	if (isset($_POST['texte_plus']) && is_array($_POST['texte_plus'])) {
+		foreach ($_POST['texte_plus'] as $t) {
+			$_POST['texte'] = preg_replace(",<!--SPIP-->[\n\r]*,","", $t)
+				. $_POST['texte'];
+		}
 	}
-	return $texte_ajout;
 }
 
 // Poser un lien de traduction vers un article de reference
