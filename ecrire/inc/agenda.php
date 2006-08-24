@@ -911,7 +911,7 @@ function http_calendrier_navigation($annee, $mois, $jour, $echelle, $partie_cal,
 	  $args_pred = calendrier_href($script, $a, $m, $j, $t, "&amp;echelle=$echelle&amp;partie_cal=$partie_cal", $ancre,
 				       "fleche-$spip_lang_left.png",
 				       _T('precedent'),
-				       'calendrier-png',
+				       'format_png',
 				       '&lt;&lt;&lt;');
 
 	}
@@ -921,7 +921,7 @@ function http_calendrier_navigation($annee, $mois, $jour, $echelle, $partie_cal,
 	  $args_suiv = calendrier_href($script, $a, $m, $j, $t, "&amp;echelle=$echelle&amp;partie_cal=$partie_cal", $ancre,
 				       "fleche-$spip_lang_right.png",
 				       _T('suivant'),
-				       'calendrier-png',
+				       'format_png',
 				       '&gt;&gt;&gt;');
 	}
 
@@ -940,23 +940,23 @@ function http_calendrier_navigation($annee, $mois, $jour, $echelle, $partie_cal,
 	     (calendrier_href($script, $annee, $mois, $jour, $type, "&amp;echelle=$echelle&amp;partie_cal=sansheure", $ancre,
 				 "sans-heure.gif",
 				 _T('sans_heure'),
-				 "calendrier-png" .
+				 "format_png" .
 				 (($partie_cal == "sansheure") ? " calendrier-opacity'" : ""))
 	      . calendrier_href($script, $annee, $mois, $jour, $type, "&amp;echelle=$echelle&amp;partie_cal=tout", $ancre,
 				 "heures-tout.png",
 				 _T('cal_jour_entier'),
-				 "calendrier-png" .
+				 "format_png" .
 				 (($partie_cal == "tout") ? " calendrier-opacity'" : ""))
 	      . calendrier_href($script, $annee, $mois, $jour, $type, "&amp;echelle=$echelle&amp;partie_cal=matin", $ancre,
 				 "heures-am.png",
 				 _T('cal_matin'),
-				 "calendrier-png" .
+				 "format_png" .
 				 (($partie_cal == "matin") ? " calendrier-opacity'" : ""))
 
 	      . calendrier_href($script, $annee, $mois, $jour, $type, "&amp;echelle=$echelle&amp;partie_cal=soir", $ancre,
 				 "heures-pm.png",
 				 _T('cal_apresmidi'), 
-				 "calendrier-png" .
+				 "format_png" .
 				 (($partie_cal == "soir") ? " calendrier-opacity'" : ""))
 		  . "&nbsp;"
 	      . calendrier_href($script, $annee, $mois, $jour, $type, "&amp;partie_cal=$partie_cal&amp;echelle=" . floor($echelle * 1.5),
