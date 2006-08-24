@@ -70,18 +70,15 @@ function articles_set($id_article, $id_rubrique, $lier_trad, $new)
 	include_spip('inc/filtres');
 	include_spip('inc/rubriques');
 
-	// retour de articles_edit
-	if (_request('titre') !== NULL) {
-		return revisions_articles($id_article, $id_rubrique, $new);
+	// si editer_article='oui', on modifie le contenu
+	if (_request('editer_article') == 'oui') {
+		revisions_articles($id_article, $id_rubrique, $new);
 	}
-	// retour articles.php, pour gestion des liens de trad (ou autre)
-	else {
-		if ($lier_trad)
-			return article_referent($id_article, $lier_trad);
-		else
-			spip_log("erreur sur action/editer_article"); // ne devrait pas se produire
-	}
-return;
+
+	if ($lier_trad)
+		$err = article_referent($id_article, $lier_trad);
+
+	return $err;
 }
 
 // http://doc.spip.org/@revisions_articles

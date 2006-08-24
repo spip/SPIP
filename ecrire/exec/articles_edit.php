@@ -107,9 +107,6 @@ function chapo_articles_edit($chapo, $articles_chapeau)
 				$chapo .
 				"</textarea><P>\n";
 		}
-		else {
-			return "<br /><INPUT TYPE='hidden' NAME='chapo' VALUE=\"$chapo\">";
-		}
 	}
 }
 
@@ -163,7 +160,8 @@ function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 	$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');
 	$redirect = generer_url_ecrire("articles");
 
-	$form = (!$lier_trad ? '' :
+	$form = "<input type='hidden' name='editer_article' value='oui' />\n" .
+		 (!$lier_trad ? '' :
 		 ("\n<input type='hidden' name='lier_trad' value='" .
 		  $lier_trad .
 		  "' />" .
