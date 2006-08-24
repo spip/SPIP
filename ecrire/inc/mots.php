@@ -141,19 +141,15 @@ function formulaire_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag_
 		if (!$cpt['n']) return;
 	}
 
-	if ($flag_editable){
-		if ($visible)
-			$bouton = bouton_block_visible("lesmots");
-		else
-			$bouton =  bouton_block_invisible("lesmots");
-	} else $bouton = '';
+	//
+	// Preparer l'affichage
+	//
 
-	$res = debut_cadre_enfonce("mot-cle-24.gif", true, "", $bouton._T('titre_mots_cles').aide ("artmots"));
-
+	// La reponse
+	$reponse = '';
 	if ($flag_editable AND $cherche_mot) {
 		$reindexer = false;
-		list($choix, $nouveaux_mots) = recherche_mot_cle($cherche_mot, $select_groupe, $objet, $id_objet, $table, $table_id, $url_base);
-			$res .= $choix;
+		list($reponse, $nouveaux_mots) = recherche_mot_cle($cherche_mot, $select_groupe, $objet, $id_objet, $table, $table_id, $url_base);
 			while ((list(,$nouv_mot) = each($nouveaux_mots)) AND $nouv_mot!='x') {
 			  $reindexer |= inserer_mot("spip_mots_$table", $table_id, $id_objet, $nouv_mot);
 			}
@@ -166,12 +162,19 @@ function formulaire_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag_
 
 	$form = afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id, $url_base, $visible);
 
-	// n'envoyer que le formulaire si on est appele par ajax
+	// n'envoyer que le formulaire (et sa reponse) si on est appele par ajax
 	if ($flag_editable === 'ajax')
-		return $form;
+		return $reponse . $form;
 
 	// Envoyer titre + div-id + formulaire + fin
-	return $res
+	if ($flag_editable){
+		if ($visible)
+			$bouton = bouton_block_visible("lesmots");
+		else
+			$bouton =  bouton_block_invisible("lesmots");
+	} else $bouton = '';
+
+	return debut_cadre_enfonce("mot-cle-24.gif", true, "", $bouton._T('titre_mots_cles').aide ("artmots"))
 		. "<div id='editer_mot-$id_objet'>".$form."</div>"
 		. fin_cadre_enfonce(true);
 
