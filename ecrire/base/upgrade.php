@@ -26,6 +26,7 @@ function maj_version ($version, $test = true) {
 	}
 }
 
+// http://doc.spip.org/@upgrade_vers
 function upgrade_vers($version, $version_installee, $version_cible = 0){
 	return ($version_installee<$version
 		AND (($version_cible>=$version) OR ($version_cible==0))

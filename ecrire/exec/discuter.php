@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/forum');
 include_spip('inc/presentation');
 
-// http://doc.spip.org/@affiche_forums_article
+// http://doc.spip.org/@formulaire_discuter
 function formulaire_discuter($query, $total, $debut, $total_afficher, $script, $args, $mute=false)
 {
 	$res = $nav ='';
@@ -46,6 +46,7 @@ function formulaire_discuter($query, $total, $debut, $total_afficher, $script, $
 	return (_request('var_ajax')) ? $res : "<div id='forum'>$res</div>";
 }
 
+// http://doc.spip.org/@exec_discuter_dist
 function exec_discuter_dist($id_article=-1, $debut=-1)
 {
   if ($debut == -1) $debut = _request('debut');
