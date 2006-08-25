@@ -121,6 +121,29 @@ function aff_selection (type, rac, id) {
 	charger_id_url("./?exec=informer&var_ajax=1&type="+type+"&id="+id+"&rac="+rac, rac+"_selection");
 }
 
+// selecteur de rubrique et affichage de son titre dans le bandeau
+
+function aff_selection_titre(id_rubrique, titre)
+{
+	findObj('id_parent').value=id_rubrique;
+	findObj('titreparent').value=titre;
+	findObj('selection_rubrique').style.display='none';
+}
+
+function aff_selection_provisoire(id_rubrique, racine, url, col, sens)
+{
+  nom = racine + '_col_' + (col+1);
+  if (url)
+    { r = racine + 'principal';
+      c = ((col-1)*150);
+      charger_id_url(url, nom, function() {slide_horizontal(r,c,sens);})}
+  else 
+    { findObj_forcer(nom).innerHTML=''; }
+  // afficher le descriptif de la rubrique dans la div du dessous?
+  // si trop lent, commenter la ligne ci-dessous
+  aff_selection('rubrique',racine,id_rubrique);
+}
+
 //
 // Cette fonction charge du contenu - dynamiquement - dans un 
 // Ajax
@@ -165,7 +188,7 @@ function ajahReady(xhr, f) {
 // Toutefois il y toujours un coup de retard dans la pose d'un cookie:
 // eviter de se loger avec redirection vers un telle page
 
-function AjaxSqueeze(trig, id)
+function AjaxSqueeze(trig, id, f)
 {
 	var i, s, g;
 	var u = '';
@@ -173,6 +196,9 @@ function AjaxSqueeze(trig, id)
 	// pere du demandeur dans le DOM (le donner direct serait mieux)
 	var noeud = document.getElementById(id);
 	if (!noeud) return true;
+
+	// retour std si pas precise: affecte ce noeud avec ce retour
+	if (!f) f = function(r) { noeud.innerHTML = r;}
 
 	// vivement jquery !
 	if (typeof ajax_image_searching != 'undefined') {
@@ -182,7 +208,7 @@ function AjaxSqueeze(trig, id)
 	}
 
 	if (typeof(trig) == 'string') {
-		return ajah('GET', trig, null, function(r) { noeud.innerHTML = r;});
+		return ajah('GET', trig, null, f);
 	}
 
 	for (i=0;i < trig.elements.length;i++) {
@@ -197,7 +223,7 @@ function AjaxSqueeze(trig, id)
 	return !ajah('POST', // ou 'GET'
 		     s ,     // s + '?'+ u,
 		     u,      // null,
-		     function(r) { noeud.innerHTML = r;} );
+		     f);
 }
 
 
@@ -212,7 +238,8 @@ function charger_id_url(myUrl, myField, jjscript)
 		Field.innerHTML = url_chargee['mem_'+myUrl];
 		Field.style.visibility = "visible";
 		Field.style.display = "block";
-		if(jjscript) eval(jjscript);
+		//		if(jjscript) eval(jjscript);
+		if(jjscript) jjscript();
 	} else {
 		image_search[myField] = findObj_forcer('img_'+myField);
 		if (image_search[myField]) image_search[myField].style.visibility = "visible";
@@ -233,7 +260,8 @@ function charger_id_url(myUrl, myField, jjscript)
 					if (image_search[myField]) {
 						image_search[myField].style.visibility = "hidden";
 					}
-					if(jjscript) eval(jjscript);
+					//	if(jjscript) eval(jjscript);
+					if(jjscript) jjscript();
 				} else {
 					charger_id_url(myUrl, myField, jjscript);
 				}

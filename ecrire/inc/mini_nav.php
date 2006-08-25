@@ -13,98 +13,84 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@mini_afficher_rubrique
-function mini_afficher_rubrique ($id_rubrique, $rac="", $liste="", $col = 1, $rub_exclus=0) {
+function mini_afficher_rubrique ($id_rubrique, $rac="", $list=array(), $col = 1, $rub_exclus=0) {
 	global  $spip_lang_left;
 	
-	if (strlen($liste) > 0) {
-		$rubs = explode(",", $liste);
-		$id_rubrique = $rubs[$col-1];
-	}
+	if ($list) $id_rubrique = $list[$col-1];
 	
-	
-	$ret = "<div id = '".$rac."_col_".$col."' class='arial1'>"; 
-	$ret .= http_img_pack("searching.gif", "*", "style='visibility: hidden; position: absolute; $spip_lang_left: ".(($col*150)-30)."px; top: 2px; z-index: 2;' id = 'img_".$rac."_col_".($col+1)."'");
+	$nom_col = $rac . "_col_".($col+1);
 
-	$ret .= "<div style='width: 150px; height: 100%; overflow: auto; position: absolute; top: 0px; $spip_lang_left: ".(($col-1)*150)."px;'>";
+	$ret = "<div id='"
+	. $rac
+	. "_col_"
+	. $col
+	."' class='arial1'>" 
+	. http_img_pack("searching.gif", "*", "style='visibility: hidden; position: absolute; $spip_lang_left: "
+		.(($col*150)-30)
+		."px; top: 2px; z-index: 2;' id='img_$nom_col'")
+	. "<div style='width: 150px; height: 100%; overflow: auto; position: absolute; top: 0px; $spip_lang_left: "
+	.(($col-1)*150)
+	."px;'>";
 
 	# recherche les filles et petites-filles de la rubrique donnee
-	$res = spip_query("SELECT rub1.* FROM spip_rubriques AS rub1, spip_rubriques AS rub2 WHERE ((rub1.id_parent = $id_rubrique) OR (rub2.id_parent = $id_rubrique AND rub1.id_parent=rub2.id_rubrique)) AND rub1.id_rubrique!=$rub_exclus GROUP BY rub1.id_rubrique ORDER BY rub1.titre");
+	$ordre = array();
+
+	$res = spip_query("SELECT rub1.id_rubrique, rub1.titre, rub1.id_parent, rub1.lang, rub1.langue_choisie FROM spip_rubriques AS rub1, spip_rubriques AS rub2 WHERE ((rub1.id_parent = $id_rubrique) OR (rub2.id_parent = $id_rubrique AND rub1.id_parent=rub2.id_rubrique)) AND rub1.id_rubrique!=$rub_exclus GROUP BY rub1.id_rubrique ORDER BY rub1.titre");
+
 	while ($row = spip_fetch_array($res)) {
-		$le_parent = $row["id_parent"];
-		$la_rub = $row["id_rubrique"];
-		$titre = typo($row["titre"]);
-		$lang = $row["lang"];
-		$langue_choisie = $row["langue_choisie"];
-		
-		if ($langue_choisie == "oui") $titre = $titre. " [$lang]";
-		
-		$rub[$la_rub]["id_rubrique"] = $la_rub;
-		$rub[$la_rub]["id_parent"] = $le_parent;
-		$rub[$la_rub]["titre"] = $titre;
-		$rub[$le_parent]["enfants"] = true;
-		$ordre[$la_rub] = trim($titre);
+		$id = $row["id_rubrique"];
+		$rub[$id] = $row;
+		$rub[$row["id_parent"]]["enfants"] = true;
+		if ($row["id_parent"] == $id_rubrique)
+			$ordre[$id] = trim(typo($row['titre']))
+			. (($row["langue_choisie"] != "oui") ? '' : (" [" . $row["lang"] . "]"));
+
 	}
 
 	if ($ordre) {
 		asort($ordre);
-		while (list($i, $k) = each($ordre)) {
-			$le_parent = $rub[$i]["id_parent"];
-			$la_rub = $rub[$i]["id_rubrique"];
-			$titre = $rub[$i]["titre"];
-	
-			if ($le_parent == $id_rubrique) {
-				if ($la_rub == $rubs[$col]) $class="highlight";
-				else $class = "pashighlight";
-				
-				if ($rub[$i]["id_parent"] == 0) $style = " style='background-image: url(" . _DIR_IMG_PACK . "secteur-12.gif)'";
+		$place = (($col-1)*150);
 
-				$titre = "<div class='petite-rubrique'$style>"
-					.supprimer_numero($titre)."</div>";
-				# ce lien provoque la selection (directe) de la rubrique cliquee
-				$ondbClick = "findObj('id_parent').value=$la_rub;";
-				# et l'affichage de son titre dans le bandeau
-				$ondbClick .= "findObj('titreparent').value='"
-					. strtr(
-						str_replace("'", "&#8217;",
+		while (list($id, $titre) = each($ordre)) {
+
+			$titre = "<div class='petite-rubrique'"
+			. ($id_rubrique ? '' : (" style='background-image: url(" . _DIR_IMG_PACK . "secteur-12.gif)'"))
+			. ">"
+			. supprimer_numero($titre)
+			. "</div>";
+
+			if ($rub[$id]["enfants"]) {
+				$titre = "\n<div class='rub-ouverte'>$titre</div>";
+
+		# ensuite, ouverture ou fermeture du menu des sous-rubriques
+				$url = generer_url_ecrire('plonger',"&var_ajax=1&rac=$rac&exclus=$rub_exclus&id=$id&col=".($col+1), true);
+
+			} else {  $url = ''; }
+
+			$class = ($id == $list[$col]) ? "highlight" : "pashighlight";
+
+			$onClick = "\naff_selection_provisoire($id,\n\t'$rac',\n\t'$url',\n\t$col,\n\t'$spip_lang_left');";
+				
+# ce lien provoque la selection (directe) de la rubrique cliquee
+# et l'affichage de son titre dans le bandeau
+			$ondbClick = "aff_selection_titre($id,'"
+			. strtr(str_replace("'", "&#8217;",
 						str_replace('"', "&#34;",
 							textebrut($titre))),
-						"\n\r", "  ")."';";
-				$ondbClick .= "findObj('selection_rubrique').style.display='none';";
+					"\n\r", "  ")
+			. "');";
 
-				if ($rub[$i]["enfants"]) {
-					$titre = "<div class='rub-ouverte'>$titre</div>";
-
-					# ensuite, l'ouverture du menu des sous-rubriques
-					$url = generer_url_ecrire('plonger',"&var_ajax=1&rac=$rac&exclus=$rub_exclus&id=$la_rub&col=".($col+1), true);
-					$onClick .= "charger_id_url('$url',"
-					. "'".$rac."_col_".($col+1)
-					."', 'slide_horizontal(\'".$rac."_principal\', \'"
-					.(($col-1)*150)."\', \'$spip_lang_left\')');";
-				} else {
-					# ou la fermeture du menu des sous-rubriques
-					$onClick .= "findObj_forcer('".$rac."_col_"
-					. ($col+1)."').innerHTML='';";
-				}
-
-				## afficher le descriptif de la rubrique dans la div du dessous?
-				# si trop lent, commenter la ligne ci-dessous
-				$onClick .= " aff_selection('rubrique','$rac','$la_rub');";
-				##
-
-				$ret .= "<div class='$class' onClick=\"changerhighlight(this); $onClick\" ondblclick=\"$ondbClick$onClick\">";
-				$ret .= $titre;
-				$ret .= "</div>";
-			}
+			$ret .= "\n<div class='$class'\nonClick=\"changerhighlight(this);$onClick\"\nondblclick=\"$ondbClick$onClick\">$titre\n</div>";
 		}
 	}
 	
-	$ret .= "</div>";
+	$ret .= "\n</div>";
+
+	if ($list[$col]) $ret .= mini_afficher_rubrique ($id_rubrique, $rac, $list, $col+1, $rub_exclus);
+	else $ret .= "\n<div id='$nom_col'></div>";
 	
-	if ($rubs[$col]) $ret .= mini_afficher_rubrique ($id_rubrique, $rac, $liste, $col+1, $rub_exclus);
-	else $ret .= "<div id = '".$rac."_col_".($col+1)."'></div>";
-	
-	$ret .= "</div>";
-	
+	$ret .= "\n</div>";
+
 	return $ret;
 }
 
@@ -120,16 +106,14 @@ function mini_hierarchie_rub ($id_rubrique) {
 function mini_afficher_hierarchie ($id_rubrique, $rac="", $rub_exclus=0) {
 	
 	$id_parent = $id_rubrique;
+	$liste = $id_rubrique;
 	while ($id_parent = mini_hierarchie_rub ($id_parent)) {
 		$liste = $id_parent.",".$liste;
 	}
 	
-	$liste = "0,".$liste.$id_rubrique;
+	$liste = "0,".$liste;
 		
-	$ret = mini_afficher_rubrique ($id_rubrique, $rac, $liste, $col = 1, $rub_exclus);
-	
-	return $ret;
-	
+	return mini_afficher_rubrique($id_rubrique, $rac, explode(',',$liste), 1, $rub_exclus);
 }
 
 // http://doc.spip.org/@mini_nav_principal
