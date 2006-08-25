@@ -24,7 +24,7 @@ function action_editer_article_dist() {
 
 	if (!$id_article = intval($arg)) {
 		if ($arg != 'oui') redirige_par_entete('./');
-		$id_article = insert_article();
+		$id_article = insert_article(_request('id_parent'));
 	} 
 	  
 	// Enregistre l'envoi dans la BD
@@ -37,27 +37,42 @@ function action_editer_article_dist() {
 }
 
 // http://doc.spip.org/@insert_article
-function insert_article() {
+function insert_article($id_rubrique) {
 	include_spip('base/abstract_sql');
 	$id_auteur = _request('id_auteur');
 
 
 	// Si id_rubrique vaut 0 ou n'est pas definie, creer l'article
 	// dans la premiere rubrique racine
-	if (!$id_rubrique = intval(_request('id_parent'))) {
+	if (!$id_rubrique = intval($id_rubrique)) {
 		$row = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 ORDER by 0+titre,titre LIMIT 1"));
 		$id_rubrique = $row['id_rubrique'];
 	}
 
-	$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+	// La langue a la creation : si les liens de traduction sont autorises
+	// dans les rubriques, on essaie avec la langue de l'auteur,
+	// ou a defaut celle de la rubrique
+	// Sinon c'est la langue de la rubrique qui est choisie + heritee
+	if ($GLOBALS['meta']['multi_articles'] == 'oui') {
+		lang_select($GLOBALS['auteur_session']['lang']);
+		if (in_array($GLOBALS['spip_lang'],
+		explode(',', $GLOBALS['meta']['langues_multilingue']))) {
+			$lang = $GLOBALS['spip_lang'];
+			$choisie = 'oui';
+		}
+	}
+	if (!$lang) {
+		$lang = $GLOBALS['meta']['langue_site'];
+		$choisie = 'non';
+		if ($row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique")))
+			$lang = $row['lang'];
+	}
 
 	$id_article = spip_abstract_insert("spip_articles",
-			"(id_rubrique, statut, date, accepter_forum, lang, langue_choisie)", 
-			"($id_rubrique, 'prepa', NOW(), '" .
-				substr($GLOBALS['meta']['forums_publics'],0,3)
-				. "', '"
-				. ($row["lang"] ? $row["lang"] : $GLOBALS['meta']['langue_site'])
-				. "', 'non')");
+		"(id_rubrique, statut, date, accepter_forum, lang, langue_choisie)",
+		"($id_rubrique, 'prepa', NOW(), '"
+			. substr($GLOBALS['meta']['forums_publics'],0,3)
+			. "', '$lang', '$choisie')");
 	spip_abstract_insert('spip_auteurs_articles', "(id_auteur,id_article)", "('$id_auteur','$id_article')");
 	return $id_article;
 }
