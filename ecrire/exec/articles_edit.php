@@ -206,8 +206,6 @@ function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 
 		fin_cadre_couleur(true) .
 	
-		($new ? '' : "\n<input type='hidden' name='id_rubrique_old' value='$id_rubrique'>") .
-
 		((($options == "avancees" AND $articles_descriptif) OR strlen($descriptif))?
 		 ("\n<P><B>" ._T('texte_descriptif_rapide') ."</B>" .
 		  aide ("artdesc") .
@@ -239,10 +237,6 @@ function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 		 '') .
 
 		(!$champs_extra ? '': extra_saisie($extra, 'articles', $id_secteur, false)) .
-
-		(!$date ? '' : ("\n<input type='hidden' name='date' value=\"$date\" size='40'><P>")) .
-
-		(!$new ? '' : ("\n<input type='hidden' name='statut_nouv' value=\"prepa\" SIZE='40' /><p>")) .
 
 		"<div align='right'><input class='fondo' type='submit' value='" . _T('bouton_enregistrer') . "'></div>";
 
