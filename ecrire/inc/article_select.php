@@ -91,6 +91,7 @@ function article_select_trad($lier_trad) {
 	$result = spip_query("SELECT * FROM spip_articles WHERE id_article=$lier_trad");
 	if ($row = spip_fetch_array($result)) {
 		$row['titre'] = filtrer_entites(_T('info_nouvelle_traduction')).' '.$row["titre"];
+		$id_rubrique = $row['id_rubrique'];
 	}
 
 	// Regler la langue, si possible, sur celle du redacteur
@@ -109,11 +110,12 @@ function article_select_trad($lier_trad) {
 			if ($GLOBALS['meta']['multi_secteurs'] == 'oui') {
 				$id_parent = 0;
 			} else {
+				// on cherche une rubrique soeur dans la bonne langue
 				$row_rub = spip_fetch_array(spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 
 				$id_parent = $row_rub['id_parent'];
 			}
-			$row_rub = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE lang='$spip_lang' AND id_parent=$id_parent"));
+			$row_rub = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE lang='".$GLOBALS['spip_lang']."' AND id_parent=$id_parent"));
 			if ($row_rub)
 				$row['id_rubrique'] = $row_rub['id_rubrique'];
 		}
