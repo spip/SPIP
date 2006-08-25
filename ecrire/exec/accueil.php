@@ -482,15 +482,15 @@ echo "<p>";
 
   afficher_enfant_rub(0, false);
 
-if ($options == 'avancees') {
-
-	// Dernieres modifications d'articles
+ // Dernieres modifications d'articles
+ if ($options == 'avancees'
+ AND ($GLOBALS['meta']['articles_versions'] == 'oui')) {
 	include_spip('inc/suivi_versions');
 	afficher_suivi_versions (0, 0, false, "", true);
-}
+ }
 
 
-fin_page("jimmac");
+ fin_page("jimmac");
 
 
 //
