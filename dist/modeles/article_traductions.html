@@ -1,6 +1,11 @@
 [(#REM)
 
-	Modele pour les traductions d'un article
+	Modele pour les traductions d'un article.
+
+	La langue de l'article courant s'affiche en gras, sans lien.
+
+	Note : le lien <a rel="alternate" hreflang="xx" ...> indique qu'il
+	s'agit d'une traduction (version alternative dans la langue xx)
 
 ]<BOUCLE_article(ARTICLES){id_article}>
 <B_traductions>
@@ -11,8 +16,8 @@
 	<li lang="#LANG" xml:lang="#LANG" dir="#LANG_DIR"[ class="(#EXPOSE)"]>
 		&#91;[(#EXPOSE{
 		<span>,
-		<a href="#URL_ARTICLE" rel="alternate" hreflang="#LANG" title="[(#LANG|traduire_nom_langue)][ - (#TITRE|texte_backend)]">}
-		)]#LANG#EXPOSE{</span>,</a>}&#93;
+		<a href="#URL_ARTICLE" rel="alternate" hreflang="#LANG"[ title="(#TITRE|texte_backend)"]>}
+		)][(#LANG|traduire_nom_langue)]#EXPOSE{</span>,</a>}&#93;
 	</li>
 	</BOUCLE_traductions>
 </ul>
