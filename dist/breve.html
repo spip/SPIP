@@ -24,7 +24,6 @@
 	<div id="conteneur">
 
 		[(#REM) Contenu : corps de la breve ]
-
 		<div id="contenu">
 
 			<div class="cartouche">
@@ -47,7 +46,6 @@
 
 		[(#REM) Menu de navigation laterale ]
 		<div id="navigation">
-			<h1 class="invisible"><:navigation:></h1>
 
 			[(#REM) Menu de navigation par rubriques ]
 			<INCLURE{fond=inc-rubriques}{id_rubrique}>
@@ -75,6 +73,9 @@
 				</ul>
 			</div>
 			</B_mots>
+
+			[(#REM) Voir le squelette de cette page ]
+			<a href="#SQUELETTE"><:squelette_voir:></a>
 
 		</div><!-- fin navigation -->
 

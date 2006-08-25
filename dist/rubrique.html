@@ -23,13 +23,14 @@
 	<div id="conteneur">
 
 		[(#REM) Contenu principal : contenu de la rubrique ]
-
 		<div id="contenu">
+
 			<div class="cartouche">
 				[(#LOGO_RUBRIQUE||image_reduire{200,200})]
 				<h1 class="titre">#TITRE</h1>
 				<small><:dernier_ajout:> &ndash; [(#DATE|nom_jour) ][(#DATE|affdate).]</small>
 			</div>
+
 			[<div class="chapo">(#TEXTE)</div>]
 
 			<br class="nettoyeur" />
@@ -37,7 +38,6 @@
 			<div class="contre-encart">
 
 				[(#REM) Articles de la rubrique ]
-				
 				<B_articles>
 				<div class="liste-articles">
 					#ANCRE_PAGINATION
@@ -148,7 +148,6 @@
 
 		[(#REM) Menu de navigation laterale ]
 		<div id="navigation">
-			<h1 class="invisible"><:navigation:></h1>
 
 			[(#REM) Menu de navigation par rubriques ]
 			<INCLURE{fond=inc-rubriques}{id_rubrique}>
@@ -164,6 +163,9 @@
 				</ul>
 			</div>
 			</B_mots>
+
+			[(#REM) Voir le squelette de cette page ]
+			<a href="#SQUELETTE"><:squelette_voir:></a>
 
 		</div><!-- fin navigation -->
 

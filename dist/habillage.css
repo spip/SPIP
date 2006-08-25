@@ -57,6 +57,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 #conteneur #navigation {
 	float: right;
 	width: 12em;
+	text-align: center;
 }
 
 /* Blocs du contenu (c-a-d. la colonne principale) */
@@ -145,8 +146,8 @@ q, blockquote, .liste-articles li .texte, h3.spip {
 	font-weight: bold;
 }
 
-.rubriques p, .breves p, .syndic p, .forums p, .divers p { margin: 0; padding: 0.2em 0.7em;  }
-.rubriques ul, .breves ul, .syndic ul, .forums ul, .divers ul { padding: 0.2em 0; }
+.rubriques p, .breves p, .syndic p, .forums p, .divers p { margin: 0; padding: 0.2em 0.7em; text-align: left;  }
+.rubriques ul, .breves ul, .syndic ul, .forums ul, .divers ul { padding: 0.2em 0; text-align: left; }
 .rubriques li, .breves li, .syndic li, .forums li, .divers li { padding: 0 0.7em; }
 
 /*  Des couleurs specifiques selon les types de menus
@@ -281,6 +282,8 @@ q, blockquote, .liste-articles li .texte, h3.spip {
 /*  ------------------------------------------
 /*  Habillage specifique du plan du site
 /*  ------------------------------------------ */
+
+.page_plan .cartouche { display: none; }
 
 .page_plan #contenu h2 {
 	clear: both;
