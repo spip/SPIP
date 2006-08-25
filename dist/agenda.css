@@ -2,15 +2,27 @@
 /*  Styles pour l'agenda de SPIP
 /*  ------------------------------------------ */
 
-/* Pour la table principale */
-.agenda { 
-	border: 0;
-	width: 100%;
+.calendrier-arial9 { 
+	font-family: Arial, Sans, sans-serif; font-size: 9px;
 }
-.large { max-width: 900px; }
-.etroit { max-width: 750px; }
 
-/* ----------------------- */
+.calendrier-arial10 { 
+	font-family: Arial, Sans, sans-serif; font-size: 10px;
+}
+
+.calendrier-arial11 { 
+	font-family: Arial, Sans, sans-serif; font-size: 11px;
+}
+
+.calendrier-verdana10 {
+	font-family: Verdana, Arial, Sans, sans-serif; font-size: 10px;
+}
+
+.calendrier-helvetica16 {
+	font-family: arial,helvetica,sans-serif;
+	font-size: 16px; 
+	color: #000;
+}
 
 div.navigation-calendrier {
 	color: #FFF;
@@ -21,7 +33,9 @@ div.navigation-calendrier {
 }
 
 div.navigation-calendrier img {
-	border: 0; vertical-align: middle; margin: 1px;
+	border: 0;
+	vertical-align: middle;
+	margin: 1px;
 }
 
 .calendrier-annee {
@@ -40,6 +54,28 @@ div.navigation-calendrier img {
 	background-color: #FFF;
 }
 
+.calendrier-table-large { 
+	border: 0;
+	width: 900px;
+ }
+
+.calendrier-table-etroit { 
+	border: 0;
+	width: 750px;
+ }
+
+.calendrier-td-centre { 
+	width: 550px;
+	padding-left: 25px;
+	padding-right: 25px;
+  	vertical-align: top;
+ }
+
+.calendrier-td { 
+	width: 14%;
+  	vertical-align: top;
+ }
+
 .calendrier-th { 
 	width: 14%;
 	padding: 5px;
@@ -48,38 +84,31 @@ div.navigation-calendrier img {
 	font-size: 10px;
 	font-weight: bold;
 	font-family: Verdana, Arial, Sans, sans-serif;
-}
+ }
 
 .calendrier-th a { 
   color: #000;
 }
 
-.calendrier-td-centre { 
-	width: 550px;
-	padding-left: 25px;
-	padding-right: 25px;
-  	vertical-align: top;
-}
-
-.calendrier-td { 
-	width: 14%;
-  	vertical-align: top;
-}
-
-.etroit .calendrier-td-gauche {
+.calendrier-table-etroit  .calendrier-td-gauche {
 	width: 0;
   	vertical-align: top;
-}
+ }
 
-.large .calendrier-td-gauche {
+.calendrier-table-large  .calendrier-td-gauche {
 	width: 150px;
   	vertical-align: top;
-}
+ }
 
-.agenda .calendrier-td-droit {
+.calendrier-table-etroit  .calendrier-td-droit {
 	width: 150px;
   	vertical-align: top;
-}
+ }
+
+.calendrier-table-large  .calendrier-td-droit {
+	width: 150px;
+  	vertical-align: top;
+ }
 
 .calendrier-jour {
 	position: relative; 
@@ -95,7 +124,7 @@ div.navigation-calendrier img {
 	text-align: center; 
 	background-color: #FFF;
 	-moz-border-radius: 5px;
-}
+ }
 
 .calendrier-demiagenda { 
 	margin-left: 0;
@@ -104,12 +133,12 @@ div.navigation-calendrier img {
 	text-align: center; 
 	background-color: #FFF;
 	-moz-border-radius: 5px;
-}
+ }
 
 .calendrier-tripleagenda { 
 	vertical-align: top;
 	width: 33%;  
-}
+ }
 
 .calendrier-cadreagenda { 
 	visibility: hidden;
@@ -121,19 +150,18 @@ div.navigation-calendrier img {
 	background-color: #FFF;
 	-moz-border-radius-bottomleft: 8px;
 	-moz-border-radius-bottomright: 8px;
-}
+ }
 
 .calendrier-titre { 
 	padding: 5px;
 	text-align: center; 
 	font-weight: bold;
-}
+ }
 
 .calendrier-evenement { 
 	padding: 2px;
 	margin-top: 2px;
-	width: 100px;
-}
+ }
 
 .calendrier-heurepile { 
 	position: absolute;
@@ -141,24 +169,24 @@ div.navigation-calendrier img {
 	margin-right: 2px;
 	border-top: 1px solid #CCC;
 	font-weight: bold;
-}
+ }
 
 .calendrier-heureface { 
 	position: absolute;
 	margin-left: 2px;
 	margin-right: 2px;
 	border-top: 1px solid #CCC;
-}
+ }
 
 .calendrier-mozleft { 
 	-moz-border-radius-topleft: 10px;
 	-moz-border-radius-bottomleft: 10px;
-}
+ }
 
 .calendrier-mozright { 
 	-moz-border-radius-topright: 10px;
 	-moz-border-radius-bottomright: 10px;
-}
+ }
 
 .calendrier-moztop8 { 
 	-moz-border-radius-topleft: 8px;
@@ -185,35 +213,19 @@ div.navigation-calendrier img {
 	filter: alpha(opacity=30);
 }
 
+
+.calendrier-png { 
+	width: 12px; 
+	height: 12px;
+	/* URL a revoir */
+	behavior: url(win_png.htc);
+}
+
 .calendrier-icone { 
 	width: 14px;
 	height: 7px;
 	border: 0;
 }
-
-/* ----------------------- */
-
-.agenda .arial9 { 
-	font-family: Arial, Sans, sans-serif; font-size: 9px;
-}
-
-.agenda .arial10 { 
-	font-family: Arial, Sans, sans-serif; font-size: 10px;
-}
-
-.agenda .arial11 { 
-	font-family: Arial, Sans, sans-serif; font-size: 11px;
-}
-
-.agenda .verdana10 {
-	font-family: Verdana, Arial, Sans, sans-serif; font-size: 10px;
-}
-
-.agenda .helvetica16 {
-	font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #000;
-}
-
-/* ----------------------- */
 
 .calendrier-noir  { 		/*  style anar */
 	color: #000;

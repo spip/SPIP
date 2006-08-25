@@ -2856,15 +2856,15 @@ function http_calendrier_rv($messages, $type) {
 			$date_jour = affdate_jourcourt($date);
 			$total .= "<tr><td colspan='2'>" .
 				(($date_jour == $date_rv) ? '' :
-				"<div  class='arial11'><b>$date_jour</b></div>") .
+				"<div  class='calendrier-arial11'><b>$date_jour</b></div>") .
 				"</td></tr>";
 			$date_rv = $date_jour;
 			$rv =
 		((affdate($date) == affdate($date_fin)) ?
-		 ("<div class='arial9 fond-agenda'>"
+		 ("<div class='calendrier-arial9 fond-agenda'>"
 		  . heures($date).":".minutes($date)."<br />"
 		  . heures($date_fin).":".minutes($date_fin)."</div>") :
-		( "<div class='arial9 fond-agenda' style='text-align: center;'>"
+		( "<div class='calendrier-arial9 fond-agenda' style='text-align: center;'>"
 		  . heures($date).":".minutes($date)."<br />...</div>" ));
 		}
 
@@ -2879,7 +2879,7 @@ function http_calendrier_rv($messages, $type) {
 		"<td valign='middle'>" .
 		$rv .
 		"<div><b>" .
-		  http_href($url, typo($row['titre']), '', '', 'verdana10') .
+		  http_href($url, typo($row['titre']), '', '', 'calendrier-verdana10') .
 		"</b></div>" .
 		"</td>" .
 		"</tr>\n";
