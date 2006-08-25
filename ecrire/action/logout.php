@@ -21,8 +21,9 @@ function action_logout_dist()
 	$logout =_request('logout');
 	$url = _request('url');
 	spip_log("logout $logout $url" . $auteur_session['id_auteur']);
-// cas particulier, logout dans l'espace public
-	if ($logout='public' AND !$url)  $url = $GLOBALS['meta']['adresse_site'];
+	// cas particulier, logout dans l'espace public
+	if ($logout == 'public' AND !$url)
+		$url = url_de_base();
 
 // seul le loge peut se deloger
 	if ($auteur_session['id_auteur']) {

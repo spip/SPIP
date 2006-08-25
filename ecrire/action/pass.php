@@ -56,12 +56,11 @@ function message_oubli($email, $param)
 	spip_query("UPDATE spip_auteurs SET cookie_oubli = '$cookie' WHERE id_auteur=" . $row['id_auteur']);
 
 	$nom = $GLOBALS['meta']["nom_site"];
-	$url = $GLOBALS['meta']["adresse_site"];
 	if ( envoyer_mail($email,
 			  ("[$nom] " .  _T('pass_oubli_mot')),
 			  _T('pass_mail_passcookie',
 			     array('nom_site_spip' => $nom,
-				   'adresse_site' => $url, 
+				   'adresse_site' => url_de_base(),
 				   'sendcookie' => generer_url_action('pass', "$param=$cookie", true)))) )
 	  return _T('pass_recevoir_mail');
 	else

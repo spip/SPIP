@@ -149,7 +149,7 @@ function appliquer_modifs_config() {
 	global $forums_publics, $forums_publics_appliquer;
 	global $charset, $charset_custom, $langues_auth;
 
-	$adresse_site = ereg_replace("/$", "", $adresse_site);
+	$adresse_site = preg_replace(",/$,", "", _request('adresse_site'));
 
 	// Purger les squelettes si un changement de meta les affecte
 	if ($post_dates AND ($post_dates != $GLOBALS['meta']["post_dates"]))
