@@ -54,7 +54,7 @@ function mini_afficher_rubrique ($id_rubrique, $rac="", $list=array(), $col = 1,
 		while (list($id, $titre) = each($ordre)) {
 
 			$titre = "<div class='petite-rubrique'"
-			. ($id_rubrique ? '' : (" style='background-image: url(" . _DIR_IMG_PACK . "secteur-12.gif)'"))
+#		  	. ($id_rubrique ? '' : (" style='background-image: url(" . _DIR_IMG_PACK . "secteur-12.gif)'"))
 			. ">"
 			. supprimer_numero($titre)
 			. "</div>";
