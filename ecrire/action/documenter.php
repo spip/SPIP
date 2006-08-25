@@ -68,7 +68,7 @@ function action_documenter_dist() {
 
 		// Demander l'indexation du document
 		include_spip('inc/indexation');
-		marquer_indexer('document', $id_document);
+		marquer_indexer('spip_documents', $id_document);
 	}
 }
 ?>

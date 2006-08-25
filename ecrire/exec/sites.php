@@ -123,7 +123,7 @@ if ($nouveau_statut AND $flag_administrable) {
 	if ($statut == 'publie') {
 		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 			include_spip("inc/indexation");
-			marquer_indexer('syndic', $id_syndic);
+			marquer_indexer('spip_syndic', $id_syndic);
 		}
 	}
 }
@@ -159,7 +159,7 @@ if (strval($nom_site)!='' AND $modifier_site == 'oui' AND $flag_editable) {
 
 		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 			include_spip("inc/indexation");
-			marquer_indexer('syndic', $id_syndic);
+			marquer_indexer('spip_syndic', $id_syndic);
 		}
 	}
  }

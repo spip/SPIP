@@ -51,9 +51,9 @@ spip_log("$id_mot, $id_objet, $table, $table_id, $objet");
 				spip_query("INSERT INTO spip_mots_$table (id_mot,$table_id) VALUES ($nouv_mot, $id_objet)");
 		}
 
-		if ($objet AND $GLOBALS['meta']['activer_moteur'] == 'oui') {
+		if ($table AND $GLOBALS['meta']['activer_moteur'] == 'oui') {
 			include_spip("inc/indexation");
-			marquer_indexer($objet, $id_objet);
+			marquer_indexer("spip_$table", $id_objet);
 		}
 	}
 

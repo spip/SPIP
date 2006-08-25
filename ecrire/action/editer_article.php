@@ -175,7 +175,7 @@ function revisions_articles ($id_article, $id_rubrique, $new) {
 	// Demander une reindexation de l'article
 	if ($statut == 'publie') {
 		include_spip('inc/indexation');
-		marquer_indexer('article', $id_article);
+		marquer_indexer('spip_articles', $id_article);
 	}
 
 	// Recalculer les rubriques (statuts et dates)

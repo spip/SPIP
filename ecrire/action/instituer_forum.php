@@ -38,7 +38,7 @@ function action_instituer_forum_dist() {
 	// Signaler au moteur de recherche qu'il faut reindexer le thread
 	if ($id_parent) {
 		include_spip('inc/indexation');
-		marquer_indexer ('forum', $id_parent);
+		marquer_indexer ('spip_forum', $id_parent);
 	}
 
 	// changer le statut de toute l'arborescence dependant de ce message
