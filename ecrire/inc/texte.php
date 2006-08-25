@@ -339,7 +339,7 @@ function couper_intro($texte, $long) {
 	}
 
 	// supprimer un eventuel chapo redirecteur =http:/.....
-	return preg_replace(',^=[^[:space:]]+,S','',$intro);
+	return $intro;
 }
 
 
