@@ -498,9 +498,9 @@ function afficher_documents_et_portfolio($id_article, $type = "article", $flag_m
 	global $options, $spip_lang_left, $spip_lang_right;
 
 	if ($type == "rubrique")
-			$script = 'naviguer'; // seul cas actuellement
+			$script = 'naviguer'; // exception
 	else
-			$script = 'articles'; // seul cas actuellement
+			$script = $type.'s'; // 'exec=articles', seul cas actuellement
 
 	// Afficher portfolio
 	/////////
@@ -578,8 +578,8 @@ function afficher_documents_et_portfolio($id_article, $type = "article", $flag_m
 function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 	global $connect_id_auteur, $connect_statut, $options, $id_doc_actif;
 
-	// seuls cas connus:
-	$script = ($type== 'article') ? 'articles_edit' : 'breves_edit';
+	// seuls cas connus : exec=articles_edit ou breves_edit
+	$script = $type.'s_edit';
 
 	/// Ajouter nouvelle image
 	echo "<a name='images'></a>\n";
