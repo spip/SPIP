@@ -313,6 +313,8 @@ function boite_info_articles($id_article, $statut_article, $visites, $id_version
 	echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"._T('info_numero_article')."</b></font>\n";
 	echo "<br /><font face='Verdana,Arial,Sans,sans-serif' size='6'><b>$id_article</b></font>\n";
 
+	echo "</div>\n";
+
 	voir_en_ligne('article', $id_article, $statut_article);
 
 	if ($connect_statut == "0minirezo" AND $statut_article == 'publie' AND $visites > 0 AND $GLOBALS['meta']["activer_statistiques"] != "non" AND $options == "avancees"){
