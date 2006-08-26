@@ -243,7 +243,7 @@ if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
 
  if ($statut_rubrique)
    echo debut_cadre_relief('', true),
-     "<div id='instituer_article-$id_article'>",     
+     "\n<div id='instituer_article-$id_article'>",     
      formulaire_instituer_article($id_article, $statut_article, 'articles', "id_article=$id_article"),
      '</div>',
      fin_cadre_relief('', true);
@@ -251,7 +251,7 @@ if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
  afficher_corps_articles($virtuel, $chapo, $texte, $ps, $extra);
 
 if ($flag_editable) {
-	echo "\n\n<div align='$spip_lang_right'><br />";
+	echo "\n<div align='$spip_lang_right'><br />";
 	bouton_modifier_articles($id_article, $id_rubrique, $modif,_T('texte_travail_article', $modif), "warning-24.gif", "");
 	echo "</div>";
 }
