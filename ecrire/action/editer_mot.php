@@ -29,7 +29,6 @@ function action_editer_mot_dist() {
 		spip_log("action editer_mot: $arg pas compris");
 	else {
 		list($x, $id_objet, $id_mot, $table, $table_id, $objet, $nouv_mot) = $r;
-spip_log("$id_mot, $id_objet, $table, $table_id, $objet");
 		if ($id_mot) {
 			if ($objet)
 			  // desassocier un/des mot d'un objet precis

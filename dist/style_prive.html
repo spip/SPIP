@@ -111,7 +111,7 @@ select.fondl {
 	z-index: 100;
 }
 
-.bandeau-icones .separateur {
+.bandeau-icones.separateur {
 	vertical-align: middle;
 	height: 100%;
 	width: 11px;
@@ -1307,7 +1307,7 @@ span.spip_documents_center { display:block; margin-top:1em; }
 .spip_documents_right { float: right; margin-left: 15px; margin-bottom: 5px; }
 .spip_doc_titre { font-weight: bold; font-size: 0.8em; margin-left:auto; margin-right:auto;}
 .spip_doc_descriptif { clear: both; font-size: 0.8em; margin-left:auto; margin-right:auto;
-
+}
 
 /* modeles par defaut */
 .spip_modele {float:right; display:block; border:1px dotted grey; width:180px;}
@@ -1369,9 +1369,24 @@ div.highlight:hover, div.pashighlight:hover {
 	cursor: pointer;
 }
 
+
+div.petite-racine {
+	background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat;
+	background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=racine-site-12.gif);
+	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 15px;
+	background-color: white; 
+	border: 1px solid ##ENV{couleur_foncee,3874b0};
+	border-bottom: 0px;
+	width: 134px;
+}
 div.petite-rubrique {
 	background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat;
 	background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=rubrique-12.gif);
+	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 15px;
+}
+div.petit-secteur {
+	background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat;
+	background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=secteur-12.gif);
 	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 15px;
 }
 div.rub-ouverte {

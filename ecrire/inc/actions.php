@@ -158,7 +158,7 @@ function ajax_action_auteur($action, $id, $script, $args, $corps=false, $args_aj
 			$action,
 			"var_ajax=1&script=$script$args_ajax");
 
-		$clic = "<a href='$href' onclick='return !AjaxSqueeze(\"$ajax\",\"$ancre\");'>$clic</a>";
+		$clic = "<a href='$href'\nonclick='return !AjaxSqueeze(\"$ajax\",\"$ancre\");'>$clic</a>";
 
 		return (!$att)
 		? $clic
