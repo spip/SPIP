@@ -145,6 +145,11 @@ function balise_SQUELETTE_dist($p) {
 	return $p;
 }
 
+// http://doc.spip.org/@balise_SPIP_VERSION_dist
+function balise_SPIP_VERSION_dist($p) {
+	$p->code = "spip_version('')";
+	return $p;
+}
 
 // http://doc.spip.org/@balise_URL_SITE_SPIP_dist
 function balise_URL_SITE_SPIP_dist($p) {
