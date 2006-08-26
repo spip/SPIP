@@ -293,10 +293,7 @@ function liste_options_langues($nom_select, $default='', $herit='') {
 	if ($default == '') $default = $GLOBALS['spip_lang'];
 	switch($nom_select) {
 		# #MENU_LANG
-		# les langues rellement utilisees sur le site
 		case 'var_lang':
-			$langues = explode(',', $GLOBALS['meta']['langues_utilisees']);
-			break;
 		# menu de changement de la langue d'un article
 		# les langues selectionnees dans la configuration "multilinguisme"
 		case 'changer_lang':
