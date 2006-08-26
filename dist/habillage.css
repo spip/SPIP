@@ -166,10 +166,6 @@ q, blockquote, .liste-articles li .texte, h3.spip, .voirskel {
 .divers { background: #F8F8E8; }
 .divers .menu-titre { background: #FCFCF0; }
 
-/*  Lien "Voir le squelette de cette page"
----------------------------------------------- */
-a.voirskel { font-size: 0.77em; font-style: italic; color: #666; }
-
 /*  ------------------------------------------
 /*  Habillage du contenu
 /*  ------------------------------------------ */
