@@ -329,7 +329,7 @@ function taille_image($img) {
 // Cette fonction accepte en entree un nom de fichier ou un tag <img ...>
 
 // http://doc.spip.org/@reduire_image_logo
-function reduire_image_logo($img, $taille = -1, $taille_y = -1) {
+function reduire_image_logo($img, $taille = -1, $taille_y = -1, $cherche_image=true) {
 
 	// Determiner la taille x,y maxi
 	if ($taille == -1) {
@@ -415,7 +415,10 @@ function reduire_image_logo($img, $taille = -1, $taille_y = -1) {
 		$attributs .= " style='$style'";
 
 	if (preg_match(",(.*)\.(jpg|gif|png)$,", $logo, $regs)) {
-		if ($i = cherche_image_nommee($regs[1], array($regs[2]))) {
+		$i = array(dirname($regs[1]),basename($regs[1]),$regs[2]);
+		if ($cherche_image)
+			$i = cherche_image_nommee($regs[1], array($regs[2]));
+		if ($i) {
 			list(,$nom,$format) = $i;
 			include_spip('inc/chercher_logo');
 			return ratio_image($logo, $nom, $format, $taille, $taille_y, $attributs);
