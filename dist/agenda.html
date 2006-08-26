@@ -12,6 +12,6 @@
 	<script type="text/javascript" src="#EVAL{_DIR_IMG_PACK}presentation.js"></script> 
 </head>
 
-<body id="page_agenda">
+<body class="page_agenda">
 [(#ENV{type, mois}|agenda_connu)<INCLURE {fond=agenda_#ENV{type,mois}} {type} {delais=900} {annee} {mois} {jour} {echelle} {partie_cal} {theme}>]
 </body></html>
