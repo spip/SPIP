@@ -332,8 +332,6 @@ function boite_info_articles($id_article, $statut_article, $visites, $id_version
 		icone_horizontale(_T('ortho_verifier'), generer_url_ecrire("articles_ortho", "id_article=$id_article"), "ortho-24.gif", "rien.gif", 'echo', $js_ortho);
 	}
 
-	echo "</div>\n";
-	
 	fin_boite_info();
 }
 
