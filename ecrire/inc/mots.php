@@ -428,7 +428,7 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 	}
 	if ($ajouter) {
 		$message = "<span class='verdana1'><b>"._T('titre_ajouter_mot_cle')."</b></span>\n";
-		$res .= "<div style='float:$spip_lang_right; width:280px;'>"
+		$res .= "<div style='float:$spip_lang_right; width:280px;position:relative;display:inline;'>"
 			. $ajouter
 			."</div>\n" ;
 	}
@@ -441,7 +441,7 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 	}
 
 	if ($message OR $bouton_ajouter) {
-		$res .= "<div style='float:$spip_lang_left; width:170px;'>$message
+		$res .= "<div style='width:170px;'>$message
 			<br />$bouton_ajouter</div>\n";
 	}
 
