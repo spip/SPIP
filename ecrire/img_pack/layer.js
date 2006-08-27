@@ -219,7 +219,9 @@ function AjaxSqueeze(trig, id, f)
 		}
 	}
 
-	s = trig.attributes.action.value;
+	s = trig.getAttribute('action');
+	if (typeof(s)!='string') // pour IE qui a foire la ligne precedente
+		s = trig.attributes.action.value;
 	return !ajah('POST', // ou 'GET'
 		     s ,     // s + '?'+ u,
 		     u,      // null,
