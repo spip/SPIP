@@ -22,17 +22,18 @@ function maj_miroirs_ortho() {
 		$miroirs_old[$url] = $index;
 	}
 
-	// TODO: recuperer la liste dynamiquement depuis ortho.spip.net
-	$urls = array(
-		'http://tony.ortho.spip.net/ortho_serveur.php',
-		'http://spip.destination-linux.org/ortho_serveur.php',
-		'http://spip-ortho.linagora.org:18080/ortho_serveur.php',
-		'http://ortho.spip.net/ortho_serveur.php'
-	);
+	$page = recuperer_page($GLOBALS['services']['ortho']?$GLOBALS['services']['ortho']:'http://www.spip.net/services/ortho.txt');
+	$urls=array();
+	foreach(explode("\n", $page) as $ligne) {
+		if(trim($ligne)=="") continue;
+		$t= explode(";", $ligne);
+		$urls[$t[0]]=$t[1];
+	}
+
 	$liste = array();
 	$miroirs_new = array();
 	$index = 1;
-	foreach ($urls as $url) {
+	foreach ($urls as $url => $contact) {
 		if ($index_old = $miroirs_old[$url]) {
 			$s = $GLOBALS['meta']["miroir_ortho_$index_old"];
 		}
@@ -498,7 +499,7 @@ function panneau_ortho($ortho_result) {
 
 	echo "<script type='text/javascript'><!--
 	var curr_suggest = null;
-	// http://doc.spip.org/@suggest
+// http://doc.spip.org/@suggest
 	function suggest(id) {
 		var menu_box;
 		if (curr_suggest)
