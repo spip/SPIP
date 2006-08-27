@@ -58,7 +58,7 @@ function supprimer_auteur_et_rediriger($id_article, $id_auteur, $redirect)
 	spip_query("DELETE FROM spip_auteurs_articles WHERE id_auteur=$id_auteur AND id_article=$id_article");
 	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 			include_spip("inc/indexation");
-			marquer_indexer('spip_articles', $r[2]);
+			marquer_indexer('spip_articles', $id_article);
 	}
 	if ($redirect) redirige_par_entete($redirect);
 }
