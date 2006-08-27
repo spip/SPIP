@@ -685,7 +685,7 @@ function spip_substr($c, $start=0, $end='') {
 		$restart='';
 	} else {
 		if($start<0) {
-			$start= ($l=utf_strlen($s))+$start;
+			$start= ($l=utf_strlen($c))+$start;
 		}
 		$re_start= "(?:$re_char\{$start})";
 	}
@@ -694,12 +694,12 @@ function spip_substr($c, $start=0, $end='') {
 		$re_end="(.*)";
 	} else {
 		if($len<0) {
-			$len= ($l?$l:utf_strlen($s))+$len-$start;
+			$len= ($l?$l:utf_strlen($c))+$len-$start;
 		}
 		$re_end="($re_char\{0,$len})";
 	}
 
-	if(preg_match("/^${re_start}${re_end}/", $s, $m)) {
+	if(preg_match("/^${re_start}${re_end}/", $c, $m)) {
 		return $m[1];
 	}
 	return FALSE;
@@ -710,7 +710,7 @@ function spip_strlen($c) {
 	if (init_mb_string())
 		return mb_strlen($c);
 	else
-		return strlen(preg_replace("/[\300-\377][\200-\277]*/", " ", $s));
+		return strlen(preg_replace("/[\300-\377][\200-\277]*/", " ", $c));
 }
 
 
