@@ -95,16 +95,4 @@ function action_supprimer_auteur_rubrique($arg)
 	else spip_log("action_supprimer_auteur_rubrique $arg pas compris");
 }
 
-// http://doc.spip.org/@action_supprimer_auteur_article
-function action_supprimer_auteur_article($arg)
-{
-	if (preg_match(",^\W*(\d+)\W+(\d+)$,", $arg, $r)) {
-		spip_query("DELETE FROM spip_auteurs_articles WHERE id_auteur=".$r[1]." AND id_article=" . $r[2]);
-		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-			include_spip("inc/indexation");
-			marquer_indexer('spip_articles', $r[2]);
-		}
-	}
-	else spip_log("action_supprimer_auteur_article $arg pas compris");
-}
 ?>
