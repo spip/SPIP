@@ -630,7 +630,7 @@ function calculer_url ($lien, $texte='', $pour='url') {
 		if (strlen($texte)>40)
 				$texte = substr($texte,0,35).'...';
 		$texte = "<html>$texte</html>";
-		$class = "spip_url";
+		$class = "spip_url spip_out";
 	} else 	$class = "spip_out";
 
 	if ($pour == 'titre') return $texte;
