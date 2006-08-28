@@ -147,14 +147,16 @@ function balise_SQUELETTE_dist($p) {
 
 // http://doc.spip.org/@balise_SPIP_VERSION_dist
 function balise_SPIP_VERSION_dist($p) {
-	$p->code = "spip_version('')";
+	$p->code = "spip_version()";
+	$p->interdire_scripts = false;
 	return $p;
 }
 
 // http://doc.spip.org/@balise_URL_SITE_SPIP_dist
 function balise_URL_SITE_SPIP_dist($p) {
-	$p->code = "\$GLOBALS['meta']['adresse_site']";
-	#$p->interdire_scripts = true;
+	$p->code = "(\$a=\$GLOBALS['meta']['adresse_site'])?\$a:url_de_base()";
+	$p->code = "htmlspecialchars(".$p->code.")";
+	$p->interdire_scripts = false;
 	return $p;
 }
 
