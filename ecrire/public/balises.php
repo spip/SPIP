@@ -154,7 +154,7 @@ function balise_SPIP_VERSION_dist($p) {
 
 // http://doc.spip.org/@balise_URL_SITE_SPIP_dist
 function balise_URL_SITE_SPIP_dist($p) {
-	$p->code = "sinon($GLOBALS['meta']['adresse_site'],'.')";
+	$p->code = "sinon(\$GLOBALS['meta']['adresse_site'],'.')";
 	$p->code = "htmlspecialchars(".$p->code.")";
 	$p->interdire_scripts = false;
 	return $p;
