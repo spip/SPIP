@@ -38,6 +38,7 @@ function action_editer_article_dist() {
 
 // http://doc.spip.org/@insert_article
 function insert_article($id_rubrique) {
+
 	include_spip('base/abstract_sql');
 	$id_auteur = _request('id_auteur');
 
@@ -118,8 +119,8 @@ function revisions_articles ($id_article, $new) {
 	// Verifier que la rubrique demandee existe et est differente
 	// de la rubrique actuelle
 	if ($id_rubrique = intval(_request('id_parent'))
-	AND spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_rubrique=$id_rubrique"))
-	AND !spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_articles WHERE id_article=$id_article AND id_rubrique!=$id_rubrique"))) {
+	    AND (spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_rubrique=$id_rubrique")))
+	    AND (spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_articles WHERE id_article=$id_article AND id_rubrique!=$id_rubrique")))) {
 		$champs['id_rubrique'] = $id_rubrique;
 	}
 
@@ -244,7 +245,6 @@ function article_referent ($id_article, $lier_trad) {
 
 	// $id_lier est le numero du groupe de traduction
 	$id_lier = $row['id_trad'];
-	spip_log("traduction $id_article, $id_trad, $lier_trad, $id_lier");
 
 	// Si l'article vise n'est pas deja traduit, son identifiant devient
 	// le nouvel id_trad de ce nouveau groupe et on l'affecte aux deux
