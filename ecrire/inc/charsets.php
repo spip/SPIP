@@ -690,13 +690,13 @@ function spip_substr($c, $start=0, $end='') {
 		$re_start= "(?:$re_char\{$start})";
 	}
 	
-	if($len===null) {
+	if($end===null) {
 		$re_end="(.*)";
 	} else {
-		if($len<0) {
-			$len= ($l?$l:utf_strlen($c))+$len-$start;
+		if($end<0) {
+			$end= ($l?$l:utf_strlen($c))+$end-$start;
 		}
-		$re_end="($re_char\{0,$len})";
+		$re_end="($re_char\{0,$end})";
 	}
 
 	if(preg_match("/^${re_start}${re_end}/", $c, $m)) {
