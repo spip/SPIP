@@ -40,7 +40,6 @@ ecrire/action/instituer_article.php -text
 ecrire/action/instituer_breve.php -text
 ecrire/action/instituer_collaboration.php -text
 ecrire/action/instituer_forum.php -text
-ecrire/action/instituer_langue_article.php -text
 ecrire/action/instituer_langue_rubrique.php -text
 ecrire/action/instituer_syndic.php -text
 ecrire/action/joindre.php -text

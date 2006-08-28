@@ -35,8 +35,27 @@ function action_referencer_traduction_dist() {
 	} elseif (preg_match(",^(\d+)\D(\d+)\D(\d+)$,", $arg, $r)) {
 	  // modifier le groupe de traduction de $r[1] (SQL le trouvera)
 		spip_query("UPDATE spip_articles SET id_trad = " . $r[3] . " WHERE id_trad =" . $r[2]);
+	} elseif (preg_match(",^(\d+)\D(\d+)$,", $arg, $r)) {
+		instituer_langue_article($r[1],$r[2]);
 	} else {
 		spip_log("action_referencer_traduction_dist $arg pas compris");
+	}
+}
+
+function instituer_langue_article($id_article, $id_rubrique) {
+
+	$changer_lang = _request('changer_lang');
+
+	if ($GLOBALS['meta']['multi_articles'] == 'oui' AND $changer_lang) {
+		if ($changer_lang != "herit")
+			spip_query("UPDATE spip_articles SET lang=" . spip_abstract_quote($changer_lang) . ", langue_choisie='oui' WHERE id_article=$id_article");
+		else {
+			$langue_parent = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=" . $id_rubrique));
+			$langue_parent=$langue_parent['lang'];
+			spip_query("UPDATE spip_articles SET lang=" . spip_abstract_quote($langue_parent) . ", langue_choisie='non' WHERE id_article=$id_article");
+			include_spip('inc/lang');
+			calculer_langues_utilisees();
+		}
 	}
 }
 ?>

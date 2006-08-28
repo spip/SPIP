@@ -268,9 +268,13 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 		}
 	}
 
-	return "<form action='$lien' method='post' style='margin:0px; padding:0px;'>"
-	  . (!$cible ? '' : "<input type='hidden' name='url' value='$cible' />")
-	  . $texte
+	$change = ($lien === 'ajax')
+	? "\nonchange=\"this.nextSibling.style.visibility='visible';\""
+	: ("\nonchange=\"document.location.href='"
+	   . parametre_url($lien, 'url', str_replace('&amp;', '&', $cible))
+	   ."&amp;$nom_select='+this.options[this.selectedIndex].value\"");
+
+	$ret = $texte
 	  . "<select name='$nom_select' "
 	  . (_DIR_RESTREINT ?
 	     ("class='forml' style='vertical-align: top; max-height: 24px; margin-bottom: 5px; width: 120px;'") :
@@ -278,12 +282,18 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	      ("class='verdana1' style='background-color: " . $couleur_foncee
 	       . "; max-height: 24px; border: 1px solid white; color: white; width: 100px;'") :
 	      "class='fondl'"))
-	  . "\nonchange=\"document.location.href='"
-	  . parametre_url($lien, 'url', str_replace('&amp;', '&', $cible))
-	  ."&amp;$nom_select='+this.options[this.selectedIndex].value\">\n"
+	  . $change
+	  . ">\n"
 	  . $ret
-	  . "</select>\n"
-	  . "<noscript><div style='display:inline;'><input type='submit' name='Valider' value='&gt;&gt;' class='spip_bouton' /></div></noscript>\n"
+	  // attention, le input doit etre le frere direct du select
+	  . "</select><input type='submit' class='visible_au_chargement fondo' value='"
+	  . _T('bouton_changer')
+	  ."' />";
+
+	if ($lien === 'ajax') return $ret;
+	return "<form action='$lien' method='post' style='margin:0px; padding:0px;'>"
+	  . (!$cible ? '' : "<input type='hidden' name='url' value='$cible' />")
+	  . $ret
 	  . "</form>\n";
 }
 
