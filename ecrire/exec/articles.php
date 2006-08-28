@@ -20,6 +20,7 @@ include_spip('inc/date');
 include_spip('inc/documents');
 include_spip('inc/petition');
 include_spip('exec/editer_auteurs');
+include_spip('exec/referencer_traduction');
 include_spip('exec/virtualiser');
 include_spip('exec/discuter');
 include_spip('base/abstract_sql');
@@ -167,7 +168,7 @@ if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
   if (($GLOBALS['meta']['multi_articles'] == 'oui')
 	OR (($GLOBALS['meta']['multi_rubriques'] == 'oui') AND ($GLOBALS['meta']['gerer_trad'] == 'oui'))) {
 
-	echo formulaire_traductions($id_article, $flag_editable, $id_rubrique, $id_trad,  $trad_err);
+    echo formulaire_referencer_traduction($id_article, $id_rubrique, $id_trad,  $flag_editable, $trad_err);
   }
 
  echo pipeline('affiche_milieu',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
@@ -604,149 +605,6 @@ function formulaire_dater($id_article, $flag_editable, $statut_article, $date, $
     : "<div id='dater-$id_article'>$res</div>";
 }
 
-function formulaire_traductions($id_article, $flag_editable, $id_rubrique, $id_trad, $trad_err)
-{
-	global $connect_statut, $couleur_claire, $options, $connect_toutes_rubriques, $spip_lang_right, $dir_lang;
-
-	$langue_article = spip_fetch_array(spip_query("SELECT lang FROM spip_articles WHERE id_article=$id_article"));
-
-	$langue_article = $langue_article['lang'];
-	if ($GLOBALS['meta']['gerer_trad'] == 'oui')
-		$titre_barre = _T('titre_langue_trad_article');
-	else
-		$titre_barre = _T('titre_langue_article');
-
-	if ($langue_article)
-		$titre_barre .= "&nbsp; (".traduire_nom_langue($langue_article).")";
-
-	$res = debut_cadre_enfonce('langues-24.gif', false, "", bouton_block_invisible('languesarticle,ne_plus_lier,lier_traductions').$titre_barre);
-
-	// Choix langue article
-	if ($GLOBALS['meta']['multi_articles'] == 'oui' AND $flag_editable) {
-
-		$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
-		$langue_parent = $row['lang'];
-
-		if (!$langue_parent)
-			$langue_parent = $GLOBALS['meta']['langue_site'];
-		if (!$langue_article)
-			$langue_article = $langue_parent;
-
-		$res .= debut_block_invisible('languesarticle')
-		. debut_cadre_couleur('',true)
-		. "<div style='text-align: center;' id='instituer_langue_article-$id_article'>"
-		.  menu_langues('changer_lang', $langue_article, _T('info_multi_cet_article').' ', $langue_parent, redirige_action_auteur('instituer_langue_article', "$id_article-$id_rubrique","articles","id_article=$id_article"))
-		. "</div>\n"
-		. fin_cadre_couleur(true)
-		. fin_block();
-	}
-
-	if ($trad_err)
-		$res .= "<div><font color='red' size='2' face='verdana,arial,helvetica,sans-serif'>"._T('trad_deja_traduit'). "</font></div>";
-
-		// Afficher la liste des traductions
-	$table = !$id_trad ? array() : articles_traduction($id_article, $id_trad);
-
-		// bloc traductions
-	if (count($table) > 0) {
-
-		$largeurs = array(7, 12, '', 100);
-		$styles = array('', '', 'arial2', 'arial2');
-
-		$res .= "<div class='liste'>"
-		. bandeau_titre_boite2(_T('trad_article_traduction'),'', 'white', 'black', false)
-		. "<table width='100%' cellspacing='0' border='0' cellpadding='2'>"
-		. afficher_liste ($largeurs, $table, $styles)
-		. "</table>"
-		. "</div>";
-	}
-
-	// changer les globales $dir_lang etc
-	changer_typo($langue_article);
-
-	$res .= debut_block_invisible('lier_traductions')
-	. "<table width='100%'><tr>";
-
-	if ($flag_editable AND $options == "avancees" AND !$table) {
-			// Formulaire pour lier a un article
-		$res .= "<td class='arial2' width='60%'>"
-		. redirige_action_auteur("editer_article",
-				$id_article,
-				'articles',
-				"id_article=$id_article",
-				(_T('trad_lier') .
-					 "<div align='$spip_lang_right'>\n<input type='text' class='fondl' name='lier_trad' size='5' />\n<input type='submit' VALUE='"._T('bouton_valider')."' CLASS='fondl' /></div>"),
-				" method='post' style='margin:0px; padding:0px;'")
-		. "</td>\n"
-		. "<td background='' width='10'> &nbsp; </td>"
-		. "<td background='" . _DIR_IMG_PACK . "tirets-separation.gif' width='2'>". http_img_pack('rien.gif', " ", "width='2' height='2'") . "</td>"
-		. "<td background='' width='10'> &nbsp; </td>";
-	}
-
-	$res .= "<td>"
-	. icone_horizontale(_T('trad_new'), generer_url_ecrire("articles_edit","new=oui&lier_trad=$id_article&id_rubrique=$id_rubrique"), "traductions-24.gif", "creer.gif", false)
-	. "</td>";
-	if ($flag_editable AND $options == "avancees" AND $table) {
-			$res .= "<td background='' width='10'> &nbsp; </td>";
-			$res .= "<td background='" . _DIR_IMG_PACK . "tirets-separation.gif' width='2'>". http_img_pack('rien.gif', " ", "width='2' height='2'") . "</td>";
-			$res .= "<td background='' width='10'> &nbsp; </td>";
-			$res .= "<td>";
-			$res .= icone_horizontale(_T('trad_delier'), redirige_action_auteur("supprimer_traduction","$id_article-$id_trad",'articles',	"id_article=$id_article"), "traductions-24.gif", "supprimer.gif", false);
-			$res .= "</td>\n";
-	}
-
-	$res .= "</tr></table>"
-	. fin_block()
-	. fin_cadre_enfonce(true);
-	return $res;
-}
-
-
-// http://doc.spip.org/@articles_traduction
-function articles_traduction($id_article, $id_trad)
-{
-	global $connect_toutes_rubriques, $dir_lang;
-
-	$result_trad = spip_query("SELECT id_article, id_rubrique, titre, lang, statut FROM spip_articles WHERE id_trad = $id_trad");
-	
-	$table= array();
-
-	while ($row = spip_fetch_array($result_trad)) {
-		$vals = array();
-		$id_article_trad = $row["id_article"];
-		$id_rubrique_trad = $row["id_rubrique"];
-		$titre_trad = $row["titre"];
-		$lang_trad = $row["lang"];
-		$statut_trad = $row["statut"];
-
-		changer_typo($lang_trad);
-		$titre_trad = "<span $dir_lang>$titre_trad</span>";
-
-		$vals[] = http_img_pack("puce-".puce_statut($statut_trad).'.gif', "", "width='7' height='7' border='0' NAME='statut'");
-		
-		if ($id_article_trad == $id_trad) {
-			$vals[] = http_img_pack('langues-12.gif', "", "width='12' height='12' border='0'");
-			$titre_trad = "<b>$titre_trad</b>";
-		} else {
-		  if ($connect_toutes_rubriques)
-		    $vals[] = "<a href='" . redirige_action_auteur("referencer_traduction", "$id_trad,$id_article_trad", 'articles', "id_article=$id_article") . "'>". 
-		    http_img_pack('langues-off-12.gif', _T('trad_reference'), "width='12' height='12' border='0'", _T('trad_reference')) . "</a>";
-		  else $vals[] = http_img_pack('langues-off-12.gif', "", "width='12' height='12' border='0'");
-		}
-
-		$s = typo($titre_trad);
-		if ($id_article_trad != $id_article) 
-			$s = "<a href='" . generer_url_ecrire("articles","id_article=$id_article_trad&id_rubrique=$id_rubrique_trad") . "'>$s</a>";
-		if ($id_article_trad == $id_trad)
-			$s .= " "._T('trad_reference');
-
-		$vals[] = $s;
-		$vals[] = traduire_nom_langue($lang_trad);
-		$table[] = $vals;
-	}
-
-	return $table;
-}
 
 // http://doc.spip.org/@afficher_corps_articles
 function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)

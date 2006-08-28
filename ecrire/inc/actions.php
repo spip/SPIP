@@ -161,7 +161,7 @@ function ajax_action_auteur($action, $id, $script, $args, $corps=false, $args_aj
 
 		return (!$att)
 		? $clic
-		: "<div$att'>$clic</div>";
+		: "\n<div$att>$clic</div>";
 	}
 }
 
