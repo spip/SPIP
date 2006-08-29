@@ -22,7 +22,7 @@ function exec_auteurs_edit_dist()
   global $connect_id_auteur, $spip_display;
 
 	$id_auteur = intval(_request('id_auteur'));
-	pipeline('exec_init',array('args'=>array('exec'=>'auteurs_edit','$id_auteur'=>$id_auteur),'data'=>''));
+	pipeline('exec_init',array('args'=>array('exec'=>'auteurs_edit','id_auteur'=>$id_auteur),'data'=>''));
 
 	$result = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur='$id_auteur'");
 
