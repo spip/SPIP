@@ -203,53 +203,37 @@ function spip_log($message, $logname='spip') {
 		spip_log($message);
 }
 
+// API d'appel a la base de donnees:
+// on charge le fichier du repertoire base/ donne en argument
+// et on execute la fonction homonyme censee initaliser la connexion
+// et renvoyer le nom de la fonction a connexion persistante.
+// On memorise ce nom dans une statique pour n'appeler qu'une fois.
 
-// API d'appel a la base de donnees
 // http://doc.spip.org/@spip_connect
-function spip_connect() {
-	static $t;
-	if ($t++) return;
+function spip_connect($serveur='') {
+	static $t = array();
 
-	include_spip('base/db_mysql');
-	include_once(_FILE_CONNECT);
+// Assimiler spip_connect() et spip_connect('') [PHP les distingue].
+// Tous deux designent le serveur SQL std (moche mais historique)
 
-	// Version courante = 0.3
-	//
-	// les versions 0.1 et 0.2 fonctionnent toujours, meme si :
-	// - la version 0.1 est moins performante que la 0.2
-	// - la 0.2 fait un include_ecrire('inc_db_mysql.php3')
-	// En tout cas on ne force pas la mise a niveau
-	if ($GLOBALS['spip_connect_version'] >= 0.1)
-		return;
+	if (!$serveur) $serveur = 'db_mysql';
 
-	// La version 0.0 (non numerotee) doit etre refaite
-	if ($GLOBALS['spip_connect_version'] < 0.1) {
-		if (!_DIR_RESTREINT) {
-			$GLOBALS['db_ok'] = false;
-			return;
-		}
-		redirige_par_entete(
-			generer_url_ecrire('upgrade', 'reinstall=oui', true));
-	}
+	if (isset($t[$serveur])) return $t[$serveur];
+
+	$f = charger_fonction($serveur, 'base', true);
+
+	$t[$serveur] = ($f ? $f() : false);
+	spip_log("spip_connect($serveur) $f " . $t[$serveur]);
+	return $t[$serveur];
 }
 
 // http://doc.spip.org/@spip_query
-function spip_query($query) {
+function spip_query($query, $serveur='') {
 
-	// Remarque : si on est appele par l'install,
-	// la connexion initiale a ete faite avant
-	if (!$GLOBALS['db_ok']) {
-		// Essaie de se connecter
-		if (_FILE_CONNECT)
-			spip_connect();
+	if (!($f = spip_connect($serveur))) return;  // Erreur de connexion
 
-		// Erreur de connexion
-		if (!$GLOBALS['db_ok'])
-			return;
-	}
-
-	// Faire la requete
-	return spip_query_db($query);
+	// executer la requete
+	return $f($query);
 }
 
 // a demenager dans base/abstract_sql a terme
@@ -1084,7 +1068,7 @@ function spip_initialisation() {
 	$GLOBALS['spip_lang'] = $GLOBALS['langue_site'];
 
 	// Verifier le visiteur
-	verifier_visiteur();
+	if (_FILE_CONNECT) verifier_visiteur();
 }
 
 // Annuler les magic quotes \' sur GET POST COOKIE et GLOBALS ;

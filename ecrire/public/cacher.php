@@ -294,9 +294,8 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 
 	// Faut-il effacer des pages invalidees (en particulier ce cache-ci) ?
 	if (isset($GLOBALS['meta']['invalider'])) {
-		// tester si la base est dispo
-		spip_connect();
-		if ($GLOBALS['db_ok']) {
+		// le faire si la base est disponible
+		if (spip_connect()) {
 			include_spip('inc/meta');
 			lire_metas();
 			retire_caches($chemin_cache);
@@ -321,12 +320,8 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 		$use_cache = 1;
 	}
 
-
-	// tester si la base est dispo
-	spip_connect();
-
 	// Si pas valide mais pas de connexion a la base, le garder quand meme
-	if (!$GLOBALS['db_ok']) {
+	if (!spip_connect()) {
 		if (file_exists(_DIR_CACHE . $chemin_cache))
 			$use_cache = 0 ;
 		else {

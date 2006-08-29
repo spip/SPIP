@@ -29,7 +29,7 @@ function exec_install_dist()
 	@unlink(_FILE_META);
 	unset($GLOBALS['meta']);
 	include_spip('inc/lang');
-	init_langues();
+	init_langues(); // pourquoi faut-il l'appeler encore une fois ?
 
 	include_spip('base/create');
 	include_spip('base/db_mysql');

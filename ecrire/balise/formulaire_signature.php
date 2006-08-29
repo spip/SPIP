@@ -93,8 +93,7 @@ function reponse_confirmation($var_confirm = '') {
 	static $confirm = '';
 	if (!$var_confirm) return $confirm;
 
-	spip_connect();
-	if ($GLOBALS['db_ok']) {
+	if (spip_connect()) {
 		include_spip('inc/texte');
 		include_spip('inc/filtres');
 
@@ -177,7 +176,7 @@ function reponse_confirmation($var_confirm = '') {
 
 function reponse_signature($id_article, $nom_email, $adresse_email, $message, $nom_site, $url_site, $url_page) {
 
-	if (!$GLOBALS['db_ok']) return _T('form_pet_probleme_technique');
+	if (!spip_connect()) return _T('form_pet_probleme_technique');
 
 	include_spip('inc/texte');
 	include_spip('inc/filtres');

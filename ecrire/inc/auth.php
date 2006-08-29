@@ -218,7 +218,7 @@ function auth_prefs()
 function auth_areconnecter($auth_login)
 {
 	include_spip('inc/minipres');
-	if (!$GLOBALS['db_ok']) {
+	if (!spip_connect()) {
 		spip_log("Erreur base de donnees");
 
 		minipres(_T('info_travaux_titre'), _T('titre_probleme_technique'). "<p><tt>".spip_sql_errno()." ".spip_sql_error()."</tt></p>");

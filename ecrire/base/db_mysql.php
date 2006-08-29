@@ -21,6 +21,35 @@ define('SPIP_NUM', MYSQL_NUM);
 // Appel de requetes SQL
 //
 
+// fonction pour la premiere connexion
+
+function base_db_mysql_dist()
+{
+	// fichier d'init present ?
+	if (!_FILE_CONNECT) {
+		if ($GLOBALS['exec'] != 'install') // est-ce l'installation ?
+			return false; // non, faut faire sans
+		else  return 'spip_query_db'; // oui; valeur d'office
+	}
+
+	include_once(_FILE_CONNECT);
+
+	// Version courante = 0.3
+	//
+	// les versions 0.1 et 0.2 fonctionnent toujours, meme si :
+	// - la version 0.1 est moins performante que la 0.2
+	// - la 0.2 fait un include_ecrire('inc_db_mysql.php3')
+	// En tout cas on ne force pas la mise a niveau
+	if ($GLOBALS['spip_connect_version'] >= 0.1)
+		return 'spip_query_db';
+
+	// La version 0.0 (non numerotee) doit etre refaite par un admin
+
+	if (!_DIR_RESTREINT) return false;
+
+	redirige_par_entete(generer_url_ecrire('upgrade', 'reinstall=oui', true));
+}
+
 // http://doc.spip.org/@spip_query_db
 function spip_query_db($query) {
 
@@ -197,7 +226,7 @@ function spip_connect_db($host, $port, $login, $pass, $db) {
 		$err = 'Echec connexion MySQL '.spip_sql_errno().' '.spip_sql_error();
 		spip_log($err);
 		spip_log($err, 'mysql');
-	}
+	} else $GLOBALS['db_ok'] = 'spip_query_db';
 	return $GLOBALS['db_ok'];
 }
 
