@@ -59,13 +59,11 @@ function formulaire_referencer_traduction($id_article, $id_rubrique, $id_trad, $
 
 		$menu = ajax_action_auteur('referencer_traduction', "$id_article,$id_rubrique","articles","id_article=$id_article", $menu);
 
-		$reponse .= debut_block_invisible('languesarticle')
-		. debut_cadre_couleur('',true)
+		$reponse .= debut_cadre_couleur('',true)
 		. "\n<div style='text-align: center;'>"
 		. $menu
 		. "</div>\n"
-		. fin_cadre_couleur(true)
-		. fin_block();
+		. fin_cadre_couleur(true);
 	}
 
 	if ($trad_err)
@@ -80,7 +78,7 @@ function formulaire_referencer_traduction($id_article, $id_rubrique, $id_trad, $
 		$largeurs = array(7, 12, '', 100);
 		$styles = array('', '', 'arial2', 'arial2');
 
-		$reponse .= "\n<div class='liste'>"
+		$liste = "\n<div class='liste'>"
 		. bandeau_titre_boite2(_T('trad_article_traduction'),'', 'white', 'black', false)
 		. "<table width='100%' cellspacing='0' border='0' cellpadding='2'>"
 		. afficher_liste ($largeurs, $table, $styles)
@@ -132,19 +130,35 @@ function formulaire_referencer_traduction($id_article, $id_rubrique, $id_trad, $
 
 	if ($langue_article)
 		$bouton .= "&nbsp; (".traduire_nom_langue($langue_article).")";
-	$bouton = bouton_block_invisible('lier_traductions').$bouton;
-
-	$res = "\n<div>&nbsp;</div>\n" // place pour l'animation pendant Ajax
-	. debut_cadre_enfonce('langues-24.gif', true, "", $bouton)
-	. $reponse
-	. debut_block_invisible('lier_traductions')
-	. $form
-	. fin_block()
-	. fin_cadre_enfonce(true);
 
 	return ($flag_editable === 'ajax')
-	? $res
-	: "\n<div id='referencer_traduction-$id_article'>$res</div>";
+		? 
+			debut_cadre_enfonce('langues-24.gif', true, "", 
+				bouton_block_visible('languearticle,lier_traductions')
+				. $bouton)
+			. debut_block_visible('languearticle')
+			. $reponse
+			. fin_block()
+			. $liste
+			. debut_block_visible('lier_traductions')
+			. $form
+			. fin_block()
+			. fin_cadre_enfonce(true)
+			. fin_block()
+		:
+			"<div id='referencer_traduction-$id_article'>"
+			. debut_cadre_enfonce('langues-24.gif', true, "",
+				bouton_block_invisible('languearticle,lier_traductions')
+				. $bouton)
+			. debut_block_invisible('languearticle')
+			. $reponse
+			. fin_block()
+			. $liste
+			. debut_block_invisible('lier_traductions')
+			. $form
+			. fin_block()
+			. fin_cadre_enfonce(true)
+			. "</div>";
 }
 
 
