@@ -230,7 +230,6 @@ function exec_affiche_auteur_info_dist($id_auteur, $auteur,  $echec, $redirect, 
   formulaire_auteur_infos($id_auteur, $auteur, $onfocus, $redirect, $ajouter_id_article);
   fin_cadre_formulaire();
   echo "&nbsp;<p />";
-	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'auteur_infos','$id_auteur'=>$id_auteur),'data'=>''));
 
   fin_page();
 }
@@ -377,6 +376,8 @@ echo "<INPUT NAME='redirect' VALUE='$redirect' TYPE='hidden'>\n";
 echo "<INPUT NAME='redirect_ok' VALUE='oui' TYPE='hidden'>\n";
 
 echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondo' NAME='Valider' VALUE='"._T('bouton_enregistrer')."'></DIV>";
+
+echo pipeline('affiche_milieu',array('args'=>array('exec'=>'auteur_infos','$id_auteur'=>$id_auteur),'data'=>''));
 
 echo "</div>";
 
