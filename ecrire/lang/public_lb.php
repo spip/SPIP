@@ -119,7 +119,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // V
 'ver_imprimer' => 'Drock-Versioun',
-'voir_en_ligne' => 'Online gesinn'
+'voir_en_ligne' => 'Online gesinn',
+'voir_squelette' => 'd\'Skelett vun d&euml;ser S&auml;it weisen'
 
 );
 
