@@ -45,14 +45,8 @@ function spip_abstract_select (
 	    $f = 'spip_mysql_select';
 	  }
 	else {
-	  // c'est un autre; est-il deja charge ?
-		$f = 'spip_' . $serveur . '_select';
-		if (!function_exists($f)) {
-		  // non, il est decrit dans le fichier ad hoc
-			$d = find_in_path('inc_connect-' . $serveur . '.php');
-			if (@file_exists($d)) include($d); else spip_log("pas de fichier $d pour decrire le serveur '$serveur'");
-			$f = spip_abstract_serveur($f, $serveur);
-		}
+	  // c'est un autre; le charger si ce n'est fait
+		$f = spip_abstract_serveur('select', $serveur);
 	}
 	return $f($select, $from, $where,
 		  $groupby, $orderby, $limit,
@@ -60,24 +54,30 @@ function spip_abstract_select (
 		  $table, $id, $serveur);
 }
 
+// Chargement a la volee de la description d'un serveur de base de donnees
+
 // http://doc.spip.org/@spip_abstract_serveur
-function spip_abstract_serveur($f, $serveur) {
-	if (function_exists($f))
-		return $f;
+function spip_abstract_serveur($ins_sql, $serveur) {
+	$f = 'spip_' . $serveur . '_' . $ins_sql;
+	if (function_exists($f)) return $f;
+
+	$d = find_in_path('inc_connect-' . $serveur . '.php');
+	if (@file_exists($d))
+		include($d);
+	else spip_log("pas de fichier $d pour decrire le serveur '$serveur'");
+
+	if (function_exists($f)) return $f;
 
 	erreur_squelette(" $f " ._T('zbug_serveur_indefini'), $serveur);
 
 	// hack pour continuer la chasse aux erreurs
-	return 'array';
+	return 'spip_log';
 }
-
-// Les 3 fonctions suivantes exploitent le resultat de la precedente,
-// si l'include ne les a pas definies, erreur immediate
 
 // http://doc.spip.org/@spip_abstract_fetch
 function spip_abstract_fetch($res, $serveur='') {
 	if (!$serveur) return spip_fetch_array($res, SPIP_ASSOC);
-	$f = spip_abstract_serveur('spip_' . $serveur . '_fetch', $serveur);
+	$f = spip_abstract_serveur('fetch', $serveur);
 	return $f($res);
 }
 
@@ -85,7 +85,7 @@ function spip_abstract_fetch($res, $serveur='') {
 function spip_abstract_count($res, $serveur='')
 {
   if (!$serveur) return spip_num_rows($res);
-  $f = spip_abstract_serveur('spip_' . $serveur . '_count', $serveur);
+  $f = spip_abstract_serveur('count', $serveur);
   return $f($res);
 }
 
@@ -93,7 +93,7 @@ function spip_abstract_count($res, $serveur='')
 function spip_abstract_free($res, $serveur='')
 {
   if (!$serveur) return spip_free_result($res);
-  $f = spip_abstract_serveur('spip_' . $serveur . '_free', $serveur);
+  $f = spip_abstract_serveur('free', $serveur);
   return $f($res);
 }
 
@@ -101,7 +101,7 @@ function spip_abstract_free($res, $serveur='')
 function spip_abstract_insert($table, $noms, $valeurs, $serveur='')
 {
   $f = (!$serveur ? 'spip_mysql_insert' :
-	spip_abstract_serveur('spip_' . $serveur . '_insert', $serveur));
+	spip_abstract_serveur('insert', $serveur));
   return $f($table, $noms, $valeurs);
 }
 
@@ -115,7 +115,7 @@ function spip_abstract_showtable($table, $serveur='', $table_spip = false)
 	}
 	
   $f = (!$serveur ? 'spip_mysql_showtable' :
-	spip_abstract_serveur('spip_' . $serveur . '_showtable', $serveur));
+	spip_abstract_serveur('showtable', $serveur));
   return $f($table);
 }
 
