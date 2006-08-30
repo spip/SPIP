@@ -246,7 +246,7 @@ function formulaire_poster($id_article, $script, $args, $ajax=false) {
 	. "\n\t<select name='change_accepter_forum'
 		class='fondl'
 		style='font-size:10px;'
-		onChange=\"changeVisible(true, 'valider_poster_$id_article', 'block', 'block');\"
+		onchange=\"findObj_forcer('valider_poster_$id_article').style.visibility='visible';\"
 		>";
 
 	foreach (array(
@@ -257,13 +257,13 @@ function formulaire_poster($id_article, $script, $args, $ajax=false) {
 		as $val => $desc) {
 		$r .= "\n\t<option";
 		if ($statut_forum == $val)
-			$r .= " selected";
+			$r .= " selected='selected'";
 		$r .= " value='$val'>".$desc."</option>";
 	}
 	$r .= "\n\t</select>\n";
 
 	$r .= "<div align='$spip_lang_right' id='valider_poster_$id_article'"
-	. ($ajax ? '' : " class='display_au_chargement'")
+	. ($ajax ? '' : " class='visible_au_chargement'")
 	. ">\n\t<input type='submit' class='fondo' style='font-size:10px' value='"
 	. _T('bouton_changer')
 	. "' /></div>\n";
