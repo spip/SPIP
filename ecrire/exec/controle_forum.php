@@ -264,7 +264,7 @@ function exec_controle_forum_dist()
   echo "<div style='text-align: "
     . $GLOBALS['spip_lang_right']
     . ";'>"
-    . bouton_spip_rss('forums', array('type' => $type))
+    . bouton_spip_rss('forums', array('page' => $type))
     ."</div>";
 
   fin_boite_info();
