@@ -680,12 +680,12 @@ function spip_substr($c, $start=0, $end='') {
 	}
 
 	// version manuelle
-	$re_char="(?:[\300-\377][\200-\277]*|[\1-\200])";
+	$re_char="(?:[\300-\377][\200-\277]*|.)";
 	if($start==0) {
-		$restart='';
+		$re_start='';
 	} else {
 		if($start<0) {
-			$start= ($l=utf_strlen($c))+$start;
+			$start= ($l=spip_strlen($c))+$start;
 		}
 		$re_start= "(?:$re_char\{$start})";
 	}
@@ -694,7 +694,7 @@ function spip_substr($c, $start=0, $end='') {
 		$re_end="(.*)";
 	} else {
 		if($end<0) {
-			$end= ($l?$l:utf_strlen($c))+$end-$start;
+			$end= ($l?$l:spip_strlen($c))+$end-$start;
 		}
 		$re_end="($re_char\{0,$end})";
 	}
