@@ -245,9 +245,25 @@ function spip_abstract_quote($arg_sql) {
 // http://doc.spip.org/@_request
 function _request($var) {
 	global $_GET, $_POST;
-	if (isset($_GET[$var])) return $_GET[$var];
-	if (isset($_POST[$var])) return $_POST[$var];
-	return NULL;
+	if (isset($_GET[$var])) $a = $_GET[$var];
+	elseif (isset($_POST[$var])) $a = $_POST[$var];
+	else return NULL;
+
+	// temporaire: si on est en ajax tout a ete encode
+	// via encodeURIComponent, il faut donc repasser
+	// dans le charset local.... on le repere grace
+	// a la variable var_charset=utf-8 ajoutee dans
+	// la fonction AjaxSqueeze() de layer.js
+	if (isset($_REQUEST['var_charset'])
+	AND isset($GLOBALS['meta']['charset'])
+	AND $GLOBALS['meta']['charset'] != $_REQUEST['var_charset']
+	AND is_string($a)
+	AND preg_match(',[\x80-\xFF],', $a)) {
+		include_spip('inc/charsets');
+		return importer_charset($a, $_REQUEST['var_charset']);
+	}
+
+	return $a;
 }
 
 
@@ -866,7 +882,6 @@ function spip_register_globals() {
 		'id_syndic', 'id_syndic_article', 'id_mot', 'id_groupe',
 		'id_document', 'date', 'lang'
 	);
-
 
 	// Si les variables sont passees en global par le serveur, il faut
 	// faire quelques verifications de base
