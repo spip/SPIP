@@ -10,8 +10,38 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/actions');
+
+function affiche_navigation_forum($script, $args, $debut, $i, $pack, $ancre, $query)
+{
+	$nav = ($i <=0) ? '' : ("<a href='" . generer_url_ecrire($script, $args) ."'>0</a> ... |\n");
+
+	$evt = ($_COOKIE['spip_accepte_ajax'] == 1 );
+
+	$n = spip_num_rows($query);
+
+	for (;$n;$n--){
+
+		if ($i == $pack*floor($i/$pack)) {
+			if ($i == $debut)
+				$nav .= "<FONT SIZE=3><B>$i</B></FONT> |\n";
+			else {
+				$h = generer_url_ecrire($script, $args . "&debut=$i", $evt);
+				if ($evt) $evt = "\nonclick='return !AjaxSqueeze(\"$h&amp;var_ajax=1\",\n\t\"$ancre\")'";
+				$nav .= "<a href='$h'$evt>$i</a> |\n";
+			}
+		}
+		$i ++;
+	}
+
+	$h = generer_url_ecrire($script, $args . "&debut=$i");
+
+	if ($evt) $evt = "\nonclick='return !AjaxSqueeze(\"$h&amp;var_ajax=1\",\n\t\"$ancre\")'";
+
+	return "$nav<a href='$h'$evt>...</a> |";
+}
+
 
 // tous les boutons de controle d'un forum
 // nb : les forums prives (privrac ou prive), une fois effaces
