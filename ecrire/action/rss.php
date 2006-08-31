@@ -222,7 +222,7 @@ function rss_suivi_forums($a, $from, $where, $lien_moderation=false) {
 		$item['email'] = $t['email_auteur'];
 
 		if ($lien_moderation)
-		  $item['url'] = generer_url_ecrire('controle_forum', 'page='.$a['page'] .'&debut_id_forum='.$t['id_forum']);
+		  $item['url'] = generer_url_ecrire('controle_forum', 'type='.$a['page'] .'&debut_id_forum='.$t['id_forum']);
 		else
 			$item['url'] = generer_url_forum($t['id_forum']);
 
@@ -426,7 +426,7 @@ switch($op) {
 		list($f,$w) = critere_statut_controle_forum($a['page']);
 		$rss = rss_suivi_forums($a, $f, $w, true);
 		$title = _T("ecrire:titre_page_forum_suivi")." (".$a['page'].")";
-		$url = generer_url_ecrire('controle_forum', 'page='.$a['page']);
+		$url = generer_url_ecrire('controle_forum', 'type='.$a['page']);
 		break;
 	# revisions des articles
 	case 'revisions':
