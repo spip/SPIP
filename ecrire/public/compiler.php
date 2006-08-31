@@ -112,7 +112,7 @@ function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
 function calculer_boucle($id_boucle, &$boucles) {
  
   if ($boucles[$id_boucle]->type_requete == 'boucle')  {
-    $corps = ( "\n	\$t0 = " . $boucles[$id_boucle]->return . ";");
+    $corps = calculer_boucle_rec($id_boucle, $boucles);
     $req = "";
     } else {
       $corps = calculer_boucle_nonrec($id_boucle, $boucles);
@@ -127,6 +127,17 @@ function calculer_boucle($id_boucle, &$boucles) {
 	. ($notrace ? "" : "
 		boucle_debug_resultat('$id_boucle', 'resultat', \$t0);")
 	.  "\n	return \$t0;";
+}
+
+// compil d'un boucle non recursive. 
+// il suffit (ET IL FAUT) sauvegarder les valeurs des arguments passes par
+// reference, car par definition un tel passage ne les sauvegarde pas
+
+function calculer_boucle_rec($id_boucle, &$boucles) {
+	$nom = $boucles[$id_boucle]->param[0];
+	return "\n\t\$save_numrows = (\$Numrows['$nom']);"
+	. "\n\t\$t0 = " . $boucles[$id_boucle]->return . ";"
+	. "\n\t\$Numrows['$nom'] = (\$save_numrows);";
 }
 
 // compil d'un boucle non recursive. 
