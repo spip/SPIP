@@ -30,7 +30,7 @@ function chercher_module_lang($module, $lang = '') {
 
 // http://doc.spip.org/@charger_langue
 function charger_langue($lang, $module = 'spip') {
-	if ($fichier_lang = chercher_module_lang($module, $lang)) {
+	if ($lang AND $fichier_lang = chercher_module_lang($module, $lang)) {
 		$GLOBALS['idx_lang']='i18n_'.$module.'_'.$lang;
 		include_once($fichier_lang);
 	} else {
