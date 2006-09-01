@@ -228,7 +228,7 @@ function exec_controle_forum_dist()
 		  (!$connect_toutes_rubriques AND
 		   (!$id_rubrique OR !acces_rubrique($id_rubrique))));
 
-	if (_request('var_ajax') AND !$droit) {
+	if (_request('var_ajaxcharset') AND !$droit) {
 		return $mess;
 	} else {
 

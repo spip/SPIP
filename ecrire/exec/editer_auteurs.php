@@ -113,7 +113,7 @@ function formulaire_editer_auteurs($cherche_auteur, $ids, $id_article, $flag_edi
 
  return ($flag_editable === 'ajax') 
  ? $res
- : "\n<div id='editer_auteurs-$id_article'>$res</div>";
+ : "\n<div id='editer_auteurs-$id_article'><div>&nbsp;</div>$res</div>";
 }
 
 // http://doc.spip.org/@rechercher_auteurs_articles

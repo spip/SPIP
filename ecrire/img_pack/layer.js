@@ -118,7 +118,7 @@ function aff_selection (type, rac, id) {
 	
 	findObj_forcer(rac+"_selection").style.display = "none";
 	
-	charger_id_url("./?exec=informer&var_ajax=1&type="+type+"&id="+id+"&rac="+rac, rac+"_selection");
+	charger_id_url("./?exec=informer&type="+type+"&id="+id+"&rac="+rac, rac+"_selection");
 }
 
 // selecteur de rubrique et affichage de son titre dans le bandeau
@@ -210,7 +210,7 @@ function AjaxSqueeze(trig, id, f)
 	if (!f) f = function(r) { noeud.innerHTML = r;}
 
 	if (typeof(trig) == 'string') {
-		return ajah('GET', trig, null, f);
+		return ajah('GET', trig+'&var_ajaxcharset=utf-8', null, f);
 	}
 
 	for (i=0;i < trig.elements.length;i++) {
@@ -220,7 +220,7 @@ function AjaxSqueeze(trig, id, f)
 			u += n.name+"="+ encodeURIComponent(n.value) + '&';
 		}
 	}
-	u += 'var_charset=utf-8'; // encodeURIComponent
+	u += 'var_ajaxcharset=utf-8'; // encodeURIComponent
 
 	s = trig.getAttribute('action');
 	if (typeof(s)!='string') // pour IE qui a foire la ligne precedente
@@ -251,7 +251,7 @@ function charger_id_url(myUrl, myField, jjscript)
 
 
 		if (!(xmlhttp[myField] = createXmlHttp())) return false;
-		xmlhttp[myField].open("GET", myUrl, true);
+		xmlhttp[myField].open("GET", myUrl + '&var_ajaxcharset=utf-8',  true);
 		// traiter la reponse du serveur
 		xmlhttp[myField].onreadystatechange = function() {
 			if (xmlhttp[myField].readyState == 4) { 
