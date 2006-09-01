@@ -27,12 +27,7 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 
 	if (!file_exists($fichier)) return false;
 	
-	$class = extraire_attribut($img, 'class');
-	$alt = extraire_attribut($img, 'alt');
-	$style = extraire_attribut($img, 'style');
-	
-
-	if (ereg("\.(gif|jpg|png)$", $fichier, $regs)) {
+	if (preg_match(",\.(gif|jpg|png)$,", $fichier, $regs)) {
 		$terminaison = $regs[1];
 		$terminaison_dest = $terminaison;
 		
@@ -40,42 +35,33 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 	}
 	if ($forcer_format) $terminaison_dest = $forcer_format;
 	
-	$nom_fichier = substr($fichier, 0, strlen($fichier) - 4);
-
-	$fichier_dest = "$nom_fichier-$effet";
-	
 	$term_fonction = $terminaison;
 	if ($term_fonction == "jpg") $term_fonction = "jpeg";
 	$term_fonction_dest = $terminaison_dest;
 	if ($term_fonction_dest == "jpg") $term_fonction_dest = "jpeg";
 
+	$nom_fichier = substr($fichier, 0, strlen($fichier) - 4);
+	$fichier_dest = "$nom_fichier-$effet";
 	$fichier_dest = md5($fichier_dest);
-	
 	$fichier_dest = sous_repertoire(_DIR_IMG, "cache-gd2") . $fichier_dest . "." .$terminaison_dest;
-	
-	$fonction_imagecreatefrom = "imagecreatefrom".$term_fonction;
-	$fonction_image = "image".$term_fonction_dest;
-	
-	$largeur = largeur($img);
-	$hauteur = hauteur($img);
 	
 	$creer = true;
 	if (@filemtime($fichier) < @filemtime($fichier_dest)) {
 		$creer = false;
 	}
 	
-	$ret["largeur"] = $largeur;
-	$ret["hauteur"] = $hauteur;
+	$ret["largeur"] = largeur($img);
+	$ret["hauteur"] = hauteur($img);
 	$ret["fichier"] = $fichier;
-	$ret["fonction_imagecreatefrom"] = $fonction_imagecreatefrom;
-	$ret["fonction_image"] = $fonction_image;
+	$ret["fonction_imagecreatefrom"] = "imagecreatefrom".$term_fonction;
+	$ret["fonction_image"] = "image".$term_fonction_dest;
 	$ret["fichier_dest"] = $fichier_dest;
 	$ret["format_source"] = $terminaison;
 	$ret["format_dest"] = $terminaison_dest;
 	$ret["creer"] = $creer;
-	$ret["class"] = $class;
-	$ret["alt"] = $alt;
-	$ret["style"] = $style;
+	$ret["class"] = extraire_attribut($img, 'class');
+	$ret["alt"] = extraire_attribut($img, 'alt');
+	$ret["style"] = extraire_attribut($img, 'style');
 	return $ret;
 
 }
