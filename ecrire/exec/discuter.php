@@ -32,7 +32,7 @@ function formulaire_discuter($query, $total, $debut, $total_afficher, $script, $
 					$h = generer_url_ecrire($script, $a);
 				} else {
 					$h = generer_url_ecrire('discuter', $a);
-					$evt = "\nonclick='return !AjaxSqueeze(\"$h\",\n\t\"forum\")'";
+					$evt = "\nonclick='return AjaxSqueeze(\"$h\",\n\t\"forum\")'";
 				}
 				$nav .= "[<a href='$h#forum'$evt>$i-$y</a>] ";
 			}

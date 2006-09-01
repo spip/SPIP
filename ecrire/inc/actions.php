@@ -158,7 +158,7 @@ function ajax_action_auteur($action, $id, $script, $args, $corps=false, $args_aj
 			"script=$script$args_ajax&var_ajaxcharset=utf-8");
 
 		if ($att) $clic = "\n<div$att>$clic</div>";
-		return "<a href='$href'\nonclick='return !AjaxSqueeze(\"$ajax\",\"$ancre\");'>$clic</a>";
+		return "<a href='$href'\nonclick='return AjaxSqueeze(\"$ajax\",\"$ancre\");'>$clic</a>";
 	}
 }
 
