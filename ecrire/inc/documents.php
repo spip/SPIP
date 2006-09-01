@@ -935,7 +935,7 @@ function formulaire_documenter($id_document, $document, $script, $type, $id, $an
 	$bloc = "documenter-aff-$id_document";
 
 	$corps = "<div style='text-align:center;'>"
-		. "<div style='float:".$GLOBALS['spip_lang_left'].";'>"
+		. "<div style='float:".$GLOBALS['spip_lang_left'].";position:relative'>"
 		. ($flag_deplie ?
 			bouton_block_visible($bloc) : bouton_block_invisible($bloc))
 		. "</div>\n"
