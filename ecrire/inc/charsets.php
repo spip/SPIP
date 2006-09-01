@@ -671,47 +671,88 @@ function transcoder_page($texte, $headers='') {
 // Gerer les outils mb_string
 //
 // http://doc.spip.org/@spip_substr
-function spip_substr($c, $start=0, $end='') {
+function spip_substr($c, $start=0, $length = NULL) {
+	// Si ce n'est pas utf-8, utiliser substr
+	if ($GLOBALS['meta']['charset'] != 'utf-8') {
+		if ($length)
+			return substr($c, $start, $length);
+		else
+			substr($c, $start);
+	}
+
+	// Si utf-8, voir si on dispose de mb_string
 	if (init_mb_string()) {
-		if ($end)
-			return mb_substr($c, $start, $end);
+		if ($length)
+			return mb_substr($c, $start, $length);
 		else
 			return mb_substr($c, $start);
 	}
 
-	// version manuelle
-	if($start==0) {
-		$re_start='';
-	} else {
-		if($start<0) {
-			$start= ($l=spip_strlen($c))+$start;
-		}
-		$re_start= ".\{$start}";
+	// Version manuelle (cf. ci-dessous)
+	return spip_substr_manuelle($c, $start, $length);
+}
+
+// version manuelle de substr utf8, pour php vieux et/ou mal installe
+function spip_substr_manuelle($c, $start, $length) {
+
+	// Cas vide
+	if ($length === 0)
+		return '';
+
+	// S'il y a un demarrage, on se positionne
+	if ($start > 0) {
+		$d = spip_substr($c, 0, $start);
+		$c = substr($c, strlen($d));
 	}
-	
-	if($end===null) {
-		$re_end="(.*)";
-	} else {
-		if($end<0) {
-			$end= ($l?$l:spip_strlen($c))+$end-$start;
-		}
-		$re_end="(.\{0,$end})";
+	if ($start < 0) {
+		$d = spip_substr($c, 0, $start);
+		$c = substr($c, -strlen($d));
 	}
 
-	if(preg_match("/^${re_start}${re_end}/su", $c, $m)) {
-		return $m[1];
+	// Pas de parametre length
+	if (!$length)
+		return $c;
+
+	if ($length > 0) {
+		// on prend 5 fois la longueur desiree, pour etre surs d'avoir tout
+		// (un caractere utf-8 prenant au maximum 5 bytes)
+		$c = substr($c, 0, 5*$length);
+		// puis, tant qu'on est trop long, on coupe...
+		while (($l = spip_strlen($c)) > $length)
+			$c = substr($c, 0, $length - $l);
+		return $c;
 	}
-	return FALSE;
+
+	if ($length < 0) {
+		// on se prepare a enlever 5 fois la longueur desiree
+		$fin = substr($c, 5*$length);
+		// puis, tant qu'on est trop long, on reduit cette longueur...
+		while (($l = spip_strlen($fin)) > -$length) {
+			$fin = substr($fin, $length+$l);
+			// le premier car, s'il est tronque, ne doit pas compter
+			// pour 0 dans la spip_strlen()
+			$fin = preg_replace(',^[\x80-\xBF],S', 'x', $fin);
+		}
+		return substr($c, -strlen($fin));
+	}
+
 }
 
 // http://doc.spip.org/@spip_strlen
 function spip_strlen($c) {
+	// Si ce n'est pas utf-8, utiliser strlen
+	if ($GLOBALS['meta']['charset'] != 'utf-8')
+		return strlen($c);
+
+	// Sinon, utiliser mb_strlen() si disponible
 	if (init_mb_string())
 		return mb_strlen($c);
-	else
-		return strlen(preg_replace("/[\300-\377][\200-\277]*/", "?", $c));
-}
 
+	// Methode manuelle : on supprime les bytes 10......,
+	// on compte donc les ascii (0.......) et les demarrages
+	// de caracteres utf-8 (11......)
+	return strlen(preg_replace(',[\x80-\xBF],S', '', $c));
+}
 
 // Initialisation
 $GLOBALS['CHARSET'] = Array();
