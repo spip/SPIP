@@ -106,7 +106,7 @@ function revisions_articles ($id_article, $new) {
 
 	// ne pas accepter de titre vide
 	if (_request('titre') === '')
-		$_POST['titre'] = _T('ecrire:info_sans_titre');
+		_request('titre', _T('ecrire:info_sans_titre'));
 
 	foreach (array(
 	'surtitre', 'titre', 'soustitre', 'descriptif',
@@ -220,10 +220,10 @@ function revisions_articles ($id_article, $new) {
 
 // http://doc.spip.org/@trop_longs_articles
 function trop_longs_articles() {
-	if (isset($_POST['texte_plus']) && is_array($_POST['texte_plus'])) {
-		foreach ($_POST['texte_plus'] as $t) {
-			$_POST['texte'] = preg_replace(",<!--SPIP-->[\n\r]*,","", $t)
-				. $_POST['texte'];
+	if (is_array($plus = _request('texte_plus')) {
+		foreach ($plus as $t) {
+			_request('texte', preg_replace(",<!--SPIP-->[\n\r]*,","", $t)
+				. _request('texte'));
 		}
 	}
 }
