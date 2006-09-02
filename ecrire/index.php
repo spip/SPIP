@@ -184,22 +184,18 @@ else
 
 // Trouver la fonction eventuellement surchagee et l'appeler.
 // Elle envoie parfois des en-tetes http,
-// et en mode Ajax retourne un resultat, qu'il faut reencoder
+// et en mode Ajax retourne un resultat.
 
 $var_f = charger_fonction($exec);
 $r = $var_f(); 
 
-// Un retour d'Ajax est repere par cette variable, qui donne en + le charset
+// Un retour d'Ajax est repere par cette variable, 
+// (qui donne en + le charset utilise par le client, utile a _request).
+// Il faut preciser le charset utilise par le serveur,
+// mais pas avec header(Content-Type ... charset): ca bloque MSIE
+
 if (isset($var_ajaxcharset)) {
-	
-  	include_spip('inc/charsets');
-	$charset = $GLOBALS['meta']["charset"];
 
-// Curieux: le content-type bloque MSIE!
-//		@header('Content-type: text/html; charset=$charset');
-
-	echo "<"."?xml version='1.0' encoding='$charset'?".">\n";
-# gerer un charset minimaliste en convertissant tout en unicode &#xxx;
-	echo charset2unicode($r, 'AUTO', true); 
+	  echo "<","?xml version='1.0' encoding='",$GLOBALS['meta']["charset"],"'?",">\n", $r;
  }
 ?>
