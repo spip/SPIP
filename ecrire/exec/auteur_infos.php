@@ -41,7 +41,12 @@ global $ajouter_id_article,
 
  $id_auteur = intval($id_auteur);
  $ajouter_id_article = intval($ajouter_id_article);
- pipeline('exec_init',array('args'=>array('exec'=>'auteur_infos','id_auteur'=>$id_auteur),'data'=>''));
+	pipeline('exec_init',
+		array('args' => array(
+			'exec'=>'auteur_infos',
+			'id_auteur'=>$id_auteur),
+		'data'=>'')
+	);
 
 //
 // Recuperer id_auteur ou se preparer a l'inventer
@@ -208,10 +213,20 @@ function exec_affiche_auteur_info_dist($id_auteur, $auteur,  $echec, $redirect, 
 
   cadre_auteur_infos($id_auteur, $auteur);
 
-	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'auteur_infos','$id_auteur'=>$id_auteur),'data'=>''));
+	echo pipeline('affiche_gauche',
+		array('args' => array(
+			'exec'=>'auteur_infos',
+			'id_auteur'=>$id_auteur),
+		'data'=>'')
+	);
 
 	creer_colonne_droite();
-	echo pipeline('affiche_droite',array('args'=>array('exec'=>'auteur_infos','$id_auteur'=>$id_auteur),'data'=>''));
+	echo pipeline('affiche_droite',
+		array('args' => array(
+			'exec'=>'auteur_infos',
+			'id_auteur'=>$id_auteur),
+		'data'=>'')
+	);
 	debut_droite();
 
 //
@@ -377,7 +392,12 @@ echo "<INPUT NAME='redirect_ok' VALUE='oui' TYPE='hidden'>\n";
 
 echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondo' NAME='Valider' VALUE='"._T('bouton_enregistrer')."'></DIV>";
 
-echo pipeline('affiche_milieu',array('args'=>array('exec'=>'auteur_infos','$id_auteur'=>$id_auteur),'data'=>''));
+echo pipeline('affiche_milieu',
+	array('args' => array(
+		'exec'=>'auteur_infos',
+		'id_auteur'=>$id_auteur),
+	'data'=>'')
+);
 
 echo "</div>";
 
