@@ -2031,17 +2031,17 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = tr
 			$retour .= "<a class='cellule-h' $javascript$lien>"
 			. "\n<table cellpadding='0' valign='middle'>"
 			. "\n<tr><td>"
-			. "<div class='cell-i'>" ;
+			. "<div class='cell-i'><a$href>" ;
 			if ($fonction){
 				$retour .= http_img_pack($fonction, "", http_style_background($fond, "center center no-repeat"));
 			}
 			else {
 				$retour .= http_img_pack($fond, "", "");
 			}
-			$retour .= "</div></td>"
-			. "\n<td class='cellule-h-lien'>"
+			$retour .= "</a></div></td>"
+			. "\n<td class='cellule-h-lien'><a$href class='cellule-h'>"
 			. $texte
-			. "</td></tr></table></a>\n";
+			. "</a></td></tr></table></a>\n";
 		}
 		else {
 			$retour .= "<a class='cellule-h-texte' $javascript$lien><div>$texte</div></a>\n";
