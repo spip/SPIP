@@ -102,9 +102,20 @@ function aide($aide='') {
 // http://doc.spip.org/@version_svn_courante
 function version_svn_courante($dir) {
 	if (!$dir) $dir = '.';
-	if (!lire_fichier($dir . '/.svn/entries', $c)) return 0;
-	preg_match_all(',committed-rev="([0-9]+)",', $c, $r1, PREG_PATTERN_ORDER);
-	return max($r1[1]);
+
+	// version installee par SVN
+	if (lire_fichier($dir . '/.svn/entries', $c)
+	AND preg_match_all(
+	',committed-rev="([0-9]+)",', $c, $r1, PREG_PATTERN_ORDER))
+		return max($r1[1]);
+
+	// version installee par paquet ZIP de SPIP-Zone
+	if (lire_fichier($dir.'/svn.revision', $c)
+	AND preg_match(',Revision: (\d+),', $c, $d))
+		return intval($d[1]);
+
+	// Bug ou paquet fait main
+	return 0;
 }
 
 // http://doc.spip.org/@info_copyright
