@@ -1,13 +1,10 @@
 var memo_obj = new Array();
 var url_chargee = new Array();
-var xmlhttp = new Array();
-var image_search = new Array();
-
 
 function findObj_test_forcer(n, forcer) { 
 	var p,i,x;
 
-	// Voir si on n'a pas deja memoriser cet element
+	// Voir si on n'a pas deja memorise cet element
 	if (memo_obj[n] && !forcer) {
 		return memo_obj[n];
 	}
@@ -123,25 +120,27 @@ function aff_selection (type, rac, id) {
 
 // selecteur de rubrique et affichage de son titre dans le bandeau
 
-function aff_selection_titre(id_rubrique, titre)
+function aff_selection_titre(titre, id_rubrique, racine, url, col, sens)
 {
-	findObj('id_parent').value=id_rubrique;
 	findObj('titreparent').value=titre;
+	findObj('id_parent').value=id_rubrique;
 	findObj('selection_rubrique').style.display='none';
+	return aff_selection_provisoire(id_rubrique, racine, url, col, sens);
 }
 
 function aff_selection_provisoire(id_rubrique, racine, url, col, sens)
 {
-  nom = racine + '_col_' + (col+1);
-  if (url)
-    { r = racine + 'principal';
-      c = ((col-1)*150);
-      charger_id_url(url, nom, function() {slide_horizontal(r,c,sens);})}
-  else 
-    { findObj_forcer(nom).innerHTML=''; }
+    charger_id_url(url.href,
+		   racine + '_col_' + (col+1),
+		   function() {
+		     slide_horizontal(racine + 'principal', ((col-1)*150), sens);
   // afficher le descriptif de la rubrique dans la div du dessous?
   // si trop lent, commenter la ligne ci-dessous
-  aff_selection('rubrique',racine,id_rubrique);
+		     aff_selection('rubrique',racine,id_rubrique);
+		   }
+		   );
+  // empecher le chargement non Ajax
+  return false;
 }
 
 //
@@ -192,19 +191,23 @@ function ajahReady(xhr, f) {
 
 function AjaxSqueeze(trig, id, f)
 {
-	var i, s, g;
-	var u = '';
-
 	// position du demandeur dans le DOM (le donner direct serait mieux)
-	var noeud = document.getElementById(id);
-	if (!noeud) return true;
+	id = document.getElementById(id);
+	if (!id) {return true;}
 
 	// animation immediate pour faire patienter (vivement jquery !)
 	if (typeof ajax_image_searching != 'undefined') {
 		g = document.createElement('div');
 		g.innerHTML = ajax_image_searching;
-		noeud.insertBefore(g, noeud.firstChild);
+		id.insertBefore(g, id.firstChild);
 	}
+	return  AjaxSqueezeNode(trig, id, f);
+}
+
+function AjaxSqueezeNode(trig, noeud, f)
+{
+	var i, s, g;
+	var u = '';
 
 	// retour std si pas precise: affecter ce noeud avec ce retour
 	if (!f) f = function(r) { noeud.innerHTML = r;}
@@ -234,46 +237,37 @@ function AjaxSqueeze(trig, id, f)
 
 function charger_id_url(myUrl, myField, jjscript) 
 {
-	var Field = findObj_forcer(myField); // selects the given element
+	var Field = findObj_forcer(myField);
 	if (!Field) return;
 
-	if (xmlhttp[myField]) xmlhttp[myField].abort();
-
-	if (url_chargee['mem_'+myUrl]) {
-		Field.innerHTML = url_chargee['mem_'+myUrl];
-		Field.style.visibility = "visible";
-		Field.style.display = "block";
-		//		if(jjscript) eval(jjscript);
-		if(jjscript) jjscript();
-	} else {
-		image_search[myField] = findObj_forcer('img_'+myField);
-		if (image_search[myField]) image_search[myField].style.visibility = "visible";
-
-
-		if (!(xmlhttp[myField] = createXmlHttp())) return false;
-		xmlhttp[myField].open("GET", myUrl + '&var_ajaxcharset=utf-8',  true);
-		// traiter la reponse du serveur
-		xmlhttp[myField].onreadystatechange = function() {
-			if (xmlhttp[myField].readyState == 4) { 
-				// si elle est non vide, l'afficher
-				if (xmlhttp[myField].responseText != '') {
-					Field.innerHTML = xmlhttp[myField].responseText;
-					url_chargee['mem_'+myUrl] = Field.innerHTML;
-				
-					Field.style.visibility = "visible";
-					Field.style.display = "block";
-					if (image_search[myField]) {
-						image_search[myField].style.visibility = "hidden";
-					}
-					//	if(jjscript) eval(jjscript);
-					if(jjscript) jjscript();
-				} else {
-					charger_id_url(myUrl, myField, jjscript);
-				}
+	if (!myUrl) 
+		retour_id_url('', Field, jjscript);
+	else {
+	  var r = url_chargee[myUrl];
+	// disponible en cache ?
+	  if (r) {
+		retour_id_url(r, Field, jjscript);
+	  } else {
+		var img = findObj_forcer('img_' + myField);
+		if (img) img.style.visibility = "visible";
+		AjaxSqueezeNode(myUrl,
+			'',
+			function (r) {
+				if (img) img.style.visibility = "hidden";
+				url_chargee[myUrl] = r;
+				retour_id_url(r, Field, jjscript);
 			}
-		}
-		xmlhttp[myField].send(null); 
+		     )
+		  }
 	}
+}
+
+function retour_id_url(r, Field, jjscript)
+{
+	Field.innerHTML = r;
+	Field.style.visibility = "visible";
+	Field.style.display = "block";
+	if (jjscript) jjscript();
 }
 
 // ne sert que pour selecteur_rubrique_ajax() dans inc/chercher_rubrique.php
