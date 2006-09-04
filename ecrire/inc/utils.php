@@ -242,18 +242,8 @@ function spip_abstract_quote($arg_sql) {
 
 // Renvoie le _GET ou le _POST emis par l'utilisateur
 //
-// S'il y a un second argument, on SET la valeur dans $_GET -- qui est
-// la premiere a etre retournee par _request()
 // http://doc.spip.org/@_request
 function _request($var) {
-	// set ?
-	if (func_num_args()>1) {
-		unset($_GET[$var]); // au cas ou l'on fait _request('truc', NULL);
-		unset($_POST[$var]);
-		if (func_get_arg(1) !== NULL)
-			$_GET[$var] = func_get_arg(1);
-	}
-
 	if (isset($_GET[$var])) $a = $_GET[$var];
 	elseif (isset($_POST[$var])) $a = $_POST[$var];
 	else return NULL;
@@ -274,7 +264,15 @@ function _request($var) {
 
 	return $a;
 }
-
+// Methode set de la fonction _request()
+//
+// http://doc.spip.org/@set_request
+function set_request($var, $val = NULL) {
+	unset($_GET[$var]); // au cas ou l'on fait set_request('truc', NULL);
+	unset($_POST[$var]);
+	if ($val !== NULL)
+		$_GET[$var] = $val;
+}
 
 //
 // Prend une URL et lui ajoute/retire un parametre.

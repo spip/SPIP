@@ -197,7 +197,7 @@ function appliquer_modifs_config() {
 	}
 
 	if ($langues_auth) {
-		_request('langues_multilingue', join($langues_auth, ","));
+		set_request('langues_multilingue', join($langues_auth, ","));
 	}
 
 	if (isset($email_webmaster))
