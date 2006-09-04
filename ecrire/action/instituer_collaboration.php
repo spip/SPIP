@@ -20,14 +20,13 @@ function action_instituer_collaboration_dist() {
 	$var_f();
 
 	$arg = _request('arg');
-	$id_auteur = _request('id_auteur');
 
-	if ($arg AND ($id_auteur = intval($id_auteur))) {
+	if ($arg) {
 		include_spip('inc/drapeau_edition');
 		if ($arg == 'tous')
-			debloquer_tous($id_auteur);
+			debloquer_tous($GLOBALS['auteur_session']['id_auteur']);
 		else
-			debloquer_edition($id_auteur, $arg, 'article');
+			debloquer_edition($GLOBALS['auteur_session']['id_auteur'], $arg, 'article');
 	}
 }
 ?>

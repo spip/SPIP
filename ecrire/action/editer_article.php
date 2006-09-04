@@ -40,8 +40,6 @@ function action_editer_article_dist() {
 function insert_article($id_rubrique) {
 
 	include_spip('base/abstract_sql');
-	$id_auteur = _request('id_auteur');
-
 
 	// Si id_rubrique vaut 0 ou n'est pas definie, creer l'article
 	// dans la premiere rubrique racine
@@ -74,7 +72,7 @@ function insert_article($id_rubrique) {
 		"($id_rubrique, 'prepa', NOW(), '"
 			. substr($GLOBALS['meta']['forums_publics'],0,3)
 			. "', '$lang', '$choisie')");
-	spip_abstract_insert('spip_auteurs_articles', "(id_auteur,id_article)", "('$id_auteur','$id_article')");
+	spip_abstract_insert('spip_auteurs_articles', "(id_auteur,id_article)", "('" . $GLOBALS['auteur_session']['id_auteur'] . "','$id_article')");
 	return $id_article;
 }
 
@@ -98,8 +96,6 @@ function articles_set($id_article, $new, $lier_trad) {
 // http://doc.spip.org/@revisions_articles
 function revisions_articles ($id_article, $new) {
 	global $flag_revisions;
-
-	$id_auteur = _request('id_auteur');
 
 	// unifier $texte en cas de texte trop long
 	trop_longs_articles();
@@ -156,7 +152,7 @@ function revisions_articles ($id_article, $new) {
 
 	// Stockage des versions
 	if (($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions) {
-		ajouter_version($id_article, $champs, '', $id_auteur);
+		ajouter_version($id_article, $champs, '', $GLOBALS['auteur_session']['id_auteur']);
 	}
 
 	// marquer le fait que l'article est travaille par toto a telle date
@@ -164,7 +160,7 @@ function revisions_articles ($id_article, $new) {
 	if ($GLOBALS['meta']['articles_modif'] != 'non') {
 		include_spip('inc/drapeau_edition');
 		if ($id_article)
-			signale_edition ($id_article, $id_auteur, 'article');
+			signale_edition ($id_article, $GLOBALS['auteur_session']['id_auteur'], 'article');
 	}
 
 
