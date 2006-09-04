@@ -54,12 +54,9 @@ function mini_afficher_rubrique ($id_rubrique, $rac="", $list=array(), $col = 1,
 				$url = "\nhref='$rec&amp;id=$id'" ;
 			} else {  $url = $acces = ''; }
 
-			$ret .= "<div class='"
-			. (($id == $next) ? "highlight" : "pashighlight")
-			. "'><a"
+			$ret .= "<a"
 			. $url
-# "this" sur une balise A retourne son attribut href, pas le noeud A !
-			. "\nonClick=\"changerhighlight(this.parentNode);"
+			. "\nonClick=\"changerhighlight(this);"
 			. "return aff_selection_provisoire($id,$args);"
 # ce lien provoque la selection (directe) de la rubrique cliquee
 # et l'affichage de son titre dans le bandeau
@@ -67,7 +64,7 @@ function mini_afficher_rubrique ($id_rubrique, $rac="", $list=array(), $col = 1,
 			. "return aff_selection_titre(this."
 			. $acces
 			. "firstChild.firstChild.nodeValue,$id,$args);"
-			. "\">$titre</a></div>";
+			. "\" class='". (($id == $next) ? "highlight" : "pashighlight")."'>$titre</a>";
 		}
 	}
 
