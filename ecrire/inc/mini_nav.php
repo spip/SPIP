@@ -54,7 +54,9 @@ function mini_afficher_rubrique ($id_rubrique, $rac="", $list=array(), $col = 1,
 				$url = "\nhref='$rec&amp;id=$id'" ;
 			} else {  $url = $acces = ''; }
 
-			$ret .= "<a"
+			$ret .= "<a class='"
+			. (($id == $next) ? "highlight" : "pashighlight")
+			. "'"
 			. $url
 			. "\nonClick=\"changerhighlight(this);"
 			. "return aff_selection_provisoire($id,$args);"
@@ -64,29 +66,24 @@ function mini_afficher_rubrique ($id_rubrique, $rac="", $list=array(), $col = 1,
 			. "return aff_selection_titre(this."
 			. $acces
 			. "firstChild.firstChild.nodeValue,$id,$args);"
-			. "\" class='". (($id == $next) ? "highlight" : "pashighlight")."'>$titre</a>";
+			. "\">$titre</a>";
 		}
 	}
 
 	$nom_col = $rac . "_col_".($col+1);
 	$left = ($col*150);
 
-	return "<div id='"
-	. $rac
-	. "_col_"
-	. $col
-	."' class='arial1'>" 
-	. http_img_pack("searching.gif", "*", "style='visibility: hidden; position: absolute; $spip_lang_left: "
-		.($left-30)
-		."px; top: 2px; z-index: 2;' id='img_$nom_col'")
+	return http_img_pack("searching.gif", "*", "style='visibility: hidden; position: absolute; $spip_lang_left: "
+	. ($left-30)
+	. "px; top: 2px; z-index: 2;' id='img_$nom_col'")
 	. "<div style='width: 150px; height: 100%; overflow: auto; position: absolute; top: 0px; $spip_lang_left: "
 	.($left-150)
 	."px;'>"
 	. $ret
-	. "\n</div>"
+	. "\n</div>\n<div id='$nom_col'>"
 	. ($next
 	   ? mini_afficher_rubrique($id_rubrique, $rac, $list, $col+1, $exclu)
-	   : "\n<div id='$nom_col'></div>")
+	   : "")
 	. "\n</div>";
 }
 
@@ -109,7 +106,11 @@ function mini_afficher_hierarchie ($id_rubrique, $rac="", $rub_exclus=0) {
 	
 	$liste = "0,".$liste;
 		
-	return mini_afficher_rubrique($id_rubrique, $rac, explode(',',$liste), 1, $rub_exclus);
+	return  "<div id='"
+	. $rac
+	. "_col_1' class='arial1'>" 
+	. mini_afficher_rubrique($id_rubrique, $rac, explode(',',$liste), 1, $rub_exclus)
+	. "</div>";
 }
 
 // http://doc.spip.org/@mini_nav_principal

@@ -218,7 +218,7 @@ function lancer_recherche(champ, cible) {
 function lancer_recherche_rub(champ, rac, exclus) {
 	valeur = findObj(champ).value;
 	if (valeur.length > 0) {
-		charger_id_url('./?exec=rechercher&var_ajax=1&type='+valeur+'&exclus='+exclus+'&rac='+rac, rac+'_col_1');
+		charger_id_url('./?exec=rechercher&type='+valeur+'&exclus='+exclus+'&rac='+rac, rac+'_col_1');
 	}
 }
 
