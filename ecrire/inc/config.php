@@ -273,8 +273,8 @@ function appliquer_modifs_config() {
 	}
 
 	foreach($liste_meta as $i)
-		if (isset($_POST[$i]))
-			ecrire_meta($i, $_POST[$i]);
+		if (!(_request($i)==NULL))
+			ecrire_meta($i, _request($i));
 
 	// langue_site : la globale est mangee par inc_version
 	if ($lang = $GLOBALS['changer_langue_site']) {
