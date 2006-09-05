@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/agenda'); // inclut inc/layer, inc/texte, inc/filtre
 include_spip('inc/boutons');
+include_spip('inc/actions');
 
 // Choix dynamique de la couleur
 
@@ -708,7 +709,6 @@ function puce_statut_breve($id, $statut, $type, $droit) {
 // http://doc.spip.org/@afficher_script_statut
 function afficher_script_statut($id, $type, $n, $img, $statut, $title, $act)
 {
-  include_spip('inc/actions');
   return http_href_img("javascript:selec_statut('$id', '$type', -1, '" .
 		      http_wrapper($img) .
 		      "', '" .

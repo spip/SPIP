@@ -12,6 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/actions');
+
 // http://doc.spip.org/@afficher_sites
 function afficher_sites($titre_table, $requete)
 {

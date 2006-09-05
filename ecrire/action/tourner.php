@@ -14,13 +14,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/charsets');	# pour le nom de fichier
 include_spip('base/abstract_sql');
+include_spip('inc/actions');
 
 // http://doc.spip.org/@action_tourner_dist
 function action_tourner_dist() {
 	
 	global $convert_command;
 
-	include_spip('inc/actions');
 	$var_f = charger_fonction('controler_action_auteur', 'inc');
 	$var_f();
 

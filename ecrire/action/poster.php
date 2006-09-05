@@ -12,12 +12,12 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/actions');
 
 // Modifier le reglage des forums publics de l'article x
 // http://doc.spip.org/@action_poster_dist
 function action_poster_dist()
 {
-	include_spip('inc/actions');
 	$var_f = charger_fonction('controler_action_auteur', 'inc');
 	$var_f();
 

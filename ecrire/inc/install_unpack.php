@@ -10,6 +10,9 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/actions');
+
 // http://doc.spip.org/@inc_install_unpack
 function inc_install_unpack()
 {

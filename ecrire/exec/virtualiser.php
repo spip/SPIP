@@ -11,6 +11,7 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/actions');
 
 // http://doc.spip.org/@formulaire_virtualiser
 function formulaire_virtualiser($id_article, $virtuel, $script, $args)
@@ -54,8 +55,6 @@ function exec_virtualiser_dist()
 		include_spip('inc/minipres');
 		minipres(_T('info_acces_interdit'));
 	}
-
-	include_spip('inc/actions');
 
 	return formulaire_virtualiser($id_article, 'ajax', $script, "id_article=$id_article");
 }

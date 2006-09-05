@@ -45,9 +45,7 @@ function formulaire_discuter($query, $total, $debut, $total_afficher, $script, $
 	. "<br />"
 	. $nav;
 
-	return (_request('var_ajaxcharset'))
-	? $res
-	: "<div id='forum'>$res</div>";
+	return $res;
 }
 
 // http://doc.spip.org/@exec_discuter_dist

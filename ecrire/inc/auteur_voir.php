@@ -11,6 +11,9 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
+include_spip('inc/actions');
+
 // http://doc.spip.org/@cadre_auteur_infos
 function cadre_auteur_infos($id_auteur, $auteur)
 {

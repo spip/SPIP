@@ -13,11 +13,10 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
+include_spip('inc/actions');
 
 function exec_editer_auteurs_dist()
 {
-	include_spip('inc/actions');
-
 	$id_article = intval(_request('id_article'));
 
 	if ($GLOBALS['connect_toutes_rubriques']) // pour eviter SQL

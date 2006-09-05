@@ -10,6 +10,10 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+include_spip('inc/actions');
+include_spip('inc/cookie');
 
 // http://doc.spip.org/@auth_http
 function auth_http($url) {
@@ -31,8 +35,6 @@ function auth_http($url) {
 // http://doc.spip.org/@action_cookie_dist
 function action_cookie_dist()
 {
-  include_spip('inc/actions');
-  include_spip('inc/cookie');
   global
     $auteur_session,
     $change_session,

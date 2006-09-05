@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/texte');
 include_spip('inc/rubriques');
+include_spip('inc/actions');
 include_spip('inc/forum');
 include_spip('inc/mots');
 include_spip('inc/documents');
