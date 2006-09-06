@@ -107,6 +107,7 @@ ecrire/exec/export_all.php -text
 ecrire/exec/forum.php -text
 ecrire/exec/forum_admin.php -text
 ecrire/exec/forum_envoi.php -text
+ecrire/exec/grouper_mots.php -text
 ecrire/exec/import_all.php -text
 ecrire/exec/informer.php -text
 ecrire/exec/install.php -text
