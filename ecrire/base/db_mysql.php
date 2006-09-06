@@ -194,7 +194,8 @@ function traite_query($query) {
 }
 
 //
-// Connexion a la base
+// Connexion a la base 
+// (db_ok n'a plus besoin d'etre globale, mais on garde pour compatibilite)
 //
 
 // http://doc.spip.org/@spip_connect_db
