@@ -218,7 +218,7 @@ function revisions_articles ($id_article, $new) {
 function trop_longs_articles() {
 	if (is_array($plus = _request('texte_plus'))) {
 		foreach ($plus as $t) {
-			_request('texte', preg_replace(",<!--SPIP-->[\n\r]*,","", $t)
+			set_request('texte', preg_replace(",<!--SPIP-->[\n\r]*,","", $t)
 				. _request('texte'));
 		}
 	}
