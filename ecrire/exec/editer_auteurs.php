@@ -103,16 +103,17 @@ function formulaire_editer_auteurs($cherche_auteur, $ids, $id_article, $flag_edi
  . _T('texte_auteurs')
 . aide("artauteurs");
 
- $res =  debut_cadre_enfonce("auteur-24.gif", true, "", $bouton)
+ $res = '<div>&nbsp;</div>' // pour placer le gif patienteur
+ . debut_cadre_enfonce("auteur-24.gif", true, "", $bouton)
  . $reponse
- .  debut_block_invisible("auteursarticle")
+ .  ($flag_editable === 'ajax' ?
+     debut_block_visible("auteursarticle") :
+     debut_block_invisible("auteursarticle"))
  . $res
  . fin_block()
  . fin_cadre_enfonce(true);
 
- return ($flag_editable === 'ajax') 
- ? $res
- : "\n<div id='editer_auteurs-$id_article'><div>&nbsp;</div>$res</div>";
+ return $res;
 }
 
 // http://doc.spip.org/@rechercher_auteurs_articles
