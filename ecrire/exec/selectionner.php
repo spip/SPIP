@@ -20,10 +20,11 @@ function exec_selectionner_dist()
 	global $id, $exclus, $rac;
 	$id = intval($id);
 	$exclus = intval($exclus);
+	$type = _request('type');
 
 	include_spip('inc/texte');
 	include_spip('inc/mini_nav');
-	return mini_nav ($id, "choix_parent", "this.form.id_rubrique.value=::sel::;this.form.titreparent.value='::sel2::';findObj('selection_rubrique').style.display='none';", $exclus, $rac);
+	return mini_nav ($id, "choix_parent", "this.form.id_rubrique.value=::sel::;this.form.titreparent.value='::sel2::';findObj('selection_rubrique').style.display='none';", $exclus, $rac, $type!='breve');
 
 }
 ?>

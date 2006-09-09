@@ -714,6 +714,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 			} else {
 				$rec->externe = $id;
 				$descr['id_mere'] = $id;
+				spip_log(" $id " . $boucle->param);
 				$boucles[$id]->return =
 						calculer_liste(array($rec),
 							 $descr,
