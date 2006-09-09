@@ -39,7 +39,7 @@ function extraire_article($id_p) {
 // http://doc.spip.org/@gen_liste_rubriques
 function gen_liste_rubriques() {
 	// ici, un petit fichier cache ne fait pas de mal
-	if (lire_fichier(_DIR_SESSIONS.'cache-menu-rubriques.txt', $cache)
+	if (lire_fichier(_DIR_TMP.'cache-menu-rubriques.txt', $cache)
 	AND list($date,$GLOBALS['db_art_cache']) = @unserialize($cache)
 	AND $date == $GLOBALS['meta']["date_calcul_rubriques"])
 		return; // c'etait en cache :-)
@@ -63,7 +63,7 @@ function gen_liste_rubriques() {
 	}
 
 	// ecrire dans le cache
-	ecrire_fichier(_DIR_SESSIONS.'cache-menu-rubriques.txt',
+	ecrire_fichier(_DIR_TMP.'cache-menu-rubriques.txt',
 		serialize(array(
 			$GLOBALS['meta']["date_calcul_rubriques"],
 			$GLOBALS['db_art_cache']
