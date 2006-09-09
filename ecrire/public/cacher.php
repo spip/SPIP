@@ -231,7 +231,8 @@ function restaurer_meta_donnees ($contenu) {
 			}
 		}
 		$page['texte'] = substr($contenu, strlen($match[0]));
-	} else	$page['texte'] = $contenu;
+	} else
+		$page['texte'] = $contenu;
 
 	return $page;
 }
@@ -254,12 +255,12 @@ function nettoyer_petit_cache($prefix, $duree = 300) {
 
 // Interface du gestionnaire de cache
 // Si son 3e argument est non vide, elle passe la main a creer_cache
-// Sinon, elle recoit un contexte (ou le construit a partir de REQUEST_URI) 
+// Sinon, elle recoit un contexte (ou le construit a partir de REQUEST_URI)
 // et affecte les 4 autres parametres recus par reference:
 // - use_cache qui est
-//	< 0 s'il faut calculer la page sans la mettre en cache
-// 	= 0 si on peut utiliser un cache existant
-//	> 0 s'il faut calculer la page et la mette en cache use_cache secondes
+//     < 0 s'il faut calculer la page sans la mettre en cache
+//     = 0 si on peut utiliser un cache existant
+//     > 0 s'il faut calculer la page et la mette en cache use_cache secondes
 // - chemin_cache qui est le chemin d'acces au fichier ou vide si pas cachable
 // - page qui est le tableau decrivant la page, si le cache la contenait
 // - lastmodified qui vaut la date de derniere modif du fichier.
@@ -304,9 +305,9 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 
 	// cas sans jamais de cache pour raison interne
 	if (isset($GLOBALS['var_mode']) &&
-	    (isset($_COOKIE['spip_session'])
-	    || isset($_COOKIE['spip_admin'])
-		 || @file_exists(_ACCESS_FILE_NAME))) {
+		(isset($_COOKIE['spip_session'])
+		|| isset($_COOKIE['spip_admin'])
+		|| @file_exists(_ACCESS_FILE_NAME))) {
 			supprimer_fichier(_DIR_CACHE . $chemin_cache);
 	}
 
