@@ -754,6 +754,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 		if (!function_exists($f)) $f = $f.'_dist';
 		// laquelle a une definition par defaut
 		if (!function_exists($f)) $f = 'boucle_DEFAUT';
+		if (!function_exists($f)) $f = 'boucle_DEFAUT_dist';
 		$boucles[$id]->return = 
 			"function BOUCLE" . ereg_replace("-","_",$id) . $nom .
 			'(&$Cache, &$Pile, &$doublons, &$Numrows, $SP) {' .
