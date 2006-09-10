@@ -184,6 +184,7 @@ $spip_pipeline = array(
 	'insert_head' => '',
 	'nettoyer_raccourcis_typo' => '',
 	'pre_indexation' => '',
+	'pre_enregistre_contenu' => '',
 	'pre_propre' => '|extraire_multi',
 	'pre_syndication' => '',
 	'pre_typo' => '|extraire_multi',

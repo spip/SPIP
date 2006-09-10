@@ -108,7 +108,7 @@ function revisions_articles ($id_article, $new) {
 	'surtitre', 'titre', 'soustitre', 'descriptif',
 	'nom_site', 'url_site', 'chapo', 'texte', 'ps') as $champ) {
 		if (($val = _request($champ)) !== NULL) {
-			$champs[$champ] = corriger_caracteres($val);
+			$champs[$champ] = pipeline('pre_enregistre_contenu',array('args'=>array('table'=>'spip_articles','id_objet'=>$id_article),'data'=>corriger_caracteres($val)));
 		}
 	}
 
