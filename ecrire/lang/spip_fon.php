@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_recalculer' => 'mi l&#603; v&#596; ak&#596;nta wekpa t&#596;n blo',
 'alerte_maj_impossible' => 'Jijlado&#769; MySQL t&#596;n soyi&#769; &#598;i&#768;d&egrave; &#598;&eacute;vom&#603; glo&#769;, e siwu nyi&#769; &#598;&#596; ac&#603; e na  yi&#769; do &#598;i&#596; titom&#603; &#596; w&#603; z&#596;n. Mi t&#603;nkp&#596; bo&#769; so al&#596; xw&eacute;t&#596;&#769; mi t&#596;n',
 'analyse_xml' => '',
+'antispam_champ_vide' => '<NEW>Veuillez laisser ce champ vide&nbsp;:',
 'avis_archive_incorrect' => 'gb&egrave;takin xo&#769;xo&#769; &eacute; l&#596; &eacute; nyi gb&egrave;takin supipu t&#596;n a',
 'avis_archive_invalide' => 'gb&egrave;tak&#603;n xoxo &#596; f&#603;wu a',
 'avis_attention' => 'Mi c&#596; mi &#598;&eacute;',
