@@ -12,6 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/lang');
+
 //
 // Presentation des pages d'installation et d'erreurs
 //
@@ -20,7 +22,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function install_debut_html($titre = 'AUTO') {
 	include_spip('inc/filtres');
 	include_spip('inc/headers');
-	include_spip('inc/lang');
 	utiliser_langue_visiteur();
 
 	http_no_cache();
