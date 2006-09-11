@@ -151,14 +151,15 @@ function controle_un_forum($row) {
 	$controle .= "<table width='100%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td width='100%' valign='top'><table width='100%' cellpadding='5' cellspacing='0'>\n<tr><td class='serif'><span class='arial2'>" .
 	  date_interface($forum_date_heure) .
 	  "</span>";
-	if ($forum_auteur) {
-		if ($forum_email_auteur)
-			$forum_auteur="<a href='mailto:"
+	if ($forum_email_auteur) {
+		if (email_valide($forum_email_auteur))
+			$forum_email_auteur = "<a href='mailto:"
 			.htmlspecialchars($forum_email_auteur)
-			."?subject=".rawurlencode($forum_titre)."'>".$forum_auteur
-			."</A>";
-		$controle .= safehtml("<span class='arial2'> / <b>$forum_auteur</b></span>");
+			."?subject=".rawurlencode($forum_titre)."'>".$forum_email_auteur
+			."</a>";
+		$forum_auteur .= " &mdash; $forum_email_auteur";
 	}
+	$controle .= safehtml("<span class='arial2'> / <b>$forum_auteur</b></span>");
 
 	$controle .= boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur, "$type=$valeur", $forum_ip);
 
