@@ -635,7 +635,7 @@ function calculer_url ($lien, $texte='', $pour='url') {
 
 	if ($pour == 'titre') return $texte;
 
-	$lien = entites_html(vider_url($lien));
+	$lien = vider_url($lien);
 
 	// petites corrections d'URL
 	if (preg_match(",^www\.[^@]+$,S",$lien))
