@@ -107,18 +107,8 @@ function revisions_articles ($id_article, $new) {
 	foreach (array(
 	'surtitre', 'titre', 'soustitre', 'descriptif',
 	'nom_site', 'url_site', 'chapo', 'texte', 'ps') as $champ) {
-		if (($val = _request($champ)) !== NULL) {
-			$champs[$champ] = pipeline('pre_enregistre_contenu',
-				array(
-					'args' => array(
-						'table' => 'spip_articles',
-						'id_objet' => $id_article,
-						'champ' => $champ
-					),
-					'data' => corriger_caracteres($val)
-				)
-			);
-		}
+		if (($val = _request($champ)) !== NULL)
+			$champs[$champ] = corriger_caracteres($val);
 	}
 
 	// Verifier que la rubrique demandee existe et est differente
@@ -134,6 +124,19 @@ function revisions_articles ($id_article, $new) {
 		include_spip('inc/extra');
 		$champs['extra'] = extra_recup_saisie("articles", _request('id_secteur'));
 	}
+
+	// Envoyer aux plugins
+	$champs = pipeline('pre_enregistre_contenu',
+		array(
+			'args' => array(
+				'table' => 'spip_articles',
+				'id_objet' => $id_article,
+				'champ' => $champ
+			),
+			'data' => $champs
+		)
+	);
+
 
 	// Stockage des versions : creer une premier version si non-existante
 	if (($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions) {
