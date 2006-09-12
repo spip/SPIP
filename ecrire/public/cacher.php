@@ -164,6 +164,12 @@ function cache_valide_autodetermine($chemin_cache, $page, $date) {
 
 	if (!$page) return 1;
 
+	// Cache invalide par la meta 'derniere_modif'
+	if ($GLOBALS['derniere_modif_invalide']
+	AND $date < $GLOBALS['meta']['derniere_modif'])
+		return 1;
+
+	// Duree du cache precisee par #CACHE{x}
 	if (isset($page['entetes']['X-Spip-Cache'])) {
 		$duree = intval($page['entetes']['X-Spip-Cache']);
 		if ($duree == 0)  #CACHE{0}
