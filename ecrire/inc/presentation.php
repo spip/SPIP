@@ -478,53 +478,64 @@ function afficher_liste($largeurs, $table, $styles = '') {
 }
 
 // http://doc.spip.org/@afficher_tranches_requete
-function afficher_tranches_requete($num_rows, $colspan, $tmp_var, $javascript=false, $nb_aff = 10) {
+function afficher_tranches_requete($num_rows, $colspan, $tvar, $url='', $nb_aff = 10) {
 	static $ancre = 0;
 	global $spip_lang_right, $spip_display;
 
-	$tmp_var = 't_'. $tmp_var;
+	$tmp_var = 't_'. $tvar;
 	$deb_aff = intval(_request($tmp_var));
 	$ancre++;
 	$self = self();
 
-	$texte = ($spip_display == 4) ? '' :  "<tr style='background-color: #dddddd;'><td class=\"arial1\" style='border-bottom: 1px solid #444444;' colspan=\"".($colspan - 1)."\">";
+	$texte = ($spip_display == 4) ? '' :  "\n<tr style='background-color: #dddddd;'><td class=\"arial1\" style='border-bottom: 1px solid #444444;' colspan=\"".($colspan - 1)."\">";
 	$texte .= "\n<a name='a$ancre'></a>";
+	$on ='';
 
 	for ($i = 0; $i < $num_rows; $i += $nb_aff){
-			$deb = $i + 1;
-			$fin = $i + $nb_aff;
-			if ($fin > $num_rows) $fin = $num_rows;
-			if ($deb > 1) $texte .= " | ";
-			if ($deb_aff + 1 >= $deb AND $deb_aff + 1 <= $fin) {
-				$texte .= "<B>$deb</B>";
+		$deb = $i + 1;
+		$fin = $i + $nb_aff;
+		if ($fin > $num_rows) $fin = $num_rows;
+		if ($deb > 1) $texte .= " |\n";
+		if ($deb_aff + 1 >= $deb AND $deb_aff + 1 <= $fin) {
+			$texte .= "<B>$deb</B>";
+		}
+		else {
+			$script = parametre_url($self, $tmp_var, $deb-1);
+			if ($url) {
+				$on = "\nonClick=\"return charger_id_url('"
+				. $url
+				. "&"
+				. $tmp_var
+				. '='
+				. $deb
+				. "','"
+				. $tvar
+				. '\');"';
 			}
-			else {
-				$url = parametre_url($self, $tmp_var, $deb-1);
-				if ($javascript) {
-					$jj = str_replace("::deb::", "&amp;$tmp_var=$deb", $javascript);
-					$texte .= "<a onClick=\"$jj; return false;\" href=\"$url#a$ancre\">$deb</a>";
-				}
-				else $texte .= "<a href=\"$url#a$ancre\">$deb</a>";
-			}
+			$texte .= "<a href=\"$script#a$ancre\"$on>$deb</a>";
+		}
 	}
 	
 	if ($spip_display != 4) {
-			$texte .= "</td>\n";
-			$texte .= "<td class=\"arial2\" style='border-bottom: 1px solid #444444; text-align: $spip_lang_right;' colspan=\"1\" align=\"right\" valign=\"top\">";
+			$texte .= "</td>\n<td class=\"arial2\" style='border-bottom: 1px solid #444444; text-align: $spip_lang_right;' colspan=\"1\" align=\"right\" valign=\"top\">";
 	} else {
-			$texte .= " | ";
+			$texte .= " |\n";
 	}
 		
 	if ($deb_aff == -1) {
 			//$texte .= "<B>"._T('info_tout_afficher')."</B>";
 	} else {
-			$lien = parametre_url(self(), $tmp_var, -1);
-			if ($javascript) {
-				$jj = str_replace("::deb::", "&amp;$tmp_var=-1", $javascript);
-				$texte .= "<a onClick=\"$jj; return false; \" href=\"$lien#a$ancre\"><img src='". _DIR_IMG_PACK . "plus.gif' title='"._T('lien_tout_afficher')."' /></a>";
+			$script = parametre_url($self, $tmp_var, -1);
+			if ($url) {
+				$on = "\nonClick=\"return charger_id_url('"
+				. $url
+				. "&"
+				. $tmp_var
+				. "=-1','"
+				. $tvar
+				. '\');"';
 			}
-			else
-				$texte .= "<A HREF=\"$lien#a$ancre\"><img src='". _DIR_IMG_PACK . "plus.gif' title='"._T('lien_tout_afficher')."' /></A>";
+			$texte .= "<a href=\"$script#a$ancre\"$on><img src='". _DIR_IMG_PACK . "plus.gif' title='"._T('lien_tout_afficher')."' /></a>";
 	}
 
 	if ($spip_display != 4) $texte .= "</td></tr>\n";
@@ -784,7 +795,6 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	$hash = "0x".substr(md5($connect_id_auteur.$jjscript), 0, 16);
 
 	$tmp_var = substr($hash, 2, 6);
-	$javascript = "charger_id_url('" . generer_url_ecrire('memoriser',"id_ajax_fonc=::id_ajax_fonc::::deb::", true) . "','$tmp_var')";
 
 	if (!isset($requete['GROUP BY'])) $requete['GROUP BY'] = '';
 	$tous_id = array();
@@ -794,12 +804,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 	$nb_aff = 1.5 * _TRANCHES;
 	$deb_aff = intval(_request('t_' .$tmp_var));
-	$tranches = '';
-	if ($cpt > $nb_aff) {
-		$nb_aff = (_TRANCHES); 
-		$tranches = afficher_tranches_requete($cpt, $afficher_auteurs ? 4 + $ajout_col : 3 + $ajout_col, $tmp_var, $javascript, $nb_aff);
 
-	}
 
 	$requete['FROM'] = preg_replace("/(spip_articles AS \w*)/", "\\1 LEFT JOIN spip_petitions AS petitions USING (id_article)", $requete['FROM']);
 
@@ -812,6 +817,12 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			include_spip('base/abstract_sql');
 			$id_ajax_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, " . spip_abstract_quote($jjscript) . ", $hash, NOW())");
 	}
+
+	if ($cpt > $nb_aff) {
+		$nb_aff = (_TRANCHES); 
+		$tranches = afficher_tranches_requete($cpt, $afficher_auteurs ? 4 + $ajout_col : 3 + $ajout_col, $tmp_var, generer_url_ecrire('memoriser',"id_ajax_fonc=$id_ajax_fonc", true), $nb_aff);
+
+	} else 	$tranches = '';
 
 	if (!$deb_aff) {
 
@@ -836,7 +847,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 		
 
 	//echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
-	echo afficher_liste_debut_tableau(), str_replace("::id_ajax_fonc::", $id_ajax_fonc, $tranches);
+	echo afficher_liste_debut_tableau(), $tranches;
 
 	$result = spip_query("SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
 
@@ -1016,8 +1027,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 	$jjscript = (serialize($jjscript));
 	$hash = "0x".substr(md5($connect_id_auteur.$jjscript), 0, 16);
 	$tmp_var = substr($hash, 2, 6);	
-	$javascript = "charger_id_url('" . generer_url_ecrire('memoriser', 'id_ajax_fonc=::id_ajax_fonc::::deb::') . "','$tmp_var')";
-
+	
 	$tous_id = array();
 	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
 	if (! ($obligatoire OR ($cpt = $cpt['n']))) return $tous_id ;
@@ -1025,11 +1035,6 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 
 	$nb_aff = 1.5 * _TRANCHES;
 	$deb_aff = intval(_request('t_' .$tmp_var));
-	$tranches = '';
-	if ($cpt > $nb_aff) {
-		$nb_aff = (_TRANCHES); 
-		$tranches = afficher_tranches_requete($cpt,  4, $tmp_var, $javascript, $nb_aff);
-	}
 
 	$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur ORDER BY id_ajax_fonc DESC LIMIT 1");
 	if ($row = spip_fetch_array($res_proch)) {
@@ -1038,6 +1043,11 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 			include_spip('base/abstract_sql');
 			$id_ajax_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, " . spip_abstract_quote($jjscript) . ", $hash, NOW())");
 		}
+
+	if ($cpt > $nb_aff) {
+		$nb_aff = (_TRANCHES); 
+		$tranches = afficher_tranches_requete($cpt,  4, $tmp_var, generer_url_ecrire('memoriser', "id_ajax_fonc=$id_ajax_fonc"), $nb_aff);
+	} else 	$tranches = '';
 
 	if (!$deb_aff) {
 			echo "<div id='$div_trad'>";
@@ -1057,7 +1067,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 	}
 		
 	//echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
-	echo afficher_liste_debut_tableau(), str_replace("::id_ajax_fonc::", "$id_ajax_fonc", $tranches);
+	echo afficher_liste_debut_tableau(),  $tranches;
 
 	$result = spip_query("SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
 

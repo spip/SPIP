@@ -48,13 +48,14 @@ function afficher_groupe_mots($id_groupe) {
 
 	if ($cpt > $nb_aff) {
 		$nb_aff = _TRANCHES; 
-		$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, "charger_id_url('" . generer_url_ecrire('grouper_mots',"id_groupe=$id_groupe::deb::", true) . "','$tmp_var')", $nb_aff);
+		$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, generer_url_ecrire('grouper_mots',"id_groupe=$id_groupe", true), $nb_aff);
 	} else $tranches = '';
 
 
 	$table = array();
-	$result = spip_query($q="SELECT $select FROM $from WHERE $where ORDER BY multi LIMIT " . ($deb_aff !== NULL ? intval($deb_aff) : 0) .", $nb_aff");
-	spip_log(spip_num_rows($result) . $deb_aff);
+	$n = ($deb_aff !== NULL ? intval($deb_aff) : 0);
+	$result = spip_query($q="SELECT $select FROM $from WHERE $where ORDER BY multi" . (($n < 0) ? '' : " LIMIT $n, $nb_aff"));
+
 	while ($row = spip_fetch_array($result)) {
 		$table[] = afficher_groupe_mots_boucle($row, $occurrences);
 	}
@@ -75,7 +76,7 @@ function afficher_groupe_mots($id_groupe) {
 	  . afficher_liste($largeurs, $table, $styles)
 	  . "</table>"
 	  . "</div>";
-		
+
 	return $res;
 }
 
