@@ -126,9 +126,12 @@ function prepare_donnees_post($donnees, $boundary = '') {
 // datas, une chaine ou un tableau pour faire un POST de donnees
 // boundary, pour forcer l'envoi par cette methode
 // et refuser_gz pour forcer le refus de la compression (cas des serveurs orthographiques)
+// date_verif, un timestamp unix pour arreter la recuperation si la page distante n'a pas ete modifiee depuis une date donnee
+// uri_referer, preciser un referer different 
 // http://doc.spip.org/@recuperer_page
-function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_max = 1048576,
-  $datas='', $boundary='', $refuser_gz = false) {
+function recuperer_page($url, $munge_charset=false, $get_headers=false,
+	$taille_max = 1048576, $datas='', $boundary='', $refuser_gz = false,
+	$date_verif = '', $uri_referer = '') {
   	$gz = false;
 
 	// Accepter les URLs au format feed:// ou qui ont oublie le http://
@@ -146,7 +149,7 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_
 	}
 
 	for ($i=0;$i<10;$i++) {	// dix tentatives maximum en cas d'entetes 301...
-		list($f, $fopen) = init_http($get, $url, $refuser_gz);
+		list($f, $fopen) = init_http($get, $url, $refuser_gz, $uri_referer);
 
 		// si on a utilise fopen() - passer a la suite
 		if ($fopen) {
@@ -177,6 +180,13 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_
 					include_spip('inc/filtres');
 					$location = suivre_lien($url, $r[1]);
 					spip_log("Location: $location");
+				}
+				if ($date_verif AND preg_match(',^Last-Modified: (.*),', $s, $r)) {
+					if(strtotime($date_verif)>=strtotime($r[1])) {
+						//Cas ou la page distante n'a pas bouge depuis
+						//la derniere visite
+						return $status;
+					}
 				}
 				if (preg_match(",^Content-Encoding: .*gzip,i", $s))
 					$gz = true;
@@ -332,7 +342,7 @@ function recuperer_infos_distantes($source, $max=0) {
 // retourne un descripteur de fichier
 //
 // http://doc.spip.org/@init_http
-function init_http($get, $url, $refuse_gz=false) {
+function init_http($get, $url, $refuse_gz=false, $uri_referer = '') {
 	$via_proxy = ''; $proxy_user = ''; $fopen = false;
 	$http_proxy = $GLOBALS['meta']["http_proxy"];
 	if (!eregi("^http://", $http_proxy))
@@ -378,8 +388,10 @@ function init_http($get, $url, $refuse_gz=false) {
 			. base64_encode($proxy_user . ":" . $proxy_pass) . "\r\n");
 		}
 		// Referer = c'est nous !
-		if ($referer = $GLOBALS['meta']["adresse_site"])
-			fputs($f, "Referer: $referer/\r\n");
+		if ($referer = $GLOBALS['meta']["adresse_site"]) {
+			$referer .= '/'.$uri_referer;
+			fputs($f, "Referer: $referer\r\n");
+		}
 
 		// On sait lire du gzip
 		if ($GLOBALS['flag_gz'] AND !$refuse_gz)
