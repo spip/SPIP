@@ -140,7 +140,7 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_
 	else
 		$get = 'GET';
 
-	if (!empty($datas) && is_array($datas)) {
+	if (!empty($datas)) {
 		$get = 'POST';
 		list($content_type, $postdata) = prepare_donnees_post($datas);
 	}
