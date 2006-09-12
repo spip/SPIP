@@ -66,10 +66,12 @@ function insere_invalideur($inval, $fichier) {
 // on en profite pour noter la date de mise a jour dans les metas
 //
 // http://doc.spip.org/@suivre_invalideur
-function suivre_invalideur($cond) {
+function suivre_invalideur($cond, $modif=true) {
 	include_spip('inc/meta');
-	ecrire_meta('derniere_modif', time());
-	ecrire_metas();
+	if ($modif) {
+		ecrire_meta('derniere_modif', time());
+		ecrire_metas();
+	}
 	$result = spip_query("SELECT DISTINCT fichier FROM spip_caches WHERE $cond");
 	$tous = array();
 	while ($row = spip_fetch_array($result))
@@ -187,7 +189,7 @@ function cron_invalideur($t) {
 			$taille_supprimee += $r['taille'];
 		}
 		spip_log ("Quota cache: efface $taille_supprimee octets");
-		suivre_invalideur("id <= $date_limite AND type in ('t', 'x')");
+		suivre_invalideur("id <= $date_limite AND type in ('t', 'x')", false);
 	}
 	return 1;
 }
