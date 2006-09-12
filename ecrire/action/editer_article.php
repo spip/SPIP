@@ -130,8 +130,7 @@ function revisions_articles ($id_article, $new) {
 		array(
 			'args' => array(
 				'table' => 'spip_articles',
-				'id_objet' => $id_article,
-				'champ' => $champ
+				'id_objet' => $id_article
 			),
 			'data' => $champs
 		)
