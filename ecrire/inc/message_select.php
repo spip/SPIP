@@ -18,8 +18,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function afficher_messages($titre, $from, $where, &$messages_vus, $afficher_auteurs = true, $important = false) {
 	global $connect_id_auteur, $couleur_foncee, $spip_lang_rtl, $spip_lang_left;
 
-	$tmp_var = substr(md5($where.$from), 0, 4);
-	$deb_aff = intval(_request('t_' .$tmp_var));
+	$tmp_var = 't_' . substr(md5($where.$from), 0, 4);
 
 	$requete = array('FROM' => "spip_messages AS messages$from", 'WHERE' => $where .(!$messages_vus ? '' : ' AND messages.id_message NOT IN ('.join(',', $messages_vus).')'), 'ORDER BY'=> 'date_heure');
 
@@ -36,7 +35,7 @@ function afficher_messages($titre, $from, $where, &$messages_vus, $afficher_aute
 	if ($important)  #debut_cadre_couleur();
 	 echo "<div class='cadre-couleur'><div class='cadre-padding'>";
 
-	$t = affiche_tranche_bandeau($requete, "messagerie-24.gif", $col, $couleur_foncee, "white", $tmp_var, $deb_aff, $titre, false, $largeurs, $styles, 'afficher_message_boucles', $afficher_auteurs);
+	$t = affiche_tranche_bandeau($requete, "messagerie-24.gif", $col, $couleur_foncee, "white", $tmp_var, $titre, false, $largeurs, $styles, 'afficher_message_boucles', $afficher_auteurs);
 
 	foreach ($t as $v) $messages_vus[$v]= $v;
 	if ($important) echo '</div></div>';#fin_cadre_couleur();

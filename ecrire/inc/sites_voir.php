@@ -19,10 +19,9 @@ function afficher_sites($titre_table, $requete)
 {
 	global $couleur_claire, $connect_id_auteur, $spip_display ;
 
-	$tmp_var = substr(md5(join(' ',$requete)), 0, 4);
-	$deb_aff = intval(_request('t_' .$tmp_var));
+	$tmp_var = 't_' . substr(md5(join(' ',$requete)), 0, 4);
 
-	return affiche_tranche_bandeau($requete, "site-24.gif", 3, $couleur_claire, "black", $tmp_var, $deb_aff, $titre_table, false,  array('','',''), array('arial11', 'arial1', 'arial1'), 'afficher_sites_boucle');
+	return affiche_tranche_bandeau($requete, "site-24.gif", 3, $couleur_claire, "black", $tmp_var, $titre_table, false,  array('','',''), array('arial11', 'arial1', 'arial1'), 'afficher_sites_boucle');
 }
 
 // http://doc.spip.org/@afficher_sites_boucle
@@ -112,9 +111,8 @@ function afficher_syndic_articles($titre_table, $requete, $id = 0) {
 	global $connect_statut, $spip_lang_right;
 
 	$col = (($connect_statut == '0minirezo') ? 3 :  2) + ($id==0);
-	$tmp_var = substr(md5(join(' ',$requete)), 0, 4);
-	$deb_aff = intval(_request('t_' .$tmp_var));
-	$redirect = ('t_' .$tmp_var . '=' . $deb_aff) . (!$id ? '' : "&id_syndic=$id");
+	$tmp_var = 't_' . substr(md5(join(' ',$requete)), 0, 4);
+
 	if (!$requete['FROM']) $requete['FROM']= 'spip_syndic_articles';
 
 	if (!$id) {
@@ -129,7 +127,7 @@ function afficher_syndic_articles($titre_table, $requete, $id = 0) {
 			$styles[] = 'arial1';
 	}
 
-	return affiche_tranche_bandeau($requete, "site-24.gif", $col, "#999999", "white", $tmp_var, $deb_aff, $titre_table, $obligatoire, $largeurs, $styles, 'afficher_syndic_articles_boucle', $redirect);
+	return affiche_tranche_bandeau($requete, "site-24.gif", $col, "#999999", "white", $tmp_var, $titre_table, $obligatoire, $largeurs, $styles, 'afficher_syndic_articles_boucle', array($tmp_var, $id));
 }
 
 // http://doc.spip.org/@afficher_syndic_articles_boucle
@@ -221,6 +219,10 @@ function afficher_syndic_articles_boucle($row, &$my_sites, $bof, $redirect)
 	}
 				
 	if ($connect_statut == '0minirezo'){
+		list($tmp_var, $id) = $redirect;
+		$redirect = ($tmp_var . '=' . intval(_request($tmp_var)))
+		. (!$id ? '' : "&id_syndic=$id");
+
 		if ($statut == "publie"){
 		  $s =  "[<a href='". redirige_action_auteur('instituer_syndic',"$id_syndic_article-refuse", $GLOBALS['exec'], $redirect) . "'><font color='black'>"._T('info_bloquer_lien')."</font></a>]";
 		

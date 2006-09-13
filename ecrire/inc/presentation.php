@@ -478,11 +478,10 @@ function afficher_liste($largeurs, $table, $styles = '') {
 }
 
 // http://doc.spip.org/@afficher_tranches_requete
-function afficher_tranches_requete($num_rows, $colspan, $tvar, $url='', $nb_aff = 10) {
+function afficher_tranches_requete($num_rows, $colspan, $tmp_var, $url='', $nb_aff = 10) {
 	static $ancre = 0;
 	global $spip_lang_right, $spip_display;
 
-	$tmp_var = 't_'. $tvar;
 	$deb_aff = intval(_request($tmp_var));
 	$ancre++;
 	$self = self();
@@ -509,7 +508,7 @@ function afficher_tranches_requete($num_rows, $colspan, $tvar, $url='', $nb_aff 
 				. '='
 				. $deb
 				. "','"
-				. $tvar
+				. $tmp_var
 				. '\');"';
 			}
 			$texte .= "<a href=\"$script#a$ancre\"$on>$deb</a>";
@@ -532,7 +531,7 @@ function afficher_tranches_requete($num_rows, $colspan, $tvar, $url='', $nb_aff 
 				. "&"
 				. $tmp_var
 				. "=-1','"
-				. $tvar
+				. $tmp_var
 				. '\');"';
 			}
 			$texte .= "<a href=\"$script#a$ancre\"$on><img src='". _DIR_IMG_PACK . "plus.gif' title='"._T('lien_tout_afficher')."' /></a>";
@@ -545,39 +544,35 @@ function afficher_tranches_requete($num_rows, $colspan, $tvar, $url='', $nb_aff 
 
 
 // http://doc.spip.org/@affiche_tranche_bandeau
-function affiche_tranche_bandeau($requete, $icone, $col, $fg, $bg, $tmp_var, $deb_aff, $titre, $force, $largeurs, $styles, $skel, $own='')
+function affiche_tranche_bandeau($requete, $icone, $col, $fg, $bg, $tmp_var,  $titre, $force, $largeurs, $styles, $skel, $own='')
 {
 	global $spip_display ;
 
 	$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
-
-	$tous_id = array();
 
 	if (!isset($requete['GROUP BY'])) $requete['GROUP BY'] = '';
 
 	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
 	if (! ($force OR ($cpt = $cpt['n']))) return  array();
 
-	if (!isset($requete["SELECT"])) $requete["SELECT"]= "*";
-	if (isset($requete['LIMIT'])) $cpt = min($requete['LIMIT'], $cpt);
-
-	$nb_aff = 1.5 * _TRANCHES;
-	$tranches = '';
-	if ($cpt > $nb_aff) {
-		$nb_aff = (_TRANCHES); 
-		$tranches = afficher_tranches_requete($cpt, $col, $tmp_var, '', $nb_aff);
-	}
-
 	if ($titre) echo "<div style='height: 12px;'></div>";
 	echo "<div class='liste'>";
 	echo bandeau_titre_boite2($titre, $icone, $fg, $bg, false);
 	echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
+	if (isset($requete['LIMIT'])) $cpt = min($requete['LIMIT'], $cpt);
 
-	echo $tranches;
+	$deb_aff = intval(_request($tmp_var));
+	$nb_aff = floor(1.5 * _TRANCHES);
+	$tranches = '';
+	if ($cpt > $nb_aff) {
+		$nb_aff = (_TRANCHES); 
+		echo afficher_tranches_requete($cpt, $col, $tmp_var, '', $nb_aff);
+	}
 
-	$result = spip_query("SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
+	$result = spip_query("SELECT " . (isset($requete["SELECT"]) ? $requete["SELECT"] : "*") . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
 
 	$table = array();
+	$tous_id = array();
 	while ($row = spip_fetch_array($result)) {
 		$table[]= $skel($row, $tous_id, $voir_logo, $own);
 	}
@@ -794,7 +789,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	$jjscript = (serialize($jjscript));
 	$hash = "0x".substr(md5($connect_id_auteur.$jjscript), 0, 16);
 
-	$tmp_var = substr($hash, 2, 6);
+	$tmp_var = 't_' . substr($hash, 2, 6);
 
 	if (!isset($requete['GROUP BY'])) $requete['GROUP BY'] = '';
 	$tous_id = array();
@@ -802,8 +797,8 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	if (! ($obligatoire OR ($cpt = $cpt['n']))) return $tous_id ;
 	if (isset($requete['LIMIT'])) $cpt = min($requete['LIMIT'], $cpt);
 
-	$nb_aff = 1.5 * _TRANCHES;
-	$deb_aff = intval(_request('t_' .$tmp_var));
+	$nb_aff = floor(1.5 * _TRANCHES);
+	$deb_aff = intval(_request($tmp_var));
 
 
 	$requete['FROM'] = preg_replace("/(spip_articles AS \w*)/", "\\1 LEFT JOIN spip_petitions AS petitions USING (id_article)", $requete['FROM']);
@@ -1026,15 +1021,15 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 	$jjscript["afficher_auteurs"] = $afficher_auteurs;
 	$jjscript = (serialize($jjscript));
 	$hash = "0x".substr(md5($connect_id_auteur.$jjscript), 0, 16);
-	$tmp_var = substr($hash, 2, 6);	
+	$tmp_var = 't_' . substr($hash, 2, 6);	
 	
 	$tous_id = array();
 	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
 	if (! ($obligatoire OR ($cpt = $cpt['n']))) return $tous_id ;
 	if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
 
-	$nb_aff = 1.5 * _TRANCHES;
-	$deb_aff = intval(_request('t_' .$tmp_var));
+	$nb_aff = floor(1.5 * _TRANCHES);
+	$deb_aff = intval(_request($tmp_var));
 
 	$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur ORDER BY id_ajax_fonc DESC LIMIT 1");
 	if ($row = spip_fetch_array($res_proch)) {
@@ -1086,7 +1081,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 	echo afficher_liste_fin_tableau();
 	echo "</div>";
 		
-	if (!$GLOBALS["t_$tmp_var"]) echo "</div>";
+	if (!$GLOBALS[$tmp_var]) echo "</div>";
 		
 	//if ($afficher_cadre) fin_cadre_gris_clair();
 
@@ -1195,8 +1190,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 	}
 
 
-	$tmp_var = substr(md5(join('', $requete)), 0, 4);
-	$deb_aff = intval(_request('t_' .$tmp_var));
+	$tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);
 	$col = ($options == "avancees") ? 4 : 3;
 	if ($options == "avancees") {
 		if ($affrub) $largeurs = array('7', '', '188', '38');
@@ -1208,7 +1202,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 		$styles = array('','arial11', 'arial1');
 	}
 
-	return affiche_tranche_bandeau($requete, "breve-24.gif", count($largeurs), $couleur_foncee, "white", $tmp_var, $deb_aff, $titre_table, false, $largeurs, $styles, 'afficher_breves_boucle', array( $afficher_langue, $affrub, $langue_defaut));
+	return affiche_tranche_bandeau($requete, "breve-24.gif", count($largeurs), $couleur_foncee, "white", $tmp_var, $titre_table, false, $largeurs, $styles, 'afficher_breves_boucle', array( $afficher_langue, $affrub, $langue_defaut));
 
 }
 
@@ -1277,12 +1271,10 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 function afficher_rubriques($titre_table, $requete) {
 	global $options;
 
-        $tmp_var = substr(md5(join('', $requete)), 0, 4);
-        $deb_aff = intval(_request('t_' .$tmp_var));
-	$col = ($options == "avancees") ? 4 : 3;
+        $tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);
 	$largeurs = array('12','', '');
 	$styles = array('', 'arial2', 'arial11');
-	return affiche_tranche_bandeau($requete, "rubrique-24.gif", $col, "#999999", "white", $tmp_var, $deb_aff, $titre_table, false, $largeurs, $styles, 'afficher_rubriques_boucle');
+	return affiche_tranche_bandeau($requete, "rubrique-24.gif", 3, "#999999", "white", $tmp_var, $titre_table, false, $largeurs, $styles, 'afficher_rubriques_boucle');
 }
 
 // http://doc.spip.org/@afficher_rubriques_boucle
@@ -1379,9 +1371,9 @@ function afficher_auteurs ($titre_table, $requete) {
 	if (! ($cpt = $cpt['n'])) return $tous_id ;
 	if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
 
-	$tmp_var = substr(md5(join('', $requete)), 0, 4);
-	$nb_aff = 1.5 * _TRANCHES;
-	$deb_aff = intval(_request('t_' .$tmp_var));
+	$tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);
+	$nb_aff = floor(1.5 * _TRANCHES);
+	$deb_aff = intval(_request($tmp_var));
 	$tranches = '';
 	if ($cpt > $nb_aff) {
 		$nb_aff = (_TRANCHES); 
