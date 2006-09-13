@@ -1091,28 +1091,31 @@ function balise_ENV_dist($p, $src = NULL) {
 	// le tableau de base de la balise (cf #META ci-dessous)
 	if (!$src) $src = '$Pile[0]';
 
-	if ($a = $p->param) {
-		$sinon = array_shift($a);
-		if  (!array_shift($sinon)) {
-			$p->fonctions = $a;
-			array_shift( $p->param );
-			$nom = array_shift($sinon);
-			$nom = ($nom[0]->type=='texte') ? $nom[0]->texte : "";
-		}
+	$_nom = "";
+	$_sinon = "";
+	if ($p->param && !$p->param[0][0]) {
+		$_nom =  calculer_liste($p->param[0][1],
+					$p->descr,
+					$p->boucles,
+					$p->id_boucle);
+
+		if (isset($p->param[0][2]))
+			$_sinon =  calculer_liste($p->param[0][2],
+						$p->descr,
+						$p->boucles,
+						$p->id_boucle);
 	}
 
-	if (!$nom) {
+	if (!$_nom) {
 		// cas de #ENV sans argument : on retourne le serialize() du tableau
 		// une belle fonction [(#ENV|affiche_env)] serait pratique
 		$p->code = 'serialize('.$src.')';
 	} else {
 		// admet deux arguments : nom de variable, valeur par defaut si vide
-		$p->code = $src.'[\'' . addslashes($nom) . '\']';
-		if ($sinon)
+		$p->code = $src."[$_nom]";
+		if ($_sinon)
 			$p->code = 'sinon('. 
-				$p->code
-				. compose_filtres_args($p, $sinon, ',')
-				. ')';
+				$p->code.",$_sinon)";
 	}
 	#$p->interdire_scripts = true;
 
