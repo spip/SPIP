@@ -671,6 +671,28 @@ function find_in_path ($filename) {
 	return false;
 }
 
+
+function find_all_in_path($dir,$pattern){
+	$liste_fichiers=array();
+	$maxfiles = 10000;
+	
+	// Parcourir le chemin
+	foreach (creer_chemin() as $d)
+		if (@is_dir($f = $d.$dir)){
+			$liste = preg_files($d.$dir,$pattern,$maxfiles-count($liste_fichiers),false);
+			foreach($liste as $chemin){
+				$nom = basename($chemin);
+				// ne prendre que les fichiers pas deja trouves
+				// car find_in_path prend le premier qu'il trouve,
+				// les autres sont donc masques
+				if (!isset($liste_fichiers[$nom]))
+					$liste_fichiers[$nom] = $chemin;
+			}
+		}
+			
+	return $liste_fichiers;
+}
+
 // predicat sur les scripts de ecrire qui n'authentifient pas par cookie
 
 // http://doc.spip.org/@autoriser_sans_cookie

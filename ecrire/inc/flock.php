@@ -205,6 +205,7 @@ function creer_repertoire($base, $subdir) {
 // Attention, afin de conserver la compatibilite avec les repertoires '.plat'
 // si $dir = 'rep/sous_rep_' au lieu de 'rep/sous_rep/' on scanne 'rep/' et on
 // applique un pattern '^rep/sous_rep_'
+// si $recurs vaut false, la fonction ne descend pas dans les sus repertoires
 //
 // http://doc.spip.org/@preg_files
 function preg_files($dir, $pattern=-1 /* AUTO */, $maxfiles = 10000, $recurs=array()) {
@@ -230,7 +231,7 @@ function preg_files($dir, $pattern=-1 /* AUTO */, $maxfiles = 10000, $recurs=arr
 						$nbfiles++;
 					}
 				} 
-				else if (is_dir($f)){
+				else if (is_dir($f) AND is_array($recurs)){
 					$rp = @realpath($f);
 					if (!is_string($rp) OR !strlen($rp)) $rp=$f; # realpath n'est peut etre pas autorise
 					if (!isset($recurs[$rp])) {
