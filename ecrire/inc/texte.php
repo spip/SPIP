@@ -36,19 +36,6 @@ function tester_variable($var, $val){
 		die ("tester_variable: $var interdite");
 }
 
-// Verifier les variables de personnalisation
-tester_variable('debut_intertitre', "\n<h3 class=\"spip\">");
-tester_variable('fin_intertitre', "</h3>\n");
-tester_variable('ligne_horizontale', "\n<hr class=\"spip\" />\n");
-tester_variable('ouvre_ref', '&nbsp;[');
-tester_variable('ferme_ref', ']');
-tester_variable('ouvre_note', '[');
-tester_variable('ferme_note', '] ');
-tester_variable('les_notes', '');
-tester_variable('compt_note', 0);
-tester_variable('nombre_surligne', 4);
-tester_variable('url_glossaire_externe', "http://@lang@.wikipedia.org/wiki/");
-
 // on initialise la puce ici car il serait couteux de faire le find_in_path()
 // a chaque hit, alors qu'on n'a besoin de cette valeur que lors du calcul
 // http://doc.spip.org/@definir_puce
@@ -90,7 +77,7 @@ define('_BALISES_BLOCS',
 	'div|pre|ul|ol|li|blockquote|h[1-6r]|'
 	.'t(able|[rdh]|body|foot|extarea)|'
 	.'form|object|center|marquee|address|'
-	.'d[ltd]|script|noscript|map|del|ins|button|fieldset');
+	.'d[ltd]|script|noscript|map|button|fieldset');
 
 
 // Ne pas afficher le chapo si article virtuel
@@ -289,8 +276,8 @@ function couper($texte, $taille=50) {
 		$nbcharutf = preg_match_all("/(&#[0-9]{3,5};)/S",$long,$matches);
 		$taille += $nbcharutf;
 	}
-	
-	
+
+
 	// couper au mot precedent
 	$long = spip_substr($texte, 0, max($taille-4,1));
 	$court = ereg_replace("([^[:space:]][[:space:]]+)[^[:space:]]*\n?$", "\\1", $long);
@@ -620,6 +607,7 @@ function calculer_url ($lien, $texte='', $pour='url') {
 			}
 
 			$res = $f($id, $texte, $ancre);
+			$res[2] = supprimer_numero($res[2]);
 			if ($pour == 'titre')
 				return $res[2];
 			if ($params)
@@ -655,6 +643,10 @@ function calculer_url ($lien, $texte='', $pour='url') {
 		$lien = "http://".$lien;
 	else if (strpos($lien, "@") && email_valide($lien))
 		$lien = "mailto:".$lien;
+
+	// class spip_ancre sur les ancres pures (internes a la page)
+	if (substr($lien,0,1) == '#')
+		$class = 'spip_ancre';
 
 	return ($pour == 'url') ? $lien : array($lien, $class, $texte);
 }
@@ -1055,6 +1047,23 @@ function paragrapher($letexte) {
 	return $letexte;
 }
 
+//
+// Inserer un lien a partir du preg_match du raccourci [xx->url]
+// $regs:
+// 0=>tout le raccourci
+// 1=>texte
+// 2=>double fleche (historiquement, liens ouvrants)
+// 3=>url
+//
+function traiter_raccourci_lien($regs) {
+	list($lien, $class, $texte) = calculer_url($regs[3], $regs[1], 'tout');
+	# ici bien passer le lien pour traiter [<doc3>->url]
+	return typo("<a href=\"$lien\" class=\"$class\">"
+		. $texte
+		. "</a>");
+}
+
+
 // Nettoie un texte, traite les raccourcis spip, la typo, etc.
 // http://doc.spip.org/@traiter_raccourcis
 function traiter_raccourcis($letexte) {
@@ -1067,6 +1076,7 @@ function traiter_raccourcis($letexte) {
 	global $ferme_note;
 	global $lang_dir;
 	static $notes_vues;
+	static $tester_variables=0;
 
 	// Appeler les fonctions de pre_traitement
 	$letexte = pipeline('pre_propre', $letexte);
@@ -1074,6 +1084,20 @@ function traiter_raccourcis($letexte) {
 	if (function_exists('avant_propre'))
 		$letexte = avant_propre($letexte);
 
+	// Verifier les variables de personnalisation
+	if (!$tester_variables++) {
+		tester_variable('debut_intertitre', "\n<h3 class=\"spip\">");
+		tester_variable('fin_intertitre', "</h3>\n");
+		tester_variable('ligne_horizontale', "\n<hr class=\"spip\" />\n");
+		tester_variable('ouvre_ref', '&nbsp;[');
+		tester_variable('ferme_ref', ']');
+		tester_variable('ouvre_note', '[');
+		tester_variable('ferme_note', '] ');
+		tester_variable('url_glossaire_externe',
+			"http://@lang@.wikipedia.org/wiki/");
+		tester_variable('les_notes', '');
+		tester_variable('compt_note', 0);
+	}
 
 	// Gestion de la <poesie>
 	if (preg_match_all(",<(poesie|poetry)>(.*)<\/(poesie|poetry)>,UimsS",
@@ -1165,18 +1189,22 @@ function traiter_raccourcis($letexte) {
 	//  la typo sur les URLs, voir raccourcis liens ci-dessous)
 	//
 	if ($url_glossaire_externe) {
-		$regexp = "|\[\?+([^][<>]+)\]|";
+		$regexp = "|\[\?+([^][<>]+)\]|S";
 		if (preg_match_all($regexp, $letexte, $matches, PREG_SET_ORDER))
 		foreach ($matches as $regs) {
 			$terme = trim($regs[1]);
-			$terme_underscore = rawurlencode(preg_replace(',\s+,', '_', $terme));
+			$terme_underscore = preg_replace(',\s+,', '_', $terme);
+			// faire sauter l'eventuelle partie "|bulle d'aide" du lien
+			// cf. http://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Conventions_sur_les_titres
+			$terme_underscore = preg_replace(',[|].*,', '', $terme_underscore);
 			if (strstr($url_glossaire_externe,"%s"))
-				$url = str_replace("%s", $terme_underscore, $url_glossaire_externe);
+				$url = str_replace("%s", rawurlencode($terme_underscore),
+					$url_glossaire_externe);
 			else
 				$url = $url_glossaire_externe.$terme_underscore;
 			$url = str_replace("@lang@", $GLOBALS['spip_lang'], $url);
 			$code = '['.$terme.'->?'.$url.']';
-			
+
 			// Eviter les cas particulier genre "[?!?]"
 			if (preg_match(',[a-z],i', $terme))
 				$letexte = str_replace($regs[0], $code, $letexte);
@@ -1193,22 +1221,19 @@ function traiter_raccourcis($letexte) {
 		$letexte = str_replace($regs[0],
 		'<a name="'.entites_html($regs[1]).'"></a>', $letexte);
 
-
 	//
-	// Raccourcis liens [xxx->url] 
-	// Note : complique car c'est ici qu'on applique typo() !
+	// Raccourcis liens [xxx->url]
+	// Note : complique car c'est ici qu'on applique typo(),
+	// et en plus on veut pouvoir les passer en pipeline
 	//
-	$regexp = "|\[([^][]*)->(>?)([^]]*)\]|ms";
+	$regexp = ",\[([^][]*)->(>?)([^]]*)\],msS";
 	$inserts = array();
 	if (preg_match_all($regexp, $letexte, $matches, PREG_SET_ORDER)) {
 		$i = 0;
 		foreach ($matches as $regs) {
-			list($lien, $class, $texte) = calculer_url($regs[3], $regs[1], 'tout');
-			# ici ibne passer le lien pour traiter [<doc3>->url]
-			$inserts[++$i] = typo("<a href=\"$lien\" class=\"$class\">"
-				. supprimer_numero($texte)
-				. "</a>");
-
+			$insert = traiter_raccourci_lien($regs);
+			$inserts[++$i] = pipeline('traiter_raccourci_lien',
+				array('data'=>$insert, 'args'=>$regs));
 			$letexte = str_replace($regs[0], "@@SPIP_ECHAPPE_LIEN_$i@@",
 				$letexte);
 		}

@@ -87,6 +87,7 @@ function surligner_regexp_accents ($mot) {
 function surligner_mots($page, $mots) {
 	global $nombre_surligne;
 	include_spip('inc/texte'); // pour le reglage de $nombre_surligne
+	tester_variable('nombre_surligne', 4);
 
 	// Remplacer les caracteres potentiellement accentues dans la chaine
 	// de recherche par les choix correspondants en syntaxe regexp (!)
