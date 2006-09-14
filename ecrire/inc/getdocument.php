@@ -512,32 +512,12 @@ function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $
 			include_spip('inc/pclzip');
 			$archive = new PclZip($zip);
 			if ($archive) {
-// presenter une interface pour choisir si fichier joint ou decompacte
-// passer ca en squelette un de ces jours.
-
 			  include_spip('inc/documents');
-			  $arg = (intval($id) .'/' .intval($id_document) . "/$mode/$type");
-			  $texte =
-			"<div><input type='radio' checked='checked' name='sousaction5' value='5'>" .
-			_T('upload_zip_telquel').
-			"</div>".
-			"<div><input type='radio' name='sousaction5' value='6'>".
-			_T('upload_zip_decompacter').
-			"</div>".
-			"<ul><li>" .
-			join("</li>\n<li>",verifier_compactes($archive)) .
-			"</li></ul>".
-			"<div>&nbsp;</div>".
-			"<div style='text-align: right;'><input class='fondo' style='font-size: 9px;' type='submit' value='".
-			_T('bouton_valider').
-			  "'></div>";
-			  afficher_compactes(construire_upload($texte, array(
-					 'redirect' => $redirect,
-					 'hash' => $hash,
-					 'chemin' => $zip,
-					 'arg' => $arg)));
-			  // a tout de suite en joindre5 ou joindre6
-			  exit;
+			  $valables = verifier_compactes($archive);
+			  if ($valables) {
+			    liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash, $redirect, $zip);
+			    exit;
+			  }
 			}
 		}
 	}
@@ -546,6 +526,37 @@ function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $
 		ajouter_un_document($arg['tmp_name'], $arg['name'], 
 				    $type, $id, $mode, $id_document, $actifs);
 	}
+}
+
+// Afficher un formulaire de choix: decompacter et/ou garder tel quel.
+// Passer ca en squelette un de ces jours.
+
+function liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash, $redirect, $zip)
+{
+	$arg = (intval($id) .'/' .intval($id_document) . "/$mode/$type");
+	$texte =
+		"<div><input type='radio' checked='checked' name='sousaction5' value='5'>" .
+	  	_T('upload_zip_telquel').
+		"</div>".
+		"<div><input type='radio' name='sousaction5' value='6'>".
+		_T('upload_zip_decompacter').
+		"</div>".
+		"<ol><li><tt>" .
+		join("</tt></li>\n<li><tt>", $valables) .
+		"</tt></li></ol>".
+		"<div>&nbsp;</div>" .
+		"<div><input type='radio' name='sousaction4' value='4'>".
+		_L('les_deux').
+		"</div>".
+		"<div style='text-align: right;'><input class='fondo' style='font-size: 9px;' type='submit' value='".
+		_T('bouton_valider').
+		  "'></div>";
+	afficher_compactes(construire_upload($texte, array(
+					 'redirect' => $redirect,
+					 'hash' => $hash,
+					 'chemin' => $zip,
+					 'arg' => $arg)));
+	// a tout de suite en joindre4, joindre5, ou joindre6
 }
 
 //
