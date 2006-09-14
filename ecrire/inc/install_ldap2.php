@@ -22,20 +22,26 @@ function inc_install_ldap2()
 
 	echo "<P>";
 
-	$ldap_link = @ldap_connect($adresse_ldap, $port_ldap);
+	$port_ldap = intval($port_ldap);
+	$ldap_link = ldap_connect($adresse_ldap, $port_ldap);
+	$erreur = "ldap_connect($adresse_ldap, $port_ldap)";
 
         if ($ldap_link) {
 
-		if ( !@ldap_set_option($ldap_link, LDAP_OPT_PROTOCOL_VERSION, $protocole_ldap) ) {
+		if ( !ldap_set_option($ldap_link, LDAP_OPT_PROTOCOL_VERSION, $protocole_ldap) ) {
 			$protocole_ldap = 2 ;
-			@ldap_set_option($ldap_link, LDAP_OPT_PROTOCOL_VERSION, $protocole_ldap);
+			ldap_set_option($ldap_link, LDAP_OPT_PROTOCOL_VERSION, $protocole_ldap);
 		}
 		if ($tls_ldap == 'oui') {
-			if (!ldap_start_tls($ldap_link))
+			if (!ldap_start_tls($ldap_link)) {
+				$erreur = "ldap_start_tls($ldap_link) $adresse_ldap, $port_ldap";
 				$ldap_link = false;
+			}
 		}
-	        if ($ldap_link) 
-			$ldap_link = @ldap_bind($ldap_link, $login_ldap, $pass_ldap);
+	        if ($ldap_link) {
+			$ldap_link = ldap_bind($ldap_link, $login_ldap, $pass_ldap);
+			$erreur = "ldap_bind('$ldap_link', '$login_ldap', '$pass_ldap'): $adresse_ldap, $port_ldap";
+		}
 	}
 
 	if ($ldap_link) {
@@ -57,6 +63,7 @@ function inc_install_ldap2()
 		echo "<B>"._T('avis_connexion_ldap_echec_1')."</B>";
 		echo "<P>"._T('avis_connexion_ldap_echec_2');
 		echo "<br />\n"._T('avis_connexion_ldap_echec_3');
+		echo '<br /><br />', $erreur, '<b> ?</b>';
 	}
 
 	install_fin_html();
