@@ -25,6 +25,7 @@ dist/polices/dustismo.ttf -text
 dist/polices/dustismo_bold.ttf -text
 dist/puce.gif -text
 dist/puce_rtl.gif -text
+dist/rss.html -text
 dist/spip.png -text
 dist/style_prive.html -text
 dist/win_width.htc -text
