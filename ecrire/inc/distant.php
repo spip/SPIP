@@ -194,7 +194,7 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false,
 			if ($status >= 300 AND $status < 400 AND $location)
 				$url = $location;
 			else if ($status != 200)
-				return;
+				return false;
 			else
 				break; # ici on est content
 			fclose($f);
