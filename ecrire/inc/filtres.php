@@ -1559,24 +1559,33 @@ function calcul_pagination($total, $nom, $pas, $liste = true, $modele='') {
 // 2. sinon la cree (ou la recree) dans IMG/cache_css/
 // SI on lui donne a manger une feuille nommee _rtl.css il va faire l'inverse
 // http://doc.spip.org/@direction_css
-function direction_css ($css) {
+function direction_css ($css, $voulue='') {
 	if (!preg_match(',(_rtl)?\.css$,i', $css, $r)) return $css;
 
-	$sens = $r[1] ? 'left' : 'right'; // sens de la css lue en entree
-	$dir = $r[1] ? 'ltr' : 'rtl'; // direction voulu en sortie
+	// si on a precise le sens voulu en argument, le prendre en compte
+	if ($voulue = strtolower($voulue)) {
+		if ($voulue != 'rtl' AND $voulue != 'ltr')
+			$voulue = lang_dir($voulue);
+	}
+	else
+		$voulue = $GLOBALS['spip_lang_dir'];
 
-	if ($GLOBALS['spip_lang_right'] == $sens)
+	$right = $r[1] ? 'left' : 'right'; // 'right' de la css lue en entree
+	$dir = $r[1] ? 'rtl' : 'ltr';
+	$ndir = $r[1] ? 'ltr' : 'rtl';
+
+	if ($voulue == $dir)
 		return $css;
 
 	// 1.
-	$f = preg_replace(',(_rtl)?\.css$,i', '_'.$dir.'.css', $css);
+	$f = preg_replace(',(_rtl)?\.css$,i', '_'.$ndir.'.css', $css);
 	if (@file_exists($f))
 		return $f;
 
 	// 2.
 	$f = sous_repertoire (_DIR_IMG, 'cache-css')
 		. preg_replace(',.*/(.*?)(_rtl)?\.css,', '\1', $css)
-		. '.' . substr(md5($css), 0,4) . '_' . $dir . '.css';
+		. '.' . substr(md5($css), 0,4) . '_' . $ndir . '.css';
 
 	if ((@filemtime($f) > @filemtime($css))
 	AND ($GLOBALS['var_mode'] != 'recalcul'))
