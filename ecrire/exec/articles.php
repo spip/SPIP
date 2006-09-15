@@ -194,8 +194,14 @@ if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
 // Documents associes a l'article
 //
 
- if ($spip_display != 4)
- afficher_documents_et_portfolio($id_article, "article", $flag_editable);
+ if ($spip_display != 4) {
+
+	echo	afficher_portfolio($id_article, 'article', 'portfolio', $flag_editable),
+		afficher_portfolio($id_article, 'article', 'documents', $flag_editable);
+
+	if ($GLOBALS['meta']["documents_article"] != 'non' AND $flag_editable)
+		echo afficher_formulaire_upload($id_article, "article", $flag_editable);
+ }
 
  if ($flag_auteur AND  $statut_article == 'prepa' AND !$statut_rubrique)
 	echo demande_publication($id_article);

@@ -35,6 +35,8 @@ function action_supprimer_dist() {
 		spip_log("action supprimer $arg incompris");
 }
 
+// Ne pas confondre cette fonction avec celle au pluriel ci-dessous
+
 // http://doc.spip.org/@action_supprimer_document
 function action_supprimer_document($arg) {
 	global $redirect;
@@ -83,7 +85,9 @@ function action_supprimer_portfolio($arg)
 	}
 }
 
-function action_supprimer_fonds($arg)
+// Ne pas confondre cette fonction avec celle au singulier ci-dessus
+
+function action_supprimer_documents($arg)
 {
 	if (!preg_match(",^\D*(\d+)\W+(\w+)$,", $arg, $r))
 		spip_log("action_supprimer_fonds $arg pas compris");
