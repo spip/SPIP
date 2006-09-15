@@ -124,8 +124,10 @@ $ignore_remote_user = true; # methode obsolete et risquee
 #$invalider_caches = 'id_article,id_breve,id_rubrique,id_syndic';
 $invalider_caches = '';
 
-// Autre approche, egalement experimentale : tout invalider si modif
-$derniere_modif_invalide = false;
+// Autre approche : tout invalider si modif
+// Si votre site a des problemes de performance face a une charge tres elevee,
+// il est recommande de mettre cette globale a false (dans mes_options).
+$derniere_modif_invalide = true;
 
 // Quota : la variable $quota_cache, si elle est > 0, indique la taille
 // totale maximale desiree des fichiers contenus dans le CACHE/ ;
