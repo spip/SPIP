@@ -118,13 +118,12 @@ function code_echappement($rempl, $source='') {
 function echappe_html($letexte, $source='', $no_transform=false,
 $preg='') {
 	if (!$preg) $preg = ',<(html|code|cadre|frame|script)'
-			.'(:?\s[^>]*)?'
+			.'(\s[^>]*)?'
 			.'>(.*)</\1>,UimsS';
 	if (preg_match_all(
 	$preg,
 	$letexte, $matches, PREG_SET_ORDER))
 	foreach ($matches as $regs) {
-
 		// mode d'echappement :
 		//    <span class='base64'> . base64_encode(contenu) . </span>
 		// ou 'div' selon les cas, pour refermer correctement les paragraphes
@@ -140,12 +139,12 @@ $preg='') {
 
 			// Echapper les <html>...</ html>
 			case 'html':
-				$echap = $regs[2];
+				$echap = $regs[3];
 				break;
 
 			// Echapper les <code>...</ code>
 			case 'code':
-				$echap = entites_html($regs[2]);
+				$echap = entites_html($regs[3]);
 				// supprimer les sauts de ligne debut/fin
 				// (mais pas les espaces => ascii art).
 				$echap = ereg_replace("^\n+|\n+$", "", $echap);
@@ -168,7 +167,7 @@ $preg='') {
 			// Echapper les <cadre>...</ cadre>
 			case 'cadre':
 			case 'frame':
-				$echap = trim(entites_html($regs[2]));
+				$echap = trim(entites_html($regs[3]));
 				$total_lignes = substr_count($echap, "\n") + 1;
 				$echap = "<form action=\"/\" method=\"get\"><div>"
 				."<textarea readonly='readonly' cols='40' rows='$total_lignes' "
@@ -203,6 +202,7 @@ $preg='') {
 			code_echappement(highlight_string($regs[0],true), $source),
 			$letexte);
 	}
+
 	return $letexte;
 }
 
