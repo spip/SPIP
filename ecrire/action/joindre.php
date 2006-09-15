@@ -53,8 +53,8 @@ function action_joindre_dist()
      $documents_actifs = array();
 
      if (function_exists($sousaction))
-       $sousaction($path, $mode, $type, $id, $id_document, 
-	       $hash, $GLOBALS['auteur_session']['id_auteur'], $redirect, $documents_actifs);
+       $type_image = $sousaction($path, $mode, $type, $id, $id_document, 
+				 $hash, $redirect, $documents_actifs);
 
      else spip_log("spip_action: sousaction inconnue $sousaction");
 
@@ -62,9 +62,18 @@ function action_joindre_dist()
 	$redirect .= '&show_docs=' . join('-',$documents_actifs);
      }
      
-     if ($ancre) {
-	$redirect .= '#' . $ancre;
+     if (!$ancre) {
+
+		if ($mode=='vignette')
+			$ancre = 'images';
+		else if ($type_image)
+			$ancre = 'portfolio';
+		else
+			$ancre = 'documents';
+
+		$redirect .= '#' . $ancre;
      }
+
      if ($type == 'rubrique') {
 	include_spip('inc/rubriques');
 	calculer_rubriques();
@@ -77,9 +86,9 @@ function action_joindre_dist()
 // Cas d'un document distant reference sur internet
 
 // http://doc.spip.org/@spip_action_joindre2
-function spip_action_joindre2($path, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
+function spip_action_joindre2($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs)
 {
-	examiner_les_fichiers(array(
+	return examiner_les_fichiers(array(
 				   array('name' => basename($path),
 					 'tmp_name' => $path)
 				   ), 'distant', $type, $id, $id_document,
@@ -89,7 +98,7 @@ function spip_action_joindre2($path, $mode, $type, $id, $id_document,$hash, $id_
 // Cas d'un fichier transmis
 
 // http://doc.spip.org/@spip_action_joindre1
-function spip_action_joindre1($path, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
+function spip_action_joindre1($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs)
 {
 	$files = array();
 	if (is_array($path))
@@ -98,14 +107,14 @@ function spip_action_joindre1($path, $mode, $type, $id, $id_document,$hash, $id_
 			$files[]=$file;
 	}
 
-	examiner_les_fichiers($files, $mode, $type, $id, $id_document,
+	return examiner_les_fichiers($files, $mode, $type, $id, $id_document,
 			     $hash, $redirect, $actifs);
 } 
 
 // copie de tout ou partie du repertoire upload
 
 // http://doc.spip.org/@spip_action_joindre3
-function spip_action_joindre3($path, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
+function spip_action_joindre3($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs)
 {
 	if (!$path || strstr($path, '..')) return;
 	    
@@ -128,37 +137,38 @@ function spip_action_joindre3($path, $mode, $type, $id, $id_document,$hash, $id_
 	  }
 	}
 
-	examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $redirect, $actifs);
+	return examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $redirect, $actifs);
 }
 
 //  Zip avec confirmation "tel quel"
 
 // http://doc.spip.org/@spip_action_joindre5
-function spip_action_joindre5($path, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
+function spip_action_joindre5($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs)
 {
-  	ajouter_un_document($path, basename($path), $type, $id, $mode, $id_document, $actifs);
+	return ajouter_un_document($path, basename($path), $type, $id, $mode, $id_document, $actifs);
 }
 
 // Zip a deballer.
 
 // http://doc.spip.org/@spip_action_joindre6
-function spip_action_joindre6($path, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
+function spip_action_joindre6($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs)
 {
-	joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, $actifs);
+	$x = joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
 	//  suppression de l'archive en zip
 	@unlink($path);
+	return $x;
 }
 
 // Zip avec les 2 options a la fois
 
-function spip_action_joindre4($path, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
+function spip_action_joindre4($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs)
 {
-	joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, $actifs);
-	spip_action_joindre5($path, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, $actifs);
+	joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
+	return spip_action_joindre5($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
 }
 
 // http://doc.spip.org/@spip_action_joindre6
-function joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
+function joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs)
 {
 	    define('_tmp_dir', creer_repertoire_documents($hash));
 	    if (_tmp_dir == _DIR_DOC) die(_L('Op&eacute;ration impossible'));
@@ -171,9 +181,10 @@ function joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $id_aute
 	    $contenu = verifier_compactes($archive);
 	    
 	    foreach ($contenu as $fichier)
-		ajouter_un_document(_tmp_dir.basename($fichier),
+		$x = ajouter_un_document(_tmp_dir.basename($fichier),
 				    basename($fichier),
 				    $type, $id, $mode, $id_document, $actifs);
 	    effacer_repertoire_temporaire(_tmp_dir);
+	    return $x;
 }
 ?>

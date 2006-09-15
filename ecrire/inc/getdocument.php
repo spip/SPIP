@@ -362,16 +362,6 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 		}
 	}
 
-	// regler l'ancre du retour
-	if (!$GLOBALS['ancre']) {
-		if ($mode=='vignette')
-			$GLOBALS['ancre'] = 'images';
-		else if ($type_image)
-			$GLOBALS['ancre'] = 'portfolio';
-		else
-			$GLOBALS['ancre'] = 'documents';
-	}
-
 	// Preparation vignette du document $id_document
 	$id_document=intval($id_document);
 	if ($mode == 'vignette' AND $id_document_lie = $id_document) {
@@ -424,7 +414,7 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 	include_spip('inc/indexation');
 	marquer_indexer('spip_documents', $id_document);
 
-	return true;
+	return $type_image;
 }
 
 // http://doc.spip.org/@traite_svg
@@ -523,9 +513,10 @@ function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $
 	}
 	foreach ($files as $arg) {
 		check_upload_error($arg['error']);
-		ajouter_un_document($arg['tmp_name'], $arg['name'], 
+		$x = ajouter_un_document($arg['tmp_name'], $arg['name'], 
 				    $type, $id, $mode, $id_document, $actifs);
 	}
+	return $x;
 }
 
 // Afficher un formulaire de choix: decompacter et/ou garder tel quel.
