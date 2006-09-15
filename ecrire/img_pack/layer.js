@@ -276,6 +276,14 @@ function retour_id_url(r, Field, jjscript)
 	if (jjscript) jjscript();
 }
 
+function ajax_double(id, id2, r)
+{
+	noeud = document.getElementById(id);  
+	noeud.innerHTML = r;
+	noeud = document.getElementById(id2);
+	noeud.style.visibility = "visible";
+}
+
 // ne sert que pour selecteur_rubrique_ajax() dans inc/chercher_rubrique.php
 function charger_id_url_si_vide (myUrl, myField, jjscript) {
 	var Field = findObj_forcer(myField); // selects the given element
