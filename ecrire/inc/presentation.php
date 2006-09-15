@@ -2127,9 +2127,11 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
 	global $browser_verifForm;
 
+	if ($load = "$browser_verifForm$onLoad")
+		$load = " onLoad=\"$load\"";
+
 	echo pipeline('body_prive',"<body ". _ATTRIBUTES_BODY
-		. ' onLoad="'
-		. "$browser_verifForm$onLoad"
+		.$load
 		. '">');
 
 	if ($spip_ecran == "large") $largeur = 974;
