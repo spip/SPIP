@@ -2101,6 +2101,10 @@ function init_entete($titre, $rubrique, $css='') {
 		. "'>\n<head>\n<title>["
 		. $nom_site_spip
 		. "] " . textebrut(typo($titre)) . "</title>\n"
+		. "<meta http-equiv='Content-Type' content='text/html"
+		. (($c = $GLOBALS['meta']['charset']) ?
+			"; charset=$c" : '')
+		. "' />\n"
 		. envoi_link($nom_site_spip, $rubrique)
 		. (!$css ? "" : (
 			'<link rel="stylesheet" href="' . entites_html($css)
