@@ -72,35 +72,6 @@ function action_supprimer_auteur_rubrique($arg)
 	else spip_log("action_supprimer_auteur_rubrique $arg pas compris");
 }
 
-function action_supprimer_portfolio($arg)
-{
-	if (!preg_match(",^\D*(\d+)\W+(\w+)$,", $arg, $r))
-		spip_log("action_supprimer_portfolio $arg pas compris");
-	else {
-		list($x, $id, $type) = $r;
-		$x = spip_query("SELECT docs.id_document FROM spip_documents AS docs, spip_documents_".$type."s AS l, spip_types_documents AS lestypes WHERE l.id_$type=$id AND l.id_document=docs.id_document AND docs.mode='document' AND docs.id_type=lestypes.id_type AND lestypes.extension IN ('gif', 'jpg', 'png')");
-		while($r = spip_fetch_array($x)) {
-			supprimer_document_et_vignette($r['id_document']);
-		}
-	}
-}
-
-// Ne pas confondre cette fonction avec celle au singulier ci-dessus
-
-function action_supprimer_documents($arg)
-{
-	if (!preg_match(",^\D*(\d+)\W+(\w+)$,", $arg, $r))
-		spip_log("action_supprimer_fonds $arg pas compris");
-	else {
-		list($x, $id, $type) = $r;
-		$x = spip_query("SELECT docs.* FROM spip_documents AS docs, spip_documents_".$type."s AS l, spip_types_documents AS lestypes  WHERE l.id_$type=$id AND l.id_document=docs.id_document AND docs.mode='document'  AND docs.id_type=lestypes.id_type AND lestypes.extension NOT IN ('gif', 'jpg', 'png')");
-
-		while($r = spip_fetch_array($x)) {
-			supprimer_document_et_vignette($r['id_document']);
-		}
-	}
-}
-
 function supprimer_document_et_vignette($arg)
 {
 	$result = spip_query("SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$arg");

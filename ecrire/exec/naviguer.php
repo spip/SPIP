@@ -408,7 +408,8 @@ if ($relief) {
 /// Documents associes a la rubrique
 	if ($id_rubrique > 0) {
 
-	echo afficher_portfolio($id_rubrique, 'rubrique', 'portfolio', $flag_editable), afficher_portfolio($id_rubrique, 'rubrique', 'documents', $flag_editable);
+	include_spip('exec/documenter');
+	echo formulaire_documenter($id_rubrique, 'rubrique', 'portfolio', $flag_editable), formulaire_documenter($id_rubrique, 'rubrique', 'documents', $flag_editable);
 
 	if ($GLOBALS['meta']["documents_rubrique"] != 'non' AND $flag_editable)
 		echo afficher_formulaire_upload($id_rubrique, "rubrique", $flag_editable);
