@@ -24,12 +24,12 @@
 
 <BOUCLE_10recents(ARTICLES) {lang ?}{branche ?}{id_mot ?}
 	{par date}{inverse}{0,10}{unique}>
-<INCLURE{fond=rss}{id_article}>
+<INCLURE{fond=inc-rss-item}{id_article}>
 </BOUCLE_10recents>
 
 <BOUCLE_tres_recents(ARTICLES){lang ?}{branche ?}{id_mot ?}
 	{par date}{inverse}{age<3}{unique}>
-<INCLURE{fond=rss}{id_article}>
+<INCLURE{fond=inc-rss-item}{id_article}>
 </BOUCLE_tres_recents>
 
 </channel>
