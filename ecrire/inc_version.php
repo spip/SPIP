@@ -62,6 +62,12 @@ $dossier_squelettes = "";
 // navigateur l'accepte (valable pour apache >= 1.3 seulement) ?
 $auto_compress = true;
 
+// Pour le javascript, trois modes : parano (-1), prive (0), ok (1)
+// parano le refuse partout, ok l'accepte partout
+// le mode par defaut le signale en rouge dans l'espace prive
+$filtrer_javascript = 0;
+// PS: dans les forums, petitions, flux syndiques... c'est *toujours* securise
+
 // Type d'URLs
 // 'page': spip.php?article123 [c'est la valeur par defaut pour SPIP 1.9]
 // 'html': article123.html
