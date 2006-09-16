@@ -140,21 +140,9 @@ function retire_caches($chemin = '') {
 
 // http://doc.spip.org/@cache_valide
 function cache_valide($chemin_cache, $date) {
-
-	if (!isset($GLOBALS['delais']))
-		$GLOBALS['delais'] = 3600;
-
-	if (
-		isset($_REQUEST['delais'])
-		AND $GLOBALS['delais'] == $_REQUEST['delais']
-	)
-		die ("tester_variable: 'delais' interdite");
-
-	if (!$GLOBALS['delais']) return -1;
-
-	if ((time() - $date) > $GLOBALS['delais']) return $GLOBALS['delais'];
-
-	return 0;
+	if (!$GLOBALS['delais']) return -1; // delais=0, calcul a faire
+	if ((time() - $date) > $GLOBALS['delais']) return 1; // cache trop vieux
+	return 0; // cache ok
 }
 
 // gestion des delais par specification a l'interieur du squelette
@@ -175,7 +163,7 @@ function cache_valide_autodetermine($chemin_cache, $page, $date) {
 		if ($duree == 0)  #CACHE{0}
 			return -1;
 		else if ($date + $duree < time())
-			return $duree;
+			return 1;
 		else
 			return 0;
 	}
@@ -188,14 +176,7 @@ function cache_valide_autodetermine($chemin_cache, $page, $date) {
 // Creer le fichier cache
 # Passage par reference de $page par souci d'economie
 // http://doc.spip.org/@creer_cache
-function creer_cache(&$page, &$chemin_cache, $duree) {
-	// Entrer dans la base les invalideurs calcules par le compilateur
-	// (et supprimer les anciens)
-
-	// arbitrage entre ancien et nouveau modele de delai:
-	// primaute a la duree de vie de la page donnee a l'interieur de la page 
-	if (isset($page['entetes']['X-Spip-Cache']))
-		$duree = intval($page['entetes']['X-Spip-Cache']);
+function creer_cache(&$page, &$chemin_cache) {
 
 	// Enregistrer le fichier cache qui contient
 	// 1) la carte d'identite de la page (ses "globals", genre id_article=7)
@@ -210,16 +191,18 @@ function creer_cache(&$page, &$chemin_cache, $duree) {
 
 	// l'enregistrer, compresse ou non...
 	$chemin_cache .= $gz;
-	ecrire_fichier(_DIR_CACHE . $chemin_cache,
+	$ok = ecrire_fichier(_DIR_CACHE . $chemin_cache,
 		"<!-- "
 		. str_replace("\n", " ", serialize($page['signal']))
 		. " -->\n"
 		. $page['texte']);
 
-	spip_log("Creation du cache $chemin_cache pour $duree secondes");
+	spip_log("Creation du cache $chemin_cache pour "
+		. $page['entetes']['X-Spip-Cache']." secondes". ($ok?'':' (erreur!)'));
+
 	// Inserer ses invalideurs
 	include_spip('inc/invalideur');
-	maj_invalideurs($chemin_cache, $page, $duree);
+	maj_invalideurs($chemin_cache, $page, $page['entetes']['X-Spip-Cache']);
 
 	// En profiter pour verifier que le .htaccess (deny all) est bien la
 	include_spip('inc/acces');
@@ -263,10 +246,10 @@ function nettoyer_petit_cache($prefix, $duree = 300) {
 // Si son 3e argument est non vide, elle passe la main a creer_cache
 // Sinon, elle recoit un contexte (ou le construit a partir de REQUEST_URI)
 // et affecte les 4 autres parametres recus par reference:
-// - use_cache qui est
-//     < 0 s'il faut calculer la page sans la mettre en cache
-//     = 0 si on peut utiliser un cache existant
-//     > 0 s'il faut calculer la page et la mette en cache use_cache secondes
+// - use_cache qui vaut
+//     -1 s'il faut calculer la page sans la mettre en cache
+//      0 si on peut utiliser un cache existant
+//      1 s'il faut calculer la page et la mettre en cache
 // - chemin_cache qui est le chemin d'acces au fichier ou vide si pas cachable
 // - page qui est le tableau decrivant la page, si le cache la contenait
 // - lastmodified qui vaut la date de derniere modif du fichier.
@@ -274,9 +257,12 @@ function nettoyer_petit_cache($prefix, $duree = 300) {
 // http://doc.spip.org/@public_cacher_dist
 function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmodified) {
 
-	if ($chemin_cache) return creer_cache($page, $chemin_cache, $use_cache);
+	// Second appel, destine a l'enregistrement du cache sur le disque
+	if ($chemin_cache) return creer_cache($page, $chemin_cache);
 
-	// cas ignorant le cache car complement dynamique
+	// Toute la suite correspond au premier appel
+
+	// Cas ignorant le cache car complement dynamique
 	if ($_SERVER['REQUEST_METHOD'] == 'POST'
 	OR substr($contexte['fond'],0,8)=='modeles/') {
 		$use_cache = -1;
@@ -301,7 +287,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 
 	// Faut-il effacer des pages invalidees (en particulier ce cache-ci) ?
 	if (isset($GLOBALS['meta']['invalider'])) {
-		// le faire si la base est disponible
+		// ne le faire que si la base est disponible
 		if (spip_connect()) {
 			include_spip('inc/meta');
 			lire_metas();
@@ -309,7 +295,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 		}
 	}
 
-	// cas sans jamais de cache pour raison interne
+	// Cas sans jamais de cache pour raison interne
 	if (isset($GLOBALS['var_mode']) &&
 		(isset($_COOKIE['spip_session'])
 		|| isset($_COOKIE['spip_admin'])
@@ -317,20 +303,23 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 			supprimer_fichier(_DIR_CACHE . $chemin_cache);
 	}
 
-	if ($ok = lire_fichier(_DIR_CACHE . $chemin_cache, $page)) {
+	// $delais par defaut (pour toutes les pages sans #CACHE{})
+	if (!isset($GLOBALS['delais'])) $GLOBALS['delais'] = 3600;
+
+	// Lire le fichier cache et determiner sa validite
+	if (lire_fichier(_DIR_CACHE . $chemin_cache, $page)) {
 		$lastmodified = @file_exists(_DIR_CACHE . $chemin_cache) ?
 			@filemtime(_DIR_CACHE . $chemin_cache) : 0;
 		$page = restaurer_meta_donnees ($page);
 		$use_cache = cache_valide_autodetermine($chemin_cache, $page, $lastmodified);
-		if (!$use_cache) return;
-	} else {
-		$use_cache = 1;
-	}
+		if (!$use_cache) return; // cache utilisable
+	} else
+		$use_cache = 1; // fichier cache absent : provoque le calcul
 
 	// Si pas valide mais pas de connexion a la base, le garder quand meme
 	if (!spip_connect()) {
 		if (file_exists(_DIR_CACHE . $chemin_cache))
-			$use_cache = 0 ;
+			$use_cache = 0;
 		else {
 			spip_log("Erreur base de donnees, impossible utiliser $chemin_cache");
 			include_spip('inc/minipres');
@@ -338,7 +327,8 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 		}
 	}
 
-	if ($use_cache < 0) $chemin_cache = "";
+	if ($use_cache < 0) $chemin_cache = '';
 	return;
 }
+
 ?>
