@@ -182,6 +182,7 @@ $controler_dates_rss = true;
 # ils seront compiles par la suite
 # note: un pipeline non reference se compile aussi, mais uniquement
 # lorsqu'il est rencontre
+// http://doc.spip.org/@Tuto-Se-servir-des-points-d-entree
 $spip_pipeline = array(
 	'affichage_final' => '|f_surligne|f_tidy|f_admin', # cf. public/assembler
 	'affiche_droite' => '',
