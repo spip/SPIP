@@ -369,13 +369,7 @@ function formulaire_tourner($id_document, $document, $script, $flag_modif, $type
 	// Signaler les documents distants par une icone de trombone
 	if ($document['distant'] == 'oui')
 		$boite .= "\n<img src='"._DIR_IMG_PACK.'attachment.gif'."'\n\t style='float: $spip_lang_right;'\n\talt=\"$fichier\"\n\ttitle=\"$fichier\" />\n";
-	$boite .= "<div id='tourner-$id_document'>" .
-		$res .
-		'</div></div>';
-
-	return $boite;
-
-
+	return "$boite<div id='tourner-$id_document'>$res</div>";
 }
 
 // http://doc.spip.org/@boutons_rotateurs
@@ -724,6 +718,23 @@ function date_formulaire_legender($date, $id_document) {
 		"<br />\n";
 }
 
+function vignette_formulaire_legender($id_document, $document, $script, $type, $id, $ancre)
+{
+	$id_vignette = $document['id_vignette'];
+	$texte = _T('info_supprimer_vignette');
+
+	if (preg_match('/_edit$/', $script))
+		$action = redirige_action_auteur('supprimer', "document-$id_vignette", $script, "id_$type=$id&show_docs=$id_document#$ancre");
+	else {
+		$s = ($ancre =='documents' ? '': '-');
+		$action = ajax_action_auteur('documenter', "$s$id/$type/$id_vignette", $script, "id_$type=$id&type=$type&s=$s&show_docs=$id_document#$ancre", array($texte));
+	}
+
+	return "<hr style='margin-left: -5px; margin-right: -5px; height: 1px; border: 0px; color: #eeeeee; background-color: white;' />"
+	. (!$id_vignette
+	? formulaire_upload(generer_url_ecrire($script, "id_$type=$id"),$id, _T('info_vignette_personnalisee'), false, 'vignette', $type, $ancre, $id_document)
+	   : icone_horizontale($texte, $action, "vignette-24.png", "supprimer.gif", false));
+}
 
 // Formulaire de description d'un document (titre, date etc)
 // En mode Ajax pour eviter de recharger toute la page ou il se trouve
@@ -752,22 +763,15 @@ function formulaire_legender($id_document, $document, $script, $type, $id, $ancr
 	$date = $document['date'];
 
 	if ($document['mode'] == 'vignette') {
+		$supp = 'image-24.gif';
 		$label = _T('entree_titre_image');
 		$taille = $vignette = '';
-		$supp = 'image-24.gif';
 	  
 	} else {
+		$supp = 'doc-24.gif';
 		$label = _T('entree_titre_document');
 		$taille = formulaire_taille($document);
-		$supp = 'doc-24.gif';
-
-		$id_vignette = $document['id_vignette'];
-		$vignette = "<hr style='margin-left: -5px; margin-right: -5px; height: 1px; border: 0px; color: #eeeeee; background-color: white;' />" .
-			($id_vignette ?
-	     // pourrait faire partie de l'ajax de tout le bloc
-				icone_horizontale (_T('info_supprimer_vignette'), redirige_action_auteur('supprimer', "document-$id_vignette", $script, "id_$type=$id&show_docs=$id_document#$ancre"), "vignette-24.png", "supprimer.gif", false) :
-	     // mais pas ca, dommage.
-				formulaire_upload(generer_url_ecrire($script, "id_$type=$id"),$id, _T('info_vignette_personnalisee'), false, 'vignette', $type, $ancre, $id_document));
+		$vignette = vignette_formulaire_legender($id_document, $document, $script, $type, $id, $ancre);
 	}
 
 	$entete = basename($document['fichier']);
@@ -778,7 +782,7 @@ function formulaire_legender($id_document, $document, $script, $type, $id, $ancr
 
 	$contenu = '';
 	if ($descriptif)
-	  $contenu .=  propre($descriptif)  . '<br />' ;
+	  $contenu .=  propre($descriptif)  . "<br />\n" ;
 	if ($document['largeur'] OR $document['hauteur'])
 	  $contenu .= _T('info_largeur_vignette',
 		     array('largeur_vignette' => $document['largeur'],
@@ -786,7 +790,7 @@ function formulaire_legender($id_document, $document, $script, $type, $id, $ancr
 	else
 	  $contenu .= taille_en_octets($document['taille']) . ' - ';
 
-	if ($date) $contenu .= "<br />" . affdate($date);
+	if ($date) $contenu .= "<br />\n" . affdate($date);
 
 	$corps =
 	  (!$contenu ? '' :
@@ -794,10 +798,9 @@ function formulaire_legender($id_document, $document, $script, $type, $id, $ancr
 	  "<b>$label</b><br />\n" .
 
 	  "<input type='text' name='titre_document' class='formo' value=\"".entites_html($titre).
-	  "\" size='40'	onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /><br />\n" .
-	  '<br />' . 
+	  "\" size='40'	onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /><br /><br />\n" .
 	  date_formulaire_legender($date, $id_document) .
-	  "<br /><b>".
+	  "<br />\n<b>".
 	  _T('info_description_2').
 	  "</b><br />\n" .
 	  "<textarea name='descriptif_document' rows='4' class='formo' cols='*' wrap='soft'	onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">" .
@@ -813,11 +816,18 @@ function formulaire_legender($id_document, $document, $script, $type, $id, $ancr
 	  "' type='submit' />" .
 	  "</div>\n";
 
+	$texte = _T('icone_supprimer_document');
+	if (preg_match('/_edit$/', $script))
+		$action = redirige_action_auteur('supprimer', "document-$id_document", $script, "id_$type=$id#$ancre");
+	else {
+		$s = ($ancre =='documents' ? '': '-');
+		$action = ajax_action_auteur('documenter', "$s$id/$type/$id_document", $script, "id_$type=$id&type=$type&s=$s#$ancre", array($texte));
+	}
+
 	$corps = ajax_action_auteur("legender", $id_document, $script, "show_docs=$id_document&id_$type=$id#$ancre", $corps, "&id_document=$id_document&id=$id&type=$type&ancre=$ancre");
 
-	$corps .= 
-	  $vignette .
-	  icone_horizontale(_T('icone_supprimer_document'), redirige_action_auteur('supprimer', "document-$id_document", $script, "id_$type=$id#$ancre"), $supp,  "supprimer.gif", false);
+	$corps .=  $vignette . "\n\n\n\n"
+	  .  icone_horizontale($texte, $action, $supp, "supprimer.gif", false);
 
 	$bloc = "legender-aff-$id_document";
 

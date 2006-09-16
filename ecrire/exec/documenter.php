@@ -18,11 +18,12 @@ include_spip('inc/texte');
 function exec_documenter_dist()
 {
 	$type = _request("type");
+	$s = _request("s");
 	$id = intval(_request(($type == 'article') ? 'id_article' : 'id_rubrique'));
 
-	if ($id > 0)
+	if (!$s)
 	  $album = 'documents';
-	else {	  $album = 'portfolio'; $id = 0 - $id;}
+	else  $album = 'portfolio'; 
 
 	if ($type == 'rubrique')
 		$flag_editable = acces_rubrique($id);
@@ -33,7 +34,7 @@ function exec_documenter_dist()
 			  $flag_editable = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur LIMIT 1"));
 		}
 	}
-	return formulaire_documenter($id, $type, $album, $flag_editable ? 'ajax' : false);
+	return formulaire_documenter($id, $type, $album, $flag_editable);
 }
 
 // Compatbilite plugin (sinon togg va encore raler).
@@ -48,7 +49,7 @@ $GLOBALS['afficher_portfolio'] = 'formulaire_documenter';
 function formulaire_documenter(
 	$doc,		# tableau des documents ou numero de l'objet attachant
 	$type = "article",	# article ou rubrique ?
-	$album = 'portfolio',	# album d'images ou de documents ?
+	$ancre = 'portfolio',	# album d'images ou de documents ?
 	$flag_modif = false,	# a-t-on le droit de modifier ?
 	$couleur='',		# couleur des cases du tableau
 	$appelant =''		# pour le rappel (cf plugin)
@@ -56,7 +57,7 @@ function formulaire_documenter(
 	global $couleur_claire, $spip_lang_left, $spip_lang_right;
 
 	if (is_int($doc)) {
-		if ($album == 'portfolio') {
+		if ($ancre == 'portfolio') {
 			$lies = spip_query("SELECT docs.*,l.id_$type FROM spip_documents AS docs, spip_documents_".$type."s AS l, spip_types_documents AS lestypes WHERE l.id_$type=$doc AND l.id_document=docs.id_document AND docs.mode='document' AND docs.id_type=lestypes.id_type AND lestypes.extension IN ('gif', 'jpg', 'png') ORDER BY 0+docs.titre, docs.date");
 			$couleur = $couleur_claire;
 		} else {
@@ -73,7 +74,7 @@ function formulaire_documenter(
 	include_spip('inc/documents');
 	charger_generer_url();
 	// la derniere case d'une rangee
-	$bord_droit = ($album == 'portfolio' ? 2 : 1);
+	$bord_droit = ($ancre == 'portfolio' ? 2 : 1);
 	$case = 0;
 	$res = '';
 
@@ -97,7 +98,7 @@ function formulaire_documenter(
 		$res .= formulaire_tourner($id_document, $document, $script, $flag_modif, $type);
 
 		if ($flag_modif)
-		  $res .= formulaire_legender($id_document, $document, $script, $type, $document["id_$type"], $album);
+		  $res .= formulaire_legender($id_document, $document, $script, $type, $document["id_$type"], $ancre);
 
 		if (isset($document['info']))
 			$res .= "<div class='verdana1'>".$document['info']."</div>";
@@ -117,14 +118,14 @@ function formulaire_documenter(
 		$res .= "</tr>";
 	}
 
-	$div = ($album =='documents' ? '': '-');
+	$s = ($ancre =='documents' ? '': '-');
 	if (is_int($doc)) {
-		$head = "\n<div id='$album'>&nbsp;</div>"
-		. "\n<div style='background-color: $couleur; padding: 4px; color: black; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px;' class='verdana2'>\n<b>".majuscules(_T("info_$album"))."</b></div>";
+		$head = "\n<div id='$ancre'>&nbsp;</div>"
+		. "\n<div style='background-color: $couleur; padding: 4px; color: black; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px;' class='verdana2'>\n<b>".majuscules(_T("info_$ancre"))."</b></div>";
 
 		if (count($documents) > 3) {
 			$head .= "<div style='background-color: #dddddd; padding: 4px; color: black; text-align: right' class='arial1'>"
-			  . ajax_action_auteur('documenter', "$div$doc/$type", $GLOBALS['exec'], "id_$type=$div$doc&type=$type",array(_L('Supprimer_tout')))
+			  . ajax_action_auteur('documenter', "$s$doc/$type", $GLOBALS['exec'], "id_$type=$doc&s=$s&type=$type",array(_L('Supprimer_tout')))
 			. "</div>\n";
 		}
 	} else $head = '';
@@ -135,7 +136,7 @@ function formulaire_documenter(
 	. "</table>";	  
 	return _request('var_ajaxcharset') 
 	? $res
-	: ("<div id='documenter-$div$doc'>$res</div>");
+	: ("<div id='documenter-$s$doc'>$res</div>");
 }
 
 ?>

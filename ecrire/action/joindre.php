@@ -34,7 +34,7 @@ function action_joindre_dist()
 	$redirect = _request('redirect');
 	if (!preg_match(',^(\d+)\D(\d+)\D(\w+)/(\w+)$,',_request('arg'),$r)) {
 	  spip_log("action_joindre_dist incompris: " . _request('arg'));
-	  redirige_par_entete($redirect);
+	  redirige_par_entete(urldecode($redirect));
 	}
 	list($arg, $id, $id_document, $mode, $type) = $r;
 
@@ -58,11 +58,12 @@ function action_joindre_dist()
 
      else spip_log("spip_action: sousaction inconnue $sousaction");
 
+     $redirect = urldecode($redirect);
      if ($documents_actifs) {
 	$redirect .= '&show_docs=' . join('-',$documents_actifs);
      }
      
-     if (!$ancre) {
+    if (!$ancre) {
 
 		if ($mode=='vignette')
 			$ancre = 'images';
@@ -70,11 +71,10 @@ function action_joindre_dist()
 			$ancre = 'portfolio';
 		else
 			$ancre = 'documents';
-
-		$redirect .= '#' . $ancre;
      }
 
-     if ($type == 'rubrique') {
+    $redirect .= '#' . $ancre;
+    if ($type == 'rubrique') {
 	include_spip('inc/rubriques');
 	calculer_rubriques();
      }
