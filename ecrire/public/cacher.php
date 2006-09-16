@@ -136,19 +136,10 @@ function retire_caches($chemin = '') {
 	}
 }
 
-// gestion des delais par specification a l'exterieur du squelette
-
+// gestion des delais d'expiration du cache
+// $page passee par reference pour accelerer
 // http://doc.spip.org/@cache_valide
-function cache_valide($chemin_cache, $date) {
-	if (!$GLOBALS['delais']) return -1; // delais=0, calcul a faire
-	if ((time() - $date) > $GLOBALS['delais']) return 1; // cache trop vieux
-	return 0; // cache ok
-}
-
-// gestion des delais par specification a l'interieur du squelette
-
-// http://doc.spip.org/@cache_valide_autodetermine
-function cache_valide_autodetermine($chemin_cache, $page, $date) {
+function cache_valide(&$page, $date) {
 
 	if (!$page) return 1;
 
@@ -157,19 +148,14 @@ function cache_valide_autodetermine($chemin_cache, $page, $date) {
 	AND $date < $GLOBALS['meta']['derniere_modif'])
 		return 1;
 
-	// Duree du cache precisee par #CACHE{x}
-	if (isset($page['entetes']['X-Spip-Cache'])) {
-		$duree = intval($page['entetes']['X-Spip-Cache']);
-		if ($duree == 0)  #CACHE{0}
-			return -1;
-		else if ($date + $duree < time())
-			return 1;
-		else
-			return 0;
-	}
-
-	// squelette ancienne maniere, on se rabat sur le vieux modele
-	return cache_valide($chemin_cache, $date);
+	// Sinon comparer l'age du fichier a sa duree de cache
+	$duree = intval($page['entetes']['X-Spip-Cache']);
+	if ($duree == 0)  #CACHE{0}
+		return -1;
+	else if ($date + $duree < time())
+		return 1;
+	else
+		return 0;
 }
 
 
@@ -311,7 +297,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 		$lastmodified = @file_exists(_DIR_CACHE . $chemin_cache) ?
 			@filemtime(_DIR_CACHE . $chemin_cache) : 0;
 		$page = restaurer_meta_donnees ($page);
-		$use_cache = cache_valide_autodetermine($chemin_cache, $page, $lastmodified);
+		$use_cache = cache_valide($page, $lastmodified);
 		if (!$use_cache) return; // cache utilisable
 	} else
 		$use_cache = 1; // fichier cache absent : provoque le calcul
