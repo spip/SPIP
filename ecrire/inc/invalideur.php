@@ -287,4 +287,24 @@ function code_invalideur_forums($p, $code) {
 	(!($Cache[\''.$type.'\']['.$valeur."]=1) ? '':\n\t" . $code .")\n";
 }
 
+
+// Fonction permettant au compilo de calculer les invalideurs d'une page
+function calcul_invalideurs($corps, $primary, &$boucles, $id_boucle) {
+	if ($primary == 'id_forum'
+	OR in_array($primary, explode(',', $GLOBALS['invalider_caches']))) {
+		$corps .= "\n\t\t\$Cache['$primary'][intval(" .
+		  (($primary != 'id_forum')  ? 
+		   index_pile($id_boucle, $primary, $boucles) :
+		   ("calcul_index_forum(" . 
+		// Retournera 4 [$SP] mais force la demande du champ a MySQL
+		    index_pile($id_boucle, 'id_article', $boucles) . ',' .
+		    index_pile($id_boucle, 'id_breve', $boucles) .  ',' .
+		    index_pile($id_boucle, 'id_rubrique', $boucles) .',' .
+		    index_pile($id_boucle, 'id_syndic', $boucles) .
+		    ")")) .
+		  ")] = 1; // invalideurs\n";
+	}
+	return $corps;
+}
+
 ?>
