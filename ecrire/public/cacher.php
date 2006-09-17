@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 // Le format souhaite : "a/bout-d-url.md5" (.gz s'ajoutera pour les gros caches)
 // Attention a modifier simultanement le sanity check de
-// la fonction retire_cache()
+// la fonction retire_cache() de inc/invalideur
 //
 // http://doc.spip.org/@generer_nom_fichier_cache
 function generer_nom_fichier_cache($contexte) {
@@ -69,73 +69,6 @@ function cache_gz($page) {
 		return '';
 }
 
-//
-// Destruction des fichiers caches invalides
-//
-
-// Securite : est sur que c'est un cache
-// http://doc.spip.org/@retire_cache
-function retire_cache($cache) {
-
-	if (preg_match(
-	"|^([0-9a-f]/)?([0-9]+/)?[^.][\-_\%0-9a-z]+\.[0-9a-f]+(\.gz)?$|i",
-	$cache)) {
-		// supprimer le fichier (de facon propre)
-		supprimer_fichier(_DIR_CACHE . $cache);
-	} else
-		spip_log("Impossible de retirer $cache");
-}
-
-// Supprimer les caches marques "x"
-// http://doc.spip.org/@retire_caches
-function retire_caches($chemin = '') {
-
-	include_spip('base/abstract_sql');
-	// recuperer la liste des caches voues a la suppression
-	$suppr = array();
-
-	// En priorite le cache qu'on appelle maintenant
-	if ($chemin) {
-		$f = spip_abstract_fetsel(array("fichier"),  array("spip_caches"), array("fichier = " . spip_abstract_quote($chemin) . " ",  "type='x'"), "", array(), 1);
-		if ($f['fichier']) $suppr[$f['fichier']] = true;
-	}
-
-	// Et puis une centaine d'autres
-	$compte = 0;
-	if (isset($GLOBALS['meta']['invalider_caches'])) {
-		$compte = 1;
-		effacer_meta('invalider_caches'); # concurrence
-		ecrire_metas();
-
-		$q = spip_abstract_select(array("fichier"),
-				    array("spip_caches"),
-				    array("type='x'"),
-				    "",
-				    array(),
-				    100);
-		while ($r = spip_abstract_fetch($q)) {
-			$compte ++;	# compte le nombre de resultats vus (y compris doublons)
-			$suppr[$r['fichier']] = true;
-		}
-	}
-
-	if ($n = count($suppr)) {
-		spip_log ("Retire $n caches");
-		foreach ($suppr as $cache => $ignore)
-			retire_cache($cache);
-		spip_query("DELETE FROM spip_caches WHERE " . calcul_mysql_in('fichier', "'".join("','",array_keys($suppr))."'") );
-	}
-
-	// Si on a regarde (compte > 0), signaler s'il reste des caches invalides
-	if ($compte > 0) {
-		if ($compte > 100) # s'il y en a 101 c'est qu'on n'a pas fini
-			ecrire_meta('invalider_caches', 'oui');
-		else
-			effacer_meta('invalider');
-		ecrire_metas();
-	}
-}
-
 // gestion des delais d'expiration du cache
 // $page passee par reference pour accelerer
 // http://doc.spip.org/@cache_valide
@@ -164,12 +97,6 @@ function cache_valide(&$page, $date) {
 // http://doc.spip.org/@creer_cache
 function creer_cache(&$page, &$chemin_cache) {
 
-	// Enregistrer le fichier cache qui contient
-	// 1) la carte d'identite de la page (ses "globals", genre id_article=7)
-	// 2) son contenu
-	$page['signal']['process_ins'] = $page['process_ins'];
-	$page['signal']['entetes'] = $page['entetes'];
-
 	// Normaliser le chemin et supprimer l'eventuelle contrepartie -gz du cache
 	$chemin_cache = str_replace('.gz', '', $chemin_cache);
 	$gz = cache_gz($page);
@@ -177,39 +104,15 @@ function creer_cache(&$page, &$chemin_cache) {
 
 	// l'enregistrer, compresse ou non...
 	$chemin_cache .= $gz;
-	$ok = ecrire_fichier(_DIR_CACHE . $chemin_cache,
-		"<!-- "
-		. str_replace("\n", " ", serialize($page['signal']))
-		. " -->\n"
-		. $page['texte']);
+	$ok = ecrire_fichier(_DIR_CACHE . $chemin_cache, serialize($page));
 
 	spip_log("Creation du cache $chemin_cache pour "
 		. $page['entetes']['X-Spip-Cache']." secondes". ($ok?'':' (erreur!)'));
 
 	// Inserer ses invalideurs
 	include_spip('inc/invalideur');
-	maj_invalideurs($chemin_cache, $page, $page['entetes']['X-Spip-Cache']);
+	maj_invalideurs($chemin_cache, $page);
 
-	// En profiter pour verifier que le .htaccess (deny all) est bien la
-	include_spip('inc/acces');
-	verifier_htaccess(_DIR_CACHE);
-}
-
-// http://doc.spip.org/@restaurer_meta_donnees
-function restaurer_meta_donnees ($contenu) {
-
-	if (preg_match("/^<!-- ([^\n]*) -->\n/ms", $contenu, $match)) {
-		$meta_donnees = unserialize($match[1]);
-		if (is_array($meta_donnees)) {
-			foreach ($meta_donnees as $var=>$val) {
-				$page[$var] = $val;
-			}
-		}
-		$page['texte'] = substr($contenu, strlen($match[0]));
-	} else
-		$page['texte'] = $contenu;
-
-	return $page;
 }
 
 
@@ -275,8 +178,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	if (isset($GLOBALS['meta']['invalider'])) {
 		// ne le faire que si la base est disponible
 		if (spip_connect()) {
-			include_spip('inc/meta');
-			lire_metas();
+			include_spip('inc/invalideur');
 			retire_caches($chemin_cache);
 		}
 	}
@@ -296,7 +198,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	if (lire_fichier(_DIR_CACHE . $chemin_cache, $page)) {
 		$lastmodified = @file_exists(_DIR_CACHE . $chemin_cache) ?
 			@filemtime(_DIR_CACHE . $chemin_cache) : 0;
-		$page = restaurer_meta_donnees ($page);
+		$page = unserialize ($page);
 		$use_cache = cache_valide($page, $lastmodified);
 		if (!$use_cache) return; // cache utilisable
 	} else

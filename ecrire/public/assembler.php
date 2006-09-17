@@ -252,17 +252,21 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 		list($fond, $delainc, $contexte_inclus) = $texte;
 
 		// delais a l'ancienne, c'est pratiquement mort
-		$d = isset($GLOBALS['delais']) ? $GLOBALS['delais'] : 0;
+		$d = isset($GLOBALS['delais']) ? $GLOBALS['delais'] : NULL;
 		$GLOBALS['delais'] = $delainc;
 		$page = inclure_page($fond, $contexte_inclus);
 		$GLOBALS['delais'] = $d;
-		if (is_array($page['entetes']))
-			foreach($page['entetes'] as $k => $v) {
-			  // ceci se discute
-			  // if ((strtolower($k) != 'content-type')
-			  // OR !isset( $GLOBALS['page']['entetes'][$k])
-				$GLOBALS['page']['entetes'][$k] = $v;
-			}
+
+		// Faire remonter les entetes
+		if (is_array($page['entetes'])) {
+			// mais pas toutes
+			unset($page['entetes']['X-Spip-Cache']);
+			unset($page['entetes']['Content-Type']);
+			if (!is_array($GLOBALS['page']['entetes']))
+				$GLOBALS['page']['entetes'] = array();
+			$GLOBALS['page']['entetes'] = 
+				array_merge($GLOBALS['page']['entetes'],$page['entetes']);
+		}
 
 		if ($page['process_ins'] == 'html') {
 				$texte = $page['texte'];

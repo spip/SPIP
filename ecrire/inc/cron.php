@@ -163,8 +163,8 @@ function taches_generales() {
 	if ($GLOBALS['meta']["activer_moteur"] == "oui") 
 		$taches_generales['indexation'] = 90;
 		
-	// ajax
-		$taches_generales['ajax'] = 3600 * 2;
+	// maintenance (ajax, verifications diverses)
+		$taches_generales['maintenance'] = 3600 * 2;
 
 	return pipeline('taches_generales_cron',$taches_generales);
 }

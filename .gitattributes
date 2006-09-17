@@ -414,7 +414,6 @@ ecrire/img_pack/wrapper.php -text
 ecrire/img_pack/xml.gif -text
 ecrire/inc/actions.php -text
 ecrire/inc/agenda.php -text
-ecrire/inc/ajax.php -text
 ecrire/inc/article_select.php -text
 ecrire/inc/auteur_voir.php -text
 ecrire/inc/boutons.php -text
@@ -445,6 +444,7 @@ ecrire/inc/install_ldap4.php -text
 ecrire/inc/install_ldap5.php -text
 ecrire/inc/install_unpack.php -text
 ecrire/inc/lang_liste.php -text
+ecrire/inc/maintenance.php -text
 ecrire/inc/message_select.php -text
 ecrire/inc/mini_nav.php -text
 ecrire/inc/minipres.php -text

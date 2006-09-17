@@ -36,8 +36,12 @@ charger_generer_url();
 function balise_FORMULAIRE_FORUM ($p) {
 
 	$p = calculer_balise_dynamique($p,'FORMULAIRE_FORUM', array('id_rubrique', 'id_forum', 'id_article', 'id_breve', 'id_syndic', 'ajouter_mot', 'ajouter_groupe', 'afficher_texte'));
-	// Ajouter l'invalideur forums sur les pages contenant ce formulaire
-	$p->code = code_invalideur_forums($p, $p->code);
+
+	// Ajouter le code d'invalideur specifique aux forums
+	include_spip('inc/invalideur');
+	if (function_exists($i = 'code_invalideur_forums'))
+		$p->code = $i($p, $p->code);
+
 	return $p;
 }
 

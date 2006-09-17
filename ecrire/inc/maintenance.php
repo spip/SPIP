@@ -12,8 +12,15 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@cron_ajax
-function cron_ajax ($t) {
+// Diverses taches de maintenance
+// http://doc.spip.org/@cron_maintenance
+function cron_maintenance ($t) {
+
+	// Verifier que le .htaccess (deny all) est bien la
+	include_spip('inc/acces');
+	verifier_htaccess(_DIR_CACHE);
+
+	// Supprimer les vieilles fonctions ajax enregistrees
 	spip_query("DELETE FROM spip_ajax_fonc WHERE date < DATE_SUB(NOW(), INTERVAL 2 HOUR)");
 	return 1;
 }
