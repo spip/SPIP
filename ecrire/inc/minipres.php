@@ -217,7 +217,14 @@ function http_wrapper($img){
 	static $wrapper_state=NULL;
 	static $wrapper_table = array();
 	
-	$f = _DIR_IMG_PACK . $img;
+	if (strpos($img,'/')===FALSE) // on ne prefixe par _DIR_IMG_PACK que si c'est un nom de fichier sans chemin
+		$f = _DIR_IMG_PACK . $img;
+	else { // sinon, le path a ete fourni
+		$f = $img;
+		// gerer quand meme le cas des hacks pre 1.9.2 ou l'on faisait un path relatif depuis img_pack
+		if (substr($f,0,strlen("../"._DIR_PLUGINS))=="../"._DIR_PLUGINS)
+			$f = substr($img,3); // on enleve le ../ qui ne faisait que ramener au rep courant
+	}
 	
 	if ($wrapper_state==NULL){
 		global $browser_name;
