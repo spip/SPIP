@@ -102,8 +102,8 @@ function assembler_page ($fond) {
 	AND !$var_mode
 	AND $chemin_cache
 	AND isset($page['entetes'])
-	AND strstr('max-age=', $page['entetes']['Cache-Control'])
-	AND !strstr('IIS/', $_SERVER['SERVER_SOFTWARE'])
+	AND strstr($page['entetes']['Cache-Control'],'max-age=')
+	AND !strstr($_SERVER['SERVER_SOFTWARE'],'IIS/')
 	) {
 		$since = preg_replace('/;.*/', '',
 			$_SERVER['HTTP_IF_MODIFIED_SINCE']);
