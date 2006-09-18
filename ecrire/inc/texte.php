@@ -1114,7 +1114,7 @@ function paragrapher($letexte) {
 function traiter_raccourci_lien($regs) {
 
 	// title et hreflang donnes par le raccourci ?
-	if (preg_match(',^(.*?)([|](.*?))?([{]([a-z_]+)[}])?$,', $regs[1], $m)) {
+	if (preg_match(',^(.*?)([|]([^<>]*?))?([{]([a-z_]+)[}])?$,', $regs[1], $m)) {
 		// |infobulle ?
 		if ($m[2])
 			$bulle = ' title="'.texte_backend($m[3]).'"';
