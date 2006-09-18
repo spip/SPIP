@@ -144,7 +144,7 @@ function generer_supprimer_mot($id_mot, $id_groupe, $clic, $total)
 	$cont = ($total > 1)
 		? ''
 	: "function(r) {ajax_double(\"editer_mot-$id_groupe\", \"editer_mot-$id_groupe-supprimer\", r)}";
-	return ajax_action_auteur('editer_mot', "$id_groupe,$id_mot,,,",'grouper_mots', "&id_groupe=$id_groupe", array($clic,''), '', $cont);
+	return ajax_action_auteur('editer_mot', "$id_groupe,$id_mot,,,",'grouper_mots', "id_groupe=$id_groupe", array($clic,''), '', $cont);
 }
 
 //

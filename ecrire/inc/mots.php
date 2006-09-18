@@ -108,7 +108,6 @@ function formulaire_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag_
 	global $connect_statut, $spip_lang_rtl, $spip_lang_right, $spip_lang;
 
 	$visible = ($cherche_mot OR ($flag_editable === 'ajax'));
-#	spip_log("fm '$cherche_mot' '$flag_editable' '$visible' '$select_groupe'");
 
 	if ($objet == 'article') {
 		$table_id = 'id_article';
@@ -131,7 +130,10 @@ function formulaire_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag_
 		$table = 'syndic';
 		$url_base = "sites";
 	}
-	else {$table =	$table_id = $objet = $url_base = '';}
+	else {
+		spip_log("erreur dans formulaire_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag_editable)");
+		return '';
+	}
 
 	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot"));
 
