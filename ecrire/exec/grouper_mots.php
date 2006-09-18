@@ -173,7 +173,7 @@ else $aff_articles = "'prop','publie'";
 }
 
  $breves = array();
- $result_breves = spip_query("SELECT COUNT(*) AS cnt, lien.id_mot FROM spip_mots_breves AS lien, spip_breves AS breve, spip_mots AS M WHERE lien.id_mot=M.id_mot AND M.id_groupe=$id_groupe breve.id_breve=lien.id_breve AND breve.statut IN ($aff_articles) GROUP BY lien.id_mot");
+ $result_breves = spip_query("SELECT COUNT(*) AS cnt, lien.id_mot FROM spip_mots_breves AS lien, spip_breves AS breve, spip_mots AS M WHERE lien.id_mot=M.id_mot AND M.id_groupe=$id_groupe AND breve.id_breve=lien.id_breve AND breve.statut IN ($aff_articles) GROUP BY lien.id_mot");
 
  while ($row = spip_fetch_array($result_breves)){
 	$breves[$row['id_mot']] = $row['cnt'];
