@@ -62,8 +62,6 @@ function action_editer_mot_dist() {
 
 	if (preg_match('/^(.*exec=)editer_mot(&.*)script=(grouper_mots)(.*)$/', $redirect, $r))
 	    $redirect = $r[1] . $r[3] . $r[2] . $r[4];
-#($p =(strpos($redirect, '=editer_mot&script=grouper_mots&'))) !== false)
-#	    $redirect = substr($redirect,0,$p) . substr($redirect,$p+18);
 	    
 	if ($cherche_mot) {
 		if ($p = strpos($redirect, '#')) {
