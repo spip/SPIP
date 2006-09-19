@@ -212,7 +212,11 @@ if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
   echo "\n<div align='center'>";
   icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi","statut=prive&id_article=$id_article&titre_message=$tm&url=" . generer_url_retour("articles","id_article=$id_article")), "forum-interne-24.gif", "creer.gif");
   echo "</div><br />";
-  echo  "<div id='forum'>", exec_discuter_dist($id_article, $debut),"</div>";
+
+  $f = charger_fonction('discuter', 'fragments');
+  echo  "<div id='forum'>";
+  echo $f($id_article, $debut);
+  echo "</div>";
 
   fin_page();
 
