@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions'); // *action_auteur et determine_upload
 include_spip('inc/date');
 include_spip('base/abstract_sql');
-include_spip('exec/documenter');
+include_spip('fragments/documenter');
 
 //
 // Vignette pour les documents lies

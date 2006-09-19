@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
-function exec_referencer_traduction_dist()
+function fragments_referencer_traduction_dist()
 {
 	include_spip('inc/actions');
 

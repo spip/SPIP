@@ -12,20 +12,22 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
-# afficher les sous-rubriques d'une rubrique (composant du mini-navigateur)
-
-// http://doc.spip.org/@exec_plonger_dist
-function exec_plonger_dist()
+// http://doc.spip.org/@fragments_petitionner_dist
+function fragments_petitionner_dist()
 {
-	global $id, $exclus, $col, $rac;
-	$id = intval($id);
-	$exclus = intval($exclus);
-	$col = intval($col);
+	global $id_article, $script;
+	$id_article = intval($id_article);
 
-	include_spip('inc/texte');
-	include_spip('inc/mini_nav');
-	return mini_afficher_rubrique ($id, htmlentities($rac), array(), $col, $exclus);
+	if (!acces_article($id_article)) {
+		spip_log("Tentative d'intrusion de " . $GLOBALS['auteur_session']['nom'] . " dans " . $GLOBALS['exec']);
+		include_spip('inc/minipres');
+		minipres(_T('info_acces_interdit'));
+	}
+
+	include_spip('inc/petition');
+	include_spip('inc/presentation');
+	include_spip('inc/actions');
+
+	return formulaire_petitionner($id_article, $script, "&id_article=$id_article", true);
 }
-
 ?>

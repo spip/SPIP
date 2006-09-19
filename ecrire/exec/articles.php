@@ -21,10 +21,10 @@ include_spip('inc/date');
 include_spip('inc/petition');
 include_spip('inc/documents');
 include_spip('base/abstract_sql');
-include_spip('exec/editer_auteurs');
-include_spip('exec/referencer_traduction');
-include_spip('exec/virtualiser');
-include_spip('exec/discuter');
+include_spip('fragments/editer_auteurs');
+include_spip('fragments/referencer_traduction');
+include_spip('fragments/virtualiser');
+include_spip('fragments/discuter');
 
 // http://doc.spip.org/@exec_articles_dist
 function exec_articles_dist()

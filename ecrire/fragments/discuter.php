@@ -48,8 +48,8 @@ function formulaire_discuter($query, $total, $debut, $total_afficher, $script, $
 	return $res;
 }
 
-// http://doc.spip.org/@exec_discuter_dist
-function exec_discuter_dist($id_article=-1, $debut=-1)
+// http://doc.spip.org/@fragments_discuter_dist
+function fragments_discuter_dist($id_article=-1, $debut=-1)
 {
   if ($debut == -1) $debut = _request('debut');
   if ($id_article == -1) $id_article = _request('id_article');

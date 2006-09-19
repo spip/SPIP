@@ -45,7 +45,7 @@ function formulaire_virtualiser($id_article, $virtuel, $script, $args)
 }
 
 // http://doc.spip.org/@exec_virtualiser_dist
-function exec_virtualiser_dist()
+function fragments_virtualiser_dist()
 {
 	global $id_article, $script;
 	$id_article = intval($id_article);

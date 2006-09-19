@@ -14,8 +14,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 # Affiche les infos d'une rubrique selectionnee dans le mini navigateur
 
-// http://doc.spip.org/@exec_informer_dist
-function exec_informer_dist()
+// http://doc.spip.org/@fragments_informer_dist
+function fragments_informer_dist()
 {
 	global $couleur_foncee,$spip_display,$spip_lang_right ;
 	global $id, $exclus, $col, $type, $rac;

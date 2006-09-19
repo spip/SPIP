@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/actions');
 
-function exec_editer_auteurs_dist()
+function fragments_editer_auteurs_dist()
 {
 	$id_article = intval(_request('id_article'));
 

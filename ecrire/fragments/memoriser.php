@@ -12,8 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@exec_memoriser_dist
-function exec_memoriser_dist()
+// http://doc.spip.org/@fragments_memoriser_dist
+function fragments_memoriser_dist()
 {
 	global $flag_ob;
 
