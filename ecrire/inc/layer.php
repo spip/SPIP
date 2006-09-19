@@ -136,32 +136,32 @@ function verif_butineur() {
 	if (!eregi("opera", $browser_description)&&eregi("opera", $browser_name)) {
 		$browser_name = "Opera";
 		$browser_version = $match[2];
-		$browser_layer = (($browser_version < 7) ? '' :  http_script('', _DIR_IMG_PACK . 'layer.js',''));
+		$browser_layer = (($browser_version < 7) ? '' :  http_script('', _DIR_JAVASCRIPT . 'layer.js',''));
 		$browser_barre = ($browser_version >= 8.5); 
 	}
 	else if (eregi("opera", $browser_description)) {
 		eregi("Opera ([^\ ]*)", $browser_description, $match);
 		$browser_name = "Opera";
 		$browser_version = $match[1];
-		$browser_layer = (($browser_version < 7) ? '' :  http_script('', _DIR_IMG_PACK . 'layer.js',''));
+		$browser_layer = (($browser_version < 7) ? '' :  http_script('', _DIR_JAVASCRIPT . 'layer.js',''));
 		$browser_barre = ($browser_version >= 8.5); 
 	}
 	else if (eregi("msie", $browser_description)) {
 		eregi("MSIE ([^;]*)", $browser_description, $match);
 		$browser_name = "MSIE";
 		$browser_version = $match[1];
-		$browser_layer = (($browser_version < 5) ? '' :  http_script('', _DIR_IMG_PACK . 'layer.js',''));
+		$browser_layer = (($browser_version < 5) ? '' :  http_script('', _DIR_JAVASCRIPT . 'layer.js',''));
 		$browser_barre = ($browser_version >= 5.5);
 	}
 	else if (eregi("KHTML", $browser_description) &&
 		eregi("Safari/([^;]*)", $browser_description, $match)) {
 		$browser_name = "Safari";
 		$browser_version = $match[1];
-		$browser_layer = http_script('', _DIR_IMG_PACK . 'layer.js','');
+		$browser_layer = http_script('', _DIR_JAVASCRIPT . 'layer.js','');
 		$browser_barre = ($browser_version >= 5.0);
 	}
 	else if (eregi("mozilla", $browser_name) AND $browser_version >= 5) {
-		$browser_layer = http_script('', _DIR_IMG_PACK . 'layer.js','');
+		$browser_layer = http_script('', _DIR_JAVASCRIPT . 'layer.js','');
 		// Numero de version pour Mozilla "authentique"
 		if (ereg("rv:([0-9]+\.[0-9]+)", $browser_description, $match))
 			$browser_rev = doubleval($match[1]);
