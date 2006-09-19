@@ -2264,7 +2264,7 @@ if (true /*$bandeau_colore*/) {
 	}
 
 	echo "\n<div style=\"max-height: 40px; width: 100%; border-bottom: solid 1px white;$style\">";
-	echo "<table align='center' cellpadding='0' background='' width='$largeur'><tr width='$largeur'>";
+	echo "<table align='center' cellpadding='0' style='background: none;' width='$largeur'><tr width='$largeur'>";
 
 	echo "<td valign='middle' class='bandeau_couleur' style='text-align: $spip_lang_left;'>";
 
