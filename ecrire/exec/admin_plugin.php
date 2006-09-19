@@ -285,12 +285,22 @@ function ligne_plug($plug_file, $actif, $id){
 		$s .= " onclick='verifchange.apply(this,[\"$plug_file\"])' /> <label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
 	}
 	$id_input++;
-	
+
 	$s .= bouton_block_invisible("$plug_file");
+
 	$s .= ($actif?"":"").typo($info['nom']).($actif?"":"");
-
-
 	$s .= "</div>";
+
+	// TODO : n'afficher que les actifs, les autres en AHAH
+	if (true
+	OR $actif
+	OR $GLOBALS['spip_accepte_ajax']!=1) # va-t-on afficher le bloc ?
+		$s .= affiche_bloc_plugin($plug_file, $info);
+
+	return $s;
+}
+
+function affiche_bloc_plugin($plug_file, $info) {
 	$s .= debut_block_invisible("$plug_file");
 	$s .= "<div class='detailplugin'>";
 	$s .= _T('version') .' '.  $info['version'] . " | <strong>$titre_etat</strong><br/>";
@@ -305,7 +315,6 @@ function ligne_plug($plug_file, $actif, $id){
 		$s .= "<hr/>" . _T('info_url') .' '. propre($info['lien']) . "<br/>";
 	$s .= "</div>";
 	$s .= fin_block();
-
 
 	return $s;
 }
