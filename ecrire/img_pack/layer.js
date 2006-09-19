@@ -1,5 +1,6 @@
 var memo_obj = new Array();
 var url_chargee = new Array();
+var load_handlers = new Array();
 
 function findObj_test_forcer(n, forcer) { 
 	var p,i,x;
@@ -154,6 +155,21 @@ function createXmlHttp() {
 		return new ActiveXObject("Microsoft.XMLHTTP");
 }
 
+//
+// Add a function to the list of those to be executed on ajax load complete
+//
+function onAjaxLoad(f) {
+	load_handlers.push(f);
+}
+
+//
+// Call the functions that have been added to onAjaxLoad
+//
+function triggerAjaxLoad(root) {
+	for ( var i = 0; i < load_handlers.length; i++ )
+	load_handlers[i].apply( root );
+}
+
 function ajah(method, url, flux, rappel)
 {
 	var xhr = createXmlHttp();
@@ -206,16 +222,17 @@ function AjaxSqueeze(trig, id, f)
 
 function AjaxSqueezeNode(trig, noeud, f)
 {
-	var i, s, g;
+	var i, s, g, callback;
 	var u = '';
-
+	
 	// retour std si pas precise: affecter ce noeud avec ce retour
-	if (!f) f = function(r) { noeud.innerHTML = r;}
-
+	if (!f) callback = function(r) { noeud.innerHTML = r; triggerAjaxLoad(noeud);}
+	else callback = function(r) { f(r); triggerAjaxLoad(noeud);}
+	
 	if (typeof(trig) == 'string') {
 		i = trig.split('?');
 		trig = i[0] +'?var_ajaxcharset=utf-8&' + i[1];
-		return !ajah('GET', trig, null, f);
+		return !ajah('GET', trig, null, callback);
 	}
 
 	for (i=0;i < trig.elements.length;i++) {
@@ -233,7 +250,7 @@ function AjaxSqueezeNode(trig, noeud, f)
 	return !ajah('POST', // ou 'GET'
 		     s ,     // s + '?'+ u,
 		     u,      // null,
-		     f);
+		     callback);
 }
 
 
@@ -253,20 +270,20 @@ function charger_id_url(myUrl, myField, jjscript)
 	  var r = url_chargee[myUrl];
 	// disponible en cache ?
 	  if (r) {
-		retour_id_url(r, Field, jjscript);
-		return false; 
+			retour_id_url(r, Field, jjscript);
+			triggerAjaxLoad(Field);
+			return false; 
 	  } else {
-		var img = findObj_forcer('img_' + myField);
-		if (img) img.style.visibility = "visible";
-		return AjaxSqueezeNode(myUrl,
-			'',
-			function (r) {
-				if (img) img.style.visibility = "hidden";
-				url_chargee[myUrl] = r;
-				retour_id_url(r, Field, jjscript);
-			}
-		     )
-		  }
+			var img = findObj_forcer('img_' + myField);
+			if (img) img.style.visibility = "visible";
+			return AjaxSqueezeNode(myUrl,
+				'',
+				function (r) {
+					if (img) img.style.visibility = "hidden";
+					url_chargee[myUrl] = r;
+					retour_id_url(r, Field, jjscript);
+				})
+		}
 	}
 }
 
