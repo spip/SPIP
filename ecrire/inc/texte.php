@@ -1022,7 +1022,7 @@ function traiter_modeles($texte, $doublons=false) {
 			substr($texte, $a), $regs);
 
 			if ($regs[5] AND preg_match(
-			',<a\s.*>\s*$,Uis', substr($texte, 0, $a), $r)) {
+			',<a\s[^<>]*>\s*$,i', substr($texte, 0, $a), $r)) {
 				$lien = array(
 					extraire_attribut($r[0],'href'),
 					extraire_attribut($r[0],'class')
