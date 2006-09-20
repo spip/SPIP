@@ -111,7 +111,7 @@ echo _T('ical_texte_rss');
 
 echo "<p>"._T("ical_texte_rss_articles")."</p>";
 
-echo propre("<ul><cadre>" . generer_url_public('backend') . "</cadre></ul>");
+echo propre("<cadre>" . generer_url_public('backend') . "</cadre>");
 
 echo "<p>"._T("ical_texte_rss_articles2")."</p>";
 
