@@ -32,6 +32,7 @@ $INDEX_tables_interdites=array('spip_ajax_fonc');
 
 // Indexation des elements de l'objet principal
 // 'champ'=>poids, ou 'champ'=>array(poids,min_long)
+$reindex = false;
 global $INDEX_elements_objet;
 $INDEX_elements_objet = FALSE;
 if (isset($GLOBALS['meta']['INDEX_elements_objet']))
@@ -50,6 +51,7 @@ if (!$INDEX_elements_objet) {
 	$INDEX_elements_objet['spip_documents'] = array('titre'=>20,'descriptif'=>10,'fichier|nettoie_nom_fichier'=>1);
 	ecrire_meta('INDEX_elements_objet',serialize($INDEX_elements_objet));
 	ecrire_metas();
+	$reindex = true;
 }
 
 // Indexation des objets associes
@@ -66,6 +68,7 @@ if (!$INDEX_objet_associes) {
 	$INDEX_objet_associes['spip_documents'] = array('spip_mots'=>3);
 	ecrire_meta('INDEX_objet_associes',serialize($INDEX_objet_associes));
 	ecrire_metas();
+	$reindex = true;
 }
 
 // Indexation des elements des objets associes
@@ -81,6 +84,7 @@ if (!$INDEX_elements_associes){
 	$INDEX_elements_associes['spip_mots'] = array('titre'=>4,'descriptif'=>1);
 	ecrire_meta('INDEX_elements_associes',serialize($INDEX_elements_associes));
 	ecrire_metas();
+	$reindex = true;
 }
 // Criteres d'indexation
 global $INDEX_critere_indexation;
@@ -97,6 +101,7 @@ if (!$INDEX_critere_indexation){
 	$INDEX_critere_indexation['spip_signatures']="statut='publie'";
 	ecrire_meta('INDEX_critere_indexation',serialize($INDEX_critere_indexation));
 	ecrire_metas();
+	$reindex = true;
 }
 
 // Criteres de des-indexation (optimisation dans base/optimiser)
@@ -114,6 +119,7 @@ if (!$INDEX_critere_optimisation) {
 	$INDEX_critere_optimisation['spip_signatures']="statut<>'publie'";
 	ecrire_meta('INDEX_critere_optimisation',serialize($INDEX_critere_optimisation));
 	ecrire_metas();
+	$reindex = true;
 }
 
 // Nombre d'elements maxi a indexer a chaque iteration
@@ -127,7 +133,9 @@ if (!$INDEX_iteration_nb_maxi) {
 	$INDEX_iteration_nb_maxi['spip_syndic']=1;
 	ecrire_meta('INDEX_iteration_nb_maxi',serialize($INDEX_iteration_nb_maxi));
 	ecrire_metas();
+	$reindex = true;
 }
+if ($reindex) creer_liste_indexation();
 
 
 // Filtres d'indexation
