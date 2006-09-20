@@ -1705,7 +1705,7 @@ function debut_javascript($admin, $stat)
 	// pose un cookie valant -1
 	if ($_COOKIE['spip_accepte_ajax'] < 1) {
 		$tester_javascript = "if (a = createXmlHttp()) {
-	a.open('GET', '" . generer_url_ecrire('test_ajax', 'js=1') .
+	a.open('GET', '" . generer_url_ecrire('test_ajax', 'js=1', '&') .
 		  "', true) ;
 	a.send(null);
 }";
