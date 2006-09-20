@@ -366,7 +366,6 @@ function recuperer_fond($fond, $contexte=array()) {
 	$contexte['fond'] = $fond; // necessaire pour calculer correctement le cache
 
 	$page = inclure_page($fond, $contexte);
-
 	if ($GLOBALS['flag_ob'] AND ($page['process_ins'] != 'html')) {
 		ob_start();
 		eval('?' . '>' . $page['texte']);
@@ -465,11 +464,11 @@ function inclure_modele($type, $id, $params, $lien) {
 		$contexte['lien'] = str_replace("&quot;",'"', $lien[0]);
 		$contexte['lien_class'] = $lien[1];
 	}
-	
+
 	// Traiter les parametres
 	// par exemple : <img1|center>, <emb12|autostart=true> ou <doc1|lang=en>
 	$contexte = array_merge($contexte,
-		creer_contexte_de_modele($params)); 
+		creer_contexte_de_modele($params));
 
 	// On cree un marqueur de notes unique lie a ce modele
 	// et on enregistre l'etat courant des globales de notes...
