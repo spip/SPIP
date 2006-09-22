@@ -133,11 +133,20 @@ changer_typo('','article'.$id_article);
 
 debut_cadre_relief();
 
+// Est-ce que quelqu'un a deja ouvert l'article en edition ?
+ $modif = array();
+ if ($GLOBALS['meta']['articles_modif'] != 'non') {
+	include_spip('inc/drapeau_edition');
+	$modif = qui_edite($id_article, 'article');
+	if ($modif['id_auteur_modif'] == $connect_id_auteur)
+		$modif = array();
+ }
+
 //
 // Titre, surtitre, sous-titre
 //
 
-$modif = titres_articles($titre, $statut_article,$surtitre, $soustitre, $descriptif, $url_site, $nom_site, $flag_editable, $id_article, $id_rubrique);
+ echo titres_articles($titre, $statut_article,$surtitre, $soustitre, $descriptif, $url_site, $nom_site, $flag_editable, $id_article, $id_rubrique, $modif);
 
  echo "<div class='serif' align='$spip_lang_left'>";
 
@@ -149,7 +158,8 @@ $modif = titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 
 
 if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
-  echo formulaire_mots('article', $id_article, $cherche_mot, $select_groupe, $flag_editable);
+  $f = charger_fonction('editer_mot', 'inc');
+  echo $f('article', $id_article, $cherche_mot, $select_groupe, $flag_editable);
 }
 
 // Les langues
@@ -174,7 +184,7 @@ if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
 
  if ($flag_editable) {
 	echo "\n<div align='$spip_lang_right'><br />";
-	bouton_modifier_articles($id_article, $id_rubrique, $modif,_T('texte_travail_article', $modif), "warning-24.gif", "");
+	echo bouton_modifier_articles($id_article, $id_rubrique, $modif,_T('texte_travail_article', $modif), "warning-24.gif", "");
 	echo "</div>";
 }
 
@@ -364,83 +374,63 @@ function meme_rubrique_articles($id_rubrique, $id_article, $options, $order='dat
 function bouton_modifier_articles($id_article, $id_rubrique, $flag_modif, $mode, $ip, $im)
 {
 	if ($flag_modif) {
-	  icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), $ip, $im);
-		echo "<font face='arial,helvetica,sans-serif' size='2'>$mode</font>";
-		echo aide("artmodif");
+		return icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), $ip, $im, true)
+		. "<font face='arial,helvetica,sans-serif' size='2'>$mode</font>"
+		. aide("artmodif");
 	}
-	else {
-		icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), "article-24.gif", "edit.gif");
-	}
-
+	else return icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), "article-24.gif", "edit.gif", true);
 }
 
 // http://doc.spip.org/@titres_articles
-function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descriptif, $url_site, $nom_site, $flag_editable, $id_article, $id_rubrique)
+function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descriptif, $url_site, $nom_site, $flag_editable, $id_article, $id_rubrique, $modif)
 {
-	global  $dir_lang, $spip_lang_left, $connect_id_auteur;
+	global  $dir_lang, $spip_lang_left;
 
-	$tout = '';
-
-	$logo_statut = "puce-".puce_statut($statut_article).".gif";
-	
-	echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
-	echo "<tr width='100%'><td width='100%' valign='top'>";
+	$res .= "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>"
+	. "<tr width='100%'><td width='100%' valign='top'>";
 	
 	if ($surtitre) {
-		echo "<span $dir_lang><font face='arial,helvetica' size=3><b>";
-		echo typo($surtitre);
-		echo "</b></font></span>\n";
+		$res .= "<span $dir_lang><font face='arial,helvetica' size='3'><b>";
+		$res .= typo($surtitre);
+		$res .= "</b></font></span>\n";
 	}
 	 
-	gros_titre($titre, $logo_statut);
+	$res .= gros_titre($titre, "puce-".puce_statut($statut_article).".gif", true);
 	
 	if ($soustitre) {
-		echo "<span $dir_lang><font face='arial,helvetica' size=3><b>";
-		echo typo($soustitre);
-		echo "</b></font></span>\n";
+		$res .= "<span $dir_lang><font face='arial,helvetica' size='3'><b>";
+		$res .= typo($soustitre);
+		$res .= "</b></font></span>\n";
 	}
-	
 	
 	if ($descriptif OR $url_site OR $nom_site) {
-		echo "<p><div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;' $dir_lang>";
-		echo "<font size=2 face='Verdana,Arial,Sans,sans-serif'>";
+		$res .= "<p><div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;' $dir_lang>"
+		.  "<font size=2 face='Verdana,Arial,Sans,sans-serif'>";
+
 		$texte_case = ($descriptif) ? "{{"._T('info_descriptif')."}} $descriptif\n\n" : '';
-		$texte_case .= ($nom_site.$url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
-		echo propre($texte_case);
-		echo "</font>";
-		echo "</div>";
+
+		$texte_case .=  ($nom_site.$url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
+
+		$res .= propre($texte_case)
+		. "</font>"
+		. "</div>";
 	}
-	
 	
 	if ($statut_article == 'prop') {
-		echo "<P><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2 COLOR='red'><B>"._T('text_article_propose_publication')."</B></FONT></P>";
+		$res .= "<P><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2 COLOR='red'><B>"._T('text_article_propose_publication')."</B></FONT></P>";
 	}
 	
-	echo "</td>";
+	$res .= "</td>";
 	
-	$flag_modif = false;
-	$modif = array();
-
 	if ($flag_editable) {
-		echo "<td>". http_img_pack('rien.gif', " ", "width='5'") . "</td>\n";
-		echo "<td align='center'>";
-	
-
-		// Est-ce que quelqu'un a deja ouvert l'article en edition ?
-		unset($modif);
-		if ($GLOBALS['meta']['articles_modif'] != 'non') {
-			include_spip('inc/drapeau_edition');
-			$modif = qui_edite($id_article, 'article');
-			if ($modif['id_auteur_modif'] == $connect_id_auteur)
-				unset($modif);
-		}
-
-		bouton_modifier_articles($id_article, $id_rubrique, $modif, _T('avis_article_modifie', $modif), "article-24.gif", "edit.gif");
-		echo "</td>";
+		$res .= "<td>". http_img_pack('rien.gif', " ", "width='5'") . "</td>\n";
+		$res .= "<td align='center'>";
+		$res .= bouton_modifier_articles($id_article, $id_rubrique, $modif, _T('avis_article_modifie', $modif), "article-24.gif", "edit.gif");
+		$res .= "</td>";
 	}
-	echo "</tr></table>\n";
-	echo "<div>&nbsp;</div>";
-	return $modif;
+	$res .= "</tr></table>\n";
+	$res .= "<div>&nbsp;</div>";
+	return $res;
 }
 
 

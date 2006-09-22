@@ -127,10 +127,9 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 	}
 }
 
-
-
 if ($GLOBALS['meta']["articles_mots"]!='non' AND $flag_editable AND $options == 'avancees') {
-  echo formulaire_mots('breve', $id_breve, $cherche_mot, $select_groupe, $flag_editable);
+  $f = charger_fonction('editer_mot', 'inc');
+  echo $f('breve', $id_breve, $cherche_mot, $select_groupe, $flag_editable);
 }
 
 
