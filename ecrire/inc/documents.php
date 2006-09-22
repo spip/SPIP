@@ -15,7 +15,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions'); // *action_auteur et determine_upload
 include_spip('inc/date');
 include_spip('base/abstract_sql');
-include_spip('fragments/documenter');
 
 //
 // Vignette pour les documents lies
@@ -50,7 +49,6 @@ function vignette_par_defaut($ext, $size=true, $loop = true) {
 
 	return array($v, $largeur, $hauteur);
 }
-
 
 //
 // Affiche le document avec sa vignette par defaut
@@ -332,10 +330,11 @@ function formulaire_joindre($id, $type = "article", $script, $flag_editable) {
 	  $res = "<div$align>$res</div>";
 	} else $res ='';
 
-	return formulaire_documenter($id, $type, 'portfolio', $flag_editable)
-	. formulaire_documenter($id, $type, 'documents', $flag_editable)
-	. $res;
+	$f = charger_fonction('documenter', 'inc');
 
+	return $f($id, $type, 'portfolio', $flag_editable)
+	. $f($id, $type, 'documents', $flag_editable)
+	. $res;
 }
 
 // http://doc.spip.org/@formulaire_tourner

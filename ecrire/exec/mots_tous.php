@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('fragments/grouper_mots');
+include_spip('inc/presentation');
 
 // http://doc.spip.org/@exec_mots_tous_dist
 function exec_mots_tous_dist()
@@ -131,7 +131,10 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 	if ($conf_mot  AND $son_groupe==$id_groupe)
 		echo confirmer_mot($conf_mot, $id_groupe, $groupe);
 
-	if ($groupe) echo afficher_groupe_mots($id_groupe, $groupe);
+	if ($groupe) {
+	  	$f = charger_fonction('grouper_mots', 'inc');
+		echo $f($id_groupe, $groupe);
+	}
 
 	echo "</div>";
 
