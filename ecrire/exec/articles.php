@@ -17,14 +17,10 @@ include_spip('inc/texte');
 include_spip('inc/rubriques');
 include_spip('inc/actions');
 include_spip('inc/mots');
-include_spip('inc/date');
 include_spip('inc/petition');
+include_spip('inc/forum');
 include_spip('inc/documents');
 include_spip('base/abstract_sql');
-include_spip('fragments/editer_auteurs');
-include_spip('fragments/referencer_traduction');
-include_spip('fragments/virtualiser');
-include_spip('fragments/discuter');
 
 // http://doc.spip.org/@exec_articles_dist
 function exec_articles_dist()
@@ -113,7 +109,7 @@ if ($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable)
   {
 	boites_de_config_articles($id_article);
  
-	boite_article_virtuel($id_article, $virtuel);
+	echo boite_article_virtuel($id_article, $virtuel);
   }
 
 //
@@ -143,23 +139,14 @@ debut_cadre_relief();
 
 $modif = titres_articles($titre, $statut_article,$surtitre, $soustitre, $descriptif, $url_site, $nom_site, $flag_editable, $id_article, $id_rubrique);
 
-
  echo "<div class='serif' align='$spip_lang_left'>";
 
- debut_cadre_couleur();
- echo formulaire_dater($id_article, $flag_editable, $statut_article, $date, $date_redac);
- fin_cadre_couleur();
+ $f = charger_fonction('dater', 'inc');
+ echo $f($id_article, $flag_editable, $statut_article, $date, $date_redac);
 
-//
-// Liste des auteurs de l'article
-//
+ $f = charger_fonction('editer_auteurs', 'inc');
+ echo $f($id_article, $flag_editable, $cherche_auteur, $ids);
 
- echo "\n<div id='editer_auteurs-$id_article'>";
- echo formulaire_editer_auteurs($cherche_auteur, $ids, $id_article,$flag_editable);
- echo "</div>";
-//
-// Liste des mots-cles de l'article
-//
 
 if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
   echo formulaire_mots('article', $id_article, $cherche_mot, $select_groupe, $flag_editable);
@@ -170,7 +157,8 @@ if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
   if (($GLOBALS['meta']['multi_articles'] == 'oui')
 	OR (($GLOBALS['meta']['multi_rubriques'] == 'oui') AND ($GLOBALS['meta']['gerer_trad'] == 'oui'))) {
 
-    echo formulaire_referencer_traduction($id_article, $id_rubrique, $id_trad,  $flag_editable, $trad_err);
+ $f = charger_fonction('referencer_traduction', 'inc');
+ echo $f($id_article, $flag_editable, $id_rubrique, $id_trad, $trad_err);
   }
 
  echo pipeline('affiche_milieu',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
@@ -190,10 +178,6 @@ if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
 	echo "</div>";
 }
 
-//
-// Documents associes a l'article
-//
-
  if ($spip_display != 4) {
 
 	echo formulaire_joindre($id_article, "article", 'articles', $flag_editable);
@@ -206,17 +190,15 @@ if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
  echo "</div>";
  fin_cadre_relief();
 
-  echo "<br /><br />";
-  
-  $tm = rawurlencode($titre);
-  echo "\n<div align='center'>";
-  icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi","statut=prive&id_article=$id_article&titre_message=$tm&url=" . generer_url_retour("articles","id_article=$id_article")), "forum-interne-24.gif", "creer.gif");
-  echo "</div><br />";
+ // forum interne
 
-  $f = charger_fonction('discuter', 'fragments');
-  echo  "<div id='forum'>";
-  echo $f($id_article, $debut);
-  echo "</div>";
+  $tm = rawurlencode($titre);
+  $f = charger_fonction('discuter', 'inc');
+
+  echo "<br /><br />\n<div align='center'>",
+	icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi","statut=prive&id_article=$id_article&titre_message=$tm&url=" . generer_url_retour("articles","id_article=$id_article")), "forum-interne-24.gif", "creer.gif", false),
+	"</div><br />",
+	$f($id_article, false, $debut);
 
   fin_page();
 
@@ -336,27 +318,20 @@ function boites_de_config_articles($id_article)
 function boite_article_virtuel($id_article, $virtuel)
 {
 
-	debut_cadre_relief("site-24.gif");
+	$f = charger_fonction('virtualiser', 'inc');
 
-	echo "\n<div class='verdana1' style='text-align: center;'>";
-	if ($virtuel)
-		echo bouton_block_visible("redirection");
-	else
-		echo bouton_block_invisible("redirection");
-
-	echo '<b>', _T('bouton_redirection'), '</b>';
-	echo aide ("artvirt");
-	echo "</div>";
-
-	if ($virtuel)
-		echo debut_block_visible("redirection");
-	else
-		echo debut_block_invisible("redirection");
-	echo "<div id='virtualiser-$id_article'>";
-	echo formulaire_virtualiser($id_article, $virtuel, "articles", "id_article=$id_article");
-	echo "</div>";
-	echo fin_block();
-	fin_cadre_relief();
+	return debut_cadre_relief("site-24.gif", true)
+	. "\n<div class='verdana1' style='text-align: center;'>"
+	. ($virtuel ? bouton_block_visible("redirection") : bouton_block_invisible("redirection"))
+	. '<b>'
+	._T('bouton_redirection')
+	. '</b>'
+	. aide ("artvirt")
+	. "</div>"
+	. ($virtuel ? debut_block_visible("redirection") : debut_block_invisible("redirection"))
+	. $f($id_article, false, $virtuel, "articles", "id_article=$id_article")
+	. fin_block()
+	. fin_cadre_relief(true);
 }
 
 // http://doc.spip.org/@meme_rubrique_articles
@@ -468,149 +443,6 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 	return $modif;
 }
 
-
-// http://doc.spip.org/@formulaire_dater
-function formulaire_dater($id_article, $flag_editable, $statut_article, $date, $date_redac)
-{
-	global $spip_lang_left, $spip_lang_right, $options;
-
-	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})", $date_redac, $regs)) {
-		$annee_redac = $regs[1];
-		$mois_redac = $regs[2];
-		$jour_redac = $regs[3];
-		$heure_redac = $regs[4];
-		$minute_redac = $regs[5];
-		if ($annee_redac > 4000) $annee_redac -= 9000;
-	}
-
-	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})", $date, $regs)) {
-		$annee = $regs[1];
-		$mois = $regs[2];
-		$jour = $regs[3];
-		$heure = $regs[4];
-		$minute = $regs[5];
-	}
-
-  if ($flag_editable AND $options == 'avancees') {
-
-	if ($statut_article == 'publie') {
-
-		$js = "onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
-		$res = ajax_action_auteur("dater", 
-			"$id_article",
-			'articles',
-			"id_article=$id_article",
-			(
- bouton_block_invisible("datepub") .
- "<b><span class='verdana1'>".
- _T('texte_date_publication_article').
- '</span> ' . 
- majuscules(affdate($date)) .
- "</b>".
- aide('artdate') . 
- debut_block_invisible("datepub") .
- "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>" .
- afficher_jour($jour, "name='jour' size='1' class='fondl' $js", true) .
- afficher_mois($mois, "name='mois' size='1' class='fondl' $js", true) .
- afficher_annee($annee, "name='annee' size='1' class='fondl' $js") .
- ' - ' .
- afficher_heure($heure, "name='heure' size='1' class='fondl' $js") .
- afficher_minute($minute, "name='minute' size='1' class='fondl' $js") .
- "<span class='visible_au_chargement' id='valider_date'>" .
- " &nbsp;\n<input type='submit' class='fondo' value='".
- _T('bouton_changer')."' />" .
- "</span>" .
- "</div>" .
- fin_block()));
-	} else {
-		$res = "\n<div><b> <span class='verdana1'>"
-		. _T('texte_date_creation_article')
-		. "</span>\n"
-		. majuscules(affdate($date))."</b>".aide('artdate')."</div>";
-	}
-
-	$possedeDateRedac= ($annee_redac.'-'.$mois_redac.'-'.$jour_redac != '0000-00-00');
-	if (($options == 'avancees' AND $GLOBALS['meta']["articles_redac"] != 'non')
-	OR $possedeDateRedac) {
-		if ($possedeDateRedac)
-			$date_affichee = majuscules(affdate($date_redac))
-#			." " ._T('date_fmt_heures_minutes', array('h' =>$heure_redac, 'm'=>$minute_redac))
-			;
-		else
-			$date_affichee = majuscules(_T('jour_non_connu_nc'));
-
-		$js = "\"findObj_forcer('valider_date_redac').style.visibility='visible';\"";
-		$res .= ajax_action_auteur("dater", 
-			"$id_article",
-			'articles',
-			"id_article=$id_article",
-			(bouton_block_invisible('dateredac') .
- "<b>" .
- "<span class='verdana1'>" .
- majuscules(_T('texte_date_publication_anterieure')) .
-'</span> '.
- $date_affichee .
- " " .
- aide('artdate_redac') .
- "</b>" .
- debut_block_invisible('dateredac') .
- "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>" .
- '<table cellpadding="0" cellspacing="0" border="0" width="100%">' .
- '<tr><td align="$spip_lang_left">' .
- '<input type="radio" name="avec_redac" value="non" id="avec_redac_on"' .
- ($possedeDateRedac ? '' : ' checked="checked"') .
- " onClick=$js" .
- ' /> <label for="avec_redac_on">'.
- _T('texte_date_publication_anterieure_nonaffichee').
- '</label>' .
- '<br /><input type="radio" name="avec_redac" value="oui" id="avec_redac_off"' .
- (!$possedeDateRedac ? '' : ' checked="checked"') .
- " onClick=$js /> <label for='avec_redac_off'>" .
- _T('bouton_radio_afficher').
- ' :</label> ' .
- afficher_jour($jour_redac, "name='jour_redac' class='fondl' onchange=$js", true) .
- afficher_mois($mois_redac, "name='mois_redac' class='fondl' onchange=$js", true) .
- "<input type='text' name='annee_redac' class='fondl' value='".$annee_redac."' size='5' maxlength='4' onclick=$js />" .
- '<div align="center">' .
- afficher_heure($heure_redac, "name='heure_redac' class='fondl' onchange=$js", true) .
- afficher_minute($minute_redac, "name='minute_redac' class='fondl' onchange=$js", true) .
- "</div>\n" .
-
- '</td><td align="$spip_lang_right">' .
- "<span class='visible_au_chargement' id='valider_date_redac'>" .
- '<input type="submit" class="fondo" value="'.
- _T('bouton_changer').'" />' .
- "</span>" .
- '</td></tr>' .
- '</table>' .
- '</div>' .
- fin_block()) #, " method='post'"
-);
-	}
-  } else {
-
-	$res .= "<div style='text-align:center;'><b> <span class='verdana1'>"
-	. (($statut_article == 'publie')
-		? _T('texte_date_publication_article')
-		: _T('texte_date_creation_article'))
-	. "</span> "
-	.  majuscules(affdate($date))."</b>".aide('artdate')."</div>";
-
-	if ($possedeDateRedac) {
-		$res .= "<div style='text-align:center;'><b><span class='verdana1'>"
-		. _T('texte_date_publication_anterieure')
-		. "</span> "
-		. ' : '
-		. majuscules(affdate($date_redac))
-		. "</b>"
-		. aide('artdate_redac')
-		. "</div>";
-	}
-  }
-  return ($flag_editable === 'ajax')
-    ? $res
-    : "<div id='dater-$id_article'>$res</div>";
-}
 
 
 // http://doc.spip.org/@afficher_corps_articles

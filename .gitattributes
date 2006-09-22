@@ -421,8 +421,11 @@ ecrire/inc/boutons.php -text
 ecrire/inc/chercher_logo.php -text
 ecrire/inc/chercher_rubrique.php -text
 ecrire/inc/cookie.php -text
+ecrire/inc/dater.php -text
+ecrire/inc/discuter.php -text
 ecrire/inc/distant.php -text
 ecrire/inc/drapeau_edition.php -text
+ecrire/inc/editer_auteurs.php -text
 ecrire/inc/filtres_images.php -text
 ecrire/inc/forum_insert.php -text
 ecrire/inc/gadgets.php -text
@@ -452,10 +455,12 @@ ecrire/inc/minipres.php -text
 ecrire/inc/petition.php -text
 ecrire/inc/plugin.php -text
 ecrire/inc/popularites.php -text
+ecrire/inc/referencer_traduction.php -text
 ecrire/inc/sites_voir.php -text
 ecrire/inc/suivi_versions.php -text
 ecrire/inc/syndic.php -text
 ecrire/inc/utils.php -text
+ecrire/inc/virtualiser.php -text
 ecrire/lang/ecrire_br.php -text
 ecrire/lang/ecrire_bs.php -text
 ecrire/lang/ecrire_cs.php -text

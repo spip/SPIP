@@ -30,10 +30,7 @@ function fragments_dater_dist()
 	$date = $row["date"];
 	$date_redac = $row["date_redac"];
 
-	include_spip('inc/actions');
-	include_spip('exec/articles');
-
-	return formulaire_dater($id_article, 'ajax', $statut_article, $date, $date_redac);
+	$f = charger_fonction('dater', 'inc');
+	return $f($id_article, 'ajax', $statut_article, $date, $date_redac);
 }
-
 ?>
