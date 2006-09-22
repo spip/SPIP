@@ -24,9 +24,7 @@ function fragments_poster_dist()
 		minipres(_T('info_acces_interdit'));
 	}
 
-	include_spip('inc/forum');
-	include_spip('inc/actions');
-
-	return formulaire_poster($id_article, $script, "&id_article=$id_article", true);
+	$f = charger_fonction('poster', 'inc');
+	return $f($id_article, $script, "&id_article=$id_article", true);
 }
 ?>

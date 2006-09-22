@@ -24,10 +24,7 @@ function fragments_petitionner_dist()
 		minipres(_T('info_acces_interdit'));
 	}
 
-	include_spip('inc/petition');
-	include_spip('inc/presentation');
-	include_spip('inc/actions');
-
-	return formulaire_petitionner($id_article, $script, "&id_article=$id_article", true);
+	$f = charger_fonction('petitionner', 'inc');
+	return $f($id_article, $script, "&id_article=$id_article", 'ajax');
 }
 ?>

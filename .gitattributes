@@ -455,7 +455,7 @@ ecrire/inc/maintenance.php -text
 ecrire/inc/message_select.php -text
 ecrire/inc/mini_nav.php -text
 ecrire/inc/minipres.php -text
-ecrire/inc/petition.php -text
+ecrire/inc/petitionner.php -text
 ecrire/inc/plugin.php -text
 ecrire/inc/popularites.php -text
 ecrire/inc/referencer_traduction.php -text
