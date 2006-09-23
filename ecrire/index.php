@@ -163,7 +163,8 @@ if (isset($GLOBALS['_COOKIE']['spip_lang_ecrire'])) {
 // le charset [utf-8] utilise par le client, utile a _request.
 if (isset($var_ajaxcharset)) {
 	header("Content-Type: text/html; charset=".$GLOBALS['meta']["charset"]);
-	$var_f = charger_fonction($exec, 'fragments');
+	$var_f = charger_fonction($exec, 'fragments', true);
+	if (!$var_f) $var_f = charger_fonction($exec, 'exec');
 	$fragment = $var_f();
 	echo "<","?xml version='1.0' encoding='",
 		$GLOBALS['meta']["charset"],"'?",">\n";

@@ -209,7 +209,6 @@ ecrire/exec/statistiques_svg.php -text
 ecrire/exec/statistiques_visites.php -text
 ecrire/exec/synchro.php -text
 ecrire/exec/upgrade.php -text
-ecrire/fragments/calendrier.php -text
 ecrire/fragments/dater.php -text
 ecrire/fragments/discuter.php -text
 ecrire/fragments/documenter.php -text
