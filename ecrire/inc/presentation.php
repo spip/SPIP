@@ -2842,7 +2842,7 @@ function bouton_spip_rss($op, $args, $fmt='rss') {
 	return "<a href='"
 	. $url
 	. "'>"
-	. http_img_pack('feed.png', $button, '')
+	. http_img_pack('feed.png', $button, 'RSS', 'RSS')
 	. "</a>";
 }
 
