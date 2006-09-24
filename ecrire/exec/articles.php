@@ -367,28 +367,28 @@ function meme_rubrique_articles($id_rubrique, $id_article, $options, $order='dat
 function bouton_modifier_articles($id_article, $id_rubrique, $flag_modif, $mode, $ip, $im)
 {
 	if ($flag_modif) {
-		return icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), $ip, $im, true)
+		return icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), $ip, $im, '', false)
 		. "<font face='arial,helvetica,sans-serif' size='2'>$mode</font>"
 		. aide("artmodif");
 	}
-	else return icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), "article-24.gif", "edit.gif", true);
+	else return icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), "article-24.gif", "edit.gif", '', false);
 }
 
 // http://doc.spip.org/@titres_articles
 function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descriptif, $url_site, $nom_site, $flag_editable, $id_article, $id_rubrique, $modif)
 {
-	global  $dir_lang, $spip_lang_left;
+	global  $dir_lang, $spip_lang_left, $spip_lang_right;
 
 	$res .= "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>"
-	. "<tr width='100%'><td width='100%' valign='top'>";
-	
+	. "<tr width='100%'><td valign='top'>";
+
 	if ($surtitre) {
 		$res .= "<span $dir_lang><font face='arial,helvetica' size='3'><b>";
 		$res .= typo($surtitre);
 		$res .= "</b></font></span>\n";
 	}
 	 
-	$res .= gros_titre($titre, "puce-".puce_statut($statut_article).".gif", true);
+	$res .= gros_titre($titre, "puce-".puce_statut($statut_article).".gif", false);
 	
 	if ($soustitre) {
 		$res .= "<span $dir_lang><font face='arial,helvetica' size='3'><b>";
@@ -414,13 +414,14 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 	}
 	
 	$res .= "</td>";
-	
+
 	if ($flag_editable) {
-		$res .= "<td>". http_img_pack('rien.gif', " ", "width='5'") . "</td>\n";
-		$res .= "<td align='center'>";
-		$res .= bouton_modifier_articles($id_article, $id_rubrique, $modif, _T('avis_article_modifie', $modif), "article-24.gif", "edit.gif");
-		$res .= "</td>";
+		$res .= "<td valign='top' align='$spip_lang_right'>"
+		. bouton_modifier_articles($id_article, $id_rubrique, $modif, _T('avis_article_modifie', $modif), "article-24.gif", "edit.gif")
+		. "</td>\n";
 	}
+
+
 	$res .= "</tr></table>\n";
 	$res .= "<div>&nbsp;</div>";
 	return $res;
