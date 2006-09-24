@@ -18,7 +18,8 @@ include_spip('inc/actions');
 
 // http://doc.spip.org/@action_tourner_dist
 function action_tourner_dist() {
-	
+	include_spip('inc/distant'); # pour copie_locale
+
 	global $convert_command;
 
 	$var_f = charger_fonction('controler_action_auteur', 'inc');
@@ -27,54 +28,65 @@ function action_tourner_dist() {
 	$arg = _request('arg');
 
 	if (!preg_match(",^\W*(\d+)\W?(-?\d+)$,", $arg, $r)) {
-		 spip_log("action_tourner_dist $arg pas compris");
-	} else {
-	$var_rot = $r[2];
-	$arg = $r[1];
-	$result = spip_query("SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$arg");
+		spip_log("action_tourner_dist $arg pas compris");
+		return;
+	}
 
-	if ($row = spip_fetch_array($result)) {
-		$id_vignette = $row['id_vignette'];
-		$image = $row['fichier'];
+	$arg = $r[1];
+	$result = spip_query("SELECT fichier FROM spip_documents WHERE id_document=$arg");
+
+	if (!$row = spip_fetch_array($result))
+		return;
+
+	// Fichier destination : on essaie toujours de repartir de l'original
+	$var_rot = $r[2];
+	$src = copie_locale($row['fichier']);
+	if (preg_match(',^(.*)-r(90|180|270)\.([^.]+)$,', $src, $match)) {
+		$effacer = $src;
+		$src = $match[1].'.'.$match[3];
+		$var_rot += intval($match[2]);
+	}
+	$var_rot = ((360 + $var_rot) % 360); // 0, 90, 180 ou 270
+
+	if ($var_rot > 0) {
+		$dest = preg_replace(',\.[^.]+$,', '-r'.$var_rot.'$0', $src);
+		spip_log("rotation $var_rot $src : $dest");
 
 		$process = $GLOBALS['meta']['image_process'];
 
-		 // imagick (php4-imagemagick)
-		 if ($process == 'imagick') {
-			$handle = imagick_readimage($image);
+		// imagick (php4-imagemagick)
+		if ($process == 'imagick') {
+			$handle = imagick_readimage($src);
 			imagick_rotate($handle, $var_rot);
-			imagick_write($handle, $image);
-			if (!@file_exists($image)) return;	// echec imagick
+			imagick_write($handle, $dest);
+			if (!@file_exists($dest)) return;	// echec imagick
 		}
 		else if ($process == "gd2") { // theoriquement compatible gd1, mais trop forte degradation d'image
-			if ($var_rot == 180) { // 180 = 90+90
-				gdRotate ($image, 90);
-				gdRotate ($image, 90);
-			} else {
-				gdRotate ($image, $var_rot);
-			}
+			gdRotate ($src, $dest, $var_rot);
 		}
 		else if ($process = "convert") {
 			$commande = "$convert_command -rotate $var_rot ./"
-				. escapeshellcmd($image).' ./'.escapeshellcmd($image);
+				. escapeshellcmd($src).' ./'.escapeshellcmd($dest);
 #			spip_log($commande);
 			exec($commande);
 		}
-
-		$size_image = @getimagesize($image);
-		$largeur = $size_image[0];
-		$hauteur = $size_image[1];
-
- /*
-	A DESACTIVER PEUT-ETRE ? QUE SE PASSE--IL SI JE TOURNE UNE IMAGE AYANT UNE VGNETTE "MANUELLE" -> NE PAS CREER DE VIGNETTE TOURNEE -- EN VERITE IL NE FAUT PAS PERMETTRE DE TOURNER UNE IMAGE AYANT UNE VIGNETTE MANUELLE
-		if ($id_vignette > 0) {
-			creer_fichier_vignette($image);
-		}
-*/
-
-		spip_query("UPDATE spip_documents SET largeur=$largeur, hauteur=$hauteur WHERE id_document=$arg");
-	  }
 	}
+	else
+		$dest = $src;
+
+	$size_image = @getimagesize($dest);
+	$largeur = $size_image[0];
+	$hauteur = $size_image[1];
+
+	// succes !
+	if ($largeur>0 AND $hauteur>0) {
+		spip_query("UPDATE spip_documents SET fichier='".addslashes($dest)."', largeur=$largeur, hauteur=$hauteur WHERE id_document=$arg");
+		if ($effacer) {
+			spip_log("j'efface $effacer");
+			@unlink($effacer);
+		}
+	}
+
 }
 
 
@@ -83,32 +95,32 @@ function action_tourner_dist() {
 // Faire tourner une image
 //
 // http://doc.spip.org/@gdRotate
-function gdRotate ($imagePath,$rtt){
+function gdRotate ($src, $dest, $rtt){
 	$src_img = '';
-	if(preg_match("/\.(png|gif|jpe?g|bmp)$/i", $imagePath, $regs)) {
+	if(preg_match("/\.(png|gif|jpe?g|bmp)$/i", $src, $regs)) {
 		switch($regs[1]) {
 			case 'png':
 			  if (function_exists('ImageCreateFromPNG')) {
-				$src_img=ImageCreateFromPNG($imagePath);
+				$src_img=ImageCreateFromPNG($src);
 				$save = 'imagepng';
 			  }
 			  break;
 			case 'gif':
 			  if (function_exists('ImageCreateFromGIF')) {
-				$src_img=ImageCreateFromGIF($imagePath);
+				$src_img=ImageCreateFromGIF($src);
 				$save = 'imagegif';
 			  }
 			  break;
 			case 'jpeg':
 			case 'jpg':
 			  if (function_exists('ImageCreateFromJPEG')) {
-				$src_img=ImageCreateFromJPEG($imagePath);
+				$src_img=ImageCreateFromJPEG($src);
 				$save = 'Imagejpeg';
 			  }
 			  break;
 			case 'bmp':
 			  if (function_exists('ImageCreateFromWBMP')) {
-				$src_img=@ImageCreateFromWBMP($imagePath);
+				$src_img=@ImageCreateFromWBMP($src);
 				$save = 'imagewbmp';
 			  }
 			  break;
@@ -116,69 +128,60 @@ function gdRotate ($imagePath,$rtt){
 	}
 
 	if (!$src_img) {
-		spip_log("gdrotate: image non lue, $imagePath");
+		spip_log("gdrotate: image non lue, $src");
 		return false;
 	}
 
-	$size=@getimagesize($imagePath);
+	$size=@getimagesize($src);
 	if (!($size[0] * $size[1])) return false;
 
 	if (function_exists('imagerotate')) {
 		$dst_img = imagerotate($src_img, -$rtt, 0);
 	} else {
 
-	// Creer l'image destination (hauteur x largeur) et la parcourir
-	// pixel par pixel (un truc de fou)
-	$process = $GLOBALS['meta']['image_process'];
-	if ($process == "gd2")
-		$dst_img=ImageCreateTrueColor($size[1],$size[0]);
-	else
-		$dst_img=ImageCreate($size[1],$size[0]);
+		// Creer l'image destination (hauteur x largeur) et la parcourir
+		// pixel par pixel (un truc de fou)
+		if ($rtt == 180)
+			$size_dest = $size;
+		else
+			$size_dest = array($size[1],$size[0]);
+		
+		if ($GLOBALS['meta']['image_process'] == "gd2")
+			$dst_img=ImageCreateTrueColor($size_dest[0],$size_dest[1]);
+		else
+			$dst_img=ImageCreate($size_dest[0],$size_dest[1]);
 
-	if($rtt==90){
-		$t=0;
-		$b=$size[1]-1;
-		while($t<=$b){
-			$l=0;
-			$r=$size[0]-1;
-			while($l<=$r){
-				imagecopy($dst_img,$src_img,$t,$r,$r,$b,1,1);
-				imagecopy($dst_img,$src_img,$t,$l,$l,$b,1,1);
-				imagecopy($dst_img,$src_img,$b,$r,$r,$t,1,1);
-				imagecopy($dst_img,$src_img,$b,$l,$l,$t,1,1);
-				$l++;
-				$r--;
+		// t=top; b=bottom; r=right; l=left
+		for ($t=0;$t<=$size_dest[0]-1; $t++) {
+			$b = $size_dest[0] -1 - $t;
+			for ($l=0;$l<=$size_dest[1]-1; $l++) {
+				$r = $size_dest[1] -1 - $l;
+				switch ($rtt) {
+					case 90:
+						imagecopy($dst_img,$src_img,$t,$r,$r,$b,1,1);
+						break;
+					case 270:
+						imagecopy($dst_img,$src_img,$t,$l,$r,$t,1,1);
+						break;
+					case 180:
+						imagecopy($dst_img,$src_img,$t,$l,$b,$r,1,1);
+						break;
+				}
 			}
-			$t++;
-			$b--;
 		}
-	}
-	elseif($rtt==-90){
-		$t=0;
-		$b=$size[1]-1;
-		while($t<=$b){
-			$l=0;
-			$r=$size[0]-1;
-			while($l<=$r){
-				imagecopy($dst_img,$src_img,$t,$l,$r,$t,1,1);
-				imagecopy($dst_img,$src_img,$t,$r,$l,$t,1,1);
-				imagecopy($dst_img,$src_img,$b,$l,$r,$b,1,1);
-				imagecopy($dst_img,$src_img,$b,$r,$l,$b,1,1);
-				$l++;
-				$r--;
-			}
-			$t++;
-			$b--;
-		}
-	}
 	}
 	ImageDestroy($src_img);
 	ImageInterlace($dst_img,0);
 
-	# obligatoire d'enregistrer dans le meme format, puisque c'est
-	# dans le fichier de depart...
-	$save($dst_img,$imagePath);
+	// obligatoire d'enregistrer dans le meme format, puisqu'on change le doc
+	// mais pas son id_type
+	$save($dst_img,$dest);
 }
+
+
+
+/*  CODE MORT DEPUIS QU'ON NE FAIT PLUS DE VIGNETTES AUTOMATIQUES */
+/*
 
 // Creation
 // http://doc.spip.org/@creer_fichier_vignette
@@ -233,4 +236,7 @@ function inserer_vignette_base($image, $vignette) {
 		}
 	}
 }
+
+*/
+
 ?>
