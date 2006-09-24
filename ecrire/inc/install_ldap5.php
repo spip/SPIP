@@ -17,13 +17,12 @@ function inc_install_ldap5()
 
 	install_debut_html();
 
-	include_once($f = (_FILE_CONNECT_INS . _FILE_TMP . '.php'));
-	// simuler la fin de l'install pour pouvoir sauver le statut
-	define('_FILE_CONNECT',	(@is_readable($f) ? $f : false));
+	// simuler ecrire_meta/s pour pouvoir sauver le statut
+	// car _FILE_CONNECT est defa a False a ce moment.
 
 	include_spip('inc/meta');
-	ecrire_meta("ldap_statut_import", $statut_ldap);
-	ecrire_metas();
+	spip_query("REPLACE spip_meta (nom, valeur) VALUES ('ldap_statut_import', " . spip_abstract_quote($statut_ldap) . " )");
+	@unlink(_FILE_META);
 
 	echo "<B>"._T('info_ldap_ok')."</B>";
 	echo "<P>"._T('info_terminer_installation');
