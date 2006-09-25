@@ -27,10 +27,9 @@ function fragments_tourner_dist()
 		minipres(_T('info_acces_interdit'));
 	}
 
-	include_spip('inc/documents');
-	include_spip('inc/presentation');
+	$f = charger_fonction('tourner', 'inc');
 
-	return formulaire_tourner($id_document, array(), $script, 'ajax', $type);
+	return $f($id_document, array(), $script, 'ajax', $type);
 }
 
 ?>

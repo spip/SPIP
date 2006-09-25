@@ -42,12 +42,15 @@ function inc_documenter_dist(
 	} else $documents = $doc;
 
 	if (!$documents) return '';
-	include_spip('inc/documents');
+
 	charger_generer_url();
 	// la derniere case d'une rangee
 	$bord_droit = ($ancre == 'portfolio' ? 2 : 1);
 	$case = 0;
 	$res = '';
+
+	$tourner = charger_fonction('tourner', 'inc');
+	$legender = charger_fonction('legender', 'inc');
 
 	foreach ($documents as $document) {
 		$id_document = $document['id_document'];
@@ -64,16 +67,14 @@ function inc_documenter_dist(
 			$res .= "<tr style='border-top: 1px solid black;'>";
 		else if ($case == $bord_droit)
 			$style .= " border-$spip_lang_right: 1px solid $couleur;";
-		$res .= "\n<td  style='width:33%; text-align: $spip_lang_left; border-$spip_lang_left: 1px solid $couleur; border-bottom: 1px solid $couleur; $style' valign='top'>";
+		$res .= "\n<td  style='width:33%; text-align: $spip_lang_left; border-$spip_lang_left: 1px solid $couleur; border-bottom: 1px solid $couleur; $style' valign='top'>"
+		.  $tourner($id_document, $document, $script, $flag_modif, $type)
+		. (!$flag_modif  ? '' :
+		   $legender($id_document, $document, $script, $type, $document["id_$type"], $ancre))
+		. (!isset($document['info']) ? '' :
+		       ("<div class='verdana1'>".$document['info']."</div>"))
+		. "</td>\n";
 
-		$res .= formulaire_tourner($id_document, $document, $script, $flag_modif, $type);
-
-		if ($flag_modif)
-		  $res .= formulaire_legender($id_document, $document, $script, $type, $document["id_$type"], $ancre);
-
-		if (isset($document['info']))
-			$res .= "<div class='verdana1'>".$document['info']."</div>";
-		$res .= "</td>\n";
 		$case++;
 				
 		if ($case > $bord_droit) {
