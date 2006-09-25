@@ -2109,7 +2109,7 @@ function init_entete($titre, $rubrique, $css='') {
 			. '" type="text/css" />'. "\n"
 		) ) ."\n";
 
-	echo pipeline('header_prive', $head)
+	echo "<head>\n".pipeline('header_prive', $head)
 		. "</head>\n";
 }
 
