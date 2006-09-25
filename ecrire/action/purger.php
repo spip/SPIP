@@ -54,6 +54,7 @@ function action_purger_dist()
 	$handle = @opendir(_DIR_IMG);
 	if (!$handle) return;
 
+	$taille = 0;
 	while (($fichier = @readdir($handle)) !== false) {
 		// Eviter ".", "..", ".htaccess", etc.
 		if ($fichier[0] == '.') continue;
