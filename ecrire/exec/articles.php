@@ -84,7 +84,7 @@ function exec_articles_dist()
 
 debut_gauche();
 
-boite_info_articles($id_article, $statut_article, $visites, $id_version);
+echo boite_info_articles($id_article, $statut_article, $visites, $id_version);
 
 //
 // Logos de l'article
@@ -92,32 +92,26 @@ boite_info_articles($id_article, $statut_article, $visites, $id_version);
 
   if ($flag_editable AND ($spip_display != 4)) {
 	  include_spip('inc/chercher_logo');
-	  echo afficher_boite_logo('id_article', $id_article,
-			      _T('logo_article').aide ("logoart"), _T('logo_survol'), 'articles');
+	  echo afficher_boite_logo('id_article', $id_article, _T('logo_article').aide ("logoart"), _T('logo_survol'), 'articles');
   }
 
 // pour l'affichage du virtuel
-$virtuel = '';
-if (substr($chapo, 0, 1) == '=') {
-	$virtuel = substr($chapo, 1);
-}
+  $virtuel =  (substr($chapo, 0, 1) == '=')  ? substr($chapo, 1) : '';
 
 // Boites de configuration avancee
 
 if ($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable)
   {
-	boites_de_config_articles($id_article);
- 
-	echo boite_article_virtuel($id_article, $virtuel);
+	echo boites_de_config_articles($id_article),
+	  boite_article_virtuel($id_article, $virtuel);
   }
 
 //
 // Articles dans la meme rubrique
 //
 
-meme_rubrique_articles($id_rubrique, $id_article, $options);
-
-echo pipeline('affiche_gauche',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
+ echo meme_rubrique_articles($id_rubrique, $id_article, $options),
+   pipeline('affiche_gauche',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
 
 //
 // Affichage de la colonne de droite
@@ -145,9 +139,8 @@ debut_cadre_relief();
 // Titre, surtitre, sous-titre
 //
 
- echo titres_articles($titre, $statut_article,$surtitre, $soustitre, $descriptif, $url_site, $nom_site, $flag_editable, $id_article, $id_rubrique, $modif);
-
- echo "<div class='serif' align='$spip_lang_left'>";
+ echo titres_articles($titre, $statut_article,$surtitre, $soustitre, $descriptif, $url_site, $nom_site, $flag_editable, $id_article, $id_rubrique, $modif),
+   "<div class='serif' align='$spip_lang_left'>";
 
  $f = charger_fonction('dater', 'inc');
  echo $f($id_article, $flag_editable, $statut_article, $date, $date_redac);
@@ -166,8 +159,8 @@ if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
   if (($GLOBALS['meta']['multi_articles'] == 'oui')
 	OR (($GLOBALS['meta']['multi_rubriques'] == 'oui') AND ($GLOBALS['meta']['gerer_trad'] == 'oui'))) {
 
- $f = charger_fonction('referencer_traduction', 'inc');
- echo $f($id_article, $flag_editable, $id_rubrique, $id_trad, $trad_err);
+	$f = charger_fonction('referencer_traduction', 'inc');
+	echo $f($id_article, $flag_editable, $id_rubrique, $id_trad, $trad_err);
   }
 
  echo pipeline('affiche_milieu',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
@@ -179,24 +172,23 @@ if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
      '</div>',
      fin_cadre_relief('', true);
 
- afficher_corps_articles($virtuel, $chapo, $texte, $ps, $extra);
+ echo "\n\n<div align='justify' style='padding: 10px;'>",
+   afficher_corps_articles($virtuel, $chapo, $texte, $ps, $extra);
 
  if ($flag_editable) {
-	echo "\n<div align='$spip_lang_right'><br />";
-	echo bouton_modifier_articles($id_article, $id_rubrique, $modif,_T('texte_travail_article', $modif), "warning-24.gif", "");
-	echo "</div>";
+	echo "\n<div align='$spip_lang_right'><br />",
+	  bouton_modifier_articles($id_article, $id_rubrique, $modif,_T('texte_travail_article', $modif), "warning-24.gif", ""),
+	  "</div>";
 }
 
- if ($spip_display != 4) {
-
+ if ($spip_display != 4)
 	echo formulaire_joindre($id_article, "article", 'articles', $flag_editable);
- }
 
  if ($flag_auteur AND  $statut_article == 'prepa' AND !$statut_rubrique)
 	echo demande_publication($id_article);
 
- echo "</div>";
- echo "</div>";
+ echo "</div></div>";
+
  fin_cadre_relief();
 
  // forum interne
@@ -205,15 +197,13 @@ if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
   $f = charger_fonction('discuter', 'inc');
 
   echo "<br /><br />\n<div align='center'>",
-	icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi","statut=prive&id_article=$id_article&titre_message=$tm&url=" . generer_url_retour("articles","id_article=$id_article")), "forum-interne-24.gif", "creer.gif", false),
+    icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi","statut=prive&id_article=$id_article&titre_message=$tm&url=" . generer_url_retour("articles","id_article=$id_article")), "forum-interne-24.gif", "creer.gif", '', false),
 	"</div><br />",
 	$f($id_article, false, $debut);
 
   fin_page();
 
 }
-
-
 
 // http://doc.spip.org/@demande_publication
 function demande_publication($id_article)
@@ -236,35 +226,32 @@ function demande_publication($id_article)
 // http://doc.spip.org/@boite_info_articles
 function boite_info_articles($id_article, $statut_article, $visites, $id_version)
 {
-  global $connect_statut, $options, $flag_revisions;
+	global $connect_statut, $options, $flag_revisions;
 
-	debut_boite_info();
- 
-	echo "<div align='center'>\n";
-
-	echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"._T('info_numero_article')."</b></font>\n";
-	echo "<br /><font face='Verdana,Arial,Sans,sans-serif' size='6'><b>$id_article</b></font>\n";
-
-	echo "</div>\n";
-
-	voir_en_ligne('article', $id_article, $statut_article);
+	$res = debut_boite_info(true)
+	. "<div align='center'>\n"
+	. "<font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"
+	. _T('info_numero_article')."</b></font>\n"
+	. "<br /><font face='Verdana,Arial,Sans,sans-serif' size='6'><b>$id_article</b></font>\n"
+	. "</div>\n"
+	  . voir_en_ligne('article', $id_article, $statut_article, 'racine-24.gif', false);
 
 	if ($connect_statut == "0minirezo" AND $statut_article == 'publie' AND $visites > 0 AND $GLOBALS['meta']["activer_statistiques"] != "non" AND $options == "avancees"){
-	icone_horizontale(_T('icone_evolution_visites', array('visites' => $visites)), generer_url_ecrire("statistiques_visites","id_article=$id_article"), "statistiques-24.gif","rien.gif");
+		$res .= icone_horizontale(_T('icone_evolution_visites', array('visites' => $visites)), generer_url_ecrire("statistiques_visites","id_article=$id_article"), "statistiques-24.gif","rien.gif", false);
 	}
 
 	if ((($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions)
-		AND $id_version>1 AND $options == "avancees") {
-	icone_horizontale(_T('info_historique_lien'), generer_url_ecrire("articles_versions","id_article=$id_article"), "historique-24.gif", "rien.gif");
-}
+	AND $id_version>1 AND $options == "avancees") 
+		$res .= icone_horizontale(_T('info_historique_lien'), generer_url_ecrire("articles_versions","id_article=$id_article"), "historique-24.gif", "rien.gif", false);
 
 	// Correction orthographique
 	if ($GLOBALS['meta']['articles_ortho'] == 'oui') {
 		$js_ortho = "onclick=\"window.open(this.href, 'spip_ortho', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;\"";
-		icone_horizontale(_T('ortho_verifier'), generer_url_ecrire("articles_ortho", "id_article=$id_article"), "ortho-24.gif", "rien.gif", 'echo', $js_ortho);
+		$res .= icone_horizontale(_T('ortho_verifier'), generer_url_ecrire("articles_ortho", "id_article=$id_article"), "ortho-24.gif", "rien.gif", false, $js_ortho);
 	}
 
-	fin_boite_info();
+	$res .= fin_boite_info(true);
+	return $res;
 }
 
 
@@ -284,37 +271,38 @@ function boites_de_config_articles($id_article)
 	$nb_signatures = $nb_signatures['count'];
 	$visible = $nb_forums || $nb_signatures;
 
-	debut_cadre_relief("forum-interne-24.gif");
-	echo "<div class='verdana1' style='text-align: center;'><b>";
-	if ($visible)
-		echo bouton_block_visible("forumpetition");
-	else
-		echo bouton_block_invisible("forumpetition");
-	echo _T('bouton_forum_petition') .aide('confforums');
-	echo "</b></div>";
-	if ($visible)
-		echo debut_block_visible("forumpetition");
-	else
-		echo debut_block_invisible("forumpetition");
+	$res = '';
 
-	echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'>\n";
+	$res .=debut_cadre_relief("forum-interne-24.gif", true);
+	$res .="<div class='verdana1' style='text-align: center;'><b>";
+	if ($visible)
+		$res .=bouton_block_visible("forumpetition");
+	else
+		$res .=bouton_block_invisible("forumpetition");
+	$res .=_T('bouton_forum_petition') .aide('confforums');
+	$res .="</b></div>";
+	if ($visible)
+		$res .=debut_block_visible("forumpetition");
+	else
+		$res .=debut_block_invisible("forumpetition");
+
+	$res .="<font face='Verdana,Arial,Sans,sans-serif' size='1'>\n";
 
 	if ($nb_forums) {
-		echo "<br />\n";
-		icone_horizontale(_T('icone_suivi_forum', array('nb_forums' => $nb_forums)), generer_url_ecrire("articles_forum","id_article=$id_article"), "suivi-forum-24.gif", "");
+		$res .="<br />\n"
+		.  icone_horizontale(_T('icone_suivi_forum', array('nb_forums' => $nb_forums)), generer_url_ecrire("articles_forum","id_article=$id_article"), "suivi-forum-24.gif", "", false);
 	}
 
 	$f = charger_fonction('poster', 'inc');
 	$g = charger_fonction('petitionner', 'inc');
 
-	echo 
-	  $f($id_article,"articles","id_article=$id_article"),
-	  '<br />', 
-	  $g($id_article,"articles","id_article=$id_article");
+	$res .= $f($id_article,"articles","id_article=$id_article")
+	.  '<br />'
+	.  $g($id_article,"articles","id_article=$id_article")
+	.  fin_block()
+	.  fin_cadre_relief(true);
 
-	echo fin_block();
-
-	fin_cadre_relief();
+	return $res;
 }
 
 // http://doc.spip.org/@boite_article_virtuel
@@ -343,24 +331,29 @@ function meme_rubrique_articles($id_rubrique, $id_article, $options, $order='dat
 	global $spip_lang_right, $spip_lang_left;
 
 	$vos_articles = spip_query("SELECT id_article, titre, statut FROM spip_articles WHERE id_rubrique=$id_rubrique AND (statut = 'publie' OR statut = 'prop') AND id_article != $id_article ORDER BY $order DESC LIMIT $limit");
-	if (spip_num_rows($vos_articles) > 0) {
-			echo "<div>&nbsp;</div>";
-			echo "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			bandeau_titre_boite2(_T('info_meme_rubrique'), "article-24.gif");
-			echo "<div class='plan-articles'>";
-			while($row = spip_fetch_array($vos_articles)) {
-				$ze_article = $row['id_article'];
-				$ze_titre = typo($row['titre']);
-				$ze_statut = $row['statut'];
-				
-				if ($options == "avancees") {
-					$numero = "<div class='arial1' style='float: $spip_lang_right; color: black; padding-$spip_lang_left: 4px;'><b>"._T('info_numero_abbreviation')."$ze_article</b></div>";
-				}
-				echo "<a class='$ze_statut' style='font-size: 10px;' href='" . generer_url_ecrire("articles","id_article=$ze_article") . "'>$numero$ze_titre</a>";
-			}
-			echo "</div>";
-			echo "</div>";
-		}
+	if (!spip_num_rows($vos_articles)) return '';
+
+	$retour = "<div>&nbsp;</div>"
+	. "<div class='bandeau_rubriques' style='z-index: 1;'>"
+	. bandeau_titre_boite2(_T('info_meme_rubrique'), "article-24.gif",'','',false)
+	. "<div class='plan-articles'>";
+
+	$numero = ($options != "avancees") ?'':_T('info_numero_abbreviation');
+
+	while($row = spip_fetch_array($vos_articles)) {
+		$ze_article = $row['id_article'];
+		$retour .= "<a class='"
+		. $row['statut']
+		. "' style='font-size: 10px;' href='"
+		. generer_url_ecrire("articles","id_article=$ze_article")
+		. "'>"
+		. (($options !== "avancees") ? '' :
+		     "<div class='arial1' style='float: $spip_lang_right; color: black; padding-$spip_lang_left: 4px;'><b>$numero$ze_article</b></div>")
+		. typo($row['titre'])
+		. "</a>";
+	}
+	$retour .=  "</div></div>";
+	return $retour;
 }
 
 // http://doc.spip.org/@bouton_modifier_articles
@@ -434,53 +427,53 @@ function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)
 {
   global $revision_nbsp, $activer_revision_nbsp, $champs_extra, $les_notes, $dir_lang;
 
-	echo "\n\n<div align='justify' style='padding: 10px;'>";
+	$res = '';
 
 	if ($virtuel) {
-		debut_boite_info();
-		echo "<div id='renvoi' style='text-align: center'>",
-		  _T('info_renvoi_article'),
-		  " ",
-		  propre("[->$virtuel]"),
-		  '</div>';
-		fin_boite_info();
+		$res .= debut_boite_info(true)
+		.  "<div id='renvoi' style='text-align: center'>"
+		. _T('info_renvoi_article')
+		. " "
+		.  propre("[->$virtuel]")
+		. '</div>'
+		.  fin_boite_info(true);
 	} else {
 		$revision_nbsp = $activer_revision_nbsp;
 
 		if (strlen($chapo) > 0) {
-			echo "<div $dir_lang><b>";
-			echo propre($chapo);
-			echo "</b></div>\n\n";
+			$res .= "<div $dir_lang><b>"
+			. propre($chapo)
+			. "</b></div>\n\n";
 		}
 
-		echo "<div $dir_lang>";
-#	echo reduire_image(propre($texte), 500,10000);
-		echo propre($texte);
-		echo "<br clear='all' />";
-		echo "</div>";
+		$res .= "<div $dir_lang>"
+		.  propre($texte)
+		.  "<br clear='all' />"
+		.  "</div>";
 
 		if ($ps) {
-			echo debut_cadre_enfonce();
-			echo "<div $dir_lang><font style='font-family:Verdana,Arial,Sans,sans-serif; font-size: small;'>";
-			echo justifier("<b>"._T('info_ps')."</b> ".propre($ps));
-			echo "</font></div>";
-			echo fin_cadre_enfonce();
+			$res .= debut_cadre_enfonce('',true)
+			. "<div $dir_lang><font style='font-family:Verdana,Arial,Sans,sans-serif; font-size: small;'>"
+			. justifier("<b>"._T('info_ps')."</b> ".propre($ps))
+			. "</font></div>"
+			. fin_cadre_enfonce(true);
 		}
 		$revision_nbsp = false;
 
 		if ($les_notes) {
-			echo debut_cadre_relief();
-			echo "<div $dir_lang class='arial11'>";
-			echo justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes);
-			echo "</div>";
-			echo fin_cadre_relief();
+			$res .= debut_cadre_relief('',true)
+			. "<div $dir_lang class='arial11'>"
+			. justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes)
+			. "</div>"
+			. fin_cadre_relief(true);
 		}
 		
 		if ($champs_extra AND $extra) {
 			include_spip('inc/extra');
-			extra_affichage($extra, "articles");
+			$res .= extra_affichage($extra, "articles");
 		}
 	}
+	return $res;
 }
 
 // http://doc.spip.org/@formulaire_instituer_article
@@ -511,10 +504,5 @@ function formulaire_instituer_article($id_article, $statut, $script, $args)
 	 "</center>");
   
   return redirige_action_auteur('instituer_article',$id_article,'articles', "id_article=$id_article", $res, " method='post'");
-
-  /* quand la mise en page sera plus regroupee
-  return ajax_action_auteur("instituer_article", $id_article, $script, $args, $res, $args);
-  */
 }
-
 ?>
