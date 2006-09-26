@@ -972,15 +972,15 @@ function spip_initialisation() {
 
 	// Icones
 	# le chemin http (relatif) vers les images standard
-	define('_DIR_IMG_PACK', (_DIR_RESTREINT . 'img_pack/'));
-	# vers les logos de type de document, standard & perso
-	define('_DIR_IMG_ICONES_DIST', _DIR_RACINE . "dist/img/icones/");
-	# les icones de la barre d'edition des formulaires
-	define('_DIR_IMG_ICONES_BARRE', _DIR_RACINE . "dist/img/icones_barre/");
+	define('_DIR_IMG_PACK', (_DIR_RACINE . 'dist/images/'));
+	# le chemin des vignettes de type de document
+	define('_DIR_IMG_ICONES_DIST', _DIR_RACINE . "dist/vignettes/");
+	# le chemin des icones de la barre d'edition des formulaires
+	define('_DIR_IMG_ICONES_BARRE', _DIR_RACINE . "dist/icones_barre/");
 
 	# le chemin php (absolu) vers les images standard (pour hebergement centralise)
-	define('_ROOT_IMG_PACK', (dirname(dirname(__FILE__)) . '/img_pack/'));
-	define('_ROOT_IMG_ICONES_DIST', (dirname(dirname(__FILE__)) . '/img_pack/icones/'));
+	define('_ROOT_IMG_PACK', dirname(dirname(dirname(__FILE__))) . '/dist/images/');
+	define('_ROOT_IMG_ICONES_DIST', dirname(dirname(dirname(__FILE__))) . '/dist/vignettes/');
 
 	// Le charset par defaut lors de l'installation
 	define('_DEFAULT_CHARSET', 'utf-8');
