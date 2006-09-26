@@ -20,6 +20,7 @@ function exec_articles_tous_dist()
 	global $aff_art, $sel_lang, $article, $enfant, $text_article;
 	global $connect_id_auteur, $connect_statut, $spip_dir_lang, $spip_lang, $browser_layer;
 
+	changer_typo(); // pour definir $dir_lang
 	if (!is_array($aff_art)) $aff_art = array('prop','publie');
 
  	pipeline('exec_init',array('args'=>array('exec'=>'articles_tous'),'data'=>''));
@@ -95,10 +96,15 @@ debut_droite();
 if ($enfant AND $browser_layer)
 	couche_formulaire_tous($first_couche, $last_couche);
 
-afficher_rubriques_filles(0);
+ $flag_trad = (($GLOBALS['meta']['multi_rubriques'] == 'oui' 
+			OR $GLOBALS['meta']['multi_articles'] == 'oui') 
+		AND $GLOBALS['meta']['gerer_trad'] == 'oui');
 
+ 
+afficher_rubriques_filles(0, $flag_trad);
 
-fin_page();
+ 
+ fin_page();
 }
 
 // Voir inc_layer pour les 2 globales utilisees
@@ -191,7 +197,7 @@ if ($aff_statut['poubelle'])
 			    'puce-poubelle-breve.gif',
 			    _T('texte_statut_poubelle'));
 
-echo "<div align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondo' VALUE='"._T('bouton_changer')."'></div>";
+echo "\n<div align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondo' VALUE='"._T('bouton_changer')."'></div>";
 
 
 // GERER LE MULTILINGUISME
@@ -199,19 +205,19 @@ if (($GLOBALS['meta']['multi_rubriques'] == 'oui' OR $GLOBALS['meta']['multi_art
 
 	// bloc legende
 	$lf = $GLOBALS['meta']['langue_site'];
-	echo "<hr /><div class='verdana2'>";
+	echo "<hr />\n<div class='verdana2'>";
 	echo _T('info_tout_site6');
-	echo "<div><span class='lang_base'>$lf</span> ". _T('info_tout_site5') ." </div>";
-	echo "<div><span class='creer'>$lf</span> ". _T('info_tout_site2') ." </div>";
-	echo "<div><a class='claire'>$lf</a> ". _T('info_tout_site3'). " </div>";
-	echo "<div><a class='foncee'>$lf</a> ". _T('info_tout_site4'). " </div>";
+	echo "\n<div><span class='lang_base'>$lf</span> ". _T('info_tout_site5') ." </div>";
+	echo "\n<div><span class='creer'>$lf</span> ". _T('info_tout_site2') ." </div>";
+	echo "\n<div><a class='claire'>$lf</a> ". _T('info_tout_site3'). " </div>";
+	echo "\n<div><a class='foncee'>$lf</a> ". _T('info_tout_site4'). " </div>";
 	echo "</div>\n";
 
 	// bloc choix de langue
 	$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
 	if (count($langues) > 1) {
 		sort($langues);
-		echo "<br /><div class='verdana2'><b>"._T('titre_cadre_afficher_traductions')."</b><br />";
+		echo "<br />\n<div class='verdana2'><b>"._T('titre_cadre_afficher_traductions')."</b><br />";
 		echo "<select style='width:100%' NAME='sel_lang[]' size='".count($langues)."' multiple='multiple'>";
 		while (list(, $l) = each ($langues)) {
 		  echo "<option value='$l'",
@@ -222,7 +228,7 @@ if (($GLOBALS['meta']['multi_rubriques'] == 'oui' OR $GLOBALS['meta']['multi_art
 		}
 		echo "</select></div>\n";
 
-		echo "<div align='$spip_lang_right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."'></div>";
+		echo "\n<div align='$spip_lang_right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."'></div>";
 	}
 
 }
@@ -253,97 +259,89 @@ function couche_formulaire_tous($first_couche, $last_couche)
 	echo "<div>&nbsp;</div>";
 }
 
+global $spip_lang_left, $spip_lang_right, $spip_lang, $couleur_claire;
+
+define('STYLE_SECTEUR', "padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(" . http_wrapper("secteur-24.gif") . ") $spip_lang_left center no-repeat; background-color: $couleur_claire;");
+
+define('STYLE_NONSECTEUR', "padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(" . http_wrapper("rubrique-24.gif") . ") $spip_lang_left center no-repeat;");
+
 // http://doc.spip.org/@afficher_rubriques_filles
-function afficher_rubriques_filles($id_parent) {
+function afficher_rubriques_filles($id_parent, $flag_trad) {
 	global $enfant, $article;
-	global $spip_lang_left, $spip_lang_right, $spip_lang;
-	global $couleur_claire;
 	static $decal = 0;
 
+	if (!$enfant[$id_parent]) return;
+
 	$decal = $decal + 1;
-	$droite = 500 - (10 * $decal);
-	
-	if ($enfant[$id_parent]) {
-	  while (list($id_rubrique, $titre) = each($enfant[$id_parent]) ) {
-			
-			if ($id_parent == 0) {
-				$icone = "secteur-24.gif";
-				$bgcolor = " background-color: $couleur_claire;";
-			}
-			else {
-				$icone = "rubrique-24.gif";
-				$bgcolor = "";
-			}
-			
-			echo "<div style='padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(" . http_wrapper($icone) . ") $spip_lang_left center no-repeat;$bgcolor'>";
-			
-			$lesarticles = isset($article[$id_rubrique]) ? $article[$id_rubrique] : '';
-			$lesenfants = isset($enfant[$id_rubrique]) ? $enfant[$id_rubrique] : '';
-			if ($lesenfants OR $lesarticles) echo bouton_block_invisible("rubrique$id_rubrique");
-			
-			echo "<b class='verdana2'><a href='",
-			  generer_url_ecrire("naviguer","id_rubrique=$id_rubrique"),
-			  "'>",
-			  $titre,
-			  "</b></a></div>\n";
 
-			if ($lesenfants OR $lesarticles) {
-				echo debut_block_invisible("rubrique$id_rubrique");
-				echo "<div class='plan-rubrique'>";
-				if ($lesarticles) {
-					echo "<div class='plan-articles'>";
-					article_tous_rubrique($lesarticles, $id_rubrique);
-					echo "</div>";
-				}
-
-				afficher_rubriques_filles($id_rubrique);	
-				echo "</div>";
-				echo fin_block();
-			}
+	while (list($id_rubrique, $titre) = each($enfant[$id_parent]) ) {
 			
-		if ($id_parent == 0) echo "<div>&nbsp;</div>";
-	  }
+		$lesarticles = isset($article[$id_rubrique]);
+		$lesenfants = ($lesarticles OR isset($enfant[$id_rubrique]));
+
+		echo "\n<div style='",
+		  ($id_parent ? STYLE_NONSECTEUR : STYLE_SECTEUR),
+		  "'>",
+		  (!$lesenfants ? '' : bouton_block_invisible("rubrique$id_rubrique")),
+		   "<b class='verdana2'><a href='",
+		   generer_url_ecrire("naviguer","id_rubrique=$id_rubrique"),
+		   "'>",
+		   $titre,
+		   "</a></b></div>\n";
+
+		if ($lesenfants) {
+			echo debut_block_invisible("rubrique$id_rubrique");
+			echo "\n<div class='plan-rubrique'>";
+			if ($lesarticles) 
+				echo article_tous_rubrique($article[$id_rubrique], $id_rubrique, $flag_trad);
+			afficher_rubriques_filles($id_rubrique,$flag_trad);
+			echo "</div>";
+			echo fin_block();
+		}
+			
+		if (!$id_parent) echo "<div>&nbsp;</div>";
 	}
 	$decal = $decal-1;
-	
 }
 
 // http://doc.spip.org/@article_tous_rubrique
-function article_tous_rubrique($tous, $id_rubrique) 
+function article_tous_rubrique($tous, $id_rubrique, $flag_trad) 
 {
 	global $text_article;
 
-	$flag_trad = (($GLOBALS['meta']['multi_rubriques'] == 'oui' 
-			OR $GLOBALS['meta']['multi_articles'] == 'oui') 
-		AND $GLOBALS['meta']['gerer_trad'] == 'oui');
-
+	$res = '';
 	while(list(,$zarticle) = each($tous) ) {
 		$attarticle = &$text_article[$zarticle];
 		$zelang = $attarticle["lang"];
 		unset ($attarticle["trad"][$zelang]);
-		if ($attarticle["id_trad"] == 0 OR $attarticle["id_trad"] == $zarticle) {
+		if ($attarticle["id_trad"] == 0
+		OR $attarticle["id_trad"] == $zarticle) {
 			$auteurs = trouve_auteurs_articles($zarticle);
-			/* pas loin du but, mais mise en page horrible
-$statuts= puce_statut_article($zarticle, $attarticle['statut'], $id_rubrique);
-			*/
+
+			$res .= "\n<tr class='tr_liste'>";
 			if (count($attarticle["trad"]) > 0) {
 				ksort($attarticle["trad"]);
-				$traductions = join ($attarticle["trad"], "");
-			echo "<span class='trad_float'>", $traductions, "</span>";
+				$res .= "\n<td><span class='trad_float'>" 
+				.  join('',$attarticle["trad"])
+				.  "</span></td>";
 			}
-			echo "<a   class='",
-			  $attarticle["statut"],
-			  "' href='", 
-			  generer_url_ecrire("articles","id_article=$zarticle"),
-			  "'",
-			  ($auteurs ? (' title="' . htmlspecialchars($auteurs). '"') :''),
-			  ">",
-			  ($flag_trad ? "<span class='lang_base'>$zelang</span> " : ''),
-			  "<span>",
-			  $attarticle["titre"],
-			  "</span></a>";
+			$res .= "\n<td width='11'>"
+			  . puce_statut_article($zarticle, $attarticle["statut"], $id_rubrique)
+			  . '</td>'
+			  . "\n<td  class='plan-articles'><a"
+			  . ($auteurs ? (' title="' . htmlspecialchars($auteurs). '"') :'')
+			  . "\nhref='"
+			  . generer_url_ecrire("articles","id_article=$zarticle")
+			  . "'>"
+			  . ($flag_trad ? "<span class='lang_base'>$zelang</span> " : '')
+			  . "<span>"
+			  . $attarticle["titre"]
+			  . "</span></a>"
+			  . "</td></tr>";
 		}
 	}
+
+	return (!$res ? '' : "\n<table cellpadding='2' cellspacing='0' border='0'>$res</table>");
 }
 
 // http://doc.spip.org/@trouve_auteurs_articles
@@ -351,7 +349,7 @@ function trouve_auteurs_articles($id_article)
 {
 	$result = spip_query("SELECT nom FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE auteurs.id_auteur=lien.id_auteur AND lien.id_article=$id_article ORDER BY auteurs.nom");
 	$res = array();
-	while ($row = spip_fetch_array($result))  $res[] = $row["nom"];
+	while ($row = spip_fetch_array($result))  $res[] = extraire_multi($row["nom"]);
 	return join(", ", $res);
 }
 ?>
