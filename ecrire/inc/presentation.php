@@ -357,12 +357,14 @@ function bandeau_titre_boite($titre, $afficher_auteurs, $boite_importante = true
 //
 // http://doc.spip.org/@bandeau_titre_boite2
 function bandeau_titre_boite2($titre, $logo="", $fond="white", $texte="black", $echo = true) {
-	global $spip_lang_left, $spip_display;
+	global $spip_lang_left, $spip_display, $browser_name;
 	
 	$retour = '';
 
 	if (strlen($logo) > 0 AND $spip_display != 1 AND $spip_display != 4) {
-		$retour .= "<div style='position: relative;'>";
+		if ($browser_name == "MSIE") 
+			$ie_style = "height:1%";
+		$retour .= "<div style='position: relative;$ie_style'>";
 		$retour .= "<div style='position: absolute; top: -12px; $spip_lang_left: 3px;'>" .
 		  http_img_pack("$logo", "", "") . "</div>";
 		$retour .= "<div style='background-color: $fond; color: $texte; padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2'><b>$titre</b></div>";
@@ -412,13 +414,9 @@ function fin_raccourcis() {
 
 // http://doc.spip.org/@afficher_plus
 function afficher_plus($lien) {
-	global $options, $spip_lang_right, $spip_display, $browser_name;
+	global $options, $spip_lang_right, $spip_display;
 	
 	if ($options == "avancees" AND $spip_display != 4) {
-		if ($browser_name == "MSIE") 
-			return "<a href='$lien'>" .
-			  http_img_pack("plus.gif", "+", ""). "</a> ";
-		else
 			return "<div style='float:$spip_lang_right; padding-top: 2px;'><a href='$lien'>" .
 			  http_img_pack("plus.gif", "+", "") ."</a></div>";
 	}
