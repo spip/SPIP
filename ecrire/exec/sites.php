@@ -255,8 +255,8 @@ echo "<p><center>";
 echo "</center>";
 
  if ($id_syndic AND $flag_administrable AND ($spip_display != 4)) {
-	include_spip('inc/chercher_logo');
-	echo afficher_boite_logo('id_syndic', $id_syndic, _T('logo_site')." ".aide ("rublogo"), _T('logo_survol'), 'sites');
+	  $iconifier = charger_fonction('iconifier', 'inc');
+	  echo $iconifier('id_syndic', $id_syndic, 'sites');
  }
 echo pipeline('affiche_gauche',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
 

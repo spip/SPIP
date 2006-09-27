@@ -251,10 +251,14 @@ function enfant_rub($collection){
 
 		if ($spip_display == 4) $les_enfants .= "<li>";
 
+
 		if ($voir_logo) {
-			if ($logo = $logo_f($id_rubrique, $id_rubrique, 'on'))
-			  if ($logo = decrire_logo("id_rubrique", 'on', $id_rubrique, 48, 36, $logo))
-				$logo =  "<div style='$voir_logo'>$logo</div>";
+			if ($logo = $logo_f($id_rubrique, 'id_rubrique', 'on')) {
+				list($fid, $dir, $nom, $format) = $logo;
+				$logo = ratio_image($fid, $nom, $format, 48, 36, "alt=''");
+				if ($logo)
+					$logo =  "<div style='$voir_logo'>$logo</div>";
+			}
 		}
 		$les_enfants .= "<div class='enfants'>" .
 			debut_cadre_sous_rub(($id_parent ? "rubrique-24.gif" : "secteur-24.gif"), true) .

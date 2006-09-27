@@ -314,9 +314,12 @@ if ($spip_display != 4) {
 
 	if ($spip_display != 1) {
 		$logo_f = charger_fonction('chercher_logo', 'inc');
-		if ($res = $logo_f(0, 'id_syndic', 'on'))
-		  if ($res = decrire_logo("id_syndic", 'on', 0, 170, 170, $res))
-			echo  "<div style='text-align:center; margin-bottom: 5px;'>$res</div>";
+		if ($res = $logo_f(0, 'id_syndic', 'on'))  {
+			list($fid, $dir, $nom, $format) = $res;
+			$res = ratio_image($fid, $nom, $format, 170, 170, "alt=''");
+			if ($res)
+				echo  "<div style='text-align:center; margin-bottom: 5px;'>$res</div>";
+		}
 	}
 	echo "<div class='verdana1'>";
 

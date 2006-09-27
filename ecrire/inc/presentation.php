@@ -939,9 +939,12 @@ function afficher_articles_boucle($row, &$tous_id, $afficher_auteurs, $afficher_
 
 	if ($voir_logo) {
 		$logo_f = charger_fonction('chercher_logo', 'inc');
-		if ($logo = $logo_f($id_article, 'id_article', 'on'))
-			if ($logo = decrire_logo("id_article", 'on', $id_article, 26, 20, $logo))
+		if ($logo = $logo_f($id_article, 'id_article', 'on')) {
+			list($fid, $dir, $nom, $format) = $logo;
+			$logo = ratio_image($fid, $nom, $format, 26, 20, "alt=''");
+			if ($logo)
 				$s .= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</div>";
+		}
 	}
 
 	$s .= typo($titre);
@@ -1229,9 +1232,12 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 
 	if ($voir_logo) {
 		$logo_f = charger_fonction('chercher_logo', 'inc');
-		if ($logo = $logo_f($id_breve, 'id_breve', 'on'))
-		  if ($logo = decrire_logo("id_breve", 'on', $id_breve, 26, 20, $logo))
+		if ($logo = $logo_f($id_breve, 'id_breve', 'on')) {
+			list($fid, $dir, $nom, $format) = $logo;
+			$logo = ratio_image($fid, $nom, $format, 26, 20, "alt=''");
+			if ($logo)
 				$s .= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</div>";
+		}
 	}
 
 	$s .= typo($titre);
@@ -1504,9 +1510,12 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 		$titre_boite = '';
 		if ($id_auteur AND $voir_logo) {
 			$logo_f = charger_fonction('chercher_logo', 'inc');
-			if ($logo = $logo_f($id_auteur, 'id_auteur', 'on'))
-				if ($logo = decrire_logo("id_auteur", 'on', $id_auteur, 48, 48, $logo))
+			if ($logo = $logo_f($id_auteur, 'id_auteur', 'on')) {
+				list($fid, $dir, $nom, $format) = $logo;
+				$logo = ratio_image($fid, $nom, $format, 48, 48, "alt=''");
+				if ($logo)
 					$titre_boite = "<div style='$voir_logo'>$logo</div>" ;
+			}
 		} 
 
 		$titre_boite .= typo($titre);
