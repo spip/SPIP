@@ -16,7 +16,7 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_sites_edit_dist
 function exec_sites_edit_dist()
 {
-  global $champs_extra, $connect_statut, $descriptif, $id_rubrique, $id_secteur, $id_syndic, $new, $nom_site, $syndication, $url_site, $url_syndic;
+  global $champs_extra, $connect_statut, $descriptif, $id_rubrique, $id_secteur, $id_syndic, $new, $nom_site, $syndication, $url_site, $url_syndic, $connect_id_rubrique;
 
 $result = spip_query("SELECT * FROM spip_syndic WHERE id_syndic=" . intval($id_syndic));
 
@@ -34,7 +34,9 @@ else {
 	$syndication = 'non';
 	$new = 'oui';
 	if (!intval($id_rubrique)) {
-		$row = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent='0' ORDER BY titre LIMIT 1"));
+		$in = !$connect_id_rubrique ? ''
+		  : (' WHERE id_rubrique IN (' . join(',', $connect_id_rubrique) . ')');
+		$row = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques$in ORDER BY id_rubrique DESC LIMIT 1"));		
 		$id_rubrique = $row['id_rubrique'];
 	}
 }

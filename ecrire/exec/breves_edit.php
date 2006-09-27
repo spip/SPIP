@@ -23,6 +23,7 @@ function exec_breves_edit_dist()
 global
   $champs_extra,
   $connect_statut,
+  $connect_id_rubrique,
   $id_breve,
   $id_rubrique,
   $lien_titre,
@@ -129,6 +130,17 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 
 
 	debut_cadre_couleur("$logo_parent", false, "",_T('entree_interieur_rubrique').aide ("brevesrub"));
+
+	// appel du script a la racine, faut choisir 
+	// on prend le dernier secteur cree
+	// dans une liste restreinte si admin restreint
+
+	if (!$id_rubrique) {
+		$in = !$connect_id_rubrique ? ''
+		  : (' AND id_rubrique IN (' . join(',', $connect_id_rubrique) . ')');
+		$row_rub = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0$in ORDER BY id_rubrique DESC LIMIT 1"));		
+		$id_rubrique = $row_rub['id_rubrique'];
+	}
 
 	// selecteur de rubrique (en general pas d'ajax car toujours racine)
 	$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');
