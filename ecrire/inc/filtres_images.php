@@ -1298,6 +1298,15 @@ function image_couleur_extraire($img, $x=10, $y=6) {
 	return $GLOBALS["couleur_extraite"]["$fichier-$x-$y"];
 }
 
+function couleur_html_to_hex($couleur){
+	$couleurs_html=array(
+		'aqua'=>'00FFFF','black'=>'000000','blue'=>'0000FF','fuchsia'=>'FF00FF','gray'=>'808080','green'=>'008000','lime'=>'00FF00','maroon'=>'800000',
+		'navy'=>'000080','olive'=>'808000','purple'=>'800080','red'=>'FF0000','silver'=>'C0C0C0','teal'=>'008080','white'=>'FFFFFF','yellow'=>'FFFF00');
+	if (isset($couleurs_html[$lc=strtolower($couleur)]))
+		return $couleurs_html[$lc];
+	return $couleur;
+}
+
 // http://doc.spip.org/@couleur_dec_to_hex
 function couleur_dec_to_hex($red, $green, $blue) {
 	$red = dechex($red);
@@ -1313,7 +1322,8 @@ function couleur_dec_to_hex($red, $green, $blue) {
 
 // http://doc.spip.org/@couleur_hex_to_dec
 function couleur_hex_to_dec($couleur) {
-	$couleur = ereg_replace("^#","",$couleur);
+	$couleur = couleur_html_to_hex($couleur);
+	$couleur = preg_replace(",^#,","",$couleur);
 	$retour["red"] = hexdec(substr($couleur, 0, 2));
 	$retour["green"] = hexdec(substr($couleur, 2, 2));
 	$retour["blue"] = hexdec(substr($couleur, 4, 2));
@@ -1530,7 +1540,7 @@ function produire_image_typo() {
 	$taille = $variable["taille"];
 	if ($taille < 1) $taille = 16;
 
-	$couleur = $variable["couleur"];
+	$couleur = couleur_html_to_hex($variable["couleur"]);
 	if (strlen($couleur) < 6) $couleur = "000000";
 
 	$alt = $texte;
