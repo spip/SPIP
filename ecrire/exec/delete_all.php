@@ -71,7 +71,7 @@ spip_query("DROP TABLE spip_ajax_fonc");
 
 
 // un pipeline pour DROP les tables installees par les plugins
-pipeline('delete_tables');
+pipeline('delete_tables', '');
 
 @unlink(_ACCESS_FILE_NAME);
 @unlink(_FILE_CONNECT);
