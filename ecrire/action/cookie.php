@@ -61,13 +61,13 @@ function action_cookie_dist()
 	$var_f = charger_fonction('session', 'inc');
 	$var_f(true);
 	envoie_image_vide();
-	exit;
+	return;
   }
 
 // tentative de connexion en auth_http
 if ($essai_auth_http AND !$ignore_auth_http) {
 	auth_http(($url ? $url : _DIR_RESTREINT_ABS), $essai_auth_http);
-	exit;
+	return;
 }
 
 // en cas de login sur bonjour=oui, on tente de poser un cookie
@@ -75,9 +75,9 @@ if ($essai_auth_http AND !$ignore_auth_http) {
 // le cas echeant.
 if ($test_echec_cookie == 'oui') {
 	spip_setcookie('spip_session', 'test_echec_cookie');
-	redirige_par_entete(generer_url_public('login'),
+	redirige_par_entete(generer_url_public('login',
 			    "var_echec_cookie=oui&url="
-			    . ($url ? rawurlencode($url) : _DIR_RESTREINT_ABS), true);
+			    . ($url ? rawurlencode($url) : _DIR_RESTREINT_ABS), true));
 }
 
 unset ($cookie_session);
