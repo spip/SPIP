@@ -24,11 +24,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_recalculer' => 'Rekalkulu tiun &#265;i pa&#285;on',
 'alerte_maj_impossible' => '<b>Alarmo&nbsp;!</b> La &#285;isdatigo de la MySQL-datenbazo al versio @version@ ne eblas pro datenbazo-modif-rajtaj kialoj. Bonvolu kontakti vian retgastiganton.',
 'analyse_xml' => 'XML analizo',
-'antispam_champ_vide' => 'Bonvolu forlasi tiun kampon malplena&nbsp;:',
+'antispam_champ_vide' => 'Bonvolu forlasi tiun tajpujon malplena&nbsp;:',
 'avis_archive_incorrect' => 'Tiu arkivo ne estas SPIP-dosiero',
 'avis_archive_invalide' => 'Tiu arkiva dosiero ne validas',
 'avis_attention' => 'ATENTU&nbsp;!',
-'avis_champ_incorrect_type_objet' => 'Erara tajpeja nomo @name@ por la objekto de tipo @type@',
+'avis_champ_incorrect_type_objet' => 'Erara tajpuja nomo @name@ por la objekto de tipo @type@',
 'avis_colonne_inexistante' => 'La kolumno @col@ ne ekzistas',
 'avis_echec_syndication_01' => 'Abonrilatigo malsukcesis: la indikata abonrilatiga dosiero (backend-dosiero) ne estas de&#265;ifrebla a&#365; proponas neniun artikolon.',
 'avis_echec_syndication_02' => 'Abonrilatigo malsukcesis: ne eblas iri al abonrilatiga dosiero (backend-dosiero) de tiu retejo.',
@@ -42,14 +42,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'barre_a_accent_grave' => 'Entajpi malakut-akcentan &#265;efliteran A',
-'barre_aide' => 'Uzu la tipografiajn &#349;parvojojn por pliri&#265;igi vian enpa&#285;igon',
+'barre_aide' => 'Uzu la tipografiajn rapidligilojn por pliri&#265;igi vian enpa&#285;igon',
 'barre_e_accent_aigu' => 'Entajpi malakut-akcentan &#265;efliteran E',
 'barre_eo' => 'Entajpi E en &#265;efliteran O',
 'barre_eo_maj' => 'Entajpi E en la &#265;eflitero O',
 'barre_euro' => 'Entajpi la simbolon &euro;',
 'barre_gras' => '{{Grasigi}}',
 'barre_guillemets' => 'Flanki per &laquo; citiloj &raquo;',
-'barre_guillemets_simples' => 'Flanki per &#147;simplaj citiloj”',
+'barre_guillemets_simples' => 'Flanki per &#147;simplaj citiloj&#148;',
 'barre_intertitre' => '{{{Intertitoligi}}}',
 'barre_italic' => '{Kursivigi}',
 'barre_lien' => 'Transformi al [hiperligo->http://...]',
@@ -78,7 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => 'tag-kalendaro',
 'cal_par_mois' => 'monat-kalendaro',
 'cal_par_semaine' => 'semajn-kalendaro',
-'confirm_changer_statut' => 'Atentu, vi petis por &#349;an&#285;i la statuson de tiu elemento. &#264;u vi deziras da&#365;rigi ?',
+'confirm_changer_statut' => 'Atentu, vi petis por &#349;an&#285;i la statuton de tiu elemento. &#264;u vi deziras da&#365;rigi ?',
 'correcte' => 'korekta',
 
 
@@ -140,12 +140,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_jnum8' => '8',
 'date_jnum9' => '9',
 'date_jour_1' => 'diman&#265;o',
+'date_jour_1_abbr' => 'dim.',
+'date_jour_1_initiale' => 'd.',
 'date_jour_2' => 'lundo',
+'date_jour_2_abbr' => 'lun.',
+'date_jour_2_initiale' => 'l.',
 'date_jour_3' => 'mardo',
+'date_jour_3_abbr' => 'mar.',
+'date_jour_3_initiale' => 'm.',
 'date_jour_4' => 'merkredo',
+'date_jour_4_abbr' => 'mer.',
+'date_jour_4_initiale' => 'm.',
 'date_jour_5' => '&#309;a&#365;do',
+'date_jour_5_abbr' => 'ja&#365;.',
+'date_jour_5_initiale' => 'j.',
 'date_jour_6' => 'vendredo',
+'date_jour_6_abbr' => 'ven.',
+'date_jour_6_initiale' => 'v.',
 'date_jour_7' => 'sabato',
+'date_jour_7_abbr' => 'sab.',
+'date_jour_7_initiale' => 's.',
 'date_jours' => 'tagoj',
 'date_minutes' => 'minutoj',
 'date_mois' => 'monatoj',
@@ -166,13 +180,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_3' => 'somero',
 'date_saison_4' => 'a&#365;tuno',
 'date_semaines' => 'semajnoj',
-'dirs_commencer' => ' por vere komenci la instalon',
+'dirs_commencer' => ' por vere komenci la instalprocezon',
 'dirs_preliminaire' => 'Anta&#365;faro: <b>Difinu la alir-rajtojn</b>',
 'dirs_probleme_droits' => 'Alir-rajta problemo',
 'dirs_repertoires_absents' => '<b>La jenaj dosierujoj ne estas trovitaj&nbsp;: <ul>@bad_dirs@.</ul> </b>
-  <p />La problemo ver&#349;ajne rilatas al uskligo de literoj.
-  Kontrolu ke la uskloj ja akordas kun tio kio estas afi&#349;ita &#265;i-supre;
-  se ili ne akordas, bonvolu renomi la dosierujon per via FTP-programo por korekti la eraron.
+  <p />La problemo ver&#349;ajne rilatas al majuskligo de literoj.
+  Kontrolu ke la majuskloj ja kongruas kun tio kio estas afi&#349;ita &#265;i-supre;
+  se ili ne kongruas, bonvolu renomi la dosierujon per via FTP-programo por korekti la eraron.
   <p />Post tio, vi povos',
 'dirs_repertoires_suivants' => '<b>La jenaj dosierujoj ne estas skribe alireblaj&nbsp;: 
 <ul>@bad_dirs@.</ul></b>
@@ -235,8 +249,8 @@ Dankon pro via partopreno
 ',
 'form_pet_message_commentaire' => '&#264;u mesa&#285;on, &#265;u komenton&nbsp;?',
 'form_pet_nom_site2' => 'Nomo de via retejo',
-'form_pet_probleme_technique' => 'Teknika problemo, la subskribeblo estas portempe interrompita.',
-'form_pet_signature_pasprise' => 'Via subskribo ne estas konsiderita.',
+'form_pet_probleme_technique' => 'Teknika problemo, la subskribeblo estas portempe ne ebla.',
+'form_pet_signature_pasprise' => 'Via subskribo ne estas enmemorigita.',
 'form_pet_signature_validee' => 'Via subskribo estas validigita. Dankon&nbsp;!',
 'form_pet_site_deja_enregistre' => 'Tiu retejo estas jam registrita',
 'form_pet_url_invalide' => 'La retadreso, kiun vi indikis, ne validas.',
@@ -256,15 +270,15 @@ Dankon pro via partopreno
 'form_prop_sujet' => 'Temo',
 'form_prop_url_site' => 'Adreso (URL) de la retejo',
 'forum_acces_refuse' => 'Vi ne plu havas alir-rajton al tiuj &#265;i forumoj.',
-'forum_attention_dix_caracteres' => '<b>Atentu&nbsp;!</b> via mesa&#285;o devas enhavi almena&#365; dek literojn.',
-'forum_attention_trois_caracteres' => '<b>Atentu&nbsp;!</b> via titolo devas enhavi almena&#365; tri literojn.',
+'forum_attention_dix_caracteres' => '<b>Atentu&nbsp;!</b> via mesa&#285;o devas enhavi almena&#365; dek signojn.',
+'forum_attention_trois_caracteres' => '<b>Atentu&nbsp;!</b> via titolo devas enhavi almena&#365; tri signojn.',
 'forum_avez_selectionne' => 'Vi selektis&nbsp;:',
 'forum_cliquer_retour' => 'Musklaku <a href=\'@retour_forum@\'>&#265;i tie</a> por da&#365;rigi.',
 'forum_forum' => 'forumo',
-'forum_info_modere' => 'Tiu &#265;i forumo estas apriore moderigita: via kontribuo aperos nur post validigo de administranto de la forumo.',
+'forum_info_modere' => 'Tiu &#265;i forumo estas apriore moderigita: via kontribuo aperos nur post validigo far de mastrumanto de la forumo.',
 'forum_lien_hyper' => '<b>Hiperligo</b> (nedeviga)',
 'forum_message_definitif' => 'Definitiva mesa&#285;o: sendu al la forumo',
-'forum_message_trop_long' => 'Via mesa&#285;o estas tro longa. La maksimuma longeco estas 20.000 literojn.',
+'forum_message_trop_long' => 'Via mesa&#285;o estas tro longa. La maksimuma longeco estas 20.000 signojn.',
 'forum_ne_repondez_pas' => 'Ne respondu al tiu &#265;i retletero, sed en la forumo &#265;e la jena adreso:',
 'forum_non_inscrit' => 'Vi ne estas registrita, a&#365; la adreso a&#365; la pasvorto ne &#285;ustas.',
 'forum_page_url' => '(Se via mesa&#285;o rilatas al artikolo publikigita &#265;e la reto, a&#365; al pa&#285;o donanta pli da informoj, bonvolu indiki &#265;i-poste la titolon de la pa&#285;o kaj ties ret-adreson.)',
@@ -288,8 +302,8 @@ Dankon pro via partopreno
 
 
 // I
-'ical_texte_rss_articles' => 'La backend-dosiero de la artikoloj de tiu retejo troveblas &#265;e la retadreso :',
-'ical_texte_rss_articles2' => 'Vi anka&#365; povas ricevi backend-dosierojn por artikoloj el &#265;iu rubriko de la retejo:',
+'ical_texte_rss_articles' => 'La abonrilatiga dosiero (backend-dosiero) de la artikoloj de tiu retejo troveblas &#265;e la retadreso :',
+'ical_texte_rss_articles2' => 'Vi anka&#365; povas ricevi abonrilatigajn dosierojn por artikoloj el &#265;iu rubriko de la retejo:',
 'ical_texte_rss_breves' => 'Krome ekzistas dosiero enhavanta &#265;iujn fulm-informojn de la retejo. Precizigante la rubriko-numeron, vi ricevos nur la fulm-informojn el tiu rubriko.',
 'icone_a_suivre' => 'Stabejo',
 'icone_admin_site' => 'Reteja administrado',
@@ -309,8 +323,8 @@ Dankon pro via partopreno
 'icone_discussions' => 'Diskutoj',
 'icone_doc_rubrique' => 'Dokumentoj de la rubrikoj',
 'icone_ecrire_article' => 'Skribi novan artikolon',
-'icone_edition_site' => 'Eldono',
-'icone_forum_administrateur' => 'Forumo de la administrantoj',
+'icone_edition_site' => 'Redaktejo',
+'icone_forum_administrateur' => 'Forumo de la mastrumantoj',
 'icone_forum_suivi' => 'Supervido de la forumoj',
 'icone_gestion_langues' => 'Mastrumado de lingvoj',
 'icone_informations_personnelles' => 'Personaj datenoj',
@@ -331,8 +345,8 @@ Dankon pro via partopreno
 'icone_statistiques_visites' => 'Statistikoj',
 'icone_suivi_activite' => 'Observi funkciadon de la retejo',
 'icone_suivi_actualite' => 'Evoluado de la&nbsp;retejo',
-'icone_suivi_forums' => 'Supervidi/administri la forumojn',
-'icone_suivi_pettions' => 'Supervidi/administri la petskribon',
+'icone_suivi_forums' => 'Superrigardi/mastrumi la forumojn',
+'icone_suivi_pettions' => 'Superrigardi/mastrumi la petskribon',
 'icone_suivi_revisions' => 'Modifoj de artikoloj',
 'icone_supprimer_document' => 'Forigi tiun dokumenton',
 'icone_supprimer_image' => 'Forigi tiun bildon',
@@ -352,7 +366,7 @@ Dankon pro via partopreno
 'info_acces_interdit' => 'Malpermesata aliro',
 'info_acces_refuse' => 'Rifuzita aliro',
 'info_action' => 'Ago : @action@',
-'info_administrer_rubriques' => 'Vi povas administri tiun rubrikon kaj ties subrubrikojn',
+'info_administrer_rubriques' => 'Vi povas mastrumi tiun rubrikon kaj ties subrubrikojn',
 'info_adresse_non_indiquee' => 'Vi indikis neniun adreson por testi&nbsp;!',
 'info_aide' => 'HELPO:',
 'info_ajouter_mot' => 'Aldoni tiun vorton',
@@ -380,7 +394,7 @@ Dankon pro via partopreno
 'info_copyright_doc' => 'Por pliaj informoj vidu la retpa&#285;on <a href=\'http://www.spip.net/eo\'>http://www.spip.net/eo</a>.',
 'info_copyright_gpl' => 'sub licenco GPL',
 'info_cours_edition' => 'Viaj redaktataj artikoloj',
-'info_creer_repertoire' => 'Bonvolu krei dosier(uj)on kies nomo estu&nbsp;:',
+'info_creer_repertoire' => 'Bonvolu krei dosieron a&#365; dosierujon kies nomo estu&nbsp;:',
 'info_creer_repertoire_2' => 'ene de la subdosierujo <b>@repertoire@</b>, kaj&nbsp;:',
 'info_creer_vignette' => 'a&#365;tomata kreo de la vinjeto',
 'info_deplier' => 'Malfaldi',
@@ -391,7 +405,7 @@ Dankon pro via partopreno
 'info_document' => 'Dokumento ',
 'info_documents' => 'Dokumentoj',
 'info_echange_message' => 'SPIP ebligas inter&#349;an&#285;on de mesa&#285;oj kaj la starigon de privataj diskutforumoj
- inter la            partoprenantoj de la retejo. Vi povas aktivigi a&#365;
+ inter la partoprenantoj de la retejo. Vi povas aktivigi a&#365;
  malaktivigi tiun funkcion.',
 'info_ecire_message_prive' => 'Skribi privatan mesa&#285;on',
 'info_email_invalide' => 'Nevalida retpo&#349;tadreso.',
@@ -403,7 +417,7 @@ Dankon pro via partopreno
 'info_erreur_systeme' => 'Sistemo-eraro (errno @errsys@)',
 'info_erreur_systeme2' => 'Eble la fiksdisko plenas, a&#365; la datenbazo estas difektita. <br>
  <font color=\'red\'><a href=\'@script@\'>Provu ripari la datenbazon</a>,
- a&#365; kontaktu vian gastiganton.</font></br>',
+ a&#365; kontaktu vian retgastiganton.</font></br>',
 'info_fini' => 'Finite !',
 'info_format_image' => 'Bildaj formatoj uzeblaj por krei vinjetojn&nbsp;: @gd_formats@.',
 'info_format_non_defini' => 'nedefinita formato',
@@ -415,7 +429,7 @@ Dankon pro via partopreno
 'info_inclusion_vignette' => 'Inkludo de la vinjeto&nbsp;:',
 'info_installation_systeme_publication' => 'Instalo de la publikiga sistemo...',
 'info_installer_documents' => 'Vi povas a&#365;tomate instali &#265;iujn dokumentojn trovi&#285;antajn en la dosiero @upload@.',
-'info_installer_ftp' => 'Kiel administranto, vi povas instali (FTP-e) dosierojn en la dosierujon @upload@ kaj poste rekte selekti ilin &#265;i tie.',
+'info_installer_ftp' => 'Kiel mastrumanto, vi povas instali (FTP-e) dosierojn en la dosierujon @upload@ kaj poste rekte selekti ilin &#265;i tie.',
 'info_installer_images' => 'Vi povas instali bildojn je la formatoj JPEG, GIF kaj PNG.',
 'info_installer_images_dossier' => 'Instali bildojn en la dosierujon @upload@ por povi ilin selekti &#265;i tie.',
 'info_installer_tous_documents' => 'Instali &#265;iujn dokumentojn',
@@ -430,16 +444,16 @@ Dankon pro via partopreno
 'info_langue_principale' => '&#264;efa lingvo de la retejo',
 'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ bilderoj',
 'info_les_auteurs_1' => 'de @les_auteurs@',
-'info_logo_format_interdit' => 'Nur vinjetoj je formatoj @formats@ estas permisataj.',
-'info_logo_max_poids' => 'Vinjetoj devige pezu malpli ol @maxi@ (tiu dosiero pezas @actuel@).',
-'info_logo_max_taille' => 'Vinjetoj devige pezu malpli ol @maxi@ (tiu dosiero pezas @actuel@).',
+'info_logo_format_interdit' => 'Nur vinjetoj je formatoj @formats@ estas permesataj.',
+'info_logo_max_poids' => 'Vinjetoj devige pesu malpli ol @maxi@ (tiu dosiero pesas @actuel@).',
+'info_logo_max_taille' => 'Vinjetoj devige pesu malpli ol @maxi@ (tiu dosiero pesas @actuel@).',
 'info_mail_fournisseur' => 'vi@retalir-provizisto.com',
 'info_message_2' => 'MESA&#284;O',
 'info_message_supprime' => 'FORIGITA MESA&#284;O',
 'info_mise_en_ligne' => 'Dato de &#265;eretigo&nbsp;: ',
 'info_modification_parametres_securite' => 'modifoj de la sekuraj parametroj',
-'info_mois_courant' => 'En la pasanta monato :',
-'info_mot_cle_ajoute' => 'La jena &#349;losilvorto estas aldonita al',
+'info_mois_courant' => 'En la kuranta monato :',
+'info_mot_cle_ajoute' => 'La jena &#349;losilvorto estas kunligita al',
 'info_multi_herit' => 'Defa&#365;lta lingvo',
 'info_multi_langues_soulignees' => 'Por la <u>substrekitaj lingvoj</u>, &#265;iuj tekstoj de la interfaco estas tradukitaj. Kiam vi elektas tiujn lingvojn, multaj elementoj de la publika retejo (datoj, formularoj) estos a&#365;tomate tradukitaj. Por la nesubstrekitaj lingvoj, tiuj elementoj afi&#349;i&#285;os en la &#265;efa lingvo de la retejo.',
 'info_multilinguisme' => 'Multlingvismo',
@@ -487,7 +501,7 @@ Dankon pro via partopreno
 'info_sites_referencer' => 'Referenci retejon',
 'info_supprimer_vignette' => 'forigi la vinjeton',
 'info_symbole_bleu' => 'La <b>blua</b> simbolo indikas <b>memorigilon</b> : tio estas al vi persone adresata memoriga mesa&#285;o.',
-'info_symbole_jaune' => 'La <B>flava</B> simbolo indikas <B>anoncon al &#265;iuj redaktantoj</B>&nbsp;: modifebla de &#265;iuj administrantoj, kaj videbla de &#265;iuj redaktantoj.',
+'info_symbole_jaune' => 'La <B>flava</B> simbolo indikas <B>anoncon al &#265;iuj redaktantoj</B>&nbsp;: modifebla de &#265;iuj mastrumantoj, kaj videbla de &#265;iuj redaktantoj.',
 'info_symbole_vert' => 'La <B>verda</B> simbolo indikas la <B>mesa&#285;ojn inter&#349;an&#285;itajn kun aliaj uzantoj</B> de la retejo.',
 'info_syndication' => 'abonrilato&nbsp;:',
 'info_syndication_articles' => 'artikolo(j)',
@@ -501,7 +515,7 @@ Dankon pro via partopreno
 'info_trop_resultat' => 'Tro da rezultoj por "@cherche_mot@"; bonvolu fajnigi la ser&#265;okriteriojn.',
 'info_utilisation_messagerie_interne' => 'Vi uzas la internan po&#349;ton de tiu &#265;i retejo.',
 'info_valider_lien' => 'validigi tiun &#265;i ligilon',
-'info_verifier_image' => ', bonvolu kontroli &#265;u viaj bildoj estas bone transigitaj.',
+'info_verifier_image' => ', bonvolu kontroli &#265;u viaj bildoj estas trafe transigitaj.',
 'info_vignette_defaut' => 'Defa&#365;lta vinjeto',
 'info_vignette_personnalisee' => 'Persona vinjeto',
 'info_visite' => 'vizito :',
@@ -535,7 +549,7 @@ Dankon pro via partopreno
 'login_acces_prive' => 'aliro al la privata spaco',
 'login_autre_identifiant' => 'ensaluti per alia kromnomo',
 'login_connexion_refusee' => 'Ensaluto rifuzita.',
-'login_cookie_accepte' => 'Bonvolu &#285;ustigi vian retumilon por ke &#285;i akceptu ilin (almena&#365; por tiu &#265;i retejo).',
+'login_cookie_accepte' => 'Bonvolu agordi vian retumilon por ke &#285;i akceptu ilin (almena&#365; por tiu &#265;i retejo).',
 'login_cookie_oblige' => 'Por sekure ensaluti&#285;i en tiu retejo, vi devas akcepti la kuketojn.',
 'login_deconnexion_ok' => 'Elsalutinta.',
 'login_erreur_pass' => 'Pasvort-eraro.',
@@ -543,7 +557,7 @@ Dankon pro via partopreno
 'login_identifiant_inconnu' => 'La salutnomo &laquo; @login@ &raquo; estas nekonata.',
 'login_login' => 'Salutnomo:',
 'login_login2' => 'Salutnomo (ensalutilo por konekti&#285;i al la retejo)&nbsp;:',
-'login_login_pass_incorrect' => '(Salutnomo a&#365; pasvorto mal&#285;usta.)',
+'login_login_pass_incorrect' => '(Salutnomo a&#365; pasvorto ne valida.)',
 'login_motpasseoublie' => '&#265;u&nbsp;vi&nbsp;forgesis&nbsp;la&nbsp;pasvorton?',
 'login_non_securise' => 'Atentu, tiu formularo ne estas sekurigita;.
    Se vi ne volas ke via pasvorto estu fra&#365;de
@@ -599,7 +613,7 @@ Dankon pro via partopreno
 'pass_erreur_acces_refuse' => '<b>Eraro:</b> vi ne plu havas aliron al tiu retejo.',
 'pass_erreur_code_inconnu' => '<b>Eraro:</b> tiu kodo kongruas kun neniu el la vizitantoj rajtantaj aliri tiun &#265;i retejon.',
 'pass_erreur_non_enregistre' => '<b>Eraro :</b> la retpo&#349;tadreso <tt>@email_oubli@</tt> ne estas registrita &#265;i tie.',
-'pass_erreur_non_valide' => '<b>Erreur :</b> tiu retpo&#349;tadreso <tt>@email_oubli@</tt> ne validas!',
+'pass_erreur_non_valide' => '<b>Eraro :</b> tiu retpo&#349;tadreso <tt>@email_oubli@</tt> ne validas!',
 'pass_erreur_probleme_technique' => '<b>Eraro :</b> pro teknika problemo, la retmesa&#285;o ne povas esti sendata.',
 'pass_espace_prive_bla' => 'La privata spaco de tiu &#265;i retejo estas malfermita al
   vizitantoj, post ties registri&#285;o. Tio farita, vi povos
@@ -626,7 +640,7 @@ kaj ensaluti.
 'pass_mot_oublie' => 'Pasvorto forgesita',
 'pass_nouveau_enregistre' => 'Via nova pasvorto estas registrita.',
 'pass_nouveau_pass' => 'Nova pasvorto',
-'pass_ok' => 'EK',
+'pass_ok' => 'JES',
 'pass_oubli_mot' => 'Pasvorto-forgeso',
 'pass_quitter_fenetre' => 'Forlasi tiun fenestron',
 'pass_rappel_login' => 'Memoru: via ensalutilo (salutnomo) estas &laquo; @login@ &raquo;.',
@@ -635,8 +649,8 @@ kaj ensaluti.
 'pass_rien_a_faire_ici' => 'Nenion por fari &#265;i tie.',
 'pass_vousinscrire' => 'Registri&#285;i &#265;e tiu retejo',
 'precedent' => 'anta&#365;an',
-'previsualisation' => 'Anta&#365;vido',
-'previsualiser' => 'Anta&#365;vidi',
+'previsualisation' => 'Anta&#365;rigardo',
+'previsualiser' => 'Anta&#365;rigardi',
 
 
 // S
@@ -644,7 +658,7 @@ kaj ensaluti.
 'squelette_inclus_ligne' => 'skeleto inkluzivita, linio',
 'squelette_ligne' => 'skeleto, linio',
 'stats_visites_et_popularite' => '@visites@ vizitoj&nbsp;; populareco&nbsp;: @popularite@',
-'suivant' => 'postan',
+'suivant' => 'sekvanta',
 
 
 // T
@@ -655,12 +669,12 @@ kaj ensaluti.
 'texte_actualite_site_2' => 'kompleta interfaco',
 'texte_actualite_site_3' => '&raquo; por malfermi pliajn eblecojn.',
 'texte_creation_automatique_vignette' => 'La a&#365;tomata kreado de anta&#365;rigardaj vinjetoj estas aktivigita &#265;e tiu &#265;i retejo. Se vi instalas pere de tiu &#265;i formularo bildojn je la formato(j) @gd_formats@, ili estos akompanataj de vinjeto kun maksimuma grandeco de @taille_preview@&nbsp;bilderoj.',
-'texte_documents_associes' => 'La sekvaj dokumentoj estas asociitaj al la artikolo,
+'texte_documents_associes' => 'La sekvantaj dokumentoj estas asociitaj al la artikolo,
     sed ili ne estis rekte enmetitaj en &#285;in.
     La&#365; la enpa&#285;igo de la publika spaco,
     ili povos aperi en formo de alkro&#265;itaj dokumentoj.',
 'texte_erreur_mise_niveau_base' => 'Datenbazo-eraro dum la alniveligo.
-  La bildo <B>@fichier@</B> ne pasis (artikolo @id_article@).
+  La bildo <B>@fichier@</B> ne aperis (artikolo @id_article@).
   Notu bone tiun referencon, reprovu la alniveligon,
   kaj fine kontrolu ke la bildoj aperu
   plu en la artikoloj.',
@@ -675,7 +689,7 @@ kaj ensaluti.
  kutimi&#285;inta pri la funkcionado de la sistemo SPIP. <P align="justify"><B>Pli
  &#285;enerale, estas tre konsilinde lasi la mastrumadon de tiuj &#265;i pa&#285;oj
  al la &#265;efa retejestro .</B>',
-'texte_inc_meta_1' => 'La sistemo detektis eraron dum skribado de la dosiero <code>@fichier@</code>. Bonvolu, kiel administranto de la retejo,',
+'texte_inc_meta_1' => 'La sistemo detektis eraron dum skribado de la dosiero <code>@fichier@</code>. Bonvolu, kiel mastrumanto de la retejo,',
 'texte_inc_meta_2' => 'kontroli la skriborajtojn',
 'texte_inc_meta_3' => 'en la dosierujo <code>@repertoire@</code>.',
 'texte_statut_en_cours_redaction' => 'redaktata',
@@ -709,11 +723,11 @@ kaj ensaluti.
 
 // U
 'upload_fichier_zip' => 'ZIP-Dosiero (densigita)',
-'upload_fichier_zip_texte' => 'La dosiero, kiun vi proponas instali estas densigita dosiero(zip).',
+'upload_fichier_zip_texte' => 'La dosiero, kiun vi proponas instali estas densigita dosiero (zip).',
 'upload_fichier_zip_texte2' => 'Tiu dosiero povas esti&nbsp;:',
 'upload_limit' => 'Tiu dosiero estas tro granda por la servilo&nbsp;; la maksimuma grandeco permesata en <i>upload</i> estas @max@.',
-'upload_zip_decompacter' => 'maldensigita kaj &#265;iu elemento, kiun &#285;i enhavas instalita en la teksejo. La dosieroj kiuj estos tiam instalitaj &#265;e la retejo estas:',
-'upload_zip_telquel' => 'instalita tiel, kiel &#285;i estas, kiel densigita Zip-arkivo&nbsp;;',
+'upload_zip_decompacter' => 'maldensigita kaj &#265;iu elemento, kiun &#285;i enhavas estas instalita &#265;e la retejo. La dosieroj kiuj estos sekve instalitaj &#265;e la retejo estas&nbsp;:',
+'upload_zip_telquel' => 'instalita tia, kia &#285;i estas, kiel densigita Zip-arkivo&nbsp;;',
 
 
 // Z
@@ -727,8 +741,8 @@ kaj ensaluti.
 'zbug_distant_interdit' => 'ago &#265;e tiu ekstera datenbazo malpermesata',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: duobla difino',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: mankas fermanta marko',
-'zbug_erreur_boucle_syntaxe' => 'Mal&#285;usta ma&#349;a sintakso',
-'zbug_erreur_execution_page' => 'eraro rulante pa&#285;on',
+'zbug_erreur_boucle_syntaxe' => 'Ne valida ma&#349;a sintakso',
+'zbug_erreur_execution_page' => 'eraro dum plenumo de pa&#285;-afi&#349;o',
 'zbug_erreur_filtre' => 'Eraro : filtrilo <b>&laquo; @filtre@ &raquo;</b> nedifinita',
 'zbug_erreur_meme_parent' => '{meme_parent} nur apliki&#285;as je ma&#349;oj (FORUMS) a&#365; (RUBRIQUES)',
 'zbug_erreur_squelette' => 'Eraro(j) en la skeleto',
