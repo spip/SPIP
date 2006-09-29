@@ -125,16 +125,6 @@ if (!isset($couleurs_spip[$choix_couleur])) $choix_couleur = 1;
 $couleur_foncee = $couleurs_spip[$choix_couleur]['couleur_foncee'];
 $couleur_claire = $couleurs_spip[$choix_couleur]['couleur_claire'];
 
-define ('_ATTRIBUTES_BODY',  "
-link='" .  $couleurs_spip[$choix_couleur]['couleur_lien'] . "'
-vlink='" . $couleurs_spip[$choix_couleur]['couleur_lien_off'] ."'
-alink='" . $couleurs_spip[$choix_couleur]['couleur_lien_off'] ."'
-bgcolor='#f8f7f3' text='#000000' 
-topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'" .
-	($spip_lang_rtl ? " dir='rtl'" : ""));
-
-define('_TRANCHES', 10);
-
 // charger l'affichage minimal et initialiser a la langue par defaut
 include_spip('inc/minipres');
 
@@ -155,6 +145,16 @@ if (isset($GLOBALS['_COOKIE']['spip_lang_ecrire'])) {
 		}
 	}
 }
+
+define ('_ATTRIBUTES_BODY',  "
+link='" .  $couleurs_spip[$choix_couleur]['couleur_lien'] . "'
+vlink='" . $couleurs_spip[$choix_couleur]['couleur_lien_off'] ."'
+alink='" . $couleurs_spip[$choix_couleur]['couleur_lien_off'] ."'
+bgcolor='#f8f7f3' text='#000000' 
+topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'" .
+	($spip_lang_rtl ? " dir='rtl'" : ""));
+
+define('_TRANCHES', 10);
 
 //
 // Fragment (ajax) ?

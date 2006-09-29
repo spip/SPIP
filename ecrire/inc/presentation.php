@@ -362,8 +362,7 @@ function bandeau_titre_boite2($titre, $logo="", $fond="white", $texte="black", $
 	$retour = '';
 
 	if (strlen($logo) > 0 AND $spip_display != 1 AND $spip_display != 4) {
-		if ($browser_name == "MSIE") 
-			$ie_style = "height:1%";
+		$ie_style = ($browser_name == "MSIE") ? "height:1%" : '';
 		$retour .= "<div style='position: relative;$ie_style'>";
 		$retour .= "<div style='position: absolute; top: -12px; $spip_lang_left: 3px;'>" .
 		  http_img_pack("$logo", "", "") . "</div>";
@@ -763,7 +762,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	$langue_defaut = $GLOBALS['meta']['langue_site'];
 	// Preciser la requete (alleger les requetes)
 	if (!isset($requete['SELECT'])) {
-		$requete['SELECT'] = "articles.id_article, articles.titre, articles.id_rubrique, articles.statut, articles.date";
+		$requete['SELECT'] = "articles.id_article, articles.titre, articles.id_rubrique, articles.statut, articles.date, articles.lang";
 
 		if (($GLOBALS['meta']['multi_rubriques'] == 'oui' AND (!isset($GLOBALS['id_rubrique']))) OR $GLOBALS['meta']['multi_articles'] == 'oui') {
 			$afficher_langue = true;
@@ -1188,7 +1187,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 
 		if (isset($GLOBALS['langue_rubrique'])) $langue_defaut = $GLOBALS['langue_rubrique'];
 		else $langue_defaut = $GLOBALS['meta']['langue_site'];
-	}
+	} else $afficher_langue = $langue_defaut = '';
 
 
 	$tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);
@@ -1713,13 +1712,13 @@ function debut_javascript($admin, $stat)
 	// On envoie un script ajah ; si le script reussit le cookie passera a +1
 	// on installe egalement un <noscript></noscript> qui charge une image qui
 	// pose un cookie valant -1
-	if ($_COOKIE['spip_accepte_ajax'] < 1) {
-		$tester_javascript = "if (a = createXmlHttp()) {
+	$tester_javascript =  ($_COOKIE['spip_accepte_ajax'] >= 1) ? '' : (
+ "if (a = createXmlHttp()) {
 	a.open('GET', '" . generer_url_ecrire('test_ajax', 'js=1', '&') .
 		  "', true) ;
 	a.send(null);
-}";
-	}
+}");
+
 	if ($_COOKIE['spip_accepte_ajax'] != -1) {
 		define('_TESTER_NOSCRIPT',
 			"<noscript><div style='display:none;'><img src='".generer_url_ecrire('test_ajax', 'js=-1')."' width='1' height='1' alt='' /></div></noscript>\n"); // pour le pied de page
