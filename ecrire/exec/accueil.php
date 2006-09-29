@@ -167,7 +167,7 @@ if ($spip_display == 4) {
 			
 			if ($activer_breves != "non") {
 				$gadget .= "<td>";
-				$gadget .= icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui$dans_rub"), "breve-24.gif","creer.gif", false);
+				$gadget .= icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui$dans_parent"), "breve-24.gif","creer.gif", false);
 				$gadget .= "</td>";
 			}
 			
