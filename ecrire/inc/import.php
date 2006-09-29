@@ -132,7 +132,6 @@ function import_fin() {
 	effacer_meta('fichier_restauration');
 	effacer_meta('version_archive_restauration');
 	effacer_meta('tag_archive_restauration');
-	ecrire_meta('calculer_rubriques', 'oui');
 	ecrire_metas();
 }
 
@@ -428,7 +427,7 @@ function import_all_continue()
 		spip_log("Erreur: $r");
 		import_abandon();
 	}
-	else	import_fin();
+	else import_fin();
 }
 
 ?>

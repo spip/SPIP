@@ -231,7 +231,8 @@ function maj_base($version_cible = 0) {
 		spip_query("ALTER TABLE spip_rubriques ADD INDEX id_parent (id_parent)");
 		spip_query("ALTER TABLE spip_rubriques ADD statut VARCHAR(10) NOT NULL");
 		// Declencher le calcul des rubriques publiques
-		spip_query("REPLACE spip_meta (nom, valeur) VALUES ('calculer_rubriques', 'oui')");
+		include_spip('inc/rubriques');
+		calculer_rubriques();
 		maj_version (1.207);
 	}
 
