@@ -218,8 +218,8 @@ function articles_documents($flag_editable, $type, $id)
 
 	$f = charger_fonction('documenter', 'inc');
 
-	return $f($id_article, 'article', 'portfolio', $flag_editable)
-	. $f($id_article, 'article', 'documents', $flag_editable)
+	return $f($id, 'article', 'portfolio', $flag_editable)
+	. $f($id, 'article', 'documents', $flag_editable)
 	. $res;
 }
 
