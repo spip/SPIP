@@ -138,7 +138,9 @@ function boucle_FORUMS_dist($id_boucle, &$boucles) {
 	}
 	// Restreindre aux elements publies
 	if (!$boucle->statut) {
-		if (!$GLOBALS['var_preview'])
+		if ($GLOBALS['var_preview'])
+			$boucle->where[]= array("'IN'", "'$mstatut'", "'(\"publie\",\"prive\")'");		
+		else
 			$boucle->where[]= array("'='", "'$mstatut'", "'\"publie\"'");
 	}
 
