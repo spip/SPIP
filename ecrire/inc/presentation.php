@@ -2101,10 +2101,6 @@ function init_entete($titre, $rubrique, $css='') {
 	// envoi des en-tetes, du doctype et du <head><title...
 	include_spip('inc/headers');
 	http_no_cache();
-	echo _DOCTYPE_ECRIRE
-		. "<html lang='".$GLOBALS['spip_lang']."' dir='"
-		. ($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')
-		. "'>\n";
 	$head = "<title>["
 		. $nom_site_spip
 		. "] " . textebrut(typo($titre)) . "</title>\n"
@@ -2118,8 +2114,7 @@ function init_entete($titre, $rubrique, $css='') {
 			. '" type="text/css" />'. "\n"
 		) ) ."\n";
 	
-	echo "<head>\n".pipeline('header_prive', $head)
-		. "</head>\n";
+	echo _DOCTYPE_ECRIRE, html_lang_attributes(), "<head>\n",pipeline('header_prive', $head), "</head>\n";
 }
 
 // fonction envoyant la double serie d'icones de redac

@@ -73,7 +73,7 @@ function afficher_sites_boucle($row, &$tous_id, $voir_logo, $bof)
 
 	if ($voir_logo) {
 		$logo_f = charger_fonction('chercher_logo', 'inc');
-		if ($logo = $logo_f($id_syndic, $id_syndic, 'on'))  {
+		if ($logo = $logo_f($id_syndic, 'id_syndic', 'on'))  {
 			list($fid, $dir, $nom, $format) = $logo;
 			$logo = ratio_image($fid, $nom, $format, 26, 20, "alt=''");
 			if ($logo)

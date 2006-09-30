@@ -20,13 +20,10 @@ include_spip('inc/texte');
 // La frame de base
 //
 // http://doc.spip.org/@help_frame
-function help_frame ($aide) {
-	global $spip_lang;
+function help_frame ($aide, $lang) {
 
-	echo "<head><title>", _T('info_aide_en_ligne'),	"</title></head>\n";
-
-	$frame_menu = "<frame src='" . generer_url_ecrire('aide_index', "aide=$aide&var_lang=$spip_lang&frame=menu", false, true) . "' name=\"gauche\" scrolling=\"auto\" noresize>\n";
-	$frame_body = "<frame src='" . generer_url_ecrire('aide_index', "aide=$aide&var_lang=$spip_lang&frame=body", false, true) . "' name=\"droite\" scrolling=\"auto\" noresize>\n";
+	$frame_menu = "<frame src='" . generer_url_ecrire('aide_index', "aide=$aide&var_lang=$lang&frame=menu", false, true) . "' name=\"gauche\" scrolling=\"auto\" noresize>\n";
+	$frame_body = "<frame src='" . generer_url_ecrire('aide_index', "aide=$aide&var_lang=$lang&frame=body", false, true) . "' name=\"droite\" scrolling=\"auto\" noresize>\n";
 
 	if ($GLOBALS['spip_lang_rtl']) {
 	  echo '<frameset cols="*,160" border="0" frameborder="0" framespacing="0">', $frame_body,$frame_menu, '</frameset>';
@@ -83,7 +80,7 @@ function fichier_aide($lang_aide = '') {
 	erreur_aide_indisponible();
 }
 
-define(_STYLE_AIDE_BODY, '
+define('_STYLE_AIDE_BODY', '
 <style type="text/css"><!--
 .spip_cadre {
 	width : 100%;
@@ -137,8 +134,8 @@ table.spip td {
 --></style>');
 
 // http://doc.spip.org/@help_body
-function help_body($aide, $html) {
-	global $help_server;
+function help_body($aide, $html, $lang_aide='') {
+  global $help_server, $spip_lang_rtl;
 
 	// Recuperation du contenu de l'aide demandee
 
@@ -176,7 +173,7 @@ function help_body($aide, $html) {
 		$suite = substr($suite, $p + strlen($r[0]));
 	}
 
-	echo "<head><title>",_T('info_aide_en_ligne'), "</title>\n", _STYLE_AIDE_BODY, "</head>\n";
+	echo _STYLE_AIDE_BODY, "</head>\n";
 
 	echo '<body bgcolor="#FFFFFF" text="#000000" TOPMARGIN="24" LEFTMARGIN="24" MARGINWIDTH="24" MARGINHEIGHT="24"';
 	if ($spip_lang_rtl)
@@ -290,10 +287,10 @@ define('AIDE_STYLE_MENU', '<style type="text/css">
 // Le menu de gauche
 //
 // http://doc.spip.org/@help_menu
-function help_menu($aide, $html) {
+function help_menu($aide, $html, $lang_aide='') {
 	global $spip_lang_rtl; 
 
-	echo "<head><title>",_T('info_aide_en_ligne'), "</title>\n",AIDE_STYLE_MENU, '<script type="text/javascript"><!--
+	echo AIDE_STYLE_MENU, '<script type="text/javascript"><!--
 var curr_article;
 // http://doc.spip.org/@activer_article
 function activer_article(id) {
@@ -319,6 +316,7 @@ function activer_article(id) {
 
 	// Recuperation et analyse de la structure de l'aide demandee
 	$sections = analyse_aide($html);
+	$rubrique_vue = false;
 	foreach ($sections as $section) {
 		if ($section[1] == '1') {
 			if ($rubrique_vue)
@@ -437,12 +435,12 @@ function analyse_aide($html, $aide=false) {
 // http://doc.spip.org/@exec_aide_index_dist
 function exec_aide_index_dist()
 {
-global $img, $frame, $aide, $var_lang, $lang, $help_server;
-
+  global $img, $frame, $aide, $var_lang, $lang, $help_server, $spip_lang;
 // Recuperer les infos de langue (preferences auteur), si possible
 utiliser_langue_visiteur();
 if ($var_lang) changer_langue($var_lang);
 if ($lang) changer_langue($lang); # pour le cas ou on a fait appel au menu de changement de langue (aide absente dans la langue x)
+ else $lang = $spip_lang;
 
 if (preg_match(',^([^-.]*)-([^-.]*)-([^\.]*\.(gif|jpg|png))$,', $img, $regs))
 	help_img($regs);
@@ -469,19 +467,15 @@ else {
 	} 
 
 	header("Content-Type: text/html; charset=utf-8");
-	echo _DOCTYPE_ECRIRE, "\n",
-		"<html lang='",
-		$GLOBALS['spip_lang'],
-		"' dir='",
-		($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr'),
-		"'>\n";
+	echo _DOCTYPE_ECRIRE, html_lang_attributes();
+	echo "<head><title>", _T('info_aide_en_ligne'),	"</title></head>\n";
 
 	if ($frame == 'menu')
-			help_menu($aide, $html);
+		help_menu($aide, $html, $lang);
 	else if ($frame == 'body')
-			help_body($aide, $html);
+		help_body($aide, $html, $lang);
 	else
-			help_frame($aide);
+		help_frame($aide, $lang);
 	echo "\n</html>";
  }
 }

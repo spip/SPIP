@@ -18,6 +18,7 @@ include_spip('inc/logos');
 function inc_chercher_logo_dist($id, $type, $mode='on') {
 	global $formats_logos;
 	# attention au cas $id = '0' pour LOGO_SITE_SPIP : utiliser intval()
+
 	$type = $GLOBALS['table_logos'][$type];
 	$nom = $type . $mode . intval($id);
 

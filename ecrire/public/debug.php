@@ -132,7 +132,7 @@ function erreur_squelette($message='', $lieu='') {
 			lang_select($auteur_session['lang']);
 			http_no_cache();
 			echo _DOCTYPE_ECRIRE,
-			  "<html lang='".$GLOBALS['spip_lang']."' dir='ltr'>\n" .
+			  html_lang_attributes(),
 			  "<head>\n<title>",
 			  ('Spip ' . $GLOBALS['spip_version_affichee'] . ' ' .
 			   _T('admin_debug') . ' ' .
@@ -352,7 +352,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	$self = str_replace("\\'", '&#39;', self());
 	$self = parametre_url($self,'var_mode', 'debug');
 	echo _DOCTYPE_ECRIRE,
-	  "<html lang='".$GLOBALS['spip_lang']."' dir='ltr'>\n" .
+	  html_lang_attributes(),
 	  "<head>\n<title>",
 	  ('Spip ' . $GLOBALS['spip_version_affichee'] . ' ' .
 	   _T('admin_debug') . ' ' .

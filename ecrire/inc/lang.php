@@ -485,8 +485,14 @@ function init_langues() {
 	}
 }
 
+function html_lang_attributes()
+{
+	return  "<html lang='"
+	. $GLOBALS['spip_lang']
+	. "' dir='"
+	. ($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')
+	  . "'>\n" ;
+}
 init_langues();
 utiliser_langue_site();
-
-
 ?>
