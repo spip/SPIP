@@ -2085,7 +2085,7 @@ function lien_change_var($lien, $set, $couleur, $coords, $titre, $mouseOver="") 
 // http://doc.spip.org/@debut_page
 function debut_page($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $onLoad = "", $css="", $id_rubrique = "") {
 
-	utiliser_langue_visiteur();
+  //	utiliser_langue_visiteur(); fait dans index a present
 	init_entete($titre, $rubrique, $css);
 	definir_barre_boutons();
 	init_body($rubrique, $sous_rubrique, $onLoad, $id_rubrique);
