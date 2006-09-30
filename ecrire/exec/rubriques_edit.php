@@ -71,7 +71,7 @@ else {
 
 debut_grand_cadre();
 
-afficher_hierarchie($id_parent);
+echo afficher_hierarchie($id_parent);
 
 fin_grand_cadre();
 

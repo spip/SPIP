@@ -229,7 +229,7 @@ debut_page("$titre_page","naviguer","sites", "", "", $id_rubrique);
 
 debut_grand_cadre();
 
-afficher_hierarchie($id_rubrique);
+echo afficher_hierarchie($id_rubrique);
 
 fin_grand_cadre();
 

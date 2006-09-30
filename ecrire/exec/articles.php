@@ -69,11 +69,9 @@ function exec_articles_dist()
 
 	debut_page("&laquo; $titre &raquo;", "naviguer", "articles", "", "", $id_rubrique);
 
-	debut_grand_cadre();
-
-	afficher_hierarchie($id_rubrique);
-
-	fin_grand_cadre();
+	echo	debut_grand_cadre(true),
+		afficher_hierarchie($id_rubrique),
+		fin_grand_cadre(true);
 
 //
 // Affichage de la colonne de gauche

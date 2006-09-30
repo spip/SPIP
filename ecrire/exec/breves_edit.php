@@ -67,7 +67,7 @@ debut_page(_T('titre_page_breves_edit', array('titre' => $titre)), "naviguer", "
 
 debut_grand_cadre();
 
-afficher_hierarchie($id_rubrique);
+echo afficher_hierarchie($id_rubrique);
 
 fin_grand_cadre();
 debut_gauche();
