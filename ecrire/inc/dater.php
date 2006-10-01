@@ -43,32 +43,33 @@ function inc_dater_dist($id_article, $flag_editable, $statut_article, $date, $da
 	if ($statut_article == 'publie') {
 
 		$js = "onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
+		$invite =  "<b><span class='verdana1'>"
+		. _T('texte_date_publication_article')
+		. '</span> '
+		.  majuscules(affdate($date))
+		.  "</b>"
+		. aide('artdate');
+
+		$masque = "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>"
+		. afficher_jour($jour, "name='jour' size='1' class='fondl' $js", true)
+		. afficher_mois($mois, "name='mois' size='1' class='fondl' $js", true)
+		. afficher_annee($annee, "name='annee' size='1' class='fondl' $js")
+		. ' - '
+		. afficher_heure($heure, "name='heure' size='1' class='fondl' $js")
+		. afficher_minute($minute, "name='minute' size='1' class='fondl' $js")
+		. "<span class='visible_au_chargement' id='valider_date'>"
+		. " &nbsp;\n<input type='submit' class='fondo' value='"
+		. _T('bouton_changer')."' />"
+		.  "</span>"
+		.  "</div>";
+
+		$bloc = block_parfois_visible('datepub', $invite, $masque, 'text-align: left');
 		$res = ajax_action_auteur("dater", 
-			"$id_article",
+			$id_article,
 			'articles',
 			"id_article=$id_article",
-			(
- bouton_block_invisible("datepub") .
- "<b><span class='verdana1'>".
- _T('texte_date_publication_article').
- '</span> ' . 
- majuscules(affdate($date)) .
- "</b>".
- aide('artdate') . 
- debut_block_invisible("datepub") .
- "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>" .
- afficher_jour($jour, "name='jour' size='1' class='fondl' $js", true) .
- afficher_mois($mois, "name='mois' size='1' class='fondl' $js", true) .
- afficher_annee($annee, "name='annee' size='1' class='fondl' $js") .
- ' - ' .
- afficher_heure($heure, "name='heure' size='1' class='fondl' $js") .
- afficher_minute($minute, "name='minute' size='1' class='fondl' $js") .
- "<span class='visible_au_chargement' id='valider_date'>" .
- " &nbsp;\n<input type='submit' class='fondo' value='".
- _T('bouton_changer')."' />" .
- "</span>" .
- "</div>" .
- fin_block()));
+			$bloc);
+
 	} else {
 		$res = "\n<div><b> <span class='verdana1'>"
 		. _T('texte_date_creation_article')
@@ -87,20 +88,17 @@ function inc_dater_dist($id_article, $flag_editable, $statut_article, $date, $da
 			$date_affichee = majuscules(_T('jour_non_connu_nc'));
 
 		$js = "\"findObj_forcer('valider_date_redac').style.visibility='visible';\"";
-		$res .= ajax_action_auteur("dater", 
-			"$id_article",
-			'articles',
-			"id_article=$id_article",
-			(bouton_block_invisible('dateredac') .
- "<b>" .
- "<span class='verdana1'>" .
- majuscules(_T('texte_date_publication_anterieure')) .
-'</span> '.
- $date_affichee .
- " " .
- aide('artdate_redac') .
- "</b>" .
- debut_block_invisible('dateredac') .
+
+		$invite = "<b>"
+		. "<span class='verdana1'>"
+		. majuscules(_T('texte_date_publication_anterieure'))
+		. '</span> '
+		. $date_affichee
+		. " "
+		. aide('artdate_redac')
+		.  "</b>";
+
+		$masque = 
  "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>" .
  '<table cellpadding="0" cellspacing="0" border="0" width="100%">' .
  '<tr><td align="$spip_lang_left">' .
@@ -122,7 +120,6 @@ function inc_dater_dist($id_article, $flag_editable, $statut_article, $date, $da
  afficher_heure($heure_redac, "name='heure_redac' class='fondl' onchange=$js", true) .
  afficher_minute($minute_redac, "name='minute_redac' class='fondl' onchange=$js", true) .
  "</div>\n" .
-
  '</td><td align="$spip_lang_right">' .
  "<span class='visible_au_chargement' id='valider_date_redac'>" .
  '<input type="submit" class="fondo" value="'.
@@ -130,13 +127,18 @@ function inc_dater_dist($id_article, $flag_editable, $statut_article, $date, $da
  "</span>" .
  '</td></tr>' .
  '</table>' .
- '</div>' .
- fin_block()) #, " method='post'"
-);
+ '</div>';
+
+		$bloc = block_parfois_visible('dateredac', $invite, $masque, 'text-align: left');
+		$res .= ajax_action_auteur("dater", 
+			$id_article,
+			'articles',
+			"id_article=$id_article",
+			$bloc);
 	}
   } else {
 
-	$res .= "<div style='text-align:center;'><b> <span class='verdana1'>"
+	$res = "<div style='text-align:center;'><b> <span class='verdana1'>"
 	. (($statut_article == 'publie')
 		? _T('texte_date_publication_article')
 		: _T('texte_date_creation_article'))

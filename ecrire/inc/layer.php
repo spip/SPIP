@@ -20,30 +20,60 @@ $compteur_block = 0;
 if (_request('var_ajaxcharset'))
 $compteur_block = rand(1,2500)*500;	// astuce idiote pour que les blocs ahah n'aient pas les memes numeros de triangle que la page principale (sinon le triangle d'un bloc importe par ahah agit sur un autre triangle... vivement jquery...).
 
+function block_parfois_visible($nom, $invite, $masque, $style, $visible=false)
+{
+	if (!$GLOBALS['browser_layer']) return '';
+
+	$bouton = $visible
+	? bouton_block_visible($nom)
+	: bouton_block_invisible($nom);
+
+	$nom = 'Layer' . renomme_block($nom);
+
+	// initialement invisible, seulement si on sait rendre visible
+	if (!$visible AND $_COOKIE['spip_accepte_ajax'] != -1)
+		$visible = 'display:none;';
+	else 	$visible = 'display:block;';
+
+	return "\n"
+	. "<div style='$style'>"
+	. $bouton
+	. $invite
+	. '</div>'
+	. "<div id='$nom' style='$visible'>"
+	. $masque
+	. '<div style="clear: both;"></div></div>';
+}
+
+
+function renomme_block($nom_block)
+{
+	global $numero_block, $compteur_block;
+	if (!isset($numero_block[$nom_block])){
+		$compteur_block++;
+		$numero_block[$nom_block] = $compteur_block;
+	}
+	return $numero_block["$nom_block"];
+}
 
 // http://doc.spip.org/@debut_block_visible
 function debut_block_visible($nom_block){
 	global $numero_block, $compteur_block, $browser_layer;
 	if (!$browser_layer) return '';
-	if (!isset($numero_block[$nom_block])){
-		$compteur_block++;
-		$numero_block[$nom_block] = $compteur_block;
-	}
-	return "<div id='Layer".$numero_block["$nom_block"]."' style='display: block;'>";
+	return "<div id='Layer".renomme_block($nom_block)."' style='display: block;'>";
 
 }
 
 // http://doc.spip.org/@debut_block_invisible
 function debut_block_invisible($nom_block){
-	global $numero_block, $compteur_block, $browser_layer;
 
-	if (!$a = debut_block_visible($nom_block)) return '';
+	if (!$browser_layer) return '';
 
 	// si on n'accepte pas js, ne pas fermer
 	if ($_COOKIE['spip_accepte_ajax'] == -1)
-		return $a;
-	else
-		return inserer_attribut($a, 'style', 'display:none;');
+		return debut_block_visible($nom_block);
+
+	return "<div id='Layer".renomme_block($nom_block)."' style='display: none;'";
 }
 
 // http://doc.spip.org/@fin_block
