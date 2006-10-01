@@ -34,15 +34,15 @@ function inc_referencer_traduction_dist($id_article, $flag_editable, $id_rubriqu
 		if (!$langue_article)
 			$langue_article = $langue_parent;
 
-		$menu = menu_langues('changer_lang', $langue_article, _T('info_multi_cet_article').' ', $langue_parent, 'ajax');
+		if ($menu = menu_langues('changer_lang', $langue_article, _T('info_multi_cet_article').' ', $langue_parent, 'ajax')) {
+			$menu = ajax_action_auteur('referencer_traduction', "$id_article,$id_rubrique","articles","id_article=$id_article", $menu);
 
-		$menu = ajax_action_auteur('referencer_traduction', "$id_article,$id_rubrique","articles","id_article=$id_article", $menu);
-
-		$reponse .= debut_cadre_couleur('',true)
-		. "\n<div style='text-align: center;'>"
-		. $menu
-		. "</div>\n"
-		. fin_cadre_couleur(true);
+			$reponse .= debut_cadre_couleur('',true)
+			. "\n<div style='text-align: center;'>"
+			. $menu
+			. "</div>\n"
+			. fin_cadre_couleur(true);
+		}
 	}
 
 	if ($trad_err)
