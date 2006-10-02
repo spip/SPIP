@@ -203,6 +203,7 @@ AND $l = @unserialize($l)) {
 		if (!@is_readable($fichier)) {
 			include_spip('inc/plugin');
 			verifie_include_plugins();
+			break; // sortir de la boucle, on a fait un verif
 		}
 	}
 }

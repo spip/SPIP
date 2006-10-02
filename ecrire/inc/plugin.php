@@ -43,11 +43,21 @@ function liste_plugin_actifs(){
 }
 
 // http://doc.spip.org/@ecrire_plugin_actifs
-function ecrire_plugin_actifs($plugin,$pipe_recherche=false){
+function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz'){
 	static $liste_pipe_manquants=array();
 	$liste_fichier_verif = array();
 	if (($pipe_recherche)&&(!in_array($pipe_recherche,$liste_pipe_manquants)))
 		$liste_pipe_manquants[]=$pipe_recherche;
+	
+	if ($operation!='raz'){
+		$plugin_actifs = liste_plugin_actifs();
+		$plugin_liste = liste_plugin_files();
+		$plugin_valides = array_intersect($plugin_actifs,$plugin_liste);
+		if ($operation=='ajoute')
+			$plugin = array_merge($plugin_valides,$plugin);
+		if ($operation=='enleve')
+			$plugin = array_diff($plugin_valides,$plugin);
+	}
 	
 	$plugin_valides = array();
 	if (is_array($plugin)){
@@ -55,8 +65,8 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false){
 		$infos = array();
 		foreach ($plugin as $plug) {
 			$infos[$plug] = plugin_get_infos($plug);
-			if (!isset($infos[$plug]['erreur']))
-				$plugin_valides[] = $plug;
+			if (!isset($infos[$plug]['erreur']) && !isset($plugin_valides[$p=strtoupper($infos[$plug]['prefix'])]))
+				$plugin_valides[$p] = $plug;
 			else
 				unset($infos[$plug]);
 		}
@@ -78,9 +88,9 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false){
 				// definir le plugin, donc le path avant l'include du fichier options
 				// permet de faire des include_ecrire pour attraper un inc_ du plugin
 				if ($charge=='options'){
-					$prefix = strtoupper(trim(array_pop($info['prefix'])));
+					$prefix = strtoupper($info['prefix']);
 					$splugs .= '$GLOBALS[\'plugins\'][]=\''.$plug.'\';';
-					$splugs .= "define(_DIR_PLUGINS_$prefix,_DIR_PLUGINS.'$plug/');";
+					$splugs .= "define(_DIR_PLUGIN_$prefix,_DIR_PLUGINS.'$plug/');";
 					$splugs .= "\n";
 				}
 				if (isset($info[$charge])){
@@ -101,7 +111,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false){
 		// $GLOBALS['spip_matrice']
 		foreach($infos as $plug=>$info){
 			$prefix = "";
-			$prefix = trim(array_pop($info['prefix']))."_";
+			$prefix = $info['prefix']."_";
 			if (is_array($info['pipeline'])){
 				foreach($info['pipeline'] as $pipe){
 					$nom = trim(array_pop($pipe['nom']));
@@ -357,7 +367,7 @@ function plugin_get_infos($plug){
 				$ret['options'] = $arbre['options'];
 			if (isset($arbre['fonctions']))
 				$ret['fonctions'] = $arbre['fonctions'];
-			$ret['prefix'] = $arbre['prefix'];
+			$ret['prefix'] = trim(array_pop($arbre['prefix']));
 			if (isset($arbre['pipeline']))
 				$ret['pipeline'] = $arbre['pipeline'];
 			if (isset($arbre['erreur']))
