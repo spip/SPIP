@@ -262,10 +262,12 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 			// mais pas toutes
 			unset($page['entetes']['X-Spip-Cache']);
 			unset($page['entetes']['Content-Type']);
-			if (!is_array($GLOBALS['page']['entetes']))
-				$GLOBALS['page']['entetes'] = array();
-			$GLOBALS['page']['entetes'] = 
-				array_merge($GLOBALS['page']['entetes'],$page['entetes']);
+			if (is_array($GLOBALS['page'])) {
+				if (!is_array($GLOBALS['page']['entetes']))
+					$GLOBALS['page']['entetes'] = array();
+				$GLOBALS['page']['entetes'] = 
+					array_merge($GLOBALS['page']['entetes'],$page['entetes']);
+			}
 		}
 
 		if ($page['process_ins'] == 'html') {

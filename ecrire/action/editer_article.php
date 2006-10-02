@@ -28,7 +28,7 @@ function action_editer_article_dist() {
 	} 
 	  
 	// Enregistre l'envoi dans la BD
-	$err = articles_set($id_article, $arg=='oui', _request('lier_trad'));
+	$err = articles_set($id_article, $arg=='oui');
 
 	$redirect = parametre_url(urldecode(_request('redirect')),
 		'id_article', $id_article, '&') . ($err ? '&trad_err=1' : '');
@@ -77,7 +77,7 @@ function insert_article($id_rubrique) {
 }
 
 // http://doc.spip.org/@articles_set
-function articles_set($id_article, $new, $lier_trad) {
+function articles_set($id_article, $new) {
 	include_spip('inc/filtres');
 	include_spip('inc/rubriques');
 
@@ -87,7 +87,7 @@ function articles_set($id_article, $new, $lier_trad) {
 	}
 
 	// Un lien de trad a prendre en compte
-	if ($lier_trad)
+	if ($lier_trad = _request('lier_trad'))
 		$err = article_referent($id_article, $lier_trad);
 
 	return $err;
