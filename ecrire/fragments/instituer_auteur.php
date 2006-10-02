@@ -12,19 +12,15 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-# afficher un mini-navigateur de rubriques
-
-// http://doc.spip.org/@fragments_selectionner_dist
-function fragments_selectionner_dist()
+function fragments_instituer_auteur_dist()
 {
-	global $id, $exclus, $rac;
-	$id = intval($id);
-	$exclus = intval($exclus);
-	$type = _request('type');
+  $script = _request('script');
+  $id_auteur = intval(_request('id_auteur'));
+  if (!preg_match('/^\w+$/', $script)) die("$script !!");
 
-	include_spip('inc/texte');
-	include_spip('inc/mini_nav');
-	return mini_nav ($id, "choix_parent", "this.form.id_rubrique.value=::sel::;this.form.titreparent.value='::sel2::';findObj_forcer('selection_rubrique').style.display='none';", $exclus, $rac, $type!='breve');
+  $r = spip_fetch_array(spip_query("SELECT statut FROM spip_auteurs WHERE id_auteur=$id_auteur"));
 
+  $f = charger_fonction('instituer_auteur', 'inc');
+  return $f(_request('id_auteur'), $r['statut'] , _request('script'));
 }
 ?>

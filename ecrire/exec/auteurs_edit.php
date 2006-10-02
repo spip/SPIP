@@ -33,7 +33,8 @@ function exec_auteurs_edit_dist()
 
 	if (!$auteur = spip_fetch_array($result)) die('erreur');
 
-	modifier_statut_auteur($auteur, $_POST['statut'], $_POST['id_parent']);
+	// Afficher le formulaire de changement de statut (cf. inc_acces)
+	$f = charger_fonction('instituer_auteur', 'inc');
 
 	debut_page($auteur['nom'],  "auteurs",
 		   (($connect_id_auteur == $id_auteur) ? "perso" : "redacteurs"));
@@ -55,7 +56,7 @@ function exec_auteurs_edit_dist()
 			'id_auteur'=>$id_auteur),
 		'data'=>'')
 	);
-	table_auteurs_edit($auteur);
+	table_auteurs_edit($auteur, $f);
 	echo pipeline('affiche_milieu',
 		array('args' => array(
 			'exec'=>'auteurs_edit',
@@ -68,9 +69,9 @@ function exec_auteurs_edit_dist()
 }
 
 // http://doc.spip.org/@table_auteurs_edit
-function table_auteurs_edit($auteur)
+function table_auteurs_edit($auteur, $instituer_auteur)
 {
-	global $connect_statut, $connect_id_auteur, $champs_extra, $options  ;
+  global $connect_toutes_rubriques, $connect_statut, $connect_id_auteur, $champs_extra, $options,$spip_lang_right ;
 
 	$id_auteur=$auteur['id_auteur'];
 	$nom=$auteur['nom'];
@@ -128,11 +129,7 @@ function table_auteurs_edit($auteur)
 		extra_affichage($extra, "auteurs");
 	}
 
-	// Afficher le formulaire de changement de statut (cf. inc_acces)
-	if ($options == 'avancees')
-	  afficher_formulaire_statut_auteur ($id_auteur, $auteur['statut'], "auteurs_edit");
-
-	fin_cadre_relief();
+	echo $instituer_auteur($id_auteur, $auteur['statut'], "auteurs_edit");
 
 	echo "<div>&nbsp;</div>";
 

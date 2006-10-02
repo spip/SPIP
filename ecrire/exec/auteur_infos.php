@@ -12,7 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
-include_spip('inc/auteur_voir');
 include_spip('inc/acces');
 include_spip('base/abstract_sql');
 
@@ -51,20 +50,24 @@ global $ajouter_id_article,
 //
 // Recuperer id_auteur ou se preparer a l'inventer
 //
- if ($id_auteur) {
-	$auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
-	if (!$auteur) exit;
- } else {
-	$auteur['nom'] = filtrer_entites(_T('item_nouvel_auteur'));
-	$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
-	$auteur['statut'] = '1comite'; // statut par defaut a la creation
-	$auteur['source'] = 'spip';
-}
+	if ($id_auteur) {
+		$auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
+		if (!$auteur) exit;
+	} else {
+		$auteur['nom'] = filtrer_entites(_T('item_nouvel_auteur'));
+		$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
+		$auteur['statut'] = '1comite'; // statut par defaut a la creation
+		$auteur['source'] = 'spip';
+	}
 
-if (!statut_modifiable_auteur($id_auteur, $auteur)) {
-	gros_titre(_T('info_acces_interdit'));
-	exit;
- }
+	// formulaire de changement de statut
+	// (faux chargement pour disposer de la fonction ci-dessous. a revoir)
+	$f = charger_fonction('instituer_auteur', 'inc');
+
+	if (!statut_modifiable_auteur($id_auteur, $auteur)) {
+		gros_titre(_T('info_acces_interdit'));
+		exit;
+	}
 
 //
 // Modification (et creation si besoin)
@@ -80,11 +83,11 @@ if (strval($nom)!='') {
 	if (($new_login<>$old_login) AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques AND $auteur['source'] == 'spip') {
 		if ($new_login) {
 			if (strlen($new_login) < 4)
-				$echec .= "<p>"._T('info_login_trop_court');
+				$echec .= "\n<p>"._T('info_login_trop_court');
 			else {
 			  $n = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_auteurs WHERE login=" . spip_abstract_quote($new_login) . " AND id_auteur!=$id_auteur AND statut!='5poubelle'"));
 			  if ($n['n'])
-				$echec .= "<p>"._T('info_login_existant');
+				$echec .= "\n<p>"._T('info_login_existant');
 			  else if ($new_login != $old_login) {
 				$modif_login = true;
 				$auteur['login'] = $new_login;
@@ -101,9 +104,9 @@ if (strval($nom)!='') {
 	// changement de pass, a securiser en jaja ?
 	if ($new_pass AND ($statut != '5poubelle') AND $auteur['login'] AND $auteur['source'] == 'spip') {
 		if ($new_pass != $new_pass2)
-			$echec .= "<p>"._T('info_passes_identiques');
+			$echec .= "\n<p>"._T('info_passes_identiques');
 		else if ($new_pass AND strlen($new_pass) < 6)
-			$echec .= "<p>"._T('info_passe_trop_court');
+			$echec .= "\n<p>"._T('info_passe_trop_court');
 		else {
 			$modif_login = true;
 			$auteur['new_pass'] = $new_pass;
@@ -124,7 +127,7 @@ if (strval($nom)!='') {
 	  if (isset($email)) {
 		$email = trim($email);	 
 		if ($email !='' AND !email_valide($email)) 
-			$echec .= "<p>"._T('info_email_invalide');
+			$echec .= "\n<p>"._T('info_email_invalide');
 		$auteur['email'] = $email;
 	  }
 	}
@@ -173,9 +176,6 @@ if (strval($nom)!='') {
 		if (!$n) die('UPDATE');
 	}
  }
-
-// Appliquer des modifications de statut
-modifier_statut_auteur($auteur, $_POST['statut'], $_POST['id_parent']);
 
 
 // Si on modifie la fiche auteur, reindexer et modifier htpasswd
@@ -236,9 +236,9 @@ function exec_affiche_auteur_info_dist($id_auteur, $auteur,  $echec, $redirect, 
   if ($echec){
 	debut_cadre_relief();
 	echo http_img_pack("warning.gif", _T('info_avertissement'), "width='48' height='48' align='left'");
-	echo "<font color='red'>$echec <p>"._T('info_recommencer')."</font>";
+	echo "<font color='red'>$echec \n<p>"._T('info_recommencer')."</font>";
 	fin_cadre_relief();
-	echo "<p>";
+	echo "\n<p>";
   }
 
   debut_cadre_formulaire();
@@ -262,40 +262,40 @@ function formulaire_auteur_infos($id_auteur, $auteur, $onfocus, $redirect, $ajou
 // Infos personnelles
 //
 
-echo "<div class='serif'>";
+echo "\n<div class='serif'>";
 
 debut_cadre_relief("fiche-perso-24.gif", false, "", _T("icone_informations_personnelles"));
 
 echo _T('titre_cadre_signature_obligatoire');
-echo "("._T('entree_nom_pseudo').")<BR>";
-echo "<INPUT TYPE='text' NAME='nom' CLASS='formo' VALUE=\"".entites_html($auteur['nom'])."\" SIZE='40' $onfocus><P>";
+echo "("._T('entree_nom_pseudo').")<br />\n";
+echo "<INPUT TYPE='text' NAME='nom' CLASS='formo' VALUE=\"".entites_html($auteur['nom'])."\" SIZE='40' $onfocus>\n<p>";
 
 echo "<B>"._T('entree_adresse_email')."</B>";
 
 if ($connect_statut == "0minirezo"
 AND ($connect_toutes_rubriques OR $auteur['statut']<>'0minirezo')) {
-	echo "<br><INPUT TYPE='text' NAME='email' CLASS='formo' VALUE=\"".entites_html($auteur['email'])."\" SIZE='40'><P>\n";
+	echo "<br><INPUT TYPE='text' NAME='email' CLASS='formo' VALUE=\"".entites_html($auteur['email'])."\" SIZE='40'>\n<p>\n";
 }
 else {
 	echo "&nbsp;: <tt>".$auteur['email']."</tt>";
 	echo "<br>("._T('info_reserve_admin').")\n";
-	echo "<P>";
+	echo "\n<p>";
 }
 
-echo "<B>"._T('entree_infos_perso')."</B><BR>";
-echo "("._T('entree_biographie').")<BR>";
+echo "<B>"._T('entree_infos_perso')."</B><br />\n";
+echo "("._T('entree_biographie').")<br />\n";
 echo "<TEXTAREA NAME='bio' CLASS='forml' ROWS='4' COLS='40' wrap=soft>";
 echo entites_html($auteur['bio']);
 echo "</TEXTAREA>\n";
 
 debut_cadre_enfonce("site-24.gif", false, "", _T('info_site_web'));
-echo "<B>"._T('entree_nom_site')."</B><BR>";
+echo "<B>"._T('entree_nom_site')."</B><br />\n";
 echo "<INPUT TYPE='text' NAME='nom_site_auteur' CLASS='forml' VALUE=\"".entites_html($auteur['nom_site'])."\" SIZE='40'><P>\n";
 
-echo "<B>"._T('entree_url')."</B><BR>";
+echo "<B>"._T('entree_url')."</B><br />\n";
 echo "<INPUT TYPE='text' NAME='url_site' CLASS='forml' VALUE=\"".entites_html($auteur['url_site'])."\" SIZE='40'>\n";
 fin_cadre_enfonce();
-	echo "<p>";
+	echo "\n<p>";
 
 if ($options == "avancees") {
 	debut_cadre_enfonce("cadenas-24.gif", false, "", _T('entree_cle_pgp'));
@@ -303,21 +303,17 @@ if ($options == "avancees") {
 	echo entites_html($auteur['pgp']);
 	echo "</TEXTAREA>\n";
 	fin_cadre_enfonce();
-	echo "<p>";
+	echo "\n<p>";
 }
 else {
 	echo "<input type='hidden' name='pgp' value=\"".entites_html($auteur['pgp'])."\">";
 }
 
-echo "<p>";
+echo "\n<p>";
 	if ($champs_extra) {
 		include_spip('inc/extra');
 		extra_saisie($auteur['extra'], 'auteurs', $auteur['statut']);
 	}
-
-fin_cadre_relief();
-echo "<p>";
-
 
 
 //
@@ -350,26 +346,26 @@ if (($edit_login OR $edit_pass) AND $connect_id_auteur == $id_auteur) {
 	echo http_img_pack("warning.gif", _T('info_avertissement'), "width='48' height='48' align='right'");
 	echo "<b>"._T('texte_login_precaution')."</b>\n";
 	fin_cadre_enfonce();
-	echo "<p>";
+	echo "\n<p>";
 }
 
 // Un redacteur n'a pas le droit de modifier son login !
 if ($edit_login) {
 	echo "<B>"._T('item_login')."</B> ";
-	echo "<font color='red'>("._T('texte_plus_trois_car').")</font> :<BR>";
+	echo "<font color='red'>("._T('texte_plus_trois_car').")</font> :<br />\n";
 	echo "<INPUT TYPE='text' NAME='new_login' CLASS='formo' VALUE=\"".entites_html($auteur['login'])."\" SIZE='40'><P>\n";
 }
 else {
-	echo "<fieldset style='padding:5'><legend><B>"._T('item_login')."</B><BR></legend><br><b>".$auteur['login']."</b> ";
-	echo "<i> ("._T('info_non_modifiable').")</i><p>";
+	echo "<fieldset style='padding:5'><legend><B>"._T('item_login')."</B><br />\n</legend><br><b>".$auteur['login']."</b> ";
+	echo "<i> ("._T('info_non_modifiable').")</i>\n<p>";
 }
 
 // On ne peut modifier le mot de passe en cas de source externe (par exemple LDAP)
 if ($edit_pass) {
 	echo "<B>"._T('entree_nouveau_passe')."</B> ";
-	echo "<font color='red'>("._T('info_plus_cinq_car').")</font> :<BR>";
-	echo "<INPUT TYPE='password' NAME='new_pass' CLASS='formo' VALUE=\"\" SIZE='40'><BR>\n";
-	echo _T('info_confirmer_passe')."<BR>";
+	echo "<font color='red'>("._T('info_plus_cinq_car').")</font> :<br />\n";
+	echo "<INPUT TYPE='password' NAME='new_pass' CLASS='formo' VALUE=\"\" SIZE='40'><br />\n";
+	echo _T('info_confirmer_passe')."<br />\n";
 	echo "<INPUT TYPE='password' NAME='new_pass2' CLASS='formo' VALUE=\"\" SIZE='40'><P>\n";
 }
 fin_cadre_relief();
@@ -382,15 +378,11 @@ echo "<p />";
 
  if ($apparait) apparait_auteur_infos($id_auteur, $auteur);
 
-// Afficher le formulaire de changement de statut (cf. inc/acces)
-afficher_formulaire_statut_auteur ($id_auteur, $auteur['statut']);
-
-
 echo "<INPUT NAME='ajouter_id_article' VALUE='$ajouter_id_article' TYPE='hidden'>\n";
 echo "<INPUT NAME='redirect' VALUE='$redirect' TYPE='hidden'>\n";
 echo "<INPUT NAME='redirect_ok' VALUE='oui' TYPE='hidden'>\n";
 
-echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondo' NAME='Valider' VALUE='"._T('bouton_enregistrer')."'></DIV>";
+echo "\n<div align='right'><INPUT TYPE='submit' CLASS='fondo' NAME='Valider' VALUE='"._T('bouton_enregistrer')."'></DIV>";
 
 echo pipeline('affiche_milieu',
 	array('args' => array(
@@ -400,10 +392,14 @@ echo pipeline('affiche_milieu',
 );
 
 echo "</div>";
-
+fin_cadre_relief();
 echo "</form>";
 
+// Afficher le formulaire de changement de statut (cf. inc_acces)
+ $f = charger_fonction('instituer_auteur', 'inc');
+ echo $f($id_auteur, $auteur['statut'], "auteurs_edit");
 }
+
 //
 // Apparaitre dans la liste des redacteurs connectes
 //
@@ -416,18 +412,18 @@ function apparait_auteur_infos($id_auteur, $auteur)
 
 		debut_cadre_relief("messagerie-24.gif", false, "", _T('info_liste_redacteurs_connectes'));
 		
-		echo "<div>"._T('texte_auteur_messagerie')."</div>";	
+		echo "\n<div>"._T('texte_auteur_messagerie')."</div>";	
 
 		if ($auteur['imessage']=="non"){
 			echo "<INPUT TYPE='radio' NAME='perso_activer_imessage' VALUE='oui' id='perso_activer_imessage_on'>";
 			echo " <label for='perso_activer_imessage_on'>"._T('bouton_radio_apparaitre_liste_redacteurs_connectes')."</label> ";
-			echo "<BR><INPUT TYPE='radio' NAME='perso_activer_imessage' VALUE='non' CHECKED id='perso_activer_imessage_off'>";
+			echo "<br />\n<INPUT TYPE='radio' NAME='perso_activer_imessage' VALUE='non' CHECKED id='perso_activer_imessage_off'>";
 			echo " <B><label for='perso_activer_imessage_off'>"._T('bouton_radio_non_apparaitre_liste_redacteurs_connectes')."</label></B> ";
 		} else {
 			echo "<INPUT TYPE='radio' NAME='perso_activer_imessage' VALUE='oui' id='perso_activer_imessage_on' CHECKED>";
 			echo " <B><label for='perso_activer_imessage_on'>"._T('bouton_radio_apparaitre_liste_redacteurs_connectes')."</label></B> ";
 
-			echo "<BR><INPUT TYPE='radio' NAME='perso_activer_imessage' VALUE='non' id='perso_activer_imessage_off'>";
+			echo "<br />\n<INPUT TYPE='radio' NAME='perso_activer_imessage' VALUE='non' id='perso_activer_imessage_off'>";
 			echo " <label for='perso_activer_imessage_off'>"._T('bouton_radio_non_apparaitre_liste_redacteurs_connectes')."</label> ";
 		}
 
