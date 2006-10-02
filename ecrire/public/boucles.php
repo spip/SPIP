@@ -84,7 +84,7 @@ function boucle_AUTEURS_dist($id_boucle, &$boucles) {
 		// Si pas de lien avec un article, selectionner
 		// uniquement les auteurs d'un article publie
 		if (!$GLOBALS['var_preview'])
-		if (!$boucle->lien AND !$boucle->tout) {
+		if (!isset($boucle->modificateur['lien']) AND !isset($boucle->modificateur['tout'])) {
 			$boucle->from["lien"] =  "spip_auteurs_articles";
 			$boucle->from["articles"] =  "spip_articles";
 			$boucle->where[]= array("'='", "'lien.id_auteur'", "'$id_table.id_auteur'");
@@ -133,7 +133,7 @@ function boucle_FORUMS_dist($id_boucle, &$boucles) {
 
 	// Par defaut, selectionner uniquement les forums sans mere
 	// Les criteres {tout} et {plat} inversent ce choix
-	if (!$boucle->tout AND !$boucle->plat) {
+	if (!isset($boucle->modificateur['tout']) AND !isset($boucle->modificateur['plat'])) {
 		$boucle->where[]= array("'='", "'$id_table." ."id_parent'", 0);
 	}
 	// Restreindre aux elements publies
@@ -195,7 +195,7 @@ function boucle_RUBRIQUES_dist($id_boucle, &$boucles) {
 	// Restreindre aux elements publies
 	if (!$boucle->statut) {
 		if (!$GLOBALS['var_preview'])
-			if (!$boucle->tout)
+			if (!isset($boucle->modificateur['tout']))
 				$boucle->where[]= array("'='", "'$mstatut'", "'\"publie\"'");
 	}
 
@@ -218,7 +218,7 @@ function boucle_HIERARCHIE_dist($id_boucle, &$boucles) {
 	$boucle->hierarchie = '$hierarchie = calculer_hierarchie('
 	. calculer_argument_precedent($boucle->id_boucle, 'id_rubrique', $boucles)
 	. ', '
-	. ($boucle->tout ? 'false' : 'true')
+	. (isset($boucle->modificateur['tout']) ? 'false' : 'true')
 	. ');';
 
 	$boucle->having[]= array("'<>'", "'rang'", 0);

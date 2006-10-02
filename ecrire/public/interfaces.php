@@ -52,11 +52,8 @@ class Boucle {
 	var $jointures_explicites = false;
 	var $doublons;
 	var $partie, $total_parties,$mode_partie;
-	var $fragment; # definir un fragment de page
 	var $externe = ''; # appel a partir d'une autre boucle (recursion)
 	// champs pour la construction de la requete SQL
-	var $tout = false;
-	var $plat = false;
 	var $select = array();
 	var $from = array();
 	var $where = array();
@@ -69,7 +66,6 @@ class Boucle {
 	var $date = 'date' ;
 	var $hash = "" ;
 	var $in = "" ;
-	var $lien = false;
 	var $sous_requete = false;
 	var $hierarchie = '';
 	var $statut = false; # definition/surcharge du statut des elements retournes
@@ -81,6 +77,14 @@ class Boucle {
 	var $cptrows = false;
 	var $ligne = 0;
 	var $descr =  array(); # noms des fichiers source et but etc
+	
+	var $modificateur = array(); // table pour stocker les modificateurs de boucle tels que tout, plat, fragment ..., utilisable par les plugins egalement
+	
+	// obsoletes, conserves provisoirement pour compatibilite
+	var $fragment; # definir un fragment de page
+	var $tout = false;
+	var $plat = false;
+	var $lien = false;
 }
 
 // sous-noeud du precedent
