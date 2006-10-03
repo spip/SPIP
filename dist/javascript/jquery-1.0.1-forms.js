@@ -1998,19 +1998,19 @@ $.fn.formdata = function(){
 $.fn.serialize = function() {
 	var a = [];
 
-	$('input,textarea,select', this).each(function() {
-		var par = this.parentNode;
+	$('input,textarea,select,button', this).each(function() {
 		var n = this.name || this.id;
+		var t = this.type;
 
-		if ( !n || this.disabled || this.type == 'reset' || 
-			(this.type == 'checkbox' || this.type == 'radio') && !this.checked || 
-			(this.type == 'submit' || this.type == 'image') && this.form.clicked != this) 
+		if ( !n || this.disabled || t == 'reset' || 
+			(t == 'checkbox' || t == 'radio') && !this.checked || 
+			(t == 'submit' || t == 'image') && this.form.clicked != this) 
 			return;
 
-		if (this.type == 'image' && this.form.clicked_x)
+		if (t == 'image' && this.form.clicked_x)
 			return a.push(
-				{name: this.name+'_x', value: this.form.clicked_x},
-				{name: this.name+'_y', value: this.form.clicked_y}
+				{name: n+'_x', value: this.form.clicked_x},
+				{name: n+'_y', value: this.form.clicked_y}
 			);
 		if(this.nodeName.toUpperCase()=='SELECT' && this.multiple) {
 			//verify multiple options
@@ -2026,3 +2026,4 @@ $.fn.serialize = function() {
 	this.vars = a;
 	return this;
 };
+
