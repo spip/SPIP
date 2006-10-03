@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-include_spip('inc/auteur_voir');
 include_spip('inc/message_select');
 
 // http://doc.spip.org/@exec_auteurs_edit_dist
