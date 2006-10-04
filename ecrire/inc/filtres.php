@@ -1695,4 +1695,14 @@ function f_jQuery ($texte) {
  	return $js.$texte;
 }
 
+// Concatenet des chaines
+// #TEXTE|concat{texte1,texte2,...}
+function concat(){
+	$tous = func_get_args();
+	$texte = "";
+	foreach($tous as $arg)
+		$texte.=$arg;
+	return $texte;
+}
+
 ?>
