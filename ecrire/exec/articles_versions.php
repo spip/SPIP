@@ -79,6 +79,7 @@ if (!$id_diff) {
 if ($id_version && $id_diff) {
 	include_spip('inc/diff');
 
+	// code a unifier avec suivi_versions
 	if ($id_diff > $id_version) {
 		$t = $id_version;
 		$id_version = $id_diff;
@@ -93,12 +94,19 @@ if ($id_version && $id_diff) {
 
 	$textes = array();
 	$champs = array('surtitre', 'titre', 'soustitre', 'descriptif', 'nom_site', 'url_site', 'chapo', 'texte', 'ps');
-	
-	foreach ($champs as $champ) {
-		if (!$new[$champ] && !$old[$champ]) continue;
 
-		$diff = new Diff(new DiffTexte);
-		$textes[$champ] = afficher_diff($diff->comparer(preparer_diff($new[$champ]), preparer_diff($old[$champ])));
+	foreach ($champs as $champ) {
+		if (!strlen($new[$champ]) && !strlen($old[$champ])) continue;
+
+		// Si on n'en a qu'un, pas de modif, on peut afficher directement les donnees courantes ; mais en fait il faudrait remonter a la precedente version disposant de ce champ
+		if (!isset($new[$champ]))
+			$textes[$champ] = $old[$champ];
+		elseif (!isset($old[$champ]))
+			$textes[$champ] = $new[$champ];
+		else {
+			$diff = new Diff(new DiffTexte);
+			$textes[$champ] = afficher_diff($diff->comparer(preparer_diff($new[$champ]), preparer_diff($old[$champ])));
+		}
 	}
 }
 
