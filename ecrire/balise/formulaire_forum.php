@@ -95,9 +95,9 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 				array('inscription' => generer_url_public('spip_inscription'),
 					'oubli' => generer_url_public('spip_pass')));
 		} else {
-	  // forcer ces valeur
-		$auteur = $GLOBALS['auteur_session']['nom'];
-		$email_auteur = $GLOBALS['auteur_session']['email'];
+		// forcer ces valeur
+			$auteur = $GLOBALS['auteur_session']['nom'];
+			$email_auteur = $GLOBALS['auteur_session']['email'];
 		}
 	}
 	// Tableau des valeurs servant au calcul d'une signature de securite.
@@ -203,12 +203,20 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 function inclure_previsu($texte,$titre, $email_auteur, $auteur, $url_site, $nom_site_forum, $ajouter_mot)
 {
 	$erreur = $bouton = '';
-
 	if (strlen($texte) < 10 AND !$ajouter_mot)
 		$erreur = _T('forum_attention_dix_caracteres');
 	else if (strlen($titre) < 3)
 		$erreur = _T('forum_attention_trois_caracteres');
+	else if (defined('_FORUM_LONGUEUR_MAXI')
+	AND _FORUM_LONGUEUR_MAXI > 0
+	AND strlen($texte) > _FORUM_LONGUEUR_MAXI)
+		$erreur = _T('forum_attention_trop_caracteres',
+			array(
+				'compte' => strlen($texte),
+				'max' => _FORUM_LONGUEUR_MAXI
+			));
 	else
+		die('totot = '.strlen($texte).' : '.$texte);
 		$bouton = _T('forum_message_definitif');
 
 	// supprimer les <form> de la previsualisation
