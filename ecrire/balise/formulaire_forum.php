@@ -216,7 +216,6 @@ function inclure_previsu($texte,$titre, $email_auteur, $auteur, $url_site, $nom_
 				'max' => _FORUM_LONGUEUR_MAXI
 			));
 	else
-		die('totot = '.strlen($texte).' : '.$texte);
 		$bouton = _T('forum_message_definitif');
 
 	// supprimer les <form> de la previsualisation
