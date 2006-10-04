@@ -128,8 +128,9 @@ function revisions_articles ($id_article, $new, $c = false) {
 		$champs['id_rubrique'] = $id_rubrique;
 	}
 
-	// recuperer les extras
-	if ($GLOBALS['champs_extra']) {
+	// recuperer les extras (incompatible avec $c pour l'instant)
+	if ($GLOBALS['champs_extra']
+	AND !is_array($c)) {
 		include_spip('inc/extra');
 		$champs['extra'] = extra_recup_saisie("articles", _request('id_secteur'));
 	}
