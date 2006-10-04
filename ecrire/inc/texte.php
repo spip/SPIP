@@ -111,6 +111,54 @@ function code_echappement($rempl, $source='') {
 		."</$mode>$nn";
 }
 
+// Echapper les <html>...</ html>
+function traiter_echap_html_dist($regs) {
+	return $regs[3];
+}
+
+// Echapper les <code>...</ code>
+function traiter_echap_code_dist($regs) {
+	$echap = entites_html($regs[3]);
+	// supprimer les sauts de ligne debut/fin
+	// (mais pas les espaces => ascii art).
+	$echap = ereg_replace("^\n+|\n+$", "", $echap);
+
+	// ne pas mettre le <div...> s'il n'y a qu'une ligne
+	if (is_int(strpos($echap,"\n"))) {
+		$echap = nl2br("<div style='text-align: left;' "
+		. "class='spip_code' dir='ltr'><code>"
+		.$echap."</code></div>");
+		$mode = 'div';
+	} else
+		$echap = "<code class='spip_code' "
+		."dir='ltr'>".$echap."</code>";
+
+	$echap = str_replace("\t",
+		"&nbsp; &nbsp; &nbsp; &nbsp; ", $echap);
+	$echap = str_replace("  ", " &nbsp;", $echap);
+	return $echap;
+}
+
+// Echapper les <cadre>...</ cadre> aka <frame>...</ frame>
+function traiter_echap_cadre_dist($regs) {
+	$echap = trim(entites_html($regs[3]));
+	$total_lignes = substr_count($echap, "\n") + 1;
+	$echap = "<form action=\"/\" method=\"get\"><div>"
+	."<textarea readonly='readonly' cols='40' rows='$total_lignes' "
+	."class='spip_cadre' dir='ltr'>"
+	.$echap
+	."</textarea></div></form>";
+	return $echap;
+}
+function traiter_echap_frame_dist($regs) {
+	return traiter_echap_cadre_dist($regs);
+}
+
+function traiter_echap_script_dist($regs) {
+	return $regs[0];
+}
+
+
 // - pour $source voir commentaire infra (echappe_retour)
 // - pour $no_transform voir le filtre post_autobr dans inc_filtres.php3
 // http://doc.spip.org/@echappe_html
@@ -136,52 +184,10 @@ $preg='') {
 		}
 
 		// sinon les traiter selon le cas
-		else switch(strtolower($regs[1])) {
-
-			// Echapper les <html>...</ html>
-			case 'html':
-				$echap = $regs[3];
-				break;
-
-			// Echapper les <code>...</ code>
-			case 'code':
-				$echap = entites_html($regs[3]);
-				// supprimer les sauts de ligne debut/fin
-				// (mais pas les espaces => ascii art).
-				$echap = ereg_replace("^\n+|\n+$", "", $echap);
-
-				// ne pas mettre le <div...> s'il n'y a qu'une ligne
-				if (is_int(strpos($echap,"\n"))) {
-					$echap = nl2br("<div style='text-align: left;' "
-					. "class='spip_code' dir='ltr'><code>"
-					.$echap."</code></div>");
-					$mode = 'div';
-				} else
-					$echap = "<code class='spip_code' "
-					."dir='ltr'>".$echap."</code>";
-
-				$echap = str_replace("\t",
-					"&nbsp; &nbsp; &nbsp; &nbsp; ", $echap);
-				$echap = str_replace("  ", " &nbsp;", $echap);
-				break;
-
-			// Echapper les <cadre>...</ cadre>
-			case 'cadre':
-			case 'frame':
-				$echap = trim(entites_html($regs[3]));
-				$total_lignes = substr_count($echap, "\n") + 1;
-				$echap = "<form action=\"/\" method=\"get\"><div>"
-				."<textarea readonly='readonly' cols='40' rows='$total_lignes' "
-				."class='spip_cadre' dir='ltr'>"
-				.$echap
-				."</textarea></div></form>";
-				break;
-
-			case 'script':
-				$echap = $regs[0];
-				break;
-
-		}
+		else if (function_exists($f = 'traiter_echap_'.strtolower($regs[1])))
+			$echap = $f($regs);
+		else if (function_exists($f = $f.'_dist'))
+			$echap = $f($regs);
 
 		$letexte = str_replace($regs[0],
 			code_echappement($echap, $source),
