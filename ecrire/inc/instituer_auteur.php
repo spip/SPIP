@@ -15,7 +15,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 include_spip('inc/texte');
 include_spip('inc/layer');
-include_spip('inc/auteur_voir');
 include_spip('inc/presentation');
 
 //  affiche le statut de l'auteur dans l'espace prive
@@ -26,39 +25,46 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@auteur_voir_rubriques
 function inc_instituer_auteur_dist($id_auteur, $statut, $url_self)
 {
-	global $connect_toutes_rubriques, $connect_id_auteur, $connect_statut, $spip_lang_right;
+	global $connect_toutes_rubriques, $connect_id_auteur, $connect_statut, $spip_lang_right, $spip_lang;
 					 
 	if ($connect_statut != "0minirezo") return;
 
-	$result_admin = spip_query("SELECT rubriques.id_rubrique, titre FROM spip_auteurs_rubriques AS lien, spip_rubriques AS rubriques WHERE lien.id_auteur=$id_auteur AND lien.id_rubrique=rubriques.id_rubrique");
+	$result_admin = spip_query("SELECT rubriques.id_rubrique, " . creer_objet_multi ("titre", $spip_lang) . " FROM spip_auteurs_rubriques AS lien, spip_rubriques AS rubriques WHERE lien.id_auteur=$id_auteur AND lien.id_rubrique=rubriques.id_rubrique ORDER BY multi");
 
 	$restreint = spip_num_rows($result_admin);
 
 	if (!$restreint) 
-		$res .= _T('info_admin_gere_toutes_rubriques');
+		$res = _T('info_admin_gere_toutes_rubriques');
 	else {
 		$modif = ($connect_toutes_rubriques AND $connect_id_auteur != $id_auteur) ? "id_auteur=$id_auteur" : '';
 
-		$lien .= !$modif  ? '' : _T('lien_supprimer_rubrique');
+		$lien = !$modif 
+		? ''
+		: array("&nbsp;&nbsp;&nbsp;&nbsp;[<font size='1'>"
+			. _T('lien_supprimer_rubrique')
+			. "</font>]");
 
-		$res .=  _T('info_admin_gere_rubriques')
-		. "\n<ul style='list-style-image: url("
-		. _DIR_IMG_PACK
-		. "rubrique-12.gif)'>";
+		$res = '';
 
 		while ($row_admin = spip_fetch_array($result_admin)) {
 			$id_rubrique = $row_admin["id_rubrique"];
 			
-			$res .= "<li><a href='"
+			$res .= "\n<li><a href='"
 			. generer_url_ecrire("naviguer","id_rubrique=$id_rubrique")
 			. "'>"
-			. typo($row_admin["titre"])
+			. typo($row_admin["multi"])
 			. "</a>"
 			. (!$modif ? '' :
-			   ajax_action_auteur('instituer_auteur', "$id_auteur/-$id_rubrique", $url_self, $modif, array("&nbsp;&nbsp;&nbsp;&nbsp;[<font size='1'>$lien</font>]")))
+			   ajax_action_auteur('instituer_auteur', "$id_auteur/-$id_rubrique", $url_self, $modif, $lien))
 			. '</li>';
 		}
-		$res .= "</ul>";
+
+		$res =  _T('info_admin_gere_rubriques')
+		. "\n<ul style='list-style-image: url("
+		. _DIR_IMG_PACK
+		. "rubrique-12.gif)'>"
+		. $res
+		. "</ul>";
 	}
 
 	// si pas admin au chargement, rien a montrer. 
@@ -66,17 +72,22 @@ function inc_instituer_auteur_dist($id_auteur, $statut, $url_self)
 
 		// Ajouter une rubrique a un administrateur restreint
 	if ($connect_toutes_rubriques AND $connect_id_auteur != $id_auteur) {
-		$res .=debut_block_visible("statut$id_auteur");
-		$res .="\n<div id='ajax_rubrique' class='arial1'><br />\n";
-		if (!$restreint)
-			$res .="<b>"._T('info_restreindre_rubrique')."</b><br />";
-		else
-			$res .="<b>"._T('info_ajouter_rubrique')."</b><br />";
-		$res .="\n<input name='id_auteur' value='$id_auteur' type='hidden' />";
+
+		$label = $restreint ? _T('info_ajouter_rubrique') : _T('info_restreindre_rubrique');
+
 		$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');
-		$res .=$selecteur_rubrique(0, 'auteur', false);
-		$res .="</div>\n";
-		$res .=fin_block();
+
+		$res .= debut_block_visible("statut$id_auteur")
+		. "\n<div id='ajax_rubrique' class='arial1'><br />\n"
+		. "<b>"
+		. $label 
+		. "</b><br />"
+		. "\n<input name='id_auteur' value='"
+		. $id_auteur
+		. "' type='hidden' />"
+		. $selecteur_rubrique(0, 'auteur', false)
+		. "</div>\n"
+		. fin_block();
 	}
 		
 	$droit = (($connect_toutes_rubriques OR $statut != "0minirezo")
@@ -98,14 +109,15 @@ function inc_instituer_auteur_dist($id_auteur, $statut, $url_self)
 		$res = ajax_action_auteur('instituer_auteur', $id_auteur, $url_self, (!$id_auteur ? "" : "id_auteur=$id_auteur"), $res);
 	}
 
-	return (_request('var_ajaxcharset'))? $res :
-	  (debut_cadre_relief('',true)
-	. "<div id='"
-	. $ancre
-	. "'>"
-	. $res 
-	. '</div>'
-	. fin_cadre_relief(true));
+	return (_request('var_ajaxcharset'))
+	? $res
+	: (debut_cadre_relief('',true)
+		. "<div id='"
+		. $ancre
+		. "'>"
+		. $res 
+		. '</div>'
+		. fin_cadre_relief(true));
 }
 
 // http://doc.spip.org/@cadre_auteur_infos
