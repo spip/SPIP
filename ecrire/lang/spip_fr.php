@@ -273,6 +273,7 @@ Merci de votre participation
 'forum_acces_refuse' => 'Vous n\'avez plus acc&egrave;s &agrave; ces forums.',
 'forum_attention_dix_caracteres' => '<b>Attention&nbsp;!</b> votre message doit contenir au moins dix caract&egrave;res.',
 'forum_attention_trois_caracteres' => '<b>Attention&nbsp;!</b> votre titre doit contenir au moins trois caract&egrave;res.',
+'forum_attention_trop_caracteres' => '<b>Attention&nbsp;!</b> votre message est trop long (@compte@ caract&egrave;res)&nbsp;: pour pouvoir &ecirc;tre enregistr&eacute;, il ne doit pas d&eacute;passer @max@ caract&egrave;res.',
 'forum_avez_selectionne' => 'Vous avez s&eacute;lectionn&eacute;&nbsp;:',
 'forum_cliquer_retour' => 'Cliquez <a href=\'@retour_forum@\'>ici</a> pour continuer.',
 'forum_forum' => 'forum',
