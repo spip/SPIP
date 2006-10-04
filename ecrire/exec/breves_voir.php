@@ -82,6 +82,9 @@ function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $select_gr
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'breves_voir','id_breve'=>$id_breve),'data'=>''));
 	creer_colonne_droite();
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'breves_voir','id_breve'=>$id_breve),'data'=>''));
+
+	echo meme_rubrique($id_rubrique, $id_breve, 'breve', 'date_heure');
+
 	debut_droite();
 	
 	debut_cadre_relief("breve-24.gif");

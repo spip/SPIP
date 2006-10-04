@@ -2500,7 +2500,7 @@ function fin_cadre_formulaire(){
 //
 
 // http://doc.spip.org/@debut_gauche
-function debut_gauche($rubrique = "accueil") {
+function debut_gauche($rubrique = "accueil", $return=false) {
 	global $connect_statut;
 	global $options, $spip_display;
 	global $connect_id_auteur;
@@ -2529,13 +2529,14 @@ function debut_gauche($rubrique = "accueil") {
 		$rspan = '';
 	}
 
-	echo "<br /><table width='$largeur_ecran' cellpadding='0' cellspacing='0' border='0'>
+	$res = "<br /><table width='$largeur_ecran' cellpadding='0' cellspacing='0' border='0'>
 		<tr><td width='$largeur' class='colonne_etroite serif' valign='top' $rspan>
 		<div style='width: ${largeur}px; overflow:hidden;'>
 \n";
 		
-	if ($spip_display == 4) echo "<!-- ";
+	if ($spip_display == 4) $res .= "<!-- ";
 
+	if ($return) return $res; else echo $res;
 }
 
 
@@ -2544,91 +2545,67 @@ function debut_gauche($rubrique = "accueil") {
 //
 
 // http://doc.spip.org/@creer_colonne_droite
-function creer_colonne_droite($rubrique=""){
+function creer_colonne_droite($rubrique="", $return= false){
 	global $deja_colonne_droite;
 	global $flag_3_colonnes, $flag_centre_large;
 	global $spip_lang_rtl, $spip_lang_left;
 
-	if ($flag_3_colonnes AND !$deja_colonne_droite) {
-		$deja_colonne_droite = true;
+	if (!$flag_3_colonnes OR $deja_colonne_droite) return '';
+	$deja_colonne_droite = true;
 
-		if ($flag_centre_large) {
+	if ($flag_centre_large) {
 			$espacement = 17;
 			$largeur = 140;
-		}
-		else {
+	} else {
 			$espacement = 37;
 			$largeur = 200;
-		}
-
-
-		echo "<td width=$espacement rowspan=2 class='colonne_etroite'>&nbsp;</td>";
-		echo "<td rowspan=1 class='colonne_etroite'></td>";
-		echo "<td width=$espacement rowspan=2 class='colonne_etroite'>&nbsp;</td>";
-		echo "<td width=$largeur rowspan=2 align='$spip_lang_left' valign='top' class='colonne_etroite'><p />";
-
 	}
 
+	$res = "<td width='"
+	.  $espacement
+	.  "' rowspan='2' class='colonne_etroite'>&nbsp;</td>"
+	. "<td rowspan='1' class='colonne_etroite'></td>"
+	. "<td width='"
+	.  $espacement
+	.  "'rowspan=2 class='colonne_etroite'>&nbsp;</td>"
+	. "<td width='"
+	. $largeur 
+	. "' rowspan=2 align='"
+	. $spip_lang_left
+	. "' valign='top' class='colonne_etroite'><p />";
+
+	if ($return) return $res; else echo $res;
 }
 
 // http://doc.spip.org/@debut_droite
-function debut_droite($rubrique="") {
+function debut_droite($rubrique="", $return= false) {
 	global $options, $spip_ecran, $deja_colonne_droite, $spip_display;
-	global $connect_id_auteur, $connect_statut, $connect_toutes_rubriques;
-	global $flag_3_colonnes, $flag_centre_large, $couleur_foncee, $couleur_claire;
-	global $spip_lang_left;
+	global $spip_lang_left, $couleur_foncee, $couleur_claire;
+	global $flag_3_colonnes, $flag_centre_large;
 
-	if ($spip_display == 4) echo " -->";
+	$res = '';
 
-	echo "</div>\n"; # largeur fixe, cf. debut_gauche
+	if ($spip_display == 4) $res .= " -->";
+
+	$res .= "</div>\n"; # largeur fixe, cf. debut_gauche
 
 	if ($options == "avancees") {
-		// liste des articles bloques
-		if ($GLOBALS['meta']["articles_modif"] != "non") {
-			include_spip('inc/drapeau_edition');
-			$articles_ouverts = liste_drapeau_edition ($connect_id_auteur, 'article');
-			if (count($articles_ouverts)) {
 
-
-
-		//	$vos_articles = spip_query("SELECT id_article, id_rubrique, titre, statut FROM spip_articles WHERE statut='prop' ORDER BY date DESC LIMIT 5");
-		//	if (spip_num_rows($vos_articles) > 0) {
-				echo "<div>&nbsp;</div>";
-				echo "<div class='bandeau_rubriques' style='z-index: 1;'>";
-				echo bandeau_titre_boite2(_T('info_cours_edition'), "article-24.gif", $couleur_foncee, 'white', false);
-				echo "<div class='plan-articles-bloques'>";
-
-
-				foreach ($articles_ouverts as $row) {
-					$ze_article = $row['id_article'];
-					$ze_titre = $row['titre'];
-					$statut = $row["statut"];
-					
-					echo "<div class='$statut'><a style='font-size: 10px;' href='" . generer_url_ecrire("articles","id_article=$ze_article") . "'>$ze_titre</a>";
-
-					$nb_liberer ++;
-					echo "<div style='text-align:right; font-size: 9px;'>", debloquer_article($ze_article,_T('lien_liberer')), "</div>";
-
-					echo "</div>";
-
-				}
-				echo "</div></div>";
-			}
-		}
-		
-		if (!$deja_colonne_droite) creer_colonne_droite($rubrique);
+		$res .= liste_articles_bloques();
+		if (!$deja_colonne_droite) 
+		  $res .= creer_colonne_droite($rubrique, true);
 	}
 
-	echo "<div>&nbsp;</div></td>";
+	$res .= "<div>&nbsp;</div></td>";
 
 	if (!$flag_3_colonnes) {
-		echo "<td width='50'>&nbsp;</td>";
+		$res .= "<td width='50'>&nbsp;</td>";
 	}
 	else {
 		if (!$deja_colonne_droite) {
-			creer_colonne_droite($rubrique);
+			$res .= creer_colonne_droite($rubrique, true);
 		}
-		echo "</td></tr><tr>";
+		$res .= "</td></tr><tr>";
 	}
 
 	if ($spip_ecran == 'large' AND $flag_centre_large)
@@ -2636,13 +2613,48 @@ function debut_droite($rubrique="") {
 	else
 		$largeur = 500;
 
-	echo '<td width="'.$largeur.'" valign="top" align="'.$spip_lang_left.'" rowspan="1" class="serif">';
+	$res .= '<td width="'.$largeur.'" valign="top" align="'.$spip_lang_left.'" rowspan="1" class="serif">';
 
 	// touche d'acces rapide au debut du contenu
-	echo "\n<a name='saut' href='#saut' accesskey='s'></a>\n";
+	$res .= "\n<a name='saut' href='#saut' accesskey='s'></a>\n";
+
+	if ($return) return $res; else echo $res;
 }
 
+function liste_articles_bloques()
+{
+	global $connect_id_auteur, $couleur_foncee;
 
+	$res = '';
+	if ($GLOBALS['meta']["articles_modif"] != "non") {
+		include_spip('inc/drapeau_edition');
+		$articles_ouverts = liste_drapeau_edition ($connect_id_auteur, 'article');
+		if (count($articles_ouverts)) {
+			$res .= "<div>&nbsp;</div>"
+			. "<div class='bandeau_rubriques' style='z-index: 1;'>"
+			. bandeau_titre_boite2(_T('info_cours_edition'), "article-24.gif", $couleur_foncee, 'white', false)
+			. "<div class='plan-articles-bloques'>";
+
+			foreach ($articles_ouverts as $row) {
+				$ze_article = $row['id_article'];
+				$ze_titre = $row['titre'];
+				$statut = $row["statut"];
+					
+				$res .= "<div class='$statut'><a style='font-size: 10px;' href='" 
+				. generer_url_ecrire("articles","id_article=$ze_article")
+				. "'>$ze_titre</a>"
+				. "<div style='text-align:right; font-size: 9px;'>"
+				. debloquer_article($ze_article,_T('lien_liberer'))
+				. "</div>"
+				. "</div>";
+			}
+			$res .= "</div></div>";
+		}
+	}
+	return $res;
+}
+	
+///// 
 //
 // Presentation de l'interface privee, fin de page et flush()
 //
@@ -2699,6 +2711,43 @@ function debloquer_article($arg, $texte) {
 	  http_img_pack("croix-rouge.gif", ($arg=='tous' ? "" : "X"),
 			"width='7' height='7' align='baseline'") .
 	  "</a>";
+}
+
+
+function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30)
+{
+	global $spip_lang_right, $spip_lang_left, $options;
+
+	$table = $type . 's';
+	$key = 'id_' . $type;
+
+	$voss = spip_query("SELECT $key AS id, titre, statut FROM spip_$table WHERE id_rubrique=$id_rubrique AND (statut = 'publie' OR statut = 'prop') AND ($key != $id) ORDER BY $order DESC LIMIT $limit");
+
+	if (!spip_num_rows($voss)) return '';
+
+	$numero = ($options != "avancees") ?'':_T('info_numero_abbreviation');
+	$style = "float: $spip_lang_right; color: black; padding-$spip_lang_left: 4px;";
+	$retour = '';
+
+	while($row = spip_fetch_array($voss)) {
+		$ze = $row['id'];
+		$retour .= "<a class='"
+		. $row['statut']
+		. "' style='font-size: 10px;' href='"
+		  . generer_url_ecrire($table,"$key=$ze")
+		. "'>"
+		. (($options !== "avancees") ? '' :
+		     "<div class='arial1' style='$style'><b>$numero$ze</b></div>")
+		. typo($row['titre'])
+		. "</a>";
+	}
+
+	return "<div>&nbsp;</div>"
+	. "<div class='bandeau_rubriques' style='z-index: 1;'>"
+	. bandeau_titre_boite2(_T('info_meme_rubrique'), "article-24.gif",'','',false)
+	. "<div class='plan-articles'>"
+	. $retour
+	. "</div></div>";
 }
 
 //
