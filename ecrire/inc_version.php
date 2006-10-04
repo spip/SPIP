@@ -265,6 +265,8 @@ function spip_initialisation_parametree($dir1, $dir2) {
 	if ($too_late) return;
 	$too_late = true;
 
+	define('_DIR_CHMOD', 0777);
+	
 	define('_DIR_IMG', $dir1 ."IMG/");
 	define('_DIR_DOC', $dir1 ."IMG/");
 	define('_DIR_LOGOS', $dir1 ."IMG/");
