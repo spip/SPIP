@@ -2,4 +2,4 @@
 		[<span class="on">(#ENV*{texte})</span>]
 	][(#ENV{num}|=={#ENV{page_courante}}|?{'',' '})
 		[<a href='#ENV{url}' class='lien_pagination'>(#ENV*{texte})</a>]
-	][(#ENV{num}|<{#ENV{derniere}}|?{#ENV{separateur},''})]
+	][(#ENV{num}|<{#ENV{derniere}}|?{#ENV*{separateur},''})]
