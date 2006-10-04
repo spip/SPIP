@@ -237,15 +237,13 @@ fin_page();
 // http://doc.spip.org/@exec_breves_voir_dist
 function exec_breves_voir_dist()
 {
-global $id_breve, $id_parent, $texte, $titre, $statut,
-  $annee, $mois, $jour, $lien_titre, $lien_url,$champs_extra,
-  $new, $modifier_breve, $changer_lang, $cherche_mot,  $select_groupe,  
-  $connect_statut;
+global $connect_statut;
 
-$id_breve = intval($id_breve);
+$id_breve = intval(_request('id_breve'));
+$id_rubrique_old = 0;
 
-if (($id_breve == 0) AND ($new == "oui")) {
-	$id_rubrique = intval($id_parent);
+if (($id_breve == 0) AND (_request('new') == "oui")) {
+	$id_rubrique_old = $id_rubrique = intval(_request('id_parent'));
 	$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 	$langue_new = $row ? $row["lang"] : "";
 	if (!$langue_new) $langue_new = $GLOBALS['meta']['langue_site'];
@@ -254,21 +252,46 @@ if (($id_breve == 0) AND ($new == "oui")) {
 		"(titre, date_heure, id_rubrique, statut, lang, langue_choisie)", 
 		"('"._T('item_nouvelle_breve')."', NOW(), '$id_rubrique', 'refuse', '$langue_new', 'non')");
 }
+else
+	if ($row = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_breves WHERE id_breve=$id_breve")))
+		$id_rubrique_old = $row['id_rubrique'];
+
 
  $calculer_rubriques = false;
 
- if (($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") AND
-     strval($titre)) {
-	$id_rubrique = intval($id_parent);
-
-	// recoller les champs du extra
-	if ($champs_extra) {
+ if (($connect_statut=="0minirezo" OR _request('statut')=="prop" OR _request('new') == "oui") AND
+     strval(_request('titre'))) {
+	
+	foreach (array(
+	'titre', 'texte', 'lien_titre', 'lien_url',
+	'statut', 'id_parent'=>'id_rubrique') as $req=>$champ) {
+		if (($val = _request(is_numeric($req)?$champ:$req)) !== NULL)
+			$champs[$champ] = corriger_caracteres($val);
+	}
+	// recuperer les extras
+	if ($GLOBALS['champs_extra']) {
 		include_spip('inc/extra');
-		$add_extra = extra_recup_saisie("breves");
-	} else
-		$add_extra = '';
+		$champs['extra'] = extra_recup_saisie("breves");
+	}
+	$id_rubrique = $champs['id_rubrique'];
 
-	spip_query("UPDATE spip_breves SET titre=" . spip_abstract_quote($titre) . ", texte=" . spip_abstract_quote($texte) . ", lien_titre=" . spip_abstract_quote($lien_titre) . ", lien_url=" . spip_abstract_quote($lien_url) . ", statut=" . spip_abstract_quote($statut) . ", id_rubrique=$id_rubrique " . (!$add_extra ? '' : (", extra = " . spip_abstract_quote($add_extra))) . " WHERE id_breve=$id_breve");
+	// Envoyer aux plugins
+	$champs = pipeline('pre_enregistre_contenu',
+		array(
+			'args' => array(
+				'table' => 'spip_breves',
+				'id_objet' => $id_breve
+			),
+			'data' => $champs
+		)
+	);
+	
+	$update = '';
+	foreach ($champs as $champ => $val)
+		$update .= $champ . '=' . spip_abstract_quote($val).', ';
+	$update = substr($update,0,strlen($update)-2);
+
+	spip_query("UPDATE spip_breves SET $update WHERE id_breve=$id_breve");
 
 	// invalider et reindexer
 	include_spip('inc/invalideur');
@@ -282,7 +305,7 @@ if (($id_breve == 0) AND ($new == "oui")) {
 	
 	
 	// Changer la langue heritee
-	if ($id_rubrique != id_rubrique_old) {
+	if ($id_rubrique != $id_rubrique_old) {
 		$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_breves WHERE id_breve=$id_breve"));
 		$langue_old = $row['lang'];
 		$langue_choisie_old = $row['langue_choisie'];
@@ -298,7 +321,10 @@ if (($id_breve == 0) AND ($new == "oui")) {
 	}
 }
 
-if ($jour AND $connect_statut == '0minirezo') {
+if (_request('jour') AND $connect_statut == '0minirezo') {
+	$annee = _request('annee');
+	$mois = _request('mois');
+	$jour = _request('jour');
 	if ($annee == "0000") $mois = "00";
 	if ($mois == "00") $jour = "00";
 	spip_query("UPDATE spip_breves SET date_heure='$annee-$mois-$jour' WHERE id_breve=$id_breve");
@@ -307,9 +333,9 @@ if ($jour AND $connect_statut == '0minirezo') {
 
  if ($calculer_rubriques) calculer_rubriques();
 
-	if ($new == 'oui')
+	if (_request('new') == 'oui')
 		redirige_par_entete(
 			generer_url_ecrire('breves_voir', 'id_breve='.$id_breve, '&'));
-	afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $select_groupe);
+	afficher_breves_voir($id_breve, _request('changer_lang'), _request('cherche_mot'), _request('select_groupe'));
 }
 ?>
