@@ -18,6 +18,7 @@ include_spip('inc/texte');
 function exec_documenter_dist()
 {
 	$type = _request("type");
+	$script = _request("script"); // generalisation a tester
 	$s = _request("s");
 	$id = intval(_request(($type == 'article') ? 'id_article' : 'id_rubrique'));
 
@@ -41,7 +42,8 @@ function exec_documenter_dist()
 		minipres(_T('info_acces_interdit'));
 	}
 
-	$f = charger_fonction('documenter', 'inc');
-	return $f($id, $type, $album, 'ajax');
+	$documenter = charger_fonction('documenter', 'inc');
+	return $documenter($id, $type, $album, 'ajax', '', $script);
+
 }
 ?>

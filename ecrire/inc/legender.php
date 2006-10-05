@@ -110,11 +110,16 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre)
 	. "\n\n\n\n"
 	. icone_horizontale($texte, $action, $supp, "supprimer.gif", false);
 
-	$corps = block_parfois_visible("legender-aff-$id_document", $entete, $corps, "text-align:center;", $flag);
 
-	$atts = " class='verdana1' style='color: " . $GLOBALS['couleur_foncee'] . "; border: 1px solid ". $GLOBALS['couleur_foncee'] .";  padding: 5px; margin: 3px; background-color: white;'";
+	$corps = "<div class='verdana1' style='color: "
+	. $GLOBALS['couleur_foncee']
+	. "; border: 1px solid "
+	. $GLOBALS['couleur_foncee']
+	. ";  padding: 5px; margin: 3px; background-color: white;'>"
+	. block_parfois_visible("legender-aff-$id_document", $entete, $corps, "text-align:center;", $flag)
+	. "</div>";
 
-	return greffe_action_ajax("legender-$id_document", $corps, $atts);
+	return greffe_action_ajax("legender-$id_document", $corps);
 }
 
 

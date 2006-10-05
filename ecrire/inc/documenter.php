@@ -97,7 +97,7 @@ function inc_documenter_dist(
 
 		if (count($documents) > 3) {
 			$head .= "<div style='background-color: #dddddd; padding: 4px; color: black; text-align: right' class='arial1'>"
-			  . ajax_action_auteur('documenter', "$s$doc/$type", $GLOBALS['exec'], "id_$type=$doc&s=$s&type=$type",array(_L('Supprimer_tout')))
+			. ajax_action_auteur('documenter', "$s$doc/$type", $script, "id_$type=$doc&s=$s&type=$type",array(_L('Supprimer_tout')))
 			. "</div>\n";
 		}
 	} else $head = '';
@@ -107,5 +107,5 @@ function inc_documenter_dist(
 	. $res
 	. "</table>";	  
 
-	return greffe_action_ajax("documenter-$s$doc", $res);
+	return greffe_action_ajax("documenter-$s$doc", $res, $flag==='ajax');
 }

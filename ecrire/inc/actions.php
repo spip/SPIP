@@ -200,7 +200,7 @@ function declencheur_action_ajax($request, $noeud, $fct_ajax)
 	. ")'";
 }
 
-function greffe_action_ajax($idom, $corps, $atts='')
+function greffe_action_ajax($idom, $corps)
 {
 	return _request('var_ajaxcharset')
 	? $corps
