@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/texte');
 
-function fragments_iconifier_dist()
+function exec_iconifier_dist()
 {
 	global $connect_id_auteur, $connect_toutes_rubriques;;
 

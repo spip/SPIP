@@ -12,17 +12,19 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-# petit moteur de recherche sur les rubriques
-
-// http://doc.spip.org/@fragments_rubriquer_dist
-function fragments_rubriquer_dist()
+function exec_referencer_traduction_dist()
 {
-	global $id;
-	$id = intval($id);
+	$id_article = intval(_request('id_article'));
 
-	include_spip('inc/texte');
-	include_spip('inc/mini_nav');
-	return mini_nav ($id, "aff_nav_recherche", 
-			"document.location.href='" . generer_url_ecrire('naviguer', "id_rubrique=::sel::") .
-			"';", 0, true);
+	if (!acces_article($id_article)) {
+		spip_log("Tentative d'intrusion de " . $GLOBALS['auteur_session']['nom'] . " dans " . $GLOBALS['exec']);
+		include_spip('inc/minipres');
+		minipres(_T('info_acces_interdit'));
+	}
+
+	$row = spip_fetch_array(spip_query("SELECT id_trad, id_rubrique FROM spip_articles WHERE id_article=$id_article"));
+
+	$f = charger_fonction('referencer_traduction', 'inc');
+	return $f($id_article, 'ajax', $row['id_rubrique'], $row['id_trad']); 
 }
+?>

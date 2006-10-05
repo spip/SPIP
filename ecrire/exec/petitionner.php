@@ -12,10 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@fragments_dater_dist
-function fragments_dater_dist()
+function exec_petitionner_dist()
 {
-	global $id_article;
+	global $id_article, $script;
 	$id_article = intval($id_article);
 
 	if (!acces_article($id_article)) {
@@ -24,13 +23,7 @@ function fragments_dater_dist()
 		minipres(_T('info_acces_interdit'));
 	}
 
-	$row = spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article=$id_article"));
-
-	$statut_article = $row['statut'];
-	$date = $row["date"];
-	$date_redac = $row["date_redac"];
-
-	$f = charger_fonction('dater', 'inc');
-	return $f($id_article, 'ajax', $statut_article, $date, $date_redac);
+	$f = charger_fonction('petitionner', 'inc');
+	return $f($id_article, $script, "&id_article=$id_article", 'ajax');
 }
 ?>

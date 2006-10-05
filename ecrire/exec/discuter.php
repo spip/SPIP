@@ -12,21 +12,11 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function fragments_legender_dist()
+function exec_discuter_dist()
 {
-	global $id_document, $id, $type, $ancre, $script;
-	$id = intval($id);
-	$id_document = intval($id_document);
-
-	if (!($type == 'article' 
-		? acces_article($id)
-		: acces_rubrique($id))) {
-		spip_log("Tentative d'intrusion de " . $GLOBALS['auteur_session']['nom'] . " dans " . $GLOBALS['exec']);
-		include_spip('inc/minipres');
-		minipres(_T('info_acces_interdit'));
-	}
-
-	$f = charger_fonction('legender', 'inc');
-	return $f($id_document, array(), $script, $type, $id, $ancre);
+	$debut = _request('debut');
+	$id_article = _request('id_article');
+	$f = charger_fonction('discuter', 'inc');
+	return $f($id_article, 'ajax', $debut);
 }
 ?>

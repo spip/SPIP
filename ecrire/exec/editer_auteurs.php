@@ -12,15 +12,17 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function fragments_instituer_auteur_dist()
+function exec_editer_auteurs_dist()
 {
-  $script = _request('script');
-  $id_auteur = intval(_request('id_auteur'));
-  if (!preg_match('/^\w+$/', $script)) die("$script !!");
+	$id_article = intval(_request('id_article'));
 
-  $r = spip_fetch_array(spip_query("SELECT statut FROM spip_auteurs WHERE id_auteur=$id_auteur"));
+	if (! acces_article($id_article)) {
+		spip_log("Tentative d'intrusion de " . $GLOBALS['auteur_session']['nom'] . " dans " . $GLOBALS['exec']);
+		include_spip('inc/minipres');
+		minipres(_T('info_acces_interdit'));
+	}
 
-  $f = charger_fonction('instituer_auteur', 'inc');
-  return $f(_request('id_auteur'), $r['statut'] , _request('script'));
+	$f = charger_fonction('editer_auteurs', 'inc');
+	return $f($id_article, 'ajax', _request('cherche_auteur'), _request('ids'));
 }
 ?>

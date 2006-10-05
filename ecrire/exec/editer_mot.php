@@ -12,19 +12,37 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@fragments_petitionner_dist
-function fragments_petitionner_dist()
+function exec_editer_mot_dist()
 {
-	global $id_article, $script;
-	$id_article = intval($id_article);
+	include_spip('inc/actions');
+	include_spip('inc/mots');
+	include_spip('inc/presentation');
 
-	if (!acces_article($id_article)) {
+	$objet = _request('objet');
+	$id_objet = intval(_request('id_objet'));
+
+	if ($GLOBALS['connect_toutes_rubriques']) // pour eviter SQL
+		$droit = true;
+	elseif ($objet == 'article')
+		$droit = acces_article($id_objet);
+	elseif ($objet == 'rubrique')
+		$droit = acces_rubrique($id_objet);
+	else {
+		if ($objet == 'breve')
+			$droit = spip_query("SELECT id_rubrique FROM spip_breves WHERE id_breve='$id_objet'");
+		else $droit = spip_query("SELECT id_rubrique FROM spip_syndic WHERE id_syndic=$id_objet");
+		$droit = acces_rubrique($droit['id_rubrique']);
+	}
+
+	if (!$droit) {
 		spip_log("Tentative d'intrusion de " . $GLOBALS['auteur_session']['nom'] . " dans " . $GLOBALS['exec']);
 		include_spip('inc/minipres');
 		minipres(_T('info_acces_interdit'));
 	}
 
-	$f = charger_fonction('petitionner', 'inc');
-	return $f($id_article, $script, "&id_article=$id_article", 'ajax');
+	$ch = _request('cherche_mot');
+	$id_groupe = _request('select_groupe');
+	$f = charger_fonction('editer_mot', 'inc');
+	return $f($objet, $id_objet, $ch, $id_groupe, 'ajax'); 
 }
 ?>

@@ -12,17 +12,12 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function fragments_editer_auteurs_dist()
+function exec_grouper_mots_dist()
 {
-	$id_article = intval(_request('id_article'));
-
-	if (! acces_article($id_article)) {
-		spip_log("Tentative d'intrusion de " . $GLOBALS['auteur_session']['nom'] . " dans " . $GLOBALS['exec']);
-		include_spip('inc/minipres');
-		minipres(_T('info_acces_interdit'));
-	}
-
-	$f = charger_fonction('editer_auteurs', 'inc');
-	return $f($id_article, 'ajax', _request('cherche_auteur'), _request('ids'));
+	$id_groupe = intval(_request('id_groupe'));
+	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_mots WHERE id_groupe=$id_groupe"));
+	if (! ($cpt = $cpt['n'])) return '' ;
+	$f = charger_fonction('grouper_mots', 'inc');
+	return $f($id_groupe, $cpt);
 }
 ?>
