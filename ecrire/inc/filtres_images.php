@@ -79,8 +79,8 @@ function image_reduire($img, $taille=-1, $taille_y=-1) {
 		return $image;
 	
 	$mouseover = extraire_attribut(
-			reduire_image_logo($match[1], $taille, $taille_y, false),
-			'src');
+		reduire_image_logo($match[1], $taille, $taille_y, false),
+		'src');
 
 	$mouseout = extraire_attribut($image, 'src');
 	$js_mouseover = "onmouseover=\"this.src='$mouseover'\""

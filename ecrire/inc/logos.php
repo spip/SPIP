@@ -351,9 +351,16 @@ function reduire_image_logo($img, $taille = -1, $taille_y = -1, $cherche_image=t
 		return '';
 
 	// recuperer le nom du fichier
-	if ($src = extraire_attribut($img, 'src'))
+	if ($src = extraire_attribut($img, 'src')) {
 		$logo = $src;
-	else
+		// Cas d'une reduction HTML, ne pas agrandir
+		$w_html = extraire_attribut($img, 'width');
+		$h_html = extraire_attribut($img, 'height');
+		if ($w_html AND $h_html
+		AND $w_html<=$taille
+		AND $h_html<=$taille_y)
+			return $img;
+	} else
 		$logo = $img;
 	if (!$logo) return '';
 
@@ -454,25 +461,23 @@ function image_ratio ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
 }
 
 // http://doc.spip.org/@ratio_image
-function ratio_image($logo, $nom, $format, $taille, $taille_y, $attributs)
-{
+function ratio_image($logo, $nom, $format, $taille, $taille_y, $attributs) {
 	if (!$taille_origine = @getimagesize($logo)) return '';
 	list ($destWidth,$destHeight, $ratio) = image_ratio($taille_origine[0], $taille_origine[1], $taille, $taille_y);
 
-		// Creer effectivement la vignette reduite
-
+	// Creer effectivement la vignette reduite
 	$suffixe = '-'.$destWidth.'x'.$destHeight;
 	$preview = creer_vignette($logo, $taille, $taille_y, $format, ('cache'.$suffixe), $nom.$suffixe);
 	if ($preview) {
-			$logo = $preview['fichier'];
-			$destWidth = $preview['width'];
-			$destHeight = $preview['height'];
+		$logo = $preview['fichier'];
+		$destWidth = $preview['width'];
+		$destHeight = $preview['height'];
 	}
 
-		// dans l'espace prive mettre un timestamp sur l'adresse 
-		// de l'image, de facon a tromper le cache du navigateur
-		// quand on fait supprimer/reuploader un logo
-		// (pas de filemtime si SAFE MODE)
+	// dans l'espace prive mettre un timestamp sur l'adresse 
+	// de l'image, de facon a tromper le cache du navigateur
+	// quand on fait supprimer/reuploader un logo
+	// (pas de filemtime si SAFE MODE)
 	$date = _DIR_RESTREINT ? '' : ('?date='.@filemtime($logo));
 	return "<img src='$logo$date' width='".$destWidth."' height='".$destHeight."'$attributs />";
 }
