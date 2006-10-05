@@ -376,7 +376,7 @@ function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)
 
 	if ($virtuel) {
 		$res .= debut_boite_info(true)
-		.  "\n<div id='renvoi' style='text-align: center'>"
+		.  "\n<div style='text-align: center'>"
 		. _T('info_renvoi_article')
 		. " "
 		.  propre("[->$virtuel]")

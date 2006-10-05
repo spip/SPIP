@@ -2128,8 +2128,8 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 	global $options, $spip_display, $spip_ecran;
 	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
 	global $browser_verifForm;
-
-	if ($load = "$browser_verifForm$onLoad")
+	include_spip('inc/gadgets');
+	if ($load = "$browser_verifForm$onLoad" . repercuter_gadgets($id_rubrique))
 		$load = " onLoad=\"$load\"";
 
 	echo pipeline('body_prive',"<body ". _ATTRIBUTES_BODY
@@ -2376,13 +2376,10 @@ if (true /*$bandeau_colore*/) {
 
 } // fin bandeau colore
 
-
 	// <div> pour la barre des gadgets
 	// (elements invisibles qui s'ouvrent sous la barre precedente)
-	include_spip('inc/gadgets');
-	echo bandeau_gadgets($largeur, $options, $id_rubrique);
-	$GLOBALS['id_rubrique_gadgets'] = $id_rubrique;  # un peu sale
 
+	echo bandeau_gadgets($largeur, $options, $id_rubrique);
 	echo "</div>";
 	echo "</div>";
 
@@ -2664,8 +2661,6 @@ function fin_html() {
 
 	echo "</font>", $GLOBALS['rejoue_session'];
 
-	if (function_exists('dessiner_gadgets'))
-		echo dessiner_gadgets($GLOBALS['id_rubrique_gadgets']);
 	if (defined('_TESTER_NOSCRIPT'))
 		echo _TESTER_NOSCRIPT;
 
