@@ -15,10 +15,10 @@ include_spip('inc/actions');
 
 
 // http://doc.spip.org/@formulaire_mots
-function inc_editer_mot_dist($objet, $id_objet, $cherche_mot, $select_groupe, $flag_editable) {
+function inc_editer_mot_dist($objet, $id_objet, $cherche_mot, $select_groupe, $flag) {
 	global $connect_statut, $spip_lang_rtl, $spip_lang_right, $spip_lang;
 
-	$visible = ($cherche_mot OR ($flag_editable === 'ajax'));
+	$visible = ($cherche_mot OR ($flag === 'ajax'));
 
 	if ($objet == 'article') {
 		$table_id = 'id_article';
@@ -42,14 +42,14 @@ function inc_editer_mot_dist($objet, $id_objet, $cherche_mot, $select_groupe, $f
 		$url_base = "sites";
 	}
 	else {
-		spip_log("erreur dans formulaire_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag_editable)");
+		spip_log("erreur dans formulaire_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag)");
 		return '';
 	}
 
 	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot"));
 
 	if (!($nombre_mots = $cpt['n'])) {
-		if (!$flag_editable) return;
+		if (!$flag) return;
 		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_groupes_mots WHERE $table = 'oui'	AND ".substr($connect_statut,1)." = 'oui'"));
 
 		if (!$cpt['n']) return;
@@ -61,7 +61,7 @@ function inc_editer_mot_dist($objet, $id_objet, $cherche_mot, $select_groupe, $f
 
 	// La reponse
 	$reponse = '';
-	if ($flag_editable AND $cherche_mot) {
+	if ($flag AND $cherche_mot) {
 		$reindexer = false;
 		list($reponse, $nouveaux_mots) = recherche_mot_cle($cherche_mot, $select_groupe, $objet, $id_objet, $table, $table_id, $url_base);
 		foreach($nouveaux_mots as $nouv_mot) {
@@ -75,10 +75,10 @@ function inc_editer_mot_dist($objet, $id_objet, $cherche_mot, $select_groupe, $f
 		}
 	}
 
-	$form = afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id, $url_base, $visible);
+	$form = afficher_mots_cles($flag, $objet, $id_objet, $table, $table_id, $url_base, $visible);
 
 	// Envoyer titre + div-id + formulaire + fin
-	if ($flag_editable){
+	if ($flag){
 		if ($visible)
 			$bouton = bouton_block_visible("lesmots");
 		else
@@ -93,9 +93,7 @@ function inc_editer_mot_dist($objet, $id_objet, $cherche_mot, $select_groupe, $f
 	  . $form
 	  . fin_cadre_enfonce(true);
 
-	return ($flag_editable === 'ajax') 
-	  ? $res
-	  : "\n<div id='editer_mot-$id_objet'>$res</div>";
+	return greffe_action_ajax("editer_mot-$id_objet", $res);
 }
 
 // http://doc.spip.org/@inserer_mot

@@ -18,7 +18,7 @@ include_spip('inc/presentation');
 include_spip('inc/filtres');
 
 // http://doc.spip.org/@formulaire_tourner
-function inc_tourner_dist($id_document, $document, $script, $flag_modif, $type)
+function inc_tourner_dist($id_document, $document, $script, $flag, $type)
 {
 	global $spip_lang_right;
 
@@ -39,35 +39,37 @@ function inc_tourner_dist($id_document, $document, $script, $flag_modif, $type)
 		$url = generer_url_document($id_document);
 	}
 
-	if ($flag_modif)
-		$res .= boutons_rotateurs($document, $type, $id, $id_document,$script,  $id_vignette);
-	else $res = '';
+	$res = '';
+
 	// Indiquer les documents manquants avec un panneau de warning
 
-	if ($document['distant'] != 'oui'
-	AND !@file_exists(_DIR_RACINE.$document['fichier'])) {
+	if ($document['distant'] != 'oui') {
+		if (!@file_exists(_DIR_RACINE.$document['fichier'])) {
 			$c = _T('fichier_introuvable',
 					array('fichier'=>basename($document['fichier'])));
-			$res .= "<img src='" . _DIR_IMG_PACK . "warning-24.gif'"
+			$res = "<img src='" . _DIR_IMG_PACK . "warning-24.gif'"
 				."\n\tstyle='float: right;'\n\talt=\"$c\"\n\ttitle=\"$c\" />";
+		} else 	if ($flag)
+			$res = boutons_rotateurs($document, $type, $id, $id_document,$script,  $id_vignette);
+
+		$boite = '';
+
+	} else {
+	// Signaler les documents distants par une icone de trombone
+		$boite = "\n<img src='"._DIR_IMG_PACK.'attachment.gif'."'\n\t style='float: $spip_lang_right;'\n\talt=\"$fichier\"\n\ttitle=\"$fichier\" />\n";
 	}
 
 	$res .= "<div style='text-align: center;'>";
 	$res .= document_et_vignette($document, $url, true);
 	$res .= "</div>\n";
 
-	$res .= "<div class='verdana1' style='text-align: center;'>";
-	$res .= " <font size='1' face='arial,helvetica,sans-serif' color='333333'>&lt;doc$id_document&gt;</font>";
-	$res .= "</div>";
+	$res .= "<div class='verdana1' style='text-align: center;'>"
+	. " <font size='1' face='arial,helvetica,sans-serif' color='333333'>&lt;doc$id_document&gt;</font>"
+	. "</div>";
 
-	if ($flag_modif === 'ajax') return $res;
+	if ($boite) return "$boite<div>$res</div>";
 
-	$boite = '';
-
-	// Signaler les documents distants par une icone de trombone
-	if ($document['distant'] == 'oui')
-		$boite .= "\n<img src='"._DIR_IMG_PACK.'attachment.gif'."'\n\t style='float: $spip_lang_right;'\n\talt=\"$fichier\"\n\ttitle=\"$fichier\" />\n";
-	return "$boite<div id='tourner-$id_document'>$res</div>";
+	return greffe_action_ajax("tourner-$id_document", $res);
 }
 
 // http://doc.spip.org/@boutons_rotateurs
@@ -85,8 +87,10 @@ function boutons_rotateurs($document, $type, $id, $id_document, $script, $id_vig
 	AND isset($ftype[$document['id_type']])
 	AND strstr($GLOBALS['meta']['formats_graphiques'],
 		   $ftype[$document['id_type']])
-	AND ($process == 'imagick' OR $process == 'gd2'
-	OR $process == 'convert' OR $process == 'netpbm')
+	AND ($process == 'imagick'
+		OR $process == 'gd2'
+		OR $process == 'convert'
+		OR $process == 'netpbm')
 	AND @file_exists(_DIR_RACINE.$document['fichier'])
 	) {
 

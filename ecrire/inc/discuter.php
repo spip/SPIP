@@ -51,21 +51,21 @@ function formulaire_discuter($query, $total, $debut, $total_afficher, $script, $
 // http://doc.spip.org/@fragments_discuter_dist
 function inc_discuter_dist($id_article, $flag, $debut=1)
 {
-  $debut = intval($debut);
-  $id_article = intval($id_article);
+	$debut = intval($debut);
+	$id_article = intval($id_article);
 
-  $res = spip_fetch_array(spip_query("SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0"));
-  $res = $res["cnt"];
+	$res = spip_fetch_array(spip_query("SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0"));
+	$res = $res["cnt"];
 
-  if ($res) {
+	if ($res) {
 
-	  $total_afficher = 8;
-	  $forum = spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0 ORDER BY date_heure DESC" .   " LIMIT $debut,$total_afficher"   );
+		$total_afficher = 8;
+		$forum = spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0 ORDER BY date_heure DESC" .   " LIMIT $debut,$total_afficher"   );
 #				   " LIMIT $total_afficher OFFSET $debut" # PG
 
-	  $res = formulaire_discuter($forum, $res, $debut, $total_afficher, 'articles', "id_article=$id_article");
-  } else $res ='';
+		$res = formulaire_discuter($forum, $res, $debut, $total_afficher, 'articles', "id_article=$id_article");
+	} else $res ='';
 
-  return ($flag=='ajax') ? $res : "<div id='forum'>$res</div>";
+	return greffe_action_ajax("forum", $res);
 }
 ?>

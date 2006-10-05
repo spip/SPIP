@@ -17,7 +17,7 @@ include_spip('inc/texte');
 include_spip('inc/actions');
 include_spip('inc/date');
 
-function inc_dater_dist($id_article, $flag_editable, $statut_article, $date, $date_redac)
+function inc_dater_dist($id_article, $flag, $statut_article, $date, $date_redac)
 {
 	global $spip_lang_left, $spip_lang_right, $options;
 
@@ -38,7 +38,7 @@ function inc_dater_dist($id_article, $flag_editable, $statut_article, $date, $da
 		$minute = $regs[5];
 	}
 
-  if ($flag_editable AND $options == 'avancees') {
+  if ($flag AND $options == 'avancees') {
 
 	if ($statut_article == 'publie') {
 
@@ -159,9 +159,7 @@ function inc_dater_dist($id_article, $flag_editable, $statut_article, $date, $da
 
   $res =  debut_cadre_couleur('',true) . $res .  fin_cadre_couleur(true);
 
-  return ($flag_editable === 'ajax')
-    ? $res
-    : "<div id='dater-$id_article'>$res</div>";
+  return greffe_action_ajax("dater-$id_article", $res);
 }
 
 ?>

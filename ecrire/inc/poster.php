@@ -29,7 +29,7 @@ function get_forums_publics($id_article=0) {
 
 // Cree le formulaire de modification du reglage des forums de l'article
 // http://doc.spip.org/@formulaire_poster
-function inc_poster_dist($id_article, $script, $args, $ajax=false) {
+function inc_poster_dist($id_article, $script, $args, $flag=false) {
 	global $spip_lang_right;
 
 	$statut_forum = get_forums_publics($id_article);
@@ -56,15 +56,13 @@ function inc_poster_dist($id_article, $script, $args, $ajax=false) {
 	$r .= "\n\t</select>\n";
 
 	$r .= "<div align='$spip_lang_right' id='valider_poster_$id_article'"
-	. ($ajax ? '' : " class='visible_au_chargement'")
+	. ($flag ? '' : " class='visible_au_chargement'")
 	. ">\n\t<input type='submit' class='fondo' style='font-size:10px' value='"
 	. _T('bouton_changer')
 	. "' /></div>\n";
 
 	$r = ajax_action_auteur('poster', $id_article, $script, $args, $r);
 
-	return ($ajax == 'ajax') 
-	? $r
-	:  "<div id='poster-$id_article'>$r</div>";
+	return greffe_action_ajax("poster-$id_article", $r);
 }
 ?>
