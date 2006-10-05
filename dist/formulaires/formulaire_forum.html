@@ -1,0 +1,75 @@
+<div class="formulaire_spip formulaire_forum">
+
+<a id="formulaire_forum" name="formulaire_forum"></a>
+
+<form action="#ENV{url}#formulaire_forum" method="post">
+[(#ENV{url_post}|form_hidden)]
+[<input type="hidden" name="alea" value="(#ENV{alea})" />]
+[<input type="hidden" name="hash" value="(#ENV{hash})" />]
+[<input type="hidden" name="verif_(#ENV{hash})" value="ok" />]
+[<input type="hidden" name="afficher_texte" value="(#ENV{afficher_texte})" />]
+[<input type="hidden" name="retour_forum" value="(#ENV*{retour_forum}|rawurlencode)" />]
+[<fieldset class="reponse_formulaire">
+<legend><:bouton_radio_modere_priori:></legend>
+<p>(#ENV{modere})<:forum_info_modere:></p>
+</fieldset>]
+
+[(#ENV*{previsu})]
+
+<BOUCLE_G(GROUPES_MOTS)
+	{forum=(#CONFIG{mots_cles_forums}|choixsiegal{oui,oui,jamais})}
+	{articles==(#ENV{table}|choixsiegal{articles,'oui','.*'})}
+	{breves==(#ENV{table}|choixsiegal{breves,'oui','.*'})}
+	{rubriques==(#ENV{table}|choixsiegal{rubriques,'oui','.*'})}
+	{syndic==(#ENV{table}|choixsiegal{syndic,'oui','.*'})}
+>
+[(#ID_GROUPE|in_any{#ENV**{ajouter_groupe},' '})
+	<fieldset>
+	<legend><:mots_clefs:> : #TITRE</legend>
+		<INCLURE{fond=formulaires/choix_mots}{id_groupe}{ajouter_mot}{unseul}>
+	</fieldset>
+]</BOUCLE_G>
+
+[(#ENV**{afficher_texte}|choixsiegal{'non', ' ',''})
+[<input type="hidden" name="titre" value="(#ENV{titre})" />]
+<div class="spip_bouton"><input type="submit" value="<:forum_valider:>" /></div>]
+
+[(#ENV**{afficher_texte}|choixsiegal{'non', '',' '})
+
+	<fieldset>
+	<legend><:form_pet_message_commentaire:></legend>
+	<p><label for="titre"><:forum_titre:></label>
+	<input type="text" class="forml" name="titre" id="titre"[ value="(#ENV{titre})"] size="40" /></p>
+
+	<label><:forum_texte:></label>
+	<p><small><:info_creation_paragraphe:></small></p>
+	[(#ENV**{texte}|barre_textarea{12,40})]
+	</fieldset>
+
+	<fieldset>
+	<legend><:forum_lien_hyper:></legend>
+	<p><:forum_page_url:></p>
+	<p><label for="nom_site_forum"><:forum_titre:></label>
+	<input type="text" class="forml" name="nom_site_forum" id="nom_site_forum" size="40" value="#ENV{nom_site_forum}" /></p>
+	<p><label for="url_site"><:forum_url:></label>
+	<input type="text" class="forml" name="url_site" id="url_site" style="text-align: left;" dir="ltr" size="40" value="#ENV{url_site}" /></p>
+	</fieldset>
+
+	<fieldset>
+	<legend><:forum_qui_etes_vous:></legend>
+	<p><label for="auteur"><:forum_votre_nom:></label>
+	<input type="text" class="forml" name="auteur" id="auteur" value="#ENV{auteur}" size="40"[ readonly="(#ENV{readonly})"] /></p>
+	<p><label for="email_auteur"><:forum_votre_email:></label>
+	<input type="text" class="forml" name="email_auteur" id="email_auteur" value="#ENV{email_auteur}" size="40"[ readonly="(#ENV{readonly})"] /></p>
+	</fieldset>
+
+	[(#REM) Piege a robots spammeurs ]
+	<p style='display:none;'><label for="nobot"><:antispam_champ_vide:></label>
+	<input type="text" name="nobot" value="#ENV{nobot}" size="10" /></p>
+
+	<div class="spip_bouton"><input type="submit" value="<:forum_voir_avant:>" /></div>
+]
+
+</form>
+
+</div>

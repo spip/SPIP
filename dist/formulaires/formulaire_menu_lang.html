@@ -1,0 +1,15 @@
+<div class="formulaire_spip formulaire_menu_lang">
+<a name="formulaire_menu_lang" id="formulaire_menu_lang"></a>
+
+<form method="post" action="#ENV{url}">
+	[(#ENV{url}|form_hidden)]
+	<label for="#ENV{nom}"><:info_langues:></label>
+	<select class="forml" name="#ENV{nom}" id="#ENV{nom}" onchange="document.location.href='#ENV{url}&amp;#ENV{nom}='+this.options[this.selectedIndex].value">
+	#ENV*{langues}
+	</select>
+	<noscript>
+		<input type="submit" value="&gt;&gt;" />
+	</noscript>
+</form>
+
+</div>

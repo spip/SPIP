@@ -1,0 +1,23 @@
+<div class="formulaire_spip formulaire_site">
+<a name="formulaire_site" id="formulaire_site"></a>
+
+[<p class="reponse_formulaire">(#ENV*{message_erreur})</p>]
+[<p class="reponse_formulaire">(#ENV*{message_ok})</p>]
+
+[(#ENV*{message_ok}|?{'',' '})
+<form method="post" action="#ENV{self}#formulaire_site">
+	<fieldset>
+	<legend><:info_site:></legend>
+	<p><:proposer_site:></p>
+	<p><label for="nom_site"><:form_prop_nom_site:></label>
+	  <input type="text" class="forml" name="nom_site" id="nom_site" value="#ENV{nom_site}" size="30" /></p>
+	<p><label for="url_site"><:form_prop_url_site:></label>
+	  <input type="text" class="forml" name="url_site" id="url_site" style="text-align: left;" dir="ltr" value="#ENV{url_site}" size="30" /></p>
+	<p><label for="description_site"><:form_prop_description:></label>
+	  <textarea class="forml" name="description_site" id="description_site" rows="5" cols="40">#ENV{descriptif_site}</textarea></p>
+	<div class="spip_bouton"><input type="submit" value="<:bouton_valider:>" /></div>
+	</fieldset>
+</form>
+]
+
+</div>
