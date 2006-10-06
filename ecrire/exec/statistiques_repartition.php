@@ -174,6 +174,6 @@ function exec_statistiques_repartition_dist()
 
 	echo "</td></tr></table></center>";
 
-	//	fin_page();
+	//	echo fin_page();
 }
 ?>

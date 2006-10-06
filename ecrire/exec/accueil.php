@@ -486,6 +486,6 @@ echo "<p>";
  }
 
 
- fin_page("jimmac");
+ echo fin_page();
 }
 ?>

@@ -204,6 +204,6 @@ if ($cadre_ouvert) {
 
 fin_cadre_formulaire();
 
-fin_page();
+echo fin_page();
 }
 ?>

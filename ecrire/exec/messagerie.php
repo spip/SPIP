@@ -148,7 +148,7 @@ if (spip_num_rows($result) > 0) {
 
  afficher_messages(_T('info_tous_redacteurs'), '', "statut='publie' AND type='affich' AND (date_fin > DATE_SUB(NOW(), INTERVAL 1 DAY) OR rv != 'oui')",  $messages_vus, false, false);
 
-fin_page();
+echo fin_page();
 
 }
 ?>

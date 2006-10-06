@@ -25,7 +25,7 @@ function exec_admin_tech_dist()
 
  if ($connect_statut != '0minirezo' ){
 	echo _T('avis_non_acces_page');
-	fin_page();
+	echo fin_page();
 	exit;
  }
 
@@ -152,7 +152,7 @@ echo "<BR>";
 
 
 
-fin_page();
+echo fin_page();
 }
 
 ?>

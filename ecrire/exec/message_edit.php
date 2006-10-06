@@ -52,7 +52,7 @@ if ($new=='oui') {
 		debut_gauche();
 		debut_droite();
 		echo "<b>"._T('avis_non_acces_message')."</b><p>";
-		fin_page();
+		echo fin_page();
 		exit;
 	}
 
@@ -161,7 +161,7 @@ debut_droite();
 	echo "</div>";
 	echo "</form>";
 
-fin_page();
+echo fin_page();
 }
 
 // http://doc.spip.org/@afficher_si_rdv

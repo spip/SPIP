@@ -32,9 +32,7 @@ function exec_articles_dist()
 		fin_grand_cadre();
 	} else $res = articles_affiche($id_article, $row, _request('cherche_auteur'), _request('ids'), _request('cherche_mot'), _request('select_groupe'), _request('debut'), _request('trad_err'));
 
-	echo $res;
-
-	fin_page();
+	echo $res, fin_page();
 }
 
 function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot,  $select_groupe, $debut, $trad_err)

@@ -104,7 +104,7 @@ if ($enfant AND $browser_layer)
 afficher_rubriques_filles(0, $flag_trad);
 
  
- fin_page();
+ echo fin_page();
 }
 
 // Voir inc_layer pour les 2 globales utilisees

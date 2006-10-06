@@ -88,7 +88,7 @@ function demande_maj_version() {
 	" <a href='" . generer_url_ecrire("upgrade","reinstall=non") . "'>",
 	_T('info_administrateur_site_02'),
 	"</a></blockquote></blockquote><p>";
-	fin_page();
+	echo fin_page();
 	exit;
 }
 

@@ -100,7 +100,7 @@ function exec_config_fonctions_dist()
 
 	echo "</form>";
 
-	fin_page();
+	echo fin_page();
 }
 
 

@@ -18,7 +18,7 @@ function exec_admin_plugin() {
 	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 		debut_page(_T('icone_admin_plugin'), "configuration", "plugin");
 		echo _T('avis_non_acces_page');
-		fin_page();
+		echo fin_page();
 		exit;
 	}
 
@@ -144,7 +144,7 @@ EOF;
 
 	echo "<br />";
 
-	fin_page();
+	echo fin_page();
 
 }
 

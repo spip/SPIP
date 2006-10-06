@@ -2651,48 +2651,33 @@ function liste_articles_bloques()
 	return $res;
 }
 	
-///// 
 //
-// Presentation de l'interface privee, fin de page et flush()
-//
-
-// http://doc.spip.org/@fin_html
-function fin_html() {
-
-	echo "</font>", $GLOBALS['rejoue_session'];
-
-	if (defined('_TESTER_NOSCRIPT'))
-		echo _TESTER_NOSCRIPT;
-
-	echo "</body></html>\n";
-}
-
+// Fin de page de l'interface privee. 
+// Elle comporte une image invisble declenchant une tache de fond
 
 // http://doc.spip.org/@fin_page
-function fin_page($credits='') {
+function fin_page() {
 	global $spip_display;
 
-	echo "</td></tr></table>";
+	return "</td></tr></table>"
+	. debut_grand_cadre(true)
 
-	debut_grand_cadre();
+	. (($spip_display == 4)
+		? ("<div><a href='./?set_disp=2'>"
+		.  _T("access_interface_graphique")
+		. "</a></div>")
+		: ('<div style="text-align: right; font-family: Verdana; font-size: 8pt">'
+		. info_copyright()
+		. "<br />"
+		. _T('info_copyright_doc')
+		. '</div>'))
 
-	# ici on en profite pour glisser une tache de fond
-
-	echo generer_spip_cron();
-
-	if ($spip_display == 4) {
-	  echo "<div><a href='./?set_disp=2'>",
-	    _T("access_interface_graphique"),
-	    "</a></div>";
-	} else {
-	  echo '<div style="text-align: right; font-family: Verdana; font-size: 8pt">',
-	    info_copyright(), "<br />",_T('info_copyright_doc'),'</div>' ;
-	}
-
-	fin_grand_cadre();
-	echo "</center>";
-
-	fin_html();
+	. fin_grand_cadre(true)
+	. "</center></font>"
+	. $GLOBALS['rejoue_session']
+	. generer_spip_cron()
+	. (defined('_TESTER_NOSCRIPT') ? _TESTER_NOSCRIPT : '')
+	. "</body></html>\n";
 }
 
 // http://doc.spip.org/@debloquer_article

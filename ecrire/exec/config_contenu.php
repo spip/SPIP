@@ -24,7 +24,7 @@ function exec_config_contenu_dist()
 
 if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 	echo _T('avis_non_acces_page');
-	fin_page();
+	echo fin_page();
 	exit;
 }
 
@@ -358,6 +358,6 @@ if ($options == "avancees") {
 
 echo "</form>";
 
-fin_page();
+echo fin_page();
 }
 ?>

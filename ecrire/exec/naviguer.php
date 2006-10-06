@@ -159,7 +159,7 @@ function exec_naviguer_dist()
 
 	    contenu_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable);
 
-	    fin_page();
+	    echo fin_page();
 }
 
 // http://doc.spip.org/@infos_naviguer

@@ -329,6 +329,6 @@ if ($id_version) {
 fin_cadre_relief();
 
 
-fin_page();
+echo fin_page();
 }
 ?>

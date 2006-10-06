@@ -32,7 +32,7 @@ gros_titre(_T('info_langues'));
 
 if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 	echo _T('avis_non_acces_page');
-	fin_page();
+	echo fin_page();
 	exit;
 }
 
@@ -190,6 +190,6 @@ fin_cadre_couleur();
 
 echo "</form>";
 
-fin_page();
+echo fin_page();
 }
 ?>

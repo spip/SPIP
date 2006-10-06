@@ -171,6 +171,6 @@ echo "\n<p align='right'><input type='submit' value='"._T('bouton_enregistrer').
 
 fin_cadre_formulaire();
 
-fin_page();
+echo fin_page();
 }
 ?>

@@ -166,7 +166,7 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 	echo "</div>";
 }
 
-fin_page();
+echo fin_page();
 }
 
 function confirmer_mot ($conf_mot, $son_groupe, $total)

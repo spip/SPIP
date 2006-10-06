@@ -117,6 +117,6 @@ function exec_brouteur_dist()
 		echo "</td>";
 	}
 	echo "\n</tr></table>";
-	fin_page();
+	echo fin_page();
 }
 ?>

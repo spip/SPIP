@@ -276,7 +276,7 @@ function exec_controle_forum_dist()
 
 			echo "<div id='$ancre' class='serif2'>$mess</div>";
 
-			fin_page();
+			echo fin_page();
 		}
 	}
 }

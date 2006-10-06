@@ -27,7 +27,7 @@ global
 
 if ($connect_statut != '0minirezo') {
 	echo _T('avis_non_acces_page');
-	fin_page();
+	echo fin_page();
 	exit;
 }
 	$date = date("U");

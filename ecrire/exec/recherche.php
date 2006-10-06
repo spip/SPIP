@@ -127,6 +127,6 @@ function exec_recherche_dist()
 
 	}
 
-fin_page();
+echo fin_page();
 }
 ?>

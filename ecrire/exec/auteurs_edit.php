@@ -64,7 +64,7 @@ function exec_auteurs_edit_dist()
 		'data'=>'')
 	);
 
-	fin_page();
+	echo fin_page();
 }
 
 // http://doc.spip.org/@table_auteurs_edit

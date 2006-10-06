@@ -61,7 +61,7 @@ function exec_lang_raccourcis_dist() {
 	afficher_raccourcis($module);
 
 
-	fin_page();
+	echo fin_page();
 
 }
 
