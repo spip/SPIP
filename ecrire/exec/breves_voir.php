@@ -75,9 +75,8 @@ function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $select_gr
 		echo $iconifier('id_breve', $id_breve, 'breves_voir'); 
 	}
 
-	debut_raccourcis();
-	icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui&id_rubrique=$id_rubrique"), "breve-24.gif","creer.gif");
-	fin_raccourcis();
+	echo bloc_des_raccourcis(icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui&id_rubrique=$id_rubrique"), "breve-24.gif","creer.gif", false));
+
 	
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'breves_voir','id_breve'=>$id_breve),'data'=>''));
 	creer_colonne_droite();

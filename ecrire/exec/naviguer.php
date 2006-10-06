@@ -212,27 +212,25 @@ function raccourcis_naviguer($id_rubrique, $id_parent)
 {
 	global $connect_statut;
 
-	debut_raccourcis();
-	
-	icone_horizontale(_T('icone_tous_articles'), generer_url_ecrire("articles_page"), "article-24.gif");
+	$res = icone_horizontale(_T('icone_tous_articles'), generer_url_ecrire("articles_page"), "article-24.gif", '',false);
 	
 	$n = spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1"));
 	if ($n) {
 		if ($id_rubrique > 0)
-			icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.gif","creer.gif");
+		  $res .= icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.gif","creer.gif", false);
 	
 		$activer_breves = $GLOBALS['meta']["activer_breves"];
 		if ($activer_breves != "non" AND $id_parent == "0" AND $id_rubrique != "0") {
-			icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","id_rubrique=$id_rubrique&new=oui"), "breve-24.gif","creer.gif");
+		  $res .= icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","id_rubrique=$id_rubrique&new=oui"), "breve-24.gif","creer.gif", false);
 		}
 	}
 	else {
 		if ($connect_statut == '0minirezo') {
-			echo "<p>"._T('info_creation_rubrique');
+			$res .= "<p>"._T('info_creation_rubrique');
 		}
 	}
 	
-	fin_raccourcis();
+	echo bloc_des_raccourcis($res);
 }
 
 // http://doc.spip.org/@langue_naviguer

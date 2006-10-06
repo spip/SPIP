@@ -379,35 +379,24 @@ function bandeau_titre_boite2($titre, $logo="", $fond="white", $texte="black", $
 
 
 //
-// La boite raccourcis
-//
+// La boite des raccourcis
+// Se place a droite si l'ecran est en mode panoramique.
 
-// http://doc.spip.org/@debut_raccourcis
-function debut_raccourcis() {
+function bloc_des_raccourcis($bloc) {
 	global $spip_display;
-	echo "<div>&nbsp;</div>";
-	creer_colonne_droite();
 
-	debut_cadre_enfonce();
-	if ($spip_display != 4) {
-		echo "<font face='Verdana,Arial,Sans,sans-serif' size=1>";
-		echo "<b>"._T('titre_cadre_raccourcis')."</b><p />";
-	} else {
-		echo "<h3>"._T('titre_cadre_raccourcis')."</h3>";
-		echo "<ul>";
-	}
+	return "<div>&nbsp;</div>"
+	. creer_colonne_droite('',true)
+	. debut_cadre_enfonce('',true)
+	. (($spip_display != 4)
+	     ? ("<font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"
+		._T('titre_cadre_raccourcis')
+		."</b><p />")
+	       : ( "<h3>"._T('titre_cadre_raccourcis')."</h3><ul>"))
+	. $bloc
+	. (($spip_display != 4) ? "</font>" :  "</ul>")
+	. fin_cadre_enfonce(true);
 }
-
-// http://doc.spip.org/@fin_raccourcis
-function fin_raccourcis() {
-	global $spip_display;
-	
-	if ($spip_display != 4) echo "</font>";
-	else echo "</ul>";
-	
-	fin_cadre_enfonce();
-}
-
 
 // Afficher un petit "+" pour lien vers autre page
 
@@ -1677,8 +1666,7 @@ function envoi_link($nom_site_spip) {
 	. '<link rel="shortcut icon" href="'
 	. url_absolue(find_in_path('favicon.ico'))
 	. "\" >\n";
-	$js = debut_javascript($connect_statut == "0minirezo"
-			AND $connect_toutes_rubriques,
+	$js = debut_javascript($connect_toutes_rubriques,
 			($GLOBALS['meta']["activer_statistiques"] != 'non'));
 
 	if ($spip_display == 4) return $res . $js;
@@ -2088,7 +2076,6 @@ function debut_page($titre = "", $rubrique = "accueil", $sous_rubrique = "accuei
 	include_spip('inc/headers');
 	http_no_cache();
 	echo init_entete($titre, $rubrique);
-	definir_barre_boutons();
 	init_body($rubrique, $sous_rubrique, $onLoad, $id_rubrique);
 
 	echo "<center onmouseover='recherche_desesperement()'>", // ????
@@ -2133,6 +2120,8 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
 	global $browser_verifForm;
 	include_spip('inc/gadgets');
+
+	definir_barre_boutons();
 	if ($load = "$browser_verifForm$onLoad" . repercuter_gadgets($id_rubrique))
 		$load = " onLoad=\"$load\"";
 
@@ -2529,7 +2518,7 @@ function debut_gauche($rubrique = "accueil", $return=false) {
 
 // http://doc.spip.org/@creer_colonne_droite
 function creer_colonne_droite($rubrique="", $return= false){
-	global $deja_colonne_droite;
+	static $deja_colonne_droite;
 	global $flag_3_colonnes, $flag_centre_large;
 	global $spip_lang_rtl, $spip_lang_left;
 
@@ -2562,7 +2551,7 @@ function creer_colonne_droite($rubrique="", $return= false){
 
 // http://doc.spip.org/@debut_droite
 function debut_droite($rubrique="", $return= false) {
-	global $options, $spip_ecran, $deja_colonne_droite, $spip_display;
+	global $options, $spip_ecran, $spip_display;
 	global $spip_lang_left, $couleur_foncee, $couleur_claire;
 	global $flag_3_colonnes, $flag_centre_large;
 
@@ -2574,9 +2563,8 @@ function debut_droite($rubrique="", $return= false) {
 
 	if ($options == "avancees") {
 
-		$res .= liste_articles_bloques();
-		if (!$deja_colonne_droite) 
-		  $res .= creer_colonne_droite($rubrique, true);
+		$res .= liste_articles_bloques()
+		. creer_colonne_droite($rubrique, true);
 	}
 
 	$res .= "<div>&nbsp;</div></td>";
@@ -2585,10 +2573,8 @@ function debut_droite($rubrique="", $return= false) {
 		$res .= "<td width='50'>&nbsp;</td>";
 	}
 	else {
-		if (!$deja_colonne_droite) {
-			$res .= creer_colonne_droite($rubrique, true);
-		}
-		$res .= "</td></tr><tr>";
+		$res .= creer_colonne_droite($rubrique, true)
+		. "</td></tr><tr>";
 	}
 
 	if ($spip_ecran == 'large' AND $flag_centre_large)

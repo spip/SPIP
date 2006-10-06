@@ -225,9 +225,7 @@ else {
 	//
 	if ($connect_statut == '0minirezo') {
 		if ($id_article > 0) {
-			debut_raccourcis();
-			icone_horizontale(_T('icone_retour_article'), generer_url_ecrire("articles","id_article=$id_article"), "article-24.gif","rien.gif");
-			fin_raccourcis();
+			echo bloc_des_raccourcis(icone_horizontale(_T('icone_retour_article'), generer_url_ecrire("articles","id_article=$id_article"), "article-24.gif","rien.gif", false));
 		}
 	}
 

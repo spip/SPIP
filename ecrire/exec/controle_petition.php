@@ -34,17 +34,7 @@ function exec_controle_petition_dist()
 	debut_page(_T('titre_page_controle_petition'), "forum", "suivi-petition");
 	debut_gauche();
 
-//
-// Raccourcis
-//
-/*
-	debut_raccourcis();
-	// rien
-	fin_raccourcis();
-*/
-
 debut_droite();
-
   
 echo "<div class='serif2'>";
  
