@@ -241,7 +241,7 @@ $tables_des_serveurs_sql['localhost'] =  &$tables_principales;
 // (utilise pour les modifs de la base de donnees)
 
 // version de la base
-$spip_version = 1.917;
+$spip_version = 1.918;
 
 // version de spip en chaine
 // et en numerique a incrementer sur les evolutions qui cassent la compatibilite descendante
@@ -249,7 +249,7 @@ $spip_version = 1.917;
 // (ce qui marche pour yy ne marchera pas forcement sur une version plus ancienne)
 // type nouvelles fonctionnalites, deplacement de fonctions ...
 $spip_version_affichee = '1.9.2 alpha';
-$spip_version_code=1.9201;
+$spip_version_code=1.9202;
 
 // ** Securite **
 $auteur_session = $connect_statut = $connect_toutes_rubriques = $connect_id_rubrique = $hash_recherche = $hash_recherche_strict = '';

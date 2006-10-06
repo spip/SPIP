@@ -27,10 +27,12 @@ function image_math($tex) {
 			$ext = '.xhtml';
 			$server = $GLOBALS['mathml_server'];
 			break;
-		default:
+		case 'text':
 			$ext = '.png';
 			$server = $GLOBALS['tex_server'];
 			break;
+		default:
+			return $tex;
 	}
 
 	// Regarder dans le repertoire local des images TeX et blocs MathML

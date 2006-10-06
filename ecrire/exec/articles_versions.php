@@ -85,7 +85,7 @@ if ($id_version && $id_diff) {
 		$id_version = $id_diff;
 		$id_diff = $t;
 		$old = $textes;
-		$new = $textes = recuperer_version($id_article, $id_version);
+		$new = recuperer_version($id_article, $id_version);
 	}
 	else {
 		$old = recuperer_version($id_article, $id_diff);
@@ -96,14 +96,20 @@ if ($id_version && $id_diff) {
 	$champs = array('surtitre', 'titre', 'soustitre', 'descriptif', 'nom_site', 'url_site', 'chapo', 'texte', 'ps');
 
 	foreach ($champs as $champ) {
+		// Si on n'en a qu'un, pas de modif, on peut afficher directement les donnees courantes ; mais il faut remonter a la precedente version disposant de ce champ
+		$id_ref = $id_diff-1;
+		while (!isset($old[$champ])
+		AND $id_ref>0) {
+			$prev = recuperer_version($id_article, $id_ref--); 
+			if (isset($prev[$champ]))
+				$old[$champ] = $prev[$champ];
+		}
+
 		if (!strlen($new[$champ]) && !strlen($old[$champ])) continue;
 
-		// Si on n'en a qu'un, pas de modif, on peut afficher directement les donnees courantes ; mais en fait il faudrait remonter a la precedente version disposant de ce champ
-		if (!isset($new[$champ]))
+		if (!isset($new[$champ])) {
 			$textes[$champ] = $old[$champ];
-		elseif (!isset($old[$champ]))
-			$textes[$champ] = $new[$champ];
-		else {
+		} else {
 			$diff = new Diff(new DiffTexte);
 			$textes[$champ] = afficher_diff($diff->comparer(preparer_diff($new[$champ]), preparer_diff($old[$champ])));
 		}
@@ -240,9 +246,12 @@ while ($row = spip_fetch_array($result)) {
 		echo "<b>$titre_aff</b>";
 	}
 
-	if ($row['id_auteur']) {
-		$t = spip_fetch_array(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=".$row['id_auteur']));
-		echo " (".typo($t['nom']).")";
+	if (isset($row['id_auteur'])) {
+		$t = spip_fetch_array(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur='".addslashes($row['id_auteur'])."'"));
+		if ($t)
+			echo " (".typo($t['nom']).")";
+		else
+			echo " (".$row['id_auteur'].")"; #IP edition anonyme
 	}
 
 	if ($version_aff != $id_version) {

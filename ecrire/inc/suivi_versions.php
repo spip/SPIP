@@ -96,13 +96,16 @@ echo "<a href='", generer_url_ecrire('suivi_revisions', "debut=$next&id_secteur=
 			$id_article = $row['id_article'];
 			$statut = $row['statut'];
 			$titre = propre($row['titre']);
-			$row_auteur = spip_fetch_array(spip_query("SELECT nom,email FROM spip_auteurs	WHERE id_auteur = $id_auteur"));
-
-			$nom = typo($row_auteur["nom"]);
-			$email = $row_auteur['email'];
+			
+			// l'id_auteur peut etre un numero IP (edition anonyme)
+			if ($row_auteur = spip_fetch_array(spip_query("SELECT nom,email FROM spip_auteurs	WHERE id_auteur = '".addslashes($id_auteur)."'"))) {
+				$nom = typo($row_auteur["nom"]);
+				$email = $row_auteur['email'];
+			} else {
+				$nom = $id_auteur;
+				$email = '';
+			}
 	
-	
-
 			if (!$rss) {
 				$logo_statut = "puce-".puce_statut($statut).".gif";
 				echo "<div class='tr_liste' style='padding: 5px; border-top: 1px solid #aaaaaa;'>";
@@ -158,15 +161,23 @@ echo "<a href='", generer_url_ecrire('suivi_revisions', "debut=$next&id_secteur=
 						$id_version = $id_diff;
 						$id_diff = $t;
 						$old = $textes;
-						$new = $textes = recuperer_version($id_article, $id_version);
+						$new = recuperer_version($id_article, $id_version);
 					}
 					else {
 						$old = recuperer_version($id_article, $id_diff);
 						$new = $textes;
 					}		
 					$textes = array();
-					foreach ($champs as $champ) {
-						if (!strlen($new[$champ]) && !strlen($old[$champ])) continue;
+					foreach ($new as $champ => $val) {
+						// la version precedente est partielle, il faut remonter dans le temps
+						$id_ref = $id_diff-1;
+						while (!isset($old[$champ])
+						AND $id_ref>0) {
+							$prev = recuperer_version($id_article, $id_ref--);
+							if (isset($prev[$champ]))
+								$old[$champ] = $prev[$champ];
+						}
+						if (!strlen($val) && !strlen($old[$champ])) continue;
 						// si on n'en a qu'un, pas de modif, donc on n'est pas interesses a l'afficher
 						if (isset($new[$champ])
 						AND isset($old[$champ])) {
