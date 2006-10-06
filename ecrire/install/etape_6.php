@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 // http://doc.spip.org/@inc_install_6
-function inc_install_6()
+function install_etape_6_dist()
 {
 	global $email,$login,$nom,$pass,$spip_lang_right;
 

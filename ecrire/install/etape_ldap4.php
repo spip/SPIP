@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 // http://doc.spip.org/@inc_install_ldap4
-function inc_install_ldap4()
+function install_etape_ldap4_dist()
 {
 	global $adresse_ldap, $login_ldap, $pass_ldap, $port_ldap, $tls_ldap, $protocole_ldap, $base_ldap, $base_ldap_text, $spip_lang_right;
 

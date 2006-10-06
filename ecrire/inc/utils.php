@@ -47,15 +47,17 @@ function charger_fonction($nom, $dossier='exec', $continue=false) {
 	if (!preg_match(',^\w+$,', $nom))
 		redirige_par_entete('./');
 
-	if (substr($dossier,-1) == '/') $dossier = substr($dossier,0,-1);
+	if (substr($dossier,-1) != '/') $dossier .= '/';
 	// Si la fonction existe deja (definie par mes_options, par exemple)
 	
-	if (function_exists($f = $dossier.'_'.$nom)) return $f;
-	if (function_exists($g = $f . '_dist'))	return $g;
+	if (function_exists($f = str_replace('/','_',$dossier) . $nom))
+		return $f;
+	if (function_exists($g = $f . '_dist'))
+		return $g;
 
 	// Sinon charger le fichier de declaration
 	// passer en minuscules (cf les balises de formulaires)
-	$inc = include_spip($dossier.'/'. strtolower($nom));
+	$inc = include_spip($d = ($dossier . strtolower($nom)));
 
 	if (function_exists($f)) return $f;
 	if (function_exists($g)) return $g;
@@ -63,12 +65,12 @@ function charger_fonction($nom, $dossier='exec', $continue=false) {
 	if ($continue) return false;
 
 	// Echec : message d'erreur
-	spip_log("fonction $nom indisponible" .
-		($inc ? "" : "(fichier $dossier/$nom absent)"));
+	spip_log("fonction $nom ($f ou $g) indisponible" .
+		($inc ? "" : " (fichier $d absent)"));
 
 	include_spip('inc/minipres');
 	minipres(_T('forum_titre_erreur'),
-		 _T('fichier_introuvable', array('fichier'=> '<b>'.htmlentities("$dossier/$nom").'</b>')));
+		 _T('fichier_introuvable', array('fichier'=> '<b>'.htmlentities($d).'</b>')));
 }
 
 //

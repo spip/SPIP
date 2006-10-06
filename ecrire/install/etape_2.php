@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 // http://doc.spip.org/@inc_install_2
-function inc_install_2()
+function install_etape_2_dist()
 {
 	global $adresse_db, $login_db, $pass_db, $spip_lang_right;
 
