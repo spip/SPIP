@@ -1637,7 +1637,7 @@ function afficher_forum_4($compteur_forum, $nb_forum, $thread)
 
 
 // http://doc.spip.org/@envoi_link
-function envoi_link($nom_site_spip, $rubrique="") {
+function envoi_link($nom_site_spip) {
 	global $connect_statut, $connect_toutes_rubriques, $spip_display;
 	global $spip_lang, $couleur_claire, $couleur_foncee;
 
@@ -2083,24 +2083,28 @@ function lien_change_var($lien, $set, $couleur, $coords, $titre, $mouseOver="") 
 //
 
 // http://doc.spip.org/@debut_page
-function debut_page($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $onLoad = "", $css="", $id_rubrique = "") {
+function debut_page($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $onLoad = "", $id_rubrique = "") {
 
-  //	utiliser_langue_visiteur(); fait dans index a present
-	init_entete($titre, $rubrique, $css);
+	include_spip('inc/headers');
+	http_no_cache();
+	echo init_entete($titre, $rubrique);
 	definir_barre_boutons();
 	init_body($rubrique, $sous_rubrique, $onLoad, $id_rubrique);
-	debut_corps_page($rubrique);
+
+	echo "<center onmouseover='recherche_desesperement()'>", // ????
+		avertissement_messagerie(),
+		(($rubrique == "messagerie")
+		 OR ($GLOBALS['changer_config']!="oui")) 
+		? auteurs_recemment_connectes() : '';
 }
- 
+
+// envoi du doctype et du <head><title>...</head> 
 // http://doc.spip.org/@init_entete
-function init_entete($titre, $rubrique, $css='') {
+function init_entete($titre='', $rubrique='') {
 
 	if (!$nom_site_spip = textebrut(typo($GLOBALS['meta']["nom_site"])))
 		$nom_site_spip=  _T('info_mon_site_spip');
 
-	// envoi des en-tetes, du doctype et du <head><title...
-	include_spip('inc/headers');
-	http_no_cache();
 	$head = "<title>["
 		. $nom_site_spip
 		. "] " . textebrut(typo($titre)) . "</title>\n"
@@ -2108,13 +2112,13 @@ function init_entete($titre, $rubrique, $css='') {
 		. (($c = $GLOBALS['meta']['charset']) ?
 			"; charset=$c" : '')
 		. "' />\n"
-		. envoi_link($nom_site_spip, $rubrique)
-		. (!$css ? "" : (
-			'<link rel="stylesheet" href="' . entites_html($css)
-			. '" type="text/css" />'. "\n"
-		) ) ."\n";
+		. envoi_link($nom_site_spip);
 	
-	echo _DOCTYPE_ECRIRE, html_lang_attributes(), "<head>\n",pipeline('header_prive', $head), "</head>\n";
+	return _DOCTYPE_ECRIRE
+	. html_lang_attributes()
+	. "<head>\n"
+	. pipeline('header_prive', $head)
+	. "</head>\n";
 }
 
 // fonction envoyant la double serie d'icones de redac
@@ -2386,57 +2390,39 @@ if (true /*$bandeau_colore*/) {
 	if ($options != "avancees") echo "<div style='height: 18px;'>&nbsp;</div>";
 }
 
-
-// http://doc.spip.org/@debut_corps_page
-function debut_corps_page($rubrique='') {
+function avertissement_messagerie() {
 	global $couleur_foncee;
 	global $connect_id_auteur;
-  
-	// Ouverture de la partie "principale" de la page
-
-	echo "<center onmouseover='recherche_desesperement()'>";
 
 	$result_messages = spip_query("SELECT lien.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message");
 	$total_messages = @spip_num_rows($result_messages);
 	if ($total_messages == 1) {
-				while($row = @spip_fetch_array($result_messages)) {
-					$ze_message=$row['id_message'];
-					echo "<div class='messages'><a href='" . generer_url_ecrire("message","id_message=$ze_message") . "'><font color='$couleur_foncee'>"._T('info_nouveau_message')."</font></a></div>";
-				}
-			}
-			if ($total_messages > 1) echo "<div class='messages'><a href='" . generer_url_ecrire("messagerie") . "'><font color='$couleur_foncee'>"._T('info_nouveaux_messages', array('total_messages' => $total_messages))."</font></a></div>";
+		$row = @spip_fetch_array($result_messages);
+		$ze_message=$row['id_message'];
+		return "<div class='messages'><a href='" . generer_url_ecrire("message","id_message=$ze_message") . "'><font color='$couleur_foncee'>"._T('info_nouveau_message')."</font></a></div>";
+	} elseif ($total_messages > 1)
+		return "<div class='messages'><a href='" . generer_url_ecrire("messagerie") . "'><font color='$couleur_foncee'>"._T('info_nouveaux_messages', array('total_messages' => $total_messages))."</font></a></div>";
+	else return '';
+}
 
 
-	// Afficher les auteurs recemment connectes
-	
-	global $changer_config;
-	global $activer_imessage;
+function auteurs_recemment_connectes()
+{	
+	global $connect_id_auteur;
+	$res = '';
+	$result_auteurs = spip_query("SELECT id_auteur, nom FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND imessage!='non' AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE) AND statut IN ('0minirezo','1comite')");
 
-	if ($changer_config!="oui"){
-		$activer_imessage = "oui";
+	if (spip_num_rows($result_auteurs)) {
+
+		$res = "<b>"._T('info_en_ligne')."</b>";
+		while ($row = spip_fetch_array($result_auteurs)) {
+			$id_auteur = $row["id_auteur"];
+			$nom_auteur = typo($row["nom"]);
+			$res .= " &nbsp; ".bouton_imessage($id_auteur,$row)."&nbsp;<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "' style='color: #666666;'>$nom_auteur</a>";
+		}
 	}
-	
-			if ($activer_imessage != "non") {
-				$result_auteurs = spip_query("SELECT id_auteur, nom FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND imessage!='non' AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE) AND statut IN ('0minirezo','1comite')");
 
-				$nb_connectes = spip_num_rows($result_auteurs);
-			}
-				
-			$flag_cadre = (($nb_connectes > 0) OR $rubrique == "messagerie");
-			if ($flag_cadre) echo "<div class='messages' style='color: #666666;'>";
-
-			
-			if ($nb_connectes > 0) {
-				if ($nb_connectes > 0) {
-					echo "<b>"._T('info_en_ligne')."</b>";
-					while ($row = spip_fetch_array($result_auteurs)) {
-						$id_auteur = $row["id_auteur"];
-						$nom_auteur = typo($row["nom"]);
-						echo " &nbsp; ".bouton_imessage($id_auteur,$row)."&nbsp;<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "' style='color: #666666;'>$nom_auteur</a>";
-					}
-				}
-			}
-			if ($flag_cadre) echo "</div>";
+	return "<div class='messages' style='color: #666666;'>$res</div>";
 }
 
 

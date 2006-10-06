@@ -44,7 +44,7 @@ function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $select_gr
 	
 	pipeline('exec_init',array('args'=>array('exec'=>'breves_voir','id_breve'=>$id_breve),'data'=>''));
 	
-	debut_page("&laquo; $titre_breve &raquo;", "naviguer", "breves", "", "", $id_rubrique);
+	debut_page("&laquo; $titre_breve &raquo;", "naviguer", "breves", "", $id_rubrique);
 	
 	debut_grand_cadre();
 	
