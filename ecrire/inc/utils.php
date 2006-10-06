@@ -16,6 +16,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Gestion des inclusions et infos repertoires
 //
 
+// Cette inclusion est destine aux extensions de Spip qui n'ont pas suivi
+// son evolution. Si vous n'en utilisez pas, neutrlaliser cette ligne
+// gagner du temps au chargement.
+
+include(_DIR_RESTREINT . 'inc/vieilles_defs.php');
+
 // charge un fichier perso ou, a defaut, standard
 // et retourne si elle existe le nom de la fonction homonyme (exec_$nom),
 // ou de suffixe _dist
