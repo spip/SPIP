@@ -27,7 +27,7 @@ function image_math($tex) {
 			$ext = '.xhtml';
 			$server = $GLOBALS['mathml_server'];
 			break;
-		case 'text':
+		case 'tex':
 			$ext = '.png';
 			$server = $GLOBALS['tex_server'];
 			break;
