@@ -16,27 +16,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Gestion des inclusions et infos repertoires
 //
 
-# fonction obsolete, assurant la compatilibite ascendante. cf include_spip
-// http://doc.spip.org/@include_ecrire
-function include_ecrire($file, $silence=false) {
-	preg_match('/^((inc_)?([^.]*))(\.php[3]?)?$/', $file, $r);
-
-	// Version new style, surchargeable
-	# cas speciaux
-	if ($r[3] == 'index') return include_spip('inc/indexation');
-	if ($r[3] == 'db_mysql') return include_spip('base/db_mysql');
-	if ($r[3] == 'connect') { spip_connect(); return; }
-
-	# cas general
-	if ($f=include_spip('inc/'.$r[3]))
-		return $f;
-
-	// fichiers old-style, ecrire/inc_truc.php
-	if (is_readable($f = _DIR_RESTREINT . $r[1] . '.php'))
-		return include_once($f);
-}
-
-
 // charge un fichier perso ou, a defaut, standard
 // et retourne si elle existe le nom de la fonction homonyme (exec_$nom),
 // ou de suffixe _dist
