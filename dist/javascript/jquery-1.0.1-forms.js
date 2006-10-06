@@ -1086,7 +1086,7 @@ jQuery.fn.extend({
 			var p = (e.type == "mouseover" ? e.fromElement : e.toElement) || e.relatedTarget;
 	
 			// Traverse up the tree
-			while ( p && p != this ) p = p.parentNode;
+			while ( p && p != this ) try {p = p.parentNode;} catch(e) {p = this;};
 			
 			// If we actually just moused on to a sub-element, ignore it
 			if ( p == this ) return false;
@@ -2004,7 +2004,8 @@ $.fn.serialize = function() {
 
 		if ( !n || this.disabled || t == 'reset' || 
 			(t == 'checkbox' || t == 'radio') && !this.checked || 
-			(t == 'submit' || t == 'image') && this.form.clicked != this) 
+			(t == 'submit' || t == 'image' || t == 'button') && this.form.clicked != this ||
+			this.tagName.toLowerCase() == 'select' && this.selectedIndex == -1) 
 			return;
 
 		if (t == 'image' && this.form.clicked_x)
@@ -2012,10 +2013,10 @@ $.fn.serialize = function() {
 				{name: n+'_x', value: this.form.clicked_x},
 				{name: n+'_y', value: this.form.clicked_y}
 			);
-		if(this.nodeName.toUpperCase()=='SELECT' && this.multiple) {
+		if(t == 'select-multiple') {
 			//verify multiple options
 			$('option:enabled',this).each(function() {
-				if(this.selected)a.push({name: n, value: this.value});
+				if(this.selected) a.push({name: n, value: this.value});
 			});			
 			return;
 		}
