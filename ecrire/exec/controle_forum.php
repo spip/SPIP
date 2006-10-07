@@ -197,7 +197,7 @@ function controle_un_forum($row) {
 function exec_controle_forum_dist()
 {
 
-  global $type, $debut, $debut_id_forum, $id_rubrique, $connect_statut, $connect_toutes_rubriques;
+	global $type, $debut, $debut_id_forum, $id_rubrique, $connect_statut, $connect_toutes_rubriques;
 
 	$debut= intval($debut);
 	$id_rubrique = intval($id_rubrique);
@@ -230,7 +230,7 @@ function exec_controle_forum_dist()
 		   (!$id_rubrique OR !acces_rubrique($id_rubrique))));
 
 	if (_request('var_ajaxcharset') AND !$droit) {
-		return $mess;
+		ajax_retour($mess);
 	} else {
 
 		debut_page(_T('titre_page_forum_suivi'), "forum", "forum-controle");

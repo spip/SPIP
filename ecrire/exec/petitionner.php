@@ -23,7 +23,7 @@ function exec_petitionner_dist()
 		minipres(_T('info_acces_interdit'));
 	}
 
-	$f = charger_fonction('petitionner', 'inc');
-	return $f($id_article, $script, "&id_article=$id_article", 'ajax');
+	$petitionner = charger_fonction('petitionner', 'inc');
+	ajax_retour($petitionner($id_article, $script, "&id_article=$id_article", 'ajax'));
 }
 ?>

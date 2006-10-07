@@ -159,7 +159,7 @@ function inc_dater_dist($id_article, $flag, $statut_article, $date, $date_redac)
 
   $res =  debut_cadre_couleur('',true) . $res .  fin_cadre_couleur(true);
 
-  return greffe_action_ajax("dater-$id_article", $res);
+  return ajax_action_greffe("dater-$id_article", $res);
 }
 
 ?>

@@ -133,7 +133,7 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 			. $form
 			. fin_block()
 			. fin_cadre_enfonce(true);
-	return greffe_action_ajax("referencer_traduction-$id_article", $res);
+	return ajax_action_greffe("referencer_traduction-$id_article", $res);
 }
 
 

@@ -160,7 +160,7 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 				"var_ajaxcharset=utf-8&script=$script$args_ajax",
 				$corps,
 				(" method='post'\nonsubmit="
-				 . declencheur_action_ajax('this', $ancre, $fct_ajax)));
+				 . ajax_action_declencheur('this', $ancre, $fct_ajax)));
 				 
 		}
 	}
@@ -184,12 +184,12 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 
 		if ($att) $clic = "\n<div$att>$clic</div>";
 		return "<a href='$href'\nonclick="
-		.  declencheur_action_ajax("\"$ajax\"", $ancre, $fct_ajax)
+		.  ajax_action_declencheur("\"$ajax\"", $ancre, $fct_ajax)
 		. ">$clic</a>";
 	}
 }
 
-function declencheur_action_ajax($request, $noeud, $fct_ajax)
+function ajax_action_declencheur($request, $noeud, $fct_ajax='')
 {
 	return "'return AjaxSqueeze("
 	. $request
@@ -200,11 +200,19 @@ function declencheur_action_ajax($request, $noeud, $fct_ajax)
 	. ")'";
 }
 
-function greffe_action_ajax($idom, $corps)
+function ajax_action_greffe($idom, $corps)
 {
 	return _request('var_ajaxcharset')
 	? $corps
 	: "\n<div id='$idom'$atts>$corps</div>";
+}
+
+function ajax_retour($corps)
+{
+	$c = $GLOBALS['meta']["charset"];
+	header('Content-Type: text/html; charset='. $c);
+	echo '<', "?xml version='1.0' encoding='", $c, "'?", ">\n", $corps;
+	exit;
 }
 
 // http://doc.spip.org/@determine_upload

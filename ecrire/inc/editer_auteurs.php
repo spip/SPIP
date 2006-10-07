@@ -96,7 +96,7 @@ function inc_editer_auteurs_dist($id_article, $flag, $cherche_auteur, $ids)
  . fin_block()
  . fin_cadre_enfonce(true);
 
- return greffe_action_ajax("editer_auteurs-$id_article", $res);
+ return ajax_action_greffe("editer_auteurs-$id_article", $res);
 }
 
 // http://doc.spip.org/@rechercher_auteurs_articles

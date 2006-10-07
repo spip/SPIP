@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 
 // Cette inclusion est destine aux extensions de Spip qui n'ont pas suivi
-// son evolution. Si vous n'en utilisez pas, neutrlaliser cette ligne
+// son evolution. Si vous n'en utilisez pas, neutraliser cette ligne pour
 // gagner du temps au chargement.
 
 include(_DIR_RESTREINT . 'inc/vieilles_defs.php');

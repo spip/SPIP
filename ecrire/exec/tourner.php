@@ -26,9 +26,8 @@ function exec_tourner_dist()
 		minipres(_T('info_acces_interdit'));
 	}
 
-	$f = charger_fonction('tourner', 'inc');
-
-	return $f($id_document, array(), $script, 'ajax', $type);
+	$tourner = charger_fonction('tourner', 'inc');
+	ajax_retour($tourner($id_document, array(), $script, 'ajax', $type));
 }
 
 ?>

@@ -30,7 +30,7 @@ function exec_virtualiser_dist()
 			$virtuel = substr($virtuel, 1);
 	}
 
-	$f = charger_fonction('virtualiser', 'inc');
-	return  $f($id_article, 'ajax', $virtuel, "articles", "id_article=$id_article");
+	$virtualiser = charger_fonction('virtualiser', 'inc');
+	ajax_retour($virtualiser($id_article, 'ajax', $virtuel, "articles", "id_article=$id_article"));
 }
 ?>

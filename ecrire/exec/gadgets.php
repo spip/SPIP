@@ -18,6 +18,6 @@ function exec_gadgets_dist()
 	$gadget = _request('gadget');
 	$gadgets = charger_fonction('gadgets', 'inc');
 
-	return $gadgets($id_rubrique, $gadget);
+	ajax_retour($gadgets($id_rubrique, $gadget));
 }
 ?>

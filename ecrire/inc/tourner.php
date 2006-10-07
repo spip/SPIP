@@ -69,7 +69,7 @@ function inc_tourner_dist($id_document, $document, $script, $flag, $type)
 
 	if ($boite) return "$boite<div>$res</div>";
 
-	return greffe_action_ajax("tourner-$id_document", $res);
+	return ajax_action_greffe("tourner-$id_document", $res);
 }
 
 // http://doc.spip.org/@boutons_rotateurs

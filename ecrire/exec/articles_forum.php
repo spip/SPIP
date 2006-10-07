@@ -49,7 +49,7 @@ function exec_articles_forum_dist()
 
 	$droit= acces_rubrique($id_rubrique);
 
-	if (_request('var_ajaxcharset') AND $droit) return $mess;
+	if (_request('var_ajaxcharset') AND $droit) ajax_retour($mess);
 
  	pipeline('exec_init',array('args'=>array('exec'=>'articles_forum','id_article'=>$id_article),'data'=>''));
 

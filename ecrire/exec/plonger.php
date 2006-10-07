@@ -24,7 +24,7 @@ function exec_plonger_dist()
 
 	include_spip('inc/texte');
 	include_spip('inc/mini_nav');
-	return mini_afficher_rubrique ($id, htmlentities($rac), array(), $col, $exclus);
+	ajax_retour(mini_afficher_rubrique($id, htmlentities($rac), array(), $col, $exclus));
 }
 
 ?>

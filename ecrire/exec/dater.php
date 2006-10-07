@@ -29,7 +29,7 @@ function exec_dater_dist()
 	$date = $row["date"];
 	$date_redac = $row["date_redac"];
 
-	$f = charger_fonction('dater', 'inc');
-	return $f($id_article, 'ajax', $statut_article, $date, $date_redac);
+	$dater = charger_fonction('dater', 'inc');
+	ajax_retour($dater($id_article, 'ajax', $statut_article, $date, $date_redac));
 }
 ?>

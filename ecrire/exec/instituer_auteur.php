@@ -20,7 +20,7 @@ function exec_instituer_auteur_dist()
 
 	$r = spip_fetch_array(spip_query("SELECT statut FROM spip_auteurs WHERE id_auteur=$id_auteur"));
 
-	$f = charger_fonction('instituer_auteur', 'inc');
-	return $f($id_auteur, $r['statut'] , $script);
+	$instituer_auteur = charger_fonction('instituer_auteur', 'inc');
+	ajax_retour($instituer_auteur($id_auteur, $r['statut'], $script));
 }
 ?>

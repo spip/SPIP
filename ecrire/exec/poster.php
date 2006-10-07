@@ -23,7 +23,7 @@ function exec_poster_dist()
 		minipres(_T('info_acces_interdit'));
 	}
 
-	$f = charger_fonction('poster', 'inc');
-	return $f($id_article, $script, "&id_article=$id_article", true);
+	$poster = charger_fonction('poster', 'inc');
+	ajax_retour($poster($id_article, $script, "&id_article=$id_article", true));
 }
 ?>

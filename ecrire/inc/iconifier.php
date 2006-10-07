@@ -50,7 +50,7 @@ function inc_iconifier_dist($id_objet, $id,  $script) {
 	. "</div>"
 	. fin_cadre_relief(true);
 
-	return greffe_action_ajax("iconifier-$id", $res);
+	return ajax_action_greffe("iconifier-$id", $res);
 }
 
 global $logo_libelles;

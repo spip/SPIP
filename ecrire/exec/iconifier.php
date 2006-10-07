@@ -46,7 +46,7 @@ function exec_iconifier_dist()
 		minipres(_T('info_acces_interdit'));
 	}
 
-	$f = charger_fonction('iconifier', 'inc');
-	return $f($type, $id, $script);
+	$iconifier = charger_fonction('iconifier', 'inc');
+	ajax_retour($iconifier($type, $id, $script));
 }
 ?>

@@ -34,6 +34,6 @@ function inc_virtualiser_dist($id_article, $flag, $virtuel, $script, $args)
 	. "' style='font-size:10px' /></div>";
 
 	$res = ajax_action_auteur('virtualiser', $id_article, $script, $args, $res);
-	return greffe_action_ajax("virtualiser-$id_article", $res);
+	return ajax_action_greffe("virtualiser-$id_article", $res);
 }
 ?>

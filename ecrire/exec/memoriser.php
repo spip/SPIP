@@ -40,7 +40,7 @@ function exec_memoriser_dist()
 	if ($flag_ob) {
 			$res = ob_get_contents();
 			ob_end_clean();
-			return $res;
+			ajax_retour($res);
 	}
 }
 ?>
