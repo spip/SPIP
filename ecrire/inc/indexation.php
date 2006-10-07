@@ -436,7 +436,7 @@ function indexer_les_champs(&$row,&$index_desc,$ponderation = 1){
 					$texte = $func($texte);
 				}
 			}
-			//echo ":$quoi:$poids:$texte<br/>";
+			//spip_log(":$quoi:$poids:$texte");
 			if (is_array($poids))
 				indexer_chaine($texte,array_shift($poids) * $ponderation,array_shift($poids));
 			else

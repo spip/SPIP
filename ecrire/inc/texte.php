@@ -222,7 +222,7 @@ $preg='') {
 // http://doc.spip.org/@echappe_retour
 function echappe_retour($letexte, $source='') {
 	if (strpos($letexte,"base64$source")) {
-		# echo htmlspecialchars($letexte);  ## pour les curieux
+		# spip_log(htmlspecialchars($letexte));  ## pour les curieux
 		if (preg_match_all(
 		',<(span|div) class=[\'"]base64'.$source.'[\'"]\s.*></\1>,UmsS',
 		$letexte, $regs, PREG_SET_ORDER)) {

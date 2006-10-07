@@ -239,7 +239,6 @@ function enregistre_modif_plugin(){
 	spip_log("Changement des plugins actifs par auteur id=$connect_id_auteur :".implode(',',$plugin));
 	ecrire_plugin_actifs($plugin);
 	ecrire_metas();
-	//echo "mise à jour ok";
 }
 
 // http://doc.spip.org/@ordonne_plugin

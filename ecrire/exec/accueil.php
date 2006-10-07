@@ -475,7 +475,7 @@ echo "<p>";
 
   encours_accueil($vos_articles);
 
-  afficher_enfant_rub(0, false);
+  echo afficher_enfant_rub(0, false, true);
 
  // Dernieres modifications d'articles
  if ($options == 'avancees'

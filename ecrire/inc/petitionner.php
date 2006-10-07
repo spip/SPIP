@@ -43,7 +43,7 @@ function inc_petitionner_dist($id_article, $script, $args, $ajax=false)
 		$val_menu = 'off';
 	}
 
-	$res = '';
+	$res = "<br />\n";
 	foreach ($menu as $val => $desc) {
 		$res .= "<option" . (($val_menu == $val) ? " selected" : '') . " value='$val'>".$desc."</option>\n";
 	}

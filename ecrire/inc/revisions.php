@@ -35,7 +35,7 @@ function replace_fragment($id_article, $version_min, $version_max, $id_fragment,
 	if ($flag_gz) {
 		$s = gzcompress($fragment);
 		if (strlen($s) < strlen($fragment)) {
-			//echo "gain gz: ".(100 - 100 * strlen($s) / strlen($fragment))."%<br />";
+			//spip_log("gain gz: ".(100 - 100 * strlen($s) / strlen($fragment)));
 			$compress = 1;
 			$fragment = $s;
 		}
