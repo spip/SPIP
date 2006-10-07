@@ -21,7 +21,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /* reecrites conformement a la nouvelle interface.		*/
 
 
-// http://doc.spip.org/@debut_raccourcis
 function debut_raccourcis() {
         global $spip_display;
         echo "<div>&nbsp;</div>";
@@ -46,9 +45,6 @@ function fin_raccourcis() {
         fin_cadre_enfonce();
 }
 
-
-# fonction obsolete, assurant la compatilibite ascendante. cf include_spip
-// http://doc.spip.org/@include_ecrire
 function include_ecrire($file, $silence=false) {
 	preg_match('/^((inc_)?([^.]*))(\.php[3]?)?$/', $file, $r);
 
@@ -67,8 +63,10 @@ function include_ecrire($file, $silence=false) {
 		return include_once($f);
 }
 
-// Fonction abandonnee. . Ne plus utiliser, remplacer par son contenu
-// http://doc.spip.org/@lire_meta
 function lire_meta($nom) { global $meta; return $meta[$nom];}
+
+function afficher_script_layer(){echo $GLOBALS['browser_layer'];}
+
+function test_layer(){return $GLOBALS['browser_layer'];}
 
 ?>

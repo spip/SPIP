@@ -302,10 +302,9 @@ function activer_article(id) {
 	}
 }
 //--></script>
-';
-
-	afficher_script_layer();
-	echo '
+',
+	$GLOBALS['browser_layer'],
+	'
 </head>
 <body bgcolor="#FFFFFF" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" TOPMARGIN="5" LEFTMARGIN="5" MARGINWIDTH="5" MARGINHEIGHT="5"';
 
