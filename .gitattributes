@@ -452,13 +452,14 @@ ecrire/inc/lang_liste.php -text
 ecrire/inc/legender.php -text
 ecrire/inc/maintenance.php -text
 ecrire/inc/message_select.php -text
-ecrire/inc/mini_nav.php -text
 ecrire/inc/minipres.php -text
 ecrire/inc/petitionner.php -text
+ecrire/inc/plonger.php -text
 ecrire/inc/plugin.php -text
 ecrire/inc/popularites.php -text
 ecrire/inc/poster.php -text
 ecrire/inc/referencer_traduction.php -text
+ecrire/inc/selectionner.php -text
 ecrire/inc/sites_voir.php -text
 ecrire/inc/suivi_versions.php -text
 ecrire/inc/syndic.php -text

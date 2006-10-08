@@ -21,7 +21,8 @@ function exec_rubriquer_dist()
 
 	include_spip('inc/texte');
 	include_spip('inc/mini_nav');
-	ajax_retour(mini_nav($id, "aff_nav_recherche", 
+	$selectionner = charger_fonction('selectionner', 'inc');
+	ajax_retour($selectionner($id, "aff_nav_recherche", 
 			"document.location.href='" . generer_url_ecrire('naviguer', "id_rubrique=::sel::") .
 			      "';", 0, true));
 }

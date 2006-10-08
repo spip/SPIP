@@ -23,8 +23,8 @@ function exec_plonger_dist()
 	$col = intval($col);
 
 	include_spip('inc/texte');
-	include_spip('inc/mini_nav');
-	ajax_retour(mini_afficher_rubrique($id, htmlentities($rac), array(), $col, $exclus));
+	$plonger = charger_fonction('plonger', 'inc');
+	ajax_retour($plonger($id, htmlentities($rac), array(), $col, $exclus));
 }
 
 ?>
