@@ -42,8 +42,9 @@ function exec_admin_tech_dist()
 		debut_gauche();
 		$dir_dump = _DIR_TRANSFERT . $connect_login . '/';
 	}
-	$file = joli_repertoire($dir_dump . _SPIP_DUMP);
-	$zfile = joli_repertoire($dir_dump . _SPIP_DUMP . '.gz');
+	include_spip('exec/export_all');
+	$file = joli_repertoire($dir_dump . export_nom_fichier_dump($dir_dump,false));
+	$zfile = joli_repertoire($dir_dump . export_nom_fichier_dump($dir_dump,true));
 	$dir_dump = joli_repertoire($dir_dump);
 
  debut_droite();
@@ -96,11 +97,20 @@ echo "</TABLE>";
 //
 
  if ($connect_toutes_rubriques) {
+ 	$liste_dump = preg_files(_DIR_DUMP,str_replace("@stamp@","(_[0-9]{6,8}_[0-9]{1,3})?",_SPIP_DUMP)."(.gz)?",50,false);
+ 	$selected = end($liste_dump);
+ 	$liste_choix = "<p><ul>"; 
+ 	foreach($liste_dump as $key=>$fichier){
+ 		$affiche_fichier = substr($fichier,strlen(_DIR_DUMP));
+ 		$liste_choix.="<li><input type='radio' name='archive' value='$affiche_fichier' id='dump_$key' ".
+ 			(($fichier==$selected)?"checked='checked' ":"")."/><label for='dump_$key'>$affiche_fichier</label></li>\n";
+ 	}
+ 	
 	if ($flag_gz) {
-		$fichier_defaut = _SPIP_DUMP . '.gz';
+		$fichier_defaut = str_replace("@stamp@","",_SPIP_DUMP) . '.gz';
 		$texte_compresse = _T('texte_compresse_ou_non')."&nbsp;";
 	} else {
-		$fichier_defaut = _SPIP_DUMP;
+		$fichier_defaut = str_replace("@stamp@","",_SPIP_DUMP);
 		$texte_compresse = _T('texte_non_compresse')."&nbsp;";
 	}
 
@@ -114,7 +124,9 @@ echo "</TABLE>";
 	_T('texte_restaurer_sauvegarde', array('dossier' => '<i>'.$dir_dump.'</i>')),
 	"\n<p>",
 	_T('entree_nom_fichier', array('texte_compresse' => $texte_compresse)),
-	"\n<p><FONT SIZE=3><ul><INPUT TYPE='text' NAME='archive' VALUE='$fichier_defaut' SIZE='30'></ul></FONT>",
+	$liste_choix,
+	"<li><input type='radio' name='archive' value='' />",
+	"\n<FONT SIZE=3><INPUT TYPE='text' NAME='archive_perso' VALUE='$fichier_defaut' SIZE='30'></FONT></li></ul>",
 	"\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' VALUE='"._T('bouton_restaurer_base')."'></DIV></FORM>",
 	"\n</td></tr>",
 	"</TABLE>";

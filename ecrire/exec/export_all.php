@@ -15,8 +15,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS['version_archive'] = '1.3';
 
-#include_spip('exec/export'); // celui dans le meme repertoire, pas celui de ecrire
-include_spip('inc/admin');
 include_spip('base/serial');
 include_spip('base/auxiliaires');
 include_spip('inc/indexation'); // pour la fonction primary_index_table 
@@ -58,6 +56,16 @@ if (!isset($EXPORT_tables_noexport)){
 }
 $GLOBALS['flag_ob_flush'] = function_exists('ob_flush');
 
+function export_nom_fichier_dump($dir,$gz=true){
+	$archive = _SPIP_DUMP;
+	if ($gz) $archive .= '.gz';
+	$cpt=0;
+	$stamp = date('Ymd');
+	while ((file_exists($dir.($nom = str_replace('@stamp@',"_{$stamp}_".substr("00$cpt",-3),$archive))))&&($cpt<999))
+		$cpt++;
+	return $nom;
+}
+
 // http://doc.spip.org/@exec_export_all_dist
 function exec_export_all_dist()
 {
@@ -69,10 +77,9 @@ function exec_export_all_dist()
 		$dir = _DIR_TRANSFERT . $connect_login . '/';
 	}
 
-  	if (!$archive) {
-		if ($gz) $archive = _SPIP_DUMP . '.gz';
-		else $archive = _SPIP_DUMP;
-	}
+  if (!$archive)
+		$archive = export_nom_fichier_dump($dir,$gz);
+	
   
 	// utiliser une version fraiche des metas (ie pas le cache)
 	include_spip('inc/meta');
@@ -88,13 +95,6 @@ function exec_export_all_dist()
 			$start = true;
 		else
 			$start = ($status_dump[2]==0)&&($status_dump[3]==0);
-	}
-	if ($start){
-	  // phase admin en debut de dump
-	  // apres, on continue sans verif : 
-		// sur la duree du dump cela genere de demandes recurrentes d'authent
-		debut_admin(generer_url_post_ecrire("export_all","archive=$archive&gz=$gz"), $action);
-		fin_admin($action);
 	}
 
 	install_debut_html(_T('info_sauvegarde'));

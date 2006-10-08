@@ -80,12 +80,12 @@ function import_charge_version($version_archive)
 // http://doc.spip.org/@exec_import_all_dist
 function exec_import_all_dist()
 {
-	global $archive;
-
 	// si l'appel est explicite, 
 	// passer par l'authentification ftp et attendre d'etre rappele
 	if (!$GLOBALS['meta']["debut_restauration"]) {
 	// cas de l'appel apres demande de confirmation
+		$archive=_request('archive');
+		if (!strlen($archive)) $archive=_request('archive_perso');
 		if ($archive) {
 			$action = _T('info_restauration_sauvegarde', array('archive' => $archive));
 			$commentaire = verifier_version_sauvegarde ($archive);
