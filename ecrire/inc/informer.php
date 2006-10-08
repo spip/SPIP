@@ -42,7 +42,7 @@ function inc_informer_dist($id, $col, $exclus, $rac, $type)
 	}
 
 	$rac = htmlentities($rac);
-	spip_log("info $res");
+
 # ce lien provoque la selection (directe) de la rubrique cliquee
 	$onClick = "findObj_forcer('id_parent').value=$id;";
 # et l'affichage de son titre dans le bandeau
