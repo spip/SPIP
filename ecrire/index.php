@@ -165,6 +165,7 @@ define('_TRANCHES', 10);
 
 // Controle de la version, sauf si on est deja en train de s'en occuper
 if (!isset($reinstall)
+AND (!isset($var_ajaxcharset))
 AND ($spip_version <> ((double) str_replace(',','.',$GLOBALS['meta']['version_installee']))))
 	$exec = 'demande_mise_a_jour';
 
