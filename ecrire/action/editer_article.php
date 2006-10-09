@@ -100,7 +100,8 @@ function articles_set($id_article, $new) {
 function revisions_articles ($id_article, $new, $c = false) {
 	global $flag_revisions;
 
-	$row = spip_fetch_array(spip_query("SELECT statut FROM spip_articles WHERE id_article=$id_article"));
+	$s = spip_query("SELECT statut FROM spip_articles WHERE id_article=$id_article");
+	$row = spip_fetch_array($s);
 	$statut = $row['statut'];
 	$nouveau_statut = false;
 
