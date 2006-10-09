@@ -72,7 +72,10 @@ function auth_rubrique($id_auteur, $statut)
 
 	$result = spip_query("SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur=$id_auteur AND id_rubrique!='0'");
 
-	if (!spip_num_rows($result)) return 0;
+	if (!spip_num_rows($result)) {
+		$GLOBALS['connect_toutes_rubriques'] = true;
+		return 0;
+	}
 
 	$rubriques = array();
 	for (;;) {
