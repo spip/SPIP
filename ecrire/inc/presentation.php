@@ -1831,7 +1831,7 @@ function largeur_icone_bandeau_principal($texte) {
 	}
 	if ($spip_ecran == "large") $largeur = $largeur + 30;
 
-	if (!($connect_statut == "0minirezo" AND $connect_toutes_rubriques)) {
+	if (!$connect_toutes_rubriques) {
 		$largeur = $largeur + 30;
 	}
 
@@ -1839,13 +1839,44 @@ function largeur_icone_bandeau_principal($texte) {
 	return $largeur;
 }
 
+function bandeau_principal($rubrique, $sous_rubrique, $largeur)
+{
+	$res = '';
+	foreach($GLOBALS['boutons_admin'] as $page => $detail) {
+		if ($page=='espacement') {
+			$res .= "<td> &nbsp; </td>";
+		} else {
+			if ($detail->url)
+				$lien_noscript = $detail->url;
+			else
+				$lien_noscript = generer_url_ecrire($page);
+
+			if ($detail->url2)
+				$lien = $detail->url2;
+			else
+				$lien = $lien_noscript;
+
+			$res .= icone_bandeau_principal(
+					_T($detail->libelle),
+					$lien,
+					$detail->icone,
+					$page,
+					$rubrique,
+					$lien_noscript,
+					$page,
+					$sous_rubrique);
+		}
+	}
+
+	return "<div class='bandeau-icones'>\n<table width='$largeur' cellpadding='0' cellspacing='0' border='0' align='center'><tr>\n$res</tr></table></div>\n";
+}
+
+
 // http://doc.spip.org/@icone_bandeau_principal
 function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide", $rubrique = "", $lien_noscript = "", $sous_rubrique_icone = "", $sous_rubrique = ""){
-	global $spip_display, $spip_ecran;
-	global $menu_accesskey, $compteur_survol;
+	global $spip_display, $menu_accesskey, $compteur_survol;
 
 	$largeur = largeur_icone_bandeau_principal($texte);
-
 
 	$alt = '';
 	$title = '';
@@ -1872,23 +1903,23 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 	$class_select = ($sous_rubrique_icone == $sous_rubrique) ? " class='selection'" : '';
 
 	if (eregi("^javascript:",$lien)) {
-		$a_href = "<a$accesskey onClick=\"$lien; return false;\" href='$lien_noscript' target='spip_aide'$class_select>";
+		$a_href = "\nonClick=\"$lien; return false;\" href='$lien_noscript' target='spip_aide'$class_select";
 	}
 	else {
-		$a_href = "<a$accesskey href=\"$lien\"$class_select>";
+		$a_href = "\nhref=\"$lien\"$class_select";
 	}
 
 	$compteur_survol ++;
 
 	if ($spip_display != 1 AND $spip_display != 4) {
-		echo "<td class='cellule48' onmouseover=\"changestyle('bandeau$rubrique_icone', 'visibility', 'visible');\" width='$largeur'>$a_href" .
-		  http_img_pack("$fond", $alt, "$title width='48' height='48'");
-		if ($spip_display != 3) {
-			echo "<span>$texte</span>";
-		}
-	}
-	else echo "<td class='cellule-texte' onmouseover=\"changestyle('bandeau$rubrique_icone', 'visibility', 'visible');\" width='$largeur'>$a_href".$texte;
-	echo "</a></td>\n";
+		$class ='cellule48';
+		$texte = http_img_pack($fond, $alt, "$title width='48' height='48'")
+		. ($spip_display == 3 ? '' :  "<span>$texte</span>");
+	} else {
+		$class = 'cellule-texte';
+	}  
+		
+	return "<td class='$class' onmouseover=\"changestyle('bandeau$rubrique_icone', 'visibility', 'visible');\" width='$largeur'><a$accesskey$a_href>$texte</a></td>\n";
 }
 
 
@@ -2112,10 +2143,8 @@ function init_entete($titre='', $rubrique='') {
 // http://doc.spip.org/@init_body
 function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $id_rubrique='') {
 	global $couleur_foncee, $couleur_claire;
-	global $connect_id_auteur;
-	global $connect_statut;
-	global $connect_toutes_rubriques;
-	global $auth_can_disconnect, $connect_login;
+	global $connect_id_auteur, $connect_toutes_rubriques;
+	global $auth_can_disconnect;
 	global $options, $spip_display, $spip_ecran;
 	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
 	global $browser_verifForm;
@@ -2138,10 +2167,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 	echo lien_change_var (self(), 'set_disp', 3, '41,0,59,15', _T('lien_afficher_icones_seuls'), "onmouseover=\"changestyle('bandeauvide','visibility', 'visible');\"");
 	echo "\n</map>";
 
-
-
 	if ($spip_display == "4") {
-		// Icones principales
 		echo "<ul>";
 		echo "<li><a href='./'>"._T('icone_a_suivre')."</a>";
 		echo "<li><a href='" . generer_url_ecrire("naviguer") . "'>"._T('icone_edition_site')."</a>";
@@ -2160,40 +2186,8 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 	echo "<div class='invisible_au_chargement' style='position: absolute; height: 0px; visibility: hidden;'><a href='oo'>"._T("access_mode_texte")."</a></div>";
 	
 	echo "<div id='haut-page'>";
-
-	// Icones principales
 	echo "<div class='bandeau-principal' align='center'>\n";
-	echo "<div class='bandeau-icones'>\n";
-	echo "<table width='$largeur' cellpadding='0' cellspacing='0' border='0' align='center'><tr>\n";
-
-	foreach($GLOBALS['boutons_admin'] as $page => $detail) {
-		if($page=='espacement') {
-			echo "<td> &nbsp; </td>";
-		} else {
-			if ($detail->url)
-				$lien_noscript = $detail->url;
-			else
-				$lien_noscript = generer_url_ecrire($page);
-
-			if ($detail->url2)
-				$lien = $detail->url2;
-			else
-				$lien = $lien_noscript;
-
-			icone_bandeau_principal(
-				_T($detail->libelle),
-				$lien,
-				$detail->icone,
-				$page,
-				$rubrique,
-				$lien_noscript,
-				$page,
-				$sous_rubrique);
-		}
-	}
-	echo "</tr></table>\n";
-
-	echo "</div>\n";
+	echo bandeau_principal($rubrique, $sous_rubrique, $largeur);
 
 	echo "<table width='$largeur' cellpadding='0' cellspacing='0' align='center'><tr><td>";
 	echo "<div style='text-align: $spip_lang_left; width: ".$largeur."px; position: relative; z-index: 2000;'>";
@@ -2283,7 +2277,7 @@ if (true /*$bandeau_colore*/) {
 		  http_img_pack("cal-suivi.png", "", "width='26' height='20'") . "</a>";
 		
 
-		if (!($connect_statut == "0minirezo" AND $connect_toutes_rubriques)) {
+		if (!($connect_toutes_rubriques)) {
 			echo http_img_pack("rien.gif", " ", "width='10'");
 			echo "<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$connect_id_auteur") . "' class='icone26' onmouseover=\"changestyle('bandeauinfoperso','visibility','visible');\">" .
 			  http_img_pack("fiche-perso.png", "", "onmouseover=\"changestyle('bandeauvide','visibility', 'visible');\"");
@@ -2378,6 +2372,7 @@ if (true /*$bandeau_colore*/) {
 
 	if ($options != "avancees") echo "<div style='height: 18px;'>&nbsp;</div>";
 }
+
 
 function avertissement_messagerie() {
 	global $couleur_foncee;
