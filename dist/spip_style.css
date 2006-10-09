@@ -1,7 +1,7 @@
 /* SPIP-STYLE                                              version 1.9  */
 /* Cette feuille contient les styles associes au code genere par SPIP.  */
 /* Ces styles sont indispensables et doivent necessairement etre        */
-/* definis pour le bon fonctionnement de votre squelette                */
+/* definis pour le bon fonctionnement de vos squelettes.                */
 
 
 /* Raccourcis typographiques de SPIP */
@@ -11,10 +11,9 @@ hr.spip {}
 
 .spip_puce { list-style-position: outside; }
 
-ul.spip { list-style: disc; }
-ol.spip { list-style: decimal; }
-ul.spip li, ol.spip li { list-style: inherit; }
-li.spip { margin: 0.3em 0 0.3em 0.8em; list-style-position: outside; }
+ul.spip {}
+ol.spip {}
+li.spip {}
 
 h3.spip {
 	text-align: center; 
@@ -42,8 +41,8 @@ div.spip_poesie {
 	font-family: Garamond, Georgia, Times, serif; }
 div.spip_poesie div { text-indent: -60px; margin-left: 60px; }
 
-.spip_code, .spip_cadre { font-family: monospace; font-style: normal; font-size: 1.1em; }
-.spip_cadre { width: 99%; border: 1px solid; }
+.spip_code, .spip_cadre { font-family: monospace; font-style: normal; font-size: 1.2em; }
+.spip_cadre { width: 99%; border: 1px inset; }
 
 .spip_surligne { background: #FF6; }
 
@@ -72,15 +71,14 @@ img, .spip_logos { margin: 0; padding: 0; border: none; }
 span.spip_documents_center { display: block; margin-top:1em; }
 .spip_documents_left { float: left; margin-right: 15px; margin-bottom: 5px; }
 .spip_documents_right { float: right; margin-left: 15px; margin-bottom: 5px; }
-.spip_doc_titre { font-weight: bold; font-size: 0.8em; margin-left:auto; margin-right:auto;}
-.spip_doc_descriptif { clear: both; font-size: 0.8em; margin-left:auto; margin-right:auto;
-}
+.spip_doc_titre { font-weight: bold; font-size: 0.8em; margin-left: auto; margin-right: auto; }
+.spip_doc_descriptif { clear: both; font-size: 0.8em; margin-left: auto; margin-right: auto; }
 
 /* Images typographiques (via image_typo), URL a revoir... */
 .format_png { behavior: url(win_png.htc); }
 
 /* modeles par defaut */
-.spip_modele {float:right; display:block; border:1px dotted gray; width:180px;}
+.spip_modele { float: right; display: block; border: 1px dotted grey; width: 180px; }
 
 /* Barre de raccourcis typographiques */
 table.spip_barre { width: 100%; }
