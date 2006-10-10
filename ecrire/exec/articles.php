@@ -327,7 +327,7 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 	$res = "<td valign='top'>$res</td>";
 
 	if ($flag_editable) {
-		$res .= "<td valign='top' align='$spip_lang_right'>"
+		$res .= "<td valign='top' align='$spip_lang_right' width='130'>"
 		. bouton_modifier_articles($id_article, $id_rubrique, $modif, _T('avis_article_modifie', $modif), "article-24.gif", "edit.gif")
 		. "</td>\n";
 	}
