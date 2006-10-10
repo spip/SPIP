@@ -94,10 +94,10 @@ function generer_action_auteur($action, $arg, $redirect="", $mode=false, $att=''
 		list($id_auteur, $pass) =  caracteriser_auteur();
 	}
 	$hash = _action_auteur("$action-$arg", $id_auteur, $pass, 'alea_ephemere');
+	$r = rawurlencode($redirect);
 	if (!is_string($mode))
-	  return generer_url_action($action, "arg=$arg&hash=$hash" . (!$redirect ? '' : ("&redirect=" . rawurlencode($redirect))), $mode);
-	if ($redirect)
-		$redirect = "\n\t\t<input name='redirect' type='hidden' value='$redirect' />";
+	  return generer_url_action($action, "arg=$arg&hash=$hash" . (!$r ? '' : "&redirect=$r"), $mode);
+
 	// Attention, JS n'aime pas le melange de param GET/POST
 	return "\n<form style='margin:0px' action='" .
 		generer_url_public('') .
@@ -105,7 +105,7 @@ function generer_action_auteur($action, $arg, $redirect="", $mode=false, $att=''
 		<input name='hash' type='hidden' value='$hash' />
 		<input name='action' type='hidden' value='$action' />
 		<input name='arg' type='hidden' value='$arg' />" .
-		$redirect .  
+		(!$r ? '' : "\n\t\t<input name='redirect' type='hidden' value='$r' />") .
 		$mode .
 		"\n\t</div>\n</form>\n";
 }
@@ -113,14 +113,9 @@ function generer_action_auteur($action, $arg, $redirect="", $mode=false, $att=''
 // http://doc.spip.org/@redirige_action_auteur
 function redirige_action_auteur($action, $arg, $ret, $gra='', $mode=false, $atts='') {
 
-	$redirect = generer_url_ecrire($ret, $gra, true, _DIR_RESTREINT_ABS);
+	$r = generer_url_ecrire($ret, $gra, true, _DIR_RESTREINT_ABS);
 
-	return generer_action_auteur(
-		$action,
-		$arg,
-		$redirect,
-		$mode,
-		$atts);
+	return generer_action_auteur($action, $arg, $r, $mode, $atts);
 }
 
 // Retourne un formulaire d'execution de $action sur $id,

@@ -154,7 +154,7 @@ link='" .  $couleurs_spip[$choix_couleur]['couleur_lien'] . "'
 vlink='" . $couleurs_spip[$choix_couleur]['couleur_lien_off'] ."'
 alink='" . $couleurs_spip[$choix_couleur]['couleur_lien_off'] ."'
 bgcolor='#f8f7f3' text='#000000' 
-topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'" .
+topmargin='0' leftmargin='0' marginwidth='0' marginheight='0'" .
 	($spip_lang_rtl ? " dir='rtl'" : ""));
 
 define('_TRANCHES', 10);

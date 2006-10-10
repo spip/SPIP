@@ -140,9 +140,9 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 		else if (count($resultat) == 1) {
 			$nouveaux_mots[] = $resultat[0];
 			$row = spip_fetch_array(spip_query("SELECT titre FROM spip_mots WHERE id_mot=$resultat[0]"));
-			$res .= "<B>"._T('info_mot_cle_ajoute')." $ou : </B><BR><UL>";
-			$res .= "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE='2'><B><FONT SIZE='3'>".typo($row['titre'])."</FONT></B></FONT></LI>\n";
-			$res .= "</UL>";
+			$res .= "<b>"._T('info_mot_cle_ajoute')." $ou : </b><br /><ul>";
+			$res .= "<li><font face='Verdana,Arial,Sans,sans-serif' size='2'><b><font size='3'>".typo($row['titre'])."</font></b></font></li>\n";
+			$res .= "</ul>";
 		}
 		else $res .= affiche_mots_ressemblant($cherche_mot, $objet, $id_objet, $resultat, $table, $table_id, $url_base);
 
@@ -183,7 +183,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 
 			$id_groupes_vus[] = $id_groupe;
 			$url = generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=$ret");
-			$vals= array("<A href='$url'>$cle</A>");
+			$vals= array("<a href='$url'>$cle</a>");
 			
 
 			$row_groupe = spip_fetch_array(spip_query("SELECT titre, unseul, obligatoire, minirezo, comite FROM spip_groupes_mots WHERE id_groupe = $id_groupe"));
@@ -197,7 +197,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 			if (($row_groupe['unseul'] == "oui") AND $flag_groupe) {
 				$vals[]= formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_id, $objet, $id_objet);
 			} else {
-				$vals[]= "<A href='$url'>".typo($titre_mot)."</A>";
+				$vals[]= "<a href='$url'>".typo($titre_mot)."</a>";
 			}
 
 			if ($connect_toutes_rubriques)
@@ -381,11 +381,11 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 		$jscript = "onchange=\"$jscript1\"";
 	  
 		if ($obligatoire)
-			$res .= "<SELECT NAME='nouv_mot' SIZE='1' STYLE='width: 180px; background-color:#E86519;' CLASS='fondl' $jscript>";
+			$res .= "<select name='nouv_mot' size='1' style='width: 180px; background-color:#E86519;' class='fondl' $jscript>";
 		else if ($unseul)
-			$res .= "<SELECT NAME='nouv_mot' SIZE='1' STYLE='width: 180px; background-color:#cccccc;' CLASS='fondl' $jscript>";
+			$res .= "<select name='nouv_mot' size='1' style='width: 180px; background-color:#cccccc;' class='fondl' $jscript>";
 		else
-			$res .= "<SELECT NAME='nouv_mot' SIZE='1' STYLE='width: 180px; ' CLASS='fondl' $jscript>";
+			$res .= "<select name='nouv_mot' size='1' style='width: 180px; ' class='fondl' $jscript>";
 
 		$res .= "\n<option value='x' style='font-variant: small-caps;'>$titre</option>";
 		while($row = spip_fetch_array($result)) {
@@ -394,7 +394,7 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 				textebrut(typo($row['titre'])) .
 				"</option>";
 		}
-		$res .= "</SELECT>";
+		$res .= "</select>";
 		$res .= "<span class='visible_au_chargement' id='$ancre'>";
 		$res .= "\n&nbsp;<input type='submit' value='"._T('bouton_choisir')."' CLASS='fondo' />";
 		$res .= "</span>";

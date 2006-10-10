@@ -43,15 +43,15 @@ function inc_petitionner_dist($id_article, $script, $args, $ajax=false)
 		$val_menu = 'off';
 	}
 
-	$res = "<br />\n";
+	$res = "";
 	foreach ($menu as $val => $desc) {
-		$res .= "<option" . (($val_menu == $val) ? " selected" : '') . " value='$val'>".$desc."</option>\n";
+		$res .= "<option" . (($val_menu == $val) ? " selected='selected'" : '') . " value='$val'>".$desc."</option>\n";
 	}
 
 	$res = "<select name='change_petition'
 		class='fondl' style='font-size:10px;'
-		onChange=\"setvisibility('valider_petition', 'visible');\"
-		>\n$res</select>\n";
+		onchange=\"setvisibility('valider_petition', 'visible');\"
+		>\n$res</select><br />\n";
 
 
 	if ($petition) {
@@ -68,31 +68,31 @@ function inc_petitionner_dist($id_article, $script, $args, $ajax=false)
 			$res .= "<input type='checkbox' name='email_unique' id='emailunique' checked='checked'>";
 		else
 			$res .="<input type='checkbox' name='email_unique'  id='emailunique'>";
-		$res .=" <label for='emailunique'>"._T('bouton_checkbox_signature_unique_email')."</label><BR>";
+		$res .=" <label for='emailunique'>"._T('bouton_checkbox_signature_unique_email')."</label><br />";
 		if ($site_obli=="oui")
 			$res .="<input type='checkbox' name='site_obli' id='siteobli' checked='checked'>";
 		else
 			$res .="<input type='checkbox' name='site_obli'  id='siteobli'>";
-		$res .=" <label for='siteobli'>"._T('bouton_checkbox_indiquer_site')."</label><BR>";
+		$res .=" <label for='siteobli'>"._T('bouton_checkbox_indiquer_site')."</label><br />";
 		if ($site_unique=="oui")
 			$res .="<input type='checkbox' name='site_unique' id='siteunique' checked='checked'>";
 		else
 			$res .="<input type='checkbox' name='site_unique'  id='siteunique'>";
-		$res .=" <label for='siteunique'>"._T('bouton_checkbox_signature_unique_site')."</label><BR>";
+		$res .=" <label for='siteunique'>"._T('bouton_checkbox_signature_unique_site')."</label><br />";
 		if ($message=="oui")
 			$res .="<input type='checkbox' name='message' id='message' checked='checked'>";
 		else
 			$res .="<input type='checkbox' name='message'  id='message' />";
 		$res .=" <label for='message'>"._T('bouton_checkbox_envoi_message')."</label>";
 
-		$res .= "<br />"._T('texte_descriptif_petition')."&nbsp;:<BR />";
-		$res .="<TEXTAREA NAME='texte_petition' CLASS='forml' ROWS='4' COLS='10' wrap='soft'>";
+		$res .= "<br />"._T('texte_descriptif_petition')."&nbsp;:<br />";
+		$res .="<textarea name='texte_petition' class='forml' rows='4' COLS='10' wrap='soft'>";
 		$res .=entites_html($texte_petition);
-		$res .="</TEXTAREA>\n";
+		$res .="</textarea>\n";
 
 		$res .="<span align='$spip_lang_right'>";
 	} else $res .="<span class='visible_au_chargement' id='valider_petition'>";
-	$res .="<input type='submit' CLASS='fondo' VALUE='"._T('bouton_changer')."' STYLE='font-size:10px' />";
+	$res .="<input type='submit' class='fondo' value='"._T('bouton_changer')."' style='font-size:10px' />";
 	$res .="</span>";
 	$res = ajax_action_auteur('petitionner', $id_article, $script, $args, $res);
 

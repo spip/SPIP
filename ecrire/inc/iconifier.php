@@ -98,7 +98,7 @@ function indiquer_logo($titre, $id_objet, $mode, $id, $script) {
 		$afficher = "\n" .
 			_T('info_telecharger_nouveau_logo') .
 			"<br />" .
-			"\n<input name='image' type='File' class='forml' style='font-size:9px;' size='15'>" .
+			"\n<input name='image' type='file' class='forml' style='font-size:9px;' size='15' />" .
 			"<div align='" .  $GLOBALS['spip_lang_right'] . "'>" .
 			"\n<input name='sousaction1' type='submit' value='" .
 			_T('bouton_telecharger') .

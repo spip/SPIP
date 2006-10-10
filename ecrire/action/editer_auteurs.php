@@ -22,7 +22,7 @@ function action_editer_auteurs_dist() {
 	$var_f();
 
 	$arg = _request('arg');
-	$redirect = _request('redirect');
+	$redirect = urldecode(_request('redirect'));
 
 	if (preg_match(",^\W*(\d+)\W-(\d+)$,", $arg, $r)) {
 		supprimer_auteur_et_rediriger($r[1], $r[2], $redirect);

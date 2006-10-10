@@ -236,7 +236,7 @@ function boites_de_config_articles($id_article)
 	$nb_signatures = $nb_signatures['count'];
 	$visible = $nb_forums || $nb_signatures;
 
-	$invite = "<span class='verdana1'<b>"
+	$invite = "<span class='verdana1'><b>"
 	. _T('bouton_forum_petition')
 	. aide('confforums')
 	. "</b></span>";
@@ -277,14 +277,14 @@ function boite_article_virtuel($id_article, $virtuel)
 }
 
 // http://doc.spip.org/@bouton_modifier_articles
-function bouton_modifier_articles($id_article, $id_rubrique, $flag_modif, $mode, $ip, $im)
+function bouton_modifier_articles($id_article, $id_rubrique, $flag_modif, $mode, $ip, $im, $align='')
 {
 	if ($flag_modif) {
-		return icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), $ip, $im, '', false)
+		return icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), $ip, $im, $align, false)
 		. "<font face='arial,helvetica,sans-serif' size='2'>$mode</font>"
 		. aide("artmodif");
 	}
-	else return icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), "article-24.gif", "edit.gif", '', false);
+	else return icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), "article-24.gif", "edit.gif", $align, false);
 }
 
 // http://doc.spip.org/@titres_articles
@@ -328,11 +328,11 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 
 	if ($flag_editable) {
 		$res .= "<td valign='top' align='$spip_lang_right' width='130'>"
-		. bouton_modifier_articles($id_article, $id_rubrique, $modif, _T('avis_article_modifie', $modif), "article-24.gif", "edit.gif")
+		. bouton_modifier_articles($id_article, $id_rubrique, $modif, _T('avis_article_modifie', $modif), "article-24.gif", "edit.gif", 'right')
 		. "</td>\n";
 	}
 
-	return "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>"
+	return "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>"
 	. "\n<tr width='100%'>"
 	. $res
 	. "</tr></table>\n";

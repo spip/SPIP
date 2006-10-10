@@ -487,7 +487,7 @@ function afficher_tranches_requete($num_rows, $colspan, $tmp_var, $url='', $nb_a
 		else {
 			$script = parametre_url($self, $tmp_var, $deb-1);
 			if ($url) {
-				$on = "\nonClick=\"return charger_id_url('"
+				$on = "\nonclick=\"return charger_id_url('"
 				. $url
 				. "&"
 				. $tmp_var
@@ -512,7 +512,7 @@ function afficher_tranches_requete($num_rows, $colspan, $tmp_var, $url='', $nb_a
 	} else {
 			$script = parametre_url($self, $tmp_var, -1);
 			if ($url) {
-				$on = "\nonClick=\"return charger_id_url('"
+				$on = "\nonclick=\"return charger_id_url('"
 				. $url
 				. "&"
 				. $tmp_var
@@ -1492,7 +1492,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	$res = "<a id='$id_forum'></a>";
 
 	if ($spip_display == 4) {
-		$res .= "<li>".typo($titre)."<br>";
+		$res .= "<li>".typo($titre)."<br />";
 	} else {
 
 		$titre_boite = '';
@@ -1640,32 +1640,32 @@ function envoi_link($nom_site_spip) {
 	// CSS de secours en cas de non fonct de la suivante
 	$res = '<link rel="stylesheet" type="text/css" href="'
 	. find_in_path('style_prive_defaut.css')
-	. '" >'  . "\n"
+	. '" />'  . "\n"
 	
 	// CSS espace prive : la vraie
 	. '<link rel="stylesheet" type="text/css" href="'
-	. generer_url_public('style_prive', $args) .'" >' . "\n"
+	. generer_url_public('style_prive', $args) .'" />' . "\n"
 
 	// CSS calendrier
 	. '<link rel="stylesheet" type="text/css" href="'
-	. find_in_path('agenda.css') .'" >' . "\n"
+	. find_in_path('agenda.css') .'" />' . "\n"
 
 	// CSS imprimante (masque des trucs, a completer)
 	. '<link rel="stylesheet" type="text/css" href="'
 	. find_in_path('spip_style_print.css')
-	. '" media="print" >' . "\n"
+	. '" media="print" />' . "\n"
 
 	// CSS "visible au chargement" differente selon js actif ou non
 	. '<link rel="stylesheet" type="text/css" href="'
 	. find_in_path('spip_style_'
 		. (($_COOKIE['spip_accepte_ajax'] != -1) ? 'invisible' : 'visible')
 		. '.css')
-	.' " >' . "\n"
+	.' " />' . "\n"
 
 	// favicon.ico
 	. '<link rel="shortcut icon" href="'
 	. url_absolue(find_in_path('favicon.ico'))
-	. "\" >\n";
+	. "\" />\n";
 	$js = debut_javascript($connect_toutes_rubriques,
 			($GLOBALS['meta']["activer_statistiques"] != 'non'));
 
@@ -1674,16 +1674,16 @@ function envoi_link($nom_site_spip) {
 	$nom = entites_html($nom_site_spip);
 
 	$res .= "<link rel='alternate' type='application/rss+xml' title=\"$nom\" href='"
-			. generer_url_public('backend') . "' >\n";
+			. generer_url_public('backend') . "' />\n";
 	$res .= "<link rel='help' type='text/html' title=\""._T('icone_aide_ligne') . 
 			"\" href='"
 			. generer_url_ecrire('aide_index',"var_lang=$spip_lang")
-			."' >\n";
+			."' />\n";
 	if ($GLOBALS['meta']["activer_breves"] != "non")
 		$res .= "<link rel='alternate' type='application/rss+xml' title=\""
 			. $nom
 			. " ("._T("info_breves_03")
-			. ")\" href='" . generer_url_public('backend-breves') . "' >\n";
+			. ")\" href='" . generer_url_public('backend-breves') . "' />\n";
 
 	return $res . $js;
 }
@@ -1903,7 +1903,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 	$class_select = ($sous_rubrique_icone == $sous_rubrique) ? " class='selection'" : '';
 
 	if (eregi("^javascript:",$lien)) {
-		$a_href = "\nonClick=\"$lien; return false;\" href='$lien_noscript' target='spip_aide'$class_select";
+		$a_href = "\nonclick=\"$lien; return false;\" href='$lien_noscript' target='spip_aide'$class_select";
 	}
 	else {
 		$a_href = "\nhref=\"$lien\"$class_select";
@@ -2033,7 +2033,7 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 	$icone = "\n<table cellpadding='0' class='pointeur' cellspacing='0' border='0' width='$largeur'" .
 	  ((strlen($align) > 2) ? " align='$align' " : '') .
 	">\n<tr><td class='icone36$style' style='text-align:center;'><a
-	href='$lien'>$icone</a></td>\n</tr></table>";
+	href='$lien'>$icone</a></td></tr></table>";
 
 	if ($afficher == 'oui')
 		echo $icone;
@@ -2059,14 +2059,14 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = tr
 		if ($spip_display != 1) {
 			$retour .= "\n<table class='cellule-h-table' cellpadding='0' valign='middle'>"
 			. "\n<tr><td><a $javascript$lien class='cellule-h'>"
-			. "<div class='cell-i'>" ;
+			. "<span class='cell-i'>" ;
 			if ($fonction){
 				$retour .= http_img_pack($fonction, "", http_style_background($fond, "center center no-repeat"));
 			}
 			else {
 				$retour .= http_img_pack($fond, "", "");
 			}
-			$retour .= "</div></a></td>"
+			$retour .= "</span></a></td>"
 			. "\n<td class='cellule-h-lien'><a $javascript$lien class='cellule-h'>"
 			. $texte
 			. "</a></td></tr></table>\n";
@@ -2152,7 +2152,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 
 	definir_barre_boutons();
 	if ($load = "$browser_verifForm$onLoad" . repercuter_gadgets($id_rubrique))
-		$load = " onLoad=\"$load\"";
+		$load = " onload=\"$load\"";
 
 	echo pipeline('body_prive',"<body ". _ATTRIBUTES_BODY
 		.$load
@@ -2660,12 +2660,10 @@ function debloquer_article($arg, $texte) {
 	  "</a>";
 }
 
-
 function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30)
 {
 	global $spip_lang_right, $spip_lang_left, $options;
 
-spip_log("option mr $options");
 	if ($options != "avancees") return '';
 
 	$table = $type . 's';
@@ -2686,7 +2684,7 @@ spip_log("option mr $options");
 		. "' style='font-size: 10px;' href='"
 		  . generer_url_ecrire($table,"$key=$ze")
 		. "'>"
-		. "<div class='arial1' style='$style'><b>$numero$ze</b></div>"
+		. "<span class='arial1' style='$style'><b>$numero$ze</b></span>"
 		. typo($row['titre'])
 		. "</a>";
 	}

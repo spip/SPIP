@@ -20,7 +20,6 @@ function action_petitionner_dist() {
 	$var_f();
 
 	$arg = _request('arg');
-	$redirect = _request('redirect');
 
 	$id_article = intval($arg);
 

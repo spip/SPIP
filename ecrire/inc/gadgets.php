@@ -472,10 +472,10 @@ function gadget_messagerie() {
 function repercuter_gadgets($id_rubrique) {
 	if ($_COOKIE['spip_accepte_ajax'] != -1) {
 	  return ";
-		AjaxSqueeze('./?exec=gadgets&gadget=rubriques&id_rubrique=$id_rubrique', 'gadget-rubriques');
-		AjaxSqueeze('./?exec=gadgets&gadget=navigation&id_rubrique=$id_rubrique', 'gadget-navigation');
-		AjaxSqueeze('./?exec=gadgets&gadget=agenda&id_rubrique=$id_rubrique', 'gadget-agenda');
-		AjaxSqueeze('./?exec=gadgets&gadget=messagerie&id_rubrique=$id_rubrique', 'gadget-messagerie');";
+		AjaxSqueeze('./?exec=gadgets&amp;gadget=rubriques&amp;id_rubrique=$id_rubrique', 'gadget-rubriques');
+		AjaxSqueeze('./?exec=gadgets&amp;gadget=navigation&amp;id_rubrique=$id_rubrique', 'gadget-navigation');
+		AjaxSqueeze('./?exec=gadgets&amp;gadget=agenda&amp;id_rubrique=$id_rubrique', 'gadget-agenda');
+		AjaxSqueeze('./?exec=gadgets&amp;gadget=messagerie&amp;id_rubrique=$id_rubrique', 'gadget-messagerie');";
 	}
 }
 
