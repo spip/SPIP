@@ -74,7 +74,7 @@ function inc_joindre_dist($script, $args, $id=0, $intitule='', $mode='', $type='
 
 	return generer_action_auteur('joindre',
 		(intval($id) .'/' .intval($id_document) . "/$mode/$type"),
-		generer_url_ecrire($script, $args),
+		generer_url_ecrire($script, $args, true),
 		"$debut$intitule$res$dir_ftp$distant$fin",
 		" method='post' enctype='multipart/form-data' style='border: 0px; margin: 0px;'");
 }
