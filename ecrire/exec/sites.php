@@ -331,11 +331,10 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 }
  echo "\n";
 
-if ($flag_editable AND $options == 'avancees') {
-  $f = charger_fonction('editer_mot', 'inc');
-  echo $f('syndic', $id_syndic,  $cherche_mot,  $select_groupe, $flag_editable);
-}
-echo pipeline('affiche_milieu',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
+ $f = charger_fonction('editer_mot', 'inc');
+ echo $f('syndic', $id_syndic,  $cherche_mot,  $select_groupe, $flag_editable);
+
+ echo pipeline('affiche_milieu',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
 
 if ($flag_administrable) {
 	debut_cadre_relief("racine-site-24.gif");

@@ -91,7 +91,9 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
  // chargement prealable des fonctions produisant des formulaires
 
 	$dater = charger_fonction('dater', 'inc');
+	$editer_mot = charger_fonction('editer_mot', 'inc');
 	$editer_auteurs = charger_fonction('editer_auteurs', 'inc');
+	$traduction = charger_fonction('referencer_traduction', 'inc');
 
 	if ($flag_editable AND ($spip_display != 4)) 
 		$iconifier = charger_fonction('iconifier', 'inc');
@@ -100,16 +102,6 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	if ($flag_editable)
 		$instituer_article = charger_fonction('instituer_article', 'inc');
 	else $instituer_article ='';
-
-	if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non')
-		$editer_mot = charger_fonction('editer_mot', 'inc');
-	else $editer_mot = '';
-
-	if (($GLOBALS['meta']['multi_articles'] == 'oui')
-	OR (($GLOBALS['meta']['multi_rubriques'] == 'oui') 
-	AND ($GLOBALS['meta']['gerer_trad'] == 'oui'))) 
-		$traduction = charger_fonction('referencer_traduction', 'inc');
-	else $traduction ='';
 
 	$res = debut_gauche('accueil',true)
 

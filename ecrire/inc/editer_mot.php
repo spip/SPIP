@@ -16,7 +16,10 @@ include_spip('inc/actions');
 
 // http://doc.spip.org/@formulaire_mots
 function inc_editer_mot_dist($objet, $id_objet, $cherche_mot, $select_groupe, $flag) {
-	global $connect_statut, $spip_lang_rtl, $spip_lang_right, $spip_lang;
+	global $options, $connect_statut, $spip_lang_rtl, $spip_lang_right, $spip_lang;
+
+	if (!($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non'))
+		return '';
 
 	$visible = ($cherche_mot OR ($flag === 'ajax'));
 
@@ -160,7 +163,7 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 // http://doc.spip.org/@afficher_mots_cles
 function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id, $url_base, $visible)
 {
-	global $spip_lang_rtl, $spip_lang, $spip_lang_right, $connect_statut, $connect_toutes_rubriques, $options;
+	global $spip_lang_rtl, $spip_lang, $spip_lang_right, $connect_statut, $connect_toutes_rubriques;
 
 	$les_mots = array();
 	$id_groupes_vus = array();

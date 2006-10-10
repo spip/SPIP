@@ -127,11 +127,8 @@ function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $select_gr
 		}
 	}
 
-	if ($GLOBALS['meta']["articles_mots"]!='non' AND $flag_editable AND $options == 'avancees') {
-	  $f = charger_fonction('editer_mot', 'inc');
-	  echo $f('breve', $id_breve, $cherche_mot, $select_groupe, $flag_editable);
-	}
-
+	$f = charger_fonction('editer_mot', 'inc');
+	echo $f('breve', $id_breve, $cherche_mot, $select_groupe, $flag_editable);
 
 	//
 	// Langue de la breve
