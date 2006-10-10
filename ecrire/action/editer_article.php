@@ -198,7 +198,7 @@ function revisions_articles ($id_article, $new, $c = false) {
 	if ($GLOBALS['meta']['articles_modif'] != 'non') {
 		include_spip('inc/drapeau_edition');
 		if ($id_article)
-			signale_edition ($id_article, $GLOBALS['auteur_session']['id_auteur'], 'article');
+			signale_edition ($id_article, $GLOBALS['auteur_session'], 'article');
 	}
 
 	// Si on deplace l'article
