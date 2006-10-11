@@ -798,14 +798,16 @@ function aligner($letexte, $justif='') {
 	$letexte = trim($letexte);
 	if (!strlen($letexte)) return '';
 
-	// Ajouter un paragraphe au debut, et reparagrapher proprement
-	$letexte = paragrapher(
-		str_replace('</p>', '', '<p>'.$letexte));
+	// Paragrapher proprement
+	$letexte = paragrapher($letexte, true);
 
 	// Inserer les alignements
-	return str_replace(
+	if ($justif)
+		$letexte = str_replace(
 		'<p class="spip">', '<p class="spip" align="'.$justif.'">',
 		$letexte);
+
+	return $letexte;
 }
 
 // http://doc.spip.org/@justifier
