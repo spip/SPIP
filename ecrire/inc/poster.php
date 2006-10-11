@@ -30,11 +30,21 @@ function get_forums_publics($id_article=0) {
 // Cree le formulaire de modification du reglage des forums de l'article
 // http://doc.spip.org/@formulaire_poster
 function inc_poster_dist($id_article, $script, $args, $flag=false) {
-	global $spip_lang_right;
+
+	global $spip_lang_right, $options, $connect_statut;
+
+	if (!($options == "avancees" && $connect_statut=='0minirezo' && $flag))
+	  return '';
 
 	$statut_forum = get_forums_publics($id_article);
 
-	$r.= "\n\t"
+	$nb_forums = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_forum WHERE id_article=$id_article 	AND statut IN ('publie', 'off', 'prop')"));
+
+	if ($nb_forums) {
+		$r = icone_horizontale(_T('icone_suivi_forum', array('nb_forums' => $nb_forums)), generer_url_ecrire("articles_forum","id_article=$id_article"), "suivi-forum-24.gif", "", false);
+	} else 	$r = '';
+
+	$r = "\n\t"
 	. _T('info_fonctionnement_forum')
 	. "\n\t<select name='change_accepter_forum'
 		class='fondl'
@@ -56,7 +66,7 @@ function inc_poster_dist($id_article, $script, $args, $flag=false) {
 	$r .= "\n\t</select>\n";
 
 	$r .= "<div align='$spip_lang_right' id='valider_poster_$id_article'"
-	. ($flag ? '' : " class='visible_au_chargement'")
+	. " class='visible_au_chargement'"
 	. ">\n\t<input type='submit' class='fondo' style='font-size:10px' value='"
 	. _T('bouton_changer')
 	. "' /></div>\n";

@@ -17,9 +17,13 @@ include_spip('inc/actions');
 include_spip('inc/texte');
 
 // http://doc.spip.org/@formulaire_petitionner
-function inc_petitionner_dist($id_article, $script, $args, $ajax=false)
+function inc_petitionner_dist($id_article, $script, $args, $modifiable)
 {
-	global $spip_lang_right;
+	global $spip_lang_right, $options, $connect_statut;
+
+	if (!($options == "avancees" && $connect_statut=='0minirezo' && $modifiable))
+	  return '';
+
 
 	$petition = spip_fetch_array(spip_query("SELECT * FROM spip_petitions WHERE id_article=$id_article"));
 

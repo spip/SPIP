@@ -16,7 +16,10 @@ include_spip('inc/actions');
 // http://doc.spip.org/@formulaire_virtualiser
 function inc_virtualiser_dist($id_article, $flag, $virtuel, $script, $args)
 {
-	global $spip_lang_right;
+	global $spip_lang_right, $options, $connect_statut;
+
+	if (!($options == "avancees" && $connect_statut=='0minirezo' && $flag))
+	  return '';
 
 	$http = ($virtuel ? "" : "http://");
 
