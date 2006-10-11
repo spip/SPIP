@@ -156,51 +156,6 @@ function changeVisible(input, id, select, nonselect) {
 
 
 
-// pour MOzilla >= 1.7
-function verifForm() {
-	/* if (pluginlist.indexOf("SVG")!=-1)
-		document.cookie = "spip_svg_plugin=oui";
-	else
-		document.cookie = "spip_svg_plugin=non";
-	*/
-
-	//convert2math();
-
-	retrait = 16;
-	var obj=document.getElementsByTagName("input");
-	for(i=0;i<obj.length;i++) {
-		if(obj[i].className=="forml" || obj[i].className=="formo") {
-			element = obj[i];
-			if (element.offsetWidth) {
-				obj[i]["nouvelle-largeur"] = (element.offsetWidth - retrait) + "px";
-			} else {
-				obj[i]["nouvelle-largeur"] = "95%";
-			}
-		}
-	}
-	
-	var objx=document.getElementsByTagName("textarea");
-	for(i=0;i<objx.length;i++) {
-		if(objx[i].className=="forml" || objx[i].className=="formo") {
-			element = objx[i];
-			if (element.offsetWidth) {
-				objx[i]["nouvelle-largeur"] = (element.offsetWidth - retrait) + "px";
-			} else {
-				objx[i]["nouvelle-largeur"] = "95%";
-			}
-		}
-	}
-	
-	// Appliquer les modifs apres les calculs, sinon des decalages peuvent apparaitre
-	for(i=0;i<obj.length;i++) {
-		if (obj[i]["nouvelle-largeur"]) obj[i].style.width = obj[i]["nouvelle-largeur"];
-	}
-
-	for(i=0;i<objx.length;i++) {
-		if (objx[i]["nouvelle-largeur"]) objx[i].style.width = objx[i]["nouvelle-largeur"];
-	}
-}
-
 // livesearchlike...
 
 
