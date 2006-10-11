@@ -75,7 +75,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 
 	$statut_rubrique = acces_rubrique($id_rubrique);
 
-	$flag_auteur = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur LIMIT 1"));
+	$flag_auteur = spip_num_rows(auteurs_article($id_article, " id_auteur=$connect_id_auteur"));
 
 	$flag_editable = ($statut_rubrique OR ($flag_auteur AND ($statut_article == 'prepa' OR $statut_article == 'prop' OR $statut_article == 'poubelle')));
 

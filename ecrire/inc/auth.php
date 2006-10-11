@@ -51,13 +51,17 @@ function acces_article($id_article)
 
 	if (acces_rubrique($row['id_rubrique'])) return true;
 
-	$s = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur LIMIT 1"));
-
-	if (!$s) return false;
+	$s = auteurs_article($id_article, " id_auteur=$connect_id_auteur");
+	if (!spip_num_rows($s)) return false;
 
 	$s = $row['statut'];
 
 	return ($s == 'prepa' OR $s == 'prop' OR $s == 'poubelle');
+}
+
+function auteurs_article($id_article, $cond='')
+{
+	return spip_query("SELECT id_auteur FROM spip_auteurs_articles WHERE id_article=$id_article". ($cond ? " AND $cond" : ''));
 }
 
 // Retourne les droits de publication d'un auteur selon le codage suivant:

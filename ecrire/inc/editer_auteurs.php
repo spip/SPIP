@@ -17,87 +17,101 @@ include_spip('inc/actions');
 
 function inc_editer_auteurs_dist($id_article, $flag, $cherche_auteur, $ids)
 {
-  global $spip_lang_left, $spip_lang_right, $options;
+	global $options;
+
+	$les_auteurs = join(',', determiner_auteurs_article($id_article));
+	if ($flag AND $options == 'avancees') {
+		$r = spip_query("SELECT * FROM spip_auteurs WHERE " . (!$les_auteurs ? '' : "id_auteur NOT IN ($les_auteurs) AND ") . "statut!='5poubelle' AND statut!='6forum' AND statut!='nouveau' ORDER BY statut, nom");
+		$futurs = ajouter_auteurs_articles($id_article, $r);
+	} else $futurs = '';
+
+	return editer_auteurs_article($id_article, $flag, $cherche_auteur, $ids, $les_auteurs, $futurs);
+}
+
+function editer_auteurs_article($id_article, $flag, $cherche_auteur, $ids, $les_auteurs, $futurs)
+{
+	global $spip_lang_left, $spip_lang_right, $options;
 
 //
 // complement de action/editer_auteurs.php pour notifier la recherche d'auteur
 //
+	$bouton_creer_auteur =  $GLOBALS['connect_toutes_rubriques'];
 
- $bouton_creer_auteur =  $GLOBALS['connect_toutes_rubriques'];
+	if ($cherche_auteur) {
 
- if ($cherche_auteur) {
+		$reponse ="<p align='$spip_lang_left'>"
+		. debut_boite_info(true)
+		. rechercher_auteurs_articles($cherche_auteur, $ids,  $id_article);
 
-	$reponse ="<p align='$spip_lang_left'>"
-	. debut_boite_info(true)
-	. rechercher_auteurs_articles($cherche_auteur, $ids,  $id_article);
+		if ($bouton_creer_auteur) {
 
-	if ($bouton_creer_auteur) {
+			$reponse .="<div style='width: 200px;'>"
+			. icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","ajouter_id_article=$id_article&nom=" . rawurlencode($cherche_auteur). "&redirect=" . generer_url_retour("articles","id_article=$id_article")), "redacteurs-24.gif", "creer.gif", false)
+			. "</div> ";
 
-		$reponse .="<div style='width: 200px;'>"
-		. icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","ajouter_id_article=$id_article&nom=" . rawurlencode($cherche_auteur). "&redirect=" . generer_url_retour("articles","id_article=$id_article")), "redacteurs-24.gif", "creer.gif", false)
-		. "</div> ";
+			$bouton_creer_auteur = false;
+		}
 
-		$bouton_creer_auteur = false;
-	}
+		$reponse .= fin_boite_info(true)
+		. '</p>';
+	} else $reponse ='';
 
-	$reponse .= fin_boite_info(true)
-	. '</p>';
- } else $reponse ='';
-
-//
-// Afficher les auteurs
-//
-	$les_auteurs = array();
-
-	$result = spip_query("SELECT id_auteur FROM spip_auteurs_articles WHERE id_article=$id_article");
-
-	while ($row = spip_fetch_array($result))
-		$les_auteurs[]= $row['id_auteur'];
-
-	if ($les_auteurs = join(',', $les_auteurs)) 
+	if ($les_auteurs)
 		$reponse .= afficher_auteurs_articles($id_article, $flag, $les_auteurs);
 
 //
 // Ajouter un auteur
 //
 
- $res = '';
- if ($flag AND $options == 'avancees') {
+	$res = '';
+	if ($flag AND $options == 'avancees') {
 
-	if ($bouton_creer_auteur) {
+		if ($bouton_creer_auteur) {
 
-		$res = "<div style='width:170px;'><span class='verdana1'><b>"
-		. icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","ajouter_id_article=$id_article&redirect=" .generer_url_retour("articles","id_article=$id_article")), "redacteurs-24.gif", "creer.gif", false)
-		. "</b></span></div>\n";
+			$res = "<div style='width:170px;'><span class='verdana1'><b>"
+			. icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","ajouter_id_article=$id_article&redirect=" .generer_url_retour("articles","id_article=$id_article")), "redacteurs-24.gif", "creer.gif", false)
+			. "</b></span></div>\n";
+		}
+
+		$res = "<div style='float:$spip_lang_right; width:280px;position:relative;display:inline;'>"
+		. $futurs
+		."</div>\n"
+		. $res;
 	}
 
-	$res = "<div style='float:$spip_lang_right; width:280px;position:relative;display:inline;'>"
-	. ajouter_auteurs_articles($id_article, $les_auteurs, $bouton_creer_auteur)
-	."</div>\n"
-	. $res;
+	$bouton = (!$flag 
+		   ? ''
+		   : (($flag === 'ajax')
+			? bouton_block_visible("auteursarticle")
+			: bouton_block_invisible("auteursarticle")))
+	. _T('texte_auteurs')
+	. aide("artauteurs");
 
- }
+	$res = '<div>&nbsp;</div>' // pour placer le gif patienteur
+	. debut_cadre_enfonce("auteur-24.gif", true, "", $bouton)
+	. $reponse
+	.  ($flag === 'ajax' ?
+		debut_block_visible("auteursarticle") :
+		debut_block_invisible("auteursarticle"))
+	. $res
+	. fin_block()
+	. fin_cadre_enfonce(true);
 
- $bouton = (!$flag 
-	    ? ''
-	    : (($flag === 'ajax')
-	        ? bouton_block_visible("auteursarticle")
-	       : bouton_block_invisible("auteursarticle")))
- . _T('texte_auteurs')
-. aide("artauteurs");
-
- $res = '<div>&nbsp;</div>' // pour placer le gif patienteur
- . debut_cadre_enfonce("auteur-24.gif", true, "", $bouton)
- . $reponse
- .  ($flag === 'ajax' ?
-     debut_block_visible("auteursarticle") :
-     debut_block_invisible("auteursarticle"))
- . $res
- . fin_block()
- . fin_cadre_enfonce(true);
-
- return ajax_action_greffe("editer_auteurs-$id_article", $res);
+	return ajax_action_greffe("editer_auteurs-$id_article", $res);
 }
+
+function determiner_auteurs_article($id_article, $cond='')
+{
+	$les_auteurs = array();
+
+	$result = auteurs_article($id_article,$cond); // function de inc/auth
+
+	while ($row = spip_fetch_array($result))
+		$les_auteurs[]= $row['id_auteur'];
+
+	return $les_auteurs;
+}
+
 
 // http://doc.spip.org/@rechercher_auteurs_articles
 function rechercher_auteurs_articles($cherche_auteur, $ids, $id_article)
@@ -203,11 +217,9 @@ function afficher_auteurs_articles($id_article, $flag_editable, $les_auteurs)
 
 
 // http://doc.spip.org/@ajouter_auteurs_articles
-function ajouter_auteurs_articles($id_article, $les_auteurs)
+function ajouter_auteurs_articles($id_article, $query)
 {
-	$result = spip_query("SELECT * FROM spip_auteurs WHERE " . (!$les_auteurs ? '' : "id_auteur NOT IN ($les_auteurs) AND ") . "statut!='5poubelle' AND statut!='6forum' AND statut!='nouveau' ORDER BY statut, nom");
-
-	if (!$num = spip_num_rows($result)) return '';
+	if (!$num = spip_num_rows($query)) return '';
 
 	$js = "\"findObj_forcer('valider_ajouter_auteur').style.visibility='visible';\"";
 
@@ -219,7 +231,7 @@ function ajouter_auteurs_articles($id_article, $les_auteurs)
 			? ("<input type='text' name='cherche_auteur' onclick=$js CLASS='fondl' VALUE='' SIZE='20' />" .
 			  "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>\n<input type='submit' value='"._T('bouton_chercher')."' CLASS='fondo' /></span>")
 			: ("<select name='nouv_auteur' size='1' style='width:150px;' CLASS='fondl' onchange=$js>" .
-			   articles_auteur_select($result) .
+			   articles_auteur_select($query) .
 			   "</select>" .
 			   "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>" .
 			   " <input type='submit' value='"._T('bouton_ajouter')."' CLASS='fondo'>" .
