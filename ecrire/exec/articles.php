@@ -42,7 +42,7 @@ function exec_articles_dist()
 	debut_page("&laquo; ". $row['titre'] ." &raquo;", "naviguer", "articles", "", $row['id_rubrique']);
 
 	echo debut_grand_cadre(true),
-		afficher_hierarchie($id_rubrique),
+		afficher_hierarchie($row['id_rubrique']),
 		fin_grand_cadre(true),
 		$res,
 		fin_page();
@@ -386,7 +386,7 @@ function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)
 		
 		if ($champs_extra AND $extra) {
 			include_spip('inc/extra');
-			$res .= extra_affichage($extra, "articles");
+			$res .= extra_affichage($extra, "articles", true);
 		}
 	}
 	return $res;
