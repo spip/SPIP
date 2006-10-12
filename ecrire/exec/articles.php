@@ -84,8 +84,19 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	if ($GLOBALS['meta']['articles_modif'] != 'non') {
 		include_spip('inc/drapeau_edition');
 		$modif = qui_edite($id_article, 'article');
-		if ($modif['id_auteur_modif'] == $connect_id_auteur)
-			$modif = array();
+		unset($modif[$connect_id_auteur]);
+
+		if ($modif) {
+			$quand = 0;
+			foreach($modif as $duo) {
+				$auteurs[] = typo(extraire_multi(key($duo)));
+				$quand = max($quand, current($duo));
+			}
+		// format lie a la chaine de langue 'avis_article_modifie'
+		  	$modif = array(
+				'nom_auteur_modif' => join(' | ', $auteurs),
+				'date_diff' => floor((time()-$quand) / 60));
+		}
 	}
 
  // chargement prealable des fonctions produisant des formulaires
