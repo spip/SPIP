@@ -46,6 +46,35 @@ global $ajouter_id_article,
 		'data'=>'')
 	);
 
+	list($echec, $auteur) = action_auteur_infos_dist($id_auteur, $ajouter_id_article);
+// Redirection
+
+	if (!$echec AND $_SERVER['REQUEST_METHOD'] == "POST") {
+		redirige_par_entete($redirect ? rawurldecode($redirect) : generer_url_ecrire("auteurs_edit", "id_auteur=$id_auteur", true));
+}
+	exec_affiche_auteur_info_dist($id_auteur, $auteur,  $echec, $redirect, $ajouter_id_article);
+}
+
+function action_auteur_infos_dist($id_auteur, $ajouter_id_article)
+{
+global $bio,
+  $champs_extra,
+  $connect_id_auteur,
+  $connect_statut,
+  $connect_toutes_rubriques,
+  $email,
+  $id_auteur,
+  $new_login,
+  $new_pass,
+  $new_pass2,
+  $nom,
+  $nom_site_auteur,
+  $perso_activer_imessage,
+  $pgp,
+  $redirect,
+  $statut,
+  $url_site;
+
 //
 // Recuperer id_auteur ou se preparer a l'inventer
 //
@@ -54,7 +83,7 @@ global $ajouter_id_article,
 		if (!$auteur) exit;
 	} else {
 		$auteur['nom'] = filtrer_entites(_T('item_nouvel_auteur'));
-		$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
+
 		$auteur['statut'] = '1comite'; // statut par defaut a la creation
 		$auteur['source'] = 'spip';
 	}
@@ -190,26 +219,23 @@ if ($nom OR $statut) {
 
 	// Mettre a jour les fichiers .htpasswd et .htpasswd-admin
 	ecrire_acces();
-}
-// Redirection
-if (!$echec AND $_SERVER['REQUEST_METHOD'] == "POST") {
-  redirige_par_entete($redirect ? rawurldecode($redirect) : generer_url_ecrire("auteurs_edit", "id_auteur=$id_auteur", true));
-}
-exec_affiche_auteur_info_dist($id_auteur, $auteur,  $echec, $redirect, $ajouter_id_article, $onfocus);
-
+ }
+ return array($echec, $auteur);
 }
 
 // http://doc.spip.org/@exec_affiche_auteur_info_dist
-function exec_affiche_auteur_info_dist($id_auteur, $auteur,  $echec, $redirect, $ajouter_id_article, $onfocus)
+function exec_affiche_auteur_info_dist($initial, $auteur,  $echec, $redirect, $ajouter_id_article)
 {
 	global $connect_id_auteur;
+
+	$id_auteur = $auteur['id_auteur'];
 
 	if ($connect_id_auteur == $id_auteur)
 		debut_page($auteur['nom'], "auteurs", "perso");
 	else
 		debut_page($auteur['nom'],"auteurs","redacteurs");
 
-	echo "<br><br><br>";
+	echo "<br /><br /><br />";
 
 	debut_gauche();
 
@@ -242,12 +268,8 @@ function exec_affiche_auteur_info_dist($id_auteur, $auteur,  $echec, $redirect, 
 	}
 
 	debut_cadre_formulaire();
-	echo generer_url_post_ecrire('auteur_infos', (!$id_auteur ? "" : "id_auteur=$id_auteur"));
-	if ($ajouter_id_article)
-		echo "<input name='ajouter_id_article' value='$ajouter_id_article' type='hidden'>\n"
-		. "\n<input name='redirect' value='$redirect' type='hidden' />";
 
-	formulaire_auteur_infos($id_auteur, $auteur, $onfocus);
+	echo formulaire_auteur_infos($id_auteur, $auteur, $initial, $ajouter_id_article, $redirect);
 	echo "</form>";
 	echo $instituer_auteur($id_auteur, $auteur['statut'], "auteurs_edit");
 
@@ -259,66 +281,72 @@ function exec_affiche_auteur_info_dist($id_auteur, $auteur,  $echec, $redirect, 
 
 
 // http://doc.spip.org/@formulaire_auteur_infos
-function formulaire_auteur_infos($id_auteur, $auteur, $onfocus)
+function formulaire_auteur_infos($id_auteur, $auteur, $initial, $ajouter_id_article, $redirect)
 {
-  global $connect_statut, $connect_toutes_rubriques,$connect_id_auteur, $options, $champs_extra  ;
+	global $connect_statut, $connect_toutes_rubriques,$connect_id_auteur, $options, $champs_extra  ;
 
+	$onfocus = $initial ? '' : " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 
-//
-// Infos personnelles
-//
+	$corps = generer_url_post_ecrire('auteur_infos', (!$id_auteur ? "" : "id_auteur=$id_auteur"));
 
-echo "\n<div class='serif'>";
+	if ($ajouter_id_article)
+		$corps .= "<input name='ajouter_id_article' value='$ajouter_id_article' type='hidden'>\n"
+		. "\n<input name='redirect' value='$redirect' type='hidden' />";
+	$corps .= "\n<div class='serif'>"
+	. debut_cadre_relief("fiche-perso-24.gif", true, "", _T("icone_informations_personnelles"))
+	. _T('titre_cadre_signature_obligatoire')
+	. "("._T('entree_nom_pseudo').")<br />\n"
+	. "<input type='text' name='nom' class='formo' value=\""
+	. entites_html($auteur['nom'])
+	. "\" size='40' $onfocus />\n<p>"
+	. "<b>"._T('entree_adresse_email')."</b>";
 
-debut_cadre_relief("fiche-perso-24.gif", false, "", _T("icone_informations_personnelles"));
+	if ($connect_statut == "0minirezo"
+	AND ($connect_toutes_rubriques OR $auteur['statut']<>'0minirezo')) {
+		$corps .= "<br /><input type='text' name='email' class='formo' value=\"".entites_html($auteur['email'])."\" size='40' />\n<p>\n";
+	} else {
+		$corps .= "&nbsp;: <tt>".$auteur['email']."</tt>"
+		. "<br>("._T('info_reserve_admin').")\n"
+		. "\n<p>";
+	}
 
-echo _T('titre_cadre_signature_obligatoire');
-echo "("._T('entree_nom_pseudo').")<br />\n";
-echo "<input type='text' name='nom' class='formo' value=\"".entites_html($auteur['nom'])."\" size='40' $onfocus />\n<p>";
+	$corps .= "<b>"._T('entree_infos_perso')."</b><br />\n"
+	. "("._T('entree_biographie').")<br />\n"
+	. "<textarea name='bio' class='forml' rows='4' cols='40' wrap=soft>"
+	. entites_html($auteur['bio'])
+	. "</textarea>\n"
+	. debut_cadre_enfonce("site-24.gif", true, "", _T('info_site_web'))
+	. "<b>"._T('entree_nom_site')."</b><br />\n"
+	. "<input type='text' name='nom_site_auteur' class='forml' value=\""
+	. entites_html($auteur['nom_site'])
+	. "\" size='40'><P>\n"
+	. "<b>"
+	. _T('entree_url')
+	. "</b><br />\n"
+	. "<input type='text' name='url_site' class='forml' value=\""
+	. entites_html($auteur['url_site'])
+	. "\" size='40'>\n"
+	. fin_cadre_enfonce(true)
+	. "\n<p>";
 
-echo "<B>"._T('entree_adresse_email')."</B>";
+	if ($options == "avancees") {
+		$corps .= debut_cadre_enfonce("cadenas-24.gif", true, "", _T('entree_cle_pgp'))
+		. "<textarea name='pgp' class='forml' rows='4' cols='40' wrap=soft>"
+		. entites_html($auteur['pgp'])
+		. "</textarea>\n"
+		. fin_cadre_enfonce(true)
+		. "\n<p>";
+	} else {
+		$corps .= "<input type='hidden' name='pgp' value=\""
+		. entites_html($auteur['pgp'])
+		. "\" />";
+	}
 
-if ($connect_statut == "0minirezo"
-AND ($connect_toutes_rubriques OR $auteur['statut']<>'0minirezo')) {
-	echo "<br /><input type='text' name='email' class='formo' value=\"".entites_html($auteur['email'])."\" size='40' />\n<p>\n";
-}
-else {
-	echo "&nbsp;: <tt>".$auteur['email']."</tt>";
-	echo "<br>("._T('info_reserve_admin').")\n";
-	echo "\n<p>";
-}
+	$corps .= "\n<p>";
 
-echo "<B>"._T('entree_infos_perso')."</b><br />\n";
-echo "("._T('entree_biographie').")<br />\n";
-echo "<textarea name='bio' class='forml' rows='4' cols='40' wrap=soft>";
-echo entites_html($auteur['bio']);
-echo "</textarea>\n";
-
-debut_cadre_enfonce("site-24.gif", false, "", _T('info_site_web'));
-echo "<b>"._T('entree_nom_site')."</b><br />\n";
-echo "<input type='text' name='nom_site_auteur' class='forml' value=\"".entites_html($auteur['nom_site'])."\" size='40'><P>\n";
-
-echo "<b>"._T('entree_url')."</b><br />\n";
-echo "<input type='text' name='url_site' class='forml' value=\"".entites_html($auteur['url_site'])."\" size='40'>\n";
-fin_cadre_enfonce();
-	echo "\n<p>";
-
-if ($options == "avancees") {
-	debut_cadre_enfonce("cadenas-24.gif", false, "", _T('entree_cle_pgp'));
-	echo "<textarea name='pgp' class='forml' rows='4' cols='40' wrap=soft>";
-	echo entites_html($auteur['pgp']);
-	echo "</textarea>\n";
-	fin_cadre_enfonce();
-	echo "\n<p>";
-}
-else {
-	echo "<input type='hidden' name='pgp' value=\"".entites_html($auteur['pgp'])."\" />";
-}
-
-echo "\n<p>";
 	if ($champs_extra) {
 		include_spip('inc/extra');
-		extra_saisie($auteur['extra'], 'auteurs', $auteur['statut']);
+		$corps .= extra_saisie($auteur['extra'], 'auteurs', $auteur['statut'],'', false);
 	}
 
 //
@@ -343,25 +371,25 @@ else {
 	$edit_pass = false;
 }
 
-	debut_cadre_relief("base-24.gif");
+	$corps .= debut_cadre_relief("base-24.gif", true);
 
 // Avertissement en cas de modifs de ses propres donnees
 	if (($edit_login OR $edit_pass) AND $connect_id_auteur == $id_auteur) {
-		debut_cadre_enfonce();
-		echo http_img_pack("warning.gif", _T('info_avertissement'), "width='48' height='48' align='right'");
-		echo "<b>"._T('texte_login_precaution')."</b>\n";
-		fin_cadre_enfonce();
-		echo "\n<p>";
+		$corps .= debut_cadre_enfonce(true)
+		.  http_img_pack("warning.gif", _T('info_avertissement'), "width='48' height='48' align='right'")
+		. "<b>"._T('texte_login_precaution')."</b>\n"
+		. fin_cadre_enfonce(true)
+		. "\n<p>";
 	}
 
 // Un redacteur n'a pas le droit de modifier son login !
 	if ($edit_login) {
-		echo "<b>"._T('item_login')."</b> ";
-		echo "<font color='red'>("._T('texte_plus_trois_car').")</font> :<br />\n";
-		echo "<input type='text' name='new_login' class='formo' value=\"".entites_html($auteur['login'])."\" size='40' /><p>\n";
+		$corps .= "<b>"._T('item_login')."</b> "
+		. "<font color='red'>("._T('texte_plus_trois_car').")</font> :<br />\n"
+		. "<input type='text' name='new_login' class='formo' value=\"".entites_html($auteur['login'])."\" size='40' /><p>\n";
 	} else {
-		echo "<fieldset style='padding:5'><legend><B>"._T('item_login')."</B><br />\n</legend><br><b>".$auteur['login']."</b> ";
-		echo "<i> ("._T('info_non_modifiable').")</i>\n<p>";
+		$corps .= "<fieldset style='padding:5'><legend><B>"._T('item_login')."</B><br />\n</legend><br><b>".$auteur['login']."</b> "
+		. "<i> ("._T('info_non_modifiable').")</i>\n<p>";
 	}
 
 // On ne peut modifier le mot de passe en cas de source externe (par exemple LDAP)
@@ -371,9 +399,9 @@ else {
 		. "<input type='password' name='new_pass' class='formo' value=\"\" size='40' /><br />\n"
 		. _T('info_confirmer_passe')."<br />\n"
 		. "<input type='password' name='new_pass2' class='formo' value=\"\" size='40'><p>\n";
-		echo $res;
+		$corps .= $res;
 	}
-	fin_cadre_relief();
+	$corps .= fin_cadre_relief(true);
 
 	$res = "<p />";
 
@@ -391,9 +419,11 @@ else {
 			'id_auteur'=>$id_auteur),
 			'data'=>''));
 
-	echo $res;
-	echo "</div>";
-	fin_cadre_relief();
+	$corps .= $res
+	. "</div>"
+	. fin_cadre_relief(true);
+
+	return $corps;
 }
 
 //
