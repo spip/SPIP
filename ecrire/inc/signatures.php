@@ -18,7 +18,7 @@ charger_generer_url();
 // http://doc.spip.org/@controle_signatures
 function controle_signatures($script, $id, $debut, $where, $order, $limit='') {
 	global $couleur_foncee;
-	
+
 	$where = tronconne_signatures($script, $id, $debut, $where, $limit);
 	$limit = (!$limit AND !$debut) ? '' : (($debut ? "$debut," : "") . $limit);
 #	($limit . ($debut ? " OFFSET $debut" : "")); #PG
@@ -107,7 +107,7 @@ function tronconne_signatures($script, $id_article, $debut, $where, $limit=10)
 	}
 	else $args = "";
 
-	$res = spip_query("SELECT date_time FROM spip_signatures WHERE $where ORDER BY date_time DESC");
+	$res = spip_query("SELECT date_time FROM spip_signatures " . ($where ? "WHERE $where" : '') . " ORDER BY date_time DESC");
 
 	while ($row = spip_fetch_array($res)) {
 		if($c++%$limit==0) {	
