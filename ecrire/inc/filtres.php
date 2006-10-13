@@ -21,6 +21,7 @@ include_spip('inc/charsets');
 $GLOBALS['spip_matrice']['image_valeurs_trans'] = '';
 $GLOBALS['spip_matrice']['image_reduire'] = '';
 $GLOBALS['spip_matrice']['image_reduire_par'] = '';
+$GLOBALS['spip_matrice']['image_recadre'] = '';
 $GLOBALS['spip_matrice']['image_alpha'] = '';
 $GLOBALS['spip_matrice']['image_flip_vertical'] = '';
 $GLOBALS['spip_matrice']['image_flip_horizontal'] = '';
