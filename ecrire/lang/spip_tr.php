@@ -273,6 +273,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'forum_acces_refuse' => 'Art&#305;k bu forumlara eri&#351;iminiz yok.',
 'forum_attention_dix_caracteres' => '<b>Dikkat&nbsp;!</b> iletiniz on karakterden k&#305;sa.',
 'forum_attention_trois_caracteres' => '<b>Dikkat&nbsp;!</b> ba&#351;l&#305;&#287;&#305;n&#305;z &uuml;&ccedil; karakterden k&#305;sa.',
+'forum_attention_trop_caracteres' => '<b>Dikkart&nbsp;!</b> mesaj&#305;n&#305;z &ccedil;ok uzun (@compte@ caract&egrave;res)&nbsp;: kaydedilebilmesi i&ccedil;in @max@ karakteri a&#351;mamal&#305;.',
 'forum_avez_selectionne' => '&#350;unu se&ccedil;tiniz&nbsp;:',
 'forum_cliquer_retour' => 'Devam etmek i&ccedil;in <a href=\'@retour_forum@\'>buraya t&#305;klay&#305;n&#305;z</a>.',
 'forum_forum' => 'forum',
