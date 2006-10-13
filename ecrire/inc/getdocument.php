@@ -530,8 +530,8 @@ function liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash,
 		join("</tt></li>\n<li><tt>", $valables) .
 		"</tt></li></ol>".
 		"<div>&nbsp;</div>" .
-		"<div><input type='radio' name='sousaction4' value='4'>".
-		_L('les_deux').
+		"<div><input type='checkbox' name='sousaction4' value='4'>".
+		_T('les_deux').
 		"</div>".
 		"<div style='text-align: right;'><input class='fondo' style='font-size: 9px;' type='submit' value='".
 		_T('bouton_valider').
