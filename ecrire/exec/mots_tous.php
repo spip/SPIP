@@ -129,9 +129,10 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 
 	// Preliminaire: confirmation de suppression d'un mot lie à qqch
 	// (cf fin de afficher_groupe_mots_boucle executee a l'appel precedent)
-	if ($conf_mot  AND $son_groupe==$id_groupe)
+	if ($conf_mot  AND $son_groupe==$id_groupe) {
+		include_spip('inc/grouper_mots');
 		echo confirmer_mot($conf_mot, $id_groupe, $groupe);
-
+	}
 	if ($groupe) {
 	  	$f = charger_fonction('grouper_mots', 'inc');
 		echo $f($id_groupe, $groupe);
