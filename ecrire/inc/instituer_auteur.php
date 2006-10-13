@@ -27,7 +27,9 @@ function inc_instituer_auteur_dist($id_auteur, $statut, $url_self)
 {
 	global $connect_toutes_rubriques, $connect_id_auteur, $connect_statut, $spip_lang_right, $spip_lang;
 					 
-	if ($connect_statut != "0minirezo") return;
+	if (($connect_statut != '0minirezo')
+	OR (!($id_auteur = intval($id_auteur))))
+		return '';
 
 	$result_admin = spip_query("SELECT rubriques.id_rubrique, " . creer_objet_multi ("titre", $spip_lang) . " FROM spip_auteurs_rubriques AS lien, spip_rubriques AS rubriques WHERE lien.id_auteur=$id_auteur AND lien.id_rubrique=rubriques.id_rubrique ORDER BY multi");
 

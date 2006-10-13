@@ -319,6 +319,7 @@ ecrire/action/instituer_langue_rubrique.php -text
 ecrire/action/instituer_syndic.php -text
 ecrire/action/joindre.php -text
 ecrire/action/legender.php -text
+ecrire/action/legender_auteur.php -text
 ecrire/action/logout.php -text
 ecrire/action/petitionner.php -text
 ecrire/action/poster.php -text
