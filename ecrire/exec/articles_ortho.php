@@ -90,7 +90,6 @@ $ortho = "";
 function debut_html($titre = "", $rubrique="") {
 	include_spip('inc/headers');
 
-	global $browser_verifForm;
 	$nom_site_spip = entites_html(textebrut(typo($GLOBALS['meta']["nom_site"])));
 	if (!$nom_site_spip) $nom_site_spip=  _T('info_mon_site_spip');
 	$titre = textebrut(typo($titre));
@@ -100,13 +99,17 @@ function debut_html($titre = "", $rubrique="") {
 	  html_lang_attributes(),
 	  "<head>\n" .
 	  "<title>[$nom_site_spip] $titre</title>\n";
-	if (strpos($rubrique, 'script>'))
-	  echo  $rubrique, "\n";
-	echo envoi_link($nom_site_spip);
+	echo f_jQuery("");
+	echo  $rubrique, "\n";
+	echo envoi_link($nom_site_spip),
+  http_script("$(document).ready(function(){
+    verifForm();
+    if(jQuery.browser.msie) document.getElementById('ortho-content').focus();
+  });");
+
 	// Fin des entetes
 	echo "\n</head>\n";
-	echo "<body ",  _ATTRIBUTES_BODY, "
-	 onLoad=\"$browser_verifForm\">";
+	echo "<body ",  _ATTRIBUTES_BODY, ">";
 }
 
 
@@ -132,9 +135,6 @@ $code_ie = "<!--[if IE]>
 		padding: 12px;
 	}
 </style>
-<script type=\"text/javascript\">
-	onload = function() { document.getElementById('ortho-content').focus(); }
-</script>
 <![endif]-->";
 
 debut_html(_T('ortho_orthographe').' &laquo;'.$titre.'&raquo;', $code_ie);
