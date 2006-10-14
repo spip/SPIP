@@ -162,9 +162,13 @@ function verifForm(racine) {
   .each(function(){
   	var jField = $(this);
     var w = jField.width();
-    w -= (parseInt(jField.css("borderLeftWidth"))+parseInt(jField.css("borderRightWidth"))+
-  	parseInt(jField.css("paddingLeft"))+parseInt(jField.css("paddingRight")));
-  	jField.width(w+"px");
+    if(!w) {
+      jField.width("95%");
+    } else {
+      w -= (parseInt(jField.css("borderLeftWidth"))+parseInt(jField.css("borderRightWidth"))+
+    	parseInt(jField.css("paddingLeft"))+parseInt(jField.css("paddingRight")));
+    	jField.width(w+"px");
+    }
   });
 }
 
@@ -239,8 +243,8 @@ function AjaxSqueezeNode(trig, noeud, f)
 	var u = '';
 	
 	// retour std si pas precise: affecter ce noeud avec ce retour
-	if (!f) callback = function(r) { noeud.innerHTML = r; triggerAjaxLoad(noeud);}
-	else callback = function(r) { f(r); triggerAjaxLoad(noeud);}
+	if (!f) callback = function(r) { noeud.innerHTML = r; verifForm(noeud); triggerAjaxLoad(noeud);}
+	else callback = function(r) { f(r); verifForm(noeud); triggerAjaxLoad(noeud);}
 	
 	if (typeof(trig) == 'string') {
 		i = trig.split('?');
