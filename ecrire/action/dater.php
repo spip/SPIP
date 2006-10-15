@@ -24,15 +24,20 @@ function action_dater_dist() {
 	if (!preg_match(",^\W*(\d+)$,", $arg, $r)) {
 		spip_log("action_dater_dist $arg pas compris");
 	}
-	else {
-		include_spip('inc/date');
-		if (!isset($_REQUEST['avec_redac']))
-			spip_query("UPDATE spip_articles SET date='" . format_mysql_date(_request('annee'), _request('mois'), _request('jour'), _request('heure'), _request('minute')) ."'	WHERE id_article=$r[1]");
-		else {
+	else action_dater_post($r);
+}
 
-		  if (_request('avec_redac') == 'non')
-				$annee_redac = $mois_redac = $jour_redac = $heure_redac = $minute_redac = 0;
-			else  {
+function action_dater_post($r)
+{
+	include_spip('inc/date');
+	if (!isset($_REQUEST['avec_redac']))
+
+		spip_query("UPDATE spip_articles SET date='" . format_mysql_date(_request('annee'), _request('mois'), _request('jour'), _request('heure'), _request('minute')) ."'	WHERE id_article=$r[1]");
+
+	else {
+		if (_request('avec_redac') == 'non')
+			$annee_redac = $mois_redac = $jour_redac = $heure_redac = $minute_redac = 0;
+		else  {
 				$annee_redac = _request('annee_redac');
 				$mois_redac = _request('mois_redac');
 				$jour_redac = _request('jour_redac');
@@ -41,13 +46,12 @@ function action_dater_dist() {
 
 				if ($annee_redac<>'' AND $annee_redac < 1001) 
 					$annee_redac += 9000;
-			}
-
-			spip_query("UPDATE spip_articles SET date_redac='" . format_mysql_date($annee_redac, $mois_redac, $jour_redac, $heure_redac, $minute_redac) ."' WHERE id_article=$r[1]");
-
 		}
-		include_spip('inc/rubriques');
-		calculer_rubriques();
+
+		spip_query("UPDATE spip_articles SET date_redac='" . format_mysql_date($annee_redac, $mois_redac, $jour_redac, $heure_redac, $minute_redac) ."' WHERE id_article=$r[1]");
+
 	}
+	include_spip('inc/rubriques');
+	calculer_rubriques();
 }
 ?>

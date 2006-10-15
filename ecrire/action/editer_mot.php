@@ -20,16 +20,20 @@ function action_editer_mot_dist() {
 	$var_f();
 
 	$arg = _request('arg');
+	// arg = l'eventuel mot a supprimer pour d'eventuelles Row SQL
+	if (!preg_match(',^(\d*)\D(-?\d*)\W(\w*)\W(\w*)\W(\w*)\W?(\d*)$,', $arg, $r)) 
+		spip_log("action editer_mot: $arg pas compris");
+	else action_editer_mot_post($r);
+}
+
+function action_editer_mot_post($r)
+{
 	$redirect = _request('redirect');
 	$cherche_mot = _request('cherche_mot');
 	$select_groupe = _request('select_groupe');
 
-	// arg = l'eventuel mot a supprimer pour d'eventuelles Row SQL
-	if (!preg_match(',^(\d*)\D(-?\d*)\W(\w*)\W(\w*)\W(\w*)\W?(\d*)$,', $arg, $r)) 
-		spip_log("action editer_mot: $arg pas compris");
-	else {
-		list($x, $id_objet, $id_mot, $table, $table_id, $objet, $nouv_mot) = $r;
-		if ($id_mot) {
+	list($x, $id_objet, $id_mot, $table, $table_id, $objet, $nouv_mot) = $r;
+	if ($id_mot) {
 			if ($objet)
 			  // desassocier un/des mot d'un objet precis
 				spip_query("DELETE FROM spip_mots_$table WHERE $table_id=$id_objet" . (($id_mot <= 0) ? "" : " AND id_mot=$id_mot"));
@@ -41,8 +45,8 @@ function action_editer_mot_dist() {
 			spip_query("DELETE FROM spip_mots_syndic WHERE id_mot=$id_mot");
 			spip_query("DELETE FROM spip_mots_forum WHERE id_mot=$id_mot");
 			}
-		}
-		if ($nouv_mot ? $nouv_mot : ($nouv_mot = _request('nouv_mot'))) {
+	}
+	if ($nouv_mot ? $nouv_mot : ($nouv_mot = _request('nouv_mot'))) {
 		  // recopie de:
 		  // inserer_mot("spip_mots_$table", $table_id, $id_objet, $nouv_mot);
 			$result = spip_num_rows(spip_query("SELECT id_mot FROM spip_mots_$table WHERE id_mot=$nouv_mot AND $table_id=$id_objet"));
@@ -54,7 +58,6 @@ function action_editer_mot_dist() {
 			include_spip("inc/indexation");
 			marquer_indexer("spip_$table", $id_objet);
 		}
-	}
 
 	$redirect = rawurldecode($redirect);
 
