@@ -20,6 +20,7 @@ $compteur_block = 0;
 if (_request('var_ajaxcharset'))
 $compteur_block = rand(1,2500)*500;	// astuce idiote pour que les blocs ahah n'aient pas les memes numeros de triangle que la page principale (sinon le triangle d'un bloc importe par ahah agit sur un autre triangle... vivement jquery...).
 
+// http://doc.spip.org/@block_parfois_visible
 function block_parfois_visible($nom, $invite, $masque, $style='', $visible=false)
 {
 	if (!$GLOBALS['browser_layer']) return '';
@@ -46,6 +47,7 @@ function block_parfois_visible($nom, $invite, $masque, $style='', $visible=false
 }
 
 
+// http://doc.spip.org/@renomme_block
 function renomme_block($nom_block)
 {
 	global $numero_block, $compteur_block;

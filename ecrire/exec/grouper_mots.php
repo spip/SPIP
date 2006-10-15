@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@exec_grouper_mots_dist
 function exec_grouper_mots_dist()
 {
 	$id_groupe = intval(_request('id_groupe'));

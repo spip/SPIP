@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/texte');
 
+// http://doc.spip.org/@exec_documenter_dist
 function exec_documenter_dist()
 {
 	$type = _request("type");

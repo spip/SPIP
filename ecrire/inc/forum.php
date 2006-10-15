@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 
+// http://doc.spip.org/@affiche_navigation_forum
 function affiche_navigation_forum($script, $args, $debut, $i, $pack, $ancre, $query)
 {
 	$nav = ($i <=0) ? '' : ("<a href='" . generer_url_ecrire($script, $args) ."'>0</a> ... |\n");

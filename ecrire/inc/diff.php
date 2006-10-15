@@ -134,13 +134,13 @@ class Diff {
 	var $diff;
 	var $fuzzy;
 
-	// http://doc.spip.org/@Diff
+// http://doc.spip.org/@Diff
 	function Diff($diff) {
 		$this->diff = $diff;
 		$this->fuzzy = true;
 	}
 
-	// http://doc.spip.org/@comparer
+// http://doc.spip.org/@comparer
 	function comparer($new, $old) {
 		$paras = $this->diff->segmenter($new);
 		$paras_old = $this->diff->segmenter($old);
@@ -217,49 +217,49 @@ class Diff {
 class DiffTexte {
 	var $r;
 
-	// http://doc.spip.org/@DiffTexte
+// http://doc.spip.org/@DiffTexte
 	function DiffTexte() {
 		$this->r = "";
 	}
 
-	// http://doc.spip.org/@_diff
+// http://doc.spip.org/@_diff
 	function _diff($p, $p_old) {
 		$diff = new Diff(new DiffPara);
 		return $diff->comparer($p, $p_old);
 	}
 
-	// http://doc.spip.org/@fuzzy
+// http://doc.spip.org/@fuzzy
 	function fuzzy() {
 		return true;
 	}
-	// http://doc.spip.org/@segmenter
+// http://doc.spip.org/@segmenter
 	function segmenter($texte) {
 		return separer_paras($texte);
 	}
 
 	// NB :  rem=\"diff-\" est un signal pour la fonction "afficher_para_modifies"
-	// http://doc.spip.org/@ajouter
+// http://doc.spip.org/@ajouter
 	function ajouter($p) {
 		$p = trim($p);
 		$this->r .= "\n\n\n<div class=\"diff-para-ajoute\" title=\""._T('diff_para_ajoute')."\">".$p."</div rem=\"diff-\">";
 	}
-	// http://doc.spip.org/@supprimer
+// http://doc.spip.org/@supprimer
 	function supprimer($p_old) {
 		$p_old = trim($p_old);
 		$this->r .= "\n\n\n<div class=\"diff-para-supprime\" title=\""._T('diff_para_supprime')."\">".$p_old."</div rem=\"diff-\">";
 	}
-	// http://doc.spip.org/@deplacer
+// http://doc.spip.org/@deplacer
 	function deplacer($p, $p_old) {
 		$this->r .= "\n\n\n<div class=\"diff-para-deplace\" title=\""._T('diff_para_deplace')."\">";
 		$this->r .= trim($this->_diff($p, $p_old));
 		$this->r .= "</div rem=\"diff-\">";
 	}
-	// http://doc.spip.org/@comparer
+// http://doc.spip.org/@comparer
 	function comparer($p, $p_old) {
 		$this->r .= "\n\n\n".$this->_diff($p, $p_old);
 	}
 	
-	// http://doc.spip.org/@resultat
+// http://doc.spip.org/@resultat
 	function resultat() {
 		return $this->r;
 	}
@@ -269,22 +269,22 @@ class DiffTexte {
 class DiffPara {
 	var $r;
 
-	// http://doc.spip.org/@DiffPara
+// http://doc.spip.org/@DiffPara
 	function DiffPara() {
 		$this->r = "";
 	}
 
-	// http://doc.spip.org/@_diff
+// http://doc.spip.org/@_diff
 	function _diff($p, $p_old) {
 		$diff = new Diff(new DiffPhrase);
 		return $diff->comparer($p, $p_old);
 	}
 
-	// http://doc.spip.org/@fuzzy
+// http://doc.spip.org/@fuzzy
 	function fuzzy() {
 		return true;
 	}
-	// http://doc.spip.org/@segmenter
+// http://doc.spip.org/@segmenter
 	function segmenter($texte) {
 		$paras = array();
 		$texte = trim($texte);
@@ -297,24 +297,24 @@ class DiffPara {
 		return $paras;
 	}
 
-	// http://doc.spip.org/@ajouter
+// http://doc.spip.org/@ajouter
 	function ajouter($p) {
 		$this->r .= "<span class=\"diff-ajoute\" title=\""._T('diff_texte_ajoute')."\">".$p."</span rem=\"diff-\">";
 	}
-	// http://doc.spip.org/@supprimer
+// http://doc.spip.org/@supprimer
 	function supprimer($p_old) {
 		$this->r .= "<span class=\"diff-supprime\" title=\""._T('diff_texte_supprime')."\">".$p_old."</span rem=\"diff-\">";
 	}
-	// http://doc.spip.org/@deplacer
+// http://doc.spip.org/@deplacer
 	function deplacer($p, $p_old) {
 		$this->r .= "<span class=\"diff-deplace\" title=\""._T('diff_texte_deplace')."\">".$this->_diff($p, $p_old)."</span rem=\"diff-\">";
 	}
-	// http://doc.spip.org/@comparer
+// http://doc.spip.org/@comparer
 	function comparer($p, $p_old) {
 		$this->r .= $this->_diff($p, $p_old);
 	}
 	
-	// http://doc.spip.org/@resultat
+// http://doc.spip.org/@resultat
 	function resultat() {
 		return $this->r;
 	}
@@ -324,16 +324,16 @@ class DiffPara {
 class DiffPhrase {
 	var $r;
 
-	// http://doc.spip.org/@DiffPhrase
+// http://doc.spip.org/@DiffPhrase
 	function DiffPhrase() {
 		$this->r = "";
 	}
 
-	// http://doc.spip.org/@fuzzy
+// http://doc.spip.org/@fuzzy
 	function fuzzy() {
 		return false;
 	}
-	// http://doc.spip.org/@segmenter
+// http://doc.spip.org/@segmenter
 	function segmenter($texte) {
 		$paras = array();
 		if (test_pcre_unicode()) {
@@ -380,20 +380,20 @@ class DiffPhrase {
 		return $paras;
 	}
 
-	// http://doc.spip.org/@ajouter
+// http://doc.spip.org/@ajouter
 	function ajouter($p) {
 		$this->r .= "<span class=\"diff-ajoute\" title=\""._T('diff_texte_ajoute')."\">".$p."</span rem=\"diff-\"> ";
 	}
-	// http://doc.spip.org/@supprimer
+// http://doc.spip.org/@supprimer
 	function supprimer($p_old) {
 		$this->r .= "<span class=\"diff-supprime\" title=\""._T('diff_texte_supprime')."\">".$p_old."</span rem=\"diff-\"> ";
 	}
-	// http://doc.spip.org/@comparer
+// http://doc.spip.org/@comparer
 	function comparer($p, $p_old) {
 		$this->r .= $p;
 	}
 
-	// http://doc.spip.org/@resultat
+// http://doc.spip.org/@resultat
 	function resultat() {
 		return $this->r;
 	}

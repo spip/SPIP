@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@exec_discuter_dist
 function exec_discuter_dist()
 {
 	$debut = _request('debut');

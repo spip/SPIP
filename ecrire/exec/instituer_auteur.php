@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@exec_instituer_auteur_dist
 function exec_instituer_auteur_dist()
 {
 	$script = _request('script');

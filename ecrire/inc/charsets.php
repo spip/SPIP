@@ -693,6 +693,7 @@ function spip_substr($c, $start=0, $length = NULL) {
 }
 
 // version manuelle de substr utf8, pour php vieux et/ou mal installe
+// http://doc.spip.org/@spip_substr_manuelle
 function spip_substr_manuelle($c, $start, $length = NULL) {
 
 	// Cas pathologique

@@ -653,6 +653,7 @@ function find_in_path ($filename) {
 }
 
 
+// http://doc.spip.org/@find_all_in_path
 function find_all_in_path($dir,$pattern){
 	$liste_fichiers=array();
 	$maxfiles = 10000;

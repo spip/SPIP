@@ -72,7 +72,7 @@ if (!$refus AND !$auth_login) {
   else
     {
       if (!function_exists('mime_content_type')) {
-	// http://doc.spip.org/@mime_content_type
+// http://doc.spip.org/@mime_content_type
 	function mime_content_type($f) {preg_match("/\.(\w+)/",$f,$r); return $r[1];}
  }
       $ct = mime_content_type($file);

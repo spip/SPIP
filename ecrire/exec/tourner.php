@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@exec_tourner_dist
 function exec_tourner_dist()
 {
 	global $id_document, $script, $id, $type, $ancre;

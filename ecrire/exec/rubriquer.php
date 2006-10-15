@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 # petit moteur de recherche sur les rubriques
 
+// http://doc.spip.org/@exec_rubriquer_dist
 function exec_rubriquer_dist()
 {
 	global $id;

@@ -21,6 +21,7 @@ include_spip('inc/date');
 // En mode Ajax pour eviter de recharger toute la page ou il se trouve
 // (surtout si c'est un portfolio)
 
+// http://doc.spip.org/@inc_legender_dist
 function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre) {
 
 	// + securite (avec le script exec=legender ca vient de dehors)
@@ -123,6 +124,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre)
 }
 
 
+// http://doc.spip.org/@vignette_formulaire_legender
 function vignette_formulaire_legender($id_document, $document, $script, $type, $id, $ancre)
 {
 	$id_vignette = $document['id_vignette'];
@@ -180,6 +182,7 @@ function formulaire_taille($document) {
 	}
 }
 
+// http://doc.spip.org/@date_formulaire_legender
 function date_formulaire_legender($date, $id_document) {
 
 	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)){

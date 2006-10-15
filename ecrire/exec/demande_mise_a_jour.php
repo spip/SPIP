@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-// http://doc.spip.org/@demande_maj_version
+// http://doc.spip.org/@exec_demande_mise_a_jour_dist
 function exec_demande_mise_a_jour_dist() {
 	include_spip('inc/presentation');
 	debut_page();

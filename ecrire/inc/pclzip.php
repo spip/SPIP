@@ -183,6 +183,7 @@
   //   Note that no real action is taken, if the archive does not exist it is not
   //   created. Use create() for that.
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@PclZip
   function PclZip($p_zipname)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, 'PclZip::PclZip', "zipname=$p_zipname");
@@ -242,6 +243,7 @@
   //   The list of the added files, with a status of the add action.
   //   (see PclZip::listContent() for list entry format)
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@create
   function create($p_filelist)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, 'PclZip::create', "filelist='$p_filelist', ...");
@@ -428,6 +430,7 @@
   //   The list of the added files, with a status of the add action.
   //   (see PclZip::listContent() for list entry format)
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@add
   function add($p_filelist)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, 'PclZip::add', "filelist='$p_filelist', ...");
@@ -619,6 +622,7 @@
   //   0 on an unrecoverable failure,
   //   The list of the files in the archive.
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@listContent
   function listContent()
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, 'PclZip::listContent', "");
@@ -680,6 +684,7 @@
   //   The list of the extracted files, with a status of the action.
   //   (see PclZip::listContent() for list entry format)
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@extract
   function extract()
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::extract", "");
@@ -841,6 +846,7 @@
   //   (see PclZip::listContent() for list entry format)
   // --------------------------------------------------------------------------------
   //function extractByIndex($p_index, options...)
+// http://doc.spip.org/@extractByIndex
   function extractByIndex($p_index)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::extractByIndex", "index='$p_index', ...");
@@ -997,6 +1003,7 @@
   //   The list of the files which are still present in the archive.
   //   (see PclZip::listContent() for list entry format)
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@delete
   function delete()
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::delete", "");
@@ -1062,6 +1069,7 @@
   //   ***** Deprecated *****
   //   delete(PCLZIP_OPT_BY_INDEX, $p_index) should be prefered.
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@deleteByIndex
   function deleteByIndex($p_index)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::deleteByIndex", "index='$p_index'");
@@ -1088,6 +1096,7 @@
   //   0 on failure,
   //   An array with the archive properties.
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@properties
   function properties()
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::properties", "");
@@ -1167,6 +1176,7 @@
   //   1 on success.
   //   0 or a negative value on error (error code).
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@duplicate
   function duplicate($p_archive)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::duplicate", "");
@@ -1230,6 +1240,7 @@
   //   1 on success,
   //   0 or negative values on error (see below).
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@merge
   function merge($p_archive_to_add)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::merge", "");
@@ -1286,6 +1297,7 @@
   // Description :
   // Parameters :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@errorCode
   function errorCode()
   {
     if (PCLZIP_ERROR_EXTERNAL == 1) {
@@ -1302,6 +1314,7 @@
   // Description :
   // Parameters :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@errorName
   function errorName($p_with_code=false)
   {
     $v_name = array ( PCLZIP_ERR_NO_ERROR => 'PCLZIP_ERR_NO_ERROR',
@@ -1348,6 +1361,7 @@
   // Description :
   // Parameters :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@errorInfo
   function errorInfo($p_full=false)
   {
     if (PCLZIP_ERROR_EXTERNAL == 1) {
@@ -1387,6 +1401,7 @@
   //   true on success,
   //   false on error, the error code is set.
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privCheckFormat
   function privCheckFormat($p_level=0)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privCheckFormat", "");
@@ -1444,6 +1459,7 @@
   //   1 on success.
   //   0 on failure.
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privParseOptions
   function privParseOptions(&$p_options_list, $p_size, &$v_result_list, $v_requested_options=false)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privParseOptions", "");
@@ -1825,6 +1841,7 @@
   //   1 on success.
   //   0 on failure.
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privFileDescrParseAtt
   function privFileDescrParseAtt(&$p_file_list, &$p_filedescr, $v_options, $v_requested_options=false)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privFileDescrParseAtt", "");
@@ -1940,6 +1957,7 @@
   //   1 on success.
   //   0 on failure.
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privFileDescrExpand
   function privFileDescrExpand(&$p_filedescr_list, &$p_options)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privFileDescrExpand", "");
@@ -2063,6 +2081,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privCreate
   function privCreate($p_filedescr_list, &$p_result_list, &$p_options)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privCreate", "list");
@@ -2101,6 +2120,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privAdd
   function privAdd($p_filedescr_list, &$p_result_list, &$p_options)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privAdd", "list");
@@ -2297,6 +2317,7 @@
   // Description :
   // Parameters :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privOpenFd
   function privOpenFd($p_mode)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privOpenFd", 'mode='.$p_mode);
@@ -2336,6 +2357,7 @@
   // Description :
   // Parameters :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privCloseFd
   function privCloseFd()
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privCloseFd", "");
@@ -2365,6 +2387,7 @@
   // Return Values :
   // --------------------------------------------------------------------------------
 //  function privAddList($p_list, &$p_result_list, $p_add_dir, $p_remove_dir, $p_remove_all_dir, &$p_options)
+// http://doc.spip.org/@privAddList
   function privAddList($p_filedescr_list, &$p_result_list, &$p_options)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privAddList", "list");
@@ -2434,6 +2457,7 @@
   //   $p_result_list : list of added files with their properties (specially the status field)
   // Return Values :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privAddFileList
   function privAddFileList($p_filedescr_list, &$p_result_list, &$p_options)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privAddFileList", "filedescr_list");
@@ -2499,6 +2523,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privAddFile
   function privAddFile($p_filedescr, &$p_header, &$p_options)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privAddFile", "filename='".$p_filedescr['filename']."'");
@@ -2726,6 +2751,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privCalculateStoredFilename
   function privCalculateStoredFilename(&$p_filedescr, &$p_options)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privCalculateStoredFilename", "filename='".$p_filedescr['filename']."'");
@@ -2841,6 +2867,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privWriteFileHeader
   function privWriteFileHeader(&$p_header)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privWriteFileHeader", 'file="'.$p_header['filename'].'", stored as "'.$p_header['stored_filename'].'"');
@@ -2890,6 +2917,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privWriteCentralFileHeader
   function privWriteCentralFileHeader(&$p_header)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privWriteCentralFileHeader", 'file="'.$p_header['filename'].'", stored as "'.$p_header['stored_filename'].'"');
@@ -2946,6 +2974,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privWriteCentralHeader
   function privWriteCentralHeader($p_nb_entries, $p_size, $p_offset, $p_comment)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privWriteCentralHeader", 'nb_entries='.$p_nb_entries.', size='.$p_size.', offset='.$p_offset.', comment="'.$p_comment.'"');
@@ -2977,6 +3006,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privList
   function privList(&$p_list)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privList", "list");
@@ -3074,6 +3104,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privConvertHeader2FileInfo
   function privConvertHeader2FileInfo($p_header, &$p_info)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privConvertHeader2FileInfo", "Filename='".$p_header['filename']."'");
@@ -3112,6 +3143,7 @@
   // Return Values :
   //   1 on success,0 or less on error (see error code list)
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privExtractByRule
   function privExtractByRule(&$p_file_list, $p_path, $p_remove_path, $p_remove_all_path, &$p_options)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privExtractByRule", "path='$p_path', remove_path='$p_remove_path', remove_all_path='".($p_remove_all_path?'true':'false')."'");
@@ -3494,6 +3526,7 @@
   // 1 : ... ?
   // PCLZIP_ERR_USER_ABORTED(2) : User ask for extraction stop in callback
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privExtractFile
   function privExtractFile(&$p_entry, $p_path, $p_remove_path, $p_remove_all_path, &$p_options)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, 'PclZip::privExtractFile', "path='$p_path', remove_path='$p_remove_path', remove_all_path='".($p_remove_all_path?'true':'false')."'");
@@ -3896,6 +3929,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privExtractFileInOutput
   function privExtractFileInOutput(&$p_entry, &$p_options)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, 'PclZip::privExtractFileInOutput', "");
@@ -4021,6 +4055,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privExtractFileAsString
   function privExtractFileAsString(&$p_entry, &$p_string)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, 'PclZip::privExtractFileAsString', "p_entry['filename']='".$p_entry['filename']."'");
@@ -4087,6 +4122,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privReadFileHeader
   function privReadFileHeader(&$p_header)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privReadFileHeader", "");
@@ -4214,6 +4250,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privReadCentralFileHeader
   function privReadCentralFileHeader(&$p_header)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privReadCentralFileHeader", "");
@@ -4349,6 +4386,7 @@
   //   1 on success,
   //   0 on error;
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privCheckFileHeaders
   function privCheckFileHeaders(&$p_local_header, &$p_central_header)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privCheckFileHeaders", "");
@@ -4399,6 +4437,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privReadEndCentralDir
   function privReadEndCentralDir(&$p_central_dir)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privReadEndCentralDir", "");
@@ -4584,6 +4623,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privDeleteByRule
   function privDeleteByRule(&$p_result_list, &$p_options)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privDeleteByRule", "");
@@ -4943,6 +4983,7 @@
   //    1 : OK
   //   -1 : Unable to create directory
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privDirCheck
   function privDirCheck($p_dir, $p_is_dir=false)
   {
     $v_result = 1;
@@ -5006,6 +5047,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privMerge
   function privMerge(&$p_archive_to_add)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privMerge", "archive='".$p_archive_to_add->zipname."'");
@@ -5215,6 +5257,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privDuplicate
   function privDuplicate($p_archive_filename)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privDuplicate", "archive_filename='$p_archive_filename'");
@@ -5284,6 +5327,7 @@
   // Description :
   // Parameters :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privErrorLog
   function privErrorLog($p_error_code=0, $p_error_string='')
   {
     if (PCLZIP_ERROR_EXTERNAL == 1) {
@@ -5301,6 +5345,7 @@
   // Description :
   // Parameters :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privErrorReset
   function privErrorReset()
   {
     if (PCLZIP_ERROR_EXTERNAL == 1) {
@@ -5319,6 +5364,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privDecrypt
   function privDecrypt($p_encryption_header, &$p_buffer, $p_size, $p_crc)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, 'PclZip::privDecrypt', "size=".$p_size."");
@@ -5342,6 +5388,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privDisableMagicQuotes
   function privDisableMagicQuotes()
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, 'PclZip::privDisableMagicQuotes', "");
@@ -5384,6 +5431,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@privSwapBackMagicQuotes
   function privSwapBackMagicQuotes()
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, 'PclZip::privSwapBackMagicQuotes', "");
@@ -5426,6 +5474,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@PclZipUtilPathReduction
   function PclZipUtilPathReduction($p_dir)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZipUtilPathReduction", "dir='$p_dir'");
@@ -5510,6 +5559,7 @@
   //   1 if $p_path is inside directory $p_dir
   //   2 if $p_path is exactly the same as $p_dir
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@PclZipUtilPathInclusion
   function PclZipUtilPathInclusion($p_dir, $p_path)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZipUtilPathInclusion", "dir='$p_dir', path='$p_path'");
@@ -5595,6 +5645,7 @@
   //             3 : src & dest gzip
   // Return Values :
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@PclZipUtilCopyBlock
   function PclZipUtilCopyBlock($p_src, $p_dest, $p_size, $p_mode=0)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZipUtilCopyBlock", "size=$p_size, mode=$p_mode");
@@ -5667,6 +5718,7 @@
   // Return Values :
   //   1 on success, 0 on failure.
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@PclZipUtilRename
   function PclZipUtilRename($p_src, $p_dest)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZipUtilRename", "source=$p_src, destination=$p_dest");
@@ -5702,6 +5754,7 @@
   // Return Values :
   //   The option text value.
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@PclZipUtilOptionText
   function PclZipUtilOptionText($p_option)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZipUtilOptionText", "option='".$p_option."'");
@@ -5736,6 +5789,7 @@
   // Return Values :
   //   The path translated.
   // --------------------------------------------------------------------------------
+// http://doc.spip.org/@PclZipUtilTranslateWinPath
   function PclZipUtilTranslateWinPath($p_path, $p_remove_disk_letter=true)
   {
     if (stristr(php_uname(), 'windows')) {

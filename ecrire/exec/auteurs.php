@@ -42,6 +42,7 @@ function exec_auteurs_dist()
 	echo "<div id='auteurs'>", $res, "</div>", fin_page();
 }
 
+// http://doc.spip.org/@lettres_d_auteurs
 function lettres_d_auteurs($query, $debut, $max_par_page, $tri)
 {
 	$auteurs = $lettre = array();
@@ -70,7 +71,7 @@ function lettres_d_auteurs($query, $debut, $max_par_page, $tri)
 }
 
 
-// http://doc.spip.org/@affiche_auteurs
+// http://doc.spip.org/@bandeau_auteurs
 function bandeau_auteurs($auteurs, $debut, $tri, $visiteurs, $max_par_page, $nombre_auteurs)
 {
 	global $options, $spip_lang_right, $connect_id_auteur,   $connect_statut,   $connect_toutes_rubriques;
@@ -131,6 +132,7 @@ function bandeau_auteurs($auteurs, $debut, $tri, $visiteurs, $max_par_page, $nom
 	echo "\n<br />";
 }
 
+// http://doc.spip.org/@auteurs_tranches
 function auteurs_tranches($auteurs, $debut, $lettre, $tri, $visiteurs, $max_par_page, $nombre_auteurs)
 {
 	global $options, $spip_lang_right;
@@ -222,6 +224,7 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $visiteurs, $max_par_
 	. fin_cadre_relief(true);
 }
 
+// http://doc.spip.org/@auteurs_href
 function auteurs_href($clic, $args='', $att='')
 {
 	$h = generer_url_ecrire('auteurs', $args);

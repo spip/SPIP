@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 
 
-// http://doc.spip.org/@formulaire_mots
+// http://doc.spip.org/@inc_editer_mot_dist
 function inc_editer_mot_dist($objet, $id_objet, $cherche_mot, $select_groupe, $flag) {
 	global $options, $connect_statut, $spip_lang_rtl, $spip_lang_right, $spip_lang;
 

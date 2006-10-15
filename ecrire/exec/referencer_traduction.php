@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@exec_referencer_traduction_dist
 function exec_referencer_traduction_dist()
 {
 	$id_article = intval(_request('id_article'));

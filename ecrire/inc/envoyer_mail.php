@@ -83,7 +83,7 @@ function nettoyer_caracteres_mail($t) {
 	return $t;
 }
 
-// http://doc.spip.org/@envoyer_mail
+// http://doc.spip.org/@inc_envoyer_mail_dist
 function inc_envoyer_mail_dist($email, $sujet, $texte, $from = "", $headers = "") {
 	global $hebergeur, $queue_mails;
 	include_spip('inc/charsets');

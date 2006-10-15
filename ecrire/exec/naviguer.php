@@ -370,6 +370,7 @@ if ($relief) {
 	bouton_supprimer_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable);
 }
 
+// http://doc.spip.org/@naviguer_doc
 function naviguer_doc ($id, $type = "article", $script, $flag_editable) {
 	global $spip_lang_left;
 

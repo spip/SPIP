@@ -46,6 +46,7 @@ function formulaire_discuter($query, $total, $debut, $total_afficher, $script, $
 	. $nav;
 }
 
+// http://doc.spip.org/@inc_discuter_dist
 function inc_discuter_dist($id_article, $flag, $debut=1)
 {
 	$debut = intval($debut);

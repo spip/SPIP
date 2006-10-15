@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('base/abstract_sql');
 include_spip('inc/actions');
 
-// http://doc.spip.org/@action_ajouter_dist
+// http://doc.spip.org/@action_editer_auteurs_dist
 function action_editer_auteurs_dist() {
 	
 	$var_f = charger_fonction('controler_action_auteur', 'inc');
@@ -53,6 +53,7 @@ function action_editer_auteurs_dist() {
 	} else spip_log("action_editer_auteur: $arg pas compris");
 }
 
+// http://doc.spip.org/@supprimer_auteur_et_rediriger
 function supprimer_auteur_et_rediriger($id_article, $id_auteur, $redirect)
 {
 	spip_query("DELETE FROM spip_auteurs_articles WHERE id_auteur=$id_auteur AND id_article=$id_article");

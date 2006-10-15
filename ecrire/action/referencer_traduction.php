@@ -48,6 +48,7 @@ function action_referencer_traduction_dist() {
 	}
 }
 
+// http://doc.spip.org/@instituer_langue_article
 function instituer_langue_article($id_article, $id_rubrique) {
 
 	$changer_lang = _request('changer_lang');

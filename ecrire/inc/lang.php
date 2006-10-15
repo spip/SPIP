@@ -485,6 +485,7 @@ function init_langues() {
 	}
 }
 
+// http://doc.spip.org/@html_lang_attributes
 function html_lang_attributes()
 {
 	return  "<html lang='"

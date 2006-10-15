@@ -112,7 +112,7 @@ function defautElement($parser, $data)
   $contenu[$depth] .= $data;
 }
 
- // http://doc.spip.org/@translate_entities
+// http://doc.spip.org/@translate_entities
  function translate_entities($data)
  {
    return

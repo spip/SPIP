@@ -161,13 +161,14 @@ function spip_action_joindre6($path, $mode, $type, $id, $id_document,$hash, $red
 
 // Zip avec les 2 options a la fois
 
+// http://doc.spip.org/@spip_action_joindre4
 function spip_action_joindre4($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs)
 {
 	joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
 	return spip_action_joindre5($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
 }
 
-// http://doc.spip.org/@spip_action_joindre6
+// http://doc.spip.org/@joindre_deballes
 function joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs)
 {
 	    define('_tmp_dir', creer_repertoire_documents($hash));

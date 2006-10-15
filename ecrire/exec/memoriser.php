@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@exec_memoriser_dist
 function exec_memoriser_dist()
 {
 	global $flag_ob,$connect_id_auteur, $id_ajax_fonc;

@@ -56,6 +56,7 @@ if (!isset($EXPORT_tables_noexport)){
 }
 $GLOBALS['flag_ob_flush'] = function_exists('ob_flush');
 
+// http://doc.spip.org/@export_nom_fichier_dump
 function export_nom_fichier_dump($dir,$gz=true){
 	$archive = _SPIP_DUMP;
 	if ($gz) $archive .= '.gz';

@@ -281,6 +281,7 @@ function exec_controle_forum_dist()
 	}
 }
 
+// http://doc.spip.org/@affiche_tranche_forum
 function affiche_tranche_forum($debut, $i, $pack, $query)
 {
 

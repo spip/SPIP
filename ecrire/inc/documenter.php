@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // => Nouveau : au lieu de les ignorer, on affiche desormais avec un fond gris
 // les documents et images inclus dans le texte.
 
-// http://doc.spip.org/@afficher_portfolio
+// http://doc.spip.org/@inc_documenter_dist
 function inc_documenter_dist(
 	$doc,		# tableau des documents ou numero de l'objet attachant
 	$type = "article",	# article ou rubrique ?

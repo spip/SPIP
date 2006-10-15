@@ -184,6 +184,7 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 	}
 }
 
+// http://doc.spip.org/@ajax_action_declencheur
 function ajax_action_declencheur($request, $noeud, $fct_ajax='')
 {
 	return "'return AjaxSqueeze("
@@ -195,6 +196,7 @@ function ajax_action_declencheur($request, $noeud, $fct_ajax='')
 	. ")'";
 }
 
+// http://doc.spip.org/@ajax_action_greffe
 function ajax_action_greffe($idom, $corps)
 {
 	return _request('var_ajaxcharset')
@@ -202,6 +204,7 @@ function ajax_action_greffe($idom, $corps)
 	: "\n<div id='$idom'$atts>$corps</div>";
 }
 
+// http://doc.spip.org/@ajax_retour
 function ajax_retour($corps)
 {
 	$c = $GLOBALS['meta']["charset"];

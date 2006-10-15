@@ -55,7 +55,7 @@ function exec_auteur_infos_dist()
 }
 
 
-// http://doc.spip.org/@exec_affiche_auteur_info_dist
+// http://doc.spip.org/@affiche_auteur_info_dist
 function affiche_auteur_info_dist($initial, $auteur,  $echec, $redirect, $ajouter_id_article)
 {
 	global $connect_id_auteur;

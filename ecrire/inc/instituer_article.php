@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@inc_instituer_article_dist
 function inc_instituer_article_dist($id_article, $statut=-1)
 {
 	if ($statut == -1) return demande_publication($id_article);

@@ -19,6 +19,7 @@ include_spip('base/abstract_sql');
 // Construire un formulaire pour telecharger un fichier
 //
 
+// http://doc.spip.org/@inc_joindre_dist
 function inc_joindre_dist($script, $args, $id=0, $intitule='', $mode='', $type='', $ancre='', $id_document=0) {
 	global $spip_lang_right;
 	$vignette_de_doc = ($mode == 'vignette' AND $id_document>0);

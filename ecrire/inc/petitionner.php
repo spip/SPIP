@@ -16,7 +16,7 @@ include_spip('inc/presentation');
 include_spip('inc/actions');
 include_spip('inc/texte');
 
-// http://doc.spip.org/@formulaire_petitionner
+// http://doc.spip.org/@inc_petitionner_dist
 function inc_petitionner_dist($id_article, $script, $args, $modifiable)
 {
 	global $spip_lang_right, $options, $connect_statut;

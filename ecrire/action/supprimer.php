@@ -64,6 +64,7 @@ function action_supprimer_rubrique($id_rubrique)
 
 }
 
+// http://doc.spip.org/@supprimer_document_et_vignette
 function supprimer_document_et_vignette($arg)
 {
 	$result = spip_query("SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$arg");

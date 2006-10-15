@@ -170,6 +170,7 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 echo fin_page();
 }
 
+// http://doc.spip.org/@confirmer_mot
 function confirmer_mot ($conf_mot, $son_groupe, $total)
 {
 	$row = spip_fetch_array(spip_query("SELECT * FROM spip_mots WHERE id_mot=$conf_mot"));

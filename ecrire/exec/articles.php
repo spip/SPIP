@@ -48,6 +48,7 @@ function exec_articles_dist()
 		fin_page();
 }
 
+// http://doc.spip.org/@articles_affiche
 function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot,  $select_groupe, $trad_err)
 {
 	global $spip_display, $spip_lang_left, $spip_lang_right, $dir_lang;
@@ -175,6 +176,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	. fin_cadre_relief(true);
 }
 
+// http://doc.spip.org/@articles_documents
 function articles_documents($flag_editable, $type, $id)
 {
 	global $spip_lang_left;
