@@ -61,7 +61,7 @@ function inc_selectionner_dist ($sel, $idom="",$fonction="", $exclus=0, $aff_rac
 	. "<td style='vertical-align: bottom;'>"
 	. "\n<div class='arial11 petite-racine'\nonclick=\""
 	. $onClick
-	. "'\nonClick=\""
+	. "\"\nondbclick=\""
 	. $ondbClick
 	. $onClick
 	. "\">\n<div class='pashighlight'>"
