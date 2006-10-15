@@ -64,9 +64,10 @@ function inc_plonger_dist($id_rubrique, $idom="", $list=array(), $col = 1, $excl
 # ce lien provoque la selection (directe) de la rubrique cliquee
 # et l'affichage de son titre dans le bandeau
 			. "\"\nondblclick=\""
-			. "return aff_selection_titre(this."
+			. "aff_selection_titre(this."
 			. $acces
-			. "firstChild.firstChild.nodeValue,$id,$args);"
+			. "firstChild.firstChild.nodeValue,$id);"
+			. "return aff_selection_provisoire($id,$args);"
 			. "\">$titre</a>";
 		}
 	}

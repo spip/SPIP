@@ -31,19 +31,16 @@ function inc_selectionner_dist ($sel, $idom="",$fonction="", $exclus=0, $aff_rac
 	if ($aff_racine) {
 		$onClick = " aff_selection('rubrique','$idom', '0');";
 
-		$ondbClick = "findObj_forcer('id_parent').value=0;"
-		.  "findObj_forcer('titreparent').value='"
-			. strtr(
-				str_replace("'", "&#8217;",
+		$titre = strtr(str_replace("'", "&#8217;",
 				str_replace('"', "&#34;",
 					textebrut(_T('info_racine_site')))),
-				"\n\r", "  ")."';"
-		. "findObj_forcer('selection_rubrique').style.display='none';";
+				"\n\r", "  ");
+		$ondbClick = "aff_selection_titre('$titre',0);";
 	}
 
 	$idom1 = $idom . "_champ_recherche";
 	$idom2 = $idom . "_principal";
-	$idom3 = $idom . "_selection";
+	$idom3 = $idom . "_selection"; // utiliser par aff_selection
 	$idom4 = $idom . "_col_1";
 	$idom5 = 'img_' . $idom4;
 	$idom6 = $idom."_fonc";
@@ -64,7 +61,7 @@ function inc_selectionner_dist ($sel, $idom="",$fonction="", $exclus=0, $aff_rac
 	. "<td style='vertical-align: bottom;'>"
 	. "\n<div class='arial11 petite-racine'\nonclick=\""
 	. $onClick
-	. "\"\nondblclick=\""
+	. "'\nonClick=\""
 	. $ondbClick
 	. $onClick
 	. "\">\n<div class='pashighlight'>"

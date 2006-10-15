@@ -79,22 +79,15 @@ function exec_rechercher_dist()
 					  htmlentities($rac) .
 					  "','$id_rubrique');";
 	
-					$ondbClick = "findObj('id_parent').value=$id_rubrique;";
-					# et l'affichage de son titre dans le bandeau
-					$ondbClick .= "findObj('titreparent').value='"
-					. strtr(
-						str_replace("'", "&#8217;",
-						str_replace('"', "&#34;",
-							textebrut($titre))),
-						"\n\r", "  ")."';";
-				$ondbClick .= "findObj('selection_rubrique').style.display='none';";
+					$btitre = strtr(str_replace("'", "&#8217;",
+								    str_replace('"', "&#34;", textebrut($titre))),
+							"\n\r", "  ");
 
-	
+					$ondbClick = "aff_selection_titre('$btitre',$id_rubrique;);";
 					$ret .= "<div class='pashighlight' onClick=\"changerhighlight(this); $onClick\" ondblclick=\"$ondbClick$onClick\"><div class='arial11 petite-rubrique'$style>";
 					$ret .= "&nbsp; $titre";
 					$ret .= "</div></div>";
 			}
-				
 		}
 		if (!$ret)
 			$ret =  "<div style='padding: 5px; color: red;'><b>"

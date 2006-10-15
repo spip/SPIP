@@ -112,8 +112,7 @@ function changerhighlight (couche) {
 }
 
 function aff_selection (type, rac, id) {
-//	alert (type + " - " + rac + " - " + id);
-	
+
 	findObj_forcer(rac+"_selection").style.display = "none";
 	
 	charger_id_url("./?exec=informer&type="+type+"&id="+id+"&rac="+rac, rac+"_selection");
@@ -121,12 +120,11 @@ function aff_selection (type, rac, id) {
 
 // selecteur de rubrique et affichage de son titre dans le bandeau
 
-function aff_selection_titre(titre, id_rubrique, racine, url, col, sens)
+function aff_selection_titre(titre, id_rubrique)
 {
 	findObj_forcer('titreparent').value=titre;
 	findObj_forcer('id_parent').value=id_rubrique;
 	findObj_forcer('selection_rubrique').style.display='none';
-	return aff_selection_provisoire(id_rubrique, racine, url, col, sens);
 }
 
 function aff_selection_provisoire(id_rubrique, racine, url, col, sens)
@@ -284,6 +282,14 @@ function charger_id_url(myUrl, myField, jjscript)
 		retour_id_url('', Field, jjscript);
 		return true; // url vide, c'est un self complet
 	} else {
+		charger_node_url(myUrl, Field, jjscript, findObj_forcer('img_' + myField));
+	}
+}
+
+// La suite
+
+function charger_node_url(myUrl, Field, jjscript, img) 
+{
 	  var r = url_chargee[myUrl];
 	// disponible en cache ?
 	  if (r) {
@@ -291,7 +297,6 @@ function charger_id_url(myUrl, myField, jjscript)
 			triggerAjaxLoad(Field);
 			return false; 
 	  } else {
-			var img = findObj_forcer('img_' + myField);
 			if (img) img.style.visibility = "visible";
 			return AjaxSqueezeNode(myUrl,
 				'',
@@ -301,7 +306,6 @@ function charger_id_url(myUrl, myField, jjscript)
 					retour_id_url(r, Field, jjscript);
 				})
 		}
-	}
 }
 
 function retour_id_url(r, Field, jjscript)
@@ -320,7 +324,19 @@ function ajax_double(id, id2, r)
 	noeud.style.visibility = "visible";
 }
 
-// ne sert que pour selecteur_rubrique_ajax() dans inc/chercher_rubrique.php
+function charger_node_url_si_vide(url, noeud, gifanime, jjscript) {
+
+	if  (noeud.style.display !='none') {
+		noeud.style.display='none';}
+	else {if (noeud.innerHTML != "") {
+		noeud.style.visibility = "visible";
+		noeud.style.display = "block";
+	} else {
+		charger_node_url(url, noeud,'',gifanime);
+	      }
+	}
+}
+
 function charger_id_url_si_vide (myUrl, myField, jjscript) {
 	var Field = findObj_forcer(myField); // selects the given element
 	if (!Field) return;
