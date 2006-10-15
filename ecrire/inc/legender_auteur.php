@@ -14,25 +14,51 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 // http://doc.spip.org/@inc_legender_auteur
-function inc_legender_auteur($id_auteur, $auteur, $initial, $ajouter_id_article, $redirect)
+function inc_legender_auteur_dist($id_auteur, $auteur, $mode, $echec='', $redirect='')
 {
-	global $connect_statut, $connect_toutes_rubriques,$connect_id_auteur, $options, $champs_extra  ;
+	$corps = (($mode < 0) OR !statut_modifiable_auteur($id_auteur, $auteur))
+	? legender_auteur_voir($auteur, $redirect)
+	: legender_auteur_saisir($id_auteur, $auteur, $mode, $echec, $redirect);
+	
+	return  $redirect ? $corps :
+	  ajax_action_greffe("legender_auteur-$id_auteur", $corps);
+
+}
+
+function legender_auteur_saisir($id_auteur, $auteur, $mode, $echec='', $redirect='')
+{
+	global $options, $connect_statut, $connect_id_auteur, $connect_toutes_rubriques;
+	$corps = '';
+
+	if ($echec){
+
+		foreach (split('@@@',$echec) as $e)
+			$corps .= '<p>' . _T($e) . "</p>\n";
+		
+		$corps = debut_cadre_relief('', true)
+		.  http_img_pack("warning.gif", _T('info_avertissement'), "width='48' height='48' align='left'")
+		.  "<div style='color: red; left-margin: 5px'>"
+		. $corps
+		. "<p>"
+		.  _T('info_recommencer')
+		.  "</p></div>\n"
+		. fin_cadre_relief(true)
+		.  "\n<p>";
+	}
 
 	$setmail = ($connect_statut == "0minirezo"
 		AND ($connect_toutes_rubriques OR $auteur['statut']<>'0minirezo'));
 
 	$setconnecte = ($connect_id_auteur == $id_auteur);
 
-	$corps .= "\n<div class='serif'>"
-	. debut_cadre_relief("fiche-perso-24.gif", true, "", _T("icone_informations_personnelles"))
-	. _T('titre_cadre_signature_obligatoire')
+	$corps .= _T('titre_cadre_signature_obligatoire')
 	. "("
 	. _T('entree_nom_pseudo')
 	. ")<br />\n"
 	. "<input type='text' name='nom' class='formo' size='40' value=\""
 	. entites_html($auteur['nom'])
 	. "\" "
-	. (!$initial ? '' : ' onfocus="if(!antifocus){this.value=\'\';antifocus=true;}"')
+	. (!$mode ? '' : ' onfocus="if(!antifocus){this.value=\'\';antifocus=true;}"')
 	. " />\n<p>"
 	. "<b>"._T('entree_adresse_email')."</b>";
 
@@ -56,13 +82,13 @@ function inc_legender_auteur($id_auteur, $auteur, $initial, $ajouter_id_article,
 	. "<b>"._T('entree_nom_site')."</b><br />\n"
 	. "<input type='text' name='nom_site_auteur' class='forml' value=\""
 	. entites_html($auteur['nom_site'])
-	. "\" size='40'><P>\n"
+	. "\" size='40' /><p>\n"
 	. "<b>"
 	. _T('entree_url')
 	. "</b><br />\n"
 	. "<input type='text' name='url_site' class='forml' value=\""
 	. entites_html($auteur['url_site'])
-	. "\" size='40'>\n"
+	. "\" size='40' />\n"
 	. fin_cadre_enfonce(true)
 	. "\n<p>";
 
@@ -150,14 +176,18 @@ else {
 		array('args' => array(
 			'exec'=>'auteur_infos',
 			'id_auteur'=>$id_auteur),
-			'data'=>''))
+		      'data'=>''));
 
+	$arg = intval($id_auteur) . '/';
+
+	return '<div>&nbsp;</div>'
+	. "\n<div class='serif'>"
+	. debut_cadre_relief("fiche-perso-24.gif", true, "", _T("icone_informations_personnelles"))
+	. ($redirect
+	     ? generer_action_auteur('legender_auteur', $arg, $redirect, $corps)
+	   : ajax_action_auteur('legender_auteur', $arg, 'auteur_infos', "id_auteur=$id_auteur&initial=-1&retour=$redirect", $corps))
 	. fin_cadre_relief(true)
-	. "</div>";
-
-	$arg = intval($id_auteur) . '/' . intval($ajouter_id_article);
-
-	return generer_action_auteur('legender_auteur', $arg, $redirect, $corps);
+	. '</div>';
 }
 
 //
@@ -184,12 +214,86 @@ function apparait_auteur_infos($id_auteur, $auteur)
 		. "</label> ";
 	}
 
-	return debut_cadre_relief("messagerie-24.gif", true, "", _T('info_liste_redacteurs_connectes'))
+	return 	debut_cadre_formulaire('', true)
+	. debut_cadre_relief("messagerie-24.gif", true, "", _T('info_liste_redacteurs_connectes'))
 	. "\n<div>"
 	. _T('texte_auteur_messagerie')
 	. "</div>"
 	. $res
 	. fin_cadre_relief(true)
-	. "<p />";
+	. "<p />"
+	. fin_cadre_formulaire(true);
 }
+
+
+// http://doc.spip.org/@table_auteurs_edit
+function legender_auteur_voir($auteur, $redirect)
+{
+	global $connect_toutes_rubriques, $connect_statut, $connect_id_auteur, $champs_extra, $options,$spip_lang_right ;
+
+	$id_auteur=$auteur['id_auteur'];
+	$nom=$auteur['nom'];
+	$bio=$auteur['bio'];
+	$email=$auteur['email'];
+	$nom_site_auteur=$auteur['nom_site'];
+	$url_site=$auteur['url_site'];
+	$statut=$auteur['statut'];
+	$pgp=$auteur["pgp"];
+	$extra = $auteur["extra"];
+
+	$res .= "<table width='100%' cellpadding='0' border='0' cellspacing='0'>"
+	. "<tr>"
+	. "<td valign='top' width='100%'>"
+	. gros_titre($nom,'',false)
+	. "<div>&nbsp;</div>";
+
+	if (strlen($email) > 2)
+		$res .= "<div>"._T('email_2')." <b><a href='mailto:$email'>$email</a></b></div>";
+
+	if ($url_site) {
+		if (!$nom_site_auteur) $nom_site_auteur = _T('info_site');
+		$res .= propre(_T('info_site_2')." [{{".$nom_site_auteur."}}->".$url_site."]");
+	}
+		
+	$res .= "</td>"
+	.  "<td>";
+	
+	if (statut_modifiable_auteur($id_auteur, $auteur)) {
+		$ancre = "legender_auteur-$id_auteur";
+		$clic = _T("admin_modifier_auteur");
+		$h = generer_url_ecrire("auteur_infos","id_auteur=$id_auteur&initial=0");
+		if (($_COOKIE['spip_accepte_ajax'] == 1 ) AND !$redirect) {
+		  $evt .= "\nonclick=" . ajax_action_declencheur("\"$h\"",$ancre);
+		  $h = "<a\nhref='$h$a'$evt>$clic</a>";
+		}
+	  $res .= icone($clic, $h, "redacteurs-24.gif", "edit.gif", '', '',true);
+	}
+	$res .= "</td></tr></table>";
+
+	if (strlen($bio) > 0) { $res .= "<div>".propre("<quote>".$bio."</quote>")."</div>"; }
+	if (strlen($pgp) > 0) { $res .= "<div>".propre("PGP:<cadre>".$pgp."</cadre>")."</div>"; }
+
+	if ($champs_extra AND $extra) {
+		include_spip('inc/extra');
+		$res .= extra_affichage($extra, "auteurs", true);
+	}
+
+	return $res;
+
+}
+
+// http://doc.spip.org/@statut_modifiable_auteur
+function statut_modifiable_auteur($id_auteur, $auteur)
+{
+	global $connect_statut, $connect_toutes_rubriques, $connect_id_auteur;
+
+// on peut se changer soi-meme
+	  return  (($connect_id_auteur == $id_auteur) ||
+  // sinon on doit etre admin
+  // et pas admin restreint pour changer un autre admin ou creer qq
+		(($connect_statut == "0minirezo") &&
+		 ($connect_toutes_rubriques OR 
+		  ($id_auteur AND ($auteur['statut'] != "0minirezo")))));
+}
+
 ?>

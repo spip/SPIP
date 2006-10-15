@@ -297,18 +297,16 @@ function afficher_n_auteurs($auteurs) {
 	$res = '';
 	foreach ($auteurs as $row) {
 
-		$res .= "\n<tr style='background-color: #eeeeee;'>";
+		$nom = typo($row['nom']);
 
-	// statut auteur
-		$res .= "\n<td style='border-top: 1px solid #cccccc;'>";
-		$res .= bonhomme_statut($row);
-
-	// nom
-		$res .= "</td><td class='verdana11' style='border-top: 1px solid #cccccc;'>"
+		$res .= "\n<tr style='background-color: #eeeeee;'>"
+		. "\n<td style='border-top: 1px solid #cccccc;'>"
+		. bonhomme_statut($row)
+		. "</td><td class='verdana11' style='border-top: 1px solid #cccccc;'>"
 		. "<a href='"
 		. generer_url_ecrire('auteurs_edit',"id_auteur=".$row['id_auteur'])
 		."'>"
-		. typo($row['nom'])
+		. ($nom ? $nom : ("<span style='color: red'>" . _T('texte_vide') . '</span>'))
 		. '</a>';
 
 		if (isset($row['restreint']) AND $row['restreint'])

@@ -201,7 +201,7 @@ function ajax_action_greffe($idom, $corps)
 {
 	return _request('var_ajaxcharset')
 	? $corps
-	: "\n<div id='$idom'$atts>$corps</div>";
+	: "\n<div id='$idom'>$corps\n<!-- $idom --></div>\n";
 }
 
 // http://doc.spip.org/@ajax_retour

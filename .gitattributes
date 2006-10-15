@@ -394,6 +394,7 @@ ecrire/exec/install.php -text
 ecrire/exec/instituer_auteur.php -text
 ecrire/exec/lang_raccourcis.php -text
 ecrire/exec/legender.php -text
+ecrire/exec/legender_auteur.php -text
 ecrire/exec/memoriser.php -text
 ecrire/exec/message.php -text
 ecrire/exec/message_edit.php -text

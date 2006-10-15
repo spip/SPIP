@@ -38,29 +38,15 @@ function exec_auteur_infos_dist()
 
 	$auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
 
-// on peut se changer soi-meme
-	if  (!($auteur AND 
-	       (($connect_id_auteur == $id_auteur) ||
-  // sinon on doit etre admin
-  // et si on est admin restreint on ne peut pas changer un autre admin
-		(($connect_statut == "0minirezo") &&
-		 ($connect_toutes_rubriques OR 
-		  ($auteur['statut'] != "0minirezo")))))) {
+	if (!$auteur) {
+                gros_titre(_T('info_acces_interdit'));
+                exit;
+        }
 
-		gros_titre(_T('info_acces_interdit'));
-		exit;
-	}
+	$legender_auteur = charger_fonction('legender_auteur', 'inc');
+	$legender_auteur = $legender_auteur($id_auteur, $auteur, $initial, $echec, $redirect);
 
-	affiche_auteur_info_dist($initial, $auteur,  $echec, $redirect, $ajouter_id_article);
-}
-
-
-// http://doc.spip.org/@affiche_auteur_info_dist
-function affiche_auteur_info_dist($initial, $auteur,  $echec, $redirect, $ajouter_id_article)
-{
-	global $connect_id_auteur;
-
-	$id_auteur = $auteur['id_auteur'];
+	if (_request('var_ajaxcharset')) ajax_retour($legender_auteur);
 
 	if ($connect_id_auteur == $id_auteur)
 		debut_page($auteur['nom'], "auteurs", "perso");
@@ -71,9 +57,7 @@ function affiche_auteur_info_dist($initial, $auteur,  $echec, $redirect, $ajoute
 
 	debut_gauche();
 
-  // charger ça tout de suite pour diposer de la fonction ci-dessous
-	$instituer_auteur = charger_fonction('instituer_auteur', 'inc');
-	cadre_auteur_infos($id_auteur, $auteur);
+	echo cadre_auteur_infos($id_auteur, $auteur);
 
 	echo pipeline('affiche_gauche',
 		array('args' => array(
@@ -82,6 +66,15 @@ function affiche_auteur_info_dist($initial, $auteur,  $echec, $redirect, $ajoute
 		'data'=>'')
 	);
 
+  // charger ça tout de suite pour diposer de la fonction ci-dessous
+	$instituer_auteur = charger_fonction('instituer_auteur', 'inc');
+	$instituer_auteur = $instituer_auteur($id_auteur, $auteur['statut'], "auteurs_edit");
+
+	if (statut_modifiable_auteur($id_auteur, $auteur) AND ($spip_display != 4)) {
+		$iconifier = charger_fonction('iconifier', 'inc');
+		$iconifier = $iconifier('id_auteur', $id_auteur, 'auteur_infos');
+	} else $iconifier ='';
+
 	creer_colonne_droite();
 	echo pipeline('affiche_droite',
 		array('args' => array(
@@ -89,29 +82,70 @@ function affiche_auteur_info_dist($initial, $auteur,  $echec, $redirect, $ajoute
 			'id_auteur'=>$id_auteur),
 		'data'=>'')
 	);
+
+	echo $iconifier, 
+
 	debut_droite();
 
-	if ($echec){
-		$m = '';
-		foreach (split('%%%',$echec) as $e)
-			$m .= '<p>' . _T($e) . "</p>\n";
-		debut_cadre_relief();
-		echo http_img_pack("warning.gif", _T('info_avertissement'), "width='48' height='48' align='left'"),
-		  "<div style='color: red; left-margin: 5px'>",$m,"<p>",_T('info_recommencer'),"</p></div>\n";
-		fin_cadre_relief();
-		echo "\n<p>";
-	}
+	echo 
+	  debut_cadre_relief("redacteurs-24.gif", true),
+	  $legender_auteur, $instituer_auteur;
 
-	$legender_auteur = charger_fonction('legender_auteur', 'inc');
-	debut_cadre_formulaire();
+	auteurs_interventions($id_auteur, $auteur['statut']);
 
-	echo $legender_auteur($id_auteur, $auteur, $initial, $ajouter_id_article, $redirect);
-
-	echo $instituer_auteur($id_auteur, $auteur['statut'], "auteurs_edit");
-
-	fin_cadre_formulaire();
-
-	echo fin_page();
+	echo fin_cadre_relief(true),
+	  fin_page();
 }
 
+// http://doc.spip.org/@cadre_auteur_infos
+function cadre_auteur_infos($id_auteur, $auteur)
+{
+	global $connect_statut;
+
+	if (!$id_auteur) return '';
+
+	$res = "<center>"
+	.  "<font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"._T('titre_cadre_numero_auteur')."&nbsp;:</b></font>"
+	. "<br /><font face='Verdana,Arial,Sans,sans-serif' size='6'><b>$id_auteur</b></font>"
+	. "</center>";
+
+// "Voir en ligne" si l'auteur a un article publie
+// seuls les admins peuvent "previsualiser" une page auteur
+	$n = spip_num_rows(spip_query("SELECT lien.id_article FROM spip_auteurs_articles AS lien, spip_articles AS articles WHERE lien.id_auteur=$id_auteur AND lien.id_article=articles.id_article AND articles.statut='publie'"));
+
+	if ($n)
+	  $res .= voir_en_ligne ('auteur', $id_auteur, 'publie', 'racine-24.gif', false);
+	else if ($connect_statut == '0minirezo')
+	  $res .= voir_en_ligne ('auteur', $id_auteur, 'prop', 'racine-24.gif', false);
+
+	return debut_boite_info(true) . $res . fin_boite_info(true);
+}
+
+
+function auteurs_interventions($id_auteur, $statut)
+{
+	global $connect_statut, $connect_id_auteur;
+
+	if ($connect_statut == "0minirezo") $aff_art = "'prepa','prop','publie','refuse'";
+	else if ($connect_id_auteur == $id_auteur) $aff_art = "'prepa','prop','publie'";
+	else $aff_art = "'prop','publie'";
+
+	afficher_articles(_T('info_articles_auteur'),  array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien",  "WHERE" => "lien.id_auteur='$id_auteur' AND lien.id_article=articles.id_article AND articles.statut IN ($aff_art)",  'ORDER BY' => "articles.date DESC"), true);
+
+	if ($id_auteur != $connect_id_auteur
+	    AND ($statut == '0minirezo' OR $statut == '1comite')) {
+		echo "<div>&nbsp;</div>";
+		debut_cadre_couleur();
+
+		$vus = array();
+	
+		afficher_messages(_T('info_discussion_cours'), ", spip_auteurs_messages AS lien, spip_auteurs_messages AS lien2", "lien.id_auteur=$connect_id_auteur AND lien2.id_auteur = $id_auteur AND statut='publie' AND type='normal' AND rv!='oui' AND lien.id_message=messages.id_message AND lien2.id_message=messages.id_message", $vus, false, false);
+	
+		afficher_messages(_T('info_vos_rendez_vous'), ", spip_auteurs_messages AS lien, spip_auteurs_messages AS lien2", "lien.id_auteur=$connect_id_auteur AND lien2.id_auteur = $id_auteur AND statut='publie' AND type='normal' AND rv='oui' AND date_fin > NOW() AND lien.id_message=messages.id_message AND lien2.id_message=messages.id_message", $vus, false, false);
+	
+		icone_horizontale(_T('info_envoyer_message_prive'), generer_url_ecrire("message_edit", "new=oui&type=normal&dest=$id_auteur"),
+				  "message.gif");
+		fin_cadre_couleur();
+	}
+}
 ?>

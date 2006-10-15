@@ -16,6 +16,7 @@ include_spip('inc/actions');
 include_spip('inc/texte');
 include_spip('inc/layer');
 include_spip('inc/presentation');
+include_spip('inc/message_select');
 
 //  affiche le statut de l'auteur dans l'espace prive
 // les admins voient et peuvent modifier les droits d'un auteur
@@ -122,44 +123,7 @@ function inc_instituer_auteur_dist($id_auteur, $statut, $url_self)
 		. fin_cadre_relief(true));
 }
 
-// http://doc.spip.org/@cadre_auteur_infos
-function cadre_auteur_infos($id_auteur, $auteur)
-{
-  global $connect_statut;
 
-  if ($id_auteur) {
-	debut_boite_info();
-	echo "<CENTER>";
-	echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=1><B>"._T('titre_cadre_numero_auteur')."&nbsp;:</B></FONT>";
-	echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=6><B>$id_auteur</B></FONT>";
-	echo "</CENTER>";
-
-
-// "Voir en ligne" si l'auteur a un article publie
-// seuls les admins peuvent "previsualiser" une page auteur
-	$n = spip_num_rows(spip_query("SELECT lien.id_article FROM spip_auteurs_articles AS lien, spip_articles AS articles WHERE lien.id_auteur=$id_auteur AND lien.id_article=articles.id_article AND articles.statut='publie'"));
-	if ($n)
-		voir_en_ligne ('auteur', $id_auteur, 'publie');
-	else if ($connect_statut == '0minirezo')
-		voir_en_ligne ('auteur', $id_auteur, 'prop');
-
-	fin_boite_info();
-  }
-}
-
-// http://doc.spip.org/@statut_modifiable_auteur
-function statut_modifiable_auteur($id_auteur, $auteur)
-{
-	global $connect_statut, $connect_toutes_rubriques, $connect_id_auteur;
-
-// on peut se changer soi-meme
-	  return  (($connect_id_auteur == $id_auteur) ||
-  // sinon on doit etre admin
-  // et pas admin restreint pour changer un autre admin ou creer qq
-		(($connect_statut == "0minirezo") &&
-		 ($connect_toutes_rubriques OR 
-		  ($id_auteur AND ($auteur['statut'] != "0minirezo")))));
-}
 
 // Menu de choix d'un statut d'auteur
 // http://doc.spip.org/@choix_statut_auteur
