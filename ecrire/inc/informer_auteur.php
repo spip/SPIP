@@ -48,7 +48,6 @@ function inc_informer_auteur_dist($id)
 			. '</span>';
 			$bio = $mail = $nb = '';
 	}
-			spip_log("nb $nb $bio");
 	$res = '';
 	if ($spip_display != 1 AND $spip_display!=4 AND $GLOBALS['meta']['image_process'] != "non") {
 		$logo_f = charger_fonction('chercher_logo', 'inc');
