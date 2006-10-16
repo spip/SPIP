@@ -75,7 +75,7 @@ function debut_block_invisible($nom_block){
 	if ($_COOKIE['spip_accepte_ajax'] == -1)
 		return debut_block_visible($nom_block);
 
-	return "<div id='Layer".renomme_block($nom_block)."' style='display: none;'";
+	return "<div id='Layer".renomme_block($nom_block)."' style='display: none;'>";
 }
 
 // http://doc.spip.org/@fin_block
