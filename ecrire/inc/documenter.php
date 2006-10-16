@@ -63,6 +63,8 @@ function inc_documenter_dist(
 
 		$style = est_inclus($id_document) ? ' background-color: #cccccc;':'';
 
+		$deplier = in_array($id_document, explode('-', _request('show_docs')));
+
 		if (!$case)
 			$res .= "<tr style='border-top: 1px solid black;'>";
 		else if ($case == $bord_droit)
@@ -70,7 +72,7 @@ function inc_documenter_dist(
 		$res .= "\n<td  style='width:33%; text-align: $spip_lang_left; border-$spip_lang_left: 1px solid $couleur; border-bottom: 1px solid $couleur; $style' valign='top'>"
 		.  $tourner($id_document, $document, $script, $flag, $type)
 		. (!$flag  ? '' :
-		   $legender($id_document, $document, $script, $type, $document["id_$type"], $ancre))
+		   $legender($id_document, $document, $script, $type, $document["id_$type"], $ancre, $deplier))
 		. (!isset($document['info']) ? '' :
 		       ("<div class='verdana1'>".$document['info']."</div>"))
 		. "</td>\n";

@@ -22,23 +22,24 @@ include_spip('inc/date');
 // (surtout si c'est un portfolio)
 
 // http://doc.spip.org/@inc_legender_dist
-function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre) {
+function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre, $deplier=false) {
 
 	// + securite (avec le script exec=legender ca vient de dehors)
 	if (!preg_match('/^\w+$/',$type, $r)) {
 	  return;
 	}
 
+	// premier appel
 	if ($document) {
-		// premier appel
-		$flag = teste_doc_deplie($id_document);
-	} else if ($id_document) {
-		// retour d'Ajax
+		$flag = $deplier;
+	} else
+	// retour d'Ajax
+	if ($id_document) {
 		$document = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document)));
 		$flag = 'ajax';
-	} else {
-		return;
 	}
+	else
+		return;
 
 	$descriptif = $document['descriptif'];
 	$titre = $document['titre'];
@@ -110,7 +111,6 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre)
 	.  $vignette
 	. "\n\n\n\n"
 	. icone_horizontale($texte, $action, $supp, "supprimer.gif", false);
-
 
 	$corps = "<div class='verdana1' style='color: "
 	. $GLOBALS['couleur_foncee']
