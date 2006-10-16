@@ -1074,14 +1074,17 @@ function extraire_multi ($letexte) {
 //
 // Ce filtre retourne la donnee si c'est la premiere fois qu'il la voit ;
 // possibilite de gerer differentes "familles" de donnees |unique{famille}
+# |unique{famille,1} affiche le nombre d'elements affiches (preferer toutefois #TOTAL_UNIQUE)
 # ameliorations possibles :
 # 1) si la donnee est grosse, mettre son md5 comme cle
 # 2) purger $mem quand on change de squelette (sinon bug inclusions)
 //
 // http://www.spip.net/@unique
 // http://doc.spip.org/@unique
-function unique($donnee, $famille='') {
+function unique($donnee, $famille='', $cpt = false) {
 	static $mem;
+	if ($cpt)
+		return count($mem[$famille]);
 	if (!($mem[$famille][$donnee]++))
 		return $donnee;
 }
