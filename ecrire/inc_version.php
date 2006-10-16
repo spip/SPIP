@@ -270,15 +270,15 @@ function spip_initialisation_parametree($dir1, $dir2) {
 	define('_DIR_IMG', $dir1 ."IMG/");
 	define('_DIR_DOC', $dir1 ."IMG/");
 	define('_DIR_LOGOS', $dir1 ."IMG/");
-	define('_DIR_CACHE', $dir1 ."CACHE/");
-	define('_DIR_SKELS', $dir1 ."CACHE/skel/");
+	define('_DIR_CACHE', $dir1 ."tmp/CACHE/");
+	define('_DIR_SKELS', $dir1 ."tmp/CACHE/skel/");
 	define('_DIR_PLUGINS', $dir1 . "plugins/");
 
 	define('_DIR_CONFIG', $dir1 . "config/");
 
-	define('_DIR_TMP', $dir2 . "data/");
-	define('_DIR_DUMP', $dir2 . "data/");
-	define('_DIR_SESSIONS', $dir2 . "data/");
+	define('_DIR_TMP', $dir1 . "tmp/");
+	define('_DIR_DUMP', $dir1 . "tmp/data/");
+	define('_DIR_SESSIONS', $dir1 . "tmp/data/");
 	define('_DIR_TRANSFERT', $dir2 . "upload/");
 
 	// les fichiers qu'on y met, entre autres
@@ -301,7 +301,7 @@ function spip_initialisation_parametree($dir1, $dir2) {
 	:	false))));
 
 	if (!isset($GLOBALS['test_dirs']))
-		$GLOBALS['test_dirs'] =  array(_DIR_CACHE, _DIR_IMG, _DIR_TMP);
+		$GLOBALS['test_dirs'] =  array(_DIR_IMG, _DIR_TMP);
 }
 
 //
