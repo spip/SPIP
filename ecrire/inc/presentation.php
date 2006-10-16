@@ -29,36 +29,6 @@ function choix_couleur() {
 	}
 }
 
-//
-// affiche un bouton imessage
-//
-// http://doc.spip.org/@bouton_imessage
-function bouton_imessage($destinataire, $row = '') {
-	// si on passe "force" au lieu de $row, on affiche l'icone sans verification
-	global $connect_id_auteur;
-	global $spip_lang_rtl;
-
-	// verifier que ce n'est pas un auto-message
-	if ($destinataire == $connect_id_auteur)
-		return;
-	// verifier que le destinataire a un login
-	if ($row != "force") {
-		$login_req = spip_query("SELECT login, messagerie FROM spip_auteurs where id_auteur=$destinataire AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 DAY)");
-		$row = spip_fetch_array($login_req);
-
-		if (($row['login'] == "") OR ($row['messagerie'] == "non")) {
-			return;
-		}
-	}
-
-	if ($destinataire) $title = _T('info_envoyer_message_prive');
-	else $title = _T('info_ecire_message_prive');
-
-	$texte_bouton = http_img_pack("m_envoi$spip_lang_rtl.gif", "m&gt;", "width='14' height='7'", $title);
-		
-	return "<a href='". generer_url_ecrire("message_edit","new=oui&dest=$destinataire&type=normal"). "' title=\"$title\">$texte_bouton</a>";
-}
-
 // Faux HR, avec controle de couleur
 
 // http://doc.spip.org/@hr
@@ -893,21 +863,19 @@ function afficher_articles_boucle($row, &$tous_id, $afficher_auteurs, $afficher_
 
 	if ($afficher_auteurs) {
 		$les_auteurs = "";
-		$result_auteurs = spip_query("SELECT auteurs.id_auteur, nom, messagerie, login, bio FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article=$id_article AND auteurs.id_auteur=lien.id_auteur");
+		$result_auteurs = spip_query("SELECT auteurs.id_auteur, nom,  bio FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article=$id_article AND auteurs.id_auteur=lien.id_auteur ORDER BY nom");
 
-
+		$bouton_auteur = charger_fonction('bouton_auteur', 'inc');
 		while ($row = spip_fetch_array($result_auteurs)) {
 			$id_auteur = $row['id_auteur'];
 			$nom_auteur = typo($row['nom']);
-			$auteur_messagerie = $row['messagerie'];
 
 			if ($bio = texte_backend(supprimer_tags(couper($row['bio'],50))))
 				$bio = " title=\"$bio\"";
 
 
-			$les_auteurs .= ", <a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "'$bio>$nom_auteur</a>";
-			if ($id_auteur != $connect_id_auteur AND $auteur_messagerie != "non"
-			AND $bouton = bouton_imessage($id_auteur, $row)) {
+			$les_auteurs .= ", <a href='" . generer_url_ecrire("auteur_infos","id_auteur=$id_auteur&initial=-1") . "'$bio>$nom_auteur</a>";
+			if ($bouton = $bouton_auteur($id_auteur)) {
 				$les_auteurs .= "&nbsp;".$bouton;
 			}
 		}
@@ -1535,7 +1503,8 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	else	$res .= typo($auteur);
 
 	if ($id_auteur) {
-		$bouton = bouton_imessage($id_auteur);
+		$bouton_auteur = charger_fonction('bouton_auteur', 'inc');
+		$bouton = $bouton_auteur($id_auteur);
 		if ($bouton) $res .= "&nbsp;".$bouton;
 	}
 
@@ -2420,13 +2389,14 @@ function auteurs_recemment_connectes()
 	$res = '';
 	$result_auteurs = spip_query("SELECT id_auteur, nom FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND imessage!='non' AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE) AND statut IN ('0minirezo','1comite')");
 
+	$bouton_auteur = charger_fonction('bouton_auteur', 'inc');
 	if (spip_num_rows($result_auteurs)) {
 
 		$res = "<b>"._T('info_en_ligne')."</b>";
 		while ($row = spip_fetch_array($result_auteurs)) {
 			$id_auteur = $row["id_auteur"];
 			$nom_auteur = typo($row["nom"]);
-			$res .= " &nbsp; ".bouton_imessage($id_auteur,$row)."&nbsp;<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "' style='color: #666666;'>$nom_auteur</a>";
+			$res .= " &nbsp; ".bouton_auteur($id_auteur)."&nbsp;<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "' style='color: #666666;'>$nom_auteur</a>";
 		}
 	}
 

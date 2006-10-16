@@ -292,9 +292,10 @@ default:
 
 // http://doc.spip.org/@afficher_n_auteurs
 function afficher_n_auteurs($auteurs) {
-	global $connect_statut, $options, $messagerie;
+	global $connect_statut, $options;
 
 	$res = '';
+	$bouton_auteur = charger_fonction('bouton_auteur', 'inc');
 	foreach ($auteurs as $row) {
 
 		$nom = typo($row['nom']);
@@ -316,9 +317,7 @@ function afficher_n_auteurs($auteurs) {
 	// contact
 		if ($options == 'avancees') {
 			$res .= "</td><td class='arial1' style='border-top: 1px solid #cccccc;'>";
-			if ($row['messagerie'] != 'non' AND $row['login']
-			    AND $messagerie != "non")
-				$res .= bouton_imessage($row['id_auteur'],"force")."&nbsp;";
+			$res .= $bouton_auteur($row['id_auteur'])."&nbsp;";
 			if ($connect_statut=="0minirezo")
 				if (strlen($row['email'])>3)
 					$res .= "<a href='mailto:".$row['email']."'>"._T('lien_email')."</a>";

@@ -176,6 +176,7 @@ function afficher_auteurs_articles($id_article, $flag_editable, $les_auteurs)
 
 	$result = spip_query("SELECT * FROM spip_auteurs AS A WHERE A.id_auteur IN ($les_auteurs) ORDER BY A.nom");
 
+	$bouton_auteur = charger_fonction('bouton_auteur', 'inc');
 	while ($row = spip_fetch_array($result)) {
 			$vals = array();
 			$id_auteur = $row["id_auteur"];
@@ -184,14 +185,12 @@ function afficher_auteurs_articles($id_article, $flag_editable, $les_auteurs)
 			if ($bio_auteur = attribut_html(propre(couper($row["bio"], 100))))
 			  $bio_auteur = " title=\"$bio_auteur\"";
 			$url_site_auteur = $row["url_site"];
-			$statut_auteur = $row["statut"];
-			if ($row['messagerie'] == 'non' OR $row['login'] == '') $messagerie = 'non';
 
 			$vals[] = bonhomme_statut($row);
 
 			$vals[] = "<a href='" . generer_url_ecrire('auteurs_edit', "id_auteur=$id_auteur") . "' $bio_auteur>".typo($nom_auteur)."</a>";
 
-			$vals[] = bouton_imessage($id_auteur);
+			$vals[] = $bouton_auteur($id_auteur);
 		
 			if ($email_auteur) $vals[] =  "<a href='mailto:$email_auteur'>"._T('email')."</a>";
 			else $vals[] =  "&nbsp;";

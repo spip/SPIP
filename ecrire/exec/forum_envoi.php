@@ -94,7 +94,8 @@ if ($id_parent) {
 	echo " ".typo($auteur_parent);
 
 	if ($id_auteur_parent) {
-		$bouton = bouton_imessage($id_auteur_parent, $row);
+		$bouton_auteur = charger_fonction('bouton_auteur', 'inc');
+		$bouton = $bouton_auteur($id_auteur_parent);
 		if ($bouton) echo "&nbsp;".$bouton;
 	}
 

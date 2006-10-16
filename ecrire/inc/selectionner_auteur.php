@@ -20,7 +20,7 @@ include_spip('inc/editer_auteurs');
 
 function inc_selectionner_auteur_dist($id_article)
 {
-	global $spip_lang_right;
+	global $spip_lang_right, $couleur_foncee;
 
 	$idom = 'bloc_selectionner_auteur';
 	$idom1 = $idom . "_champ_recherche";
