@@ -40,6 +40,7 @@ function action_editer_article_dist() {
 function insert_article($id_rubrique) {
 
 	include_spip('base/abstract_sql');
+	include_spip('inc/rubriques');
 
 	// Si id_rubrique vaut 0 ou n'est pas definie, creer l'article
 	// dans la premiere rubrique racine
@@ -73,6 +74,7 @@ function insert_article($id_rubrique) {
 			. substr($GLOBALS['meta']['forums_publics'],0,3)
 			. "', '$lang', '$choisie')");
 	spip_abstract_insert('spip_auteurs_articles', "(id_auteur,id_article)", "('" . $GLOBALS['auteur_session']['id_auteur'] . "','$id_article')");
+	propager_les_secteurs();
 	return $id_article;
 }
 
