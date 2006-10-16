@@ -31,6 +31,7 @@ function action_virtualiser_dist() {
 	} else action_virtualiser_post($r);
 }
 
+// http://doc.spip.org/@action_virtualiser_post
 function action_virtualiser_post($r)
 {
 	$url = eregi_replace("^ *https?://$", "", rtrim($url));

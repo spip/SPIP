@@ -28,6 +28,7 @@ function action_editer_rubrique_dist() {
 	} else action_editer_rubrique_post($r);
 }
 
+// http://doc.spip.org/@action_editer_rubrique_post
 function action_editer_rubrique_post($r)
 {
 

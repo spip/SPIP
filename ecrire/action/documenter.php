@@ -27,6 +27,7 @@ function action_documenter_dist()
 	else action_documenter_post($r);
 }
 
+// http://doc.spip.org/@action_documenter_post
 function action_documenter_post($r)
 {
 	list($x, $sign, $id, $type, $vignette) = $r;

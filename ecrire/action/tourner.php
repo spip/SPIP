@@ -32,6 +32,7 @@ function action_tourner_dist() {
 	} else  action_tourner_post($r);
 }
 
+// http://doc.spip.org/@action_tourner_post
 function action_tourner_post($r)
 {
 	$arg = $r[1];

@@ -28,6 +28,7 @@ function action_poster_dist()
 	} else action_poster_post($r);
 }
 
+// http://doc.spip.org/@action_poster_post
 function action_poster_post($r)
 {
 	$id_article = $r[1];
