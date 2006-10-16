@@ -266,13 +266,15 @@ function spip_initialisation_parametree($dir1, $dir2) {
 	$too_late = true;
 
 	define('_DIR_CHMOD', 0777);
-	
+
 	define('_DIR_IMG', $dir1 ."IMG/");
 	define('_DIR_DOC', $dir1 ."IMG/");
 	define('_DIR_LOGOS', $dir1 ."IMG/");
 	define('_DIR_CACHE', $dir1 ."CACHE/");
 	define('_DIR_SKELS', $dir1 ."CACHE/skel/");
 	define('_DIR_PLUGINS', $dir1 . "plugins/");
+
+	define('_DIR_CONFIG', $dir1 . "config/");
 
 	define('_DIR_TMP', $dir2 . "data/");
 	define('_DIR_DUMP', $dir2 . "data/");
@@ -290,14 +292,16 @@ function spip_initialisation_parametree($dir1, $dir2) {
 	define('_DIR_IMG_ICONES', _DIR_IMG . "icones/");
 
 	// Le fichier de connexion a la base de donnees
-	define('_FILE_CONNECT_INS', ($dir2 . "inc_connect"));
+	define('_FILE_CONNECT_INS_191', ($dir2 . "inc_connect"));
+	define('_FILE_CONNECT_INS', (_DIR_CONFIG . "connect"));
 	define('_FILE_CONNECT',
 		(@is_readable($f = _FILE_CONNECT_INS . '.php') ? $f
-	:	(@is_readable($f = _FILE_CONNECT_INS . '.php3') ? $f
-	:	false)));
+	:	(@is_readable($f = _FILE_CONNECT_INS_191 . '.php') ? $f
+	:	(@is_readable($f = _FILE_CONNECT_INS_191 . '.php3') ? $f
+	:	false))));
 
 	if (!isset($GLOBALS['test_dirs']))
-	    $GLOBALS['test_dirs'] =  array(_DIR_CACHE, _DIR_IMG, _DIR_TMP);
+		$GLOBALS['test_dirs'] =  array(_DIR_CACHE, _DIR_IMG, _DIR_TMP);
 }
 
 //

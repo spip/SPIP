@@ -73,7 +73,7 @@ function install_etape_4_dist()
 			$port = '';
 		$conn = "<"."?php\n";
 		$conn .= "if (!defined(\"_ECRIRE_INC_VERSION\")) return;\n";
-		$conn .= "\$GLOBALS['spip_connect_version'] = 0.3;\n";
+		$conn .= "\$GLOBALS['spip_connect_version'] = 0.4;\n";
 		$conn .= $ligne_rappel;
 		$conn .= "spip_connect_db("
 			. "'$adresse_db','$port','$login_db','$pass_db','$sel_db'"

@@ -1,6 +1,7 @@
 * text=auto !eol
 /INSTALL.txt -text
 /UPGRADE.txt -text
+config/remove.txt -text
 dist/favicon.ico -text
 dist/feed.png -text
 dist/formulaires/choix_mots.html -text
