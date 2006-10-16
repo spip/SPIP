@@ -30,7 +30,7 @@ function charger_fonction($nom, $dossier='exec', $continue=false) {
 
 	// Securite de base
 	if (!preg_match(',^\w+$,', $nom))
-		redirige_par_entete('./');
+		die(htmlspecialchars($nom)." pas autorise");
 
 	if (substr($dossier,-1) != '/') $dossier .= '/';
 	// Si la fonction existe deja (definie par mes_options, par exemple)

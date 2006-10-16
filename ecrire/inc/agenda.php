@@ -91,7 +91,7 @@ function calendrier_href($script, $annee, $mois, $jour, $type, $fin, $ancre, $im
 
 		return http_href("$h$a", $clic, $titre, $style, $class, $evt);
 	else {
-		$evt .= "\nonclick=" . ajax_action_declencheur("\"$h\"",$ancre);
+		$evt .= "\nonclick=" . ajax_action_declencheur($h,$ancre);
 		return "<a$c$s\nhref='$h$a'$evt>$clic</a>";
 	}
 }

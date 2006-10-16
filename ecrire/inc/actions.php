@@ -179,21 +179,28 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 
 		if ($att) $clic = "\n<div$att>$clic</div>";
 		return "<a href='$href'\nonclick="
-		.  ajax_action_declencheur("\"$ajax\"", $ancre, $fct_ajax)
+		.  ajax_action_declencheur($ajax, $ancre, $fct_ajax)
 		. ">$clic</a>";
 	}
 }
 
+//
+// Attention pour que Safari puisse manipuler cet evenement
+// il faut onsubmit="return AjaxSqueeze(x,'truc',...)"
+// et non pas onsubmit='return AjaxSqueeze(x,"truc",...)'
+//
 // http://doc.spip.org/@ajax_action_declencheur
-function ajax_action_declencheur($request, $noeud, $fct_ajax='')
-{
-	return "'return AjaxSqueeze("
+function ajax_action_declencheur($request, $noeud, $fct_ajax='') {
+	if ($request != 'this')
+		$request = "'".$request."'";
+
+	return '"return AjaxSqueeze('
 	. $request
-	. ',"'
+	. ",'"
 	. $noeud
-	. '"'
+	. "'"
 	. (!$fct_ajax ? '' : ",$fct_ajax")
-	. ")'";
+	. ')"';
 }
 
 // http://doc.spip.org/@ajax_action_greffe
