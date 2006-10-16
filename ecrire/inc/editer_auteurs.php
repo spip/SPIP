@@ -15,6 +15,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/actions');
 
+define('_SPIP_SELECT_AUTEURS', 20); /* mettre 100000 pour desactiver ajax */
+
 // http://doc.spip.org/@inc_editer_auteurs_dist
 function inc_editer_auteurs_dist($id_article, $flag, $cherche_auteur, $ids)
 {
@@ -22,8 +24,7 @@ function inc_editer_auteurs_dist($id_article, $flag, $cherche_auteur, $ids)
 
 	$les_auteurs = join(',', determiner_auteurs_article($id_article));
 	if ($flag AND $options == 'avancees') {
-		$r = spip_query("SELECT * FROM spip_auteurs WHERE " . (!$les_auteurs ? '' : "id_auteur NOT IN ($les_auteurs) AND ") . "statut!='5poubelle' AND statut!='6forum' AND statut!='nouveau' ORDER BY statut, nom");
-		$futurs = ajouter_auteurs_articles($id_article, $r);
+		$futurs = ajouter_auteurs_articles($id_article, $les_auteurs);
 	} else $futurs = '';
 
 	return editer_auteurs_article($id_article, $flag, $cherche_auteur, $ids, $les_auteurs, $futurs);
@@ -181,7 +182,7 @@ function afficher_auteurs_articles($id_article, $flag_editable, $les_auteurs)
 			$nom_auteur = $row["nom"];
 			$email_auteur = $row["email"];
 			if ($bio_auteur = attribut_html(propre(couper($row["bio"], 100))))
-			  $bio_auteur = " TITLE=\"$bio_auteur\"";
+			  $bio_auteur = " title=\"$bio_auteur\"";
 			$url_site_auteur = $row["url_site"];
 			$statut_auteur = $row["statut"];
 			if ($row['messagerie'] == 'non' OR $row['login'] == '') $messagerie = 'non';
@@ -225,26 +226,39 @@ function afficher_auteurs_articles($id_article, $flag_editable, $les_auteurs)
 
 
 // http://doc.spip.org/@ajouter_auteurs_articles
-function ajouter_auteurs_articles($id_article, $query)
+function ajouter_auteurs_articles($id_article, $les_auteurs)
 {
+	$query = determiner_non_auteurs($les_auteurs, "statut, nom");
 	if (!$num = spip_num_rows($query)) return '';
 
-	$js = "\"findObj_forcer('valider_ajouter_auteur').style.visibility='visible';\"";
+	$js = "findObj_forcer('valider_ajouter_auteur').style.visibility='visible';";
 
-	return ajax_action_auteur('editer_auteurs', $id_article,'articles', "id_article=$id_article",
-				      (
-			"<span class='verdana1'><b>"._T('titre_cadre_ajouter_auteur')."&nbsp; </b></span>\n" .
+	$text = "<span class='verdana1'><b>"
+	. _T('titre_cadre_ajouter_auteur')
+	. "</b></span>\n";
 
-			($num > 200 
-			? ("<input type='text' name='cherche_auteur' onclick=$js CLASS='fondl' VALUE='' SIZE='20' />" .
-			  "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>\n<input type='submit' value='"._T('bouton_chercher')."' CLASS='fondo' /></span>")
-			: ("<select name='nouv_auteur' size='1' style='width:150px;' CLASS='fondl' onchange=$js>" .
-			   articles_auteur_select($query) .
-			   "</select>" .
-			   "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>" .
-			   " <input type='submit' value='"._T('bouton_ajouter')."' CLASS='fondo'>" .
-			   "</span>"))));
+	$sel = ($num <= _SPIP_SELECT_AUTEURS 
+		? ("$text<select name='nouv_auteur' size='1' style='width:150px;' CLASS='fondl' onchange=\"$js\">" .
+		   articles_auteur_select($query) .
+		   "</select>" .
+		   "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>" .
+		   " <input type='submit' value='"._T('bouton_ajouter')."' class='fondo'>" .
+		   "</span>")
+	   : (($_COOKIE['spip_accepte_ajax'] < 1)
+	      ? ("$text <input type='text' name='cherche_auteur' onclick=\"$js\" class='fondl' value='' size='20' /><span  class='visible_au_chargement' id='valider_ajouter_auteur'>\n<input type='submit' value='"._T('bouton_chercher')."' class='fondo' /></span>")
+	      : (selecteur_auteur_ajax($id_article, $js, $text)
+		 .  "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>"
+		 . " <input type='submit' value='"._T('bouton_ajouter')."' class='fondo'>"
+		 . "</span>")));
+
+	return ajax_action_auteur('editer_auteurs', $id_article,'articles', "id_article=$id_article", $sel);
 }
+
+function determiner_non_auteurs($les_auteurs, $order)
+{
+	return spip_query("SELECT * FROM spip_auteurs WHERE " . (!$les_auteurs ? '' : "id_auteur NOT IN ($les_auteurs) AND ") . "statut!='5poubelle' AND statut!='6forum' AND statut!='nouveau' ORDER BY $order");
+}
+
 
 // http://doc.spip.org/@articles_auteur_select
 function articles_auteur_select($result)
@@ -272,18 +286,25 @@ function articles_auteur_select($result)
 			$email = " ($email)";
 
 		if ($statut != $statut_old) {
-			$res .= "\n<OPTION VALUE=\"x\">";
-			$res .= "\n<OPTION VALUE=\"x\" style='background-color: $couleur_claire;'> $statut";
+			$res .= "\n<option value=\"x\" />";
+			$res .= "\n<option value=\"x\" style='background-color: $couleur_claire;'> $statut</option>";
 		}
 
 		if ($premiere != $premiere_old AND ($statut != _T('info_administrateurs') OR !$premiere_old))
-			$res .= "\n<OPTION VALUE=\"x\">";
+			$res .= "\n<option value=\"x\" />";
 				
-		$res .= "\n<OPTION VALUE=\"$id_auteur\">&nbsp;&nbsp;&nbsp;&nbsp;" . supprimer_tags(couper(typo("$nom$email"), 40));
+		$res .= "\n<option value=\"$id_auteur\">&nbsp;&nbsp;&nbsp;&nbsp;" . supprimer_tags(couper(typo("$nom$email"), 40)) . '</option>';
 		$statut_old = $statut;
 		$premiere_old = $premiere;
 	}
 	return $res;
 }
 
+function selecteur_auteur_ajax($id_article, $js, $text)
+{
+	include_spip('inc/chercher_rubrique');
+	$url = generer_url_ecrire('selectionner_auteur',"id_article=$id_article");
+
+	return construire_selecteur($url, $js, 'selection_auteur', 'nouv_auteur', $text);
+}
 ?>

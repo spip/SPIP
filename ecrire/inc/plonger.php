@@ -33,12 +33,12 @@ function inc_plonger_dist($id_rubrique, $idom="", $list=array(), $col = 1, $excl
 			. (($row['langue_choisie'] != 'oui')
 			   ? '' : (' [' . $row['lang'] . ']'));
 	}
-
 	$next = $list[$col];
 	if ($ordre) {
 		asort($ordre);
 		$rec = generer_url_ecrire('plonger',"rac=$idom&exclus=$exclu&col=".($col+1));
-		$args = "'$idom',this,$col,'$spip_lang_left'";
+		$info = generer_url_ecrire('informer', "type=rubrique&rac=$idom&id=");
+		$args = "'$idom',this,$col,'$spip_lang_left','$info'";
 		while (list($id, $titrebrut) = each($ordre)) {
 
 			$titre = "<div class='"
@@ -49,7 +49,6 @@ function inc_plonger_dist($id_rubrique, $idom="", $list=array(), $col = 1, $excl
 
 			if (isset($rub[$id]["enfants"])) {
 				$titre = "<div class='rub-ouverte'>$titre</div>";
-
 				$acces = "firstChild.";
 				$url = "\nhref='$rec&amp;id=$id'" ;
 			} else {  $url = $acces = ''; }
@@ -66,7 +65,7 @@ function inc_plonger_dist($id_rubrique, $idom="", $list=array(), $col = 1, $excl
 			. "\"\nondblclick=\""
 			. "aff_selection_titre(this."
 			. $acces
-			. "firstChild.firstChild.nodeValue,$id);"
+			. "firstChild.firstChild.nodeValue,$id,'selection_rubrique');"
 			. "return aff_selection_provisoire($id,$args);"
 			. "\">$titre</a>";
 		}

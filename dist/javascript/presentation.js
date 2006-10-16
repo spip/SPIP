@@ -170,10 +170,10 @@ function lancer_recherche(champ, cible) {
 	*/
 }
 
-function lancer_recherche_rub(champ, rac, exclus) {
+function onkeypress_rechercher(champ, rac, url) {
 	valeur = findObj(champ).value;
 	if (valeur.length > 0) {
-		charger_id_url('./?exec=rechercher&type='+valeur+'&exclus='+exclus+'&rac='+rac, rac+'_col_1');
+		charger_id_url(url+valeur, rac);
 	}
 }
 
