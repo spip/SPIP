@@ -601,7 +601,9 @@ function typo($letexte, $echapper=true) {
 	//
 	// NOTE : dans propre() ceci s'execute avant les tableaux a cause du "|",
 	// et apres les liens a cause du traitement de [<imgXX|right>->URL]
-	$letexte = traiter_modeles($letexte);
+	$letexte = traiter_modeles($mem = $letexte, false, 'TYPO');
+	if ($letexte != $mem) $echapper = true;
+	unset($mem);
 
 	// Appeler les fonctions de post-traitement
 	$letexte = pipeline('post_typo', $letexte);
@@ -1014,7 +1016,7 @@ function supprime_img($letexte) {
 // Si $doublons==true, on repere les documents sans calculer les modeles
 // mais on renvoie les params (pour l'indexation par le moteur de recherche)
 // http://doc.spip.org/@traiter_modeles
-function traiter_modeles($texte, $doublons=false) {
+function traiter_modeles($texte, $doublons=false, $echap='') {
 	// detecter les modeles (rapide)
 	if (preg_match_all('/<[a-z_-]{3,}\s*[0-9|]+/iS',
 	$texte, $matches, PREG_SET_ORDER)) {
@@ -1056,7 +1058,7 @@ function traiter_modeles($texte, $doublons=false) {
 
 				// le remplacer dans le texte
 				if ($modele !== false) {
-					$rempl = code_echappement($modele);
+					$rempl = code_echappement($modele, $echap);
 					$texte = substr($texte, 0, $a)
 						. $rempl
 						. substr($texte, $a+strlen($cherche));
