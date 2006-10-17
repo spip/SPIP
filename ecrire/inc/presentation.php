@@ -861,27 +861,6 @@ function afficher_articles_boucle($row, &$tous_id, $afficher_auteurs, $afficher_
 	if ($descriptif) $descriptif = ' title="'.attribut_html(typo($descriptif)).'"';
 	$petition = $row['petition'];
 
-	if ($afficher_auteurs) {
-		$les_auteurs = "";
-		$result_auteurs = spip_query("SELECT auteurs.id_auteur, nom,  bio FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article=$id_article AND auteurs.id_auteur=lien.id_auteur ORDER BY nom");
-
-		$bouton_auteur = charger_fonction('bouton_auteur', 'inc');
-		while ($row = spip_fetch_array($result_auteurs)) {
-			$id_auteur = $row['id_auteur'];
-			$nom_auteur = typo($row['nom']);
-
-			if ($bio = texte_backend(supprimer_tags(couper($row['bio'],50))))
-				$bio = " title=\"$bio\"";
-
-
-			$les_auteurs .= ", <a href='" . generer_url_ecrire("auteur_infos","id_auteur=$id_auteur&initial=-1") . "'$bio>$nom_auteur</a>";
-			if ($bouton = $bouton_auteur($id_auteur)) {
-				$les_auteurs .= "&nbsp;".$bouton;
-			}
-		}
-		$les_auteurs = substr($les_auteurs, 2);
-	}
-
 	// La petite puce de changement de statut
 	$vals[] = puce_statut_article($id_article, $statut, $id_rubrique);
 
@@ -913,8 +892,18 @@ function afficher_articles_boucle($row, &$tous_id, $afficher_auteurs, $afficher_
 	
 	$vals[] = $s;
 
-	// Les auteurs
-	if ($afficher_auteurs) $vals[] = $les_auteurs;
+
+	if ($afficher_auteurs) {
+		$les_auteurs = "";
+		$result_auteurs = auteurs_article($id_article);
+
+		$bouton_auteur = charger_fonction('bouton_auteur', 'inc');
+		while ($row = spip_fetch_array($result_auteurs)) {
+			list($s, $mail, $nom, $w, $p) = $bouton_auteur($row['id_auteur']);
+			$les_auteurs .= "$mail&nbsp;$nom, ";
+		}
+		$vals[] = substr($les_auteurs, 0, -2);
+	}
 
 	// La date
 	$vals[] = affdate_jourcourt($date);
@@ -1347,7 +1336,7 @@ function afficher_auteurs ($titre_table, $requete) {
 			echo "<p><table width='100%' cellpadding='0' cellspacing='0' border='0' background=''>";
 			echo "<tr><td width='100%' background=''>";
 			echo "<table width='100%' cellpadding='3' cellspacing='0' border='0'>";
-			echo "<tr bgcolor='#333333'><td width='100%' colspan='2'><font face='Verdana,Arial,Sans,sans-serif' size=3 color='#FFFFFF'>";
+			echo "<tr bgcolor='#333333'><td width='100%' colspan='5'><font face='Verdana,Arial,Sans,sans-serif' size=3 color='#FFFFFF'>";
 			echo "<b>$titre_table</b></font></td></tr>";
 		}
 	else {
@@ -1360,36 +1349,20 @@ function afficher_auteurs ($titre_table, $requete) {
 
 	$table = array();
 	while ($row = spip_fetch_array($result)) {
-		$table[]= affiche_auteur_boucle($row, $tous_id);
+		$tous_id[] = $row['id_auteur'];
+		$bouton_auteur = charger_fonction('bouton_auteur', 'inc');
+		$table[]= $bouton_auteur($row['id_auteur']);
 	}
 	spip_free_result($result);
-	$largeurs = array('');
-	$styles = array('arial2');
+	$largeurs = array(20, 20, 200, 20, 50);
+	$styles = array('','','arial2','arial1','arial1');
 	echo afficher_liste($largeurs, $table, $styles);
 
-	if ($titre_table) echo "</TABLE></TD></TR>";
-	echo "</TABLE>";
+	if ($titre_table) echo "</table></td></tr>";
+	echo "</table>";
 	fin_cadre_relief();
 
 	return $tous_id;
-}
-
-// http://doc.spip.org/@affiche_auteur_boucle
-function affiche_auteur_boucle($row, &$tous_id)
-{
-	$vals = '';
-
-	$id_auteur = $row['id_auteur'];
-	$tous_id[] = $id_auteur;
-	$nom = $row['nom'];
-
-	$s = bonhomme_statut($row);
-	$s .= "<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "'>";
-	$s .= typo($nom);
-	$s .= "</a>";
-	$vals[] = $s;
-
-	return $vals;
 }
 
 //
@@ -1494,19 +1467,14 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 		$res .= "<div style='border: 1px solid yellow; padding: 5px;'>";
 	}
 		
-	$res .= "<span class='arial2'>". date_interface($date_heure) . "</span> ";
-
-	if ($id_auteur)
-		$res .= "<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "'>".typo($auteur)."</a>";
-	else if ($email_auteur)
-		$res .= "<a href='mailto:$email_auteur'>".typo($auteur)."</a>";
-	else	$res .= typo($auteur);
+	$res .= "<span class='arial2'>". date_interface($date_heure) . "</span>&nbsp;&nbsp;";
 
 	if ($id_auteur) {
 		$bouton_auteur = charger_fonction('bouton_auteur', 'inc');
-		$bouton = $bouton_auteur($id_auteur);
-		if ($bouton) $res .= "&nbsp;".$bouton;
-	}
+		$res .= join(' ',$bouton_auteur($id_auteur));
+	} else if ($email_auteur)
+		$res .= "<a href='mailto:$email_auteur'>".typo($auteur)."</a>";
+	else	$res .= typo($auteur);
 
 	// boutons de moderation
 	if ($controle_id_article)
@@ -2270,7 +2238,7 @@ if (true /*$bandeau_colore*/) {
 
 		if (!($connect_toutes_rubriques)) {
 			echo http_img_pack("rien.gif", " ", "width='10'");
-			echo "<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$connect_id_auteur") . "' class='icone26' onmouseover=\"changestyle('bandeauinfoperso','visibility','visible');\">" .
+			echo "<a href='" . generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur&initial=-1") . "' class='icone26' onmouseover=\"changestyle('bandeauinfoperso','visibility','visible');\">" .
 			  http_img_pack("fiche-perso.png", "", "onmouseover=\"changestyle('bandeauvide','visibility', 'visible');\"");
 			echo "</a>";
 		}
@@ -2387,17 +2355,16 @@ function auteurs_recemment_connectes()
 {	
 	global $connect_id_auteur;
 	$res = '';
-	$result_auteurs = spip_query("SELECT id_auteur, nom FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND imessage!='non' AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE) AND statut IN ('0minirezo','1comite')");
+	$result_auteurs = spip_query("SELECT id_auteur FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE) AND statut IN ('0minirezo','1comite')");
 
-	$bouton_auteur = charger_fonction('bouton_auteur', 'inc');
 	if (spip_num_rows($result_auteurs)) {
-
-		$res = "<b>"._T('info_en_ligne')."</b>";
+		$bouton_auteur = charger_fonction('bouton_auteur', 'inc');
+		$res = "<b>"._T('info_en_ligne'). "&nbsp;</b>";
 		while ($row = spip_fetch_array($result_auteurs)) {
-			$id_auteur = $row["id_auteur"];
-			$nom_auteur = typo($row["nom"]);
-			$res .= " &nbsp; ".bouton_auteur($id_auteur)."&nbsp;<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "' style='color: #666666;'>$nom_auteur</a>";
+			list($s, $mail, $nom, $w, $p) = $bouton_auteur($row['id_auteur']);
+			$res .= "$mail&nbsp;$nom, ";
 		}
+		$res = substr($res,0,-2);
 	}
 
 	return "<div class='messages' style='color: #666666;'>$res</div>";

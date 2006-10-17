@@ -91,6 +91,12 @@ function exec_auteur_infos_dist()
 	  debut_cadre_relief("redacteurs-24.gif", true),
 	  $legender_auteur, $instituer_auteur;
 
+	echo pipeline('affiche_milieu',
+	        array('args' => array(
+        	        'exec'=>'auteur_infos',
+                	'id_auteur'=>$id_auteur),
+		      'data'=>''));
+
 	auteurs_interventions($id_auteur, $auteur['statut']);
 
 	echo fin_cadre_relief(true),

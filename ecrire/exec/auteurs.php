@@ -17,12 +17,12 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_auteurs_dist
 function exec_auteurs_dist()
 {
-	global  $visiteurs;
 
 	$tri = preg_replace('/\W/', '', _request('tri'));
 	if (!$tri) $tri='nom'; 
+	$statut = preg_replace('/\W/', '', _request('statut'));
 
-	$result = requete_auteurs($tri, $visiteurs);
+	$result = requete_auteurs($tri, $statut);
 	$nombre_auteurs = spip_num_rows($result);
 	$max_par_page = 30;
 	$debut = intval(_request('debut'));
@@ -31,13 +31,13 @@ function exec_auteurs_dist()
 
 	list($auteurs, $lettre)= lettres_d_auteurs($result, $debut, $max_par_page, $tri);
 
-	$res = auteurs_tranches(afficher_n_auteurs($auteurs), $debut, $lettre, $tri, $visiteurs, $max_par_page, $nombre_auteurs);
+	$res = auteurs_tranches(afficher_n_auteurs($auteurs), $debut, $lettre, $tri, $statut, $max_par_page, $nombre_auteurs);
 
 	if (_request('var_ajaxcharset')) ajax_retour($res);
 
 	pipeline('exec_init',array('args'=>array('exec'=>'auteurs'),'data'=>''));
 
-	bandeau_auteurs($auteurs, $debut, $tri, $visiteurs, $max_par_page, $nombre_auteurs);
+	bandeau_auteurs($tri, $statut);
 
 	echo "<div id='auteurs'>", $res, "</div>", fin_page();
 }
@@ -72,7 +72,7 @@ function lettres_d_auteurs($query, $debut, $max_par_page, $tri)
 
 
 // http://doc.spip.org/@bandeau_auteurs
-function bandeau_auteurs($auteurs, $debut, $tri, $visiteurs, $max_par_page, $nombre_auteurs)
+function bandeau_auteurs($tri, $statut)
 {
 	global $options, $spip_lang_right, $connect_id_auteur,   $connect_statut,   $connect_toutes_rubriques;
 
@@ -81,24 +81,22 @@ function bandeau_auteurs($auteurs, $debut, $tri, $visiteurs, $max_par_page, $nom
 	if ($tri=='nombre') $s = _T('info_par_nombre_articles');
 	$s = ' ('._T('info_par_nombre_article').')';
 
-	if ($visiteurs == "oui") {
+	if ($statut == '6forum') {
 		debut_page(_T('titre_page_auteurs'),"auteurs","redacteurs");
-		$visiteurs = '&visiteurs=oui';
 	} else {
 		debut_page(_T('info_auteurs_par_tri', array('partri' => $s)),"auteurs","redacteurs");
-	$visiteurs = "";
 	}
 	debut_gauche();
 
 	debut_boite_info();
-	if ($visiteurs)
+	if ($statut == '6forum') 
 		echo "\n<p class='arial1'>"._T('info_gauche_visiteurs_enregistres'), '</p>';
-	else {
+	else 
 		echo "\n<p class='arial1'>"._T('info_gauche_auteurs'), '</p>';
 
 	if ($connect_statut == '0minirezo')
 		echo "\n<br />". _T('info_gauche_auteurs_exterieurs');
-	}
+
 	fin_boite_info();
 
 
@@ -108,14 +106,14 @@ function bandeau_auteurs($auteurs, $debut, $tri, $visiteurs, $max_par_page, $nom
 			$res = icone_horizontale(_T('icone_creer_nouvel_auteur'), generer_url_ecrire("auteur_infos"), "auteur-24.gif", "creer.gif", false);
 		else $res = '';
 
-		$res .= icone_horizontale(_T('icone_informations_personnelles'), generer_url_ecrire("auteurs_edit","id_auteur=$connect_id_auteur"), "fiche-perso-24.gif","rien.gif", false);
+		$res .= icone_horizontale(_T('icone_informations_personnelles'), generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur&initial=-1"), "fiche-perso-24.gif","rien.gif", false);
 
 		$n = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE statut='6forum' LIMIT 1"));
 		if ($n) {
-			if ($visiteurs)
-				$res .= icone_horizontale (_T('icone_afficher_auteurs'), generer_url_ecrire("auteurs",""), "auteur-24.gif", "", false);
+			if ($statut == '6forum')
+				$res .= icone_horizontale (_T('icone_afficher_auteurs'), generer_url_ecrire("auteurs"), "auteur-24.gif", "", false);
 			else
-				$res .= icone_horizontale (_T('icone_afficher_visiteurs'), generer_url_ecrire("auteurs","visiteurs=oui"), "auteur-24.gif", "", false);
+				$res .= icone_horizontale (_T('icone_afficher_visiteurs'), generer_url_ecrire("auteurs","statut=6forum"), "auteur-24.gif", "", false);
 		}
 		echo bloc_des_raccourcis($res);
 	}
@@ -125,7 +123,7 @@ function bandeau_auteurs($auteurs, $debut, $tri, $visiteurs, $max_par_page, $nom
 	debut_droite();
 
 	echo "\n<br />";
-	if ($visiteurs)
+	if ($statut == '6forum') 
 		gros_titre(_T('info_visiteurs'));
 	else
 		gros_titre(_T('info_auteurs'));
@@ -133,7 +131,7 @@ function bandeau_auteurs($auteurs, $debut, $tri, $visiteurs, $max_par_page, $nom
 }
 
 // http://doc.spip.org/@auteurs_tranches
-function auteurs_tranches($auteurs, $debut, $lettre, $tri, $visiteurs, $max_par_page, $nombre_auteurs)
+function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_page, $nombre_auteurs)
 {
 	global $options, $spip_lang_right;
 
@@ -147,29 +145,27 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $visiteurs, $max_par_
 	  $res .= auteurs_href(http_img_pack('admin-12.gif', $t, "border='0'"),'tri=statut', " title=\"$t\"");
 	}
 
-	$res .= "</td><td>";
+	$res .= "</td><td width='20'></td><td colspan='2'>";
 
 	if ($tri == '' OR $tri=='nom')
 		$res .= '<b>'._T('info_nom').'</b>';
 	else
 		$res .= auteurs_href(_T('info_nom'), "tri=nom", " title='"._T('lien_trier_nom'). "'");
 
-	if ($options == 'avancees')
-	 	$res .= "</td><td colspan='2'>"._T('info_contact');
 
 	$res .= "</td><td>";
 
-	if (!$visiteurs) {
+	if ($statut != '6forum') {
 		if ($tri=='nombre')
 			$res .= '<b>'._T('info_articles').'</b>';
 		else
 			$res .= auteurs_href(_T('info_articles_2'), "tri=nombre", " title=\""._T('lien_trier_nombre_articles'). '"');
-	} else $visiteurs = '&visiteurs=oui';
+	}
 
 	$res .= "</td></tr>\n";
 
 	if ($nombre_auteurs > $max_par_page) {
-		$res .= "\n<tr bgcolor='white'><td class='arial1' colspan='".($options == 'avancees' ? 5 : 3)."'>";
+		$res .= "\n<tr bgcolor='white'><td class='arial1' colspan='5'>";
 
 		for ($j=0; $j < $nombre_auteurs; $j+=$max_par_page) {
 			if ($j > 0) 	$res .= " | ";
@@ -177,9 +173,9 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $visiteurs, $max_par_
 			if ($j == $debut)
 				$res .= "<b>$j</b>";
 			else if ($j > 0)
-				$res .= auteurs_href($j, "tri=$tri$visiteurs&debut=$j");
+				$res .= auteurs_href($j, "tri=$tri&statut=$statut&debut=$j");
 			else
-				$res .= auteurs_href('0', "tri=$tri$visiteurs");
+				$res .= auteurs_href('0', "tri=$tri&statut=$statut");
 			if ($debut > $j  AND $debut < $j+$max_par_page){
 				$res .= " | <b>$debut</b>";
 			}
@@ -192,7 +188,7 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $visiteurs, $max_par_
 				if ($val == $debut)
 					$res .= "<b>$key</b>\n";
 				else
-					$res .= auteurs_href($key, "tri=$tri$visiteurs&debut=$val") . "\n";
+					$res .= auteurs_href($key, "tri=$tri&statut=$statut&debut=$val") . "\n";
 			}
 			$res .= "</td></tr>\n";
 		}
@@ -206,11 +202,11 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $visiteurs, $max_par_
 
 		if ($debut > 0) {
 			$debut_prec = max($debut - $max_par_page, 0);
-			$nav .= auteurs_href('&lt;&lt;&lt;',"tri=$tri&debut=$debut_prec$visiteurs");
+			$nav .= auteurs_href('&lt;&lt;&lt;',"tri=$tri&debut=$debut_prec&statut=$statut");
 		}
 		$nav .= "</td><td style='text-align: $spip_lang_right'>";
 		if ($debut_suivant < $nombre_auteurs) {
-			$nav .= auteurs_href('&gt;&gt;&gt;',"tri=$tri&debut=$debut_suivant$visiteurs");
+			$nav .= auteurs_href('&gt;&gt;&gt;',"tri=$tri&debut=$debut_suivant&statut=$statut");
 		}
 		$nav .= "</td></tr></table>\n";
 	}
@@ -236,7 +232,7 @@ function auteurs_href($clic, $args='', $att='')
 }
 
 // http://doc.spip.org/@requete_auteurs
-function requete_auteurs($tri, $visiteurs)
+function requete_auteurs($tri, $statut)
 {
   global $connect_statut, $spip_lang, $connect_id_auteur;
 
@@ -248,8 +244,8 @@ function requete_auteurs($tri, $visiteurs)
 // sauf les admins, toujours visibles.
 // limiter les statuts affiches
 if ($connect_statut == '0minirezo') {
-	if ($visiteurs == "oui") {
-		$sql_visible = "aut.statut IN ('6forum','5poubelle')";
+	if ($statut) {
+		$sql_visible = "aut.statut IN ('$statut')";
 		$tri = 'nom';
 	} else {
 		$sql_visible = "aut.statut IN ('0minirezo','1comite','5poubelle')";
@@ -271,7 +267,7 @@ case 'nombre':
 	break;
 
 case 'statut':
-	$sql_order = ' statut, login = "", unom';
+	$sql_order = ' statut, unom';
 	break;
 
 case 'nom':
@@ -286,7 +282,7 @@ default:
 // La requete de base est tres sympa
 //
 
- $row = spip_query("SELECT							aut.id_auteur AS id_auteur,							aut.statut AS statut,								aut.login AS login,								aut.nom AS nom,								aut.email AS email,								aut.source AS source,								aut.pass AS pass,								aut.url_site AS url_site,							aut.messagerie AS messagerie,							UPPER(aut.nom) AS unom,							count(lien.id_article) as compteur						$sql_sel									FROM spip_auteurs as aut							LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur	LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)		WHERE	$sql_visible								GROUP BY aut.id_auteur	 ORDER BY		$sql_order");
+ $row = spip_query("SELECT							aut.id_auteur AS id_auteur,							aut.statut AS statut,								aut.nom AS nom,								UPPER(aut.nom) AS unom,							count(lien.id_article) as compteur						$sql_sel									FROM spip_auteurs as aut							LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur	LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)		WHERE	$sql_visible								GROUP BY aut.id_auteur	 ORDER BY		$sql_order");
  return $row;
 }
 
@@ -298,48 +294,22 @@ function afficher_n_auteurs($auteurs) {
 	$bouton_auteur = charger_fonction('bouton_auteur', 'inc');
 	foreach ($auteurs as $row) {
 
-		$nom = typo($row['nom']);
-
+		list($s, $mail, $nom, $w, $p) = $bouton_auteur($row['id_auteur']);
 		$res .= "\n<tr style='background-color: #eeeeee;'>"
 		. "\n<td style='border-top: 1px solid #cccccc;'>"
-		. bonhomme_statut($row)
+		. $s
+		. "</td><td class='arial1' style='border-top: 1px solid #cccccc;'>"
+		. $mail
 		. "</td><td class='verdana11' style='border-top: 1px solid #cccccc;'>"
-		. "<a href='"
-		. generer_url_ecrire('auteurs_edit',"id_auteur=".$row['id_auteur'])
-		."'>"
-		. ($nom ? $nom : ("<span style='color: red'>" . _T('texte_vide') . '</span>'))
-		. '</a>';
-
-		if (isset($row['restreint']) AND $row['restreint'])
-			$res .= " &nbsp;<small>"._T('statut_admin_restreint')."</small>";
-
-
-	// contact
-		if ($options == 'avancees') {
-			$res .= "</td><td class='arial1' style='border-top: 1px solid #cccccc;'>";
-			$res .= $bouton_auteur($row['id_auteur'])."&nbsp;";
-			if ($connect_statut=="0minirezo")
-				if (strlen($row['email'])>3)
-					$res .= "<a href='mailto:".$row['email']."'>"._T('lien_email')."</a>";
-				else
-					$res .= "&nbsp;";
-
-			if (strlen($row['url_site'])>3)
-				$res .= "</td><td class='arial1' style='border-top: 1px solid #cccccc;'><a href='".$row['url_site']."'>"._T('lien_site')."</a>";
-			else
-				$res .= "</td><td style='border-top: 1px solid #cccccc;'>&nbsp;";
-		}
-
-	// nombre d'articles
-		$res .= "</td><td class='arial1' style='border-top: 1px solid #cccccc;'>";
-		if ($row['compteur'] > 1)
-			$res .= $row['compteur']."&nbsp;"._T('info_article_2');
-		else if($row['compteur'] == 1)
-			$res .= "1&nbsp;"._T('info_article');
-		else
-			$res .= "&nbsp;";
-
-		$res .= "</td></tr>\n";
+		. $nom
+		. ((isset($row['restreint']) AND $row['restreint'])
+		   ? (" &nbsp;<small>"._T('statut_admin_restreint')."</small>")
+		   : '')
+		 ."</td><td class='arial1' style='border-top: 1px solid #cccccc;'>"
+		 . $w
+		 . "</td><td class='arial1' style='border-top: 1px solid #cccccc;'>"
+		 . $p
+		.  "</td></tr>\n";
 	}
 	return $res;
 }

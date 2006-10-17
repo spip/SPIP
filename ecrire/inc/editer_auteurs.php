@@ -22,7 +22,7 @@ function inc_editer_auteurs_dist($id_article, $flag, $cherche_auteur, $ids)
 {
 	global $options;
 
-	$les_auteurs = join(',', determiner_auteurs_article($id_article));
+	$les_auteurs = determiner_auteurs_article($id_article);
 	if ($flag AND $options == 'avancees') {
 		$futurs = ajouter_auteurs_articles($id_article, $les_auteurs);
 	} else $futurs = '';
@@ -174,49 +174,18 @@ function afficher_auteurs_articles($id_article, $flag_editable, $les_auteurs)
 
 	$table = array();
 
-	$result = spip_query("SELECT * FROM spip_auteurs AS A WHERE A.id_auteur IN ($les_auteurs) ORDER BY A.nom");
-
 	$bouton_auteur = charger_fonction('bouton_auteur', 'inc');
-	while ($row = spip_fetch_array($result)) {
-			$vals = array();
-			$id_auteur = $row["id_auteur"];
-			$nom_auteur = $row["nom"];
-			$email_auteur = $row["email"];
-			if ($bio_auteur = attribut_html(propre(couper($row["bio"], 100))))
-			  $bio_auteur = " title=\"$bio_auteur\"";
-			$url_site_auteur = $row["url_site"];
+	foreach($les_auteurs as $id_auteur) {
+		$vals = $bouton_auteur($id_auteur);
 
-			$vals[] = bonhomme_statut($row);
-
-			$vals[] = "<a href='" . generer_url_ecrire('auteurs_edit', "id_auteur=$id_auteur") . "' $bio_auteur>".typo($nom_auteur)."</a>";
-
-			$vals[] = $bouton_auteur($id_auteur);
-		
-			if ($email_auteur) $vals[] =  "<a href='mailto:$email_auteur'>"._T('email')."</a>";
-			else $vals[] =  "&nbsp;";
-
-			if ($url_site_auteur) $vals[] =  "<a href='$url_site_auteur'>"._T('info_site_min')."</a>";
-			else $vals[] =  "&nbsp;";
-
-			$cpt = spip_fetch_array(spip_query("SELECT COUNT(articles.id_article) AS n FROM spip_auteurs_articles AS lien, spip_articles AS articles WHERE lien.id_auteur=$id_auteur AND articles.id_article=lien.id_article AND articles.statut IN " . ($connect_statut == "0minirezo" ? "('prepa', 'prop', 'publie', 'refuse')" : "('prop', 'publie')") . " GROUP BY lien.id_auteur"));
-
-			$nombre_articles = intval($cpt['n']);
-
-			if ($nombre_articles > 1) $vals[] =  $nombre_articles.' '._T('info_article_2');
-			elseif ($nombre_articles == 1) $vals[] =  _T('info_1_article');
-			else $vals[] =  "&nbsp;";
-
-			if ($flag_editable AND ($connect_id_auteur != $id_auteur OR $connect_statut == '0minirezo') AND $options == 'avancees') {
-				$vals[] =  ajax_action_auteur('editer_auteurs', "$id_article,-$id_auteur",'articles', "id_article=$id_article", array(_T('lien_retirer_auteur')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'")));
-			} else {
-			  $vals[] = "";
-			}
-		
-			$table[] = $vals;
+		if ($flag_editable AND ($connect_id_auteur != $id_auteur OR $connect_statut == '0minirezo') AND $options == 'avancees') {
+			$vals[] =  ajax_action_auteur('editer_auteurs', "$id_article,-$id_auteur",'articles', "id_article=$id_article", array(_T('lien_retirer_auteur')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'")));
+		} else  $vals[] = "";
+		$table[] = $vals;
 	}
 	
-	$largeurs = array('14', '', '', '', '', '', '');
-	$styles = array('arial11', 'arial2', 'arial11', 'arial11', 'arial11', 'arial11', 'arial1');
+	$largeurs = array('14', '', '', '', '', '');
+	$styles = array('arial11', 'arial2', 'arial11', 'arial11', 'arial11', 'arial1');
 
 	return "<div class='liste'><table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>"
 	. afficher_liste($largeurs, $table, $styles)

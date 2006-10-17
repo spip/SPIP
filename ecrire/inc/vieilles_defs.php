@@ -75,4 +75,22 @@ function afficher_script_layer(){echo $GLOBALS['browser_layer'];}
 // http://doc.spip.org/@test_layer
 function test_layer(){return $GLOBALS['browser_layer'];}
 
+
+// http://doc.spip.org/@affiche_auteur_boucle
+function affiche_auteur_boucle($row, &$tous_id)
+{
+	$vals = '';
+
+	$id_auteur = $row['id_auteur'];
+	
+	$nom = $row['nom'];
+
+	$s = bonhomme_statut($row);
+	$s .= "<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "'>";
+	$s .= typo($nom);
+	$s .= "</a>";
+	$vals[] = $s;
+
+	return $vals;
+}
 ?>

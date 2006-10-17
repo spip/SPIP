@@ -90,14 +90,13 @@ if ($id_parent) {
 
     if ($titre_parent) {
 	debut_cadre_forum("forum-interne-24.gif", false, "", typo($titre_parent));
-	echo "<span class='arial2'>$date_heure_parent</span>";
-	echo " ".typo($auteur_parent);
+	echo "<span class='arial2'>$date_heure_parent</span> ";
 
 	if ($id_auteur_parent) {
 		$bouton_auteur = charger_fonction('bouton_auteur', 'inc');
-		$bouton = $bouton_auteur($id_auteur_parent);
-		if ($bouton) echo "&nbsp;".$bouton;
-	}
+		list($s, $mail, $nom, $w, $p) = $bouton_auteur($id_auteur_parent);
+		echo "$mail&nbsp;$nom";
+	} else 	echo " ", typo($auteur_parent);
 
 	echo justifier(propre($texte_parent));
 
