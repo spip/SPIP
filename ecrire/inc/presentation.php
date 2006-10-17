@@ -794,9 +794,6 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			echo "<div id='$tmp_var'>";
 
 	}
-		
-	$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
-		
 
 	//echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
 	echo afficher_liste_debut_tableau(), $tranches;
@@ -804,8 +801,11 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	$result = spip_query("SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
 
 	$table = array();
+	$formater_article = charger_fonction('formater_article', 'inc');
 	while ($row = spip_fetch_array($result)) {
-		$table[]= afficher_articles_boucle($row, $tous_id, $afficher_auteurs, $afficher_langue, $langue_defaut, $voir_logo);
+	  	$id = $row['id_article'];
+		$tous_id[]= $id;
+		$table[]= $formater_article($id, $row, $afficher_auteurs, $afficher_langue, $langue_defaut);
 	}
 	spip_free_result($result);
 
@@ -842,81 +842,6 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 	return $tous_id;
 }
-
-// http://doc.spip.org/@afficher_articles_boucle
-function afficher_articles_boucle($row, &$tous_id, $afficher_auteurs, $afficher_langue, $langue_defaut, $voir_logo)
-{
-  global $connect_id_auteur, $dir_lang, $options, $spip_lang_right;
-
-	$vals = '';
-
-	$id_article = $row['id_article'];
-	$tous_id[] = $id_article;
-	$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
-	$id_rubrique = $row['id_rubrique'];
-	$date = $row['date'];
-	$statut = $row['statut'];
-	if ($lang = $row['lang']) changer_typo($lang);
-	$descriptif = $row['descriptif'];
-	if ($descriptif) $descriptif = ' title="'.attribut_html(typo($descriptif)).'"';
-	$petition = $row['petition'];
-
-	// La petite puce de changement de statut
-	$vals[] = puce_statut_article($id_article, $statut, $id_rubrique);
-
-	// Le titre (et la langue)
-	$s = "<div>";
-
-	if (acces_restreint_rubrique($id_rubrique))
-		$s .= http_img_pack("admin-12.gif", "", "width='12' height='12'", _T('titre_image_admin_article'));
-
-	$s .= "<a href='" . generer_url_ecrire("articles","id_article=$id_article") .
-		"'$descriptif$dir_lang style=\"display:block;\">";
-
-	if ($voir_logo) {
-		$logo_f = charger_fonction('chercher_logo', 'inc');
-		if ($logo = $logo_f($id_article, 'id_article', 'on')) {
-			list($fid, $dir, $nom, $format) = $logo;
-			$logo = ratio_image($fid, $nom, $format, 26, 20, "alt=''");
-			if ($logo)
-				$s .= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</div>";
-		}
-	}
-
-	$s .= typo($titre);
-	if ($afficher_langue AND $lang != $langue_defaut)
-		$s .= " <font size='1' color='#666666'$dir_lang>(".traduire_nom_langue($lang).")</font>";
-	if ($petition) $s .= " <font size=1 color='red'>"._T('lien_petitions')."</font>";
-	$s .= "</a>";
-	$s .= "</div>";
-	
-	$vals[] = $s;
-
-
-	if ($afficher_auteurs) {
-		$les_auteurs = "";
-		$result_auteurs = auteurs_article($id_article);
-
-		$bouton_auteur = charger_fonction('bouton_auteur', 'inc');
-		while ($row = spip_fetch_array($result_auteurs)) {
-			list($s, $mail, $nom, $w, $p) = $bouton_auteur($row['id_auteur']);
-			$les_auteurs .= "$mail&nbsp;$nom, ";
-		}
-		$vals[] = substr($les_auteurs, 0, -2);
-	}
-
-	// La date
-	$vals[] = affdate_jourcourt($date);
-
-	// Le numero (moche)
-	if ($options == "avancees") {
-		$vals[] = "<b>"._T('info_numero_abbreviation')."$id_article</b>";
-	}
-	
-
-	return $vals;
-}
-
 
 // http://doc.spip.org/@afficher_articles_trad
 function afficher_articles_trad($titre_table, $requete, $afficher_visites = false, $afficher_auteurs = true,
@@ -1015,7 +940,8 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 
 	$table = array();
 	while ($row = spip_fetch_array($result)) {
-		$table[]=afficher_articles_trad_boucle($row, $tous_id, $afficher_langue, $langue_defaut, $langues_site);
+	  	$tous_id[] = $row['id_article'];
+		$table[]=afficher_articles_trad_boucle($row, $afficher_langue, $langue_defaut, $langues_site);
 	}
 	spip_free_result($result);
 
@@ -1036,14 +962,13 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 }
 
 // http://doc.spip.org/@afficher_articles_trad_boucle
-function afficher_articles_trad_boucle($row, &$tous_id, $afficher_langue, $langue_defaut, $langues_site)
+function afficher_articles_trad_boucle($row, $afficher_langue, $langue_defaut, $langues_site)
 {
 	global $dir_lang,  $spip_lang_right;
 
 	$vals = '';
 
 	$id_article = $row['id_article'];
-	$tous_id[] = $id_article;
 	$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
 	$id_rubrique = $row['id_rubrique'];
 	$date = $row['date'];
@@ -1350,8 +1275,8 @@ function afficher_auteurs ($titre_table, $requete) {
 	$table = array();
 	while ($row = spip_fetch_array($result)) {
 		$tous_id[] = $row['id_auteur'];
-		$bouton_auteur = charger_fonction('bouton_auteur', 'inc');
-		$table[]= $bouton_auteur($row['id_auteur']);
+		$formater_auteur = charger_fonction('formater_auteur', 'inc');
+		$table[]= $formater_auteur($row['id_auteur']);
 	}
 	spip_free_result($result);
 	$largeurs = array(20, 20, 200, 20, 50);
@@ -1470,8 +1395,8 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	$res .= "<span class='arial2'>". date_interface($date_heure) . "</span>&nbsp;&nbsp;";
 
 	if ($id_auteur) {
-		$bouton_auteur = charger_fonction('bouton_auteur', 'inc');
-		$res .= join(' ',$bouton_auteur($id_auteur));
+		$formater_auteur = charger_fonction('formater_auteur', 'inc');
+		$res .= join(' ',$formater_auteur($id_auteur));
 	} else if ($email_auteur)
 		$res .= "<a href='mailto:$email_auteur'>".typo($auteur)."</a>";
 	else	$res .= typo($auteur);
@@ -2358,10 +2283,10 @@ function auteurs_recemment_connectes()
 	$result_auteurs = spip_query("SELECT id_auteur FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE) AND statut IN ('0minirezo','1comite')");
 
 	if (spip_num_rows($result_auteurs)) {
-		$bouton_auteur = charger_fonction('bouton_auteur', 'inc');
+		$formater_auteur = charger_fonction('formater_auteur', 'inc');
 		$res = "<b>"._T('info_en_ligne'). "&nbsp;</b>";
 		while ($row = spip_fetch_array($result_auteurs)) {
-			list($s, $mail, $nom, $w, $p) = $bouton_auteur($row['id_auteur']);
+			list($s, $mail, $nom, $w, $p) = $formater_auteur($row['id_auteur']);
 			$res .= "$mail&nbsp;$nom, ";
 		}
 		$res = substr($res,0,-2);

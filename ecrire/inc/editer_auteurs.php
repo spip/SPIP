@@ -174,9 +174,9 @@ function afficher_auteurs_articles($id_article, $flag_editable, $les_auteurs)
 
 	$table = array();
 
-	$bouton_auteur = charger_fonction('bouton_auteur', 'inc');
+	$formater_auteur = charger_fonction('formater_auteur', 'inc');
 	foreach($les_auteurs as $id_auteur) {
-		$vals = $bouton_auteur($id_auteur);
+		$vals = $formater_auteur($id_auteur);
 
 		if ($flag_editable AND ($connect_id_auteur != $id_auteur OR $connect_statut == '0minirezo') AND $options == 'avancees') {
 			$vals[] =  ajax_action_auteur('editer_auteurs', "$id_article,-$id_auteur",'articles', "id_article=$id_article", array(_T('lien_retirer_auteur')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'")));

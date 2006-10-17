@@ -23,7 +23,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // 5. le nombre d'articles publies
 //
 
-function inc_bouton_auteur_dist($id_auteur) {
+function inc_formater_auteur_dist($id_auteur) {
 
 	global $connect_id_auteur, $spip_lang_rtl;
 

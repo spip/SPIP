@@ -93,8 +93,8 @@ if ($id_parent) {
 	echo "<span class='arial2'>$date_heure_parent</span> ";
 
 	if ($id_auteur_parent) {
-		$bouton_auteur = charger_fonction('bouton_auteur', 'inc');
-		list($s, $mail, $nom, $w, $p) = $bouton_auteur($id_auteur_parent);
+		$formater_auteur = charger_fonction('formater_auteur', 'inc');
+		list($s, $mail, $nom, $w, $p) = $formater_auteur($id_auteur_parent);
 		echo "$mail&nbsp;$nom";
 	} else 	echo " ", typo($auteur_parent);
 

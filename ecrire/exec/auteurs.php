@@ -291,10 +291,10 @@ function afficher_n_auteurs($auteurs) {
 	global $connect_statut, $options;
 
 	$res = '';
-	$bouton_auteur = charger_fonction('bouton_auteur', 'inc');
+	$formater_auteur = charger_fonction('formater_auteur', 'inc');
 	foreach ($auteurs as $row) {
 
-		list($s, $mail, $nom, $w, $p) = $bouton_auteur($row['id_auteur']);
+		list($s, $mail, $nom, $w, $p) = $formater_auteur($row['id_auteur']);
 		$res .= "\n<tr style='background-color: #eeeeee;'>"
 		. "\n<td style='border-top: 1px solid #cccccc;'>"
 		. $s
