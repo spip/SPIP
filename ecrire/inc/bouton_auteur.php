@@ -12,14 +12,16 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+
 //
 // Construit un tableau des 5 informations principales sur un auteur,
 // avec des liens vers les scripts associes:
 // 1. l'icone du statut, avec lien vers la page de tous ceux ayant ce statut
-// 2. le nom, avec lien vers la page complete des informations
-// 3. le mot "mail" avec un lien mailto ou a defaut la messagerie de Spip
-// 4. le nom du site perso avec le lien vers lui
+// 2. l'icone du mail avec un lien mailto ou a defaut la messagerie de Spip
+// 3. le nom, avec lien vers la page complete des informations
+// 4. le mot "site" avec le lien vers le site Web personnelle
 // 5. le nombre d'articles publies
+//
 
 function inc_bouton_auteur_dist($id_auteur) {
 

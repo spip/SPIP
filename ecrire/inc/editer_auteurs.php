@@ -224,7 +224,11 @@ function ajouter_auteurs_articles($id_article, $les_auteurs)
 
 function determiner_non_auteurs($les_auteurs, $order)
 {
-	return spip_query("SELECT * FROM spip_auteurs WHERE " . (!$les_auteurs ? '' : "id_auteur NOT IN ($les_auteurs) AND ") . "statut!='5poubelle' AND statut!='6forum' AND statut!='nouveau' ORDER BY $order");
+	if (!$les_auteurs)
+	  $cond = '';
+	else $cond = "id_auteur NOT IN (" . join(',',$les_auteurs) . ') AND ';
+
+	return spip_query("SELECT * FROM spip_auteurs WHERE $cond" . "statut!='5poubelle' AND statut!='6forum' AND statut!='nouveau' ORDER BY $order");
 }
 
 
