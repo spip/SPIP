@@ -38,7 +38,7 @@ function image_math($tex) {
 	// Regarder dans le repertoire local des images TeX et blocs MathML
 
 	if (!@is_dir(_DIR_TeX))
-		@mkdir (_DIR_TeX, 0777);
+		@mkdir (_DIR_TeX, _DIR_CHMOD);
 	$fichier = _DIR_TeX .md5(trim($tex)).$ext;
 	
 
