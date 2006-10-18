@@ -15,33 +15,27 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@exec_memoriser_dist
 function exec_memoriser_dist()
 {
-	global $flag_ob,$connect_id_auteur, $id_ajax_fonc;
+	global $flag_ob,$connect_id_auteur, $id_ajax_fonc, $trad;
 
-	if ($flag_ob) ob_start();
+	$res = spip_fetch_array(spip_query("SELECT variables, hash FROM spip_ajax_fonc	WHERE id_ajax_fonc =" . spip_abstract_quote($id_ajax_fonc) . " AND id_auteur=$connect_id_auteur"));
 
-	$res = spip_fetch_array(spip_query("SELECT variables FROM spip_ajax_fonc	WHERE id_ajax_fonc =" . spip_abstract_quote($id_ajax_fonc) . " AND id_auteur=$connect_id_auteur"));
-
-	if ($res = unserialize($res["variables"])) {
+	if ($res) {
 		
-		foreach($res as $i => $k) $$i = $k;
+	  foreach(unserialize($res["variables"]) as $i => $k){ $$i = $k; }
 
-		include_spip('inc/presentation');		
+	  include_spip('inc/presentation');		
 
-		if ($fonction == "afficher_articles") {
-			afficher_articles ($titre_table, $requete,
-				$afficher_visites, $afficher_auteurs);
-		}
+	  if (_request('trad'))
+		afficher_articles_trad ($param, $id_ajax_fonc, $titre_table, $requete, $afficher_visites, $afficher_auteurs);
 
-		elseif ($fonction == "afficher_articles_trad") {
-			afficher_articles_trad ($titre_table, $requete,
-				$afficher_visites, $afficher_auteurs);
-		}
-	}
-
-	if ($flag_ob) {
-			$res = ob_get_contents();
-			ob_end_clean();
-			ajax_retour($res);
+	  else {
+	    if (!$flag_ob) {spip_log("flag_ob pas la pour memoriser");exit;}
+	    ob_start();
+	    afficher_articles ($titre_table, $requete, $afficher_visites, $afficher_auteurs);
+	    $res = ob_get_contents();
+	    ob_end_clean();
+	    ajax_retour($res);
+	  }
 	}
 }
 ?>

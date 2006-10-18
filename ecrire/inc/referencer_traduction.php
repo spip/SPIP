@@ -64,7 +64,7 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 		$styles = array('', '', 'arial2', 'arial2');
 
 		$liste = "\n<div class='liste'>"
-		. bandeau_titre_boite2(_T('trad_article_traduction'),'', 'white', 'black', false)
+		. bandeau_titre_boite2( '<b>' . _T('trad_article_traduction') . '</b>','', 'white', 'black', false)
 		. "<table width='100%' cellspacing='0' border='0' cellpadding='2'>"
 		. afficher_liste ($largeurs, $table, $styles)
 		. "</table>"

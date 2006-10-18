@@ -197,7 +197,7 @@ function gadget_navigation($id_rubrique) {
 	if (spip_num_rows($vos_articles) > 0) {
 			$gadget .= "<div>&nbsp;</div>";
 			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			$gadget .= bandeau_titre_boite2(afficher_plus(generer_url_ecrire("articles_page",""))._T('info_en_cours_validation'), "article-24.gif", $couleur_foncee, 'white', false);
+			$gadget .= bandeau_titre_boite2(afficher_plus(generer_url_ecrire("articles_page","")) . '<b>' ._T('info_en_cours_validation')  . '</b>', "article-24.gif", $couleur_foncee, 'white', false);
 			$gadget .= "\n<div class='plan-articles'>\n";
 			while($row = spip_fetch_array($vos_articles)) {
 				$id_article = $row['id_article'];
@@ -213,7 +213,7 @@ function gadget_navigation($id_rubrique) {
 	if (spip_num_rows($vos_articles) > 0) {
 			$gadget .= "<div>&nbsp;</div>";
 			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			$gadget .= bandeau_titre_boite2(afficher_plus('./')._T('info_articles_proposes'), "article-24.gif", $couleur_foncee, 'white', false);
+			$gadget .= bandeau_titre_boite2(afficher_plus('./') . '<b>' . _T('info_articles_proposes') . '</b>', "article-24.gif", $couleur_foncee, 'white', false);
 			$gadget .= "<div class='plan-articles'>";
 			while($row = spip_fetch_array($vos_articles)) {
 				$id_article = $row['id_article'];
@@ -230,7 +230,7 @@ function gadget_navigation($id_rubrique) {
 	if (spip_num_rows($vos_articles) > 0) {
 			$gadget .= "<div>&nbsp;</div>";
 			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			$gadget .= bandeau_titre_boite2(afficher_plus(generer_url_ecrire("breves"))._T('info_breves_valider'), "breve-24.gif", "$couleur_foncee", "white", false);
+			$gadget .= bandeau_titre_boite2(afficher_plus(generer_url_ecrire("breves")).'<b>' . _T('info_breves_valider') . '</b>', "breve-24.gif", "$couleur_foncee", "white", false);
 			$gadget .= "<div class='plan-articles'>";
 			while($row = spip_fetch_array($vos_articles)) {
 				$id_breve = $row['id_breve'];

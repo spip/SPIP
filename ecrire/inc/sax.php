@@ -151,13 +151,14 @@ function xml_parsestring($xml_parser, $data)
 	    xml_get_current_line_number($xml_parser) .
 	    _L(" colonne ") .
 	    xml_get_current_column_number($xml_parser) .
-	    '<br />' .
-	    _L("derni&egrave;re balise non referm&eacute;e&nbsp;: ") .
-	    "<tt>" .
-	    $phraseur_xml->ouvrant[$phraseur_xml->depth] .
-	    "</tt>" .
-	    _L(" ligne ") .
-	    $phraseur_xml->reperes[$phraseur_xml->depth];
+	    (!$depth ? '' :
+	     ('<br />' .
+	      _L("derni&egrave;re balise non referm&eacute;e&nbsp;: ") .
+	      "<tt>" .
+	      $phraseur_xml->ouvrant[$phraseur_xml->depth] .
+	      "</tt>" .
+	      _L(" ligne ") .
+	      $phraseur_xml->reperes[$phraseur_xml->depth]));
 
 	} else $r = $phraseur_xml->res;
 

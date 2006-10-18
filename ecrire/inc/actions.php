@@ -216,8 +216,27 @@ function ajax_retour($corps)
 {
 	$c = $GLOBALS['meta']["charset"];
 	header('Content-Type: text/html; charset='. $c);
-	echo '<', "?xml version='1.0' encoding='", $c, "'?", ">\n", $corps;
+	$c = '<' . "?xml version='1.0' encoding='" . $c . "'?" . ">\n";
+	if (isset($GLOBALS['ajax_debug']))
+	  ajax_debug_retour($corps, $c);
+	echo $c, $corps;
 	exit;
+}
+
+function ajax_debug_retour($c, $corps)
+{
+	$f = charger_fonction('sax', 'inc');
+	$corps = $f($corps);
+	if ($GLOBALS['xhtml_error']) {
+	  spip_log("ajax_retour " .  $GLOBALS['xhtml_error']);
+	  $debut = "<script type='text/javascript'>console.log('";
+	  $fin = "')</script>\n";
+	  $corps = $GLOBALS['xhtml_error']
+	  . $debut
+	  . join("$fin$debut", split("\n", addslashes($corps)))
+	  . $fin;
+	  $c ='';
+	}
 }
 
 // http://doc.spip.org/@determine_upload
