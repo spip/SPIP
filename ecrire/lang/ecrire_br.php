@@ -673,6 +673,7 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 
 
 // L
+'les_deux' => 'an daou',
 'lien_ajout_destinataire' => 'Ouzhpenna&ntilde; an degemerer-ma&ntilde;',
 'lien_ajouter_auteur' => 'Ouzhpenna&ntilde; ar skridaozer-ma&ntilde;',
 'lien_ajouter_participant' => 'Ouzhpenna&ntilde; ur perzhiad',

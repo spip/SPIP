@@ -694,6 +694,7 @@ cunha cor que indica o seu estado&nbsp;:',
 
 
 // L
+'les_deux' => 'os dous',
 'lien_ajout_destinataire' => 'Engadir destinatari@',
 'lien_ajouter_auteur' => 'Engadir autor/a',
 'lien_ajouter_participant' => 'Engadir participante',

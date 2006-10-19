@@ -272,6 +272,7 @@ Dankon pro via partopreno
 'forum_acces_refuse' => 'Vi ne plu havas alir-rajton al tiuj &#265;i forumoj.',
 'forum_attention_dix_caracteres' => '<b>Atentu&nbsp;!</b> via mesa&#285;o devas enhavi almena&#365; dek signojn.',
 'forum_attention_trois_caracteres' => '<b>Atentu&nbsp;!</b> via titolo devas enhavi almena&#365; tri signojn.',
+'forum_attention_trop_caracteres' => '<NEW><b>Attention&nbsp;!</b> votre message est trop long (@compte@ caract&egrave;res)&nbsp;: pour pouvoir &ecirc;tre enregistr&eacute;, il ne doit pas d&eacute;passer @max@ caract&egrave;res.',
 'forum_avez_selectionne' => 'Vi selektis&nbsp;:',
 'forum_cliquer_retour' => 'Musklaku <a href=\'@retour_forum@\'>&#265;i tie</a> por da&#365;rigi.',
 'forum_forum' => 'forumo',

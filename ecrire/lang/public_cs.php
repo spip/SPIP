@@ -120,7 +120,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // V
 'ver_imprimer' => 'Verze pro tisk',
-'voir_en_ligne' => 'Pod&iacute;vejte se online'
+'voir_en_ligne' => 'Pod&iacute;vejte se online',
+'voir_squelette' => 'Zobrazit &#353;ablonu t&eacute;to str&aacute;nky'
 
 );
 
