@@ -25,8 +25,16 @@ function action_editer_article_dist() {
 	if (!$id_article = intval($arg)) {
 		if ($arg != 'oui') redirige_par_entete('./');
 		$id_article = insert_article(_request('id_parent'));
+		
+		# cf. GROS HACK ecrire/inc/getdocument
+		# rattrapper les documents associes a cet article nouveau
+		# ils ont un id = 0-id_auteur
+		if ($GLOBALS['auteur_session']['id_auteur']>0)
+			spip_query("UPDATE spip_documents_articles
+			SET id_article = $id_article
+			WHERE id_article = ".(0-$GLOBALS['auteur_session']['id_auteur']));
 	} 
-	  
+
 	// Enregistre l'envoi dans la BD
 	$err = articles_set($id_article, $arg=='oui');
 
