@@ -42,6 +42,7 @@ function action_instituer_auteur_dist() {
 					marquer_indexer('spip_auteurs', $id_auteur);
 				}
 				// Mettre a jour les fichiers .htpasswd et .htpasswd-admin
+				include_spip('inc/acces');
 				ecrire_acces();
 			}
 		}
