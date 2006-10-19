@@ -51,8 +51,7 @@ debut_droite();
 // Vos articles en cours de redaction
 //
 
-echo "<P align=left>";
- afficher_articles(_T('info_en_cours_validation'), array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien ", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa'", 'ORDER BY' => "articles.date DESC"));
+ echo "<P align=left>", afficher_articles(_T('info_en_cours_validation'), array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien ", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa'", 'ORDER BY' => "articles.date DESC"));
 echo "</p>";
 
 
@@ -61,24 +60,21 @@ echo "</p>";
 // Vos articles soumis au vote
 //
 
-echo "<p>";
- afficher_articles(_T('info_attente_validation'), array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien ", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prop'", "ORDER BY" => "articles.date"));
+ echo "<p>", afficher_articles(_T('info_attente_validation'), array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien ", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prop'", "ORDER BY" => "articles.date"));
 echo "</p>";
 
 //
 // Vos articles publies
 //
 
-echo "<p>";
- afficher_articles(_T('info_publies'),	array("FROM" =>"spip_articles AS articles, spip_auteurs_articles AS lien ", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut='publie'", 'ORDER BY' => "articles.date DESC"), true);
+ echo "<p>", afficher_articles(_T('info_publies'),	array("FROM" =>"spip_articles AS articles, spip_auteurs_articles AS lien ", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut='publie'", 'ORDER BY' => "articles.date DESC"), true);
 echo "</p>";
 
 //
 //  Vos articles refuses
 //
 
-echo "<p>";
- afficher_articles(_T('info_refuses'),	array('FROM' =>"spip_articles AS articles, spip_auteurs_articles AS lien ", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut='refuse'",  'ORDER BY' => "articles.date DESC"));
+ echo "<p>",  afficher_articles(_T('info_refuses'),	array('FROM' =>"spip_articles AS articles, spip_auteurs_articles AS lien ", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut='refuse'",  'ORDER BY' => "articles.date DESC"));
 echo "</p>";
 
 echo fin_page();

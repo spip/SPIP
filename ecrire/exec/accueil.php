@@ -18,7 +18,7 @@ charger_generer_url();
 include_spip('inc/rubriques');
 
 // http://doc.spip.org/@encours_accueil
-function encours_accueil($vos_articles)
+function encours_accueil()
 {
   global $connect_statut, $connect_toutes_rubriques, $connect_id_auteur, $flag_ob;
 
@@ -36,8 +36,7 @@ else
 	// Les articles a valider
 	//
 
-
- afficher_articles(_T('info_articles_proposes'), array("WHERE" => "statut='prop'$vos_articles", 'ORDER BY' => "date DESC"));
+ echo  afficher_articles(_T('info_articles_proposes'), array("WHERE" => "statut='prop'$vos_articles", 'ORDER BY' => "date DESC"));
 
 	//
 	// Les breves a valider
@@ -390,11 +389,8 @@ if ($spip_display != 4) {
 // Afficher les raccourcis : boutons de creation d'article et de breve, etc.
 //
 
-
 	creer_colonne_droite();
 	echo "<div>&nbsp;</div>";	
-
-
 	
 	//
 	// Annonces
@@ -403,7 +399,6 @@ if ($spip_display != 4) {
 	echo    http_calendrier_rv(sql_calendrier_taches_pb(),"pb") ;
 	echo    http_calendrier_rv(sql_calendrier_taches_rv(), "rv");
 
-	
 	//
 	// Afficher le calendrier du mois s'il y a des rendez-vous
 	//
@@ -432,59 +427,55 @@ if ($spip_display != 4) {
 function exec_accueil_dist()
 {
 
-  global $id_rubrique, $meta, $connect_statut, $options,  $connect_id_auteur, $flag_ob;
+	global $id_rubrique, $meta, $connect_statut, $options,  $connect_id_auteur, $flag_ob;
 
-  $id_rubrique =  intval($id_rubrique);
+	$id_rubrique =  intval($id_rubrique);
  	pipeline('exec_init',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
  
-  debut_page(_T('titre_page_index'), "accueil", "accueil");
+	debut_page(_T('titre_page_index'), "accueil", "accueil");
 
-  debut_gauche();
+	debut_gauche();
 
-  personnel_accueil();
-  etat_base_accueil();
+	personnel_accueil();
+	etat_base_accueil();
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
 	creer_colonne_droite();
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
-  debut_droite();
+
+	debut_droite();
 
 //
 // Articles post-dates en attente de publication
 //
 
-$post_dates = $GLOBALS['meta']["post_dates"];
+	$post_dates = $GLOBALS['meta']["post_dates"];
 
-if ($post_dates == "non" AND $connect_statut == '0minirezo' AND $options == 'avancees') {
-	echo "<p>";
-	afficher_articles(_T('info_article_a_paraitre'), array("WHERE" => "statut='publie' AND date>NOW()", 'ORDER BY' => "date"));
+	if ($post_dates == "non" AND $connect_statut == '0minirezo' AND $options == 'avancees') {
+		echo "<p>", afficher_articles(_T('info_article_a_paraitre'), array("WHERE" => "statut='publie' AND date>NOW()", 'ORDER BY' => "date"));
 }
 
 //
 // Vos articles en cours de redaction
 //
 
-echo "<p>";
- $vos_articles = afficher_articles(afficher_plus(generer_url_ecrire('articles_page'))._T('info_en_cours_validation'),	array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa'", "ORDER BY" => "articles.date DESC"));
+	echo "<p>", afficher_articles(afficher_plus(generer_url_ecrire('articles_page'))._T('info_en_cours_validation'),	array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa'", "ORDER BY" => "articles.date DESC"));
 
- $vos_articles = !$vos_articles ? '' : (' AND articles.id_article NOT IN ('.join(',',$vos_articles) .')');
-
-  colonne_gauche_accueil($id_rubrique,
+	colonne_gauche_accueil($id_rubrique,
 			 $GLOBALS['meta']["activer_breves"],
 			 $GLOBALS['meta']["activer_sites"],
 			 $GLOBALS['meta']['articles_mots']);
 
-  encours_accueil($vos_articles);
+	encours_accueil();
 
-  echo afficher_enfant_rub(0, false, true);
+	echo afficher_enfant_rub(0, false, true);
 
- // Dernieres modifications d'articles
- if ($options == 'avancees'
- AND ($GLOBALS['meta']['articles_versions'] == 'oui')) {
-	include_spip('inc/suivi_versions');
-	afficher_suivi_versions (0, 0, false, "", true);
- }
+	// Dernieres modifications d'articles
+	if ($options == 'avancees'
+	AND ($GLOBALS['meta']['articles_versions'] == 'oui')) {
+		include_spip('inc/suivi_versions');
+		afficher_suivi_versions (0, 0, false, "", true);
+	}
 
-
- echo fin_page();
+	echo fin_page();
 }
 ?>
