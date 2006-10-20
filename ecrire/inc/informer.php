@@ -63,7 +63,7 @@ function inc_informer_dist($id, $col, $exclus, $rac, $type)
 	. "<div style='text-align: $spip_lang_right;'>"
 	. "<input type='submit' class='fondo' value='"
 	. _T('bouton_choisir')
-	. "'\nonclick=\"aff_selection_titre('$titre',$id),'selection_rubrique'; return false;\" />"
+	. "'\nonclick=\"aff_selection_titre('$titre',$id,'selection_rubrique','id_parent'); return false;\" />"
 	.  "</div>"
 	.  "</div>";
 }
