@@ -695,7 +695,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	// memo des arguments en base pour gérer l'affichage par tranche
 	// et/ou par langues.
 
-	$hash = "0x".substr(md5($connect_id_auteur.$requete.$titre_table), 0, 31);
+	$hash = "0x".substr(md5($connect_id_auteur. serialize($requete) . $titre_table), 0, 31);
 	$tmp_var = 't' . substr($hash, 2, 7);
 
 	$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur LIMIT 1");
@@ -713,6 +713,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 		$id_ajax = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, " . spip_abstract_quote($variables) . ", $hash, NOW())");
 		}
+
 	$activer_statistiques = $GLOBALS['meta']["activer_statistiques"];
 	$afficher_visites = ($afficher_visites AND $connect_statut == "0minirezo" AND $activer_statistiques != "non");
 	$afficher_langue = false;
@@ -864,7 +865,7 @@ $afficher_auteurs= true,  $obligatoire = false, $afficher_cadre = true, $affiche
 
 	$res = afficher_article_logo_trad($titre_table, $tranches, $largeurs, $table, $styles, $tmp_var, $id_ajax, 0);
 	
-	ajax_retour($res);
+	return $res;
 }
 
 // http://doc.spip.org/@afficher_articles_trad_boucle
