@@ -42,7 +42,7 @@ function action_purger_dist()
 	break;
 
   case 'vignettes':
-	purger_repertoire(_DIR_IMG, $age='ignore', $regexp = '^cache\-');
+	purger_repertoire(_DIR_TMP_IMG, $age='ignore', $regexp = '^cache\-');
 	spip_log('vider le cache');
 	supprime_invalideurs();
 	purger_repertoire(_DIR_CACHE, 0);
@@ -51,7 +51,7 @@ function action_purger_dist()
   case 'taille_vignettes':
 
   	global $lang;
-	$handle = @opendir(_DIR_IMG);
+	$handle = @opendir(_DIR_TMP_IMG);
 	if (!$handle) return;
 
 	$taille = 0;
@@ -59,8 +59,8 @@ function action_purger_dist()
 		// Eviter ".", "..", ".htaccess", etc.
 		if ($fichier[0] == '.') continue;
 		if ($regexp AND !ereg($regexp, $fichier)) continue;
-		if (is_dir(_DIR_IMG.$fichier) AND ereg("^cache-", $fichier)) {
-			$taille += calculer_taille_dossier(_DIR_IMG.$fichier);
+		if (is_dir(_DIR_TMP_IMG.$fichier) AND ereg("^cache-", $fichier)) {
+			$taille += calculer_taille_dossier(_DIR_TMP_IMG.$fichier);
 		}
 	}
 	closedir($handle);

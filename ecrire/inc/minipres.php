@@ -20,6 +20,8 @@ include_spip('inc/lang');
 
 // http://doc.spip.org/@install_debut_html
 function install_debut_html($titre = 'AUTO') {
+	global $spip_lang_right;
+	
 	include_spip('inc/filtres');
 	include_spip('inc/headers');
 	utiliser_langue_visiteur();
@@ -35,28 +37,54 @@ function install_debut_html($titre = 'AUTO') {
 		header('Content-Type: text/html; charset=utf-8');
 
 	echo  _DOCTYPE_ECRIRE ,
-	  html_lang_attributes(),
-	  "<head>\n",
-	  "<title>",
-	  textebrut($titre),
-	  "</title>
-	  <style type='text/css'><!--\n/*<![CDATA[*/\n\n\n",
-	  "a {text-decoration: none; }",
-	  "img {border: 0; }",
+		html_lang_attributes(),
+		"<head>\n",
+		"<title>",
+		textebrut($titre),
+		"</title>
+		<style type='text/css'><!--\n/*<![CDATA[*/\n\n\n",
+		"body { background: #FFF; color: #000; }\n",
+		"h1 { color: #970038; margin-top: 50px; font-family: Verdana; font-weigth: bold; font-size: 18px }\n",
+		"a { color: #E86519; text-decoration: none; }\n",
+		"a:visited { color: #6E003A; }\n",
+		"a:active { color: #FF9900; }\n",
+		"img { border: 0; }\n",
+		"#minipres { width: 30em; text-align: center; margin-left: auto; margin-right: auto; }\n",
+		"ul, p, label { text-align: justify; margin: 0;}\n",
+		"fieldset { margin: 0.5em 0; }\n",
+		".suivant { text-align: $spip_lang_right; }\n",
+		".sans_puce { list-style-type: none; }\n",
+		".fondl { padding: 3px; background-color: #eee; border: 1px solid #333; 
+	background-position: center bottom; 
+	font-size: 0.8em;
+	font-family: Verdana,Arial,Sans,sans-serif; }\n",
+		".formo { width: 100%; display: block; padding: 3px;
+	margin-top: 1em;
+	background-color: #FFF; 
+	border: 1px solid #333; 
+	background-position: center bottom; 
+	behavior: url(../dist/win_width.htc);
+	font-size: 0.8em;
+	font-family: Verdana,Arial,Sans,sans-serif; }\n",
 	  "\n\n]]>\n--></style>\n\n
 </head>
-<body bgcolor='#FFFFFF' text='#000000' link='#E86519' vlink='#6E003A' alink='#FF9900'>
-<table style='margin-top:50px; width: 450px;' align='center'>
-<tr><th style='color: #970038;text-align: left;font-family: Verdana; font-weigth: bold; font-size: 18px'>",
+<body>
+	<div id='minipres'>
+	<h1>",
 	  $titre ,
-	  "</th></tr>
-<tr><td  class='serif'>";
+	  "</h1>
+	<div>\n";
 }
 
 // http://doc.spip.org/@install_fin_html
 function install_fin_html() {
+	echo "\n\t</div>\n\t</div>\n</body>\n</html>";
+}
 
-	echo '</td></tr></table></body></html>';
+function bouton_suivant() {
+	return "<p class='suivant'><input type='submit' class='fondl' value='" .
+		_T('bouton_suivant') .
+		" >>' /></p>";
 }
 
 // http://doc.spip.org/@minipres

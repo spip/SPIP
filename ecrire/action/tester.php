@@ -88,7 +88,7 @@ function action_tester_dist() {
 			"pnmtojpeg", $pnmscale_command);
 
 		$vignette = _ROOT_IMG_PACK."test.jpg";
-		$dest = _DIR_IMG . "test-jpg.jpg";
+		$dest = _DIR_TMP_IMG . "test-jpg.jpg";
 		$commande = "$jpegtopnm_command $vignette | $pnmscale_command -width 10 | $pnmtojpeg_command > $dest";
 		spip_log($commande);
 		exec($commande);
@@ -98,7 +98,7 @@ function action_tester_dist() {
 		$giftopnm_command = str_replace("pnmscale", "giftopnm", $pnmscale_command);
 		$pnmtojpeg_command = str_replace("pnmscale", "pnmtojpeg", $pnmscale_command);
 		$vignette = _ROOT_IMG_PACK."test.gif";
-		$dest = _DIR_IMG . "test-gif.jpg";
+		$dest = _DIR_TMP_IMG . "test-gif.jpg";
 		$commande = "$giftopnm_command $vignette | $pnmscale_command -width 10 | $pnmtojpeg_command > $dest";
 		spip_log($commande);
 		exec($commande);
@@ -108,7 +108,7 @@ function action_tester_dist() {
 
 		$pngtopnm_command = str_replace("pnmscale", "pngtopnm", $pnmscale_command);
 		$vignette = _ROOT_IMG_PACK."test.png";
-		$dest = _DIR_IMG . "test-gif.jpg";
+		$dest = _DIR_TMP_IMG . "test-gif.jpg";
 		$commande = "$pngtopnm_command $vignette | $pnmscale_command -width 10 | $pnmtojpeg_command > $dest";
 		spip_log($commande);
 		exec($commande);

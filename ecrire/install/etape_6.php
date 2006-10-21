@@ -18,10 +18,10 @@ function install_etape_6_dist()
 	install_debut_html();
 
 
-	echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_derniere_etape')."</B></FONT>";
+	echo "<p><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_derniere_etape')."</B></FONT></p>";
 	echo "<P>";
 	echo "<B>"._T('info_code_acces')."</B>";
-	echo "<P>"._T('info_utilisation_spip');
+	echo "</p><P>"._T('info_utilisation_spip')."</p>";
 
 	if (@file_exists(_FILE_CONNECT_INS . _FILE_TMP . '.php'))
 		include(_FILE_CONNECT_INS . _FILE_TMP . '.php');
@@ -79,7 +79,7 @@ function install_etape_6_dist()
 	}
 
 	echo "<form action='./' method='post'>";
-	echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
+	echo bouton_suivant();
 	echo "</FORM>";
 
 	ecrire_metas();

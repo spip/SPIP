@@ -20,22 +20,19 @@ function install_etape__dist()
 		redirige_par_entete(generer_url_action('test_dirs'));
 	else {
 		install_debut_html();
-	
-		echo "<p align='center'><img src='" . _DIR_IMG_PACK . "logo-spip.gif'></p>",
-		  "<p style='text-align: center; font-family: Verdana,Arial,Sans,sans-serif; font-size: 10px;'>",
-		 info_copyright(),
-		  "</p>",
-		  "<p>" . _T('install_select_langue'),
-		  "<p><div align='center'>",
-		  $menu_langues,
-		  "</div>",
-		  "<p><form action='", generer_url_action('test_dirs'),
-		  "'>",
-		  '<input type="hidden" name="action" value="test_dirs" />',
-		  "<div align='$spip_lang_right'><input type='submit' class='fondl'  VALUE='",
-		  _T('bouton_suivant'),
-		  " >>'>",
-		  "</form>";
+		echo "<p align='center'><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></p>\n",
+			"<p style='text-align: center; font-family: Verdana,Arial,Sans,sans-serif; font-size: 10px;'>",
+			info_copyright(),
+			"</p>\n",
+			"<p>" . _T('install_select_langue'),
+			"</p><div align='center'>",
+			$menu_langues,
+			"</div>\n",
+			"<form action='", generer_url_action('test_dirs'),
+			"'>",
+			'<input type="hidden" name="action" value="test_dirs" />',
+			bouton_suivant(),
+			"</form>";
 		install_fin_html();
 	}
 }

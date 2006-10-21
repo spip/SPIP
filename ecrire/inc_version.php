@@ -28,12 +28,24 @@ define("_ECRIRE_INC_VERSION", "1");
 # ou inversement ?
 @define('_DIR_RACINE', _DIR_RESTREINT ? '' : '../');
 
-# le nom du repertoire config/
-define('_DIR_CONFIG', _DIR_RACINE . "config/");
+# le nom du repertoire plugins/
+define('_DIR_PLUGINS', _DIR_RACINE . "plugins/");
 
 // nombre de repertoires depuis la racine
 
 $profondeur_url = _DIR_RESTREINT ? 0 : 1;
+
+# LES 4 repertoires que les scripts lances par httpd doivent pouvoir modifier
+# Par defaut ces 4 noms seront suffixes par _DIR_RACINE (cf plus bas)
+# mais on peut les mettre ailleurs et changer completement leur nom
+# le nom du repertoire des fichiers Permanents Inaccessibles par http://
+define('_DIR_CONFIG', _DIR_RACINE . "config/");
+# le nom du repertoire des fichiers Permanents Accessibles par http://
+define('_DIR_IMG', _DIR_RACINE . "IMG/");
+# le nom du repertoire des fichiers Temporaires Accessibles par http://
+define('_DIR_TMP_IMG', _DIR_RACINE . "tmp_img/");
+# le nom du repertoire des fichiers Temporaires Inaccessibles par http://
+define('_DIR_TMP', _DIR_RACINE . "tmp/");
 
 //
 // *** Parametrage par defaut de SPIP ***
@@ -262,25 +274,23 @@ $auteur_session = $connect_statut = $connect_toutes_rubriques = $connect_id_rubr
 // mais ne touche pas a cette variable si elle est deja definie
 // afin que mes_options.php puisse en specifier d'autres.
 
-function spip_initialisation_parametree($dir1) {
+function spip_initialisation_parametree($pi, $pa, $ti, $ta) {
 
 	static $too_late = false;
 	if ($too_late) return;
 	$too_late = true;
 
-	define('_DIR_CHMOD', 0777);
+	define('_DIR_DOC', $pa);
+	define('_DIR_LOGOS', $pa);
+	define('_DIR_IMG_ICONES', $pa . "icones/");
 
-	define('_DIR_IMG', $dir1 ."IMG/");
-	define('_DIR_DOC', $dir1 ."IMG/");
-	define('_DIR_LOGOS', $dir1 ."IMG/");
-	define('_DIR_CACHE', $dir1 ."tmp/CACHE/");
-	define('_DIR_SKELS', $dir1 ."tmp/CACHE/skel/");
-	define('_DIR_PLUGINS', $dir1 . "plugins/");
+	define('_DIR_TeX', _DIR_TMP . "cache-TeX/");
 
-	define('_DIR_TMP', $dir1 . "tmp/");
-	define('_DIR_DUMP', $dir1 . "tmp/data/");
-	define('_DIR_SESSIONS', $dir1 . "tmp/sessions/");
-	define('_DIR_TRANSFERT', $dir1 . "tmp/upload/");
+	define('_DIR_DUMP', $ta . "data/");
+	define('_DIR_SESSIONS', $ta . "sessions/");
+	define('_DIR_TRANSFERT', $ta . "upload/");
+	define('_DIR_CACHE', $ta . "CACHE/");
+	define('_DIR_SKELS', $ta . "CACHE/skel/");
 
 	// les fichiers qu'on y met, entre autres
 	define('_FILE_CRON_LOCK', _DIR_TMP . 'cron.lock');
@@ -288,21 +298,18 @@ function spip_initialisation_parametree($dir1) {
 	define('_FILE_GARBAGE', _DIR_TMP . '.poubelle');
 	define('_FILE_META', _DIR_TMP . 'meta_cache.txt');
 
-	// sous-repertoires d'images et d'icones
-	define('_DIR_TeX', _DIR_IMG . "cache-TeX/");
-	define('_DIR_IMG_ICONES', _DIR_IMG . "icones/");
 
 	// Le fichier de connexion a la base de donnees
-	define('_FILE_CONNECT_INS_191', (_DIR_RESTREINT . "inc_connect"));
-	define('_FILE_CONNECT_INS', (_DIR_CONFIG . "connect"));
+	define('_FILE_CONNECT_INS_ANTE_192', (_DIR_RESTREINT . "inc_connect"));
+	define('_FILE_CONNECT_INS', ($pi . "connect"));
 	define('_FILE_CONNECT',
 		(@is_readable($f = _FILE_CONNECT_INS . '.php') ? $f
-	:	(@is_readable($f = _FILE_CONNECT_INS_191 . '.php') ? $f
-	:	(@is_readable($f = _FILE_CONNECT_INS_191 . '.php3') ? $f
+	:	(@is_readable($f = _FILE_CONNECT_INS_ANTE_192 . '.php') ? $f
+	:	(@is_readable($f = _FILE_CONNECT_INS_ANTE_192 . '.php3') ? $f
 	:	false))));
 
 	if (!isset($GLOBALS['test_dirs']))
-		$GLOBALS['test_dirs'] =  array(_DIR_IMG, _DIR_TMP);
+		$GLOBALS['test_dirs'] =  array($pa, $ti, $ta);
 }
 
 //
@@ -314,7 +321,7 @@ if (defined('_FILE_OPTIONS')) {
 		include_once(_FILE_OPTIONS);
 	}
 } else {
-	if (@file_exists(_DIR_CONFIG . 'mes_options.php')) {
+	if (@file_exists(_DIR_PI . 'mes_options.php')) {
 		define('_FILE_OPTIONS',_DIR_CONFIG . 'mes_options.php');
 		include_once(_FILE_OPTIONS);
 	}
@@ -335,7 +342,7 @@ if (defined('_FILE_OPTIONS')) {
 // 
 // mais cette fonction a peut-etre deja ete appelee par mes_options
 
-spip_initialisation_parametree(_DIR_RACINE) ;
+spip_initialisation_parametree(_DIR_CONFIG, _DIR_IMG, _DIR_TMP_IMG, _DIR_TMP);
 
 //
 // Definitions standards (charge aussi inc/flock)
@@ -383,7 +390,7 @@ OR _request('action') == 'test_dirs')) {
 	} else {
 	// Si on est dans le site public, dire que qq s'en occupe
 		include_spip('inc/minipres');
-		minipres(_T('info_travaux_titre'), "<p>"._T('info_travaux_texte')."</p>");
+		minipres(_T('info_travaux_titre'), "<p style='text-align: center;'>"._T('info_travaux_texte')."</p>");
 	}
 	// autrement c'est une install ad hoc (spikini...), on sait pas faire
 }

@@ -29,6 +29,7 @@ function install_etape_1_dist()
 	list($adresse_db, $login_db) = login_hebergeur();
 	$pass_db = '';
 
+	$chmod = (isset($_GET['chmod']) AND preg_match(',^[0-9]+$,', $_GET['chmod']))? sprintf('%04o', $_GET['chmod']):'0777';
 	// Recuperer les anciennes donnees pour plus de facilite (si presentes)
 	if (@file_exists(_FILE_CONNECT_INS . _FILE_TMP . '.php')) {
 		$s = @join('', @file(_FILE_CONNECT_INS . _FILE_TMP . '.php'));
@@ -41,25 +42,26 @@ function install_etape_1_dist()
 			if ($port_db = $regs[2]) $adresse_db .= ':'.$port_db;
 			$login_db = $regs[3];
 		}
+		if(ereg("define\(_SPIP_CHMOD, (.*)\)", $s, $regs)) {
+			$chmod = $regs[1]; 
+		}
 	}
-
 	echo generer_url_post_ecrire('install');
-	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='2'>";
+	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='2' />";
+	echo "<INPUT TYPE='hidden' NAME='chmod' VALUE='$chmod' />";
 	echo "<fieldset><label><B>"._T('entree_base_donnee_1')."</B><BR />\n</label>";
-	echo _T('entree_base_donnee_2')."<BR />\n";
-	echo "<INPUT TYPE='text' NAME='adresse_db' CLASS='formo' VALUE=\"$adresse_db\" SIZE='40'></fieldset><P>";
+	echo "<p>"._T('entree_base_donnee_2')."</p>\n";
+	echo "<INPUT TYPE='text' NAME='adresse_db' CLASS='formo' VALUE=\"$adresse_db\" SIZE='40' /></fieldset>";
 
 	echo "<fieldset><label><B>"._T('entree_login_connexion_1')."</B><BR />\n</label>";
-	echo _T('entree_login_connexion_2')."<BR />\n";
-	echo "<INPUT TYPE='text' NAME='login_db' CLASS='formo' VALUE=\"$login_db\" SIZE='40'></fieldset><P>";
+	echo "<p>"._T('entree_login_connexion_2')."</p>\n";
+	echo "<INPUT TYPE='text' NAME='login_db' CLASS='formo' VALUE=\"$login_db\" SIZE='40' /></fieldset>";
 
 	echo "<fieldset><label><B>"._T('entree_mot_passe_1')."</B><BR />\n</label>";
-	echo _T('entree_mot_passe_2')."<BR />\n";
-	echo "<INPUT TYPE='password' NAME='pass_db' CLASS='formo' VALUE=\"$pass_db\" SIZE='40'></fieldset><P>";
+	echo "<p>"._T('entree_mot_passe_2')."</p>\n";
+	echo "<INPUT TYPE='password' NAME='pass_db' CLASS='formo' VALUE=\"$pass_db\" SIZE='40' /></fieldset>";
 
-	echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
-
-
+	echo bouton_suivant();
 	echo "</FORM>";
 
 	install_fin_html();
