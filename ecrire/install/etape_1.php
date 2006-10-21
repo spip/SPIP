@@ -42,7 +42,7 @@ function install_etape_1_dist()
 			if ($port_db = $regs[2]) $adresse_db .= ':'.$port_db;
 			$login_db = $regs[3];
 		}
-		if(ereg("define\(_SPIP_CHMOD, (.*)\)", $s, $regs)) {
+		if(ereg("define\('_SPIP_CHMOD', (.*)\)", $s, $regs)) {
 			$chmod = $regs[1]; 
 		}
 	}

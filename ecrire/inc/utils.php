@@ -208,7 +208,10 @@ function spip_connect($serveur='') {
 
 	$f = charger_fonction($serveur, 'base', true);
 
-	return ($t[$serveur] = ($f ? $f() : false));
+	$t[$serveur] = $f ? $f() : false;
+	if(!defined('_SPIP_CHMOD')
+		define('_SPIP_CHMOD', 0777);
+	return $t[$serveur];
 }
 
 // http://doc.spip.org/@spip_query
