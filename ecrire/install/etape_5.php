@@ -22,6 +22,11 @@ function install_etape_5_dist()
 	else
 		redirige_par_entete(generer_url_ecrire('install'));
 
+	if (@file_exists(_FILE_CHMOD_INS . _FILE_TMP . '.php'))
+		include(_FILE_CHMOD_INS . _FILE_TMP . '.php');
+	else
+		redirige_par_entete(generer_url_ecrire('install'));
+
 	echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_informations_personnelles')."</FONT>\n";
 
 	echo "<b>"._T('texte_informations_personnelles_1')."</b>";
