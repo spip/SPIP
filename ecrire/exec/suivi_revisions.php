@@ -67,7 +67,7 @@ $result = spip_query("SELECT * FROM spip_rubriques WHERE id_parent = 0 ORDER BY 
 
 while ($row = spip_fetch_array($result)) {
 	$id_rubrique = $row['id_rubrique'];
-	$titre = propre($row['titre']);
+	$titre = typo($row['titre']);
 	
 	$result_rub = spip_query("SELECT versions.*, articles.statut, articles.titre FROM spip_versions AS versions, spip_articles AS articles  WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.id_secteur=$id_rubrique$req_where LIMIT 1");
 	
