@@ -67,7 +67,7 @@ echo "</p>";
 // Vos articles publies
 //
 
- echo "<p>", afficher_articles(_T('info_publies'),	array("FROM" =>"spip_articles AS articles, spip_auteurs_articles AS lien ", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut='publie'", 'ORDER BY' => "articles.date DESC"), true);
+ echo "<p>", afficher_articles(_T('info_publies'),	array("FROM" =>"spip_articles AS articles, spip_auteurs_articles AS lien ", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut='publie'", 'ORDER BY' => "articles.date DESC"));
 echo "</p>";
 
 //

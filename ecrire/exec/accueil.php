@@ -36,7 +36,7 @@ else
 	// Les articles a valider
 	//
 
- echo  afficher_articles(_T('info_articles_proposes'), array("WHERE" => "statut='prop'$vos_articles", 'ORDER BY' => "date DESC"));
+ echo  afficher_articles(_T('info_articles_proposes'), array("WHERE" => "statut='prop'", 'ORDER BY' => "date DESC"));
 
 	//
 	// Les breves a valider
