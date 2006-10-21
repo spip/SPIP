@@ -28,25 +28,9 @@ define("_ECRIRE_INC_VERSION", "1");
 # ou inversement ?
 @define('_DIR_RACINE', _DIR_RESTREINT ? '' : '../');
 
-# le nom du repertoire plugins/
-define('_DIR_PLUGINS', _DIR_RACINE . "plugins/");
-
 // nombre de repertoires depuis la racine
-
 $profondeur_url = _DIR_RESTREINT ? 0 : 1;
 
-# Le nom des 4 repertoires modifiables par les scripts lances par httpd
-# Par defaut ces 4 noms seront suffixes par _DIR_RACINE (cf plus bas)
-# mais on peut les mettre ailleurs et changer completement les noms
-
-# le nom du repertoire des fichiers Permanents Inaccessibles par http://
-define('_DIRNAME_PERMANENT_INACCESSIBLE', "config/");
-# le nom du repertoire des fichiers Permanents Accessibles par http://
-define('_DIRNAME_PERMANENT_ACCESSIBLE', "IMG/");
-# le nom du repertoire des fichiers Temporaires Inaccessibles par http://
-define('_DIRNAME_TEMPORAIRE_INACCESSIBLE', "tmp/");
-# le nom du repertoire des fichiers Temporaires Accessibles par http://
-define('_DIRNAME_TEMPORAIRE_ACCESSIBLE', "tmp_img/");
 
 //
 // *** Parametrage par defaut de SPIP ***
@@ -275,11 +259,20 @@ $auteur_session = $connect_statut = $connect_toutes_rubriques = $connect_id_rubr
 // mais ne touche pas a cette variable si elle est deja definie
 // afin que mes_options.php puisse en specifier d'autres.
 
-function spip_initialisation_parametree($pi, $pa, $ti, $ta) {
+function spip_initialisation_parametree($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL){
+	static $too_late = 0;
+	if ($too_late++) return;
 
-	static $too_late = false;
-	if ($too_late) return;
-	$too_late = true;
+
+	// Quatre repertoires modifiables par les scripts de SPIP
+	# Repertoire des fichiers Permanents Inaccessibles par http://
+	isset($pi) OR $pi = _DIR_RACINE.'config/';
+	# Repertoire des fichiers Permanents Accessibles par http://
+	isset($pa) OR $pa = _DIR_RACINE.'IMG/';
+	# Repertoire des fichiers Temporaires Inaccessibles par http://
+	isset($ti) OR $ti = _DIR_RACINE.'tmp/';
+	# Repertoire des fichiers Temporaires Accessibles par http://
+	isset($ta) OR $ta = _DIR_RACINE.'IMG/'; # provisoire ?
 
 	define('_DIR_IMG', $pa);
 	define('_DIR_DOC', $pa);
@@ -293,30 +286,23 @@ function spip_initialisation_parametree($pi, $pa, $ti, $ta) {
 	define('_DIR_SKELS', $ti . "CACHE/skel/");
 	define('_DIR_TMP', $ti);
 
-	define('_FILE_CRON_LOCK', $ti . 'cron.lock');
-	define('_FILE_MYSQL_OUT', $ti . 'mysql_out');
-	define('_FILE_GARBAGE', $ti . '.poubelle');
 	define('_FILE_META', $ti . 'meta_cache.txt');
 
 	define('_DIR_TMP_IMG', $ta);
-	define('_DIR_TeX', $ta . "cache-TeX/");
 
 	define('_DIR_CONFIG', $pi);
 
-	// Le fichier de definition des droits d'acces en ecriture
-	define('_FILE_CHMOD_INS', ($pi . "chmod"));
-	define('_FILE_CHMOD',
-		(@is_readable($f = _FILE_CHMOD_INS . '.php') ? $f
-	:	false));
-	
+	// Definition des droits d'acces en ecriture
+	if (@is_readable($f = _DIR_CONFIG . 'chmod.php')) {
+		include_once $f;
+	} else
+		define('_SPIP_CHMOD', 0777);
 
 	// Le fichier de connexion a la base de donnees
-	define('_FILE_CONNECT_INS_ANTE_192', (_DIR_RESTREINT . "inc_connect"));
-	define('_FILE_CONNECT_INS', ($pi . "connect"));
 	define('_FILE_CONNECT',
-		(@is_readable($f = _FILE_CONNECT_INS . '.php') ? $f
-	:	(@is_readable($f = _FILE_CONNECT_INS_ANTE_192 . '.php') ? $f
-	:	(@is_readable($f = _FILE_CONNECT_INS_ANTE_192 . '.php3') ? $f
+		(@is_readable($f = _DIR_CONFIG . 'connect.php') ? $f
+	:	(@is_readable($f = _DIR_RESTREINT . 'inc_connect.php') ? $f
+	:	(@is_readable($f = _DIR_RESTREINT . 'inc_connect.php3') ? $f
 	:	false))));
 
 	if (!isset($GLOBALS['test_dirs']))
@@ -327,52 +313,30 @@ function spip_initialisation_parametree($pi, $pa, $ti, $ta) {
 // Inclure le fichier config/mes_options (ou equivalent)
 //
 
-if (defined('_FILE_OPTIONS')) {
-	if (@file_exists(_FILE_OPTIONS)) {
-		include_once(_FILE_OPTIONS);
-	}
-} else {
-	if (@file_exists(_DIRNAME_PERMANENT_INACCESSIBLE . 'mes_options.php')) {
-		define('_FILE_OPTIONS', _DIRNAME_PERMANENT_INACCESSIBLE . 'mes_options.php');
-		include_once(_FILE_OPTIONS);
-	}
-	else if (@file_exists(_DIR_RESTREINT . 'mes_options.php')) {
-		define('_FILE_OPTIONS',_DIR_RESTREINT . 'mes_options.php');
-		include_once(_FILE_OPTIONS);
-	}
-	# COMPATIBILITE .php3
-	else if (_EXTENSION_PHP && @file_exists(_DIR_RESTREINT . 'mes_options.php3')) {
-		define('_FILE_OPTIONS', _DIR_RESTREINT . 'mes_options.php3');
-		include_once(_FILE_OPTIONS);
-	}
+if (defined('_FILE_OPTIONS')
+OR @file_exists($f = _DIR_CONFIG.'mes_options.php')
+OR @file_exists($f = _DIR_RESTREINT.'mes_options.php')
+OR (_EXTENSION_PHP AND @file_exists($f = _DIR_RESTREINT.'mes_options.php3'))
+OR !($f = false)) {
+	define('_FILE_OPTIONS', $f);
+	if ($f) { @include_once(_FILE_OPTIONS); }
 }
 
-//
-// INITIALISER LES REPERTOIRES NON PARTAGEABLES
-//
-// 
-// mais cette fonction a peut-etre deja ete appelee par mes_options
-
-spip_initialisation_parametree(
-       (_DIR_RACINE  . _DIRNAME_PERMANENT_INACCESSIBLE),
-       (_DIR_RACINE  . _DIRNAME_PERMANENT_ACCESSIBLE),
-       (_DIR_RACINE  . _DIRNAME_TEMPORAIRE_INACCESSIBLE),
-       (_DIR_RACINE  . _DIRNAME_TEMPORAIRE_ACCESSIBLE)
-       );
-
-if (defined('_FILE_CHMOD')) {
-	if (@file_exists(_FILE_CHMOD)) {
-		include_once(_FILE_CHMOD);
-	}
-}else {
-	define('_SPIP_CHMOD', 0777);
-}
 
 //
 // Definitions standards (charge aussi inc/flock)
 //
 
 require_once(_DIR_RESTREINT . 'inc/utils.php');
+
+
+//
+// INITIALISER LES REPERTOIRES NON PARTAGEABLES
+//
+// 
+// mais cette fonction a peut-etre deja ete appelee par mes_options
+spip_initialisation_parametree();
+
 
 //
 // INITIALISER LES CONSTANTES ET LES VARIABLES SYSTEMES DE SPIP
@@ -384,6 +348,9 @@ spip_initialisation();
 // car dans les plugins on peut inclure inc-version
 // qui ne sera pas execute car _ECRIRE_INC_VERSION est defini
 // donc il faut avoir tout fini ici avant de charger les plugins
+# le nom du repertoire plugins/
+define('_DIR_PLUGINS', _DIR_RACINE . "plugins/");
+
 if (@is_readable(_DIR_TMP."charger_plugins_options.php")){
 	// chargement optimise precompile
 	include_once(_DIR_TMP."charger_plugins_options.php");

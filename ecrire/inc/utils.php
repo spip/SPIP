@@ -539,12 +539,12 @@ function cron ($gourmand=false) {
 	// Si on est gourmand, ou si le fichier gourmand n'existe pas
 	// (ou est trop vieux -> 60 sec), on va voir si un cron est necessaire.
 	// Au passage si on est gourmand on le dit aux autres
-	if (spip_touch(_FILE_CRON_LOCK.'-gourmand', 60, $gourmand)
+	if (spip_touch(_DIR_TMP.'cron.lock-gourmand', 60, $gourmand)
 	OR $gourmand) {
 
 		// Faut-il travailler ? Pas tous en meme temps svp
 		// Au passage si on travaille on bloque les autres
-		if (spip_touch(_FILE_CRON_LOCK, 2)) {
+		if (spip_touch(_DIR_TMP.'cron.lock', 2)) {
 			include_spip('inc/cron');
 			spip_cron();
 		}

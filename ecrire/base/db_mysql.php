@@ -203,10 +203,10 @@ function traite_query($query) {
 function spip_connect_db($host, $port, $login, $pass, $db) {
 	global $spip_mysql_link, $spip_mysql_db;	// pour connexions multiples
 
-	// gerer le fichier ecrire/data/mysql_out
+	// gerer le fichier tmp/mysql_out
 	## TODO : ajouter md5(parametres de connexion)
-	if (@file_exists(_FILE_MYSQL_OUT)
-	AND (time() - @filemtime(_FILE_MYSQL_OUT) < 120)
+	if (@file_exists(_DIR_TMP.'mysql_out')
+	AND (time() - @filemtime(_DIR_TMP.'mysql_out') < 30)
 	AND !defined('_ECRIRE_INSTALL'))
 		return $GLOBALS['db_ok'] = false;
 
@@ -224,7 +224,7 @@ function spip_connect_db($host, $port, $login, $pass, $db) {
 	// En cas d'erreur marquer le fichier mysql_out
 	if (!$GLOBALS['db_ok']
 	AND !defined('_ECRIRE_INSTALL')) {
-		@touch(_FILE_MYSQL_OUT);
+		@touch(_DIR_TMP.'mysql_out');
 		$err = 'Echec connexion MySQL '.spip_sql_errno().' '.spip_sql_error();
 		spip_log($err);
 		spip_log($err, 'mysql');
