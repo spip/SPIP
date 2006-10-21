@@ -263,7 +263,7 @@ if (acces_mots()){
 
 	if ($champs_extra) {
 		include_spip('inc/extra');
-		extra_saisie($extra, 'mots', $id_groupe);
+		echo extra_saisie($extra, 'mots', $id_groupe);
 	}
 
 	echo "<DIV align='right'><input type='submit' NAME='Valider' VALUE='"._T('bouton_enregistrer')."' CLASS='fondo'></div>";

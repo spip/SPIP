@@ -101,9 +101,9 @@ function enregistre_modifier_naviguer($id_rubrique, $id_parent, $titre, $texte, 
 
 	if ($id_parent == $id_rubrique) $parent = ''; // au fou
 
-	if (_request('champs_extra')) {
-			include_spip('inc/extra');
-			$extra = extra_recup_saisie("rubriques");
+	if ($GLOBALS['champs_extra']) {
+		include_spip('inc/extra');
+		$extra = extra_recup_saisie("rubriques");
 	}
 	else $extra = '';
 

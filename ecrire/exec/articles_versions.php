@@ -319,7 +319,7 @@ if ($id_version) {
 	
 		if ($champs_extra AND $extra) {
 			include_spip('inc/extra');
-			extra_affichage($extra, "articles");
+			echo extra_affichage($extra, "articles");
 		}
 	}
 }

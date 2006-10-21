@@ -401,7 +401,7 @@ function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)
 		
 		if ($champs_extra AND $extra) {
 			include_spip('inc/extra');
-			$res .= extra_affichage($extra, "articles", true);
+			$res .= extra_affichage($extra, "articles");
 		}
 	}
 	return $res;
