@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     validez pas cette demande d\'importation.<p />Pour plus
     d\'informations, voyez <a href=\'http://www.spip.net/fr_article1489.html\'>
                                 la documentation de SPIP</a>.',
-'avis_espace_interdit' => '<b>Espace interdit</b><p />SPIP est d&eacute;j&agrave; install&eacute;.',
+'avis_espace_interdit' => '<b>Espace interdit</b><div>SPIP est d&eacute;j&agrave; install&eacute;.</div>',
 'avis_lecture_noms_bases_1' => 'Le programme d\'installation n\'a pas pu lire les noms des bases de donn&eacute;es install&eacute;es.',
 'avis_lecture_noms_bases_2' => 'Soit aucune base n\'est disponible, soit la fonction permettant de lister les bases a &eacute;t&eacute; d&eacute;sactiv&eacute;e
 		pour des raisons de s&eacute;curit&eacute; (ce qui est le cas chez de nombreux h&eacute;bergeurs).',
@@ -314,7 +314,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_delet_mots_cles' => 'Vous avez	demand&eacute; &agrave; supprimer le mot-cl&eacute;
 <B>@titre_mot@</B> (@type_mot@). Ce mot-cl&eacute; &eacute;tant li&eacute; &agrave;
 <b>@texte_lie@</b> vous devez confirmer cette d&eacute;cision&nbsp;:',
-'info_derniere_etape' => 'Derni&egrave;re &eacute;tape : <B>C\'est termin&eacute; !',
+'info_derniere_etape' => 'Derni&egrave;re &eacute;tape : C\'est termin&eacute; !',
 'info_derniere_syndication' => 'La derni&egrave;re syndication de ce site a &eacute;t&eacute; effectu&eacute;e le',
 'info_derniers_articles_publies' => 'Vos derniers articles publi&eacute;s en ligne',
 'info_desactiver_forum_public' => 'D&eacute;sactiver l\'utilisation des forums

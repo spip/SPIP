@@ -183,15 +183,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => 'a-benn kregi&ntilde; da-vat gant ar staliadur',
 'dirs_preliminaire' => 'A-raok kenderc\'hel : <b>Renka&ntilde; ar gwirio&ugrave; da zont-tre</b>',
 'dirs_probleme_droits' => 'Kudenn gant ar gwirio&ugrave; da zont-tre',
-'dirs_repertoires_absents' => '<b>An teulio&ugrave;-ma&ntilde;&nbsp; n\'int ket bet kavet : <ul>@bad_dirs@.</ul></b>
-  <p />Posupl eo e vefe dre fazi implij pennlizherenno&ugrave; pe lizherenno&ugrave; munud e lec\'hio&ugrave; fall.
+'dirs_repertoires_absents' => '<p><b>An teulio&ugrave;-ma&ntilde; n\'int ket bet kavet : </b></p><ul>@bad_dirs@.</ul>
+  <p>Posupl eo e vefe dre fazi implij pennlizherenno&ugrave; pe lizherenno&ugrave; munud e lec\'hio&ugrave; fall.
   Gwiriit e klot mat stumm lizherenno&ugrave; an teulio&ugrave; gant ar pezh a vez diskouezet a-us;
-  ha ma ne glotont ket, adanvit anezho gant ho meziant FTP evit reizha&ntilde; ar gudenn.
-  <p />Ur wech graet an dra-se e c\'helloc\'h ',
-'dirs_repertoires_suivants' => '<b>N\'haller ket skriva&ntilde; en teulio&ugrave;-ma&ntilde;&nbsp;: <ul>@bad_dirs@.</ul></b>
-  <p />Implijit ar meziant FTP a-benn kemm ar gwirio&ugrave; evit pep teul.
-  Displeget eo an hentenn en diell-stalia&ntilde;.
-  <p />Ur wech graet se e c\'helloc\'h ',
+  ha ma ne glotont ket, adanvit anezho gant ho meziant FTP evit reizha&ntilde; ar gudenn.</p>
+  <p>Ur wech graet an dra-se e c\'helloc\'h </p>',
+'dirs_repertoires_suivants' => '<p><b>N\'haller ket skriva&ntilde; en teulio&ugrave;-ma&ntilde;&nbsp;: </b></p><ul>@bad_dirs@.</ul>
+  <p>Implijit ar meziant FTP a-benn kemm ar gwirio&ugrave; evit pep teul.
+  Displeget eo an hentenn en diell-stalia&ntilde;.</p>
+  <p>Ur wech graet se e c\'helloc\'h ',
 
 
 // E
