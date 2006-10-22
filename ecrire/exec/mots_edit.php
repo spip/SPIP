@@ -69,7 +69,7 @@ global
 		} else
 			$add_extra = '';
 
-		spip_query("UPDATE spip_mots SET titre=" . spip_abstract_quote($titre_mot) . ", texte=" . spip_abstract_quote($texte) . ", descriptif=" . spip_abstract_quote($descriptif) . ", type=" . spip_abstract_quote($type) . ", id_groupe=$id_groupe" . (!$add_extra ? '' : (", extra = " . spip_abstract_quote($add_extra))) . " WHERE id_mot=$id_mot");
+		spip_query("UPDATE spip_mots SET titre=" . _q($titre_mot) . ", texte=" . _q($texte) . ", descriptif=" . _q($descriptif) . ", type=" . _q($type) . ", id_groupe=$id_groupe" . (!$add_extra ? '' : (", extra = " . _q($add_extra))) . " WHERE id_mot=$id_mot");
 
 		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 			include_spip("inc/indexation");
@@ -300,7 +300,7 @@ function determine_groupe_mots($table, $id_groupe) {
 			// il faut creer un groupe de mots (cas d'un mot cree depuis le script articles)
 
 			$titre = _T('info_mot_sans_groupe');
-		  	$row_groupes['id_groupe'] = spip_abstract_insert("spip_groupes_mots", "(titre, unseul, obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum)", "(" . spip_abstract_quote($titre) . ", 'non',  'non', '" . (($table=='articles') ? 'oui' : 'non') ."', '" . (($table=='breves') ? 'oui' : 'non') ."','" . (($table=='rubriques') ? 'oui' : 'non') ."','" . (($table=='syndic') ? 'oui' : 'non') ."', 'oui', 'non', 'non'" . ")");
+		  	$row_groupes['id_groupe'] = spip_abstract_insert("spip_groupes_mots", "(titre, unseul, obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum)", "(" . _q($titre) . ", 'non',  'non', '" . (($table=='articles') ? 'oui' : 'non') ."', '" . (($table=='breves') ? 'oui' : 'non') ."','" . (($table=='rubriques') ? 'oui' : 'non') ."','" . (($table=='syndic') ? 'oui' : 'non') ."', 'oui', 'non', 'non'" . ")");
 		} else $titre = $row_groupes['titre'];
 		echo $titre, '<br />';
 		echo "<input type='hidden' name='id_groupe' value='".$row_groupes['id_groupe']."' />";

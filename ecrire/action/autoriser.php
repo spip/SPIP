@@ -39,7 +39,7 @@ function action_autoriser_dist()
     else
   {
     if (!$arg) {
-      $arg =spip_query("SELECT id_document, descriptif FROM spip_documents AS documents WHERE documents.fichier=" . spip_abstract_quote($file));
+      $arg =spip_query("SELECT id_document, descriptif FROM spip_documents AS documents WHERE documents.fichier=" . _q($file));
       $arg = spip_fetch_array($arg);
       if (!$arg) $refus = 2;
       $dcc = $arg['descriptif'];

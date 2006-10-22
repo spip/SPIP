@@ -158,7 +158,7 @@ function inc_auth_dist() {
 
 	$where = $connect_id_auteur ?
 	  "id_auteur=$connect_id_auteur" :
-	  (!$connect_login ? '' : "login=" . spip_abstract_quote($connect_login));
+	  (!$connect_login ? '' : "login=" . _q($connect_login));
 
 	// pas authentifie par cookie ni rien: demander login / mdp
 

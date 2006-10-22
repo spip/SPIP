@@ -48,7 +48,7 @@ function install_etape_6_dist()
 		# pour le passwd, bizarrement il faut le convertir comme s'il avait
 		# ete tape en iso-8859-1 ; car c'est en fait ce que voit md5.js
 		$pass = unicode2charset(utf_8_to_unicode($pass), 'iso-8859-1');
-		$result = spip_query("SELECT id_auteur FROM spip_auteurs WHERE login=" . spip_abstract_quote($login));
+		$result = spip_query("SELECT id_auteur FROM spip_auteurs WHERE login=" . _q($login));
 
 		unset($id_auteur);
 		if ($row = spip_fetch_array($result)) $id_auteur = $row['id_auteur'];
@@ -57,14 +57,14 @@ function install_etape_6_dist()
 		$htpass = generer_htpass($pass);
 
 		if ($id_auteur) {
-			spip_query("UPDATE spip_auteurs SET nom=" . spip_abstract_quote($nom) . ", email=" . spip_abstract_quote($email) . ", login=" . spip_abstract_quote($login) . ", pass='$mdpass', alea_actuel='', alea_futur=FLOOR(32000*RAND()), htpass='$htpass', statut='0minirezo' WHERE id_auteur=$id_auteur");
+			spip_query("UPDATE spip_auteurs SET nom=" . _q($nom) . ", email=" . _q($email) . ", login=" . _q($login) . ", pass='$mdpass', alea_actuel='', alea_futur=FLOOR(32000*RAND()), htpass='$htpass', statut='0minirezo' WHERE id_auteur=$id_auteur");
 		}
 		else {
-			spip_query("INSERT INTO spip_auteurs (nom, email, login, pass, htpass, alea_futur, statut) VALUES(" . spip_abstract_quote($nom) . "," . spip_abstract_quote($email) . "," . spip_abstract_quote($login) . ",'$mdpass','$htpass',FLOOR(32000*RAND()),'0minirezo')");
+			spip_query("INSERT INTO spip_auteurs (nom, email, login, pass, htpass, alea_futur, statut) VALUES(" . _q($nom) . "," . _q($email) . "," . _q($login) . ",'$mdpass','$htpass',FLOOR(32000*RAND()),'0minirezo')");
 		}
 
 		// inserer email comme email webmaster principal
-		spip_query("REPLACE spip_meta (nom, valeur) VALUES ('email_webmaster', " . spip_abstract_quote($email) . ")");
+		spip_query("REPLACE spip_meta (nom, valeur) VALUES ('email_webmaster', " . _q($email) . ")");
 	}
 
 	include_spip('inc/config');

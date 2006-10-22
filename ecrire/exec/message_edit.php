@@ -62,10 +62,10 @@ if ($new=='oui') {
 	if ($type == 'pb') $statut = 'publie';
 	else $statut = 'redac';
 	$titre = filtrer_entites(_T('texte_nouveau_message'));
-	$id_message = spip_abstract_insert("spip_messages", "(titre, date_heure, statut, type, id_auteur)", "(" . spip_abstract_quote($titre) . ", NOW(), '$statut', '$type', $connect_id_auteur)");
+	$id_message = spip_abstract_insert("spip_messages", "(titre, date_heure, statut, type, id_auteur)", "(" . _q($titre) . ", NOW(), '$statut', '$type', $connect_id_auteur)");
 	
 	if ($rv) {
-		spip_query("UPDATE spip_messages SET rv='oui', date_heure=" . spip_abstract_quote($rv . ' 12:00:00') . ", date_fin= " . spip_abstract_quote($rv . ' 13:00:00') . " WHERE id_message = $id_message");
+		spip_query("UPDATE spip_messages SET rv='oui', date_heure=" . _q($rv . ' 12:00:00') . ", date_fin= " . _q($rv . ' 13:00:00') . " WHERE id_message = $id_message");
 	}
 
 	if ($type != "affich"){

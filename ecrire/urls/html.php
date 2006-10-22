@@ -100,7 +100,7 @@ function recuperer_parametres_url($fond, $url) {
 		$url_propre = (preg_replace('/^[_+-]{0,2}(.*?)[_+-]{0,2}(\.html)?$/',
 			'$1', $url_propre));
 		$id = id_table_objet($fond);
-		$r = spip_query("SELECT $id AS id FROM spip_" . table_objet($fond) . " WHERE url_propre = " . spip_abstract_quote($url_propre));
+		$r = spip_query("SELECT $id AS id FROM spip_" . table_objet($fond) . " WHERE url_propre = " . _q($url_propre));
 		if ($r AND $r = spip_fetch_array($r))
 			$contexte[$id] = $r['id'];
 	}

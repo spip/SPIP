@@ -198,7 +198,7 @@ function revisions_articles ($id_article, $new, $c = false) {
 
 	$update = '';
 	foreach ($champs as $champ => $val)
-		$update .= $champ . '=' . spip_abstract_quote($val).', ';
+		$update .= $champ . '=' . _q($val).', ';
 
 	spip_query("UPDATE spip_articles SET $update date_modif=NOW() WHERE id_article=$id_article");
 

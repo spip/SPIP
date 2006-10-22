@@ -139,9 +139,9 @@ function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $select_gr
 	
 		if ($changer_lang) {
 			if ($changer_lang != "herit")
-				spip_query("UPDATE spip_breves SET lang=" . spip_abstract_quote($changer_lang) . ", langue_choisie='oui' WHERE id_breve=$id_breve");
+				spip_query("UPDATE spip_breves SET lang=" . _q($changer_lang) . ", langue_choisie='oui' WHERE id_breve=$id_breve");
 			else
-				spip_query("UPDATE spip_breves SET lang=" . spip_abstract_quote($langue_parent) . ", langue_choisie='non' WHERE id_breve=$id_breve");
+				spip_query("UPDATE spip_breves SET lang=" . _q($langue_parent) . ", langue_choisie='non' WHERE id_breve=$id_breve");
 			calculer_langues_utilisees();
 		}
 	
@@ -283,7 +283,7 @@ function exec_breves_voir_dist()
 		
 		$update = '';
 		foreach ($champs as $champ => $val)
-			$update .= $champ . '=' . spip_abstract_quote($val).', ';
+			$update .= $champ . '=' . _q($val).', ';
 		$update = substr($update,0,strlen($update)-2);
 	
 		spip_query("UPDATE spip_breves SET $update WHERE id_breve=$id_breve");

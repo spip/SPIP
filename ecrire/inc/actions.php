@@ -261,7 +261,7 @@ function determine_upload()
 function verifier_php_auth() {
 	if ($_SERVER['PHP_AUTH_USER'] && $_SERVER['PHP_AUTH_PW']
 	&& !$GLOBALS['ignore_auth_http']) {
-		$result = spip_query("SELECT * FROM spip_auteurs WHERE login=" . spip_abstract_quote($_SERVER['PHP_AUTH_USER']));
+		$result = spip_query("SELECT * FROM spip_auteurs WHERE login=" . _q($_SERVER['PHP_AUTH_USER']));
 
 		$row = @spip_fetch_array($result);
 		if ($row AND $row['source'] != 'ldap') {

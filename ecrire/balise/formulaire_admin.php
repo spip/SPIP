@@ -142,7 +142,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	include_spip('base/abstract_sql');
 	$login = preg_replace(',^@,','',$GLOBALS['spip_admin']);
 	$alang = spip_abstract_fetsel(array('lang'), array('spip_auteurs'),
-		array("login=" . spip_abstract_quote($login)));
+		array("login=" . _q($login)));
 	if ($alang['lang']) {
 		lang_select($alang['lang']);
 		$lang = $GLOBALS['spip_lang'];

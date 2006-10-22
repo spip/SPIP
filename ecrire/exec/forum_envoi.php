@@ -53,7 +53,7 @@ if ($valider_forum AND ($statut!='')) {
 	$titre_message = corriger_caracteres($titre_message);
 	$texte = corriger_caracteres($texte);
 
-	spip_abstract_insert('spip_forum', "(titre, texte, date_heure, nom_site, url_site, statut, id_auteur,	auteur, email_auteur, id_rubrique, id_parent, id_article, id_breve,	id_message, id_syndic)", "(" . spip_abstract_quote($titre_message) . ", " . spip_abstract_quote($texte) . ", NOW(), " . spip_abstract_quote($nom_site) . ", " . spip_abstract_quote($url_site) . ", " . spip_abstract_quote($statut) . ", $connect_id_auteur, " . spip_abstract_quote($GLOBALS['auteur_session']['nom']) . ", " . spip_abstract_quote($GLOBALS['auteur_session']['email']) . ",	'$id_rubrique', '$id_parent', '$id_article', '$id_breve',	'$id_message', '$id_syndic')");
+	spip_abstract_insert('spip_forum', "(titre, texte, date_heure, nom_site, url_site, statut, id_auteur,	auteur, email_auteur, id_rubrique, id_parent, id_article, id_breve,	id_message, id_syndic)", "(" . _q($titre_message) . ", " . _q($texte) . ", NOW(), " . _q($nom_site) . ", " . _q($url_site) . ", " . _q($statut) . ", $connect_id_auteur, " . _q($GLOBALS['auteur_session']['nom']) . ", " . _q($GLOBALS['auteur_session']['email']) . ",	'$id_rubrique', '$id_parent', '$id_article', '$id_breve',	'$id_message', '$id_syndic')");
 
 	calculer_threads();
 

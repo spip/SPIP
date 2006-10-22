@@ -91,7 +91,7 @@ function inc_import_1_3_dist($f, $gz=false) {
 			&& ($fields==NULL or isset($fields[$col])) ) {
 			if ($phpmyadmin)
 				$value = str_replace(array('&quot;','&gt;'),array('"','>'),$value);
-			$values[$col] = spip_abstract_quote($value);
+			$values[$col] = _q($value);
 		}
 	}
 	

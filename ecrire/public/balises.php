@@ -402,8 +402,8 @@ function balise_EXPOSER_dist($p)
 		// Gerer la notation [(#EXPOSER|on,off)]
 		$onoff = array_shift($a);
 		ereg("([^,]*)(,(.*))?", $onoff[0], $regs);
-		$on = "" . spip_abstract_quote($regs[1]);
-		$off = "" . spip_abstract_quote($regs[3]) ;
+		$on = "" . _q($regs[1]);
+		$off = "" . _q($regs[3]) ;
 		// autres filtres
 		array_shift($p->param);
 	}

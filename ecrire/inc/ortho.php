@@ -232,7 +232,7 @@ function verifier_langue_miroir($url, $lang) {
 //
 // http://doc.spip.org/@suggerer_dico_ortho
 function suggerer_dico_ortho(&$mots, $lang) {
-	$result = spip_query("SELECT mot FROM spip_ortho_dico WHERE lang=" . spip_abstract_quote($lang) . " AND mot IN (".join(", ", array_map('spip_abstract_quote', $mots)).")");
+	$result = spip_query("SELECT mot FROM spip_ortho_dico WHERE lang=" . _q($lang) . " AND mot IN (".join(", ", array_map('_q', $mots)).")");
 
 	$mots = array_flip($mots);
 	$bons = array();
@@ -254,13 +254,13 @@ function suggerer_dico_ortho(&$mots, $lang) {
 function ajouter_dico_ortho($mot, $lang) {
 	global $connect_id_auteur;
 
-	spip_query("INSERT IGNORE INTO spip_ortho_dico (lang, mot, id_auteur)  VALUES (" . spip_abstract_quote($lang) . ", " . spip_abstract_quote($mot) . ", $connect_id_auteur)");
+	spip_query("INSERT IGNORE INTO spip_ortho_dico (lang, mot, id_auteur)  VALUES (" . _q($lang) . ", " . _q($mot) . ", $connect_id_auteur)");
 
 }
 
 // http://doc.spip.org/@supprimer_dico_ortho
 function supprimer_dico_ortho($mot, $lang) {
-	spip_query("DELETE FROM spip_ortho_dico WHERE lang=" . spip_abstract_quote($lang) . " AND mot=" . spip_abstract_quote($mot));
+	spip_query("DELETE FROM spip_ortho_dico WHERE lang=" . _q($lang) . " AND mot=" . _q($mot));
 
 }
 
@@ -283,7 +283,7 @@ function gerer_dico_ortho($lang) {
 function suggerer_cache_ortho(&$mots, $lang) {
 	global $duree_cache_ortho;
 
-	$result = spip_query("SELECT mot, ok, suggest FROM spip_ortho_cache WHERE lang=" . spip_abstract_quote($lang) . " AND mot IN (".join(", ", array_map('spip_abstract_quote', $mots)).") AND maj > FROM_UNIXTIME(".(time() - $duree_cache_ortho).")");
+	$result = spip_query("SELECT mot, ok, suggest FROM spip_ortho_cache WHERE lang=" . _q($lang) . " AND mot IN (".join(", ", array_map('_q', $mots)).") AND maj > FROM_UNIXTIME(".(time() - $duree_cache_ortho).")");
 
 	
 	$mots = array_flip($mots);
@@ -311,16 +311,16 @@ function ajouter_cache_ortho($tous, $mauvais, $lang) {
 	global $duree_cache_ortho;
 
 	$values = array();
-	$lang = spip_abstract_quote($lang);
+	$lang = _q($lang);
 	if (count($mauvais)) {
 		foreach ($mauvais as $mot => $suggest) {
-			$values[] = "($lang, " . spip_abstract_quote($mot) . ", 0, ".spip_abstract_quote(join(",", $suggest)).")";
+			$values[] = "($lang, " . _q($mot) . ", 0, "._q(join(",", $suggest)).")";
 		}
 	}
 	if (count($tous)) {
 		foreach ($tous as $mot) {
 			if (!isset($mauvais[$mot]))
-				$values[] = "($lang, " . spip_abstract_quote($mot) . ", 1, '')";
+				$values[] = "($lang, " . _q($mot) . ", 1, '')";
 		}
 	}
 	if (count($values)) {

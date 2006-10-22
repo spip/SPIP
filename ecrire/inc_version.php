@@ -216,7 +216,8 @@ $plugins = array();  // voir le contenu du repertoire /plugins/
 $surcharges = array(); // format 'inc_truc' => '/plugins/chose/inc_truc2.php'
 
 // Masquer les warning
-error_reporting(E_ALL ^ E_NOTICE);
+//error_reporting(E_ALL ^ E_NOTICE);
+error_reporting(E_ALL);
 
 // Variables du compilateur de squelettes
 

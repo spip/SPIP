@@ -659,7 +659,7 @@ function maj_base($version_cible = 0) {
 			$prefs = unserialize($row['prefs']);
 			$l = $prefs['spip_lang'];
 			unset ($prefs['spip_lang']);
-			spip_query("UPDATE spip_auteurs SET lang=" . spip_abstract_quote($l) . ", prefs='".addslashes(serialize($prefs))."' WHERE id_auteur=".$row['id_auteur']);
+			spip_query("UPDATE spip_auteurs SET lang=" . _q($l) . ", prefs='".addslashes(serialize($prefs))."' WHERE id_auteur=".$row['id_auteur']);
 		}
 		$u = spip_query("SELECT lang FROM spip_auteurs");
 		maj_version (1.604, $u);

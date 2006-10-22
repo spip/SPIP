@@ -104,7 +104,7 @@ if ($analyser_site == 'oui' AND $flag_editable) {
 		$url_syndic = trim($v['url_syndic']);
 		$descriptif = $v['descriptif'];
 		$syndication = $v[syndic] ? 'oui' : 'non';
-		$result = spip_query("UPDATE spip_syndic SET nom_site=" . spip_abstract_quote($nom_site) . ", url_site=" . spip_abstract_quote($url) . ", url_syndic=" . spip_abstract_quote($url_syndic) . ", descriptif=" . spip_abstract_quote($descriptif) . ", syndication='$syndication', statut='$statut' WHERE id_syndic=$id_syndic");
+		$result = spip_query("UPDATE spip_syndic SET nom_site=" . _q($nom_site) . ", url_site=" . _q($url) . ", url_syndic=" . _q($url_syndic) . ", descriptif=" . _q($descriptif) . ", syndication='$syndication', statut='$statut' WHERE id_syndic=$id_syndic");
 		if ($syndication == 'oui') syndic_a_jour($id_syndic);
 	}
 }
@@ -139,7 +139,7 @@ if (strval($nom_site)!='' AND $modifier_site == 'oui' AND $flag_editable) {
 	} else
 		$add_extra = '';
 	
-	spip_query("UPDATE spip_syndic SET id_rubrique='$id_rubrique',	nom_site=" . spip_abstract_quote($nom_site) . ", url_site=" . spip_abstract_quote($url_site) . ", url_syndic=" . spip_abstract_quote($url_syndic) . ",	descriptif=" . spip_abstract_quote($descriptif) . ", syndication='$syndication', statut='$statut'". (!$add_extra ? '' :  (", extra = " . spip_abstract_quote($add_extra))) . " WHERE id_syndic=$id_syndic");
+	spip_query("UPDATE spip_syndic SET id_rubrique='$id_rubrique',	nom_site=" . _q($nom_site) . ", url_site=" . _q($url_site) . ", url_syndic=" . _q($url_syndic) . ",	descriptif=" . _q($descriptif) . ", syndication='$syndication', statut='$statut'". (!$add_extra ? '' :  (", extra = " . _q($add_extra))) . " WHERE id_syndic=$id_syndic");
 
 	propager_les_secteurs();
 
@@ -168,7 +168,7 @@ if (strval($nom_site)!='' AND $modifier_site == 'oui' AND $flag_editable) {
 if ($jour AND $flag_administrable) {
 	if ($annee == "0000") $mois = "00";
 	if ($mois == "00") $jour = "00";
-	spip_query("UPDATE spip_syndic SET date=" . spip_abstract_quote("$annee-$mois-$jour") . " WHERE id_syndic=$id_syndic");
+	spip_query("UPDATE spip_syndic SET date=" . _q("$annee-$mois-$jour") . " WHERE id_syndic=$id_syndic");
 	calculer_rubriques();
 }
 

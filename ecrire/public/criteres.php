@@ -271,7 +271,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 				if (!$t) $t = $r; else $t = "spip_$t";
 				$desc = $tables_des_serveurs_sql[$s][$t];
 				if (is_array($desc['field'])){
-					$liste_field = implode(',',array_map('spip_abstract_quote',array_keys($desc['field'])));
+					$liste_field = implode(',',array_map('_q',array_keys($desc['field'])));
 		      $order =
 			"((\$x = preg_replace(\"/\\W/\",'',$order)) ? ( in_array(\$x,array($liste_field))  ? ('$boucle->id_table.' . \$x$sens):(\$x$sens) ) : '')";
 				}
@@ -557,9 +557,9 @@ function calculer_criteres ($idb, &$boucles) {
 function kwote($lisp)
 {
 	if (preg_match(",^(\n//[^\n]*\n)? *'(.*)' *$,", $lisp, $r))
-		return $r[1] . "\"" . spip_abstract_quote(str_replace(array("\\'","\\\\"),array("'","\\"),$r[2])) . "\"" ;
+		return $r[1] . "\"" . _q(str_replace(array("\\'","\\\\"),array("'","\\"),$r[2])) . "\"" ;
 	else
-		return "spip_abstract_quote($lisp)"; 
+		return "_q($lisp)"; 
 }
 
 // http://doc.spip.org/@critere_IN_dist
@@ -576,7 +576,7 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 			if (is_numeric($r[2]))
 				$x .= "\n\t$var" . "[]= $r[2];";
 			else
-				$x .= "\n\t$var" . "[]= " . spip_abstract_quote($r[2]) . ";";
+				$x .= "\n\t$var" . "[]= " . _q($r[2]) . ";";
 		} else {
 		  // Pour permettre de passer des tableaux de valeurs
 		  // on repere l'utilisation brute de #ENV**{X}, 
@@ -594,7 +594,7 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 			$op = '<>';
 	} else $op = '=';
 
-	$arg = "FIELD($arg,\" . join(',',array_map('spip_abstract_quote', $var)) . \")";
+	$arg = "FIELD($arg,\" . join(',',array_map('_q', $var)) . \")";
 	if ($boucles[$idb]->group) $arg = "SUM($arg)";
 	$boucles[$idb]->select[]=  "$arg AS cpt$cpt";
 	$op = array("'$op'", "'cpt$cpt'", 0);

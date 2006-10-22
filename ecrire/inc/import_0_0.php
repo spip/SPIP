@@ -53,7 +53,7 @@ function inc_import_0_0_dist($f, $gz=false) {
 		}
 		else if ($col != 'maj') {
 			$cols[] = $col;
-			$values[] = spip_abstract_quote($value);
+			$values[] = _q($value);
 			if ($is_art && ($col == 'id_article')) $id_article = $value;
 			if ($is_mot && ($col == 'id_mot')) $id_mot = $value;
 		}

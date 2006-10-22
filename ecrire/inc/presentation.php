@@ -722,7 +722,7 @@ function afficher_articles($titre_table, $requete, $formater_article='') {
 		if (!$cpt = $cpt['n']) return '' ;
 		
 		if (isset($requete['LIMIT'])) $cpt = min($requete['LIMIT'], $cpt);
-		$id_ajax = spip_abstract_insert("spip_ajax_fonc", "(variables, hash, id_auteur, date)", "(" . spip_abstract_quote($variables) . ", $hash, $cpt, NOW())");
+		$id_ajax = spip_abstract_insert("spip_ajax_fonc", "(variables, hash, id_auteur, date)", "(" . _q($variables) . ", $hash, $cpt, NOW())");
 		}
 
 	$nb_aff = floor(1.5 * _TRANCHES);

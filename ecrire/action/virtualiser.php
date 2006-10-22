@@ -36,6 +36,6 @@ function action_virtualiser_post($r)
 {
 	$url = eregi_replace("^ *https?://$", "", rtrim($url));
 	if ($url) $url = corriger_caracteres("=$url");
-	spip_query("UPDATE spip_articles SET chapo=" . spip_abstract_quote($url) . ", date_modif=NOW() WHERE id_article=" . $r[1]);
+	spip_query("UPDATE spip_articles SET chapo=" . _q($url) . ", date_modif=NOW() WHERE id_article=" . $r[1]);
 }
 ?>
