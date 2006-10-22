@@ -259,12 +259,12 @@ $auteur_session = $connect_statut = $connect_toutes_rubriques = $connect_id_rubr
 //
 
 if (defined('_FILE_OPTIONS')
-OR @file_exists($f = _DIR_CONFIG.'mes_options.php')
+#OR @file_exists($f = _DIR_CONFIG.'mes_options.php') # _DIR_CONFIG pas defini!
 OR @file_exists($f = _DIR_RESTREINT.'mes_options.php')
 OR (_EXTENSION_PHP AND @file_exists($f = _DIR_RESTREINT.'mes_options.php3'))
 OR !($f = false)) {
 	define('_FILE_OPTIONS', $f);
-	if ($f) { @include_once(_FILE_OPTIONS); }
+	if ($f) { @include_once _FILE_OPTIONS; }
 }
 
 

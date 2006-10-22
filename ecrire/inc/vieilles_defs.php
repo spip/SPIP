@@ -93,4 +93,9 @@ function affiche_auteur_boucle($row, &$tous_id)
 
 	return $vals;
 }
+
+function spip_abstract_quote($arg_sql) {
+	return _q($arg_sql);
+}
+
 ?>

@@ -222,9 +222,6 @@ function spip_query($query, $serveur='') {
 }
 
 // a demenager dans base/abstract_sql a terme
-
-function spip_abstract_quote($arg_sql) {return _q($arg_sql);}
-
 function _q($arg_sql) {
 	return (is_int($arg_sql)) ? $arg_sql : ("'" . addslashes($arg_sql) . "'");
 }
@@ -980,8 +977,9 @@ function spip_initialisation_parametree($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL){
 		define('_SPIP_CHMOD', 0777);
 
 	// Le fichier de connexion a la base de donnees
+	define('_FILE_CONNECT_INS', _DIR_CONFIG . 'connect');
 	define('_FILE_CONNECT',
-		(@is_readable($f = _DIR_CONFIG . 'connect.php') ? $f
+		(@is_readable($f = _FILE_CONNECT_INS . '.php') ? $f
 	:	(@is_readable($f = _DIR_RESTREINT . 'inc_connect.php') ? $f
 	:	(@is_readable($f = _DIR_RESTREINT . 'inc_connect.php3') ? $f
 	:	false))));
