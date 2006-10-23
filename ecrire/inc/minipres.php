@@ -164,9 +164,16 @@ function version_svn_courante($dir) {
 
 	// version installee par SVN
 	if (lire_fichier($dir . '/.svn/entries', $c)
-	AND preg_match_all(
-	',committed-rev="([0-9]+)",', $c, $r1, PREG_PATTERN_ORDER))
-		return -max($r1[1]);
+	AND (
+	(preg_match_all(
+	',committed-rev="([0-9]+)",', $c, $r1, PREG_PATTERN_ORDER)
+	AND $v = max($r1[1])
+	)
+	OR
+	(preg_match(',^8.*dir[\r\n]+(\d+),ms', $c, $r1) # svn >= 1.4
+	AND $v = $r1[1]
+	)))
+		return -$v;
 
 	// version installee par paquet ZIP de SPIP-Zone
 	if (lire_fichier($dir.'/svn.revision', $c)
