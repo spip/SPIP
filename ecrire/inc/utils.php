@@ -933,24 +933,19 @@ function spip_register_globals() {
 }
 
 
-// Fonction definissant les repertoires et fichiers non partageables
-// Elle indique dans $test_dirs ceux devant etre accessibles en ecriture
+// Fonction d'initialisation, appelle dans inc_version ou mes_options
+// Elle definit les repertoires et fichiers non partageables
+// et indique dans $test_dirs ceux devant etre accessibles en ecriture
 // mais ne touche pas a cette variable si elle est deja definie
 // afin que mes_options.php puisse en specifier d'autres.
-function spip_initialisation_parametree($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL){
+// Elle definit ensuite les noms des fichiers et les droits.
+// Puis simule un register_global=on securise.
+
+// http://doc.spip.org/@spip_initialisation
+function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
+
 	static $too_late = 0;
 	if ($too_late++) return;
-
-
-	// Quatre repertoires modifiables par les scripts de SPIP
-	# Repertoire des fichiers Permanents Inaccessibles par http://
-	isset($pi) OR $pi = _DIR_RACINE.'config/';
-	# Repertoire des fichiers Permanents Accessibles par http://
-	isset($pa) OR $pa = _DIR_RACINE.'IMG/';
-	# Repertoire des fichiers Temporaires Inaccessibles par http://
-	isset($ti) OR $ti = _DIR_RACINE.'tmp/';
-	# Repertoire des fichiers Temporaires Accessibles par http://
-	isset($ta) OR $ta = _DIR_RACINE.'IMG/'; # provisoire ?
 
 	define('_DIR_IMG', $pa);
 	define('_DIR_DOC', $pa);
@@ -966,31 +961,23 @@ function spip_initialisation_parametree($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL){
 
 	define('_FILE_META', $ti . 'meta_cache.txt');
 
-	define('_DIR_TMP_IMG', $ta);
+	define('_DIR_VAR', $ta);
 
-	define('_DIR_CONFIG', $pi);
+	define('_DIR_ETC', $pi);
+
+	if (!isset($GLOBALS['test_dirs']))
+		$GLOBALS['test_dirs'] =  array($pa, $ti, $ta);
 
 	// Definition des droits d'acces en ecriture
-	if (@is_readable($f = _DIR_CONFIG . 'chmod.php')) {
-		include_once $f;
-	} else
-		define('_SPIP_CHMOD', 0777);
+	define('_SPIP_CHMOD', 0777);
 
 	// Le fichier de connexion a la base de donnees
-	define('_FILE_CONNECT_INS', _DIR_CONFIG . 'connect');
+	define('_FILE_CONNECT_INS', _DIR_ETC . 'connect');
 	define('_FILE_CONNECT',
 		(@is_readable($f = _FILE_CONNECT_INS . '.php') ? $f
 	:	(@is_readable($f = _DIR_RESTREINT . 'inc_connect.php') ? $f
 	:	(@is_readable($f = _DIR_RESTREINT . 'inc_connect.php3') ? $f
 	:	false))));
-
-	if (!isset($GLOBALS['test_dirs']))
-		$GLOBALS['test_dirs'] =  array($pa, $ti, $ta);
-}
-
-
-// http://doc.spip.org/@spip_initialisation
-function spip_initialisation() {
 
 	// la taille maxi des logos (0 : pas de limite)
 	define('_LOGO_MAX_SIZE', 0); # poids en ko
@@ -1004,21 +991,6 @@ function spip_initialisation() {
 	define('_IMG_MAX_HEIGHT', 0); # hauteur en pixels
 
 	define('_IMG_GD_MAX_PIXELS', 0); # nombre de pixels maxi pour calcul de la vignette avec gd
-
-	# le chemin http (relatif) vers les bibliotheques JavaScript
-	define('_DIR_JAVASCRIPT', (_DIR_RACINE . 'dist/javascript/'));
-
-	// Icones
-	# le chemin http (relatif) vers les images standard
-	define('_DIR_IMG_PACK', (_DIR_RACINE . 'dist/images/'));
-	# le chemin des vignettes de type de document
-	define('_DIR_IMG_ICONES_DIST', _DIR_RACINE . "dist/vignettes/");
-	# le chemin des icones de la barre d'edition des formulaires
-	define('_DIR_IMG_ICONES_BARRE', _DIR_RACINE . "dist/icones_barre/");
-
-	# le chemin php (absolu) vers les images standard (pour hebergement centralise)
-	define('_ROOT_IMG_PACK', dirname(dirname(dirname(__FILE__))) . '/dist/images/');
-	define('_ROOT_IMG_ICONES_DIST', dirname(dirname(dirname(__FILE__))) . '/dist/vignettes/');
 
 	// Le charset par defaut lors de l'installation
 	define('_DEFAULT_CHARSET', 'utf-8');
@@ -1036,6 +1008,8 @@ function spip_initialisation() {
 	// le script index.php
 	define('_SPIP_SCRIPT', 'spip.php');
 
+	// le nom du repertoire plugins/
+	define('_DIR_PLUGINS', _DIR_RACINE . "plugins/");
 
 	// *********** traiter les variables ************
 
@@ -1175,7 +1149,7 @@ function spip_desinfecte(&$t) {
 function verifier_visiteur() {
 // Rq: pour que cette fonction marche depuis mes_options elle a besoin
 // que les constantes principales soient initialisees
-	spip_initialisation_parametree(
+	spip_initialisation(
 	       (_DIR_RACINE  . _DIRNAME_PERMANENT_INACCESSIBLE),
 	       (_DIR_RACINE  . _DIRNAME_PERMANENT_ACCESSIBLE),
 	       (_DIR_RACINE  . _DIRNAME_TEMPORAIRE_INACCESSIBLE),
