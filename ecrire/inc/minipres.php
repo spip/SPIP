@@ -45,15 +45,20 @@ function install_debut_html($titre = 'AUTO') {
 		<style type='text/css'><!--\n/*<![CDATA[*/\n\n\n",
 		"body { background: #FFF; color: #000; }\n",
 		"h1 { color: #970038; margin-top: 50px; font-family: Verdana; font-weigth: bold; font-size: 18px }\n",
+		"h2 { font-family: Verdana,Arial,Sans,sans-serif; font-weigth: normal; font-size: 100%; }\n",
 		"a { color: #E86519; text-decoration: none; }\n",
 		"a:visited { color: #6E003A; }\n",
 		"a:active { color: #FF9900; }\n",
 		"img { border: 0; }\n",
+		"p { text-align: justify; }\n",
+		"ul { text-align: justify; list-style-type: none; }\n",
+		"fieldset, .fieldset { font-weigth: bold; text-align: justify; border: 1px solid #444; paddind: 10px; margin-top: 1em; }\n",
+		"legend { font-weight: bold; }\n",
+		"label {}\n",
 		"#minipres { width: 30em; text-align: center; margin-left: auto; margin-right: auto; }\n",
-		"ul, p, label { text-align: justify; margin: 0;}\n",
-		"fieldset { margin: 0.5em 0; }\n",
-		".suivant { text-align: $spip_lang_right; }\n",
-		".sans_puce { list-style-type: none; }\n",
+		".petit-centre { font-family: Verdana,Arial,Sans,sans-serif; font-size: 10px; }\n",
+		".petit-centre p { text-align: center; }\n",
+		".suivant { text-align: $spip_lang_right; display: block; margin-top: 1em; }\n",
 		".fondl { padding: 3px; background-color: #eee; border: 1px solid #333; 
 	background-position: center bottom; 
 	font-size: 0.8em;
@@ -81,10 +86,28 @@ function install_fin_html() {
 	echo "\n\t</div>\n\t</div>\n</body>\n</html>";
 }
 
-function bouton_suivant() {
-	return "<p class='suivant'><input type='submit' class='fondl' value='" .
-		_T('bouton_suivant') .
-		" >>' /></p>";
+function info_etape($titre, $complement = ''){
+	return "\n<h2>".$titre."</h2>\n" .
+	($complement ? "<p>".$complement."</p>\n":'');
+}
+
+function fieldset($legend, $champs = array()) {
+	$fieldset = "<fieldset>\n" .
+	($legend ? "<legend>".$legend."</legend>\n" : '');
+	foreach($champs as $nom => $contenu) {
+		$type = $contenu['hidden'] ? 'hidden' : (preg_match(',^pass,', $nom) ? 'password' : 'text');
+		$class = $contenu['hidden'] ? '' : "class='formo' size='40' ";
+		$fieldset .= "<label for='".$nom."'>".$contenu['label']."</label>\n";
+		$fieldset .= "<input ".$class."type='".$type."' name='".$nom."' value='".$contenu['valeur']."' />\n";
+	}
+	$fieldset .= "</fieldset>\n";
+	return $fieldset;
+}
+
+function bouton_suivant($code = 'bouton_suivant') {
+	return "\n<span class='suivant'><input type='submit' class='fondl' value=\"" .
+		_T($code) .
+		" >>\" /></span>\n";
 }
 
 // http://doc.spip.org/@minipres

@@ -14,9 +14,6 @@ IMG/siteon*
 IMG/test_*
 ecrire/inc_connect.php3
 ecrire/inc_meta_cache.php3
-tmp/CACHE/?
-tmp/CACHE/lang_*
-tmp/CACHE/skel_*
 tmp/data/.htaccess
 tmp/data/.htpasswd
 tmp/data/.htpasswd-admin

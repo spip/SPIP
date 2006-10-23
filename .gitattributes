@@ -1,7 +1,6 @@
 * text=auto !eol
 /INSTALL.txt -text
 /UPGRADE.txt -text
-config/remove.txt -text
 dist/favicon.ico -text
 dist/feed.png -text
 dist/formulaires/choix_mots.html -text
@@ -523,11 +522,11 @@ ecrire/win_png.htc -text
 ecrire/xml/atom.php -text
 ecrire/xml/ical.php -text
 ecrire/xml/rss.php -text
+etc/remove.txt -text
 /inc-public.php3 -text
 /index.php -text
 /rien.gif -text
 /spip.php -text
 tmp/remove.txt -text
-tmp/sessions/remove.txt -text
-tmp_img/remove.txt -text
+var/remove.txt -text
 /win_png.htc -text

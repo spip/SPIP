@@ -17,26 +17,23 @@ function install_etape_3_dist()
 
 	install_debut_html();
 
-	echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_choix_base')." <B>"._T('menu_aide_installation_choix_base')."</B></FONT>";
-
-	echo aide ("install2");
-	echo "\n";
+	echo info_etape(_T('info_choix_base')." "._T('menu_aide_installation_choix_base').aide ("install2"));
 
 	echo generer_url_post_ecrire('install');
 	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='4' />";
 	echo "<INPUT TYPE='hidden' NAME='chmod' VALUE='$chmod' />";
-	echo "<INPUT TYPE='hidden' NAME='adresse_db'  VALUE=\"$adresse_db\" SIZE='40' />";
+	echo "<INPUT TYPE='hidden' NAME='adresse_db'  VALUE=\"$adresse_db\" />";
 	echo "<INPUT TYPE='hidden' NAME='login_db' VALUE=\"$login_db\" />";
 	echo "<INPUT TYPE='hidden' NAME='pass_db' VALUE=\"$pass_db\" />\n";
 
 	$link = mysql_connect("$adresse_db","$login_db","$pass_db");
 	$result = @mysql_list_dbs();
 
-	echo "<fieldset><label><B>"._T('texte_choix_base_1')."</B></label>\n";
+	echo "<fieldset><legend>"._T('texte_choix_base_1')."</legend>\n";
 
 	if ($result AND (($n = @mysql_num_rows($result)) > 0)) {
-		echo "<B>"._T('texte_choix_base_2')."</B><P> "._T('texte_choix_base_3');
-		echo "<ul class='sans_puce'>";
+		echo "<label for='choix_db'><b>"._T('texte_choix_base_2')."</b><br />"._T('texte_choix_base_3')."</label>";
+		echo "<ul>";
 		$bases = "";
 		for ($i = 0; $i < $n; $i++) {
 			$table_nom = mysql_dbname($result, $i);
@@ -69,7 +66,7 @@ function install_etape_3_dist()
 			
 			if ($ok) {
 				echo _T('avis_lecture_noms_bases_3');
-				echo "<ul class='sans_puce'>";
+				echo "<ul>";
 				echo "<li><INPUT NAME=\"choix_db\" VALUE=\"".$test_base."\" TYPE=Radio id='stand' CHECKED>";
 				echo "<label for='stand'>".$test_base."</label></li>\n";
 				echo "</UL>";

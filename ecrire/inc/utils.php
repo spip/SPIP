@@ -979,6 +979,12 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	:	(@is_readable($f = _DIR_RESTREINT . 'inc_connect.php3') ? $f
 	:	false))));
 
+	// Le fichier de connexion a la base de donnees
+	define('_FILE_CHMOD_INS', _DIR_ETC . 'chmod');
+	define('_FILE_CHMOD',
+		(@is_readable($f = _FILE_CHMOD_INS . '.php') ? $f
+	:	false));
+
 	// la taille maxi des logos (0 : pas de limite)
 	define('_LOGO_MAX_SIZE', 0); # poids en ko
 	define('_LOGO_MAX_WIDTH', 0); # largeur en pixels

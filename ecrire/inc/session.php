@@ -160,7 +160,13 @@ function rejouer_session()
 function fichier_session($id_session, $alea) {
 	if (ereg("^([0-9]+_)", $id_session, $regs))
 		$id_auteur = $regs[1];
-	return _DIR_SESSIONS . 'session_'.$id_auteur.md5($id_session.' '.$alea). '.php';
+		
+	$repertoire = _DIR_SESSIONS;
+	if(!@file_exists($repertoire)) {
+		$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
+		$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
+	}
+	return $repertoire . 'session_'.$id_auteur.md5($id_session.' '.$alea). '.php';
 }
 
 //
