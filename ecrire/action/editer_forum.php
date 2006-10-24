@@ -29,12 +29,12 @@ function action_editer_forum_dist() {
 // http://doc.spip.org/@action_editer_mot_post
 function action_editer_forum_post($r)
 {
-  global $redirect, $nom_site, $texte, $titre_message, $url_site,  $modif_forum,  $valider_forum;
+	global $redirect, $nom_site, $texte, $titre_message, $url_site,  $modif_forum,  $valider_forum;
 
-  list($x,$id,$id_parent,$statut,$script,$objet) = $r;
+	list($x,$id,$id_parent,$statut,$script,$objet) = $r;
 
 	$redirect = urldecode($redirect);
-	spip_log("$id,$id_parent,$statut $script $objet $valider_forum ");
+
 	if ($valider_forum AND ($statut!='')) {
 		include_spip('inc/texte');
 		include_spip('base/abstract_sql');
