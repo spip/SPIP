@@ -384,6 +384,7 @@ function _T($texte, $args=array()) {
 	static $c; $c OR $c = include_spip('inc/lang');
 
 	$text = traduire_chaine($texte);
+
 	if (!empty($GLOBALS['xhtml'])) {
 		include_spip('inc/charsets');
 		$text = html2unicode($text, true /* secure */);
@@ -1153,17 +1154,13 @@ function spip_desinfecte(&$t) {
 
 // http://doc.spip.org/@verifier_visiteur
 function verifier_visiteur() {
-// Rq: pour que cette fonction marche depuis mes_options elle a besoin
-// que les constantes principales soient initialisees
-	spip_initialisation(
-	       (_DIR_RACINE  . _DIRNAME_PERMANENT_INACCESSIBLE),
-	       (_DIR_RACINE  . _DIRNAME_PERMANENT_ACCESSIBLE),
-	       (_DIR_RACINE  . _DIRNAME_TEMPORAIRE_INACCESSIBLE),
-	       (_DIR_RACINE  . _DIRNAME_TEMPORAIRE_ACCESSIBLE)
-	       );
-
 	if (isset($_COOKIE['spip_session']) OR
 	(isset($_SERVER['PHP_AUTH_USER'])  AND !$GLOBALS['ignore_auth_http'])) {
+
+		// Rq: pour que cette fonction marche depuis mes_options 
+		// il faut forcer l'init si ce n'est fait
+
+		@spip_initialisation();
 		$var_f = charger_fonction('session', 'inc');
 		if ($var_f()) return $GLOBALS['auteur_session']['statut'];
 		include_spip('inc/actions');

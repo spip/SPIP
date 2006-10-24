@@ -215,7 +215,7 @@ function help_img($regs) {
 	header("Expires: ".gmdate("D, d M Y H:i:s", time()+24*3600) .' GMT');
 
 	if ($rep=="IMG" AND $lang=="cache"
-	AND @file_exists($img_tex = _DIR_IMG.'cache-TeX/'.preg_replace(',^TeX-,', '', $file))) {
+	AND @file_exists($img_tex = _DIR_VAR.'cache-TeX/'.preg_replace(',^TeX-,', '', $file))) {
           readfile($img_tex);
 	} else if (@file_exists($img = _DIR_CACHE . 'aide-'.$cache)) {
 		readfile($img);
