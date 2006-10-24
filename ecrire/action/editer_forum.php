@@ -21,7 +21,7 @@ function action_editer_forum_dist() {
 
 	$arg = _request('arg');
 	// arg = l'eventuel mot a supprimer pour d'eventuelles Row SQL
-	if (!preg_match(',^(\d+)\D(\d+)\D(\d+)\D(\d+)\D(\d+)\D(\d+)\D(\w+)$,', $arg, $r)) 
+	if (!preg_match(',^(\d+)\D(\d+)\D(\w+)\W(\w+)\W(\w+)$,', $arg, $r)) 
 		spip_log("action editer_forum: $arg pas compris");
 	else action_editer_forum_post($r);
 }
@@ -31,9 +31,11 @@ function action_editer_forum_post($r)
 {
   global $redirect, $nom_site, $texte, $titre_message, $url_site,  $modif_forum,  $valider_forum;
 
-	list($x,$id_rubrique,$id_parent,$id_article,$id_breve,$id_message,$id_syndic, $statut) = $r;
+  list($x,$id,$id_parent,$statut,$script,$objet) = $r;
 
-	 if ($valider_forum AND ($statut!='')) {
+	$redirect = urldecode($redirect);
+	spip_log("$id,$id_parent,$statut $script $objet $valider_forum ");
+	if ($valider_forum AND ($statut!='')) {
 		include_spip('inc/texte');
 		include_spip('base/abstract_sql');
 		include_spip('inc/forum');
@@ -41,7 +43,7 @@ function action_editer_forum_post($r)
 		$titre_message = corriger_caracteres($titre_message);
 		$texte = corriger_caracteres($texte);
 
-		spip_abstract_insert('spip_forum', "(titre, texte, date_heure, nom_site, url_site, statut, id_auteur,	auteur, email_auteur, id_rubrique, id_parent, id_article, id_breve,	id_message, id_syndic)", "(" . _q($titre_message) . ", " . _q($texte) . ", NOW(), " . _q($nom_site) . ", " . _q($url_site) . ", " . _q($statut) . ", " . $GLOBALS['auteur_session']['id_auteur'] . ", " . _q($GLOBALS['auteur_session']['nom']) . ", " . _q($GLOBALS['auteur_session']['email']) . ",	'$id_rubrique', '$id_parent', '$id_article', '$id_breve',	'$id_message', '$id_syndic')");
+		spip_abstract_insert('spip_forum', "($objet, titre, texte, date_heure, nom_site, url_site, statut, id_auteur,	auteur, email_auteur, id_parent)", "($id, " . _q($titre_message) . ", " . _q($texte) . ", NOW(), " . _q($nom_site) . ", " . _q($url_site) . ", " . _q($statut) . ", " . $GLOBALS['auteur_session']['id_auteur'] . ", " . _q($GLOBALS['auteur_session']['nom']) . ", " . _q($GLOBALS['auteur_session']['email']) . ", $id_parent)");
 
 		calculer_threads();
 
@@ -49,28 +51,20 @@ function action_editer_forum_post($r)
 			spip_query("UPDATE spip_auteurs_messages SET vu = 'non' WHERE id_message='$id_message'");
 
 		}
-		redirige_par_entete(_DIR_RESTREINT . urldecode($redirect));
+		redirige_par_entete($redirect);
+		
 	 } else {
 	   // on ne fait que passer .... 
 	   // et si les clients HTTP respectaient le RFC HTTP selon lequel
 	   // une redirection d'un POST doit etre en POST et pas en GET
 	   // on n'aurait pas a faire l'horreur ci-dessous.
+		  
 	   set_request('exec', 'forum_envoi');
-	   set_request('id_article', $id_article);
-	   set_request('id_breve', $id_breve);
-	   set_request('id_message', $id_message);
+	   set_request('id', $id);
 	   set_request('id_parent', $id_parent);
-	   set_request('id_rubrique', $id_rubrique);
-	   set_request('id_syndic', $id_syndic);
-		     
-	   set_request('modif_forum', $modif_forum);
-	   set_request('nom_site', $nom_site);
 	   set_request('statut', $statut);
-	   set_request('texte', $texte);
-	   set_request('titre_message', $titre_message);
-	   set_request('url_site', $url_site);
-	   set_request('url', $redirect);
-	   set_request('valider_forum', $valider_forum);
+	   set_request('script', $script);
+
 	   include('ecrire/index.php');
 	     }
 	 exit;

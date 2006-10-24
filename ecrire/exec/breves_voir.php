@@ -213,12 +213,10 @@ function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $select_gr
 	// Forums
 	//
 	
-	$tm = rawurlencode($titre);
-	
 	echo "<br /><br />";
 	
 	echo "\n<div align='center'>";
-	icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=prive&id_breve=$id_breve&titre_message=$tm&url=".generer_url_retour("breves_voir", "id_breve=$id_breve")),
+	icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=prive&id=$id_breve&script=breves_voir") . '#formulaire',
 	     "forum-interne-24.gif", "creer.gif");
 	echo "</div>";
 	

@@ -72,10 +72,9 @@ function exec_forum_dist()
 
   if ($total > 10) liste_numeros_forum($script, $debut, $total);
 
-  $tm = rawurlencode(filtrer_entites(_T('texte_nouveau_message')));
+  
   echo "<p><div align='center'>";
-  icone (_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=$statutforum&titre_message=$tm&url=" . generer_url_retour($script)),
-       $logo, "creer.gif");
+  icone (_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=$statutforum&script=$script"), $logo, "creer.gif");
   echo "</div></p>";
 
   echo "<p align='left'>";

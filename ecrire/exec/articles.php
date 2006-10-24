@@ -34,7 +34,7 @@ function exec_articles_dist()
 
 		$res = articles_affiche($id_article, $row, _request('cherche_auteur'), _request('ids'), _request('cherche_mot'), _request('select_groupe'), _request('trad_err'))
 		. "<br /><br />\n<div align='center'>"
-		. icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi","statut=prive&id_article=$id_article&titre_message=" .rawurlencode($row['titre']) . "&url=" . generer_url_retour("articles","id_article=$id_article")), "forum-interne-24.gif", "creer.gif", '', false)
+		  . icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=prive&id=$id_article&script=articles") ."#formulaire", "forum-interne-24.gif", "creer.gif", '', false)
 		. "</div><br />"
 		. $discuter($id_article, false,  _request('debut'));
 	}
