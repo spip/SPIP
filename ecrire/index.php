@@ -71,6 +71,7 @@ include_spip('inc/cookie');
 //
 
 $exec = _request('exec');
+
 if (!preg_match(',^[a-z][0-9a-z_]*$,i', $exec)) $exec = "accueil";
 
 //
@@ -79,7 +80,7 @@ if (!preg_match(',^[a-z][0-9a-z_]*$,i', $exec)) $exec = "accueil";
 
 if (autoriser_sans_cookie($exec)) {
 	if (!isset($reinstall)) $reinstall = 'non';
-	$prefs = array('couleur' =>1, 'display'=>0, 'options'=>'avancees');
+	$GLOBALS['prefs'] = array('couleur' =>1, 'display'=>0, 'options'=>'avancees');
 	$var_auth = true;
 } else {
 	$var_auth = charger_fonction('auth', 'inc');
@@ -93,38 +94,37 @@ if (autoriser_sans_cookie($exec)) {
 
 $prefs_mod = false;
 
-if (isset($set_couleur)) {
-	$prefs['couleur'] = floor($set_couleur);
+if (isset($_GET['set_couleur'])) {
+	$GLOBALS['prefs']['couleur'] = floor($_GET['set_couleur']);
 	$prefs_mod = true;
 }
-if (isset($set_disp)) {
-	$prefs['display'] = floor($set_disp);
+if (isset($_GET['set_display'])) {
+	$GLOBALS['prefs']['display'] = floor($_GET['set_display']);
 	$prefs_mod = true;
 }
-if (isset($set_options) AND ($set_options == 'avancees' OR $set_options == 'basiques')) {
-	$prefs['options'] = $set_options;
+if (isset($_GET['set_options']) AND ($_GET['set_options'] == 'avancees' OR $_GET['set_options'] == 'basiques')) {
+	$GLOBALS['prefs']['options'] = $_GET['set_options'];
 	$prefs_mod = true;
 }
 if ($prefs_mod AND !$var_auth)
-	spip_query("UPDATE spip_auteurs SET prefs = " . _q(serialize($prefs)) . " WHERE id_auteur = $connect_id_auteur");
+	spip_query("UPDATE spip_auteurs SET prefs = " . _q(serialize($GLOBALS['prefs'])) . " WHERE id_auteur = " .intval($GLOBALS['auteur_session']['id_auteur']));
 
-if (isset($set_ecran)) {
-	// Poser un cookie, car ce reglage depend plus du navigateur que de l'utilisateur
-	spip_setcookie('spip_ecran', $set_ecran, time() + 365 * 24 * 3600);
-	$spip_ecran = $set_ecran;
-}
-if (!isset($spip_ecran)) $spip_ecran = "etroit";
-
+if (isset($_GET['set_ecran'])) {
+	// Poser un cookie,
+	// car ce reglage depend plus du navigateur que de l'utilisateur
+	$GLOBALS['spip_ecran'] = $_GET['set_ecran'];
+	spip_setcookie('spip_ecran', $GLOBALS['spip_ecran'], time() + 365 * 24 * 3600);
+} else $GLOBALS['spip_ecran'] = "etroit";
 
 
 // deux globales (compatibilite ascendante)
-$options      = $prefs['options'];
-$spip_display = $prefs['display'];
-$choix_couleur = $prefs['couleur'];
-if (!isset($couleurs_spip[$choix_couleur])) $choix_couleur = 1;
+$GLOBALS['options']      = $GLOBALS['prefs']['options'];
+$GLOBALS['spip_display'] = $GLOBALS['prefs']['display'];
+$choix_couleur = $GLOBALS['prefs']['couleur'];
+if (!isset($GLOBALS['couleurs_spip'][$choix_couleur])) $choix_couleur = 1;
 
-$couleur_foncee = $couleurs_spip[$choix_couleur]['couleur_foncee'];
-$couleur_claire = $couleurs_spip[$choix_couleur]['couleur_claire'];
+$GLOBALS['couleur_foncee'] = $GLOBALS['couleurs_spip'][$choix_couleur]['couleur_foncee'];
+$GLOBALS['couleur_claire'] = $GLOBALS['couleurs_spip'][$choix_couleur]['couleur_claire'];
 
 // charger l'affichage minimal et initialiser a la langue par defaut
 include_spip('inc/minipres');
@@ -137,12 +137,12 @@ if (isset($GLOBALS['_COOKIE']['spip_lang_ecrire'])) {
 	if ($var_auth)
 		changer_langue($GLOBALS['_COOKIE']['spip_lang_ecrire']);
 	// si authentifie, changer definitivement si ce n'est fait
-	else {	if (($spip_lang_ecrire <> $auteur_session['lang'])
+	else {	if (($spip_lang_ecrire <> $GLOBALS['auteur_session']['lang'])
 		AND changer_langue($spip_lang_ecrire)) {
-			spip_query("UPDATE spip_auteurs SET lang = " . _q($spip_lang_ecrire) . " WHERE id_auteur = " . intval($auteur_session['id_auteur']));
-			$auteur_session['lang'] = $var_lang_ecrire;
+			spip_query("UPDATE spip_auteurs SET lang = " . _q($spip_lang_ecrire) . " WHERE id_auteur = " . intval($GLOBALS['auteur_session']['id_auteur']));
+			$GLOBALS['auteur_session']['lang'] = $var_lang_ecrire;
 			$var_f = charger_fonction('session', 'inc');
-			$var_f($auteur_session);
+			$var_f($GLOBALS['auteur_session']);
 		}
 	}
 }
@@ -150,12 +150,12 @@ if (isset($GLOBALS['_COOKIE']['spip_lang_ecrire'])) {
 utiliser_langue_visiteur(); 
 
 define ('_ATTRIBUTES_BODY',  "
-link='" .  $couleurs_spip[$choix_couleur]['couleur_lien'] . "'
-vlink='" . $couleurs_spip[$choix_couleur]['couleur_lien_off'] ."'
-alink='" . $couleurs_spip[$choix_couleur]['couleur_lien_off'] ."'
+link='" .  $GLOBALS['couleurs_spip'][$choix_couleur]['couleur_lien'] . "'
+vlink='" . $GLOBALS['couleurs_spip'][$choix_couleur]['couleur_lien_off'] ."'
+alink='" . $GLOBALS['couleurs_spip'][$choix_couleur]['couleur_lien_off'] ."'
 bgcolor='#f8f7f3' text='#000000' 
 topmargin='0' leftmargin='0' marginwidth='0' marginheight='0'" .
-	($spip_lang_rtl ? " dir='rtl'" : ""));
+	($GLOBALS['spip_lang_rtl'] ? " dir='rtl'" : ""));
 
 define('_TRANCHES', 10);
 
@@ -166,7 +166,7 @@ define('_TRANCHES', 10);
 // Controle de la version, sauf si on est deja en train de s'en occuper
 if (!isset($reinstall)
 AND (!isset($var_ajaxcharset))
-AND ($spip_version <> ((double) str_replace(',','.',$GLOBALS['meta']['version_installee']))))
+AND ($GLOBALS['spip_version'] <> ((double) str_replace(',','.',$GLOBALS['meta']['version_installee']))))
 	$exec = 'demande_mise_a_jour';
 
 // Controle d'interruption d'une longue restauration
@@ -177,7 +177,7 @@ AND isset($GLOBALS['meta']["debut_restauration"]))
 // Verification des plugins
 // (ne pas interrompre une restauration ou un upgrade)
 elseif ($exec!='upgrade'
-AND $auteur_session['statut']=='0minirezo'
+AND $GLOBALS['auteur_session']['statut']=='0minirezo'
 AND lire_fichier(_DIR_TMP.'verifier_plugins.txt',$l)
 AND $l = @unserialize($l)) {
 	foreach ($l as $fichier) {
