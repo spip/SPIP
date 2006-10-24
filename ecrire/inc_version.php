@@ -43,8 +43,8 @@ define('_DIR_IMG_ICONES_DIST', _DIR_RACINE . "dist/vignettes/");
 define('_DIR_IMG_ICONES_BARRE', _DIR_RACINE . "dist/icones_barre/");
 
 # le chemin php (absolu) vers les images standard (pour hebergement centralise)
-define('_ROOT_IMG_PACK', dirname(dirname(dirname(__FILE__))) . '/dist/images/');
-define('_ROOT_IMG_ICONES_DIST', dirname(dirname(dirname(__FILE__))) . '/dist/vignettes/');
+define('_ROOT_IMG_PACK', dirname(dirname(__FILE__)) . '/dist/images/');
+define('_ROOT_IMG_ICONES_DIST', dirname(dirname(__FILE__)) . '/dist/vignettes/');
 
 
 # Le nom des 4 repertoires modifiables par les scripts lances par httpd
