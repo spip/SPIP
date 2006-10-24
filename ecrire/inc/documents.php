@@ -31,7 +31,7 @@ function vignette_par_defaut($ext, $size=true, $loop = true) {
 	if (!@file_exists($v = _DIR_IMG_ICONES . $ext.'.png')
 	AND !@file_exists($v = _DIR_IMG_ICONES . $ext.'.gif')
 	# icones standard
-	AND !@file_exists($v = _DIR_IMG_ICONES_DIST . $ext.'-dist.png')
+	AND !@file_exists($v = _DIR_IMG_ICONES_DIST . $ext.'.png')
 	# cas d'une install dans un repertoire "applicatif"...
 	AND !@file_exists(_ROOT_IMG_ICONES_DIST . $v)
 	)
