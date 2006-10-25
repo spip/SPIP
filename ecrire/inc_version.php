@@ -56,7 +56,7 @@ define('_NOM_TEMPORAIRES_INACCESSIBLES', "tmp/");
 # le nom du repertoire des fichiers Temporaires Accessibles par http://
 define('_NOM_TEMPORAIRES_ACCESSIBLES', "var/");
 # le nom du repertoire des fichiers Permanents Inaccessibles par http://
-define('_NOM_PERMANENTS_INACCESSIBLES', "etc/");
+define('_NOM_PERMANENTS_INACCESSIBLES', "config/");
 # le nom du repertoire des fichiers Permanents Accessibles par http://
 define('_NOM_PERMANENTS_ACCESSIBLES', "IMG/");
 

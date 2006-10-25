@@ -189,11 +189,6 @@ function sous_repertoire($base, $subdir, $nobase = false) {
 	spip_log("faux sous-repertoire $base${subdir}");
 	return "$baseaff${subdir}";
 }
-// compatibilite ascendante
-// http://doc.spip.org/@creer_repertoire
-function creer_repertoire($base, $subdir) {
-	return sous_repertoire($base, $subdir, true);
-}
 
 //
 // Cette fonction parcourt recursivement le repertoire $dir, et renvoie les
