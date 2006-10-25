@@ -172,12 +172,7 @@ else {
 	. "\n<div align='right'>"
 	. "\n<input type='submit' class='fondo' value='"
 	. _T('bouton_enregistrer')
-	. "'></div>"
-	. pipeline('affiche_milieu',
-		array('args' => array(
-			'exec'=>'auteur_infos',
-			'id_auteur'=>$id_auteur),
-		      'data'=>''));
+	. "'></div>";
 
 	$arg = intval($id_auteur) . '/';
 
