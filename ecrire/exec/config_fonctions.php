@@ -195,8 +195,10 @@ function vignettes_config()
 		}
 	}
 
-	echo afficher_choix_vignette($p = 'netpbm');
-	$nb_process ++;
+	if (_PNMSCALE_COMMAND!='') {
+		echo afficher_choix_vignette($p = 'netpbm');
+		$nb_process ++;
+	}
 
 	if (function_exists('imagick_readimage')) {
 		echo afficher_choix_vignette('imagick');

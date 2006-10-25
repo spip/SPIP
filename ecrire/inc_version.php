@@ -121,21 +121,20 @@ $type_urls = 'page';
 ($ip = @$_SERVER['HTTP_X_FORWARDED_FOR']) OR $ip = @$_SERVER['REMOTE_ADDR'];
 
 // Pour renforcer la privacy, decommentez la ligne ci-dessous (ou recopiez-la
-// dans le fichier config/mes_options : SPIP ne pourra alors conserver aucun
+// dans le fichier config/mes_options) : SPIP ne pourra alors conserver aucun
 // numero IP, ni temporairement lors des visites (pour gerer les statistiques
 // ou dans spip.log), ni dans les forums (responsabilite)
 # $ip = substr(md5($ip),0,16);
 
+// Creation des images avec ImageMagick : definir la constante de facon
+// a preciser le chemin du binaire et les options souhaitees. Par defaut :
+// define('_CONVERT_COMMAND', 'convert -quality 85 -resize %xx%y %src %dest');
 
-// creation des vignettes avec image magick en ligne de commande : mettre
-// le chemin complet '/bin/convert' (Linux) ou '/sw/bin/convert' (fink/Mac OS X)
-// Note : preferer GD2 ou le module php imagick s'ils sont disponibles
-$convert_command = 'convert';
-
-// creation des vignettes avec pnmscale
+// Creation des vignettes avec netpbm/pnmscale
 // Note: plus facile a installer par FTP,
 // voir http://gallery.menalto.com/modules.php?op=modload&name=GalleryFAQ&file=index&myfaq=yes&id_cat=2#43
-$pnmscale_command = 'pnmscale';
+// par defaut :
+// define('_PNMSCALE_COMMAND', 'pnmscale');
 
 // faut-il passer les connexions MySQL en mode debug ?
 $mysql_debug = false;
