@@ -23,31 +23,30 @@ function exec_controle_petition_dist()
 	$id_article = intval($id_article);
 	$debut =  intval($debut);
 
-	debut_page(_T('titre_page_controle_petition'), "forum", "suivi-petition");
-	debut_gauche();
-
-	debut_droite();
-  
-	echo "<div class='serif2'>";
- 
-	if ($connect_statut == "0minirezo") {
-		gros_titre(_T('titre_suivi_petition'));
-
+ 	if ($connect_statut != "0minirezo") {
+		$r = "<b>"._T('avis_non_acces_page')."</b>";
+	} else {
 		$var_f = charger_fonction('signatures', 'inc');
-		$var_f('controle_petition',
+
+		$r = $var_f('controle_petition',
 			$id_article,
 			$debut, 
 			"(statut='publie' OR statut='poubelle')",
 			"date_time DESC",
 			10);
-	} else {
-		echo "<b>"._T('avis_non_acces_page')."</b>";
 	}
 
+	if (_request('var_ajaxcharset')) ajax_retour($r);
 
-	echo "</div>";
+	debut_page(_T('titre_page_controle_petition'), "forum", "suivi-petition");
+	debut_gauche();
 
-	echo fin_page();
+	debut_droite();
+  
+	gros_titre(_T('titre_suivi_petition'));
 
+	$a = "editer_signature-" . $id_article;
+
+	echo  "<div id='", $a, "' class='serif2'>", $r, "</div>", fin_page();
 }
 ?>
