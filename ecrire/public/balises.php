@@ -970,6 +970,26 @@ function balise_URL_ECRIRE_dist($p) {
 }
 
 //
+// #URL_ACTION_AUTEUR{naviguer} -> ecrire/?exec=naviguer
+//
+// http://doc.spip.org/@balise_URL_ECRIRE_dist
+function balise_URL_ACTION_AUTEUR_dist($p) {
+
+	$p->code = interprete_argument_balise(1,$p);
+	$args = interprete_argument_balise(2,$p);
+	if ($args != "''" && $args!==NULL)
+		$p->code .= ".'\",\"'.".$args;
+	$redirect = interprete_argument_balise(3,$p);
+	if ($redirect != "''" && $redirect!==NULL)
+		$p->code .= ".'\",\"'.".$redirect;
+
+	$p->code = "'<"."?php echo generer_action_auteur(\"'." . $p->code .".'\"); ?>'";
+
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+//
 // #CHEMIN{fichier} -> find_in_path(fichier)
 //
 // http://doc.spip.org/@balise_CHEMIN_dist
@@ -1241,6 +1261,7 @@ function balise_SET_dist($p){
 //
 // http://doc.spip.org/@balise_GET_dist
 function balise_GET_dist($p) {
+	$p->interdire_scripts = false; // le contenu vient de #SET, donc il est de confiance
 	if (function_exists('balise_ENV'))
 		return balise_ENV($p, '$Pile["vars"]');
 	else
