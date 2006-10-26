@@ -143,7 +143,7 @@ function afficher_choix_vignette($process) {
 // http://doc.spip.org/@vignettes_config
 function vignettes_config()
 {
-  global $image_process, $convert_command, $spip_lang_left, $spip_lang_right;
+  global $image_process, $spip_lang_left, $spip_lang_right;
 
 	debut_cadre_trait_couleur("image-24.gif");
 
@@ -205,7 +205,7 @@ function vignettes_config()
 		$nb_process ++;
 	}
 
-	if ($convert_command) {
+	if (_CONVERT_COMMAND!='') {
 		echo afficher_choix_vignette($p = 'convert');
 		$nb_process ++;
 	}

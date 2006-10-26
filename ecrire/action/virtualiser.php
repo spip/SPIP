@@ -17,8 +17,6 @@ include_spip('inc/actions');
 
 // http://doc.spip.org/@action_virtualiser_dist
 function action_virtualiser_dist() {
-	
-	global $convert_command;
 
 	$var_f = charger_fonction('controler_action_auteur', 'inc');
 	$var_f();
