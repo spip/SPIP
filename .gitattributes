@@ -484,6 +484,7 @@ ecrire/inc/tourner.php -text
 ecrire/inc/utils.php -text
 ecrire/inc/vieilles_defs.php -text
 ecrire/inc/virtualiser.php -text
+ecrire/inc/xml.php -text
 ecrire/install/etape_.php -text
 ecrire/install/etape_1.php -text
 ecrire/install/etape_2.php -text

@@ -258,91 +258,17 @@ function ordonne_plugin(){
 	ecrire_metas();
 }
 
-// http://doc.spip.org/@parse_plugin_xml
-function parse_plugin_xml($texte, $clean=true){
-	$out = array();
-  // enlever les commentaires
-  if ($clean){
-	  $texte = preg_replace(',<!--(.*?)-->,is','',$texte);
-	  $texte = preg_replace(',<\?(.*?)\?>,is','',$texte);
-  }
-  $txt = $texte;
-
-	// tant qu'il y a des tags
-	$chars = preg_split("{<([^>]*?)>}s",$txt,2,PREG_SPLIT_DELIM_CAPTURE);
-	while(count($chars)>=2){
-		// tag ouvrant
-		//$chars = preg_split("{<([^>]*?)>}s",$txt,2,PREG_SPLIT_DELIM_CAPTURE);
-	
-		// $before doit etre vide ou des espaces uniquements!
-		$before = trim($chars[0]);
-
-		if (strlen($before)>0)
-			return $texte; // before non vide, donc on est dans du texte
-	
-		$tag = $chars[1];
-		$closing_tag = explode(" ",trim($tag));$closing_tag=reset($closing_tag);
-		$txt = $chars[2];
-	
-		if(substr($tag,-1)=='/'){ // self closing tag
-			$tag = substr($tag,0,strlen($tag)-1);
-			$out[$tag][]="";
-			$txt = trim($txt);
-		}
-		else{
-			// tag fermant
-			$chars = preg_split("{(</".preg_quote($closing_tag).">)}s",$txt,2,PREG_SPLIT_DELIM_CAPTURE);
-			if (!isset($chars[1])) { // tag fermant manquant
-				$out[$tag][]="erreur : tag fermant $tag manquant::$txt"; 
-				return $out;
-			}
-			$content = $chars[0];
-			$txt = trim($chars[2]);
-			if (strpos($content,"<")===FALSE) // eviter une recursion si pas utile
-				$out[$tag][] = $content;
-			else
-				$out[$tag][]=parse_plugin_xml($content, false);
-		}
-		$chars = preg_split("{<([^>]*?)>}s",$txt,2,PREG_SPLIT_DELIM_CAPTURE);
-	}
-	if (count($out)&&(strlen($txt)==0))
-		return $out;
-	else
-		return $texte;
-}
-
-// http://doc.spip.org/@applatit_arbre
-function applatit_arbre($arbre,$separateur = " "){
-	$s = "";
-	if (is_array($arbre))
-		foreach($arbre as $tag=>$feuille){
-			if (is_array($feuille)){
-				if ($tag!==intval($tag)){
-					$f = applatit_arbre($feuille);
-					if (strlen($f))	$s.="<$tag>$f</$tag>";
-					else $s.="<$tag/>";
-				}
-				else
-					$s.=applatit_arbre($feuille);
-				$s .= $separateur;
-			}				
-			else
-				$s.="$feuille$separateur";
-		}
-	return substr($s,0,strlen($s)-strlen($separateur));
-}
-
 // lecture du fichier de configuration d'un plugin
 // http://doc.spip.org/@plugin_get_infos
 function plugin_get_infos($plug){
+	include_spip('inc/xml');
 	static $infos=array();
 	if (!isset($infos[$plug])){
 	  $ret = array();
 	  if ((@file_exists(_DIR_PLUGINS))&&(is_dir(_DIR_PLUGINS))){
 			if (@file_exists(_DIR_PLUGINS."$plug/plugin.xml")) {
-				lire_fichier(_DIR_PLUGINS."$plug/plugin.xml", $texte);
-				$arbre = parse_plugin_xml($texte);
-				if (!isset($arbre['plugin'])&&is_array($arbre['plugin']))
+				$arbre = spip_xml_load(_DIR_PLUGINS."$plug/plugin.xml");
+				if (!$arbre OR !isset($arbre['plugin']) OR !is_array($arbre['plugin']))
 					$arbre = array('erreur' => array(_T('erreur_plugin_fichier_def_incorrect')." : $plug/plugin.xml"));
 			}
 			else {
@@ -352,12 +278,12 @@ function plugin_get_infos($plug){
 	
 			plugin_verifie_conformite($plug,$arbre);
 			
-			$ret['nom'] = applatit_arbre($arbre['nom']);
+			$ret['nom'] = spip_xml_aplatit($arbre['nom']);
 			$ret['version'] = trim(end($arbre['version']));
 			if (isset($arbre['auteur']))
-				$ret['auteur'] = applatit_arbre($arbre['auteur']);
+				$ret['auteur'] = spip_xml_aplatit($arbre['auteur']);
 			if (isset($arbre['description']))
-				$ret['description'] = applatit_arbre($arbre['description']);
+				$ret['description'] = spip_xml_aplatit($arbre['description']);
 			if (isset($arbre['lien']))
 				$ret['lien'] = join(' ',$arbre['lien']);
 			if (isset($arbre['etat']))
