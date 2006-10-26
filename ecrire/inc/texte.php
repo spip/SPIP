@@ -130,7 +130,6 @@ function traiter_echap_code_dist($regs) {
 		$echap = nl2br("<div style='text-align: left;' "
 		. "class='spip_code' dir='ltr'><code>"
 		.$echap."</code></div>");
-		$mode = 'div';
 	} else
 		$echap = "<code class='spip_code' "
 		."dir='ltr'>".$echap."</code>";
@@ -171,23 +170,32 @@ function echappe_html($letexte, $source='', $no_transform=false,
 $preg='') {
 	if (!strlen($letexte)) return '';
 
-	if (!$preg) $preg = ',<(html|code|cadre|frame|script)'
+	if (!$preg)
+		$preg = ',<(html|code|cadre|frame|script)'
 			.'(\s[^>]*)?'
 			.'>(.*)</\1>,UimsS';
-	if (preg_match_all(
+	while (preg_match_all(
 	$preg,
 	$letexte, $matches, PREG_SET_ORDER))
 	foreach ($matches as $regs) {
-		// mode d'echappement :
-		//    <span class='base64'> . base64_encode(contenu) . </span>
-		// ou 'div' selon les cas, pour refermer correctement les paragraphes
-		$mode = 'span';
+
+		// Bloc gerant les imbrications complexes
+		// balise d'ouverture == imbrication non finie
+		if (strpos($regs[$endr = count($regs) - 1], '<' . $regs[1]) !== false
+		 && (!isset($lastreg) || $lastreg != $regs[$endr])) {
+			if (isset($pmid) || (($posmid = strpos($preg, '(.*)'))
+						&& ($pmid = '.') && ($psav = $preg))) {
+				$pmid = '(?:<\1[^>]*>(' . $pmid . '*)</\1>|.)';
+				$preg = substr_replace($psav, $pmid, $posmid + 1, 1);
+				$lastreg = $regs[$endr];
+				continue 2; # reprendre preg_match_all avec un $preg augmente
+			}
+		}
 
 		// echappements tels quels ?
 		if ($no_transform) {
 			$echap = $regs[0];
 		}
-
 		// sinon les traiter selon le cas
 		else if (function_exists($f = 'traiter_echap_'.strtolower($regs[1])))
 			$echap = $f($regs);
