@@ -25,22 +25,22 @@ include(_DIR_RESTREINT . 'inc/vieilles_defs.php');
 // charge un fichier perso ou, a defaut, standard
 // et retourne si elle existe le nom de la fonction homonyme (exec_$nom),
 // ou de suffixe _dist
+// Peut etre appelee plusieurs fois, donc optimiser
 // http://doc.spip.org/@charger_fonction
 function charger_fonction($nom, $dossier='exec', $continue=false) {
 
-	// Securite de base
-	if (!preg_match(',^\w+$,', $nom))
-		die(htmlspecialchars($nom)." pas autorise");
-
 	if (substr($dossier,-1) != '/') $dossier .= '/';
-	// Si la fonction existe deja (definie par mes_options, par exemple)
 	
 	if (function_exists($f = str_replace('/','_',$dossier) . $nom))
 		return $f;
 	if (function_exists($g = $f . '_dist'))
 		return $g;
 
-	// Sinon charger le fichier de declaration
+	// Sinon charger le fichier de declaration si plausible
+
+	if (!preg_match(',^\w+$,', $f))
+		die(htmlspecialchars($nom)." pas autorise");
+
 	// passer en minuscules (cf les balises de formulaires)
 	$inc = include_spip($d = ($dossier . strtolower($nom)));
 
@@ -380,10 +380,9 @@ function self($root = false) {
 //
 // http://doc.spip.org/@_T
 function _T($texte, $args=array()) {
-	# petite optimisation pour ne passer qu'une fois dans include_spip
-	static $c; $c OR $c = include_spip('inc/lang');
 
-	$text = traduire_chaine($texte);
+	$f = charger_fonction('traduire', 'inc');
+	$text = $f($texte,$GLOBALS['spip_lang']);
 
 	if (!empty($GLOBALS['xhtml'])) {
 		include_spip('inc/charsets');
