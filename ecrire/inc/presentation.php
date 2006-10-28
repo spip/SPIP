@@ -685,11 +685,9 @@ function afficher_script_statut($id, $type, $n, $img, $statut, $title, $act)
 // Afficher tableau d'articles
 //
 // http://doc.spip.org/@afficher_articles
-function afficher_articles($titre_table, $requete, $formater_article='') {
+function afficher_articles($titre, $requete, $formater_article='') {
 
-	global $options;
-
-	if (!isset($requete['FROM']))  $requete['FROM'] = 'spip_articles AS articles';
+	if (!isset($requete['FROM'])) $requete['FROM'] = 'spip_articles AS articles';
 
 	if (!isset($requete['SELECT'])) {
 		$requete['SELECT'] = "articles.id_article, articles.titre, articles.id_rubrique, articles.statut, articles.date, articles.lang, articles.id_trad, articles.descriptif";
@@ -697,33 +695,32 @@ function afficher_articles($titre_table, $requete, $formater_article='') {
 	
 	if (!isset($requete['GROUP BY'])) $requete['GROUP BY'] = '';
 
-	// memo des arguments en base pour gérer l'affichage par tranche
+	// memorisation des arguments pour gérer l'affichage par tranche
 	// et/ou par langues.
 
-	$hash = "0x".substr(md5(serialize($requete) . $GLOBALS['meta']['gerer_trad'] . $titre_table), 0, 31);
-	$tmp_var = 't' . substr($hash, 2, 7);
+	$hash = substr(md5(serialize($requete) . $GLOBALS['meta']['gerer_trad'] . $titre), 0, 31);
+	$tmp_var = 't' . substr($hash, 0, 7);
 
 	// le champ id_auteur sert finalement a memoriser le nombre de lignes
 	// (a renommer)
 
-	$res_proch = spip_query("SELECT id_ajax_fonc, id_auteur FROM spip_ajax_fonc WHERE hash=$hash LIMIT 1");
+	$res_proch = spip_query("SELECT id_ajax_fonc, id_auteur FROM spip_ajax_fonc WHERE hash=0x$hash LIMIT 1");
+
 	if ($row = spip_fetch_array($res_proch)) {
 		$id_ajax = $row["id_ajax_fonc"];
 		$cpt = $row["id_auteur"];
 	} else  {
-		include_spip ('base/abstract_sql');
-		$variables = serialize(array(
-			"param" => $tmp_var,
-			"requete" => $requete,
-			"titre_table" => $titre_table,
-			));
 
 		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
+
 		if (!$cpt = $cpt['n']) return '' ;
 		
 		if (isset($requete['LIMIT'])) $cpt = min($requete['LIMIT'], $cpt);
-		$id_ajax = spip_abstract_insert("spip_ajax_fonc", "(variables, hash, id_auteur, date)", "(" . _q($variables) . ", $hash, $cpt, NOW())");
-		}
+		$v = serialize(array($titre, $requete, $tmp_var, $formater_article));
+
+		include_spip ('base/abstract_sql');
+		$id_ajax = spip_abstract_insert("spip_ajax_fonc", "(variables, hash, id_auteur, date)", "(" . _q($v) . ", 0x$hash, $cpt, NOW())");
+	}
 
 	$nb_aff = floor(1.5 * _TRANCHES);
 	$deb_aff = intval(_request($tmp_var));
@@ -732,23 +729,22 @@ function afficher_articles($titre_table, $requete, $formater_article='') {
 
 	$requete['SELECT'] .= ", petitions.id_article AS petition ";
 
-	if (!function_exists($formater_article))
-		$formater_article = charger_fonction('formater_article', 'inc');
-	return afficher_articles_trad($titre_table, $requete, $formater_article, $tmp_var, $id_ajax, $cpt);
+	return afficher_articles_trad($titre, $requete, $formater_article, $tmp_var, $id_ajax, $cpt);
 }
 
 // http://doc.spip.org/@afficher_articles_trad
-function afficher_articles_trad($titre_table, $requete, $formater_article, $tmp_var, $id_ajax, $cpt) {
+function afficher_articles_trad($titre_table, $requete, $formater_article, $tmp_var, $id_ajax, $cpt, $trad=0) {
 
 	global $options, $spip_lang_right;
 
-	if (!$formater_article) {
-	  $formater_article = 'afficher_articles_trad_boucle';
-	  $largeurs = array(11, 24, '', '1');
-	  $styles = array('', 'arial1', 'arial1', '');
-	  $icone = "langues-off-12.gif";
-	  $trad =0;
+	if ($trad) {
+		$formater_article = 'afficher_articles_trad_boucle';
+		$largeurs = array(11, 24, '', '1');
+		$styles = array('', 'arial1', 'arial1', '');
+		$icone = "langues-off-12.gif";
 	} else {
+		if (!$formater_article)
+			$formater_article =  charger_fonction('formater_article', 'inc');
 		if ($options == "avancees") { // Afficher le numero (JMB)
 		  $largeurs = array(11, '', 80, 100, 50);
 		  $styles = array('', 'arial2', 'arial1', 'arial1', 'arial1');
@@ -757,7 +753,6 @@ function afficher_articles_trad($titre_table, $requete, $formater_article, $tmp_
 		  $styles = array('', 'arial2', 'arial1', 'arial1');
 		}
 		$icone = 'langues-12.gif';
-		$trad = 1;
 	}
 
 	$nb_aff = floor(1.5 * _TRANCHES);
@@ -778,7 +773,7 @@ function afficher_articles_trad($titre_table, $requete, $formater_article, $tmp_
 	$texte = http_img_pack("searching.gif", "*", $style . " id='img_$tmp_var'");
 
 	if (($GLOBALS['meta']['gerer_trad'] == "oui")) {
-		$url= generer_url_ecrire('memoriser',"id_ajax_fonc=$id_ajax&trad=$trad");
+		$url= generer_url_ecrire('memoriser',"id_ajax_fonc=$id_ajax&trad=" . (1-$trad));
 		$texte .= 
 		 "\n<div style='float: $spip_lang_right;'><a href=\"#\"\nonclick=\"return charger_id_url('$url','$tmp_var');\">"
 		. "<img\nsrc='". _DIR_IMG_PACK . $icone ."' /></a></div>";
