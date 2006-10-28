@@ -49,7 +49,7 @@ function editer_auteurs_article($id_article, $flag, $cherche_auteur, $ids, $les_
 
 		if ($bouton_creer_auteur) {
 
-			$legender = redirige_action_auteur("legender_auteur","0/$id_article/" . rawurlencode($cherche_auteur), "articles","id_article=$id_article", array($clic));
+			$legender = redirige_action_auteur("legender_auteur","0/$id_article/" . rawurlencode($cherche_auteur), "articles","id_article=$id_article");
 
 			$reponse .="<div style='width: 200px;'>"
 			. icone_horizontale($clic, $legender, "redacteurs-24.gif", "creer.gif", false)
@@ -74,7 +74,7 @@ function editer_auteurs_article($id_article, $flag, $cherche_auteur, $ids, $les_
 
 		if ($bouton_creer_auteur) {
 
-			$legender = redirige_action_auteur("legender_auteur","0/$id_article", "articles","id_article=$id_article", array($clic));
+			$legender = redirige_action_auteur("legender_auteur","0/$id_article", "articles","id_article=$id_article");
 
 			$res = "<div style='width:170px;'><span class='verdana1'><b>"
 			. icone_horizontale($clic, $legender, "redacteurs-24.gif", "creer.gif", false)
@@ -206,17 +206,17 @@ function ajouter_auteurs_articles($id_article, $les_auteurs)
 	. "</b></span>\n";
 
 	$sel = ($num <= _SPIP_SELECT_AUTEURS 
-		? ("$text<select name='nouv_auteur' size='1' style='width:150px;' CLASS='fondl' onchange=\"$js\">" .
+		? ("$text<select name='nouv_auteur' size='1' style='width:150px;' class='fondl' onchange=\"$js\">" .
 		   articles_auteur_select($query) .
 		   "</select>" .
 		   "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>" .
-		   " <input type='submit' value='"._T('bouton_ajouter')."' class='fondo'>" .
+		   " <input type='submit' value='"._T('bouton_ajouter')."' class='fondo' />" .
 		   "</span>")
 	   : (($_COOKIE['spip_accepte_ajax'] < 1)
 	      ? ("$text <input type='text' name='cherche_auteur' onclick=\"$js\" class='fondl' value='' size='20' /><span  class='visible_au_chargement' id='valider_ajouter_auteur'>\n<input type='submit' value='"._T('bouton_chercher')."' class='fondo' /></span>")
 	      : (selecteur_auteur_ajax($id_article, $js, $text)
 		 .  "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>"
-		 . " <input type='submit' value='"._T('bouton_ajouter')."' class='fondo'>"
+		 . " <input type='submit' value='"._T('bouton_ajouter')."' class='fondo' />"
 		 . "</span>")));
 
 	return ajax_action_auteur('editer_auteurs', $id_article,'articles', "id_article=$id_article", $sel);

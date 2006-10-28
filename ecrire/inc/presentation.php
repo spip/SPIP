@@ -776,7 +776,7 @@ function afficher_articles_trad($titre_table, $requete, $formater_article, $tmp_
 		$url= generer_url_ecrire('memoriser',"id_ajax_fonc=$id_ajax&trad=" . (1-$trad));
 		$texte .= 
 		 "\n<div style='float: $spip_lang_right;'><a href=\"#\"\nonclick=\"return charger_id_url('$url','$tmp_var');\">"
-		. "<img\nsrc='". _DIR_IMG_PACK . $icone ."' /></a></div>";
+		. "<img\nsrc='". _DIR_IMG_PACK . $icone ."' alt=' ' /></a></div>";
 	}
 	$texte .=  '<b>' . $titre_table  . '</b>';
 
@@ -1101,14 +1101,14 @@ function afficher_auteurs ($titre_table, $requete) {
 	debut_cadre_relief("auteur-24.gif");
 
 	if ($titre_table) {
-			echo "<p><table width='100%' cellpadding='0' cellspacing='0' border='0' background=''>";
-			echo "<tr><td width='100%' background=''>";
+			echo "<p><table width='100%' cellpadding='0' cellspacing='0' border='0'>";
+			echo "<tr><td width='100%'>";
 			echo "<table width='100%' cellpadding='3' cellspacing='0' border='0'>";
 			echo "<tr bgcolor='#333333'><td width='100%' colspan='5'><font face='Verdana,Arial,Sans,sans-serif' size=3 color='#FFFFFF'>";
 			echo "<b>$titre_table</b></font></td></tr>";
 		}
 	else {
-			echo "<p><table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>";
+			echo "<p><table width='100%' cellpadding='3' cellspacing='0' border='0'>";
 		}
 
 	echo $tranches;
@@ -1323,11 +1323,13 @@ function afficher_forum_4($compteur_forum, $nb_forum, $thread)
 		if ($j==$compteur_forum){
 			$fleche="forum-droite$spip_lang_rtl.gif";
 		}
-		$res .= "<td width='10' valign='top' background=$fond[$j]>"
+		$res .= "<td width='10' valign='top' style='background-color: "
+		.  $fond[$j]
+		.  "'>"
 		. http_img_pack($fleche, " ", "width='10' height='13'")
 		. "</td>\n";
 	}
-	return $res . "\n<td width=100% valign='top'>";
+	return $res . "\n<td width='100%' valign='top'>";
 }
 
 
@@ -1809,7 +1811,7 @@ function bandeau_barre_verticale(){
 // http://doc.spip.org/@lien_change_var
 function lien_change_var($lien, $set, $couleur, $coords, $titre, $mouseOver="") {
 	$lien = parametre_url($lien, $set, $couleur);
-	return "\n<area shape='rect' href='$lien' coords='$coords' title=\"$titre\" alt=' ' $mouseOver>";
+	return "\n<area shape='rect' href='$lien' coords='$coords' title=\"$titre\" alt=' ' $mouseOver />";
 }
 
 //
@@ -1888,7 +1890,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $load='', $id_
 	if ($spip_ecran == "large") $largeur = 974;
 	else $largeur = 750;
 
-	echo "\n<map name='map_layout'>";
+	echo "\n<map id='map_layout'>";
 	echo lien_change_var (self(), 'set_disp', 1, '1,0,18,15', _T('lien_afficher_texte_seul'), "onmouseover=\"changestyle('bandeauvide','visibility', 'visible');\"");
 	echo lien_change_var (self(), 'set_disp', 2, '19,0,40,15', _T('lien_afficher_texte_icones'), "onmouseover=\"changestyle('bandeauvide','visibility', 'visible');\"");
 	echo lien_change_var (self(), 'set_disp', 3, '41,0,59,15', _T('lien_afficher_icones_seuls'), "onmouseover=\"changestyle('bandeauvide','visibility', 'visible');\"");

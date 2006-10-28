@@ -55,7 +55,7 @@ function inc_editer_article($row, $lier_trad, $new, $champs_article) {
 	else $logo = "rubrique-24.gif";
 
 	if ($spip_ecran == "large") $rows = 28;	else $rows = 20;
-	$att_text = " class='formo' ".$GLOBALS['browser_caret']." rows='$rows' COLS='40' wrap='soft'";
+	$att_text = " class='formo' ".$GLOBALS['browser_caret']." rows='$rows' cols='40'";
 	if (strlen($texte)>29*1024) { // texte > 32 ko -> decouper en morceaux
 	  list($texte, $sup) = articles_edit_recolle($texte, $att_text);
 	} else $sup='';
@@ -102,7 +102,7 @@ function inc_editer_article($row, $lier_trad, $new, $champs_article) {
 		  aide ("arttitre") .
 		  "\n<br /><input type='text' name='soustitre' class='forml' value=\"" .
 		  $soustitre .
-		  "\" size='40' /><br /><br />\n") :
+		  "\" size='40' /><br /><br /></p>\n") :
 		 '') .
 
 		debut_cadre_couleur($logo, true, "", _T('titre_cadre_interieur_rubrique'). aide("artrub")) .
@@ -112,10 +112,10 @@ function inc_editer_article($row, $lier_trad, $new, $champs_article) {
 		fin_cadre_couleur(true) .
 	
 		((($options == "avancees" AND $articles_descriptif) OR strlen($descriptif))?
-		 ("\n</p><p><b>" ._T('texte_descriptif_rapide') ."</b>" .
+		 ("\n<p><b>" ._T('texte_descriptif_rapide') ."</b>" .
 		  aide ("artdesc") .
-		  "</p>\n<br />" ._T('texte_contenu_article') ."<br />\n" .
-		  "<textarea name='descriptif' class='forml' rows='2' cols='40' wrap=soft>" .
+		  "<br />" ._T('texte_contenu_article') ."<br />\n" .
+		  "<textarea name='descriptif' class='forml' rows='2' cols='40'>" .
 		  $descriptif .
 		  "</textarea>\n") :
 		 '') .
@@ -129,7 +129,7 @@ function inc_editer_article($row, $lier_trad, $new, $champs_article) {
 
 		chapo_articles_edit($chapo, $articles_chapeau) .
 
-		"<b>" ._T('info_texte') ."</b>" . 
+		"</p><p><b>" ._T('info_texte') ."</b>" . 
 		aide ("arttexte") . "<br />\n" .
 		_T('texte_enrichir_mise_a_jour') .
 		aide("raccourcis") .
@@ -138,12 +138,12 @@ function inc_editer_article($row, $lier_trad, $new, $champs_article) {
 		"<textarea id='text_area' name='texte'$att_text>$texte</textarea>\n" .
 
 		((($articles_ps AND $options == "avancees") OR strlen($ps)) ?
-		 ("\n<p><b>" . _T('info_post_scriptum') ."</b><br />" . "<textarea name='ps' class='forml' rows='5' cols='40' wrap=soft>" . $ps . "</textarea></p><p>\n") :
+		 ("\n</p><p><b>" . _T('info_post_scriptum') ."</b><br />" . "<textarea name='ps' class='forml' rows='5' cols='40'>" . $ps . "</textarea>\n") :
 		 '') .
 
 		(!$champs_extra ? '': extra_saisie($extra, 'articles', $id_secteur)) .
 
-		"<div align='right'><input class='fondo' type='submit' value='" . _T('bouton_enregistrer') . "' /></div>";
+		"<div align='right'><input class='fondo' type='submit' value='" . _T('bouton_enregistrer') . "' /></div></p>";
 
 	return
 		"\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>" .
@@ -162,7 +162,7 @@ function inc_editer_article($row, $lier_trad, $new, $champs_article) {
 		"<td width='100%'>" .
 	 	_T('texte_modifier_article') .
 		gros_titre($gros_titre,'',false) . 
-		"</td></tr></table><p><hr />\n<p>" .
+		"</td></tr></table><hr />\n<p>" .
 	  generer_action_auteur("editer_article", $new ? $new : $id_article, $redirect, $form, " method='post' name='formulaire' onchange='disable_other_forms(this);'");
 
 }
@@ -209,7 +209,7 @@ function articles_edit_recolle($texte, $att_text)
 
 		$textes_supplement .= "<br />" .
 			afficher_barre('document.formulaire.texte'.$nombre)  .
-			"<textarea id='texte$nombre' name='texte_plus[$nombre]'$att_text>$texte1</textarea><p>\n";
+			"<textarea id='texte$nombre' name='texte_plus[$nombre]'$att_text>$texte1</textarea></p><p>\n";
 		}
 	return array($texte,$textes_supplement);
 }
@@ -226,11 +226,11 @@ function chapo_articles_edit($chapo, $articles_chapeau)
 	}
 
 	if ($virtuel) {
-		return "<p><div style='border: 1px dashed #666666; background-color: #f0f0f0; padding: 5px;'>" .
+		return "<div style='border: 1px dashed #666666; background-color: #f0f0f0; padding: 5px;'>" .
 			"<table width=100% cellspacing=0 cellpadding=0 border=0>" .
 			"<tr><td valign='top'>" .
 			"<font face='Verdana,Arial,Sans,sans-serif' size=2>" .
-			"<B><label for='confirme-virtuel'>"._T('info_redirection')."&nbsp;:</label></B>" .
+			"<b><label for='confirme-virtuel'>"._T('info_redirection')."&nbsp;:</label></b>" .
 			aide ("artvirt") .
 			"</font>" .
 			"</td>" .
@@ -243,7 +243,7 @@ function chapo_articles_edit($chapo, $articles_chapeau)
 			"<font face='Verdana,Arial,Sans,sans-serif' size=2>" .
 			_T('texte_article_virtuel_reference') .
 			"</font>" .
-			"</div><p>\n";
+			"</div>\n";
 	} else {
 
 		if (($articles_chapeau) OR strlen($chapo)) {
@@ -252,9 +252,9 @@ function chapo_articles_edit($chapo, $articles_chapeau)
 			return "<br /><b>"._T('info_chapeau')."</b>" .
 				aide ("artchap") .
 				"\n<br />"._T('texte_introductif_article')."<br />\n" .
-				"<textarea name='chapo' class='forml' rows='$rows' COLS='40' wrap=soft>" .
+				"<textarea name='chapo' class='forml' rows='$rows' cols='40'>" .
 				$chapo .
-				"</textarea><p>\n";
+				"</textarea>\n";
 		}
 	}
 }

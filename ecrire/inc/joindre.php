@@ -56,9 +56,9 @@ function inc_joindre_dist($script, $args, $id=0, $intitule='', $mode='', $type='
 			"' style='float: $spip_lang_right;' alt=\"\" />\n" .
 			_T('info_referencer_doc_distant') .
 			"<br />\n\t<input name='url' class='fondo' value='http://' />" .
-			"\n\t<div align='$spip_lang_right'><input name='sousaction2' type='Submit' value='".
+			"\n\t<div align='$spip_lang_right'><input name='sousaction2' type='submit' value='".
 			_T('bouton_choisir').
-			"' class='fondo'></div>" .
+			"' class='fondo' /></div>" .
 			"\n</div>";
 	}
 
@@ -77,7 +77,7 @@ function inc_joindre_dist($script, $args, $id=0, $intitule='', $mode='', $type='
 		(intval($id) .'/' .intval($id_document) . "/$mode/$type"),
 		generer_url_ecrire($script, $args, true),
 		"$debut$intitule$res$dir_ftp$distant$fin",
-		" method='post' enctype='multipart/form-data' style='border: 0px; margin: 0px;'");
+		" method='post' enctype='multipart/form-data'");
 }
 
 
@@ -157,9 +157,9 @@ function afficher_transferer_upload($texte_upload)
 		"\n</select>" .
 		"\n<div align='".
 		$GLOBALS['spip_lang_right'] .
-		"'><input name='sousaction3' type='Submit' value='" .
+		"'><input name='sousaction3' type='submit' value='" .
 		_T('bouton_choisir').
-		"' class='fondo'></div>" .
+		"' class='fondo' /></div>" .
 		"</div>\n";
 	}
 }

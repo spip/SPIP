@@ -227,11 +227,11 @@ function construire_selecteur($url, $js, $idom, $name, $init='', $id=0)
 	. "', this.parentNode.parentNode.parentNode.parentNode.nextSibling, this.nextSibling)\"><img src='"
 	. _DIR_IMG_PACK
 	. $icone
-	. "' style='vertical-align: middle;'/></a><img src='"
+	. "' style='vertical-align: middle;' alt=' ' /></a><img src='"
 	. _DIR_IMG_PACK
 	. "searching.gif' id='img_"
 	.  $idom
-	. "' style='visibility: hidden;' /></td><td>"
+	. "' style='visibility: hidden;' alt='*' /></td><td>"
 	. "<input id='titreparent' name='titreparent'"
 	. $init
 	. " />" 
