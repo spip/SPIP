@@ -81,24 +81,13 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	$flag_editable = ($statut_rubrique OR ($flag_auteur AND ($statut_article == 'prepa' OR $statut_article == 'prop' OR $statut_article == 'poubelle')));
 
 	// Est-ce que quelqu'un a deja ouvert l'article en edition ?
-	$modif = array();
-	if ($GLOBALS['meta']['articles_modif'] != 'non') {
+	if ($flag_editable
+	AND $GLOBALS['meta']['articles_modif'] != 'non') {
 		include_spip('inc/drapeau_edition');
-		$modif = qui_edite($id_article, 'article');
-		unset($modif[$connect_id_auteur]);
+		$modif = mention_qui_edite($id_article, 'article');
+	} else
+		$modif = array();
 
-		if ($modif) {
-			$quand = 0;
-			foreach($modif as $duo) {
-				$auteurs[] = typo(extraire_multi(key($duo)));
-				$quand = max($quand, current($duo));
-			}
-		// format lie a la chaine de langue 'avis_article_modifie'
-		  	$modif = array(
-				'nom_auteur_modif' => join(' | ', $auteurs),
-				'date_diff' => floor((time()-$quand) / 60));
-		}
-	}
 
  // chargement prealable des fonctions produisant des formulaires
 
@@ -113,7 +102,8 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 
 	if ($flag_editable)
 		$instituer_article = charger_fonction('instituer_article', 'inc');
-	else $instituer_article ='';
+	else
+		$instituer_article ='';
 
 	$res = debut_gauche('accueil',true)
 

@@ -47,8 +47,8 @@ function inc_editer_article($row, $lier_trad, $new, $champs_article) {
 	$id_secteur = $row['id_secteur'];
 	$date = $row['date'];
 	$extra = $row['extra'];
-	$onfocus = $row['onfocus'];
 	$statut = $row['statut'];
+	$onfocus = $row['onfocus']; // effacer le titre lorsque nouvel article
 	
 	if ($id_rubrique == 0) $logo = "racine-site-24.gif";
 	elseif ($id_secteur == $id_rubrique) $logo = "secteur-24.gif";
@@ -82,11 +82,7 @@ function inc_editer_article($row, $lier_trad, $new, $champs_article) {
 			  aide ("arttitre") .
 			  "<br />\n<input type='text' name='surtitre' class='forml' value=\"" .
 			  $surtitre .
-			  "\" size='40'" .
-// Pour faire fonctionner le onchange sur Safari il faudrait modifier
-// chaque input. Conclusion : c'est la mauvaise methode.
-// ' onchange="disable_other_forms(this.parentNode);"'.
-			  " /><p>")) .
+			  "\" size='40' /><p>")) .
 		_T('texte_titre_obligatoire') .
 		aide ("arttitre") .
 		"\n<br /><input type='text' name='titre' style='font-weight: bold; font-size: 13px;' class='formo' value=\"" .
@@ -163,7 +159,7 @@ function inc_editer_article($row, $lier_trad, $new, $champs_article) {
 	 	_T('texte_modifier_article') .
 		gros_titre($gros_titre,'',false) . 
 		"</td></tr></table><hr />\n<p>" .
-	  generer_action_auteur("editer_article", $new ? $new : $id_article, $redirect, $form, " method='post' name='formulaire' onchange='disable_other_forms(this);'");
+	  generer_action_auteur("editer_article", $new ? $new : $id_article, $redirect, $form, " method='post' name='formulaire'");
 
 }
 

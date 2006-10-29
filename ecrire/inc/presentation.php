@@ -1908,9 +1908,6 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $load='', $id_
 		return;
 	}
 
-	// iframe permettant de passer les changements de statut rapides
-	echo "<iframe id='iframe_action' name='iframe_action' width='1' height='1' style='position: absolute; visibility: hidden;'></iframe>";
-
 	// Lien oo
 	echo "<div class='invisible_au_chargement' style='position: absolute; height: 0px; visibility: hidden;'><a href='oo'>"._T("access_mode_texte")."</a></div>";
 	

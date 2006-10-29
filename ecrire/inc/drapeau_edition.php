@@ -90,6 +90,24 @@ function qui_edite ($id, $type='article') {
 	return $edition[$type][$id];
 }
 
+function mention_qui_edite ($id, $type='article') {
+	$modif = qui_edite($id, $type);
+	unset($modif[$GLOBALS['auteur_session']['id_auteur']]);
+
+	if ($modif) {
+		$quand = 0;
+		foreach ($modif as $duo) {
+			$auteurs[] = typo(extraire_multi(key($duo)));
+			$quand = max($quand, current($duo));
+		}
+		// format lie a la chaine de langue 'avis_article_modifie'
+		return array(
+			'nom_auteur_modif' => join(' | ', $auteurs),
+			'date_diff' => ceil((time()-$quand) / 60)
+		);
+	}
+}
+
 // Quels sont les articles en cours d'edition par X ?
 // http://doc.spip.org/@liste_drapeau_edition
 function liste_drapeau_edition ($id_auteur, $type = 'article') {
