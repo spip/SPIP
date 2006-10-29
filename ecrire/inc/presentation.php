@@ -310,17 +310,17 @@ function bandeau_titre_boite($titre, $afficher_auteurs, $boite_importante = true
 		$couleur_fond = '#EEEECC';
 		$couleur_texte = '#000000';
 	}
-	echo "<tr bgcolor='$couleur_fond'><td width=\"100%\"><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='$couleur_texte'>";
-	echo "<B>$titre</B></FONT></TD>";
+	echo "<tr bgcolor='$couleur_fond'><td width=\"100%\"><font face='Verdana,Arial,Sans,sans-serif' size='3' color='$couleur_texte'>";
+	echo "<b>$titre</b></font></td>";
 	if ($afficher_auteurs){
-		echo "<TD WIDTH='100'>";
+		echo "<td width='100'>";
 		echo http_img_pack("rien.gif", " ", "width='100' height='12'");
-		echo "</TD>";
+		echo "</td>";
 	}
-	echo "<TD WIDTH='90'>";
+	echo "<td width='90'>";
 	echo http_img_pack("rien.gif", " ", "width='90' height='12'");
-	echo "</TD>";
-	echo "</TR>";
+	echo "</td>";
+	echo "</tr>";
 }
 //
 // une autre boite
@@ -476,7 +476,7 @@ function afficher_tranches_requete($num_rows, $colspan, $tmp_var, $url='', $nb_a
 	}
 		
 	if ($deb_aff == -1) {
-			//$texte .= "<B>"._T('info_tout_afficher')."</B>";
+			//$texte .= "<b>"._T('info_tout_afficher')."</b>";
 	} else {
 			$script = parametre_url($self, $tmp_var, -1);
 			if ($url) {
@@ -1199,7 +1199,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	$ip=$row["ip"];
 	$id_auteur=$row["id_auteur"];
 	
-	$res = "<a id='$id_forum'></a>";
+	$res = "<a id='id$id_forum'></a>";
 
 	if ($spip_display == 4) {
 		$res .= "<li>".typo($titre)."<br />";
@@ -1789,7 +1789,7 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = tr
 			. "</a></td></tr></table>\n";
 		}
 		else {
-			$retour .= "<a class='cellule-h-texte' $javascript$lien><div>$texte</div></a>\n";
+			$retour .= "<div><a class='cellule-h-texte' $javascript$lien>$texte</a></div>\n";
 		}
 		if ($fonction == "supprimer.gif")
 			$retour = "\n<div class='danger'>$retour</div>";
@@ -1898,11 +1898,11 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $load='', $id_
 
 	if ($spip_display == "4") {
 		echo "<ul>";
-		echo "<li><a href='./'>"._T('icone_a_suivre')."</a>";
-		echo "<li><a href='" . generer_url_ecrire("naviguer") . "'>"._T('icone_edition_site')."</a>";
-		echo "<li><a href='" . generer_url_ecrire("forum"). "'>"._T('titre_forum')."</a>";
-		echo "<li><a href='" . generer_url_ecrire("auteurs") . "'>"._T('icone_auteurs')."</a>";
-		echo "<li><a href=\"".url_de_base()."\">"._T('icone_visiter_site')."</a>";
+		echo "<li><a href='./'>"._T('icone_a_suivre')."</a></li>";
+		echo "<li><a href='" . generer_url_ecrire("naviguer") . "'>"._T('icone_edition_site')."</a></li>";
+		echo "<li><a href='" . generer_url_ecrire("forum"). "'>"._T('titre_forum')."</a></li>";
+		echo "<li><a href='" . generer_url_ecrire("auteurs") . "'>"._T('icone_auteurs')."</a></li>";
+		echo "<li><a href=\"".url_de_base()."\">"._T('icone_visiter_site')."</a></li>";
 		echo "</ul>";
 
 		return;

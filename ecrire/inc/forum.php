@@ -99,7 +99,7 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 			$valider = 'publie';
 			$valider_repondre = false;
 			$supprimer = false;
-			$controle = "<br /><FONT COLOR='red'><B>"._T('info_message_supprime')." $forum_ip</B></FONT>";
+			$controle = "<br /><font color='red'><b>"._T('info_message_supprime')." $forum_ip</b></font>";
 			if($forum_id_auteur)
 				$controle .= " - <a href='" . generer_url_ecrire('auteurs_edit', "id_auteur=$forum_id_auteur") .
 				  "'>" ._T('lien_voir_auteur'). "</a>";

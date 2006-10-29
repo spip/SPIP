@@ -76,9 +76,10 @@ function editer_auteurs_article($id_article, $flag, $cherche_auteur, $ids, $les_
 
 			$legender = redirige_action_auteur("legender_auteur","0/$id_article", "articles","id_article=$id_article");
 
-			$res = "<div style='width:170px;'><span class='verdana1'><b>"
+			$clic = "<span class='verdana1'><b>$clic</b></span>";
+			$res = "<div style='width:170px;'>"
 			. icone_horizontale($clic, $legender, "redacteurs-24.gif", "creer.gif", false)
-			. "</b></span></div>\n";
+			. "</div>\n";
 		}
 
 		$res = "<div style='float:$spip_lang_right; width:280px;position:relative;display:inline;'>"
@@ -187,7 +188,7 @@ function afficher_auteurs_articles($id_article, $flag_editable, $les_auteurs)
 	$largeurs = array('14', '', '', '', '', '');
 	$styles = array('arial11', 'arial2', 'arial11', 'arial11', 'arial11', 'arial1');
 
-	return "<div class='liste'><table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>"
+	return "<div class='liste'><table width='100%' cellpadding='3' cellspacing='0' border='0'>"
 	. afficher_liste($largeurs, $table, $styles)
 	. "</table></div>\n";
 }
