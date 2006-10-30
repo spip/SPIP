@@ -180,19 +180,21 @@ function forum_envoi_formulaire($id, $objet, $script, $statut, $texte, $titre_pa
 	  ."\n<td><img src='"
 	  . _DIR_IMG_PACK
 	  . "rien.gif' width='10' border='0' alt=''/></td><td width=\"100%\">"
-	  ."<b>"._T('info_titre')."</b><br />\n"
-	  . "<input type='text' class='formo' name='titre_message' value=\""
+	  ."<b><label for='titre_message'>"
+	  . _T('info_titre')
+	  ."</label></b><br />\n"
+	  . "<input id='titre_message' name='titre_message' type='text' value=\""
 	  . entites_html($titre_page)
-	  . "\" size='40' />\n"
+	  . "\" size='40'  class='formo' />\n"
 	  . "</td></tr></table><br />"
 	  .
-	  "<b>" .
+	  "<b><label for='texte'>" .
 	  _T('info_texte_message') .
-	  "</b><br />\n" .
+	  "</label></b><br />\n" .
 	  _T('info_creation_paragraphe') .
 	  "<br />\n" .
 	  afficher_barre('document.formulaire.texte', true) .
-	  "<textarea name='texte' " .
+	  "<textarea id='texte' name='texte' " .
 	  $GLOBALS['browser_caret'] .
 	  " rows='15' class='formo' cols='40'>" .
 	  entites_html($texte) .
@@ -201,14 +203,18 @@ function forum_envoi_formulaire($id, $objet, $script, $statut, $texte, $titre_pa
 	  (!($statut != 'perso' AND $options == "avancees")
 	   ? ''
 	   : ("<b>"._T('info_lien_hypertexte')."</b><br />\n"
-		  . _T('texte_lien_hypertexte')."<br />\n"
-		  . _T('texte_titre_02')."<br />\n"
-		  . "<input type='text' class='forml' name='nom_site' value=\"".entites_html($nom_site)."\" size='40' /><br />\n"
-		  . _T('info_url')
-		  ."<br />\n"
-		  . "<input type='text' class='forml' name='url_site' value=\"".entites_html($url_site)
-		  . "\" size='40' /></p>"
-	      ));
+		. _T('texte_lien_hypertexte')."<br />\n"
+		. "<label for='nom_site'>"
+		. _T('form_prop_nom_site')
+		. "</label><br />\n"
+		. "<input type='text' id='nom_site' name='nom_site' value=\""
+	        . entites_html($nom_site)
+	        . "\" size='40' class='forml' />"
+		. "<label for='url_site'>"
+		. _T('info_url')
+		."</label><br /><br />\n"
+		. "<input type='text' class='forml' id='url_site' name='url_site' value=\"".entites_html($url_site)
+		. "\" size='40' />"	      ));
 }
 
 function forum_envoi_entete($parent, $titre_parent, $texte, $titre_texte, $nom_site, $url_site)

@@ -161,7 +161,7 @@ define('_TRANCHES', 10);
 //
 // Gestion d'une page normale de l'espace prive
 //
-spip_log("index " . _DIR_RESTREINT);
+
 // Controle de la version, sauf si on est deja en train de s'en occuper
 if (!isset($reinstall)
 AND (!isset($var_ajaxcharset))
