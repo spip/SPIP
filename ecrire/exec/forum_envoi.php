@@ -116,45 +116,77 @@ function forum_envoi(
 	  $objet = 'id_forum';
 	  $titre = 'titre'; 
 	  $id = 0;
-	  $titre_page = $titre_message  ? $titre_message  : _T('texte_nouveau_message');
 	  $num = '';
 	}
+
+	$titre_page = $titre_message
+	? $titre_message
+	: ($id_message ? _T('texte_nouveau_message')
+		: _T('info_forum_interne'));
 
 	if ($num) {
 		$q = spip_query("SELECT $titre AS titre FROM spip_$table WHERE $objet=$id");
 		$q = spip_fetch_array($q);
-		$titre_page = $q['titre'];
 		$num  = "<br />("
 		  . str_replace(':','',strtolower($num))
 		  . $id
-		  . ", "
-		  ._T('info_forum_interne') . ')';
+		  . ')<br />'
+		  . $titre_page;
+		$titre_page = $q['titre'];
 	}
 
-	if ($id_message) debut_page(_T('titre_page_forum_envoi'), "accueil", "messagerie");
-	else debut_page(_T('titre_page_forum_envoi'), "accueil");
+	debut_page($titre_page, "accueil", $id_message ? "messagerie" : "accueil");
 	debut_gauche();
 	debut_droite();
 	gros_titre($titre_page . $num);
+
+	if ($modif_forum == "oui") {
+		$corps = forum_envoi_entete($parent, $titre_parent, $texte, $titre_message, $nom_site, $url_site);
+		$parent = '';
+	} else $corps = '';
+
+	$corps .= debut_cadre_formulaire(($statut == 'privac') ? "" : 'background-color: #dddddd;', true)
+	. forum_envoi_formulaire($id, $objet, $script, $statut, $texte, $titre_page,  $nom_site, $url_site)
+	. "<div align='right'><input class='fondo' type='submit' value='"
+	. _T('bouton_voir_message')
+	. "' /></div>"
+	. fin_cadre_formulaire(true);
+
+	$cat = intval($id) . '/'
+	  . intval($id_parent) . '/'
+	  . $statut . '/'
+	  . $script . '/'
+	  . $objet;
+
+	echo  $parent,
+	  "\n<div>&nbsp;</div>"
+	  . redirige_action_auteur('editer_forum',$cat, $script, "$objet=$id", $corps, "")
+	  .  "<a id='formulaire'></a>"
+	  . fin_page();
+}
+
+function forum_envoi_formulaire($id, $objet, $script, $statut, $texte, $titre_page, $nom_site, $url_site)
+{
+	global $options;
 
 	if ($statut == "prive") $logo = "forum-interne-24.gif";
 	else if ($statut == "privadm") $logo = "forum-admin-24.gif";
 	else if ($statut == "privrac") $logo = "forum-interne-24.gif";
 	else $logo = "forum-public-24.gif";
 
-	$corps = "\n<table border='0' cellpadding='0' cellspacing='0' background='' width='100%'><tr><td>"
+	return "\n<table border='0' cellpadding='0' cellspacing='0' width='100%'><tr><td>"
 	  . icone(_T('icone_retour'), generer_url_ecrire($script, "$objet=$id"), $logo, '','', false)
 	  ."</td>"
 	  ."\n<td><img src='"
 	  . _DIR_IMG_PACK
-	  . "rien.gif' width='10' border='0' /></td><td width=\"100%\">"
-	  ."<b>"._T('info_titre')."</b><br />"
+	  . "rien.gif' width='10' border='0' alt=''/></td><td width=\"100%\">"
+	  ."<b>"._T('info_titre')."</b><br />\n"
 	  . "<input type='text' class='formo' name='titre_message' value=\""
-	  . entites_html($titre_message ? $titre_message : $titre_page)
+	  . entites_html($titre_page)
 	  . "\" size='40' />\n"
-	  . "</td></tr></table>"
+	  . "</td></tr></table><br />"
 	  .
-	  "<p><b>" .
+	  "<b>" .
 	  _T('info_texte_message') .
 	  "</b><br />\n" .
 	  _T('info_creation_paragraphe') .
@@ -162,35 +194,29 @@ function forum_envoi(
 	  afficher_barre('document.formulaire.texte', true) .
 	  "<textarea name='texte' " .
 	  $GLOBALS['browser_caret'] .
-	  " rows='15' class='formo' cols='40' wrap='soft'>" .
+	  " rows='15' class='formo' cols='40'>" .
 	  entites_html($texte) .
-	  "</textarea></p><p>\n";
-
-	if (!$modif_forum OR $modif_forum == "oui") {
-		$corps .="<input type='hidden' name='modif_forum' value='oui' />\n";
- }
-	if ($statut != 'perso' AND $options == "avancees") {
-		$corps .="<b>"._T('info_lien_hypertexte')."</b><br />\n"
+	  "</textarea>\n" .
+	  "<input type='hidden' name='modif_forum' value='oui' />\n" .
+	  (!($statut != 'perso' AND $options == "avancees")
+	   ? ''
+	   : ("<b>"._T('info_lien_hypertexte')."</b><br />\n"
 		  . _T('texte_lien_hypertexte')."<br />\n"
 		  . _T('texte_titre_02')."<br />\n"
 		  . "<input type='text' class='forml' name='nom_site' value=\"".entites_html($nom_site)."\" size='40' /><br />\n"
 		  . _T('info_url')
 		  ."<br />\n"
 		  . "<input type='text' class='forml' name='url_site' value=\"".entites_html($url_site)
-		  . "\" size='40' /></p>";
-	}
+		  . "\" size='40' /></p>"
+	      ));
+}
 
-	$corps = debut_cadre_formulaire(($statut == 'privac') ? "" : 'background-color: #dddddd;', true)
-	. $corps
-	. "<div align='right'><input class='fondo' type='submit' value='"
-	. _T('bouton_voir_message')
-	. "' /></div>"
-	. fin_cadre_formulaire(true);
+function forum_envoi_entete($parent, $titre_parent, $texte, $titre_texte, $nom_site, $url_site)
+{
+	global $spip_lang_rtl;
 
-	if ($modif_forum == "oui") {
-		$corps = 
 		 
-		 "\n<table width='100%' cellpadding='0' cellspacing='0' border='0'>"
+	return "\n<table width='100%' cellpadding='0' cellspacing='0' border='0'>"
 		. (!$parent ? '' : "<tr><td colspan='2'>$parent</td></tr>")
 		. "\n<tr>"
 		. (!$parent ? "<td colsan='2'"
@@ -201,7 +227,7 @@ function forum_envoi(
 			   . http_img_pack('rien.gif', ' ', "width='10' height='13' border='0'")
 			   . "</td>\n<td "))
 		.  " width='100%' valign='top' rowspan='2'>"
-		.  debut_cadre_thread_forum("", true, "", typo($titre_message))
+		.  debut_cadre_thread_forum("", true, "", typo($titre_texte))
 		. propre($texte)
 		. (!$nom_site ? '' : "<p><a href='$url_site'>$nom_site</a></p>")
 		. "\n<div align='right'><input class='fondo' type='submit' name='valider_forum' value='"
@@ -217,22 +243,7 @@ function forum_envoi(
 			  .  http_img_pack("forum-droite$spip_lang_rtl.gif", $titre_parent, "width='10' height='13' border='0'")
 		      . "</td>\n</tr>"))
 		. "</table>"
-		. "\n<div>&nbsp;</div>"
-		. $corps;
-		$parent = '';
-	}
-
-	$cat = intval($id) . '/'
-	  . intval($id_parent) . '/'
-	  . $statut . '/'
-	  . $script . '/'
-	  . $objet;
-
-	echo  $parent,
-	  "\n<div>&nbsp;</div>"
-	  . redirige_action_auteur('editer_forum',$cat, $script, "$objet=$id", $corps, "")
-	  .  "<a id='formulaire'></a>"
-	  . fin_page();
+		. "\n<div>&nbsp;</div>";
 }
 
 ?>
