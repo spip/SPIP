@@ -161,7 +161,7 @@ define('_TRANCHES', 10);
 //
 // Gestion d'une page normale de l'espace prive
 //
-
+spip_log("index " . _DIR_RESTREINT);
 // Controle de la version, sauf si on est deja en train de s'en occuper
 if (!isset($reinstall)
 AND (!isset($var_ajaxcharset))
@@ -177,6 +177,7 @@ AND isset($GLOBALS['meta']["debut_restauration"]))
 // (ne pas interrompre une restauration ou un upgrade)
 elseif ($exec!='upgrade'
 AND $GLOBALS['auteur_session']['statut']=='0minirezo'
+AND !_DIR_RESTREINT
 AND lire_fichier(_DIR_TMP.'verifier_plugins.txt',$l)
 AND $l = @unserialize($l)) {
 	foreach ($l as $fichier) {
