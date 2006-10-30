@@ -214,6 +214,7 @@ dist/inc-petition.html -text
 dist/inc-pied.html -text
 dist/inc-rss-item.html -text
 dist/inc-rubriques.html -text
+dist/javascript/async_upload.js -text
 dist/javascript/jquery-1.0.2-forms.js -text
 dist/javascript/jquery-1.0.2-forms.pack.js -text
 dist/modeles/article_mots.html -text
@@ -383,6 +384,7 @@ ecrire/exec/delete_all.php -text
 ecrire/exec/demande_mise_a_jour.php -text
 ecrire/exec/discuter.php -text
 ecrire/exec/documenter.php -text
+ecrire/exec/documents_colonne.php -text
 ecrire/exec/documents_liste.php -text
 ecrire/exec/editer_auteurs.php -text
 ecrire/exec/editer_mot.php -text

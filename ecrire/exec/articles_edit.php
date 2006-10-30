@@ -63,13 +63,23 @@ function exec_articles_edit_dist()
 	// Pave "documents associes a l'article"
 
 	if (!$new){
-
 		# affichage sur le cote des pieces jointes, en reperant les inserees
 		# note : traiter_modeles($texte, true) repere les doublons
 		# aussi efficacement que propre(), mais beaucoup plus rapidement
 		traiter_modeles(join('',$row), true);
-		afficher_documents_colonne($id_article, 'article', true);
+		echo afficher_documents_colonne($id_article, 'article', true);
+	} else {
+		# ICI GROS HACK
+		# -------------
+		# on est en new ; si on veut ajouter un document, on ne pourra
+		# pas l'accrocher a l'article (puisqu'il n'a pas d'id_article)...
+		# on indique donc un id_article farfelu (0-id_auteur) qu'on ramassera
+		# le moment venu, c'est-ˆ-dire lors de la creation de l'article
+		# dans editer_article.
+		echo afficher_documents_colonne(
+			0-$GLOBALS['auteur_session']['id_auteur'], 'article', true);
 	}
+
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));
 	creer_colonne_droite();
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));

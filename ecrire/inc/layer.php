@@ -17,7 +17,7 @@ $numero_block = array();
 
 $compteur_block = 0;
 
-if (_request('var_ajaxcharset'))
+if (_request('var_ajaxcharset') || _request("iframe")=="iframe")
 $compteur_block = rand(1,2500)*500;	// astuce idiote pour que les blocs ahah n'aient pas les memes numeros de triangle que la page principale (sinon le triangle d'un bloc importe par ahah agit sur un autre triangle... vivement jquery...).
 
 // http://doc.spip.org/@block_parfois_visible
@@ -245,6 +245,10 @@ onselect='storeCaret(this);'
 onclick='storeCaret(this);'
 onkeyup='storeCaret(this);'
 ondblclick='storeCaret(this);'");
+
+	// Hack pour forcer largeur des formo/forml sous Mozilla >= 1.7
+	// meme principe que le behavior win_width.htc pour MSIE
+$GLOBALS['browser_verifForm'] = (eregi("mozilla", $GLOBALS["browser_name"]) AND $GLOBALS["browser_rev"] >= 1.7) ?  "verifForm();" : "";
 
 // http://doc.spip.org/@http_script
 function http_script($script, $src='', $noscript='') {

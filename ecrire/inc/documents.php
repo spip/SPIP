@@ -120,14 +120,14 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 	$script = $type.'s_edit';
 
 	/// Ajouter nouvelle image
-	echo "<a name='images'></a>\n";
+	$ret .= "<a name='images'></a>\n";
 	$titre_cadre = _T('bouton_ajouter_image').aide("ins_img");
 
 	$joindre = charger_fonction('joindre', 'inc');
-	debut_cadre_relief("image-24.gif", false, "creer.gif", $titre_cadre);
-	echo $joindre($script, "id_$type=$id", $id, _T('info_telecharger'),'vignette',$type);
+	$ret .= debut_cadre_relief("image-24.gif", true, "creer.gif", $titre_cadre);
+	$ret .= $joindre($script, "id_$type=$id", $id, _T('info_telecharger'),'vignette',$type,'',0,generer_url_ecrire("documents_colonne","id=$id&type=$type",true));
 
-	fin_cadre_relief();
+	$ret .= fin_cadre_relief(true);
 
 	//// Documents associes
 	$res = spip_query("SELECT docs.id_document FROM spip_documents AS docs, spip_documents_".$type."s AS l WHERE l.id_".$type."=$id AND l.id_document=docs.id_document AND docs.mode='document' ORDER BY docs.id_document");
@@ -148,31 +148,68 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 	//// Images sans documents
 	$images_liees = spip_query("SELECT docs.id_document FROM spip_documents AS docs, spip_documents_".$type."s AS l "."WHERE l.id_".$type."=$id AND l.id_document=docs.id_document ".$docs_exclus."AND docs.mode='vignette' ORDER BY docs.id_document");
 
-	echo "\n<p />";
+	$ret .= "\n<p></p><div id='liste_images'>";
 	while ($doc = spip_fetch_array($images_liees)) {
 		$id_document = $doc['id_document'];
 		$deplier = $id_document_actif==$id_document;
-		afficher_case_document($id_document, $id, $script, $type, $deplier);
+		$ret .= afficher_case_document($id_document, $id, $script, $type, $deplier);
 	}
 
 	/// Ajouter nouveau document
-	echo "<p>&nbsp;</p>\n<a name='documents'></a>\n<a name='portfolio'></a>\n";
+	$ret .= "</div><p>&nbsp;</p>\n<a name='documents'></a>\n<a name='portfolio'></a>\n";
 	if ($type == "article") {
 		if ($GLOBALS['meta']["documents_article"] != 'non') {
 			$titre_cadre = _T('bouton_ajouter_document').aide("ins_doc");
-			debut_cadre_enfonce("doc-24.gif", false, "creer.gif", $titre_cadre);
-			echo $joindre($script, "id_$type=$id", $id, _T('info_telecharger_ordinateur'), 'document',$type);
-			fin_cadre_enfonce();
+			$ret .= debut_cadre_enfonce("doc-24.gif", true, "creer.gif", $titre_cadre);
+			$ret .= $joindre($script, "id_$type=$id", $id, _T('info_telecharger_ordinateur'), 'document',$type,'',0,generer_url_ecrire("documents_colonne","id=$id&type=$type",true));
+			$ret .= fin_cadre_enfonce(true);
 		}
 
 		// Afficher les documents lies
-		echo "<p />\n";
+		$ret .= "<p></p><div id='liste_documents'>\n";
 
-		foreach($documents_lies as $id_document) {
-			$deplier = $id_document_actif==$id_document;
-			afficher_case_document($id_document, $id, $script, $type, $deplier);
+		foreach($documents_lies as $doc) {
+			$ret .= afficher_case_document($doc, $id, $script, $type, $id_doc_actif == $doc);
 		}
+		$ret .= "</div>";
 	}
+  
+  $ret .= "<script src='"._DIR_JAVASCRIPT."async_upload.js' type='text/javascript'></script>\n";
+  $ret .= <<<EOF
+    <script type='text/javascript'>
+    $(".form_upload").async_upload(function(res,jForm){
+      var cont;
+      //add a class to new documents
+      res.
+      find(">div[@class]")
+        .addClass("documents_added")
+        .css("display","none")
+      .end();
+      if (jForm.find("input[@name='arg']").val().search("vignette")!=-1)
+        cont = $("#liste_images");
+      else
+        cont = $("#liste_documents");
+      cont
+      .prepend(res.html());
+      //find added documents, remove label and show them nicely
+      //set overflow to visible to completely show the overlay icon
+      cont.
+      find("div.documents_added")
+        .removeClass("documents_added")
+        .show("slow",function(){
+            var anim = $(this).css({"height":"","overflow":""});
+            //bug explorer-opera-safari
+            if(!jQuery.browser.mozilla) anim.width(this.orig.width-2);
+            $(anim).find("img[@onclick]").get(0).onclick();
+        })
+        .overflow("");
+      verifForm(cont);
+      return true;
+    })
+    </script>
+EOF;
+    
+	return $ret;
 }
 
 //
@@ -240,7 +277,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 	//
 	// Afficher un document
 	//
-
+	$ret = "";
 	if ($mode == 'document') {
 		if ($options == "avancees") {
 			# 'extension', a ajouter dans la base quand on supprimera spip_types_documents
@@ -256,53 +293,53 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 					break;
 			}
 
-		echo "<a id='document$id_document' name='document$id_document'></a>\n";
-		debut_cadre_enfonce("doc-24.gif", false, "", lignes_longues(typo($cadre),30));
+		$ret .= "<a id='document$id_document' name='document$id_document'></a>\n";
+		$ret .= debut_cadre_enfonce("doc-24.gif", true, "", lignes_longues(typo($cadre),30));
 
 		//
 		// Affichage de la vignette
 		//
-		echo "\n<div align='center'>";
-		echo document_et_vignette($document, $url, true); 
-		echo '</div>';
-		echo "\n<div class='verdana1' style='text-align: center; color: black;'>\n";
-		echo ($type_titre ? $type_titre : 
+		$ret .= "\n<div align='center'>";
+		$ret .= document_et_vignette($document, $url, true); 
+		$ret .= '</div>';
+		$ret .= "\n<div class='verdana1' style='text-align: center; color: black;'>\n";
+		$ret .= ($type_titre ? $type_titre : 
 		      ( _T('info_document').' '.majuscules($type_extension)));
-		echo "</div>";
+		$ret .= "</div>";
 
 		// Affichage du raccourci <doc...> correspondant
 		if (!$doublon) {
-			echo "\n<div style='padding:2px; font-size: 10px; font-family: arial,helvetica,sans-serif'>";
+			$ret .= "\n<div style='padding:2px; font-size: 10px; font-family: arial,helvetica,sans-serif'>";
 			if ($options == "avancees" AND ($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
-				echo "<b>"._T('info_inclusion_vignette')."</b><br />";
+				$ret .= "<b>"._T('info_inclusion_vignette')."</b><br />";
 			}
-			echo "<div style='color: 333333'>"
+			$ret .= "<div style='color: 333333'>"
 			. affiche_raccourci_doc('doc', $id_document, 'left')
 			. affiche_raccourci_doc('doc', $id_document, 'center')
 			. affiche_raccourci_doc('doc', $id_document, 'right')
 			. "</div>\n";
-			echo "</div>";
+			$ret .= "</div>";
 
 			if ($options == "avancees" AND ($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
-				echo "<div style='padding:2px; font-size: 10px; font-family: arial,helvetica,sans-serif'>";
-				echo "<b>"._T('info_inclusion_directe')."</b><br />";
-				echo "<div style='color: 333333'>"
+				$ret .= "<div style='padding:2px; font-size: 10px; font-family: arial,helvetica,sans-serif'>";
+				$ret .= "<b>"._T('info_inclusion_directe')."</b><br />";
+				$ret .= "<div style='color: 333333'>"
 				. affiche_raccourci_doc('emb', $id_document, 'left')
 				. affiche_raccourci_doc('emb', $id_document, 'center')
 				. affiche_raccourci_doc('emb', $id_document, 'right')
 				. "</div>\n";
-				echo "</div></div>";
+				$ret .= "</div>";
 			}
 		} else {
-			echo "<div style='padding:2px;'><font size='1' face='arial,helvetica,sans-serif'>",
-			  affiche_raccourci_doc('doc', $id_document, ''),
+			$ret .= "<div style='padding:2px;'><font size='1' face='arial,helvetica,sans-serif'>".
+			  affiche_raccourci_doc('doc', $id_document, '').
 			  "</font></div>";
 		}
 
 		$f = charger_fonction('legender', 'inc');
-		echo $f($id_document, $document, $script, $type, $id, "document$id_document", $deplier);
+		$ret .= $f($id_document, $document, $script, $type, $id, "document$id_document", $deplier);
 
-		fin_cadre_enfonce();
+		$ret .= fin_cadre_enfonce(true);
 		}
 	}
 
@@ -311,7 +348,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 	//
 	else if ($mode == 'vignette') {
 	
-		debut_cadre_relief("image-24.gif", false, "", lignes_longues(typo($cadre),30));
+		$ret .= debut_cadre_relief("image-24.gif", true, "", lignes_longues(typo($cadre),30));
 
 		//
 		// Preparer le raccourci a afficher sous la vignette ou sous l'apercu
@@ -328,7 +365,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 				. affiche_raccourci_doc($doc, $id_document, 'center')
 				. affiche_raccourci_doc($doc, $id_document, 'right');
 		} else {
-			$raccourci_doc .= affiche_raccourci_doc($doc, $id_document, '');;
+			$raccourci_doc .= affiche_raccourci_doc($doc, $id_document, '');
 		}
 		$raccourci_doc .= "</font></div>\n";
 
@@ -336,21 +373,22 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 		// Afficher un apercu (pour les images)
 		//
 		if ($type_inclus == 'image') {
-			echo "<div style='text-align: center; padding: 2px;'>\n";
-			echo document_et_vignette($document, $url, true);
-			echo "</div>\n";
+			$ret .= "<div style='text-align: center; padding: 2px;'>\n";
+			$ret .= document_et_vignette($document, $url, true);
+			$ret .= "</div>\n";
 			if (!$doublon)
-				echo $raccourci_doc;
+				$ret .= $raccourci_doc;
 		}
 
 		if ($doublon)
-			echo $raccourci_doc;
+			$ret .= $raccourci_doc;
 
 		$f = charger_fonction('legender', 'inc');
-		echo $f($id_document, $document, $script, $type, $id, "document$id_document", $deplier);
+		$ret .= $f($id_document, $document, $script, $type, $id, "document$id_document");
 		
-		fin_cadre_relief();
+		$ret .= fin_cadre_relief(true);
 	}
+	return $ret;
 }
 
 ?>

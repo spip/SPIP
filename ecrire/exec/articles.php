@@ -109,7 +109,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 
 	.	boite_info_articles($id_article, $statut_article, $visites, $id_version)
 
-	.	(!$iconifier ? '' : $iconifier('id_article', $id_article,'articles'))
+	.	(!$iconifier ? '' : $iconifier('id_article', $id_article,'articles','iconifier'))
 
 	.	boites_de_config_articles($id_article, $flag_editable)
 	.	boite_article_virtuel($id_article, $virtuel, $flag_editable) 
@@ -175,23 +175,42 @@ function articles_documents($flag_editable, $type, $id)
 		$f = charger_fonction('joindre', 'inc');
 
 		$res = debut_cadre_relief("image-24.gif", true, "", _T('titre_joindre_document'))
-		. $f('articles', "id_article=$id", $id, _T('info_telecharger_ordinateur'), 'document', 'article')
+		. $f('articles', "id_article=$id", $id, _T('info_telecharger_ordinateur'), 'document', 'article','',0,generer_url_ecrire("documenter","id_article=$id&type=$type",true))
 		. fin_cadre_relief(true);
 
 	// eviter le formulaire upload qui se promene sur la page
 	// a cause des position:relative incompris de MSIE
 
-		if ($align = ($GLOBALS['browser_name'] !== "MSIE")) {
+    $align = "";
+		if ($GLOBALS['browser_name']!='MSIE') {
 			$res = "\n<table width='50%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td style='text-align: $spip_lang_left;'>\n$res</td></tr></table>";
 			$align = " align='right'";
 		}
 		$res = "\n<div$align>$res</div>";
-	} else $res ='';
+    $res .= "<script src='"._DIR_JAVASCRIPT."async_upload.js' type='text/javascript'></script>\n";
+    $res .= <<<EOF
+    <script type='text/javascript'>
+    $(".form_upload").async_upload(function(res){
+      res.find(">div").each(function(){
+        var cont = $("#"+this.id);
+        var self = $(this);
+        if(!cont.size()) {
+          cont = $(this.id.search(/--/)!=-1 ? "#portfolio":"#documents")
+          .append(self.clone().get());
+        }
+        verifForm(cont.html(self.html()));
+      });
+      return true;             
+    })
+    </script>
+EOF;
+		
+	} else $res = '';
 
 	$f = charger_fonction('documenter', 'inc');
 
-	return $f($id, 'article', 'portfolio', $flag_editable)
-	. $f($id, 'article', 'documents', $flag_editable)
+	return "<div id='portfolio'>" . $f($id, 'article', 'portfolio', $flag_editable) . "</div>"
+	. "<div id='documents'>" . $f($id, 'article', 'documents', $flag_editable) . "</div>"
 	. $res;
 }
 
