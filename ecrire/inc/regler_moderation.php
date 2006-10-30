@@ -28,8 +28,9 @@ function get_forums_publics($id_article=0) {
 }
 
 // Cree le formulaire de modification du reglage des forums de l'article
-// http://doc.spip.org/@inc_poster_dist
-function inc_poster_dist($id_article, $script, $args, $flag=false) {
+// http://doc.spip.org/@inc_regler_moderation_dist
+function inc_regler_moderation_dist($id_article, $script, $args, $flag=false) {
+	include_spip('inc/presentation');
 
 	global $spip_lang_right, $options, $connect_statut;
 
@@ -49,7 +50,7 @@ function inc_poster_dist($id_article, $script, $args, $flag=false) {
 	. "\n\t<select name='change_accepter_forum'
 		class='fondl'
 		style='font-size:10px;'
-		onchange=\"findObj_forcer('valider_poster_$id_article').style.visibility='visible';\"
+		onchange=\"findObj_forcer('valider_regler_moderation_$id_article').style.visibility='visible';\"
 		>";
 
 	foreach (array(
@@ -65,14 +66,14 @@ function inc_poster_dist($id_article, $script, $args, $flag=false) {
 	}
 	$r .= "\n\t</select>\n";
 
-	$r .= "<div align='$spip_lang_right' id='valider_poster_$id_article'"
+	$r .= "<div align='$spip_lang_right' id='valider_regler_moderation_$id_article'"
 	. " class='visible_au_chargement'"
 	. ">\n\t<input type='submit' class='fondo' style='font-size:10px' value='"
 	. _T('bouton_changer')
 	. "' /></div>\n";
 
-	$r = ajax_action_auteur('poster', $id_article, $script, $args, $r);
+	$r = ajax_action_auteur('regler_moderation', $id_article, $script, $args, $r);
 
-	return ajax_action_greffe("poster-$id_article", $r);
+	return ajax_action_greffe("regler_moderation-$id_article", $r);
 }
 ?>

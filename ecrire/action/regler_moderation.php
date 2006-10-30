@@ -15,8 +15,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 
 // Modifier le reglage des forums publics de l'article x
-// http://doc.spip.org/@action_poster_dist
-function action_poster_dist()
+// http://doc.spip.org/@action_regler_moderation_dist
+function action_regler_moderation_dist()
 {
 	$var_f = charger_fonction('controler_action_auteur', 'inc');
 	$var_f();
@@ -24,12 +24,12 @@ function action_poster_dist()
 	$arg = _request('arg');
 
 	if (!preg_match(",^\W*(\d+)$,", $arg, $r)) {
-		 spip_log("action_poster_dist $arg pas compris");
-	} else action_poster_post($r);
+		 spip_log("action_regler_moderation_dist $arg pas compris");
+	} else action_regler_moderation_post($r);
 }
 
-// http://doc.spip.org/@action_poster_post
-function action_poster_post($r)
+// http://doc.spip.org/@action_regler_moderation_post
+function action_regler_moderation_post($r)
 {
 	$id_article = $r[1];
 	$statut = _request('change_accepter_forum');
