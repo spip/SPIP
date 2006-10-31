@@ -61,7 +61,7 @@ function action_joindre_dist()
 
      $redirect = urldecode($redirect);
      if ($documents_actifs) {
-	$redirect .= '&show_docs=' . join('-',$documents_actifs);
+	$redirect .= '&show_docs=' . join(',',$documents_actifs);
      }
      
     if (!$ancre) {
