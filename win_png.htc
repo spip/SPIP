@@ -31,15 +31,15 @@ function fixImage() {
 	if ( ! new RegExp(blankSrc).test(src)) {
 		// backup old src
 		realSrc = src;
-	}
 
-	// test for png
-	if ( /\.png$/.test( realSrc.toLowerCase() ) ) {
-		// set blank image
-		element.src = blankSrc;
-		// set filter
-		element.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" +
-			src + "',sizingMethod='image')";
+		// test for png
+		if ( /\.png$/.test( realSrc.toLowerCase() ) ) {
+			// set blank image
+			element.src = blankSrc;
+			// set filter
+			element.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" +
+				src + "',sizingMethod='image')";
+		}
 	}
 }
 
