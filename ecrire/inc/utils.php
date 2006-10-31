@@ -749,9 +749,13 @@ function url_de_base() {
 		return $url;
 
 	// cas particulier des sites filtres par un proxy entrant
-	// cf. http://trac.rezo.net/trac/spip/ticket/478
-	if (isset($_SERVER['HTTP_X_FORWARDED_HOST']))
-		$server = $_SERVER['HTTP_X_FORWARDED_HOST'];
+	// cf. http://trac.rezo.net/trac/spip/ticket/401
+	// le forwarded_host peut prendre plusieurs valeurs separees par des virgules
+	// chez ovh notamment
+	if (isset($_SERVER['HTTP_X_FORWARDED_HOST'])){
+		$server = explode(',',$_SERVER['HTTP_X_FORWARDED_HOST']);
+		$server = trim(reset($server));
+	}
 	else
 		$server = $_SERVER['HTTP_HOST'];
 
