@@ -77,19 +77,29 @@ function inc_formater_article_dist($row)
 	. "</div>";
 	
 	$result = auteurs_article($id_article);
-	$les_auteurs = "";
+	$les_auteurs = array();
 	while ($r = spip_fetch_array($result)) {
 		list($s, $mail, $nom, $w, $p) = $formater_auteur($r['id_auteur']);
-		$les_auteurs .= "$mail&nbsp;$nom, ";
+		$les_auteurs[]= "$mail&nbsp;$nom";
 	}
-	$vals[] = substr($les_auteurs, 0, -2);
+	$vals[] = join('<br />', $les_auteurs);
 
 	$s = affdate_jourcourt($date);
 	$vals[] = $s ? $s : '&nbsp;';
 
 	if  ($nb) $vals[]= "<b>" . $nb . $id_article . '</b>';
 
-	return $vals;
+	if ($options == "avancees") { // Afficher le numero (JMB)
+		  $largeurs = array(11, '', 80, 100, 50);
+		  $styles = array('', 'arial2', 'arial1', 'arial1', 'arial1');
+	} else {
+		  $largeurs = array(11, '', 100, 100);
+		  $styles = array('', 'arial2', 'arial1', 'arial1');
+	}
+
+	return ($spip_display != 4)
+	? afficher_liste_display_neq4($largeurs, $vals, $styles)
+	: afficher_liste_display_eq4($largeurs, $vals, $styles);
 }
 
 ?>

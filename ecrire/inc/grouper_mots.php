@@ -30,7 +30,7 @@ function inc_grouper_mots_dist($id_groupe, $cpt) {
 
 	if ($cpt > $nb_aff) {
 		$nb_aff = _TRANCHES; 
-		$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, generer_url_ecrire('grouper_mots',"id_groupe=$id_groupe", true), $nb_aff);
+		$tranches = afficher_tranches_requete($cpt, $tmp_var, generer_url_ecrire('grouper_mots',"id_groupe=$id_groupe", true), $nb_aff);
 	} else $tranches = '';
 
 

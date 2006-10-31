@@ -95,7 +95,7 @@ function legender_auteur_saisir($id_auteur, $auteur, $mode, $echec='', $redirect
 
 	if ($options == "avancees") {
 		$corps .= debut_cadre_enfonce("cadenas-24.gif", true, "", _T('entree_cle_pgp'))
-		. "<textarea name='pgp' class='forml' rows='4' cols='40' wrap=soft>"
+		. "<textarea name='pgp' class='forml' rows='4' cols='40'>"
 		. entites_html($auteur['pgp'])
 		. "</textarea>\n"
 		. fin_cadre_enfonce(true)

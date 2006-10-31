@@ -357,7 +357,7 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 	}
 
 	return "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>"
-	. "\n<tr width='100%'>"
+	. "\n<tr>"
 	. $res
 	. "</tr></table>\n";
 }
