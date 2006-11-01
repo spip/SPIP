@@ -28,20 +28,20 @@ function inc_editer_auteurs_dist($id_article, $flag, $cherche_auteur, $ids)
 	} else $futurs = '';
 
 	$les_auteurs = afficher_auteurs_articles($id_article, $flag, $les_auteurs);
-	return editer_auteurs_article($id_article, $flag, $cherche_auteur, $ids, $les_auteurs, $futurs);
+	return editer_auteurs_article($id_article, $flag, $cherche_auteur, $ids, $les_auteurs, $futurs, $GLOBALS['meta']['ldap_statut_import']);
 }
 
 // http://doc.spip.org/@editer_auteurs_article
-function editer_auteurs_article($id_article, $flag, $cherche_auteur, $ids, $les_auteurs, $futurs)
+function editer_auteurs_article($id_article, $flag, $cherche_auteur, $ids, $les_auteurs, $futurs, $statut)
 {
 	global $spip_lang_left, $spip_lang_right, $options;
 
+	$bouton_creer_auteur =  $GLOBALS['connect_toutes_rubriques'];
+	$clic = _T('icone_creer_auteur');
+	$arg = "0/$id_article/"  . ($statut ? $statut : '1comite') . '/';
 //
 // complement de action/editer_auteurs.php pour notifier la recherche d'auteur
 //
-	$bouton_creer_auteur =  $GLOBALS['connect_toutes_rubriques'];
-	$clic = _T('icone_creer_auteur');
-
 	if ($cherche_auteur) {
 
 		$reponse ="<p align='$spip_lang_left'>"
@@ -50,7 +50,7 @@ function editer_auteurs_article($id_article, $flag, $cherche_auteur, $ids, $les_
 
 		if ($bouton_creer_auteur) {
 
-			$legender = redirige_action_auteur("legender_auteur","0/$id_article/" . rawurlencode($cherche_auteur), "articles","id_article=$id_article");
+			$legender = redirige_action_auteur("legender_auteur", $arg . rawurlencode($cherche_auteur), "articles","id_article=$id_article");
 
 			$reponse .="<div style='width: 200px;'>"
 			. icone_horizontale($clic, $legender, "redacteurs-24.gif", "creer.gif", false)
@@ -74,7 +74,7 @@ function editer_auteurs_article($id_article, $flag, $cherche_auteur, $ids, $les_
 
 		if ($bouton_creer_auteur) {
 
-			$legender = redirige_action_auteur("legender_auteur","0/$id_article", "articles","id_article=$id_article");
+			$legender = redirige_action_auteur("legender_auteur",$arg, "articles","id_article=$id_article");
 
 			$clic = "<span class='verdana1'><b>$clic</b></span>";
 			$res = "<div style='width:170px;'>"

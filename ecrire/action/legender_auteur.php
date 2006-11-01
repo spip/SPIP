@@ -18,7 +18,7 @@ include_spip('inc/acces');
 include_spip('base/abstract_sql');
 
 // http://doc.spip.org/@action_legender_auteur
-function action_legender_auteur()
+function action_legender_auteur_dist()
 {
         $var_f = charger_fonction('controler_action_auteur', 'inc');
         $var_f();
@@ -27,10 +27,10 @@ function action_legender_auteur()
 
 	$echec = array();
 
-        if (!preg_match(",^(\d+)\D(\d*)(\D?)(.*)$,", $arg, $r)) {
+        if (!preg_match(",^(\d+)\D(\d*)(\D(\w*)\D(.*))?$,", $arg, $r)) {
 		$r = "action_legender_auteur_dist $arg pas compris";
 		spip_log($r);
-        } else action_legender_post($r);
+        } else 	redirige_par_entete(action_legender_post($r));
 }
 
 // http://doc.spip.org/@action_legender_post
@@ -52,7 +52,8 @@ function action_legender_post($r)
 	  $statut,
 	  $url_site;
 
-	  list($tout, $id_auteur, $ajouter_id_article,$s, $n) = $r;
+	list($tout, $id_auteur, $ajouter_id_article,$x,$s, $n) = $r;
+
 //
 // si id_auteur est hors table, c'est une creation sinon une modif
 //
@@ -62,9 +63,14 @@ function action_legender_post($r)
 	  }
 	  if (!$auteur) {
 		$id_auteur = 0;
-		$statut = '1comite'; // statut par defaut
 		$source = 'spip';
 		$nom = $n ? $n : _T('ecrire:item_nouvel_auteur');
+		$statut = '1comite'; // statut par defaut
+		if ($s) {
+		  if (ereg("^(0minirezo|1comite|5poubelle|6forum)$",$s))
+		    $statut = $s;
+		  else spip_log("action_legender_auteur_dist: statut $s incompris");
+		}
 	  } 
 
 	  $acces = ($id_auteur == $auteur_session['id_auteur']) ? true : " a voir ";
@@ -172,7 +178,7 @@ function action_legender_post($r)
 	// l'entrer dans la base
 	if (!$echec) {
 		if (!$auteur['id_auteur']) { // creation si pas d'id
-			$auteur['id_auteur'] = $id_auteur = spip_abstract_insert("spip_auteurs", "(nom,statut)", "('temp','1comite')");
+			$auteur['id_auteur'] = $id_auteur = spip_abstract_insert("spip_auteurs", "(nom,statut)", "('temp','" . $statut . "')");
 			if ($ajouter_id_article)
 				spip_abstract_insert("spip_auteurs_articles", "(id_auteur, id_article)", "($id_auteur, $ajouter_id_article)");
 		}
@@ -203,12 +209,12 @@ function action_legender_post($r)
 		$ret = !$redirect ? '' 
 		  : ('&redirect=' . rawurlencode(rawurldecode($redirect)));
 
-		$redirect = generer_url_ecrire("auteur_infos", "id_auteur=$id_auteur&initial=$init$echec$ret",true);
+		return generer_url_ecrire("auteur_infos", "id_auteur=$id_auteur&initial=$init$echec$ret",true);
 	} else {
 	  // modif: renvoyer le resultat ou a nouveau le formulaire si erreur
 		  if (!$redirect) {
 		    $redirect = generer_url_ecrire("auteur_infos", "id_auteur=$id_auteur", true, true);
-		    $ancre = '';
+		    $anc = '';
 		  } else 
 		    list($redirect,$anc) = split('#',rawurldecode($redirect));
 
@@ -217,9 +223,8 @@ function action_legender_post($r)
 		else  {
 		  $redirect .= $echec . '&initial=0' . $anc;
 		}
+		return $redirect;
 	}
-
-	redirige_par_entete($redirect);
 }
 
 // http://doc.spip.org/@admin_general
