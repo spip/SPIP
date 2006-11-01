@@ -344,7 +344,7 @@ function unicode2charset($texte, $charset='AUTO') {
 // (les caracteres non resolus sont transformes en &#123;)
 // http://doc.spip.org/@importer_charset
 function importer_charset($texte, $charset = 'AUTO') {
-	return unicode2charset(charset2unicode($texte, $charset, true));
+	return unicode2charset(charset2unicode($texte, $charset));
 }
 
 // UTF-8
