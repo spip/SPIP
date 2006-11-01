@@ -197,15 +197,12 @@ function verifier_htaccess($rep) {
 	    !defined('_ECRIRE_INSTALL') AND !defined('_TEST_DIRS')) {
 		spip_log("demande de creation de $htaccess");
 		if ($_SERVER['SERVER_ADMIN'] != 'www@nexenservices.com'){
-			if (!$f = fopen($htaccess, "w"))
-				echo "<b>" .
-				  "ECHEC DE LA CREATION DE $htaccess" . # ne pas traduire
-				  "</b>";
-			else
-			  {
+			if (!$f = @fopen($htaccess, "w")) {
+				spip_log("ECHEC DE LA CREATION DE $htaccess"); # ne pas traduire
+			} else {
 				fputs($f, "deny from all\n");
 				fclose($f);
-			  }
+			}
 		} else {
 			echo "<font color=\"#FF0000\">IMPORTANT : </font>";
 			echo "Votre h&eacute;bergeur est Nexen Services.<br />";
