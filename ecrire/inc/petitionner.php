@@ -17,13 +17,9 @@ include_spip('inc/actions');
 include_spip('inc/texte');
 
 // http://doc.spip.org/@inc_petitionner_dist
-function inc_petitionner_dist($id_article, $script, $args, $modifiable)
+function inc_petitionner_dist($id_article, $script, $args)
 {
-	global $spip_lang_right, $options, $connect_statut;
-
-	if (!($options == "avancees" && $connect_statut=='0minirezo' && $modifiable))
-	  return '';
-
+	global $spip_lang_right;
 
 	$petition = spip_fetch_array(spip_query("SELECT * FROM spip_petitions WHERE id_article=$id_article"));
 
@@ -62,11 +58,15 @@ function inc_petitionner_dist($id_article, $script, $args, $modifiable)
 		$nb_signatures = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_signatures WHERE id_article=$id_article AND statut IN ('publie', 'poubelle')"));
 		$nb_signatures = $nb_signatures['count'];
 		if ($nb_signatures) {
-			$res .= "<br />\n" .
-			  icone_horizontale($nb_signatures.'&nbsp;'. _T('info_signatures'), generer_url_ecrire("controle_petition","id_article=$id_article",'', false), "suivi-petition-24.gif", "", false);
+			$res .= '<!-- visible -->' // message pour l'appelant
+			. icone_horizontale(
+				$nb_signatures.'&nbsp;'. _T('info_signatures'),
+				generer_url_ecrire("controle_petition", "id_article=$id_article",'', false),
+				"suivi-petition-24.gif",
+				"",
+				false
+			);
 		}
-
-		$res .= "<br />\n";
 
 		if ($email_unique=="oui")
 			$res .= "<input type='checkbox' name='email_unique' id='emailunique' checked='checked' />";

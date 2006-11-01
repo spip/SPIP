@@ -16,12 +16,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_petitionner_dist() {
 
 	include_spip('inc/actions');
+	include_spip('inc/autoriser');
+
 	$var_f = charger_fonction('controler_action_auteur', 'inc');
 	$var_f();
 
 	$arg = _request('arg');
 
 	$id_article = intval($arg);
+
+	if (!autoriser('modifier', 'article', $id_article))
+		return;
 
 	$message = _request('message');
 	$site_obli = _request('site_obli');

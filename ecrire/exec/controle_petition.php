@@ -12,20 +12,27 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/presentation');
-include_spip('inc/signatures');
 
 // http://doc.spip.org/@exec_controle_petition_dist
 function exec_controle_petition_dist()
 {
-	global $connect_statut, $id_article, $debut;
 
-	$id_article = intval($id_article);
-	$debut =  intval($debut);
+	include_spip('inc/presentation');
+	include_spip('inc/signatures');
+	include_spip('inc/autoriser');
 
- 	if ($connect_statut != "0minirezo") {
-		$r = "<b>"._T('avis_non_acces_page')."</b>";
-	} else {
+	$id_article = intval(_request('id_article'));
+
+	if (
+		autoriser('moderer_petition')
+		OR (
+			$id_article > 0
+			AND autoriser('moderer_petition', 'article', $id_article)
+		)
+	) {
+
+		$debut = intval(_request('debut'));
+
 		$var_f = charger_fonction('signatures', 'inc');
 
 		$r = $var_f('controle_petition',
@@ -35,6 +42,9 @@ function exec_controle_petition_dist()
 			"date_time DESC",
 			10);
 	}
+	else
+		$r = "<b>"._T('avis_non_acces_page')."</b>";
+
 
 	if (_request('var_ajaxcharset')) ajax_retour($r);
 
@@ -49,4 +59,5 @@ function exec_controle_petition_dist()
 
 	echo  "<div id='", $a, "' class='serif2'>", $r, "</div>", fin_page();
 }
+
 ?>

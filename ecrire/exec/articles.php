@@ -111,8 +111,8 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 
 	.	(!$iconifier ? '' : $iconifier('id_article', $id_article,'articles','iconifier'))
 
-	.	boites_de_config_articles($id_article, $flag_editable)
-	.	boite_article_virtuel($id_article, $virtuel, $flag_editable) 
+	.	boites_de_config_articles($id_article)
+	.	boite_article_virtuel($id_article, $virtuel, $flag_editable)
 	.	meme_rubrique($id_rubrique, $id_article, 'article')
 
 	.	 pipeline('affiche_gauche',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''))
@@ -253,25 +253,24 @@ function boite_info_articles($id_article, $statut_article, $visites, $id_version
 //
 
 // http://doc.spip.org/@boites_de_config_articles
-function boites_de_config_articles($id_article, $modifiable)
+function boites_de_config_articles($id_article)
 {
-	$regler_moderation = charger_fonction('regler_moderation', 'inc');
-	$petitionner = charger_fonction('petitionner', 'inc');
-	$regler_moderation = $regler_moderation($id_article,"articles","id_article=$id_article", $modifiable);
-	$petitionner = $petitionner($id_article,"articles","id_article=$id_article",$modifiable);
+	if (autoriser('moderer_forum', 'article', $id_article)) {
+		$regler_moderation = charger_fonction('regler_moderation', 'inc');
+		$regler_moderation =
+			$regler_moderation($id_article,"articles","id_article=$id_article");
+	}
+
+	if (autoriser('moderer_petition', 'article', $id_article)) {
+		$petitionner = charger_fonction('petitionner', 'inc');
+		$petitionner =
+			$petitionner($id_article,"articles","id_article=$id_article");
+	}
+
 	$masque = $regler_moderation . $petitionner;
 
-	if (!$masque) return '';
-
-	$forums = spip_query("SELECT id_article FROM spip_forum WHERE id_article=$id_article 	AND statut IN ('publie', 'off', 'prop') LIMIT 1");
-
-	$visible = spip_fetch_array($forums);
-
-	if (!$visible) {
-
-		$signatures = spip_query("SELECT id_article FROM spip_signatures WHERE id_article=$id_article AND statut IN ('publie', 'poubelle') LIMIT 1");
-		$visible = spip_fetch_array($signatures);
-	}
+	if (!$masque)
+		return '';
 
 	$invite = "<span class='verdana1'><b>"
 	. _T('bouton_forum_petition')
@@ -279,7 +278,12 @@ function boites_de_config_articles($id_article, $modifiable)
 	. "</b></span>";
 
 	return debut_cadre_relief("forum-interne-24.gif", true)
-	. block_parfois_visible('forumpetition', $invite, $masque, 'text-align: center;', $visible)
+	. block_parfois_visible('forumpetition',
+		$invite,
+		$masque,
+		'text-align: center;',
+		$visible = strstr($masque, '<!-- visible -->')
+	)
 	. fin_cadre_relief(true);
 }
 
