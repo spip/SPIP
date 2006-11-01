@@ -75,7 +75,7 @@ function surcharger_langue($fichier) {
 //
 // Traduire une chaine internationalisee
 //
-// http://doc.spip.org/@traduire_chaine
+// http://doc.spip.org/@inc_traduire_dist
 function inc_traduire_dist($ori, $lang) {
 
 	static $deja_vu = array();

@@ -223,6 +223,7 @@ function ajax_retour($corps)
 	exit;
 }
 
+// http://doc.spip.org/@ajax_debug_retour
 function ajax_debug_retour($c, $corps)
 {
 	$f = charger_fonction('sax', 'inc');

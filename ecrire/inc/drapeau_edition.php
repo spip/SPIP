@@ -90,6 +90,7 @@ function qui_edite ($id, $type='article') {
 	return $edition[$type][$id];
 }
 
+// http://doc.spip.org/@mention_qui_edite
 function mention_qui_edite ($id, $type='article') {
 	$modif = qui_edite($id, $type);
 	unset($modif[$GLOBALS['auteur_session']['id_auteur']]);

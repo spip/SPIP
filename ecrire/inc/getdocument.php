@@ -148,6 +148,7 @@ function check_upload_error($error, $msg='') {
 
 // Erreur appelee depuis public.php (la precedente ne fonctionne plus
 // depuis qu'on est sortis de spip_image.php, apparemment).
+// http://doc.spip.org/@erreur_upload_trop_gros
 function erreur_upload_trop_gros() {
 	include_spip('inc/filtres');
 	
@@ -536,6 +537,7 @@ function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $
 // Afficher un formulaire de choix: decompacter et/ou garder tel quel.
 // Passer ca en squelette un de ces jours.
 
+// http://doc.spip.org/@liste_archive_jointe
 function liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash, $redirect, $zip, $iframe_redirect)
 {
 	$arg = (intval($id) .'/' .intval($id_document) . "/$mode/$type");

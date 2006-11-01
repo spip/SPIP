@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@spip_xml_load
 function spip_xml_load($fichier, $clean=true){
 	$contenu = "";
 	if (preg_match(",^(http|ftp)://,",$fichier)){
@@ -26,6 +27,7 @@ function spip_xml_load($fichier, $clean=true){
 	return count($arbre)?$arbre:false;
 }
 
+// http://doc.spip.org/@spip_xml_parse
 function spip_xml_parse($texte, $clean=true){
 	$out = array();
   // enlever les commentaires
@@ -78,6 +80,7 @@ function spip_xml_parse($texte, $clean=true){
 		return $texte;
 }
 
+// http://doc.spip.org/@spip_xml_aplatit
 function spip_xml_aplatit($arbre,$separateur = " "){
 	$s = "";
 	if (is_array($arbre))

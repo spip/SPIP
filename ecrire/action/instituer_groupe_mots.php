@@ -16,6 +16,7 @@ include_spip('inc/actions');
 include_spip('inc/filtres');
 include_spip('base/abstract_sql');
 
+// http://doc.spip.org/@action_instituer_groupe_mots_dist
 function action_instituer_groupe_mots_dist()
 {
 	$var_f = charger_fonction('controler_action_auteur', 'inc');
@@ -29,6 +30,7 @@ function action_instituer_groupe_mots_dist()
 }
 
 
+// http://doc.spip.org/@action_instituer_groupe_mots_post
 function action_instituer_groupe_mots_post($r)
 {
 	global $acces_comite, $acces_forum, $acces_minirezo, $new, $articles, $breves, $change_type, $descriptif, $id_groupe, $obligatoire, $rubriques, $syndic, $texte, $unseul;

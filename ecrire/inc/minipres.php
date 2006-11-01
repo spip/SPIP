@@ -86,11 +86,13 @@ function install_fin_html() {
 	echo "\n\t</div>\n\t</div>\n</body>\n</html>";
 }
 
+// http://doc.spip.org/@info_etape
 function info_etape($titre, $complement = ''){
 	return "\n<h2>".$titre."</h2>\n" .
 	($complement ? "<p>".$complement."</p>\n":'');
 }
 
+// http://doc.spip.org/@fieldset
 function fieldset($legend, $champs = array()) {
 	$fieldset = "<fieldset>\n" .
 	($legend ? "<legend>".$legend."</legend>\n" : '');
@@ -104,6 +106,7 @@ function fieldset($legend, $champs = array()) {
 	return $fieldset;
 }
 
+// http://doc.spip.org/@bouton_suivant
 function bouton_suivant($code = 'bouton_suivant') {
 	return "\n<span class='suivant'><input type='submit' class='fondl' value=\"" .
 		_T($code) .

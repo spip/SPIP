@@ -222,6 +222,7 @@ function spip_query($query, $serveur='') {
 }
 
 // a demenager dans base/abstract_sql a terme
+// http://doc.spip.org/@_q
 function _q($arg_sql) {
 	return (is_int($arg_sql)) ? $arg_sql : ("'" . addslashes($arg_sql) . "'");
 }
@@ -1212,6 +1213,7 @@ function lang_dselect ($rien='') {
 
 // pipeline appelant la fonction de notification
 // avant chaque modification du contenu
+// http://doc.spip.org/@notif_pre_enregistre_contenu
 function notif_pre_enregistre_contenu($x) {
 	include_spip('inc/notifications');
 	return notifications('pre_enregistre_contenu', $x);

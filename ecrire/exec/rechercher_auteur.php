@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 # gerer un charset minimaliste en convertissant tout en unicode &#xxx;
 
-// http://doc.spip.org/@exec_rechercher_dist
+// http://doc.spip.org/@exec_rechercher_auteur_dist
 function exec_rechercher_auteur_dist()
 {
 	$idom = _request('idom');

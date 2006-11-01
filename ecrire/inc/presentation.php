@@ -380,6 +380,7 @@ function afficher_liste($largeurs, $table, $styles = '') {
 	return $res;
 }
 
+// http://doc.spip.org/@afficher_liste_display_neq4
 function afficher_liste_display_neq4($largeurs, $t, $styles = '') {
 
 	global $spip_lang_left;
@@ -403,6 +404,7 @@ function afficher_liste_display_neq4($largeurs, $t, $styles = '') {
 	return $res;
 }
 
+// http://doc.spip.org/@afficher_liste_display_eq4
 function afficher_liste_display_eq4($largeurs, $t, $styles = '') {
 	global $spip_lang_left;
 

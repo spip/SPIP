@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@action_editer_mot_dist
+// http://doc.spip.org/@action_poster_forum_prive_dist
 function action_poster_forum_prive_dist() {
 
 	include_spip('inc/actions');
@@ -26,7 +26,7 @@ function action_poster_forum_prive_dist() {
 	else action_poster_forum_prive_post($r);
 }
 
-// http://doc.spip.org/@action_editer_mot_post
+// http://doc.spip.org/@action_poster_forum_prive_post
 function action_poster_forum_prive_post($r)
 {
 	global $redirect, $nom_site, $texte, $titre_message, $url_site,  $modif_forum,  $valider_forum;

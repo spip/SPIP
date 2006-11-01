@@ -31,6 +31,7 @@ function exec_forum_envoi_dist()
 		    _request('valider_forum'));
 }
 
+// http://doc.spip.org/@forum_envoi
 function forum_envoi(  
 		     $id,
 		     $id_parent,
@@ -165,6 +166,7 @@ function forum_envoi(
 	  . fin_page();
 }
 
+// http://doc.spip.org/@forum_envoi_formulaire
 function forum_envoi_formulaire($id, $objet, $script, $statut, $texte, $titre_page, $nom_site, $url_site)
 {
 	global $options;
@@ -217,6 +219,7 @@ function forum_envoi_formulaire($id, $objet, $script, $statut, $texte, $titre_pa
 		. "\" size='40' />"	      ));
 }
 
+// http://doc.spip.org/@forum_envoi_entete
 function forum_envoi_entete($parent, $titre_parent, $texte, $titre_texte, $nom_site, $url_site)
 {
 	global $spip_lang_rtl;

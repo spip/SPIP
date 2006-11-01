@@ -65,6 +65,7 @@ function inc_iconifier_dist($id_objet, $id,  $script, $iframe_script='') {
   		$js .= <<<EOF
       <script type='text/javascript'>
       $(".form_upload_icon").async_upload(upload_complete);
+// http://doc.spip.org/@upload_complete
       function upload_complete(res) {
         res.find(">div").each(function(){
           var cont = $("#"+this.id);

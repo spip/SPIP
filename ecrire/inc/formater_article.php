@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Fonction appelee dans une boucle, calculer les invariants au premier appel.
 
+// http://doc.spip.org/@inc_formater_article_dist
 function inc_formater_article_dist($row)
 {
 	global $dir_lang, $options, $spip_lang_right, $spip_display;
