@@ -177,35 +177,7 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
   $ret .= "<script src='"._DIR_JAVASCRIPT."async_upload.js' type='text/javascript'></script>\n";
   $ret .= <<<EOF
     <script type='text/javascript'>
-    $(".form_upload").async_upload(function(res,jForm){
-      var cont;
-      //add a class to new documents
-      res.
-      find(">div[@class]")
-        .addClass("documents_added")
-        .css("display","none")
-      .end();
-      if (jForm.find("input[@name='arg']").val().search("vignette")!=-1)
-        cont = $("#liste_images");
-      else
-        cont = $("#liste_documents");
-      cont
-      .prepend(res.html());
-      //find added documents, remove label and show them nicely
-      //set overflow to visible to completely show the overlay icon
-      cont.
-      find("div.documents_added")
-        .removeClass("documents_added")
-        .show("slow",function(){
-            var anim = $(this).css({"height":"","overflow":""});
-            //bug explorer-opera-safari
-            if(!jQuery.browser.mozilla) anim.width(this.orig.width-2);
-            $(anim).find("img[@onclick]").get(0).onclick();
-        })
-        .overflow("");
-      verifForm(cont);
-      return true;
-    })
+    $(".form_upload").async_upload(async_upload_article_edit)
     </script>
 EOF;
     
