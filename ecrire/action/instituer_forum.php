@@ -35,12 +35,6 @@ function action_instituer_forum_dist() {
 	$index_forum = calcul_index_forum($row['id_article'], $row['id_breve'], $row['id_rubrique'], $row['id_syndic']);
 	suivre_invalideur("id='id_forum/$index_forum'");
 
-	// Signaler au moteur de recherche qu'il faut reindexer le thread
-	if ($id_parent) {
-		include_spip('inc/indexation');
-		marquer_indexer ('spip_forum', $id_parent);
-	}
-
 	// changer le statut de toute l'arborescence dependant de ce message
 	$id_messages = array($id_forum);
 	while ($id_messages) {
@@ -52,5 +46,12 @@ function action_instituer_forum_dist() {
 		while ($row = spip_fetch_array($result_forum))
 			$id_messages[] = $row['id_forum'];
 	}
+
+	// Signaler au moteur de recherche qu'il faut reindexer le thread
+	if ($id_parent) {
+		include_spip('inc/indexation');
+		marquer_indexer ('spip_forum', $id_parent);
+	}
 }
+
 ?>
