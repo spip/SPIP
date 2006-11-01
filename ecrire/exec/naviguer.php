@@ -72,7 +72,7 @@ function exec_naviguer_dist()
 //
 		if ($flag_editable AND ($spip_display != 4)) {
 			$iconifier = charger_fonction('iconifier', 'inc');
-			echo $iconifier('id_rubrique', $id_rubrique, 'naviguer');
+			echo $iconifier('id_rubrique', $id_rubrique, 'naviguer','iconifier');
 		}
 
 //
@@ -378,7 +378,7 @@ function naviguer_doc ($id, $type = "article", $script, $flag_editable) {
 
 	  $f = charger_fonction('joindre', 'inc');
 	  $res = debut_cadre_relief("image-24.gif", true, "", _T('titre_joindre_document'))
-	  . $f($script, "id_$type=$id", $id, _T('info_telecharger_ordinateur'), 'document', $type)
+	  . $f($script, "id_$type=$id", $id, _T('info_telecharger_ordinateur'), 'document', $type,'',0,generer_url_ecrire("documenter","id_rubrique=$id&type=$type",true))
 	  . fin_cadre_relief(true);
 
 	// eviter le formulaire upload qui se promene sur la page
@@ -389,12 +389,18 @@ function naviguer_doc ($id, $type = "article", $script, $flag_editable) {
 		$align = " align='right'";
 	  }
 	  $res = "<div$align>$res</div>";
+	      $res .= "<script src='"._DIR_JAVASCRIPT."async_upload.js' type='text/javascript'></script>\n";
+    $res .= <<<EOF
+    <script type='text/javascript'>
+    $(".form_upload").async_upload(async_upload_portfolio_documents);
+    </script>
+EOF;
 	} else $res ='';
 
 	$f = charger_fonction('documenter', 'inc');
 
-	return $f($id, $type, 'portfolio', $flag_editable)
-	. $f($id, $type, 'documents', $flag_editable)
+	return "<div id='portfolio'>".$f($id, $type, 'portfolio', $flag_editable)."</div>"
+	."<div id='documents'>". $f($id, $type, 'documents', $flag_editable)."</div>"
 	. $res;
 }
 

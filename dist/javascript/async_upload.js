@@ -102,7 +102,7 @@ function async_upload_icon(res) {
   return true;                     
 }
 
-function async_upload_article(res){
+function async_upload_portfolio_documents(res){
   res.find(">div").each(function(){
     var cont = $("#"+this.id);
     var self = $(this);
