@@ -150,7 +150,7 @@ function decrire_logo($id_objet, $mode, $id, $width, $height, $img, $titre="", $
 			"<font size='1'>" .
 		     $taille .
 		     "\n<br />[" .
-		     ajax_action_auteur("iconifier", "$id-$nom.$format", $script, "$id_objet=$id&type=$id_objet", array(_T('lien_supprimer')),'',"function(r,noeud) {noeud.innerHTML = r; \$('.form_upload_icon',noeud).async_upload(upload_complete);}") .
+		     ajax_action_auteur("iconifier", "$id-$nom.$format", $script, "$id_objet=$id&type=$id_objet", array(_T('lien_supprimer')),'',"function(r,noeud) {noeud.innerHTML = r; \$('.form_upload_icon',noeud).async_upload(async_upload_icon);}") .
 		     "]</font>");
 }
 ?>
