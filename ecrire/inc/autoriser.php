@@ -55,13 +55,19 @@ function autoriser($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 
 	// Chercher une fonction d'autorisation explicite
 	if (
-	// 1. Sous la forme "autoriser_faire_type"
-		($f = charger_fonction($faire.'_'.$type,'autoriser'))
+	// 1. Sous la forme "autoriser_type_faire"
+	// si $type est vide, charge directement autoriser_faire
+	   ($f = charger_fonction($faire,"autoriser/$type"))
 
-	// 2. Sous la forme "autoriser_faire"
-	OR ($f = charger_fonction($faire,'autoriser'))
+	// 2. Sous la forme "autoriser_type"
+	// ne pas tester si $type est vide
+	OR ($type AND $f = charger_fonction($type,"autoriser"))
 
-	// 3. Sinon autorisation generique
+	// 3. Sous la forme "autoriser_faire"
+	// ne pas tester si $type est vide, deja teste en 1.
+	OR ($type AND $f = charger_fonction($faire,'autoriser'))
+
+	// 4. Sinon autorisation generique
 	OR ($f = charger_fonction('defaut','autoriser'))
 	)
 		$a = $f($faire,$type,intval($id),$qui,$opt);
@@ -79,7 +85,7 @@ function autoriser_defaut_dist($faire, $type, $id, $qui, $opt) {
 }
 
 // Autoriser a publier dans la rubrique $id
-function autoriser_publier_dans_rubrique_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_rubrique_publier_dans_dist($faire, $type, $id, $qui, $opt) {
 	return
 		($qui['statut'] == '0minirezo')
 		AND (!$qui['restreint']
@@ -90,7 +96,7 @@ function autoriser_publier_dans_rubrique_dist($faire, $type, $id, $qui, $opt) {
 
 // Autoriser a modifier la rubrique $id
 // = publier_dans rubrique $id
-function autoriser_modifier_rubrique_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_rubrique_modifier_dist($faire, $type, $id, $qui, $opt) {
 	return
 		autoriser('publier_dans', 'rubrique', $id, $qui, $opt);
 }
@@ -98,7 +104,7 @@ function autoriser_modifier_rubrique_dist($faire, $type, $id, $qui, $opt) {
 // Autoriser a modifier la breve $id
 // = admins & redac si la breve n'est pas publiee
 // = admins de rubrique parente si publiee
-function autoriser_modifier_breve_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_breve_modifier_dist($faire, $type, $id, $qui, $opt) {
 	$s = spip_query(
 	"SELECT id_rubrique,statut FROM spip_breves WHERE id_breve="._q($id));
 	$r = spip_fetch_array($s);
@@ -111,7 +117,7 @@ function autoriser_modifier_breve_dist($faire, $type, $id, $qui, $opt) {
 // Autoriser a modifier l'article $id
 // = publier_dans rubrique parente
 // = ou statut 'prop,prepa' et $qui est auteur
-function autoriser_modifier_article_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_article_modifier_dist($faire, $type, $id, $qui, $opt) {
 	$s = spip_query(
 	"SELECT id_rubrique,statut FROM spip_articles WHERE id_article="._q($id));
 	$r = spip_fetch_array($s);
@@ -126,7 +132,7 @@ function autoriser_modifier_article_dist($faire, $type, $id, $qui, $opt) {
 
 // Lire les stats ?
 // = tous les admins
-function autoriser_voir_stats_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_stats_voir_dist($faire, $type, $id, $qui, $opt) {
 	return
 		$qui['statut'] == '0minirezo';
 }
@@ -149,7 +155,7 @@ function autoriser_voir_dist($faire, $type, $id, $qui, $opt) {
 
 // Voir les revisions ?
 // = voir l'objet
-function autoriser_voir_revisions_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_revisions_voir_dist($faire, $type, $id, $qui, $opt) {
 	return
 		autoriser('voir', $type, $id, $qui, $opt);
 }
@@ -157,7 +163,7 @@ function autoriser_voir_revisions_dist($faire, $type, $id, $qui, $opt) {
 // Moderer le forum ?
 // = modifier l'objet correspondant (si forum attache a un objet)
 // = droits par defaut sinon (admin complet pour moderation complete)
-function autoriser_moderer_forum_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_forum_moderer_dist($faire, $type, $id, $qui, $opt) {
 	return
 		autoriser('modifier', $type, $id, $qui, $opt);
 }
@@ -165,7 +171,7 @@ function autoriser_moderer_forum_dist($faire, $type, $id, $qui, $opt) {
 // Moderer la petition ?
 // = modifier l'article correspondant
 // = droits par defaut sinon (admin complet pour moderation de tout)
-function autoriser_moderer_petition_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_petition_moderer_dist($faire, $type, $id, $qui, $opt) {
 	return
 		autoriser('modifier', $type, $id, $qui, $opt);
 }
