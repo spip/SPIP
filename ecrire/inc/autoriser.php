@@ -55,24 +55,14 @@ function autoriser($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 
 	// Chercher une fonction d'autorisation explicite
 	if (
-
 	// 1. Sous la forme "autoriser_faire_type"
-		(
-		$f = 'autoriser_'.$faire.'_'.$type
-		AND (function_exists($f) OR function_exists($f.='_dist'))
-		)
+		($f = charger_fonction($faire.'_'.$type,'autoriser'))
 
 	// 2. Sous la forme "autoriser_faire"
-	OR (
-		$f = 'autoriser_'.$faire
-		AND (function_exists($f) OR function_exists($f.='_dist'))
-		)
+	OR ($f = charger_fonction($faire,'autoriser'))
 
 	// 3. Sinon autorisation generique
-	OR (
-		$f = 'autoriser_defaut'
-		AND (function_exists($f) OR function_exists($f.='_dist'))
-		)
+	OR ($f = charger_fonction('defaut','autoriser'))
 	)
 		$a = $f($faire,$type,intval($id),$qui,$opt);
 
