@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/revisions');
+include_spip('inc/autoriser');
 
 // http://doc.spip.org/@exec_articles_versions_dist
 function exec_articles_versions_dist()
@@ -42,6 +43,10 @@ function exec_articles_versions_dist()
 //
 // Lire l'article
 //
+
+	if(!autoriser('voir_revisions', 'article', $id_article))
+		return;
+
 
     $id_article = intval($id_article);
     $result = spip_query("SELECT * FROM spip_articles WHERE id_article='$id_article'");
@@ -205,15 +210,15 @@ echo "</td>";
 
 echo "<td align='center'>";
 
-// L'article est-il editable ?
- $result_auteur = spip_query("SELECT * FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur");
-
-$flag_auteur = (spip_num_rows($result_auteur) > 0);
-$flag_editable = (acces_rubrique($id_rubrique)
-	OR ($flag_auteur AND ($statut_article == 'prepa' OR $statut_article == 'prop' OR $statut_article == 'poubelle')));
-
-if ($flag_editable)
-	icone(_T('icone_modifier_article').'<br />('._T('version')." $id_version)", generer_url_ecrire("articles_edit","id_article=$id_article&id_version=$id_version"), "article-24.gif", "edit.gif");
+// Icone de modification
+if (autoriser('modifier', 'article', $id_article))
+	icone(
+		_T('icone_modifier_article').'<br />('._T('version')." $id_version)",
+		generer_url_ecrire("articles_edit",
+			"id_article=$id_article&id_version=$id_version"),
+		"article-24.gif",
+		"edit.gif"
+	);
 
 echo "</td>";
 
@@ -328,5 +333,7 @@ fin_cadre_relief();
 
 
 echo fin_page();
+
 }
+
 ?>
