@@ -1214,9 +1214,17 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	if ($id_auteur) {
 		$formater_auteur = charger_fonction('formater_auteur', 'inc');
 		$res .= join(' ',$formater_auteur($id_auteur));
-	} else if ($email_auteur)
-		$res .= "<a href='mailto:$email_auteur'>".typo($auteur)."</a>";
-	else	$res .= typo($auteur);
+	} else {
+		if ($email_auteur) {
+			if (email_valide($email_auteur))
+				$email_auteur = "<a href='mailto:"
+				.htmlspecialchars($email_auteur)
+				."?subject=".rawurlencode($titre)."'>".$email_auteur
+				."</a>";
+			$auteur .= " &mdash; $email_auteur";
+		}
+		$res .= safehtml("<span class='arial2'> / <b>$auteur</b></span>");
+	}
 
 	// boutons de moderation
 	if ($controle_id_article)
