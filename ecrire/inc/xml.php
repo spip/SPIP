@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@spip_xml_load
-function spip_xml_load($fichier, $clean=true){
+function spip_xml_load($fichier, $strict=true, $clean=true){
 	$contenu = "";
 	if (preg_match(",^(http|ftp)://,",$fichier)){
 		include_spip('inc_distant');
@@ -22,18 +22,25 @@ function spip_xml_load($fichier, $clean=true){
 	else lire_fichier ($fichier, $contenu);
 	$arbre = array();
 	if ($contenu)
-		$arbre = spip_xml_parse($contenu);
+		$arbre = spip_xml_parse($contenu, $strict, $clean);
 		
 	return count($arbre)?$arbre:false;
 }
 
 // http://doc.spip.org/@spip_xml_parse
-function spip_xml_parse($texte, $clean=true){
+function spip_xml_parse($texte, $strict=true, $clean=true){
 	$out = array();
   // enlever les commentaires
   if ($clean){
+  	$charset = 'AUTO';
+  	if (preg_match(",<\?xml\s(.*?)encoding=['\"]?(.*?)['\"]?(\s(.*))?\?>,im",$texte,$regs))
+  		$charset = $regs[2];
+  	var_dump($regs);
+  	var_dump($charset);
 	  $texte = preg_replace(',<!--(.*?)-->,is','',$texte);
 	  $texte = preg_replace(',<\?(.*?)\?>,is','',$texte);
+		include_spip('inc/charsets');
+		$texte = importer_charset($texte,$charset);
   }
   $txt = $texte;
 
@@ -62,15 +69,18 @@ function spip_xml_parse($texte, $clean=true){
 			// tag fermant
 			$chars = preg_split("{(</".preg_quote($closing_tag).">)}s",$txt,2,PREG_SPLIT_DELIM_CAPTURE);
 			if (!isset($chars[1])) { // tag fermant manquant
-				$out[$tag][]="erreur : tag fermant $tag manquant::$txt"; 
-				return $out;
+				if ($strict){
+					$out[$tag][]="erreur : tag fermant $tag manquant::$txt"; 
+					return $out;
+				}
+				else return $texte; // un tag qui constitue du texte a reporter dans $before
 			}
 			$content = $chars[0];
 			$txt = trim($chars[2]);
 			if (strpos($content,"<")===FALSE) // eviter une recursion si pas utile
 				$out[$tag][] = $content;
 			else
-				$out[$tag][]=spip_xml_parse($content, false);
+				$out[$tag][]=spip_xml_parse($content, $strict, false);
 		}
 		$chars = preg_split("{<([^>]*?)>}s",$txt,2,PREG_SPLIT_DELIM_CAPTURE);
 	}
