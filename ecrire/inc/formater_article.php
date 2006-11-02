@@ -26,7 +26,7 @@ function inc_formater_article_dist($row)
 		if ($chercher_logo) 
 			$chercher_logo = charger_fonction('chercher_logo', 'inc');
 		$formater_auteur = charger_fonction('formater_auteur', 'inc');
-		$img_admin = http_img_pack("admin-12.gif", "", "width='12' height='12'", _T('titre_image_admin_article'));
+		$img_admin = http_img_pack("admin-12.gif", "", " width='12' height='12'", _T('titre_image_admin_article'));
 		$nb = ($options != "avancees")
 		  ? ''
 		  : _T('info_numero_abbreviation');
@@ -60,7 +60,6 @@ function inc_formater_article_dist($row)
 	$vals[]= puce_statut_article($id_article, $statut, $id_rubrique);
 
 	$vals[]= "<div>"
-	. (acces_restreint_rubrique($id_rubrique) ? $img_admin : '')
 	. "<a href='"
 	. generer_url_ecrire("articles","id_article=$id_article")
 	. "'"
@@ -70,6 +69,7 @@ function inc_formater_article_dist($row)
 	. " style=\"display:block;\">"
 	. (!$logo ? '' :
 	   ("<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>" . $logo . "</div>"))
+	. (acces_restreint_rubrique($id_rubrique) ? $img_admin : '')
 	. typo($titre)
 	. (!($afficher_langue AND $lang != $GLOBALS['meta']['langue_site']) ? '' :
 	   (" <font size='1' color='#666666'$dir_lang>(".traduire_nom_langue($lang).")</font>"))
