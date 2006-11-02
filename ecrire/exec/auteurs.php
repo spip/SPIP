@@ -82,9 +82,11 @@ function bandeau_auteurs($tri, $statut)
 	$s = ' ('._T('info_par_nombre_article').')';
 
 	if ($statut == '6forum') {
-		debut_page(_T('titre_page_auteurs'),"auteurs","redacteurs");
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('titre_page_auteurs'),"auteurs","redacteurs");
 	} else {
-		debut_page(_T('info_auteurs_par_tri', array('partri' => $s)),"auteurs","redacteurs");
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('info_auteurs_par_tri', array('partri' => $s)),"auteurs","redacteurs");
 	}
 	debut_gauche();
 

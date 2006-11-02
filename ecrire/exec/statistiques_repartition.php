@@ -132,7 +132,8 @@ function exec_statistiques_repartition_dist()
   global $connect_statut, $connect_toutes_rubriques, $spip_ecran, $taille,
     $abs_total, $nombre_vis, $critere;
 
-	debut_page(_T('titre_page_statistiques'), "statistiques_visites", "repartition");
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('titre_page_statistiques'), "statistiques_visites", "repartition");
 	
 	if (($connect_statut != '0minirezo')|| !$connect_toutes_rubriques) {
 		echo _T('avis_non_acces_page');

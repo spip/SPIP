@@ -31,7 +31,8 @@ function exec_config_fonctions_dist()
 	global $flag_revisions, $options ;
 
 	pipeline('exec_init',array('args'=>array('exec'=>'config_fonctions'),'data'=>''));
-	debut_page(_T('titre_page_config_fonctions'), "configuration", "configuration");
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('titre_page_config_fonctions'), "configuration", "configuration");
 
 	echo "<br><br><br>";
 	gros_titre(_T('titre_config_fonctions'));

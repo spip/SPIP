@@ -143,4 +143,10 @@ function bandeau_titre_boite($titre, $afficher_auteurs, $boite_importante = true
 	echo "</td>";
 	echo "</tr>";
 }
+
+function debut_page($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $onLoad = "", $id_rubrique = "") {
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page($titre, $rubrique, $sous_rubrique, $onLoad, $id_rubrique);
+}
+
 ?>

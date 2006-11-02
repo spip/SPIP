@@ -22,7 +22,8 @@ function exec_documents_liste_dist()
 // Recupere les donnees
 //
 
-debut_page(_T('titre_page_documents_liste'), "naviguer", "documents");
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('titre_page_documents_liste'), "naviguer", "documents");
 debut_gauche();
 
 

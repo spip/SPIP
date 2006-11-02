@@ -48,7 +48,8 @@ function exec_controle_petition_dist()
 
 	if (_request('var_ajaxcharset')) ajax_retour($r);
 
-	debut_page(_T('titre_page_controle_petition'), "forum", "suivi-petition");
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('titre_page_controle_petition'), "forum", "suivi-petition");
 	debut_gauche();
 
 	debut_droite();

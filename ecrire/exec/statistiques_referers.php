@@ -35,7 +35,8 @@ else {
 	}
 }
 
-debut_page(_T('titre_page_statistiques_referers'), "statistiques_visites", "referers");
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('titre_page_statistiques_referers'), "statistiques_visites", "referers");
 echo "<br /><br /><br />";
 
 	gros_titre(_T('titre_liens_entrants'));

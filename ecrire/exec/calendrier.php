@@ -46,7 +46,8 @@ function exec_calendrier_dist()
 
   if (_request('var_ajaxcharset')) ajax_retour($r);
 
-  debut_page($titre, "accueil", "calendrier");
+  $commencer_page = charger_fonction('commencer_page', 'inc');
+  echo $commencer_page($titre, "accueil", "calendrier");
   echo "\n<div>&nbsp;</div>\n<div id='", $ancre, "'>",$r,'</div>';
   echo fin_page();
 }

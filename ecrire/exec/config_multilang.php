@@ -24,7 +24,8 @@ function exec_config_multilang_dist()
 lire_metas();
 
 pipeline('exec_init',array('args'=>array('exec'=>'config_multilang'),'data'=>''));
-debut_page(_T('titre_page_config_contenu'), "configuration", "langues");
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('titre_page_config_contenu'), "configuration", "langues");
 
 echo "<br><br><br>";
 gros_titre(_T('info_langues'));

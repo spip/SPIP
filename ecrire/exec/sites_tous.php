@@ -21,7 +21,8 @@ function exec_sites_tous_dist()
 	global $connect_statut, $options;
 
 pipeline('exec_init',array('args'=>array('exec'=>'sites_tous'),'data'=>''));
-debut_page(_T('titre_page_sites_tous'),"naviguer","sites");
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('titre_page_sites_tous'),"naviguer","sites");
 debut_gauche();
 echo pipeline('affiche_gauche',array('args'=>array('exec'=>'sites_tous'),'data'=>''));
 creer_colonne_droite();

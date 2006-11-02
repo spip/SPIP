@@ -21,12 +21,14 @@ include_spip('inc/actions');
 // http://doc.spip.org/@choix_couleur
 function choix_couleur() {
 	global $couleurs_spip;
+	$res = '';
 	if ($couleurs_spip) {
 		foreach ($couleurs_spip as $key => $val) {
-			echo "<a href=\"".parametre_url(self(), 'set_couleur', $key)."\">" .
+			$res = "<a href=\"".parametre_url(self(), 'set_couleur', $key)."\">" .
 				http_img_pack("rien.gif", " ", "width='8' height='8' style='margin: 1px; background-color: ".$val['couleur_claire'].";' onmouseover=\"changestyle('bandeauinterface','visibility', 'visible');\""). "</a>";
 		}
 	}
+	return $res;
 }
 
 // Faux HR, avec controle de couleur
@@ -1664,19 +1666,20 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 
 	$a_href = "<a$accesskey href=\"$lien\"$class_select>";
 
+	$res = '';
 	if ($spip_display != 1) {
-		echo "<td class='cellule36' style='width: ".$largeur."px;'>";
-		echo "$a_href" .
+		$res .= "<td class='cellule36' style='width: ".$largeur."px;'>";
+		$res .= "$a_href" .
 		  http_img_pack("$fond", $alt, "$title");
-		if ($aide AND $spip_display != 3) echo aide($aide)." ";
+		if ($aide AND $spip_display != 3) $res .= aide($aide)." ";
 		if ($spip_display != 3) {
-			echo "<span>$texte</span>";
+			$res .= "<span>$texte</span>";
 		}
 	}
-	else echo "<td class='cellule-texte' width='$largeur'>$a_href".$texte;
-	echo "</a>";	
-	echo "</td>\n";
-	return $largeur;
+	else $res .= "<td class='cellule-texte' width='$largeur'>$a_href".$texte;
+	$res .= "</a>";	
+	$res .= "</td>\n";
+	return array($res, $largeur);
 }
 
 
@@ -1798,328 +1801,6 @@ function lien_change_var($lien, $set, $couleur, $coords, $titre, $mouseOver="") 
 	return "\n<area shape='rect' href='$lien' coords='$coords' title=\"$titre\" alt=' ' $mouseOver />";
 }
 
-//
-// Presentation de l'interface privee, debut du HTML
-//
-
-// http://doc.spip.org/@debut_page
-function debut_page($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $onLoad = "", $id_rubrique = "") {
-
-	include_spip('inc/headers');
-	http_no_cache();
-	echo init_entete($titre, $id_rubrique);
-	init_body($rubrique, $sous_rubrique, $onLoad, $id_rubrique);
-
-	echo "<center onmouseover='recherche_desesperement()'>", // ????
-		avertissement_messagerie(),
-		(($rubrique == "messagerie")
-		 OR (_request('changer_config')!="oui")) 
-		? auteurs_recemment_connectes() : '';
-}
-
-// envoi du doctype et du <head><title>...</head> 
-// http://doc.spip.org/@init_entete
-function init_entete($titre='', $id_rubrique=0) {
-  include_spip('inc/gadgets');
-
-	if (!$nom_site_spip = textebrut(typo($GLOBALS['meta']["nom_site"])))
-		$nom_site_spip=  _T('info_mon_site_spip');
-
-	$head = "<title>["
-		. $nom_site_spip
-		. "] " . textebrut(typo($titre)) . "</title>\n"
-		. "<meta http-equiv='Content-Type' content='text/html"
-		. (($c = $GLOBALS['meta']['charset']) ?
-			"; charset=$c" : '')
-		. "' />\n"
-		. envoi_link($nom_site_spip);
-
-	// anciennement verifForm
-	$head .= '
-	<script type="text/javascript"><!--
-	$(document).ready(function(){
-		verifForm();
-	'
-	.
-	repercuter_gadgets($id_rubrique)
-	.'
-	});
-	// --></script>
-	';
-
-	return _DOCTYPE_ECRIRE
-	. html_lang_attributes()
-	. "<head>\n"
-	. pipeline('header_prive', $head)
-	. "</head>\n";
-}
-
-// fonction envoyant la double serie d'icones de redac
-// http://doc.spip.org/@init_body
-function init_body($rubrique='accueil', $sous_rubrique='accueil', $load='', $id_rubrique='') {
-	global $couleur_foncee, $couleur_claire;
-	global $connect_id_auteur, $connect_toutes_rubriques;
-	global $auth_can_disconnect;
-	global $options, $spip_display, $spip_ecran;
-	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
-
-	definir_barre_boutons();
-	if ($load)
-		$load = " onload=\"$load\"";
-
-	echo pipeline('body_prive',"<body ". _ATTRIBUTES_BODY
-		.$load
-		. '>');
-
-	if ($spip_ecran == "large") $largeur = 974;
-	else $largeur = 750;
-
-	echo "\n<map id='map_layout'>";
-	echo lien_change_var (self(), 'set_disp', 1, '1,0,18,15', _T('lien_afficher_texte_seul'), "onmouseover=\"changestyle('bandeauvide','visibility', 'visible');\"");
-	echo lien_change_var (self(), 'set_disp', 2, '19,0,40,15', _T('lien_afficher_texte_icones'), "onmouseover=\"changestyle('bandeauvide','visibility', 'visible');\"");
-	echo lien_change_var (self(), 'set_disp', 3, '41,0,59,15', _T('lien_afficher_icones_seuls'), "onmouseover=\"changestyle('bandeauvide','visibility', 'visible');\"");
-	echo "\n</map>";
-
-	if ($spip_display == "4") {
-		echo "<ul>";
-		echo "<li><a href='./'>"._T('icone_a_suivre')."</a></li>";
-		echo "<li><a href='" . generer_url_ecrire("naviguer") . "'>"._T('icone_edition_site')."</a></li>";
-		echo "<li><a href='" . generer_url_ecrire("forum"). "'>"._T('titre_forum')."</a></li>";
-		echo "<li><a href='" . generer_url_ecrire("auteurs") . "'>"._T('icone_auteurs')."</a></li>";
-		echo "<li><a href=\"".url_de_base()."\">"._T('icone_visiter_site')."</a></li>";
-		echo "</ul>";
-
-		return;
-	}
-
-	// Lien oo
-	echo "<div class='invisible_au_chargement' style='position: absolute; height: 0px; visibility: hidden;'><a href='oo'>"._T("access_mode_texte")."</a></div>";
-	
-	echo "<div id='haut-page'>";
-	echo "<div class='bandeau-principal' align='center'>\n";
-	echo bandeau_principal($rubrique, $sous_rubrique, $largeur);
-
-	echo "<table width='$largeur' cellpadding='0' cellspacing='0' align='center'><tr><td>";
-	echo "<div style='text-align: $spip_lang_left; width: ".$largeur."px; position: relative; z-index: 2000;'>";
-
-	// Icones secondaires
-
-	global $browser_name;
-	$coeff_decalage = 0;
-	if ($browser_name=="MSIE")
-		$coeff_decalage = 1.0;
-	$decal=0;
-	$largitem_moy = 85;
-	$largeur_maxi_menu = $largeur-100;
-
-	foreach($GLOBALS['boutons_admin'] as $page => $detail) {
-		if (($rubrique == $page) AND ($_COOKIE['spip_accepte_ajax']==-1)) {
-			$class = "visible_au_chargement";
-		} else {
-			$class = "invisible_au_chargement";
-		}
-
-		$sousmenu= $detail->sousmenu;
-		if($sousmenu) {
-			$offset = (int)round($decal-$coeff_decalage*max(0,($decal+count($sousmenu)*$largitem_moy-$largeur_maxi_menu)));
-			if ($offset<0){	$offset = 0; }
-			echo "<div class='$class' id='bandeau$page' style='position: absolute; $spip_lang_left: ".$offset."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
-			$width=0;
-			foreach($sousmenu as $souspage => $sousdetail) {
-				if ($width+1.25*$largitem_moy>$largeur_maxi_menu){echo "</tr><tr>\n";$width=0;}
-				if($souspage=='espacement') {
-					if ($width>0){
-						echo "<td class='separateur'></td>\n";
-						$largitem = 0;
-					}
-				} else {
-					$largitem = icone_bandeau_secondaire (_T($sousdetail->libelle), generer_url_ecrire($sousdetail->url?$sousdetail->url:$souspage, $sousdetail->urlArg), $sousdetail->icone, $souspage, $sous_rubrique);
-				}
-				$width+=$largitem+10;
-			}
-			echo "</tr></table></div></div>";
-		}
-		
-		$decal += largeur_icone_bandeau_principal(_T($detail->libelle));
-	}
-
-	echo "</div>";
-	
-	echo "</td></tr></table>";
-	
-	echo "</div>\n"; // referme: <div class='bandeau-principal' align='center'>"
-
-	//
-	// Bandeau colore
-	//
-
-if (true /*$bandeau_colore*/) {
-	if ($rubrique == "administration") {
-		$style = "background: url(" . _DIR_IMG_PACK . "rayures-danger.png); background-color: $couleur_foncee";
-		echo "<style>a.icone26 { color: white; }</style>";
-	}
-	else {
-		$style = "background-color: $couleur_claire";
-	}
-
-	echo "\n<div style=\"max-height: 40px; width: 100%; border-bottom: solid 1px white;$style\">";
-	echo "<table align='center' cellpadding='0' style='background: none;' width='$largeur'><tr>";
-
-	echo "<td valign='middle' class='bandeau_couleur' style='text-align: $spip_lang_left;'>";
-
-	echo "<a href='" . generer_url_ecrire("articles_tous") . "' class='icone26' onmouseover=\"changestyle('bandeautoutsite','visibility','visible');\">",
-		  http_img_pack("tout-site.png", "", "width='26' height='20'") . "</a>";
-		if ($id_rubrique > 0) echo "<a href='" . generer_url_ecrire("brouteur","id_rubrique=$id_rubrique") . "' class='icone26' onmouseover=\"changestyle('bandeaunavrapide','visibility','visible');\">" .
-		  http_img_pack("naviguer-site.png", "", "width='26' height='20'") ."</a>";
-		else echo "<a href='" . generer_url_ecrire("brouteur") . "' class='icone26' onmouseover=\"changestyle('bandeaunavrapide','visibility','visible');\" >" .
-		  http_img_pack("naviguer-site.png", "", "width='26' height='20'") . "</a>";
-
-		echo "<a href='" . generer_url_ecrire("recherche") . "' class='icone26' onmouseover=\"changestyle('bandeaurecherche','visibility','visible'); findObj('form_recherche').focus();\" >" .
-		  http_img_pack("loupe.png", "", "width='26' height='20'") ."</a>";
-
-		echo http_img_pack("rien.gif", " ", "width='10'");
-
-		echo "<a href='" . generer_url_ecrire("calendrier","type=semaine") . "' class='icone26' onmouseover=\"changestyle('bandeauagenda','visibility','visible');\">" .
-		  http_img_pack("cal-rv.png", "", "width='26' height='20'") ."</a>";
-		echo "<a href='" . generer_url_ecrire("messagerie") . "' class='icone26' onmouseover=\"changestyle('bandeaumessagerie','visibility','visible');\">" .
-		  http_img_pack("cal-messagerie.png", "", "width='26' height='20'") ."</a>";
-		echo "<a href='" . generer_url_ecrire("synchro") . "' class='icone26' onmouseover=\"changestyle('bandeausynchro','visibility','visible');\">" .
-		  http_img_pack("cal-suivi.png", "", "width='26' height='20'") . "</a>";
-		
-
-		if (!($connect_toutes_rubriques)) {
-			echo http_img_pack("rien.gif", " ", "width='10'");
-			echo "<a href='" . generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur&initial=-1") . "' class='icone26' onmouseover=\"changestyle('bandeauinfoperso','visibility','visible');\">" .
-			  http_img_pack("fiche-perso.png", "", "onmouseover=\"changestyle('bandeauvide','visibility', 'visible');\"");
-			echo "</a>";
-		}
-		
-	echo "</td>";
-	echo "<td valign='middle' class='bandeau_couleur' style='text-align: $spip_lang_left;'>";
-		// overflow pour masquer les noms tres longs (et eviter debords, notamment en ecran etroit)
-		if ($spip_ecran == "large") $largeur_nom = 300;
-		else $largeur_nom= 110;
-		echo "<div style='width: ".$largeur_nom."px; height: 14px; overflow: hidden;'>";
-		// Redacteur connecte
-		echo typo($GLOBALS['auteur_session']['nom']);
-		echo "</div>";
-	
-	echo "</td>";
-
-	echo "<td> &nbsp; </td>";
-
-
-	echo "<td class='bandeau_couleur' style='text-align: $spip_lang_right;' valign='middle'>";
-
-			// Choix display
-		//	echo"<img src=_DIR_IMG_PACK . 'rien.gif' width='10' />";
-			if ($options != "avancees") {
-				$lien = parametre_url(self(), 'set_options', 'avancees');
-				$icone = "interface-display-comp.png";
-			} else {
-				$lien = parametre_url(self(), 'set_options', 'basiques');
-				$icone = "interface-display.png";
-			}
-			echo "<a href='$lien' class='icone26' onmouseover=\"changestyle('bandeaudisplay','visibility', 'visible');\">" .
-			  http_img_pack("$icone", "", "width='26' height='20'")."</a>";
-
-			echo http_img_pack("rien.gif", " ", "width='10' height='1'");
-			echo http_img_pack("choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".gif", "abc", "class='format_png' style='vertical-align: middle' width='59' height='15' usemap='#map_layout'");
-
-
-			echo http_img_pack("rien.gif", " ", "width='10' height='1'");
-			// grand ecran
-			if ($spip_ecran == "large") {
-				$i = _T('info_petit_ecran');
-				echo "<a href='". parametre_url(self(),'set_ecran', 'etroit') ."' class='icone26' onmouseover=\"changestyle('bandeauecran','visibility', 'visible');\" title=\"$i\">" .
-				  http_img_pack("set-ecran-etroit.png", $i, "width='26' height='20'") . "</a>";
-				$ecran = "<div><a href='".parametre_url(self(),'set_ecran', 'etroit')."' class='lien_sous'>"._T('info_petit_ecran')."</a>/<b>"._T('info_grand_ecran')."</b></div>";
-			}
-			else {
-				$i = _T('info_grand_ecran');
-				echo "<a href='".parametre_url(self(),'set_ecran', 'large')."' class='icone26' onmouseover=\"changestyle('bandeauecran','visibility', 'visible');\" title=\"$i\">" .
-				  http_img_pack("set-ecran.png", $i, "width='26' height='20'") ."</a>";
-				$ecran = "<div><b>"._T('info_petit_ecran')."</b>/<a href='".parametre_url(self(),'set_ecran', 'large')."' class='lien_sous'>"._T('info_grand_ecran')."</a></div>";
-			}
-
-		echo "</td>";
-		
-		echo "<td class='bandeau_couleur' style='width: 60px; text-align:$spip_lang_left;' valign='middle'>";
-		choix_couleur();
-		
-		echo "</td>";
-	//
-	// choix de la langue
-	//
-	if ($GLOBALS['all_langs']) {
-		echo "<td class='bandeau_couleur' style='width: 100px; text-align: $spip_lang_right;' valign='middle'>";
-		echo menu_langues('var_lang_ecrire');
-		echo "</td>";
-	}
-
-		echo "<td class='bandeau_couleur' style='text-align: $spip_lang_right; width: 28px;' valign='middle'>";
-
-		if ($auth_can_disconnect) {
-			echo "<a href='",
-			  generer_url_action("logout","logout=prive"),
-			  "' class='icone26' onmouseover=\"changestyle('bandeaudeconnecter','visibility', 'visible');\">",
-			  http_img_pack("deconnecter-24.gif", "", ""),
-			  "</a>";
-			}
-		echo "</td>";
-	
-	
-	echo "</tr></table>";
-
-} // fin bandeau colore
-
-	// <div> pour la barre des gadgets
-	// (elements invisibles qui s'ouvrent sous la barre precedente)
-
-	echo bandeau_gadgets($largeur, $options, $id_rubrique);
-	echo "</div>";
-	echo "</div>";
-
-	if ($options != "avancees") echo "<div style='height: 18px;'>&nbsp;</div>";
-}
-
-
-// http://doc.spip.org/@avertissement_messagerie
-function avertissement_messagerie() {
-	global $couleur_foncee;
-	global $connect_id_auteur;
-
-	$result_messages = spip_query("SELECT lien.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message");
-	$total_messages = @spip_num_rows($result_messages);
-	if ($total_messages == 1) {
-		$row = @spip_fetch_array($result_messages);
-		$ze_message=$row['id_message'];
-		return "<div class='messages'><a href='" . generer_url_ecrire("message","id_message=$ze_message") . "'><font color='$couleur_foncee'>"._T('info_nouveau_message')."</font></a></div>";
-	} elseif ($total_messages > 1)
-		return "<div class='messages'><a href='" . generer_url_ecrire("messagerie") . "'><font color='$couleur_foncee'>"._T('info_nouveaux_messages', array('total_messages' => $total_messages))."</font></a></div>";
-	else return '';
-}
-
-
-// http://doc.spip.org/@auteurs_recemment_connectes
-function auteurs_recemment_connectes()
-{	
-	global $connect_id_auteur;
-	$res = '';
-	$result_auteurs = spip_query("SELECT id_auteur FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE) AND statut IN ('0minirezo','1comite')");
-
-	if (spip_num_rows($result_auteurs)) {
-		$formater_auteur = charger_fonction('formater_auteur', 'inc');
-		$res = "<b>"._T('info_en_ligne'). "&nbsp;</b>";
-		while ($row = spip_fetch_array($result_auteurs)) {
-			list($s, $mail, $nom, $w, $p) = $formater_auteur($row['id_auteur']);
-			$res .= "$mail&nbsp;$nom, ";
-		}
-		$res = substr($res,0,-2);
-	}
-
-	return "<div class='messages' style='color: #666666;'>$res</div>";
-}
 
 
 // http://doc.spip.org/@gros_titre

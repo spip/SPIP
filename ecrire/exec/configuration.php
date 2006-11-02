@@ -48,7 +48,8 @@ lire_metas();
 
 pipeline('exec_init',array('args'=>array('exec'=>'configuration'),'data'=>''));
 
-debut_page(_T('titre_page_configuration'), "configuration", "configuration");
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('titre_page_configuration'), "configuration", "configuration");
 
 echo "<br><br><br>";
 gros_titre(_T('titre_configuration'));

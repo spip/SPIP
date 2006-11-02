@@ -33,7 +33,8 @@ function exec_lang_raccourcis_dist() {
 	if (!in_array($module = _request('module'), $modules))
 		$module = 'public';
 
-	debut_page(_T('module_fichier_langue').": $module",
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('module_fichier_langue').": $module",
 		"configuration", "langues");
 
 	echo "<br><br><br>";

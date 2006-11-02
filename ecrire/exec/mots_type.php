@@ -57,7 +57,8 @@ function exec_mots_type_dist()
 	}
 
 	pipeline('exec_init',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>''));
-	debut_page("&laquo; $titre &raquo;", "naviguer", "mots");
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page("&laquo; $titre &raquo;", "naviguer", "mots");
 	debut_gauche();
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>''));
