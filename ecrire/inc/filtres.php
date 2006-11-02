@@ -1562,7 +1562,7 @@ function calcul_pagination($total, $nom, $pas, $liste = true, $modele='') {
 
 // recuperere le chemin d'une css existante et :
 // 1. regarde si une css inversee droite-gauche existe dans le meme repertoire
-// 2. sinon la cree (ou la recree) dans IMG/cache_css/
+// 2. sinon la cree (ou la recree) dans _DIR_VAR/cache_css/
 // SI on lui donne a manger une feuille nommee _rtl.css il va faire l'inverse
 // http://doc.spip.org/@direction_css
 function direction_css ($css, $voulue='') {
@@ -1605,6 +1605,66 @@ function direction_css ($css, $voulue='') {
 		array('@@@@L E F T@@@@', 'right', 'left'),
 		$contenu);
 
+	if (!ecrire_fichier($f, $contenu))
+		return $css;
+
+	return $f;
+}
+
+// recuperere le chemin d'une css existante et :
+// cree (ou recree) dans _DIR_VAR/cache_css/ une css dont les url relatives sont passees en url absolues
+function url_absolue_css ($css) {
+	if (!preg_match(',\.css$,i', $css, $r)) return $css;
+
+	$path = dirname(url_absolue($css))."/"; // pour mettre sur les images
+	
+	$f = basename($css,'.css');
+	$f = sous_repertoire (_DIR_VAR, 'cache-css') . "$f-url_absolue"
+		. '_' . substr(md5("$css-url_absolue"), 0,4) . '.css';
+
+	if ((@filemtime($f) > @filemtime($css))
+	AND ($GLOBALS['var_mode'] != 'recalcul'))
+		return $f;
+
+	if (!lire_fichier($css, $contenu))
+		return $css;
+
+	// passer les url relatives a la css d'origine en url absolues
+	$contenu = preg_replace(",url\(([^/][^:]*)\),Uims","url($path\\1)",$contenu);
+
+	// ecrire la css
+	if (!ecrire_fichier($f, $contenu))
+		return $css;
+
+	return $f;
+}
+
+// recuperere le chemin d'une css existante et :
+// cree (ou recree) dans _DIR_VAR/cache_css/ une css compactee en nettoyant tout ce qui n'est pas significatif
+function compacte_css ($css) {
+	if (!preg_match(',\.css$,i', $css, $r)) return $css;
+	
+	$f = basename($css,'.css');
+	$f = sous_repertoire (_DIR_VAR, 'cache-css') . "$f-compacte"
+		. '_' . substr(md5("$css-compacte"), 0,4) . '.css';
+
+	if ((@filemtime($f) > @filemtime($css))
+	AND ($GLOBALS['var_mode'] != 'recalcul'))
+		return $f;
+
+	if (!lire_fichier($css, $contenu))
+		return $css;
+
+	// nettoyer la css de tout ce qui sert pas
+	$contenu = preg_replace(",/\*.*\*/,Ums","",$contenu); // pas de commentaires
+	$contenu = preg_replace(",\s(?=\s),Ums","",$contenu); // pas d'espaces consecutifs
+	$contenu = preg_replace("/\s?({|;|,|:)\s?/ms","$1",$contenu); // pas d'espaces dans les declarations css
+	$contenu = preg_replace("/\s}/ms","}",$contenu); // pas d'espaces dans les declarations css
+	$contenu = preg_replace(",#([0-9a-f])(\\1)([0-9a-f])(\\3)([0-9a-f])(\\5),i","#$1$3$5",$contenu); // passser les codes couleurs en 3 car si possible
+	$contenu = preg_replace(",([^{}]*){},Ums"," ",$contenu); // supprimer les declarations vides
+	$contenu = trim($contenu);
+
+	// ecrire la css
 	if (!ecrire_fichier($f, $contenu))
 		return $css;
 
