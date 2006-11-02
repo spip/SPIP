@@ -121,7 +121,7 @@ function assembler_page ($fond) {
 		$page['entetes']["Connection"] = "close";
 		$page['texte'] = "";
 	} else {
-		if (!$use_cache )  {
+		if (!$use_cache)  {
 			if (isset($page['contexte'])){
 				// Remplir les globals pour les boutons d'admin
 				foreach ($page['contexte'] as $var=>$val)
@@ -138,7 +138,7 @@ function assembler_page ($fond) {
 
 		auto_content_type($page);
 
-		$flag_preserver |=  (headers_sent());
+		$flag_preserver |=  headers_sent();
 
 		// Definir les entetes si ce n'est fait 
 		if (!$flag_preserver) {
@@ -157,7 +157,10 @@ function assembler_page ($fond) {
 		}
 	}
 
-	if ($lastmodified)
+	// Entete Last-Modified: s'il y a une chance qu'on fasse 304 (page non dynamique)
+	if ($lastmodified
+	AND isset($page['entetes'])
+	AND strstr($page['entetes']['Cache-Control'],'max-age='))
 		$page['entetes']["Last-Modified"]=gmdate("D, d M Y H:i:s", $lastmodified)." GMT";
 
 	return $page;
