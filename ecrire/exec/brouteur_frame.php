@@ -21,7 +21,18 @@ function exec_brouteur_frame_dist() {
 
 	include_spip('inc/headers');
 	http_no_cache();
-	echo init_entete();
+
+	echo _DOCTYPE_ECRIRE
+	. html_lang_attributes()
+	. "<head>\n"
+	.  "<title>brouteur_frame</title>\n"
+	. "<meta http-equiv='Content-Type' content='text/html"
+	. (($c = $GLOBALS['meta']['charset']) ? "; charset=$c" : '')
+	. "' />\n"
+	. envoi_link(_T('info_mon_site_spip'))	
+	. pipeline('header_prive', $head)
+	. "</head>\n";
+
 
 	if ($spip_ecran == "large") {
 		$nb_col = 4;
