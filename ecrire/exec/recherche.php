@@ -130,4 +130,59 @@ function exec_recherche_dist()
 	}
 echo fin_page();
 }
+
+
+// http://doc.spip.org/@afficher_auteurs
+function afficher_auteurs ($titre_table, $requete) {
+
+	if (!$requete['SELECT']) $requete['SELECT'] = '*' ;
+
+	$tous_id = array();
+	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
+	if (! ($cpt = $cpt['n'])) return 0 ;
+	if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
+
+	$tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);
+	$nb_aff = floor(1.5 * _TRANCHES);
+	$deb_aff = intval(_request($tmp_var));
+	$tranches = '';
+	if ($cpt > $nb_aff) {
+		$nb_aff = (_TRANCHES); 
+		$tranches = afficher_tranches_requete($cpt, $tmp_var, '', $nb_aff);
+	}
+
+	debut_cadre_relief("auteur-24.gif");
+
+	if ($titre_table) {
+			echo "<p><table width='100%' cellpadding='0' cellspacing='0' border='0'>";
+			echo "<tr><td width='100%'>";
+			echo "<table width='100%' cellpadding='3' cellspacing='0' border='0'>";
+			echo "<tr bgcolor='#333333'><td width='100%' colspan='5'><font face='Verdana,Arial,Sans,sans-serif' size=3 color='#FFFFFF'>";
+			echo "<b>$titre_table</b></font></td></tr>";
+		}
+	else {
+			echo "<p><table width='100%' cellpadding='3' cellspacing='0' border='0'>";
+		}
+
+	echo $tranches;
+
+	$result = spip_query("SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
+
+	$table = array();
+	while ($row = spip_fetch_array($result)) {
+		$tous_id[] = $row['id_auteur'];
+		$formater_auteur = charger_fonction('formater_auteur', 'inc');
+		$table[]= $formater_auteur($row['id_auteur']);
+	}
+	spip_free_result($result);
+	$largeurs = array(20, 20, 200, 20, 50);
+	$styles = array('','','arial2','arial1','arial1');
+	echo afficher_liste($largeurs, $table, $styles);
+
+	if ($titre_table) echo "</table></td></tr>";
+	echo "</table>";
+	fin_cadre_relief();
+
+	return $cpt;
+}
 ?>
