@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/distant');
 include_spip('inc/ortho');
+include_spip('inc/autoriser');
 
 // http://doc.spip.org/@exec_articles_ortho_dist
 function exec_articles_ortho_dist()
@@ -42,6 +43,7 @@ function exec_articles_ortho_dist()
 // Lire l'article
 //
   $id_article = intval($id_article);
+  if (!autoriser('voir', 'article', $id_article)) die('interdit');
 
   $result = spip_query("SELECT * FROM spip_articles WHERE id_article='$id_article'");
 
