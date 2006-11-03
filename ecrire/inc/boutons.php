@@ -202,7 +202,7 @@ function definir_barre_boutons() {
  */
 // http://doc.spip.org/@definir_barre_onglets
 function definir_barre_onglets($rubrique) {
-	global $id_auteur, $connect_id_auteur, $connect_statut, $statut_auteur, $options;
+	global $id_auteur, $connect_id_auteur, $connect_statut, $statut_auteur;
 
 	$onglets=array();
 
