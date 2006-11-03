@@ -133,17 +133,20 @@ function revisions_articles ($id_article, $c=false) {
 
 	// Changer le statut de l'article ?
 	include_spip('inc/auth');
+
 	auth_rubrique($GLOBALS['auteur_session']['id_auteur'], $GLOBALS['auteur_session']['statut']);
 	$s = spip_query("SELECT statut, id_rubrique FROM spip_articles WHERE id_article=$id_article");
 	$row = spip_fetch_array($s);
 	$id_rubrique = $row['id_rubrique'];
 	$statut = $row['statut'];
 
-	if (_request('statut', $c)
-	AND _request('statut', $c) != $statut) {
+	$s = _request('statut', $c);
+	if ($s AND _request('statut', $c) != $statut) {
 		if (acces_rubrique($id_rubrique))
-			$statut = $champs['statut'] = _request('statut', $c);
-		// else erreur ?
+			$statut = $champs['statut'] = $s;
+		elseif (acces_article($id_article) AND  $s != 'publie')
+			$statut = $champs['statut'] = $s;
+		else spip_log("editer_article $id_article refus " . join(' ', $c));
 	}
 
 	// Verifier que la rubrique demandee existe et est differente
