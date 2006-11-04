@@ -203,7 +203,7 @@ function ajouter_auteurs_articles($id_article, $les_auteurs)
 {
 	$query = determiner_non_auteurs($les_auteurs, "statut, nom");
 	if (!$num = spip_num_rows($query)) return '';
-	spip_log("nb auteur $num");
+
 	$js = "findObj_forcer('valider_ajouter_auteur').style.visibility='visible';";
 
 	$text = "<span class='verdana1'><b>"

@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/charsets');	# pour le nom de fichier
-include_spip('inc/getdocument');
 include_spip('base/abstract_sql');
 include_spip('inc/actions');
 
@@ -94,7 +93,8 @@ function action_joindre_dist()
 // http://doc.spip.org/@spip_action_joindre2
 function spip_action_joindre2($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
-	return examiner_les_fichiers(array(
+	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
+	return $ajouter_documents(array(
 				   array('name' => basename($path),
 					 'tmp_name' => $path)
 				   ), 'distant', $type, $id, $id_document,
@@ -106,6 +106,7 @@ function spip_action_joindre2($path, $mode, $type, $id, $id_document,$hash, $red
 // http://doc.spip.org/@spip_action_joindre1
 function spip_action_joindre1($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
+	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
 	$files = array();
 	if (is_array($path))
 	  foreach ($path as $file) {
@@ -113,7 +114,7 @@ function spip_action_joindre1($path, $mode, $type, $id, $id_document,$hash, $red
 			$files[]=$file;
 	}
 
-	return examiner_les_fichiers($files, $mode, $type, $id, $id_document,
+	return $ajouter_documents($files, $mode, $type, $id, $id_document,
 			     $hash, $redirect, $actifs, $iframe_redirect);
 } 
 
@@ -143,7 +144,8 @@ function spip_action_joindre3($path, $mode, $type, $id, $id_document,$hash, $red
 	  }
 	}
 
-	return examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $redirect, $actifs, $iframe_redirect);
+	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
+	return $ajouter_documents($files, $mode, $type, $id, $id_document, $hash, $redirect, $actifs, $iframe_redirect);
 }
 
 //  Zip avec confirmation "tel quel"
@@ -151,18 +153,22 @@ function spip_action_joindre3($path, $mode, $type, $id, $id_document,$hash, $red
 // http://doc.spip.org/@spip_action_joindre5
 function spip_action_joindre5($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs)
 {
+	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
 	$pos = strpos($path, '/zip/');
 	if (!$pos) {
 		$pos = strpos($path, '/zip_');
 	}
-	return ajouter_un_document($path, substr($path, $pos+5), $type, $id, $mode, $id_document, $actifs);
+	return $ajouter_documents($path, substr($path, $pos+5), $type, $id, $mode, $id_document, $actifs);
 }
 
-// Zip a deballer.
+// Zip a deballer. 
+// Pas tres beau: on charge une fonction pas appelee mais dont le fichier
+// contient les acolytes qui nous interessent.
 
 // http://doc.spip.org/@spip_action_joindre6
 function spip_action_joindre6($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
+	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
 	$x = joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
 	//  suppression de l'archive en zip
 	@unlink($path);
@@ -174,28 +180,9 @@ function spip_action_joindre6($path, $mode, $type, $id, $id_document,$hash, $red
 // http://doc.spip.org/@spip_action_joindre4
 function spip_action_joindre4($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
+	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
 	joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
 	return spip_action_joindre5($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
 }
 
-// http://doc.spip.org/@joindre_deballes
-function joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs)
-{
-	    define('_tmp_dir', creer_repertoire_documents($hash));
-	    if (_tmp_dir == _DIR_DOC) die(_L('Op&eacute;ration impossible'));
-	    include_spip('inc/pclzip');
-	    $archive = new PclZip($path);
-	    $archive->extract(
-			      PCLZIP_OPT_PATH, _tmp_dir,
-			      PCLZIP_CB_PRE_EXTRACT, 'callback_deballe_fichier'
-			      );
-	    $contenu = verifier_compactes($archive);
-	    
-	    foreach ($contenu as $fichier)
-		$x = ajouter_un_document(_tmp_dir.basename($fichier),
-				    basename($fichier),
-				    $type, $id, $mode, $id_document, $actifs);
-	    effacer_repertoire_temporaire(_tmp_dir);
-	    return $x;
-}
 ?>
