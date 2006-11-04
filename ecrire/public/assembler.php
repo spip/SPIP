@@ -157,10 +157,11 @@ function assembler_page ($fond) {
 		}
 	}
 
-	// Entete Last-Modified: s'il y a une chance qu'on fasse 304 (page non dynamique)
+	// Entete Last-Modified:
+	// eviter d'etre incoherent en envoyant un lastmodified identique
+	// a celui qu'on a refuse d'honorer plus haut (cf. #655)
 	if ($lastmodified
-	AND isset($page['entetes'])
-	AND strstr($page['entetes']['Cache-Control'],'max-age='))
+	AND !isset($_SERVER['HTTP_IF_MODIFIED_SINCE']))
 		$page['entetes']["Last-Modified"]=gmdate("D, d M Y H:i:s", $lastmodified)." GMT";
 
 	return $page;
