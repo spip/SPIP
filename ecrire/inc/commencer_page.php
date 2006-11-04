@@ -77,20 +77,12 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $load='', $id_
 	global $options, $spip_display, $spip_ecran;
 	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
 
-	$res = '';
+	if ($spip_ecran == "large") $largeur = 974; else $largeur = 750;
 
-	definir_barre_boutons();
-	if ($load)
-		$load = " onload=\"$load\"";
+	if ($load) $load = " onload=\"$load\"";
 
-	$res .= pipeline('body_prive',"<body ". _ATTRIBUTES_BODY
-		.$load
-		. '>');
-
-	if ($spip_ecran == "large") $largeur = 974;
-	else $largeur = 750;
-
-	$res .= "\n<map id='map_layout'>"
+	$res = pipeline('body_prive',"<body ". _ATTRIBUTES_BODY	.$load . '>')
+	.  "\n<map id='map_layout'>"
 	. lien_change_var (self(), 'set_disp', 1, '1,0,18,15', _T('lien_afficher_texte_seul'), "onmouseover=\"changestyle('bandeauvide','visibility', 'visible');\"")
 	. lien_change_var (self(), 'set_disp', 2, '19,0,40,15', _T('lien_afficher_texte_icones'), "onmouseover=\"changestyle('bandeauvide','visibility', 'visible');\"")
 	. lien_change_var (self(), 'set_disp', 3, '41,0,59,15', _T('lien_afficher_icones_seuls'), "onmouseover=\"changestyle('bandeauvide','visibility', 'visible');\"")
@@ -108,82 +100,22 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $load='', $id_
 		return $res;
 	}
 
-	// Lien oo
-	$res .= "<div class='invisible_au_chargement' style='position: absolute; height: 0px; visibility: hidden;'><a href='oo'>"._T("access_mode_texte")."</a></div>"
-	. "<div id='haut-page'>"
-	. "<div class='bandeau-principal' align='center'>\n"
-	. bandeau_principal($rubrique, $sous_rubrique, $largeur)
-	. "<table width='$largeur' cellpadding='0' cellspacing='0' align='center'><tr><td>"
-	. "<div style='text-align: $spip_lang_left; width: ".$largeur."px; position: relative; z-index: 2000;'>";
+	$res .= bandeau_double_rangee($rubrique, $sous_rubrique, $largeur);
 
-	// Icones secondaires
+	if (true /*$bandeau_colore*/) {
+		if ($rubrique == "administration") {
+			$style = "background: url(" . _DIR_IMG_PACK . "rayures-danger.png); background-color: $couleur_foncee";
+			$res .= "<style>a.icone26 { color: white; }</style>";
+		} else  $style = "background-color: $couleur_claire";
 
-	global $browser_name;
-	$coeff_decalage = 0;
-	if ($browser_name=="MSIE")
-		$coeff_decalage = 1.0;
-	$decal=0;
-	$largitem_moy = 85;
-	$largeur_maxi_menu = $largeur-100;
-
-	foreach($GLOBALS['boutons_admin'] as $page => $detail) {
-		if (($rubrique == $page) AND ($_COOKIE['spip_accepte_ajax']==-1)) {
-			$class = "visible_au_chargement";
-		} else {
-			$class = "invisible_au_chargement";
-		}
-
-		$sousmenu= $detail->sousmenu;
-		if($sousmenu) {
-			$offset = (int)round($decal-$coeff_decalage*max(0,($decal+count($sousmenu)*$largitem_moy-$largeur_maxi_menu)));
-			if ($offset<0){	$offset = 0; }
-			$res .= "<div class='$class' id='bandeau$page' style='position: absolute; $spip_lang_left: ".$offset."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
-			$width=0;
-			foreach($sousmenu as $souspage => $sousdetail) {
-				if ($width+1.25*$largitem_moy>$largeur_maxi_menu){$res .= "</tr><tr>\n";$width=0;}
-				if($souspage=='espacement') {
-					if ($width>0){
-						$res .= "<td class='separateur'></td>\n";
-						$largitem = 0;
-					}
-				} else {
-				  list($html,$largitem) = icone_bandeau_secondaire (_T($sousdetail->libelle), generer_url_ecrire($sousdetail->url?$sousdetail->url:$souspage, $sousdetail->urlArg), $sousdetail->icone, $souspage, $sous_rubrique);
-				  $res .= $html;
-				}
-				$width+=$largitem+10;
-			}
-			$res .= "</tr></table></div></div>";
-		}
-		
-		$decal += largeur_icone_bandeau_principal(_T($detail->libelle));
-	}
-
-	$res .= "</div>"
-	. "</td></tr></table>"
-	. "</div>\n"; // referme: <div class='bandeau-principal' align='center'>"
-
-	//
-	// Bandeau colore
-	//
-
-if (true /*$bandeau_colore*/) {
-	if ($rubrique == "administration") {
-		$style = "background: url(" . _DIR_IMG_PACK . "rayures-danger.png); background-color: $couleur_foncee";
-		$res .= "<style>a.icone26 { color: white; }</style>";
-	}
-	else {
-		$style = "background-color: $couleur_claire";
-	}
-
-	$res .= "\n<div style=\"max-height: 40px; width: 100%; border-bottom: solid 1px white;$style\">"
-	. "<table align='center' cellpadding='0' style='background: none;' width='$largeur'><tr>";
-
-	$res .= "<td valign='middle' class='bandeau_couleur' style='text-align: $spip_lang_left;'>";
-
-	$res .= "<a href='" . generer_url_ecrire("articles_tous") . "' class='icone26' onmouseover=\"changestyle('bandeautoutsite','visibility','visible');\">" .
-		  http_img_pack("tout-site.png", "", "width='26' height='20'") . "</a>";
-		if ($id_rubrique > 0) $res .= "<a href='" . generer_url_ecrire("brouteur","id_rubrique=$id_rubrique") . "' class='icone26' onmouseover=\"changestyle('bandeaunavrapide','visibility','visible');\">" .
-		  http_img_pack("naviguer-site.png", "", "width='26' height='20'") ."</a>";
+		$res .= "\n<div style=\"max-height: 40px; width: 100%; border-bottom: solid 1px white;$style\">"
+	. "<table align='center' cellpadding='0' style='background: none;' width='$largeur'><tr>"
+		. "<td valign='middle' class='bandeau_couleur' style='text-align: $spip_lang_left;'>"
+		. "<a href='" . generer_url_ecrire("articles_tous") . "' class='icone26' onmouseover=\"changestyle('bandeautoutsite','visibility','visible');\">"
+		. http_img_pack("tout-site.png", "", "width='26' height='20'") . "</a>";
+		if ($id_rubrique > 0)
+			$res .= "<a href='" . generer_url_ecrire("brouteur","id_rubrique=$id_rubrique") . "' class='icone26' onmouseover=\"changestyle('bandeaunavrapide','visibility','visible');\">" .
+			  http_img_pack("naviguer-site.png", "", "width='26' height='20'") ."</a>";
 		else $res .= "<a href='" . generer_url_ecrire("brouteur") . "' class='icone26' onmouseover=\"changestyle('bandeaunavrapide','visibility','visible');\" >" .
 		  http_img_pack("naviguer-site.png", "", "width='26' height='20'") . "</a>";
 
