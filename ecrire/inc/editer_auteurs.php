@@ -15,7 +15,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/actions');
 
-define('_SPIP_SELECT_AUTEURS', 20); /* mettre 100000 pour desactiver ajax */
+// L'ajout d'un auteur se fait par mini-navigateur dans la fourchette:
+define('_SPIP_SELECT_MIN_AUTEURS', 10); // en dessous: balise Select
+define('_SPIP_SELECT_MAX_AUTEURS', 100); // au-dessus: saisie + return
 
 // http://doc.spip.org/@inc_editer_auteurs_dist
 function inc_editer_auteurs_dist($id_article, $flag, $cherche_auteur, $ids)
@@ -201,21 +203,22 @@ function ajouter_auteurs_articles($id_article, $les_auteurs)
 {
 	$query = determiner_non_auteurs($les_auteurs, "statut, nom");
 	if (!$num = spip_num_rows($query)) return '';
-
+	spip_log("nb auteur $num");
 	$js = "findObj_forcer('valider_ajouter_auteur').style.visibility='visible';";
 
 	$text = "<span class='verdana1'><b>"
 	. _T('titre_cadre_ajouter_auteur')
 	. "</b></span>\n";
 
-	$sel = ($num <= _SPIP_SELECT_AUTEURS 
+	$sel = (($num <= _SPIP_SELECT_MIN_AUTEURS)
 		? ("$text<select name='nouv_auteur' size='1' style='width:150px;' class='fondl' onchange=\"$js\">" .
 		   articles_auteur_select($query) .
 		   "</select>" .
 		   "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>" .
 		   " <input type='submit' value='"._T('bouton_ajouter')."' class='fondo' />" .
 		   "</span>")
-	   : (($_COOKIE['spip_accepte_ajax'] < 1)
+		: ((($_COOKIE['spip_accepte_ajax'] < 1) OR
+		    ($num >= _SPIP_SELECT_MAX_AUTEURS))
 	      ? ("$text <input type='text' name='cherche_auteur' onclick=\"$js\" class='fondl' value='' size='20' /><span  class='visible_au_chargement' id='valider_ajouter_auteur'>\n<input type='submit' value='"._T('bouton_chercher')."' class='fondo' /></span>")
 	      : (selecteur_auteur_ajax($id_article, $js, $text)
 		 .  "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>"
