@@ -516,8 +516,9 @@ function afficher_liste_fin_tableau() {
 
 
 // http://doc.spip.org/@puce_statut_article
-function puce_statut_article($id, $statut, $id_rubrique) {
+function puce_statut_article($id, $statut, $id_rubrique, $ajax = false) {
 	global $spip_lang_left, $dir_lang, $connect_statut, $options;
+	static $script=NULL;
 	
 	switch ($statut) {
 	case 'publie':
@@ -547,8 +548,9 @@ function puce_statut_article($id, $statut, $id_rubrique) {
 		break;
 	}
 	$puce = "puce-$puce.gif";
-	
-	if ($connect_statut == '0minirezo' AND $options == 'avancees' AND acces_rubrique($id_rubrique)) {
+
+	include_spip('inc/autoriser');
+	if (autoriser('publier_dans', 'rubrique', $id_rubrique)) {
 	  // les versions de MSIE ne font pas toutes pareil sur alt/title
 	  // la combinaison suivante semble ok pour tout le monde.
 	  $titles = array(
@@ -557,17 +559,44 @@ function puce_statut_article($id, $statut, $id_rubrique) {
 			  "verte" => _T('texte_statut_publie'),
 			  "rouge" => _T('texte_statut_refuse'),
 			  "poubelle" => _T('texte_statut_poubelle'));
-	  $action = "onmouseover=\"montrer('statutdecalarticle$id');\"";
-	  $inser_puce = "\n<div class='puce_article' id='statut$id'$dir_lang>"
-			. "\n<div class='puce_article_fixe' $action>" .
-		  http_img_pack("$puce", "", "id='imgstatutarticle$id' style='margin: 1px;'") ."</div>"
-			. "\n<div class='puce_article_popup' id='statutdecalarticle$id' onmouseout=\"cacher('statutdecalarticle$id');\" style=' margin-left: -".((11*$clip)+1)."px;'>\n"
-			. afficher_script_statut($id, 'article', -1, 'puce-blanche.gif', 'prepa', $titles['blanche'], $action)
-			. afficher_script_statut($id, 'article', -12, 'puce-orange.gif', 'prop', $titles['orange'], $action)
-			. afficher_script_statut($id, 'article', -23, 'puce-verte.gif', 'publie', $titles['verte'], $action)
-			. afficher_script_statut($id, 'article', -34, 'puce-rouge.gif', 'refuse', $titles['rouge'], $action)
-			. afficher_script_statut($id, 'article', -45, 'puce-poubelle.gif', 'poubelle', $titles['poubelle'], $action)
-		. "</div></div>";
+		if ($ajax){
+		  $action = "onmouseover=\"montrer('statutdecalarticle$id');\"";
+		  $inser_puce = 
+		  	// "\n<div class='puce_article' id='statut$id'$dir_lang>" .
+				"\n<div class='puce_article_fixe' $action>" .
+			  http_img_pack("$puce", "", "id='imgstatutarticle$id' style='margin: 1px;'") ."</div>"
+				. "\n<div class='puce_article_popup' id='statutdecalarticle$id' onmouseout=\"cacher('statutdecalarticle$id');\" style=' margin-left: -".((11*$clip)+1)."px;'>\n"
+				. afficher_script_statut($id, 'article', -1, 'puce-blanche.gif', 'prepa', $titles['blanche'], $action)
+				. afficher_script_statut($id, 'article', -12, 'puce-orange.gif', 'prop', $titles['orange'], $action)
+				. afficher_script_statut($id, 'article', -23, 'puce-verte.gif', 'publie', $titles['verte'], $action)
+				. afficher_script_statut($id, 'article', -34, 'puce-rouge.gif', 'refuse', $titles['rouge'], $action)
+				. afficher_script_statut($id, 'article', -45, 'puce-poubelle.gif', 'poubelle', $titles['poubelle'], $action)
+			. "</div>"
+			//. "</div>"
+			;
+		}
+		else{
+		  $inser_puce = "\n<div class='puce_article' id='statut$id'$dir_lang>".
+			  http_img_pack("$puce", "", "id='imgstatutarticle$id' style='margin: 1px;'") ."</div>"
+		  	. "</div>";
+			if ($script==NULL){
+				$action = "'".generer_url_ecrire('puce_statut_article',"id='+id",true);
+				$script = "<script type='text/javascript'><!--\n";
+				$script .= "$(document).ready(function(){
+					$('div.puce_article').onemouseover( function() {
+						id = $(this).id();
+						id = id.substr(6,id.length-1);
+						$('#statut'+id).load($action,function(){ 
+								$('#statutdecalarticle'+id).show(); 
+								/*$('#statut'+id).mouseover(function(){ $(this).children('.puce_article_popup').show(); });*/
+							});
+						});
+					
+				})";
+				$script .= "//--></script>";
+				$inser_puce = $script . $inser_puce;
+			}
+		}
 	} else {
 		$inser_puce = http_img_pack("$puce", "", "id='imgstatutarticle$id' style='margin: 1px;'");
 	}
@@ -631,7 +660,7 @@ function puce_statut_breve($id, $statut, $type, $droit) {
 // http://doc.spip.org/@afficher_script_statut
 function afficher_script_statut($id, $type, $n, $img, $statut, $title, $act)
 {
-  return http_href_img("javascript:selec_statut('$id', '$type', -1, '" .
+  return http_href_img("javascript:selec_statut('$id', '$type', $n, '" .
 		      http_wrapper($img) .
 		      "', '" .
 		       generer_action_auteur("instituer_$type","$id-$statut") .

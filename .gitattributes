@@ -413,6 +413,7 @@ ecrire/exec/mots_type.php -text
 ecrire/exec/naviguer.php -text
 ecrire/exec/petitionner.php -text
 ecrire/exec/plonger.php -text
+ecrire/exec/puce_statut_article.php -text
 ecrire/exec/recherche.php -text
 ecrire/exec/rechercher.php -text
 ecrire/exec/rechercher_auteur.php -text
