@@ -164,9 +164,11 @@ function onkey_rechercher(valeur, rac, url, img, nid, init) {
 			   	var n = Field.childNodes.length - 1;
 				// Safari = 0  & Firefox  = 1 !
 				// et gare aux negatifs en cas d'abort
-				if (!n  || (n == 1)) {
+				if ((n == 1)) {
 				  noeud = Field.childNodes[n].firstChild;
-				  aff_selection_titre(noeud.firstChild.nodeValue, noeud.title, rac, nid);
+				  if (noeud.title)
+				    // cas de la rubrique, pas des auteurs
+					  aff_selection_titre(noeud.firstChild.nodeValue, noeud.title, rac, nid);
 				}
 			   },
 			   img);

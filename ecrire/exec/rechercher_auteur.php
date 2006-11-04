@@ -26,7 +26,8 @@ function exec_rechercher_auteur_dist()
 			$where[$k] = "'%" . substr(str_replace("%","\%", _q($v)),1,-1) . "%'";
 		$where= ("(nom LIKE " . join(" AND nom LIKE ", $where) . ")");
 	}
-	$q = spip_query("SELECT * FROM spip_auteurs WHERE $where");
+
+	$q = spip_query("SELECT * FROM spip_auteurs WHERE $where ORDER BY nom");
 	include_spip('inc/selectionner_auteur');
 	ajax_retour(selectionner_auteur_boucle($q, $idom));
 }
