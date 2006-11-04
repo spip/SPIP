@@ -17,7 +17,7 @@ include_spip('inc/actions');
 include_spip('inc/acces');
 include_spip('base/abstract_sql');
 
-// http://doc.spip.org/@action_legender_auteur
+// http://doc.spip.org/@action_legender_auteur_dist
 function action_legender_auteur_dist()
 {
         $var_f = charger_fonction('controler_action_auteur', 'inc');

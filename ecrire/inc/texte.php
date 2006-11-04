@@ -810,7 +810,7 @@ function calculer_url_site($id, $texte='')
 	return array($lien, 'spip_out', $texte, $row['lang']);
 }
 
-// http://doc.spip.org/@calculer_url_site
+// http://doc.spip.org/@calculer_url_forum
 function calculer_url_forum($id, $texte='')
 {
 	$lien = generer_url_forum($id);

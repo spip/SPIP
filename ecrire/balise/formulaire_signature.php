@@ -25,11 +25,13 @@ spip_connect();
 // car on doit obtenir la jointure avec sql_petitions pour verifier si
 // une petition est attachee a l'article
 
+// http://doc.spip.org/@balise_FORMULAIRE_SIGNATURE
 function balise_FORMULAIRE_SIGNATURE ($p) {
 	return calculer_balise_dynamique($p,'FORMULAIRE_SIGNATURE', array('id_article', 'petition'));
 }
 
 // Verification des arguments (contexte + filtres)
+// http://doc.spip.org/@balise_FORMULAIRE_SIGNATURE_stat
 function balise_FORMULAIRE_SIGNATURE_stat($args, $filtres) {
 
 	// pas d'id_article => erreur de squelette
@@ -57,6 +59,7 @@ function balise_FORMULAIRE_SIGNATURE_stat($args, $filtres) {
 }
 
 // Executer la balise
+// http://doc.spip.org/@balise_FORMULAIRE_SIGNATURE_dyn
 function balise_FORMULAIRE_SIGNATURE_dyn($id_article, $petition, $texte, $site_obli, $message) {
 
 	if (_request('var_confirm')) # _GET
@@ -88,6 +91,7 @@ function balise_FORMULAIRE_SIGNATURE_dyn($id_article, $petition, $texte, $site_o
 // Sinon, c'est l'execution du formulaire et on retourne le message 
 // de confirmation ou d'erreur construit lors de l'appel par assembler.php
 
+// http://doc.spip.org/@reponse_confirmation
 function reponse_confirmation($var_confirm = '') {
 
 	static $confirm = '';
@@ -174,6 +178,7 @@ function reponse_confirmation($var_confirm = '') {
 // Retour a l'ecran de la signature d'une petition
 //
 
+// http://doc.spip.org/@reponse_signature
 function reponse_signature($id_article, $nom_email, $adresse_email, $message, $nom_site, $url_site, $url_page) {
 
 	if (!spip_connect()) return _T('form_pet_probleme_technique');
@@ -246,6 +251,7 @@ function reponse_signature($id_article, $nom_email, $adresse_email, $message, $n
 }
 
 
+// http://doc.spip.org/@test_pass
 function test_pass() {
 	include_spip('inc/acces');
 	for (;;) {

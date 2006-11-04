@@ -1613,6 +1613,7 @@ function direction_css ($css, $voulue='') {
 
 // recuperere le chemin d'une css existante et :
 // cree (ou recree) dans _DIR_VAR/cache_css/ une css dont les url relatives sont passees en url absolues
+// http://doc.spip.org/@url_absolue_css
 function url_absolue_css ($css) {
 	if (!preg_match(',\.css$,i', $css, $r)) return $css;
 
@@ -1641,6 +1642,7 @@ function url_absolue_css ($css) {
 
 // recuperere le chemin d'une css existante et :
 // cree (ou recree) dans _DIR_VAR/cache_css/ une css compactee en nettoyant tout ce qui n'est pas significatif
+// http://doc.spip.org/@compacte_css
 function compacte_css ($css) {
 	if (!preg_match(',\.css$,i', $css, $r)) return $css;
 	

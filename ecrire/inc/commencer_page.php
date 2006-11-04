@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Presentation de l'interface privee, debut du HTML
 //
 
-// http://doc.spip.org/@debut_page
+// http://doc.spip.org/@inc_commencer_page_dist
 function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $onLoad = "", $id_rubrique = "") {
 
 	include_spip('inc/headers');
