@@ -31,11 +31,17 @@ function afficher_messages($titre, $from, $where, &$messages_vus, $afficher_aute
 	}
 
 
-	if ($important)	echo "<div class='cadre-couleur'><div class='cadre-padding'>";
-	$t = affiche_tranche_bandeau($requete, "messagerie-24.gif", $couleur_foncee, "white", $tmp_var, $titre, false, $largeurs, $styles, 'afficher_message_boucles', $afficher_auteurs);
+	$res =  affiche_tranche_bandeau($requete, "messagerie-24.gif", $couleur_foncee, "white", $tmp_var, $titre, false, $largeurs, $styles, 'afficher_message_boucles', $afficher_auteurs);
 
-	foreach ($t as $v) $messages_vus[$v]= $v;
-	if ($important) echo '</div></div>';
+	$result = spip_query("SELECT messages.id_message FROM " . $requete['FROM'] . ' WHERE ' . $requete['WHERE']);
+
+	while ($r = spip_fetch_array($result)) {
+		$r = $r['id_message'];
+		$messages_vus[$r]= $r;
+	}
+	
+	if (!$important) return $res;
+	else return "<div class='cadre-couleur'><div class='cadre-padding'>$res</div></div>";
 }
 
 // http://doc.spip.org/@afficher_message_boucles

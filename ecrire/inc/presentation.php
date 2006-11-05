@@ -441,12 +441,13 @@ function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, 
 	if (!isset($requete['GROUP BY'])) $requete['GROUP BY'] = '';
 
 	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
-	if (! ($force OR ($cpt = $cpt['n']))) return  array();
+	if (! ($force OR ($cpt = $cpt['n']))) return '';
 
-	if ($titre) echo "<div style='height: 12px;'></div>";
-	echo "<div class='liste'>";
-	echo bandeau_titre_boite2('<b>' . $titre . '</b>', $icone, $fg, $bg, false);
-	echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
+	$res = "";
+	if ($titre) $res .= "<div style='height: 12px;'></div>";
+	$res .= "<div class='liste'>";
+	$res .= bandeau_titre_boite2('<b>' . $titre . '</b>', $icone, $fg, $bg, false);
+	$res .= "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
 	if (isset($requete['LIMIT'])) $cpt = min($requete['LIMIT'], $cpt);
 
 	$deb_aff = intval(_request($tmp_var));
@@ -454,22 +455,21 @@ function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, 
 
 	if ($cpt > $nb_aff) {
 		$nb_aff = (_TRANCHES); 
-		echo afficher_tranches_requete($cpt, $tmp_var, '', $nb_aff);
+		$res .= afficher_tranches_requete($cpt, $tmp_var, '', $nb_aff);
 	}
 
 	$result = spip_query("SELECT " . (isset($requete["SELECT"]) ? $requete["SELECT"] : "*") . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
 
 	$table = array();
-	$tous_id = array();
 	while ($row = spip_fetch_array($result)) {
 		$table[]= $skel($row, $tous_id, $voir_logo, $own);
 	}
 	spip_free_result($result);
 		
-	echo afficher_liste($largeurs, $table, $styles);
-	echo "</table>";
-	echo "</div>\n";
-	return $tous_id;
+	$res .= afficher_liste($largeurs, $table, $styles);
+	$res .= "</table>";
+	$res .= "</div>\n";
+	return $res;
 }
 
 

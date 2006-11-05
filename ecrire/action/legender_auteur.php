@@ -36,20 +36,21 @@ function action_legender_auteur_dist()
 // http://doc.spip.org/@action_legender_post
 function action_legender_post($r)
 {
-	global $auteur_session, $bio,
-	  $champs_extra,
-	  $auteur_session,
-	  $email,
-	  $id_auteur,
-	  $new_login,
-	  $new_pass,
-	  $new_pass2,
-	  $nom_site_auteur,
-	  $perso_activer_imessage,
-	  $pgp,
-	  $redirect,
-	  $statut,
-	  $url_site;
+	$auteur_session = _request('auteur_session');
+	$bio = _request('bio');
+	$champs_extra = _request('champs_extra');
+	$auteur_session = _request('auteur_session');
+	$email = _request('email');
+	$id_auteur = _request('id_auteur');
+	$new_login = _request('new_login');
+	$new_pass = _request('new_pass');
+	$new_pass2 = _request('new_pass2');
+	$nom_site_auteur = _request('nom_site_auteur');
+	$perso_activer_imessage = _request('perso_activer_imessage');
+	$pgp = _request('pgp');
+	$redirect = _request('redirect');
+	$statut = _request('statut');
+	$url_site = _request('url_site');
 
 	list($tout, $id_auteur, $ajouter_id_article,$x,$s, $n) = $r;
 

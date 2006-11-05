@@ -274,7 +274,7 @@ if ($relief) {
 	//
 	// Les breves a valider
 	//
-	afficher_breves(_T('info_breves_valider'), array("FROM" => 'spip_breves', 'WHERE' => "id_rubrique='$id_rubrique' AND (statut='prepa' OR statut='prop')", 'ORDER BY' => "date_heure DESC"), true);
+	echo afficher_breves(_T('info_breves_valider'), array("FROM" => 'spip_breves', 'WHERE' => "id_rubrique='$id_rubrique' AND (statut='prepa' OR statut='prop')", 'ORDER BY' => "date_heure DESC"), true);
 
 
 	//
@@ -282,7 +282,7 @@ if ($relief) {
 	//
 	if ($GLOBALS['meta']['activer_sites'] != 'non') {
 		include_spip('inc/sites_voir');
-		afficher_sites(_T('info_site_valider'), array("FROM" => 'spip_syndic', 'WHERE' => "id_rubrique='$id_rubrique' AND statut='prop'", 'ORDER BY' => "nom_site"));
+		echo afficher_sites(_T('info_site_valider'), array("FROM" => 'spip_syndic', 'WHERE' => "id_rubrique='$id_rubrique' AND statut='prop'", 'ORDER BY' => "nom_site"));
 	}
 
 	//
@@ -290,7 +290,7 @@ if ($relief) {
 	//
 	if ($GLOBALS['meta']['activer_sites'] != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		include_spip('inc/sites_voir');
-		afficher_sites(_T('avis_sites_syndiques_probleme'), array('FROM' => 'spip_syndic', 'WHERE' => "id_rubrique='$id_rubrique' AND (syndication='off' OR syndication='sus') AND statut='publie'", 'ORDER BY' => "nom_site"));
+		echo afficher_sites(_T('avis_sites_syndiques_probleme'), array('FROM' => 'spip_syndic', 'WHERE' => "id_rubrique='$id_rubrique' AND (syndication='off' OR syndication='sus') AND statut='publie'", 'ORDER BY' => "nom_site"));
 	}
 
 	// Les articles syndiques en attente de validation
@@ -335,7 +335,7 @@ if ($relief) {
 
 //// Les breves
 
-	afficher_breves(_T('icone_ecrire_nouvel_article'), array("FROM" => 'spip_breves', 'WHERE' => "id_rubrique='$id_rubrique' AND statut != 'prop' AND statut != 'prepa'", 'ORDER BY' => "date_heure DESC"));
+	echo afficher_breves(_T('icone_ecrire_nouvel_article'), array("FROM" => 'spip_breves', 'WHERE' => "id_rubrique='$id_rubrique' AND statut != 'prop' AND statut != 'prepa'", 'ORDER BY' => "date_heure DESC"));
 
 	$activer_breves=$GLOBALS['meta']["activer_breves"];
 
@@ -349,7 +349,7 @@ if ($relief) {
 
 	if ($GLOBALS['meta']["activer_sites"] == 'oui') {
 		include_spip('inc/sites_voir');
-		afficher_sites(_T('titre_sites_references_rubrique'), array("FROM" => 'spip_syndic', 'WHERE' => "id_rubrique='$id_rubrique' AND statut!='refuse' AND statut != 'prop' AND syndication NOT IN ('off','sus')", 'ORDER BY' => 'nom_site'));
+		echo afficher_sites(_T('titre_sites_references_rubrique'), array("FROM" => 'spip_syndic', 'WHERE' => "id_rubrique='$id_rubrique' AND statut!='refuse' AND statut != 'prop' AND syndication NOT IN ('off','sus')", 'ORDER BY' => 'nom_site'));
 
 		if ($id_rubrique > 0 AND ($flag_editable OR $GLOBALS['meta']["proposer_sites"]> 0)) {
 	
