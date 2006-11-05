@@ -297,7 +297,7 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'info_delet_mots_cles' => 'Dir w&euml;llt d\'Schl&euml;sselwuert
 <B>@titre_mot@</B> (@type_mot@) l&auml;schen. D&euml;st Wuert ass un
 <b>@texte_lie@</b> gebonnen, dir musst d&euml;s Decisioun valid&eacute;ieren:',
-'info_derniere_etape' => 'L&auml;schte Schr&euml;tt: <B>&Euml;t ass f&auml;rdeg!',
+'info_derniere_etape' => 'L&auml;schte Schr&euml;tt: &Euml;t ass f&auml;rdeg!',
 'info_derniere_syndication' => 'L&auml;scht Syndicatioun vun d&euml;sem Site den',
 'info_derniers_articles_publies' => '&Auml;r l&auml;scht publiz&eacute;iert Artikelen',
 'info_desactiver_forum_public' => 'D&eacute;i &ouml;ffentl&euml;ch Forum\'en ausschalten. &Ouml;ffentl&euml;ch Forum\'en k&euml;nnen vu Fall zu Fall pro Artikel ageschalt ginn; awer n&euml;t op de Rubriken, Kuerzmeldungen, asw.',
@@ -654,6 +654,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 
 
 // L
+'les_deux' => 'd&eacute;i zwee',
 'lien_ajout_destinataire' => 'Destinataire derb&auml;i setzen',
 'lien_ajouter_auteur' => 'D&euml;sen Auteur derb&auml;i setzen',
 'lien_ajouter_participant' => 'E Mataarbechter derb&auml;i setzen',

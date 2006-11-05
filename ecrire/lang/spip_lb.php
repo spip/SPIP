@@ -140,12 +140,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_jnum8' => '8',
 'date_jnum9' => '9',
 'date_jour_1' => 'Sonndeg',
+'date_jour_1_abbr' => 'Son.',
+'date_jour_1_initiale' => 'S.',
 'date_jour_2' => 'M&eacute;indeg',
+'date_jour_2_abbr' => 'M&eacute;i.',
+'date_jour_2_initiale' => 'M.',
 'date_jour_3' => 'D&euml;nschdeg',
+'date_jour_3_abbr' => 'D&euml;n.',
+'date_jour_3_initiale' => 'D.',
 'date_jour_4' => 'M&euml;ttwoch',
+'date_jour_4_abbr' => 'M&euml;t.',
+'date_jour_4_initiale' => 'M.',
 'date_jour_5' => 'Donneschdeg',
+'date_jour_5_abbr' => 'Don.',
+'date_jour_5_initiale' => 'D.',
 'date_jour_6' => 'Freideg',
+'date_jour_6_abbr' => 'Fre.',
+'date_jour_6_initiale' => 'F.',
 'date_jour_7' => 'Samschdeg',
+'date_jour_7_abbr' => 'Sam.',
+'date_jour_7_initiale' => 'S.',
 'date_jours' => 'Deg',
 'date_minutes' => 'Minuten',
 'date_mois' => 'M&eacute;int',
@@ -169,13 +183,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => ' fir d\'Installatioun richteg unzef&auml;nken',
 'dirs_preliminaire' => 'Fir d\'&eacute;ischt: <b>R&eacute;gl&eacute;iert d\'Zougangs-Rechter</b>',
 'dirs_probleme_droits' => 'Problem mat den Zougangs-Rechter',
-'dirs_repertoires_absents' => '<b>D&euml;s Dossier\'en konnten n&euml;t fonnt ginn: <ul>@bad_dirs@.</ul> </b>
-<p />&Euml;t ass m&eacute;iglech dass dat e Problem vu Grouss- oder Kleng-Schreiwen ass.
-Kontroll&eacute;iert op d&eacute;i grouss an d&eacute;i kleng Buchstawen mat deem wat hei ugewisen g&euml;t iwwerteneenst&euml;mmen; wann dat n&euml;t de Fall ass, &auml;nnert de Numm vun den Dossier\'en mat &auml;rer FTP-Sofware fir de Fehler ze verbesseren.
-<p />Wann dat gemaach ass, da k&euml;nnt der ',
-'dirs_repertoires_suivants' => '<b>D&euml;s Dossier\'en k&euml;nnen n&euml;t beschriwwen ginn: <ul>@bad_dirs@.</ul> </b>
-<p />Fir dat ze &auml;nneren, benotzt &auml;r FTP-Software fir d\'Zougangsrechter vun jidfer Dossier ze r&eacute;gl&eacute;ieren. D&euml;s Prozedur ass am Detail am Installatiouns-Guide beschriwwen.
-<p />Wann dat gemaach ass, da k&euml;nnt der ',
+'dirs_repertoires_absents' => '<p><b>D&euml;s Dossier\'en konnten n&euml;t fonnt ginn:</b></p><ul>@bad_dirs@.</ul>
+<p>Warscheinl&euml;ch ass dat e Problem vu Grouss- oder Kleng-Schreiwen.
+Kontroll&eacute;iert op d&eacute;i grouss an d&eacute;i kleng Buchstawen mat deem wat hei ugewisen g&euml;t iwwerteneenst&euml;mmen;
+wann dat n&euml;t de Fall ass, &auml;nnert de Numm vun den Dossier\'en mat &auml;rer FTP-Software fir de Fehler ze verbesseren.
+<p>Wann dat gemaach ass, da k&euml;nnt dier',
+'dirs_repertoires_suivants' => '<p><b>D&euml;s Dossier\'en k&euml;nnen n&euml;t beschriwwen ginn:</b></p><ul>@bad_dirs@.</ul>
+<p>Fir dat ze verbesseren, benotzt &auml;r FTP-Software fir d\'Zougangsrechter vun jidfer Dossier anzestellen.
+D&euml;s Prozedur ass am Detail an der Installatiouns-Prozedur beschriwwen.<p>
+<p>Wann dat gemaach ass, da k&euml;nnt dier ',
 
 
 // E
@@ -254,6 +270,7 @@ Merci fir &auml;r Participatioun
 'forum_acces_refuse' => 'Dir hutt keen Zougang m&eacute;i zu d&euml;se Forum\'en.',
 'forum_attention_dix_caracteres' => '<b>Opgepasst!</b> &Auml;re Message muss op manst 10 Buchstawen hun.',
 'forum_attention_trois_caracteres' => '<b>Opgepasst!</b> &Auml;ren Titel muss op manst 3 Buchstawen hun.',
+'forum_attention_trop_caracteres' => '<b>Opgepasst!</b> &Auml;re Message ass ze laang (@compte@ Buchstawen): fir enregistr&eacute;iert ze ginn d&auml;rf hien n&euml;t m&eacute;i w&eacute;i @max@ Buchstawen hun.',
 'forum_avez_selectionne' => 'Dir hutt gewielt:',
 'forum_cliquer_retour' => '<a href=\'@retour_forum@\'>Hei klicken</a> fir weider.',
 'forum_forum' => 'Forum',

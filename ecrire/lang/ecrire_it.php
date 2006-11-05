@@ -30,7 +30,7 @@ rischio di distruzione del database, malfunzionamenti diversi del sito ecc.
 Non confermare questa richiesta d\'importazione!
 <p />Per ulteriori informazioni, vedere <A HREF=\'http://www.spip.net/it_article2827.html\'>
 la documentazione di SPIP</a>.',
-'avis_espace_interdit' => '<B>Area vietata</B><p />SPIP &egrave; gi&agrave; installato.</p>',
+'avis_espace_interdit' => '<b>Area vietata</b><div>SPIP &egrave; gi&agrave; installato.</div>',
 'avis_lecture_noms_bases_1' => 'Il programma di installazione non ha potuto leggere i nomi dei database installati nel server.',
 'avis_lecture_noms_bases_2' => 'Nessun database &egrave; disponibile, o la funzione che permette di accedere alla lista database &egrave;
 disattivata per motivi sicurezza (verifica con l\'amministratore di sistema).',
@@ -312,7 +312,7 @@ immagini inserite. Ci&ograve; permette ad esempio di creare in automatico una ga
 di eliminare la parola chiave
 <B>@titre_mot@</b> (@type_mot@). Essendo quest\'ultima collegata a
 <b>@texte_lie@</b>, &egrave; necessario confermare la decisione:',
-'info_derniere_etape' => 'Ultima fase: <B>Finito!',
+'info_derniere_etape' => 'Ultima fase: Finito!',
 'info_derniere_syndication' => 'L\'ultima <em>syndication</em> di questo sito &egrave; stata effettuata il',
 'info_derniers_articles_publies' => 'I tuoi ultimi articoli pubblicati',
 'info_desactiver_forum_public' => 'Disattiva l\'uso dei forum pubblici.

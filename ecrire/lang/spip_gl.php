@@ -184,14 +184,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => ' para escomezar realmente a instalaci&oacute;n',
 'dirs_preliminaire' => 'Preliminar: <B>Regular os permisos de acceso</B>',
 'dirs_probleme_droits' => 'Problema de permisos de acceso',
-'dirs_repertoires_absents' => '<B>Os directorios seguintes non foron encontrados&nbsp;: <ul>@bad_dirs@.</ul> </B>
+'dirs_repertoires_absents' => '<p><B>Os directorios seguintes non foron atopados&nbsp;:</b></p><ul>@bad_dirs@.</ul>
   <P>&Eacute; probable que iso se deba a un problema de uso de mai&uacute;sculas ou min&uacute;sculas.
   Verifique que as min&uacute;sculas e mai&uacute;sculas destes directorios concorden ben co que se amosa
- aqu&iacute; abaixo; se non &eacute; ese o caso, renomee os directorios co seu programa de FTP de xeito que se corrixa o erro.
+ aqu&iacute; abaixo; se non &eacute; ese o caso, renomee os directorios co seu programa de FTP de xeito que se corrixa o erro.</p>
   <P>Logo de facer este cambio, poder&aacute; ',
-'dirs_repertoires_suivants' => '<B>Non se pode acceder para escribir nos directorios seguintes: <ul>@bad_dirs@.</ul></B>
-  <P>Para arranxalo, empregue o seu cliente de FTP e cambia os permisos de acceso de cada un
-  deles. O procedemento est&aacute; explicado polo mi&uacute;do na gu&iacute;a de instalaci&oacute;n.
+'dirs_repertoires_suivants' => '<p><B>Non se pode acceder para escribir nos directorios seguintes:</b></p><ul>@bad_dirs@.</ul>
+  <P>Para arranxalo, empregue o seu cliente de FTP e cambie os permisos de acceso de cada un
+  deles. O procedemento est&aacute; explicado polo mi&uacute;do na gu&iacute;a de instalaci&oacute;n.</p>
   <P>Unha vez feito isto, poder&aacute; ',
 
 

@@ -187,15 +187,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => ' per iniziare realmente l\'installazione',
 'dirs_preliminaire' => 'Prima di iniziare: <B>impostare i diritti di accesso</b>',
 'dirs_probleme_droits' => 'Problema nei diritti di accesso',
-'dirs_repertoires_absents' => '<B>Le seguenti cartelle non sono state trovate: <ul>@bad_dirs@.</ul> </B>
-  <p />Probabilmente ci&ograve; &egrave; dovuto a un\'errata formattazione delle lettere maiuscole o minuscole.
+'dirs_repertoires_absents' => '<p><b>Le seguenti cartelle non sono state trovate: </b></p><ul>@bad_dirs@.</ul>
+  <p>Probabilmente ci&ograve; &egrave; dovuto a un\'errata formattazione delle lettere maiuscole o minuscole.
   Verificare che le maiuscole e le minuscole delle cartelle coincidano con quelle visualizzate
-  qui sopra; se non &egrave; cos&igrave;, rinomina le cartelle utilizzando il tuo software FTP.
-  <p />Una volta effettuata questa correzione, si potr&agrave;',
-'dirs_repertoires_suivants' => '<B>Le seguenti cartelle non sono accessibili in scrittura: <ul>@bad_dirs@.</ul></b>
-<p />Utilizzare un client FTP o un comando di shell [chmod] per impostare i diritti di accesso
-di ciascuna di queste cartelle. La procedura &egrave; spiegata in dettaglio nella guida d\'installazione.
-<p />Una volta attribuiti i permessi, si potr&agrave; ',
+  qui sopra; se non &egrave; cos&igrave;, rinominare le cartelle utilizzando il software FTP.</p>
+  <p>Una volta effettuata questa correzione, si potr&agrave;',
+'dirs_repertoires_suivants' => '<p><b>Le seguenti cartelle non sono accessibili in scrittura:</b></p> <ul>@bad_dirs@.</ul>
+<p>Per risolvere il problema, utilizzare un client FTP per impostare i diritti di accesso
+di ciascuna di queste cartelle. La procedura &egrave; spiegata in dettaglio nella guida d\'installazione.</p>
+<p>Una volta attribuiti i permessi, si potr&agrave; ',
 
 
 // E
