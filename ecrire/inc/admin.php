@@ -45,19 +45,19 @@ function debut_admin($form, $action, $commentaire='') {
 	minipres(_T('info_action', array('action' => $action)),
 		  $commentaire
 		. $form
-		. "\n<p><b>"._T('info_authentification_ftp')."</b>"
-		. aide("ftp_auth")
-		. "\n<p>"
-		. _T('info_creer_repertoire')
-		. "\n<p align='center'>\n<INPUT TYPE='text' NAME='fichier' CLASS='fondl' VALUE=\"".
-		 $signal
-		. "\" size='30'>"
-		. "\n<p>"
-		. _T('info_creer_repertoire_2',
-			array('repertoire' => joli_repertoire($dir)))
-		. "\n<p align='right'><INPUT TYPE='submit' VALUE='"
-		. _T('bouton_recharger_page')
-		. "' CLASS='fondo'>"
+		. fieldset(_T('info_authentification_ftp').aide("ftp_auth"),
+			array(
+				'fichier' => array(
+					'label' => _T('info_creer_repertoire'),
+					'valeur' => $signal
+				),
+				'bouton' => array(
+					'label' => _T('info_creer_repertoire_2', array('repertoire' => joli_repertoire($dir))).bouton_suivant(_T('bouton_recharger_page')),
+					'valeur' => 'bouton',
+					'hidden' => true
+				)
+			)
+		)
 		. "</form>");
 }
 

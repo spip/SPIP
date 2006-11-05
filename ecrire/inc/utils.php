@@ -428,11 +428,13 @@ function _L($text, $args=array()) {
 }
 
 // Afficher "ecrire/data/" au lieu de "data/" dans les messages
+// ou tmp/ au lieu de ../tmp/
 // http://doc.spip.org/@joli_repertoire
 function joli_repertoire($rep) {
 	$a = substr($rep,0,1);
 	if ($a<>'.' AND $a<>'/')
 		$rep = (_DIR_RESTREINT?'':_DIR_RESTREINT_ABS).$rep;
+	$rep = preg_replace(',(^\.\.\/),', '', $rep);
 	return $rep;
 }
 
@@ -971,7 +973,7 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	define('_DIR_LOGOS', $pa);
 	define('_DIR_IMG_ICONES', $pa . "icones/");
 
-	define('_DIR_DUMP', $ti . "data/");
+	define('_DIR_DUMP', $ti . "dump/");
 	define('_DIR_SESSIONS', $ti . "sessions/");
 	define('_DIR_TRANSFERT', $ti . "upload/");
 	define('_DIR_CACHE', $ti . "CACHE/");
