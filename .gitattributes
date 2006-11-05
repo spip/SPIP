@@ -117,6 +117,8 @@ dist/images/messagerie-48.png -text
 dist/images/monter-16.png -text
 dist/images/mot-cle-24.gif -text
 dist/images/naviguer-site.png -text
+dist/images/noeud_moins.gif -text
+dist/images/noeud_plus.gif -text
 dist/images/ortho-24.gif -text
 dist/images/pense-bete.gif -text
 dist/images/petite-cle.gif -text
@@ -214,9 +216,12 @@ dist/inc-petition.html -text
 dist/inc-pied.html -text
 dist/inc-rss-item.html -text
 dist/inc-rubriques.html -text
+dist/javascript/articles_tous_edite.js -text
 dist/javascript/async_upload.js -text
+dist/javascript/dragdrop_interface.js -text
 dist/javascript/jquery-1.0.2-forms.js -text
 dist/javascript/jquery-1.0.2-forms.pack.js -text
+dist/javascript/pause.js -text
 dist/modeles/article_mots.html -text
 dist/modeles/article_traductions.html -text
 dist/modeles/doc.html -text
@@ -332,6 +337,7 @@ ecrire/action/purger.php -text
 ecrire/action/redirect.php -text
 ecrire/action/referencer_traduction.php -text
 ecrire/action/regler_moderation.php -text
+ecrire/action/reorganiser.php -text
 ecrire/action/supprimer.php -text
 ecrire/action/supprimer_traduction.php -text
 ecrire/action/test_dirs.php -text
