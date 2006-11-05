@@ -145,14 +145,18 @@ function definir_barre_boutons() {
 
 	// sous menu auteurs
 
-	$boutons_admin['auteurs']->sousmenu= array(
-		'auteurs_edit' => 
-		  new Bouton("fiche-perso-24.gif", "icone_informations_personnelles",
-			null, 'id_auteur='.$GLOBALS['connect_id_auteur']),
-		'auteur_infos' => 
-		  new Bouton("auteur-24.gif", "icone_creer_nouvel_auteur",
-					 null, 'new=oui')
-	);
+	$sousmenu=array();
+
+	$n = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE statut='6forum' LIMIT 1"));
+
+	if ($n)
+		$sousmenu['auteurs'] = 
+			new Bouton("fiche-perso.png", 'icone_afficher_visiteurs', null, "statut=6forum");
+
+	$sousmenu['auteur_infos']=
+		new Bouton("auteur-24.gif", "icone_creer_nouvel_auteur", null, 'new=oui');
+
+	$boutons_admin['auteurs']->sousmenu= $sousmenu;
 
 	// sous menu statistiques
 	if (isset($boutons_admin['statistiques_visites'])) {

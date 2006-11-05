@@ -44,7 +44,6 @@ function action_legender_post($r)
 	  $new_login,
 	  $new_pass,
 	  $new_pass2,
-	  $nom,
 	  $nom_site_auteur,
 	  $perso_activer_imessage,
 	  $pgp,
@@ -71,7 +70,7 @@ function action_legender_post($r)
 		    $statut = $s;
 		  else spip_log("action_legender_auteur_dist: statut $s incompris");
 		}
-	  } 
+	  } else $nom = _request('nom'); // risque de conflits en globale.
 
 	  $acces = ($id_auteur == $auteur_session['id_auteur']) ? true : " a voir ";
 	  $auteur['nom'] = corriger_caracteres($nom);

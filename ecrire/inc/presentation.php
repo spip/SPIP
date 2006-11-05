@@ -1564,15 +1564,6 @@ function bandeau_barre_verticale(){
 }
 
 
-// lien changement de couleur
-// http://doc.spip.org/@lien_change_var
-function lien_change_var($lien, $set, $couleur, $coords, $titre, $mouseOver="") {
-	$lien = parametre_url($lien, $set, $couleur);
-	return "\n<area shape='rect' href='$lien' coords='$coords' title=\"$titre\" alt=' ' $mouseOver />";
-}
-
-
-
 // http://doc.spip.org/@gros_titre
 function gros_titre($titre, $ze_logo='', $aff=true){
 	global $couleur_foncee, $spip_display;
