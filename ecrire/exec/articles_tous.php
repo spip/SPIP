@@ -31,7 +31,7 @@ function exec_articles_tous_dist()
 		OR $GLOBALS['meta']['multi_articles'] == 'oui') 
 		AND $GLOBALS['meta']['gerer_trad'] == 'oui');
 
-	list($article,$text_article) = texte_articles_tous($sel_lang, $flag_trad, $aff_art);
+	list($article,$text_article,$aff_statut) = texte_articles_tous($sel_lang, $flag_trad, $aff_art);
 	if (_request('var_ajaxcharset')&&_request('id_rubrique')) ajax_retour(afficher_contenu_rubrique($article, $enfant, $text_article, _request('id_rubrique'), $flag_trad, 2));
 
  	pipeline('exec_init',array('args'=>array('exec'=>'articles_tous'),'data'=>''));
@@ -166,7 +166,7 @@ function texte_articles_tous(&$sel_lang, $flag_trad, $aff_art){
 					"<a class='$c' href='" . generer_url_ecrire("articles","id_article=$id_article") . "'>$lang</a>";
 			}
 		}
-	return array($article,$text_article);
+	return array($article,$text_article,$aff_statut);
 }
 
 //  checkbox avec image
