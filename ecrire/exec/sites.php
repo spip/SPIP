@@ -222,7 +222,7 @@ pipeline('exec_init',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic
 
 
 $commencer_page = charger_fonction('commencer_page', 'inc');
-echo $commencer_page("$titre_page","naviguer","sites", "", $id_rubrique);
+echo $commencer_page("$titre_page","naviguer","sites", $id_rubrique);
 
 
 //////// parents

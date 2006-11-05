@@ -127,7 +127,7 @@ foreach ($textes as $var => $t) $$var = $t;
 
 
 $commencer_page = charger_fonction('commencer_page', 'inc');
-echo $commencer_page(_T('info_historique')." &laquo; $titre &raquo;", "naviguer", "articles", "", $id_rubrique);
+echo $commencer_page(_T('info_historique')." &laquo; $titre &raquo;", "naviguer", "articles", $id_rubrique);
 
 debut_grand_cadre();
 

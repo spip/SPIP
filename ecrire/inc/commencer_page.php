@@ -17,15 +17,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 
 // http://doc.spip.org/@inc_commencer_page_dist
-function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $onLoad = "", $id_rubrique = "") {
+function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $id_rubrique = "") {
 
 	include_spip('inc/headers');
 
 	http_no_cache();
 
 	return init_entete($titre, $id_rubrique)
-	. init_body($rubrique, $sous_rubrique, $onLoad, $id_rubrique)
-	. "<center onmouseover='recherche_desesperement()'>" // ????
+	. init_body($rubrique, $sous_rubrique, $id_rubrique)
+	. "<div id='page' align='center'>"
 	. avertissement_messagerie()
 	  . ((($rubrique == "messagerie") OR (_request('changer_config')!="oui"))
 	     ? auteurs_recemment_connectes() : '');
@@ -53,6 +53,10 @@ function init_entete($titre='', $id_rubrique=0) {
 	<script type="text/javascript"><!--
 	$(document).ready(function(){
 		verifForm();
+		$("#page")
+		.mouseover(function(){
+			changestyle("garder-recherche");
+		});
 	'
 	.
 	repercuter_gadgets($id_rubrique)
@@ -70,7 +74,7 @@ function init_entete($titre='', $id_rubrique=0) {
 
 // fonction envoyant la double serie d'icones de redac
 // http://doc.spip.org/@init_body
-function init_body($rubrique='accueil', $sous_rubrique='accueil', $load='', $id_rubrique='') {
+function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='') {
 	global $couleur_foncee, $couleur_claire;
 	global $connect_id_auteur, $connect_toutes_rubriques;
 	global $auth_can_disconnect;
@@ -79,13 +83,11 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $load='', $id_
 
 	if ($spip_ecran == "large") $largeur = 974; else $largeur = 750;
 
-	if ($load) $load = " onload=\"$load\"";
-
-	$res = pipeline('body_prive',"<body ". _ATTRIBUTES_BODY	.$load . '>')
+	$res = pipeline('body_prive',"<body ". _ATTRIBUTES_BODY . '>')
 	.  "\n<map name='map_layout'>"
-	. lien_change_var (self(), 'set_disp', 1, '1,0,18,15', _T('lien_afficher_texte_seul'), "onmouseover=\"changestyle('bandeauvide','visibility', 'visible');\"")
-	. lien_change_var (self(), 'set_disp', 2, '19,0,40,15', _T('lien_afficher_texte_icones'), "onmouseover=\"changestyle('bandeauvide','visibility', 'visible');\"")
-	. lien_change_var (self(), 'set_disp', 3, '41,0,59,15', _T('lien_afficher_icones_seuls'), "onmouseover=\"changestyle('bandeauvide','visibility', 'visible');\"")
+	. lien_change_var (self(), 'set_disp', 1, '1,0,18,15', _T('lien_afficher_texte_seul'), "onmouseover=\"changestyle('bandeauvide');\"")
+	. lien_change_var (self(), 'set_disp', 2, '19,0,40,15', _T('lien_afficher_texte_icones'), "onmouseover=\"changestyle('bandeauvide');\"")
+	. lien_change_var (self(), 'set_disp', 3, '41,0,59,15', _T('lien_afficher_icones_seuls'), "onmouseover=\"changestyle('bandeauvide');\"")
 	. "\n</map>";
 
 	if ($spip_display == "4") {
@@ -111,31 +113,31 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $load='', $id_
 		$res .= "\n<div style=\"max-height: 40px; width: 100%; border-bottom: solid 1px white;$style\">"
 	. "<table align='center' cellpadding='0' style='background: none;' width='$largeur'><tr>"
 		. "<td valign='middle' class='bandeau_couleur' style='text-align: $spip_lang_left;'>"
-		. "<a href='" . generer_url_ecrire("articles_tous") . "' class='icone26' onmouseover=\"changestyle('bandeautoutsite','visibility','visible');\">"
+		. "<a href='" . generer_url_ecrire("articles_tous") . "' class='icone26' onmouseover=\"changestyle('bandeautoutsite');\">"
 		. http_img_pack("tout-site.png", "", "width='26' height='20'") . "</a>";
 		if ($id_rubrique > 0)
-			$res .= "<a href='" . generer_url_ecrire("brouteur","id_rubrique=$id_rubrique") . "' class='icone26' onmouseover=\"changestyle('bandeaunavrapide','visibility','visible');\">" .
+			$res .= "<a href='" . generer_url_ecrire("brouteur","id_rubrique=$id_rubrique") . "' class='icone26' onmouseover=\"changestyle('bandeaunavrapide');\">" .
 			  http_img_pack("naviguer-site.png", "", "width='26' height='20'") ."</a>";
-		else $res .= "<a href='" . generer_url_ecrire("brouteur") . "' class='icone26' onmouseover=\"changestyle('bandeaunavrapide','visibility','visible');\" >" .
+		else $res .= "<a href='" . generer_url_ecrire("brouteur") . "' class='icone26' onmouseover=\"changestyle('bandeaunavrapide');\" >" .
 		  http_img_pack("naviguer-site.png", "", "width='26' height='20'") . "</a>";
 
-		$res .= "<a href='" . generer_url_ecrire("recherche") . "' class='icone26' onmouseover=\"changestyle('bandeaurecherche','visibility','visible'); findObj('form_recherche').focus();\" >" .
+		$res .= "<a href='" . generer_url_ecrire("recherche") . "' class='icone26' onmouseover=\"changestyle('bandeaurecherche'); findObj('form_recherche').focus();\" >" .
 		  http_img_pack("loupe.png", "", "width='26' height='20'") ."</a>";
 
 		$res .= http_img_pack("rien.gif", " ", "width='10'");
 
-		$res .= "<a href='" . generer_url_ecrire("calendrier","type=semaine") . "' class='icone26' onmouseover=\"changestyle('bandeauagenda','visibility','visible');\">" .
+		$res .= "<a href='" . generer_url_ecrire("calendrier","type=semaine") . "' class='icone26' onmouseover=\"changestyle('bandeauagenda');\">" .
 		  http_img_pack("cal-rv.png", "", "width='26' height='20'") ."</a>"
-		. "<a href='" . generer_url_ecrire("messagerie") . "' class='icone26' onmouseover=\"changestyle('bandeaumessagerie','visibility','visible');\">" .
+		. "<a href='" . generer_url_ecrire("messagerie") . "' class='icone26' onmouseover=\"changestyle('bandeaumessagerie');\">" .
 		  http_img_pack("cal-messagerie.png", "", "width='26' height='20'") ."</a>"
-		. "<a href='" . generer_url_ecrire("synchro") . "' class='icone26' onmouseover=\"changestyle('bandeausynchro','visibility','visible');\">" .
+		. "<a href='" . generer_url_ecrire("synchro") . "' class='icone26' onmouseover=\"changestyle('bandeausynchro');\">" .
 		  http_img_pack("cal-suivi.png", "", "width='26' height='20'") . "</a>";
 		
 
 		if (!($connect_toutes_rubriques)) {
 			$res .= http_img_pack("rien.gif", " ", "width='10'");
-			$res .= "<a href='" . generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur&initial=-1") . "' class='icone26' onmouseover=\"changestyle('bandeauinfoperso','visibility','visible');\">" .
-			  http_img_pack("fiche-perso.png", "", "onmouseover=\"changestyle('bandeauvide','visibility', 'visible');\"");
+			$res .= "<a href='" . generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur&initial=-1") . "' class='icone26' onmouseover=\"changestyle('bandeauinfoperso');\">" .
+			  http_img_pack("fiche-perso.png", "", "onmouseover=\"changestyle();\"");
 			$res .= "</a>";
 		}
 		
@@ -166,7 +168,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $load='', $id_
 				$lien = parametre_url(self(), 'set_options', 'basiques');
 				$icone = "interface-display.png";
 	}
-	$res .= "<a href='$lien' class='icone26' onmouseover=\"changestyle('bandeaudisplay','visibility', 'visible');\">"
+	$res .= "<a href='$lien' class='icone26' onmouseover=\"changestyle('bandeaudisplay');\">"
 	. http_img_pack($icone, "", "width='26' height='20'")."</a>"
 	. http_img_pack("rien.gif", " ", "width='10' height='1'")
 
@@ -175,12 +177,12 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $load='', $id_
 			// grand ecran
 	if ($spip_ecran == "large") {
 				$i = _T('info_petit_ecran');
-				$res .= "<a href='". parametre_url(self(),'set_ecran', 'etroit') ."' class='icone26' onmouseover=\"changestyle('bandeauecran','visibility', 'visible');\" title=\"$i\">" .
+				$res .= "<a href='". parametre_url(self(),'set_ecran', 'etroit') ."' class='icone26' onmouseover=\"changestyle('bandeauecran');\" title=\"$i\">" .
 				  http_img_pack("set-ecran-etroit.png", $i, "width='26' height='20'") . "</a>";
 				$ecran = "<div><a href='".parametre_url(self(),'set_ecran', 'etroit')."' class='lien_sous'>"._T('info_petit_ecran')."</a>/<b>"._T('info_grand_ecran')."</b></div>";
 	} else {
 				$i = _T('info_grand_ecran');
-				$res .= "<a href='".parametre_url(self(),'set_ecran', 'large')."' class='icone26' onmouseover=\"changestyle('bandeauecran','visibility', 'visible');\" title=\"$i\">" .
+				$res .= "<a href='".parametre_url(self(),'set_ecran', 'large')."' class='icone26' onmouseover=\"changestyle('bandeauecran');\" title=\"$i\">" .
 				  http_img_pack("set-ecran.png", $i, "width='26' height='20'") ."</a>";
 				$ecran = "<div><b>"._T('info_petit_ecran')."</b>/<a href='".parametre_url(self(),'set_ecran', 'large')."' class='lien_sous'>"._T('info_grand_ecran')."</a></div>";
 			}
@@ -203,7 +205,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $load='', $id_
 	if ($auth_can_disconnect) {
 			$res .= "<a href='".
 			  generer_url_action("logout","logout=prive") .
-			  "' class='icone26' onmouseover=\"changestyle('bandeaudeconnecter','visibility', 'visible');\">" .
+			  "' class='icone26' onmouseover=\"changestyle('bandeaudeconnecter');\">" .
 			  http_img_pack("deconnecter-24.gif", "", "") .
 			  "</a>";
 			}

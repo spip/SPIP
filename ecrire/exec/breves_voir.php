@@ -59,7 +59,7 @@ function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $select_gr
 	);
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page("&laquo; $titre_breve &raquo;", "naviguer", "breves", "", $id_rubrique);
+	echo $commencer_page("&laquo; $titre_breve &raquo;", "naviguer", "breves", $id_rubrique);
 	
 	debut_grand_cadre();
 	

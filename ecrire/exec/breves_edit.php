@@ -63,7 +63,7 @@ else {
 pipeline('exec_init',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''));
 
 $commencer_page = charger_fonction('commencer_page', 'inc');
-echo $commencer_page(_T('titre_page_breves_edit', array('titre' => $titre)), "naviguer", "breves", "", $id_rubrique);
+echo $commencer_page(_T('titre_page_breves_edit', array('titre' => $titre)), "naviguer", "breves", $id_rubrique);
 
 
 debut_grand_cadre();

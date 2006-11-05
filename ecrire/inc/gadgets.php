@@ -99,7 +99,7 @@ function gadget_rubriques() {
 
 			if ($count_lignes == $max_lignes) {
 				$count_lignes = 0;
-				$ret .= "</div></td><td valign='top' width='200'><div>&nbsp;</div><div class='bandeau_rubriques' style='z-index: 1;'>";
+				$ret .= "</div></td><td valign='top' width='200'><div>&nbsp;</div><div class='bandeau bandeau_rubriques' style='z-index: 1;'>";
 			}
 			$count_lignes ++;
 
@@ -293,7 +293,7 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 	"\n<table width='$largeur' cellpadding='0' cellspacing='0' align='center'><tr><td>\n<div style='position: relative; z-index: 1000;'>"
 
 	// GADGET Menu rubriques
-	. "\n<div id='bandeautoutsite' class='bandeau_couleur_sous' style='$spip_lang_left: 0px;'>"
+	. "\n<div id='bandeautoutsite' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 0px;'>"
 	. "<a href='"
 	. generer_url_ecrire("articles_tous")
 	. "' class='lien_sous'" 
@@ -309,7 +309,7 @@ onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; char
 
 
 	// GADGET Navigation rapide
-	$bandeau .= "<div id='bandeaunavrapide' class='bandeau_couleur_sous' style='$spip_lang_left: 30px;'>"
+	$bandeau .= "<div id='bandeaunavrapide' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 30px;'>"
 	. "<a href='" . generer_url_ecrire("brouteur", ($id_rubrique ? "id_rubrique=$id_rubrique" : '')) . "' class='lien_sous'>" . _T('icone_brouteur') . "</a>"
 	. "<div id='gadget-navigation'></div>\n"
 	. "</div>\n";
@@ -318,7 +318,7 @@ onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; char
 	// GADGET Recherche
 	// attribut non conforme ==> le generer dynamiquement
 	$js = 'this.setAttribute(\'autocomplete\', \'off\')';
-	$bandeau .= "<div id='bandeaurecherche' class='bandeau_couleur_sous' style='$spip_lang_left: 60px;'>"
+	$bandeau .= "<div id='bandeaurecherche' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 60px;'>"
 	. "<form method='get' style='margin: 0px; position: relative;' action='"
 	 . generer_url_ecrire("recherche")
 	. "'>"
@@ -331,7 +331,7 @@ onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; char
 	// FIN GADGET recherche
 
 	// GADGET Agenda
-	$bandeau .= "<div id='bandeauagenda' class='bandeau_couleur_sous' style='$spip_lang_left: 100px;'>"
+	$bandeau .= "<div id='bandeauagenda' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 100px;'>"
 	. "<a href='" . generer_url_ecrire("calendrier","type=semaine") . "' class='lien_sous'>"
 	. _T('icone_agenda')
 	. "</a>"
@@ -342,7 +342,7 @@ onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; char
 
 	// GADGET Messagerie
 	$gadget = '';
-	$gadget .= "<div id='bandeaumessagerie' class='bandeau_couleur_sous' style='$spip_lang_left: 130px;'>";
+	$gadget .= "<div id='bandeaumessagerie' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 130px;'>";
 	$gadget .= "<a href='" . generer_url_ecrire("messagerie") . "' class='lien_sous'>";
 	$gadget .= _T('icone_messagerie_personnelle');
 	$gadget .= "</a>";
@@ -355,7 +355,7 @@ onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; char
 
 
 	// Suivi activite
-	$bandeau .= "<div id='bandeausynchro' class='bandeau_couleur_sous' style='$spip_lang_left: 160px;'>";
+	$bandeau .= "<div id='bandeausynchro' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 160px;'>";
 	$bandeau .= "<a href='" . generer_url_ecrire("synchro") . "' class='lien_sous'>";
 	$bandeau .= _T('icone_suivi_activite');
 	$bandeau .= "</a>";
@@ -363,7 +363,7 @@ onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; char
 	$bandeau .= "</div>";
 	
 		// Infos perso
-	$bandeau .= "<div id='bandeauinfoperso' class='bandeau_couleur_sous' style='$spip_lang_left: 200px;'>";
+	$bandeau .= "<div id='bandeauinfoperso' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 200px;'>";
 	$bandeau .= "<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$connect_id_auteur") . "' class='lien_sous'>";
 	$bandeau .= _T('icone_informations_personnelles');
 	$bandeau .= "</a>";
@@ -374,20 +374,20 @@ onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; char
 		// -------- Affichage de droite ----------
 	
 		// Deconnection
-	$bandeau .= "<div class='bandeau_couleur_sous' id='bandeaudeconnecter' style='$spip_lang_right: 0px;'>";
+	$bandeau .= "<div class='bandeau bandeau_couleur_sous' id='bandeaudeconnecter' style='$spip_lang_right: 0px;'>";
 	$bandeau .= "<a href='" . generer_url_action("logout","logout=prive") . "' class='lien_sous'>"._T('icone_deconnecter')."</a>".aide("deconnect");
 	$bandeau .= "</div>";
 	
 	$decal = 0;
 	$decal = $decal + 150;
 
-	$bandeau .= "<div id='bandeauinterface' class='bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>";
+	$bandeau .= "<div id='bandeauinterface' class='bandeau bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>";
 	$bandeau .= _T('titre_changer_couleur_interface');
 	$bandeau .= "</div>";
 		
 	$decal = $decal + 70;
 		
-	$bandeau .= "<div id='bandeauecran' class='bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>";
+	$bandeau .= "<div id='bandeauecran' class='bandeau bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>";
 	if ($spip_ecran == "large") 
 			$bandeau .= "<div><a href='".parametre_url(self(),'set_ecran', 'etroit')."' class='lien_sous'>"._T('info_petit_ecran')."</a>/<b>"._T('info_grand_ecran')."</b></div>";
 	else
@@ -398,11 +398,11 @@ onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; char
 		
 	// En interface simplifiee, afficher en permanence l'indication de l'interface
 	if ($options != "avancees") {
-			$bandeau .= "<div id='displayfond' class='bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right; visibility: visible; background-color: white; color: $couleur_foncee; z-index: -1000; border: 1px solid $couleur_claire; border-top: 0px;'>";
+			$bandeau .= "<div id='displayfond' class='bandeau bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right; visibility: visible; background-color: white; color: $couleur_foncee; z-index: -1000; border: 1px solid $couleur_claire; border-top: 0px;'>";
 			$bandeau .= "<b>"._T('icone_interface_simple')."</b>";
 			$bandeau .= "</div>";
 	}
-	$bandeau .= "<div id='bandeaudisplay' class='bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>";
+	$bandeau .= "<div id='bandeaudisplay' class='bandeau bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>";
 
 	if ($options != 'avancees') {
 		$bandeau .= "<b>"._T('icone_interface_simple')."</b>/<a href='".parametre_url(self(),'set_options', 'avancees')."' class='lien_sous'>"._T('icone_interface_complet')."</a>";

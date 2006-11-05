@@ -2,59 +2,34 @@ var init_gauche = true;
 
 function changestyle(id_couche, element, style) {
 
-	if (admin) {
-		hide_obj("bandeauaccueil");
-		hide_obj("bandeaunaviguer");
-		hide_obj("bandeauforum");
-		hide_obj("bandeauauteurs");
-		if (stat) {  hide_obj("bandeaustatistiques_visites"); } 
-		hide_obj("bandeauconfiguration"); 
-	}
-	hide_obj("bandeaudeconnecter");
-	hide_obj("bandeautoutsite");
-	hide_obj("bandeaunavrapide");
-	hide_obj("bandeauagenda");
-	hide_obj("bandeaumessagerie");
-	hide_obj("bandeausynchro");
-	//hide_obj("nav-recherche");
-	hide_obj("bandeaurecherche");
-	hide_obj("bandeauinfoperso");
-	hide_obj("bandeaudisplay");
-	hide_obj("bandeauecran");
-	hide_obj("bandeauinterface");
-
+	// La premiere fois, regler l'emplacement des sous-menus
 	if (init_gauche) {
-		if (admin) {
-			decalerCouche('bandeauaccueil');
-			decalerCouche('bandeaunaviguer');
-			decalerCouche('bandeauforum');
-			decalerCouche('bandeauauteurs');
-			if (stat) decalerCouche('bandeaustatistiques_visites');
-			decalerCouche('bandeauconfiguration');
-		}
 		init_gauche = false;
+		if (bug_offsetwidth) {
+			$('#haut-page').find('div.sous-menu').each(function(){
+				if (parseInt(this.style.left) > 0) {
+					demilargeur = Math.floor( this.offsetWidth / 2 );
+					if (demilargeur == 0) demilargeur = 100; // bug offsetwidth MSIE, on fixe une valeur arbitraire
+					gauche = parseInt(this.style.left)
+						- demilargeur
+						+ Math.floor(largeur_icone / 2);
+					if (gauche < 0) gauche = 0;
+					this.style.left = gauche+"px";
+				}
+			});
+		}
 	}
 
-	if (!(layer = findObj(id_couche))) return;
+	// Masquer les elements du bandeau
+	var select = $('#haut-page').find('div.bandeau').not('#'+id_couche);
+	// sauf eventuellement la boite de recherche si la souris passe en-dessous
+	if (id_couche=='garder-recherche') select = select.not('#bandeaurecherche');
+		select.css('visibility','hidden');
 
-	layer.style[element] = style;
+	// Afficher, le cas echeant, celui qui est demande
+	$('#'+id_couche).css(element||'visibility',style||'visible');
 }
 
-function decalerCouche(id_couche) {
-	if (!(layer = findObj(id_couche))) return;
-	if (bug_offsetwidth && ( parseInt(layer.style.left) > 0)) {
-		demilargeur = Math.floor( layer.offsetWidth / 2 );
-		if (demilargeur == 0) demilargeur = 100; // bug offsetwidth MSIE, on fixe une valeur arbitraire
-		gauche = parseInt(layer.style.left)
-		  - demilargeur
-		  + Math.floor(largeur_icone / 2);
-
-		if (gauche < 0) gauche = 0;
-
-		layer.style.left = gauche+"px";
-	}
-
-}
 
 var accepter_change_statut = false;
 
@@ -186,15 +161,4 @@ function puce_statut(selection){
 	if (selection=="poubelle"){
 		return "puce-poubelle.gif";
 	}
-}
-
-// Pour ne pas fermer le formulaire de recherche pendant qu'on l'edite
-function recherche_desesperement()
-{
-	if (findObj('bandeaurecherche') && findObj('bandeaurecherche').style.visibility == 'visible') 
-		{ ouvrir_recherche = true; } 
-	else { ouvrir_recherche = false; } 
-	changestyle('bandeauvide', 'visibility', 'hidden'); 
-	if (ouvrir_recherche == true) 
-		{ changestyle('bandeaurecherche','visibility','visible'); }
 }

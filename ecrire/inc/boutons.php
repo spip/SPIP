@@ -418,7 +418,7 @@ function bandeau_principal2($rubrique, $sous_rubrique, $largeur) {
 		if($sousmenu) {
 			$offset = (int)round($decal-$coeff_decalage*max(0,($decal+count($sousmenu)*$largitem_moy-$largeur_maxi_menu)));
 			if ($offset<0){	$offset = 0; }
-			$res .= "<div class='$class' id='bandeau$page' style='position: absolute; $spip_lang_left: ".$offset."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
+			$res .= "<div class='$class bandeau' id='bandeau$page' style='position: absolute; $spip_lang_left: ".$offset."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
 			$width=0;
 			foreach($sousmenu as $souspage => $sousdetail) {
 				if ($width+1.25*$largitem_moy>$largeur_maxi_menu){$res .= "</tr><tr>\n";$width=0;}
