@@ -99,7 +99,7 @@ function gadget_rubriques() {
 
 			if ($count_lignes == $max_lignes) {
 				$count_lignes = 0;
-				$ret .= "</div></td><td valign='top' width='200'><div>&nbsp;</div><div class='bandeau bandeau_rubriques' style='z-index: 1;'>";
+				$ret .= "</div></td><td valign='top' width='200'><div>&nbsp;</div><div class='bandeau_rubriques' style='z-index: 1;'>";
 			}
 			$count_lignes ++;
 
