@@ -6,7 +6,7 @@ function changestyle(id_couche, element, style) {
 	if (init_gauche) {
 		init_gauche = false;
 		if (bug_offsetwidth) {
-			$('#haut-page div.bandeau-principal').find('div.bandeau').each(function(){
+			$('#bandeau-principal div.bandeau').each(function(){
 				if (parseInt(this.style.left) > 0) {
 					demilargeur = Math.floor( this.offsetWidth / 2 );
 					if (demilargeur == 0) demilargeur = 100; // bug offsetwidth MSIE, on fixe une valeur arbitraire
@@ -21,7 +21,7 @@ function changestyle(id_couche, element, style) {
 	}
 
 	// Masquer les elements du bandeau
-	var select = $('#haut-page').find('div.bandeau').not('#'+id_couche);
+	var select = $('#haut-page div.bandeau').not('#'+id_couche);
 	// sauf eventuellement la boite de recherche si la souris passe en-dessous
 	if (id_couche=='garder-recherche') select = select.not('#bandeaurecherche');
 		select.css('visibility','hidden');

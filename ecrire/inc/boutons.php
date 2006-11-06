@@ -462,7 +462,7 @@ function bandeau_double_rangee($rubrique, $sous_rubrique, $largeur)
 
 	return "<div class='invisible_au_chargement' style='position: absolute; height: 0px; visibility: hidden;'><a href='oo'>"._T("access_mode_texte")."</a></div>"
 	. "<div id='haut-page'>"
-	. "<div class='bandeau-principal' align='center'>\n"
+	. "<div id='bandeau-principal' align='center'>\n"
 	. bandeau_principal($rubrique, $sous_rubrique, $largeur)
 	. "<table width='$largeur' cellpadding='0' cellspacing='0' align='center'><tr><td>"
 	. "<div style='text-align: $spip_lang_left; width: ".$largeur."px; position: relative; z-index: 2000;'>"
