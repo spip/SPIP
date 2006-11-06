@@ -48,7 +48,7 @@ function install_etape_3_dist()
 			}
 		}
 		echo $bases."</ul>";
-		echo _T('info_ou')." ";
+		echo "<p>"._T('info_ou')." ";
 	}
 	else {
 		echo "<b>"._T('avis_lecture_noms_bases_1')."</b>
@@ -70,15 +70,15 @@ function install_etape_3_dist()
 				echo "<li><input name=\"choix_db\" value=\"".$test_base."\" type='radio' id='stand' checked='checked' />";
 				echo "<label for='stand'>".$test_base."</label></li>\n";
 				echo "</ul>";
-				echo _T('info_ou')." ";
+				echo "<p>"._T('info_ou')." ";
 				$checked = true;
 			}
 		}
 	}
 	echo "<input name=\"choix_db\" value=\"new_spip\" type='radio' id='nou'";
-	if (!$checked) echo " checked";
-	echo " /> <label for='nou'>"._T('info_creer_base')."</label> ";
-	echo "<input type='text' name='table_new' class='fondl' value=\"spip\" size='20' /></fieldset>";
+	if (!$checked) echo " checked='checked'";
+	echo " /> <label for='nou'>"._T('info_creer_base')."</label></p><p>";
+	echo "<input type='text' name='table_new' class='fondl' value=\"spip\" size='20' /></p></fieldset>";
 
 	echo bouton_suivant();
 	echo "</form>";
