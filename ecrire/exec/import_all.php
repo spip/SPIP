@@ -43,7 +43,12 @@ function verifier_version_sauvegarde ($archive) {
 	global $flag_gz, $connect_toutes_rubriques;
 
 	if ($connect_toutes_rubriques) {
-		$dir = _DIR_DUMP;
+		$repertoire = _DIR_DUMP;
+		if(!@file_exists($repertoire)) {
+			$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
+			$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
+		}
+		$dir = $repertoire;
 	} else {
 		$dir = _DIR_TRANSFERT . $connect_login . '/';
 	}
@@ -127,7 +132,12 @@ function import_all_continue()
 
 	$request = unserialize($meta['request_restauration']);
 	if ($connect_toutes_rubriques) {
-		$dir = _DIR_DUMP;
+		$repertoire = _DIR_DUMP;
+		if(!@file_exists($repertoire)) {
+			$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
+			$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
+		}
+		$dir = $repertoire;
 	} else {
 		$dir = _DIR_TRANSFERT . $connect_login . '/';
 	}

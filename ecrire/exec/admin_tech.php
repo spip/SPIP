@@ -38,7 +38,12 @@ function exec_admin_tech_dist()
 		debut_boite_info();
 		echo _T('info_gauche_admin_tech');
 		fin_boite_info();
-		$dir_dump = _DIR_DUMP;
+		$repertoire = _DIR_DUMP;
+		if(!@file_exists($repertoire)) {
+			$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
+			$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
+		}
+		$dir_dump = $repertoire;
 	} else {
 		debut_gauche();
 		$dir_dump = _DIR_TRANSFERT . $connect_login . '/';
