@@ -487,10 +487,10 @@ function typo_fr($letexte) {
 	$letexte = strtr($letexte, $trans);
 
 	$cherche1 = array(
-		/* 1 */ 	'/((^|[^\#0-9a-zA-Z\&])[\#0-9a-zA-Z]*)\;/S',
-		/* 2 */		'/&#187;| --?,|:([^0-9]|$)/S',
+		/* 1 */ 	'/((?:^|[^\#0-9a-zA-Z\&])[\#0-9a-zA-Z]*)\;/S',
+		/* 2 */		'/&#187;| --?,|(?::| %)(?:\W|$)/S',
 		/* 3 */		'/([^[<!?])([!?])/S',
-		/* 4 */		'/&#171;|(M(M?\.|mes?|r\.?)|[MnN]&#176;) /S'
+		/* 4 */		'/&#171;|(?:M(?:M?\.|mes?|r\.?)|[MnN]&#176;) /S'
 	);
 	$remplace1 = array(
 		/* 1 */		'\1~;',
@@ -1161,12 +1161,22 @@ function traiter_raccourci_lien($regs) {
 		if ($m[2])
 			$bulle = ' title="'.texte_backend($m[3]).'"';
 		// {hreflang} ?
-		if ($m[4])
-			$hlang = $m[5];
+		if ($m[4]) {
+			// si c'est un code de langue connu, on met un hreflang
+			include_spip('inc/lang');
+			if (traduire_nom_langue($m[5]) <> $m[5]) {
+				$hlang = $m[5];
+			}
+			// sinon c'est un italique
+			else {
+				$m[1] .= '{'.$m[3].'}';
+			}
+		}
 		// S'il n'y a pas de hreflang sous la forme {}, ce qui suit le |
 		// est peut-etre une langue
 		else if (preg_match(',^[a-z_]+$,', $m[3])) {
 			// si c'est un code de langue connu, on met un hreflang
+			// mais on laisse le title (c'est arbitraire tout ca...)
 			include_spip('inc/lang');
 			if (traduire_nom_langue($m[3]) <> $m[3]) {
 				$hlang = $m[3];
