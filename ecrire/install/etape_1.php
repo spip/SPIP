@@ -48,7 +48,7 @@ function install_etape_1_dist()
 	echo generer_url_post_ecrire('install');
 	echo "<input type='hidden' name='etape' value='2' />";
 	echo "<input type='hidden' name='chmod' value='$chmod' />";
-	echo fieldset(_t('entree_base_donnee_1'),
+	echo fieldset(_T('entree_base_donnee_1'),
 		array(
 			'adresse_db' => array(
 				'label' => _T('entree_base_donnee_2'),
