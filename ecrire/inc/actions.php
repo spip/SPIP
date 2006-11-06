@@ -251,7 +251,15 @@ function determine_upload()
 		$var_auth = $var_auth();
 	}
 	if ($connect_statut != '0minirezo') return false;
-	return _DIR_TRANSFERT . 
+	$repertoire = _DIR_TRANSFERT;
+	if(!@file_exists($repertoire)) {
+		$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
+		$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
+	}
+	if(!$connect_toutes_rubriques AND !@file_exists($repertoire.$connect_login)) {
+		$sous_rep = sous_repertoire($repertoire, $connect_login);
+	}
+	return $repertoire . 
 	  ($connect_toutes_rubriques ? '' : ($connect_login . '/'));
 }
 

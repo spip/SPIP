@@ -50,7 +50,15 @@ function verifier_version_sauvegarde ($archive) {
 		}
 		$dir = $repertoire;
 	} else {
-		$dir = _DIR_TRANSFERT . $connect_login . '/';
+		$repertoire = _DIR_TRANSFERT;
+		if(!@file_exists($repertoire)) {
+			$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
+			$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
+		}
+		if(!@file_exists($repertoire.$connect_login)) {
+			$sous_rep = sous_repertoire($repertoire, $connect_login);
+		}
+		$dir = $sous_rep . '/';
 	}
 	$_fopen = ($flag_gz) ? gzopen : fopen;
 	$_fread = ($flag_gz) ? gzread : fread;
@@ -139,7 +147,15 @@ function import_all_continue()
 		}
 		$dir = $repertoire;
 	} else {
-		$dir = _DIR_TRANSFERT . $connect_login . '/';
+		$repertoire = _DIR_TRANSFERT;
+		if(!@file_exists($repertoire)) {
+			$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
+			$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
+		}
+		if(!@file_exists($repertoire.$connect_login)) {
+			$sous_rep = sous_repertoire($repertoire, $connect_login);
+		}
+		$dir = $sous_rep . '/';
 	}
 	$archive = $dir . $request['archive'];
 	$affiche_progression_pourcent = @filesize($archive);
