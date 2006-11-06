@@ -37,7 +37,7 @@ function install_etape_5_dist()
 
 	echo generer_url_post_ecrire('install');
 
-	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='6' />";
+	echo "<input type='hidden' name='etape' value='6' />";
 
 	echo fieldset(_T('info_identification_publique'),
 		array(

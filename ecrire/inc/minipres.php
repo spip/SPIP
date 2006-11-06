@@ -19,7 +19,7 @@ include_spip('inc/lang');
 //
 
 // http://doc.spip.org/@install_debut_html
-function install_debut_html($titre = 'AUTO') {
+function install_debut_html($titre = 'AUTO', $onLoad = '') {
 	global $spip_lang_right;
 	
 	include_spip('inc/filtres');
@@ -73,7 +73,7 @@ function install_debut_html($titre = 'AUTO') {
 	font-family: Verdana,Arial,Sans,sans-serif; }\n",
 	  "\n\n]]>\n--></style>\n\n
 </head>
-<body>
+<body".$onLoad.">
 	<div id='minipres'>
 	<h1>",
 	  $titre ,
@@ -108,7 +108,7 @@ function fieldset($legend, $champs = array()) {
 
 // http://doc.spip.org/@bouton_suivant
 function bouton_suivant($code = 'bouton_suivant') {
-	return "\n<span class='suivant'><input type='submit' class='fondl' value=\"" .
+	return "\n<span class='suivant'><input id='suivant' type='submit' class='fondl' value=\"" .
 		_T($code) .
 		" >>\" /></span>\n";
 }
