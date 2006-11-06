@@ -1,16 +1,17 @@
-var init_gauche = true;
+var bandeau_elements = false;
 
 function changestyle(id_couche, element, style) {
 
 	// La premiere fois, regler l'emplacement des sous-menus
-	if (init_gauche) {
-		init_gauche = false;
+	if (!bandeau_elements) {
+		bandeau_elements = $('#haut-page div.bandeau');
 		if (bug_offsetwidth) {
 			$('#bandeau-principal div.bandeau').each(function(){
-				if (parseInt(this.style.left) > 0) {
+				var left = parseInt(this.style.left);
+				if (left > 0) {
 					demilargeur = Math.floor( this.offsetWidth / 2 );
 					if (demilargeur == 0) demilargeur = 100; // bug offsetwidth MSIE, on fixe une valeur arbitraire
-					gauche = parseInt(this.style.left)
+					gauche = left
 						- demilargeur
 						+ Math.floor(largeur_icone / 2);
 					if (gauche < 0) gauche = 0;
@@ -21,7 +22,7 @@ function changestyle(id_couche, element, style) {
 	}
 
 	// Masquer les elements du bandeau
-	var select = $('#haut-page div.bandeau').not('#'+id_couche);
+	var select = $(bandeau_elements).not('#'+id_couche);
 	// sauf eventuellement la boite de recherche si la souris passe en-dessous
 	if (id_couche=='garder-recherche') select = select.not('#bandeaurecherche');
 		select.css('visibility','hidden');
