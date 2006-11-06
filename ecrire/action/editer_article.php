@@ -146,7 +146,12 @@ function revisions_articles ($id_article, $c=false) {
 			$statut = $champs['statut'] = $s;
 		elseif (acces_article($id_article) AND  $s != 'publie')
 			$statut = $champs['statut'] = $s;
-		else spip_log("editer_article $id_article refus " . join(' ', $c));
+		else
+			spip_log("editer_article $id_article refus " . join(' ', $c));
+
+		// En cas de publication, fixer la date a "maintenant".
+		if ($champs['statut'] == 'publie')
+			$champs['date'] = date('Y-m-d H:i:s');
 	}
 
 	// Verifier que la rubrique demandee existe et est differente
