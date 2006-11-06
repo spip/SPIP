@@ -11,14 +11,11 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/presentation');
 
 // http://doc.spip.org/@exec_editer_mot_dist
 function exec_editer_mot_dist()
 {
-	include_spip('inc/actions');
-	include_spip('inc/mots');
-	include_spip('inc/presentation');
-
 	$objet = _request('objet');
 	$id_objet = intval(_request('id_objet'));
 

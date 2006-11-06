@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
-
+include_spip('inc/mots');
 
 // http://doc.spip.org/@inc_editer_mot_dist
 function inc_editer_mot_dist($objet, $id_objet, $cherche_mot, $select_groupe, $flag) {

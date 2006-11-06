@@ -34,20 +34,26 @@ function action_editer_auteurs_dist() {
 		if  ($nouv_auteur = intval(_request('nouv_auteur'))) {
 			ajouter_auteur_et_rediriger($r[1], $nouv_auteur, $redirect);
 		} else if ($cherche = _request('cherche_auteur')) {
+			if ($p = strpos($redirect, '#')) {
+				$ancre = substr($redirect,$p);
+				$redirect = substr($redirect,0,$p);
+			} else $ancre ='';
+
 			$res = rechercher_auteurs($cherche);
 			$n = count($res);
+
 			if ($n == 1)
 			# Bingo. Signaler le choix fait.
-				ajouter_auteur_et_rediriger($r[1], $res[0], "$redirect&ids=" . $res[0] . "&cherche_auteur=" . $res[0]);
+				ajouter_auteur_et_rediriger($r[1], $res[0], "$redirect&ids=" . $res[0] . "&cherche_auteur=" . $res[0] . $ancre);
 			# Trop vague. Le signaler.
 			elseif ($n > 16)
-				redirige_par_entete("$redirect&cherche_auteur=$cherche&ids=-1");
+				redirige_par_entete("$redirect&cherche_auteur=$cherche&ids=-1" . $ancre);
 			elseif (!$n)
 			# Recherche vide (mais faite). Le signaler 
-				redirige_par_entete("$redirect&cherche_auteur=$cherche&ids=" );
+				redirige_par_entete("$redirect&cherche_auteur=$cherche&ids="  . $ancre);
 			else
 			# renvoyer un formulaire de choix
-				redirige_par_entete("$redirect&cherche_auteur=$cherche&ids=" . join(',',$res));
+				redirige_par_entete("$redirect&cherche_auteur=$cherche&ids=" . join(',',$res)  . $ancre);
 
 		}
 	} else spip_log("action_editer_auteur: $arg pas compris");
