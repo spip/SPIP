@@ -33,7 +33,7 @@ function action_legender_auteur_dist()
         } else 	redirige_par_entete(action_legender_auteur_post($r));
 }
 
-// http://doc.spip.org/@action_legender_post
+// http://doc.spip.org/@action_legender_auteur_post
 function action_legender_auteur_post($r)
 {
 	global $auteur_session;

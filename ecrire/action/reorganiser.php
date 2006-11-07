@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 include_spip('inc/autoriser');
 
+// http://doc.spip.org/@gerer_deplacements
 function gerer_deplacements($deplacements){
 	$liste_dep = explode("\n",$deplacements);
 	if (count($liste_dep)){
@@ -37,6 +38,7 @@ function gerer_deplacements($deplacements){
 	}
 }
 
+// http://doc.spip.org/@action_reorganiser_dist
 function action_reorganiser_dist(){
 	global $auteur_session;
 	$arg = _request('arg');

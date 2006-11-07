@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/autoriser');
 
-// http://doc.spip.org/@exec_articles_versions_dist
+// http://doc.spip.org/@exec_puce_statut_article_dist
 function exec_puce_statut_article_dist()
 {
 	$id = _request('id');
