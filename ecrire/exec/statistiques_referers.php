@@ -69,7 +69,7 @@ if ($limit == 0) $limit = 100;
 if ($jour<>'veille')
 	$jour='jour';
 
-barre_onglets("stat_referers", $jour);
+echo barre_onglets("stat_referers", $jour);
 
 
 // afficher quels referers ?

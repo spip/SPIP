@@ -83,7 +83,7 @@ if ($origine) {
 	echo $commencer_page(_T('titre_page_statistiques_referers'), "statistiques_visites", "statistiques");
 	echo "<br /><br />";
 	gros_titre(_T('titre_liens_entrants'));
-	barre_onglets("statistiques", "referers");
+	echo barre_onglets("statistiques", "referers");
 
 	debut_gauche();
 	debut_boite_info();

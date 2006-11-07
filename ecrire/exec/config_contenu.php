@@ -41,7 +41,7 @@ echo $commencer_page(_T('titre_page_config_contenu'), "configuration", "configur
 
 echo "<br><br><br>";
 gros_titre(_T('titre_page_config_contenu'));
-barre_onglets("configuration", "interactivite");
+echo barre_onglets("configuration", "interactivite");
 
 
 debut_gauche();

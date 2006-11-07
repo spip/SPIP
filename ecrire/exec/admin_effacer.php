@@ -25,7 +25,7 @@ echo $commencer_page(_T('titre_page_admin_effacer'), "configuration", "base");
 
 echo "<br><br><br>";
 gros_titre(_T('titre_admin_effacer'));
-barre_onglets("administration", "effacer");
+echo barre_onglets("administration", "effacer");
 
 
 debut_gauche();

@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-include_spip('inc/rubriques');
 include_spip('inc/documents');
 include_spip ('inc/barre');
 

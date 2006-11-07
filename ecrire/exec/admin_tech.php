@@ -33,7 +33,7 @@ function exec_admin_tech_dist()
 	echo "<br /><br />";
 	gros_titre(_T('titre_admin_tech'));
 	if ($connect_toutes_rubriques) {
-		barre_onglets("administration", "sauver");
+		echo barre_onglets("administration", "sauver");
 		debut_gauche();
 		debut_boite_info();
 		echo _T('info_gauche_admin_tech');

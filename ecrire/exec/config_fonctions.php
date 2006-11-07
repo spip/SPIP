@@ -36,7 +36,7 @@ function exec_config_fonctions_dist()
 
 	echo "<br><br><br>";
 	gros_titre(_T('titre_config_fonctions'));
-	barre_onglets("configuration", "fonctions");
+	echo barre_onglets("configuration", "fonctions");
 
 	debut_gauche();
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'config_fonctions'),'data'=>''));

@@ -40,7 +40,7 @@ function exec_lang_raccourcis_dist() {
 	echo "<br><br><br>";
 	gros_titre(_T('module_fichier_langue').": $module");
 
-	barre_onglets("config_lang", "fichiers");
+	echo barre_onglets("config_lang", "fichiers");
 
 
 	debut_gauche();
