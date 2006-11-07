@@ -72,7 +72,7 @@ var img_deplierbas = "'._DIR_IMG_PACK.'noeud_moins.gif";
 	$arbre .= "<ul id='articles_tous'><li id='rubrique-0' class='treeItem racine verdana2'>" .
 	"<span class='holder icone'>&nbsp;</span>$titre" .
 	"\n<ul class=''>\n";
-	$arbre .= afficher_rubriques_filles($article, $enfant, $text_article, 0, $flag_trad, 2);
+	$arbre .= afficher_contenu_rubrique($article, $enfant, $text_article, 0, $flag_trad, 2);
 	$arbre .= "</ul></li></ul>\n";
 	echo $arbre;
 
