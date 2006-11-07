@@ -309,16 +309,18 @@ function afficher_contenu_rubrique(&$article, &$enfant, &$text_article, $id_rubr
 			$out .= afficher_rubriques_filles($article, $enfant, $text_article, $id_rubrique, $flag_trad, $profondeur);
 	}
 	else{
-		if ($ajax_args==NULL){
-			$ajax_args = "";
-			if (is_array($aff_art = _request('aff_art')))
-				foreach($aff_art as $aff)
-					$ajax_args.="&aff_art[]=$aff";
-			if (is_array($sel_lang = _request('sel_lang')))
-				foreach($sel_lang as $sel)
-					$ajax_args.="&sel_lang[]=$sel";
+		if (isset($article[$id_rubrique]) || isset($enfant[$id_rubrique])){
+			if ($ajax_args==NULL){
+				$ajax_args = "";
+				if (is_array($aff_art = _request('aff_art')))
+					foreach($aff_art as $aff)
+						$ajax_args.="&aff_art[]=$aff";
+				if (is_array($sel_lang = _request('sel_lang')))
+					foreach($sel_lang as $sel)
+						$ajax_args.="&sel_lang[]=$sel";
+			}
+			$out = "<a href='".generer_url_ecrire('articles_tous',"id_rubrique=$id_rubrique&$ajax_args")."' class='ajax' rel='ul$id_rubrique'>"._T('info_tout_site')."</a>";
 		}
-		$out = "<a href='".generer_url_ecrire('articles_tous',"id_rubrique=$id_rubrique&$ajax_args")."' class='ajax' rel='ul$id_rubrique'>"._T('info_tout_site')."</a>";
 	}
 	return $out;
 }
