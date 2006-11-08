@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-include_spip('inc/texte');
 
 // http://doc.spip.org/@exec_documenter_dist
 function exec_documenter_dist()
@@ -38,7 +37,7 @@ function exec_documenter_dist()
 		$editable = (is_array($droits) AND $droits[$row['id_rubrique']]);
 		if (!$editable) {
 			if ($row['statut'] == 'prepa' OR $row['statut'] == 'prop')
-				$editable = spip_num_rows(auteurs_article($id_article, " AND id_auteur=$id_auteur"));
+				$editable = spip_num_rows(auteurs_article($id_article, "id_auteur=$id_auteur"));
 		}
 	}
 	if (!$editable) {
