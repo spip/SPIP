@@ -25,7 +25,7 @@ function exec_documenter_dist()
 	$statut = $GLOBALS['auteur_session']['statut'];
 
 	$droits = auth_rubrique($id_auteur, $statut);
-	spip_log("documenter($droits, $id, $type, $album, $script $statut");
+
 	if ($type == 'rubrique')
 		$editable = is_array($droits) ? $droits[$id] : is_int($droits);
 	elseif (is_int($droits)) // i.e. admin complet
@@ -37,7 +37,7 @@ function exec_documenter_dist()
 		$editable = (is_array($droits) AND $droits[$row['id_rubrique']]);
 		if (!$editable) {
 			if ($row['statut'] == 'prepa' OR $row['statut'] == 'prop')
-				$editable = spip_num_rows(auteurs_article($id_article, "id_auteur=$id_auteur"));
+				$editable = spip_num_rows(auteurs_article($id, "id_auteur=$id_auteur"));
 		}
 	}
 	if (!$editable) {
