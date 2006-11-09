@@ -130,7 +130,13 @@ function redirige_action_auteur($action, $arg, $ret, $gra='', $mode=false, $atts
 // http://doc.spip.org/@ajax_action_auteur
 function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='', $fct_ajax='')
 {
-	$ancre = "$action-" . intval($id);
+	if (strpos($args,"#")===FALSE)
+		$ancre = "$action-" . intval($id);
+	else {
+		$ancre = explode("#",$args);
+		$args = $ancre[0];
+		$ancre = $ancre[1];
+	}
 
 	// Formulaire (POST)
 	// methodes traditionnelle et ajax a unifier...
