@@ -251,7 +251,6 @@ function determine_upload()
 {
 	global $connect_toutes_rubriques, $connect_login, $connect_statut ;
 
-	if (!$GLOBALS['flag_upload']) return false;
 	if (!$connect_statut) {
 		$var_auth = charger_fonction('auth', 'inc');
 		$var_auth = $var_auth();
@@ -262,11 +261,14 @@ function determine_upload()
 		$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
 		$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
 	}
-	if(!$connect_toutes_rubriques AND !@file_exists($repertoire.$connect_login)) {
+	if($connect_toutes_rubriques) return $repertoire;
+
+	$sous_rep = $repertoire . $connect_login ;
+	if(!@file_exists($sous_rep)) {
 		$sous_rep = sous_repertoire($repertoire, $connect_login);
 	}
-	return $repertoire . 
-	  ($connect_toutes_rubriques ? '' : ($connect_login . '/'));
+
+	return $sous_rep . '/';
 }
 
 //

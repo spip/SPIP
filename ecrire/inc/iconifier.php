@@ -92,7 +92,7 @@ function indiquer_logo($titre, $id_objet, $mode, $id, $script, $iframe_script) {
 	$afficher = "";
 	$reg = '[.](' . join('|', $formats_logos) . ')$';
 
-	if ($dir_ftp
+	if ($GLOBALS['flag_upload']
 	AND $fichiers = preg_files($dir_ftp, $reg)) {
 		foreach ($fichiers as $f) {
 			$f = substr($f, strlen($dir_ftp));
