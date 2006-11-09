@@ -92,7 +92,8 @@ if (autoriser_sans_cookie($exec)) {
 //
 
 if (!isset($GLOBALS['prefs']))
-	$GLOBALS['prefs'] = array('couleur' =>1, 'display'=>0, 'options'=>'avancees');
+	$GLOBALS['prefs'] = array('couleur' =>1, 'display'=>0, 
+			  'options'=> $var_auth ? 'avancees' : 'basiques');
 $prefs_mod = false;
 
 if (isset($_GET['set_couleur'])) {
