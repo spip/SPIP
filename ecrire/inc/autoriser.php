@@ -151,7 +151,7 @@ function autoriser_article_modifier_dist($faire, $type, $id, $qui, $opt) {
 
 // Lire les stats ?
 // = tous les admins
-// http://doc.spip.org/@autoriser_stats_voir_dist
+// http://doc.spip.org/@autoriser_voir_stats_dist
 function autoriser_voir_stats_dist($faire, $type, $id, $qui, $opt) {
 	return
 		$qui['statut'] == '0minirezo';
@@ -178,7 +178,7 @@ function autoriser_voir_dist($faire, $type, $id, $qui, $opt) {
 
 // Voir les revisions ?
 // = voir l'objet
-// http://doc.spip.org/@autoriser_revisions_voir_dist
+// http://doc.spip.org/@autoriser_voir_revisions_dist
 function autoriser_voir_revisions_dist($faire, $type, $id, $qui, $opt) {
 	return
 		autoriser('voir', $type, $id, $qui, $opt);
@@ -187,7 +187,7 @@ function autoriser_voir_revisions_dist($faire, $type, $id, $qui, $opt) {
 // Moderer le forum ?
 // = modifier l'objet correspondant (si forum attache a un objet)
 // = droits par defaut sinon (admin complet pour moderation complete)
-// http://doc.spip.org/@autoriser_forum_moderer_dist
+// http://doc.spip.org/@autoriser_moderer_forum_dist
 function autoriser_moderer_forum_dist($faire, $type, $id, $qui, $opt) {
 	return
 		autoriser('modifier', $type, $id, $qui, $opt);
@@ -196,7 +196,7 @@ function autoriser_moderer_forum_dist($faire, $type, $id, $qui, $opt) {
 // Moderer la petition ?
 // = modifier l'article correspondant
 // = droits par defaut sinon (admin complet pour moderation de tout)
-// http://doc.spip.org/@autoriser_petition_moderer_dist
+// http://doc.spip.org/@autoriser_moderer_petition_dist
 function autoriser_moderer_petition_dist($faire, $type, $id, $qui, $opt) {
 	return
 		autoriser('modifier', $type, $id, $qui, $opt);
