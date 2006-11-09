@@ -100,6 +100,7 @@ function rechercher_auteurs($cherche_auteur)
 	return mots_ressemblants($cherche_auteur, $table_auteurs, $table_ids);
 }
 
+// http://doc.spip.org/@revisions_auteurs
 function revisions_auteurs($id_auteur, $c=false) {
 	include_spip('inc/filtres');
 
