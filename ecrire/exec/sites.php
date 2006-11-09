@@ -10,6 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+
+// TODO : passer dans l'API revisions_sites() de action/editer_site :
+// - la gestion de la date
+// - la gestion des options resume / oubli / moderation
+
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/sites_voir');
@@ -26,25 +32,16 @@ function exec_sites_dist()
   global   $connect_statut,   $options,   $spip_lang_left,  $spip_lang_right;
 
   global
-  $analyser_site,
   $annee,
-  $champs_extra,
+  $mois,
+  $jour,
   $cherche_mot,
   $select_groupe, 
-  $descriptif,
-  $id_parent,
   $id_syndic,
-  $jour,
   $miroir,
   $moderation,
-  $modifier_site,
-  $mois,
-  $new,
-  $nom_site,
   $nouveau_statut,
-  $old_syndic,
   $oubli,
-  $reload,
   $resume,
   $spip_display,
   $syndication,
@@ -90,103 +87,15 @@ if ($new == 'oui') {
   }
  }
 
-//
-// Analyse automatique d'une URL
-//
-
-if ($analyser_site == 'oui' AND $flag_editable) {
-
-	$v = analyser_site($url);
-
-	if ($v) {
-		$nom_site = ($v['nom_site']);
-		if (!$nom_site) $nom_site = $url;
-		$url_syndic = trim($v['url_syndic']);
-		$descriptif = $v['descriptif'];
-		$syndication = $v[syndic] ? 'oui' : 'non';
-		$result = spip_query("UPDATE spip_syndic SET nom_site=" . _q($nom_site) . ", url_site=" . _q($url) . ", url_syndic=" . _q($url_syndic) . ", descriptif=" . _q($descriptif) . ", syndication='$syndication', statut='$statut' WHERE id_syndic=$id_syndic");
-		if ($syndication == 'oui') syndic_a_jour($id_syndic);
-	}
-}
-
-//
-// Ajout et suppression syndication
-//
-
 if ($nouveau_statut AND $flag_administrable) {
-	$statut = $nouveau_statut;
-	$result = spip_query("UPDATE spip_syndic SET statut='$statut' WHERE id_syndic=$id_syndic");
-	if ($statut == 'publie')
-		spip_query("UPDATE spip_syndic SET date=NOW() WHERE id_syndic=$id_syndic");
-
-	calculer_rubriques();
-	if ($statut == 'publie') {
-		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-			include_spip("inc/indexation");
-			marquer_indexer('spip_syndic', $id_syndic);
-		}
-	}
+	spip_query("UPDATE spip_syndic SET statut="._q($nouveau_statut)." WHERE id_syndic="._q($id_syndic));
 }
-
-if (strval($nom_site)!='' AND $modifier_site == 'oui' AND $flag_editable) {
-	if (strlen($url_syndic) < 8) $syndication = "non";
-	$url_syndic = trim($url_syndic);
-	
-	// recoller les champs du extra
-	if ($champs_extra) {
-		include_spip('inc/extra');
-		$add_extra = extra_recup_saisie("sites");
-	} else
-		$add_extra = '';
-	
-	spip_query("UPDATE spip_syndic SET id_rubrique='$id_rubrique',	nom_site=" . _q($nom_site) . ", url_site=" . _q($url_site) . ", url_syndic=" . _q($url_syndic) . ",	descriptif=" . _q($descriptif) . ", syndication='$syndication', statut='$statut'". (!$add_extra ? '' :  (", extra = " . _q($add_extra))) . " WHERE id_syndic=$id_syndic");
-
-	propager_les_secteurs();
-
-	if ($syndication_old != $syndication
-	OR $url_syndic != $old_syndic)
-		$reload = "oui";
-
-	if ($syndication_old != $syndication AND $syndication == "non")
-		spip_query("DELETE FROM spip_syndic_articles WHERE id_syndic=$id_syndic");
-
-	calculer_rubriques();
-
-	// invalider et reindexer
-	if ($statut == 'publie') {
-		include_spip('inc/invalideur');
-		suivre_invalideur("id='id_syndic/$id_syndic'");
-
-		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-			include_spip("inc/indexation");
-			marquer_indexer('spip_syndic', $id_syndic);
-		}
-	}
- }
-
 
 if ($jour AND $flag_administrable) {
 	if ($annee == "0000") $mois = "00";
 	if ($mois == "00") $jour = "00";
 	spip_query("UPDATE spip_syndic SET date=" . _q("$annee-$mois-$jour") . " WHERE id_syndic=$id_syndic");
 	calculer_rubriques();
-}
-
-// Appliquer le choix resume/fulltexte (necessite un reload)
-if ($flag_editable AND ($resume == 'oui' OR $resume == 'non')) {
-	$old_resume = spip_fetch_array(spip_query("SELECT resume FROM spip_syndic WHERE id_syndic=$id_syndic"));
-	if ($old_resume['resume'] <> $resume) $reload = 'oui';
-	spip_query("UPDATE spip_syndic SET resume='$resume' WHERE id_syndic=$id_syndic");
-}
-
-
-//
-// reload
-//
-if ($reload) {
-	$result = spip_query("SELECT id_syndic FROM spip_syndic WHERE id_syndic=$id_syndic AND syndication IN ('oui', 'sus', 'off') LIMIT 1");
-	if ($result AND spip_num_rows($result)>0)
-		$erreur_syndic = syndic_a_jour ($id_syndic);
 }
 
 
@@ -358,6 +267,19 @@ if ($flag_administrable) {
 	fin_cadre_relief();
 }
 
+
+
+# appliquer les choix concernant le resume (a passer dans editer_site)
+if ($flag_editable AND ($resume == 'oui' OR $resume == 'non')) {
+	spip_query("UPDATE spip_syndic SET resume='$resume'	WHERE id_syndic=$id_syndic");
+	include_spip('inc/syndication');
+	syndic_a_jour($id_syndic);
+} else $resume = '';
+if (!$resume AND !$resume = $row['resume']) $resume = 'oui';
+
+
+
+
 if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 	echo "<p><font size=3 face='Verdana,Arial,Sans,sans-serif'>",
 	"<a href='".htmlspecialchars($url_syndic)."'>",
@@ -372,25 +294,41 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 	if ($syndication == "off" OR $syndication=="sus") {
 		debut_boite_info();
 		echo _T('avis_site_syndique_probleme', array('url_syndic' => quote_amp($url_syndic)));
-		echo "<center><b>";
-		echo "<a href='" . generer_url_ecrire("sites","id_syndic=$id_syndic&reload=oui") . "'>";
-		echo _T('lien_nouvelle_recuperation')."</a></b></center>\n";
+
+		echo "<center>";
+		echo generer_action_auteur('editer_site',
+			$id_syndic,
+			$redirect = generer_url_ecrire('sites'),
+			"<input type='hidden' name='reload' value='oui' />
+		<input type='submit' value=\""
+			. attribut_html(_T('lien_nouvelle_recuperation'))
+			. "\" class='fondo' style='font-size:9px;' />",
+		" method='post'"
+		);
+		echo "</center>\n";
 		fin_boite_info();
 	}
 	echo afficher_syndic_articles(_T('titre_articles_syndiques'), array('FROM' => 'spip_syndic_articles', 'WHERE' => "id_syndic=$id_syndic", 'ORDER BY' => "date DESC"), $id_syndic);
 
 
-	echo "<font face='verdana,arial,helvetica' size=2>";
 	// afficher la date de dernier acces a la syndication
+	echo "<font face='verdana,arial,helvetica' size=2>";
 	if ($date_syndic)
 		echo "<p><div align='left'>"._T('info_derniere_syndication').' '.affdate_heure($date_syndic)
 		.".</div>\n";
-		
-	echo "<div align='right'>\n",
-		  generer_url_post_ecrire("sites",("id_syndic=$id_syndic")),
-		  "<input type='submit' name='reload' value=\"",
-		  attribut_html(_T('lien_mise_a_jour_syndication')),
-		  "\" class='fondo' style='font-size:9px;' /></form></div>\n";
+
+
+	echo "<div align='right'>\n";
+	echo generer_action_auteur('editer_site',
+		$id_syndic,
+		$redirect = generer_url_ecrire('sites'),
+		"<input type='hidden' name='reload' value='oui' />
+		<input type='submit' value=\""
+		. attribut_html(_T('lien_mise_a_jour_syndication'))
+		. "\" class='fondo' style='font-size:9px;' />",
+		" method='post'"
+	);
+	echo "</div>\n";
 
 	// Options
 	if ($flag_administrable && $options=='avancees') {
@@ -450,10 +388,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 
 
 		// Prendre les resumes ou le texte integral ?
-		# appliquer les choix
-		if ($resume == 'oui' OR $resume == 'non')
-			spip_query("UPDATE spip_syndic SET resume='$resume'	WHERE id_syndic=$id_syndic");
-		if (!$resume AND !$resume = $row['resume']) $resume = 'oui';
+		# choix appliques plus haut (a passer dans editer_site)
 		echo "<div align='$spip_lang_left'>"
 			. _T('syndic_choix_resume') ;
 		echo "<div style='padding-$spip_lang_left: 40px;'>";		
@@ -497,15 +432,13 @@ else if (preg_match(',^select: (.*),', trim($url_syndic), $regs)) {
 	}
 	echo "</select>\n";
 	echo aide("rubsyn");
-	echo '<input type="hidden" name="modifier_site" value="oui" />';
-	echo '<input type="hidden" name="reload" value="oui" />';
 	echo "<div align='$spip_lang_right'><input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>\n";
 	echo fin_cadre_relief();
 	echo "</div></form>\n";
 }
 
 
-if ($champs_extra AND $extra) {
+if ($GLOBALS['champs_extra'] AND $extra) {
 		include_spip('inc/extra');
 		echo extra_affichage($extra, "sites");
 	}
@@ -531,68 +464,5 @@ fin_cadre_relief();
  echo fin_page();
 }
 
-// http://doc.spip.org/@analyser_site
-function analyser_site($url) {
-	include_spip('inc/filtres'); # pour filtrer_entites()
-	include_spip('inc/distant');
-
-	// Accepter les URLs au format feed:// ou qui ont oublie le http://
-	$url = preg_replace(',^feed://,i', 'http://', $url);
-	if (!preg_match(',^[a-z]+://,i', $url)) $url = 'http://'.$url;
-
-	$texte = recuperer_page($url, true);
-	if (!$texte) return false;
-
-	if (preg_match(',<(channel|feed)([:[:space:]][^>]*)?'
-	.'>(.*)</\1>,ims', $texte, $regs)) {
-		$result['syndic'] = true;
-		$result['url_syndic'] = $url;
-		$channel = $regs[3];
-
-		list($header) = preg_split(
-		',<(entry|item)([:[:space:]][^>]*)?'.'>,Uims', $channel,2);
-		if (preg_match(',<title[^>]*>(.*)</title>,Uims', $header, $r))
-			$result['nom_site'] = supprimer_tags(filtrer_entites($r[1]));
-		if (preg_match(
-		',<link[^>]*[[:space:]]rel=["\']?alternate[^>]*>(.*)</link>,Uims',
-		$header, $regs))
-			$result['url_site'] = filtrer_entites($regs[1]);
-		else if (preg_match(',<link[^>]*[[:space:]]rel=.alternate[^>]*>,Uims',
-		$header, $regs))
-			$result['url_site'] = filtrer_entites(extraire_attribut($regs[0], 'href'));
-		else if (preg_match(',<link[^>]*>(.*)</link>,Uims', $header, $regs))
-			$result['url_site'] = filtrer_entites($regs[1]);
-		else if (preg_match(',<link[^>]*>,Uims', $header, $regs))
-			$result['url_site'] = filtrer_entites(extraire_attribut($regs[0], 'href'));
-		$result['url_site'] = url_absolue($result['url_site'], $url);
-
-		if (preg_match(',<(description|tagline)([[:space:]][^>]*)?'
-		.'>(.*)</\1>,Uims', $header, $r))
-			$result['descriptif'] = filtrer_entites($r[3]);
-	}
-	else {
-		$result['syndic'] = false;
-		$result['url_site'] = $url;
-		if (eregi('<head>(.*)', $texte, $regs))
-			$head = filtrer_entites(eregi_replace('</head>.*', '', $regs[1]));
-		else
-			$head = $texte;
-		if (eregi('<title[^>]*>(.*)', $head, $regs))
-			$result['nom_site'] = filtrer_entites(supprimer_tags(eregi_replace('</title>.*', '', $regs[1])));
-		if (eregi('<meta[[:space:]]+(name|http\-equiv)[[:space:]]*=[[:space:]]*[\'"]?description[\'"]?[[:space:]]+(content|value)[[:space:]]*=[[:space:]]*[\'"]([^>]+)[\'"]>', $head, $regs))
-			$result['descriptif'] = filtrer_entites(supprimer_tags($regs[3]));
-
-		// Cherchons quand meme un backend
-		include_spip('inc/distant');
-		include_spip('inc/feedfinder');
-		$feeds = get_feed_from_url($url, $texte);
-		if (count($feeds)>1) {
-			spip_log("feedfinder.php :\n".join("\n", $feeds));
-			$result['url_syndic'] = "select: ".join(' ',$feeds);
-		} else
-			$result['url_syndic'] = $feeds[0];
-	}
-	return $result;
-}
 
 ?>
