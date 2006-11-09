@@ -26,7 +26,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@inc_formater_auteur_dist
 function inc_formater_auteur_dist($id_auteur) {
 
-	global $connect_id_auteur, $spip_lang_rtl;
+  global $connect_id_auteur, $spip_lang_rtl, $connect_statut;
 
 	$id_auteur = intval($id_auteur);
 

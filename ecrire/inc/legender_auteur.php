@@ -237,7 +237,7 @@ function legender_auteur_voir($auteur, $redirect)
 	$pgp=$auteur["pgp"];
 	$extra = $auteur["extra"];
 
-	$res .= "<table width='100%' cellpadding='0' border='0' cellspacing='0'>"
+	$res = "<table width='100%' cellpadding='0' border='0' cellspacing='0'>"
 	. "<tr>"
 	. "<td valign='top' width='100%'>"
 	. gros_titre($nom,'',false)
@@ -259,8 +259,8 @@ function legender_auteur_voir($auteur, $redirect)
 		$clic = _T("admin_modifier_auteur");
 		$h = generer_url_ecrire("auteur_infos","id_auteur=$id_auteur&initial=0");
 		if (($_COOKIE['spip_accepte_ajax'] == 1 ) AND !$redirect) {
-		  $evt .= "\nonclick=" . ajax_action_declencheur($h,$ancre);
-		  $h = "<a\nhref='$h$a'$evt>$clic</a>";
+		  $evt = "\nonclick=" . ajax_action_declencheur($h,$ancre);
+		  $h = "<a\nhref='$h#$ancre'$evt>$clic</a>";
 		}
 	  $res .= icone($clic, $h, "redacteurs-24.gif", "edit.gif", '', '',true);
 	}
