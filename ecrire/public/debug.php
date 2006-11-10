@@ -232,6 +232,7 @@ function trouve_boucle_debug($n, $nom, $debut=0, $boucle = "")
 	global $debug_objets;
 
 	$id = $nom . $boucle;
+	if (!is_array($debug_objets['sequence'][$id])) return array();
 	foreach($debug_objets['sequence'][$id] as $v) {
 	  if (!preg_match('/^(.*)(<\?.*\?>)(.*)$/s', $v[2],$r))
 	    $y = substr_count($v[2], "\n");
@@ -307,8 +308,9 @@ function ancre_texte($texte, $fautifs=array())
 {
 	global $var_mode_ligne;
 	if ($var_mode_ligne) $fautifs[]=$var_mode_ligne;
+	$res ='';
 	$s = highlight_string($texte,true);
-	if (substr($s,0,6) == '<code>') { $s=substr($s,6); echo '<code>';}
+	if (substr($s,0,6) == '<code>') { $s=substr($s,6); $res = '<code>';}
 	$tableau = explode("<br />", $s);
 
 	$n = strlen(count($tableau));
@@ -321,11 +323,12 @@ function ancre_texte($texte, $fautifs=array())
 	$i=1;
 
 	foreach ($tableau as $ligne) {
-		echo "<br />\n",
-		  sprintf((($i%10) ? $format :$format10), $i, $i),
-		  sprintf(in_array($i, $fautifs) ? $formaterr : '%s', $ligne);
+		$res .= "<br />\n"
+		.  sprintf((($i%10) ? $format :$format10), $i, $i)
+		.  sprintf(in_array($i, $fautifs) ? $formaterr : '%s', $ligne);
 		$i++;
 	}
+	return $res;
 }
 
 // l'environnement graphique du debuggueur 
@@ -417,56 +420,46 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	    echo "<div id=\"debug_boucle\"><fieldset>";
 	    if ($var_mode_affiche == 'resultat') {
 		echo "<legend>",$debug_objets['pretty'][$var_mode_objet],"</legend>";
-		ancre_texte(traite_query($debug_objets['requete'][$var_mode_objet]));
+		echo ancre_texte(traite_query($debug_objets['requete'][$var_mode_objet]));
 		foreach ($res as $view) 
 			if ($view) echo "\n<br /><fieldset>",interdire_scripts($view),"</fieldset>";
 
 	    } else if ($var_mode_affiche == 'code') {
 		echo  "<legend>",$debug_objets['pretty'][$var_mode_objet],"</legend>";
-		ancre_texte("<"."?php\n".$res."\n?".">");
+		echo ancre_texte("<"."?php\n".$res."\n?".">");
 	    } else if ($var_mode_affiche == 'boucle') {
 		echo  "<legend>",$debug_objets['pretty'][$var_mode_objet],"</legend>";
-		ancre_texte($res);
+		echo ancre_texte($res);
 	    } else if ($var_mode_affiche == 'squelette') {
 		echo  "<legend>",$debug_objets['sourcefile'][$var_mode_objet],"</legend>";
-		ancre_texte($debug_objets['squelette'][$var_mode_objet]);
+		echo ancre_texte($debug_objets['squelette'][$var_mode_objet]);
 	    }
 	    echo "</fieldset></div>";
 	  }
 	}
+
 	if ($texte) {
 
-	  $ouvrant = $fermant = $err = "";
-	  $titre = $GLOBALS['var_mode_affiche'];
-	  if ($titre != 'validation') {
-	    $titre = 'zbug_' . $titre;
-	  }
+		$err = "";
+		$titre = $GLOBALS['var_mode_affiche'];
+		if ($titre != 'validation') {
+			$titre = 'zbug_' . $titre;
+			$texte = ancre_texte($texte, array('',''));
+		} else {
+		  list($texte, $err) = emboite_texte($texte, $self);
+			if ($err === false)
+				$err = _T('impossible');
+			elseif ($err === true)
+			  $err = _T('correcte');
+		}
 
-	  else if ($sax = charger_fonction('sax', 'inc')
-	  AND $res = $sax($texte)) {
-	     if (ereg("^[[:space:]]*([^<][^0-9]*)([0-9]*)(.*[^0-9])([0-9]*)$", $GLOBALS['xhtml_error'], $r)) {
-		$fermant = $r[2];
-		$ouvrant = $r[4];
-		$rf = reference_boucle_debug($fermant, $fonc, $self);
-		$ro = reference_boucle_debug($ouvrant, $fonc, $self);
-		$err = ": " . $r[1] .
-		  "<a href='#L" . $r[2] . "'>$r[2]</a>$rf" .
-		  $r[3] ."<a href='#L" . $r[4] . "'>$r[4]</a>$ro";
-	      } else {
-		  $err = _T('correcte');
-		  $texte = $res;
-	      }
-	  }
-		else
-			$err = _T('impossible');
-
-	  echo "<div id=\"debug_boucle\"><fieldset><legend>",
-	    _T($titre),	       
-	    ' ',
-	    $err,
-	    "</legend>";
-	  ancre_texte($texte, array($ouvrant, $fermant));
-	  echo "</fieldset></div>";
+		echo "<div id=\"debug_boucle\"><fieldset><legend>",
+		  _T($titre),	       
+		  ' ',
+		  $err,
+		  "</legend>";
+		echo $texte;
+		echo "</fieldset></div>";
 	}
 	echo "\n</div>";
 	include_spip('balise/formulaire_admin');
@@ -476,4 +469,27 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	echo '</body></html>';
 	exit;
 }
+
+function emboite_texte($texte,$self='')
+{
+	if (!($sax = charger_fonction('sax', 'inc') AND $res = $sax($texte)))
+		return array(ancre_texte($texte, array('','')), false);
+	elseif (!ereg("^[[:space:]]*([^<][^0-9]*)([0-9]*)(.*[^0-9])([0-9]*)$",
+		     $GLOBALS['xhtml_error'],
+		     $r))
+		return array(ancre_texte($texte, array('', '')), true);
+	else {
+		$fermant = $r[2];
+		$ouvrant = $r[4];
+		if (isset($GLOBALS['debug_objets'])) {
+		  $rf = reference_boucle_debug($fermant, $fonc, $self);
+		  $ro = reference_boucle_debug($ouvrant, $fonc, $self);
+		} else $rf = $ro = '';
+		$err = ": " . $r[1] .
+		  "<a href='#L" . $r[2] . "'>$r[2]</a>$rf" .
+		  $r[3] ."<a href='#L" . $r[4] . "'>$r[4]</a>$ro";
+		return array(ancre_texte($texte, array($ouvrant, $fermant)), $err);
+	}
+}
+
 ?>

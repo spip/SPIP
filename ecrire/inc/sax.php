@@ -109,7 +109,7 @@ function defautElement($parser, $data)
   $depth = &$phraseur_xml->depth;
   $contenu = &$phraseur_xml->contenu;
 
-  $contenu[$depth] .= $data;
+  @$contenu[$depth] .= $data;
 }
 
 // http://doc.spip.org/@translate_entities
@@ -151,7 +151,7 @@ function xml_parsestring($xml_parser, $data)
 	    xml_get_current_line_number($xml_parser) .
 	    _L(" colonne ") .
 	    xml_get_current_column_number($xml_parser) .
-	    (!$depth ? '' :
+	    (!$phraseur_xml->depth ? '' :
 	     ('<br />' .
 	      _L("derni&egrave;re balise non referm&eacute;e&nbsp;: ") .
 	      "<tt>" .
@@ -162,7 +162,6 @@ function xml_parsestring($xml_parser, $data)
 
 	} else $r = $phraseur_xml->res;
 
-	xml_parser_free($xml_parser);
 	return $r;
 }
 
@@ -173,23 +172,21 @@ var $ouvrant = array();
 var $reperes = array();
 }
 
-// xml_set_objet a utiliser a terme
-global $phraseur_xml, $xml_parser;
-$phraseur_xml = new PhraseurXML();
-
-$xml_parser = xml_parser_create($GLOBALS['meta']['charset']);
-xml_set_element_handler($xml_parser,
-			array($phraseur_xml, "debutElement"),
-			array($phraseur_xml, "finElement"));
-xml_set_character_data_handler($xml_parser, array($phraseur_xml, "textElement"));
-xml_set_processing_instruction_handler($xml_parser, array($phraseur_xml, 'PiElement'));
-xml_set_default_handler($xml_parser, array($phraseur_xml, "defautElement"));
-xml_parser_set_option($xml_parser, XML_OPTION_CASE_FOLDING, false);
-
 // http://doc.spip.org/@inc_sax_dist
 function inc_sax_dist($page) {
 	global $phraseur_xml, $xml_parser, $xhtml_error;
+	$phraseur_xml = new PhraseurXML();
+
+	$xml_parser = xml_parser_create($GLOBALS['meta']['charset']);
+	xml_set_element_handler($xml_parser,
+			array($phraseur_xml, "debutElement"),
+			array($phraseur_xml, "finElement"));
+	xml_set_character_data_handler($xml_parser, array($phraseur_xml, "textElement"));
+	xml_set_processing_instruction_handler($xml_parser, array($phraseur_xml, 'PiElement'));
+	xml_set_default_handler($xml_parser, array($phraseur_xml, "defautElement"));
+	xml_parser_set_option($xml_parser, XML_OPTION_CASE_FOLDING, false);
 	$res = $phraseur_xml->xml_parsestring($xml_parser, $page);
+	xml_parser_free($xml_parser);
 	if ($res[0] != '<')
 	  $xhtml_error = $res;
 	else
