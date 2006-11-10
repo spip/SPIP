@@ -88,13 +88,13 @@ fin_cadre_relief();
 
  $messages_vus = array();
 
- echo afficher_messages(_T('infos_vos_pense_bete'), '', "id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND (date_fin > DATE_SUB(NOW(), INTERVAL 1 DAY) OR rv != 'oui')", $messages_vus, false, true);
+ echo afficher_messages('<b>' . _T('infos_vos_pense_bete') . '</b>', '', "id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND (date_fin > DATE_SUB(NOW(), INTERVAL 1 DAY) OR rv != 'oui')", $messages_vus, false, true);
 
 
- echo afficher_messages(_T('info_nouveaux_message'), ", spip_auteurs_messages AS lien", "lien.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND lien.id_message=messages.id_message", $messages_vus,  true, true);
+ echo afficher_messages('<b>' . _T('info_nouveaux_message') . '</b>', ", spip_auteurs_messages AS lien", "lien.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND lien.id_message=messages.id_message", $messages_vus,  true, true);
 
 
- echo afficher_messages(_T('info_discussion_cours'), ", spip_auteurs_messages AS lien", "lien.id_auteur=$connect_id_auteur AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message AND (date_fin > DATE_SUB(NOW(), INTERVAL 1 DAY) OR rv != 'oui')",  $messages_vus, true, false);
+ echo afficher_messages('<b>' . _T('info_discussion_cours') . '</b>', ", spip_auteurs_messages AS lien", "lien.id_auteur=$connect_id_auteur AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message AND (date_fin > DATE_SUB(NOW(), INTERVAL 1 DAY) OR rv != 'oui')",  $messages_vus, true, false);
 
 
 // Afficher le lien RSS
@@ -111,7 +111,7 @@ echo "<div style='text-align: "
 
 
 
- echo afficher_messages(_T('info_message_en_redaction'), '', "id_auteur=$connect_id_auteur AND statut='redac'",  $messages_vus, true, false);
+ echo afficher_messages('<b>' . _T('info_message_en_redaction') . '</b>', '', "id_auteur=$connect_id_auteur AND statut='redac'",  $messages_vus, true, false);
 
 
 $result = spip_query("SELECT auteurs.id_auteur, auteurs.nom, COUNT(*) AS total FROM spip_auteurs AS auteurs,  spip_auteurs_messages AS lien2, spip_messages AS messages, spip_auteurs_messages AS lien WHERE (lien.id_auteur = $connect_id_auteur AND lien.id_message = messages.id_message AND messages.statut = 'publie' AND (messages.rv != 'oui' OR messages.date_fin > NOW() )) AND (lien2.id_auteur = lien2.id_auteur AND lien2.id_message = messages.id_message AND lien2.id_auteur != $connect_id_auteur AND auteurs.id_auteur = lien2.id_auteur) GROUP BY auteurs.id_auteur ORDER BY total DESC LIMIT 10");
@@ -145,9 +145,9 @@ if (spip_num_rows($result) > 0) {
 	echo "</div>";
 }
 
- echo afficher_messages(_T('info_pense_bete_ancien'), '', "id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui'",  $messages_vus, false, false);
+ echo afficher_messages('<b>' . _T('info_pense_bete_ancien') . '</b>', '', "id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui'",  $messages_vus, false, false);
 
- echo afficher_messages(_T('info_tous_redacteurs'), '', "statut='publie' AND type='affich' AND (date_fin > DATE_SUB(NOW(), INTERVAL 1 DAY) OR rv != 'oui')",  $messages_vus, false, false);
+ echo afficher_messages('<b>' . _T('info_tous_redacteurs') . '</b>', '', "statut='publie' AND type='affich' AND (date_fin > DATE_SUB(NOW(), INTERVAL 1 DAY) OR rv != 'oui')",  $messages_vus, false, false);
 
 echo fin_page();
 
