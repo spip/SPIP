@@ -51,9 +51,7 @@ function exec_articles_edit_dist()
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_articles_edit', array('titre' => $titre)),
-			"naviguer", "articles", "hauteurTextarea();", 
-			"",
-			$id_rubrique);
+			"naviguer", "articles", $id_rubrique);
 
 	debut_grand_cadre();
 	echo afficher_hierarchie($id_rubrique);

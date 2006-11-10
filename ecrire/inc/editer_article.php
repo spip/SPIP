@@ -131,7 +131,10 @@ function inc_editer_article($row, $lier_trad, $new, $champs_article) {
 		aide("raccourcis") .
 		$sup .
 		($spip_display==4 ? '' : afficher_barre('document.formulaire.texte')) .
-		"<textarea id='text_area' name='texte'$att_text>$texte</textarea>\n" .
+		"<textarea id='text_area' name='texte'$att_text>$texte</textarea>\n"
+		."<script type='text/javascript'><!--\njQuery(hauteurTextarea);\n//--></script>\n"
+
+		.
 
 		((($articles_ps AND $options == "avancees") OR strlen($ps)) ?
 		 ("\n</p><p><b>" . _T('info_post_scriptum') ."</b><br />" . "<textarea name='ps' class='forml' rows='5' cols='40'>" . $ps . "</textarea>\n") :
