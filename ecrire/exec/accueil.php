@@ -37,7 +37,7 @@ function encours_accueil()
 	//
 	if ($GLOBALS['meta']['activer_sites'] != 'non') {
 		include_spip('inc/sites_voir');
-		$res .= afficher_sites(afficher_plus(generer_url_ecrire('sites_tous'))._T('info_site_valider'), array("FROM" => 'spip_syndic', 'WHERE' => "statut='prop'", 'ORDER BY'=> "nom_site"));
+		$res .= afficher_sites(afficher_plus(generer_url_ecrire('sites_tous')).'<b>' . _T('info_site_valider') . '</b>', array("FROM" => 'spip_syndic', 'WHERE' => "statut='prop'", 'ORDER BY'=> "nom_site"));
 	}
 
 	//
@@ -45,7 +45,7 @@ function encours_accueil()
 	//
 	if ($GLOBALS['meta']['activer_sites'] != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		include_spip('inc/sites_voir');
-		$res .= afficher_sites(afficher_plus(generer_url_ecrire('sites_tous'))._T('avis_sites_syndiques_probleme'), array('FROM' => 'spip_syndic', 'WHERE' => "(syndication='off' OR syndication='sus') AND statut='publie'", 'ORDER BY' => 'nom_site'));
+		$res .= afficher_sites(afficher_plus(generer_url_ecrire('sites_tous')). '<b>' . _T('avis_sites_syndiques_probleme') . '<b>', array('FROM' => 'spip_syndic', 'WHERE' => "(syndication='off' OR syndication='sus') AND statut='publie'", 'ORDER BY' => 'nom_site'));
 	}
 
 	// Les articles syndiques en attente de validation
@@ -225,46 +225,50 @@ echo "<div>&nbsp;</div>";
 // http://doc.spip.org/@personnel_accueil
 function personnel_accueil()
 {
-  global $spip_display, $spip_lang_left, $connect_id_auteur, $connect_id_rubrique, $connect_statut,  $partie_cal, $echelle;
+	global $spip_display, $spip_lang_left, $connect_id_auteur, $connect_id_rubrique, $connect_statut,  $partie_cal, $echelle;
 
-if ($spip_display != 4) {
+	if ($spip_display != 4) {
 	
 	//
 	// Infos personnelles : nom, utilisation de la messagerie
 	//
 	
-	$titre_cadre = afficher_plus(generer_url_ecrire("auteurs_edit","id_auteur=$connect_id_auteur"));
-	$titre_cadre .= majuscules(typo($GLOBALS['auteur_session']['nom']));
+		$titre_cadre = afficher_plus(generer_url_ecrire("auteurs_edit","id_auteur=$connect_id_auteur"));
+		$titre_cadre .= majuscules(typo($GLOBALS['auteur_session']['nom']));
 	
-	debut_cadre_relief("fiche-perso-24.gif", false, '',$titre_cadre);
+		debut_cadre_relief("fiche-perso-24.gif", false, '',$titre_cadre);
 
-	if ($connect_statut == '0minirezo') {
+		if ($connect_statut == '0minirezo') {
 
-		if ($connect_id_rubrique) {
+			if ($connect_id_rubrique) {
 
-			$q = spip_query("SELECT R.id_rubrique, R.titre, R.descriptif FROM spip_rubriques AS R, spip_auteurs_rubriques AS A WHERE A.id_auteur=$connect_id_auteur AND A.id_rubrique=R.id_rubrique ORDER BY titre");
+				$q = spip_query("SELECT R.id_rubrique, R.titre, R.descriptif FROM spip_rubriques AS R, spip_auteurs_rubriques AS A WHERE A.id_auteur=$connect_id_auteur AND A.id_rubrique=R.id_rubrique ORDER BY titre");
 
-			$rubs = array();
-			while ($r = spip_fetch_array($q)) {
-				$rubs[] = "<a title='" .
-				    typo($r['descriptif']) .
-				    "' href='" . generer_url_ecrire('naviguer', "id_rubrique=" .$r['id_rubrique']) . "'>" .
-				    typo($r['titre']) .
-				    '</a>';
+				$rubs = array();
+				while ($r = spip_fetch_array($q)) {
+					$rubs[] = "<a title='" .
+					  typo($r['descriptif']) .
+					  "' href='" . generer_url_ecrire('naviguer', "id_rubrique=" .$r['id_rubrique']) . "'>" .
+					  typo($r['titre']) .
+					  '</a>';
+				}
+
+				echo "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>\n<li>", join("</li>\n<li>", $rubs), "\n</li></ul>";
 			}
-
-			echo "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>\n<li>", join("</li>\n<li>", $rubs), "\n</li></ul>";
 		}
-	}
 
 	//
 	// Supprimer le cookie, se deconnecter...
 	//
 	
-	if ($_COOKIE['spip_admin']) {
-			$texte = _T('icone_supprimer_cookie');
-			if ($spip_display != 1) $texte .= aide("cookie");
-			icone_horizontale( $texte , generer_url_public("spip_cookie", "cookie_admin=non&url=".rawurlencode(_DIR_RESTREINT_ABS)), "cookie-24.gif", "");
+		if ($_COOKIE['spip_admin']) {
+			$t = _T('icone_supprimer_cookie');
+			$t = icone_horizontale($t, generer_url_public("spip_cookie", "cookie_admin=non&url=".rawurlencode(_DIR_RESTREINT_ABS)), "cookie-24.gif", "", false);
+			if ($spip_display != 1) 
+				$t = str_replace('</td></tr></table>', 
+					aide("cookie").'</td></tr></table>',
+						 $t);
+			echo $t;
 		}
 	}
 
@@ -339,7 +343,7 @@ if ($spip_display != 4) {
 		if ($connect_statut == "0minirezo") echo afficher_plus(generer_url_ecrire("controle_forum",""));
 		echo "<b>",_T('onglet_messages_publics'),"</b>";
 		echo "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
-		echo "<li><b>",$cpt , "</b>";
+		echo "<li><b>",$cpt , "</b></li>";
 		echo "</ul>";
 	}
 
@@ -429,14 +433,14 @@ function exec_accueil_dist()
 	$post_dates = $GLOBALS['meta']["post_dates"];
 
 	if ($post_dates == "non" AND $connect_statut == '0minirezo' AND $options == 'avancees') {
-		echo "<p>", afficher_articles(_T('info_article_a_paraitre'), array("WHERE" => "statut='publie' AND date>NOW()", 'ORDER BY' => "date"));
+		echo afficher_articles(_T('info_article_a_paraitre'), array("WHERE" => "statut='publie' AND date>NOW()", 'ORDER BY' => "date"));
 }
 
 //
 // Vos articles en cours de redaction
 //
 
-	echo "<p>", afficher_articles(afficher_plus(generer_url_ecrire('articles_page'))._T('info_en_cours_validation'),	array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa'", "ORDER BY" => "articles.date DESC"));
+	echo afficher_articles(afficher_plus(generer_url_ecrire('articles_page'))._T('info_en_cours_validation'),	array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa'", "ORDER BY" => "articles.date DESC"));
 
 	colonne_gauche_accueil($id_rubrique,
 			 $GLOBALS['meta']["activer_breves"],

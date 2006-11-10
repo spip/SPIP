@@ -62,8 +62,8 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 				$titre_table = afficher_plus(generer_url_ecrire("suivi_revisions"))
 				. $titre_table;
 
-			echo "<div style='height: 12px;'></div>";
-			echo "<div class='liste'>";
+			echo "\n<div style='height: 12px;'></div>";
+			echo "\n<div class='liste'>";
 			bandeau_titre_boite2($titre_table, "historique-24.gif");
 	
 			$total = spip_num_rows(spip_query("SELECT versions.*, articles.statut, articles.titre FROM spip_versions AS versions, spip_articles AS articles WHERE $req_where LIMIT 0, 149"));
@@ -71,7 +71,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 			if ($total > $nb_aff) {
 				$nb_tranches = ceil($total / $nb_aff);
 			
-				echo "<div class='arial2' style='background-color: #dddddd; padding: 5px;'>";
+				echo "\n<div class='arial2' style='background-color: #dddddd; padding: 5px;'>";
 		
 				for ($i = 0; $i < $nb_tranches; $i++) {
 					if ($i > 0) echo " | ";
@@ -108,11 +108,11 @@ echo "<a href='", generer_url_ecrire('suivi_revisions', "debut=$next&id_secteur=
 	
 			if (!$rss) {
 				$logo_statut = "puce-".puce_statut($statut).".gif";
-				echo "<div class='tr_liste' style='padding: 5px; border-top: 1px solid #aaaaaa;'>";
+				echo "\n<div class='tr_liste' style='padding: 5px; border-top: 1px solid #aaaaaa;'>";
 	
 				echo "<span class='arial2'>";
 				if (!$court) echo bouton_block_visible("$id_version-$id_article-$id_auteur");
-				echo "<img src='" . _DIR_IMG_PACK . "$logo_statut' />&nbsp;";
+				echo "<img src='" . _DIR_IMG_PACK . "$logo_statut' alt=' ' />&nbsp;";
 				echo "<a class='$statut' style='font-weight: bold;' href='" . generer_url_ecrire("articles_versions","id_article=$id_article") . "'>$titre</a>";
 				echo "</span>";
 				echo "<span class='arial1'$dir_lang>";

@@ -21,7 +21,7 @@ include_spip('inc/actions');
 
 // http://doc.spip.org/@hr
 function hr($color, $retour = false) {
-	$ret = "<div style='height: 1px; margin-top: 5px; padding-top: 5px; border-top: 1px solid $color;'></div>";
+	$ret = "\n<div style='height: 1px; margin-top: 5px; padding-top: 5px; border-top: 1px solid $color;'></div>";
 	
 	if ($retour) return $ret; else echo $ret;
 }
@@ -49,18 +49,18 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 	} else $ret ='';
 
 	if ($style == "e") {
-		$ret .= "<div class='cadre-e-noir'$style_cadre><div class='cadre-$style'>";
+		$ret .= "\n<div class='cadre-e-noir'$style_cadre><div class='cadre-$style'>";
 	}
 	else {
-		$ret .= "<div class='cadre-$style'$style_cadre>";
+		$ret .= "\n<div class='cadre-$style'$style_cadre>";
 	}
 
-	$ret .= "<div style='position: relative;'>";
+	$ret .= "\n<div style='position: relative;'>";
 
 	if ($spip_display != 1 AND $spip_display != 4 AND strlen($icone) > 1) {
-		$ret .= "<div style='position: absolute; top: -16px; $spip_lang_left: 10px;'>";
+		$ret .= "\n<div style='position: absolute; top: -16px; $spip_lang_left: 10px;'>";
 		if ($fonction) {
-			$ret .= "<div " . http_style_background($icone, "no-repeat; padding: 0px; margin: 0px") . ">";
+			$ret .= "\n<div " . http_style_background($icone, "no-repeat; padding: 0px; margin: 0px") . ">";
 			$ret .= http_img_pack($fonction, "", "");
 			$ret .= "</div>";
 		}
@@ -73,16 +73,16 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 
 	if (strlen($titre) > 0) {
 		if ($spip_display == 4) {
-			$ret .= "<h3 class='cadre-titre'>$titre</h3>";
+			$ret .= "\n<h3 class='cadre-titre'>$titre</h3>";
 		} else {
-			$ret .= "<div class='cadre-titre' style='margin: 0px;$style_gauche'>$titre</div>";
+			$ret .= "\n<div class='cadre-titre' style='margin: 0px;$style_gauche'>$titre</div>";
 		}
 	}
 	
 	
 	$ret .= "</div>";
 	
-	$ret .= "<div class='cadre-padding' style='overflow:hidden;'>";
+	$ret .= "\n<div class='cadre-padding' style='overflow:hidden;'>";
 
 
 	return $ret;
@@ -94,7 +94,7 @@ function fin_cadre($style) {
 	$ret = "</div>";
 	$ret .= "</div>";
 	if ($style == "e") $ret .= "</div>";
-	if ($style != "forum" AND $style != "thread-forum") $ret .= "<div style='height: 5px;'></div>";
+	if ($style != "forum" AND $style != "thread-forum") $ret .= "\n<div style='height: 5px;'></div>";
 
 	return $ret;
 }
@@ -236,7 +236,7 @@ function fin_boite_alerte() {
 //
 // http://doc.spip.org/@debut_boite_info
 function debut_boite_info($return=false) {
-	$r ="<div class='cadre-info verdana1'>";
+	$r ="\n<div class='cadre-info verdana1'>";
 	if ($return) return $r; else echo $r;
 }
 
@@ -256,11 +256,11 @@ function bandeau_titre_boite2($titre, $logo="", $fond="white", $texte="black", $
 	if (strlen($logo) > 0 AND $spip_display != 1 AND $spip_display != 4) {
 		$ie_style = ($browser_name == "MSIE") ? "height:1%" : '';
 
-		$retour = "<div style='position: relative;$ie_style'>"
-		. "<div style='position: absolute; top: -12px; $spip_lang_left: 3px;'>" .
+		$retour = "\n<div style='position: relative;$ie_style'>"
+		. "\n<div style='position: absolute; top: -12px; $spip_lang_left: 3px;'>" .
 		  http_img_pack("$logo", "", "")
 		. "</div>"
-		. "<div style='background-color: $fond; color: $texte; padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2'>$titre</div>"
+		. "\n<div style='background-color: $fond; color: $texte; padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2'>$titre</div>"
 		 . "</div>";
 	} else {
 		$retour = "<h3 style='background-color: $fond; color: $texte; padding: 3px; border-bottom: 1px solid #444444; margin: 0px;' class='verdana2'>$titre</h3>";
@@ -277,11 +277,11 @@ function bandeau_titre_boite2($titre, $logo="", $fond="white", $texte="black", $
 function bloc_des_raccourcis($bloc) {
 	global $spip_display;
 
-	return "<div>&nbsp;</div>"
+	return "\n<div>&nbsp;</div>"
 	. creer_colonne_droite('',true)
 	. debut_cadre_enfonce('',true)
 	. (($spip_display != 4)
-	     ? ("<div style='font-family: Verdana,Arial,Sans,sans-serif; font-size: x-small'><b>"
+	     ? ("\n<div style='font-family: Verdana,Arial,Sans,sans-serif; font-size: x-small'><b>"
 		._T('titre_cadre_raccourcis')
 		."</b>")
 	       : ( "<h3>"._T('titre_cadre_raccourcis')."</h3><ul>"))
@@ -297,7 +297,7 @@ function afficher_plus($lien) {
 	global $options, $spip_lang_right, $spip_display;
 	
 	if ($options == "avancees" AND $spip_display != 4) {
-			return "<div style='float:$spip_lang_right; padding-top: 2px;'><a href='$lien'>" .
+			return "\n<div style='float:$spip_lang_right; padding-top: 2px;'><a href='$lien'>" .
 			  http_img_pack("plus.gif", "+", "") ."</a></div>";
 	}
 }
@@ -358,7 +358,7 @@ function afficher_liste_display_neq4($largeurs, $t, $styles = '') {
 function afficher_liste_display_eq4($largeurs, $t, $styles = '') {
 	global $spip_lang_left;
 
-	$res .= "<li>";
+	$res = "<li>";
 	reset($largeurs);
 	if ($styles) reset($styles);
 	while (list(, $texte) = each($t)) {
@@ -434,6 +434,7 @@ function afficher_tranches_requete($num_rows, $tmp_var, $url='', $nb_aff = 10) {
 // http://doc.spip.org/@affiche_tranche_bandeau
 function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, $force, $largeurs, $styles, $skel, $own='')
 {
+
 	global $spip_display ;
 
 	$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
@@ -444,8 +445,8 @@ function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, 
 	if (! ($force OR ($cpt = $cpt['n']))) return '';
 
 	$res = "";
-	if ($titre) $res .= "<div style='height: 12px;'></div>";
-	$res .= "<div class='liste'>";
+	if ($titre) $res .= "\n<div style='height: 12px;'></div>";
+	$res .= "\n<div class='liste'>";
 	$res .= bandeau_titre_boite2('<b>' . $titre . '</b>', $icone, $fg, $bg, false);
 	$res .= "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
 	if (isset($requete['LIMIT'])) $cpt = min($requete['LIMIT'], $cpt);
@@ -536,7 +537,7 @@ function puce_statut_article($id, $statut, $id_rubrique, $ajax = false) {
 		  $inser_puce = 
 		  	// "\n<div class='puce_article' id='statut$id'$dir_lang>" .
 				"\n<div class='puce_article_fixe' $action>" .
-			  http_img_pack("$puce", "", "id='imgstatutarticle$id' style='margin: 1px;'") ."</div>"
+			  http_img_pack($puce, ' ', "id='imgstatutarticle$id' style='margin: 1px;'") ."</div>"
 				. "\n<div class='puce_article_popup' id='statutdecalarticle$id' onmouseout=\"cacher('statutdecalarticle$id');\" style=' margin-left: -".((11*$clip)+1)."px;'>\n"
 				. afficher_script_statut($id, 'article', -1, 'puce-blanche.gif', 'prepa', $titles['blanche'], $action)
 				. afficher_script_statut($id, 'article', -12, 'puce-orange.gif', 'prop', $titles['orange'], $action)
@@ -549,8 +550,7 @@ function puce_statut_article($id, $statut, $id_rubrique, $ajax = false) {
 		}
 		else{
 		  $inser_puce = "\n<div class='puce_article' id='statut$id'$dir_lang>".
-			  http_img_pack("$puce", "", "id='imgstatutarticle$id' style='margin: 1px;'") ."</div>"
-		  	. "</div>";
+			  http_img_pack($puce, ' ', "id='imgstatutarticle$id' style='margin: 1px;'") ."</div>";
 			if ($script==NULL){
 				$action = "'".generer_url_ecrire('puce_statut_article',"id='+id",true);
 				$script = "<script type='text/javascript'><!--\n";
@@ -570,7 +570,7 @@ function puce_statut_article($id, $statut, $id_rubrique, $ajax = false) {
 			}
 		}
 	} else {
-		$inser_puce = http_img_pack("$puce", "", "id='imgstatutarticle$id' style='margin: 1px;'");
+		$inser_puce = http_img_pack($puce, ' ', "id='imgstatutarticle$id' style='margin: 1px;'");
 	}
 	return $inser_puce;
 }
@@ -608,7 +608,7 @@ function puce_statut_breve($id, $statut, $type, $droit) {
 	}
 
 	$type1 = "statut$type$id"; 
-	$inser_puce = http_img_pack($puce, "", "id='img$type1' style='margin: 1px;'");
+	$inser_puce = http_img_pack($puce, ' ', "id='img$type1' style='margin: 1px;'");
 
 	if (!$droit) return $inser_puce;
 	
@@ -618,8 +618,8 @@ function puce_statut_breve($id, $statut, $type, $droit) {
 	  // les versions de MSIE ne font pas toutes pareil sur alt/title
 	  // la combinaison suivante semble ok pour tout le monde.
 
-	return	"<div class='puce_breve' id='$type1'$dir_lang>"
-		. "<div class='puce_breve_fixe' $action>"
+	return	"\n<div class='puce_breve' id='$type1'$dir_lang>"
+		. "\n<div class='puce_breve_fixe' $action>"
 		. $inser_puce
 		. "</div>"
 		. "\n<div class='puce_breve_popup' id='$type2' onmouseout=\"cacher('$type2');\" style=' margin-left: -".((9*$clip)+1)."px;'>\n"
@@ -637,9 +637,7 @@ function afficher_script_statut($id, $type, $n, $img, $statut, $title, $act)
 		      "', '" .
 		       generer_action_auteur("instituer_$type","$id-$statut") .
 		      "');",
-		      $img,
-			"title=\"".$title."\"",
-			'','','',
+		       $img,'', $title,'','',
 		      $act);
 }
 
@@ -802,11 +800,11 @@ function afficher_articles_trad_boucle($row)
 	if (!$span_lang)
 		$span_lang = "<a href='" . generer_url_ecrire("articles","id_article=$id_article") . "'><span class='lang_base'>$lang</span></a>";
 
-	$vals[] = "<div style='text-align: center;'>$span_lang</div>";
+	$vals[] = "\n<div style='text-align: center;'>$span_lang</div>";
 			
 			
-	$s = "<div>";
-	$s .= "<div style='float: $spip_lang_right; margin-right: -10px;'>$l</div>";
+	$s = "\n<div>";
+	$s .= "\n<div style='float: $spip_lang_right; margin-right: -10px;'>$l</div>";
 	
 	if (acces_restreint_rubrique($id_rubrique))
 		$s .= http_img_pack("admin-12.gif", "", "width='12' height='12'", _T('titre_image_admin_article'));
@@ -890,7 +888,7 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 			
 	$vals[] = puce_statut_breve($id_breve, $statut, 'breve', ($droit && acces_rubrique($id_rubrique)), $id_rubrique);
 
-	$s = "<div>";
+	$s = "\n<div>";
 	$s .= "<a href='" . generer_url_ecrire("breves_voir","id_breve=$id_breve") . "' style=\"display:block;\">";
 
 	if ($voir_logo) {
@@ -899,7 +897,7 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 			list($fid, $dir, $nom, $format) = $logo;
 			$logo = ratio_image($fid, $nom, $format, 26, 20, "alt=''");
 			if ($logo)
-				$s .= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</div>";
+				$s .= "\n<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</div>";
 		}
 	}
 
@@ -967,10 +965,10 @@ function afficher_rubriques_boucle($row, &$tous_id)
 	
 	$s = "<b><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'>";
 	$s .= typo($titre);
-	$s .= "</A></b>";
+	$s .= "</a></b>";
 	$vals[] = $s;
 	
-	$s = "<div align=\"right\">";
+	$s = "\n<div align=\"right\">";
 	if  ($GLOBALS['meta']['multi_rubriques'] == 'oui') {
 				$s .= ($lang);
 	}
@@ -1107,7 +1105,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 				list($fid, $dir, $nom, $format) = $logo;
 				$logo = ratio_image($fid, $nom, $format, 48, 48, "alt=''");
 				if ($logo)
-					$titre_boite = "<div style='$voir_logo'>$logo</div>" ;
+					$titre_boite = "\n<div style='$voir_logo'>$logo</div>" ;
 			}
 		} 
 
@@ -1123,11 +1121,11 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 			
 	// Si refuse, cadre rouge
 	if ($statut=="off") {
-		$res .= "<div style='border: 2px dashed red; padding: 5px;'>";
+		$res .= "\n<div style='border: 2px dashed red; padding: 5px;'>";
 	}
 	// Si propose, cadre jaune
 	else if ($statut=="prop") {
-		$res .= "<div style='border: 1px solid yellow; padding: 5px;'>";
+		$res .= "\n<div style='border: 1px solid yellow; padding: 5px;'>";
 	}
 		
 	$res .= "<span class='arial2'>". date_interface($date_heure) . "</span>&nbsp;&nbsp;";
@@ -1155,13 +1153,13 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 
 	if ($nom_site) {
 		if (strlen($url_site) > 10)
-			$res .= "<div align='left' class='verdana2'><b><a href='$url_site'>$nom_site</a></b></div>";
+			$res .= "\n<div align='left' class='verdana2'><b><a href='$url_site'>$nom_site</a></b></div>";
 		else $res .= "<b>$nom_site</b>";
 	}
 
 	if (!$controle_id_article) {
 	  	$tm = rawurlencode($titre);
-		$res .= "<div align='right' class='verdana1'>"
+		$res .= "\n<div align='right' class='verdana1'>"
 		. "<b><a href='"
 		  . generer_url_ecrire("forum_envoi", "id_parent=$id_forum&titre_message=$tm&script=$retour") . '#formulaire'
 		. "'>"
@@ -1204,7 +1202,7 @@ function afficher_forum_mots($id_forum)
 		. propre($row['titre'])
 		. " :</b> "
 		.  propre($row['type'])
-		.  "<li>";
+		.  "</li>";
 	}
 	$res .= '</ul>';
 	return $res;
@@ -1320,7 +1318,7 @@ function debut_javascript($admin, $stat)
 
 	if ($_COOKIE['spip_accepte_ajax'] != -1) {
 		define('_TESTER_NOSCRIPT',
-			"<noscript><div style='display:none;'><img src='".generer_url_ecrire('test_ajax', 'js=-1')."' width='1' height='1' alt='' /></div></noscript>\n"); // pour le pied de page
+			"<noscript>\n<div style='display:none;'><img src='".generer_url_ecrire('test_ajax', 'js=-1')."' width='1' height='1' alt='' /></div></noscript>\n"); // pour le pied de page
 	}
 
 	return 
@@ -1328,7 +1326,7 @@ function debut_javascript($admin, $stat)
 		$GLOBALS['browser_layer'] .
 	 	http_script(
 			$tester_javascript . 
-			"\nvar ajax_image_searching = '<div style=\"float: ".$GLOBALS['spip_lang_right'].";\"><img src=\"".url_absolue(_DIR_IMG_PACK."searching.gif")."\" /></div>';" .
+			"\nvar ajax_image_searching = \n'<div style=\"float: ".$GLOBALS['spip_lang_right'].";\"><img src=\"".url_absolue(_DIR_IMG_PACK."searching.gif")."\" /></div>';" .
 			"\nvar stat = " . ($stat ? 1 : 0) .
 			"\nvar largeur_icone = " .
 			intval(_LARGEUR_ICONES_BANDEAU) .
@@ -1350,7 +1348,7 @@ function debut_javascript($admin, $stat)
 function debut_onglet(){
 
 	return "
-<div style='padding: 7px;'><table cellpadding='0' cellspacing='0' border='0' align='center'><tr>
+\n<div style='padding: 7px;'><table cellpadding='0' cellspacing='0' border='0' align='center'><tr>
 ";
 }
 
@@ -1366,10 +1364,10 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 	$res = "<td>";
 	
 	if ($onglet != $onglet_ref) {
-		$res .= "<div style='position: relative;'>";
+		$res .= "\n<div style='position: relative;'>";
 		if ($spip_display != 1) {
 			if (strlen($icone) > 0) {
-				$res .= "<div style='z-index: 2; position: absolute; top: 0px; $spip_lang_left: 5px;'>" .
+				$res .= "\n<div style='z-index: 2; position: absolute; top: 0px; $spip_lang_left: 5px;'>" .
 				  http_img_pack("$icone", "", "") . "</div>";
 				$style = " top: 7px; padding-$spip_lang_left: 32px; z-index: 1;";
 			} else {
@@ -1377,15 +1375,15 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 			}
 		}
 		
-		$res .= "<div onmouseover=\"changeclass(this, 'onglet_on');\" onmouseout=\"changeclass(this, 'onglet');\" class='onglet' style='position: relative;$style'><a href='$lien'>$texte</a></div>";
+		$res .= "\n<div onmouseover=\"changeclass(this, 'onglet_on');\" onmouseout=\"changeclass(this, 'onglet');\" class='onglet' style='position: relative;$style'><a href='$lien'>$texte</a></div>";
 		
 		
 		$res .= "</div>";
 	} else {
-		$res .= "<div style='position: relative;'>";
+		$res .= "\n<div style='position: relative;'>";
 		if ($spip_display != 1) {
 			if (strlen($icone) > 0) {
-				$res .= "<div style='z-index: 2; position: absolute; top: 0px; $spip_lang_left: 5px;'>" .
+				$res .= "\n<div style='z-index: 2; position: absolute; top: 0px; $spip_lang_left: 5px;'>" .
 				  http_img_pack("$icone", "", "") . "</div>";
 				$style = " top: 7px; padding-$spip_lang_left: 32px; z-index: 1;";
 			} else {
@@ -1393,7 +1391,7 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 			}
 		}
 		
-		$res .= "<div class='onglet_off' style='position: relative;$style'>$texte</div>";
+		$res .= "\n<div class='onglet_off' style='position: relative;$style'>$texte</div>";
 		
 		
 		$res .= "</div>";
@@ -1469,7 +1467,6 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $af = true
 	global $spip_display;
 
 	$retour = '';
-
 	// cas d'ajax_action_auteur: faut defaire le boulot 
 	// (il faudrait fusionner avec le cas $javascript)
 	if (preg_match(",^<a href='([^']*)'([^>]*)>(.*)</a>$,i",$lien,$r))
@@ -1495,7 +1492,7 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $af = true
 			. "</a></td></tr></table>\n";
 		}
 		else {
-			$retour .= "<div><a class='cellule-h-texte' $javascript$lien>$texte</a></div>\n";
+			$retour .= "\n<div><a class='cellule-h-texte' $javascript$lien>$texte</a></div>\n";
 		}
 		if ($fonction == "supprimer.gif")
 			$retour = "\n<div class='danger'>$retour</div>";
@@ -1514,7 +1511,7 @@ function gros_titre($titre, $ze_logo='', $aff=true){
 		$res = "\n<h1>".typo($titre)."</h1>&nbsp;\n";
 	}
 	else {
-		$res = "<div class='verdana2' style='font-size: 18px; color: $couleur_foncee; font-weight: bold;'>" .
+		$res = "\n<div class='verdana2' style='font-size: 18px; color: $couleur_foncee; font-weight: bold;'>" .
 		  (strlen($ze_logo) <= 3 ? '':  (http_img_pack($ze_logo, "", "align='middle'") . " &nbsp; ")) .
 		  typo($titre) .
 		  "</div>\n";
@@ -1596,7 +1593,7 @@ function debut_gauche($rubrique = "accueil", $return=false) {
 
 	$res = "<br /><table width='$largeur_ecran' cellpadding='0' cellspacing='0' border='0'>
 		<tr>\n<td width='$largeur' class='colonne_etroite serif' valign='top' $rspan>
-		<div style='width: ${largeur}px; overflow:hidden;'>
+		\n<div style='width: ${largeur}px; overflow:hidden;'>
 \n";
 		
 	if ($spip_display == 4) $res .= "<!-- ";
@@ -1659,7 +1656,7 @@ function debut_droite($rubrique="", $return= false) {
 		$res .= liste_articles_bloques();
 	}
 
-	$res .= "<div>&nbsp;</div></td>";
+	$res .= "\n<div>&nbsp;</div></td>";
 
 	if (!$flag_3_colonnes) {
 		$res .= "<td width='50'>&nbsp;</td>";
@@ -1692,20 +1689,20 @@ function liste_articles_bloques()
 		include_spip('inc/drapeau_edition');
 		$articles_ouverts = liste_drapeau_edition ($connect_id_auteur, 'article');
 		if (count($articles_ouverts)) {
-			$res .= "<div>&nbsp;</div>"
-			. "<div class='bandeau_rubriques' style='z-index: 1;'>"
+			$res .= "\n<div>&nbsp;</div>"
+			. "\n<div class='bandeau_rubriques' style='z-index: 1;'>"
 			. bandeau_titre_boite2('<b>' . _T('info_cours_edition')  . '</b>', "article-24.gif", $couleur_foncee, 'white', false)
-			. "<div class='plan-articles-bloques'>";
+			. "\n<div class='plan-articles-bloques'>";
 
 			foreach ($articles_ouverts as $row) {
 				$ze_article = $row['id_article'];
 				$ze_titre = $row['titre'];
 				$statut = $row["statut"];
 					
-				$res .= "<div class='$statut'><a style='font-size: 10px;' href='" 
+				$res .= "\n<div class='$statut'><a style='font-size: 10px;' href='" 
 				. generer_url_ecrire("articles","id_article=$ze_article")
 				. "'>$ze_titre</a>"
-				. "<div style='text-align:right; font-size: 9px;'>"
+				. "\n<div style='text-align:right; font-size: 9px;'>"
 				. debloquer_article($ze_article,_T('lien_liberer'))
 				. "</div>"
 				. "</div>";
@@ -1726,7 +1723,7 @@ function fin_page() {
 
 	return "</td></tr></table>"
 	. debut_grand_cadre(true)
-
+	. "\n"
 	. (($spip_display == 4)
 		? ("<div><a href='./?set_disp=2'>"
 		.  _T("access_interface_graphique")
@@ -1788,10 +1785,10 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30)
 		. "</a>";
 	}
 
-	return "<div>&nbsp;</div>"
-	. "<div class='bandeau_rubriques' style='z-index: 1;'>"
+	return "\n<div>&nbsp;</div>"
+	. "\n<div class='bandeau_rubriques' style='z-index: 1;'>"
 	. bandeau_titre_boite2('<b>' . _T('info_meme_rubrique')  . '</b>', "article-24.gif",'','',false)
-	. "<div class='plan-articles'>"
+	. "\n<div class='plan-articles'>"
 	. $retour
 	. "</div></div>";
 }
@@ -1821,7 +1818,7 @@ function afficher_hierarchie($id_rubrique) {
 		: (acces_restreint_rubrique($id_rubrique)
 		? "admin-12.gif" : "rubrique-12.gif");
 
-		$parents = "<div class='verdana3' "
+		$parents = "\n<div class='verdana3' "
 		. http_style_background($logo, $style1)
 		. "><a href='"
 		. generer_url_ecrire("naviguer","id_rubrique=$id_rubrique")
@@ -1834,7 +1831,7 @@ function afficher_hierarchie($id_rubrique) {
 		$id_rubrique = $id_parent;
 	}
 
-	return "<div class='verdana3' " .
+	return "\n<div class='verdana3' " .
 		  http_style_background("racine-site-12.gif", $style1). 
 		  "><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'><b>"._T('lien_racine_site')."</b></a>".aide ("rubhier")."</div>\n<div style='$style2'>".$parents."</div>";
 }
@@ -1875,25 +1872,25 @@ function enfant_rub($collection){
 				list($fid, $dir, $nom, $format) = $logo;
 				$logo = ratio_image($fid, $nom, $format, 48, 36, "alt=''");
 				if ($logo)
-					$logo =  "<div style='$voir_logo'>$logo</div>";
+					$logo =  "\n<div style='$voir_logo'>$logo</div>";
 			}
 		}
-		$les_enfants .= "<div class='enfants'>" .
+		$les_enfants .= "\n<div class='enfants'>" .
 			debut_cadre_sous_rub(($id_parent ? "rubrique-24.gif" : "secteur-24.gif"), true) .
 		  (is_string($logo) ? $logo : '') .
 		  (!$les_sous_enfants ? "" : bouton_block_invisible("enfants$id_rubrique")) .
 		  (!acces_restreint_rubrique($id_rubrique) ? "" :
 		   http_img_pack("admin-12.gif", '', " width='12' height='12'", _T('image_administrer_rubrique'))) .
-		  " <span dir='$lang_dir'><B><A href='" . 
+		  " <span dir='$lang_dir'><b><a href='" . 
 		  generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") .
 		  "'><font color='$couleur_foncee'>".
 		  typo($titre) .
-		  "</font></A></B></span>" .
-		  (!$descriptif ? '' : "<div class='verdana1'>$descriptif</div>");
+		  "</font></a></b></span>" .
+		  (!$descriptif ? '' : "\n<div class='verdana1'>$descriptif</div>");
 
 		if ($spip_display != 4) $les_enfants .= $les_sous_enfants;
 		
-		$les_enfants .= "<div style='clear:both;'></div>"  .
+		$les_enfants .= "\n<div style='clear:both;'></div>"  .
 		  fin_cadre_sous_rub(true) .
 		  "</div>";
 
@@ -1919,8 +1916,8 @@ function sous_enfant_rub($collection2){
 			$titre2=$row['titre'];
 			changer_typo($row['lang']);
 
-			$retour.="<div class='arial11' " .
-			  http_style_background('rubrique-12.gif', "left center no-repeat; padding: 2px; padding-$spip_lang_left: 18px; margin-$spip_lang_left: 3px") . "><A href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique2") . "'><span dir='$lang_dir'>".typo($titre2)."</span></a></div>\n";
+			$retour.="\n<li><div class='arial11' " .
+			  http_style_background('rubrique-12.gif', "left center no-repeat; padding: 2px; padding-$spip_lang_left: 18px; margin-$spip_lang_left: 3px") . "><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique2") . "'><span dir='$lang_dir'>".typo($titre2)."</span></a></div></li>\n";
 	}
 	$retour .= "</ul>\n\n".fin_block()."\n\n";
 	
@@ -1936,17 +1933,17 @@ function afficher_enfant_rub($id_rubrique, $bouton=false, $return=false) {
 
 	$les_enfants2=substr($les_enfants,round($n/2));
 
-	if (strpos($les_enfants2,"<div class='enfants'>")){
-		$les_enfants2=substr($les_enfants2,strpos($les_enfants2,"<div class='enfants'>"));
+	if (strpos($les_enfants2,"\n<div class='enfants'>")){
+		$les_enfants2=substr($les_enfants2,strpos($les_enfants2,"\n<div class='enfants'>"));
 		$n2 = strlen($les_enfants2);
 		$les_enfants=substr($les_enfants,0,$n-$n2);
 	}else{
 		$les_enfants2="";
 	}
 	
-	$res = "<div>&nbsp;</div>"
+	$res = "\n<div>&nbsp;</div>"
 	. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>"
-	. "\n<tr><td valign='top' width=50% rowspan=2>"
+	. "\n<tr><td valign='top' width='50%' rowspan='2'>"
 	. $les_enfants
 	. "</td>"
 	. "\n<td width='20' rowspan='2'>"
@@ -1958,7 +1955,7 @@ function afficher_enfant_rub($id_rubrique, $bouton=false, $return=false) {
 	. "</td></tr>"
 	. "\n<tr><td style='text-align: "
 	. $spip_lang_right
-	. ";' valign='bottom'><div align='"
+	. ";' valign='bottom'>\n<div align='"
 	. $spip_lang_right
 	. "'>"
 	. (!$bouton ? ''
@@ -2068,7 +2065,7 @@ function bouton_spip_rss($op, $args, $fmt='rss') {
 	return "<a href='"
 	. $url
 	. "'>"
-	. http_img_pack('feed.png', $button, 'RSS', 'RSS')
+	. http_img_pack('feed.png', $button, '', 'RSS')
 	. "</a>";
 }
 
@@ -2098,15 +2095,15 @@ function http_calendrier_rv($messages, $type) {
 			$date_jour = affdate_jourcourt($date);
 			$total .= "<tr><td colspan='2'>" .
 				(($date_jour == $date_rv) ? '' :
-				"<div  class='calendrier-arial11'><b>$date_jour</b></div>") .
+				"\n<div  class='calendrier-arial11'><b>$date_jour</b></div>") .
 				"</td></tr>";
 			$date_rv = $date_jour;
 			$rv =
 		((affdate($date) == affdate($date_fin)) ?
-		 ("<div class='calendrier-arial9 fond-agenda'>"
+		 ("\n<div class='calendrier-arial9 fond-agenda'>"
 		  . heures($date).":".minutes($date)."<br />"
 		  . heures($date_fin).":".minutes($date_fin)."</div>") :
-		( "<div class='calendrier-arial9 fond-agenda' style='text-align: center;'>"
+		( "\n<div class='calendrier-arial9 fond-agenda' style='text-align: center;'>"
 		  . heures($date).":".minutes($date)."<br />...</div>" ));
 		}
 
@@ -2120,7 +2117,7 @@ function http_calendrier_rv($messages, $type) {
 		"</td>" .
 		"<td valign='middle'>" .
 		$rv .
-		"<div><b>" .
+		"\n<div><b>" .
 		  http_href($url, typo($row['titre']), '', '', 'calendrier-verdana10') .
 		"</b></div>" .
 		"</td>" .
