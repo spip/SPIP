@@ -83,7 +83,7 @@ function document_et_vignette($document, $url, $portfolio=false) {
 				$image = image_pattern($vignette);
 			} else {
 				include_spip('inc/logos');
-				$image = reduire_image_logo((_DIR_RACINE . $vignette['fichier']), 120, 110);
+				$image = reduire_image_logo($vignette['fichier'], 120, 110);
 			}
 	} else if (strstr($GLOBALS['meta']['formats_graphiques'], $extension)
 	AND $GLOBALS['meta']['creer_preview'] == 'oui') {
