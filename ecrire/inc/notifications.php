@@ -99,6 +99,10 @@ function envoyer_mail_publication($id_article) {
 			$lang_utilisateur = $GLOBALS['spip_lang'];
 			changer_langue($row['lang']);
 
+			// URL de l'article
+			charger_generer_url();
+			$url = url_absolue(generer_url_article($id_article, true));
+
 			$titre = nettoyer_titre_email($row['titre']);
 
 			$sujet = _T('info_publie_1', array('nom_site_spip' => $nom_site_spip, 'titre' => $titre));
@@ -106,7 +110,10 @@ function envoyer_mail_publication($id_article) {
 
 			$nom = $GLOBALS['auteur_session']['nom'];
 			$nom = trim(supprimer_tags(typo($nom)));
-			$courr .= _T('info_publie_01', array('titre' => $titre, 'connect_nom' => $nom))."\n\n\n";
+			$courr .= _T('info_publie_01', array('titre' => $titre, 'connect_nom' => $nom))
+				."\n\n" 
+				. $url
+				."\n\n";
 			$courr = $courr . extrait_article($row);
 			envoyer_mail($adresse_suivi, $sujet, $courr);
 
