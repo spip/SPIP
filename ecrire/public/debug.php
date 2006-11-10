@@ -473,6 +473,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	exit;
 }
 
+// http://doc.spip.org/@emboite_texte
 function emboite_texte($texte,$fonc='',$self='')
 {
 	if (!($sax = charger_fonction('sax', 'inc') AND $res = $sax($texte)))
