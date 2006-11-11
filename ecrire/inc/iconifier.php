@@ -64,7 +64,7 @@ function inc_iconifier_dist($id_objet, $id,  $script, $iframe_script='') {
       $js .= "<script src='"._DIR_JAVASCRIPT."async_upload.js' type='text/javascript'></script>\n";
   		$js .= <<<EOF
       <script type='text/javascript'>
-      $(".form_upload_icon").async_upload(async_upload_icon);
+      $("form.form_upload_icon").async_upload(async_upload_icon);
       </script>
 EOF;
     }

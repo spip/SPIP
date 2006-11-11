@@ -24,7 +24,7 @@ function changestyle(id_couche, element, style) {
 	// Masquer les elements du bandeau
 	var select = $(bandeau_elements).not('#'+id_couche);
 	// sauf eventuellement la boite de recherche si la souris passe en-dessous
-	if (id_couche=='garder-recherche') select = select.not('#bandeaurecherche');
+	if (id_couche=='garder-recherche') select.not('#bandeaurecherche');
 		select.css('visibility','hidden');
 
 	// Afficher, le cas echeant, celui qui est demande

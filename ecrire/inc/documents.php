@@ -177,7 +177,7 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
   $ret .= "<script src='"._DIR_JAVASCRIPT."async_upload.js' type='text/javascript'></script>\n";
   $ret .= <<<EOF
     <script type='text/javascript'>
-    $(".form_upload").async_upload(async_upload_article_edit)
+    $("form.form_upload").async_upload(async_upload_article_edit)
     </script>
 EOF;
     
