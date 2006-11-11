@@ -27,17 +27,15 @@ function notifications($pipeline, $x) {
 		OR $x['data']['statut'] == 'prop')
 	) {
 
+		$id_article = $x['args']['id_objet'];
 		$statut = $x['data']['statut'];
-		$id_article = intval($x['args']['id_objet']);
-		$result = spip_query("SELECT statut FROM spip_articles WHERE id_article=$id_article");
-		if ($row = spip_fetch_array($result))
-			$statut_ancien = $row['statut'];
-		else
-			return $x;
+		$statut_ancien = $x['data']['statut_ancien'];
 
 		// ne devrait jamais se produire
-		if ($statut == $statut_ancien)
+		if ($statut == $statut_ancien) {
+			spip_log("statut inchange");
 			return $x;
+		}
 
 		include_spip('inc/lang');
 		include_spip('inc/texte');

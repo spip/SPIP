@@ -62,7 +62,6 @@ function articles_set($id_article, $c=false) {
 
 	return $err;
 }
--
 
 // http://doc.spip.org/@insert_article
 function insert_article($id_rubrique) {
@@ -250,7 +249,7 @@ function instituer_article($id_article, $c) {
 	$s = spip_query("SELECT statut, id_rubrique FROM spip_articles WHERE id_article=$id_article");
 	$row = spip_fetch_array($s);
 	$id_rubrique = $row['id_rubrique'];
-	$statut = $row['statut'];
+	$statut_ancien = $statut = $row['statut'];
 
 	$s = _request('statut', $c);
 	if ($s AND _request('statut', $c) != $statut) {
@@ -261,9 +260,14 @@ function instituer_article($id_article, $c) {
 		else
 			spip_log("editer_article $id_article refus " . join(' ', $c));
 
-		// En cas de publication, fixer la date a "maintenant".
-		if ($champs['statut'] == 'publie')
-			$champs['date'] = date('Y-m-d H:i:s');
+		// En cas de publication, fixer la date a "maintenant"
+		// sauf si $c commande autre chose
+		if ($champs['statut'] == 'publie') {
+			if ($d = _request('date', $c))
+				$champs['date'] = $d;
+			else
+				$champs['date'] = date('Y-m-d H:i:s');
+		}
 	}
 
 	// Verifier que la rubrique demandee existe et est differente
@@ -339,13 +343,15 @@ function instituer_article($id_article, $c) {
 		calculer_rubriques();
 
 	// Notification ?
+	$data = $champs;
+	$data['statut_ancien'] = $statut_ancien;
 	pipeline('post_edition',
 		array(
 			'args' => array(
 				'table' => 'spip_articles',
 				'id_objet' => $id_article
 			),
-			'data' => $champs
+			'data' => $data
 		)
 	);
 }
