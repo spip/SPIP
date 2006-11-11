@@ -18,6 +18,7 @@ define ('_DEBUG_AUTORISER', false);
 // surcharge possible de autoriser(), sinon autoriser_dist()
 // http://doc.spip.org/@autoriser
 if (!function_exists('autoriser')) {
+// http://doc.spip.org/@autoriser
 	function autoriser() {
 		$args = func_get_args(); 
 		return call_user_func_array('autoriser_dist', $args);
