@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@lire_metas
 function lire_metas() {
-	if (!_FILE_CONNECT) return;
+	if (!_FILE_CONNECT && !@file_exists(_FILE_CONNECT_INS .'.php')) return;
 	if ($result = @spip_query("SELECT nom,valeur FROM spip_meta")) {
 
 		$GLOBALS['meta'] = array();
@@ -30,7 +30,7 @@ function lire_metas() {
 function ecrire_meta($nom, $valeur) {
 	if (strlen($nom)){
 		$GLOBALS['meta'][$nom] = $valeur; 
-		if (!_FILE_CONNECT) return;
+		if (!_FILE_CONNECT && !@file_exists(_FILE_CONNECT_INS .'.php')) return;
 		spip_query("REPLACE spip_meta (nom, valeur) VALUES ('$nom', " . _q($valeur) . " )");
 	}
 }
@@ -47,7 +47,7 @@ function effacer_meta($nom) {
 //
 // http://doc.spip.org/@ecrire_metas
 function ecrire_metas() {
-	if (!_FILE_CONNECT) return;
+	if (!_FILE_CONNECT && !@file_exists(_FILE_CONNECT_INS .'.php')) return;
 
 	lire_metas();
 
