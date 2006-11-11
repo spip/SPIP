@@ -239,7 +239,7 @@ function revisions_articles ($id_article, $c=false) {
 //
 // statut et rubrique sont lies, car un admin restreint peut deplacer
 // un article publie vers une rubrique qu'il n'administre pas
-// http://doc.spip.org/@changer_statut
+// http://doc.spip.org/@instituer_article
 function instituer_article($id_article, $c) {
 
 	include_spip('inc/auth');
