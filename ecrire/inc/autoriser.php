@@ -13,6 +13,18 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
+define ('_DEBUG_AUTORISER', false);
+
+// surcharge possible de autoriser(), sinon autoriser_dist()
+// http://doc.spip.org/@autoriser
+if (!function_exists('autoriser')) {
+	function autoriser() {
+		$args = func_get_args(); 
+		return call_user_func_array('autoriser_dist', $args);
+	}
+}
+
+
 // API pour une fonction generique d'autorisation :
 // $qui est : vide (on prend alors auteur_session)
 //            un id_auteur (on regarde dans la base)
@@ -24,9 +36,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // (par exemple pour preciser si l'autorisation concerne tel ou tel champ)
 //
 // Seul le premier argument est obligatoire
-define ('_DEBUG_AUTORISER', false);
-// http://doc.spip.org/@autoriser
-function autoriser($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
+//
+// http://doc.spip.org/@autoriser_dist
+function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 	static $restreint = array();
 
 	// Qui ? auteur_session ?
@@ -201,6 +213,5 @@ function autoriser_moderer_petition_dist($faire, $type, $id, $qui, $opt) {
 	return
 		autoriser('modifier', $type, $id, $qui, $opt);
 }
-
 
 ?>
