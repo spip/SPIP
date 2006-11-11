@@ -22,6 +22,7 @@ function action_editer_article_dist() {
 
 	$arg = _request('arg');
 
+	// Creation d'un article ?
 	if (!$id_article = intval($arg)) {
 		if ($arg != 'oui') redirige_par_entete('./');
 		$id_article = insert_article(_request('id_parent'));
@@ -39,10 +40,29 @@ function action_editer_article_dist() {
 	$err = articles_set($id_article);
 
 	$redirect = parametre_url(urldecode(_request('redirect')),
-		'id_article', $id_article, '&') . ($err ? '&trad_err=1' : '');
+		'id_article', $id_article, '&') . $err;
 
 	redirige_par_entete($redirect);
 }
+
+// Appelle toutes les fonctions de modification d'un article
+// $err est de la forme '&trad_err=1'
+// http://doc.spip.org/@articles_set
+function articles_set($id_article, $c=false) {
+	$err = '';
+
+	// Edition du contenu ?
+	$err .= revisions_articles($id_article, $c);
+
+	// Modification de statut, changement de rubrique ?
+	$err .= instituer_article($id_article, $c);
+
+	// Un lien de trad a prendre en compte
+	$err .= article_referent($id_article, $c);
+
+	return $err;
+}
+-
 
 // http://doc.spip.org/@insert_article
 function insert_article($id_rubrique) {
@@ -90,28 +110,12 @@ function insert_article($id_rubrique) {
 	return $id_article;
 }
 
-// http://doc.spip.org/@articles_set
-function articles_set($id_article) {
-
-	// si editer_article='oui', on modifie le contenu
-	if (_request('editer_article') == 'oui') {
-		revisions_articles($id_article);
-	}
-
-	// Un lien de trad a prendre en compte
-	if ($lier_trad = _request('lier_trad'))
-		$err = article_referent($id_article, $lier_trad);
-
-	return $err;
-}
-
 // Enregistre une revision d'article
 // $c est un contenu (par defaut on prend le contenu via _request())
 // http://doc.spip.org/@revisions_articles
 function revisions_articles ($id_article, $c=false) {
 	global $flag_revisions;
 	include_spip('inc/filtres');
-	include_spip('inc/rubriques');
 
 	// Ces champs seront pris nom pour nom (_POST[x] => spip_articles.x)
 	$champs_normaux = array('surtitre', 'titre', 'soustitre', 'descriptif',
@@ -131,51 +135,6 @@ function revisions_articles ($id_article, $c=false) {
 			$champs[$champ] = corriger_caracteres($val);
 	}
 
-	// Changer le statut de l'article ?
-	include_spip('inc/auth');
-
-	auth_rubrique($GLOBALS['auteur_session']['id_auteur'], $GLOBALS['auteur_session']['statut']);
-	$s = spip_query("SELECT statut, id_rubrique FROM spip_articles WHERE id_article=$id_article");
-	$row = spip_fetch_array($s);
-	$id_rubrique = $row['id_rubrique'];
-	$statut = $row['statut'];
-
-	$s = _request('statut', $c);
-	if ($s AND _request('statut', $c) != $statut) {
-		if (acces_rubrique($id_rubrique))
-			$statut = $champs['statut'] = $s;
-		elseif (acces_article($id_article) AND  $s != 'publie')
-			$statut = $champs['statut'] = $s;
-		else
-			spip_log("editer_article $id_article refus " . join(' ', $c));
-
-		// En cas de publication, fixer la date a "maintenant".
-		if ($champs['statut'] == 'publie')
-			$champs['date'] = date('Y-m-d H:i:s');
-	}
-
-	// Verifier que la rubrique demandee existe et est differente
-	// de la rubrique actuelle
-	if ($id_parent = _request('id_parent', $c)
-	AND $id_parent != $id_rubrique
-	AND (spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_rubrique=$id_parent")))) {
-		$champs['id_rubrique'] = $id_parent;
-
-		// si l'article etait publie
-		// et que le demandeur n'est pas admin de la rubrique
-		// repasser l'article en statut 'propose'.
-		if ($statut == 'publie') {
-			if ($GLOBALS['auteur_session']['statut'] != '0minirezo')
-				$champs['statut'] = 'prop';
-			else {
-				include_spip('inc/auth');
-				$r = auth_rubrique($GLOBALS['auteur_session']['id_auteur'], $GLOBALS['auteur_session']['statut']);
-				if (is_array($r) AND !$r[$id_rubrique])
-					$champs['statut'] = 'prop';
-			}
-		}
-	}
-
 	// recuperer les extras
 	if ($GLOBALS['champs_extra']) {
 		include_spip('inc/extra');
@@ -184,7 +143,7 @@ function revisions_articles ($id_article, $c=false) {
 	}
 
 	// Envoyer aux plugins
-	$champs = pipeline('pre_enregistre_contenu',
+	$champs = pipeline('pre_edition',
 		array(
 			'args' => array(
 				'table' => 'spip_articles',
@@ -225,34 +184,133 @@ function revisions_articles ($id_article, $c=false) {
 
 	if (!count($champs)) return;
 
+	// Creer la requete SQL
 	$update = array();
 	foreach ($champs as $champ => $val)
 		$update[] = $champ . '=' . _q($val);
-
-	// Si on ne modifie que le statut, ne pas faire tout le tralala
-	// de la gestion de revisions
-	$statut_seulement = (count($champs) == 1 AND isset($champs['statut']));
-	if (!$statut_seulement)
-		$update[] = 'date_modif=NOW()';
+	$update[] = 'date_modif=NOW()';
 
 	spip_query("UPDATE spip_articles SET ".join(', ',$update)." WHERE id_article=$id_article");
 
 	// Stockage des versions
-	if (!$statut_seulement
-	AND $GLOBALS['meta']["articles_versions"]=='oui'
+	if ($GLOBALS['meta']["articles_versions"]=='oui'
 	AND $flag_revisions)
 		ajouter_version($id_article, $champs, '', $GLOBALS['auteur_session']['id_auteur']);
 
 	// marquer le fait que l'article est travaille par toto a telle date
 	// une alerte sera donnee aux autres redacteurs sur exec=articles
-	if (!$statut_seulement
-	AND $GLOBALS['meta']['articles_modif'] != 'non') {
+	if ($GLOBALS['meta']['articles_modif'] != 'non') {
 		include_spip('inc/drapeau_edition');
 		if ($id_article)
 			signale_edition ($id_article, $GLOBALS['auteur_session'], 'article');
 	}
 
-	// Si on deplace l'article
+	//
+	// Post-modifications
+	//
+
+	// Si l'article est publie
+	$t = spip_fetch_array(spip_query(
+	"SELECT statut FROM spip_articles WHERE id_article=$id_article"));
+	if ($t['statut'] == 'publie') {
+
+		// Invalider les caches
+		include_spip('inc/invalideur');
+		suivre_invalideur("id='id_article/$id_article'");
+
+		// Demander une reindexation
+		include_spip('inc/indexation');
+		marquer_indexer('spip_articles', $id_article);
+	}
+
+	// Notification ?
+	pipeline('post_edition',
+		array(
+			'args' => array(
+				'table' => 'spip_articles',
+				'id_objet' => $id_article
+			),
+			'data' => $champs
+		)
+	);
+}
+
+
+// $c est un array ('statut', 'id_rubrique')
+//
+// statut et rubrique sont lies, car un admin restreint peut deplacer
+// un article publie vers une rubrique qu'il n'administre pas
+// http://doc.spip.org/@changer_statut
+function instituer_article($id_article, $c) {
+
+	include_spip('inc/auth');
+	include_spip('inc/rubriques');
+
+	auth_rubrique($GLOBALS['auteur_session']['id_auteur'], $GLOBALS['auteur_session']['statut']);
+	$s = spip_query("SELECT statut, id_rubrique FROM spip_articles WHERE id_article=$id_article");
+	$row = spip_fetch_array($s);
+	$id_rubrique = $row['id_rubrique'];
+	$statut = $row['statut'];
+
+	$s = _request('statut', $c);
+	if ($s AND _request('statut', $c) != $statut) {
+		if (acces_rubrique($id_rubrique))
+			$statut = $champs['statut'] = $s;
+		elseif (acces_article($id_article) AND $s != 'publie')
+			$statut = $champs['statut'] = $s;
+		else
+			spip_log("editer_article $id_article refus " . join(' ', $c));
+
+		// En cas de publication, fixer la date a "maintenant".
+		if ($champs['statut'] == 'publie')
+			$champs['date'] = date('Y-m-d H:i:s');
+	}
+
+	// Verifier que la rubrique demandee existe et est differente
+	// de la rubrique actuelle
+	if ($id_parent = _request('id_parent', $c)
+	AND $id_parent != $id_rubrique
+	AND (spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_rubrique=$id_parent")))) {
+		$champs['id_rubrique'] = $id_parent;
+
+		// si l'article etait publie
+		// et que le demandeur n'est pas admin de la rubrique
+		// repasser l'article en statut 'propose'.
+		if ($statut == 'publie') {
+			if ($GLOBALS['auteur_session']['statut'] != '0minirezo')
+				$champs['statut'] = 'prop';
+			else {
+				include_spip('inc/auth');
+				$r = auth_rubrique($GLOBALS['auteur_session']['id_auteur'], $GLOBALS['auteur_session']['statut']);
+				if (is_array($r) AND !$r[$id_rubrique])
+					$champs['statut'] = 'prop';
+			}
+		}
+	}
+
+
+	// Envoyer aux plugins
+	$champs = pipeline('pre_edition',
+		array(
+			'args' => array(
+				'table' => 'spip_articles',
+				'id_objet' => $id_article
+			),
+			'data' => $champs
+		)
+	);
+
+	if (!count($champs)) return;
+
+	// Creer la requete SQL
+	$update = array();
+	foreach ($champs as $champ => $val)
+		$update[] = $champ . '=' . _q($val);
+
+	spip_query("UPDATE spip_articles SET ".join(', ',$update)." WHERE id_article=$id_article");
+
+
+	// Si on a deplace l'article
 	// - propager les secteurs
 	// - changer sa langue (si heritee)
 	if (isset($champs['id_rubrique'])) {
@@ -270,29 +328,26 @@ function revisions_articles ($id_article, $c=false) {
 		}
 	}
 
-
-	//
-	// Post-modifications
-	//
-
-	// Invalider les caches si l'article est publie, ou si on le depublie
-	if ($statut == 'publie'
-	OR ($statut_ancien=='publie' AND $champ['statut'])) {
-		include_spip('inc/invalideur');
-		suivre_invalideur("id='id_article/$id_article'");
-	}
-
-	// Demander une reindexation de l'article s'il est publie
-	if ($statut == 'publie') {
-		include_spip('inc/indexation');
-		marquer_indexer('spip_articles', $id_article);
-	}
+	// Invalider les caches
+	include_spip('inc/invalideur');
+	suivre_invalideur("id='id_article/$id_article'");
 
 	// Recalculer les rubriques (statuts et dates) si l'on deplace
 	// un article publie, ou si on le depublie
 	if (($statut == 'publie' AND isset($champ['id_rubrique']))
 	OR ($statut_ancien=='publie' AND $champ['statut']))
 		calculer_rubriques();
+
+	// Notification ?
+	pipeline('post_edition',
+		array(
+			'args' => array(
+				'table' => 'spip_articles',
+				'id_objet' => $id_article
+			),
+			'data' => $champs
+		)
+	);
 }
 
 
@@ -312,9 +367,9 @@ function trop_longs_articles() {
 
 // Poser un lien de traduction vers un article de reference
 // http://doc.spip.org/@article_referent
-function article_referent ($id_article, $lier_trad) {
+function article_referent ($id_article, $c) {
 
-	$lier_trad = intval($lier_trad);
+	if (!$lier_trad = intval(_request('lier_trad', $c))) return;
 
 	// selectionner l'article cible, qui doit etre different de nous-meme,
 	// et quitter s'il n'existe pas
@@ -322,7 +377,7 @@ function article_referent ($id_article, $lier_trad) {
 	spip_query("SELECT id_trad FROM spip_articles WHERE id_article=$lier_trad AND NOT(id_article=$id_article)")))
 	{
 		spip_log("echec lien de trad vers article inexistant ($lier_trad)");
-		return 'erreur';
+		return '&trad_err=1';
 	}
 
 	// $id_lier est le numero du groupe de traduction
@@ -338,8 +393,6 @@ function article_referent ($id_article, $lier_trad) {
 	else {
 		spip_query("UPDATE spip_articles SET id_trad = $id_lier WHERE id_article = $id_article");
 	}
-
-	return false; # pas d'erreur
 }
 
 

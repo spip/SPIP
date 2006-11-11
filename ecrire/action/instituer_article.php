@@ -29,7 +29,7 @@ function action_instituer_article_dist() {
 
 	include_spip('action/editer_article');
 
-	revisions_articles($id_article, array('statut' => $statut));
+	instituer_article($id_article, array('statut' => $statut));
 
 }
 

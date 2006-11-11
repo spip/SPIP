@@ -1214,11 +1214,11 @@ function lang_dselect ($rien='') {
 }
 
 // pipeline appelant la fonction de notification
-// avant chaque modification du contenu
-// http://doc.spip.org/@notif_pre_enregistre_contenu
-function notif_pre_enregistre_contenu($x) {
+// apres chaque modification de contenu ou statut
+// http://doc.spip.org/@notif_post_edition
+function notif_post_edition($x) {
 	include_spip('inc/notifications');
-	return notifications('pre_enregistre_contenu', $x);
+	return notifications('post_edition', $x);
 }
 
 ?>

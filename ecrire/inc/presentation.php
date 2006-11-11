@@ -316,12 +316,12 @@ function afficher_liste($largeurs, $table, $styles = '') {
 
 	if ($spip_display != 4) {
 		$res = '';
-		while (list(, $t) = each($table)) {
+		foreach ($table as $t) {
 			$res .= afficher_liste_display_neq4($largeurs, $t, $styles);
 		}
 	} else {
 		$res = "\n<ul style='text-align: $spip_lang_left; background-color: white;'>";
-		while (list(, $t) = each($table)) {
+		foreach ($table as $t) {
 			$res .= afficher_liste_display_eq4($largeurs, $t, $styles);
 		}
 		$res .= "\n</ul>";
@@ -442,6 +442,7 @@ function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, 
 	if (!isset($requete['GROUP BY'])) $requete['GROUP BY'] = '';
 
 	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
+
 	if (! ($force OR ($cpt = $cpt['n']))) return '';
 
 	$res = "";
@@ -459,7 +460,7 @@ function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, 
 		$res .= afficher_tranches_requete($cpt, $tmp_var, '', $nb_aff);
 	}
 
-	$result = spip_query("SELECT " . (isset($requete["SELECT"]) ? $requete["SELECT"] : "*") . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
+	$result = spip_query($u = "SELECT " . (isset($requete["SELECT"]) ? $requete["SELECT"] : "*") . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
 
 	$table = array();
 	while ($row = spip_fetch_array($result)) {
@@ -840,7 +841,7 @@ function afficher_articles_trad_boucle($row)
 
 // http://doc.spip.org/@afficher_breves
 function afficher_breves($titre_table, $requete, $affrub=false) {
-	global  $couleur_foncee, $options;	
+	global  $couleur_foncee, $options;
  
 	if (($GLOBALS['meta']['multi_rubriques'] == 'oui'
 	     AND (!isset($GLOBALS['id_rubrique'])))
