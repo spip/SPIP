@@ -13,6 +13,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/filtres');
+
 // http://doc.spip.org/@PhraseurXML
 class PhraseurXML {
 
@@ -41,8 +43,9 @@ function debutElement($parser, $name, $attrs)
   $sep = ' ';
   foreach ($attrs as $k => $v) {
 	$delim = strpos($v, "'") === false ? "'" : '"';
+	$val = $phraseur_xml->translate_entities($v);
 	$att .= $sep .  $k . "=" . $delim
-	  . str_replace('"',  '&quot;', $phraseur_xml->translate_entities($v))
+	  . ($delim == '"' ? str_replace('"',  '&quot;', $val) : $val)
 	  . $delim;
 	$sep = "\n $depth";
     }
@@ -109,18 +112,13 @@ function defautElement($parser, $data)
   $depth = &$phraseur_xml->depth;
   $contenu = &$phraseur_xml->contenu;
 
-  @$contenu[$depth] .= $data;
+  $contenu[$depth] .= $data;
 }
 
 // http://doc.spip.org/@translate_entities
- function translate_entities($data)
+function translate_entities($data)
  {
-   return
-    str_replace('<', '&lt;', 
-		str_replace('>', '&gt;', 
-			    ereg_replace('[&]([A-Za-z0-9]*[^A-Za-z0-9;])',
-					 "&amp;\\1",
-					 $data)));
+   return entites_html($data);
  }
 
 // http://doc.spip.org/@xml_parsefile
@@ -175,7 +173,6 @@ var $reperes = array();
 // http://doc.spip.org/@inc_sax_dist
 function inc_sax_dist($page) {
 	global $phraseur_xml, $xml_parser, $xhtml_error;
-	$phraseur_xml = new PhraseurXML();
 
 	$xml_parser = xml_parser_create($GLOBALS['meta']['charset']);
 	xml_set_element_handler($xml_parser,
@@ -194,6 +191,7 @@ function inc_sax_dist($page) {
 	return $page;
 }
 
+$GLOBALS['phraseur_xml'] = new PhraseurXML();
 // exemple d'appel en ligne de commande:
 #$error = $phraseur_xml->xml_parsefile($xml_parser, $_SERVER['argv'][1]);
 
