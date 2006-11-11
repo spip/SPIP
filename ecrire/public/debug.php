@@ -149,7 +149,7 @@ function erreur_squelette($message='', $lieu='') {
 // Le debusqueur version 3
 //
 
-// appelee a chaque sortie de boucle (cf compilo.php) et a chaque requete
+// appelee a chaque sortie de boucle (cf compiler.php) et a chaque requete
 // dans ce derniers cas on n'a pas le nom du squelette
 
 // http://doc.spip.org/@boucle_debug_resultat
@@ -338,7 +338,6 @@ function ancre_texte($texte, $fautifs=array())
 // http://doc.spip.org/@debug_dumpfile
 function debug_dumpfile ($texte, $fonc, $type) {
 	global $debug_objets, $var_mode_objet, $var_mode_affiche;
-	global $auteur_session;
 
 	$debug_objets[$type][$fonc . 'tout'] = $texte;
 	if (!$debug_objets['sourcefile']) return;
@@ -350,25 +349,10 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	// - il contient souvent une Div restreignant la largeur a 3 fois rien
 	// - ca fait 2 headers !
 	ob_end_clean();
-
-	include_spip('inc/headers');
-	include_spip('inc/filtres');
-	http_no_cache();
-	lang_select($auteur_session['lang']);
 	$self = str_replace("\\'", '&#39;', self());
 	$self = parametre_url($self,'var_mode', 'debug');
-	echo _DOCTYPE_ECRIRE,
-	  html_lang_attributes(),
-	  "<head>\n<title>",
-	  ('Spip ' . $GLOBALS['spip_version_affichee'] . ' ' .
-	   _T('admin_debug') . ' ' .
-	   supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']))), 
-	  "</title>\n",
-	  "<link rel='stylesheet' href='".url_absolue(find_in_path('spip_admin.css'))
-	  . "' type='text/css'>",
-	  "</head>\n<body style='margin:0 10px;'>",
-	  "\n<div id='spip-debug' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:10px;right:10px;'><div id='spip-boucles'>\n"; 
 
+	debug_debut($fonc);
 	if ($var_mode_affiche !== 'validation') {
 		$self = parametre_url($self,'var_mode', 'debug');
 	  foreach ($debug_objets['sourcefile'] as $nom_skel => $sourcefile) {
@@ -449,7 +433,9 @@ function debug_dumpfile ($texte, $fonc, $type) {
 			$titre = 'zbug_' . $titre;
 			$texte = ancre_texte($texte, array('',''));
 		} else {
-		  list($texte, $err) = emboite_texte($texte, $fonc, $self);
+		  $sax = charger_fonction('sax', 'inc');
+		  $res = $sax($texte);
+		  list($texte, $err) = emboite_texte($res, $fonc, $self);
 			if ($err === false)
 				$err = _T('impossible');
 			elseif ($err === true)
@@ -464,19 +450,63 @@ function debug_dumpfile ($texte, $fonc, $type) {
 		echo $texte;
 		echo "</fieldset></div>";
 	}
+	debug_fin();
+	exit;
+}
+
+// Fonction pour l'espace de redaction, appeler par ecrire/index.php
+
+function debug_script ($fonc) {
+
+	$sax = charger_fonction($GLOBALS['xml_indent'], 'inc');
+	$t = $sax($fonc, true);
+	if (!isset($GLOBALS['xhtml_error']))
+	  echo $t;
+	else {
+	  debug_debut($GLOBALS['exec']);
+	  list($t, $err) = emboite_texte($t);
+	  echo $err, $t;
+	echo "\n</div>";
+	echo '</body></html>';
+	}
+}
+
+function debug_debut($titre)
+{
+	global $auteur_session;
+	include_spip('inc/headers');
+	include_spip('inc/filtres');
+	http_no_cache();
+	lang_select($auteur_session['lang']);
+	echo _DOCTYPE_ECRIRE,
+	  html_lang_attributes(),
+	  "<head>\n<title>",
+	  ('Spip ' . $GLOBALS['spip_version_affichee'] . ' ' .
+	   _T('admin_debug') . ' ' . $titre . ' (' .
+	   supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']))), 
+	  ")</title>\n",
+	  "<link rel='stylesheet' href='".url_absolue(find_in_path('spip_admin.css'))
+	  . "' type='text/css'>",
+	  "</head>\n<body style='margin:0 10px;'>",
+	  "\n<div id='spip-debug' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:10px;right:10px;'><div id='spip-boucles'>\n"; 
+}
+
+function debug_fin()
+{
+	global $debug_objets;
+
 	echo "\n</div>";
 	include_spip('balise/formulaire_admin');
 	echo inclure_balise_dynamique(
 		balise_FORMULAIRE_ADMIN_dyn('spip-admin-float', $debug_objets)
 	);
 	echo '</body></html>';
-	exit;
 }
 
 // http://doc.spip.org/@emboite_texte
-function emboite_texte($texte,$fonc='',$self='')
+function emboite_texte($texte, $fonc='',$self='')
 {
-	if (!($sax = charger_fonction('sax', 'inc') AND $res = $sax($texte)))
+	if (!$texte)
 		return array(ancre_texte($texte, array('','')), false);
 	elseif (!ereg("^[[:space:]]*([^<][^0-9]*)([0-9]*)(.*[^0-9])([0-9]*)$",
 		     $GLOBALS['xhtml_error'],

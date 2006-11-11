@@ -76,7 +76,7 @@ function formater_auteur_mail($email)
 	return "<a href='$href' title=\""
 		  . _T('email')
 		  . '">'
-		. http_img_pack("m_envoi$spip_lang_rtl.gif", "m&gt;", "width='14' height='7'", _T('info_envoyer_message_prive'))
+		. http_img_pack("m_envoi$spip_lang_rtl.gif", "m&gt;", " width='14' height='7'", _T('info_envoyer_message_prive'))
 		  . '</a>';
 }
 ?>

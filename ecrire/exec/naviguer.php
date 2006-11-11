@@ -204,13 +204,13 @@ if ($id_rubrique>0 AND $GLOBALS['meta']['multi_rubriques'] == 'oui' AND ($GLOBAL
 		$langue_rubrique = $langue_parent;
 
 	debut_cadre_enfonce('langues-24.gif');
-	echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC' class='serif2'>";
+	echo "<table border='0' cellspacing='0' cellpadding='3' width='100%' background=''><tr><td bgcolor='#eeeecc' class='serif2'>";
 	echo bouton_block_invisible('languesrubrique');
-	echo "<B>";
+	echo "<b>";
 	echo _T('titre_langue_rubrique');
 	echo "&nbsp; (".traduire_nom_langue($langue_rubrique).")";
-	echo "</B>";
-	echo "</TD></TR></TABLE>";
+	echo "</b>";
+	echo "</td></tr></table>";
 
 	echo debut_block_invisible('languesrubrique');
 	echo "<div class='verdana2' align='center'>";
@@ -237,7 +237,7 @@ echo   afficher_enfant_rub($id_rubrique, $flag_editable, false);
 //////////  Vos articles en cours de redaction
 /////////////////////////
 
-echo "<P>";
+echo "<p />";
 
 //
 // Verifier les boucles a mettre en relief
@@ -407,7 +407,7 @@ function montre_naviguer($id_rubrique, $titre, $descriptif, $logo, $flag_editabl
 {
   global $spip_lang_right, $spip_lang_left;
 
-  echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
+  echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
   echo "<tr width='100%'><td width='100%' valign='top'>";
   gros_titre((!acces_restreint_rubrique($id_rubrique) ? '' :
 		http_img_pack("admin-12.gif",'', "width='12' height='12'",

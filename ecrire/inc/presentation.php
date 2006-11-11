@@ -1270,7 +1270,7 @@ function envoi_link($nom_site_spip) {
 	. find_in_path('spip_style_'
 		. (($_COOKIE['spip_accepte_ajax'] != -1) ? 'invisible' : 'visible')
 		. '.css')
-	.' " />' . "\n"
+	.'" />' . "\n"
 
 	// favicon.ico
 	. '<link rel="shortcut icon" href="'

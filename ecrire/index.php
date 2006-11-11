@@ -193,6 +193,8 @@ AND $l = @unserialize($l)) {
 
 // Trouver la fonction eventuellement surchagee et l'appeler.
 $var_f = charger_fonction($exec);
-$var_f();
-
+if (!$GLOBALS['xml_indent']
+OR $GLOBALS['auteur_session']['statut']!='0minirezo')
+	$var_f();
+ else { include('public/debug.php'); debug_script($var_f); }
 ?>
