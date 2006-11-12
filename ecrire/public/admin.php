@@ -24,24 +24,28 @@ function affiche_boutons_admin($contenu) {
 		$css .= "<link rel='stylesheet' href='"
 		. url_absolue($f) . "' type='text/css' />\n";
 
-	if (preg_match('@<(/head|body)@i', $contenu, $regs)) {
-		$contenu = explode($regs[0], $contenu, 2);
-		$contenu = $contenu[0] . $css . $regs[0] . $contenu[1];
-	} else
-		$contenu = $css . $contenu;
+	// Compatibilite : on utilise strripos() qui n'existe pas en php4
+	if (!function_exists('strripos')) {
+		function strripos($botte, $aiguille) {
+			return strrpos(strtolower($botte), $aiguille);
+		}
+	}
 
-	if (preg_match('@<(/body|/html)@i', $contenu, $regs)) {
-		$split = explode($regs[0], $contenu, 2);
-		$contenu = $split[0];
-		$suite = $regs[0].$split[1];
-	} else $suite ='';
+	($pos = strripos($contenu, '</head>'))
+	    || ($pos = strripos($contenu, '<body>'))
+	    || ($pos = 0);
+	$contenu = substr_replace($contenu, $css, $pos, 0);
 
 	// Recuperer sans l'afficher la balise #FORMULAIRE_ADMIN, en float
 	$boutons_admin = inclure_balise_dynamique(
 		balise_FORMULAIRE_ADMIN_dyn('spip-admin-float'),
 	false);
+	($pos = strripos($contenu, '</body>'))
+	    || ($pos = strripos($contenu, '</html>'))
+	    || ($pos = strlen($contenu));
+	$contenu = substr_replace($contenu, $boutons_admin, $pos, 0);
 
-	return $contenu.$boutons_admin.$suite;
+	return $contenu;
 }
 
 ?>
