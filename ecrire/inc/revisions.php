@@ -506,6 +506,7 @@ function propre_diff($texte) {
 
 
 // liste les champs versionnes d'un objet
+// http://doc.spip.org/@liste_champs_versionnes
 function liste_champs_versionnes($table) {
 	if ($table == 'spip_articles')
 		return array('surtitre', 'titre', 'soustitre', 'descriptif',
@@ -514,6 +515,7 @@ function liste_champs_versionnes($table) {
 		return array();
 }
 
+// http://doc.spip.org/@enregistrer_premiere_revision
 function enregistrer_premiere_revision($x) {
 
 	if  ($GLOBALS['flag_revisions']
@@ -551,6 +553,7 @@ function enregistrer_premiere_revision($x) {
 }
 
 
+// http://doc.spip.org/@enregistrer_nouvelle_revision
 function enregistrer_nouvelle_revision($x) {
 	if  ($GLOBALS['flag_revisions']
 	AND $GLOBALS['meta']["articles_versions"]=='oui'

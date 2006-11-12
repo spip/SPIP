@@ -21,6 +21,7 @@ function affiche_boutons_admin($contenu) {
 
 	// Compatibilite : on utilise stripos/strripos() qui n'existent pas en php4
 	if (!function_exists('strripos')) {
+// http://doc.spip.org/@strripos
 		function strripos($botte, $aiguille) {
 			if (preg_match('@^(.*)' . preg_quote($aiguille, '@') . '@is',
 			$botte, $regs)) { 
@@ -30,6 +31,7 @@ function affiche_boutons_admin($contenu) {
 		}
 	}
 	if (!function_exists('stripos')) {
+// http://doc.spip.org/@stripos
 		function stripos($botte, $aiguille) {
 			if (preg_match('@^(.*)' . preg_quote($aiguille, '@') . '@isU',
 			$botte, $regs)) { 
