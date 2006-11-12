@@ -16,7 +16,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Une fonction generique pour l'API de modification de contenu
 // $options est un array() avec toutes les options
 //
-// Pour l'instant fonctionne pour les types : document
+// Pour l'instant fonctionne pour les types :
+//   article, document
 //
 // http://doc.spip.org/@modifier_contenu
 function modifier_contenu($type, $id, $options, $c=false) {
@@ -65,6 +66,9 @@ function modifier_contenu($type, $id, $options, $c=false) {
 
 	if (!count($update)) return;
 
+	if ($options['supplement_sql'])
+		$update[] = $options['supplement_sql'];
+
 	spip_query($q = "UPDATE spip_$table_objet SET ".join(', ',$update)." WHERE $id_table_objet=$id");
 
 
@@ -74,7 +78,19 @@ function modifier_contenu($type, $id, $options, $c=false) {
 		signale_edition ($id, $GLOBALS['auteur_session'], $type);
 	}
 
-	// Notification ?
+	// Invalider les caches
+	if ($options['invalideur']) {
+		include_spip('inc/invalideur');
+		suivre_invalideur($options['invalideur']);
+	}
+
+	// Demander une reindexation
+	if ($options['indexation']) {
+		include_spip('inc/indexation');
+		marquer_indexer('spip_'.$table_objet, $id);
+	}
+
+	// Notifications, gestion des revisions...
 	pipeline('post_edition',
 		array(
 			'args' => array(

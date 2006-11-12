@@ -113,125 +113,31 @@ function insert_article($id_rubrique) {
 // $c est un contenu (par defaut on prend le contenu via _request())
 // http://doc.spip.org/@revisions_articles
 function revisions_articles ($id_article, $c=false) {
-	global $flag_revisions;
-	include_spip('inc/filtres');
+	include_spip('inc/modifier');
 
 	// unifier $texte en cas de texte trop long (sur methode POST seulement)
 	if (!is_array($c)) trop_longs_articles();
 
-	// Ces champs seront pris nom pour nom (_POST[x] => spip_articles.x)
-	$champs_normaux = array('surtitre', 'titre', 'soustitre', 'descriptif',
-		'nom_site', 'url_site', 'chapo', 'texte', 'ps');
-
-	// ne pas accepter de titre vide
-	if (_request('titre', $c) === '')
-		$c = set_request('titre', _T('ecrire:info_sans_titre'), $c);
-
-	$champs = array();
-	foreach ($champs_normaux as $champ) {
-		$val = _request($champ, $c);
-		if ($val !== NULL)
-			$champs[$champ] = corriger_caracteres($val);
-	}
-
-	// recuperer les extras
-	if ($GLOBALS['champs_extra']) {
-		include_spip('inc/extra');
-		if ($extra = extra_update('articles', $id_article, $c))
-			$champs['extra'] = $extra;
-	}
-
-	// Envoyer aux plugins
-	$champs = pipeline('pre_edition',
-		array(
-			'args' => array(
-				'table' => 'spip_articles',
-				'id_objet' => $id_article
-			),
-			'data' => $champs
-		)
-	);
-
-	// Stockage des versions : creer une premiere version si non-existante
-	if  ($flag_revisions
-	AND $GLOBALS['meta']["articles_versions"]=='oui') {
-		include_spip('inc/revisions');
-		$query = spip_query("SELECT id_article FROM spip_versions WHERE id_article=$id_article LIMIT 1");
-		if (!spip_num_rows($query)) {
-			$select = join(", ", $champs_normaux);
-			$query = spip_query("SELECT $select, date, date_modif FROM spip_articles WHERE id_article=$id_article");
-			$champs_originaux = spip_fetch_array($query);
-			// Si le titre est vide, c'est qu'on vient de creer l'article
-			if ($champs_originaux['titre'] != '') {
-				$date_modif = $champs_originaux['date_modif'];
-				$date = $champs_originaux['date'];
-				unset ($champs_originaux['date_modif']);
-				unset ($champs_originaux['date']);
-				$id_version = ajouter_version($id_article, $champs_originaux,
-					_T('version_initiale'), 0);
-				// Inventer une date raisonnable pour la version initiale
-				if ($date_modif>'1970-')
-					$date_modif = strtotime($date_modif);
-				else if ($date>'1970-')
-					$date_modif = strtotime($date);
-				else
-					$date_modif = time()-7200;
-				spip_query("UPDATE spip_versions SET date=FROM_UNIXTIME($date_modif) WHERE id_article=$id_article AND id_version=$id_version");
-			}
-		}
-	}
-
-	if (!count($champs)) return;
-
-	// Creer la requete SQL
-	$update = array();
-	foreach ($champs as $champ => $val)
-		$update[] = $champ . '=' . _q($val);
-	$update[] = 'date_modif=NOW()';
-
-	spip_query("UPDATE spip_articles SET ".join(', ',$update)." WHERE id_article=$id_article");
-
-	// Stockage des versions
-	if ($GLOBALS['meta']["articles_versions"]=='oui'
-	AND $flag_revisions)
-		ajouter_version($id_article, $champs, '', $GLOBALS['auteur_session']['id_auteur']);
-
-	// marquer le fait que l'article est travaille par toto a telle date
-	// une alerte sera donnee aux autres redacteurs sur exec=articles
-	if ($GLOBALS['meta']['articles_modif'] != 'non') {
-		include_spip('inc/drapeau_edition');
-		if ($id_article)
-			signale_edition ($id_article, $GLOBALS['auteur_session'], 'article');
-	}
-
-	//
-	// Post-modifications
-	//
-
-	// Si l'article est publie
+	// Si l'article est publie, invalider les caches et demander sa reindexation
 	$t = spip_fetch_array(spip_query(
 	"SELECT statut FROM spip_articles WHERE id_article=$id_article"));
 	if ($t['statut'] == 'publie') {
-
-		// Invalider les caches
-		include_spip('inc/invalideur');
-		suivre_invalideur("id='id_article/$id_article'");
-
-		// Demander une reindexation
-		include_spip('inc/indexation');
-		marquer_indexer('spip_articles', $id_article);
+		$invalideur = "id='id_article/$id_article'";
+		$indexation = true;
 	}
 
-	// Notification ?
-	pipeline('post_edition',
+	return modifier_contenu('article', $id_article,
 		array(
-			'args' => array(
-				'table' => 'spip_articles',
-				'id_objet' => $id_article
+			'champs' => array(
+				'surtitre', 'titre', 'soustitre', 'descriptif',
+				'nom_site', 'url_site', 'chapo', 'texte', 'ps'
 			),
-			'data' => $champs
-		)
-	);
+			'nonvide' => array('titre' => _T('info_sans_titre')),
+			'invalideur' => $invalideur,
+			'indexation' => $indexation,
+			'supplement_sql' => 'date_modif=NOW()'
+		),
+		$c);
 }
 
 

@@ -1180,4 +1180,31 @@ function notif_post_edition($x) {
 	return notifications('post_edition', $x);
 }
 
+// pipeline appelant la fonction de sauvegarde de la premiere revision
+// d'un article avant chaque modification de contenu
+// http://doc.spip.org/@premiere_revision
+function premiere_revision($x) {
+	// Stockage des versions : creer une premiere version si non-existante
+	if  ($GLOBALS['flag_revisions']
+	AND $GLOBALS['meta']["articles_versions"]=='oui') {
+		include_spip('inc/revisions');
+		$x = enregistrer_premiere_revision($x);
+	}
+	return $x;
+}
+
+// pipeline appelant la fonction de sauvegarde de la nouvelle revision
+// d'un article apres chaque modification de contenu
+// http://doc.spip.org/@nouvelle_revision
+function nouvelle_revision($x) {
+	// Stockage des versions : creer une premiere version si non-existante
+	if  ($GLOBALS['flag_revisions']
+	AND $GLOBALS['meta']["articles_versions"]=='oui') {
+		include_spip('inc/revisions');
+		$x = enregistrer_nouvelle_revision($x);
+	}
+	return $x;
+}
+
+
 ?>

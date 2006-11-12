@@ -504,4 +504,68 @@ function propre_diff($texte) {
 	return $texte;
 }
 
+
+// liste les champs versionnes d'un objet
+function liste_champs_versionnes($table) {
+	if ($table == 'spip_articles')
+		return array('surtitre', 'titre', 'soustitre', 'descriptif',
+		'nom_site', 'url_site', 'chapo', 'texte', 'ps');
+	else
+		return array();
+}
+
+function enregistrer_premiere_revision($x) {
+
+	if  ($GLOBALS['flag_revisions']
+	AND $GLOBALS['meta']["articles_versions"]=='oui'
+	AND $x['args']['table'] == 'spip_articles') {
+
+		$id_article = $x['args']['id_objet'];
+
+		$query = spip_query("SELECT id_article FROM spip_versions WHERE id_article=$id_article LIMIT 1");
+		if (!spip_num_rows($query)) {
+			$select = join(", ", liste_champs_versionnes($x['args']['table']));
+			$query = spip_query("SELECT $select, date, date_modif FROM spip_articles WHERE id_article=$id_article");
+			$champs_originaux = spip_fetch_array($query);
+			// Si le titre est vide, c'est qu'on vient de creer l'article
+			if ($champs_originaux['titre'] != '') {
+				$date_modif = $champs_originaux['date_modif'];
+				$date = $champs_originaux['date'];
+				unset ($champs_originaux['date_modif']);
+				unset ($champs_originaux['date']);
+				$id_version = ajouter_version($id_article, $champs_originaux,
+					_T('version_initiale'), 0);
+				// Inventer une date raisonnable pour la version initiale
+				if ($date_modif>'1970-')
+					$date_modif = strtotime($date_modif);
+				else if ($date>'1970-')
+					$date_modif = strtotime($date);
+				else
+					$date_modif = time()-7200;
+				spip_query("UPDATE spip_versions SET date=FROM_UNIXTIME($date_modif) WHERE id_article=$id_article AND id_version=$id_version");
+			}
+		}
+	}
+
+	return $x;
+}
+
+
+function enregistrer_nouvelle_revision($x) {
+	if  ($GLOBALS['flag_revisions']
+	AND $GLOBALS['meta']["articles_versions"]=='oui'
+	AND $x['args']['table'] == 'spip_articles') {
+
+		$champs = array();
+		foreach (liste_champs_versionnes($x['args']['table']) as $key)
+			if (isset($x['data'][$key]))
+				$champs[$key] = $x['data'][$key];
+
+		if (count($champs))
+			ajouter_version($x['args']['id_objet'], $champs, '', $GLOBALS['auteur_session']['id_auteur']);
+	}
+	
+	return $x;
+}
+
 ?>
