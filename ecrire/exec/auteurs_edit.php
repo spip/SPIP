@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $id_auteur = intval(_request('id_auteur'));
-
+include_spip('inc/headers');
 redirige_par_entete("./?exec=auteur_infos&id_auteur=$id_auteur&initial=-1");
 
 ?>

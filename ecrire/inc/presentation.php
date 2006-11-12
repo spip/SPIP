@@ -1738,7 +1738,9 @@ function fin_page() {
 	. fin_grand_cadre(true)
 	. "</div>" // cf. <div center> ouverte dans conmmencer_page()
 	. $GLOBALS['rejoue_session']
-	. generer_spip_cron()
+	. '<div style="background-image: url(\''
+	. generer_url_action('cron')
+	. '\');"></div>'
 	. (defined('_TESTER_NOSCRIPT') ? _TESTER_NOSCRIPT : '')
 	. "</body></html>\n";
 }

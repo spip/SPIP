@@ -126,21 +126,17 @@ function erreur_squelette($message='', $lieu='') {
 	// Eviter les boucles infernales
 	if (++$runs > 4) {
 		if ($_COOKIE['spip_admin'] OR
-		$auteur_session['statut'] == '0minirezo' OR
+		($auteur_session['statut'] == '0minirezo') OR
 		($GLOBALS['var_mode'] == 'debug')) {
-			include_spip('inc/headers');
-			lang_select($auteur_session['lang']);
-			http_no_cache();
-			echo _DOCTYPE_ECRIRE,
-			  html_lang_attributes(),
-			  "<head>\n<title>",
-			  ('Spip ' . $GLOBALS['spip_version_affichee'] . ' ' .
-			   _T('admin_debug') . ' ' .
-			   supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']))), 
-			  "</title>\n</head><body>",
-			  affiche_erreurs_page($tableau_des_erreurs),
-			  "</body></html>";
-			exit;
+			include_spip('inc/minipres');
+
+			$titre = 'Spip '
+				. $GLOBALS['spip_version_affichee']
+				. ' '
+				. _T('admin_debug')
+				. ' '
+				. supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']));
+			minipres($titre, affiche_erreurs_page($tableau_des_erreurs));
 		}
 	}
 }

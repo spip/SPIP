@@ -396,13 +396,10 @@ function self($root = false) {
 // http://doc.spip.org/@_T
 function _T($texte, $args=array()) {
 
-	$f = charger_fonction('traduire', 'inc');
-	$text = $f($texte,$GLOBALS['spip_lang']);
+	static $traduire=false ;
 
-	if (!empty($GLOBALS['xhtml'])) {
-		include_spip('inc/charsets');
-		$text = html2unicode($text, true /* secure */);
-	}
+ 	if (!$traduire) $traduire = charger_fonction('traduire', 'inc');
+	$text = $traduire($texte,$GLOBALS['spip_lang']);
 
 	if (!$text) 
 		// pour les chaines non traduites
@@ -512,33 +509,16 @@ function spip_touch($fichier, $duree=0, $touch=true) {
 	return false;
 }
 
-// Pour executer des taches de fond discretement, on utilise background-image
-// car contrairement a un iframe vide, les navigateurs ne diront pas qu'ils
-// n'ont pas fini de charger, c'est plus rassurant.
+// Ce declencheur de tache de fond, de l'espace prive (cf inc_presentation)
+// et de l'espace public (cf #SPIP_CRON dans inc_balise), est appelee
+// par un background-image  car contrairement a un iframe vide, 
+// les navigateurs ne diront pas qu'ils n'ont pas fini de charger,
+// c'est plus rassurant.
 // C'est aussi plus discret qu'un <img> sous un navigateur non graphique.
-// Cette fonction est utilisee pour l'espace prive (cf inc_presentation)
-// et pour l'espace public (cf #SPIP_CRON dans inc_balise)
 
-// http://doc.spip.org/@generer_spip_cron
-function generer_spip_cron() {
-  return '<div style="background-image: url(\'' . generer_url_action('cron') .
-	'\');"></div>';
-}
-
-// envoi de l'image demandee dans le code ci-dessus
-// http://doc.spip.org/@envoie_image_vide
-function envoie_image_vide() {
-	$image = pack("H*", "47494638396118001800800000ffffff00000021f90401000000002c0000000018001800000216848fa9cbed0fa39cb4da8bb3debcfb0f86e248965301003b");
-	header("Content-Type: image/gif");
-	header("Content-Length: ".strlen($image));
-	header("Cache-Control: no-cache,no-store");
-	header("Pragma: no-cache");
-	header("Connection: close");
-	echo $image;
-	flush();
-}
 // http://doc.spip.org/@action_cron
 function action_cron() {
+	include_spip('inc/headers');
 	envoie_image_vide();
 	cron (1);
 }
@@ -566,31 +546,6 @@ function cron ($gourmand=false) {
 	}
 }
 
-// envoyer le navigateur sur une nouvelle adresse
-// en evitant les attaques par la redirection (souvent indique par 1 $_GET)
-
-// http://doc.spip.org/@redirige_par_entete
-function redirige_par_entete($url) {
-	# en theorie on devrait faire ca tout le temps, mais quand la chaine
-	# commence par ? c'est imperatif, sinon l'url finale n'est pas la bonne
-	if ($url[0]=='?')
-		$url = url_de_base().$url;
-
-	@header("Location: " . strtr($url, "\n\r", "  "));
-
-	echo '<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
-<html><head>
-<title>302 Found</title>
-</head>
-<body>
-<h1>302 Found</h1>
-<a href="'
-.quote_amp($url)
-.'">Click here</a>.
-</body></html>';
-
-	exit;
-}
 
 // transformation XML des "&" en "&amp;"
 // http://doc.spip.org/@quote_amp
@@ -1133,6 +1088,7 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 			unset ($GLOBALS['meta']['noyau']);
 		}
 	}
+
 	// en cas d'echec refaire le fichier
 	if (!is_array($GLOBALS['meta']) AND _FILE_CONNECT) {
 		include_spip('inc/meta');
@@ -1150,6 +1106,7 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 
 	// Verifier le visiteur
 	if (_FILE_CONNECT) verifier_visiteur();
+
 }
 
 // Annuler les magic quotes \' sur GET POST COOKIE et GLOBALS ;
@@ -1184,11 +1141,13 @@ function verifier_visiteur() {
 		// il faut forcer l'init si ce n'est fait
 
 		@spip_initialisation();
+
 		$var_f = charger_fonction('session', 'inc');
 		if ($var_f()) return $GLOBALS['auteur_session']['statut'];
 		include_spip('inc/actions');
 		return verifier_php_auth();
 	}
+
 	return false;
 }
 

@@ -43,7 +43,7 @@ function debutElement($parser, $name, $attrs)
   $sep = ' ';
   foreach ($attrs as $k => $v) {
 	$delim = strpos($v, "'") === false ? "'" : '"';
-	$val = $phraseur_xml->translate_entities($v);
+	$val = entites_html($v);
 	$att .= $sep .  $k . "=" . $delim
 	  . ($delim !== '"' ? str_replace('&quot;', '"', $val) : $val)
 	  . $delim;
@@ -88,7 +88,7 @@ function textElement($parser, $data)
   $contenu = &$phraseur_xml->contenu;
   $contenu[$depth] .= preg_match('/^script/',$phraseur_xml->ouvrant[$depth])
     ? $data
-    : $phraseur_xml->translate_entities($data);
+    : entites_html($data);
 }
 
 // http://doc.spip.org/@PiElement
@@ -118,12 +118,6 @@ function defautElement($parser, $data)
 
   $contenu[$depth] .= $data;
 }
-
-// http://doc.spip.org/@translate_entities
-function translate_entities($data)
- {
-   return entites_html($data);
- }
 
 // http://doc.spip.org/@xml_parsefile
 function xml_parsefile($xml_parser, $file)
