@@ -103,21 +103,6 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 			$email_auteur = $GLOBALS['auteur_session']['email'];
 		}
 	}
-	// Tableau des valeurs servant au calcul d'une signature de securite.
-	// Elles seront placees en Input Hidden pour que inc/forum_insert
-	// recalcule la meme chose et verifie l'identite des resultats.
-	// Donc ne pas changer la valeur de ce tableau entre le calcul de
-	// la signature et la fabrication des Hidden
-	// Faire attention aussi a 0 != ''
-
-	// id_rubrique est parfois passee pour les articles, on n'en veut pas
-	$ids = array();
-	if ($id_rubrique > 0 AND ($id_article OR $id_breve OR $id_syndic))
-		$id_rubrique = 0;
-	foreach (array('id_article', 'id_breve', 'id_forum', 'id_rubrique', 'id_syndic') as $o) {
-		$ids[$o] = ($x = intval($$o)) ? $x : '';
-	}
-
 
 	// ne pas mettre '', sinon le squelette n'affichera rien.
 	$previsu = ' ';
@@ -161,10 +146,8 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 		if ($afficher_texte != 'non') 
 			$previsu = inclure_previsu($texte, $titre, $email_auteur, $auteur, $url_site, $nom_site_forum, $ajouter_mot);
 
-		$alea = forum_fichier_tmp();
 
-		include_spip('inc/actions');
-		$hash = calculer_action_auteur('ajout_forum'.join(' ', $ids).' '.$alea);
+		$alea = forum_fichier_tmp();
 
 		// Poser un cookie pour ne pas retaper les infos invariables
 		include_spip('inc/cookie');
@@ -173,10 +156,32 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 				'email' => $email_auteur)));
 	}
 
-	// pour la chaine de hidden
-	$script_hidden = $script = str_replace('&amp;', '&', $script);
-	foreach ($ids as $id => $v)
-		$script_hidden = parametre_url($script_hidden, $id, $v, '&');
+
+	// Valeurs servant au calcul d'une signature de securite.
+	// Elles seront placees en Input Hidden pour que inc/forum_insert
+	// recalcule la meme chose et verifie l'identite des resultats.
+	// Ne pas changer ces valeurs entre le calcul de la signature
+	// et leur insertion en hidden.
+	// Faire attention aussi a 0 != ''
+
+	// id_rubrique est parfois passee pour les articles, on n'en veut pas
+
+	if ($id_rubrique > 0 AND ($id_article OR $id_breve OR $id_syndic))
+		$id_rubrique = 0;
+
+	$arg = intval($id_article) .'/'. .
+	  intval($id_breve) . '/' .
+	  intval($id_forum) . '/' .
+	  intval($id_rubrique) . '/' .
+	  intval($id_syndic) . '/' .
+	  $alea;
+
+	include_spip('inc/actions');
+	$hash = calculer_action_auteur("ajout_forum-$arg");
+
+	$script = str_replace('&amp;', '&', $script);
+	$script_hidden = parametre_url($script, 'arg', $arg, '&');
+	$script_hidden = parametre_url($script_hidden, 'action', 'ajout_forum, '&');
 
 	return array('formulaires/formulaire_forum', 0,
 	array(

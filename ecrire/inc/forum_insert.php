@@ -113,24 +113,12 @@ function mots_du_forum($ajouter_mot, $id_message)
 		  spip_abstract_insert('spip_mots_forum', '(id_mot, id_forum)', "($id_mot, $id_message)");
 }
 
-// Recalcule la signature faite dans formulaires/inc-formulaire-forum
-// en fonction des input POST (ne pas se fier aux parametres d'URL)
+
 // Retourne le fichier verrouillant si correct
 
 // http://doc.spip.org/@forum_insert_secure
-function forum_insert_secure($alea, $hash)
+function forum_insert_secure($arg, $hash)
 {
-	$ids = array();
-
-	foreach (array('id_article', 'id_breve', 'id_forum', 'id_rubrique', 'id_syndic') as $o) {
-		$ids[$o] = ($x = intval($_POST[$o])) ? $x : '';
-	}
-
-	if (!verifier_action_auteur('ajout_forum'.join(' ', $ids).' '.$alea,
-		$hash)) {
-		spip_log('erreur hash forum');
-		die (_T('forum_titre_erreur')); 	# echec du POST
-	}
 
 	$file = _DIR_TMP ."forum_" . preg_replace('/[^0-9]/', '', $alea) .".lck";
 	return  file_exists($file) ? $file : '';
@@ -204,7 +192,10 @@ function inc_forum_insert_dist() {
 
 	// Verifier hash securite pour les forums avec previsu
 	if ($afficher_texte <> 'non') {
-		$file = forum_insert_secure(_request('alea'), _request('hash'));
+	        $var_f = charger_fonction('controler_action_auteur', 'inc');
+        	$var_f();
+
+		$file = forum_insert_secure(_request('arg'), _request('hash'));
 		if (!$file) {
 			# ne pas tracer cette erreur, peut etre due a un double POST
 			# tracer_erreur_forum('session absente');
