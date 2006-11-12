@@ -348,7 +348,7 @@ function afficher_liste_display_neq4($largeurs, $t, $styles = '') {
 		$res .= "\n<td" .
 			($largeur ? " width=\"$largeur\"" : '') .
 			($style ? " class=\"$style\"" : '') .
-			">$texte\n</td>";
+			">" . lignes_longues($texte) . "\n</td>";
 	}
 	$res .= "\n</tr>";
 	return $res;
