@@ -26,11 +26,11 @@ function action_virtualiser_dist() {
 
 	if (!preg_match(",^\W*(\d+)$,", $arg, $r)) {
 		 spip_log("action_virtualiser_dist $arg $url pas compris");
-	} else action_virtualiser_post($r);
+	} else action_virtualiser_post($r, $url);
 }
 
 // http://doc.spip.org/@action_virtualiser_post
-function action_virtualiser_post($r)
+function action_virtualiser_post($r, $url)
 {
 	$url = eregi_replace("^ *https?://$", "", rtrim($url));
 	if ($url) $url = corriger_caracteres("=$url");
