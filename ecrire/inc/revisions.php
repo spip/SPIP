@@ -281,10 +281,10 @@ function apparier_paras($src, $dest, $flou = true) {
 
 	// Nettoyage de la ponctuation pour faciliter l'appariement
 	foreach($src as $key => $val) {
-		$t1[$key] = preg_replace("/[[:punct:][:space:]]+/", " ", $val);
+		$t1[$key] = strval(preg_replace("/[[:punct:][:space:]]+/", " ", $val));
 	}
 	foreach($dest as $key => $val) {
-		$t2[$key] = preg_replace("/[[:punct:][:space:]]+/", " ", $val);
+		$t2[$key] = strval(preg_replace("/[[:punct:][:space:]]+/", " ", $val));
 	}
 
 	// Premiere passe : chercher les correspondance exactes
