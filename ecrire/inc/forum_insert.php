@@ -113,28 +113,6 @@ function mots_du_forum($ajouter_mot, $id_message)
 		  spip_abstract_insert('spip_mots_forum', '(id_mot, id_forum)', "($id_mot, $id_message)");
 }
 
-// Recalcule la signature faite dans formulaires/inc-formulaire-forum
-// en fonction des input POST (ne pas se fier aux parametres d'URL)
-// Retourne le fichier verrouillant si correct
-
-// http://doc.spip.org/@forum_insert_secure
-function forum_insert_secure($alea, $hash)
-{
-	$ids = array();
-
-	foreach (array('id_article', 'id_breve', 'id_forum', 'id_rubrique', 'id_syndic') as $o) {
-		$ids[$o] = ($x = intval($_POST[$o])) ? $x : '';
-	}
-
-	if (!verifier_action_auteur('ajout_forum'.join(' ', $ids).' '.$alea,
-		$hash)) {
-		spip_log('erreur hash forum');
-		die (_T('forum_titre_erreur')); 	# echec du POST
-	}
-
-	$file = _DIR_TMP ."forum_" . preg_replace('/[^0-9]/', '', $alea) .".lck";
-	return  file_exists($file) ? $file : '';
-}
 
 // http://doc.spip.org/@reduce_strlen
 function reduce_strlen($n, $c) 
@@ -204,8 +182,15 @@ function inc_forum_insert_dist() {
 
 	// Verifier hash securite pour les forums avec previsu
 	if ($afficher_texte <> 'non') {
-		$file = forum_insert_secure(_request('alea'), _request('hash'));
-		if (!$file) {
+
+		// simuler une action venant de l'espace public
+		// pour se conformer au a general.
+		set_request('action', 'ajout_forum');
+	        $var_f = charger_fonction('securiser_action', 'inc');
+        	$var_f();
+
+		$file = _DIR_TMP ."forum_" . preg_replace('/[^0-9]/', '', _request('arg')) .".lck";
+		if (!file_exists($file)) {
 			# ne pas tracer cette erreur, peut etre due a un double POST
 			# tracer_erreur_forum('session absente');
 			return $retour_forum; # echec silencieux du POST

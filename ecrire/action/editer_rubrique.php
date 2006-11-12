@@ -12,13 +12,12 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/actions');
 include_spip('inc/rubriques');
 
 // http://doc.spip.org/@action_editer_rubrique_dist
 function action_editer_rubrique_dist() {
 
-	$var_f = charger_fonction('controler_action_auteur', 'inc');
+	$var_f = charger_fonction('securiser_action', 'inc');
 	$var_f();
 
 	$arg = _request('arg');

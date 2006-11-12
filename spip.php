@@ -15,8 +15,10 @@
 include_once _DIR_RESTREINT_ABS.'inc_version.php';
 
 # rediriger les anciens URLs de la forme page.php3fond=xxx
-if (isset($_GET['fond']))
+if (isset($_GET['fond'])) {
+	include_spip('inc/headers');
 	redirige_par_entete(generer_url_public($_GET['fond']));
+ }
 
 # au travail...
 include _DIR_RESTREINT_ABS.'public.php';

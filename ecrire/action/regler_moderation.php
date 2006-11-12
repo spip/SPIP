@@ -16,10 +16,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@action_regler_moderation_dist
 function action_regler_moderation_dist()
 {
-	include_spip('inc/actions');
 	include_spip('inc/autoriser');
 
-	$var_f = charger_fonction('controler_action_auteur', 'inc');
+	$var_f = charger_fonction('securiser_action', 'inc');
 	$var_f();
 
 	$arg = _request('arg');

@@ -129,7 +129,7 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 		} else {
 			$cible = _DIR_RESTREINT_ABS . $lien;
 			if (_FILE_CONNECT) {
-				$lien = generer_action_auteur('cookie','var_lang_ecrire');
+			  $lien = generer_action_auteur('converser','');
 			} else $lien = generer_url_action('cookie');
 		}
 	}

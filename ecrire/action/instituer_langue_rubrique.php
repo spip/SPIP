@@ -15,8 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@action_instituer_langue_rubrique_dist
 function action_instituer_langue_rubrique_dist() {
 
-	include_spip('inc/actions');
-	$var_f = charger_fonction('controler_action_auteur', 'inc');
+	$var_f = charger_fonction('securiser_action', 'inc');
 	$var_f();
 
 	$arg = _request('arg');

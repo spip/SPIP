@@ -12,7 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/actions');
 include_spip('inc/autoriser');
 
 // http://doc.spip.org/@gerer_deplacements
@@ -40,17 +39,16 @@ function gerer_deplacements($deplacements){
 
 // http://doc.spip.org/@action_reorganiser_dist
 function action_reorganiser_dist(){
-	global $auteur_session;
-	$arg = _request('arg');
-	$hash = _request('hash');
-	$id_auteur = $auteur_session['id_auteur'];
+
+	$var_f = charger_fonction('securiser_action', 'inc');
+	$var_f();
+
+	if (_request('deplacements')!==NULL)
+		  gerer_deplacements(_request('deplacements'));
+
 	$redirect = _request('redirect');
 	if ($redirect==NULL) $redirect="";
-	include_spip("inc/actions");
-	if (verifier_action_auteur("reorganiser-$arg",$hash,$id_auteur)==TRUE) {
-		if (_request('deplacements')!==NULL)
-			gerer_deplacements(_request('deplacements'));
-	}
+
 	redirige_par_entete(str_replace("&amp;","&",urldecode($redirect)));
 }
 
