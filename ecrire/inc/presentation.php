@@ -1130,7 +1130,11 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	else if ($statut=="prop") {
 		$res .= "\n<div style='border: 1px solid yellow; padding: 5px;'>";
 	}
-		
+	// Si original, cadre vert
+	else if ($statut=="original") {
+		$res .= "\n<div style='border: 1px solid green; padding: 5px;'>";
+	}
+
 	$res .= "<span class='arial2'>". date_interface($date_heure) . "</span>&nbsp;&nbsp;";
 
 	if ($id_auteur) {

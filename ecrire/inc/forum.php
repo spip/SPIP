@@ -111,6 +111,11 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 			$valider_repondre = true;
 			$suppression = 'off';
 			break;
+		# forum original (reponse a un forum modifie) sur le site public
+		case "original":
+			$logo = "forum-public-24.gif";
+			$original = true;
+			break;
 		default:
 			return;
 	}
@@ -131,6 +136,14 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 	  $controle .= icone(_T('icone_valider_message') . " &amp; " .   _T('lien_repondre_message'), generer_action_auteur('instituer_forum',"$id_forum-$valider", generer_url_public('forum', "$ref&id_forum=$id_forum&retour=$dblret", true)),
 			     $logo,
 			     "creer.gif", 'right', 'non');
+	}
+
+	// TODO: un bouton retablir l'original ?
+	if ($original) {
+		$controle .= "<div style='float:".$GLOBALS['spip_lang_right'].";color:green'>"
+		."("
+		._L('original')
+		.")</div>";
 	}
 
 	return $controle;
