@@ -29,7 +29,7 @@ if (!function_exists('autoriser')) {
 // API pour une fonction generique d'autorisation :
 // $qui est : vide (on prend alors auteur_session)
 //            un id_auteur (on regarde dans la base)
-//            un tableau auteur complet
+//            un tableau auteur complet, y compris [restreint]
 // $faire est une action ('modifier', 'publier'...)
 // $type est un type d'objet ou nom de table ('article')
 // $id est l'id de l'objet sur lequel on veut agir
@@ -57,7 +57,7 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 	// (y compris leurs sous-rubriques), ou 0 si admin complet
 	if (is_array($qui)
 	AND $qui['statut'] == '0minirezo'
-	AND !isset($qui['rubriques'])) {
+	AND !isset($qui['restreint'])) {
 		if (!isset($restreint[$qui['id_auteur']])) {
 			include_spip('inc/auth'); # pour auth_rubrique
 			$restreint[$qui['id_auteur']] = auth_rubrique($qui['id_auteur'], $qui['statut']);
@@ -205,6 +205,15 @@ function autoriser_moderer_forum_dist($faire, $type, $id, $qui, $opt) {
 	return
 		autoriser('modifier', $type, $id, $qui, $opt);
 }
+
+// Modifier un forum ?
+// = jamais !
+// http://doc.spip.org/@autoriser_moderer_forum_dist
+function autoriser_modifier_forum_dist($faire, $type, $id, $qui, $opt) {
+	return
+		false;
+}
+
 
 // Moderer la petition ?
 // = modifier l'article correspondant
