@@ -45,7 +45,7 @@ function exec_auteur_infos_dist()
         }
 
 	$legender_auteur = charger_fonction('legender_auteur', 'inc');
-	$legender_auteur = $legender_auteur($id_auteur, $auteur, $initial, $echec, $redirect);
+	$legender_auteur_r = $legender_auteur($id_auteur, $auteur, $initial, $echec, $redirect);
 
 	if (_request('var_ajaxcharset')) ajax_retour($legender_auteur);
 
@@ -71,7 +71,7 @@ function exec_auteur_infos_dist()
 
   // charger ça tout de suite pour diposer de la fonction ci-dessous
 	$instituer_auteur = charger_fonction('instituer_auteur', 'inc');
-	$instituer_auteur = $instituer_auteur($id_auteur, $auteur['statut'], "auteurs_edit");
+	$instituer_auteur_r = $instituer_auteur($id_auteur, $auteur['statut'], "auteurs_edit");
 
 	if (statut_modifiable_auteur($id_auteur, $auteur) AND ($spip_display != 4)) {
 		$iconifier = charger_fonction('iconifier', 'inc');
@@ -92,7 +92,7 @@ function exec_auteur_infos_dist()
 
 	echo 
 	  debut_cadre_relief("redacteurs-24.gif", true),
-	  $legender_auteur, $instituer_auteur;
+	  $legender_auteur_r, $instituer_auteur_r;
 
 	echo pipeline('affiche_milieu',
 	        array('args' => array(

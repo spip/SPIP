@@ -244,17 +244,15 @@ function boites_de_config_articles($id_article)
 {
 	if (autoriser('moderer_forum', 'article', $id_article)) {
 		$regler_moderation = charger_fonction('regler_moderation', 'inc');
-		$regler_moderation =
-			$regler_moderation($id_article,"articles","id_article=$id_article");
+		$regler = $regler_moderation($id_article,"articles","id_article=$id_article");
 	}
 
 	if (autoriser('moderer_petition', 'article', $id_article)) {
 		$petitionner = charger_fonction('petitionner', 'inc');
-		$petitionner =
-			$petitionner($id_article,"articles","id_article=$id_article");
+		$petition = $petitionner($id_article,"articles","id_article=$id_article");
 	}
 
-	$masque = $regler_moderation . $petitionner;
+	$masque = $regler . $petition;
 
 	if (!$masque)
 		return '';

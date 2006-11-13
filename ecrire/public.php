@@ -89,8 +89,8 @@ if (defined('_INC_PUBLIC')) {
 	//
 
 	$tableau_des_erreurs = array();
-	$f = charger_fonction('assembler', 'public');
-	$page = $f($fond);
+	$assembler = charger_fonction('assembler', 'public');
+	$page = $assembler($fond);
 
 	if (isset($page['status'])) {
 		include_spip('inc/headers');
@@ -200,8 +200,8 @@ if (defined('_INC_PUBLIC')) {
 
 	// Gestion des statistiques du site public
 	if ($GLOBALS['meta']["activer_statistiques"] != "non") {
-		$f = charger_fonction('stats', 'public');
-		$f();
+		$stats = charger_fonction('stats', 'public');
+		$stats();
 	}
 
 	// Effectuer une tache de fond ?

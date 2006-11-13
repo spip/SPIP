@@ -50,11 +50,11 @@ function inc_selectionner_dist ($sel, $idom="",$fonction="", $exclus=0, $aff_rac
 	}
 
 	$plonger = charger_fonction('plonger', 'inc');
-	$plonger = $plonger($sel, $idom, $recur, 1, $exclus);
+	$plonger_r = $plonger($sel, $idom, $recur, 1, $exclus);
 
 	// url completee par la fonction JS onkeypress_rechercher
 	$url = generer_url_ecrire('rechercher', "exclus=$exclus&rac=$idom&type=");
-	return construire_selectionner_hierarchie($idom, $plonger, $aff_racine, $url, 'id_parent', $url_init);
+	return construire_selectionner_hierarchie($idom, $plonger_r, $aff_racine, $url, 'id_parent', $url_init);
 }
 
 // http://doc.spip.org/@construire_selectionner_hierarchie

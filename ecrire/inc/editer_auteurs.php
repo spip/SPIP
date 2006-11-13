@@ -52,10 +52,10 @@ function editer_auteurs_article($id_article, $flag, $cherche_auteur, $ids, $les_
 
 		if ($bouton_creer_auteur) {
 
-			$legender = redirige_action_auteur("legender_auteur", $arg . rawurlencode($cherche_auteur), "articles","id_article=$id_article");
+			$legende = redirige_action_auteur("legender_auteur", $arg . rawurlencode($cherche_auteur), "articles","id_article=$id_article");
 
 			$reponse .="<div style='width: 200px;'>"
-			. icone_horizontale($clic, $legender, "redacteurs-24.gif", "creer.gif", false)
+			. icone_horizontale($clic, $legende, "redacteurs-24.gif", "creer.gif", false)
 			. "</div> ";
 
 			$bouton_creer_auteur = false;
@@ -76,11 +76,11 @@ function editer_auteurs_article($id_article, $flag, $cherche_auteur, $ids, $les_
 
 		if ($bouton_creer_auteur) {
 
-			$legender = redirige_action_auteur("legender_auteur",$arg, "articles","id_article=$id_article");
+			$legende = redirige_action_auteur("legender_auteur",$arg, "articles","id_article=$id_article");
 
 			$clic = "<span class='verdana1'><b>$clic</b></span>";
 			$res = "<div style='width:170px;'>"
-			. icone_horizontale($clic, $legender, "redacteurs-24.gif", "creer.gif", false)
+			. icone_horizontale($clic, $legende, "redacteurs-24.gif", "creer.gif", false)
 			. "</div>\n";
 		}
 
