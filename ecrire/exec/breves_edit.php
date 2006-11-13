@@ -86,17 +86,17 @@ debut_cadre_formulaire();
 
 if ($new != "oui") {
 	echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
-	echo "<tr width='100%'>";
+	echo "\n<tr width='100%'>";
 	echo "<td>";
 		icone(_T('icone_retour'), generer_url_ecrire("breves_voir","id_breve=$id_breve"), "breve-24.gif", "rien.gif");
 	
 	echo "</td>";
-	echo "<td>", http_img_pack("rien.gif", ' ', "width='10'"), "</td>\n";
+	echo "\n<td>", http_img_pack("rien.gif", ' ', "width='10'"), "</td>\n";
 	echo "<td width='100%'>";
 	echo _T('info_modifier_breve');
 	gros_titre($titre);
 	echo "</td></tr></table>";
-	echo "<p>";
+	echo "\n<p>";
 }
 
 
@@ -107,11 +107,11 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	$lien_titre = entites_html($lien_titre);
 
 	$form = _T('entree_titre_obligatoire')
-	. "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre\" SIZE='40' $onfocus>"
+	. "<input type='text' class='formo' name='titre' value=\"$titre\" size='40' $onfocus />"
 
 
 	/// Dans la rubrique....
-	. "<INPUT TYPE='Hidden' NAME='id_rubrique_old' VALUE=\"$id_rubrique\"><p />";
+	. "<input type='hidden' name='id_rubrique_old' value=\"$id_rubrique\" /><p />";
 
 	if ($id_rubrique == 0) $logo_parent = "racine-site-24.gif";
 	else {
@@ -147,19 +147,18 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	if ($spip_ecran == "large") $rows = 28;
 	else $rows = 15;
 	
-	$form .= "<p /><B>"._T('entree_texte_breve')."</B><BR>"
+	$form .= "<p /><b>"._T('entree_texte_breve')."</b><br />\n"
 	. afficher_barre('document.formulaire.texte')
-	. "<TEXTAREA NAME='texte' ".$GLOBALS['browser_caret']." ROWS='$rows' CLASS='formo' COLS='40' wrap='soft'>"
+	. "<textarea name='texte' ".$GLOBALS['browser_caret']." rows='$rows' class='formo' cols='40'>"
 	. entites_html($texte)
-	. "</TEXTAREA><P>\n"
-
-
-	. _T('entree_liens_sites').aide ("breveslien")."<BR>"
-	. _T('info_titre')."<BR>"
-	. "<INPUT TYPE='text' CLASS='forml' NAME='lien_titre' VALUE=\"$lien_titre\" SIZE='40'><BR>"
-
-	. _T('info_url')."<BR>"
-	. "<INPUT TYPE='text' CLASS='forml' NAME='lien_url' VALUE=\"$lien_url\" SIZE='40'><P>";
+	. "</textarea><p />\n"
+	. _T('entree_liens_sites')
+	. aide ("breveslien")
+	. "<br />\n"
+	. _T('info_titre')."<br />\n"
+	. "<input type='text' class='forml' name='lien_titre' value=\"$lien_titre\" size='40' /><br />\n"
+	. _T('info_url')."<br />\n"
+	. "<input type='text' class='forml' name='lien_url' value=\"$lien_url\" size='40' /><p />";
 
 	if ($GLOBALS['champs_extra']) {
 		include_spip('inc/extra');
@@ -168,28 +167,26 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 
 	if ($connect_statut=="0minirezo" AND acces_rubrique($id_rubrique)) {
 		$form .= debut_cadre_relief('', true)
-		. "<B>"._T('entree_breve_publiee')."</B>\n"
-
-		. "<SELECT NAME='statut' SIZE=1 CLASS='fondl'>\n"
-		. "<OPTION".mySel("prop",$statut)." style='background-color: white'>"._T('item_breve_proposee')."\n"
-		. "<OPTION".mySel("refuse",$statut). http_style_background('rayures-sup.gif'). ">"._T('item_breve_refusee')."\n"
-		. "<OPTION".mySel("publie",$statut)." style='background-color: #B4E8C5'>"._T('item_breve_validee')."\n"
-
-		. "</SELECT>".aide ("brevesstatut")."<P>\n"
+		. "<b>"._T('entree_breve_publiee')."</b>\n"
+		. "<select name='statut' size='1' class='fondl'>\n"
+		. "<option".mySel("prop",$statut)." style='background-color: white'>"._T('item_breve_proposee')."</option>\n"
+		. "<option".mySel("refuse",$statut). http_style_background('rayures-sup.gif'). ">"._T('item_breve_refusee')."</option>\n"
+		. "<option".mySel("publie",$statut)." style='background-color: #B4E8C5'>"._T('item_breve_validee')."</option>\n"
+		. "</select>".aide ("brevesstatut")."<p />\n"
 		. fin_cadre_relief(true);
 	}
-	$form .= "<P ALIGN='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_enregistrer')."' CLASS='fondo'>";
+	$form .= "<p align='right'><input type='submit' value='"._T('bouton_enregistrer')."' class='fondo' /></p>";
 
 	echo generer_action_auteur('editer_breve',
 		$new ? $new : $id_breve,
-		$redirect = generer_url_ecrire('breves_voir'),
+		generer_url_ecrire('breves_voir'),
 		$form,
 		" method='post' name='formulaire'"
 	);
 
 }
 else
-	echo "<H2>"._T('info_page_interdite')."</H2>";
+	echo "<h2>"._T('info_page_interdite')."</h2>";
 
 fin_cadre_formulaire();
 echo fin_page();

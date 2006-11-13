@@ -107,7 +107,7 @@ function sous_menu_rubriques($id_rubrique, $root, $niv, &$data, &$enfants, $excl
 	// en fonction du niveau faire un affichage plus ou moins kikoo
 
 	// selected ?
-	$selected = ($root == $id_rubrique) ? ' selected' : '';
+	$selected = ($root == $id_rubrique) ? ' selected="selected"' : '';
 
 	// class='selec_rub' sauf pour contourner le bug MSIE / MacOs 9.0
 	if (!($browser_name == "MSIE" AND floor($browser_version) == "5"))

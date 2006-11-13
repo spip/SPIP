@@ -61,14 +61,14 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 			$logo = "forum-interne-24.gif";
 			$valider = false;
 			$valider_repondre = false;
-			$supprimer = 'privoff';
+			$suppression = 'privoff';
 			break;
 		# forum des administrateurs
 		case "privadmin":
 			$logo = "forum-admin-24.gif";
 			$valider = false;
 			$valider_repondre = false;
-			$supprimer = false;
+			$suppression = false;
 			break;
 		# forum de l'espace prive, supprime (non revalidable,
 		# d'ailleurs on ne sait plus a quel type de forum il appartenait)
@@ -76,14 +76,14 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 			$logo = "forum-interne-24.gif";
 			$valider = false;
 			$valider_repondre = false;
-			$supprimer = false;
+			$suppression = false;
 			break;
 		# forum general de l'espace prive
 		case "privrac":
 			$logo = "forum-interne-24.gif";
 			$valider = false;
 			$valider_repondre = false;
-			$supprimer = 'privoff';
+			$suppression = 'privoff';
 			break;
 
 		# forum publie sur le site public
@@ -91,14 +91,14 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 			$logo = "forum-public-24.gif";
 			$valider = false;
 			$valider_repondre = false;
-			$supprimer = 'off';
+			$suppression = 'off';
 			break;
 		# forum supprime sur le site public
 		case "off":
 			$logo = "forum-public-24.gif";
 			$valider = 'publie';
 			$valider_repondre = false;
-			$supprimer = false;
+			$suppression = false;
 			$controle = "<br /><font color='red'><b>"._T('info_message_supprime')." $forum_ip</b></font>";
 			if($forum_id_auteur)
 				$controle .= " - <a href='" . generer_url_ecrire('auteurs_edit', "id_auteur=$forum_id_auteur") .
@@ -109,15 +109,15 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 			$logo = "forum-public-24.gif";
 			$valider = 'publie';
 			$valider_repondre = true;
-			$supprimer = 'off';
+			$suppression = 'off';
 			break;
 		default:
 			return;
 	}
 
 	$lien = str_replace('&amp;', '&', self()) . "#id$id_forum";
-	if ($supprimer)
-	  $controle .= icone(_T('icone_supprimer_message'), generer_action_auteur('instituer_forum',"$id_forum-$supprimer", _DIR_RESTREINT_ABS . $lien),
+	if ($suppression)
+	  $controle .= icone(_T('icone_supprimer_message'), generer_action_auteur('instituer_forum',"$id_forum-$suppression", _DIR_RESTREINT_ABS . $lien),
 			$logo,
 			"supprimer.gif", 'right', 'non');
 

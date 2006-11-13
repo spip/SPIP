@@ -47,7 +47,7 @@ function exec_auteur_infos_dist()
 	$legender_auteur = charger_fonction('legender_auteur', 'inc');
 	$legender_auteur_r = $legender_auteur($id_auteur, $auteur, $initial, $echec, $redirect);
 
-	if (_request('var_ajaxcharset')) ajax_retour($legender_auteur);
+	if (_request('var_ajaxcharset')) ajax_retour($legender_auteur_r);
 
 	if ($connect_id_auteur == $id_auteur) {
 		$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -75,8 +75,8 @@ function exec_auteur_infos_dist()
 
 	if (statut_modifiable_auteur($id_auteur, $auteur) AND ($spip_display != 4)) {
 		$iconifier = charger_fonction('iconifier', 'inc');
-		$iconifier = $iconifier('id_auteur', $id_auteur, 'auteur_infos','iconifier');
-	} else $iconifier ='';
+		$icone = $iconifier('id_auteur', $id_auteur, 'auteur_infos','iconifier');
+	} else $icone ='';
 
 	creer_colonne_droite();
 	echo pipeline('affiche_droite',
@@ -86,7 +86,7 @@ function exec_auteur_infos_dist()
 		'data'=>'')
 	);
 
-	echo $iconifier, 
+	echo $icone, 
 
 	debut_droite();
 
