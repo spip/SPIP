@@ -49,12 +49,13 @@ function public_assembler_dist($fond) {
 	if ($var_mode=='debug') {
 		if ($auteur_session['statut'] == '0minirezo')
 			spip_log('debug !');
-		else
+		else {
 			include_spip('inc/headers');
 			redirige_par_entete(generer_url_public('login',
 			'url='.rawurlencode(
 			parametre_url(self(), 'var_mode', 'debug', '&')
 			), true));
+		}
 	}
 
 	return assembler_page ($fond);
