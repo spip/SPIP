@@ -147,10 +147,9 @@ function revisions_articles ($id_article, $c=false) {
 // http://doc.spip.org/@instituer_article
 function instituer_article($id_article, $c) {
 
-	include_spip('inc/auth');
+	include_spip('inc/autoriser');
 	include_spip('inc/rubriques');
 
-	auth_rubrique($GLOBALS['auteur_session']['id_auteur'], $GLOBALS['auteur_session']['statut']);
 	$s = spip_query("SELECT statut, id_rubrique FROM spip_articles WHERE id_article=$id_article");
 	$row = spip_fetch_array($s);
 	$id_rubrique = $row['id_rubrique'];
@@ -158,9 +157,9 @@ function instituer_article($id_article, $c) {
 
 	$s = _request('statut', $c);
 	if ($s AND _request('statut', $c) != $statut) {
-		if (acces_rubrique($id_rubrique))
+		if (autoriser('publier_dans', 'rubrique', $id_rubrique))
 			$statut = $champs['statut'] = $s;
-		elseif (acces_article($id_article) AND $s != 'publie')
+		else if (autoriser('modifier', 'article', $id_article) AND $s != 'publie')
 			$statut = $champs['statut'] = $s;
 		else
 			spip_log("editer_article $id_article refus " . join(' ', $c));
