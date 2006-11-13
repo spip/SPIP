@@ -34,8 +34,8 @@ function public_assembler_dist($fond) {
 	if (isset($_POST['confirmer_forum'])
 	OR (isset($_POST['ajouter_mot']) AND $GLOBALS['afficher_texte']=='non')) {
 		include_spip('inc/headers');
-		$f = charger_fonction('forum_insert', 'inc');
-		redirige_par_entete($f());
+		$forum_insert = charger_fonction('forum_insert', 'inc');
+		redirige_par_entete($forum_insert());
 	}
 
 	// si signature de petition, l'enregistrer avant d'afficher la page
@@ -81,9 +81,9 @@ function assembler_page ($fond) {
 		$use_cache, $var_mode, $var_preview;
 
 	// Cette fonction est utilisee deux fois
-	$fcache = charger_fonction('cacher', 'public');
+	$cacher = charger_fonction('cacher', 'public');
 	// Garnir ces quatre parametres avec les infos sur le cache
-	$fcache(NULL, $use_cache, $chemin_cache, $page, $lastmodified);
+	$cacher(NULL, $use_cache, $chemin_cache, $page, $lastmodified);
 
 	if (!$chemin_cache || !$lastmodified) $lastmodified = time();
 
@@ -131,10 +131,10 @@ function assembler_page ($fond) {
 					$GLOBALS[$var] = $val;
 			}
 		} else {
-			$f = charger_fonction('parametrer', 'public');
-			$page = $f($fond, '', $chemin_cache);
+			$parametrer = charger_fonction('parametrer', 'public');
+			$page = $parametrer($fond, '', $chemin_cache);
 			if ($chemin_cache)
-				$fcache(NULL, $use_cache, $chemin_cache, $page, $lastmodified);
+				$cacher(NULL, $use_cache, $chemin_cache, $page, $lastmodified);
 		}
 
 		if ($chemin_cache) $page['cache'] = $chemin_cache;
@@ -212,10 +212,10 @@ function inclure_page($fond, $contexte_inclus) {
 		$lang_select = true; // pour lang_dselect en sortie
 	}
 
-	$fcache = charger_fonction('cacher', 'public');
+	$cacher = charger_fonction('cacher', 'public');
 	// Garnir ces quatre parametres avec les infos sur le cache :
 	// emplacement, validite, et, s'il est valide, contenu & age
-	$fcache($contexte_inclus, $use_cache, $chemin_cache, $page, $lastinclude);
+	$cacher($contexte_inclus, $use_cache, $chemin_cache, $page, $lastinclude);
 
 	// Une fois le chemin-cache decide, on ajoute la date (et date_redac)
 	// dans le contexte inclus, pour que les criteres {age} etc fonctionnent
@@ -230,13 +230,13 @@ function inclure_page($fond, $contexte_inclus) {
 	}
 	// sinon on la calcule
 	else {
-		$f = charger_fonction('parametrer', 'public');
-		$page = $f($fond, $contexte_inclus, $chemin_cache);
+		$parametrer = charger_fonction('parametrer', 'public');
+		$page = $parametrer($fond, $contexte_inclus, $chemin_cache);
 		$lastmodified = time();
 		// et on l'enregistre sur le disque
 		if ($chemin_cache
 		AND $page['entetes']['X-Spip-Cache'] > 0)
-			$fcache($contexte_inclus, $use_cache, $chemin_cache, $page,
+			$cacher($contexte_inclus, $use_cache, $chemin_cache, $page,
 				$lastmodified);
 	}
 	if($lang_select)

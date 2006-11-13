@@ -369,8 +369,8 @@ function traite_svg($file)
 	// Securite si pas guru: virer les scripts et les references externes
 	// Trop expeditif, a ameliorer
 
-        $var_auth = charger_fonction('auth', 'inc');
-	$var_auth();
+        $auth = charger_fonction('auth', 'inc');
+	$auth();
 
 	if ($connect_statut != '0minirezo') {
 		include_spip('inc/texte');

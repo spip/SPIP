@@ -159,8 +159,8 @@ function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $select_gr
 		}
 	}
 
-	$f = charger_fonction('editer_mot', 'inc');
-	echo $f('breve', $id_breve, $cherche_mot, $select_groupe, $flag_editable);
+	$editer_mot = charger_fonction('editer_mot', 'inc');
+	echo $editer_mot('breve', $id_breve, $cherche_mot, $select_groupe, $flag_editable);
 
 	//
 	// Langue de la breve

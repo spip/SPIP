@@ -893,8 +893,8 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 	$s .= "<a href='" . generer_url_ecrire("breves_voir","id_breve=$id_breve") . "' style=\"display:block;\">";
 
 	if ($voir_logo) {
-		$logo_f = charger_fonction('chercher_logo', 'inc');
-		if ($logo = $logo_f($id_breve, 'id_breve', 'on')) {
+		$chercher_logo = charger_fonction('chercher_logo', 'inc');
+		if ($logo = $chercher_logo($id_breve, 'id_breve', 'on')) {
 			list($fid, $dir, $nom, $format) = $logo;
 			$logo = ratio_image($fid, $nom, $format, 26, 20, "alt=''");
 			if ($logo)
@@ -1101,8 +1101,8 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 
 		$titre_boite = '';
 		if ($id_auteur AND $voir_logo) {
-			$logo_f = charger_fonction('chercher_logo', 'inc');
-			if ($logo = $logo_f($id_auteur, 'id_auteur', 'on')) {
+			$chercher_logo = charger_fonction('chercher_logo', 'inc');
+			if ($logo = $chercher_logo($id_auteur, 'id_auteur', 'on')) {
 				list($fid, $dir, $nom, $format) = $logo;
 				$logo = ratio_image($fid, $nom, $format, 48, 48, "alt=''");
 				if ($logo)
@@ -1849,7 +1849,7 @@ function enfant_rub($collection){
 		
 	if ($voir_logo) {
 		$voir_logo = "float: $spip_lang_right; margin-$spip_lang_right: -6px; margin-top: -6px;";
-		$logo_f = charger_fonction('chercher_logo', 'inc');
+		$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	} else $logo ='';
 
 	$les_enfants = "";
@@ -1871,7 +1871,7 @@ function enfant_rub($collection){
 
 
 		if ($voir_logo) {
-			if ($logo = $logo_f($id_rubrique, 'id_rubrique', 'on')) {
+			if ($logo = $chercher_logo($id_rubrique, 'id_rubrique', 'on')) {
 				list($fid, $dir, $nom, $format) = $logo;
 				$logo = ratio_image($fid, $nom, $format, 48, 36, "alt=''");
 				if ($logo)

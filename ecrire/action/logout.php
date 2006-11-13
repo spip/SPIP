@@ -30,8 +30,8 @@ function action_logout_dist()
 		spip_query("UPDATE spip_auteurs SET en_ligne = DATE_SUB(NOW(),INTERVAL 15 MINUTE) WHERE id_auteur = ".$auteur_session['id_auteur']);
 	// le logout explicite vaut destruction de toutes les sessions
 		if ($_COOKIE['spip_session']) {
-			$var_f = charger_fonction('session', 'inc');
-			$var_f($auteur_session['id_auteur']);
+			$session = charger_fonction('session', 'inc');
+			$session($auteur_session['id_auteur']);
 			spip_setcookie('spip_session', '', 0);
 		}
 		if ($_SERVER['PHP_AUTH_USER'] AND !$ignore_auth_http) {

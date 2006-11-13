@@ -19,7 +19,7 @@ function inc_iconifier_dist($id_objet, $id,  $script, $iframe_script='') {
 
 	$texteon = $GLOBALS['logo_libelles'][($id OR $id_objet != 'id_rubrique') ? $id_objet : 'id_racine'];
 
-	$logo_f = charger_fonction('chercher_logo', 'inc');
+	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	
 	// Add the redirect url when uploading via iframe
 
@@ -29,7 +29,7 @@ function inc_iconifier_dist($id_objet, $id,  $script, $iframe_script='') {
     $iframe = "<input type='hidden' name='iframe_redirect' value='".rawurlencode($iframe_script)."' />\n";
   }
 	
-	if (!$logo = $logo_f($id, $id_objet, 'on')) {
+	if (!$logo = $chercher_logo($id, $id_objet, 'on')) {
 		$masque = indiquer_logo($texteon, $id_objet, 'on', $id, $script, $iframe);
 		$res = block_parfois_visible('on', "<b>$texteon</b>", $masque);
 	} else {
@@ -40,7 +40,7 @@ function inc_iconifier_dist($id_objet, $id,  $script, $iframe_script='') {
 		$res = "<center>$masque</center><br /><br />";;
 		$texteoff = _T('logo_survol');
 
-		if ($logo = $logo_f($id, $id_objet, 'off')) {
+		if ($logo = $chercher_logo($id, $id_objet, 'off')) {
 
 			list($img, $clic) = decrire_logo($id_objet, 'off', $id, 170, 170, $logo, $texteoff, $script);
 

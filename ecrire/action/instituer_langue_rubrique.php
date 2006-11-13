@@ -15,8 +15,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@action_instituer_langue_rubrique_dist
 function action_instituer_langue_rubrique_dist() {
 
-	$var_f = charger_fonction('securiser_action', 'inc');
-	$var_f();
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$securiser_action();
 
 	$arg = _request('arg');
 	$changer_lang = _request('changer_lang');

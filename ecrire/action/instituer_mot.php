@@ -19,8 +19,8 @@ include_spip('base/abstract_sql');
 // http://doc.spip.org/@action_instituer_mot_dist
 function action_instituer_mot_dist()
 {
-	$var_f = charger_fonction('securiser_action', 'inc');
-	$var_f();
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$securiser_action();
 
 	$arg = _request('arg');
 

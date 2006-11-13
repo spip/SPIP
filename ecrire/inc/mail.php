@@ -14,8 +14,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@envoyer_mail
 function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
-	$f = charger_fonction('envoyer_mail','inc');
-	return $f($email,$sujet,$texte,$from,$headers);
+	$envoyer_mail = charger_fonction('envoyer_mail','inc');
+	return $envoyer_mail($email,$sujet,$texte,$from,$headers);
 }
 
 
@@ -35,8 +35,8 @@ function cron_mail($t) {
 	// $t = 0 si le fichier de lock a ete detruit
 	if (!$t) $t = time() - (3600 * 24 * $jours_neuf);
 
-	$f = charger_fonction('parametrer', 'public');
-	$page = $f('nouveautes',
+	$parametrer = charger_fonction('parametrer', 'public');
+	$page = $parametrer('nouveautes',
 			    array('date' => date('Y-m-d H:i:s', $t),
 				  'jours_neuf' => $jours_neuf));
 	$page = $page['texte'];

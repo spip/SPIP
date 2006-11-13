@@ -17,8 +17,8 @@ include_spip('action/supprimer');
 // http://doc.spip.org/@action_documenter_dist
 function action_documenter_dist()
 {
-	$var_f = charger_fonction('securiser_action', 'inc');
-	$var_f();
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$securiser_action();
 
 	$arg = _request('arg');
 

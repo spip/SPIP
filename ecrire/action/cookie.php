@@ -58,8 +58,8 @@ function action_cookie_dist()
 
 // rejoue le cookie pour renouveler spip_session
   if ($change_session == 'oui') {
-	$var_f = charger_fonction('session', 'inc');
-	$var_f(true);
+	$session = charger_fonction('session', 'inc');
+	$session(true);
 	envoie_image_vide();
 	return;
   }
@@ -91,13 +91,13 @@ if ($essai_login == "oui") {
 	spip_connect();
 
 	// Essayer l'authentification par MySQL
-	$f = charger_fonction('auth_spip', 'inc', true);
-	if ($f) $row_auteur = $f($session_login, $session_password);		
+	$auth_spip = charger_fonction('auth_spip', 'inc', true);
+	if ($auth_spip) $row_auteur = $f($session_login, $session_password);		
 
 	// Marche pas: essayer l'authentification par LDAP si present
 	if (!$row_auteur AND $GLOBALS['ldap_present']) {
-		$f = charger_fonction('auth_ldap', 'inc', true);
-		if ($f) $row_auteur = $f($session_login, $session_password);
+		$auth_ldap = charger_fonction('auth_ldap', 'inc', true);
+		if ($auth_ldap) $row_auteur = $auth_ldap($session_login, $session_password);
 	}
 
 	// Marche pas, renvoyer le formulaire avec message d'erreur si 2e fois
@@ -120,8 +120,8 @@ if ($essai_login == "oui") {
 		if ($row_auteur['statut'] == '0minirezo')
 			$cookie_admin = "@".$session_login;
 	        
-		$var_f = charger_fonction('session', 'inc');
-		$cookie_session = $var_f($row_auteur);
+		$session = charger_fonction('session', 'inc');
+		$cookie_session = $session($row_auteur);
 
 		if ($session_remember == 'oui')
 			spip_setcookie('spip_session', $cookie_session, time() + 3600 * 24 * 14);

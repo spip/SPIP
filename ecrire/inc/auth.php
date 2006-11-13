@@ -131,8 +131,8 @@ function inc_auth_dist() {
 	
 	// Session valide en cours ?
 	if ($_COOKIE['spip_session']) {
-		$var_f = charger_fonction('session', 'inc');
-		if ($connect_id_auteur = $var_f()) {
+		$session = charger_fonction('session', 'inc');
+		if ($connect_id_auteur = $session()) {
 			$auth_can_disconnect = true;
 		} else unset($_COOKIE['spip_session']);
 	}
@@ -200,12 +200,12 @@ function inc_auth_dist() {
 	// rajouter les sessions meme en mode auth_http
 	// pour permettre les connexions multiples
 	if (!$_COOKIE['spip_session']) {
-		$var_f = charger_fonction('session', 'inc');
-		if ($session = $var_f($row)) {
+		$session = charger_fonction('session', 'inc');
+		if ($spip_session = $session($row)) {
 			preg_match(',^[^/]*//[^/]*(.*)/$,',
 				   url_de_base(),
 				   $r);
-			spip_setcookie('spip_session', $session, time() + 3600 * 24 * 14, $r[1]);
+			spip_setcookie('spip_session', $spip_session, time() + 3600 * 24 * 14, $r[1]);
 		}
 	}
 

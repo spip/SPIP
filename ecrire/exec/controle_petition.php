@@ -16,7 +16,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@exec_controle_petition_dist
 function exec_controle_petition_dist()
 {
-
 	include_spip('inc/presentation');
 	include_spip('inc/signatures');
 	include_spip('inc/autoriser');
@@ -33,9 +32,9 @@ function exec_controle_petition_dist()
 
 		$debut = intval(_request('debut'));
 
-		$var_f = charger_fonction('signatures', 'inc');
+		$signatures = charger_fonction('signatures', 'inc');
 
-		$r = $var_f('controle_petition',
+		$r = $signatures('controle_petition',
 			$id_article,
 			$debut, 
 			"(statut='publie' OR statut='poubelle')",

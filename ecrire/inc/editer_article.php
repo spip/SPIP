@@ -62,7 +62,7 @@ function inc_editer_article($row, $lier_trad, $new, $champs_article) {
 
 	if ($champs_extra) include_spip('inc/extra');
 
-	$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');
+	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
 	$redirect = generer_url_ecrire("articles");
 
 	$form = "<input type='hidden' name='editer_article' value='oui' />\n" .
@@ -103,7 +103,7 @@ function inc_editer_article($row, $lier_trad, $new, $champs_article) {
 
 		debut_cadre_couleur($logo, true, "", _T('titre_cadre_interieur_rubrique'). aide("artrub")) .
 
-		$selecteur_rubrique($id_rubrique, 'article', ($statut == 'publie')) .
+		$chercher_rubrique($id_rubrique, 'article', ($statut == 'publie')) .
 
 		fin_cadre_couleur(true) .
 	

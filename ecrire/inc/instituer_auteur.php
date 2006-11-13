@@ -78,7 +78,7 @@ function inc_instituer_auteur_dist($id_auteur, $statut, $url_self)
 
 		$label = $restreint ? _T('info_ajouter_rubrique') : _T('info_restreindre_rubrique');
 
-		$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');
+		$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
 
 		$res .= debut_block_visible("statut$id_auteur")
 		. "\n<div id='ajax_rubrique' class='arial1'><br />\n"
@@ -88,7 +88,7 @@ function inc_instituer_auteur_dist($id_auteur, $statut, $url_self)
 		. "\n<input name='id_auteur' value='"
 		. $id_auteur
 		. "' type='hidden' />"
-		. $selecteur_rubrique(0, 'auteur', false)
+		. $chercher_rubrique(0, 'auteur', false)
 		. "</div>\n"
 		. fin_block();
 	}

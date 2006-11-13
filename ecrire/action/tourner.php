@@ -19,8 +19,8 @@ include_spip('base/abstract_sql');
 function action_tourner_dist() {
 	include_spip('inc/distant'); # pour copie_locale
 
-	$var_f = charger_fonction('securiser_action', 'inc');
-	$var_f();
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$securiser_action();
 
 	$arg = _request('arg');
 

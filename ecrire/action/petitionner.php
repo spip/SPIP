@@ -17,8 +17,8 @@ function action_petitionner_dist() {
 
 	include_spip('inc/autoriser');
 
-	$var_f = charger_fonction('securiser_action', 'inc');
-	$var_f();
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$securiser_action();
 
 	$arg = _request('arg');
 

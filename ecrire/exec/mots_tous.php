@@ -110,8 +110,8 @@ function exec_mots_tous_dist()
 			echo confirmer_mot($conf_mot, $id_groupe, $groupe);
 		}
 		if ($groupe) {
-		  	$f = charger_fonction('grouper_mots', 'inc');
-			echo $f($id_groupe, $groupe);
+		  	$grouper_mots = charger_fonction('grouper_mots', 'inc');
+			echo $grouper_mots($id_groupe, $groupe);
 		}
 
 		echo "</div>";

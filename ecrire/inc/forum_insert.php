@@ -186,8 +186,8 @@ function inc_forum_insert_dist() {
 		// simuler une action venant de l'espace public
 		// pour se conformer au a general.
 		set_request('action', 'ajout_forum');
-	        $var_f = charger_fonction('securiser_action', 'inc');
-        	$var_f();
+	        $securiser_action = charger_fonction('securiser_action', 'inc');
+        	$securiser_action();
 
 		$file = _DIR_TMP ."forum_" . preg_replace('/[^0-9]/', '', _request('arg')) .".lck";
 		if (!file_exists($file)) {

@@ -41,8 +41,8 @@ function inc_informer_auteur_dist($id)
 	}
 	$res = '';
 	if ($spip_display != 1 AND $spip_display!=4 AND $GLOBALS['meta']['image_process'] != "non") {
-		$logo_f = charger_fonction('chercher_logo', 'inc');
-		if ($res = $logo_f($id, 'id_auteur', 'on'))  {
+		$chercher_logo = charger_fonction('chercher_logo', 'inc');
+		if ($res = $chercher_logo($id, 'id_auteur', 'on'))  {
 			list($fid, $dir, $n, $format) = $res;
 			$res = ratio_image($fid, $n, $format, 100, 48, "alt=''");
 			if ($res)
