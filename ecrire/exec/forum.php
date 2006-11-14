@@ -24,7 +24,7 @@ function liste_numeros_forum($script, $debut, $total)
 	for ($i = 0; $i < $total; $i = $i + 10){
 		if ($i > 0) echo " | ";
 		if ($i == $debut)
-			echo "\n<FONT SIZE='3'><B>$i</B></FONT>";
+			echo "\n<font size='3'><b>$i</b></font>";
 		else
 			echo "\n<a href='", generer_url_ecrire($script, "debut=$i"), "'>$i</a>";
 	}
@@ -38,14 +38,13 @@ function exec_forum_dist()
 
   $debut = intval($debut);
 
+  $commencer_page = charger_fonction('commencer_page', 'inc');
   if ($admin) {
-	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_forum'), "forum", "privadm");
 	$statutforum = 'privadm';
 	$logo = "forum-admin-24.gif";
 	$script = 'forum_admin';
   } else {
-	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_forum'), "forum", "forum-interne");
 	$statutforum = 'privrac';
 	$logo = "forum-interne-24.gif";
@@ -75,17 +74,17 @@ function exec_forum_dist()
   if ($total > 10) liste_numeros_forum($script, $debut, $total);
 
   
-  echo "<p><div align='center'>";
+  echo "\n<p><div align='center'>\n";
   icone (_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=$statutforum&script=$script"), $logo, "creer.gif");
-  echo "</div></p>";
+  echo "\n</div></p>";
 
-  echo "<p align='left'>";
+  echo "\n<p align='left'>";
   $limit = $debut ? "LIMIT $debut,10" : "LIMIT 10" ;
   $result_forum = spip_query("SELECT * FROM spip_forum WHERE statut='$statutforum' AND id_parent=0 ORDER BY date_heure DESC $limit");
  
   echo afficher_forum($result_forum,$script,'');
  
-  echo "</div>";
+  echo "</p></div>";
 
   echo fin_page();
 }

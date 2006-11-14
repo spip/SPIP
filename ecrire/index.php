@@ -83,10 +83,10 @@ if (autoriser_sans_cookie($exec)) {
 	$var_auth = true;
 } else {
 	$auth = charger_fonction('auth', 'inc');
-	$auth = $auth();
-	if ($auth) {
+	$var_auth = $auth();
+	if ($var_auth) {
 		include_spip('inc/headers');
-		redirige_par_entete($auth);
+		redirige_par_entete($var_auth);
 	}
  }
 

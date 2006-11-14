@@ -73,7 +73,7 @@ function finElement($parser, $name)
   $t = ereg_replace("[\n\t ]+$", "\n" . $depth, $t);
   // fusion <balise></balise> en <balise />
   // ATTENTION, ne pas le faire s'il y a des attributs
-  // ca trompe completement les clients http
+  // ca trompe completement les clients http 
   if ($t || ($ouv !=$name))
     $res .= ($ouv ? ('<' . $ouv . '>') : '') . $t . "</" . $name . ">";
   else
@@ -116,6 +116,7 @@ function defautElement($parser, $data)
   $depth = &$phraseur_xml->depth;
   $contenu = &$phraseur_xml->contenu;
 
+  if (!isset($contenu[$depth])) $contenu[$depth]='';
   $contenu[$depth] .= $data;
 }
 
@@ -139,6 +140,8 @@ function xml_parsefile($xml_parser, $file)
 function xml_parsestring($xml_parser, $data)
 {
 	global $phraseur_xml;
+
+	$phraseur_xml->contenu[$phraseur_xml->depth] ='';
 	$r = "";
 	if (!xml_parse($xml_parser, $data, true)) {
 	  // ne pas commencer le message par un "<" (cf inc_sax_dist)

@@ -298,7 +298,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 		echo "<center>";
 		echo generer_action_auteur('editer_site',
 			$id_syndic,
-			$redirect = generer_url_ecrire('sites'),
+			generer_url_ecrire('sites'),
 			"<input type='hidden' name='reload' value='oui' />
 		<input type='submit' value=\""
 			. attribut_html(_T('lien_nouvelle_recuperation'))
@@ -321,7 +321,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 	echo "<div align='right'>\n";
 	echo generer_action_auteur('editer_site',
 		$id_syndic,
-		$redirect = generer_url_ecrire('sites'),
+		generer_url_ecrire('sites'),
 		"<input type='hidden' name='reload' value='oui' />
 		<input type='submit' value=\""
 		. attribut_html(_T('lien_mise_a_jour_syndication'))

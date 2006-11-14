@@ -130,7 +130,7 @@ function inc_auth_dist() {
 	//
 	
 	// Session valide en cours ?
-	if ($_COOKIE['spip_session']) {
+	if (isset($_COOKIE['spip_session'])) {
 		$session = charger_fonction('session', 'inc');
 		if ($connect_id_auteur = $session()) {
 			$auth_can_disconnect = true;
@@ -140,15 +140,15 @@ function inc_auth_dist() {
 	// Essayer auth http si significatif
 	// (ignorer les login d'intranet independants de spip)
 	if (!$ignore_auth_http AND !$connect_id_auteur) {
-		if ($_SERVER['PHP_AUTH_USER'] AND $_SERVER['PHP_AUTH_PW']) {
+		if (isset($_SERVER['PHP_AUTH_USER'])
+		AND isset($_SERVER['PHP_AUTH_PW'])) {
 			include_spip('inc/actions');
 			if (verifier_php_auth()) {
 				$connect_login = $_SERVER['PHP_AUTH_USER'];
 				$auth_can_disconnect = true;
 				$_SERVER['PHP_AUTH_PW'] = '';
 			}
-
-		} else if ($_SERVER['REMOTE_USER'])
+		} else if (isset($_SERVER['REMOTE_USER']))
 
 	// Authentification .htaccess old style, car .htaccess semble
 	// souvent definir *aussi* PHP_AUTH_USER et PHP_AUTH_PW
@@ -238,6 +238,6 @@ function auth_arefaire()
 {
 	$url = rawurlencode(str_replace('/./', '/',
 			(_DIR_RESTREINT ? "" : _DIR_RESTREINT_ABS) . str_replace('&amp;', '&', self()))); 
-	return generer_url_public('login', "url=$url" . ($_GET['bonjour'] == 'oui' ? '&var_echec_cookie=true' : ''),true);
+	return generer_url_public('login', "url=$url" . (isset($_GET['bonjour']) ? '&var_echec_cookie=true' : ''),true);
 }
 ?>

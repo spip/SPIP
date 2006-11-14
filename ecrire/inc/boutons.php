@@ -267,7 +267,7 @@ function definir_barre_onglets($rubrique) {
 			generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur"));
 		$onglets['infos']=
 		  new Bouton('fiche-perso-24.gif', 'icone_informations_personnelles',
-			generer_url_ecrire("auteurs_infos","id_auteur=$id_auteur"));
+			generer_url_ecrire("auteur_infos","id_auteur=$id_auteur"));
 	break;
 
 	case 'configuration':
