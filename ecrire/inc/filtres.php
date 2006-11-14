@@ -1693,17 +1693,16 @@ function table_valeur($table,$cle,$defaut=''){
 // http://doc.spip.org/@match
 function match($texte, $expression, $modif="UimsS") {
 	$expression=str_replace("\/","/",$expression);
-	$expression=str_replace("/","\/",$expression);
-	return preg_match("/$expression/$modif",$texte, $r) ? $r[0] : false;
+	return preg_match('/' . preg_quote($expression, '/') . '/' . $modif,$texte, $r)
+		? $r[0] : false;
 }
 
 // filtre replace pour faire des operations avec expression reguliere
 // [(#TEXTE|replace{^ceci$,cela,Uims})]
 // http://doc.spip.org/@replace
 function replace($texte, $expression, $replace='', $modif="UimsS") {
-	$expression=str_replace("\/","/",$expression);
-	$expression=str_replace("/","\/",$expression);
-	return preg_replace("/$expression/$modif",$replace,$texte);
+	$expression=str_replace("\/","/", $expression);
+	return preg_replace('/' . preg_quote($expression, '/') . '/' . $modif, $replace, $texte);
 }
 
 
