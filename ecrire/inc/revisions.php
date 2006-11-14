@@ -452,6 +452,8 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 
 	spip_release_lock($lock);
 
+	spip_log("creation version $id_version_new de l'article $id_article $titre_version");
+
 	return $id_version_new;
 }
 
@@ -548,7 +550,6 @@ function enregistrer_premiere_revision($x) {
 			}
 		}
 	}
-
 	return $x;
 }
 
@@ -567,7 +568,7 @@ function enregistrer_nouvelle_revision($x) {
 		if (count($champs))
 			ajouter_version($x['args']['id_objet'], $champs, '', $GLOBALS['auteur_session']['id_auteur']);
 	}
-	
+
 	return $x;
 }
 

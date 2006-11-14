@@ -140,8 +140,8 @@ function revisions_articles ($id_article, $c=false) {
 	if ($r) {
 		spip_query("UPDATE spip_articles SET date_modif=NOW() WHERE id_article="._q($id_article));
 	}
-	
-	return $r;
+
+	return ''; // pas d'erreur
 }
 
 
@@ -159,6 +159,7 @@ function instituer_article($id_article, $c) {
 	$row = spip_fetch_array($s);
 	$id_rubrique = $row['id_rubrique'];
 	$statut_ancien = $statut = $row['statut'];
+	$champs = array();
 
 	$s = _request('statut', $c);
 	if ($s AND _request('statut', $c) != $statut) {
@@ -263,6 +264,8 @@ function instituer_article($id_article, $c) {
 			'data' => $data
 		)
 	);
+
+	return ''; // pas d'erreur
 }
 
 
@@ -308,6 +311,8 @@ function article_referent ($id_article, $c) {
 	else {
 		spip_query("UPDATE spip_articles SET id_trad = $id_lier WHERE id_article = $id_article");
 	}
+
+	return ''; // pas d'erreur
 }
 
 

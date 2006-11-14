@@ -74,7 +74,6 @@ function insert_breve($id_rubrique) {
 
 
 // Enregistre une revision de breve
-// $new indique si c'est un INSERT
 // $c est un contenu (par defaut on prend le contenu via _request())
 // http://doc.spip.org/@revisions_breves
 function revisions_breves ($id_breve, $c=false) {

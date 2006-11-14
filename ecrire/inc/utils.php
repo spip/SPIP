@@ -98,6 +98,7 @@ function include_spip($f, $include = true) {
 // utilisee dans le script pipeline precompile
 // http://doc.spip.org/@minipipe
 function minipipe($fonc,$val){
+
 	// fonction
 	if (function_exists($fonc))
 		$val = call_user_func($fonc, $val);
@@ -147,8 +148,9 @@ function pipeline($action,$val) {
 	}
 	// si le flux est une table qui encapsule donnees et autres
 	// on ne ressort du pipe que les donnees
-	if (is_array($val) && isset($val['data']))
-			$val = $val['data'];
+	// array_key_exists pour php 4.1.0
+	if (is_array($val) && in_array('data', array_keys($val)))
+		$val = $val['data'];
 	return $val;
 }
 
