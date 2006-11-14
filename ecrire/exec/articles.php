@@ -78,7 +78,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	$virtuel =  (substr($chapo, 0, 1) == '=')  ? substr($chapo, 1) : '';
 
 
-	$statut_rubrique = autoriser('publier_dans', 'rubrique', $id_rubrique);
+	$statut_rubrique = autoriser('publierdans', 'rubrique', $id_rubrique);
 	$flag_editable = autoriser('modifier', 'article', $id_article);
 
 	// Est-ce que quelqu'un a deja ouvert l'article en edition ?
@@ -219,12 +219,13 @@ function boite_info_articles($id_article, $statut_article, $visites, $id_version
 	AND $visites > 0
 	AND $GLOBALS['meta']["activer_statistiques"] != "non"
 	AND $options == "avancees"
-	AND autoriser('voir_stats', 'article', $id_article)) {
+	AND autoriser('voirstats', 'article', $id_article)) {
 		$res .= icone_horizontale(_T('icone_evolution_visites', array('visites' => $visites)), generer_url_ecrire("statistiques_visites","id_article=$id_article"), "statistiques-24.gif","rien.gif", false);
 	}
 
 	if ((($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions)
-	AND $id_version>1 AND $options == "avancees") 
+	AND $id_version>1 AND $options == "avancees"
+	AND autoriser('voirrevisions', 'article', $id_article))
 		$res .= icone_horizontale(_T('info_historique_lien'), generer_url_ecrire("articles_versions","id_article=$id_article"), "historique-24.gif", "rien.gif", false);
 
 	// Correction orthographique
@@ -243,7 +244,7 @@ function boite_info_articles($id_article, $statut_article, $visites, $id_version
 // http://doc.spip.org/@boites_de_config_articles
 function boites_de_config_articles($id_article)
 {
-	if (autoriser('moderer_forum', 'article', $id_article)) {
+	if (autoriser('modererforum', 'article', $id_article)) {
 		$regler_moderation = charger_fonction('regler_moderation', 'inc');
 		$regler = $regler_moderation($id_article,"articles","id_article=$id_article");
 	}

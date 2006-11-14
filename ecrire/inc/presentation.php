@@ -524,7 +524,7 @@ function puce_statut_article($id, $statut, $id_rubrique, $ajax = false) {
 	$puce = "puce-$puce.gif";
 
 	include_spip('inc/autoriser');
-	if (autoriser('publier_dans', 'rubrique', $id_rubrique)) {
+	if (autoriser('publierdans', 'rubrique', $id_rubrique)) {
 	  // les versions de MSIE ne font pas toutes pareil sur alt/title
 	  // la combinaison suivante semble ok pour tout le monde.
 	  $titles = array(
