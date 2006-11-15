@@ -1253,6 +1253,10 @@ function envoi_link($nom_site_spip) {
 		'&ltr=' . 
 		$GLOBALS['spip_lang_left'];
 
+	$ajax =  isset($_COOKIE['spip_accepte_ajax']) 
+	? $_COOKIE['spip_accepte_ajax']
+	: 0;
+
 	// CSS de secours en cas de non fonct de la suivante
 	$res = '<link rel="stylesheet" type="text/css" href="'
 	. find_in_path('style_prive_defaut.css')
@@ -1272,9 +1276,10 @@ function envoi_link($nom_site_spip) {
 	. '" media="print" />' . "\n"
 
 	// CSS "visible au chargement" differente selon js actif ou non
+
 	. '<link rel="stylesheet" type="text/css" href="'
 	. find_in_path('spip_style_'
-		. (($_COOKIE['spip_accepte_ajax'] != -1) ? 'invisible' : 'visible')
+		. (($ajax != -1) ? 'invisible' : 'visible')
 		. '.css')
 	.'" />' . "\n"
 
@@ -1316,23 +1321,25 @@ function debut_javascript($admin, $stat)
 	// On envoie un script ajah ; si le script reussit le cookie passera a +1
 	// on installe egalement un <noscript></noscript> qui charge une image qui
 	// pose un cookie valant -1
-	$tester_javascript =  ($_COOKIE['spip_accepte_ajax'] >= 1) ? '' : (
- "if (a = createXmlHttp()) {
-	a.open('GET', '" . generer_url_ecrire('test_ajax', 'js=1', '&') .
-		  "', true) ;
-	a.send(null);
-}");
+	$ajax =  isset($_COOKIE['spip_accepte_ajax']) 
+	? $_COOKIE['spip_accepte_ajax']
+	: 0;
 
-	if ($_COOKIE['spip_accepte_ajax'] != -1) {
+	$testeur = generer_url_ecrire('test_ajax', 'js=1');
+
+	if ($ajax != -1) {
+	  // pour le pied de page
 		define('_TESTER_NOSCRIPT',
-			"<noscript>\n<div style='display:none;'><img src='".generer_url_ecrire('test_ajax', 'js=-1')."' width='1' height='1' alt='' /></div></noscript>\n"); // pour le pied de page
+			"<noscript>\n<div style='display:none;'><img src='"
+		        . $testeur
+		        . "' width='1' height='1' alt='' /></div></noscript>\n"); 
 	}
 
 	return 
 	// envoi le fichier JS de config si browser ok.
 		$GLOBALS['browser_layer'] .
 	 	http_script(
-			$tester_javascript . 
+			(($ajax >= 1) ? '' : "ajah('GET', '$testeur')") .
 			"\nvar ajax_image_searching = \n'<div style=\"float: ".$GLOBALS['spip_lang_right'].";\"><img src=\"".url_absolue(_DIR_IMG_PACK."searching.gif")."\" /></div>';" .
 			"\nvar stat = " . ($stat ? 1 : 0) .
 			"\nvar largeur_icone = " .

@@ -31,8 +31,11 @@ function block_parfois_visible($nom, $invite, $masque, $style='', $visible=false
 
 	$nom = 'Layer' . renomme_block($nom);
 
+	$ajax =  isset($_COOKIE['spip_accepte_ajax']) 
+	  ? ($_COOKIE['spip_accepte_ajax']!=-1)
+	: 1;
 	// initialement invisible, seulement si on sait rendre visible
-	if (!$visible AND $_COOKIE['spip_accepte_ajax'] != -1)
+	if (!$visible AND $ajax)
 		$visible = 'display:none;';
 	else 	$visible = 'display:block;';
 
