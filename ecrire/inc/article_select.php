@@ -49,9 +49,8 @@ function article_select($id_article, $id_rubrique=0, $lier_trad=0, $id_version=0
 			}
 		}
 		return $row;
-
-	} else if ($id_article !='new') return array(); // anormal
-
+	}
+	// id_article non numerique, c'est une demande de creation.
 	// Si c'est une demande de nouvelle traduction, init specifique
 	if ($lier_trad)
 		$row = article_select_trad($lier_trad);
