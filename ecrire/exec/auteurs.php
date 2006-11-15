@@ -227,7 +227,8 @@ function auteurs_href($clic, $args='', $att='')
 {
 	$h = generer_url_ecrire('auteurs', $args);
 	$a = 'auteurs';
-	if (_SPIP_AJAX == 1 )
+
+	if (_SPIP_AJAX === 1 )
 		$att .= ("\nonclick=" . ajax_action_declencheur($h,$a));
 
 	return "<a href='$h#$a'$att>$clic</a>";

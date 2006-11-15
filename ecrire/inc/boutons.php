@@ -424,7 +424,7 @@ function bandeau_principal2($rubrique, $sous_rubrique, $largeur) {
 	$largitem_moy = 85;
 
 	foreach($GLOBALS['boutons_admin'] as $page => $detail) {
-		if (($rubrique == $page) AND (_SPIP_AJAX !=-1)) {
+		if (($rubrique == $page) AND (_SPIP_AJAX === -1)) {
 			$class = "visible_au_chargement";
 		} else {
 			$class = "invisible_au_chargement";

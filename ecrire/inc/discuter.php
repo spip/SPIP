@@ -20,7 +20,7 @@ function formulaire_discuter($query, $total, $debut, $total_afficher, $script, $
 {
 	$nav ='';
 	if ($total > $total_afficher) {
-		$evt = _SPIP_AJAX == 1;
+		$evt = (_SPIP_AJAX === 1);
 		$nav = "<div class='serif2' align='center'>";
 		for ($i = 0; $i < $total; $i = $i + $total_afficher){
 			$y = $i + $total_afficher - 1;

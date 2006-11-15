@@ -53,7 +53,7 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 	if (is_string($corps)) {
 
 		// Methode traditionnelle
-		if (_SPIP_AJAX != 1) {
+		if (_SPIP_AJAX !== 1) {
 			return redirige_action_auteur($action,
 				$id,
 				$script,

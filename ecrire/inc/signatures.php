@@ -32,7 +32,7 @@ function inc_signatures_dist($script, $id, $debut, $where, $order, $limit='') {
 	}
 	else $args = "";
 
-	$evt = (_SPIP_AJAX == 1);
+	$evt = (_SPIP_AJAX === 1);
 
 	$a = "editer_signature-$id";
 
