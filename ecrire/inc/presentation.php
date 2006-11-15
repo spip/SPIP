@@ -660,6 +660,11 @@ function afficher_articles($titre, $requete, $formater='') {
 
 	if (!$cpt = $cpt['n']) return '' ;
 
+
+	$requete['FROM'] = preg_replace("/(spip_articles AS \w*)/", "\\1 LEFT JOIN spip_petitions AS petitions USING (id_article)", $requete['FROM']);
+
+	$requete['SELECT'] .= ", petitions.id_article AS petition ";
+
 	// memorisation des arguments pour gérer l'affichage par tranche
 	// et/ou par langues.
 
@@ -679,10 +684,6 @@ function afficher_articles($titre, $requete, $formater='') {
 		include_spip ('base/abstract_sql');
 		$id_ajax = spip_abstract_insert("spip_ajax_fonc", "(variables, hash, date)", "(" . _q($v) . ", 0x$hash, NOW())");
 	}
-
-	$requete['FROM'] = preg_replace("/(spip_articles AS \w*)/", "\\1 LEFT JOIN spip_petitions AS petitions USING (id_article)", $requete['FROM']);
-
-	$requete['SELECT'] .= ", petitions.id_article AS petition ";
 
 	return afficher_articles_trad($titre, $requete, $formater, $tmp_var, $id_ajax, $cpt);
 }
@@ -706,7 +707,8 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $id
 	$nb_aff = ($cpt  > floor(1.5 * _TRANCHES)) ? _TRANCHES : floor(1.5 * _TRANCHES) ;
 	$deb_aff = intval(_request($tmp_var));
 
-	$q = spip_query("SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
+	$q = spip_query($r="SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
+	spip_log($r);
 	$t = '';
 	while ($r = spip_fetch_array($q)) $t .= $formater($r);
 	spip_free_result($q);
@@ -1253,9 +1255,6 @@ function envoi_link($nom_site_spip) {
 		'&ltr=' . 
 		$GLOBALS['spip_lang_left'];
 
-	$ajax =  isset($_COOKIE['spip_accepte_ajax']) 
-	? $_COOKIE['spip_accepte_ajax']
-	: 0;
 
 	// CSS de secours en cas de non fonct de la suivante
 	$res = '<link rel="stylesheet" type="text/css" href="'
@@ -1279,7 +1278,7 @@ function envoi_link($nom_site_spip) {
 
 	. '<link rel="stylesheet" type="text/css" href="'
 	. find_in_path('spip_style_'
-		. (($ajax != -1) ? 'invisible' : 'visible')
+		. ((_SPIP_AJAX != -1) ? 'invisible' : 'visible')
 		. '.css')
 	.'" />' . "\n"
 
@@ -1321,13 +1320,10 @@ function debut_javascript($admin, $stat)
 	// On envoie un script ajah ; si le script reussit le cookie passera a +1
 	// on installe egalement un <noscript></noscript> qui charge une image qui
 	// pose un cookie valant -1
-	$ajax =  isset($_COOKIE['spip_accepte_ajax']) 
-	? $_COOKIE['spip_accepte_ajax']
-	: 0;
 
 	$testeur = generer_url_ecrire('test_ajax', 'js=1');
 
-	if ($ajax != -1) {
+	if (_SPIP_AJAX != -1) {
 	  // pour le pied de page
 		define('_TESTER_NOSCRIPT',
 			"<noscript>\n<div style='display:none;'><img src='"
@@ -1339,7 +1335,7 @@ function debut_javascript($admin, $stat)
 	// envoi le fichier JS de config si browser ok.
 		$GLOBALS['browser_layer'] .
 	 	http_script(
-			(($ajax >= 1) ? '' : "ajah('GET', '$testeur')") .
+			((_SPIP_AJAX >= 1) ? '' : "ajah('GET', '$testeur')") .
 			"\nvar ajax_image_searching = \n'<div style=\"float: ".$GLOBALS['spip_lang_right'].";\"><img src=\"".url_absolue(_DIR_IMG_PACK."searching.gif")."\" /></div>';" .
 			"\nvar stat = " . ($stat ? 1 : 0) .
 			"\nvar largeur_icone = " .

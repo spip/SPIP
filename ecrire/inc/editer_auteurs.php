@@ -217,7 +217,7 @@ function ajouter_auteurs_articles($id_article, $les_auteurs)
 		   "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>" .
 		   " <input type='submit' value='"._T('bouton_ajouter')."' class='fondo' />" .
 		   "</span>")
-		: ((($_COOKIE['spip_accepte_ajax'] < 1) OR
+		: (((_SPIP_AJAX < 1) OR
 		    ($num >= _SPIP_SELECT_MAX_AUTEURS))
 	      ? ("$text <input type='text' name='cherche_auteur' onclick=\"$js\" class='fondl' value='' size='20' /><span  class='visible_au_chargement' id='valider_ajouter_auteur'>\n<input type='submit' value='"._T('bouton_chercher')."' class='fondo' /></span>")
 	      : (selecteur_auteur_ajax($id_article, $js, $text)
