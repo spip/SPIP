@@ -19,39 +19,53 @@ include_spip('inc/documents');
 // http://doc.spip.org/@exec_articles_edit_dist
 function exec_articles_edit_dist()
 {
-	$id_article = _request('id_article');
-	$id_rubrique = _request('id_rubrique');
-	$lier_trad = intval(_request('lier_trad'));
-	$new = _request('new');
+  articles_edit(_request('id_article'), // intval plus tard
+		intval(_request('id_rubrique')),
+		intval(_request('lier_trad')),
+		intval(_request('id_version')),
+		((_request('new') == 'oui') ? 'new' : ''),
+		articles_edit_config());
+}
+
+function articles_edit_config()
+{
+	global $champs_extra, $spip_ecran, $options, $spip_lang;
+
+	$config = $GLOBALS['meta'];
+	if ($options != 'avancees') {
+		$config['articles_surtitre'] = 'non';
+		$config['articles_descriptif'] = "non";
+		$config['articles_urlref'] = "non";
+		$config['articles_ps'] = "non";
+	}
+	$config['afficher_barre'] = $spip_display != 4;
+	$config['langue'] = $spip_lang;
+	$config['lignes'] = ($spip_ecran == "large")? 8 : 5;
+
+	if ($champs_extra) {
+		include_spip('inc/extra');
+		$config['extra'] = true;
+	} else $config['extra'] = false;
+
+	return $config;
+}
+
+function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new, $config)
+{
 
 	pipeline('exec_init',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));
 	
-	$row = article_select($id_article, $id_rubrique, $lier_trad, $new);
+	$row = article_select($id_article ? $id_article : $new, $id_rubrique,  $lier_trad, $id_version);
 	if (!$row) die ("<h3>"._T('info_acces_interdit')."</h3>");
 
 	$id_article = $row['id_article'];
-
-	// si une ancienne revision est demandee, la charger
-	// en lieu et place de l'actuelle ; attention les champs
-	// qui etaient vides ne sont pas vide's. Ca permet de conserver
-	// des complements ajoutes "orthogonalement", et ca fait un code
-	// plus generique.
-	if ($id_version = intval(_request('id_version'))) {
-		include_spip('inc/revisions');
-		if ($textes = recuperer_version($id_article, $id_version)) {
-			foreach ($textes as $champ => $contenu)
-				$row[$champ] = $contenu;
-		}
-	}
-
 	$id_rubrique = $row['id_rubrique'];
-	$titre = $row['titre'];
 
 	if ($id_version) $titre.= ' ('._T('version')." $id_version)";
+	else $titre = $row['titre'];
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('titre_page_articles_edit', array('titre' => $titre)),
-			"naviguer", "articles", $id_rubrique);
+	echo $commencer_page(_T('titre_page_articles_edit', array('titre' => $titre)), "naviguer", "articles", $id_rubrique);
 
 	debut_grand_cadre();
 	echo afficher_hierarchie($id_rubrique);
@@ -86,7 +100,7 @@ function exec_articles_edit_dist()
 	
 	debut_cadre_formulaire();
 	$editer_article = charger_fonction('editer_article', 'inc');
-	echo $editer_article($row, $lier_trad, $new, $GLOBALS['meta']);
+	echo $editer_article($new, $id_rubrique, $lier_trad, generer_url_ecrire("articles"), $config, $row);
 	fin_cadre_formulaire();
 
 	echo fin_page();

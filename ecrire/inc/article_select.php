@@ -19,38 +19,47 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // lier_trad = l'associer a l'article numero $lier_trad
 // new=oui = article a creer si on valide le formulaire
 // http://doc.spip.org/@article_select
-function article_select($id_article, $id_rubrique, $lier_trad, $new) {
-  global $connect_id_auteur, $connect_id_rubrique, $spip_lang; 
-  $id_article = intval($id_article);
-  $id_rubrique =  intval($id_rubrique);
-  $lier_trad =  intval($lier_trad);
+function article_select($id_article, $id_rubrique=0, $lier_trad=0, $id_version=0) {
+	global $connect_id_auteur, $connect_id_rubrique, $spip_lang; 
 
 	include_spip('inc/autoriser');
 
-if ($id_article) {
+	if (is_numeric($id_article)) {
 
-	if (!autoriser('modifier','article',$id_article))
-		return false;
+		if (!autoriser('modifier','article',$id_article))
+			return array();
 
-	$result = spip_query("SELECT * FROM spip_articles WHERE id_article=$id_article");
+// marquer le fait que l'article est ouvert en edition par toto a telle date
+// une alerte sera donnee aux autres redacteurs sur exec=articles
+		if ($GLOBALS['meta']['articles_modif'] != 'non') {
+			include_spip('inc/drapeau_edition');
+			signale_edition ($id_article,  $GLOBALS['auteur_session'], 'article');
+		}
+		$row = spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article=$id_article"));
+	// si une ancienne revision est demandee, la charger
+	// en lieu et place de l'actuelle ; attention les champs
+	// qui etaient vides ne sont pas vide's. Ca permet de conserver
+	// des complements ajoutes "orthogonalement", et ca fait un code
+	// plus generique.
+		if ($id_version) {
+			include_spip('inc/revisions');
+			if ($textes = recuperer_version($id_article, $id_version)) {
+				foreach ($textes as $champ => $contenu)
+					$row[$champ] = $contenu;
+			}
+		}
+		return $row;
 
-	if ($row = spip_fetch_array($result)) {
-		$titre = $row["titre"];
-		$id_rubrique = $row["id_rubrique"];
-		$id_secteur = $row['id_secteur'];
-		$statut = $row['statut'];
+	} else if ($id_article !='new') return array(); // anormal
 
- 	}
-}
-else if ($new=='oui') {
-	// Nouvel article : titre par defaut
-	$row['titre'] = filtrer_entites(_T('info_nouvel_article'));
-	$row['onfocus'] = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
-	$row['id_rubrique'] = $id_rubrique;
-
-	// Si c'est une demande de nouvelle traduction, on procede autrement
+	// Si c'est une demande de nouvelle traduction, init specifique
 	if ($lier_trad)
 		$row = article_select_trad($lier_trad);
+	else {
+		$row['titre'] = filtrer_entites(_T('info_nouvel_article'));
+		$row['onfocus'] = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
+		$row['id_rubrique'] = $id_rubrique;
+	}
 
 	// appel du script a la racine, faut choisir 
 	// admin restreint ==> sa premiere rubrique
@@ -68,15 +77,6 @@ else if ($new=='oui') {
 	if (!$row['id_secteur']) {
 		$row_rub = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 		$row['id_secteur'] = $row_rub['id_secteur'];
-	}
-}
-
-	// marquer le fait que l'article est ouvert en edition par toto a telle date
-	// une alerte sera donnee aux autres redacteurs sur exec=articles
-	if ($GLOBALS['meta']['articles_modif'] != 'non') {
-		include_spip('inc/drapeau_edition');
-		if ($id_article)
-			signale_edition ($id_article,  $GLOBALS['auteur_session'], 'article');
 	}
 
 	return $row;
