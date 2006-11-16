@@ -135,11 +135,11 @@ function bandeau_titre_boite($titre, $afficher_auteurs, $boite_importante = true
 	echo "<b>$titre</b></font></td>";
 	if ($afficher_auteurs){
 		echo "<td width='100'>";
-		echo http_img_pack("rien.gif", " ", "width='100' height='12'");
+		echo http_img_pack("rien.gif", "", "width='100' height='12'");
 		echo "</td>";
 	}
 	echo "<td width='90'>";
-	echo http_img_pack("rien.gif", " ", "width='90' height='12'");
+	echo http_img_pack("rien.gif", "", "width='90' height='12'");
 	echo "</td>";
 	echo "</tr>";
 }

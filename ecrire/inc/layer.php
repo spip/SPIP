@@ -146,7 +146,7 @@ function produire_acceder_couche($couches, $nom, $icone) {
 			. $couche[1].');';
 
 	return 
-	'<img name="triangle'.$nom.'" src="'._DIR_IMG_PACK.$icone.'" alt="" title="'._T('info_deplier').'" border="0" height="10" width="10"
+	'<img name="triangle'.$nom.'" src="'._DIR_IMG_PACK.$icone.'" alt="'._T('info_deplier').'" title="'._T('info_deplier').'" border="0" height="10" width="10"
 onclick="'.join(' ',$onclick).'" />';
 
 }

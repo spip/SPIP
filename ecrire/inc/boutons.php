@@ -377,7 +377,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 		$alt = $texte;
 	}
 	else {
-		$alt = ' ';
+		$alt = '';
 	}
 	
 	if (!$menu_accesskey = intval($menu_accesskey)) $menu_accesskey = 1;
@@ -499,7 +499,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 		//$hauteur = 68;
 		if (count(explode(" ", $texte)) > 1) $largeur = 80;
 		else $largeur = 70;
-		$alt = " ";
+		$alt = "";
 	}
 	if ($aide AND $spip_display != 3) {
 		$largeur += 50;

@@ -538,7 +538,7 @@ function puce_statut_article($id, $statut, $id_rubrique, $ajax = false) {
 		  $inser_puce = 
 		  	// "\n<div class='puce_article' id='statut$id'$dir_lang>" .
 				"\n<div class='puce_article_fixe' $action>" .
-			  http_img_pack($puce, ' ', "id='imgstatutarticle$id' style='margin: 1px;'") ."</div>"
+			  http_img_pack($puce, $title, "id='imgstatutarticle$id' style='margin: 1px;'") ."</div>"
 				. "\n<div class='puce_article_popup' id='statutdecalarticle$id' onmouseout=\"cacher('statutdecalarticle$id');\" style=' margin-left: -".((11*$clip)+1)."px;'>\n"
 				. afficher_script_statut($id, 'article', -1, 'puce-blanche.gif', 'prepa', $titles['blanche'], $action)
 				. afficher_script_statut($id, 'article', -12, 'puce-orange.gif', 'prop', $titles['orange'], $action)
@@ -551,7 +551,7 @@ function puce_statut_article($id, $statut, $id_rubrique, $ajax = false) {
 		}
 		else{
 		  $inser_puce = "\n<div class='puce_article' id='statut$id'$dir_lang>".
-			  http_img_pack($puce, ' ', "id='imgstatutarticle$id' style='margin: 1px;'") ."</div>";
+			  http_img_pack($puce, $title, "id='imgstatutarticle$id' style='margin: 1px;'") ."</div>";
 			if ($script==NULL){
 				$action = "'".generer_url_ecrire('puce_statut_article',"id='+id",true);
 				$script = "<script type='text/javascript'><!--\n";
@@ -571,7 +571,7 @@ function puce_statut_article($id, $statut, $id_rubrique, $ajax = false) {
 			}
 		}
 	} else {
-		$inser_puce = http_img_pack($puce, ' ', "id='imgstatutarticle$id' style='margin: 1px;'");
+		$inser_puce = http_img_pack($puce, $title, "id='imgstatutarticle$id' style='margin: 1px;'");
 	}
 	return $inser_puce;
 }
@@ -609,7 +609,7 @@ function puce_statut_breve($id, $statut, $type, $droit) {
 	}
 
 	$type1 = "statut$type$id"; 
-	$inser_puce = http_img_pack($puce, ' ', "id='img$type1' style='margin: 1px;'");
+	$inser_puce = http_img_pack($puce, $title, "id='img$type1' style='margin: 1px;'");
 
 	if (!$droit) return $inser_puce;
 	
@@ -696,12 +696,14 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $id
 	if ($trad) {
 		$formater = 'afficher_articles_trad_boucle';
 		$icone = "langues-off-12.gif";
+		$alt = _T('amelioration_access:masquer_trad');
 	} else {
 		if (!$formater) {
 			$formater_article =  charger_fonction('formater_article', 'inc');
 			$formater = $formater_article;
 		}
 		$icone = 'langues-12.gif';
+		$alt = _T('amelioration_access:afficher_trad');
 	}
 
 	$nb_aff = ($cpt  > floor(1.5 * _TRANCHES)) ? _TRANCHES : floor(1.5 * _TRANCHES) ;
@@ -714,13 +716,13 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $id
 
 	$style = "style='visibility: hidden; float: $spip_lang_right'";
 
-	$texte = http_img_pack("searching.gif", "*", $style . " id='img_$tmp_var'");
+	$texte = http_img_pack("searching.gif", "", $style . " id='img_$tmp_var'");
 
 	if (($GLOBALS['meta']['gerer_trad'] == "oui")) {
 		$url = generer_url_ecrire('memoriser',"id_ajax_fonc=$id_ajax&trad=" . (1-$trad));
 		$texte .= 
 		 "\n<div style='float: $spip_lang_right;'><a href=\"#\"\nonclick=\"return charger_id_url('$url','$tmp_var');\">"
-		. "<img\nsrc='". _DIR_IMG_PACK . $icone ."' alt=' ' /></a></div>";
+		. "<img\nsrc='". _DIR_IMG_PACK . $icone ."' alt='$alt' /></a></div>";
 	}
 	$texte .=  '<b>' . $titre_table  . '</b>';
 
@@ -811,7 +813,7 @@ function afficher_articles_trad_boucle($row)
 	$s .= "\n<div style='float: $spip_lang_right; margin-right: -10px;'>$l</div>";
 	
 	if (acces_restreint_rubrique($id_rubrique))
-		$s .= http_img_pack("admin-12.gif", "", "width='12' height='12'", _T('titre_image_admin_article'));
+		$s .= http_img_pack("admin-12.gif", _T('titre_image_administrateur'), "width='12' height='12'", _T('titre_image_admin_article'));
 
 	$s .= "<a href='" . generer_url_ecrire("articles","id_article=$id_article") . "'$dir_lang style=\"display:block;\">";
 			
@@ -964,7 +966,7 @@ function afficher_rubriques_boucle($row, &$tous_id)
 	if ($id_parent == 0) $puce = "secteur-12.gif";
 	else $puce = "rubrique-12.gif";
 	
-	$s = http_img_pack($puce, '- ', "");
+	$s = http_img_pack($puce, '', "");
 	$vals[] = $s;
 	
 	$s = "<b><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'>";
@@ -990,20 +992,20 @@ function bonhomme_statut($row) {
 
 	switch($row['statut']) {
 		case "0minirezo":
-			return http_img_pack("admin-12.gif", "", "",
+			return http_img_pack("admin-12.gif", _T('titre_image_administrateur'), "",
 					_T('titre_image_administrateur'));
 			break;
 		case "1comite":
 			if ($connect_statut == '0minirezo' AND ($row['source'] == 'spip' AND !($row['pass'] AND $row['login'])))
-			  return http_img_pack("visit-12.gif",'', "", _T('titre_image_redacteur'));
+			  return http_img_pack("visit-12.gif",_T('titre_image_redacteur'), "", _T('titre_image_redacteur'));
 			else
-			  return http_img_pack("redac-12.gif",'', "", _T('titre_image_redacteur_02'));
+			  return http_img_pack("redac-12.gif",_T('titre_image_redacteur'), "", _T('titre_image_redacteur_02'));
 			break;
 		case "5poubelle":
-		  return http_img_pack("poubelle.gif", '', "",_T('titre_image_auteur_supprime'));
+		  return http_img_pack("poubelle.gif", _T('titre_image_auteur_supprime'), "",_T('titre_image_auteur_supprime'));
 			break;
 		case "6forum":
-		  return http_img_pack("visit-12.gif", '', "",_T('titre_image_visiteur'));
+		  return http_img_pack("visit-12.gif", _T('titre_image_visiteur'), "",_T('titre_image_visiteur'));
 			break;
 		case "nouveau":
 		default:
@@ -1235,7 +1237,7 @@ function afficher_forum_4($compteur_forum, $nb_forum, $thread)
 		$res .= "<td width='10' valign='top' style='background-color: "
 		.  $fond[$j]
 		.  "'>"
-		. http_img_pack($fleche, " ", "width='10' height='13'")
+		. http_img_pack($fleche, "", "width='10' height='13'")
 		. "</td>\n";
 	}
 	return $res . "\n<td width='100%' valign='top'>";
@@ -1337,7 +1339,7 @@ function debut_javascript($admin, $stat)
 			(isset($_COOKIE['spip_accepte_ajax']) >= 1
 			? ''
 			: "ajah('GET', '$testeur')") .
-			"\nvar ajax_image_searching = \n'<div style=\"float: ".$GLOBALS['spip_lang_right'].";\"><img src=\"".url_absolue(_DIR_IMG_PACK."searching.gif")."\" /></div>';" .
+			"\nvar ajax_image_searching = \n'<div style=\"float: ".$GLOBALS['spip_lang_right'].";\"><img src=\"".url_absolue(_DIR_IMG_PACK."searching.gif")."\" alt=\"\" /></div>';" .
 			"\nvar stat = " . ($stat ? 1 : 0) .
 			"\nvar largeur_icone = " .
 			intval(_LARGEUR_ICONES_BANDEAU) .
@@ -1492,10 +1494,10 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $af = true
 			. "\n<tr><td><a $javascript$lien class='cellule-h'>"
 			. "<span class='cell-i'>" ;
 			if ($fonction){
-				$retour .= http_img_pack($fonction, "", http_style_background($fond, "center center no-repeat"));
+				$retour .= http_img_pack($fonction, $texte, http_style_background($fond, "center center no-repeat"));
 			}
 			else {
-				$retour .= http_img_pack($fond, "", "");
+				$retour .= http_img_pack($fond, $texte, "");
 			}
 			$retour .= "</span></a></td>"
 			. "\n<td class='cellule-h-lien'><a $javascript$lien class='cellule-h'>"
@@ -2078,7 +2080,7 @@ function bouton_spip_rss($op, $args, $fmt='rss') {
 	return "<a href='"
 	. $url
 	. "'>"
-	. http_img_pack('feed.png', $button, '', 'RSS')
+	. http_img_pack('feed.png', $button, 'RSS', 'RSS')
 	. "</a>";
 }
 
