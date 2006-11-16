@@ -18,13 +18,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // mode = 'auto' - charger au besoin
 // mode = 'force' - charger toujours (mettre a jour)
 //
+// Prend en argument un chemin relatif au rep racine, ou une URL
+// Renvoie un chemin relatif au rep racine, ou false
+//
 // http://doc.spip.org/@copie_locale
 function copie_locale($source, $mode='auto') {
 	$local = fichier_copie_locale($source);
 
 	// test d'existence du fichier
 	if ($mode == 'test')
-		return @file_exists(_DIR_RACINE.$local) ? _DIR_RACINE.$local : '';
+		return @file_exists(_DIR_RACINE.$local) ? $local : '';
 
 	// si $local = '' c'est un fichier refuse par fichier_copie_locale(),
 	// par exemple un fichier qui ne figure pas dans nos documents ;
@@ -247,8 +250,11 @@ function nom_fichier_copie_locale($source, $extension) {
 // http://doc.spip.org/@fichier_copie_locale
 function fichier_copie_locale($source) {
 	// Si c'est une image locale pas de souci
-	if (!preg_match(',^(\w+:),', $source))
+	if (!preg_match(',^(\w+:),', $source)) {
+		if (_DIR_RACINE)
+			$source = preg_replace(',^'.preg_quote(_DIR_RACINE).',', '', $source);
 		return $source;
+	}
 
 	// Si l'extension n'est pas precisee, aller la chercher dans la table
 	// des documents -- si la source n'est pas dans la table des documents,
