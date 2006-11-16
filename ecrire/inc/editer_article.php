@@ -21,6 +21,7 @@ function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='',
 		include_spip('inc/presentation');
 		include_spip('inc/article_select');
 		$row = article_select($new, $id_rubrique, $lier_trad);
+		if (!$row) return '';
 		if (is_numeric($new)) $new = '';
 	}
 	// Gaffe: sans ceci, on ecrase systematiquement l'article d'origine

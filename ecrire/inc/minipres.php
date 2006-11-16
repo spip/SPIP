@@ -297,12 +297,13 @@ function http_wrapper($img){
 }
 // http://doc.spip.org/@http_img_pack
 function http_img_pack($img, $alt, $att, $title='') {
-	return "<img src='" . http_wrapper($img)
+	return  "<img src='" . http_wrapper($img)
 	  . ("'\nalt=\"" .
-	     ($alt ? str_replace('"','',$alt) : ($title ? $title : ''))
+	     textebrut($alt ? str_replace('"','',$alt) : ($title ? $title : ''))
 	     . '" ')
 	  . ($title ? " title=\"$title\"" : '')
-	  . $att . " />";
+	  . $att
+	  . " />";
 }
 
 // http://doc.spip.org/@http_href_img

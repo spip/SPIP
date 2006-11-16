@@ -102,7 +102,7 @@ function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new,
 	debut_droite();
 	
 	debut_cadre_formulaire();
-	echo articles_edit_presentation($new, $row['id_rubrique'], $lier_trad, $row['titre']);
+	echo articles_edit_presentation($new, $row['id_rubrique'], $lier_trad, $row['id_article'], $row['titre']);
 	$editer_article = charger_fonction('editer_article', 'inc');
 	echo $editer_article($new, $id_rubrique, $lier_trad, generer_url_ecrire("articles"), $config, $row);
 	fin_cadre_formulaire();
@@ -110,13 +110,13 @@ function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new,
 	echo fin_page();
 }
 
-function articles_edit_presentation($new, $id_rubrique, $lier_trad, $titre)
+function articles_edit_presentation($new, $id_rubrique, $lier_trad, $id_article, $titre)
 {
 	$oups = ($lier_trad ?
 	     generer_url_ecrire("articles","id_article=$lier_trad")
 	     : ($new
 		? generer_url_ecrire("naviguer","id_rubrique=$id_rubrique")
-		: generer_url_ecrire("articles","id_article=$id_trad")
+		: generer_url_ecrire("articles","id_article=$id_article")
 		));
 
 	return
