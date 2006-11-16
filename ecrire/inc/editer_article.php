@@ -21,10 +21,12 @@ function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='',
 		include_spip('inc/presentation');
 		include_spip('inc/article_select');
 		$row = article_select($new, $id_rubrique, $lier_trad);
+		if (is_numeric($new)) $new = '';
 	}
 	// Gaffe: sans ceci, on ecrase systematiquement l'article d'origine
 	// (et donc: pas de lien de traduction)
 	$id_trad = $row['id_article'];
+
 	$id_article = $lier_trad ? '' : $id_trad;
 	$id_rubrique = $row['id_rubrique'];
 	$id_secteur = $row['id_secteur'];
@@ -80,22 +82,23 @@ function editer_article_texte($texte, $config, $aider)
 		.  afficher_barre('document.formulaire.texte')
 		. '</div>';
 	} else $afficher_barre = '';
-	return
-		"<p><b>" ._T('info_texte') ."</b>" . 
-		$aider ("arttexte") . "<br />\n" .
-		_T('texte_enrichir_mise_a_jour') .
-		$aider("raccourcis") .
-		'<br />' .
-		$sup .
-		'</p>' .
-		$afficher_barre .
-		"<textarea id='text_area' name='texte'$att_text>$texte</textarea>\n"
-	  ."<script type='text/javascript'><!--\njQuery(hauteurTextarea);\n//--></script>\n";
+	return	"\n<p><b>" ._T('info_texte') ."</b>"
+	. $aider ("arttexte") . "<br />\n" 
+	. _T('texte_enrichir_mise_a_jour')
+	. $aider("raccourcis")
+	. "<br />"
+	. $sup
+	. "</p>\n"
+	. $afficher_barre
+	.  "<textarea id='text_area' name='texte'$att_text>"
+	.  $texte
+	. "</textarea>\n"
+	. (_DIR_RESTREINT ? '' : "<script type='text/javascript'><!--\njQuery(hauteurTextarea);\n//--></script>\n");
 }
 
 function editer_article_titre($titre, $onfocus, $config, $aider)
 {
-	return	'<p>' .
+	return	"\n<p>" .
 		_T('texte_titre_obligatoire') .
 		$aider("arttitre") .
 		"\n<br /><input type='text' name='titre' style='font-weight: bold; font-size: 13px;' class='formo' value=\"" .
@@ -126,7 +129,7 @@ function editer_article_surtitre($surtitre, $config, $aider)
 	if (($config['articles_surtitre'] == 'non') AND !$surtitre)
 		return '';
 
-	return ( "<p><b>" .
+	return ( "\n<p><b>" .
 		 _T('texte_sur_titre') .
 		"</b>" .
 		$aider ("arttitre") .
@@ -140,7 +143,7 @@ function editer_article_soustitre($soustitre, $config, $aider)
 	if (($config['articles_soustitre'] == "non") AND !$soustitre)
 		return '';
 
-	return ("<p><b>" .
+	return ("\n<p><b>" .
 		  _T('texte_sous_titre') .
 		  "</b>" .
 		  $aider ("arttitre") .
@@ -154,12 +157,14 @@ function editer_article_descriptif($descriptif, $config, $aider)
 	if (($config['articles_descriptif'] == "non") AND !$descriptif)
 		return '';
 
+	$msg = _T('texte_contenu_article');
 	return ("\n<p><b>" ._T('texte_descriptif_rapide') ."</b>" .
 		  $aider("artdesc") .
-		  "<br />" ._T('texte_contenu_article') ."<br />\n" .
-		  "<textarea name='descriptif' class='forml' rows='2' cols='40'>" .
+		"<br />\n" . 
+		(!trim($msg) ? '' : "$msg<br />\n") .
+		"<textarea name='descriptif' class='forml' rows='2' cols='40'>" .
 		entites_html($descriptif) .
-		"</textarea></p>\n");
+		"\n</textarea></p>");
 }
 
 function editer_article_url($url, $nom, $config, $aider)
@@ -267,7 +272,7 @@ function editer_article_chapo($chapo, $config, $aider)
 			return '';
 
 		$rows = $config['lignes'];
-		return "<p><br /><b>"._T('info_chapeau')."</b>" .
+		return "\n<p><br /><b>"._T('info_chapeau')."</b>" .
 			$aider ("artchap") .
 		  	"\n<br />"._T('texte_introductif_article')."<br />\n" .
 			"<textarea name='chapo' class='forml' rows='$rows' cols='40'>" .
