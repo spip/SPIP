@@ -98,20 +98,23 @@ function critere_debut_dist($idb, &$boucles, $crit) {
 // {pagination}
 // {pagination 20}
 // {pagination #ENV{pages,5}} etc
+// {pagination 20 #ENV{truc,chose}} pour utiliser la variable debut_#ENV{truc,chose}
 // http://www.spip.net/@pagination
 // http://doc.spip.org/@critere_pagination_dist
 function critere_pagination_dist($idb, &$boucles, $crit) {
 
 	// definition de la taille de la page
-	$pas = !isset($crit->param[0]) ? "''" : calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
-
+	$pas = !isset($crit->param[0][0]) ? "''" : calculer_liste(array($crit->param[0][0]), array(), $boucles, $boucles[$idb]->id_parent);
+	$debut = !isset($crit->param[0][1]) ? "'$idb'" : calculer_liste(array($crit->param[0][1]), array(), $boucles, $boucles[$idb]->id_parent);
 	$pas = ($pas== "''") ? '10' : "((\$a = intval($pas)) ? \$a : 10)";
 
 	$boucle = &$boucles[$idb];
 	$boucle->mode_partie = 'p+';
-	$boucle->partie = 'intval(_request("debut'.$idb.'"))';
+	$boucle->partie = 'intval(_request("debut".'.$debut.'))';
+	$boucle->modificateur['debut_nom'] = $debut;
 	$boucle->total_parties = $pas;
-	$boucle->modificateur['fragment'] = 'fragment_'.$boucle->descr['nom'].$idb;
+	if (!isset($boucle->modificateur['fragment']))
+		$boucle->modificateur['fragment'] = 'fragment_'.$boucle->descr['nom'].$idb;
 }
 
 // {fragment}
