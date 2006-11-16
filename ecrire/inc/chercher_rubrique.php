@@ -24,9 +24,6 @@ define('_SPIP_SELECT_RUBRIQUES', 20); /* mettre 100000 pour desactiver ajax */
 // $idem : en mode rubrique = la rubrique soi-meme
 // http://doc.spip.org/@inc_chercher_rubrique_dist
 function inc_chercher_rubrique_dist ($id_rubrique, $type, $restreint, $idem=0) {
-	global $_COOKIE;
-	global $browser_name, $browser_version;
-
 	// Mode sans Ajax :
 	// - soit parce que le cookie ajax n'est pas la
 	// - soit parce qu'il y a peu de rubriques
@@ -222,7 +219,7 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0) {
 function construire_selecteur($url, $js, $idom, $name, $init='', $id=0)
 {
 	$icone = ($idom == 'selection_auteur') ? 'message.gif' : 'loupe.png';
-	return 	"<table width='100%'><tr width='100%'><td width='45'><a onclick=\""
+	return 	"<table width='100%'><tr><td width='45'><a onclick=\""
 	.  $js
 	. "charger_node_url_si_vide('"
 	. $url

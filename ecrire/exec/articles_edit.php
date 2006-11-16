@@ -32,15 +32,17 @@ function articles_edit_config()
 	global $champs_extra, $spip_ecran, $options, $spip_lang;
 
 	$config = $GLOBALS['meta'];
+	$config['lignes'] = ($spip_ecran == "large")? 8 : 5;
+	$config['afficher_barre'] = $spip_display != 4;
+	$config['langue'] = $spip_lang;
+	
+
 	if ($options != 'avancees') {
 		$config['articles_surtitre'] = 'non';
 		$config['articles_descriptif'] = "non";
 		$config['articles_urlref'] = "non";
 		$config['articles_ps'] = "non";
 	}
-	$config['afficher_barre'] = $spip_display != 4;
-	$config['langue'] = $spip_lang;
-	$config['lignes'] = ($spip_ecran == "large")? 8 : 5;
 
 	if ($champs_extra) {
 		include_spip('inc/extra');
@@ -60,6 +62,7 @@ function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new,
 
 	$id_article = $row['id_article'];
 	$id_rubrique = $row['id_rubrique'];
+	$config['restreint'] = ($row['statut'] == 'publie');
 
 	if ($id_version) $titre.= ' ('._T('version')." $id_version)";
 	else $titre = $row['titre'];
@@ -99,10 +102,35 @@ function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new,
 	debut_droite();
 	
 	debut_cadre_formulaire();
+	echo articles_edit_presentation($new, $row['id_rubrique'], $lier_trad, $row['titre']);
 	$editer_article = charger_fonction('editer_article', 'inc');
 	echo $editer_article($new, $id_rubrique, $lier_trad, generer_url_ecrire("articles"), $config, $row);
 	fin_cadre_formulaire();
 
 	echo fin_page();
+}
+
+function articles_edit_presentation($new, $id_rubrique, $lier_trad, $titre)
+{
+	$oups = ($lier_trad ?
+	     generer_url_ecrire("articles","id_article=$lier_trad")
+	     : ($new
+		? generer_url_ecrire("naviguer","id_rubrique=$id_rubrique")
+		: generer_url_ecrire("articles","id_article=$id_trad")
+		));
+
+	return
+		"\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>" .
+		"<tr>" .
+		"\n<td>" .
+		icone(_T('icone_retour'), $oups, "article-24.gif", "rien.gif", '',false) .
+		"</td>\n<td>" .
+		"<img src='" .
+	  	_DIR_IMG_PACK .	"rien.gif' width='10' alt='' />" .
+		"</td>\n" .
+		"<td width='100%'>" .
+	 	_T('texte_modifier_article') .
+		gros_titre($titre,'',false) . 
+		"</td></tr></table><hr />\n";
 }
 ?>

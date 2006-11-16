@@ -41,7 +41,7 @@ function securiser_action_auteur($action, $arg, $redirect="", $mode=false, $att=
 	  return generer_url_action($action, "arg=$arg&hash=$hash" . (!$r ? '' : "&redirect=$r"), $mode);
 
 	// Attention, JS n'aime pas le melange de param GET/POST
-	return "\n<form style='margin:0px' action='" .
+	return "\n<form style='margin: 0px; border: 0px' action='" .
 		generer_url_public('') .
 		"'$att>\n\t<div>
 		<input name='hash' type='hidden' value='$hash' />
