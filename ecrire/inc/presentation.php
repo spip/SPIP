@@ -696,14 +696,14 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $id
 	if ($trad) {
 		$formater = 'afficher_articles_trad_boucle';
 		$icone = "langues-off-12.gif";
-		$alt = _T('amelioration_access:masquer_trad');
+		$alt = _L('masquer les traductions');
 	} else {
 		if (!$formater) {
 			$formater_article =  charger_fonction('formater_article', 'inc');
 			$formater = $formater_article;
 		}
 		$icone = 'langues-12.gif';
-		$alt = _T('amelioration_access:afficher_trad');
+		$alt = _L('afficher les traductions');
 	}
 
 	$nb_aff = ($cpt  > floor(1.5 * _TRANCHES)) ? _TRANCHES : floor(1.5 * _TRANCHES) ;

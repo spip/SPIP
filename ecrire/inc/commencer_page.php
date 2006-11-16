@@ -171,7 +171,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 		$res .= "<a href='$lien' class='icone26' onmouseover=\"changestyle('bandeaudisplay');\" onfocus=\"changestyle('bandeaudisplay');\" onblur=\"changestyle('bandeaudisplay');\">"
 		. http_img_pack($icone, "$alt", "width='26' height='20'")."</a>"
 		. http_img_pack("rien.gif", "", "width='10' height='1'")
-		. http_img_pack("choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".gif", _T('amelioration_access:choix_interface'), "class='format_png' style='vertical-align: middle' width='59' height='15' usemap='#map_layout'")
+		. http_img_pack("choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".gif", _L('choix  de l\'interface'), "class='format_png' style='vertical-align: middle' width='59' height='15' usemap='#map_layout'")
 		. http_img_pack("rien.gif", "", "width='10' height='1'");
 			// grand ecran
 		if ($spip_ecran == "large") {
@@ -234,7 +234,7 @@ function choix_couleur() {
 	if ($couleurs_spip) {
 		foreach ($couleurs_spip as $key => $val) {
 			$res .= "<a href=\"".parametre_url(self(), 'set_couleur', $key)."\">" .
-				http_img_pack("rien.gif",  _T('amelioration_access:choix_couleur_interface').$key, "width='8' height='8' style='margin: 1px; background-color: ".$val['couleur_claire'].";' onmouseover=\"changestyle('bandeauinterface');\" onfocus=\"changestyle('bandeauinterface');\" onblur=\"changestyle('bandeauinterface');\""). "</a>";
+				http_img_pack("rien.gif",  _L('couleur').$key, "width='8' height='8' style='margin: 1px; background-color: ".$val['couleur_claire'].";' onmouseover=\"changestyle('bandeauinterface');\" onfocus=\"changestyle('bandeauinterface');\" onblur=\"changestyle('bandeauinterface');\""). "</a>";
 		}
 	}
 	return $res;
