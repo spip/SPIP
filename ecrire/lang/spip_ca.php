@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Modificar aquesta paraula clau',
 'admin_modifier_rubrique' => 'Modificar aquesta secci&oacute;',
 'admin_recalculer' => 'Recarregar aquesta p&agrave;gina',
+'afficher_trad' => 'visualitzar les traduccions',
 'alerte_maj_impossible' => '<b>Alerta&nbsp;!</b> L\'actualitzaci&oacute;  de la base de dades MySQL cap a  la versi&oacute; @version@ &eacute;s impossible, pot ser degut a un problema amb els drets de modificaci&oacute; de la base de dades. Si us plau contacteu amb el vostre prove&iuml;dor d\'hostatge.',
 'analyse_xml' => 'An&agrave;lisi XML',
 'antispam_champ_vide' => 'Si us plau, deixeu aquest camp buit:',
@@ -81,6 +82,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'calendrier_synchro_prive' => '<NEW>El calendario siguiente, de uso estrictamente personal, te informa sobre la actividad editorial privada de este sitio (tareas y citas personales, art&iacute;culos y breves propuestas...).',
 'calendrier_synchro_public' => '<NEW>El siguiente calendario le permite seguir la actividad p&uacute;blica de este sitio (art&iacute;culos y breves publicadas).',
 'calendrier_synchro_sync' => '<NEW>Sincronizar el archivo <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
+'choix_couleur_interface' => 'color',
+'choix_interface' => 'elecci&oacute; de la interf&iacute;cie',
 'confirm_changer_statut' => 'Atenci&oacute;, heu demanat canviar l\'estat d\'aquest element. Voleu continuar? ',
 'correcte' => 'correcte',
 
@@ -186,15 +189,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => 'per comen&ccedil;ar realment la instal&middot;laci&oacute;',
 'dirs_preliminaire' => 'Preliminar: <b>Regular els drets d\'acc&eacute;s</b>',
 'dirs_probleme_droits' => 'Problema de drets d\'acc&eacute;s',
-'dirs_repertoires_absents' => '<b>No s\'han trobat els seg&uuml;ents directoris&nbsp;: <ul>@bad_dirs@.</ul> </b>
-  <p />&Eacute;s probable que la causa sigui un problema d\'escriptura de les maj&uacute;scules o les min&uacute;scules.
-  Verifiqueu que les min&uacute;scules i les maj&uacute;scules d\'aquests directoris coincideixen exactament amb el que es mostra
-  m&eacute;s amunt; si aquest no &eacute;s el cas, canvieu el nom dels directoris amb l\'ajuda del vostre programa d\'FTP per tal de corregir l\'error.
-  <p />Un cop feta aquesta manipulaci&oacute;, podreu ',
-'dirs_repertoires_suivants' => '<b>Els seg&uuml;ents directoris no s&oacute;n accessibles a l\'escriptura&nbsp;: <ul>@bad_dirs@.</ul> </b>
-  <p />Per solucionar el problema feu servir el vostre client FTP per tal de regular els drets d\'acc&eacute;s de cadascun d\'aquests directoris.
-  El procediment s\'explica detalladament a la guia d\'instal&middot;laci&oacute;.
-  <p />Un cop feta la manipulaci&oacute;, podreu ',
+'dirs_repertoires_absents' => '<p><b>No s\'han trobat els seg&uuml;ents directoris: </b></p><ul>@bad_dirs@</ul>  <p>&Eacute;s probable que la causa sigui un problema d\'escriptura de les maj&uacute;scules o les min&uacute;scules.
+  Verifiqueu que les min&uacute;scules i les maj&uacute;scules d\'aquests directoris coincideixin exactament amb el que es mostra m&eacute;s amunt; si aquest no &eacute;s el cas, canvieu el nom dels directoris amb l\'ajuda del vostre programa FTP per tal de corregir l\'error.</p>
+  <p>Un cop feta aquesta manipulaci&oacute;, podreu ',
+'dirs_repertoires_suivants' => '<p><b>Els seg&uuml;ents directoris no s&oacute;n accessibles a l\'escriptura:</b></p> <ul>@bad_dirs@.</ul>
+  <p>Per solucionar el problema feu servir el vostre client FTP per tal de regular els drets d\'acc&eacute;s de cadascun d\'aquests directoris. El procediment s\'explica detalladament a la guia d\'instal&middot;laci&oacute;.</p>
+  <p>Un cop feta aquesta manipulaci&oacute;, podreu ',
 
 
 // E
@@ -578,6 +578,7 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 
 
 // M
+'masquer_trad' => 'amagar les traduccions',
 'module_fichiers_langues' => 'Fitxers de llengua',
 
 

@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     d\'importaci&oacute;.<p>Si voleu m&eacute;s informaci&oacute;, consulteu
     <A HREF=\'http://www.spip.net/fr_article1489.html\'>
                                 la documentaci&oacute; d\'SPIP</A>.',
-'avis_espace_interdit' => '<B>Zona prohibida</B><p>SPIP ja est&agrave; instal&middot;lat.',
+'avis_espace_interdit' => '<b>Zona prohibida</b><div>SPIP ja est&agrave; instal&middot;lat.</div>',
 'avis_lecture_noms_bases_1' => 'El programa d\'instal&middot;laci&oacute; no ha pogut llegir els noms de les bases de dades instal&middot;lades.',
 'avis_lecture_noms_bases_2' => 'O b&eacute; cap base de dades no est&agrave; disponible, o b&eacute; la funci&oacute; que permet de llistar les bases ha estat
 desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'hostatge).',
@@ -308,7 +308,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_delet_mots_cles' => 'Heu sol&middot;licitat la supressi&oacute; de la
  paraula clau <B>@titre_mot@</B> (@type_mot@). Donat que la paraula-clau est&agrave; lligada a
 <b>@texte_lie@</b> heu de confirmar aquesta decisi&oacute;:',
-'info_derniere_etape' => '&Uacute;ltim pas: <B>S\'ha acabat!',
+'info_derniere_etape' => '&Uacute;ltim pas: S\'ha acabat!',
 'info_derniere_syndication' => 'La &uacute;ltima sindicaci&oacute; d\'aquest lloc ha estat realitzada el',
 'info_derniers_articles_publies' => 'El m&eacute;s nou dels vostres articles editats',
 'info_desactiver_forum_public' => 'Inhabilitar l\'&uacute;s dels f&ograve;rums p&uacute;blics.
