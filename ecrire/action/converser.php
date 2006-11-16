@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // changer de langue espace prive (ou login)
 
+// http://doc.spip.org/@action_converser_dist
 function action_converser_dist()
 {
 
@@ -29,6 +30,7 @@ function action_converser_dist()
 	action_converser_post();
 }
 
+// http://doc.spip.org/@action_converser_post
 function action_converser_post()
 {
 	if ($lang = _request('var_lang_ecrire')) {

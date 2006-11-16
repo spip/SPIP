@@ -18,6 +18,7 @@ include_spip('inc/meta');
 // - avec au moins un argument, construit une URL ou un formulaire securises
 // - sans argument: verifie que les param HTTP attestent de la securite
 
+// http://doc.spip.org/@inc_securiser_action_dist
 function inc_securiser_action_dist($action='', $arg='', $redirect="", $mode=false, $att='')
 {
 	if ($action)
@@ -28,7 +29,7 @@ function inc_securiser_action_dist($action='', $arg='', $redirect="", $mode=fals
 	}
 }
 
-// http://doc.spip.org/@generer_action_auteur
+// http://doc.spip.org/@securiser_action_auteur
 function securiser_action_auteur($action, $arg, $redirect="", $mode=false, $att='')
 {
 	static $id_auteur=0, $pass;

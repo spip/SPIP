@@ -130,6 +130,7 @@ function revision_auteur($id_auteur, $c=false) {
 
 // Quand on edite un forum, on tient a conserver l'original
 // sous forme d'un forum en reponse, de statut 'original'
+// http://doc.spip.org/@conserver_original
 function conserver_original($id_forum) {
 	$s = spip_query("SELECT id_forum FROM spip_forum WHERE id_parent="._q($id_forum)." AND statut='original'");
 
@@ -151,7 +152,7 @@ function conserver_original($id_forum) {
 		return '&erreur';
 }
 
-// http://doc.spip.org/@revision_auteur
+// http://doc.spip.org/@revision_forum
 function revision_forum($id_forum, $c=false) {
 
 	if ($err = conserver_original($id_forum)) {
