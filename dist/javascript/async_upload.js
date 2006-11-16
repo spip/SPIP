@@ -75,12 +75,11 @@ function async_upload_article_edit(res,jForm){
       cont
       .prepend(res.html());
       //find added documents, remove label and show them nicely
-      //set overflow to visible to completely show the overlay icon
       cont.
       find("div.documents_added")
         .removeClass("documents_added")
         .show("slow",function(){
-            var anim = $(this).css({"height":"","overflow":""});
+            var anim = $(this).css("height","");
             //bug explorer-opera-safari
             if(!jQuery.browser.mozilla) anim.width(this.orig.width-2);
             $(anim).find("img[@onclick]").get(0).onclick();
