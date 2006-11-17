@@ -130,9 +130,11 @@ function vignette_formulaire_legender($id_document, $document, $script, $type, $
 	$id_vignette = $document['id_vignette'];
 	$texte = _T('info_supprimer_vignette');
 
-	if (preg_match('/_edit$/', $script))
+	if (preg_match('/_edit$/', $script)) {
+		$iframe_redirect = generer_url_ecrire("documents_colonne","id=$id&type=$type",true);
 		$action = redirige_action_auteur('supprimer', "document-$id_vignette", $script, "id_$type=$id&show_docs=$id_document#$ancre");
-	else {
+	} else {
+		$iframe_redirect = generer_url_ecrire("documenter","id_$type=$id&type=$type",true);
 		$s = ($ancre =='documents' ? '': '-');
 		$action = ajax_action_auteur('documenter', "$s$id/$type/$id_vignette", $script, "id_$type=$id&type=$type&s=$s&show_docs=$id_document#$ancre", array($texte),'',"function(r,noeud) {noeud.innerHTML = r; \$('.form_upload',noeud).async_upload(async_upload_portfolio_documents);}");
 	}
@@ -141,7 +143,7 @@ function vignette_formulaire_legender($id_document, $document, $script, $type, $
 
 	return "<hr style='margin-left: -5px; margin-right: -5px; height: 1px; border: 0px; color: #eeeeee; background-color: white;' />"
 	. (!$id_vignette
-	   ? $joindre($script, "id_$type=$id",$id, _T('info_vignette_personnalisee'), 'vignette', $type, $ancre, $id_document,generer_url_ecrire("documenter","id_$type=$id&type=$type",true))
+	   ? $joindre($script, "id_$type=$id",$id, _T('info_vignette_personnalisee'), 'vignette', $type, $ancre, $id_document,$iframe_redirect)
 	   : icone_horizontale($texte, $action, "vignette-24.png", "supprimer.gif", false));
 }
 

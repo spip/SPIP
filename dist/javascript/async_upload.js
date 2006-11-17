@@ -62,29 +62,37 @@ jQuery.fn.async_upload = function(add_function) {
 
 function async_upload_article_edit(res,jForm){
       var cont;
-      //add a class to new documents
-      res.
-      find(">div[@class]")
-        .addClass("documents_added")
-        .css("display","none")
-      .end();
-      if (jForm.find("input[@name='arg']").val().search("vignette")!=-1)
-        cont = $("#liste_images");
-      else
-        cont = $("#liste_documents");
-      cont
-      .prepend(res.html());
-      //find added documents, remove label and show them nicely
-      cont.
-      find("div.documents_added")
-        .removeClass("documents_added")
-        .show("slow",function(){
-            var anim = $(this).css("height","");
-            //bug explorer-opera-safari
-            if(!jQuery.browser.mozilla) anim.width(this.orig.width-2);
-            $(anim).find("img[@onclick]").get(0).onclick();
-        })
-        .overflow("");
+      //verify if a new document or a customized vignette
+      var anchor = $(res.find(">a:first"));
+      res.end(); 
+			if($("#"+anchor.id()).size()) {
+				cont = $("#"+anchor.id()).next().next().html(anchor.next().next().html());
+			} else {
+	      //add a class to new documents
+	      res.
+	      find(">div[@class]")
+	        .addClass("documents_added")
+	        .css("display","none")
+	      .end();
+	      if (jForm.find("input[@name='arg']").val().search("/0/vignette")!=-1)
+	        cont = $("#liste_images");
+	      else
+	        cont = $("#liste_documents");
+	      cont
+	      .prepend(res.html());
+	      //find added documents, remove label and show them nicely
+	      cont.
+	      find("div.documents_added")
+	        .removeClass("documents_added")
+	        .show("slow",function(){
+	            var anim = $(this).css("height","");
+	            //bug explorer-opera-safari
+	            if(!jQuery.browser.mozilla) anim.width(this.orig.width-2);
+	            $(anim).find("img[@onclick]").get(0).onclick();
+	        })
+	        .overflow("");
+	    }
+			$("form.form_upload",cont).async_upload(async_upload_article_edit);
       verifForm(cont);
       return true;
 }
