@@ -34,7 +34,7 @@ function exec_config_fonctions_dist()
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_config_fonctions'), "configuration", "configuration");
 
-	echo "<br><br><br>";
+	echo "<br /><br /><br />";
 	gros_titre(_T('titre_config_fonctions'));
 	echo barre_onglets("configuration", "fonctions");
 
@@ -132,7 +132,7 @@ function afficher_choix_vignette($process) {
 	}
 
 	$retour .= "<td  width='".($taille_preview+4)."'><div align='center' valign='bottom' width='".($taille_preview+4)."'".
-	($border ? "style='border:2px;border-style: dotted; border-color: $couleur_foncee;'" : '').
+	($border ? " style='border:2px;border-style: dotted; border-color: $couleur_foncee;'" : '').
 	"><a href='" . generer_url_ecrire("config_fonctions", "image_process=$process"). 
 	  "'><img src='". generer_url_action("tester", "arg=$process").
 	  "' /></a><br />";
@@ -248,21 +248,22 @@ function vignettes_config()
 		else $style = "display: none;";
 	
 			echo "<div id='config-preview' class='verdana2' style='$style margin-$spip_lang_left: 40px;'>"._T('info_taille_maximale_vignette');
-			echo "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<INPUT TYPE='text' NAME='taille_preview' VALUE='$taille_preview' class='fondl' size=5>";
+			echo "<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='taille_preview' value='$taille_preview' class='fondl' size='5' />";
 			echo " "._T('info_pixels').'<br /><br /></div>';
 			
 		$block= "'none', 'block'";
 		echo bouton_radio("creer_preview", "non", _T('item_choix_non_generation_miniature'), $creer_preview != "oui", "changeVisible(this.checked, 'config-preview', $block);");
 	
-		echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
+		echo "<div style='text-align:$spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>";
 		
+		echo "</p>";
+
 		fin_cadre_trait_couleur();
 	}
 
 
 	fin_cadre_trait_couleur();
 
-	echo "<p>";
 }
 
 // http://doc.spip.org/@moteur_config
@@ -284,7 +285,7 @@ function moteur_config()
 		array('oui' => _T('item_utiliser_moteur_recherche'),
 			'non' => _T('item_non_utiliser_moteur_recherche')), ' &nbsp; ');
 	echo "</div>";
-	echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
+	echo "<div style='text-align:$spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>";
 
 	fin_cadre_trait_couleur();
 		
@@ -309,7 +310,7 @@ afficher_choix('activer_statistiques', $activer_statistiques,
 	array('oui' => _T('item_gerer_statistiques'),
 		'non' => _T('item_non_gerer_statistiques')), ' &nbsp; ');
 	echo "</div>";
-	echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
+	echo "<div style='text-align:$spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>";
 
 	fin_cadre_trait_couleur();
 	
@@ -334,7 +335,7 @@ function notification_config()
 		array('oui' => _T('item_activer_messages_avertissement'),
 			'non' => _T('item_non_activer_messages_avertissement')));
 	echo "</div>";
-	echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
+	echo "<div style='text-align:$spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>";
 
 	fin_cadre_trait_couleur();
 
@@ -359,7 +360,7 @@ function versions_config()
 		array('oui' => _T('info_historique_activer'),
 			'non' => _T('info_historique_desactiver')));
 	echo "</div>";
-	echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
+	echo "<div style='text-align:$spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>";
 	
 	fin_cadre_trait_couleur();
 
@@ -390,7 +391,7 @@ function correcteur_config()
 		array('oui' => _T('info_ortho_activer'),
 			'non' => _T('info_ortho_desactiver')));
 	echo "</div>";
-	echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
+	echo "<div style='text-align:$spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>";
 	
 	fin_cadre_trait_couleur();
 
@@ -420,7 +421,7 @@ function previsu_config()
 		)
 	);
 	echo "</div>";
-		echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
+		echo "<div style='text-align:$spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>";
 	
 fin_cadre_trait_couleur();
 
@@ -445,26 +446,25 @@ function proxy_config()
 	echo "</div>";
 
 	echo "<div class='verdana2'>";
-	echo "<INPUT TYPE='text' NAME='http_proxy' VALUE='$http_proxy' size='40' class='forml'>";
+	echo "<input type='text' name='http_proxy' value='$http_proxy' size='40' class='forml' />";
 
 	if ($http_proxy) {
-		echo "<p align='$spip_lang_left'><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2 COLOR='#000000'>"
+		echo "<p align='$spip_lang_left'><font face='Verdana,Arial,Sans,sans-serif' size='2' color='#000000'>"
 			. _T('texte_test_proxy');
 		echo "</p>";
 
 		echo "<p>";
-		echo "<INPUT TYPE='text' NAME='test_proxy' VALUE='http://www.spip.net/' size='40' class='forml'>";
+		echo "<input type='text' name='test_proxy' value='http://www.spip.net/' size='40' class='forml' />";
 		echo "</p>";
-		echo "<div style='text-align: $spip_lang_right;'><INPUT TYPE='submit' NAME='tester_proxy' VALUE='"._T('bouton_test_proxy')."' CLASS='fondo'></div>";
+		echo "<div style='text-align: $spip_lang_right;'><input type='submit' name='tester_proxy' value='"._T('bouton_test_proxy')."' class='fondo' /></div>";
 
 	}
 
 
 	echo "</div>";
-	echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
+	echo "<div style='text-align:$spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>";
 	
 	fin_cadre_trait_couleur();
-	echo "<p>";
 }
 
 // http://doc.spip.org/@htpasswd_config
@@ -488,11 +488,9 @@ function htpasswd_config()
 			'non' =>  _T('item_non_creer_fichiers_authent')),
 		' &nbsp; ');
 	echo "</div>";
-	echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
+	echo "<div style='text-align:$spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>";
 	
 	fin_cadre_trait_couleur();
-
-	echo "<p>";
 }
 
 ##### n'est pas encore utilise #######
@@ -517,7 +515,7 @@ function htaccess_config()
 			     'non' => _L("autoriser la lecture")),
 		       ' &nbsp; ');
 	echo "</div>";
-	echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
+	echo "<div style='text-align:$spip_lang_right'><input type='submit'  value='"._T('bouton_valider')."' class='fondo' /></div>";
 	
 	fin_cadre_trait_couleur();
 
