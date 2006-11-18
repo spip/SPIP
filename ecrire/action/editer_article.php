@@ -253,18 +253,23 @@ function instituer_article($id_article, $c) {
 	OR ($statut_ancien=='publie' AND $champ['statut']))
 		calculer_rubriques();
 
-	// Notification ?
-	$data = $champs;
-	$data['statut_ancien'] = $statut_ancien;
+	// Pipeline
 	pipeline('post_edition',
 		array(
 			'args' => array(
 				'table' => 'spip_articles',
 				'id_objet' => $id_article
 			),
-			'data' => $data
+			'data' => $champs
 		)
 	);
+
+	// Notifications
+	if ($notifications = charger_fonction('notifications', 'inc')) {
+		$notifications('instituerarticle', $id_article,
+			array('statut' => $statut, 'statut_ancien' => $statut_ancien)
+		);
+	}
 
 	return ''; // pas d'erreur
 }

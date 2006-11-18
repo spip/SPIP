@@ -3,7 +3,7 @@
 
 <p>[<strong>(#ENV*{titre})</strong>][<em> - (#ENV*{auteur}|supprimer_numero|couper{80})</em>]</p>
 [(#ENV*{texte}|lignes_longues)]
-[<p><a[ href="(#ENV{url_site}|attribut_html)"] class="spip_out">(#ENV*{nom_site_forum}|sinon{#ENV{url_site}|couper{80}})</a></p>]
+[<p><a[ href="(#ENV{url_site}|attribut_html)"] class="spip_out">(#ENV*{nom_site}|sinon{#ENV{url_site}|couper{80}})</a></p>]
 
 <B_mots>
 <p class="reponse_formulaire"><:forum_avez_selectionne:>

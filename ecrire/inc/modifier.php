@@ -128,51 +128,76 @@ function revision_auteur($id_auteur, $c=false) {
 		$c);
 }
 
-// Quand on edite un forum, on tient a conserver l'original
-// sous forme d'un forum en reponse, de statut 'original'
-// http://doc.spip.org/@conserver_original
-function conserver_original($id_forum) {
-	$s = spip_query("SELECT id_forum FROM spip_forum WHERE id_parent="._q($id_forum)." AND statut='original'");
-
-	if (spip_num_rows($s))
-		return ''; // pas d'erreur
-
-	// recopier le forum
-	$t = spip_fetch_array(
-		spip_query("SELECT date_heure,titre,texte,auteur,email_auteur,nom_site,url_site,ip,id_auteur,idx,id_thread FROM spip_forum WHERE id_forum="._q($id_forum))
-	);
-
-	if ($t
-	AND spip_query("INSERT spip_forum (date_heure,titre,texte,auteur,email_auteur,nom_site,url_site,ip,id_auteur,idx,id_thread) VALUES (".join(',',array_map('_q', $t)).")")) {
-		$id_copie = spip_insert_id();
-		spip_query("UPDATE spip_forum SET id_parent="._q($id_forum).", statut='original' WHERE id_forum=$id_copie");
-		return ''; // pas d'erreur
-	}
-
-		return '&erreur';
-}
-
+// Nota: quand on edite un forum existant, il est de bon ton d'appeler
+// au prealable conserver_original($id_forum)
 // http://doc.spip.org/@revision_forum
 function revision_forum($id_forum, $c=false) {
 
-	if ($err = conserver_original($id_forum)) {
-		spip_log("erreur de sauvegarde de l'original, $err");
+	$s = spip_query("SELECT * FROM spip_forum WHERE id_forum="._q($id_forum));
+	if (!$t = spip_fetch_array($s)) {
+		spip_log("erreur forum $id_forum inexistant");
 		return;
 	}
 
+	// Calculer l'invalideur des caches lies a ce forum
+	if ($t['statut'] == 'publie') {
+		include_spip('inc/invalideur');
+		$invalideur = "id='id_forum/"
+			. calcul_index_forum(
+				$t['id_article'],
+				$t['id_breve'],
+				$t['id_rubrique'],
+				$t['id_syndic']
+			)
+			. "'";
+	} else
+		$invalideur = '';
+
+	// Supprimer 'http://' tout seul
+	$u = _request('url_site', $c);
+	if (isset($u))
+		$c = set_request('url_site', vider_url($u, false));
+
 	$r = modifier_contenu('forum', $id_forum,
 		array(
-			'champs' => array('titre', 'texte', 'auteur', 'email_auteur', 'nom_site', 'url_site', 'ip'),
-			'nonvide' => array('titre' => _T('info_sans_titre'))
+			'champs' => array('titre', 'texte', 'auteur', 'email_auteur', 'nom_site', 'url_site'),
+			'nonvide' => array('titre' => _T('info_sans_titre')),
+			'invalideur' => $invalideur
 		),
 		$c);
 
 	// s'il y a vraiment eu une modif, on stocke le numero IP courant
-	// ainsi que le nouvel id_auteur dans le message modifie
+	// ainsi que le nouvel id_auteur dans le message modifie ;
 	if ($r) {
 		spip_query("UPDATE spip_forum SET ip="._q($GLOBALS['ip']).", id_auteur="._q($GLOBALS['auteur_session']['id_auteur'])." WHERE id_forum="._q($id_forum));
 	}
 }
 
+
+// pipeline appelant la fonction de sauvegarde de la premiere revision
+// d'un article avant chaque modification de contenu
+// http://doc.spip.org/@premiere_revision
+function premiere_revision($x) {
+	// Stockage des versions : creer une premiere version si non-existante
+	if  ($GLOBALS['flag_revisions']
+	AND $GLOBALS['meta']["articles_versions"]=='oui') {
+		include_spip('inc/revisions');
+		$x = enregistrer_premiere_revision($x);
+	}
+	return $x;
+}
+
+// pipeline appelant la fonction de sauvegarde de la nouvelle revision
+// d'un article apres chaque modification de contenu
+// http://doc.spip.org/@nouvelle_revision
+function nouvelle_revision($x) {
+	// Stockage des versions : creer une premiere version si non-existante
+	if  ($GLOBALS['flag_revisions']
+	AND $GLOBALS['meta']["articles_versions"]=='oui') {
+		include_spip('inc/revisions');
+		$x = enregistrer_nouvelle_revision($x);
+	}
+	return $x;
+}
 
 ?>

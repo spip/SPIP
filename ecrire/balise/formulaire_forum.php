@@ -153,13 +153,13 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 		$texte = _request('texte');
 		$auteur = _request('auteur');
 		$email_auteur = _request('email_auteur');
-		$nom_site_forum = _request('nom_site_forum');
+		$nom_site = _request('nom_site');
 		$url_site = _request('url_site');
 		$ajouter_mot = _request('ajouter_mot');
 		$ajouter_groupe = _request('ajouter_groupe');
 
 		if ($afficher_texte != 'non') 
-			$previsu = inclure_previsu($texte, $titre, $email_auteur, $auteur, $url_site, $nom_site_forum, $ajouter_mot);
+			$previsu = inclure_previsu($texte, $titre, $email_auteur, $auteur, $url_site, $nom_site, $ajouter_mot);
 
 		$arg = forum_fichier_tmp(join('', $ids));
 
@@ -185,7 +185,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 		'readonly' => ($type == "abo")? "readonly" : '',
 		'email_auteur' => $email_auteur,
 		'modere' => (($type != 'pri') ? '' : ' '),
-		'nom_site_forum' => $nom_site_forum,
+		'nom_site' => $nom_site,
 		'retour_forum' => $retour_forum,
 		'afficher_texte' => $afficher_texte,
 		'previsu' => $previsu,
@@ -205,7 +205,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 }
 
 // http://doc.spip.org/@inclure_previsu
-function inclure_previsu($texte,$titre, $email_auteur, $auteur, $url_site, $nom_site_forum, $ajouter_mot)
+function inclure_previsu($texte,$titre, $email_auteur, $auteur, $url_site, $nom_site, $ajouter_mot)
 {
 	$erreur = $bouton = '';
 	if (strlen($texte) < 10 AND !$ajouter_mot)
@@ -235,7 +235,7 @@ function inclure_previsu($texte,$titre, $email_auteur, $auteur, $url_site, $nom_
 			'auteur' => safehtml(typo($auteur)),
 			'texte' => safehtml(propre($texte)),
 			'url_site' => vider_url($url_site),
-			'nom_site_forum' => safehtml(typo($nom_site_forum)),
+			'nom_site' => safehtml(typo($nom_site)),
 			'ajouter_mot' => (is_array($ajouter_mot) ? $ajouter_mot : array($ajouter_mot)),
 			'erreur' => $erreur,
 			'bouton' => $bouton
