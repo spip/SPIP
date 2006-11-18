@@ -27,7 +27,14 @@ function exec_mots_tous_dist()
 	echo $commencer_page(_T('titre_page_mots_tous'), "naviguer", "mots");
 	debut_gauche();
 
+	if (acces_mots()  AND !$conf_mot){
+		$res = icone_horizontale(_T('icone_creation_groupe_mots'), generer_url_ecrire("mots_type","new=oui"), "groupe-mot-24.gif", "creer.gif",false);
+
+		echo bloc_des_raccourcis($res);
+	}
+
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
+
 	creer_colonne_droite();
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
 	debut_droite();
@@ -62,13 +69,13 @@ function exec_mots_tous_dist()
 		// Afficher le titre du groupe
 		debut_cadre_enfonce("groupe-mot-24.gif", false, '', $titre_groupe);
 		// Affichage des options du groupe (types d'elements, permissions...)
-		echo "<font face='Verdana,Arial,Sans,sans-serif' size=1>";
+		echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'>";
 		if ($articles == "oui") echo "> "._T('info_articles_2')." &nbsp;&nbsp;";
 		if ($breves == "oui") echo "> "._T('info_breves_02')." &nbsp;&nbsp;";
 		if ($rubriques == "oui") echo "> "._T('info_rubriques')." &nbsp;&nbsp;";
 		if ($syndic == "oui") echo "> "._T('icone_sites_references')." &nbsp;&nbsp;";
 
-		if ($unseul == "oui" OR $obligatoire == "oui") echo "<br>";
+		if ($unseul == "oui" OR $obligatoire == "oui") echo "<br />";
 		if ($unseul == "oui") echo "> "._T('info_un_mot')." &nbsp;&nbsp;";
 		if ($obligatoire == "oui") echo "> "._T('info_groupe_important')." &nbsp;&nbsp;";
 
@@ -137,11 +144,6 @@ function exec_mots_tous_dist()
 		fin_cadre_enfonce();
 	}
 
-	if (acces_mots()  AND !$conf_mot){
-		echo "<p>&nbsp;</p><div align='right'>";
-		icone(_T('icone_creation_groupe_mots'), generer_url_ecrire("mots_type","new=oui"), "groupe-mot-24.gif", "creer.gif");
-		echo "</div>";
-	}
 
 	echo fin_page();
 }
