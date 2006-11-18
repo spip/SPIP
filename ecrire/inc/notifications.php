@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 // La fonction de notification de base, qui dispatche le travail
+// http://doc.spip.org/@inc_notifications_dist
 function inc_notifications_dist($quoi, $id=0, $options=array()) {
 	if (function_exists($f = 'notifications_'.$quoi)
 	OR function_exists($f = $f.'_dist')) {
@@ -25,7 +26,7 @@ function inc_notifications_dist($quoi, $id=0, $options=array()) {
 }
 
 // Fonction appelee par divers pipelines
-// http://doc.spip.org/@notifications
+// http://doc.spip.org/@notifications_instituerarticle
 function notifications_instituerarticle($quoi, $id_article, $options) {
 
 	// ne devrait jamais se produire
@@ -147,6 +148,7 @@ function notifier_proposition_article($id_article) {
 	}
 }
 
+// http://doc.spip.org/@email_notification_forum
 function email_notification_forum ($t, $email) {
 
 	// Rechercher la langue du destinataire
@@ -193,6 +195,7 @@ function email_notification_forum ($t, $email) {
 	return array('subject' => $sujet, 'body' => $corps);
 }
 
+// http://doc.spip.org/@notifications_forumposte_dist
 function notifications_forumposte_dist($quoi, $id_forum) {
 	$s = spip_query("SELECT * FROM spip_forum WHERE id_forum="._q($id_forum));
 	if (!$t = spip_fetch_array($s))
