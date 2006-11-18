@@ -638,7 +638,7 @@ function afficher_script_statut($id, $type, $n, $img, $statut, $title, $act)
 		      "', '" .
 		       generer_action_auteur("instituer_$type","$id-$statut") .
 		      "');",
-		       $img,'', $title,'','',
+		       $img,'', '', $title,'','',
 		      $act);
 }
 
