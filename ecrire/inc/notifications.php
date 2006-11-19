@@ -151,7 +151,7 @@ function notifier_proposition_article($id_article) {
 // http://doc.spip.org/@email_notification_forum
 function email_notification_forum ($t, $email) {
 
-	// Rechercher la langue du destinataire
+	// Rechercher eventuellement la langue du destinataire
 	if ($l = spip_fetch_array(spip_query("SELECT lang FROM spip_auteurs WHERE email=" . _q($email))))
 		lang_select($l['lang']);
 
@@ -165,9 +165,14 @@ function email_notification_forum ($t, $email) {
 	else {
 		spip_log('inc-urls personnalise : ajoutez generer_url_forum() !');
 		if ($t['id_article'])
-			$url = generer_url_article($t['id_article']);
+			$url = generer_url_article($t['id_article']).'#'.$t['id_forum'];
 		else
 			$url = './';
+	}
+
+	if ($t['id_article']) {
+		$article = spip_fetch_array(spip_query("SELECT titre FROM spip_articles WHERE id_article="._q($t['id_article'])));
+		$titre = textebrut(typo($article['titre']));
 	}
 
 	$sujet = "[" .
@@ -175,18 +180,21 @@ function email_notification_forum ($t, $email) {
 	  "] ["._T('forum_forum')."] ".typo($t['titre']);
 
 	$parauteur = (strlen($t['auteur']) <= 2) ? '' :
-	  (" " ._T('forum_par_auteur', array('auteur' => $t['auteur'])) . 
+	  (" " ._T('forum_par_auteur', array(
+	  	'auteur' => $t['auteur'])
+	  ) . 
 	   ($t['email_auteur'] ? ' <' . $t['email_auteur'] . '>' : ''));
 
+	// TODO: squelettiser
 	$corps = _T('form_forum_message_auto') .
 		"\n\n" .
-		_T('forum_poste_par', array('parauteur' => $parauteur)).
-		"\n"
-		. _T('forum_ne_repondez_pas')
-		. "\n"
+		_T('forum_poste_par', array('parauteur' => $parauteur,
+	  	'titre' => $titre)).
+		"\n\n"
+		. (($t['statut'] == 'publie') ? _T('forum_ne_repondez_pas')."\n" : '')
 		. url_absolue($url)
-		. "\n\n\n".textebrut(typo($t['titre']))
-		."\n\n".textebrut(propre($t['texte']))
+		. "\n\n\n** ".textebrut(typo($t['titre']))
+		."\n\n* ".textebrut(propre($t['texte']))
 		. "\n\n".$t['nom_site']."\n".$t['url_site']."\n";
 
 	if ($l)
@@ -195,8 +203,12 @@ function email_notification_forum ($t, $email) {
 	return array('subject' => $sujet, 'body' => $corps);
 }
 
-// http://doc.spip.org/@notifications_forumposte_dist
-function notifications_forumposte_dist($quoi, $id_forum) {
+
+// cette notification s'execute quand on valide un message 'prop'ose,
+// dans ecrire/inc/forum_insert.php ; ici on va notifier ceux qui ne l'ont
+// pas ete a la notification forumposte (sachant que les deux peuvent se
+// suivre si le forum est valide directement ('pos' ou 'abo')
+function notifications_forumvalide_dist($quoi, $id_forum) {
 	$s = spip_query("SELECT * FROM spip_forum WHERE id_forum="._q($id_forum));
 	if (!$t = spip_fetch_array($s))
 		return;
@@ -204,30 +216,38 @@ function notifications_forumposte_dist($quoi, $id_forum) {
 	include_spip('inc/texte');
 	include_spip('inc/filtres');
 	include_spip('inc/mail');
+	include_spip('inc/autoriser');
 
 
 	// Qui va-t-on prevenir ?
 	$tous = array();
+	$pasmoi = array();
 
-	// 1. Les auteurs de l'article ?
-	if ($GLOBALS['meta']['prevenir_auteurs'] == 'oui') {
-		$result = spip_query("SELECT auteurs.email FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article="._q($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
+	// 1. Les auteurs de l'article ; si c'est un article, ceux qui n'ont
+	// pas le droit de le moderer (les autres l'ont recu plus tot)
+	if ($t['id_article']
+	AND $GLOBALS['meta']['prevenir_auteurs'] == 'oui') {
+		$result = spip_query("SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article="._q($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
 
-		while ($r = spip_fetch_array($result))
-			$tous[] = $r['email'];
+		while ($qui = spip_fetch_array($result)) {
+			if (!autoriser('modererforum', 'article', $t['id_article'], $qui['id_auteur']))
+				$tous[] = $qui['email'];
+			else
+				$pasmoi[] = $qui['email'];
+
+		}
 	}
 
-	// 2. Tous les participants a ce *thread* (desactive pour l'instant,
-	// et ne fonctionne que pour les forums moderes a posteriori)
+	// 2. Tous les participants a ce *thread* (desactive pour l'instant)
 	// TODO: proposer une case a cocher ou un lien dans le message
 	// pour se retirer d'un troll (hack: replacer @ par % dans l'email)
 	if (defined('_SUIVI_FORUM_THREAD')
-	AND _SUIVI_FORUM_THREAD
-	AND $t['statut'] == 'publie') {
+	AND _SUIVI_FORUM_THREAD) {
 		$s = spip_query("SELECT DISTINCT(email_auteur) FROM spip_forum WHERE id_thread=".$t['id_thread']." AND email_auteur != ''");
 		while ($r = spip_fetch_array($s))
 			$tous[] = $r['email_auteur'];
 	}
+
 
 	// 3. Tous les auteurs des messages qui precedent (desactive egalement)
 	// (possibilite exclusive de la possibilite precedente)
@@ -242,7 +262,57 @@ function notifications_forumposte_dist($quoi, $id_forum) {
 		}
 	}
 
-	// 4. Les moderateurs definis par mes_options
+	// Nettoyer le tableau
+	// Ne pas ecrire au posteur du message, ni au moderateur qui active le mail,
+	// ni aux auteurs deja notifies precedemment
+	$destinataires = array();
+	foreach ($tous as $m) {
+		if ($m = email_valide($m)
+		AND $m != trim($t['email_auteur'])
+		AND $m != $GLOBALS['auteur_session']['email']
+		AND !in_array($m, $pasmoi))
+			$destinataires[$m]++;
+	}
+
+	//
+	// Envoyer les emails
+	//
+	foreach (array_keys($destinataires) as $email) {
+		$msg = email_notification_forum($t, $email);
+		envoyer_mail($email, $msg['subject'], $msg['body']);
+	}
+}
+
+
+// http://doc.spip.org/@notifications_forumposte_dist
+function notifications_forumposte_dist($quoi, $id_forum) {
+	$s = spip_query("SELECT * FROM spip_forum WHERE id_forum="._q($id_forum));
+	if (!$t = spip_fetch_array($s))
+		return;
+
+	include_spip('inc/texte');
+	include_spip('inc/filtres');
+	include_spip('inc/mail');
+	include_spip('inc/autoriser');
+
+
+	// Qui va-t-on prevenir ?
+	$tous = array();
+
+	// 1. Les auteurs de l'article (si c'est un article), mais
+	// seulement s'ils ont le droit de le moderer (les autres seront
+	// avertis par la notifications_forumvalide).
+	if ($t['id_article']
+	AND $GLOBALS['meta']['prevenir_auteurs'] == 'oui') {
+		$result = spip_query("SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article="._q($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
+
+		while ($qui = spip_fetch_array($result)) {
+			if (autoriser('modererforum', 'article', $t['id_article'], $qui['id_auteur']))
+				$tous[] = $qui['email'];
+		}
+	}
+
+	// 2. Les moderateurs definis par mes_options
 	// TODO: a passer en meta
 	// define('_MODERATEURS_FORUM', 'email1,email2,email3');
 	if (defined('_MODERATEURS_FORUM'))
@@ -263,12 +333,16 @@ function notifications_forumposte_dist($quoi, $id_forum) {
 	//
 	// Envoyer les emails
 	//
-	// TODO: changer le corps selon le statut (auteur de l'article, moderateur, etc)
 	foreach (array_keys($destinataires) as $email) {
 		$msg = email_notification_forum($t, $email);
 		envoyer_mail($email, $msg['subject'], $msg['body']);
 	}
 
+	// Notifier les autres si le forum est valide
+	if ($t['statut'] == 'publie') {
+		$notifications = charger_fonction('notifications', 'inc');
+		$notifications('forumvalide', $id_forum);
+	}
 }
 
 ?>
