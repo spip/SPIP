@@ -386,6 +386,15 @@ function echappe_js($t,$class='') {
 			$t);
 	return $t;
 }
+function protege_js_modeles($t) {
+	if (isset($GLOBALS['auteur_session']['alea_actuel'])){
+		$a = $GLOBALS['auteur_session']['alea_actuel'];
+		if (preg_match_all(',<script.*?($|</script.),isS', $t, $r, PREG_SET_ORDER))
+			foreach ($r as $regs)
+				$t = str_replace($regs[0],code_echappement($regs[0],'javascript'.$a),$t);
+	}
+	return $t;
+}
 
 // Securite : empecher l'execution de code PHP, en le transformant en joli code
 // http://doc.spip.org/@interdire_scripts
@@ -1079,6 +1088,7 @@ function traiter_modeles($texte, $doublons=false, $echap='') {
 
 				// le remplacer dans le texte
 				if ($modele !== false) {
+					$modele = protege_js_modeles($modele);
 					$rempl = code_echappement($modele, $echap);
 					$texte = substr($texte, 0, $a)
 						. $rempl
@@ -1511,6 +1521,10 @@ function propre($letexte) {
 	// Dans l'espace prive, securiser ici
 	if (!_DIR_RESTREINT)
 		$letexte = interdire_scripts($letexte);
+
+	// Reinserer le javascript de confiance (venant des modeles)
+	if (isset($GLOBALS['auteur_session']['alea_actuel']))
+		$letexte = echappe_retour($letexte,"javascript".$GLOBALS['auteur_session']['alea_actuel']);
 
 	return $letexte;
 }
