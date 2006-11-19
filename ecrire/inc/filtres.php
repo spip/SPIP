@@ -144,7 +144,9 @@ function reduire_image($texte, $taille = -1, $taille_y = -1) {
 }
 // http://doc.spip.org/@valeurs_image_trans
 function valeurs_image_trans($img, $effet, $forcer_format = false) {
-	return filtrer('image_valeurs_trans',$img, $effet, $forcer_format);
+//	return filtrer('image_valeurs_trans',$img, $effet, $forcer_format);
+	include_spip('inc/filtres_images');
+	return image_valeurs_trans($img, $effet, $forcer_format = false);
 }
 // http://doc.spip.org/@couleur_extraire
 function couleur_extraire($img, $x=10, $y=6) {
