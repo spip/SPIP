@@ -386,6 +386,7 @@ function echappe_js($t,$class='') {
 			$t);
 	return $t;
 }
+// http://doc.spip.org/@protege_js_modeles
 function protege_js_modeles($t) {
 	if (isset($GLOBALS['auteur_session']['alea_actuel'])){
 		$a = $GLOBALS['auteur_session']['alea_actuel'];
