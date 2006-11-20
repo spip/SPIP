@@ -180,6 +180,7 @@ function revisions_sites ($id_syndic, $c=false) {
 	}
 
 	// Envoyer aux plugins
+	include_spip('inc/modifier'); # temporaire pour eviter un bug
 	$champs = pipeline('pre_edition',
 		array(
 			'args' => array(
