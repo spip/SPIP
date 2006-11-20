@@ -1882,6 +1882,7 @@ jQuery.extend({
 		
 		// Send the data
 		xml.send(data);
+		return xml;
 	},
 	
 	// Counter for holding the number of active queries
@@ -2382,6 +2383,6 @@ jQuery.ajax = function( type, url, data, ret, ifModified ) {
     ret = function(res,status) {triggerAjaxLoad(document);orig_ret(res,status);};  
   }
 
-  jQuery._ajax( type, url, data, ret, ifModified ); 
+  return jQuery._ajax( type, url, data, ret, ifModified ); 
 
 };
