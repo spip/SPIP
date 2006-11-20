@@ -556,7 +556,9 @@ function puce_statut_article($id, $statut, $id_rubrique, $ajax = false) {
 				$action = "'".generer_url_ecrire('puce_statut_article',"id='+id",true);
 				$script = "<script type='text/javascript'><!--\n";
 				$script .= "$(document).ready(function(){
-					$('div.puce_article').onemouseover( function() {
+					$('div.puce_article').mouseover( function() {
+						if(this.puce_loaded) return;
+						this.puce_loaded = true;
 						id = $(this).id();
 						id = id.substr(6,id.length-1);
 						$('#statut'+id).load($action,function(){ 
