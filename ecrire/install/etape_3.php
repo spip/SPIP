@@ -31,6 +31,7 @@ function install_etape_3_dist()
 
 	echo "<fieldset><legend>"._T('texte_choix_base_1')."</legend>\n";
 
+	$checked = '';
 	if ($result AND (($n = @mysql_num_rows($result)) > 0)) {
 		echo "<label for='choix_db'><b>"._T('texte_choix_base_2')."</b><br />"._T('texte_choix_base_3')."</label>";
 		echo "<ul>";

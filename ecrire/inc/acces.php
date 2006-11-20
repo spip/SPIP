@@ -69,7 +69,7 @@ function creer_uniqid() {
 function renouvelle_alea()
 {
 	$alea = md5(creer_uniqid());
-	ecrire_meta('alea_ephemere_ancien',$GLOBALS['meta']['alea_ephemere']);
+	ecrire_meta('alea_ephemere_ancien',@$GLOBALS['meta']['alea_ephemere']);
 	ecrire_meta('alea_ephemere', $alea);
 	ecrire_meta('alea_ephemere_date', time());
 	ecrire_metas();
