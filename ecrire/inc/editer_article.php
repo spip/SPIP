@@ -15,8 +15,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 
 // http://doc.spip.org/@inc_editer_article_dist
-function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='', $config=array(), $row=array()) {
-
+function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='', $config_fonc='articles_edit_config', $row=array(), $hidden='')
+{
 	// Appel en tant que filtre d'un squelette 
 	if (!$row) {
 		include_spip('inc/presentation');
@@ -25,15 +25,16 @@ function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='',
 		if (!$row) return '';
 		if (is_numeric($new)) $new = '';
 	}
+
 	// Gaffe: sans ceci, on ecrase systematiquement l'article d'origine
 	// (et donc: pas de lien de traduction)
-	$id_trad = $row['id_article'];
 
-	$id_article = $lier_trad ? '' : $id_trad;
+	$id_article = ($new OR $lier_trad) ? 'oui' : $row['id_article'];
 	$id_rubrique = $row['id_rubrique'];
 	$id_secteur = $row['id_secteur'];
 
 	$aider = charger_fonction('aider', 'inc');
+	$config = $config_fonc($row);
 
 	$form = "<input type='hidden' name='editer_article' value='oui' />\n" .
 		 (!$lier_trad ? '' :
@@ -55,13 +56,12 @@ function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='',
 	. editer_article_ps($row['ps'], $config, $aider)
 
 	. (!$config['extra'] ? '': extra_saisie($row['extra'], 'articles', $id_secteur))
-
-	. "<div align='right'><input class='fondo' type='submit' value='"
+	. $hidden
+	. ("<div align='right'><input class='fondo' type='submit' value='"
 	. _T('bouton_enregistrer')
-	. "' /></div>";
+	. "' /></div>");
 
-	return generer_action_auteur("editer_article", $new ? 'oui' : $id_article, $retour, $form, " method='post' name='formulaire'");
-
+	return generer_action_auteur("editer_article", $id_article, $retour, $form, " method='post' name='formulaire'");
 }
 
 // http://doc.spip.org/@editer_article_texte
@@ -294,4 +294,32 @@ function editer_article_chapo($chapo, $config, $aider)
 			"</textarea></p>\n";
 	}
 }
+
+// Choix par defaut des options de presentation
+function articles_edit_config($row)
+{
+	global $champs_extra, $spip_ecran, $options, $spip_lang;
+
+	$config = $GLOBALS['meta'];
+	$config['lignes'] = ($spip_ecran == "large")? 8 : 5;
+	$config['afficher_barre'] = $spip_display != 4;
+	$config['langue'] = $spip_lang;
+	
+
+	if ($options != 'avancees') {
+		$config['articles_surtitre'] = 'non';
+		$config['articles_descriptif'] = "non";
+		$config['articles_urlref'] = "non";
+		$config['articles_ps'] = "non";
+	}
+
+	if ($champs_extra) {
+		include_spip('inc/extra');
+		$config['extra'] = true;
+	} else $config['extra'] = false;
+
+	$config['restreint'] = ($row['statut'] == 'publie');
+	return $config;
+}
+
 ?>

@@ -27,32 +27,6 @@ function exec_articles_edit_dist()
 		'articles_edit_config');
 }
 
-// http://doc.spip.org/@articles_edit_config
-function articles_edit_config($row)
-{
-	global $champs_extra, $spip_ecran, $options, $spip_lang;
-
-	$config = $GLOBALS['meta'];
-	$config['lignes'] = ($spip_ecran == "large")? 8 : 5;
-	$config['afficher_barre'] = $spip_display != 4;
-	$config['langue'] = $spip_lang;
-	
-
-	if ($options != 'avancees') {
-		$config['articles_surtitre'] = 'non';
-		$config['articles_descriptif'] = "non";
-		$config['articles_urlref'] = "non";
-		$config['articles_ps'] = "non";
-	}
-
-	if ($champs_extra) {
-		include_spip('inc/extra');
-		$config['extra'] = true;
-	} else $config['extra'] = false;
-
-	$config['restreint'] = ($row['statut'] == 'publie');
-	return $config;
-}
 
 // http://doc.spip.org/@articles_edit
 function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new, $config_fonc)
@@ -106,7 +80,7 @@ function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new,
 	debut_cadre_formulaire();
 	echo articles_edit_presentation($new, $row['id_rubrique'], $lier_trad, $row['id_article'], $row['titre']);
 	$editer_article = charger_fonction('editer_article', 'inc');
-	echo $editer_article($new, $id_rubrique, $lier_trad, generer_url_ecrire("articles"), $config_fonc($row), $row);
+	echo $editer_article($new, $id_rubrique, $lier_trad, generer_url_ecrire("articles"), $config_fonc, $row);
 	fin_cadre_formulaire();
 
 	echo fin_page();
