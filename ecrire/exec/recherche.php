@@ -98,7 +98,6 @@ function exec_recherche_dist()
 	echo $nbb;
 	if ($activer_moteur) {
 		if ($nbb) {
-			$doublons = join($nbb, ",");
 			$query_breves_int["WHERE"].= " AND NOT (" . $query_breves['WHERE'] . ")";
 		}
 		$nbb1 = afficher_breves ('<b>' . _T('info_breves_touvees_dans_texte') . '</b>', $query_breves_int, true);
