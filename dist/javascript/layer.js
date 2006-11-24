@@ -290,7 +290,7 @@ function charger_id_url(myUrl, myField, jjscript)
 		retour_id_url(Field, jjscript);
 		return true; // url vide, c'est un self complet
 	} else {
-		return charger_node_url(myUrl, myField, jjscript, findObj_forcer('img_' + myField));
+		return charger_node_url(myUrl, Field, jjscript, findObj_forcer('img_' + myField));
 	}
 }
 
@@ -300,7 +300,7 @@ function charger_node_url(myUrl, Field, jjscript, img)
 {
 	// disponible en cache ?
 	if (url_chargee[myUrl]) {
-			var el = $("#"+Field).html(url_chargee[myUrl])[0];
+			var el = $(Field).html(url_chargee[myUrl])[0];
 			retour_id_url(el, jjscript);
 			triggerAjaxLoad(el);
 			return false; 
@@ -308,12 +308,12 @@ function charger_node_url(myUrl, Field, jjscript, img)
 		if (img) img.style.visibility = "visible";
 		if (xhr_actifs[Field]) { xhr_actifs[Field].aborted = true;xhr_actifs[Field].abort(); }
 		xhr_actifs[Field] = AjaxSqueezeNode(myUrl,
-				"#"+Field,
+				Field,
 				function (r) {
 					xhr_actifs[Field] = undefined;
 					if (img) img.style.visibility = "hidden";
 					url_chargee[myUrl] = r;
-					retour_id_url("#"+Field, jjscript);
+					retour_id_url(Field, jjscript);
 								   });
 		return false;
 	}
