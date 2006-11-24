@@ -222,6 +222,7 @@ dist/javascript/dragdrop_interface.js -text
 dist/javascript/jquery-1.0.3-forms.js -text
 dist/javascript/jquery-1.0.3-forms.pack.js -text
 dist/javascript/pause.js -text
+dist/jquery.js.html -text
 dist/modeles/article_mots.html -text
 dist/modeles/article_traductions.html -text
 dist/modeles/doc.html -text

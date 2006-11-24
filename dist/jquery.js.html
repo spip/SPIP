@@ -1,0 +1,9 @@
+[(#REM)
+
+	Charger la librairie jQuery et ses plugins
+
+]
+#CACHE{7*24*3600,cache-client}
+#HTTP_HEADER{'Content-Type: text/javascript'}
+
+[(#CHEMIN{javascript/jquery-1.0.3-forms.js}|spip_file_get_contents)]

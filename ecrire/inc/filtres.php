@@ -1758,12 +1758,7 @@ function env_to_attributs ($texte){
 // Inserer jQuery
 // http://doc.spip.org/@f_jQuery
 function f_jQuery ($texte) {
-	if (!_request('jquery_debug')
-	AND _DIR_RESTREINT)
-		$js = "<script src=\""._DIR_JAVASCRIPT."jquery-1.0.3-forms.pack.js\" type=\"text/javascript\"></script>\n";
-	else
-		$js = "<script src=\""._DIR_JAVASCRIPT."jquery-1.0.3-forms.js\" type=\"text/javascript\"></script>\n";
- 	
+	$js = "<script src=\"".generer_url_public('jquery.js')."\" type=\"text/javascript\"></script>\n";
  	return $js.$texte;
 }
 
