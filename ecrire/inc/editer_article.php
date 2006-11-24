@@ -294,6 +294,7 @@ function editer_article_chapo($chapo, $config, $aider)
 	}
 }
 
+// http://doc.spip.org/@editer_article_extra
 function editer_article_extra($extra, $config, $aider)
 {
 	if (!$config['extra'])
