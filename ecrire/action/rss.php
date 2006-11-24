@@ -223,6 +223,8 @@ if (!verifier_low_sec ($id, $cle,
 //
 // Choisir la fonction de calcul du RSS
 //
+
+spip_connect();
 switch($op) {
 	# forum public
 	case 'forum':
