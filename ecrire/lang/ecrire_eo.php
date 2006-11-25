@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     Ne validigu tiun peton pri importo.<p />Por pli
     da informoj, vidu <a HREF=\'http://www.spip.net/fr_article1489.html\'>
                                 la dokumentaron pri SPIP</a>.',
-'avis_espace_interdit' => '<b>Malpermesata aliro</b><p />SPIP jam estas instalita.',
+'avis_espace_interdit' => '<b>Malpermesata aliro</b><div>SPIP jam estas instalita.</div>',
 'avis_lecture_noms_bases_1' => 'Instalprogramo ne sukcesis legi la nomojn de la instalitaj datenbazoj.',
 'avis_lecture_noms_bases_2' => 'A&#365; neniu datenbazo disponeblas, a&#365; la funkcio ebliganta listigi datenbazojn estis malaktivigita pro sekuraj kialoj (tio ja okazas &#265;e multaj retejoj-gastigantoj).',
 'avis_lecture_noms_bases_3' => 'Okaze de la dua alternativo, eble uzeblos datenbazo nomita per via salutnomo&nbsp;:',

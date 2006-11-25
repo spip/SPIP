@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Zm&#283;nit kl&iacute;&#269;ov&eacute; slovo',
 'admin_modifier_rubrique' => 'Zm&#283;nit sekci',
 'admin_recalculer' => 'Obnovit str&aacute;nku',
+'afficher_trad' => 'vyv&#283;sit p&#345;eklady',
 'alerte_maj_impossible' => '<b>Varov&aacute;n&iacute;!</b> Aktualizace datab&aacute;ze MySQL na verzi @version@ se nezda&#345;ilo. Je mo&#382;n&eacute;, &#382;e je to kv&#367;li probl&eacute;m&#367;m s p&#345;&iacute;stupov&yacute;mi pr&aacute;vy k datab&aacute;zi. Kontaktujte sv&eacute;ho poskytovatele p&#345;ipojen&iacute; k internetu (ISP).',
 'analyse_xml' => 'XML parsov&aacute;n&iacute;',
 'antispam_champ_vide' => 'Tuto polo&#382;ku nechte pros&iacute;m pr&aacute;zdnou:',
@@ -79,6 +80,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => 'zobrazen&iacute; jednotliv&yacute;ch dn&#367;',
 'cal_par_mois' => 'zobrazen&iacute; cel&eacute;ho m&#283;s&iacute;ce',
 'cal_par_semaine' => 'zobrazen&iacute; cel&yacute;ch t&yacute;dn&#367;',
+'choix_couleur_interface' => 'barva',
+'choix_interface' => 'volba rozhran&iacute;',
 'confirm_changer_statut' => 'Je nutn&eacute; potvrzen&iacute; akce: Po&#382;&aacute;dali jste o zm&#283;nu stavu &#269;l&aacute;nku. Chcete pokra&#269;ovat?',
 'correcte' => 'spr&aacute;vn&#283;',
 
@@ -184,18 +187,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => 'pro vlastn&iacute; zah&aacute;jen&iacute; instalace',
 'dirs_preliminaire' => 'P&#345;edb&#283;&#382;n&aacute; akce: <b>Nastaven&iacute; p&#345;&iacute;stupov&yacute;ch pr&aacute;v</b>',
 'dirs_probleme_droits' => 'Probl&eacute;m s p&#345;&iacute;stupov&yacute;mi pr&aacute;vy',
-'dirs_repertoires_absents' => '<b>Nebyl nalezen adres&aacute;&#345;, resp. adres&aacute;&#345;e: <ul>@bad_dirs@.</ul> </b>
-  <p />M&#367;&#382;e to b&yacute;t kv&#367;li nespr&aacute;vn&eacute;mu zad&aacute;n&iacute; velk&yacute;ch a mal&yacute;ch p&iacute;smen.
+'dirs_repertoires_absents' => '<p><b>Nebyl nalezen adres&aacute;&#345;, resp. adres&aacute;&#345;e:</b></p> <ul>@bad_dirs@.</ul> 
+  <p>M&#367;&#382;e to b&yacute;t kv&#367;li nespr&aacute;vn&eacute;mu zad&aacute;n&iacute; velk&yacute;ch a mal&yacute;ch p&iacute;smen.
   Zkontrolujte, zda mal&aacute; a velk&aacute; p&iacute;smena uveden&eacute;ho adres&aacute;&#345;e, resp. adres&aacute;&#345;&#367; souhlas&iacute; s t&iacute;m,
-  co je uvedeno v&yacute;&#353;e. Pokud ne, p&#345;ejmenujte adres&aacute;&#345;e pomoc&iacute; klienta programu FTP. T&iacute;m chybu oprav&iacute;te.
-  <p />Pot&eacute; m&#367;&#382;ete',
-'dirs_repertoires_suivants' => '<b>K n&aacute;sleduj&iacute;c&iacute;mu adres&aacute;&#345;i, resp. adres&aacute;&#345;&#367;m chyb&iacute; pr&aacute;vo z&aacute;pisu: <ul>@bad_dirs@.</ul> </b>
+  co je uvedeno v&yacute;&#353;e. Pokud ne, p&#345;ejmenujte adres&aacute;&#345;e pomoc&iacute; klienta programu FTP. T&iacute;m chybu oprav&iacute;te.</p>
+  <p>Pot&eacute; m&#367;&#382;ete',
+'dirs_repertoires_suivants' => '<p><b>K n&aacute;sleduj&iacute;c&iacute;mu adres&aacute;&#345;i, resp. adres&aacute;&#345;&#367;m chyb&iacute; pr&aacute;vo z&aacute;pisu:</b></p><ul>@bad_dirs@.</ul>
 
-  <p />Zm&#283;&#328;te tato pr&aacute;va pomoc&iacute; klienta FTP a nastavte pr&aacute;va p&#345;&iacute;stupu jednotliv&yacute;ch adres&aacute;&#345;&#367;
-
-  Podrobn&yacute; popis je v n&aacute;vodu k instalaci.
-
-  <p />Pot&eacute; m&#367;&#382;ete ',
+  <p>Zm&#283;&#328;te tato pr&aacute;va pomoc&iacute; klienta FTP a nastavte pr&aacute;va p&#345;&iacute;stupu jednotliv&yacute;ch adres&aacute;&#345;&#367;
+  Podrobn&yacute; popis je v n&aacute;vodu k instalaci.</p>
+  <p>Pot&eacute; m&#367;&#382;ete ',
 
 
 // E
@@ -619,6 +620,7 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 
 
 // M
+'masquer_trad' => 'skr&yacute;t p&#345;eklady',
 'module_fichiers_langues' => 'Jazykov&eacute; soubory',
 
 

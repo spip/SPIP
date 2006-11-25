@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Modificar esta palabra chave',
 'admin_modifier_rubrique' => 'Modificar este tema',
 'admin_recalculer' => 'Recargar a p&aacute;xina',
+'afficher_trad' => 'mostrar as traduci&oacute;ns',
 'alerte_maj_impossible' => '<b>Alerta&nbsp;!</b> A actualizaci&oacute;n da base MySQL sobre a versi&oacute;n @version@ &eacute; imposible, poder&iacute;a ser por causa dun problema de permisos de modificaci&oacute;n da base de datos. Contacte co seu aloxador.',
 'analyse_xml' => 'An&aacute;lise XML',
 'antispam_champ_vide' => 'Deixe este campo baleiro, por favor&nbsp;:',
@@ -79,6 +80,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_mois' => 'calendario por mes',
 'cal_par_semaine' => 'calendario por semana',
 'calendrier_synchro_lien' => 'R&eacute;cuperar el archivo <i>iCal</i>',
+'choix_couleur_interface' => 'cor',
+'choix_interface' => 'escolla de interface',
 'confirm_changer_statut' => 'Coidado, pediches cambiar o estado deste elemento. &iquest;Desexas continuar?',
 'correcte' => 'correcto',
 
@@ -581,6 +584,7 @@ Grazas pola s&uacute;a participaci&oacute;n
 
 
 // M
+'masquer_trad' => 'ocultar as traduci&oacute;ns',
 'module_fichiers_langues' => 'Ficheiros de lingua',
 
 

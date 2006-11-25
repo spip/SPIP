@@ -22,8 +22,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Modificar aqueu m&ograve;t clau',
 'admin_modifier_rubrique' => 'Modificar aquela rubrica',
 'admin_recalculer' => 'Tornar calcular la p&agrave;gina',
+'afficher_trad' => 'afichar li reviradas',
 'alerte_maj_impossible' => '<b>Al&egrave;rta!</b> Es impossible d\'actualisar la basa MySQL dev&egrave;rs la version @version@; bessai i a un problema relatiu au drech de modificar la basa de donadas. Vorgatz contactar lo voastre aubergador.',
 'analyse_xml' => 'Analisa XML',
+'antispam_champ_vide' => 'Vorgatz laissar aquel camp vu&egrave;i:',
 'avis_archive_incorrect' => 'lo fichier arquiu es pas un fichier SPIP',
 'avis_archive_invalide' => 'lo fichier arquiu es pas valid',
 'avis_attention' => 'DAIDA&nbsp;!',
@@ -77,8 +79,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => 'calendier per jorn',
 'cal_par_mois' => 'calendier per mes',
 'cal_par_semaine' => 'calendier per setmana',
+'choix_couleur_interface' => 'color ',
+'choix_interface' => 'chausida de l\'interfa&ccedil;a',
 'confirm_changer_statut' => 'Atencion, av&egrave;tz demandat de cambiar l\'estatut d\'aquel element. Desiratz continuar? ',
-'correcte' => '<NEW>correcte',
+'correcte' => 'corr&egrave;cte',
 
 
 // D
@@ -139,12 +143,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_jnum8' => '8',
 'date_jnum9' => '9',
 'date_jour_1' => 'dim&eacute;negue',
+'date_jour_1_abbr' => 'dmg.',
+'date_jour_1_initiale' => 'dg.',
 'date_jour_2' => 'diluns',
+'date_jour_2_abbr' => 'dil.',
+'date_jour_2_initiale' => 'dl.',
 'date_jour_3' => 'dimars',
+'date_jour_3_abbr' => 'dmr.',
+'date_jour_3_initiale' => 'dm.',
 'date_jour_4' => 'dim&egrave;cres',
+'date_jour_4_abbr' => 'dmc.',
+'date_jour_4_initiale' => 'dc.',
 'date_jour_5' => 'dij&ograve;us',
+'date_jour_5_abbr' => 'dij.',
+'date_jour_5_initiale' => 'dj.',
 'date_jour_6' => 'divendres',
+'date_jour_6_abbr' => 'div.',
+'date_jour_6_initiale' => 'dv.',
 'date_jour_7' => 'dissabta',
+'date_jour_7_abbr' => 'dis.',
+'date_jour_7_initiale' => 'ds.',
 'date_jours' => 'jorns',
 'date_minutes' => 'minutes',
 'date_mois' => 'm&egrave;s',
@@ -168,15 +186,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => 'per comen&ccedil;ar vertadierament l\'installacion',
 'dirs_preliminaire' => 'Preliminari : <b>Reglar lu drechs d\'acc&egrave;s</b>',
 'dirs_probleme_droits' => 'Probl&egrave;ma de drechs d\'acc&egrave;s',
-'dirs_repertoires_absents' => '<b>Lu repert&ograve;ris seguents son pas estat trobats: <ul>@bad_dirs@.</ul> </b>
-  <p />Si p&ograve;u que venga d\'un problema de majusculas &ograve; minusculas mau mesi.
+'dirs_repertoires_absents' => '<p><b>Lu repert&ograve;ris seguents son pas estat trobats:</b></p><ul>@bad_dirs@.</ul>
+  <p>Si p&ograve;u que venga d\'un problema de majusculas &ograve; minusculas mau mesi.
   Verificatz que li minusculas e majusculas d\'aquelu repert&ograve;ris correspondon ben emb cen qu\'es afichat
-  &ccedil;ai sobre; s\'es pas lo cas, tornatz nommar lu repert&ograve;ris emb lo voastre logiciau FTP per corregir l\'error.
-  <p />Un c&ograve;up qu\'auretz fach aqu&ograve;, podretz ',
-'dirs_repertoires_suivants' => '<b>Lu repert&ograve;ris seguents son pas accessibles en escritura&nbsp;: <ul>@bad_dirs@.</ul> </b>
-  <p />Per adobar aqu&ograve;, utilisatz lo voastre client FTP per fin de reglar lu drechs d\'acc&egrave;s de cadun
-  d\'aquelu repert&ograve;ris. Lo guida d\'installacion explica en detalh coma  proc&egrave;dre.
-  <p />Un c&ograve;up aquesta manipulacion facha, podretz ',
+  &ccedil;ai sobre; s\'es pas lo cas, tornatz nommar lu repert&ograve;ris emb lo voastre logiciau FTP per corregir l\'error.</p>
+  <p>Un c&ograve;up qu\'auretz fach aqu&ograve;, podretz ',
+'dirs_repertoires_suivants' => '<p><b>Lu repert&ograve;ris seguents son pas accessibles en escritura&nbsp;:</b></p><ul>@bad_dirs@.</ul>
+  <p>Per adobar aqu&ograve;, utilisatz lo voastre client FTP per fin de reglar lu drechs d\'acc&egrave;s de cadun
+  d\'aquelu repert&ograve;ris. Lo guida d\'installacion explica en detalh coma  proc&egrave;dre.</p>
+  <p>Un c&ograve;up aquesta manipulacion facha, podretz ',
 
 
 // E
@@ -258,6 +276,7 @@ Merc&eacute; de la voastra participacion
 'forum_acces_refuse' => 'Pod&egrave;tz pas plus accedir en aquelu forums.',
 'forum_attention_dix_caracteres' => '<b>D&agrave;ida&nbsp;!</b> lo voastre messatge deu aver au manco d&egrave;tz caract&egrave;rs.',
 'forum_attention_trois_caracteres' => '<b>D&agrave;ida&nbsp;!</b> lo voastre titre deu aver au manco tres caract&egrave;rs.',
+'forum_attention_trop_caracteres' => '<b>Atencion&nbsp;!</b> lo voastre messatge es tr&ograve;p long (@compte@ caract&egrave;rs)&nbsp;: per si poder registrar, cau pas que passe @max@ caract&egrave;rs.',
 'forum_avez_selectionne' => 'Av&egrave;tz seleccionat&nbsp;:',
 'forum_cliquer_retour' => 'Clicatz <a href=\'@retour_forum@\'>aqu&iacute;</a> per continuar.',
 'forum_forum' => 'forum',
@@ -269,7 +288,7 @@ Merc&eacute; de la voastra participacion
 'forum_non_inscrit' => 'Si&egrave;tz pas inscrich(a), &ograve; l\'adre&ccedil;a &ograve; lo m&ograve;t de santa Clara son erron&egrave;us.',
 'forum_page_url' => '(se lo voastre messatge si referisse a un article publicat sus lo web, &ograve; a una p&agrave;gina que fornisse mai d\'informacions, podetz marcar &ccedil;ai sota lo titre de la p&agrave;gina e la sieu adre&ccedil;a.)',
 'forum_par_auteur' => 'de @auteur@',
-'forum_poste_par' => 'Messatge poste@parauteur@ a la seguida dau voastre article.',
+'forum_poste_par' => 'Messatge postat@parauteur@ a la seguida de l\'article &laquo; @titre@ &raquo;.',
 'forum_probleme_database' => 'Probl&egrave;ma de basa de donadas, lo voastre messatge es pas estat registrat.',
 'forum_qui_etes_vous' => '<B>Cu si&egrave;tz ?</B> (opcionau)',
 'forum_texte' => 'T&egrave;xt dau voastre messatge :',
@@ -346,7 +365,7 @@ Merc&eacute; de la voastra participacion
 'image_tourner_droite' => 'Rotacion 90&deg; a drecha',
 'image_tourner_gauche' => 'Rotacion 90&deg; a sen&egrave;ca',
 'img_indisponible' => 'imatge indisponible',
-'impossible' => '<NEW>impossible',
+'impossible' => 'impossible',
 'info_a_suivre' => 'DA SEGRE&nbsp;&gt;&gt;',
 'info_a_valider' => '[de validar]',
 'info_acces_interdit' => 'Acc&egrave;s pro&iuml;bit',
@@ -563,6 +582,7 @@ Merc&eacute; de la voastra participacion
 
 
 // M
+'masquer_trad' => 'Escondre li reviradas',
 'module_fichiers_langues' => 'Fichiers de langa',
 
 
@@ -638,9 +658,9 @@ e vos tornar connectar au sit.
 
 
 // S
-'squelette' => '<NEW>squelette',
-'squelette_inclus_ligne' => '<NEW>squelette inclus, ligne',
-'squelette_ligne' => '<NEW>squelette, ligne',
+'squelette' => 'esqueleta',
+'squelette_inclus_ligne' => 'esqueleta inclusa, linha',
+'squelette_ligne' => 'esqueleta, linha',
 'stats_visites_et_popularite' => '@visites@ visitas&nbsp;; popularitat&nbsp;: @popularite@',
 'suivant' => 'seguent',
 
