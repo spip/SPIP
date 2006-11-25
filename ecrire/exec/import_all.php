@@ -98,6 +98,7 @@ function exec_import_all_dist()
 	if (!$GLOBALS['meta']["debut_restauration"]) {
 	// cas de l'appel apres demande de confirmation
 		$archive=_request('archive');
+		$insertion=_request('insertion');
 		if (!strlen($archive)) $archive=_request('archive_perso');
 		if ($archive) {
 			$action = _T('info_restauration_sauvegarde', array('archive' => $archive));
@@ -105,9 +106,11 @@ function exec_import_all_dist()
 		}
 
 		// au tout premier appel, on ne revient pas de debut_admin
-		debut_admin(generer_url_post_ecrire("import_all","archive=$archive"), $action, $commentaire);
 
-		// on est revenu: l'authentification ftp est ok
+		debut_admin(generer_url_post_ecrire("import_all","archive=$archive&insertion=$insertion"), $action, $commentaire);
+
+		// si on est revenu c'est que l'authentification ftp est ok
+		// sinon il reste le meta request_restau; a ameliorer.
 		fin_admin($action);
 		// dire qu'on commence
 		ecrire_meta("request_restauration", serialize($_REQUEST));
@@ -120,17 +123,6 @@ function exec_import_all_dist()
 	}
 
 	// au rappel, on commence (voire on continue)
-	import_all_continue();
-	include_spip('inc/rubriques');
-	calculer_rubriques();
-}
-
-
-// http://doc.spip.org/@import_all_continue
-function import_all_continue()
-{
-	global $meta, $flag_gz, $buf, $abs_pos, $my_pos, $connect_toutes_rubriques;
-	global $affiche_progression_pourcent;
 	@ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
 	// utiliser une version fraiche des metas (ie pas le cache)
 	include_spip('inc/meta');
@@ -138,14 +130,71 @@ function import_all_continue()
 	include_spip('inc/import');
 	@ignore_user_abort(1);
 
-	$request = unserialize($meta['request_restauration']);
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('titre_page_index'), "accueil", "accueil");
+
+	debut_gauche();
+
+	debut_droite();
+	$request = unserialize($GLOBALS['meta']['request_restauration']);
+	spip_log("import_all " . $GLOBALS['meta']['request_restauration']);
+	$dir = import_queldir();
+	$r = import_tables($request, $dir);
+
+	if ($r) {
+		spip_log("Erreur: $r");
+	}
+	else {
+		if ($request['insertion']== 'on') {
+			$request['insertion'] = 'passe2';
+			ecrire_meta("request_restauration", serialize($request));
+			ecrire_meta("debut_restauration", "debut");
+			ecrire_meta("status_restauration", "0");
+			ecrire_metas();
+			spip_log("import_all passe 2");
+			$trans = translate_init($request);
+			$r = import_tables($request, $dir, $trans);
+			if ($r) spip_log("Erreur: $r");
+			spip_query("DROP TABLE spip_translate");
+		} 
+		ecrire_acces();	// Mise a jour du fichier htpasswd
+		detruit_restaurateur();
+		if ($charset = $GLOBALS['meta']['charset_restauration']) {
+				ecrire_meta('charset', $charset);
+				ecrire_metas();
+		}
+		import_fin();
+		include_spip('inc/rubriques');
+		calculer_rubriques();
+	}
+	echo "</body></html>\n";
+}
+
+function import_fin() {
+
+	effacer_meta("charset_restauration");
+	effacer_meta("status_restauration");
+	effacer_meta("debut_restauration");
+	effacer_meta("date_optimisation");
+	effacer_meta('request_restauration');
+	effacer_meta('fichier_restauration');
+	effacer_meta('version_archive_restauration');
+	effacer_meta('tag_archive_restauration');
+	ecrire_metas();
+}
+
+// http://doc.spip.org/@import_all_continue
+function import_queldir()
+{
+	global $connect_toutes_rubriques;
+
 	if ($connect_toutes_rubriques) {
 		$repertoire = _DIR_DUMP;
 		if(!@file_exists($repertoire)) {
 			$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
 			$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
 		}
-		$dir = $repertoire;
+		return $repertoire;
 	} else {
 		$repertoire = _DIR_TRANSFERT;
 		if(!@file_exists($repertoire)) {
@@ -155,75 +204,8 @@ function import_all_continue()
 		if(!@file_exists($repertoire.$connect_login)) {
 			$sous_rep = sous_repertoire($repertoire, $connect_login);
 		}
-		$dir = $sous_rep . '/';
-	}
-	$archive = $dir . $request['archive'];
-	$affiche_progression_pourcent = @filesize($archive);
-
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('titre_page_index'), "accueil", "accueil");
-
-	debut_gauche();
-
-	debut_droite();
-
-	// attention : si $request['archive']=="", alors archive='data/' 
-	// le test is_readable n'est donc pas suffisant
-	if (!@is_readable($archive)||is_dir($archive) || !$affiche_progression_pourcent) {
-		$texte_boite = _T('info_erreur_restauration');
-		echo debut_boite_alerte();
-		echo "<font face='Verdana,Arial,Sans,sans-serif' size='4' color='black'><b>$texte_boite</b></font>";
-		echo fin_boite_alerte();
-
-		// faut faire quelque chose, sinon le site est mort :-)
-		// a priori on reset les meta de restauration car rien n'a encore commence
-		effacer_meta('request_restauration');
-		effacer_meta('fichier_restauration');
-		effacer_meta('version_archive_restauration');
-		effacer_meta('tag_archive_restauration');
-		effacer_meta('status_restauration');
-		effacer_meta('debut_restauration');
-		effacer_meta('charset_restauration');
-		ecrire_metas();
-		exit;
+		return $sous_rep . '/';
 	}
 
-	$my_pos = $meta["status_restauration"];
-
-	if (ereg("\.gz$", $archive)) {
-			$affiche_progression_pourcent = false;
-			$taille = taille_en_octets($my_pos);
-			$gz = true;
-	} else {
-			$taille = floor(100 * $my_pos / $affiche_progression_pourcent)." %";
-			$gz = false;
-		}
-	$texte_boite = _T('info_base_restauration')."<p>
-		<form name='progression'><center><input type='text' size=10 style='text-align:center;' name='taille' value='$taille'><br>
-		<input type='text' class='forml' name='recharge' value='"._T('info_recharger_page')."'></center></form>";
-
-	echo debut_boite_alerte();
-	echo "<font FACE='Verdana,Arial,Sans,sans-serif' SIZE=4 color='black'><B>$texte_boite</B></font>";
-	echo fin_boite_alerte();
-	$max_time = ini_get('max_execution_time')*1000;
-	echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".self()."\";',$max_time);</script>\n");
-
-	if ($GLOBALS['flag_ob_flush']) ob_flush();
-	flush();
-
-	$_fopen = ($gz) ? 'gzopen' : 'fopen';
-	$f = $_fopen($archive, "rb");
-	$buf = "";
-	$r = import_tables($f, $gz);
-	if ($r) {
-		spip_log("Erreur: $r");
-	}
-	else {
-		if ($charset = $GLOBALS['meta']['charset_restauration'])
-			ecrire_meta('charset', $charset);
-	}
-
-	import_fin();
-	echo "</body></html>\n";
 }
 ?>

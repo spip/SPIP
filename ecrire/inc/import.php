@@ -117,20 +117,6 @@ function import_debut($f, $gz=false) {
 $tables_trans = array(
 );
 
-// http://doc.spip.org/@import_fin
-function import_fin() {
-
-	effacer_meta("charset_restauration");
-	effacer_meta("status_restauration");
-	effacer_meta("debut_restauration");
-	effacer_meta("date_optimisation");
-	effacer_meta('request_restauration');
-	effacer_meta('fichier_restauration');
-	effacer_meta('version_archive_restauration');
-	effacer_meta('tag_archive_restauration');
-	ecrire_metas();
-}
-
 // http://doc.spip.org/@import_init_tables
 function import_init_tables()
 {
@@ -145,41 +131,95 @@ function import_init_tables()
 	}
 
 	// Bidouille pour garder l'acces admin actuel pendant toute la restauration
-	spip_query("UPDATE spip_auteurs SET id_auteur=0 WHERE id_auteur=$connect_id_auteur");
+	spip_query("UPDATE spip_auteurs SET id_auteur=0, extra=$connect_id_auteur WHERE id_auteur=$connect_id_auteur");
 	spip_query("DELETE FROM spip_auteurs WHERE id_auteur!=0");
 
 	return $tables;
 }
 
+// Effacement de la bidouille ci-dessus
+// Toutefois si la table des auteurs ne contient plus qu'elle
+// c'est que la sauvegarde etait incomplete et on restaure le compte
+// pour garder la connection au site (mais il doit pas etre bien beau)
+
+// http://doc.spip.org/@detruit_restaurateur
+function detruit_restaurateur()
+{
+	$r = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_auteurs"));
+	if ($r['n'] > 1)
+		spip_query("DELETE FROM spip_auteurs WHERE id_auteur=0");
+	else {
+	  	spip_query("UPDATE spip_auteurs SET id_auteur=extra WHERE id_auteur=0");
+	}
+}
+
 // http://doc.spip.org/@import_tables
-function import_tables($f, $gz=false) {
+function import_tables($request, $dir, $trans=array()) {
 	global $import_ok, $abs_pos, $my_pos;
+	global $affiche_progression_pourcent;
 	static $time_javascript;
+
+	$my_pos = $GLOBALS['meta']["status_restauration"];
+	$archive = $dir . ($request['archive'] ? $request['archive'] : $request['archive_perso']);
+	$size = @filesize($archive);
+
+	// attention : si $request['archive']=="", alors archive='data/' 
+	// le test is_readable n'est donc pas suffisant
+	if (!@is_readable($archive)||is_dir($archive) || !$size) {
+		$texte_boite = _T('info_erreur_restauration');
+		echo debut_boite_alerte();
+		echo "<font face='Verdana,Arial,Sans,sans-serif' size='4' color='black'><b>$texte_boite</b></font>";
+		echo fin_boite_alerte();
+// renvoyer True pour effacer les meta sans refaire calculer_rubriques:
+// la restauration n'a pas encore commence, on peut eviter de tout casser
+		return $texte_boite;
+	}
+
+	if (ereg("\.gz$", $archive)) {
+			$size = false;
+			$taille = taille_en_octets($my_pos);
+			$_fopen = 'gzopen';
+			$gz = true;
+	} else {
+			$taille = floor(100 * $my_pos / $size)." %";
+			$_fopen = 'fopen';
+			$gz = false;
+	}
+
+	import_affiche_javascript($taille);
+
+	if ($GLOBALS['flag_ob_flush']) ob_flush();
+	flush();
 
 	list($my_date) = spip_fetch_array(spip_query("SELECT UNIX_TIMESTAMP(maj) AS d FROM spip_meta WHERE nom='debut_restauration'"), SPIP_NUM);
 
 	if (!$my_date) return false;
 
+	if ($request['insertion']=='on') {
+		$request['init'] = 'insere_1_init';
+		$request['boucle'] = 'import_insere';
+	} elseif ($request['insertion']=='passe2') {
+		$request['init'] = 'insere_2_init';
+		$request['boucle'] = 'import_translate';
+	} else {
+		$request['init'] = 'import_init';
+		$request['boucle'] = 'import_replace';
+	}
+
+	$f = $_fopen($archive, "rb");
 	$my_pos = (!isset($GLOBALS['meta']["status_restauration"])) ? 0 :
 		$GLOBALS['meta']["status_restauration"];
+
 	if ($my_pos==0) {
-		// par defaut pour les anciens sites
-		// il est contenu dans le xml d'import et sera reecrit dans import_debut
+// par defaut pour les anciens sites
+// il est contenu dans le xml d'import et sera reecrit dans import_debut
 		ecrire_meta('charset_restauration', 'iso-8859-1'); 
-		// Debut de l'importation
-		$fimport = false;
 		if ($r = import_debut($f, $gz)) {
 // tag ouvrant :
 // 'SPIP' pour un dump xml spip, nom de la base source pour un dump phpmyadmin
 			$tag_archive = $r[0];
 			$version_archive = $r[1]['version_archive'];
-			$fimport = import_charge_version($version_archive);
 		}
-		// Normalement c'est controle par import_all auparavant
-		if (!$fimport) {
-			return _T('avis_archive_incorrect');
-		}
-
 		ecrire_meta('version_archive_restauration', $version_archive);
 		ecrire_meta('tag_archive_restauration', $tag_archive);
 		ecrire_metas();
@@ -189,18 +229,24 @@ function import_tables($f, $gz=false) {
 		$_fseek($f, $my_pos);
 		$version_archive = $GLOBALS['meta']['version_archive_restauration'];
 		$tag_archive = $GLOBALS['meta']['tag_archive_restauration'];
-		$fimport = import_charge_version($version_archive);
-		$tables = import_table_choix();
+		// a completer pour les insertions
+		$request['init'] = 'import_table_choix';
 	}
 
-	while ($table = $fimport($f, $gz)) {
+	$fimport = import_charge_version($version_archive);
+
+	// Normalement c'est controle par import_all auparavant
+	// c'est pour se proteger des reprises avortees
+	if (!$fimport) return _T('avis_archive_incorrect');
+
+	while ($table = $fimport($f, $request, $gz, $trans)) {
 	// Pas d'ecriture SQL car sinon le temps double.
 	// Il faut juste faire attention a bien lire_metas()
 	// au debut de la restauration
 		ecrire_meta("status_restauration", "$abs_pos");
 
 		if (time() - $time_javascript > 3) {	// 3 secondes
-			affiche_progression_javascript($abs_pos,$table);
+			affiche_progression_javascript($abs_pos,$size,$table);
 			$time_javascript = time();
 		}
 
@@ -209,51 +255,55 @@ function import_tables($f, $gz=false) {
 
 	if (!$import_ok) return  _T('avis_archive_invalide');
 
-	// Mise a jour du fichier htpasswd
-
-	ecrire_acces();
-
-	detruit_restaurateur();
-
-	affiche_progression_javascript('100 %');
+	affiche_progression_javascript('100 %', $size);
 
 	return false;
 }
 
-// Destruction des entrees non restaurees
-
-// http://doc.spip.org/@detruit_restaurateur
-function detruit_restaurateur()
+function import_affiche_javascript($taille)
 {
-	spip_query("DELETE FROM spip_auteurs WHERE id_auteur=0");
+	$max_time = ini_get('max_execution_time')*1000;
+	echo debut_boite_alerte(),
+	  "<font face='Verdana,Arial,Sans,sans-serif' size='4' color='black'><b>",
+	  _T('info_base_restauration'),
+	  "</b></font>",
+	  "<form name='progression'><center><input type='text' size='10' style='text-align:center;' name='taille' value='",
+	  $taille,
+	  "'><br /><input type='text' class='forml' name='recharge' value='"._T('info_recharger_page')."'></center></form>",
+	  fin_boite_alerte(),
+	  "<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"",
+	  self(),
+	  "\";',",
+	  $max_time,
+	  ");</script>\n";
 }
 
 
+
 // http://doc.spip.org/@affiche_progression_javascript
-function affiche_progression_javascript($abs_pos,$table="") {
-	global $affiche_progression_pourcent;
+function affiche_progression_javascript($abs_pos,$size, $table="") {
 	include_spip('inc/charsets');
 	if ($GLOBALS['flag_ob_flush']) ob_flush();
 	flush();
 	echo "\n<script type='text/javascript'><!--\n";
 
 	if ($abs_pos == '100 %') {
-		$taille = $abs_pos;
-		if ($GLOBALS['erreur_restauration'])
-			echo "document.progression.recharge.value='".str_replace("'", "\\'", unicode_to_javascript(_T('avis_erreur')))."';\n";
+
+		if ($x = $GLOBALS['erreur_restauration'])
+			echo "document.progression.recharge.value='".str_replace("'", "\\'", unicode_to_javascript(_T('avis_erreur'))).": $x ';\n";
 		else
 			echo "document.progression.recharge.value='".str_replace("'", "\\'", unicode_to_javascript(_T('info_fini')))."';\n";
-		echo "document.progression.taille.value='$taille';\n";
+		echo "document.progression.taille.value='$abs_pos';\n";
 		echo "//--></script>\n";
 		echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".self()."\";',0);</script>\n");
 	}
 	else {
 		if (trim($table))
 			echo "document.progression.recharge.value='$table';\n";
-		if (! $affiche_progression_pourcent)
+		if (!$size)
 			$taille = ereg_replace("&nbsp;", " ", taille_en_octets($abs_pos));
 		else
-			$taille = floor(100 * $abs_pos / $affiche_progression_pourcent)." %";
+			$taille = floor(100 * $abs_pos / $size)." %";
 		echo "document.progression.taille.value='$taille';\n";
 		echo "//--></script>\n<!--\n";
 	}

@@ -38,7 +38,7 @@ function description_table($nom){
 
 // pour le support des vieux dump
 // http://doc.spip.org/@inc_import_1_2_dist
-function inc_import_1_2_dist($f, $gz=false) {
+function inc_import_1_2_dist($f, $request, $gz=false, $t='') {
   global $import_ok, $abs_pos, $my_pos;
 	static $field_desc = array ();
 

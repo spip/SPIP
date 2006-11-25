@@ -225,8 +225,8 @@ function spip_query($query, $serveur='') {
 
 // a demenager dans base/abstract_sql a terme
 // http://doc.spip.org/@_q
-function _q($arg_sql) {
-	return (is_int($arg_sql)) ? $arg_sql : ("'" . addslashes($arg_sql) . "'");
+function _q($a) {
+	return (is_numeric($a)) ? strval($a) : ("'" . addslashes($a) . "'");
 }
 
 // Renvoie le _GET ou le _POST emis par l'utilisateur
