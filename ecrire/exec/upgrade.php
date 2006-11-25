@@ -67,8 +67,8 @@ function exec_upgrade_dist() {
 	// On passe a l'upgrade
 	include_spip('inc/admin');
 
-	debut_admin(generer_url_post_ecrire("upgrade", 'reinstall=non'),
-		$upgrade_titre, $commentaire);
+	$_POST['reinstall'] = 'non';
+	debut_admin("upgrade", $upgrade_titre, $commentaire);
 
 	include_spip('base/create');
 	creer_base();

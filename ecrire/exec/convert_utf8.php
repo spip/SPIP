@@ -44,8 +44,7 @@ function demander_conversion($tables_a_convertir, $action) {
 		$commentaire .= '<p>'._T('utf8_convert_timeout');
 		$commentaire .= "<hr />\n";
 
-		debut_admin(generer_url_post_ecrire("convert_utf8"),
-			$action, $commentaire);
+		debut_admin("convert_utf8", $action, $commentaire);
 
 		// noter dans les meta qu'on veut convertir
 		ecrire_meta('conversion_charset', $charset_orig);

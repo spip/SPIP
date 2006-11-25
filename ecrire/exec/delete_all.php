@@ -19,7 +19,7 @@ function exec_delete_all_dist()
 {
 $action = _T('titre_page_delete_all');
 
-debut_admin(generer_url_post_ecrire("delete_all"), $action);
+ debut_admin("delete_all", $action);
 
 // faudrait plutot recuperer dans inc_serialbase et inc_auxbase
 // mais il faudra prevenir ceux qui affectent les globales qui s'y trouvent
