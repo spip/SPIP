@@ -36,12 +36,14 @@ function description_table($nom){
 	return array($nom,array());
 }
 
+// http://doc.spip.org/@import_init
 function import_init($request, $my_pos) {
 
 	// au premier appel destruction des tables a restaurer
 	return (!$my_pos) ? import_init_tables() : import_table_choix();
 }
 
+// http://doc.spip.org/@insere_2_init
 function insere_2_init($request, $my_pos) {
 
 	// l'insertion ne porte que sur les tables principales
@@ -54,6 +56,7 @@ function insere_2_init($request, $my_pos) {
 	return $t;
 }
 
+// http://doc.spip.org/@insere_1_init
 function insere_1_init($request, $my_pos) {
 
   //  preparation de la table des translations
@@ -73,6 +76,7 @@ function insere_1_init($request, $my_pos) {
 	return insere_2_init($request, $my_pos);
 }
 
+// http://doc.spip.org/@translate_init
 function translate_init($request, $my_pos=0) {
   /* 
    construire le tableau PHP de la table spip_translate
@@ -153,10 +157,12 @@ function inc_import_1_3_dist($lecteur, $request, $gz=false, $trans=array()) {
 	return $import_ok = $new;
 }
 
+// http://doc.spip.org/@import_replace
 function import_replace($values, $table, $desc, $trans) {
 	return spip_query("REPLACE $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',',$values) . ')');
 }
 
+// http://doc.spip.org/@import_insere
 function import_insere($values, $table, $desc, $trans) {
 	// reserver une place dans les tables principales
 	$n = spip_abstract_insert($table, '', '()');
@@ -170,6 +176,7 @@ function import_insere($values, $table, $desc, $trans) {
 	return $n;
 }
 
+// http://doc.spip.org/@import_translate
 function import_translate($values, $table, $desc, $trans) {
 	$vals = '';
 
@@ -185,6 +192,7 @@ function import_translate($values, $table, $desc, $trans) {
 	return spip_query("REPLACE $table (" . join(',',array_keys($values)) . ') VALUES (' .substr($vals,1) . ')');
 }
 
+// http://doc.spip.org/@import_lire_champs
 function import_lire_champs($f, $fields, $gz, $phpmyadmin, $table)
 {
 	$values = array();

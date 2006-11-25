@@ -170,6 +170,7 @@ function exec_import_all_dist()
 	echo "</body></html>\n";
 }
 
+// http://doc.spip.org/@import_fin
 function import_fin() {
 
 	effacer_meta("charset_restauration");
@@ -183,7 +184,7 @@ function import_fin() {
 	ecrire_metas();
 }
 
-// http://doc.spip.org/@import_all_continue
+// http://doc.spip.org/@import_queldir
 function import_queldir()
 {
 	global $connect_toutes_rubriques;

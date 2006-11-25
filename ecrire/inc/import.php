@@ -260,6 +260,7 @@ function import_tables($request, $dir, $trans=array()) {
 	return false;
 }
 
+// http://doc.spip.org/@import_affiche_javascript
 function import_affiche_javascript($taille)
 {
 	$max_time = ini_get('max_execution_time')*1000;
