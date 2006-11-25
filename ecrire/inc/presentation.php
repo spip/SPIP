@@ -1324,7 +1324,7 @@ function debut_javascript($admin, $stat)
 	// on installe egalement un <noscript></noscript> qui charge une image qui
 	// pose un cookie valant -1
 
-	$testeur = generer_url_ecrire('test_ajax', 'js=1');
+	$testeur = generer_url_ecrire('test_ajax', 'var_ajaxcharset=utf-8&js=1');
 
 	if (_SPIP_AJAX) {
 	  // pour le pied de page

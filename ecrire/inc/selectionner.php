@@ -71,7 +71,7 @@ function construire_selectionner_hierarchie($idom, $liste, $racine, $url, $name,
 
 	return "<div id='$idom'>"
 	. "<a id='$idom6' style='visibility: hidden;'"
-	. ($url_init ?  "href='$url_init'" : '')
+	. ($url_init ?  " href='$url_init'" : '')
 	. "></a>"
 	. "<table width='100%' cellpadding='0' cellspacing='0'><tr>"
 	. "<td style='vertical-align: bottom;'>\n"

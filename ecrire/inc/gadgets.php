@@ -482,12 +482,16 @@ function repercuter_gadgets($id_rubrique) {
 
 	if (!_SPIP_AJAX) return '';
 
-	$rub = $id_rubrique ? "\\x26id_rubrique=$id_rubrique" : '';
+	// ne sert ici qu'a caracteriser l'asyncrhonisme de ces scripts,
+	// afin de les neutraliser lors d'une restauration
+	$ajax = "\\x26var_ajaxcharset=utf8" ;
+
+	$rub = $ajax . ($id_rubrique ? "\\x26id_rubrique=$id_rubrique" : '');
 
 	return
 	 "
 	$('#gadget-rubriques')
-	.load('./?exec=gadgets\\x26gadget=rubriques');" #pas de $rub
+	.load('./?exec=gadgets\\x26gadget=rubriques$ajax');" #pas de $rub
 	."
 	$('#gadget-navigation')
 	.load('./?exec=gadgets\\x26gadget=navigation$rub');"
