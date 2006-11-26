@@ -205,8 +205,14 @@ if (defined('_INC_PUBLIC')) {
 	}
 
 	// Effectuer une tache de fond ?
-	cron();
+	// si #SPIP_CRON est present, on ne le tente que pour les navigateurs
+	// en mode texte (par exemple), et seulement sur les pages web
+	if ($html
+	AND !strstr($page['texte'], '<!-- SPIP-CRON -->')
+	AND !preg_match(',msie|mozilla|opera|konqueror,i', $_SERVER['HTTP_USER_AGENT']))
+		cron();
 
+	spip_log('fini '.$_SERVER['REQUEST_URI']);
 }
 
 ?>
