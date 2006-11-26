@@ -33,7 +33,6 @@ function debut_admin($script, $action, $commentaire='') {
 
 	}
 	$signal = fichier_admin($action);
-	spip_log("debut_admin $signal");
 	if (@file_exists($dir . $signal)) {
 		spip_log ("Action admin: $action");
 		return true;
