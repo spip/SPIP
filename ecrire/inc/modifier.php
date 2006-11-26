@@ -69,7 +69,7 @@ function modifier_contenu($type, $id, $options, $c=false) {
 		return false;
 
 	spip_query($q = "UPDATE spip_$table_objet SET ".join(', ',$update)." WHERE $id_table_objet=$id");
-
+	//spip_log($q);
 
 	// marquer le fait que l'objet est travaille par toto a telle date
 	if ($GLOBALS['meta']['articles_modif'] != 'non') {
@@ -180,9 +180,9 @@ function revision_forum($id_forum, $c=false) {
 
 	// Supprimer 'http://' tout seul
 	$u = _request('url_site', $c);
-	if (isset($u)) {
+	if ($u !== NULL) {
 		include_spip('inc/filtres');
-		$c = set_request('url_site', vider_url($u, false));
+		$c = set_request('url_site', vider_url($u, false), $c);
 	}
 
 	$r = modifier_contenu('forum', $id_forum,
