@@ -180,8 +180,10 @@ function revision_forum($id_forum, $c=false) {
 
 	// Supprimer 'http://' tout seul
 	$u = _request('url_site', $c);
-	if (isset($u))
+	if (isset($u)) {
+		include_spip('inc/filtres');
 		$c = set_request('url_site', vider_url($u, false));
+	}
 
 	$r = modifier_contenu('forum', $id_forum,
 		array(
