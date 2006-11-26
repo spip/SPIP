@@ -306,6 +306,6 @@ switch($op) {
 	'url' => $url,
 	'language'=> $GLOBALS['spip_lang']));
  
- spip_log("spip_rss applique $f sur '$fmt $opt $args'. Tempsd: " . spip_timer('rss'));
+ spip_log("spip_rss applique $f sur '$fmt $opt $args' - " . spip_timer('rss'));
 }
 ?>
