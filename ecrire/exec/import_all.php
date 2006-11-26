@@ -37,7 +37,7 @@ if ($f = include_spip('mes_fonctions', false)) {
 	@include_once ($f); 
 }
 
-// http://doc.spip.org/@verifier_version_sauvegarde
+// http://doc.spip.org/@verifier_sauvegarde
 function verifier_sauvegarde ($archive, $dir) {
 	global $spip_version;
 
@@ -121,6 +121,7 @@ function exec_import_all_dist()
 	import_all_fin();
 }
 
+// http://doc.spip.org/@import_all_debut
 function import_all_debut($request) {
 	ecrire_meta("request_restauration", serialize($request));
 	ecrire_meta("debut_restauration", "debut");
@@ -128,6 +129,7 @@ function import_all_debut($request) {
 	ecrire_metas();
 }
 
+// http://doc.spip.org/@import_all_fin
 function import_all_fin() {
 
 	effacer_meta("charset_restauration");
@@ -140,7 +142,7 @@ function import_all_fin() {
 	ecrire_metas();
 }
 
-// http://doc.spip.org/@import_all_continue
+// http://doc.spip.org/@import_queldir
 function import_queldir()
 {
 	global $connect_toutes_rubriques;
