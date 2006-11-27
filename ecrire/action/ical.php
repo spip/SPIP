@@ -56,10 +56,13 @@ function action_ical_dist()
 	lang_select($langue_utilisateur);
 	$nom_site = $GLOBALS['meta']["nom_site"];
 	$adresse_site = url_de_base();
+	$spip = "SPIP " . $GLOBALS['spip_version_affichee'] . ' ' . $GLOBALS['home_server'];
 
 	header("Content-Type: text/calendar; charset=utf-8");
 	echo	filtrer_ical ("BEGIN:VCALENDAR"), "\n",
 		filtrer_ical ("CALSCALE:GREGORIAN"), "\n",
+		filtrer_ical ("PRODID: $spip"), "\n",
+		filtrer_ical ("VERSION:2.0"), "\n",
 		filtrer_ical ("X-WR-CALNAME;VALUE=TEXT:$nom_site / $nom_utilisateur"), "\n",
 		filtrer_ical ("X-WR-RELCALID:cal$id_utilisateur @ $adresse_site"), "\n";
 	spip_ical_rendez_vous($id_utilisateur, $nom_site);
