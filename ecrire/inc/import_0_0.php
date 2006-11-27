@@ -16,10 +16,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // pff ou vous l'avez trouve ce dump ?
 // http://doc.spip.org/@inc_import_0_0_dist
 function inc_import_0_0_dist($f, $request, $gz=false, $t='') {
-	global $import_ok, $abs_pos, $my_pos;
+	global $import_ok;
 
 	// detruire les tables a restaurer
-	$tables = (!$my_pos) ? import_init_tables() : import_table_choix();
+	$init = $request['init'];
+	$tables = $init($request);
 
 	$import_ok = false;
 	$b = '';
