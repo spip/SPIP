@@ -430,7 +430,7 @@ function interdire_scripts($t) {
 // Securite : utiliser SafeHTML s'il est present dans ecrire/safehtml/
 // http://doc.spip.org/@safehtml
 function safehtml($t) {
-	static $process, $test;
+	static $safehtml;
 
 	# attention safehtml nettoie deux ou trois caracteres de plus. A voir
 	if (strpos($t,'<')===false)
@@ -439,32 +439,10 @@ function safehtml($t) {
 	$t = interdire_scripts($t);
 	$t = echappe_js($t);
 
-	if (!$test) {
-		if ($f = include_spip('safehtml/classes/safehtml', false)) {
-			define('XML_HTMLSAX3', dirname($f).'/');
-			include($f);
-			$process = new safehtml();
-			$process->deleteTags[] = 'param'; // sinon bug Firefox
-		} else die('pas de safe');
-		if ($process)
-			$test = 1; # ok
-		else
-			$test = -1; # se rabattre sur interdire_scripts
-	}
-
-	if ($test > 0) {
-		# reset ($process->clear() ne vide que _xhtml...),
-		# on doit pouvoir programmer ca plus propremement
-		$process->_counter = array();
-		$process->_stack = array();
-		$process->_dcCounter = array();
-		$process->_dcStack = array();
-		$process->_listScope = 0;
-		$process->_liStack = array();
-#		$process->parse(''); # cas particulier ?
-		$process->clear();
-		$t = $process->parse($t);
-	}
+	if (!isset($safehtml))
+		$safehtml = charger_fonction('safehtml', 'inc');
+	if ($safehtml)
+		$t = $safehtml($t);
 
 	return interdire_scripts($t); # gere le < ?php > en plus
 }
