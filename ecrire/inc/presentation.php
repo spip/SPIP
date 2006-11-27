@@ -1338,7 +1338,7 @@ function debut_javascript($admin, $stat)
 	// envoi le fichier JS de config si browser ok.
 		$GLOBALS['browser_layer'] .
 	 	http_script(
-			(isset($_COOKIE['spip_accepte_ajax']) >= 1
+			((isset($_COOKIE['spip_accepte_ajax']) && $_COOKIE['spip_accepte_ajax'] >= 1)
 			? ''
 			: "$.ajax('GET', '$testeur')") .
 			"\nvar ajax_image_searching = \n'<div style=\"float: ".$GLOBALS['spip_lang_right'].";\"><img src=\"".url_absolue(_DIR_IMG_PACK."searching.gif")."\" alt=\"\" /></div>';" .
