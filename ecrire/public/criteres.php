@@ -672,13 +672,21 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 		$val[0] = str_replace('image', 'vignette', $val[0]);
 
 	else  {
-	  $nom = $table_des_tables[$type];
-	  list($nom, $desc) = trouver_def_table($nom ? $nom : $type, $boucle);
-	  if (@!array_key_exists($col, $desc['field'])) {
-		if (isset($exceptions_des_jointures[$col]))
-		  // on ignore la table, quel luxe!
-			list($t, $col) = $exceptions_des_jointures[$col];
-		$table = calculer_critere_externe_init($boucle, $boucle->jointures, $col, $desc, ($crit->cond OR $op !='='), $t);
+		$nom = $table_des_tables[$type];
+		list($nom, $desc) = trouver_def_table($nom ? $nom : $type, $boucle);
+		if (@!array_key_exists($col, $desc['field'])) {
+	  	$calculer_critere_externe = 'calculer_critere_externe_init';
+			// gestion par les plugins des jointures tordues pas automatiques mais necessaires
+			if (isset($exceptions_des_jointures[$table][$col])){
+				if (count($exceptions_des_jointures[$table][$col])==3)
+					list($t, $col, $calculer_critere_externe) = $exceptions_des_jointures[$table][$col];
+				else
+					list($t, $col) = $exceptions_des_jointures[$table][$col];
+			}
+			else if (isset($exceptions_des_jointures[$col]))
+			  // on ignore la table, quel luxe!
+				list($t, $col) = $exceptions_des_jointures[$col];
+			$table = $calculer_critere_externe($boucle, $boucle->jointures, $col, $desc, ($crit->cond OR $op !='='), $t);
 	  }
 	}
 	// ajout pour le cas special d'une condition sur le champ statut:
