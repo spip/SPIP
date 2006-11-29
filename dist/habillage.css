@@ -305,64 +305,36 @@ q, blockquote, .liste-articles li .texte, h3.spip, .voirskel {
 /*  Habillage des formulaires
 /*  ------------------------------------------ */
 
-/* Correction des styles HTML par defaut */
-.formulaire_spip form, .formulaire_spip fieldset, .formulaire_spip legend, .formulaire_spip label, .formulaire_spip input, .formulaire_spip textarea, .formulaire_spip select, .formulaire_spip option { margin: 0; padding: 0; border: none; background: none; }
+.formulaire_spip { text-align: left; font-size: 0.77em; }
+.formulaire_spip p { margin: 0.5em 0; padding: 0; }
 
-/* Styles des formulaires de Spip */
-.formulaire_spip {
-	text-align: left;
-	font-size: 0.77em;
-}
-
-.formulaire_spip p {
-	margin: 0.5em 0;
-	padding: 0; }
-
-.formulaire_spip fieldset {
-    display: block;
-	margin: 0.77em 0;
-	padding: 0.77em;
-	border: 1px dotted; }
-.formulaire_spip legend { 
-	font-weight: bold; 
-	padding: 3px;
-	background: #FFF; /* Sinon, superposition dans MSIE */
-}
+.formulaire_spip fieldset {}
+.formulaire_spip legend {}
 
 .formulaire_spip label {}
-.formulaire_spip .forml {
-	width: 99%;
-	padding: 1px;
-	border: 1px inset;
-	font-family: inherit;
-	font-size: inherit; }
+.formulaire_spip .forml { width: 99%; font-family: inherit; font-size: inherit; }
 
+/* Boutons */
 .spip_bouton { text-align: right; }
-.spip_bouton input {
-	padding: 1px 2px;
-	border: 2px outset;
-	font-weight: bold;
-	float: right; }
+.spip_bouton input {}
 
 /* Reponse du formulaire */
-.reponse_formulaire { font-weight: bold; color: #F00; }
-fieldset.reponse_formulaire { border: 1px dotted; font-weight: normal; }
+.reponse_formulaire { font-weight: bold; color: #e86519; }
+fieldset.reponse_formulaire { border-color: #e86519; font-weight: normal; }
 
 /* Previsualisation du message */
-fieldset.previsu {
-	padding: 1em;
-	border: 1px solid; }
+fieldset.previsu { padding: 1em; }
 
 /* Formulaire de login au forum */
 .formulaire_login_forum .forml { width: 12em; }
 .formulaire_login_forum .spip_logos { float: right; padding-left: 10px; }
 
 /* Choix des mots-clefs */
-ul.choix_mots { margin: 0; padding: 0; width: 47%; float: left; list-style: none; } 
+ul.choix_mots { float: left; width: 47%; margin: 0; padding: 0; list-style: none; } 
 ul.choix_mots label { display: inline; }
 
 /* Formulaire de recherche */
-.formulaire_recherche { text-align: left; width: 12em; }
+.formulaire_recherche { width: 12em; text-align: left; }
 .formulaire_recherche label { display: none; }
 
 /*  ------------------------------------------
