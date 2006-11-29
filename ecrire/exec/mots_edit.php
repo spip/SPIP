@@ -194,7 +194,7 @@ global
 		$res .= "<b>"._T('info_titre_mot_cle')."</b> "._T('info_obligatoire_02');
 		$res .= aide ("mots");
 
-		$res .= "<br /><input type='text' name='titre_mot' class='formo' value=\"$titre_mot\" size='40' $onfocus />";
+		$res .= "<br /><input type='text' name='titre' class='formo' value=\"$titre_mot\" size='40' $onfocus />";
 
 		$res .= determine_groupe_mots($table, $id_groupe);
 
@@ -226,8 +226,9 @@ global
 		$res .= "</div>";
 
 		if (!$redirect)
-		  $redirect = generer_url_ecrire('mots_tous','',false,true);
-		else $redirect = rawurldecode($redirect);
+			$redirect = generer_url_ecrire('mots_edit','id_mot='.$id_mot, '&',true);
+		else
+			$redirect = rawurldecode($redirect);
 		echo generer_action_auteur("instituer_mot", $id_mot, _DIR_RESTREINT_ABS . $redirect, $res);
 
 		fin_cadre_formulaire();
