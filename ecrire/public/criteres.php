@@ -645,6 +645,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 
 	list($fct, $col, $op, $val, $args_sql) =
 	  calculer_critere_infixe_ops($idb, $boucles, $crit);
+	$col_alias = $col;
 
 	// Cas particulier : id_enfant => utiliser la colonne id_objet
 	if ($col == 'id_enfant')
@@ -713,7 +714,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	// inserer la fonction SQL
 	if ($fct) $arg = "$fct($arg$args_sql)";
 
-	return array($arg, $op, $val, $col);
+	return array($arg, $op, $val, $col_alias);
 }
 
 // Faute de copie du champ id_secteur dans la table des forums,
