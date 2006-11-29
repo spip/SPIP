@@ -971,7 +971,7 @@ function balise_URL_ECRIRE_dist($p) {
 }
 
 //
-// #URL_ACTION_AUTEUR{naviguer} -> ecrire/?exec=naviguer
+// #URL_ACTION_AUTEUR{converser,arg,redirect} -> ecrire/?action=converser&arg=arg&hash=xxx&redirect=redirect
 //
 // http://doc.spip.org/@balise_URL_ACTION_AUTEUR_dist
 function balise_URL_ACTION_AUTEUR_dist($p) {
