@@ -20,7 +20,7 @@
 <legend><:previsualisation:></legend>
 <p><strong>#ENV{sujet}</strong> - <em>#ENV{mail}</em></p>
 [(#ENV{texte}|nl2br)]
-<div class="spip_bouton"><input type="submit" name="confirmer#ENV{id}" value="(#ENV{boutonconfirmation})" /></div>
+<p class="spip_bouton"><input type="submit" name="confirmer#ENV{id}" value="(#ENV{boutonconfirmation})" /></p>
 </fieldset>]
 
 [(#REM) Sinon, formulaire normal ]
@@ -34,7 +34,7 @@
 <p><label for="texte_message_auteur#ENV{id}"><:info_texte_message:></label>
 <textarea class="forml" name="texte_message_auteur#ENV{id}" id="texte_message_auteur#ENV{id}" rows="10" cols="40">#ENV{texte}</textarea></p>
 
-[<div class="spip_bouton"><input type="submit" name="valide" value="(#ENV{bouton})" /></div>]
+[<p class="spip_bouton"><input type="submit" name="valide" value="(#ENV{bouton})" /></p>]
 </fieldset>
 
 </form>

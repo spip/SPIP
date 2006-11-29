@@ -339,7 +339,6 @@ q, blockquote, .liste-articles li .texte, h3.spip, .voirskel {
 
 .spip_bouton { text-align: right; }
 .spip_bouton input {
-	margin: 3px 0;
 	padding: 1px 2px;
 	border: 2px outset;
 	font-weight: bold;
