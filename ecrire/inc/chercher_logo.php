@@ -30,6 +30,7 @@ function inc_chercher_logo_dist($id, $id_type, $mode='on') {
 	return array();
 }
 
+// http://doc.spip.org/@type_du_logo
 function type_du_logo($id_type) {
 	return isset($GLOBALS['table_logos'][$id_type])
 		? $GLOBALS['table_logos'][$id_type]

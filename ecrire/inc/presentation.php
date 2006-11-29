@@ -1809,6 +1809,7 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30)
 	. "</div></div>";
 }
 
+// http://doc.spip.org/@afficher_numero_edit
 function afficher_numero_edit($id, $key, $script)
 {
 	global $spip_lang_right, $spip_lang_left;
