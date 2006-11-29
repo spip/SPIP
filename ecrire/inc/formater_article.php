@@ -27,9 +27,7 @@ function inc_formater_article_dist($row)
 			$chercher_logo = charger_fonction('chercher_logo', 'inc');
 		$formater_auteur = charger_fonction('formater_auteur', 'inc');
 		$img_admin = http_img_pack("admin-12.gif", "", " width='12' height='12'", _T('titre_image_admin_article'));
-		$nb = ($options != "avancees")
-		  ? ''
-		  : _T('info_numero_abbreviation');
+		$nb = ($options == "avancees");
 		if (($GLOBALS['meta']['multi_rubriques'] == 'oui' AND (!isset($GLOBALS['id_rubrique']))) OR $GLOBALS['meta']['multi_articles'] == 'oui') {
 			$afficher_langue = true;
 			$langue_defaut = !isset($GLOBALS['langue_rubrique'])
@@ -88,7 +86,7 @@ function inc_formater_article_dist($row)
 	$s = affdate_jourcourt($date);
 	$vals[] = $s ? $s : '&nbsp;';
 
-	if  ($nb) $vals[]= "<b>" . $nb . $id_article . '</b>';
+	if  ($nb) $vals[]= afficher_numero_edit($id_article, 'id_article', 'articles_edit');
 
 	if ($options == "avancees") { // Afficher le numero (JMB)
 		  $largeurs = array(11, '', 80, 100, 50);
