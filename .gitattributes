@@ -216,11 +216,12 @@ dist/inc-petition.html -text
 dist/inc-pied.html -text
 dist/inc-rss-item.html -text
 dist/inc-rubriques.html -text
+dist/javascript/ajaxCallback.js -text
 dist/javascript/articles_tous_edite.js -text
 dist/javascript/async_upload.js -text
 dist/javascript/dragdrop_interface.js -text
-dist/javascript/jquery-1.0.3-forms.js -text
-dist/javascript/jquery-1.0.3-forms.pack.js -text
+dist/javascript/form.js -text
+dist/javascript/jquery-1.0.3.js -text
 dist/javascript/pause.js -text
 dist/jquery.js.html -text
 dist/modeles/article_mots.html -text
