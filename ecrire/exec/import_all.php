@@ -116,9 +116,36 @@ function exec_import_all_dist()
 	// precaution inutile I think (esj)
 	list($my_date) = spip_fetch_array(spip_query("SELECT UNIX_TIMESTAMP(maj) AS d FROM spip_meta WHERE nom='debut_restauration'"), SPIP_NUM);
 
-	if ($my_date) echo import_tables($request, $dir);
+	if ($my_date) {
 
+		if ($request['insertion'] == 'passe2') {
+			include_spip('inc/import_insere');
+			$trans = translate_init($request);
+		} else $trans = array();
+
+		$res = import_tables($request, $dir, $trans);
+	}
+
+	echo $res, "</body></html>\n";
+
+	if ($request['insertion'] == 'on') {
+			$request['insertion'] = 'passe2';
+			import_all_debut($request);
+			redirige_par_entete('./');
+	} else if ($request['insertion']) 
+			spip_query("DROP TABLE spip_translate");
+	  
+	if ($charset = $GLOBALS['meta']['charset_restauration']) {
+			ecrire_meta('charset', $charset);
+			ecrire_metas();
+	}
+
+	detruit_restaurateur();
 	import_all_fin();
+	include_spip('inc/rubriques');
+	calculer_rubriques();
+
+	if (!$res) ecrire_acces();	// Mise a jour du fichier htpasswd
 }
 
 // http://doc.spip.org/@import_all_debut

@@ -164,8 +164,8 @@ function import_tables($request, $dir, $trans=array()) {
 	// ou initialisation de la table des translations,
 	// mais pas lors d'une reprise.
 
-	include_spip('inc/import_insere');
 	if ($request['insertion']=='on') {
+		include_spip('inc/import_insere');
 		$request['init'] = (!$my_pos) ? 'insere_1_init' : 'insere_2_init';		$request['boucle'] = 'import_insere';
 	} elseif ($request['insertion']=='passe2') {
 		$request['init'] = 'insere_2_init';
@@ -200,7 +200,7 @@ function import_tables($request, $dir, $trans=array()) {
 			ecrire_meta('charset_restauration', $charset);
 		else	ecrire_meta('charset_insertion', $charset);
 		ecrire_metas();
-		spip_log("Debut de l'importation ($charset $version_archive)" . ($i ? ' en mode insertion' : ''));
+		spip_log("Debut de l'importation (charset: $charset, archive: $version_archive)" . ($i ? " insertion $i" : ''));
 	} else {
 		spip_log("Reprise de l'importation interrompue en $my_pos");
 		$_fseek = ($gz) ? gzseek : fseek;
@@ -222,39 +222,21 @@ function import_tables($request, $dir, $trans=array()) {
 	// au debut de la restauration
 		ecrire_meta("status_restauration", "$abs_pos");
 		if ($oldtable != $table) {
+			spip_log("Restauration de $table");
 			affiche_progression_javascript($abs_pos,$size,$table);
-			if ($oldtable) spip_log("Fin de restauration de $oldtable");
+
 			$time_javascript = time();
 			$oldtable = $table;
 		}
 	}
-
 	if (!$import_ok) 
 		$res =  _T('avis_archive_invalide');
 	else {
-
-		affiche_progression_javascript('100 %', $size);
-
-		if ($request['insertion'] == 'on') {
-
-			$request['insertion'] = 'passe2';
-			import_all_debut($request);
-			$trans = translate_init($request);
-			spip_log("import_all passe 2");
-			import_tables($request, $dir, $trans);
-			spip_query("DROP TABLE spip_translate");
-		}
-		if ($charset = $GLOBALS['meta']['charset_restauration']) {
-			ecrire_meta('charset', $charset);
-			ecrire_metas();
-		}
-		include_spip('inc/rubriques');
-		calculer_rubriques();
 		$res = '';
+		affiche_progression_javascript('100 %', $size);
 	}
-	detruit_restaurateur();
-	if (!$res) ecrire_acces();	// Mise a jour du fichier htpasswd
-	return $res . "</body></html>\n";;
+
+	return $res ;
 }
 
 // http://doc.spip.org/@import_affiche_javascript
