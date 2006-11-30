@@ -38,14 +38,15 @@ function insere_1_init($request) {
 
   //  preparation de la table des translations
 	$spip_translate = array(
-		"type" 	     =>  "VARCHAR(16) NOT NULL",
-		"titre"	     =>  "text NOT NULL",
-                "id_old"     => "BIGINT (21) DEFAULT '0' NOT NULL",
-                "id_new"    => "BIGINT (21) DEFAULT '0' NOT NULL");
+		"type"		=> "VARCHAR(16) NOT NULL",
+		"ajout"		=> "ENUM('0', '1')",
+		"titre"		=> "text NOT NULL",
+                "id_old"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
+                "id_new"	=> "BIGINT (21) DEFAULT '0' NOT NULL");
 
 	$spip_translate_key = array(
-                "PRIMARY KEY"   => "id_old, id_new, type",
-                "KEY id_old"        => "id_old");
+                "PRIMARY KEY"	=> "id_old, id_new, type",
+                "KEY id_old"	=> "id_old");
 
 	include_spip('base/create');
 	spip_create_table('spip_translate', $spip_translate, $spip_translate_key, true);
@@ -63,7 +64,7 @@ function translate_init($request) {
 	$q = spip_query("SELECT * FROM spip_translate");
 	$trans = array();
 	while ($r = spip_fetch_array($q)) {
-		$trans[$r['type']][$r['id_old']] = array($r['id_new'], $r['titre']);
+		$trans[$r['type']][$r['id_old']] = array($r['id_new'], $r['titre'], intval($r['ajout']));
 	}
 	return $trans;
 }
@@ -74,22 +75,25 @@ function import_insere($values, $table, $desc, $request, $trans) {
 	$type_id = $desc['key']["PRIMARY KEY"];
 
 	// reserver une place dans les tables principales si nouveau
+	$ajout = 0;
 	if ((!function_exists($f = 'import_identifie_' . $type_id))
 	OR (!$n = $f($values, $table, $desc, $request, $trans))) {
 		$n = spip_abstract_insert($table, '', '()');
-		if (!$n)
+		if (!$n) {
 			$GLOBALS['erreur_restauration'] = spip_sql_error();
+			return;
+		}
+		$ajout = 1;
 	}
-
-	// et memoriser la correspondance dans la table auxilaire
+	// et memoriser la correspondance dans la table auxiliaire
 	// si different et pas de recherche dessus plus tard
-	if ($n AND (($n != $values[$type_id]) OR $table != 'id_groupe')) {
+	if (($n != $values[$type_id]) OR $table != 'id_groupe') {
 		if (is_array($n))
-		  list($id, $titre) = $n; // _q() deja applique sur $titre
-		else {$id = $n; $titre = "''";}
+		  list($id, $titre) = $n; 
+		else {$id = $n; $titre = "";}
 		spip_abstract_insert('spip_translate',
-				"(id_old, id_new, titre, type)",
-				"(". $values[$type_id] .",$id, $titre, '$type_id')");
+				"(id_old, id_new, titre, type, ajout)",
+				     "(". $values[$type_id] .",$id, " . _q($titre) . ", '$type_id', '$ajout')");
 	}
 }
 
@@ -98,47 +102,51 @@ function import_translate($values, $table, $desc, $request, $trans) {
 	$vals = '';
 
 	foreach ($values as $k => $v) {
-
 		if ($k=='id_parent' OR $k=='id_secteur') $k = 'id_rubrique';
 
 		if (isset($trans[$k]) AND isset($trans[$k][$v])) {
-			list($g, $titre) = $trans[$k][$v];
+			list($g, $titre, $ajout) = $trans[$k][$v];
 			if ($g < 0) {
 			  // cas du  parent a verifier en plus du titre
-				if (!($g = import_identifie_mot_si_groupe(0-$g, $titre, $trans)))
-					$g = spip_abstract_insert($table, '', '()');
+			  // pour l'instant il n'y a que spip_mots
+				if (!($g = import_identifie_mot_si_groupe(0-$g, $titre, $trans))) {
+					$g = spip_abstract_insert('spip_mots', '', '()');
+					$trans[$k][$v][2]=1;
+					
+				}
 			// Memoriser le nouveau numero pour ne pas recalculer
 			// Mise a jour de spip_translate pas indispensable,
 			// on evite: si vraiment une interrupt a lieu et
 			// retombe dessus, elle recalculera, pas dramatique
-				$trans[$k][$v] = array($g, $titre);
+				$trans[$k][$v][0] = $g;
 			}
 			$v = $g;
 		}
 
-		$vals .= ",$v";
+		$vals .= "," . _q($v);
 	}
-	return spip_query("REPLACE $table (" . join(',',array_keys($values)) . ') VALUES (' .substr($vals,1) . ')');
+	// si le champ titre est la, c'est une equivalence avec un existant
+	// pas la peine d'ecraser avec les memes valerurs
+	$p = $desc['key']["PRIMARY KEY"];
+	$v = $values[$p];
+	if (!isset($trans[$p]) OR !isset($trans[$p][$v]) OR $trans[$p][$v][2])
+		spip_query("REPLACE $table (" . join(',',array_keys($values)) . ') VALUES (' .substr($vals,1) . ')');
 }
 
 
 // deux groupes de mots ne peuvent avoir le meme titre ==> identification
-// http://doc.spip.org/@import_identifie_id_groupe
 function import_identifie_id_groupe($values, $table, $desc, $request, $trans) {
-  // _q() deja appliquee
-	$n = spip_fetch_array(spip_query("SELECT id_groupe FROM spip_groupes_mots WHERE titre=" . $values['titre']));
-	return $n ? $n['id_groupe'] : false;
+	$r = spip_fetch_array(spip_query($q = "SELECT id_groupe, titre FROM spip_groupes_mots WHERE titre=" . _q($values['titre'])), SPIP_NUM);
+	return $r;
 }
 
 // pour un mot le titre est insuffisant, il faut aussi l'identite du groupe.
 // Memoriser ces 2 infos et le signaler a import_translate grace a 1 negatif
-// http://doc.spip.org/@import_identifie_id_mot
 function import_identifie_id_mot($values, $table, $desc, $request, $trans) {
 	return array((0 - $values['id_groupe']), $values['titre']);
 }
 
-// mot de meme et de meme groupe ==> identification
-// http://doc.spip.org/@import_identifie_mot_si_groupe
+// mot de meme titre et de meme groupe ==> identification
 function import_identifie_mot_si_groupe($id_groupe, $titre, $trans)
 {
 	if (!(isset($trans['id_groupe'])
@@ -147,7 +155,7 @@ function import_identifie_mot_si_groupe($id_groupe, $titre, $trans)
 
 	$new = $trans['id_groupe'][$id_groupe][0];
 
-	$r = spip_fetch_array(spip_query($q = "SELECT id_mot, id_groupe FROM spip_mots WHERE titre=" . _q($titre) . " AND id_groupe=$new" ));
+	$r = spip_fetch_array(spip_query("SELECT id_mot FROM spip_mots WHERE titre=" . _q($titre) . " AND id_groupe=$new" ));
 
 	return !$r ? false  : $r['id_mot'];
 }

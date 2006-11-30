@@ -196,12 +196,13 @@ function import_tables($request, $dir, $trans=array()) {
 		$version_archive = $r['version_archive'];
 		ecrire_meta('version_archive_restauration', $version_archive);
 		ecrire_meta('tag_archive_restauration', $tag);
-		if ($request['insertion']=='off')
+		if ( $i = $request['insertion'])
 			ecrire_meta('charset_restauration', $charset);
 		else	ecrire_meta('charset_insertion', $charset);
 		ecrire_metas();
+		spip_log("Debut de l'importation ($charset $version_archive)" . ($i ? ' en mode insertion' : ''));
 	} else {
-		// Reprise de l'importation
+		spip_log("Reprise de l'importation interrompue en $my_pos");
 		$_fseek = ($gz) ? gzseek : fseek;
 		$_fseek($file, $my_pos);
 		$version_archive = $GLOBALS['meta']['version_archive_restauration'];
@@ -214,15 +215,17 @@ function import_tables($request, $dir, $trans=array()) {
 	if ($GLOBALS['flag_ob_flush']) ob_flush();
 	flush();
 
+	$oldtable ='';
 	while ($table = $fimport($file, $request, $gz, $trans)) {
 	// Pas d'ecriture SQL car sinon le temps double.
 	// Il faut juste faire attention a bien lire_metas()
 	// au debut de la restauration
 		ecrire_meta("status_restauration", "$abs_pos");
-
-		if (time() - $time_javascript > 3) {	// 3 secondes
+		if ($oldtable != $table) {
 			affiche_progression_javascript($abs_pos,$size,$table);
+			if ($oldtable) spip_log("Fin de restauration de $oldtable");
 			$time_javascript = time();
+			$oldtable = $table;
 		}
 	}
 
