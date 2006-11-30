@@ -929,7 +929,7 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 	$vals[] = $s;
 			
 	if ($options == "avancees") {
-		$vals[] = afficher_numero_edit($id_breve, 'id_breve', 'breves_edit');
+		$vals[] = afficher_numero_edit($id_breve, 'id_breve', 'breve');
 	}
 			
 	return $vals;
@@ -1780,7 +1780,6 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30)
 	if ($options != "avancees") return '';
 
 	$table = $type . 's';
-	$script = $type . 's_edit';
 	$key = 'id_' . $type;
 
 	$voss = spip_query("SELECT $key AS id, titre, statut FROM spip_$table WHERE id_rubrique=$id_rubrique AND (statut = 'publie' OR statut = 'prop') AND ($key != $id) ORDER BY $order DESC LIMIT $limit");
@@ -1791,7 +1790,7 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30)
 
 	while($row = spip_fetch_array($voss)) {
 		$n = $row['id'];
-		$retour .= afficher_numero_edit($n, $key, $script)
+		$retour .= afficher_numero_edit($n, $key, $type)
 		. "<a class='"
 		. $row['statut']
 		. "' style='font-size: 10px;' href='"
@@ -1810,23 +1809,30 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30)
 }
 
 // http://doc.spip.org/@afficher_numero_edit
-function afficher_numero_edit($id, $key, $script)
+function afficher_numero_edit($id, $key, $type)
 {
 	global $spip_lang_right, $spip_lang_left;
 	static $numero , $style='' ;
-	
+
 	if (!$style) {
 		$style = " style='float: $spip_lang_right; padding-$spip_lang_left: 4px;font-size: 10px; color: black; '"; 
 
 		$numero = _T('info_numero_abbreviation');
 	}
 
-	return "<a$style\nhref='"
-	. generer_url_ecrire($script,"$key=$id")
-	. "'><b>"
+	if (!autoriser('modifier',$type,$id)) {
+		$bal ='span';
+		$href = '';
+	} else {
+		$bal = 'a';
+		$href = "\nhref='"
+		. generer_url_ecrire($type . "s_edit","$key=$id")
+		. "'";
+	}
+	return "<$bal$style$href><b>"
 	. $numero
 	. $id
-	. "</b></a>";
+	. "</b></$bal>";
 }
 
 //
