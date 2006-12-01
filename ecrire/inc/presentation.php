@@ -929,6 +929,7 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 	$vals[] = $s;
 			
 	if ($options == "avancees") {
+		include_spip("inc/autoriser");
 		$vals[] = afficher_numero_edit($id_breve, 'id_breve', 'breve');
 	}
 			
