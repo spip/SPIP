@@ -56,8 +56,7 @@ function inc_import_1_3_dist($lecteur, $request, $gz=false) {
 		$fin = '/' . $GLOBALS['meta']['tag_archive_restauration'];
 	}
 
-	$b = '';
-
+	$b = false;
 	if (!($table = xml_fetch_tag($lecteur, $b, $gz))) return false;
 	if ($table == $fin) return !($import_ok = true);
 	$new = isset($tables_trans[$table]) ? $tables_trans[$table]: $table; 
@@ -122,8 +121,8 @@ function import_lire_champs($f, $fields, $gz, $phpmyadmin, $table)
 	$char = $GLOBALS['meta']['charset_insertion'];
 	if ($char == $GLOBALS['meta']['charset_restauration']) $char = '';
 
+	$b = false;
 	for (;;) {
-		$b = '';
 		if (!($col = xml_fetch_tag($f, $b, $gz))) return false;
 		if ($col[0] == '/') { 
 			if ($col != $table) 
@@ -131,7 +130,7 @@ function import_lire_champs($f, $fields, $gz, $phpmyadmin, $table)
 				spip_log("restauration : table $table tag fermant $col innatendu");
 			break;
 		}
-		$value = '';
+		$value = true;
 		if (!xml_fetch_tag($f, $value, $gz)) return false;
 
 		if ( ($col != 'maj') AND (isset($fields[$col])) ) {

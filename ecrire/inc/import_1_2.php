@@ -64,7 +64,7 @@ function inc_import_1_2_dist($f, $request, $gz=false) {
 		);
 	}
 	$import_ok = false;
-	$b = '';
+	$b = false;
 	// Lire le type d'objet
 	if (!($type = xml_fetch_tag($f, $b, $gz))) return false;
 	if ($type == '/SPIP') return !($import_ok = true);
@@ -89,10 +89,10 @@ function inc_import_1_2_dist($f, $request, $gz=false) {
 	$values = array();
 	// Lire les champs de l'objet
 	for (;;) {
-		$b = '';
+		$b = false;
 		if (!($col = xml_fetch_tag($f, $b, $gz))) return false;
 		if ($col == '/'.$type) break;
-		$value = '';
+		$value = true;
 		if (!xml_fetch_tag($f, $value, $gz)) return false;
 		if (substr($col, 0, 5) == 'lien:') {
 			$type_lien = substr($col, 5);

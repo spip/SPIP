@@ -34,39 +34,54 @@ $IMPORT_tables_noerase[]='spip_ajax_fonc';
 $IMPORT_tables_noerase[]='spip_meta';
 $GLOBALS['flag_ob_flush'] = function_exists('ob_flush');
 
+// Retourne la premiere balise XML figurant dans le buffet de la sauvegarde 
+// et avance dans ce buffet jusqu'au '>' de cette balise.
+// Si le 2e argument (passe par reference) est non vide
+// ce qui precede cette balise y est mis.
+// Les balises commencant par <! sont ignorees
+
 // http://doc.spip.org/@xml_fetch_tag
-function xml_fetch_tag($f, &$before, $gz=false, $skip_comment=true) {
+function xml_fetch_tag($f, &$before, $gz=false, $skip='!') {
 	global $buf, $abs_pos;
-	static $buf_len = 500;
 	static $_fread,$_feof,$_ftell;
+	static $ent = array('&amp;','&lt;');
+	static $brut = array('&','<');
+
 	if (!$_fread){
 		$_fread = ($gz) ? 'gzread' : 'fread';
 		$_feof = ($gz) ? 'gzeof' : 'feof';
 		$_ftell = ($gz) ? 'gztell' : 'ftell';
 	}
 	
-	while (preg_match("{<([^>]*?)>}s",$buf)==FALSE)
-		$buf .= $_fread($f, $buf_len);
-	$chars = preg_split("{<([^>]*?)>}s",$buf,2,PREG_SPLIT_DELIM_CAPTURE);
+	while (($b=strpos($buf,'<'))===false) 
+		$buf .= $_fread($f, 1024);
 
-	$before .= str_replace(array('&amp;','&lt;'),array('&','<'),$chars[0]);
-	$tag = $chars[1];
-	$buf = $chars[2];
+	if ($before) $before = str_replace($ent,$brut,substr($buf,0,$b));
+
+	// pour ignorer un > de raccourci Spip avant un < de balise XML
+
+	$buf = substr($buf,$b+1); 
+
+	while (($e=strpos($buf,'>'))===false)
+		$buf .= $_fread($f, 1024);
+
+	$tag = substr($buf, 0, $e);
+	$buf = substr($buf,$e+1);
 
 	$abs_pos = $_ftell($f) - strlen($buf);
+	
+	if ($tag[0]!=$skip) return $tag;
 
-	if (($skip_comment==true)&&(substr($tag,0,3)=='!--')){
-	  return xml_fetch_tag($f,$before,$gz,$skip_comment);
-	}
-	else
-		return $tag;
+	return xml_fetch_tag($f,$before,$gz,$skip_comment);
 }
 
 // http://doc.spip.org/@xml_parse_tag
 function xml_parse_tag($texte) {
+
 	list($tag, $atts) = split('[[:space:]]+', $texte, 2);
 	$result[0] = $tag;
 	$result[1] = '';
+
 	if (!$atts) return $result;
 	if ($tag=='!--'){
 	  $result[1]=preg_replace(",(.*?)--$,s",'\\1',$atts);
@@ -83,11 +98,12 @@ function xml_parse_tag($texte) {
 
 // http://doc.spip.org/@import_debut
 function import_debut($f, $gz=false) {
-	$b = "";
+
 //  Pour les anciennes archives, indiquer le charset par defaut:
 	$charset = 'iso-8859-1'; 
 //  les + recentes l'ont en debut de ce fichier 
 	$flag_phpmyadmin = false;
+	$b = false;
 	while ($t = xml_fetch_tag($f, $b, $gz, false)) {
 		$r = xml_parse_tag($t);
 		if ($r[0] == '?xml' AND $r[1]['encoding'])
@@ -104,7 +120,6 @@ function import_debut($f, $gz=false) {
 			$r[2] = $charset;
 			return $r;
 		}
-		$b = "";
 	}
 	// improbable: fichier correct avant debut_admin et plus apres
 	import_all_fin();
