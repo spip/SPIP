@@ -26,11 +26,11 @@
 
 			<div class="cartouche">
 				[(#LOGO_RUBRIQUE||image_reduire{200,200})]
-				<h1 class="titre #EDIT{titre}">#TITRE</h1>
+				<h1 class="#EDIT{titre} titre">#TITRE</h1>
 				<small><:dernier_ajout:> &ndash; [(#DATE|nom_jour) ][(#DATE|affdate).]</small>
 			</div>
 
-			[<div class="chapo #EDIT{texte}">(#TEXTE)</div>]
+			[<div class="#EDIT{texte} chapo">(#TEXTE)</div>]
 
 			<br class="nettoyeur" />
 

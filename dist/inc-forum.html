@@ -14,12 +14,12 @@
 
 		<div class="forum-message">
 			<div class="forum-chapo">
-				<h3 class="forum-titre #EDIT{titre}"><a href="#forum#ID_FORUM" name="forum#ID_FORUM" id="forum#ID_FORUM">#TITRE</a></h3>
+				<h3 class="#EDIT{titre} forum-titre"><a href="#forum#ID_FORUM" name="forum#ID_FORUM" id="forum#ID_FORUM">#TITRE</a></h3>
 				<small>[(#DATE|affdate)][&nbsp;(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> <span class="#EDIT{qui}">(#NOM|couper{80})</span>]</small>
 			</div>
-			<div class="forum-texte #EDIT{texte}">
+			<div class="#EDIT{texte} forum-texte">
 				[(#TEXTE|lignes_longues)]
-				[<p class="forum-lien #EDIT{hyperlien}"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+				[<p class="#EDIT{hyperlien} forum-lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
 				[<p class="forum-repondre-message"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_message:></a></p>]
 			</div>
 		</div>
@@ -31,12 +31,12 @@
 			<li>
 				<div class="forum-message">
 					<div class="forum-chapo">
-						<strong class="forum-titre #EDIT{titre}"><a href="#forum#ID_FORUM" name="forum#ID_FORUM" id="forum#ID_FORUM">#TITRE</a></strong>
+						<strong class="#EDIT{titre} forum-titre"><a href="#forum#ID_FORUM" name="forum#ID_FORUM" id="forum#ID_FORUM">#TITRE</a></strong>
 						<small>[(#DATE|affdate)][&nbsp;(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> <span class="#EDIT{qui}">(#NOM|couper{80})</span>]</small>
 					</div>
-					<div class="forum-texte #EDIT{texte}">
+					<div class="#EDIT{texte} forum-texte">
 						[(#TEXTE|lignes_longues)]
-						[<p class="forum-lien #EDIT{hyperlien}"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+						[<p class="#EDIT{hyperlien} forum-lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
 						[<p class="forum-repondre-message"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_message:></a></p>]
 					</div>
 				</div>

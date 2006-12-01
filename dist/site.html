@@ -26,11 +26,11 @@
 
 			<div class="cartouche">
 				<a href="#URL_SITE">[(#LOGO_SITE||image_reduire{150,100})]</a>
-				<h1 class="titre #EDIT{nom_site}">#NOM_SITE</h1>
-				[<p class="soustitre #EDIT{url_site}"><a href="#URL_SITE" class="spip_out">(#URL_SITE|couper{80})</a></p>]
+				<h1 class="#EDIT{nom_site} titre">#NOM_SITE</h1>
+				[<p class="#EDIT{url_site} soustitre"><a href="#URL_SITE" class="spip_out">(#URL_SITE|couper{80})</a></p>]
 			</div>
 
-			[<div class="chapo #EDIT{descriptif}">(#DESCRIPTIF)</div>]
+			[<div class="#EDIT{descriptif} chapo">(#DESCRIPTIF)</div>]
 
 			[(#REM) Articles issus de la syndication ]
 			<B_articles>
