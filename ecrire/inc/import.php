@@ -153,9 +153,8 @@ function detruit_restaurateur()
 }
 
 // http://doc.spip.org/@import_tables
-function import_tables($request, $dir, $trans=array()) {
+function import_tables($request, $dir) {
 	global $import_ok, $abs_pos,  $affiche_progression_pourcent;
-	static $time_javascript;
 
 	$my_pos = (!isset($GLOBALS['meta']["status_restauration"])) ? 0 :
 		$GLOBALS['meta']["status_restauration"];
@@ -216,7 +215,7 @@ function import_tables($request, $dir, $trans=array()) {
 	flush();
 
 	$oldtable ='';
-	while ($table = $fimport($file, $request, $gz, $trans)) {
+	while ($table = $fimport($file, $request, $gz)) {
 	// Pas d'ecriture SQL car sinon le temps double.
 	// Il faut juste faire attention a bien lire_metas()
 	// au debut de la restauration
@@ -224,11 +223,10 @@ function import_tables($request, $dir, $trans=array()) {
 		if ($oldtable != $table) {
 			spip_log("Restauration de $table");
 			affiche_progression_javascript($abs_pos,$size,$table);
-
-			$time_javascript = time();
 			$oldtable = $table;
 		}
 	}
+
 	if (!$import_ok) 
 		$res =  _T('avis_archive_invalide');
 	else {

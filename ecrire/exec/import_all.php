@@ -118,12 +118,13 @@ function exec_import_all_dist()
 
 	if ($my_date) {
 
+		global $trans;
 		if ($request['insertion'] == 'passe2') {
 			include_spip('inc/import_insere');
 			$trans = translate_init($request);
 		} else $trans = array();
 
-		$res = import_tables($request, $dir, $trans);
+		$res = import_tables($request, $dir);
 	}
 
 	echo $res, "</body></html>\n";

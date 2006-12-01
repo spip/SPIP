@@ -37,8 +37,8 @@ function description_table($nom){
 }
 
 // http://doc.spip.org/@inc_import_1_3_dist
-function inc_import_1_3_dist($lecteur, $request, $gz=false, $trans=array()) {
-	global $import_ok, $abs_pos, $tables_trans;
+function inc_import_1_3_dist($lecteur, $request, $gz=false) {
+  global $import_ok, $abs_pos, $tables_trans,  $trans;
 	static $tables = '';
 	static $phpmyadmin, $fin;
 	static $field_desc = array ();
@@ -102,13 +102,13 @@ function inc_import_1_3_dist($lecteur, $request, $gz=false, $trans=array()) {
 				     '/' . $table);
 
 	if ($values === false) return  ($import_ok = false);
-	if ($values) $boucle($values, $new, $desc, $request, $trans);
+	if ($values) $boucle($values, $new, $desc, $request);
 
 	return $import_ok = $new;
 }
 
 // http://doc.spip.org/@import_replace
-function import_replace($values, $table, $desc, $request, $trans) {
+function import_replace($values, $table, $desc, $request) {
 	if (!spip_query("REPLACE $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',',array_map('_q', $values)) . ')')) {
 		$GLOBALS['erreur_restauration'] = spip_sql_error();
   }
