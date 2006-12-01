@@ -134,6 +134,7 @@ function import_translate($values, $table, $desc, $request) {
 		spip_query($q = "REPLACE $table (" . join(',',array_keys($values)) . ') VALUES (' .substr($vals,1) . ')');
 }
 
+// http://doc.spip.org/@importe_translate_maj
 function importe_translate_maj($k, $v)
 {
   global $trans;
@@ -152,6 +153,7 @@ function importe_translate_maj($k, $v)
 	return $g;
 }
 
+// http://doc.spip.org/@importe_raccourci
 function importe_raccourci($regs, $k, $v)
 {
 	$lien = vider_url($regs[3]); # supprimer 'http://' ou 'mailto:'
@@ -204,12 +206,14 @@ function import_identifie_parent_id_mot($id_groupe, $titre, $v)
 
 // pour une rubrique le titre est insuffisant, il faut l'identite du parent
 // Memoriser ces 2 infos et le signaler a import_translate grace a 1 negatif
+// http://doc.spip.org/@import_identifie_id_rubrique
 function import_identifie_id_rubrique($values, $table, $desc, $request) {
 	return array((0 - $values['id_parent']), $values['titre']);
 }
 
 // renumerotation en cascade. 
 // rubrique de meme titre et de meme parent ==> identification
+// http://doc.spip.org/@import_identifie_parent_id_rubrique
 function import_identifie_parent_id_rubrique($id_parent, $titre, $v)
 {
 	global $trans;
@@ -245,6 +249,7 @@ function import_identifie_parent_id_rubrique($id_parent, $titre, $v)
 // reserver la place en mettant titre et parent tout de suite
 // pour que le SELECT ci-dessus fonctionne a la prochaine occurrence
 
+// http://doc.spip.org/@import_alloue_id_rubrique
 function import_alloue_id_rubrique($id_parent, $titre, $v) {
 	$titre = _q($titre);
 	$r = spip_abstract_insert('spip_rubriques', '(titre, id_parent)', "($titre,$id_parent)");
