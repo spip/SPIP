@@ -36,10 +36,18 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 	global $spip_display, $spip_lang_left;
 	static $accesskey = 97; // a
 
+	//zoom:1 fixes all expanding blocks in IE, see authors block in articles.php
+	//being not standard, next step can be putting this kind of hacks in a different stylesheet
+	//visible to IE only using conditional comments.  
+	
+	$style_cadre = ($GLOBALS["browser_name"]=="MSIE")? " style='zoom:1;":" style='";
 	if ($spip_display != 1 AND $spip_display != 4 AND strlen($icone) > 1) {
-		$style_gauche = " padding-$spip_lang_left: 38px;";
-		$style_cadre = " style='margin-top: 14px;'";
-	} else $style_cadre = $style_gauche = '';
+		$style_gauche = "padding-$spip_lang_left: 38px;";
+		$style_cadre .= "margin-top: 14px;'";
+	} else {
+		$style_cadre .= "'"; 
+		$style_gauche = '';
+	}
 	
 	// accesskey pour accessibilite espace prive
 	if ($accesskey <= 122) // z
@@ -82,7 +90,7 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 	
 	$ret .= "</div>";
 	
-	$ret .= "\n<div class='cadre-padding' style='overflow:hidden;'>";
+	$ret .= "\n<div class='cadre-padding' style='overflow:hidden".($GLOBALS["browser_name"]=="MSIE"?";zoom:1":"")."'>";
 
 
 	return $ret;
@@ -552,9 +560,9 @@ function puce_statut_article($id, $statut, $id_rubrique, $ajax = false) {
 		else{
 		  $inser_puce = "\n<div class='puce_article' id='statut$id'$dir_lang>".
 			  http_img_pack($puce, $title, "id='imgstatutarticle$id' style='margin: 1px;'") ."</div>";
-			if ($script==NULL){
+			if ($script==NULL && _SPIP_AJAX){
 				$action = "'".generer_url_ecrire('puce_statut_article',"id='+id",true);
-				$script = "<script type='text/javascript'><!--\n";
+				$script = "<script type='text/javascript'>\n";
 				$script .= "$(document).ready(function(){
 					$('div.puce_article').mouseover( function() {
 						if(this.puce_loaded) return;
@@ -568,7 +576,7 @@ function puce_statut_article($id, $statut, $id_rubrique, $ajax = false) {
 						});
 					
 				})";
-				$script .= "//--></script>";
+				$script .= "</script>";
 				$inser_puce = $script . $inser_puce;
 			}
 		}
