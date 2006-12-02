@@ -37,8 +37,8 @@ function description_table($nom){
 }
 
 // http://doc.spip.org/@inc_import_1_3_dist
-function inc_import_1_3_dist($lecteur, $request, $gz=false) {
-  global $import_ok, $abs_pos, $tables_trans,  $trans;
+function inc_import_1_3_dist($lecteur, $request, $gz='fread') {
+  global $import_ok, $tables_trans,  $trans;
 	static $tables = '';
 	static $phpmyadmin, $fin;
 	static $field_desc = array ();
@@ -125,9 +125,11 @@ function import_lire_champs($f, $fields, $gz, $phpmyadmin, $table)
 	for (;;) {
 		if (!($col = xml_fetch_tag($f, $b, $gz))) return false;
 		if ($col[0] == '/') { 
-			if ($col != $table) 
+			if ($col != $table) {
 		    // autre tag fermant ici est une erreur de format
-				spip_log("restauration : table $table tag fermant $col innatendu");
+			  spip_log("restauration de la table $table, tag fermant inattendu:");
+			  spip_log($col);
+		  }
 			break;
 		}
 		$value = true;

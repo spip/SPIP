@@ -102,13 +102,21 @@ echo "</table>";
 //
 
  if ($connect_toutes_rubriques) {
- 	$liste_dump = preg_files(_DIR_DUMP,str_replace("@stamp@","(_[0-9]{6,8}_[0-9]{1,3})?",_SPIP_DUMP)."(.gz)?",50,false);
+ 	$liste_dump = preg_files(_DIR_DUMP,str_replace("@stamp@","(_[0-9]{6,8}_[0-9]{1,3})?",_SPIP_DUMP)."(.gz)?$",50,false);
  	$selected = end($liste_dump);
  	$liste_choix = "<p><ul>"; 
  	foreach($liste_dump as $key=>$fichier){
  		$affiche_fichier = substr($fichier,strlen(_DIR_DUMP));
- 		$liste_choix.="\n<li><input type='radio' name='archive' value='$affiche_fichier' id='dump_$key' ".
- 			(($fichier==$selected)?"checked='checked' ":"")."/>\n<label for='dump_$key'>$affiche_fichier</label></li>";
+ 		$liste_choix.="\n<li><input type='radio' name='archive' value='"
+		. $affiche_fichier
+		. "' id='dump_$key' "
+		.  (($fichier==$selected)?"checked='checked' ":"")
+		. "/>\n<label for='dump_$key'>"
+		. $affiche_fichier
+		. '&nbsp;&nbsp; ('
+		. _T('taille_octets',
+		     array('taille' => number_format(filesize($fichier), 0, ' ', ' ')))
+		. ')</label></li>';
  	}
  	
 	if ($flag_gz) {
