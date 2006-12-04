@@ -248,7 +248,7 @@ function import_tables($request, $dir) {
 	}
 	spip_log("$cpt entrees");
 
-	if (!$import_imok) 
+	if (!$import_ok) 
 		$res =  _T('avis_archive_invalide');
 	else {
 		$res = '';
@@ -282,8 +282,6 @@ function import_affiche_javascript($taille)
 // http://doc.spip.org/@affiche_progression_javascript
 function affiche_progression_javascript($abs_pos,$size, $table="") {
 	include_spip('inc/charsets');
-	if ($GLOBALS['flag_ob_flush']) ob_flush();
-	flush();
 	echo "\n<script type='text/javascript'><!--\n";
 
 	if ($abs_pos == '100 %') {
@@ -293,8 +291,7 @@ function affiche_progression_javascript($abs_pos,$size, $table="") {
 		else
 			echo "document.progression.recharge.value='".str_replace("'", "\\'", unicode_to_javascript(_T('info_fini')))."';\n";
 		echo "document.progression.taille.value='$abs_pos';\n";
-		echo "//--></script>\n";
-		echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".self()."\";',0);</script>\n");
+		echo "window.setTimeout('location.href=\"".self()."\";',0);";
 	}
 	else {
 		if (trim($table))
@@ -304,9 +301,8 @@ function affiche_progression_javascript($abs_pos,$size, $table="") {
 		else
 			$taille = floor(100 * $abs_pos / $size)." %";
 		echo "document.progression.taille.value='$taille';\n";
-		echo "//--></script>\n<!--\n";
 	}
-
+	echo "\n--></script>\n";
 	if ($GLOBALS['flag_ob_flush']) ob_flush();
 	flush();
 }
