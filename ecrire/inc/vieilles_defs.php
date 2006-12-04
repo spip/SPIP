@@ -151,4 +151,14 @@ function debut_page($titre = "", $rubrique = "accueil", $sous_rubrique = "accuei
 	if ($onLoad) spip_log("parametre obsolete onLoad=$onLoad");
 }
 
+// obsolete, utiliser calculer_url
+
+// http://doc.spip.org/@extraire_lien
+function extraire_lien ($regs) {
+	list($lien, $class, $texte) = calculer_url($regs[3], $regs[1],'tout');
+	// Preparer le texte du lien ; attention s'il contient un <div>
+	// (ex: [<docXX|right>->lien]), il faut etre smart
+	$ref = "<a href=\"$lien\" class=\"$class\">$texte</a>";
+	return array($ref, $lien, $texte);
+}
 ?>

@@ -10,8 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-//
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/filtres');
@@ -624,17 +622,6 @@ function typo($letexte, $echapper=true) {
 	return $letexte;
 }
 
-// obsolete, utiliser calculer_url
-
-// http://doc.spip.org/@extraire_lien
-function extraire_lien ($regs) {
-	list($lien, $class, $texte) = calculer_url($regs[3], $regs[1],'tout');
-	// Preparer le texte du lien ; attention s'il contient un <div>
-	// (ex: [<docXX|right>->lien]), il faut etre smart
-	$ref = "<a href=\"$lien\" class=\"$class\">$texte</a>";
-	return array($ref, $lien, $texte);
-}
-
 // traitement des raccourcis issus de [TITRE->RACCOURCInnn] et connexes
 
 define('_RACCOURCI_URL', ',^(\S*?)\s*(\d+)(\?.*?)?(#[^\s]*)?$,S');
@@ -1196,6 +1183,23 @@ function traiter_raccourci_lien($regs) {
 	return typo("<a href=\"$lien\" class=\"$class\"$hreflang$bulle>"
 		. $texte
 		. "</a>");
+}
+
+// Fonction pour les champs chapo commencant par =,  redirection qui peut etre:
+// 1. un raccourci Spip habituel (premier If) [texte->TYPEnnn]
+// 2. un ultra raccourci TYPEnnn voire nnn (article) (deuxieme If)
+// 3. une URL std
+// renvoie une tableau structure comme ci-dessus mais sans calcul d'URL
+// (cf fusion de sauvegardes)
+
+define('_RACCOURCI_CHAPO', ',^(\W*)(\W*)(\w*\d+([?#].*)?)$,');
+
+function chapo_redirige($chapo)
+{
+	if (!preg_match(_RACCOURCI_LIEN, $chapo, $m))
+		if (!preg_match(_RACCOURCI_CHAPO, $chapo, $m))
+			$m = array('','','',$chapo);
+	return $m;
 }
 
 // Regexp des raccouris, aussi utilisee pour la fusion de sauvegarde Spip
