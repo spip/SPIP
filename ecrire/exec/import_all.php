@@ -116,37 +116,41 @@ function exec_import_all_dist()
 	// precaution inutile I think (esj)
 	list($my_date) = spip_fetch_array(spip_query("SELECT UNIX_TIMESTAMP(maj) AS d FROM spip_meta WHERE nom='debut_restauration'"), SPIP_NUM);
 
-	if ($my_date) {
-
-		global $trans;
-		if ($request['insertion'] == 'passe2') {
-			include_spip('inc/import_insere');
-			$trans = translate_init($request);
-		} else $trans = array();
-
-		$res = import_tables($request, $dir);
-	}
+	$res = $my_date ? import_all_milieu($request, $dir) : '';
 
 	echo $res, "</body></html>\n";
 
-	if ($request['insertion'] == 'on') {
+	if ($request['insertion'] == 'on' AND $res) {
 			$request['insertion'] = 'passe2';
+			if ($request['url_site']
+			AND substr($request['url_site'],-1) != '/')
+				$request['url_site'] .= '/';
 			import_all_debut($request);
-			redirige_par_entete('./');
-	} else if ($request['insertion']) 
-			spip_query("DROP TABLE spip_translate");
-	  
+			$res = import_all_milieu($request, $dir);
+	}
+ 
 	if ($charset = $GLOBALS['meta']['charset_restauration']) {
 			ecrire_meta('charset', $charset);
 			ecrire_metas();
 	}
 
 	detruit_restaurateur();
-	import_all_fin();
+	import_all_fin($request);
 	include_spip('inc/rubriques');
 	calculer_rubriques();
 
 	if (!$res) ecrire_acces();	// Mise a jour du fichier htpasswd
+}
+
+function import_all_milieu($request, $dir)
+{
+	global $trans;
+	if ($request['insertion'] == 'passe2') {
+		include_spip('inc/import_insere');
+		$trans = translate_init($request);
+	} else $trans = array();
+
+	return import_tables($request, $dir);
 }
 
 // http://doc.spip.org/@import_all_debut
@@ -158,7 +162,7 @@ function import_all_debut($request) {
 }
 
 // http://doc.spip.org/@import_all_fin
-function import_all_fin() {
+function import_all_fin($request) {
 
 	effacer_meta("charset_restauration");
 	effacer_meta("charset_insertion");
@@ -169,6 +173,9 @@ function import_all_fin() {
 	effacer_meta('version_archive_restauration');
 	effacer_meta('tag_archive_restauration');
 	ecrire_metas();
+	if ($request['insertion'] == 'passe2') 
+		spip_query("DROP TABLE spip_translate");
+	 
 }
 
 // http://doc.spip.org/@import_queldir
