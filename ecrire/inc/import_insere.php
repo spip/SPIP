@@ -34,7 +34,7 @@ function insere_1_init($request) {
 	return insere_1bis_init($request);
 }
 
-// http://doc.spip.org/@insere_2_init
+// http://doc.spip.org/@insere_1bis_init
 function insere_1bis_init($request) {
 
 	// l'insertion porte sur les tables principales ...
@@ -50,6 +50,7 @@ function insere_1bis_init($request) {
 // En passe 2, relire les tables principales et les tables auxiliaires 
 // sur les mots et les documents car on sait les identifier
 
+// http://doc.spip.org/@insere_2_init
 function insere_2_init($request) {
 	$t = insere_1bis_init($request);
 
@@ -127,6 +128,7 @@ function import_translate($values, $table, $desc, $request) {
 // de meme titre avec le meme contexte (parent etc) dans la base installee.
 // Une synchronisation plus fine serait preferable, cf [8002]
 
+// http://doc.spip.org/@import_inserer_translate
 function import_inserer_translate($values, $table, $desc, $request, $vals) {
 	global $trans;
 	$p = $desc['key']["PRIMARY KEY"];
@@ -136,6 +138,7 @@ function import_inserer_translate($values, $table, $desc, $request, $vals) {
 }
 
 // Insertion avec renumerotation, y compris des raccourcis.
+// http://doc.spip.org/@import_translate_std
 function import_translate_std($values, $table, $desc, $request) {
 
 	$vals = '';
@@ -153,6 +156,7 @@ function import_translate_std($values, $table, $desc, $request) {
 	import_inserer_translate($values, $table, $desc, $request, $vals);
 }
 
+// http://doc.spip.org/@import_translate_spip_documents
 function import_translate_spip_documents($values, $table, $desc, $request) {
 
 
@@ -224,6 +228,7 @@ function importe_raccourci($k, $v)
 
 // un document importe est considere comme identique a un document present
 // s'ils ont meme taille et meme nom
+// http://doc.spip.org/@import_identifie_id_document
 function import_identifie_id_document($values, $table, $desc, $request) {
 	$t = $values['taille'];
 	$f = $values['fichier'];
@@ -265,12 +270,14 @@ function import_identifie_parent_id_mot($id_groupe, $titre, $v)
 }
 
 // idem pour les articles
+// http://doc.spip.org/@import_identifie_id_article
 function import_identifie_id_article($values, $table, $desc, $request) {
 	return array((0 - $values['id_rubrique']), $values['titre']);
 }
 
 // Passe 2 des articles comme pour les mots
 
+// http://doc.spip.org/@import_identifie_parent_id_article
 function import_identifie_parent_id_article($id_parent, $titre, $v)
 {
 	$id_parent = importe_translate_maj('id_rubrique', (0 - $id_parent));
