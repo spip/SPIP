@@ -1213,6 +1213,16 @@ function maj_base($version_cible = 0) {
 		maj_version('1.919');
 	}
 
+	if (upgrade_vers(1.920, $version_installee, $version_cible)) {
+		spip_query("ALTER IGNORE TABLE spip_documents_articles ADD PRIMARY KEY (id_article, id_document)");
+		spip_query("ALTER IGNORE TABLE spip_documents_breves ADD PRIMARY KEY (id_breve, id_document)");
+		spip_query("ALTER IGNORE TABLE spip_documents_rubriques ADD PRIMARY KEY (id_rubrique, id_document)");
+		spip_query("ALTER IGNORE TABLE spip_documents_articles DROP INDEX id_article");
+		spip_query("ALTER IGNORE TABLE spip_documents_breves DROP INDEX id_breve");
+		spip_query("ALTER IGNORE TABLE spip_documents_rubriques DROP INDEX id_rubrique");
+		maj_version('1.920');
+	}
+
 }
 
 ?>

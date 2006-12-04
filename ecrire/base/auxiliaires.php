@@ -97,24 +97,24 @@ $spip_documents_articles = array(
 		"id_article"	=> "BIGINT (21) DEFAULT '0' NOT NULL");
 
 $spip_documents_articles_key = array(
-		"KEY id_document"	=> "id_document",
-		"KEY id_article"	=> "id_article");
+		"PRIMARY KEY"		=> "id_article, id_document",
+		"KEY id_document"	=> "id_document");
 
 $spip_documents_rubriques = array(
 		"id_document"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
 		"id_rubrique"	=> "BIGINT (21) DEFAULT '0' NOT NULL");
 
 $spip_documents_rubriques_key = array(
-		"KEY id_document"	=> "id_document",
-		"KEY id_rubrique"	=> "id_rubrique");
+		"PRIMARY KEY"		=> "id_rubrique, id_document",
+		"KEY id_document"	=> "id_document");
 
 $spip_documents_breves = array(
 		"id_document"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
 		"id_breve"	=> "BIGINT (21) DEFAULT '0' NOT NULL");
 
 $spip_documents_breves_key = array(
-		"KEY id_document"	=> "id_document",
-		"KEY id_breve"	=> "id_breve");
+		"PRIMARY KEY"		=> "id_breve, id_document",
+		"KEY id_document"	=> "id_document");
 
 $spip_mots_articles = array(
 		"id_mot"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
