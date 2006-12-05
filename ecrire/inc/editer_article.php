@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/actions');
+include_spip('inc/extra');
 
 // http://doc.spip.org/@inc_editer_article_dist
 function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='', $config_fonc='articles_edit_config', $row=array(), $hidden='')
