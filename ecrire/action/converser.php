@@ -23,9 +23,15 @@ function action_converser_dist()
 
 	if (_FILE_CONNECT AND $lang = _request('var_lang_ecrire')) {
 		spip_query("UPDATE spip_auteurs SET lang = " . _q($lang) . " WHERE id_auteur = " . $GLOBALS['auteur_session']['id_auteur']);
-		$auteur_session['lang'] = $lang;
+		$GLOBALS['auteur_session']['lang'] = $lang;
 		$session = charger_fonction('session', 'inc');
-		$session($auteur_session);
+		if ($spip_session = $session($GLOBALS['auteur_session'])) {
+			preg_match(',^[^/]*//[^/]*(.*)/$,',
+				   url_de_base(),
+				   $r);
+			include_spip('inc/cookie');
+			spip_setcookie('spip_session', $spip_session, time() + 3600 * 24 * 14, $r[1]);
+		}
 	}
 	action_converser_post();
 }

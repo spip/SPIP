@@ -27,7 +27,7 @@ $GLOBALS['rejoue_session'] = ''; # globale pour insertion de JS en fin de page
 //
 // 3 actions sur les sessions, selon le type de l'argument:
 //
-// - numérique: efface toutes les sessions de l'auteur (retour quelconque)
+// - numerique: efface toutes les sessions de l'auteur (retour quelconque)
 // - tableau: cree une session pour l'auteur decrit et retourne l'identifiant
 // - autre: predicat de validite de la session indiquee par le cookie
 
