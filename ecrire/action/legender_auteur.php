@@ -40,7 +40,6 @@ function action_legender_auteur_post($r)
 	$bio = _request('bio');
 	$champs_extra = _request('champs_extra');
 	$email = _request('email');
-	$id_auteur = _request('id_auteur');
 	$new_login = _request('new_login');
 	$new_pass = _request('new_pass');
 	$new_pass2 = _request('new_pass2');
@@ -53,11 +52,12 @@ function action_legender_auteur_post($r)
 
 	list($tout, $id_auteur, $ajouter_id_article,$x,$s, $n) = $r;
 
+
 //
 // si id_auteur est hors table, c'est une creation sinon une modif
 //
 	  $auteur = array();
-	  if ($id_auteur) {
+	  if ($id_auteur=intval(_request('id_auteur'))) {
 		$auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
 	  }
 	  if (!$auteur) {
