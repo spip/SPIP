@@ -47,7 +47,8 @@ function exec_admin_tech_dist()
 		debut_gauche();
 		$dir_dump = determine_upload();
 	}
-	include_spip('exec/export_all');
+
+	include_spip('inc/export');
 	$file = joli_repertoire($dir_dump . export_nom_fichier_dump($dir_dump,false));
 	$zfile = joli_repertoire($dir_dump . export_nom_fichier_dump($dir_dump,true));
 	$dir_dump = joli_repertoire($dir_dump);
