@@ -68,7 +68,7 @@ function http_status($status) {
 
 	$php_cgi = ($flag_sapi_name AND eregi("cgi", @php_sapi_name()));
 	if ($php_cgi)
-		header("Status: $status");
+		header("Status: ".$status_string[$status]);
 	else
 		header("HTTP/1.0 ".$status_string[$status]);
 }
