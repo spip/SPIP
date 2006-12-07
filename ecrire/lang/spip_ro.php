@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Modifica&#355;i cuvântul cheie',
 'admin_modifier_rubrique' => 'Modifica&#355;i rubrica',
 'admin_recalculer' => 'Recalcula&#355;i aceast&#259; pagin&#259;',
+'afficher_trad' => 'afi&#351;a&#355;i traducerile',
 'alerte_maj_impossible' => '<b>Alert&#259;&nbsp;!</b> Aducerea la zi a bazei de date MySQL c&#259;tre versiunea @version@ este imposibil&#259;, probabil din cauza unei probleme de drepturi de modificare &icirc;n baza de date. V&#259; rug&#259;m s&#259; contacta&#355;i furnizorul dumneavoastr&#259; de hosting.',
 'analyse_xml' => 'Analiz&#259; XML',
 'antispam_champ_vide' => 'V&#259; rug&#259;m s&#259; l&#259;sa&#355;i acest c&acirc;mp gol&nbsp;:',
@@ -79,6 +80,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => 'calendar pe zi',
 'cal_par_mois' => 'calendar pe lun&#259;',
 'cal_par_semaine' => 'calendar pe s&#259;pt&#259;m&acirc;n&#259;',
+'choix_couleur_interface' => 'culoare',
+'choix_interface' => 'alegerea interfe&#355;ei',
 'confirm_changer_statut' => 'Aten&#355;ie, a&#355;i cerut schimbarea st&#259;rii acestui element. Dori&#355;i s&#259; continua&#355;i ?',
 'correcte' => 'corect&#259;',
 
@@ -285,7 +288,7 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'forum_non_inscrit' => 'Nu sunte&#355;i &icirc;nscris, sau adresa ori parola dumneavoastr&#259; nu sunt corecte.',
 'forum_page_url' => '(Dac&#259; mesajul se refer&#259; la un articol publicat pe Web sau la o pagin&#259; cu informa&#355;ii suplimentare, indica&#355;i mai jos titlul &#351;i adresa URL a paginii.)',
 'forum_par_auteur' => 'de @auteur@',
-'forum_poste_par' => 'Mesaj publicat de @parauteur@ ca r&#259;spuns la articolul dumneavoastr&#259;.',
+'forum_poste_par' => 'Mesaj publicat de @parauteur@ ca r&#259;spuns la articolul &laquo; @titre@ &raquo;.',
 'forum_probleme_database' => 'Problem&#259; tehnic&#259; cu baza de date, mesajul dumneavoastr&#259; nu a fost &icirc;nregistrat.',
 'forum_qui_etes_vous' => '<b>Cine sunte&#355;i dumneavoastr&#259; ?</b> (op&#355;ional)',
 'forum_texte' => 'Textul mesajului dumneavoastr&#259; :',
@@ -618,6 +621,7 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 
 
 // M
+'masquer_trad' => 'masca&#355;i traducerile',
 'module_fichiers_langues' => 'Fi&#351;iere de limb&#259;',
 
 

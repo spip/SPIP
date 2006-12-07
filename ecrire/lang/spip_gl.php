@@ -289,7 +289,7 @@ Grazas pola s&uacute;a participaci&oacute;n
 'forum_non_inscrit' => 'A&iacute;nda non se rexistrou, ou o enderezo ou a chave andan errados.',
 'forum_page_url' => '(Se a t&uacute;a mensaxe se refire a un artigo publicado en Internet, ou a unha p&aacute;xina que cont&eacute;n m&aacute;is informaci&oacute;ns, indica a continuaci&oacute;n o t&iacute;tulo da p&aacute;xina e o seu enderezo URL)',
 'forum_par_auteur' => 'por @auteur@',
-'forum_poste_par' => 'Mensaxe enviada @parauteur@ en resposta &oacute; teu artigo.',
+'forum_poste_par' => 'Mensaxe de @parauteur@ relacionado co artigo &laquo; @titre@ &raquo;.',
 'forum_probleme_database' => 'Problema da base de datos, a t&uacute;a mensaxe non foi rexistrada.',
 'forum_qui_etes_vous' => '<B>Quen &eacute; vostede?</B> (opcional)',
 'forum_texte' => 'Texto da s&uacute;a mensaxe:',

@@ -287,7 +287,7 @@ Gr&agrave;cies per la participaci&oacute;
 'forum_non_inscrit' => 'No esteu inscrit o b&eacute; l\'adre&ccedil;a o la contrasenya s&oacute;n err&ograve;nies. ',
 'forum_page_url' => '(Si el vostre missatge fa refer&egrave;ncia a un article publicat a la Web, o a una p&agrave;gina que cont&eacute; m&eacute;s informacions, podeu indicar a continuaci&oacute; el t&iacute;tol de la p&agrave;gina i la seva adre&ccedil;a URL.)',
 'forum_par_auteur' => 'per @auteur@',
-'forum_poste_par' => 'Missatge enviat@parauteur@ a continuaci&oacute; del vostre article.',
+'forum_poste_par' => 'Missatge enviat@parauteur@ a continuaci&oacute; de l\'article &laquo; @titre@ &raquo;.',
 'forum_probleme_database' => 'Problema de la base de dades, el vostre missatge no s\'ha registrat.',
 'forum_qui_etes_vous' => '<b>Qui s&oacute;u?</b> (opcional)',
 'forum_texte' => 'Text del vostre missatge:',
