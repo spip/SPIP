@@ -91,7 +91,6 @@ function inc_import_1_3_dist($lecteur, $request, $gz='fread') {
 				if (isset($desc['field'][$p='fichier'])) {
 					$b[$p]= $desc['field'][$p];
 					$b['taille']= $desc['field']['taille'];
-					spip_log("pass1 " . join(',', array_keys($b)));
 				}
 				$p = $desc['key']["PRIMARY KEY"];
 				$b[$p] = $desc['field'][$p];
