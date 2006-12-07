@@ -204,9 +204,12 @@ function importe_translate_maj($k, $v)
 	return $g;
 }
 
+define('_RACCOURCI_MODELE_ALL', '/' . _RACCOURCI_MODELE .'/isS');
+
 // http://doc.spip.org/@importe_raccourci
 function importe_raccourci($k, $v)
 {
+
 	if (preg_match_all(_RACCOURCI_LIEN, $v, $m, PREG_SET_ORDER)) {
 		foreach ($m as $regs) {
 		  // supprimer 'http://' ou 'mailto:'
@@ -220,6 +223,16 @@ function importe_raccourci($k, $v)
 				  $rac = '[' . $regs[1] . '->' . $reg[2] . $objet . $g . $params . $ancre .']';
 				  $v = str_replace($regs[0], $rac, $v);
 				}
+			}
+		}
+	}
+
+	if (preg_match_all(_RACCOURCI_MODELE_ALL, $v, $m, PREG_SET_ORDER)) {
+		foreach ($m as $regs) {
+			$g = importe_translate_maj('id_document', $regs[3]);
+			if ($g != $regs[3]) {
+				$rac = '<' . $regs[2] . $g . $regs[4] . '>' . $regs[5];
+				$v = str_replace($regs[0], $rac, $v);
 			}
 		}
 	}
