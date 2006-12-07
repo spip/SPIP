@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
+include_spip('inc/documents');
 
 // http://doc.spip.org/@exec_rubriques_edit_dist
 function exec_rubriques_edit_dist()
@@ -79,6 +80,16 @@ function exec_rubriques_edit_dist()
 	fin_grand_cadre();
 
 	debut_gauche();
+
+	// Pave "documents associes a la rubrique"
+
+	if (!$new){
+		# affichage sur le cote des pieces jointes, en reperant les inserees
+		# note : traiter_modeles($texte, true) repere les doublons
+		# aussi efficacement que propre(), mais beaucoup plus rapidement
+		traiter_modeles(join('',$row), true);
+		echo afficher_documents_colonne($id_rubrique, 'rubrique', true);
+	} 
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'rubriques_edit','id_rubrique'=>$id_rubrique),'data'=>''));
 	creer_colonne_droite();

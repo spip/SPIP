@@ -118,7 +118,7 @@ function document_et_vignette($document, $url, $portfolio=false) {
 function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 	global $connect_id_auteur, $connect_statut, $options;
 
-	// seuls cas connus : exec=articles_edit ou breves_edit
+	// seuls cas connus : article, breve ou rubrique
 	$script = $type.'s_edit';
 
 	/// Ajouter nouvelle image
@@ -159,22 +159,21 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 
 	/// Ajouter nouveau document
 	$ret .= "</div><p>&nbsp;</p>\n<a name='documents'></a>\n<a name='portfolio'></a>\n";
-	if ($type == "article") {
-		if ($GLOBALS['meta']["documents_article"] != 'non') {
-			$titre_cadre = _T('bouton_ajouter_document').aide("ins_doc");
-			$ret .= debut_cadre_enfonce("doc-24.gif", true, "creer.gif", $titre_cadre);
-			$ret .= $joindre($script, "id_$type=$id", $id, _T('info_telecharger_ordinateur'), 'document',$type,'',0,generer_url_ecrire("documents_colonne","id=$id&type=$type",true));
-			$ret .= fin_cadre_enfonce(true);
-		}
 
-		// Afficher les documents lies
-		$ret .= "<p></p><div id='liste_documents'>\n";
-
-		foreach($documents_lies as $doc) {
-			$ret .= afficher_case_document($doc, $id, $script, $type, $id_doc_actif == $doc);
-		}
-		$ret .= "</div>";
+	if ($GLOBALS['meta']["documents_" . $type . 's'] == 'oui') {
+		$titre_cadre = _T('bouton_ajouter_document').aide("ins_doc");
+		$ret .= debut_cadre_enfonce("doc-24.gif", true, "creer.gif", $titre_cadre);
+		$ret .= $joindre($script, "id_$type=$id", $id, _T('info_telecharger_ordinateur'), 'document',$type,'',0,generer_url_ecrire("documents_colonne","id=$id&type=$type",true));
+		$ret .= fin_cadre_enfonce(true);
 	}
+
+	// Afficher les documents lies
+	$ret .= "<p></p><div id='liste_documents'>\n";
+
+	foreach($documents_lies as $doc) {
+			$ret .= afficher_case_document($doc, $id, $script, $type, $id_doc_actif == $doc);
+	}
+	$ret .= "</div>";
   
   $ret .= "<script src='"._DIR_JAVASCRIPT."async_upload.js' type='text/javascript'></script>\n";
   $ret .= <<<EOF
