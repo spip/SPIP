@@ -59,7 +59,7 @@ function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new,
 		# note : traiter_modeles($texte, true) repere les doublons
 		# aussi efficacement que propre(), mais beaucoup plus rapidement
 		traiter_modeles(join('',$row), true);
-		echo afficher_documents_colonne($id_article, 'article';
+		echo afficher_documents_colonne($id_article, 'article');
 	} else {
 		# ICI GROS HACK
 		# -------------
