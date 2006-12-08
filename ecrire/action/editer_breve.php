@@ -26,6 +26,10 @@ function action_editer_breve_dist() {
 		$id_breve = $r[1];
 		set_request('statut', $r[2]);
 		revisions_breves($id_breve);
+	} 
+	// Envoi depuis le formulaire d'edition pour chgt de langue
+	else if (preg_match(',^(\d+)\W(\w+)$,', $arg, $r)) {
+		revisions_breves_langue($id_breve=$r[1], $r[2], _request('changer_lang'));
 	}
 	// Envoi depuis le formulaire d'edition d'une breve existante
 	else if ($id_breve = intval($arg)) {
@@ -35,15 +39,16 @@ function action_editer_breve_dist() {
 	else if ($arg == 'oui') {
 		$id_breve = insert_breve(_request('id_parent'));
 		revisions_breves($id_breve);
-	}
+	} 
 	// Erreur
-	else {
+	else{
 		redirige_par_entete('./');
 	}
 
 	// Rediriger le navigateur
 	$redirect = parametre_url(urldecode(_request('redirect')),
 		'id_breve', $id_breve, '&');
+
 	redirige_par_entete($redirect);
 }
 
@@ -213,6 +218,16 @@ function revisions_breves ($id_breve, $c=false) {
 			'data' => $champs
 		)
 	);
+}
+
+function revisions_breves_langue($id_breve, $id_rubrique, $changer_lang)
+{
+	if ($changer_lang == "herit") {
+		$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+		$langue_parent = $row['lang'];
+		spip_query("UPDATE spip_breves SET lang=" . _q($langue_parent) . ", langue_choisie='non' WHERE id_breve=$id_breve");
+		calculer_langues_utilisees();
+	} else 	spip_query("UPDATE spip_breves SET lang=" . _q($changer_lang) . ", langue_choisie='oui' WHERE id_breve=$id_breve");
 }
 
 ?>

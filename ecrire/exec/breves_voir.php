@@ -13,8 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-include_spip('inc/rubriques');
-include_spip('inc/mots');
 include_spip('inc/actions');
 include_spip('inc/date');
 include_spip('base/abstract_sql');
@@ -71,10 +69,10 @@ function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $select_gr
 	
 	debut_boite_info();
 	
-	echo "<CENTER>";
-	echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE='1'><B>"._T('info_gauche_numero_breve')."&nbsp;:</B></FONT>";
-	echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE='6'><B>$id_breve</B></FONT>";
-	echo "</CENTER>";
+	echo "<center>";
+	echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"._T('info_gauche_numero_breve')."&nbsp;:</b></font>";
+	echo "<br /><font face='Verdana,Arial,Sans,sans-serif' size='6'><b>$id_breve</b></font>";
+	echo "</center>";
 	
 	voir_en_ligne ('breve', $id_breve, $statut);
 	
@@ -114,11 +112,11 @@ function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $select_gr
 	debut_droite();
 	
 	debut_cadre_relief("breve-24.gif");
-	echo "<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>";
-	echo "<TR><td class='serif'>";
+	echo "<table width='100%' cellpadding='0' cellspacing='0' border='0'>";
+	echo "<tr><td class='serif'>";
 
-	echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
-	echo "<tr width='100%'><td width='100%' valign='top'>";
+	echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
+	echo "<tr><td width='100%' valign='top'>";
 	gros_titre($titre);
 	echo "</td>";
 
@@ -147,7 +145,7 @@ function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $select_gr
 			        $jour = $regs[3];
 			        $annee = $regs[1];
 			}
-	
+			echo "</p>";	
 	
 			debut_cadre_enfonce();
 			echo afficher_formulaire_date("breves_voir", "id_breve=$id_breve&options=$options",
@@ -155,7 +153,7 @@ function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $select_gr
 			fin_cadre_enfonce();	
 		}
 		else {
-			echo "<br /><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE='3'><B>".affdate($date_heure)."&nbsp;</B></FONT><P>";
+			echo "<p><font face='Verdana,Arial,Sans,sans-serif' size='3'><b>".affdate($date_heure)."&nbsp;</b></font></p>";
 		}
 	}
 
@@ -169,35 +167,24 @@ function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $select_gr
 		$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 		$langue_parent = $row['lang'];
 	
-		if ($changer_lang) {
-			if ($changer_lang != "herit")
-				spip_query("UPDATE spip_breves SET lang=" . _q($changer_lang) . ", langue_choisie='oui' WHERE id_breve=$id_breve");
-			else
-				spip_query("UPDATE spip_breves SET lang=" . _q($langue_parent) . ", langue_choisie='non' WHERE id_breve=$id_breve");
-			calculer_langues_utilisees();
-		}
-	
 		$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_breves WHERE id_breve=$id_breve"));
 		$langue_breve = $row['lang'];
-		$langue_choisie_breve = $row['langue_choisie'];
-	
-		if ($langue_choisie_breve == 'oui') $herit = false;
-		else $herit = true;
 	
 		debut_cadre_enfonce('langues-24.gif');
 	
-		echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC' class='serif2'>";
+		echo "<table border='0' cellspacing='0' cellpadding='3' width='100%'><tr><td bgcolor='#EEEECC' class='serif2'>";
 		echo bouton_block_invisible('languesbreve');
-		echo "<B>";
+		echo "<b>";
 		echo _T('titre_langue_breve');
 		echo "&nbsp; (".traduire_nom_langue($langue_breve).")";
-		echo "</B>";
-		echo "</TD></TR></TABLE>";
+		echo "</b>";
+		echo "</td></tr></table>";
 	
 		echo debut_block_invisible('languesbreve');
-		echo "<center><font face='Verdana,Arial,Sans,sans-serif' size='2'>";
-		echo menu_langues('changer_lang', $langue_breve, '', $langue_parent);
-		echo "</font></center>\n";
+		echo "<center>";
+		$menu = menu_langues('changer_lang', $langue_breve, '', $langue_parent,'ajax');
+		echo redirige_action_auteur('editer_breve', "$id_breve/$id_rubrique", "breves_voir","id_breve=$id_breve", $menu);
+		echo "</center>\n";
 		echo fin_block();
 	
 		fin_cadre_enfonce();
@@ -221,7 +208,7 @@ function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $select_gr
 	if ($connect_statut=="0minirezo" AND acces_rubrique($id_rubrique) AND ($statut=="prop" OR $statut=="prepa")){
 		echo "<div align='right'>";
 		
-		echo "<table>";
+		echo "<table><tr>";
 		echo "<td  align='right'>";
 		icone(_T('icone_publier_breve'), 
 		      redirige_action_auteur('editer_breve',"$id_breve-statut-publie","breves_voir","id_breve=$id_breve"), "breve-24.gif", "racine-24.gif");
@@ -231,13 +218,13 @@ function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $select_gr
 		echo "<td  align='right'>";
 		icone(_T('icone_refuser_breve'), 
 		      redirige_action_auteur('editer_breve', "$id_breve-statut-refuse", "breves_voir","id_breve=$id_breve"), "breve-24.gif", "supprimer.gif");
-		echo "</td>";
+		echo "</td></tr>";
 		echo "</table>";	
 		
 		echo "</div>";
 	}	
 
-	echo "</TD></TR></TABLE>";
+	echo "</td></tr></table>";
 
 	fin_cadre_relief();
 	
