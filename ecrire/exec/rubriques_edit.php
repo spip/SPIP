@@ -88,7 +88,7 @@ function exec_rubriques_edit_dist()
 		# note : traiter_modeles($texte, true) repere les doublons
 		# aussi efficacement que propre(), mais beaucoup plus rapidement
 		traiter_modeles(join('',$row), true);
-		echo afficher_documents_colonne($id_rubrique, 'rubrique', true);
+		echo afficher_documents_colonne($id_rubrique, 'rubrique');
 	} 
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'rubriques_edit','id_rubrique'=>$id_rubrique),'data'=>''));
