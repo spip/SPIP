@@ -41,6 +41,7 @@ $GLOBALS['flag_ob_flush'] = function_exists('ob_flush');
 // Les balises commencant par <! sont ignorees
 // $abs_pos est globale pour pouvoir etre reinitialisee a la meta
 // status_restauration en cas d'interruption sur TimeOut.
+// Evite au maximum les recopies
 
 // http://doc.spip.org/@xml_fetch_tag
 function xml_fetch_tag($f, &$before, $_fread='fread', $skip='!') {
@@ -51,27 +52,29 @@ function xml_fetch_tag($f, &$before, $_fread='fread', $skip='!') {
 
 	while (($b=strpos($buf,'<'))===false) {
 		if (!($x = $_fread($f, 1024))) return '';
-		$buf .= $x;
+		if ($before)
+			$buf .= $x;
+		else $buf = $x;
 	}
 	if ($before) $before = str_replace($ent,$brut,substr($buf,0,$b));
 #	else { spip_log("position: $abs_pos" . substr($buf,0,12));flush();}
-	// pour ignorer un > de raccourci Spip avant un < de balise XML
 
-	$buf = substr($buf,++$b); 
+	// $b pour ignorer un > de raccourci Spip avant un < de balise XML
 
-	while (($e=strpos($buf,'>'))===false) {
+	while (($e=strpos($buf,'>', $b))===false) {
 		if (!($x = $_fread($f, 1024))) return '';
 		$buf .= $x;
 	}
-	if ($buf[0]!=$skip) {
-		$tag = substr($buf, 0, $e);
+
+	if ($buf[++$b]!=$skip) {
+		$tag = substr($buf, $b, $e-$b);
 		$buf = substr($buf,++$e);
-		$abs_pos += $e + $b;
+		$abs_pos += $e;
 		return $tag;
 	}
 
 	$buf = substr($buf,++$e);
-	$abs_pos += $e + $b;
+	$abs_pos += $e;
 	return xml_fetch_tag($f,$before,$_fread,$skip);
 }
 
