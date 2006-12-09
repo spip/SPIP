@@ -132,7 +132,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	. "\n<div>&nbsp;</div>"
 	. "\n<div class='serif' align='$spip_lang_left'>"
 
-	. $dater($id_article, $flag_editable, $statut_article, $date, $date_redac)
+	. $dater($id_article, $flag_editable, $statut_article, 'article', 'articles', $date, $date_redac)
 
 	. $editer_auteurs($id_article, $flag_editable, $cherche_auteur, $ids)
 

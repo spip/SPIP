@@ -18,32 +18,34 @@ include_spip('inc/actions');
 include_spip('inc/date');
 
 // http://doc.spip.org/@inc_dater_dist
-function inc_dater_dist($id_article, $flag, $statut_article, $date, $date_redac)
+function inc_dater_dist($id, $flag, $statut, $type, $script, $date, $date_redac='')
 {
 	global $spip_lang_left, $spip_lang_right, $options;
 
-	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})", $date_redac, $regs)) {
+	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})( ([0-9]{2}):([0-9]{2}))?", $date_redac, $regs)) {
 		$annee_redac = $regs[1];
 		$mois_redac = $regs[2];
 		$jour_redac = $regs[3];
-		$heure_redac = $regs[4];
-		$minute_redac = $regs[5];
+		$heure_redac = $regs[5];
+		$minute_redac = $regs[6];
 		if ($annee_redac > 4000) $annee_redac -= 9000;
 	}
 
-	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})", $date, $regs)) {
+	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})( ([0-9]{2}):([0-9]{2}))?", $date, $regs)) {
 		$annee = $regs[1];
 		$mois = $regs[2];
 		$jour = $regs[3];
-		$heure = $regs[4];
-		$minute = $regs[5];
+		$heure = $regs[5];
+		$minute = $regs[6];
 	}
 
   if ($flag AND $options == 'avancees') {
 
-	if ($statut_article == 'publie') {
+	if ($statut == 'publie') {
 
-		$js = "onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
+		$js = "size='1' class='fondl'
+onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
+
 		$invite =  "<b><span class='verdana1'>"
 		. _T('texte_date_publication_article')
 		. '</span> '
@@ -52,12 +54,14 @@ function inc_dater_dist($id_article, $flag, $statut_article, $date, $date_redac)
 		. aide('artdate');
 
 		$masque = "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>"
-		. afficher_jour($jour, "name='jour' size='1' class='fondl' $js", true)
-		. afficher_mois($mois, "name='mois' size='1' class='fondl' $js", true)
-		. afficher_annee($annee, "name='annee' size='1' class='fondl' $js")
-		. ' - '
-		. afficher_heure($heure, "name='heure' size='1' class='fondl' $js")
-		. afficher_minute($minute, "name='minute' size='1' class='fondl' $js")
+		. afficher_jour($jour, "name='jour' $js", true)
+		. afficher_mois($mois, "name='mois' $js", true)
+		. afficher_annee($annee, "name='annee' $js")
+		. (($type != 'article')
+		   ? ''
+		   : (' - '
+			. afficher_heure($heure, "name='heure' $js")
+			. afficher_minute($minute, "name='minute' $js")))
 		. "<span class='visible_au_chargement' id='valider_date'>"
 		. " &nbsp;\n<input type='submit' class='fondo' value='"
 		. _T('bouton_changer')."' />"
@@ -66,10 +70,11 @@ function inc_dater_dist($id_article, $flag, $statut_article, $date, $date_redac)
 
 		$bloc = block_parfois_visible('datepub', $invite, $masque, 'text-align: left');
 		$res = ajax_action_auteur("dater", 
-			$id_article,
-			'articles',
-			"id_article=$id_article",
-			$bloc);
+			"$id/$type",
+			$script,
+			"id_$type=$id",
+			$bloc,
+			"&id=$id&type=$type");
 
 	} else {
 		$res = "\n<div><b> <span class='verdana1'>"
@@ -78,9 +83,10 @@ function inc_dater_dist($id_article, $flag, $statut_article, $date, $date_redac)
 		. majuscules(affdate($date))."</b>".aide('artdate')."</div>";
 	}
 
-	$possedeDateRedac= ($annee_redac.'-'.$mois_redac.'-'.$jour_redac != '0000-00-00');
-	if (($options == 'avancees' AND $GLOBALS['meta']["articles_redac"] != 'non')
-	OR $possedeDateRedac) {
+	$possedeDateRedac= ($annee_redac OR $mois_redac OR ($jour_redac != '0000-00-00'));
+	if (($type == 'article')
+	AND (($options == 'avancees' AND $GLOBALS['meta']["articles_redac"] != 'non')
+		OR $possedeDateRedac)) {
 		if ($possedeDateRedac)
 			$date_affichee = majuscules(affdate($date_redac))
 #			." " ._T('date_fmt_heures_minutes', array('h' =>$heure_redac, 'm'=>$minute_redac))
@@ -132,15 +138,16 @@ function inc_dater_dist($id_article, $flag, $statut_article, $date, $date_redac)
 
 		$bloc = block_parfois_visible('dateredac', $invite, $masque, 'text-align: left');
 		$res .= ajax_action_auteur("dater", 
-			$id_article,
-			'articles',
-			"id_article=$id_article",
-			$bloc);
+			"$id/$type",
+			$script,
+			"id_$type=$id",
+			$bloc,
+			"&id=$id&type=$type");
 	}
   } else {
 
 	$res = "<div style='text-align:center;'><b> <span class='verdana1'>"
-	. (($statut_article == 'publie')
+	. (($statut == 'publie')
 		? _T('texte_date_publication_article')
 		: _T('texte_date_creation_article'))
 	. "</span> "
@@ -160,7 +167,7 @@ function inc_dater_dist($id_article, $flag, $statut_article, $date, $date_redac)
 
   $res =  debut_cadre_couleur('',true) . $res .  fin_cadre_couleur(true);
 
-  return ajax_action_greffe("dater-$id_article", $res);
+  return ajax_action_greffe("dater-$id", $res);
 }
 
 ?>

@@ -149,8 +149,8 @@ debut_gauche();
 
 debut_boite_info();
 	echo "<center>";
-	echo "<font face='Verdana,Arial,Sans,sans-serif' size=1><b>"._T('titre_site_numero')."</b></font>";
-	echo "<br><font face='Verdana,Arial,Sans,sans-serif' size=6><b>$id_syndic</b></font>\n";
+	echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"._T('titre_site_numero')."</b></font>";
+	echo "<br /><font face='Verdana,Arial,Sans,sans-serif' size='6'><b>$id_syndic</b></font>\n";
 
 	echo "</center>";
 
@@ -160,7 +160,7 @@ debut_boite_info();
 fin_boite_info();
 
 
-echo "<p><center>";
+echo "<br /><center>";
 	icone (_T('icone_voir_sites_references'), generer_url_ecrire("sites_tous",""), "site-24.gif","rien.gif");
 echo "</center>";
 
@@ -192,8 +192,8 @@ else if ($statut == 'refuse') {
 	$logo_statut = "puce-rouge.gif";
 }
 
-echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
-echo "<tr width='100%'><td width='100%' valign='top'>";
+echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
+echo "<tr><td width='100%' valign='top'>";
 	gros_titre($nom_site, $logo_statut);
 
 $url_affichee = $url_site;
@@ -203,7 +203,7 @@ echo "<a href='$url_site'><b>$url_affichee</b></a>";
 
 if (strlen($descriptif) > 1) {
 	echo "<p><div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;'>";
-	echo "<font size=2 face='Verdana,Arial,Sans,sans-serif'>";
+	echo "<font size='2' face='Verdana,Arial,Sans,sans-serif'>";
 	echo "<b>"._T('info_descriptif')."</b> ";
 	echo propre($descriptif);
 	echo "&nbsp; ";
@@ -218,28 +218,20 @@ if ($flag_editable) {
 	icone(_T('icone_modifier_site'), generer_url_ecrire('sites_edit',"id_syndic=$id_syndic"), "site-24.gif", "edit.gif");
 	echo "</td>";
 }
-echo "</tr></table>\n";
+echo "</tr></table><br />\n";
 
 if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 	if ($statut == 'publie') {
-		echo "<p>";
-
-		if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date_heure, $regs)) {
-		        $mois = $regs[2];
-		        $jour = $regs[3];
-		        $annee = $regs[1];
-		}
-
 
 		debut_cadre_enfonce();
-		echo afficher_formulaire_date("sites", "id_syndic=$id_syndic", _T('info_date_referencement'), $jour, $mois, $annee);
+		$dater = charger_fonction('dater', 'inc');
+		echo $dater($id_syndic, $flag_editable, $statut, 'syndic', 'sites', $date_heure);
 		fin_cadre_enfonce();	
 	}
 	else {
-		echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_site_propose')." <B>".affdate($date_heure)."&nbsp;</B></FONT><P>";
+		echo "<br />\n<font face='Verdana,Arial,Sans,sans-serif' SIZE='3'>"._T('info_site_propose')." <b>".affdate($date_heure)."&nbsp;</b></font>";
 	}
 }
- echo "\n";
 
  $editer_mot = charger_fonction('editer_mot', 'inc');
  echo $editer_mot('syndic', $id_syndic,  $cherche_mot,  $select_groupe, $flag_editable);
