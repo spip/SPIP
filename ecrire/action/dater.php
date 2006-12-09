@@ -57,6 +57,7 @@ function action_dater_post($r)
 	calculer_rubriques();
 }
 
+// http://doc.spip.org/@action_dater_breve_syndic
 function action_dater_breve_syndic($id, $type)
 {
 	if (_request('jour')) {

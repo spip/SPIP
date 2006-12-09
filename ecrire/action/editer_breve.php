@@ -220,6 +220,7 @@ function revisions_breves ($id_breve, $c=false) {
 	);
 }
 
+// http://doc.spip.org/@revisions_breves_langue
 function revisions_breves_langue($id_breve, $id_rubrique, $changer_lang)
 {
 	if ($changer_lang == "herit") {
