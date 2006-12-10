@@ -27,7 +27,7 @@ function install_etape_ldap4_dist()
 	$fail = (ldap_errno($ldap_link) == 32);
 
 	if ($fail) {
-		echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_chemin_acces_annuaire')."</B></FONT>";
+		echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_chemin_acces_annuaire')."</FONT>";
 		echo "<P>";
 
 		echo "<B>"._T('avis_operation_echec')."</B> "._T('avis_chemin_invalide_1')." (<tt>".htmlspecialchars($base_ldap);
