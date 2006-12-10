@@ -429,7 +429,7 @@ Merci de votre participation
 'info_grand_ecran' => 'Grand &eacute;cran',
 'info_image_aide' => 'AIDE',
 'info_image_process_titre' => 'M&eacute;thode de fabrication des vignettes',
-'info_impossible_lire_page' => '<b>Erreur !</b> Impossible de lire la page <tt><html>@test_proxy@</html></tt> &agrave; travers le proxy <tt>',
+'info_impossible_lire_page' => '<b>Erreur !</b> Impossible de lire la page <tt><html>@test_proxy@</html></tt> &agrave; travers le proxy ',
 'info_inclusion_directe' => 'Inclusion directe&nbsp;:',
 'info_inclusion_vignette' => 'Inclusion de la vignette&nbsp;:',
 'info_installation_systeme_publication' => 'Installation du syst&egrave;me de publication...',
@@ -691,10 +691,10 @@ et vous reconnecter au site.
 'texte_inc_auth_3' => ', apr&egrave;s avoir &eacute;ventuellement quitt&eacute; puis
 		red&eacute;marr&eacute; votre navigateur.',
 'texte_inc_config' => 'Les modifications effectu&eacute;es dans ces pages influent notablement sur le
-	fonctionnement de votre site. Nous vous recommandons de ne pas y intervenir tant que vous n\'&ecirc;tes pas
-	familier du fonctionnement du syst&egrave;me SPIP. <p align="justify"><b>Plus
-	g&eacute;n&eacute;ralement, il est fortement conseill&eacute;
-	de laisser la charge de ces pages au webmestre principal de votre site.</b>',
+ fonctionnement de votre site. Nous vous recommandons de ne pas y intervenir tant que vous n\'&ecirc;tes pas
+ familier du fonctionnement du syst&egrave;me SPIP. <br /><br /><b>Plus
+ g&eacute;n&eacute;ralement, il est fortement conseill&eacute;
+ de laisser la charge de ces pages au webmestre principal de votre site.</b>',
 'texte_inc_meta_1' => 'Le syst&egrave;me a rencontr&eacute; une erreur lors de l\'&eacute;criture du fichier <code>@fichier@</code>. Veuillez, en tant qu\'administrateur du site,',
 'texte_inc_meta_2' => 'v&eacute;rifier les droits d\'&eacute;criture',
 'texte_inc_meta_3' => 'sur le r&eacute;pertoire <code>@repertoire@</code>.',
