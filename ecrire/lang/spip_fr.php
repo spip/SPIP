@@ -429,7 +429,7 @@ Merci de votre participation
 'info_grand_ecran' => 'Grand &eacute;cran',
 'info_image_aide' => 'AIDE',
 'info_image_process_titre' => 'M&eacute;thode de fabrication des vignettes',
-'info_impossible_lire_page' => '<B>Erreur !</B> Impossible de lire la page <tt><html>@test_proxy@</html></tt> &agrave; travers le proxy <tt>',
+'info_impossible_lire_page' => '<b>Erreur !</b> Impossible de lire la page <tt><html>@test_proxy@</html></tt> &agrave; travers le proxy <tt>',
 'info_inclusion_directe' => 'Inclusion directe&nbsp;:',
 'info_inclusion_vignette' => 'Inclusion de la vignette&nbsp;:',
 'info_installation_systeme_publication' => 'Installation du syst&egrave;me de publication...',
@@ -505,9 +505,9 @@ Merci de votre participation
 'info_site_refuse' => 'Site Web refus&eacute;',
 'info_sites_referencer' => 'R&eacute;f&eacute;rencer un site',
 'info_supprimer_vignette' => 'supprimer la vignette',
-'info_symbole_bleu' => 'Le symbole <B>bleu</B> indique un <B>pense-b&ecirc;te</B>: c\'est-&agrave;-dire un message &agrave; votre usage personnel.',
-'info_symbole_jaune' => 'Le symbole <B>jaune</B> indique une <B>annonce &agrave; tous les r&eacute;dacteurs</B>&nbsp;: modifiable par tous les administrateurs, et visible par tous les r&eacute;dacteurs.',
-'info_symbole_vert' => 'Le symbole <B>vert</B> indique les <B>messages &eacute;chang&eacute;s avec d\'autres utilisateurs</B> du site.',
+'info_symbole_bleu' => 'Le symbole <b>bleu</b> indique un <b>pense-b&ecirc;te</b>: c\'est-&agrave;-dire un message &agrave; votre usage personnel.',
+'info_symbole_jaune' => 'Le symbole <b>jaune</b> indique une <b>annonce &agrave; tous les r&eacute;dacteurs</b>&nbsp;: modifiable par tous les administrateurs, et visible par tous les r&eacute;dacteurs.',
+'info_symbole_vert' => 'Le symbole <b>vert</b> indique les <b>messages &eacute;chang&eacute;s avec d\'autres utilisateurs</b> du site.',
 'info_syndication' => 'syndication&nbsp;:',
 'info_syndication_articles' => 'article(s)',
 'info_telecharger' => 'T&eacute;l&eacute;charger depuis votre ordinateur&nbsp;:',
@@ -680,21 +680,21 @@ et vous reconnecter au site.
 				ins&eacute;r&eacute;s. Selon la mise en page du site public,
 				ils pourront appara&icirc;tre sous forme de documents joints.',
 'texte_erreur_mise_niveau_base' => 'Erreur de base de donn&eacute;es lors de la mise &agrave; niveau.
-		L\'image <B>@fichier@</B> n\'est pas pass&eacute;e (article @id_article@).
+		L\'image <b>@fichier@</b> n\'est pas pass&eacute;e (article @id_article@).
 		Notez bien cette r&eacute;f&eacute;rence, r&eacute;essayez la mise &agrave;
 		niveau, et enfin v&eacute;rifiez que les images apparaissent
 		toujours dans les articles.',
 'texte_inc_auth_1' => 'Vous &ecirc;tes identifi&eacute; sous le
-		login <B>@auth_login@</B>, mais celui-ci n\'existe pas/plus dans la base. 
+		login <b>@auth_login@</b>, mais celui-ci n\'existe pas/plus dans la base. 
 		Essayez de vous',
 'texte_inc_auth_2' => 'reconnecter',
 'texte_inc_auth_3' => ', apr&egrave;s avoir &eacute;ventuellement quitt&eacute; puis
 		red&eacute;marr&eacute; votre navigateur.',
 'texte_inc_config' => 'Les modifications effectu&eacute;es dans ces pages influent notablement sur le
 	fonctionnement de votre site. Nous vous recommandons de ne pas y intervenir tant que vous n\'&ecirc;tes pas
-	familier du fonctionnement du syst&egrave;me SPIP. <P align="justify"><B>Plus
+	familier du fonctionnement du syst&egrave;me SPIP. <p align="justify"><b>Plus
 	g&eacute;n&eacute;ralement, il est fortement conseill&eacute;
-	de laisser la charge de ces pages au webmestre principal de votre site.</B>',
+	de laisser la charge de ces pages au webmestre principal de votre site.</b>',
 'texte_inc_meta_1' => 'Le syst&egrave;me a rencontr&eacute; une erreur lors de l\'&eacute;criture du fichier <code>@fichier@</code>. Veuillez, en tant qu\'administrateur du site,',
 'texte_inc_meta_2' => 'v&eacute;rifier les droits d\'&eacute;criture',
 'texte_inc_meta_3' => 'sur le r&eacute;pertoire <code>@repertoire@</code>.',
