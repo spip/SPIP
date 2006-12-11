@@ -77,11 +77,11 @@ function install_etape_5_dist()
 		echo fieldset(_T('info_authentification_externe'),
 			array(
 				'etape' => array(
-					'label' => _T('texte_annuaire_ldap_1').bouton_suivant('bouton_acces_ldap'),
-					'value' => 'ldap1',
+					'label' => _T('texte_annuaire_ldap_1'),
+					'valeur' => 'ldap1',
 					'hidden' => true
-				)
-			)
+				)),
+			bouton_suivant('bouton_acces_ldap')
 		);
 		echo "</form>\n";
 	}
