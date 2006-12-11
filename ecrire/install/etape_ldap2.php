@@ -16,7 +16,7 @@ function install_etape_ldap2_dist()
 {
 	global $adresse_ldap, $login_ldap, $pass_ldap, $port_ldap, $tls_ldap, $protocole_ldap, $spip_lang_right;
 
-	install_debut_html('AUTO', ' onLoad="document.getElementById(\'suivant\').focus();return false;"');
+	echo install_debut_html('AUTO', ' onLoad="document.getElementById(\'suivant\').focus();return false;"');
 
 	$port_ldap = intval($port_ldap);
 	$ldap_link = @ldap_connect($adresse_ldap, $port_ldap);
@@ -63,7 +63,7 @@ function install_etape_ldap2_dist()
 		);
 	}
 
-	install_fin_html();
+	echo install_fin_html();
 }
 
 ?>

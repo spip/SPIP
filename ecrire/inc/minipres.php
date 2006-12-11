@@ -36,33 +36,33 @@ function install_debut_html($titre = 'AUTO', $onLoad = '') {
 	if (!headers_sent())
 		header('Content-Type: text/html; charset=utf-8');
 
-	echo  _DOCTYPE_ECRIRE ,
-		html_lang_attributes(),
-		"<head>\n",
-		"<title>",
-		textebrut($titre),
+	return  _DOCTYPE_ECRIRE.
+		html_lang_attributes().
+		"<head>\n".
+		"<title>".
+		textebrut($titre).
 		"</title>
-		<style type='text/css'><!--\n/*<![CDATA[*/\n\n\n",
-		"body { background: #FFF; color: #000; }\n",
-		"h1 { color: #970038; margin-top: 50px; font-family: Verdana; font-weigth: bold; font-size: 18px }\n",
-		"h2 { font-family: Verdana,Arial,Sans,sans-serif; font-weigth: normal; font-size: 100%; }\n",
-		"a { color: #E86519; text-decoration: none; }\n",
-		"a:visited { color: #6E003A; }\n",
-		"a:active { color: #FF9900; }\n",
-		"img { border: 0; }\n",
-		"p { text-align: justify; }\n",
-		"ul { text-align: justify; list-style-type: none; }\n",
-		"fieldset, .fieldset { font-weigth: bold; text-align: justify; border: 1px solid #444; paddind: 10px; margin-top: 1em; }\n",
-		"legend { font-weight: bold; }\n",
-		"label {}\n",
-		"#minipres { width: 30em; text-align: center; margin-left: auto; margin-right: auto; }\n",
-		".petit-centre { font-family: Verdana,Arial,Sans,sans-serif; font-size: 10px; }\n",
-		".petit-centre p { text-align: center; }\n",
-		".suivant { text-align: $spip_lang_right; display: block; margin-top: 1em; }\n",
+		<style type='text/css'><!--\n/*<![CDATA[*/\n\n\n".
+		"body { background: #FFF; color: #000; }\n".
+		"h1 { color: #970038; margin-top: 50px; font-family: Verdana; font-weigth: bold; font-size: 18px }\n".
+		"h2 { font-family: Verdana,Arial,Sans,sans-serif; font-weigth: normal; font-size: 100%; }\n".
+		"a { color: #E86519; text-decoration: none; }\n".
+		"a:visited { color: #6E003A; }\n".
+		"a:active { color: #FF9900; }\n".
+		"img { border: 0; }\n".
+		"p { text-align: justify; }\n".
+		"ul { text-align: justify; list-style-type: none; }\n".
+		"fieldset, .fieldset { font-weigth: bold; text-align: justify; border: 1px solid #444; paddind: 10px; margin-top: 1em; }\n".
+		"legend { font-weight: bold; }\n".
+		"label {}\n".
+		"#minipres { width: 30em; text-align: center; margin-left: auto; margin-right: auto; }\n".
+		".petit-centre { font-family: Verdana,Arial,Sans,sans-serif; font-size: 10px; }\n".
+		".petit-centre p { text-align: center; }\n".
+		".suivant { text-align: $spip_lang_right; display: block; margin-top: 1em; }\n".
 		".fondl { padding: 3px; background-color: #eee; border: 1px solid #333; 
 	background-position: center bottom; 
 	font-size: 0.8em;
-	font-family: Verdana,Arial,Sans,sans-serif; }\n",
+	font-family: Verdana,Arial,Sans,sans-serif; }\n".
 		".formo { width: 100%; display: block; padding: 3px;
 	margin-top: 1em;
 	background-color: #FFF; 
@@ -70,22 +70,22 @@ function install_debut_html($titre = 'AUTO', $onLoad = '') {
 	background-position: center bottom; 
 	behavior: url(../dist/win_width.htc);
 	font-size: 0.8em;
-	font-family: Verdana,Arial,Sans,sans-serif; }\n",
+	font-family: Verdana,Arial,Sans,sans-serif; }\n".
 	  "\n\n]]>\n--></style>\n\n
 	<script type='text/javascript' src='"
 	  . _DIR_JAVASCRIPT . "spip_barre.js'></script>
 </head>
 <body".$onLoad.">
 	<div id='minipres'>
-	<h1>",
-	  $titre ,
+	<h1>".
+	  $titre .
 	  "</h1>
 	<div>\n";
 }
 
 // http://doc.spip.org/@install_fin_html
 function install_fin_html() {
-	echo "\n\t</div>\n\t</div>\n</body>\n</html>";
+	return "\n\t</div>\n\t</div>\n</body>\n</html>";
 }
 
 // http://doc.spip.org/@info_etape
@@ -129,14 +129,14 @@ function bouton_suivant($code = 'suivant') {
 function minipres($titre, $corps="", $onload='')
 {
 	if (!$titre)
-		echo  _DOCTYPE_ECRIRE ,
-		  html_lang_attributes(),
-		  "<body$onload>",
-		  $corps,
+		return  _DOCTYPE_ECRIRE.
+		  html_lang_attributes().
+		  "<body$onload>".
+		  $corps.
 		  '</body></html>';
 	else {
-		install_debut_html($titre, $onload);
-		echo $corps;
+		return install_debut_html($titre, $onload).
+		$corps.
 		install_fin_html();
 	}
 	exit;

@@ -22,7 +22,7 @@ function install_etape__dist()
 		include_spip('inc/headers');
 		redirige_par_entete(generer_url_action('test_dirs'));
 	} else {
-		install_debut_html();
+		echo install_debut_html();
 		echo "<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n",
 			"<div class='petit-centre'><p>",info_copyright(),"</p></div>\n",
 			"<p>",_T('install_select_langue'),"</p>",
@@ -31,7 +31,7 @@ function install_etape__dist()
 			'<input type="hidden" name="action" value="test_dirs" />',
 			bouton_suivant(),
 			"</form>";
-		install_fin_html();
+		echo install_fin_html();
 	}
 }
 

@@ -120,7 +120,7 @@ function exec_convert_utf8_dist() {
 
 	// commencer (ou continuer apres un timeout et reload)
 
-	install_debut_html($action);
+	echo install_debut_html($action);
 	
 	echo "<p>" . _T('utf8_convert_timeout') . "<hr />\n";
 
@@ -208,7 +208,7 @@ function exec_convert_utf8_dist() {
 	echo "<p align='right'> <a href='" . generer_url_ecrire("config_lang")
 	. "'> &gt;&gt; "._T('icone_retour')."</a>";
 
-	install_fin_html();
+	echo install_fin_html();
 }
 
 

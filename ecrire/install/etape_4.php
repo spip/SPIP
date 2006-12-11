@@ -19,7 +19,7 @@ function install_etape_4_dist()
 {
 	global $adresse_db, $choix_db, $login_db, $pass_db, $spip_lang_right, $spip_version, $table_new, $chmod;
 
-	install_debut_html('AUTO', ' onLoad="document.getElementById(\'suivant\').focus();return false;"');
+	echo install_debut_html('AUTO', ' onLoad="document.getElementById(\'suivant\').focus();return false;"');
 
 	echo info_etape(_T('info_creation_tables'));
 
@@ -113,7 +113,7 @@ function install_etape_4_dist()
 		echo "<B>"._T('avis_operation_echec')."</B> "._T('texte_operation_echec');
 	}
 
-	install_fin_html();
+	echo install_fin_html();
 }
 
 ?>

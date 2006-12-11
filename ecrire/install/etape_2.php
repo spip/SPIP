@@ -15,7 +15,7 @@ function install_etape_2_dist()
 {
 	global $adresse_db, $login_db, $pass_db, $spip_lang_right,$chmod;
 
-	install_debut_html('AUTO', ' onLoad="document.getElementById(\'suivant\').focus();return false;"');
+	echo install_debut_html('AUTO', ' onLoad="document.getElementById(\'suivant\').focus();return false;"');
 
 	echo info_etape(_T('info_connexion_base'));
 
@@ -43,7 +43,7 @@ function install_etape_2_dist()
 		echo "<p style='font-size: small;'>"._T('avis_connexion_echec_3')."</p>";
 	}
 
-	install_fin_html();
+	echo install_fin_html();
 }
 
 ?>
