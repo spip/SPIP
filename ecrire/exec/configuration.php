@@ -74,7 +74,7 @@ creer_colonne_droite();
 echo pipeline('affiche_droite',array('args'=>array('exec'=>'configuration'),'data'=>''));
 debut_droite();
 
-avertissement_config();
+echo avertissement_config();
 
 //
 // Afficher les options de config
@@ -156,7 +156,7 @@ if ($options == 'avancees') {
 	echo _T('info_surtitre');
 	echo "</TD>";
 	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
-	afficher_choix('articles_surtitre', $articles_surtitre,
+	echo afficher_choix('articles_surtitre', $articles_surtitre,
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 	echo "</TD></TR>\n";
 
@@ -165,7 +165,7 @@ if ($options == 'avancees') {
 	echo _T('info_sous_titre');
 	echo "</TD>";
 	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
-	afficher_choix('articles_soustitre', $articles_soustitre,
+	echo afficher_choix('articles_soustitre', $articles_soustitre,
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 	echo "</TD></TR>\n";
 
@@ -174,7 +174,7 @@ if ($options == 'avancees') {
 	echo _T('info_descriptif');
 	echo "</TD>";
 	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
-	afficher_choix('articles_descriptif', $articles_descriptif,
+	echo afficher_choix('articles_descriptif', $articles_descriptif,
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 	echo "</TD></TR>\n";
 
@@ -183,7 +183,7 @@ if ($options == 'avancees') {
 	echo _T('info_chapeau_2');
 	echo "</TD>";
 	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
-	afficher_choix('articles_chapeau', $articles_chapeau,
+	echo afficher_choix('articles_chapeau', $articles_chapeau,
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 	echo "</TD></TR>\n";
 
@@ -192,7 +192,7 @@ if ($options == 'avancees') {
 	echo _T('info_post_scriptum_2');
 	echo "</TD>";
 	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
-	afficher_choix('articles_ps', $articles_ps,
+	echo afficher_choix('articles_ps', $articles_ps,
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 	echo "</TD></TR>\n";
 
@@ -201,7 +201,7 @@ if ($options == 'avancees') {
 	echo _T('info_date_publication_anterieure');
 	echo "</TD>";
 	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
-	afficher_choix('articles_redac', $articles_redac,
+	echo afficher_choix('articles_redac', $articles_redac,
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 	echo "</TD></TR>\n";
 
@@ -210,7 +210,7 @@ if ($options == 'avancees') {
 	echo _T('info_urlref');
 	echo "</TD>";
 	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
-	afficher_choix('articles_urlref', $articles_urlref,
+	echo afficher_choix('articles_urlref', $articles_urlref,
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 	echo "</TD></TR>\n";
 
@@ -235,7 +235,7 @@ if ($options == 'avancees') {
 	echo "</TD></TR>";
 
 	echo "<TR><TD ALIGN='$spip_lang_left' class='verdana2'>";
-	afficher_choix('post_dates', $post_dates,
+	echo afficher_choix('post_dates', $post_dates,
 		array('oui' => _T('item_publier_articles'),
 			'non' => _T('item_non_publier_articles')));
 	echo "</TD></TR>\n";
@@ -270,7 +270,7 @@ echo _T('info_breves');
 echo "</TD></TR>";
 
 echo "<TR><TD align='center' class='verdana2'>";
-afficher_choix('activer_breves', $activer_breves,
+echo afficher_choix('activer_breves', $activer_breves,
 	array('oui' => _T('item_utiliser_breves'),
 		'non' => _T('item_non_utiliser_breves')), " &nbsp; ");
 echo "</FONT>";
@@ -314,7 +314,7 @@ if ($options == "avancees") {
 		echo bouton_radio("articles_mots", "non", _T('item_non_utiliser_mots_cles'), $articles_mots == "non", "changeVisible(this.checked, 'mots-config', 'none', 'block');");
 
 
-//	afficher_choix('articles_mots', $articles_mots,
+//	echo afficher_choix('articles_mots', $articles_mots,
 //		array('oui' => _T('item_utiliser_mots_cles'),
 //			'non' => _T('item_non_utiliser_mots_cles')), "<br />");
 	echo "</TD></TR></table>";
@@ -334,7 +334,7 @@ if ($options == "avancees") {
 
 		echo "<TR>";
 		echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
-		afficher_choix('config_precise_groupes', $config_precise_groupes,
+		echo afficher_choix('config_precise_groupes', $config_precise_groupes,
 			array('oui' => _T('item_utiliser_config_groupe_mots_cles'),
 				'non' => _T('item_non_utiliser_config_groupe_mots_cles')));
 		echo "</TD></TR></table>";
@@ -350,7 +350,7 @@ if ($options == "avancees") {
 
 			echo "<TR>";
 			echo "<TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
-			afficher_choix('mots_cles_forums', $mots_cles_forums,
+			echo afficher_choix('mots_cles_forums', $mots_cles_forums,
 				array('oui' => _T('item_ajout_mots_cles'),
 					'non' => _T('item_non_ajout_mots_cles')));
 			echo "</FONT>";
@@ -449,7 +449,7 @@ else $style = "display: none;";
 			echo "<p><hr><p align='$spip_lang_left'>";
 			echo _T('texte_liens_sites_syndiques')."<p>";
 	
-			afficher_choix('moderation_sites', $moderation_sites,
+			echo afficher_choix('moderation_sites', $moderation_sites,
 				array('oui' => _T('item_bloquer_liens_syndiques'),
 				'non' => _T('item_non_bloquer_liens_syndiques')));
 	
@@ -461,7 +461,7 @@ else $style = "display: none;";
 				echo _T('texte_utilisation_moteur_syndiques')." ";
 				echo "<blockquote><i>"._T('texte_utilisation_moteur_syndiques_2')."</i></blockquote><p>";
 	
-				afficher_choix('visiter_sites', $visiter_sites,
+				echo afficher_choix('visiter_sites', $visiter_sites,
 					array('non' => _T('item_limiter_recherche'),
 						'oui' => _T('item_non_limiter_recherche')));
 			}
@@ -495,7 +495,7 @@ echo "</TD></TR>";
 
 echo "<TR>";
 echo "<TD align='$spip_lang_left' class='verdana2'>";
-afficher_choix('syndication_integrale', $GLOBALS['meta']["syndication_integrale"],
+echo afficher_choix('syndication_integrale', $GLOBALS['meta']["syndication_integrale"],
 	array('oui' => _T('item_autoriser_syndication_integrale'),
 		'non' => _T('item_non_autoriser_syndication_integrale')), "<br>");
 echo "</TD></TR>";
@@ -536,11 +536,11 @@ echo "</TD></TR>";
 
 echo "<TR>";
 echo "<TD align='$spip_lang_left' class='verdana2'>";
-afficher_choix('documents_article', $documents_article,
+echo afficher_choix('documents_article', $documents_article,
 	array('oui' => _T('item_autoriser_documents_joints'),
 		'non' => _T('item_non_autoriser_documents_joints')), "<br>");
 echo "<br><br>\n";
-afficher_choix('documents_rubrique', $documents_rubrique,
+echo afficher_choix('documents_rubrique', $documents_rubrique,
 	array('oui' => _T('item_autoriser_documents_joints_rubriques'),
 		'non' => _T('item_non_autoriser_documents_joints_rubriques')), "<br>");
 echo "</FONT>";

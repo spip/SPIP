@@ -55,6 +55,8 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 
 	if (spip_num_rows($result) > 0) {
 
+		$revisions = '';
+
 		// Afficher l'entete de la boite
 		if (!$rss) {
 			$titre_table =  '<b>' . _T('icone_suivi_revisions').aide('suivimodif')  . '</b>';
@@ -62,29 +64,29 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 				$titre_table = afficher_plus(generer_url_ecrire("suivi_revisions"))
 				. $titre_table;
 
-			echo "\n<div style='height: 12px;'></div>";
-			echo "\n<div class='liste'>";
-			bandeau_titre_boite2($titre_table, "historique-24.gif");
+			$revisions .= "\n<div style='height: 12px;'></div>";
+			$revisions .= "\n<div class='liste'>";
+			$revisions .= bandeau_titre_boite2($titre_table, "historique-24.gif", "white", "black", true);
 	
 			$total = spip_num_rows(spip_query("SELECT versions.*, articles.statut, articles.titre FROM spip_versions AS versions, spip_articles AS articles WHERE $req_where LIMIT 0, 149"));
 		
 			if ($total > $nb_aff) {
 				$nb_tranches = ceil($total / $nb_aff);
 			
-				echo "\n<div class='arial2' style='background-color: #dddddd; padding: 5px;'>";
+				$revisions .= "\n<div class='arial2' style='background-color: #dddddd; padding: 5px;'>";
 		
 				for ($i = 0; $i < $nb_tranches; $i++) {
-					if ($i > 0) echo " | ";
-					if ($i*$nb_aff == $debut) echo "<b>";
+					if ($i > 0) $revisions .= " | ";
+					if ($i*$nb_aff == $debut) $revisions .= "<b>";
 					else {
 					  $next = ($i * $nb_aff);
-echo "<a href='", generer_url_ecrire('suivi_revisions', "debut=$next&id_secteur=$id_secteur&id_auteur=$uniq_auteur&lang_choisie=$lang"),"'>";
+$revisions .= "<a href='".generer_url_ecrire('suivi_revisions', "debut=$next&id_secteur=$id_secteur&id_auteur=$uniq_auteur&lang_choisie=$lang")."'>";
 					}
-					echo (($i * $nb_aff) + 1);
-					if ($i*$nb_aff == $debut) echo "</b>";
-					else echo "</a>";
+					$revisions .= (($i * $nb_aff) + 1);
+					if ($i*$nb_aff == $debut) $revisions .= "</b>";
+					else $revisions .= "</a>";
 				}
-				echo "</div>";
+				$revisions .= "</div>";
 			}
 		}
 
@@ -108,17 +110,17 @@ echo "<a href='", generer_url_ecrire('suivi_revisions', "debut=$next&id_secteur=
 	
 			if (!$rss) {
 				$logo_statut = "puce-".puce_statut($statut).".gif";
-				echo "\n<div class='tr_liste' style='padding: 5px; border-top: 1px solid #aaaaaa;'>";
+				$revisions .= "\n<div class='tr_liste' style='padding: 5px; border-top: 1px solid #aaaaaa;'>";
 	
-				echo "<span class='arial2'>";
-				if (!$court) echo bouton_block_visible("$id_version-$id_article-$id_auteur");
-				echo "<img src='" . _DIR_IMG_PACK . "$logo_statut' alt=' ' />&nbsp;";
-				echo "<a class='$statut' style='font-weight: bold;' href='" . generer_url_ecrire("articles_versions","id_article=$id_article") . "'>$titre</a>";
-				echo "</span>";
-				echo "<span class='arial1'$dir_lang>";
-				echo " ".date_relative($date)." "; # laisser un peu de privacy aux redacteurs
-				if (strlen($nom)>0) echo "($nom)";
-				echo "</span>";
+				$revisions .= "<span class='arial2'>";
+				if (!$court) $revisions .= bouton_block_visible("$id_version-$id_article-$id_auteur");
+				$revisions .= "<img src='" . _DIR_IMG_PACK . "$logo_statut' alt=' ' />&nbsp;";
+				$revisions .= "<a class='$statut' style='font-weight: bold;' href='" . generer_url_ecrire("articles_versions","id_article=$id_article") . "'>$titre</a>";
+				$revisions .= "</span>";
+				$revisions .= "<span class='arial1'$dir_lang>";
+				$revisions .= " ".date_relative($date)." "; # laisser un peu de privacy aux redacteurs
+				if (strlen($nom)>0) $revisions .= "($nom)";
+				$revisions .= "</span>";
 			} else {
 				$item = array(
 					'title' => $titre,
@@ -188,37 +190,38 @@ echo "<a href='", generer_url_ecrire('suivi_revisions', "debut=$next&id_secteur=
 				}
 
 				if (!$rss)
-					echo debut_block_visible("$id_version-$id_article-$id_auteur");
+					$revisions .= debut_block_visible("$id_version-$id_article-$id_auteur");
 
 				if (is_array($textes))
 				foreach ($textes as $var => $t) {
 					if (strlen($t) > 0) {
-						if (!$rss) echo "<blockquote class='serif1'>";
+						if (!$rss) $revisions .= "<blockquote class='serif1'>";
 						$aff = propre_diff($t);
 						if ($GLOBALS['les_notes']) {
 							$aff .= '<p>'.$GLOBALS['les_notes'];
 							$GLOBALS['les_notes'] = '';
 						}
 						if (!$rss) {
-							echo $aff;
-							echo "</blockquote>";
+							$revisions .= $aff;
+							$revisions .= "</blockquote>";
 						} else
 							$item['description'] = $aff;
 					}
 				}
-				if (!$rss) echo fin_block();
+				if (!$rss) $revisions .= fin_block();
 			}
 			
-			if (!$rss) echo "</div>";
+			if (!$rss) $revisions .= "</div>";
 
 			if ($rss)
 				$items[] = $item;
 		}		
-		if (!$rss) echo "</div>";
+		if (!$rss) $revisions .= "</div>";
 	}
 
 	if ($rss)
 		return $items;
+	else return $revisions;
 }
 
 ?>

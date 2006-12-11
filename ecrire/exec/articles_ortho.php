@@ -169,7 +169,7 @@ if (is_array($result_ortho)) {
 		echo "<b>"._T('ortho_mode_demploi').aide('corrortho')."</b><p>\n";
 	}
 
-	panneau_ortho($result_ortho);
+	echo panneau_ortho($result_ortho);
 }
 else {
 	$erreur = $result_ortho;

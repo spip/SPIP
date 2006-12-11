@@ -99,18 +99,18 @@ function init_config() {
 // http://doc.spip.org/@avertissement_config
 function avertissement_config() {
 	global $spip_lang_right, $spip_lang_left;
-	debut_boite_info();
+	$texte = debut_boite_info(true);
 
-	echo "<div class='verdana2' align='justify'>
-	<p align='center'><B>"._T('avis_attention')."</B></p>",
-	  http_img_pack("warning.gif", (_T('avis_attention')), "width='48' height='48' align='$spip_lang_right' style='padding-$spip_lang_left: 10px;'");
-
-	echo _T('texte_inc_config');
-
-	echo "</div>";
-
-	fin_boite_info();
-	echo "<p>&nbsp;<p>";
+	$texte .= "<div class='verdana2' align='justify'>
+	<p align='center'><B>"._T('avis_attention')."</B></p>";
+	$texte .= http_img_pack("warning.gif", (_T('avis_attention')),
+		"width='48' height='48' align='$spip_lang_right' style='padding-$spip_lang_left: 10px;'");
+	$texte .= _T('texte_inc_config');
+	$texte .= "</div>";
+	$texte .= fin_boite_info(true);
+	$texte .= "<p>&nbsp;<p>";
+	
+	return $texte;
 }
 
 
@@ -135,7 +135,7 @@ function afficher_choix($nom, $valeur_actuelle, $valeurs, $sep = "<br />") {
 	while (list($valeur, $titre) = each($valeurs)) {
 		$choix[] = bouton_radio($nom, $valeur, $titre, $valeur == $valeur_actuelle);
 	}
-	echo "\n".join($sep, $choix);
+	return "\n".join($sep, $choix);
 }
 
 

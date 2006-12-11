@@ -117,9 +117,9 @@ fin_cadre_relief();
 //
 
 
-debut_droite();
+echo debut_droite("", true);
 
- afficher_suivi_versions ($debut, $id_secteur, $id_auteur, $lang_choisie);
+ echo afficher_suivi_versions ($debut, $id_secteur, $id_auteur, $lang_choisie);
 
 echo fin_page();
 }

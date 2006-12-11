@@ -65,7 +65,7 @@ debut_cadre_couleur("traductions-24.gif", false, "", _T('info_multilinguisme'));
 	echo "<div>";
 	echo _T('info_multi_articles');
 	echo "<div style='text-align: $spip_lang_right';>";
-	afficher_choix('multi_articles', $GLOBALS['meta']['multi_articles'],
+	echo afficher_choix('multi_articles', $GLOBALS['meta']['multi_articles'],
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 	echo "</div>";
 	echo "</div>";
@@ -73,7 +73,7 @@ debut_cadre_couleur("traductions-24.gif", false, "", _T('info_multilinguisme'));
 	echo "<div>";
 	echo _T('info_multi_rubriques');
 	echo "<div style='text-align: $spip_lang_right';>";
-	afficher_choix('multi_rubriques', $GLOBALS['meta']['multi_rubriques'],
+	echo afficher_choix('multi_rubriques', $GLOBALS['meta']['multi_rubriques'],
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 	echo "</div>";
 	echo "</div>";
@@ -82,7 +82,7 @@ debut_cadre_couleur("traductions-24.gif", false, "", _T('info_multilinguisme'));
 		echo "<div>";
 		echo _T('info_multi_secteurs');
 		echo "<div style='text-align: $spip_lang_right';>";
-		afficher_choix('multi_secteurs', $GLOBALS['meta']['multi_secteurs'],
+		echo afficher_choix('multi_secteurs', $GLOBALS['meta']['multi_secteurs'],
 			array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 		echo "</div>";
 		echo "</div>";
@@ -95,7 +95,7 @@ debut_cadre_couleur("traductions-24.gif", false, "", _T('info_multilinguisme'));
 
 		echo _T('info_gerer_trad');
 		echo "<div style='text-align: $spip_lang_right';>";
-		afficher_choix('gerer_trad', $GLOBALS['meta']['gerer_trad'],
+		echo afficher_choix('gerer_trad', $GLOBALS['meta']['gerer_trad'],
 			array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 		echo "</div>";
 	} else
