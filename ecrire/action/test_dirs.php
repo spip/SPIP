@@ -131,7 +131,7 @@ if ($bad_dirs OR $absent_dirs) {
 	  "<DIV align='right'><input type='submit' class='fondl' value='". 
 	  _T('login_recharger')."' /></DIV>" .
 	  "</form>";
-	minipres($titre, $res);
+	echo minipres($titre, $res);
 
  } else {
 	if (!_FILE_CONNECT)

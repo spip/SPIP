@@ -136,7 +136,7 @@ function erreur_squelette($message='', $lieu='') {
 				. _T('admin_debug')
 				. ' '
 				. supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']));
-			minipres($titre, affiche_erreurs_page($tableau_des_erreurs));
+			echo minipres($titre, affiche_erreurs_page($tableau_des_erreurs));
 		}
 	}
 }
