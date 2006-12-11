@@ -1313,4 +1313,25 @@ function balise_TOTAL_UNIQUE_dist($p) {
 	return $p;
 }
 
+//
+// #ARRAY
+// pour creer un array php a partir d'arguments calcules
+// #ARRAY{key1,val1,key2,val2 ...} returne array(key1=>val1,...)
+//
+function balise_ARRAY_dist($p) {
+	$_code= "";
+	$n=1;
+	$_key = interprete_argument_balise($n++,$p);
+	$_val = interprete_argument_balise($n++,$p);
+	while ($_key && $_val){
+		$_code .= ", $_key => $_val";
+		$_key = interprete_argument_balise($n++,$p);
+		$_val = interprete_argument_balise($n++,$p);
+	}
+	if (strlen($_code))
+		$p->code = "array(".substr($_code,2).")";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
 ?>
