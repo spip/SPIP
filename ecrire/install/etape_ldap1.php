@@ -29,55 +29,56 @@ function install_etape_ldap1_dist()
 	}
 	install_debut_html();
 
-	echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>";
-	echo _T('titre_connexion_ldap');
-	echo "</FONT><br />";
+	echo info_etape(_T('titre_connexion_ldap'), _T('entree_informations_connexion_ldap'));
 
-	echo _T('entree_informations_connexion_ldap');
 	echo generer_url_post_ecrire('install');
-	echo "<p><INPUT TYPE='hidden' NAME='etape' VALUE='ldap2'>";
+	echo "<input type='hidden' name='etape' value='ldap2' />";
 
-	echo "<fieldset><label><B>";
-	echo _T('entree_adresse_annuaire');
-	echo "</B><BR />\n</label>";
-	echo _T('texte_adresse_annuaire_1');
-	echo "<BR />\n<INPUT TYPE='text' NAME='adresse_ldap' CLASS='formo' VALUE=\"$adresse_ldap\" SIZE='20'></p>";
+	echo fieldset(_T('entree_adresse_annuaire'),
+		array(
+			'adresse_ldap' => array(
+				'label' => _T('texte_adresse_annuaire_1'),
+				'valeur' => $adresse_ldap
+			),
+			'port_ldap' => array(
+				'label' => _T('entree_port_annuaire').'<br />'._T('texte_port_annuaire'),
+				'valeur' => $port_ldap
+			),
+			'tls_ldap' => array(
+				'label' => '<b>'._L('Transport Layer Security :').'</b>',
+				'valeur' => 'non',
+				'alternatives' => array(
+					'non' => _T('item_non'),
+					'oui' => _T('item_oui')
+				)
+			),
+			'protocole_ldap' => array(
+				'label' => _L('Version du protocole :'),
+				'valeur' => $protocole_ldap,
+				'alternatives' => array(
+					'3' => '3',
+					'2' => '2'
+				)
+			)
+		)
+	);
 
-	echo "<p><label><B>";
-	echo _T('entree_port_annuaire');
-	echo "</B><BR />\n</label>";
-	echo _T('texte_port_annuaire');
-	echo "<BR />\n<INPUT TYPE='text' NAME='port_ldap' CLASS='formo' VALUE=\"$port_ldap\" SIZE='20' /></p>";
+	echo '<p>'._T('texte_acces_ldap_anonyme_1').'</p>';
+	echo fieldset(_L('Connexion:'),
+		array(
+			'login_ldap' => array(
+				'label' => _T('texte_login_ldap_1'),
+				'valeur' => ''
+			),
+			'pass_ldap' => array(
+				'label' => _T('entree_passe_ldap'),
+				'vaelur' => ''
+			)
+		)
+	);
 
-	echo "<p><label><B>";
-	echo _L('Transport Layer Security' );
-	echo "</B></label>";
-	echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-	echo "<INPUT TYPE='radio' NAME='tls_ldap' value='non' checked='checked' />";
-	echo _T('item_non');
-	echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-	echo "<INPUT TYPE='radio' NAME='tls_ldap' value='oui'/>";
-	echo _T('item_oui');
-	echo '</p>';
-
-	echo "<p><label><B>"._T('version')."</B></label>";
-	echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-	echo "<INPUT TYPE='text' NAME='protocole_ldap' CLASS='formo' VALUE=\"$protocole_ldap\" SIZE='5' />";
-
-	echo "</fieldset>";
-
-	echo "<p><fieldset>";
-	echo _T('texte_acces_ldap_anonyme_1')." ";
-	echo "<label><B>"._T('entree_login_ldap')."</B><BR />\n</label>";
-	echo _T('texte_login_ldap_1')."<br />\n";
-	echo "<INPUT TYPE='text' NAME='login_ldap' CLASS='formo' VALUE=\"\" SIZE='40'><P>";
-
-	echo "<label><B>"._T('entree_passe_ldap')."</B><BR />\n</label>";
-	echo "<INPUT TYPE='password' NAME='pass_ldap' CLASS='formo' VALUE=\"\" SIZE='40'></fieldset>";
-
-	echo "<p><DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
-
-	echo "</FORM>";
+	echo bouton_suivant();
+	echo "</form>";
 
 	install_fin_html();
 }

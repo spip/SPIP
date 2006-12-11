@@ -81,7 +81,7 @@ function install_etape_5_dist()
 					'valeur' => 'ldap1',
 					'hidden' => true
 				)),
-			bouton_suivant('bouton_acces_ldap')
+			bouton_suivant('acces_ldap')
 		);
 		echo "</form>\n";
 	}

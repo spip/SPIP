@@ -102,16 +102,26 @@ function fieldset($legend, $champs = array(), $horchamps='') {
 		$type = $contenu['hidden'] ? 'hidden' : (preg_match(',^pass,', $nom) ? 'password' : 'text');
 		$class = $contenu['hidden'] ? '' : "class='formo' size='40' ";
 		$fieldset .= "<label for='".$nom."'>".$contenu['label']."</label>\n";
-		$fieldset .= "<input ".$class."type='".$type."' name='".$nom."'\nvalue='".$contenu['valeur']."' />\n";
+		if(is_array($contenu['alternatives'])) {
+			foreach($contenu['alternatives'] as $valeur => $label) {
+				$fieldset .= "<input type='radio' name='".$nom .
+				"'\nvalue='".$valeur."' ".($valeur==$contenu['valeur']?"checked='checked'":'')."/>\n";
+				$fieldset .= "<label for='".$valeur."'>".$label."</label>\n";
+			}
+			$fieldset .= "<br />\n";
+		}
+		else {
+			$fieldset .= "<input ".$class."type='".$type."' name='".$nom."'\nvalue='".$contenu['valeur']."' />\n";
+		}
 	}
 	$fieldset .= "$horchamps</fieldset>\n";
 	return $fieldset;
 }
 
 // http://doc.spip.org/@bouton_suivant
-function bouton_suivant($code = 'bouton_suivant') {
-	return "\n<span class='suivant'><input id='suivant' type='submit' class='fondl'\nvalue=\"" .
-		_T($code) .
+function bouton_suivant($code = 'suivant') {
+	return "\n<span class='suivant'><input id='".$code."' type='submit' class='fondl'\nvalue=\"" .
+		_T("bouton_".$code) .
 		" >>\" /></span>\n";
 }
 

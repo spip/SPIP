@@ -16,54 +16,51 @@ function install_etape_ldap2_dist()
 {
 	global $adresse_ldap, $login_ldap, $pass_ldap, $port_ldap, $tls_ldap, $protocole_ldap, $spip_lang_right;
 
-	 install_debut_html();
-
-	echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('titre_connexion_ldap')."</FONT>";
-
-	echo "<P>";
+	install_debut_html('AUTO', ' onLoad="document.getElementById(\'suivant\').focus();return false;"');
 
 	$port_ldap = intval($port_ldap);
-	$ldap_link = ldap_connect($adresse_ldap, $port_ldap);
+	$ldap_link = @ldap_connect($adresse_ldap, $port_ldap);
 	$erreur = "ldap_connect($adresse_ldap, $port_ldap)";
 
-        if ($ldap_link) {
-
-		if ( !ldap_set_option($ldap_link, LDAP_OPT_PROTOCOL_VERSION, $protocole_ldap) ) {
+	if ($ldap_link) {
+		if ( !@ldap_set_option($ldap_link, LDAP_OPT_PROTOCOL_VERSION, $protocole_ldap) ) {
 			$protocole_ldap = 2 ;
-			ldap_set_option($ldap_link, LDAP_OPT_PROTOCOL_VERSION, $protocole_ldap);
+			@ldap_set_option($ldap_link, LDAP_OPT_PROTOCOL_VERSION, $protocole_ldap);
 		}
 		if ($tls_ldap == 'oui') {
-			if (!ldap_start_tls($ldap_link)) {
+			if (!@ldap_start_tls($ldap_link)) {
 				$erreur = "ldap_start_tls($ldap_link) $adresse_ldap, $port_ldap";
 				$ldap_link = false;
 			}
 		}
-	        if ($ldap_link) {
-			$ldap_link = ldap_bind($ldap_link, $login_ldap, $pass_ldap);
+		if ($ldap_link) {
+			$ldap_link = @ldap_bind($ldap_link, $login_ldap, $pass_ldap);
 			$erreur = "ldap_bind('$ldap_link', '$login_ldap', '$pass_ldap'): $adresse_ldap, $port_ldap";
 		}
 	}
 
 	if ($ldap_link) {
-		echo "<B>"._T('info_connexion_ldap_ok');
+		echo info_etape(_T('titre_connexion_ldap'),_T('info_connexion_ldap_ok'));
 
 		echo generer_url_post_ecrire('install');
-		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap3'>";
-		echo "<INPUT TYPE='hidden' NAME='adresse_ldap' VALUE=\"$adresse_ldap\">";
-		echo "<INPUT TYPE='hidden' NAME='port_ldap' VALUE=\"$port_ldap\">";
-		echo "<INPUT TYPE='hidden' NAME='login_ldap' VALUE=\"$login_ldap\">";
-		echo "<INPUT TYPE='hidden' NAME='pass_ldap' VALUE=\"$pass_ldap\">";
-		echo "<INPUT TYPE='hidden' NAME='protocole_ldap' VALUE=\"$protocole_ldap\">";
-		echo "<INPUT TYPE='hidden' NAME='tls_ldap' VALUE=\"$tls_ldap\">";
+		echo "<input type='hidden' name='etape' value='ldap3' />";
+		echo "<input type='hidden' name='adresse_ldap' value=\"$adresse_ldap\" />";
+		echo "<input type='hidden' name='port_ldap' value=\"$port_ldap\" />";
+		echo "<input type='hidden' name='login_ldap' value=\"$login_ldap\" />";
+		echo "<input type='hidden' name='pass_ldap' value=\"$pass_ldap\" />";
+		echo "<input type='hidden' name='protocole_ldap' value=\"$protocole_ldap\" />";
+		echo "<input type='hidden' name='tls_ldap' value=\"$tls_ldap\" />";
 
-		echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
-		echo "</FORM>";
+		echo bouton_suivant();
+		echo "</form>";
 	}
 	else {
-		echo "<B>"._T('avis_connexion_ldap_echec_1')."</B>";
-		echo "<P>"._T('avis_connexion_ldap_echec_2');
-		echo "<br />\n"._T('avis_connexion_ldap_echec_3');
-		echo '<br /><br />', $erreur, '<b> ?</b>';
+		echo info_etape(_T('titre_connexion_ldap'),
+			_T('avis_connexion_ldap_echec_1').
+			"<p>"._T('avis_connexion_ldap_echec_2').
+			"<br />\n"._T('avis_connexion_ldap_echec_3') .
+			'<br /><br />'. $erreur. '<b> ?</b></p>'
+		);
 	}
 
 	install_fin_html();
