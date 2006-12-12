@@ -67,6 +67,7 @@ function ecrire_metas() {
 			. _T('texte_inc_meta_3',
 				array('repertoire' => joli_repertoire(_DIR_TMP)))
 			. "</h4>\n");
+			exit;
 		}
 	}
 }

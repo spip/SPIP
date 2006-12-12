@@ -140,7 +140,6 @@ function minipres($titre, $corps="", $onload='')
 		$corps.
 		install_fin_html();
 	}
-	exit;
 }
 
 //

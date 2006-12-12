@@ -24,6 +24,7 @@ function exec_documents_colonne_dist()
 		spip_log("Tentative d'intrusion de " . $GLOBALS['auteur_session']['nom'] . " dans " . $GLOBALS['exec']);
 		include_spip('inc/minipres');
 		echo minipres(_T('info_acces_interdit'));
+		exit;
 	}
 
 	include_spip("inc/documents");

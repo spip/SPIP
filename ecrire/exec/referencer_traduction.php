@@ -21,6 +21,7 @@ function exec_referencer_traduction_dist()
 		spip_log("Tentative d'intrusion de " . $GLOBALS['auteur_session']['nom'] . " dans " . $GLOBALS['exec']);
 		include_spip('inc/minipres');
 		echo minipres(_T('info_acces_interdit'));
+		exit;
 	}
 
 	$row = spip_fetch_array(spip_query("SELECT id_trad, id_rubrique FROM spip_articles WHERE id_article=$id_article"));

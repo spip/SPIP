@@ -143,6 +143,7 @@ function check_upload_error($error, $msg='') {
 		'"><input type="submit" class="fondl"  value="'.
 		_T('ecrire:bouton_suivant').
 		' &gt;&gt;"></div></form>');
+	exit;
 }
 
 // Erreur appelee depuis public.php (la precedente ne fonctionne plus

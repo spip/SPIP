@@ -25,6 +25,7 @@ function debut_admin($script, $action, $commentaire='') {
 	if ((!$action) || ($connect_statut != "0minirezo")) {
 		include_spip('inc/minipres');
 		echo minipres(_T('info_acces_refuse'));
+		exit;
 	}
 	if ($connect_toutes_rubriques) {
 		$dir = _DIR_TMP;
@@ -60,6 +61,7 @@ function debut_admin($script, $action, $commentaire='') {
 	echo minipres(_T('info_action', array('action' => $action)),
 		 $form,
 		 " onload='barre_inserer(\"$signal\", document.forms[0].fichier)'");
+	exit;
 }
 
 // http://doc.spip.org/@fin_admin
