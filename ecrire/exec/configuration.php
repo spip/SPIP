@@ -97,30 +97,30 @@ debut_cadre_couleur("racine-site-24.gif");
 
 
 	debut_cadre_relief("", false, "", _T('info_nom_site').aide ("confnom"));
-	echo "<input type='text' name='nom_site' value=\"$nom_site\" size='40' CLASS='forml'>";
+	echo "<input type='text' name='nom_site' value=\"$nom_site\" size='40' class='forml' />";
 	fin_cadre_relief();
 
 	debut_cadre_relief("", false, "", _T('info_adresse_url'));
-	echo "<input type='text' name='adresse_site' value=\"$adresse_site/\" size='40' CLASS='forml'>";
+	echo "<input type='text' name='adresse_site' value=\"$adresse_site/\" size='40' class='forml' />";
 	fin_cadre_relief();
 
 	debut_cadre_relief("", false, "", _T('entree_description_site'));
-	echo "<textarea name='descriptif_site' CLASS='forml' ROWS='4' COLS='40' wrap=soft>$descriptif_site</textarea>";
+	echo "<textarea name='descriptif_site' class='forml' rows='4' cols='40'>$descriptif_site</textarea>";
 	fin_cadre_relief();
 
 	if ($options == "avancees") {
 		echo "<div>&nbsp;</div>";
 	
 		debut_cadre_relief("", false, "", _T('info_email_webmestre'));
-		echo "<input type='text' name='email_webmaster' value=\"$email_webmaster\" size='40' CLASS='formo'>";
+		echo "<input type='text' name='email_webmaster' value=\"$email_webmaster\" size='40' class='formo' />";
 		fin_cadre_relief();
 	}
 
-	echo "<div style='text-align:right;'><input type='submit' name='Valider' value='"._T('bouton_enregistrer')."' CLASS='fondo'></div>";
+	echo "<div style='text-align:right;'><input type='submit' name='Valider' value='"._T('bouton_enregistrer')."' class='fondo' /></div>";
 
 fin_cadre_couleur();
 
-echo "<p>&nbsp;<p>";
+echo "<p>&nbsp;</p>";
 
 
 //
@@ -145,7 +145,7 @@ if ($options == 'avancees') {
 	$articles_redac = $GLOBALS['meta']["articles_redac"];
 	$articles_urlref = $GLOBALS['meta']["articles_urlref"];
 
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+	echo "<TABLE BORDER='0' CELLSPACING='1' CELLPADDING='3' WIDTH=\"100%\">";
 
 	echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' COLSPAN='2' class='verdana2'>";
 	echo _T('texte_contenu_articles');
@@ -214,8 +214,8 @@ if ($options == 'avancees') {
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 	echo "</TD></TR>\n";
 
-	echo "<TR><TD style='text-align: $spip_lang_right;' COLSPAN=2>";
-	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
+	echo "<TR><TD style='text-align: $spip_lang_right;' COLSPAN='2'>";
+	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo' />";
 	echo "</TD></TR>";
 	echo "</TABLE>";
 
@@ -229,7 +229,7 @@ if ($options == 'avancees') {
 
 	$post_dates = $GLOBALS['meta']["post_dates"];
 
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+	echo "<TABLE BORDER='0' CELLSPACING='1' CELLPADDING='3' WIDTH=\"100%\">";
 	echo "<TR><TD class='verdana2'>";
 	echo _T('texte_publication_articles_post_dates');
 	echo "</TD></TR>";
@@ -241,8 +241,8 @@ if ($options == 'avancees') {
 	echo "</TD></TR>\n";
 
 	echo "<TR><td style='text-align:$spip_lang_right;'>";
-	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
-	echo "</TD></TR>";
+	echo "<INPUT TYPE='submit' VALUE='"._T('bouton_valider')."' CLASS='fondo' />";
+	echo "</td></TR>";
 	echo "</TABLE>\n";
 
 	fin_cadre_relief();
@@ -263,9 +263,9 @@ debut_cadre_trait_couleur("breve-24.gif", false, "", _T('titre_breves').aide ("c
 
 $activer_breves = $GLOBALS['meta']["activer_breves"];
 
-echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+echo "<TABLE BORDER='0' CELLSPACING='1' CELLPADDING='3' WIDTH=\"100%\">";
 echo "<TR><TD class='verdana2'>";
-echo _T('texte_breves')."<p>";
+echo _T('texte_breves')."<br />";
 echo _T('info_breves');
 echo "</TD></TR>";
 
@@ -273,12 +273,11 @@ echo "<TR><TD align='center' class='verdana2'>";
 echo afficher_choix('activer_breves', $activer_breves,
 	array('oui' => _T('item_utiliser_breves'),
 		'non' => _T('item_non_utiliser_breves')), " &nbsp; ");
-echo "</FONT>";
 echo "</TD></TR>\n";
 
 echo "<TR><td style='text-align:$spip_lang_right;'>";
-echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
-echo "</TD></TR>";
+echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo' />";
+echo "</td></TR>";
 echo "</TABLE>\n";
 
 fin_cadre_trait_couleur();
@@ -299,9 +298,9 @@ if ($options == "avancees") {
 	$mots_cles_forums = $GLOBALS['meta']["mots_cles_forums"];
 	$forums_publics = $GLOBALS['meta']["forums_publics"];
 
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+	echo "<table BORDER='0' CELLSPACING='1' CELLPADDING='3' WIDTH=\"100%\">";
 	echo "<TR><TD class='verdana2'>";
-	echo _T('texte_mots_cles')."<p>";
+	echo _T('texte_mots_cles')."<br />";
 	echo _T('info_question_mots_cles');
 	echo "</TD></TR>";
 
@@ -327,7 +326,7 @@ if ($options == "avancees") {
 		echo "<p />";
 		debut_cadre_relief("", false, "", _T('titre_config_groupe_mots_cles'));
 
-		echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+		echo "<TABLE BORDER='0' CELLSPACING='1' CELLPADDING='3' WIDTH=\"100%\">";
 		echo "<TR><TD class='verdana2'>";
 		echo _T('texte_config_groupe_mots_cles');
 		echo "</TD></TR>";
@@ -343,7 +342,7 @@ if ($options == "avancees") {
 		if ($forums_publics != "non"){
 			echo "<p />";
 			debut_cadre_relief("", false, "", _T('titre_mots_cles_dans_forum'));
-			echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+			echo "<TABLE BORDER='0' CELLSPACING='1' CELLPADDING='3' WIDTH=\"100%\">";
 			echo "<TR><TD class='verdana2'>";
 			echo _T('texte_mots_cles_dans_forum');
 			echo "</TD></TR>";
@@ -361,9 +360,9 @@ if ($options == "avancees") {
 		echo "</div>";
 	
 
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+	echo "<TABLE BORDER='0' CELLSPACING='1' CELLPADDING='3' WIDTH=\"100%\">";
 	echo "<TR><td style='text-align:$spip_lang_right;'>";
-	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
+	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo' />";
 	echo "</TD></TR>";
 	echo "</TABLE>\n";
 
@@ -509,7 +508,7 @@ echo "<p>";
 
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 echo "<TR><td style='text-align:$spip_lang_right;'>";
-echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
+echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo' />";
 echo "</TD></TR>";
 echo "</TABLE>\n";
 
@@ -547,7 +546,7 @@ echo "</FONT>";
 echo "</TD></TR>";
 
 echo "<TR><td style='text-align:$spip_lang_right;'>";
-echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
+echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo' />";
 echo "</TD></TR>";
 echo "</TABLE>\n";
 
