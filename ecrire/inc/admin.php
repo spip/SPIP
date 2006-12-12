@@ -24,7 +24,7 @@ function debut_admin($script, $action, $commentaire='') {
 
 	if ((!$action) || ($connect_statut != "0minirezo")) {
 		include_spip('inc/minipres');
-		minipres(_T('info_acces_refuse'));
+		echo minipres(_T('info_acces_refuse'));
 	}
 	if ($connect_toutes_rubriques) {
 		$dir = _DIR_TMP;
@@ -57,7 +57,7 @@ function debut_admin($script, $action, $commentaire='') {
 			 . bouton_suivant(_T('recharger_page'))))
 		. "</form>";
 
-	minipres(_T('info_action', array('action' => $action)),
+	echo minipres(_T('info_action', array('action' => $action)),
 		 $form,
 		 " onload='barre_inserer(\"$signal\", document.forms[0].fichier)'");
 }

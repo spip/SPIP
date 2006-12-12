@@ -21,7 +21,7 @@ function exec_virtualiser_dist()
 	if (!acces_article($id_article)) {
 		spip_log("Tentative d'intrusion de " . $GLOBALS['auteur_session']['nom'] . " dans " . $GLOBALS['exec']);
 		include_spip('inc/minipres');
-		minipres(_T('info_acces_interdit'));
+		echo minipres(_T('info_acces_interdit'));
 	}
 
 	$row = spip_fetch_array(spip_query("SELECT chapo FROM spip_articles WHERE id_article='$id_article'"));

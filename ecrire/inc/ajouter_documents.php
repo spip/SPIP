@@ -468,7 +468,7 @@ function liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash,
     exit;
   }
   				 
-	minipres(_T('upload_fichier_zip'),
+	echo minipres(_T('upload_fichier_zip'),
 	  "<p>" .
 		_T('upload_fichier_zip_texte') .
 	  "</p><p>" .

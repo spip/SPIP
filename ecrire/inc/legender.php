@@ -91,7 +91,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	  "</textarea>\n" .
 	  $taille .
 	  "\n<div " .
-	  ($flag == 'ajax' ? '' : "class='display_au_chargement'") .
+	  ($flag == 'ajax' ? '' : "class='display_au_chargement' ") .
 	  "id='valider_doc$id_document' align='".
 	  $GLOBALS['spip_lang_right'].
 	  "'>\n<input class='fondo' style='font-size:9px;' value='".

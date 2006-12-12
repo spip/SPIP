@@ -44,7 +44,7 @@ function exec_iconifier_dist()
 	if (!$droit) {
 		spip_log("Tentative d'intrusion de " . $GLOBALS['auteur_session']['nom'] . " dans " . $GLOBALS['exec']);
 		include_spip('inc/minipres');
-		minipres(_T('info_acces_interdit'));
+		echo minipres(_T('info_acces_interdit'));
 	}
 
 	$iconifier = charger_fonction('iconifier', 'inc');

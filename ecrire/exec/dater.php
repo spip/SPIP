@@ -25,7 +25,7 @@ function exec_dater_dist()
 	OR ($type == 'article' AND    !acces_article($id))) {
 		spip_log("Tentative d'intrusion du " . $GLOBALS['auteur_session']['statut'] . ' ' . $GLOBALS['auteur_session']['nom'] . " dans " . $GLOBALS['exec'] . " sur $type $id.");
 		include_spip('inc/minipres');
-		minipres(_T('info_acces_interdit'));
+		echo minipres(_T('info_acces_interdit'));
 	}
 
 	$table = ($type=='syndic') ? 'syndic' : ($type . 's');

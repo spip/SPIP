@@ -87,10 +87,10 @@ function exec_admin_repair_dist()
 		if (! $res = verifier_base())
 			$res = "<br /><br /><font color='red'><b><tt>"._T('avis_erreur_mysql').' '.spip_sql_errno().': '.spip_sql_error() ."</tt></b></font><br /><br /><br />\n";
 		fin_admin($action);
-		minipres(_T('texte_tentative_recuperation'), $res);
+		echo minipres(_T('texte_tentative_recuperation'), $res);
 	}
 	else {
-	  minipres(_T('titre_reparation'), "<p>$message</p>");
+	  echo minipres(_T('titre_reparation'), "<p>$message</p>");
 	}
 }
 ?>
