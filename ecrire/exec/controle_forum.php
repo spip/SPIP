@@ -182,8 +182,8 @@ function controle_un_forum($row) {
 		}
 	}
 
-	$controle .= "</TD></TR></TABLE>";
-	$controle .= "</TD></TR></TABLE>\n";
+	$controle .= "</td></tr></table>";
+	$controle .= "</td></tr></table>\n";
 
 	$controle .= "</div>".fin_cadre_thread_forum(true);
 	return $controle;
@@ -261,7 +261,7 @@ function exec_controle_forum_dist()
 
 			debut_gauche();
 			debut_boite_info();
-			echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2>";
+			echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' size='2'>";
 			echo _T('info_gauche_suivi_forum_2');
 			echo aide("suiviforum");
 			echo "</FONT>";
