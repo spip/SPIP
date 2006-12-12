@@ -37,6 +37,27 @@ function http_img_rien($width, $height, $style='', $title='') {
 		. (!$title ? '' : (" title=\"$title\"")));
 }
 
+// pondre les stats sous forme d'un fichier csv tres basique
+function statistiques_csv($id_article) {
+	if ($id = intval($id_article))
+		$q = "SELECT date, visites FROM spip_visites_articles WHERE id_article=$id ORDER BY date";
+	else
+		$q = "SELECT date, visites FROM spip_visites ORDER BY date";
+
+	include_spip('inc/autoriser');
+	if (!autoriser('voirstats', $id ? 'article':'', $id)) exit;
+
+
+	$filename = 'stats_'.($id ? 'article'.$id : 'total').'.csv';
+	header('Content-Type: text/csv');
+	header('Content-Disposition: attachment; filename='.$filename);
+
+	$s = spip_query($q);
+	while ($t = spip_fetch_array($s)) {
+		echo $t['date'].";".$t['visites']."\n";
+	}
+}
+
 // http://doc.spip.org/@exec_statistiques_visites_dist
 function exec_statistiques_visites_dist()
 {
@@ -49,6 +70,9 @@ function exec_statistiques_visites_dist()
     $limit,
     $origine,
     $spip_lang_left;
+
+	if (_request('format') == 'csv')
+		return statistiques_csv($id_article);
 
 
 	$GLOBALS['accepte_svg'] = flag_svg();
@@ -774,7 +798,9 @@ if ($GLOBALS['accepte_svg']) {
 	}
 	echo "\n<div align='".$GLOBALS['spip_lang_right']."' style='font-family:Verdana,Arial,Sans,sans-serif; font-size:x-small;'>
 	<a href='".
-	parametre_url(self(), 'var_svg', $lien)."'>$alter</a></div>\n";
+	parametre_url(self(), 'var_svg', $lien)."'>$alter</a> | <a href='".
+	parametre_url(self(), 'format', 'csv')."'>CSV</a>".
+	"</div>\n";
 
 }
 
