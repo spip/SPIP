@@ -148,6 +148,7 @@ function appliquer_modifs_config() {
 	global $email_webmaster, $descriptif_site, $email_envoi, $post_dates, $tester_proxy, $test_proxy, $http_proxy, $activer_moteur;
 	global $forums_publics, $forums_publics_appliquer;
 	global $charset, $charset_custom, $langues_auth;
+	global $retour_proxy;
 
 	if (_request('adresse_site'))
 		$_POST['adresse_site'] = preg_replace(",/$,", "", _request('adresse_site'));
@@ -175,18 +176,17 @@ function appliquer_modifs_config() {
 	if (preg_match(',:\*\*\*\*@,', $http_proxy))
 		$http_proxy = $GLOBALS['meta']['http_proxy'];
 
+	$retour_proxy = '';
 	if ($tester_proxy) {
 		if (!$test_proxy) {
-			echo _T('info_adresse_non_indiquee');
-			exit;
+			$retour_proxy = _T('info_adresse_non_indiquee');
 		} else {
 			include_spip('inc/distant');
 			$page = recuperer_page($test_proxy, true);
 			if ($page)
-				echo "<pre>".entites_html($page)."</pre>";
+				$retour_proxy = "<p>"._L('test proxy ok')."</p>\n<tt>".couper(entites_html($page),300)."</tt>";
 			else
-				echo _T('info_impossible_lire_page', array('test_proxy' => $test_proxy))." <tt>".no_password_proxy_url($http_proxy)."</tt>.".aide('confhttpproxy');
-			exit;
+				$retour_proxy = _T('info_impossible_lire_page', array('test_proxy' => $test_proxy))." <tt>".no_password_proxy_url($http_proxy)."</tt>.".aide('confhttpproxy');
 		}
 	}
 
@@ -311,7 +311,6 @@ function appliquer_modifs_config() {
 		purger_repertoire(_DIR_SKELS);
 	}
 }
-    
 
 // Ne pas afficher la partie 'password' du proxy
 // http://doc.spip.org/@no_password_proxy_url
