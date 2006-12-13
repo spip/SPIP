@@ -80,6 +80,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_mois' => 'calendario por mes',
 'cal_par_semaine' => 'calendario por semana',
 'calendrier_synchro_lien' => 'R&eacute;cuperar el archivo <i>iCal</i>',
+'calendrier_synchro_prive' => '<NEW><NEW><pLUS_UTILISE><NEW>El calendario siguiente, de uso estrictamente personal, te informa sobre la actividad editorial privada de este sitio (tareas y citas personales, art&iacute;culos y breves propuestos...).',
+'calendrier_synchro_public' => '<NEW><NEW><pLUS_UTILISE><NEW>El calendario siguiente le permite seguir la actividad p&uacute;blica de este sitio (art&iacute;culos y breves publicadas).',
+'calendrier_synchro_sync' => '<NEW><NEW><pLUS_UTILISE><NEW>Sincronizar el fichero <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 'choix_couleur_interface' => 'cor',
 'choix_interface' => 'escolla de interface',
 'confirm_changer_statut' => 'Coidado, pediches cambiar o estado deste elemento. &iquest;Desexas continuar?',
@@ -185,17 +188,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_4' => 'outono',
 'date_semaines' => 'semanas',
 'dirs_commencer' => ' para escomezar realmente a instalaci&oacute;n',
-'dirs_preliminaire' => 'Preliminar: <B>Regular os permisos de acceso</B>',
+'dirs_preliminaire' => 'Preliminar: <b>Regular os permisos de acceso</b>',
 'dirs_probleme_droits' => 'Problema de permisos de acceso',
-'dirs_repertoires_absents' => '<p><B>Os directorios seguintes non foron atopados&nbsp;:</b></p><ul>@bad_dirs@.</ul>
-  <P>&Eacute; probable que iso se deba a un problema de uso de mai&uacute;sculas ou min&uacute;sculas.
+'dirs_repertoires_absents' => '<p><b>Os directorios seguintes non foron atopados&nbsp;:</b></p><ul>@bad_dirs@.</ul>
+  <p>&Eacute; probable que iso se deba a un problema de uso de mai&uacute;sculas ou min&uacute;sculas.
   Verifique que as min&uacute;sculas e mai&uacute;sculas destes directorios concorden ben co que se amosa
  aqu&iacute; abaixo; se non &eacute; ese o caso, renomee os directorios co seu programa de FTP de xeito que se corrixa o erro.</p>
-  <P>Logo de facer este cambio, poder&aacute; ',
-'dirs_repertoires_suivants' => '<p><B>Non se pode acceder para escribir nos directorios seguintes:</b></p><ul>@bad_dirs@.</ul>
-  <P>Para arranxalo, empregue o seu cliente de FTP e cambie os permisos de acceso de cada un
+  <p>Logo de facer este cambio, poder&aacute; ',
+'dirs_repertoires_suivants' => '<p><b>Non se pode acceder para escribir nos directorios seguintes:</b></p><ul>@bad_dirs@.</ul>
+  <p>Para arranxalo, empregue o seu cliente de FTP e cambie os permisos de acceso de cada un
   deles. O procedemento est&aacute; explicado polo mi&uacute;do na gu&iacute;a de instalaci&oacute;n.</p>
-  <P>Unha vez feito isto, poder&aacute; ',
+  <p>Unha vez feito isto, poder&aacute; ',
 
 
 // E
@@ -282,7 +285,7 @@ Grazas pola s&uacute;a participaci&oacute;n
 'forum_cliquer_retour' => 'Preme <a href=\'@retour_forum@\'>aqu&iacute;</a> para seguir.',
 'forum_forum' => 'foro',
 'forum_info_modere' => 'Este foro &eacute; moderado a priori: a s&uacute;a contribuci&oacute;n non aparecer&aacute; namentres non sexa aprobada polo equipo de xesti&oacute;n do web.',
-'forum_lien_hyper' => '<B>Ligaz&oacute;n de hipertexto</B> (opcional)',
+'forum_lien_hyper' => '<b>Ligaz&oacute;n de hipertexto</b> (opcional)',
 'forum_message_definitif' => 'Mensaxe definitiva: enviala ao web',
 'forum_message_trop_long' => 'A mensaxe &eacute; longa de m&aacute;is. O tama&ntilde;o m&aacute;ximo permitido &eacute; de 20000 caract&eacute;res.',
 'forum_ne_repondez_pas' => 'Resposta este correo no foro do enderezo seguinte:',
@@ -291,7 +294,7 @@ Grazas pola s&uacute;a participaci&oacute;n
 'forum_par_auteur' => 'por @auteur@',
 'forum_poste_par' => 'Mensaxe de @parauteur@ relacionado co artigo &laquo; @titre@ &raquo;.',
 'forum_probleme_database' => 'Problema da base de datos, a t&uacute;a mensaxe non foi rexistrada.',
-'forum_qui_etes_vous' => '<B>Quen &eacute; vostede?</B> (opcional)',
+'forum_qui_etes_vous' => '<b>Quen &eacute; vostede?</b> (opcional)',
 'forum_texte' => 'Texto da s&uacute;a mensaxe:',
 'forum_titre' => 'T&iacute;tulo:',
 'forum_titre_erreur' => 'Erro...',
@@ -329,6 +332,7 @@ Grazas pola s&uacute;a participaci&oacute;n
 'icone_doc_rubrique' => 'Documento dos temas',
 'icone_ecrire_article' => 'Escribir un novo artigo',
 'icone_edition_site' => 'Edici&oacute;n',
+'icone_evolution_visites_2' => '<NEW><pLUS_UTILISE><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Evolution des visites',
 'icone_forum_administrateur' => 'Foro de xesti&oacute;n',
 'icone_forum_suivi' => 'Seguimento dos foros',
 'icone_gestion_langues' => 'Xesti&oacute;n das linguas',
@@ -429,7 +433,7 @@ Grazas pola s&uacute;a participaci&oacute;n
 'info_grand_ecran' => 'Pantalla grande',
 'info_image_aide' => 'AXUDA',
 'info_image_process_titre' => 'M&eacute;todo de produci&oacute;n das vi&ntilde;etas',
-'info_impossible_lire_page' => '<B>Erro!</B> Foi imposible ler a p&aacute;xina <tt><html>@test_proxy@</html></tt> a trav&eacute;s do proxy <tt>',
+'info_impossible_lire_page' => '<b>Erro!</b> Foi imposible ler a p&amp;aacute;xina <tt><html>@test_proxy@</html></tt> a trav&amp;eacute;s do proxy <tt>',
 'info_inclusion_directe' => 'Inclusi&oacute;n directa:',
 'info_inclusion_vignette' => 'Inclusi&oacute;n da vi&ntilde;eta:',
 'info_installation_systeme_publication' => 'Instalaci&oacute;n do sistema de publicaci&oacute;n...',
@@ -492,6 +496,8 @@ Grazas pola s&uacute;a participaci&oacute;n
 'info_publie_1' => '[@nom_site_spip@] PUBLICADO: @titre@',
 'info_publie_2' => 'Artigo publicado
 --------------',
+'info_question_referers' => '<NEW><pLUS_UTILISE><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Votre site doit-il conserver les <i>referers</i>
+		(adresses des liens externes menant &agrave; votre site)&nbsp;?',
 'info_rechercher' => 'Buscar',
 'info_rechercher_02' => 'Buscar:',
 'info_remplacer_vignette' => 'Trocar a vi&ntilde;eta por defecto por un logo persoal:',
@@ -506,9 +512,9 @@ Grazas pola s&uacute;a participaci&oacute;n
 'info_site_refuse' => 'Web rexeitado',
 'info_sites_referencer' => 'Referenciar un web',
 'info_supprimer_vignette' => 'suprimir a vi&ntilde;eta',
-'info_symbole_bleu' => 'O s&iacute;mbolo <B>azul</B> indica unha <B>nota</B>: ou sexa, unha mensaxe para o teu uso persoal.',
-'info_symbole_jaune' => 'O s&iacute;mbolo <B>amarelo</B> indica un <B>an&uacute;ncio a todo o equipo de redacci&oacute;n</B>: &eacute; modificable polo equipo de xesti&oacute;n, e visible por toda a redacci&oacute;n.',
-'info_symbole_vert' => 'A &iacute;cona <B>verde</B> indica as <B>mensaxes intercambiadas con outras persoas</B> do web.',
+'info_symbole_bleu' => 'O s&amp;iacute;mbolo <b>azul</b> indica unha <b>nota</b>: ou sexa, unha mensaxe para o seu uso persoal.',
+'info_symbole_jaune' => 'O s&amp;iacute;mbolo <b>amarelo</b> indica un <b>anuncio para todo o equipo de redacci&amp;oacute;n</b>: &amp;eacute; modificable polo equipo de xesti&amp;oacute;n, e visible por toda a redacci&amp;oacute;n.',
+'info_symbole_vert' => 'O s&amp;iacute;mbolo <b>verde</b> indica as <b>mensaxes intercambiadas con outros usuarios</b> do web.',
 'info_syndication' => 'sindicaci&oacute;n&nbsp;:',
 'info_syndication_articles' => 'artigo(s)',
 'info_telecharger' => 'Subir dende a t&uacute;a computadora:',
@@ -530,6 +536,10 @@ Grazas pola s&uacute;a participaci&oacute;n
 'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'As t&uacute;as notas',
 'item_breve_proposee' => 'Breve proposta',
+'item_gerer_referers' => '<NEW><pLUS_UTILISE><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>G&eacute;rer les referers',
+'item_non_gerer_referers' => '<NEW><pLUS_UTILISE><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas g&eacute;rer les referers',
+'item_non_utiliser_moteur_recherche_forum' => '<NEW><pLUS_UTILISE><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas indexer les forums',
+'item_utiliser_moteur_recherche_forum' => '<NEW><pLUS_UTILISE><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Indexer les forums',
 
 
 // L
@@ -548,6 +558,7 @@ Grazas pola s&uacute;a participaci&oacute;n
 'lien_reessayer' => 'reintentar',
 'lien_repondre_message' => 'Responder esta mensaxe',
 'lien_supprimer' => 'Suprimir',
+'lien_test_format_image' => '<pLUS_UTILISE>Probar os formatos de imaxe que este lugar pode empregar para crear as vi&ntilde;etas.',
 'lien_tout_afficher' => 'Amosar todo',
 'lien_visite_site' => 'visitar este web',
 'lien_visites' => '@visites@ visitas',
@@ -678,21 +689,21 @@ e reconectar co web.
 'texte_documents_associes' => 'Os seguintes documentos est&aacute;n vencellados &oacute; artigo,
   mais non foron inseridos directamente. Dependendo do formato da p&aacute;xina no web p&uacute;blico,
   poder&aacute;n aparecer en forma de documentos adxuntos.',
-'texte_erreur_mise_niveau_base' => 'Erro de base de datos tralo axuste.
-  A imaxe <B>@fichier@</B> non foi engadida ao artigo @id_article@).
-  Tome boa nota deste aviso, reintente o axuste, 
+'texte_erreur_mise_niveau_base' => 'Hai un erro na base de datos trala posta ao d&amp;iacute;a.
+  A imaxe <b>@fichier@</b> non foi engadida ao (artigo @id_article@).
+  Tome nota deste aviso, reintente a posta ao d&amp;iacute;a, 
   e finalmente verifique que as imaxes aparecen sempre
-  cos seus artigos.',
-'texte_inc_auth_1' => 'Identific&aacute;ches.te baixo o
-		login <B>@auth_login@</B>, mais este xa non existe na base de datos.
-		Tenta',
+  nos artigos.',
+'texte_inc_auth_1' => 'Identificouse baixo o
+  identificador <b>@auth_login@</b>, por&amp;eacute;n este xa/non existe na base de datos.
+  Probe',
 'texte_inc_auth_2' => 'reconectar',
 'texte_inc_auth_3' => ', despois de reiniciar o teu navegador.',
-'texte_inc_config' => 'As modificaci&oacute;ns que faga nestas p&aacute;xinas influir&aacute;n notablemente no
-  funcionamento do web. Recomend&aacute;moslle non intervir namentres que non estea 
+'texte_inc_config' => 'As modificaci&amp;oacute;ns que faga nestas p&amp;aacute;xinas influir&amp;aacute;n notablemente no
+  funcionamento do web. Recom&amp;eeacute;ndaselle non as modificar namentres que non estea 
   un pouco ao tanto do funcionamento do sistema SPIP.
-  <P align="justify"><B>En xeral, &eacute; moi recomend&aacute;bel que estas p&aacute;xinas sexan
-  xestionadas polo/a webm&aacute;ster principal do web.</B>',
+  <p align="justify"><b>En xeral, &amp;eacute; moi recomend&amp;aacute;bel que estas p&amp;aacute;xinas sexan
+  xestionadas polo/a webm&amp;aacute;ster principal do web.</b>',
 'texte_inc_meta_1' => 'O sistema encontrou un erro trala escritura do ficheiro <code>@fichier@</code>. Rev&iacute;seo co perfil de administrador/a do web.',
 'texte_inc_meta_2' => 'Comprobar os dereitos de escritura',
 'texte_inc_meta_3' => 'no cartafol <code>@repertoire@</code>.',

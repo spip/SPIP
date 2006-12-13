@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Editar esta palavra-chave',
 'admin_modifier_rubrique' => 'Editar esta se&ccedil;&atilde;o',
 'admin_recalculer' => 'Atualizar esta p&aacute;gina',
+'afficher_trad' => 'exibir as tradu&ccedil;&otilde;es',
 'alerte_maj_impossible' => 'Aten&ccedil;&atilde;o! A atualiza&ccedil;&atilde;o da base de dados MySQL para a vers&atilde;o @version@ n&atilde;o &eacute; poss&iacute;vel, provavelmente por problema de direitos de edi&ccedil;&atilde;o na base de dados. Por favor, contate o seu provedor de hospedagem.',
 'analyse_xml' => 'Analisar XML',
 'antispam_champ_vide' => 'Deixe, por favor, este campo vazio:',
@@ -79,6 +80,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => 'calend&aacute;rio por dia',
 'cal_par_mois' => 'calend&aacute;rio por m&ecirc;s',
 'cal_par_semaine' => 'calend&aacute;rio por semana',
+'choix_couleur_interface' => 'c&ocirc;r',
+'choix_interface' => 'escolha da interface',
 'confirm_changer_statut' => 'Aten&ccedil;&atilde;o, voc&ecirc; solicitou a altera&ccedil;&atilde;o de status deste elemento. Deseja continuar?',
 'correcte' => 'correta',
 
@@ -141,26 +144,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_jnum8' => '8',
 'date_jnum9' => '9',
 'date_jour_1' => 'domingo',
-'date_jour_1_abbr' => '<NEW>dim.',
-'date_jour_1_initiale' => '<NEW>d.',
+'date_jour_1_abbr' => 'dom.',
+'date_jour_1_initiale' => 'd.',
 'date_jour_2' => 'segunda-feira',
-'date_jour_2_abbr' => '<NEW>lun.',
-'date_jour_2_initiale' => '<NEW>l.',
+'date_jour_2_abbr' => 'seg.',
+'date_jour_2_initiale' => 's.',
 'date_jour_3' => 'ter&ccedil;a-feira',
-'date_jour_3_abbr' => '<NEW>mar.',
-'date_jour_3_initiale' => '<NEW>m.',
+'date_jour_3_abbr' => 'ter.',
+'date_jour_3_initiale' => 't.',
 'date_jour_4' => 'quarta-feira',
-'date_jour_4_abbr' => '<NEW>mer.',
-'date_jour_4_initiale' => '<NEW>m.',
+'date_jour_4_abbr' => 'quar.',
+'date_jour_4_initiale' => 'q.',
 'date_jour_5' => 'quinta-feira',
-'date_jour_5_abbr' => '<NEW>jeu.',
-'date_jour_5_initiale' => '<NEW>j.',
+'date_jour_5_abbr' => 'quin.',
+'date_jour_5_initiale' => 'q.',
 'date_jour_6' => 'sexta-feira',
-'date_jour_6_abbr' => '<NEW>ven.',
-'date_jour_6_initiale' => '<NEW>v.',
+'date_jour_6_abbr' => 'sex.',
+'date_jour_6_initiale' => 's.',
 'date_jour_7' => 's&aacute;bado',
-'date_jour_7_abbr' => '<NEW>sam.',
-'date_jour_7_initiale' => '<NEW>s.',
+'date_jour_7_abbr' => 's&aacute;b.',
+'date_jour_7_initiale' => 's.',
 'date_jours' => 'dias',
 'date_minutes' => 'minutos',
 'date_mois' => 'meses',
@@ -184,12 +187,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => 'Para come&ccedil;ar realmente a instala&ccedil;&atilde;o',
 'dirs_preliminaire' => 'Preliminar: <b>Configurar os direitos de acesso</b>',
 'dirs_probleme_droits' => 'Problema com as permiss&otilde;es de acesso',
-'dirs_repertoires_absents' => '<b>Os diret&oacute;rios a seguir n&atilde;o foram encontrados: <ul>@bad_dirs@.</ul> </b>
-  <p />&Eacute; prov&aacute;vel que isto se deva a um problema de letras em mai&uacute;sculas e min&uacute;sculas.
-Verifique que as mai&uacute;sculas e min&uacute;suculas destes diret&oacute;rios coincidam exatamente com o que est&aacute; sendo exibido abaixo; se este n&atilde;o for o caso, renomeie os diret&oacute;rios com o seu programa de FTP de modo a corrigir o erro.
-<p />Uma v&ecirc;z feita esta manipula&ccedil;&atilde;o, voc&ecirc; poder&aacute; ',
-'dirs_repertoires_suivants' => '<b>Os diret&oacute;rios a seguir n&atilde;o s&atilde;o acessiveis para leitura: <ul>@bad_dirs@.</ul> </b>
-  <p />Para corrigir, utilize o seu programa de FTP para configurar os direitos de acesso de cada um destes diret&oacute;rios. O procedimento est&aacute; explicado em detalhes no guia de instala&ccedil;&atilde;o.  <p />Uma v&ecirc;z feita esta altera&ccedil;&atilde;o, voc&ecirc; poder&aacute; ',
+'dirs_repertoires_absents' => '<p><b>Os diret&oacute;rios a seguir n&atilde;o foram encontrados:</b></p><ul>@bad_dirs@.</ul>
+<p>&Eacute; prov&aacute;vel que isto se deva a um problema de letras em mai&uacute;sculas e min&uacute;sculas.
+Verifique se as mai&uacute;sculas e min&uacute;suculas destes diret&oacute;rios coincidem exatamente com o que est&aacute; sendo exibido abaixo; se este n&atilde;o for o caso, renomeie os diret&oacute;rios com o seu programa de FTP de modo a corrigir o erro.
+<p>Uma v&ecirc;z feita esta manipula&ccedil;&atilde;o, voc&ecirc; poder&aacute; ',
+'dirs_repertoires_suivants' => '<p><b>Os diret&oacute;rios a seguir n&atilde;o s&atilde;o acessiveis para leitura:</b></p><ul>@bad_dirs@.</ul>
+<p>Para corrigir, utilize o seu programa de FTP para configurar os direitos de acesso de cada um destes diret&oacute;rios. O procedimento est&aacute; explicado em detalhes no guia de instala&ccedil;&atilde;o.</p>
+<p>Uma v&ecirc;z feita esta altera&ccedil;&atilde;o, voc&ecirc; poder&aacute; ',
 
 
 // E
@@ -269,6 +273,7 @@ Obrigado por participar
 'forum_acces_refuse' => 'Voc&ecirc; n&atilde;o tem mais acesso a estes f&oacute;runs.',
 'forum_attention_dix_caracteres' => '<b>Aten&ccedil;&atilde;o!</b> Sua mensagem precisa ter pelo menos dez caracteres.',
 'forum_attention_trois_caracteres' => '<b>Aten&ccedil;&atilde;o!</b> Seu t&iacute;tulo precisa ter pelo menos tr&ecirc;s caracteres.',
+'forum_attention_trop_caracteres' => '<b>Aten&ccedil;&atilde;o!</b> sua mensagem &eacute; muito longa (@compte@ caracteres): para que ela seja gravada, ela n&atilde;o pode ultrapassar @max@ caracteres.',
 'forum_avez_selectionne' => 'Voc&ecirc; selecionou:',
 'forum_cliquer_retour' => 'Clique <a href=\'@retour_forum@\'>aqui</a> para continuar.',
 'forum_forum' => 'f&oacute;rum',
@@ -418,7 +423,7 @@ Obrigado por participar
 'info_grand_ecran' => 'Alta resolu&ccedil;&atilde;o',
 'info_image_aide' => 'AJUDA',
 'info_image_process_titre' => 'M&eacute;todo de cria&ccedil;&atilde;o dos &iacute;cones',
-'info_impossible_lire_page' => '<B>Erro!</B> Imposs&iacute;vel ler a p&aacute;gina <tt><html>@test_proxy@</html></tt> via proxy <tt>',
+'info_impossible_lire_page' => '<b>Erro!</b> Imposs&iacute;vel ler a p&aacute;gina <tt><html>@test_proxy@</html></tt> via proxy',
 'info_inclusion_directe' => 'Inclus&atilde;o direta:',
 'info_inclusion_vignette' => 'Inclus&atilde;o do &iacute;cone:',
 'info_installation_systeme_publication' => 'Instala&ccedil;&atilde;o do sistema de publica&ccedil;&atilde;o...',
@@ -495,8 +500,8 @@ Obrigado por participar
 'info_sites_referencer' => 'Referenciar um site',
 'info_supprimer_vignette' => 'excluir o &iacute;cone',
 'info_symbole_bleu' => 'O &iacute;cone <b>azul</b> indica um <b>lembrete</b>: ou seja, uma mensagem para seu uso pessoal.',
-'info_symbole_jaune' => 'O &iacute;cone <B>amarelo</B> incida um  <B>an&uacute;ncio para todos os redatores</B>: modific&aacute;vel por todos os administradores, e vis&iacute;vel por todos os redatores.',
-'info_symbole_vert' => 'O &iacute;cone <B>verde</B> indica as  <B>mensagens trocadas com outros usu&aacute;rios</B> do site.',
+'info_symbole_jaune' => 'O &iacute;cone <b>amarelo</b> indica um  <b>an&uacute;ncio para todos os redatores</b>: modific&aacute;vel por todos os administradores, e vis&iacute;vel por todos os redatores.',
+'info_symbole_vert' => 'O &iacute;cone <b>verde</b> indica as  <b>mensagens trocadas com outros usu&aacute;rios</b> do site.',
 'info_syndication' => 'sindica&ccedil;&atilde;o:',
 'info_syndication_articles' => 'mat&eacute;ria(s)',
 'info_telecharger' => 'Transferir do seu computador:',
@@ -571,6 +576,7 @@ Se voc&ecirc; n&atilde;o quiser que a sua senha possa ser interceptada na rede, 
 
 
 // M
+'masquer_trad' => 'esconder as tradu&ccedil;&otilde;es',
 'module_fichiers_langues' => 'Arquivos de idioma',
 
 
@@ -657,13 +663,13 @@ e reconectar-se com o site.
 'texte_documents_associes' => 'Os documentos a seguir est&atilde;o associados &agrave; mat&eacute;ria,
 mas eles n&atilde;o foram inseridos diretamente. Dependendo da elabora&ccedil;&atilde;o dos gabaritos do site p&uacute;blico, eles podem aparecer como documentos anexados.',
 'texte_erreur_mise_niveau_base' => 'Erro da base de dados durante a atualiza&ccedil;&atilde;o.
- A imagem <B>@fichier@</B> n&atilde;o passou (mat&eacute;ria @id_article@).
-Anote esta refer&ecirc;ncia, tente novamente a atualiza&ccedil;&atilde;o e, verifique enfim se as imagens aparecem nas mat&eacute;rias.',
-'texte_inc_auth_1' => 'Voc&ecirc; se identificou com o login <B>@auth_login@</B>, mas ele n&atilde;o consta (mais) na base.
+A imagem <b>@fichier@</b> n&atilde;o passou (mat&eacute;ria @id_article@).
+Anote esta refer&ecirc;ncia, tente novamente a atualiza&ccedil;&atilde;o e, finalmente, verifique se as imagens aparecem nas mat&eacute;rias.',
+'texte_inc_auth_1' => 'Voc&ecirc; se identificou com o login <b>@auth_login@</b>, mas ele n&atilde;o consta (mais) na base.
 Tente se',
 'texte_inc_auth_2' => 'reconectar',
 'texte_inc_auth_3' => ', ap&oacute;s ter eventualmente sa&iacute;do e reiniciado o seu navegador.',
-'texte_inc_config' => 'As modifica&ccedil;&otilde;es efetuadoas nestas p&aacute;ginas influem consideravelmente no funcionamento do seu site. &Eacute; recomend&aacute;vel n&atilde;o intervir enquanto voc&ecirc; n&atilde;o estiver familiarizado com o funcionamento do sistema SPIP.<p align="justify"><b>Geralmente, &eacute; fortemente aconselh&aacute;vel deixar a carga destas p&aacute;ginas para o webmaster principal do seu site.</b>',
+'texte_inc_config' => 'As modifica&ccedil;&otilde;es efetuadas nestas p&aacute;ginas influem consideravelmente no funcionamento do seu site. &Eacute; recomend&aacute;vel n&atilde;o intervir enquanto voc&ecirc; n&atilde;o estiver familiarizado com o funcionamento do sistema SPIP.<br /><br /><b>Geralmente, &eacute; fortemente aconselh&aacute;vel deixar a carga destas p&aacute;ginas para o webmaster principal do seu site.</b>',
 'texte_inc_meta_1' => 'O sistema encontrou um erro durante a escrita do arquivo <code>@fichier@</code>. Como administrador do site, queira por favor,',
 'texte_inc_meta_2' => 'Verificar os direitos de escrita',
 'texte_inc_meta_3' => 'no diret&oacute;rio <code>@repertoire@</code>.',

@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_chemin_invalide_2' => 'no sembla pas v&agrave;lid. Voleu tornar a la p&agrave;gina precedent i constrastar les informacions donades.',
 'avis_connexion_echec_1' => 'La connexi&oacute; al servidor MySQL ha acabat.',
 'avis_connexion_echec_2' => 'Tornar a la p&agrave;gina precedent per verificar les dades que heu ficat.',
-'avis_connexion_echec_3' => '<B>N.B.</b> A molts dels servidors, heu de <b>demanar</b> l\'activaci&oacute; del vostre acc&eacute;s a la base de dades MySQL abans de poder utilitzar-la. Si no podeu connectar-vos, verifiqueu que heu efectuat aquest pas.',
+'avis_connexion_echec_3' => '<b>N.B.</b> A molts dels servidors, heu de <b>demanar</b> l\'activaci&oacute; del vostre acc&eacute;s a la base de dades MySQL abans de poder utilitzar-la. Si no podeu connectar-vos, verifiqueu que heu efectuat aquest pas.',
 'avis_connexion_ldap_echec_1' => ' La connexi&oacute; amb el servidor LDAP ha caigut.',
 'avis_connexion_ldap_echec_2' => 'Tornar a la p&agrave;gina precedent per verificar les dades que heu ficat.',
 'avis_connexion_ldap_echec_3' => 'Alternativament, no utilitzeu el support LDAP per a importar els usuaris.',
@@ -24,8 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'Atenci&oacute;&nbsp;! Aquesta secci&oacute; cont&eacute; @contient_breves@ breu@scb@&nbsp;: si la moveu, assenyaleu-ho en aquesta casella de confirmaci&oacute;.',
 'avis_destinataire_obligatoire' => 'Ha d\'escriure un destinatari abans d\'enviar el missatge.',
 'avis_erreur_connexion_mysql' => 'Error de connexi&oacute; MySQL',
-'avis_erreur_version_archive' => '<B>Atenci&oacute;! El fitxer @archive@ correspon a una
-    versi&oacute; diferent d\'SPIP de la instal&middot;lada.</B> Us
+'avis_erreur_version_archive' => '<b>Atenci&oacute;! El fitxer @archive@ correspon a una
+    versi&oacute; diferent d\'SPIP de la instal&middot;lada.</b> Us
     podeu trobar amb grans dificultats: risc de
       destrucci&oacute; de la base de dades, mal funcionament
     del lloc, etc. Cal que no valideu aquesta sol&middot;licitud
@@ -50,7 +50,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 
 
 // B
-'bouton_acces_ldap' => 'Afegir l\'acc&eacute;s a LDAP >>',
+'bouton_acces_ldap' => 'Afegir l\'acc&eacute;s a LDAP',
 'bouton_ajouter' => 'Afegir',
 'bouton_ajouter_participant' => 'AFEGIR UN PARTICIPANT&nbsp;:',
 'bouton_annonce' => 'ANUNCI',
@@ -140,7 +140,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'entree_base_donnee_2' => '(Sovint aquesta adre&ccedil;a correspon a la del vostre lloc, a vegades correspon a la menci&oacute; &laquo;localhost&raquo;, altres vegades es deixa totalment buida.)',
 'entree_biographie' => 'Biografia curta i en poques paraules.',
 'entree_breve_publiee' => 'Aquesta breu s\'ha de publicar?',
-'entree_chemin_acces' => '<B>Entrar</B> el cam&iacute; d\'acc&eacute;s:',
+'entree_chemin_acces' => '<b>Entrar</b> el cam&iacute; d\'acc&eacute;s:',
 'entree_cle_pgp' => 'La vostra clau PGP',
 'entree_contenu_rubrique' => '(Contingut de la secci&oacute;, en poques paraules.)',
 'entree_description_site' => 'Descripci&oacute; del lloc',
@@ -150,7 +150,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
    ',
 'entree_infos_perso' => 'Qui s&oacute;u?',
 'entree_interieur_rubrique' => 'A l\'interior de la secci&oacute;:',
-'entree_liens_sites' => '<B>Enlla&ccedil; hipertext</B> (refer&egrave;ncia, indret a visitar...)',
+'entree_liens_sites' => '<b>Enlla&ccedil; hipertext</b> (refer&egrave;ncia, indret a visitar...)',
 'entree_login' => 'El vostre nom d\'usuari',
 'entree_login_connexion_1' => 'El nom d\'usuari de connexi&oacute;',
 'entree_login_connexion_2' => '(A vegades correspon al vostre nom d\'usuari d\'acc&egrave;s a l\'FTP; a vegades s\'ha de deixar buit)',
@@ -167,7 +167,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'entree_port_annuaire' => 'N&uacute;mero de port del directori',
 'entree_signature' => 'Secci&oacute;',
 'entree_texte_breve' => 'Text de la breu',
-'entree_titre_obligatoire' => '<B>T&iacute;tol</B> [Obligatori]<BR>',
+'entree_titre_obligatoire' => '<b>T&iacute;tol</b> [Obligatori]<br />',
 'entree_url' => 'L\'adre&ccedil;a (URL) del vostre lloc',
 'erreur_plugin_fichier_absent' => 'Fitxer absent',
 'erreur_plugin_fichier_def_absent' => 'Fitxer de definici&oacute; absent',
@@ -229,7 +229,8 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_1_breve' => '1 breu',
 'info_1_site' => '1 lloc',
 'info_activer_cookie' => 'Podeu activar una <b>galeta de correspond&egrave;ncia</b>, us permetr&agrave; passar f&agrave;cilment del lloc p&uacute;blic al lloc privat.',
-'info_activer_forum_public' => '<I>Per activar els f&ograve;rums p&uacute;blics, escolliu el seu mode de moderaci&oacute; per defecte:</I>',
+'info_activer_forum_public' => '<i>Per activar els f&ograve;rums p&uacute;blics, escolliu el seu mode
+ de moderaci&oacute; per defecte:</i>',
 'info_admin_gere_rubriques' => 'Aquest administrador gestiona les seg&uuml;ents seccions:',
 'info_admin_gere_toutes_rubriques' => 'Aquest administrador gestiona <b>totes les seccions</b>.',
 'info_administrateur' => 'Administrador',
@@ -279,9 +280,9 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_changer_nom_groupe' => 'Canviar el nom d\'aquest grup:',
 'info_chapeau' => 'Encap&ccedil;alament',
 'info_chapeau_2' => 'Encap&ccedil;alament:',
-'info_chemin_acces_1' => 'Opcions: <B>Cam&iacute; d\'acc&eacute;s al directori</B>',
+'info_chemin_acces_1' => 'Opcions: <b>Cam&iacute; d\'acc&eacute;s al directori</b>',
 'info_chemin_acces_2' => 'Des d\'ara, heu de configurar el cam&iacute; d\'acc&eacute;s a la informaci&oacute; del directori. Aquesta informaci&oacute; &eacute;s essencial per llegir els perfils dels usuaris guardats al directori.',
-'info_chemin_acces_annuaire' => 'Opcions: <B>Cam&iacute; d\'acc&eacute;s al directori',
+'info_chemin_acces_annuaire' => 'Opcions: <b>Cam&iacute; d\'acc&eacute;s al directori',
 'info_choix_base' => 'Tercer pas:',
 'info_classement_1' => '<sup>r</sup> a la @liste@',
 'info_classement_2' => '<sup>n</sup> a la @liste@',
@@ -290,23 +291,23 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_config_suivi' => 'Si aquesta adre&ccedil;a correspon a una llista de correu, podeu indicar m&eacute;s avall l\'adre&ccedil;a a la que els participants es poden registrar. Aquesta adre&ccedil;a pot ser una URL (per exemple la p&agrave;gina de registre a la llista per la Web), o un correu electr&ograve;nic amb un assumpte espec&iacute;fic: <tt>@adresse_suivi@?assumpte=subscriure\'s</tt>):',
 'info_config_suivi_explication' => 'Us podeu subscriure a la llista de correu d\'aquest lloc. Si ho feu, rebreu per correu electr&ograve;nic els anuncis dels articles i de les breus que es proposen per ser publicats.',
 'info_confirmer_passe' => 'Confirmar la nova contrasenya:',
-'info_connexion_base' => 'Segon pas: <B>Intent de connexi&oacute; a la base de dades</B>',
-'info_connexion_ldap_ok' => 'La connexio LDAP ha reexit.</B><P> Podeu passar al seg&uuml;ent pas.',
-'info_connexion_mysql' => 'Primer pas: <B>La vostra connexi&oacute; MySQL</B>',
+'info_connexion_base' => 'Segon pas: <b>Intent de connexi&oacute; a la base de dades</b>',
+'info_connexion_ldap_ok' => 'La connexio LDAP ha reexit.</b><p> Podeu passar al seg&uuml;ent pas.',
+'info_connexion_mysql' => 'Primer pas: <b>La vostra connexi&oacute; MySQL</b>',
 'info_connexion_ok' => 'La connexi&oacute; ha reexit.',
 'info_contact' => 'Contacte',
 'info_contenu_articles' => 'Contingut dels articles',
 'info_creation_mots_cles' => 'Crear i configurar aqu&iacute; les paraules clau del lloc',
 'info_creation_paragraphe' => '(Per crear par&agrave;grafs, deixeu simplement  unes l&iacute;nies buides.)',
-'info_creation_rubrique' => 'Abans de poder crear articles, <BR> heu de crear com a m&iacute;nim una secci&oacute;.<BR>',
-'info_creation_tables' => 'Quart pas: <B>Creaci&oacute; de les taules de la base</B>',
-'info_creer_base' => '<B>Crear</B> una nova base de dades:',
+'info_creation_rubrique' => 'Abans de poder escriure articles,<br /> heu de crear com a m&iacute;nim una secci&oacute;.<br />',
+'info_creation_tables' => 'Quart pas: <b>Creaci&oacute; de les taules de la base de dades</b>',
+'info_creer_base' => '<b>Crear</b> una nova base de dades:',
 'info_dans_groupe' => 'Dins el grup:',
 'info_dans_rubrique' => 'Dins la secci&oacute;:',
 'info_date_publication_anterieure' => 'Data de redacci&oacute; anterior:',
 'info_date_referencement' => 'DATA DE REFER&Egrave;NCIA D\'AQUEST LLOC:',
 'info_delet_mots_cles' => 'Heu sol&middot;licitat la supressi&oacute; de la
- paraula clau <B>@titre_mot@</B> (@type_mot@). Donat que la paraula-clau est&agrave; lligada a
+ paraula clau <b>@titre_mot@</b> (@type_mot@). Donat que la paraula-clau est&agrave; lligada a
 <b>@texte_lie@</b> heu de confirmar aquesta decisi&oacute;:',
 'info_derniere_etape' => '&Uacute;ltim pas: S\'ha acabat!',
 'info_derniere_syndication' => 'La &uacute;ltima sindicaci&oacute; d\'aquest lloc ha estat realitzada el',
@@ -340,9 +341,9 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
   reservat nom&eacute;s als adminsitradors. ',
 'info_forum_statistiques' => 'Estad&iacute;stiques de les visites',
 'info_forums_abo_invites' => 'El seu lloc Web proporciona f&ograve;rums pels abonats; en el lloc p&uacute;blic els visitants s&oacute;n convidats a enregistrar-se.',
-'info_gauche_admin_effacer' => '<B>Nom&eacute;s els responsables del site tenen acc&eacute;s a aquesta p&agrave;gina.</B><P> D&oacute;na acc&eacute;s a les diferents funcions de manteniment t&egrave;cnic. Algunes d\'aquestes necessiten un proc&eacute;s d\'autenticaci&oacute; espec&iacute;fic que requereix disposar d\'un acc&eacute;s FTP al lloc Web.',
-'info_gauche_admin_tech' => '<B>Nom&eacute;s els responsables del site tenen acc&eacute;s a aquesta p&agrave;gina.</B><P> D&oacute;na acc&eacute;s a les diferents funcions de manteniment t&egrave;cnic. Algunes d\'aquestes necessiten un proc&eacute;s d\'autenticaci&oacute; espec&iacute;fic que requereix disposar d\'un acc&eacute;s FTP al lloc Web.',
-'info_gauche_admin_vider' => '<B>Nom&eacute;s els responsables del site tenen acc&eacute;s a aquesta p&agrave;gina.</B><P> D&oacute;na acc&eacute;s a les diferents funcions de manteniment t&egrave;cnic. Algunes d\'aquestes necessiten un proc&eacute;s d\'autenticaci&oacute; espec&iacute;fic que requereix disposar d\'un acc&eacute;s FTP al lloc Web.',
+'info_gauche_admin_effacer' => '<b>Nom&eacute;s els responsables del site tenen acc&eacute;s a aquesta p&agrave;gina.</b><p> D&oacute;na acc&eacute;s a les diferents funcions de manteniment t&egrave;cnic. Algunes d\'aquestes necessiten un proc&eacute;s d\'autenticaci&oacute; espec&iacute;fic que requereix disposar d\'un acc&eacute;s FTP al lloc Web.',
+'info_gauche_admin_tech' => '<b>Nom&eacute;s els responsables del site tenen acc&eacute;s a aquesta p&agrave;gina.</b><p> D&oacute;na acc&eacute;s a les diferents funcions de manteniment t&egrave;cnic. Algunes d\'aquestes necessiten un proc&eacute;s d\'autenticaci&oacute; espec&iacute;fic que requereix disposar d\'un acc&eacute;s FTP al lloc Web.',
+'info_gauche_admin_vider' => '<b>Nom&eacute;s els responsables del site tenen acc&eacute;s a aquesta p&agrave;gina.</b><p> D&oacute;na acc&eacute;s a les diferents funcions de manteniment t&egrave;cnic. Algunes d\'aquestes necessiten un proc&eacute;s d\'autenticaci&oacute; espec&iacute;fic que requereix disposar d\'un acc&eacute;s FTP al lloc Web.',
 'info_gauche_auteurs' => 'Aqu&iacute; hi trobareu tots els autors del lloc.
  El seu estat s\'indica pel color de la seva icona (administrador = verd; redactor = groc).',
 'info_gauche_auteurs_exterieurs' => 'Els autors externs, sense acc&eacute;s al lloc, estan indicats amb una icona blava;
@@ -350,9 +351,9 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_gauche_messagerie' => 'La missatgeria us permet intercanviar missatges entre els redactors, conservar recordatoris (pel vostre &uacute;s personal) o mostrar avisos a la p&agrave;gina inicial de l\'espai privat (si s&oacute;u administrador).',
 'info_gauche_numero_auteur' => 'AUTOR N&Uacute;MERO',
 'info_gauche_numero_breve' => 'BREU N&Uacute;MERO',
-'info_gauche_statistiques_referers' => 'Aquesta p&agrave;gina mostra la llista de  <I>referidors</I>, &eacute;s a dir, dels llocs que contenen enlla&ccedil;os cap al vostre propi lloc Web, &uacute;nicament per ahir i avui; aquesta llista es posa a zero cada 24 hores. ',
-'info_gauche_suivi_forum' => 'La p&agrave;gina de <I>seguiment dels f&ograve;rums</I> &eacute;s una eina de gesti&oacute; del vostre lloc (i no un espai de discussi&oacute; o de redacci&oacute;). Mostra totes les contribucions del f&ograve;rum p&uacute;blic d\'aquest article i us pemet de gestionar aquestes contribucions.',
-'info_gauche_suivi_forum_2' => 'La p&agrave;gina de <I>seguiment dels f&ograve;rums</I> &eacute;s una eina de gesti&oacute; del vostre lloc (i no un espai de discussi&oacute; o de redacci&oacute;). Mostra totes les contribucions dels f&ograve;rums del lloc, tan les de l\'espai p&uacute;blic com les de l\'espai privat i us permet de gestionar aquestes contribucions.',
+'info_gauche_statistiques_referers' => 'Aquesta p&agrave;gina mostra la llista de  <i>referidors</i>, &eacute;s a dir, dels llocs que contenen enlla&ccedil;os cap al vostre propi lloc Web, &uacute;nicament per ahir i avui; aquesta llista es posa a zero cada 24 hores. ',
+'info_gauche_suivi_forum' => 'La p&agrave;gina de <i>seguiment dels f&ograve;rums</i> &eacute;s una eina de gesti&oacute; del vostre lloc Web (i no un espai de discussi&oacute; o de redacci&oacute;). Mostra totes les contribucions del f&ograve;rum p&uacute;blic d\'aquest article i us permet gestionar aquestes contribucions.',
+'info_gauche_suivi_forum_2' => 'La p&agrave;gina de <i>seguiment dels f&ograve;rums</i> &eacute;s una eina de gesti&oacute; del vostre lloc Web (i no un espai de discussi&oacute; o de redacci&oacute;). Mostra totes les contribucions dels f&ograve;rums del lloc, tant les de l\'espai p&uacute;blic com les de l\'espai privat i us permet gestionar aquestes contribucions.',
 'info_gauche_visiteurs_enregistres' => 'Aqu&iacute; hi trobareu els visitants registrats
  a l\'espai p&uacute;blic del lloc (f&ograve;rums per subscripci&oacute;).',
 'info_generation_miniatures_images' => 'Generaci&oacute; de miniatures d\'imatges',
@@ -372,7 +373,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_image_process' => 'Vulgueu seleccionar el millor m&egrave;tode de fabricaci&oacute; de vinyetes fent un clic damunt de la imatge corresponent. ',
 'info_image_process2' => '<b>N.B.</b> <i>Si no apareix cap imatge, aleshores &eacute;s que el servidor que allotja la vostra web no ha estat configurat per utilitzar aquestes eines. Si desitgeu emprar aquestes funcions, poseu-vos en contacte amb el responsable t&egrave;cnic i demaneu les extensions &laquo;GD&raquo; o &laquo;Imagick&raquo;.</i>',
 'info_images_auto' => 'Imatges calculades autom&agrave;ticament',
-'info_informations_personnelles' => 'Cinqu&egrave; pas: <B>Informacions personals</B>',
+'info_informations_personnelles' => 'Cinqu&egrave; pas: <b>Informacions personals</b>',
 'info_inscription_automatique' => 'Inscripci&oacute; autom&agrave;tica dels nous redactors',
 'info_jeu_caractere' => 'Joc de car&agrave;cters del lloc',
 'info_jours' => 'dies',
@@ -496,8 +497,8 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_redirection' => 'Redireccionament',
 'info_referencer_doc_distant' => 'Referenciar un document a Internet&nbsp;:',
 'info_refuses' => 'Els vostres articles rebutjats',
-'info_reglage_ldap' => 'Opcions: <B>Posta a punt de l\'importaci&oacute; LDAP</B>',
-'info_renvoi_article' => '<B>Redirecci&oacute;.</B> Aquest article et porta a la p&agrave;gina:',
+'info_reglage_ldap' => 'Opcions: <b>Posta a punt de la importaci&oacute; LDAP</b>',
+'info_renvoi_article' => '<b>Redirecci&oacute;.</b> Aquest article et porta a la p&agrave;gina:',
 'info_reserve_admin' => 'Nom&eacute;s els adminsitradors poden modificar aquesta adre&ccedil;a.',
 'info_restauration_sauvegarde' => 'restauraci&oacute; de la c&ograve;pia de seguretat @archive@',
 'info_restreindre_rubrique' => 'Restringir la gesti&oacute; a les seccions:',
@@ -787,7 +788,7 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr&
 'texte_breves' => 'Les breus son textes curts i simples que permeten posar r&agrave;pidament en l&iacute;nia informacions concises, gestionar una revista de premsa, un calendari d\'esdeveniments...',
 'texte_choix_base_1' => 'Trie la seua base:',
 'texte_choix_base_2' => 'El servidor MySQL cont&eacute; diverses  bases de dades.',
-'texte_choix_base_3' => '<B>Seleccioneu</B> d\'aqu&iacute; sota quina us ha atribu&iuml;t el vostre prove&iuml;dor d\'hostatge:',
+'texte_choix_base_3' => '<b>Seleccioneu</b> d\'aqu&iacute; sota quina us ha estat atribu&iuml;da pel vostre prove&iuml;dor d\'hostatge:',
 'texte_commande_vider_tables_indexation' => 'Utiliceu aquesta comanda per buidar les taules d\'indexaci&oacute; emprades
  pel motor de recerca integrat en SPIP. Aix&ograve; vos permetr&agrave;
   guanyar espai a disc.',
@@ -807,7 +808,7 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr&
  que certs elements dels articles  no siguen emprats.
  Useu la llista d\'ac&iacute; baix per a indicar quins elements estaran disponibles.',
 'texte_crash_base' => 'Si la bbdd ha deixat de funcionar correctament, es pot intentar fer una reparaci&oacute; autom&agrave;tica.',
-'texte_creer_rubrique' => 'Abans de poder escriure els articles, <BR> s\'ha de crear una  secci&oacute;.',
+'texte_creer_rubrique' => 'Abans de poder escriure els articles, <br /> heu de crear una secci&oacute;.',
 'texte_date_creation_article' => 'DATA DE CREACI&Oacute; DE L\'ARTICLE&nbsp;:',
 'texte_date_publication_anterieure' => 'Data de redacci&oacute; anterior:',
 'texte_date_publication_anterieure_nonaffichee' => 'No publicar els articles de data de redacci&oacute; anterior.',
@@ -870,10 +871,10 @@ enriquir la navegaci&oacute; del vostre lloc, incl&uacute;s utilitzar aquestes p
 'texte_presente_plugin' => 'Aquesta p&agrave;gina llista els connectors disponibles al vostre lloc Web. Podeu activar els connectors marcant la casella corresponent.',
 'texte_proposer_publication' => 'Despr&eacute;s que un article est&agrave; acabat, <br> es pot proposar la seua publicaci&oacute;.',
 'texte_proxy' => 'En alguns casos (intranet, xarxes protegides...),
-pot caldre utilitzar un <I>proxy HTTP</I> per enlla&ccedil;ar amb els llocs sindicats.
-En aquest cas, indiqueu a continuaci&oacute; la seua adre&ccedil;a, baix la forma
+  pot ser necessari utilitzar un <i>proxy HTTP</i> per enlla&ccedil;ar amb els llocs sindicats.
+  En aquest cas, indiqueu a continuaci&oacute;  la vostra adre&ccedil;a, baix la forma
   <tt><html>http://proxy:8080</html></tt>. En general,
- es deixar&agrave; buida aquesta opci&oacute;.',
+ deixareu buida aquesta opci&oacute;.',
 'texte_publication_articles_post_dates' => 'Que ha de fer SPIP quan els articles tinguin una data de publicaci&oacute; posterior a l\'actual?',
 'texte_rappel_selection_champs' => ' [No oblide pas seleccionar correctament aquest camp.]',
 'texte_recalcul_page' => 'Si es vol recarregar una sola p&agrave;gina, cal passar abans per l\'espai p&uacute;blic i premer el bot&oacute; "recarregar".',
@@ -914,7 +915,7 @@ fet modificacions importants gr&agrave;ficament o estructurals del lloc web.',
 'texte_test_proxy' => 'Per fer una prova d\'aquest proxy, indicar ac&iacute; l\'adre&ccedil;a del lloc Web
 que es vol testar.',
 'texte_titre_02' => 'T&iacute;tol:',
-'texte_titre_obligatoire' => ' <B>T&iacute;tol</B> [Obligatori]',
+'texte_titre_obligatoire' => '<b>T&iacute;tol</b> [Obligatori]',
 'texte_travail_article' => '@nom_auteur_modif@ ha treballat amb aquest article fa @date_diff@ minuts',
 'texte_travail_collaboratif' => 'Si &eacute;s freq&uuml;ent que diversos redactors treballin en un mateix article, el sistema pot mostrar els articles "oberts" recentment per tal d\'evitar les modificacions simult&agrave;nies.
 Aquesta opci&oacute; est&agrave; desactivada per defecte amb la finalitat d\'evitar mostrar  missatges d\'advert&egrave;ncia intempestius.',
@@ -938,11 +939,11 @@ el que pot provocar un lleuger alentiment de la vostra pr&ograve;pia web.',
 'titre_cadre_forum_interne' => 'F&ograve;rum intern',
 'titre_cadre_interieur_rubrique' => 'A l\'interior de la secci&oacute;',
 'titre_cadre_numero_auteur' => 'AUTOR N&Uacute;MERO',
-'titre_cadre_signature_obligatoire' => '<B>Signatura</B> [Obligatoria]<BR>',
+'titre_cadre_signature_obligatoire' => '<b>Signatura</b> [Obligat&ograve;ria]<br />',
 'titre_config_fonctions' => 'Configuraci&oacute; del web',
 'titre_config_groupe_mots_cles' => 'Configuraci&oacute; dels grups de paraules clau',
 'titre_configuration' => 'Configuraci&oacute; del lloc',
-'titre_connexion_ldap' => 'Opcions: <B>Vostre connexi&oacute; LDAP</B>',
+'titre_connexion_ldap' => 'Opcions: <b>Vostre connexi&oacute; LDAP</b>',
 'titre_dernier_article_syndique' => 'Darrers articles sindicats',
 'titre_documents_joints' => 'Documents adjunts',
 'titre_evolution_visite' => 'Evoluci&oacute; de les visites',

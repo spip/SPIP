@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Schlagwort bearbeiten',
 'admin_modifier_rubrique' => 'Rubrik bearbeiten',
 'admin_recalculer' => 'Seite aus Cache l&ouml;schen',
+'afficher_trad' => '&Uuml;bersetzungen anzeigen',
 'alerte_maj_impossible' => '<b>Achtung!</b> Ihre MySQL Datenbank konnte nicht auf die Version @version@ umgestellt werden. M&ouml;glicherweise gibt es ein Problem mit den Zugriffsrechten. Bitte setzen Sie sich mit Ihrem Webspace-Provider in Verbindung.',
 'analyse_xml' => 'XML-Analyse',
 'antispam_champ_vide' => 'Bitte lassen Sie dieses Feld leer:',
@@ -78,6 +79,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => 'Tageskalender',
 'cal_par_mois' => 'Monatskalender',
 'cal_par_semaine' => 'Wochenkalender',
+'choix_couleur_interface' => 'Farbe',
+'choix_interface' => 'Oberfl&auml;chenfarbe',
 'confirm_changer_statut' => 'Achtung, Sie werden den Status dieses Elementes &auml;ndern. Wollen Sie fortfahren?',
 'correcte' => 'korrekt',
 
@@ -181,15 +184,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_4' => 'unabh&auml;ngig',
 'date_semaines' => 'Wochen',
 'dirs_commencer' => 'um die Installation wirklich zu starten',
-'dirs_preliminaire' => 'Vorbereitung: <B>Berechtigungen einstellen</B>',
+'dirs_preliminaire' => 'Vorbereitung: <b>Berechtigungen einstellen</b>',
 'dirs_probleme_droits' => 'Problem mit den Berechtigungen',
-'dirs_repertoires_absents' => '<B>Folgende Verzeichnisse wurden nicht gefunden: <ul>@bad_dirs@.</ul> </b>
-  <P>Das liegt wahrscheinlich an unzutreffender Gross- und Kleinschreibung.
+'dirs_repertoires_absents' => '<p><b>Folgende Verzeichnisse wurden nicht gefunden:</b><(p><ul>@bad_dirs@</ul> 
+  <p>Das liegt wahrscheinlich an unzutreffender Gross- und Kleinschreibung.
   &Uuml;berpr&uuml;fen Sie bitte die genaue Schreibweise der oben stehenden Verzeichnisse,
   sollten Sie Abweichungen feststellen, benennen Sie bitte mit Ihrem FTP-Programm die betreffenden Verzeichnisse um.
-  <P>Danach k&ouml;nnen Sie ',
-'dirs_repertoires_suivants' => '<B>In die folgenden Verzeichnisse kann nicht geschrieben werden: <ul>@bad_dirs@.</ul> </B>
-<P>Um das Problem zu l&ouml;sen, verwenden Sie bitte Ihren FTP-Client, um die Zugriffsrechte f&uuml;r diese Verzeichnisse zu setzen. Die Installationsanleitung erl&auml;utert die Details dazu. <P>Wenn Sie diesen Vorgang abgeschlossen haben, k&ouml;nnen Sie',
+  <p>Danach k&ouml;nnen Sie ',
+'dirs_repertoires_suivants' => '<p><b>In die folgenden Verzeichnisse kann nicht geschrieben werden:</b></p><ul>@bad_dirs@</ul>
+<p>Um das Problem zu l&ouml;sen, verwenden Sie bitte Ihren FTP-Client, um die Zugriffsrechte f&uuml;r diese
+Verzeichnisse zu setzen.Die Installationsanleitung erl&auml;utert die Details dazu.</p>
+<p>Wenn Sie diesen Vorgang abgeschlossen haben, k&ouml;nnen Sie',
 
 
 // E
@@ -272,16 +277,16 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'forum_cliquer_retour' => '<a href=\'@retour_forum@\'>Weiter</a>',
 'forum_forum' => 'Forum',
 'forum_info_modere' => 'Dieses Forum ist moderiert. Ihr Beitrag erscheint erst nach Freischaltung durch einen Administrator der Website.',
-'forum_lien_hyper' => '<B>Hyperlink</B> (optional)',
+'forum_lien_hyper' => '<b>Hyperlink</b> (optional)',
 'forum_message_definitif' => 'Beitrag fertiggestellt: Endg&uuml;ltig eintragen.',
 'forum_message_trop_long' => 'Ihr Beitrag ist zu lang. Sie k&ouml;nnen maximal 20.000 Zeichen schreiben.',
 'forum_ne_repondez_pas' => 'Antworten Sie nicht auf diese Mail, sondern im Forum mit dieser Adresse:',
 'forum_non_inscrit' => 'Sie sind nicht eingeschrieben oder Adresse bzw. Passwort waren falsch.',
 'forum_page_url' => '(Wenn sich Ihr Beitrag auf einen Artikel im Internet oder auf eine Seite mit Zusatzinformationen bezieht, geben Sie hier bitte den Titel der Seite und ihre Adresse bzw. URL an.)',
 'forum_par_auteur' => 'Nach @auteur@',
-'forum_poste_par' => 'Beitrag @parauteur@ als Antwort auf Ihren Artikel.',
+'forum_poste_par' => 'Beitrag von @parauteur@ als Antwort auf den Artikel &laquo; @titre@ &raquo;.',
 'forum_probleme_database' => 'Datenbankfehler. Ihr Beitrag wurde nicht gespeichert',
-'forum_qui_etes_vous' => '<B>Wer sind Sie?</B> (optional)',
+'forum_qui_etes_vous' => '<b>Wer sind Sie?</b> (optional)',
 'forum_texte' => 'Text Ihres Beitrags:',
 'forum_titre' => 'Titel:',
 'forum_titre_erreur' => 'Fehler...',
@@ -415,7 +420,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'info_grand_ecran' => 'Grosser Bildschirm',
 'info_image_aide' => 'HILFE',
 'info_image_process_titre' => 'Methode zum Anlegen der Miniaturbilder',
-'info_impossible_lire_page' => '<B>Fehler!</b> Die Seite <tt><html>@test_proxy@</html></tt> ist nicht &uuml;ber den Proxy erreichbar<tt>',
+'info_impossible_lire_page' => '<b>Fehler!</b> Die Seite <tt><html>@test_proxy@</html></tt> ist nicht &uuml;ber den Proxy erreichbar',
 'info_inclusion_directe' => 'Direkte Einbindung:',
 'info_inclusion_vignette' => 'Einbindung des Icons:',
 'info_installation_systeme_publication' => 'Installation des CMS ...',
@@ -491,9 +496,9 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'info_site_refuse' => 'Abgelehnte Website',
 'info_sites_referencer' => 'Website verlinken',
 'info_supprimer_vignette' => 'Icon l&ouml;schen',
-'info_symbole_bleu' => 'Das <B>blaue</b> Symbol bedeutet <B>Merkzettel</b>, d.h. eine Nachricht an Sie selbst.',
-'info_symbole_jaune' => 'Das <B>gelbe</b> Symbol bedeutet <B>Ank&uuml;ndigung an alle Redakteure</b> (f&uuml;r alle Redakteure sichtbar, &Auml;nderung nur durch Administratoren)',
-'info_symbole_vert' => 'Das <B>gr&uuml;ne</b> Symbol bedeutet <B>Nachricht f&uuml;r andere Benutzer </b> der Website.',
+'info_symbole_bleu' => 'Das <b>blaue</b> Symbol bedeutet <b>Merkzettel</b>, d.h. eine Nachricht nur zu Ihrer eigenen Verwendung.',
+'info_symbole_jaune' => 'Das <b>gelbe</b> Symbol bedeutet <b>Ank&uuml;ndigung an alle Redakteure</b> (f&uuml;r alle Redakteure sichtbar, &Auml;nderung nur durch Administratoren)',
+'info_symbole_vert' => 'Das <b>gr&uuml;ne</b> Symbol bezeichnet Nachrichten an <b>andere Benutzer</b> der Website.',
 'info_syndication' => 'Syndikation:',
 'info_syndication_articles' => 'Artikel',
 'info_telecharger' => 'Von Ihrem Computer hochladen:',
@@ -567,6 +572,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 
 
 // M
+'masquer_trad' => '&Uuml;bersetzungen ausblenden',
 'module_fichiers_langues' => 'Sprachdateien',
 
 
@@ -649,11 +655,14 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
 'texte_actualite_site_3' => 'um zus&auml;tzliche Funktionen zu nutzen.',
 'texte_creation_automatique_vignette' => 'Diese Website generiert automatisch Vorschaubilder. Wenn Sie Bilder in den Formaten @gd_formats@ mit diesem Formular installieren, werden Vorschaubilder mit den maximalen Diemsionen @taille_preview@ Pixel angelegt.',
 'texte_documents_associes' => 'Die folgenden Dokumente wurden dem Artikel zugeordnet jedoch nicht direkt in ihn eingef&uuml;gt. Ja nach Gestaltung der &ouml;ffentlichen Website k&ouml;nnen Sie alle beigeordneten Dokumente angezeigt werden (oder auch nicht).',
-'texte_erreur_mise_niveau_base' => 'Datenbankfehler beim Einrichten der neuen Version. Das Bild <B>@fichier@</b> wurde nicht &uuml;bernommen (Artikel @id_article@). Bitte notieren Sie diesen Hinweis, starten Sie die Aktualisierung erneut und pr&uuml;fen Sie, ob die Bilder in den Artikeln angezeigt werden.',
-'texte_inc_auth_1' => 'Sie sind angemeldet als <B>@auth_login@</b>, aber diese ID existiert nicht bzw. nicht mehr in der Datenbank. Versuchen Sie,',
+'texte_erreur_mise_niveau_base' => 'Datenbankfehler beim Einrichten der neuen Version. Das Bild <b>@fichier@</b> wurde nicht &uuml;bernommen (Artikel @id_article@).
+ Bitte notieren Sie diesen Hinweis, starten Sie die Aktualisierung erneut und pr&uuml;fen Sie, ob die Bilder
+ in den Artikeln angezeigt werden.',
+'texte_inc_auth_1' => 'Sie sind angemeldet als <b>@auth_login@</b>, aber diese ID existiert nicht bzw. nicht mehr in der Datenbank.
+ Versuchen Sie,',
 'texte_inc_auth_2' => 'sich erneut anzumelden',
 'texte_inc_auth_3' => ', nachdem Sie u.U. Ihren Webbrowser neu gestartet haben.',
-'texte_inc_config' => 'Die hier m&ouml;glichten Einstellungen beeinflussen wesentlich das Verhalten Ihrer Website. Wir raten dringend, sie nur zu &auml;ndern, wenn Sie vollst&auml;ndig mit der Funktionsweise von SPIP vertraut sind.<P align="justify"><B>Es ist ebenfalls mehr als ratsam, diese Einstellungen nur von Ihrem Haupt-Administrator vornehmen zu lassen.</b>',
+'texte_inc_config' => 'Die hier m&ouml;glichten Einstellungen beeinflussen das grunds&auml;tzliche Verhalten Ihrer Website. Wir raten dringend, sie nur zu &auml;ndern, wenn Sie vollst&auml;ndig mit der Funktionsweise von SPIP vertraut sind.<br /><br /><b>Es ist ebenfalls mehr als ratsam, diese Einstellungen nur von Ihrem Haupt-Administrator vornehmen zu lassen.</b>',
 'texte_inc_meta_1' => 'Das System konnte die Datei <code>@fichier@</code> nicht speichern. Bitte pr&uuml;fen Sie als Administrator ',
 'texte_inc_meta_2' => 'die Berechtigungen',
 'texte_inc_meta_3' => 'f&uuml;r das Verzeichnis <code>@repertoire@</code>.',
