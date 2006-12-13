@@ -96,35 +96,6 @@ function lcs($s, $t) {
 	return array(0 => array(), 1 => array());
 }
 
-
-// http://doc.spip.org/@test_lcs
-function test_lcs($a, $b) {
-	$s = explode(" ", $a);
-	$t = explode(" ", $b);
-	
-	$t0 = explode(" ", microtime());
-	list($r1, $r2) = lcs($s, $t);
-	$t1 = explode(" ", microtime());
-	$dt = $t1[0] + $t1[1] - $t0[0] - $t0[1];
-	echo join(" ", $r1)."<br />";
-	echo join(" ", $r2)."<p>";
-	echo "<div style='font-weight: bold; color: red;'>$dt s.</div>";
-}
-
-// http://doc.spip.org/@test_lcs_opt
-function test_lcs_opt($s) {
-	$s = preg_split(',\s+,', $s);
-
-	$t0 = explode(" ", microtime());
-	$t = lcs_opt($s);
-	$t1 = explode(" ", microtime());
-	$dt = $t1[0] + $t1[1] - $t0[0] - $t0[1];
-	echo join(" ", $s)."<br />";
-	echo join(" ", $t)."<p>";
-	echo "<div style='font-weight: bold; color: red;'>$dt s.</div>";
-}
-
-
 //
 // Generation de diff a plusieurs etages
 //
