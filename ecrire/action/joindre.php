@@ -149,7 +149,7 @@ function spip_action_joindre3($path, $mode, $type, $id, $id_document,$hash, $red
 // Charger la fonction surchargeable receptionnant un fichier
 // et l'appliquer sur celui ou ceux indiques.
 
-// http://doc.spip.org/@inc_ajouter_documents
+// http://doc.spip.org/@joindre_documents
 function joindre_documents($files, $mode, $type, $id, $id_document, $hash, $redirect, &$actifs, $iframe_redirect)
 {
 	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');

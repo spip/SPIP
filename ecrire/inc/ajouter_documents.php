@@ -28,6 +28,7 @@ include_spip('inc/getdocument');
 # $id_document,	# pour une vignette, l'id_document de maman
 # $actifs	# les documents dont il faudra ouvrir la boite de dialogue
 
+// http://doc.spip.org/@inc_ajouter_documents_dist
 function inc_ajouter_documents_dist ($source, $nom_envoye, $type_lien, $id_lien, $mode, $id_document, &$documents_actifs) {
 
 // Documents distants : pas trop de verifications bloquantes, mais un test
