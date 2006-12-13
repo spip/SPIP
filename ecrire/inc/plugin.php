@@ -89,6 +89,11 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz'){
 	
 	$plugin_valides = liste_plugin_valides($plugin,$infos);
 	ecrire_meta('plugin',serialize($plugin_valides));
+	$plugin_header_info = array();
+	foreach($plugin_valides as $p=>$info){
+		$plugin_header_info[]= $p.($info['version']?"(".$info['version'].")":"");
+	}
+	ecrire_meta('plugin_header',strtolower(implode(",",$plugin_header_info)));
 
 	$start_file = "<"."?php\nif (!defined('_ECRIRE_INC_VERSION')) return;\n";
 	$end_file = "\n?".">";
