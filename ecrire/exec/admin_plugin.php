@@ -123,7 +123,7 @@ EOF;
 	echo generer_url_post_ecrire("admin_plugin");
 
 	echo "<ul>";
-	affiche_arbre_plugins(liste_plugin_files(),liste_plugin_actifs());
+	affiche_arbre_plugins(liste_plugin_files(),liste_chemin_plugin_actifs());
 	echo "</ul>";
 
 	echo "</table></div>\n";
