@@ -16,6 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 define('_REGEXP_DOCTYPE',
 	'/^\s*<!DOCTYPE\s+(\w+)\s+(\w+)\s+(.)([^\3>]*)\3\s+(.)([^\5>]*)\5[^>]*>/');
 
+// http://doc.spip.org/@inc_validateur_dist
 function inc_validateur_dist($data)
 {
   global $phraseur_xml;
@@ -67,6 +68,7 @@ function inc_validateur_dist($data)
 	$phraseur_xml->attributs = $res;
 }
 
+// http://doc.spip.org/@expanserEntite
 function expanserEntite($val, $entites)
 {
 	if (preg_match_all('/%([.\w]+);/', $val, $r, PREG_SET_ORDER)) {
@@ -78,6 +80,7 @@ function expanserEntite($val, $entites)
 	return $val;
 }
 
+// http://doc.spip.org/@validerElement
 function validerElement($parser, $name, $attrs)
 {
 	global $phraseur_xml;
@@ -122,6 +125,7 @@ function validerElement($parser, $name, $attrs)
 }
 
 
+// http://doc.spip.org/@validerAttribut
 function validerAttribut($parser, $name, $val, $bal)
 {
   global $phraseur_xml;
