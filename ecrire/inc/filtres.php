@@ -960,9 +960,14 @@ function agenda_affiche($i)
 		}
 	}
 	$d = array_keys($evt);
-	$mindate = date_ical(_request('jour')."/"._request('mois')."/"._request('annee'));
 	if (count($d))
 		$mindate = min($d);
+	else {
+	  $mindate = (_request('jour')."/"._request('mois')."/"._request('annee'));
+	  if ($mindate !='//')
+	  	$mindate = date_ical($mindate);
+	  else  $mindate = date("Ymd\THis");
+	}
 	$start = strtotime($mindate);
 	if ($type != 'periode')
 		$evt = array('', $evt);
