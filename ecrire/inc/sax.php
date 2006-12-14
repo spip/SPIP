@@ -23,7 +23,7 @@ function debutElement($parser, $name, $attrs)
   global $phraseur_xml;
 
   if ($phraseur_xml->elements)
-    validerElement($parser, $name);
+    validerElement($parser, $name, $attrs);
 
   $depth = &$phraseur_xml->depth;
   $contenu = &$phraseur_xml->contenu;

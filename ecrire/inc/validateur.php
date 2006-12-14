@@ -78,7 +78,7 @@ function expanserEntite($val, $entites)
 	return $val;
 }
 
-function validerElement($parser, $name)
+function validerElement($parser, $name, $attrs)
 {
 	global $phraseur_xml;
 
@@ -108,7 +108,16 @@ function validerElement($parser, $name)
 		. '<br />';
 	    }
 	  }
-
+	  foreach ($phraseur_xml->attributs[$name] as $n => $v)
+	    { if (($v == '#REQUIRED') AND (!isset($attrs[$n])))
+		$phraseur_xml->err[]= $n 
+		. '&nbsp;:&nbsp;'
+		. _L(" attribut obligatoire mais absent dans <b>")
+		. $name
+		. _L('</b> ligne ')
+		. xml_get_current_line_number($parser)
+		. '<br />';
+	    }
 	}
 }
 
