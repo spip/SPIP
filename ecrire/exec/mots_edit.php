@@ -67,8 +67,8 @@ global
 	 if ($id_mot) {
 		debut_boite_info();
 		echo "<center>";
-		echo "<font FACE='Verdana,Arial,Sans,sans-serif' size='1'><b>"._T('titre_gauche_mots_edit')."</B></font>";
-		echo "<br /><font FACE='Verdana,Arial,Sans,sans-serif' SIZE='6'><B>$id_mot</B></font>";
+		echo "<font FACE='Verdana,Arial,Sans,sans-serif' size='1'><b>"._T('titre_gauche_mots_edit')."</b></font>";
+		echo "<br /><font FACE='Verdana,Arial,Sans,sans-serif' SIZE='6'><b>$id_mot</b></font>";
 		echo "</center>";
 
 		voir_en_ligne ('mot', $id_mot);
@@ -120,13 +120,13 @@ global
 
 
 	echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
-	echo "<tr width='100%'>";
+	echo "<tr>";
 	echo "<td width='100%' valign='top'>";
 	gros_titre($titre_mot);
 
 
 	if ($descriptif) {
-		echo "<p><div style='border: 1px dashed #aaaaaa;'>";
+		echo "<div style='border: 1px dashed #aaaaaa;'>";
 		echo "<font size='2' face='Verdana,Arial,Sans,sans-serif'>";
 		echo "<b>",_T('info_descriptif'),"</b> ";
 		echo propre($descriptif);
@@ -140,9 +140,9 @@ global
 
 
 	if (strlen($texte)>0){
-		echo "<font FACE='Verdana,Arial,Sans,sans-serif'>";
-		echo "<P>".propre($texte);
-		echo "</font>";
+		echo "<p><font FACE='Verdana,Arial,Sans,sans-serif'>";
+		echo propre($texte);
+		echo "</font></p>";
 	}
 
 	if ($les_notes) {
@@ -154,7 +154,6 @@ global
 	}
 
 	if ($id_mot) {
-		echo "<P>";
 
 		if ($connect_statut == "0minirezo")
 			$aff_articles = "'prepa','prop','publie','refuse'";
@@ -176,7 +175,7 @@ global
 
 
 	if (acces_mots()){
-		echo "<P>";
+
 		debut_cadre_formulaire();
 
 		$res = "<div class='serif'>";
@@ -200,28 +199,28 @@ global
 
 		if ($options == 'avancees' OR $descriptif) {
 			$res .= "<b>"._T('texte_descriptif_rapide')."</b><br />";
-			$res .= "<textarea name='descriptif' CLASS='forml' ROWS='4' COLS='40' wrap=soft>";
+			$res .= "<textarea name='descriptif' class='forml' rows='4' cols='40'>";
 			$res .= $descriptif;
-			$res .= "</textarea><p>\n";
+			$res .= "</textarea><br />\n";
 		}
 		else
-			$res .= "<input type='hidden' NAME='descriptif' VALUE=\"$descriptif\">";
+			$res .= "<input type='hidden' NAME='descriptif' VALUE=\"$descriptif\" />";
 
 		if ($options == 'avancees' OR $texte) {
-			$res .= "<B>"._T('info_texte_explicatif')."</B><BR>";
-			$res .= "<textarea name='texte' rows='8' class='forml' cols='40' wrap='soft'>";
+			$res .= "<b>"._T('info_texte_explicatif')."</b><br />";
+			$res .= "<textarea name='texte' rows='8' class='forml' cols='40'>";
 			$res .= $texte;
-			$res .= "</textarea><p>\n";
+			$res .= "</textarea><br />\n";
 		}
 		else
-			$res .= "<input type='hidden' name='texte' value=\"$texte\">";
+			$res .= "<input type='hidden' name='texte' value=\"$texte\" />";
 
 		if ($champs_extra) {
 			include_spip('inc/extra');
 			$res .= extra_saisie($extra, 'mots', $id_groupe);
 		}
 
-		$res .= "<div align='right'><input type='submit' value='"._T('bouton_enregistrer')."' class='fondo'></div>";
+		$res .= "<div align='right'><input type='submit' value='"._T('bouton_enregistrer')."' class='fondo' /></div>";
 	
 		$res .= "</div>";
 
