@@ -117,9 +117,14 @@ function document_et_vignette($document, $url, $portfolio=false) {
 //
 
 // http://doc.spip.org/@afficher_documents_colonne
-function afficher_documents_colonne($id, $type="article") {
+function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	// seuls cas connus : article, breve ou rubrique
-	$script = $type.'s_edit';
+	if ($script==NULL){
+		$script = $type.'s_edit';
+		if (_DIR_RESTREINT)
+			$script = parametre_url(self(),"show_docs",'');
+	}
+	
 
 	/// Ajouter nouvelle image
 	$ret .= "<a name='images'></a>\n";
@@ -174,13 +179,14 @@ function afficher_documents_colonne($id, $type="article") {
 		$ret .= afficher_case_document($doc, $id, $script, $type, false);
 	}
 	$ret .= "</div>";
-  
-  $ret .= "<script src='"._DIR_JAVASCRIPT."async_upload.js' type='text/javascript'></script>\n";
-  $ret .= <<<EOF
-    <script type='text/javascript'>
-    $("form.form_upload").async_upload(async_upload_article_edit)
-    </script>
+  if (!_DIR_RESTREINT){
+	  $ret .= "<script src='"._DIR_JAVASCRIPT."async_upload.js' type='text/javascript'></script>\n";
+	  $ret .= <<<EOF
+	    <script type='text/javascript'>
+	    $("form.form_upload").async_upload(async_upload_article_edit)
+	    </script>
 EOF;
+  }
     
 	return $ret;
 }
