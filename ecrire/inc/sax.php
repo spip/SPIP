@@ -10,7 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/filtres');
@@ -22,6 +21,10 @@ class PhraseurXML {
 function debutElement($parser, $name, $attrs)
 {
   global $phraseur_xml;
+
+  if ($phraseur_xml->elements)
+    validerElement($parser, $name);
+
   $depth = &$phraseur_xml->depth;
   $contenu = &$phraseur_xml->contenu;
   $ouvrant = &$phraseur_xml->ouvrant;
@@ -42,6 +45,8 @@ function debutElement($parser, $name, $attrs)
   $att = '';
   $sep = ' ';
   foreach ($attrs as $k => $v) {
+	if ($phraseur_xml->attributs)
+	  validerAttribut($parser, $k, $v, $name);
 	$delim = strpos($v, "'") === false ? "'" : '"';
 	$val = entites_html($v);
 	$att .= $sep .  $k . "=" . $delim
@@ -159,7 +164,9 @@ function xml_parsestring($xml_parser, $data)
 	      _L(" ligne ") .
 	      $phraseur_xml->reperes[$phraseur_xml->depth]));
 
-	} else $r = $phraseur_xml->res;
+	} else if ($phraseur_xml->err)
+	  $r = join(', ', $phraseur_xml->err);
+	else $r = $phraseur_xml->res;
 
 	return $r;
 }
@@ -169,7 +176,13 @@ function xml_parsestring($xml_parser, $data)
  var $contenu = array();
  var $ouvrant = array();
  var $reperes = array();
+ var $elements = array();
+ var $entites = array();
+ var $attributs = array();
+ var $err = array();
 }
+
+
 
 // http://doc.spip.org/@inc_sax_dist
 function inc_sax_dist($page, $apply=false) {
@@ -191,7 +204,8 @@ function inc_sax_dist($page, $apply=false) {
 		$page = ob_get_contents();
 		ob_end_clean();
 	}
-
+	if ($validateur = charger_fonction('validateur', 'inc', true))
+		$validateur($page);
 	$res = $phraseur_xml->xml_parsestring($xml_parser, $page);
 	xml_parser_free($xml_parser);
 	if ($res[0] != '<')
