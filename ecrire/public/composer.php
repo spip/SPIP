@@ -182,7 +182,7 @@ function calcul_introduction ($type, $texte, $chapo='', $descriptif='') {
 
 	switch ($type) {
 		case 'articles':
-			if ($descriptif)
+			if (trim($descriptif))
 				return propre($descriptif);
 			else if (substr($chapo, 0, 1) == '=')	// article virtuel
 				return '';
