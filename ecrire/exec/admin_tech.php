@@ -68,7 +68,7 @@ function exec_admin_tech_dist()
    $dir_img = _DIR_IMG;
 
  echo "<table border='0' cellspacing='0' cellpadding='5' width=\"100%\">",
-   "<tr><td bgcolor='", $couleur_foncee, "' background=''><b>",
+   "<tr><td bgcolor='", $couleur_foncee, "'><b>",
    "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#FFFFFF'>",
    _T('texte_sauvegarde'),
    "</font></b></td></tr><tr><td class='serif'>",
@@ -129,7 +129,7 @@ echo "</table>";
 	}
 
 	echo	"\n<table border='0' cellspacing='1' cellpadding='8' width=\"100%\">",
-	"<tr><td bgcolor='#eeeecc' background=''><b>",
+	"<tr><td bgcolor='#eeeecc'><b>",
 	"<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#000000'>",
 	_T('texte_restaurer_base')."</font></b></td></tr>",
 	"<tr><td class='serif'>\n",
@@ -168,8 +168,8 @@ if ($options == "avancees" AND 	$connect_toutes_rubriques) {
 	$res = spip_mysql_version();
 	if ($res >= '3.23.14') {
 		echo "<table border='0' cellspacing='1' cellpadding='8' width=\"100%\">";
-		echo "<tr><td bgcolor='#eeeecc' background=''><b>";
-		echo "<font face='Verdana,Arial,Sans,sans-serif' size='3' COLOR='#000000'>";
+		echo "<tr><td bgcolor='#eeeecc'><b>";
+		echo "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#000000'>";
 		echo _T('texte_recuperer_base'),
 			"</font></b></td></tr>",
 			"<tr><td class='serif'>",

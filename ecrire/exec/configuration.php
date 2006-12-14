@@ -54,7 +54,7 @@ pipeline('exec_init',array('args'=>array('exec'=>'configuration'),'data'=>''));
 $commencer_page = charger_fonction('commencer_page', 'inc');
 echo $commencer_page(_T('titre_page_configuration'), "configuration", "configuration");
 
-echo "<br><br><br>";
+echo "<br /><br /><br />";
 gros_titre(_T('titre_configuration'));
 echo barre_onglets("configuration", "contenu");
 
@@ -326,7 +326,7 @@ if ($options == "avancees") {
 		echo "<p />";
 		debut_cadre_relief("", false, "", _T('titre_config_groupe_mots_cles'));
 
-		echo "<TABLE BORDER='0' CELLSPACING='1' CELLPADDING='3' WIDTH=\"100%\">";
+		echo "<table BORDER='0' CELLSPACING='1' CELLPADDING='3' WIDTH=\"100%\">";
 		echo "<TR><TD class='verdana2'>";
 		echo _T('texte_config_groupe_mots_cles');
 		echo "</TD></TR>";
@@ -342,7 +342,7 @@ if ($options == "avancees") {
 		if ($forums_publics != "non"){
 			echo "<p />";
 			debut_cadre_relief("", false, "", _T('titre_mots_cles_dans_forum'));
-			echo "<TABLE BORDER='0' CELLSPACING='1' CELLPADDING='3' WIDTH=\"100%\">";
+			echo "<table BORDER='0' CELLSPACING='1' CELLPADDING='3' WIDTH=\"100%\">";
 			echo "<TR><TD class='verdana2'>";
 			echo _T('texte_mots_cles_dans_forum');
 			echo "</TD></TR>";
@@ -352,7 +352,6 @@ if ($options == "avancees") {
 			echo afficher_choix('mots_cles_forums', $mots_cles_forums,
 				array('oui' => _T('item_ajout_mots_cles'),
 					'non' => _T('item_non_ajout_mots_cles')));
-			echo "</FONT>";
 			echo "</TD></TR>";
 			echo "</table>";
 			fin_cadre_relief();
@@ -363,7 +362,7 @@ if ($options == "avancees") {
 	echo "<TABLE BORDER='0' CELLSPACING='1' CELLPADDING='3' WIDTH=\"100%\">";
 	echo "<TR><td style='text-align:$spip_lang_right;'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo' />";
-	echo "</TD></TR>";
+	echo "</td></TR>";
 	echo "</TABLE>\n";
 
 	fin_cadre_trait_couleur();
@@ -384,7 +383,7 @@ $proposer_sites = $GLOBALS['meta']["proposer_sites"];
 $visiter_sites = $GLOBALS['meta']["visiter_sites"];
 $moderation_sites = $GLOBALS['meta']["moderation_sites"];
 
-echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+echo "\n<table BORDER='0' CELLSPACING='1' CELLPADDING='3' WIDTH=\"100%\">";
 
 echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
 
@@ -405,15 +404,15 @@ else $style = "display: none;";
 	//
 		echo "<p />";
 		debut_cadre_relief();
-		echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+		echo "\n<table BORDER='0' CELLSPACING='1' CELLPADDING='3' WIDTH=\"100%\">";
 		echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif'>";
-		echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2 COLOR='#000000'>";
+		echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE='2' COLOR='#000000'>";
 		echo _T('info_question_proposer_site');
-			echo "<center><SELECT NAME='proposer_sites' CLASS='fondo' SIZE=1>\n";
-				echo "<OPTION".mySel('0',$proposer_sites).">"._T('item_choix_administrateurs')."\n";
-				echo "<OPTION".mySel('1',$proposer_sites).">"._T('item_choix_redacteurs')."\n";
-				echo "<OPTION".mySel('2',$proposer_sites).">"._T('item_choix_visiteurs')."\n";
-			echo "</SELECT></center><P>\n";
+			echo "<center><SELECT NAME='proposer_sites' CLASS='fondo' SIZE='1'>\n";
+				echo "<OPTION".mySel('0',$proposer_sites).">"._T('item_choix_administrateurs')."</OPTION>\n";
+				echo "<OPTION".mySel('1',$proposer_sites).">"._T('item_choix_redacteurs')."</OPTION>\n";
+				echo "<OPTION".mySel('2',$proposer_sites).">"._T('item_choix_visiteurs')."</OPTION>\n";
+			echo "</SELECT></center><br />\n";
 		echo "</FONT>";
 		echo "</TD></TR></table>";
 		fin_cadre_relief();
@@ -422,7 +421,7 @@ else $style = "display: none;";
 	if ($options == "avancees") {
 		debut_cadre_relief("", false, "", _T('titre_syndication').aide ("rubsyn"));
 	
-		echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+		echo "\n<TABLE BORDER='0' CELLSPACING='1' CELLPADDING='3' WIDTH=\"100%\">";
 		//
 		// Reglage de la syndication
 		//
@@ -458,7 +457,7 @@ else $style = "display: none;";
 			if ($activer_moteur == "oui") {
 				echo "<p><hr><p align='$spip_lang_left'>";
 				echo _T('texte_utilisation_moteur_syndiques')." ";
-				echo "<blockquote><i>"._T('texte_utilisation_moteur_syndiques_2')."</i></blockquote><p>";
+				echo "<blockquote><i>"._T('texte_utilisation_moteur_syndiques_2')."</i></blockquote><br />";
 	
 				echo afficher_choix('visiter_sites', $visiter_sites,
 					array('non' => _T('item_limiter_recherche'),
@@ -481,7 +480,7 @@ else $style = "display: none;";
 
 debut_cadre_relief("feed.png", false, "", _T('ical_titre_rss'));
 
-echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+echo "<TABLE BORDER='0' CELLSPACING='1' CELLPADDING='3' WIDTH=\"100%\">";
 
 echo "<TR><TD class='verdana2'>";
 echo _T('info_syndication_integrale_1',
@@ -496,7 +495,7 @@ echo "<TR>";
 echo "<TD align='$spip_lang_left' class='verdana2'>";
 echo afficher_choix('syndication_integrale', $GLOBALS['meta']["syndication_integrale"],
 	array('oui' => _T('item_autoriser_syndication_integrale'),
-		'non' => _T('item_non_autoriser_syndication_integrale')), "<br>");
+		'non' => _T('item_non_autoriser_syndication_integrale')), "<br />");
 echo "</TD></TR>";
 echo "</TABLE>\n";
 
@@ -506,7 +505,7 @@ echo "<p>";
 
 
 
-echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+echo "<TABLE BORDER='0' CELLSPACING='1' CELLPADDING='3' WIDTH=\"100%\">";
 echo "<TR><td style='text-align:$spip_lang_right;'>";
 echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo' />";
 echo "</TD></TR>";
@@ -526,7 +525,7 @@ debut_cadre_trait_couleur("doc-24.gif", false, "", _T('titre_documents_joints'))
 $documents_rubrique = $GLOBALS['meta']["documents_rubrique"];
 $documents_article = $GLOBALS['meta']["documents_article"];
 
-echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+echo "<TABLE BORDER='0' CELLSPACING='1' CELLPADDING='3' WIDTH=\"100%\">";
 
 echo "<TR><TD class='verdana2'>";
 echo _T('texte_documents_joints');
@@ -537,11 +536,11 @@ echo "<TR>";
 echo "<TD align='$spip_lang_left' class='verdana2'>";
 echo afficher_choix('documents_article', $documents_article,
 	array('oui' => _T('item_autoriser_documents_joints'),
-		'non' => _T('item_non_autoriser_documents_joints')), "<br>");
-echo "<br><br>\n";
+		'non' => _T('item_non_autoriser_documents_joints')), "<br />");
+echo "<br /><br />\n";
 echo afficher_choix('documents_rubrique', $documents_rubrique,
 	array('oui' => _T('item_autoriser_documents_joints_rubriques'),
-		'non' => _T('item_non_autoriser_documents_joints_rubriques')), "<br>");
+		'non' => _T('item_non_autoriser_documents_joints_rubriques')), "<br />");
 echo "</FONT>";
 echo "</TD></TR>";
 
