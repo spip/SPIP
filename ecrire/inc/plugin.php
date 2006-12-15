@@ -287,14 +287,15 @@ function plugin_get_infos($plug){
 	include_spip('inc/xml');
 	static $infos=array();
 	static $plugin_xml_cache=NULL;
-	if ($plugin_xml_cache==NULL){
-		$plugin_xml_cache = array();
-		if (is_file($f=_DIR_TMP."plugin_xml.cache")){
-			lire_fichier($f,$contenu);
-			$plugin_xml_cache = unserialize($contenu);
-		}
-	}
 	if (!isset($infos[$plug])){
+		if ($plugin_xml_cache==NULL){
+			$plugin_xml_cache = array();
+			if (is_file($f=_DIR_TMP."plugin_xml.cache")){
+				lire_fichier($f,$contenu);
+				$plugin_xml_cache = unserialize($contenu);
+				if (!is_array($plugin_xml_cache)) $plugin_xml_cache = array();
+			}
+		}
 		$ret = array();
 		if (isset($plugin_xml_cache[$plug])){
 			$info = $plugin_xml_cache[$plug];
