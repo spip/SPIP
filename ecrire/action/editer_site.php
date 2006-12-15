@@ -35,8 +35,10 @@ function action_editer_site_dist() {
 			(_request('syndication') AND _request('syndication') != $t['syndication'])
 			OR
 			(_request('resume') AND _request('resume') != $t['resume'])
-		))
+			))
 			set_request('reload', 'oui');
+		else if (_request('nouveau_statut'))
+			spip_query("UPDATE spip_syndic SET statut="._q(_request('nouveau_statut'))." WHERE id_syndic=$id_syndic");
 
 		revisions_sites($id_syndic);
 	}
