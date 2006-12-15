@@ -441,4 +441,47 @@ function verifie_include_plugins() {
 		spip_log("desactivation des plugins suite a suppression du repertoire");
 	}
 }
+
+// http://doc.spip.org/@affiche_bloc_plugin
+function affiche_bloc_plugin($plug_file, $info) {
+	// puce d'etat du plugin
+	// <etat>dev|experimental|test|stable</etat>
+	$etat = 'dev';
+	if (isset($info['etat']))
+		$etat = $info['etat'];
+	switch ($etat) {
+		case 'experimental':
+			$puce = 'puce-rouge.gif';
+			$titre_etat = _T('plugin_etat_experimental');
+			break;
+		case 'test':
+			$puce = 'puce-orange.gif';
+			$titre_etat = _T('plugin_etat_test');
+			break;
+		case 'stable':
+			$puce = 'puce-verte.gif';
+			$titre_etat = _T('plugin_etat_stable');
+			break;
+		default:
+			$puce = 'puce-poubelle.gif';
+			$titre_etat = _T('plugin_etat_developpement');
+			break;
+	}
+	
+	$s .= "<div class='detailplugin verdana2'>";
+	$s .= _T('version') .' '.  $info['version'] . " | <strong>$titre_etat</strong><br/>";
+	$s .= _T('repertoire_plugins') .' '. $plug_file . "<br/>";
+
+	if (isset($info['description']))
+		$s .= "<hr/>" . propre($info['description']) . "<br/>";
+
+	if (isset($info['auteur']))
+		$s .= "<hr/>" . _T('auteur') .' '. propre($info['auteur']) . "<br/>";
+	if (isset($info['lien']))
+		$s .= "<hr/>" . _T('info_url') .' '. propre($info['lien']) . "<br/>";
+	$s .= "</div>";
+
+	return $s;
+}
+
 ?>
