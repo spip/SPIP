@@ -280,7 +280,9 @@ function ligne_plug($plug_file, $actif, $id){
 	$nom = typo($info['nom']);
 	// puce d'etat du plugin
 	// <etat>dev|experimental|test|stable</etat>
-	$s .= "<span class='formInfo'><a href='".generer_url_ecrire('info_plugin',"plug=$plug_file&width=500")."' class='jTip' name=\"".attribut_html($nom)."\" id='aide_$plug_file'>?</a></span>";
+	$url = urlencode(generer_url_ecrire('admin_plugin',"plug=$plug_file",'&'));
+	$id = substr(md5("aide_$plug_file"),0,8);
+	$s .= "<span class='formInfo'><a href='".generer_url_ecrire('info_plugin',"plug=$plug_file&width=500&link=$url")."' class='jTip' name=\"".attribut_html($nom)."\" id='$id'>?</a></span>";
 	$s .= "<span class='$etat'>&nbsp;</span>";
 	if (!$erreur){
 		$s .= "<input type='checkbox' name='statusplug_$plug_file' value='O' id='label_$id_input'";
