@@ -95,7 +95,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz'){
 	foreach($plugin_valides as $p=>$info){
 		$plugin_header_info[]= $p.($info['version']?"(".$info['version'].")":"");
 	}
-	ecrire_meta('plugin_header',strtolower(implode(",",$plugin_header_info)));
+	ecrire_meta('plugin_header',substr(strtolower(implode(",",$plugin_header_info)),0,900));
 
 	$start_file = "<"."?php\nif (!defined('_ECRIRE_INC_VERSION')) return;\n";
 	$end_file = "\n?".">";
