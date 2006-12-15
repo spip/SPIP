@@ -57,12 +57,12 @@ div.cadre-padding ul li li {
 	margin:0;
 	padding:0 0 0.25em 0;
 }
-div.cadre-padding ul li li div.nomplugin, div.cadre-padding ul li li div.nomplugin_on {
+div.cadre-padding ul li li div.nomplugin {
 	border:1px solid #AFAFAF;
 	padding:.3em .3em .6em .3em;
 	font-weight:normal;
 }
-div.cadre-padding ul li li div.nomplugin a, div.cadre-padding ul li li div.nomplugin_on a {
+div.cadre-padding ul li li div.nomplugin a {
 	outline:0;
 	outline:0 !important;
 	-moz-outline:0 !important;
@@ -103,6 +103,7 @@ span.dev,span.test,span.stable,span.experimental{
 	display:block;float:left;
 	width:9px; height:9px;margin-right:5px;margin-top:5px;
 }
+div.nomplugin label {display:none;}
 EOF;
 	echo "</style>";
 
@@ -121,8 +122,8 @@ EOF;
 	$s .= "<p><span class='experimental'>&nbsp;</span>"._T('plugin_etat_experimental')."</p>";
 	echo $s;
 	fin_boite_info();
-	/*echo "<a href='#' onclick=\"$('input.selection').attr('checked','checked');\">"._L("tout_activer")."</a><br/>";
-	echo "<a href='#' onclick=\"$('input.selection').attr('checked','');\">"._L("tout_desactiver")."</a><br/>";*/
+	/*echo "<a href='#' onclick=\"$('input.check').attr('checked','checked');\">"._L("tout_activer")."</a><br/>";
+	echo "<a href='#' onclick=\"$('input.check').attr('checked','');\">"._L("tout_desactiver")."</a><br/>";*/
 
 	debut_droite();
 
@@ -229,16 +230,13 @@ function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
 	
 	$visible = @isset($deplie[$current_dir]);
 	$maxiter=1000;
-	echo http_script("// http://doc.spip.org/@verifchange\n".
-	"function verifchange(id) {\n".
-	"if(this.checked == true)\n".
-	"{\n".
-	"	document.getElementById(id).className = 'nomplugin_on';\n".
-	"}\n".
-	"else {\n".
-	"	document.getElementById(id).className = 'nomplugin';\n".
-	"}\n".
-	"}\n");
+	echo http_script("
+	$(document).ready(
+		function()
+		{
+			$('input.check').click(function(){\$(this).parent().toggleClass('nomplugin_on');});
+		}
+	);");
 	while (count($liste_plugins) && $maxiter--){
 		// le rep suivant
 		$dir = dirname(reset($liste_plugins));
@@ -267,7 +265,7 @@ function ligne_plug($plug_file, $actif, $id){
 	$erreur = false;
 	$vals = array();
 	$info = plugin_get_infos($plug_file);
-	$s = "<div id='$plug_file' class='nomplugin".($actif?'_on':'')."'>";
+	$s = "<div id='$plug_file' class='nomplugin ".($actif?'nomplugin_on':'')."'>";
 	if (isset($info['erreur'])){
 		$s .=  "<div style='background:".$GLOBALS['couleur_claire']."'>";
 		$erreur = true;
@@ -282,7 +280,7 @@ function ligne_plug($plug_file, $actif, $id){
 	if (!$erreur){
 		$s .= "<input type='checkbox' name='statusplug_$plug_file' value='O' id='label_$id_input'";
 		$s .= $actif?" checked='checked'":"";
-		$s .= " onclick='verifchange.apply(this,[\"$plug_file\"])' class='selection' /> <label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
+		$s .= " class='check' /> <label for='label_$id_input'>"._T('activer_plugin')."</label>";
 	}
 	$id_input++;
 
