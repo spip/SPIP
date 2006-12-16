@@ -98,13 +98,13 @@ function http_afficher_rendez_vous($date_heure, $date_fin)
 {
   global $spip_lang_rtl;
 
+	$dirpuce = _DIR_RACINE . 'dist';
 	if (jour($date_heure) == jour($date_fin) AND mois($date_heure) == mois($date_fin) AND annee($date_heure) == annee($date_fin)) {		
-	  echo "<p><center class='verdana2'>"._T('titre_rendez_vous')." ".majuscules(nom_jour($date_heure))." <b>".majuscules(affdate($date_heure))."</b><br><b>".heures($date_heure)." "._T('date_mot_heures')." ".minutes($date_heure)."</b>";
-	  echo " &nbsp; <img src='puce$spip_lang_rtl.gif' border='0'> &nbsp;  ".heures($date_fin)." "._T('date_mot_heures')." ".minutes($date_fin)."</center>";
+	  echo "<p class='verdana2' style='text-align: center'>"._T('titre_rendez_vous')." ".majuscules(nom_jour($date_heure))." <b>".majuscules(affdate($date_heure))."</b><br />\n<b>".heures($date_heure)." "._T('date_mot_heures')." ".minutes($date_heure)."</b>";
+	  echo " &nbsp; <img src='$dirpuce/puce$spip_lang_rtl.gif' alt=' ' border='0' /> &nbsp;  ".heures($date_fin)." "._T('date_mot_heures')." ".minutes($date_fin)."</center></p>";
 	} else {
-	  echo "<p><center class='verdana2'>"._T('titre_rendez_vous')."<br> ".majuscules(nom_jour($date_heure))." <b>".majuscules(affdate($date_heure))."</b>, <b>".heures($date_heure)." "._T('date_mot_heures')." ".minutes($date_heure)."</b>";
-	  echo "<center class='verdana2'><img src='puce$spip_lang_rtl.gif' border='0'> ".majuscules(nom_jour($date_fin))." ".majuscules(affdate($date_fin)).", <b>".heures($date_fin)." "._T('date_mot_heures')." ".minutes($date_fin)."</b>";
-	  //echo " &nbsp; <img src='puce$spip_lang_rtl.gif' border='0'> &nbsp;  ".heures($date_fin)." "._T('date_mot_heures')." ".minutes($date_fin)."</center>";
+	  echo "<p class='verdana2' style='text-align: center'>"._T('titre_rendez_vous')."<br />\n".majuscules(nom_jour($date_heure))." <b>".majuscules(affdate($date_heure))."</b>, <b>".heures($date_heure)." "._T('date_mot_heures')." ".minutes($date_heure)."</b>";
+	  echo "<br />\n<img src='$dirpuce/puce$spip_lang_rtl.gif' alt=' ' border='0' /> ".majuscules(nom_jour($date_fin))." ".majuscules(affdate($date_fin)).", <b>".heures($date_fin)." "._T('date_mot_heures')." ".minutes($date_fin)."</b></p>";
 	}
 }
 
@@ -149,15 +149,15 @@ function http_auteurs_ressemblants($cherche_auteur, $id_message)
       $nom_auteur = $row['nom'];
       $email_auteur = $row['email'];
       $bio_auteur = $row['bio'];
-      $res .= "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><b><FONT SIZE=3>$nom_auteur</FONT></b>" .
+      $res .= "<li><font face='Verdana,Arial,Sans,sans-serif' size='2'><b><font size='3'>$nom_auteur</font></b>" .
 	($email_auteur ? " ($email_auteur)" : '') .
 	" | <a href='" . generer_url_ecrire('message', "id_message=$id_message&ajout_auteur=oui&nouv_auteur=$id_auteur") .
 	"'>" .
 	_T('lien_ajout_destinataire').
 	"</a>" .
 	(!trim($bio_auteur) ? '' :
-	 ("<br /><FONT SIZE=1>".propre(couper($bio_auteur, 100))."</FONT>\n")) .
-	"</FONT></LI>\n";
+	 ("<br /><font size='1'>".propre(couper($bio_auteur, 100))."</font>\n")) .
+	"</font></li>\n";
     }
     return  "<b>"._T('info_recherche_auteur_ok', array('cherche_auteur' => $cherche_auteur))."</b><br /><UL>$res</UL>";
   }
@@ -169,14 +169,14 @@ function http_auteurs_ressemblants($cherche_auteur, $id_message)
 // http://doc.spip.org/@http_visualiser_participants
 function http_visualiser_participants($auteurs_tmp)
 {
-  return "\n<table border='0' cellspacing='0' cellpadding='3' width='100%' background=''><tr><td bgcolor='#EEEECC'>" .
+  return "\n<table border='0' cellspacing='0' cellpadding='3' width='100%'><tr><td bgcolor='#EEEECC'>" .
     bouton_block_invisible("auteurs,ajouter_auteur") .
     "<span class='serif2'><b>" .
     _T('info_nombre_partcipants') .
     "</b></span>" .
     ((count($auteurs_tmp) == 0) ? '' :
      (" <font class='arial2'>".join($auteurs_tmp,", ")."</font>")) .
-    "</td></tr></table>";
+    "</td></tr></table>\n";
 }
 
 // http://doc.spip.org/@http_ajouter_participants
@@ -186,16 +186,19 @@ function http_ajouter_participants($ze_auteurs, $id_message)
 
     if (spip_num_rows($result_ajout_auteurs) > 0) {
 
+      echo "<div align='left'>";
       echo generer_url_post_ecrire('message');
-      echo "<DIV align=left><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><b>"._T('bouton_ajouter_participant')." &nbsp; </b></FONT>\n";
-      echo "<input TYPE='Hidden' NAME='id_message' VALUE=\"$id_message\">";
+      echo "<font face='Verdana,Arial,Sans,sans-serif' size='2'><b>",
+	_T('bouton_ajouter_participant'),
+	" &nbsp; </b></font>\n",
+	"<input type='hidden' name='id_message' value=\"$id_message\" />";
 
       if (spip_num_rows($result_ajout_auteurs) > 50) {
-	echo "<input TYPE='text' NAME='cherche_auteur' CLASS='fondl' VALUE='' SIZE='20'>";
-	echo "<input TYPE='submit' NAME='Chercher' VALUE='"._T('bouton_chercher')."' CLASS='fondo'>";
+	echo "\n<input type='text' name='cherche_auteur' class='fondl' value='' size='20' />";
+	echo "\n<input type='submit' name='Chercher' value='"._T('bouton_chercher')."' class='fondo' />";
       }
       else {
-	echo "<SELECT NAME='nouv_auteur' SIZE='1' STYLE='WIDTH=150' CLASS='fondl'>";
+	echo "<select name='nouv_auteur' size='1' style='width: 150px' class='fondl'>";
 	$group = false;
 	$group2 = false;
 	
@@ -217,24 +220,24 @@ function http_ajouter_participants($ze_auteurs, $id_message)
 	  }
 
 	  if ($statut_auteur != $statut_old) {
-	    echo "\n<OPTION VALUE=\"x\">";
-	    echo "\n<OPTION VALUE=\"x\"> $statut_auteur".'s';
+	    echo "\n<option value=\"x\"></option>";
+	    echo "\n<option value=\"x\"> $statut_auteur".'s</option>';
 	  }
 						
 	  if ($premiere != $premiere_old AND ($statut_auteur != _T('info_administrateur') OR !$premiere_old)) {
-	    echo "\n<OPTION VALUE=\"x\">";
+	    echo "\n<option value=\"x\"></option>";
 	  }
 	  
 	  $texte_option = supprimer_tags(couper("$nom ($email) ", 40));
-	  echo "\n<OPTION VALUE=\"$id_auteur\">&nbsp;&nbsp;&nbsp;&nbsp;$texte_option";
+	  echo "\n<option value=\"$id_auteur\">&nbsp;&nbsp;&nbsp;&nbsp;$texte_option</option>";
 	  $statut_old = $statut_auteur;
 	  $premiere_old = $premiere;
 	}
 	
-	echo "</SELECT>";
-	echo "<input TYPE='submit' NAME='Ajouter' VALUE='"._T('bouton_ajouter')."' CLASS='fondo'>";
+	echo "</select>";
+	echo "<input TYPE='submit' name='Ajouter' value='"._T('bouton_ajouter')."' class='fondo' />";
       }
-      echo "</div></FORM>";
+      echo "</form></div>";
     }
 }
 
@@ -292,7 +295,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $nou
 				$auteurs_tmp[] = "<a href='" .
 				  generer_url_ecrire('auteurs_edit',"id_auteur=" . $id_auteur) ."'>". $nom_auteur . "</a>";
 
-				$res .= "<tr><td background='' bgcolor='$couleur'><font face='Verdana,Arial,Sans,sans-serif' size=2>&nbsp;".
+				$res .= "<tr><td bgcolor='$couleur'><font face='Verdana,Arial,Sans,sans-serif' size='2'>&nbsp;".
 				  bonhomme_statut($row)."&nbsp;" .
 				  (($id_auteur != $expediteur) ? '' :
 				   "<font class='arial0'>".
@@ -300,7 +303,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $nou
 				   ."</font> ") .
 				  $nom_auteur .
 				  "</font></td>" .
-				  "<td background='' bgcolor='$couleur' align='right'><font face='Verdana,Arial,Sans,sans-serif' size='1'>" .
+				  "<td bgcolor='$couleur' align='right'><font face='Verdana,Arial,Sans,sans-serif' size='1'>" .
 				  (($id_auteur == $connect_id_auteur) ?
 				   "&nbsp;" :
 				   ("[<a href='" . generer_url_ecrire("message","id_message=$id_message&supp_dest=$id_auteur") . "'>"._T('lien_retrait_particpant')."</a>]")) .
@@ -309,9 +312,9 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $nou
 			echo
 			  http_visualiser_participants($auteurs_tmp),
 			  debut_block_invisible("auteurs"),
-			  "\n<table border=0 cellspacing=0 cellpadding=3 width=100% background=''><tr><td bgcolor='#eeeecc' colspan=2>",
+			  "\n<table border='0' cellspacing='0' cellpadding='3' width='100%'>",
 			  $res,
-			  "</td></tr></table>",
+			    "</table>\n",
 			  fin_block();
 	  }
 
@@ -365,8 +368,6 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 		echo "<br /><font face='Verdana,Arial,Sans,sans-serif' size='2' color='#666666'><b>".nom_jour($date_heure).' '.affdate_heure($date_heure)."</b></font>";
 	}
 
-	echo "<p>";
-
 
 	//////////////////////////////////////////////////////
 	// Message avec participants
@@ -389,25 +390,25 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 	  "<div class='serif'><p>$texte</p></div>";
 
 	if ($les_notes) {
-			echo debut_cadre_relief();
-			echo "<div $dir_lang class='arial11'>";
-			echo justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes);
-			echo "</div>";
-			echo fin_cadre_relief();
+		echo debut_cadre_relief();
+		echo "<div $dir_lang class='arial11'>";
+		echo justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes);
+		echo "</div>";
+		echo fin_cadre_relief();
 	}
 
 	if ($expediteur == $connect_id_auteur AND $statut == 'redac') {
 	  if ($type == 'normal' AND $total_dest < 2){
 	    echo "<p align='right'><font face='Verdana,Arial,Sans,sans-serif' size='2' color='#666666'><b>"._T('avis_destinataire_obligatoire')."</b></font></p>";
 	  } else {
-	    echo "\n<p><center><table><tr><td>";
+	    echo "\n<div align='center'><table><tr><td>";
 	    icone (_T('icone_envoyer_message'), (generer_url_ecrire("message","id_message=$id_message&change_statut=publie")), "messagerie-24.gif", "creer.gif");
-	    echo "</td></tr></table></center></p>";
+	    echo "</td></tr></table></div>";
 	  }
 	}
-	echo "</td></tr></table></div>";	
+	echo "</td></tr></table>\n</div>";	
 
-	echo "</td></tr></table>"; //fin_cadre_relief();
+	echo "</td></tr></table>\n"; //fin_cadre_relief();
 	echo "</div>";			// fin du cadre de couleur
 	
 	// Les boutons
