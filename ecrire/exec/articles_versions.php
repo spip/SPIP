@@ -20,24 +20,7 @@ include_spip('inc/autoriser');
 // http://doc.spip.org/@exec_articles_versions_dist
 function exec_articles_versions_dist()
 {
-  global
-    $champs_extra,
-    $chapo,
-    $connect_id_auteur,
-    $descriptif,
-    $dir_lang,
-    $id_article,
-    $id_diff,
-    $id_version,
-    $les_notes,
-    $nom_site,
-    $options,
-    $ps,
-    $soustitre,
-    $surtitre,
-    $texte,
-    $titre,
-    $url_site;
+  global $champs_extra, $chapo, $descriptif, $dir_lang, $id_article, $id_diff, $id_version, $les_notes, $nom_site, $options, $ps, $soustitre, $surtitre, $texte, $titre, $url_site;
 
 
 //
@@ -185,14 +168,14 @@ echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
 echo "<tr width='100%'><td width='100%' valign='top'>";
 if ($surtitre) {
 	echo "<span $dir_lang><font face='arial,helvetica' size='3'><b>";
-	echo typo($surtitre);
+	echo propre_diff($surtitre);
 	echo "</b></font></span>\n";
 }
-gros_titre($titre, $logo_statut);
+ gros_titre(propre_diff($titre), $logo_statut);
 
 if ($soustitre) {
 	echo "<span $dir_lang><font face='arial,helvetica' size='3'><b>";
-	echo typo($soustitre);
+	echo propre_diff($soustitre);
 	echo "</b></font></span>\n";
 }
 

@@ -20,21 +20,7 @@ include_spip('inc/autoriser');
 // http://doc.spip.org/@exec_articles_ortho_dist
 function exec_articles_ortho_dist()
 {
-  global
-    $browser_name,
-    $champs_extra,
-    $chapo,
-    $descriptif,
-    $dir_lang,
-    $id_article,
-    $les_notes,
-    $ps,
-    $soustitre,
-    $spip_lang_left,
-    $spip_lang_right,
-    $surtitre,
-    $texte,
-    $titre;
+  global $champs_extra, $chapo, $descriptif, $dir_lang, $id_article, $les_notes, $ps, $soustitre, $spip_lang_left, $spip_lang_right, $surtitre, $texte, $titre;
 
 
 //charset_texte('utf-8');
@@ -83,36 +69,6 @@ if (substr($chapo, 0, 1) == '=') {
 
 $echap = array();
 $ortho = "";
-
-//
-// Affichage HTML
-//
-
-// http://doc.spip.org/@debut_html
-function debut_html($titre = "", $rubrique="") {
-	include_spip('inc/headers');
-
-	$nom_site_spip = entites_html(textebrut(typo($GLOBALS['meta']["nom_site"])));
-	if (!$nom_site_spip) $nom_site_spip=  _T('info_mon_site_spip');
-	$titre = textebrut(typo($titre));
-
-	http_no_cache();
-	echo _DOCTYPE_ECRIRE .
-	  html_lang_attributes(),
-	  "<head>\n" .
-	  "<title>[$nom_site_spip] $titre</title>\n";
-	echo f_jQuery("");
-	echo  $rubrique, "\n";
-	echo envoi_link($nom_site_spip),
-  http_script("$(document).ready(function(){
-    verifForm();
-    if(jQuery.browser.msie) document.getElementById('ortho-content').focus();
-  });");
-
-	// Fin des entetes
-	echo "\n</head>\n";
-	echo "<body ",  _ATTRIBUTES_BODY, ">";
-}
 
 
 // Gros hack IE pour le "position: fixed"
@@ -166,7 +122,7 @@ if (is_array($result_ortho)) {
 		echo "<b>"._T('ortho_trop_de_fautes2')."</b><p>";
 	}
 	else {
-		echo "<b>"._T('ortho_mode_demploi').aide('corrortho')."</b><p>\n";
+		echo "<b>"._T('ortho_mode_demploi').aide('corrortho')."</b><br />\n";
 	}
 
 	echo panneau_ortho($result_ortho);
@@ -298,4 +254,35 @@ fin_cadre_relief();
 echo "</div></div></body></html>\n";
 
 }
+
+//
+// Affichage HTML
+//
+
+// http://doc.spip.org/@debut_html
+function debut_html($titre = "", $rubrique="") {
+	include_spip('inc/headers');
+
+	$nom_site_spip = entites_html(textebrut(typo($GLOBALS['meta']["nom_site"])));
+	if (!$nom_site_spip) $nom_site_spip=  _T('info_mon_site_spip');
+	$titre = textebrut(typo($titre));
+
+	http_no_cache();
+	echo _DOCTYPE_ECRIRE .
+	  html_lang_attributes(),
+	  "<head>\n" .
+	  "<title>[$nom_site_spip] $titre</title>\n";
+	echo f_jQuery("");
+	echo  $rubrique, "\n";
+	echo envoi_link($nom_site_spip),
+  http_script("$(document).ready(function(){
+    verifForm();
+    if(jQuery.browser.msie) document.getElementById('ortho-content').focus();
+  });");
+
+	// Fin des entetes
+	echo "\n</head>\n";
+	echo "<body ",  _ATTRIBUTES_BODY, ">";
+}
+
 ?>

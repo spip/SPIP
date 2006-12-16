@@ -75,7 +75,7 @@ function afficher_sites_boucle($row, &$tous_id, $voir_logo, $bof)
 			list($fid, $dir, $nom, $format) = $logo;
 			$logo = ratio_image($fid, $nom, $format, 26, 20, "alt=''");
 			if ($logo)
-				$s .= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</div>";
+				$s .= "<span style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</span>";
 		}
 	}
 

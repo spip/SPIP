@@ -18,14 +18,7 @@ include_spip('inc/actions');
 // http://doc.spip.org/@exec_admin_vider_dist
 function exec_admin_vider_dist()
 {
-  global
-    $connect_id_auteur,
-    $connect_statut,
-    $connect_toutes_rubriques,
-    $hash,
-    $purger_index,
-    $quota_cache,
-    $spip_lang;
+  global $connect_toutes_rubriques,  $quota_cache, $spip_lang;
 
 $commencer_page = charger_fonction('commencer_page', 'inc');
 echo $commencer_page(_T('onglet_vider_cache'), "configuration", "cache");
@@ -46,7 +39,7 @@ fin_boite_info();
 
 debut_droite();
 
-if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
+if (!$connect_toutes_rubriques) {
 	echo _T('avis_non_acces_page');
 	echo fin_page();
 	exit;
