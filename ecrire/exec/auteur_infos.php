@@ -153,7 +153,7 @@ function auteurs_interventions($id_auteur, $statut)
 	
 		echo afficher_messages('<b>' . _T('info_vos_rendez_vous') . '</b>', ", spip_auteurs_messages AS lien, spip_auteurs_messages AS lien2", "lien.id_auteur=$connect_id_auteur AND lien2.id_auteur = $id_auteur AND statut='publie' AND type='normal' AND rv='oui' AND date_fin > NOW() AND lien.id_message=messages.id_message AND lien2.id_message=messages.id_message", $vus, false, false);
 	
-		icone_horizontale(_T('info_envoyer_message_prive'), generer_url_ecrire("message_edit", "new=oui&type=normal&dest=$id_auteur"),
+		icone_horizontale(_T('info_envoyer_message_prive'), generer_action_auteur("editer_message","normal/$id_auteur"),
 				  "message.gif");
 		fin_cadre_couleur();
 	}

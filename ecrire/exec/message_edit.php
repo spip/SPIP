@@ -14,128 +14,77 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/date');
-include_spip('base/abstract_sql');
+
 
 // http://doc.spip.org/@exec_message_edit_dist
 function exec_message_edit_dist()
 {
-global
-  $connect_id_auteur,
-  $connect_statut,
-  $dest,
-  $id_message,
-  $new,
-  $rv,
-  $spip_lang_rtl,
-  $type;
+	global  $connect_id_auteur, $connect_statut,   $spip_lang_rtl;
 
- $id_message =  intval($id_message);
- $dest = intval($dest);
+	$id_message =  intval(_request('id_message'));
+	$dest = intval(_request('dest'));
 
-// Droits
-if ($new=='oui') {
-	switch ($type) {
-		case 'affich':
-			$ok = ($connect_statut == '0minirezo');
-			break;
-		case 'pb':
-		case 'rv':
-		case 'normal':
-			$ok = true;
-			break;
-		default:
-			$ok = false;
-	}
+	if (_request('new')=='oui') {
+		$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
+	} else $onfocus = '';
 
-	if (!$ok) {
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('info_acces_refuse'));
-		debut_gauche();
-		debut_droite();
-		echo "<b>"._T('avis_non_acces_message')."</b><p>";
-		echo fin_page();
+	$row = spip_fetch_array(spip_query("SELECT * FROM spip_messages WHERE id_message=$id_message"));
+
+	$id_message = $row['id_message'];
+	$date_heure = $row["date_heure"];
+	$date_fin = $row["date_fin"];
+	$titre = entites_html($row["titre"]);
+	$texte = entites_html($row["texte"]);
+	$type = $row["type"];
+	$statut = $row["statut"];
+	$rv = $row["rv"];
+	$expediteur = $row["id_auteur"];
+
+	if (!($expediteur == $connect_id_auteur OR ($type == 'affich' AND $connect_statut == '0minirezo'))) {
+		echo minipres(_T('avis_non_acces_message'));
 		exit;
 	}
 
-	$mydate = date("YmdHis", time() - 2 * 24 * 3600);
-	spip_query("DELETE FROM spip_messages WHERE (statut = 'redac') AND (date_heure < $mydate)");
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('titre_page_message_edit'), "accueil", "messagerie");
 
-	if ($type == 'pb') $statut = 'publie';
-	else $statut = 'redac';
-	$titre = filtrer_entites(_T('texte_nouveau_message'));
-	$id_message = spip_abstract_insert("spip_messages", "(titre, date_heure, statut, type, id_auteur)", "(" . _q($titre) . ", NOW(), '$statut', '$type', $connect_id_auteur)");
-	
-	if ($rv) {
-		spip_query("UPDATE spip_messages SET rv='oui', date_heure=" . _q($rv . ' 12:00:00') . ", date_fin= " . _q($rv . ' 13:00:00') . " WHERE id_message = $id_message");
+	if ($type == 'normal') {
+	  $le_type = _T('bouton_envoi_message_02');
+	  $logo = "message";
+	}
+	if ($type == 'pb') {
+	  $le_type = _T('bouton_pense_bete');
+	  $logo = "pense-bete";
+	}
+	if ($type == 'affich') {
+	  $le_type = _T('bouton_annonce');
+	  $logo = "annonce";
 	}
 
-	if ($type != "affich"){
-		spip_abstract_insert('spip_auteurs_messages',
-			"(id_auteur,id_message,vu)",
-			"('$connect_id_auteur','$id_message','oui')");
-		if ($dest) {
-			spip_abstract_insert('spip_auteurs_messages',
-				"(id_auteur,id_message,vu)",
-				"('$dest','$id_message','non')");
-		}
-		else if ($type == 'normal') $ajouter_auteur = true;
-	}
-	$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
- } else $onfocus = $ajouter_auteur = '';
 
-$row = spip_fetch_array(spip_query("SELECT * FROM spip_messages WHERE id_message=$id_message"));
+	debut_gauche();
 
-$id_message = $row['id_message'];
-$date_heure = $row["date_heure"];
-$date_fin = $row["date_fin"];
-$titre = entites_html($row["titre"]);
-$texte = entites_html($row["texte"]);
-$type = $row["type"];
-$statut = $row["statut"];
-$rv = $row["rv"];
-$expediteur = $row["id_auteur"];
-
-$commencer_page = charger_fonction('commencer_page', 'inc');
-echo $commencer_page(_T('titre_page_message_edit'), "accueil", "messagerie");
-
-if (!($expediteur = $connect_id_auteur OR ($type == 'affich' AND $connect_statut == '0minirezo'))) die();
-
-if ($type == 'normal') {
-  $le_type = _T('bouton_envoi_message_02');
-  $logo = "message";
- }
-if ($type == 'pb') {
-  $le_type = _T('bouton_pense_bete');
-  $logo = "pense-bete";
- }
-if ($type == 'affich') {
-  $le_type = _T('bouton_annonce');
-  $logo = "annonce";
- }
-
- echo generer_url_post_ecrire('message',"id_message=$id_message");
-
- debut_gauche();
-
-debut_droite();
+	debut_droite();
 
 	echo "<div class='arial2'>";
-	echo "<font face='Verdana,Arial,Sans,sans-serif' size='2' color='green'><b>$le_type</b></font><p>";
+	echo "<font face='Verdana,Arial,Sans,sans-serif' size='2' color='green'><b>$le_type</b></font>";
 	
+	echo generer_url_post_ecrire('message',"id_message=$id_message");
 	if ($type == "affich")
-		echo "<font face='Verdana,Arial,Sans,sans-serif' size='1' color='red'>"._T('texte_message_edit')."</font></p><p>";
+		echo "<p><font face='Verdana,Arial,Sans,sans-serif' size='1' color='red'>"._T('texte_message_edit')."</font></p>";
 	
-
-	echo "<input type='hidden' name='modifier_message' value='oui'/>";
-	echo "<input type='hidden' name='id_message' value='$id_message'/>";
-	echo "<input type='hidden' name='changer_rv' value='$id_message'/>";
-	echo _T('texte_titre_obligatoire')."<br />";
+	echo "\n<p><input type='hidden' name='modifier_message' value='oui'/>";
+	echo "\n<input type='hidden' name='id_message' value='$id_message'/>";
+	echo "\n<input type='hidden' name='changer_rv' value='$id_message'/>";
+	echo _T('texte_titre_obligatoire')."<br />\n";
 	echo "<input type='text' class='formo' name='titre' value=\"$titre\" size='40' $onfocus />";
 
-	if ($ajouter_auteur) {
-		echo "</p><p><b>"._T('info_nom_destinataire')."</b><br />";
-		echo "<input type='text' class='formo' name='cherche_auteur' value='' size='40'/>";
-	} else if ($dest) {
+	if (!$dest) {
+		if ($type == 'normal') {
+		  echo "</p><p><b>"._T('info_nom_destinataire')."</b><br />";
+		  echo "<input type='text' class='formo' name='cherche_auteur' value='' size='40'/>";
+		}
+	} else {
 		$nom = spip_fetch_array(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$dest"));
 		echo "</p><p><b>",
 		  _T('info_nom_destinataire'),
@@ -143,7 +92,7 @@ debut_droite();
 		  $nom['nom'],
 		  "<br /><br />";
 	}
-	echo "<p />";
+	echo "</p>";
 
 
 	//////////////////////////////////////////////////////
@@ -154,16 +103,15 @@ debut_droite();
 	afficher_si_rdv($date_heure, $date_fin, ($rv == "oui")); 
 	fin_cadre_trait_couleur();
 
-	echo "<p><b>"._T('info_texte_message_02')."</b><br />";
+	echo "\n<p><b>"._T('info_texte_message_02')."</b><br />";
 	echo "<textarea name='texte' rows='20' class='formo' cols='40'>";
 	echo $texte;
 	echo "</textarea></p><br />\n";
 
-	echo "<p align='right'><input type='submit' name='valider' value='"._T('bouton_valider')."' class='fondo'/></p>";
-	echo "</div>";
+	echo "\n<p align='right'><input type='submit' name='valider' value='"._T('bouton_valider')."' class='fondo'/></p>";
 	echo "</form>";
-
-echo fin_page();
+	echo "\n</div>";
+	echo fin_page();
 }
 
 // http://doc.spip.org/@afficher_si_rdv
@@ -186,27 +134,32 @@ function afficher_si_rdv($date_heure, $date_fin, $choix)
 		$minutes_fin = 59;
 	}
 			
-	$res = "<div><input type='radio' name='rv' value='non' id='rv_off'" .
-		(!$choix ? "checked='checked' " : '') .
-		" onclick=\"changeVisible(this.checked, 'heure-rv', 'none', 'block');\"/>" .
-		"<label for='rv_off'>".
-		_T('item_non_afficher_calendrier').
-		"</label>";
-	echo ($choix  ? $res : "<b>$res</b>") . "</div>";
+	$res = _T('item_non_afficher_calendrier');
+	if (!$choix)  $res = "<b>$res</b>";
 
-	$res = "<input type='radio' name='rv' value='oui' id='rv_on' " .
-		($choix ? "checked='checked' " : '') .
-		"onclick=\"changeVisible(this.checked, 'heure-rv', 'block', 'none');\"/>" . 
-		"<label for='rv_on'>".
-		_T('item_afficher_calendrier').
-		"</label>";
-	echo '<div>' . (!$choix  ? $res : "<b>$res</b>") . '</div>';
+	echo "\n<div><input type='radio' name='rv' value='non' id='rv_off'" .
+		(!$choix ? " checked='checked' " : '') .
+		"\nonclick=\"changeVisible(this.checked, 'heure-rv', 'none', 'block');\"/>" .
+		"<label for='rv_off'>"
+	       . $res
+		. "</label>"
+		. "</div>";
+
+	$res = _T('item_afficher_calendrier');
+	if (!$choix)  $res = "<b>$res</b>";
+	echo "\n<div><input type='radio' name='rv' value='oui' id='rv_on' " .
+		($choix ? " checked='checked' " : '') .
+		"\nonclick=\"changeVisible(this.checked, 'heure-rv', 'block', 'none');\"/>" . 
+		"<label for='rv_on'>"
+		. $res
+		. "</label>"
+	  . '</div>';
 	
 	$display = ($choix ? "block" : "none");
 	
-	echo "<div id='heure-rv' style='display: $display; padding-top: 4px; padding-left: 24px;'>",
+	echo "\n<div id='heure-rv' style='display: $display; padding-top: 4px; padding-left: 24px;'>",
 	  afficher_jour_mois_annee_h_m($date_heure, $heures_debut, $minutes_debut),
-	  " <br /><img src='puce$spip_lang_rtl.gif' alt=' '/> &nbsp; ",
+	  "\n<br /><img src='puce$spip_lang_rtl.gif' alt=' '/> &nbsp; ",
 	  afficher_jour_mois_annee_h_m($date_fin, $heures_fin, $minutes_fin, '_fin'),
 	  "</div>";
 }

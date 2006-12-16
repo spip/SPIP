@@ -61,20 +61,20 @@ function http_calendrier_ics_message($annee, $mois, $jour, $large)
   $j=  _T("lien_nouvelle_annonce");
 
   return 
-    http_href(generer_url_ecrire("message_edit","rv=$annee-$mois-$jour&new=oui&type=pb"), 
+    http_href(generer_action_auteur("editer_message","pb/$annee-$mois-$jour"), 
 	      $bleu . ($large ? $b : ''), 
 	      $b,
 	      'color: blue;',
 	      'calendrier-arial10') .
     "\n" .
-    http_href(generer_url_ecrire("message_edit","rv=$annee-$mois-$jour&new=oui&type=normal"),
+    http_href(generer_action_auteur("editer_message","normal/$annee-$mois-$jour"), 
 	      $vert . ($large ? $v : ''), 
 	      $v,
 	      'color: green;',
 	      'calendrier-arial10') .
     (($GLOBALS['connect_statut'] != "0minirezo") ? "" :
      ("\n" .
-      http_href(generer_url_ecrire("message_edit","rv=$annee-$mois-$jour&new=oui&type=affich"),
+    http_href(generer_action_auteur("editer_message","affich/$annee-$mois-$jour"), 
 		$jaune . ($large ? $j : ''), 
 		$j,
 		'color: #ff9900;',

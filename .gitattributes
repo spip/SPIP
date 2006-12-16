@@ -322,6 +322,7 @@ ecrire/action/documenter.php -text
 ecrire/action/editer_article.php -text
 ecrire/action/editer_auteurs.php -text
 ecrire/action/editer_breve.php -text
+ecrire/action/editer_message.php -text
 ecrire/action/editer_mot.php -text
 ecrire/action/editer_rubrique.php -text
 ecrire/action/editer_signatures.php -text
