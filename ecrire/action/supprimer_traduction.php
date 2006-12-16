@@ -16,9 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_supprimer_traduction_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
-
-	$arg = _request('arg');
+	$arg = $securiser_action();
 
 	if (!preg_match(",^(\d+)\D(\d+)$,", $arg, $r)) 
 		spip_log("action supprimer_traduction: $arg pas compris");

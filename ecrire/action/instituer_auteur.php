@@ -16,9 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_instituer_auteur_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
-
-	$arg = _request('arg');
+	$arg = $securiser_action();
 
 	if (preg_match(",^(\d+)\W-(\d+)$,", $arg, $r))
 		spip_query("DELETE FROM spip_auteurs_rubriques WHERE id_auteur=".$r[1]." AND id_rubrique=" . $r[2]);

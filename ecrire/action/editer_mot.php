@@ -16,9 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_editer_mot_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
-
-	$arg = _request('arg');
+	$arg = $securiser_action();
 	// arg = l'eventuel mot a supprimer pour d'eventuelles Row SQL
 	if (!preg_match(',^(\d*)\D(-?\d*)\W(\w*)\W(\w*)\W(\w*)\W?(\d*)$,', $arg, $r)) 
 		spip_log("action editer_mot: $arg pas compris");

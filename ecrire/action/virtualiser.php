@@ -18,9 +18,7 @@ include_spip('inc/filtres');
 function action_virtualiser_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
-
-	$arg = _request('arg');
+	$arg = $securiser_action();
 	$url = _request('virtuel');
 
 	if (!preg_match(",^\W*(\d+)$,", $arg, $r)) {

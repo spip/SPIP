@@ -16,9 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_instituer_collaboration_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
-
-	$arg = _request('arg');
+	$arg = $securiser_action();
 
 	if ($arg) {
 		include_spip('inc/drapeau_edition');

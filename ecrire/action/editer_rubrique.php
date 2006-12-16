@@ -18,9 +18,7 @@ include_spip('inc/rubriques');
 function action_editer_rubrique_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
-
-	$arg = _request('arg');
+	$arg = $securiser_action();
 
 	if (!$id_rubrique = intval($arg)) {
 		if ($arg != 'oui') redirige_par_entete('./');

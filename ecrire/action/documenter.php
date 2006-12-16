@@ -18,9 +18,7 @@ include_spip('action/supprimer');
 function action_documenter_dist()
 {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
-
-	$arg = _request('arg');
+	$arg = $securiser_action();
 
 	if (!preg_match(",^(-?)(\d+)\W(\w+)\W?(\d*)$,", $arg, $r))
 		spip_log("action_documenter $arg pas compris");

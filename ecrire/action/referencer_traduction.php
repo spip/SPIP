@@ -18,9 +18,7 @@ include_spip('inc/filtres');
 function action_referencer_traduction_dist() {
 	
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
-
-	$arg = _request('arg');
+	$arg = $securiser_action();
 
 	if (preg_match(",^(\d+)$,", $arg, $r)
 	AND $trad = intval(_request('lier_trad'))) {

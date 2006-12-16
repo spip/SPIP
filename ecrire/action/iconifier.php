@@ -17,8 +17,7 @@ function action_iconifier_dist()
 {
 	include_spip('inc/actions');
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
-	$arg = _request('arg');
+	$arg = $securiser_action();
 	$iframe_redirect = _request('iframe_redirect');
 
 	$arg = rawurldecode($arg);

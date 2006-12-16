@@ -17,9 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_editer_breve_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
-
-	$arg = _request('arg');
+	$arg = $securiser_action();
 
 	// Envoi depuis les boutons "publier/supprimer cette breve"
 	if (preg_match(',^(\d+)\Wstatut\W(\w+)$,', $arg, $r)) {

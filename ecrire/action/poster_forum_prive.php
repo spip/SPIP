@@ -16,9 +16,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_poster_forum_prive_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
+	$arg = $securiser_action();
 
-	$arg = _request('arg');
 	// arg = l'eventuel mot a supprimer pour d'eventuelles Row SQL
 	if (!preg_match(',^(\d+)\D(\d+)\D(\w+)\W(\w+)\W(\w+)$,', $arg, $r)) 
 		spip_log("action poster_forum_prive: $arg pas compris");

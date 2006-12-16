@@ -28,12 +28,12 @@ function action_joindre_dist()
 	  $_FILES,  $HTTP_POST_FILES;
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
+	$arg = $securiser_action();
 
 	$redirect = _request('redirect');
 	$iframe_redirect = _request('iframe_redirect');
-	if (!preg_match(',^(-?\d+)\D(\d+)\D(\w+)/(\w+)$,',_request('arg'),$r)) {
-	  spip_log("action_joindre_dist incompris: " . _request('arg'));
+	if (!preg_match(',^(-?\d+)\D(\d+)\D(\w+)/(\w+)$,',$arg,$r)) {
+	  spip_log("action_joindre_dist incompris: " . $arg);
 	  redirige_par_entete(urldecode($redirect));
 	}
 	list($arg, $id, $id_document, $mode, $type) = $r;

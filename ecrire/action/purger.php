@@ -16,9 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 function action_purger_dist()
 {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
-
-	$arg = _request('arg');
+	$arg = $securiser_action();
 
 	include_spip('inc/invalideur');
 
