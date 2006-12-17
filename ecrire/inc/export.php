@@ -95,7 +95,7 @@ function export_objets($table, $primary, $liens, $file = 0, $gz = false, $etape_
 		if ($file) {
 			// on se contente d'une ecriture en base pour aller plus vite
 			// a la relecture on en profitera pour mettre le cache a jour
-			ecrire_meta("status_dump", implode("::",$status_dump));
+			ecrire_meta("status_dump", implode("::",$status_dump),'non');
 			#lire_metas();
 			#ecrire_metas();
 		}
@@ -127,13 +127,15 @@ function build_while($file,$gz, $nfields, &$pos_in_table, $result, &$status_dump
 	$all = $connect_toutes_rubriques || (!in_array('id_rubrique',$fields));
 	while ($row = spip_fetch_array($result,SPIP_ASSOC)) {
 		$item = '';
-		for ($i = 0; $i < $nfields; ++$i) {
-			$k = $fields[$i];
-			$item .= "<$k>" . text_to_xml($row[$k]) . "</$k>\n";
+		if (!isset($row['impt']) OR $row['impt']=='oui'){
+			for ($i = 0; $i < $nfields; ++$i) {
+				$k = $fields[$i];
+				$item .= "<$k>" . text_to_xml($row[$k]) . "</$k>\n";
+			}
+			if ($all OR acces_rubrique($row['id_rubrique']))
+				$string .= "$begin$item$end";
 		}
 		$status_dump[3] = $pos_in_table = $pos_in_table +1;
-		if ($all OR acces_rubrique($row['id_rubrique']))
-			$string .= "$begin$item$end";
 	}
 
 	if ($file) {
@@ -142,7 +144,7 @@ function build_while($file,$gz, $nfields, &$pos_in_table, $result, &$status_dump
 		fflush($file);
 		// on se contente d'une ecriture en base pour aller plus vite
 		// a la relecture on en profitera pour mettre le cache a jour
-		ecrire_meta("status_dump", implode("::",$status_dump));
+		ecrire_meta("status_dump", implode("::",$status_dump),'non');
 		$string = '';
 	}
 	return $string;
