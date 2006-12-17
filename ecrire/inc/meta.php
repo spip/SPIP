@@ -27,11 +27,17 @@ function lire_metas() {
 }
 
 // http://doc.spip.org/@ecrire_meta
-function ecrire_meta($nom, $valeur) {
+function ecrire_meta($nom, $valeur, $importable = NULL) {
 	if (strlen($nom)){
 		$GLOBALS['meta'][$nom] = $valeur; 
 		if (!_FILE_CONNECT && !@file_exists(_FILE_CONNECT_INS .'.php')) return;
-		spip_query("REPLACE spip_meta (nom, valeur) VALUES ('$nom', " . _q($valeur) . " )");
+		// conserver la valeur de impt si existante
+		if ($importable === NULL){
+			$importable = 'oui';
+			if ($row = spip_fetch_array(spip_query("SELECT impt FROM spip_meta WHERE nom="._q($nom))))
+				$importable = $row['impt'];
+		}
+		spip_query("REPLACE spip_meta (nom, valeur, impt) VALUES ("._q($nom).", " . _q($valeur) . ","._q($importable)." )");
 	}
 }
 
