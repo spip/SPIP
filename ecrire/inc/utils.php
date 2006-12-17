@@ -46,7 +46,6 @@ function charger_fonction($nom, $dossier='exec', $continue=false) {
 
 	if (function_exists($f)) return $f;
 	if (function_exists($g)) return $g;
-
 	if ($continue) return false;
 
 	// Echec : message d'erreur
@@ -1142,12 +1141,12 @@ function spip_desinfecte(&$t) {
 
 // http://doc.spip.org/@verifier_visiteur
 function verifier_visiteur() {
+
 	if (isset($_COOKIE['spip_session']) OR
 	(isset($_SERVER['PHP_AUTH_USER'])  AND !$GLOBALS['ignore_auth_http'])) {
 
 		// Rq: pour que cette fonction marche depuis mes_options 
 		// il faut forcer l'init si ce n'est fait
-
 		@spip_initialisation();
 
 		$session = charger_fonction('session', 'inc');
