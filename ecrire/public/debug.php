@@ -306,7 +306,7 @@ function reference_boucle_debug($n, $nom, $self)
 function ancre_texte($texte, $fautifs=array())
 {
 	global $var_mode_ligne;
-	if ($var_mode_ligne) $fautifs[]=$var_mode_ligne;
+	if ($var_mode_ligne) $fautifs[]= array($var_mode_ligne);
 	$res ='';
 	$s = highlight_string($texte,true);
 	if (substr($s,0,6) == '<code>') { $s=substr($s,6); $res = '<code>';}
@@ -322,11 +322,27 @@ function ancre_texte($texte, $fautifs=array())
 	$formaterr="<span style='background-color: pink'>%s</span>";
 	$i=1;
 
+	$flignes = array();
+
+	foreach ($fautifs as $lc)
+	  if (is_array($lc))
+	    $flignes[$lc[0]] = $lc[1];
+	  else $flignes[$lc] = 0;
+
 	foreach ($tableau as $ligne) {
-		$res .= "<br />\n"
+	  if (isset($flignes[$i])) {
+	    $ligne = str_replace('&nbsp;',' ', $ligne);
+	    // tentative de pointer sur la colonne fautive;
+	    // marche pas car highlight_string rajoute des entites. A revoir.
+	    // $m = $flignes[$i];
+	    //  $ligne = substr($ligne, 0, $m-1) .
+	    //  sprintf($formaterr, substr($ligne,$m));
+	    $ligne = sprintf($formaterr, $ligne);
+	  }
+	  $res .= "<br />\n"
 		.  sprintf((($i%10) ? $format :$format10), $i, $i)
-		.  sprintf(in_array($i, $fautifs) ? $formaterr : '%s', $ligne);
-		$i++;
+		.   $ligne;
+	  $i++;
 	}
 	return "<div id='T$ancre'>$res</div>";
 }
@@ -510,33 +526,32 @@ function emboite_texte($texte, $fonc='',$self='')
  
 	if (!$texte)
 		return array(ancre_texte($texte, array('','')), false);
-	elseif (preg_match_all(",([^0-9]* )([0-9]+)(.*?<br />),",
+	elseif (!ereg("^[[:space:]]*([^<][^0-9]*)([0-9]*)(.*[^0-9])([0-9]*)$",
+                     $GLOBALS['xhtml_error'],
+                     $eregs))
+		return array(ancre_texte($texte, array('', '')), true);
+	if (!isset($GLOBALS['debug_objets'])) {
+		preg_match_all(",([^0-9]* )([0-9]+)(.*?(\d*)<br />),",
 				$GLOBALS['xhtml_error'],
 				$regs,
-				PREG_SET_ORDER)) {
+			       PREG_SET_ORDER);
 		$err = '';
 		$fautifs = array();
 		foreach($regs as $r) {
 			$err .= $r[1] .
 			  "<a href='#L" . $r[2] . "'>$r[2]</a>$r[3]";
-			$fautifs[]=$r[2];
+			$fautifs[]= array($r[2], $r[4]);
 		}
 		return array(ancre_texte($texte, $fautifs), $err);
-	} elseif (!ereg("^[[:space:]]*([^<][^0-9]*)([0-9]*)(.*[^0-9])([0-9]*)$",
-                     $GLOBALS['xhtml_error'],
-                     $r))
-		return array(ancre_texte($texte, array('', '')), true);
-	else {
-		$fermant = $r[2];
-		$ouvrant = $r[4];
-		if (isset($GLOBALS['debug_objets'])) {
-		  $rf = reference_boucle_debug($fermant, $fonc, $self);
-		  $ro = reference_boucle_debug($ouvrant, $fonc, $self);
-		} else $rf = $ro = '';
-		$err = $r[1] .
-		  "<a href='#L" . $r[2] . "'>$r[2]</a>$rf" .
-		  $r[3] ."<a href='#L" . $r[4] . "'>$r[4]</a>$ro";
-		return array(ancre_texte($texte, array($ouvrant, $fermant)), $err);
+	} else {
+		$fermant = $eregs[2];
+		$ouvrant = $eregs[4];
+		$rf = reference_boucle_debug($fermant, $fonc, $self);
+		$ro = reference_boucle_debug($ouvrant, $fonc, $self);
+		$err = $eregs[1] .
+		  "<a href='#L" . $eregs[2] . "'>$eregs[2]</a>$rf" .
+		  $eregs[3] ."<a href='#L" . $eregs[4] . "'>$eregs[4]</a>$ro";
+		return array(ancre_texte($texte, array(array($ouvrant), array($fermant))), $err);
 	}
 }
 ?>
