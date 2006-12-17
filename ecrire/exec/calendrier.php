@@ -88,7 +88,7 @@ function http_calendrier_aide_mess()
   return
    "\n<br /><br /><br />\n<font face='arial,helvetica,sans-serif' size='2'><table width='700'>\n<tr><th style='text-align: $spip_lang_left; font-weight: bold;'> " . _T('info_aide').
     "</th></tr><tr><td>$bleu\n"._T('info_symbole_bleu')."\n" .
-    "</td></tr><tr>><td>$vert\n"._T('info_symbole_vert')."\n" .
+    "</td></tr><tr><td>$vert\n"._T('info_symbole_vert')."\n" .
     "</td></tr><tr><td>$jaune\n"._T('info_symbole_jaune')."\n" .
     "</td></tr>\n</table></font>";
  }

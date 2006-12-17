@@ -359,7 +359,8 @@ OR _request('action') == 'test_dirs')) {
 	} else {
 	// Si on est dans le site public, dire que qq s'en occupe
 		include_spip('inc/minipres');
-		minipres(_T('info_travaux_titre'), "<p style='text-align: center;'>"._T('info_travaux_texte')."</p>");
+		echo minipres(_T('info_travaux_titre'), "<p style='text-align: center;'>"._T('info_travaux_texte')."</p>");
+		exit;
 	}
 	// autrement c'est une install ad hoc (spikini...), on sait pas faire
 }
