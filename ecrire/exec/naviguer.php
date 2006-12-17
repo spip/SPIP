@@ -31,7 +31,11 @@ function exec_naviguer_dist()
 		$statut = $row['statut'];
 		$extra = $row["extra"];
 	} elseif ($id_rubrique)
-		die();
+	      {include_spip('minipres');
+		minipres();
+		exit;
+	      }
+
 	else $statut = $titre = $descriptif = $texte = $extra = '';
 
 	if ($id_rubrique ==  0) $ze_logo = "racine-site-24.gif";

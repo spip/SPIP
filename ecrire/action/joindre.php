@@ -169,7 +169,8 @@ function joindre_documents($files, $mode, $type, $id, $id_document, $hash, $redi
 					$desc['name'],
 					$desc['tmp_name']
 				);
-			if (!$zip) die ('Erreur upload zip'); # pathologique
+			if (!$zip)
+			  {include_spip('minipres'); minipres ('Erreur upload zip'); exit;} # pathologique
 			// Est-ce qu'on sait le lire ?
 			include_spip('inc/pclzip');
 			$archive = new PclZip($zip);
@@ -239,8 +240,11 @@ function joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirec
 	    $ajouter_documents = charger_fonction('ajouter_documents', 'inc');
 	    define('_tmp_dir', creer_repertoire_documents($hash));
 
-	    if (_tmp_dir == _DIR_DOC) die(_L('Op&eacute;ration impossible'));
-
+	    if (_tmp_dir == _DIR_DOC)
+	      {include_spip('minipres');
+		minipres(_L('Op&eacute;ration impossible'));
+		exit;
+	      }
 	    include_spip('inc/pclzip');
 	    $archive = new PclZip($path);
 	    $archive->extract(

@@ -17,7 +17,10 @@ function exec_dater_dist()
 {
 	$type = _request('type');
 	if (!preg_match('/^\w+$/',$type)) // securite
-		die('XSS');
+	      {include_spip('minipres');
+		minipres();
+		exit;
+	      }
 
 	$id = intval(_request('id'));
 
@@ -25,7 +28,7 @@ function exec_dater_dist()
 	OR ($type == 'article' AND    !acces_article($id))) {
 		spip_log("Tentative d'intrusion du " . $GLOBALS['auteur_session']['statut'] . ' ' . $GLOBALS['auteur_session']['nom'] . " dans " . $GLOBALS['exec'] . " sur $type $id.");
 		include_spip('inc/minipres');
-		echo minipres(_T('info_acces_interdit'));
+		minipres();
 		exit;
 	}
 

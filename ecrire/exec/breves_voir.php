@@ -35,7 +35,10 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 		$statut=$row['statut'];
 		$id_rubrique=$row['id_rubrique'];
 	} else 
-		die ('breve inexistante');
+	      {include_spip('minipres');
+		minipres();
+		exit;
+	      }
 
 	$flag_editable = (($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique)) OR $statut == 'prop');
 

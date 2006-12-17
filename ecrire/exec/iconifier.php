@@ -25,7 +25,10 @@ function exec_iconifier_dist()
 	$id = intval(_request($type));
   
 	if (!preg_match('/^\w+$/', "$type$script"))
-		die(_T('info_acces_interdit'));
+	      {include_spip('minipres');
+		minipres();
+		exit;
+	      }
 
 	if ($type == 'id_rubrique')
 	  $droit = acces_rubrique($id_rubrique);
@@ -44,7 +47,7 @@ function exec_iconifier_dist()
 	if (!$droit) {
 		spip_log("Tentative d'intrusion de " . $GLOBALS['auteur_session']['nom'] . " dans " . $GLOBALS['exec']);
 		include_spip('inc/minipres');
-		echo minipres(_T('info_acces_interdit'));
+		minipres();
 		exit;
 	}
 

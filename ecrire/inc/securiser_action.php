@@ -30,7 +30,7 @@ function inc_securiser_action_dist($action='', $arg='', $redirect="", $mode=fals
 		if (verifier_action_auteur("$action-$arg", $hash))
 			return $arg;
 		include_spip('inc/minipres');
-		echo minipres(_T('info_acces_interdit'));
+		minipres();
 		exit;
 	}
 }
@@ -86,8 +86,9 @@ function caracteriser_auteur() {
 		$t = spip_query("SELECT id_auteur, pass FROM spip_auteurs WHERE id_auteur=$id_auteur");
 		if ($t = spip_fetch_array($t))
 			return $caracterisation = array($t['id_auteur'], $t['pass']);
-		spip_log("auteur $id_auteur sans caracterisation");
-		die(_T('info_acces_interdit'));
+		include_spip('minipres');
+		minipres();
+		exit;
 	}
 }
 
@@ -110,7 +111,6 @@ function verifier_action_auteur($action, $valeur) {
 		return true;
 	if ($valeur == _action_auteur($action, $id_auteur, $pass, 'alea_ephemere_ancien'))
 		return true;
-	spip_log("verifier action $action $id_auteur : echec");
 	return false;
 }
 

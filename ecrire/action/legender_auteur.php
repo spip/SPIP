@@ -179,7 +179,7 @@ function action_legender_auteur_post($r)
 		}
 
 		$n = spip_query("UPDATE spip_auteurs SET $query_pass		nom=" . _q($auteur['nom']) . ",						login=" . _q($auteur['login']) . ",					bio=" . _q($auteur['bio']) . ",						email=" . _q($auteur['email']) . ",					nom_site=" . _q($auteur['nom_site']) . ",				url_site=" . _q($auteur['url_site']) . ",				pgp=" . _q($auteur['pgp']) .					(!$extra ? '' : (", extra = " . _q($extra) . "")) .			" WHERE id_auteur=".$auteur['id_auteur']);
-		if (!$n) die('UPDATE');
+		$echec[]= ('UPDATE');
 	}
 
 // Si on modifie la fiche auteur, reindexer 
