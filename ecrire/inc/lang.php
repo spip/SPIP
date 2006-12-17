@@ -21,7 +21,7 @@ include_spip('inc/actions');
 function changer_langue($lang) {
 	global $all_langs, $spip_lang_rtl, $spip_lang_right, $spip_lang_left, $spip_lang_dir, $spip_dir_lang;
 
-	$liste_langues = $all_langs.','.@$GLOBALS['meta']['langues_multilingue'];
+	$liste_langues = ',' . $all_langs.','.@$GLOBALS['meta']['langues_multilingue'] . ',';
 
 	// Si la langue demandee n'existe pas, on essaie d'autres variantes
 	// Exemple : 'pt-br' => 'pt_br' => 'pt'
@@ -29,9 +29,9 @@ function changer_langue($lang) {
 	if (!$lang)
 		return false;
 
-	if (ereg(",$lang,", ",$liste_langues,")
+	if (ereg(",$lang,", $liste_langues)
 	OR ($lang = preg_replace(',_.*,', '', $lang)
-	AND ereg(",$lang,", ",$liste_langues,"))) {
+	AND ereg(",$lang,", $liste_langues))) {
 
 		$GLOBALS['spip_lang'] = $lang;
 		$spip_lang_rtl =   lang_dir($lang, '', '_rtl');
@@ -243,7 +243,7 @@ function calculer_langues_utilisees () {
 //
 // http://doc.spip.org/@verifier_lang_url
 function verifier_lang_url() {
-	global $_GET, $_COOKIE, $spip_lang;
+	global $spip_lang;
 
 	// quelle langue est demandee ?
 	$lang_demandee = $GLOBALS['meta']['langue_site'];
@@ -277,7 +277,7 @@ function verifier_lang_url() {
 //
 // http://doc.spip.org/@utiliser_langue_site
 function utiliser_langue_site() {
-	changer_langue($GLOBALS['langue_site']);
+	changer_langue($GLOBALS['meta']['langue_site']);
 }
 
 // http://doc.spip.org/@utiliser_langue_visiteur
