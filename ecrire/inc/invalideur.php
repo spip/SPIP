@@ -141,27 +141,6 @@ function purger_repertoire($dir, $age='ignore', $regexp = '') {
 	closedir($handle);
 }
 
-// Fonctions pour le cache des images (vues reduites)
-
-
-// http://doc.spip.org/@calculer_taille_dossier
-function calculer_taille_dossier ($dir) {
-	$handle = @opendir($dir);
-	if (!$handle) return;
-
-	while (($fichier = @readdir($handle)) !== false) {
-		// Eviter ".", "..", ".htaccess", etc.
-		if ($fichier[0] == '.') continue;
-		if ($regexp AND !ereg($regexp, $fichier)) continue;
-		if (is_file("$dir/$fichier")) {
-			$taille += filesize("$dir/$fichier");
-		}
-	}
-	closedir($handle);
-	return $taille;
-}
-
-
 // http://doc.spip.org/@cron_invalideur
 function cron_invalideur($t) {
 	//

@@ -15,6 +15,49 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/actions');
 
+
+// http://doc.spip.org/@calculer_taille_dossier
+function calculer_taille_dossier ($dir) {
+	$handle = @opendir($dir);
+	if (!$handle) return;
+
+	while (($fichier = @readdir($handle)) !== false) {
+		// Eviter ".", "..", ".htaccess", etc.
+		if ($fichier[0] == '.') continue;
+		if ($regexp AND !ereg($regexp, $fichier)) continue;
+		if (is_file("$dir/$fichier")) {
+			$taille += filesize("$dir/$fichier");
+		}
+	}
+	closedir($handle);
+	return $taille;
+}
+
+
+
+function afficher_taille_cache_vignettes() {
+	$handle = @opendir(_DIR_VAR);
+	if (!$handle) return;
+
+	$taille = 0;
+	while (($fichier = @readdir($handle)) !== false) {
+		// Eviter ".", "..", ".htaccess", etc.
+		if ($fichier[0] == '.') continue;
+		if ($regexp AND !ereg($regexp, $fichier)) continue;
+		if (is_dir($d = _DIR_VAR . $fichier) AND ereg("^cache-", $fichier)) {
+			$taille += calculer_taille_dossier($d);
+		}
+	}
+	closedir($handle);
+	
+	return _T('ecrire:taille_cache_image',
+		array(
+			'dir' => joli_repertoire(_DIR_VAR),
+			'taille' => "<b>".taille_en_octets($taille)."</b>"
+			)
+		);
+}
+
 // http://doc.spip.org/@exec_admin_vider_dist
 function exec_admin_vider_dist()
 {
@@ -88,11 +131,7 @@ if ($quota_cache) {
 
  debut_cadre_relief("image-24.gif", false, "", _T('info_images_auto'));
 
- echo "<div style='text-align: center;'>
-<iframe width='530px' height='65px'\nsrc='",
-   generer_action_auteur('purger','taille_vignettes') . "&amp;lang=$spip_lang",
-   "'></iframe>
-</div>";
+ echo afficher_taille_cache_vignettes();
 
  echo generer_action_auteur('purger',
 	'vignettes',
