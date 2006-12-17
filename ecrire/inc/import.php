@@ -139,9 +139,14 @@ function import_init_tables($request)
 	// on vide toutes les tables dont la restauration est demandee
 	$tables = import_table_choix($request);
 	foreach($tables as $table){
-
-		if (($table!='spip_auteurs')&&(!in_array($table,$IMPORT_tables_noerase)))
-			spip_query("DELETE FROM $table");
+		// regarder si il y a au moins un champ impt='non'
+		if (($table!='spip_auteurs')&&(!in_array($table,$IMPORT_tables_noerase))){
+			$res = spip_query("SELECT impt FROM $table WHERE impt='non' LIMIT 0,1");
+			if (spip_num_rows($res))
+				spip_query("DELETE FROM $table WHERE impt='oui'");
+			else
+				spip_query("DELETE FROM $table");
+		}
 	}
 
 	// Bidouille pour garder l'acces admin actuel pendant toute la restauration
