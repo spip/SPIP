@@ -25,8 +25,8 @@ function action_logout_dist()
 	if ($logout == 'public' AND !$url)
 		$url = url_de_base();
 
-// seul le loge peut se deloger
-	if ($auteur_session['id_auteur']) {
+	// seul le loge peut se deloger (mais id_auteur peut valoir 0 apres une restauration avortee)
+	if (is_numeric($auteur_session['id_auteur'])) {
 		spip_query("UPDATE spip_auteurs SET en_ligne = DATE_SUB(NOW(),INTERVAL 15 MINUTE) WHERE id_auteur = ".$auteur_session['id_auteur']);
 	// le logout explicite vaut destruction de toutes les sessions
 		if ($_COOKIE['spip_session']) {
