@@ -77,9 +77,6 @@ if (!preg_match(',^[a-z][0-9a-z_]*$,i', $exec)) $exec = "accueil";
 //
 // Authentification, redefinissable
 //
-var_dump(-1=="");
-var_dump(-1==false);
-var_dump(-1==true);
 
 if (autoriser_sans_cookie($exec)) {
 	if (!isset($reinstall)) $reinstall = 'non';
