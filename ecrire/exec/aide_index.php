@@ -150,7 +150,7 @@ function help_body($aide, $html, $lang_aide='') {
 		// panneau d'accueil
 		$html = '<center>
 			<img src="'._DIR_IMG_PACK.
-			'logo-spip.gif" alt="SPIP" width="267" height="170" border="0">
+			'logo-spip.gif" alt="SPIP" width="267" height="170" border="0" />
 			<p />
 			<div align="center" style="font-variant: small-caps;">
 			Syst&egrave;me de publication pour l\'Internet
@@ -184,11 +184,11 @@ function help_body($aide, $html, $lang_aide='') {
 
 	if ($aide == 'spip') {
 		echo '<table border="0" width="100%" height="60%">
-<tr width=100% height=60%>
-<td width=100% height=60% align="center" valign="middle">
+<tr width="100%" height="60%">
+<td width="100%" height="60%" align="center" valign="middle">
 <center>
 <img src="', generer_url_ecrire("aide_index", "img=AIDE--logo-spip.gif", false, true),
-		  '" alt="SPIP" width="300" height="170" border="0">
+		  '" alt="SPIP" width="300" height="170" border="0" />
 </center>
 </td></tr></table>';
 	}
@@ -200,7 +200,7 @@ function help_body($aide, $html, $lang_aide='') {
 	// Remplacer les liens externes par des liens ouvrants (a cause des frames)
 	$html = ereg_replace('<a href="(http://[^"]+)"([^>]*)>', '<a href="\\1"\\2 target="_blank">', $html);
 
-	echo $html;
+	echo $html, '</body>';
 }
 
 
@@ -409,8 +409,8 @@ function article($titre, $lien, $statut = "redac") {
 			$class = "article-inactif";
 		}
 		$texte[$ligne] .= "<a class='$class' id='$id'
- href='" . generer_url_ecrire("aide_index", "aide=$lien&frame=body&var_lang=$spip_lang", false, true) .
-		  "' target='droite' onClick=\"activer_article('$id');return true;\">$titre</a><br style='clear:both;'>\n";
+ href='" . generer_url_ecrire("aide_index", "aide=$lien&amp;frame=body&amp;var_lang=$spip_lang", false, true) .
+		  "' target='droite' onclick=\"activer_article('$id');return true;\">$titre</a><br style='clear:both;' />\n";
 	}
 }
 
@@ -466,15 +466,17 @@ else {
 	} 
 
 	header("Content-Type: text/html; charset=utf-8");
-	echo _DOCTYPE_ECRIRE, html_lang_attributes();
-	echo "<head><title>", _T('info_aide_en_ligne'),	"</title></head>\n";
+	echo _DOCTYPE_AIDE, html_lang_attributes();
+	echo "<head><title>", _T('info_aide_en_ligne'),	"</title>\n";
 
 	if ($frame == 'menu')
 		help_menu($aide, $html, $lang);
-	else if ($frame == 'body')
+	else if ($frame == 'body') {
 		help_body($aide, $html, $lang);
-	else
+	} else {
+		echo '</head>';
 		help_frame($aide, $lang);
+	}
 	echo "\n</html>";
  }
 }

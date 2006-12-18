@@ -63,7 +63,7 @@ function ecrire_metas() {
 		$ok = ecrire_fichier (_FILE_META, serialize($GLOBALS['meta']));
 		if (!$ok && $GLOBALS['connect_statut'] == '0minirezo') {
 			include_spip('inc/minipres');
-			echo minipres(_T('texte_inc_meta_2'), "<h4 font color=red>"
+			echo minipres(_T('texte_inc_meta_2'), "<h4 style='color: red'>"
 			. _T('texte_inc_meta_1', array('fichier' => _FILE_META))
 			. " <a href='". generer_url_action('test_dirs'). "'>"
 			. _T('texte_inc_meta_2')
