@@ -147,7 +147,7 @@ fin_cadre_couleur();
 			if ($langues_trad[$code_langue]) $nom_langue = "<u>$nom_langue</u>";
 			$nom_langue = "<b><font color='$couleur_foncee'>$nom_langue</font></b>";
 			echo "<input type='hidden' name='langues_auth[]' value='$code_langue' id='langue_auth_$code_langue'>";
-			echo "<input type='checkbox' checked disabled>";
+			echo "<input type='checkbox' checked='checked' disabled='disabled'>";
 			echo  " $nom_langue &nbsp; &nbsp;<font color='#777777'>[$code_langue]</font>";
 			echo "</div>\n";
 
@@ -163,7 +163,7 @@ fin_cadre_couleur();
 			if ($langues_trad[$code_langue]) $nom_langue = "<u>$nom_langue</u>";
 	
 			if ($langues_auth[$code_langue]) {
-				echo "<input type='checkbox' name='langues_auth[]' value='$code_langue' id='langue_auth_$code_langue' checked>";
+				echo "<input type='checkbox' name='langues_auth[]' value='$code_langue' id='langue_auth_$code_langue' checked='checked'>";
 				$nom_langue = "<b>$nom_langue</b>";
 			}
 			else {

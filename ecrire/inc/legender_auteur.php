@@ -197,10 +197,10 @@ function apparait_auteur_infos($id_auteur, $auteur)
 	if ($auteur['imessage']=="non"){
 		$res = "<input type='radio' name='perso_activer_imessage' value='oui' id='perso_activer_imessage_on'>"
 		. " <label for='perso_activer_imessage_on'>"._T('bouton_radio_apparaitre_liste_redacteurs_connectes')."</label> "
-		. "<br />\n<input type='radio' name='perso_activer_imessage' value='non' checked id='perso_activer_imessage_off'>"
+		. "<br />\n<input type='radio' name='perso_activer_imessage' value='non' checked='checked' id='perso_activer_imessage_off'>"
 		. " <b><label for='perso_activer_imessage_off'>"._T('bouton_radio_non_apparaitre_liste_redacteurs_connectes')."</label></b> ";
 	} else {
-		$res = "<input type='radio' name='perso_activer_imessage' value='oui' id='perso_activer_imessage_on' checked>"
+		$res = "<input type='radio' name='perso_activer_imessage' value='oui' id='perso_activer_imessage_on' checked='checked'>"
 		. " <b><label for='perso_activer_imessage_on'>"
 		. _T('bouton_radio_apparaitre_liste_redacteurs_connectes')
 		. "</label></b> "

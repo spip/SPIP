@@ -108,7 +108,7 @@ if ($options == 'avancees') {
 	echo "<tr><td class='verdana2'>";
 	echo _T('info_appliquer_choix_moderation')."<br />";
 
-	echo "<input type='radio' CHECKED name='forums_publics_appliquer' value='futur' id='forums_appliquer_futur'>";
+	echo "<input type='radio' checked='checked' name='forums_publics_appliquer' value='futur' id='forums_appliquer_futur'>";
 	echo " <b><label for='forums_appliquer_futur'>"._T('bouton_radio_articles_futurs')."</label></b><br />";
 	echo "<input type='radio' name='forums_publics_appliquer' value='saufnon' id='forums_appliquer_saufnon'>";
 	echo " <label for='forums_appliquer_saufnon'>"._T('bouton_radio_articles_tous_sauf_forum_desactive')."</label><br />";
@@ -285,7 +285,7 @@ if ($options == "avancees") {
 	echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' align='$spip_lang_left' class='verdana2'>";
 
 		echo bouton_radio("quoi_de_neuf", "oui", _T('bouton_radio_envoi_liste_nouveautes'), $quoi_de_neuf == "oui", "changeVisible(this.checked, 'config-neuf', 'block', 'none');");
-	//	echo "<input type='radio' name='quoi_de_neuf' value='oui' id='quoi_de_neuf_on' CHECKED>";
+	//	echo "<input type='radio' name='quoi_de_neuf' value='oui' id='quoi_de_neuf_on' checked='checked'>";
 	//	echo " <b><label for='quoi_de_neuf_on'>"._T('bouton_radio_envoi_liste_nouveautes')."</label></b> ";
 
 			if ($quoi_de_neuf == "oui") $style = "display: block;";

@@ -396,7 +396,7 @@ else if (preg_match(',^\s*select: (.*),', $url_syndic, $regs)) {
 	}
 	echo debut_cadre_relief();
 	echo "<div align='$spip_lang_left'>\n";
-	echo "<input type='radio' name='syndication' value='non' id='syndication_non' CHECKED>";
+	echo "<input type='radio' name='syndication' value='non' id='syndication_non' checked='checked'>";
 	echo " <b><label for='syndication_non'>"._T('bouton_radio_non_syndication')."</label></b><p>";
 	echo "<input type='radio' name='syndication' value='oui' id='syndication_oui'>";
 	echo " <b><label for='syndication_oui'>"._T('bouton_radio_syndication')."</label></b> &nbsp;";
