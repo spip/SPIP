@@ -458,6 +458,6 @@ function exec_accueil_dist()
 		echo afficher_suivi_versions (0, 0, false, "", true);
 	}
 
-	echo fin_page();
+	echo fin_gauche(), fin_page();
 }
 ?>

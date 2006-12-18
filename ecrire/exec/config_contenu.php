@@ -24,7 +24,7 @@ function exec_config_contenu_dist()
 
 if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 	echo _T('avis_non_acces_page');
-	echo fin_page();
+	echo fin_gauche(), fin_page();
 	exit;
 }
 
@@ -356,6 +356,6 @@ echo pipeline('affiche_milieu',array('args'=>array('exec'=>'config_contenu'),'da
 
 echo "</form>";
 
-echo fin_page();
+echo fin_gauche(), fin_page();
 }
 ?>

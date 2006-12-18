@@ -1614,6 +1614,9 @@ function debut_gauche($rubrique = "accueil", $return=false) {
 		$rspan = '';
 	}
 
+	// table fermee par fin_gauche()
+	// div fermee par debut_droite()
+
 	$res = "<br /><table width='$largeur_ecran' cellpadding='0' cellspacing='0' border='0'>
 		<tr>\n<td width='$largeur' class='colonne_etroite serif' valign='top' $rspan>
 		\n<div style='width: ${largeur}px; overflow:hidden;'>
@@ -1624,6 +1627,10 @@ function debut_gauche($rubrique = "accueil", $return=false) {
 	if ($return) return $res; else echo $res;
 }
 
+function fin_gauche()
+{
+	return "</td></tr></table>";
+}
 
 //
 // Presentation de l''interface privee, marge de droite
@@ -1741,11 +1748,11 @@ function liste_articles_bloques()
 // Elle comporte une image invisble declenchant une tache de fond
 
 // http://doc.spip.org/@fin_page
-function fin_page() {
+function fin_page()
+{
 	global $spip_display;
 
-	return "</td></tr></table>"
-	. debut_grand_cadre(true)
+	return debut_grand_cadre(true)
 	. "\n"
 	. (($spip_display == 4)
 		? ("<div><a href='./?set_disp=2'>"

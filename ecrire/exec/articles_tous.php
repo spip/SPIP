@@ -76,7 +76,7 @@ var img_deplierbas = "'._DIR_IMG_PACK.'noeud_moins.gif";
 	$arbre .= "</ul></li></ul>\n";
 	echo $arbre;
 
-	echo fin_page();
+	echo fin_gauche(), fin_page();
 }
 
 // Voir inc_layer pour les 2 globales utilisees

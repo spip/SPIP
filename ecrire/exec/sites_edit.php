@@ -216,6 +216,6 @@ echo $form;
 
 echo fin_cadre_formulaire(true);
 
-echo fin_page();
+echo fin_gauche(), fin_page();
 }
 ?>

@@ -57,7 +57,7 @@ function exec_controle_petition_dist()
 
 	$a = "editer_signature-" . $id_article;
 
-	echo  "<div id='", $a, "' class='serif2'>", $r, "</div>", fin_page();
+	echo  "<div id='", $a, "' class='serif2'>", $r, "</div>", fin_gauche(), fin_page();
 }
 
 ?>

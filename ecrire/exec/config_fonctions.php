@@ -102,7 +102,7 @@ function exec_config_fonctions_dist()
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'config_fonctions'),'data'=>''));
 	echo "</form>";
 
-	echo fin_page();
+	echo fin_gauche(), fin_page();
 }
 
 

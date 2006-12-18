@@ -76,7 +76,7 @@ echo "</p>";
  echo "<p>",  afficher_articles(_T('info_refuses'),	array('FROM' =>"spip_articles AS articles, spip_auteurs_articles AS lien ", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut='refuse'",  'ORDER BY' => "articles.date DESC"));
 echo "</p>";
 
-echo fin_page();
+echo fin_gauche(), fin_page();
 }
 
 ?>

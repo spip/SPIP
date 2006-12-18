@@ -147,7 +147,7 @@ function exec_mots_tous_dist()
 	}
 
 
-	echo fin_page();
+	echo fin_gauche(), fin_page();
 }
 
 // http://doc.spip.org/@confirmer_mot

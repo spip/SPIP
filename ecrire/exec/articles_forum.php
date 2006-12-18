@@ -64,7 +64,7 @@ function exec_articles_forum_dist()
 	echo $mess;
 	echo '</div>';
 
-	echo fin_page();
+	echo fin_gauche(), fin_page();
 }
 
 // http://doc.spip.org/@articles_forum_cadres

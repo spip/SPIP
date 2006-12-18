@@ -111,7 +111,7 @@ function exec_message_edit_dist()
 	echo "\n<p align='right'><input type='submit' name='valider' value='"._T('bouton_valider')."' class='fondo'/></p>";
 	echo "</form>";
 	echo "\n</div>";
-	echo fin_page();
+	echo fin_gauche(), fin_page();
 }
 
 // http://doc.spip.org/@afficher_si_rdv

@@ -72,6 +72,6 @@ debut_droite();
 	}
 	
 
-echo fin_page();
+echo fin_gauche(), fin_page();
 }
 ?>

@@ -233,7 +233,7 @@ global
 		fin_cadre_formulaire();
 	}
 
-	echo fin_page();
+	echo fin_gauche(), fin_page();
 }
 
 

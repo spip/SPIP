@@ -170,6 +170,6 @@ echo propre('<code>
 fin_cadre_relief();
 
 
-echo fin_page();
+echo fin_gauche(), fin_page();
 }
 ?>

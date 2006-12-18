@@ -87,7 +87,7 @@ function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new,
 	echo $editer_article($new, $id_rubrique, $lier_trad, generer_url_ecrire("articles"), $config_fonc, $row);
 	fin_cadre_formulaire();
 
-	echo fin_page();
+	echo fin_gauche(), fin_page();
 }
 
 // http://doc.spip.org/@articles_edit_presentation

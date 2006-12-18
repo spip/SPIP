@@ -49,6 +49,7 @@ function exec_articles_dist()
 		afficher_hierarchie($row['id_rubrique']),
 		fin_grand_cadre(true),
 		$res,
+		fin_gauche(),
 		fin_page();
 }
 

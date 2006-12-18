@@ -127,7 +127,7 @@ function exec_naviguer_dist()
 
 	bouton_supprimer_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable);
 
-	echo fin_page();
+	echo fin_gauche(), fin_page();
 }
 
 // http://doc.spip.org/@infos_naviguer

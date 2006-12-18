@@ -22,7 +22,7 @@ include_spip('inc/config');
 
  if ($connect_statut != '0minirezo') {
 	echo _T('avis_non_acces_page');
-	echo fin_page();
+	echo fin_gauche(), fin_page();
 	exit;
 }
 
@@ -559,7 +559,7 @@ echo pipeline('affiche_milieu',array('args'=>array('exec'=>'configuration'),'dat
 echo "</form>";
 
 
-echo fin_page();
+echo fin_gauche(), fin_page();
 
 }
 ?>
