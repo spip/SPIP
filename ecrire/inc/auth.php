@@ -228,7 +228,7 @@ function auth_areconnecter($auth_login)
 	} else {
 		echo minipres(_T('avis_erreur_connexion'), "<br /><br /><p>" . _T('texte_inc_auth_1', array('auth_login' => $auth_login)). " <a href='".  generer_url_action('logout', "logout=prive"). "'>". _T('texte_inc_auth_2'). "</a>"._T('texte_inc_auth_3'));
 	}
-	return false;
+	return -1;
 }
 
 // redemande login, avec nettoyage
