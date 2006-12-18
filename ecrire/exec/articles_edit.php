@@ -37,7 +37,7 @@ function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new,
 	$row = article_select($id_article ? $id_article : $new, $id_rubrique,  $lier_trad, $id_version);
 	if (!$row) 
 	      {include_spip('minipres');
-		minipres();
+		echo minipres();
 		exit;
 	      }
 

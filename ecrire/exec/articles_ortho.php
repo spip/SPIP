@@ -31,7 +31,7 @@ function exec_articles_ortho_dist()
   $id_article = intval($id_article);
   if (!autoriser('voir', 'article', $id_article))
 	      {include_spip('minipres');
-		minipres();
+		echo minipres();
 		exit;
 	      }
 

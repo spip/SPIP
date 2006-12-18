@@ -61,8 +61,11 @@ if (defined('_INC_PUBLIC')) {
 	else if (isset($_GET['page'])) {
 		$fond = $_GET['page'];
 		// Securite
-		if (strstr($fond, '/'))
-			die (_L("Faut pas se gener"));
+		if (strstr($fond, '/')) {
+			include_spip('inc/minipres');
+			echo minipres();
+			exit;
+		}
 
 	# par defaut
 	} else {

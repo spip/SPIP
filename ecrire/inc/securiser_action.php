@@ -30,7 +30,7 @@ function inc_securiser_action_dist($action='', $arg='', $redirect="", $mode=fals
 		if (verifier_action_auteur("$action-$arg", $hash))
 			return $arg;
 		include_spip('inc/minipres');
-		minipres();
+		echo minipres();
 		exit;
 	}
 }
@@ -87,7 +87,7 @@ function caracteriser_auteur() {
 		if ($t = spip_fetch_array($t))
 			return $caracterisation = array($t['id_auteur'], $t['pass']);
 		include_spip('minipres');
-		minipres();
+		echo minipres();
 		exit;
 	}
 }

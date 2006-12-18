@@ -41,9 +41,8 @@ function exec_documenter_dist()
 		}
 	}
 	if (!$editable) {
-		spip_log("Tentative d'intrusion de " . $GLOBALS['auteur_session']['nom'] . " dans " . $GLOBALS['exec']);
 		include_spip('inc/minipres');
-		minipres();
+		echo minipres();
 		exit;
 	}
 

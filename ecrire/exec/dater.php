@@ -16,19 +16,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function exec_dater_dist()
 {
 	$type = _request('type');
-	if (!preg_match('/^\w+$/',$type)) // securite
-	      {include_spip('minipres');
-		minipres();
-		exit;
-	      }
-
 	$id = intval(_request('id'));
 
 	if (($GLOBALS['auteur_session']['statut'] != '0minirezo')
-	OR ($type == 'article' AND    !acces_article($id))) {
-		spip_log("Tentative d'intrusion du " . $GLOBALS['auteur_session']['statut'] . ' ' . $GLOBALS['auteur_session']['nom'] . " dans " . $GLOBALS['exec'] . " sur $type $id.");
+	OR ($type == 'article' AND    !acces_article($id))
+	OR (!!preg_match('/^\w+$/',$type))) { // securite 
 		include_spip('inc/minipres');
-		minipres();
+		echo minipres();
 		exit;
 	}
 

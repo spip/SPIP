@@ -40,7 +40,7 @@ function exec_breves_edit_dist()
 		$extra = $row['extra'];
 	} else 
 	      {include_spip('minipres');
-		minipres();
+		echo minipres();
 		exit;
 	      }
 

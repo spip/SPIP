@@ -125,8 +125,10 @@ function exec_convert_utf8_dist() {
 	
 	echo "<p>" . _T('utf8_convert_timeout') . "<hr />\n";
 
-	if (!spip_get_lock('conversion_charset'))
-		die(_T('utf8_convert_attendez'));
+	if (!spip_get_lock('conversion_charset')) {
+		echo minipres(_T('utf8_convert_attendez'));
+		exit;
+	}
 
 	// preparer un fichier de sauvegarde au cas ou
 	// on met 'a' car ca peut demander plusieurs rechargements
