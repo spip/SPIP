@@ -32,7 +32,8 @@ if (autoriser_sans_cookie($exec)) {
 } else {
 	$auth = charger_fonction('auth', 'inc');
 	$auth = $auth();
-	if ($auth) {
+	if ($auth!=="") {
+		if ($auth===false) exit();
 	  include_spip('inc/headers');
 	  redirige_par_entete($auth);
 	}
