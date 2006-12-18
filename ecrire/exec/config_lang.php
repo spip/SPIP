@@ -52,7 +52,7 @@ lire_metas();
 
 
  echo generer_url_post_ecrire('config_lang');
- echo "<input type='hidden' name='changer_config' value='oui'>";
+ echo "<input type='hidden' name='changer_config' value='oui' />";
 
 
 //
@@ -69,7 +69,7 @@ echo _T('texte_selection_langue_principale');
 
 // langue du site
 echo _T('info_langue_principale')." : ";
-echo "\n<select name='changer_langue_site' class='fondl' align='middle'>\n";
+echo "\n<select name='changer_langue_site' class='fondl'>\n";
 echo "<option value='$langue_site' selected='selected'>".traduire_nom_langue($langue_site)."</option>\n";
 reset ($langues_prop);
 while (list(,$l) = each ($langues_prop)) {
@@ -77,13 +77,10 @@ while (list(,$l) = each ($langues_prop)) {
 		echo "<option value='$l'>".traduire_nom_langue($l)."</option>\n";
 }
 echo "</select>\n";
-echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'>";
+echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />";
 
 
 fin_cadre_couleur();
-
-echo "<p>";
-
 
 //
 // Configuration du charset
@@ -95,21 +92,25 @@ $charset = $GLOBALS['meta']["charset"];
 	debut_cadre_relief("breve-24.gif", false, "", _T('info_jeu_caractere'));
 
 
-	echo _T('texte_jeu_caractere')."<p>";
-	echo "<blockquote class='spip'><p>"._T('texte_jeu_caractere_3'),
-		"</p><div align='center'><b><tt>".entites_html($charset)."</tt></b></div><p>",
+	echo _T('texte_jeu_caractere');
+	echo "<blockquote class='spip'>\n<p>"
+	  . _T('texte_jeu_caractere_3'),
+	  "</p>\n<div align='center'><b><tt>"
+	  .entites_html($charset)
+	  ."</tt></b></div><p>",
 		_T('texte_jeu_caractere_4'),
 		" &nbsp; <input type='text' name='charset'
 			value=\"".entites_html($charset)."\" />",
-		"<br />("._T('texte_jeu_caractere_2').")",
-		"</p></blockquote>";
+		"<br />\n(".
+	  _T('texte_jeu_caractere_2').")",
+		"</p></blockquote>\n";
 
 	if ($charset != 'utf-8' AND load_charset($charset))
 		echo _T('texte_jeu_caractere_conversion',
 			array('url' => generer_url_ecrire('convert_utf8'))
 		);
 
-	echo "<div style='text-align: $spip_lang_right;'><input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>";
+	echo "\n<div style='text-align: $spip_lang_right;'><input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' /></div>";
 
 	fin_cadre_relief();
 

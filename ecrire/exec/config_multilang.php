@@ -46,10 +46,8 @@ if ($changer_config == 'oui') {
 
 echo barre_onglets("config_lang", "multi");
 
-
 debut_gauche();
 
-	
 	
 echo pipeline('affiche_gauche',array('args'=>array('exec'=>'config_multilang'),'data'=>''));
 creer_colonne_droite();
@@ -57,14 +55,14 @@ echo pipeline('affiche_droite',array('args'=>array('exec'=>'config_multilang'),'
 debut_droite();
 
 echo generer_url_post_ecrire('config_multilang');
-echo "<input type='hidden' name='changer_config' value='oui'>";
+echo "<input type='hidden' name='changer_config' value='oui' />";
 
 debut_cadre_couleur("traductions-24.gif", false, "", _T('info_multilinguisme'));
 	echo "<p>"._T('texte_multilinguisme')."</p>";
 
 	echo "<div>";
 	echo _T('info_multi_articles');
-	echo "<div style='text-align: $spip_lang_right';>";
+	echo "<div style='text-align: $spip_lang_right;'>";
 	echo afficher_choix('multi_articles', $GLOBALS['meta']['multi_articles'],
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 	echo "</div>";
@@ -72,37 +70,37 @@ debut_cadre_couleur("traductions-24.gif", false, "", _T('info_multilinguisme'));
 
 	echo "<div>";
 	echo _T('info_multi_rubriques');
-	echo "<div style='text-align: $spip_lang_right';>";
+	echo "<div style='text-align: $spip_lang_right;'>";
 	echo afficher_choix('multi_rubriques', $GLOBALS['meta']['multi_rubriques'],
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 	echo "</div>";
 	echo "</div>";
 
 	if  ($GLOBALS['meta']['multi_rubriques'] == 'oui') {
-		echo "<div>";
+		echo "\n<div>";
 		echo _T('info_multi_secteurs');
-		echo "<div style='text-align: $spip_lang_right';>";
+		echo "<div style='text-align: $spip_lang_right;'>";
 		echo afficher_choix('multi_secteurs', $GLOBALS['meta']['multi_secteurs'],
 			array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 		echo "</div>";
 		echo "</div>";
 	} else
-		echo "<input type='hidden' name='multi_secteurs' value='".$GLOBALS['meta']['multi_secteurs']."'>";
+		echo "<input type='hidden' name='multi_secteurs' value='".$GLOBALS['meta']['multi_secteurs']."' />";
 
 	if (($GLOBALS['meta']['multi_rubriques'] == 'oui') OR ($GLOBALS['meta']['multi_articles'] == 'oui')) {
-		echo "<hr>";
+		echo "<hr />";
 		echo "<p>"._T('texte_multilinguisme_trad')."</p>";
 
 		echo _T('info_gerer_trad');
-		echo "<div style='text-align: $spip_lang_right';>";
+		echo "<div style='text-align: $spip_lang_right;'>";
 		echo afficher_choix('gerer_trad', $GLOBALS['meta']['gerer_trad'],
 			array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 		echo "</div>";
 	} else
-		echo "<input type='hidden' name='gerer_trad' value='".$GLOBALS['meta']['gerer_trad']."'>";
+		echo "<input type='hidden' name='gerer_trad' value='".$GLOBALS['meta']['gerer_trad']."' />";
 
 
-	echo "<div style='text-align: $spip_lang_right;'><input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>";
+	echo "\n<div style='text-align: $spip_lang_right;'><input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' /></div>";
 
 fin_cadre_couleur();
 
@@ -112,7 +110,7 @@ fin_cadre_couleur();
 	if ($GLOBALS['meta']['multi_articles'] == "oui"
 	OR $GLOBALS['meta']['multi_rubriques'] == "oui"
 	OR count(explode(',',$GLOBALS['meta']['langues_utilisees'])) > 1) {
-		echo "<p>";
+
 		debut_cadre_relief("langues-24.gif");
 		echo "<p class='verdana2'>";
 		echo _T('info_multi_langues_choisies');
@@ -138,47 +136,47 @@ fin_cadre_couleur();
 			$langues_bloquees[$l] = true;
 		}
 
-		echo "<table width = '100%' cellspacing='10'><tr><td width='50%' align='top' class='verdana1'>";
+		echo "\n<table width='100%' cellspacing='10'><tr><td width='50%'  class='verdana1'>";
 
 		while (list($code_langue) = each($langues_bloquees)) {
 			$i++;
-			echo "<div>";
+			echo "\n<div>";
 			$nom_langue = $langues[$code_langue];
 			if ($langues_trad[$code_langue]) $nom_langue = "<u>$nom_langue</u>";
 			$nom_langue = "<b><font color='$couleur_foncee'>$nom_langue</font></b>";
-			echo "<input type='hidden' name='langues_auth[]' value='$code_langue' id='langue_auth_$code_langue'>";
-			echo "<input type='checkbox' checked='checked' disabled='disabled'>";
-			echo  " $nom_langue &nbsp; &nbsp;<font color='#777777'>[$code_langue]</font>";
-			echo "</div>\n";
+			echo "<input type='hidden' name='langues_auth[]' value='$code_langue' id='langue_auth_$code_langue' />";
+			echo "<input type='checkbox' checked='checked' disabled='disabled' />";
+			echo  "\n$nom_langue\n&nbsp; &nbsp;<font color='#777777'>[$code_langue]</font>";
+			echo "</div>";
 
-			if ($i == $cesure) echo "</td><td width='50%' align='top' class='verdana1'>";
+			if ($i == $cesure) echo "\n</td><td width='50%' class='verdana1'>";
 		}
 
-		echo "<div>&nbsp;</div>";
+		echo "\n<div>&nbsp;</div>";
 
 		while (list($code_langue, $nom_langue) = each($langues)) {
 			if ($langues_bloquees[$code_langue]) continue;
 			$i++;
-			echo "<div>";
+			echo "\n<div>";
 			if ($langues_trad[$code_langue]) $nom_langue = "<u>$nom_langue</u>";
 	
 			if ($langues_auth[$code_langue]) {
-				echo "<input type='checkbox' name='langues_auth[]' value='$code_langue' id='langue_auth_$code_langue' checked='checked'>";
+				echo "<input type='checkbox' name='langues_auth[]' value='$code_langue' id='langue_auth_$code_langue' checked='checked' />";
 				$nom_langue = "<b>$nom_langue</b>";
 			}
 			else {
-				echo "<input type='checkbox' name='langues_auth[]' value='$code_langue' id='langue_auth_$code_langue'>";
+				echo "<input type='checkbox' name='langues_auth[]' value='$code_langue' id='langue_auth_$code_langue' />";
 			}
-			echo  " <label for='langue_auth_$code_langue'>$nom_langue</label> &nbsp; &nbsp;<font color='#777777'>[$code_langue]</font>";
+			echo  "\n<label for='langue_auth_$code_langue'>$nom_langue</label> &nbsp; &nbsp;<font color='#777777'>[$code_langue]</font>";
 
-			echo "</div>\n";
+			echo "</div>";
 
-			if ($i == $cesure) echo "</font></td><td width='50%' align='top' class='verdana1'>";
+			if ($i == $cesure) echo "</td><td width='50%' class='verdana1'>";
 		}
 
 		echo "</td></tr>";
 		echo "<tr><td style='text-align:$spip_lang_right;' colspan='2'>";
-		echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'>";
+		echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />";
 		echo "</td></tr></table>";
 		
 		

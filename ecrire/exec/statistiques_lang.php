@@ -69,11 +69,10 @@ $result = spip_query("SELECT SUM(".$critere.") AS total_visites FROM spip_articl
 			$total_visites = $row['total_visites'];
 		else
 			$total_visites = 1;
-		echo "<p>";
 
 		$result = spip_query("SELECT lang, SUM(".$critere.") AS cnt FROM spip_articles WHERE statut='publie' GROUP BY lang");
 		
-		echo "<table cellpadding = 2 cellspacing = 0 border = 0 width='100%' style='border: 1px solid #aaaaaa;'>";
+		echo "\n<table cellpadding = 2 cellspacing = 0 border = 0 width='100%' style='border: 1px solid #aaaaaa;'>";
 		$ifond = 1;
 		
 		while ($row = spip_fetch_array($result)) {
@@ -91,23 +90,23 @@ $result = spip_query("SELECT SUM(".$critere.") AS total_visites FROM spip_articl
 					$couleur="eeeeee";
 				}
 	
-				echo "<tr bgcolor='$couleur'>";
+				echo "\n<tr bgcolor='$couleur'>";
 				$dir=lang_dir($lang,'',' dir=rtl');
 				echo "<td width='100%' style='border-bottom: 1px solid #cccccc;'><span class='verdana2'$dir><div style='float: $spip_lang_right;'>$pourcent%</div>".traduire_nom_langue($lang)."</span></td>";
 				
 				echo "<td style='border-bottom: 1px solid #cccccc;'>";
-					echo "<table cellpadding='0' cellspacing='0' border='0' width='".($taille+5)."' height=8>";
-					echo "<tr><td style='align:$spip_lang_right; background-color: #eeeeee; border: 1px solid #999999; white-space: nowrap;'>";
-					if ($visites_abs > 0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' width='$visites_abs' height='8'>";
-					if ($visites>0) echo "<IMG src='" . _DIR_IMG_PACK . "rien.gif' style='background-color: $couleur_foncee;' width='$visites' height=8 border=0>";
-					echo "</td></tr></table>\n";
+				echo "\n<table cellpadding='0' cellspacing='0' border='0' width='".($taille+5)."' height=8>";
+				echo "\n<tr><td style='align:$spip_lang_right; background-color: #eeeeee; border: 1px solid #999999; white-space: nowrap;'>";
+				if ($visites_abs > 0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' width='$visites_abs' height='8' />";
+				if ($visites>0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' style='background-color: $couleur_foncee;' width='$visites' height='8' border='0' />";
+				echo "</td></tr></table>\n";
 	
 				echo "</td>";
 				echo "</tr>";
 			$visites_abs += $visites;
 			}
 		}
-		echo "</table>";
+		echo "</table>\n";
 
 
 //echo "<p><font face='Verdana,Arial,Sans,sans-serif' size='3'>"._T('texte_signification')."</font>";

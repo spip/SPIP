@@ -58,8 +58,10 @@ function inc_signatures_dist($script, $id, $debut, $where, $order, $limit='') {
 #	($limit . ($debut ? " OFFSET $debut" : "")); #PG
 	$request = spip_query("SELECT * FROM spip_signatures " .  ($where ? " WHERE $where" : "") .  ($order ? " ORDER BY $order" : "") . (!$limit ? ''  : " LIMIT $limit"));
 
+	$res .= '<br />';
+
  	while($row=spip_fetch_array($request)){
-		$res .= signatures_edit($script, $id, $debut, $row);
+		$res .= '<br />' . signatures_edit($script, $id, $debut, $row);
 	}
 	return $res;
 }
@@ -118,7 +120,7 @@ function signatures_edit($script, $id, $debut, $row) {
 			$res .= "<font size='1'>"._T('info_adresse_email')."</font> <a href='mailto:$ad_email'>$ad_email</a><br />";
 		}
 
-		$res .= "<p>" . message_de_signature($row) ."</p>";
+		$res .= '<br />' . message_de_signature($row);
 		
 		$titre = spip_fetch_array(spip_query("SELECT titre FROM spip_articles WHERE id_article=$id_article"));
 
@@ -141,6 +143,6 @@ function signatures_edit($script, $id, $debut, $row) {
 			$res .= "</td></tr></table>";
 		}
 
-		return "<p>$res</p>";
+		return $res;
 }
 ?>

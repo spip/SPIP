@@ -62,11 +62,11 @@ debut_droite();
 			debut_cadre_relief("doc-24.gif");
 			echo "<b>$titre</b> (" . $types[$row['type']]['titre'] . ', ' . affdate($date) . ")";
 			if ($descriptif)
-				echo "<p>".propre($descriptif);
+				echo "<p>".propre($descriptif) . '</p>';
 			else
-				echo "<p><tt>$fichier</tt>";
+				echo "<p><tt>$fichier</tt>" . '</p>';
 
-			echo "<p>"._T('info_dans_rubrique')." <a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'>$titre_rub</a>";
+			echo "<p>"._T('info_dans_rubrique')." <a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'>$titre_rub</a></p>";
 			
 			fin_cadre_relief();
 	}

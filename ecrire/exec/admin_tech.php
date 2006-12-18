@@ -105,7 +105,7 @@ echo "</table>";
  if ($connect_toutes_rubriques) {
  	$liste_dump = preg_files(_DIR_DUMP,str_replace("@stamp@","(_[0-9]{6,8}_[0-9]{1,3})?",_SPIP_DUMP)."(.gz)?$",50,false);
  	$selected = end($liste_dump);
- 	$liste_choix = "<p><ul>"; 
+ 	$liste_choix = "<ul>"; 
  	foreach($liste_dump as $key=>$fichier){
  		$affiche_fichier = substr($fichier,strlen(_DIR_DUMP));
  		$liste_choix.="\n<li><input type='radio' name='archive' value='"
@@ -148,11 +148,11 @@ echo "</table>";
 	  '</p>';
 	echo  "<p>",
 	  _L("Eventuellement, URL du site d'origine&nbsp;:"),
-	  "<input name='url_site' type='texte' />",
+	  "<input name='url_site' type='text' />",
 	  '</p>';
 	fin_cadre_relief();
 
-	echo "\n</p><div align='right'><input class='fondo' type='submit' value='",
+	echo "\n<div align='right'><input class='fondo' type='submit' value='",
 	  _T('bouton_restaurer_base'),
 	  "' /></div></form>",
 	  "\n</td></tr>",
