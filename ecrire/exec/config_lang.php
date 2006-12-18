@@ -25,7 +25,7 @@ pipeline('exec_init',array('args'=>array('exec'=>'config_lang'),'data'=>''));
 $commencer_page = charger_fonction('commencer_page', 'inc');
 echo $commencer_page(_T('titre_page_config_contenu'), "configuration", "langues");
 
-echo "<br><br><br>";
+echo "<br /><br /><br />";
 gros_titre(_T('info_langues'));
 
 if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {

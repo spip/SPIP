@@ -31,7 +31,7 @@ function exec_statistiques_lang_dist()
 echo "<center><table width='$largeur_table'><tr width='$largeur_table'><td width='$largeur_table' class='verdana2'>";
 
 
-echo "<br><br>";
+echo "<br /><br />";
 echo "<center>";
 gros_titre(_T('onglet_repartition_lang'));
 echo "</center>";

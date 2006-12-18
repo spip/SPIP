@@ -104,7 +104,7 @@ function inc_import_1_2_dist($f, $request, $gz='fread') {
 			if (($type == 'article') && ($col == 'images'))
 			{
 				if ($value) {		// ne pas afficher de message si on a un champ suppl mais vide
-					echo "--><br><font color='red'><b>"._T('avis_erreur_sauvegarde', array('type' => $type, 'id_objet' => $id_objet))."</b></font>\n<font color='black'>"._T('avis_colonne_inexistante', array('col' => $col));
+					echo "--><br /><font color='red'><b>"._T('avis_erreur_sauvegarde', array('type' => $type, 'id_objet' => $id_objet))."</b></font>\n<font color='black'>"._T('avis_colonne_inexistante', array('col' => $col));
 					if ($col == 'images') echo _T('info_verifier_image');
 					echo "</font>\n<!--";
 					$GLOBALS['erreur_restauration'] = true;
@@ -120,7 +120,7 @@ function inc_import_1_2_dist($f, $request, $gz='fread') {
 	}
    if ($values) {
 	if (!spip_query("REPLACE $table (" . join(',', array_keys($values)) . ') VALUES (' . join(',', array_map('_q', $values)) . ')')) {
-		echo "--><br><font color='red'><b>"._T('avis_erreur_mysql')."</b></font>\n<font color='black'><tt>".spip_sql_error()."</tt></font>\n<!--";
+		echo "--><br /><font color='red'><b>"._T('avis_erreur_mysql')."</b></font>\n<font color='black'><tt>".spip_sql_error()."</tt></font>\n<!--";
 		$GLOBALS['erreur_restauration'] = true;
 	}
 
