@@ -58,7 +58,7 @@ echo pipeline('affiche_droite',array('args'=>array('exec'=>'sites_edit','id_synd
 debut_droite();
 debut_cadre_formulaire();
 
-echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
+echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
 echo "<tr width='100%'>";
 
 if ($new != 'oui') {
@@ -137,7 +137,7 @@ $form .= "<input type='text' class='formo' name='url_site' value=\"$url_site\" s
 	$form .= fin_cadre_couleur(true);
 
 $form .= "<p /><b>"._T('entree_description_site')."</b><br />\n";
-$form .= "<textarea name='descriptif' rows='8' class='forml' cols='40' wrap=soft>";
+$form .= "<textarea name='descriptif' rows='8' class='forml' cols='40' wrap='soft'>";
 $form .= entites_html($descriptif);
 $form .= "</textarea>\n";
 
@@ -167,7 +167,7 @@ if ($activer_syndic != "non") {
 	$form .= aide("rubsyn");
 
 
-	$form .= "<table cellpadding=0 cellspacing=0 border=0 width=100%><tr><td width=50>&nbsp;</td><td>";
+	$form .= "<table cellpadding='0' cellspacing='0' border='0' width='100%'><tr><td width='50'>&nbsp;</td><td>";
 
 	if (strlen($url_syndic) < 8) $url_syndic = "http://";
 	$form .= _T('entree_adresse_fichier_syndication');

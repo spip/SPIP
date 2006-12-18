@@ -190,7 +190,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	echo propre($texte_case);
 
 	if ($les_notes) {
-		echo "<hr width='70%' height=1 align='left'><font size=2>$les_notes</font>\n";
+		echo "<hr width='70%' height='1' align='left'><font size=2>$les_notes</font>\n";
 	}
 
 	// afficher les extra

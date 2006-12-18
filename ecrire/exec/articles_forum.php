@@ -80,7 +80,7 @@ function articles_forum_cadres($id_rubrique, $id_article, $titre, $script, $args
 
 	debut_boite_info();
 
-	echo "<p align=left>",
+	echo "<p align='left'>",
 	  "<font FACE='Verdana,Arial,Sans,sans-serif' SIZE='2'>",
 	  _T('info_gauche_suivi_forum'),
 	  aide ("suiviforum"),
@@ -99,7 +99,7 @@ function articles_forum_cadres($id_rubrique, $id_article, $titre, $script, $args
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'articles_forum','id_article'=>$id_article),'data'=>''));
 	debut_droite();
 
-	echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
+	echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
 	echo "<tr width='100%'>";
 	echo "<td>";
 	icone(_T('icone_retour'),

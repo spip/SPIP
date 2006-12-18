@@ -63,7 +63,7 @@ debut_cadre_trait_couleur("forum-interne-24.gif", false, "", _T('info_mode_fonct
 
 $forums_publics=$GLOBALS['meta']["forums_publics"];
 
-echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
+echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' align='$spip_lang_left' class='verdana2'>";
 
 
@@ -144,7 +144,7 @@ if ($options == "avancees") {
 	debut_cadre_trait_couleur("redacteurs-24.gif", false, "", _T('info_inscription_automatique'));
 
 	$accepter_inscriptions=$GLOBALS['meta']["accepter_inscriptions"];
-	echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
+	echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 
 	echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
 	echo _T('info_question_inscription_nouveaux_redacteurs')."</i></blockquote>";
@@ -169,7 +169,7 @@ if ($options == "avancees") {
 
 	debut_cadre_trait_couleur("redacteurs-24.gif", false, "", _T('info_visiteurs'));
 		$accepter_visiteurs = $GLOBALS['meta']['accepter_visiteurs'];
-		echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
+		echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 		echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
 
 		if ($n = ($forums_publics<>'abo')) {
@@ -205,13 +205,13 @@ if ($options == "avancees") {
 	$prevenir_auteurs=$GLOBALS['meta']["prevenir_auteurs"];
 
 
-	echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
+	echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 	echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
 	echo "<blockquote><i>"._T('info_hebergeur_desactiver_envoi_email')."</i></blockquote>";
 	echo "</td></tr></table>";
 
 	debut_cadre_relief("", false, "", _T('info_envoi_forum'));
-	echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
+	echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 	echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
 	echo _T('info_option_email');
 	echo "</td></tr>";
@@ -233,14 +233,14 @@ if ($options == "avancees") {
 
 	echo "<p />";
 	debut_cadre_relief("", false, "", _T('info_suivi_activite'));
-	echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
+	echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 
 	echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
 	echo _T('info_facilite_suivi_activite')."</font>";
 	echo "</td></tr></table>";
 
 
-	echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
+	echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 	echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' align='$spip_lang_left' class='verdana2'>";
 
 		echo bouton_radio("suivi_edito", "oui", _T('bouton_radio_envoi_annonces_adresse'), $suivi_edito == "oui", "changeVisible(this.checked, 'config-edito', 'block', 'none');");
@@ -276,7 +276,7 @@ if ($options == "avancees") {
 
 	echo "<p />";
 	debut_cadre_relief("", false, "", _T('info_annonce_nouveautes'));
-	echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
+	echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 
 	echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
 	echo _T('info_non_envoi_annonce_dernieres_nouveautes');
@@ -312,7 +312,7 @@ if ($options == "avancees") {
 		$email_envoi = entites_html($GLOBALS['meta']["email_envoi"]);
 		echo "<p />";
 		debut_cadre_relief("", false, "", _T('info_email_envoi'));
-		echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
+		echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 		echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
 		echo _T('info_email_envoi_txt');
 		echo " <input type='text' name='email_envoi' value=\"$email_envoi\" size='20' class='fondl'>";
@@ -321,7 +321,7 @@ if ($options == "avancees") {
 		fin_cadre_relief();
 	}
 
-	echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
+	echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 	echo "<tr><td style='text-align:$spip_lang_right;'>";
 	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'>";
 	echo "</td></tr>";
