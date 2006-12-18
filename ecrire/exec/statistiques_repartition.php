@@ -77,37 +77,37 @@ function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 				else {
 					$couleur="white";
 				}
-				echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 width='100%'>";
-				echo "\n<TR BGCOLOR='$couleur' BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' width='100%'>";
-				echo "\n<TD style='border-bottom: 1px solid #aaaaaa; padding-$spip_lang_left: ".($niveau*20+5)."px;'>";
+				echo "<table cellpadding=2 cellspacing=0 border=0 width='100%'>";
+				echo "\n<tr bgcolor='$couleur' background='" . _DIR_IMG_PACK . "rien.gif' width='100%'>";
+				echo "\n<td style='border-bottom: 1px solid #aaaaaa; padding-$spip_lang_left: ".($niveau*20+5)."px;'>";
 				if ($niveau==0 OR 1==1){
 					$pourcent = round($nombre_vis[$id_rubrique]/$abs_total*1000)/10;
 					echo "\n<div class='verdana1' style='float: $spip_lang_right;'>$pourcent%</div>";
 				}
 
-				//echo "<IMG SRC='" . _DIR_IMG_PACK . "rien.gif' WIDTH='".($niveau*20+1)."' HEIGHT=8 BORDER=0>";
+				//echo "<IMG src='" . _DIR_IMG_PACK . "rien.gif' width='".($niveau*20+1)."' height=8 border=0>";
 				
 			
 				if ( $largeur_rouge > 2) echo bouton_block_invisible("stats$id_rubrique");
 				
 				echo "<span class='verdana1'>";	
-				echo "<A href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "' style='color: black;' title=\"$descriptif\">$titre</A>";
+				echo "<a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "' style='color: black;' title=\"$descriptif\">$titre</a>";
 				
 				
 				echo "</span>";
-				echo "</TD>\n<TD ALIGN='right' width='".($taille+5)."' style='border-bottom: 1px solid #aaaaaa;'>";
+				echo "</td>\n<td align='right' width='".($taille+5)."' style='border-bottom: 1px solid #aaaaaa;'>";
 				
 				
-				echo "\n<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=".($decalage+1+$gauche)." HEIGHT=8>";
-				echo "\n<TR>";
+				echo "\n<table cellpadding=0 cellspacing=0 border=0 width=".($decalage+1+$gauche)." height=8>";
+				echo "\n<tr>";
 				if ($gauche > 0) echo "<td width='".$gauche."'></td>";
-				echo "\n<TD style='background-color: #eeeeee; border: 1px solid #999999; white-space: nowrap;'>";
+				echo "\n<td style='background-color: #eeeeee; border: 1px solid #999999; white-space: nowrap;'>";
 				if ($visites_abs > 0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' width='".$visites_abs."' height=8 border=0>";
-				if ($largeur_rouge>0) echo "<IMG SRC='" . _DIR_IMG_PACK . "rien.gif' style='background-color: $couleur_foncee;' WIDTH=$largeur_rouge HEIGHT=8 BORDER=0>";
-				if ($largeur_vert>0) echo "<IMG SRC='" . _DIR_IMG_PACK . "rien.gif' style='background-color: $couleur_claire;' WIDTH=$largeur_vert HEIGHT=8 BORDER=0>";
+				if ($largeur_rouge>0) echo "<IMG src='" . _DIR_IMG_PACK . "rien.gif' style='background-color: $couleur_foncee;' width=$largeur_rouge height=8 border=0>";
+				if ($largeur_vert>0) echo "<IMG src='" . _DIR_IMG_PACK . "rien.gif' style='background-color: $couleur_claire;' width=$largeur_vert height=8 border=0>";
 				
-				echo "</TD></TR></TABLE>\n";
-				echo "</TD></TR></table>";
+				echo "</td></tr></table>\n";
+				echo "</td></tr></table>";
 			}	
 		}
 		

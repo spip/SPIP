@@ -177,20 +177,20 @@ function help_body($aide, $html, $lang_aide='') {
 
 	echo _STYLE_AIDE_BODY, "</head>\n";
 
-	echo '<body bgcolor="#FFFFFF" text="#000000" TOPMARGIN="24" LEFTMARGIN="24" MARGINWIDTH="24" MARGINHEIGHT="24"';
+	echo '<body bgcolor="#FFFFFF" text="#000000" topmargin="24" leftmargin="24" marginwidth="24" marginheight="24"';
 	if ($spip_lang_rtl)
 		echo " dir='rtl'";
 	echo " lang='$lang_aide'>";
 
 	if ($aide == 'spip') {
-		echo '<TABLE BORDER=0 WIDTH=100% HEIGHT=60%>
-<TR WIDTH=100% HEIGHT=60%>
-<TD WIDTH=100% HEIGHT=60% ALIGN="center" VALIGN="middle">
-<CENTER>
+		echo '<table border=0 width=100% height=60%>
+<tr width=100% height=60%>
+<td width=100% height=60% align="center" valign="middle">
+<center>
 <img src="', generer_url_ecrire("aide_index", "img=AIDE--logo-spip.gif", false, true),
 		  '" alt="SPIP" width="300" height="170" border="0">
-</CENTER>
-</TD></TR></TABLE>';
+</center>
+</td></tr></table>';
 	}
 
 	// Il faut que la langue de typo() soit celle de l'aide en ligne
@@ -308,7 +308,7 @@ function activer_article(id) {
 	$GLOBALS['browser_layer'],
 	'
 </head>
-<body bgcolor="#FFFFFF" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" TOPMARGIN="5" LEFTMARGIN="5" MARGINWIDTH="5" MARGINHEIGHT="5"';
+<body bgcolor="#FFFFFF" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" topmargin="5" leftmargin="5" marginwidth="5" marginheight="5"';
 
 	if ($spip_lang_rtl)
 		echo " dir='rtl'";

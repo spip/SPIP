@@ -210,7 +210,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 		fin_cadre_enfonce();	
 	}
 	else {
-		echo "<br />\n<font face='Verdana,Arial,Sans,sans-serif' SIZE='3'>"._T('info_site_propose')." <b>".affdate($date_heure)."&nbsp;</b></font>";
+		echo "<br />\n<font face='Verdana,Arial,Sans,sans-serif' size='3'>"._T('info_site_propose')." <b>".affdate($date_heure)."&nbsp;</b></font>";
 	}
 }
 
@@ -396,9 +396,9 @@ else if (preg_match(',^\s*select: (.*),', $url_syndic, $regs)) {
 	}
 	echo debut_cadre_relief();
 	echo "<div align='$spip_lang_left'>\n";
-	echo "<INPUT TYPE='radio' NAME='syndication' VALUE='non' id='syndication_non' CHECKED>";
+	echo "<input type='radio' name='syndication' value='non' id='syndication_non' CHECKED>";
 	echo " <b><label for='syndication_non'>"._T('bouton_radio_non_syndication')."</label></b><p>";
-	echo "<INPUT TYPE='radio' NAME='syndication' VALUE='oui' id='syndication_oui'>";
+	echo "<input type='radio' name='syndication' value='oui' id='syndication_oui'>";
 	echo " <b><label for='syndication_oui'>"._T('bouton_radio_syndication')."</label></b> &nbsp;";
 
 	$feeds = explode(' ',$regs[1]);

@@ -128,8 +128,8 @@ if ($bad_dirs OR $absent_dirs) {
 	   "<input type='hidden' name='action' value='test_dirs' />" .
 	  (!$test_dir ? "" : 
 	   "<input type='hidden' name='test_dir' value='$test_dir' />") .
-	  "<DIV align='right'><input type='submit' class='fondl' value='". 
-	  _T('login_recharger')."' /></DIV>" .
+	  "<div align='right'><input type='submit' class='fondl' value='". 
+	  _T('login_recharger')."' /></div>" .
 	  "</form>";
 	echo minipres($titre, $res);
 

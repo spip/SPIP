@@ -63,8 +63,8 @@ debut_cadre_trait_couleur("forum-interne-24.gif", false, "", _T('info_mode_fonct
 
 $forums_publics=$GLOBALS['meta']["forums_publics"];
 
-echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
+echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
+echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' align='$spip_lang_left' class='verdana2'>";
 
 
 	if ($forums_publics == "non") $block = "'none', 'block'"; 
@@ -72,13 +72,13 @@ echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='$spip_lang_left'
 	echo bouton_radio("forums_publics", "non", _T('info_desactiver_forum_public'), $forums_publics == "non", "changeVisible(this.checked, 'config-options', $block);");
 
 
-echo "</TD></TR>";
+echo "</td></tr>";
 
-echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
+echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
 echo _T('info_activer_forum_public');
-echo "</TD></TR>";
+echo "</td></tr>";
 
-echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
+echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' align='$spip_lang_left' class='verdana2'>";
 
 
 	if ($forums_publics == "posteriori") $block = "'none', 'block'"; 
@@ -94,9 +94,9 @@ echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='$spip_lang_left'
 	else $block= "'block', 'none'";
 	echo bouton_radio("forums_publics", "abo", _T('bouton_radio_enregistrement_obligatoire'), $forums_publics == "abo", "changeVisible(this.checked, 'config-options', $block);");
 
-echo "</TD></TR>\n";
+echo "</td></tr>\n";
 
-echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
+echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' align='$spip_lang_left' class='verdana2'>";
 
 if ($options == 'avancees') {
 	echo "<div id='config-options' class='display_au_chargement'>";
@@ -108,13 +108,13 @@ if ($options == 'avancees') {
 	echo "<tr><td class='verdana2'>";
 	echo _T('info_appliquer_choix_moderation')."<br>";
 
-	echo "<INPUT TYPE='radio' CHECKED NAME='forums_publics_appliquer' VALUE='futur' id='forums_appliquer_futur'>";
+	echo "<input type='radio' CHECKED name='forums_publics_appliquer' value='futur' id='forums_appliquer_futur'>";
 	echo " <b><label for='forums_appliquer_futur'>"._T('bouton_radio_articles_futurs')."</label></b><br>";
-	echo "<INPUT TYPE='radio' NAME='forums_publics_appliquer' VALUE='saufnon' id='forums_appliquer_saufnon'>";
+	echo "<input type='radio' name='forums_publics_appliquer' value='saufnon' id='forums_appliquer_saufnon'>";
 	echo " <label for='forums_appliquer_saufnon'>"._T('bouton_radio_articles_tous_sauf_forum_desactive')."</label><br>";
-	echo "<INPUT TYPE='radio' NAME='forums_publics_appliquer' VALUE='tous' id='forums_appliquer_tous'>";
+	echo "<input type='radio' name='forums_publics_appliquer' value='tous' id='forums_appliquer_tous'>";
 	echo " <label for='forums_appliquer_tous'>"._T('bouton_radio_articles_tous')."</label><br>";
-	echo "</TD></TR></table>";
+	echo "</td></tr></table>";
 	fin_cadre_relief();
 	echo "</ul>\n";
 
@@ -125,10 +125,10 @@ else {
 }
 
 
-echo "<TR><td style='text-align:$spip_lang_right;'>";
-echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
-echo "</TD></TR>";
-echo "</TABLE>\n";
+echo "<tr><td style='text-align:$spip_lang_right;'>";
+echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'>";
+echo "</td></tr>";
+echo "</table>\n";
 
 fin_cadre_trait_couleur();
 
@@ -144,23 +144,23 @@ if ($options == "avancees") {
 	debut_cadre_trait_couleur("redacteurs-24.gif", false, "", _T('info_inscription_automatique'));
 
 	$accepter_inscriptions=$GLOBALS['meta']["accepter_inscriptions"];
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+	echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
 
-	echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
+	echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
 	echo _T('info_question_inscription_nouveaux_redacteurs')."</i></blockquote>";
-	echo "</TD></TR>";
+	echo "</td></tr>";
 
 
-	echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='center' class='verdana2'>";
+	echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' align='center' class='verdana2'>";
 	echo afficher_choix('accepter_inscriptions', $accepter_inscriptions,
 		array('oui' => _T('item_accepter_inscriptions'),
 			'non' => _T('item_non_accepter_inscriptions')), " &nbsp; ");
 
 	echo "</td></tr>\n";
 	echo "<tr><td style='text-align:$spip_lang_right;'>";
-	echo "<input type='submit' value='"._T('bouton_valider')."' CLASS='fondo' />";
-	echo "</TD></TR>";
-	echo "</TABLE>\n";
+	echo "<input type='submit' value='"._T('bouton_valider')."' class='fondo' />";
+	echo "</td></tr>";
+	echo "</table>\n";
 
 	fin_cadre_trait_couleur();
 
@@ -169,8 +169,8 @@ if ($options == "avancees") {
 
 	debut_cadre_trait_couleur("redacteurs-24.gif", false, "", _T('info_visiteurs'));
 		$accepter_visiteurs = $GLOBALS['meta']['accepter_visiteurs'];
-		echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-		echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
+		echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
+		echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
 
 		if ($n = ($forums_publics<>'abo')) {
 			$n = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_articles WHERE accepter_forum='abo' LIMIT 1"));
@@ -178,19 +178,19 @@ if ($options == "avancees") {
 		}
 		if ($n) {
 			echo _T('info_question_accepter_visiteurs');
-			echo "</TD></TR>";
-			echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
+			echo "</td></tr>";
+			echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' align='$spip_lang_left' class='verdana2'>";
 			echo afficher_choix('accepter_visiteurs', $accepter_visiteurs,
 				array('oui' => _T('info_option_accepter_visiteurs'),
 					'non' => _T('info_option_ne_pas_accepter_visiteurs')));
 			echo "</td></tr>\n";
 			echo "<tr><td style='text-align:$spip_lang_right;'>";
-			echo "<input type='submit' value='"._T('bouton_valider')."' CLASS='fondo' />";
+			echo "<input type='submit' value='"._T('bouton_valider')."' class='fondo' />";
 		} else {
 			echo _T('info_forums_abo_invites');
 		}
 
-		echo "</TD></TR></table>\n";
+		echo "</td></tr></table>\n";
 		fin_cadre_trait_couleur();
 
 	echo "<p>";
@@ -205,22 +205,22 @@ if ($options == "avancees") {
 	$prevenir_auteurs=$GLOBALS['meta']["prevenir_auteurs"];
 
 
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
+	echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
+	echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
 	echo "<blockquote><i>"._T('info_hebergeur_desactiver_envoi_email')."</i></blockquote>";
-	echo "</TD></TR></table>";
+	echo "</td></tr></table>";
 
 	debut_cadre_relief("", false, "", _T('info_envoi_forum'));
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
+	echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
+	echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
 	echo _T('info_option_email');
-	echo "</TD></TR>";
+	echo "</td></tr>";
 
-	echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
+	echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' align='$spip_lang_left' class='verdana2'>";
 	echo afficher_choix('prevenir_auteurs', $prevenir_auteurs,
 		array('oui' => _T('info_option_faire_suivre'),
 			'non' => _T('info_option_ne_pas_faire_suivre')));
-	echo "</TD></TR></table>\n";
+	echo "</td></tr></table>\n";
 	fin_cadre_relief();
 
 	//
@@ -233,15 +233,15 @@ if ($options == "avancees") {
 
 	echo "<p />";
 	debut_cadre_relief("", false, "", _T('info_suivi_activite'));
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+	echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
 
-	echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
-	echo _T('info_facilite_suivi_activite')."</FONT>";
-	echo "</TD></TR></table>";
+	echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
+	echo _T('info_facilite_suivi_activite')."</font>";
+	echo "</td></tr></table>";
 
 
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
+	echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
+	echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' align='$spip_lang_left' class='verdana2'>";
 
 		echo bouton_radio("suivi_edito", "oui", _T('bouton_radio_envoi_annonces_adresse'), $suivi_edito == "oui", "changeVisible(this.checked, 'config-edito', 'block', 'none');");
 
@@ -249,18 +249,18 @@ if ($options == "avancees") {
 			if ($suivi_edito == "oui") $style = "display: block;";
 			else $style = "display: none;";			
 			echo "<div id='config-edito' style='$style'>";
-			echo "<div style='text-align: center;'><input type='text' name='adresse_suivi' value='$adresse_suivi' size='30' CLASS='fondl'></div>";
+			echo "<div style='text-align: center;'><input type='text' name='adresse_suivi' value='$adresse_suivi' size='30' class='fondl'></div>";
 			echo "<blockquote class='spip'>";
 			if (!$adresse_suivi) $adresse_suivi = "mailing@monsite.net";
 			echo _T('info_config_suivi', array('adresse_suivi' => $adresse_suivi));
-			echo "<br><input type='text' name='adresse_suivi_inscription' value='$adresse_suivi_inscription' size='50' CLASS='fondl'>";
+			echo "<br><input type='text' name='adresse_suivi_inscription' value='$adresse_suivi_inscription' size='50' class='fondl'>";
 			echo "</blockquote>";
 			echo "</div>";
 
 		echo "<br />";
 		echo bouton_radio("suivi_edito", "non", _T('bouton_radio_non_envoi_annonces_editoriales'), $suivi_edito == "non", "changeVisible(this.checked, 'config-edito', 'none', 'block');");
 
-	echo "</TD></TR></table>\n";
+	echo "</td></tr></table>\n";
 	fin_cadre_relief();
 
 	//
@@ -276,56 +276,56 @@ if ($options == "avancees") {
 
 	echo "<p />";
 	debut_cadre_relief("", false, "", _T('info_annonce_nouveautes'));
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+	echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
 
-	echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
+	echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
 	echo _T('info_non_envoi_annonce_dernieres_nouveautes');
-	echo "</TD></TR>";
+	echo "</td></tr>";
 
-	echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
+	echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' align='$spip_lang_left' class='verdana2'>";
 
 		echo bouton_radio("quoi_de_neuf", "oui", _T('bouton_radio_envoi_liste_nouveautes'), $quoi_de_neuf == "oui", "changeVisible(this.checked, 'config-neuf', 'block', 'none');");
-	//	echo "<INPUT TYPE='radio' NAME='quoi_de_neuf' VALUE='oui' id='quoi_de_neuf_on' CHECKED>";
-	//	echo " <B><label for='quoi_de_neuf_on'>"._T('bouton_radio_envoi_liste_nouveautes')."</label></B> ";
+	//	echo "<input type='radio' name='quoi_de_neuf' value='oui' id='quoi_de_neuf_on' CHECKED>";
+	//	echo " <b><label for='quoi_de_neuf_on'>"._T('bouton_radio_envoi_liste_nouveautes')."</label></b> ";
 
 			if ($quoi_de_neuf == "oui") $style = "display: block;";
 			else $style = "display: none;";			
 		echo "<div id='config-neuf' style='$style'>";
-		echo "<UL>";
-		echo "<LI>"._T('info_adresse')." <input type='text' name='adresse_neuf' value='$adresse_neuf' size='30' CLASS='fondl'>";
-		echo "<LI>"._T('info_tous_les')." <input type='text' name='jours_neuf' value='$jours_neuf' size='4' CLASS='fondl'> "._T('info_jours');
-		echo " &nbsp;  &nbsp;  &nbsp; <INPUT TYPE='submit' NAME='envoi_now' VALUE='"._T('info_envoyer_maintenant')."' CLASS='fondl'>";
-		echo "</UL>";
+		echo "<ul>";
+		echo "<li>"._T('info_adresse')." <input type='text' name='adresse_neuf' value='$adresse_neuf' size='30' class='fondl'>";
+		echo "<li>"._T('info_tous_les')." <input type='text' name='jours_neuf' value='$jours_neuf' size='4' class='fondl'> "._T('info_jours');
+		echo " &nbsp;  &nbsp;  &nbsp; <input type='submit' name='envoi_now' value='"._T('info_envoyer_maintenant')."' class='fondl'>";
+		echo "</ul>";
 		echo "</div>";
 
 		echo "<br />";
 		echo bouton_radio("quoi_de_neuf", "non", _T('info_non_envoi_liste_nouveautes'), $quoi_de_neuf == "non", "changeVisible(this.checked, 'config-neuf', 'none', 'block');");
-		//echo "<BR><INPUT TYPE='radio' NAME='quoi_de_neuf' VALUE='non' id='quoi_de_neuf_off'>";
+		//echo "<br><input type='radio' name='quoi_de_neuf' value='non' id='quoi_de_neuf_off'>";
 		//echo " <label for='quoi_de_neuf_off'>"._T('info_non_envoi_liste_nouveautes')."</label> ";
 	
 	
 	
-	echo "</TD></TR></table>\n";
+	echo "</td></tr></table>\n";
 	fin_cadre_relief();
 
 	if($options == "avancees") {
 		$email_envoi = entites_html($GLOBALS['meta']["email_envoi"]);
 		echo "<p />";
 		debut_cadre_relief("", false, "", _T('info_email_envoi'));
-		echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-		echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
+		echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
+		echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
 		echo _T('info_email_envoi_txt');
-		echo " <input type='text' name='email_envoi' value=\"$email_envoi\" size='20' CLASS='fondl'>";
-		echo "</TD></TR>";
-		echo "<TR><TD>&nbsp;</TD></TR></table>";
+		echo " <input type='text' name='email_envoi' value=\"$email_envoi\" size='20' class='fondl'>";
+		echo "</td></tr>";
+		echo "<tr><td>&nbsp;</td></tr></table>";
 		fin_cadre_relief();
 	}
 
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><td style='text-align:$spip_lang_right;'>";
-	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
-	echo "</TD></TR>";
-	echo "</TABLE>\n";
+	echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
+	echo "<tr><td style='text-align:$spip_lang_right;'>";
+	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'>";
+	echo "</td></tr>";
+	echo "</table>\n";
 
 	fin_cadre_trait_couleur();
 	echo "<p />";
@@ -345,7 +345,7 @@ if ($options == "avancees") {
 			'non' => _T('item_desactiver_forum_administrateur')));
 
 	echo "</div>";
-	echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
+	echo "<div style='text-align:$spip_lang_right'><input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>";
 
 	fin_cadre_trait_couleur();
 	echo "<p />";

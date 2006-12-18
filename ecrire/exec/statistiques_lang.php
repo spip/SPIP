@@ -96,11 +96,11 @@ $result = spip_query("SELECT SUM(".$critere.") AS total_visites FROM spip_articl
 				echo "<td width='100%' style='border-bottom: 1px solid #cccccc;'><span class='verdana2'$dir><div style='float: $spip_lang_right;'>$pourcent%</div>".traduire_nom_langue($lang)."</span></td>";
 				
 				echo "<td style='border-bottom: 1px solid #cccccc;'>";
-					echo "<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH='".($taille+5)."' HEIGHT=8>";
-					echo "<TR><TD style='align:$spip_lang_right; background-color: #eeeeee; border: 1px solid #999999; white-space: nowrap;'>";
+					echo "<table cellpadding=0 cellspacing=0 border=0 width='".($taille+5)."' height=8>";
+					echo "<tr><td style='align:$spip_lang_right; background-color: #eeeeee; border: 1px solid #999999; white-space: nowrap;'>";
 					if ($visites_abs > 0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' width='$visites_abs' height='8'>";
-					if ($visites>0) echo "<IMG SRC='" . _DIR_IMG_PACK . "rien.gif' style='background-color: $couleur_foncee;' WIDTH='$visites' HEIGHT=8 BORDER=0>";
-					echo "</TD></TR></TABLE>\n";
+					if ($visites>0) echo "<IMG src='" . _DIR_IMG_PACK . "rien.gif' style='background-color: $couleur_foncee;' width='$visites' height=8 border=0>";
+					echo "</td></tr></table>\n";
 	
 				echo "</td>";
 				echo "</tr>";
@@ -110,7 +110,7 @@ $result = spip_query("SELECT SUM(".$critere.") AS total_visites FROM spip_articl
 		echo "</table>";
 
 
-//echo "<P><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('texte_signification')."</FONT>";
+//echo "<p><font face='Verdana,Arial,Sans,sans-serif' size=3>"._T('texte_signification')."</font>";
 
 
 fin_cadre_enfonce();

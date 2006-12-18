@@ -158,10 +158,10 @@ if ($activer_syndic != "non") {
 		. "</label></b>\n<p>";
 
 	if ($syndication == "non") {
-		$form .= "<INPUT TYPE='radio' NAME='syndication' VALUE='oui' id='syndication_oui'>";
+		$form .= "<input type='radio' name='syndication' value='oui' id='syndication_oui'>";
 	}
 	else {
-		$form .= "<INPUT TYPE='radio' NAME='syndication' VALUE='oui' id='syndication_oui' CHECKED>";
+		$form .= "<input type='radio' name='syndication' value='oui' id='syndication_oui' CHECKED>";
 	}
 	$form .= " <b><label for='syndication_oui'>"._T('bouton_radio_syndication')."</label></b>";
 	$form .= aide("rubsyn");

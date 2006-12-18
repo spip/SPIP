@@ -102,7 +102,7 @@ debut_cadre_couleur("traductions-24.gif", false, "", _T('info_multilinguisme'));
 		echo "<input type='hidden' name='gerer_trad' value='".$GLOBALS['meta']['gerer_trad']."'>";
 
 
-	echo "<div style='text-align: $spip_lang_right;'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
+	echo "<div style='text-align: $spip_lang_right;'><input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>";
 
 fin_cadre_couleur();
 
@@ -177,8 +177,8 @@ fin_cadre_couleur();
 		}
 
 		echo "</td></tr>";
-		echo "<tr><td style='text-align:$spip_lang_right;' COLSPAN=2>";
-		echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
+		echo "<tr><td style='text-align:$spip_lang_right;' colspan=2>";
+		echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'>";
 		echo "</td></tr></table>";
 		
 		

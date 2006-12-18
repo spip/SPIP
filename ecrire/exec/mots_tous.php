@@ -190,14 +190,14 @@ function confirmer_mot ($conf_mot, $son_groupe, $total)
 	.  _T('info_oui_suppression_mot_cle')
 	. '</p>'
 	  /* troublant. A refaire avec une visibility
-	 . "<LI><B><A href='" 
+	 . "<li><b><a href='" 
 	. generer_url_ecrire("mots_tous")
 	. "#editer_mot-$son_groupe"
 	. "'>"
 	. _T('item_non')
-	. "</A>,</B> "
+	. "</a>,</b> "
 	. _T('info_non_suppression_mot_cle')
-	. "</UL>" */
+	. "</ul>" */
 	. "</div>"
 	. fin_boite_info(true);
 }

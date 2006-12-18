@@ -52,10 +52,10 @@ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 
 debut_cadre_relief();
 
-echo "\n<TABLE BORDER='0' CELLSPACING='1' CELLPADDING='8' WIDTH=\"100%\">";
-echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND=''><B>";
-echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE='3' COLOR='#FFFFFF'>";
-echo _T('texte_effacer_base')."</FONT></B></TD></TR>";
+echo "\n<table border='0' cellspacing='1' cellpadding='8' width=\"100%\">";
+echo "<tr><td bgcolor='$couleur_foncee' background=''><b>";
+echo "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#FFFFFF'>";
+echo _T('texte_effacer_base')."</font></b></td></tr>";
 
 echo "<tr><td class='serif'>";
 
@@ -63,7 +63,7 @@ echo "\n<p align='justify'>\n";
 echo '<img src="' . _DIR_IMG_PACK . 'warning.gif" alt="'._T('info_avertissement').'" width="48" height="48" align="right" />';
 echo _T('texte_admin_effacer_01');
 
-echo "\n<CENTER>";
+echo "\n<center>";
 
 echo debut_boite_alerte();
 
@@ -79,10 +79,10 @@ echo "\n<b>"._T('avis_suppression_base')."&nbsp;!</b>";
 
 echo fin_boite_alerte();
 
-echo "</CENTER></p>";
+echo "</center></p>";
 
 echo "</td></tr>";
-echo "</TABLE>";
+echo "</table>";
 
 fin_cadre_relief();
 

@@ -106,7 +106,7 @@ function get_feed_from_url($url, $buffer=false){
          if (!$buffer) $buffer = @file_get_contents($url);
 
          $feed_list = array();
-         //extraction des <LINK>
+         //extraction des <link>
          if (preg_match_all("/<link [^>]*>/i", $buffer, $matches)){
                     //y a t-y rss atom rdf ou xml dans ces balises
                     foreach($matches[0] as $link){
@@ -128,7 +128,7 @@ function get_feed_from_url($url, $buffer=false){
                     }
                     //print_r($matches);
          }
-         //extraction des <A>
+         //extraction des <a>
          if (preg_match_all("/<a [^>]*>/i", $buffer, $matches)){
                     //y a t-y rss atom rdf ou xml dans ces balises
                     foreach($matches[0] as $link){
