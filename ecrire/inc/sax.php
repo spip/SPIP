@@ -181,6 +181,7 @@ function xml_parsestring($xml_parser, $data)
  var $elements = array();
  var $entites = array();
  var $attributs = array();
+ var $ids = array();
  var $err = array();
 }
 

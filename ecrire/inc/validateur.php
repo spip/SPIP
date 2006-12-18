@@ -71,7 +71,7 @@ function inc_validateur_dist($data)
 	    $att = array();
 	    if (preg_match_all("/\s*(\S+)\s+(([(][^)]*[)])|(\S+))\s+(\S+)(\s*'[^']*')?/", $val, $r2, PREG_SET_ORDER)) {
 		foreach($r2 as $m2) {
-			$v = preg_match('/^\w+$/', $m2[2]) ? ''
+			$v = preg_match('/^\w+$/', $m2[2]) ? $m2[2]
 			  : ('/^' . preg_replace('/\s+/', '', $m2[2]) . '$/');
 			$att[$m2[1]] = array($v, $m2[5]);
 		}
@@ -146,17 +146,37 @@ function validerAttribut($parser, $name, $val, $bal)
 		. _L(' attribut inconnu de ')
 		. "<b>$bal</b>"
 		.  coordonnees_erreur($parser);
-	elseif ($a[$name][0][0]=='/') {
-	  if (!preg_match($a[$name][0], $val)) {
-		$phraseur_xml->err[]= " <p><b>$val</b>"
-		. _L(" valeur de l'attribut ")
-		. "<b>$name</b>"
-		  . _L(' de ')
-		. "<b>$bal</b>"
-		. _L(" n'est pas conforme au motif</p><p>")
-		. "<b>" . $a[$name][0] . "</b></p>"
-		.  coordonnees_erreur($parser);
-	  }
+	else{
+		$type =  $a[$name][0];
+		if ($type[0]=='/') {
+		    if (!preg_match($a[$name][0], $val)) {
+		      $phraseur_xml->err[]= " <p><b>$val</b>"
+		      . _L(" valeur de l'attribut ")
+		      . "<b>$name</b>"
+		      . _L(' de ')
+		      . "<b>$bal</b>"
+		      . _L(" n'est pas conforme au motif</p><p>")
+		      . "<b>" . $a[$name][0] . "</b></p>"
+		      .  coordonnees_erreur($parser);
+		    }
+		} elseif ($type == 'ID') {
+		  if (isset($phraseur_xml->ids[$val])) {
+		      $phraseur_xml->err[]= " <p><b>$val</b>"
+		      . _L(" valeur de l'attribut ")
+		      . "<b>$name</b>"
+		      . _L(' de ')
+		      . "<b>$bal</b>"
+		      . _L(" incorrect ")
+		      .  coordonnees_erreur($parser);
+		      list($l,$c) = $phraseur_xml->ids[$val];
+		      $phraseur_xml->err[]= " <p><b>$val</b>"
+		      . _L(" vu auparavant ligne ")
+		      . $l
+		      . _L(" colonne ")
+			. $c;
+		  }
+		      else $phraseur_xml->ids[$val] = array(xml_get_current_line_number($parser), xml_get_current_column_number($parser));
+		}
 	}
 }
 ?>
