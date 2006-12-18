@@ -303,8 +303,8 @@ onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; char
 	. ">"
 	._T('icone_site_entier')
 	. "</a>"
-	. "<div id='nav-recherche'></div>"
-	. "<div id='gadget-rubriques'></div>"
+	. "\n<div id='nav-recherche'></div>"
+	. "\n<div id='gadget-rubriques'></div>"
 	. "</div>";
 	// FIN GADGET Menu rubriques
 
@@ -312,14 +312,14 @@ onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; char
 	// GADGET Navigation rapide
 	$bandeau .= "<div id='bandeaunavrapide' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 30px;'>"
 	. "<a href='" . generer_url_ecrire("brouteur", ($id_rubrique ? "id_rubrique=$id_rubrique" : '')) . "' class='lien_sous'>" . _T('icone_brouteur') . "</a>"
-	. "<div id='gadget-navigation'></div>\n"
+	. "\n<div id='gadget-navigation'></div>\n"
 	. "</div>\n";
 	// FIN GADGET Navigation rapide
 
 	// GADGET Recherche
 	// attribut non conforme ==> le generer dynamiquement
 	$js = 'this.setAttribute(\'autocomplete\', \'off\')';
-	$bandeau .= "<div id='bandeaurecherche' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 60px;'>"
+	$bandeau .= "\n<div id='bandeaurecherche' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 60px;'>"
 	. "<form method='get' style='margin: 0px; position: relative;' action='"
 	 . generer_url_ecrire("recherche")
 	. "'>"
@@ -337,7 +337,7 @@ onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; char
 	. _T('icone_agenda')
 	. "</a>"
 	
-	. "<div id='gadget-agenda'></div>\n"
+	. "\n<div id='gadget-agenda'></div>\n"
 	. "</div>\n";
 	// FIN GADGET Agenda
 
@@ -347,7 +347,7 @@ onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; char
 	$gadget .= "<a href='" . generer_url_ecrire("messagerie") . "' class='lien_sous'>";
 	$gadget .= _T('icone_messagerie_personnelle');
 	$gadget .= "</a>";
-	$gadget .= "<div id='gadget-messagerie'></div>\n";
+	$gadget .= "\n<div id='gadget-messagerie'></div>\n";
 	$gadget .= "</div>";
 
 	$bandeau .= $gadget;
@@ -360,11 +360,11 @@ onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; char
 	$bandeau .= "<a href='" . generer_url_ecrire("synchro") . "' class='lien_sous'>";
 	$bandeau .= _T('icone_suivi_activite');
 	$bandeau .= "</a>";
-	$bandeau .= "<div id='gadget-suivi'></div>\n";
+	$bandeau .= "\n<div id='gadget-suivi'></div>\n";
 	$bandeau .= "</div>";
 	
 		// Infos perso
-	$bandeau .= "<div id='bandeauinfoperso' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 200px;'>";
+	$bandeau .= "\n<div id='bandeauinfoperso' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 200px;'>";
 	$bandeau .= "<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$connect_id_auteur") . "' class='lien_sous'>";
 	$bandeau .= _T('icone_informations_personnelles');
 	$bandeau .= "</a>";
@@ -375,20 +375,20 @@ onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; char
 		// -------- Affichage de droite ----------
 	
 		// Deconnection
-	$bandeau .= "<div class='bandeau bandeau_couleur_sous' id='bandeaudeconnecter' style='$spip_lang_right: 0px;'>";
+	$bandeau .= "\n<div class='bandeau bandeau_couleur_sous' id='bandeaudeconnecter' style='$spip_lang_right: 0px;'>";
 	$bandeau .= "<a href='" . generer_url_action("logout","logout=prive") . "' class='lien_sous'>"._T('icone_deconnecter')."</a>".aide("deconnect");
 	$bandeau .= "</div>";
 	
 	$decal = 0;
 	$decal = $decal + 150;
 
-	$bandeau .= "<div id='bandeauinterface' class='bandeau bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>";
+	$bandeau .= "\n<div id='bandeauinterface' class='bandeau bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>";
 	$bandeau .= _T('titre_changer_couleur_interface');
 	$bandeau .= "</div>";
 		
 	$decal = $decal + 70;
 		
-	$bandeau .= "<div id='bandeauecran' class='bandeau bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>";
+	$bandeau .= "\n<div id='bandeauecran' class='bandeau bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>";
 	if ($spip_ecran == "large") 
 			$bandeau .= "<div><a href='".parametre_url(self(),'set_ecran', 'etroit')."' class='lien_sous'>"._T('info_petit_ecran')."</a>/<b>"._T('info_grand_ecran')."</b></div>";
 	else
@@ -399,11 +399,11 @@ onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; char
 		
 	// En interface simplifiee, afficher en permanence l'indication de l'interface
 	if ($options != "avancees") {
-			$bandeau .= "<div id='displayfond' class='bandeau bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right; visibility: visible; background-color: white; color: $couleur_foncee; z-index: -1000; border: 1px solid $couleur_claire; border-top: 0px;'>";
+			$bandeau .= "\n<div id='displayfond' class='bandeau bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right; visibility: visible; background-color: white; color: $couleur_foncee; z-index: -1000; border: 1px solid $couleur_claire; border-top: 0px;'>";
 			$bandeau .= "<b>"._T('icone_interface_simple')."</b>";
-			$bandeau .= "</div>";
+			$bandeau .= "</div>\n";
 	}
-	$bandeau .= "<div id='bandeaudisplay' class='bandeau bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>";
+	$bandeau .= "\n<div id='bandeaudisplay' class='bandeau bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>";
 
 	if ($options != 'avancees') {
 		$bandeau .= "<b>"._T('icone_interface_simple')."</b>/<a href='".parametre_url(self(),'set_options', 'avancees')."' class='lien_sous'>"._T('icone_interface_complet')."</a>";
@@ -412,12 +412,12 @@ onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; char
 	}
 
 	if ($options != "avancees") {
-		$bandeau .= "<div>&nbsp;</div><div style='width: 250px; text-align: $spip_lang_left;'>"._T('texte_actualite_site_1')."<a href='./?set_options=avancees'>"._T('texte_actualite_site_2')."</a>"._T('texte_actualite_site_3')."</div>";
+		$bandeau .= "<div>&nbsp;</div><div style='width: 250px; text-align: $spip_lang_left;'>"._T('texte_actualite_site_1')."<a href='./?set_options=avancees'>"._T('texte_actualite_site_2')."</a>"._T('texte_actualite_site_3')."</div>\n";
 	}
 
 	$bandeau .= "</div>";
 	$bandeau .= "</div>";
-	$bandeau .= "</td></tr></table>";
+	$bandeau .= "</td></tr></table>\n";
 
 
 	$bandeau .= '</div>';

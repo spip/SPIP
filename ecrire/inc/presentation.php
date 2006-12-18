@@ -230,12 +230,12 @@ function fin_cadre_trait_couleur($return = false){
 //
 // http://doc.spip.org/@debut_boite_alerte
 function debut_boite_alerte() {
-	return "<p><table cellpadding='6' border='0'><tr><td width='100%' bgcolor='red'><table width='100%' cellpadding='12' border='0'><tr><td width='100%' bgcolor='white'>";
+	return "<table cellpadding='6' border='0'><tr><td width='100%' bgcolor='red'><table width='100%' cellpadding='12' border='0'><tr><td width='100%' bgcolor='white'>";
 }
 
 // http://doc.spip.org/@fin_boite_alerte
 function fin_boite_alerte() {
-	return "</td></tr></table></td></tr></table></p>";
+	return "</td></tr></table></td></tr></table>";
 }
 
 

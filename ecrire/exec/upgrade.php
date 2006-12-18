@@ -32,12 +32,12 @@ function exec_upgrade_dist() {
 		echo "<p><b>",_T('texte_nouvelle_version_spip_1'),"</b><p> ",
 		  _T('texte_nouvelle_version_spip_2',
 		     array('connect' => '<tt>' . _FILE_CONNECT . '</tt>')),
-		 "<p><div align='right'>",
+		 "<div align='right'>",
 		  '<form action="', generer_url_ecrire("upgrade", 'reinstall=non'),
 		  '">', "<input type='submit' value=\"",
 		_T('bouton_relancer_installation'),
 		"\" class='fondl'>",
-		"</form>\n";
+		"</form></div>\n";
 
 		echo install_fin_html();
 		exit;

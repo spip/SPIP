@@ -74,9 +74,9 @@ function exec_forum_dist()
   if ($total > 10) liste_numeros_forum($script, $debut, $total);
 
   
-  echo "\n<p><div align='center'>\n";
+  echo "\n<div align='center'>\n";
   icone (_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=$statutforum&script=$script"), $logo, "creer.gif");
-  echo "\n</div></p>";
+  echo "\n</div>";
 
   echo "\n<p align='left'>";
   $limit = $debut ? "LIMIT $debut,10" : "LIMIT 10" ;
