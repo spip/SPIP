@@ -25,8 +25,7 @@ else{
 	include_spip('inc/meta');
 	$IMPORT_tables_noimport[]='spip_ajax_fonc';
 	$IMPORT_tables_noimport[]='spip_caches';
-	$IMPORT_tables_noimport[]='spip_meta';
-	ecrire_meta('IMPORT_tables_noimport',serialize($IMPORT_tables_noimport));
+	ecrire_meta('IMPORT_tables_noimport',serialize($IMPORT_tables_noimport),'non');
 	ecrire_metas();
 }
 
@@ -155,9 +154,9 @@ function import_all_milieu($request, $dir)
 
 // http://doc.spip.org/@import_all_debut
 function import_all_debut($request) {
-	ecrire_meta("request_restauration", serialize($request));
-	ecrire_meta("debut_restauration", "debut");
-	ecrire_meta("status_restauration", "0");
+	ecrire_meta("request_restauration", serialize($request),'non');
+	ecrire_meta("debut_restauration", "debut",'non');
+	ecrire_meta("status_restauration", "0",'non');
 	ecrire_metas();
 }
 
