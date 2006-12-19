@@ -128,49 +128,58 @@ function defautElement($parser, $data)
 }
 
 // http://doc.spip.org/@xml_parsefile
-function xml_parsefile($xml_parser, $file)
+function xml_parsefile($phraseur, $file)
 {
-  if (!($fp = fopen($file, "r"))) {
+	if (!($fp = fopen($file, "r"))) {
 		include_spip('inc/minipres');
 		echo minipres("Impossible d'ouvrir le fichier XML");
 		exit;
-  }
-  while ($data = fread($fp, 4096)) {
-    if (!xml_parse($xml_parser, str_replace('&#8217;',"'",$data), feof($fp))) {
-      return (sprintf("erreur XML : %s ligne %d",
-		      xml_error_string(xml_get_error_code($xml_parser)),
-		      xml_get_current_line_number($xml_parser)));
-    }
-  }
-  return "";
+	}
+	while ($data = fread($fp, 4096)) {
+		if (!xml_parse($phraseur,
+			       str_replace('&#8217;',"'",$data), feof($fp))) {
+			return (sprintf("erreur XML : %s ligne %d",
+				xml_error_string(xml_get_error_code($phraseur)),
+				xml_get_current_line_number($phraseur)));
+		}
+	}
+	return "";
 }
 
 // http://doc.spip.org/@xml_parsestring
-function xml_parsestring($xml_parser, $data)
+function xml_parsestring($phraseur, $data)
 {
 	global $phraseur_xml;
 
 	$phraseur_xml->contenu[$phraseur_xml->depth] ='';
-	$r = "";
-	if (!xml_parse($xml_parser, $data, true)) {
+
+	if (!xml_parse($phraseur, $data, true)) {
 	  // ne pas commencer le message par un "<" (cf inc_sax_dist)
-	  $r = xml_error_string(xml_get_error_code($xml_parser)) .
-	    coordonnees_erreur($xml_parser) . '<br />' .
-	    (!$phraseur_xml->depth ? '' :
-	     (
-	      _L("derni&egrave;re balise non referm&eacute;e&nbsp;: ") .
-	      "<tt>" .
-	      $phraseur_xml->ouvrant[$phraseur_xml->depth] .
-	      "</tt>" .
-	      _L(" ligne ") .
-	      $phraseur_xml->reperes[$phraseur_xml->depth] .
-	      '<br />' ));
+		return  xml_error_string(xml_get_error_code($phraseur)) .
+		  coordonnees_erreur($phraseur) . '<br />' .
+		  (!$phraseur_xml->depth ? '' :
+		   (
+		    _L("derni&egrave;re balise non referm&eacute;e&nbsp;: ") .
+		    "<tt>" .
+		    $phraseur_xml->ouvrant[$phraseur_xml->depth] .
+		    "</tt>" .
+		    _L(" ligne ") .
+		    $phraseur_xml->reperes[$phraseur_xml->depth] .
+		    '<br />' ));
+	}
+	foreach ($phraseur_xml->idrefs as $idref) {
+		list($nom, $ligne, $col) = $idref;
+		if (!isset($phraseur_xml->ids[$nom]))
+		      $phraseur_xml->err[]= " <p><b>$nom</b>"
+		      . _L(" ID inconnu ligne ")
+		      . $ligne
+		      . _L(" colonne ")
+		      . $col;
+	}
+	if ($phraseur_xml->err)
+		return join('<br />', $phraseur_xml->err) . '<br />';
 
-	} else if ($phraseur_xml->err)
-	  $r = join('<br />', $phraseur_xml->err) . '<br />';
-	else $r = $phraseur_xml->res;
-
-	return $r;
+	return $phraseur_xml->res;
 }
 
  var $depth = "";
@@ -182,6 +191,7 @@ function xml_parsestring($xml_parser, $data)
  var $entites = array();
  var $attributs = array();
  var $ids = array();
+ var $idrefs = array();
  var $err = array();
 }
 
