@@ -538,7 +538,7 @@ function emboite_texte($texte, $fonc='',$self='')
 				$GLOBALS['xhtml_error'],
 				$regs,
 			       PREG_SET_ORDER);
-		$err = '<tr><th>#</th><th>Occ.</th><th>Msg</th><th>L</th><th>Col</th></tr>';
+		$err = '<tr><th>#</th><th>Occ.</th><th>Li.</th><th>Col.</th><th>Err.</th></tr>';
 		$fautifs = array();
 		$i = 0;
 		$encore = array();
@@ -560,14 +560,14 @@ function emboite_texte($texte, $fonc='',$self='')
 			  . "'><td style='text-align: right'>"
 			  . $i
 			  . "</td><td  style='text-align: right'>"
-			  . "$ref/$encore[$msg]</td><td>$msg</td>"
+			  . "$ref/$encore[$msg]</td>"
 			  . "<td  style='text-align: right'><a href='#L"
 			  . $ligne
 			  . "' id='T$i'>"
 			  . $ligne
 			  . "</a></td><td  style='text-align: right'>"
 			  . $fin
-			  . "</td></tr>\n";
+			  . "</td><td>$msg</td></tr>\n";
 			$fautifs[]= array($ligne, $col, $i);
 		}
 		return array(ancre_texte($texte, $fautifs),
