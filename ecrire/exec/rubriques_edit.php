@@ -82,6 +82,19 @@ function exec_rubriques_edit_dist()
 	debut_gauche();
 
 	// Pave "documents associes a la rubrique"
+	$multi_js = "";
+	if($GLOBALS['meta']['multi_rubriques']!="oui" && $GLOBALS['meta']['multi_secteurs']!="oui") {
+		$active_langs = "'".str_replace(",","','",$GLOBALS['meta']['langues_multilingue'])."'";
+		$multi_js = "<script type='text/javascript' src='"._DIR_JAVASCRIPT."multilang.js'></script>\n".
+		"<script type='text/javascript'>\n".
+		"var multilang_def_lang='".$GLOBALS["spip_lang"]."';var multilang_avail_langs=[$active_langs];\n".
+		"$(function(){\n".
+		"multilang_init_lang({'root':'#page','forms':'#liste_images form,#liste_documents form:not(.form_upload) , div.cadre-formulaire form','fields':'input,textarea'});\n".
+		"onAjaxLoad(function(){forms_init_multi({'target':this})});\n".
+		"});\n".
+		"</script>\n";
+	}
+	echo $multi_js;
 
 	if (!$new){
 		# affichage sur le cote des pieces jointes, en reperant les inserees
