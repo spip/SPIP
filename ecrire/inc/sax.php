@@ -171,9 +171,9 @@ function xml_parsestring($phraseur, $data)
 		list($nom, $ligne, $col) = $idref;
 		if (!isset($phraseur_xml->ids[$nom]))
 		      $phraseur_xml->err[]= " <p><b>$nom</b>"
-		      . _L(" ID inconnu ligne ")
+		      . _L(" ID inconnu ")
 		      . $ligne
-		      . _L(" colonne ")
+		      . " "
 		      . $col;
 	}
 	if ($phraseur_xml->err)
@@ -235,9 +235,9 @@ function inc_sax_dist($page, $apply=false) {
 function coordonnees_erreur($xml_parser)
 {
   return
-	_L(" ligne ") .
+    ' ' .
 	xml_get_current_line_number($xml_parser) .
-	_L(" colonne ") .
+    ' ' .
 	xml_get_current_column_number($xml_parser);
 }
 

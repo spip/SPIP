@@ -139,9 +139,12 @@ function validerAttribut($parser, $name, $val, $bal)
 {
 	global $phraseur_xml;
 
-	$a = @$phraseur_xml->attributs[$bal]; // vide ou absent, pareil.
+	// Si la balise est inconnue, eviter d'insister
+	if (!isset($phraseur_xml->attributs[$bal]))
+		return ;
+		
+	$a = $phraseur_xml->attributs[$bal];
 	if (!isset($a[$name]))
-
 		$phraseur_xml->err[]= " <b>$name</b>"
 		. _L(' attribut inconnu de ')
 		. "<b>$bal</b>"
@@ -170,9 +173,9 @@ function validerAttribut($parser, $name, $val, $bal)
 		      .  coordonnees_erreur($parser);
 		      list($l,$c) = $phraseur_xml->ids[$val];
 		      $phraseur_xml->err[]= " <p><b>$val</b>"
-		      . _L(" vu auparavant ligne ")
+		      . _L(" vu auparavant ")
 		      . $l
-		      . _L(" colonne ")
+		      . "  "
 		      . $c;
 		  } else $phraseur_xml->ids[$val] = array(xml_get_current_line_number($parser), xml_get_current_column_number($parser));
 		} elseif ($type == 'IDREF') {
