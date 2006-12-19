@@ -1586,28 +1586,13 @@ function fin_cadre_formulaire($return=false){
 
 // http://doc.spip.org/@debut_gauche
 function debut_gauche($rubrique = "accueil", $return=false) {
-	global $connect_statut;
-	global $options, $spip_display;
-	global $connect_id_auteur;
+	global $spip_display;
 	global $spip_ecran;
-	global $flag_3_colonnes, $flag_centre_large;
-	global $spip_lang_rtl;
-
-	$flag_3_colonnes = false;
-	$largeur = 200;
 
 	// Ecran panoramique ?
 	if ($spip_ecran == "large") {
 		$largeur_ecran = 974;
-		
-		// Si edition de texte, formulaires larges
-		if (ereg('((articles|breves|rubriques)_edit|forum_envoi)', $GLOBALS['REQUEST_URI'])) {
-			$flag_centre_large = true;
-		}
-		
-		$flag_3_colonnes = true;
 		$rspan = " rowspan='2'";
-
 	}
 	else {
 		$largeur_ecran = 750;
@@ -1615,10 +1600,10 @@ function debut_gauche($rubrique = "accueil", $return=false) {
 	}
 
 	// table fermee par fin_gauche()
-	// div fermee par debut_droite()
+	// div fermee par debut_droite() ou creer_colonne_droite
 
 	$res = "<br /><table width='$largeur_ecran' cellpadding='0' cellspacing='0' border='0'>
-		<tr>\n<td width='$largeur' class='colonne_etroite serif' valign='top' $rspan>
+		<tr>\n<td width='200' class='colonne_etroite serif' valign='top' $rspan>
 		\n<div style='width: ${largeur}px; overflow:hidden;'>
 \n";
 		
@@ -1640,13 +1625,12 @@ function fin_gauche()
 // http://doc.spip.org/@creer_colonne_droite
 function creer_colonne_droite($rubrique="", $return= false){
 	static $deja_colonne_droite;
-	global $flag_3_colonnes, $flag_centre_large;
-	global $spip_lang_rtl, $spip_lang_left;
+	global $spip_ecran, $spip_lang_rtl, $spip_lang_left;
 
-	if ((!$flag_3_colonnes) OR $deja_colonne_droite) return '';
+	if ((!($spip_ecran == "large")) OR $deja_colonne_droite) return '';
 	$deja_colonne_droite = true;
 
-	if ($flag_centre_large) {
+	if  (formulaire_large()) {
 			$espacement = 17;
 			$largeur = 140;
 	} else {
@@ -1654,7 +1638,7 @@ function creer_colonne_droite($rubrique="", $return= false){
 			$largeur = 200;
 	}
 
-	$res = "\n<td width='"
+	$res = "\n</div></td><td width='"
 	.  $espacement
 	.  "' rowspan='2' class='colonne_etroite'>&nbsp;</td>"
 	. "\n<td rowspan='1' class='colonne_etroite'></td>"
@@ -1670,34 +1654,34 @@ function creer_colonne_droite($rubrique="", $return= false){
 	if ($return) return $res; else echo $res;
 }
 
+function formulaire_large()
+{
+	return preg_match(',^((articles|breves|rubriques)_edit|forum_envoi),', $_GET['exec']);
+}
+
 // http://doc.spip.org/@debut_droite
 function debut_droite($rubrique="", $return= false) {
 	global $options, $spip_ecran, $spip_display;
 	global $spip_lang_left, $couleur_foncee, $couleur_claire;
-	global $flag_3_colonnes, $flag_centre_large;
 
 	$res = '';
 
 	if ($spip_display == 4) $res .= " -->";
-
-	$res .= "</div>\n"; # largeur fixe, cf. debut_gauche
 
 	if ($options == "avancees") {
 
 		$res .= liste_articles_bloques();
 	}
 
-	$res .= "\n<div>&nbsp;</div></td>";
-
-	if (!$flag_3_colonnes) {
-		$res .= "<td width='50'>&nbsp;</td>";
+	if ($spip_ecran != "large") {
+		$res .= "</div></td><td width='50'>&nbsp;</td>";
 	}
 	else {
 		$res .= creer_colonne_droite($rubrique, true)
 		. "</td></tr>\n<tr>";
 	}
 
-	if ($spip_ecran == 'large' AND $flag_centre_large)
+	if ($spip_ecran == 'large' AND formulaire_large())
 		$largeur = 600;
 	else
 		$largeur = 500;

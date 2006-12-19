@@ -66,6 +66,7 @@ function image_pattern($vignette) {
 	return "<img src='"
 			. _DIR_RACINE
 			. $vignette['fichier']."'
+			alt=' '
 			width='".$vignette['largeur']."'
 			height='".$vignette['hauteur']."' />";
 }
@@ -102,7 +103,7 @@ function document_et_vignette($document, $url, $portfolio=false) {
 	}
 	if (!$image) {
 		list($fichier, $largeur, $hauteur) = vignette_par_defaut($extension);
-		$image = "<img src='$fichier'\n\theight='$hauteur' width='$largeur' />";
+		$image = "<img src='$fichier'\n\theight='$hauteur' width='$largeur' alt=' ' />";
 	}
 
 	if (!$url)
