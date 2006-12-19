@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_chemin_invalide_2' => 'non sembra valido. Torna alla pagina precedente e verifica le informazioni fornite.',
 'avis_connexion_echec_1' => 'il collegamento al server MySQL &egrave; fallito.',
 'avis_connexion_echec_2' => 'torna alla pagina precedente e verifica le informazioni fornite.',
-'avis_connexion_echec_3' => '<B>N.B.</B> Spesso sul server si deve <B>chiedere</B> l\'attivazione dell\'accesso al database MySQL prima di poterlo utilizzare. Se &egrave; impossibile collegarsi, verificare la configurazione per la connessione con l\'amministratore del sistema.',
+'avis_connexion_echec_3' => '<b>N.B.</b> Spesso sul server si deve <b>chiedere</b> l\'attivazione dell\'accesso al database MySQL prima di poterlo utilizzare. Se &egrave; impossibile collegarsi, verificare la configurazione per la connessione con l\'amministratore del sistema.',
 'avis_connexion_ldap_echec_1' => 'La connessione al server LDAP &egrave; fallita.',
 'avis_connexion_ldap_echec_2' => 'Torna alla pagina precedente e verifica le informazioni fornite. ',
 'avis_connexion_ldap_echec_3' => 'In alternativa, non utilizzare il supporto LDAP per importare utenti.',
@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'Attenzione! Questa rubrica contiene @contient_breves@ breve/i: se vuoi spostarla, spunta questa casella per confermare.',
 'avis_destinataire_obligatoire' => 'Devi indicare un destinatario prima di mandare questo messaggio.',
 'avis_erreur_connexion_mysql' => 'Errore di connessione MySQL',
-'avis_erreur_version_archive' => '<B>Attenzione! Il file @archive@ corrisponde a
+'avis_erreur_version_archive' => '<b>Attenzione! Il file @archive@ corrisponde a
 una versione di SPIP diversa da quella installata.</b> Potranno sorgere dei problemi:
 rischio di distruzione del database, malfunzionamenti diversi del sito ecc.
 Non confermare questa richiesta d\'importazione!
@@ -49,7 +49,7 @@ Verifica l\'indirizzo del file per la syndication di (<b>@url_syndic@</b>) e pro
 
 
 // B
-'bouton_acces_ldap' => 'Aggiungi l\'accesso a LDAP >>',
+'bouton_acces_ldap' => 'Aggiungi l\'accesso a LDAP ',
 'bouton_ajouter' => 'Aggiungi',
 'bouton_ajouter_participant' => 'AGGIUNGI UN UTENTE:',
 'bouton_annonce' => 'ANNUNCIO',
@@ -140,7 +140,7 @@ cancellarli successivamente).',
 'entree_base_donnee_2' => '(Spesso questo indirizzo coincide con quello dell\'intero sito, qualche volta corrisponde a "localhost", altre volte invece non &egrave; necessario specificarlo.)',
 'entree_biographie' => 'La tua biografia in breve.',
 'entree_breve_publiee' => 'Questa breve deve essere pubblicata?',
-'entree_chemin_acces' => '<B>Inserire</b> il percorso d\'accesso:',
+'entree_chemin_acces' => '<b>Inserire</b> il percorso d\'accesso:',
 'entree_cle_pgp' => 'Chiave PGP',
 'entree_contenu_rubrique' => '(Contenuto della rubrica in qualche parola)',
 'entree_description_site' => 'Descrizione del sito',
@@ -149,7 +149,7 @@ cancellarli successivamente).',
 Se non conosci queste informazioni, richiedile all\'amministratore del sistema o della rete.',
 'entree_infos_perso' => 'Chi sei?',
 'entree_interieur_rubrique' => 'All\'interno della rubrica:',
-'entree_liens_sites' => '<B>Link ipertestuale</B> (riferimento, sito da visitare...)',
+'entree_liens_sites' => '<b>Link ipertestuale</b> (riferimento, sito da visitare...)',
 'entree_login' => 'Login',
 'entree_login_connexion_1' => 'Il login di connessione',
 'entree_login_connexion_2' => '(Corrisponde a volte al login d\'accesso via FTP; in alcuni casi non occorre specificare nulla)',
@@ -166,7 +166,7 @@ Se non conosci queste informazioni, richiedile all\'amministratore del sistema o
 'entree_port_annuaire' => 'Il numero di porta della rubrica',
 'entree_signature' => 'Firma',
 'entree_texte_breve' => 'Testo della breve',
-'entree_titre_obligatoire' => '<B>Titolo</B> [Obbligatorio]<BR>',
+'entree_titre_obligatoire' => '<b>Titolo</b> [Obbligatorio]<br />',
 'entree_url' => 'Indirizzo (URL) del sito',
 'erreur_plugin_fichier_absent' => 'File non presente',
 'erreur_plugin_fichier_def_absent' => 'File di definizioni non presente',
@@ -202,7 +202,7 @@ Se non conosci queste informazioni, richiedile all\'amministratore del sistema o
 'icone_creer_rubrique_2' => 'Crea una nuova rubrica',
 'icone_ecrire_nouvel_article' => 'Le brevi contenute nella rubrica',
 'icone_envoyer_message' => 'Invia questo messaggio',
-'icone_evolution_visites' => 'Evoluzione delle visite<br>@visites@ visite',
+'icone_evolution_visites' => 'Evoluzione delle visite<br />@visites@ visite',
 'icone_modif_groupe_mots' => 'Modifica questo gruppo',
 'icone_modifier_article' => 'Modifica l\'articolo',
 'icone_modifier_breve' => 'Modifica la breve',
@@ -229,7 +229,7 @@ Se non conosci queste informazioni, richiedile all\'amministratore del sistema o
 'info_1_site' => '1 sito',
 'info_activer_cookie' => 'Se vuoi puoi attivare un <b>cookie di corrispondenza</b>, che ti permetter&agrave;
 di passare facilmente dal sito pubblico all\'interfaccia privata.',
-'info_activer_forum_public' => '<I>Per attivare i forum pubblici, scegli il tipo
+'info_activer_forum_public' => '<i>Per attivare i forum pubblici, scegli il tipo
 di moderazione predefinito:</i>',
 'info_admin_gere_rubriques' => 'Questo amministratore gestisce le seguenti rubriche:',
 'info_admin_gere_toutes_rubriques' => 'Questo amministratore gestisce <b>tutte le rubriche</b>.',
@@ -282,9 +282,9 @@ immagini inserite. Ci&ograve; permette ad esempio di creare in automatico una ga
 'info_changer_nom_groupe' => 'Cambiare il nome di questo gruppo:',
 'info_chapeau' => 'Introduzione',
 'info_chapeau_2' => 'Introduzione:',
-'info_chemin_acces_1' => 'Opzioni: <B>Percorso d\'accesso ai dati nell\'elenco</b>',
+'info_chemin_acces_1' => 'Opzioni: <b>Percorso d\'accesso ai dati nell\'elenco</b>',
 'info_chemin_acces_2' => '&Egrave; necessario specificare il  percorso per accedere ai dati nell\'elenco. Questa informazione &egrave; indispensabile al fine di leggere i profili utente in esso contenuti.',
-'info_chemin_acces_annuaire' => 'Opzioni: <B>Percorso d\'accesso ai dati nell\'elenco',
+'info_chemin_acces_annuaire' => 'Opzioni: <b>Percorso d\'accesso ai dati nell\'elenco</b>',
 'info_choix_base' => 'Terza fase: ',
 'info_classement_1' => '<sup>o</sup> su @liste@',
 'info_classement_2' => '<sup>o</sup> su @liste@',
@@ -293,24 +293,24 @@ immagini inserite. Ci&ograve; permette ad esempio di creare in automatico una ga
 'info_config_suivi' => 'Se questo indirizzo corrisponde a una mailing-list, &egrave; possibile indicare qui sotto l\'indirizzo al quale i partecipanti del sito possono iscriversi. Questo indirizzo pu&ograve; essere una URL (per esempio la pagina di iscrizione via Web alla lista), oppure un indirizzo email che contiene un Oggetto specifico (per esempio: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => '&Egrave; possibile abbonarsi alla mailing-list di questo sito. Verranno spedite per email le notifiche degli articoli e delle brevi proposte per la pubblicazione.',
 'info_confirmer_passe' => 'Conferma la nuova password:',
-'info_connexion_base' => 'Seconda fase: <B>Prova di connessione al database</b>',
+'info_connexion_base' => 'Seconda fase: <b>Prova di connessione al database</b>',
 'info_connexion_ldap_ok' => 'La connessione LDAP &egrave; riuscita.</b><p /> &Egrave; possibile passare alla fase successiva.',
-'info_connexion_mysql' => 'Prima fase: <B>La connessione a MySQL</b>',
+'info_connexion_mysql' => 'Prima fase: <b>La connessione a MySQL</b>',
 'info_connexion_ok' => 'La connessione &egrave; riuscita.',
 'info_contact' => 'Contatti',
 'info_contenu_articles' => 'Contentuto degli articoli',
 'info_creation_mots_cles' => 'In questa pagina &egrave; possibile creare e configurare le parole chiave del sito',
 'info_creation_paragraphe' => '(Per creare dei paragrafi indipendenti, lasciare fra loro delle righe vuote.)',
-'info_creation_rubrique' => 'Prima di poter scrivere degli articoli, <BR>devi creare almeno una rubrica.<BR>',
-'info_creation_tables' => 'Quarta fase: <B>Creazione delle tabelle nel database</b>',
-'info_creer_base' => '<B>Creare</b> un nuovo database:',
+'info_creation_rubrique' => 'Prima di poter scrivere degli articoli, <br />devi creare almeno una rubrica.<br />',
+'info_creation_tables' => 'Quarta fase: <b>Creazione delle tabelle nel database</b>',
+'info_creer_base' => '<b>Creare</b> un nuovo database:',
 'info_dans_groupe' => 'Nel gruppo:',
 'info_dans_rubrique' => 'Nella rubrica:',
 'info_date_publication_anterieure' => 'Data di redazione anteriore:',
 'info_date_referencement' => 'DATA DI INSERIMENTO IN REPERTORIO DI QUESTO SITO:',
 'info_delet_mots_cles' => 'Hai chiesto
 di eliminare la parola chiave
-<B>@titre_mot@</b> (@type_mot@). Essendo quest\'ultima collegata a
+<b>@titre_mot@</b> (@type_mot@). Essendo quest\'ultima collegata a
 <b>@texte_lie@</b>, &egrave; necessario confermare la decisione:',
 'info_derniere_etape' => 'Ultima fase: Finito!',
 'info_derniere_syndication' => 'L\'ultima <em>syndication</em> di questo sito &egrave; stata effettuata il',
@@ -347,9 +347,9 @@ tutti i redattori registrati. &Egrave; anche possibile attivare un
 secondo forum riservato ai soli amministratori.',
 'info_forum_statistiques' => 'Statistiche delle visite',
 'info_forums_abo_invites' => 'Il sito comprende dei forum accessibili solo a utenti registrati. Nel sito pubblico &egrave; quindi presente una pagina d\'iscrizione.',
-'info_gauche_admin_effacer' => '<B>Questa pagina &egrave; accessibile solo ai responsabili del sito.</b><p /> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie a un accesso FTP.',
-'info_gauche_admin_tech' => '<B>Questa pagina &egrave; accessibile solo ai responsabili del sito.</B><p /> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie a un accesso FTP.',
-'info_gauche_admin_vider' => '<B>Questa pagina &egrave; accessibile solo ai responsabili del sito.</B><p /> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie ad un accesso FTP.',
+'info_gauche_admin_effacer' => '<b>Questa pagina &egrave; accessibile solo ai responsabili del sito.</b><p /> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie a un accesso FTP.',
+'info_gauche_admin_tech' => '<b>Questa pagina &egrave; accessibile solo ai responsabili del sito.</b><p /> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie a un accesso FTP.',
+'info_gauche_admin_vider' => '<b>Questa pagina &egrave; accessibile solo ai responsabili del sito.</b><p /> Permette l\'accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie ad un accesso FTP.',
 'info_gauche_auteurs' => 'Elenco di tutti gli autori del sito.
 Il loro status &egrave; indicato dal colore dell\'icona (redattore = giallo; amministratore = verde).',
 'info_gauche_auteurs_exterieurs' => 'Gli autori esterni, senza accesso al sito, sono indicati da un\'icona blu;
@@ -357,9 +357,9 @@ gli autori eliminati, invece, da un cestino.',
 'info_gauche_messagerie' => 'Il sistema di messaggistica permette di scambiare dei messaggi tra redattori, di conservare dei memo (promemoria ad uso personale) o di pubblicare degli annunci nel pannello di controllo dell\'area riservata (se sei amministratore).',
 'info_gauche_numero_auteur' => 'AUTORE NUMERO',
 'info_gauche_numero_breve' => 'BREVE NUMERO',
-'info_gauche_statistiques_referers' => 'Questa pagina presenta un elenco dei siti che contengono link verso il tuo (<I>referrer</I>). Questo elenco &egrave; valido per&ograve; solo per oggi essendo azzerato ogni 24 ore.',
-'info_gauche_suivi_forum' => 'La pagina di <I>monitoraggio dei forum</I> &egrave; uno strumento di gestione del sito (e non uno spazio di discussione o di redazione). In essa sono pubblicati tutti i contributi del forum pubblico di quest\'articolo, permettendone la gestione.',
-'info_gauche_suivi_forum_2' => 'La pagina di <I>monitoraggio dei forum</I> &egrave; uno strumento di gestione del sito (e non uno spazio di discussione o di redazione). In essa sono pubblicati tutti i contributi dei forum del sito, sia quelli del sito pubblico che quelli dell\'area riservata, permettendone la gestione.',
+'info_gauche_statistiques_referers' => 'Questa pagina presenta un elenco dei siti che contengono link verso il tuo (<i>referrer</i>). Questo elenco &egrave; valido per&ograve; solo per oggi essendo azzerato ogni 24 ore.',
+'info_gauche_suivi_forum' => 'La pagina di <i>monitoraggio dei forum</i> &egrave; uno strumento di gestione del sito (e non uno spazio di discussione o di redazione). In essa sono pubblicati tutti i contributi del forum pubblico di quest\'articolo, permettendone la gestione.',
+'info_gauche_suivi_forum_2' => 'La pagina di <i>monitoraggio dei forum</i> &egrave; uno strumento di gestione del sito (e non uno spazio di discussione o di redazione). In essa sono pubblicati tutti i contributi dei forum del sito, sia quelli del sito pubblico che quelli dell\'area riservata, permettendone la gestione.',
 'info_gauche_visiteurs_enregistres' => 'Trovi qui i visitatori registrati allo spazio
 pubblico del sito (forum su abbonamento).',
 'info_generation_miniatures_images' => 'Generazione di thumbnail di immagini',
@@ -380,7 +380,7 @@ dai loro server. In questo caso, le funzionalit&agrave; di SPIP di seguito ripor
 'info_image_process' => 'Seleziona il metodo migliore per la creazione delle anteprime cliccando sull\'immagine corrispondente.',
 'info_image_process2' => '<b>N.B.</b> <i>Se non appare alcuna immagine, ci&ograve; significa che la configurazione del server non permette l\'uso di alcune funzioni grafiche. Se si desidera utilizzarle, rivolgersi al responsabile tecnico chiedendo di installare le estensioni "GD" o "Imagick".</i>',
 'info_images_auto' => 'Immagini elaborate automaticamente',
-'info_informations_personnelles' => 'Quinta fase: <B>Informazioni personali</b>',
+'info_informations_personnelles' => 'Quinta fase: <b>Informazioni personali</b>',
 'info_inscription_automatique' => 'Iscrizione automatica di nuovi redattori',
 'info_jeu_caractere' => 'Set di caratteri del sito',
 'info_jours' => 'giorni',
@@ -408,7 +408,7 @@ dai loro server. In questo caso, le funzionalit&agrave; di SPIP di seguito ripor
 'info_mise_a_niveau_base' => 'aggiornamento del database MySQL',
 'info_mise_a_niveau_base_2' => '{{Attenzione!}} &Egrave; stata installata una versione
 dei file di SPIP {precedente} rispetto a quella che era in uso per questo sito:
-le informazioni contenute nel database sono probabilmente andate perse.<br>{{Reinstallare i file di SPIP.}}',
+le informazioni contenute nel database sono probabilmente andate perse.<br />{{Reinstallare i file di SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Modo di funzionamento predefinito dei forum pubblici',
 'info_modifier_breve' => 'Modifica la breve:',
 'info_modifier_rubrique' => 'Modifica la rubrica:',
@@ -516,8 +516,8 @@ impossibile.',
 'info_redirection' => 'Reindirizzamento',
 'info_referencer_doc_distant' => 'Mettere in repertorio un documento su Internet:',
 'info_refuses' => 'I tuoi articoli rifiutati',
-'info_reglage_ldap' => 'Opzioni: <B>Parametri per l\'importazione LDAP</b>',
-'info_renvoi_article' => '<B>Reindirizzamento.</b> Quest\'articolo rimanda alla pagina:',
+'info_reglage_ldap' => 'Opzioni: <b>Parametri per l\'importazione LDAP</b>',
+'info_renvoi_article' => '<b>Reindirizzamento.</b> Quest\'articolo rimanda alla pagina:',
 'info_reserve_admin' => 'Solo gli amministratori possono modificare quest\'indirizzo.',
 'info_restauration_sauvegarde' => 'ripristino del salvataggio @archive@',
 'info_restreindre_rubrique' => 'Limita la facolt&agrave; di gestione alla rubrica:',
@@ -813,7 +813,7 @@ di mettere on line rapidamente delle news di attualit&agrave;,
 di gestire una rassegna stampa o un calendario di eventi, ecc.',
 'texte_choix_base_1' => 'Scegli il database:',
 'texte_choix_base_2' => 'Il server MySQL contiene diversi database.',
-'texte_choix_base_3' => '<B>Seleziona</b> quello che &egrave; stato attribuito al tuo dominio:',
+'texte_choix_base_3' => '<b>Seleziona</b> quello che &egrave; stato attribuito al tuo dominio:',
 'texte_commande_vider_tables_indexation' => 'Utilizza questo comando per svuotare le tabelle d\'incidizzazione utilizzate
 dal motore di ricerca integrato di SPIP. Ci&ograve; permetter&agrave;
 di guadagnare spazio sul disco.',
@@ -835,7 +835,7 @@ indicando per esempio che si pu&ograve; selezionare una parola unica per gruppo 
 che alcuni elementi degli articoli siano utilizzati oppure no.
 Serviti dell\'elenco qui sotto per indicare quali elementi rendere disponibili.',
 'texte_crash_base' => 'Se il database &egrave; stato danneggiato, puoi tentare un ripristino automatico.',
-'texte_creer_rubrique' => 'Prima di poter scrivere degli articoli,<BR> devi creare una rubrica.',
+'texte_creer_rubrique' => 'Prima di poter scrivere degli articoli,<br /> devi creare una rubrica.',
 'texte_date_creation_article' => 'DATA DI CREAZIONE DELL\'ARTICOLO:',
 'texte_date_publication_anterieure' => 'DATA DI REDAZIONE ANTERIORE',
 'texte_date_publication_anterieure_nonaffichee' => 'Non visualizzare la data di redazione anteriore.',
@@ -901,9 +901,9 @@ per personalizzare la presentazione degli articoli nei tuoi modelli di layout.',
 'texte_plusieurs_articles' => 'Diversi autori trovati per "@cherche_auteur@":',
 'texte_port_annuaire' => '(Il valore predefinito &egrave; in genere quello adatto.)',
 'texte_presente_plugin' => 'Questa pagina elenca i plugin disponibili sul sito. &Egrave; possibile attivare i plugin necessari selezionando la casella corrispondente.',
-'texte_proposer_publication' => 'Quando l\'articolo &egrave; completo,<br> puoi proporne la pubblicazione.',
+'texte_proposer_publication' => 'Quando l\'articolo &egrave; completo,<br /> puoi proporne la pubblicazione.',
 'texte_proxy' => 'In alcuni casi (intranet, reti protette...),
-pu&ograve; essere necessario utilizzare un <I>proxy HTTP</i> per accedere ai siti in syndication.
+pu&ograve; essere necessario utilizzare un <i>proxy HTTP</i> per accedere ai siti in syndication.
 In questo caso, va indicato l\'indirizzo del server nella forma
 <tt><html>http://proxy:8080</html></tt>. Altrimenti
 questa casella va lasciata vuota.',
@@ -915,10 +915,10 @@ una sola pagina, utilizza piuttosto lo spazio pubblico e clicca sul pulsante &la
 'texte_recapitiule_liste_documents' => 'Questa pagina mostra l\'elenco dei documenti allegati alle rubriche. Per modificare le informazioni di un documento, seguire il link verso la relativa pagina di rubrica.',
 'texte_recuperer_base' => 'Ripara il database',
 'texte_reference_mais_redirige' => 'articolo catalogato nel tuo sito SPIP, ma con reindirizzamento verso un altro URL.',
-'texte_referencement_automatique' => '<b>Inserimento automatizzato in repertorio</b><br>&Egrave; possibile repertoriare rapidamente un sito Web indicandone qui sotto l\'indirizzo URL, o l\'indirizzo del file di syndication. SPIP recuperer&agrave; automaticamente le informazioni riguardanti il sito (titolo, descrizione...).',
-'texte_requetes_echouent' => '<B>Quando alcune query MySQL falliscono
+'texte_referencement_automatique' => '<b>Inserimento automatizzato in repertorio</b><br />&Egrave; possibile repertoriare rapidamente un sito Web indicandone qui sotto l\'indirizzo URL, o l\'indirizzo del file di syndication. SPIP recuperer&agrave; automaticamente le informazioni riguardanti il sito (titolo, descrizione...).',
+'texte_requetes_echouent' => '<b>Quando alcune query MySQL falliscono
 ripetutamente e senza un chiaro motivo, &egrave; possibile
-che sia per colpa del database stesso.</B><p />
+che sia per colpa del database stesso.</b><p />
 MySQL dispone di una funzione di ripristino delle tabelle
 danneggiate inavvertitamente. &Egrave; possibile tentare il ripristino;
 in caso di errore, conservare una copia del messaggio visualizzato,
@@ -958,7 +958,7 @@ a partire dal tuo sito.</i></blockquote>',
 'texte_test_proxy' => 'Per fare una prova di questo proxy, indicare qui l\'indirizzo
 di un sito Web da testare.',
 'texte_titre_02' => 'Titolo:',
-'texte_titre_obligatoire' => '<B>Titolo</B> [Obbligatorio]',
+'texte_titre_obligatoire' => '<b>Titolo</b> [Obbligatorio]',
 'texte_travail_article' => '@nom_auteur_modif@ ha lavorato su questo articolo @date_diff@ minuti fa',
 'texte_travail_collaboratif' => 'Se diversi autori lavorano spesso sullo stesso articolo,
 il sistema pu&ograve; segnalare gli articoli &laquo;aperti&raquo;
@@ -970,8 +970,8 @@ per evitare di generare messaggi d\'avvertimento intempestivi.',
 'texte_utilisation_moteur_syndiques' => 'Quando utilizzi il motore di ricerca integrato di SPIP,
 puoi effettuare le ricerche sui siti e
 gli articoli in syndication
-in due modalit&agrave; diverse. <br>- La pi&ugrave; semplice
-consiste nel ricercare solo nei titoli e nelle descrizioni degli articoli.<br>-
+in due modalit&agrave; diverse. <br />- La pi&ugrave; semplice
+consiste nel ricercare solo nei titoli e nelle descrizioni degli articoli.<br />-
 Un altro metodo, molto pi&ugrave; potente, consente
 a SPIP di ricercare anche nel testo degli articoli in syndication.
 Se inserisci un sito nel repertorio, SPIP effettuer&agrave; la ricerca anche nel testo del sito stesso.',
@@ -992,11 +992,11 @@ in tal caso si pu&ograve; verificare un leggero rallentamento del tuo sito.',
 'titre_cadre_forum_interne' => 'Forum interno',
 'titre_cadre_interieur_rubrique' => 'All\'interno della rubrica',
 'titre_cadre_numero_auteur' => 'AUTORE NUMERO',
-'titre_cadre_signature_obligatoire' => '<B>Firma</B> [Obbligatoria]<BR>',
+'titre_cadre_signature_obligatoire' => '<b>Firma</b> [Obbligatoria]<br />',
 'titre_config_fonctions' => 'Configurazione del sito',
 'titre_config_groupe_mots_cles' => 'Configurazione dei gruppi di parole chiave',
 'titre_configuration' => 'Configurazione del sito',
-'titre_connexion_ldap' => 'Opzioni: <B>La connessione LDAP</b>',
+'titre_connexion_ldap' => 'Opzioni: <b>La connessione LDAP</b>',
 'titre_dernier_article_syndique' => 'Ultimi articoli in syndication',
 'titre_documents_joints' => 'Documenti allegati',
 'titre_evolution_visite' => 'Evoluzione delle visite',

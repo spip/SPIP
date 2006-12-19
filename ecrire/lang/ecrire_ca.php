@@ -203,7 +203,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'icone_creer_rubrique_2' => 'Crear una nova secci&oacute;',
 'icone_ecrire_nouvel_article' => 'Les breus contingudes en aquesta secci&oacute;',
 'icone_envoyer_message' => 'Enviar aquest missatge',
-'icone_evolution_visites' => 'Evoluci&oacute; de les visites<br>@visites@ visites',
+'icone_evolution_visites' => 'Evoluci&oacute; de les visites<br />@visites@ visites',
 'icone_modif_groupe_mots' => 'Modificar aquest grup de paraules',
 'icone_modifier_article' => 'Modificar aquest article',
 'icone_modifier_breve' => 'Modificar aquesta breu',
@@ -399,7 +399,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_message_technique' => 'Missatge t&egrave;cnic:',
 'info_messagerie_interne' => 'Missatgeria interna',
 'info_mise_a_niveau_base' => 'actualitzaci&oacute; de la vostra base de dades MySQL',
-'info_mise_a_niveau_base_2' => '{{Atenci&oacute;!}} Heu instal&middot;lat una versi&oacute; dels fitxers d\'SPIP {anterior} a la que es trobava anteriorment al vostre lloc: correu el risc de perdre la vostra base de dades i que el vostre lloc deixi de funcionar.<br>{{Torneu a instal&middot;lar els fitxers d\'SPIP.}}',
+'info_mise_a_niveau_base_2' => '{{Atenci&oacute;!}} Heu instal&middot;lat una versi&oacute; dels fitxers d\'SPIP {anterior} a la que hi havia anteriorment en aquest lloc: correu el risc de perdre la vostra base de dades i que el vostre lloc deixi de funcionar.<br />{{Torneu a instal&middot;lar els fitxers d\'SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Mode de funcionament per defecte dels f&ograve;rums p&uacute;blics',
 'info_modifier_breve' => 'Modificar la breu:',
 'info_modifier_rubrique' => 'Modificar la secci&oacute;:',
@@ -799,9 +799,9 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr&
 'texte_compresse_ou_non' => '(a&ccedil;&ograve; pot ser comprimit o no)',
 'texte_compte_element' => ' @count@ element',
 'texte_compte_elements' => ' @count@ elements',
-'texte_config_groupe_mots_cles' => 'Desitja activar la configuraci&oacute; avan&ccedil;ada de les paraules clau,
- indicant per exemple que es pot seleccionar un mot &uacute;nic
- per grup, quin grup &eacute;s important...?',
+'texte_config_groupe_mots_cles' => 'Voleu activar la configuraci&oacute; avan&ccedil;ada de les paraules clau,
+  indicant per exemple que es pot seleccionar un mot &uacute;nic
+  per grup, quin grup &eacute;s important...?',
 'texte_connexion_mysql' => 'Consulteu les informacions aportades pel vostre prove&iuml;dor d\'hostatge: heu de trobar-hi, si el vostre prove&iuml;dor d&oacute;na suport MyQSL, els codis de connexi&oacute; al servidor MySQL.',
 'texte_contenu_article' => ' (Contingut de l\'article en poques paraules.)',
 'texte_contenu_articles' => 'Segons l\'esquelet triat per la vostra web, podeu decidir
@@ -869,7 +869,7 @@ enriquir la navegaci&oacute; del vostre lloc, incl&uacute;s utilitzar aquestes p
 'texte_plusieurs_articles' => 'Diversos autors trobats per  "@cherche_auteur@":',
 'texte_port_annuaire' => ' (El valor indicat per defecte es en general convenient.)',
 'texte_presente_plugin' => 'Aquesta p&agrave;gina llista els connectors disponibles al vostre lloc Web. Podeu activar els connectors marcant la casella corresponent.',
-'texte_proposer_publication' => 'Despr&eacute;s que un article est&agrave; acabat, <br> es pot proposar la seua publicaci&oacute;.',
+'texte_proposer_publication' => 'Quan un article est&agrave; acabat, <br /> podeu proposar la seva publicaci&oacute;.',
 'texte_proxy' => 'En alguns casos (intranet, xarxes protegides...),
   pot ser necessari utilitzar un <i>proxy HTTP</i> per enlla&ccedil;ar amb els llocs sindicats.
   En aquest cas, indiqueu a continuaci&oacute;  la vostra adre&ccedil;a, baix la forma
@@ -881,7 +881,7 @@ enriquir la navegaci&oacute; del vostre lloc, incl&uacute;s utilitzar aquestes p
 'texte_recapitiule_liste_documents' => 'Aquesta p&agrave;gina recull un llistat de documents que hi ha a cada secci&oacute; de la seua web. Per modificar la informaci&oacute; de cada document premer el enlla&ccedil; cap a la p&agrave;gina de la seua secci&oacute;.',
 'texte_recuperer_base' => 'Reparar la base de dades',
 'texte_reference_mais_redirige' => 'article referenciat a la web SPIP, pero redirigit cap a un altre URL.',
-'texte_referencement_automatique' => '<b>Referenciament automatitzat d\'un lloc Web</b><br>Podeu referenciar r&agrave;pidament un lloc Web nom&eacute;s indicant aqu&iacute; baix l\'adre&ccedil;a URL desitjada, o l\'adre&ccedil;a del seu fitxer de sindicaci&oacute;. SPIP recuperar&agrave; autom&agrave;ticament les informacions pel que fa a aquest lloc Web (t&iacute;tol, descripci&oacute;...).',
+'texte_referencement_automatique' => '<b>Referenciament automatitzat d\'un lloc Web</b><br />Podeu referenciar r&agrave;pidament un lloc Web nom&eacute;s indicant aqu&iacute; baix l\'adre&ccedil;a URL desitjada, o l\'adre&ccedil;a del seu fitxer de sindicaci&oacute;. SPIP recuperar&agrave; autom&agrave;ticament les informacions pel que fa a aquest lloc Web (t&iacute;tol, descripci&oacute;...).',
 'texte_requetes_echouent' => '<b>Quan algunes peticions MySQL fracassen sistem&agrave;ticament i sense ra&oacute; aparent, &eacute;s possible que sigui per culpa de la pr&ograve;pia base de dades.</b><p>
   MySQL disposa d\'una facultat de reparaci&oacute; de les seves taules quan aquestes han estat deteriorades per accident. Aqu&iacute; podeu provar aquesta reparaci&oacute;; en cas de frac&agrave;s, conserveu una c&ograve;pia del resultat, que possiblement cont&eacute; indicis de quines coses no funcionen...<p>
   Si el problema persisteix, poseu-vos en contacte amb el vostre prove&iuml;dor d\'hostatge.<p>',
@@ -921,7 +921,7 @@ que es vol testar.',
 Aquesta opci&oacute; est&agrave; desactivada per defecte amb la finalitat d\'evitar mostrar  missatges d\'advert&egrave;ncia intempestius.',
 'texte_trop_resultats_auteurs' => 'Massa resultats "@cherche_auteur@" ; si us plau, fa&ccedil;a una recerca m&eacute;s acurada.',
 'texte_unpack' => 'desc&agrave;rrega de la darrera versi&oacute;',
-'texte_utilisation_moteur_syndiques' => 'Quan utilitzeu el motor de cerca integrat a l\'SPIP, podeu efectuar les cerques sobre els llocs i els articles sindicats de dues maneres diferents.<br>- La m&eacute;s simple consisteix en buscar &uacute;nicament dins dels t&iacute;tols i les descripcions dels articles. <br>- Un segon m&egrave;tode, molt m&eacute;s potent, permet a l\'SPIP buscar tamb&eacute; dins dels texts dels llocs referenciats. Si referencieu un lloc Web, l\'SPIP efectuar&agrave; llavors la cerca dins del text d\'aquest lloc.',
+'texte_utilisation_moteur_syndiques' => 'Quan utilitzeu el motor de cerca integrat a l\'SPIP, podeu efectuar les cerques sobre els llocs i els articles sindicats de dues maneres diferents.<br />- La m&eacute;s simple consisteix en buscar &uacute;nicament a dins dels t&iacute;tols i les descripcions dels articles. <br />- Un segon m&egrave;tode, molt m&eacute;s potent, permet a SPIP buscar tamb&eacute; a dins dels texts dels llocs referenciats. Si referencieu un lloc Web, SPIP efectuar&agrave; llavors la cerca a dins del text d\'aquest lloc.',
 'texte_utilisation_moteur_syndiques_2' => 'Aquest metode obliga SPIP a visitar
 regularment les webs referenciades,
 el que pot provocar un lleuger alentiment de la vostra pr&ograve;pia web.',

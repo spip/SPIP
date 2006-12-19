@@ -204,7 +204,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_rubrique_2' => 'Cr&eacute;er une nouvelle rubrique',
 'icone_ecrire_nouvel_article' => 'Les br&egrave;ves contenues dans cette rubrique',
 'icone_envoyer_message' => 'Envoyer ce message',
-'icone_evolution_visites' => '&Eacute;volution des visites<br>@visites@ visites',
+'icone_evolution_visites' => '&Eacute;volution des visites<br />@visites@ visites',
 'icone_modif_groupe_mots' => 'Modifier ce groupe de mots',
 'icone_modifier_article' => 'Modifier cet article',
 'icone_modifier_breve' => 'Modifier cette br&egrave;ve',
@@ -416,7 +416,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_mise_a_niveau_base_2' => '{{Attention!}} Vous avez install&eacute; une version
 		des fichiers SPIP {ant&eacute;rieure} &agrave; celle qui se trouvait
 		auparavant sur ce site: votre base de donn&eacute;es risque d\'&ecirc;tre
-		perdue et votre site ne fonctionnera plus.<br>{{R&eacute;installez les
+		perdue et votre site ne fonctionnera plus.<br />{{R&eacute;installez les
 		fichiers de SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Mode de fonctionnement par d&eacute;faut des forums publics',
 'info_modifier_breve' => 'Modifier la br&egrave;ve :',
@@ -920,7 +920,7 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 'texte_plusieurs_articles' => 'Plusieurs auteurs trouv&eacute;s pour "@cherche_auteur@":',
 'texte_port_annuaire' => '(La valeur indiqu&eacute;e par d&eacute;faut convient g&eacute;n&eacute;ralement.)',
 'texte_presente_plugin' => 'Cette page liste les plugins disponibles sur le site. Vous pouvez activer les plugins n&eacute;cessaires en cochant la case correspondante.',
-'texte_proposer_publication' => 'Lorsque votre article est termin&eacute;,<br> vous pouvez proposer sa publication.',
+'texte_proposer_publication' => 'Lorsque votre article est termin&eacute;,<br /> vous pouvez proposer sa publication.',
 'texte_proxy' => 'Dans certains cas (intranet, r&eacute;seaux prot&eacute;g&eacute;s...),
 		il peut &ecirc;tre n&eacute;cessaire d\'utiliser un <i>proxy HTTP</i> pour atteindre les sites syndiqu&eacute;s.
 		Le cas &eacute;ch&eacute;ant, indiquez ci-dessous son adresse, sous la forme
@@ -935,7 +935,7 @@ recalculer une seule page, passez plut&ocirc;t par l\'espace public et utilisez-
 'texte_recapitiule_liste_documents' => 'Cette page r&eacute;capitule la liste des documents que vous avez plac&eacute;s dans les rubriques. Pour modifier les informations de chaque document, suivez le lien vers la page de sa rubrique.',
 'texte_recuperer_base' => 'R&eacute;parer la base de donn&eacute;es',
 'texte_reference_mais_redirige' => 'article r&eacute;f&eacute;renc&eacute; dans votre site SPIP, mais redirig&eacute; vers une autre URL.',
-'texte_referencement_automatique' => '<b>R&eacute;f&eacute;rencement automatis&eacute; d\'un site</b><br>Vous pouvez r&eacute;f&eacute;rencer rapidement un site Web en indiquant ci-dessous l\'adresse URL d&eacute;sir&eacute;e, ou l\'adresse de son fichier de syndication. SPIP va r&eacute;cup&eacute;rer automatiquement les informations concernant ce site (titre, description...).',
+'texte_referencement_automatique' => '<b>R&eacute;f&eacute;rencement automatis&eacute; d\'un site</b><br />Vous pouvez r&eacute;f&eacute;rencer rapidement un site Web en indiquant ci-dessous l\'adresse URL d&eacute;sir&eacute;e, ou l\'adresse de son fichier de syndication. SPIP va r&eacute;cup&eacute;rer automatiquement les informations concernant ce site (titre, description...).',
 'texte_requetes_echouent' => '<b>Lorsque certaines requ&ecirc;tes MySQL &eacute;chouent
   syst&eacute;matiquement et sans raison apparente, il est possible
   que ce soit &agrave; cause de la base de donn&eacute;es
@@ -997,9 +997,9 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'texte_utilisation_moteur_syndiques' => 'Lorsque vous utilisez le moteur de recherche int&eacute;gr&eacute; 
     &agrave; SPIP, vous pouvez effectuer les recherches sur les sites et
     les articles syndiqu&eacute;s de deux mani&egrave;res
-    diff&eacute;rentes. <br>- La plus
+    diff&eacute;rentes. <br />- La plus
     simple consiste &agrave; rechercher uniquement dans les
-    titres et les descriptifs des articles. <br>-
+    titres et les descriptifs des articles. <br />-
     Une seconde m&eacute;thode, beaucoup plus puissante, permet
     &agrave; SPIP de rechercher &eacute;galement dans le texte des
     sites r&eacute;f&eacute;renc&eacute;s&nbsp;. Si vous

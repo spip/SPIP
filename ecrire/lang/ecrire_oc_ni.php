@@ -44,7 +44,7 @@ la documentacion de SPIP</a>.',
 
 
 // B
-'bouton_acces_ldap' => 'Ajustar l\'acc&egrave;s a LDAP >>',
+'bouton_acces_ldap' => 'Ajustar l\'acc&egrave;s a LDAP',
 'bouton_ajouter' => 'Ajustar',
 'bouton_ajouter_participant' => 'AJUSTAR UN PARTICIPANT&nbsp;:',
 'bouton_annonce' => 'ANON&Ccedil;A',
@@ -76,7 +76,7 @@ la documentacion de SPIP</a>.',
 'bouton_radio_enregistrement_obligatoire' => 'Registrament obligat&ograve;ri (lu utilisaires si devon abonar en donant li sieui adre&ccedil;as e-mail denant de poder postar li contribucions).',
 'bouton_radio_envoi_annonces_adresse' => 'Mandar li anon&ccedil;as a l\'adre&ccedil;a&nbsp;:',
 'bouton_radio_envoi_liste_nouveautes' => 'Mandar la tiera dei noveutats',
-'bouton_radio_moderation_priori' => 'Moderacion <I>a pri&ograve;ri</I> (li contribucions apareisson pas publicament apr&egrave;s validacion dei administrators).',
+'bouton_radio_moderation_priori' => 'Moderacion <i>a pri&ograve;ri</i> (li contribucions apareisson pas publicament apr&egrave;s validacion dei administrators).',
 'bouton_radio_modere_abonnement' => 'sus abonament',
 'bouton_radio_modere_posteriori' => 'moderacion a posteri&ograve;ri',
 'bouton_radio_modere_priori' => 'moderacion a pri&ograve;ri',
@@ -129,7 +129,7 @@ la documentacion de SPIP</a>.',
 'entree_base_donnee_2' => '(Sovent, aquela adre&ccedil;a corresp&ograve;nde a la dau voastre sit, de c&ograve;ups, corresp&ograve;nde a la mencion "localhost", de c&ograve;ups, es laissada vueia completament.)',
 'entree_biographie' => 'Biografia br&egrave;va, en quauqui paraulas.',
 'entree_breve_publiee' => 'Aquela br&egrave;va deu &egrave;stre publicada&nbsp;?',
-'entree_chemin_acces' => '<B>Ficar</b> lo camin d\'acc&egrave;s:',
+'entree_chemin_acces' => '<b>Ficar</b> lo camin d\'acc&egrave;s:',
 'entree_cle_pgp' => 'La voastra clau PGP',
 'entree_contenu_rubrique' => '(Contengut de la rubrica en quauqui paraulas.)',
 'entree_description_site' => 'Descripcion dau sit',
@@ -155,7 +155,7 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 'entree_port_annuaire' => 'Lo n&uacute;mero de poart de l\'annuari',
 'entree_signature' => 'Signatura',
 'entree_texte_breve' => 'T&egrave;xt de la br&egrave;va',
-'entree_titre_obligatoire' => '<B>Titre</B> [Obligat&ograve;ri]<BR>',
+'entree_titre_obligatoire' => '<b>Titre</b> [Obligat&ograve;ri]<br />',
 'entree_url' => 'L\'adre&ccedil;a (URL) dau voastre sit',
 'erreur_plugin_fichier_absent' => 'Fichier assent',
 'erreur_plugin_fichier_def_absent' => 'Fichier de definicion assent',
@@ -191,7 +191,7 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 'icone_creer_rubrique_2' => 'Crear una nov&egrave;la rubrica',
 'icone_ecrire_nouvel_article' => 'Li br&egrave;vas contengudi dins aquela rubrica',
 'icone_envoyer_message' => 'Mandar aqueu messatge',
-'icone_evolution_visites' => 'Evolucion dei visitas<br>@visites@ visitas',
+'icone_evolution_visites' => 'Evolucion dei visitas<br />@visites@ visitas',
 'icone_modif_groupe_mots' => 'Modificar aqueu grop de m&ograve;ts',
 'icone_modifier_article' => 'Modificar aquel article',
 'icone_modifier_breve' => 'Modificar aquela br&egrave;va',
@@ -267,9 +267,9 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 'info_changer_nom_groupe' => 'Cambiar lo nom d\'aqueu grop:',
 'info_chapeau' => 'Cap&egrave;u',
 'info_chapeau_2' => 'Cap&egrave;u&nbsp;:',
-'info_chemin_acces_1' => 'Opcions: <B>camin d\'acc&egrave;s dins l\'annuari</B>',
+'info_chemin_acces_1' => 'Opcions: <b>camin d\'acc&egrave;s dins l\'annuari</b>',
 'info_chemin_acces_2' => 'Dev&egrave;tz a&uuml;ra configurar lo camin d\'acc&egrave;s ai informacions dins l\'annuari.',
-'info_chemin_acces_annuaire' => 'Opcions:<B>camin d\'acc&egrave;s dins l\'annuari',
+'info_chemin_acces_annuaire' => 'Opcions: <b>camin d\'acc&egrave;s dins l\'annuari',
 'info_choix_base' => 'Tresena estapa:',
 'info_classement_1' => '<sup>er</sup> sus @liste@',
 'info_classement_2' => '<sup>nd</sup> sus @liste@',
@@ -278,9 +278,9 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 'info_config_suivi' => 'S\'aquela adre&ccedil;a corresponde a una mailing-list, pod&egrave;tz indicar &ccedil;ai sota l\'adre&ccedil;a dont lu participants au sit si p&ograve;don inscriure. Aquela adre&ccedil;a p&ograve;ut &egrave;stre una URL (per exemple la p&agrave;gina d\'inscripcion a la lista per lo web), &ograve; una adre&ccedil;a e-mail tenent un subjecte especific (per exemple&nbsp;: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Vos pod&egrave;tz abonar a la mailing-list d\'aqueu sit. Receber&egrave;tz per corri&egrave;r electonic li anon&ccedil;as dei articles e br&egrave;vas prepauats a la publication.',
 'info_confirmer_passe' => 'Confirmar aqueu nov&egrave;u m&ograve;t de santa Clara:',
-'info_connexion_base' => 'Segonda estapa&nbsp;: <B>Pr&ograve;va de connexion a la basa</B>',
+'info_connexion_base' => 'Segonda estapa&nbsp;: <b>Pr&ograve;va de connexion a la basa</b>',
 'info_connexion_ldap_ok' => 'La connexion LDAP a capitat.</b><p> Pod&egrave;tz passar a l\'estapa seguenta.',
-'info_connexion_mysql' => 'Promi&egrave;ra estapa:<B>la voastra connexion MySQL</B>',
+'info_connexion_mysql' => 'Promi&egrave;ra estapa: <b>la voastra connexion MySQL</b>',
 'info_connexion_ok' => 'La connexion a capitat.',
 'info_contact' => 'Contact',
 'info_contenu_articles' => 'Contengut dei articles',
@@ -288,13 +288,13 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 'info_creation_paragraphe' => '(Per crear de paragrafs, laissatz de linhas vueii, tot simplament)',
 'info_creation_rubrique' => 'Denant de poder escriure d\'articles,<br /> dev&egrave;tz crear aumens una rubrica.<br />',
 'info_creation_tables' => 'Quatren estapa&nbsp;: <b>Creacion dei taulas de la basa</b>',
-'info_creer_base' => '<B>Crear</B> una basa n&ograve;va de donadas:',
+'info_creer_base' => '<b>Crear</b> una basa n&ograve;va de donadas:',
 'info_dans_groupe' => 'Dins lo grop:',
 'info_dans_rubrique' => 'Dins la rubrica:',
 'info_date_publication_anterieure' => 'Data anteriora de redaccion:',
 'info_date_referencement' => 'DATA DE REFEREN&Ccedil;AMENT D\'AQUEU SIT&nbsp;:',
 'info_delet_mots_cles' => 'Av&egrave;tz demandat de suprimir lo m&ograve;t clau
-<B>@titre_mot@</B> (@type_mot@). Aqueu m&ograve;t clau es ligat a <b>@texte_lie@</b>. Dev&egrave;tz confirmar aquela decision&nbsp;:',
+<b>@titre_mot@</b> (@type_mot@). Aqueu m&ograve;t clau es ligat a <b>@texte_lie@</b>. Dev&egrave;tz confirmar aquela decision&nbsp;:',
 'info_derniere_etape' => 'Darriera estapa: es acabat!',
 'info_derniere_syndication' => 'La darriera sindicacion d\'aqueu sit si fagu&egrave;t lo',
 'info_derniers_articles_publies' => 'Lu voastres darriers articles publicats en linha',
@@ -481,8 +481,8 @@ I son d\'aubergadors que desactivan lo mandad&iacute;s d\'e-mails desp&iacute; l
 'info_redirection' => 'Redireccion',
 'info_referencer_doc_distant' => 'Referen&ccedil;ar un document sus l\'internet&nbsp;:',
 'info_refuses' => 'Lu voastres articles refudats',
-'info_reglage_ldap' => 'Opcions: <B>Reglatge de l\'importacion LDAP</B>',
-'info_renvoi_article' => '<B>Redireccion.</B> Aquel article torna mandar a la p&agrave;gina:',
+'info_reglage_ldap' => 'Opcions: <b>Reglatge de l\'importacion LDAP</b>',
+'info_renvoi_article' => '<b>Redireccion.</b> Aquel article torna mandar a la p&agrave;gina:',
 'info_reserve_admin' => 'Solets lu administrators p&ograve;don modificar aquela adre&ccedil;a.',
 'info_restauration_sauvegarde' => 'restauracion de la sauvagarda @archive@',
 'info_restreindre_rubrique' => 'Restr&eacute;nher la gestion a la rubrica:',
@@ -774,7 +774,7 @@ una color indica lo sieu estat:',
  una revista de premsa, un calendier d\'aveniments...',
 'texte_choix_base_1' => 'Chausiss&egrave;tz la voastra basa:',
 'texte_choix_base_2' => 'Lo servidor MySQL conten mai d\'una basa de donadas.',
-'texte_choix_base_3' => '<B>Chausiss&egrave;tz</b> &ccedil;ai sota la que lo voastre aubergador vos a atribuida:',
+'texte_choix_base_3' => '<b>Chausiss&egrave;tz</b> &ccedil;ai sota la que lo voastre aubergador vos a atribuida:',
 'texte_commande_vider_tables_indexation' => 'Utilisatz aquela comanda per vuar li taulas d\'indexacion utilisadi per lo motor de recerca integrat a SPIP. Aqu&ograve; permetr&agrave; de ganhar d\'espaci disc.',
 'texte_comment_lire_tableau' => 'Lo reng de l\'article,
 dins lo classament per popularitat, es indicat dins lo marge; la popularitat de l\'article 
@@ -784,7 +784,9 @@ qu\'apareisse quora la rateta passa sus lo titre.',
 'texte_compresse_ou_non' => '(Aquesto p&ograve;ut &egrave;stre comprimit &ograve; non)',
 'texte_compte_element' => '@count@ element',
 'texte_compte_elements' => '@count@ elements',
-'texte_config_groupe_mots_cles' => 'Desiratz d\'activar la configuracion avan&ccedil;ada dei m&ograve;ts claus, en indicant per exemple que si p&ograve;ut seleccionar un m&ograve;t unic per grop, qu\'un grop es important... ?',
+'texte_config_groupe_mots_cles' => 'Desiratz d\'activar la configuracion avan&ccedil;ada dei m&ograve;ts claus,
+ en indicant per exemple que si p&ograve;ut seleccionar un m&ograve;t unic
+ per grop, qu\'un grop es important...&nbsp;?',
 'texte_connexion_mysql' => 'Consultatz li informacions que lo voastre aubergador fornisse: i dev&egrave;tz trobar, se lo voastre aubergador supoarta MySQL, lu c&ograve;des de connexion au servidor MySQL.',
 'texte_contenu_article' => '(Contengut de l\'article en quaucu mots.)',
 'texte_contenu_articles' => 'Segon la maqueta que lo voastre site a adoptada, pod&egrave;tz decidir
@@ -793,7 +795,7 @@ qu\'apareisse quora la rateta passa sus lo titre.',
 'texte_crash_base' => 'Se la voastra basa de donadas s\'es
  encalada, pod&egrave;tz assajar una reparacion
  automatica.',
-'texte_creer_rubrique' => 'Denant de poder escriure d\'articles,<BR> dev&egrave;tz crear una rubrica.',
+'texte_creer_rubrique' => 'Denant de poder escriure d\'articles,<br /> dev&egrave;tz crear una rubrica.',
 'texte_date_creation_article' => 'DATA DE CREACION DE L\'ARTICLE:',
 'texte_date_publication_anterieure' => 'Data de redaccion anteriora&nbsp;:',
 'texte_date_publication_anterieure_nonaffichee' => 'Faire pas apar&eacute;isser de data de redaccion anteriora.',
@@ -865,9 +867,9 @@ qu\'apareisse quora la rateta passa sus lo titre.',
 'texte_plusieurs_articles' => 'Mantun autor trobat per "@cherche_auteur@":',
 'texte_port_annuaire' => '(La valor predefinida conven generalament.)',
 'texte_presente_plugin' => 'Aquela p&agrave;gina lista lu ajustons disponibles sus lo site. Pod&egrave;tz activar lu ajustons necessaris en marcant la casa correspondenta.',
-'texte_proposer_publication' => 'Quora auretz acabat lo voastre article,<br> podretz prepauar que sigue publicat.',
+'texte_proposer_publication' => 'Quora auretz acabat lo voastre article,<br /> podretz prepauar que sigue publicat.',
 'texte_proxy' => 'Dins certans cas (intranet, rets protegidi...),
-  si p&ograve;ut que cauga utilisar un <I>proxy HTTP</i> per at&eacute;nher lu sits sindicats.
+  si p&ograve;ut que cauga utilisar un <i>proxy HTTP</i> per at&eacute;nher lu sits sindicats.
   En aqueu cas, marcatz &ccedil;ai sota la sieua adre&ccedil;a, sota la forma
   <tt><html>http://proxy:8080</html></tt>. En generau,
   laissaretz vueia aquela casa.',
@@ -880,7 +882,7 @@ tornar calcular solament una p&agrave;gina, passatz pusl&egrave;u per l\'espaci 
 'texte_recapitiule_liste_documents' => 'Aquesta p&agrave;gina recapitula la tiera dei documents qu\'av&egrave;tz pla&ccedil;ats dins li rubricas. Per modificar li informacions de cada document, seguiss&egrave;tz lo ligam vers la p&agrave;gina de la sieua rubrica.',
 'texte_recuperer_base' => 'Reparar la basa de donadas',
 'texte_reference_mais_redirige' => 'article referen&ccedil;at dins lo voastre sit SPIP, ma redirigit vers una autra URL.',
-'texte_referencement_automatique' => '<b>Referen&ccedil;ament automatisat d\'un site</b><br>Pod&egrave;tz referen&ccedil;ar l&egrave;u-l&egrave;u un site web en indicant &ccedil;ai sota l\'adre&ccedil;a URL desirada, &ograve; l\'adre&ccedil;a dau sieu fichier de sindicacion. SPIP agantar&agrave; automaticament li informacions que concernisson aqueu site (titre, descripcion...).',
+'texte_referencement_automatique' => '<b>Referen&ccedil;ament automatisat d\'un site</b><br />Pod&egrave;tz referen&ccedil;ar l&egrave;u-l&egrave;u un site web en indicant &ccedil;ai sota l\'adre&ccedil;a URL desirada, &ograve; l\'adre&ccedil;a dau sieu fichier de sindicacion. SPIP agantar&agrave; automaticament li informacions que concernisson aqueu site (titre, descripcion...).',
 'texte_requetes_echouent' => '<b>Quora certani requistas MySQL s\'encalan
   sistematicament e sensa rason aparenta, si p&ograve;u
   qu\'aqu&ograve; venga de la basa de donadas.  </b><p />
@@ -941,9 +943,9 @@ s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.'
 'texte_utilisation_moteur_syndiques' => 'Quora utilisatz lo motor de recerca integrat 
     a SPIP, pod&egrave;tz far li recercas sus lu sites e
     articles sindicats de doi manieras
-    diferenti. <br>- Lo mai
+    diferenti. <br />- Lo mai
     simple consiste da recercar ren que dins lu
-    titres e descriptius dei articles. <br>-
+    titres e descriptius dei articles. <br />-
     La segonda maniera, ben mai potent, permete
     a SPIP de recercar tanben dins lo t&egrave;xt dei
     sites referen&ccedil;ats. Se referen&ccedil;atz
@@ -967,11 +969,11 @@ s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.'
 'titre_cadre_forum_interne' => 'Forum interne',
 'titre_cadre_interieur_rubrique' => 'Dintre de la rubrica',
 'titre_cadre_numero_auteur' => 'AUTOR N&Uacute;MERO',
-'titre_cadre_signature_obligatoire' => '<B>Signatura</B> [Obligada]<BR>',
+'titre_cadre_signature_obligatoire' => '<b>Signatura</b> [Obligada]<br />',
 'titre_config_fonctions' => 'Configuracion dau sit',
 'titre_config_groupe_mots_cles' => 'Configuracion dei grops de m&ograve;ts claus',
 'titre_configuration' => 'Configuracion dau sit',
-'titre_connexion_ldap' => 'Opcions : <B>La voastra connexion LDAP</B>',
+'titre_connexion_ldap' => 'Opcions : <b>La voastra connexion LDAP</b>',
 'titre_dernier_article_syndique' => 'Darriers articles sindicats',
 'titre_documents_joints' => 'Documents jonchs',
 'titre_evolution_visite' => 'Evolucion dei visitas',

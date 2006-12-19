@@ -290,7 +290,7 @@ Merc&eacute; de la voastra participacion
 'forum_par_auteur' => 'de @auteur@',
 'forum_poste_par' => 'Messatge postat@parauteur@ a la seguida de l\'article &laquo; @titre@ &raquo;.',
 'forum_probleme_database' => 'Probl&egrave;ma de basa de donadas, lo voastre messatge es pas estat registrat.',
-'forum_qui_etes_vous' => '<B>Cu si&egrave;tz ?</B> (opcionau)',
+'forum_qui_etes_vous' => '<b>Cu si&egrave;tz ?</b> (opcionau)',
 'forum_texte' => 'T&egrave;xt dau voastre messatge :',
 'forum_titre' => 'Titre :',
 'forum_titre_erreur' => 'Error...',
@@ -329,6 +329,7 @@ Merc&eacute; de la voastra participacion
 'icone_doc_rubrique' => 'Documents dei rubricas',
 'icone_ecrire_article' => 'Escriure un nov&egrave;l article',
 'icone_edition_site' => 'Edicion',
+'icone_evolution_visites_2' => '<NEW><NEW><NEW><pLUS_UTILISE>',
 'icone_forum_administrateur' => 'Forum dei administrators',
 'icone_forum_suivi' => 'Seguit dei forums',
 'icone_gestion_langues' => 'Gestion dei lengas',
@@ -337,6 +338,7 @@ Merc&eacute; de la voastra participacion
 'icone_interface_simple' => 'Interfa&ccedil;a simplificada',
 'icone_maintenance_site' => 'Mantenen&ccedil;a dau sit',
 'icone_messagerie_personnelle' => 'Messatgeria personala',
+'icone_modifier_informations_personnelles' => '<pLUS_UTILISE>Modificar li voastri informacions personali',
 'icone_mots_cles' => 'M&ograve;ts claus',
 'icone_nouvelle_breve' => 'Escriure una nov&egrave;la br&egrave;va',
 'icone_repartition_actuelle' => 'Afichar la reparticion actuala',
@@ -418,7 +420,7 @@ Merc&eacute; de la voastra participacion
 'info_erreur_requete' => 'Error dins la requesta',
 'info_erreur_squelette2' => 'Minga d\'esqueleta <b>@fichier@</b> es disponibla...',
 'info_erreur_systeme' => 'Error sist&egrave;ma (errno @errsys@)',
-'info_erreur_systeme2' => 'Bessai lo disc dur es plen, &ograve; la basa de donadas degalhada.<br>
+'info_erreur_systeme2' => 'Bessai lo disc dur es plen, &ograve; la basa de donadas degalhada. <br />
  <font color=\'red\'>Provatz de <a href=\'@script@\'>reparar la basa</a>,
  &ograve; contactatz lo voastre albergador.</font>',
 'info_fini' => 'Es acabat&nbsp;!',
@@ -427,7 +429,7 @@ Merc&eacute; de la voastra participacion
 'info_grand_ecran' => 'Grand ecran',
 'info_image_aide' => 'AJUDA',
 'info_image_process_titre' => 'Met&ograve;de de fabricacion dei vinhetas',
-'info_impossible_lire_page' => '<B>Error !</B> Impossible de li&egrave;ger la p&agrave;gina <tt><html>@test_proxy@</html></tt> a trav&egrave;rs lo proxy <tt>',
+'info_impossible_lire_page' => '<b>Error !</b> Impossible de li&egrave;ger la p&agrave;gina <tt><html>@test_proxy@</html></tt> a trav&egrave;rs lo proxy <tt>',
 'info_inclusion_directe' => 'Inclusion dir&egrave;cta&nbsp;:',
 'info_inclusion_vignette' => 'Inclusion de la vinheta:',
 'info_installation_systeme_publication' => 'Installacion dau sistema de publicacion...',
@@ -489,6 +491,8 @@ Merc&eacute; de la voastra participacion
 'info_publie_1' => '[@nom_site_spip@] PUBLICA: @titre@',
 'info_publie_2' => 'Article publicat
 ----------------',
+'info_question_referers' => '<NEW><NEW><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Votre site doit-il conserver les <i>referers</i>
+		(adresses des liens externes menant &agrave; votre site)&nbsp;?',
 'info_rechercher' => 'Recercar',
 'info_rechercher_02' => 'Recercar:',
 'info_remplacer_vignette' => 'Rempla&ccedil;ar la vinheta predefinida per un l&ograve;go personalisat&nbsp;:',
@@ -511,6 +515,7 @@ Merc&eacute; de la voastra participacion
 'info_telecharger' => 'Telecargar desp&iacute; lo voastre ordinator&nbsp;:',
 'info_telecharger_nouveau_logo' => 'Telecargar un nov&egrave;u l&ograve;go&nbsp;:',
 'info_telecharger_ordinateur' => 'Telecargar desp&iacute; lo voastre ordinator&nbsp;:',
+'info_tous_redacteur' => '<pLUS_UTILISE>Anoncis a toi lu redactors ',
 'info_tous_resultats_enregistres' => '[toi lu resultats son registrats]',
 'info_tout_afficher' => 'Far par&eacute;isser tot',
 'info_travaux_texte' => 'Aqueu sit es pas encara configurat. Tornatz plus tard...',
@@ -527,6 +532,10 @@ Merc&eacute; de la voastra participacion
 'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'Li voastri n&ograve;tas de renembran&ccedil;a ',
 'item_breve_proposee' => 'Br&egrave;va prepauada',
+'item_gerer_referers' => '<NEW><NEW><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>G&eacute;rer les referers',
+'item_non_gerer_referers' => '<NEW><NEW><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas g&eacute;rer les referers',
+'item_non_utiliser_moteur_recherche_forum' => '<NEW><NEW><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas indexer les forums',
+'item_utiliser_moteur_recherche_forum' => '<NEW><NEW><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Indexer les forums',
 
 
 // L
@@ -672,19 +681,20 @@ e vos tornar connectar au sit.
 'texte_actualite_site_1' => 'Quora seretz familharisat/ada emb l\'interfa&ccedil;a, podretz clicar sus &laquo;',
 'texte_actualite_site_2' => 'interfa&ccedil;a completa',
 'texte_actualite_site_3' => '&raquo; per aver mai de possibilitats.',
+'texte_choix_langue_defaut' => '<pLUS_UTILISE>Vorgatz chausir &ccedil;ai sota la lenga predefinida dau voastre sit, e tanben li lengas que si prepauar&agrave; ai redactors.',
 'texte_creation_automatique_vignette' => 'La creacion automatica de vinhetas de previsualisacion es activada sus aqueu sit. S\'installatz a partir d\'aqueu formulari d\'imatges au(ai) format(s) @gd_formats@, ser&agrave;n acompanhats d\'una vinheta d\'una talha maximala de @taille_preview@ pix&egrave;ls.',
 'texte_documents_associes' => 'Li documents seguents son associats a l\'article, ma son pas estats drech inserits. Segon la compaginacion dau sit public, podran apar&eacute;isser sota forma de documents jonchs.',
 'texte_erreur_mise_niveau_base' => 'Error de basa de donadas pendent la mesa a niv&egrave;u. L\'imatge <b>@fichier@</b> es pas passat (article @id_article@).
   Notatz ben aquela referen&ccedil;a, tornatz ensajar la mesa a niv&egrave;u, e verificatz pi que lu imatges apar&eacute;isson encara dins lu articles.',
 'texte_inc_auth_1' => 'Si&egrave;tz identificat/ada coma
-   <B>@auth_login@</b>, ma aqueu login existisse pas &ograve; pas plus mai dins la basa.
+   <b>@auth_login@</b>, ma aqueu login existisse pas &ograve; pas plus mai dins la basa.
   Temptatz de vos',
 'texte_inc_auth_2' => 'tornar connectar',
 'texte_inc_auth_3' => ', apr&egrave;s aver eventualament quitat pi
   tornat lan&ccedil;ar lo voastre navigador.',
 'texte_inc_config' => 'Li modificacions fachi dins aquesti p&agrave;ginas influen&ccedil;an bravament lo
  foncionament dau voastre sit. Vos aconselham de pas i intervenir tant que si&egrave;tz pas
- acostumat/ada au foncionament dau sistema SPIP. <p align="justify"><b>
+ acostumat/ada au foncionament dau sistema SPIP. <br /><br /><b>
  En generau, si conselha foart
  de laissar la carga d\'aquesti p&agrave;ginas au webm&egrave;stre principau dau voastre sit.</b>',
 'texte_inc_meta_1' => 'Lo sist&egrave;ma a rescontrat un error dins l\'escritura dau fichi&egrave;r <code>@fichier@</code>. Vorgatz, coma administrator/triz dau sit,',
