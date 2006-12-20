@@ -66,7 +66,7 @@ function inc_formater_article_dist($row)
 	. $dir_lang
 	. " style=\"display:block;\">"
 	. (!$logo ? '' :
-	   ("<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>" . $logo . "</div>"))
+	   ("<span style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>" . $logo . "</span>"))
 	. (acces_restreint_rubrique($id_rubrique) ? $img_admin : '')
 	. typo($titre)
 	. (!($afficher_langue AND $lang != $GLOBALS['meta']['langue_site']) ? '' :

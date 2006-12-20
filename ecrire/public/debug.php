@@ -474,10 +474,8 @@ function debug_dumpfile ($texte, $fonc, $type) {
 // Fonction pour l'espace de redaction, appeler par ecrire/index.php
 
 // http://doc.spip.org/@debug_script
-function debug_script ($fonc) {
+function debug_script ($t) {
 
-	$sax = charger_fonction($GLOBALS['xml_indent'], 'inc');
-	$t = $sax($fonc, true);
 	if (!isset($GLOBALS['xhtml_error']))
 	  echo $t;
 	else {

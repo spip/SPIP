@@ -10,21 +10,20 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
+include_spip('inc/sax');
 
 define('_REGEXP_DOCTYPE',
 	'/^\s*(<[?][^>]*>\s*)?<!DOCTYPE\s+(\w+)\s+(\w+)\s*([^>]*)>/');
 
-
-// http://doc.spip.org/@inc_validateur_dist
-function inc_validateur_dist($data)
+function validateur($data)
 {
 	global $phraseur_xml;
 
-
 	if (!preg_match(_REGEXP_DOCTYPE, $data, $r))
 		return array();
+
 	list(,,$topelement, $avail,$suite) = $r;
 
 	if (!preg_match('/^"([^"]*)"\s*(.*)$/', $suite, $r))
@@ -93,7 +92,7 @@ function inc_validateur_dist($data)
 	    asort($v);
 	    $phraseur_xml->peres[$k] = $v;
 	  } 
-	} 
+	}
 	$phraseur_xml->elements = $res;
 
 	$res = array();
@@ -222,5 +221,79 @@ function validerAttribut($parser, $name, $val, $bal)
 			$phraseur_xml->idrefs[] = array($val, xml_get_current_line_number($parser), xml_get_current_column_number($parser));
 		}
 	}
+}
+
+class ValidateurXML {
+
+function debutElement($phraseur, $name, $attrs)
+{ 
+
+	validerElement($phraseur, $name, $attrs);
+	xml_debutElement($phraseur, $name, $attrs);
+	foreach ($attrs as $k => $v) {
+		validerAttribut($phraseur, $k, $v, $name);
+	}
+}
+
+function finElement($phraseur, $name)
+{
+	global $phraseur_xml;
+ 	xml_finElement($phraseur,
+		       $name,
+		       $phraseur_xml->elements[$name][0] == 'EMPTY');
+}
+
+function textElement($phraseur, $data)
+{	xml_textElement($phraseur, $data);}
+
+function PiElement($phraseur, $target, $data)
+{	xml_PiElement($phraseur, $target, $data);}
+
+function defautElement($phraseur, $data)
+{	xml_defautElement($phraseur, $data);}
+
+function phraserTout($phraseur, $data)
+{ 
+	validateur($data);
+	if (isset($this->entites['HTMLsymbol']))
+		$data = unicode2charset(html2unicode($data, true));
+
+
+	xml_parsestring($phraseur, $data);
+
+	if (!$phraseur_xml->err) {
+	  foreach ($this->idrefs as $idref) {
+		list($nom, $ligne, $col) = $idref;
+		if (!isset($phraseur_xml->ids[$nom]))
+		      $this->err[]= " <p><b>$nom</b>"
+		      . _L(" ID inconnu ")
+		      . $ligne
+		      . " "
+		      . $col;
+	  }
+	}
+
+	return !$this->err ?  $this->res : join('<br />', $this->err) . '<br />';
+}
+
+ var $depth = "";
+ var $res = "";
+ var $contenu = array();
+ var $ouvrant = array();
+ var $reperes = array();
+ var $elements = array();
+ var $peres = array();
+ var $entites = array();
+ var $attributs = array();
+ var $ids = array();
+ var $idrefs = array();
+ var $err = array();
+}
+
+function inc_valider_xml_dist($page, $apply=false)
+{
+	$sax = charger_fonction('sax', 'inc');
+	return $sax($page, $apply, $GLOBALS['phraseur_xml'] = new ValidateurXML());
+
 }
 ?>
