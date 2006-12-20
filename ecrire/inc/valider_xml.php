@@ -148,16 +148,15 @@ function validerElement($parser, $name, $attrs)
 	      $pere = $r[1];
 	      if (isset($phraseur_xml->elements[$pere]))
 		if (!@in_array($name, $phraseur_xml->elements[$pere])) {
-		  $bons_peres = @join ('</b>, <b>', $phraseur_xml->peres[$name]);
-		  $phraseur_xml->err[]= " <b>$name</b>" 
-		    . _L(" n'est pas un fils de ")
-		    . '<b>'
-		    .  $pere
-		    . '</b>'
-		    . (!$bons_peres ? '' 
-		       : (_L( '<p style="font-size: 80%"> mais de <b>') . $bons_peres . '</b></p>'))
-		    .  coordonnees_erreur($parser);
-		}
+	          $bons_peres = @join ('</b>, <b>', $phraseur_xml->peres[$name]);
+	          $phraseur_xml->err[]= " <b>$name</b>"
+	            . _L(" n'est pas un fils de ")
+	            . '<b>'
+	            .  $pere
+	            . '</b>'
+	            . (!$bons_peres ? ''
+	               : (_L( '<p style="font-size: 80%"> mais de <b>') . $bons_peres . '</b></p>'));
+		    }
 	    }
 	  }
 	  if (isset($phraseur_xml->attributs[$name])) {
@@ -184,12 +183,20 @@ function validerAttribut($parser, $name, $val, $bal)
 		return ;
 		
 	$a = $phraseur_xml->attributs[$bal];
-	if (!isset($a[$name]))
+	if (!isset($a[$name])) {
+		$bons = join(', ',array_keys($a));
+		if ($bons)
+		  $bons = " title=' " .
+		    _L('attributs connus: ') .
+		    $bons .
+		    "'";
+		$bons .= " style='font-weight: bold'";
 		$phraseur_xml->err[]= " <b>$name</b>"
 		. _L(' attribut inconnu de ')
-		. "<b>$bal</b>"
+		. "<a$bons>$bal</a>"
+		. _L(" (survoler pour voir les corrects)")
 		.  coordonnees_erreur($parser);
-	else{
+	} else{
 		$type =  $a[$name][0];
 		if ($type[0]=='/') {
 		    if (!preg_match($a[$name][0], $val)) {
@@ -261,8 +268,10 @@ function defautElement($phraseur, $data)
 // http://doc.spip.org/@phraserTout
 function phraserTout($phraseur, $data)
 { 
+	global $phraseur_xml;
+
 	validateur($data);
-	if (isset($this->entites['HTMLsymbol']))
+	if (isset($phraseur_xml->entites['HTMLsymbol']))
 		$data = unicode2charset(html2unicode($data, true));
 
 
@@ -272,7 +281,7 @@ function phraserTout($phraseur, $data)
 	  foreach ($this->idrefs as $idref) {
 		list($nom, $ligne, $col) = $idref;
 		if (!isset($phraseur_xml->ids[$nom]))
-		      $this->err[]= " <p><b>$nom</b>"
+		      $phraseur_xml->err[]= " <p><b>$nom</b>"
 		      . _L(" ID inconnu ")
 		      . $ligne
 		      . " "
