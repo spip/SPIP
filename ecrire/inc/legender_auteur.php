@@ -43,8 +43,7 @@ function legender_auteur_saisir($id_auteur, $auteur, $mode, $echec='', $redirect
 		. "<p>"
 		.  _T('info_recommencer')
 		.  "</p></div>\n"
-		. fin_cadre_relief(true)
-		.  "\n<p>";
+		. fin_cadre_relief(true);
 	}
 
 	$setmail = ($connect_statut == "0minirezo"
@@ -60,17 +59,17 @@ function legender_auteur_saisir($id_auteur, $auteur, $mode, $echec='', $redirect
 	. entites_html($auteur['nom'])
 	. "\" "
 	. (!$mode ? '' : ' onfocus="if(!antifocus){this.value=\'\';antifocus=true;}"')
-	. " />\n<p>"
+	. " />\n<br />"
 	. "<b>"._T('entree_adresse_email')."</b>";
 
 	if ($setmail) {
 		$corps .= "<br /><input type='text' name='email' class='formo' size='40' value=\""
 		. entites_html($auteur['email'])
-		. "\"  />\n<p>\n";
+		. "\"  />\n<br />\n";
 	} else {
 		$corps .= "&nbsp;: <tt>".$auteur['email']."</tt>"
 		. "<br />("._T('info_reserve_admin').")\n"
-		. "\n<p>";
+		. "\n<br />";
 	}
 
 	$corps .= "<b>"._T('entree_infos_perso')."</b><br />\n"
@@ -83,7 +82,7 @@ function legender_auteur_saisir($id_auteur, $auteur, $mode, $echec='', $redirect
 	. "<b>"._T('entree_nom_site')."</b><br />\n"
 	. "<input type='text' name='nom_site_auteur' class='forml' value=\""
 	. entites_html($auteur['nom_site'])
-	. "\" size='40' /><p>\n"
+	. "\" size='40' /><br />\n"
 	. "<b>"
 	. _T('entree_url')
 	. "</b><br />\n"
@@ -91,22 +90,21 @@ function legender_auteur_saisir($id_auteur, $auteur, $mode, $echec='', $redirect
 	. entites_html($auteur['url_site'])
 	. "\" size='40' />\n"
 	. fin_cadre_enfonce(true)
-	. "\n<p>";
+	. "\n<br />";
 
 	if ($options == "avancees") {
 		$corps .= debut_cadre_enfonce("cadenas-24.gif", true, "", _T('entree_cle_pgp'))
 		. "<textarea name='pgp' class='forml' rows='4' cols='40'>"
 		. entites_html($auteur['pgp'])
 		. "</textarea>\n"
-		. fin_cadre_enfonce(true)
-		. "\n<p>";
+		. fin_cadre_enfonce(true);
 	} else {
 		$corps .= "<input type='hidden' name='pgp' value=\""
 		. entites_html($auteur['pgp'])
 		. "\" />";
 	}
 
-	$corps .= "\n<p>";
+	$corps .= "\n<br />";
 
 	if ($champs_extra) {
 		include_spip('inc/extra');
@@ -143,17 +141,17 @@ else {
 		.  http_img_pack("warning.gif", _T('info_avertissement'), "width='48' height='48' align='right'")
 		. "<b>"._T('texte_login_precaution')."</b>\n"
 		. fin_cadre_enfonce(true)
-		. "\n<p>";
+		. "\n<br />";
 	}
 
 // Un redacteur n'a pas le droit de modifier son login !
 	if ($edit_login) {
 		$corps .= "<b>"._T('item_login')."</b> "
 		. "<font color='red'>("._T('texte_plus_trois_car').")</font> :<br />\n"
-		. "<input type='text' name='new_login' class='formo' value=\"".entites_html($auteur['login'])."\" size='40' /><p>\n";
+		. "<input type='text' name='new_login' class='formo' value=\"".entites_html($auteur['login'])."\" size='40' /><br />\n";
 	} else {
 		$corps .= "<fieldset style='padding:5'><legend><b>"._T('item_login')."</b><br />\n</legend><br /><b>".$auteur['login']."</b> "
-		. "<i> ("._T('info_non_modifiable').")</i>\n<p>";
+		. "<i> ("._T('info_non_modifiable').")</i>\n<br />";
 	}
 
 // On ne peut modifier le mot de passe en cas de source externe (par exemple LDAP)
@@ -162,17 +160,17 @@ else {
 		. "<font color='red'>("._T('info_plus_cinq_car').")</font> :<br />\n"
 		. "<input type='password' name='new_pass' class='formo' value=\"\" size='40' /><br />\n"
 		. _T('info_confirmer_passe')."<br />\n"
-		. "<input type='password' name='new_pass2' class='formo' value=\"\" size='40'><p>\n";
+		. "<input type='password' name='new_pass2' class='formo' value=\"\" size='40' /><br />\n";
 		$corps .= $res;
 	}
 
 	$corps .= fin_cadre_relief(true)
-	. "<p />"
+	. "<br />"
 	. (!$setconnecte ? '' : apparait_auteur_infos($id_auteur, $auteur))
 	. "\n<div align='right'>"
 	. "\n<input type='submit' class='fondo' value='"
 	. _T('bouton_enregistrer')
-	. "'></div>";
+	. "' /></div>";
 
 	$arg = intval($id_auteur) . '/';
 

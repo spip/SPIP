@@ -731,8 +731,8 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $id
 	if (($GLOBALS['meta']['gerer_trad'] == "oui")) {
 		$url = generer_url_ecrire('memoriser',"id_ajax_fonc=$id_ajax&trad=" . (1-$trad));
 		$texte .= 
-		 "\n<div style='float: $spip_lang_right;'><a href=\"#\"\nonclick=\"return charger_id_url('$url','$tmp_var');\">"
-		. "<img\nsrc='". _DIR_IMG_PACK . $icone ."' alt='$alt' /></a></div>";
+		 "\n<span style='float: $spip_lang_right;'><a href=\"#\"\nonclick=\"return charger_id_url('$url','$tmp_var');\">"
+		. "<img\nsrc='". _DIR_IMG_PACK . $icone ."' alt='$alt' /></a></span>";
 	}
 	$texte .=  '<b>' . $titre_table  . '</b>';
 
@@ -1244,9 +1244,9 @@ function afficher_forum_4($compteur_forum, $nb_forum, $thread)
 		if ($j==$compteur_forum){
 			$fleche="forum-droite$spip_lang_rtl.gif";
 		}
-		$res .= "<td style='width: 10px' valign='top' style='background-color: "
+		$res .= "<td style='width: 10px; background-color: "
 		.  $fond[$j]
-		.  "'>"
+		.  "' valign='top'>"
 		. http_img_pack($fleche, "", "width='10' height='13'")
 		. "</td>\n";
 	}
