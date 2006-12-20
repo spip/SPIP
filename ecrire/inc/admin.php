@@ -55,7 +55,7 @@ function debut_admin($script, $action, $commentaire='') {
 					)),
 			('<br />'
 			 . _T('info_creer_repertoire_2', array('repertoire' => joli_repertoire($dir)))
-			 . bouton_suivant(_T('recharger_page'))))
+			 . bouton_suivant(_T('bouton_recharger_page'))))
 		. "</form>";
 
 	// code volontairement tordu:

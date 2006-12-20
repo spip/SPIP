@@ -120,9 +120,13 @@ function fieldset($legend, $champs = array(), $horchamps='') {
 }
 
 // http://doc.spip.org/@bouton_suivant
-function bouton_suivant($code = 'suivant') {
-	return "\n<span class='suivant'><input id='".$code."' type='submit' class='fondl'\nvalue=\"" .
-		_T("bouton_".$code) .
+function bouton_suivant($code = '') {
+	if($code=='') $code = _T('bouton_suivant');
+	static $suivant = 0;
+	$id = 'suivant'.(($suivant>0)?strval($suivant):'');
+	$suivant +=1;
+	return "\n<span class='suivant'><input id='".$id."' type='submit' class='fondl'\nvalue=\"" .
+		$code .
 		" >>\" /></span>\n";
 }
 
