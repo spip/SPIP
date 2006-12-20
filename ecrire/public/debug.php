@@ -557,9 +557,9 @@ function emboite_texte($texte, $fonc='',$self='')
 			else $encore2[$msg] = $ref = 1;
 			$err .= "<tr  style='background-color: "
 			  . $colors[$i%2]
-			  . "'><td style='text-align: right'>"
+			  . "'><td style='text-align: right'><a href='#debut_err'>"
 			  . $i
-			  . "</td><td  style='text-align: right'>"
+			  . "</a></td><td  style='text-align: right'>"
 			  . "$ref/$encore[$msg]</td>"
 			  . "<td  style='text-align: right'><a href='#L"
 			  . $ligne
@@ -570,8 +570,14 @@ function emboite_texte($texte, $fonc='',$self='')
 			  . "</td><td>$msg</td></tr>\n";
 			$fautifs[]= array($ligne, $col, $i);
 		}
-		return array(ancre_texte($texte, $fautifs),
-			     "<table>$err</table>");
+		$err = "<h2 style='text-align: center'>"
+		.  $i
+		. "<a href='#fin_err'>"
+		.  _L(' erreur(s)')
+		.  "</a></h2><table id='debut_err'>"
+		. $err
+		. " </table><a id='fin_err'></a>";
+		return array(ancre_texte($texte, $fautifs), $err);
 	} else {
 		$fermant = $eregs[2];
 		$ouvrant = $eregs[4];

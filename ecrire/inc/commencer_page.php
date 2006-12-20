@@ -83,19 +83,19 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 	if ($spip_ecran == "large") $largeur = 974; else $largeur = 750;
 
 	$res = pipeline('body_prive',"<body class='$rubrique $sous_rubrique'". _ATTRIBUTES_BODY . '>')
-	. "\n<map name='map_layout' id='map_layout'>"
+	. "\n<div><map name='map_layout' id='map_layout'>"
 	. lien_change_var (self(), 'set_disp', 1, '1,0,18,15', _T('lien_afficher_texte_seul'), "onmouseover=\"changestyle('bandeauvide');\" onfocus=\"changestyle('bandeauvide');\" onblur=\"changestyle('bandeauvide');\"")
 	. lien_change_var (self(), 'set_disp', 2, '19,0,40,15', _T('lien_afficher_texte_icones'), "onmouseover=\"changestyle('bandeauvide');\" onfocus=\"changestyle('bandeauvide');\" onblur=\"changestyle('bandeauvide');\"")
 	. lien_change_var (self(), 'set_disp', 3, '41,0,59,15', _T('lien_afficher_icones_seuls'), "onmouseover=\"changestyle('bandeauvide');\" onfocus=\"changestyle('bandeauvide');\" onblur=\"changestyle('bandeauvide');\"")
-	. "\n</map>";
+	. "\n</map></div>";
 
 	if ($spip_display == "4") {
 		$res .= "<ul>"
-		. "<li><a href='./'>"._T('icone_a_suivre')."</a></li>"
-		. "<li><a href='" . generer_url_ecrire("naviguer") . "'>"._T('icone_edition_site')."</a></li>"
-		. "<li><a href='" . generer_url_ecrire("forum"). "'>"._T('titre_forum')."</a></li>"
-		. "<li><a href='" . generer_url_ecrire("auteurs") . "'>"._T('icone_auteurs')."</a></li>"
-		. "<li><a href=\"".url_de_base()."\">"._T('icone_visiter_site')."</a></li>"
+		. "\n<li><a href='./'>"._T('icone_a_suivre')."</a></li>"
+		. "\n<li><a href='" . generer_url_ecrire("naviguer") . "'>"._T('icone_edition_site')."</a></li>"
+		. "\n<li><a href='" . generer_url_ecrire("forum"). "'>"._T('titre_forum')."</a></li>"
+		. "\n<li><a href='" . generer_url_ecrire("auteurs") . "'>"._T('icone_auteurs')."</a></li>"
+		. "\n<li><a href=\"".url_de_base()."\">"._T('icone_visiter_site')."</a></li>"
 		. "</ul>";
 
 		return $res;
