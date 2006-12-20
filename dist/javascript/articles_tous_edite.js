@@ -32,10 +32,10 @@ var recall;
 jQuery.fn.deplie = function(){
 	$(this).show();
 	$(this).siblings('img.expandImage').eq(0).attr('src',img_deplierbas);
-	$(this).children('a.ajax').each(function(){
+	$(this).children('li').children('a.ajax').each(function(){
 		$(this).before("<div>"+ajax_image_searching+"</div>");
-		var id = $(this).parent().id();
-		$(this).parent().load($(this).href()+"&var_ajaxcharset=utf-8",function(){$("#"+id).set_expandImage().set_droppables();jQuery.recallDroppables();});
+		var id = $(this).parent().parent().id();
+		$(this).parent().parent().load($(this).href()+"&var_ajaxcharset=utf-8",function(){$("#"+id).set_expandImage().set_droppables();jQuery.recallDroppables();});
 	});
 	recall = true;
 	jQuery.recallDroppables();
@@ -47,10 +47,10 @@ jQuery.fn.bascule = function() {
 	if (subbranch.is(':hidden')) {
 		subbranch.show();
 		$(this).attr('src',img_deplierbas);
-		subbranch.children('a.ajax').each(function(){
+		subbranch.children('li').children('a.ajax').each(function(){
 			$(this).before("<div>"+ajax_image_searching+"</div>");
-			var id = $(this).parent().id();
-			$(this).parent().load($(this).href()+"&var_ajaxcharset=utf-8",function(){$("#"+id).set_expandImage().set_droppables();});
+			var id = $(this).parent().parent().id();
+			$(this).parent().parent().load($(this).href()+"&var_ajaxcharset=utf-8",function(){$("#"+id).set_expandImage().set_droppables();});
 		});
 	} else {
 		subbranch.hide();
