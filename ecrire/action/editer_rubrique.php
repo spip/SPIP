@@ -68,9 +68,10 @@ function revisions_rubriques($id_rubrique, $c=false) {
 	// interdiction de deplacer vers ou a partir d'une rubrique
 	// qu'on n'administre pas.
 	$parent = '';
-	if ($id_parent = intval(_request('id_parent', $c))
+	if (NULL !== ($id_parent = _request('id_parent', $c))
 	AND $id_parent != $id_rubrique // au fou
 	) {
+		$id_parent = intval($id_parent);
 		$s = spip_fetch_array(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique=".intval($id_rubrique)));
 		$old_parent = $s['id_parent'];
 
