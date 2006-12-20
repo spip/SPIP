@@ -17,6 +17,7 @@ include_spip('inc/sax');
 define('_REGEXP_DOCTYPE',
 	'/^\s*(<[?][^>]*>\s*)?<!DOCTYPE\s+(\w+)\s+(\w+)\s*([^>]*)>/');
 
+// http://doc.spip.org/@validateur
 function validateur($data)
 {
 	global $phraseur_xml;
@@ -225,6 +226,7 @@ function validerAttribut($parser, $name, $val, $bal)
 
 class ValidateurXML {
 
+// http://doc.spip.org/@debutElement
 function debutElement($phraseur, $name, $attrs)
 { 
 
@@ -235,6 +237,7 @@ function debutElement($phraseur, $name, $attrs)
 	}
 }
 
+// http://doc.spip.org/@finElement
 function finElement($phraseur, $name)
 {
 	global $phraseur_xml;
@@ -243,15 +246,19 @@ function finElement($phraseur, $name)
 		       $phraseur_xml->elements[$name][0] == 'EMPTY');
 }
 
+// http://doc.spip.org/@textElement
 function textElement($phraseur, $data)
 {	xml_textElement($phraseur, $data);}
 
+// http://doc.spip.org/@PiElement
 function PiElement($phraseur, $target, $data)
 {	xml_PiElement($phraseur, $target, $data);}
 
+// http://doc.spip.org/@defautElement
 function defautElement($phraseur, $data)
 {	xml_defautElement($phraseur, $data);}
 
+// http://doc.spip.org/@phraserTout
 function phraserTout($phraseur, $data)
 { 
 	validateur($data);
@@ -290,6 +297,7 @@ function phraserTout($phraseur, $data)
  var $err = array();
 }
 
+// http://doc.spip.org/@inc_valider_xml_dist
 function inc_valider_xml_dist($page, $apply=false)
 {
 	$sax = charger_fonction('sax', 'inc');

@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/filtres');
 include_spip('inc/charsets');
 
-// http://doc.spip.org/@debutElement
+// http://doc.spip.org/@xml_debutElement
 function xml_debutElement($parser, $name, $attrs)
 {
 	global $phraseur_xml;
@@ -51,7 +51,7 @@ function xml_debutElement($parser, $name, $attrs)
 	$reperes[$depth] = xml_get_current_line_number($parser);
 }
 
-// http://doc.spip.org/@finElement
+// http://doc.spip.org/@xml_finElement
 function xml_finElement($parser, $name, $fusion_bal=false)
 {
 	global $phraseur_xml;
@@ -79,7 +79,7 @@ function xml_finElement($parser, $name, $fusion_bal=false)
 	  $phraseur_xml->res .= ($ouv ? ('<' . $ouv  . ' />') : ("</" .  $name . ">"));
 }
 
-// http://doc.spip.org/@textElement
+// http://doc.spip.org/@xml_textElement
 function xml_textElement($parser, $data)
 {
 	global $phraseur_xml;
@@ -91,7 +91,7 @@ function xml_textElement($parser, $data)
 	  : entites_html($data);
 }
 
-// http://doc.spip.org/@PiElement
+// http://doc.spip.org/@xml_PiElement
 function xml_PiElement($parser, $target, $data)
 {
 	global $phraseur_xml;
@@ -109,7 +109,7 @@ function xml_PiElement($parser, $target, $data)
 }
 
 
-// http://doc.spip.org/@defautElement
+// http://doc.spip.org/@xml_defautElement
 function xml_defautElement($parser, $data)
 {
 	global $phraseur_xml;
@@ -153,6 +153,7 @@ function coordonnees_erreur($xml_parser)
 	xml_get_current_column_number($xml_parser);
 }
 
+// http://doc.spip.org/@inc_sax_dist
 function inc_sax_dist($page, $apply=false)
 {
 	global $phraseur_xml;
