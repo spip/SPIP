@@ -22,6 +22,8 @@ function action_dater_dist() {
 		spip_log("action_dater_dist $arg pas compris");
 	}
 	else action_dater_post($r);
+
+var_dump($_REQUEST);
 }
 
 // http://doc.spip.org/@action_dater_post
