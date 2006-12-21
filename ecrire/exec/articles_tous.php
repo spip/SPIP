@@ -57,27 +57,23 @@ var img_deplierbas = "'._DIR_IMG_PACK.'noeud_moins.gif";
 	if ($enfant AND $browser_layer)
 		echo couche_formulaire_tous($first_couche, $last_couche);
 
-	$out = "";
-	$action = generer_action_auteur("reorganiser","",generer_url_ecrire('articles_tous'));
-	$out .= "\n<div id='cancel' class='verdana2' style='display:none;text-align:$spip_lang_left;float:$spip_lang_left'>";
-	$out .= "<a href='javascript:annuler_deplacement();'>"._L("Annuler")."</a>";
-	$out .= "</div>";
-	$out .= "<form action='$action' method='post'>";
-	$out .= form_hidden($action);
-	$out .= "<textarea id='deplacements' style='display:none;' name='deplacements' rows='1' cols='1'></textarea>";
-	$out .= "\n<div id='apply' style='display:none;text-align:$spip_lang_right'><input type='submit' class='fondo' value='"._T('bouton_changer')."' /></div>";
-	$out .= "</form>";
-	echo $out;
+	$out = "<textarea cols='1' rows='1' id='deplacements' style='display:none;' name='deplacements'></textarea>"
+	. "\n<div id='apply' style='display:none;text-align:$spip_lang_right'><input type='submit' class='fondo' value='"._T('bouton_changer')."' /></div>";
 
-	$titre = _L("Racine");
-	$arbre .= "<ul id='articles_tous'><li id='rubrique-0' class='treeItem racine verdana2'>" .
-	"<span class='holder icone'>&nbsp;</span>$titre" .
-	"\n<ul class=''>\n";
-	$arbre .= afficher_contenu_rubrique($article, $enfant, $text_article, 0, $flag_trad, 2);
-	$arbre .= "</ul></li></ul>\n";
-	echo $arbre;
-
-	echo fin_gauche(), fin_page();
+	
+	echo "\n<div id='cancel' class='verdana2' style='display:none;text-align:$spip_lang_left;float:$spip_lang_left'>",
+	  "<a href='javascript:annuler_deplacement();'>",
+	  _L("Annuler"),
+	  "</a></div>",
+	  redirige_action_auteur("reorganiser","",'articles_tous', '',$out,
+				    " method='post'"),
+	  "<ul id='articles_tous'><li id='rubrique-0' class='treeItem racine verdana2'>",
+	  "<span class='holder icone'>&nbsp;</span>",
+	  _L("Racine"),
+	  "\n<ul class=''>\n",
+	  afficher_contenu_rubrique($article, $enfant, $text_article, 0, $flag_trad, 2),
+	  "</ul></li></ul>\n",
+	  fin_gauche(), fin_page();
 }
 
 // Voir inc_layer pour les 2 globales utilisees
