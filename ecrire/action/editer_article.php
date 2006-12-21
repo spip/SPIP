@@ -128,7 +128,8 @@ function revisions_articles ($id_article, $c=false) {
 		array(
 			'champs' => array(
 				'surtitre', 'titre', 'soustitre', 'descriptif',
-				'nom_site', 'url_site', 'chapo', 'texte', 'ps'
+				'nom_site', 'url_site', 'chapo', 'texte', 'ps',
+				'url_propre'
 			),
 			'nonvide' => array('titre' => _T('info_sans_titre')),
 			'invalideur' => $invalideur,
