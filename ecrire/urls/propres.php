@@ -302,8 +302,10 @@ function recuperer_parametres_url(&$fond, $url) {
 	}
 
 	// En mode Query-String, on fixe ici le $fond utilise
-	if ($adapter_le_fond)
+	if ($adapter_le_fond) {
 		$fond = $type;
+		if ($type == 'syndic') $fond = 'site';
+	}
 
 	return;
 }
