@@ -173,16 +173,16 @@ function image_alpha($im, $alpha = 63)
 }
 
 // http://doc.spip.org/@image_recadre
-function image_recadre($im,$width,$height,$position='center')
+function image_recadre($im,$width,$height,$position='center', $background_color='white')
 {
-	$image = image_valeurs_trans($im, "recadre-$width-$height-$position");
+	$image = image_valeurs_trans($im, "recadre-$width-$height-$position-$background_color");
 	if (!$image) return("");
 	
 	$x_i = $image["largeur"];
 	$y_i = $image["hauteur"];
 	
-	if ($width==0 OR $width>$x_i) $width==$x_i;
-	if ($height==0 OR $height>$y_i) $height==$y_i;
+	if ($width==0) $width=$x_i;
+	if ($height==0) $height=$y_i;
 	
 	$offset_width = $x_i-$width;
 	$offset_height = $y_i-$height;
@@ -211,10 +211,15 @@ function image_recadre($im,$width,$height,$position='center')
 		$im_ = imagecreatetruecolor($width, $height);
 		@imagealphablending($im_, false);
 		@imagesavealpha($im_,true);
-	
-		$color_t = ImageColorAllocateAlpha( $im_, 255, 255, 255 , 127 );
+
+		if ($background_color=='transparent')
+			$color_t = imagecolorallocatealpha( $im_, 255, 255, 255 , 127 );
+		else {
+			$bg = couleur_hex_to_dec($background_color);
+			$color_t = imagecolorallocate( $im_, $bg['red'], $bg['green'], $bg['blue']);
+		}
 		imagefill ($im_, 0, 0, $color_t);
-		imagecopy($im_, $im, 0, 0, $offset_width, $offset_height, $width, $height);
+		imagecopy($im_, $im, max(0,-$offset_width), max(0,-$offset_height), max(0,$offset_width), max(0,$offset_height), min($width,$x_i), min($height,$y_i));
 
 		$image["fonction_image"]($im_, "$dest");
 		imagedestroy($im_);
