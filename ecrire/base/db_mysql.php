@@ -134,7 +134,7 @@ function spip_mysql_select($select, $from, $where,
 		boucle_debug_resultat($id, 'requete', "SELECT " . $query);
 	}
 
-	if (!($res = @spip_query("SELECT ". $query))) {
+	if (!($res = @spip_query("SELECT ". $query, $server))) {
 		include_spip('public/debug');
 		erreur_requete_boucle($query, $id, $table,
 				      spip_sql_errno(),
