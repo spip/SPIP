@@ -130,7 +130,7 @@ function xml_parsestring($phraseur, $data)
 	  // ne pas commencer le message par un "<" (cf inc_sax_dist)
 	  $phraseur_xml->err = array(
 	    xml_error_string(xml_get_error_code($phraseur)) .
-		  coordonnees_erreur($phraseur) . '<br />' .
+		  coordonnees_erreur($phraseur) . "<br />\n" .
 		  (!$phraseur_xml->depth ? '' :
 		   (
 		    _L("derni&egrave;re balise non referm&eacute;e&nbsp;: ") .
@@ -139,7 +139,7 @@ function xml_parsestring($phraseur, $data)
 		    "</tt>" .
 		    _L(" ligne ") .
 		    $phraseur_xml->reperes[$phraseur_xml->depth] .
-		    '<br />' )));
+		    "<br />\n" )));
 	}
 }
 

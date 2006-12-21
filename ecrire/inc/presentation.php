@@ -68,16 +68,15 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 	if ($spip_display != 1 AND $spip_display != 4 AND strlen($icone) > 1) {
 		$ret .= "\n<div style='position: absolute; top: -16px; $spip_lang_left: 10px;'>";
 		if ($fonction) {
-			$ret .= "\n<div " . http_style_background($icone, "no-repeat; padding: 0px; margin: 0px") . ">";
-			$ret .= http_img_pack($fonction, "", "");
-			$ret .= "</div>";
+			$ret .= "\n<div " . http_style_background($icone, "no-repeat; padding: 0px; margin: 0px") . ">"
+			. http_img_pack($fonction, "", "")
+			. "</div>";
 		}
 		else $ret .=  http_img_pack("$icone", "", "");
 		$ret .= "</div>";
 
 		$style_cadre = " style='position: relative; top: 15px; margin-bottom: 14px;'";
 	}
-
 
 	if (strlen($titre) > 0) {
 		if ($spip_display == 4) {
@@ -87,22 +86,16 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 		}
 	}
 	
-	
-	$ret .= "</div>";
-	
-	$ret .= "\n<div class='cadre-padding' style='overflow:hidden".($GLOBALS["browser_name"]=="MSIE"?";zoom:1":"")."'>";
-
-
-	return $ret;
+	return $ret . "</div>\n<div class='cadre-padding' style='overflow:hidden".($GLOBALS["browser_name"]=="MSIE"?";zoom:1":"")."'>";
 }
 
 // http://doc.spip.org/@fin_cadre
 function fin_cadre($style) {
 
-	$ret = "</div>";
-	$ret .= "</div>";
-	if ($style == "e") $ret .= "</div>";
-	if ($style != "forum" AND $style != "thread-forum") $ret .= "\n<div style='height: 5px;'></div>";
+	$ret = ($style == "e") ? "</div></div></div>\n" : "</div></div>\n";
+
+	if ($style != "forum" AND $style != "thread-forum")
+		$ret .= "<div style='height: 5px;'></div>\n";
 
 	return $ret;
 }
@@ -366,7 +359,7 @@ function afficher_liste_display_neq4($largeurs, $t, $styles = '') {
 function afficher_liste_display_eq4($largeurs, $t, $styles = '') {
 	global $spip_lang_left;
 
-	$res = "<li>";
+	$res = "\n<li>";
 	reset($largeurs);
 	if ($styles) reset($styles);
 	while (list(, $texte) = each($t)) {
@@ -456,10 +449,7 @@ function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, 
 
 	if (! ($force OR ($cpt = $cpt['n']))) return '';
 
-	$res = "";
-	if ($titre) $res .= "\n<div style='height: 12px;'></div>";
-	$res .= "\n<div class='liste'>";
-	$res .= bandeau_titre_boite2($titre, $icone, $fg, $bg, false);
+	$res = bandeau_titre_boite2($titre, $icone, $fg, $bg, false);
 	if (isset($requete['LIMIT'])) $cpt = min($requete['LIMIT'], $cpt);
 
 	$deb_aff = intval(_request($tmp_var));
@@ -478,11 +468,17 @@ function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, 
 	}
 	spip_free_result($result);
 
-	return $res
-	. "<table width='100%' cellpadding='2' cellspacing='0' border='0'>"
-	. afficher_liste($largeurs, $table, $styles)
-	. "</table>"
-	. "</div>\n";
+	$t = afficher_liste($largeurs, $table, $styles);
+	if ($spip_display != 4)
+	  $t = "<table width='100%' cellpadding='2' cellspacing='0' border='0'>"
+	    . $t
+	    . "</table>";
+	return
+	  (!$titre ? '': "\n<div style='height: 12px;'></div>")
+	  . "\n<div class='liste'>"
+	  . $res
+	  . $t
+	  . "</div>\n";
 }
 
 
@@ -491,12 +487,14 @@ function afficher_liste_debut_tableau() {
 	global $spip_display;
 
 	if ($spip_display != 4) return "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
+	else return '<ul>';
 }
 
 // http://doc.spip.org/@afficher_liste_fin_tableau
 function afficher_liste_fin_tableau() {
 	global $spip_display;
 	if ($spip_display != 4) return "</table>";
+	else return '</ul>';
 }
 
 
@@ -1114,7 +1112,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	$res = "<a id='id$id_forum'></a>";
 
 	if ($spip_display == 4) {
-		$res .= "<li>".typo($titre)."<br />";
+		$res .= "\n<li>".typo($titre)."<br />";
 	} else {
 
 		$titre_boite = '';
@@ -1199,7 +1197,8 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 		if ($compteur_forum == 1) $res .= fin_cadre_forum(true);
 		else $res .= fin_cadre_thread_forum(true);
 		$res .= "</td></tr></table>\n";
-	}
+	} else $res .= "</li>\n";
+
 	return $res;
 }
 
@@ -1219,15 +1218,15 @@ function afficher_forum_mots($id_forum)
 {
 	$result = spip_query("SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot");
 
-	$res = '<ul>';
+	$res = "\n<ul>";
 	while ($row = spip_fetch_array($result)) {
-		$res .= "<li> <b>"
+		$res .= "\n<li> <b>"
 		. propre($row['titre'])
 		. " :</b> "
 		.  propre($row['type'])
 		.  "</li>";
 	}
-	$res .= '</ul>';
+	$res .= "</ul>\n";
 	return $res;
 }
 
@@ -1523,7 +1522,7 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $af = true
 		if ($fonction == "supprimer.gif")
 			$retour = "\n<div class='danger'>$retour</div>";
 	} else {
-		$retour = "<li><a$lien>$texte</a></li>";
+		$retour = "\n<li><a$lien>$texte</a></li>";
 	}
 
 	if ($af) echo $retour; else return $retour;
@@ -1896,11 +1895,11 @@ function enfant_rub($collection){
 		$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	} else $logo ='';
 
-	$les_enfants = "";
+	$res = "";
 
-	$res = spip_query("SELECT id_rubrique, id_parent, titre, descriptif, lang FROM spip_rubriques WHERE id_parent='$collection' ORDER BY 0+titre,titre");
+	$result = spip_query("SELECT id_rubrique, id_parent, titre, descriptif, lang FROM spip_rubriques WHERE id_parent='$collection' ORDER BY 0+titre,titre");
 
-	while($row=spip_fetch_array($res)){
+	while($row=spip_fetch_array($result)){
 		$id_rubrique=$row['id_rubrique'];
 		$id_parent=$row['id_parent'];
 		$titre=$row['titre'];
@@ -1911,9 +1910,6 @@ function enfant_rub($collection){
 
 		$descriptif=propre($row['descriptif']);
 
-		if ($spip_display == 4) $les_enfants .= "<li>";
-
-
 		if ($voir_logo) {
 			if ($logo = $chercher_logo($id_rubrique, 'id_rubrique', 'on')) {
 				list($fid, $dir, $nom, $format) = $logo;
@@ -1922,8 +1918,9 @@ function enfant_rub($collection){
 					$logo =  "\n<div style='$voir_logo'>$logo</div>";
 			}
 		}
-		$les_enfants .= "\n<div class='enfants'>" .
-			debut_cadre_sous_rub(($id_parent ? "rubrique-24.gif" : "secteur-24.gif"), true) .
+
+		$les_enfants = "\n<div class='enfants'>" .
+		  debut_cadre_sous_rub(($id_parent ? "rubrique-24.gif" : "secteur-24.gif"), true) .
 		  (is_string($logo) ? $logo : '') .
 		  (!$les_sous_enfants ? "" : bouton_block_invisible("enfants$id_rubrique")) .
 		  (!acces_restreint_rubrique($id_rubrique) ? "" :
@@ -1933,19 +1930,19 @@ function enfant_rub($collection){
 		  "'><font color='$couleur_foncee'>".
 		  typo($titre) .
 		  "</font></a></b></span>" .
-		  (!$descriptif ? '' : "\n<div class='verdana1'>$descriptif</div>");
-
-		if ($spip_display != 4) $les_enfants .= $les_sous_enfants;
-		
-		$les_enfants .= "\n<div style='clear:both;'></div>"  .
+		  (!$descriptif ? '' : "\n<div class='verdana1'>$descriptif</div>") .
+		  (($spip_display == 4) ? '' : $les_sous_enfants) .
+		  "\n<div style='clear:both;'></div>"  .
 		  fin_cadre_sous_rub(true) .
 		  "</div>";
 
-		if ($spip_display == 4) $les_enfants .= "</li>";
+		$res .= ($spip_display != 4)
+		? $les_enfants
+		: "\n<li>$les_enfants</li>";
 	}
 
 	changer_typo($spip_lang); # remettre la typo de l'interface pour la suite
-	return (($spip_display == 4) ? "<ul> $les_enfants</ul>" :  $les_enfants);
+	return (($spip_display == 4) ? "\n<ul>$res</ul>\n" :  $res);
 
 }
 
@@ -1973,29 +1970,29 @@ function sous_enfant_rub($collection2){
 
 // http://doc.spip.org/@afficher_enfant_rub
 function afficher_enfant_rub($id_rubrique, $bouton=false, $return=false) {
-	global  $spip_lang_right;
+	global  $spip_lang_right, $spip_display;
 	
 	$les_enfants = enfant_rub($id_rubrique);
 	$n = strlen($les_enfants);
-
-	$les_enfants2=substr($les_enfants,round($n/2));
-
-	if (strpos($les_enfants2,"\n<div class='enfants'>")){
-		$les_enfants2=substr($les_enfants2,strpos($les_enfants2,"\n<div class='enfants'>"));
-		$n2 = strlen($les_enfants2);
-		$les_enfants=substr($les_enfants,0,$n-$n2);
-	}else{
-		$les_enfants2="";
-	}
 	
+	if (!($x = strpos($les_enfants,"\n<div class='enfants'>",round($n/2)))) {
+		$les_enfants2="";
+	}else{
+		$les_enfants2 = substr($les_enfants, $x);
+		$les_enfants = substr($les_enfants,0,$x);
+		if ($spip_display == 4) {
+		  $les_enfants .= '</li></ul>';
+		  $les_enfants2 = '<ul><li>' . $les_enfants2;
+		}
+	}
+
 	$res = "\n<div>&nbsp;</div>"
 	. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>"
 	. "\n<tr><td valign='top' width='50%' rowspan='2'>"
 	. $les_enfants
-	. "</td>"
-	. "\n<td style='width: 20px' rowspan='2'>"
+	. "</td>\n<td style='width: 20px;' rowspan='2'>"
 	. http_img_pack("rien.gif", ' ', "width='20'")
-	. "</td>\n"
+	. "</td>"
 	. "\n<td valign='top' width='50%'>"
 	. $les_enfants2
 	. "&nbsp;"
@@ -2010,6 +2007,7 @@ function afficher_enfant_rub($id_rubrique, $bouton=false, $return=false) {
 		    ? icone(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "secteur-24.gif", "creer.gif",'', false)
 		    : icone(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav&id_parent=$id_rubrique"), "rubrique-24.gif", "creer.gif",'',false)))
 	. "</div></td></tr></table>";
+
 	if ($return) return $res; else echo $res;
 }
 
