@@ -173,7 +173,7 @@ function rechercher_auteurs_articles($cherche_auteur, $ids, $id_article)
 // http://doc.spip.org/@afficher_auteurs_articles
 function afficher_auteurs_articles($id_article, $flag_editable, $les_auteurs)
 {
-	global $connect_statut, $options,$connect_id_auteur;
+	global $connect_statut, $options,$connect_id_auteur, $spip_display;
 
 	if (!$les_auteurs) return '';
 
@@ -192,9 +192,12 @@ function afficher_auteurs_articles($id_article, $flag_editable, $les_auteurs)
 	$largeurs = array('14', '', '', '', '', '');
 	$styles = array('arial11', 'arial2', 'arial11', 'arial11', 'arial11', 'arial1');
 
-	return "<div class='liste'><table width='100%' cellpadding='3' cellspacing='0' border='0'>"
-	. afficher_liste($largeurs, $table, $styles)
-	. "</table></div>\n";
+	$t = afficher_liste($largeurs, $table, $styles);
+	if ($spip_display != 4)
+	  $t = "<table width='100%' cellpadding='3' cellspacing='0' border='0'>"
+	    . $t
+	    . "</table>";
+	return "<div class='liste'>$t</div>\n";
 }
 
 

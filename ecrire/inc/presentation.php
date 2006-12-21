@@ -971,26 +971,24 @@ function afficher_rubriques_boucle($row, &$tous_id)
 	$lang = traduire_nom_langue($row['lang']);
 	$langue_choisie = $row['langue_choisie'];
 	
-	if ($langue_choisie == "oui") $lang = "<b>$lang</b>";
-	else $lang = "($lang)";
-	
 	if ($id_parent == 0) $puce = "secteur-12.gif";
 	else $puce = "rubrique-12.gif";
 	
-	$s = http_img_pack($puce, '', "");
-	$vals[] = $s;
+	$vals[] = http_img_pack($puce, '', "");
 	
-	$s = "<b><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'>";
+	$s = "<a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "' style='font-weight: bold;'>";
 	$s .= typo($titre);
-	$s .= "</a></b>";
+	$s .= "</a>";
 	$vals[] = $s;
 	
 	$s = "\n<div align=\"right\">";
 	if  ($GLOBALS['meta']['multi_rubriques'] == 'oui') {
-				$s .= ($lang);
+		if ($langue_choisie == "oui") $s .= "<b>$lang</b>";
+		else $s .= "($lang)";
 	}
 	$s .= "</div>";
 	$vals[] = $s;
+
 	return $vals;
 }
 
@@ -1059,24 +1057,23 @@ function afficher_forum($request, $retour, $arg, $controle_id_article = false) {
 	$thread[$compteur_forum] = 1;
 	
 	$res = '';
+	if ($spip_display == 4) $res = "<ul>";
 
-	if ($spip_display == 4) $res .= "<ul>";
- 
  	while($row = spip_fetch_array($request)) {
 		$statut=$row['statut'];
-		if ($compteur_forum==1) $res .= "\n<br />";
 		if (($controle_id_article) ? ($statut!="perso") :
 			(($statut=="prive" OR $statut=="privrac" OR $statut=="privadm" OR $statut=="perso")
 			 OR ($statut=="publie" AND $id_parent > 0))) {
+		  $res .= afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_forum, $thread, $retour, $arg);
 
-			$res .= afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_forum, $thread, $retour, $arg)
-			. afficher_forum(spip_query("SELECT * FROM spip_forum WHERE id_parent='" . $row['id_forum'] . "'" . ($controle_id_article ? '':" AND statut<>'off'") . " ORDER BY date_heure"), $retour, $arg, $controle_id_article);
+		  $res .= afficher_forum(spip_query("SELECT * FROM spip_forum WHERE id_parent='" . $row['id_forum'] . "'" . ($controle_id_article ? '':" AND statut<>'off'") . " ORDER BY date_heure"), $retour, $arg, $controle_id_article);
 		}
 		$thread[$compteur_forum]++;
 	}
-	if ($spip_display == 4) $res .= "</ul>";
+
 	spip_free_result($request);
 	$compteur_forum--;
+	if ($spip_display == 4) $res .= "</ul>";	
 	return $res;
 }
 
@@ -1109,10 +1106,10 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	$ip=$row["ip"];
 	$id_auteur=$row["id_auteur"];
 	
-	$res = "<a id='id$id_forum'></a>";
+	$deb = "<a id='id$id_forum'></a>";
 
 	if ($spip_display == 4) {
-		$res .= "\n<li>".typo($titre)."<br />";
+		$res .= "\n<li>$deb".typo($titre)."<br />";
 	} else {
 
 		$titre_boite = '';
@@ -1128,14 +1125,15 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 
 		$titre_boite .= typo($titre);
 
-		$res .= "<table width='100%' cellpadding='0' cellspacing='0' border='0'><tr>";
-		$res .= afficher_forum_4($compteur_forum, $nb_forum, $i);
-
+		$res .= "$deb<table width='100%' cellpadding='0' cellspacing='0' border='0'><tr>"
+		. afficher_forum_4($compteur_forum, $nb_forum, $i)
+		. "\n<td style='width: 100%' valign='top'>";
 		if ($compteur_forum == 1) 
-			$res .= afficher_forum_logo($statut, $titre_boite);
+			$res .= '<br />'
+			  . debut_cadre_forum(forum_logo($statut), true, "", $titre_boite);
 		else $res .= debut_cadre_thread_forum("", true, "", $titre_boite);
 	}
-			
+
 	// Si refuse, cadre rouge
 	if ($statut=="off") {
 		$res .= "\n<div style='border: 2px dashed red; padding: 5px;'>";
@@ -1149,7 +1147,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 		$res .= "\n<div style='border: 1px solid green; padding: 5px;'>";
 	}
 
-	$res .= "<span class='arial2'>". date_interface($date_heure) . "</span>&nbsp;&nbsp;";
+	$res .= "<div style='font-weight: normal;'>". date_interface($date_heure) . "&nbsp;&nbsp;";
 
 	if ($id_auteur) {
 		$formater_auteur = charger_fonction('formater_auteur', 'inc');
@@ -1166,11 +1164,13 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 		$res .= safehtml("<span class='arial2'> / <b>$auteur</b></span>");
 	}
 
+	$res .= '</div>';
+
 	// boutons de moderation
 	if ($controle_id_article)
 		$res .= boutons_controle_forum($id_forum, $statut, $id_auteur, "id_article=$id_article", $ip);
 
-	$res .= safehtml(justifier(propre($texte)));
+	$res .= safehtml(justifier(propre("<div style='font-weight: normal;'>$texte</div>")));
 
 	if ($nom_site) {
 		if (strlen($url_site) > 10)
@@ -1182,7 +1182,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	  	$tm = rawurlencode($titre);
 		$res .= "\n<div align='right' class='verdana1'>"
 		. "<b><a href='"
-		  . generer_url_ecrire("forum_envoi", "id_parent=$id_forum&titre_message=$tm&script=$retour") . '#formulaire'
+		. generer_url_ecrire("forum_envoi", "id_parent=$id_forum&titre_message=$tm&script=$retour") . '#formulaire'
 		. "'>"
 		. _T('lien_repondre_message')
 		. "</a></b></div>";
@@ -1190,7 +1190,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 
 	if ($GLOBALS['meta']["mots_cles_forums"] == "oui")
 		$res .= afficher_forum_mots($id_forum);
-	
+
 	if ($statut == "off" OR $statut == "prop") $res .= "</div>";
 
 	if ($spip_display != 4) {
@@ -1203,14 +1203,12 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 }
 
 
-// http://doc.spip.org/@afficher_forum_logo
-function afficher_forum_logo($statut, $titre_boite)
+function forum_logo($statut)
 {
-	if ($statut == "prive") $logo = "forum-interne-24.gif";
-	else if ($statut == "privadm") $logo = "forum-admin-24.gif";
-	else if ($statut == "privrac") $logo = "forum-interne-24.gif";
-	else $logo = "forum-public-24.gif";
-	return debut_cadre_forum($logo, true, "", $titre_boite);
+	if ($statut == "prive") return "forum-interne-24.gif";
+	else if ($statut == "privadm") return "forum-admin-24.gif";
+	else if ($statut == "privrac") return "forum-interne-24.gif";
+	else return "forum-public-24.gif";
 }
 
 // http://doc.spip.org/@afficher_forum_mots
@@ -1252,7 +1250,7 @@ function afficher_forum_4($compteur_forum, $nb_forum, $thread)
 		. http_img_pack($fleche, "", "width='10' height='13'")
 		. "</td>\n";
 	}
-	return $res . "\n<td style='width: 100%' valign='top'>";
+	return $res;
 }
 
 

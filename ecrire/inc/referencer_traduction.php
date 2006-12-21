@@ -17,7 +17,7 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@inc_referencer_traduction_dist
 function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_trad, $trad_err='')
 {
-	global $connect_statut, $couleur_claire, $options, $connect_toutes_rubriques, $spip_lang_right, $dir_lang;
+	global $connect_statut, $couleur_claire, $options, $connect_toutes_rubriques, $spip_lang_right, $spip_display, $dir_lang;
 
 	if (! (($GLOBALS['meta']['multi_articles'] == 'oui')
 		OR (($GLOBALS['meta']['multi_rubriques'] == 'oui') 
@@ -63,17 +63,23 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 		$largeurs = array(7, 12, '', 100);
 		$styles = array('', '', 'arial2', 'arial2');
 
+		$t = afficher_liste($largeurs, $table, $styles);
+		if ($spip_display != 4)
+		  $t = "\n<table width='100%' cellpadding='2' cellspacing='0' border='0'>"
+		    . $t
+		    . "</table>\n";
+
 		$liste = "\n<div class='liste'>"
 		. bandeau_titre_boite2( '<b>' . _T('trad_article_traduction') . '</b>','', 'white', 'black', false)
-		. "<table width='100%' cellspacing='0' border='0' cellpadding='2'>"
-		. afficher_liste ($largeurs, $table, $styles)
-		. "</table>"
+		. $t
 		. "</div>";
 	}
 
 	// changer les globales $dir_lang etc
 	changer_typo($langue_article);
 
+	// Participation aux Traductions pas pour Mal-voyant. A completer
+	if ($spip_display == 4) $form =''; else {
 	$form = "<table width='100%'><tr>";
 
 	if ($flag AND $options == "avancees" AND !$table) {
@@ -107,7 +113,7 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 	}
 
 	$form .= "</tr></table>";
-
+	}
 	if ($GLOBALS['meta']['gerer_trad'] == 'oui')
 		$bouton = _T('titre_langue_trad_article');
 	else
