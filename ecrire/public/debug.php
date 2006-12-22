@@ -449,7 +449,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 			$titre = 'zbug_' . $titre;
 			$texte = ancre_texte($texte, array('',''));
 		} else {
-		  $sax = charger_fonction('sax', 'inc');
+		  $sax = charger_fonction('valider_xml', 'inc');
 		  $res = $sax($texte);
 		  list($texte, $err) = emboite_texte($res, $fonc, $self);
 			if ($err === false)
