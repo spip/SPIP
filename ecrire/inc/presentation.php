@@ -1203,6 +1203,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 }
 
 
+// http://doc.spip.org/@forum_logo
 function forum_logo($statut)
 {
 	if ($statut == "prive") return "forum-interne-24.gif";
