@@ -31,7 +31,7 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 		."><img\nsrc='"
 		._DIR_IMG_ICONES_BARRE
 		.$img
-		."' height='16' width='16' align='middle' alt=' '/></a>";
+		."' style=\"height: 16px; width: 16px; background-position: center center;\" alt=\"$a\"/></a>";
 }
 
 // construit un tableau de raccourcis pour un noeud de DOM 

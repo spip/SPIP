@@ -409,7 +409,7 @@ function article($titre, $lien, $statut = "redac") {
 			$class = "article-inactif";
 		}
 		$texte[$ligne] .= "<a class='$class' id='$id'
- href='" . generer_url_ecrire("aide_index", "aide=$lien&amp;frame=body&amp;var_lang=$spip_lang", false, true) .
+ href='" . generer_url_ecrire("aide_index", "aide=$lien&frame=body&var_lang=$spip_lang", false, true) .
 		  "' target='droite' onclick=\"activer_article('$id');return true;\">$titre</a><br style='clear:both;' />\n";
 	}
 }

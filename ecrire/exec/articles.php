@@ -400,9 +400,9 @@ function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)
 
 		if ($ps) {
 			$res .= debut_cadre_enfonce('',true)
-			. "\n<div $dir_lang><font style='font-family:Verdana,Arial,Sans,sans-serif; font-size: small;'>"
+			. "\n<div $dir_lang style='font-family:Verdana,Arial,Sans,sans-serif; font-size: small;'>"
 			. justifier("<b>"._T('info_ps')."</b> ".propre($ps))
-			. "</font></div>"
+			. "</div>"
 			. fin_cadre_enfonce(true);
 		}
 		$revision_nbsp = false;
