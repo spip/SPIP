@@ -33,10 +33,10 @@ function exec_recherche_dist()
 	  $recherche_aff = _T('info_rechercher');
 	  $onfocus = "this.value='';";
 	}
-	echo "<form method='get' style='margin: 0px;' action='" . generer_url_ecrire("recherche","") . "'>";
+	echo "<form method='get' style='margin: 0px;' action='" . generer_url_ecrire("recherche","") . "'><div>";
 	echo "<input type='hidden' name='exec' value='recherche' />";
 	echo '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" accesskey="r" onfocus="'.$onfocus . '" />';
-	echo "</form>";
+	echo "</div></form>";
 
 	debut_droite();
 
@@ -127,7 +127,7 @@ function exec_recherche_dist()
 	}
 	
 	if (!$nba AND !$nba1 AND !$nbb AND !$nbb1 AND !$nbr AND !$nbr1 AND !$nbt AND !$nbs AND !$nbs1) {
-		echo "<font face='Verdana,Arial,Sans,sans-serif'>"._T('avis_aucun_resultat')."</font><p>";
+		echo "<p style='font-face: Verdana,Arial,Sans,sans-serif'>"._T('avis_aucun_resultat')."</p>";
 	}
 	}
 echo fin_gauche(), fin_page();

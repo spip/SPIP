@@ -17,7 +17,7 @@ include_spip('inc/sax');
 define('_REGEXP_DOCTYPE',
 	'/^\s*(<[?][^>]*>\s*)?<!DOCTYPE\s+(\w+)\s+(\w+)\s*([^>]*)>/');
 
-define('_REGEXP_ID', '/^[A-Za-z_][\w_:.]*$/');
+define('_REGEXP_ID', '/^[A-Za-z_][\w_:.-]*$/');
 
 // http://doc.spip.org/@validateur
 function validateur($data)
