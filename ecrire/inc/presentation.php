@@ -1741,14 +1741,16 @@ function fin_page()
 	return debut_grand_cadre(true)
 	. "\n"
 	. (($spip_display == 4)
-		? ("<div><a href='./?set_disp=2'>"
-		.  _T("access_interface_graphique")
-		. "</a></div>")
+		? ("<div><a href='./?set_disp=2&exec="
+			. _request('exec')
+			. "'>"
+			.  _T("access_interface_graphique")
+			. "</a></div>")
 		: ('<div style="text-align: right; font-family: Verdana; font-size: 8pt">'
-		. info_copyright()
-		. "<br />"
-		. _T('info_copyright_doc')
-		. '</div>'))
+			. info_copyright()
+			. "<br />"
+			. _T('info_copyright_doc')
+			. '</div>'))
 
 	. fin_grand_cadre(true)
 	. "</div>" // cf. <div center> ouverte dans conmmencer_page()
