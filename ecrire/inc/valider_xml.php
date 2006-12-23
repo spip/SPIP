@@ -19,11 +19,19 @@ define('_REGEXP_DOCTYPE',
 
 define('_REGEXP_ID', '/^[A-Za-z_][\w_:.-]*$/');
 
-// http://doc.spip.org/@validateur
-function validateur($data)
-{
-	global $phraseur_xml;
+// Document Type Compilation
 
+class DTC {
+	var	$macros = array();
+	var 	$elements = array();
+	var 	$peres = array();
+	var 	$attributs = array();
+	var	$entites = array();
+}
+
+// http://doc.spip.org/@validateur
+function charger_dtd($data)
+{
 	if (!preg_match(_REGEXP_DOCTYPE, $data, $r))
 		return array();
 
@@ -31,7 +39,7 @@ function validateur($data)
 
 	if (!preg_match('/^"([^"]*)"\s*(.*)$/', $suite, $r))
 		if (!preg_match("/^'([^']*)'\s*(.*)$/", $suite, $r))
-			return array();
+			return  array();
 	list(,$rotlvl, $suite) = $r;
 
 	if (!$suite) {
@@ -43,6 +51,14 @@ function validateur($data)
 				return array();
 		$grammaire = $r[1];
 	}
+	spip_log("Racine $topelement dans $grammaire ($rotlvl)");
+	$dtc = new DTC;
+	analyser_dtd($grammaire, $avail, $dtc);
+	return $dtc;
+}
+
+function analyser_dtd($grammaire, $avail, &$dtc)
+{
 
 	$dtd = '';
 	if ($avail == 'SYSTEM')
@@ -64,93 +80,105 @@ function validateur($data)
 		return array();
 	}
 
-	$res = array();
+	// ejecter les commentaires, surtout quand ils contiennent du code.
+	// Option /s car sur plusieurs lignes parfois
 
-	// les entites publiques sont declarees vides. A ameliorer a terme
-	if (preg_match_all('/<!ENTITY\s+%\s+([.\w]+)\s+(PUBLIC)?\s*"([^"]*)"\s*("[^"]*")?\s*>/', $dtd, $r, PREG_SET_ORDER)) {
-	  foreach($r as $m) {
-	    list(,$nom, $type, $val) = $m;
-	    $res[$nom] =  $type ? '': expanserEntite($val, $res) ;
-	  }
+	$dtd = preg_replace('/<!--.*?-->/s','',$dtd);
+
+	if (preg_match_all('/<!ENTITY\s+(%?)\s*([.\w]+)\s+(PUBLIC|SYSTEM)?\s*"([^"]*)"\s*("([^"]*)")?\s*>/', $dtd, $r, PREG_SET_ORDER)) {
+		foreach($r as $m) {
+		  list($t, $term, $nom, $type, $val, $q, $alt) = $m;
+		  if ($type) {
+		    $dir = preg_replace(',/[^/]+$,', '/', $grammaire);
+		    // en cas d'inclusion, l'espace de nom est le meme
+		    analyser_dtd($dir . $alt, $type, $dtc);
+		  }
+		  elseif (!$term) {
+		    $dtc->entites[$nom] = $val;
+		  }
+		  else 
+		    $dtc->macros[$nom] = expanserEntite($val, $dtc->macros) ;
+		}
 	} 
-	$phraseur_xml->entites = $res;
 
 	// reperer pour chaque noeud ses fils potentiels.
 	// mais tant pis pour leur eventuel ordre de succession (, * +):
 	// les cas sont rares et si aberrants que interet/temps-de-calcul -> 0
-	$res = array();
 	if (preg_match_all('/<!ELEMENT\s+(\w+)([^>]*)>/', $dtd, $r, PREG_SET_ORDER)) {
 	  foreach($r as $m) {
 	    list(,$nom, $val) = $m;
-	    $val = expanserEntite($val, $phraseur_xml->entites);
+	    $val = expanserEntite($val, $dtc->macros);
 	    $val = array_values(preg_split('/\W+/', $val,-1,PREG_SPLIT_NO_EMPTY));
-	    $res[$nom]= $val;
+	    $dtc->elements[$nom]= $val;
 	    foreach ($val as $k) {
-		if (!isset($phraseur_xml->peres[$k])
-		OR !in_array($nom, $phraseur_xml->peres[$k]))
-		  $phraseur_xml->peres[$k][]= $nom;
+		if (!isset($dtc->peres[$k])
+		OR !in_array($nom, $dtc->peres[$k]))
+			$dtc->peres[$k][]= $nom;
 	    }
 	  }
-	  foreach ($phraseur_xml->peres as $k => $v) {
+	  foreach ($dtc->peres as $k => $v) {
 	    asort($v);
-	    $phraseur_xml->peres[$k] = $v;
+	    $dtc->peres[$k] = $v;
 	  } 
 	}
-	$phraseur_xml->elements = $res;
 
-	$res = array();
+	$res2 = array();
+
 	if (preg_match_all('/<!ATTLIST\s+(\S+)\s+([^>]*)>/', $dtd, $r, PREG_SET_ORDER)) {
 	  foreach($r as $m) {
 	    list(,$nom, $val) = $m;
-	    $val = expanserEntite($val, $phraseur_xml->entites);
+	    $val = expanserEntite($val, $dtc->macros);
 	    $att = array();
 	    if (preg_match_all("/\s*(\S+)\s+(([(][^)]*[)])|(\S+))\s+(\S+)(\s*'[^']*')?/", $val, $r2, PREG_SET_ORDER)) {
 		foreach($r2 as $m2) {
 			$v = preg_match('/^\w+$/', $m2[2]) ? $m2[2]
 			  : ('/^' . preg_replace('/\s+/', '', $m2[2]) . '$/');
+			$res2[$v] = 1;
 			$att[$m2[1]] = array($v, $m2[5]);
 		}
 	    }
-	    $res[$nom] = $att;
+	    $dtc->attributs[$nom] = $att;
 	  }
 	}
-	$phraseur_xml->attributs = $res;
-	spip_log("DTD $topelement ($avail) $rotlvl $grammaire ". strlen($dtd) . ' octets ' . count($phraseur_xml->entites)  . ' entites, ' . count($phraseur_xml->elements)  . ' elements');
+
+	// pour voir la liste des regep d'attributs:
+#	echo join('<br />', array_keys($res2));exit;
+
+	spip_log("DTD $avail $grammaire ". strlen($dtd) . ' octets ' . count($dtc->macros)  . ' macros, ' . count($dtc->elements)  . ' elements, ' . count($res2) . " types différents d'attributs " . count($dtc->entites) . " entites");
 }
 
 // http://doc.spip.org/@expanserEntite
-function expanserEntite($val, $entites)
+function expanserEntite($val, $macros)
 {
 	if (preg_match_all('/%([.\w]+);/', $val, $r, PREG_SET_ORDER)) {
 		foreach($r as $m)
-	  // parfois faux suite au non chargement des entites publiques
-			if ($x = $entites[$m[1]])
+			if ($x = $macros[$m[1]])
 				$val = str_replace($m[0], $x, $val);
 	}
 	return $val;
 }
 
 // http://doc.spip.org/@validerElement
-function validerElement($parser, $name, $attrs)
+function validerElement($phraseur, $name, $attrs)
 {
 	global $phraseur_xml;
 
-	if (!$phraseur_xml->elements) return;
+	if (!$phraseur_xml->dtc->elements) return;
 
-	if (!isset($phraseur_xml->elements[$name]))
+	if (!isset($phraseur_xml->dtc->elements[$name]))
 
 		$phraseur_xml->err[]= " <b>$name</b>"
 		. _L(' balise inconnue ')
-		.  coordonnees_erreur($parser);
+		.  coordonnees_erreur($phraseur);
 	else {
 	  $depth = $phraseur_xml->depth;
 	  $ouvrant = $phraseur_xml->ouvrant;
 	  if (isset($ouvrant[$depth])) {
 	    if (preg_match('/^\s*(\w+)/', $ouvrant[$depth], $r)) {
 	      $pere = $r[1];
-	      if (isset($phraseur_xml->elements[$pere]))
-		if (!@in_array($name, $phraseur_xml->elements[$pere])) {
-	          $bons_peres = @join ('</b>, <b>', $phraseur_xml->peres[$name]);
+	      if (isset($phraseur_xml->dtc->elements[$pere]))
+		if (!@in_array($name, $phraseur_xml->dtc->elements[$pere])) {
+	          $bons_peres = @join ('</b>, <b>', $phraseur_xml->dtc->peres[$name]);
 	          $phraseur_xml->err[]= " <b>$name</b>"
 	            . _L(" n'est pas un fils de ")
 	            . '<b>'
@@ -158,18 +186,18 @@ function validerElement($parser, $name, $attrs)
 	            . '</b>'
 	            . (!$bons_peres ? ''
 	               : (_L( '<p style="font-size: 80%"> mais de <b>') . $bons_peres . '</b></p>'))
-		    .  coordonnees_erreur($parser);
+		    .  coordonnees_erreur($phraseur);
 		    }
 	    }
 	  }
-	  if (isset($phraseur_xml->attributs[$name])) {
-		  foreach ($phraseur_xml->attributs[$name] as $n => $v)
+	  if (isset($phraseur_xml->dtc->attributs[$name])) {
+		  foreach ($phraseur_xml->dtc->attributs[$name] as $n => $v)
 		    { if (($v[1] == '#REQUIRED') AND (!isset($attrs[$n])))
 			$phraseur_xml->err[]= " <b>$n</b>"
 			  . '&nbsp;:&nbsp;'
 			  . _L(" attribut obligatoire mais absent dans ")
 			  . "<b>$name</b>"
-			  .  coordonnees_erreur($parser);
+			  .  coordonnees_erreur($phraseur);
 		    }
 	  }
 	}
@@ -177,15 +205,15 @@ function validerElement($parser, $name, $attrs)
 
 
 // http://doc.spip.org/@validerAttribut
-function validerAttribut($parser, $name, $val, $bal)
+function validerAttribut($phraseur, $name, $val, $bal)
 {
 	global $phraseur_xml;
 
 	// Si la balise est inconnue, eviter d'insister
-	if (!isset($phraseur_xml->attributs[$bal]))
+	if (!isset($phraseur_xml->dtc->attributs[$bal]))
 		return ;
 		
-	$a = $phraseur_xml->attributs[$bal];
+	$a = $phraseur_xml->dtc->attributs[$bal];
 	if (!isset($a[$name])) {
 		$bons = join(', ',array_keys($a));
 		if ($bons)
@@ -198,36 +226,50 @@ function validerAttribut($parser, $name, $val, $bal)
 		. _L(' attribut inconnu de ')
 		. "<a$bons>$bal</a>"
 		. _L(" (survoler pour voir les corrects)")
-		.  coordonnees_erreur($parser);
+		.  coordonnees_erreur($phraseur);
 	} else{
 		$type =  $a[$name][0];
-		if ($type[0]=='/')
-			valider_motif($parser, $name, $val, $bal, $type);
-		elseif ($type == 'ID') {
-		  if (isset($phraseur_xml->ids[$val])) {
-		      list($l,$c) = $phraseur_xml->ids[$val];
-		      $phraseur_xml->err[]= " <p><b>$val</b>"
+		if (!preg_match('/^\w+$/', $type))
+			valider_motif($phraseur, $name, $val, $bal, $type);
+		else if (function_exists($f = 'validerAttribut_' . $type))
+			$f($phraseur, $name, $val, $bal);
+	}
+}
+
+function validerAttribut_ID($phraseur, $name, $val, $bal)
+{
+	global $phraseur_xml;
+
+	if (isset($phraseur_xml->ids[$val])) {
+		list($l,$c) = $phraseur_xml->ids[$val];
+		$phraseur_xml->err[]= " <p><b>$val</b>"
 		      . _L(" valeur de l'attribut ")
 		      . "<b>$name</b>"
 		      . _L(' de ')
 		      . "<b>$bal</b>"
 		      . _L(" vu auparavant ")
 		      . "(L$l,C$c)"
-		      .  coordonnees_erreur($parser);
-		  } else {
-		    valider_motif($parser, $name, $val, $bal, _REGEXP_ID);
-		    $phraseur_xml->ids[$val] = array(xml_get_current_line_number($parser), xml_get_current_column_number($parser));
-		  }
-		} elseif ($type == 'IDREF') {
-			$phraseur_xml->idrefs[] = array($val, xml_get_current_line_number($parser), xml_get_current_column_number($parser));
-		} elseif ($type == 'IDREFS') {
-			$phraseur_xml->idrefss[] = array($val, xml_get_current_line_number($parser), xml_get_current_column_number($parser));
-		}
+		      .  coordonnees_erreur($phraseur);
+	} else {
+		valider_motif($phraseur, $name, $val, $bal, _REGEXP_ID);
+		$phraseur_xml->ids[$val] = array(xml_get_current_line_number($phraseur), xml_get_current_column_number($phraseur));
 	}
 }
 
-// http://doc.spip.org/@valider_motif
-function valider_motif($parser, $name, $val, $bal, $motif)
+function validerAttribut_IDREF($phraseur, $name, $val, $bal)
+{
+	global $phraseur_xml;
+	$phraseur_xml->idrefs[] = array($val, xml_get_current_line_number($phraseur), xml_get_current_column_number($phraseur));
+}
+
+function validerAttribut_IDREFS($phraseur, $name, $val, $bal)
+{
+	global $phraseur_xml;
+
+	$phraseur_xml->idrefss[] = array($val, xml_get_current_line_number($phraseur), xml_get_current_column_number($phraseur));
+}
+
+function valider_motif($phraseur, $name, $val, $bal, $motif)
 {
 	global $phraseur_xml;
 
@@ -239,11 +281,10 @@ function valider_motif($parser, $name, $val, $bal, $motif)
 		. "<b>$bal</b>"
 		. _L(" n'est pas conforme au motif</p><p>")
 		. "<b>" . $motif . "</b></p>"
-		.  coordonnees_erreur($parser);
+		.  coordonnees_erreur($phraseur);
 	}
 }
 
-// http://doc.spip.org/@valider_idref
 function valider_idref($nom, $ligne, $col)
 {
 	global $phraseur_xml;
@@ -274,7 +315,7 @@ function finElement($phraseur, $name)
 	global $phraseur_xml;
  	xml_finElement($phraseur,
 		       $name,
-		       $phraseur_xml->elements[$name][0] == 'EMPTY');
+		       $phraseur_xml->dtc->elements[$name][0] == 'EMPTY');
 }
 
 // http://doc.spip.org/@textElement
@@ -287,16 +328,32 @@ function PiElement($phraseur, $target, $data)
 
 // http://doc.spip.org/@defautElement
 function defautElement($phraseur, $data)
-{	xml_defautElement($phraseur, $data);}
+{	
+	global $phraseur_xml;
+
+	if (!preg_match('/^<!--/', $data)
+	AND (preg_match_all('/&([^;]*)?/', $data, $r, PREG_SET_ORDER)))
+		foreach ($r as $m) {
+			list($t,$e) = $m;
+			if (!isset($phraseur_xml->dtc->entites[$e]))
+				$phraseur_xml->err[]= " <b>$e</b>"
+				  . _L(' entite inconnue ')
+				  .  coordonnees_erreur($phraseur);
+		}
+	xml_defautElement($phraseur, $data);
+}
 
 // http://doc.spip.org/@phraserTout
 function phraserTout($phraseur, $data)
 { 
 	global $phraseur_xml;
 
-	validateur($data);
-	if (isset($phraseur_xml->entites['HTMLsymbol']))
-		$data = unicode2charset(html2unicode($data, true));
+	$this->dtc = charger_dtd($data);
+
+  // bug de SAX qui ne dit pas si une Entite est dans un attribut ou non
+  // ==> eliminer toutes les entites
+
+	$data = unicode2charset(html2unicode($data, true));
 
 	xml_parsestring($phraseur, $data);
 
@@ -320,14 +377,12 @@ function phraserTout($phraseur, $data)
  var $contenu = array();
  var $ouvrant = array();
  var $reperes = array();
- var $elements = array();
- var $peres = array();
- var $entites = array();
- var $attributs = array();
+
+ var $dtc = NULL;
+ var $err = array();
  var $ids = array();
  var $idrefs = array();
  var $idrefss = array();
- var $err = array();
 }
 
 // http://doc.spip.org/@inc_valider_xml_dist
