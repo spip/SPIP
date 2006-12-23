@@ -267,6 +267,7 @@ dist/vignettes/flv.png -text
 dist/vignettes/gif.png -text
 dist/vignettes/gz.png -text
 dist/vignettes/html.png -text
+dist/vignettes/index.php -text
 dist/vignettes/jpg.png -text
 dist/vignettes/mid.png -text
 dist/vignettes/mov.png -text
