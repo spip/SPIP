@@ -165,7 +165,7 @@ else if ($statut_article == 'poubelle') {
 
 
 echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
-echo "<tr width='100%'><td width='100%' valign='top'>";
+echo "<tr><td width='100%' valign='top'>";
 if ($surtitre) {
 	echo "<span $dir_lang><font face='arial,helvetica' size='3'><b>";
 	echo propre_diff($surtitre);
@@ -208,6 +208,7 @@ echo "</td>";
 
 echo "</tr></table>";
 
+fin_cadre_relief();
 
 //////////////////////////////////////////////////////
 // Affichage des versions
@@ -257,8 +258,6 @@ while ($row = spip_fetch_array($result)) {
 	echo "</li>\n";
 }
 echo "</ul>\n";
-
-fin_cadre_relief();
 
 
 //////////////////////////////////////////////////////
@@ -316,7 +315,7 @@ if ($id_version) {
 fin_cadre_relief();
 
 
-echo fin_gauche(), fin_page();
+echo  fin_gauche(), fin_page();
 
 }
 

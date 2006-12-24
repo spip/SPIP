@@ -285,16 +285,29 @@ function valider_motif($phraseur, $name, $val, $bal, $motif)
 	}
 }
 
-function valider_idref($nom, $ligne, $col)
+function valider_idref(&$own, $nom, $ligne, $col)
 {
-	global $phraseur_xml;
-
-	if (!isset($phraseur_xml->ids[$nom]))
-		$phraseur_xml->err[]= " <p><b>$nom</b>"
+	if (!isset($own->ids[$nom]))
+		$own->err[]= " <p><b>$nom</b>"
 		. _L(" ID inconnu ")
 		. $ligne
 		. " "
 		. $col;
+}
+
+function inc_valider_passe2_dist(&$own)
+{
+	if (!$own->err) {
+		foreach ($own->idrefs as $idref) {
+			list($nom, $ligne, $col) = $idref;
+			valider_idref($own, $nom, $ligne, $col);
+		}
+		foreach ($own->idrefss as $idref) {
+			list($noms, $ligne, $col) = $idref;
+			foreach(preg_split('/\s+/', $noms) as $nom)
+				valider_idref($own, $nom, $ligne, $col);
+		}
+	}
 }
 
 class ValidateurXML {
@@ -346,8 +359,6 @@ function defautElement($phraseur, $data)
 // http://doc.spip.org/@phraserTout
 function phraserTout($phraseur, $data)
 { 
-	global $phraseur_xml;
-
 	$this->dtc = charger_dtd($data);
 
   // bug de SAX qui ne dit pas si une Entite est dans un attribut ou non
@@ -357,17 +368,8 @@ function phraserTout($phraseur, $data)
 
 	xml_parsestring($phraseur, $data);
 
-	if (!$phraseur_xml->err) {
-		foreach ($this->idrefs as $idref) {
-			list($nom, $ligne, $col) = $idref;
-			valider_idref($nom, $ligne, $col);
-		}
-		foreach ($this->idrefss as $idref) {
-			list($noms, $ligne, $col) = $idref;
-			foreach(preg_split('/\s+/', $noms) as $nom)
-				valider_idref($nom, $ligne, $col);
-		}
-	}
+	$valider_passe2 = charger_fonction('valider_passe2', 'inc');
+	$valider_passe2($this);
 
 	return !$this->err ?  $this->res : join('<br />', $this->err) . '<br />';
 }
