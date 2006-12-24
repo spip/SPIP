@@ -29,7 +29,7 @@ class DTC {
 	var	$entites = array();
 }
 
-// http://doc.spip.org/@validateur
+// http://doc.spip.org/@charger_dtd
 function charger_dtd($data)
 {
 	if (!preg_match(_REGEXP_DOCTYPE, $data, $r))
@@ -57,6 +57,7 @@ function charger_dtd($data)
 	return $dtc;
 }
 
+// http://doc.spip.org/@analyser_dtd
 function analyser_dtd($grammaire, $avail, &$dtc)
 {
 
@@ -236,6 +237,7 @@ function validerAttribut($phraseur, $name, $val, $bal)
 	}
 }
 
+// http://doc.spip.org/@validerAttribut_ID
 function validerAttribut_ID($phraseur, $name, $val, $bal)
 {
 	global $phraseur_xml;
@@ -256,12 +258,14 @@ function validerAttribut_ID($phraseur, $name, $val, $bal)
 	}
 }
 
+// http://doc.spip.org/@validerAttribut_IDREF
 function validerAttribut_IDREF($phraseur, $name, $val, $bal)
 {
 	global $phraseur_xml;
 	$phraseur_xml->idrefs[] = array($val, xml_get_current_line_number($phraseur), xml_get_current_column_number($phraseur));
 }
 
+// http://doc.spip.org/@validerAttribut_IDREFS
 function validerAttribut_IDREFS($phraseur, $name, $val, $bal)
 {
 	global $phraseur_xml;
@@ -269,6 +273,7 @@ function validerAttribut_IDREFS($phraseur, $name, $val, $bal)
 	$phraseur_xml->idrefss[] = array($val, xml_get_current_line_number($phraseur), xml_get_current_column_number($phraseur));
 }
 
+// http://doc.spip.org/@valider_motif
 function valider_motif($phraseur, $name, $val, $bal, $motif)
 {
 	global $phraseur_xml;
@@ -285,6 +290,7 @@ function valider_motif($phraseur, $name, $val, $bal, $motif)
 	}
 }
 
+// http://doc.spip.org/@valider_idref
 function valider_idref(&$own, $nom, $ligne, $col)
 {
 	if (!isset($own->ids[$nom]))
@@ -295,6 +301,7 @@ function valider_idref(&$own, $nom, $ligne, $col)
 		. $col;
 }
 
+// http://doc.spip.org/@inc_valider_passe2_dist
 function inc_valider_passe2_dist(&$own)
 {
 	if (!$own->err) {
