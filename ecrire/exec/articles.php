@@ -221,12 +221,12 @@ function boite_info_articles($id_article, $statut_article, $visites, $id_version
 {
 	global $connect_statut, $options, $flag_revisions;
 
-	$res ="\n<div align='center'>\n"
-	. "<font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"
-	. _T('info_numero_article')."</b></font>\n"
-	. "<br /><font face='Verdana,Arial,Sans,sans-serif' size='6'><b>$id_article</b></font>\n"
-	. "</div>\n"
-	  . voir_en_ligne('article', $id_article, $statut_article, 'racine-24.gif', false);
+	$res = "\n<div style='font-famuily: Verdana,Arial,Sans,sans-serif; font-size: 10px; font-weight: bold; text-align: center'>" 
+	. _T('info_numero_article')
+	.  "<br /><span style='font-size: 32px;'>"
+	.  $id_article
+	.  '</span></div>'
+	. voir_en_ligne('article', $id_article, $statut_article, 'racine-24.gif', false);
 
 	if ($statut_article == 'publie'
 	AND $visites > 0

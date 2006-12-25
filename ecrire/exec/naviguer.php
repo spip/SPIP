@@ -134,12 +134,14 @@ function exec_naviguer_dist()
 function infos_naviguer($id_rubrique, $statut)
 {
 	if ($id_rubrique > 0) {
+		$res = "\n<div style='font-famuily: Verdana,Arial,Sans,sans-serif; font-size: 10x; font-weight: bold; text-align: center'>"
+		  .  _T('titre_numero_rubrique')
+		  . "<br /><span style='font-size: 32px;'>"
+		  . $id_rubrique
+		  . '</span></div>';
+
 		debut_boite_info();
-		echo "<center>";
-		echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"._T('titre_numero_rubrique')."</b></font>";
-		echo "<br /><font face='Verdana,Arial,Sans,sans-serif' size='6'><b>$id_rubrique</b></font>";
-		echo "</center>";
-	
+		echo $res;
 		voir_en_ligne ('rubrique', $id_rubrique, $statut);
 	
 		if (acces_rubrique($id_rubrique)) {

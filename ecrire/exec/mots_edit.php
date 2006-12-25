@@ -79,14 +79,15 @@ global
 //
 
 	 if ($id_mot) {
+		$res = "\n<div style='font-famuily: Verdana,Arial,Sans,sans-serif; font-size: 10px; font-weight: bold; text-align: center'>" 
+		.  _T('titre_gauche_mots_edit')
+		.  "<br /><span style='font-size: 32px;'>"
+		.  $id_mot
+		.  '</span></div>';
+
 		debut_boite_info();
-		echo "<center>";
-		echo "<font FACE='Verdana,Arial,Sans,sans-serif' size='1'><b>"._T('titre_gauche_mots_edit')."</b></font>";
-		echo "<br /><font FACE='Verdana,Arial,Sans,sans-serif' SIZE='6'><b>$id_mot</b></font>";
-		echo "</center>";
-
+		echo $res;
 		voir_en_ligne ('mot', $id_mot);
-
 		fin_boite_info();
 		$onfocus ='';
 

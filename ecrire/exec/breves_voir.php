@@ -71,11 +71,13 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	
 	debut_boite_info();
 	
-	echo "<center>";
-	echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"._T('info_gauche_numero_breve')."&nbsp;:</b></font>";
-	echo "<br /><font face='Verdana,Arial,Sans,sans-serif' size='6'><b>$id_breve</b></font>";
-	echo "</center>";
-	
+	$res = "\n<div style='font-famuily: Verdana,Arial,Sans,sans-serif; font-size: 10x; font-weight: bold; text-align: center'>" 
+	. _T('info_gauche_numero_breve')
+	. "<br /><span style='font-size: 32px;'>"
+	. $id_breve
+	. '</span></div>';
+
+	echo $res;
 	voir_en_ligne ('breve', $id_breve, $statut);
 	
 	fin_boite_info();
