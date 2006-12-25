@@ -411,7 +411,7 @@ function montre_naviguer($id_rubrique, $titre, $descriptif, $logo, $flag_editabl
   global $spip_lang_right, $spip_lang_left;
 
   echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
-  echo "<tr><td width='100%' valign='top'>";
+  echo "<tr><td style='width: 100%' valign='top'>";
   gros_titre((!acces_restreint_rubrique($id_rubrique) ? '' :
 		http_img_pack("admin-12.gif",'', "width='12' height='12'",
 			      _T('info_administrer_rubrique'))) .

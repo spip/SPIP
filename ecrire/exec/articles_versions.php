@@ -165,7 +165,7 @@ else if ($statut_article == 'poubelle') {
 
 
 echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
-echo "<tr><td width='100%' valign='top'>";
+echo "<tr><td style='width: 100%' valign='top'>";
 if ($surtitre) {
 	echo "<span $dir_lang><font face='arial,helvetica' size='3'><b>";
 	echo propre_diff($surtitre);

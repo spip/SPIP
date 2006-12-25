@@ -135,7 +135,7 @@ global
 
 	echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
 	echo "<tr>";
-	echo "<td width='100%' valign='top'>";
+	echo "<td style='width: 100%' valign='top'>";
 	gros_titre($titre_mot);
 
 

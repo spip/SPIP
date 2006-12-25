@@ -96,7 +96,7 @@ function exec_mots_type_dist()
 	. icone(_T('icone_retour'), generer_url_ecrire("mots_tous",""), "mot-cle-24.gif", "rien.gif",'', false)
 	. "</td>"
 	. "<td>". http_img_pack('rien.gif', " ", "width='5'") . "</td>\n"
-	. "<td width='100%' valign='top'>"
+	. "<td style='width: 100%' valign='top'>"
 	. "<font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"
 	. _T('titre_groupe_mots')
 	. "</b></font><br />"

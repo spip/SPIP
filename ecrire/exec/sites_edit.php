@@ -67,7 +67,7 @@ if ($new != 'oui') {
 	echo "</td>";
 	echo "<td>". http_img_pack('rien.gif', " ", "width='10'") . "</td>\n";
 }
-echo "<td width='100%'>";
+echo "<td style='width: 100%'>";
 echo _T('titre_referencer_site');
 gros_titre($nom_site);
 echo "</td></tr></table>";
@@ -167,7 +167,7 @@ if ($activer_syndic != "non") {
 	$form .= aide("rubsyn");
 
 
-	$form .= "<table cellpadding='0' cellspacing='0' border='0' width='100%'><tr><td width='50'>&nbsp;</td><td>";
+	$form .= "<table cellpadding='0' cellspacing='0' border='0' width='100%'><tr><td style='width: 50'>&nbsp;</td><td>";
 
 	if (strlen($url_syndic) < 8) $url_syndic = "http://";
 	$form .= _T('entree_adresse_fichier_syndication');

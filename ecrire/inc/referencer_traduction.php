@@ -92,9 +92,9 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 				(_T('trad_lier') .
 				 "\n<input type='text' class='fondl' name='lier_trad' size='5' />\n<input type='submit' value='"._T('bouton_valider')."' class='fondl' />"))
 		. "</td>\n"
-		. "<td width='10'> &nbsp; </td>"
-		. "<td style='background: url(" . _DIR_IMG_PACK . "tirets-separation.gif)' width='2'>". http_img_pack('rien.gif', " ", "width='2' height='2'") . "</td>"
-		. "<td width='10'> &nbsp; </td>";
+		. "<td style='width: 10px'> &nbsp; </td>"
+		. "<td style='width: 2px; background: url(" . _DIR_IMG_PACK . "tirets-separation.gif)'>". http_img_pack('rien.gif', " ", "width='2' height='2'") . "</td>"
+		. "<td style='width: 10px'> &nbsp; </td>";
 	}
 
 	$form .= "<td>"
@@ -103,9 +103,9 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 
 	if ($flag AND $options == "avancees" AND $table) {
 		$clic = _T('trad_delier');
-		$form .= "<td width='10'> &nbsp; </td>"
-		. "<td style='background: url(" . _DIR_IMG_PACK . "tirets-separation.gif)' width='2'>". http_img_pack('rien.gif', " ", "width='2' height='2'") . "</td>"
-		. "<td width='10'> &nbsp; </td>"
+		$form .= "<td style='width: 10px'> &nbsp; </td>"
+		. "<td style='width: 2px; background: url(" . _DIR_IMG_PACK . "tirets-separation.gif)'>". http_img_pack('rien.gif', " ", "width='2' height='2'") . "</td>"
+		. "<td style='width: 10px'> &nbsp; </td>"
 		. "<td>"
 		  // la 1ere occurrence de clic ne sert pas en Ajax
 		. icone_horizontale($clic, ajax_action_auteur("referencer_traduction","$id_article,-$id_trad",'articles', "id_article=$id_article",array($clic)), "traductions-24.gif", "supprimer.gif", false)

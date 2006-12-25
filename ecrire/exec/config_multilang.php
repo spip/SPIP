@@ -136,7 +136,7 @@ fin_cadre_couleur();
 			$langues_bloquees[$l] = true;
 		}
 
-		echo "\n<table width='100%' cellspacing='10'><tr><td width='50%'  class='verdana1'>";
+		echo "\n<table width='100%' cellspacing='10'><tr><td style='width: 50%'  class='verdana1'>";
 
 		while (list($code_langue) = each($langues_bloquees)) {
 			$i++;
@@ -149,7 +149,7 @@ fin_cadre_couleur();
 			echo  "\n$nom_langue\n&nbsp; &nbsp;<font color='#777777'>[$code_langue]</font>";
 			echo "</div>";
 
-			if ($i == $cesure) echo "\n</td><td width='50%' class='verdana1'>";
+			if ($i == $cesure) echo "\n</td><td style='width: 50%' class='verdana1'>";
 		}
 
 		echo "\n<div>&nbsp;</div>";
@@ -171,7 +171,7 @@ fin_cadre_couleur();
 
 			echo "</div>";
 
-			if ($i == $cesure) echo "</td><td width='50%' class='verdana1'>";
+			if ($i == $cesure) echo "</td><td style='width: 50%' class='verdana1'>";
 		}
 
 		echo "</td></tr>";

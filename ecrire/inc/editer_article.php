@@ -270,8 +270,8 @@ function editer_article_chapo($chapo, $config, $aider)
 			$aider ("artvirt") .
 			"</font>" .
 			"</td>" .
-			"<td width='10'>&nbsp;</td>" .
-			"<td valign='top' width='50%'>" .
+			"<td style='width: 10px'>&nbsp;</td>" .
+			"<td valign='top' style='width: 50%'>" .
 			"<input type='text' name='virtuel' class='forml'
 		style='font-size:9px;' value=\"$virtuel\" size='40' />" .
 			"<input type='hidden' name='changer_virtuel' value='oui' />" .

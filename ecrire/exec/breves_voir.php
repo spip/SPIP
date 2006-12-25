@@ -118,7 +118,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	echo "<tr><td class='serif'>";
 
 	echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
-	echo "<tr><td width='100%' valign='top'>";
+	echo "<tr><td style='width: 100%' valign='top'>";
 	gros_titre($titre);
 	echo "</td>";
 

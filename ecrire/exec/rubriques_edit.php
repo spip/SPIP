@@ -120,7 +120,7 @@ function exec_rubriques_edit_dist()
 
 	echo "</td>";
 	echo "<td>". http_img_pack('rien.gif', " ", "width='10'") . "</td>\n";
-	echo "<td width='100%'>";
+	echo "<td style='width: 100%'>";
 	echo _T('info_modifier_rubrique');
 	gros_titre($titre);
 	echo "</td></tr></table>";
@@ -176,11 +176,7 @@ function exec_rubriques_edit_dist()
 	. _T('bouton_enregistrer')
 	. "' class='fondo' />\n</p>";
 
-	$retour = generer_url_ecrire("naviguer");
-
-	if (!$arg = intval($id_rubrique)) $arg='oui';
-
-	echo generer_action_auteur("editer_rubrique", $arg, $retour, $form, " method='post'");
+	echo redirige_action_auteur("editer_rubrique", $arg ? $arg : 'oui', 'naviguer', '', $form, " method='post'");
 
 	fin_cadre_formulaire();
 

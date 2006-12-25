@@ -138,7 +138,7 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 	global $options, $spip_lang_right;
 
 	$res ="\n<tr bgcolor='#DBE1C5'>"
-	. "\n<td width='20'>";
+	. "\n<td style='width: 20px'>";
 
 	if ($tri=='statut')
   		$res .= http_img_pack('admin-12.gif','', "border='0'");
@@ -147,7 +147,7 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 	  $res .= auteurs_href(http_img_pack('admin-12.gif', $t, "border='0'"),'tri=statut', " title=\"$t\"");
 	}
 
-	$res .= "</td><td width='20'></td><td colspan='2'>";
+	$res .= "</td><td style='width: 20px'></td><td colspan='2'>";
 
 	if ($tri == '' OR $tri=='nom')
 		$res .= '<b>'._T('info_nom').'</b>';
@@ -199,7 +199,7 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 	$nav = '';
 	$debut_suivant = $debut + $max_par_page;
 	if ($debut_suivant < $nombre_auteurs OR $debut > 0) {
-		$nav = "\n<table id='bas' width='100%' border='0'>"
+		$nav = "\n<table id='bas' style='width: 100%' border='0'>"
 		. "\n<tr bgcolor='white'><td align='left'>";
 
 		if ($debut > 0) {
@@ -214,7 +214,7 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 	}
 
 	return 	debut_cadre_relief('auteur-24.gif',true)
-	. "\n<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n"
+	. "\n<table  class='arial2' border='0' cellpadding='2' cellspacing='0' style='width: 100%; border: 1px solid #aaaaaa;'>\n"
 	. $res
 	. $auteurs
 	. "</table>\n<br />"

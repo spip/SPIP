@@ -176,7 +176,7 @@ else if ($statut == 'refuse') {
 }
 
 echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
-echo "<tr><td width='100%' valign='top'>";
+echo "<tr><td style='width: 100%' valign='top'>";
 	gros_titre($nom_site, $logo_statut);
 
 $url_affichee = $url_site;
