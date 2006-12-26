@@ -17,11 +17,8 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@encours_accueil
 function encours_accueil()
 {
-	global $connect_statut, $connect_toutes_rubriques, $connect_id_auteur;
+	global $connect_toutes_rubriques;
 
-	$res = '';
-
-	//
 	// Les articles a valider
 	//
 
@@ -43,13 +40,13 @@ function encours_accueil()
 	//
 	// Les sites a probleme
 	//
-	if ($GLOBALS['meta']['activer_sites'] != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
+	if ($GLOBALS['meta']['activer_sites'] != 'non' AND $connect_toutes_rubriques) {
 		include_spip('inc/sites_voir');
 		$res .= afficher_sites(afficher_plus(generer_url_ecrire('sites_tous')). '<b>' . _T('avis_sites_syndiques_probleme') . '</b>', array('FROM' => 'spip_syndic', 'WHERE' => "(syndication='off' OR syndication='sus') AND statut='publie'", 'ORDER BY' => 'nom_site'));
 	}
 
 	// Les articles syndiques en attente de validation
-	if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
+	if ($connect_toutes_rubriques) {
 		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_syndic_articles WHERE statut='dispo'"));
 		if ($cpt = $cpt['n'])
 			$res .= "<br /><small><a href='"
@@ -115,15 +112,13 @@ if ($spip_display == 4) {
 			$res = "<div class='verdana11'>"._T('info_ecrire_article')."</div>";
 		}
 	}
-	if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
+	if ($connect_toutes_rubriques) {
 		$res .= icone_horizontale(_T('icone_creer_rubrique_2'), generer_url_ecrire("rubriques_edit","new=oui"), "rubrique-24.gif","creer.gif", false);
 	}
 	echo bloc_des_raccourcis($res);
  } else {
 
-	$gadget = "";
-		
-	$gadget = "<center><table><tr>";
+  $gadget = '';
 
 	if ($id_rubrique > 0) {
 				$dans_rub = "&id_rubrique=$id_rubrique";
@@ -154,13 +149,12 @@ if ($spip_display == 4) {
 				}
 			} 
 			
-		}
-		$gadget .= "</tr></table></center>\n";
-
+	}
+	$gadget = "<table><tr>$gadget</tr></table>\n";
 
 	if ($connect_statut != "0minirezo") {
 	
-		$gadget .= "<center><table><tr>";
+		$gadget .= "<table><tr>";
 	
 		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_articles AS art, spip_auteurs_articles AS lien WHERE lien.id_auteur = '$connect_id_auteur' AND art.id_article = lien.id_article LIMIT 1"));
 		if ($cpt['n'] > 0) {
@@ -186,7 +180,7 @@ if ($spip_display == 4) {
 			$gadget .= icone_horizontale  (_T('icone_sites_references'), generer_url_ecrire("sites_tous",""), "site-24.gif", "", false);
 			$gadget .= "</td>";
 		}
-		$gadget .= "</tr></table></center>\n";
+		$gadget .= "</tr></table>\n";
 	}
  }
 

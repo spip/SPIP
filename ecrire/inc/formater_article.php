@@ -70,8 +70,8 @@ function inc_formater_article_dist($row)
 	. (acces_restreint_rubrique($id_rubrique) ? $img_admin : '')
 	. typo($titre)
 	. (!($afficher_langue AND $lang != $GLOBALS['meta']['langue_site']) ? '' :
-	   (" <font size='1' color='#666666'$dir_lang>(".traduire_nom_langue($lang).")</font>"))
-	. (!$row['petition'] ? '' : (" <font size='1' color='red'>"._T('lien_petitions')."</font>"))
+	   (" <span style='font-size: 10px; color: #666666'$dir_lang>(".traduire_nom_langue($lang).")</span>"))
+	. (!$row['petition'] ? '' : (" <span style='font-size: 10px; color: red'>"._T('lien_petitions')."</span>"))
 	. "</a>"
 	. "</div>";
 	

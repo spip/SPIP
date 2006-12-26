@@ -37,7 +37,7 @@ function inc_iconifier_dist($id_objet, $id,  $script, $iframe_script='') {
 
 		$masque = block_parfois_visible('on', "<b>$texteon</b><br />$img", $clic, 'margin-bottom: -2px');
 
-		$res = "<center>$masque</center><br /><br />";;
+		$res = "<div style='text-align: center'>$masque</div><br /><br />";;
 		$texteoff = _T('logo_survol');
 
 		if ($logo = $chercher_logo($id, $id_objet, 'off')) {
@@ -46,7 +46,7 @@ function inc_iconifier_dist($id_objet, $id,  $script, $iframe_script='') {
 
 			$masque = block_parfois_visible('off', "<b>$texteoff</b><br />$img", $clic, 'margin-bottom: -2px');
 
-			$res .= "<center>$masque</center>";
+			$res .= "<div style='text-align: center'>$masque</div>";
 		} else {
 		  $masque = indiquer_logo($texteoff, $id_objet, 'off', $id, $script, $iframe);
 		  $res .= block_parfois_visible('off', "<b>$texteoff</b>", $masque);
@@ -147,10 +147,10 @@ function decrire_logo($id_objet, $mode, $id, $width, $height, $img, $titre="", $
 		$taille = _T('info_largeur_vignette', array('largeur_vignette' => $taille[0], 'hauteur_vignette' => $taille[1]));
 
 	return array($res,
-			"<font size='1'>" .
+			"<div style='font-size: 1Opx;'>" .
 		     $taille .
 		     "\n<br />[" .
 		     ajax_action_auteur("iconifier", "$id-$nom.$format", $script, "$id_objet=$id&type=$id_objet", array(_T('lien_supprimer')),'',"function(r,noeud) {noeud.innerHTML = r; \$('.form_upload_icon',noeud).async_upload(async_upload_icon);}") .
-		     "]</font>");
+		     "]</div>");
 }
 ?>

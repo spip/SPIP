@@ -359,7 +359,7 @@ function bandeau_principal($rubrique, $sous_rubrique, $largeur)
 		}
 	}
 
-	return "<div class='bandeau-icones'>\n<table width='$largeur' cellpadding='0' cellspacing='0' border='0' align='center'><tr>\n$res</tr></table></div>\n";
+	return "<div class='bandeau-icones'>\n<table width='$largeur' cellpadding='0' cellspacing='0' border='0'><tr>\n$res</tr></table></div>\n";
 }
 
 // http://doc.spip.org/@icone_bandeau_principal
@@ -467,7 +467,7 @@ function bandeau_double_rangee($rubrique, $sous_rubrique, $largeur)
 	. "<div id='haut-page'>"
 	. "<div id='bandeau-principal' align='center'>\n"
 	. bandeau_principal($rubrique, $sous_rubrique, $largeur)
-	. "<table width='$largeur' cellpadding='0' cellspacing='0' align='center'><tr><td>"
+	. "<table width='$largeur' cellpadding='0' cellspacing='0'><tr><td>"
 	. "<div style='text-align: $spip_lang_left; width: ".$largeur."px; position: relative; z-index: 2000;'>"
 	. bandeau_principal2($rubrique, $sous_rubrique, $largeur)
 	. "</div>"

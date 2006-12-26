@@ -18,8 +18,7 @@ function inc_instituer_article_dist($id_article, $statut=-1)
 	if ($statut == -1) return demande_publication($id_article);
 
 	$res =
-	"\n<div id='instituer_article-$id_article'>" .
-	"\n<center>" . 
+	"\n<div style='text-align: center;' id='instituer_article-$id_article'>" .
 	"<b>" .
 	_T('texte_article_statut') .
 	"</b>" .
@@ -41,8 +40,7 @@ function inc_instituer_article_dist($id_article, $statut=-1)
 	"<span class='visible_au_chargement' id='valider_statut'>" .
 	"<input type='submit' value='"._T('bouton_valider')."' class='fondo' />" .
 	"</span>" .
-	aide("artstatut") .
-	 "</center>"
+	aide("artstatut")
 	. '</div>';
   
 	return redirige_action_auteur('instituer_article',$id_article,'articles', "id_article=$id_article", $res, " method='post'");
@@ -53,7 +51,7 @@ function inc_instituer_article_dist($id_article, $statut=-1)
 function demande_publication($id_article)
 {
 	return debut_cadre_relief('',true) .
-		"<center>" .
+		"<div style='text-align: center'>" .
 		"<b>" ._T('texte_proposer_publication') . "</b>" .
 		aide ("artprop") .
 			redirige_action_auteur('instituer_article', "$id_article-prop",
@@ -63,7 +61,7 @@ function demande_publication($id_article)
 			    _T('bouton_demande_publication') .
 			    "\" />\n"),
 			"method='post'") .
-		"</center>" .
+		"</div>" .
 		fin_cadre_relief(true);
 }
 

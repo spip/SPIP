@@ -83,16 +83,16 @@ function afficher_sites_boucle($row, &$tous_id, $voir_logo, $bof)
 			
 	$s .= typo($nom_site);
 	
-	$s .= "</a> &nbsp;&nbsp; <font size='1'>[<a href='$url_site'>"._T('lien_visite_site')."</a>]</font>";
+	$s .= "</a> &nbsp;&nbsp; <span style='font-size: 11px;'>[<a href='$url_site'>"._T('lien_visite_site')."</a>]</span>";
 	$vals[] = $s;
 			
 	$s = "";
 
 	if ($syndication == 'off' OR $syndication == 'sus') {
-				$s .= "<font color='red'>"._T('info_probleme_grave')." </font>";
+		$s .= "<span style='color: red;'>"._T('info_probleme_grave')." </span>";
 	}
 	if ($syndication == "oui" or $syndication == "off" OR $syndication == 'sus'){
-			$s .= "<font color='red'>"._T('info_syndication')."</font>";
+		$s .= "<span style='color: red;'>"._T('info_syndication')."</span>";
 	}
 	$vals[] = $s;
 
