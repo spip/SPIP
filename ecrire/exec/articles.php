@@ -355,10 +355,10 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 	if ($statut_article == 'prop')
 		$res .= "<p><font face='Verdana,Arial,Sans,sans-serif' size='2' color='red'><b>"._T('text_article_propose_publication')."</b></font></p>";
 	
-	$res = "<td valign='top'>$res</td>";
+	$res = "\n<td valign='top'>$res</td>";
 
 	if ($flag_editable) {
-		$res .= "<td valign='top' align='$spip_lang_right' width='130'>"
+		$res .= "\n<td style='width: 130px;' valign='top' align='$spip_lang_right'>"
 		. bouton_modifier_articles($id_article, $id_rubrique, $modif, _T('avis_article_modifie', $modif), "article-24.gif", "edit.gif", 'right')
 		. "</td>\n";
 	}

@@ -84,7 +84,7 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 
 	if ($flag AND $options == "avancees" AND !$table) {
 			// Formulaire pour lier a un article
-		$form .= "<td class='arial2' width='60%'>"
+		$form .= "<td style='width: 60%' class='arial2'>"
 		. ajax_action_auteur("referencer_traduction",
 				$id_article,
 				'articles',

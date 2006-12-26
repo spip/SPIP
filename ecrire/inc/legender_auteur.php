@@ -237,7 +237,7 @@ function legender_auteur_voir($auteur, $redirect)
 
 	$res = "<table width='100%' cellpadding='0' border='0' cellspacing='0'>"
 	. "<tr>"
-	. "<td valign='top' width='100%'>"
+	. "<td  style='width: 100%' valign='top'>"
 	. gros_titre($nom,'',false)
 	. "<div>&nbsp;</div>";
 
