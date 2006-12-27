@@ -260,9 +260,9 @@ function avertissement_messagerie() {
 	if ($total_messages == 1) {
 		$row = @spip_fetch_array($result_messages);
 		$ze_message=$row['id_message'];
-		return "<div class='messages'><a href='" . generer_url_ecrire("message","id_message=$ze_message") . "'><font color='$couleur_foncee'>"._T('info_nouveau_message')."</font></a></div>";
+		return "<div class='messages'><a href='" . generer_url_ecrire("message","id_message=$ze_message") . "'><span style='color: $couleur_foncee'>"._T('info_nouveau_message')."</span></a></div>";
 	} elseif ($total_messages > 1)
-		return "<div class='messages'><a href='" . generer_url_ecrire("messagerie") . "'><font color='$couleur_foncee'>"._T('info_nouveaux_messages', array('total_messages' => $total_messages))."</font></a></div>";
+		return "<div class='messages'><a href='" . generer_url_ecrire("messagerie") . "'><span style='color: $couleur_foncee'>"._T('info_nouveaux_messages', array('total_messages' => $total_messages))."</span></a></div>";
 	else return '';
 }
 

@@ -202,9 +202,9 @@ function aff_referers ($result, $limit, $plus) {
 
 			$ret .= "\n<li>";
 
-			if ($visites > 5) $ret .= "<font color='red'>$visites "._T('info_visites')."</font> ";
+			if ($visites > 5) $ret .= "<span style='color: red'>$visites "._T('info_visites')."</span> ";
 			else if ($visites > 1) $ret .= "$visites "._T('info_visites')." ";
-			else $ret .= "<font color='#999999'>$visites "._T('info_visite')."</font> ";
+			else $ret .= "<span style='color: #999999'>$visites "._T('info_visite')."</span> ";
 		
 		
 			if ($lesdomaines[$numero] == "(email)") {
@@ -215,7 +215,7 @@ function aff_referers ($result, $limit, $plus) {
 				global $couleur_foncee;
 				$referers = join ("</li><li>",$lesreferers[$numero]);
 				$aff .= $ret;
-				$aff .= "<a href='http://".quote_amp($lesurls[$numero])."'><b><font color='$couleur_foncee'>".$lesdomaines[$numero]."</font></b></a>";
+				$aff .= "<a href='http://".quote_amp($lesurls[$numero])."'><span style='color: $couleur_foncee; font-weight: bold;'>".$lesdomaines[$numero]."</span></a>";
 				if ($rac = $lesliensracine[$numero]) $aff .= " <font size='1'>($rac)</font>";
 				$aff .= "<ul style='font-size:x-small;'><li>$referers</li></ul>";
 				$aff .= "</li></ul><ul style='font-size:small;'>\n";

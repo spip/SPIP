@@ -239,7 +239,7 @@ function coupe_trop_long($texte){
 // http://doc.spip.org/@editer_article_recolle
 function editer_article_recolle($texte, $att_text)
 {
-	$textes_supplement = "<br /><font color='red'>"._T('info_texte_long')."</font>\n";
+	$textes_supplement = "<br /><span style='color: red'>"._T('info_texte_long')."</span>\n";
 	$nombre = 0;
 
 	while (strlen($texte)>29*1024) {

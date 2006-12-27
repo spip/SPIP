@@ -54,7 +54,7 @@ function verifier_base() {
 		$ok = ($row[3] == 'OK');
 
 		if (!$ok)
-			$res .= "<pre><font color='red'><b>".htmlentities(join("\n", $row))."</b></font></pre>\n";
+			$res .= "<pre><span style='color: red; font-weight: bold;'>".htmlentities(join("\n", $row))."</span></pre>\n";
 		else
 			$res .= " "._T('texte_table_ok')."<br />\n";
 
@@ -85,7 +85,7 @@ function exec_admin_repair_dist()
 		debut_admin("admin_repair", $action, $message);
 
 		if (! $res = verifier_base())
-			$res = "<br /><br /><font color='red'><b><tt>"._T('avis_erreur_mysql').' '.spip_sql_errno().': '.spip_sql_error() ."</tt></b></font><br /><br /><br />\n";
+			$res = "<br /><br /><span style='color: red; font-weight: bold;'><tt>"._T('avis_erreur_mysql').' '.spip_sql_errno().': '.spip_sql_error() ."</tt></span><br /><br /><br />\n";
 		fin_admin($action);
 		echo minipres(_T('texte_tentative_recuperation'), $res);
 	}

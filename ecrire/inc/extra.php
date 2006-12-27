@@ -232,7 +232,7 @@ function extra_form($extra, $type, $ensemble='') {
 				break;
 
 			case "masque":
-				$affiche .= "<font color='#555555'>".interdire_scripts($extra[$champ])."</font>\n";
+				$affiche .= "<span style='color: #555555'>".interdire_scripts($extra[$champ])."</span>\n";
 				break;
 
 			case "ligne":

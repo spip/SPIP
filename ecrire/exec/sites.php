@@ -264,7 +264,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 	'</font></p>';
 
 	if ($erreur_syndic)
-		echo "<p><font color='red'><b>$erreur_syndic</b></font></p>";
+		echo "<p style='color: red; font-weight: bold;'>",$erreur_syndic,"</p>";
 
 	if ($syndication == "off" OR $syndication=="sus") {
 		debut_boite_info();

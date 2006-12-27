@@ -46,7 +46,7 @@ function forum_parent($id_forum) {
 			 'type' => 'id_article',
 			 'valeur' => $id_article,
 			 'titre' => $titre,
-			 'avant' => "<a href='" . generer_url_ecrire("articles_forum","id_article=$id_article") . "'><font color='red'>"._T('lien_forum_public'). "</font></a><br />");
+			 'avant' => "<a href='" . generer_url_ecrire("articles_forum","id_article=$id_article") . "'><span style='color: red'>"._T('lien_forum_public'). "</span></a><br />");
 	  }
 	}
 	else if ($forum_id_rubrique > 0) {
