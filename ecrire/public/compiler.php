@@ -772,7 +772,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 	$secondes = spip_timer('calcul_skel');
 	spip_log("COMPIL ($secondes) ["
 		.preg_replace(',\.html$,', '', $sourcefile)
-		."] ".sous_repertoire(_DIR_CACHE, 'skel', true)."$nom.php");
+		."] $nom.php");
 
 	$code = "<"."?php
 /*
