@@ -145,9 +145,18 @@ function produire_acceder_couche($couches, $nom, $icone) {
 			. _DIR_IMG_PACK."',"
 			. $couche[1].');';
 
+	$t = _T('info_deplier');
+
 	return 
-	'<img name="triangle'.$nom.'" src="'._DIR_IMG_PACK.$icone.'" alt="'._T('info_deplier').'" title="'._T('info_deplier').'" border="0" height="10" width="10"
-onclick="'.join(' ',$onclick).'" />';
+	'<img id="triangle'.$nom.'" src="'
+	  . _DIR_IMG_PACK . $icone
+	  . '" alt="'
+	  . $t
+	  . '" title="'
+	  . $t
+	  . '" class="swap-couche"
+	onclick="'
+	  . join(' ',$onclick).'" />';
 
 }
 
