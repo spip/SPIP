@@ -176,7 +176,7 @@ function exec_rubriques_edit_dist()
 	. _T('bouton_enregistrer')
 	. "' class='fondo' />\n</p>";
 
-	echo redirige_action_auteur("editer_rubrique", $arg ? $arg : 'oui', 'naviguer', '', $form, " method='post'");
+	echo redirige_action_auteur("editer_rubrique", $id_rubrique ? $id_rubrique : 'oui', 'naviguer', '', $form, " method='post'");
 
 	fin_cadre_formulaire();
 
