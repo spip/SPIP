@@ -1423,7 +1423,7 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 	return $res;
 }
 
-
+// l'argument align n'est plus jamais fourni
 // http://doc.spip.org/@icone
 function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 	global $spip_display;
@@ -1475,8 +1475,7 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 	$lien = "\nhref='$lien'$atts";
 
 	$icone = "\n<table cellpadding='0' class='pointeur' cellspacing='0' border='0' width='$largeur'"
-	. ((strlen($align) > 2) ? " align='$align' " : '')
-	. ">\n<tr><td class='icone36$style' style='text-align:center;'><a"
+	. ">\n<tr><td class='icone36$style'><a"
 	. $lien
 	. '>'
 	. $icone

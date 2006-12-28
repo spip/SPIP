@@ -66,9 +66,9 @@ function inc_tourner_dist($id_document, $document, $script, $flag, $type)
 	$res .= document_et_vignette($document, $url, true);
 	$res .= "</div>\n";
 
-	$res .= "<div class='verdana1' style='text-align: center;'>"
-	. " <font size='1' face='arial,helvetica,sans-serif' color='333333'>&lt;doc$id_document&gt;</font>"
-	. "</div>";
+	$res .= "<div class='verdana1' style='text-align: center; font-size: 12px; font-family: arial,helvetica,sans-serif; color: 333333;'>&lt;doc"
+	.  $id_document
+	. "&gt;</div>";
 
 	if ($boite) return "$boite<div>$res</div>";
 

@@ -175,7 +175,7 @@ function http_visualiser_participants($auteurs_tmp)
     _T('info_nombre_partcipants') .
     "</b></span>" .
     ((count($auteurs_tmp) == 0) ? '' :
-     (" <font class='arial2'>".join($auteurs_tmp,", ")."</font>")) .
+     (" <span class='arial2'>".join($auteurs_tmp,", ")."</span>")) .
     "</td></tr></table>\n";
 }
 
@@ -359,13 +359,13 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 	echo "\n<table width='100%' cellpadding='0' cellspacing='0' border='0'>";
 	echo "<tr><td>"; # uniques
 
-	echo "<font face='Verdana,Arial,Sans,sans-serif' size='2' color='$la_couleur'><b>$le_type</b></font><br />";
+	echo "<span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 14px; color: $la_couleur'><b>$le_type</b></span><br />";
 	echo "<font face='Verdana,Arial,Sans,sans-serif' size='5'><b>$titre</b></font>";
 	if ($statut == 'redac') {
-		echo "<br /><font face='Verdana,Arial,Sans,sans-serif' size='2' color='red'><b>"._T('info_redaction_en_cours')."</b></font>";
+		echo "<br /><span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 14px; color: red;'><b>"._T('info_redaction_en_cours')."</b></span>";
 	}
 	else if ($rv == 'non') {
-		echo "<br /><font face='Verdana,Arial,Sans,sans-serif' size='2' color='#666666'><b>".nom_jour($date_heure).' '.affdate_heure($date_heure)."</b></font>";
+		echo "<br /><span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 14px; color: #666666;'><b>".nom_jour($date_heure).' '.affdate_heure($date_heure)."</b></span>";
 	}
 
 
@@ -398,8 +398,8 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 	}
 
 	if ($expediteur == $connect_id_auteur AND $statut == 'redac') {
-	  if ($type == 'normal' AND $total_dest < 2){
-	    echo "<p align='right'><font face='Verdana,Arial,Sans,sans-serif' size='2' color='#666666'><b>"._T('avis_destinataire_obligatoire')."</b></font></p>";
+	  if ($type == 'normal' AND $total_dest < 2) {
+	    echo "<p style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 14px; color: #666666; text-align: right;'><b>"._T('avis_destinataire_obligatoire')."</b></p>";
 	  } else {
 	    echo "\n<div align='center'><table><tr><td>";
 	    icone (_T('icone_envoyer_message'), (generer_url_ecrire("message","id_message=$id_message&change_statut=publie")), "messagerie-24.gif", "creer.gif");
