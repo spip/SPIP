@@ -328,10 +328,12 @@ function f_tidy ($texte) {
 }
 
 // Inserer les css et js meme si #INSERT_HEAD n'est pas dans le squelette
+// http://doc.spip.org/@f_insert_head
 function f_insert_head($texte){
 	return "<!--insert_head-->".$texte;
 }
 
+// http://doc.spip.org/@f_insert_head_defaut
 function f_insert_head_defaut($texte){
 	if ($GLOBALS['desactiver_insert_head_defaut']==true) return $texte;
 	if (($p = strpos($texte,"<!--insert_head-->"))!==FALSE){
