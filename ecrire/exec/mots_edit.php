@@ -42,6 +42,7 @@ global
 //
 // Recupere les donnees
 //
+	$out = "";
 
 	$row = spip_fetch_array(spip_query("SELECT * FROM spip_mots WHERE id_mot=$id_mot"));
 	 if ($row) {
@@ -56,7 +57,7 @@ global
 	 pipeline('exec_init',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
 
 	 $commencer_page = charger_fonction('commencer_page', 'inc');
-	 echo $commencer_page("&laquo; $titre_mot &raquo;", "naviguer", "mots");
+	 $out .= $commencer_page("&laquo; $titre_mot &raquo;", "naviguer", "mots");
 	 
 	 $multi_js = "";
 	 if($GLOBALS['meta']['multi_rubriques']=="oui" || $GLOBALS['meta']['multi_articles']=="oui" || $GLOBALS['meta']['multi_secteurs']=="oui") {
@@ -69,9 +70,9 @@ global
 		"});\n".
 		"</script>\n";
 	 }
-	 echo $multi_js; 
+	 $out .= $multi_js; 
 
-	 debut_gauche();
+	 $out .= debut_gauche('',true);
 
 
 //////////////////////////////////////////////////////
@@ -85,14 +86,14 @@ global
 		.  $id_mot
 		.  '</span></div>';
 
-		debut_boite_info();
-		echo $res;
-		voir_en_ligne ('mot', $id_mot);
-		fin_boite_info();
+		$out .= debut_boite_info(true);
+		$out .= $res;
+		$out .= voir_en_ligne ('mot', $id_mot, false, 'racine-24.gif', false);
+		$out .= fin_boite_info(true);
 		$onfocus ='';
 
 	 } elseif (!$new OR !acces_mots()) {
-		echo _T('info_mot_sans_groupe');
+		$out .= _T('info_mot_sans_groupe');
 		exit;
 	 } else {
 		if (!$titre_mot = $titre) {
@@ -107,7 +108,7 @@ global
 
 	if ($id_mot > 0 AND acces_mots() AND ($spip_display != 4)) {
 		$iconifier = charger_fonction('iconifier', 'inc');
-		echo $iconifier('id_mot', $id_mot, 'mots_edit');
+		$out .= $iconifier('id_mot', $id_mot, 'mots_edit');
 	}
 
 //
@@ -121,49 +122,49 @@ global
 		  . icone_horizontale(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit", "new=oui&id_groupe=$id_groupe&redirect=" . generer_url_retour('mots_tous')),  "mot-cle-24.gif",  "creer.gif", false);
 	}
 
-	echo bloc_des_raccourcis($res . icone_horizontale(_T('icone_voir_tous_mots_cles'), generer_url_ecrire("mots_tous",""), "mot-cle-24.gif", "rien.gif", false));
+	$out .= bloc_des_raccourcis($res . icone_horizontale(_T('icone_voir_tous_mots_cles'), generer_url_ecrire("mots_tous",""), "mot-cle-24.gif", "rien.gif", false));
 
-	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
+	$out .= pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
 
-	creer_colonne_droite();
+	$out .= creer_colonne_droite('',true);
 
-	echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
+	$out .= pipeline('affiche_droite',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
 
-	debut_droite();
+	$out .= debut_droite('',true);
 
-	debut_cadre_relief("mot-cle-24.gif");
+	$out .= debut_cadre_relief("mot-cle-24.gif",true);
 
 
-	echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
-	echo "<tr>";
-	echo "<td style='width: 100%' valign='top'>";
-	gros_titre($titre_mot);
+	$out .= "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
+	$out .= "<tr>";
+	$out .= "<td style='width: 100%' valign='top'>";
+	$out .= gros_titre($titre_mot,'',false);
 
 
 	if ($descriptif) {
-		echo "<div style='border: 1px dashed #aaaaaa; font-size: 14px; font-family: Verdana,Arial,Sans,sans-serif;'>";
-		echo "<b>",_T('info_descriptif'),"</b> ";
-		echo propre($descriptif);
-		echo "&nbsp; ";
-		echo "</div>";
+		$out .= "<div style='border: 1px dashed #aaaaaa; font-size: 14px; font-family: Verdana,Arial,Sans,sans-serif;'>";
+		$out .= "<b>" . _T('info_descriptif') . "</b> ";
+		$out .= propre($descriptif);
+		$out .= "&nbsp; ";
+		$out .= "</div>";
 	}
 
-	echo "</td>";
-	echo "</tr></table>\n";
+	$out .= "</td>";
+	$out .= "</tr></table>\n";
 
 
 	if (strlen($texte)>0){
-		echo "<p style='font-family: Verdana,Arial,Sans,sans-serif'>";
-		echo propre($texte);
-		echo "</p>";
+		$out .= "<p style='font-family: Verdana,Arial,Sans,sans-serif'>";
+		$out .= propre($texte);
+		$out .= "</p>";
 	}
 
 	if ($les_notes) {
-		echo debut_cadre_relief();
-		echo "<div $dir_lang class='arial11'>";
-		echo justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes);
-		echo "</div>";
-		echo fin_cadre_relief();
+		$out .= debut_cadre_relief('',true);
+		$out .= "<div $dir_lang class='arial11'>";
+		$out .= justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes);
+		$out .= "</div>";
+		$out .= fin_cadre_relief(true);
 	}
 
 	if ($id_mot) {
@@ -173,21 +174,23 @@ global
 		else
 			$aff_articles = "'prop','publie'";
 
-		echo afficher_rubriques('<b>' . _T('info_rubriques_liees_mot') . '</b>', array("FROM" => 'spip_rubriques AS rubrique, spip_mots_rubriques AS lien', 'WHERE' => "lien.id_mot='$id_mot' AND lien.id_rubrique=rubrique.id_rubrique", 'ORDER BY' => "rubrique.titre"));
+		$out .= afficher_rubriques('<b>' . _T('info_rubriques_liees_mot') . '</b>', array("FROM" => 'spip_rubriques AS rubrique, spip_mots_rubriques AS lien', 'WHERE' => "lien.id_mot='$id_mot' AND lien.id_rubrique=rubrique.id_rubrique", 'ORDER BY' => "rubrique.titre"));
 
-		echo afficher_articles(_T('info_articles_lies_mot'),	array('FROM' => "spip_articles AS articles, spip_mots_articles AS lien", 'WHERE' => "lien.id_mot='$id_mot' AND lien.id_article=articles.id_article AND articles.statut IN ($aff_articles)", 'ORDER BY' => "articles.date DESC"));
+		$out .= afficher_articles(_T('info_articles_lies_mot'),	array('FROM' => "spip_articles AS articles, spip_mots_articles AS lien", 'WHERE' => "lien.id_mot='$id_mot' AND lien.id_article=articles.id_article AND articles.statut IN ($aff_articles)", 'ORDER BY' => "articles.date DESC"));
 
-		echo afficher_breves('<b>' . _T('info_breves_liees_mot') . '</b>', array("FROM" => 'spip_breves AS breves, spip_mots_breves AS lien', 'WHERE' => "lien.id_mot='$id_mot' AND lien.id_breve=breves.id_breve", 'ORDER BY' => "breves.date_heure DESC"));
+		$out .= afficher_breves('<b>' . _T('info_breves_liees_mot') . '</b>', array("FROM" => 'spip_breves AS breves, spip_mots_breves AS lien', 'WHERE' => "lien.id_mot='$id_mot' AND lien.id_breve=breves.id_breve", 'ORDER BY' => "breves.date_heure DESC"));
 
 		include_spip('inc/sites_voir');
-		echo afficher_sites('<b>' . _T('info_sites_lies_mot') . '</b>', array("FROM" => 'spip_syndic AS syndic, spip_mots_syndic AS lien', 'WHERE' => "lien.id_mot='$id_mot' AND lien.id_syndic=syndic.id_syndic", 'ORDER BY' => "syndic.nom_site DESC"));
+		$out .= afficher_sites('<b>' . _T('info_sites_lies_mot') . '</b>', array("FROM" => 'spip_syndic AS syndic, spip_mots_syndic AS lien', 'WHERE' => "lien.id_mot='$id_mot' AND lien.id_syndic=syndic.id_syndic", 'ORDER BY' => "syndic.nom_site DESC"));
 	}
 
-	fin_cadre_relief();
+	$out .= fin_cadre_relief(true);
+
+	$out .= pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
 
 	if (acces_mots()){
 
-		debut_cadre_formulaire();
+		$out .= debut_cadre_formulaire('',true);
 
 		$res = "<div class='serif'>";
 
@@ -239,12 +242,12 @@ global
 			$redirect = generer_url_ecrire('mots_edit','id_mot='.$id_mot, '&',true);
 		else
 			$redirect = rawurldecode($redirect);
-		echo generer_action_auteur("instituer_mot", $id_mot, _DIR_RESTREINT_ABS . $redirect, $res);
+		$out .= generer_action_auteur("instituer_mot", $id_mot, _DIR_RESTREINT_ABS . $redirect, $res);
 
-		fin_cadre_formulaire();
+		$out .= fin_cadre_formulaire(true);
 	}
 
-	echo fin_gauche(), fin_page();
+	echo $out, fin_gauche(), fin_page();
 }
 
 
