@@ -1998,7 +1998,7 @@ function afficher_enfant_rub($id_rubrique, $bouton=false, $return=false) {
 	. "</td></tr>"
 	. "\n<tr><td style='text-align: "
 	. $spip_lang_right
-	. ";' valign='bottom'>\n<div align='"
+	. ";' valign='bottom'>\n<div style='float:"
 	. $spip_lang_right
 	. "'>"
 	. (!$bouton ? ''
