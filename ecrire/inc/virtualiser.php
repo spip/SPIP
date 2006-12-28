@@ -22,16 +22,12 @@ function inc_virtualiser_dist($id_article, $flag, $virtuel, $script, $args)
 	  return '';
 
 	$http = ($virtuel ? "" : "http://");
-
+	$t = _T('texte_reference_mais_redirige');
 	$res = "<input type='text' name='virtuel' class='formo' style='font-size:9px;' value='"
 	. $http
 	. $virtuel
 	. "' size='40' /><br />\n"
-	. "<font face='Verdana,Arial,Sans,sans-serif' size='2'>"
-	. "(<b>"._T('texte_article_virtuel')
-	. "&nbsp;:</b> "
-	. _T('texte_reference_mais_redirige')
-	. ")</font>"
+	. "<span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 14px;'>(<b>"._T('texte_article_virtuel') . "&nbsp;:</b>$t)</span>"
 	. "\n<div align='$spip_lang_right'><input type='submit' class='fondo' value='"
 	. _T('bouton_changer')
 	. "' style='font-size:10px' /></div>";

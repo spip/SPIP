@@ -141,12 +141,10 @@ function exec_rubriques_edit_dist()
 
 	if ($contient_breves > 0) {
 		$scb = ($contient_breves>1? 's':'');
-
-		$form .= "<div><font size='2'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace' /><label for='confirme-deplace'>&nbsp;"
-		. _T('avis_deplacement_rubrique',
+		$scb = _T('avis_deplacement_rubrique',
 			array('contient_breves' => $contient_breves,
-				'scb' => $scb))
-		. "</font></label></div>\n";
+			      'scb' => $scb));
+		$form .= "<div><span style='font-size: 14px;'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace' /><label for='confirme-deplace'>&nbsp;" . $scb . "</span></label></div>\n";
 	} else
 		$form .= "<input type='hidden' name='confirme_deplace' value='oui' />\n";
 

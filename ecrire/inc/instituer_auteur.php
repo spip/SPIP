@@ -43,9 +43,7 @@ function inc_instituer_auteur_dist($id_auteur, $statut, $url_self)
 
 		$lien = !$modif 
 		? ''
-		: array("&nbsp;&nbsp;&nbsp;&nbsp;[<font size='1'>"
-			. _T('lien_supprimer_rubrique')
-			. "</font>]");
+		: array("&nbsp;&nbsp;&nbsp;&nbsp;[<span style='font-size: 12px;'>" . _T('lien_supprimer_rubrique') . "</span>]");
 
 		$res = '';
 

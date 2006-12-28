@@ -98,9 +98,7 @@ function afficher_message_boucles($row, &$messages_vus, $voir_logo, $afficher_au
 		}
 
 		if ($auteurs AND $type == 'normal') {
-			$s = "<font face='Arial,Sans,sans-serif' size='1'>";
-			$s .= join(', ', $auteurs);
-			$s .= "</font>";
+			$s = "<span style='font-family: Arial,Sans,sans-serif; font-size: 12px;'>" . join(', ', $auteurs) . "</span>";
 		} else $s = "&nbsp;";
 		$vals[] = $s;
 	}

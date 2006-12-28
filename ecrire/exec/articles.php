@@ -314,7 +314,7 @@ function bouton_modifier_articles($id_article, $id_rubrique, $flag_modif, $mode,
 {
 	if ($flag_modif) {
 		return icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), $ip, $im, $align, false)
-		. "<font face='arial,helvetica,sans-serif' size='2'>$mode</font>"
+		. "<span style='font-family: arial,helvetica,sans-serif; font-size: 14px;'>$mode</span>"
 		. aide("artmodif");
 	}
 	else return icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), "article-24.gif", "edit.gif", $align, false);
@@ -328,17 +328,13 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 	$res = '';
 
 	if ($surtitre) {
-		$res .= "<span $dir_lang><font face='arial,helvetica' size='3'><b>";
-		$res .= typo($surtitre);
-		$res .= "</b></font></span>\n";
+		$res .= "<span $dir_lang><span style='font-family: arial,helvetica; font-size: 16px;'><b>" . typo($surtitre) . "</b></span></span>\n";
 	}
 	 
 	$res .= gros_titre($titre, "puce-".puce_statut($statut_article).".gif", false);
 	
 	if ($soustitre) {
-		$res .= "<span $dir_lang><font face='arial,helvetica' size='3'><b>";
-		$res .= typo($soustitre);
-		$res .= "</b></font></span>\n";
+		$res .= "<span $dir_lang><span style='font-family: arial,helvetica; font-size: 16px;'><b>" . typo($soustitre) . "</b></span></span>\n";
 	}
 	
 	if ($descriptif OR $url_site OR $nom_site) {

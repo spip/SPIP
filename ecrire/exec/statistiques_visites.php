@@ -557,31 +557,31 @@ if ($GLOBALS['accepte_svg']) {
 			echo "<td valign='top'><div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;'>";
 			echo "<table cellpadding='0' cellspacing='0' border='0'>";
 			echo "<tr><td height='15' valign='top'>";		
-			echo "<font face='arial,helvetica,sans-serif' size='1'><b>".round($maxgraph)."</b></font>";
+			echo "<span style='font-family: arial,helvetica,sans-serif; font-size: 12px;'><b>".round($maxgraph)."</b></span>";
 			echo "</td></tr>";
 			echo "<tr><td height='25' valign='middle'>";		
 			echo "<span $style>",round(7*($maxgraph/8))."</span>";
 			echo "</td></tr>";
 			echo "<tr><td height='25' valign='middle'>";		
-			echo "<font face='arial,helvetica,sans-serif' size='1'>".round(3*($maxgraph/4))."</font>";
+			echo "<span style='font-family: arial,helvetica,sans-serif; font-size: 12px;'>".round(3*($maxgraph/4))."</span>";
 			echo "</td></tr>";
 			echo "<tr><td height='25' valign='middle'>";		
 			echo "<span $style>",round(5*($maxgraph/8)),"</span>";
 			echo "</td></tr>";
 			echo "<tr><td height='25' valign='middle'>";		
-			echo "<font face='arial,helvetica,sans-serif' size='1'><b>".round($maxgraph/2)."</b></font>";
+			echo "<span style='font-family: arial,helvetica,sans-serif; font-size: 12px;'><b>".round($maxgraph/2)."</b></span>";
 			echo "</td></tr>";
 			echo "<tr><td height='25' valign='middle'>";		
 			echo "<span $style>",round(3*($maxgraph/8)),"</span>";
 			echo "</td></tr>";
 			echo "<tr><td height='25' valign='middle'>";		
-			echo "<font face='arial,helvetica,sans-serif' size='1'>".round($maxgraph/4)."</font>";
+			echo "<span style='font-family: arial,helvetica,sans-serif; font-size: 12px;'>".round($maxgraph/4)."</span>";
 			echo "</td></tr>";
 			echo "<tr><td height='25' valign='middle'>";		
 			echo "<span $style>",round(1*($maxgraph/8)),"</span>";
 			echo "</td></tr>";
 			echo "<tr><td height='10' valign='bottom'>";		
-			echo "<font face='arial,helvetica,sans-serif' size='1'><b>0</b></font>";
+			echo "<span style='font-family: arial,helvetica,sans-serif; font-size: 12px;'><b>0</b></span>";
 			echo "</td>";
 			
 			
@@ -615,12 +615,9 @@ if ($GLOBALS['accepte_svg']) {
 		// (desactive au profit de la moeynne "glissante")
 		# $moyenne =  round($total_absolu / ((date("U")-$date_premier)/(3600*24)));
 
-		echo "<font face='arial,helvetica,sans-serif' size='1'>"._T('texte_statistiques_visites')."</font>";
+		echo "<span style='font-family: arial,helvetica,sans-serif; font-size: 12px;'>"._T('texte_statistiques_visites')."</span>";
 		echo "<br /><table cellpadding='0' cellspacing='0' border='0' width='100%'><tr style='width:100%;'>";
-		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Sans,sans-serif'>";
-		echo _T('info_maximum')." ".$max;
-		echo "<br />"._T('info_moyenne')." ".round($moyenne);
-		echo "</font></td>";
+		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Sans,sans-serif'>", _T('info_maximum')." ".$max, "<br />"._T('info_moyenne')." ".round($moyenne), "</font></td>";
 		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Sans,sans-serif'>";
 		echo '<a href="' . generer_url_ecrire("statistiques_referers","").'" title="'._T('titre_liens_entrants').'">'._T('info_aujourdhui').'</a> '.$visites_today;
 		if ($val_prec > 0) echo '<br /><a href="' . generer_url_ecrire("statistiques_referers","jour=veille").'"  title="'._T('titre_liens_entrants').'">'._T('info_hier').'</a> '.$val_prec;
@@ -639,17 +636,14 @@ if ($GLOBALS['accepte_svg']) {
 				echo "<br />".$classement[$id_article].$ch;
 			}
 		} else {
-			echo "<font size='1'>";
-			echo "<br />"._T('info_popularite_2')." ";
-			echo ceil($GLOBALS['meta']['popularite_total']);
-			echo "</font>";
+		  echo "<span style='font-size: 12px;'><br />"._T('info_popularite_2')." ", ceil($GLOBALS['meta']['popularite_total']), "</span>";
 		}
 		echo "</font></td></tr></table>";	
 	}		
 	
 	if (count($log) > 60) {
 		echo "<br />";
-		echo "<font face='verdana,arial,helvetica,sans-serif' size='2'><b>"._T('info_visites_par_mois')."</b></font>";
+		echo "<span style='font-family: verdana,arial,helvetica,sans-serif; font-size: 14px;'><b>"._T('info_visites_par_mois')."</b></span>";
 
 		echo "<div align='left'>";
 		///////// Affichage par mois
@@ -755,31 +749,31 @@ if ($GLOBALS['accepte_svg']) {
 		echo "<td valign='top'><div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;'>";
 		echo "<table cellpadding='0' cellspacing='0' border='0'>";
 		echo "<tr><td height='15' valign='top'>";		
-		echo "<font face='arial,helvetica,sans-serif' size='1'><b>".round($maxgraph)."</b></font>";
+		echo "<span style='font-family: arial,helvetica,sans-serif; font-size: 12px;'><b>".round($maxgraph)."</b></span>";
 		echo "</td></tr>";
 		echo "<tr><td height='25' valign='middle' $style>";		
 		echo round(7*($maxgraph/8));
 		echo "</td></tr>";
 		echo "<tr><td height='25' valign='middle'>";		
-		echo "<font face='arial,helvetica,sans-serif' size='1'>".round(3*($maxgraph/4))."</font>";
+		echo "<span style='font-family: arial,helvetica,sans-serif; font-size: 12px;'>".round(3*($maxgraph/4))."</span>";
 		echo "</td></tr>";
 		echo "<tr><td height='25' valign='middle' $style>";		
 		echo round(5*($maxgraph/8));
 		echo "</td></tr>";
 		echo "<tr><td height='25' valign='middle'>";		
-		echo "<font face='arial,helvetica,sans-serif' size='1'><b>".round($maxgraph/2)."</b></font>";
+		echo "<span style='font-family: arial,helvetica,sans-serif; font-size: 12px;'><b>".round($maxgraph/2)."</b></span>";
 		echo "</td></tr>";
 		echo "<tr><td height='25' valign='middle' $style>";		
 		echo round(3*($maxgraph/8));
 		echo "</td></tr>";
 		echo "<tr><td height='25' valign='middle'>";		
-		echo "<font face='arial,helvetica,sans-serif' size='1'>".round($maxgraph/4)."</font>";
+		echo "<span style='font-family: arial,helvetica,sans-serif; font-size: 12px;'>".round($maxgraph/4)."</span>";
 		echo "</td></tr>";
 		echo "<tr><td height='25' valign='middle' $style>";		
 		echo round(1*($maxgraph/8));
 		echo "</td></tr>";
 		echo "<tr><td height='10' valign='bottom'>";		
-		echo "<font face='arial,helvetica,sans-serif' size='1'><b>0</b></font>";
+		echo "<span style='font-family: arial,helvetica,sans-serif; font-size: 12px;'><b>0</b></span>";
 		echo "</td>";
 
 		echo "</tr></table>";
