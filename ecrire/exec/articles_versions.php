@@ -180,7 +180,7 @@ if ($descriptif OR $url_site OR $nom_site) {
 	echo "<div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;' $dir_lang>";
 	$texte_case = ($descriptif) ? "{{"._T('info_descriptif')."}} $descriptif\n\n" : '';
 	$texte_case .= ($nom_site.$url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
-	echo "<font size='2' face='Verdana,Arial,Sans,sans-serif'>", propre($texte_case), "</font>";
+	echo "<span style='font-size: 14px; font-family: Verdana,Arial,Sans,sans-serif'>", propre($texte_case), "</span>";
 	echo "</div>";
 }
 
@@ -284,7 +284,7 @@ if ($id_version) {
 	
 		if ($ps) {
 			echo debut_cadre_enfonce();
-			echo "<div $dir_lang><font size='2' face='Verdana,Arial,Sans,sans-serif'>", justifier("<b>"._T('info_ps')."</b> ".propre_diff($ps)), "</font></div>";
+			echo "<div $dir_lang style='font-size: 14px; font-family: Verdana,Arial,Sans,sans-serif'>", justifier("<b>"._T('info_ps')."</b> ".propre_diff($ps)), "</div>";
 			echo fin_cadre_enfonce();
 		}
 		$revision_nbsp = false;

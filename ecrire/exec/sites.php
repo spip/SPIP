@@ -256,7 +256,7 @@ if (!$resume AND !$resume = $row['resume']) $resume = 'oui';
 
 
 if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
-	echo "<p><font size='3' face='Verdana,Arial,Sans,sans-serif'>",	"<a href='".htmlspecialchars($url_syndic)."'>",	http_img_pack('feed.png', 'RSS', ''),	'</a> ', '<b>'._T('info_site_syndique').'</b></font></p>';
+	echo "<p style='font-size: 16px; font-family: Verdana,Arial,Sans,sans-serif'><a href='".htmlspecialchars($url_syndic)."'>",	http_img_pack('feed.png', 'RSS', ''),	'</a> <b>'._T('info_site_syndique').'</b></p>';
 
 	if ($erreur_syndic)
 		echo "<p style='color: red; font-weight: bold;'>",$erreur_syndic,"</p>";

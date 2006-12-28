@@ -295,7 +295,7 @@ function import_affiche_javascript($taille)
 {
 	$max_time = ini_get('max_execution_time')*1000;
 	echo debut_boite_alerte(),
-	  "<font face='Verdana,Arial,Sans,sans-serif' size='4' color='black'><b>",  _T('info_base_restauration'),  "</b></font>",
+	  "<span font-family: Verdana,Arial,Sans,sans-serif; font-size: 18px; color: black'><b>",  _T('info_base_restauration'),  "</b></span>",
 	  "<form name='progression'><center><input type='text' size='10' style='text-align:center;' name='taille' value='",
 	  $taille,
 	  "'><br /><input type='text' class='forml' name='recharge' value='"._T('info_recharger_page')."'></center></form>",
