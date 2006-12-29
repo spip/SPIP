@@ -197,14 +197,14 @@ function info_copyright() {
 	if ($svn_revision = version_svn_courante(_DIR_RACINE)) {
 		$version .= ' ' . (($svn_revision < 0) ? 'SVN ':'')
 		. "[<a href='http://trac.rezo.net/trac/spip/changeset/"
-		. abs($svn_revision) . "' target='_blank'>"
+		. abs($svn_revision) . "' onclick=\"window.open(this.href); return false;\">"
 		. abs($svn_revision) . "</a>]";
 	}
 
 	return _T('info_copyright', 
 		   array('spip' => "<b>SPIP $version</b> ",
 			 'lien_gpl' => 
-			 "<a href='". generer_url_ecrire("aide_index", "aide=licence&var_lang=$spip_lang") . "' target='spip_aide' onclick=\"javascript:window.open(this.href, 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); return false;\">" . _T('info_copyright_gpl')."</a>"));
+			 "<a href='". generer_url_ecrire("aide_index", "aide=licence&var_lang=$spip_lang") . "' onclick=\"window.open(this.href, 'spip_aide', 'scrollbars=yes,resizable=yes,width=740,height=580'); return false;\">" . _T('info_copyright_gpl')."</a>"));
 
 }
 

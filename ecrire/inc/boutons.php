@@ -79,7 +79,7 @@ function definir_barre_boutons() {
 	$urlAide= generer_url_ecrire('aide_index')."&amp;var_lang=$spip_lang";
 	$boutons_admin['aide_index']=
 		  new Bouton('aide-48'.$spip_lang_rtl.'.png', 'icone_aide_ligne',
-					 $urlAide, null, "javascript:window.open('$urlAide', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580');", 'aide_spip');
+					 $urlAide, null, "javascript:window.open('$urlAide', 'spip_aide', 'scrollbars=yes,resizable=yes,width=740,height=580');", 'aide_spip');
 
 	$boutons_admin['visiter']=
 		new Bouton("visiter-48$spip_lang_rtl.png", 'icone_visiter_site',
@@ -388,7 +388,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 	$class_select = ($sous_rubrique_icone == $sous_rubrique) ? " class='selection'" : '';
 
 	if (eregi("^javascript:",$lien)) {
-		$a_href = "\nonclick=\"$lien; return false;\" href='$lien_noscript' target='spip_aide'";
+		$a_href = "\nonclick=\"$lien; return false;\" href='$lien_noscript' ";
 	}
 	else {
 		$a_href = "\nhref=\"$lien\"";
