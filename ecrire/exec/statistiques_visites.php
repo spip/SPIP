@@ -179,9 +179,9 @@ else {
 				$articles_vus[] = $l_article;
 			
 				if ($l_article == $id_article){
-					echo "\n<li value='$liste'><b>$titre</b>";
+					echo "\n<li><b>$titre</b></li>";
 				} else {
-					echo "\n<li value='$liste'><a href='" . generer_url_ecrire("statistiques_visites","id_article=$l_article") . "' title='"._T('info_popularite', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a>";
+					echo "\n<li><a href='" . generer_url_ecrire("statistiques_visites","id_article=$l_article") . "' title='"._T('info_popularite', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></li>";
 				}
 			}
 		}
@@ -201,9 +201,9 @@ else {
 				$numero = $classement[$l_article];
 				
 				if ($l_article == $id_article){
-					echo "\n<li value='$numero'><b>$titre</b></li>";
+					echo "\n<li><b>$titre</b></li>";
 				} else {
-					echo "\n<li value='$numero'><a href='" . generer_url_ecrire("statistiques_visites","id_article=$l_article") . "' title='"._T('info_popularite_3', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></li>";
+					echo "\n<li><a href='" . generer_url_ecrire("statistiques_visites","id_article=$l_article") . "' title='"._T('info_popularite_3', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></li>";
 				}
 			}
 		}
@@ -238,9 +238,9 @@ else {
 				$numero = $classement[$l_article];
 				
 				if ($l_article == $id_article){
-					echo "\n<li value='$numero'><b>$titre</b></li>";
+					echo "\n<li><b>$titre</b></li>";
 				} else {
-					echo "\n<li value='$numero'><a href='" . generer_url_ecrire("statistiques_visites","id_article=$l_article") . "' title='"._T('info_popularite_4', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></li>";
+					echo "\n<li><a href='" . generer_url_ecrire("statistiques_visites","id_article=$l_article") . "' title='"._T('info_popularite_4', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></li>";
 				}
 		}
 		echo "</ol>";
@@ -453,7 +453,7 @@ if ($GLOBALS['accepte_svg']) {
 						$moyenne = $moyenne / count($tab_moyenne);
 		
 						$hauteur_moyenne = round(($moyenne) * $rapport) - 1;
-						echo "<td valign='bottom' width=$largeur>";
+						echo "<td valign='bottom' width='$largeur'>";
 						$difference = ($hauteur_moyenne) -1;
 						$moyenne = round($moyenne,2); // Pour affichage harmonieux
 						$tagtitle= attribut_html(supprimer_tags("$jour | "
@@ -483,7 +483,7 @@ if ($GLOBALS['accepte_svg']) {
 				$hauteur_moyenne = round($moyenne * $rapport) - 1;
 				$hauteur = round($value * $rapport) - 1;
 				$moyenne = round($moyenne,2); // Pour affichage harmonieux
-				echo "<td valign='bottom' width=$largeur>";
+				echo "<td valign='bottom' width='$largeur'>";
 	
 				$tagtitle= attribut_html(supprimer_tags("$jour | "
 				._T('info_visites')." ".$value));
@@ -527,7 +527,7 @@ if ($GLOBALS['accepte_svg']) {
 			// Dernier jour
 			$hauteur = round($visites_today * $rapport)	- 1;
 			$total_absolu = $total_absolu + $visites_today;
-			echo "<td valign='bottom' width=$largeur>";
+			echo "<td valign='bottom' width='$largeur'>";
 			// prevision de visites jusqu'a minuit
 			// basee sur la moyenne (site) ou popularite (article)
 			if (! $id_article) $val_popularite = $moyenne;
@@ -696,7 +696,7 @@ if ($GLOBALS['accepte_svg']) {
 			
 			$hauteur_moyenne = round($moyenne * $rapport) - 1;
 			$hauteur = round($value * $rapport) - 1;
-			echo "<td valign='bottom' width=$largeur>";
+			echo "<td valign='bottom' width='$largeur'>";
 
 			$tagtitle= attribut_html(supprimer_tags("$mois | "
 			._T('info_visites')." ".$value));
