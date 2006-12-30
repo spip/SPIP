@@ -80,7 +80,7 @@ function articles_forum_cadres($id_rubrique, $id_article, $titre, $script, $args
 
 	debut_boite_info();
 
-	echo "<p style='text-align: left: font-family: Verdana,Arial,Sans,sans-serif; font-size: 11px'>",
+	echo "<p style='text-align: left; font-size: 11px' class='verdana1'>",
 	  _T('info_gauche_suivi_forum'),
 	  aide ("suiviforum"),
 	  "</p>";

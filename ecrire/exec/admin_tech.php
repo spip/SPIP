@@ -69,7 +69,7 @@ function exec_admin_tech_dist()
 
  echo "<table border='0' cellspacing='0' cellpadding='5' width=\"100%\">",
    "<tr><td bgcolor='", $couleur_foncee, "'><b>",
-   "<span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 16px; color: #FFFFFF;'>",   _T('texte_sauvegarde'), "</span></b></td></tr><tr><td class='serif'>",
+   "<span style='font-size: 16px; color: #FFFFFF;' class='verdana1'>",   _T('texte_sauvegarde'), "</span></b></td></tr><tr><td class='serif'>",
    generer_url_post_ecrire("export_all", "reinstall=non"),
    "\n<p align='justify'>",
    http_img_pack('warning.gif', _T('info_avertissement'), "width='48' height='48' align='right'"),
@@ -128,7 +128,7 @@ echo "</table>";
 
 	echo	"\n<table border='0' cellspacing='1' cellpadding='8' width=\"100%\">",
 	"<tr><td bgcolor='#eeeecc'><b>",
-	"<span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 16px; color: #000000;'>", _T('texte_restaurer_base')."</span></b></td></tr>",
+	"<span style='font-size: 16px; color: #000000;' class='verdana1'>", _T('texte_restaurer_base')."</span></b></td></tr>",
 	"<tr><td class='serif'>\n",
 	generer_url_post_ecrire("import_all"),
 	"\n<p align='justify'> ",
@@ -166,7 +166,7 @@ if ($options == "avancees" AND 	$connect_toutes_rubriques) {
 	if ($res >= '3.23.14') {
 		echo "<table border='0' cellspacing='1' cellpadding='8' width=\"100%\">";
 		echo "<tr><td bgcolor='#eeeecc'><b>";
-		echo "<span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 16px; color: #000000;'>", _T('texte_recuperer_base'), "</span></b></td></tr>",
+		echo "<span style='font-size: 16px; color: #000000;' class='verdana1'>", _T('texte_recuperer_base'), "</span></b></td></tr>",
 			"<tr><td class='serif'>",
 			generer_url_post_ecrire("admin_repair"),
 			"\n<p align='justify'>"._T('texte_crash_base'),

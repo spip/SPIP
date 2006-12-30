@@ -141,7 +141,7 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 			$nouveaux_mots[] = $resultat[0];
 			$row = spip_fetch_array(spip_query("SELECT titre FROM spip_mots WHERE id_mot=$resultat[0]"));
 			$res .= "<b>"._T('info_mot_cle_ajoute')." $ou : </b><br /><ul>";
-			$res .= "<li><span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 14px;'><b><span style='font-size: 16px;'>".typo($row['titre'])."</span></b></span></li>\n";
+			$res .= "<li><span style='font-size: 14px;' class='verdana1'><b><span style='font-size: 16px;'>".typo($row['titre'])."</span></b></span></li>\n";
 			$res .= "</ul>";
 		}
 		else $res .= affiche_mots_ressemblant($cherche_mot, $objet, $id_objet, $resultat, $table, $table_id, $url_base);

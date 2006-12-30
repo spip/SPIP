@@ -27,7 +27,7 @@ function inc_virtualiser_dist($id_article, $flag, $virtuel, $script, $args)
 	. $http
 	. $virtuel
 	. "' size='40' /><br />\n"
-	. "<span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 14px;'>(<b>"._T('texte_article_virtuel') . "&nbsp;:</b>$t)</span>"
+	. "<span style='font-size: 14px;' class='verdana1'>(<b>"._T('texte_article_virtuel') . "&nbsp;:</b>$t)</span>"
 	. "\n<div align='$spip_lang_right'><input type='submit' class='fondo' value='"
 	. _T('bouton_changer')
 	. "' style='font-size:10px' /></div>";

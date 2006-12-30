@@ -138,7 +138,7 @@ function http_auteurs_ressemblants($cherche_auteur, $id_message)
     $row = spip_fetch_array(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$nouv_auteur"));
     $nom_auteur = $row['nom'];
     return "<b>"._T('info_ajout_participant')."</b><br />" .
-      "<ul><li><span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 14px;'><b><span style='font-size: 16px;'>$nom_auteur</span></b></span>\n</ul>";
+      "<ul><li><span style='font-size: 14px;' class='verdana1'><b><span style='font-size: 16px;'>$nom_auteur</span></b></span>\n</ul>";
   }
   else if (count($resultat) < 16) {
     $res = '';
@@ -149,7 +149,7 @@ function http_auteurs_ressemblants($cherche_auteur, $id_message)
       $nom_auteur = $row['nom'];
       $email_auteur = $row['email'];
       $bio_auteur = $row['bio'];
-      $res .= "<li><span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 16px;><b>$nom_auteur</b></span>" .
+      $res .= "<li><span style='font-size: 16px; class='verdana1'><b>$nom_auteur</b></span>" .
 	($email_auteur ? " ($email_auteur)" : '') .
 	" | <a href='" . generer_url_ecrire('message', "id_message=$id_message&ajout_auteur=oui&nouv_auteur=$id_auteur") .
 	"'>" .
@@ -188,7 +188,7 @@ function http_ajouter_participants($ze_auteurs, $id_message)
 
       echo "<div align='left'>";
       echo generer_url_post_ecrire('message');
-      echo "<span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 14px;'><b>", _T('bouton_ajouter_participant')," &nbsp; </b></span>\n",
+      echo "<span style='font-size: 14px;' class='verdana1'><b>", _T('bouton_ajouter_participant')," &nbsp; </b></span>\n",
 	"<input type='hidden' name='id_message' value=\"$id_message\" />";
 
       if (spip_num_rows($result_ajout_auteurs) > 50) {
@@ -296,8 +296,8 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $nou
 				$aut =  (($id_auteur != $expediteur) ? '' :
 					 ("<span class='arial0'>".  _T('info_auteur_message') ."</span> "));
 
-				$res .= "<tr><td bgcolor='$couleur'><span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 14px;'>&nbsp;". bonhomme_statut($row)."&nbsp;" .  $aut .	  $nom_auteur .  "</span></td>" .
-				  "<td bgcolor='$couleur' align='right'><span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 12px;'>" . (($id_auteur == $connect_id_auteur) ?  "&nbsp;" : ("[<a href='" . generer_url_ecrire("message","id_message=$id_message&supp_dest=$id_auteur") . "'>"._T('lien_retrait_particpant')."</a>]")) .  "</span></td></tr>\n";
+				$res .= "<tr><td bgcolor='$couleur'><span style='font-size: 14px;' class='verdana1'>&nbsp;". bonhomme_statut($row)."&nbsp;" .  $aut .	  $nom_auteur .  "</span></td>" .
+				  "<td bgcolor='$couleur' align='right'><span style='font-size: 12px;' class='verdana1'>" . (($id_auteur == $connect_id_auteur) ?  "&nbsp;" : ("[<a href='" . generer_url_ecrire("message","id_message=$id_message&supp_dest=$id_auteur") . "'>"._T('lien_retrait_particpant')."</a>]")) .  "</span></td></tr>\n";
 			}
 			echo
 			  http_visualiser_participants($auteurs_tmp),
@@ -314,7 +314,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $nou
 	  else {
 		  echo
 		    debut_block_invisible("ajouter_auteur"),
-		    "<br /><div align='right'><span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 14px;'><a href='" . generer_url_ecrire("message","id_message=$id_message&forcer_dest=oui") . "'>"._T('lien_ajouter_participant')."</a></span></div>",
+		    "<br /><div align='right'><span style='font-size: 14px;' class='verdana1'><a href='" . generer_url_ecrire("message","id_message=$id_message&forcer_dest=oui") . "'>"._T('lien_ajouter_participant')."</a></span></div>",
 		    fin_block();
 		}
 	  fin_cadre_enfonce();
@@ -349,13 +349,13 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 	echo "\n<table width='100%' cellpadding='0' cellspacing='0' border='0'>";
 	echo "<tr><td>"; # uniques
 
-	echo "<span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 14px; color: $la_couleur'><b>$le_type</b></span><br />";
-	echo "<span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 20px;'><b>$titre</b></span>";
+	echo "<span style='font-size: 14px; color: $la_couleur' class='verdana1'><b>$le_type</b></span><br />";
+	echo "<span style='font-size: 20px;' class='verdana1'><b>$titre</b></span>";
 	if ($statut == 'redac') {
-		echo "<br /><span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 14px; color: red;'><b>"._T('info_redaction_en_cours')."</b></span>";
+		echo "<br /><span style='font-size: 14px; color: red;' class='verdana1'><b>"._T('info_redaction_en_cours')."</b></span>";
 	}
 	else if ($rv == 'non') {
-		echo "<br /><span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 14px; color: #666666;'><b>".nom_jour($date_heure).' '.affdate_heure($date_heure)."</b></span>";
+		echo "<br /><span style='font-size: 14px; color: #666666;' class='verdana1'><b>".nom_jour($date_heure).' '.affdate_heure($date_heure)."</b></span>";
 	}
 
 
@@ -389,7 +389,7 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 
 	if ($expediteur == $connect_id_auteur AND $statut == 'redac') {
 	  if ($type == 'normal' AND $total_dest < 2) {
-	    echo "<p style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 14px; color: #666666; text-align: right;'><b>"._T('avis_destinataire_obligatoire')."</b></p>";
+	    echo "<p style='font-size: 14px; color: #666666; text-align: right;' class='verdana1'><b>"._T('avis_destinataire_obligatoire')."</b></p>";
 	  } else {
 	    echo "\n<div align='center'><table><tr><td>";
 	    icone (_T('icone_envoyer_message'), (generer_url_ecrire("message","id_message=$id_message&change_statut=publie")), "messagerie-24.gif", "creer.gif");

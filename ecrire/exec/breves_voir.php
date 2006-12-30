@@ -71,7 +71,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	
 	debut_boite_info();
 	
-	$res = "\n<div style='font-famuily: Verdana,Arial,Sans,sans-serif; font-size: 10x; font-weight: bold; text-align: center'>" 
+	$res = "\n<div style='font-size: 10x; font-weight: bold; text-align: center' class='verdana1'>" 
 	. _T('info_gauche_numero_breve')
 	. "<br /><span style='font-size: 32px;'>"
 	. $id_breve
@@ -149,7 +149,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 			fin_cadre_enfonce();	
 		}
 		else {
-			echo "<p><span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 16px;'><b>".affdate($date_heure)."&nbsp;</b></span></p>";
+			echo "<p><span style='font-size: 16px;' class='verdana1'><b>".affdate($date_heure)."&nbsp;</b></span></p>";
 		}
 	}
 

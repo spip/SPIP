@@ -42,8 +42,8 @@ function exec_recherche_dist()
 
 	if (strlen($recherche) > 0) {
 
-	echo "<span style='font-family: Verdana,Arial,Sans,sans-serif'><b>"._T('info_resultat_recherche')."</b></span><br />";
-	echo "<span style='font-size: 20px; font-family: Verdana,Arial,Sans,sans-serif; color: $couleur_foncee'><b>$recherche_aff</b></span>";
+	echo "<span class='verdana1'><b>"._T('info_resultat_recherche')."</b></span><br />";
+	echo "<span style='font-size: 20px; color: $couleur_foncee' class='verdana1'><b>$recherche_aff</b></span>";
 
 	$query_articles['FROM'] = 'spip_articles AS articles';
 	$query_breves['FROM'] = 'spip_breves';
@@ -127,7 +127,7 @@ function exec_recherche_dist()
 	}
 	
 	if (!$nba AND !$nba1 AND !$nbb AND !$nbb1 AND !$nbr AND !$nbr1 AND !$nbt AND !$nbs AND !$nbs1) {
-		echo "<p style='font-face: Verdana,Arial,Sans,sans-serif'>"._T('avis_aucun_resultat')."</p>";
+		echo "<p class='verdana1'>"._T('avis_aucun_resultat')."</p>";
 	}
 	}
 echo fin_gauche(), fin_page();
@@ -159,7 +159,7 @@ function afficher_auteurs ($titre_table, $requete) {
 			echo "<p><table width='100%' cellpadding='0' cellspacing='0' border='0'>";
 			echo "<tr><td style='width: 100%'>";
 			echo "<table width='100%' cellpadding='3' cellspacing='0' border='0'>";
-			echo "<tr bgcolor='#333333'><td style='width: 100%' colspan='5'><span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 16px; color: #FFFFFF;'><b>$titre_table</b></span></td></tr>";
+			echo "<tr bgcolor='#333333'><td style='width: 100%' colspan='5'><span style='font-size: 16px; color: #FFFFFF;' class='verdana1'><b>$titre_table</b></span></td></tr>";
 		}
 	else {
 			echo "<p><table width='100%' cellpadding='3' cellspacing='0' border='0'>";

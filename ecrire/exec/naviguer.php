@@ -105,7 +105,7 @@ function exec_naviguer_dist()
 
 
 	if (strlen($texte) > 1) {
-		echo "\n<div align='justify' style='font-size: 16px; font-face: Verdana,Arial,Sans,sans-serif'>", justifier(propre($texte)), "</div>";
+		echo "\n<div align='justify' style='font-size: 16px; ' class='verdana1'>", justifier(propre($texte)), "</div>";
 	}
 	
 	langue_naviguer($id_rubrique, $id_parent, $flag_editable);
@@ -134,7 +134,7 @@ function exec_naviguer_dist()
 function infos_naviguer($id_rubrique, $statut)
 {
 	if ($id_rubrique > 0) {
-		$res = "\n<div style='font-famuily: Verdana,Arial,Sans,sans-serif; font-size: 10x; font-weight: bold; text-align: center'>"
+		$res = "\n<div style='font-size: 10x; font-weight: bold; text-align: center' class='verdana1'>"
 		  .  _T('titre_numero_rubrique')
 		  . "<br /><span style='font-size: 32px;'>"
 		  . $id_rubrique
@@ -429,7 +429,7 @@ function montre_naviguer($id_rubrique, $titre, $descriptif, $logo, $flag_editabl
   echo "</tr>\n";
 
   if (strlen($descriptif) > 1) {
-	echo "<tr><td><div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa; font-size: 14px; font-family: Verdana,Arial,Sans,sans-serif'>", propre($descriptif."~"), "</div></td></tr>\n";
+	echo "<tr><td><div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa; font-size: 14px; ' class='verdana1'>", propre($descriptif."~"), "</div></td></tr>\n";
   }
   echo "</table>\n";
 }

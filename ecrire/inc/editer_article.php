@@ -265,7 +265,7 @@ function editer_article_chapo($chapo, $config, $aider)
 		return "<div style='border: 1px dashed #666666; background-color: #f0f0f0; padding: 5px;'>" .
 			"<table width='100%' cellspacing='0' cellpadding='0' border='0'>" .
 			"<tr><td valign='top'>" .
-			"<span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 14px;'><b><label for='confirme-virtuel'>"._T('info_redirection')."&nbsp;:</label></b>" .	$aider ("artvirt") . "</span>" .
+			"<span style='font-size: 14px;' class='verdana1'><b><label for='confirme-virtuel'>"._T('info_redirection')."&nbsp;:</label></b>" .	$aider ("artvirt") . "</span>" .
 			"</td>" .
 			"<td style='width: 10px'>&nbsp;</td>" .
 			"<td valign='top' style='width: 50%'>" .
@@ -273,7 +273,7 @@ function editer_article_chapo($chapo, $config, $aider)
 		style='font-size:9px;' value=\"$virtuel\" size='40' />" .
 			"<input type='hidden' name='changer_virtuel' value='oui' />" .
 			"</td></tr></table>\n" .
-			"<span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 14px;'>" . _T('texte_article_virtuel_reference') . "</span>" .
+			"<span style='font-size: 14px;' class='verdana1'>" . _T('texte_article_virtuel_reference') . "</span>" .
 			"</div>\n";
 	} else {
 

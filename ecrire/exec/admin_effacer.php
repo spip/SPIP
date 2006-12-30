@@ -54,7 +54,7 @@ debut_cadre_relief();
 
 echo "\n<table border='0' cellspacing='1' cellpadding='8' width=\"100%\">";
 echo "<tr><td bgcolor='$couleur_foncee' background=''><b>";
-echo "<span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 16px; color: #FFFFFF;'>". _T('texte_effacer_base')."</span></b></td></tr>";
+echo "<span style='font-size: 16px; color: #FFFFFF;' class='verdana1'>". _T('texte_effacer_base')."</span></b></td></tr>";
 
 echo "<tr><td class='serif'>";
 

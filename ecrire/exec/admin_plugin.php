@@ -131,7 +131,7 @@ EOF;
 	global $couleur_foncee;
 	echo "<table border='0' cellspacing='0' cellpadding='5' width='100%'>";
 	echo "<tr><td bgcolor='$couleur_foncee' background='' colspan='4'><b>";
-	echo "<span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 16px; color: #ffffff;'>", _T('plugins_liste')."</span></b></td></tr>";
+	echo "<span style='font-size: 16px; color: #ffffff;' class='verdana1'>", _T('plugins_liste')."</span></b></td></tr>";
 
 	echo "<tr><td class='serif' colspan='4'>";
 	echo _T('texte_presente_plugin');

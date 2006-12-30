@@ -184,19 +184,19 @@ if ($les_notes) {
 debut_cadre_relief();
 
 if ($surtitre) {
-	echo "<span $dir_lang><span style='font-family: arial,helvetica; font-size: 16px;'><b>", $surtitre, "</b></span></span>\n";
+	echo "<span $dir_lang><span style='font-size: 16px;' class='arial1'><b>", $surtitre, "</b></span></span>\n";
 }
 gros_titre($titre);
 
 if ($soustitre) {
-	echo "<span $dir_lang><span style='font-family: arial,helvetica; font-size: 16px;'><b>", $soustitre, "</b></span></span>\n";
+	echo "<span $dir_lang><span style='font-size: 16px;' class='arial1'><b>", $soustitre, "</b></span></span>\n";
 }
 
 if ($descriptif OR $url_site OR $nom_site) {
 	echo "<div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;' $dir_lang>";
 	$t = ($descriptif) ? "{{"._T('info_descriptif')."}} $descriptif\n\n" : '';
 	$t .= ($nom_site.$url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
-	echo "<span style='font-size: 14px; font-family: Verdana,Arial,Sans,sans-serif'>", $t, "</span>";
+	echo "<span style='font-size: 14px; ' class='verdana1'>", $t, "</span>";
 	echo "</div>";
 }
 
@@ -221,7 +221,7 @@ else {
 
 	if ($ps) {
 		echo debut_cadre_enfonce();
-		echo "<div $dir_lang style='font-size 14px; font-family: Verdana,Arial,Sans,sans-serif'>", "<b>"._T('info_ps')."</b>", $ps, "</div>";
+		echo "<div $dir_lang style='font-size 14px; ' class='verdana1'>", "<b>"._T('info_ps')."</b>", $ps, "</div>";
 		echo fin_cadre_enfonce();
 	}
 

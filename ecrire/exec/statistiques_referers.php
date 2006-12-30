@@ -45,7 +45,7 @@ echo "<br /><br /><br />";
 
 debut_gauche();
 debut_boite_info();
-echo "<p style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small; text-align:left;'>"._T('info_gauche_statistiques_referers')."</p>";
+echo "<p style='font-size:small; text-align:left;' class='verdana1'>"._T('info_gauche_statistiques_referers')."</p>";
 fin_boite_info();
 
 debut_droite();
@@ -76,7 +76,7 @@ echo barre_onglets("stat_referers", $jour);
 
  $result = spip_query("SELECT referer, visites_$jour AS vis FROM spip_referers WHERE visites_$jour>0 ORDER BY vis DESC LIMIT $limit");
 
- echo "<br /><div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;'>";
+ echo "<br /><div style='font-size:small;' class='verdana1'>";
  echo aff_referers ($result, $limit, generer_url_ecrire('statistiques_referers', ("jour=$jour&limit=" . strval($limit+200))));
 
  echo "</div><br />";

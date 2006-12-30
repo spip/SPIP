@@ -258,19 +258,19 @@ if ($connect_statut != '0minirezo') {
 
 		echo "<rect x='0' y='0' width='".round($largeur*$nb_jours/$agreg)."' height='300' style='stroke-width: 1px; stroke: black; fill: blue; fill-opacity: 0; '/>\n";	
 
-		echo " <text x='".(round($largeur*$nb_jours/$agreg)+3)."' y='300' font-family='Verdana, helvetica, sans-serif, sans' font-size='8' fill='black' >";
+		echo " <text x='".(round($largeur*$nb_jours/$agreg)+3)."' y='300' class='verdana1' font-size='8' fill='black' >";
 		echo "0";
 		echo "</text>\n";
-		echo " <text x='".(round($largeur*$nb_jours/$agreg)+3)."' y='228' font-family='Verdana, helvetica, sans-serif, sans' font-size='8' fill='black' >";
+		echo " <text x='".(round($largeur*$nb_jours/$agreg)+3)."' y='228' class='verdana1' font-size='8' fill='black' >";
 		echo round($maxgraph/4);
 		echo "</text>\n";
-		echo " <text x='".(round($largeur*$nb_jours/$agreg)+3)."' y='153' font-family='Verdana, helvetica, sans-serif, sans' font-size='8' fill='black' >";
+		echo " <text x='".(round($largeur*$nb_jours/$agreg)+3)."' y='153' class='verdana1' font-size='8' fill='black' >";
 		echo round($maxgraph/2);
 		echo "</text>\n";
-		echo " <text x='".(round($largeur*$nb_jours/$agreg)+3)."' y='78' font-family='Verdana, helvetica, sans-serif, sans' font-size='8' fill='black' >";
+		echo " <text x='".(round($largeur*$nb_jours/$agreg)+3)."' y='78' class='verdana1' font-size='8' fill='black' >";
 		echo round(3*$maxgraph/4);
 		echo "</text>\n";
-		echo " <text x='".(round($largeur*$nb_jours/$agreg)+3)."' y='8' font-family='Verdana, helvetica, sans-serif, sans' font-size='8' fill='black' >";
+		echo " <text x='".(round($largeur*$nb_jours/$agreg)+3)."' y='8' class='verdana1' font-size='8' fill='black' >";
 		echo round($maxgraph);
 		echo "</text>\n";
 
@@ -289,7 +289,7 @@ if ($connect_statut != '0minirezo') {
 					//echo "<div class='arial0' style='border-$spip_lang_left: 1px solid black; padding-$spip_lang_left: 2px; padding-top: 3px; position: absolute; $spip_lang_left: ".$gauche."px; top: -1px;'>".$afficher."</div>";
 
 					echo "<rect x='$gauche' y='300' width='1' height='10' style='fill: black;'/>\n";
-					echo " <text x='".($gauche+3)."' y='308' font-family='Verdana, helvetica, sans-serif, sans' font-size='8' fill='black' >";
+					echo " <text x='".($gauche+3)."' y='308' class='verdana1' font-size='8' fill='black' >";
 					echo filtrer_ical($afficher);
 					echo "</text>\n";
 

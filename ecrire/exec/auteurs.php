@@ -303,7 +303,7 @@ function afficher_n_auteurs($auteurs) {
 		. $s
 		. "</td><td class='arial1' style='border-top: 1px solid #cccccc;'>"
 		. $mail
-		. "</td><td class='verdana11' style='border-top: 1px solid #cccccc;'>"
+		. "</td><td class='verdana1' style='border-top: 1px solid #cccccc;'>"
 		. $nom
 		. ((isset($row['restreint']) AND $row['restreint'])
 		   ? (" &nbsp;<small>"._T('statut_admin_restreint')."</small>")
