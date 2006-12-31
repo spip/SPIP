@@ -20,6 +20,8 @@ include_spip('inc/autoriser');
 // http://doc.spip.org/@exec_articles_versions_dist
 function exec_articles_versions_dist()
 {
+	include_spip('inc/suivi_versions');
+
   global $champs_extra, $chapo, $descriptif, $dir_lang, $id_article, $id_diff, $id_version, $les_notes, $nom_site, $options, $ps, $soustitre, $surtitre, $texte, $titre, $url_site;
 
 
@@ -29,7 +31,6 @@ function exec_articles_versions_dist()
 
 	if(!autoriser('voirrevisions', 'article', $id_article))
 		return;
-
 
     $id_article = intval($id_article);
     $result = spip_query("SELECT * FROM spip_articles WHERE id_article='$id_article'");
@@ -51,60 +52,9 @@ if ($row = spip_fetch_array($result)) {
 if (!($id_version = intval($id_version))) {
 	$id_version = $row['id_version'];
 }
-$textes = recuperer_version($id_article, $id_version);
-
 $id_diff = intval($id_diff);
-if (!$id_diff) {
-	$diff_auto = true;
-	$row = spip_fetch_array(spip_query("SELECT id_version FROM spip_versions WHERE id_article=$id_article AND id_version<$id_version ORDER BY id_version DESC LIMIT 1"));
-	if ($row) $id_diff = $row['id_version'];
-}
 
-//
-// Calculer le diff
-//
-
-if ($id_version && $id_diff) {
-	include_spip('inc/diff');
-
-	// code a unifier avec suivi_versions
-	if ($id_diff > $id_version) {
-		$t = $id_version;
-		$id_version = $id_diff;
-		$id_diff = $t;
-		$old = $textes;
-		$new = recuperer_version($id_article, $id_version);
-	}
-	else {
-		$old = recuperer_version($id_article, $id_diff);
-		$new = $textes;
-	}
-
-	$textes = array();
-	$champs = array('surtitre', 'titre', 'soustitre', 'descriptif', 'nom_site', 'url_site', 'chapo', 'texte', 'ps');
-
-	foreach ($champs as $champ) {
-		// Si on n'en a qu'un, pas de modif, on peut afficher directement les donnees courantes ; mais il faut remonter a la precedente version disposant de ce champ
-		$id_ref = $id_diff-1;
-		while (!isset($old[$champ])
-		AND $id_ref>0) {
-			$prev = recuperer_version($id_article, $id_ref--); 
-			if (isset($prev[$champ]))
-				$old[$champ] = $prev[$champ];
-		}
-
-		if (!strlen($new[$champ]) && !strlen($old[$champ])) continue;
-
-		if (!isset($new[$champ])) {
-			$textes[$champ] = $old[$champ];
-		} else {
-			$diff = new Diff(new DiffTexte);
-			$textes[$champ] = afficher_diff($diff->comparer(preparer_diff($new[$champ]), preparer_diff($old[$champ])));
-		}
-	}
-}
-
-if (is_array($textes))
+$textes = revision_comparee($id_article, $id_version, 'complet', $id_diff);
 foreach ($textes as $var => $t) $$var = $t;
 
 
