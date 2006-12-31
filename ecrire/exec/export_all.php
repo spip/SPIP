@@ -39,7 +39,6 @@ global $EXPORT_tables_noexport;
 
 if (!isset($EXPORT_tables_noexport)){
 	$EXPORT_tables_noexport= array(
-		'spip_ajax_fonc',
 		'spip_caches',
 		'spip_index',
 		'spip_index_dico',

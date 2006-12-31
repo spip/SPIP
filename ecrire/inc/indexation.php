@@ -28,7 +28,7 @@ $GLOBALS['extracteur'] = array (
 
 // tables que l'on ne doit pas indexer
 global $INDEX_tables_interdites;
-$INDEX_tables_interdites=array('spip_ajax_fonc');
+$INDEX_tables_interdites=array();
 
 // Indexation des elements de l'objet principal
 // 'champ'=>poids, ou 'champ'=>array(poids,min_long)

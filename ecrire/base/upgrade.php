@@ -1240,6 +1240,12 @@ function maj_base($version_cible = 0) {
 		}
 		maj_version('1.923');
 	}
+
+	if (upgrade_vers(1.924, $version_installee, $version_cible)) {
+		spip_query('DROP TABLE spip_ajax_fonc');
+		maj_version('1.924');
+	}
+
 }
 
 ?>

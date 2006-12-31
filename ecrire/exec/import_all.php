@@ -23,7 +23,6 @@ if (isset($GLOBALS['meta']['IMPORT_tables_noimport']))
 	$IMPORT_tables_noimport = unserialize($GLOBALS['meta']['IMPORT_tables_noimport']);
 else{
 	include_spip('inc/meta');
-	$IMPORT_tables_noimport[]='spip_ajax_fonc';
 	$IMPORT_tables_noimport[]='spip_caches';
 	ecrire_meta('IMPORT_tables_noimport',serialize($IMPORT_tables_noimport),'non');
 	ecrire_metas();

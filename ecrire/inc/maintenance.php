@@ -23,8 +23,6 @@ function cron_maintenance ($t) {
 	verifier_htaccess(_DIR_ETC);
 	verifier_htaccess(_DIR_TMP);
 
-	// Supprimer les vieilles fonctions ajax enregistrees
-	spip_query("DELETE FROM spip_ajax_fonc WHERE date < DATE_SUB(NOW(), INTERVAL 2 HOUR)");
 	return 1;
 }
 
