@@ -202,7 +202,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_rubrique_2' => 'Create a new section',
 'icone_ecrire_nouvel_article' => 'News in this section',
 'icone_envoyer_message' => 'Send this message',
-'icone_evolution_visites' => 'Visits level<br>@visites@ visits',
+'icone_evolution_visites' => 'Visits level<br />@visites@ visits',
 'icone_modif_groupe_mots' => 'Modify this keyword group',
 'icone_modifier_article' => 'Modify this article',
 'icone_modifier_breve' => 'Modify this news item',
@@ -409,10 +409,10 @@ requiring an FTP access to the Web site.',
 'info_messagerie_interne' => 'Internal messaging',
 'info_mise_a_niveau_base' => 'MySQL database upgrade',
 'info_mise_a_niveau_base_2' => '{{Warning!}} You have installed a version of
-		SPIP files {older} than the one that was
-		previously on this site: your database is at risk of being lost
-		and your site will not work properly anymore.<br>{{Reinstall
-		SPIP files.}}',
+  SPIP files {older} than the one
+  previously installed on this site: your database is at risk of being lost
+  and your site will not work properly anymore.<br />{{Reinstall
+  SPIP files.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Default operation mode of public forums',
 'info_modifier_breve' => 'Modify the news item:',
 'info_modifier_rubrique' => 'Modify the section:',
@@ -915,7 +915,7 @@ reinstall SPIP in order to recreate a new database and the first administrator\'
 'texte_plusieurs_articles' => 'Several authors were found for "@cherche_auteur@":',
 'texte_port_annuaire' => '(Default value is generally suitable.)',
 'texte_presente_plugin' => 'This page lists the available plugins on the site. Activate the plugins you require by ticking the corresponding box.',
-'texte_proposer_publication' => 'When your article is finished,<br> you can submit it for publication.',
+'texte_proposer_publication' => 'When your article is finished,<br /> you can submit it for publication.',
 'texte_proxy' => 'In some cases (intranet, protected networks,...),
   it is necessary to use a <i>proxy HTTP</i> to reach syndicated sites.
   Should there be a proxy, enter its address below, thus
@@ -930,7 +930,7 @@ to refresh only one page, you would rather do it from the public area and use th
 'texte_recapitiule_liste_documents' => 'This page sums up the list of documents that you have placed in the sections. To modify each document\'s information, follow the link to its section\'s page.',
 'texte_recuperer_base' => 'Repair the database',
 'texte_reference_mais_redirige' => 'referenced article in your SPIP site, but redirected to another URL.',
-'texte_referencement_automatique' => '<b>Automated site referencing</b><br>You can reference a Web site quickly by indicating below the desired URL, or the address of its syndication file. SPIP will automatically pick up the information concerning that site (title, description...).',
+'texte_referencement_automatique' => '<b>Automated site referencing</b><br />You can reference a Web site quickly by indicating below the desired URL, or the address of its syndication file. SPIP will automatically retrieve the site\'s information (title, description...).',
 'texte_requetes_echouent' => '<b>When some MySQL queries fail
   systematically and without any apparent reason, it is possible
   that the database itself
@@ -989,7 +989,16 @@ entered important modifications on the graphics or the structure of the site.',
   messages.',
 'texte_trop_resultats_auteurs' => 'Too many results for "@cherche_auteur@"; please refine the search.',
 'texte_unpack' => 'downloading the latest version',
-'texte_utilisation_moteur_syndiques' => 'When you use SPIP\'s integrated search engine, you can perform searches on sites and articles syndicated in two different manners. <br>- The simplest way is to search only in the titles and descriptions of the articles. <br>- A second, much more powerful, method allows SPIP to search also in the text of the referenced sites. If you reference a site, SPIP will perform the search in the site\'s text itself.',
+'texte_utilisation_moteur_syndiques' => 'When you use SPIP\'s integrated search engine, 
+you can perform searches on sites and
+ articles syndicated in two different ways. <br />- The simplest
+ way is to search only in the
+ titles and descriptions of the articles. <br />-
+ A second, much more powerful, method allows
+ SPIP to search also in the text
+ of the referenced sites. If you
+ reference a site, SPIP will perform
+ the search in the site\'s text itself.',
 'texte_utilisation_moteur_syndiques_2' => 'This method forces SPIP to visit the referenced sites regularly, which could cause a drop in the performance of your own site.',
 'texte_vide' => 'empty',
 'texte_vider_cache' => 'Empty the cache',

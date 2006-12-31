@@ -328,8 +328,10 @@ Dankon pro via partopreno
 'icone_doc_rubrique' => 'Dokumentoj de la rubrikoj',
 'icone_ecrire_article' => 'Skribi novan artikolon',
 'icone_edition_site' => 'Redaktejo',
+'icone_evolution_visites_2' => '<NEW><pLUS_UTILISE>',
 'icone_forum_administrateur' => 'Forumo de la mastrumantoj',
 'icone_forum_suivi' => 'Supervido de la forumoj',
+'icone_forums_petitions' => '<pLUS_UTILISE>Forumoj kaj petskriboj',
 'icone_gestion_langues' => 'Mastrumado de lingvoj',
 'icone_informations_personnelles' => 'Personaj datenoj',
 'icone_interface_complet' => 'kompleta interfaco',
@@ -419,7 +421,7 @@ Dankon pro via partopreno
 'info_erreur_requete' => 'Eraro en la peto: ',
 'info_erreur_squelette2' => 'Neniu skeleto <b>@fichier@</b> disponeblas...',
 'info_erreur_systeme' => 'Sistemo-eraro (errno @errsys@)',
-'info_erreur_systeme2' => 'Eble la fiksdisko plenas, a&#365; la datenbazo estas difektita. <br>
+'info_erreur_systeme2' => '<MODIF>Eble la fiksdisko plenas, a&#365; la datenbazo estas difektita. <br />
  <font color=\'red\'><a href=\'@script@\'>Provu ripari la datenbazon</a>,
  a&#365; kontaktu vian retgastiganton.</font></br>',
 'info_fini' => 'Finite !',
@@ -428,7 +430,7 @@ Dankon pro via partopreno
 'info_grand_ecran' => 'Granda ekrano',
 'info_image_aide' => 'HELPILO',
 'info_image_process_titre' => 'Metodo pri vinjet-farado',
-'info_impossible_lire_page' => '<B>Eraro!</b> Ne eblas legi la pa&#285;on <tt> <html>@test_proxy@</html> </tt> tra la prokura servilo <tt>',
+'info_impossible_lire_page' => '<MODIF><b>Eraro!</b> Ne eblas legi la pa&#285;on <tt> <html>@test_proxy@</html> </tt> tra la prokura servilo <tt>',
 'info_inclusion_directe' => 'Rekta inkludo&nbsp;:',
 'info_inclusion_vignette' => 'Inkludo de la vinjeto&nbsp;:',
 'info_installation_systeme_publication' => 'Instalo de la publikiga sistemo...',
@@ -490,6 +492,8 @@ Dankon pro via partopreno
 'info_publie_1' => '[@nom_site_spip@] PUBLIKIGAS: @titre@',
 'info_publie_2' => 'Artikolo publikigita
 --------------',
+'info_question_referers' => '<NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Votre site doit-il conserver les <i>referers</i>
+		(adresses des liens externes menant &agrave; votre site)&nbsp;?',
 'info_rechercher' => 'Ser&#265;i',
 'info_rechercher_02' => 'Ser&#265;i&nbsp;:',
 'info_remplacer_vignette' => 'Anstata&#365;i la defa&#365;ltan vinjeton per propra vinjeto&nbsp;:',
@@ -504,9 +508,9 @@ Dankon pro via partopreno
 'info_site_refuse' => 'Rifuzita retejo',
 'info_sites_referencer' => 'Referenci retejon',
 'info_supprimer_vignette' => 'forigi la vinjeton',
-'info_symbole_bleu' => 'La <b>blua</b> simbolo indikas <b>memorigilon</b> : tio estas al vi persone adresata memoriga mesa&#285;o.',
-'info_symbole_jaune' => 'La <B>flava</B> simbolo indikas <B>anoncon al &#265;iuj redaktantoj</B>&nbsp;: modifebla de &#265;iuj mastrumantoj, kaj videbla de &#265;iuj redaktantoj.',
-'info_symbole_vert' => 'La <B>verda</B> simbolo indikas la <B>mesa&#285;ojn inter&#349;an&#285;itajn kun aliaj uzantoj</B> de la retejo.',
+'info_symbole_bleu' => '<MODIF>La <b>blua</b> simbolo indikas <b>memorigilon</b> : tio estas al vi persone adresata memoriga mesa&#285;o.',
+'info_symbole_jaune' => '<MODIF>La <b>flava</b> simbolo indikas <b>anoncon al &#265;iuj redaktantoj</b>&nbsp;: modifebla de &#265;iuj mastrumantoj, kaj videbla de &#265;iuj redaktantoj.',
+'info_symbole_vert' => '<MODIF>La <b>verda</b> simbolo indikas la <b>mesa&#285;ojn inter&#349;an&#285;itajn kun aliaj uzantoj</b> de la retejo.',
 'info_syndication' => 'abonrilato&nbsp;:',
 'info_syndication_articles' => 'artikolo(j)',
 'info_telecharger' => 'Al&#349;uti ekde via komputilo&nbsp;:',
@@ -528,6 +532,10 @@ Dankon pro via partopreno
 'info_zoom' => 'zomo',
 'infos_vos_pense_bete' => 'Viaj memorigiloj',
 'item_breve_proposee' => 'Proponita fulm-informo',
+'item_gerer_referers' => '<NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>G&eacute;rer les referers',
+'item_non_gerer_referers' => '<NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas g&eacute;rer les referers',
+'item_non_utiliser_moteur_recherche_forum' => '<NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas indexer les forums',
+'item_utiliser_moteur_recherche_forum' => '<NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Indexer les forums',
 
 
 // L
@@ -678,22 +686,22 @@ kaj ensaluti.
     sed ili ne estis rekte enmetitaj en &#285;in.
     La&#365; la enpa&#285;igo de la publika spaco,
     ili povos aperi en formo de alkro&#265;itaj dokumentoj.',
-'texte_erreur_mise_niveau_base' => 'Datenbazo-eraro dum la alniveligo.
-  La bildo <B>@fichier@</B> ne aperis (artikolo @id_article@).
+'texte_erreur_mise_niveau_base' => '<MODIF>Datenbazo-eraro dum la alniveligo.
+  La bildo <b>@fichier@</b> ne aperis (artikolo @id_article@).
   Notu bone tiun referencon, reprovu la alniveligon,
   kaj fine kontrolu ke la bildoj aperu
   plu en la artikoloj.',
-'texte_inc_auth_1' => 'Vi ensalutis la&#365; la
-  salutnomo <B>@auth_login@</B>, sed tiu ne/ne plu ekzistas en la bazo.
+'texte_inc_auth_1' => '<MODIF>Vi ensalutis la&#365; la
+  salutnomo <b>@auth_login@</b>, sed tiu ne/ne plu ekzistas en la bazo.
   Provu',
 'texte_inc_auth_2' => 'rekonekti&#285;i',
 'texte_inc_auth_3' => ', post esti eventuale ferminta kaj
   restartiginta via retumilon.',
-'texte_inc_config' => 'La &#349;an&#285;oj faritaj en tiuj &#265;i pa&#285;oj influas grave la
+'texte_inc_config' => '<MODIF>La &#349;an&#285;oj faritaj en tiuj &#265;i pa&#285;oj influas grave la
  funkcionadon de via retejo. Ni konsilas vin ne plu interveni anta&#365; ol esti pli
- kutimi&#285;inta pri la funkcionado de la sistemo SPIP. <P align="justify"><B>Pli
+ kutimi&#285;inta pri la funkcionado de la sistemo SPIP. <p align="justify"><b>Pli
  &#285;enerale, estas tre konsilinde lasi la mastrumadon de tiuj &#265;i pa&#285;oj
- al la &#265;efa retejestro .</B>',
+ al la &#265;efa retejestro .</b>',
 'texte_inc_meta_1' => 'La sistemo detektis eraron dum skribado de la dosiero <code>@fichier@</code>. Bonvolu, kiel mastrumanto de la retejo,',
 'texte_inc_meta_2' => 'kontroli la skriborajtojn',
 'texte_inc_meta_3' => 'en la dosierujo <code>@repertoire@</code>.',
