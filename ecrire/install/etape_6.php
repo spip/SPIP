@@ -22,8 +22,8 @@ function install_etape_6_dist()
 	echo install_debut_html('AUTO', ' onLoad="document.getElementById(\'suivant\').focus();return false;"');
 
 	echo info_etape(_T('info_derniere_etape'),
-		"<b>"._T('info_code_acces')."</b></p><p>" .
-		_T('info_utilisation_spip')
+			"<b>"._T('info_code_acces')."</b><br />" .
+			_T('info_utilisation_spip')
 	);
 
 	if (@file_exists(_FILE_CONNECT_INS . _FILE_TMP . '.php'))
@@ -85,6 +85,7 @@ function install_etape_6_dist()
 	@unlink($htpasswd);
 	@unlink($htpasswd."-admin");
 	ecrire_acces();
+	ecrire_metas();
 
 	if (!@rename(_FILE_CHMOD_INS . _FILE_TMP . '.php',
 		    _DIR_ETC . 'chmod.php')) {
@@ -93,12 +94,9 @@ function install_etape_6_dist()
 		@unlink(_FILE_CHMOD_INS . _FILE_TMP . '.php');
 	}
 
-	echo "<form action='./' method='post'>";
+	echo "<form action='./' method='post'><div>";
 	echo bouton_suivant();
-	echo "</form>";
-
-	ecrire_metas();
-
+	echo "</div></form>";
 	echo install_fin_html();
 }
 
