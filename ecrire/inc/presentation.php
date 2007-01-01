@@ -541,12 +541,12 @@ function puce_statut_article($id, $statut, $id_rubrique, $ajax = false) {
 			  "rouge" => _T('texte_statut_refuse'),
 			  "poubelle" => _T('texte_statut_poubelle'));
 		if ($ajax){
-		  $action = "onmouseover=\"montrer('statutdecalarticle$id');\"";
+		  $action = "\nonmouseover=\"montrer('statutdecalarticle$id');\"";
 		  $inser_puce = 
 		  	// "\n<div class='puce_article' id='statut$id'$dir_lang>" .
-				"\n<div class='puce_article_fixe' $action>" .
+				"<div class='puce_article_fixe'\n$action>" .
 			  http_img_pack($puce, $title, "id='imgstatutarticle$id' style='margin: 1px;'") ."</div>"
-				. "\n<div class='puce_article_popup' id='statutdecalarticle$id' onmouseout=\"cacher('statutdecalarticle$id');\" style=' margin-left: -".((11*$clip)+1)."px;'>\n"
+				. "<div class='puce_article_popup' id='statutdecalarticle$id'\nonmouseout=\"cacher('statutdecalarticle$id');\" style=' margin-left: -".((11*$clip)+1)."px;'>"
 				. afficher_script_statut($id, 'article', -1, 'puce-blanche.gif', 'prepa', $titles['blanche'], $action)
 				. afficher_script_statut($id, 'article', -12, 'puce-orange.gif', 'prop', $titles['orange'], $action)
 				. afficher_script_statut($id, 'article', -23, 'puce-verte.gif', 'publie', $titles['verte'], $action)
@@ -557,7 +557,7 @@ function puce_statut_article($id, $statut, $id_rubrique, $ajax = false) {
 			;
 		}
 		else{
-		  $inser_puce = "\n<div class='puce_article' id='statut$id'$dir_lang>".
+		  $inser_puce = "<div class='puce_article' id='statut$id'$dir_lang>".
 			  http_img_pack($puce, $title, "id='imgstatutarticle$id' style='margin: 1px;'") ."</div>";
 			if ($script==NULL && _SPIP_AJAX){
 				$action = "'".generer_url_ecrire('puce_statut_article',"id='+id",true);
@@ -582,6 +582,7 @@ function puce_statut_article($id, $statut, $id_rubrique, $ajax = false) {
 	} else {
 		$inser_puce = http_img_pack($puce, $title, "id='imgstatutarticle$id' style='margin: 1px;'");
 	}
+
 	return $inser_puce;
 }
 
@@ -623,16 +624,16 @@ function puce_statut_breve($id, $statut, $type, $droit) {
 	if (!$droit) return $inser_puce;
 	
 	$type2 = "statutdecal$type$id";
-	$action = "onmouseover=\"montrer('$type2');\"\n";
+	$action = "\nonmouseover=\"montrer('$type2');\"";
 
 	  // les versions de MSIE ne font pas toutes pareil sur alt/title
 	  // la combinaison suivante semble ok pour tout le monde.
 
-	return	"\n<div class='puce_breve' id='$type1'$dir_lang>"
-		. "\n<div class='puce_breve_fixe' $action>"
+	return	"<div class='puce_breve' id='$type1'$dir_lang>"
+		. "<div class='puce_breve_fixe' $action>"
 		. $inser_puce
 		. "</div>"
-		. "\n<div class='puce_breve_popup' id='$type2' onmouseout=\"cacher('$type2');\" style=' margin-left: -".((9*$clip)+1)."px;'>\n"
+		. "<div class='puce_breve_popup' id='$type2'\nonmouseout=\"cacher('$type2');\" style=' margin-left: -".((9*$clip)+1)."px;'>\n"
 		. afficher_script_statut($id, $type, -1, $puces[0], 'prop',_T('texte_statut_propose_evaluation'), $action)
 		. afficher_script_statut($id, $type, -10, $puces[1], 'publie',_T('texte_statut_publie'), $action)
 	  	. afficher_script_statut($id, $type, -19, $puces[2], 'refuse',_T('texte_statut_refuse'), $action)
@@ -1801,23 +1802,23 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30)
 	$retour = '';
 
 	while($row = spip_fetch_array($voss)) {
-		$n = $row['id'];
-		$retour .= afficher_numero_edit($n, $key, $type)
-		. "<a class='"
-		. $row['statut']
-		. "' style='font-size: 10px;' href='"
-		. generer_url_ecrire($table,"$key=$n")
+		$id = $row['id'];
+		$num = afficher_numero_edit($id, $key, $type);
+		$statut = puce_statut_article($id, $row['statut'], $id_rubrique);
+		$href = "<a href='"
+		. generer_url_ecrire($table,"$key=$id")
 		. "'>"
 		. typo($row['titre'])
 		. "</a>";
+		$retour .= "<tr class='tr_liste' style='background-color: #e0e0e0;'><td>$statut</td><td>$href</td><td style='width: 25%;'>$num</td></tr>";
 	}
 
 	return "\n<div>&nbsp;</div>"
 	. "\n<div class='bandeau_rubriques' style='z-index: 1;'>"
 	. bandeau_titre_boite2('<b>' . _T('info_meme_rubrique')  . '</b>', "article-24.gif",'','',false)
-	. "\n<div class='plan-articles'>"
+	. "\n<table style='font-size: 11px; background-color: #e0e0e0;border: 0px; padding-left:4px;'>"
 	. $retour
-	. "</div></div>";
+	. "</table></div>";
 }
 
 // http://doc.spip.org/@afficher_numero_edit
@@ -1840,6 +1841,8 @@ function afficher_numero_edit($id, $key, $type)
 		$bal = 'a';
 		$href = "\nhref='"
 		. generer_url_ecrire($type . "s_edit","$key=$id")
+		. "' title='"
+		. _T('bouton_modifier')
 		. "'";
 	}
 	return "<$bal$style$href><b>"
