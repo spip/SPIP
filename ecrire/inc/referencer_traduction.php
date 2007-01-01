@@ -169,16 +169,16 @@ function articles_traduction($id_article, $id_trad)
 		changer_typo($lang_trad);
 		$titre_trad = "<span $dir_lang>$titre_trad</span>";
 
-		$vals[] = http_img_pack("puce-".puce_statut($statut_trad).'.gif', "", "width='7' height='7' border='0'");
+		$vals[] = http_img_pack("puce-".puce_statut($statut_trad).'.gif', "", " class='puce'");
 		
 		if ($id_article_trad == $id_trad) {
-			$vals[] = http_img_pack('langues-12.gif', "", "width='12' height='12' border='0'");
+			$vals[] = http_img_pack('langues-12.gif', "", " class='lang'");
 			$titre_trad = "<b>$titre_trad</b>";
 		} else {
 		  if (!$connect_toutes_rubriques)
-			$vals[] = http_img_pack('langues-off-12.gif', "", "width='12' height='12' border='0'");
+			$vals[] = http_img_pack('langues-off-12.gif', "", " class='lang'");
 		  else 
-		    $vals[] = ajax_action_auteur("referencer_traduction", "$id_article,$id_trad,$id_article_trad", 'articles', "id_article=$id_article", array(http_img_pack('langues-off-12.gif', _T('trad_reference'), "width='12' height='12' border='0'"), ' title="' . _T('trad_reference') . '"'));
+		    $vals[] = ajax_action_auteur("referencer_traduction", "$id_article,$id_trad,$id_article_trad", 'articles', "id_article=$id_article", array(http_img_pack('langues-off-12.gif', _T('trad_reference'), "class='lang'"), ' title="' . _T('trad_reference') . '"'));
 		}
 
 		$s = typo($titre_trad);

@@ -183,7 +183,7 @@ function forum_envoi_formulaire($id, $objet, $script, $statut, $texte, $titre_pa
 	  ."</td>"
 	  ."\n<td><img src='"
 	  . _DIR_IMG_PACK
-	  . "rien.gif' width='10' border='0' alt=''/></td><td style='width: 100%'>"
+	  . "rien.gif' style='width: 10px; border: 0px;' alt=''/></td><td style='width: 100%'>"
 	  ."<b><label for='titre_message'>"
 	  . _T('info_titre')
 	  ."</label></b><br />\n"

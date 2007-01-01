@@ -79,7 +79,7 @@ function afficher_sites_boucle($row, &$tous_id, $voir_logo, $bof)
 		}
 	}
 
-	$s .= http_img_pack($puce, $statut, "width='7' height='7'") ."&nbsp;&nbsp;";
+	$s .= http_img_pack($puce, $statut, "class='puce'") ."&nbsp;&nbsp;";
 			
 	$s .= typo($nom_site);
 	
@@ -162,7 +162,7 @@ function afficher_syndic_articles_boucle($row, &$my_sites, $bof, $redirect)
 			$puce = 'puce-rouge-anim.gif';
 	}
 
-	$vals[] = http_img_pack($puce, $statut, "width='7' height='7'");
+	$vals[] = http_img_pack($puce, $statut, "class='puce'");
 
 	$s = "<a href='$url'>$titre</a>";
 

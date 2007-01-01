@@ -391,7 +391,7 @@ function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)
 
 		$res .= "\n<div $dir_lang>"
 		.  propre($texte)
-		.  "<br clear='all' />"
+		.  "<br style='clear: both;' />"
 		.  "</div>";
 
 		if ($ps) {

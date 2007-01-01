@@ -209,7 +209,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 				if ($flag_groupe) {
 					$s =  _T('info_retirer_mot')
 					. "&nbsp;"
-					. http_img_pack('croix-rouge.gif', "X", "width='7' height='7' align='middle'");
+					. http_img_pack('croix-rouge.gif', "X", " class='puce' style='vertical-align: bottom;'");
 					$s = ajax_action_auteur('editer_mot', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", array($s,''),"&id_objet=$id_objet&objet=$objet");
 				} else $s = "&nbsp;";
 				$vals[] = $s;
