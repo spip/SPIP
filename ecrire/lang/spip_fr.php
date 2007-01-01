@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Erreur de programmation. Cette fonction ne doit pas etre appelee dans ce contexte.',
 'avis_erreur_mysql' => 'Erreur MySQL',
 'avis_erreur_sauvegarde' => 'Erreur dans la sauvegarde (@type@ @id_objet@) !',
+'avis_erreur_visiteur' => 'Probl&amp;egrave;me d\'acc&amp;egrave; &amp;agrave; l\'espace priv&amp;eacute;',
 
 
 // B
@@ -420,7 +421,7 @@ Merci de votre participation
 'info_erreur_requete' => 'Erreur dans la requ&ecirc;te :',
 'info_erreur_squelette2' => 'Aucun squelette <b>@fichier@</b> n\'est disponible...',
 'info_erreur_systeme' => 'Erreur syst&egrave;me (errno @errsys@)',
-'info_erreur_systeme2' => 'Le disque dur est peut-&ecirc;tre plein, ou la base de donn&eacute;es endommag&eacute;e. <br>
+'info_erreur_systeme2' => 'Le disque dur est peut-&ecirc;tre plein, ou la base de donn&eacute;es endommag&eacute;e. <br />
 	<font color=\'red\'>Essayez de <a href=\'@script@\'>r&eacute;parer la base</a>,
 	ou contactez votre h&eacute;bergeur.</font>',
 'info_fini' => 'C\'est fini !',
@@ -684,6 +685,7 @@ et vous reconnecter au site.
 		Notez bien cette r&eacute;f&eacute;rence, r&eacute;essayez la mise &agrave;
 		niveau, et enfin v&eacute;rifiez que les images apparaissent
 		toujours dans les articles.',
+'texte_erreur_visiteur' => 'Vous avez tent&amp;eacute; de d\'acc&amp;eacute;der &amp;agrave; l\'espace priv&amp;eacute; avec un login qui ne le permet pas.',
 'texte_inc_auth_1' => 'Vous &ecirc;tes identifi&eacute; sous le
 		login <b>@auth_login@</b>, mais celui-ci n\'existe pas/plus dans la base. 
 		Essayez de vous',
