@@ -150,10 +150,11 @@ function revisions_articles ($id_article, $c=false) {
 // statut et rubrique sont lies, car un admin restreint peut deplacer
 // un article publie vers une rubrique qu'il n'administre pas
 // http://doc.spip.org/@instituer_article
-function instituer_article($id_article, $c) {
+function instituer_article($id_article, $c, $calcul_rub=true) {
 
 	include_spip('inc/autoriser');
 	include_spip('inc/rubriques');
+	include_spip('inc/modifier');
 
 	$s = spip_query("SELECT statut, id_rubrique FROM spip_articles WHERE id_article=$id_article");
 	$row = spip_fetch_array($s);
@@ -223,7 +224,6 @@ function instituer_article($id_article, $c) {
 
 	spip_query("UPDATE spip_articles SET ".join(', ',$update)." WHERE id_article=$id_article");
 
-
 	// Si on a deplace l'article
 	// - propager les secteurs
 	// - changer sa langue (si heritee)
@@ -248,8 +248,8 @@ function instituer_article($id_article, $c) {
 
 	// Recalculer les rubriques (statuts et dates) si l'on deplace
 	// un article publie, ou si on le depublie
-	if (($statut == 'publie' AND isset($champ['id_rubrique']))
-	OR ($statut_ancien=='publie' AND $champ['statut']))
+	if (($statut == 'publie' AND isset($champs['id_rubrique']))
+	OR ($statut_ancien=='publie' AND $champs['statut'] AND $calcul_rub))
 		calculer_rubriques();
 
 	// Pipeline
