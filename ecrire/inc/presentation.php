@@ -548,16 +548,16 @@ function puce_statut_article($id, $statut, $id_rubrique, $type='article', $ajax 
 			  "poubelle" => _T('texte_statut_poubelle'));
 	if ($ajax){
 		$action = "\nonmouseover=\"montrer('statutdecal$type$id');\"";
-		return 	"<div class='puce_article_fixe'\n$action>"
+		return 	"<span class='puce_article_fixe'\n$action>"
 		. $inser_puce
-		. "</div>"
-		. "<div class='puce_article_popup' id='statutdecal$type$id'\nonmouseout=\"cacher('statutdecal$type$id');\" style='margin-left: -".((11*$clip)+1)."px;'>"
+		. "</span>"
+		. "<span class='puce_article_popup' id='statutdecal$type$id'\nonmouseout=\"cacher('statutdecal$type$id');\" style='margin-left: -".((11*$clip)+1)."px;'>"
 		  . afficher_script_statut($id, $type, -1, 'puce-blanche.gif', 'prepa', $titles['blanche'], $action)
 		  . afficher_script_statut($id, $type, -12, 'puce-orange.gif', 'prop', $titles['orange'], $action)
 		  . afficher_script_statut($id, $type, -23, 'puce-verte.gif', 'publie', $titles['verte'], $action)
 		  . afficher_script_statut($id, $type, -34, 'puce-rouge.gif', 'refuse', $titles['rouge'], $action)
 		  . afficher_script_statut($id, $type, -45, 'puce-poubelle.gif', 'poubelle', $titles['poubelle'], $action)
-		  . "</div>";
+		  . "</span>";
 	}
 
 	$nom = "puce_statut_";
@@ -567,13 +567,13 @@ function puce_statut_article($id, $statut, $id_rubrique, $type='article', $ajax 
 	else {
 
 	  $action = generer_url_ecrire('puce_statut_article',"",true);
-	  $action = "if (!this.puce_loaded) { this.puce_loaded = true; prepare_selec_statut('$nom', '$type', $id, '$action'); } }";
+	  $action = "if (!this.puce_loaded) { this.puce_loaded = true; prepare_selec_statut('$nom', '$type', $id, '$action'); }";
 	  $over = "\nonmouseover=\"$action\"";
 	}
 
-	return 	"<div class='puce_article' id='$nom$type$id'$dir_lang$over>"
+	return 	"<span class='puce_article' id='$nom$type$id'$dir_lang$over>"
 	. $inser_puce
-	. '</div>';
+	. '</span>';
 }
 
 // http://doc.spip.org/@puce_statut_breve
@@ -1801,14 +1801,12 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30, $ajax
 
 	$limit -= $n;
 	$retour = '';
-	$statuts = array();
 	$fstatut = 'puce_statut_' . $type;
 
 	while($row = spip_fetch_array($voss)) {
 		$id = $row['id'];
 		$num = afficher_numero_edit($id, $key, $type);
 		$statut = $row['statut'];
-		$statuts[$statut]++;
 		$statut = $fstatut($id, $statut, $id_rubrique);
 		$href = "<a class='verdana1' href='"
 		. generer_url_ecrire($table,"$key=$id")
@@ -1819,10 +1817,11 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30, $ajax
 	}
 
 	$type = 'rubrique_' . $table;
-	$statut = array_search(max($statuts), $statuts);
-	$icone =  puce_statut_article(0, $statut, $id_rubrique, $type);
+	$statut = 'prop';// arbitraire
+	$icone =  puce_statut_article(0, $statut, $id_rubrique, $type)
+	. '&nbsp;<b>' . _T('info_meme_rubrique')  . '</b>';
 
-	$retour = bandeau_titre_boite2('<b>' . _T('info_meme_rubrique')  . '</b>' . $icone, 'article-24.gif','','',false)
+	$retour = bandeau_titre_boite2($icone,  'article-24.gif','','',false)
 	. "\n<table style='font-size: 11px; background-color: #e0e0e0;border: 0px; padding-left:4px;'>"
 	. $retour
 	. (($limit > 0) ? '' : "<tr><td colspan='3' style='text-align: center'>+ $limit</td></tr>")

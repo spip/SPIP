@@ -49,7 +49,7 @@ function encours_accueil()
 	if ($connect_toutes_rubriques) {
 		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_syndic_articles WHERE statut='dispo'"));
 		if ($cpt = $cpt['n'])
-			$res .= "<br /><small><a href='"
+			$res .= "\n<br /><small><a href='"
 			. generer_url_ecrire("sites_tous","")
 			. "' style='color: black;'>"
 			. $cpt
@@ -64,7 +64,7 @@ function encours_accueil()
 	if ($connect_toutes_rubriques) {
 		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_forum WHERE statut='prop'"));
 		if ($cpt = $cpt['n']) {
-		$res .= "<br /><small> <a href='" . generer_url_ecrire("controle_forum","") . "' style='color: black;'>".$cpt;
+		$res .= "\n<br /><small> <a href='" . generer_url_ecrire("controle_forum","") . "' style='color: black;'>".$cpt;
 		if ($cpt>1)
 			$res .= " "._T('info_liens_syndiques_3')." "._T('info_liens_syndiques_4');
 		else
@@ -77,7 +77,7 @@ function encours_accueil()
 
 	return debut_cadre_couleur_foncee("",true, "", _T('texte_en_cours_validation'))
 	. $res
-	. "<div style='text-align: "
+	. "\n<div style='text-align: "
 	. $GLOBALS['spip_lang_right']
 	. ";'>"
 	. bouton_spip_rss('a-suivre',array())
