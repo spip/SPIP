@@ -738,7 +738,7 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 	}
 	$texte .=  '<b>' . $titre_table  . '</b>';
 
-	$icone = http_img_pack("article-24.gif",'','');
+	$icone = "article-24.gif";
 
 	$res =  "\n<div style='height: 12px;'></div>"
 	. "\n<div class='liste'>"
