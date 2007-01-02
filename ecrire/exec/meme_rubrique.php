@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
-// http://doc.spip.org/@exec_puce_statut_article_dist
+// http://doc.spip.org/@exec_meme_rubrique_dist
 function exec_meme_rubrique_dist()
 {
 	$id = intval(_request('id'));
