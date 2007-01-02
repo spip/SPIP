@@ -31,8 +31,8 @@ function debut_admin($script, $action, $commentaire='') {
 		$dir = _DIR_TMP;
 	} else {
 		$dir = _DIR_TRANSFERT . $connect_login . '/';
-
 	}
+
 	$signal = fichier_admin($action);
 	if (@file_exists($dir . $signal)) {
 		spip_log ("Action admin: $action");
@@ -42,9 +42,29 @@ function debut_admin($script, $action, $commentaire='') {
 		include_spip('inc/texte');
 		$commentaire = ("\n<p>".propre($commentaire)."</p>\n");
 	}
-	include_spip('inc/minipres');
 
-	$form =  $commentaire
+	include_spip('inc/minipres');
+	include_spip('inc/autoriser');
+
+
+	// Si on est un super-admin, un bouton de validation suffit
+	// nom de l'autorisation a revoir... 'webmestre' veut tout et rien dire...
+	if (autoriser('webmestre')) {
+		if (_request('validation_admin') == $signal) {
+			spip_log ("Action super-admin: $action");
+			return true;
+		}
+		$form = $commentaire
+			. "<form action='./' method='post'>"
+			. copy_request($script)
+			. '<input type="hidden" name="validation_admin" value="'.$signal.'" />'
+			. bouton_suivant(_T('bouton_valider'))
+		. "</form>";
+		$js = '';
+	}
+
+	else {
+		$form =  $commentaire
 		. "<form action='./' method='post'>"
 		. copy_request($script)
 		. fieldset(_T('info_authentification_ftp').aide("ftp_auth"),
@@ -57,14 +77,15 @@ function debut_admin($script, $action, $commentaire='') {
 			 . _T('info_creer_repertoire_2', array('repertoire' => joli_repertoire($dir)))
 			 . bouton_suivant(_T('bouton_recharger_page'))))
 		. "</form>";
+		$js = " onload='document.forms[0].fichier.value=\"\";barre_inserer(\"$signal\", document.forms[0].fichier)'";
+	}
 
 	// code volontairement tordu:
 	// provoquer la copie dans le presse papier du nom du repertoire
-	// en remettant a vide le champ pour que ça marche aussi en cas
+	// en remettant a vide le champ pour que ca marche aussi en cas
 	// de JavaScript inactif.
 	echo minipres(_T('info_action', array('action' => $action)),
-		 $form
-,		 " onload='document.forms[0].fichier.value=\"\";barre_inserer(\"$signal\", document.forms[0].fichier)'");
+		 $form, $js);
 	exit;
 }
 

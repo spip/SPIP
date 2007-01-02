@@ -225,10 +225,21 @@ function autoriser_signature_modifier_dist($faire, $type, $id, $qui, $opt) {
 // Moderer la petition ?
 // = modifier l'article correspondant
 // = droits par defaut sinon (admin complet pour moderation de tout)
-// http://doc.spip.org/@autoriser_moderer_petition_dist
-function autoriser_moderer_petition_dist($faire, $type, $id, $qui, $opt) {
+// http://doc.spip.org/@autoriser_modererpetition_dist
+function autoriser_modererpetition_dist($faire, $type, $id, $qui, $opt) {
 	return
 		autoriser('modifier', $type, $id, $qui, $opt);
 }
+
+// Est-on webmestre ? Signifie qu'on n'a meme pas besoin de passer par ftp
+// pour modifier les fichiers, cf. notamment inc/admin
+// = rien ni personne sauf definition de 
+// a l'avenir peut-etre autoriser "admin numero 1" ou une interface de selection
+function autoriser_webmestre_dist($faire, $type, $id, $qui, $opt) {
+	return
+		(defined('_ID_WEBMESTRES') AND in_array($qui['id_auteur'], explode(':', _ID_WEBMESTRES)) AND $qui['statut'] == '0minirezo' AND !$qui['restreint'])
+		OR false;
+}
+
 
 ?>

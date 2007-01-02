@@ -262,7 +262,7 @@ function boites_de_config_articles($id_article)
 		$regler = $regler_moderation($id_article,"articles","id_article=$id_article");
 	}
 
-	if (autoriser('moderer_petition', 'article', $id_article)) {
+	if (autoriser('modererpetition', 'article', $id_article)) {
 		$petitionner = charger_fonction('petitionner', 'inc');
 		$petition = $petitionner($id_article,"articles","id_article=$id_article");
 	}

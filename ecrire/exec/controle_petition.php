@@ -23,10 +23,10 @@ function exec_controle_petition_dist()
 	$id_article = intval(_request('id_article'));
 
 	if (
-		autoriser('moderer_petition')
+		autoriser('modererpetition')
 		OR (
 			$id_article > 0
-			AND autoriser('moderer_petition', 'article', $id_article)
+			AND autoriser('modererpetition', 'article', $id_article)
 		)
 	) {
 
