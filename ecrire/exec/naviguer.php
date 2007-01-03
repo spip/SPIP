@@ -365,7 +365,6 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 function naviguer_doc ($id, $type = "article", $script, $flag_editable) {
 	global $spip_lang_left;
 
-	$multi_js = "";
 	if ($GLOBALS['meta']["documents_$type"]!='non' AND $flag_editable) {
 
 	  $joindre = charger_fonction('joindre', 'inc');
@@ -387,22 +386,11 @@ function naviguer_doc ($id, $type = "article", $script, $flag_editable) {
     $(".form_upload").async_upload(async_upload_portfolio_documents);
     </script>
 EOF;
-		if($GLOBALS['meta']['multi_rubriques']!="oui" && $GLOBALS['meta']['multi_secteurs']!="oui") {
-			$active_langs = "'".str_replace(",","','",$GLOBALS['meta']['langues_multilingue'])."'";
-			$multi_js = "<script type='text/javascript' src='"._DIR_JAVASCRIPT."multilang.js'></script>\n".
-			"<script type='text/javascript'>\n".
-			"var multilang_def_lang='".$GLOBALS["spip_lang"]."';var multilang_avail_langs=[$active_langs];\n".
-			"$(function(){\n".
-			"multilang_init_lang({'root':'#portfolio,#documents','forms':'form:not(.form_upload)','fields':'input,textarea'});\n".
-			"onAjaxLoad(function(){forms_init_multi({'target':this})});\n".
-			"});\n".
-			"</script>\n";
-		}		
 	} else $res ='';
 
 	$documenter = charger_fonction('documenter', 'inc');
 
-	return $multi_js."<div id='portfolio'>".$documenter($id, $type, 'portfolio', $flag_editable)."</div>"
+	return "<div id='portfolio'>".$documenter($id, $type, 'portfolio', $flag_editable)."</div>"
 	."<div id='documents'>". $documenter($id, $type, 'documents', $flag_editable)."</div>"
 	. $res;
 }
