@@ -223,7 +223,7 @@ function fin_cadre_trait_couleur($return = false){
 //
 // http://doc.spip.org/@debut_boite_alerte
 function debut_boite_alerte() {
-	return "<table cellpadding='6' border='0'><tr><td style='width: 100%' bgcolor='red'><table width='100%' cellpadding='12' border='0'><tr><td style='width: 100%' bgcolor='white'>";
+	return "<table width='100%' cellpadding='6' border='0'><tr><td style='width: 100%; background-color: red'><table width='100%' cellpadding='12' border='0'><tr><td style='width: 100%; background-color: white'>";
 }
 
 // http://doc.spip.org/@fin_boite_alerte

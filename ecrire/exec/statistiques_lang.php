@@ -28,11 +28,11 @@ function exec_statistiques_lang_dist()
 		$largeur_table = 750;
 	}
 	$taille = $largeur_table - 200;	
-	echo "<center><table width='$largeur_table'><tr><td style='width: $largeur_table" . "px;' class='verdana2'>";
+	echo "<table align='center' width='$largeur_table'><tr><td style='width: $largeur_table" . "px; text-align:center;' class='verdana2'>";
 	echo "<br /><br />";
-	echo "<center>";
+
 	gros_titre(_T('onglet_repartition_lang'));
-	echo "</center>";
+
 //barre_onglets("repartition", "langues");
 
 	if ($critere == "debut") {
@@ -111,7 +111,7 @@ function exec_statistiques_lang_dist()
 
 	fin_cadre_enfonce();
 
-	echo "</td></tr></table></center>";
+	echo "</td></tr></table>";
 	echo fin_page();
 }
 ?>

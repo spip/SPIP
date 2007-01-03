@@ -148,13 +148,13 @@ function help_body($aide, $html, $lang_aide='') {
 		}
 	} else {
 		// panneau d'accueil
-		$html = '<center>
+		$html = '<div align="center">
 			<img src="'._DIR_IMG_PACK.
 			'logo-spip.gif" alt="SPIP" width="267" height="170" border="0" />
-			<p />
+			<br />
 			<div align="center" style="font-variant: small-caps;">
 			Syst&egrave;me de publication pour l\'Internet
-			</div></center>
+			</div></div>
 			<div style="position:absolute; bottom: 10px; right:20px;
 			font-size: 12px; ">'.
 		preg_replace(",<a ,i", "<a class='target_blank' ",_T('info_copyright_doc')).
@@ -197,10 +197,8 @@ jQuery(function(){
 		echo '<table border="0" width="100%" height="60%">
 <tr style="width: 100%" height="60%">
 <td style="width: 100%" height="60%" align="center" valign="middle">
-<center>
 <img src="', generer_url_ecrire("aide_index", "img=AIDE--logo-spip.gif", false, true),
 		  '" alt="SPIP" width="300" height="170" border="0" />
-</center>
 </td></tr></table>';
 	}
 

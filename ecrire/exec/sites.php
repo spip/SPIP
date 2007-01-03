@@ -142,9 +142,9 @@ debut_gauche();
 	fin_boite_info();
 
 
-echo "<br /><center>";
+echo "<br /><div align='center'>";
 	icone (_T('icone_voir_sites_references'), generer_url_ecrire("sites_tous",""), "site-24.gif","rien.gif");
-echo "</center>";
+echo "</div>";
 
  if ($id_syndic AND $flag_administrable AND ($spip_display != 4)) {
 	  $iconifier = charger_fonction('iconifier', 'inc');
@@ -159,7 +159,6 @@ debut_droite();
 
 
 debut_cadre_relief("site-24.gif");
-echo "<center>";
 
 if ($syndication == 'off' OR $syndication == 'sus') {
 	$logo_statut = "puce-orange-anim.gif";
@@ -174,13 +173,14 @@ else if ($statut == 'refuse') {
 	$logo_statut = "puce-rouge.gif";
 }
 
-echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
-echo "<tr><td style='width: 100%' valign='top'>";
-	gros_titre($nom_site, $logo_statut);
-
 $url_affichee = $url_site;
 
 if (strlen($url_affichee) > 40) $url_affichee = substr($url_affichee, 0, 30)."...";
+
+echo "<div style='text-align: center;'>";
+echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
+echo "<tr><td style='width: 100%' valign='top'>";
+gros_titre($nom_site, $logo_statut);
 echo "<a href='$url_site'><b>$url_affichee</b></a>";
 
 if (strlen($descriptif) > 1) {
@@ -221,7 +221,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 if ($flag_administrable) {
 	debut_cadre_relief("racine-site-24.gif");
 
-	$corps = "\n<center><b>"
+	$corps = "\n<div style='text-align: center'><b>"
 	. _T('info_statut_site_1')
 	. "</b> &nbsp;&nbsp; \n"
 	.  "<select name='nouveau_statut' size='1' class='fondl'>\n"
@@ -233,7 +233,7 @@ if ($flag_administrable) {
 	. "<input type='submit' value='"
 	. _T('bouton_valider')
 	.  "' class='fondo' />\n"
-	.  "</center>\n";
+	.  "</div>\n";
 
 	echo redirige_action_auteur('editer_site',
 		$id_syndic,
@@ -253,8 +253,6 @@ if ($flag_editable AND ($resume == 'oui' OR $resume == 'non')) {
 if (!$resume AND !$resume = $row['resume']) $resume = 'oui';
 
 
-
-
 if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 	echo "<p style='font-size: 16px; ' class='verdana1'><a href='".htmlspecialchars($url_syndic)."'>",	http_img_pack('feed.png', 'RSS', ''),	'</a> <b>'._T('info_site_syndique').'</b></p>';
 
@@ -265,7 +263,6 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 		debut_boite_info();
 		echo _T('avis_site_syndique_probleme', array('url_syndic' => quote_amp($url_syndic)));
 
-		echo "<center>";
 		echo redirige_action_auteur('editer_site',
 			$id_syndic,
 			'sites',
@@ -275,7 +272,6 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 			. attribut_html(_T('lien_nouvelle_recuperation'))
 			. "\" class='fondo' style='font-size:9px;' />"
 		);
-		echo "</center>\n";
 		fin_boite_info();
 	}
 	echo afficher_syndic_articles(_T('titre_articles_syndiques'), array('FROM' => 'spip_syndic_articles', 'WHERE' => "id_syndic=$id_syndic", 'ORDER BY' => "date DESC"), $id_syndic);
@@ -411,7 +407,7 @@ if ($GLOBALS['champs_extra'] AND $extra) {
 		echo extra_affichage($extra, "sites");
 	}
 
- echo '</center>';
+ echo '</div>';
 fin_cadre_relief();
 
 

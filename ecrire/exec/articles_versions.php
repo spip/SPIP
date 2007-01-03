@@ -22,20 +22,22 @@ function exec_articles_versions_dist()
 {
 	include_spip('inc/suivi_versions');
 
-  global $champs_extra, $chapo, $descriptif, $dir_lang, $id_article, $id_diff, $id_version, $les_notes, $nom_site, $options, $ps, $soustitre, $surtitre, $texte, $titre, $url_site;
+	global $champs_extra, $chapo, $descriptif, $dir_lang, $id_article, $id_diff, $id_version, $les_notes, $nom_site, $options, $ps, $soustitre, $surtitre, $texte, $titre, $url_site;
 
 
 //
 // Lire l'article
 //
 
-	if(!autoriser('voirrevisions', 'article', $id_article))
-		return;
+	$id_article = intval($id_article);
+	$row = spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article='$id_article'"));
 
-    $id_article = intval($id_article);
-    $result = spip_query("SELECT * FROM spip_articles WHERE id_article='$id_article'");
+	if(!(autoriser('voirrevisions', 'article', $id_article) AND $row)) {
+		include_spip('minipres');
+		echo minipres();
+		exit;
+	}
 
-if ($row = spip_fetch_array($result)) {
 	$id_article = $row["id_article"];
 	$id_rubrique = $row["id_rubrique"];
 	$titre = $row["titre"];
@@ -47,27 +49,25 @@ if ($row = spip_fetch_array($result)) {
 	$referers = $row["referers"];
 	$extra = $row["extra"];
 	$id_trad = $row["id_trad"];
-}
 
-if (!($id_version = intval($id_version))) {
-	$id_version = $row['id_version'];
-}
-$id_diff = intval($id_diff);
+	if (!($id_version = intval($id_version))) {
+		$id_version = $row['id_version'];
+	}
+	$id_diff = intval($id_diff);
 
-$textes = revision_comparee($id_article, $id_version, 'complet', $id_diff);
-foreach ($textes as $var => $t) $$var = $t;
-
+	$textes = revision_comparee($id_article, $id_version, 'complet', $id_diff);
+	if (is_array($textes)) foreach ($textes as $var => $t) $$var = $t;
 
 
-$commencer_page = charger_fonction('commencer_page', 'inc');
-echo $commencer_page(_T('info_historique')." &laquo; $titre &raquo;", "naviguer", "articles", $id_rubrique);
 
-debut_grand_cadre();
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('info_historique')." &laquo; $titre &raquo;", "naviguer", "articles", $id_rubrique);
 
-echo afficher_hierarchie($id_rubrique);
+	debut_grand_cadre();
 
-fin_grand_cadre();
+	echo afficher_hierarchie($id_rubrique);
 
+	fin_grand_cadre();
 
 
 //////////////////////////////////////////////////////
@@ -219,7 +219,8 @@ if ($id_version) {
 	
 	if ($virtuel) {
 		debut_boite_info();
-		echo _T('info_renvoi_article')." ".propre("<center>[->$virtuel]</center>");
+		echo _T('info_renvoi_article'),
+			propre("<span style='text-align: center'> [->$virtuel]</span>");
 		fin_boite_info();
 	}
 	else {

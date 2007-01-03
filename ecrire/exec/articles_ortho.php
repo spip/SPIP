@@ -207,7 +207,8 @@ echo "\n\n<div align='justify'>";
 
 if ($virtuel) {
 	debut_boite_info();
-	echo _T('info_renvoi_article')." ".propre("<center>[->$virtuel]</center>");
+	echo _T('info_renvoi_article'),
+		propre("<span style='text-align: center'> [->$virtuel]</span>");
 	fin_boite_info();
 }
 else {
