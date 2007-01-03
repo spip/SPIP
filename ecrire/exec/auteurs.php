@@ -137,7 +137,7 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 {
 	global $options, $spip_lang_right;
 
-	$res ="\n<tr bgcolor='#DBE1C5'>"
+	$res ="\n<tr style='background-color: #dbe1c5'>"
 	. "\n<td style='width: 20px'>";
 
 	if ($tri=='statut')
@@ -167,7 +167,7 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 	$res .= "</td></tr>\n";
 
 	if ($nombre_auteurs > $max_par_page) {
-		$res .= "\n<tr bgcolor='white'><td class='arial1' colspan='5'>";
+		$res .= "\n<tr style='background-color: white'><td class='arial1' colspan='5'>";
 
 		for ($j=0; $j < $nombre_auteurs; $j+=$max_par_page) {
 			if ($j > 0) 	$res .= " | ";
@@ -185,7 +185,7 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 		$res .= "</td></tr>\n";
 
 		if ($tri == 'nom' AND $options == 'avancees') {
-			$res .= "\n<tr bgcolor='white'><td class='arial11' colspan='5'>";
+			$res .= "\n<tr style='background-color: white'><td class='arial11' colspan='5'>";
 			foreach ($lettre as $key => $val) {
 				if ($val == $debut)
 					$res .= "<b>$key</b>\n";
@@ -200,7 +200,7 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 	$debut_suivant = $debut + $max_par_page;
 	if ($debut_suivant < $nombre_auteurs OR $debut > 0) {
 		$nav = "\n<table id='bas' style='width: 100%' border='0'>"
-		. "\n<tr bgcolor='white'><td align='left'>";
+		. "\n<tr style='background-color: white'><td align='left'>";
 
 		if ($debut > 0) {
 			$debut_prec = max($debut - $max_par_page, 0);

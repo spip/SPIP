@@ -78,7 +78,7 @@ function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 					$couleur="white";
 				}
 				echo "<table cellpadding='2' cellspacing='0' border='0' width='100%'>";
-				echo "\n<tr bgcolor='$couleur'>";
+				echo "\n<tr style='background-color: $couleur'>";
 				echo "\n<td style='border-bottom: 1px solid #aaaaaa; padding-$spip_lang_left: ".($niveau*20+5)."px;'>";
 				if ($niveau==0 OR 1==1){
 					$pourcent = round($nombre_vis[$id_rubrique]/$abs_total*1000)/10;

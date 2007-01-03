@@ -416,7 +416,7 @@ if ($GLOBALS['accepte_svg']) {
 	  "<td ".http_style_background("fond-stats.gif").">";
 	echo "<table cellpadding='0' cellspacing='0' border='0'><tr>";
 	
-	echo "<td bgcolor='black'>", http_img_rien(1,200), "</td>";
+	echo "<td style='background-color: black'>", http_img_rien(1,200), "</td>";
 	
 	$test_agreg = $decal = $jour_prec = $val_prec = $total_loc =0;
 
@@ -549,7 +549,7 @@ if ($GLOBALS['accepte_svg']) {
 			echo "</td>";
 
 
-			echo "<td bgcolor='black'>",http_img_rien(1, 1),"</td>";
+			echo "<td style='background-color: black'>",http_img_rien(1, 1),"</td>";
 			echo "</tr></table>";
 			echo "</td>",
 			  "<td ".http_style_background("fond-stats.gif")."  valign='bottom'>", http_img_rien(3, 1, 'background-color:black;'),"</td>";
@@ -672,7 +672,7 @@ if ($GLOBALS['accepte_svg']) {
 		echo "<table cellpadding='0' cellspacing='0' border='0'><tr>",
 		  "<td ".http_style_background("fond-stats.gif").">";
 		echo "<table cellpadding='0' cellspacing='0' border='0'><tr>";
-		echo "<td bgcolor='black'>", http_img_rien(1, 200),"</td>";
+		echo "<td style='background-color: black'>", http_img_rien(1, 200),"</td>";
 	
 		// Presentation graphique
 		$decal = 0;
@@ -741,7 +741,7 @@ if ($GLOBALS['accepte_svg']) {
 			echo "</td>\n";
 		}
 		
-		echo "<td bgcolor='black'>", http_img_rien(1, 1),"</td>";
+		echo "<td style='background-color: black'>", http_img_rien(1, 1),"</td>";
 		echo "</tr></table>";
 		echo "</td>",
 		  "<td ".http_style_background("fond-stats.gif")." valign='bottom'>", http_img_rien(3, 1, 'background-color:black;'),"</td>";
