@@ -17,7 +17,16 @@ include_spip('inc/headers');
 // http://doc.spip.org/@inc_install_6
 function install_etape_6_dist()
 {
-	global $email,$login,$nom,$pass,$spip_lang_right;
+	global $email,$login,$nom,$pass, $pass_verif,$spip_lang_right;
+
+	if($pass!=$pass_verif OR strlen($pass)<5 OR strlen($login)<3) {
+		echo minipres(
+			'AUTO',
+			"<h2>"._L('Echec de saisie du mot de passe')."</h2>\n".
+			"<p>"._L('Revenez à la page précédente, et vérifiez les informations que vous avez fournies.')."</p>"
+		);
+		exit;
+	}
 
 	echo install_debut_html('AUTO', ' onLoad="document.getElementById(\'suivant\').focus();return false;"');
 

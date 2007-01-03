@@ -65,6 +65,10 @@ function install_etape_5_dist()
 			'pass' => array(
 				'label' => "<b>"._T('entree_mot_passe')."</b><br />\n"._T('info_plus_cinq_car_2')."\n",
 				'value' => $pass
+			),
+			'pass_verif' => array(
+				'label' => "<b>"._L('Confirmation')."</b><br />\n",
+				'value' => $pass
 			)
 		)
 	);
