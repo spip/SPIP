@@ -38,7 +38,7 @@ function demander_conversion($tables_a_convertir, $action) {
 				'charset' => 'utf-8')
 		);
 		$commentaire .=  "<p><small>"
-		. http_img_pack('warning.gif', _T('info_avertissement'), "width='48' height='48' align='right'");
+		. http_img_pack('warning.gif', _T('info_avertissement'), "style='width: 48px; height: 48px; float: right;margin: 10px;'");
 		$commentaire .= _T('utf8_convert_backup', array('charset' => 'utf-8'))
 		."</small>";
 		$commentaire .= '<p>'._T('utf8_convert_timeout');
