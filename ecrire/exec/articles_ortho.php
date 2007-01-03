@@ -276,7 +276,7 @@ function debut_html($titre = "", $rubrique="") {
 
 	// Fin des entetes
 	echo "\n</head>\n";
-	echo "<body ",  _ATTRIBUTES_BODY, ">";
+	echo "<body", ($GLOBALS['spip_lang_rtl'] ? " dir='rtl'" : ""), ">";
 }
 
 ?>
