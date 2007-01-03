@@ -101,10 +101,10 @@ function http_afficher_rendez_vous($date_heure, $date_fin)
 	$dirpuce = _DIR_RACINE . 'dist';
 	if (jour($date_heure) == jour($date_fin) AND mois($date_heure) == mois($date_fin) AND annee($date_heure) == annee($date_fin)) {		
 	  echo "<p class='verdana2' style='text-align: center'>"._T('titre_rendez_vous')." ".majuscules(nom_jour($date_heure))." <b>".majuscules(affdate($date_heure))."</b><br />\n<b>".heures($date_heure)." "._T('date_mot_heures')." ".minutes($date_heure)."</b>";
-	  echo " &nbsp; <img src='$dirpuce/puce$spip_lang_rtl.gif' alt=' ' border='0' /> &nbsp;  ".heures($date_fin)." "._T('date_mot_heures')." ".minutes($date_fin)."</p>";
+	  echo " &nbsp; <img src='$dirpuce/puce$spip_lang_rtl.gif' alt=' ' style='border: 0px;' /> &nbsp;  ".heures($date_fin)." "._T('date_mot_heures')." ".minutes($date_fin)."</p>";
 	} else {
 	  echo "<p class='verdana2' style='text-align: center'>"._T('titre_rendez_vous')."<br />\n".majuscules(nom_jour($date_heure))." <b>".majuscules(affdate($date_heure))."</b>, <b>".heures($date_heure)." "._T('date_mot_heures')." ".minutes($date_heure)."</b>";
-	  echo "<br />\n<img src='$dirpuce/puce$spip_lang_rtl.gif' alt=' ' border='0' /> ".majuscules(nom_jour($date_fin))." ".majuscules(affdate($date_fin)).", <b>".heures($date_fin)." "._T('date_mot_heures')." ".minutes($date_fin)."</b></p>";
+	  echo "<br />\n<img src='$dirpuce/puce$spip_lang_rtl.gif' alt=' ' style='border: 0px;' /> ".majuscules(nom_jour($date_fin))." ".majuscules(affdate($date_fin)).", <b>".heures($date_fin)." "._T('date_mot_heures')." ".minutes($date_fin)."</b></p>";
 	}
 }
 

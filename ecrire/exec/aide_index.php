@@ -148,15 +148,15 @@ function help_body($aide, $html, $lang_aide='') {
 		}
 	} else {
 		// panneau d'accueil
-		$html = '<div align="center">
-			<img src="'._DIR_IMG_PACK.
-			'logo-spip.gif" alt="SPIP" width="267" height="170" border="0" />
+		$html = "<div align='center'>
+			<img src='" . _DIR_IMG_PACK.
+		  "logo-spip.gif' alt='SPIP' style='width: 267px; height: 170px; border: 0px' />
 			<br />
-			<div align="center" style="font-variant: small-caps;">
-			Syst&egrave;me de publication pour l\'Internet
+			<div align='center' style='font-variant: small-caps;'>
+			Syst&egrave;me de publication pour l'Internet
 			</div></div>
-			<div style="position:absolute; bottom: 10px; right:20px;
-			font-size: 12px; ">'.
+			<div style='position:absolute; bottom: 10px; right:20px;
+			font-size: 12px; '>" .
 		preg_replace(",<a ,i", "<a class='target_blank' ",_T('info_copyright_doc')).
 			'</div>';
 	}
@@ -194,12 +194,12 @@ jQuery(function(){
 	echo " lang='$lang_aide'>";
 
 	if ($aide == 'spip') {
-		echo '<table border="0" width="100%" height="60%">
-<tr style="width: 100%" height="60%">
-<td style="width: 100%" height="60%" align="center" valign="middle">
-<img src="', generer_url_ecrire("aide_index", "img=AIDE--logo-spip.gif", false, true),
-		  '" alt="SPIP" width="300" height="170" border="0" />
-</td></tr></table>';
+		echo "<table border='0' width='100%' height='60%'>
+<tr style='width: 100%' height='60%'>
+<td style='width: 100%' height='60%' align='center' valign='middle'>
+<img src='", generer_url_ecrire('aide_index', 'img=AIDE--logo-spip.gif', false, true),
+		  "' alt='SPIP' style='width: 300px; height: 170px; border: 0px;' />
+</td></tr></table>";
 	}
 
 	// Il faut que la langue de typo() soit celle de l'aide en ligne

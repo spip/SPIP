@@ -45,15 +45,15 @@ debut_boite_info();
 
 echo _T('info_gauche_messagerie');
 
-echo "<p>".http_img_pack("m_envoi$spip_lang_rtl.gif", 'V', "width='14' height='7' border='0'") .' ' . _T('info_symbole_vert'), '</p>';
+echo "<p>".http_img_pack("m_envoi$spip_lang_rtl.gif", 'V', "style='width: 14px; height: 7px; border: 0px'") .' ' . _T('info_symbole_vert'), '</p>';
 
  echo aide ("messut");
 
-echo "<p>".http_img_pack("m_envoi_bleu$spip_lang_rtl.gif", 'B', "width='14' height='7' border='0'") .' ' . _T('info_symbole_bleu'), '</p>';
+echo "<p>".http_img_pack("m_envoi_bleu$spip_lang_rtl.gif", 'B', "style='width: 14px; height: 7px; border: 0px'") .' ' . _T('info_symbole_bleu'), '</p>';
 
 echo aide ("messpense");
 
-echo "<p>".http_img_pack("m_envoi_jaune$spip_lang_rtl.gif", 'J', "width='14' height='7' border='0'") .' ' . _T('info_symbole_jaune'), '</p>';
+echo "<p>".http_img_pack("m_envoi_jaune$spip_lang_rtl.gif", 'J', "style='width: 14px; height: 7px; border: 0px'") .' ' . _T('info_symbole_jaune'), '</p>';
 
 fin_boite_info();
 
@@ -138,7 +138,7 @@ if (spip_num_rows($result) > 0) {
 		$id_auteur = $row['id_auteur'];
 		$nom = typo($row["nom"]);
 		$total = $row["total"];
-		echo "<div class='tr_liste' onmouseover=\"changeclass(this,'tr_liste_over');\" onmouseout=\"changeclass(this,'tr_liste');\" style='padding: 2px; padding-left: 10px; border-bottom: 1px solid #cccccc;'><div class='verdana1'><img src='" . _DIR_IMG_PACK . "redac-12.gif' border='0'> <a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "'>$nom</a> ($total)</div></div>";
+		echo "<div class='tr_liste' onmouseover=\"changeclass(this,'tr_liste_over');\" onmouseout=\"changeclass(this,'tr_liste');\" style='padding: 2px; padding-left: 10px; border-bottom: 1px solid #cccccc;'><div class='verdana1'><img src='" . _DIR_IMG_PACK . "redac-12.gif' style='border: 0px'> <a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "'>$nom</a> ($total)</div></div>";
 		if ($count == ceil(spip_num_rows($result)/2)) echo "</td><td valign='top' width='50%' style='background-color: #eeeeee;'>";
 	}
 	echo "</td></tr></table>";
