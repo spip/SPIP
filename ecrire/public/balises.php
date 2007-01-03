@@ -1331,7 +1331,8 @@ function balise_ARRAY_dist($p) {
 		$_val = interprete_argument_balise($n++,$p);
 	}
 	if (strlen($_code))
-		$p->code = "array(".substr($_code,2).")";
+		$_code = substr($_code,2);
+	$p->code = "array($_code)";
 	$p->interdire_scripts = false;
 	return $p;
 }
