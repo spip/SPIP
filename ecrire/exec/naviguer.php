@@ -105,7 +105,7 @@ function exec_naviguer_dist()
 
 
 	if (strlen($texte) > 1) {
-		echo "\n<div align='justify' style='font-size: 16px; ' class='verdana1'>", justifier(propre($texte)), "</div>";
+		echo "\n<div style='font-size: 16px; ' class='verdana1'>", justifier(propre($texte)), "</div>";
 	}
 	
 	langue_naviguer($id_rubrique, $id_parent, $flag_editable);

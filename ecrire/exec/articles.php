@@ -149,7 +149,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 		. $instituer_article($id_article, $statut_article)
 		. fin_cadre_relief(true)))
 
-	. "\n<div align='justify' style='padding: 10px;'>"
+	. "\n<div style='text-align: justify; padding: 10px;'>"
 	. afficher_corps_articles($virtuel, $chapo, $texte, $ps, $extra)
 
 	. (!$flag_editable ? ''
