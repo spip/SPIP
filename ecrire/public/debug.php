@@ -322,7 +322,7 @@ function ancre_texte($texte, $fautifs=array())
 
 	$ancre = md5($texte);
 	$n = strlen(count($tableau));
-	$format = "<a href='#T%s'><span id='L%d' style='text-align: right;color: black;%s'>%0"
+	$format = "<a href='#T%s' title=\"%s\"><span id='L%d' style='text-align: right;color: black;%s'>%0"
 	. strval($n)
 	. "d&nbsp;&nbsp;</span></a>\n";
 
@@ -343,15 +343,16 @@ function ancre_texte($texte, $fautifs=array())
 	  if (isset($flignes[$i])) {
 	    $ligne = str_replace('&nbsp;',' ', $ligne);
 	    $indexmesg = $flignes[$i][1];
+	    $err = textebrut($flignes[$i][2]);
 	    // tentative de pointer sur la colonne fautive;
 	    // marche pas car highlight_string rajoute des entites. A revoir.
 	    // $m = $flignes[$i][0];
 	    //  $ligne = substr($ligne, 0, $m-1) .
 	    //  sprintf($formaterr, substr($ligne,$m));
 	    $bg = $formaterr; 
-	  } else {$indexmesg = $ancre; $bg='';}
+	  } else {$indexmesg = $ancre; $err= $bg='';}
 	  $res .= "<br />\n"
-	    .  sprintf((($i%10) ? $format :$format10), $indexmesg, $i, $bg, $i)
+	    .  sprintf((($i%10) ? $format :$format10), $indexmesg, $err, $i, $bg, $i)
 		.   $ligne;
 	  $i++;
 	}
@@ -603,7 +604,7 @@ function emboite_texte($texte, $fonc='',$self='')
 			  . "</a></td><td  style='text-align: right'>"
 			  . $fin
 			  . "</td><td>$msg</td></tr>\n";
-			$fautifs[]= array($ligne, $col, $i);
+			$fautifs[]= array($ligne, $col, $i, $msg);
 		}
 		$err = "<h2 style='text-align: center'>"
 		.  $i
