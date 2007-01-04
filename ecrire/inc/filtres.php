@@ -1601,6 +1601,8 @@ function direction_css ($css, $voulue='') {
 	if ($voulue == $dir)
 		return $css;
 
+	$path = dirname(url_absolue($css))."/"; // pour mettre sur les images
+
 	// 1.
 	$f = preg_replace(',(_rtl)?\.css$,i', '_'.$ndir.'.css', $css);
 	if (@file_exists($f))
@@ -1622,6 +1624,9 @@ function direction_css ($css, $voulue='') {
 		array('right', 'left', '@@@@L E F T@@@@'),
 		array('@@@@L E F T@@@@', 'right', 'left'),
 		$contenu);
+	
+	// passer les url relatives a la css d'origine en url absolues
+	$contenu = preg_replace(",url\(([^/][^:]*)\),Uims","url($path\\1)",$contenu);
 
 	if (!ecrire_fichier($f, $contenu))
 		return $css;
@@ -1638,8 +1643,9 @@ function url_absolue_css ($css) {
 	$path = dirname(url_absolue($css))."/"; // pour mettre sur les images
 	
 	$f = basename($css,'.css');
-	$f = sous_repertoire (_DIR_VAR, 'cache-css') . "$f-url_absolue"
-		. '_' . substr(md5("$css-url_absolue"), 0,4) . '.css';
+	$f = sous_repertoire (_DIR_VAR, 'cache-css') 
+		. preg_replace(",(.*?)(_rtl|_ltr)?$,","\\1-urlabs-" . substr(md5("$css-urlabs"), 0,4) . "\\2",$f) 
+		. '.css';
 
 	if ((@filemtime($f) > @filemtime($css))
 	AND ($GLOBALS['var_mode'] != 'recalcul'))
@@ -1665,8 +1671,9 @@ function compacte_css ($css) {
 	if (!preg_match(',\.css$,i', $css, $r)) return $css;
 	
 	$f = basename($css,'.css');
-	$f = sous_repertoire (_DIR_VAR, 'cache-css') . "$f-compacte"
-		. '_' . substr(md5("$css-compacte"), 0,4) . '.css';
+	$f = sous_repertoire (_DIR_VAR, 'cache-css') 
+		. preg_replace(",(.*?)(_rtl|_ltr)?$,","\\1-compacte-" . substr(md5("$css-compacte"), 0,4) . "\\2",$f) 
+		. '.css';
 
 	if ((@filemtime($f) > @filemtime($css))
 	AND ($GLOBALS['var_mode'] != 'recalcul'))
