@@ -95,8 +95,8 @@ function erreur_requete_boucle($query, $id_boucle, $type, $errno, $erreur) {
 		. $type . ")</blink><br />\n"
 		. "<b>"._T('avis_erreur_mysql')."</b><br />\n"
 		. htmlspecialchars($query)
-		. "\n<br /><font color='red'><b>".htmlspecialchars($erreur)
-		. "</b></font><br />"
+		. "\n<br /><span style='color: red'><b>".htmlspecialchars($erreur)
+		. "</b></span><br />"
 		. "<blink>&lt;/BOUCLE".$id_boucle."&gt;</blink></tt>\n";
 
 		include_spip('inc/minipres');
@@ -308,18 +308,26 @@ function ancre_texte($texte, $fautifs=array())
 	global $var_mode_ligne;
 	if ($var_mode_ligne) $fautifs[]= array($var_mode_ligne);
 	$res ='';
-	$s = highlight_string($texte,true);
+	$s = highlight_string(str_replace('</script>','</@@@@@>',$texte),true);
+
+	$s = str_replace('/@@@@@','/script', // bug de highlight_string
+		str_replace('</font>','</span>',
+			str_replace('<font color="','<span style="color: ', $s)));
 	if (substr($s,0,6) == '<code>') { $s=substr($s,6); $res = '<code>';}
+
+	$s = preg_replace(',<(\w[^<>]*)>([^<]*)<br />([^<]*)</\1>,',
+			  '<\1>\2</\1><br />' . "\n" . '<\1>\3</\1>',
+			  $s);
 	$tableau = explode("<br />", $s);
 
 	$ancre = md5($texte);
 	$n = strlen(count($tableau));
-	$format = "<a href='#T%s'><span id='L%d' style='text-align: right;color: black;'>%0"
+	$format = "<a href='#T%s'><span id='L%d' style='text-align: right;color: black;%s'>%0"
 	. strval($n)
 	. "d&nbsp;&nbsp;</span></a>\n";
 
 	$format10=str_replace('black','pink',$format);
-	$formaterr="<span style='background-color: pink'>%s</span>";
+	$formaterr="background-color: pink;";
 	$i=1;
 
 	$flignes = array();
@@ -340,10 +348,10 @@ function ancre_texte($texte, $fautifs=array())
 	    // $m = $flignes[$i][0];
 	    //  $ligne = substr($ligne, 0, $m-1) .
 	    //  sprintf($formaterr, substr($ligne,$m));
-	    $ligne = sprintf($formaterr, $ligne);
-	  } else $indexmesg = $ancre;
+	    $bg = $formaterr; 
+	  } else {$indexmesg = $ancre; $bg='';}
 	  $res .= "<br />\n"
-	  .  sprintf((($i%10) ? $format :$format10), $indexmesg, $i, $i)
+	    .  sprintf((($i%10) ? $format :$format10), $indexmesg, $i, $bg, $i)
 		.   $ligne;
 	  $i++;
 	}
@@ -478,12 +486,16 @@ function debug_script ($t) {
 
 	debug_debut($GLOBALS['exec']);
 	if (!isset($GLOBALS['xhtml_error'])) {
-	  $err = '<h3>' . _L('SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE&nbsp;: <br />') .
-	    substr($t,9,strpos($t,'>')-9)
-	    .'</h3>';
-	  $t ='';
+		list ($top, $avail, $grammaire, $rotlvl) = analyser_doctype($t);
+		$err = '<h3>' . _L('SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE&nbsp;:')
+		. "<br /><a href='" 
+		. $grammaire
+		. "'>"
+		. $rotlvl
+		. '</a></h3>';
+		$t ='';
 	} else {
-	  list($t, $err) = emboite_texte($t);
+		list($t, $err) = emboite_texte($t);
 	}
 
 	echo "<div style='text-align: center'><h1>", _T('analyse_xml') . '</h1>',
@@ -494,8 +506,7 @@ function debug_script ($t) {
 	    .  _T("access_interface_graphique")
 	    . "</a></div>";
 	echo $t;
-	echo "\n</div>";
-	echo '</body></html>';
+	echo "\n</div></div></body></html>";
 }
 
 // http://doc.spip.org/@debug_debut
@@ -513,8 +524,11 @@ function debug_debut($titre)
 	   _T('admin_debug') . ' ' . $titre . ' (' .
 	   supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']))), 
 	  ")</title>\n",
+	  "<meta http-equiv='Content-Type' content='text/html",
+	  (($c = $GLOBALS['meta']['charset']) ? "; charset=$c" : ''),
+	  "' />\n",
 	  "<link rel='stylesheet' href='".url_absolue(find_in_path('spip_admin.css'))
-	  . "' type='text/css'>",
+	  . "' type='text/css' />",
 	  "</head>\n<body style='margin:0 10px;'>",
 	  "\n<div id='spip-debug' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:10px;right:10px;'><div id='spip-boucles'>\n"; 
 }

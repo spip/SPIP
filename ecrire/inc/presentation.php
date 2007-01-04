@@ -1799,7 +1799,7 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30, $ajax
 
 	$voss = spip_query($query . " ORDER BY $order DESC LIMIT $limit");
 
-	$limit -= $n;
+	$limit = $n - $limit;
 	$retour = '';
 	$fstatut = 'puce_statut_' . $type;
 
@@ -1824,7 +1824,8 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30, $ajax
 	$retour = bandeau_titre_boite2($icone,  'article-24.gif','','',false)
 	. "\n<table style='font-size: 11px; background-color: #e0e0e0;border: 0px; padding-left:4px;'>"
 	. $retour
-	. (($limit > 0) ? '' : "<tr><td colspan='3' style='text-align: center'>+ $limit</td></tr>")
+	. (($limit >= 0) ? ''
+	 : "<tr><td colspan='3' style='text-align: center'>+ $limit</td></tr>")
 	. "</table>";
 
 	if ($ajax) return $retour;
