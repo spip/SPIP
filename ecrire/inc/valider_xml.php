@@ -128,7 +128,6 @@ function analyser_dtd($grammaire, $avail, &$dtc)
 	    $nom = expanserEntite($nom, $dtc->macros);
 	    $val = str_replace("\n",' ', trim(expanserEntite($val, $dtc->macros)));
 	    $dtc->regles[$nom]= $val;
-	    spip_log("$nom '$val'");
 	    $val = array_values(preg_split('/\W+/', $val,-1, PREG_SPLIT_NO_EMPTY));
 	    $dtc->elements[$nom]= $val;
 
@@ -143,7 +142,6 @@ function analyser_dtd($grammaire, $avail, &$dtc)
 	    $dtc->peres[$k] = $v;
 	  } 
 	}
-
 
 	if (preg_match_all('/<!ATTLIST\s+(\S+)\s+([^>]*)>/', $dtd, $r, PREG_SET_ORDER)) {
 	  foreach($r as $m) {
@@ -382,7 +380,7 @@ function finElement($phraseur, $name)
 		if (preg_match('/^\(.*\)\+$/', $regle)
 		OR ((strpos($regle,',') !== false)
 			AND strpos($regle,'|') === false)) {
-			$phraseur_xml->err[]= " <p>\n<b>$name '$regle'</b>"
+			$phraseur_xml->err[]= " <p>\n<b>$name</b>"
 			.  _L(' balise vide')
 			.  coordonnees_erreur($phraseur);
 		}
