@@ -27,10 +27,10 @@ class DTC {
 	var 	$peres = array();
 	var 	$attributs = array();
 	var	$entites = array();
+	var	$regles = array();
 }
 
-// http://doc.spip.org/@charger_dtd
-function charger_dtd($data)
+function analyser_doctype($data)
 {
 	if (!preg_match(_REGEXP_DOCTYPE, $data, $r))
 		return array();
@@ -51,6 +51,16 @@ function charger_dtd($data)
 				return array();
 		$grammaire = $r[1];
 	}
+	return array($topelement, $avail, $grammaire, $rotlvl);
+}
+
+// http://doc.spip.org/@charger_dtd
+function charger_dtd($data)
+{
+	$r = analyser_doctype($data);
+	if (!$r) return array();
+
+	list ($topelement, $avail, $grammaire, $rotlvl) = $r;
 	spip_log("Racine $topelement dans $grammaire ($rotlvl)");
 	$dtc = new DTC;
 	analyser_dtd($grammaire, $avail, $dtc);
@@ -116,9 +126,10 @@ function analyser_dtd($grammaire, $avail, &$dtc)
 	  foreach($r as $m) {
 	    list(,$nom, $val) = $m;
 	    $nom = expanserEntite($nom, $dtc->macros);
-	    $val = expanserEntite($val, $dtc->macros);
-	    $val = array_values(preg_split('/\W+/', $val,-1,
-					   PREG_SPLIT_NO_EMPTY));
+	    $val = str_replace("\n",' ', trim(expanserEntite($val, $dtc->macros)));
+	    $dtc->regles[$nom]= $val;
+	    spip_log("$nom '$val'");
+	    $val = array_values(preg_split('/\W+/', $val,-1, PREG_SPLIT_NO_EMPTY));
 	    $dtc->elements[$nom]= $val;
 
 	    foreach ($val as $k) {
@@ -333,8 +344,12 @@ class ValidateurXML {
 // http://doc.spip.org/@debutElement
 function debutElement($phraseur, $name, $attrs)
 { 
+	global $phraseur_xml;
+
 	validerElement($phraseur, $name, $attrs);
 	xml_debutElement($phraseur, $name, $attrs);
+	$depth = &$phraseur_xml->depth;
+	$phraseur_xml->debuts[$depth] =  strlen($phraseur_xml->res);
 	foreach ($attrs as $k => $v) {
 		validerAttribut($phraseur, $k, $v, $name);
 	}
@@ -344,9 +359,35 @@ function debutElement($phraseur, $name, $attrs)
 function finElement($phraseur, $name)
 {
 	global $phraseur_xml;
- 	xml_finElement($phraseur,
-		       $name,
-		       $phraseur_xml->dtc->elements[$name][0] == 'EMPTY');
+
+	$depth = &$phraseur_xml->depth;
+	$contenu = &$phraseur_xml->contenu;
+	$ouvrant = &$phraseur_xml->ouvrant;
+
+	$ouv = $ouvrant[$depth];
+	if ($ouv[0] != ' ')
+	  $ouvrant[$depth] = ' ' . $ouv;
+	else $ouv= "";
+	$n = strlen($phraseur_xml->res) + strlen(trim($contenu[$depth]));
+	$k = $phraseur_xml->debuts[$depth];
+
+	$regle = $phraseur_xml->dtc->regles[$name];
+	$vide = ($regle  == 'EMPTY');
+	if ($vide) {
+		if ($n <> $k)
+			$phraseur_xml->err[]= " <p><b>$name</b>"
+			.  _L(' balise non vide')
+			.  coordonnees_erreur($phraseur);
+	} elseif ($n == $k) {
+		if (preg_match('/^\(.*\)\+$/', $regle)
+		OR ((strpos($regle,',') !== false)
+			AND strpos($regle,'|') === false)) {
+			$phraseur_xml->err[]= " <p>\n<b>$name '$regle'</b>"
+			.  _L(' balise vide')
+			.  coordonnees_erreur($phraseur);
+		}
+	}
+	xml_finElement($phraseur, $name, $vide);
 }
 
 // http://doc.spip.org/@textElement
@@ -403,6 +444,7 @@ function phraserTout($phraseur, $data)
  var $ids = array();
  var $idrefs = array();
  var $idrefss = array();
+ var $debuts = array();
 }
 
 // http://doc.spip.org/@inc_valider_xml_dist
