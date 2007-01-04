@@ -476,15 +476,23 @@ function debug_dumpfile ($texte, $fonc, $type) {
 // http://doc.spip.org/@debug_script
 function debug_script ($t) {
 
+	debug_debut($GLOBALS['exec']);
 	if (!isset($GLOBALS['xhtml_error']))
-	  echo $t;
+	  $res = '<h2>' . _L('SPIP consid&egrave;re ce document comme valide'). '</h2>';
 	else {
-	  debug_debut($GLOBALS['exec']);
 	  list($t, $err) = emboite_texte($t);
-	  echo $err, $t;
+	  $res = $err . $t;
+	}
+
+	echo "<div style='text-align: center'><h1>", _T('analyse_xml') . '</h1>',
+	  $res,
+	   " <a href='"
+	    . parametre_url(self(),'transformer_xml', '')
+	    . "'>"
+	    .  _T("access_interface_graphique")
+	    . "</a></div>";
 	echo "\n</div>";
 	echo '</body></html>';
-	}
 }
 
 // http://doc.spip.org/@debug_debut

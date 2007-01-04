@@ -353,21 +353,21 @@ onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; char
 
 	// FIN GADGET Messagerie
 
-
 	// Suivi activite
-	$bandeau .= "<div id='bandeausynchro' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 160px;'>";
-	$bandeau .= "<a href='" . generer_url_ecrire("synchro") . "' class='lien_sous'>";
-	$bandeau .= _T('icone_suivi_activite');
-	$bandeau .= "</a>";
-	$bandeau .= "\n<div id='gadget-suivi'></div>\n";
-	$bandeau .= "</div>";
+	$bandeau .= "<div id='bandeausynchro' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 160px;'>"
+	. "<a href='" . generer_url_ecrire("synchro") . "' class='lien_sous'>"
+	. _T('icone_suivi_activite')
+	. "</a>"
+	. "\n<div id='gadget-suivi'><div>&nbsp;</div>"
+	. icone_horizontale(_T('analyse_xml'), parametre_url(self(),'transformer_xml', 'valider_xml'), 'xml.gif', '', false)
+	. "</div></div>\n";
 	
 		// Infos perso
-	$bandeau .= "\n<div id='bandeauinfoperso' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 200px;'>";
-	$bandeau .= "<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$connect_id_auteur") . "' class='lien_sous'>";
-	$bandeau .= _T('icone_informations_personnelles');
-	$bandeau .= "</a>";
-	$bandeau .= "</div>";
+	$bandeau .= "\n<div id='bandeauinfoperso' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 200px;'>"
+	. "<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$connect_id_auteur") . "' class='lien_sous'>"
+	. _T('icone_informations_personnelles')
+	. "</a>"
+	. "</div>";
 
 		
 		//
@@ -398,9 +398,9 @@ onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; char
 		
 	// En interface simplifiee, afficher en permanence l'indication de l'interface
 	if ($options != "avancees") {
-			$bandeau .= "\n<div id='displayfond' class='bandeau bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right; visibility: visible; background-color: white; color: $couleur_foncee; z-index: -1000; border: 1px solid $couleur_claire; border-top: 0px;'>";
-			$bandeau .= "<b>"._T('icone_interface_simple')."</b>";
-			$bandeau .= "</div>\n";
+		$bandeau .= "\n<div id='displayfond' class='bandeau bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right; visibility: visible; background-color: white; color: $couleur_foncee; z-index: -1000; border: 1px solid $couleur_claire; border-top: 0px;'>"
+		. "<b>" . _T('icone_interface_simple')."</b>"
+		. "</div>\n";
 	}
 	$bandeau .= "\n<div id='bandeaudisplay' class='bandeau bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>";
 

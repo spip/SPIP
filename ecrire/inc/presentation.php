@@ -1744,8 +1744,8 @@ function fin_page()
 	return debut_grand_cadre(true)
 	. "\n"
 	. (($spip_display == 4)
-		? ("<div><a href='./?set_disp=2&exec="
-			. _request('exec')
+		? ("<div><a href='"
+		   	. parametre_url(self(),'set_disp', '2')
 			. "'>"
 			.  _T("access_interface_graphique")
 			. "</a></div>")
