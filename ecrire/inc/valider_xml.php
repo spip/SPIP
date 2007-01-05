@@ -120,28 +120,29 @@ function analyser_dtd($grammaire, $avail, &$dtc)
 		}
 	}
 
-	// reperer pour chaque noeud ses fils potentiels.
-	// mais tant pis pour leur eventuel ordre de succession (, * +):
-	// les cas sont rares et si aberrants que interet/temps-de-calcul -> 0
-	if (preg_match_all('/<!ELEMENT\s+(\S+)\s+([^>]*)>/', $dtd, $r, PREG_SET_ORDER)) {
-	  foreach($r as $m) {
-	    list(,$nom, $val) = $m;
-	    $nom = expanserEntite($nom, $dtc->macros);
-	    $val = str_replace("\n",' ', trim(expanserEntite($val, $dtc->macros)));
-	    $dtc->regles[$nom]= $val;
-	    $val = array_values(preg_split('/\W+/', $val,-1, PREG_SPLIT_NO_EMPTY));
-	    $dtc->elements[$nom]= $val;
+	// memoriser la regle de production de l'element
+	// et dresser le tableau de ses fils potentiels
+	// pour traquer tres vite les balises filles illegitimes
 
-	    foreach ($val as $k) {
-		if (!isset($dtc->peres[$k])
-		OR !in_array($nom, $dtc->peres[$k]))
-			$dtc->peres[$k][]= $nom;
-	    }
-	  }
-	  foreach ($dtc->peres as $k => $v) {
-	    asort($v);
-	    $dtc->peres[$k] = $v;
-	  } 
+	if (preg_match_all('/<!ELEMENT\s+(\S+)\s+([^>]*)>/', $dtd, $r, PREG_SET_ORDER)) {
+		foreach($r as $m) {
+			list(,$nom, $val) = $m;
+			$nom = expanserEntite($nom, $dtc->macros);
+			$val = expanserEntite($val, $dtc->macros);
+			$dtc->regles[$nom]= $val;
+			$val = array_values(preg_split('/\W+/', $val,-1, PREG_SPLIT_NO_EMPTY));
+			$dtc->elements[$nom]= $val;
+
+			foreach ($val as $k) {
+				if (($k != 'EMPTY') AND ($k != 'ANY') AND ($k[0] != '#') AND ((!isset($dtc->peres[$k])) OR !in_array($nom, $dtc->peres[$k])))
+				$dtc->peres[$k][]= $nom;
+			}
+		}
+		// tri pour presenter les suggestions de corrections
+		foreach ($dtc->peres as $k => $v) {
+			asort($v);
+			$dtc->peres[$k] = $v;
+		} 
 	}
 
 	if (preg_match_all('/<!ATTLIST\s+(\S+)\s+([^>]*)>/', $dtd, $r, PREG_SET_ORDER)) {
@@ -177,7 +178,7 @@ function expanserEntite($val, $macros)
 			if (isset($macros[$m[1]]))
 				$val = str_replace($m[0], $macros[$m[1]], $val);
 	}
-	return $val;
+	return trim(preg_replace('/\s+/', ' ', $val));
 }
 
 // http://doc.spip.org/@validerElement
@@ -192,6 +193,12 @@ function validerElement($phraseur, $name, $attrs)
 		$phraseur_xml->err[]= " <b>$name</b>"
 		. _L(' balise inconnue ')
 		.  coordonnees_erreur($phraseur);
+	// controler les filles illegitimes, mais pas le droit d'ainesse
+	// (i.e. l'ordre de succession indique par une virgule dans la regle:
+	// le cas est rare, du coup interet/temps-de-calcul tend vers 0)
+	// Pour XHTML 1.0 il n'y a que <html>, <head> et <table>.
+	// Mais a-t-on jamais mis  head apres body et caption apres tr ?
+	// Quant a Head, c'est juste pour avoir 1 seul title et 1 seul base.
 	else {
 	  $depth = $phraseur_xml->depth;
 	  $ouvrant = $phraseur_xml->ouvrant;
@@ -372,15 +379,24 @@ function finElement($phraseur, $name)
 
 	$regle = $phraseur_xml->dtc->regles[$name];
 	$vide = ($regle  == 'EMPTY');
+	// controler que les balises devant etre vides le sont (ok),
+	// idem pour les nons vides (approximatif, car on ignore "|")
+	// Pour Xhtml 1.0, cette approximation suffit
 	if ($vide) {
 		if ($n <> $k)
 			$phraseur_xml->err[]= " <p><b>$name</b>"
 			.  _L(' balise non vide')
 			.  coordonnees_erreur($phraseur);
 	} elseif ($n == $k) {
-		if (preg_match('/^\(.*\)\+$/', $regle)
-		OR ((strpos($regle,',') !== false)
-			AND strpos($regle,'|') === false)) {
+		if (strpos($regle, '+')) $ok = false;
+		else {
+		  if (!preg_match('/^\(.*(.)$/', $regle,$r))
+			$ok = true; // DATA: ok.
+		  elseif ($r[1] != ')') $ok = true; // i.e. ? ou *: ok
+		  elseif (preg_match('/[^?*)][)]*,/', $regle)) $ok= false;
+		  else $ok= true;
+		}
+		if( !$ok) {
 			$phraseur_xml->err[]= " <p>\n<b>$name</b>"
 			.  _L(' balise vide')
 			.  coordonnees_erreur($phraseur);
