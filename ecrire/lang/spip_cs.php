@@ -736,7 +736,7 @@ a znovu se ke str&aacute;nk&aacute;m p&#345;ipoj&iacute;te.
   restartujte v p&#345;&iacute;pad&#283; pot&#345;eby prohl&iacute;&#382;e&#269;.',
 'texte_inc_config' => 'N&iacute;&#382;e uveden&eacute; &uacute;pravy v&yacute;znamn&#283; ovliv&#328;uj&iacute;
   fungov&aacute;n&iacute; webu. M&#283;nit tato nastaven&iacute; by m&#283;li jenom u&#382;ivatel&eacute;, kte&#345;&iacute; dob&#345;e v&#283;d&iacute;,
- jak syst&eacute;m SPIP funguje. <p align="justify"><b>Obecn&#283;
+ jak syst&eacute;m SPIP funguje. <br /><br /><b>Obecn&#283;
  plat&iacute;, &#382;e s t&#283;mito str&aacute;nkami by m&#283;l pracovat pouze hlavn&iacute; spr&aacute;vce va&#353;eho webu.</b>',
 'texte_inc_meta_1' => 'P&#345;i pokusu o z&aacute;pis do souboru  <code>@fichier@</code> do&#353;lo k syst&eacute;mov&eacute; chyb&#283;. Jako&#382;to spr&aacute;vce webu',
 'texte_inc_meta_2' => 'zkontrolujte opr&aacute;vn&#283;n&iacute; k z&aacute;pisu ',

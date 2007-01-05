@@ -662,7 +662,7 @@ Pr&oacute;b&aacute;ljon',
 &uacute;jraind&iacute;totta a b&ouml;ng&eacute;sz&#337;j&eacute;t.',
 'texte_inc_config' => 'Az ezeken az oldalokon v&eacute;gzett m&oacute;dos&iacute;t&aacute;sok jelent&#337;sen befoly&aacute;solj&aacute;k a
  honlap m&#369;k&ouml;d&eacute;s&eacute;t. Javasoljuk, hogy ne  avatkozzon bele, amig &Ouml;n nem j&aacute;r&aacute;tos
- az SPIP m&#369;k&ouml;d&eacute;s&eacute;ben. <p align="justify"><b>&Aacute;ltal&aacute;ban nagyon tan&aacute;csos b&iacute;zni ezeket az oldalakat
+ az SPIP m&#369;k&ouml;d&eacute;s&eacute;ben. <br /><br /><b>&Aacute;ltal&aacute;ban nagyon tan&aacute;csos b&iacute;zni ezeket az oldalakat
  a honlap f&#337; webmester&eacute;re.</b>',
 'texte_inc_meta_1' => 'A rendszer hib&aacute;t &eacute;szlelt a <code>@fichier@</code> f&aacute;jl &iacute;r&aacute;s&aacute;kor. Mint honlap adminisztr&aacute;tor, legyen sz&iacute;ves',
 'texte_inc_meta_2' => 'ellen&#337;rizni a ir&aacute;si jogokat',

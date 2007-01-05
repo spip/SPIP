@@ -672,7 +672,7 @@ e tornar connect&agrave;\'vs au sit.
   tornat lan&ccedil;ar lo v&ograve;ste navigader.',
 'texte_inc_config' => 'Las modificacions h&egrave;itas dens aquestas paginas qu\'influ&eacute;ncian de b&egrave;th pro lo
  foncionament deu v&ograve;ste sit. Que vs\'aconselham de n\'interviene\'i pas tant que non siatz pas
- acostumat/ada au foncionament deu sist&egrave;ma SPIP. <p align="justify"><b>
+ acostumat/ada au foncionament deu sist&egrave;ma SPIP. <br /><br /><b>
  En generau, que\'s conselha h&ograve;rt
  de deishar la carga d\'aquestas paginas au webm&egrave;stre principau deu v&ograve;ste sit.</b>',
 'texte_inc_meta_1' => 'Lo sist&egrave;ma qu\'a rescontrat ua error dens l\'escritura deu fichi&egrave;r <code>@fichier@</code>.Volhatz, com administrator/tritz deu sit,',

@@ -669,7 +669,7 @@ e vos tornar connectar au sit.
   tornat lan&ccedil;ar v&ograve;stre navigador.',
 'texte_inc_config' => 'Las modificacions fachas dins questas paginas influ&eacute;ncian ferme lo
  foncionament de v&ograve;stre sit. Vos aconselham de pas i intervenir tant que siatz pas
- acostumat/ada au foncionament dau sistema SPIP. <p align="justify"><b>
+ acostumat/ada au foncionament dau sistema SPIP. <br /><br /><b>
  En generau, se conselha f&ograve;rt
  de laissar la charja de questas paginas au webmestre principau de v&ograve;stre sit.</b>',
 'texte_inc_meta_1' => 'Lo sistema a rescontrat una error durant l\'escritura dau fichier <code>@fichier@</code>. Volhatz, coma administrator/tritz dau sit,',

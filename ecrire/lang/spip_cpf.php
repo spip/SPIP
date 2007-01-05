@@ -668,7 +668,7 @@ navigat&egrave;r.',
 'texte_inc_config' => 'Bann sanzman sir bann paz-la na inn l&eacute;f&eacute; importan sir lamanyir
 out sit i mars. Ni kons&egrave;y aou pa tous a ryin si ou l&eacute; pa fransv&eacute;rit&eacute; byin abity&eacute; &egrave;k lo sist&egrave;m SPIP.
 
- <p align="justify"><b>&Eacute; minm, ni kons&eacute;y
+ <br /><br /><b>&Eacute; minm, ni kons&eacute;y
 aou l&egrave;s laz&eacute;styon do bann paz-la pou lo w&egrave;bm&egrave;t prinsipal.</b>',
 'texte_inc_meta_1' => 'Sist&egrave;m-la la finn trov&eacute; inn larlik &egrave;k l&eacute;kritir lo fisy&eacute; <code>@fichier@</code>.  Mersi, kom komand&egrave;r lo sit,',
 'texte_inc_meta_2' => 'v&eacute;rify&eacute; bann drwa l&eacute;kritir',

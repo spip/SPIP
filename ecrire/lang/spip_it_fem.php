@@ -689,7 +689,7 @@ Prova a ',
 'texte_inc_auth_3' => ', dopo aver eventualmente effettuato un logout e 
 riavviato il tuo browser.',
 'texte_inc_config' => 'Le modifiche effettuate in queste pagine influenzano notevolmente il
-funzionamento del sito. Non intervenire finch&eacute; non conosci bene i meccanismi del sistema SPIP. <p align="justify"><b>In generale, si consiglia di lasciare sempre alla webmistress la configurazione delle opzioni qui presenti.</b>',
+funzionamento del sito. Non intervenire finch&eacute; non conosci bene i meccanismi del sistema SPIP. <br /><br /><b>In generale, si consiglia di lasciare sempre alla webmistress la configurazione delle opzioni qui presenti.</b>',
 'texte_inc_meta_1' => 'La scrittura del file <code>@fichier@</code> ha causato un errore di sistema. L\'amministratrice del sito, ',
 'texte_inc_meta_2' => 'verifichi i diritti di scrittura',
 'texte_inc_meta_3' => 'nella cartella <code>@repertoire@</code>.',

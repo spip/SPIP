@@ -696,7 +696,7 @@ opnieuw verbinding maken met de site
  be&iuml;nvloeden de werking van de volledige website. We raden
  je aan hier niets aan te wijzigen tot je voldoende bekend
  bent met het functioneren van het SPIP systeem.
- <p align="justify"><b>Algemeen gesproken laat je het
+ <br /><br /><b>Algemeen gesproken laat je het
  beheer van deze pagina best over aan de webmaster van je
  site.</b>',
 'texte_inc_meta_1' => 'Het systeem merkt een fout bij het wegschrijven van het bestand <code>@fichier@</code>. Gelieve, als beheerder van de site,',

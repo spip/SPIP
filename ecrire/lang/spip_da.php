@@ -690,7 +690,7 @@ og igen f&aring; adgang til webstedet.',
 'texte_inc_auth_3' => 'efter om n&oslash;dvendigt at have lukket din browser ned og genstartet den igen.',
 'texte_inc_config' => '&AElig;ndringer nedenfor vil markant p&aring;virke webstedets funktion. 
 	 Du r&aring;des til ikke at &aelig;ndre dem, med mindre du er fortrolig med SPIP-systemets funktion.
-	<p align="justify"><b>I almindelighed r&aring;des du kraftigt til at lade den hovedansvarlige webmaster p&aring; dit websted tage sig af denne side.</b>',
+	<br /><br /><b>I almindelighed r&aring;des du kraftigt til at lade den hovedansvarlige webmaster p&aring; dit websted tage sig af denne side.</b>',
 'texte_inc_meta_1' => '<MODIF>Kontroller venligst som administrator',
 'texte_inc_meta_2' => 'skriveadgangen',
 'texte_inc_meta_3' => '<MODIF>til kataloget ecrire/',

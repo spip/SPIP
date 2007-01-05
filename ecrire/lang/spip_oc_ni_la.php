@@ -689,7 +689,7 @@ e vos tornar connectar au sit.
   tornat lan&ccedil;ar lo v&ograve;stre navigador.',
 'texte_inc_config' => 'Li modificacions fachi dins aquesti p&agrave;ginas influ&eacute;ncian bravament lo
  foncionament dau v&ograve;stre sit. V\'aconselham de non i intervenir tant que siatz pas
- acostumat/ada au foncionament dau sist&egrave;ma SPIP. <p align="justify"><b>
+ acostumat/ada au foncionament dau sist&egrave;ma SPIP. <br /><br /><b>
  En generau, si conselha tot plen
  de laissar la carga d\'aquesti p&agrave;ginas au webm&egrave;stre principau dau v&ograve;stre sit.</b>',
 'texte_inc_meta_1' => 'Lo sist&egrave;ma a rescontrat un error dins l\'escritura dau fichier <code>@fichier@</code>.Vougatz, coma administrator/tritz dau sit,',

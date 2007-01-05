@@ -715,7 +715,7 @@ e vos tornar connectar au sit.
   tornat lan&ccedil;ar v&ograve;stre navigador.',
 'texte_inc_config' => 'Lei modificacions fachas dins aquestei paginas influ&eacute;ncian bravament lo
  foncionament de v&ograve;stre sit. Vos aconselham de pas i intervenir tant que siatz pas
- acostumat/ada au foncionament dau sist&egrave;ma SPIP. <p align="justify"><b>
+ acostumat/ada au foncionament dau sist&egrave;ma SPIP. <br /><br /><b>
  En generau, se conselha f&ograve;rt
  de laissar la carga d\'aquestei paginas au webm&egrave;stre principau de v&ograve;stre sit.</b>',
 'texte_inc_meta_1' => 'Lo sist&egrave;ma a rescontrat una error dins l\'escritura dau fichier <code>@fichier@</code>.Vougatz, coma administrator/tritz dau sit,',

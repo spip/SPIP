@@ -693,7 +693,7 @@ e reconectar co web.
 'texte_inc_config' => 'As modificaci&amp;oacute;ns que faga nestas p&amp;aacute;xinas influir&amp;aacute;n notablemente no
   funcionamento do web. Recom&amp;eeacute;ndaselle non as modificar namentres que non estea 
   un pouco ao tanto do funcionamento do sistema SPIP.
-  <p align="justify"><b>En xeral, &amp;eacute; moi recomend&amp;aacute;bel que estas p&amp;aacute;xinas sexan
+  <br /><br /><b>En xeral, &amp;eacute; moi recomend&amp;aacute;bel que estas p&amp;aacute;xinas sexan
   xestionadas polo/a webm&amp;aacute;ster principal do web.</b>',
 'texte_inc_meta_1' => 'O sistema encontrou un erro trala escritura do ficheiro <code>@fichier@</code>. Rev&iacute;seo co perfil de administrador/a do web.',
 'texte_inc_meta_2' => 'Comprobar os dereitos de escritura',
