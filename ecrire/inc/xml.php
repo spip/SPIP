@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function spip_xml_load($fichier, $strict=true, $clean=true){
 	$contenu = "";
 	if (preg_match(",^(http|ftp)://,",$fichier)){
-		include_spip('inc_distant');
+		include_spip('inc/distant');
 		$contenu = recuperer_page($fichier);
 	}
 	else lire_fichier ($fichier, $contenu);
