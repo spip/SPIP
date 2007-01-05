@@ -770,7 +770,6 @@ a znovu se ke str&aacute;nk&aacute;m p&#345;ipoj&iacute;te.
 'titre_liens_entrants' => 'P&#345;&iacute;choz&iacute; odkazy',
 'titre_mots_cles' => 'KL&Iacute;&#268;OV&Aacute; SLOVA',
 'titre_page_admin_vider' => 'Nepou&#382;&iacute;v&aacute; se',
-'titre_page_etat_traductions' => '<pLUS_UTILISE><NEW><NEW><NEW><NEW><NEW>Estado de las traducciones',
 'titre_probleme_technique' => 'Varov&aacute;n&iacute;: Z technick&yacute;ch d&#367;vod&#367; (server MySQL) je tato &#269;&aacute;st webu nep&#345;&iacute;stupn&aacute;.<p>D&#283;kujeme v&aacute;m za pochopen&iacute;.',
 'titre_publier_document' => 'ZVE&#344;EJNIT DOKUMENT V T&Eacute;TO &#268;&Aacute;STI',
 'titre_statistiques' => 'Statistiky str&aacute;nek',

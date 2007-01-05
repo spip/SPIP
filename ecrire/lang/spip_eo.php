@@ -328,10 +328,8 @@ Dankon pro via partopreno
 'icone_doc_rubrique' => 'Dokumentoj de la rubrikoj',
 'icone_ecrire_article' => 'Skribi novan artikolon',
 'icone_edition_site' => 'Redaktejo',
-'icone_evolution_visites_2' => '<NEW><pLUS_UTILISE>',
 'icone_forum_administrateur' => 'Forumo de la mastrumantoj',
 'icone_forum_suivi' => 'Supervido de la forumoj',
-'icone_forums_petitions' => '<pLUS_UTILISE>Forumoj kaj petskriboj',
 'icone_gestion_langues' => 'Mastrumado de lingvoj',
 'icone_informations_personnelles' => 'Personaj datenoj',
 'icone_interface_complet' => 'kompleta interfaco',
@@ -492,8 +490,6 @@ Dankon pro via partopreno
 'info_publie_1' => '[@nom_site_spip@] PUBLIKIGAS: @titre@',
 'info_publie_2' => 'Artikolo publikigita
 --------------',
-'info_question_referers' => '<NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Votre site doit-il conserver les <i>referers</i>
-		(adresses des liens externes menant &agrave; votre site)&nbsp;?',
 'info_rechercher' => 'Ser&#265;i',
 'info_rechercher_02' => 'Ser&#265;i&nbsp;:',
 'info_remplacer_vignette' => 'Anstata&#365;i la defa&#365;ltan vinjeton per propra vinjeto&nbsp;:',
@@ -532,10 +528,6 @@ Dankon pro via partopreno
 'info_zoom' => 'zomo',
 'infos_vos_pense_bete' => 'Viaj memorigiloj',
 'item_breve_proposee' => 'Proponita fulm-informo',
-'item_gerer_referers' => '<NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>G&eacute;rer les referers',
-'item_non_gerer_referers' => '<NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas g&eacute;rer les referers',
-'item_non_utiliser_moteur_recherche_forum' => '<NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas indexer les forums',
-'item_utiliser_moteur_recherche_forum' => '<NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Indexer les forums',
 
 
 // L

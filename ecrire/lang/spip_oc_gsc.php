@@ -530,8 +530,6 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'lien_popularite' => 'popularitat: @popularite@%',
 'lien_racine_site' => 'ARRADIT DEU SIT',
 'lien_reessayer' => 'tornar ensajar',
-'lien_rendez_vous' => '<pLUS_UTILISE>UN RENDETZ-VOS',
-'lien_rendez_vous_02' => '<pLUS_UTILISE>@total_messages@ RENDETZ-VOS',
 'lien_repondre_message' => 'Resp&oacute;ner a aqueth messatge',
 'lien_supprimer' => 'suprimir',
 'lien_tout_afficher' => 'Afichar tot',

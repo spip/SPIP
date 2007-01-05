@@ -42,7 +42,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // B
 'barre_a_accent_grave' => 'Inserir um A mai&uacute;sculo com acento grave',
 'barre_aide' => 'Utilize as abreviaturas tipogr&aacute;ficas para enriquecer a sua pagina&ccedil;&atilde;o.',
-'barre_aide_rac' => '<pLUS_UTILISE>Ter mais informa&ccedil;&otilde;es sobre as abreviaturas tipogr&aacute;ficas ',
 'barre_e_accent_aigu' => 'Inserir um E mai&uacute;sculo com acento agudo ',
 'barre_eo' => 'Inserir um E no O',
 'barre_eo_maj' => 'Inserir um E no O mai&uacute;sculo',
@@ -309,8 +308,6 @@ Obrigado pela sua participa&ccedil;&atilde;o
 'icone_doc_rubrique' => 'Documentos das rubricas',
 'icone_ecrire_article' => 'Escrever um novo artigo',
 'icone_edition_site' => 'Edi&ccedil;&atilde;o',
-'icone_etat_traductions' => '<pLUS_UTILISE>Estado das tradu&ccedil;&otilde;es',
-'icone_evolution_visites_2' => '<pLUS_UTILISE><MAIS_UTILIZADO>',
 'icone_forum_administrateur' => 'F&oacute;rum dos administradores',
 'icone_forum_suivi' => 'Seguimento dos f&oacute;runs',
 'icone_gestion_langues' => 'Gest&atilde;o das l&iacute;nguas',
@@ -430,7 +427,6 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_langue_principale' => 'L&iacute;ngua principal do s&iacute;tio',
 'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ pixels',
 'info_les_auteurs_1' => 'por @les_auteurs@',
-'info_lien' => '<pLUS_UTILISE>liga&ccedil;&atilde;o',
 'info_logo_format_interdit' => 'Apenas os &iacute;cones nos formatos @formats@ est&atilde;o autorizados.',
 'info_logo_max_poids' => 'Os &iacute;cones devem obrigatoriamente ter menos de @maxi@ (este arquivo tem @actuel@).',
 'info_logo_max_taille' => 'Os &iacute;cones devem obrigatoriamente ter menos de @maxi@ (este arquivo tem @actuel@).',
@@ -473,8 +469,6 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_publie_1' => '[@nom_site_spip@] PUBLICA : @titre@',
 'info_publie_2' => 'Artigo publicado
 --------------',
-'info_question_referers' => '<pLUS_UTILISE><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>O seu site deve conservar <i>referers</i>
-  (endere&ccedil;os dos links externos direccionados para o seu site)?',
 'info_rechercher' => 'Procurar',
 'info_rechercher_02' => 'Procurar&nbsp;:',
 'info_remplacer_vignette' => 'Substituir a vinheta por defeito por um logotipo personalizado&nbsp;:',
@@ -499,7 +493,6 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_telecharger_ordinateur' => 'Telecarregar do seu computador&nbsp;:',
 'info_tous_resultats_enregistres' => '[todos os  resultados est&atilde;o registados]',
 'info_tout_afficher' => 'Exibir tudo',
-'info_tout_site1' => '<pLUS_UTILISE><NEW>L&iacute;ngua do artigo.',
 'info_travaux_texte' => 'Este s&iacute;tio n&atilde;o est&aacute; configurado. Volte mais tarde...',
 'info_travaux_titre' => 'S&iacute;tio em obras',
 'info_trop_resultat' => 'Demasiado resultados para "@cherche_mot@" ; favor afinar a pesquisa.',
@@ -514,10 +507,6 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'Os seus memorandos',
 'item_breve_proposee' => 'Not&iacute;cia proposta',
-'item_gerer_referers' => '<pLUS_UTILISE>Gerir os referers',
-'item_non_gerer_referers' => '<pLUS_UTILISE>N&atilde;o gerir os referers',
-'item_non_utiliser_moteur_recherche_forum' => '<pLUS_UTILISE>N&atilde;o indexar os f&oacute;runs',
-'item_utiliser_moteur_recherche_forum' => '<pLUS_UTILISE>Indexar os forums',
 
 
 // L
@@ -680,12 +669,6 @@ Poder&aacute; ent&atilde;o introduzir uma nova palavra-passe
 'texte_inc_meta_1' => '<MODIF>O sistema encontrou um erro durante a escrita do arquivo <code>@fichier@</code>. Como administrador do site, queira por favor,',
 'texte_inc_meta_2' => 'verificar os direitos de escrita',
 'texte_inc_meta_3' => '<MODIF>no direct&oacute;rio <code>@repertoire@</code>.',
-'texte_plan_trad' => '<pLUS_UTILISE>Esta p&aacute;gina permite-lhe visualizar o estado das tradu&ccedil;&otilde;es para a l&iacute;ngua escolhida. 
-  A p&aacute;gina exibe os artigos cuja tradu&ccedil;&atilde;o est&aacute; em curso, os artigos cuja tradu&ccedil;&atilde;o deve ser actualizada,
-assim como os artigos que ainda n&atilde;o foram traduzidos.',
-'texte_plan_trad_en_cours' => '<pLUS_UTILISE>Este s&iacute;mbolo indica que um artigo est&aacute; em curso de tradu&ccedil;&atilde;o&nbsp;: isto quer dizer que uma tradu&ccedil;&atilde;o 
-  foi come&ccedil;ada mas n&atilde;o foi ainda publicada. Clique no s&iacute;mbolo para aceder
- &agrave; tradu&ccedil;&atilde;o.',
 'texte_statut_en_cours_redaction' => 'em curso de reda&ccedil;&atilde;o',
 'texte_statut_poubelle' => 'no caixote de lixo',
 'texte_statut_propose_evaluation' => 'proposto para avalia&ccedil;&atilde;o',

@@ -330,7 +330,6 @@ che ti &egrave; stato fornito.  Se non sei registrato, devi',
 'icone_doc_rubrique' => 'Documenti delle rubriche',
 'icone_ecrire_article' => 'Scrivi un articolo',
 'icone_edition_site' => 'Redazione del sito',
-'icone_evolution_visites_2' => '<NEW><pLUS_UTILISE>razvitak posjeta',
 'icone_forum_administrateur' => 'Forum degli amministratori',
 'icone_forum_suivi' => 'Monitoraggio dei forum',
 'icone_gestion_langues' => 'Gestione delle lingue',
@@ -494,8 +493,6 @@ o contatta il tuo hoster.</font>',
 'info_publie_1' => '[@nom_site_spip@] PUBBLICA: @titre@',
 'info_publie_2' => 'Articolo pubblicato
 --------------',
-'info_question_referers' => '<NEW><pLUS_UTILISE>Da li Va&#353; web sajt &#269;uva podatke o <i>referers</i>
-  (adrese sa kojih Va&#353;e stranice bivaju pozvane)&nbsp;?',
 'info_rechercher' => 'Ricerca',
 'info_rechercher_02' => 'Cerca:',
 'info_remplacer_vignette' => 'Sostituire l\'icona predefinita con una personalizzata:',
@@ -534,10 +531,6 @@ o contatta il tuo hoster.</font>',
 'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'I tuoi memo',
 'item_breve_proposee' => 'Breve proposta',
-'item_gerer_referers' => '<NEW><pLUS_UTILISE>obrada <i>referer</i>-a',
-'item_non_gerer_referers' => '<NEW><pLUS_UTILISE>bez obrade <i>referer</i>-a',
-'item_non_utiliser_moteur_recherche_forum' => '<NEW><pLUS_UTILISE>ne pretraživati forume',
-'item_utiliser_moteur_recherche_forum' => '<NEW><pLUS_UTILISE>pretraživati forume',
 
 
 // L

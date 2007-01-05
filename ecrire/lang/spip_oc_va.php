@@ -315,7 +315,6 @@ Merc&eacute; per v&ograve;stra participacion
 'icone_ecrire_article' => 'Escriure un article n&ograve;u',
 'icone_edition_site' => 'Edicion',
 'icone_etat_traductions' => 'Ont ne\'n son las reviraas',
-'icone_evolution_visites_2' => '<NEW><NEW><NEW><NEW><pLUS_UTILISE>',
 'icone_forum_administrateur' => 'Forum dels administrators',
 'icone_forum_interne' => 'Forum int&egrave;rne',
 'icone_forum_suivi' => 'Seguit dels forums',
@@ -487,8 +486,6 @@ Merc&eacute; per v&ograve;stra participacion
 'info_publie_1' => '[@nom_site_spip@] PUBLICA: @titre@',
 'info_publie_2' => 'Article publicat
 --------------',
-'info_question_referers' => '<NEW><NEW><NEW><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Votre site doit-il conserver les <i>referers</i>
-		(adresses des liens externes menant &agrave; votre site)&nbsp;?',
 'info_rechercher' => 'Cerchar',
 'info_rechercher_02' => 'Cerchar:',
 'info_remplacer_vignette' => 'Rempla&ccedil;ar la vinheta predefinia per un l&ograve;go personalizat:',
@@ -533,12 +530,8 @@ Merc&eacute; per v&ograve;stra participacion
 'item_administrateur' => 'Administrator',
 'item_breve_proposee' => 'Br&egrave;va prepausaa',
 'item_efface' => 'Esfa&ccedil;at',
-'item_gerer_referers' => '<NEW><NEW><NEW><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>G&eacute;rer les referers',
-'item_non_gerer_referers' => '<NEW><NEW><NEW><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas g&eacute;rer les referers',
-'item_non_utiliser_moteur_recherche_forum' => '<NEW><NEW><NEW><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas indexer les forums',
 'item_premier' => '1ier',
 'item_redacteur' => 'Redactor',
-'item_utiliser_moteur_recherche_forum' => '<NEW><NEW><NEW><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Indexer les forums',
 
 
 // L

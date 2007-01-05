@@ -329,7 +329,6 @@ Merc&eacute; de la voastra participacion
 'icone_doc_rubrique' => 'Documents dei rubricas',
 'icone_ecrire_article' => 'Escriure un nov&egrave;l article',
 'icone_edition_site' => 'Edicion',
-'icone_evolution_visites_2' => '<NEW><NEW><NEW><pLUS_UTILISE>',
 'icone_forum_administrateur' => 'Forum dei administrators',
 'icone_forum_suivi' => 'Seguit dei forums',
 'icone_gestion_langues' => 'Gestion dei lengas',
@@ -338,7 +337,6 @@ Merc&eacute; de la voastra participacion
 'icone_interface_simple' => 'Interfa&ccedil;a simplificada',
 'icone_maintenance_site' => 'Mantenen&ccedil;a dau sit',
 'icone_messagerie_personnelle' => 'Messatgeria personala',
-'icone_modifier_informations_personnelles' => '<pLUS_UTILISE>Modificar li voastri informacions personali',
 'icone_mots_cles' => 'M&ograve;ts claus',
 'icone_nouvelle_breve' => 'Escriure una nov&egrave;la br&egrave;va',
 'icone_repartition_actuelle' => 'Afichar la reparticion actuala',
@@ -491,8 +489,6 @@ Merc&eacute; de la voastra participacion
 'info_publie_1' => '[@nom_site_spip@] PUBLICA: @titre@',
 'info_publie_2' => 'Article publicat
 ----------------',
-'info_question_referers' => '<NEW><NEW><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Votre site doit-il conserver les <i>referers</i>
-		(adresses des liens externes menant &agrave; votre site)&nbsp;?',
 'info_rechercher' => 'Recercar',
 'info_rechercher_02' => 'Recercar:',
 'info_remplacer_vignette' => 'Rempla&ccedil;ar la vinheta predefinida per un l&ograve;go personalisat&nbsp;:',
@@ -515,7 +511,6 @@ Merc&eacute; de la voastra participacion
 'info_telecharger' => 'Telecargar desp&iacute; lo voastre ordinator&nbsp;:',
 'info_telecharger_nouveau_logo' => 'Telecargar un nov&egrave;u l&ograve;go&nbsp;:',
 'info_telecharger_ordinateur' => 'Telecargar desp&iacute; lo voastre ordinator&nbsp;:',
-'info_tous_redacteur' => '<pLUS_UTILISE>Anoncis a toi lu redactors ',
 'info_tous_resultats_enregistres' => '[toi lu resultats son registrats]',
 'info_tout_afficher' => 'Far par&eacute;isser tot',
 'info_travaux_texte' => 'Aqueu sit es pas encara configurat. Tornatz plus tard...',
@@ -532,10 +527,6 @@ Merc&eacute; de la voastra participacion
 'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'Li voastri n&ograve;tas de renembran&ccedil;a ',
 'item_breve_proposee' => 'Br&egrave;va prepauada',
-'item_gerer_referers' => '<NEW><NEW><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>G&eacute;rer les referers',
-'item_non_gerer_referers' => '<NEW><NEW><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas g&eacute;rer les referers',
-'item_non_utiliser_moteur_recherche_forum' => '<NEW><NEW><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas indexer les forums',
-'item_utiliser_moteur_recherche_forum' => '<NEW><NEW><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Indexer les forums',
 
 
 // L
@@ -681,7 +672,6 @@ e vos tornar connectar au sit.
 'texte_actualite_site_1' => 'Quora seretz familharisat/ada emb l\'interfa&ccedil;a, podretz clicar sus &laquo;',
 'texte_actualite_site_2' => 'interfa&ccedil;a completa',
 'texte_actualite_site_3' => '&raquo; per aver mai de possibilitats.',
-'texte_choix_langue_defaut' => '<pLUS_UTILISE>Vorgatz chausir &ccedil;ai sota la lenga predefinida dau voastre sit, e tanben li lengas que si prepauar&agrave; ai redactors.',
 'texte_creation_automatique_vignette' => 'La creacion automatica de vinhetas de previsualisacion es activada sus aqueu sit. S\'installatz a partir d\'aqueu formulari d\'imatges au(ai) format(s) @gd_formats@, ser&agrave;n acompanhats d\'una vinheta d\'una talha maximala de @taille_preview@ pix&egrave;ls.',
 'texte_documents_associes' => 'Li documents seguents son associats a l\'article, ma son pas estats drech inserits. Segon la compaginacion dau sit public, podran apar&eacute;isser sota forma de documents jonchs.',
 'texte_erreur_mise_niveau_base' => 'Error de basa de donadas pendent la mesa a niv&egrave;u. L\'imatge <b>@fichier@</b> es pas passat (article @id_article@).

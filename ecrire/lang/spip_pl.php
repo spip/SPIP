@@ -474,8 +474,6 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'info_publie_1' => '[@nom_site_spip@] PUBLIKUJE: @titre@',
 'info_publie_2' => 'Artyku&#322; opublikowany
 -----------------',
-'info_question_referers' => '<NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Votre site doit-il conserver les <i>referers</i>
-		(adresses des liens externes menant &agrave; votre site)&nbsp;?',
 'info_rechercher' => 'Szukaj',
 'info_rechercher_02' => 'Szukaj:',
 'info_remplacer_vignette' => 'Zamie&#324; domy&#347;ln&#261; miniaturk&#281; na wybrane przez ciebie logo&nbsp;:',
@@ -514,10 +512,6 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'Twoje notatki',
 'item_breve_proposee' => 'Zaproponowany news',
-'item_gerer_referers' => '<NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>G&eacute;rer les referers',
-'item_non_gerer_referers' => '<NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas g&eacute;rer les referers',
-'item_non_utiliser_moteur_recherche_forum' => '<NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas indexer les forums',
-'item_utiliser_moteur_recherche_forum' => '<NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Indexer les forums',
 
 
 // L
