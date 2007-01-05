@@ -67,7 +67,7 @@ function install_etape_5_dist()
 				'value' => $pass
 			),
 			'pass_verif' => array(
-				'label' => "<b>"._L('Confirmation')."</b><br />\n",
+				'label' => "<b>"._T('info_confirmer_passe')."</b><br />\n",
 				'value' => $pass
 			)
 		)
