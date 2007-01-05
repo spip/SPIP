@@ -167,19 +167,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_4' => 'efter&aring;r',
 'date_semaines' => '<NEW>semaines',
 'dirs_commencer' => ' for at kunne begynde installationen',
-'dirs_preliminaire' => 'Forberedelser: <B>Ops&aelig;tning af adgangsrettigheder</b>',
+'dirs_preliminaire' => 'Forberedelser: <b>Ops&aelig;tning af adgangsrettigheder</b>',
 'dirs_probleme_droits' => '<MODIF>Problem med adgangsrettigheder',
-'dirs_repertoires_absents' => '<B>F&oslash;lgende kataloger blev ikke fundet: <ul>@bad_dirs@.</ul> </b>
-  <P>Det skyldes sandsynligvis forkert brug af store og sm&aring; bogstaver.
+'dirs_repertoires_absents' => '<b>F&oslash;lgende kataloger blev ikke fundet: <ul>@bad_dirs@.</ul> </b>
+  <p>Det skyldes sandsynligvis forkert brug af store og sm&aring; bogstaver.
   Kontroller, at katalognavnene har samme store og sm&aring; bogstaver som vist ovenfor.
   Hvis ikke, sm&aring; brug et FTP-program til at omd&oslash;be dem, for at rette fejlen.
-  <P>Derefter kan du',
+  <p>Derefter kan du',
 'dirs_repertoires_suivants' => '<b>F&oslash;lgende kataloger mangler skriveadgang: <ul>@bad_dirs@.</ul> </b>
 
-  <P>For at &aelig;ndre dette skal du benytte din FTP-klient til at s&aelig;tte adgangsrettigheder
+  <p>For at &aelig;ndre dette skal du benytte din FTP-klient til at s&aelig;tte adgangsrettigheder
   for hvert katalog. Fremgangsm&aring;den er vist i brugerh&aring;ndbogen.
 
-  <P>N&aring;r du har fuldf&oslash;rt dette, kan du ',
+  <p>N&aring;r du har fuldf&oslash;rt dette, kan du ',
 
 
 // E
@@ -259,7 +259,7 @@ Tak for din deltagelse
 'forum_cliquer_retour' => 'Klik  <a href=\'@retour_forum@\'>her</a> for at forts&aelig;tte.',
 'forum_forum' => 'forum',
 'forum_info_modere' => 'Dette forum benytter forh&aring;ndsgodkendelse: dit bidrag vil f&oslash;rst blive offentliggjort, n&aring;r det er godkendt af en administrator.',
-'forum_lien_hyper' => '<B>Hypertekst link</B> (valgfrit)',
+'forum_lien_hyper' => '<b>Hypertekst link</b> (valgfrit)',
 'forum_message_definitif' => 'Endeligt indl&aelig;g: send til webstedet',
 'forum_message_trop_long' => 'Dit indl&aelig;g er for langt. Maksimal l&aelig;ngde er 20.000 tegn.',
 'forum_ne_repondez_pas' => 'Undlad at besvare denne e-mail, men g&aring; i stedet til forummet p&aring; denne adresse:',
@@ -268,7 +268,7 @@ Tak for din deltagelse
 'forum_par_auteur' => 'af @auteur@',
 'forum_poste_par' => 'Indl&aelig;g @parauteur@ som svar p&aring; din artikel.',
 'forum_probleme_database' => 'Databaseproblem, dit indl&aelig;g er ikke modtaget.',
-'forum_qui_etes_vous' => '<B>Hvem er du?</B> (valgfrit)',
+'forum_qui_etes_vous' => '<b>Hvem er du?</b> (valgfrit)',
 'forum_texte' => 'Indl&aelig;ggets tekst:',
 'forum_titre' => 'Titel:',
 'forum_titre_erreur' => 'Fejl...',
@@ -309,6 +309,7 @@ Tak for din deltagelse
 'icone_ecrire_article' => 'Skriv ny artikel',
 'icone_edition_site' => 'Rediger websted',
 'icone_etat_traductions' => 'Overs&aelig;ttelsesstatus',
+'icone_evolution_visites_2' => '<pLUS_UTILISE>',
 'icone_forum_administrateur' => 'Administratorforum',
 'icone_forum_interne' => 'Internt forum',
 'icone_forum_suivi' => 'Forumopf&oslash;lgning',
@@ -404,7 +405,7 @@ Tak for din deltagelse
 'info_erreur_requete' => 'Fejl i foresp&oslash;rgsel:',
 'info_erreur_squelette2' => 'Ingen template parat <b>@fichier@</b>...',
 'info_erreur_systeme' => 'System fejl (errno @errsys@)',
-'info_erreur_systeme2' => '<MODIF>Harddisken er m&aring;ske fyldt eller databasen er skadet. <br>
+'info_erreur_systeme2' => '<MODIF>Harddisken er m&aring;ske fyldt eller databasen er skadet. <br />
  <font color=\'red\'>pr&oslash;v <a href=\'@script@\'>at reparere databasen</a>,
 eller kontakt din internetudbyder.</font>',
 'info_fini' => 'Det er overst&aring;et!',
@@ -413,7 +414,7 @@ eller kontakt din internetudbyder.</font>',
 'info_grand_ecran' => 'Stort sk&aelig;rmbillede',
 'info_image_aide' => 'HJ&AElig;LP',
 'info_image_process_titre' => '<NEW>M&eacute;thode de fabrication des vignettes',
-'info_impossible_lire_page' => '<B>Fejl!</b> Siden kan ikke l&aelig;ses <tt><html>@test_proxy@</html></tt> gennem proxy&yen;en <tt>',
+'info_impossible_lire_page' => '<b>Fejl!</b> Siden kan ikke l&aelig;ses <tt><html>@test_proxy@</html></tt> gennem proxy&yen;en <tt>',
 'info_inclusion_directe' => 'Direkte indlejring:',
 'info_inclusion_vignette' => 'Medtag piktogram:',
 'info_installation_systeme_publication' => 'Installation af publiceringssystemet ...',
@@ -481,6 +482,8 @@ eller kontakt din internetudbyder.</font>',
 'info_publie_1' => '[@nom_site_spip@] OFFENTLIGG&Oslash;R: @titre@',
 'info_publie_2' => 'Artikel offentliggjort
 -----------------',
+'info_question_referers' => '<NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Votre site doit-il conserver les <i>referers</i>
+		(adresses des liens externes menant &agrave; votre site)&nbsp;?',
 'info_rechercher' => 'S&oslash;gning',
 'info_rechercher_02' => 'S&oslash;gning:',
 'info_remplacer_vignette' => 'Erstatte standardpiktogrammet med et eget ikon:',
@@ -497,9 +500,9 @@ eller kontakt din internetudbyder.</font>',
 'info_sites_referencer' => 'Link til websted',
 'info_supprimer_vignette' => 'slet piktogram',
 'info_sur_site_public' => '[p&aring; det offentligt tilg&aelig;ngelige websted]',
-'info_symbole_bleu' => '<B>Bl&aring;t</B> symbol henviser til et <B>memo</B>: dvs. en meddelelse til privat brug.',
-'info_symbole_jaune' => '<B>Gult</B> symbol henviser til en <B>annoncering til alle redakt&oslash;rer</B>: den kan redigeres af alle redakt&oslash;rer og er synlig for alle redakt&oslash;rer.',
-'info_symbole_vert' => '<B>Gr&oslash;nt</B> symbol henviser til <B>meddelelser udvekslet med andre brugere</B> p&aring; webstedet.',
+'info_symbole_bleu' => '<b>Bl&aring;t</b> symbol henviser til et <b>memo</b>: dvs. en meddelelse til privat brug.',
+'info_symbole_jaune' => '<b>Gult</b> symbol henviser til en <b>annoncering til alle redakt&oslash;rer</b>: den kan redigeres af alle redakt&oslash;rer og er synlig for alle redakt&oslash;rer.',
+'info_symbole_vert' => '<b>Gr&oslash;nt</b> symbol henviser til <b>meddelelser udvekslet med andre brugere</b> p&aring; webstedet.',
 'info_syndication' => 'syndikering:',
 'info_syndication_articles' => 'bidrag',
 'info_telecharger' => 'Hent fra din computer:',
@@ -525,8 +528,12 @@ eller kontakt din internetudbyder.</font>',
 'item_administrateur' => 'Administrator',
 'item_breve_proposee' => 'Nyhed indsendt',
 'item_efface' => 'Slettet',
+'item_gerer_referers' => '<NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>G&eacute;rer les referers',
+'item_non_gerer_referers' => '<NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas g&eacute;rer les referers',
+'item_non_utiliser_moteur_recherche_forum' => '<NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas indexer les forums',
 'item_premier' => '1.',
 'item_redacteur' => 'Redakt&oslash;r',
+'item_utiliser_moteur_recherche_forum' => '<NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Indexer les forums',
 
 
 // L
@@ -681,16 +688,16 @@ og igen f&aring; adgang til webstedet.',
 'texte_creation_automatique_vignette' => 'Dette websted tillader automatisk dannelse af miniaturepiktogrammer. Hvis du via denne formular indl&aelig;ser billeder i formatet @gd_formats@, vil de blive knyttet sammen med miniaturepiktogrammer med en maksimal st&oslash;rrelse p&aring; @taille_preview@ pixels.',
 'texte_documents_associes' => 'F&oslash;lgende dokumenter er knyttet til artiklen  men inds&aelig;ttes ikke direkte. Afh&aelig;ngig af det offentlige websteds layout kan de optr&aelig;de som vedh&aelig;ftede dokumenter.',
 'texte_erreur_mise_niveau_base' => 'Databasefejl under opgradering.
-			Billedet <B>@fichier@</B> kunne ikke overf&oslash;res (artiklen @id_article@).<p>
+			Billedet <b>@fichier@</b> kunne ikke overf&oslash;res (artiklen @id_article@).<p>
 			Noter omhyggeligt denne henvisning, gentag opgraderingsproceduren,
 			og kontrolller sluttelig, at billederne stadig figurerer i dokumentet.',
-'texte_inc_auth_1' => 'Du har identificeret dig selv med login <B>@auth_login@</B>, men det findes ikke (mere) i databasen. 
+'texte_inc_auth_1' => 'Du har identificeret dig selv med login <b>@auth_login@</b>, men det findes ikke (mere) i databasen. 
 		Pr&oslash;v at ',
 'texte_inc_auth_2' => 'genetablere forbindelsen',
 'texte_inc_auth_3' => 'efter om n&oslash;dvendigt at have lukket din browser ned og genstartet den igen.',
 'texte_inc_config' => '&AElig;ndringer nedenfor vil markant p&aring;virke webstedets funktion. 
 	 Du r&aring;des til ikke at &aelig;ndre dem, med mindre du er fortrolig med SPIP-systemets funktion.
-	<P align="justify"><B>I almindelighed r&aring;des du kraftigt til at lade den hovedansvarlige webmaster p&aring; dit websted tage sig af denne side.</b>',
+	<p align="justify"><b>I almindelighed r&aring;des du kraftigt til at lade den hovedansvarlige webmaster p&aring; dit websted tage sig af denne side.</b>',
 'texte_inc_meta_1' => '<MODIF>Kontroller venligst som administrator',
 'texte_inc_meta_2' => 'skriveadgangen',
 'texte_inc_meta_3' => '<MODIF>til kataloget ecrire/',

@@ -119,7 +119,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // V
 'ver_imprimer' => 'Nyomtathat&oacute; v&aacute;ltozat',
-'voir_en_ligne' => 'L&aacute;tni &eacute;l&#337;ben'
+'voir_en_ligne' => 'L&aacute;tni &eacute;l&#337;ben',
+'voir_squelette' => '<NEW>t&eacute;l&eacute;charger le squelette de cette page'
 
 );
 

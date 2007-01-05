@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Erro de programa&ccedil;&atilde;o. Esta fun&ccedil;&atilde;o n&atilde;o pode ser chamada neste contexto.',
 'avis_erreur_mysql' => 'Erro MySQL',
 'avis_erreur_sauvegarde' => 'Erro na c&oacute;pia de seguran&ccedil;a (@type@ @id_objet@) !',
+'avis_erreur_visiteur' => 'Problema de acesso ao espa&ccedil;o privado',
 
 
 // B
@@ -414,7 +415,7 @@ Obrigado por participar
 'info_erreur_requete' => 'Erro na requisi&ccedil;&atilde;o:',
 'info_erreur_squelette2' => 'Nenhum gabarito <b>@fichier@</b> est&aacute; dispon&iacute;vel...',
 'info_erreur_systeme' => 'Erro do sistema (errno @errsys@)',
-'info_erreur_systeme2' => '&Eacute; poss&iacute;vel que n&atilde;o haja espa&ccedil;o livre em disco, ou que a base de dados esteja corrompida.<br>
+'info_erreur_systeme2' => '&Eacute; poss&iacute;vel que n&atilde;o haja espa&ccedil;o livre em disco, ou que a base de dados esteja corrompida.<br />
  <font color=\'red\'>Tente <a href=\'@script@\'>reparar a base</a>,
  ou contate o seu servi&ccedil;o de hospedagem.</font>',
 'info_fini' => 'Terminou!',
@@ -665,6 +666,7 @@ mas eles n&atilde;o foram inseridos diretamente. Dependendo da elabora&ccedil;&a
 'texte_erreur_mise_niveau_base' => 'Erro da base de dados durante a atualiza&ccedil;&atilde;o.
 A imagem <b>@fichier@</b> n&atilde;o passou (mat&eacute;ria @id_article@).
 Anote esta refer&ecirc;ncia, tente novamente a atualiza&ccedil;&atilde;o e, finalmente, verifique se as imagens aparecem nas mat&eacute;rias.',
+'texte_erreur_visiteur' => 'Voc&ecirc; tentou acessar o espa&ccedil;o restrito com um login que n&atilde;o tem a necess&aacute;ria permiss&atilde;o.',
 'texte_inc_auth_1' => 'Voc&ecirc; se identificou com o login <b>@auth_login@</b>, mas ele n&atilde;o consta (mais) na base.
 Tente se',
 'texte_inc_auth_2' => 'reconectar',

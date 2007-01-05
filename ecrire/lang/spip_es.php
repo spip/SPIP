@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Error de programaci&oacute;n.  No se debe llamar esta funci&oacute;n en este contexto.',
 'avis_erreur_mysql' => 'Error MySQL',
 'avis_erreur_sauvegarde' => 'Error al hacer la copia de respaldo (@type@ @id_objet@)!',
+'avis_erreur_visiteur' => 'Probleme de acceso al espacio privado',
 
 
 // B
@@ -616,7 +617,7 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 
 
 // P
-'pass_choix_pass' => 'Escoged la nueva contrase&ntilde;a:',
+'pass_choix_pass' => 'Elije tu nueva contrase&ntilde;a:',
 'pass_erreur' => 'Error',
 'pass_erreur_acces_refuse' => '<b>Error:</b> ya no tienes acceso a este sitio.',
 'pass_erreur_code_inconnu' => '<b>Error:</b> este c&oacute;digo no corresponde a ning&uacute;n visitante que tenga acceso a este sitio.',
@@ -675,6 +676,7 @@ volver a conectarte al sitio.
 'texte_erreur_mise_niveau_base' => 'Error de la base de datos en el curso la la actualizaci&oacute;n.
 La imagen <b>@fichier@</b> no ha pasado (art&iacute;culo @id_article@).
 Tome nota de esta referencia, reintente la actualizaci&oacute;n y verifique que las im&aacute;genes aparecen en los art&iacute;culos.',
+'texte_erreur_visiteur' => 'Has intentado de entrar al espacio privado con un identificador que no lo permite.',
 'texte_inc_auth_1' => 'Te identificaste con el login  <b>@auth_login@</b>, pero &eacute;ste no existe en la base.
 Intenta',
 'texte_inc_auth_2' => 'reconectarte',

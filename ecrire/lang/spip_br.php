@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_article' => 'Kemm ar pennad-ma&ntilde;',
 'admin_modifier_auteur' => 'Kemm ar skridaozer-ma&ntilde;',
 'admin_modifier_breve' => 'Kemm ar berrskrid-ma&ntilde;',
-'admin_modifier_mot' => 'Kemm ar ger-alc\'hwez-ma&ntilde;',
+'admin_modifier_mot' => 'Kemm ar ger-stur-ma&ntilde;',
 'admin_modifier_rubrique' => 'Kemm ar rummad-ma&ntilde;',
 'admin_recalculer' => 'Hizivaat ar bajenn',
 'afficher_trad' => 'diskouez an droidigezhio&ugrave;',
@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Fazi-programi&ntilde; : ne rank ket ar fonksion-ma&ntilde beza&ntilde; galvet en degouezh-ma&ntilde;.',
 'avis_erreur_mysql' => 'Fazi MySQL',
 'avis_erreur_sauvegarde' => 'Fazi er savete (@type@ @id_objet@) !',
+'avis_erreur_visiteur' => 'N\'eus ket tu da dizhout al lodenn brevez',
 
 
 // B
@@ -316,7 +317,7 @@ Trugarez da gemer perzh
 'icone_brouteur' => 'Merdei&ntilde; prim',
 'icone_configuration_site' => 'Ardremmezi&ntilde;',
 'icone_configurer_site' => 'Ardremmezi&ntilde; ho lec\'hienn',
-'icone_creer_mot_cle' => 'Kroui&ntilde; ur ger-alc\'hwez nevez hag e liamma&ntilde; ouzh ar pennad-ma&ntilde;',
+'icone_creer_mot_cle' => 'Kroui&ntilde; ur ger-stur nevez hag e liamma&ntilde; ouzh ar pennad-ma&ntilde;',
 'icone_creer_nouvel_auteur' => 'Kroui&ntilde; ur skridaozer nevez',
 'icone_creer_rubrique' => 'Kroui&ntilde; ur rummad',
 'icone_creer_sous_rubrique' => 'Kroui&ntilde; un is-rummad',
@@ -333,7 +334,7 @@ Trugarez da gemer perzh
 'icone_interface_simple' => 'Ketal kevrega&ntilde; eeunaet',
 'icone_maintenance_site' => 'Ober war-dro al lec\'hienn',
 'icone_messagerie_personnelle' => 'Postelerezh hiniennel',
-'icone_mots_cles' => 'Gerio&ugrave;-alc\'hwez',
+'icone_mots_cles' => 'Gerio&ugrave;-stur',
 'icone_nouvelle_breve' => 'Skriva&ntilde; ur berrskrid nevez',
 'icone_repartition_actuelle' => 'Diskouez an dasparzh er mare-ma&ntilde;',
 'icone_repartition_debut' => 'Diskouez an dasparzh abaoe an dero&ugrave;',
@@ -468,7 +469,7 @@ Trugarez da gemer perzh
 'info_pense_bete' => 'NOTENNIG-E&Ntilde;VOR',
 'info_petit_ecran' => 'Skramm bihan',
 'info_pixels' => 'pixel',
-'info_plusieurs_mots_trouves' => 'Meur a c\'her-alc\'hwez a zo bet kavet evit "@cherche_mot@":',
+'info_plusieurs_mots_trouves' => 'Meur a c\'her-stur a zo bet kavet evit "@cherche_mot@":',
 'info_popularite_5' => 'brud;&nbsp;:',
 'info_portfolio' => 'Teul-poltriji',
 'info_portfolio_automatique' => 'Teul-poltriji emgefreek&nbsp;:',
@@ -670,6 +671,7 @@ kevrea&ntilde; en-dro ouzh al lec\'hienn.
   N\'eo ket tremenet ar skeudenn <b>@fichier@</b> (pennad @id_article@).
   Notennit an dave-se, klaksit en-dro nevesaaat, 
   ha gwiriit e vez diskouezet ar skeudenno&ugrave; er pennado&ugrave;.',
+'texte_erreur_visiteur' => 'Klasket ho peus tizhout al lodenn brevez gant un anv-implijer direizh. N\'eo ket ar memes hini hag hini ar forom.',
 'texte_inc_auth_1' => 'Enrollet oc\'h dindan al login
  <b>@auth_login@</b>, met n\'eus ket ouzh hennezh (ken) en diaz-titouro&ugrave;.
   Klaskit ',
@@ -686,7 +688,7 @@ Aliet oc\'h da chom hep kemm tra pe dra keit ha ma n\'oc\'h ket boaz ouzh SPIP.
 'texte_statut_propose_evaluation' => 'kinniget ouzh an amprou',
 'texte_statut_publie' => 'embannet',
 'texte_statut_refuse' => 'nac\'het',
-'titre_ajouter_mot_cle' => 'OUZHPENNA&Ntilde; UR GER-ALC\'HWEZ :',
+'titre_ajouter_mot_cle' => 'OUZHPENNA&Ntilde; UR GER-STUR :',
 'titre_breve_proposee' => 'Berrskrid bet kinniget',
 'titre_breve_publiee' => 'Berrskrid bet embannet',
 'titre_breve_refusee' => 'Berrskrid bet nac\'het',
@@ -702,7 +704,7 @@ Aliet oc\'h da chom hep kemm tra pe dra keit ha ma n\'oc\'h ket boaz ouzh SPIP.
 'titre_image_visiteur' => 'Gweladenner',
 'titre_joindre_document' => 'STAGA&Ntilde; UN TEULIAD',
 'titre_liens_entrants' => 'Liammo&ugrave; davet al lec\'hienn',
-'titre_mots_cles' => 'GERIO&Ugrave;-ALC\'HWEZ',
+'titre_mots_cles' => 'GERIO&Ugrave;-STUR',
 'titre_probleme_technique' => 'Diwallit&nbsp;: ur gudenn teknikel (servijer MySQL) a ra ma n\'eus ket tu da dizhout lodenn-ma&ntilde; al lec\'hienn. Trugarez da gompren.',
 'titre_publier_document' => 'EMBANN UN TEULIAD ER RUMMAD-MA&Ntilde;',
 'titre_statistiques' => 'Stadego&ugrave; al lec\'hienn',

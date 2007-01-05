@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Programming error. This function should not be called in this context.',
 'avis_erreur_mysql' => 'MySQL error',
 'avis_erreur_sauvegarde' => 'Error in backup (@type@ @id_objet@)!',
+'avis_erreur_visiteur' => 'Problem entering the private area',
 
 
 // B
@@ -418,9 +419,9 @@ Thank you for your participation!
 'info_erreur_requete' => 'Error in query:',
 'info_erreur_squelette2' => 'No available template <b>@fichier@</b>...',
 'info_erreur_systeme' => 'System error (errno @errsys@)',
-'info_erreur_systeme2' => 'The hard disk might be full or the database damaged. <br>
- <font color=\'red\'>try <a href=\'@script@\'>repairing the database</a>,
- or contact your host.</font>',
+'info_erreur_systeme2' => 'The hard disk may be full or the database damaged. <br />
+ <font color=\'red\'>Try <a href=\'@script@\'>repairing the database</a>,
+ or contact your service provider.</font>',
 'info_fini' => 'Done!',
 'info_format_image' => 'Image format to be used for the creation of vignettes: @gd_formats@.',
 'info_format_non_defini' => 'undefined format',
@@ -681,6 +682,7 @@ and connect again to the site.
    Note this reference carefully, try the upgrade procedure again,
    and check afterwards that the images still appear
       in the articles.',
+'texte_erreur_visiteur' => 'You have tried to enter the private area using a login which does not permit this.',
 'texte_inc_auth_1' => 'You identified yourself with the login
   <b>@auth_login@</b>, but it does not exist in the database (anymore). 
   Try to',

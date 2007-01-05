@@ -119,7 +119,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // V
 'ver_imprimer' => '<NEW>Version &agrave; imprimer',
-'voir_en_ligne' => '<NEW>Voir en ligne'
+'voir_en_ligne' => '<NEW>Voir en ligne',
+'voir_squelette' => '<NEW>t&eacute;l&eacute;charger le squelette de cette page'
 
 );
 

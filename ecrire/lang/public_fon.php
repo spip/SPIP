@@ -119,7 +119,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // V
 'ver_imprimer' => 'Zin wema',
-'voir_en_ligne' => 'kp&#596;n Gblogbloji'
+'voir_en_ligne' => 'kp&#596;n Gblogbloji',
+'voir_squelette' => 'S&#603; titom&#603; wema &eacute;l&#596; t&#596;n do '
 
 );
 

@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-oc',
 '0_langue' => 'occitan (lengadocian) [oc_lnc]',
 '0_liste' => 'escambis.pedagogics@aprene.org',
-'0_mainteneur' => 'M&ograve;ni&nbsp;:&nbsp;escambis.pedagogics@aprene.org <br> Est&egrave;ve (Servici de l\'Emplec)&nbsp;:&nbsp;cros@emplec.net',
+'0_mainteneur' => 'M&ograve;ni&nbsp;:&nbsp;escambis.pedagogics@aprene.org <br /> Est&egrave;ve (Servici de l\'Emplec)&nbsp;:&nbsp;cros@emplec.net',
 
 
 // A
@@ -81,7 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'calendrier_synchro_lien' => 'Recuperar lo fichi&egrave;r <i>iCal</i>',
 'calendrier_synchro_prive' => 'Lo calendi&egrave;r seguent, d\'us estrictament personal, vos informa de l\'activitat editoriala privada d\'aqueste sit (&ograve;bras e rend&egrave;tz-vos personals, articles e br&egrave;vas prepausats...).',
 'calendrier_synchro_public' => 'Lo calendi&egrave;r seguent permet de seguir l\'activitat de l\'espaci public d\'aqueste sit (articles e br&egrave;vas publicats).',
-'calendrier_synchro_sync' => 'Sincronizar lo fichi&egrave;r <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
+'calendrier_synchro_sync' => 'Sincronizar lo fichi&egrave;r <i>iCal</i><br /> (Mozilla Calendar, Apple iCal...)',
 'confirm_changer_statut' => 'Atencion, av&egrave;tz demandat de cambiar l\'estatut d\'aquel element. Desiratz de contunhar? ',
 'correcte' => 'corr&egrave;cte',
 
@@ -330,6 +330,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'icone_doc_rubrique' => 'Documents de las rubricas',
 'icone_ecrire_article' => 'Escriure un article n&ograve;u',
 'icone_edition_site' => 'Edicion',
+'icone_evolution_visites_2' => '<NEW><NEW><pLUS_UTILISE>',
 'icone_forum_administrateur' => 'Forum dels administrators',
 'icone_forum_suivi' => 'Seguit dels forums',
 'icone_gestion_langues' => 'Gestion de las lengas',
@@ -419,7 +420,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_erreur_requete' => 'Error dins la requista',
 'info_erreur_squelette2' => 'Ges d\'esqueleta <b>@fichier@</b> es pas disponibla...',
 'info_erreur_systeme' => 'Error sist&egrave;ma (errno @errsys@)',
-'info_erreur_systeme2' => 'Lo disc dur es benl&egrave;u plen, o la basa de donadas degalhada. <br>
+'info_erreur_systeme2' => 'Lo disc dur es benl&egrave;u plen, o la basa de donadas degalhada. <br />
  <font color=\'red\'>Assajatz de <a href=\'@script@\'>reparar la basa</a>,
  o contactatz v&ograve;stre albergador.</font>',
 'info_fini' => 'Es acabat&nbsp;!',
@@ -428,7 +429,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_grand_ecran' => 'Ecran grand',
 'info_image_aide' => 'AJUDA',
 'info_image_process_titre' => 'Met&ograve;de de fabricacion de las vinhetas',
-'info_impossible_lire_page' => '<B>Error!</b> Impossible de legir la pagina <tt><html>@test_proxy@</html></tt> a trav&egrave;rs del proxy <tt>',
+'info_impossible_lire_page' => '<b>Error!</b> Impossible de legir la pagina <tt><html>@test_proxy@</html></tt> a trav&egrave;rs del proxy <tt>',
 'info_inclusion_directe' => 'Inclusion dir&egrave;cta:',
 'info_inclusion_vignette' => 'Inclusion de la vinheta:',
 'info_installation_systeme_publication' => 'Installacion del sist&egrave;ma de publicacion...',
@@ -490,6 +491,8 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_publie_1' => '[@nom_site_spip@] PUBLICA: @titre@',
 'info_publie_2' => 'Article publicat
 --------------',
+'info_question_referers' => '<NEW><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Votre site doit-il conserver les <i>referers</i>
+		(adresses des liens externes menant &agrave; votre site)&nbsp;?',
 'info_rechercher' => 'Cercar',
 'info_rechercher_02' => 'Cercar:',
 'info_remplacer_vignette' => 'Rempla&ccedil;ar la vinheta predefinida per un l&ograve;go personalizat:',
@@ -504,9 +507,9 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_site_refuse' => 'Sit web refusat',
 'info_sites_referencer' => 'Referenciar un sit',
 'info_supprimer_vignette' => 'suprimir la vinheta',
-'info_symbole_bleu' => 'Lo simb&egrave;l <B>blau</b> marca un <B>memento</b>: valent a dire un messatge per v&ograve;stre usatge personal.',
-'info_symbole_jaune' => 'Lo simb&egrave;l <B>jaune</b> marca un <B>anonci per totes los redactors </b>: los administrators lo p&ograve;don modificar, cada redactor lo p&ograve;t veire.',
-'info_symbole_vert' => 'Lo simb&egrave;l <B>verd</b> marca los <B>messatges escambiats amb d\'autres utilizaires</b> del sit.',
+'info_symbole_bleu' => 'Lo simb&egrave;l <b>blau</b> marca un <b>memento</b>: valent a dire un messatge per v&ograve;stre usatge personal.',
+'info_symbole_jaune' => 'Lo simb&egrave;l <b>jaune</b> marca un <b>anonci per totes los redactors </b>: los administrators lo p&ograve;don modificar, cada redactor lo p&ograve;t veire.',
+'info_symbole_vert' => 'Lo simb&egrave;l <b>verd</b> marca los <b>messatges escambiats amb d\'autres utilizaires</b> del sit.',
 'info_syndication' => 'sindicacion:',
 'info_syndication_articles' => 'article(s)',
 'info_telecharger' => 'Telecargar a partir de v&ograve;stre ordenador:',
@@ -528,6 +531,10 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'V&ograve;stres mementos',
 'item_breve_proposee' => 'Br&egrave;va prepausada',
+'item_gerer_referers' => '<NEW><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>G&eacute;rer les referers',
+'item_non_gerer_referers' => '<NEW><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas g&eacute;rer les referers',
+'item_non_utiliser_moteur_recherche_forum' => '<NEW><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas indexer les forums',
+'item_utiliser_moteur_recherche_forum' => '<NEW><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Indexer les forums',
 
 
 // L
@@ -677,19 +684,19 @@ e vos tornar connectar al sit.
  mas s\'inserisson pas
  dir&egrave;ctament. Segon la compaginacion del sit public,
  poir&agrave;n apar&eacute;isser jos forma de documents jonches.',
-'texte_erreur_mise_niveau_base' => 'Error de basa de donadas pendent la mesa a niv&egrave;l. L\'imatge <B>@fichier@</b> es pas passat (article @id_article@).
+'texte_erreur_mise_niveau_base' => 'Error de basa de donadas pendent la mesa a niv&egrave;l. L\'imatge <b>@fichier@</b> es pas passat (article @id_article@).
   Notatz plan aquela refer&eacute;ncia, tornatz ensajar la mesa a
  niv&egrave;l, e verificatz pu&egrave;i que los imatges aparescan
  encara dins los articles.',
 'texte_inc_auth_1' => 'S&egrave;tz identificat/ada coma
-   <B>@auth_login@</b>, mas aquel login exist&iacute;s pas o pas mai dins la basa.
+   <b>@auth_login@</b>, mas aquel login exist&iacute;s pas o pas mai dins la basa.
   Ensajatz de vos',
 'texte_inc_auth_2' => 'tornar connectar',
 'texte_inc_auth_3' => ', apr&egrave;p qu\'auretz quitat eventualament, pu&egrave;i
   tornat lan&ccedil;ar v&ograve;stre navigador.',
 'texte_inc_config' => 'Las modificacions fachas dins aquestas paginas influ&eacute;ncian bravament lo
  foncionament de v&ograve;stre sit. Vos aconselham d\'i intervenir pas tant que siatz pas
- acostumat/ada al foncionament del sist&egrave;ma SPIP. <P align="justify"><B>
+ acostumat/ada al foncionament del sist&egrave;ma SPIP. <p align="justify"><b>
  En general, se conselha f&ograve;rt
  de daissar la carga d\'aquestas paginas al webm&egrave;stre principal de v&ograve;stre sit.</b>',
 'texte_inc_meta_1' => 'Lo sist&egrave;ma a rescontrat una error dins l\'escritura del fichi&egrave;r <code>@fichier@</code>.Volgatz, coma administrator/tritz del sit,',

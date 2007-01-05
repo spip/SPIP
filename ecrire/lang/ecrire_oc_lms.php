@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_chemin_invalide_2' => 'sembla pas valid. Volhatz tornar vers la pagina anteriora per verificar las informacions fornidas.',
 'avis_connexion_echec_1' => 'La connexion au servidor MySQL a frolhat.',
 'avis_connexion_echec_2' => 'Tornatz a la pagina anteriora, e verificatz las informacions qu\'avetz fornidas.',
-'avis_connexion_echec_3' => '<B>N.B.</b> Sus ben daus servidors, devetz <B>demandar</b> qu\'activen v&ograve;stre acc&egrave;s a la basa MySQL avans de la poder utilizar. Se vos podetz pas connectar, verificatz qu\'ajatz be realizat queu procediment.',
+'avis_connexion_echec_3' => '<b>N.B.</b> Sus ben daus servidors, devetz <b>demandar</b> qu\'activen v&ograve;stre acc&egrave;s a la basa MySQL avans de la poder utilizar. Se vos podetz pas connectar, verificatz qu\'ajatz be realizat queu procediment.',
 'avis_connexion_ldap_echec_1' => 'La connexion au servidor LDAP a frolhat.',
 'avis_connexion_ldap_echec_2' => 'Tornatz a la pagina anteriora, e verificatz las informacions qu\'avetz fornidas. ',
 'avis_connexion_ldap_echec_3' => 'Alternativament, utilizetz pas lo sup&ograve;rt LDAP per importar daus utilizaires.',
@@ -22,10 +22,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'Atention! Quela rubrica conten @contient_breves@ brevas@scb@: se la despla&ccedil;atz, voudretz be oschar quela casa de confirmacion.',
 'avis_destinataire_obligatoire' => 'Devetz indicar un destinatari avans de mandar queu messatge.',
 'avis_erreur_connexion_mysql' => 'Error de connexion MySQL',
-'avis_erreur_version_archive' => '<B>Atencion! Lo fichier @archive@ correspond emb una autra version d\'SPIP que la qu\'avetz installada.</b> Anatz vers de las dificultats grandassas: risca de destruccion de v&ograve;stra basa de donadas, disfoncionaments divers dau sit, etc. Validetz pas quela demanda d\'importacion.<p> Per mai d\'informacions, vesetz
+'avis_erreur_version_archive' => '<b>Atencion! Lo fichier @archive@ correspond emb una autra version d\'SPIP que la qu\'avetz installada.</b> Anatz vers de las dificultats grandassas: risca de destruccion de v&ograve;stra basa de donadas, disfoncionaments divers dau sit, etc. Validetz pas quela demanda d\'importacion.<p> Per mai d\'informacions, vesetz
 <A HREF=\'http://www.spip.net/fr_article1489.html\'>
 la documentacion d\'SPIP</a>.',
-'avis_espace_interdit' => '<B>Espaci pro&iuml;bit</b><p>SPIP es ja installat.',
+'avis_espace_interdit' => '<b>Espaci pro&iuml;bit</b><p>SPIP es ja installat.',
 'avis_lecture_noms_bases_1' => 'Lo programa d\'installacion a pas pogut legir los noms de las basas de donadas installadas.',
 'avis_lecture_noms_bases_2' => 'Si&aacute; brisa de basa es pas disponibla, si&aacute; la foncion que permet d\'entierar las basas es estada desactivada per de las rasons de seguretat (quo es lo cas chas mai d\'un auberjador).',
 'avis_lecture_noms_bases_3' => 'Dins la segonda alternativa, es probable qu\'una basa que p&ograve;rta v&ograve;stre nom de login si&aacute; utilizabla:',
@@ -84,21 +84,15 @@ la documentacion d\'SPIP</a>.',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Pas apar&eacute;isser dins la tiera daus redactors',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Pas mandar d\'anoncis editoriaus',
 'bouton_radio_non_syndication' => 'Brisa de sindicacion',
-'bouton_radio_occidental' => 'Alfabet occidentau&nbsp; (<tt>iso-8859-1</tt>): tots los navigadors lo sup&ograve;rtan, mas permet mas
- d\'afichar las lengas oest-europeas (occitan, catalan, angl&eacute;s, alemand...).  ',
 'bouton_radio_pas_petition' => 'Brisa de peticion',
-'bouton_radio_personnalise' => 'J&ograve;c de caracters personalizat: chausissetz quela opcion se voletz
- utilizar un j&ograve;c de caracters especific ',
 'bouton_radio_petition_activee' => 'Peticion activada',
 'bouton_radio_publication_immediate' => 'Publicar los messatges c&ograve;p sec
  (las contribucions apareissen tanleu mandadas, los administrators las p&ograve;den
  suprimir puei).',
-'bouton_radio_sauvegarde_compressee' => 'Sauvagarda comprimida sos <b>ecrire/data/dump.xml.gz</b>',
-'bouton_radio_sauvegarde_non_compressee' => 'Sauvagarda non comprimida sos <b>ecrire/data/dump.xml</b>',
+'bouton_radio_sauvegarde_compressee' => 'Sauvagarda comprimida sos @fichier@',
+'bouton_radio_sauvegarde_non_compressee' => 'Sauvagarda non comprimida sos @fichier@',
 'bouton_radio_supprimer_petition' => 'Suprimir la peticion',
 'bouton_radio_syndication' => 'Sindicacion:',
-'bouton_radio_universel' => 'Alfabet universau (<tt>utf-8</tt>: permet d\'afichar totas las lengas, mas per lo temps que vai es
- pas reconegut per tots los navigadors.',
 'bouton_redirection' => 'TORNAR DIRIGIR',
 'bouton_relancer_installation' => 'Tornar lan&ccedil;ar l\'installacion',
 'bouton_restaurer_base' => 'Restaurar la basa',
@@ -138,7 +132,7 @@ la documentacion d\'SPIP</a>.',
 'entree_base_donnee_2' => '(Sovent, quela adrei&ccedil;a correspond a la de v&ograve;stre sit, daus uns c&ograve;ps correspond a la men&ccedil;on "localhost", daus uns c&ograve;ps, se laissa voida completament.)',
 'entree_biographie' => 'Biografia breva, en quauques mots.',
 'entree_breve_publiee' => 'Quela breva la chau publicar?',
-'entree_chemin_acces' => '<B>Entrar</b> lo chamin d\'acc&egrave;s:',
+'entree_chemin_acces' => '<b>Entrar</b> lo chamin d\'acc&egrave;s:',
 'entree_cle_pgp' => 'V&ograve;stra clau PGP',
 'entree_contenu_rubrique' => '(Contengut de la rubrica en quauques mots.)',
 'entree_description_site' => 'Descripcion dau sit',
@@ -148,7 +142,7 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
  quelas informacions.',
 'entree_infos_perso' => 'Quau setz?',
 'entree_interieur_rubrique' => 'Dedins la rubrica:',
-'entree_liens_sites' => '<B>Liam ipertext</b> (refer&eacute;ncia, sit de vesitar...)',
+'entree_liens_sites' => '<b>Liam ipertext</b> (refer&eacute;ncia, sit de vesitar...)',
 'entree_login' => 'V&ograve;stre login',
 'entree_login_connexion_1' => 'Lo login de connexion',
 'entree_login_connexion_2' => '(Correspond daus uns c&ograve;ps a v&ograve;stre login d\'acc&egrave;s a l\'FTP; daus uns c&ograve;ps se laissa voide)',
@@ -165,7 +159,7 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'entree_port_annuaire' => 'Lo numero de p&ograve;rt de l\'annuari',
 'entree_signature' => 'Signatura',
 'entree_texte_breve' => 'Text de la breva',
-'entree_titre_obligatoire' => '<B>T&iacute;tol</b> [Obligat&ograve;ri]<BR>',
+'entree_titre_obligatoire' => '<b>T&iacute;tol</b> [Obligat&ograve;ri]<br />',
 'entree_url' => 'L\'adrei&ccedil;a (URL) de v&ograve;stre sit',
 
 
@@ -193,7 +187,7 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'icone_creer_rubrique_2' => 'Crear una rubrica nu&ograve;va',
 'icone_ecrire_nouvel_article' => 'Las brevas contengudas dins quela rubrica',
 'icone_envoyer_message' => 'Mandar queu messatge',
-'icone_evolution_visites' => 'Evolucion de las vesitas<br>@visites@ vesitas',
+'icone_evolution_visites' => 'Evolucion de las vesitas<br />@visites@ vesitas',
 'icone_modif_groupe_mots' => 'Modificar queu grop de mots',
 'icone_modifier_article' => 'Modificar quel article',
 'icone_modifier_breve' => 'Modificar quela breva',
@@ -219,7 +213,7 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_1_breve' => '1 breva',
 'info_1_site' => '1 sit',
 'info_activer_cookie' => 'Podetz activar un <b>cookie de correspond&eacute;ncia</b>; qu&ograve; lai vos permetr&aacute; de passar aisat dau sit public au sit privat.',
-'info_activer_forum_public' => '<I>Per activar los forums publics, volhatz chausir lor m&ograve;de de moderacion predefinit:</i>',
+'info_activer_forum_public' => '<i>Per activar los forums publics, volhatz chausir lor m&ograve;de de moderacion predefinit:</i>',
 'info_admin_gere_rubriques' => 'Quel administrator ger&iacute;s las rubricas seguentas:',
 'info_admin_gere_toutes_rubriques' => 'Quel administrator ger&iacute;s <b>totas las rubricas</b>.',
 'info_administrateur' => 'Administrator',
@@ -269,9 +263,9 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_changer_nom_groupe' => 'Chamjar lo nom de queu grop:',
 'info_chapeau' => 'Chapeu',
 'info_chapeau_2' => 'Chapeu:',
-'info_chemin_acces_1' => 'Opcions: <B>chamin d\'acc&egrave;s dins l\'annuari</b>',
+'info_chemin_acces_1' => 'Opcions: <b>chamin d\'acc&egrave;s dins l\'annuari</b>',
 'info_chemin_acces_2' => 'Aura devetz configurar lo chamin d\'acc&egrave;s vers las informacions dins l\'annuari.',
-'info_chemin_acces_annuaire' => 'Opcions:<B>chamin d\'acc&egrave;s dins l\'annuari',
+'info_chemin_acces_annuaire' => 'Opcions:<b>chamin d\'acc&egrave;s dins l\'annuari',
 'info_choix_base' => 'Tresesma estapa:',
 'info_classement_1' => '<sup>ier</sup> de @liste@',
 'info_classement_2' => '<sup>nd</sup> de @liste@',
@@ -280,25 +274,25 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_config_suivi' => 'Se quela adrei&ccedil;a correspond a una lista de corrier, podetz indicar &ccedil;ai jos l\'adrei&ccedil;a ont los participants au sit se p&ograve;den inscriure. Quela adrei&ccedil;a p&ograve;t estre una URL (per exemple la pagina d\'inscripcion a la lista per lo web), o una adrei&ccedil;a e-mail tenent un subjecte especific (per exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Podetz recebre automaticament, per e-mail, los anoncis pertochant l\'activitat editoriala de queu sit. Per qu&ograve; faire, vos podetz abonar a la lista de corrier seguenta:',
 'info_confirmer_passe' => 'Confirmar queu mot de santa Clara noveu:',
-'info_connexion_base' => 'Segonda estapa: <B>Assai de connexion a la basa</b>',
-'info_connexion_ldap_ok' => 'La connexion LDAP a abotit.</b><P> Podetz passar a l\'estapa seguenta.',
-'info_connexion_mysql' => 'Primiera estapa:<B>V&ograve;stra connexion MySQL</b>',
+'info_connexion_base' => 'Segonda estapa: <b>Assai de connexion a la basa</b>',
+'info_connexion_ldap_ok' => 'La connexion LDAP a abotit.</b><p> Podetz passar a l\'estapa seguenta.',
+'info_connexion_mysql' => 'Primiera estapa:<b>V&ograve;stra connexion MySQL</b>',
 'info_connexion_ok' => 'La connexion a abotit.',
 'info_contact' => 'Contacte',
 'info_contenu_articles' => 'Contengut daus articles',
 'info_creation_mots_cles' => 'Creatz e configuratz aic&iacute; los mots clau dau sit',
 'info_creation_paragraphe' => '(Per crear daus paragrafs, suf&iacute;s que laissetz de las linhas voidas.)',
-'info_creation_rubrique' => 'Avans de poder escriure daus articles,<BR> devetz crear aumens una rubrica.<BR>',
-'info_creation_tables' => 'Quatresma estapa: <B>Creacion de las taulas de la basa</b>',
-'info_creer_base' => '<B>Crear</b> una basa de donadas novela:',
+'info_creation_rubrique' => 'Avans de poder escriure daus articles,<br /> devetz crear aumens una rubrica.<br />',
+'info_creation_tables' => 'Quatresma estapa: <b>Creacion de las taulas de la basa</b>',
+'info_creer_base' => '<b>Crear</b> una basa de donadas novela:',
 'info_dans_groupe' => 'Dins lo grop:',
 'info_dans_rubrique' => 'Dins la rubrica:',
 'info_date_publication_anterieure' => 'Data anteriora de publicacion:',
 'info_date_referencement' => 'DATA DE REFERENCIAMENT DE QUEU SIT:',
 'info_delet_mots_cles' => 'Avetz demandat de suprimir lo mot clau
-<B>@titre_mot@</b> (@type_mot@). Queu mot clau es liat a
+<b>@titre_mot@</b> (@type_mot@). Queu mot clau es liat a
  <b>@texte_lie@</b>. Devetz confirmar quela decision:',
-'info_derniere_etape' => 'Darriera estapa: <B>Quo es \'chabat!',
+'info_derniere_etape' => 'Darriera estapa: <b>Quo es \'chabat!',
 'info_derniere_syndication' => 'La darriera sindicacion de queu sit se faguet lo',
 'info_derniers_articles_publies' => 'V&ograve;stres darriers articles publicats en linha',
 'info_desactiver_forum_public' => 'Desactivar l\'utilizacion daus forums publics. Los forums publics poir&aacute;n &egrave;sser autorizats au cas per cas subre los articles; ser&aacute;n pro&iuml;bits subre las rubricas, brevas, etc.',
@@ -326,17 +320,17 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_forum_ouvert' => 'Dins l\'espaci privat dau sit, un forum es dobert a tots los redactors registrats. Podetz, &ccedil;ai sos, activar un forum suplementari, reservat nonm&agrave;s aus administrators.',
 'info_forum_statistiques' => 'Estadisticas de las vesitas',
 'info_forums_abo_invites' => 'V&ograve;stre sit web &ograve;fre daus forums per los abonats; dins lo sit public los vesitaires son convidats a se registrar.',
-'info_gauche_admin_effacer' => '<B>A quela pagina, nonm&agrave;s los responsables dau sit i p&ograve;den accedir.</b><P> Permet de trobar las diferentas foncions de mantenen&ccedil;a tecnica. Quauques unas implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP au sit web.',
-'info_gauche_admin_tech' => '<B>A quela pagina, nonm&agrave;s los responsables dau sit i p&ograve;den accedir.</b><P> Permet de trobar las diferentas foncions de mantenen&ccedil;a tecnica. Quauques unas implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP au sit web.',
-'info_gauche_admin_vider' => '<B>A quela pagina, nonm&agrave;s los responsables dau sit i p&ograve;den accedir.</b><P> Permet de trobar las diferentas foncions de mantenen&ccedil;a tecnica. Quauques unas implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP au sit web.',
+'info_gauche_admin_effacer' => '<b>A quela pagina, nonm&agrave;s los responsables dau sit i p&ograve;den accedir.</b><p> Permet de trobar las diferentas foncions de mantenen&ccedil;a tecnica. Quauques unas implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP au sit web.',
+'info_gauche_admin_tech' => '<b>A quela pagina, nonm&agrave;s los responsables dau sit i p&ograve;den accedir.</b><p> Permet de trobar las diferentas foncions de mantenen&ccedil;a tecnica. Quauques unas implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP au sit web.',
+'info_gauche_admin_vider' => '<b>A quela pagina, nonm&agrave;s los responsables dau sit i p&ograve;den accedir.</b><p> Permet de trobar las diferentas foncions de mantenen&ccedil;a tecnica. Quauques unas implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP au sit web.',
 'info_gauche_auteurs' => 'Trobaretz aic&iacute; tots los autors dau sit. La color de las ic&ograve;nas n\'indica l\'estatut (administrator: verd; redactor: jaune).',
 'info_gauche_auteurs_exterieurs' => 'Los autors exteriors, sens acc&egrave;s au sit, son indicats emb una ic&ograve;na blava; los autors esfa&ccedil;ats emb un bordilhier.',
 'info_gauche_messagerie' => 'La messatjari&aacute; vos permet d\'eschamjar daus messatges entre redactors, de servar daus mementos (per v&ograve;stre usatge personau) o d\'afichar daus anoncis sus la pagina d\'acuelh de l\'espaci privat (se setz administrator/tritz).',
 'info_gauche_numero_auteur' => 'AUTOR NUMERO',
 'info_gauche_numero_breve' => 'BREVA NUMERO',
-'info_gauche_statistiques_referers' => 'Quela pagina presenta la lista daus <I>referidors</i>, qu&ograve; v&ograve;u dire daus sits menant a v&ograve;stre quite sit, unicament pet ier e uei: quela lista s\'actualiza chasca 24 oras.',
-'info_gauche_suivi_forum' => 'La pagina de <I>segut daus forums</i> es un esplech de gestion de v&ograve;stre sit (mas es pas un espaci per discutir o per redigir). Aficha totas las contribucions dau forum public de quel article e vos permet de gerir quelas contribucions.',
-'info_gauche_suivi_forum_2' => 'La pagina de <I>segut daus forums</i> es un esplech de gestion dau v&ograve;stre sit (mas es pas un espaci per discutir o per redigir). Aficha totas las contribucions dau forum public de quel article e vos permet de gerir quelas contribucions.',
+'info_gauche_statistiques_referers' => 'Quela pagina presenta la lista daus <i>referidors</i>, qu&ograve; v&ograve;u dire daus sits menant a v&ograve;stre quite sit, unicament pet ier e uei: quela lista s\'actualiza chasca 24 oras.',
+'info_gauche_suivi_forum' => 'La pagina de <i>segut daus forums</i> es un esplech de gestion de v&ograve;stre sit (mas es pas un espaci per discutir o per redigir). Aficha totas las contribucions dau forum public de quel article e vos permet de gerir quelas contribucions.',
+'info_gauche_suivi_forum_2' => 'La pagina de <i>segut daus forums</i> es un esplech de gestion dau v&ograve;stre sit (mas es pas un espaci per discutir o per redigir). Aficha totas las contribucions dau forum public de quel article e vos permet de gerir quelas contribucions.',
 'info_gauche_visiteurs_enregistres' => 'Trobaretz aqu&iacute; los vesitaires registrats
  dins l\'espaci public dau sit (forums emb abonament).',
 'info_generation_miniatures_images' => 'Congreacion de miniaturas daus imatges',
@@ -358,7 +352,7 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_image_process' => 'Volhatz seleccionar lo melhor met&ograve;de de fabricacion de las vinhetas en clicar sus l\'imatge correspondent.',
 'info_image_process2' => '<b>N.B.</b> <i>Se brisa d\'imatge apareis, laidonc lo servidor qu\'auberja v&ograve;stre sit l\'an pas configurat per utilizar de taus gatges. Se desiratz d\'utilirar quelas foncions, contactatz lo responsable tecnic e demandatz las extensions &laquo;GD&raquo; o &laquo;Imagick&raquo;.</i>',
 'info_images_auto' => 'Imatges calculats automaticament',
-'info_informations_personnelles' => 'Cinquesma estapa: <B>Informacions personalas</b>',
+'info_informations_personnelles' => 'Cinquesma estapa: <b>Informacions personalas</b>',
 'info_inscription_automatique' => 'Inscripcion automatica de redactors noveus',
 'info_jeu_caractere' => 'J&ograve;c de caracters dau sit',
 'info_jours' => 'jorns',
@@ -387,7 +381,7 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_mise_a_niveau_base_2' => '{{Atencion!}} Avetz installada una version
   daus fichiers SPIP {anteriora} a la que i avi&aacute;
   avans subre queste sit: riscatz de perdre v&ograve;stra basa de donadas
-   e v&ograve;stre sit foncionar&aacute; pas mai.<br>{{Tornatz installar los
+   e v&ograve;stre sit foncionar&aacute; pas mai.<br />{{Tornatz installar los
   fichiers d\'SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'M&ograve;de de foncionament predefinit daus forums publics',
 'info_modifier_breve' => 'Modificar la breva:',
@@ -440,7 +434,6 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_oui_suppression_mot_cle' => 'V&ograve;le suprimir queu mot clau definitivament.',
 'info_page_interdite' => 'Pagina pro&iuml;bida',
 'info_par_nombre_article' => '(per nombre d\'articles)',
-'info_par_tri' => '(per @tri@)',
 'info_pas_de_forum' => 'Brisa de forum',
 'info_passe_trop_court' => 'Mot de santa Clara tr&ograve;p cort.',
 'info_passes_identiques' => 'Los dos mots de santa Clara son pas identics.',
@@ -492,8 +485,8 @@ Quauques auberjadors autorizan pas l\'enviament d\'e-mails dempuei lors servidor
 'info_redirection' => 'Redireccion',
 'info_referencer_doc_distant' => 'Referenciar un document dins l\'Internet:',
 'info_refuses' => 'V&ograve;stres articles refusats',
-'info_reglage_ldap' => 'Opcions: <B>Reglatge de l\'importacion LDAP</b>',
-'info_renvoi_article' => '<B>Redireccion.</b> Quel article remanda a la pagina:',
+'info_reglage_ldap' => 'Opcions: <b>Reglatge de l\'importacion LDAP</b>',
+'info_renvoi_article' => '<b>Redireccion.</b> Quel article remanda a la pagina:',
 'info_reserve_admin' => 'Nonm&agrave;s los administrators p&ograve;den modificar quela adrei&ccedil;a.',
 'info_restauration_sauvegarde' => 'restauracion de la sauvagarda @archive@',
 'info_restreindre_rubrique' => 'Restr&eacute;nher la gestion a la rubrica:',
@@ -518,7 +511,7 @@ Quauques auberjadors autorizan pas l\'enviament d\'e-mails dempuei lors servidor
 'info_sauvegarde_petitions' => 'Sauvagardar las peticions',
 'info_sauvegarde_refers' => 'Sauvagardar los referidors',
 'info_sauvegarde_reussi_01' => 'Sauvagarda abotida.',
-'info_sauvegarde_reussi_02' => 'La basa es estada sauvagardada dins <b>ecrire/data/@archive@</b>. Podetz',
+'info_sauvegarde_reussi_02' => 'La basa es estada sauvagardada dins @archive@. Podetz',
 'info_sauvegarde_reussi_03' => 'tornar a la gestion',
 'info_sauvegarde_reussi_04' => 'de v&ograve;stre sit.',
 'info_sauvegarde_rubriques' => 'Sauvagardar las rubricas',
@@ -745,7 +738,7 @@ una color indica lor estat:',
 'texte_acces_ldap_anonyme_1' => 'Quauques servidors LDAP acceptan brisa d\'acc&egrave;s anonim. En queu cas, chau especificar un identificant d\'acc&egrave;s iniciau per poder puei cerchar de las informacions dins l\'annuari. Pasmens, los champs seguents se poir&aacute;n laissar voides dins lo pus mai daus cas.',
 'texte_admin_effacer_01' => 'Quela comanda esfa&ccedil;a <i>tot</i> lo contengut de la basa de donadas,
  incl&uacute;s <i>tots</i> los acc&egrave;s redactors e administrators. Un c&ograve;p que l\'auretz executada, auretz de tornar lan&ccedil;ar l\'installacion d\'SPIP per tornar crear una basa novela e mai un primier acc&egrave;s administrator.',
-'texte_admin_tech_01' => 'Quela opcion vos permet de sauvagardar lo contengut de la basa dins un fichier que ser&aacute; servat dins lo repert&ograve;ri <i>ecrire/data/</i>.
+'texte_admin_tech_01' => 'Quela opcion vos permet de sauvagardar lo contengut de la basa dins un fichier que ser&aacute; servat dins lo repert&ograve;ri @dossier@.
 Oblidetz pas tanpauc de recuperar l\'integralitat dau repert&ograve;ri <i>IMG/</i>, que conten los imatges e los documents utilizats dins los articles e rubricas.',
 'texte_admin_tech_02' => 'Atencion: quela sauvagarda se poir&aacute; restaurar
  SOLAMENT dins un sit installat emb la mesma version d\'SPIP. Donc subretot chau pas "voidar la basa" en esperar de re&iuml;nstallar la sauvagarda apr&egrave;s una actualizacion. Consultatz <a href="http://www.spip.net/fr_article1489.html">la documentacion d\'SPIP</a>.',
@@ -765,7 +758,7 @@ Oblidetz pas tanpauc de recuperar l\'integralitat dau repert&ograve;ri <i>IMG/</
  una revista de premsa, un chalendier d\'eveniments...',
 'texte_choix_base_1' => 'Chausissetz v&ograve;stra basa:',
 'texte_choix_base_2' => 'Lo servidor MySQL conten mai d\'una basa de donadas.',
-'texte_choix_base_3' => '<B>Chausissetz</b> &ccedil;ai sos la que v&ograve;stre auberjador vos a atribuida:',
+'texte_choix_base_3' => '<b>Chausissetz</b> &ccedil;ai sos la que v&ograve;stre auberjador vos a atribuida:',
 'texte_commande_vider_tables_indexation' => 'Utilizatz quela comanda per voidar las taulas d\'indexacion utilizadas per lo cerchador integrat a SPIP. Qu&ograve; lai permetr&aacute;
  de ganhar de l\'espaci disc.',
 'texte_comment_lire_tableau' => 'Lo reng de l\'article,
@@ -787,7 +780,7 @@ qu\'apareis quand la murja passa sus lo t&iacute;tol.',
 'texte_crash_base' => 'Se v&ograve;stra basa de donadas a
  frolhat, podetz assajar una reparacion
  automatica.',
-'texte_creer_rubrique' => 'Avans de poder escriure daus articles,<BR> devetz crear una rubrica.',
+'texte_creer_rubrique' => 'Avans de poder escriure daus articles,<br /> devetz crear una rubrica.',
 'texte_date_creation_article' => 'DATA DE CREACION DE L\'ARTICLE:',
 'texte_date_publication_anterieure' => 'DATA DE PUBLICACION ANTERIORA&nbsp;:',
 'texte_date_publication_anterieure_nonaffichee' => 'Afichar brisa de data de publicacion anteriora.',
@@ -804,7 +797,7 @@ qu\'apareis quand la murja passa sus lo t&iacute;tol.',
 'texte_en_cours_validation' => 'Se prepausa de publicar los articles e brevas &ccedil;ai sos. Esitetz pas per donar v&ograve;stre av&iacute;s gr&agrave;cias aus forums que i son estachats.',
 'texte_enrichir_mise_a_jour' => 'Podetz enrichir la compaginacion de v&ograve;stre text en utilizar de las "escorchieras tipograficas".',
 'texte_fichier_authent' => '<b>Deu crear, SPIP, daus fichiers especiaus  <tt>.htpasswd</tt>
-  e <tt>.htpasswd-admin</tt> dins lo repert&ograve;ri <tt>ecrire/data/</tt>?</b><p>
+  e <tt>.htpasswd-admin</tt> dins lo repert&ograve;ri @dossier@?</b><p>
   Quilhs fichiers vos p&ograve;den servir per restr&eacute;nher l\'acc&egrave;s aus autors
   e administrators endac&ograve;m mai dins v&ograve;stre sit
   (programa externe d\'estadisticas, per exemple).<p>
@@ -863,9 +856,9 @@ qu\'apareis quand la murja passa sus lo t&iacute;tol.',
 'texte_plus_trois_car' => 'mai de 3 caracters',
 'texte_plusieurs_articles' => 'Mai d\'un autor trobat per "@cherche_auteur@":',
 'texte_port_annuaire' => '(La valor indicada coma predefinida conven en generau.)',
-'texte_proposer_publication' => 'Quand auretz \'chabat v&ograve;stre article,<br> poiretz prepausar que si&aacute; publicat.',
+'texte_proposer_publication' => 'Quand auretz \'chabat v&ograve;stre article,<br /> poiretz prepausar que si&aacute; publicat.',
 'texte_proxy' => 'Dins quauques cas (intranet, rets protegidas...),
-  se p&ograve;t que chalha utilizar un <I>proxy HTTP</i> per at&eacute;nher los sits sindicats.
+  se p&ograve;t que chalha utilizar un <i>proxy HTTP</i> per at&eacute;nher los sits sindicats.
   En queu cas, marcatz &ccedil;ai sos son adrei&ccedil;a, sos la forma
   <tt><html>http://proxy:8080</html></tt>. En generau,
   laissaretz voida quela casa.',
@@ -878,7 +871,7 @@ tornar calcular nonm&agrave;s una pagina, passatz pusleu per l\'espaci public e 
 'texte_recapitiule_liste_documents' => 'Questa pagina recapitula la tiera daus documents qu\'avetz pla&ccedil;ats dins las rubricas. Per modificar las informacions de chasque document, seguetz lo liam vers la pagina de sa rubrica.',
 'texte_recuperer_base' => 'Reparar la basa de donadas',
 'texte_reference_mais_redirige' => 'article referenciat dins v&ograve;stre sit SPIP, mas redirigit vers una autra URL.',
-'texte_referencement_automatique' => '<b>Referenciament automatizat d\'un sit</b><br> Podetz referenciar de briu un sit web en indicar &ccedil;ai sos l\'adrei&ccedil;a URL desirada, o l\'adrei&ccedil;a de son fichier backend. SPIP atrapar&aacute; automaticament las informacions que concernissen queu sit (t&iacute;tol, descripcion...).',
+'texte_referencement_automatique' => '<b>Referenciament automatizat d\'un sit</b><br /> Podetz referenciar de briu un sit web en indicar &ccedil;ai sos l\'adrei&ccedil;a URL desirada, o l\'adrei&ccedil;a de son fichier backend. SPIP atrapar&aacute; automaticament las informacions que concernissen queu sit (t&iacute;tol, descripcion...).',
 'texte_requetes_echouent' => '<b>Quand quauques requestas MySQL frolhan
   sistematicament e sens rason aparenta, se p&ograve;t
   que qu&ograve; lai venha be ben de la basa de donadas.  </b><p>
@@ -892,12 +885,12 @@ tornar calcular nonm&agrave;s una pagina, passatz pusleu per l\'espaci public e 
 'texte_restaurer_base' => 'Restaurar lo contengut d\'una sauvagarda de la basa',
 'texte_restaurer_sauvegarde' => 'Quela opcion vos permet de restaurar una sauvagarda 
  de la basa que l\'aviatz facha avans. Per qu&ograve; faire, chau aver botat lo fichier que conten la sauvagarda 
-dins lo repert&ograve;ri <i>ecrire/data/</i>.
+dins lo repert&ograve;ri @dossier@.
   Pasmens, siatz prudent(a) emb quela foncionalitat: <b>las modificacions e perdas eventualas son
   irreversiblas.</b>',
 'texte_sauvegarde' => 'Sauvagardar lo contengut de la basa',
 'texte_sauvegarde_base' => 'Sauvagardar la basa',
-'texte_sauvegarde_compressee' => 'La sauvagarda se far&aacute; dins lo fichier non comprimit <b>ecrire/data/dump.xml</b>.',
+'texte_sauvegarde_compressee' => 'La sauvagarda se far&aacute; dins lo fichier non comprimit @fichier@.',
 'texte_selection_langue_principale' => 'Podetz seleccionar &ccedil;ai sos la "lenga principala" dau sit. Quela chausida vos obliga pas -de bona&uuml;r- d\'escriure v&ograve;stres articles dins la lenga seleccionada, mas permet de determinar:
  <ul><li> lo format predefinit de las datas subre lo sit public;</li>
  <li> la natura dau motor tipografic que SPIP deu utilizar per lo rendut daus texts;</li>
@@ -925,7 +918,7 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
 'texte_test_proxy' => 'Per assajar queu proxy, indicatz aic&iacute; l\'adrei&ccedil;a d\'un sit web
     que lo voudriatz esprovar.',
 'texte_titre_02' => 'T&iacute;tol:',
-'texte_titre_obligatoire' => '<B>T&iacute;tol</b> [Obligat&ograve;ri]',
+'texte_titre_obligatoire' => '<b>T&iacute;tol</b> [Obligat&ograve;ri]',
 'texte_travail_article' => '@nom_auteur_modif@ a trabalhat sus quel article qu&ograve; fai @date_diff@ minutas',
 'texte_travail_collaboratif' => 'Quand es frequent que mai d\'un redactor 
   trabalhe subre lo mesme article, lo sistema
@@ -939,9 +932,9 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
 'texte_utilisation_moteur_syndiques' => 'Quand utilizatz lo cerchador integrat 
     a SPIP, podetz far las cerchas sus los sits e
     articles sindicats de doas manieras
-    diferentas. <br><img src=\'puce.gif\'> Lo mai
+    diferentas. <br /><img src=\'puce.gif\'> Lo mai
     simple consist&iacute;s a cerchar solament dins los
-    t&iacute;tols e descriptius daus articles. <br><img src=\'puce.gif\'>
+    t&iacute;tols e descriptius daus articles. <br /><img src=\'puce.gif\'>
     La segonda maniera, plan mai potenta, permet
     a SPIP de cerchar maitot dins lo text daus
     sits referenciats. 
@@ -965,11 +958,11 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
 'titre_cadre_forum_interne' => 'Forum interne',
 'titre_cadre_interieur_rubrique' => 'Dedins la rubrica',
 'titre_cadre_numero_auteur' => 'AUTOR NUMERO',
-'titre_cadre_signature_obligatoire' => '<B>Signatura</b> [Obligat&ograve;ria]<BR>',
+'titre_cadre_signature_obligatoire' => '<b>Signatura</b> [Obligat&ograve;ria]<br />',
 'titre_config_fonctions' => 'Configuracion dau sit',
 'titre_config_groupe_mots_cles' => 'Configuracion daus grops de mots clau',
 'titre_configuration' => 'Configuracion dau sit',
-'titre_connexion_ldap' => 'Opcions: <B>V&ograve;stra connexion LDAP</b>',
+'titre_connexion_ldap' => 'Opcions: <b>V&ograve;stra connexion LDAP</b>',
 'titre_dernier_article_syndique' => 'Darriers articles sindicats',
 'titre_documents_joints' => 'Documents jonchs',
 'titre_evolution_visite' => 'Evolucion de las vesitas',
