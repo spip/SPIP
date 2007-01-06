@@ -314,11 +314,12 @@ function plugin_get_infos($plug){
 					$arbre = array('erreur' => array(_T('erreur_plugin_fichier_def_absent')." : $plug/plugin.xml"));
 				}
 				plugin_verifie_conformite($plug,$arbre);
-				
 				$ret['nom'] = spip_xml_aplatit($arbre['nom']);
 				$ret['version'] = trim(end($arbre['version']));
 				if (isset($arbre['auteur']))
 					$ret['auteur'] = spip_xml_aplatit($arbre['auteur']);
+				if (isset($arbre['icon']))
+					$ret['icon'] = spip_xml_aplatit($arbre['icon']);
 				if (isset($arbre['description']))
 					$ret['description'] = spip_xml_aplatit($arbre['description']);
 				if (isset($arbre['lien']))
@@ -444,6 +445,8 @@ function verifie_include_plugins() {
 
 // http://doc.spip.org/@affiche_bloc_plugin
 function affiche_bloc_plugin($plug_file, $info) {
+	global $spip_lang_right;
+
 	// puce d'etat du plugin
 	// <etat>dev|experimental|test|stable</etat>
 	$etat = 'dev';
@@ -467,8 +470,12 @@ function affiche_bloc_plugin($plug_file, $info) {
 			$titre_etat = _T('plugin_etat_developpement');
 			break;
 	}
-	
+
 	$s .= "<div class='detailplugin verdana2'>";
+
+	if (isset($info['icon']))
+		$s .= "<img src='". _DIR_PLUGINS.$plug_file.'/'.trim($info['icon'])."' style='float:$spip_lang_right;' alt=' ' />\n";
+
 	$s .= _T('version') .' '.  $info['version'] . " | <strong>$titre_etat</strong><br/>";
 	$s .= _T('repertoire_plugins') .' '. $plug_file . "<br/>";
 
@@ -477,8 +484,12 @@ function affiche_bloc_plugin($plug_file, $info) {
 
 	if (isset($info['auteur']))
 		$s .= "<hr/>" . _T('auteur') .' '. propre($info['auteur']) . "<br/>";
-	if (isset($info['lien']))
-		$s .= "<hr/>" . _T('info_url') .' '. propre($info['lien']) . "<br/>";
+	if (isset($info['lien'])) {
+		if (preg_match(',^https?://,iS', $info['lien']))
+			$s .= "<hr/>" . _T('info_url') .' '. propre("[->".$info['lien']."]") . "<br/>";
+		else
+			$s .= "<hr/>" . _T('info_url') .' '. propre($info['lien']) . "<br/>";
+	}
 	$s .= "</div>";
 
 	return $s;
