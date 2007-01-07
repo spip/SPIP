@@ -46,7 +46,7 @@ function install_debut_html($titre = 'AUTO', $onLoad = '') {
 		<style type='text/css'><!--\n/*<![CDATA[*/\n\n\n".
 		"body { background: #FFF; color: #000; }\n".
 		"h1 { color: #970038; margin-top: 50px; font-family: Verdana; font-weigth: bold; font-size: 18px }\n".
-		"h2 { font-family: Verdana,Arial,Sans,sans-serif; font-weigth: normal; font-size: 100%; }\n".
+		"h2 { font-family: Verdana,Arial,Sans,sans-serif; font-weigth: normal; }\n".
 		"a { color: #E86519; text-decoration: none; }\n".
 		"a:visited { color: #6E003A; }\n".
 		"a:active { color: #FF9900; }\n".
@@ -249,7 +249,7 @@ function afficher_bouton_preview() {
 		padding-right: 5px;
 		padding-top: 2px;
 		padding-bottom: 5px;
-		font-size: 20px;
+		font-size: 18px;
 		top: 0px;
 		left: 0px;
 		position: absolute;

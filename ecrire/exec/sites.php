@@ -132,7 +132,7 @@ debut_gauche();
 
 	debut_boite_info();
 
-	$res = "\n<div style='font-size: 10x; font-weight: bold; text-align: center' class='verdana1'>"
+	$res = "\n<div style='font-size: 10px; font-weight: bold; text-align: center' class='verdana1'>"
 		  .  _T('titre_site_numero')
 		  . "<br /><span style='font-size: 32px;'>"
 		  . $id_syndic
@@ -184,7 +184,7 @@ gros_titre($nom_site, $logo_statut);
 echo "<a href='$url_site'><b>$url_affichee</b></a>";
 
 if (strlen($descriptif) > 1) {
-	echo "<div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4; margin-top: 5px; font-size: 13px; ' class='verdana1'>";
+	echo "<div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4; margin-top: 5px; font-size: 14px; ' class='verdana1'>";
 	echo "<b>"._T('info_descriptif')."</b> ";
 	echo propre($descriptif);
 	echo "&nbsp; ";
@@ -270,7 +270,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 			"<input type='hidden' name='reload' value='oui' />
 			<input type='submit' value=\""
 			. attribut_html(_T('lien_nouvelle_recuperation'))
-			. "\" class='fondo' style='font-size:9px;' />"
+			. "\" class='fondo' style='font-size: 10px;' />"
 		);
 		fin_boite_info();
 	}
@@ -291,7 +291,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 		"<input type='hidden' name='reload' value='oui' />
 		<input type='submit' value=\""
 		. attribut_html(_T('lien_mise_a_jour_syndication'))
-		. "\" class='fondo' style='font-size:9px;' />",
+		. "\" class='fondo' style='font-size: 10px;' />",
 		" method='post'"
 	);
 	echo "</div>\n";

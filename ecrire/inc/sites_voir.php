@@ -83,7 +83,7 @@ function afficher_sites_boucle($row, &$tous_id, $voir_logo, $bof)
 			
 	$s .= typo($nom_site);
 	
-	$s .= "</a> &nbsp;&nbsp; <span style='font-size: 11px;'>[<a href='$url_site'>"._T('lien_visite_site')."</a>]</span>";
+	$s .= "</a> &nbsp;&nbsp; <span style='font-size: 10px;'>[<a href='$url_site'>"._T('lien_visite_site')."</a>]</span>";
 	$vals[] = $s;
 			
 	$s = "";

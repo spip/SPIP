@@ -94,7 +94,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	  ($flag == 'ajax' ? '' : "class='display_au_chargement' ") .
 	  "id='valider_doc$id_document' align='".
 	  $GLOBALS['spip_lang_right'].
-	  "'>\n<input class='fondo' style='font-size:9px;' value='".
+	  "'>\n<input class='fondo' style='font-size: 10px;' value='".
 	  _T('bouton_enregistrer') .
 	  "' type='submit' />" .
 	  "</div>\n";
@@ -185,8 +185,8 @@ function formulaire_taille($document) {
 		OR $extension=='flv' OR $extension=='mpg'
 	)) {
 		return "\n<br /><b>"._T('entree_dimensions')."</b><br />\n" .
-		  "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"".$document['largeur']."\" size='5' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" />" .
-		  " &#215; <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"".$document['hauteur']."\" size='5' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /> "._T('info_pixels');
+		  "<input type='text' name='largeur_document' class='fondl' style='font-size: 10px;' value=\"".$document['largeur']."\" size='5' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" />" .
+		  " &#215; <input type='text' name='hauteur_document' class='fondl' style='font-size: 10px;' value=\"".$document['hauteur']."\" size='5' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /> "._T('info_pixels');
 	}
 }
 
@@ -199,9 +199,9 @@ function date_formulaire_legender($date, $id_document) {
 		$annee = $regs[1];
 	}
 	return  "<b>"._T('info_mise_en_ligne')."</b><br />\n" .
-		afficher_jour($jour, "name='jour_doc' size='1' class='fondl' style='font-size:9px;'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"") .
-		afficher_mois($mois, "name='mois_doc' size='1' class='fondl' style='font-size:9px;'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"") .
-		afficher_annee($annee, "name='annee_doc' size='1' class='fondl' style='font-size:9px;'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\"") .
+		afficher_jour($jour, "name='jour_doc' size='1' class='fondl' style='font-size: 10px;'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"") .
+		afficher_mois($mois, "name='mois_doc' size='1' class='fondl' style='font-size: 10px;'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"") .
+		afficher_annee($annee, "name='annee_doc' size='1' class='fondl' style='font-size: 10px;'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\"") .
 		"<br />\n";
 }
 

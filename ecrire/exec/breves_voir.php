@@ -71,7 +71,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	
 	debut_boite_info();
 	
-	$res = "\n<div style='font-size: 10x; font-weight: bold; text-align: center' class='verdana1'>" 
+	$res = "\n<div style='font-size: 10px; font-weight: bold; text-align: center' class='verdana1'>" 
 	. _T('info_gauche_numero_breve')
 	. "<br /><span style='font-size: 32px;'>"
 	. $id_breve

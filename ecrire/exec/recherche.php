@@ -43,7 +43,7 @@ function exec_recherche_dist()
 	if (strlen($recherche) > 0) {
 
 	echo "<span class='verdana1'><b>"._T('info_resultat_recherche')."</b></span><br />";
-	echo "<span style='font-size: 20px; color: $couleur_foncee' class='verdana1'><b>$recherche_aff</b></span>";
+	echo "<span style='font-size: 18px; color: $couleur_foncee' class='verdana1'><b>$recherche_aff</b></span>";
 
 	$query_articles['FROM'] = 'spip_articles AS articles';
 	$query_breves['FROM'] = 'spip_breves';

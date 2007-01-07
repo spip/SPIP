@@ -285,7 +285,7 @@ define('AIDE_STYLE_MENU', '<style type="text/css">
 		margin-bottom: 4px;
 		padding: 4px;
 		font-family: Trebuchet MS, Arial, Sans, sans-serif;
-		font-size: 13px;
+		font-size: 14px;
 		font-weight: bold;
 		color: black;
 		background-color: #EEEECC;

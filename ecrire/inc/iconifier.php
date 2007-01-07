@@ -113,16 +113,16 @@ function indiquer_logo($titre, $id_objet, $mode, $id, $script, $iframe_script) {
 			$GLOBALS['spip_lang_right'] .
 			"'><input name='sousaction2' type='submit' value='".
 			_T('bouton_choisir') .
-			"' class='fondo'  style='font-size:9px' /></div>";
+			"' class='fondo'  style='font-size: 10px;' /></div>";
 		}
 		$afficher = "\n" .
 			_T('info_telecharger_nouveau_logo') .
 			"<br />" .
-			"\n<input name='image' type='file' class='forml' style='font-size:9px;' size='15' />" .
+			"\n<input name='image' type='file' class='forml' style='font-size: 10px;' size='15' />" .
 			"<div align='" .  $GLOBALS['spip_lang_right'] . "'>" .
 			"\n<input name='sousaction1' type='submit' value='" .
 			_T('bouton_telecharger') .
-			"' class='fondo' style='font-size:9px' /></div>" .
+			"' class='fondo' style='font-size: 10px;' /></div>" .
 			$afficher;
 
 		$type = type_du_logo($id_objet);
@@ -147,7 +147,7 @@ function decrire_logo($id_objet, $mode, $id, $width, $height, $img, $titre="", $
 		$taille = _T('info_largeur_vignette', array('largeur_vignette' => $taille[0], 'hauteur_vignette' => $taille[1]));
 
 	return array($res,
-			"<div style='font-size: 1Opx;'>" .
+			"<div style='font-size: 10px;'>" .
 		     $taille .
 		     "\n<br />[" .
 		     ajax_action_auteur("iconifier", "$id-$nom.$format", $script, "$id_objet=$id&type=$id_objet", array(_T('lien_supprimer')),'',"function(r,noeud) {noeud.innerHTML = r; \$('.form_upload_icon',noeud).async_upload(async_upload_icon);}") .

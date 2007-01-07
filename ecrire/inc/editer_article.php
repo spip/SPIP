@@ -106,7 +106,7 @@ function editer_article_titre($titre, $onfocus, $config, $aider)
 	return	"\n<p>" .
 		_T('texte_titre_obligatoire') .
 		$aider("arttitre") .
-		"\n<br /><input type='text' name='titre' style='font-weight: bold; font-size: 13px;' class='formo' value=\"" .
+		"\n<br /><input type='text' name='titre' style='font-weight: bold; font-size: 14px;' class='formo' value=\"" .
 	  	entites_html($titre) .
 		"\" size='40' " .
 	  	$onfocus. // effacer le titre lorsque nouvel article
@@ -270,7 +270,7 @@ function editer_article_chapo($chapo, $config, $aider)
 			"<td style='width: 10px'>&nbsp;</td>" .
 			"<td valign='top' style='width: 50%'>" .
 			"<input type='text' name='virtuel' class='forml'
-		style='font-size:9px;' value=\"$virtuel\" size='40' />" .
+		style='font-size: 10px;' value=\"$virtuel\" size='40' />" .
 			"<input type='hidden' name='changer_virtuel' value='oui' />" .
 			"</td></tr></table>\n" .
 			"<span style='font-size: 14px;' class='verdana1'>" . _T('texte_article_virtuel_reference') . "</span>" .
