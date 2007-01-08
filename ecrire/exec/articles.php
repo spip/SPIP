@@ -209,9 +209,9 @@ function boite_info_articles($id_article, $statut_article, $visites, $id_version
 {
 	global $connect_statut, $options, $flag_revisions;
 
-	$res = "\n<div style='font-size: 10px; font-weight: bold; text-align: center' class='verdana1'>" 
+	$res = "\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>" 
 	. _T('info_numero_article')
-	.  "<br /><span style='font-size: 32px;'>"
+	.  "<br /><span class='spip_xx-large'>"
 	.  $id_article
 	.  '</span></div>'
 	. voir_en_ligne('article', $id_article, $statut_article, 'racine-24.gif', false);
@@ -302,7 +302,7 @@ function bouton_modifier_articles($id_article, $id_rubrique, $flag_modif, $mode,
 {
 	if ($flag_modif) {
 		return icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), $ip, $im, $align, false)
-		. "<span style='font-size: 14px;' class='arial1'>$mode</span>"
+		. "<span class='arial1 spip_small'>$mode</span>"
 		. aide("artmodif");
 	}
 	else return icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), "article-24.gif", "edit.gif", $align, false);
@@ -316,13 +316,13 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 	$res = '';
 
 	if ($surtitre) {
-		$res .= "<span $dir_lang style='font-size: 16px;' class='arial1'><b>" . typo($surtitre) . "</b></span>\n";
+		$res .= "<span $dir_lang class='arial1 spip_medium'><b>" . typo($surtitre) . "</b></span>\n";
 	}
 	 
 	$res .= gros_titre($titre, "puce-".puce_statut($statut_article).".gif", false);
 	
 	if ($soustitre) {
-		$res .= "<span $dir_lang style='font-size: 16px;' class='arial1'><b>" . typo($soustitre) . "</b></span>\n";
+		$res .= "<span $dir_lang class='arial1 spip_medium'><b>" . typo($soustitre) . "</b></span>\n";
 	}
 	
 	if ($descriptif OR $url_site OR $nom_site) {
@@ -331,13 +331,13 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 
 		$texte_case .=  ($nom_site OR $url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
 
-		$res .= "<br />\n<div align='$spip_lang_left' $dir_lang style='padding: 4px; border: 1px dashed #aaaaaa; background-color: #e4e4e4; font-size: 12px;' class='Verdana1'>"
+		$res .= "<br />\n<div align='$spip_lang_left' $dir_lang style='padding: 4px; border: 1px dashed #aaaaaa; background-color: #e4e4e4; ' class='Verdana1 spip_x-small'>"
 		. propre($texte_case)
 		. "</div>";
 	}
 	
 	if ($statut_article == 'prop')
-		$res .= "<p style='font-size: 14px; color: red' class='verdana1'><b>"._T('text_article_propose_publication')."</b></p>";
+		$res .= "<p style='color: red' class='verdana1 spip_small'><b>"._T('text_article_propose_publication')."</b></p>";
 	
 	$res = "\n<td valign='top'>$res</td>";
 

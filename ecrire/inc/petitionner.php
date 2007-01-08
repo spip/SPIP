@@ -49,7 +49,7 @@ function inc_petitionner_dist($id_article, $script, $args)
 	}
 
 	$res = "<select name='change_petition'
-		class='fondl' style='font-size:10px;'
+		class='fondl spip_xx-small'
 		onchange=\"setvisibility('valider_petition', 'visible');\"
 		>\n$res</select><br />\n";
 
@@ -96,7 +96,7 @@ function inc_petitionner_dist($id_article, $script, $args)
 
 		$res .="<span align='$spip_lang_right'>";
 	} else $res .="<span class='visible_au_chargement' id='valider_petition'>";
-	$res .="<input type='submit' class='fondo' value='"._T('bouton_changer')."' style='font-size:10px' />";
+	$res .="<input type='submit' class='fondo spip_xx-small' value='"._T('bouton_changer')."' />";
 	$res .="</span>";
 	$res = ajax_action_auteur('petitionner', $id_article, $script, $args, $res);
 

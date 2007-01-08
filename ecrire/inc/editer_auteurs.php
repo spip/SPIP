@@ -137,7 +137,7 @@ function rechercher_auteurs_articles($cherche_auteur, $ids, $id_article)
 	elseif (preg_match('/^\d+$/',$ids)) {
 
 		$row = spip_fetch_array(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$ids"));
-		return "<b>"._T('texte_ajout_auteur')."</b><br /><ul><li><span style='font-size: 14px;' class='verdana1'><b><span style='font-size: 16px;'>".typo($row['nom'])."</span></b></span></li></ul>";
+		return "<b>"._T('texte_ajout_auteur')."</b><br /><ul><li><span class='verdana1 spip_small'><b><span class='spip_medium'>".typo($row['nom'])."</span></b></span></li></ul>";
 	}
 	else {
 		$ids = preg_replace('/[^0-9,]/','',$ids); // securite

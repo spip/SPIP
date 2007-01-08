@@ -203,7 +203,7 @@ function gadget_navigation($id_rubrique) {
 				$id_article = $row['id_article'];
 				$titre = typo(sinon($row['titre'], _T('ecrire:info_sans_titre')));
 				$statut = $row['statut'];
-				$gadget .= "<a class='$statut' style='font-size: 10px;' href='" . generer_url_ecrire("articles","id_article=$id_article") . "'>$titre</a>\n";
+				$gadget .= "<a class='$statut spip_xx-small' href='" . generer_url_ecrire("articles","id_article=$id_article") . "'>$titre</a>\n";
 			}
 			$gadget .= "</div>";
 			$gadget .= "</div>";
@@ -220,7 +220,7 @@ function gadget_navigation($id_rubrique) {
 				$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
 				$statut = $row['statut'];
 	
-				$gadget .= "<a class='$statut' style='font-size: 10px;' href='" . generer_url_ecrire("articles","id_article=$id_article") . "'>$titre</a>";
+				$gadget .= "<a class='$statut spip_xx-small' href='" . generer_url_ecrire("articles","id_article=$id_article") . "'>$titre</a>";
 			}
 			$gadget .= "</div>";
 			$gadget .= "</div>";
@@ -237,7 +237,7 @@ function gadget_navigation($id_rubrique) {
 				$titre = typo(sinon($row['titre'], _T('ecrire:info_sans_titre')));
 				$statut = $row['statut'];
 	
-				$gadget .= "<a class='$statut' style='font-size: 10px;' href='" . generer_url_ecrire("breves_voir","id_breve=$id_breve") . "'>$titre</a>";
+				$gadget .= "<a class='$statut spip_xx-small' href='" . generer_url_ecrire("breves_voir","id_breve=$id_breve") . "'>$titre</a>";
 			}
 			$gadget .= "</div>";
 			$gadget .= "</div>";

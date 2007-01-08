@@ -261,7 +261,7 @@ function exec_controle_forum_dist()
 
 			debut_gauche();
 			debut_boite_info();
-			echo "<span style='font-size: 14px;' class='verdana1'>", _T('info_gauche_suivi_forum_2'), aide("suiviforum"), "</span>";
+			echo "<span class='verdana1 spip_small'>", _T('info_gauche_suivi_forum_2'), aide("suiviforum"), "</span>";
 
 			// Afficher le lien RSS
 

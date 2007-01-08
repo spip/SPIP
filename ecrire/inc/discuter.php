@@ -25,7 +25,7 @@ function formulaire_discuter($query, $total, $debut, $total_afficher, $script, $
 		for ($i = 0; $i < $total; $i = $i + $total_afficher){
 			$y = $i + $total_afficher - 1;
 			if ($i == $debut)
-				$nav .= "<span style='font-size: 16px;'><b>[$i-$y]</b></span> ";
+				$nav .= "<span class='spip_medium'><b>[$i-$y]</b></span> ";
 			else {
 				$a = "$args&debut=$i";
 				if (!$evt) {

@@ -216,7 +216,7 @@ function aff_referers ($result, $limit, $plus) {
 				$referers = join ("</li><li>",$lesreferers[$numero]);
 				$aff .= $ret;
 				$aff .= "<a href='http://".quote_amp($lesurls[$numero])."'><span style='color: $couleur_foncee; font-weight: bold;'>".$lesdomaines[$numero]."</span></a>";
-				if ($rac = $lesliensracine[$numero]) $aff .= " <span style='font-size: 12px;'>($rac)</span>";
+				if ($rac = $lesliensracine[$numero]) $aff .= " <span class='spip_x-small'>($rac)</span>";
 				$aff .= "<ul style='font-size:x-small;'><li>$referers</li></ul>";
 				$aff .= "</li></ul><ul style='font-size:small;'>\n";
 			} else {

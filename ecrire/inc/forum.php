@@ -26,7 +26,7 @@ function affiche_navigation_forum($script, $args, $debut, $i, $pack, $ancre, $qu
 
 		if ($i == $pack*floor($i/$pack)) {
 			if ($i == $debut)
-				$nav .= "<span style='font-size: 16px;'><b>$i</b></span> |\n";
+				$nav .= "<span class='spip_medium'><b>$i</b></span> |\n";
 			else {
 				$h = generer_url_ecrire($script, $args . "&debut=$i");
 				if ($e)	$e = "\nonclick=" . ajax_action_declencheur($h,$ancre);

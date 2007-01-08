@@ -71,9 +71,9 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	
 	debut_boite_info();
 	
-	$res = "\n<div style='font-size: 10px; font-weight: bold; text-align: center' class='verdana1'>" 
+	$res = "\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>" 
 	. _T('info_gauche_numero_breve')
-	. "<br /><span style='font-size: 32px;'>"
+	. "<br /><span class='spip_xx-large'>"
 	. $id_breve
 	. '</span></div>';
 
@@ -149,7 +149,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 			fin_cadre_enfonce();	
 		}
 		else {
-			echo "<p><span style='font-size: 16px;' class='verdana1'><b>".affdate($date_heure)."&nbsp;</b></span></p>";
+			echo "<p><span class='verdana1 spip_medium'><b>".affdate($date_heure)."&nbsp;</b></span></p>";
 		}
 	}
 
@@ -192,7 +192,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	echo propre($texte_case);
 
 	if ($les_notes) {
-		echo "<hr width='70%' height='1' align='left'><span style='font-size: 14px;'>$les_notes</span>\n";
+		echo "<hr width='70%' height='1' align='left'><span class='spip_small'>$les_notes</span>\n";
 	}
 
 	// afficher les extra

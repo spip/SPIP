@@ -43,7 +43,7 @@ function exec_recherche_dist()
 	if (strlen($recherche) > 0) {
 
 	echo "<span class='verdana1'><b>"._T('info_resultat_recherche')."</b></span><br />";
-	echo "<span style='font-size: 18px; color: $couleur_foncee' class='verdana1'><b>$recherche_aff</b></span>";
+	echo "<span style='color: $couleur_foncee' class='verdana1 spip_large'><b>$recherche_aff</b></span>";
 
 	$query_articles['FROM'] = 'spip_articles AS articles';
 	$query_breves['FROM'] = 'spip_breves';
@@ -159,7 +159,7 @@ function afficher_auteurs ($titre_table, $requete) {
 			echo "<p><table width='100%' cellpadding='0' cellspacing='0' border='0'>";
 			echo "<tr><td style='width: 100%'>";
 			echo "<table width='100%' cellpadding='3' cellspacing='0' border='0'>";
-			echo "<tr style='background-color: #333333'><td style='width: 100%' colspan='5'><span style='font-size: 16px; color: #FFFFFF;' class='verdana1'><b>$titre_table</b></span></td></tr>";
+			echo "<tr style='background-color: #333333'><td style='width: 100%' colspan='5'><span style='color: #FFFFFF;' class='verdana1 spip_medium'><b>$titre_table</b></span></td></tr>";
 		}
 	else {
 			echo "<p><table width='100%' cellpadding='3' cellspacing='0' border='0'>";

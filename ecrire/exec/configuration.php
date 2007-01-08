@@ -405,7 +405,7 @@ else $style = "display: none;";
 		echo "<p />";
 		debut_cadre_relief();
 		echo "\n<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
-		echo "\n<tr><td style='font-size: 12px; color: #000000' class='verdana1'>";
+		echo "\n<tr><td style='color: #000000' class='verdana1 spip_x-small'>";
 		echo _T('info_question_proposer_site');
 		echo "\n<div style='text-align: center'><select name='proposer_sites' class='fondo' size='1'>\n";
 		echo "<option".mySel('0',$proposer_sites).">"._T('item_choix_administrateurs')."</option>\n";

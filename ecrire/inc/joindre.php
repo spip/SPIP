@@ -69,7 +69,7 @@ function inc_joindre_dist($script, $args, $id=0, $intitule='', $mode='', $type='
 			"\n</div>";
 	}
 
-	$res = "<input name='fichier' type='file' style='font-size: 10px;' class='forml' size='15' />"
+	$res = "<input name='fichier' type='file' class='forml spip_xx-small' size='15' />"
 	. "\n\t\t<input type='hidden' name='ancre' value='$ancre' />"
 	. "\n\t\t<div align='$spip_lang_right'><input name='sousaction1' type='submit' value='"
 	. _T('bouton_telecharger')

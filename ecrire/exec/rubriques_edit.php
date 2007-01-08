@@ -131,7 +131,7 @@ function exec_rubriques_edit_dist()
 		$scb = _T('avis_deplacement_rubrique',
 			array('contient_breves' => $contient_breves,
 			      'scb' => $scb));
-		$form .= "<div><span style='font-size: 14px;'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace' /><label for='confirme-deplace'>&nbsp;" . $scb . "</span></label></div>\n";
+		$form .= "<div><span class='spip_small'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace' /><label for='confirme-deplace'>&nbsp;" . $scb . "</span></label></div>\n";
 	} else
 		$form .= "<input type='hidden' name='confirme_deplace' value='oui' />\n";
 

@@ -67,11 +67,11 @@ function exec_message_edit_dist()
 	debut_droite();
 
 	echo "<div class='arial2'>";
-	echo "<span style='font-size: 14px; color:green' class='verdana1'><b>$le_type</b></span>";
+	echo "<span style='color:green' class='verdana1 spip_small'><b>$le_type</b></span>";
 	
 	echo generer_url_post_ecrire('message',"id_message=$id_message");
 	if ($type == "affich")
-		echo "<p style='font-size: 12px; color:red;' class='verdana1'>", _T('texte_message_edit'),"</p>";
+		echo "<p style='color:red;' class='verdana1 spip_x-small'>", _T('texte_message_edit'),"</p>";
 	
 	echo "\n<p><input type='hidden' name='modifier_message' value='oui'/>";
 	echo "\n<input type='hidden' name='id_message' value='$id_message'/>";

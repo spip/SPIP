@@ -382,7 +382,7 @@ function liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash,
 		"<div><input type='checkbox' name='sousaction4' value='4'>".
 		_T('les_deux').
 		"</div>".
-		"<div style='text-align: right;'><input class='fondo' style='font-size: 10px;' type='submit' value='".
+		"<div style='text-align: right;'><input class='fondo spip_xx-small' type='submit' value='".
 		_T('bouton_valider').
 		  "'></div>";
 	$action = construire_upload($texte, array(
