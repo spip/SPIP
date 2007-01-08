@@ -19,7 +19,7 @@ function install_etape_6_dist()
 {
 	global $email,$login,$nom,$pass, $pass_verif,$spip_lang_right;
 
-	if($pass!=$pass_verif OR strlen($pass)<5 OR strlen($login)<3) {
+	if($login!='' AND ($pass!=$pass_verif OR strlen($pass)<5 OR strlen($login)<3)) {
 		echo minipres(
 			'AUTO',
 			"<h2>"._T('info_passes_identiques')."</h2>\n".
