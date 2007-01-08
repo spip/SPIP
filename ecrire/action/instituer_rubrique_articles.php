@@ -27,13 +27,13 @@ function action_instituer_rubrique_articles_dist() {
 	$table = 'articles';
 	$key = 'id_article';
 
-	$voss = spip_query("SELECT $key AS id FROM spip_$table WHERE id_rubrique=$id AND (statut = 'publie' OR statut = 'prop' OR statut = 'prepa')");
+	$voss = spip_query("SELECT $key AS id FROM spip_$table WHERE id_rubrique=$id AND (statut = 'publie' OR statut = 'prop' OR statut = 'prepa')"); // on publie tout !?
 
 	while($row = spip_fetch_array($voss)) {
 		instituer_article($row['id'], $statut, false);
 	}
 	include_spip('inc/rubriques');
 	calculer_rubriques();
-	redirige_par_entete(generer_url_ecrire('meme_rubrique', "id=$id&type=article&date=date", true));
+	redirige_par_entete(generer_url_ecrire('meme_rubrique', "id=$id&type=article&order=date", true));
 }
 ?>

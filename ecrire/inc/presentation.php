@@ -1778,11 +1778,17 @@ function debloquer_article($arg, $texte) {
 }
 
 // http://doc.spip.org/@meme_rubrique
-function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30, $ajax=false)
+function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $ajax=false)
 {
+	// une divergence a propos du ratio utilite/dangerosite de ce menu
+	// provoque *temporairement* l'ajout ici d'un switch
+	define('_MODE_MEME_RUBRIQUE', 'ok'); // propose de tout publier + nombre d'elements
+
 	global $options;
 
 	if ($options != "avancees") return '';
+
+	if (!$limit) $limit = 10;
 
 	$table = $type . 's';
 	$key = 'id_' . $type;
@@ -1802,6 +1808,12 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30, $ajax
 	$retour = '';
 	$fstatut = 'puce_statut_' . $type;
 
+	if (_MODE_MEME_RUBRIQUE == 'ok') {
+		$type = 'rubrique_' . $table;
+		$statut = 'prop';// arbitraire
+		$puce_rubrique = puce_statut_article(0, $statut, $id_rubrique, $type).'&nbsp;';
+	}
+
 	while($row = spip_fetch_array($voss)) {
 		$id = $row['id'];
 		$num = afficher_numero_edit($id, $key, $type);
@@ -1815,17 +1827,18 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30, $ajax
 		$retour .= "<tr class='tr_liste' style='background-color: #e0e0e0;'><td>$statut</td><td>$href</td><td style='width: 25%;'>$num</td></tr>";
 	}
 
-	$type = 'rubrique_' . $table;
-	$statut = 'prop';// arbitraire
-	$icone =  puce_statut_article(0, $statut, $id_rubrique, $type)
-	. '&nbsp;<b>' . _T('info_meme_rubrique')  . '</b>';
+	$icone =  $puce_rubrique . '<b>' . _T('info_meme_rubrique')  . '</b>';
+	
 
 	$retour = bandeau_titre_boite2($icone,  'article-24.gif','','',false)
 	. "\n<table class='spip_x-small' style='background-color: #e0e0e0;border: 0px; padding-left:4px;'>"
-	. $retour
-	. (($limit <= 0) ? ''
-	 : "<tr><td colspan='3' style='text-align: center'>+ $limit</td></tr>")
-	. "</table>";
+	. $retour;
+	
+	if (_MODE_MEME_RUBRIQUE == 'ok')
+	$retour .= (($limit <= 0) ? ''
+		: "<tr><td colspan='3' style='text-align: center'>+ $limit</td></tr>");
+
+	$retour .= "</table>";
 
 	if ($ajax) return $retour;
 
