@@ -15,31 +15,32 @@
 // puis les boutons
 // Feuilles de style admin : d'abord la CSS officielle, puis la perso
 
+
+// Compatibilite : on utilise stripos/strripos() qui n'existent pas en php4
+if (!function_exists('strripos')) {
+// http://doc.spip.org/@strripos
+	function strripos($botte, $aiguille) {
+		if (preg_match('@^(.*)' . preg_quote($aiguille, '@') . '@is',
+		$botte, $regs)) { 
+			return strlen($regs[1]);
+		}
+		return false;
+	}
+}
+if (!function_exists('stripos')) {
+// http://doc.spip.org/@stripos
+	function stripos($botte, $aiguille) {
+		if (preg_match('@^(.*)' . preg_quote($aiguille, '@') . '@isU',
+		$botte, $regs)) { 
+			return strlen($regs[1]);
+		}
+		return false;
+	}
+}
+
 // http://doc.spip.org/@affiche_boutons_admin
 function affiche_boutons_admin($contenu) {
 	include_spip('inc/filtres');
-
-	// Compatibilite : on utilise stripos/strripos() qui n'existent pas en php4
-	if (!function_exists('strripos')) {
-// http://doc.spip.org/@strripos
-		function strripos($botte, $aiguille) {
-			if (preg_match('@^(.*)' . preg_quote($aiguille, '@') . '@is',
-			$botte, $regs)) { 
-				return strlen($regs[1]);
-			}
-			return false;
-		}
-	}
-	if (!function_exists('stripos')) {
-// http://doc.spip.org/@stripos
-		function stripos($botte, $aiguille) {
-			if (preg_match('@^(.*)' . preg_quote($aiguille, '@') . '@isU',
-			$botte, $regs)) { 
-				return strlen($regs[1]);
-			}
-			return false;
-		}
-	}
 
 	// Inserer le css d'admin
 	$css = "<link rel='stylesheet' href='".url_absolue(find_in_path('spip_admin.css'))

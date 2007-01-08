@@ -1155,11 +1155,10 @@ function balise_CACHE_dist($p) {
 // #INSERT_HEAD
 // pour permettre aux plugins d'inserer des styles, js ou autre
 // dans l'entete sans modification du squelette
-// #INSERT_HEAD
 //
 // http://doc.spip.org/@balise_INSERT_HEAD_dist
 function balise_INSERT_HEAD_dist($p) {
-	$p->code = "(isset(\$Pile['flags']['insert_head'])?'':(pipeline('insert_head','') . vide(\$Pile['flags']['insert_head']=1)))";
+	$p->code = "pipeline('insert_head','<!-- insert_head -->')";
 	$p->interdire_scripts = false;
 	return $p;
 }
