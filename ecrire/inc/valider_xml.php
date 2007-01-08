@@ -65,7 +65,7 @@ function charger_dtd($data)
 	spip_log("Racine $topelement dans $grammaire ($rotlvl)");
 	$dtc = new DTC;
 	analyser_dtd($grammaire, $avail, $dtc);
-$r = $dtc->regles; ksort($r);foreach($r as $l => $v) echo "$l '$v'<br />\n";
+//$r = $dtc->regles; ksort($r);foreach($r as $l => $v) echo "$l '$v'<br />\n";
 	return $dtc;
 }
 
