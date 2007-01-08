@@ -222,7 +222,7 @@ else {
 
 	if ($ps) {
 		echo debut_cadre_enfonce();
-		echo "<div $dir_lang style='font-size 14px; ' class='verdana1'>", "<b>"._T('info_ps')."</b>", $ps, "</div>";
+		echo "<div $dir_lang class='verdana1 spip_small'>", "<b>"._T('info_ps')."</b>", $ps, "</div>";
 		echo fin_cadre_enfonce();
 	}
 

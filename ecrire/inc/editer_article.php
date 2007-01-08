@@ -269,8 +269,7 @@ function editer_article_chapo($chapo, $config, $aider)
 			"</td>" .
 			"<td style='width: 10px'>&nbsp;</td>" .
 			"<td valign='top' style='width: 50%'>" .
-			"<input type='text' name='virtuel' class='forml'
-		style='font-size: 10px;' value=\"$virtuel\" size='40' />" .
+			"<input type='text' name='virtuel' class='forml spip_xx-small' value=\"$virtuel\" size='40' />" .
 			"<input type='hidden' name='changer_virtuel' value='oui' />" .
 			"</td></tr></table>\n" .
 			"<span class='verdana1 spip_small'>" . _T('texte_article_virtuel_reference') . "</span>" .
