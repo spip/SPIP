@@ -35,6 +35,7 @@ function exec_admin_plugin() {
 	}
 
 	verif_plugin();
+	installe_plugins();
 	if (isset($_GET['surligne']))
 		$surligne = $_GET['surligne'];
 
