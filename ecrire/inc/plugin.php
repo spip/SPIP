@@ -249,6 +249,22 @@ function ordonne_plugin(){
 	ecrire_plugin_actifs($liste_triee);
 	ecrire_metas();
 }
+
+function desinstalle_un_plugin($plug,$prefix,$install){
+	// faire les include qui vont bien
+	foreach($install as $file){
+		$file = trim($file);
+		@include_once(_DIR_PLUGINS."$plug/$file");
+	}
+	$prefix_install = $prefix."_install";
+	if (!function_exists($prefix_install))
+		return false;
+	// voir si on a besoin de faire l'install
+	$prefix_install('uninstall');
+	$ok = $prefix_install('test');
+	return $ok;
+}
+
 // http://doc.spip.org/@installe_un_plugin
 function installe_un_plugin($plug,$prefix,$install){
 	// faire les include qui vont bien
@@ -284,6 +300,11 @@ function installe_plugins(){
 	}
 	ecrire_meta('plugin_installes',serialize($meta_plug_installes),'non');
 	ecrire_metas();
+}
+function plugin_est_installe($plug_path){
+	$plugin_installes = isset($GLOBALS['meta']['plugin_installes'])?unserialize($GLOBALS['meta']['plugin_installes']):array();
+	if (!$plugin_installes) return false;
+	return in_array($plug_path,$plugin_installes);
 }
 
 // lecture du fichier de configuration d'un plugin
