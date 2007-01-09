@@ -249,6 +249,7 @@ function ordonne_plugin(){
 	ecrire_plugin_actifs($liste_triee);
 	ecrire_metas();
 }
+// http://doc.spip.org/@installe_un_plugin
 function installe_un_plugin($plug,$prefix,$install){
 	// faire les include qui vont bien
 	foreach($install as $file){
@@ -267,6 +268,7 @@ function installe_un_plugin($plug,$prefix,$install){
 	return $ok; // le plugin est deja installe et ok
 }
 
+// http://doc.spip.org/@installe_plugins
 function installe_plugins(){
 	$meta_plug_installes = array();
 	$liste = liste_chemin_plugin_actifs();

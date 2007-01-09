@@ -42,6 +42,7 @@ function enregistre_modif_plugin(){
 	ecrire_metas();
 }
 
+// http://doc.spip.org/@action_activer_plugins_dist
 function action_activer_plugins_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
