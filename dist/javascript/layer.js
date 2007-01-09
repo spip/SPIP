@@ -40,7 +40,7 @@ function findObj_forcer(n) {
 function hide_obj(obj) {
 	var element;
 	if (element = findObj(obj)){
-		$(element).css("visibility","hidden");
+		jQuery(element).css("visibility","hidden");
 	}
 }
 
@@ -185,16 +185,17 @@ function lancer_recherche(champ, cible) {} // obsolete
 function verifForm(racine) {
 	if(!jQuery.browser.mozilla) return;
   racine = racine || document;
-  $("input.forml,input.formo,textarea.forml,textarea.formo",racine)
+  jQuery("input.forml,input.formo,textarea.forml,textarea.formo",racine)
   .each(function(){
-  	var jField = $(this);
-    var w = jField.width();
+  	var jField = jQuery(this);
+    var w = jField.css('width');
     if(!w) {
-      jField.width("95%");
+      jField.css('width','95%');
     } else {
-      w -= (parseInt(jField.css("borderLeftWidth"))+parseInt(jField.css("borderRightWidth"))+
-    	parseInt(jField.css("paddingLeft"))+parseInt(jField.css("paddingRight")));
-    	jField.width(w+"px");
+      w = parseInt(w)-
+      (parseInt(jField.css("borderLeftWidth"))+parseInt(jField.css("borderRightWidth"))+
+        parseInt(jField.css("paddingLeft"))+parseInt(jField.css("paddingRight")));
+        jField.css('width', w+'px');
     }
   });
 }
@@ -212,7 +213,7 @@ function verifForm(racine) {
 
 function AjaxSqueeze(trig, id, callback)
 {
-  var target = $('#'+id);
+  var target = jQuery('#'+id);
   
 	// position du demandeur dans le DOM (le donner direct serait mieux)
 	if (!target.size()) {return true;}
@@ -245,13 +246,13 @@ function AjaxSqueezeNode(trig, target, f)
 	if (typeof(trig) == 'string') {
 		i = trig.split('?');
 		trig = i[0] +'?var_ajaxcharset=utf-8&' + i[1];
-    return $.ajax({"url":trig,"complete":function(res,status){
+    return jQuery.ajax({"url":trig,"complete":function(res,status){
 			if(res.aborted) return;
 			if(status=='error') {
-				return $(target).html('Erreur HTTP');
+				return jQuery(target).html('Erreur HTTP');
 			}
 			// Inject the HTML into all the matched elements
-			$(target).html(res.responseText)
+			jQuery(target).html(res.responseText)
 		  // Execute all the scripts inside of the newly-injected HTML
 		  .evalScripts()
 		  // Execute callback
@@ -260,7 +261,7 @@ function AjaxSqueezeNode(trig, target, f)
 		}});
   }
  
- $(trig).ajaxSubmit({"target":target,
+ jQuery(trig).ajaxSubmit({"target":target,
  "after":function(res,status){
 		if(status=='error') return this.html('Erreur HTTP');
 		callback(res,status);
@@ -286,7 +287,7 @@ function charger_id_url(myUrl, myField, jjscript)
 	if (!Field) return true;
 
 	if (!myUrl) {
-		$(Field).empty();
+		jQuery(Field).empty();
 		retour_id_url(Field, jjscript);
 		return true; // url vide, c'est un self complet
 	} else {
@@ -300,7 +301,7 @@ function charger_node_url(myUrl, Field, jjscript, img)
 {
 	// disponible en cache ?
 	if (url_chargee[myUrl]) {
-			var el = $(Field).html(url_chargee[myUrl])[0];
+			var el = jQuery(Field).html(url_chargee[myUrl])[0];
 			retour_id_url(el, jjscript);
 			triggerAjaxLoad(el);
 			return false; 
@@ -321,7 +322,7 @@ function charger_node_url(myUrl, Field, jjscript, img)
 
 function retour_id_url(Field, jjscript)
 {
-	$(Field).css({'visibility':'visible','display':'block'});
+	jQuery(Field).css({'visibility':'visible','display':'block'});
 	if (jjscript) jjscript();
 }
 

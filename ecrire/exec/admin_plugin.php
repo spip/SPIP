@@ -233,18 +233,17 @@ function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
 	$visible = @isset($deplie[$current_dir]);
 	$maxiter=1000;
 	echo http_script("
-	$(document).ready(
-		function(){
-			$('input.check').click(function(){\$(this).parent().toggleClass('nomplugin_on');});
+	jQuery(function(){
+		jQuery('input.check').click(function(){
+			jQuery(this).parent().toggleClass('nomplugin_on');
 		});
-	$(document).ready(function(){
-		$('div.nomplugin a[@rel=info]').click(function() {
-			if (!$(this).siblings('div.info').html()) {
-				$(this).siblings('div.info').prepend(ajax_image_searching).load(
-					$(this).href().replace(/admin_plugin/, 'info_plugin')
+		jQuery('div.nomplugin a[@rel=info]').click(function(){
+			if (!jQuery(this).siblings('div.info').html()) {
+				jQuery(this).siblings('div.info').prepend(ajax_image_searching).load(
+					jQuery(this).attr('href').replace(/admin_plugin/, 'info_plugin')
 				);
 			} else {
-				$(this).siblings('div.info').toggle();
+				jQuery(this).siblings('div.info').toggle();
 			}
 			return false;
 		});

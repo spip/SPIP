@@ -1,73 +1,73 @@
 function deplie_arbre(){
-	tree = $('#articles_tous');
-	$('ul:hidden',tree).siblings('img.expandImage').each(function(){$(this).bascule()});
+	tree = jQuery('#articles_tous');
+	jQuery('ul:hidden',tree).siblings('img.expandImage').each(function(){jQuery(this).bascule()});
 }
 function plie_arbre(){
-	tree = $('#articles_tous');
-	$('#articles_tous ul').hide();
-	$('img.expandImage', tree).attr('src',img_deplierhaut);
+	tree = jQuery('#articles_tous');
+	jQuery('#articles_tous ul').hide();
+	jQuery('img.expandImage', tree).attr('src',img_deplierhaut);
 }
 function annuler_deplacement(){
-	liste = $("#deplacements").text();
+	liste = jQuery("#deplacements").text();
 	tableau = liste.split("\n");
 	if (tableau.length>0){
 		action = tableau[tableau.length-1];
 		tab = action.split(":");
-		$("#"+tab[2]).insertion(tab[0],$("#"+tab[0]).parent().id());
+		jQuery("#"+tab[2]).insertion(tab[0],jQuery("#"+tab[0]).parent().attr('id'));
 		tableau.pop();
-		$("#deplacements").html(tableau.join("\n"));
-		if (tableau.length==0) $("#cancel").hide();
-		if (tableau.length==0) $("#apply").hide();
+		jQuery("#deplacements").html(tableau.join("\n"));
+		if (tableau.length==0) jQuery("#cancel").hide();
+		if (tableau.length==0) jQuery("#apply").hide();
 	}
 }
 
 jQuery.fn.set_expandImage = function(){
-	$('ul:hidden',$(this)).parent().prepend('<img src="'+img_deplierhaut+'" class="expandImage" />');
-	$('ul:visible',$(this)).parent().prepend('<img src="'+img_deplierbas+'" class="expandImage" />');
-	$('img.expandImage', $(this)).click(function (){$(this).bascule();});
-	return $(this);
+	jQuery('ul:hidden',jQuery(this)).parent().prepend('<img src="'+img_deplierhaut+'" class="expandImage" />');
+	jQuery('ul:visible',jQuery(this)).parent().prepend('<img src="'+img_deplierbas+'" class="expandImage" />');
+	jQuery('img.expandImage', jQuery(this)).click(function (){jQuery(this).bascule();});
+	return jQuery(this);
 }
 
 var recall;
 jQuery.fn.deplie = function(){
-	$(this).show();
-	$(this).siblings('img.expandImage').eq(0).attr('src',img_deplierbas);
-	$(this).children('li').children('a.ajax').each(function(){
-		$(this).before("<div>"+ajax_image_searching+"</div>");
-		var id = $(this).parent().parent().id();
-		$(this).parent().parent().load($(this).href()+"&var_ajaxcharset=utf-8",function(){$("#"+id).set_expandImage().set_droppables();jQuery.recallDroppables();});
+	jQuery(this).show();
+	jQuery(this).siblings('img.expandImage').eq(0).attr('src',img_deplierbas);
+	jQuery(this).children('li').children('a.ajax').each(function(){
+		jQuery(this).before("<div>"+ajax_image_searching+"</div>");
+		var id = jQuery(this).parent().parent().attr('id');
+		jQuery(this).parent().parent().load(jQuery(this).attr('href')+"&var_ajaxcharset=utf-8",function(){jQuery("#"+id).set_expandImage().set_droppables();jQuery.recallDroppables();});
 	});
 	recall = true;
 	jQuery.recallDroppables();
-	return $(this);
+	return jQuery(this);
 }
 
 jQuery.fn.bascule = function() {
-	subbranch = $(this).siblings('ul').eq(0);
+	subbranch = jQuery(this).siblings('ul').eq(0);
 	if (subbranch.is(':hidden')) {
 		subbranch.show();
-		$(this).attr('src',img_deplierbas);
+		jQuery(this).attr('src',img_deplierbas);
 		subbranch.children('li').children('a.ajax').each(function(){
-			$(this).before("<div>"+ajax_image_searching+"</div>");
-			var id = $(this).parent().parent().id();
-			$(this).parent().parent().load($(this).href()+"&var_ajaxcharset=utf-8",function(){$("#"+id).set_expandImage().set_droppables();});
+			jQuery(this).before("<div>"+ajax_image_searching+"</div>");
+			var id = jQuery(this).parent().parent().attr('id');
+			jQuery(this).parent().parent().load(jQuery(this).attr('href')+"&var_ajaxcharset=utf-8",function(){jQuery("#"+id).set_expandImage().set_droppables();});
 		});
 	} else {
 		subbranch.hide();
-		$(this).attr('src',img_deplierhaut);
+		jQuery(this).attr('src',img_deplierhaut);
 	}
-	return $(this);
+	return jQuery(this);
 }
 jQuery.fn.insertion = function(dropped_id,origine_id){
-	dropped = $('#'+dropped_id);
-	subbranch = $(this).children('ul').eq(0);
+	dropped = jQuery('#'+dropped_id);
+	subbranch = jQuery(this).children('ul').eq(0);
 	if (subbranch.size() == 0) {
-		$(this).prepend('<img src="'+img_deplierbas+'" width="16" height="16" class="expandImage" />');
-		id = $(this).id();
+		jQuery(this).prepend('<img src="'+img_deplierbas+'" width="16" height="16" class="expandImage" />');
+		id = jQuery(this).attr('id');
 		id = id.split("-"); id=id[1]
-		$(this).append("<ul id='ul"+id+"' ></ul>");
-		$(this).children('img.expandImage').click(function (){$(this).bascule();});
-		subbranch = $(this).children('ul').eq(0);
+		jQuery(this).append("<ul id='ul"+id+"' ></ul>");
+		jQuery(this).children('img.expandImage').click(function (){jQuery(this).bascule();});
+		subbranch = jQuery(this).children('ul').eq(0);
 	}
 	if((dropped.is('li.art')) && (subbranch.children('li.rub').length>0)){
 		subbranch.end().children('li.rub').eq(0).before(dropped);
@@ -79,8 +79,8 @@ jQuery.fn.insertion = function(dropped_id,origine_id){
 		subbranch.deplie();
 	}
 
-	oldParent = $('#'+origine_id);
-	oldBranches = $('li', oldParent);
+	oldParent = jQuery('#'+origine_id);
+	oldBranches = jQuery('li', oldParent);
 	if (oldBranches.size() == 0) {
 		oldParent.siblings('img.expandImage').remove();
 		oldParent.end().remove();
@@ -88,7 +88,7 @@ jQuery.fn.insertion = function(dropped_id,origine_id){
 }
 
 jQuery.fn.set_droppables = function(){
-	$('span.holder',$(this)).Droppable(
+	jQuery('span.holder',jQuery(this)).Droppable(
 		{
 			accept			: 'treeItem',
 			hoverclass		: 'none',
@@ -96,9 +96,9 @@ jQuery.fn.set_droppables = function(){
 			tollerance		: 'intersect',
 			onhover			: function(dragged)
 			{
-				$(this).parent().addClass('selected');
+				jQuery(this).parent().addClass('selected');
 				if (!this.expanded) {
-					subbranch = $(this).siblings('ul').eq(0);
+					subbranch = jQuery(this).siblings('ul').eq(0);
 					if (subbranch.is(':hidden')){
 						subbranch.pause(1000).deplie();
 						this.expanded = true;
@@ -107,9 +107,9 @@ jQuery.fn.set_droppables = function(){
 			},
 			onout			: function()
 			{
-				$(this).parent().removeClass('selected');
+				jQuery(this).parent().removeClass('selected');
 				if (this.expanded){
-					subbranch = $(this).siblings('ul').eq(0);
+					subbranch = jQuery(this).siblings('ul').eq(0);
 					subbranch.unpause();
 					if (recall){
 						recall=false;
@@ -119,23 +119,23 @@ jQuery.fn.set_droppables = function(){
 			},
 			ondrop			: function(dropped)
 			{
-				$(this).parent().removeClass('selected');
-				subbranch = $(this).siblings('ul').eq(0);
+				jQuery(this).parent().removeClass('selected');
+				subbranch = jQuery(this).siblings('ul').eq(0);
 				if (this.expanded)
 					subbranch.unpause();
-				var target=$(this).parent().id();
-				var quoi=$(dropped).id();
-				var source=$(dropped).parent().parent().id(); // il faut stocker l'id du li car le ul peut avoir disparu au moment du cancel
+				var target=jQuery(this).parent().attr('id');
+				var quoi=jQuery(dropped).attr('id');
+				var source=jQuery(dropped).parent().parent().attr('id'); // il faut stocker l'id du li car le ul peut avoir disparu au moment du cancel
 				action=quoi+":"+target+":"+source;
-				var dep = $("#deplacements");
+				var dep = jQuery("#deplacements");
 				dep.html(dep.text()+"\n"+action);
-				$("#apply").show();
-				$("#cancel").show();
-				$(this).parent().insertion(quoi,$(dropped).parent().id());
+				jQuery("#apply").show();
+				jQuery("#cancel").show();
+				jQuery(this).parent().insertion(quoi,jQuery(dropped).parent().attr('id'));
 			}
 		}
 	);
-	$('li.treeItem',$(this)).Draggable(
+	jQuery('li.treeItem',jQuery(this)).Draggable(
 		{
 			revert		: true,
 			ghosting : true,
@@ -144,10 +144,10 @@ jQuery.fn.set_droppables = function(){
 	);
 }
 
-$(document).ready(
+jQuery(
 	function()
 	{
-		$('#articles_tous').set_expandImage();
-		$('#articles_tous').set_droppables();
+		jQuery('#articles_tous').set_expandImage();
+		jQuery('#articles_tous').set_droppables();
 	}
 );
