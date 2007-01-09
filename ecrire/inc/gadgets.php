@@ -485,16 +485,16 @@ function repercuter_gadgets($id_rubrique) {
 
 	return
 	 "
-	$('#gadget-rubriques')
+	jQuery('#gadget-rubriques')
 	.load('./?exec=gadgets\\x26gadget=rubriques$ajax');" #pas de $rub
 	."
-	$('#gadget-navigation')
+	jQuery('#gadget-navigation')
 	.load('./?exec=gadgets\\x26gadget=navigation$rub');"
 	."
-	$('#gadget-agenda')
+	jQuery('#gadget-agenda')
 	.load('./?exec=gadgets\\x26gadget=agenda$rub');"
 	."
-	$('#gadget-messagerie')
+	jQuery('#gadget-messagerie')
 	.load('./?exec=gadgets\\x26gadget=messagerie$rub');";
 }
 
