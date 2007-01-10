@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/plugin');
+// http://doc.spip.org/@action_desinstaller_plugin_dist
 function action_desinstaller_plugin_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');

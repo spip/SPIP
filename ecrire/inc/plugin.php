@@ -250,6 +250,7 @@ function ordonne_plugin(){
 	ecrire_metas();
 }
 
+// http://doc.spip.org/@desinstalle_un_plugin
 function desinstalle_un_plugin($plug,$prefix,$install){
 	// faire les include qui vont bien
 	foreach($install as $file){
@@ -301,6 +302,7 @@ function installe_plugins(){
 	ecrire_meta('plugin_installes',serialize($meta_plug_installes),'non');
 	ecrire_metas();
 }
+// http://doc.spip.org/@plugin_est_installe
 function plugin_est_installe($plug_path){
 	$plugin_installes = isset($GLOBALS['meta']['plugin_installes'])?unserialize($GLOBALS['meta']['plugin_installes']):array();
 	if (!$plugin_installes) return false;
