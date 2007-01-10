@@ -1609,24 +1609,54 @@ function direction_css ($css, $voulue='') {
 		return $f;
 
 	// 2.
-	$f = sous_repertoire (_DIR_VAR, 'cache-css')
+	$dir_var = sous_repertoire (_DIR_VAR, 'cache-css');
+	$f = $dir_var
 		. preg_replace(',.*/(.*?)(_rtl)?\.css,', '\1', $css)
 		. '.' . substr(md5($css), 0,4) . '_' . $ndir . '.css';
 
-	if ((@filemtime($f) > @filemtime($css))
-	AND ($GLOBALS['var_mode'] != 'recalcul'))
-		return $f;
-
-	if (!lire_fichier($css, $contenu))
-		return $css;
+	// la css peut etre distante (url absolue !)
+	if (preg_match(",^http:,i",$css)){
+		include_spip('inc/distant');
+		$contenu = recuperer_page($css);
+		if (!$contenu) return $css;
+	}
+	else {
+		if ((@filemtime($f) > @filemtime($css))
+			AND ($GLOBALS['var_mode'] != 'recalcul'))
+			return $f;
+		if (!lire_fichier($css, $contenu))
+			return $css;
+	}
 
 	$contenu = str_replace(
 		array('right', 'left', '@@@@L E F T@@@@'),
 		array('@@@@L E F T@@@@', 'right', 'left'),
 		$contenu);
 	
+	// reperer les @import auxquels il faut propager le direction_css
+	preg_match_all(",\@import\s*url\s*\(\s*['\"]?([^'\"/][^:]*)['\"]?\s*\),Uims",$contenu,$regs);
+	$src = array();$src_direction_css = array();$src_faux_abs=array();
+	$d = dirname($css);
+	foreach($regs[1] as $k=>$import_css){
+		$css_direction = direction_css("$d/$import_css",$voulue);
+		// si la css_direction est dans le meme path que la css d'origine, on tronque le path, elle sera passee en absolue
+		if (substr($css_direction,0,strlen($d)+1)=="$d/") $css_direction = substr($css_direction,strlen($d)+1);
+		// si la css_direction commence par $dir_var on la fait passer pour une absolue
+		elseif (substr($css_direction,0,strlen($dir_var))==$dir_var) {
+			$css_direction = substr($css_direction,strlen($dir_var));
+			$src_faux_abs["/@@@@@@/".$css_direction] = $css_direction;
+			$css_direction = "/@@@@@@/".$css_direction;
+		}
+		$src[] = $regs[0][$k];
+		$src_direction_css[] = str_replace($import_css,$css_direction,$regs[0][$k]);
+	}
+	$contenu = str_replace($src,$src_direction_css,$contenu);
+	
 	// passer les url relatives a la css d'origine en url absolues
-	$contenu = preg_replace(",url\(([^/][^:]*)\),Uims","url($path\\1)",$contenu);
+	$contenu = preg_replace(",url\s*\(\s*['\"]?([^'\"/][^:]*)['\"]?\s*\),Uims","url($path\\1)",$contenu);
+	// virer les fausses url absolues que l'on a mis dans les import
+	if (count($src_faux_abs))
+		$contenu = str_replace(array_keys($src_faux_abs),$src_faux_abs,$contenu);
 
 	if (!ecrire_fichier($f, $contenu))
 		return $css;
@@ -1655,7 +1685,7 @@ function url_absolue_css ($css) {
 		return $css;
 
 	// passer les url relatives a la css d'origine en url absolues
-	$contenu = preg_replace(",url\(([^/][^:]*)\),Uims","url($path\\1)",$contenu);
+	$contenu = preg_replace(",url\s*\(\s*['\"]?([^'\"/][^:]*)['\"]?\s*\),Uims","url($path\\1)",$contenu);
 
 	// ecrire la css
 	if (!ecrire_fichier($f, $contenu))
