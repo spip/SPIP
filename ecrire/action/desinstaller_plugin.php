@@ -23,7 +23,7 @@ function action_desinstaller_plugin_dist() {
 		$etat = desinstalle_un_plugin($plug_file,$infos['prefix'],$infos['install']);
 		// desactiver si il a bien ete desinstalle
 		if (!$etat)
-			ecrire_plugin_actifs($plug_file,false,'enleve');
+			ecrire_plugin_actifs(array($plug_file),false,'enleve');
 		ecrire_metas();
 	}
 	if ($redirect = _request('redirect')){

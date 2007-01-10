@@ -289,9 +289,9 @@ function ligne_plug($plug_file, $actif, $id){
 	// bouton de desinstallation
 	if ($actif && plugin_est_installe($plug_file)){
 		$s .= "<div style='float:$spip_lang_right' class='spip_pack'>";
+		$action = generer_action_auteur('desinstaller_plugin',$plug_file,generer_url_ecrire('admin_plugin'));
 		$s .= "<a href='$action'>"._T('bouton_effacer_tout')."</a>";
 		$s .= http_img_pack('spip-pack-24.png','spip-pack','','spip-pack');
-		$action = generer_action_auteur('desinstaller_plugin',$plug_file,generer_url_ecrire('admin_plugin'));
 		$s .= "</div>";
 	}
 
