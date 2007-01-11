@@ -65,7 +65,14 @@ function charger_dtd($data)
 	spip_log("Racine $topelement dans $grammaire ($rotlvl)");
 	$dtc = new DTC;
 	analyser_dtd($grammaire, $avail, $dtc);
-//$r = $dtc->regles; ksort($r);foreach($r as $l => $v) echo "$l '$v'<br />\n";
+
+	// tri final pour presenter les suggestions de corrections
+	foreach ($dtc->peres as $k => $v) {
+		asort($v);
+		$dtc->peres[$k] = $v;
+	} 
+
+#	$r = $dtc->regles; ksort($r);foreach($r as $l => $v) echo "<b>$l</b> '$v' ", join (', ',array_keys($dtc->attributs[$l])), "<br />\n";
 	return $dtc;
 }
 
@@ -80,134 +87,204 @@ function charger_dtd($data)
 // http://doc.spip.org/@compilerRegle
 function compilerRegle($val)
 {
-	$x = str_replace('()','',
+	$x = str_replace('\s*()\s*','',
 		preg_replace('/\s*,\s*/','',
 		preg_replace('/(\w+)\s*/','(\1 )',
-		preg_replace('/\s*\|\s*/','|',
-		preg_replace('/#\w+\s*[,|]?\s*/','', $val)))));
+		preg_replace('/\s*([(+*|])\s*/','\1',
+		preg_replace('/\s*#\w+\s*[,|]?\s*/','', $val)))));
 	return $x;
 }
 
 
 // http://doc.spip.org/@analyser_dtd
-function analyser_dtd($grammaire, $avail, &$dtc)
+function analyser_dtd($loc, $avail, &$dtc)
 {
-	static $trace = array(); // pour debug
+	if ($avail == 'SYSTEM')
+	  $file = $loc;
+	else {
+	  $file = sous_repertoire(_DIR_DTD);
+	  $file .= preg_replace('/[^\w.]/','_', $loc);
+	}
 
 	$dtd = '';
-	if ($avail == 'SYSTEM')
-	  $file = $grammaire;
-	else
-	  $file = sous_repertoire(_DIR_DTD);
-	  $file .= preg_replace('/[^\w.]/','_', $grammaire);
-
 	if (@is_readable($file)) {
 		lire_fichier($file, $dtd);
 	} else {
 		if ($avail == 'PUBLIC') {
 			include_spip('inc/distant');
-			if ($dtd = recuperer_page($grammaire))
+			if ($dtd = recuperer_page($loc))
 				ecrire_fichier($file, $dtd); 
 		}
 	}
-	if (!$dtd) {
-		spip_log("DTD $grammaire inaccessible");
+
+	if (!$dtd = ltrim($dtd)) {
+		spip_log("DTD $loc inaccessible");
 		return array();
 	}
 
+	while ($dtd) {
+		if ($dtd[0] != '<')
+			$r = analyser_dtd_lexeme($dtd, $dtc, $loc);
+		elseif ($dtd[1] != '!')
+			$r = analyser_dtd_pi($dtd, $dtc, $loc);
+		else switch ($dtd[3]) {
+	  case '%' : $r = analyser_dtd_data($dtd, $dtc, $loc); break;
+	  case 'T' : $r = analyser_dtd_attlist($dtd, $dtc, $loc);break;
+	  case 'L' : $r = analyser_dtd_element($dtd, $dtc, $loc);break;
+	  case 'N' : $r = analyser_dtd_entity($dtd, $dtc, $loc);break;
+	  case 'O' : $r = analyser_dtd_notation($dtd, $dtc, $loc);break;
+	  case '-' : $r = analyser_dtd_comment($dtd, $dtc, $loc); break;
+	  default: $r = -1;
+	  }
+
+	  if (!is_string($r)) {
+	    spip_log("erreur $r dans la DTD  " . substr($dtd,0,256) . ".....");
+	    return array();
+	  }
+	  $dtd = $r;
+ 
+	}
+	spip_log("DTD $avail $loc " . count($dtc->macros)  . ' macros, ' . count($dtc->elements)  . ' elements, ' . count($dtc->attributs) . " listes d'attributs, " . count($dtc->entites) . " entites");
+}
+
+function analyser_dtd_comment($dtd, &$dtc, $grammaire){
 	// ejecter les commentaires, surtout quand ils contiennent du code.
 	// Option /s car sur plusieurs lignes parfois
 
-	$dtd = preg_replace('/<!--.*?-->/s','',$dtd);
+	if (!preg_match('/^<!--.*?-->\s*(.*)$/s',$dtd, $m))
+		return -6;
+	return $m[1];
+}
 
-	if (preg_match_all('/<!ENTITY\s+(%?)\s*([\w;.-]+)\s+(PUBLIC|SYSTEM)?\s*"([^"]*)"\s*("([^"]*)")?\s*>/', $dtd, $r, PREG_SET_ORDER)) {
-		foreach($r as $m) {
-		  list($t, $term, $nom, $type, $val, $q, $alt) = $m;
-		  if ($type AND $alt) {
-		    // valeur par defaut de $alt obscure. A etudier.
-		    if (strpos($alt, '/') === false)
+function analyser_dtd_pi($dtd, &$dtc, $grammaire){
+	if (!preg_match('/^<\?.*?>\s*(.*)$/s', $dtd, $m))
+		return -10;
+	return $m[1];
+}
+
+function analyser_dtd_lexeme($dtd, &$dtc, $grammaire){
+	if (!preg_match('/^%([\w;.-]+);\s*(.*)$/s', $dtd, $m))
+		return -9;
+
+	list(,$s, $dtd) = $m;
+	$n = $dtc->macros[$s];
+	if (is_array($n)) {
+	    // en cas d'inclusion, l'espace de nom est le meme
+		analyser_dtd($n[1], $n[0], $dtc);
+	}
+	return $dtd;
+}
+
+// il faudrait prevoir plusieurs niveaux d'inclusion.
+// (Ruby en utilise mais l'erreur est transparente. Scandaleux coup de pot)
+
+function analyser_dtd_data($dtd, &$dtc, $grammaire){
+	if (!preg_match('/^<!\[%([^;]*);\s*\[\s*(.*?)\]\]>\s*(.*)$/s',$dtd, $m))
+		return -6;
+	if ($dtc->macros[$m[1]] == 'INCLUDE')
+		$retour = $m[2] . $m[3];
+	else $retour = $m[3]; 
+	return $retour;
+}
+
+function analyser_dtd_notation($dtd, &$dtc, $grammaire){
+	if (!preg_match('/^<!NOTATION.*?>\s*(.*)$/s',$dtd, $m))
+		return -8;
+	spip_log("analyser_dtd_notation a ecrire");
+	return $m[1];
+}
+
+function analyser_dtd_entity($dtd, &$dtc, $grammaire)
+{
+	if (!preg_match('/^<!ENTITY\s+(%?)\s*([\w;.-]+)\s+(PUBLIC|SYSTEM|INCLUDE|IGNORE)?\s*"([^"]*)"\s*("([^"]*)")?\s*>\s*(.*)$/s', $dtd, $m))
+		return -2;
+
+	list($t, $term, $nom, $type, $val, $q, $alt, $dtd) = $m;
+	if  (!$term)
+		$dtc->entites[$nom] = $val;
+	elseif (!$type)
+		$dtc->macros[$nom] = expanserEntite($val, $dtc->macros);
+	elseif (!$alt)
+		$dtc->macros[$nom] = $alt;
+	else {
+		if (strpos($alt, '/') === false)
 			$alt = preg_replace(',/[^/]+$,', '/', $grammaire)
 			. ($alt ? $alt : "loose.dtd")  ;
-		    // en cas d'inclusion, l'espace de nom est le meme
-		    analyser_dtd($alt, $type, $dtc);
-		  }
-		  elseif (!$term) {
-		    $dtc->entites[$nom] = $val;
-		  }
-		  else {
-		    $dtc->macros[$nom] = expanserEntite($val, $dtc->macros) ;
-		  }
-		}
+		$dtc->macros[$nom] = array($type, $alt);
+	} 
+
+	return $dtd;
+}
+
+// Dresser le tableau des filles potentielles de l'element
+// pour traquer tres vite les illegitimes.
+// Si la regle a au moins une sequence (i.e. une virgule)
+// ou n'est pas une itération (i.e. se termine par * ou +)
+// en faire une RegExp qu'on appliquera aux balises rencontrees.
+// Sinon, conserver seulement le type de l'iteration car la traque
+// aura fait l'essentiel du controle sans memorisation des balises.
+// Fin du controle en finElement
+
+function analyser_dtd_element($dtd, &$dtc, $grammaire)
+{
+	if (!preg_match('/^<!ELEMENT\s+(\S+)\s+([^>]*)>\s*(.*)$/s', $dtd, $m))
+		return -3;
+
+	list(,$nom, $val, $dtd) = $m;
+	$nom = expanserEntite($nom, $dtc->macros);
+	$val = compilerRegle(expanserEntite($val, $dtc->macros));
+	if (isset($dtc->elements[$nom])) {
+		spip_log("double definition de $nom dans la DTD");
+		return -4;
 	}
+	$filles = array();
+	if ($val == '(EMPTY )')
+		$dtc->regles[$nom] = 'EMPTY';
+	elseif  ($val == '(ANY )') 
+		$dtc->regles[$nom] = 'ANY';
+	else {
+		$last = substr($val,-1);
+		if (preg_match('/ \w/', $val)
+		OR strpos('*+', $last) === false)
+			$dtc->regles[$nom] = "/^$val$/";
+		else
+			$dtc->regles[$nom] = $last;
+			$filles = array_values(preg_split('/\W+/', $val,-1, PREG_SPLIT_NO_EMPTY));
 
-	// Dresser le tableau des filles potentielles de l'element
-	// pour traquer tres vite les illegitimes.
-	// Si la regle a au moins une sequence (i.e. une virgule)
-	// ou n'est pas une itération (i.e. se termine par * ou +)
-	// en faire une RegExp qu'on appliquera aux balises rencontrees.
-	// Sinon, conserver seulement le type de l'iteration car la traque
-	// aura fait l'essentiel du controle sans memorisation des balises.
-	// Fin du controle en finElement
-	if (preg_match_all('/<!ELEMENT\s+(\S+)\s+([^>]*)>/', $dtd, $r, PREG_SET_ORDER)) {
-		foreach($r as $m) {
-			list(,$nom, $val) = $m;
-			$nom = expanserEntite($nom, $dtc->macros);
-			$val = compilerRegle(expanserEntite($val, $dtc->macros));
-			if (isset($dtc->elements[$nom])) {
-			  spip_log("double definition de $nom dans la DTD");
-			  return;
+			foreach ($filles as $k) {
+				if (!isset($dtc->peres[$k]))
+				  $dtc->peres[$k] = array();
+				if (!in_array($nom, $dtc->peres[$k]))
+					$dtc->peres[$k][]= $nom;
 			}
-			$filles = array();
-			if ($val == '(EMPTY )')
-				$dtc->regles[$nom] = 'EMPTY';
-			elseif  ($val == '(ANY )') 
-				$dtc->regles[$nom] = 'ANY';
-			else {
-				$last = substr($val,-1);
-				if (preg_match('/ \w/', $val)
-				OR strpos('*+', $last) === false)
-					$dtc->regles[$nom] = "/^$val$/";
-				else
-					$dtc->regles[$nom] = $last;
-				$filles = array_values(preg_split('/\W+/', $val,-1, PREG_SPLIT_NO_EMPTY));
-
-				foreach ($filles as $k) {
-					if ((!isset($dtc->peres[$k]))
-					OR !in_array($nom, $dtc->peres[$k]))
-						$dtc->peres[$k][]= $nom;
-				}
-			}
-			$dtc->elements[$nom]= $filles;
-		}
-		// tri pour presenter les suggestions de corrections
-		foreach ($dtc->peres as $k => $v) {
-			asort($v);
-			$dtc->peres[$k] = $v;
-		} 
 	}
+	$dtc->elements[$nom]= $filles;
+	return $dtd;
+}
 
-	if (preg_match_all('/<!ATTLIST\s+(\S+)\s+([^>]*)>/', $dtd, $r, PREG_SET_ORDER)) {
-	  foreach($r as $m) {
-	    list(,$nom, $val) = $m;
-	    $nom = expanserEntite($nom, $dtc->macros);
-	    $val = expanserEntite($val, $dtc->macros);
-	    $att = array();
 
-	    if (preg_match_all("/\s*(\S+)\s+(([(][^)]*[)])|(\S+))\s+(\S+)(\s*'[^']*')?/", $val, $r2, PREG_SET_ORDER)) {
+function analyser_dtd_attlist($dtd, &$dtc, $grammaire)
+{
+	if (!preg_match('/^<!ATTLIST\s+(\S+)\s+([^>]*)>\s*(.*)/s', $dtd, $m))
+		return -5;
+
+	list(,$nom, $val, $dtd) = $m;
+	$nom = expanserEntite($nom, $dtc->macros);
+	$val = expanserEntite($val, $dtc->macros);
+	if (!isset($dtc->attributs[$nom]))
+		$dtc->attributs[$nom] = array();
+
+	if (preg_match_all("/\s*(\S+)\s+(([(][^)]*[)])|(\S+))\s+(\S+)(\s*'[^']*')?/", $val, $r2, PREG_SET_ORDER)) {
 		foreach($r2 as $m2) {
 			$v = preg_match('/^\w+$/', $m2[2]) ? $m2[2]
 			  : ('/^' . preg_replace('/\s+/', '', $m2[2]) . '$/');
 			$m21 = expanserEntite($m2[1], $dtc->macros);
 			$m25 = expanserEntite($m2[5], $dtc->macros);
-			$trace[$v] = 1;
-			$att[$m21] = array($v, $m25);
+			$dtc->attributs[$nom][$m21] = array($v, $m25);
 		}
-	    }
-	    $dtc->attributs[$nom] = $att;
-	  }
 	}
 
-	spip_log("DTD $avail $grammaire ". strlen($dtd) . ' octets ' . count($dtc->macros)  . ' macros, ' . count($dtc->elements)  . ' elements, ' . count($trace) . " types différents d'attributs " . count($dtc->entites) . " entites");
+	return $dtd;
 }
 
 
@@ -294,6 +371,7 @@ function validerAttribut($phraseur, $name, $val, $bal)
 		    $bons .
 		    "'";
 		$bons .= " style='font-weight: bold'";
+
 		$phraseur_xml->err[]= " <b>$name</b>"
 		. _L(' attribut inconnu de ')
 		. "<a$bons>$bal</a>"
@@ -462,6 +540,15 @@ function textElement($phraseur, $data)
 function PiElement($phraseur, $target, $data)
 {	xml_PiElement($phraseur, $target, $data);}
 
+// Denonciation des entitees XML inconnues
+// Pour contourner le bug de conception de SAX qui ne signale pas si elles
+// sont dans un attribut, les  entites les plus frequentes ont ete
+// transcodees par html2unicode au prealable.
+// On ne les verra donc pas passer a cette etape, contrairement a ce que 
+// le source de la page laisse legitimement supposer. 
+// Il faudrait en fait transcoder toutes les entites (sauf & < > ")
+// pour leur eviter ce bug.
+
 // http://doc.spip.org/@defautElement
 function defautElement($phraseur, $data)
 {	
@@ -476,6 +563,7 @@ function defautElement($phraseur, $data)
 				  . _L(' entite inconnue ')
 				  .  coordonnees_erreur($phraseur);
 		}
+
 	xml_defautElement($phraseur, $data);
 }
 
