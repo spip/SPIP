@@ -164,12 +164,9 @@ function mots_indexation($texte, $min_long = 3) {
 	include_spip('inc/charsets');
 	include_spip('inc/texte');
 
-	// Point d'entree pour traiter le texte avant indexation
-	$texte = pipeline('pre_indexation', $texte);
-
 	// Recuperer les parametres des modeles
 	$texte = traiter_modeles($texte, true);
-
+	
 	// Supprimer les tags HTML
 	$texte = preg_replace(',<.*>,Ums',' ',$texte);
 
@@ -181,7 +178,8 @@ function mots_indexation($texte, $min_long = 3) {
 		$texte_c = ' '.translitteration_complexe ($texte, 'AUTO', true);
 	else
 		$texte_c = '';
-	$texte = translitteration($texte).$texte_c;
+	$texte = translitteration($texte);
+	if($texte!=trim($texte_c)) $texte .= $texte_c;
 	# NB. tous les caracteres non translitteres sont retournes en utf-8
 
 	// OPTIONNEL //  Gestion du tiret '-' :
@@ -189,9 +187,11 @@ function mots_indexation($texte, $min_long = 3) {
 #	$texte = preg_replace(',(\w+)-(\w+),', '\1 \2 \1\2', $texte);
 
 	// Supprimer les caracteres de ponctuation, les guillemets...
-	$e = "],:;*\"!\r\n\t\\/)}{[|@<>$%'`?\~.^+(-";
+	$e = "],:;*\"!\r\n\t\\/)}{[|@<>$%'`?\~.^(";
 	$texte = strtr($texte, $e, ereg_replace('.', ' ', $e));
 
+	//delete  +\- not at the beginning of a word
+	$texte = preg_replace(",(?:\S)[\-+],"," ",$texte);
 	// Cas particulier : sigles d'au moins deux lettres
 	$texte = preg_replace("/ ([A-Z][0-9A-Z]{1,".($min_long - 1)."}) /",
 		' \\1___ ', $texte.' ');
@@ -723,12 +723,26 @@ AND rec.id_table = $id_table",
 // http://doc.spip.org/@requete_dico
 function requete_dico($val) {
 	$min_long = 3;
-
+	
+	preg_match(",^([+\-]?)(.*),",$val,$mod);
+	switch($mod[1]) {
+		case '':
+			$mode = "OR";
+			break;
+		case '+':
+			$mode = "AND";
+			break;
+		case '-':
+			$mode = "NOT";
+			break;
+	}
+	//set logical operator between the various where parts
+	$val = $mod[2];
 	// cas normal
 	if (strlen($val) > $min_long) {
-	  return array("dico LIKE "._q($val. "%"), "dico = " . _q($val));
+	  return array("dico LIKE "._q($val. "%"), "dico = " . _q($val),$mode);
 	} else
-	  return array("dico = "._q($val."___"), "dico = "._q($val."___"));
+	  return array("dico = "._q($val."___"), "dico = "._q($val."___"),$mode);
 }
 
 
@@ -740,16 +754,16 @@ function requete_hash ($rech) {
 	$s = mots_indexation($rech);
 	unset($dico);
 	unset($h);
-
+	
 	// cherche les mots dans le dico
 	while (list(, $val) = each($s)) {
-		list($rq, $rq_strict) = requete_dico ($val);
+		list($rq, $rq_strict,$mode) = requete_dico ($val);
 		if ($rq)
-			$dico[] = $rq;
+			$dico[$mode][$val] = $rq;
 		if ($rq_strict)
-			$dico_strict[] = $rq_strict;
+			$dico_strict[$mode][$val] = $rq_strict;
 	}
-
+	
 	// Attention en MySQL 3.x il faut passer par HEX(hash)
 	// alors qu'en MySQL 4.1 c'est interdit !
 	$vers = spip_query("SELECT VERSION() AS v");
@@ -764,29 +778,88 @@ function requete_hash ($rech) {
 	}
 
 	// compose la recherche dans l'index
-	if ($dico_strict) {
-		$result2 = spip_query("SELECT $select_hash FROM spip_index_dico WHERE "			.join(" OR ", $dico_strict));
+	$cond = "";
+	if ($dico_strict["OR"]) $cond = join(" OR ", $dico_strict["OR"]);
+		
+	if ($cond) {	
+		$result2 = spip_query("SELECT $select_hash FROM spip_index_dico WHERE ".$cond);
 
 		while ($row2 = spip_fetch_array($result2))
 			$h_strict[] = $hex_fmt.$row2['h'];
 	}
-	if ($dico) {
-		$result2 = spip_query("SELECT $select_hash FROM spip_index_dico WHERE " .join(" OR ", $dico));
+
+	$cond = "";
+	if ($dico_strict["AND"])	$cond = join(" OR ", $dico_strict["AND"]);
+	if ($cond) {	
+		$result2 = spip_query("SELECT $select_hash FROM spip_index_dico WHERE ".$cond);
+
+		while ($row2 = spip_fetch_array($result2))
+			$h_strict_and[] = $hex_fmt.$row2['h'];
+		
+	}
+
+	$cond = "";
+	if ($dico["OR"]) $cond = join(" OR ", $dico["OR"]);
+	if ($cond) {	
+		$result2 = spip_query("SELECT $select_hash FROM spip_index_dico WHERE ".$cond);
 
 		while ($row2 = spip_fetch_array($result2))
 			$h[] = $hex_fmt.$row2['h'];
 	}
+	
+	
+	$cond = "";
+	if ($dico["AND"])	$cond = join(" OR ", $dico["AND"]);
+	if ($cond) {	
+		$result2 = spip_query("SELECT $select_hash,dico FROM spip_index_dico WHERE ".$cond);
+
+		while ($row2 = spip_fetch_array($result2)) {
+			//store the condition that selected the hash (the word typed by the user)  
+			foreach($dico["AND"] as $key=>$val) {
+				$mot_and = substr($key,1);
+				if(strpos($row2['dico'],$mot_and)===0) 
+					$h_and[$mot_and][] = $hex_fmt.$row2['h'];
+			}
+		}
+	}
+		
+	$cond = "";
+	if ($dico["NOT"]) $cond = join(" OR ", $dico["NOT"]);
+		
+	if ($cond) {	
+		$result2 = spip_query("SELECT $select_hash FROM spip_index_dico WHERE ".$cond);
+
+		while ($row2 = spip_fetch_array($result2))
+			$h_not[] = $hex_fmt.$row2['h'];
+	}
+	
 	if ($h_strict)
 		$hash_recherche_strict = join(",", $h_strict);
 	else
 		$hash_recherche_strict = "0";
+		
+	if ($h_strict_and)
+		$hash_recherche_strict_and = join(",", $h_strict_and);
+	else
+		$hash_recherche_strict_and = "0";
 
 	if ($h)
 		$hash_recherche = join(",", $h);
 	else
 		$hash_recherche = "0";
 
-	return array($hash_recherche, $hash_recherche_strict);
+	if ($h_and) { 
+		foreach($h_and as $key=>$val)
+			$hash_recherche_and[$key] = join(",", $h_and[$key]);
+	} else
+		$hash_recherche_and = "0";
+
+	if ($h_not) 
+		$hash_recherche_not = join(",", $h_not);
+	else
+		$hash_recherche_not = "0";
+
+	return array($hash_recherche, $hash_recherche_strict, $hash_recherche_not, $hash_recherche_and, $hash_recherche_strict_and);
 }
 
 //
@@ -815,23 +888,63 @@ function prepare_recherche($recherche, $primary = 'id_article', $id_table='artic
 	if (!$cache[$recherche][$primary]) {
 		if (!$cache[$recherche]['hash'])
 			$cache[$recherche]['hash'] = requete_hash($recherche);
-		list($hash_recherche, $hash_recherche_strict)
+		list($hash_recherche, $hash_recherche_strict, $hash_recherche_not, $hash_recherche_and, $hash_recherche_strict_and)
 			= $cache[$recherche]['hash'];
 
 		$strict = array();
 		if ($hash_recherche_strict)
 			foreach (split(',',$hash_recherche_strict) as $h)
 				$strict[$h] = 99;
+		
+		if ($hash_recherche_strict_and)
+			foreach (split(',',$hash_recherche_strict_and) as $h)
+				$strict[$h] = 99;
 
 		$index_id_table = id_index_table($nom_table);
 		$points = array();
-		$s = spip_query("SELECT hash,points,id_objet as id FROM spip_index WHERE hash IN ($hash_recherche) AND id_table='$index_id_table'");
+		
+		$objet_and = array();
+		$object_not = array();
+		if($hash_recherche_and) {
+			//$hash_recherche_and is an array of mots=>comma separated hashes
+			$list_hashes = join(",",$hash_recherche_and);
+			$pow = 1;
+			foreach($hash_recherche_and as $key=>$val) {
+				$hash_groupes[] = "$pow*".calcul_mysql_in("hash",$val);
+				$pow *= 2; 
+			}
+			$count_groupes = join(" + ",$hash_groupes);
 			
-		while ($r = spip_fetch_array($s))
-			$points[$r['id']]
-			+= (1 + $strict[$r['hash']]) * $r['points'];
-		spip_free_result($s);
-		arsort($points, SORT_NUMERIC);
+			$s = spip_query("SELECT id_objet as id,COUNT(DISTINCT $count_groupes) as count_groupes FROM spip_index WHERE id_table='$index_id_table' AND hash IN ($list_hashes) GROUP BY id HAVING count_groupes=".count($hash_recherche_and));
+			//if no ids are found, pass at least id = 0 in order to exclude any result
+			$objet_and[] = 0;
+			while ($r = spip_fetch_array($s)) 
+				$objet_and[]=$r['id'];
+		}
+		if($hash_recherche_not) {
+			$s = spip_query("SELECT DISTINCT id_objet as id FROM spip_index WHERE hash IN ($hash_recherche_not) AND id_table='$index_id_table'");
+			while ($r = spip_fetch_array($s))
+				$objet_not[]=$r['id'];														
+		}
+		if(count($objet_and))
+			$list_and = " AND id_objet IN (".join(",",$objet_and).")";
+		if(count($objet_not))
+			$list_not = " AND id_objet NOT  IN (".join(",",$objet_not).")";
+		if($hash_recherche) {
+			$list_hash = " AND hash IN (".$hash_recherche.")";
+		}
+		
+		if($list_hash || $list_and || $list_not) {
+			$query = "SELECT hash,points,id_objet as id FROM spip_index WHERE id_table='$index_id_table'".$list_and.$list_not.$list_hash;  
+			
+			$s = spip_query($query);
+				
+			while ($r = spip_fetch_array($s))
+				$points[$r['id']]
+				+= (1 + $strict[$r['hash']]) * $r['points'];
+			spip_free_result($s);
+			arsort($points, SORT_NUMERIC);
+		}
 
 		# calculer le {id_article IN()} et le {... as points}
 		if (!count($points)) {
