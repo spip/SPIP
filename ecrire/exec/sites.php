@@ -32,18 +32,10 @@ function exec_sites_dist()
   global   $connect_statut,   $options,   $spip_lang_left,  $spip_lang_right, $spip_display;
 
   global
-  $cherche_mot,
-  $select_groupe, 
-  $id_syndic,
-  $miroir,
-  $moderation,
-  $oubli,
-  $resume,
-  $syndication,
-  $syndication_old,
-  $url,
-  $url_site,
-  $url_syndic;
+    $cherche_mot,
+    $select_groupe, 
+    $id_parent,
+    $id_syndic;
 
   $id_rubrique = intval($id_parent); // pas toujours present, mais tant pis.
   $id_syndic = intval($id_syndic);
@@ -244,15 +236,6 @@ if ($flag_administrable) {
  }
 
 
-# appliquer les choix concernant le resume (a passer dans editer_site)
-if ($flag_editable AND ($resume == 'oui' OR $resume == 'non')) {
-	spip_query("UPDATE spip_syndic SET resume='$resume'	WHERE id_syndic=$id_syndic");
-	include_spip('inc/syndication');
-	syndic_a_jour($id_syndic);
-} else $resume = '';
-if (!$resume AND !$resume = $row['resume']) $resume = 'oui';
-
-
 if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 	echo "<p class='verdana1 spip_medium'><a href='".htmlspecialchars($url_syndic)."'>",	http_img_pack('feed.png', 'RSS', ''),	'</a> <b>'._T('info_site_syndique').'</b></p>';
 
@@ -299,106 +282,94 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 	// Options
 	if ($flag_administrable && $options=='avancees') {
 
-		debut_cadre_relief('feed.png', false, "", _T('syndic_options').aide('artsyn'));
-		echo  generer_url_post_ecrire("sites",("id_syndic=$id_syndic"));
-
-		// modifier la moderation
-		if ($moderation == 'oui' OR $moderation == 'non')
-			spip_query("UPDATE spip_syndic SET moderation='$moderation' WHERE id_syndic=$id_syndic");
-		else
-			$moderation = $mod;
+		$moderation = $mod;
 		if ($moderation != 'oui') $moderation='non';
 
-		echo "<div align='".$GLOBALS['spip_lang_left']."'>",
-		  _T('syndic_choix_moderation');
-		echo "<div style='padding-$spip_lang_left: 40px;'>";
-		echo afficher_choix('moderation', $moderation,
+		$res .= "<div align='".$GLOBALS['spip_lang_left']."'>".
+		  _T('syndic_choix_moderation')
+		. "<div style='padding-$spip_lang_left: 40px;'>"
+		. afficher_choix('moderation', $moderation,
 			array(
-			'non' => _T('info_publier')
-				.' ('._T('bouton_radio_modere_posteriori').')',
-			'oui' => _T('info_bloquer')
-				.' ('._T('bouton_radio_modere_priori').')'
-			));
-		echo "</div></div>\n";
+			'non' => _T('info_publier') .' ('._T('bouton_radio_modere_posteriori').')',
+			'oui' => _T('info_bloquer') .' ('._T('bouton_radio_modere_priori').')' ))
+		. "</div></div>\n";
 		
 		// Oublier les vieux liens ?
 		// Depublier les liens qui ne figurent plus ?
-		# appliquer les choix
-		if ($miroir == 'oui' OR $miroir == 'non')
-			spip_query("UPDATE spip_syndic SET miroir='$miroir'	WHERE id_syndic=$id_syndic");
-		if ($oubli == 'oui' OR $oubli == 'non')
-			spip_query("UPDATE spip_syndic SET oubli='$oubli' WHERE id_syndic=$id_syndic");
 
-		echo "\n<div>&nbsp;</div>";
-		echo "\n<div align='".$GLOBALS['spip_lang_left']."'>"._T('syndic_choix_oublier'), '</div>';
+		$res .= "\n<div>&nbsp;</div>"
+		. "\n<div align='".$GLOBALS['spip_lang_left']."'>"._T('syndic_choix_oublier'). '</div>'
+		. "\n<ul align='".$GLOBALS['spip_lang_left']."'>\n";
 
-		echo "\n<ul align='".$GLOBALS['spip_lang_left']."'>\n";
+		$on = array('oui' => _T('item_oui'), 'non' => _T('item_non'));
+		if (!$miroir = $row['miroir']) $miroir = 'non';
+		$res .= "\n<li>"._T('syndic_option_miroir').' '
+		. afficher_choix('miroir', $miroir, $on, " &nbsp; ")
+		. "</li>\n";
 
-		# miroir
-		if (!$miroir AND !$miroir = $row['miroir']) $miroir = 'non';
-		echo "\n<li>"._T('syndic_option_miroir').' ';
-		echo afficher_choix('miroir', $miroir,
-			array('oui' => _T('item_oui'), 'non' => _T('item_non')),
-			" &nbsp;\n");
-		echo "</li>\n";
-
-		# oubli
-		if (!$oubli AND !$oubli = $row['oubli']) $oubli = 'non';
-		echo "\n<li>"._T('syndic_option_oubli', array('mois' => 2)).' ';
-		echo afficher_choix('oubli', $oubli,
-			array('oui' => _T('item_oui'), 'non' => _T('item_non')),
-			" &nbsp; ");
-		echo "</li>\n";
-
-		echo "</ul>\n";
-
+		if (!$oubli = $row['oubli']) $oubli = 'non';
+		$res .= "\n<li>"
+		. _T('syndic_option_oubli', array('mois' => 2)).' '
+		. afficher_choix('oubli', $oubli, $on," &nbsp; ")
+		. "</li>\n"
+		. "</ul>\n";
 
 		// Prendre les resumes ou le texte integral ?
-		# choix appliques plus haut (a passer dans editer_site)
-		echo "\n<div align='$spip_lang_left'>"
-			. _T('syndic_choix_resume') ;
-		echo "\n<div style='padding-$spip_lang_left: 40px;'>";		
-		echo afficher_choix('resume', $resume,
-			array(
-				'oui' => _T('syndic_option_resume_oui'),
-				'non' => _T('syndic_option_resume_non')
-			));
-		echo "</div></div>\n";
-
+		if (!$resume = $row['resume']) $resume = 'oui';
+		$res .= "\n<div align='$spip_lang_left'>"
+		.  _T('syndic_choix_resume') 
+		. "\n<div style='padding-$spip_lang_left: 40px;'>"
+		. afficher_choix('resume', $resume,
+			array(	'oui' => _T('syndic_option_resume_oui'),
+				'non' => _T('syndic_option_resume_non')	))
+		. "</div></div>\n";
 
 		// Bouton "Valider"
-		echo "\n<div style='text-align:$spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>\n</form>\n";
-
-		fin_cadre_relief();
+		$res .= "\n<div style='text-align:$spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>\n";
+		echo debut_cadre_relief('feed.png', false, "", _T('syndic_options').aide('artsyn')),	
+		  redirige_action_auteur('editer_site',
+					 "options/$id_syndic",
+					 'sites',
+					 '',
+					 $res,
+					 " method='post'"),
+		  fin_cadre_relief();
 	}
-}
+ }
 // Cas d'un site ayant un feedfinder detecte
-else if (preg_match(',^\s*select: (.*),', $url_syndic, $regs)) {
-	echo "<br /><br />\n";
-	echo   generer_url_post_ecrire("sites",("id_syndic=$id_syndic"));
+// Bug: action/editer_site ne le voit pas passer.
+ else if (preg_match(',^\s*select: (.*),', $url_syndic, $regs)) {
 
+	$res = "<br /><br />\n";
 	foreach (
 		array('id_rubrique', 'nom_site', 'url_site', 'descriptif', 'statut')
 	as $var) {
-		echo "<input type='hidden' name='$var' value=\"".entites_html($$var)."\" />";
+		$res .= "<input type='hidden' name='$var' value=\"".entites_html($$var)."\" />\n";
 	}
-	echo debut_cadre_relief();
-	echo "<div align='$spip_lang_left'>\n";
-	echo "<input type='radio' name='syndication' value='non' id='syndication_non' checked='checked'>";
-	echo " <b><label for='syndication_non'>"._T('bouton_radio_non_syndication')."</label></b><p>";
-	echo "<input type='radio' name='syndication' value='oui' id='syndication_oui'>";
-	echo " <b><label for='syndication_oui'>"._T('bouton_radio_syndication')."</label></b> &nbsp;";
 
-	$feeds = explode(' ',$regs[1]);
-	echo "<select name='url_syndic'>\n";
-	foreach ($feeds as $feed) {
-		echo '<option value="'.entites_html($feed).'">'.$feed."</option>\n";
+	$res .= "<div align='$spip_lang_left'>\n";
+	$res .= "<input type='radio' name='syndication' value='non' id='syndication_non' checked='checked' />";
+	$res .= " <b><label for='syndication_non'>"._T('bouton_radio_non_syndication')."</label></b>";
+	$res .= "<input type='radio' name='syndication' value='oui' id='syndication_oui' />";
+	$res .= " <b><label for='syndication_oui'>"._T('bouton_radio_syndication')."</label></b> &nbsp;";
+
+	$res .= "<select name='url_syndic'>\n";
+	foreach (explode(' ',$regs[1]) as $feed) {
+		$res .= '<option value="'.entites_html($feed).'">'.$feed."</option>\n";
 	}
-	echo "</select>\n";
-	echo aide("rubsyn");
-	echo "<div align='$spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo'></div>\n";
+	$res .= "</select>\n";
+	$res .= aide("rubsyn");
+	$res .= "<div align='$spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>\n";
+	$res .= "</div>\n";
+	echo debut_cadre_relief();
+	echo redirige_action_auteur('editer_site',
+		$id_syndic,
+		'sites',
+		'',
+		$res,
+		" method='post'");
 	echo fin_cadre_relief();
-	echo "</div></form>\n";
+
 }
 
 
