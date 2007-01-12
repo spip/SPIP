@@ -208,6 +208,9 @@ function indexer_chaine($texte, $val = 1, $min_long = 3) {
 	global $index, $mots;
 	global $translitteration_complexe;
 
+	// Point d'entree pour traiter le texte avant indexation 
+	$texte = pipeline('pre_indexation', $texte);
+
 	$table = mots_indexation($texte, $min_long);
 
 	foreach ($table as $mot) {
