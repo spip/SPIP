@@ -17,7 +17,16 @@ include_spip('inc/sax');
 define('_REGEXP_DOCTYPE',
 	'/^\s*(<[?][^>]*>\s*)?<!DOCTYPE\s+(\w+)\s+(\w+)\s*([^>]*)>/');
 
-define('_REGEXP_ID', '/^[A-Za-z_][\w_:.-]*$/');
+define('_SUB_REGEXP_SYMBOL', '[A-Za-z_][\w_:.-]*');
+
+define('_REGEXP_ID', '/^'  . _SUB_REGEXP_SYMBOL . '$/');
+
+define('_REGEXP_ENTITY_NAME', '/' . _SUB_R2EGEXP_SYMBOL . '/');
+define('_REGEXP_ENTITY_USE', '/%('  . _SUB_REGEXP_SYMBOL . ');/');
+define('_REGEXP_ENTITY_DEF', '/^%('  . _SUB_REGEXP_SYMBOL . ');/');
+define('_REGEXP_ENTITY_DECL', '/^<!ENTITY\s+(%?)\s*(' .
+		_SUB_REGEXP_SYMBOL .
+		';?)\s+(PUBLIC|SYSTEM|INCLUDE|IGNORE)?\s*"([^"]*)"\s*("([^"]*)")?\s*>\s*(.*)$/s');
 
 // Document Type Compilation
 
@@ -72,7 +81,7 @@ function charger_dtd($data)
 		$dtc->peres[$k] = $v;
 	} 
 
-#	$r = $dtc->regles; ksort($r);foreach($r as $l => $v) echo "<b>$l</b> '$v' ", join (', ',array_keys($dtc->attributs[$l])), "<br />\n";
+#	$r = $dtc->regles; ksort($r);foreach($r as $l => $v) echo "<b>$l</b> '$v' ", join (', ',array_keys($dtc->attributs[$l])), "<br />\n";exit;
 	return $dtc;
 }
 
@@ -138,7 +147,7 @@ function analyser_dtd($loc, $avail, &$dtc)
 	  }
 
 	  if (!is_string($r)) {
-	    spip_log("erreur $r dans la DTD  " . substr($dtd,0,256) . ".....");
+	    spip_log("erreur $r dans la DTD  " . substr($dtd,0,80) . ".....");
 	    return array();
 	  }
 	  $dtd = $r;
@@ -166,16 +175,17 @@ function analyser_dtd_pi($dtd, &$dtc, $grammaire){
 
 // http://doc.spip.org/@analyser_dtd_lexeme
 function analyser_dtd_lexeme($dtd, &$dtc, $grammaire){
-	if (!preg_match('/^%([\w;.-]+);\s*(.*)$/s', $dtd, $m))
+	if (!preg_match(_REGEXP_ENTITY_DEF,$dtd, $m))
 		return -9;
 
-	list(,$s, $dtd) = $m;
+	list(,$s) = $m;
 	$n = $dtc->macros[$s];
 	if (is_array($n)) {
 	    // en cas d'inclusion, l'espace de nom est le meme
 		analyser_dtd($n[1], $n[0], $dtc);
 	}
-	return $dtd;
+	
+	return ltrim(substr($dtd,strlen($m[0])));
 }
 
 // il faudrait prevoir plusieurs niveaux d'inclusion.
@@ -202,23 +212,27 @@ function analyser_dtd_notation($dtd, &$dtc, $grammaire){
 // http://doc.spip.org/@analyser_dtd_entity
 function analyser_dtd_entity($dtd, &$dtc, $grammaire)
 {
-	if (!preg_match('/^<!ENTITY\s+(%?)\s*([\w;.-]+)\s+(PUBLIC|SYSTEM|INCLUDE|IGNORE)?\s*"([^"]*)"\s*("([^"]*)")?\s*>\s*(.*)$/s', $dtd, $m))
+	if (!preg_match(_REGEXP_ENTITY_DECL, $dtd, $m))
 		return -2;
 
 	list($t, $term, $nom, $type, $val, $q, $alt, $dtd) = $m;
+
+	if (isset($dtc->macros[$nom]) AND $dtc->macros[$nom])
+		return $dtd;
+	if (isset($dtc->entites[$nom]))
+		spip_log("redefinition de l'entite $nom");
 	if  (!$term)
-		$dtc->entites[$nom] = $val;
+		$dtc->entites[$nom] = expanserEntite($val, $dtc->macros);
 	elseif (!$type)
 		$dtc->macros[$nom] = expanserEntite($val, $dtc->macros);
 	elseif (!$alt)
-		$dtc->macros[$nom] = $alt;
+		$dtc->macros[$nom] = expanserEntite($val, $dtc->macros);
 	else {
 		if (strpos($alt, '/') === false)
 			$alt = preg_replace(',/[^/]+$,', '/', $grammaire)
-			. ($alt ? $alt : "loose.dtd")  ;
+			. $alt ;
 		$dtc->macros[$nom] = array($type, $alt);
 	} 
-
 	return $dtd;
 }
 
@@ -241,7 +255,7 @@ function analyser_dtd_element($dtd, &$dtc, $grammaire)
 	$nom = expanserEntite($nom, $dtc->macros);
 	$val = compilerRegle(expanserEntite($val, $dtc->macros));
 	if (isset($dtc->elements[$nom])) {
-		spip_log("double definition de $nom dans la DTD");
+		spip_log("redefinition de l'element $nom dans la DTD");
 		return -4;
 	}
 	$filles = array();
@@ -282,7 +296,7 @@ function analyser_dtd_attlist($dtd, &$dtc, $grammaire)
 	if (!isset($dtc->attributs[$nom]))
 		$dtc->attributs[$nom] = array();
 
-	if (preg_match_all("/\s*(\S+)\s+(([(][^)]*[)])|(\S+))\s+(\S+)(\s*'[^']*')?/", $val, $r2, PREG_SET_ORDER)) {
+	if (preg_match_all("/\s*(\S+)\s+(([(][^)]*[)])|(\S+))\s+([^\s']*)(\s*'[^']*')?/", $val, $r2, PREG_SET_ORDER)) {
 		foreach($r2 as $m2) {
 			$v = preg_match('/^\w+$/', $m2[2]) ? $m2[2]
 			  : ('/^' . preg_replace('/\s+/', '', $m2[2]) . '$/');
@@ -299,7 +313,7 @@ function analyser_dtd_attlist($dtd, &$dtc, $grammaire)
 // http://doc.spip.org/@expanserEntite
 function expanserEntite($val, $macros)
 {
-	if (preg_match_all('/%([.\w]+);/', $val, $r, PREG_SET_ORDER)) {
+	if (preg_match_all(_REGEXP_ENTITY_USE, $val, $r, PREG_SET_ORDER)){
 	  foreach($r as $m) {
 		  $ent = $m[1];
 		  // il peut valoir ""
