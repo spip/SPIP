@@ -183,7 +183,7 @@ function http_label_img($statut, $etat, $var, $img, $texte) {
 		" " .
 		$texte .
 		"</label>" .
-		"<br />";
+		"<br />\n";
 }
 
 // http://doc.spip.org/@formulaire_affiche_tous
@@ -191,14 +191,13 @@ function formulaire_affiche_tous($aff_art, $aff_statut,$sel_lang)
 {
 	global $spip_lang_left, $spip_lang_right, $spip_lang, $couleur_claire;
 	
-	$out = "";
-	global $spip_lang_right;
-	$out .= generer_url_post_ecrire("articles_tous"). 
-		"<div><input type='hidden' name='aff_art[]' value='x' />";
-	
-	$out .= debut_boite_info(true);
-	
-	$out .= "<b>"._T('titre_cadre_afficher_article')."&nbsp;:</b><br />";
+	$action = generer_url_ecrire("articles_tous");
+
+	$out = "<form action='$action' method='post'>"
+	. debut_boite_info(true)
+	. form_hidden($action)
+	. "\n<input type='hidden' name='aff_art[]' value='x' />\n"
+	. "<b>"._T('titre_cadre_afficher_article')."&nbsp;:</b><br />\n";
 	
 	if ($aff_statut['prepa'])
 		$out .= http_label_img('prepa',
@@ -255,7 +254,7 @@ function formulaire_affiche_tous($aff_art, $aff_statut,$sel_lang)
 		$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
 		if (count($langues) > 1) {
 			sort($langues);
-			$out .= "<br />\n<div class='verdana2'><b>"._T('titre_cadre_afficher_traductions')."</b><br />";
+			$out .= "\n<br />\n<div class='verdana2'><b>"._T('titre_cadre_afficher_traductions')."</b>\n<br />";
 			$out .= "<select style='width:100%' name='sel_lang[]' size='".count($langues)."' multiple='multiple'>";
 			while (list(, $l) = each ($langues)) {
 			  $out .= "<option value='$l'" .
@@ -272,7 +271,7 @@ function formulaire_affiche_tous($aff_art, $aff_statut,$sel_lang)
 	}
 
 	$out .= fin_boite_info(true);
-	$out .= "</div></form>";
+	$out .= "</form>";
 	
 	return $out;
 }
