@@ -328,6 +328,7 @@ function analyser_site($url) {
 	return $result;
 }
 
+// http://doc.spip.org/@editer_site_options
 function editer_site_options($id_syndic)
 {
 	$moderation = _request('moderation');

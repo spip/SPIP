@@ -88,6 +88,7 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 
 // function d'ecriture du tag img en sortie des filtre image
 // reprend le tag initial et surcharge les tags modifies
+// http://doc.spip.org/@image_ecrire_tag
 function image_ecrire_tag($valeurs,$surcharge){
 	$tag = 	str_replace(">","/>",str_replace("/>",">",$valeurs['tag'])); // fermer les tags img pas bien fermes;
 	
@@ -1225,6 +1226,7 @@ function image_sepia($im, $rgb = "896f5e")
 
 
 // Renforcer la nettete d'une image
+// http://doc.spip.org/@image_renforcement
 function image_renforcement($im, $k=0.5)
 {
 	$image = image_valeurs_trans($im, "renforcement-$k");
