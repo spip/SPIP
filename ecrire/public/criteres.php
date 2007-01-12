@@ -488,6 +488,15 @@ function critere_agenda_dist($idb, &$boucles, $crit)
 	// sinon on prend tout
 }
 
+// http://doc.spip.org/@critere_groupby_dist
+function critere_groupby_dist($idb,&$boucles, $crit) {
+	if (isset($crit->param[0]))
+		$boucles[$idb]->group[] = $crit->param[0][0]->texte;
+	else
+		erreur_squelette(_T('zbug_info_erreur_squelette'),
+			"{groupby ?} BOUCLE$idb");
+}
+
 // http://doc.spip.org/@calculer_critere_parties
 function calculer_critere_parties($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
