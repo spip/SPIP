@@ -38,11 +38,12 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 	if (strlen($img)==0) return false;
 
 	
-	$fichier = extraire_attribut($img, 'src');
-	if (($p=strpos($fichier,'?'))!==FALSE)
-		$fichier=substr($fichier,0,$p);
-	if (strlen($fichier) < 1) $fichier = $img;
-
+	$source = extraire_attribut($img, 'src');
+	if (($p=strpos($source,'?'))!==FALSE)
+		$source=substr($source,0,$p);
+	if (strlen($source) < 1) $source = $img;
+	$fichier = fichier_copie_locale($source);
+	
 	if (!file_exists($fichier)) return false;
 	
 	if (preg_match(",^.*+(?<=\.(gif|jpg|png)),", $fichier, $regs)) {
@@ -81,10 +82,49 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 	$ret["class"] = extraire_attribut($img, 'class');
 	$ret["alt"] = extraire_attribut($img, 'alt');
 	$ret["style"] = extraire_attribut($img, 'style');
+	$ret["tag"] = $img;
 	return $ret;
-
 }
 
+// function d'ecriture du tag img en sortie des filtre image
+// reprend le tag initial et surcharge les tags modifies
+function image_ecrit_tag($valeurs,$surcharge){
+	$tag = 	str_replace(">","/>",str_replace("/>",">",$valeurs['tag'])); // fermer les tags img pas bien fermes;
+	
+	// le style
+	$style = $valeurs['style'];
+	if (isset($surcharge['style'])){
+		$style = $surcharge['style'];
+		unset($surcharge['style']);
+	}
+	// enlever le width et height du style
+	$style = trim(preg_replace(",(width|height)\s*:\s*[^;]*(;)?,","",$style));
+	
+	// traiter specifiquement la largeur et la hauteur
+	$width = $valeurs['largeur'];
+	if (isset($surcharge['width'])){
+		$width = $surcharge['width'];
+		unset($surcharge['width']);
+	}
+	$height = $valeurs['hauteur'];
+	if (isset($surcharge['height'])){
+		$width = $surcharge['height'];
+		unset($surcharge['height']);
+	}
+
+	// mettre des attributs de width et height sur les images, c'est INDISPENSABLE pour l'accessibilite
+	// ca permet accessoirement aux navigateurs de reserver la bonne taille 
+	// quand on a desactive l'affichage des images.
+	$tag = inserer_attribut($tag,'width',$width);
+	$tag = inserer_attribut($tag,'height',$height);
+	$style = "height:".$height."px;width:".$width."px;".$style;
+	$tag = inserer_attribut($tag,'style',$style);
+	
+	foreach($surcharge as $attribut=>$valeur)
+		$tag = inserer_attribut($tag,$attribut,$valeur);
+
+	return $tag;
+}
 
 // fonctions individuelles qui s'appliquent a une image
 // http://doc.spip.org/@image_reduire
@@ -244,13 +284,7 @@ function image_recadre($im,$width,$height,$position='center', $background_color=
 		imagedestroy($im);
 	}
 	
-	$class = $image["class"];
-	if (strlen($class) > 1) $tags=" class='$class'";
-	$tags = "$tags alt='".$image["alt"]."'";
-	$style = $image["style"];
-	if (strlen($style) > 1) $tags="$tags style='$style'";
-	
-	return "<img src='$dest'$tags />";
+	return image_ecrit_tag($image,array('src'=>$dest,'width'=>$width,'height'=>$height));
 }
 
 // http://doc.spip.org/@image_flip_vertical
@@ -287,13 +321,7 @@ function image_flip_vertical($im)
 		imagedestroy($im);
 	}
 	
-	$class = $image["class"];
-	if (strlen($class) > 1) $tags=" class='$class'";
-	$tags = "$tags alt='".$image["alt"]."'";
-	$style = $image["style"];
-	if (strlen($style) > 1) $tags="$tags style='$style'";
-	
-	return "<img src='$dest'$tags />";
+	return image_ecrit_tag($image,array('src'=>$dest));
 }
 
 // http://doc.spip.org/@image_flip_horizontal
@@ -328,13 +356,8 @@ function image_flip_horizontal($im)
 		imagedestroy($im_);
 		imagedestroy($im);
 	}
-	$class = $image["class"];
-	if (strlen($class) > 1) $tags=" class='$class'";
-	$tags = "$tags alt='".$image["alt"]."'";
-	$style = $image["style"];
-	if (strlen($style) > 1) $tags="$tags style='$style'";
 	
-	return "<img src='$dest'$tags />";
+	return image_ecrit_tag($image,array('src'=>$dest));
 }
 
 // http://doc.spip.org/@image_masque
@@ -670,14 +693,7 @@ function image_masque($im, $masque, $pos="") {
 
 	}
 
-	$class = $image["class"];
-	if (strlen($class) > 1) $tags=" class='$class'";
-	$tags = "$tags alt='".$image["alt"]."'";
-	$style = $image["style"];
-	if (strlen($style) > 1) $tags="$tags style='$style'";	
-	list ($y_dest,$x_dest) = taille_image($dest);
-	return "<img src='$dest' width='".$x_dest."' height='".$y_dest."'$tags />";
-
+	return image_ecrit_tag($image,array('src'=>$dest,'width'=>$x_dest,'height'=>$y_dest));
 }
 
 // Passage de l'image en noir et blanc
@@ -735,13 +751,7 @@ function image_nb($im, $val_r = 299, $val_g = 587, $val_b = 114)
 		imagedestroy($im);
 	}
 
-	$class = $image["class"];
-	if (strlen($class) > 1) $tags=" class='$class'";
-	$tags = "$tags alt='".$image["alt"]."'";
-	$style = $image["style"];
-	if (strlen($style) > 1) $tags="$tags style='$style'";
-	
-	return "<img src='$dest'$tags />";
+	return image_ecrit_tag($image,array('src'=>$dest));
 }
 
 // http://doc.spip.org/@image_flou
@@ -863,14 +873,7 @@ function image_flou($im,$niveau=3)
 		imagedestroy($temp1);	
 	}
 	
-	$class = $image["class"];
-	if (strlen($class) > 1) $tags=" class='$class'";
-	$tags = "$tags alt='".$image["alt"]."'";
-//	$style = $image["style"]; // on force le remplacement par nouvelles valeurs...
-	$style = "height: ".($y_i+$niveau)."px; width: ".($x_i+$niveau)."px;";
-	if (strlen($style) > 1) $tags="$tags style='$style'";
-	
-	return "<img src='$dest'$tags />";
+	return image_ecrit_tag($image,array('src'=>$dest,'width'=>($x_i+$niveau),'height'=>($y_i+$niveau)));
 }
 
 // http://doc.spip.org/@image_RotateBicubic
@@ -1070,15 +1073,7 @@ function image_rotation($im, $angle, $crop=false)
 	}
 	include_spip('inc/logos');
 	list ($src_y,$src_x) = taille_image($dest);
-	
-	$class = $image["class"];
-	if (strlen($class) > 1) $tags=" class='$class'";
-	$tags = "$tags alt='".$image["alt"]."'";
-//	$style = $image["style"]; // on force le remplacement par nouvelles valeurs...
-	$style = "height: ".$src_y."px; width: ".$src_x."px;";
-	if (strlen($style) > 1) $tags="$tags style='$style'";
-	
-	return "<img src='$dest'$tags />";
+	return image_ecrit_tag($image,array('src'=>$dest,'width'=>$src_x,'height'=>$src_y));
 }
 
 // $src_img - a GD image resource
@@ -1150,13 +1145,7 @@ function image_gamma($im, $gamma = 0)
 		}
 		$image["fonction_image"]($im_, "$dest");
 	}
-	$class = $image["class"];
-	if (strlen($class) > 1) $tags=" class='$class'";
-	$tags = "$tags alt='".$image["alt"]."'";
-	$style = $image["style"];
-	if (strlen($style) > 1) $tags="$tags style='$style'";
-	
-	return "<img src='$dest'$tags />";
+	return image_ecrit_tag($image,array('src'=>$dest));
 }
 
 // Passe l'image en "sepia"
@@ -1230,13 +1219,8 @@ function image_sepia($im, $rgb = "896f5e")
 		imagedestroy($im_);
 		imagedestroy($im);
 	}
-	$class = $image["class"];
-	if (strlen($class) > 1) $tags=" class='$class'";
-	$tags = "$tags alt='".$image["alt"]."'";
-	$style = $image["style"];
-	if (strlen($style) > 1) $tags="$tags style='$style'";
 	
-	return "<img src='$dest'$tags />";
+	return image_ecrit_tag($image,array('src'=>$dest));
 }
 
 
@@ -1307,12 +1291,7 @@ function image_renforcement($im, $k=0.5)
 		$image["fonction_image"]($im_, "$dest");		
 	}
 
-	$class = $image["class"];
-	if (strlen($class) > 1) $tags=" class='$class'";
-	$tags = "$tags alt='".$image["alt"]."'";
-	$style = $image["style"];
-	
-	return "<img src='$dest'$tags />";
+	return image_ecrit_tag($image,array('src'=>$dest));
 }
 
 
@@ -1389,13 +1368,7 @@ function image_aplatir($im, $format='jpg', $coul='000000')
 		$image["fonction_image"]($im_, "$dest");
 	}
 
-	$class = $image["class"];
-	if (strlen($class) > 1) $tags=" class='$class'";
-	$tags = "$tags alt='".$image["alt"]."'";
-	$style = $image["style"];
-	if (strlen($style) > 1) $tags="$tags style='$style'";
-	
-	return "<img src='$dest'$tags />";
+	return image_ecrit_tag($image,array('src'=>$dest));
 }
 // A partir d'une image,
 // recupere une couleur
@@ -1778,7 +1751,7 @@ function produire_image_typo() {
 	$dimensions = getimagesize($image);
 	$largeur = $dimensions[0];
 	$hauteur = $dimensions[1];
-	return inserer_attribut("<img src='$image' style='width: ".$largeur."px; height: ".$hauteur.px."' class='format_png' />", 'alt', $alt);
+	return inserer_attribut("<img src='$image' width='$largeur' height='$hauteur' style='width:".$largeur."px;height:".$hauteur."px;' class='format_png' />", 'alt', $alt);
 }
 
 ?>
