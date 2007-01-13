@@ -165,7 +165,7 @@ if ($activer_syndic != "non") {
 	$form .= aide("rubsyn");
 
 
-	$form .= "<table cellpadding='0' cellspacing='0' border='0' width='100%'><tr><td style='width: 50'>&nbsp;</td><td>";
+	$form .= "<table cellpadding='0' cellspacing='0' border='0' width='100%'><tr><td style='width: 10px;'>&nbsp;</td><td>";
 
 	if (strlen($url_syndic) < 8) $url_syndic = "http://";
 	$form .= _T('entree_adresse_fichier_syndication');

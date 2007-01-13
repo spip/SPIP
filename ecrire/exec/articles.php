@@ -372,9 +372,9 @@ function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)
 		$revision_nbsp = $activer_revision_nbsp;
 
 		if (strlen($chapo) > 0) {
-			$res .= "\n<div $dir_lang><b>"
+			$res .= "\n<div $dir_lang style='font-weight: bold;'>"
 			. propre($chapo)
-			. "</b></div>\n";
+			. "</div>";
 		}
 
 		$res .= "\n<div $dir_lang>"
