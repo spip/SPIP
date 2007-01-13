@@ -140,8 +140,7 @@ function image_filtrer($args){
 							array_unshift($args,"<img src='".$match[1]."' />");
 							$srcover_filter = call_user_func_array($filtre, $args);
 							$srcover_filter = extraire_attribut($srcover_filter,'src');
-							$mouseover = str_replace($srcover,$srcover_filter,$mouseover);
-							$reduit = inserer_attribut($reduit,'mouseover',$mouseover);
+							$reduit = str_replace($srcover,$srcover_filter,$reduit);
 						}
 					}
 					$texte = str_replace($tag[3], $reduit, $texte);

@@ -123,7 +123,8 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 function image_tag_changer_taille($tag,$width,$height,$style=false){
 	if ($style===false) $style = extraire_attribut($tag,'style');
 	// enlever le width et height du style
-	$style = trim(preg_replace(",(^|;|\s)(width|height)\s*:\s*[^;]+(;)?,ims","\\1",$style));
+	$style = preg_replace(",(^|;)\s*(width|height)\s*:\s*[^;]+,ims","",$style);
+	if ($style{0}==';') $style=substr($style,1);
 	// mettre des attributs de width et height sur les images, c'est INDISPENSABLE pour l'accessibilite
 	// ca permet aux navigateurs de reserver la bonne taille 
 	// quand on a desactive l'affichage des images.
@@ -2027,9 +2028,9 @@ function produire_image_typo() {
 	$arg_list = func_get_args();
 	$texte = $arg_list[0];
 	for ($i = 1; $i < $numargs; $i++) {
-		if (ereg("\=", $arg_list[$i])) {
-			$nom_variable = substr($arg_list[$i], 0, strpos($arg_list[$i], "="));
-			$val_variable = substr($arg_list[$i], strpos($arg_list[$i], "=")+1, strlen($arg_list[$i]));
+		if (($p = strpos($arg_list[$i], "="))!==FALSE) {
+			$nom_variable = substr($arg_list[$i], 0, $p);
+			$val_variable = substr($arg_list[$i], $p+1);
 		
 			$variable["$nom_variable"] = $val_variable;
 		}
@@ -2037,8 +2038,8 @@ function produire_image_typo() {
 	}
 
 	// Construire requete et nom fichier
-	$text = ereg_replace("\&nbsp;", "~", $texte);	
-	$text = ereg_replace("(\r|\n)+", " ", $text);
+	$text = str_replace("&nbsp;", "~", $texte);	
+	$text = preg_replace(",(\r|\n)+,ms", " ", $text);
 	if (strlen($text) == 0) return "";
 
 	$taille = $variable["taille"];
