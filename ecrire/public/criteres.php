@@ -246,6 +246,41 @@ function critere_logo_dist($idb, &$boucles, $crit) {
 		$boucle->where[]= $c;
 }
 
+
+// http://doc.spip.org/@critere_groupby_dist
+function critere_fusion_dist($idb,&$boucles, $crit) {
+	if (isset($crit->param[0])) {
+		$x = $crit->param[0];
+		if ($x[0]->type == 'texte')
+			$boucles[$idb]->group[] = $x[0]->texte;
+		else 	$boucles[$idb]->group[] = '".' . calculer_critere_arg_dynamique($idb, $boucles, $x) . '."';
+	} else 
+		erreur_squelette(_T('zbug_info_erreur_squelette'),
+			"{groupby ?} BOUCLE$idb");
+}
+
+function calculer_critere_arg_dynamique($idb, &$boucles, $crit, $suffix='')
+{
+	global $table_des_tables, $tables_des_serveurs_sql;
+
+	$boucle = $boucles[$idb];
+
+	$arg = calculer_liste($crit, array(), $boucles, $boucle->id_parent);
+	$r = $boucle->type_requete;
+	$s = $boucles[$idb]->sql_serveur;
+	if (!$s) $s = 'localhost';
+	$t = $table_des_tables[$r];
+	// pour les tables non Spip
+	if (!$t) $t = $r; else $t = "spip_$t";
+	$desc = $tables_des_serveurs_sql[$s][$t];
+
+	if (is_array($desc['field'])){
+		$liste_field = implode(',',array_map('_q',array_keys($desc['field'])));
+		return	"((\$x = preg_replace(\"/\\W/\",'',$arg)) ? ( in_array(\$x,array($liste_field))  ? ('$boucle->id_table.' . \$x$suffix):(\$x$suffix) ) : '')";
+	} else {
+		return "((\$x = preg_replace(\"/\\W/\",'',$arg)) ? ('$boucle->id_table.' . \$x$suffix) : '')";
+	}
+}
 // Tri : {par xxxx}
 // http://www.spip.net/@par
 // http://doc.spip.org/@critere_par_dist
@@ -264,24 +299,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 	  $fct = ""; // en cas de fonction SQL
 	// tris specifies dynamiquement
 	  if ($tri[0]->type != 'texte') {
-	      $order = 
-		calculer_liste($tri, array(), $boucles, $boucles[$idb]->id_parent);
-				$r = $boucle->type_requete;
-				$s = $boucles[$idb]->sql_serveur;
-				if (!$s) $s = 'localhost';
-				$t = $table_des_tables[$r];
-				// pour les tables non Spip
-				if (!$t) $t = $r; else $t = "spip_$t";
-				$desc = $tables_des_serveurs_sql[$s][$t];
-				if (is_array($desc['field'])){
-					$liste_field = implode(',',array_map('_q',array_keys($desc['field'])));
-		      $order =
-			"((\$x = preg_replace(\"/\\W/\",'',$order)) ? ( in_array(\$x,array($liste_field))  ? ('$boucle->id_table.' . \$x$sens):(\$x$sens) ) : '')";
-				}
-				else{
-		      $order =
-			"((\$x = preg_replace(\"/\\W/\",'',$order)) ? ('$boucle->id_table.' . \$x$sens) : '')";
-				}
+	    $order = calculer_critere_arg_dynamique($idb, $boucles, $tri, $sens);
 	  } else {
 	      $par = array_shift($tri);
 	      $par = $par->texte;
@@ -486,15 +504,6 @@ function critere_agenda_dist($idb, &$boucles, $crit)
 					      ("$annee . $mois . $jour")),
 					array("'<='", "'DATE_FORMAT($date, \'%Y%m%d\')'", ("$annee2 . $mois2 . $jour2")));
 	// sinon on prend tout
-}
-
-// http://doc.spip.org/@critere_groupby_dist
-function critere_groupby_dist($idb,&$boucles, $crit) {
-	if (isset($crit->param[0]))
-		$boucles[$idb]->group[] = $crit->param[0][0]->texte;
-	else
-		erreur_squelette(_T('zbug_info_erreur_squelette'),
-			"{groupby ?} BOUCLE$idb");
 }
 
 // http://doc.spip.org/@calculer_critere_parties
