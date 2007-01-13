@@ -42,7 +42,11 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 	if (($p=strpos($source,'?'))!==FALSE)
 		$source=substr($source,0,$p);
 	if (strlen($source) < 1) $source = $img;
-	$fichier = fichier_copie_locale($source);
+	$fichier = $source;
+	if (preg_match(',^(\w+:),', $source)){
+		include_spip("inc/distant");
+		$fichier = fichier_copie_locale($source);
+	}
 	
 	if (!file_exists($fichier)) return false;
 	
@@ -61,23 +65,41 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 	if ($term_fonction_dest == "jpg") $term_fonction_dest = "jpeg";
 
 	$nom_fichier = substr($fichier, 0, strlen($fichier) - 4);
-	$fichier_dest = "$nom_fichier-$effet";
-	$fichier_dest = md5($fichier_dest);
-	$fichier_dest = sous_repertoire(_DIR_VAR, "cache-gd2") . $fichier_dest . "." .$terminaison_dest;
+	$fichier_dest = $nom_fichier;
+	list ($ret["hauteur"],$ret["largeur"]) = taille_image($img);
+	// cas general :
+	// on a un dossier cache commun et un nom de fichier qui varie avec l'effet
+	// cas particulier de reduire :
+	// un cache par dimension, et le nom de fichier est conserve, suffixe par la dimension aussi
+	$cache = "cache-gd2";
+	if (substr($effet,0,7)=='reduire') {
+		list(,$maxWidth,$maxHeight) = explode('-',$effet);
+		list ($destWidth,$destHeight) = image_ratio($ret['largeur'], $ret['hauteur'], $maxWidth, $maxHeight);
+		$ret['largeur_dest'] = $destWidth;
+		$ret['hauteur_dest'] = $destHeight;
+		$effet = "-{$destWidth}x$destHeight";
+		$cache = "cache$effet";
+		$fichier_dest = basename($fichier_dest).'-'.substr(md5("$fichier_dest"),0,5).$effet;
+		if (($ret['largeur']<=$maxWidth)&&($ret['hauteur']<=$maxHeight))
+			$terminaison_dest = $terminaison; // on garde la terminaison initiale car image simplement copiee
+	}
+	else 	$fichier_dest = md5("$fichier_dest-$effet");
+
+	$fichier_dest = sous_repertoire(_DIR_VAR, $cache) . $fichier_dest . "." .$terminaison_dest;
 	
 	$creer = true;
-	if (@filemtime($fichier) < @filemtime($fichier_dest)) {
+	if (($date_src = @filemtime($fichier)) < @filemtime($fichier_dest)) {
 		$creer = false;
 	}
 	
 	include_spip('inc/logos');
-	list ($ret["hauteur"],$ret["largeur"]) = taille_image($img);
 	$ret["fichier"] = $fichier;
 	$ret["fonction_imagecreatefrom"] = "imagecreatefrom".$term_fonction;
 	$ret["fonction_image"] = "image".$term_fonction_dest;
 	$ret["fichier_dest"] = $fichier_dest;
 	$ret["format_source"] = $terminaison;
 	$ret["format_dest"] = $terminaison_dest;
+	$ret["date_src"] = $date_src;
 	$ret["creer"] = $creer;
 	$ret["class"] = extraire_attribut($img, 'class');
 	$ret["alt"] = extraire_attribut($img, 'alt');
@@ -85,7 +107,6 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 	$ret["tag"] = $img;
 	return $ret;
 }
-
 // Transforme une image a palette indexee (256 couleurs max) en "vraies" couleurs RGB
 // http://doc.spip.org/@imagepalettetotruecolor
  function imagepalettetotruecolor(&$img) {
@@ -98,6 +119,24 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 	}
 }
 
+function image_tag_changer_taille($tag,$width,$height,$style=false){
+	if ($style===false) $style = extraire_attribut($tag,'style');
+	// enlever le width et height du style
+	$style = trim(preg_replace(",(^|;|\s)(width|height)\s*:\s*[^;]+(;)?,ims","\\1",$style));
+	// mettre des attributs de width et height sur les images, c'est INDISPENSABLE pour l'accessibilite
+	// ca permet aux navigateurs de reserver la bonne taille 
+	// quand on a desactive l'affichage des images.
+	$tag = inserer_attribut($tag,'width',$width);
+	$tag = inserer_attribut($tag,'height',$height);
+	$style = "height:".$height."px;width:".$width."px;".$style;
+	// attributs deprecies. Transformer en CSS
+	if ($espace = extraire_attribut($tag, 'hspace')){
+		$style = "margin:${espace}px;".$style;
+		$tag = inserer_attribut($tag,'hspace','');
+	}
+	$tag = inserer_attribut($tag,'style',$style);
+	return $tag;
+}
 
 // function d'ecriture du tag img en sortie des filtre image
 // reprend le tag initial et surcharge les tags modifies
@@ -111,8 +150,6 @@ function image_ecrire_tag($valeurs,$surcharge){
 		$style = $surcharge['style'];
 		unset($surcharge['style']);
 	}
-	// enlever le width et height du style
-	$style = trim(preg_replace(",(^|;|\s)(width|height)\s*:\s*[^;]*(;)?,i","\\1",$style));
 	
 	// traiter specifiquement la largeur et la hauteur
 	$width = $valeurs['largeur'];
@@ -122,48 +159,352 @@ function image_ecrire_tag($valeurs,$surcharge){
 	}
 	$height = $valeurs['hauteur'];
 	if (isset($surcharge['height'])){
-		$width = $surcharge['height'];
+		$height = $surcharge['height'];
 		unset($surcharge['height']);
 	}
 
-	// mettre des attributs de width et height sur les images, c'est INDISPENSABLE pour l'accessibilite
-	// ca permet accessoirement aux navigateurs de reserver la bonne taille 
-	// quand on a desactive l'affichage des images.
-	$tag = inserer_attribut($tag,'width',$width);
-	$tag = inserer_attribut($tag,'height',$height);
-	$style = "height:".$height."px;width:".$width."px;".$style;
-	$tag = inserer_attribut($tag,'style',$style);
-	
-	foreach($surcharge as $attribut=>$valeur)
-		$tag = inserer_attribut($tag,$attribut,$valeur);
+	$tag = image_tag_changer_taille($tag,$width,$height,$style);
+	// traiter specifiquement le src qui peut etre repris dans un onmouseout
+	// on remplace toute les ref a src dans le tag
+	if (isset($surcharge['src'])){
+		$src = extraire_attribut($tag,'src');
+		$tag = str_replace($src,$surcharge['src'],$tag);
+		unset($surcharge['src']);
+	}
+	if (count($surcharge))
+		foreach($surcharge as $attribut=>$valeur)
+			$tag = inserer_attribut($tag,$attribut,$valeur);
 
 	return $tag;
 }
 
-// fonctions individuelles qui s'appliquent a une image
-// http://doc.spip.org/@image_reduire
-function image_reduire($img, $taille=-1, $taille_y=-1) {
-	include_spip('inc/logos');
+function image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO', $force=false, $test_cache_only = false) {
+	// ordre de preference des formats graphiques pour creer les vignettes
+	// le premier format disponible, selon la methode demandee, est utilise
+	$image = $valeurs['fichier'];
+	$format = $valeurs['format_source'];
+	$destdir = dirname($valeurs['fichier_dest']);
+	$destfile = basename($valeurs['fichier_dest'],".".$valeurs["format_dest"]);
+	if ($format == 'jpg')
+		$formats_sortie = array('jpg','png','gif');
+	else // les gif sont passes en png preferentiellement pour etre homogene aux autres filtres images
+		$formats_sortie = array('png','jpg','gif');
 
-	$image = reduire_image_logo($img, $taille, $taille_y, false);
+	if (($process == 'AUTO') AND isset($GLOBALS['meta']['image_process']))
+		$process = $GLOBALS['meta']['image_process'];
 
-	// Cas du mouseover genere par les logos de survol de #LOGO_ARTICLE
-	if (!eregi("onmouseover=\"this\.src=\'([^']+)\'\"", $img, $match))
-		return $image;
+	// liste des formats qu'on sait lire
+	$img = isset($GLOBALS['meta']['formats_graphiques'])
+	  ? in_array($format,explode(',',$GLOBALS['meta']['formats_graphiques']))
+	  : false;
+
+	// si le doc n'est pas une image, refuser
+	if (!$force AND !$img) return;
+	$destination = "$destdir/$destfile";
+
+	// chercher un cache
+	$vignette = '';
+	foreach (array('gif','jpg','png') as $fmt)
+		if (@file_exists($destination.'.'.$fmt)) {
+			$vignette = $destination.'.'.$fmt;
+			if ($force) @unlink($vignette);
+		}
+
+	if ($test_cache_only AND !$vignette) return;
+
+	// utiliser le cache ?
+	if (!$test_cache_only)
+	if ($force OR !$vignette OR (@filemtime($vignette) < @filemtime($image))) {
+
+		$creation = true;
+		// calculer la taille
+		if (($srcWidth=$valeurs['largeur']) && ($srcHeight=$valeurs['hauteur'])){
+			if (!($destWidth=$valeurs['largeur_dest']) || !($destHeight=$valeurs['hauteur_dest']))
+				list ($destWidth,$destHeight) = image_ratio($valeurs['largeur'], $valeurs['hauteur'], $maxWidth, $maxHeight);
+		}
+		elseif ($process == 'convert' OR $process == 'imagick') {
+			$destWidth = $maxWidth;
+			$destHeight = $maxHeight;
+		} else {
+			spip_log("echec $process sur $image");
+			return;
+		}
+
+		// Si l'image est de la taille demandee (ou plus petite), simplement
+		// la retourner
+		if ($srcWidth
+		AND $srcWidth <= $maxWidth AND $srcHeight <= $maxHeight) {
+			$vignette = $destination.'.'.$format;
+			@copy($image, $vignette);
+		}
+		// imagemagick en ligne de commande
+		else if ($process == 'convert') {
+			define('_CONVERT_COMMAND', 'convert');
+			define ('_RESIZE_COMMAND', _CONVERT_COMMAND.' -quality 85 -resize %xx%y! %src %dest');
+			$format = $formats_sortie[0];
+			$vignette = $destination.".".$format;
+			$commande = str_replace(
+				array('%x', '%y', '%src', '%dest'),
+				array(
+					$destWidth,
+					$destHeight,
+					escapeshellcmd($image),
+					escapeshellcmd($vignette)
+				),
+				_RESIZE_COMMAND);
+			spip_log($commande);
+			exec($commande);
+			if (!@file_exists($vignette)) {
+				spip_log("echec convert sur $vignette");
+				return;	// echec commande
+			}
+		}
+		else
+		// imagick (php4-imagemagick)
+		if ($process == 'imagick') {
+			$format = $formats_sortie[0];
+			$vignette = "$destination.".$format;
+			$handle = imagick_readimage($image);
+			imagick_resize($handle, $destWidth, $destHeight, IMAGICK_FILTER_LANCZOS, 0.75);
+			imagick_write($handle, $vignette);
+			if (!@file_exists($vignette)) {
+				spip_log("echec imagick sur $vignette");
+				return;
+			}
+		}
+		else
+		// netpbm
+		if ($process == "netpbm") {
+			define('_PNMSCALE_COMMAND', 'pnmscale'); // chemin a changer dans mes_options
+			if (_PNMSCALE_COMMAND == '') return;
+			$format_sortie = "jpg";
+			$vignette = $destination.".".$format_sortie;
+			$pnmtojpeg_command = str_replace("pnmscale", "pnmtojpeg", _PNMSCALE_COMMAND);
+			if ($format == "jpg") {
+				
+				$jpegtopnm_command = str_replace("pnmscale", "jpegtopnm", _PNMSCALE_COMMAND);
+
+				exec("$jpegtopnm_command $image | "._PNMSCALE_COMMAND." -width $destWidth | $pnmtojpeg_command > $vignette");
+				if (!@file_exists($vignette)) {
+					spip_log("echec netpbm-jpg sur $vignette");
+					return;
+				}
+			} else if ($format == "gif") {
+				$giftopnm_command = str_replace("pnmscale", "giftopnm", _PNMSCALE_COMMAND);
+				exec("$giftopnm_command $image | "._PNMSCALE_COMMAND." -width $destWidth | $pnmtojpeg_command > $vignette");
+				if (!@file_exists($vignette)) {
+					spip_log("echec netpbm-gif sur $vignette");
+					return;
+				}
+			} else if ($format == "png") {
+				$pngtopnm_command = str_replace("pnmscale", "pngtopnm", _PNMSCALE_COMMAND);
+				exec("$pngtopnm_command $image | "._PNMSCALE_COMMAND." -width $destWidth | $pnmtojpeg_command > $vignette");
+				if (!@file_exists($vignette)) {
+					spip_log("echec netpbm-png sur $vignette");
+					return;
+				}
+			}
+		}
+		// gd ou gd2
+		else if ($process == 'gd1' OR $process == 'gd2') {
+			if (_IMG_GD_MAX_PIXELS && $srcWidth*$srcHeight>_IMG_GD_MAX_PIXELS){
+				spip_log("vignette gd1/gd2 impossible : ".$srcWidth*$srcHeight."pixels");
+				return;
+			}
+
+			// Choisir le format destination
+			// - on sauve de preference en JPEG (meilleure compression)
+			// - pour le GIF : les GD recentes peuvent le lire mais pas l'ecrire
+			# bug : gd_formats contient la liste des fichiers qu'on sait *lire*,
+			# pas *ecrire*
+			$gd_formats = $GLOBALS['meta']["gd_formats"];
+			foreach ($formats_sortie as $fmt) {
+				if (ereg($fmt, $gd_formats)) {
+					if ($format <> "gif" OR function_exists('ImageGif'))
+						$destFormat = $fmt;
+					break;
+				}
+			}
+
+			if (!$destFormat) {
+				spip_log("pas de format pour $image");
+				return;
+			}
+
+			# calcul de memoire desactive car pas fiable
+			#$memoryNeeded = round(($srcsize[0] * $srcsize[1] * $srcsize['bits'] * $srcsize['channels'] / 8 + 65536) * 1.65); 
+			#spip_log("GD : memory need $memoryNeeded");
+			#if (function_exists('memory_get_usage'))
+				#spip_log("GD : memory usage ".memory_get_usage());
+			#spip_log("GD : memory_limit ".ini_get('memory_limit'));
+			#if (function_exists('memory_get_usage') && memory_get_usage() + $memoryNeeded > (integer) ini_get('memory_limit') * 1048576){
+			#	spip_log("vignette gd1/gd2 impossible : memoire insuffisante $memoryNeeded necessaire");
+			#	return;
+			#}
+			#else
+			{
+				$fonction_imagecreatefrom = $valeurs['fonction_imagecreatefrom'];
+				$srcImage = $fonction_imagecreatefrom($image);
+				if (!$srcImage) { 
+					spip_log("echec gd1/gd2"); 
+					return; 
+				} 
+
+				// Initialisation de l'image destination 
+ 				if ($process == 'gd2' AND $destFormat != "gif") 
+					$destImage = ImageCreateTrueColor($destWidth, $destHeight); 
+				if (!$destImage) 
+					$destImage = ImageCreate($destWidth, $destHeight); 
+
+				// Recopie de l'image d'origine avec adaptation de la taille 
+				$ok = false; 
+				if (($process == 'gd2') AND function_exists('ImageCopyResampled')) { 
+					if ($format == "gif") { 
+						// Si un GIF est transparent, 
+						// fabriquer un PNG transparent  
+						$transp = imagecolortransparent($srcImage); 
+						if ($transp > 0) $destFormat = "png"; 
+					}
+					if ($destFormat == "png") { 
+						// Conserver la transparence 
+						if (function_exists("imageAntiAlias")) imageAntiAlias($destImage,true); 
+						@imagealphablending($destImage, false); 
+						@imagesavealpha($destImage,true); 
+					}
+					$ok = @ImageCopyResampled($destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
+				}
+				if (!$ok)
+					$ok = ImageCopyResized($destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
+			}
+
+			// Sauvegarde de l'image destination
+			$vignette = "$destination.$destFormat";
+			$format = $destFormat;
+			if ($destFormat == "jpg")
+				ImageJPEG($destImage, $vignette, 85);
+			else if ($destFormat == "gif")
+				ImageGIF($destImage, $vignette);
+			else if ($destFormat == "png")
+				ImagePNG($destImage, $vignette);
+
+			if ($srcImage)
+				ImageDestroy($srcImage);
+			ImageDestroy($destImage);
+		}
+	}
+	$size = @getimagesize($vignette);
+	// Gaffe: en safe mode, pas d'acces a la vignette,
+	// donc risque de balancer "width='0'", ce qui masque l'image sous MSIE
+	if ($size[0] < 1) $size[0] = $destWidth;
+	if ($size[1] < 1) $size[1] = $destHeight;
 	
-	$mouseover = extraire_attribut(
-		reduire_image_logo($match[1], $taille, $taille_y, false),
-		'src');
+	$retour['width'] = $largeur = $size[0];
+	$retour['height'] = $hauteur = $size[1];
+	
+	$retour['fichier'] = $vignette;
+	$retour['format'] = $format;
+	$retour['date'] = @filemtime($vignette);
+	
+	// renvoyer l'image
+	return $retour;
+}
 
-	$mouseout = extraire_attribut($image, 'src');
-	$js_mouseover = "onmouseover=\"this.src='$mouseover'\""
-			." onmouseout=\"this.src='$mouseout'\" />";
-	return preg_replace(",( /)?".">,", $js_mouseover, $image);
+// Calculer le ratio
+// http://doc.spip.org/@image_ratio
+function image_ratio ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
+	$ratioWidth = $srcWidth/$maxWidth;
+	$ratioHeight = $srcHeight/$maxHeight;
+
+	if ($ratioWidth <=1 AND $ratioHeight <=1) {
+		$destWidth = $srcWidth;
+		$destHeight = $srcHeight;
+	} else if ($ratioWidth < $ratioHeight) {
+		$destWidth = $srcWidth/$ratioHeight;
+		$destHeight = $maxHeight;
+	}
+	else {
+		$destWidth = $maxWidth;
+		$destHeight = $srcHeight/$ratioWidth;
+	}
+	return array (ceil($destWidth), ceil($destHeight),
+		max($ratioWidth,$ratioHeight));
+}
+
+// http://doc.spip.org/@image_reduire
+function image_reduire($img, $taille = -1, $taille_y = -1, $force=false, $cherche_image=false) {
+	// Determiner la taille x,y maxi
+	// prendre le reglage de previsu par defaut
+	if ($taille == -1)
+		$taille = isset($GLOBALS['meta']['taille_preview'])?$GLOBALS['meta']['taille_preview']:150;
+	if ($taille_y == -1)
+		$taille_y = $taille;
+
+	if ($taille == 0 AND $taille_y > 0)
+		$taille = 100000; # {0,300} -> c'est 300 qui compte
+	elseif ($taille > 0 AND $taille_y == 0)
+		$taille_y = 100000; # {300,0} -> c'est 300 qui compte
+	elseif ($taille == 0 AND $taille_y == 0)
+		return '';
+
+	$image = image_valeurs_trans($img, "reduire-{$taille}-{$taille_y}",'png');
+
+	if (!$image){
+		spip_log("image_reduire_src:pas de version locale de $img");
+		// on peut resizer en mode html si on dispose des elements
+		if ($srcw = extraire_attribut($img, 'width')
+		AND $srch = extraire_attribut($img, 'height')) {
+			list($w,$h) = image_ratio($srcw, $srch, $taille, $taille_y);
+			$img = image_tag_changer_taille($tag,$w,$h);
+			return $img;
+		}
+		// la on n'a pas d'infos sur l'image source... on refile le truc a css
+		// sous la forme style='max-width: NNpx;'
+		return inserer_attribut($img, 'style',
+			"max-width: ${taille}px; max-height: ${taille_y}px");
+	}
+	
+	// si l'image est plus petite que la cible retourner une copie cachee de l'image
+	if (($image['largeur']<=$taille)&&($image['hauteur']<=$taille_y)){
+		if ($image['creer']){
+			@copy($image['fichier'], $image['fichier_dest']);
+		}
+		return image_ecrire_tag($image,array('src'=>$image['fichier_dest']));
+	}
+	
+	if ($image['creer']==false && !$force)
+		return image_ecrire_tag($image,array('src'=>$image['fichier_dest'],'width'=>$image['largeur_dest'],'height'=>$image['hauteur_dest']));
+
+	if ($cherche_image){
+		include_spip('inc/logos');
+		$cherche = cherche_image_nommee(substr($image['fichier'],0,-4), array($image["format_source"]));
+		if (!$cherche) return $img;
+		//list($chemin,$nom,$format) = $cherche;
+	}
+	if (in_array($image["format_source"],array('jpg','gif','png'))){
+		$logo = $image['fichier'];
+		$date = $image["date_src"];
+		$preview = image_creer_vignette($image, $taille, $taille_y,'AUTO',$force);
+		if ($preview) {
+			$logo = $preview['fichier'];
+			$destWidth = $preview['width'];
+			$destHeight = $preview['height'];
+			$date = $preview['date'];
+		}
+		// dans l'espace prive mettre un timestamp sur l'adresse 
+		// de l'image, de facon a tromper le cache du navigateur
+		// quand on fait supprimer/reuploader un logo
+		// (pas de filemtime si SAFE MODE)
+		$date = _DIR_RESTREINT ? '' : ('?date='.$date);
+		return image_ecrire_tag($image,array('src'=>"$logo$date",'width'=>$destWidth,'height'=>$destHeight));
+	}
+	else
+		# SVG par exemple ? BMP, tiff ... les redacteurs osent tout!
+		return $img;
 }
 
 // Reduire une image d'un certain facteur
 // http://doc.spip.org/@image_reduire_par
-function image_reduire_par ($img, $val=1) {
+function image_reduire_par ($img, $val=1, $force=false) {
 	include_spip('inc/logos');
 	list ($hauteur,$largeur) = taille_image($img);
 
@@ -173,7 +514,7 @@ function image_reduire_par ($img, $val=1) {
 	if ($l > $h) $h = 0;
 	else $l = 0;
 	
-	$img = image_reduire($img, $l, $h);
+	$img = image_reduire($img, $l, $h, $force);
 
 	return $img;
 }
