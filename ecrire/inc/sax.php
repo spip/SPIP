@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/filtres');
 include_spip('inc/charsets');
+include_spip('xml/interfaces');
 
 // http://doc.spip.org/@xml_debutElement
 function xml_debutElement($parser, $name, $attrs)
@@ -190,7 +191,7 @@ function inc_sax_dist($page, $apply=false)
 		ob_end_clean();
 	}
 
-	$res = $phraseur_xml->phraserTout($xml_parser, $page);
+	$res = $phraseur_xml->phraserTout($xml_parser, sax_bug($page));
 
 	xml_parser_free($xml_parser);
 
@@ -198,6 +199,63 @@ function inc_sax_dist($page, $apply=false)
 
 	$GLOBALS['xhtml_error'] = $res;
 	return $page;
+}
+
+// SAX ne dit pas si une Entite est dans un attribut ou non.
+// Les eliminer toutes sinon celles des attributs apparaissent en zone texte!
+// Celles fondamentales pour la lecture (lt gt quot amp) sont conservees 
+// (d'ailleurs SAX ne les considere pas comme des entites dans un attribut)
+// Si la DTD est dispo, on va chercher les entites dedans
+// sinon on se rabat sur ce qu'en connait SPIP en standard.
+
+function sax_bug($data)
+{
+	$r = analyser_doctype($data);
+	if (!$r)
+		$data = html2unicode($data, true);
+	else  {
+		list ($topelement, $avail, $grammaire, $rotlvl) = $r;
+		$file = _DIR_DTD . preg_replace('/[^\w.]/','_', $rotlvl) . '.gz';
+		if (lire_fichier($file, $r))
+		  $this->dtc = unserialize($r);
+		else {
+		  include_spip('xml/analyser_dtd');
+		  $this->dtc = charger_dtd($grammaire, $avail);
+		  ecrire_fichier($file, serialize($this->dtc));
+		}
+		$trans = array();
+		
+		foreach($this->dtc->entites as $k => $v)
+		  if (!strpos(" amp lt gt quot ", $k))
+		    $trans["&$k;"] = $v;
+		$data = strtr($data, $trans);
+	}
+	return unicode2charset($data);
+}
+
+// http://doc.spip.org/@analyser_doctype
+function analyser_doctype($data)
+{
+	if (!preg_match(_REGEXP_DOCTYPE, $data, $r))
+		return array();
+
+	list(,,$topelement, $avail,$suite) = $r;
+
+	if (!preg_match('/^"([^"]*)"\s*(.*)$/', $suite, $r))
+		if (!preg_match("/^'([^']*)'\s*(.*)$/", $suite, $r))
+			return  array();
+	list(,$rotlvl, $suite) = $r;
+
+	if (!$suite) {
+		$grammaire = $rotlvl;
+		$rotlvl = '';
+	} else {
+		if (!preg_match('/^"([^"]*)"\s*$/', $suite, $r))
+			if (!preg_match("/^'([^']*)'\s*$/", $suite, $r))
+				return array();
+		$grammaire = $r[1];
+	}
+	return array($topelement, $avail, $grammaire, $rotlvl);
 }
 
 ?>
