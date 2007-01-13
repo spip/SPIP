@@ -196,7 +196,7 @@ function spip_log($message, $logname='spip') {
 // et on execute la fonction homonyme censee initaliser la connexion
 // et renvoyer le nom de la fonction a connexion persistante.
 // On memorise ce nom dans une statique pour n'appeler qu'une fois.
-
+// On echoue si la connexion SPIP est morte (spip_meta pas lue)
 // http://doc.spip.org/@spip_connect
 function spip_connect($serveur='') {
 	static $t = array();
@@ -210,6 +210,8 @@ function spip_connect($serveur='') {
 		$base_serveur = charger_fonction($serveur, 'base', true);
 		$t[$serveur] = $base_serveur ? $base_serveur() : false;
 	}
+
+	if (!$GLOBALS['db_ok']) return false;
 
 	return $t[$serveur];
 }
