@@ -319,11 +319,13 @@ function analyser_site($url) {
 		include_spip('inc/distant');
 		include_spip('inc/feedfinder');
 		$feeds = get_feed_from_url($url, $texte);
-		if (count($feeds)>1) {
+		// si on a a trouve un (ou plusieurs) on le note avec select:
+		// ce qui constitue un signal pour exec=sites qui proposera de choisir
+		// si on syndique, et quelle url.
+		if (count($feeds)>=1) {
 			spip_log("feedfinder.php :\n".join("\n", $feeds));
 			$result['url_syndic'] = "select: ".join(' ',$feeds);
-		} else
-			$result['url_syndic'] = $feeds[0];
+		}
 	}
 	return $result;
 }
