@@ -358,9 +358,10 @@ onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; char
 	. "<a href='" . generer_url_ecrire("synchro") . "' class='lien_sous'>"
 	. _T('icone_suivi_activite')
 	. "</a>"
-	. "\n<div id='gadget-suivi'><div>&nbsp;</div>"
-	. icone_horizontale(_T('analyse_xml'), parametre_url(self(),'transformer_xml', 'valider_xml'), 'racine-24.gif', '', false)
-	. "</div></div>\n";
+//	. "\n<div id='gadget-suivi'><div>&nbsp;</div>"
+//	. icone_horizontale(_T('analyse_xml'), parametre_url(self(),'transformer_xml', 'valider_xml'), 'racine-24.gif', '', false)
+//	. "</div>".
+	. "</div>\n";
 	
 		// Infos perso
 	$bandeau .= "\n<div id='bandeauinfoperso' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 200px;'>"
