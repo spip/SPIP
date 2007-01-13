@@ -208,6 +208,7 @@ function inc_sax_dist($page, $apply=false)
 // Si la DTD est dispo, on va chercher les entites dedans
 // sinon on se rabat sur ce qu'en connait SPIP en standard.
 
+// http://doc.spip.org/@sax_bug
 function sax_bug($data)
 {
 	$r = analyser_doctype($data);

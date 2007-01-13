@@ -120,6 +120,7 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 	}
 }
 
+// http://doc.spip.org/@image_tag_changer_taille
 function image_tag_changer_taille($tag,$width,$height,$style=false){
 	if ($style===false) $style = extraire_attribut($tag,'style');
 	// enlever le width et height du style
@@ -180,6 +181,7 @@ function image_ecrire_tag($valeurs,$surcharge){
 	return $tag;
 }
 
+// http://doc.spip.org/@image_creer_vignette
 function image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO', $force=false, $test_cache_only = false) {
 	// ordre de preference des formats graphiques pour creer les vignettes
 	// le premier format disponible, selon la methode demandee, est utilise
