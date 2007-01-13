@@ -86,6 +86,19 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 	return $ret;
 }
 
+// Transforme une image a palette indexee (256 couleurs max) en "vraies" couleurs RGB
+// http://doc.spip.org/@imagepalettetotruecolor
+ function imagepalettetotruecolor(&$img) {
+	if (!imageistruecolor($img) AND function_exists(imagecreatetruecolor)) {
+		$w = imagesx($img);
+		$h = imagesy($img);
+		$img1 = imagecreatetruecolor($w,$h);
+		imagecopy($img1,$img,0,0,0,0,$w,$h);
+		$img = $img1;
+	}
+}
+
+
 // function d'ecriture du tag img en sortie des filtre image
 // reprend le tag initial et surcharge les tags modifies
 // http://doc.spip.org/@image_ecrire_tag
@@ -186,6 +199,7 @@ function image_alpha($im, $alpha = 63)
 		// Creation de l'image en deux temps
 		// de facon a conserver les GIF transparents
 		$im = $image["fonction_imagecreatefrom"]($im);
+		imagepalettetotruecolor($im);
 		$im2 = imagecreatetruecolor($x_i, $y_i);
 		@imagealphablending($im2, false);
 		@imagesavealpha($im2,true);
@@ -267,6 +281,7 @@ function image_recadre($im,$width,$height,$position='center', $background_color=
 	
 	if ($creer) {
 		$im = $image["fonction_imagecreatefrom"]($im);
+		imagepalettetotruecolor($im);
 		$im_ = imagecreatetruecolor($width, $height);
 		@imagealphablending($im_, false);
 		@imagesavealpha($im_,true);
@@ -304,6 +319,7 @@ function image_flip_vertical($im)
 	
 	if ($creer) {
 		$im = $image["fonction_imagecreatefrom"]($im);
+		imagepalettetotruecolor($im);
 		$im_ = imagecreatetruecolor($x_i, $y_i);
 		@imagealphablending($im_, false);
 		@imagesavealpha($im_,true);
@@ -341,6 +357,7 @@ function image_flip_horizontal($im)
 	
 	if ($creer) {
 		$im = $image["fonction_imagecreatefrom"]($im);
+		imagepalettetotruecolor($im);
 		$im_ = imagecreatetruecolor($x_i, $y_i);
 		@imagealphablending($im_, false);
 		@imagesavealpha($im_,true);
@@ -551,6 +568,7 @@ function image_masque($im, $masque, $pos="") {
 		
 	
 		$im = $nouveau["fonction_imagecreatefrom"]($im_n);
+		imagepalettetotruecolor($im);
 		if ($nouveau["format_source"] == "gif" AND function_exists('ImageCopyResampled')) { 
 			$im_ = imagecreatetruecolor($x_dest, $y_dest);
 			// Si un GIF est transparent, 
@@ -723,6 +741,7 @@ function image_nb($im, $val_r = 299, $val_g = 587, $val_b = 114)
 		// Creation de l'image en deux temps
 		// de facon a conserver les GIF transparents
 		$im = $image["fonction_imagecreatefrom"]($im);
+		imagepalettetotruecolor($im);
 		$im_ = imagecreatetruecolor($x_i, $y_i);
 		@imagealphablending($im_, false);
 		@imagesavealpha($im_,true);
@@ -796,6 +815,7 @@ function image_flou($im,$niveau=3)
 		// Creation de l'image en deux temps
 		// de facon a conserver les GIF transparents
 		$im = $image["fonction_imagecreatefrom"]($im);
+		imagepalettetotruecolor($im);
 		$temp1 = imagecreatetruecolor($x_i+$niveau, $y_i);
 		$temp2 = imagecreatetruecolor($x_i+$niveau, $y_i+$niveau);
 		
@@ -1068,6 +1088,7 @@ function image_rotation($im, $angle, $crop=false)
 		// Creation de l'image en deux temps
 		// de facon a conserver les GIF transparents
 		$im = $image["fonction_imagecreatefrom"]($im);
+		imagepalettetotruecolor($im);
 		$im = image_RotateBicubic($im, $angle, true);
 		$image["fonction_image"]($im, "$dest");
 		imagedestroy($im);
@@ -1121,6 +1142,7 @@ function image_gamma($im, $gamma = 0)
 		// Creation de l'image en deux temps
 		// de facon a conserver les GIF transparents
 		$im = $image["fonction_imagecreatefrom"]($im);
+		imagepalettetotruecolor($im);
 		$im_ = imagecreatetruecolor($x_i, $y_i);
 		@imagealphablending($im_, false);
 		@imagesavealpha($im_,true);
@@ -1188,6 +1210,7 @@ function image_sepia($im, $rgb = "896f5e")
 		// Creation de l'image en deux temps
 		// de facon a conserver les GIF transparents
 		$im = $image["fonction_imagecreatefrom"]($im);
+		imagepalettetotruecolor($im);
 		$im_ = imagecreatetruecolor($x_i, $y_i);
 		@imagealphablending($im_, false);
 		@imagesavealpha($im_,true);
@@ -1240,7 +1263,7 @@ function image_renforcement($im, $k=0.5)
 	
 	if ($creer) {
 		$im = $image["fonction_imagecreatefrom"]($im);
-
+		imagepalettetotruecolor($im);
 		$im_ = imagecreatetruecolor($x_i, $y_i);
 		@imagealphablending($im_, false);
 		@imagesavealpha($im_,true);
@@ -1323,6 +1346,7 @@ function image_aplatir($im, $format='jpg', $coul='000000')
 
 	if ($creer) {
 		$im = @$image["fonction_imagecreatefrom"]($im);
+		imagepalettetotruecolor($im);
 		$im_ = imagecreatetruecolor($x_i, $y_i);
 		if ($image["format_source"] == "gif" AND function_exists('ImageCopyResampled')) { 
 			// Si un GIF est transparent, 
@@ -1403,7 +1427,8 @@ function image_couleur_extraire($img, $x=10, $y=6) {
 				if (ereg("\.jpg", $fichier)) $source = imagecreatefromjpeg($fichier);
 				if (ereg("\.gif", $fichier)) $source = imagecreatefromgif($fichier);
 				if (ereg("\.png", $fichier)) $source = imagecreatefrompng($fichier);
-	
+				imagepalettetotruecolor($source);
+
 				imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
 			
 				// get a color
