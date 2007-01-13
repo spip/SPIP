@@ -58,7 +58,7 @@ function inc_joindre_dist($script, $args, $id=0, $intitule='', $mode='', $type='
 
 	// Lien document distant, jamais en mode image
 	if ($distant) {
-		$distant = "<p />\n<div style='border: 1px #303030 solid; padding: 4px; color: #505050;'>" .
+		$distant = "<br />\n<div style='border: 1px #303030 solid; padding: 4px; color: #505050;'>" .
 			"\n\t<img src='"._DIR_IMG_PACK.'attachment.gif' .
 			"' style='float: $spip_lang_right;' alt=\"\" />\n" .
 			_T('info_referencer_doc_distant') .

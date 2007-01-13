@@ -231,7 +231,7 @@ if ($options == "avancees") {
 	$adresse_suivi=$GLOBALS['meta']["adresse_suivi"];
 	$adresse_suivi_inscription=$GLOBALS['meta']["adresse_suivi_inscription"];
 
-	echo "<p />";
+	echo "<br />";
 	debut_cadre_relief("", false, "", _T('info_suivi_activite'));
 	echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 
@@ -274,7 +274,7 @@ if ($options == "avancees") {
 	if ($envoi_now)
 		@unlink(_DIR_TMP . 'mail.lock');
 
-	echo "<p />";
+	echo "<br />";
 	debut_cadre_relief("", false, "", _T('info_annonce_nouveautes'));
 	echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 
@@ -310,7 +310,7 @@ if ($options == "avancees") {
 
 	if($options == "avancees") {
 		$email_envoi = entites_html($GLOBALS['meta']["email_envoi"]);
-		echo "<p />";
+		echo "<br />";
 		debut_cadre_relief("", false, "", _T('info_email_envoi'));
 		echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 		echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
@@ -328,7 +328,7 @@ if ($options == "avancees") {
 	echo "</table>\n";
 
 	fin_cadre_trait_couleur();
-	echo "<p />";
+	echo "<br />";
 
 // Activer forum admins
 
@@ -348,7 +348,7 @@ if ($options == "avancees") {
 	echo "<div style='text-align:$spip_lang_right'><input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>";
 
 	fin_cadre_trait_couleur();
-	echo "<p />";
+	echo "<br />";
 
 }
 

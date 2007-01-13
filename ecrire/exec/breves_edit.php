@@ -107,7 +107,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 
 
 	/// Dans la rubrique....
-	. "<input type='hidden' name='id_rubrique_old' value=\"$id_rubrique\" /><p />";
+	. "<input type='hidden' name='id_rubrique_old' value=\"$id_rubrique\" /><br />";
 
 	if ($id_rubrique == 0) $logo_parent = "racine-site-24.gif";
 	else {
@@ -143,18 +143,18 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	if ($spip_ecran == "large") $rows = 28;
 	else $rows = 15;
 	
-	$form .= "<p /><b>"._T('entree_texte_breve')."</b><br />\n"
+	$form .= "<br /><b>"._T('entree_texte_breve')."</b><br />\n"
 	. afficher_barre('document.formulaire.texte')
 	. "<textarea name='texte' ".$GLOBALS['browser_caret']." rows='$rows' class='formo' cols='40'>"
 	. entites_html($texte)
-	. "</textarea><p />\n"
+	. "</textarea><br />\n"
 	. _T('entree_liens_sites')
 	. aide ("breveslien")
 	. "<br />\n"
 	. _T('info_titre')."<br />\n"
 	. "<input type='text' class='forml' name='lien_titre' value=\"$lien_titre\" size='40' /><br />\n"
 	. _T('info_url')."<br />\n"
-	. "<input type='text' class='forml' name='lien_url' value=\"$lien_url\" size='40' /><p />";
+	. "<input type='text' class='forml' name='lien_url' value=\"$lien_url\" size='40' /><br />";
 
 	if ($GLOBALS['champs_extra']) {
 		include_spip('inc/extra');
@@ -168,7 +168,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 		. "<option".mySel("prop",$statut)." style='background-color: white'>"._T('item_breve_proposee')."</option>\n"
 		. "<option".mySel("refuse",$statut). http_style_background('rayures-sup.gif'). ">"._T('item_breve_refusee')."</option>\n"
 		. "<option".mySel("publie",$statut)." style='background-color: #B4E8C5'>"._T('item_breve_validee')."</option>\n"
-		. "</select>".aide ("brevesstatut")."<p />\n"
+		. "</select>".aide ("brevesstatut")."<br />\n"
 		. fin_cadre_relief(true);
 	}
 	$form .= "<p align='right'><input type='submit' value='"._T('bouton_enregistrer')."' class='fondo' /></p>";

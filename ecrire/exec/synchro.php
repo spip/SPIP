@@ -158,7 +158,7 @@ fin_cadre_relief();
 
 debut_cadre_relief("doc-24.gif", false, "", _T('ical_titre_js'));
 
-echo _T('ical_texte_js').'<p />';
+echo _T('ical_texte_js').'<br />';
 
 echo propre('<code>
 <script

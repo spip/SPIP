@@ -252,7 +252,7 @@ if ($options == 'avancees') {
 
 
 
-echo "<p />";
+echo "<br />";
 
 
 //
@@ -282,7 +282,7 @@ echo "</table>\n";
 
 fin_cadre_trait_couleur();
 
-echo "<p />";
+echo "<br />";
 
 
 //
@@ -323,7 +323,7 @@ if ($options == "avancees") {
 	
 		echo "<div id='mots-config' style='$style'>";
 		
-		echo "<p />";
+		echo "<br />";
 		debut_cadre_relief("", false, "", _T('titre_config_groupe_mots_cles'));
 
 		echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
@@ -340,7 +340,7 @@ if ($options == "avancees") {
 		fin_cadre_relief();
 
 		if ($forums_publics != "non"){
-			echo "<p />";
+			echo "<br />";
 			debut_cadre_relief("", false, "", _T('titre_mots_cles_dans_forum'));
 			echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 			echo "<tr><td class='verdana2'>";
@@ -367,7 +367,7 @@ if ($options == "avancees") {
 
 	fin_cadre_trait_couleur();
 
-	echo "<p />";
+	echo "<br />";
 }
 
 
@@ -402,7 +402,7 @@ else $style = "display: none;";
 	
 	// Utilisateurs autorises a proposer des sites references
 	//
-		echo "<p />";
+		echo "<br />";
 		debut_cadre_relief();
 		echo "\n<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 		echo "\n<tr><td style='color: #000000' class='verdana1 spip_x-small'>";
@@ -509,7 +509,7 @@ echo "</table>\n";
 
 fin_cadre_trait_couleur();
 
-echo "<p />";
+echo "<br />";
 
 
 //
