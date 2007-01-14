@@ -1427,7 +1427,6 @@ function image_RotateBicubic($src_img, $angle, $bicubic=0) {
 // http://doc.spip.org/@image_rotation
 function image_rotation($im, $angle, $crop=false)
 {
-
 	$image = image_valeurs_trans($im, "rot-$angle-$crop", "png");
 	if (!$image) return("");
 	
@@ -1437,18 +1436,67 @@ function image_rotation($im, $angle, $crop=false)
 	$creer = $image["creer"];
 	
 	if ($creer) {
-		// Creation de l'image en deux temps
-		// de facon a conserver les GIF transparents
-		$im = $image["fonction_imagecreatefrom"]($im);
-		imagepalettetotruecolor($im);
-		$im = image_RotateBicubic($im, $angle, true);
-		$image["fonction_image"]($im, "$dest");
-		imagedestroy($im);
+		$effectuer_gd = true;
+
+		if (function_exists(imagick_rotate)) {
+			$mask = imagick_getcanvas( "#ff0000", $x, $y );
+			$handle = imagick_readimage ($im);
+			if (imagick_isopaqueimage( $handle )) {
+				imagick_rotate( $handle, $angle);
+				imagick_writeimage( $handle, $dest);
+				$effectuer_gd = false;
+			}
+		} 
+		if ($effectuer_gd) {
+			// Creation de l'image en deux temps
+			// de facon a conserver les GIF transparents
+			$im = $image["fonction_imagecreatefrom"]($im);
+			imagepalettetotruecolor($im);
+			$im = image_RotateBicubic($im, $angle, true);
+			$image["fonction_image"]($im, "$dest");
+			imagedestroy($im);
+		}
 	}
 	include_spip('inc/logos');
 	list ($src_y,$src_x) = taille_image($dest);
 	return image_ecrire_tag($image,array('src'=>$dest,'width'=>$src_x,'height'=>$src_y));
 }
+
+// Permet d'appliquer un filtre php_imagick a une image
+// par exemple: [(#LOGO_ARTICLE||image_imagick{imagick_wave,20,60})]
+// liste des fonctions: http://www.linux-nantes.org/~fmonnier/doc/imagick/
+// http://doc.spip.org/@image_imagick
+function image_imagick () {
+	$tous = func_get_args();
+	$img = $tous[0];
+	$fonc = $tous[1];
+	$tous[0]="";
+	$tous_var = join($tous, "-");
+
+	$image = image_valeurs_trans($img, "$tous_var", "png");
+	if (!$image) return("");
+	
+	$im = $image["fichier"];
+	$dest = $image["fichier_dest"];
+	
+	$creer = $image["creer"];
+	
+	if ($creer) {
+		if (function_exists($fonc)) {
+
+			$handle = imagick_readimage ($im);
+			$arr[0] = $handle;
+			for ($i=2; $i < count($tous); $i++) $arr[] = $tous[$i];
+			call_user_func_array($fonc, $arr);
+			imagick_writeimage( $handle, $dest);
+		} 
+	}
+	include_spip('inc/logos');
+	list ($src_y,$src_x) = taille_image($dest);
+	return image_ecrire_tag($image,array('src'=>$dest,'width'=>$src_x,'height'=>$src_y));
+
+}
+
 
 // $src_img - a GD image resource
 // $angle - degrees to rotate clockwise, in degrees
