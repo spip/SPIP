@@ -150,9 +150,6 @@ function login_pour_tous($login, $cible, $action) {
 	if (_request('var_erreur') == 'pass')
 		$erreur = _T('login_erreur_pass');
 
-	// le formulaire utilise le filtre |chercher_logo si un id_auteur est la...
-	include_spip('inc/logos');
-
 	// Appeler le squelette formulaire_login
 	return array('formulaires/formulaire_login', $GLOBALS['delais'],
 		array_merge(
