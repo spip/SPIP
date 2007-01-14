@@ -36,12 +36,14 @@ function image_select($img,$width_min=0, $height_min=0, $width_max=10000, $heigh
 // http://doc.spip.org/@image_valeurs_trans
 function image_valeurs_trans($img, $effet, $forcer_format = false) {
 	if (strlen($img)==0) return false;
-
 	
 	$source = extraire_attribut($img, 'src');
 	if (($p=strpos($source,'?'))!==FALSE)
 		$source=substr($source,0,$p);
-	if (strlen($source) < 1) $source = $img;
+	if (strlen($source) < 1){
+		$source = $img;
+		$img = "<img src='$source' />";
+	}
 	$fichier = $source;
 	if (preg_match(',^(\w+:),', $source)){
 		include_spip("inc/distant");
@@ -146,9 +148,6 @@ function image_tag_changer_taille($tag,$width,$height,$style=false){
 // http://doc.spip.org/@image_ecrire_tag
 function image_ecrire_tag($valeurs,$surcharge){
 	$tag = 	str_replace(">","/>",str_replace("/>",">",$valeurs['tag'])); // fermer les tags img pas bien fermes;
-	
-	// voiture-balais: au cas ou $tag n'est qu'un nom de fichier, au lieu d'un <img src=''>
-	if (!ereg("<img ",$tag) AND ereg("(jpg|gif|png)$","$tag")) $tag = "<img src='$tag' />";
 	
 	// le style
 	$style = $valeurs['style'];
