@@ -129,8 +129,8 @@ function afficher_choix_vignette($process) {
 	}
 
 	$style = (($process == $GLOBALS['meta']['image_process'])
-	? " font-weight: bold;"
-	: " border: 2px; border-style: dotted; border-color: $couleur_foncee;");
+	? " border: 2px; border-style: dotted; border-color: $couleur_foncee; font-weight: bold;"
+	: "");
 
 	return 	$retour . "\n<td  style='text-align: center; vertical-align:center; width: ".($taille_preview+4)."px;$style'"
 	. "><a href='"
