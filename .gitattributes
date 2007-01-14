@@ -574,8 +574,8 @@ ecrire/xml/interfaces.php -text
 ecrire/xml/rss.php -text
 /inc-public.php3 -text
 /index.php -text
+local/remove.txt -text
 /rien.gif -text
 /spip.php -text
 tmp/remove.txt -text
-var/remove.txt -text
 /win_png.htc -text

@@ -54,7 +54,7 @@ define('_ROOT_IMG_ICONES_DIST', dirname(dirname(__FILE__)) . '/dist/vignettes/')
 # le nom du repertoire des fichiers Temporaires Inaccessibles par http://
 define('_NOM_TEMPORAIRES_INACCESSIBLES', "tmp/");
 # le nom du repertoire des fichiers Temporaires Accessibles par http://
-define('_NOM_TEMPORAIRES_ACCESSIBLES', "var/");
+define('_NOM_TEMPORAIRES_ACCESSIBLES', "local/");
 # le nom du repertoire des fichiers Permanents Inaccessibles par http://
 define('_NOM_PERMANENTS_INACCESSIBLES', "config/");
 # le nom du repertoire des fichiers Permanents Accessibles par http://
@@ -295,7 +295,7 @@ $spip_version = 1.924;
 // (ce qui marche pour yy ne marchera pas forcement sur une version plus ancienne)
 // type nouvelles fonctionnalites, deplacement de fonctions ...
 $spip_version_affichee = '1.9.2 beta 3';
-$spip_version_code = 1.9204;
+$spip_version_code = 1.9205;
 
 // ** Securite **
 $auteur_session = $connect_statut = $connect_toutes_rubriques = $connect_id_rubrique = $hash_recherche = $hash_recherche_strict = '';
