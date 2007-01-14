@@ -147,6 +147,9 @@ function image_tag_changer_taille($tag,$width,$height,$style=false){
 function image_ecrire_tag($valeurs,$surcharge){
 	$tag = 	str_replace(">","/>",str_replace("/>",">",$valeurs['tag'])); // fermer les tags img pas bien fermes;
 	
+	// voiture-balais: au cas ou $tag n'est qu'un nom de fichier, au lieu d'un <img src=''>
+	if (!ereg("<img ",$tag) AND ereg("(jpg|gif|png)$","$tag")) $tag = "<img src='$tag' />";
+	
 	// le style
 	$style = $valeurs['style'];
 	if (isset($surcharge['style'])){
