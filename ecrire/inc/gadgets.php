@@ -87,9 +87,13 @@ function gadget_rubriques() {
 	$arr_low = extraire_article(0);
 
 	$total_lignes = $i = sizeof($arr_low);
-
 	$nb_col = min(10,max(1,ceil($total_lignes / 10)));
+
+	// Pas certain que ce calcul de $max_lignes soit pertinent
+	// Par exemple, si on a 2 secteurs, alors max_lignes=2.
 	$max_lignes = ceil($total_lignes / $nb_col);
+	$max_lignes = 10;
+	
 
 	$count_lignes = 0;
 	$style = " style='width: 200px'; z-index: 1;'  valign='top'";
