@@ -87,7 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'participer_site' => 'You can take an active part in this website and write your own articles by registering below. You will then receive immediately an email giving you an access code to the private area of the site.',
 'plan_site' => 'Site Map',
 'popularite' => 'Popularity',
-'poster_message' => 'To post a message',
+'poster_message' => 'Post a message',
 'proposer_site' => 'You can suggest a site to be added to this section:',
 
 

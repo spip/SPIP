@@ -500,14 +500,14 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_question_accepter_visiteurs' => 'Si les squelettes de votre site pr&eacute;voient l\'enregistrement de visiteurs sans acc&egrave;s &agrave; l\'espace priv&eacute;, veuillez activer l\'option ci-dessous&nbsp;:',
 'info_question_gerer_statistiques' => 'Votre site doit-il g&eacute;rer les statistiques des visites&nbsp;?',
 'info_question_inscription_nouveaux_redacteurs' => 'Acceptez-vous les inscriptions de nouveaux r&eacute;dacteurs &agrave;
-		partir du site public&nbsp;? Si vous acceptez, les visiteurs pourront s\'inscrire
-		depuis un formulaire automatis&eacute et acc&eacute;deront alors &agrave; l\'espace priv&eacute; pour
-		proposer leurs propres articles. <blockquote><i>Lors de la phase d\'inscription,
-		les utilisateurs re&ccedil;oivent un courrier &eacute;lectronique automatique
-		leur fournissant leurs codes d\'acc&egrave;s au site priv&eacute;. Certains
-		h&eacute;bergeurs d&eacute;sactivent l\'envoi de mails depuis leurs
-		serveurs&nbsp;: dans ce cas, l\'inscription automatique est
-		impossible.',
+  partir du site public&nbsp;? Si vous acceptez, les visiteurs pourront s\'inscrire
+  depuis un formulaire automatis&eacute; et acc&eacute;deront alors &agrave; l\'espace priv&eacute; pour
+  proposer leurs propres articles. <blockquote><i>Lors de la phase d\'inscription,
+  les utilisateurs re&ccedil;oivent un courrier &eacute;lectronique automatique
+  leur fournissant leurs codes d\'acc&egrave;s au site priv&eacute;. Certains
+  h&eacute;bergeurs d&eacute;sactivent l\'envoi de mails depuis leurs
+  serveurs&nbsp;: dans ce cas, l\'inscription automatique est
+  impossible.',
 'info_question_mots_cles' => 'Souhaitez-vous utiliser les mots-cl&eacute;s sur votre site&nbsp;?',
 'info_question_proposer_site' => 'Qui peut proposer des sites r&eacute;f&eacute;renc&eacute;s&nbsp;?',
 'info_question_utilisation_moteur_recherche' => 'Souhaitez-vous utiliser le moteur de recherche int&eacute;gr&eacute; &agrave; SPIP&nbsp;?

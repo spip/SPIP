@@ -490,14 +490,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_publies' => 'Os teus artigos publicados en li&ntilde;a',
 'info_question_accepter_visiteurs' => 'Se os esqueletos do seu web prev&eacute;n o rexistro de visitantes sen acceso &aacute; parte web privada, active a opci&oacute;n aqu&iacute; abaixo&nbsp;:',
 'info_question_gerer_statistiques' => 'O seu web ten que xerar as estat&iacute;sticas das visitas?',
-'info_question_inscription_nouveaux_redacteurs' => 'Aceptaranse as inscrici&oacute;ns de m&aacute;is xente
-  dende o web p&uacute;blico? De se aceptar, as visitas poderanse rexistrar cun
+'info_question_inscription_nouveaux_redacteurs' => 'Aceptar&amp;aacute; as inscrici&oacute;ns de novos redactores
+  dende o web p&uacute;blico? De aceptalos, os visitantes poderanse rexistrar cun
   formulario automatizado e acceder&aacute;n ao espazo privado para
-  propor os seus propios artigos.<blockquote> <i>Trala fase de inscrici&oacute;n,
-  han recibir un correo electr&oacute;nico autom&aacute;tico
-  cos seus c&oacute;digos de acceso ao web privado. Alg&uacute;ns
-  provedores desactivan o env&iacute;o autom&aacute;tico desde os seus servidores:
-  nese caso, a inscrici&oacute;n autom&aacute;tica &eacute; imposible.',
+  propor os seus propios artigos.<blockquote> <i>Trala fase de inscrici&amp;oacute;n,
+  han recibir un correo electr&amp;oacute;nico autom&amp;aacute;tico
+  cos seus c&amp;oacute;digos de acceso ao web privado. Alg&amp;uacute;ns
+  provedores desactivan o env&amp;iacute;o autom&amp;aacute;tico desde os seus servidores:
+  nese caso, a inscrici&amp;oacute;n autom&amp;aacute;tica &amp;eeacute; imposible.',
 'info_question_mots_cles' => 'Queres empregar as palabras chave no teu lugar?',
 'info_question_proposer_site' => 'Quen pode propor os webs referidos?',
 'info_question_utilisation_moteur_recherche' => 'Queres empregar o motor de procura integrado en SPIP?
