@@ -206,14 +206,15 @@ function spip_connect($serveur='') {
 
 	if (!$serveur) $serveur = 'db_mysql';
 
-	if (!isset($t[$serveur])) {
-		$base_serveur = charger_fonction($serveur, 'base', true);
-		$t[$serveur] = $base_serveur ? $base_serveur() : false;
+	if (isset($t[$serveur])) return $t[$serveur];
+
+	$base_serveur = charger_fonction($serveur, 'base', true);
+
+	if (!$base_serveur) {
+		spip_log("serveur inconnue $serveur");
+		return $t[$serveur] = false;
 	}
-
-	if (!$GLOBALS['db_ok']) return false;
-
-	return $t[$serveur];
+	return $t[$serveur] = $base_serveur();
 }
 
 // http://doc.spip.org/@spip_query
