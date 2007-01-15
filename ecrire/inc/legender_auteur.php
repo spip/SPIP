@@ -115,22 +115,22 @@ function legender_auteur_saisir($id_auteur, $auteur, $mode, $echec='', $redirect
 // accessibles seulement aux admins non restreints et l'auteur lui-meme
 //
 
-if ($auteur['source'] != 'spip') {
-	$edit_login = false;
-	$edit_pass = false;
-}
-else if (($connect_statut == "0minirezo") AND $connect_toutes_rubriques) {
-	$edit_login = true;
-	$edit_pass = true;
-}
-else if ($connect_id_auteur == $id_auteur) {
-	$edit_login = false;
-	$edit_pass = true;
-}
-else {
-	$edit_login = false;
-	$edit_pass = false;
-}
+	if (($auteur['source'] != 'spip') AND $GLOBALS['ldap_present']) {
+		$edit_login = false;
+		$edit_pass = false;
+	}
+	else if (($connect_statut == "0minirezo") AND $connect_toutes_rubriques) {
+		$edit_login = true;
+		$edit_pass = true;
+	}
+	else if ($connect_id_auteur == $id_auteur) {
+		$edit_login = false;
+		$edit_pass = true;
+	}
+	else {
+		$edit_login = false;
+		$edit_pass = false;
+	}
 
 	$corps .= debut_cadre_relief("base-24.gif", true);
 
