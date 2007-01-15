@@ -634,8 +634,7 @@ function balise_PAGINATION_dist($p, $liste='true') {
 	// dans un boucle recurive ou qu'on a oublie le critere {pagination}
 	if (!$p->boucles[$b]->total_parties) {
 		erreur_squelette(
-			_L('zbug_xx: #PAGINATION sans critere {pagination}
-				ou employe dans une boucle recursive',
+			_T('zbug_pagination_sans_critere',
 				array('champ' => '#PAGINATION')
 			), $p->id_boucle);
 		$p->code = "''";

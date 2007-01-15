@@ -53,7 +53,7 @@ function critere_exclus_dist($idb, &$boucles, $crit) {
 function critere_doublons_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	if (!$boucle->primary)
-		erreur_squelette(_L('doublons sur une table sans index'), "BOUCLE$idb");
+		erreur_squelette(_T('zbug_doublon_table_sans_index'), "BOUCLE$idb");
 	$nom = !isset($crit->param[0]) ? "''" : calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
 	// mettre un tableau pour que ce ne soit pas vu comme une constante
 	$boucle->where[]= array("calcul_mysql_in('".$boucle->id_table . '.' . $boucle->primary .
