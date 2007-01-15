@@ -278,6 +278,7 @@ function spip_mysql_showtable($nom_table)
 
 // interface de abstract_sql.
 
+// http://doc.spip.org/@spip_mysql_fetch
 function spip_mysql_fetch($r, $t=SPIP_ASSOC) {
 	if ($r) return mysql_fetch_array($r, $t);
 }
@@ -298,6 +299,7 @@ function spip_sql_errno() {
 }
 
 // Interface de abstract_sql
+// http://doc.spip.org/@spip_mysql_count
 function spip_mysql_count($r) {
 	if ($r)	return mysql_num_rows($r);
 }
@@ -309,6 +311,7 @@ function spip_num_rows($r) {
 
 // Interface de abstract_sql (on est sur de l'argument, c'est le compilateur)
 
+// http://doc.spip.org/@spip_mysql_free
 function spip_mysql_free($r) {
 	return mysql_free_result($r);
 }
