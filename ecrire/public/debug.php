@@ -488,7 +488,7 @@ function debug_script ($t) {
 	debug_debut($GLOBALS['exec']);
 	if (!isset($GLOBALS['xhtml_error'])) {
 		list ($top, $avail, $grammaire, $rotlvl) = analyser_doctype($t);
-		$err = '<h3>' . _L('SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE&nbsp;:')
+		$err = '<h3>' . _T('spip_conforme_dtd')
 		. "<br /><a href='" 
 		. $grammaire
 		. "'>"
@@ -564,15 +564,15 @@ function emboite_texte($texte, $fonc='',$self='')
 			       PREG_SET_ORDER);
 
 		$err = '<tr><th>'
-		.  _L('Numero')
+		.  _T('numero')
 		. "</th><th>"
-		. _L('Occurrence')
+		. _T('occurrence')
 		. "</th><th>"
-		. _L('Ligne')
+		. _T('ligne')
 		. "</th><th>"
-		. _L('Colonne')
+		. _T('colonne')
 		. "</th><th>"
-		. _L('Erreur')
+		. _T('erreur')
 		. "</th></tr>";
 
 		$fautifs = array();
@@ -609,7 +609,7 @@ function emboite_texte($texte, $fonc='',$self='')
 		$err = "<h2 style='text-align: center'>"
 		.  $i
 		. "<a href='#fin_err'>"
-		.  _L(' erreur(s)')
+		.  " "._T('erreur_texte')
 		.  "</a></h2><table id='debut_err' style='width: 100%'>"
 		. $err
 		. " </table><a id='fin_err'></a>";
