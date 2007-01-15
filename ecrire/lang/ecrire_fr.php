@@ -117,6 +117,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cache_mode_non_compresse' => 'Les fichiers du cache sont enregistr&eacute;s en mode non compress&eacute;.',
 'cache_modifiable_webmestre' => 'Ce param&egrave;tre est modifiable par le webmestre du site.',
 'calendrier_synchro' => 'Si vous utilisez un logiciel d\'agenda compatible <b>iCal</b>, vous pouvez le synchroniser avec les informations de ce site.',
+'connexion_ldap' => 'Connexion :',
 
 
 // D
@@ -771,6 +772,7 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'plugin_etat_stable' => 'stable',
 'plugin_etat_test' => 'en test',
 'plugins_liste' => 'Liste des plugins',
+'protocole_ldap' => 'Version du protocole :',
 
 
 // R
@@ -1085,6 +1087,7 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_sites_tous' => 'Les sites r&eacute;f&eacute;renc&eacute;s',
 'titre_suivi_petition' => 'Suivi des p&eacute;titions',
 'titre_syndication' => 'Syndication de sites',
+'tls_ldap' => 'Transport Layer Security :',
 'tout_dossier_upload' => 'Tout le dossier @upload@',
 'trad_article_inexistant' => 'Il n\'y a pas d\'article portant ce num&eacute;ro.',
 'trad_article_traduction' => 'Toutes les versions de cet article&nbsp;:',
