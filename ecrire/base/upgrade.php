@@ -1246,6 +1246,46 @@ function maj_base($version_cible = 0) {
 		maj_version('1.924');
 	}
 
+	if (upgrade_vers(1.925, $version_installee, $version_cible)) {
+		include_spip('inc/flock');
+		/* deplacement des sessions */
+		$f_session = preg_files('data', 'session_');
+		$repertoire = _DIR_SESSIONS;
+		if(!@file_exists($repertoire)) {
+			$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
+			$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
+		}
+		foreach($f_session as $f) {
+			$d = basename($f);
+			@copy($f, $repertoire.$d);
+		}
+		/* deplacement des visites */
+		$f_visites = preg_files('data/visites');
+		$repertoire = sous_repertoire(_DIR_TMP, 'visites');
+		foreach($f_visites as $f) {
+			$d = basename($f);
+			@copy($f, $repertoire.$d);
+		}
+		/* deplacement des upload */
+		$auteurs = array();
+		$req = spip_query("SELECT login FROM spip_auteurs WHERE statut = '0minirezo'");
+		while($row = spip_fetch_array($req))
+			$auteurs[] = $row['login']; 
+		$f_upload = preg_files('upload', -1, 10000, $auteurs);
+		$repertoire = _DIR_TRANSFERT;
+		if(!@file_exists($repertoire)) {
+			$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
+			$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
+		}
+		foreach($auteurs as $login) {
+			$sous_repertoire = sous_repertoire(_DIR_TRANSFERT, $login);
+		}
+		foreach($f_upload as $f) {
+			@copy($f, _DIR_TMP.$f);
+		}
+		maj_version('1.925');
+	}
+
 }
 
 ?>
