@@ -189,7 +189,7 @@ $preg='') {
 		 && (!isset($lastreg) || $lastreg != $regs[$endr])) {
 			if (isset($pmid) || (($posmid = strpos($preg, '(.*)'))
 						&& ($pmid = '.') && ($psav = $preg))) {
-				$pmid = '(?:<\1[^>]*>(' . $pmid . '*)</\1>|.)';
+				$pmid = '(?:.*<\1[^>]*>(' . $pmid . '*)</\1>)*.';
 				$preg = substr_replace($psav, $pmid, $posmid + 1, 1);
 				$lastreg = $regs[$endr];
 				continue 2; # reprendre preg_match_all avec un $preg augmente
@@ -639,9 +639,7 @@ define('_RACCOURCI_URL', ',^(\S*?)\s*(\d+)(\?.*?)?(#[^\s]*)?$,S');
 function typer_raccourci ($lien) {
 
 	if (!preg_match(_RACCOURCI_URL, trim($lien), $match)) return false;
-
 	$f = $match[1];
-
 	// valeur par defaut et alias historiques
 	if (!$f) $f = 'article';
 	else if ($f == 'art') $f = 'article';
@@ -730,7 +728,8 @@ function calculer_url ($lien, $texte='', $pour='url') {
 // http://doc.spip.org/@calculer_url_article
 function calculer_url_article($id, $texte='') {
 	$lien = generer_url_article($id);
-	$row = @spip_fetch_array(spip_query("SELECT titre,lang FROM spip_articles WHERE id_article=$id"));
+	$s = spip_query("SELECT titre,lang FROM spip_articles WHERE id_article=$id");
+	$row = spip_fetch_array($s);
 	if ($texte=='')
 		$texte = supprimer_numero($row['titre']);
 	return array($lien, 'spip_in', $texte, $row['lang']);
@@ -740,7 +739,8 @@ function calculer_url_article($id, $texte='') {
 function calculer_url_rubrique($id, $texte='')
 {
 	$lien = generer_url_rubrique($id);
-	$row = @spip_fetch_array(spip_query("SELECT titre,lang FROM spip_rubriques WHERE id_rubrique=$id"));
+	$s = spip_query("SELECT titre,lang FROM spip_rubriques WHERE id_rubrique=$id");
+	$row = spip_fetch_array($s);
 	if ($texte=='')
 		$texte = supprimer_numero($row['titre']);
 	return array($lien, 'spip_in', $texte, $row['lang']);
@@ -750,7 +750,8 @@ function calculer_url_rubrique($id, $texte='')
 function calculer_url_mot($id, $texte='')
 {
 	$lien = generer_url_mot($id);
-	$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_mots WHERE id_mot=$id"));
+	$s = spip_query("SELECT titre FROM spip_mots WHERE id_mot=$id");
+	$row = spip_fetch_array($s);
 	if ($texte=='')
 		$texte = supprimer_numero($row['titre']);
 	return array($lien, 'spip_in', $texte);
@@ -760,7 +761,8 @@ function calculer_url_mot($id, $texte='')
 function calculer_url_breve($id, $texte='')
 {
 	$lien = generer_url_breve($id);
-	$row = @spip_fetch_array(spip_query("SELECT titre,lang FROM spip_breves WHERE id_breve=$id"));
+	$s = spip_query("SELECT titre,lang FROM spip_breves WHERE id_breve=$id");
+	$row = spip_fetch_array($s);
 	if ($texte=='')
 		$texte = supprimer_numero($row['titre']);
 	return array($lien, 'spip_in', $texte, $row['lang']);
@@ -771,7 +773,8 @@ function calculer_url_auteur($id, $texte='')
 {
 	$lien = generer_url_auteur($id);
 	if ($texte=='') {
-		$row = @spip_fetch_array(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$id"));
+		$s = spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$id");
+	$row = spip_fetch_array($s);
 		$texte = $row['nom'];
 	}
 	return array($lien, 'spip_in', $texte); # pas de hreflang
@@ -782,7 +785,8 @@ function calculer_url_document($id, $texte='')
 {
 	$lien = generer_url_document($id);
 	if ($texte=='') {
-		$row = @spip_fetch_array(spip_query("SELECT titre,fichier FROM spip_documents WHERE id_document=$id"));
+		$s = spip_query("SELECT titre,fichier FROM spip_documents WHERE id_document=$id");
+		$row = spip_fetch_array($s);
 		$texte = $row['titre'];
 		if ($texte=='')
 			$texte = preg_replace(",^.*/,","",$row['fichier']);
@@ -795,7 +799,8 @@ function calculer_url_site($id, $texte='')
 {
 	# attention dans le cas des sites le lien pointe non pas sur
 	# la page locale du site, mais directement sur le site lui-meme
-	$row = @spip_fetch_array(spip_query("SELECT nom_site,url_site FROM spip_syndic WHERE id_syndic=$id"));
+	$s = spip_query("SELECT nom_site,url_site FROM spip_syndic WHERE id_syndic=$id");
+	$row = spip_fetch_array($s);
 	if ($row) {
 		$lien = $row['url_site'];
 		if ($texte=='')
@@ -809,7 +814,8 @@ function calculer_url_forum($id, $texte='')
 {
 	$lien = generer_url_forum($id);
 	if ($texte=='') {
-		$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_forum WHERE id_forum=$id AND statut='publie'"));
+		$s = spip_query("SELECT titre FROM spip_forum WHERE id_forum=$id AND statut='publie'");
+		$row = spip_fetch_array($s);
 		if ($texte=='')
 			$texte = $row['titre'];
 	}
