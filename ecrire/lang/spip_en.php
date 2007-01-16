@@ -82,6 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_semaine' => 'weekly calendar',
 'choix_couleur_interface' => 'colour',
 'choix_interface' => 'choice of interface',
+'colonne' => 'Column',
 'confirm_changer_statut' => 'Confirmation required: You have asked to change this article\'s status. Do you wish to continue?',
 'correcte' => 'correct',
 
@@ -203,6 +204,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_document' => 'Document title:',
 'entree_titre_image' => 'Image title:',
 'envoi_via_le_site' => 'Sent via the site',
+'erreur' => 'Error',
+'erreur_texte' => 'error(s)',
 
 
 // F
@@ -550,6 +553,7 @@ Thank you for your participation!
 'lien_visite_site' => 'visit this site',
 'lien_visites' => '@visites@ visits',
 'lien_voir_auteur' => 'Check this author',
+'ligne' => 'Line',
 'login_acces_prive' => 'access to the private area',
 'login_autre_identifiant' => 'use a different ID',
 'login_connexion_refusee' => 'Connection rejected.',
@@ -589,9 +593,11 @@ Thank you for your participation!
 
 // N
 'navigateur_pas_redirige' => 'If your browser is not redirected, click here to continue.',
+'numero' => 'Number',
 
 
 // O
+'occurence' => 'Instance',
 'onglet_affacer_base' => 'Delete the database',
 'onglet_auteur' => 'The author',
 'onglet_contenu_site' => 'The site\'s content',
@@ -658,6 +664,7 @@ and connect again to the site.
 
 
 // S
+'spip_conforme_dtd' => 'SPIP finds this page to be in compliance with its DOCTYPE:',
 'squelette' => 'template',
 'squelette_inclus_ligne' => 'included template, line',
 'squelette_ligne' => 'template, line',
@@ -744,15 +751,18 @@ and connect again to the site.
 'zbug_code' => 'code',
 'zbug_critere_inconnu' => 'unknown criterion @critere@',
 'zbug_distant_interdit' => 'external data forbidden',
+'zbug_doublon_table_sans_index' => 'doubles in a table without an index',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: double definition',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: missing closing tag',
 'zbug_erreur_boucle_syntaxe' => 'Incorrect loop (BOUCLE) syntax ',
+'zbug_erreur_compilation' => 'Compilation error',
 'zbug_erreur_execution_page' => 'error in page calculation',
 'zbug_erreur_filtre' => 'Error - undefined filter: <b>"@filtre@"</b>',
 'zbug_erreur_meme_parent' => '{meme_parent} only applies to loops (FORUMS) and (RUBRIQUES)',
 'zbug_erreur_squelette' => 'Error(s) in template',
 'zbug_info_erreur_squelette' => '&#1615;Error in the site',
 'zbug_inversion_ordre_inexistant' => 'reversal of nonexistent order',
+'zbug_pagination_sans_critere' => '#PAGINATION tag without {pagination} criterion, or used in a recursive loop',
 'zbug_parametres_inclus_incorrects' => 'Wrong inclusion parameters',
 'zbug_resultat' => 'result',
 'zbug_serveur_indefini' => 'undefined SQL server',

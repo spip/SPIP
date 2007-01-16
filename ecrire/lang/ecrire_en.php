@@ -117,6 +117,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cache_mode_non_compresse' => 'The cache files are written in uncompressed mode.',
 'cache_modifiable_webmestre' => 'This parameter can be modified by the webmaster.',
 'calendrier_synchro' => 'If you use a calendar application compatible with <b>iCal</b>, you can synchronize it with this site\'s information.',
+'connexion_ldap' => 'Connection:',
 
 
 // D
@@ -494,15 +495,15 @@ requiring an FTP access to the Web site.',
 'info_publies' => 'Your articles published online',
 'info_question_accepter_visiteurs' => 'If your site\'s templates allow visitors to register without entering the private area, please activate the following option:',
 'info_question_gerer_statistiques' => 'Should your site manage visits statistics?',
-'info_question_inscription_nouveaux_redacteurs' => 'Do you allow the registration of new editors from
-		the published site? If you agree, visitors could register
-		through an automated form, and will access then the private area to
-		tender their own articles. <blockquote><i>During the registration process,
-		users receive an automated e-mail
-		providing them with their access code to the private site. Some
-		hosts disable mail sending on their
-		servers: in that case, automated registration cannot be
-		implemented.',
+'info_question_inscription_nouveaux_redacteurs' => 'Do you wish to allow the new editors to register
+ from the public site? If you agree to this, visitors will be able to  register
+  using an automatic form, and then access the private area to
+  tender their own articles. <blockquote><i>During the registration process,
+  users receive an automatic email
+  giving them their access code to the private area. Some
+  service providers disallow the sending of email from their
+  servers: in that case, automated registration cannot be
+  implemented.',
 'info_question_mots_cles' => 'Do you wish to use keywords in your site?',
 'info_question_proposer_site' => 'Who can propose referenced sites?',
 'info_question_utilisation_moteur_recherche' => 'Do you wish to use the search engine integrated to SPIP?
@@ -766,6 +767,7 @@ in a colour indicating their status:',
 'plugin_etat_stable' => 'stable',
 'plugin_etat_test' => 'being tested',
 'plugins_liste' => 'Plugin list',
+'protocole_ldap' => 'Protocol version:',
 
 
 // R
@@ -1076,6 +1078,7 @@ you can perform searches on sites and
 'titre_sites_tous' => 'Referenced sites',
 'titre_suivi_petition' => 'Petitions follow-up',
 'titre_syndication' => 'Sites syndication',
+'tls_ldap' => 'Transport Layer Security :',
 'tout_dossier_upload' => 'The whole @upload@ directory',
 'trad_article_inexistant' => 'There is no article with this number',
 'trad_article_traduction' => 'All the versions of this article:',
