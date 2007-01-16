@@ -135,13 +135,13 @@ function xml_parsestring($phraseur, $data)
 		  coordonnees_erreur($phraseur) . "<br />\n" .
 		  (!$phraseur_xml->depth ? '' :
 		   (
-		    _L("derni&egrave;re balise non referm&eacute;e&nbsp;: ") .
-		    "<tt>" .
+		    _T('erreur_balise_non_fermee') .
+		    " <tt>" .
 		    $phraseur_xml->ouvrant[$phraseur_xml->depth] .
-		    "</tt>" .
-		    _L(" ligne ") .
+		    "</tt> " .
+		    _T('ligne') .
 		    $phraseur_xml->reperes[$phraseur_xml->depth] .
-		    "<br />\n" )));
+		    " <br />\n" )));
 	}
 }
 
