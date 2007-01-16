@@ -85,6 +85,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'calendrier_synchro_sync' => '<NEW>Sincronizar el archivo <i>iCal</i><br /> (Mozilla Calendar, Apple iCal...)',
 'choix_couleur_interface' => 'color',
 'choix_interface' => 'elecci&oacute; de la interf&iacute;cie',
+'colonne' => 'Columna',
 'confirm_changer_statut' => 'Atenci&oacute;, heu demanat canviar l\'estat d\'aquest element. Voleu continuar? ',
 'correcte' => 'correcte',
 
@@ -196,6 +197,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_repertoires_suivants' => '<p><b>Els seg&uuml;ents directoris no s&oacute;n accessibles a l\'escriptura:</b></p> <ul>@bad_dirs@.</ul>
   <p>Per solucionar el problema feu servir el vostre client FTP per tal de regular els drets d\'acc&eacute;s de cadascun d\'aquests directoris. El procediment s\'explica detalladament a la guia d\'instal&middot;laci&oacute;.</p>
   <p>Un cop feta aquesta manipulaci&oacute;, podreu ',
+'double_occurrence' => 'Doble inst&agrave;ncia',
 
 
 // E
@@ -203,6 +205,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_document' => 'T&iacute;tol del document:',
 'entree_titre_image' => 'T&iacute;tol de la imatge:',
 'envoi_via_le_site' => 'Enviament per mitj&agrave; del lloc Web',
+'erreur' => 'Error',
+'erreur_balise_non_fermee' => '&uacute;ltima etiqueta sense tancar:',
+'erreur_texte' => 'error(s)',
 
 
 // F
@@ -549,6 +554,7 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'lien_visite_site' => 'visitar aquest lloc',
 'lien_visites' => '@visites@&nbsp;visites',
 'lien_voir_auteur' => 'Veure aquest autor',
+'ligne' => 'L&iacute;nia',
 'login_acces_prive' => 'acc&eacute;s a l\'espai privat',
 'login_autre_identifiant' => 'connectar-se amb un altre nom d\'usuari/&agrave;ria',
 'login_connexion_refusee' => 'connexi&oacute; rebutjada.',
@@ -585,9 +591,11 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 
 // N
 'navigateur_pas_redirige' => 'Si el vostre navegador no &eacute;s redirigit, cliqueu aqu&iacute; per continuar.',
+'numero' => 'N&uacute;mero',
 
 
 // O
+'occurence' => 'Inst&agrave;ncia',
 'onglet_affacer_base' => 'Suprimir la base de dades',
 'onglet_auteur' => 'L\'autor/a',
 'onglet_contenu_site' => 'Contingut del lloc',
@@ -648,6 +656,7 @@ i tornar-vos a connectar al lloc.
 
 
 // S
+'spip_conforme_dtd' => 'SPIP considera aquest document conforme al seu DOCTYPE :',
 'squelette' => 'esquelet',
 'squelette_inclus_ligne' => 'esquelet incl&ograve;s, l&iacute;nia',
 'squelette_ligne' => 'esquelet, l&iacute;nia',
@@ -729,15 +738,18 @@ i tornar-vos a connectar al lloc.
 'zbug_code' => 'codi',
 'zbug_critere_inconnu' => 'criteri desconegut @critere@',
 'zbug_distant_interdit' => 'prohibit amb dades externes',
+'zbug_doublon_table_sans_index' => 'dobles em una taula sense &iacute;ndex',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: doble definici&oacute;',
 'zbug_erreur_boucle_fermant' => ' BOUCLE@id@: falta tag que tanque',
 'zbug_erreur_boucle_syntaxe' => 'Sintaxi incorrecte del bucle',
+'zbug_erreur_compilation' => 'Error de compilaci&oacute;',
 'zbug_erreur_execution_page' => 'error d\'execuci&oacute; de la p&agrave;gina',
 'zbug_erreur_filtre' => 'Error: filtre <b>&laquo; @filtre@ &raquo;</b> no definit',
 'zbug_erreur_meme_parent' => '{meme_parent} nom&eacute;s s\'aplica als bucles (FORUMS) o (RUBRIQUES)',
 'zbug_erreur_squelette' => 'Error(s) en l\'esquelet',
 'zbug_info_erreur_squelette' => 'Error en el lloc Web',
 'zbug_inversion_ordre_inexistant' => 'inversi&oacute; d\'un ordre inexistent',
+'zbug_pagination_sans_critere' => '#PAGINATION sense criteri {pagination} o  fet servir a dins d\'un bucle recursiu.',
 'zbug_parametres_inclus_incorrects' => 'Par&agrave;metres d\'inclusi&oacute; incorrectes',
 'zbug_resultat' => 'resultat',
 'zbug_serveur_indefini' => 'servidor SQL sense definir',

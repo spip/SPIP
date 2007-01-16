@@ -85,6 +85,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'calendrier_synchro_sync' => 'Sincronizar el archivo <i>iCal</i><br /> (Mozilla Calendar, Apple iCal...)',
 'choix_couleur_interface' => 'color',
 'choix_interface' => 'Selecci&oacute;n de la interfase',
+'colonne' => '<NEW>Colonne',
 'confirm_changer_statut' => 'Cuidado, has pedido cambiar el estado de este elemento. &iquest;Deseas continuar?',
 'correcte' => 'correcta',
 
@@ -199,6 +200,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 de las carpetas mencionadas. El procedimiento se explica detalladamente en la gu&iacute;a de instalaci&oacute;n.
 <p>Una vez terminado este proceso, podr&aacute;s  
 ',
+'double_occurrence' => '<NEW>Double occurrence',
 
 
 // E
@@ -206,6 +208,9 @@ de las carpetas mencionadas. El procedimiento se explica detalladamente en la gu
 'entree_titre_document' => 'T&iacute;tulo del documento',
 'entree_titre_image' => 'T&iacute;tulo de la imagen',
 'envoi_via_le_site' => 'Env&iacute;o a trav&eacute;s del sitio',
+'erreur' => '<NEW>Erreur',
+'erreur_balise_non_fermee' => '<NEW>derni&egrave;re balise non referm&eacute;e :',
+'erreur_texte' => '<NEW>erreur(s)',
 
 
 // F
@@ -554,6 +559,7 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'lien_visite_site' => 'Visitar este sitio',
 'lien_visites' => '@visites@ visitas.',
 'lien_voir_auteur' => 'Ver esta autor/a',
+'ligne' => '<NEW>Ligne',
 'login_acces_prive' => 'acceso al espacio privado',
 'login_autre_identifiant' => 'conectarse con otro nombre de usuario',
 'login_connexion_refusee' => 'Conexi&oacute;n rechazada.',
@@ -590,9 +596,11 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 
 // N
 'navigateur_pas_redirige' => 'Si tu navegador no te redirige automaticamente, pincha aqu&iacute; para continuar.',
+'numero' => '<NEW>Num&eacute;ro',
 
 
 // O
+'occurence' => '<NEW>Occurence',
 'onglet_affacer_base' => 'Borrar la base',
 'onglet_auteur' => 'La autor/a',
 'onglet_contenu_site' => 'Contenido del sitio',
@@ -654,6 +662,7 @@ volver a conectarte al sitio.
 
 
 // S
+'spip_conforme_dtd' => '<NEW>SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE :',
 'squelette' => 'esqueleto',
 'squelette_inclus_ligne' => 'esqueleto inclu&iacute;do, l&iacute;nea',
 'squelette_ligne' => 'esqueleto, l&iacute;nea',
@@ -729,15 +738,18 @@ Intenta',
 'zbug_code' => 'c&oacute;digo',
 'zbug_critere_inconnu' => 'criterio desconocido @critere@',
 'zbug_distant_interdit' => 'externo prohibido',
+'zbug_doublon_table_sans_index' => '<NEW>doublons sur une table sans index',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: doble definici&oacute;n',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: falta la baliza de cierre',
 'zbug_erreur_boucle_syntaxe' => 'Sintaxis de bucle incorrecto',
+'zbug_erreur_compilation' => '<NEW>Erreur de compilation',
 'zbug_erreur_execution_page' => 'error de ejecuci&oacute;n de la p&aacute;gina',
 'zbug_erreur_filtre' => 'Error: filtro <b>&laquo; @filtre@ &raquo;</b> no definido',
 'zbug_erreur_meme_parent' => '{meme_parent} s&oacute;lo se aplica a los  bucles (FORUMS) o (RUBRIQUES)',
 'zbug_erreur_squelette' => 'Error(es) en el esqueleto',
 'zbug_info_erreur_squelette' => 'Error en el sitio',
 'zbug_inversion_ordre_inexistant' => 'inversi&oacute;n de un orden inexistente',
+'zbug_pagination_sans_critere' => '<NEW>#PAGINATION sans crit&egrave;re {pagination} ou employ&eacute; dans une boucle recursive',
 'zbug_parametres_inclus_incorrects' => 'Par&aacute;metreos de inclusi&oacute;n incorrectos',
 'zbug_resultat' => 'resultado',
 'zbug_serveur_indefini' => 'servidor SQL indefinido',
