@@ -55,7 +55,7 @@ function tester_compatibilite_hebergement() {
 		if ($php[0]<$min[0]
 		OR ($php[0]==$min[0] AND $php[1]<$min[1])
 		OR ($php[0]==$min[0] AND $php[1]==$min[1] AND $php[2]<$min[2]))
-			$err[] = _L("PHP version $p insuffisant (minimum = $m)");
+			$err[] = _T('install_php_version', array('version' => $p,  'minimum' => $m));
 	}
 
 	if (!function_exists('mysql_query'))
