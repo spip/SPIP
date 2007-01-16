@@ -143,7 +143,7 @@ if (spip_num_rows($result) > 0) {
 		echo '<ul><li>' .
 		http_href( generer_url_public('backend-breves', ""), 
 			http_img_pack( 'feed.png', 'RSS', '') .'&nbsp; '.
-			_L('syndication des br&egrave;ves du site'), _L('syndication des br&egrave;ves du site')) .
+			_T('ical_lien_rss_breves'), _T('ical_lien_rss_breves')) .
 		"</li></ul>";
 		
 	}

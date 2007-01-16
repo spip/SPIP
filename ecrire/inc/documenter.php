@@ -98,7 +98,7 @@ function inc_documenter_dist(
 
 		if (count($documents) > 3) {
 			$head .= "<div style='background-color: #dddddd; padding: 4px; color: black; text-align: right' class='arial1'>"
-			. ajax_action_auteur('documenter', "$s$doc/$type", $script, "id_$type=$doc&s=$s&type=$type",array(_L('Supprimer_tout')))
+			. ajax_action_auteur('documenter', "$s$doc/$type", $script, "id_$type=$doc&s=$s&type=$type",array(_T('lien_tout_supprimer')))
 			. "</div>\n";
 		}
 	} else $head = '';

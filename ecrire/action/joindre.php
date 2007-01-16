@@ -242,7 +242,7 @@ function joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirec
 
 	    if (_tmp_dir == _DIR_DOC)
 	      {include_spip('minipres');
-		echo minipres(_L('Op&eacute;ration impossible'));
+		echo minipres(_T('avis_operation_impossible'));
 		exit;
 	      }
 	    include_spip('inc/pclzip');
