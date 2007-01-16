@@ -1752,24 +1752,8 @@ function url_absolue_css ($css) {
 	return $f;
 }
 
-// recuperere le chemin d'une css existante et :
-// cree (ou recree) dans _DIR_VAR/cache_css/ une css compactee en nettoyant tout ce qui n'est pas significatif
 // http://doc.spip.org/@compacte_css
-function compacte_css ($css) {
-	if (!preg_match(',\.css$,i', $css, $r)) return $css;
-	
-	$f = basename($css,'.css');
-	$f = sous_repertoire (_DIR_VAR, 'cache-css') 
-		. preg_replace(",(.*?)(_rtl|_ltr)?$,","\\1-compacte-" . substr(md5("$css-compacte"), 0,4) . "\\2",$f) 
-		. '.css';
-
-	if ((@filemtime($f) > @filemtime($css))
-	AND ($GLOBALS['var_mode'] != 'recalcul'))
-		return $f;
-
-	if (!lire_fichier($css, $contenu))
-		return $css;
-
+function compacte_css ($contenu) {
 	// nettoyer la css de tout ce qui sert pas
 	$contenu = preg_replace(",/\*.*\*/,Ums","",$contenu); // pas de commentaires
 	$contenu = preg_replace(",\s(?=\s),Ums","",$contenu); // pas d'espaces consecutifs
@@ -1779,16 +1763,8 @@ function compacte_css ($css) {
 	$contenu = preg_replace(",([^{}]*){},Ums"," ",$contenu); // supprimer les declarations vides
 	$contenu = trim($contenu);
 
-	// ecrire la css
-	if (!ecrire_fichier($f, $contenu))
-		return $css;
-
-	return $f;
+	return $contenu;
 }
-
-### fonction depreciee, laissee ici pour compat ascendante 1.9
-// http://doc.spip.org/@entites_unicode
-function entites_unicode($texte) { return charset2unicode($texte); }
 
 // filtre table_valeur
 // permet de recuperer la valeur d'un tableau pour une cle donnee
@@ -1892,19 +1868,59 @@ function concat(){
 	return join('', $args);
 }
 
+
 // Compacte du javascript grace a javascriptcompressor
 // utile pour dist/jquery.js par exemple
-// attention contrairement a compacte_css ici c'est un flux qui est compacte
-// et pas un fichier ... comment unifier ?
 // http://doc.spip.org/@compacte_js
 function compacte_js($flux) {
-	include_spip('inc/jscompressor');
+	include_spip('inc/compacte_js');
 	$k = new JavaScriptCompressor();
 	// en cas d'echec (?) renvoyer l'original
 	if (strlen($t = $k->getClean($flux)))
 		return $t;
 	else
 		return $flux;
+}
+
+// Si la source est un chemin, on retourne un chemin avec le contenu compacte
+// dans _DIR_VAR/cache_$format/
+// Si c'est un flux on le renvoit compacte
+// Si on ne sait pas compacter, on renvoie ce qu'on a recu
+function compacte($source, $format = null) {
+	if (!$format AND preg_match(',\.(js|css)$,', $source, $r))
+		$format = $r[1];
+	if (!function_exists($compacte = 'compacte_'.$format))
+		return $source;
+
+	// Si on n'importe pas, est-ce un fichier ?
+	if (!preg_match(',[\s{}],', $source)
+	AND preg_match(',\.'.$format.'$,i', $source, $r)
+	AND file_exists($source)) {
+		$f = basename($source,'.'.$format);
+		$f = sous_repertoire (_DIR_VAR, 'cache-'.$format) 
+		. preg_replace(",(.*?)(_rtl|_ltr)?$,","\\1-compacte-"
+		. substr(md5("$source-compacte"), 0,4) . "\\2", $f, 1)
+		. '.' . $format;
+
+		if ((@filemtime($f) > @filemtime($css))
+		AND ($GLOBALS['var_mode'] != 'recalcul'))
+			return $f;
+
+		if (!lire_fichier($source, $contenu))
+			return $source;
+
+		// traiter le contenu
+		$contenu = $compacte($contenu);
+
+		// ecrire le fichier destination, en cas d'echec renvoyer la source
+		if (ecrire_fichier($f, $contenu))
+			return $f;
+		else
+			return $source;
+	}
+
+	// Sinon simple compactage de contenu
+	return $compacte($source);
 }
 
 ?>
