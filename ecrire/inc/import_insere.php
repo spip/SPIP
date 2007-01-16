@@ -71,7 +71,9 @@ function insere_2_init($request) {
 // http://doc.spip.org/@translate_init
 function translate_init($request) {
 
-	include_spip('inc/texte.php'); // pour les Regexp des raccourcis
+	include_spip('inc/texte'); // pour les Regexp des raccourcis
+	include_spip('inc/chercher_logo'); // pour les noms des logos
+	include_spip('inc/distant'); // pour recuperer les logos
 
 	$q = spip_query("SELECT * FROM spip_translate");
 	$trans = array();
@@ -132,8 +134,26 @@ function import_inserer_translate($values, $table, $desc, $request, $vals) {
 	global $trans;
 	$p = $desc['key']["PRIMARY KEY"];
 	$v = $values[$p];
-	if (!isset($trans[$p]) OR !isset($trans[$p][$v]) OR $trans[$p][$v][2])
+	if (!isset($trans[$p]) OR !isset($trans[$p][$v]) OR $trans[$p][$v][2]){
 		spip_query("REPLACE $table (" . join(',',array_keys($values)) . ') VALUES (' .substr($vals,1) . ')');
+		if ($p == 'id_rubrique') {
+		  $t = type_du_logo($p);
+		  $url = $request['url_site'] . _NOM_PERMANENTS_ACCESSIBLES;
+
+		  $new = $trans[$p][$v][0];
+		  foreach ($GLOBALS['formats_logos'] as $format) {
+		    $old = $url . $t . 'on' . "$v." . $format;
+		    $logo1 = recuperer_page($old);
+		    if ($logo1) {
+		      ecrire_fichier(_DIR_LOGOS. $t . 'on' . "$new." . $format, $logo1);
+		    }
+		    $nom = $url . $t . 'off' . "$v." . $format;
+		    $logo2 = recuperer_page($nom);
+		    if ($logo2)
+		      ecrire_fichier(_DIR_LOGOS.$t . 'off' . "$new." . $format, $logo2);
+		  }
+		}
+	}
 }
 
 // Insertion avec renumerotation, y compris des raccourcis.
