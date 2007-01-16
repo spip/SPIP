@@ -21,8 +21,9 @@ function validerElement($phraseur, $name, $attrs)
 
 	if (!isset($phraseur_xml->dtc->elements[$name]))
 
-		$phraseur_xml->err[]= " <b>$name</b>"
-		. _L(' balise inconnue ')
+		$phraseur_xml->err[]= " <b>$name</b> "
+		. _L('balise inconnue')
+		. ' '
 		.  coordonnees_erreur($phraseur);
 	else {
 	// controler les filles illegitimes, ca suffit 
@@ -34,13 +35,13 @@ function validerElement($phraseur, $name, $attrs)
 	      if (isset($phraseur_xml->dtc->elements[$pere]))
 		if (!@in_array($name, $phraseur_xml->dtc->elements[$pere])) {
 	          $bons_peres = @join ('</b>, <b>', $phraseur_xml->dtc->peres[$name]);
-	          $phraseur_xml->err[]= " <b>$name</b>"
-	            . _L(" n'est pas un fils de ")
-	            . '<b>'
+	          $phraseur_xml->err[]= " <b>$name</b> "
+	            . _L('n\'est pas un fils de')
+	            . ' <b>'
 	            .  $pere
 	            . '</b>'
 	            . (!$bons_peres ? ''
-	               : (_L( '<p style="font-size: 80%"> mais de <b>') . $bons_peres . '</b></p>'))
+	               : ('<p style="font-size: 80%"> '._L('mais de').' <b>'. $bons_peres . '</b></p>'))
 		    .  coordonnees_erreur($phraseur);
 		} else if ($phraseur_xml->dtc->regles[$pere][0]=='/') {
 		  $phraseur_xml->fratrie[substr($depth,2)].= "$name ";
@@ -55,8 +56,8 @@ function validerElement($phraseur, $name, $attrs)
 		    { if (($v[1] == '#REQUIRED') AND (!isset($attrs[$n])))
 			$phraseur_xml->err[]= " <b>$n</b>"
 			  . '&nbsp;:&nbsp;'
-			  . _L(" attribut obligatoire mais absent dans ")
-			  . "<b>$name</b>"
+			  . _L('attribut obligatoire mais absent dans')
+			  . " <b>$name</b>"
 			  .  coordonnees_erreur($phraseur);
 		    }
 	  }
@@ -78,15 +79,17 @@ function validerAttribut($phraseur, $name, $val, $bal)
 		$bons = join(', ',array_keys($a));
 		if ($bons)
 		  $bons = " title=' " .
-		    _L('attributs connus: ') .
+		    _L('attributs connus') .
+		    '&nbsp;: ' .
 		    $bons .
 		    "'";
 		$bons .= " style='font-weight: bold'";
 
-		$phraseur_xml->err[]= " <b>$name</b>"
-		. _L(' attribut inconnu de ')
-		. "<a$bons>$bal</a>"
-		. _L(" (survoler pour voir les corrects)")
+		$phraseur_xml->err[]= " <b>$name</b> "
+		. _L('attribut inconnu de')
+		. " <a$bons>$bal</a> ("
+		. _L('survoler pour voir les corrects')
+		. ")"
 		.  coordonnees_erreur($phraseur);
 	} else{
 		$type =  $a[$name][0];
@@ -104,13 +107,13 @@ function validerAttribut_ID($phraseur, $name, $val, $bal)
 
 	if (isset($phraseur_xml->ids[$val])) {
 		list($l,$c) = $phraseur_xml->ids[$val];
-		$phraseur_xml->err[]= " <p><b>$val</b>"
-		      . _L(" valeur de l'attribut ")
-		      . "<b>$name</b>"
-		      . _L(' de ')
-		      . "<b>$bal</b>"
-		      . _L(" vu auparavant ")
-		      . "(L$l,C$c)"
+		$phraseur_xml->err[]= " <p><b>$val</b> "
+		      . _L('valeur de l\'attribut')
+		      . " <b>$name</b> "
+		      . _L('de')
+		      . " <b>$bal</b> "
+		      . _L('vu auparavant')
+		      . " (L$l,C$c)"
 		      .  coordonnees_erreur($phraseur);
 	} else {
 		valider_motif($phraseur, $name, $val, $bal, _REGEXP_ID);
@@ -139,12 +142,13 @@ function valider_motif($phraseur, $name, $val, $bal, $motif)
 	global $phraseur_xml;
 
 	if (!preg_match($motif, $val)) {
-		$phraseur_xml->err[]= " <p><b>$val</b>"
-		. _L(" valeur de l'attribut ")
-		. "<b>$name</b>"
-		. _L(' de ')
-		. "<b>$bal</b>"
-		. _L(" n'est pas conforme au motif</p><p>")
+		$phraseur_xml->err[]= " <p><b>$val</b> "
+		. _L('valeur de l\'attribut')
+		. " <b>$name</b> "
+		. _L('de')
+		. " <b>$bal</b> "
+		. _L('n\'est pas conforme au motif')
+		. "</p><p>"
 		. "<b>" . $motif . "</b></p>"
 		.  coordonnees_erreur($phraseur);
 	}
@@ -154,8 +158,9 @@ function valider_motif($phraseur, $name, $val, $bal, $motif)
 function valider_idref(&$own, $nom, $ligne, $col)
 {
 	if (!isset($own->ids[$nom]))
-		$own->err[]= " <p><b>$nom</b>"
-		. _L(" ID inconnu ")
+		$own->err[]= " <p><b>$nom</b> "
+		. _L('ID inconnu')
+		. " "
 		. $ligne
 		. " "
 		. $col;
@@ -212,23 +217,24 @@ function finElement($phraseur, $name)
 	// controler que les balises devant etre vides le sont 
 	if ($vide) {
 	  if ($n <> ($k + $c))
-			$phraseur_xml->err[]= " <p><b>$name</b>"
-			.  _L(' balise non vide')
+			$phraseur_xml->err[]= " <p><b>$name</b> "
+			.  _L('balise non vide')
 			.  coordonnees_erreur($phraseur);
 	// pour les regles PCDATA ou iteration de disjonction, tout est fait
 	} elseif ($regle AND ($regle != '*')) {
 		if ($regle == '+') {
 		    // iteration de disjonction non vide: 1 balise au -
 			if ($n == $k) {
-				$phraseur_xml->err[]= " <p>\n<b>$name</b>"
-				  .  _L(' balise vide')
+				$phraseur_xml->err[]= " <p>\n<b>$name</b> "
+				  .  _L('balise vide')
 				  .  coordonnees_erreur($phraseur);
 			}
 		} else {
 			$f = $phraseur_xml->fratrie[substr($depth,2)];
 			if (!preg_match($regle, $f))
-				$phraseur_xml->err[]= " <p>\n<b>$name</b>"
-				  .  _L(' succession des fils incorrecte : <b>')
+				$phraseur_xml->err[]= " <p>\n<b>$name</b> "
+				  .  _L('succession des fils incorrecte')
+				  . '&nbsp;: <b>'
 				  . $f
 				  . '</b>'
 				  .  coordonnees_erreur($phraseur);
@@ -265,8 +271,9 @@ function defautElement($phraseur, $data)
 		foreach ($r as $m) {
 			list($t,$e) = $m;
 			if (!isset($phraseur_xml->dtc->entites[$e]))
-				$phraseur_xml->err[]= " <b>$e</b>"
-				  . _L(' entite inconnue ')
+				$phraseur_xml->err[]= " <b>$e</b> "
+				  . _L('entite inconnue')
+				  . ' '
 				  .  coordonnees_erreur($phraseur);
 		}
 
