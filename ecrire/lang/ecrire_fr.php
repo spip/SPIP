@@ -54,6 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_ajouter' => 'Ajouter',
 'bouton_ajouter_participant' => 'AJOUTER UN PARTICIPANT&nbsp;:',
 'bouton_annonce' => 'ANNONCE',
+'bouton_annuler' => 'Annuler',
 'bouton_checkbox_envoi_message' => 'possibilit&eacute; d\'envoyer un message',
 'bouton_checkbox_indiquer_site' => 'indiquer obligatoirement un site Web',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'les administrateurs du site',
