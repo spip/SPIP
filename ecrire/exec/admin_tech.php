@@ -142,10 +142,10 @@ echo "</table>";
 	  
 	debut_cadre_relief();
 	echo  "<p><input name='insertion' type='radio' />&nbsp;",
-	  _L('Fusionner la base actuelle et la sauvegarde'),
+	  _T('sauvegarde_fusionner'),
 	  '</p>';
 	echo  "<p>",
-	  _L("Eventuellement, URL du site d'origine&nbsp;:"),
+	  _T('sauvegarde_url_origine'),
 	  "<input name='url_site' type='text' />",
 	  '</p>';
 	fin_cadre_relief();
