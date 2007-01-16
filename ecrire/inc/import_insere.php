@@ -295,12 +295,33 @@ function import_identifie_parent_id_article($id_parent, $titre, $v)
 	$id_parent = importe_translate_maj('id_rubrique', (0 - $id_parent));
 
 	$titre = _q($titre);
-	$r = spip_fetch_array(spip_query("SELECT id_article FROM spip_articles WHERE titre=$titre AND id_rubrique=$id_parent" ));
-
+	$r = spip_fetch_array(spip_query("SELECT id_article FROM spip_articles WHERE titre=$titre AND id_rubrique=$id_parent AND statut<>'poubelle'" ));
 	if ($r) return (0 - $r['id_article']);
 
 	$r = spip_abstract_insert('spip_articles', '', '()');
 	spip_query("REPLACE spip_translate (id_old, id_new, titre, type, ajout) VALUES ($v,$r,$titre,'id_article',1)");
+	return $r;
+}
+
+// idem pour les breves
+// http://doc.spip.org/@import_identifie_id_article
+function import_identifie_id_breve($values, $table, $desc, $request) {
+	return array((0 - $values['id_rubrique']), $values['titre']);
+}
+
+// Passe 2 des breves comme pour les mots
+
+// http://doc.spip.org/@import_identifie_parent_id_article
+function import_identifie_parent_id_breve($id_parent, $titre, $v)
+{
+	$id_parent = importe_translate_maj('id_rubrique', (0 - $id_parent));
+
+	$titre = _q($titre);
+	$r = spip_fetch_array(spip_query("SELECT id_breve FROM spip_breves WHERE titre=$titre AND id_rubrique=$id_parent AND statut<>'refuse'" ));
+	if ($r) return (0 - $r['id_breve']);
+
+	$r = spip_abstract_insert('spip_breves', '', '()');
+	spip_query("REPLACE spip_translate (id_old, id_new, titre, type, ajout) VALUES ($v,$r,$titre,'id_breve',1)");
 	return $r;
 }
 
