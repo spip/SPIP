@@ -1278,7 +1278,8 @@ function maj_base($version_cible = 0) {
 			$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
 		}
 		foreach($auteurs as $login) {
-			$sous_repertoire = sous_repertoire(_DIR_TRANSFERT, $login);
+			if(is_dir('upload/'.$login))
+				$sous_repertoire = sous_repertoire(_DIR_TRANSFERT, $login);
 		}
 		foreach($f_upload as $f) {
 			@copy($f, _DIR_TMP.$f);
