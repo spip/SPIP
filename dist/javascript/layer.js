@@ -188,14 +188,20 @@ function verifForm(racine) {
   jQuery("input.forml,input.formo,textarea.forml,textarea.formo",racine)
   .each(function(){
   	var jField = jQuery(this);
+		//Get the nearest hidden parent
+		var hiddenparent = jQuery(jField).parents(":hidden").filter(":last");
+		//If it finds it make him have a layout in order to retrieve the field width
+		if(hiddenparent.size()) hiddenparent.css({display:"block"});
     var w = jField.css('width');
     if(!w) {
       jField.css('width','95%');
     } else {
-      w = parseInt(w)-
-      (parseInt(jField.css("borderLeftWidth"))+parseInt(jField.css("borderRightWidth"))+
-        parseInt(jField.css("paddingLeft"))+parseInt(jField.css("paddingRight")));
-        jField.css('width', w+'px');
+			p = hiddenparent.size()?hiddenparent.parent():jField.parent();
+			w = parseInt(w)-
+      (parseInt(p.css("borderLeftWidth"))+parseInt(p.css("borderRightWidth"))+
+        parseInt(p.css("paddingLeft"))+parseInt(p.css("paddingRight")));
+      if(hiddenparent.size()) hiddenparent.css({display:"none"});
+			jField.width(w+'px');
     }
   });
 }
