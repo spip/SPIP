@@ -140,8 +140,13 @@ function import_lire_champs($f, $fields, $gz, $phpmyadmin, $table)
 {
 	$values = array();
 	
-	$char = $GLOBALS['meta']['charset_insertion'];
-	if ($char == $GLOBALS['meta']['charset_restauration']) $char = '';
+	if (!isset($GLOBALS['meta']['charset_insertion']))
+		$charset = '';
+	else {
+		$charset == $GLOBALS['meta']['charset_insertion'];
+		if ($charset == $GLOBALS['meta']['charset'])
+			$charset = '';
+	}
 
 	for (;;) {
 		$b = false;
