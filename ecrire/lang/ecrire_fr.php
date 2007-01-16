@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_non_acces_message' => 'Vous n\'avez pas acc&egrave;s &agrave; ce message.',
 'avis_non_acces_page' => 'Vous n\'avez pas acc&egrave;s &agrave; cette page.',
 'avis_operation_echec' => 'L\'op&eacute;ration a &eacute;chou&eacute;.',
+'avis_operation_impossible' => 'Op&eacute;ration impossible',
 'avis_probleme_archive' => 'Probl&egrave;me de lecture du fichier @archive@',
 'avis_site_introuvable' => 'Site introuvable',
 'avis_site_syndique_probleme' => 'Attention : la syndication de ce site a rencontr&eacute; un probl&egrave;me&nbsp;; le syst&egrave;me est donc temporairement interrompu pour l\'instant. V&eacute;rifiez l\'adresse du fichier de syndication de ce site (<b>@url_syndic@</b>), et tentez une nouvelle r&eacute;cup&eacute;ration des informations.',
@@ -181,10 +182,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_version_manquant' => 'Version du plugin manquante',
 
 
+// F
+'forum_info_original' => 'original',
+
+
 // I
 'ical_info1' => 'Cette page pr&eacute;sente plusieurs m&eacute;thodes pour rester en contact avec la vie de ce site.',
 'ical_info2' => 'Pour plus de renseignements sur toutes ces techniques, n\'h&eacute;sitez pas &agrave; consulter <a href="http://www.spip.net/fr_suivi">la documentation de SPIP</a>.',
 'ical_info_calendrier' => 'Deux calendriers sont &agrave; votre disposition. Le premier est un plan du site annon&ccedil;ant tous les articles publi&eacute;s. Le second contient les annonces &eacute;ditoriales ainsi que vos derniers messages priv&eacute;s&nbsp;: il vous est r&eacute;serv&eacute; gr&acirc;ce &agrave; une cl&eacute; personnelle, que vous pouvez modifier &agrave; tout moment en renouvelant votre mot de passe.',
+'ical_lien_rss_breves' => 'Syndication des br&egrave;ves du site',
 'ical_methode_http' => 'T&eacute;l&eacute;chargement',
 'ical_methode_webcal' => 'Synchronisation (webcal://)',
 'ical_texte_js' => 'Une ligne de javascript vous permet d\'afficher tr&egrave;s simplement, sur n\'importe quel site vous appartenant, les articles r&eacute;cents publi&eacute;s sur ce site.',
@@ -496,6 +502,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_procedez_par_etape' => 'proc&eacute;dez &eacute;tape par &eacute;tape',
 'info_procedure_maj_version' => 'la proc&eacute;dure de mise &agrave; jour doit &ecirc;tre lanc&eacute;e afin d\'adapter
 	la base de donn&eacute;es &agrave; la nouvelle version de SPIP.',
+'info_proxy_ok' => 'Test du proxy r&eacute;ussi.',
 'info_ps' => 'P.-S.',
 'info_publier' => 'publier',
 'info_publies' => 'Vos articles publi&eacute;s en ligne',
@@ -727,6 +734,7 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'lien_supprimer_rubrique' => 'supprimer cette rubrique',
 'lien_tout_deplier' => 'Tout d&eacute;plier',
 'lien_tout_replier' => 'Tout replier',
+'lien_tout_supprimer' => 'Tout supprimer',
 'lien_trier_nom' => 'Trier par nom',
 'lien_trier_nombre_articles' => 'Trier par nombre d\'articles',
 'lien_trier_statut' => 'Trier par statut',
