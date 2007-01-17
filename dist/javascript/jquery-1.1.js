@@ -7,8 +7,8 @@ if(typeof window.jQuery == "undefined") {
  * Dual licensed under the MIT (MIT-LICENSE.txt)
  * and GPL (GPL-LICENSE.txt) licenses.
  *
- * $Date: 2007-01-14 17:37:33 -0500 (Sun, 14 Jan 2007) $
- * $Rev: 1073 $
+ * $Date: 2007-01-17 14:37:51 +0100 (Wed, 17 Jan 2007) $
+ * $Rev: 1106 $
  */
 
 // Global undefined variable
@@ -29,14 +29,14 @@ var jQuery = function(a,c) {
 	
 	// Handle HTML strings
 	if ( typeof a  == "string" ) {
+		// HANDLE: $(html) -> $(array)
 		var m = /^[^<]*(<.+>)[^>]*$/.exec(a);
-
-		a = m ?
-			// HANDLE: $(html) -> $(array)
-			jQuery.clean( [ m[1] ] ) :
+		if ( m )
+			a = jQuery.clean( [ m[1] ] );
 		
-			// HANDLE: $(expr)
-			jQuery.find( a, c );
+		// HANDLE: $(expr)
+		else
+			return new jQuery( c ).find( a );
 	}
 	
 	return this.setArray(
@@ -110,12 +110,12 @@ jQuery.fn = jQuery.prototype = {
 			}
 		
 		// Check to see if we're setting style values
-		return this.each(function(){
+		return this.each(function(index){
 			// Set all the styles
 			for ( var prop in obj )
 				jQuery.attr(
 					type ? this.style : this,
-					prop, jQuery.prop(this, obj[prop], type)
+					prop, jQuery.prop(this, obj[prop], type, index, prop)
 				);
 		});
 	},
@@ -219,7 +219,7 @@ jQuery.fn = jQuery.prototype = {
 	add: function(t) {
 		return this.pushStack( jQuery.merge(
 			this.get(),
-			typeof t == "string" ? jQuery(t).get() : t )
+			typeof t == "string" ? jQuery(t).get() : t.length ? t : [t] )
 		);
 	},
 	is: function(expr) {
@@ -296,13 +296,16 @@ jQuery.extend({
 		return obj;
 	},
 	
-	prop: function(elem, value, type){
+	prop: function(elem, value, type, index, prop){
 			// Handle executable functions
 			if ( jQuery.isFunction( value ) )
-				return value.call( elem );
+				return value.call( elem, [index] );
+				
+			// exclude the following css properties to add px
+			var exclude = /z-?index|font-?weight|opacity|zoom|line-?height/i;
 
 			// Handle passing in a number to a CSS property
-			if ( value.constructor == Number && type == "curCSS" )
+			if ( value.constructor == Number && type == "curCSS" && !exclude.test(prop) )
 				return value + "px";
 
 			return value;
@@ -1485,7 +1488,7 @@ jQuery.fn.extend({
 
 	show: function(speed,callback){
 		var hidden = this.filter(":hidden");
-		return speed ?
+		speed ?
 			hidden.animate({
 				height: "show", width: "show", opacity: "show"
 			}, speed, callback) :
@@ -1495,11 +1498,12 @@ jQuery.fn.extend({
 				if ( jQuery.css(this,"display") == "none" )
 					this.style.display = "block";
 			});
+		return this;
 	},
 
 	hide: function(speed,callback){
 		var visible = this.filter(":visible");
-		return speed ?
+		speed ?
 			visible.animate({
 				height: "hide", width: "hide", opacity: "hide"
 			}, speed, callback) :
@@ -1510,6 +1514,7 @@ jQuery.fn.extend({
 					this.oldblock = "block";
 				this.style.display = "none";
 			});
+		return this;
 	},
 
 	// Save the old toggle function
@@ -1813,7 +1818,7 @@ jQuery.fn.extend({
 		// If the second parameter was provided
 		if ( params )
 			// If it's a function
-			if ( jQuery.isFunction( params.constructor ) ) {
+			if ( jQuery.isFunction( params ) ) {
 				// We assume that it's the callback
 				callback = params;
 				params = null;
