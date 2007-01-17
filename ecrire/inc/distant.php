@@ -270,7 +270,7 @@ function nom_fichier_copie_locale($source, $extension) {
 // http://doc.spip.org/@fichier_copie_locale
 function fichier_copie_locale($source) {
 	// Si c'est une image locale pas de souci
-	if (!preg_match(',^(\w+:),', $source)) {
+	if (!preg_match(',^\w+://,', $source)) {
 		if (_DIR_RACINE)
 			$source = preg_replace(',^'.preg_quote(_DIR_RACINE).',', '', $source);
 		return $source;
@@ -278,8 +278,12 @@ function fichier_copie_locale($source) {
 
 	$extension = "";
 	$path_parts = pathinfo($source);
-	if (isset($path_parts['extension']) && strlen($path_parts['extension']))
-		$extension = $path_parts['extension'];
+	if (isset($path_parts['extension']) && strlen($path_parts['extension'])){
+		// verifier que c'est un type autorise
+		$t = spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE extension="._q($path_parts['extension'])));
+		if ($t)
+			$extension = $t['extension'];
+	}
 	else {
 		// Si l'extension n'est pas precisee, aller la chercher dans la table
 		// des documents -- si la source n'est pas dans la table des documents,
