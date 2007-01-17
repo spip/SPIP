@@ -22,7 +22,7 @@ function validerElement($phraseur, $name, $attrs)
 	if (!isset($phraseur_xml->dtc->elements[$name]))
 
 		$phraseur_xml->err[]= " <b>$name</b> "
-		. _L('balise inconnue')
+		. _T('zxml_inconnu_balise')
 		. ' '
 		.  coordonnees_erreur($phraseur);
 	else {
@@ -36,12 +36,12 @@ function validerElement($phraseur, $name, $attrs)
 		if (!@in_array($name, $phraseur_xml->dtc->elements[$pere])) {
 	          $bons_peres = @join ('</b>, <b>', $phraseur_xml->dtc->peres[$name]);
 	          $phraseur_xml->err[]= " <b>$name</b> "
-	            . _L('n\'est pas un fils de')
+	            . _T('zxml_non_fils')
 	            . ' <b>'
 	            .  $pere
 	            . '</b>'
 	            . (!$bons_peres ? ''
-	               : ('<p style="font-size: 80%"> '._L('mais de').' <b>'. $bons_peres . '</b></p>'))
+	               : ('<p style="font-size: 80%"> '._T('zxml_mais_de').' <b>'. $bons_peres . '</b></p>'))
 		    .  coordonnees_erreur($phraseur);
 		} else if ($phraseur_xml->dtc->regles[$pere][0]=='/') {
 		  $phraseur_xml->fratrie[substr($depth,2)].= "$name ";
@@ -56,7 +56,7 @@ function validerElement($phraseur, $name, $attrs)
 		    { if (($v[1] == '#REQUIRED') AND (!isset($attrs[$n])))
 			$phraseur_xml->err[]= " <b>$n</b>"
 			  . '&nbsp;:&nbsp;'
-			  . _L('attribut obligatoire mais absent dans')
+			  . _T('zxml_obligatoire_attribut')
 			  . " <b>$name</b>"
 			  .  coordonnees_erreur($phraseur);
 		    }
@@ -79,16 +79,16 @@ function validerAttribut($phraseur, $name, $val, $bal)
 		$bons = join(', ',array_keys($a));
 		if ($bons)
 		  $bons = " title=' " .
-		    _L('attributs connus') .
+		    _T('zxml_connus_attributs') .
 		    '&nbsp;: ' .
 		    $bons .
 		    "'";
 		$bons .= " style='font-weight: bold'";
 
 		$phraseur_xml->err[]= " <b>$name</b> "
-		. _L('attribut inconnu de')
+		. _T('zxml_inconnu_attribut').' '._T('zxml_de')
 		. " <a$bons>$bal</a> ("
-		. _L('survoler pour voir les corrects')
+		. _T('zxml_survoler')
 		. ")"
 		.  coordonnees_erreur($phraseur);
 	} else{
@@ -108,11 +108,11 @@ function validerAttribut_ID($phraseur, $name, $val, $bal)
 	if (isset($phraseur_xml->ids[$val])) {
 		list($l,$c) = $phraseur_xml->ids[$val];
 		$phraseur_xml->err[]= " <p><b>$val</b> "
-		      . _L('valeur de l\'attribut')
+		      . _T('zxml_valeur_attribut')
 		      . " <b>$name</b> "
-		      . _L('de')
+		      . _T('zxml_de')
 		      . " <b>$bal</b> "
-		      . _L('vu auparavant')
+		      . _T('zxml_vu')
 		      . " (L$l,C$c)"
 		      .  coordonnees_erreur($phraseur);
 	} else {
@@ -143,11 +143,11 @@ function valider_motif($phraseur, $name, $val, $bal, $motif)
 
 	if (!preg_match($motif, $val)) {
 		$phraseur_xml->err[]= " <p><b>$val</b> "
-		. _L('valeur de l\'attribut')
+		. _T('zxml_valeur_attribut')
 		. " <b>$name</b> "
-		. _L('de')
+		. _T('zxml_de')
 		. " <b>$bal</b> "
-		. _L('n\'est pas conforme au motif')
+		. _T('zxml_non_conforme')
 		. "</p><p>"
 		. "<b>" . $motif . "</b></p>"
 		.  coordonnees_erreur($phraseur);
@@ -159,7 +159,7 @@ function valider_idref(&$own, $nom, $ligne, $col)
 {
 	if (!isset($own->ids[$nom]))
 		$own->err[]= " <p><b>$nom</b> "
-		. _L('ID inconnu')
+		. _T('zxml_inconnu_id')
 		. " "
 		. $ligne
 		. " "
@@ -218,7 +218,7 @@ function finElement($phraseur, $name)
 	if ($vide) {
 	  if ($n <> ($k + $c))
 			$phraseur_xml->err[]= " <p><b>$name</b> "
-			.  _L('balise non vide')
+			. _T('zxml_nonvide_balise')
 			.  coordonnees_erreur($phraseur);
 	// pour les regles PCDATA ou iteration de disjonction, tout est fait
 	} elseif ($regle AND ($regle != '*')) {
@@ -226,14 +226,14 @@ function finElement($phraseur, $name)
 		    // iteration de disjonction non vide: 1 balise au -
 			if ($n == $k) {
 				$phraseur_xml->err[]= " <p>\n<b>$name</b> "
-				  .  _L('balise vide')
+				  . _T('zxml_vide_balise')
 				  .  coordonnees_erreur($phraseur);
 			}
 		} else {
 			$f = $phraseur_xml->fratrie[substr($depth,2)];
 			if (!preg_match($regle, $f))
 				$phraseur_xml->err[]= " <p>\n<b>$name</b> "
-				  .  _L('succession des fils incorrecte')
+				  .  _T('zxml_succession_fils_incorrecte')
 				  . '&nbsp;: <b>'
 				  . $f
 				  . '</b>'
@@ -272,7 +272,7 @@ function defautElement($phraseur, $data)
 			list($t,$e) = $m;
 			if (!isset($phraseur_xml->dtc->entites[$e]))
 				$phraseur_xml->err[]= " <b>$e</b> "
-				  . _L('entite inconnue')
+				  . _T('zxml_inconnu_entite')
 				  . ' '
 				  .  coordonnees_erreur($phraseur);
 		}
