@@ -376,8 +376,10 @@ class JavaScriptCompressor {
 		for($a = 0, $b = $this->__totalSources; $a < $b; $a++)
 			$this->__sources[$a]['code'] = $this->__clean($this->__sources[$a]['code']);
 		$header = $this->__getHeader();
-		for($a = 0, $b = $this->__totalSources; $a < $b; $a++)
-			$this->__sources[$a] = &$this->__sources[$a]['code'];
+		for($a = 0, $b = $this->__totalSources; $a < $b; $a++){
+			$tmp = &$this->__sources[$a]['code'];
+			$this->__sources[$a] = &$tmp;
+		}
 		$this->__sources = implode(';', $this->__sources);
 		if($packed)
 			$this->__sources = $this->__pack($this->__sources);
