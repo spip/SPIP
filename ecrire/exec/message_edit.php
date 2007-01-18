@@ -25,7 +25,7 @@ function exec_message_edit_dist()
 	$dest = intval(_request('dest'));
 
 	if (_request('new')=='oui') {
-		$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
+		$onfocus = "\nonfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 	} else $onfocus = '';
 
 	$row = spip_fetch_array(spip_query("SELECT * FROM spip_messages WHERE id_message=$id_message"));
@@ -75,51 +75,47 @@ function exec_message_edit_dist()
 
 	debut_droite();
 
-	echo "<div class='arial2'>";
-	echo "<span style='color:green' class='verdana1 spip_small'><b>$le_type</b></span>";
-	
-	echo generer_url_post_ecrire('message',"id_message=$id_message");
+	$res =  "<div class='arial2'>"
+	. "<span style='color:green' class='verdana1 spip_small'><b>$le_type</b></span>";
 	if ($type == "affich")
-		echo "<p style='color:red;' class='verdana1 spip_x-small'>", _T('texte_message_edit'),"</p>";
+		$res .="<p style='color:red;' class='verdana1 spip_x-small'>" . _T('texte_message_edit')."</p>";
 	
-	echo "\n<p><input type='hidden' name='modifier_message' value='oui'/>";
-	echo "\n<input type='hidden' name='id_message' value='$id_message'/>";
-	echo "\n<input type='hidden' name='changer_rv' value='$id_message'/>";
-	echo _T('texte_titre_obligatoire')."<br />\n";
-	echo "<input type='text' class='formo' name='titre' value=\"$titre\" size='40' $onfocus />";
+	$res .= '<br /><br />' . _T('texte_titre_obligatoire')."<br />\n";
+	$res .="<input type='text' class='formo' name='titre' value=\"$titre\" size='40' $onfocus />";
 
 	if (!$dest) {
 		if ($type == 'normal') {
-		  echo "</p><p><b>"._T('info_nom_destinataire')."</b><br />";
-		  echo "<input type='text' class='formo' name='cherche_auteur' value='' size='40'/>";
+		  $res .="<br /><b>"._T('info_nom_destinataire')."</b><br />\n";
+		  $res .="<input type='text' class='formo' name='cherche_auteur' value='' size='40'/>";
 		}
 	} else {
 		$nom = spip_fetch_array(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$dest"));
-		echo "</p><p><b>",
-		  _T('info_nom_destinataire'),
-		  "</b>&nbsp;:&nbsp;&nbsp; ",
-		  $nom['nom'],
-		  "<br /><br />";
+		$res .="<br /><b>" .
+		  _T('info_nom_destinataire') .
+		  "</b>&nbsp;:&nbsp;&nbsp; " .
+		  $nom['nom'] .
+		  "<br /><br />\n";
 	}
-	echo "</p>";
-
+	$res .= '<br />';
 
 	//////////////////////////////////////////////////////
 	// Fixer rendez-vous?
 	//
 	if ($rv == "oui") $fonction = "rv.gif";	else $fonction = "";
-	debut_cadre_trait_couleur("$logo.gif", false, $fonction, _T('titre_rendez_vous'));
-	afficher_si_rdv($date_heure, $date_fin, ($rv == "oui")); 
-	fin_cadre_trait_couleur();
+	$res .= debut_cadre_trait_couleur($logo.".gif", true, $fonction, _T('titre_rendez_vous'));
+	$res .= afficher_si_rdv($date_heure, $date_fin, ($rv == "oui")); 
+	$res .= fin_cadre_trait_couleur(true);
 
-	echo "\n<p><b>"._T('info_texte_message_02')."</b><br />";
-	echo "<textarea name='texte' rows='20' class='formo' cols='40'>";
-	echo $texte;
-	echo "</textarea></p><br />\n";
+	$res .= "\n<p><b>"._T('info_texte_message_02')."</b><br />";
+	$res .= "<textarea name='texte' rows='20' class='formo' cols='40'>";
+	$res .= $texte;
+	$res .= "</textarea></p><br />\n";
 
-	echo "\n<div align='right'><input type='submit' value='"._T('bouton_valider')."' class='fondo'/></div>";
-	echo "</form>";
-	echo "\n</div>";
+	$res .= "\n<div align='right'><input type='submit' value='"._T('bouton_valider')."' class='fondo'/></div>"	
+	. "\n</div>";
+
+	echo redirige_action_auteur('editer_message', $id_message, 'message',"id_message=$id_message", $res, " method='post'");
+
 	echo fin_gauche(), fin_page();
 }
 
@@ -143,33 +139,35 @@ function afficher_si_rdv($date_heure, $date_fin, $choix)
 		$minutes_fin = 59;
 	}
 			
-	$res = _T('item_non_afficher_calendrier');
-	if (!$choix)  $res = "<b>$res</b>";
+	$lib = _T('item_non_afficher_calendrier');
+	if (!$choix)  $lib = "<b>$lib</b>";
 
-	echo "\n<div><input type='radio' name='rv' value='non' id='rv_off'" .
-		(!$choix ? " checked='checked' " : '') .
-		"\nonclick=\"changeVisible(this.checked, 'heure-rv', 'none', 'block');\"/>" .
-		"<label for='rv_off'>"
-	       . $res
+	$res = "\n<div><input type='radio' name='rv' value='non' id='rv_off'" .
+		(!$choix ? " checked='checked' " : '')
+		. "\nonclick=\"changeVisible(this.checked, 'heure-rv', 'none', 'block');\"/>"
+		. "<label for='rv_off'>"
+		. $lib
 		. "</label>"
 		. "</div>";
 
-	$res = _T('item_afficher_calendrier');
-	if (!$choix)  $res = "<b>$res</b>";
-	echo "\n<div><input type='radio' name='rv' value='oui' id='rv_on' " .
+	$lib = _T('item_afficher_calendrier');
+	if ($choix)  $lib = "<b>$lib</b>";
+
+	$res .= "\n<div><input type='radio' name='rv' value='oui' id='rv_on' " .
 		($choix ? " checked='checked' " : '') .
 		"\nonclick=\"changeVisible(this.checked, 'heure-rv', 'block', 'none');\"/>" . 
 		"<label for='rv_on'>"
-		. $res
+		. $lib
 		. "</label>"
 	  . '</div>';
 	
 	$display = ($choix ? "block" : "none");
 	
-	echo "\n<div id='heure-rv' style='display: $display; padding-top: 4px; padding-left: 24px;'>",
-	  afficher_jour_mois_annee_h_m($date_heure, $heures_debut, $minutes_debut),
-	  "\n<br /><img src='puce$spip_lang_rtl.gif' alt=' '/> &nbsp; ",
-	  afficher_jour_mois_annee_h_m($date_fin, $heures_fin, $minutes_fin, '_fin'),
+	return $res .
+	 "\n<div id='heure-rv' style='display: $display; padding-top: 4px; padding-left: 24px;'>" .
+	  afficher_jour_mois_annee_h_m($date_heure, $heures_debut, $minutes_debut) .
+	  "\n<br /><img src='puce$spip_lang_rtl.gif' alt=' '/> &nbsp; " .
+	  afficher_jour_mois_annee_h_m($date_fin, $heures_fin, $minutes_fin, '_fin') .
 	  "</div>";
 }
 
