@@ -1116,7 +1116,8 @@ function image_masque($im, $masque, $pos="") {
 		imagedestroy($im2);
 
 	}
-
+	$x_dest = largeur($dest);
+	$y_dest = hauteur($dest);
 	return image_ecrire_tag($image,array('src'=>$dest,'width'=>$x_dest,'height'=>$y_dest));
 }
 
