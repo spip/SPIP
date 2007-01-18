@@ -27,6 +27,8 @@ function action_editer_message_dist() {
 		action_editer_message_post_supprimer($r[1]);
 	elseif (preg_match(',^(\d+)\W@(\d+)$,', $arg, $r))
 		action_editer_message_post_ajouter($r[1], $r[2]);	  
+	elseif (preg_match(',^(\d+)\W:(\d+)$,', $arg, $r))
+		action_editer_message_post_vu($r[1], $r[2]);	  
 	elseif (preg_match(',^(\d+)\W-(\d+)$,', $arg, $r))
 		action_editer_message_post_retirer($r[1], $r[2]);	  
 	elseif (preg_match(',^(\d+)\W(\w+)$,', $arg, $r))
@@ -40,19 +42,22 @@ function action_editer_message_dist() {
 	else 	spip_log("action_editer_message_dist $arg pas compris");
 }
 
-// http://doc.spip.org/@action_editer_message_post_supprimer
 function action_editer_message_post_supprimer($id_message) {
 	spip_query("DELETE FROM spip_messages WHERE id_message=$id_message");
 	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message=$id_message");
 	spip_query("DELETE FROM spip_forum WHERE id_message=id_message");
 }
 
-// http://doc.spip.org/@action_editer_message_post_retirer
+function action_editer_message_post_vu($id_message, $id_auteur) {
+  spip_log("efface $id_message $id_auteur");
+	spip_query("UPDATE spip_auteurs_messages SET vu='oui' WHERE id_message='$id_message' AND id_auteur='$id_auteur'");
+
+}
+
 function action_editer_message_post_retirer($id_message, $id_auteur) {
 	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message='$id_message' AND id_auteur='$id_auteur'");
 }
 
-// http://doc.spip.org/@action_editer_message_post_ajouter
 function action_editer_message_post_ajouter($id_message, $id_auteur) {
 	spip_query("DELETE FROM spip_auteurs_messages WHERE id_auteur='$id_auteur' AND id_message='$id_message'");
 	spip_abstract_insert('spip_auteurs_messages',
@@ -60,7 +65,6 @@ function action_editer_message_post_ajouter($id_message, $id_auteur) {
 		"('$id_auteur','$id_message','non')");
 }
 
-// http://doc.spip.org/@action_editer_message_post_envoyer
 function action_editer_message_post_envoyer($id_message, $statut) {
 
 	spip_query("UPDATE spip_messages SET statut=" . _q($statut) . " WHERE id_message='$id_message'");
@@ -100,7 +104,6 @@ function action_editer_message_post_nouveau($type, $dest='', $rv='')
 	redirige_par_entete(generer_url_ecrire('message_edit', "id_message=$id_message&new=oui&dest=$dest",true));
 }
 
-// http://doc.spip.org/@action_editer_message_post_vieux
 function action_editer_message_post_vieux($id_message)
 {
 	spip_query("UPDATE spip_messages SET titre=" . _q(_request('titre')) . ", texte=" . _q(_request('texte')) . " WHERE id_message='$id_message'");
