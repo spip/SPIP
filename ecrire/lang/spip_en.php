@@ -768,7 +768,23 @@ and connect again to the site.
 'zbug_parametres_inclus_incorrects' => 'Wrong inclusion parameters',
 'zbug_resultat' => 'result',
 'zbug_serveur_indefini' => 'undefined SQL server',
-'zbug_table_inconnue' => 'Unknown SQL table "@table@"'
+'zbug_table_inconnue' => 'Unknown SQL table "@table@"',
+'zxml_connus_attributs' => 'known attributes',
+'zxml_de' => 'from',
+'zxml_inconnu_attribut' => 'unknown attribute',
+'zxml_inconnu_balise' => 'unknown tag',
+'zxml_inconnu_entite' => 'unknown entity',
+'zxml_inconnu_id' => 'unknown ID',
+'zxml_mais_de' => 'but from',
+'zxml_non_conforme' => 'not true to the principle',
+'zxml_non_fils' => 'is not a child of',
+'zxml_nonvide_balise' => 'tag not empty',
+'zxml_obligatoire_attribut' => 'required attribute absent in',
+'zxml_succession_fils_incorrecte' => 'incorrect child inheritance',
+'zxml_survoler' => 'to see the correct ones, hover with the cursor',
+'zxml_valeur_attribut' => 'attribute value',
+'zxml_vide_balise' => 'empty tag',
+'zxml_vu' => 'seen before'
 
 );
 

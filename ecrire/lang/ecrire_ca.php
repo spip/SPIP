@@ -40,6 +40,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'avis_non_acces_message' => 'No teniu acc&eacute;s a aquest missatge.',
 'avis_non_acces_page' => 'No teniu acc&eacute;s a aquesta p&agrave;gina.',
 'avis_operation_echec' => 'L\'operaci&oacute; ha fracassat.',
+'avis_operation_impossible' => 'Operaci&oacute; impossible',
 'avis_probleme_archive' => 'Problema de lectura del fitxer @archive@',
 'avis_site_introuvable' => 'Lloc il&middot;localitzable',
 'avis_site_syndique_probleme' => 'Atenci&oacute;: la sindicaci&oacute; d\'aquest lloc troba un problema&nbsp;; el sistema queda de moment interromput. Verifiqueu l\'adre&ccedil;a del fitxer de sindicaci&oacute; d\'aquest lloc (<b>@url_syndic@</b>), i intenteu una nova recuperaci&oacute; de les informacions.',
@@ -54,6 +55,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'bouton_ajouter' => 'Afegir',
 'bouton_ajouter_participant' => 'AFEGIR UN PARTICIPANT&nbsp;:',
 'bouton_annonce' => 'ANUNCI',
+'bouton_annuler' => 'Anul&middot;lar',
 'bouton_checkbox_envoi_message' => 'possibilitat d\'enviar un missatge',
 'bouton_checkbox_indiquer_site' => 'indicar obligat&ograve;riament un lloc Web',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'els administradors del lloc',
@@ -179,10 +181,15 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'erreur_plugin_version_manquant' => 'Falta la versi&oacute; del connector',
 
 
+// F
+'forum_info_original' => 'original',
+
+
 // I
 'ical_info1' => 'Aquesta p&agrave;gina mostra diferents maneres per estar en contacte amb la vida d\'aquest lloc.',
 'ical_info2' => 'Per tenir m&eacute;s informacions sobre aquestes t&egrave;cniques, no dubteu a consultar <a href="http://www.spip.net/fr_suivi">la documentation de SPIP</a>.',
 'ical_info_calendrier' => 'Hi ha dos calendaris a la vostra disposici&oacute;. El primer &eacute;s un mapa del lloc que mostra tots els articles publicats. El segon cont&eacute; els anuncis editorials a m&eacute;s dels vostres darrers missatges privats: est&agrave; reservat per vosaltres gr&agrave;cies a una clau personal, que podeu modificar en tot moment renovant la vostra contrasenya. ',
+'ical_lien_rss_breves' => 'Sindicaci&oacute; de les breus del lloc',
 'ical_methode_http' => 'Desc&agrave;rrega',
 'ical_methode_webcal' => 'Sincronitzaci&oacute; (webcal://)',
 'ical_texte_js' => 'Els articles publicats en aquest lloc poden ser mostrats f&agrave;cilment, en qualsevol lloc vostre, mitjan&ccedil;ant una l&iacute;nia de javascript. ',
@@ -474,6 +481,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_principaux_correspondants' => 'Els vostres principals corresponsals',
 'info_procedez_par_etape' => 'procediu pas per pas',
 'info_procedure_maj_version' => 'El proc&eacute;s d\'actualitzaci&oacute; s\'ha de tornar a arrancar per tal d\'adaptar la base de dades a la nova versi&oacute; d\'SPIP.',
+'info_proxy_ok' => 'Test del proxy amb &egrave;xit.',
 'info_ps' => 'P.-S.',
 'info_publier' => 'publicar',
 'info_publies' => 'Els vostres articles publicats en l&iacute;nia',
@@ -698,6 +706,7 @@ amb un color que indica el seu estat:',
 'lien_supprimer_rubrique' => 'suprimir aquesta secci&oacute;',
 'lien_tout_deplier' => 'Obrir-ho tot',
 'lien_tout_replier' => 'Tancar-ho tot',
+'lien_tout_supprimer' => 'Suprimir-ho tot',
 'lien_trier_nom' => 'Classificar per nom',
 'lien_trier_nombre_articles' => 'Classificar per n&uacute;mero d\'articles',
 'lien_trier_statut' => 'Classificar per estat',
@@ -753,6 +762,8 @@ amb un color que indica el seu estat:',
 
 
 // S
+'sauvegarde_fusionner' => 'Fusionar la base actual i la de seguretat',
+'sauvegarde_url_origine' => 'Eventualment, URL del lloc d\'origen: ',
 'statut_admin_restreint' => '(admin restringida)',
 'syndic_choix_moderation' => 'Qu&egrave; fer dels seg&uuml;ents enlla&ccedil;os que procedeixin d\'aquest lloc Web?',
 'syndic_choix_oublier' => 'Qu&egrave; fer dels enlla&ccedil;os que ja no figuren en el fitxer de sindicaci&oacute;?',

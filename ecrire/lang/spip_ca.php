@@ -753,7 +753,23 @@ i tornar-vos a connectar al lloc.
 'zbug_parametres_inclus_incorrects' => 'Par&agrave;metres d\'inclusi&oacute; incorrectes',
 'zbug_resultat' => 'resultat',
 'zbug_serveur_indefini' => 'servidor SQL sense definir',
-'zbug_table_inconnue' => 'Taula SQL &laquo; @table@ &raquo; desconeguda'
+'zbug_table_inconnue' => 'Taula SQL &laquo; @table@ &raquo; desconeguda',
+'zxml_connus_attributs' => 'atributs conneguts',
+'zxml_de' => 'de',
+'zxml_inconnu_attribut' => 'atribut desconegut',
+'zxml_inconnu_balise' => 'etiqueta desconeguda',
+'zxml_inconnu_entite' => 'entitat desconeguda',
+'zxml_inconnu_id' => 'ID desconegut',
+'zxml_mais_de' => 'per&ograve; de',
+'zxml_non_conforme' => 'no conforme al motiu',
+'zxml_non_fils' => 'no &eacute;s un fill de',
+'zxml_nonvide_balise' => 'etiqueta no buida',
+'zxml_obligatoire_attribut' => 'atribut obligatori per&ograve; absent a dins de',
+'zxml_succession_fils_incorrecte' => 'her&egrave;ncia de fills incorrecte',
+'zxml_survoler' => 'passar el ratol&iacute; per sobre per veure els correctes',
+'zxml_valeur_attribut' => 'valor de l\'atribut',
+'zxml_vide_balise' => 'etiqueta buida',
+'zxml_vu' => 'vist abans'
 
 );
 
