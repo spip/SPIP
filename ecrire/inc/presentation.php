@@ -440,7 +440,7 @@ function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, 
 
 	global $spip_display ;
 
-	$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
+	$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND isset($GLOBALS['meta']['image_process'])) ? ($GLOBALS['meta']['image_process'] != "non") : false;
 
 	if (!isset($requete['GROUP BY'])) $requete['GROUP BY'] = '';
 
@@ -2162,7 +2162,7 @@ function bouton_spip_rss($op, $args, $fmt='rss') {
 function http_calendrier_rv($messages, $type) {
 	global $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
 
-	$total = '';
+	$total = $date_rv = '';
 	if (!$messages) return $total;
 	foreach ($messages as $row) {
 		if (ereg("^=([^[:space:]]+)$",$row['texte'],$match))
