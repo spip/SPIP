@@ -53,7 +53,7 @@ function mots_ressemblants($mot, $table_mots, $table_ids='') {
 			else $id = $val;
 			$val2 = trim($val);
 			if ($val2) {
-				if (!($m = $distance[$id])) {
+				if (!isset($distance[$id])) {
 					$val2 = reduire_mot($val2);
 					$len2 = strlen($val2);
 					if ($val2 == $mot)
@@ -67,7 +67,7 @@ function mots_ressemblants($mot, $table_mots, $table_ids='') {
 						$m -= max(0, $len2 - $len); 
 					}
 					$distance[$id] = $m;
-				}
+				} else $m = 0;
 				if ($m <= $lim) {
 					$selection[$id] = $m;
 					if ($m < $opt) {
@@ -122,7 +122,7 @@ function affiche_mots_ressemblant($cherche_mot, $objet, $id_objet, $resultat, $t
 		$res .="<li>"
 		.  ajax_action_auteur('editer_mot', "$id_objet,,$table,$table_id,$objet,$id_mot", $url_base, "$table_id=$id_objet", array(typo($titre_mot),' title="' . _T('info_ajouter_mot') .'"'),"&id_objet=$id_objet&objet=$objet") ; 
 		if (strlen($descriptif_mot) > 1) {
-			$res .= "<span class='spip_x-small'>".propre(couper($descriptif_mot, 100))."</span><br />\n";
+			$res .= "\n(<span class='spip_x-small'>".propre(couper($descriptif_mot, 100)).")</span><br />\n";
 		}
 		$res .="</li>\n";
 	}
