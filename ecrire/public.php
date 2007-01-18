@@ -126,8 +126,8 @@ if (defined('_INC_PUBLIC')) {
 	// Execution de la page calculee
 
 	// 0. xml-hack
-	$xml_hack = ($page['entetes']['X-Xml-Hack'] == 'ok');
-	unset($page['entetes']['X-Xml-Hack']);
+	if ($xml_hack = isset($page['entetes']['X-Xml-Hack']))
+		unset($page['entetes']['X-Xml-Hack']);
 
 	// 1. Cas d'une page contenant uniquement du HTML :
 	if ($page['process_ins'] == 'html') {

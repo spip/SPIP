@@ -33,7 +33,7 @@ function inc_plonger_dist($id_rubrique, $idom="", $list=array(), $col = 1, $excl
 			. (($row['langue_choisie'] != 'oui')
 			   ? '' : (' [' . $row['lang'] . ']'));
 	}
-	$next = $list[$col];
+	$next = isset($list[$col]) ? $list[$col] : 0;
 	if ($ordre) {
 		asort($ordre);
 		$rec = generer_url_ecrire('plonger',"rac=$idom&exclus=$exclu&col=".($col+1));
