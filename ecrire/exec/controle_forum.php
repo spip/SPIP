@@ -234,6 +234,9 @@ function exec_controle_forum_dist()
 		ajax_retour($mess);
 	} else {
 
+		pipeline('exec_init',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
+
+
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('titre_page_forum_suivi'), "forum", "forum-controle");
 
@@ -272,7 +275,14 @@ function exec_controle_forum_dist()
 			. "</div>";
 
 			fin_boite_info();
+			
+			echo pipeline('affiche_gauche',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
+			creer_colonne_droite();
+			echo pipeline('affiche_droite',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
+			
+			
 			debut_droite();
+			echo pipeline('affiche_milieu',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
 
 			echo "<div id='$ancre' class='serif2'>$mess</div>";
 

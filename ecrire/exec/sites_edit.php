@@ -132,7 +132,9 @@ function exec_sites_edit_dist()
 	. debut_cadre_couleur($logo, true, "", _T('entree_interieur_rubrique'))
 	. $chercher_rubrique($id_rubrique, 'site', false)
 	. fin_cadre_couleur(true)
-	. "\n<br /><b>"
+	. "\n<br />"
+	. pipeline('affiche_milieu',array('args'=>array('exec'=>'sites_edit','id_syndic'=>$id_syndic),'data'=>''))
+	."<b>"
 	. _T('entree_description_site')
 	. "</b><br />\n"
 	. "<textarea name='descriptif' rows='8' class='forml' cols='40' >"

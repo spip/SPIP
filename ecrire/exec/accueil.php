@@ -414,8 +414,9 @@ function exec_accueil_dist()
 	debut_gauche();
 
 	personnel_accueil();
-	etat_base_accueil();
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
+	etat_base_accueil();
+
 	creer_colonne_droite();
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
 
@@ -443,6 +444,9 @@ function exec_accueil_dist()
 			 $GLOBALS['meta']['articles_mots']);
 	
 	echo encours_accueil();
+
+ 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'accueil'),'data'=>''));
+
 
 	echo afficher_enfant_rub(0, false, true);
 

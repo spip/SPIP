@@ -109,9 +109,11 @@ global
 		  . icone_horizontale(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit", "new=oui&id_groupe=$id_groupe&redirect=" . generer_url_retour('mots_tous')),  "mot-cle-24.gif",  "creer.gif", false);
 	}
 
-	$out .= bloc_des_raccourcis($res . icone_horizontale(_T('icone_voir_tous_mots_cles'), generer_url_ecrire("mots_tous",""), "mot-cle-24.gif", "rien.gif", false));
 
 	$out .= pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
+
+	$out .= bloc_des_raccourcis($res . icone_horizontale(_T('icone_voir_tous_mots_cles'), generer_url_ecrire("mots_tous",""), "mot-cle-24.gif", "rien.gif", false));
+
 
 	$out .= creer_colonne_droite('',true);
 
@@ -173,7 +175,6 @@ global
 
 	$out .= fin_cadre_relief(true);
 
-	$out .= pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
 
 	if (acces_mots()){
 
@@ -197,6 +198,8 @@ global
 		$res .= "<br /><input type='text' name='titre' class='formo' value=\"$titre_mot\" size='40' $onfocus />";
 
 		$res .= determine_groupe_mots($table, $id_groupe);
+
+		$res .= pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
 
 		if ($options == 'avancees' OR $descriptif) {
 			$res .= "<b>"._T('texte_descriptif_rapide')."</b><br />";

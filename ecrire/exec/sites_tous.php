@@ -41,6 +41,9 @@ if ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0) {
 	echo "</div>";
 }
 
+echo pipeline('affiche_milieu',array('args'=>array('exec'=>'sites_tous'),'data'=>''));	  
+
+
  echo afficher_sites('<b>' . _T('avis_sites_probleme_syndication') . '</b>', array("FROM" => 'spip_syndic', 'WHERE' => "syndication='off' AND statut='publie'", 'ORDER BY' => "nom_site"));
 
 if ($options == 'avancees' AND $connect_statut == '0minirezo') {

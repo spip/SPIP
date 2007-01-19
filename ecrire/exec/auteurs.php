@@ -39,7 +39,9 @@ function exec_auteurs_dist()
 
 	bandeau_auteurs($tri, $statut);
 
-	echo "<div id='auteurs'>", $res, "</div>", fin_gauche(), fin_page();
+	echo "<div id='auteurs'>", $res, "</div>";
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'auteurs'),'data'=>''));
+	echo fin_gauche(), fin_page();
 }
 
 // http://doc.spip.org/@lettres_d_auteurs
@@ -101,6 +103,7 @@ function bandeau_auteurs($tri, $statut)
 
 	fin_boite_info();
 
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'auteurs'),'data'=>''));
 
 	if ($connect_statut == '0minirezo') {
 
@@ -119,7 +122,6 @@ function bandeau_auteurs($tri, $statut)
 		}
 		echo bloc_des_raccourcis($res);
 	}
-	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'auteurs'),'data'=>''));
 	creer_colonne_droite();
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'auteurs'),'data'=>''));
 	debut_droite();
