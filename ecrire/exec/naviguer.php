@@ -67,7 +67,7 @@ function exec_naviguer_dist()
 
 	if ($spip_display != 4) {
 
-		infos_naviguer($id_rubrique, $statut);
+		infos_naviguer($id_rubrique, $statut, $ze_logo);
 
 		//
 		// Logos de la rubrique
@@ -138,7 +138,7 @@ function exec_naviguer_dist()
 }
 
 // http://doc.spip.org/@infos_naviguer
-function infos_naviguer($id_rubrique, $statut)
+function infos_naviguer($id_rubrique, $statut, $ze_logo)
 {
 	if ($id_rubrique > 0) {
 		$res = "\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>"

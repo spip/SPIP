@@ -179,7 +179,7 @@ function import_all_fin($request) {
 // http://doc.spip.org/@import_queldir
 function import_queldir()
 {
-	global $connect_toutes_rubriques;
+  global $connect_toutes_rubriques, $connect_login;
 
 	if ($connect_toutes_rubriques) {
 		$repertoire = _DIR_DUMP;
@@ -194,11 +194,7 @@ function import_queldir()
 			$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
 			$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
 		}
-		if(!@file_exists($repertoire.$connect_login)) {
-			$sous_rep = sous_repertoire($repertoire, $connect_login);
-		}
-		return $sous_rep . '/';
+		return sous_repertoire($repertoire, $connect_login);
 	}
-
 }
 ?>

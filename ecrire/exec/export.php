@@ -92,7 +92,7 @@ function exec_export_dist()
 
 	header("Content-Type: text/plain");
 
-	$rubriques = liste_rubriques($id_rubriques);
+	$rubriques = liste_rubriques($id_rubrique);
 
 	if ($rubriques) {
 		$rubriques = join(",", $rubriques);

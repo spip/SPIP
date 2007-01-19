@@ -757,7 +757,7 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 // http://doc.spip.org/@afficher_articles_trad_boucle
 function afficher_articles_trad_boucle($row)
 {
-	global $dir_lang,  $spip_lang_right;
+  	global $dir_lang,  $spip_lang_right, $spip_display;
 
 	$vals = '';
 
