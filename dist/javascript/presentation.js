@@ -25,10 +25,14 @@ function changestyle(id_couche, element, style) {
 	var select = $(bandeau_elements).not('#'+id_couche);
 	// sauf eventuellement la boite de recherche si la souris passe en-dessous
 	if (id_couche=='garder-recherche') select.not('#bandeaurecherche');
-		select.css('visibility','hidden');
+		select.css({'visibility': 'hidden', 'display': 'none'});
 
 	// Afficher, le cas echeant, celui qui est demande
-	$('#'+id_couche).css(element||'visibility',style||'visible');
+	$('#'+id_couche).css(
+		element
+			? {element:style}
+			: {'visibility':'visible', 'display':'block'}
+		);
 }
 
 var accepter_change_statut = false;

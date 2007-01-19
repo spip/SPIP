@@ -46,6 +46,9 @@ function forum_envoi(
 {
 	global     $options, $spip_lang_rtl;
 
+
+	// Chercher a quoi on repond pour preremplir le titre
+	// et le bouton "retour"
 	if ($id_parent) {
 		$result = spip_query("SELECT * FROM spip_forum WHERE id_forum=$id_parent");
 		if ($row = spip_fetch_array($result)) {
@@ -100,7 +103,7 @@ function forum_envoi(
 	  $titre = 'titre';
 	  $num = _T('message') . ' ' ._T('info_numero_abbreviation');
 	  if (!$id)  $id = $id_message;
-	} elseif ($script == 'rubriques') {
+	} elseif ($script == 'naviguer') {
 	  $table = 'rubriques';
 	  $objet = 'id_rubrique';
 	  $titre = 'titre';
@@ -120,35 +123,37 @@ function forum_envoi(
 	  $num = '';
 	}
 
-	$titre_page = $titre_message
-	? $titre_message
-	: ($id_message ? _T('texte_nouveau_message')
-		: _T('info_forum_interne'));
+	$titre_defaut = _T('texte_nouveau_message');
 
 	if ($num) {
 		$q = spip_query("SELECT $titre AS titre FROM spip_$table WHERE $objet=$id");
 		$q = spip_fetch_array($q);
-		$num  = "<br />("
-		  . str_replace(':','',strtolower($num))
-		  . $id
-		  . ')<br />'
-		  . $titre_page;
-		$titre_page = $q['titre'];
+		$titre_defaut = $q['titre'];
 	}
 
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page($titre_page, "accueil", $id_message ? "messagerie" : "accueil");
-	debut_gauche();
-	debut_droite();
-	gros_titre($titre_page . $num);
 
+	// debut de page
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('texte_nouveau_message'), "accueil", $id_message ? "messagerie" : "accueil");
+	debut_gauche();
+	
+	echo debut_cadre_enfonce();
+	echo icone_horizontale(_T('icone_retour'), generer_url_ecrire($script,$id?"$objet=$id":''), "article-24.gif","rien.gif", false);
+	echo fin_cadre_enfonce();
+	
+	debut_droite();
+	gros_titre(_T('texte_nouveau_message'));
+
+
+	// previsualisation/validation
 	if ($modif_forum == "oui") {
-		$corps = forum_envoi_entete($parent, $titre_parent, $texte, $titre_message, $nom_site, $url_site);
+		$corps = forum_envoi_entete($parent, $titre_parent, $texte, $titre_defaut, $nom_site, $url_site);
 		$parent = '';
 	} else $corps = '';
 
+	// formulaire
 	$corps .= debut_cadre_formulaire(($statut == 'privac') ? "" : 'background-color: #dddddd;', true)
-	. forum_envoi_formulaire($id, $objet, $script, $statut, $texte, $titre_page,  $nom_site, $url_site)
+	. forum_envoi_formulaire($id, $objet, $script, $statut, $texte, $titre_defaut,  $nom_site, $url_site)
 	. "<div align='right'><input class='fondo' type='submit' value='"
 	. _T('bouton_voir_message')
 	. "' /></div>"
