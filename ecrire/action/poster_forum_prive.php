@@ -43,8 +43,8 @@ function action_poster_forum_prive_post($r)
 
 		calculer_threads();
 
-		if ($id_message > 0) {
-			spip_query("UPDATE spip_auteurs_messages SET vu = 'non' WHERE id_message='$id_message'");
+		if ($objet == 'message') {
+			spip_query("UPDATE spip_auteurs_messages SET vu = 'non' WHERE id_message=$id");
 
 		}
 		redirige_par_entete(urldecode($redirect)."#id".$id_forum);
