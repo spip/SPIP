@@ -406,7 +406,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 		
 	return "<td style='width: "
 	. _LARGEUR_ICONES_BANDEAU
-	. "px' class='$class' onmouseover=\"changestyle('bandeau$rubrique_icone', 'visibility', 'visible');\"><a$accesskey$a_href$class_select>"
+	. "px' class='$class' onmouseover=\"changestyle('bandeau$rubrique_icone');\"><a$accesskey$a_href$class_select>"
 	.  $texte
 	. "</a></td>\n";
 }
