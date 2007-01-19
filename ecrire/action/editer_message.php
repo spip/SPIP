@@ -68,7 +68,7 @@ function action_editer_message_post_ajouter($id_message, $id_auteur) {
 }
 
 function action_editer_message_post_choisir($id_message) {
-  spip_log("aempc" . urldecode(_request('redirect')));
+
 	if ($id_auteur = _request('nouv_auteur'))
 		action_editer_message_post_ajouter($id_message, $id_auteur);
 	else {

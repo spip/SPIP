@@ -238,7 +238,7 @@ global
 			$redirect = generer_url_ecrire('mots_edit','id_mot='.$id_mot, '&',true);
 		else
 			$redirect = rawurldecode($redirect);
-		$arg = "$id_mot,$ajouter_id_article,$table,$table_id";
+		$arg = !$table ? $id_mot : "$id_mot,$ajouter_id_article,$table,$table_id";
 
 		$out .= generer_action_auteur("instituer_mot", $arg, _DIR_RESTREINT_ABS . $redirect, $res);
 
