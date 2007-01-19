@@ -24,7 +24,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 
 // http://doc.spip.org/@inc_formater_auteur_dist
-function inc_formater_auteur_dist($id_auteur) {
+function inc_formater_auteur_dist($id_auteur, $script_edition = 'auteurs_infos') {
 
   global $connect_id_auteur, $spip_lang_rtl, $connect_statut;
 
@@ -48,7 +48,7 @@ function inc_formater_auteur_dist($id_auteur) {
 		$nom = "<span style='color: red'>" . _T('texte_vide') . '</span>';
 
 	$vals[] = "<a href='"
-	. generer_url_ecrire('auteur_infos', "id_auteur=$id_auteur&initial=-1")
+	. generer_url_ecrire($script_edition, "id_auteur=$id_auteur&initial=-1")
 	. "' $bio_auteur>$nom</a>";
 
 	if ($url_site_auteur = $row["url_site"]) $vals[] =  "<a href='$url_site_auteur'>"._T('info_site_min')."</a>";

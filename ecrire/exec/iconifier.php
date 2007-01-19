@@ -41,7 +41,7 @@ function exec_iconifier_dist()
 		$row = spip_fetch_array(spip_query("SELECT id_rubrique, statut FROM spip_$table WHERE $type=$id"));
 		$droit = acces_rubrique($row['id_rubrique']);
 		if (!$droit AND  ($row['statut'] == 'prepa' OR $row['statut'] == 'prop' OR $row['statut'] == 'poubelle'))
-			$droit = spip_num_rows(determiner_auteurs_article($id_article, "id_auteur=$connect_id_auteur"));
+			$droit = spip_num_rows(determiner_auteurs_objet('article',$id_article, "id_auteur=$connect_id_auteur"));
 	}
 
 	if (!$droit) {
