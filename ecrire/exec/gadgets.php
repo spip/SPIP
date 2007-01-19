@@ -27,6 +27,7 @@ function exec_gadgets_dist()
 	if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
 	AND !strstr($_SERVER['SERVER_SOFTWARE'],'IIS/')) {
 		include_spip('inc/headers');
+		header('Content-Type: text/html; charset='. $GLOBALS['meta']['charset']);
 		http_status(304);
 		exit;
 	} else {
