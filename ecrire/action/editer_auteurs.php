@@ -72,7 +72,7 @@ function supprimer_auteur_et_rediriger($type, $id, $id_auteur, $redirect)
 				marquer_indexer("spip_{$type}s", $id);
 		}
 	}
-//	die($redirect);
+
 	if ($redirect) redirige_par_entete($redirect);
 }
 
@@ -90,7 +90,6 @@ function ajouter_auteur_et_rediriger($type, $id, $id_auteur, $redirect)
 		}
 	}
 
-//	die($redirect);
 	if ($redirect) redirige_par_entete($redirect);
 }
 
