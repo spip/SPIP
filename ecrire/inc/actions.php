@@ -79,8 +79,6 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 
 	// Lien (GET)
 	else {
-		list($clic, $att) = $corps;
-
 		$href = redirige_action_auteur($action,
 			$id,
 			$script,
@@ -94,10 +92,12 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 			$action,
 			"var_ajaxcharset=utf-8&script=$script$args_ajax");
 
-		if ($att) $clic = "\n<span$att>$clic</span>";
+		$cli = array_shift($corps);
 		return "<a href='$href'\nonclick="
 		.  ajax_action_declencheur($ajax, $ancre, $fct_ajax)
-		. ">$clic</a>";
+		. ">"
+		. (!$corps ?  $cli : ("\n<span" . $corps[0] . ">$cli</span>"))
+		. "</a>";
 	}
 }
 

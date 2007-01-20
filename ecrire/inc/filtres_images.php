@@ -144,7 +144,7 @@ function image_tag_changer_taille($tag,$width,$height,$style=false){
 	if ($style===false) $style = extraire_attribut($tag,'style');
 	// enlever le width et height du style
 	$style = preg_replace(",(^|;)\s*(width|height)\s*:\s*[^;]+,ims","",$style);
-	if ($style{0}==';') $style=substr($style,1);
+	if ($style AND $style{0}==';') $style=substr($style,1);
 	// mettre des attributs de width et height sur les images, 
 	// ca accelere le rendu du navigateur
 	// ca permet aux navigateurs de reserver la bonne taille 
@@ -522,8 +522,7 @@ function image_reduire($img, $taille = -1, $taille_y = -1, $force=false, $cherch
 		if ($srcw = extraire_attribut($img, 'width')
 		AND $srch = extraire_attribut($img, 'height')) {
 			list($w,$h) = image_ratio($srcw, $srch, $taille, $taille_y);
-			$img = image_tag_changer_taille($tag,$w,$h);
-			return $img;
+			return image_tag_changer_taille($img,$w,$h);
 		}
 		// la on n'a pas d'infos sur l'image source... on refile le truc a css
 		// sous la forme style='max-width: NNpx;'

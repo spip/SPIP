@@ -22,7 +22,7 @@ function encours_accueil()
 	// Les articles a valider
 	//
 
-	$res .=  afficher_articles(_T('info_articles_proposes'), array("WHERE" => "statut='prop'", 'ORDER BY' => "date DESC"));
+	$res =  afficher_articles(_T('info_articles_proposes'), array("WHERE" => "statut='prop'", 'ORDER BY' => "date DESC"));
 
 	//
 	// Les breves a valider

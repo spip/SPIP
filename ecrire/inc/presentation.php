@@ -341,6 +341,7 @@ function afficher_liste_display_neq4($largeurs, $t, $styles = '') {
 
 	reset($largeurs);
 	if ($styles) reset($styles);
+	$res ='';
 	while (list(, $texte) = each($t)) {
 		$style = $largeur = "";
 		list(, $largeur) = each($largeurs);
@@ -580,10 +581,6 @@ function puce_statut_article($id, $statut, $id_rubrique, $type='article', $ajax 
 function puce_statut_breve($id, $statut, $type, $droit='AUTO') {
 	global $spip_lang_left, $dir_lang;
 
-	if ($droit == 'AUTO') {
-		include_spip('inc/autoriser');
-		$droit = autoriser('publierdans', 'rubrique', $id_rubrique);
-	}
 	$puces = array(
 		       0 => 'puce-orange-breve.gif',
 		       1 => 'puce-verte-breve.gif',
@@ -615,8 +612,13 @@ function puce_statut_breve($id, $statut, $type, $droit='AUTO') {
 	$type1 = "statut$type$id"; 
 	$inser_puce = http_img_pack($puce, $title, "id='img$type1' style='margin: 1px;'");
 
-	if (!$droit) return $inser_puce;
+	if (!$droit || $droit=='AUTO') return $inser_puce;
 	
+	/*	if ($droit == 'AUTO') { # id_rubrique indefinie. a revoir.
+		include_spip('inc/autoriser');
+		$droit = autoriser('publierdans', 'rubrique', $id_rubrique);
+		} */
+
 	$type2 = "statutdecal$type$id";
 	$action = "\nonmouseover=\"montrer('$type2');\"";
 

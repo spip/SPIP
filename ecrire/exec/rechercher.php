@@ -76,7 +76,7 @@ function exec_rechercher_dist()
 		}
 	}
 
-	ajax_retour(proposer_item($points, $rub, $rac));
+	ajax_retour(proposer_item($points, $rub, $rac, $type));
 
 }
 
@@ -86,7 +86,7 @@ function exec_rechercher_dist()
 // ==> attention a composer le message d'erreur avec au moins 2 balises
 
 // http://doc.spip.org/@proposer_item
-function proposer_item ($ids, $titles, $rac)
+function proposer_item ($ids, $titles, $rac, $type)
 {
 
 	if (!$ids)

@@ -14,7 +14,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/sites_voir');
 include_spip('inc/syndic');
-include_spip('inc/rubriques');
 include_spip('inc/mots');
 include_spip('inc/date');
 include_spip('inc/config');
@@ -186,8 +185,6 @@ function exec_sites_dist()
 	if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 		echo "<p class='verdana1 spip_medium'><a href='".htmlspecialchars($url_syndic)."'>",	http_img_pack('feed.png', 'RSS', ''),	'</a> <b>'._T('info_site_syndique').'</b></p>';
 
-		if ($erreur_syndic)
-			echo "<p style='color: red; font-weight: bold;'>",$erreur_syndic,"</p>";
 
 		if ($syndication == "off" OR $syndication=="sus") {
 			debut_boite_info();
