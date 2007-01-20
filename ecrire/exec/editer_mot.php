@@ -22,14 +22,14 @@ function exec_editer_mot_dist()
 	if ($GLOBALS['connect_toutes_rubriques']) // pour eviter SQL
 		$droit = true;
 	elseif ($objet == 'article')
-		$droit = acces_article($id_objet);
+		$droit = autoriser('modifier','article',$id_objet);
 	elseif ($objet == 'rubrique')
-		$droit = acces_rubrique($id_objet);
+		$droit = autoriser('publierdans','rubrique',$id_objet);
 	else {
 		if ($objet == 'breve')
 			$droit = spip_query("SELECT id_rubrique FROM spip_breves WHERE id_breve='$id_objet'");
 		else $droit = spip_query("SELECT id_rubrique FROM spip_syndic WHERE id_syndic=$id_objet");
-		$droit = acces_rubrique($droit['id_rubrique']);
+		$droit = autoriser('publierdans','rubrique',$droit['id_rubrique']);
 	}
 
 	if (!$droit) {

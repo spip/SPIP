@@ -346,7 +346,9 @@ if (@is_readable(_DIR_TMP."charger_plugins_options.php")){
 		spip_log("generation de charger_plugins_options.php impossible; pipeline desactives");
 }
 
-
+// charger systematiquement inc/autoriser dans l'espace restreint
+if (!_DIR_RESTREINT)
+	include_spip('inc/autoriser');
 //
 // Installer Spip si pas installe... sauf si justement on est en train
 //

@@ -15,7 +15,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/distant');
 include_spip('inc/ortho');
-include_spip('inc/autoriser');
 
 // http://doc.spip.org/@exec_articles_ortho_dist
 function exec_articles_ortho_dist()

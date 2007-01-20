@@ -22,7 +22,7 @@ function exec_meme_rubrique_dist()
 	$order = _request('order');
 
         if (($GLOBALS['auteur_session']['statut'] != '0minirezo')
-        OR (!acces_rubrique($id))
+        OR (!autoriser('publierdans','rubrique',$id))
 	OR (!preg_match('/^[\w_-]+$/',$order))
 	OR (!preg_match('/^[\w_-]+$/',$type))) {
                 include_spip('inc/minipres');

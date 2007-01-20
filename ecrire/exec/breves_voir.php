@@ -40,7 +40,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 		exit;
 	      }
 
-	$flag_editable = (($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique)) OR $statut == 'prop');
+	$flag_editable = (autoriser('publierdans','rubrique',$id_rubrique) OR $statut == 'prop');
 
 	// Est-ce que quelqu'un a deja ouvert la breve en edition ?
 	if ($flag_editable
@@ -87,7 +87,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	// Logos de la breve
 	//
 
-	if (($spip_display != 4) AND $id_breve>0 AND ($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique))) {
+	if (($spip_display != 4) AND $id_breve>0 AND autoriser('publierdans','rubrique',$id_rubrique)) {
 		$iconifier = charger_fonction('iconifier', 'inc');
 		echo $iconifier('id_breve', $id_breve, 'breves_voir'); 
 	}
@@ -208,7 +208,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 		echo extra_affichage($extra, "breves");
 	}
 
-	if ($connect_statut=="0minirezo" AND acces_rubrique($id_rubrique) AND ($statut=="prop" OR $statut=="prepa")){
+	if (autoriser('publierdans','rubrique',$id_rubrique) AND ($statut=="prop" OR $statut=="prepa")){
 		echo "<div align='right'>";
 		
 		echo "<table><tr>";

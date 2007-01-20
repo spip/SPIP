@@ -112,7 +112,7 @@ function afficher_groupe_mots_boucle($row, $occurrences, $total)
 				
 	$vals[] = $texte_lie;
 
-	if (acces_mots()) {
+	if (autoriser('modifier','groupemots',$id_groupe)) {
 		$clic =  _T('info_supprimer_mot')
 		. "&nbsp;<img src='"
 		. _DIR_IMG_PACK

@@ -123,12 +123,8 @@ function revisions_breves ($id_breve, $c=false) {
 		// et que le demandeur n'est pas admin de la rubrique
 		// repasser la breve en statut 'prop'.
 		if ($statut == 'publie') {
-			if ($GLOBALS['auteur_session']['statut'] != '0minirezo')
+			if (!autoriser('publierdans','rubrique',$id_parent))
 				$champs['statut'] = $statut = 'prop';
-			else {
-				if (!acces_rubrique($id_parent))
-					$champs['statut'] = $statut = 'prop';
-			}
 		}
 	}
 

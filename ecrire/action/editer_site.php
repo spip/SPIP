@@ -150,7 +150,7 @@ function revisions_sites ($id_syndic, $c=false) {
 
 	if (_request('statut', $c)
 	AND _request('statut', $c) != $statut
-	AND acces_rubrique($id_rubrique)) {
+	AND autoriser('publierdans','rubrique',$id_rubrique)) {
 		$statut = $champs['statut'] = _request('statut', $c);
 	}
 
@@ -166,12 +166,8 @@ function revisions_sites ($id_syndic, $c=false) {
 		// et que le demandeur n'est pas admin de la rubrique
 		// repasser le site en statut 'prop'.
 		if ($statut == 'publie') {
-			if ($GLOBALS['auteur_session']['statut'] != '0minirezo')
+			if (!autoriser('publierdans','rubrique',$id_parent))
 				$champs['statut'] = $statut = 'prop';
-			else {
-				if (!acces_rubrique($id_parent))
-					$champs['statut'] = $statut = 'prop';
-			}
 		}
 	}
 

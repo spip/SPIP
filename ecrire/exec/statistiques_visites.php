@@ -45,7 +45,6 @@ function statistiques_csv($id_article) {
 	else
 		$q = "SELECT date, visites FROM spip_visites ORDER BY date";
 
-	include_spip('inc/autoriser');
 	if (!autoriser('voirstats', $id ? 'article':'', $id)) exit;
 
 

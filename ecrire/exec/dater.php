@@ -19,7 +19,7 @@ function exec_dater_dist()
 	$id = intval(_request('id'));
 
 	if (($GLOBALS['auteur_session']['statut'] != '0minirezo')
-	OR ($type == 'article' AND    !acces_article($id))
+	OR ($type == 'article' AND    !autoriser('modifier','article',$id))
 	OR (!preg_match('/^\w+$/',$type))) { // securite 
 		include_spip('inc/minipres');
 		echo minipres();

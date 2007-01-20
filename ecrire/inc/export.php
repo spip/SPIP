@@ -132,7 +132,7 @@ function build_while($file,$gz, $nfields, &$pos_in_table, $result, &$status_dump
 				$k = $fields[$i];
 				$item .= "<$k>" . text_to_xml($row[$k]) . "</$k>\n";
 			}
-			if ($all OR acces_rubrique($row['id_rubrique']))
+			if ($all OR autoriser('publierdans','rubrique',$row['id_rubrique']))
 				$string .= "$begin$item$end";
 		}
 		$status_dump[3] = $pos_in_table = $pos_in_table +1;

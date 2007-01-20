@@ -20,8 +20,8 @@ function exec_legender_dist()
 	$id_document = intval($id_document);
 
 	if (!($type == 'article' 
-		? acces_article($id)
-		: acces_rubrique($id))) {
+		? autoriser('modifier','article',$id)
+		: autoriser('publierdans','rubrique',$id))) {
 		include_spip('inc/minipres');
 		echo minipres();
 		exit;

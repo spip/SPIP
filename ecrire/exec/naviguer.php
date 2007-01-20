@@ -42,7 +42,7 @@ function exec_naviguer_dist()
 	else if ($id_parent == 0) $ze_logo = "secteur-24.gif";
 	else $ze_logo = "rubrique-24.gif";
 
-	$flag_editable = acces_rubrique($id_rubrique);
+	$flag_editable = autoriser('publierdans','rubrique',$id_rubrique);
 
 	pipeline('exec_init',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''));
 
@@ -62,6 +62,12 @@ function exec_naviguer_dist()
 	  fin_grand_cadre();
 
 	  changer_typo('', 'rubrique'.$id_rubrique);
+	  
+	  if (!autoriser('voir','rubrique',$id_rubrique)){
+			echo "<strong>"._T('avis_acces_interdit')."</strong>";
+			fin_page();
+			exit;
+	  }
 
 	  debut_gauche();
 
@@ -151,7 +157,7 @@ function infos_naviguer($id_rubrique, $statut, $ze_logo)
 		echo $res;
 		voir_en_ligne ('rubrique', $id_rubrique, $statut);
 	
-		if (acces_rubrique($id_rubrique)) {
+		if (autoriser('publierdans','rubrique',$id_rubrique)) {
 			$id_parent = spip_fetch_array(spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 			if (!$id_parent['id_parent']) {
 			  list($from, $where) = critere_statut_controle_forum('prop', $id_rubrique);
@@ -358,7 +364,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 		$res .= '<br />' . afficher_sites('<b>' . _T('titre_sites_references_rubrique') . '</b>', array("FROM" => 'spip_syndic', 'WHERE' => "id_rubrique='$id_rubrique' AND statut!='refuse' AND statut != 'prop' AND syndication NOT IN ('off','sus')", 'ORDER BY' => 'nom_site'));
 
 		if ($id_rubrique > 0
-		AND ($GLOBALS['meta']["proposer_sites"]> 0 OR acces_rubrique($id_rubrique))) {
+		AND ($GLOBALS['meta']["proposer_sites"]> 0 OR autoriser('publierdans','rubrique',$id_rubrique))) {
 	
 		$res .= "<br /><div align='$spip_lang_right'>"
 		. icone(_T('info_sites_referencer'), generer_url_ecrire('sites_edit', "id_rubrique=$id_rubrique&redirect=" . generer_url_retour('naviguer', "id_rubrique=$id_rubrique")), "site-24.gif", "creer.gif",'', 'non')

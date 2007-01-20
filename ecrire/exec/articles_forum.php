@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/forum'); // pour boutons_controle_forum 
-include_spip('inc/autoriser');
 
 // http://doc.spip.org/@exec_articles_forum_dist
 function exec_articles_forum_dist()

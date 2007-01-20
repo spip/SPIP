@@ -38,8 +38,7 @@ function exec_breves_dist()
 		$titre=typo($row['titre']);
 		$descriptif=$row['descriptif'];
 		$texte=$row['texte'];
-		$editable = ($GLOBALS['connect_statut'] == "0minirezo")
-		  && acces_rubrique($id_rubrique);
+		$editable = autoriser('publierdans','rubrique',$id_rubrique);
 
 		$statuts = "'prop', 'publie'" . ($editable ? ", 'refuse'": "");
 

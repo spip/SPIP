@@ -17,46 +17,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Fonctions de gestion de l'acces restreint aux rubriques
 //
 
-// http://doc.spip.org/@acces_rubrique
-function acces_rubrique($id_rubrique) {
-	global $connect_toutes_rubriques;
-	global $connect_id_rubrique;
-
-	return ($connect_toutes_rubriques OR isset($connect_id_rubrique[$id_rubrique]));
-}
-
 // http://doc.spip.org/@acces_restreint_rubrique
 function acces_restreint_rubrique($id_rubrique) {
 	global $connect_id_rubrique;
 	global $connect_statut;
 
 	return (isset($connect_id_rubrique[$id_rubrique]));
-}
-
-// http://doc.spip.org/@acces_mots
-function acces_mots() {
-	global $connect_toutes_rubriques;
-	return $connect_toutes_rubriques;
-}
-
-// http://doc.spip.org/@acces_article
-function acces_article($id_article)
-{
-	global $auteur_session, $connect_toutes_rubriques;
-
-	if ($connect_toutes_rubriques) return true;
-
-	$s = spip_query("SELECT id_rubrique, statut FROM spip_articles WHERE id_article=$id_article");
-	$row = spip_fetch_array($s);
-
-	if (acces_rubrique($row['id_rubrique'])) return true;
-
-	$s = auteurs_article($id_article, " id_auteur=" . $auteur_session['id_auteur']);
-	if (!spip_num_rows($s)) return false;
-
-	$s = $row['statut'];
-
-	return ($s == 'prepa' OR $s == 'prop' OR $s == 'poubelle');
 }
 
 // http://doc.spip.org/@auteurs_article

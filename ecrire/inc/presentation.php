@@ -537,7 +537,6 @@ function puce_statut_article($id, $statut, $id_rubrique, $type='article', $ajax 
 
 	$inser_puce = http_img_pack($puce, $title, " style='margin: 1px;'$ajax_node");
 
-	include_spip('inc/autoriser');
 	if (!autoriser('publierdans', 'rubrique', $id_rubrique))
 		return $inser_puce;
 
@@ -615,7 +614,6 @@ function puce_statut_breve($id, $statut, $type, $droit='AUTO') {
 	if (!$droit || $droit=='AUTO') return $inser_puce;
 	
 	/*	if ($droit == 'AUTO') { # id_rubrique indefinie. a revoir.
-		include_spip('inc/autoriser');
 		$droit = autoriser('publierdans', 'rubrique', $id_rubrique);
 		} */
 
@@ -908,7 +906,7 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 	else $lang = $langue_defaut;
 	$id_rubrique = $row['id_rubrique'];
 			
-	$vals[] = puce_statut_breve($id_breve, $statut, 'breve', ($droit && acces_rubrique($id_rubrique)));
+	$vals[] = puce_statut_breve($id_breve, $statut, 'breve', ($droit && autoriser('publierdans','rubrique',$id_rubrique)));
 
 	$s = "\n<div>";
 	$s .= "<a href='" . generer_url_ecrire("breves_voir","id_breve=$id_breve") . "' style=\"display:block;\">";
@@ -1863,7 +1861,6 @@ function afficher_numero_edit($id, $key, $type)
 		$numero = _T('info_numero_abbreviation');
 	}
 
-	include_spip("inc/autoriser");
 	if (!autoriser('modifier',$type,$id)) {
 		$bal ='span';
 		$href = '';
@@ -1945,43 +1942,46 @@ function enfant_rub($collection){
 		$id_rubrique=$row['id_rubrique'];
 		$id_parent=$row['id_parent'];
 		$titre=$row['titre'];
-
-		$les_sous_enfants = sous_enfant_rub($id_rubrique);
-
-		changer_typo($row['lang']);
-
-		$descriptif=propre($row['descriptif']);
-
-		if ($voir_logo) {
-			if ($logo = $chercher_logo($id_rubrique, 'id_rubrique', 'on')) {
-				list($fid, $dir, $nom, $format) = $logo;
-				include_spip('inc/filtres_images');
-				$logo = image_reduire("<img src='$fid' alt='' />", 48, 36);
-				if ($logo)
-					$logo =  "\n<div style='$voir_logo'>$logo</div>";
+		
+		if (autoriser('voir','rubrique',$id_rubrique)){
+	
+			$les_sous_enfants = sous_enfant_rub($id_rubrique);
+	
+			changer_typo($row['lang']);
+	
+			$descriptif=propre($row['descriptif']);
+	
+			if ($voir_logo) {
+				if ($logo = $chercher_logo($id_rubrique, 'id_rubrique', 'on')) {
+					list($fid, $dir, $nom, $format) = $logo;
+					include_spip('inc/filtres_images');
+					$logo = image_reduire("<img src='$fid' alt='' />", 48, 36);
+					if ($logo)
+						$logo =  "\n<div style='$voir_logo'>$logo</div>";
+				}
 			}
+	
+			$les_enfants = "\n<div class='enfants'>" .
+			  debut_cadre_sous_rub(($id_parent ? "rubrique-24.gif" : "secteur-24.gif"), true) .
+			  (is_string($logo) ? $logo : '') .
+			  (!$les_sous_enfants ? "" : bouton_block_invisible("enfants$id_rubrique")) .
+			  (!acces_restreint_rubrique($id_rubrique) ? "" :
+			   http_img_pack("admin-12.gif", '', " width='12' height='12'", _T('image_administrer_rubrique'))) .
+			  " <span dir='$lang_dir'><b><a href='" . 
+			  generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") .
+			  "'>".
+			  typo($titre) .
+			  "</a></b></span>" .
+			  (!$descriptif ? '' : "\n<div class='verdana1'>$descriptif</div>") .
+			  (($spip_display == 4) ? '' : $les_sous_enfants) .
+			  "\n<div style='clear:both;'></div>"  .
+			  fin_cadre_sous_rub(true) .
+			  "</div>";
+	
+			$res .= ($spip_display != 4)
+			? $les_enfants
+			: "\n<li>$les_enfants</li>";
 		}
-
-		$les_enfants = "\n<div class='enfants'>" .
-		  debut_cadre_sous_rub(($id_parent ? "rubrique-24.gif" : "secteur-24.gif"), true) .
-		  (is_string($logo) ? $logo : '') .
-		  (!$les_sous_enfants ? "" : bouton_block_invisible("enfants$id_rubrique")) .
-		  (!acces_restreint_rubrique($id_rubrique) ? "" :
-		   http_img_pack("admin-12.gif", '', " width='12' height='12'", _T('image_administrer_rubrique'))) .
-		  " <span dir='$lang_dir'><b><a href='" . 
-		  generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") .
-		  "'>".
-		  typo($titre) .
-		  "</a></b></span>" .
-		  (!$descriptif ? '' : "\n<div class='verdana1'>$descriptif</div>") .
-		  (($spip_display == 4) ? '' : $les_sous_enfants) .
-		  "\n<div style='clear:both;'></div>"  .
-		  fin_cadre_sous_rub(true) .
-		  "</div>";
-
-		$res .= ($spip_display != 4)
-		? $les_enfants
-		: "\n<li>$les_enfants</li>";
 	}
 
 	changer_typo($spip_lang); # remettre la typo de l'interface pour la suite
@@ -2003,6 +2003,7 @@ function sous_enfant_rub($collection2){
 			$titre2=$row['titre'];
 			changer_typo($row['lang']);
 
+		if (autoriser('voir','rubrique',$id_rubrique2))
 			$retour.="\n<li><div class='arial11' " .
 			  http_style_background('rubrique-12.gif', "left center no-repeat; padding: 2px; padding-$spip_lang_left: 18px; margin-$spip_lang_left: 3px") . "><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique2") . "'><span dir='$lang_dir'>".typo($titre2)."</span></a></div></li>\n";
 	}

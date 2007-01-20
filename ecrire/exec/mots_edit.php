@@ -56,7 +56,7 @@ global
 		$id_groupe = $row['id_groupe'];
 		$onfocus ='';
 	 } else {
-		if (!$new OR !acces_mots()) {
+		if (!$new OR !autoriser('modifier','groupemots',$id_groupe)) {
 			echo minipres(_T('info_mot_sans_groupe'));
 			exit;
 		}
@@ -105,7 +105,7 @@ global
 
 		// Logos du mot-clef
 
-		if (acces_mots() AND ($spip_display != 4)) {
+		if (autoriser('modifier','groupemots',$id_groupe) AND ($spip_display != 4)) {
 			$iconifier = charger_fonction('iconifier', 'inc');
 			$out .= $iconifier('id_mot', $id_mot, 'mots_edit','iconifier');
 		}
@@ -117,7 +117,7 @@ global
 
 	$res ='';
 
-	if (acces_mots() AND $id_groupe) {
+	if ($id_groupe AND autoriser('modifier','groupemots',$id_groupe)) {
 		$res = icone_horizontale(_T('icone_modif_groupe_mots'), generer_url_ecrire("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.gif", "edit.gif", false)
 		  . icone_horizontale(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit", "new=oui&id_groupe=$id_groupe&redirect=" . generer_url_retour('mots_tous')),  "mot-cle-24.gif",  "creer.gif", false);
 	}
@@ -188,7 +188,7 @@ global
 	$out .= fin_cadre_relief(true);
 
 
-	if (acces_mots()){
+	if (autoriser('modifier','groupemots',$id_groupe)){
 
 		$out .= debut_cadre_formulaire('',true);
 

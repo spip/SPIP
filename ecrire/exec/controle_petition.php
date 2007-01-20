@@ -18,7 +18,6 @@ function exec_controle_petition_dist()
 {
 	include_spip('inc/presentation');
 	include_spip('inc/signatures');
-	include_spip('inc/autoriser');
 
 	$id_article = intval(_request('id_article'));
 
