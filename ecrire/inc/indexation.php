@@ -435,8 +435,9 @@ function indexer_les_champs(&$row,&$index_desc,$ponderation = 1){
 					if (!function_exists($func)) {
 						spip_log("Erreur - $func n'est pas definie (indexation)");
 					}
-					// appliquer le filtre
-					$texte = $func($texte);
+					else
+						// appliquer le filtre
+						$texte = $func($texte);
 				}
 			}
 			//spip_log(":$quoi:$poids:$texte");
