@@ -27,11 +27,13 @@ function inc_plonger_dist($id_rubrique, $idom="", $list=array(), $col = 1, $excl
 	$res = spip_query("SELECT rub1.id_rubrique, rub1.titre, rub1.id_parent, rub1.lang, rub1.langue_choisie FROM spip_rubriques AS rub1, spip_rubriques AS rub2 WHERE ((rub1.id_parent = $id_rubrique) OR (rub2.id_parent = $id_rubrique AND rub1.id_parent=rub2.id_rubrique)) AND rub1.id_rubrique!=$exclu GROUP BY rub1.id_rubrique");
 
 	while ($row = spip_fetch_array($res)) {
-		$rub[$row['id_parent']]['enfants'] = true;
-		if ($row['id_parent'] == $id_rubrique)
-			$ordre[$row['id_rubrique']]= trim(typo($row['titre']))
-			. (($row['langue_choisie'] != 'oui')
-			   ? '' : (' [' . $row['lang'] . ']'));
+		if (autoriser('voir','rubrique',$row['id_rubrique'])){
+			$rub[$row['id_parent']]['enfants'] = true;
+			if ($row['id_parent'] == $id_rubrique)
+				$ordre[$row['id_rubrique']]= trim(typo($row['titre']))
+				. (($row['langue_choisie'] != 'oui')
+				   ? '' : (' [' . $row['lang'] . ']'));
+		}
 	}
 	$next = isset($list[$col]) ? $list[$col] : 0;
 	if ($ordre) {

@@ -34,13 +34,22 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 		$lien_url=$row['lien_url'];
 		$statut=$row['statut'];
 		$id_rubrique=$row['id_rubrique'];
-	} else 
-	      {include_spip('minipres');
+	}
+	else {
+		include_spip('minipres');
 		echo minipres();
 		exit;
-	      }
+	}
 
-	$flag_editable = (autoriser('publierdans','rubrique',$id_rubrique) OR $statut == 'prop');
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	if (!autoriser('voir','breve',$id_breve)){
+		echo $commencer_page("&laquo; $titre_breve &raquo;", "naviguer", "breves", $id_rubrique);
+		echo "<strong>"._T('avis_acces_interdit')."</strong>";
+		echo fin_page();
+		exit;
+	}
+
+	$flag_editable = autoriser('modifier','breve',$id_breve);
 
 	// Est-ce que quelqu'un a deja ouvert la breve en edition ?
 	if ($flag_editable
@@ -58,7 +67,6 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 		)
 	);
 
-	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page("&laquo; $titre_breve &raquo;", "naviguer", "breves", $id_rubrique);
 	
 	debut_grand_cadre();

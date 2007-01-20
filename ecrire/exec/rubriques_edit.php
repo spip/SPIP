@@ -26,11 +26,6 @@ function exec_rubriques_edit_dist()
 	  $new,
 	  $options;
 
-	if ($connect_statut !='0minirezo')  {
-		echo _T('avis_acces_interdit');
-		exit;
-	}
-
 	if ($new == "oui") {
 		$id_rubrique = 0;
 		$titre = filtrer_entites(_T('titre_nouvelle_rubrique'));
@@ -56,9 +51,18 @@ function exec_rubriques_edit_dist()
 		$id_secteur = $row['id_secteur'];
 		$extra = $row["extra"];
 	}
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+
+	if ($connect_statut !='0minirezo'
+	OR ($new AND !autoriser('voir','rubrique',$id_parent))
+	OR (!$new AND !autoriser('voir','rubrique',$id_rubrique)))  {
+		echo $commencer_page(_T('info_modifier_titre', array('titre' => $titre)), "naviguer", "rubriques", $id_rubrique);
+		echo "<strong>"._T('avis_acces_interdit')."</strong>";
+		echo fin_page();
+		exit;
+	}
 
 	pipeline('exec_init',array('args'=>array('exec'=>'rubriques_edit','id_rubrique'=>$id_rubrique),'data'=>''));
-	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('info_modifier_titre', array('titre' => $titre)), "naviguer", "rubriques", $id_rubrique);
 
 	if ($id_parent == 0) $ze_logo = "secteur-24.gif";

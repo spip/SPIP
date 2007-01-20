@@ -31,6 +31,14 @@ function exec_articles_edit_dist()
 // http://doc.spip.org/@articles_edit
 function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new, $config_fonc)
 {
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	if (!autoriser('voir', 'article', $id_article)
+		OR !autoriser('modifier','article', $id_article)) {
+		echo $commencer_page(_T('info_modifier_titre', array('titre' => $titre)), "naviguer", "rubriques", $id_rubrique);
+		echo "<strong>"._T('avis_acces_interdit')."</strong>";
+		echo fin_page();
+		exit;
+	}
 
 	pipeline('exec_init',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));
 	
@@ -47,7 +55,6 @@ function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new,
 	if ($id_version) $titre.= ' ('._T('version')." $id_version)";
 	else $titre = $row['titre'];
 
-	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_articles_edit', array('titre' => $titre)), "naviguer", "articles", $id_rubrique);
 
 	debut_grand_cadre();

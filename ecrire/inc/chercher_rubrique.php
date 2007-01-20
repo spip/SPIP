@@ -157,15 +157,17 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem=0) {
 
 	$q = spip_query("SELECT id_rubrique, id_parent, titre, statut, lang, langue_choisie FROM spip_rubriques " . ($type == 'breve' ?  'WHERE id_parent=0 ' : '') . "ORDER BY 0+titre,titre");
 	while ($r = spip_fetch_array($q)) {
-		// titre largeur maxi a 50
-		$titre = couper(supprimer_tags(typo(extraire_multi($r['titre']
-		)))." ", 50);
-		if ($GLOBALS['meta']['multi_rubriques'] == 'oui'
-		AND ($r['langue_choisie'] == "oui" OR $r['id_parent'] == 0))
-			$titre .= ' ['.traduire_nom_langue($r['lang']).']';
-		$data[$r['id_rubrique']] = $titre;
-		$enfants[$r['id_parent']][] = $r['id_rubrique'];
-		if ($id_rubrique == $r['id_rubrique']) $id_parent = $r['id_parent'];
+		if (autoriser('voir','rubrique',$r['id_rubrique'])){
+			// titre largeur maxi a 50
+			$titre = couper(supprimer_tags(typo(extraire_multi($r['titre']
+			)))." ", 50);
+			if ($GLOBALS['meta']['multi_rubriques'] == 'oui'
+			AND ($r['langue_choisie'] == "oui" OR $r['id_parent'] == 0))
+				$titre .= ' ['.traduire_nom_langue($r['lang']).']';
+			$data[$r['id_rubrique']] = $titre;
+			$enfants[$r['id_parent']][] = $r['id_rubrique'];
+			if ($id_rubrique == $r['id_rubrique']) $id_parent = $r['id_parent'];
+		}
 	}
 
 

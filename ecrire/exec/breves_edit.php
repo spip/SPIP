@@ -21,11 +21,19 @@ function exec_breves_edit_dist()
 {
 	global $connect_statut, $connect_id_rubrique, $spip_ecran;
 
-    $id_breve = intval(_request('id_breve'));
-    $id_rubrique  = intval(_request('id_rubrique'));
-    $new = _request('new');
+	$id_breve = intval(_request('id_breve'));
+	$id_rubrique  = intval(_request('id_rubrique'));
+	$new = _request('new');
 
-    if ($new != "oui") {
+	if ( (!$new AND !autoriser('voir','breve',$id_breve))
+		OR ($new AND !autoriser('voir','rubrique',$id_rubrique)) ) {
+		echo $commencer_page("&laquo; $titre_breve &raquo;", "naviguer", "breves", $id_rubrique);
+		echo "<strong>"._T('avis_acces_interdit')."</strong>";
+		echo fin_page();
+		exit;
+	}
+
+	if ($new != "oui") {
 	$result = spip_query("SELECT * FROM spip_breves WHERE id_breve=$id_breve");
 
 	
@@ -38,13 +46,14 @@ function exec_breves_edit_dist()
 		$statut=$row['statut'];
 		$id_rubrique=$row['id_rubrique'];
 		$extra = $row['extra'];
-	} else 
-	      {include_spip('minipres');
+	} 
+	else {
+		include_spip('minipres');
 		echo minipres();
 		exit;
-	      }
+	}
 
-    } else {
+	} else {
 	$titre = filtrer_entites(_T('titre_nouvelle_breve'));
 	$texte = "";
 	$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
@@ -53,7 +62,7 @@ function exec_breves_edit_dist()
 	$statut = "prop";
 	$row = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique = ".intval($id_rubrique)));
 	$id_rubrique = $row['id_secteur'];
-}
+	}
 
 pipeline('exec_init',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''));
 

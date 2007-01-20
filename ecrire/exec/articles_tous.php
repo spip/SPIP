@@ -88,14 +88,16 @@ function arbo_articles_tous()
 	$first_couche = 0;
 	while ($row = spip_fetch_array($result)) {
 		$id_rubrique = $row['id_rubrique'];
-		$id_parent = $row['id_parent'];
-		$enfant[$id_parent][$id_rubrique] = typo($row['titre']);
-		$nom_block = "rubrique$id_rubrique";
-		if (!isset($numero_block[$nom_block])){
-			$compteur_block++;
-			$numero_block[$nom_block] = $compteur_block;
-
-			if (!$first_couche) $first_couche = $compteur_block;
+		if (autoriser('voir','rubrique',$id_rubrique)){
+			$id_parent = $row['id_parent'];
+			$enfant[$id_parent][$id_rubrique] = typo($row['titre']);
+			$nom_block = "rubrique$id_rubrique";
+			if (!isset($numero_block[$nom_block])){
+				$compteur_block++;
+				$numero_block[$nom_block] = $compteur_block;
+	
+				if (!$first_couche) $first_couche = $compteur_block;
+			}
 		}
 	}
 	$last_couche = $first_couche ? $compteur_block : 0;
@@ -121,32 +123,34 @@ function texte_articles_tous(&$sel_lang, $flag_trad, $aff_art){
 	while($row = spip_fetch_array($result)) {
 		$id_rubrique=$row['id_rubrique'];
 		$id_article = $row['id_article'];
-		$titre = typo($row['titre']);
-		$statut = $row['statut'];
-		$lang = $row['lang'];
-		$id_trad = $row['id_trad'];
-		$date_modif = $row['date_modif'];
-		
-		$aff_statut[$statut] = true; // signale qu'il existe de tels articles
-		$text_article[$id_article]["titre"] = strlen($titre)?$titre:_T('ecrire:info_sans_titre');
-		$text_article[$id_article]["statut"] = $statut;
-		$text_article[$id_article]["lang"] = $lang;
-		$text_article[$id_article]["id_trad"] = $id_trad;
-		$text_article[$id_article]["date_modif"] = $date_modif;
-		$GLOBALS['langues_utilisees'][$lang] = true;
-		
-		if (count($langues) > 1) {
-			while (list(, $l) = each ($langues)) {
-				if (in_array($l, $sel_lang)) $text_article[$id_article]["trad"]["$l"] =  "<span class='creer'>$l</span>";
+		if (autoriser('voir','article',$id_article)){
+			$titre = typo($row['titre']);
+			$statut = $row['statut'];
+			$lang = $row['lang'];
+			$id_trad = $row['id_trad'];
+			$date_modif = $row['date_modif'];
+			
+			$aff_statut[$statut] = true; // signale qu'il existe de tels articles
+			$text_article[$id_article]["titre"] = strlen($titre)?$titre:_T('ecrire:info_sans_titre');
+			$text_article[$id_article]["statut"] = $statut;
+			$text_article[$id_article]["lang"] = $lang;
+			$text_article[$id_article]["id_trad"] = $id_trad;
+			$text_article[$id_article]["date_modif"] = $date_modif;
+			$GLOBALS['langues_utilisees'][$lang] = true;
+			
+			if (count($langues) > 1) {
+				while (list(, $l) = each ($langues)) {
+					if (in_array($l, $sel_lang)) $text_article[$id_article]["trad"]["$l"] =  "<span class='creer'>$l</span>";
+				}
 			}
+			
+			if ($id_trad == $id_article OR $id_trad == 0) {
+				$text_article[$id_article]["trad"]["$lang"] = "<span class='lang_base'$spip_dir_lang>$lang</span>";
+			}
+			
+			if (in_array($statut, $aff_art))
+				$article[$id_rubrique][] = $id_article;
 		}
-		
-		if ($id_trad == $id_article OR $id_trad == 0) {
-			$text_article[$id_article]["trad"]["$lang"] = "<span class='lang_base'$spip_dir_lang>$lang</span>";
-		}
-		
-		if (in_array($statut, $aff_art))
-			$article[$id_rubrique][] = $id_article;
 	}
 
 	if ($text_article)

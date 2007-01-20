@@ -26,6 +26,13 @@ function exec_sites_dist()
 	global $cherche_mot, $select_groupe, $id_syndic;
 
 	$id_syndic = intval($id_syndic);
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	if (!autoriser('voir','site',$id_syndic)){
+		echo $commencer_page("$titre_page","naviguer","sites", $id_rubrique);
+		echo "<strong>"._T('avis_acces_interdit')."</strong>";
+		echo fin_page();
+		exit;
+	}
 
 	$result = spip_query("SELECT * FROM spip_syndic WHERE id_syndic=$id_syndic");
 
@@ -57,7 +64,6 @@ function exec_sites_dist()
 	pipeline('exec_init',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
 
 
-	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page("$titre_page","naviguer","sites", $id_rubrique);
 
 	debut_grand_cadre();
