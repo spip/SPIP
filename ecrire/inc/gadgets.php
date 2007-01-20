@@ -59,13 +59,14 @@ function gen_liste_rubriques() {
 	 
 	$res = spip_query("SELECT id_rubrique, id_parent, titre FROM spip_rubriques WHERE id_rubrique IN ($liste) ORDER BY id_parent,0+titre,titre");
 
+	// il ne faut pas filtrer le autoriser voir ici car on met le resultat en cache, commun a tout le monde
 	$GLOBALS['db_art_cache'] = array();
 	if (spip_num_rows($res) > 0) { 
 		while ($row = spip_fetch_array($res)) {
-			$parent = $row['id_parent'];
 			$id = $row['id_rubrique'];
-			$GLOBALS['db_art_cache'][$parent][$id] = 
-				supprimer_numero(typo(sinon($row['titre'], _T('ecrire:info_sans_titre'))));
+				$parent = $row['id_parent'];
+				$GLOBALS['db_art_cache'][$parent][$id] = 
+					supprimer_numero(typo(sinon($row['titre'], _T('ecrire:info_sans_titre'))));
 		}
 	}
 
@@ -101,15 +102,15 @@ function gadget_rubriques() {
 
 	if ($i > 0) {
 		foreach( $arr_low as $id_rubrique => $titre_rubrique) {
-
 			if ($count_lignes == $max_lignes) {
 				$count_lignes = 0;
 				$ret .= "</div></td>\n<td$style><div class='bandeau_rubriques'>";
 			}
 			$count_lignes ++;
-
-			$ret .= bandeau_rubrique($id_rubrique, $titre_rubrique, $i);
-			$i = $i - 1;
+			if (autoriser('voir','rubrique',$id_rubrique)){
+				$ret .= bandeau_rubrique($id_rubrique, $titre_rubrique, $i);
+				$i = $i - 1;
+			}
 		}
 
 		$ret = "<table><tr>\n<td$style><div class='bandeau_rubriques'>"
@@ -168,10 +169,11 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 				$ret .= "<div style='width: 200px;'>";
 
 			}
-		
-			$titre_rub = supprimer_numero(typo($titre_rub));
-			$ret .= bandeau_rubrique($id_rub, $titre_rub, ($z+$i));
-			$i = $i - 1;
+			if (autoriser('voir','rubrique',$id_rub)){
+				$titre_rub = supprimer_numero(typo($titre_rub));
+				$ret .= bandeau_rubrique($id_rub, $titre_rub, ($z+$i));
+				$i = $i - 1;
+			}
 		}
 		
 		$ret .= "</div></td></tr></table>\n";
