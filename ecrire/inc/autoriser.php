@@ -162,7 +162,7 @@ function autoriser_article_modifier_dist($faire, $type, $id, $qui, $opt) {
 }
 
 // Autoriser a modifier un groupe de mots $id
-// http://doc.spip.org/@autoriser_rubrique_modifier_dist
+// http://doc.spip.org/@autoriser_groupemots_modifier_dist
 function autoriser_groupemots_modifier_dist($faire, $type, $id, $qui, $opt) {
 	return
 		$qui['statut'] == '0minirezo'
