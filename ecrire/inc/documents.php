@@ -15,8 +15,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions'); // *action_auteur et determine_upload
 include_spip('inc/date');
 include_spip('base/abstract_sql');
-include_spip('inc/minipres'); // pour l'aide quand on appelle afficher_documents_colonne depuis un squelette
-include_spip('inc/presentation'); // pour l'aide quand on appelle afficher_documents_colonne depuis un squelette
 
 //
 // Vignette pour les documents lies
@@ -119,6 +117,8 @@ function document_et_vignette($document, $url, $portfolio=false) {
 
 // http://doc.spip.org/@afficher_documents_colonne
 function afficher_documents_colonne($id, $type="article",$script=NULL) {
+	include_spip('inc/minipres'); // pour l'aide quand on appelle afficher_documents_colonne depuis un squelette
+	include_spip('inc/presentation'); // pour l'aide quand on appelle afficher_documents_colonne depuis un squelette
 	// seuls cas connus : article, breve ou rubrique
 	if ($script==NULL){
 		$script = $type.'s_edit';
