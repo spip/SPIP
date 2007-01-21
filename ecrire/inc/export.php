@@ -51,72 +51,57 @@ function ramasse_parties($archive, $gz, $partfile){
 // Exportation generique d'objets (fichier ou retour de fonction)
 //
 // http://doc.spip.org/@export_objets
-function export_objets($table, $primary, $liens, $file = 0, $gz = false, $etape_actuelle="", $nom_etape="",$limit=0) {
+function export_objets($table, $liens, $file = 0, $gz = false, $etape_actuelle="", $nom_etape="",$limit=0) {
 	static $etape_affichee=array();
-	static $table_fields=array();
-	$string='';
 
+	$string='';
 	$status_dump = explode("::",$GLOBALS['meta']["status_dump"]);
 	$etape_en_cours = $status_dump[2];
 	$pos_in_table = $status_dump[3];
-	
+
 	if ($etape_en_cours < 1 OR $etape_en_cours == $etape_actuelle){
 
+	  // on calcule ca autant de fois qu'il y a de paquets!
+	  // on devrait plutot le faire dans l'appelant
+	  // et le memoriser dans status_dump
 		$result = spip_query("SELECT COUNT(*) FROM $table");
 		$row = spip_fetch_array($result,SPIP_NUM);
 		$total = $row[0];
-		$debut = $pos_in_table;
 		if (!isset($etape_affichee[$etape_actuelle]) AND $total){
-			echo "<br /><strong>$etape_actuelle-$nom_etape</strong>";
-			echo " : $total";
+			echo "\n<br /><strong>$etape_actuelle-$nom_etape</strong>";
 			$etape_affichee[$etape_actuelle] = 1;
 		}
 		if ($pos_in_table!=0 AND $total)
-			echo "| ", $pos_in_table;
+			echo " ", $pos_in_table;
 		if ($GLOBALS['flag_ob_flush']) ob_flush();
 		flush();
+		if ($limit == 0) $limit = $total;
 
-		if ($limit == 0) $limit=$total;
-		$result = spip_query("SELECT * FROM $table LIMIT $debut,$limit");
-#" LIMIT  $limit OFFSET $debut" # PG
-
-		if (!isset($table_fields[$table])){
-			$nfields = mysql_num_fields($result);
-			// Recuperer les noms des champs
-			for ($i = 0; $i < $nfields; ++$i) $table_fields[$table][$i] = mysql_field_name($result, $i);
-		}
-		else
-			$nfields = count($table_fields[$table]);
-
-		$string = build_while($file,$gz, $nfields, $pos_in_table, $result, $status_dump, $table, $table_fields[$table]);
+		$string = build_while($pos_in_table, $limit, $table);
 
 		if ($pos_in_table>=$total){
-			// etape suivante : 
 			if ($total) echo " ok";
 			$status_dump[2] = $status_dump[2]+1;
 			$status_dump[3] = 0;
-		}
+		} else  $status_dump[3] = $pos_in_table;
+
 		if ($file) {
-			// on se contente d'une ecriture en base pour aller plus vite
-			// a la relecture on en profitera pour mettre le cache a jour
+			$_fputs = ($gz) ? gzputs : fputs;
+			$_fputs($file, $string);
+			fflush($file);
 			ecrire_meta("status_dump", implode("::",$status_dump),'non');
-			#lire_metas();
-			#ecrire_metas();
+			$string='';
 		}
-		spip_free_result($result);
-		return array($string,$status_dump);
-	} else {
-	if ($etape_actuelle < $etape_en_cours) {
+	} else { // ca ne sert plus il me semble
+	  if ($etape_actuelle < $etape_en_cours) {
 		if (!isset($etape_affichee[$etape_actuelle]))
-			echo "<li>", $etape_actuelle,'-',$nom_etape,"</li>";
-		if ($GLOBALS['flag_ob_flush']) ob_flush();
-		flush();
-	} else {
+			echo "\n<li>", $etape_actuelle,'-',$nom_etape,"</li>";
+	  } else {
 		if (!isset($etape_affichee[$etape_actuelle]))
-			echo "<li> <span style='color: #999999'>",$etape_actuelle,'-',$nom_etape,'</span></li>';
-		if ($GLOBALS['flag_ob_flush']) ob_flush();
-		flush();
-	}
+			echo "\n<li> <span style='color: #999999'>",$etape_actuelle,'-',$nom_etape,'</span></li>';
+	  }
+	  if ($GLOBALS['flag_ob_flush']) ob_flush();
+	  flush();
 	}
 	return array($string,$status_dump);
 }
@@ -124,45 +109,39 @@ function export_objets($table, $primary, $liens, $file = 0, $gz = false, $etape_
 // Exporter les champs de la table
 
 // http://doc.spip.org/@build_while
-function build_while($file,$gz, $nfields, &$pos_in_table, $result, &$status_dump, $table, $fields) {
+function build_while(&$pos_in_table, $limit, $table) {
 	global $connect_toutes_rubriques ;
+	global $tables_principales;
+	static $table_fields=array();
+
+	$result = spip_query("SELECT * FROM $table LIMIT " . intval($pos_in_table) .',' . intval($limit));
+	// Recuperer les noms des champs
+	// Ces infos sont donnees par le abstract_showtable
+	// les instructions natives mysql ne devraient pas apparaitre ici
+	if (!isset($table_fields[$table])){
+		$nfields = mysql_num_fields($result);
+		for ($i = 0; $i < $nfields; ++$i)
+		  $table_fields[$table][$i] = mysql_field_name($result, $i);
+	} else	$nfields = count($table_fields[$table]);
+
 	$string = '';
-	$begin = build_begin_tag($table);
-	$end = build_end_tag($table);
-	$all = $connect_toutes_rubriques || (!in_array('id_rubrique',$fields));
+	$all = $connect_toutes_rubriques
+	  ||(!in_array('id_rubrique',$table_fields[$table]));
+
 	while ($row = spip_fetch_array($result,SPIP_ASSOC)) {
-		$item = '';
-		if (!isset($row['impt']) OR $row['impt']=='oui'){
+		if ((!isset($row['impt']) OR $row['impt']=='oui')
+		AND ($all OR autoriser('publierdans','rubrique',$row['id_rubrique']))) {
+			$string .= "<$table>\n";
 			for ($i = 0; $i < $nfields; ++$i) {
-				$k = $fields[$i];
-				$item .= "<$k>" . text_to_xml($row[$k]) . "</$k>\n";
+				$k = $table_fields[$table][$i];
+				$string .= "<$k>" . text_to_xml($row[$k]) . "</$k>\n";
 			}
-			if ($all OR autoriser('publierdans','rubrique',$row['id_rubrique']))
-				$string .= "$begin$item$end";
+			$string .= "</$table>\n\n";
 		}
-		$status_dump[3] = $pos_in_table = $pos_in_table +1;
+		$pos_in_table++;
 	}
-
-	if ($file) {
-		$_fputs = ($gz) ? gzputs : fputs;
-		$_fputs($file, $string);
-		fflush($file);
-		// on se contente d'une ecriture en base pour aller plus vite
-		// a la relecture on en profitera pour mettre le cache a jour
-		ecrire_meta("status_dump", implode("::",$status_dump),'non');
-		$string = '';
-	}
+	spip_free_result($result);
 	return $string;
-}
-
-// http://doc.spip.org/@build_begin_tag
-function build_begin_tag($tag) {
-	return "<$tag>\n";
-}
-
-// http://doc.spip.org/@build_end_tag
-function build_end_tag($tag) {
-	return "</$tag>\n\n";
 }
 
 // Conversion texte -> xml (ajout d'entites)
@@ -173,7 +152,6 @@ function text_to_xml($string) {
 
 // production de l'entete du fichier d'archive
 
-// http://doc.spip.org/@export_entete
 function export_entete()
 {
 	return
@@ -188,5 +166,7 @@ $GLOBALS['meta']['charset']."\"?".">\n" .
 	dir_logos=\"" . _DIR_LOGOS . "\"
 >\n";
 }
+
+function export_enpied () { return  "</SPIP>\n";}
 
 ?>
