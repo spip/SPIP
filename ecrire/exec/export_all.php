@@ -168,6 +168,7 @@ function exec_export_all_dist()
 // + toutes les tables auxiliaires hors relations
 // + les tables relations dont les deux tables liees sont dans la liste
 
+// http://doc.spip.org/@export_all_list_tables
 function export_all_list_tables()
 {
 	$tables_for_dump = array();
