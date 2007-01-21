@@ -71,9 +71,11 @@ jQuery(function(){
 			echo "\n<div class='plan-articles'>";
 			while($row=spip_fetch_array($result)){
 				$id_article=$row['id_article'];
-				$titre = typo($row['titre']);
-				$statut = $row['statut'];
-				echo "<a class='$statut'\nhref='javascript:window.parent.location=\"" . generer_url_ecrire('articles',"id_article=$id_article"),"\"'>",$titre,"</a>";
+				if (autoriser('voir','article',$id_article)){
+					$titre = typo($row['titre']);
+					$statut = $row['statut'];
+					echo "<a class='$statut'\nhref='javascript:window.parent.location=\"" . generer_url_ecrire('articles',"id_article=$id_article"),"\"'>",$titre,"</a>";
+				}
 			}
 			echo "</div>";
 		}
@@ -86,9 +88,11 @@ jQuery(function(){
 			echo "\n<div class='plan-articles'>";
 			while($row=spip_fetch_array($result)){
 				$id_article=$row['id_article'];
-				$titre = typo($row['titre']);
-				$statut = $row['statut'];
-				echo "<a class='$statut' href='javascript:window.parent.location=\"", generer_url_ecrire('articles',"id_article=$id_article"),"\"'>",$titre,"</a>";
+				if (autoriser('voir','article',$id_article)){
+					$titre = typo($row['titre']);
+					$statut = $row['statut'];
+					echo "<a class='$statut' href='javascript:window.parent.location=\"", generer_url_ecrire('articles',"id_article=$id_article"),"\"'>",$titre,"</a>";
+				}
 			}
 			echo "</div>";
 		}
@@ -99,16 +103,18 @@ jQuery(function(){
 			echo "\n<div class='plan-articles'>";
 			while($row=spip_fetch_array($result)){
 				$id_breve=$row['id_breve'];
-				$titre = typo($row['titre']);
-				$statut = $row['statut'];
-				echo "<a class='$statut' href='javascript:window.parent.location=\"", generer_url_ecrire('breves_voir',"id_breve=$id_breve"),"\"'>",$titre,"</a>";
+				if (autoriser('voir','breve',$id_breve)){
+					$titre = typo($row['titre']);
+					$statut = $row['statut'];
+					echo "<a class='$statut' href='javascript:window.parent.location=\"", generer_url_ecrire('breves_voir',"id_breve=$id_breve"),"\"'>",$titre,"</a>";
+				}
 			}
 			echo "</div>";
 		}
 
 	}
 	else {
-	  if ($id_rubrique !== "") {
+	  if ($id_rubrique !== "" AND autoriser('voir','rubrique',$id_rubrique)) {
 
 		$result=spip_query("SELECT id_parent, id_rubrique, titre FROM spip_rubriques WHERE id_rubrique='$id_rubrique' ORDER BY 0+titre, titre");
 		if ($row=spip_fetch_array($result)){
@@ -131,28 +137,30 @@ jQuery(function(){
 		$result=spip_query("SELECT id_rubrique, id_parent, titre FROM spip_rubriques WHERE id_parent='$id_rubrique' ORDER BY 0+titre, titre");
 		while($row=spip_fetch_array($result)){
 			$ze_rubrique=$row['id_rubrique'];
-			$titre = typo($row['titre']);
-			$id_parent=$row['id_parent'];
-			
-			echo "\n<div class='brouteur_rubrique'
-onmouseover=\"changeclass(this, 'brouteur_rubrique_on');\"
-onmouseout=\"changeclass(this, 'brouteur_rubrique');\">";
-
-			if ($id_parent == '0') 	{
-			  echo "\n<div style='", frame_background_image("secteur-24.gif"), ";'><a href='", generer_url_ecrire('brouteur_frame', "rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui"), "' class='iframe' rel='", ($frame+1), "'>",
-			    $titre,
-			    "</a></div>";
+			if (autoriser('voir','rubrique',$ze_rubrique)){
+				$titre = typo($row['titre']);
+				$id_parent=$row['id_parent'];
+				
+				echo "\n<div class='brouteur_rubrique'
+	onmouseover=\"changeclass(this, 'brouteur_rubrique_on');\"
+	onmouseout=\"changeclass(this, 'brouteur_rubrique');\">";
+	
+				if ($id_parent == '0') 	{
+				  echo "\n<div style='", frame_background_image("secteur-24.gif"), ";'><a href='", generer_url_ecrire('brouteur_frame', "rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui"), "' class='iframe' rel='", ($frame+1), "'>",
+				    $titre,
+				    "</a></div>";
+				}
+				else {
+					if ($frame+1 < $nb_col)
+					  echo "\n<div style='",
+					    frame_background_image("rubrique-24.gif"), ";'><a href='", generer_url_ecrire('brouteur_frame', "rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui"), "' class='iframe' rel='",
+					    ($frame+1),
+					    "'>$titre</a></div>";
+					else  echo "\n<div style='",
+					  frame_background_image("rubrique-24.gif"), ";'><a href='javascript:window.parent.location=\"" . generer_url_ecrire('brouteur',"id_rubrique=$ze_rubrique")."\"'>",$titre,"</a></div>";
+				}
+				echo "</div>\n";
 			}
-			else {
-				if ($frame+1 < $nb_col)
-				  echo "\n<div style='",
-				    frame_background_image("rubrique-24.gif"), ";'><a href='", generer_url_ecrire('brouteur_frame', "rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui"), "' class='iframe' rel='",
-				    ($frame+1),
-				    "'>$titre</a></div>";
-				else  echo "\n<div style='",
-				  frame_background_image("rubrique-24.gif"), ";'><a href='javascript:window.parent.location=\"" . generer_url_ecrire('brouteur',"id_rubrique=$ze_rubrique")."\"'>",$titre,"</a></div>";
-			}
-			echo "</div>\n";
 		}
 
 	
@@ -167,9 +175,11 @@ onmouseout=\"changeclass(this, 'brouteur_rubrique');\">";
 				echo "\n<div class='plan-articles'>";
 				while($row=spip_fetch_array($result)){
 					$id_article=$row['id_article'];
-					$titre = typo($row['titre']);
-					$statut = $row['statut'];
-					echo "<a class='$statut' href='javascript:window.parent.location=\"" . generer_url_ecrire('articles',"id_article=$id_article")."\"'>",$titre,"</a>";
+					if (autoriser('voir','article',$id_article)){
+						$titre = typo($row['titre']);
+						$statut = $row['statut'];
+						echo "<a class='$statut' href='javascript:window.parent.location=\"" . generer_url_ecrire('articles',"id_article=$id_article")."\"'>",$titre,"</a>";
+					}
 				}
 				echo "</div>";
 			}
@@ -180,9 +190,11 @@ onmouseout=\"changeclass(this, 'brouteur_rubrique');\">";
 				echo "\n<div class='plan-articles'>";
 				while($row=spip_fetch_array($result)){
 					$id_breve=$row['id_breve'];
-					$titre = typo($row['titre']);
-					$statut = $row['statut'];
-					echo "<a class='$statut' href='javascript:window.parent.location=\"", generer_url_ecrire('breves_voir',"id_breve=$id_breve")."\"'>",$titre,"</a>";
+					if (autoriser('voir','breve',$id_breve)){
+						$titre = typo($row['titre']);
+						$statut = $row['statut'];
+						echo "<a class='$statut' href='javascript:window.parent.location=\"", generer_url_ecrire('breves_voir',"id_breve=$id_breve")."\"'>",$titre,"</a>";
+					}
 				}
 				echo "</div>";
 
@@ -194,9 +206,11 @@ onmouseout=\"changeclass(this, 'brouteur_rubrique');\">";
 				echo "\n<div style='padding-top: 6px;'><b class='verdana2'>"._T('icone_sites_references')."</b></div>";
 				while($row=spip_fetch_array($result)){
 					$id_syndic=$row['id_syndic'];
-					$titre = typo($row['nom_site']);
-					$statut = $row['statut'];
-					echo "\n<div " . http_style_background('site-24.gif',  "$spip_lang_left center no-repeat; margin:3px; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px") . "><b><a href='javascript:window.parent.location=\"", generer_url_ecrire('sites',"id_syndic=$id_syndic"),"\"'>",$titre,"</a></b></div>";
+					if (autoriser('voir','site',$id_syndic)){
+						$titre = typo($row['nom_site']);
+						$statut = $row['statut'];
+						echo "\n<div " . http_style_background('site-24.gif',  "$spip_lang_left center no-repeat; margin:3px; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px") . "><b><a href='javascript:window.parent.location=\"", generer_url_ecrire('sites',"id_syndic=$id_syndic"),"\"'>",$titre,"</a></b></div>";
+					}
 				}
 			}
 		}
