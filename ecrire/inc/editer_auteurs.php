@@ -36,12 +36,14 @@ function inc_editer_auteurs_dist($type, $id, $flag, $cherche_auteur, $ids, $titr
 
 
 	$les_auteurs = determiner_auteurs_objet($type,$id);
+	
+	$aff_les_auteurs = afficher_auteurs_objet($type, $id, $flag, $les_auteurs, $script_edit_objet, $script_edit_auteur, $arg_ajax);
+	
 	if ($flag AND $options == 'avancees') {
 		$futurs = ajouter_auteurs_objet($type, $id, $les_auteurs,$script_edit, $arg_ajax);
 	} else $futurs = '';
 
-	$les_auteurs = afficher_auteurs_objet($type, $id, $flag, $les_auteurs, $script_edit_objet, $script_edit_auteur, $arg_ajax);
-	return editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_auteurs, $futurs, $GLOBALS['meta']['ldap_statut_import'],$titre_boite,$script_edit_objet, $arg_ajax);
+	return editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $aff_les_auteurs, $futurs, $GLOBALS['meta']['ldap_statut_import'],$titre_boite,$script_edit_objet, $arg_ajax);
 }
 
 // http://doc.spip.org/@editer_auteurs_objet
@@ -188,7 +190,8 @@ function afficher_auteurs_objet($type, $id, $flag_editable, $les_auteurs, $scrip
 
 	$table = array();
 
-	$formater_auteur = charger_fonction('formater_auteur', 'inc');
+	if (!$formater_auteur = charger_fonction("formater_auteur_$type", 'inc',true))
+		$formater_auteur = charger_fonction('formater_auteur', 'inc');
 	foreach($les_auteurs as $id_auteur) {
 		$vals = $formater_auteur($id_auteur, $script_edit_auteur);
 
@@ -213,7 +216,10 @@ function afficher_auteurs_objet($type, $id, $flag_editable, $les_auteurs, $scrip
 // http://doc.spip.org/@ajouter_auteurs_objet
 function ajouter_auteurs_objet($type, $id, $les_auteurs,$script_edit, $arg_ajax)
 {
-	$query = determiner_non_auteurs($les_auteurs, "statut, nom");
+
+	if (!$determiner_non_auteurs = charger_fonction('determiner_non_auteurs_'.$type,'inc',true))
+		$determiner_non_auteurs = 'determiner_non_auteurs';
+	$query = $determiner_non_auteurs($les_auteurs, "statut, nom");
 	if (!$num = spip_num_rows($query)) return '';
 
 	$js = "findObj_forcer('valider_ajouter_auteur').style.visibility='visible';";
