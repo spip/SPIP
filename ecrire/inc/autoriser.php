@@ -121,6 +121,44 @@ function autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt) {
 		);
 }
 
+// Autoriser a creer un article dans la rubrique $id
+function autoriser_rubrique_creerrubriquedans_dist($faire, $type, $id, $qui, $opt) {
+	return
+		autoriser('voir','rubrique',$id)
+		AND autoriser('publierdans','rubrique',$id);
+}
+
+// Autoriser a creer un article dans la rubrique $id
+function autoriser_rubrique_creerarticledans_dist($faire, $type, $id, $qui, $opt) {
+	return
+		$id
+		AND autoriser('voir','rubrique',$id);
+}
+
+// Autoriser a creer une breve dans la rubrique $id
+function autoriser_rubrique_creerbrevedans_dist($faire, $type, $id, $qui, $opt) {
+	$s = spip_query(
+	"SELECT id_parent FROM spip_rubriques WHERE id_rubrique="._q($id));
+	$r = spip_fetch_array($s);
+	return
+		$id
+		AND ($r['id_parent']==0)
+		AND ($GLOBALS['meta']["activer_breves"]!="non")
+		AND autoriser('voir','rubrique',$id);
+}
+
+// Autoriser a creer un site dans la rubrique $id
+function autoriser_rubrique_creersitedans_dist($faire, $type, $id, $qui, $opt) {
+	return
+		$id
+		AND autoriser('voir','rubrique',$id)
+		AND $GLOBALS['meta']['activer_sites'] != 'non'
+		AND (
+			$qui['statut']=='0minirezo'
+			OR ($qui['statut']=='1comite' AND $GLOBALS['meta']["proposer_sites"]>=1)
+			OR ($qui['statut']=='6forum' AND $GLOBALS['meta']["proposer_sites"]>=2) );
+}
+
 // Autoriser a modifier la rubrique $id
 // = publierdans rubrique $id
 // http://doc.spip.org/@autoriser_rubrique_modifier_dist

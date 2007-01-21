@@ -33,7 +33,7 @@ function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new,
 {
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	if (
-	  ($new AND !autoriser('voir','rubrique',$id_rubrique)) 
+	  ($new AND !autoriser('creerarticledans','rubrique',$id_rubrique)) 
 	  OR (!$new AND (!autoriser('voir', 'article', $id_article)	OR !autoriser('modifier','article', $id_article))) 
 	  ) {
 		echo $commencer_page(_T('info_modifier_titre', array('titre' => $titre)), "naviguer", "rubriques", $id_rubrique);

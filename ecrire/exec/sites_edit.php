@@ -19,14 +19,6 @@ function exec_sites_edit_dist()
 	global $connect_statut, $descriptif, $id_rubrique, $id_secteur, $id_syndic, $new, $nom_site, $syndication, $url_site, $url_syndic, $connect_id_rubrique;
 
 	$result = spip_query("SELECT * FROM spip_syndic WHERE id_syndic=" . intval($id_syndic));
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	if (!autoriser('voir','site',$id_syndic)
-	  OR !autoriser('modifier','site',$id_syndic)){
-		echo $commencer_page(_T('info_site_reference_2'), "naviguer", "sites", $id_rubrique);
-		echo "<strong>"._T('avis_acces_interdit')."</strong>";
-		echo fin_page();
-		exit;
-	}
 
 	if ($row = spip_fetch_array($result)) {
 		$id_syndic = $row["id_syndic"];
@@ -47,6 +39,15 @@ function exec_sites_edit_dist()
 			$id_rubrique = $row['id_rubrique'];
 		}
 	}
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	if ( ($new!='oui' AND (!autoriser('voir','site',$id_syndic) OR !autoriser('modifier','site',$id_syndic)))
+	  OR ($new=='oui' AND !autoriser('creersitedans','rubrique',$id_rubrique)) ){
+		echo $commencer_page(_T('info_site_reference_2'), "naviguer", "sites", $id_rubrique);
+		echo "<strong>"._T('avis_acces_interdit')."</strong>";
+		echo fin_page();
+		exit;
+	}
+
 	pipeline('exec_init',array('args'=>array('exec'=>'sites_edit','id_syndic'=>$id_syndic),'data'=>''));
 
 	echo $commencer_page(_T('info_site_reference_2'), "naviguer", "sites", $id_rubrique);

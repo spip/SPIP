@@ -122,7 +122,7 @@ function exec_naviguer_dist()
 	    
 	fin_cadre_relief();
 
-	echo afficher_enfant_rub($id_rubrique, $flag_editable, false);
+	echo afficher_enfant_rub($id_rubrique, autoriser('creerrubriquedans','rubrique',$id_rubrique), false);
 
 	echo contenu_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable);
 
@@ -199,11 +199,11 @@ function raccourcis_naviguer($id_rubrique, $id_parent)
 	
 	$n = spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1"));
 	if ($n) {
-		if ($id_rubrique > 0)
+		if (autoriser('creerarticledans','rubrique',$id_rubrique))
 		  $res .= icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.gif","creer.gif", false);
 	
 		$activer_breves = $GLOBALS['meta']["activer_breves"];
-		if ($activer_breves != "non" AND $id_parent == "0" AND $id_rubrique != "0") {
+		if (autoriser('creerbrevedans','rubrique',$id_rubrique,NULL,array('id_parent'=>$id_parent))) {
 		  $res .= icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","id_rubrique=$id_rubrique&new=oui"), "breve-24.gif","creer.gif", false);
 		}
 	}
@@ -340,7 +340,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 
 	  $res .= afficher_articles(_T('info_tous_articles_presents'), array("WHERE" => "statut='publie' AND id_rubrique='$id_rubrique'", 'ORDER BY' => "date DESC"));
 
-	if ($id_rubrique > 0){
+	if (autoriser('creerarticledans','rubrique',$id_rubrique)){
 	  $res .= "<div align='$spip_lang_right'>"
 	  . icone(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.gif", "creer.gif", '', 'non')
 	 . "</div>";
@@ -351,7 +351,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 	$res .= afficher_breves('<b>' . _T('icone_ecrire_nouvel_article') . '</b>', array("FROM" => 'spip_breves', 'WHERE' => "id_rubrique='$id_rubrique' AND statut != 'prop' AND statut != 'prepa'", 'ORDER BY' => "date_heure DESC"));
 
 
-	if ((!$id_parent) AND $id_rubrique AND $GLOBALS['meta']["activer_breves"]!="non"){
+	if (autoriser('creerbrevedans','rubrique',$id_rubrique,NULL,array('id_parent'=>$id_parent))){
 	  $res .= "<br /><div align='$spip_lang_right'>"
 	  . icone(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","id_rubrique=$id_rubrique&new=oui"), "breve-24.gif", "creer.gif",'','non')
 	  . "</div>";
@@ -364,7 +364,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 		$res .= '<br />' . afficher_sites('<b>' . _T('titre_sites_references_rubrique') . '</b>', array("FROM" => 'spip_syndic', 'WHERE' => "id_rubrique='$id_rubrique' AND statut!='refuse' AND statut != 'prop' AND syndication NOT IN ('off','sus')", 'ORDER BY' => 'nom_site'));
 
 		if ($id_rubrique > 0
-		AND ($GLOBALS['meta']["proposer_sites"]> 0 OR autoriser('publierdans','rubrique',$id_rubrique))) {
+		AND (autoriser('creersitedans','rubrique',$id_rubrique))) {
 	
 		$res .= "<br /><div align='$spip_lang_right'>"
 		. icone(_T('info_sites_referencer'), generer_url_ecrire('sites_edit', "id_rubrique=$id_rubrique&redirect=" . generer_url_retour('naviguer', "id_rubrique=$id_rubrique")), "site-24.gif", "creer.gif",'', 'non')
