@@ -18,7 +18,7 @@ include_spip('inc/minipres');
 
 function action_export_all_dist()
 {
-	global $gz, $connect_toutes_rubriques ;
+	global $connect_toutes_rubriques ;
 	
         $securiser_action = charger_fonction('securiser_action', 'inc');
         $arg = $securiser_action();
@@ -28,18 +28,10 @@ function action_export_all_dist()
 	if ($connect_toutes_rubriques AND file_exists(_DIR_DUMP))
 		$dir = _DIR_DUMP;
 
-	$file =  $dir . $arg;
-
-	if ($GLOBALS['flag_ob_flush']) ob_flush();
-	flush();
-
-	$f = ($gz) ? gzopen($file, "ab") : fopen($file, "ab");
-	$_fputs = ($gz) ? gzputs : fputs;
-	$_fputs($f, export_entete());
-	$files = ramasse_parties($file, $gz, $file . ".part");
-	$_fputs($f, export_enpied());
-	if ($gz) gzclose($f); else fclose($f);
-		
+	list($file, $nb) = split('/', $arg);
+	$file =  $dir . $file;
+	$files = ramasse_parties($file, $file, $nb, true);
+	
 	effacer_meta("status_dump");
 	ecrire_metas();
 
@@ -49,9 +41,14 @@ function action_export_all_dist()
 		array('archive' => ':<br /><b>'.joli_repertoire($file)."</b> ($n)"));
 
 	echo install_debut_html(_T('info_sauvegarde'));
+	if (!$files) {
+	  echo _T('avis_erreur_sauvegarde', array('type'=>'.', 'id_objet'=>'. .'));
+
+	} else {
 	// ne pas effrayer inutilement: il peut y avoir moins de fichiers
 	// qu'annonce' si certains etaient vides
-#	echo "<ul><li>", join('</li><li>', $files), '</li></ul>';
+
+	echo "<!--", join("\n", $files), '-->';
 	echo "<p style='text-align: left'>".
 	  $n,
 	" <a href='" . _DIR_RESTREINT . "'>".
@@ -59,6 +56,7 @@ function action_export_all_dist()
 	. "</a> "
 	._T('info_sauvegarde_reussi_04')
 	. "</p>\n";
+	}
 	echo install_fin_html();
 }
 ?>

@@ -58,7 +58,7 @@ $GLOBALS['flag_ob_flush'] = function_exists('ob_flush');
 // http://doc.spip.org/@exec_export_all_dist
 function exec_export_all_dist()
 {
-	global $archive, $etape, $gz, $connect_toutes_rubriques;
+	global $archive, $gz, $connect_toutes_rubriques;
 
 	if ($connect_toutes_rubriques AND file_exists(_DIR_DUMP))
 		$dir = _DIR_DUMP;
@@ -72,7 +72,6 @@ function exec_export_all_dist()
 	if (!$archive) $archive = export_nom_fichier_dump($dir,$gz);
 	
 	$file = $dir . $archive;
-	$partfile = $file . ".part";
   
 	// utiliser une version fraiche des metas (ie pas le cache)
 	include_spip('inc/meta');
@@ -89,7 +88,7 @@ function exec_export_all_dist()
 	}
 
 	if ($start){
-		$status_dump = "$gz::$archive::0::0";
+		$status_dump = "$gz::$archive::1::0";
 		ecrire_meta("status_dump", "$status_dump",'non');
 		$status_dump = explode("::",$status_dump);
 		ecrire_metas();
@@ -105,19 +104,20 @@ function exec_export_all_dist()
 	list($tables_for_dump, $tables_for_link) = export_all_list_tables();
 
 	$status_dump = explode("::",$GLOBALS['meta']["status_dump"]);
-	$etape = $status_dump[2];
+	$etape_actuelle = $status_dump[2];
+	$sous_etape = $status_dump[3];
+	$all = count($tables_for_dump);
 
 	// Pour avoir les valeurs de _DIR_IMG etc relatives a l'espace public
 	// la phase finale de reunion des fichiers en un seul est faite la-bas
-	$href = generer_action_auteur("export_all",$archive,'',true);
+	$href = generer_action_auteur("export_all","$archive/$all",'',true);
 
-	if ($etape >= count($tables_for_dump)){ // au timeout
+	if ($etape_actuelle > $all){ // au timeout
 		include_spip('inc/headers');
 		redirige_par_entete($href);
 	}
 
-	echo install_debut_html(_T('info_sauvegarde'));
-	echo "<p>",_T("info_sauvegarde"), $reprise, "</p>\n";
+	echo install_debut_html(_T('info_sauvegarde') . " ($all)");
 	$f = ($gz) ? gzopen($file, "ab") : fopen($file, "ab");
 	if (!$f) {
 		echo "<p>",
@@ -138,36 +138,34 @@ function exec_export_all_dist()
 	if ($start) $timeout = round($timeout/2);
 		// script de rechargement auto sur timeout
 	echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".generer_url_ecrire("export_all","archive=$archive&gz=$gz",true)."\";',$timeout);</script>\n");
-	$cpt = 0;
-	$paquets = 400; // nombre d'enregistrements dans chaque paquet
+
 	echo "<div style='text-align: left'>\n";
-	foreach($tables_for_dump as $i=>$table){
+	$etape = 1;
+	foreach($tables_for_dump as $table){
 
-		while (1){ // on ne connait pas le nb de paquets d'avance
-
-			list($string,$status_dump)=export_objets($table, $tables_for_link[$table],0, false, $i, _T("info_sauvegarde").", $table",$paquets);
-
-			if ($string) { 
-// on ecrit dans un fichier generique
-// puis on le renomme pour avoir une operation atomique 
-				ecrire_fichier ($partfile, $string);
-				rename($partfile,$partfile.".$cpt");
-				$cpt ++;
-			}
-	// on se contente d'une ecriture en base pour aller plus vite
-	// a la relecture on en profitera pour mettre le cache a jour
-			ecrire_meta("status_dump", implode("::",$status_dump),'non');
-			// attention $string vide ne suffit pas a sortir
-			// car les admins restreints peuvent parcourir
-			// une portion de table vide pour eux.
-			if (!$status_dump[3]) break;
+		$liens = $tables_for_link[$table];
+		if ($etape_actuelle <= $etape) {
+		  $r = spip_query("SELECT COUNT(*) FROM $table");
+		  $r = spip_fetch_array($r, SPIP_NUM);
+		  $r = $r[0];
+		  echo "\n<br /><strong>",$etape, '. ', $table,"</strong> ";
+		  if (!$r) echo _T('texte_vide');
+		  else {
+		    $cpt = export_objets($table, $liens, $etape, $sous_etape,$dir, $archive, $gz, $r);
+			$filetable = $dir . $archive . '_' . $etape;
+			ramasse_parties($dir . $archive . ".$etape", $filetable, $cpt);
+		  }
+		  $etape++;
+		  $sous_etape = 0;
+		  $status_dump = "$gz::$archive::" . $etape . "::0";
+		  ecrire_meta("status_dump", $status_dump,'non');
 		}
 	}
 	echo "</div>\n";
 	// si Javascript est dispo, anticiper le Time-out
 	echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"$href\";',0);</script>\n");
 	echo install_fin_html();
-}
+	}
 
 // construction de la liste des tables pour le dump :
 // toutes les tables principales
