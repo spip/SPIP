@@ -51,8 +51,6 @@ function exec_naviguer_dist()
 		    _T('titre_naviguer_dans_le_site')),
 		   "naviguer",
 		   "rubriques",
-		   '',
-		   '',
 		   $id_rubrique);
 
 	  debut_grand_cadre();
