@@ -70,6 +70,13 @@ function article_select($id_article, $id_rubrique=0, $lier_trad=0, $id_version=0
 			$row_rub = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques ORDER BY id_rubrique DESC LIMIT 1"));
 			$row['id_rubrique'] = $id_rubrique = $row_rub['id_rubrique'];
 		}
+		if (!autoriser('creerarticledans','rubrique',$row['id_rubrique'] )){
+			// manque de chance, la rubrique n'est pas autorisee, on cherche un des secteurs autorises
+			$res = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0");
+			while (!autoriser('creerarticledans','rubrique',$row['id_rubrique'] ) && $row_rub = spip_fetch_array($res)){
+				$row['id_rubrique'] = $row_rub['id_rubrique'];
+			}
+		}
 	}
 
 	// recuperer le secteur, pour affecter les bons champs extras
