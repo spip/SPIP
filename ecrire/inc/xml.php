@@ -54,12 +54,12 @@ function spip_xml_parse($texte, $strict=true, $clean=true){
 		if (strlen($before)>0)
 			return $texte; // before non vide, donc on est dans du texte
 	
-		$tag = $chars[1];
+		$tag = rtrim($chars[1]);
 		$closing_tag = explode(" ",trim($tag));$closing_tag=reset($closing_tag);
 		$txt = $chars[2];
 	
 		if(substr($tag,-1)=='/'){ // self closing tag
-			$tag = substr($tag,0,strlen($tag)-1);
+			$tag = rtrim(substr($tag,0,strlen($tag)-1));
 			$out[$tag][]="";
 		}
 		else{
@@ -114,7 +114,7 @@ function spip_xml_aplatit($arbre,$separateur = " "){
 						$tagf = $tagf[0];
 						$s.="<$tag>$f</$tagf>";
 					}
-					else $s.="<$tag/>";
+					else $s.="<$tag />";
 				}
 				else
 					$s.=spip_xml_aplatit($feuille);
