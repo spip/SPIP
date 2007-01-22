@@ -1,14 +1,14 @@
 /* prevent execution of jQuery if included more than once */
 if(typeof window.jQuery == "undefined") {
 /*
- * jQuery 1.1 - New Wave Javascript
+ * jQuery 1.1.1 - New Wave Javascript
  *
  * Copyright (c) 2007 John Resig (jquery.com)
  * Dual licensed under the MIT (MIT-LICENSE.txt)
  * and GPL (GPL-LICENSE.txt) licenses.
  *
- * $Date: 2007-01-17 14:37:51 +0100 (Wed, 17 Jan 2007) $
- * $Rev: 1106 $
+ * $Date: 2007-01-22 00:27:54 -0500 (Mon, 22 Jan 2007) $
+ * $Rev: 1153 $
  */
 
 // Global undefined variable
@@ -23,14 +23,13 @@ var jQuery = function(a,c) {
 	
 	// HANDLE: $(function)
 	// Shortcut for document ready
-	// Safari reports typeof on DOM NodeLists as a function
-	if ( jQuery.isFunction(a) && !a.nodeType && a[0] == undefined )
+	if ( jQuery.isFunction(a) )
 		return new jQuery(document)[ jQuery.fn.ready ? "ready" : "load" ]( a );
 	
 	// Handle HTML strings
 	if ( typeof a  == "string" ) {
 		// HANDLE: $(html) -> $(array)
-		var m = /^[^<]*(<.+>)[^>]*$/.exec(a);
+		var m = /^[^<]*(<(.|\n)+>)[^>]*$/.exec(a);
 		if ( m )
 			a = jQuery.clean( [ m[1] ] );
 		
@@ -59,7 +58,7 @@ if ( typeof $ != "undefined" )
 var $ = jQuery;
 
 jQuery.fn = jQuery.prototype = {
-	jquery: "1.1",
+	jquery: "1.1.1",
 
 	size: function() {
 		return this.length;
@@ -103,7 +102,7 @@ jQuery.fn = jQuery.prototype = {
 		// Look for the case where we're accessing a style value
 		if ( key.constructor == String )
 			if ( value == undefined )
-				return jQuery[ type || "attr" ]( this[0], key );
+				return this.length && jQuery[ type || "attr" ]( this[0], key ) || undefined;
 			else {
 				obj = {};
 				obj[ key ] = value;
@@ -219,7 +218,10 @@ jQuery.fn = jQuery.prototype = {
 	add: function(t) {
 		return this.pushStack( jQuery.merge(
 			this.get(),
-			typeof t == "string" ? jQuery(t).get() : t.length ? t : [t] )
+			t.constructor == String ?
+				jQuery(t).get() :
+				t.length != undefined && !t.nodeName ?
+					t : [t] )
 		);
 	},
 	is: function(expr) {
@@ -246,7 +248,7 @@ jQuery.fn = jQuery.prototype = {
 		return this.each(function(){
 			var obj = this;
 
-			if ( table && this.nodeName.toUpperCase() == "TABLE" && a[0].nodeName.toUpperCase() == "TR" )
+			if ( table && jQuery.nodeName(this, "table") && jQuery.nodeName(a[0], "tr") )
 				obj = this.getElementsByTagName("tbody")[0] || this.appendChild(document.createElement("tbody"));
 
 			jQuery.each( a, function(){
@@ -280,10 +282,18 @@ jQuery.extend({
 	noConflict: function() {
 		if ( jQuery._$ )
 			$ = jQuery._$;
+		return jQuery;
 	},
 
+	// This may seem like some crazy code, but trust me when I say that this
+	// is the only cross-browser way to do this. --John
 	isFunction: function( fn ) {
-		return fn && typeof fn == "function";
+		return !!fn && typeof fn != "string" &&
+			typeof fn[0] == "undefined" && /function/i.test( fn + "" );
+	},
+
+	nodeName: function( elem, name ) {
+		return elem.nodeName && elem.nodeName.toUpperCase() == name.toUpperCase();
 	},
 	// args is for internal usage only
 	each: function( obj, fn, args ) {
@@ -474,7 +484,7 @@ jQuery.extend({
 						tb = div.childNodes;
 
 					for ( var n = tb.length-1; n >= 0 ; --n )
-						if ( tb[n].nodeName.toUpperCase() == "TBODY" && !tb[n].childNodes.length )
+						if ( jQuery.nodeName(tb[n], "tbody") && !tb[n].childNodes.length )
 							tb[n].parentNode.removeChild(tb[n]);
 					
 				}
@@ -533,7 +543,7 @@ jQuery.extend({
 			if ( value != undefined ) elem[fix[name]] = value;
 			return elem[fix[name]];
 
-		} else if ( value == undefined && jQuery.browser.msie && elem.nodeName && elem.nodeName.toUpperCase() == "FORM" && (name == "action" || name == "method") )
+		} else if ( value == undefined && jQuery.browser.msie && jQuery.nodeName(elem, "form") && (name == "action" || name == "method") )
 			return elem.getAttributeNode(name).nodeValue;
 
 		// IE elem.getAttribute passes even for style
@@ -728,7 +738,7 @@ jQuery.each( [ "height", "width" ], function(i,n){
 });
 jQuery.extend({
 	expr: {
-		"": "m[2]=='*'||a.nodeName.toUpperCase()==m[2].toUpperCase()",
+		"": "m[2]=='*'||jQuery.nodeName(a,m[2])",
 		"#": "a.getAttribute('id')==m[2]",
 		":": {
 			// Position Checks
@@ -773,7 +783,7 @@ jQuery.extend({
 			submit: "a.type=='submit'",
 			image: "a.type=='image'",
 			reset: "a.type=='reset'",
-			button: 'a.type=="button"||a.nodeName=="BUTTON"',
+			button: 'a.type=="button"||jQuery.nodeName(a,"button")',
 			input: "/input|select|textarea|button/i.test(a.nodeName)"
 		},
 		".": "jQuery.className.has(a,m[2])",
@@ -876,12 +886,13 @@ jQuery.extend({
 				// Perform our own iteration and filter
 				jQuery.each( ret, function(){
 					for ( var c = this.firstChild; c; c = c.nextSibling )
-						if ( c.nodeType == 1 && ( c.nodeName == m[1].toUpperCase() || m[1] == "*" ) )
+						if ( c.nodeType == 1 && ( jQuery.nodeName(c, m[1]) || m[1] == "*" ) )
 							r.push( c );
 				});
 
 				ret = r;
-				t = jQuery.trim( t.replace( re, "" ) );
+				t = t.replace( re, "" );
+				if ( t.indexOf(" ") == 0 ) continue;
 				foundToken = true;
 			} else {
 				// Look for pre-defined expression tokens
@@ -947,7 +958,7 @@ jQuery.extend({
 						// Do a quick check for node name (where applicable) so
 						// that div#foo searches will be really fast
 						ret = r = oid && 
-						  (!m[3] || oid.nodeName == m[3].toUpperCase()) ? [oid] : [];
+						  (!m[3] || jQuery.nodeName(oid, m[3])) ? [oid] : [];
 
 					} else {
 						// Pre-compile a regular expression to handle class searches
@@ -962,7 +973,7 @@ jQuery.extend({
 							var tag = m[1] != "" || m[0] == "" ? "*" : m[2];
 
 							// Handle IE7 being really dumb about <object>s
-							if ( this.nodeName.toUpperCase() == "OBJECT" && tag == "*" )
+							if ( jQuery.nodeName(this, "object") && tag == "*" )
 								tag = "param";
 
 							jQuery.merge( r,
@@ -1204,28 +1215,36 @@ jQuery.event = {
 		data = jQuery.makeArray(data || []);
 
 		// Handle a global trigger
-		if ( !element ) {
-			var g = this.global[type];
-			if ( g )
-				jQuery.each( g, function(){
-					jQuery.event.trigger( type, data, this );
-				});
+		if ( !element )
+			jQuery.each( this.global[type] || [], function(){
+				jQuery.event.trigger( type, data, this );
+			});
 
 		// Handle triggering a single element
-		} else if ( element["on" + type] ) {
-			// Pass along a fake event
-			data.unshift( this.fix({ type: type, target: element }) );
-	
-			// Trigger the event
-			var val = element["on" + type].apply( element, data );
+		else {
+			var handler = element["on" + type ], val,
+				fn = jQuery.isFunction( element[ type ] );
 
-			if ( val !== false && jQuery.isFunction( element[ type ] ) )
+			if ( handler ) {
+				// Pass along a fake event
+				data.unshift( this.fix({ type: type, target: element }) );
+	
+				// Trigger the event
+				if ( (val = handler.apply( element, data )) !== false )
+					this.triggered = true;
+			}
+
+			if ( fn && val !== false )
 				element[ type ]();
+
+			this.triggered = false;
 		}
 	},
 
 	handle: function(event) {
-		if ( typeof jQuery == "undefined" ) return false;
+		// Handle the second event of a trigger and when
+		// an event is called after a page has unloaded
+		if ( typeof jQuery == "undefined" || jQuery.event.triggered ) return;
 
 		// Empty object is for triggered events with no data
 		event = jQuery.event.fix( event || window.event || {} ); 
@@ -1905,6 +1924,11 @@ jQuery.extend({
 		return jQuery.get(url, data, callback, "json");
 	},
 	post: function( url, data, callback, type ) {
+		if ( jQuery.isFunction( data ) ) {
+			callback = data;
+			data = {};
+		}
+
 		return jQuery.ajax({
 			type: "POST",
 			url: url,
@@ -2150,7 +2174,7 @@ jQuery.extend({
 			// Serialize the key/values
 			for ( var j in a )
 				// If the value is an array then the key names need to be repeated
-				if ( a[j].constructor == Array )
+				if ( a[j] && a[j].constructor == Array )
 					jQuery.each( a[j], function(){
 						s.push( encodeURIComponent(j) + "=" + encodeURIComponent( this ) );
 					});
