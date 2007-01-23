@@ -1196,7 +1196,7 @@ function extraire_attribut($balise, $attribut, $complet = false) {
 		if ($r[3][0] == '"' || $r[3][0] == "'") {
 			$r[4] = substr($r[3], 1, -1);
 			$r[3] = $r[3][0];
-		} elseif ($r[3]) {
+		} elseif ($r[3]!=='') {
 			$r[4] = $r[3]; 
 			$r[3] = '';
 		} else {
