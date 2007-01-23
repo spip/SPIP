@@ -141,6 +141,9 @@ function exec_export_all_dist()
 
 	echo "<div style='text-align: left'>\n";
 	$etape = 1;
+
+	// Instancier une fois pour toutes, car on va boucler un max.
+	$GLOBALS['chercher_logo'] = charger_fonction('chercher_logo', 'inc',true);
 	foreach($tables_for_dump as $table){
 		if ($etape_actuelle <= $etape) {
 		  $r = spip_query("SELECT COUNT(*) FROM $table");

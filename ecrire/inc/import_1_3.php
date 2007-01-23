@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@inc_import_1_3_dist
-function inc_import_1_3_dist($lecteur, $request, $gz='fread') {
+function inc_import_1_3_dist($lecteur, $request, $gz='fread', $atts=array()) {
   global $import_ok, $tables_trans,  $trans;
 	static $tables = '';
 	static $phpmyadmin, $fin;
@@ -35,6 +35,11 @@ function inc_import_1_3_dist($lecteur, $request, $gz='fread') {
 	$b = false;
 	if (!($table = xml_fetch_tag($lecteur, $b, $gz))) return false;
 	if ($table == $fin) return !($import_ok = true);
+	if (strpos($table,'=')) {
+	  list($table, $attl) = xml_parse_tag($table);
+	  $atts = array_merge($atts, $attl);
+	}
+
 	$new = isset($tables_trans[$table]) ? $tables_trans[$table]: $table; 
 
 	// indique a la fois la fonction a appliquer
@@ -50,29 +55,8 @@ function inc_import_1_3_dist($lecteur, $request, $gz='fread') {
 		list($nom,$desc) = description_table($table);
 		if (!isset($desc['field']))
 			$desc = $defaut;
-		else {
-			if ($request['insertion']=='on') {
-// Au premier tour de l'insertion, ne memoriser que le strict necessaire 
-// pour pouvoir identifier avec l'existant.
-// (Faudrait convenir d'une structure de donnees, c'est lourd & inextensible)
-				$b = array();
-				if (isset($desc['field'][$p='titre']))
-					$b[$p]= $desc['field'][$p];
-				if (isset($desc['field'][$p='id_groupe']))
-					$b[$p]= $desc['field'][$p];
-				if (isset($desc['field'][$p='id_parent']))
-					$b[$p]= $desc['field'][$p];
-				if (isset($desc['field'][$p='id_rubrique']))
-					$b[$p]= $desc['field'][$p];
-				if (isset($desc['field'][$p='fichier'])) {
-					$b[$p]= $desc['field'][$p];
-					$b['taille']= $desc['field']['taille'];
-				}
-				$p = $desc['key']["PRIMARY KEY"];
-				$b[$p] = $desc['field'][$p];
-				$desc['field'] = $b; 
-			}
-		}
+		elseif ($request['insertion']=='on')
+			$desc['field'] = import_collecte($desc); 
 		$field_desc[$boucle][$table] = $desc;
 	}
 
@@ -83,13 +67,41 @@ function inc_import_1_3_dist($lecteur, $request, $gz='fread') {
 				     '/' . $table);
 
 	if ($values === false) return  ($import_ok = false);
-	if ($values) $boucle($values, $new, $desc, $request);
+
+	if ($values) $boucle($values, $new, $desc, $request, $atts);
 
 	return $import_ok = $new;
 }
 
+// Au premier tour de l'insertion, ne memoriser que le strict necessaire 
+// pour pouvoir identifier avec l'existant.
+// (Faudrait convenir d'une structure de donnees, c'est lourd & inextensible)
+
+function import_collecte($desc)
+{
+	$fields = $desc['field'];
+	$b = array();
+	if (isset($fields[$p='titre']))
+	  $b[$p]= $fields[$p];
+	if (isset($fields[$p='id_groupe']))
+	  $b[$p]= $fields[$p];
+	if (isset($fields[$p='id_parent']))
+	  $b[$p]= $fields[$p];
+	if (isset($fields[$p='id_rubrique']))
+	  $b[$p]= $fields[$p];
+	if (isset($fields[$p='fichier'])) {
+	  $b[$p]= $fields[$p];
+	  $b['taille']= $fields['taille'];
+	}
+	$p = $desc['key']["PRIMARY KEY"];
+	$b[$p] = $fields[$p];
+	return $b;
+}
+
+// Les 2 derniers args ne servent que pour l'insertion
+
 // http://doc.spip.org/@import_replace
-function import_replace($values, $table, $desc, $request) {
+function import_replace($values, $table, $desc, $request, $atts='') {
 	if (!isset($desc['field']['impt'])) {// pas de champ de gestion d'import
 		if (!spip_query("REPLACE $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',',array_map('_q', $values)) . ')')) {
 			$GLOBALS['erreur_restauration'] = spip_sql_error();
@@ -153,8 +165,7 @@ function import_lire_champs($f, $fields, $gz, $phpmyadmin, $table)
 		if (!($col = xml_fetch_tag($f, $b, $gz))) return false;
 		if ($col[0] == '/') { 
 			if ($col != $table) {
-				spip_log("restauration de la table $table, tag fermant inattendu:");
-				spip_log($col);
+				spip_log("table $table, tag fermant inattendu:$col");
 		  }
 			break;
 		}

@@ -13,10 +13,9 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-include_spip ("inc/acces");
+include_spip('inc/acces');
 include_spip('inc/indexation'); // pour la fonction primary_index_table 
-include_spip('base/serial');
-include_spip('base/auxiliaires');
+include_spip('base/abstract_sql');
 
 // NB: Ce fichier peut ajouter des tables (old-style)
 // donc il faut l'inclure "en globals"
@@ -82,7 +81,7 @@ function xml_parse_tag($texte) {
 
 	list($tag, $atts) = split('[[:space:]]+', $texte, 2);
 	$result[0] = $tag;
-	$result[1] = '';
+	$result[1] = array();
 
 	if (!$atts) return $result;
 	if ($tag=='!--'){
@@ -97,6 +96,8 @@ function xml_parse_tag($texte) {
 	return $result;
 }
 
+// Balise ouvrante:
+// 'SPIP' si fait par spip, nom de la base source si fait par  phpmyadmin
 
 // http://doc.spip.org/@import_debut
 function import_debut($f, $gz='fread') {
@@ -130,29 +131,6 @@ function import_debut($f, $gz='fread') {
 $tables_trans = array(
 );
 
-// http://doc.spip.org/@description_table
-function description_table($nom){
-	global $tables_principales, $tables_auxiliaires, $table_des_tables, $tables_des_serveurs_sql;
-
-	$nom_table = $nom;
-	if (in_array($nom, $table_des_tables))
-	   $nom_table = 'spip_' . $nom;
-
-	include_spip('base/serial');
-	if (isset($tables_principales[$nom_table]))
-		return array($nom_table, $tables_principales[$nom_table]);
-
-	include_spip('base/auxiliaires');
-	$nom_table = 'spip_' . $nom;
-	if (isset($tables_auxiliaires[$nom_table]))
-		return array($nom_table, $tables_auxiliaires[$nom_table]);
-
-	if ($desc = spip_abstract_showtable($nom, '', true))
-	  if (isset($desc['field'])) {
-	    return array($nom, $desc);
-	  }
-	return array($nom,array());
-}
 
 // http://doc.spip.org/@import_init_tables
 function import_init_tables($request)
@@ -233,25 +211,18 @@ function import_tables($request, $dir) {
 	}
 
 	if ($abs_pos==0) {
-		list($tag, $r, $charset) = import_debut($file, $gz);
+		list($tag, $atts, $charset) = import_debut($file, $gz);
 	// improbable: fichier correct avant debut_admin et plus apres
 		if (!$tag) return !($import_ok = true);
-// tag ouvrant du Dump:
-// 'SPIP' si fait par spip, nom de la base source si fait par  phpmyadmin
-		$version_archive = $r['version_archive'];
-		ecrire_meta('version_archive_restauration', $version_archive,'non');
-		ecrire_meta('tag_archive_restauration', $tag,'non');
-		if ( $i = $request['insertion'])
-			ecrire_meta('charset_insertion', $charset,'non');
-		else	ecrire_meta('charset_restauration', $charset,'non');
-		ecrire_metas();
-		spip_log("Debut de l'importation de $archive (charset: $charset, format: $version_archive)" . ($i ? " insertion $i" : ''));
+		$version_archive = import_init_meta($tag, $atts, $charset, $request);
 	} else {
 		$version_archive = $GLOBALS['meta']['version_archive_restauration'];
-		spip_log("Reprise de l'importation de $archive interrompue en $abs_pos");
+		$atts = unserialize($GLOBALS['meta']['attributs_archive_restauration']);
+		spip_log("Reprise de l'importation interrompue en $abs_pos");
 		$_fseek = ($gz=='gzread') ? 'gzseek' : 'fseek';
 		$_fseek($file, $abs_pos);
 	}
+
 
 	$fimport = import_charge_version($version_archive);
 
@@ -259,11 +230,10 @@ function import_tables($request, $dir) {
 
 	if ($GLOBALS['flag_ob_flush']) ob_flush();
 	flush();
-
 	$oldtable ='';
 	$cpt = 0;
 	$pos = $abs_pos;
-	while ($table = $fimport($file, $request, $gz)) {
+	while ($table = $fimport($file, $request, $gz, $atts)) {
 	  // memoriser pour pouvoir reprendre en cas d'interrupt,
 	  // mais pas d'ecriture sur fichier, ca ralentit trop
 		ecrire_meta("status_restauration", "$abs_pos",'non');
@@ -280,13 +250,28 @@ function import_tables($request, $dir) {
 	spip_log("$cpt entrees");
 
 	if (!$import_ok) 
-		$res =  _T('avis_archive_invalide');
+	  $res =  _T('avis_archive_invalide') . ' ' .
+	    _T('taille_octets', array('taille' => $pos)) ;
 	else {
 		$res = '';
 		affiche_progression_javascript('100 %', $size);
 	}
 
 	return $res ;
+}
+
+function import_init_meta($tag, $atts, $charset, $request)
+{
+	$version_archive = $atts['version_archive'];
+	ecrire_meta('attributs_archive_restauration', serialize($atts),'non');
+	ecrire_meta('version_archive_restauration', $version_archive,'non');
+	ecrire_meta('tag_archive_restauration', $tag,'non');
+	if ( $i = $request['insertion'])
+		ecrire_meta('charset_insertion', $charset,'non');
+	else	ecrire_meta('charset_restauration', $charset,'non');
+	ecrire_metas();
+	spip_log("Debut de l'importation (charset: $charset, format: $version_archive)" . ($i ? " insertion $i" : ''));
+	return $version_archive;
 }
 
 // http://doc.spip.org/@import_affiche_javascript

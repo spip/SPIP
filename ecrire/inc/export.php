@@ -25,11 +25,14 @@ function export_nom_fichier_dump($dir,$gz=true){
 	return $nom;
 }
 
+// Concatenation des tranches
+// Il faudrait ouvrir une seule fois le fichier, et d'abord sous un autre nom
+// et sans detruire les tranches: au final renommage+destruction massive pour
+// prevenir autant que possible un Time-out.
 
 // http://doc.spip.org/@ramasse_parties
 function ramasse_parties($archive, $partfile, $nb, $fin=''){
-	// a ameliorer par un preg_file
-	// si le rammassage est interrompu par un timeout, on perd des morceaux
+
 	$files = array();
 	$ok = true;
 	if (!ecrire_fichier($archive,$fin ? export_entete() : '',false,false))
@@ -67,14 +70,17 @@ define('_EXPORT_TRANCHES_LIMITE', 400);
 
 // http://doc.spip.org/@export_objets
 function export_objets($table, $liens, $etape, $cpt, $dir, $archive, $gz, $total) {
-	static $etape_affichee=array();
+	global $tables_principales;
 
 	$debut = $cpt * _EXPORT_TRANCHES_LIMITE;
 	$filetable = $dir . $archive . '_' . $etape . '.';
+	$prim = isset($tables_principales[$table])
+	  ? $tables_principales[$table]['key']["PRIMARY KEY"]
+	  : '';
 
 	while (1){ // on ne connait pas le nb de paquets d'avance
 
-		$string = build_while($debut, $table);
+		$string = build_while($debut, $table, $prim);
 		// attention $string vide ne suffit pas a sortir
 		// car les admins restreints peuvent parcourir
 		// une portion de table vide pour eux.
@@ -106,26 +112,37 @@ function export_objets($table, $liens, $etape, $cpt, $dir, $archive, $gz, $total
 // Construit la version xml  des champs d'une table
 
 // http://doc.spip.org/@build_while
-function build_while($debut, $table) {
-	global $connect_toutes_rubriques ;
-	global $tables_principales;
-	static $table_fields=array();
+function build_while($debut, $table, $prim) {
+	global $connect_toutes_rubriques, $chercher_logo ;
 
 	$result = spip_query("SELECT * FROM $table LIMIT $debut," . _EXPORT_TRANCHES_LIMITE);
 
 	$string = '';
 	while ($row = spip_fetch_array($result,SPIP_ASSOC)) {
-		if ((!isset($row['impt']) OR $row['impt']=='oui')
-		AND ($connect_toutes_rubriques
-		     OR !isset($row['id_rubrique'])
-		     OR autoriser('publierdans','rubrique',$row['id_rubrique']))) {
-			$attributs = "";
-			$string .= "<$table$attributs>\n";
-			foreach ($row as $k => $v) {
+	  if ((!isset($row['impt'])) OR $row['impt']=='oui') {
+		      if (!($ok = $connect_toutes_rubriques)) {
+			if (isset($row['id_rubrique']))
+			  $ok = autoriser('publierdans','rubrique',$row['id_rubrique']);
+			elseif (isset($row['id_article']))
+			  $ok = autoriser('modifier','article',$row['id_article']);
+			else $ok = true;
+			if ($ok) {
+			  $attributs = "";
+			  if ($chercher_logo) {
+				if ($logo = $chercher_logo($row[$prim], $prim, 'on'))
+				  $attributs .= ' on="' . $logo[3] . '"';
+				if ($logo = $chercher_logo($row[$prim], $prim, 'off'))
+				  $attributs .= ' off="' . $logo[3] . '"';
+			  }
+
+			  $string .= "<$table$attributs>\n";
+			  foreach ($row as $k => $v) {
 				$string .= "<$k>" . text_to_xml($row[$k]) . "</$k>\n";
+			  }
+			  $string .= "</$table>\n\n";
 			}
-			$string .= "</$table>\n\n";
-		}
+		      }
+	  }
 	}
 	spip_free_result($result);
 	return $string;

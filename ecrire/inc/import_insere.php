@@ -85,10 +85,9 @@ function translate_init($request) {
 
 
 // http://doc.spip.org/@import_insere
-function import_insere($values, $table, $desc, $request) {
+function import_insere($values, $table, $desc, $request, $atts) {
 
 	$type_id = $desc['key']["PRIMARY KEY"];
-
 	// reserver une place dans les tables principales si nouveau
 	$ajout = 0;
 	if ((!function_exists($f = 'import_identifie_' . $type_id))
@@ -116,11 +115,11 @@ function import_insere($values, $table, $desc, $request) {
 // (Mais des requetes avec jointures eviteraient sa construction. A voir)
 
 // http://doc.spip.org/@import_translate
-function import_translate($values, $table, $desc, $request) {
+function import_translate($values, $table, $desc, $request, $atts) {
 
 	if (!function_exists($f = 'import_translate_' . $table))
 	  $f = 'import_translate_std';
-	$f($values, $table, $desc, $request);
+	$f($values, $table, $desc, $request, $atts);
 }
 
 // La fonction d'insertion apres renumerotation.
@@ -130,35 +129,38 @@ function import_translate($values, $table, $desc, $request) {
 // Une synchronisation plus fine serait preferable, cf [8004]
 
 // http://doc.spip.org/@import_inserer_translate
-function import_inserer_translate($values, $table, $desc, $request, $vals) {
+function import_inserer_translate($values, $table, $desc, $request, $vals, $atts) {
 	global $trans;
 	$p = $desc['key']["PRIMARY KEY"];
 	$v = $values[$p];
+
 	if (!isset($trans[$p]) OR !isset($trans[$p][$v]) OR $trans[$p][$v][2]){
 		spip_query("REPLACE $table (" . join(',',array_keys($values)) . ') VALUES (' .substr($vals,1) . ')');
-		if ($p == 'id_rubrique') {
-		  $t = type_du_logo($p);
-		  $url = $request['url_site'] . _NOM_PERMANENTS_ACCESSIBLES;
 
-		  $new = $trans[$p][$v][0];
-		  foreach ($GLOBALS['formats_logos'] as $format) {
-		    $old = $url . $t . 'on' . "$v." . $format;
-		    $logo1 = recuperer_page($old);
-		    if ($logo1) {
-		      ecrire_fichier(_DIR_LOGOS. $t . 'on' . "$new." . $format, $logo1);
-		    }
-		    $nom = $url . $t . 'off' . "$v." . $format;
-		    $logo2 = recuperer_page($nom);
-		    if ($logo2)
-		      ecrire_fichier(_DIR_LOGOS.$t . 'off' . "$new." . $format, $logo2);
-		  }
+		$on = isset($atts['on']) ? ($atts['on']) : '';
+		$off = isset($atts['off']) ? ($atts['off']) : '';
+		if ($on OR $off) {
+			$t = type_du_logo($p);		  
+			$url = $request['url_site'];
+			if (!$url) $url = $atts['adresse_site'];
+			if (substr($url,-1) !='/') $url .='/';
+			$url .= $atts['dir_logos'];
+			$new = $trans[$p][$v][0];
+			if ($on) {
+			  if ($logo = recuperer_page($url . $t . "on$v." . $on))
+			    ecrire_fichier(_DIR_LOGOS. $t . "on$new." . $on, $logo);
+			}
+			if ($off) {
+			  if ($logo = recuperer_page($url . $t . "off$v." . $off))
+			    ecrire_fichier(_DIR_LOGOS. $t . "off$new." . $off, $logo);
+			}
 		}
 	}
 }
 
 // Insertion avec renumerotation, y compris des raccourcis.
 // http://doc.spip.org/@import_translate_std
-function import_translate_std($values, $table, $desc, $request) {
+function import_translate_std($values, $table, $desc, $request, $atts) {
 
 	$vals = '';
 
@@ -172,28 +174,26 @@ function import_translate_std($values, $table, $desc, $request) {
 
 		$vals .= "," . _q($v);
 	}
-	import_inserer_translate($values, $table, $desc, $request, $vals);
+	import_inserer_translate($values, $table, $desc, $request, $vals, $atts);
 }
 
 // http://doc.spip.org/@import_translate_spip_documents
-function import_translate_spip_documents($values, $table, $desc, $request) {
+function import_translate_spip_documents($values, $table, $desc, $request, $atts) {
 
-
-	if (isset($request['url_site'])) {
-		$distancer = ($values['distant'] == 'non');
-		$url = $request['url_site'];
-	} else  $distancer = false;
-
+	$url = $request['url_site'];
+	if (!$url) $url = $atts['adresse_site'];
+	if (substr($url,-1) !='/') $url .='/';
+#	$url .= $atts['dir_img']; // deja dans la BD importee
 	$values['distant']= 'oui';
 
 	$vals = '';
 	foreach ($values as $k => $v) {
-	  if ($distancer AND $k=='fichier')
+	  if ($k=='fichier')
 	    $v = $url .$v;
 	  else $v = importe_raccourci($k,importe_translate_maj($k, $v));
 	  $vals .= "," . _q($v);
 	}
-	import_inserer_translate($values, $table, $desc, $request, $vals);
+	import_inserer_translate($values, $table, $desc, $request, $vals, $atts);
 }
 
 // Fonction de renumerotation, par delegation aux fonction specialisees
