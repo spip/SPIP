@@ -35,7 +35,7 @@ function ramasse_parties($archive, $partfile, $files = array()){
 
 	$files_o = array();
 	if (!count($files))
-		$files = preg_files(dirname($archive)."/",basename($partfile).".part_[0-9]+_[0-9]+");
+		$files = preg_files(dirname($archive)."/",basename($partfile).".part_[0-9]+_[0-9]+[.gz]?");
 	$ok = true;
 	foreach($files as $f) {
 	  $contenu = "";
@@ -46,14 +46,11 @@ function ramasse_parties($archive, $partfile, $files = array()){
 	  unlink($f);
 	  $files_o[]=$f;
 	}
-
-	if ($fin AND $ok)
-		$ok = ecrire_fichier($archive, export_enpied(),false,false);
-
 	return $ok ? $files_o : false;
 }
 
 define('_EXPORT_TRANCHES_LIMITE', 400);
+define('_EXTENSION_PARTIES', '.gz');
 
 //
 // Exportation de table SQL au format xml
@@ -65,10 +62,10 @@ define('_EXPORT_TRANCHES_LIMITE', 400);
 // et on memorise dans le serveur qu'on va passer a la table suivante.
 
 // http://doc.spip.org/@export_objets
-function export_objets($table, $liens, $etape, $cpt, $dir, $archive, $gz, $total) {
+function export_objets($table, $etape, $cpt, $dir, $archive, $gz, $total) {
 	global $tables_principales;
 
-	$filetable = $dir . $archive . '.part_' . sprintf('%3d',$etape);
+	$filetable = $dir . $archive . '.part_' . sprintf('%03d',$etape);
 	$prim = isset($tables_principales[$table])
 	  ? $tables_principales[$table]['key']["PRIMARY KEY"]
 	  : '';
@@ -83,24 +80,29 @@ function export_objets($table, $liens, $etape, $cpt, $dir, $archive, $gz, $total
 		if ($string) { 
 			// on ecrit dans un fichier generique
 			// puis on le renomme pour avoir une operation atomique 
-			ecrire_fichier ($filetable . '.temp', $string);
+			ecrire_fichier ($temp = $filetable . '.temp' . _EXTENSION_PARTIES, $string);
 			// le fichier destination peut deja exister si on sort d'un timeout entre le rename et le ecrire_meta
-			if (file_exists($f = $filetable . sprintf('_%4d',$cpt))) @unlink($f);
-			rename($filetable . '.temp', $f);
+			if (file_exists($f = $filetable . sprintf('_%04d',$cpt) . _EXTENSION_PARTIES)) @unlink($f);
+			rename($temp, $f);
 		}
 		$cpt++;
 		$status_dump = "$gz::$archive::$etape::$cpt";
 		// on se contente d'une ecriture en base pour aller plus vite
 		// a la relecture on en profitera pour mettre le cache a jour
 		ecrire_meta("status_dump", $status_dump,'non');
-//die();
+
 		$debut = $cpt * _EXPORT_TRANCHES_LIMITE;
 		if ($debut >= $total) {break;}
 		echo " $debut";
 
 	}
 	echo " $total."; 
-	ramasse_parties($dir.$archive, $dir.$archive);
+	
+	# on prefere ne pas faire le ramassage ici de peur d'etre interrompu par le timeout au mauvais moment
+	# le ramassage aura lieu en debut de hit suivant, et ne sera normalement pas interrompu car le temps pour ramasser
+	# est plus court que le temps pour creer les parties
+	# ramasse_parties($dir.$archive, $dir.$archive);
+	
 	$status_dump = "$gz::$archive::" . ($etape+1) . "::0";
 	// on se contente d'une ecriture en base pour aller plus vite
 	// a la relecture on en profitera pour mettre le cache a jour

@@ -58,7 +58,9 @@ $GLOBALS['flag_ob_flush'] = function_exists('ob_flush');
 // http://doc.spip.org/@exec_export_all_dist
 function exec_export_all_dist()
 {
-	global $archive, $gz, $connect_toutes_rubriques;
+	global $connect_toutes_rubriques;
+	$gz = _request('gz');
+	$redirect = generer_url_ecrire("export_all","gz=$gz",true);
 
 	if ($connect_toutes_rubriques AND file_exists(_DIR_DUMP))
 		$dir = _DIR_DUMP;
@@ -69,10 +71,7 @@ function exec_export_all_dist()
 		$dir = preg_replace(",^" . _DIR_RACINE .",", '', $dir);
 		redirige_par_entete(generer_url_action("test_dirs", "test_dir=$dir", true));
 	}
-	if (!$archive) $archive = export_nom_fichier_dump($dir,$gz);
 	
-	$file = $dir . $archive;
-  
 	// utiliser une version fraiche des metas (ie pas le cache)
 	include_spip('inc/meta');
 	lire_metas();
@@ -81,27 +80,28 @@ function exec_export_all_dist()
 		$start = true;
 	} else{
 		$status_dump = explode("::",$GLOBALS['meta']["status_dump"]);
-		if (($status_dump[0]!=$gz)||($status_dump[1]!=$archive))
-			$start = true;
-		else
-			$start = ($status_dump[2]==0)&&($status_dump[3]==0);
+		$start = ($status_dump[2]==0)&&($status_dump[3]==0);
+		$gz = $status_dump[0];
+		$archive = $status_dump[1];
 	}
+	$file = $dir . $archive;
 
 	if ($start){
-		$status_dump = "$gz::$archive::1::0";
+		$archive = export_nom_fichier_dump($dir,$gz);
+		$status_dump = "$gz::$archive::0::0";
 		ecrire_meta("status_dump", "$status_dump",'non');
 		$status_dump = explode("::",$status_dump);
 		ecrire_metas();
 
 		// Au cas ou le dernier dump n'aurait pas ete acheve correctement
-
-		foreach(preg_files($file .  ".part\.[0-9]*") as $dummy)
+		foreach(preg_files($file .  ".part_[0-9]+_[0-9]+") as $dummy)
 			@unlink($dummy);
 
 		$reprise = '';
-		// creer l'en tete du fichier
-		ecrire_fichier($dir.$archive, export_entete(),false,false);
-		
+		// (provisoire) creer l'en tete du fichier
+		include_spip('inc/headers');
+		redirige_par_entete(generer_action_auteur("export_all","$archive/start",$redirect,true));
+		//ecrire_fichier($dir.$archive, export_entete(),false,false);
 	} 
 	else	
 		$reprise = " (" . $status_dump[2] . ", " . $status_dump[3] . ")";
@@ -115,15 +115,13 @@ function exec_export_all_dist()
 
 	// Pour avoir les valeurs de _DIR_IMG etc relatives a l'espace public
 	// la phase finale de reunion des fichiers en un seul est faite la-bas
-	$href = generer_action_auteur("export_all","$archive/$all",'',true);
-	
 	
 	ramasse_parties($dir.$archive, $dir.$archive);
 
 	if ($etape_actuelle > $all){ // au timeout
 		ecrire_fichier($dir.$archive, export_enpied(),false,false);
 		include_spip('inc/headers');
-		redirige_par_entete($href);
+		redirige_par_entete(generer_action_auteur("export_all","$archive/end",'',true));
 	}
 
 	echo install_debut_html(_T('info_sauvegarde') . " ($all)");
@@ -146,13 +144,16 @@ function exec_export_all_dist()
 	$timeout = 30000; // parions sur une valeur tellement courante ...
 	if ($start) $timeout = round($timeout/2);
 	// script de rechargement auto sur timeout
-	//echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".generer_url_ecrire("export_all","archive=$archive&gz=$gz",true)."\";',$timeout);</script>\n");
+	echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".$redirect."\";',$timeout);</script>\n");
 
 	echo "<div style='text-align: left'>\n";
 	$etape = 1;
 
 	// Instancier une fois pour toutes, car on va boucler un max.
-	$GLOBALS['chercher_logo'] = charger_fonction('chercher_logo', 'inc',true);
+	if (isset($GLOBALS['EXPORT_logos']) && $GLOBALS['EXPORT_logos']==true)
+		$GLOBALS['chercher_logo'] = charger_fonction('chercher_logo', 'inc',true);
+	else
+		$GLOBALS['chercher_logo'] = false;
 	foreach($tables_for_dump as $table){
 		if ($etape_actuelle <= $etape) {
 		  $r = spip_query("SELECT COUNT(*) FROM $table");
@@ -160,10 +161,8 @@ function exec_export_all_dist()
 		  $r = $r[0];
 		  echo "\n<br /><strong>",$etape, '. ', $table,"</strong> ";
 		  if (!$r) echo _T('texte_vide');
-		  else {
-		    $liens = $tables_for_link[$table];
-		    export_objets($table, $liens, $etape, $sous_etape,$dir, $archive, $gz, $r);
-		  }
+		  else
+		    export_objets($table, $etape, $sous_etape,$dir, $archive, $gz, $r);
 		  if ($GLOBALS['flag_ob_flush']) ob_flush();
 		  flush();
 		  $sous_etape = 0;
@@ -172,7 +171,7 @@ function exec_export_all_dist()
 	}
 	echo "</div>\n";
 	// si Javascript est dispo, anticiper le Time-out
-	echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"$href\";',0);</script>\n");
+	echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"$redirect\";',0);</script>\n");
 	echo install_fin_html();
 }
 
