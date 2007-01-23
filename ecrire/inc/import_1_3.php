@@ -77,6 +77,7 @@ function inc_import_1_3_dist($lecteur, $request, $gz='fread', $atts=array()) {
 // pour pouvoir identifier avec l'existant.
 // (Faudrait convenir d'une structure de donnees, c'est lourd & inextensible)
 
+// http://doc.spip.org/@import_collecte
 function import_collecte($desc)
 {
 	$fields = $desc['field'];
