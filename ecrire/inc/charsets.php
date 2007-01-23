@@ -199,6 +199,7 @@ function corriger_caracteres_windows($texte, $charset='AUTO') {
 //
 // http://doc.spip.org/@html2unicode
 function html2unicode($texte, $secure=false) {
+	if (strpos($texte,'&') === false) return $texte;
 	static $trans;
 	if (!$trans) {
 		global $CHARSET;
