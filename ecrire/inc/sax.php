@@ -192,15 +192,19 @@ function inc_sax_dist($page, $apply=false)
 		ob_end_clean();
 	}
 
-	// charger la DTD et transcoder les entites
-	$res = $phraseur_xml->phraserTout($xml_parser, sax_bug($page));
+	// charger la DTD et transcoder les entites,
+	// et escamoter le doctype que sax mange en php 5
+	list($doctype,$page) = sax_bug($page);
+
+	$res = $phraseur_xml->phraserTout($xml_parser, $page);
 
 	xml_parser_free($xml_parser);
 
-	if ($res[0] == '<') return $res;
+	if ($res[0] == '<') return $doctype ."\n". $res;
 
 	$GLOBALS['xhtml_error'] = $res;
-	return $page;
+
+	return $doctype . $page;
 }
 
 // SAX ne dit pas si une Entite est dans un attribut ou non.
@@ -214,12 +218,14 @@ function inc_sax_dist($page, $apply=false)
 function sax_bug($data)
 {
 	global  $phraseur_xml;
+	$doctype = "";
 
 	$r = analyser_doctype($data);
 	if (!$r)
 		$data = html2unicode($data, true);
 	else  {
-		list ($topelement, $avail, $grammaire, $rotlvl) = $r;
+		list ($doctype, $topelement, $avail, $grammaire, $rotlvl) = $r;
+		$data = substr($data,strlen($doctype));
 		$file = _DIR_CACHE_XML . preg_replace('/[^\w.]/','_', $rotlvl) . '.gz';
 		if (lire_fichier($file, $r))
 			$phraseur_xml->dtc = unserialize($r);
@@ -236,7 +242,7 @@ function sax_bug($data)
 		    $trans["&$k;"] = $v;
 		$data = strtr($data, $trans);
 	}
-	return unicode2charset($data);
+	return array($doctype,unicode2charset($data));
 }
 
 // http://doc.spip.org/@analyser_doctype
@@ -245,7 +251,7 @@ function analyser_doctype($data)
 	if (!preg_match(_REGEXP_DOCTYPE, $data, $r))
 		return array();
 
-	list(,,$topelement, $avail,$suite) = $r;
+	list($doctype,,$topelement, $avail,$suite) = $r;
 
 	if (!preg_match('/^"([^"]*)"\s*(.*)$/', $suite, $r))
 		if (!preg_match("/^'([^']*)'\s*(.*)$/", $suite, $r))
@@ -261,7 +267,7 @@ function analyser_doctype($data)
 				return array();
 		$grammaire = $r[1];
 	}
-	return array($topelement, $avail, $grammaire, $rotlvl);
+	return array($doctype, $topelement, $avail, $grammaire, $rotlvl);
 }
 
 ?>

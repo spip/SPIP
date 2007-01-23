@@ -487,7 +487,7 @@ function debug_script ($t) {
 
 	debug_debut($GLOBALS['exec']);
 	if (!isset($GLOBALS['xhtml_error'])) {
-		list ($top, $avail, $grammaire, $rotlvl) = analyser_doctype($t);
+		list (,$top, $avail, $grammaire, $rotlvl) = analyser_doctype($t);
 		$err = '<h3>' . _T('spip_conforme_dtd')
 		. "<br /><a href='" 
 		. $grammaire
