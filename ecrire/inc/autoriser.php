@@ -62,7 +62,6 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 		}
 		$qui['restreint'] = $restreint[$qui['id_auteur']];
 	}
-
 	if (_DEBUG_AUTORISER) spip_log("autoriser $faire $type $id ($qui[nom]) ?");
 
 	// Chercher une fonction d'autorisation explicite
@@ -125,7 +124,8 @@ function autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt) {
 // http://doc.spip.org/@autoriser_rubrique_creerrubriquedans_dist
 function autoriser_rubrique_creerrubriquedans_dist($faire, $type, $id, $qui, $opt) {
 	return
-		autoriser('voir','rubrique',$id)
+		($id OR ($qui['statut'] == '0minirezo' AND !$qui['restreint']))
+		AND autoriser('voir','rubrique',$id)
 		AND autoriser('publierdans','rubrique',$id);
 }
 
