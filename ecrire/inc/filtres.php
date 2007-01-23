@@ -238,13 +238,11 @@ function hauteur($img) {
 // et au cas particulier de &amp; qui devient &amp;amp; dans les url
 // http://doc.spip.org/@corriger_entites_html
 function corriger_entites_html($texte) {
-	if (strpos($texte,'&amp;') === false) return $texte;
 	return preg_replace(',&amp;(#[0-9][0-9][0-9]+;|amp;),iS', '&\1', $texte);
 }
 // idem mais corriger aussi les &amp;eacute; en &eacute;
 // http://doc.spip.org/@corriger_toutes_entites_html
 function corriger_toutes_entites_html($texte) {
-	if (strpos($texte,'&amp;') === false) return $texte;
 	return preg_replace(',&amp;(#?[a-z0-9]+;),S', '&\1', $texte);
 }
 
@@ -256,7 +254,6 @@ function entites_html($texte) {
 // Transformer les &eacute; dans le charset local
 // http://doc.spip.org/@filtrer_entites
 function filtrer_entites($texte) {
-	if (strpos($texte,'&') === false) return $texte;
 #	include_spip('inc/charsets');
 	// filtrer
 	$texte = html2unicode($texte);
@@ -1192,28 +1189,38 @@ function extraire_tag($texte, $tag) {
 // ($complet demande de retourner $r)
 // http://doc.spip.org/@extraire_attribut
 function extraire_attribut($balise, $attribut, $complet = false) {
-	if (preg_match(
-//	',(.*?<[^>]*)(\s'.$attribut.'=\s*([\'"]?)([^\\3]*?)\\3)([^>]*>.*),isS',
-	',(^[^<]*+<(?:\s*+\w++(?:=(?:"[^"]*"|\'[^\']*\'|[^\'"]\S*))?+)*?)(\s+'.$attribut.'(?:=\s*("[^"]*"|\'[^\']*\'|[^\'"]\S*))?)()([^>]*>.*),isS',
+// positionner apres "...<tag " sur le premier caractere non blanc, sinon rien
+	if (!preg_match(',[^<]*<\s*\w+\s+,msS', $balise, $atag)) {
+		return $complet ? array(null, array()) : null;
+	}
+	$atag = $atag[0];
+	while (preg_match(
+//	    deja fait               1 avant attribut
+	',\A.{' . strlen($atag) . '}(.*?)' . $attribut .
+//	 2    3 valeur brute et nette         45 fin de chaine et tag
+	'(=\s*("[^"]*"|\'[^\']*\'|[^\'"]\S*))?(([^>]*)>.*\Z),misS',
 	$balise, $r)) {
+	// le match est-il imbrique ou le tag pas correct ?
+		if (!preg_match(
+			',\A(?:\w+(?:=(?:"[^"]*"|\'[^\']*\'|[^\'"]\S*))?\s+)*\Z,msS', $r[1])) {
+			$atag .= $r[1] . $attribut . $r[2];
+			continue;
+		}
+		$r[5] = $r[4];
 		if ($r[3][0] == '"' || $r[3][0] == "'") {
 			$r[4] = substr($r[3], 1, -1);
 			$r[3] = $r[3][0];
-		} elseif ($r[3]!=='') {
+		} elseif (strlen($r[3])) {
 			$r[4] = $r[3]; 
 			$r[3] = '';
 		} else {
-			$r[4] = trim($r[2]); 
+			$r[4] = $attribut; 
 		}
 		$att = filtrer_entites(str_replace("&#39;", "'", $r[4]));
+		$r[1] = $atag . $r[1];
+		return $complet ? array($att, $r) : $att;
 	}
-	else
-		$att = NULL;
-
-	if ($complet)
-		return array($att, $r);
-	else
-		return $att;
+	return $complet ? array(null, array()) : null;
 }
 
 // modifier (ou inserer) un attribut html dans une balise
