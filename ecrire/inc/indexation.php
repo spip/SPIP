@@ -379,7 +379,7 @@ function extracteur_html($fichier, &$charset) {
 
 // Indexer le contenu d'un document
 // http://doc.spip.org/@indexer_contenu_document
-function indexer_contenu_document ($row) {
+function indexer_contenu_document ($row, $min_long=3) {
 	global $extracteur;
 
 	if ($row['mode'] == 'vignette') return;
@@ -409,7 +409,7 @@ function indexer_contenu_document ($row) {
 			// importer le charset
 			$contenu = importer_charset($contenu, $charset);
 			// Indexer le texte
-			indexer_chaine($contenu, 1);
+			indexer_chaine($contenu, 1, $min_long);
 		}
 	} else {
 		spip_log("pas d'extracteur '$extension' fonctionnel");
@@ -419,7 +419,7 @@ function indexer_contenu_document ($row) {
 
 
 // http://doc.spip.org/@indexer_les_champs
-function indexer_les_champs(&$row,&$index_desc,$ponderation = 1){
+function indexer_les_champs(&$row,&$index_desc,$ponderation = 1, $min_long=3){
 	reset($index_desc);
 	while (list($quoi,$poids) = each($index_desc)){
 		$pipe=array();
@@ -444,14 +444,14 @@ function indexer_les_champs(&$row,&$index_desc,$ponderation = 1){
 			if (is_array($poids))
 				indexer_chaine($texte,array_shift($poids) * $ponderation,array_shift($poids));
 			else
-				indexer_chaine($texte,$poids * $ponderation);
+				indexer_chaine($texte,$poids * $ponderation, $min_long);
 		}
 	}
 }
 
 // Indexer les documents, auteurs, mots-cles associes a l'objet
 // http://doc.spip.org/@indexer_elements_associes
-function indexer_elements_associes($table, $id_objet, $table_associe, $valeur) {
+function indexer_elements_associes($table, $id_objet, $table_associe, $valeur, $min_long=3) {
 	global $INDEX_elements_associes, $tables_jointures, $tables_auxiliaires, $tables_principales;
 
 	if (isset($INDEX_elements_associes[$table_associe])){
@@ -487,6 +487,8 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 	global $index, $mots, $translitteration_complexe;
 	global $INDEX_elements_objet;
 	global $INDEX_objet_associes;
+
+	$min_long = isset($GLOBALS['INDEX_mots_min_long'])?intval($GLOBALS['INDEX_mots_min_long']):3;
 
 	$table_index = 'spip_index';
 	$col_id = primary_index_table($table);
@@ -553,10 +555,10 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 			// 4. Indexer le thread
 			$s = spip_query("SELECT * FROM spip_forum WHERE id_forum IN ($thread) AND idx!='non'");
 			while ($row = spip_fetch_array($s)) {
-		    indexer_les_champs($row,$INDEX_elements_objet[$table]);
+		    indexer_les_champs($row,$INDEX_elements_objet[$table],1,$min_long);
 		    if (isset($INDEX_objet_associes[$table]))
 		      foreach($INDEX_objet_associes[$table] as $quoi=>$poids)
-						indexer_elements_associes($table, $id_objet, $quoi, $poids);
+						indexer_elements_associes($table, $id_objet, $quoi, $poids, $min_long);
 				break;
 			}
 
@@ -566,10 +568,10 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 			// 6. Changer l'id_objet en id_forum de la racine du thread
 			$id_objet = $id_forum;
 		} else {
-			indexer_les_champs($row,$INDEX_elements_objet[$table]);
+			indexer_les_champs($row,$INDEX_elements_objet[$table],1,$min_long);
 			if (isset($INDEX_objet_associes[$table]))
 				foreach($INDEX_objet_associes[$table] as $quoi=>$poids)
-					indexer_elements_associes($table, $id_objet, $quoi, $poids);
+					indexer_elements_associes($table, $id_objet, $quoi, $poids, $min_long);
 
 			if ($table=='spip_syndic'){
 				// 2. Indexer les articles syndiques
@@ -577,13 +579,13 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 					$result_syndic = spip_query("SELECT titre FROM spip_syndic_articles WHERE id_syndic=$id_objet AND statut='publie' ORDER BY date DESC LIMIT 100");
 
 					while ($row_syndic = spip_fetch_array($result_syndic)) {
-		    		indexer_les_champs($row,$INDEX_elements_objet['syndic_articles']);
+		    		indexer_les_champs($row,$INDEX_elements_objet['syndic_articles'],1,$min_long);
 					}
 				}
 			}
 			if ($table=='spip_documents'){
 				// 2. Indexer le contenu si on sait le lire
-				indexer_contenu_document($row);
+				indexer_contenu_document($row,$min_long);
 			}
 	 	}
 	} else
@@ -725,8 +727,7 @@ AND rec.id_table = $id_table",
 // rechercher un mot dans le dico
 // retourne deux methodes : lache puis strict
 // http://doc.spip.org/@requete_dico
-function requete_dico($val) {
-	$min_long = 3;
+function requete_dico($val, $min_long = 3) {
 	
 	preg_match(",^([+\-]?)(.*),",$val,$mod);
 	switch($mod[1]) {
@@ -743,7 +744,8 @@ function requete_dico($val) {
 	//set logical operator between the various where parts
 	$val = $mod[2];
 	// cas normal
-	if (strlen($val) > $min_long) {
+	if ((strlen($val) > $min_long)
+	OR !preg_match("/^([A-Z][0-9A-Z]{1,".($min_long - 1)."})$/",$val)) {
 	  return array("dico LIKE "._q($val. "%"), "dico = " . _q($val),$mode);
 	} else
 	  return array("dico = "._q($val."___"), "dico = "._q($val."___"),$mode);
@@ -753,15 +755,17 @@ function requete_dico($val) {
 // decode la chaine recherchee et la traduit en hash
 // http://doc.spip.org/@requete_hash
 function requete_hash ($rech) {
+	$min_long = isset($GLOBALS['INDEX_mots_min_long'])?intval($GLOBALS['INDEX_mots_min_long']):3;
+
 	// recupere les mots de la recherche
 	$GLOBALS['translitteration_complexe'] = true;
-	$s = mots_indexation($rech);
+	$s = mots_indexation($rech,$min_long);
 	unset($dico);
 	unset($h);
 	
 	// cherche les mots dans le dico
 	while (list(, $val) = each($s)) {
-		list($rq, $rq_strict,$mode) = requete_dico ($val);
+		list($rq, $rq_strict,$mode) = requete_dico ($val,$min_long);
 		if ($rq)
 			$dico[$mode][$val] = $rq;
 		if ($rq_strict)
