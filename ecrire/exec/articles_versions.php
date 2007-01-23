@@ -31,16 +31,11 @@ function exec_articles_versions_dist()
 	$id_article = intval($id_article);
 	$row = spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article='$id_article'"));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	if (!autoriser('voir', 'article', $id_article)
-		OR !autoriser('modifier','article', $id_article)) {
-		echo $commencer_page(_T('info_modifier_titre', array('titre' => $titre)), "naviguer", "rubriques", $id_rubrique);
+	if (!autoriser('voirrevisions', 'article', $id_article) 
+		OR !$row) {
+		echo $commencer_page(_T('info_historique'), "naviguer", "articles", isset($row["id_rubrique"])?$row["id_rubrique"]:0);
 		echo "<strong>"._T('avis_acces_interdit')."</strong>";
 		echo fin_page();
-		exit;
-	}
-	if(!(autoriser('voirrevisions', 'article', $id_article) AND $row)) {
-		include_spip('minipres');
-		echo minipres();
 		exit;
 	}
 
