@@ -1235,12 +1235,13 @@ function  sql_calendrier_interval_forums($limites, &$evenements) {
 	while($row=spip_fetch_array($result)){
 		$amj = date_anneemoisjour($row['date_heure']);
 		$id = $row['id_forum'];
-		$evenements[$amj][]=
-		array(
-			'URL' => generer_url_forum($id),
-			'CATEGORIES' => 'calendrier-couleur7',
-			'SUMMARY' => $row['titre'],
-			'DTSTART' => date_ical($row['date_heure']));
+		if (autoriser('voir','forum',$id))
+			$evenements[$amj][]=
+			array(
+				'URL' => generer_url_forum($id),
+				'CATEGORIES' => 'calendrier-couleur7',
+				'SUMMARY' => $row['titre'],
+				'DTSTART' => date_ical($row['date_heure']));
 	}
 }
 
@@ -1255,12 +1256,13 @@ function sql_calendrier_interval_articles($avant, $apres, &$evenements) {
 	while($row=spip_fetch_array($result)){
 		$amj = date_anneemoisjour($row['date']);
 		$id = $row['id_article'];
-		$evenements[$amj][]=
-		    array(
-			  'CATEGORIES' => calendrier_categories('spip_articles', $id, 'id_article'),
-			'DESCRIPTION' => $row['descriptif'],
-			'SUMMARY' => $row['titre'],
-			'URL' => generer_url_article($id, 'prop'));
+		if (autoriser('voir','article',$id))
+			$evenements[$amj][]=
+			    array(
+				  'CATEGORIES' => calendrier_categories('spip_articles', $id, 'id_article'),
+				'DESCRIPTION' => $row['descriptif'],
+				'SUMMARY' => $row['titre'],
+				'URL' => generer_url_article($id, 'prop'));
 	}
 }
 
@@ -1271,12 +1273,13 @@ function sql_calendrier_interval_rubriques($avant, $apres, &$evenements) {
 	while($row=spip_fetch_array($result)){
 		$amj = date_anneemoisjour($row['date']);
 		$id = $row['id_rubrique'];
-		$evenements[$amj][]=
-		    array(
-			  'CATEGORIES' => calendrier_categories('spip_rubriques', $id, 'id_rubrique'),
-			'DESCRIPTION' => $row['descriptif'],
-			'SUMMARY' => $row['titre'],
-			'URL' => generer_url_rubrique($id, 'prop'));
+		if (autoriser('voir','rubrique',$id))
+			$evenements[$amj][]=
+			    array(
+				  'CATEGORIES' => calendrier_categories('spip_rubriques', $id, 'id_rubrique'),
+				'DESCRIPTION' => $row['descriptif'],
+				'SUMMARY' => $row['titre'],
+				'URL' => generer_url_rubrique($id, 'prop'));
 	}
 }
 
@@ -1287,11 +1290,12 @@ function sql_calendrier_interval_breves($avant, $apres, &$evenements) {
 		$amj = date_anneemoisjour($row['date_heure']);
 		$id = $row['id_breve'];
 		$ir = $row['id_rubrique'];
-		$evenements[$amj][]=
-		array(
-		      'URL' => generer_url_breve($id, 'prop'),
-		      'CATEGORIES' => calendrier_categories('spip_breves', $ir, 'id_breve'),
-		      'SUMMARY' => $row['titre']);
+		if (autoriser('voir','breve',$id))
+			$evenements[$amj][]=
+			array(
+			      'URL' => generer_url_breve($id, 'prop'),
+			      'CATEGORIES' => calendrier_categories('spip_breves', $ir, 'id_breve'),
+			      'SUMMARY' => $row['titre']);
 	}
 }
 
