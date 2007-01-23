@@ -31,7 +31,7 @@ function action_export_all_dist()
 
 	list($file, $nb) = split('/', $arg);
 	$file =  $dir . $file;
-	$files = ramasse_parties($file, $file, $nb, true);
+	//$files = ramasse_parties($file, $file, $nb, true);
 	
 	effacer_meta("status_dump");
 	ecrire_metas();

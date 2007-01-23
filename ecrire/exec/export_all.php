@@ -93,13 +93,18 @@ function exec_export_all_dist()
 		$status_dump = explode("::",$status_dump);
 		ecrire_metas();
 
-// Au cas ou le dernier dump n'aurait pas ete acheve correctement
+		// Au cas ou le dernier dump n'aurait pas ete acheve correctement
 
 		foreach(preg_files($file .  ".part\.[0-9]*") as $dummy)
 			@unlink($dummy);
 
 		$reprise = '';
-	} else	$reprise = " (" . $status_dump[2] . ", " . $status_dump[3] . ")";
+		// creer l'en tete du fichier
+		ecrire_fichier($dir.$archive, export_entete(),false,false);
+		
+	} 
+	else	
+		$reprise = " (" . $status_dump[2] . ", " . $status_dump[3] . ")";
 
 	list($tables_for_dump, $tables_for_link) = export_all_list_tables();
 
@@ -111,8 +116,12 @@ function exec_export_all_dist()
 	// Pour avoir les valeurs de _DIR_IMG etc relatives a l'espace public
 	// la phase finale de reunion des fichiers en un seul est faite la-bas
 	$href = generer_action_auteur("export_all","$archive/$all",'',true);
+	
+	
+	ramasse_parties($dir.$archive, $dir.$archive);
 
 	if ($etape_actuelle > $all){ // au timeout
+		ecrire_fichier($dir.$archive, export_enpied(),false,false);
 		include_spip('inc/headers');
 		redirige_par_entete($href);
 	}
@@ -136,8 +145,8 @@ function exec_export_all_dist()
 	if (!($timeout = ini_get('max_execution_time')*1000));
 	$timeout = 30000; // parions sur une valeur tellement courante ...
 	if ($start) $timeout = round($timeout/2);
-		// script de rechargement auto sur timeout
-	echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".generer_url_ecrire("export_all","archive=$archive&gz=$gz",true)."\";',$timeout);</script>\n");
+	// script de rechargement auto sur timeout
+	//echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".generer_url_ecrire("export_all","archive=$archive&gz=$gz",true)."\";',$timeout);</script>\n");
 
 	echo "<div style='text-align: left'>\n";
 	$etape = 1;
@@ -157,15 +166,15 @@ function exec_export_all_dist()
 		  }
 		  if ($GLOBALS['flag_ob_flush']) ob_flush();
 		  flush();
-		  $etape++;
 		  $sous_etape = 0;
 		}
+	  $etape++;
 	}
 	echo "</div>\n";
 	// si Javascript est dispo, anticiper le Time-out
 	echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"$href\";',0);</script>\n");
 	echo install_fin_html();
-	}
+}
 
 // construction de la liste des tables pour le dump :
 // toutes les tables principales
