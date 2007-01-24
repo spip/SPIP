@@ -66,7 +66,7 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 	
 	if (!file_exists($fichier)) return false;
 	
-	if (preg_match(",^.*+(?<=\.(gif|jpg|png)),", $fichier, $regs)) {
+	if (preg_match(",^(?>.*)(?<=\.(gif|jpg|png)),", $fichier, $regs)) {
 		$terminaison = $regs[1];
 		$terminaison_dest = $terminaison;
 		
