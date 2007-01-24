@@ -20,7 +20,7 @@ include_spip('inc/minipres');
 function action_export_all_dist()
 {
 	global $connect_toutes_rubriques ;
-	
+
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
@@ -29,31 +29,28 @@ function action_export_all_dist()
 	if ($connect_toutes_rubriques AND file_exists(_DIR_DUMP))
 		$dir = _DIR_DUMP;
 
-	list($archive, $action) = split('/', $arg);
+	list($quoi, $gz, $archive) = split(',', $arg);
 	
-#	var_dump($file);
-#	var_dump($action);
 	$file =  $dir . $archive;
-#	var_dump($file);
-#die();		
+	spip_log("action $arg $file");
 	include_spip('inc/meta');
-	if ($action=='start'){
-		// ecrire le debut du fichier
+	if ($quoi =='start'){
+		// creer l'en tete du fichier et retourner dans l'espace prive
 		include_spip('inc/export');
-		ecrire_fichier($file, export_entete(),false);
+		if (ecrire_fichier($file, export_entete(),false)) {
 		
-		lire_metas();
-		$status_dump = explode("::",$GLOBALS['meta']["status_dump"]);
-		$gz = $statut_dump[0];
-		// ca demarre
-		ecrire_meta("status_dump", "$gz::$archive::1::0",'non');
-		ecrire_metas();
-		
-		// retour a la case depart pour vraiment faire le dump
-		include_spip('inc/headers');
-		redirige_par_entete(_request('redirect'));
-	}
-	elseif($action=='end'){
+		  ecrire_meta("status_dump", "$gz::$archive::1::0",'non');
+		  ecrire_metas();
+		  include_spip('inc/headers');
+		  redirige_par_entete(generer_url_ecrire('export_all'));
+		} else {
+		  echo "<p>",
+		    _T('avis_erreur_sauvegarde', 
+		       array('type'=>'.', 'id_objet'=>'. .')),
+		    "</p>\n";
+		  exit;
+		}
+	}elseif ($quoi=='end'){
 
 		effacer_meta("status_dump");
 		ecrire_metas();
