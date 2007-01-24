@@ -60,7 +60,7 @@ function action_joindre_dist()
 
      $redirect = urldecode($redirect);
      if ($documents_actifs) {
-	$redirect .= '&show_docs=' . join(',',$documents_actifs);
+	$redirect = parametre_url($redirect,'show_docs',join(',',$documents_actifs));
      }
      
     if (!$ancre) {
@@ -80,7 +80,7 @@ function action_joindre_dist()
      }
 
 	if(_request("iframe") == 'iframe') {
-		$redirect = urldecode($iframe_redirect)."&show_docs=".join(',',$documents_actifs)."&iframe=iframe";
+		$redirect = parametre_url(urldecode($iframe_redirect),"show_docs",join(',',$documents_actifs)."&iframe=iframe");
 	}
 
 	redirige_par_entete($redirect);
