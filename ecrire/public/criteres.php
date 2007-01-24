@@ -185,6 +185,7 @@ function critere_traduction_dist($idb, &$boucles, $crit) {
 }
 
 // {origine_traduction}
+//   (id_trad>0 AND id_article=id_trad) OR (id_trad=0)
 // http://www.spip.net/@origine_traduction
 // http://doc.spip.org/@critere_origine_traduction_dist
 function critere_origine_traduction_dist($idb, &$boucles, $crit) {
@@ -192,10 +193,13 @@ function critere_origine_traduction_dist($idb, &$boucles, $crit) {
 	$prim = $boucle->primary;
 	$table = $boucle->id_table;
 
-	$c= array("'='", "'$table." . "id_trad'", "'$table.$prim'");
+	$c =
+	array("'OR'",
+		array("'='", "'$table." . "id_trad'", "'$table.$prim'"),
+		array("'='", "'$table.id_trad'", "'0'")
+	);
 	$boucle->where[]= ($crit->not ? array("'NOT'", $c) : $c);
 }
-
 
 // {meme_parent}
 // http://www.spip.net/@meme_parent

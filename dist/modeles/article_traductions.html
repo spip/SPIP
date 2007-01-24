@@ -11,14 +11,15 @@
 <div class="traductions">
 <p><:trad_article_traduction:></p>
 <ul>
-	<BOUCLE_traductions(ARTICLES) {traduction} {par lang}>
+	<BOUCLE_traductions(ARTICLES) {traduction} {par lang}>[
+	(#TOTAL_BOUCLE|>{1}|?{' '})
 	<li lang="#LANG" xml:lang="#LANG" dir="#LANG_DIR"[ class="(#EXPOSE)"]>
 		&#91;[(#EXPOSE{
 		<span>,
 		<a href="#URL_ARTICLE" rel="alternate" hreflang="#LANG"[ title="(#TITRE|texte_backend)"]>}
 		)][(#LANG|traduire_nom_langue)]#EXPOSE{</span>,</a>}&#93;
 	</li>
-	</BOUCLE_traductions>
+	]</BOUCLE_traductions>
 </ul>
 </div>
 </B_traductions>
