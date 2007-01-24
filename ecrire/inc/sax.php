@@ -200,7 +200,7 @@ function inc_sax_dist($page, $apply=false)
 
 	xml_parser_free($xml_parser);
 
-	if ($res[0] == '<') return $doctype ."\n". $res;
+	if ($res[0] == '<') return trim($doctype). "\n" . $res;
 
 	$GLOBALS['xhtml_error'] = $res;
 

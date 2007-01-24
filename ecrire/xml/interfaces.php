@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/sax');
 
 define('_REGEXP_DOCTYPE',
-	'/^\s*(<[?][^>]*>\s*)?<!DOCTYPE\s+(\w+)\s+(\w+)\s*([^>]*)>/');
+	'/^\s*(<[?][^>]*>\s*)?<!DOCTYPE\s+(\w+)\s+(\w+)\s*([^>]*)>\s*/');
 
 define('_SUB_REGEXP_SYMBOL', '[A-Za-z_][\w_:.-]*');
 
