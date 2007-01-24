@@ -89,7 +89,6 @@ function encours_accueil()
 // Raccourcis pour malvoyants
 //
 
-// http://doc.spip.org/@colonne_droite_eq4
 function colonne_droite_eq4($activer_breves)
 {
 	global  $spip_display, $connect_statut, $connect_toutes_rubriques, $connect_id_auteur, $connect_login;
@@ -114,7 +113,11 @@ function colonne_droite_eq4($activer_breves)
 	return  bloc_des_raccourcis($res);
  }
 
-// http://doc.spip.org/@colonne_droite_neq4
+//
+// Raccourcis pour voyants ...
+//
+
+// http://doc.spip.org/@colonne_gauche_accueil
 function colonne_droite_neq4($id_rubrique, $activer_breves,
 				$activer_sites, $articles_mots)
 {
@@ -217,6 +220,8 @@ function colonne_droite_neq4($id_rubrique, $activer_breves,
 	return $gadget;
 }
 
+// Cartouche d'identification, avec les rubriques administrees
+
 // http://doc.spip.org/@personnel_accueil
 function personnel_accueil($coockcookie)
 {
@@ -262,15 +267,16 @@ function personnel_accueil($coockcookie)
 	. fin_cadre_relief(true);
 }
 
+// Cartouche du site, avec le nombre d'aricles, breves et messages de forums
 
 // http://doc.spip.org/@etat_base_accueil
 function etat_base_accueil()
 {
-	global $spip_display, $spip_lang_left, $connect_statut;
+	global $spip_display, $spip_lang_left, $connect_statut, $connect_id_rubrique;
 
-	$nom_site_spip = propre($GLOBALS['meta']["nom_site"]);
-	if (!$nom_site_spip) $nom_site_spip=  _T('info_mon_site_spip');
-	
+	$ids = join(",", $connect_id_rubrique);
+	$where = $ids ? (" WHERE id_rubrique IN ($ids)") : '';
+
 	$res = '';
 
 	if ($spip_display != 1) {
@@ -290,43 +296,80 @@ function etat_base_accueil()
 
 	$q = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_articles GROUP BY statut HAVING cnt <>0");
   
+	$cpt = array();
+	$cpt2 = array();
+	$defaut = $where ? '0/' : '';
 	while($row = spip_fetch_array($q)) {
-	    	$cpt[$row['statut']] = $row['cnt']; 
+	  $cpt[$row['statut']] = $row['cnt'];
+	  $cpt2[$row['statut']] = $defaut;
 	}
-  
 	if ($cpt) {
-
+		if ($where) {
+			$q = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_articles$where GROUP BY statut");
+			while($row = spip_fetch_array($q)) {
+				$r = $row['statut'];
+				$cpt2[$r] = intval($row['cnt']) . '/';
+			}
+		}
 		$res .= afficher_plus(generer_url_ecrire("articles_page",""))."<b>"._T('info_articles')."</b>";
 		$res .= "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
-		if (isset($cpt['prepa'])) $res .= "<li>"._T("texte_statut_en_cours_redaction").": ".$cpt['prepa'] . '</li>';
-		if (isset($cpt['prop'])) $res .= "<li>"._T("texte_statut_attente_validation").": ".$cpt['prop'] . '</li>';
-		if (isset($cpt['publie'])) $res .= "<li><b>"._T("texte_statut_publies").": ".$cpt['publie']."</b>" . '</li>';
+		if (isset($cpt['prepa'])) $res .= "<li>"._T("texte_statut_en_cours_redaction").": ".$cpt2['prepa'] . $cpt['prepa'] .'</li>';
+		if (isset($cpt['prop'])) $res .= "<li>"._T("texte_statut_attente_validation").": ".$cpt2['prop'] . $cpt['prop'] . '</li>';
+		if (isset($cpt['publie'])) $res .= "<li><b>"._T("texte_statut_publies").": ".$cpt2['publie'].$cpt['publie'] ."</b>" . '</li>';
 		$res .= "</ul>";
-
 	}
 
 	$q = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_breves GROUP BY statut HAVING cnt <>0");
 
 	$cpt = array();
+	$cpt = array();
+	$defaut = $where ? '0/' : '';
 	while($row = spip_fetch_array($q)) {
-		$cpt[$row['statut']] = $row['cnt']; 
+	  $cpt[$row['statut']] = $row['cnt'];
+	  $cpt2[$row['statut']] = $defaut;
 	}
  
 	if ($cpt) {
+		if ($where) {
+			$q = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_breves$where GROUP BY statut");
+			while($row = spip_fetch_array($q)) {
+				$r = $row['statut'];
+				$cpt2[$r] = intval($row['cnt']) . '/';
+			}
+		}
 		$res .= afficher_plus(generer_url_ecrire("breves",""))."<b>"._T('info_breves_02')."</b>";
 		$res .= "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
-		if (isset($cpt['prop'])) $res .= "<li>"._T("texte_statut_attente_validation").": ".$cpt['prop'] . '</li>';
-		if (isset($cpt['publie'])) $res .= "<li><b>"._T("texte_statut_publies").": ".$cpt['publie'] . "</b>" .'</li>';
+		if (isset($cpt['prop'])) $res .= "<li>"._T("texte_statut_attente_validation").": ".$cpt2['prop'].$cpt['prop'] . '</li>';
+		if (isset($cpt['publie'])) $res .= "<li><b>"._T("texte_statut_publies").": ".$cpt2['publie'] .$cpt['publie'] . "</b>" .'</li>';
 		$res .= "</ul>";
 	}
 
-	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_forum where statut='publie'"));
+	$q = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_forum WHERE statut IN ('publie', 'prop') GROUP BY statut HAVING cnt <>0");
 
-	if ($cpt = $cpt['n']) {
+	$cpt = array();
+	$cpt2 = array();
+	$defaut = $where ? '0/' : '';
+	while($row = spip_fetch_array($q)) {
+	  $cpt[$row['statut']] = $row['cnt'];
+	  $cpt2[$row['statut']] = $defaut;
+	}
+
+	if ($cpt) {
+		if ($where) {
+		  include_spip('inc/forum');
+		  list($f, $w) = critere_statut_controle_forum('public',$ids);
+		  $q = spip_query("SELECT COUNT(*) AS cnt, F.statut FROM $f  WHERE $w GROUP BY F.statut");
+		  while($row = spip_fetch_array($q)) {
+				$r = $row['statut'];
+				$cpt2[$r] = intval($row['cnt']) . '/';
+			}
+		}
+
 		if ($connect_statut == "0minirezo") $res .= afficher_plus(generer_url_ecrire("controle_forum",""));
 		$res .= "<b>" ._T('onglet_messages_publics') ."</b>";
 		$res .= "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
-		$res .= "<li><b>" .$cpt  . "</b></li>";
+		if (isset($cpt['prop'])) $res .= "<li>"._T("texte_statut_attente_validation").": ".$cpt2['prop'] .$cpt['prop'] . '</li>';
+		if (isset($cpt['publie'])) $res .= "<li><b>"._T("texte_statut_publies").": ".$cpt2['publie'] .$cpt['publie'] . "</b>" .'</li>';
 		$res .= "</ul>";
 	}
 
@@ -346,54 +389,38 @@ function etat_base_accueil()
 
 	$res .= "</div>";
 
-	return  debut_cadre_relief("racine-site-24.gif", true, "", $nom_site_spip)
-	  . $res
-	  . fin_cadre_relief(true);
+	return $res ;
 }
 
-// http://doc.spip.org/@accueil_evenements
- function accueil_evenements()
+//
+// Affiche les messsages
+// et les calendrier du mois et du jour s'il y a des rendez-vous
+//
+
+function accueil_evenements()
 {
 	global  $partie_cal, $echelle;
 
-	$res = "<div>&nbsp;</div>";	
-	
-	//
-	// Annonces
-	//
-	$res .=    http_calendrier_rv(sql_calendrier_taches_annonces(),"annonces");
-	$res .=    http_calendrier_rv(sql_calendrier_taches_pb(),"pb") ;
-	$res .=    http_calendrier_rv(sql_calendrier_taches_rv(), "rv");
-
-	//
-	// Afficher le calendrier du mois s'il y a des rendez-vous
-	//
-	
 	$mois = date("m");
 	$annee = date("Y");
 	$jour = date("d");
+	$date = date("Y-m-d");
 
-	$evt = sql_calendrier_agenda($annee, $mois);
-	if ($evt) 
-		$res .= http_calendrier_agenda ($annee, $mois, $jour, $mois, $annee, false, generer_url_ecrire('calendrier'), '', $evt);
+	$evtm = sql_calendrier_agenda($annee, $mois);
+	$evt = sql_calendrier_interval_rv("'$date'", "'$date 23:59:59'");
 
-	// et ceux du jour
-	$evt = date("Y-m-d");
-	$evt = sql_calendrier_interval_rv("'$evt'", "'$evt 23:59:59'");
-
-	if ($evt) {
-		$res .= http_calendrier_ics_titre($annee,$mois,$jour,generer_url_ecrire('calendrier'));
-		$res .= http_calendrier_ics($annee, $mois, $jour, $echelle, $partie_cal, 90, array('', $evt));
-	}
-	return $res;
+	return "<div>&nbsp;</div>"
+	. http_calendrier_rv(sql_calendrier_taches_annonces(),"annonces")
+	. http_calendrier_rv(sql_calendrier_taches_pb(),"pb")
+	. http_calendrier_rv(sql_calendrier_taches_rv(), "rv")
+	. ($evtm ? http_calendrier_agenda($annee, $mois, $jour, $mois, $annee, false, generer_url_ecrire('calendrier'), '', $evtm) : '')
+	. ($evt ? ( http_calendrier_ics_titre($annee,$mois,$jour,generer_url_ecrire('calendrier')) . http_calendrier_ics($annee, $mois, $jour, $echelle, $partie_cal, 90, array('', $evt))) : '');
 }
-
 
 
 // http://doc.spip.org/@exec_accueil_dist
 function exec_accueil_dist()
 {
-
 	global $id_rubrique, $meta, $connect_statut, $options,  $connect_id_auteur, $spip_display;
 
 	$id_rubrique =  intval($id_rubrique);
@@ -407,7 +434,12 @@ function exec_accueil_dist()
 	if ($spip_display != 4) {
 		echo personnel_accueil($_COOKIE['spip_admin']);
 		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
-		echo "\n<div>&nbsp;</div>", etat_base_accueil();
+		echo "\n<div>&nbsp;</div>";
+		$nom = propre($GLOBALS['meta']["nom_site"]);
+		if (!$nom) $nom=  _T('info_mon_site_spip');
+		echo debut_cadre_relief("racine-site-24.gif", true, "", $nom),
+		  etat_base_accueil(),
+		  fin_cadre_relief(true);
 	}
 
 	creer_colonne_droite();
