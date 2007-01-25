@@ -253,7 +253,7 @@ function personnel_accueil($coockcookie)
 	if ($coockcookie) {
 		$t = _T('icone_supprimer_cookie');
 		$t = icone_horizontale($t, generer_url_public("spip_cookie", "cookie_admin=non&url=".rawurlencode(_DIR_RESTREINT_ABS)), "cookie-24.gif", "", false);
-		if ($spip_display != 1) 
+		if ($GLOBALS['spip_display'] != 1) 
 			$t = str_replace('</td></tr></table>', 
 					 aide("cookie").'</td></tr></table>',
 					 $t);

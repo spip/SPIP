@@ -85,7 +85,7 @@ function init_config() {
 		}
 	}
 
-	if ($GLOBALS['meta']['nouvelle_install'] == 'oui') {
+	if (isset($GLOBALS['meta']['nouvelle_install']) && $GLOBALS['meta']['nouvelle_install'] == 'oui') {
 		effacer_meta('nouvelle_install');
 		$modifs = true;
 	}

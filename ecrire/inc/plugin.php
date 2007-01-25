@@ -113,7 +113,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz'){
 				if ($charge=='options'){
 					$prefix = strtoupper($info['prefix']);
 					$splugs .= '$GLOBALS[\'plugins\'][]=\''.$plug.'\';';
-					$splugs .= "define(_DIR_PLUGIN_$prefix,_DIR_PLUGINS.'$plug/');";
+					$splugs .= "define('_DIR_PLUGIN_$prefix',_DIR_PLUGINS.'$plug/');";
 					$splugs .= "\n";
 				}
 				if (isset($info[$charge])){
@@ -135,7 +135,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz'){
 		foreach($infos as $plug=>$info){
 			$prefix = "";
 			$prefix = $info['prefix']."_";
-			if (is_array($info['pipeline'])){
+			if (isset($info['pipeline']) AND is_array($info['pipeline'])){
 				foreach($info['pipeline'] as $pipe){
 					$nom = trim(array_pop($pipe['nom']));
 					if (isset($pipe['action']))
