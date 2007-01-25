@@ -192,20 +192,19 @@ function aff_referers ($result, $limit, $plus) {
 	if (count($nbvisites) > 0) {
 		arsort($nbvisites);
 
-		$aff = "<ul>";
+		$aff = '';
 		for (reset($nbvisites); $numero = key($nbvisites); next($nbvisites)) {
 			if ($lesdomaines[$numero] == '') next;
 
 			$visites = pos($nbvisites);
 
-			if (strlen($source_vignettes) > 0) $ret = "\n<div style='clear: $spip_lang_right;'></div><a href=\"http://".$lesurls[$numero]."\"><img src=\"$source_vignettes".rawurlencode($lesurls[$numero])."\" style=\"float: $spip_lang_right; margin-bottom: 3px; margin-left: 3px;\" /></a>";
+			$ret = "\n<li>";
 
-			$ret .= "\n<li>";
+			if (strlen($source_vignettes) > 0) $ret .= "\n<div style='clear: $spip_lang_right;'></div>\n<a href=\"http://".$lesurls[$numero]."\"><img src=\"$source_vignettes".rawurlencode($lesurls[$numero])."\"\nstyle=\"float: $spip_lang_right; margin-bottom: 3px; margin-left: 3px;\" alt='' /></a>";
 
 			if ($visites > 5) $ret .= "<span style='color: red'>$visites "._T('info_visites')."</span> ";
 			else if ($visites > 1) $ret .= "$visites "._T('info_visites')." ";
 			else $ret .= "<span style='color: #999999'>$visites "._T('info_visite')."</span> ";
-		
 		
 			if ($lesdomaines[$numero] == "(email)") {
 				$aff .= $ret;
@@ -217,8 +216,8 @@ function aff_referers ($result, $limit, $plus) {
 				$aff .= $ret;
 				$aff .= "<a href='http://".quote_amp($lesurls[$numero])."'><span style='color: $couleur_foncee; font-weight: bold;'>".$lesdomaines[$numero]."</span></a>";
 				if ($rac = $lesliensracine[$numero]) $aff .= " <span class='spip_x-small'>($rac)</span>";
-				$aff .= "<ul style='font-size:x-small;'><li>$referers</li></ul>";
-				$aff .= "</li></ul><ul style='font-size:small;'>\n";
+				$aff .= "\n<ul style='font-size:x-small;'><li>$referers</li></ul>\n";
+				$aff .= "</li></ul>\n<ul style='font-size:small;'>\n";
 			} else {
 				$aff .= $ret;
 				$lien = $lesreferers[$numero][0];
@@ -231,7 +230,10 @@ function aff_referers ($result, $limit, $plus) {
 				$aff .= "</li>\n";
 			}
 		}
-		$aff .= "</ul>";
+
+		if (preg_match(",<ul style='font-size:small;'>\s*$,",$aff,$r))
+		  $aff = substr($aff,0,(0-strlen($r[0])));
+		if ($aff) $aff = "<ul>$aff</ul>";
 
 		// Le lien pour en afficher "plus"
 		if ($plus AND (spip_num_rows($result) == $limit)) {
