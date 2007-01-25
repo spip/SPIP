@@ -89,6 +89,7 @@ function encours_accueil()
 // Raccourcis pour malvoyants
 //
 
+// http://doc.spip.org/@colonne_droite_eq4
 function colonne_droite_eq4($activer_breves)
 {
 	global  $spip_display, $connect_statut, $connect_toutes_rubriques, $connect_id_auteur, $connect_login;
@@ -117,7 +118,7 @@ function colonne_droite_eq4($activer_breves)
 // Raccourcis pour voyants ...
 //
 
-// http://doc.spip.org/@colonne_gauche_accueil
+// http://doc.spip.org/@colonne_droite_neq4
 function colonne_droite_neq4($id_rubrique, $activer_breves,
 				$activer_sites, $articles_mots)
 {
@@ -397,6 +398,7 @@ function etat_base_accueil()
 // et les calendrier du mois et du jour s'il y a des rendez-vous
 //
 
+// http://doc.spip.org/@accueil_evenements
 function accueil_evenements()
 {
 	global  $partie_cal, $echelle;
