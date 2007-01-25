@@ -64,8 +64,8 @@ function gen_liste_rubriques() {
 	if (spip_num_rows($res) > 0) { 
 		while ($row = spip_fetch_array($res)) {
 			$id = $row['id_rubrique'];
-				$parent = $row['id_parent'];
-				$GLOBALS['db_art_cache'][$parent][$id] = 
+			$parent = $row['id_parent'];
+			$GLOBALS['db_art_cache'][$parent][$id] = 
 					supprimer_numero(typo(sinon($row['titre'], _T('ecrire:info_sans_titre'))));
 		}
 	}
@@ -88,16 +88,12 @@ function gadget_rubriques() {
 	$arr_low = extraire_article(0);
 
 	$total_lignes = $i = sizeof($arr_low);
-	$nb_col = min(10,max(1,ceil($total_lignes / 10)));
-
-	// Pas certain que ce calcul de $max_lignes soit pertinent
-	// Par exemple, si on a 2 secteurs, alors max_lignes=2.
+	$nb_col = min(10,max(4,ceil($total_lignes / 10)));
 	$max_lignes = ceil($total_lignes / $nb_col);
-	$max_lignes = 10;
-	
+	$largeur = (800 / $nb_col) . 'px';;
 
 	$count_lignes = 0;
-	$style = " style='width: 200px'; z-index: 1;'  valign='top'";
+	$style = " style='width: $largeur; z-index: 1; vertical-align: top;'";
 	$ret = '';
 
 	if ($i > 0) {
@@ -150,10 +146,10 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 		$ret = "<div class='pos_r' style='z-index: $z;' onMouseOver=\"montrer('b_$id_rubrique');\" onMouseOut=\"cacher('b_$id_rubrique');\">";
 		$ret .= '<div class="brt"><a href="' . generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique)
 		  . '" class="bandeau_rub"'.$image.'>'.supprimer_tags($titre_rubrique)."</a></div>\n"
-		  . '<div class="bandeau_rub" style="z-index: '.($z+1).';" id="b_'.$id_rubrique.'">';
+		  . '<div class="bandeau_rub" style="top: 15px; left: 15px; z-index: '.($z+1).';" id="b_'.$id_rubrique.'">';
 		
 		$ret .= '<table cellspacing="0" cellpadding="0"><tr><td valign="top">';
-		$ret .= "<div style='width: 200px;'>\n";
+		$ret .= "<div>\n";
 		
 		if ($nb_rub = count($arr_rub))
 			$ret_ligne =  ceil($nb_rub / ceil($nb_rub / $max_lignes)) + 1;
