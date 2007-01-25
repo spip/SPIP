@@ -80,7 +80,7 @@ function caracteriser_auteur() {
 	}
 	// Eviter l'acces SQL si le pass est connu de PHP
 
-	if ($auteur_session['pass'])
+	if (isset($auteur_session['pass']) AND $auteur_session['pass'])
 		return $caracterisation = array($id_auteur, $auteur_session['pass']); 
 	else {
 		$t = spip_query("SELECT id_auteur, pass FROM spip_auteurs WHERE id_auteur=$id_auteur");

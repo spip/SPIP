@@ -44,6 +44,7 @@ function action_export_all_dist()
 		  include_spip('inc/headers');
 		  redirige_par_entete(generer_url_ecrire('export_all'));
 		} else {
+			echo install_debut_html(_T('info_sauvegarde'));
 		  echo "<p>",
 		    _T('avis_erreur_sauvegarde', 
 		       array('type'=>'.', 'id_objet'=>'. .')),
