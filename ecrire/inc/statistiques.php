@@ -197,10 +197,9 @@ function aff_referers ($result, $limit, $plus) {
 			if ($lesdomaines[$numero] == '') next;
 
 			$visites = pos($nbvisites);
-
 			$ret = "\n<li>";
 
-			if (strlen($source_vignettes) > 0) $ret .= "\n<div style='clear: $spip_lang_right;'></div>\n<a href=\"http://".$lesurls[$numero]."\"><img src=\"$source_vignettes".rawurlencode($lesurls[$numero])."\"\nstyle=\"float: $spip_lang_right; margin-bottom: 3px; margin-left: 3px;\" alt='' /></a>";
+			if (strlen($source_vignettes) > 0) $ret .= "\n<span style='clear: $spip_lang_right;'></span>\n<a href=\"http://".$lesurls[$numero]."\"><img src=\"$source_vignettes".rawurlencode($lesurls[$numero])."\"\nstyle=\"float: $spip_lang_right; margin-bottom: 3px; margin-left: 3px;\" alt='' /></a>";
 
 			if ($visites > 5) $ret .= "<span style='color: red'>$visites "._T('info_visites')."</span> ";
 			else if ($visites > 1) $ret .= "$visites "._T('info_visites')." ";
@@ -231,7 +230,7 @@ function aff_referers ($result, $limit, $plus) {
 			}
 		}
 
-		if (preg_match(",<ul style='font-size:small;'>\s*$,",$aff,$r))
+		if (preg_match(",</ul>\s*<ul style='font-size:small;'>\s*$,",$aff,$r))
 		  $aff = substr($aff,0,(0-strlen($r[0])));
 		if ($aff) $aff = "<ul>$aff</ul>";
 
