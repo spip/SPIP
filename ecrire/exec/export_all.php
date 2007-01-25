@@ -13,45 +13,11 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 @ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
 
-include_spip('base/serial');
-include_spip('base/auxiliaires');
-include_spip('public/interfaces'); // pour table_des_tables
 include_spip('inc/flock');
 include_spip('inc/actions');
 include_spip('inc/export');
 
-// NB: Ce fichier peut ajouter des tables (old-style)
-// donc il faut l'inclure "en globals"
-if ($f = include_spip('mes_fonctions', false)) {
-	global $dossier_squelettes;
-	@include_once ($f); 
-}
-if (@is_readable(_DIR_TMP."charger_plugins_fonctions.php")){
-	// chargement optimise precompile
-	include_once(_DIR_TMP."charger_plugins_fonctions.php");
-}
 
-// par defaut tout est exporte sauf les tables ci-dessous
-
-global $EXPORT_tables_noexport;
-
-if (!isset($EXPORT_tables_noexport)){
-	$EXPORT_tables_noexport= array(
-		'spip_caches',
-		'spip_index',
-		'spip_index_dico',
-		'spip_referers',
-		'spip_referers_articles',
-		'spip_visites',
-		'spip_visites_articles',
-		'spip_ortho_cache',
-		'spip_ortho_dico'
-		);
-	if (!$GLOBALS['connect_toutes_rubriques']){
-		$EXPORT_tables_noexport[]='spip_messages';
-		$EXPORT_tables_noexport[]='spip_auteurs_messages';
-	}
-}
 $GLOBALS['flag_ob_flush'] = function_exists('ob_flush');
 
 
@@ -89,6 +55,7 @@ function exec_export_all_dist()
 
 	$file = $dir . $archive;
 	$redirect = generer_url_ecrire("export_all");
+	$tables_sauvegardees = isset($GLOBALS['meta']['status_dump_tables'])?unserialize($GLOBALS['meta']['status_dump_tables']):array();
 
 	if (!$etape_actuelle AND !$sous_etape) {
 		$l = preg_files($file .  ".part_[0-9]+_[0-9]+");
@@ -97,6 +64,7 @@ function exec_export_all_dist()
 			foreach($l as $dummy)@unlink($dummy);
 		}
 		$start = true; //  utilise pour faire un premier hit moitie moins long
+		$tables_sauvegardees = array();
 	}
 
 	list($tables_for_dump, $tables_for_link) = export_all_list_tables();
@@ -148,6 +116,9 @@ function exec_export_all_dist()
 		  if ($GLOBALS['flag_ob_flush']) @ob_flush();
 		  flush();
 		  $sous_etape = 0;
+		  // on utilise l'index comme ca c'est pas grave si on ecrit plusieurs fois la meme
+			$tables_sauvegardees[$table] = 1;
+			ecrire_meta("status_dump_tables", serialize($tables_sauvegardees),'non');
 		}
 		$etape++;
 		$status_dump = "$gz::$archive::" . $etape . "::0";
@@ -160,68 +131,5 @@ function exec_export_all_dist()
 	echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"$redirect\";',0);</script>\n");
 	echo install_fin_html();
 }
-
-// construction de la liste des tables pour le dump :
-// toutes les tables principales
-// + toutes les tables auxiliaires hors relations
-// + les tables relations dont les deux tables liees sont dans la liste
-
-// http://doc.spip.org/@export_all_list_tables
-function export_all_list_tables()
-{
-	$tables_for_dump = array();
-	$tables_pointees = array();
-	global $EXPORT_tables_noexport;
-	global $tables_principales;
-	global $tables_auxiliaires;
-	global $table_des_tables;
-	global $tables_jointures;
-
-// on construit un index des tables de liens
-// pour les ajouter SI les deux tables qu'ils connectent sont sauvegardees
-	$tables_for_link = array();
-	foreach($tables_jointures as $table => $liste_relations)
-		if (is_array($liste_relations))
-		{
-			$nom = $table;
-			if (!isset($tables_auxiliaires[$nom])&&!isset($tables_principales[$nom]))
-				$nom = "spip_$table";
-			if (isset($tables_auxiliaires[$nom])||isset($tables_principales[$nom])){
-				foreach($liste_relations as $link_table){
-					if (isset($tables_auxiliaires[$link_table])/*||isset($tables_principales[$link_table])*/){
-						$tables_for_link[$link_table][] = $nom;
-					}
-					else if (isset($tables_auxiliaires["spip_$link_table"])/*||isset($tables_principales["spip_$link_table"])*/){
-						$tables_for_link["spip_$link_table"][] = $nom;
-					}
-				}
-			}
-		}
-	
-	$liste_tables = array_merge(array_keys($tables_principales),array_keys($tables_auxiliaires));
-	foreach($liste_tables as $table){
-	  //		$name = preg_replace("{^spip_}","",$table);
-	  if (		!isset($tables_pointees[$table]) 
-	  		&&	!in_array($table,$EXPORT_tables_noexport) 
-	  		&&	!isset($tables_for_link[$table])){
-			$tables_for_dump[] = $table;
-			$tables_pointees[$table] = 1;
-		}
-	}
-	foreach ($tables_for_link as $link_table =>$liste){
-		$connecte = true;
-		foreach($liste as $connect_table)
-			if (!in_array($connect_table,$tables_for_dump))
-				$connecte = false;
-		if ($connecte)
-			# on ajoute les liaisons en premier
-			# si une restauration est interrompue,
-			# cela se verra mieux si il manque des objets
-			# que des liens
-			array_unshift($tables_for_dump,$link_table);
-	}
-	return array($tables_for_dump, $tables_for_link);
-}
-
 
 ?>

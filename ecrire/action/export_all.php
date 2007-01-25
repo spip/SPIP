@@ -52,8 +52,10 @@ function action_export_all_dist()
 		  exit;
 		}
 	}elseif ($quoi=='end'){
-
+		lire_metas();
+		$tables_sauvegardees = isset($GLOBALS['meta']['status_dump_tables'])?unserialize($GLOBALS['meta']['status_dump_tables']):array();
 		effacer_meta("status_dump");
+		effacer_meta("status_dump_tables");
 		ecrire_metas();
 	
 		$size = 0;
@@ -79,6 +81,13 @@ function action_export_all_dist()
 			. "</a> "
 			._T('info_sauvegarde_reussi_04')
 			. "</p>\n";
+			
+			// afficher la liste des tables qu'on a sauvegarde
+			$tables_sauvegardees = array_keys($tables_sauvegardees);
+			sort($tables_sauvegardees);
+			$n = floor(count($tables_sauvegardees)/2);
+			echo "<div style='width:49%;float:left;'><ul><li>" . join('</li><li>', array_slice($tables_sauvegardees,0,$n)) . "</li></ul></div>";
+			echo "<div style='width:49%;float:left;'><ul><li>" . join('</li><li>', array_slice($tables_sauvegardees,$n)) . "</li></ul></div>";
 		}
 		echo install_fin_html();
 	}
