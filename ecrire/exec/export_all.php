@@ -122,7 +122,7 @@ function exec_export_all_dist()
 	// sinon grosse ecriture au 1er hit, puis gros rammassage au deuxieme avec petite ecriture,... ca oscille
 	if ($start) $timeout = round($timeout/2);
 	// script de rechargement auto sur timeout
-	//echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".$redirect."\";',$timeout);</script>\n");
+	echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".$redirect."\";',$timeout);</script>\n");
 
 	if ($GLOBALS['flag_ob_flush']) @ob_flush();
 	flush();
@@ -156,7 +156,7 @@ function exec_export_all_dist()
 	}
 	echo "</div>\n";
 	// si Javascript est dispo, anticiper le Time-out
-	//echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"$redirect\";',0);</script>\n");
+	echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"$redirect\";',0);</script>\n");
 	echo install_fin_html();
 }
 
