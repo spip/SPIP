@@ -16,7 +16,9 @@ $GLOBALS['version_archive'] = '1.3';
 
 // http://doc.spip.org/@export_nom_fichier_dump
 function export_nom_fichier_dump($dir,$gz=true){
-	$archive = _SPIP_DUMP;
+	$nom_site = isset($GLOBALS['meta']['nom_site'])?$GLOBALS['meta']['nom_site']:'';
+	$nom_site = preg_replace(",[^a-z],is","_",trim($nom_site));
+	$archive = str_replace('@nom_site@',"_{$nom_site}_",_SPIP_DUMP);
 	if ($gz) $archive .= '.gz';
 	$cpt=0;
 	$stamp = date('Ymd');

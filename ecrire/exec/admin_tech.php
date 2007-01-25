@@ -102,7 +102,9 @@ echo "</table>";
 //
 
  if ($connect_toutes_rubriques) {
- 	$liste_dump = preg_files(_DIR_DUMP,str_replace("@stamp@","(_[0-9]{6,8}_[0-9]{1,3})?",_SPIP_DUMP)."(.gz)?$",50,false);
+ 	$pattern = str_replace("@nom_site@","([^.0-9]*)",_SPIP_DUMP);
+ 	$pattern = str_replace("@stamp@","(_[0-9]{6,8}_[0-9]{1,3})?",$pattern)."(.gz)?$";
+ 	$liste_dump = preg_files(_DIR_DUMP,$pattern,50,false);
  	$selected = end($liste_dump);
  	$liste_choix = "<ul>"; 
  	foreach($liste_dump as $key=>$fichier){
@@ -120,10 +122,10 @@ echo "</table>";
  	}
  	
 	if ($flag_gz) {
-		$fichier_defaut = str_replace("@stamp@","",_SPIP_DUMP) . '.gz';
+		$fichier_defaut = str_replace(array("@stamp@","@nom_site@"),array("",""),_SPIP_DUMP) . '.gz';
 		$texte_compresse = _T('texte_compresse_ou_non')."&nbsp;";
 	} else {
-		$fichier_defaut = str_replace("@stamp@","",_SPIP_DUMP);
+		$fichier_defaut = str_replace(array("@stamp@","@nom_site@"),array("",""),_SPIP_DUMP);
 		$texte_compresse = _T('texte_non_compresse')."&nbsp;";
 	}
 
