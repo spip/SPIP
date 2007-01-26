@@ -29,5 +29,5 @@
 
 ][(#GET{image}|?{'',' '})
 <span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});[ width:(#LOGO_DOCUMENT||largeur)px;]']>
-<a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]" type="#MIME_TYPE"[ title="(#TITRE|texte_backend)"]>[(#LOGO_DOCUMENT||inserer_attribut{alt,#TITRE|strlen|?{#TITRE {#TYPE_DOCUMENT},#TYPE_DOCUMENT}})]</a></span>
+<a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]"[ (#ENV{lien}|?{'',type="#MIME_TYPE"})][ title="(#TITRE|texte_backend)"]>[(#LOGO_DOCUMENT||inserer_attribut{alt,#TITRE|strlen|?{#TITRE {#TYPE_DOCUMENT},#TYPE_DOCUMENT}})]</a></span>
 ]</BOUCLE_document>
