@@ -16,12 +16,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function exec_editer_auteurs_dist()
 {
 	$type = _request('type');
-	//if (!preg_match(',^[a-z]*$,',$type)) // securite et a defaut on assure le fonctionnement pour articles
-	//	$type = 'article';
+	if (!preg_match(',^[a-z]+$,',$type)) // securite et a defaut on assure le fonctionnement pour articles
+		$type = 'article';
 
 	$id = intval(_request("id_$type"));
 
-	if (! autoriser('modifier','article',$id_article)) {
+	if (! autoriser('modifier',$type,$id)) {
 		include_spip('inc/minipres');
 		echo minipres();
 		exit;
