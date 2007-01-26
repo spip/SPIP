@@ -198,7 +198,6 @@ if (!isset($GLOBALS['transformer_xml'])
 OR $GLOBALS['auteur_session']['statut']!='0minirezo')
 	$var_f();
  else { include('public/debug.php');
-	$transformer_xml=charger_fonction($GLOBALS['transformer_xml'], 'inc');
-	debug_script($transformer_xml($var_f, true));
+   debug_script($var_f, true);
  }
 ?>
