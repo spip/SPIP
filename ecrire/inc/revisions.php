@@ -242,13 +242,13 @@ function recuperer_fragments($id_article, $id_version) {
 		if ($row['compress'] > 0){
 			$fragment_ = @gzuncompress($fragment);
 			if (strlen($fragment) && $fragment_===false)
-				$fragment=serialize(array($row['version_max']=>_T('fragment_corrompu')));
+				$fragment=serialize(array($row['version_max']=>"["._T('forum_titre_erreur').$id_fragment."]"));
 			else
 			 $fragment = $fragment_;
 		}
 		$fragment_ = unserialize($fragment);
 		if (strlen($fragment) && $fragment_===false)
-			$fragment=array($row['version_max']=>_T('fragment_corrompu'));
+			$fragment=array($row['version_max']=>"["._T('forum_titre_erreur').$id_fragment."]");
 		else
 		 $fragment = $fragment_;
 		for ($i = $id_version; $i >= $version_min; $i--) {
@@ -366,7 +366,7 @@ function recuperer_version($id_article, $id_version) {
 		$textes[$nom_champ] = "";
 		$code = explode(' ', $code);
 		foreach ($code as $id_fragment) {
-			$textes[$nom_champ] .= isset($fragments[$id_fragment])?$fragments[$id_fragment]:_T('fragment_manquant');
+			$textes[$nom_champ] .= isset($fragments[$id_fragment])?$fragments[$id_fragment]:("["._T('forum_titre_erreur').$id_fragment."]");
 		}
 	}
 	return $textes;
