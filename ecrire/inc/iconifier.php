@@ -15,20 +15,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 
 // http://doc.spip.org/@inc_iconifier_dist
-function inc_iconifier_dist($id_objet, $id,  $script, $iframe_script='') {
+function inc_iconifier_dist($id_objet, $id,  $script) {
 
 	$texteon = $GLOBALS['logo_libelles'][($id OR $id_objet != 'id_rubrique') ? $id_objet : 'id_racine'];
 
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	
 	// Add the redirect url when uploading via iframe
+	$iframe_script = generer_url_ecrire('iconifier',"type=$id_objet&$id_objet=$id&script=$script",true);
+	$iframe = "<input type='hidden' name='iframe_redirect' value='".rawurlencode($iframe_script)."' />\n";
 
-  $iframe = "";
-  if($iframe_script) {
-    $iframe_script = generer_url_ecrire($iframe_script,"type=$id_objet&$id_objet=$id&script=$script",true);
-    $iframe = "<input type='hidden' name='iframe_redirect' value='".rawurlencode($iframe_script)."' />\n";
-  }
-	
 	if (!$logo = $chercher_logo($id, $id_objet, 'on')) {
 		$masque = indiquer_logo($texteon, $id_objet, 'on', $id, $script, $iframe);
 		$res = block_parfois_visible('on', "<b>$texteon</b>", $masque);

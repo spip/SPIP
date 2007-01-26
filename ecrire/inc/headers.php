@@ -48,6 +48,8 @@ function redirige_par_entete($url, $equiv='') {
 	  _T('navigateur_pas_redirige'),
 	  '</a></body></html>';
 
+	spip_log("redirige: $url");
+
 	exit;
 }
 

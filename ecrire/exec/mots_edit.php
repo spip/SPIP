@@ -107,7 +107,7 @@ global
 
 		if (autoriser('modifier','groupemots',$id_groupe) AND ($spip_display != 4)) {
 			$iconifier = charger_fonction('iconifier', 'inc');
-			$out .= $iconifier('id_mot', $id_mot, 'mots_edit','iconifier');
+			$out .= $iconifier('id_mot', $id_mot, 'mots_edit');
 		}
 	 }
 

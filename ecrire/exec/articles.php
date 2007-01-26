@@ -101,7 +101,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 
 	if ($flag_editable AND ($spip_display != 4)) {
 		$iconifier = charger_fonction('iconifier', 'inc');
-		$icone = $iconifier('id_article', $id_article,'articles','iconifier');
+		$icone = $iconifier('id_article', $id_article,'articles');
 	} else $icone = '';
 
 	$instituer_article = charger_fonction('instituer_article', 'inc');

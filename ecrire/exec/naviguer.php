@@ -78,7 +78,7 @@ function exec_naviguer_dist()
 		//
 		if ($flag_editable AND ($spip_display != 4)) {
 			$iconifier = charger_fonction('iconifier', 'inc');
-			echo $iconifier('id_rubrique', $id_rubrique, 'naviguer','iconifier');
+			echo $iconifier('id_rubrique', $id_rubrique, 'naviguer');
 		}
 	}
 

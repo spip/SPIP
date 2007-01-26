@@ -52,7 +52,7 @@ function exec_iconifier_dist()
 
 	$iconifier = charger_fonction('iconifier', 'inc');
 	
-	$ret = $iconifier($type, $id, $script,"iconifier");
+	$ret = $iconifier($type, $id, $script);
 	
 	if(_request("iframe")=="iframe") {
     $ret = "<div class='upload_answer upload_document_added'>$ret</div>";
