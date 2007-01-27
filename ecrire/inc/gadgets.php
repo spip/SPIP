@@ -91,7 +91,6 @@ function gadget_rubriques() {
 	if ($nb_col <= 1) $nb_col = ceil($total_lignes / 10);
 	$max_lignes = ceil($total_lignes / $nb_col);
 	$largeur = ceil(700 / $nb_col); 
-	spip_log("$total_lignes $nb_col $max_lignes $largeur");
 	$count_lignes = 0;
 	$style = " style='z-index: 1; vertical-align: top;'";
 	$ret = '';
@@ -153,11 +152,12 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z, $largeur) {
 	if (!$i) return "\n<div>$nav</div>";
 
 	$zdecal++;
+	$pxdecal = max(15, ceil($largeur/5)) . 'px';
 
 	$ret = "<div class='pos_r' \nonmouseover=\"montrer('b_$id_rubrique');\"\nonmouseout=\"cacher('b_$id_rubrique');\">"
 	  . '<div class="brt">'
 		. $nav
-		. "</div>\n<div class='bandeau_rub' style='top: 14px; left: 15px; z-index: " . 1 . ";' id='b_$id_rubrique'>"
+		. "</div>\n<div class='bandeau_rub' style='top: 14px; left: $pxdecal; z-index: " . 1 . ";' id='b_$id_rubrique'>"
 		. '<table cellspacing="0" cellpadding="0"><tr><td valign="top">';
 	if ($nb_rub = count($arr_rub)) {
 		  $nb_col = min(10,max(1,ceil($nb_rub / 10)));
