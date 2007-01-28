@@ -180,9 +180,8 @@ function formulaire_taille($document) {
 		($document['largeur'] * $document['hauteur'])
 		// ou distants
 		OR $document['distant'] == 'oui'
-		// ou formats dont la taille ne peut etre lue par getimagesize
-		OR $extension=='rm' OR $extension=='mov' 
-		OR $extension=='flv' OR $extension=='mpg'
+		// ou tous les formats qui s'affichent en embed
+		OR $type_inclus == "embed"
 	)) {
 		return "\n<br /><b>"._T('entree_dimensions')."</b><br />\n" .
 		  "<input type='text' name='largeur_document' class='fondl spip_xx-small' value=\"".$document['largeur']."\" size='5' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" />" .
