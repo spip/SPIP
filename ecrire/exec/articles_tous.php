@@ -32,48 +32,50 @@ function exec_articles_tous_dist()
 		AND $GLOBALS['meta']['gerer_trad'] == 'oui');
 
 	list($article,$text_article,$aff_statut) = texte_articles_tous($sel_lang, $flag_trad, $aff_art);
-	if (_request('var_ajaxcharset')&&_request('id_rubrique')) ajax_retour(afficher_contenu_rubrique($article, $enfant, $text_article, _request('id_rubrique'), $flag_trad, 2));
+	if (_request('var_ajaxcharset')&&_request('id_rubrique')) 
+		ajax_retour(afficher_contenu_rubrique($article, $enfant, $text_article, _request('id_rubrique'), $flag_trad, 2));
+	else {
 
- 	pipeline('exec_init',array('args'=>array('exec'=>'articles_tous'),'data'=>''));
-	debut_page(_T('titre_page_articles_tous'), "accueil", "tout-site");
-	$flux = "";
-	$flux.='<script type="text/javascript"><!--
+		pipeline('exec_init',array('args'=>array('exec'=>'articles_tous'),'data'=>''));
+		debut_page(_T('titre_page_articles_tous'), "accueil", "tout-site");
+		$flux = "";
+		$flux.='<script type="text/javascript"><!--
 var img_deplierhaut = "'._DIR_IMG_PACK.'noeud_plus.gif";
 var img_deplierbas = "'._DIR_IMG_PACK.'noeud_moins.gif";
 //--></script>';
-	$flux .= '<script src="'._DIR_JAVASCRIPT .'dragdrop_interface.js" type="text/javascript"></script>';
-	$flux .= '<script src="'._DIR_JAVASCRIPT .'articles_tous_edite.js" type="text/javascript"></script>';
-	$flux .= '<script src="'._DIR_JAVASCRIPT .'pause.js" type="text/javascript"></script>';
-	echo $flux;
+		$flux .= '<script src="'._DIR_JAVASCRIPT .'dragdrop_interface.js" type="text/javascript"></script>';
+		$flux .= '<script src="'._DIR_JAVASCRIPT .'articles_tous_edite.js" type="text/javascript"></script>';
+		$flux .= '<script src="'._DIR_JAVASCRIPT .'pause.js" type="text/javascript"></script>';
+		echo $flux;
 	
-	debut_gauche();
-	echo formulaire_affiche_tous($aff_art, $aff_statut, $sel_lang);
+		debut_gauche();
+		echo formulaire_affiche_tous($aff_art, $aff_statut, $sel_lang);
 
-	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'articles_tous'),'data'=>''));
-	creer_colonne_droite();
-	echo pipeline('affiche_droite',array('args'=>array('exec'=>'articles_tous'),'data'=>''));
-	debut_droite();
+		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'articles_tous'),'data'=>''));
+		creer_colonne_droite();
+		echo pipeline('affiche_droite',array('args'=>array('exec'=>'articles_tous'),'data'=>''));
+		debut_droite();
 
-	if ($enfant AND $browser_layer)
-		echo couche_formulaire_tous($first_couche, $last_couche);
+		if ($enfant AND $browser_layer)
+		  echo couche_formulaire_tous($first_couche, $last_couche);
 
-	$out = "<textarea cols='1' rows='1' id='deplacements' style='display:none;' name='deplacements'></textarea>"
-	. "\n<div id='apply' style='display:none;text-align:$spip_lang_right'><input type='submit' class='fondo' value='"._T('bouton_changer')."' /></div>";
+		$out = "<textarea cols='1' rows='1' id='deplacements' style='display:none;' name='deplacements'></textarea>"
+		  . "\n<div id='apply' style='display:none;text-align:$spip_lang_right'><input type='submit' class='fondo' value='"._T('bouton_changer')."' /></div>";
 
-	
-	echo "\n<div id='cancel' class='verdana2' style='display:none;text-align:$spip_lang_left;float:$spip_lang_left'>",
-	  "<a href='javascript:annuler_deplacement();'>",
-	  _T('bouton_annuler'),
-	  "</a></div>",
-	  redirige_action_auteur("reorganiser","",'articles_tous', '',$out,
-				    " method='post'"),
-	  "<ul id='articles_tous'><li id='rubrique-0' class='treeItem racine verdana2'>",
-	  "<span class='holder icone'>&nbsp;</span>",
-	  _T('info_racine_site'),
-	  "\n<ul class=''>\n",
-	  afficher_contenu_rubrique($article, $enfant, $text_article, 0, $flag_trad, 2),
-	  "</ul></li></ul>\n",
-	  fin_gauche(), fin_page();
+		echo "\n<div id='cancel' class='verdana2' style='display:none;text-align:$spip_lang_left;float:$spip_lang_left'>",
+		  "<a href='javascript:annuler_deplacement();'>",
+		  _T('bouton_annuler'),
+		  "</a></div>",
+		  redirige_action_auteur("reorganiser","",'articles_tous', '',$out,
+					 " method='post'"),
+		  "<ul id='articles_tous'><li id='rubrique-0' class='treeItem racine verdana2'>",
+		  "<span class='holder icone'>&nbsp;</span>",
+		  _T('info_racine_site'),
+		  "\n<ul class=''>\n",
+		  afficher_contenu_rubrique($article, $enfant, $text_article, 0, $flag_trad, 2),
+		  "</ul></li></ul>\n",
+		  fin_gauche(), fin_page();
+	}
 }
 
 // Voir inc_layer pour les 2 globales utilisees

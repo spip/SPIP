@@ -33,15 +33,18 @@ function exec_auteurs_dist()
 
 	$res = auteurs_tranches(afficher_n_auteurs($auteurs), $debut, $lettre, $tri, $statut, $max_par_page, $nombre_auteurs);
 
-	if (_request('var_ajaxcharset')) ajax_retour($res);
+	if (_request('var_ajaxcharset'))
+	  ajax_retour($res);
+	else {
 
-	pipeline('exec_init',array('args'=>array('exec'=>'auteurs'),'data'=>''));
+		pipeline('exec_init',array('args'=>array('exec'=>'auteurs'),'data'=>''));
 
-	bandeau_auteurs($tri, $statut);
+		bandeau_auteurs($tri, $statut);
 
-	echo "<div id='auteurs'>", $res, "</div>";
-	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'auteurs'),'data'=>''));
-	echo fin_gauche(), fin_page();
+		echo "<div id='auteurs'>", $res, "</div>";
+		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'auteurs'),'data'=>''));
+		echo fin_gauche(), fin_page();
+	}
 }
 
 // http://doc.spip.org/@lettres_d_auteurs

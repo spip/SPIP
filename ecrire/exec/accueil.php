@@ -17,7 +17,7 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@encours_accueil
 function encours_accueil()
 {
-	global $connect_toutes_rubriques;
+	global $connect_statut;
 
 	// Les articles a valider
 	//
@@ -37,16 +37,16 @@ function encours_accueil()
 		$res .= afficher_sites(afficher_plus(generer_url_ecrire('sites_tous')).'<b>' . _T('info_site_valider') . '</b>', array("FROM" => 'spip_syndic', 'WHERE' => "statut='prop'", 'ORDER BY'=> "nom_site"));
 	}
 
+	if ($connect_statut == '0minirezo') {
 	//
 	// Les sites a probleme
 	//
-	if ($GLOBALS['meta']['activer_sites'] != 'non' AND $connect_toutes_rubriques) {
+	  if ($GLOBALS['meta']['activer_sites'] != 'non') {
 		include_spip('inc/sites_voir');
 		$res .= afficher_sites(afficher_plus(generer_url_ecrire('sites_tous')). '<b>' . _T('avis_sites_syndiques_probleme') . '</b>', array('FROM' => 'spip_syndic', 'WHERE' => "(syndication='off' OR syndication='sus') AND statut='publie'", 'ORDER BY' => 'nom_site'));
 	}
 
 	// Les articles syndiques en attente de validation
-	if ($connect_toutes_rubriques) {
 		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_syndic_articles WHERE statut='dispo'"));
 		if ($cpt = $cpt['n'])
 			$res .= "\n<br /><small><a href='"
@@ -58,10 +58,9 @@ function encours_accueil()
 			. " "
 			. _T('info_liens_syndiques_2')
 			. "</a></small>";
-	}
 
 	// Les forums en attente de moderation
-	if ($connect_toutes_rubriques) {
+
 		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_forum WHERE statut='prop'"));
 		if ($cpt = $cpt['n']) {
 		$res .= "\n<br /><small> <a href='" . generer_url_ecrire("controle_forum","") . "' style='color: black;'>".$cpt;
@@ -71,7 +70,7 @@ function encours_accueil()
 			$res .= " "._T('info_liens_syndiques_5')." "._T('info_liens_syndiques_6');
 		$res .= " "._T('info_liens_syndiques_7').".</a></small>";
 		}
- }
+	}
 
 	if (!$res) return '';
 
@@ -97,7 +96,6 @@ function colonne_droite_eq4($activer_breves)
 	$res = spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1"));
 	if ($res) {
 		$res = icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","new=oui"), "article-24.gif","creer.gif", false);
-	
 
 		if ($activer_breves != "non") {
 			$res .= icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui"), "breve-24.gif","creer.gif", false);
@@ -132,30 +130,29 @@ function colonne_droite_neq4($id_rubrique, $activer_breves,
 	} else $dans_rub = $dans_parent = '';
 
 	if ($connect_statut == "0minirezo") {
-			$gadget .= "<td>"
+		$gadget .= "<td>"
 			. icone_horizontale(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui"), "rubrique-24.gif", "creer.gif", false)
 			. "</td>";
 		}
 	$n = spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1"));
 	if ($n) {
-			$gadget .= "<td>"
+		$gadget .= "<td>"
 			. icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","new=oui$dans_rub"), "article-24.gif","creer.gif", false)
 			. "</td>";
 			
-			if ($activer_breves != "non") {
+		if ($activer_breves != "non") {
 				$gadget .= "<td>";
 				$gadget .= icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui$dans_rub"), "breve-24.gif","creer.gif", false);
 				$gadget .= "</td>";
 			}
 			
-			if ($activer_sites == 'oui') {
+		if ($activer_sites == 'oui') {
 				if ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0) {
 					$gadget .= "<td>";
 					$gadget .= icone_horizontale(_T('info_sites_referencer'), generer_url_ecrire("sites_edit","new=oui$dans_parent"), "site-24.gif","creer.gif", false);
 					$gadget .= "</td>";
 				}
 			} 
-			
 	}
 	$gadget = "<table><tr>$gadget</tr></table>\n";
 
@@ -323,7 +320,7 @@ function etat_base_accueil()
 	$q = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_breves GROUP BY statut HAVING cnt <>0");
 
 	$cpt = array();
-	$cpt = array();
+	$cpt2 = array();
 	$defaut = $where ? '0/' : '';
 	while($row = spip_fetch_array($q)) {
 	  $cpt[$row['statut']] = $row['cnt'];
@@ -423,7 +420,7 @@ function accueil_evenements()
 // http://doc.spip.org/@exec_accueil_dist
 function exec_accueil_dist()
 {
-	global $id_rubrique, $meta, $connect_statut, $options,  $connect_id_auteur, $spip_display;
+  global $id_rubrique, $meta, $connect_statut, $options,  $connect_id_auteur, $spip_display, $connect_id_rubrique;
 
 	$id_rubrique =  intval($id_rubrique);
  	pipeline('exec_init',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
@@ -462,14 +459,16 @@ function exec_accueil_dist()
 
 	if ($spip_display == 4)
 	  echo colonne_droite_eq4($GLOBALS['meta']["activer_breves"]);
-	else echo colonne_droite_neq4($id_rubrique,
+	else {
+	  echo colonne_droite_neq4($id_rubrique,
 			 $GLOBALS['meta']["activer_breves"],
 			 $GLOBALS['meta']["activer_sites"],
 			 $GLOBALS['meta']['articles_mots']);
-	
-	if ($spip_display != 4) echo encours_accueil();
+	  echo encours_accueil();
+	}
 
-	echo afficher_enfant_rub(0, false, true);
+	if (!$connect_id_rubrique)
+		echo afficher_enfant_rub(0, false, true);
 
  	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'accueil'),'data'=>''));
 
