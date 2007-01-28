@@ -34,7 +34,7 @@ define('CHAMP_ETENDU', '\[([^]\[]*)\(' . NOM_DE_CHAMP . '([^[)]*\)[^]\[]*)\]');
 define('BALISE_INCLURE','<INCLU[DR]E[[:space:]]*(\(([^)]*)\))?');
 
 define('SQL_ARGS', '(\([^)]*\))');
-define('CHAMP_SQL_PLUS_FONC', '`?([A-Za-z_][A-Za-z_0-9]*)' . SQL_ARGS . '?`?');
+define('CHAMP_SQL_PLUS_FONC', '`?([A-Z_][A-Z_0-9]*)' . SQL_ARGS . '?`?');
 
 // http://doc.spip.org/@phraser_arguments_inclure
 function phraser_arguments_inclure($p,$rejet_filtres = false){
@@ -465,8 +465,8 @@ function phraser_criteres($params, &$result) {
 			      $result->hash = true;
 			  if (ereg('^ *([0-9-]+) *(/) *(.+) *$', $param, $m)) {
 			    $crit = phraser_critere_infixe($m[1], $m[3],$v, '/', '', '');
-			  } elseif (ereg('^(' . CHAMP_SQL_PLUS_FONC . 
-					 ')[[:space:]]*(\??)(!?)(<=?|>=?|==?|IN)(.*)$', $param, $m)) {
+			  } elseif (preg_match(',^(' . CHAMP_SQL_PLUS_FONC . 
+					 ')[[:space:]]*(\??)(!?)(<=?|>=?|==?|\b(?:IN|LIKE)\b)(.*)$,is', $param, $m)) {
 			    $a2 = trim($m[7]);
 			    if (ereg("^'.*'$", $a2) OR ereg('^".*"$', $a2))
 			      $a2 = substr($a2,1,-1);
@@ -475,7 +475,7 @@ function phraser_criteres($params, &$result) {
 							   $m[5], $m[4]);
 			  } elseif (preg_match("/^([!]?)\s*(" .
 					       CHAMP_SQL_PLUS_FONC .
-					       ")\s*(\??)(.*)$/ism", $param, $m)) {
+					       ")\s*(\??)(.*)$/is", $param, $m)) {
 		  // contient aussi les comparaisons implicites !
 
 			    array_shift($v);

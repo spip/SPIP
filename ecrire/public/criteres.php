@@ -256,7 +256,8 @@ function critere_logo_dist($idb, &$boucles, $crit) {
 		$boucle->where[]= $c;
 }
 
-
+// c'est la commande SQL "GROUP BY"
+// par exemple <boucle(articles){fusion lang}>
 // http://doc.spip.org/@critere_fusion_dist
 function critere_fusion_dist($idb,&$boucles, $crit) {
 	if (isset($crit->param[0])) {
@@ -592,7 +593,7 @@ function calculer_criteres ($idb, &$boucles) {
 }
 
 // Madeleine de Proust, revision MIT-1958 sqq, revision CERN-1989
-
+// hum, c'est kwoi cette fonxion ?
 // http://doc.spip.org/@kwote
 function kwote($lisp)
 {
@@ -602,6 +603,8 @@ function kwote($lisp)
 		return "_q($lisp)"; 
 }
 
+// Si on a une liste de valeurs dans #ENV{x}, utiliser la double etoile
+// pour faire par exemple {id_article IN #ENV**{liste_articles}}
 // http://doc.spip.org/@critere_IN_dist
 function critere_IN_dist ($idb, &$boucles, $crit)
 {
