@@ -82,15 +82,17 @@ function gen_liste_rubriques() {
 
 // http://doc.spip.org/@gadget_rubriques
 function gadget_rubriques() {
-
+	global $spip_ecran;
+        
+	$largeur_t = ($spip_ecran == "large") ? 900 : 650;
 	gen_liste_rubriques(); 
 	$arr_low = extraire_article(0);
 
 	$total_lignes = $i = sizeof($arr_low);
-	$nb_col = ceil($total_lignes / 30);
+	$nb_col = min(8,ceil($total_lignes / 30));
 	if ($nb_col <= 1) $nb_col = ceil($total_lignes / 10);
 	$max_lignes = ceil($total_lignes / $nb_col);
-	$largeur = max(200, ceil(700 / $nb_col)); 
+	$largeur = min(200, ceil($largeur_t / $nb_col)); 
 	$count_lignes = 0;
 	$style = " style='z-index: 1; vertical-align: top;'";
 	$ret = '';
@@ -153,12 +155,17 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z, $largeur) {
 
 	$zdecal++;
 	$pxdecal = max(15, ceil($largeur/5)) . 'px';
+	$idom = 'b_' . $id_rubrique;
 
-	$ret = "<div class='pos_r' \nonmouseover=\"montrer('b_$id_rubrique');\"\nonmouseout=\"cacher('b_$id_rubrique');\">"
-	  . '<div class="brt">'
-		. $nav
-		. "</div>\n<div class='bandeau_rub' style='top: 14px; left: $pxdecal; z-index: " . 1 . ";' id='b_$id_rubrique'>"
-		. '<table cellspacing="0" cellpadding="0"><tr><td valign="top">';
+	$ret = "<div class='pos_r'\nonmouseover=\"montrer('$idom');\"\nonmouseout=\"cacher('$idom');\">"
+	. '<div class="brt">'
+	. $nav
+	. "</div>\n<div class='bandeau_rub' style='top: 14px; left: "
+	. $pxdecal
+	. "; z-index: 1;' id='"
+	. $idom
+	. "'><table cellspacing='0' cellpadding='0'><tr><td valign='top'>";
+
 	if ($nb_rub = count($arr_rub)) {
 		  $nb_col = min(10,max(1,ceil($nb_rub / 10)));
 		  $ret_ligne = max(4,ceil($nb_rub / $nb_col));
