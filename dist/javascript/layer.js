@@ -111,13 +111,13 @@ function changerhighlight (couche) {
 	couche.className = "highlight";
 }
 
-function aff_selection (arg, idom, url)
+function aff_selection (arg, idom, url, event)
 {
 
 	noeud = findObj_forcer(idom);
 	if (noeud) {
 		noeud.style.display = "none";
-		charger_node_url(url+arg, noeud);
+		charger_node_url(url+arg, noeud, '','',event);
 	}
 	return false;
 }
@@ -134,15 +134,15 @@ function aff_selection_titre(titre, id, idom, nid)
 	t.style.display='none';
 }
 
-function aff_selection_provisoire(id, racine, url, col, sens,informer)
+function aff_selection_provisoire(id, racine, url, col, sens,informer,event)
 {
     charger_id_url(url.href,
 		   racine + '_col_' + (col+1),
 		   function() {
 		     slide_horizontal(racine + 'principal', ((col-1)*150), sens);
 		     aff_selection (id, racine + "_selection", informer);
-		   }
-		   );
+		   },
+		   event);
   // empecher le chargement non Ajax
   return false;
 }
@@ -217,19 +217,17 @@ function verifForm(racine) {
 // Toutefois il y toujours un coup de retard dans la pose d'un cookie:
 // eviter de se loger avec redirection vers un telle page
 
-function AjaxSqueeze(trig, id, callback)
+function AjaxSqueeze(trig, id, callback, event)
 {
-  var target = jQuery('#'+id);
-  
+	var target = jQuery('#'+id);
 	// position du demandeur dans le DOM (le donner direct serait mieux)
 	if (!target.size()) {return true;}
 
-	// animation immediate pour faire patienter (vivement jquery !)
+	// animation immediate pour faire patienter
 	if (typeof ajax_image_searching != 'undefined') {
 		target.prepend(ajax_image_searching);
 	}
-	AjaxSqueezeNode(trig, target, callback);
-	return false;
+	return AjaxSqueezeNode(trig, target, callback, event) != false;
 }
 
 // La fonction qui fait vraiment le travail decrit ci-dessus.
@@ -237,7 +235,7 @@ function AjaxSqueeze(trig, id, callback)
 // et son resultat booleen est inverse ce qui lui permet de retourner 
 // le gestionnaire Ajax comme valeur non fausse
 
-function AjaxSqueezeNode(trig, target, f)
+function AjaxSqueezeNode(trig, target, f, event)
 {
 	var i, callback;
 	
@@ -248,32 +246,44 @@ function AjaxSqueezeNode(trig, target, f)
 	else {
     callback = function(res,status) { f.apply(this,[res,status]); verifForm(this);}
   }
-	
 	if (typeof(trig) == 'string') {
 		i = trig.split('?');
 		trig = i[0] +'?var_ajaxcharset=utf-8&' + i[1];
-    return jQuery.ajax({"url":trig,"complete":function(res,status){
-			if(res.aborted) return;
-			if(status=='error') {
-				return jQuery(target).html('Erreur HTTP');
-			}
-			// Inject the HTML into all the matched elements
-			jQuery(target).html(res.responseText)
-		  // Execute all the scripts inside of the newly-injected HTML
-		  .evalScripts()
-		  // Execute callback
-		  .each( callback, [res.responseText, status] );
-			//callback(res,status);
-		}});
-  }
- 
- jQuery(trig).ajaxSubmit({"target":target,
- "after":function(res,status){
+		// laisser le choix de la touche enfoncee au moment du clic
+		// car beaucoup de systemes en prenne une a leur usage
+		if (event.altKey || event.shiftKey || event.metaKey) {
+		   window.open(trig+'&transformer_xml=valider_xml');
+		}
+		res = jQuery.ajax({"url":trig,
+	       "complete":function(r,s){AjaxRet(r,s,target, callback)}});
+		/// ? si on met le Alert ci-dessous, tout est ok pour FF
+		  /// sinon, il ouvre deux fenetres au lieu d'une
+		//				alert(res);
+		return res;
+
+	}
+
+	jQuery(trig).ajaxSubmit({"target":target,
+				    "after":function(res,status){
 		if(status=='error') return this.html('Erreur HTTP');
 		callback(res,status);
 	},
-	"before":add_var_ajaxcharset});
-  return false; 
+				    "before":add_var_ajaxcharset});
+	return false; 
+}
+
+function AjaxRet(res,status, target, callback)
+{
+	if (res.aborted) return;
+	if (status=='error') return jQuery(target).html('HTTP Error');
+
+	// Inject the HTML into all the matched elements
+	jQuery(target).html(res.responseText)
+	  // Execute all the scripts inside of the newly-injected HTML
+	  .evalScripts()
+	  // Execute callback
+	  .each( callback, [res.responseText, status] );
+	//callback(res,status);
 }
 
 function add_var_ajaxcharset(vars) {
@@ -287,7 +297,7 @@ function add_var_ajaxcharset(vars) {
 // (utile surtout a la frappe interactive au clavier)
 // De plus, la fonction optionnelle n'a pas besoin de greffer la reponse.
 
-function charger_id_url(myUrl, myField, jjscript) 
+function charger_id_url(myUrl, myField, jjscript, event) 
 {
 	var Field = findObj_forcer(myField);
 	if (!Field) return true;
@@ -296,14 +306,12 @@ function charger_id_url(myUrl, myField, jjscript)
 		jQuery(Field).empty();
 		retour_id_url(Field, jjscript);
 		return true; // url vide, c'est un self complet
-	} else {
-		return charger_node_url(myUrl, Field, jjscript, findObj_forcer('img_' + myField));
-	}
+	} else  return charger_node_url(myUrl, Field, jjscript, findObj_forcer('img_' + myField), event);
 }
 
 // La suite
 
-function charger_node_url(myUrl, Field, jjscript, img) 
+function charger_node_url(myUrl, Field, jjscript, img, event) 
 {
 	// disponible en cache ?
 	if (url_chargee[myUrl]) {
@@ -321,7 +329,8 @@ function charger_node_url(myUrl, Field, jjscript, img)
 					if (img) img.style.visibility = "hidden";
 					url_chargee[myUrl] = r;
 					retour_id_url(Field, jjscript);
-								   });
+						    },
+				event);
 		return false;
 	}
 }
@@ -332,7 +341,7 @@ function retour_id_url(Field, jjscript)
 	if (jjscript) jjscript();
 }
 
-function charger_node_url_si_vide(url, noeud, gifanime, jjscript) {
+function charger_node_url_si_vide(url, noeud, gifanime, jjscript,event) {
 
 	if  (noeud.style.display !='none') {
 		noeud.style.display='none';}
@@ -340,17 +349,18 @@ function charger_node_url_si_vide(url, noeud, gifanime, jjscript) {
 		noeud.style.visibility = "visible";
 		noeud.style.display = "block";
 	} else {
-		charger_node_url(url, noeud,'',gifanime);
+		charger_node_url(url, noeud,'',gifanime,event);
 	      }
 	}
+  return false;
 }
 
-function charger_id_url_si_vide (myUrl, myField, jjscript) {
+function charger_id_url_si_vide (myUrl, myField, jjscript, event) {
 	var Field = findObj_forcer(myField); // selects the given element
 	if (!Field) return;
 
 	if (Field.innerHTML == "") {
-		charger_id_url(myUrl, myField, jjscript) 
+		charger_id_url(myUrl, myField, jjscript, event) 
 	}
 	else {
 		Field.style.visibility = "visible";

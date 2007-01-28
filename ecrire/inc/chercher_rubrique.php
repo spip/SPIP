@@ -223,9 +223,9 @@ function construire_selecteur($url, $js, $idom, $name, $init='', $id=0)
 	$icone = ($idom == 'selection_auteur') ? 'message.gif' : 'loupe.png';
 	return 	"<table width='100%'><tr><td style='width: 45px'><a onclick=\""
 	.  $js
-	. "charger_node_url_si_vide('"
+	. "return charger_node_url_si_vide('"
 	. $url
-	. "', this.parentNode.parentNode.parentNode.parentNode.nextSibling, this.nextSibling)\"><img src='"
+	. "', this.parentNode.parentNode.parentNode.parentNode.nextSibling, this.nextSibling,'',event)\"><img src='"
 	. _DIR_IMG_PACK
 	. $icone
 	. "' style='vertical-align: middle;' alt=' ' /></a><img src='"

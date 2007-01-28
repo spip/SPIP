@@ -97,7 +97,7 @@ function proposer_item ($ids, $titles, $rac, $type)
 	$ret = '';
 	$info = generer_url_ecrire('informer', "type=rubrique&rac=$rac&id=");
 
-	$onClick = "aff_selection(this.firstChild.title,'$rac". "_selection','$info')";
+	$onClick = "aff_selection(this.firstChild.title,'$rac". "_selection','$info', event)";
 
 	$ondbClick = "aff_selection_titre(this.firstChild.firstChild.nodeValue,this.firstChild.title,'selection_rubrique', 'id_parent');";
 
