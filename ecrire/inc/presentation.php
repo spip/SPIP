@@ -2169,10 +2169,11 @@ function bouton_spip_rss($op, $args, $fmt='rss') {
 
 // http://doc.spip.org/@http_calendrier_rv
 function http_calendrier_rv($messages, $type) {
-	global $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
+	global $spip_lang_rtl, $spip_lang_left, $spip_lang_right, $connect_id_auteur, $connect_quand;
 
-	$total = $date_rv = '';
 	if (!$messages) return $total;
+	$total = $date_rv = '';
+
 	foreach ($messages as $row) {
 		if (ereg("^=([^[:space:]]+)$",$row['texte'],$match))
 			$url = quote_amp($match[1]);
@@ -2202,6 +2203,12 @@ function http_calendrier_rv($messages, $type) {
 		  . heures($date).":".minutes($date)."<br />...</div>" ));
 		}
 
+		$color =  (strtotime($date) <= $connect_quand) ? '' : "color: red;";
+
+		$titre = "\n<div style='font-weight: bold;$color'>"
+		. typo($row['titre'])
+		. "</div>";
+
 		$total .= "<tr><td style='width: 24px' valign='middle'>" .
 		  http_href($url,
 				     ($rv ?
@@ -2212,9 +2219,7 @@ function http_calendrier_rv($messages, $type) {
 		"</td>" .
 		"<td valign='middle'>" .
 		$rv .
-		"\n<div><b>" .
-		  http_href($url, typo($row['titre']), '', '', 'calendrier-verdana10') .
-		"</b></div>" .
+		http_href($url, $titre, '', '', 'calendrier-verdana10') .
 		"</td>" .
 		"</tr>\n";
 	}
