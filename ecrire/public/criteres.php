@@ -338,7 +338,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 		  $boucle->select[] = $texte . " AS $as";
 		  $order = "'$as'";
 	      } else {
-	      if (!ereg("^" . CHAMP_SQL_PLUS_FONC . '$', $par, $match)) 
+	      if (!preg_match(",^" . CHAMP_SQL_PLUS_FONC . '$,is', $par, $match)) 
 		erreur_squelette(_T('zbug_info_erreur_squelette'), "{par $par} BOUCLE$idb");
 	      else {
 		if ($match[2]) { $par = substr($match[2],1,-1); $fct = $match[1]; }
