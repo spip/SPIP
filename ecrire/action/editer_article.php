@@ -247,9 +247,13 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 	suivre_invalideur("id='id_article/$id_article'");
 
 	// Recalculer les rubriques (statuts et dates) si l'on deplace
-	// un article publie, ou si on le depublie
+	// un article publie, ou si on le publie/depublie
 	if (($statut == 'publie' AND isset($champs['id_rubrique']))
-	OR ($statut_ancien=='publie' AND $champs['statut'] AND $calcul_rub))
+	OR (isset($champs['statut'])
+		AND ($statut_ancien=='publie' OR $champs['statut']=='publie')
+		AND $calcul_rub
+		)
+	)
 		calculer_rubriques();
 
 	// Pipeline

@@ -197,9 +197,10 @@ function revisions_breves ($id_breve, $c=false) {
 	}
 
 	// Recalculer les rubriques (statuts et dates) si l'on deplace
-	// une breve publiee
-	if ($statut == 'publie'
-	AND isset($champ['id_rubrique'])) {
+	// une breve publiee, ou si l'on publie/depublie une breve
+	if (isset($champs['statut'])
+	OR ($statut == 'publie' AND isset($champ['id_rubrique']))
+	) {
 		calculer_rubriques();
 	}
 
