@@ -20,14 +20,12 @@
 	(#REM) image complete ?
 
 ][(#GET{image})
-<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});[ width:(#LARGEUR)px;]']>
-<dt>[<a href="(#ENV{lien})"[ class="(#ENV{lien_class})"]>
-]<img src='#URL_DOCUMENT'[ width="(#LARGEUR)"][ height="(#HAUTEUR)"] alt="[(#TITRE|texte_backend)]"[ title="(#TITRE|texte_backend)"] />[(#ENV{lien}|?{</a>})]</dt></dl>
+<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});[ width:(#LARGEUR)px;]']>
+[<a href="(#ENV{lien})"[ class="(#ENV{lien_class})"]>]<img src='#URL_DOCUMENT'[ width="(#LARGEUR)"][ height="(#HAUTEUR)"] alt="[(#TITRE|texte_backend)]"[ title="(#TITRE|texte_backend)"] />[(#ENV{lien}|?{</a>})]</span>
 ][
 
 	(#REM) sinon logo document + lien + alt + title etc
 
 ][(#GET{image}|?{'',' '})
-<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});[ width:(#LOGO_DOCUMENT||largeur)px;]']>
-<dt><a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]"[ (#ENV{lien}|?{'',type="#MIME_TYPE"})][ title="(#TITRE|texte_backend)"]>[(#LOGO_DOCUMENT||inserer_attribut{alt,#TITRE|strlen|?{#TITRE {#TYPE_DOCUMENT},#TYPE_DOCUMENT}})]</a></dt></dl>
+<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});[ width:(#LOGO_DOCUMENT||largeur)px;]']><a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]"[ (#ENV{lien}|?{'',type="#MIME_TYPE"})][ title="(#TITRE|texte_backend)"]>[(#LOGO_DOCUMENT||inserer_attribut{alt,#TITRE|strlen|?{#TITRE {#TYPE_DOCUMENT},#TYPE_DOCUMENT}})]</a></span>
 ]</BOUCLE_document>
