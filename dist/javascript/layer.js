@@ -227,7 +227,7 @@ function AjaxSqueeze(trig, id, callback, event)
 	if (typeof ajax_image_searching != 'undefined') {
 		target.prepend(ajax_image_searching);
 	}
-	return AjaxSqueezeNode(trig, target, callback, event) != false;
+	return !AjaxSqueezeNode(trig, target, callback, event);
 }
 
 // La fonction qui fait vraiment le travail decrit ci-dessus.
@@ -246,12 +246,15 @@ function AjaxSqueezeNode(trig, target, f, event)
 	else {
     callback = function(res,status) { f.apply(this,[res,status]); verifForm(this);}
   }
+
+	valid = (typeof event != 'object') ? false : ((event.altKey || event.shiftKey || event.metaKey) == true);
+
 	if (typeof(trig) == 'string') {
 		i = trig.split('?');
 		trig = i[0] +'?var_ajaxcharset=utf-8&' + i[1];
 		// laisser le choix de la touche enfoncee au moment du clic
 		// car beaucoup de systemes en prenne une a leur usage
-		if (event.altKey || event.shiftKey || event.metaKey) {
+		if  (valid) {
 		   window.open(trig+'&transformer_xml=valider_xml');
 		}
 		res = jQuery.ajax({"url":trig,
@@ -260,7 +263,7 @@ function AjaxSqueezeNode(trig, target, f, event)
 		  /// sinon, il ouvre deux fenetres au lieu d'une
 		//				alert(res);
 		return res;
-
+		
 	}
 
 	jQuery(trig).ajaxSubmit({"target":target,
@@ -268,8 +271,13 @@ function AjaxSqueezeNode(trig, target, f, event)
 		if(status=='error') return this.html('Erreur HTTP');
 		callback(res,status);
 	},
-				    "before":add_var_ajaxcharset});
-	return false; 
+			"before":function (vars){
+			 vars.push({"name":"var_ajaxcharset","value":"utf-8"});
+			 if (valid)
+				vars.push({"name":"transformer_xml","value":"valider_xml"});
+			 return true;
+				  }});
+	return true; 
 }
 
 function AjaxRet(res,status, target, callback)
@@ -286,10 +294,6 @@ function AjaxRet(res,status, target, callback)
 	//callback(res,status);
 }
 
-function add_var_ajaxcharset(vars) {
-    vars.push({"name":"var_ajaxcharset","value":"utf-8"});
-    return true;  
-};
 
 // Comme AjaxSqueeze, 
 // mais avec un cache sur le noeud et un cache sur la reponse
