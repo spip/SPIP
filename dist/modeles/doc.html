@@ -11,7 +11,9 @@
 	le document lui-meme, sans lien de telechargement
 ]
 [(#MODE|=={vignette}|?{' '})
-	#SET{photo,#EMBED_DOCUMENT}
+	[(#SET{photo,
+		[(#EMBED_DOCUMENT|extraire_balise{img})]
+	})]
 	#SET{url,#ENV{lien}}
 ]
 [(#MODE|=={vignette}|?{'',' '})
