@@ -256,20 +256,20 @@ function vignettes_config()
 			// detection de taille maxi d'image manipulable avec GDx pour faire les image_reduire notamment
 			if ($GLOBALS['meta']['image_process']=='gd1' OR $GLOBALS['meta']['image_process']=='gd2') {
 				lire_metas(); // on force une mise a jour des meta avant le test
-				echo "<div id='teste_memory_size_gd' style='float:right;width:216px;background:url("._DIR_IMG_PACK . "jauge-fond.gif) repeat;'>";
-				$max_size = isset($GLOBALS['meta']['max_taille_vignettes'])?$GLOBALS['meta']['max_taille_vignettes']:(300*300);
+				echo "<div id='teste_memory_size_gd' style='float:right;width:192px;background:url("._DIR_IMG_PACK . "jauge-fond.gif) repeat;'>";
+				$max_size = isset($GLOBALS['meta']['max_taille_vignettes'])?$GLOBALS['meta']['max_taille_vignettes']:(500*500);
 				$max_size_echec = isset($GLOBALS['meta']['max_taille_vignettes_echec'])?$GLOBALS['meta']['max_taille_vignettes_echec']:0;
 				$max_size_test = isset($GLOBALS['meta']['max_taille_vignettes_test'])?$GLOBALS['meta']['max_taille_vignettes_test']:0;
 				if ($max_size_test<$max_size_echec OR  ($max_size_test AND !$max_size_echec)){
 					ecrire_meta('max_taille_vignettes_echec',$max_size_echec = $max_size_test,'non');
 					ecrire_metas();
 				}
-				$maxtest = 1730; // 3MPixels
-				if ($max_size >= $maxtest*$maxtest) $maxtest = 2450; // 6MPixels
+				$maxtest = 1740; // 3MPixels
+				if ($max_size >= ($maxtest-20)*($maxtest-20)) $maxtest = 2380; // 6MPixels
 				for ($j = 80;$j>=20;$j = $j/2){
 					$l = round($j/10);
 					$lok = 0; $lbad =0;
-					for ($i = 300;$i*$i<=$max_size && $i<=$maxtest;$i+=$j) $lok += $l;
+					for ($i = 480;$i*$i<=$max_size && $i<=$maxtest;$i+=$j) $lok += $l;
 					if ($lok) echo "<img src='"._DIR_IMG_PACK . 'jauge-vert.gif'."' width='$lok' height='8' alt='' />";
 					for (;(!$max_size_echec OR $i*$i<$max_size_echec) && $i<=$maxtest;$i+=$j){
 						$url = generer_url_action("tester_taille", "arg=$i&time=".time());
