@@ -58,7 +58,12 @@ function spip_query_db($query) {
 
 	$query = traite_query($query);
 
-	$start = ($GLOBALS['mysql_profile'] AND (($GLOBALS['connect_statut'] == '0minirezo') OR ($GLOBALS['auteur_session']['statut'] == '0minirezo'))) ? microtime() : 0;
+	$start = ($_GET['var_profile']=='oui'
+		AND (
+			($GLOBALS['connect_statut'] == '0minirezo')
+			OR ($GLOBALS['auteur_session']['statut'] == '0minirezo')
+			)
+		) ? microtime() : 0;
 
 	return spip_mysql_trace($query, 
 				$start,
