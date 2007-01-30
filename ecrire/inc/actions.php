@@ -102,6 +102,7 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 }
 
 
+// http://doc.spip.org/@ajax_action_post
 function ajax_action_post($action, $arg, $retour, $gra, $corps, $clic, $atts, $args_ajax='')
 {
 	if (strpos($args,"#")===FALSE)
