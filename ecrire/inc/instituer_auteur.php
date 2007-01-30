@@ -100,14 +100,8 @@ function inc_instituer_auteur_dist($id_auteur, $statut, $url_self)
 		$res = "<b>"._T('info_statut_auteur')." </b> "
 		. choix_statut_auteur($statut, "$ancre-aff")
 		. "<div id='$ancre-aff'$vis>"
-		. $res
-		. "</div><div align='"
-		.  $spip_lang_right
-		. "'><input type='submit' class='fondo' value=\""
-		. _T('bouton_valider')
-		. "\" /></div>";
-		
-		$res = ajax_action_auteur('instituer_auteur', $id_auteur, $url_self, (!$id_auteur ? "" : "id_auteur=$id_auteur"), $res);
+		.  ajax_action_post('instituer_auteur', $id_auteur, $url_self, (!$id_auteur ? "" : "id_auteur=$id_auteur"), $res, _T('bouton_valider'), " style='float: $spip_lang_right' class='fondo'")		  
+		. "</div>";
 	}
 
 	return (_request('var_ajaxcharset'))

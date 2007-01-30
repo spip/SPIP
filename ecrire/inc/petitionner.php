@@ -93,12 +93,12 @@ function inc_petitionner_dist($id_article, $script, $args)
 		$res .="<textarea name='texte_petition' class='forml' rows='4' cols='10'>";
 		$res .=entites_html($texte_petition);
 		$res .="</textarea>\n";
+		$class = '';
+	} else $class =" visible_au_chargement";
 
-		$res .="<span align='$spip_lang_right'>";
-	} else $res .="<span class='visible_au_chargement' id='valider_petition'>";
-	$res .="<input type='submit' class='fondo spip_xx-small' value='"._T('bouton_changer')."' />";
-	$res .="</span>";
-	$res = ajax_action_auteur('petitionner', $id_article, $script, $args, $res);
+	$atts .= " class='fondo spip_xx-small$class' style='float: $spip_lang_right;' id='valider_petition'";
+
+	$res = ajax_action_post('petitionner', $id_article, $script, $args, $res,_T('bouton_changer'), $atts);
 
 	return ajax_action_greffe("petitionner-$id_article", $res);
 }

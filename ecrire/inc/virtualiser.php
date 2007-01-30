@@ -21,18 +21,17 @@ function inc_virtualiser_dist($id_article, $flag, $virtuel, $script, $args)
 	if (!($options == "avancees" && $connect_statut=='0minirezo' && $flag))
 	  return '';
 
-	$http = ($virtuel ? "" : "http://");
-	$t = _T('texte_reference_mais_redirige');
 	$res = "<input type='text' name='virtuel' class='formo spip_xx-small' value='"
-	. $http
+	. ($virtuel ? "" : "http://")
 	. $virtuel
 	. "' size='40' /><br />\n"
-	. "<span class='verdana1 spip_small'>(<b>"._T('texte_article_virtuel') . "&nbsp;:</b>$t)</span>"
-	. "\n<div align='$spip_lang_right'><input type='submit' class='fondo spip_xx-small' value='"
-	. _T('bouton_changer')
-	. "' /></div>";
+	. "<span class='verdana1 spip_x-small'>(<b>"
+	. _T('texte_article_virtuel')
+	. "&nbsp;:</b>"
+	.  _T('texte_reference_mais_redirige')
+	. ")</span><br />";
 
-	$res = ajax_action_auteur('virtualiser', $id_article, $script, $args, $res);
+	$res = ajax_action_post('virtualiser', $id_article, $script, $args, $res, _T('bouton_changer'), " class='fondo spip_xx-small' style='float: $spip_lang_right'");
 	return ajax_action_greffe("virtualiser-$id_article", $res);
 }
 ?>

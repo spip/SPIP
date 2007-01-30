@@ -55,28 +55,29 @@ onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
 		.  "</b>"
 		. aide('artdate');
 
-		$masque = "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>"
-		. afficher_jour($jour, "name='jour' $js", true)
+		$masque = 
+		  afficher_jour($jour, "name='jour' $js", true)
 		. afficher_mois($mois, "name='mois' $js", true)
 		. afficher_annee($annee, "name='annee' $js")
 		. (($type != 'article')
 		   ? ''
 		   : (' - '
 			. afficher_heure($heure, "name='heure' $js")
-			. afficher_minute($minute, "name='minute' $js")))
-		. "<span class='visible_au_chargement' id='valider_date'>"
-		. " &nbsp;\n<input type='submit' class='fondo' value='"
-		. _T('bouton_changer')."' />"
-		.  "</span>"
+		      . afficher_minute($minute, "name='minute' $js")))
+		  . "&nbsp;\n";
+
+		$res = "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>"
+		.  ajax_action_post("dater", 
+					"$id/$type",
+					$script,
+					"id_$type=$id",
+					$masque,
+					_T('bouton_changer'),
+				       " class='fondo visible_au_chargement' id='valider_date'",
+					"&id=$id&type=$type")
 		.  "</div>";
 
-		$bloc = block_parfois_visible('datepub', $invite, $masque, 'text-align: left');
-		$res = ajax_action_auteur("dater", 
-			"$id/$type",
-			$script,
-			"id_$type=$id",
-			$bloc,
-			"&id=$id&type=$type");
+		$res = block_parfois_visible('datepub', $invite, $res, 'text-align: left');
 
 	} else {
 		$res = "\n<div><b> <span class='verdana1'>"
@@ -107,9 +108,7 @@ onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
 		.  "</b>";
 
 		$masque = 
- "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>" .
- '<table cellpadding="0" cellspacing="0" border="0" width="100%">' .
- "<tr><td align='$spip_lang_left'>" .
+ "<div style='float: $spip_lang_left; width: 80%;'>" .
  '<input type="radio" name="avec_redac" value="non" id="avec_redac_on"' .
  ($possedeDateRedac ? '' : ' checked="checked"') .
  " onclick=$js" .
@@ -124,26 +123,24 @@ onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
  afficher_jour($jour_redac, "name='jour_redac' class='fondl' onchange=$js", true) .
  afficher_mois($mois_redac, "name='mois_redac' class='fondl' onchange=$js", true) .
  "<input type='text' name='annee_redac' class='fondl' value='".$annee_redac."' size='5' maxlength='4' onclick=$js />" .
- '<div align="center">' .
+ '<div style="text-align: center; width: 80%;">' .
  afficher_heure($heure_redac, "name='heure_redac' class='fondl' onchange=$js", true) .
  afficher_minute($minute_redac, "name='minute_redac' class='fondl' onchange=$js", true) .
- "</div>\n" .
- "</td><td align='$spip_lang_right'>" .
- "<span class='visible_au_chargement' id='valider_date_redac'>" .
- '<input type="submit" class="fondo" value="'.
- _T('bouton_changer').'" />' .
- "</span>" .
- '</td></tr>' .
- '</table>' .
- '</div>';
+ "</div></div>";
 
-		$bloc = block_parfois_visible('dateredac', $invite, $masque, 'text-align: left');
-		$res .= ajax_action_auteur("dater", 
-			"$id/$type",
-			$script,
-			"id_$type=$id",
-			$bloc,
-			"&id=$id&type=$type");
+
+		$masque =  "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>" .
+		  ajax_action_post("dater", 
+				   "$id/$type",
+				   $script,
+				   "id_$type=$id",
+				   $masque,
+				   _T('bouton_changer'),
+				   " style='float: $spip_lang_right; margin-top: 20px;' class='fondo visible_au_chargement' id='valider_date_redac'",
+				   "&id=$id&type=$type")
+		. '</div>';
+
+		$res .= block_parfois_visible('dateredac', $invite, $masque, 'text-align: left');
 	}
   } else {
 
