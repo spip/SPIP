@@ -249,12 +249,51 @@ function vignettes_config()
 		else $style = "display: none;";
 	
 		echo "<div id='config-preview' class='verdana2' style='$style margin-$spip_lang_left: 40px;'>"._T('info_taille_maximale_vignette');
-		echo "<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='taille_preview' value='$taille_preview' class='fondl' size='5' />";
-		echo " "._T('info_pixels').'<br /><br /></div>';
-			
+		echo "<br /><input type='text' name='taille_preview' value='$taille_preview' class='fondl' size='5' />";
+		echo " "._T('info_pixels').'<br /><br />';
+		
+		if ($creer_preview == "oui"){
+			// detection de taille maxi d'image manipulable avec GDx pour faire les image_reduire notamment
+			if ($GLOBALS['meta']['image_process']=='gd1' OR $GLOBALS['meta']['image_process']=='gd2') {
+				lire_metas(); // on force une mise a jour des meta avant le test
+				echo "<div id='teste_memory_size_gd' style='float:right;width:216px;background:url("._DIR_IMG_PACK . "jauge-fond.gif) repeat;'>";
+				$max_size = isset($GLOBALS['meta']['max_taille_vignettes'])?$GLOBALS['meta']['max_taille_vignettes']:(300*300);
+				$max_size_echec = isset($GLOBALS['meta']['max_taille_vignettes_echec'])?$GLOBALS['meta']['max_taille_vignettes_echec']:0;
+				$max_size_test = isset($GLOBALS['meta']['max_taille_vignettes_test'])?$GLOBALS['meta']['max_taille_vignettes_test']:0;
+				if ($max_size_test<$max_size_echec OR  ($max_size_test AND !$max_size_echec)){
+					ecrire_meta('max_taille_vignettes_echec',$max_size_echec = $max_size_test,'non');
+					ecrire_metas();
+				}
+				$maxtest = 1730; // 3MPixels
+				if ($max_size >= $maxtest*$maxtest) $maxtest = 2450; // 6MPixels
+				for ($j = 80;$j>=20;$j = $j/2){
+					$l = round($j/10);
+					$lok = 0; $lbad =0;
+					for ($i = 300;$i*$i<=$max_size && $i<=$maxtest;$i+=$j) $lok += $l;
+					if ($lok) echo "<img src='"._DIR_IMG_PACK . 'jauge-vert.gif'."' width='$lok' height='8' alt='' />";
+					for (;(!$max_size_echec OR $i*$i<$max_size_echec) && $i<=$maxtest;$i+=$j){
+						$url = generer_url_action("tester_taille", "arg=$i&time=".time());
+						echo "<img src='$url' width='$l' height='8' alt='' />";
+					}
+					for ($i;$i<=$maxtest;$i+=$j) $lbad += $l;
+					if ($lbad) echo "<img src='"._DIR_IMG_PACK . 'jauge-rouge.gif'."' width='$lok' height='8' alt='' />";
+					
+					echo '<br/>';
+				}
+				echo "</div><br style='clear:both;'>";
+			}
+		}
+		else {
+			effacer_meta('max_taille_vignettes');
+			effacer_meta('max_taille_vignettes_echec');
+			effacer_meta('max_taille_vignettes_test');
+			ecrire_metas();
+		}
+		echo "</div>";
+					
 		$block= "'none', 'block'";
 		echo bouton_radio("creer_preview", "non", _T('item_choix_non_generation_miniature'), $creer_preview != "oui", "changeVisible(this.checked, 'config-preview', $block);");
-	
+		
 		echo "<div style='text-align:$spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>";
 		
 		fin_cadre_trait_couleur();
