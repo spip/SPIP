@@ -133,7 +133,7 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 			} else $lien = generer_url_action('cookie');
 		}
 	}
-
+	// attention, en Ajax ce select doit etre suivi par le submit
 	$change = ($lien === 'ajax')
 	? "\nonchange=\"this.nextSibling.style.visibility='visible';\""
 	: ("\nonchange=\"document.location.href='"
@@ -151,13 +151,11 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	  . $change
 	  . ">\n"
 	  . $ret
-	  // attention, en Ajax le input doit etre le frere direct du select
-	  . "</select>"
-	  . (($lien === 'ajax')
-	     ? "<input type='submit' class='visible_au_chargement fondo' value='". _T('bouton_changer')."' />"
-	     : "<noscript><div><input type='submit' class='fondo' value='". _T('bouton_changer')."' /></div></noscript>");
-
+	  . "</select>";
 	if ($lien === 'ajax') return $ret;
+
+	$ret .= "<noscript><div><input type='submit' class='fondo' value='". _T('bouton_changer')."' /></div></noscript>";
+
 	return "\n<form action='$lien' method='post' style='margin:0px; padding:0px;'>\n<div>"
 	  . (!$cible ? '' : "<input type='hidden' name='url' value='$cible' />")
 	  . $ret
