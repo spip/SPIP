@@ -93,11 +93,11 @@ function gadget_rubriques() {
 
 	if ($i > 0) {
 		$nb_col = min(8,ceil($total_lignes / 30));
-		$nb_col =  ceil($total_lignes / 10);
+		if ($nb_col <= 1) $nb_col =  ceil($total_lignes / 10);
 		$max_lignes = ceil($total_lignes / $nb_col);
 		$largeur = min(200, ceil($largeur_t / $nb_col)); 
 		$count_lignes = 0;
-		$style = " style='z-index: 1; vertical-align: top;'";
+		$style = " style='z-index: 0; vertical-align: top;'";
 
 		foreach( $arr_low as $id_rubrique => $titre_rubrique) {
 			if ($count_lignes == $max_lignes) {
@@ -107,7 +107,6 @@ function gadget_rubriques() {
 			$count_lignes ++;
 			if (autoriser('voir','rubrique',$id_rubrique)){
 			  $ret .= bandeau_rubrique($id_rubrique, $titre_rubrique, 1, $largeur);
-				$i = $i - 1;
 			}
 		}
 
@@ -148,7 +147,6 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal, $largeur) {
 	. "</a>\n";
 
 	if ($zdecal >= $zmax) return "\n<div>$nav</div>";
-	$zdecal++;
 
 	$arr_rub = extraire_article($id_rubrique);
 	$i = sizeof($arr_rub);
@@ -157,13 +155,15 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal, $largeur) {
 	$pxdecal = max(15, ceil($largeur/5)) . 'px';
 	$idom = 'b_' . $id_rubrique;
 
-	$ret = "<div class='pos_r' \nonmouseover=\"montrer('$idom');\"\nonmouseout=\"cacher('$idom');\">"
+	$ret = "<div class='pos_r'
+onmouseover=\"montrer('$idom');\"
+onmouseout=\"cacher('$idom'); \">"
 	. '<div class="brt">'
 	. $nav
 	. "</div>\n<div class='bandeau_rub' style='top: 14px; left: "
 	. $pxdecal
 	. "; z-index: "
-	  . $zdecal
+	. $zdecal
 	. ";' id='"
 	. $idom
 	. "'><table cellspacing='0' cellpadding='0'><tr><td valign='top'>";
@@ -183,9 +183,8 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal, $largeur) {
 
 			}
 			if (autoriser('voir','rubrique',$id_rub)){
-				$titre_rub = supprimer_numero(typo($titre_rub));
-				$ret .= bandeau_rubrique($id_rub, $titre_rub, $zdecal, $largeur);
-				$i = $i - 1;
+				$titre = supprimer_numero(typo($titre_rub));
+				$ret .= bandeau_rubrique($id_rub, $titre, $zdecal+1, $largeur);
 			}
 		}
 	$ret .= "</td></tr></table>\n";
