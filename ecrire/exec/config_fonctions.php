@@ -295,7 +295,7 @@ function vignettes_config()
 					
 					echo "</div>";
 				}
-				echo "</div><br style='clear:both;'>";
+				echo "</div><br style='clear:both;' />";
 			}
 		}
 		else {
