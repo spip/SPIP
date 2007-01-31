@@ -24,6 +24,8 @@ function action_tester_taille_dist() {
 	$max_size_echec = isset($GLOBALS['meta']['max_taille_vignettes_echec'])?$GLOBALS['meta']['max_taille_vignettes_echec']:0;
 	$max_size_test = isset($GLOBALS['meta']['max_taille_vignettes_test'])?$GLOBALS['meta']['max_taille_vignettes_test']:0;
 	$taille = intval($arg);
+	$file = _DIR_IMG_PACK . 'jauge-vert.gif';
+	$file_size = 94;
 	
 	if (($s = $taille*$taille)>$max_size){
 		if (!$max_size_echec OR $s < $max_size_echec) {
@@ -52,9 +54,17 @@ function action_tester_taille_dist() {
 			if (!$max_size_echec OR $s < $max_size_echec)
 				ecrire_meta('max_taille_vignettes_echec',$taille*$taille,'non');
 			# image echec
-			redirige_par_entete(_DIR_IMG_PACK . 'jauge-rouge.gif');
+			$file = _DIR_IMG_PACK . 'jauge-rouge.gif';
+			$file_size = 84;
 		}
 	}
-	redirige_par_entete(_DIR_IMG_PACK . 'jauge-vert.gif');
+	
+	header('Content-Type: image/gif');
+	header("Content-Length: $file_size");
+	header('Cache-Control: max-age=20');
+	header('Pragma: public');
+	readfile($file);
+	exit;
 }
+
 ?>

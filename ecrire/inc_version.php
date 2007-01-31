@@ -375,7 +375,7 @@ OR _request('action') == 'test_dirs')) {
 //
 
 // si un buffer est deja ouvert, stop
-if (_DIR_RESTREINT AND $flag_ob AND strlen(ob_get_contents())==0 AND !headers_sent()) {
+if (_DIR_RESTREINT AND _request('action')===NULL AND $flag_ob AND strlen(ob_get_contents())==0 AND !headers_sent()) {
 	@header("Vary: Cookie, Accept-Encoding");
 
 	if (
