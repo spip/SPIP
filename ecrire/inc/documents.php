@@ -130,7 +130,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 		if (_DIR_RESTREINT)
 			$script = parametre_url(self(),"show_docs",'');
 	}
-	
+	$id_document_actif = _request('show_docs');
 
 	/// Ajouter nouvelle image
 	$ret .= "<a name='images'></a>\n";
@@ -182,7 +182,9 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	$ret .= "<p></p><div id='liste_documents'>\n";
 
 	foreach($documents_lies as $doc) {
-		$ret .= afficher_case_document($doc, $id, $script, $type, false);
+		$id_document = $doc['id_document'];
+		$deplier = $id_document_actif==$id_document;
+		$ret .= afficher_case_document($doc, $id, $script, $type, $deplier);
 	}
 	$ret .= "</div>";
   if (!_DIR_RESTREINT){
@@ -365,7 +367,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 			$ret .= $raccourci_doc;
 
 		$legender = charger_fonction('legender', 'inc');
-		$ret .= $legender($id_document, $document, $script, $type, $id, "document$id_document");
+		$ret .= $legender($id_document, $document, $script, $type, $id, "document$id_document", $deplier);
 		
 		$ret .= fin_cadre_relief(true);
 	}

@@ -97,15 +97,38 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	.  $GLOBALS['spip_lang_right']
 	. "'";
 
-	$corps = ajax_action_post("legender", $id_document, $script, "show_docs=$id_document&id_$type=$id#legender-$id_document", $corps, _T('bouton_enregistrer'), $att, "&id_document=$id_document&id=$id&type=$type&ancre=$ancre")
-	.  $vignette . "\n\n";
+	if (!_DIR_RESTREINT)
+		$corps = ajax_action_post("legender", $id_document, $script, "show_docs=$id_document&id_$type=$id#legender-$id_document", $corps, _T('bouton_enregistrer'), $att, "&id_document=$id_document&id=$id&type=$type&ancre=$ancre")
+		  . "<br class='nettoyeur' />";
+	else {
+		$corps = "<div>"
+		       . $corps 
+		       . "<span"
+		       . $att
+		       . "><input type='submit' class='fondo' value='"
+		       . _T('bouton_enregistrer')
+		       ."' /></span><br class='nettoyeur' /></div>";
+		$redirect = parametre_url($script,'show_docs',$id_document,'&');
+		$redirect = parametre_url($redirect,"id_$type",$id,'&');
+		$redirect = parametre_url($redirect,"id_$type",$id,'&');
+		$redirect = ancre_url($redirect,"legender-$id_document");
+		$corps = generer_action_auteur("legender", $id_document, $redirect, $corps, "\nmethod='post'");
+	}
+	
+	$corps .=  $vignette . "\n\n";
 
 	$texte = _T('icone_supprimer_document');
 	if (preg_match('/_edit$/', $script))
 		$action = redirige_action_auteur('supprimer', "document-$id_document", $script, "id_$type=$id#$ancre");
 	else {
 		$s = ($ancre =='documents' ? '': '-');
-		$action = ajax_action_auteur('documenter', "$s$id/$type/$id_document", $script, "id_$type=$id&type=$type&s=$s#$ancre", array($texte));
+		if (!_DIR_RESTREINT)
+			$action = ajax_action_auteur('documenter', "$s$id/$type/$id_document", $script, "id_$type=$id&type=$type&s=$s#$ancre", array($texte));
+		else{
+			$redirect = str_replace('&amp;','&',$script);
+			$action = generer_action_auteur('documenter', "$s$id/$type/$id_document", $redirect);
+			$action = "<a href='$action'>$texte</a>";
+		}
 	}
 
 	// le cas $id<0 correspond a un doc charge dans un article pas encore cree,

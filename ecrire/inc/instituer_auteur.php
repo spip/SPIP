@@ -103,7 +103,7 @@ function inc_instituer_auteur_dist($id_auteur, $statut, $url_self)
 		. $res		  
 		. "</div>";
 
-		$res = ajax_action_post('instituer_auteur', $id_auteur, $url_self, (!$id_auteur ? "" : "id_auteur=$id_auteur"), $res, _T('bouton_valider'), " style='float: $spip_lang_right' class='fondo'");
+		$res = ajax_action_post('instituer_auteur', $id_auteur, $url_self, (!$id_auteur ? "" : "id_auteur=$id_auteur"), $res, _T('bouton_valider'), " style='float: $spip_lang_right' class='fondo'")."<br class='nettoyeur' />";
 	}
 
 	return (_request('var_ajaxcharset'))

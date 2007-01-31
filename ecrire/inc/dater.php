@@ -138,6 +138,7 @@ onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
 				   _T('bouton_changer'),
 				   " style='float: $spip_lang_right; margin-top: 20px;' class='fondo visible_au_chargement' id='valider_date_redac'",
 				   "&id=$id&type=$type")
+				   ."<br class='nettoyeur' />"
 		. '</div>';
 
 		$res .= block_parfois_visible('dateredac', $invite, $masque, 'text-align: left');
