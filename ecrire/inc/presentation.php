@@ -1114,7 +1114,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	$deb = "<a id='id$id_forum'></a>";
 
 	if ($spip_display == 4) {
-		$res .= "\n<li>$deb".typo($titre)."<br />";
+		$res = "\n<li>$deb".typo($titre)."<br />";
 	} else {
 
 		$titre_boite = '';
@@ -1131,7 +1131,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 
 		$titre_boite .= typo($titre);
 
-		$res .= "$deb<table width='100%' cellpadding='0' cellspacing='0' border='0'><tr>"
+		$res = "$deb<table width='100%' cellpadding='0' cellspacing='0' border='0'><tr>"
 		. afficher_forum_4($compteur_forum, $nb_forum, $i)
 		. "\n<td style='width: 100%' valign='top'>";
 		if ($compteur_forum == 1) 
@@ -1820,7 +1820,7 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 		  ?  (puce_statut_article(0, $statut, $id_rubrique, $idom).'&nbsp;')
 		  : ''; 
 # (puce_statut_breve(0, $statut, $id_rubrique, $type) .'&nbsp;'); manque Ajax
-	}
+	} else $puce_rubrique = '';
 
 	while($row = spip_fetch_array($voss)) {
 		$id = $row['id'];
@@ -1933,7 +1933,7 @@ function enfant_rub($collection){
 	global $couleur_foncee, $lang_dir;
 	global $spip_display, $spip_lang_left, $spip_lang_right, $spip_lang;
 	
-	$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
+	$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND isset($GLOBALS['meta']['image_process']) AND $GLOBALS['meta']['image_process'] != "non");
 		
 	if ($voir_logo) {
 		$voir_logo = "float: $spip_lang_right; margin-$spip_lang_right: -6px; margin-top: -6px;";
@@ -2171,8 +2171,8 @@ function bouton_spip_rss($op, $args, $fmt='rss') {
 function http_calendrier_rv($messages, $type) {
 	global $spip_lang_rtl, $spip_lang_left, $spip_lang_right, $connect_id_auteur, $connect_quand;
 
-	if (!$messages) return $total;
 	$total = $date_rv = '';
+	if (!$messages) return $total;
 
 	foreach ($messages as $row) {
 		if (ereg("^=([^[:space:]]+)$",$row['texte'],$match))

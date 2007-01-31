@@ -39,10 +39,13 @@ function inc_editer_auteurs_dist($type, $id, $flag, $cherche_auteur, $ids, $titr
 	$aff_les_auteurs = afficher_auteurs_objet($type, $id, $flag, $cond_les_auteurs, $script_edit_objet, $script_edit_auteur, $arg_ajax);
 	
 	if ($flag AND $options == 'avancees') {
-		$futurs = ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit, $arg_ajax);
+		$futurs = ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit_objet, $arg_ajax);
 	} else $futurs = '';
 
-	return editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $aff_les_auteurs, $futurs, $GLOBALS['meta']['ldap_statut_import'],$titre_boite,$script_edit_objet, $arg_ajax);
+	$ldap = isset($GLOBALS['meta']['ldap_statut_import']) ?
+	  $GLOBALS['meta']['ldap_statut_import'] : '';
+
+	return editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $aff_les_auteurs, $futurs, $ldap,$titre_boite,$script_edit_objet, $arg_ajax);
 }
 
 // http://doc.spip.org/@editer_auteurs_objet

@@ -73,7 +73,7 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 		. bandeau_titre_boite2( '<b>' . _T('trad_article_traduction') . '</b>','', 'white', 'black', false)
 		. $t
 		. "</div>";
-	}
+	} else $liste = '';
 
 	// changer les globales $dir_lang etc
 	changer_typo($langue_article);

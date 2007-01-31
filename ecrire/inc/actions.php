@@ -105,10 +105,10 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 // http://doc.spip.org/@ajax_action_post
 function ajax_action_post($action, $arg, $retour, $gra, $corps, $clic, $atts, $args_ajax='')
 {
-	if (strpos($args,"#")===FALSE)
+	if (strpos($gra,"#")===FALSE)
 		$ancre = "$action-" . intval($arg);
 	else {
-		$ancre = explode("#",$args);
+		$ancre = explode("#",$gra);
 		$args = $ancre[0];
 		$ancre = $ancre[1];
 	}

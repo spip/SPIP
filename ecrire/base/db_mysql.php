@@ -58,11 +58,9 @@ function spip_query_db($query) {
 
 	$query = traite_query($query);
 
-	$start = ($_GET['var_profile']=='oui'
-		AND (
-			($GLOBALS['connect_statut'] == '0minirezo')
-			OR ($GLOBALS['auteur_session']['statut'] == '0minirezo')
-			)
+	$start = (isset($_GET['var_profile'])
+		AND isset($GLOBALS['auteur_session']['statut'])
+		AND ($GLOBALS['auteur_session']['statut'] == '0minirezo')
 		) ? microtime() : 0;
 
 	return spip_mysql_trace($query, 
@@ -82,8 +80,8 @@ function spip_mysql_trace($query, $start, $result)
 	if ($s) {
 		$s .= ' '.mysql_error();
 		if ($GLOBALS['mysql_debug']
-		AND (($GLOBALS['connect_statut'] == '0minirezo')
-		  OR ($GLOBALS['auteur_session']['statut'] == '0minirezo'))) {
+		AND (isset($GLOBALS['auteur_session']['statut']))
+		AND ($GLOBALS['auteur_session']['statut'] == '0minirezo')) {
 			include_spip('public/debug');
 			echo _T('info_erreur_requete'),
 			  " ",
@@ -135,7 +133,7 @@ function spip_mysql_select($select, $from, $where,
 
 	// Erreur ? C'est du debug de squelette, ou une erreur du serveur
 
-	if ($GLOBALS['var_mode'] == 'debug') {
+	if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug') {
 		include_spip('public/debug');
 		boucle_debug_resultat($id, 'requete', "SELECT " . $query);
 	}
