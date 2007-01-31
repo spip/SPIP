@@ -1610,7 +1610,7 @@ function debut_gauche($rubrique = "accueil", $return=false) {
 
 	$res = "<br /><table width='$largeur_ecran' cellpadding='0' cellspacing='0' border='0'>
 		<tr>\n<td style='width: 200px' class='colonne_etroite serif' valign='top' $rspan>
-		\n<div style='width: 100%; overflow:hidden;'>
+		\n<div style='width: 200px; overflow:hidden;'>
 \n";
 		
 	if ($spip_display == 4) $res .= "<!-- ";
@@ -1655,7 +1655,7 @@ function creer_colonne_droite($rubrique="", $return= false){
 	. $largeur 
 	. "px' rowspan='2' align='"
 	. $spip_lang_left
-	. "' valign='top' class='colonne_etroite'><p />";
+	. "' valign='top' class='colonne_etroite'><div style='width:$largeur'>";
 
 	if ($return) return $res; else echo $res;
 }
@@ -1685,7 +1685,7 @@ function debut_droite($rubrique="", $return= false) {
 	}
 	else {
 		$res .= creer_colonne_droite($rubrique, true)
-		. "</td></tr>\n<tr>";
+		. "</div></td></tr>\n<tr>";
 	}
 
 	if ($spip_ecran == 'large' AND formulaire_large())
