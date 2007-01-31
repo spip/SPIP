@@ -192,7 +192,7 @@ function verifForm(racine) {
 		var hiddenparent = jQuery(jField).parents(":hidden").filter(":last");
 		//If it finds it make him have a layout in order to retrieve the field width
 		if(hiddenparent.size()) hiddenparent.css({display:"block"});
-    var w = jField.css('width');
+    var w = hiddenparent.css('width');
     if(!w) {
       jField.css('width','95%');
     } else {
