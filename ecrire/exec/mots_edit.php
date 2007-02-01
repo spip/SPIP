@@ -187,6 +187,7 @@ global
 
 	$out .= fin_cadre_relief(true);
 
+	$out .= pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
 
 	if (autoriser('modifier','groupemots',$id_groupe)){
 
@@ -205,7 +206,6 @@ global
 
 		$res .= determine_groupe_mots($table, $id_groupe);
 
-		$res .= pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
 
 		if ($options == 'avancees' OR $descriptif) {
 			$res .= "<b>"._T('texte_descriptif_rapide')."</b><br />";
