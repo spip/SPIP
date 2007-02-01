@@ -36,11 +36,14 @@ function modifier_contenu($type, $id, $options, $c=false) {
 	}
 
 	$champs = array();
+	$inchanges = array(); // savoir quels champs il manque eventuellement dans le fragment
 	if (is_array($options['champs']))
 	foreach ($options['champs'] as $champ) {
 		$val = _request($champ, $c);
 		if ($val !== NULL)
 			$champs[$champ] = corriger_caracteres($val);
+		else
+			$inchanges[] = $champ;
 	}
 
 	// recuperer les extras
@@ -55,7 +58,8 @@ function modifier_contenu($type, $id, $options, $c=false) {
 		array(
 			'args' => array(
 				'table' => 'spip_'.$table_objet,
-				'id_objet' => $id
+				'id_objet' => $id,
+				'inchanges' => $inchanges
 			),
 			'data' => $champs
 		)
@@ -96,7 +100,8 @@ function modifier_contenu($type, $id, $options, $c=false) {
 		array(
 			'args' => array(
 				'table' => 'spip_'.$table_objet,
-				'id_objet' => $id
+				'id_objet' => $id,
+				'inchanges' => $inchanges
 			),
 			'data' => $champs
 		)
