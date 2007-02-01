@@ -83,6 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'calendrier_synchro_lien' => 'R&eacute;cuperar el archivo <i>iCal</i>',
 'choix_couleur_interface' => 'cor',
 'choix_interface' => 'escolla de interface',
+'colonne' => 'Columna',
 'confirm_changer_statut' => 'Coidado, pediches cambiar o estado deste elemento. &iquest;Desexas continuar?',
 'correcte' => 'correcto',
 
@@ -197,6 +198,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>Para arranxalo, empregue o seu cliente de FTP e cambie os permisos de acceso de cada un
   deles. O procedemento est&aacute; explicado polo mi&uacute;do na gu&iacute;a de instalaci&oacute;n.</p>
   <p>Unha vez feito isto, poder&aacute; ',
+'double_occurrence' => 'Dobre ocorrencia',
 
 
 // E
@@ -204,6 +206,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_document' => 'T&iacute;tulo do documento:',
 'entree_titre_image' => 'T&iacute;tulo da imaxe:',
 'envoi_via_le_site' => 'Env&iacute;o v&iacute;a o sitio web',
+'erreur' => 'Erro',
+'erreur_balise_non_fermee' => 'a &amp;uacute;ltima baliza non est&amp;aacute; pechada :',
+'erreur_texte' => 'erro(s)',
 
 
 // F
@@ -553,6 +558,7 @@ Grazas pola s&uacute;a participaci&oacute;n
 'lien_visite_site' => 'visitar este web',
 'lien_visites' => '@visites@ visitas',
 'lien_voir_auteur' => 'Ver est@ autor/a',
+'ligne' => 'Li&amp;nacute;a',
 'login_acces_prive' => 'acceso &oacute; espazo privado',
 'login_autre_identifiant' => 'conectarse con outro identificador',
 'login_connexion_refusee' => 'Conexi&oacute;n rexeitada.',
@@ -591,9 +597,11 @@ Grazas pola s&uacute;a participaci&oacute;n
 
 // N
 'navigateur_pas_redirige' => 'Se o seu navegador non &eacute; redirixido, prema aqu&iacute; para continuar.',
+'numero' => 'N&amp;uacute;mero',
 
 
 // O
+'occurence' => 'Ocorrencia',
 'onglet_affacer_base' => 'Eliminar a base',
 'onglet_auteur' => 'A persoa',
 'onglet_contenu_site' => 'Contido do web',
@@ -660,6 +668,7 @@ e reconectar co web.
 
 
 // S
+'spip_conforme_dtd' => 'SPIP considera este documento conforme co seu DOCTYPE :',
 'squelette' => 'esqueleto',
 'squelette_inclus_ligne' => 'esqueleto inclu&iacute;do, li&ntilde;a',
 'squelette_ligne' => 'esquelto, li&ntilde;a',
@@ -745,19 +754,38 @@ e reconectar co web.
 'zbug_code' => 'c&oacute;digo',
 'zbug_critere_inconnu' => 'criterio desco&ntilde;ecido @critere@',
 'zbug_distant_interdit' => 'servizo externo prohibido',
+'zbug_doublon_table_sans_index' => 'doublons nunha t&amp;aacute;boa sen index',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: dobre definici&oacute;n',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: tag de cerre ausente',
 'zbug_erreur_boucle_syntaxe' => 'Sintaxe de bucle incorrecta',
+'zbug_erreur_compilation' => 'Erro de compilaci&amp;oacute;n',
 'zbug_erreur_execution_page' => 'erro de execuci&oacute;n da p&aacute;xina',
 'zbug_erreur_filtre' => 'Erro : filtro <b>&laquo; @filtre@ &raquo;</b> non definido',
 'zbug_erreur_meme_parent' => '{meme_parent} non &eacute; aplic&aacute;bel m&aacute;is que aos bucles (FORUMS) ou (RUBRIQUES)',
 'zbug_erreur_squelette' => 'Erro(s) no esqueleto',
 'zbug_info_erreur_squelette' => 'Erro no web',
 'zbug_inversion_ordre_inexistant' => 'inversi&oacute;n dunha orde inexistente',
+'zbug_pagination_sans_critere' => '#PAGINATION sen criterio {pagination} ou empregado nun bucle recursivo',
 'zbug_parametres_inclus_incorrects' => 'Par&aacute;metros de inclusi&oacute;n incorrectos',
 'zbug_resultat' => 'resultado',
 'zbug_serveur_indefini' => 'servidor SQL indefinido',
-'zbug_table_inconnue' => 'T&aacute;boa SQL &laquo; @table@ &raquo; desco&ntilde;ecida'
+'zbug_table_inconnue' => 'T&aacute;boa SQL &laquo; @table@ &raquo; desco&ntilde;ecida',
+'zxml_connus_attributs' => 'atributos co&amp;nacute;ecidos',
+'zxml_de' => 'de',
+'zxml_inconnu_attribut' => 'atributo desco&amp;ntilde;ecido',
+'zxml_inconnu_balise' => 'baliza desco&amp;ntilde;ecida',
+'zxml_inconnu_entite' => 'entidade desco&amp;ntilde;ecida',
+'zxml_inconnu_id' => 'ID desco&amp;ntilde;ecida',
+'zxml_mais_de' => 'mais de',
+'zxml_non_conforme' => 'non &amp;eacute; conforme co motivo',
+'zxml_non_fils' => 'non &amp;eacute; un f&amp;iacute;o de',
+'zxml_nonvide_balise' => 'a baliza non est&amp;aacute; baleira',
+'zxml_obligatoire_attribut' => 'atributo obrigatorio mais ausente en',
+'zxml_succession_fils_incorrecte' => 'sucesi&amp;oacute;n de f&amp;iacute;os incorrecta',
+'zxml_survoler' => 'sobrevoar para ver os correctos',
+'zxml_valeur_attribut' => 'valor do atributo',
+'zxml_vide_balise' => 'baliza baleira',
+'zxml_vu' => 'vista previa'
 
 );
 

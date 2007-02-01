@@ -37,6 +37,7 @@ Bu ithal istemini onaylamay&#305;n.
 'avis_non_acces_message' => 'Bu iletiye eri&#351;iminiz yok.',
 'avis_non_acces_page' => 'Bu sayfaya eri&#351;iminiz yok.',
 'avis_operation_echec' => '&#304;&#351;lem ba&#351;ar&#305;s&#305;z.',
+'avis_operation_impossible' => 'Olanaks&#305;z i&#351;lem',
 'avis_probleme_archive' => '@archive@ dosyas&#305;n&#305; okurken sorun &ccedil;&#305;kt&#305;',
 'avis_site_introuvable' => 'Site bulunamad&#305;',
 'avis_site_syndique_probleme' => 'Dikkat : bu site ile payla&#351;&#305;mda sorun &ccedil;&#305;kt&#305;&nbsp;; sistem ge&ccedil;ici bir s&uuml;re i&ccedil;in durduruldu. Bu sitenin payla&#351;&#305;m dosyas&#305;n&#305;n adresini kontrol edin (<b>@url_syndic@</b>) ve bilgileri almay&#305; yeniden deneyin.',
@@ -51,6 +52,7 @@ Bu ithal istemini onaylamay&#305;n.
 'bouton_ajouter' => 'Ekle',
 'bouton_ajouter_participant' => 'B&#304;R KATILIMCI EKLE&nbsp;:',
 'bouton_annonce' => 'DUYURU',
+'bouton_annuler' => '&#304;ptal',
 'bouton_checkbox_envoi_message' => 'ileti g&ouml;nderme olana&#287;&#305;',
 'bouton_checkbox_indiquer_site' => 'bir Web sitesi belirtmek zorundas&#305;n&#305;z',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'site y&ouml;neticileri',
@@ -110,6 +112,7 @@ sonradan yok edebilir).',
 'cache_mode_non_compresse' => '&Ouml;nbellek dosyalar&#305; s&#305;k&#305;&#351;t&#305;r&#305;lmam&#305;&#351; kipte saklan&#305;yor.',
 'cache_modifiable_webmestre' => 'Bu parametreler site y&ouml;neticisi taraf&#305;ndan de&#287;i&#351;tirilebilir.',
 'calendrier_synchro' => 'iCal uyumlu bir g&uuml;nl&uuml;k uygulama yaz&#305;l&#305;m&#305; kullan&#305;yorsan&#305;z onu bu sitedeki bilgilerle e&#351;zamanla&#351;t&#305;rabilirsiniz. ',
+'connexion_ldap' => 'Ba&#287;lant&#305; :',
 
 
 // D
@@ -170,10 +173,15 @@ sonradan yok edebilir).',
 'erreur_plugin_version_manquant' => 'Plugin\'in uyarlamas&#305; eksik',
 
 
+// F
+'forum_info_original' => 'orijinal',
+
+
 // I
 'ical_info1' => 'Bu sayfa bu sitenin ya&#351;am&#305; ile temas halinde kalmak i&ccedil;in bir ka&ccedil; y&ouml;ntem sunmaktad&#305;r. ',
 'ical_info2' => 'Bu teknikler hakk&#305;nda daha ayr&#305;nt&#305;l&#305; bilgi i&ccedil;in,  SPIP dok&uuml;manlar&#305;na bakmaktan &ccedil;ekinmeyiniz.',
 'ical_info_calendrier' => 'Kullan&#305;m&#305;n&#305;za iki takvim sunulmu&#351;tur. Birincisi yay&#305;nlanm&#305;&#351; t&uuml;m makaleleri duyuran bir site plan&#305;d&#305;r. &#304;kincisi ise edit&ouml;r ilanlar&#305; ile son olarak ald&#305;&#287;&#305;n&#305;z &ouml;zel iletilerinizi i&ccedil;erir&nbsp;: ki&#351;isel bir anahtar ile size ayr&#305;lm&#305;&#351;t&#305;r ve buradaki bilgileri &#351;ifrenizi yenileyerek her an  de&#287;i&#351;tirebilirsiniz.',
+'ical_lien_rss_breves' => 'Sitenin k&#305;sa haberlerinin payla&#351;&#305;m&#305;',
 'ical_methode_http' => 'Y&uuml;kleme',
 'ical_methode_webcal' => 'E&#351;zamanla&#351;t&#305;rma (webcal://)',
 'ical_texte_js' => 'Bir javascript sat&#305;r&#305; size ait herhangi bir sitede yay&#305;nlanan son makaleleri gayet basit bir &#351;ekilde g&ouml;r&uuml;nt&uuml;lemenizi sa&#287;lar. ',
@@ -286,7 +294,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_config_suivi' => 'E&#287;er bu adres bir g&ouml;nderi listesi (mailing-list)\'ne kar&#351;&#305; d&uuml;&#351;&uuml;yorsa, a&#351;a&#287;&#305;ya site kat&#305;l&#305;mc&#305;lar&#305;n&#305;n hangi adrese kaydolabileceklerini yazabilirsiniz. Bu adres URL (&ouml;rne&#287;in listeye Web ile kaydolma sayfas&#305;), veya &ouml;zel bir konu i&ccedil;eren (&ouml;rne&#287;in: @adresse_suivi@?subject=subscribe) bir e-posta adresi olabilir:',
 'info_config_suivi_explication' => 'Bu sitenin g&ouml;nderi listesi (mailing-list)\'ne abone olabilirsiniz. O takdirde yay&#305;nlanmas&#305; &ouml;nerilen makale ve haber ilanlar&#305; e-posta yoluyla elinize ge&ccedil;ecektir. ',
 'info_confirmer_passe' => 'Yeni &#351;ifrenin teyid edilmesi :',
-'info_connexion_base' => '&#304;kinci a&#351;ama : <b>tabana ba&#287;lanma denemesi</b>',
+'info_connexion_base' => '&#304;kinci a&#351;ama : <b>veritaban&#305;na ba&#287;lanma denemesi</b>',
 'info_connexion_ldap_ok' => 'LDAP ba&#287;lant&#305;s&#305; ba&#351;ar&#305;l&#305;. Di&#287;er a&#351;amaya ge&ccedil;ebilirsiniz.',
 'info_connexion_mysql' => '&#304;lk a&#351;ama : <b>MySQL ba&#287;lant&#305;n&#305;z</b>',
 'info_connexion_ok' => 'Ba&#287;lant&#305; ba&#351;ar&#305;l&#305;. ',
@@ -302,7 +310,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_date_publication_anterieure' => 'Daha &ouml;nceki yay&#305;nlanma tarihi :',
 'info_date_referencement' => 'BU S&#304;TEYE ATIFTA BULUNULMA TAR&#304;H&#304;&nbsp;:',
 'info_delet_mots_cles' => '<b>@titre_mot@</b>(@type_mot@) anahtar s&ouml;zc&uuml;&#287;&uuml;n&uuml; silmek istediniz. Bu anahtar s&ouml;zc&uuml;k  
-<b>@texte_lie@<b>\'e ba&#287;l&#305; oldu&#287;undan, bu karar&#305; teyid etmeniz gerekiyor&nbsp;:',
+<b>@texte_lie@<b>\'e ba&#287;l&#305; oldu&#287;undan, bu karar&#305; onaylaman&#305;z gerekiyor&nbsp;:',
 'info_derniere_etape' => 'Son a&#351;ama : Bitti !',
 'info_derniere_syndication' => 'Bu sitenin son payla&#351;&#305;m tarihi:',
 'info_derniers_articles_publies' => '&Ccedil;evrimi&ccedil;i yay&#305;nlanan son makaleleriniz',
@@ -346,7 +354,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_gauche_numero_auteur' => 'YAZAR NUMARASI',
 'info_gauche_numero_breve' => 'KISA HABER NUMARASI',
 'info_gauche_statistiques_referers' => 'Bu sayfa at&#305;flar listesini, yani sizin sitenize y&ouml;nlendiren ba&#287;lar bulunduran sitelerin listesini sunar, ancak sadece d&uuml;n ve bug&uuml;n i&ccedil;indir&nbsp;; bu liste her 24 saatte bir s&#305;f&#305;rlan&#305;r.',
-'info_gauche_suivi_forum' => '<i>Forumlar&#305; izleme</i> sayfas&#305; sitenizi y&ouml;netme arac&#305;d&#305;r (sohbet, ya da yaz&#305; yazma alan&#305; de&#287;ildir). Bir makaleye kamu forumundan yap&#305;lan t&uuml;m katk&#305;lar&#305;n&#305; g&ouml;sterir ve bu katk&#305;lar&#305; y&ouml;netmenizi sa&#287;lar.',
+'info_gauche_suivi_forum' => '<i>Forumlar&#305; izleme</i> sayfas&#305; sitenizi y&ouml;netme arac&#305;d&#305;r (sohbet, ya da yaz&#305; yazma alan&#305; de&#287;ildir). Bir makaleye kamu forumundan yap&#305;lan t&uuml;m katk&#305;lar&#305; g&ouml;sterir ve bu katk&#305;lar&#305; y&ouml;netmenizi sa&#287;lar.',
 'info_gauche_suivi_forum_2' => '<i>Forumlar&#305; izleme</i> sayfas&#305; sitenizi y&ouml;netme arac&#305;d&#305;r (sohbet, ya da yaz&#305; yazma alan&#305; de&#287;ildir). Bir makaleye kamu forumundan yap&#305;lan t&uuml;m katk&#305;lar&#305;n&#305; g&ouml;sterir ve bu katk&#305;lar&#305; y&ouml;netmenizi sa&#287;lar.',
 'info_gauche_visiteurs_enregistres' => 'Burada sitenin kamu alan&#305;na kaydolan 
                                         ziyaret&ccedil;ileri bulacaks&#305;n&#305;z (abonelik y&ouml;ntemiyle y&ouml;netilen forumlar).',
@@ -476,18 +484,19 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_procedez_par_etape' => 'A&#351;ama a&#351;ama ilerleyiniz',
 'info_procedure_maj_version' => 'Veritaban&#305;n&#305; yeni SPIP s&uuml;r&uuml;m&uuml;ne uyarlamak i&ccedil;in
               seviye y&uuml;kseltme i&#351;lemi ba&#351;lat&#305;lmal&#305;.',
+'info_proxy_ok' => 'Vekil (Proxy) denemesi ba&#351;ar&#305;l&#305;.',
 'info_ps' => 'Not :',
 'info_publier' => 'Yay&#305;nla',
 'info_publies' => '&Ccedil;evrimi&ccedil;i yay&#305;nlanan makaleleriniz',
 'info_question_accepter_visiteurs' => 'E&#287;er sitenizin iskeleti &ouml;zel alana eri&#351;imi olmayan ziyaret&ccedil;ilerin kayd&#305;n&#305; &ouml;ng&ouml;r&uuml;yorsa, a&#351;a&#287;&#305;daki se&ccedil;ene&#287;i &ccedil;al&#305;&#351;t&#305;r&#305;n&#305;z&nbsp;:',
 'info_question_gerer_statistiques' => 'Siteniz ziyaret istatisti&#287;ini y&ouml;netmeli mi ?',
 'info_question_inscription_nouveaux_redacteurs' => 'Kamu sitesinden yeni edit&ouml;rlerin kaydolmas&#305;n&#305; kabul ediyor musunuz ?
-    E&#287;er kabul ediyorsan&#305;z, ziyaret&ccedil;iler otomatikle&#351;tirilmi&#351;
-    bir form ile kaydolabilecek ve o takdirde kendi makalelerini
+    E&#287;er kabul ediyorsan&#305;z, ziyaret&ccedil;iler otomatik
+    bir form ile kaydolabilecek ve kendi makalelerini
     &ouml;nermek &uuml;zere &ouml;zel alana eri&#351;eceklerdir. 
 <blockquote><i>Kay&#305;t a&#351;amas&#305;nda,    kullan&#305;c&#305;lara,  &ouml;zel siteye eri&#351;im &#351;ifresi veren bir otomatik
     e-posta g&ouml;nderilir. Baz&#305; Hizmet bilgisayarlar&#305; kendi sunucular&#305;ndan
-    e-posta yollanmas&#305;n&#305; durduruyorlar&nbsp;: o takdirde otomatik kay&#305;t olanaks&#305;zd&#305;r.',
+    e-posta yollanmas&#305;n&#305; durduruyorlar&nbsp;: bu durumda otomatik kay&#305;t olanaks&#305;zd&#305;r.',
 'info_question_mots_cles' => 'Sitenizde anahtar s&ouml;zc&uuml;k kullanmak istiyor musunuz ?',
 'info_question_proposer_site' => 'Kim at&#305;fta bulunulan siteler &ouml;nerebilir ?',
 'info_question_utilisation_moteur_recherche' => 'SPIP\'in entegre arama motorunu kullanmak istiyor musunuz ?
@@ -507,7 +516,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_referencer_doc_distant' => 'Internet &uuml;zerinde bir dok&uuml;mana at&#305;fta bulunmak&nbsp;:',
 'info_refuses' => 'Reddedilen makaleleriniz',
 'info_reglage_ldap' => 'Se&ccedil;enekler : <b>LDAP ithalinin ayarlanmas&#305;.</b>',
-'info_renvoi_article' => '<b>Y&ouml;nlendirme.</b> Bu makalenin bizi y&ouml;nlendirdi&#287;i sayfa:',
+'info_renvoi_article' => '<b>Y&ouml;nlendirme.</b> Bu makalenin bizi &#351;u sayfaya y&ouml;nlendirir:',
 'info_reserve_admin' => 'Bu adresi sadece y&ouml;neticiler de&#287;i&#351;tirebilir.',
 'info_restauration_sauvegarde' => ' @archive@ yede&#287;inin geri y&uuml;klenmesi',
 'info_restreindre_rubrique' => 'Y&ouml;netimi bu b&ouml;l&uuml;mle s&#305;n&#305;rla:',
@@ -617,6 +626,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'install_echec_annonce' => 'Kurulum b&uuml;y&uuml;k olas&#305;l&#305;kla ba&#351;ar&#305;s&#305;z olacak veya site &ccedil;al&#305;&#351;mayacak...',
 'install_extension_mbstring' => 'SPIP belirtilen programla &ccedil;al&#305;&#351;amaz&nbsp;:',
 'install_extension_php_obligatoire' => 'SPIP i&ccedil;in php uzant&#305;s&#305; zorunludur&nbsp;:',
+'install_php_version' => '@version@ PHP s&uuml;r&uuml;m&uuml; yetersiz (minimum = @minimum@)',
 'install_select_langue' => 'Bir dil se&ccedil;iniz, sonra &laquo;&nbsp;bir sonraki&nbsp;&raquo; d&uuml;&#287;mesini t&#305;klay&#305;p y&uuml;kleme i&#351;lemini ba&#351;lat&#305;n&#305;z.',
 'intem_redacteur' => 'Yazar',
 'item_accepter_inscriptions' => 'Kay&#305;tlar&#305; kabul et',
@@ -704,6 +714,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'lien_supprimer_rubrique' => 'bu b&ouml;l&uuml;m&uuml; sil',
 'lien_tout_deplier' => 'T&uuml;m&uuml;n&uuml;n katlar&#305;n&#305; a&ccedil;',
 'lien_tout_replier' => 'T&uuml;m&uuml;n&uuml; geri katla',
+'lien_tout_supprimer' => 'Hepsini sil',
 'lien_trier_nom' => '&#304;sme g&ouml;re s&#305;rala',
 'lien_trier_nombre_articles' => 'Makale say&#305;s&#305;na g&ouml;re s&#305;rala',
 'lien_trier_statut' => 'Duruma g&ouml;re s&#305;rala',
@@ -751,6 +762,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'plugin_etat_stable' => 'durgun ("stable")',
 'plugin_etat_test' => 'test a&#351;amas&#305;nda',
 'plugins_liste' => 'Plugin listesi',
+'protocole_ldap' => 'Protokol s&uuml;r&uuml;m&uuml; :',
 
 
 // R
@@ -758,6 +770,8 @@ yaratabilir. Bu da otomatik olarak bir galeri
 
 
 // S
+'sauvegarde_fusionner' => 'Mevcut veritaban&#305; ile yede&#287;i birle&#351;tir',
+'sauvegarde_url_origine' => 'Kaynak sitenin URL\'si :',
 'statut_admin_restreint' => '(s&#305;n&#305;rl&#305; y&ouml;netici)',
 'syndic_choix_moderation' => 'Bu siteden ileride gelecek ba&#287;lar&#305; ne yapmal&#305;&nbsp;?',
 'syndic_choix_oublier' => 'Payla&#351;&#305;m dosyas&#305;nda art&#305;k bulunmayan ba&#287;lar&#305; ne yapmal&#305;&nbsp;?',
@@ -803,7 +817,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
     bir bas&#305;n &ouml;zeti, bir olaylar takvimi  yaratmaya yarar...',
 'texte_choix_base_1' => 'Veritaban&#305;n&#305;z&#305; se&ccedil;iniz :',
 'texte_choix_base_2' => 'MySQL sunucusu bir &ccedil;ok veritaban&#305; i&ccedil;erir.',
-'texte_choix_base_3' => 'A&#351;a&#287;&#305;da servis sa&#287;lay&#305;c&#305;n&#305;z taraf&#305;ndan size tahsis edilmi&#351; olan&#305; <b>se&ccedil;iniz</b>.',
+'texte_choix_base_3' => 'A&#351;a&#287;&#305;da servis sa&#287;lay&#305;c&#305;n&#305;z taraf&#305;ndan size ayr&#305;lm&#305;&#351; olan&#305; <b>se&ccedil;iniz</b>.',
 'texte_commande_vider_tables_indexation' => 'Bu komutu SPIP\'teki arama motoru taraf&#305;ndan
     kullan&#305;lan endeksleme &ccedil;izelgelerini bo&#351;altmak i&ccedil;in kullan&#305;n&#305;z.
     Diskteki alan&#305; bo&#351;a harcamam&#305;&#351; olursunuz.',
@@ -877,7 +891,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'texte_port_annuaire' => '(Genelde, varsay&#305;lan de&#287;er uygundur.) ',
 'texte_presente_plugin' => 'Bu sayfa sitedeki plugin\'leri listeler. Gerekli plugin\'leri uygun kutucuklar&#305; i&#351;aretleyerek etkinle&#351;tirebilirsiniz.',
 'texte_proposer_publication' => 'Makaleniz bitti&#287;inde, yay&#305;nlanmas&#305;n&#305; &ouml;nerebilirsiniz. ',
-'texte_proxy' => 'Baz&#305; durumlarda (intranet, korumal&#305; &#351;ebekeler...), sendikal&#305; sitelere ula&#351;mak i&ccedil;in bir HTTP vekili kullanmak gerekli olabilir. Gerekti&#287;i takdirde, a&#351;a&#287;&#305;ya adresini http://proxy:8080 &#351;eklinde belirtiniz. Genelde bu kutuyu bo&#351; b&#305;rak&#305;rs&#305;n&#305;z.',
+'texte_proxy' => 'Baz&#305; durumlarda (intranet, korumal&#305; &#351;ebekeler...), sendikal&#305; sitelere ula&#351;mak i&ccedil;in bir HTTP vekili kullanmak gerekli olabilir. Gerekti&#287;i takdirde, a&#351;a&#287;&#305;ya adresini http://proxy:8080 &#351;eklinde belirtiniz. Genelde bu kutu bo&#351; b&#305;rak&#305;l&#305;r.',
 'texte_publication_articles_post_dates' => 'Yay&#305;nlanmas&#305; ileri bir tarihe saptanan makaleler kar&#351;&#305;s&#305;nda SPIP ne gibi bir tav&#305;r almal&#305; ?',
 'texte_rappel_selection_champs' => '[Bu alan&#305; do&#287;ru olarak se&ccedil;meyi unutmay&#305;n&#305;z.] ',
 'texte_recalcul_page' => 'Sadece bir tek sayfay&#305; yenilemek istiyorsan&#305;z, daha ziyade kamu sitesinden ge&ccedil;iniz ve orada &laquo;&nbsp;yenileme&nbsp;&raquo; d&uuml;&#287;mesini se&ccedil;iniz.',
@@ -995,6 +1009,7 @@ MySQL\'in, kazayla zarar g&ouml;ren tablolar&#305;n&#305; tamir yetene&#287;i va
 'titre_sites_tous' => 'At&#305;fta bulunulan siteler ',
 'titre_suivi_petition' => 'Dilek&ccedil;elerin izlenmesi',
 'titre_syndication' => 'Site payla&#351;&#305;m&#305;',
+'tls_ldap' => 'Ta&#351;&#305;ma Katman&#305; G&uuml;venli&#287;i (TLS) :',
 'tout_dossier_upload' => 'T&uuml;m @upload@ dosyas&#305;',
 'trad_article_inexistant' => 'Bu numaral&#305; bir makale yok.',
 'trad_article_traduction' => 'Bu makalenin t&uuml;m s&uuml;r&uuml;mleri&nbsp;:',

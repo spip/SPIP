@@ -82,6 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_semaine' => 'kalandrye pa sem&egrave;n',
 'choix_couleur_interface' => 'koul&egrave;',
 'choix_interface' => 'pou chwazi lentefas',
+'colonne' => '<NEW>Colonne',
 'confirm_changer_statut' => 'Atansyon. W te domann chanje lestati eleman nan. Eske w gen kontinye ?',
 'correcte' => 'korek',
 
@@ -196,6 +197,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p />Pou swen bagay-la, ann itilize logisy&egrave;l FTP ou pou don drwa laks&eacute; chak
  rep&egrave;twa. Guid lenstalasyon ap di kouman w ke kapab f&egrave; bagay-la.
   <p />Kan w ke fini w ke kapab',
+'double_occurrence' => '<NEW>Double occurrence',
 
 
 // E
@@ -203,6 +205,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_document' => 'Kouman dokiman i rele&nbsp;:',
 'entree_titre_image' => 'Kouman imaj i rele&nbsp;:',
 'envoi_via_le_site' => 'Voye ek sit-la',
+'erreur' => '<NEW>Erreur',
+'erreur_balise_non_fermee' => '<NEW>derni&egrave;re balise non referm&eacute;e :',
+'erreur_texte' => '<NEW>erreur(s)',
 
 
 // F
@@ -547,6 +552,7 @@ M&egrave;si  w soutni petisyon-nan
 'lien_visite_site' => 'vizite sit sa-a',
 'lien_visites' => '@visites@&nbsp;vizite yo',
 'lien_voir_auteur' => 'Gad lot&egrave;-a',
+'ligne' => '<NEW>Ligne',
 'login_acces_prive' => 'akse nan espas prive',
 'login_autre_identifiant' => 'kon&egrave;k w sou sit-la ek yon l&ograve;t idantifyan',
 'login_connexion_refusee' => 'koneksyon refize',
@@ -585,9 +591,11 @@ M&egrave;si  w soutni petisyon-nan
 
 // N
 'navigateur_pas_redirige' => 'Si navigat&egrave; ou se pa tounyen taptap sou yon l&ograve;t ladr&egrave;s web, m&egrave;si klik isit pou kontinye.',
+'numero' => '<NEW>Num&eacute;ro',
 
 
 // O
+'occurence' => '<NEW>Occurence',
 'onglet_affacer_base' => 'Kraze labaz',
 'onglet_auteur' => 'Lot&egrave;',
 'onglet_contenu_site' => 'Kisa sit-la ka kontni',
@@ -655,6 +663,7 @@ ak tounyen d&eacute;y&eacute; konekte sou sit-la.
 
 
 // S
+'spip_conforme_dtd' => '<NEW>SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE :',
 'squelette' => 'eskelet',
 'squelette_inclus_ligne' => 'eskelet enkli, liy',
 'squelette_ligne' => 'eskelet,liy',
@@ -739,19 +748,38 @@ l&egrave;s plit&ograve; jestyon paj sa-yo pou w&egrave;bm&egrave;t prensipal sou
 'zbug_code' => 'kod',
 'zbug_critere_inconnu' => 'krit&egrave; sa-a se pa koni @critere@',
 'zbug_distant_interdit' => 'd&eacute;&ograve; ent&egrave;di',
+'zbug_doublon_table_sans_index' => '<NEW>doublons sur une table sans index',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: d&eacute;finisyon doub',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: tag pou f&egrave;me ap pa egsiste ',
 'zbug_erreur_boucle_syntaxe' => 'Sintaks boukl pa kor&egrave;k',
+'zbug_erreur_compilation' => '<NEW>Erreur de compilation',
 'zbug_erreur_execution_page' => 'er&egrave; nan leks&eacute;kisyon paj la',
 'zbug_erreur_filtre' => 'Er&egrave;: fil <b>&laquo; @filtre@ &raquo;</b> se pa defini ',
 'zbug_erreur_meme_parent' => '{meme_parent} ki pa mache ak (FORUMS) oubyen (RUBRIQUES)',
 'zbug_erreur_squelette' => 'Er&egrave; nan l&egrave;skel&egrave;t',
 'zbug_info_erreur_squelette' => 'Er&egrave; sou sit-la',
 'zbug_inversion_ordre_inexistant' => 'yon ord ki pa egziste genyen lanv&egrave;',
+'zbug_pagination_sans_critere' => '<NEW>#PAGINATION sans crit&egrave;re {pagination} ou employ&eacute; dans une boucle recursive',
 'zbug_parametres_inclus_incorrects' => 'Param&egrave;t pou enklizyon se pa korek',
 'zbug_resultat' => 'r&eacute;zilta',
 'zbug_serveur_indefini' => 's&egrave;v&egrave; SQL ki pa defini',
-'zbug_table_inconnue' => 'Tab SQL &laquo; @table@ &raquo; se pa koni'
+'zbug_table_inconnue' => 'Tab SQL &laquo; @table@ &raquo; se pa koni',
+'zxml_connus_attributs' => '<NEW>attributs connus',
+'zxml_de' => '<NEW>de',
+'zxml_inconnu_attribut' => '<NEW>attribut inconnu',
+'zxml_inconnu_balise' => '<NEW>balise inconnue',
+'zxml_inconnu_entite' => '<NEW>entit&eacute; inconnue',
+'zxml_inconnu_id' => '<NEW>ID inconnu',
+'zxml_mais_de' => '<NEW>mais de',
+'zxml_non_conforme' => '<NEW>n\'est pas conforme au motif',
+'zxml_non_fils' => '<NEW>n\'est pas un fils de',
+'zxml_nonvide_balise' => '<NEW>balise non vide',
+'zxml_obligatoire_attribut' => '<NEW>attribut obligatoire mais absent dans',
+'zxml_succession_fils_incorrecte' => '<NEW>succession des fils incorrecte',
+'zxml_survoler' => '<NEW>survoler pour voir les corrects',
+'zxml_valeur_attribut' => '<NEW>valeur de l\'attribut',
+'zxml_vide_balise' => '<NEW>balise vide',
+'zxml_vu' => '<NEW>vu auparavant'
 
 );
 

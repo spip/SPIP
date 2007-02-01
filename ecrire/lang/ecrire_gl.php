@@ -38,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_non_acces_message' => 'Non tes acceso a esta mensaxe.',
 'avis_non_acces_page' => 'Non tes acceso a esta p&aacute;xina.',
 'avis_operation_echec' => 'Fallou a operaci&oacute;n.',
+'avis_operation_impossible' => 'Operaci&amp;oacute;n impos&amp;iacute;bel',
 'avis_probleme_archive' => 'Problema de leitura do ficheiro @archive@',
 'avis_site_introuvable' => 'Non se pode atopar o web',
 'avis_site_syndique_probleme' => 'Atenci&oacute;n: a afiliaci&oacute;n deste web atopou un problema; o sistema quedou temporalmente interrompido. Verifique a v&iacute;a do ficheiro de afiliaci&oacute;n deste web (<b>@url_syndic@</b>), e tente unha nova recuperaci&oacute;n da informaci&oacute;n.',
@@ -52,6 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_ajouter' => 'Engadir',
 'bouton_ajouter_participant' => 'ENGADIR PARTICIPANTE:',
 'bouton_annonce' => 'ANUNCIO',
+'bouton_annuler' => 'Anular',
 'bouton_checkbox_envoi_message' => 'posibilidade de enviar unha mensaxe',
 'bouton_checkbox_indiquer_site' => 'indica obrigatoriamente un lugar web',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'o equipo de xesti&oacute;n do web',
@@ -113,6 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cache_mode_non_compresse' => 'Os ficheiros da memoria cach&eacute; est&aacute;n rexistrados en modo non comprimido',
 'cache_modifiable_webmestre' => 'Este par&aacute;metro &eacute; modific&aacute;bel polo webm&aacute;ster do web.',
 'calendrier_synchro' => 'Se usa un programa de axenda compatible <b>iCal</b>, poder&aacute; sincronizalo coas informaci&oacute;ns deste web.',
+'connexion_ldap' => 'Conexi&amp;oacute;n :',
 
 
 // D
@@ -174,10 +177,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_version_manquant' => 'Falta a versi&oacute;n do m&oacute;dulo',
 
 
+// F
+'forum_info_original' => 'orixinal',
+
+
 // I
 'ical_info1' => 'Esta p&aacute;xina presenta varios m&eacute;todos para establecer contactos coas novidades deste web.',
 'ical_info2' => 'Para obter m&aacute;is detalles sobre todas estas t&eacute;cnicas, non dubide en consultar <a href="http://www.spip.net/fr_suivi">a documentaci&oacute;n de SPIP</a>.',
 'ical_info_calendrier' => 'Dous calendarios est&aacute;n &aacute; s&uacute;a disposici&oacute;n. O primeiro e un mapa do web que anuncia todos os artigos publicados. O segundo cont&eacute;n os anuncios editoriais as&iacute; como as s&uacute;as &uacute;ltimas mensaxes privadas&nbsp;: estalle reservada gracias a unha chave persoal, que pode modificar en calquera momento anovando a s&uacute;a chave.',
+'ical_lien_rss_breves' => 'Sindication das breves do web',
 'ical_methode_http' => 'Descarga',
 'ical_methode_webcal' => 'Sincronizaci&oacute;n (webcal://)',
 'ical_texte_js' => 'Unha li&ntilde;a de javascript perm&iacute;telle amosar moi doadamente, sobre calquera web do que dispo&ntilde;a os artigos recentes deste web.',
@@ -485,6 +493,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_procedez_par_etape' => 'procede etapa por etapa',
 'info_procedure_maj_version' => 'o procedemento da posta &oacute; d&iacute;a ten que ser lanzado a fin
 		de adaptar a base de datos &aacute; nova versi&oacute;n de SPIP.',
+'info_proxy_ok' => 'Test de proxy logrado.',
 'info_ps' => 'PS.',
 'info_publier' => 'publicar',
 'info_publies' => 'Os teus artigos publicados en li&ntilde;a',
@@ -627,6 +636,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'install_echec_annonce' => 'A instalaci&oacute;n probabelmente vai pechar ou lanzar un sitio non funcional...',
 'install_extension_mbstring' => 'SPIP non funnciona con&nbsp;:',
 'install_extension_php_obligatoire' => 'SPIP exixe a extensi&oacute;n php&nbsp;:',
+'install_php_version' => 'Versi&amp;oacute;n de PHP @version@ insuficiente (m&amp;iacute;nima = @minimum@)',
 'install_select_langue' => 'Selecciona un idioma e preme o bot&oacute;n &laquo;seguinte&raquo; para comezar co proceso de instalaci&oacute;n.',
 'intem_redacteur' => 'redactor/a',
 'item_accepter_inscriptions' => 'Aceptar as inscrici&oacute;ns',
@@ -714,6 +724,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'lien_supprimer_rubrique' => 'Suprimir este tema',
 'lien_tout_deplier' => 'Despregalo todo',
 'lien_tout_replier' => 'Repregalo todo',
+'lien_tout_supprimer' => 'Suprimir todo',
 'lien_trier_nom' => 'Ordear por nome',
 'lien_trier_nombre_articles' => 'Ordear por n&uacute;mero de artigos',
 'lien_trier_statut' => 'Ordear por categor&iacute;a',
@@ -761,6 +772,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'plugin_etat_stable' => 'est&aacute;bel',
 'plugin_etat_test' => 'en test',
 'plugins_liste' => 'Lista de m&oacute;dulos',
+'protocole_ldap' => 'Versi&amp;oacute;n do protocolo :',
 
 
 // R
@@ -768,6 +780,8 @@ cunha cor que indica o seu estado&nbsp;:',
 
 
 // S
+'sauvegarde_fusionner' => 'Fusionar a base de datos actual e a copia de seguridade',
+'sauvegarde_url_origine' => 'Eventualemente, URL do web de orixe :',
 'statut_admin_restreint' => '(admin restrinxido)',
 'syndic_choix_moderation' => 'Que facer das vindeiras ligaz&oacute;ns que prove&ntilde;an deste web&nbsp;?',
 'syndic_choix_oublier' => 'Que facer das ligaz&oacute;ns que xa non figuran no ficheiro de sindicaci&oacute;n&nbsp;?',
@@ -1060,6 +1074,7 @@ embaixo o seu enderezo, no formato <tt><html>http://proxy:8080</html></tt>.
 'titre_sites_tous' => 'Os lugares referidos',
 'titre_suivi_petition' => 'Seguimento das petici&oacute;ns',
 'titre_syndication' => 'Sindicaci&oacute;n de webs',
+'tls_ldap' => 'Capa de seguridade de transporte (Transport Layer Security) :',
 'tout_dossier_upload' => 'Todo o cartafol @upload@',
 'trad_article_inexistant' => 'Non hai artigo que leve este n&uacute;mero.',
 'trad_article_traduction' => 'Todas as versi&oacute;ns deste artigo&nbsp;:',

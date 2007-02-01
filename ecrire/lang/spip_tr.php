@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Yaz&#305;l&#305;m hatas&#305;. Bu i&#351;lev burada kullan&#305;lmamal&#305;.',
 'avis_erreur_mysql' => 'MySQL hatas&#305;',
 'avis_erreur_sauvegarde' => 'Yedeklemede hata (@type@ @id_objet@) !',
+'avis_erreur_visiteur' => '&Ouml;zel alana eri&#351;im sorunu',
 
 
 // B
@@ -82,6 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_semaine' => 'haftal&#305;k takvim',
 'choix_couleur_interface' => 'renk',
 'choix_interface' => 'aray&uuml;z se&ccedil;imi',
+'colonne' => 'S&uuml;tun',
 'confirm_changer_statut' => 'Dikkat, bu eleman&#305;n durumunu de&#287;i&#351;tirmek istediniz. Devam etmek istiyor musunuz ?',
 'correcte' => 'do&#287;ru',
 
@@ -194,6 +196,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_repertoires_suivants' => '<p><b>A&#351;a&#287;&#305;daki dizinlere yazma izni yoktur&nbsp;: </b></p><ul>@bad_dirs@.</ul> 
   <p>Bu sorunu &ccedil;&ouml;zmek i&ccedil;in FTP program&#305;n&#305;zla her bir dizine eri&#351;im haklar&#305;n&#305; d&uuml;zenleyin. Bu yordam, kurulum kitap&ccedil;&#305;&#287;&#305;nda detayl&#305; bi&ccedil;imde a&ccedil;&#305;klanm&#305;&#351;t&#305;r./p> 
   <p>Bu i&#351;lemi yapt&#305;&#287;&#305;n&#305;zda ',
+'double_occurrence' => '&Ccedil;ift tekrar ',
 
 
 // E
@@ -201,6 +204,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_document' => 'Belge ba&#351;l&#305;&#287;&#305;&nbsp;:',
 'entree_titre_image' => 'Resim ba&#351;l&#305;&#287;&#305;&nbsp;:',
 'envoi_via_le_site' => 'Site &uuml;zerinden g&ouml;nder',
+'erreur' => 'Hata',
+'erreur_balise_non_fermee' => 'son etiket kapat&#305;lmam&#305;&#351; :',
+'erreur_texte' => 'hata(lar)',
 
 
 // F
@@ -521,7 +527,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'info_sites_referencer' => 'Bir siteye at&#305;fta bulun',
 'info_supprimer_vignette' => 'Bu etiketi sil',
 'info_sur_site_public' => '-vide-',
-'info_symbole_bleu' => '<b>Mavi</b> sembol bir <b>hat&#305;rlatmay&#305;</b> g&ouml;sterir : yani, ki&#351;isel kullan&#305;m&#305;n&#305;z i&ccedil;in bir uyar&#305; iletisidir.',
+'info_symbole_bleu' => '<b>Mavi</b> sembol bir <b>hat&#305;rlatmay&#305;</b> g&ouml;sterir : yani, ki&#351;isel kullan&#305;m&#305;n&#305;z i&ccedil;in bir iletidir.',
 'info_symbole_jaune' => '<b>Sar&#305;</b> sembol <b>t&uuml;m edit&ouml;rlere y&ouml;nelik</b> bir duyuruyu g&ouml;sterir&nbsp;: t&uuml;m y&ouml;neticiler taraf&#305;ndan de&#287;i&#351;tirilebilir ve t&uuml;m edit&ouml;rler taraf&#305;ndan g&ouml;r&uuml;lebilir. ',
 'info_symbole_vert' => 'Sar&#305; sembol sitenin ba&#351;ka kullan&#305;c&#305;lar&#305;yla yap&#305;lan ileti al&#305;&#351;veri&#351;lerini g&ouml;sterir.',
 'info_syndication' => 'Payla&#351;&#305;m&nbsp;:',
@@ -581,6 +587,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'lien_visite_site' => 'Bu siteyi ziyaret et',
 'lien_visites' => '@visites@&nbsp;ziyaret',
 'lien_voir_auteur' => 'Bu yazar&#305; g&ouml;r&uuml;nt&uuml;le',
+'ligne' => 'Sat&#305;r',
 'lnfo_liens' => '-vide-',
 'login_acces_prive' => '&Ouml;zel alana eri&#351;im',
 'login_autre_identifiant' => 'Ba&#351;ka bir kullan&#305;c&#305; ismi ile ba&#287;lan',
@@ -621,9 +628,11 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 
 // N
 'navigateur_pas_redirige' => 'Gezgininiz yeniden y&ouml;nlenmiyorsa, devam etmek i&ccedil;in buraya t&#305;klay&#305;n&#305;z.',
+'numero' => 'Numara',
 
 
 // O
+'occurence' => 'Tekrar',
 'onglet_affacer_base' => 'Veritaban&#305;n&#305; sil',
 'onglet_agenda' => '-vide-',
 'onglet_auteur' => 'Yazar',
@@ -695,6 +704,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 
 
 // S
+'spip_conforme_dtd' => 'SPIP bu belgeyi DOCTYPE\'e uygun buluyor :',
 'squelette' => 'iskelet',
 'squelette_inclus_ligne' => 'iskelet eklendi, sat&#305;r',
 'squelette_ligne' => 'iskelet, sat&#305;r',
@@ -715,11 +725,12 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'texte_documents_associes' => 'A&#351;a&#287;&#305;daki belgeler makale ile ba&#287;lant&#305;l&#305; olup,
     do&#287;rudan makalenin i&ccedil;ine dahil edilmemi&#351;tir. Kamu sitesinin sayfa d&uuml;zenine g&ouml;re,
     sonradan belge eki olarak g&ouml;r&uuml;lebilir.',
-'texte_erreur_mise_niveau_base' => 'Seviye y&uuml;kseltme (g&uuml;ncelleme) s&#305;ras&#305;nda veritaban&#305; hatas&#305;.  @fichier@ resmi ula&#351;mad&#305; (@id_article@ makalesi). Bu referans&#305; kaydedip seviye y&uuml;kseltmeyi tekrar deneyiniz ve resimlerin makalelerde g&ouml;r&uuml;ld&uuml;&#287;&uuml;nden emin olunuz. ',
-'texte_inc_auth_1' => '<b>@auth_login@</b> kullan&#305;c&#305; ismini girdiniz ancak veritaban&#305;nda (art&#305;k) bu kullan&#305;c&#305; ismi yok.  &#350;unu deneyiniz :',
+'texte_erreur_mise_niveau_base' => 'G&uuml;ncelleme s&#305;ras&#305;nda veritaban&#305; hatas&#305;. @fichier@ resmi ula&#351;mad&#305; (@id_article@ makalesi). Bu referans&#305; kaydedip g&uuml;ncelemeyi tekrar deneyiniz ve resimlerin makalelerde g&ouml;r&uuml;ld&uuml;&#287;&uuml;nden emin olunuz. ',
+'texte_erreur_visiteur' => '&Ouml;zel alana girmek i&ccedil;in kulland&#305;&#287;&#305;n&#305;z kullan&#305;c&#305; ismi giri&#351;e izin vermiyor.',
+'texte_inc_auth_1' => '<b>@auth_login@</b> kullan&#305;c&#305; ismini girdiniz ancak veritaban&#305;nda bu kullan&#305;c&#305; ismi yok / art&#305;k yok.  &#350;unu deneyiniz :',
 'texte_inc_auth_2' => 'gezgininizi kapat&#305;p tekrar &ccedil;al&#305;&#351;t&#305;r&#305;n&#305;z ve ',
 'texte_inc_auth_3' => 'tekrar ba&#287;lan&#305;n&#305;z.',
-'texte_inc_config' => 'Bu sayfalarda yap&#305;lan de&#287;i&#351;iklikler sitenizin i&#351;leyi&#351;ini b&uuml;y&uuml;k &ouml;l&ccedil;&uuml;de etkiler. SPIP sisteminin i&#351;leyi&#351;ine a&#351;ina olmad&#305;&#287;&#305;n&#305;z s&uuml;rece m&uuml;dahale etmemenizi tavsiye ederiz. <br /><br /><b>Daha genel bir ifadeyle s&ouml;ylemek gerekirse bu sayfalar&#305;n y&uuml;k&uuml;n&uuml; sitenin A&#287; Y&ouml;neticisi\'ne b&#305;rakman&#305;z&#305; &ouml;zellikle tavsiye ederiz.</b>',
+'texte_inc_config' => 'Bu sayfalarda yap&#305;lan de&#287;i&#351;iklikler sitenizin i&#351;leyi&#351;i &uuml;zerinde b&uuml;y&uuml;k &ouml;l&ccedil;&uuml;de etkilidir. SPIP sisteminin i&#351;leyi&#351;ine a&#351;ina olmad&#305;&#287;&#305;n&#305;z s&uuml;rece m&uuml;dahale etmemenizi &ouml;neririz.  <br /><br /><b>Daha genel bir ifadeyle s&ouml;ylemek gerekirse bu sayfalarla ilgilenme i&#351;ini sitenin A&#287; Y&ouml;neticisi\'ne b&#305;rakman&#305;z&#305; &ouml;zellikle &ouml;neririz.</b>',
 'texte_inc_meta_1' => 'Sistem <code>@fichier@</code> dosyas&#305;n&#305;n yaz&#305;lmas&#305; s&#305;ras&#305;nda bir hata ile kar&#351;&#305;la&#351;t&#305;. L&uuml;tfen, site y&ouml;neticisi olarak ',
 'texte_inc_meta_2' => '(<code>ecrire/data/</code> dizinindeki) ',
 'texte_inc_meta_3' => '<code>@repertoire@</code> dizinindeki yazma haklar&#305;n&#305; kontrol ediniz. ',
@@ -778,19 +789,38 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'zbug_code' => 'kod',
 'zbug_critere_inconnu' => 'tan&#305;ms&#305;z kriter @critere@',
 'zbug_distant_interdit' => 'yasaklanm&#305;&#351; d&#305;&#351; veri dosyas&#305;',
+'zbug_doublon_table_sans_index' => 'endekslenmemi&#351; bir tabloda tekrarlanan bilgiler',
 'zbug_erreur_boucle_double' => 'D&Ouml;NG&Uuml;@id@: &ccedil;ift tan&#305;ml&#305;',
 'zbug_erreur_boucle_fermant' => 'D&Ouml;NG&Uuml;@id@: kapatma etiketi eksik',
 'zbug_erreur_boucle_syntaxe' => 'D&ouml;ng&uuml; t&uuml;mcesi hatal&#305;',
+'zbug_erreur_compilation' => 'derleme hatas&#305;',
 'zbug_erreur_execution_page' => 'sayfa i&#351;letilirken hata olu&#351;tu',
 'zbug_erreur_filtre' => 'Hata : <b>&laquo; @filtre@ &raquo;</b> filtresi tan&#305;ms&#305;z',
 'zbug_erreur_meme_parent' => '{meme_parent} sadece (FORUMS) veya  (RUBRIQUES) i&ccedil;in uygulanabilir',
 'zbug_erreur_squelette' => '&#304;skelette hata var',
 'zbug_info_erreur_squelette' => 'Sitede hata var',
 'zbug_inversion_ordre_inexistant' => 'olmayan bir s&#305;ralama ters &ccedil;evrilemez',
+'zbug_pagination_sans_critere' => 'kritersiz veya kendini &ccedil;a&#287;&#305;ran d&ouml;ng&uuml;de kullan&#305;lan #PAGINATION {pagination} ',
 'zbug_parametres_inclus_incorrects' => 'Ekleme parametreleri hatal&#305;',
 'zbug_resultat' => 'sonu&ccedil;',
 'zbug_serveur_indefini' => 'SQL hizmet birimi tan&#305;ms&#305;z',
-'zbug_table_inconnue' => '&laquo; @table@ &raquo; SQL tablosu tan&#305;ms&#305;z'
+'zbug_table_inconnue' => '&laquo; @table@ &raquo; SQL tablosu tan&#305;ms&#305;z',
+'zxml_connus_attributs' => 'bilinen &ouml;znitelikler',
+'zxml_de' => 'n&#305;n / nin',
+'zxml_inconnu_attribut' => 'bilinmeyen &ouml;znitelik',
+'zxml_inconnu_balise' => 'bilinmeyen etiket',
+'zxml_inconnu_entite' => 'bilinmeyen madde',
+'zxml_inconnu_id' => 'bilinmeyen ID',
+'zxml_mais_de' => 'ama n&#305;n / nin',
+'zxml_non_conforme' => 'amaca uygun de&#287;il',
+'zxml_non_fils' => 'bir alt maddesi de&#287;il',
+'zxml_nonvide_balise' => 'bo&#351; olmayan etiket',
+'zxml_obligatoire_attribut' => 'zorunlu ama belirtilmemi&#351; etiket',
+'zxml_succession_fils_incorrecte' => 'alt maddelerin pe&#351;pe&#351;e gelmesi hatal&#305;',
+'zxml_survoler' => 'do&#287;rular&#305; g&ouml;rmek i&ccedil;in &uuml;zerindne ge&ccedil;mek ???',
+'zxml_valeur_attribut' => '&ouml;zniteli&#287;in de&#287;eri',
+'zxml_vide_balise' => 'bo&#351; etiket',
+'zxml_vu' => '&ouml;nceden g&ouml;r&uuml;len'
 
 );
 

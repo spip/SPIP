@@ -86,6 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'calendrier_synchro_sync' => '<NEW><NEW>Synchroniser le fichier <i>iCal</i><br /> (Mozilla Calendar, Apple iCal...)',
 'choix_couleur_interface' => 'colore',
 'choix_interface' => 'scelta dell\'interfaccia',
+'colonne' => 'Colonna',
 'confirm_changer_statut' => 'Attenzione, &egrave; stato chiesto di modificare lo status di questo elemento. Continuare?',
 'correcte' => 'corretto',
 
@@ -200,6 +201,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <p />Utilizzare un client FTP o un comando di shell [chmod] per impostare i diritti di accesso
 di ciascuna di queste cartelle. La procedura &egrave; spiegata in dettaglio nella guida d\'installazione.
 <p />Una volta attribuiti i permessi, si potr&agrave; ',
+'double_occurrence' => 'Doppia occorrenza',
 
 
 // E
@@ -207,6 +209,9 @@ di ciascuna di queste cartelle. La procedura &egrave; spiegata in dettaglio nell
 'entree_titre_document' => 'Titolo del documento:',
 'entree_titre_image' => 'Titolo dell\'immagine:',
 'envoi_via_le_site' => 'Invio tramite il sito',
+'erreur' => 'Errore',
+'erreur_balise_non_fermee' => 'ultimo tag non chiuso:',
+'erreur_texte' => 'errore/i',
 
 
 // F
@@ -554,6 +559,7 @@ o contatta il tuo hoster.</font>',
 'lien_visite_site' => 'visita il sito',
 'lien_visites' => '@visites@&nbsp;visite',
 'lien_voir_auteur' => 'Vedi questa autrice',
+'ligne' => 'Linea',
 'login_acces_prive' => 'accesso all\'area riservata',
 'login_autre_identifiant' => 'connettiti con un altro ID',
 'login_connexion_refusee' => 'Connessione rifiutata.',
@@ -592,9 +598,11 @@ devi attivare Javascript nel tuo browser e',
 
 // N
 'navigateur_pas_redirige' => 'Se la pagina non cambia automaticamente, cliccare qui per continuare.',
+'numero' => 'Numero',
 
 
 // O
+'occurence' => 'Occorrenza',
 'onglet_affacer_base' => 'Svuota il database',
 'onglet_auteur' => 'L\'autrice',
 'onglet_contenu_site' => 'Contenuto del sito',
@@ -659,6 +667,7 @@ e riconnetterti all\'area riservata.
 
 
 // S
+'spip_conforme_dtd' => 'SPIP ritiene che questo documento &egrave; conforme al proprio DOCTYPE:',
 'squelette' => 'modello di layout',
 'squelette_inclus_ligne' => 'modello incluso, linea',
 'squelette_ligne' => 'modello, linea',
@@ -742,19 +751,38 @@ funzionamento del sito. Non intervenire finch&eacute; non conosci bene i meccani
 'zbug_code' => 'codice',
 'zbug_critere_inconnu' => 'criterio sconosciuto @critere@',
 'zbug_distant_interdit' => 'esterno non accessibile',
+'zbug_doublon_table_sans_index' => 'doppioni su una tabella senza indice',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: doppia definizione',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: chiusura tag mancante',
 'zbug_erreur_boucle_syntaxe' => 'Sintassi del ciclo errata',
+'zbug_erreur_compilation' => 'Errore di compilazione',
 'zbug_erreur_execution_page' => 'errore di esecuzione della pagina',
 'zbug_erreur_filtre' => 'Errore: filtro <b>&laquo; @filtre@ &raquo;</b> non esistente',
 'zbug_erreur_meme_parent' => '{meme_parent} si applica unicamente ai cicli (FORUMS) o (RUBRIQUES)',
 'zbug_erreur_squelette' => 'Errore/i nel modello di layout',
 'zbug_info_erreur_squelette' => 'Errore sul sito',
 'zbug_inversion_ordre_inexistant' => 'inversione di un ordine non esistente',
+'zbug_pagination_sans_critere' => '#PAGINATION senza criterio {pagination} oppure usato in un ciclo ricorsivo',
 'zbug_parametres_inclus_incorrects' => 'Parametri di inclusione non corretti',
 'zbug_resultat' => 'risultato',
 'zbug_serveur_indefini' => 'server SQL non definito',
-'zbug_table_inconnue' => 'Tabella SQL &laquo; @table@ &raquo; sconosciuta'
+'zbug_table_inconnue' => 'Tabella SQL &laquo; @table@ &raquo; sconosciuta',
+'zxml_connus_attributs' => 'attributi conosciuti',
+'zxml_de' => 'di',
+'zxml_inconnu_attribut' => 'attributo sconosciuto',
+'zxml_inconnu_balise' => 'segnaposto sconosciuto',
+'zxml_inconnu_entite' => 'entit&agrave; sconosciuta',
+'zxml_inconnu_id' => 'ID sconosciuto',
+'zxml_mais_de' => 'ma di',
+'zxml_non_conforme' => 'non &egrave; conforme al motivo',
+'zxml_non_fils' => 'non &egrave; un figlio di',
+'zxml_nonvide_balise' => 'segnaposto non vuoto',
+'zxml_obligatoire_attribut' => 'attributo obbligatorio ma assente in',
+'zxml_succession_fils_incorrecte' => 'successione dei figli non corretta',
+'zxml_survoler' => 'passarci sopra col mouse per vedere i corretti',
+'zxml_valeur_attribut' => 'valore dell\'attributo',
+'zxml_vide_balise' => 'tag vuoto',
+'zxml_vu' => 'visto in precedenza'
 
 );
 

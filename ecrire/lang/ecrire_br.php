@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_non_acces_message' => 'N\'oc\'h ket aotreet da dizhout ar c\'hemennadenn-ma&ntilde;.',
 'avis_non_acces_page' => 'N\'oc\'h ket aotreet da dizhout ar bajenn-ma&ntilde;.',
 'avis_operation_echec' => 'C\'hwitet he deus an oberiadenn.',
+'avis_operation_impossible' => 'Oberenn dibosupl',
 'avis_probleme_archive' => 'Kudenn evit lenn ar fichennaoueg  @archive@',
 'avis_site_introuvable' => 'Lec\'hienn digavadus',
 'avis_site_syndique_probleme' => 'Diwallit : ur gudenn a zo savet gant sindikadurezh al lec\'hienn-ma&ntilde;&nbsp;; neuze eo ehanet ar genreizhad e-pad ur pennad-amzer evit ar mare. Gwiriit chomlec\'h fichennaoueg sindikadurezh al lec\'hienn-ma&ntilde; <b>@url_syndic@</b>), ha klaskit dezastum an titouro&ugrave; en dro.',
@@ -46,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_ajouter' => 'Ouzhpenna&ntilde;',
 'bouton_ajouter_participant' => 'OUZHPENNA&Ntilde; UR PERZHIAD&nbsp;:',
 'bouton_annonce' => 'KEMENN',
+'bouton_annuler' => 'Nulla&ntilde;',
 'bouton_checkbox_envoi_message' => 'galloud da gas ur c\'hemennadenn',
 'bouton_checkbox_indiquer_site' => 'rei&ntilde; dre-ret ul lec\'hienn-web',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'merourien ar lec\'hienn',
@@ -165,10 +167,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_version_manquant' => 'N\'eus ket ouzh arreval an astenn',
 
 
+// F
+'forum_info_original' => 'orin',
+
+
 // I
 'ical_info1' => 'War ar bajenn-ma&ntilde; ez eus meur a hentenn evit chom e-darempred gant buhez al lec\'hienn.',
 'ical_info2' => 'Evit titouro&ugrave; ouzhpenn diwar-benn an hentenno&ugrave;-se, lennit <a href="http://www.spip.net/fr_suivi">diello&ugrave; SPIP</a>.',
 'ical_info_calendrier' => 'Daou deiziataer a c\'hellit ober ganto. An hini kenta&ntilde; a ziskouez an holl pennado&ugrave; bet embannet. War an eil ema&ntilde; ar c\'hemenno&ugrave;-embann hag ho kemennadenno&ugrave; prevez&nbsp;: a-drugarez d\'un alc\'hwez hiniennel (a c\'hellit che&ntilde;ch forzh pegoulz o kemm ho ker-tremen) e c\'hellit beza&ntilde; an hini nemeta&ntilde; o kaout ar gwir da vont warna&ntilde;.',
+'ical_lien_rss_breves' => 'Liamma&ntilde; berrskrido&ugrave; al lec\'hienn-ma&ntilde; dre RSS',
 'ical_methode_http' => 'Pellgarga&ntilde;',
 'ical_methode_webcal' => 'Adkenamzeria&ntilde; (webcal://)',
 'ical_texte_js' => 'A-drugarez d\'ul linenn javascript e c\'hellit, en un doare aezet, diskouez ar pennado&ugrave; diwezha&ntilde; embannet war al lec\'hienn-ma&ntilde;, war forzh pe hini eus ho lec\'hienno&ugrave;.',
@@ -466,6 +473,7 @@ Risklo&ugrave; \'zo ma vefe distrujet ho tiaz-titouro&ugrave; pe ma n\'afe ket e
 'info_procedez_par_etape' => 'kit war-raok prantad-ha-prantad',
 'info_procedure_maj_version' => 'rankout a ra al labour hizivaat beza&ntilde; graet a-benn azasaat 
 	an diaz-titouro&ugrave; ouzh arreval nevez SPIP.',
+'info_proxy_ok' => 'Mat eo bet disoc\'h arnod ar proxy.',
 'info_ps' => 'G.-S',
 'info_publier' => 'embann',
 'info_publies' => 'Ho pennado&ugrave; bet embannet',
@@ -695,6 +703,7 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'lien_supprimer_rubrique' => 'dilemel ar rummad-ma&ntilde;',
 'lien_tout_deplier' => 'Dispaka&ntilde; pep tra',
 'lien_tout_replier' => 'Adpaka&ntilde; pep tra',
+'lien_tout_supprimer' => 'Dilemel pep tra',
 'lien_trier_nom' => 'Renka&ntilde; diouzh an anv',
 'lien_trier_nombre_articles' => 'Renka&ntilde; diouzh an niver a bennado&ugrave;',
 'lien_trier_statut' => 'Renka&ntilde; diouzh ar statud',
@@ -750,6 +759,8 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 
 
 // S
+'sauvegarde_fusionner' => 'Kendeuzi&ntilde; an diaz a zo brema&ntilde; gant ar savete',
+'sauvegarde_url_origine' => 'Marteze, URL al lec\'hienn-orin',
 'statut_admin_restreint' => '(merour strishaet)',
 'syndic_choix_moderation' => 'Petra ober gant al liammo&ugrave; a zeu a teuio ouzh al lec\'hienn-ma&ntilde;&nbsp;?',
 'syndic_choix_oublier' => 'Petra ober gant al liammo&ugrave; n\'emaint ket er restr-sindika&ntilde;&nbsp;?',

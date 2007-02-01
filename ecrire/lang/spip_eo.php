@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Program-eraro. Tiu funkcio ne alvokeblas en tiu &#265;i kunteksto.',
 'avis_erreur_mysql' => 'MySQL-eraro',
 'avis_erreur_sauvegarde' => 'Konservo-eraro (@type@ @id_objet@)! ',
+'avis_erreur_visiteur' => '<NEW>Probl&egrave;me d\'acc&egrave;s &agrave; l\'espace priv&eacute;',
 
 
 // B
@@ -81,6 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_semaine' => 'semajn-kalendaro',
 'choix_couleur_interface' => 'koloro',
 'choix_interface' => 'elekto de interfaco',
+'colonne' => '<NEW>Colonne',
 'confirm_changer_statut' => 'Atentu, vi petis por &#349;an&#285;i la statuton de tiu elemento. &#264;u vi deziras da&#365;rigi ?',
 'correcte' => 'korekta',
 
@@ -196,6 +198,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <p />Por solvi tion, uzu vian FTP-klienton por reguligi la alir-rajtojn de &#265;iu
  el tiuj dosierujoj. La proceduron oni detale klarigis en la instalgvidlibro.
 <p />Post tio, vi povos ',
+'double_occurrence' => '<NEW>Double occurrence',
 
 
 // E
@@ -203,6 +206,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_document' => 'Titolo de la dokumento&nbsp;:',
 'entree_titre_image' => 'Bildtitolo&nbsp;:',
 'envoi_via_le_site' => 'Sendo tra la retejo',
+'erreur' => '<NEW>Erreur',
+'erreur_balise_non_fermee' => '<NEW>derni&egrave;re balise non referm&eacute;e :',
+'erreur_texte' => '<NEW>erreur(s)',
 
 
 // F
@@ -550,6 +556,7 @@ Dankon pro via partopreno
 'lien_visite_site' => 'viziti tiun retejon',
 'lien_visites' => '@visites@&nbsp;vizitoj',
 'lien_voir_auteur' => 'Vidu tiun a&#365;toron',
+'ligne' => '<NEW>Ligne',
 'login_acces_prive' => 'aliro al la privata spaco',
 'login_autre_identifiant' => 'ensaluti per alia kromnomo',
 'login_connexion_refusee' => 'Ensaluto rifuzita.',
@@ -589,9 +596,11 @@ Dankon pro via partopreno
 
 // N
 'navigateur_pas_redirige' => 'Se via retumilo ne redirekti&#285;as, da&#365;rigu musklakante &#265;i tie.',
+'numero' => '<NEW>Num&eacute;ro',
 
 
 // O
+'occurence' => '<NEW>Occurence',
 'onglet_affacer_base' => 'Forigi la datenbazon',
 'onglet_auteur' => 'La a&#365;toro',
 'onglet_contenu_site' => 'Enhavo de la retejo',
@@ -659,6 +668,7 @@ kaj ensaluti.
 
 
 // S
+'spip_conforme_dtd' => '<NEW>SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE :',
 'squelette' => 'skeleto',
 'squelette_inclus_ligne' => 'skeleto inkluzivita, linio',
 'squelette_ligne' => 'skeleto, linio',
@@ -683,6 +693,7 @@ kaj ensaluti.
   Notu bone tiun referencon, reprovu la alniveligon,
   kaj fine kontrolu ke la bildoj aperu
   plu en la artikoloj.',
+'texte_erreur_visiteur' => '<NEW>Vous avez tent&eacute; de d\'acc&eacute;der &agrave; l\'espace priv&eacute; avec un login qui ne le permet pas.',
 'texte_inc_auth_1' => '<MODIF>Vi ensalutis la&#365; la
   salutnomo <b>@auth_login@</b>, sed tiu ne/ne plu ekzistas en la bazo.
   Provu',
@@ -744,19 +755,38 @@ kaj ensaluti.
 'zbug_code' => 'kodo',
 'zbug_critere_inconnu' => 'nekonata kriterio @critere@',
 'zbug_distant_interdit' => 'ago &#265;e tiu ekstera datenbazo malpermesata',
+'zbug_doublon_table_sans_index' => '<NEW>doublons sur une table sans index',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: duobla difino',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: mankas fermanta marko',
 'zbug_erreur_boucle_syntaxe' => 'Ne valida ma&#349;a sintakso',
+'zbug_erreur_compilation' => '<NEW>Erreur de compilation',
 'zbug_erreur_execution_page' => 'eraro dum plenumo de pa&#285;-afi&#349;o',
 'zbug_erreur_filtre' => 'Eraro : filtrilo <b>&laquo; @filtre@ &raquo;</b> nedifinita',
 'zbug_erreur_meme_parent' => '{meme_parent} nur apliki&#285;as je ma&#349;oj (FORUMS) a&#365; (RUBRIQUES)',
 'zbug_erreur_squelette' => 'Eraro(j) en la skeleto',
 'zbug_info_erreur_squelette' => 'Eraro &#265;e la retejo',
 'zbug_inversion_ordre_inexistant' => 'inversigo de ne ekzistanta ordo',
+'zbug_pagination_sans_critere' => '<NEW>#PAGINATION sans crit&egrave;re {pagination} ou employ&eacute; dans une boucle recursive',
 'zbug_parametres_inclus_incorrects' => 'Ne korektaj inkludaj parametroj',
 'zbug_resultat' => 'rezulto',
 'zbug_serveur_indefini' => 'nedifinata SQL servilo',
-'zbug_table_inconnue' => 'nekonata SQL &laquo; @table@ &raquo; tabelo'
+'zbug_table_inconnue' => 'nekonata SQL &laquo; @table@ &raquo; tabelo',
+'zxml_connus_attributs' => '<NEW>attributs connus',
+'zxml_de' => '<NEW>de',
+'zxml_inconnu_attribut' => '<NEW>attribut inconnu',
+'zxml_inconnu_balise' => '<NEW>balise inconnue',
+'zxml_inconnu_entite' => '<NEW>entit&eacute; inconnue',
+'zxml_inconnu_id' => '<NEW>ID inconnu',
+'zxml_mais_de' => '<NEW>mais de',
+'zxml_non_conforme' => '<NEW>n\'est pas conforme au motif',
+'zxml_non_fils' => '<NEW>n\'est pas un fils de',
+'zxml_nonvide_balise' => '<NEW>balise non vide',
+'zxml_obligatoire_attribut' => '<NEW>attribut obligatoire mais absent dans',
+'zxml_succession_fils_incorrecte' => '<NEW>succession des fils incorrecte',
+'zxml_survoler' => '<NEW>survoler pour voir les corrects',
+'zxml_valeur_attribut' => '<NEW>valeur de l\'attribut',
+'zxml_vide_balise' => '<NEW>balise vide',
+'zxml_vu' => '<NEW>vu auparavant'
 
 );
 

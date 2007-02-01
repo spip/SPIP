@@ -38,6 +38,7 @@ disattivata per motivi sicurezza (verifica con l\'amministratore di sistema).',
 'avis_non_acces_message' => 'Non hai accesso a questo messaggio.',
 'avis_non_acces_page' => 'Non hai accesso a questa pagina.',
 'avis_operation_echec' => 'L\'operazione &egrave; fallita.',
+'avis_operation_impossible' => 'Operazione impossibile',
 'avis_probleme_archive' => 'Problema di lettura del file @archive@',
 'avis_site_introuvable' => 'Sito introvabile',
 'avis_site_syndique_probleme' => 'Attenzione: si &egrave; verificato un errore nella syndication del sito; il sistema &egrave; temporaneamente fuori uso.
@@ -53,6 +54,7 @@ Verifica l\'indirizzo del file per la syndication di (<b>@url_syndic@</b>) e pro
 'bouton_ajouter' => 'Aggiungi',
 'bouton_ajouter_participant' => 'AGGIUNGI UN UTENTE:',
 'bouton_annonce' => 'ANNUNCIO',
+'bouton_annuler' => 'Annulla',
 'bouton_checkbox_envoi_message' => 'possibilit&agrave; di inviare un messaggio',
 'bouton_checkbox_indiquer_site' => 'indicare obbligatoriamente un sito Web',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'gli amministratori del sito',
@@ -116,6 +118,7 @@ cancellarli successivamente).',
 'cache_mode_non_compresse' => 'I file di cache sono salvati in modalit&agrave; non compressa.',
 'cache_modifiable_webmestre' => 'Questo parametro pu&ograve; essere modificato dal webmaster del sito.',
 'calendrier_synchro' => 'Se si utilizza un programma di agenda compatibile con <b>iCal</b>, &egrave; possibile sincronizzare i dati con le informazioni di questo sito',
+'connexion_ldap' => 'Connessione:',
 
 
 // D
@@ -177,10 +180,15 @@ Se non conosci queste informazioni, richiedile all\'amministratore del sistema o
 'erreur_plugin_version_manquant' => 'Versione del plugin mancante',
 
 
+// F
+'forum_info_original' => 'originale',
+
+
 // I
 'ical_info1' => 'Questa pagina elenca diversi metodi per rimanere in contatto con le varie attivit&agrave; del sito.',
 'ical_info2' => 'Per ulteriori informazioni su queste tecniche, consultare <a href="http://www.spip.net/it_article2870.html">la documentazione di SPIP</a>.',
 'ical_info_calendrier' => 'Sono disponibili due calendari. Il primo &egrave; una mappa del sito che annuncia tutti gli articoli pubblicati. Il secondo contiene gli annunci editoriali e gli ultimi messaggi privati: &egrave; un\'area riservata, mediante identificativo personale, che &egrave; possibile modificare in qualsiasi momento rinnovando la password personale.',
+'ical_lien_rss_breves' => 'Syndication delle brevi del sito',
 'ical_methode_http' => 'Download',
 'ical_methode_webcal' => 'Sincronizzazione (webcal://)',
 'ical_texte_js' => 'Una linea in javascript permette di visualizzare, con molta semplicit&agrave; e su qualsiasi tipo di sito, gli articoli recenti pubblicati su questo sito.',
@@ -485,14 +493,15 @@ avvertiti via email. Desideri utilizzare quest\'opzione?',
 'info_procedez_par_etape' => 'procedere passo dopo passo',
 'info_procedure_maj_version' => '&egrave; necessario avviare la procedura di aggiornamento per adattare
 il database alla nuova versione di SPIP.',
+'info_proxy_ok' => 'Test del proxy riuscito.',
 'info_ps' => 'P.S.',
 'info_publier' => 'pubblicare',
 'info_publies' => 'I tuoi articoli pubblicati',
 'info_question_accepter_visiteurs' => 'I modelli di pagina del sito prevedono la registrazione di utenti senza accesso all\'area riservata. Attivare la seguente funzionalit&agrave;:',
 'info_question_gerer_statistiques' => 'Il sito deve gestire le statistiche delle visite?',
-'info_question_inscription_nouveaux_redacteurs' => '&Egrave; possibile accettare le iscrizioni di nuovi redattori
-direttamente  dal sito pubblico. In questo caso, i visitatori potranno iscriversi
-grazie ad un modulo automatizzato e accedere allo spazio privato per proporre
+'info_question_inscription_nouveaux_redacteurs' => 'Accettate le iscrizioni di nuovi redattori
+direttamente  dal sito pubblico? In caso affermativo, i visitatori potranno iscriversi
+grazie ad un modulo automatizzato e accedere all\'area riservata per proporre
 i propri articoli. <blockquote><i>Durante la fase d\'iscrizione,
 gli utenti ricevono automaticamente un email
 che fornisce loro i codici d\'accesso al sito privato. Alcuni
@@ -627,6 +636,7 @@ Le traduzioni sono associate all\'originale,
 'install_echec_annonce' => 'L\'installazione potrebbe fallire oppure causare problemi di funzionalit&agrave; al sito...',
 'install_extension_mbstring' => 'SPIP non funziona con:',
 'install_extension_php_obligatoire' => 'SPIP esige l\'estensione php:',
+'install_php_version' => 'PHP versione @version@ insufficiente (minimo = @minimum@)',
 'install_select_langue' => 'Seleziona una lingua e poi clicca sul bottone &laquo;&nbsp;Avanti&nbsp;&raquo; per lanciare la procedura di installazione.',
 'intem_redacteur' => 'redattore',
 'item_accepter_inscriptions' => 'Accetta le iscrizioni',
@@ -714,6 +724,7 @@ Le traduzioni sono associate all\'originale,
 'lien_supprimer_rubrique' => 'elimina la rubrica',
 'lien_tout_deplier' => 'Espandi',
 'lien_tout_replier' => 'Richiudi',
+'lien_tout_supprimer' => 'Eliminare tutto',
 'lien_trier_nom' => 'Ordina per nome',
 'lien_trier_nombre_articles' => 'Ordina per numero di articoli',
 'lien_trier_statut' => 'Ordina per status',
@@ -761,6 +772,7 @@ Le traduzioni sono associate all\'originale,
 'plugin_etat_stable' => 'stabile',
 'plugin_etat_test' => 'in prova',
 'plugins_liste' => 'Elenco dei plugin',
+'protocole_ldap' => 'Versione del protocollo:',
 
 
 // R
@@ -768,6 +780,8 @@ Le traduzioni sono associate all\'originale,
 
 
 // S
+'sauvegarde_fusionner' => 'Unire il database attuale con la copia di backup',
+'sauvegarde_url_origine' => 'Eventualmente, URL del sito di origine:',
 'statut_admin_restreint' => '(ammin. parziale)',
 'syndic_choix_moderation' => 'Come comportarsi con i prossimi link provenienti da questo sito?',
 'syndic_choix_oublier' => 'Come comportarsi con i link che non compaiono pi&amp;ugrave; nel file di syndication?',
@@ -1054,6 +1068,7 @@ in tal caso si pu&ograve; verificare un leggero rallentamento del tuo sito.',
 'titre_sites_tous' => 'I siti repertoriati',
 'titre_suivi_petition' => 'Monitoraggio delle petizioni',
 'titre_syndication' => 'Syndication di siti',
+'tls_ldap' => 'Transport Layer Security:',
 'tout_dossier_upload' => 'Tutta la cartella @upload@',
 'trad_article_inexistant' => 'Non esiste un articolo con questo numero.',
 'trad_article_traduction' => 'Tutte le versioni di questo articolo:',

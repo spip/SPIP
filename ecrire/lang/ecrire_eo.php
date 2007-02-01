@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_non_acces_message' => 'Vi ne havas alir-rajton al tiu mesa&#285;o.',
 'avis_non_acces_page' => 'Vi ne havas alir-rajton al tiu pa&#285;o.',
 'avis_operation_echec' => 'La ago malsukcesis.',
+'avis_operation_impossible' => '<NEW>Op&eacute;ration impossible',
 'avis_probleme_archive' => 'Problemo por legi la dosieron @archive@',
 'avis_site_introuvable' => 'Netrovebla retejo',
 'avis_site_syndique_probleme' => 'Atentu, okazis problemo pri abonrilato de tiu retejo&nbsp;; la sistemo estas portempe haltigita. Kontrolu la abonrilatigan adreson de tiu retejo (@url_syndic@), kaj provu novan reakiron de la informoj.',
@@ -49,10 +50,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // B
-'bouton_acces_ldap' => 'Aldoni aliron al LDAP >>',
+'bouton_acces_ldap' => '<MODIF>Aldoni aliron al LDAP >>',
 'bouton_ajouter' => 'Aldoni',
 'bouton_ajouter_participant' => 'ALDONI PARTOPRENONTON&nbsp;:',
 'bouton_annonce' => 'ANONCO',
+'bouton_annuler' => '<NEW>Annuler',
 'bouton_checkbox_envoi_message' => 'eblas sendi mesa&#285;on',
 'bouton_checkbox_indiquer_site' => 'devige indiku retejon',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'la retejaj mastrumantoj',
@@ -111,6 +113,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cache_mode_non_compresse' => 'La dosieroj de staplo estas registritaj la&#365; ne-densigita modo.',
 'cache_modifiable_webmestre' => 'Tiun parametron povas modifi la retejestro.',
 'calendrier_synchro' => 'Se vi uzas agendo-programon kongruan kun <b>iCal</b> formato, vi povas &#285;isdatigi &#285;in la&#365; la datenoj de tiu retejo.',
+'connexion_ldap' => '<NEW>Connexion :',
 
 
 // D
@@ -135,7 +138,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_base_donnee_2' => '(Tiu adreso ofte estas tiu de via retejo, foje estas "localhost", alifoje la entajpujo restas malplena.)',
 'entree_biographie' => 'Mallonga kelkvorta biografio.',
 'entree_breve_publiee' => '&#264;u tiun fulm-informon oni publikigu?',
-'entree_chemin_acces' => '<b>Entajpi</b> aliran vojon&nbsp;:',
+'entree_chemin_acces' => '<MODIF><b>Entajpi</b> aliran vojon&nbsp;:',
 'entree_cle_pgp' => 'Via PGP-&#349;losilo ',
 'entree_contenu_rubrique' => '(Enhavo de la rubriko per kelkaj vortoj.)',
 'entree_description_site' => 'Priskribo de la retejo',
@@ -143,7 +146,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_informations_connexion_ldap' => 'En tiun formularon, bonvolu entajpi informojn por konekti al via LDAP-dosierujilo. Tiujn informojn disponigu al vi la sistema a&#365; reta mastrumanto.',
 'entree_infos_perso' => 'Kiu vi estas ?',
 'entree_interieur_rubrique' => 'En la rubriko&nbsp;:',
-'entree_liens_sites' => '<b>Hiperligilo</b> (referenco, vizitinda retejo...)',
+'entree_liens_sites' => '<MODIF><b>Hiperligilo</b> (referenco, vizitinda retejo...)',
 'entree_login' => 'Via salutnomo',
 'entree_login_connexion_1' => 'La salutnomo',
 'entree_login_connexion_2' => '(Foje estas via salutnomo por eniri la FTP-ejon; foje &#285;i restas malplena)',
@@ -160,7 +163,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_port_annuaire' => 'Numero de la dosierujila pordo',
 'entree_signature' => 'Subskribo',
 'entree_texte_breve' => 'Teksto de la fulm-informo',
-'entree_titre_obligatoire' => '<b>Titolo</b> [Deviga]<br />',
+'entree_titre_obligatoire' => '<MODIF><b>Titolo</b> [Deviga]<br />',
 'entree_url' => 'Retadreso de via retejo',
 'erreur_plugin_fichier_absent' => 'Foresta dosiero',
 'erreur_plugin_fichier_def_absent' => 'Difina dosiero forestas',
@@ -171,10 +174,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_version_manquant' => 'Kromprogramo-versio mankas',
 
 
+// F
+'forum_info_original' => '<NEW>original',
+
+
 // I
 'ical_info1' => 'Tiu pa&#285;o prezentas plurajn metodojn por da&#365;re ricevi informojn pri la vivo de tiu retejo.',
 'ical_info2' => 'Por pli da informoj pri &#265;i &#265;iuj teknikoj, senhezite konsultu <a href="http://www.spip.net/fr_suivi">la dokumentaron de SPIP</a>.',
 'ical_info_calendrier' => 'Du kalendaroj disponeblas. La unua estas retejo-mapo anoncanta &#265;iujn publikigitajn artikolojn. La dua enhavas la eldon-anoncojn, kaj viajn lastajn privatajn mesa&#285;ojn&nbsp;: &#285;i estas rezervita al vi, pere de persona &#349;losilo, kiun vi &#265;iumomente povas modifi &#349;an&#285;ante vian pasvorton.',
+'ical_lien_rss_breves' => '<NEW>Syndication des br&egrave;ves du site',
 'ical_methode_http' => 'Al&#349;uto',
 'ical_methode_webcal' => 'Sinkroniga &#285;isdatigo (webcal://)',
 'ical_texte_js' => 'Per ununura linio de &#285;avaskripto, vi povas simplege afi&#349;i &#265;e kiu ajn retejo, kiun vi havas, la lastajn artikolojn publikigitajn &#265;e tiu retejo.',
@@ -196,7 +204,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_rubrique_2' => 'Krei novan rubrikon',
 'icone_ecrire_nouvel_article' => 'La fulm-informoj trovi&#285;antaj en tiu rubriko',
 'icone_envoyer_message' => 'Sendi tiun mesa&#285;on',
-'icone_evolution_visites' => 'Evoluado de la vizitoj<br />@visites@ vizitoj',
+'icone_evolution_visites' => '<MODIF>Evoluado de la vizitoj<br />@visites@ vizitoj',
 'icone_modif_groupe_mots' => 'Modifi tiun vortgrupon',
 'icone_modifier_article' => 'Modifi tiun artikolon',
 'icone_modifier_breve' => 'Modifi tiun fulm-informon',
@@ -222,7 +230,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_1_breve' => '1 fulm-informo',
 'info_1_site' => '1 retejo',
 'info_activer_cookie' => 'Vi povas aktivigi <b>por-korespondan kuketon</b>. Tio ebligos al vi facile iri de la publika spaco al la privata.',
-'info_activer_forum_public' => '<i>Por aktivigi la publikajn forumojn, bonvolu elekti ilian
+'info_activer_forum_public' => '<MODIF><i>Por aktivigi la publikajn forumojn, bonvolu elekti ilian
  defa&#365;ltan moderig-manieron:</i>',
 'info_admin_gere_rubriques' => 'Tiu mastrumanto mastrumas la jenajn rubrikojn:',
 'info_admin_gere_toutes_rubriques' => 'Tiu mastrumanto mastrumas <b>&#265;iujn rubrikojn</b>.',
@@ -275,9 +283,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_changer_nom_groupe' => '&#348;an&#285;i la nomon de tiu grupo:',
 'info_chapeau' => '&#264;apo',
 'info_chapeau_2' => '&#264;apo&nbsp;:',
-'info_chemin_acces_1' => 'Opcioj : <b>Alirvojo en la LDAP-dosierujilo</b>',
+'info_chemin_acces_1' => '<MODIF>Opcioj : <b>Alirvojo en la LDAP-dosierujilo</b>',
 'info_chemin_acces_2' => 'Ekde nun vi devas konfiguri la alirvojon al la LDAP-dosierujilo. Tiu informo estas nepre necesa por legi la profilojn de uzantoj stokataj en la dosierujilo.',
-'info_chemin_acces_annuaire' => 'Opcioj: <b>Aliro en la LDAP-dosierujilo',
+'info_chemin_acces_annuaire' => '<MODIF>Opcioj: <b>Aliro en la LDAP-dosierujilo',
 'info_choix_base' => 'Tria etapo&nbsp;: ',
 'info_classement_1' => '<sup>a</sup> en @liste@',
 'info_classement_2' => '<sup>a</sup> en @liste@',
@@ -286,22 +294,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_config_suivi' => 'Se tiu adreso estas tiu de dissendlisto, indiku &#265;i-sube la adreson &#265;e kiu la partoprenantoj de la retejo povos registri&#285;i. Tiu adreso povas esti retligilo (ekz. la pa&#285;o por rete registri&#285;i en la listo), a&#365; retpo&#349;tadreso kun specifa temo (ekz. <tt>@adresse_suivi@?subject=registrigxi</tt>):',
 'info_config_suivi_explication' => 'Vi povas aboni la dissendliston de tiu retejo. Vi tiam ricevos per retmesa&#285;oj la anoncojn pri artikoloj kaj pri fulm-informoj proponitaj por publikigo.',
 'info_confirmer_passe' => 'Konfirmi tiun novan pasvorton:',
-'info_connexion_base' => 'Dua etapo: <b>Konekti&#285;o-provo al la datenbazo</b>',
+'info_connexion_base' => '<MODIF>Dua etapo: <b>Konekti&#285;o-provo al la datenbazo</b>',
 'info_connexion_ldap_ok' => 'La konekti&#285;o al LDAP sukcesis.</b><p /> Vi povas iri al la sekvanta etapo',
-'info_connexion_mysql' => 'Unua etapo: <b>Via MySQL-a konekti&#285;o</b>',
+'info_connexion_mysql' => '<MODIF>Unua etapo: <b>Via MySQL-a konekti&#285;o</b>',
 'info_connexion_ok' => 'La konekti&#285;o sukcesis.',
 'info_contact' => 'Kontakt-adreso',
 'info_contenu_articles' => 'Enhavo de la artikoloj',
 'info_creation_mots_cles' => '&#264;i tie, kreu kaj konfiguru la &#349;losilvortojn de la retejo',
 'info_creation_paragraphe' => '(Por krei malplenajn paragrafojn, simple lasu malplenajn liniojn.)',
-'info_creation_rubrique' => 'Anta&#365; ol skribi artikolojn,<br /> vi kreu almena&#365; unu rubrikon.<br />',
-'info_creation_tables' => 'Kvara etapo: <b>Kreo de la datenbazaj tabeloj</b>',
-'info_creer_base' => '<b>Krei</b> novan datenbazon&nbsp;:',
+'info_creation_rubrique' => '<MODIF>Anta&#365; ol skribi artikolojn,<br /> vi kreu almena&#365; unu rubrikon.<br />',
+'info_creation_tables' => '<MODIF>Kvara etapo: <b>Kreo de la datenbazaj tabeloj</b>',
+'info_creer_base' => '<MODIF><b>Krei</b> novan datenbazon&nbsp;:',
 'info_dans_groupe' => 'En la grupo:',
 'info_dans_rubrique' => 'En la rubriko:',
 'info_date_publication_anterieure' => 'Dato de anta&#365;a redakto :',
 'info_date_referencement' => 'REFERENCIGO-DATO DE TIU RETEJO&nbsp;:',
-'info_delet_mots_cles' => 'Vi petis forigon de la &#349;losilvorto
+'info_delet_mots_cles' => '<MODIF>Vi petis forigon de la &#349;losilvorto
  <b>@titre_mot@</b> (@type_mot@). &#264;ar la &#349;losilvorto estas ligita al
  <b>@texte_lie@</b>, vi devas konfirmi tiun decidon&nbsp;:',
 'info_derniere_etape' => 'Lasta etapo: <b>Finite!',
@@ -348,8 +356,8 @@ postulas disponi je FTP-alirrajto al la retejo.',
 'info_gauche_numero_auteur' => 'A&#364;TORA NUMERO',
 'info_gauche_numero_breve' => 'FULM-INFORMA NUMERO',
 'info_gauche_statistiques_referers' => 'Tiu pa&#285;o prezentas la liston de la  <i>referencoj</i>, tio estas retejoj enhavantaj ligilojn al via propra retejo, nur koncerne hiera&#365; kaj hodia&#365;&nbsp;: tiu listo estas prastatigita &#265;iujn 24 horojn.',
-'info_gauche_suivi_forum' => 'La pa&#285;o pri <i>superkontrolo de la forumoj</i> estas mastrumilo de via retejo (kaj ne diskutejo a&#365; redaktejo). &#284;i afi&#349;as &#265;iujn kontribua&#309;ojn de la publika forumo pri tiu artikolo, kaj ebligas al vi mastrumi tiujn kontribua&#309;ojn.',
-'info_gauche_suivi_forum_2' => 'La pa&#285;o pri <i>superkontrolo de la forumoj</i> estas mastrumilo por via retejo (kaj ne diskutejo a&#365; redaktejo). &#284;i afi&#349;as &#265;iujn kontribua&#309;ojn de la forumoj (de la publika spaco same kiel de la privata), kaj ebligas al vi mastrumi tiujn kontribua&#309;ojn.',
+'info_gauche_suivi_forum' => '<MODIF>La pa&#285;o pri <i>superkontrolo de la forumoj</i> estas mastrumilo de via retejo (kaj ne diskutejo a&#365; redaktejo). &#284;i afi&#349;as &#265;iujn kontribua&#309;ojn de la publika forumo pri tiu artikolo, kaj ebligas al vi mastrumi tiujn kontribua&#309;ojn.',
+'info_gauche_suivi_forum_2' => '<MODIF>La pa&#285;o pri <i>superkontrolo de la forumoj</i> estas mastrumilo por via retejo (kaj ne diskutejo a&#365; redaktejo). &#284;i afi&#349;as &#265;iujn kontribua&#309;ojn de la forumoj (de la publika spaco same kiel de la privata), kaj ebligas al vi mastrumi tiujn kontribua&#309;ojn.',
 'info_gauche_visiteurs_enregistres' => 'Vi trovos &#265;i tie la vizitantojn registritajn
  en la publika spaco de la retejo (forumoj la&#365; abono).',
 'info_generation_miniatures_images' => 'Bildoj-miniaturigo',
@@ -369,7 +377,7 @@ postulas disponi je FTP-alirrajto al la retejo.',
 'info_image_process' => 'Bonvolu elekti la plej bonan metodon por fabriki vinjetojn musklakante la&#365;cele bildon.',
 'info_image_process2' => '<b>N.B.</b> <i>Se neniu bildo afi&#349;i&#285;as, tio signifas ke la servilo kiu gastigas vian retejon ne estas konfigurita por uzi tiajn ilojn. Se vi deziras uzi tiujn funkciojn, petu la &laquo;GD&raquo; a&#365; &laquo;Imagick&raquo; modulojn al la teknika repondeculo.</i>',
 'info_images_auto' => 'Bildoj a&#365;tomate komputitaj',
-'info_informations_personnelles' => 'Kvina etapo: <b>Personaj datenoj</b>',
+'info_informations_personnelles' => '<MODIF>Kvina etapo: <b>Personaj datenoj</b>',
 'info_inscription_automatique' => 'A&#365;tomata registri&#285;ado de novaj redaktantoj',
 'info_jeu_caractere' => 'Litertiparo de la retejo',
 'info_jours' => 'tagoj',
@@ -395,7 +403,7 @@ postulas disponi je FTP-alirrajto al la retejo.',
 'info_message_technique' => 'Teknika mesa&#285;o:',
 'info_messagerie_interne' => 'Interna mesa&#285;ilo',
 'info_mise_a_niveau_base' => 'alniveligo de via MySQL-datenbazo',
-'info_mise_a_niveau_base_2' => '{{Atentu!}} Vi &#309;us instalis version de la SPIP-dosieroj {pli malnovan} ol tiun, kiu estis instalita anta&#365;e &#265;e via retejo: eblas ke via datenbazo perdi&#285;os kaj ke via retejo ne plu funkcios.<br />{{Reinstalu la
+'info_mise_a_niveau_base_2' => '<MODIF>{{Atentu!}} Vi &#309;us instalis version de la SPIP-dosieroj {pli malnovan} ol tiun, kiu estis instalita anta&#365;e &#265;e via retejo: eblas ke via datenbazo perdi&#285;os kaj ke via retejo ne plu funkcios.<br />{{Reinstalu la
  SPIP-dosierojn.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Defa&#365;lta funkcimodo de la publikaj forumoj',
 'info_modifier_breve' => 'Modifi la fulm-informon:',
@@ -471,12 +479,13 @@ postulas disponi je FTP-alirrajto al la retejo.',
 'info_procedez_par_etape' => 'procedu etapon post etapo',
 'info_procedure_maj_version' => 'la &#285;isdatiga proceduro devas esti lan&#265;ita por adapti
  la datenbazon al la nova versio de SPIP.',
+'info_proxy_ok' => '<NEW>Test du proxy r&eacute;ussi.',
 'info_ps' => 'P.S.',
 'info_publier' => 'publikigi',
 'info_publies' => 'Viaj artikoloj rete publikigitaj',
 'info_question_accepter_visiteurs' => 'Se via skeleto ebligas registradon de vizitantoj, kiuj ne rajtas aliri la privatan spacon, bonvolu aktivigi la &#265;i-suban opcion&nbsp;:',
 'info_question_gerer_statistiques' => '&#264;u via retejo devas mastrumi la statistikojn pri la vizitoj&nbsp;?',
-'info_question_inscription_nouveaux_redacteurs' => '&#264;u vi akceptas la registri&#285;adon de novaj redaktantoj ekde
+'info_question_inscription_nouveaux_redacteurs' => '<MODIF>&#264;u vi akceptas la registri&#285;adon de novaj redaktantoj ekde
   la publika spaco&nbsp;? Se vi akceptas tion, la vizitantoj povos registri&#285;i
   per a&#365;tomata ali&#285;ilo kaj tiam aliros al la privata spaco por
   proponi siajn proprajn artikolojn. <blockquote><i>Dum la ali&#285;o,
@@ -502,8 +511,8 @@ postulas disponi je FTP-alirrajto al la retejo.',
 'info_redirection' => 'Alidirektigo',
 'info_referencer_doc_distant' => 'Referencigi dokumenton &#265;e la reto&nbsp;:',
 'info_refuses' => 'Viaj rifuzitaj artikoloj',
-'info_reglage_ldap' => 'Opcioj: <b>Agordo de la LDAP-&#349;argo</b>',
-'info_renvoi_article' => '<b>Alidirektigo.</b> Tiu artikolo alidirektas al la pa&#285;o:',
+'info_reglage_ldap' => '<MODIF>Opcioj: <b>Agordo de la LDAP-&#349;argo</b>',
+'info_renvoi_article' => '<MODIF><b>Alidirektigo.</b> Tiu artikolo alidirektas al la pa&#285;o:',
 'info_reserve_admin' => 'Nur la mastrumantoj povas modifi tiun adreson.',
 'info_restauration_sauvegarde' => 'Resta&#365;ro de la savkopio @archive@',
 'info_restreindre_rubrique' => 'Limigi la mastrumadon al la rubriko:',
@@ -612,6 +621,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'install_echec_annonce' => 'Certe la instalado estas malsukcesonta, a&#365; naskos ne funkciivan retejon...',
 'install_extension_mbstring' => 'SPIP ne funkcias per&nbsp;:',
 'install_extension_php_obligatoire' => 'SPIP postulas la php-kromprogramon&nbsp;:',
+'install_php_version' => '<NEW>PHP version @version@ insuffisant (minimum = @minimum@)',
 'install_select_langue' => 'Elektu lingvon kaj poste musklaku la butonon &laquo;&nbsp;sekvanta&nbsp;&raquo; por lan&#265;i la instal-proceduron.',
 'intem_redacteur' => 'redaktanto',
 'item_accepter_inscriptions' => 'Akcepti la registropetojn',
@@ -699,6 +709,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'lien_supprimer_rubrique' => 'forigi tiun rubrikon',
 'lien_tout_deplier' => 'Malfaldi &#265;ion',
 'lien_tout_replier' => 'Refaldi &#265;ion',
+'lien_tout_supprimer' => '<NEW>Tout supprimer',
 'lien_trier_nom' => 'Vicigi la&#365; nomo',
 'lien_trier_nombre_articles' => 'Vicigi la&#365; nombro de artikoloj',
 'lien_trier_statut' => 'Vicigi la&#365; statuso',
@@ -746,6 +757,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'plugin_etat_stable' => 'stabila',
 'plugin_etat_test' => 'testata',
 'plugins_liste' => 'Listo de kromprogramoj',
+'protocole_ldap' => '<NEW>Version du protocole :',
 
 
 // R
@@ -753,6 +765,8 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 
 
 // S
+'sauvegarde_fusionner' => '<NEW>Fusionner la base actuelle et la sauvegarde',
+'sauvegarde_url_origine' => '<NEW>Eventuellement, URL du site d\'origine :',
 'statut_admin_restreint' => '(etrajta mastrumanto)',
 'syndic_choix_moderation' => 'Kion fari el la ligiloj venontaj el tiu retejo&nbsp;?',
 'syndic_choix_oublier' => 'Kion fari el la ligiloj, kiuj ne plu aperas en la abonrilatiga dosiero&nbsp;?',
@@ -797,7 +811,7 @@ NUR por retejo starigita per la sama versio de SPIP. Nepre ne "&nbsp;malplenigu 
  gazetar-revuon, kalendaron de eventoj...',
 'texte_choix_base_1' => 'Elektu vian datenbazon:',
 'texte_choix_base_2' => 'La MySQL-servilo enhavas plurajn datenbazojn.',
-'texte_choix_base_3' => '<b>Elektu</b> &#265;i-poste tiun, kiun atribuis al vi via retgastiganto:',
+'texte_choix_base_3' => '<MODIF><b>Elektu</b> &#265;i-poste tiun, kiun atribuis al vi via retgastiganto:',
 'texte_commande_vider_tables_indexation' => 'Uzu tiun komandon por malplenigi la indeksajn tabelojn uzatajn
    de la SPIP-integrita ser&#265;ilo. Tio ebligos al vi
    gajni diskospacon.',
@@ -811,7 +825,7 @@ NUR por retejo starigita per la sama versio de SPIP. Nepre ne "&nbsp;malplenigu 
 'texte_compresse_ou_non' => '(tiu &#265;i povas a&#365; ne esti densigita)',
 'texte_compte_element' => '@count@ elemento',
 'texte_compte_elements' => '@count@ elementoj',
-'texte_config_groupe_mots_cles' => '&#264;u vi deziras aktivigi la fajnan konfiguron de la &#349;losilvortoj,
+'texte_config_groupe_mots_cles' => '<MODIF>&#264;u vi deziras aktivigi la fajnan konfiguron de la &#349;losilvortoj,
    indikante ekzemple ke oni povas elekti po unu vorto en grupo,
    ke iu grupo estu grava... ?',
 'texte_connexion_mysql' => 'Konsultu la informojn donitajn de via retgastiganto&nbsp;: de tiuj informoj vi ekscios, &#265;u via gastiganto eltenas MySQL-on, la kodojn por konekti&#285;i al la MySQL-servilo.',
@@ -822,7 +836,7 @@ NUR por retejo starigita per la sama versio de SPIP. Nepre ne "&nbsp;malplenigu 
 'texte_crash_base' => 'Se via datenbazo kolapsis,
    vi povas provi
    a&#365;tomatan riparon.',
-'texte_creer_rubrique' => 'Anta&#365; ol povi skribi artikolojn,<br /> vi devas krei rubrikon.',
+'texte_creer_rubrique' => '<MODIF>Anta&#365; ol povi skribi artikolojn,<br /> vi devas krei rubrikon.',
 'texte_date_creation_article' => 'KREO-DATO DE LA ARTIKOLO&nbsp;:',
 'texte_date_publication_anterieure' => 'DATO DE ANTA&#364;A REDAKTO&nbsp;:',
 'texte_date_publication_anterieure_nonaffichee' => 'Ne afi&#349;i daton de anta&#365;a redakto.',
@@ -894,8 +908,8 @@ ligilojn al jena a&#365; alia retejo.',
 'texte_plusieurs_articles' => 'Pluraj a&#365;toroj trovitaj por"@cherche_auteur@":',
 'texte_port_annuaire' => 'La defa&#365;lte indikita valoro &#285;enerale ta&#365;gas.)',
 'texte_presente_plugin' => 'Tiu pa&#285;o listigas kromprogramojn disponeblajn &#265;e tiu retejo. Vi povas aktivigi la necesajn kromprogramojn no&#265;ante la kongruan no&#265;ujon.',
-'texte_proposer_publication' => 'Kiam via artikolo estas finita,<br /> vi povas proponi &#285;ian publikigon.',
-'texte_proxy' => 'En iuj okazoj (intrareto, protektitaj retoj...),
+'texte_proposer_publication' => '<MODIF>Kiam via artikolo estas finita,<br /> vi povas proponi &#285;ian publikigon.',
+'texte_proxy' => '<MODIF>En iuj okazoj (intrareto, protektitaj retoj...),
   povas esti necese uzi na <i>proxy HTTP</i> por atingi la abonrilatajn retejojn.
   Eventuale, indiku &#265;i-sube ties retadreson, la&#365; la formo
   <tt><html>http://proxy:8080</html></tt>. &#284;enerale,
@@ -909,7 +923,7 @@ rekalkuli ununuran pa&#285;on, pasu prefere tra la publika spaco kaj tie uzu la 
 'texte_recapitiule_liste_documents' => 'Tiu &#265;i pa&#285;o montras la liston de dokumentoj, kiujn vi metis en la rubrikojn. Por modifi la informojn pri &#265;iu dokumento, sekvu la ligilon al la pa&#285;o de ties rubriko.',
 'texte_recuperer_base' => 'Ripari la datenbazon',
 'texte_reference_mais_redirige' => 'artikolo referencigita &#265;e via SPIP-retejo, sed redirektita al alia URL.',
-'texte_referencement_automatique' => '<b>A&#365;tomata referenciga procezo de retejo</b><br />Vi povas rapide referencigi retejon indikante &#265;i-sube la deziratan URL-adreson a&#365; la adreson de ties abonrilatiga dosiero. SPIP a&#365;tomate elprenos la informojn kiuj koncernas tiun retejon (titolon, priskribon...).',
+'texte_referencement_automatique' => '<MODIF><b>A&#365;tomata referenciga procezo de retejo</b><br />Vi povas rapide referencigi retejon indikante &#265;i-sube la deziratan URL-adreson a&#365; la adreson de ties abonrilatiga dosiero. SPIP a&#365;tomate elprenos la informojn kiuj koncernas tiun retejon (titolon, priskribon...).',
 'texte_requetes_echouent' => '<b>Kiam iuj MySQL-ser&#265;petoj sisteme
 kaj senkiale malsukcesas, estas eble
 ke tio okazas pro la datenbazo
@@ -956,7 +970,7 @@ faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
 'texte_tenter_reparation' => 'Provi riparon de la datenbazo',
 'texte_test_proxy' => 'Por testi tiun prokuran servilon, indiku &#265;i tie la adreson de retejo, kiun vi deziras testi.',
 'texte_titre_02' => 'Titolo:',
-'texte_titre_obligatoire' => '<b>Titolo</b> [Deviga]',
+'texte_titre_obligatoire' => '<MODIF><b>Titolo</b> [Deviga]',
 'texte_travail_article' => '@nom_auteur_modif@ prilaboris tiun artikolon anta&#365; @date_diff@ minutoj',
 'texte_travail_collaboratif' => 'Se pluraj redaktantoj laboras ofte
   pri sama artikolo, la sistemo
@@ -967,7 +981,7 @@ faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
   averto-mesa&#285;ojn.',
 'texte_trop_resultats_auteurs' => 'Tro da rezultoj por "@cherche_auteur@" ; bonvolu fajnigi la ser&#265;okriteriojn.',
 'texte_unpack' => 'El&#349;uto de la lasta versio',
-'texte_utilisation_moteur_syndiques' => 'Kiam vi uzas la SPIP-internan ser&#265;ilon,
+'texte_utilisation_moteur_syndiques' => '<MODIF>Kiam vi uzas la SPIP-internan ser&#265;ilon,
     vi povas fari ser&#265;procezojn &#265;e retejoj abonrilatigitaj la&#365; du malsamaj manieroj.
     <br /><img src=\'puce.gif\'> La plej simpla
     estas ser&#265;i nur en la titoloj
@@ -995,7 +1009,7 @@ faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
 'titre_cadre_forum_interne' => 'Interna forumo',
 'titre_cadre_interieur_rubrique' => 'Ene de la rubriko',
 'titre_cadre_numero_auteur' => 'A&#364;TORO NUMERO',
-'titre_cadre_signature_obligatoire' => '<b>Subskribo</b> [deviga]<br />',
+'titre_cadre_signature_obligatoire' => '<MODIF><b>Subskribo</b> [deviga]<br />',
 'titre_config_fonctions' => 'Agordo de la retejo',
 'titre_config_groupe_mots_cles' => 'Agordo de la &#349;losilvortaj grupoj',
 'titre_configuration' => 'Agordo de la retejo',
@@ -1057,6 +1071,7 @@ faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
 'titre_sites_tous' => 'La referencigitaj retejoj',
 'titre_suivi_petition' => 'Kontrolo de la petskriboj',
 'titre_syndication' => 'Reteja abonrilatigo',
+'tls_ldap' => '<NEW>Transport Layer Security :',
 'tout_dossier_upload' => 'La tuta dosierujo @upload@',
 'trad_article_inexistant' => 'Neniu artikolo kun tiu numero.',
 'trad_article_traduction' => '&#264;iuj versioj de tiu artikolo&nbsp;:',
