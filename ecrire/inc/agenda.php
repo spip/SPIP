@@ -1071,26 +1071,18 @@ function http_calendrier_agenda ($annee, $mois, $jour_ved, $mois_ved, $annee_ved
     calendrier_href($script, $annee, $mois, 1, 'mois', '', $ancre,'', $nom,'','',    $nom,'color: black;') .
     "<table width='100%' cellspacing='0' cellpadding='0'>" .
     http_calendrier_agenda_rv ($annee, $mois, $evt,				
-			        'http_calendrier_clic', array($script, $ancre),
+			        'calendrier_href', $script, $ancre,
 			        $jour_ved, $mois_ved, $annee_ved, 
 				$semaine) . 
     "</table>" .
     "</div>";
 }
 
-// http://doc.spip.org/@http_calendrier_clic
-function http_calendrier_clic($annee, $mois, $jour, $type, $couleur, $perso)
-{
-
-  list($script, $ancre) = $perso;
-
-  return calendrier_href($script, $annee, $mois, $jour,$type, '', $ancre,'', "$jour-$mois-$annee",'','', $jour, "color: $couleur; font-weight: bold");
-}
-
 // typographie un mois sous forme d'un tableau de 7 colonnes
 
 // http://doc.spip.org/@http_calendrier_agenda_rv
-function http_calendrier_agenda_rv ($annee, $mois, $les_rv, $fclic, $perso='',
+function http_calendrier_agenda_rv ($annee, $mois, $les_rv, $fclic,
+				    $script='', $ancre='',
 				    $jour_ved='', $mois_ved='', $annee_ved='',
 				    $semaine='') {
 	global $couleur_foncee, $spip_lang_left, $spip_lang_right;
@@ -1121,6 +1113,7 @@ function http_calendrier_agenda_rv ($annee, $mois, $les_rv, $fclic, $perso='',
 		$style = "";
 		$nom = mktime(1,1,1,$mois,$j,$annee);
 		$jour_semaine = date("w",$nom);
+		$title = "$j-$mois-$annee";
 		if ($jour_semaine==0) $jour_semaine=7;
 
 		if ($j == $jour_ved AND $mois == $mois_ved AND $annee == $annee_ved) {
@@ -1150,6 +1143,7 @@ function http_calendrier_agenda_rv ($annee, $mois, $les_rv, $fclic, $perso='',
 			if (isset($les_rv[$j])) {
 			  $style = "#ffffff";
 			  $couleur = "black";
+			  $title = textebrut($les_rv[$j]['SUMMARY']);
 			}
 		  }
 		  $class= 'calendrier-arial11 calendrier-agenda';
@@ -1159,7 +1153,7 @@ function http_calendrier_agenda_rv ($annee, $mois, $les_rv, $fclic, $perso='',
 		  $style = " style='background-color: $style'";
 		else $style = $style0;
 		$ligne .= "\n\t<td><div class='$class'$style>" .
-		  $fclic($annee,$mois, $j, $type, $couleur, $perso) .
+		  $fclic($script, $annee, $mois, $j,$type, '', $ancre,'', $title ,'','', $j, "color: $couleur; font-weight: bold") .
 		  "</div></td>";
 		if ($jour_semaine==7) 
 		    {
@@ -1170,6 +1164,83 @@ function http_calendrier_agenda_rv ($annee, $mois, $les_rv, $fclic, $perso='',
 	return $total . (!$ligne ? '' : "\n<tr>$ligne\n</tr>");
 }
 
+
+
+// Fonction pour la messagerie et la page d'accueil
+
+// http://doc.spip.org/@http_calendrier_rv
+function http_calendrier_rv($messages, $type) {
+	global $spip_lang_rtl, $spip_lang_left, $spip_lang_right, $connect_id_auteur, $connect_quand;
+
+	$total = $date_rv = '';
+	if (!$messages) return $total;
+
+	foreach ($messages as $row) {
+		$rv = ($row['LOCATION'] == 'oui');
+		$date = $row['DTSTART'];
+		$date_fin = $row['DTEND'];
+		if ($row['CATEGORY']=="pb") $bouton = "pense-bete";
+		else if ($row['CATEGORY']=="affich") $bouton = "annonce";
+		else $bouton = "message";
+
+		if ($rv) {
+			$date_jour = affdate_jourcourt($date);
+			$total .= "<tr><td colspan='2'>" .
+				(($date_jour == $date_rv) ? '' :
+				"\n<div  class='calendrier-arial11'><b>$date_jour</b></div>") .
+				"</td></tr>";
+			$date_rv = $date_jour;
+			$rv =
+		((affdate($date) == affdate($date_fin)) ?
+		 ("\n<div class='calendrier-arial9 fond-agenda'>"
+		  . heures($date).":".minutes($date)."<br />"
+		  . heures($date_fin).":".minutes($date_fin)."</div>") :
+		( "\n<div class='calendrier-arial9 fond-agenda' style='text-align: center;'>"
+		  . heures($date).":".minutes($date)."<br />...</div>" ));
+		}
+
+		$total .= "<tr><td style='width: 24px' valign='middle'>" .
+		  http_href($row['URL'],
+				     ($rv ?
+				      http_img_pack("rv.gif", 'rv',
+						    http_style_background($bouton . '.gif', "no-repeat;")) : 
+				      http_img_pack($bouton.".gif", $bouton, "")),
+				     '', '') .
+		"</td>\n" .
+		"<td valign='middle'><div style='font-weight: bold;" .
+		((strtotime($date) <= $connect_quand) ? '' : " color: red;") .
+		"'>" .
+		$rv .
+		http_href($row['URL'], typo($row['SUMMARY']), '', '', 'calendrier-verdana10') .
+		"</div></td></tr>\n";
+	}
+
+	if ($type == 'annonces') {
+		$titre = _T('info_annonces_generales');
+		$couleur_titre = "ccaa00";
+		$couleur_texte = "black";
+		$couleur_fond = "#ffffee";
+	}
+	else if ($type == 'pb') {
+		$titre = _T('infos_vos_pense_bete');
+		$couleur_titre = "#3874B0";
+		$couleur_fond = "#EDF3FE";
+		$couleur_texte = "white";
+	}
+	else if ($type == 'rv') {
+		$titre = _T('info_vos_rendez_vous');
+		$couleur_titre = "#666666";
+		$couleur_fond = "#eeeeee";
+		$couleur_texte = "white";
+	}
+
+	return
+	  debut_cadre_enfonce("", true, "", $titre) .
+	  "<table width='100%' border='0' cellpadding='0' cellspacing='2'>" .
+	  $total .
+	  "</table>" .
+	  fin_cadre_enfonce(true);
+}
 
 // http://doc.spip.org/@calendrier_categories
 function calendrier_categories($table, $num, $objet)
@@ -1369,14 +1440,28 @@ function sql_calendrier_interval_rv($avant, $apres) {
 
 // fonction SQL, pour la messagerie
 
+function tache_redirige ($row) {
+
+	$m = $row['DESCRIPTION'];
+	if ($m[0] == '=')
+	    if ($m = chapo_redirige(substr($m,1)))
+	      if ($m = calculer_url($m[3], '', 'url'))
+		return $m;
+	return generer_url_ecrire("message", "id_message=".$row['UID']);
+}
+
 // http://doc.spip.org/@sql_calendrier_taches_annonces
 function sql_calendrier_taches_annonces () {
 	global $connect_id_auteur;
 	$r = array();
 	if (!$connect_id_auteur) return $r;
-	$result = spip_query("SELECT * FROM spip_messages WHERE type = 'affich' AND rv != 'oui' AND statut = 'publie' ORDER BY date_heure DESC");
-	if (spip_num_rows($result) > 0)
-		while ($x = spip_fetch_array($result)) $r[] = $x;
+
+	$result = spip_query("SELECT texte AS DESCRIPTION, id_message AS UID, date_heure AS DTSTART, date_fin AS DTEND, titre AS SUMMARY, type AS CATEGORY, rv AS LOCATION FROM spip_messages WHERE type = 'affich' AND rv != 'oui' AND statut = 'publie' ORDER BY date_heure DESC");
+
+	while ($row = spip_fetch_array($result, SPIP_ASSOC)) {
+		$row['URL'] = tache_redirige($row);
+		$r[] = $row;
+	}
 	return $r;
 }
 
@@ -1385,11 +1470,14 @@ function sql_calendrier_taches_pb () {
 	global $connect_id_auteur;
 	$r = array();
 	if (!$connect_id_auteur) return $r;
-	$result = spip_query("SELECT * FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui'");
-	if (spip_num_rows($result) > 0){
-	  $r = array();
-	  while ($x = spip_fetch_array($result)) $r[] = $x;
+
+	$result = spip_query("SELECT texte AS DESCRIPTION, id_message AS UID, date_heure AS DTSTART, date_fin AS DTEND, titre AS SUMMARY, type AS CATEGORY, rv AS LOCATION FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui'");
+
+	while ($row = spip_fetch_array($result, SPIP_ASSOC)) {
+		$row['URL'] = tache_redirige($row);
+		$r[] = $row;
 	}
+
 	return $r;
 }
 
@@ -1398,11 +1486,13 @@ function sql_calendrier_taches_rv () {
 	global $connect_id_auteur;
 	$r = array();
 	if (!$connect_id_auteur) return $r;
-	$result = spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien  WHERE	((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND ( (messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) AND messages.date_heure < DATE_ADD(NOW(), INTERVAL 1 MONTH))	OR (messages.date_heure < NOW() AND messages.date_fin > NOW() )) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
-	if (spip_num_rows($result) > 0){
-	  $r = array();
-	  while ($x = spip_fetch_array($result)) $r[] = $x;
+
+	$result = spip_query("SELECT messages.texte AS DESCRIPTION, messages.id_message AS UID, messages.date_heure AS DTSTART, messages.date_fin AS DTEND, messages.titre AS SUMMARY, messages.type AS CATEGORY, messages.rv AS LOCATION FROM spip_messages AS messages, spip_auteurs_messages AS lien  WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND ( (messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) AND messages.date_heure < DATE_ADD(NOW(), INTERVAL 1 MONTH))	OR (messages.date_heure < NOW() AND messages.date_fin > NOW() )) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
+	while ($row = spip_fetch_array($result,SPIP_ASSOC)) {
+		$row['URL'] = tache_redirige($row);
+		$r[] = $row;
 	}
+
 	return  $r;
 }
 
@@ -1417,9 +1507,9 @@ function sql_calendrier_agenda ($annee, $mois) {
 	$annee = annee($date);
 
 	// rendez-vous personnels dans le mois
-	$result_messages=spip_query("SELECT messages.date_heure FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure >='$annee-$mois-1' AND date_heure < DATE_ADD('$annee-$mois-1', INTERVAL 1 MONTH) AND messages.statut='publie'");
-	while($row=spip_fetch_array($result_messages)){
-		$rv[journum($row['date_heure'])] = 1;
+	$result_messages=spip_query("SELECT messages.titre AS SUMMARY, messages.texte AS DESCRIPTION, messages.id_message AS UID, messages.date_heure FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure >='$annee-$mois-1' AND date_heure < DATE_ADD('$annee-$mois-1', INTERVAL 1 MONTH) AND messages.statut='publie'");
+	while($row=spip_fetch_array($result_messages, SPIP_ASSOC)){
+		$rv[journum($row['date_heure'])] = $row;
 	}
 	return $rv;
 }
