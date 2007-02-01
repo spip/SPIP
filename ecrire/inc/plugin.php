@@ -250,6 +250,7 @@ function ordonne_plugin(){
 	ecrire_metas();
 }
 
+// http://doc.spip.org/@spip_plugin_install
 function spip_plugin_install($action,$prefix,$version_cible){
 	$nom_meta_base_version = $prefix."_base_version";
 	switch ($action){
