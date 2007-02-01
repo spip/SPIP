@@ -21,7 +21,7 @@ function action_desinstaller_plugin_dist() {
 	$infos = plugin_get_infos($plug_file);
 	if (isset($infos['install'])){
 		// desinstaller
-		$etat = desinstalle_un_plugin($plug_file,$infos['prefix'],$infos['install']);
+		$etat = desinstalle_un_plugin($plug_file,$infos);
 		// desactiver si il a bien ete desinstalle
 		if (!$etat)
 			ecrire_plugin_actifs(array($plug_file),false,'enleve');

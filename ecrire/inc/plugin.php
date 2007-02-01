@@ -250,39 +250,74 @@ function ordonne_plugin(){
 	ecrire_metas();
 }
 
+function spip_plugin_install($action,$prefix,$version_cible){
+	$nom_meta_base_version = $prefix."_base_version";
+	switch ($action){
+		case 'test':
+			return (isset($GLOBALS['meta'][$nom_meta_base_version]) AND ($GLOBALS['meta'][$nom_meta_base_version]>=$version_cible));
+			break;
+		case 'install':
+			if (function_exists($upgrade = $prefix."_upgrade"))
+				$upgrade($nom_meta_base_version,$version_cible);
+			break;
+		case 'uninstall':
+			if (function_exists($vider_tables = $prefix."_vider_tables"))
+				$vider_tables($nom_meta_base_version);
+			break;
+	}
+}
+	
 // http://doc.spip.org/@desinstalle_un_plugin
-function desinstalle_un_plugin($plug,$prefix,$install){
+function desinstalle_un_plugin($plug,$infos){
 	// faire les include qui vont bien
-	foreach($install as $file){
+	foreach($infos['install'] as $file){
 		$file = trim($file);
 		@include_once(_DIR_PLUGINS."$plug/$file");
 	}
-	$prefix_install = $prefix."_install";
-	if (!function_exists($prefix_install))
-		return false;
-	// voir si on a besoin de faire l'install
-	$prefix_install('uninstall');
-	$ok = $prefix_install('test');
-	return $ok;
+	$prefix_install = $infos['prefix']."_install";
+	if (function_exists($prefix_install)){
+		$prefix_install('uninstall');
+		$ok = $prefix_install('test');
+		return $ok;
+	}
+	if (isset($infos['version_base'])){
+		spip_plugin_install('uninstall',$infos['prefix'],$infos['version_base']);
+		$ok = spip_plugin_install('test',$infos['prefix'],$infos['version_base']);
+		return $ok;
+	}
+	
+	return false;
 }
 
 // http://doc.spip.org/@installe_un_plugin
-function installe_un_plugin($plug,$prefix,$install){
+function installe_un_plugin($plug,$infos){
 	// faire les include qui vont bien
-	foreach($install as $file){
+	foreach($infos['install'] as $file){
 		$file = trim($file);
 		@include_once(_DIR_PLUGINS."$plug/$file");
 	}
-	$prefix_install = $prefix."_install";
-	if (!function_exists($prefix_install))
-		return false;
-	// voir si on a besoin de faire l'install
-	$ok = $prefix_install('test');
-	if (!$ok) {
-		$prefix_install('install');
+	$prefix_install = $infos['prefix']."_install";
+	// cas de la fonction install fournie par le plugin
+	if (function_exists($prefix_install)){
+		// voir si on a besoin de faire l'install
 		$ok = $prefix_install('test');
+		if (!$ok) {
+			$prefix_install('install');
+			$ok = $prefix_install('test');
+		}
+		return $ok; // le plugin est deja installe et ok
 	}
-	return $ok; // le plugin est deja installe et ok
+	// pas de fonction instal fournie, mais une version_base dans le plugin
+	// on utilise la fonction par defaut
+	if (isset($infos['version_base'])){
+		$ok = spip_plugin_install('test',$infos['prefix'],$infos['version_base']);
+		if (!$ok) {
+			spip_plugin_install('install',$infos['prefix'],$infos['version_base']);
+			$ok = spip_plugin_install('test',$infos['prefix'],$infos['version_base']);
+		}
+		return $ok; // le plugin est deja installe et ok
+	}
+	return false;
 }
 
 // http://doc.spip.org/@installe_plugins
@@ -292,7 +327,7 @@ function installe_plugins(){
 	foreach($liste as $plug){
 		$infos = plugin_get_infos($plug);
 		if (isset($infos['install'])){
-			$ok = installe_un_plugin($plug,$infos['prefix'],$infos['install']);
+			$ok = installe_un_plugin($plug,$infos);
 			// on peut enregistrer le chemin ici car il est mis a jour juste avant l'affichage
 			// du panneau -> cela suivra si le plugin demenage
 			if ($ok)
@@ -365,6 +400,8 @@ function plugin_get_infos($plug){
 					$ret['pipeline'] = $arbre['pipeline'];
 				if (isset($arbre['erreur']))
 					$ret['erreur'] = $arbre['erreur'];
+				if (isset($arbre['version_base']))
+					$ret['version_base'] = trim(end($arbre['version_base']));
 				
 				if ($t=filemtime($f)){
 					$ret['filemtime'] = $t;
