@@ -123,14 +123,13 @@ function applique_invalideur($depart) {
 // Utilisee pour vider le cache depuis l'espace prive
 // (ou juste les squelettes si un changement de config le necessite)
 // http://doc.spip.org/@purger_repertoire
-function purger_repertoire($dir, $age='ignore', $regexp = '') {
+function purger_repertoire($dir) {
 	$handle = @opendir($dir);
 	if (!$handle) return;
 
 	while (($fichier = @readdir($handle)) !== false) {
 		// Eviter ".", "..", ".htaccess", etc.
 		if ($fichier[0] == '.') continue;
-		if ($regexp AND !ereg($regexp, $fichier)) continue;
 		$chemin = "$dir/$fichier";
 		if (is_file($chemin))
 			@unlink($chemin);

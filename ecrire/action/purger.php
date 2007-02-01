@@ -31,7 +31,7 @@ function action_purger_dist()
 
 	case 'cache': 
 		supprime_invalideurs();
-		purger_repertoire(_DIR_CACHE, 0);
+		purger_repertoire(_DIR_CACHE);
 		break;
 
 	case 'squelettes':
@@ -39,10 +39,10 @@ function action_purger_dist()
 		break;
 
 	case 'vignettes':
-		purger_repertoire(_DIR_VAR, $age='ignore', $regexp = '^cache\-');
 		spip_log('vider le cache');
+		purger_repertoire(_DIR_VAR);
 		supprime_invalideurs();
-		purger_repertoire(_DIR_CACHE, 0);
+		purger_repertoire(_DIR_CACHE);
 		break;
 	}
 
