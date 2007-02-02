@@ -49,7 +49,6 @@ function action_tester_taille_dist() {
 			include_spip('inc/documents');
 			include_spip('inc/lang');
 			include_spip('inc/texte');
-			include_spip('inc/vieilles_def');
 			$dummy = propre("<doc1>");
 
 			$image_source = _DIR_IMG_PACK."test.png";
