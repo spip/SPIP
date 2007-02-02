@@ -7,8 +7,8 @@ if(typeof window.jQuery == "undefined") {
  * Dual licensed under the MIT (MIT-LICENSE.txt)
  * and GPL (GPL-LICENSE.txt) licenses.
  *
- * $Date: 2007-01-23 18:02:32 +0100 (Tue, 23 Jan 2007) $
- * $Rev: 1173 $
+ * $Date: 2007-01-31 22:48:14 +0100 (Wed, 31 Jan 2007) $
+ * $Rev: 1242 $
  */
 
 // Global undefined variable
@@ -29,7 +29,7 @@ var jQuery = function(a,c) {
 	// Handle HTML strings
 	if ( typeof a  == "string" ) {
 		// HANDLE: $(html) -> $(array)
-		var m = /^[^<]*(<(.|\n)+>)[^>]*$/.exec(a);
+		var m = /^[^<]*(<(.|\s)+>)[^>]*$/.exec(a);
 		if ( m )
 			a = jQuery.clean( [ m[1] ] );
 		
@@ -315,7 +315,7 @@ jQuery.extend({
 			var exclude = /z-?index|font-?weight|opacity|zoom|line-?height/i;
 
 			// Handle passing in a number to a CSS property
-			if ( value.constructor == Number && type == "curCSS" && !exclude.test(prop) )
+			if ( value && value.constructor == Number && type == "curCSS" && !exclude.test(prop) )
 				return value + "px";
 
 			return value;
@@ -1210,7 +1210,7 @@ jQuery.event = {
 					this.remove( element, j );
 	},
 
-	trigger: function(type,data,element) {
+	trigger: function(type, data, element) {
 		// Clone the incoming data, if any
 		data = jQuery.makeArray(data || []);
 
@@ -1665,9 +1665,6 @@ jQuery.extend({
 		// Store display property
 		var oldDisplay = jQuery.css(elem, "display");
 
-		// Set display property to block for animation
-		y.display = "block";
-
 		// Make sure that nothing sneaks out
 		y.overflow = "hidden";
 
@@ -1680,6 +1677,8 @@ jQuery.extend({
 				jQuery.attr(y, "opacity", z.now); // Let attr handle opacity
 			else if ( parseInt(z.now) ) // My hate for IE will never die
 				y[prop] = parseInt(z.now) + "px";
+			
+			y.display = "block"; // Set display property to block for animation
 		};
 
 		// Figure out the maximum number to run to
@@ -1969,9 +1968,12 @@ jQuery.extend({
 			if (s.processData && typeof s.data != "string")
     			s.data = jQuery.param(s.data);
 			// append data to url for get requests
-			if( s.type.toLowerCase() == "get" )
+			if( s.type.toLowerCase() == "get" ) {
 				// "?" + data or "&" + data (in case there are already params)
 				s.url += ((s.url.indexOf("?") > -1) ? "&" : "?") + s.data;
+				// IE likes to send both get and post data, prevent this
+				s.data = null;
+			}
 		}
 
 		// Watch for a new set of requests
