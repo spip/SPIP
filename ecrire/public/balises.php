@@ -23,7 +23,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@interprete_argument_balise
-function interprete_argument_balise($n,$p){
+function interprete_argument_balise($n,$p) {
 	if (($p->param) && (!$p->param[0][0]) && (count($p->param[0])>$n))
 		return calculer_liste($p->param[0][$n],
 									$p->descr,
@@ -1245,10 +1245,11 @@ function balise_MODELE_dist($p) {
 function balise_SET_dist($p){
 	$_nom = interprete_argument_balise(1,$p);
 	$_valeur = interprete_argument_balise(2,$p);
-	// autres filtres (???)
-	array_shift($p->param);
-	
-	$p->code = "vide(\$Pile['vars'][$_nom] = $_valeur)";
+
+	if ($_nom AND $_valeur)
+		$p->code = "vide(\$Pile['vars'][$_nom] = $_valeur)";
+	else
+		$p->code = "''";
 
 	$p->interdire_scripts = false; // la balise ne renvoie rien
 	return $p;
