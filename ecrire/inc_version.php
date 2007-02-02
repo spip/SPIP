@@ -402,11 +402,13 @@ else
 
 // Vanter notre art de la composition typographique
 // La globale $spip_header_silencieux permet de rendre le header minimal pour raisons de securite
+define('_HEADER_COMPOSED_BY', "Composed-By: SPIP");
+
 if (!headers_sent())
 	if (!isset($GLOBALS['spip_header_silencieux']) OR !$GLOBALS['spip_header_silencieux'])
-		@header("Composed-By: SPIP $spip_version_affichee @ www.spip.net" . (isset($GLOBALS['meta']['plugin_header'])?(" + ".$GLOBALS['meta']['plugin_header']):""));
+		@header(_HEADER_COMPOSED_BY . " $spip_version_affichee @ www.spip.net" . (isset($GLOBALS['meta']['plugin_header'])?(" + ".$GLOBALS['meta']['plugin_header']):""));
 	else // header minimal
-		@header("Composed-By: SPIP @ www.spip.net");
+		@header(_HEADER_COMPOSED_BY . " @ www.spip.net");
 
 # spip_log($_SERVER['REQUEST_METHOD'].' '.self() . ' - '._FILE_CONNECT);
 

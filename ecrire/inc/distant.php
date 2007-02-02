@@ -233,7 +233,7 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false,
 	fclose($f);
 
 	// Decompresser le flux
-	if ($gz)
+	if ($gz AND $result)
 		$result = gzinflate(substr($result,10));
 
 	// Faut-il l'importer dans notre charset local ?
