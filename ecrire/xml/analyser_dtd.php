@@ -18,7 +18,9 @@ function charger_dtd($grammaire, $avail)
 {
 	spip_timer('dtd');
 	$dtc = new DTC;
-	analyser_dtd($grammaire, $avail, $dtc);
+	// L'analyseur retourne un booleen de reussite et modifie $dtc.
+	// Retourner vide en cas d'echec
+	if (!analyser_dtd($grammaire, $avail, $dtc)) return array();
 
 	// tri final pour presenter les suggestions de corrections
 	foreach ($dtc->peres as $k => $v) {
@@ -67,14 +69,14 @@ function analyser_dtd($loc, $avail, &$dtc)
 	} else {
 		if ($avail == 'PUBLIC') {
 			include_spip('inc/distant');
-			if ($dtd = recuperer_page($loc))
+			if ($dtd = trim(recuperer_page($loc)))
 				ecrire_fichier($file, $dtd, true); 
 		}
 	}
 
-	if (!$dtd = ltrim($dtd)) {
+	if (!$dtd) {
 		spip_log("DTD $loc inaccessible");
-		return array();
+		return false;
 	}
 
 	while ($dtd) {
@@ -92,13 +94,14 @@ function analyser_dtd($loc, $avail, &$dtc)
 	  default: $r = -1;
 	  }
 
-	  if (!is_string($r)) {
-	    spip_log("erreur $r dans la DTD  " . substr($dtd,0,80) . ".....");
-	    return array();
-	  }
-	  $dtd = $r;
+		if (!is_string($r)) {
+			spip_log("erreur $r dans la DTD  " . substr($dtd,0,80) . ".....");
+			return false;
+		}
+		$dtd = $r;
  
 	}
+	return true;
 }
 
 // http://doc.spip.org/@analyser_dtd_comment

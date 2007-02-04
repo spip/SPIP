@@ -255,11 +255,9 @@ function PiElement($phraseur, $target, $data)
 // Denonciation des entitees XML inconnues
 // Pour contourner le bug de conception de SAX qui ne signale pas si elles
 // sont dans un attribut, les  entites les plus frequentes ont ete
-// transcodees par html2unicode au prealable.
+// transcodees au prealable  (sauf & < > " que SAX traite correctement).
 // On ne les verra donc pas passer a cette etape, contrairement a ce que 
 // le source de la page laisse legitimement supposer. 
-// Il faudrait en fait transcoder toutes les entites (sauf & < > ")
-// pour leur eviter ce bug.
 
 // http://doc.spip.org/@defautElement
 function defautElement($phraseur, $data)
@@ -285,9 +283,13 @@ function phraserTout($phraseur, $data)
 { 
 	xml_parsestring($phraseur, $data);
 
-	$valider_passe2 = charger_fonction('valider_passe2', 'inc');
-	$valider_passe2($this);
-
+	if (!$this->dtc) {
+	  $GLOBALS['xhtml_error'] = 'DOCTYPE ? 0 0<br />';
+	  $this->err = array('DOCTYPE ? 0 0<br />');
+	} else {
+	  $valider_passe2 = charger_fonction('valider_passe2', 'inc');
+	  $valider_passe2($this);
+	}
 	return !$this->err ?  $this->res : join('<br />', $this->err) . '<br />';
 }
 
