@@ -164,6 +164,9 @@ function spip_log($message, $logname='spip') {
 
 	$pid = '(pid '.@getmypid().')';
 
+	// accepter spip_log( Array )
+	if (!is_string($message)) $message = var_export($message, true);
+
 	$message = date("M d H:i:s").' '.$GLOBALS['ip'].' '.$pid.' '
 		.preg_replace("/\n*$/", "\n", $message);
 
