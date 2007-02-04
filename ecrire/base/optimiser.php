@@ -327,6 +327,10 @@ function optimiser_base($attente = 86400) {
 		spip_query("DELETE FROM spip_auteurs
 		WHERE id_auteur=".$row['id_auteur']);
 
+	# supprimer les auteurs 'nouveau' qui n'ont jamais donne suite
+	# au mail de confirmation (45 jours pour repondre, ca devrait suffire)
+	spip_query("DELETE FROM spip_auteurs WHERE statut='nouveau' AND maj < ". _q(date('Y-m-d', time()-45*24*3600)));exit;
+
 
 	//
 	// Messages prives
