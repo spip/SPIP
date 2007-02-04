@@ -75,9 +75,10 @@ function action_legender_auteur_post($r)
 	$modif_login = false;
 	$old_login = $auteur['login'];
 
-	if (($new_login<>$old_login)
+	if (isset($new_login)
+	AND ($new_login<>$old_login)
 	AND ($auteur['source'] == 'spip' OR !$GLOBALS['ldap_present'])) {
-		if (admin_general($auteur_session['id_auteur'])) {
+		if (admin_general($auteur_session)) {
 			$acces = true;
 			if ($new_login) {
 				if (strlen($new_login) < 4)
@@ -104,7 +105,7 @@ function action_legender_auteur_post($r)
 
 	if ($new_pass AND ($statut != '5poubelle') AND $auteur['login'] AND $auteur['source'] == 'spip') {
 		if (is_string($acces))
-			$acces = admin_general($auteur_session['id_auteur']);
+			$acces = admin_general($auteur_session);
 		if ($acces) {
 			if ($new_pass != $new_pass2)
 				$echec[]= 'info_passes_identiques';
@@ -118,7 +119,7 @@ function action_legender_auteur_post($r)
 	}
 
 	if ($modif_login) {
-	  // supprimer les sessions de cet auteur
+		// supprimer les sessions de cet auteur
 		$session = charger_fonction('session', 'inc');
 		$session($auteur['id_auteur']);
 	}
@@ -129,7 +130,7 @@ function action_legender_auteur_post($r)
 	if (_request('email') AND $auteur_session['statut'] == '0minirezo') {
 		if (!($ok = ($statut <> '0minirezo'))) {
 			if (is_string($acces))
-				$acces = admin_general($auteur_session['id_auteur']);
+				$acces = admin_general($auteur_session);
 		}
 
 		if ($ok OR $acces) {
@@ -223,10 +224,17 @@ function action_legender_auteur_post($r)
 }
 
 // http://doc.spip.org/@admin_general
-function admin_general($id_auteur)
+function admin_general($session)
 {
-	include_spip('inc/auth');
-        return (!spip_num_rows(spip_query("SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur=" .$id_auteur ." AND id_rubrique!='0' LIMIT 1")));
+	static $ok;
+	if (!isset($ok)) {
+		include_spip('inc/auth');
+        $ok = ($session['statut']=='0minirezo') 
+        AND !spip_num_rows(spip_query("SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur=" .$session['id_auteur'] ." AND id_rubrique!='0' LIMIT 1"));
+	}
+
+	return $ok;
 }
+
 
 ?>
