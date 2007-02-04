@@ -7,8 +7,8 @@ if(typeof window.jQuery == "undefined") {
  * Dual licensed under the MIT (MIT-LICENSE.txt)
  * and GPL (GPL-LICENSE.txt) licenses.
  *
- * $Date: 2007-01-31 22:48:14 +0100 (Wed, 31 Jan 2007) $
- * $Rev: 1242 $
+ * $Date: 2007-02-03 20:32:16 +0100 (Sat, 03 Feb 2007) $
+ * $Rev: 1261 $
  */
 
 // Global undefined variable
@@ -315,10 +315,9 @@ jQuery.extend({
 			var exclude = /z-?index|font-?weight|opacity|zoom|line-?height/i;
 
 			// Handle passing in a number to a CSS property
-			if ( value && value.constructor == Number && type == "curCSS" && !exclude.test(prop) )
-				return value + "px";
-
-			return value;
+			return value && value.constructor == Number && type == "curCSS" && !exclude.test(prop) ?
+				value + "px" :
+				value;
 	},
 
 	className: {
