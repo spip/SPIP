@@ -118,7 +118,7 @@ function action_legender_auteur_post($r)
 		}
 	}
 
-	if ($modif_login) {
+	if ($modif_login AND ($auteur['id_auteur']<>$auteur_session['id_auteur'])) {
 		// supprimer les sessions de cet auteur
 		$session = charger_fonction('session', 'inc');
 		$session($auteur['id_auteur']);
