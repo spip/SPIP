@@ -167,8 +167,7 @@ function forum_envoi(
 
 	echo  $parent,
 	  "\n<div>&nbsp;</div>"
-	  . redirige_action_auteur('poster_forum_prive',$cat, $script, "$objet=$id", $corps, "")
-	  .  "<a id='formulaire'></a>"
+	  . redirige_action_auteur('poster_forum_prive',$cat, $script, "$objet=$id", $corps, "\nname='formulaire' id='formulaire'")
 	  . fin_gauche()
 	  . fin_page();
 }
