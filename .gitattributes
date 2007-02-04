@@ -434,7 +434,6 @@ ecrire/exec/export_all.php -text
 ecrire/exec/forum.php -text
 ecrire/exec/forum_admin.php -text
 ecrire/exec/forum_envoi.php -text
-ecrire/exec/gadgets.php -text
 ecrire/exec/grouper_mots.php -text
 ecrire/exec/iconifier.php -text
 ecrire/exec/import_all.php -text
@@ -448,6 +447,9 @@ ecrire/exec/legender.php -text
 ecrire/exec/legender_auteur.php -text
 ecrire/exec/meme_rubrique.php -text
 ecrire/exec/memoriser.php -text
+ecrire/exec/menu_agenda.php -text
+ecrire/exec/menu_navigation.php -text
+ecrire/exec/menu_rubriques.php -text
 ecrire/exec/message.php -text
 ecrire/exec/message_edit.php -text
 ecrire/exec/messagerie.php -text

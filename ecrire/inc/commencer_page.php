@@ -114,32 +114,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 		$res .= "\n<div align='center' style=\"max-height: 40px; width: 100%; border-bottom: solid 1px white;$style\">"
 	. "<table cellpadding='0' style='background: none;' width='$largeur'><tr>"
 		. "<td valign='middle' class='bandeau_couleur' style='text-align: $spip_lang_left;'>"
-
-		// ce bouton commande le menu de rubriques (cf. inc/gadgets)
-		. "<a id='boutonbandeautoutsite' href='" . generer_url_ecrire("articles_tous") . "' class='icone26' onmouseover=\"changestyle('bandeautoutsite');\" onfocus=\"changestyle('bandeautoutsite');\" onblur=\"changestyle('bandeautoutsite');\">"
-		. http_img_pack("tout-site.png", _T('icone_site_entier'), "width='26' height='20'") . "</a>";
-		if ($id_rubrique > 0)
-			$res .= "<a href='" . generer_url_ecrire("brouteur","id_rubrique=$id_rubrique") . "' class='icone26' onmouseover=\"changestyle('bandeaunavrapide');\" onfocus=\"changestyle('bandeaunavrapide');\" onblur=\"changestyle('bandeaunavrapide');\">" .
-			  http_img_pack("naviguer-site.png",  _T('icone_brouteur'), "width='26' height='20'") ."</a>";
-		else $res .= "<a href='" . generer_url_ecrire("brouteur") . "' class='icone26' onmouseover=\"changestyle('bandeaunavrapide');\" onfocus=\"changestyle('bandeaunavrapide');\" onblur=\"changestyle('bandeaunavrapide');\">" .
-		  http_img_pack("naviguer-site.png", _T('icone_brouteur'), "width='26' height='20'") . "</a>";
-
-		$res .= "<a href='"
-		. generer_url_ecrire("recherche")
-		. "' class='icone26' onmouseover=\"changestyle('bandeaurecherche'); jQuery('#form_recherche')[0].focus();\" onfocus=\"changestyle('bandeaurecherche');\" onblur=\"changestyle('bandeaurecherche');\">"
-		. http_img_pack("loupe.png", _T('info_rechercher'), "width='26' height='20'")
-		."</a>"
-		. http_img_pack("rien.gif", "", "width='10'")
-		. "<a href='"
-		. generer_url_ecrire("calendrier","type=semaine")
-		. "' class='icone26' onmouseover=\"changestyle('bandeauagenda');\">"
-		. http_img_pack("cal-rv.png", _T('icone_agenda'), "width='26' height='20'") ."</a>"
-		. "<a href='" . generer_url_ecrire("messagerie") . "' class='icone26' onmouseover=\"changestyle('bandeaumessagerie');\" onfocus=\"changestyle('bandeaumessagerie');\" onblur=\"changestyle('bandeaumessagerie');\">"
-		. http_img_pack("cal-messagerie.png", _T('icone_messagerie_personnelle'), "width='26' height='20'")
-		."</a>"
-		. "<a href='" . generer_url_ecrire("synchro") . "' class='icone26' onmouseover=\"changestyle('bandeausynchro');\" onfocus=\"changestyle('bandeausynchro');\" onblur=\"changestyle('bandeausynchro');\">" .
-		  http_img_pack("cal-suivi.png", _T('icone_suivi_activite'), "width='26' height='20'")
-		. "</a>"
+		.  installer_gadgets($id_rubrique)
 		. "</td>"
 		. "<td valign='middle' class='bandeau_couleur' style='text-align: $spip_lang_left;'>"
 
