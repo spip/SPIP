@@ -437,37 +437,19 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 function gadget_agenda() {
 	global $connect_id_auteur;
 
-	$gadget = '';
-	$today = getdate(time());
-	$jour_today = $today["mday"];
-	$mois_today = $today["mon"];
-	$annee_today = $today["year"];
-	$date = date("Y-m-d", mktime(0,0,0,$mois_today, 1, $annee_today));
-	$mois = mois($date);
-	$annee = annee($date);
-	$jour = jour($date);
-	$gadget .= "<table><tr>";
-	$gadget .= "<td style='width: 200px' valign='top' >";
-	$gadget .= "<div>";
-	$gadget .= http_calendrier_agenda($annee_today, $mois_today, $jour_today, $mois_today, $annee_today, false, generer_url_ecrire('calendrier'));
-	$gadget .= "</div>";
-	$gadget .= "</td>";
+	list($evtm, $evtt, $evtr) = http_calendrier_messages(date("Y"), date("m"), date("d"));
 
-	$n = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui' LIMIT 1"));
-	if (!$n['n'])
-		$n = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) AND messages.date_heure < DATE_ADD(NOW(), INTERVAL 1 MONTH) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure LIMIT 1"));
-	if ($n['n']) {
-		$gadget .= "<td style='width: 10px' valign='top'> &nbsp; </td>";
-		$gadget .= "<td style='width: 200px; color: black;' valign='top'>";
-		$gadget .= "<div>&nbsp;</div>";
-		$gadget .= http_calendrier_rv(sql_calendrier_taches_annonces(),"annonces");
-		$gadget .=  http_calendrier_rv(sql_calendrier_taches_pb(),"pb");
-		$gadget .=  http_calendrier_rv(sql_calendrier_taches_rv(), "rv");
-		$gadget .= "</td>";
-	}
-	$gadget .= "</tr></table>";
-
-	return $gadget;
+	return "<table><tr>"
+	. "<td style='width: 200px; vertical-align: top;' >"
+	. "<div>"
+	. $evtm
+	. "</div>"
+	. "</td>"
+	.  (!$evtt ? '' :
+	      ( "<td style='width: 10px; vertical-align: top'> &nbsp; </td>"
+		. "<td style='width: 200px; color: black; vertical-align: top'>"
+		. "<div>&nbsp;</div>$evtt</td>"))
+	. "</tr></table>";
 }
 
 // http://doc.spip.org/@gadget_messagerie
