@@ -1172,7 +1172,8 @@ function http_calendrier_messages($annee='', $mois='', $jour='', $heures='')
 {
 	global  $partie_cal, $echelle;
 
-	if ($evtm = sql_calendrier_agenda($annee, $mois))
+	$evtm = sql_calendrier_agenda($annee, $mois);
+	if ($evtm OR !$heures)
 		$evtm = http_calendrier_agenda($annee, $mois, $jour, $mois, $annee, false, generer_url_ecrire('calendrier'), '', $evtm);
 	else $evtm= '';
 

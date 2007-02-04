@@ -214,6 +214,7 @@ function verifForm(racine) {
 function AjaxSqueeze(trig, id, callback, event)
 {
 	var target = jQuery('#'+id);
+
 	// position du demandeur dans le DOM (le donner direct serait mieux)
 	if (!target.size()) {return true;}
 
@@ -232,7 +233,7 @@ function AjaxSqueeze(trig, id, callback, event)
 function AjaxSqueezeNode(trig, target, f, event)
 {
 	var i, callback;
-	
+
 	// retour std si pas precise: affecter ce noeud avec ce retour
 	if (!f) {
     callback = function() { verifForm(this);}
@@ -240,8 +241,7 @@ function AjaxSqueezeNode(trig, target, f, event)
 	else {
     callback = function(res,status) { f.apply(this,[res,status]); verifForm(this);}
   }
-
-	valid = (typeof event != 'object') ? false : ((event.altKey || event.shiftKey || event.metaKey) == true);
+	valid = (typeof event != 'object') ? false : ((event.altKey || event.metaKey) == true);
 
 	if (typeof(trig) == 'string') {
 		i = trig.split('?');
@@ -253,9 +253,6 @@ function AjaxSqueezeNode(trig, target, f, event)
 		}
 		res = jQuery.ajax({"url":trig,
 	       "complete":function(r,s){AjaxRet(r,s,target, callback)}});
-		/// ? si on met le Alert ci-dessous, tout est ok pour FF
-		  /// sinon, il ouvre deux fenetres au lieu d'une
-		//				alert(res);
 		return res;
 		
 	}
