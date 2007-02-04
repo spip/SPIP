@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
+// http://doc.spip.org/@exec_menu_agenda_dist
 function exec_menu_agenda_dist() {
 
 	list($evtm, $evtt, $evtr) = http_calendrier_messages(date("Y"), date("m"), date("d"));

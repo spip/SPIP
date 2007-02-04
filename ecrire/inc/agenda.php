@@ -1168,6 +1168,7 @@ function http_calendrier_agenda_rv ($annee, $mois, $les_rv, $fclic,
 
 // Fonctions pour la messagerie, la page d'accueil et les gadgets
 
+// http://doc.spip.org/@http_calendrier_messages
 function http_calendrier_messages($annee='', $mois='', $jour='', $heures='')
 {
 	global  $partie_cal, $echelle;

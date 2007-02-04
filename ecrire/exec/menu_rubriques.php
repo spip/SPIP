@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@exec_menu_rubriques_dist
 function exec_menu_rubriques_dist() {
 	global $spip_ecran;
         
@@ -138,6 +139,7 @@ onmouseout=\"cacher('$idom'); \">"
 
 
 
+// http://doc.spip.org/@extraire_article
 function extraire_article($id_p) {
 	if (array_key_exists($id_p, $GLOBALS['db_art_cache'])) {
 		return $GLOBALS['db_art_cache'][$id_p];
