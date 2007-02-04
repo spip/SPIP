@@ -314,7 +314,7 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 				"$table_id=$id_objet",
 				$corps,
 				$clic,
-				" class='visible_au_chargement fondo spip_xx-small'' id='valider_groupe_$id_groupe'",
+				" class='visible_au_chargement fondo spip_xx-small' id='valider_groupe_$id_groupe'",
 				"&id_objet=$id_objet&objet=$objet&select_groupe=$id_groupe");
 		}
 	}

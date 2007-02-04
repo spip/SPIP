@@ -592,8 +592,8 @@ function emboite_texte($texte, $fonc='',$self='')
 			$i++;
 			list(,$msg, $ligne, $fin, $col) = $r;
 			if (isset($encore2[$msg]))
-			  $ref = $encore2[$msg]++;
-			else $encore2[$msg] = $ref = 1;
+			  $ref = ++$encore2[$msg];
+			else {$encore2[$msg] = $ref = 1;}
 			$err .= "<tr  style='background-color: "
 			  . $colors[$i%2]
 			  . "'><td style='text-align: right'><a href='#debut_err'>"
