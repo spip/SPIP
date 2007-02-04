@@ -242,7 +242,8 @@ $spip_pipeline = array(
 	'post_syndication' => '',
 	'pre_indexation' => '',
 	'agenda_rendu_evenement' => '',
-	'taches_generales_cron' => ''
+	'taches_generales_cron' => '',
+	'calculer_rubriques' => ''
 );
 
 # pour activer #INSERT_HEAD sur tous les squelettes, qu'ils aient ou non
