@@ -75,7 +75,7 @@ function calculer_rubriques() {
 	spip_documents_rubriques AS lien
 	WHERE rub.id_rubrique = lien.id_rubrique
 	AND lien.id_document=fille.id_document AND rub.date_tmp <= fille.date
-	GROUP BY rub.id_rubrique");
+	$postdates GROUP BY rub.id_rubrique");
 	while ($row = spip_fetch_array($r))
 		spip_query("UPDATE spip_rubriques
 		SET statut_tmp='publie', date_tmp='".$row['date_h']."'
