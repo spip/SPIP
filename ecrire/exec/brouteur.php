@@ -19,7 +19,7 @@ function exec_brouteur_dist()
 {
 	global $spip_ecran, $spip_lang_left;
 
-	$id_rubrique = intval(_request($id_rubrique));
+	$id_rubrique = intval(_request('id_rubrique'));
 
 	if ($spip_ecran == "large") {
 		$largeur_table = 974;
