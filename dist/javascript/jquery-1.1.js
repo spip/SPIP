@@ -7,8 +7,8 @@ if(typeof window.jQuery == "undefined") {
  * Dual licensed under the MIT (MIT-LICENSE.txt)
  * and GPL (GPL-LICENSE.txt) licenses.
  *
- * $Date: 2007-02-03 20:32:16 +0100 (Sat, 03 Feb 2007) $
- * $Rev: 1261 $
+ * $Date: 2007-02-07 16:06:49 +0100 (mer, 07 feb 2007) $
+ * $Rev: 1294 $
  */
 
 // Global undefined variable
@@ -291,6 +291,11 @@ jQuery.extend({
 		return !!fn && typeof fn != "string" &&
 			typeof fn[0] == "undefined" && /function/i.test( fn + "" );
 	},
+	
+	// check if an element is in a XML document
+	isXMLDoc: function(elem) {
+		return elem.tagName && elem.ownerDocument && !elem.ownerDocument.body;
+	},
 
 	nodeName: function( elem, name ) {
 		return elem.nodeName && elem.nodeName.toUpperCase() == name.toUpperCase();
@@ -494,7 +499,7 @@ jQuery.extend({
 			if ( arg.length === 0 )
 				return;
 			
-			if ( arg[0] == undefined )
+			if ( arg[0] == undefined || jQuery.nodeName(arg,"form") )
 				r.push( arg );
 			else
 				r = jQuery.merge( r, arg );
@@ -505,7 +510,7 @@ jQuery.extend({
 	},
 	
 	attr: function(elem, name, value){
-		var fix = {
+		var fix = jQuery.isXMLDoc(elem) ? {} : {
 			"for": "htmlFor",
 			"class": "className",
 			"float": jQuery.browser.msie ? "styleFloat" : "cssFloat",
@@ -536,6 +541,7 @@ jQuery.extend({
 		// Mozilla doesn't play well with opacity 1
 		if ( name == "opacity" && jQuery.browser.mozilla && value == 1 )
 			value = 0.9999;
+			
 
 		// Certain attributes only work when accessed via the old DOM 0 way
 		if ( fix[name] ) {
@@ -548,8 +554,10 @@ jQuery.extend({
 		// IE elem.getAttribute passes even for style
 		else if ( elem.tagName ) {
 			if ( value != undefined ) elem.setAttribute( name, value );
+			if ( name == "href" && jQuery.browser.msie && !jQuery.isXMLDoc(elem) ) return elem.getAttribute( name, 2 );
 			return elem.getAttribute( name );
 
+		// elem is actually elem.style ... set the style
 		} else {
 			name = name.replace(/-([a-z])/ig,function(z,b){return b.toUpperCase();});
 			if ( value != undefined ) elem[name] = value;
@@ -822,7 +830,7 @@ jQuery.extend({
 		/^(\+)/, "jQuery.nth(a,2,'nextSibling')",
 		/^(~)/, function(a){
 			var s = jQuery.sibling(a.parentNode.firstChild);
-			return s.slice(0, jQuery.inArray(a,s));
+			return s.slice(jQuery.inArray(a,s) + 1);
 		}
 	],
 
@@ -1857,7 +1865,7 @@ jQuery.fn.extend({
 			complete: function(res, status){
 				if ( status == "success" || !ifModified && status == "notmodified" )
 					// Inject the HTML into all the matched elements
-					self.attr("innerHTML", res.responseText)
+					self.html(res.responseText)
 					  // Execute all the scripts inside of the newly-injected HTML
 					  .evalScripts()
 					  // Execute callback
