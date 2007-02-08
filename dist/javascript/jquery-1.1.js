@@ -494,7 +494,7 @@ jQuery.extend({
 			if ( arg.length === 0 )
 				return;
 			
-			if ( arg[0] == undefined || jQuery.nodeName(arg,"form") )
+			if ( arg[0] == undefined )
 				r.push( arg );
 			else
 				r = jQuery.merge( r, arg );
