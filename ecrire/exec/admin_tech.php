@@ -82,15 +82,21 @@ function exec_admin_tech_dist()
  $znom = "\n<input name='znom_sauvegarde' size='40' value='$file' />";
  if ($flag_gz) {
 
-	echo "\n<p style='text-align: justify;'>", _T('texte_admin_tech_03'), "</p>\n<p>";
-	echo "\n<input type='radio' name='gz' value='1' id='gz_on' checked='checked' /><label for='gz_on'> ",
-	  _T('bouton_radio_sauvegarde_compressee',
-	     array('fichier'=>'<br /><b>' . $dir_dump . "</b>$znom<b>.xml.gz</b>")), " </label><br />\n";
-	echo "\n<input type='radio' name='gz' value='0' id='gz_off' /><label for='gz_off'> ",
-	  _T('bouton_radio_sauvegarde_non_compressee',
-	     array('fichier'=>'<br /><b>' . $dir_dump . "</b>$nom<b>.xml</b>")),
-	  "</label><br /></p>\n";
-}
+	echo "\n<p style='text-align: justify;'>",
+	  _T('texte_admin_tech_03'),
+	  "</p>\n<p>",
+	  "\n<input type='radio' name='gz' value='1' id='gz_on' checked='checked' /><label for='gz_on'> ",
+	  _T('bouton_radio_sauvegarde_compressee', array('fichier'=>'')),
+	  " </label><br />\n",
+	  '<b>' . $dir_dump . "</b>",
+	  $znom,
+	  "<b>.xml.gz</b><br /><br />", 
+	  "\n<input type='radio' name='gz' value='0' id='gz_off' /><label for='gz_off'>",
+	  _T('bouton_radio_sauvegarde_non_compressee',  array('fichier'=>'')),
+	  '</label><br /><b>',
+	  $dir_dump,
+	  "</b>$nom<b>.xml</b><br /></p>\n";
+ }
 else {
   echo "\n<p style='text-align: justify;'>",
     _T('texte_sauvegarde_compressee',
