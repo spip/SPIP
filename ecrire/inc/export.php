@@ -49,20 +49,6 @@ if (!isset($EXPORT_tables_noexport)){
 	}
 }
 
-// http://doc.spip.org/@export_nom_fichier_dump
-function export_nom_fichier_dump($dir,$gz=true){
-	$nom_site = isset($GLOBALS['meta']['nom_site'])?$GLOBALS['meta']['nom_site']:'';
-	$nom_site = preg_replace(",[^a-z],is","_",trim($nom_site));
-	$archive = str_replace('@nom_site@',"_{$nom_site}_",_SPIP_DUMP);
-	if ($gz) $archive .= '.gz';
-	$cpt=0;
-	$stamp = date('Ymd');
-	while ((file_exists($dir.($nom = str_replace('@stamp@',"_{$stamp}_".substr("00$cpt",-3),$archive))))&&($cpt<999))
-		$cpt++;
-	return $nom;
-}
-
-
 // construction de la liste des tables pour le dump :
 // toutes les tables principales
 // + toutes les tables auxiliaires hors relations
@@ -131,19 +117,20 @@ function export_all_list_tables()
 // prevenir autant que possible un Time-out.
 
 // http://doc.spip.org/@ramasse_parties
-function ramasse_parties($archive, $partfile, $files = array()){
+function ramasse_parties($dir, $archive)
+{
+	$files = preg_files($dir . $archive . ".part_[0-9]+_[0-9]+[.gz]?");
 
-	$files_o = array();
-	if (!count($files))
-		$files = preg_files(dirname($archive)."/",basename($partfile).".part_[0-9]+_[0-9]+[.gz]?");
 	$ok = true;
+	$files_o = array();
+	$but = $dir . $archive;
 	foreach($files as $f) {
 	  $contenu = "";
 	  if (lire_fichier ($f, $contenu)) {
-	    if (!ecrire_fichier($archive,$contenu,false,false))
+	    if (!ecrire_fichier($but,$contenu,false,false))
 	      { $ok = false; break;}
 	  }
-	  unlink($f);
+	  @unlink($f);
 	  $files_o[]=$f;
 	}
 	return $ok ? $files_o : false;
