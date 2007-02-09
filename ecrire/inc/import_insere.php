@@ -273,6 +273,7 @@ function import_identifie_id_document($values, $table, $desc, $request) {
 // un type de document importe est considere comme identique a un type present
 // s'ils ont meme extension et meme titre
 // Sinon il ne sera PAS importe
+// http://doc.spip.org/@import_identifie_id_type
 function import_identifie_id_type($values, $table, $desc, $request) {
 	$e = $values['extension'];
 	$t = $values['titre'];
