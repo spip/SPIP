@@ -1546,7 +1546,6 @@ function image_imagick () {
 			imagick_writeimage( $handle, $dest);
 		} 
 	}
-	include_spip('inc/logos');
 	list ($src_y,$src_x) = taille_image($dest);
 	return image_ecrire_tag($image,array('src'=>$dest,'width'=>$src_x,'height'=>$src_y));
 
