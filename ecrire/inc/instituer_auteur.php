@@ -43,7 +43,7 @@ function inc_instituer_auteur_dist($id_auteur, $statut, $url_self)
 
 		$lien = !$modif 
 		? ''
-		: array("&nbsp;&nbsp;&nbsp;&nbsp;[<span class='spip_x-small'>" . _T('lien_supprimer_rubrique') . "</span>]");
+		: array(_T('lien_supprimer_rubrique'));
 
 		$res = '';
 
@@ -56,7 +56,9 @@ function inc_instituer_auteur_dist($id_auteur, $statut, $url_self)
 			. typo($row_admin["multi"])
 			. "</a>"
 			. (!$modif ? '' :
-			   ajax_action_auteur('instituer_auteur', "$id_auteur/-$id_rubrique", $url_self, $modif, $lien))
+				"&nbsp;&nbsp;&nbsp;&nbsp;[<span class='spip_x-small'>"
+				. ajax_action_auteur('instituer_auteur', "$id_auteur/-$id_rubrique", $url_self, $modif, $lien)
+				. "</span>]")
 			. '</li>';
 		}
 

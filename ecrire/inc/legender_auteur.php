@@ -14,11 +14,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 // http://doc.spip.org/@inc_legender_auteur_dist
-function inc_legender_auteur_dist($id_auteur, $auteur, $mode, $echec='', $redirect='')
+function inc_legender_auteur_dist($id_auteur, $auteur, $initial, $echec='', $redirect='')
 {
-	$corps = (($mode < 0) OR !statut_modifiable_auteur($id_auteur, $auteur))
+
+	$corps = (($initial < 0) OR !statut_modifiable_auteur($id_auteur, $auteur))
 	? legender_auteur_voir($auteur, $redirect)
-	: legender_auteur_saisir($id_auteur, $auteur, $mode, $echec, $redirect);
+	: legender_auteur_saisir($id_auteur, $auteur, $initial, $echec, $redirect);
 	
 	return  $redirect ? $corps :
 	  ajax_action_greffe("legender_auteur-$id_auteur", $corps);
@@ -26,7 +27,7 @@ function inc_legender_auteur_dist($id_auteur, $auteur, $mode, $echec='', $redire
 }
 
 // http://doc.spip.org/@legender_auteur_saisir
-function legender_auteur_saisir($id_auteur, $auteur, $mode, $echec='', $redirect='')
+function legender_auteur_saisir($id_auteur, $auteur, $initial, $echec='', $redirect='')
 {
 	global $options, $connect_statut, $connect_id_auteur, $connect_toutes_rubriques;
 	$corps = '';
@@ -55,9 +56,9 @@ function legender_auteur_saisir($id_auteur, $auteur, $mode, $echec='', $redirect
 	. _T('entree_nom_pseudo')
 	. ")<br />\n"
 	. "<input type='text' name='nom' class='formo' size='40' value=\""
-	. entites_html($auteur['nom'])
+	. entites_html(sinon($auteur['nom'], _T('ecrire:item_nouvel_auteur')))
 	. "\" "
-	. (!$mode ? '' : ' onfocus="if(!antifocus){this.value=\'\';antifocus=true;}"')
+	. (strlen($auteur['nom']) ? '' : ' onfocus="if(!antifocus){this.value=\'\';antifocus=true;}"')
 	. " />\n<br />"
 	. "<b>"._T('entree_adresse_email')."</b>";
 
@@ -177,9 +178,11 @@ function legender_auteur_saisir($id_auteur, $auteur, $mode, $echec='', $redirect
 	return '<div>&nbsp;</div>'
 	. "\n<div class='serif'>"
 	. debut_cadre_relief("fiche-perso-24.gif", true, "", _T("icone_informations_personnelles"))
-	. ($redirect
-	     ? generer_action_auteur('legender_auteur', $arg, $redirect, $corps)
-	   : ajax_action_post('legender_auteur', $arg, 'auteur_infos', "id_auteur=$id_auteur&initial=-1&retour=$redirect", $corps, _T('bouton_enregistrer'), $att))
+	. (
+	$redirect
+	     ? generer_action_auteur('legender_auteur', $arg, $redirect,
+	     	$corps . "<div align='right'><input type='submit' value='"._T('bouton_enregistrer')."' class='fondo' /></div>")
+	   : ajax_action_post('legender_auteur', $arg, 'auteur_infos', "id_auteur=$id_auteur&initial=-1", $corps, _T('bouton_enregistrer'), $att))
 	. fin_cadre_relief(true)
 	. '</div>';
 }
@@ -255,7 +258,7 @@ function legender_auteur_voir($auteur, $redirect)
 	if (statut_modifiable_auteur($id_auteur, $auteur)) {
 		$ancre = "legender_auteur-$id_auteur";
 		$clic = _T("admin_modifier_auteur");
-		$h = generer_url_ecrire("auteur_infos","id_auteur=$id_auteur&initial=0");
+		$h = generer_url_ecrire("auteur_infos","id_auteur=$id_auteur");
 		if ((_SPIP_AJAX === 1 ) AND !$redirect) {
 		  $evt = "\nonclick=" . ajax_action_declencheur($h,$ancre);
 		  $h = "<a\nhref='$h#$ancre'$evt>$clic</a>";

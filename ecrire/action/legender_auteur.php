@@ -22,9 +22,7 @@ function action_legender_auteur_dist()
         $securiser_action = charger_fonction('securiser_action', 'inc');
         $arg = $securiser_action();
 
-	$echec = array();
-
-        if (!preg_match(",^(\d+)\D(\d*)(\D(\w*)\D(.*))?$,", $arg, $r)) {
+        if (!preg_match(",^(\d+)\D(\d*)(\D(\w*))?$,", $arg, $r)) {
 		$r = "action_legender_auteur_dist $arg pas compris";
 		spip_log($r);
         } else 	redirige_par_entete(action_legender_auteur_post($r));
@@ -48,7 +46,10 @@ function action_legender_auteur_post($r)
 	$statut = _request('statut');
 	$url_site = _request('url_site');
 
-	list($tout, $id_auteur, $ajouter_id_article,$x,$s, $n) = $r;
+	$echec = array();
+
+
+	list($tout, $id_auteur, $ajouter_id_article,$x,$s) = $r;
 //
 // si id_auteur est hors table, c'est une creation sinon une modif
 //
@@ -59,17 +60,16 @@ function action_legender_auteur_post($r)
 	  if (!$auteur) {
 		$id_auteur = 0;
 		$source = 'spip';
-		$nom = $n ? $n : _T('ecrire:item_nouvel_auteur');
 		$statut = '1comite'; // statut par defaut
 		if ($s) {
 		  if (ereg("^(0minirezo|1comite|5poubelle|6forum)$",$s))
 		    $statut = $s;
 		  else spip_log("action_legender_auteur_dist: statut $s incompris");
 		}
-	  } else $nom = _request('nom'); // risque de conflits en globale.
+	  }
 
 	  $acces = ($id_auteur == $auteur_session['id_auteur']) ? true : " a voir ";
-	  $auteur['nom'] = corriger_caracteres($nom);
+	  $auteur['nom'] = corriger_caracteres(_request('nom'));
 
 	// login et mot de passe
 	$modif_login = false;
@@ -183,21 +183,19 @@ function action_legender_auteur_post($r)
 		spip_query("UPDATE spip_auteurs SET $query_pass		nom=" . _q($auteur['nom']) . ",						login=" . _q($auteur['login']) . ",					bio=" . _q($auteur['bio']) . ",						email=" . _q($auteur['email']) . ",					nom_site=" . _q($auteur['nom_site']) . ",				url_site=" . _q($auteur['url_site']) . ",				pgp=" . _q($auteur['pgp']) .					(!$extra ? '' : (", extra = " . _q($extra) . "")) .			" WHERE id_auteur=".$auteur['id_auteur']);
 	}
 
-// Si on modifie la fiche auteur, reindexer 
-	if ($nom OR $statut) {
-		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-			include_spip("inc/indexation");
-			marquer_indexer('spip_auteurs', $id_auteur);
-		}
-	// ..et mettre a jour les fichiers .htpasswd et .htpasswd-admin
-		ecrire_acces();
+	// Si on modifie la fiche auteur, reindexer 
+	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
+		include_spip("inc/indexation");
+		marquer_indexer('spip_auteurs', $id_auteur);
 	}
+	// ..et mettre a jour les fichiers .htpasswd et .htpasswd-admin
+	ecrire_acces();
 
-	if ($echec) $echec = '&echec=' . join('@@@', $echec);
+	$echec = $echec ? '&echec=' . join('@@@', $echec) : '';
 
 	// il faudrait rajouter OR $echec mais il y a conflit avec Ajax
 
-	if (($init = ($tout[0]=='0'))) {
+	if ($echec OR ($init = ($tout[0]=='0'))) {
 	  // tout nouveau. envoyer le formulaire de saisie du reste
 	  // en transmettant le retour eventuel
 	  // decode / encode car encode pas necessairement deja fait.
@@ -205,7 +203,9 @@ function action_legender_auteur_post($r)
 		$ret = !$redirect ? '' 
 		  : ('&redirect=' . rawurlencode(rawurldecode($redirect)));
 
-		return generer_url_ecrire("auteur_infos", "id_auteur=$id_auteur&initial=$init$echec$ret",true);
+		$script = (_request('var_ajaxcharset') ? 'legender_auteur' : 'auteur_infos');
+
+		return generer_url_ecrire($script, "id_auteur=$id_auteur&initial=$init$echec$ret",true);
 	} else {
 	  // modif: renvoyer le resultat ou a nouveau le formulaire si erreur
 		  if (!$redirect) {
@@ -214,11 +214,7 @@ function action_legender_auteur_post($r)
 		  } else 
 		    list($redirect,$anc) = split('#',rawurldecode($redirect));
 
-		if (!$echec) 
-		  $redirect .= '&initial=-1' . $anc;
-		else  {
-		  $redirect .= $echec . '&initial=0' . $anc;
-		}
+		  $redirect .= $echec . $anc . ($echec ? '' : '&initial=-1');
 		return $redirect;
 	}
 }

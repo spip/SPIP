@@ -55,7 +55,7 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 
 	$bouton_creer_auteur =  $GLOBALS['connect_toutes_rubriques'];
 	$clic = _T('icone_creer_auteur');
-	$arg = "0/$id/"  . ($statut ? $statut : '1comite') . '/';
+	$arg = "0/$id/"  . ($statut ? $statut : '1comite');
 //
 // complement de action/editer_auteurs.php pour notifier la recherche d'auteur
 //
@@ -67,7 +67,8 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 
 		if ($type=='article' && $bouton_creer_auteur) { // pas generique pour le moment
 
-			$legende = redirige_action_auteur("legender_auteur", $arg . rawurlencode($cherche_auteur), "articles","id_article=$id");
+			$legende = redirige_action_auteur("legender_auteur", $arg, "articles","id_article=$id");
+			$legende = parametre_url($legende, 'nom', $cherche_auteur);
 
 			$reponse .="<div style='width: 200px;'>"
 			. icone_horizontale($clic, $legende, "redacteurs-24.gif", "creer.gif", false)
