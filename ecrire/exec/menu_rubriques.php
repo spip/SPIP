@@ -43,7 +43,7 @@ function exec_menu_rubriques_dist() {
 		$largeur = min(200, ceil($largeur_t / $nb_col)); 
 		$count_lignes = 0;
 		$style = " style='z-index: 0; vertical-align: top;'";
-
+		$image = " background-image: url(" . http_wrapper("secteur-12.gif") .");";
 		foreach( $arr_low as $id_rubrique => $titre_rubrique) {
 			if ($count_lignes == $max_lignes) {
 				$count_lignes = 0;
@@ -51,7 +51,8 @@ function exec_menu_rubriques_dist() {
 			}
 			$count_lignes ++;
 			if (autoriser('voir','rubrique',$id_rubrique)){
-			  $ret .= bandeau_rubrique($id_rubrique, $titre_rubrique, 1, $largeur);
+			  $ret .= bandeau_rubrique($id_rubrique, $titre_rubrique, $i, $largeur, $image);
+			  $i--;
 			}
 		}
 
@@ -66,20 +67,10 @@ function exec_menu_rubriques_dist() {
 
 
 // http://doc.spip.org/@bandeau_rubrique
-function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal, $largeur) {
+function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal, $largeur, $image='') {
 	global $spip_ecran, $spip_display;
 	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
-
-	$titre_rubrique = preg_replace(',[\x00-\x1f]+,', ' ', $titre_rubrique);
-	// Limiter volontairement le nombre de sous-menus 
-	$zmax = 6;
-
-	if ($zdecal == 1) $image = "secteur-12.gif";
-	//else $image = "rubrique-12.gif";
-	else $image = '';
-
-	if ($image)
-		$image = " background-image: url(" . http_wrapper($image) .");";
+	static $zmax = 6;
 
 	$nav = "<a href='"
 	. generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique)
@@ -88,10 +79,11 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal, $largeur) {
 	. "px;"
 	. $image
 	. "'>\n&nbsp;"
-	. supprimer_tags($titre_rubrique)
+	. supprimer_tags(preg_replace(',[\x00-\x1f]+,', ' ', $titre_rubrique))
 	. "</a>\n";
 
-	if ($zdecal >= $zmax) return "\n<div>$nav</div>";
+	// Limiter volontairement le nombre de sous-menus 
+	if (!(--$zmax)) return "\n<div>$nav</div>";
 
 	$arr_rub = extraire_article($id_rubrique);
 	$i = sizeof($arr_rub);
@@ -100,7 +92,8 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal, $largeur) {
 	$pxdecal = max(15, ceil($largeur/5)) . 'px';
 	$idom = 'b_' . $id_rubrique;
 
-	$ret = "<div class='pos_r'
+	$ret = "<div class='pos_r' style='z-index: "
+	. $zdecal . ";'
 onmouseover=\"montrer('$idom');\"
 onmouseout=\"cacher('$idom'); \">"
 	. '<div class="brt">'
@@ -108,7 +101,7 @@ onmouseout=\"cacher('$idom'); \">"
 	. "</div>\n<div class='bandeau_rub' style='top: 14px; left: "
 	. $pxdecal
 	. "; z-index: "
-	. $zdecal
+	. ($zdecal+1)
 	. ";' id='"
 	. $idom
 	. "'><table cellspacing='0' cellpadding='0'><tr><td valign='top'>";
@@ -129,11 +122,13 @@ onmouseout=\"cacher('$idom'); \">"
 			}
 			if (autoriser('voir','rubrique',$id_rub)){
 				$titre = supprimer_numero(typo($titre_rub));
-				$ret .= bandeau_rubrique($id_rub, $titre, $zdecal+1, $largeur);
+				$ret .= bandeau_rubrique($id_rub, $titre, $zdecal+$i, $largeur);
+				$i--;
 			}
 		}
 	$ret .= "</td></tr></table>\n";
 	$ret .= "</div></div>\n";
+	$zmax++;
 	return $ret;
 }
 
