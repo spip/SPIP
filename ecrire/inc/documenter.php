@@ -39,7 +39,8 @@ function inc_documenter_dist(
 		$documents = array();
 		while ($document = spip_fetch_array($lies))
 			$documents[] = $document;
-	} else $documents = $doc;
+	} else
+		$documents = $doc;
 
 	if (!$documents) return '';
 
@@ -51,6 +52,14 @@ function inc_documenter_dist(
 
 	$tourner = charger_fonction('tourner', 'inc');
 	$legender = charger_fonction('legender', 'inc');
+
+	// Pour les doublons d'article et en mode ajax, il faut faire propre()
+	if ($type=='article'
+	AND !isset($GLOBALS['doublons_documents_inclus'])
+	AND is_int($doc)) {
+		$r = spip_fetch_array(spip_query("SELECT chapo,texte FROM spip_articles WHERE id_article="._q($doc)));
+		propre(join(" ",$r));
+	}
 
 	foreach ($documents as $document) {
 		$id_document = $document['id_document'];
