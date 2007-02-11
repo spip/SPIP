@@ -46,7 +46,6 @@ function forum_envoi(
 {
 	global     $options, $spip_lang_rtl;
 
-
 	// Chercher a quoi on repond pour preremplir le titre
 	// et le bouton "retour"
 	if ($id_parent) {
@@ -123,13 +122,11 @@ function forum_envoi(
 	  $num = '';
 	}
 
-	$titre_defaut = _T('texte_nouveau_message');
-
-	if ($num) {
+	if ($num AND !$titre_message) {
 		$q = spip_query("SELECT $titre AS titre FROM spip_$table WHERE $objet=$id");
 		$q = spip_fetch_array($q);
 		$titre_defaut = $q['titre'];
-	}
+	} else 	$titre_defaut = $titre_message  ? $titre_message  :_T('texte_nouveau_message');
 
 
 	// debut de page
