@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 
-// http://doc.spip.org/@exec_recherche_dist
+// http://doc.spip.org/@exec_valider_xml_dist
 function exec_valider_xml_dist()
 {
 	if ($GLOBALS['connect_statut'] != '0minirezo') {
