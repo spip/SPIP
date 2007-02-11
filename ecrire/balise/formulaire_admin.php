@@ -106,13 +106,13 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 			!$var_preview
 		)
 	) ? parametre_url(self(),'var_mode', 'debug', '&'): '';
-	$analyser = !$xhtml ? "" :
+		$analyser = !$xhtml ? "" :
 		(($xhtml === 'sax') ?
 		(parametre_url(self(), 'var_mode', 'debug', '&')
 			.'&var_mode_affiche=validation') :
 		('http://validator.w3.org/check?uri='
 		. rawurlencode("http://" . $_SERVER['HTTP_HOST'] . nettoyer_uri())));
-
+	
 	// hack - ne pas avoir la rubrique si un autre bouton est deja present
 	if ($id_article OR $id_breve) unset ($id_rubrique);
 
@@ -175,9 +175,9 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 		$env['use_cache'] = ' *';
 	if ($analyser)
 		$env['analyser'] = $analyser;
-	if (isset($GLOBALS['xhtml_error']))
-		$env['xhtml_error'] = $GLOBALS['xhtml_error'];
-
+	if (isset($GLOBALS['xhtml_error']) AND $GLOBALS['xhtml_error']) {
+		$env['xhtml_error'] = count($GLOBALS['xhtml_error']);
+	}
 	foreach (array('article','rubrique','auteur','breve','mot','syndic'=>'site')
 	as $id => $obj) {
 		if (is_int($id)) $id = $obj;

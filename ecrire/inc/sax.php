@@ -225,18 +225,24 @@ function sax_bug($data)
 	$doctype = "";
 
 	$r = analyser_doctype($data);
-	if ($r) {
-		list ($doctype, $topelement, $avail, $grammaire, $rotlvl) = $r;
+	if (!$r) {
+		$data = _MESSAGE_DOCTYPE . _DOCTYPE_ECRIRE
+		. preg_replace(_REGEXP_DOCTYPE, '', $data);
+		$r =  analyser_doctype($data);
+	}
+
+	list($doctype, $topelement, $avail, $grammaire, $rotlvl) = $r;
+
 		//$data = str_replace('DOCTYPE','doctype',$doctype).substr($data,strlen($doctype));
-		$file = _DIR_CACHE_XML . preg_replace('/[^\w.]/','_', $rotlvl) . '.gz';
-		if (lire_fichier($file, $r))
+	$file = _DIR_CACHE_XML . preg_replace('/[^\w.]/','_', $rotlvl) . '.gz';
+
+	if (lire_fichier($file, $r)) {
 			$phraseur_xml->dtc = unserialize($r);
-		else {
+	} else {
 			include_spip('xml/analyser_dtd');
 		    	$phraseur_xml->dtc = charger_dtd($grammaire, $avail);
 			if (($avail == 'PUBLIC' ) AND $phraseur_xml->dtc)
 				ecrire_fichier($file, serialize($phraseur_xml->dtc), true);
-		}
 	}
 
 	if ($phraseur_xml->dtc) {
@@ -258,7 +264,7 @@ function analyser_doctype($data)
 	if (!preg_match(_REGEXP_DOCTYPE, $data, $r))
 		return array();
 
-	list($doctype,,$topelement, $avail,$suite) = $r;
+	list($doctype,$pi,$co,$pico, $topelement, $avail,$suite) = $r;
 
 	if (!preg_match('/^"([^"]*)"\s*(.*)$/', $suite, $r))
 		if (!preg_match("/^'([^']*)'\s*(.*)$/", $suite, $r))
@@ -266,15 +272,18 @@ function analyser_doctype($data)
 	list(,$rotlvl, $suite) = $r;
 
 	if (!$suite) {
+		if ($avail != 'SYSTEM') return array();
 		$grammaire = $rotlvl;
 		$rotlvl = '';
 	} else {
 		if (!preg_match('/^"([^"]*)"\s*$/', $suite, $r))
 			if (!preg_match("/^'([^']*)'\s*$/", $suite, $r))
 				return array();
+
 		$grammaire = $r[1];
 	}
-	return array($doctype, $topelement, $avail, $grammaire, $rotlvl);
+
+	return array(substr($doctype,strlen($pico)), $topelement, $avail, $grammaire, $rotlvl);
 }
 
 ?>

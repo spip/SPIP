@@ -283,12 +283,12 @@ function phraserTout($phraseur, $data)
 { 
 	xml_parsestring($phraseur, $data);
 
-	if (!$this->dtc) {
-	  $GLOBALS['xhtml_error'] = 'DOCTYPE ? 0 0<br />';
-	  $this->err = array('DOCTYPE ? 0 0<br />');
+	if (!$this->dtc OR preg_match(',^' . _MESSAGE_DOCTYPE . ',', $data)) {
+		$GLOBALS['xhtml_error'] .= 'DOCTYPE ? 0 0<br />';
+		$this->err[]= ('DOCTYPE ? 0 0<br />');
 	} else {
-	  $valider_passe2 = charger_fonction('valider_passe2', 'inc');
-	  $valider_passe2($this);
+		$valider_passe2 = charger_fonction('valider_passe2', 'inc');
+		$valider_passe2($this);
 	}
 	return !$this->err ?  $this->res : join('<br />', $this->err) . '<br />';
 }
