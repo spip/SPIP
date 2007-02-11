@@ -23,118 +23,62 @@ include_spip('inc/message_select');
 // les admins restreints les voient mais 
 // ne peuvent les utiliser que pour mettre un auteur a la poubelle
 
-// http://doc.spip.org/@inc_instituer_auteur_dist
-function inc_instituer_auteur_dist($id_auteur, $statut, $url_self)
-{
+function inc_instituer_auteur_dist($auteur) {
 	global $connect_toutes_rubriques, $connect_id_auteur, $connect_statut, $spip_lang_right, $spip_lang;
-					 
-	if (($connect_statut != '0minirezo')
-	OR (!($id_auteur = intval($id_auteur))))
-		return '';
 
-	$result_admin = spip_query("SELECT rubriques.id_rubrique, " . creer_objet_multi ("titre", $spip_lang) . " FROM spip_auteurs_rubriques AS lien, spip_rubriques AS rubriques WHERE lien.id_auteur=$id_auteur AND lien.id_rubrique=rubriques.id_rubrique ORDER BY multi");
+	if ($connect_statut != '0minirezo') return '';
 
-	$restreint = spip_num_rows($result_admin);
+	$statut = $auteur['statut'];
 
-	if (!$restreint) 
-		$res = _T('info_admin_gere_toutes_rubriques');
-	else {
-		$modif = ($connect_toutes_rubriques AND $connect_id_auteur != $id_auteur) ? "id_auteur=$id_auteur" : '';
-
-		$lien = !$modif 
-		? ''
-		: array(_T('lien_supprimer_rubrique'));
-
-		$res = '';
-
-		while ($row_admin = spip_fetch_array($result_admin)) {
-			$id_rubrique = $row_admin["id_rubrique"];
-			
-			$res .= "\n<li><a href='"
-			. generer_url_ecrire("naviguer","id_rubrique=$id_rubrique")
-			. "'>"
-			. typo($row_admin["multi"])
-			. "</a>"
-			. (!$modif ? '' :
-				"&nbsp;&nbsp;&nbsp;&nbsp;[<span class='spip_x-small'>"
-				. ajax_action_auteur('instituer_auteur', "$id_auteur/-$id_rubrique", $url_self, $modif, $lien)
-				. "</span>]")
-			. '</li>';
-		}
-
-		$res =  _T('info_admin_gere_rubriques')
-		. "\n<ul style='list-style-image: url("
-		. _DIR_IMG_PACK
-		. "rubrique-12.gif)'>"
-		. $res
-		. "</ul>";
+	if (!$id_auteur = $auteur['id_auteur']) {
+		$new = true;
+		$statut = '1comite';
 	}
-
-	// si pas admin au chargement, rien a montrer. 
-	$vis = ($statut == '0minirezo') ? '' : " style='display: none'";
-
-		// Ajouter une rubrique a un administrateur restreint
-	if ($connect_toutes_rubriques AND $connect_id_auteur != $id_auteur) {
-
-		$label = $restreint ? _T('info_ajouter_rubrique') : _T('info_restreindre_rubrique');
-
-		$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
-
-		$res .= debut_block_visible("statut$id_auteur")
-		. "\n<div id='ajax_rubrique' class='arial1'><br />\n"
-		. "<b>"
-		. $label 
-		. "</b><br />"
-		. "\n<input name='id_auteur' value='"
-		. $id_auteur
-		. "' type='hidden' />"
-		. $chercher_rubrique(0, 'auteur', false)
-		. "</div>\n"
-		. fin_block();
-	}
-		
-	$droit = (($connect_toutes_rubriques OR $statut != "0minirezo")
-		   && ($connect_id_auteur != $id_auteur));
 
 	$ancre = "instituer_auteur-" . intval($id_auteur);
 
-	if ($droit) {
-		$res = "<b>"._T('info_statut_auteur')." </b> "
-		. choix_statut_auteur($statut, "$ancre-aff")
-		. "<div id='$ancre-aff'$vis>"
-		. $res		  
-		. "</div>";
+	if ($menu = choix_statut_auteur($statut, $id_auteur, "$ancre-aff"))
+		$res = "<b>"._T('info_statut_auteur')."</b> " . $menu;
 
-		$res = ajax_action_post('instituer_auteur', $id_auteur, $url_self, (!$id_auteur ? "" : "id_auteur=$id_auteur"), $res, _T('bouton_valider'), " style='float: $spip_lang_right' class='fondo'")."<br class='nettoyeur' />";
-	}
+	// Prepare le bloc des rubriques restreintes ;
+	// si l'auteur n'est pas admin, on le cache
+	$vis = ($statut == '0minirezo') ? '' : " style='display: none'";
+	if ($menu_restreints = choix_rubriques_admin_restreint($auteur))
+		$res .= "<div id='$ancre-aff'$vis>"
+			. $menu_restreints
+			. "</div>";
 
-	return (_request('var_ajaxcharset'))
-	? $res
-	: (debut_cadre_relief('',true)
+	return debut_cadre_relief('',true)
 		. "<div id='"
 		. $ancre
 		. "'>"
 		. $res 
 		. '</div>'
-		. fin_cadre_relief(true));
+		. fin_cadre_relief(true);
 }
-
 
 
 // Menu de choix d'un statut d'auteur
 // http://doc.spip.org/@choix_statut_auteur
-function choix_statut_auteur($statut, $ancre) {
-	global $connect_toutes_rubriques;
+function choix_statut_auteur($statut, $id_auteur, $ancre) {
 
+	// Le menu doit-il etre actif ?
+	if (!autoriser('modifier', 'auteur', $id_auteur,
+	null, array('statut' => '?')))
+		return '';
+
+	// Calculer le menu
 	$menu = "<select name='statut' size='1' class='fondl'
-		onchange=\"(this.selectedIndex==0)?jQuery('#$ancre').slideDown():jQuery('#$ancre:visible').slideUp();\">";
+		onchange=\"(this.options[this.selectedIndex].value == '0minirezo')?jQuery('#$ancre').slideDown():jQuery('#$ancre:visible').slideUp();\">";
 
-	// Si on est admin restreint, on n'a pas le droit de modifier un admin
-	if ($connect_toutes_rubriques)
+	// A-t-on le droit de promouvoir cet auteur comme admin ?
+	if (autoriser('modifier', 'auteur', intval($id_auteur),
+	null, array('statut' => '0minirezo'))) {
 		$menu .= "\n<option" .
 			mySel("0minirezo",$statut) .
 			">" . _T('item_administrateur_2')
 			. '</option>';
+	}
 
 	// Ajouter le choix "comite"
 	$menu .=
@@ -187,4 +131,98 @@ function choix_statut_auteur($statut, $ancre) {
 
 	return $menu;
 }
+
+
+function choix_rubriques_admin_restreint($auteur) {
+	global $connect_toutes_rubriques, $connect_id_auteur, $connect_statut, $spip_lang_right, $spip_lang;
+
+	$id_auteur = intval($auteur['id_auteur']);
+
+	$result_admin = spip_query("SELECT rubriques.id_rubrique, " . creer_objet_multi ("titre", $spip_lang) . " FROM spip_auteurs_rubriques AS lien, spip_rubriques AS rubriques WHERE lien.id_auteur=$id_auteur AND lien.id_rubrique=rubriques.id_rubrique ORDER BY multi");
+
+
+	if (spip_num_rows($result_admin) == 0) {
+		$phrase = _T('info_admin_gere_toutes_rubriques')."\n";
+		$menu = '';
+	} else {
+		// L'autorisation de modifier les rubriques restreintes
+		// est egale a l'autorisation de passer en admin
+		$modif = autoriser('modifier', 'auteur', $id_auteur, null, array('statut' => '0minirezo'));
+
+		// Il faut un element zero pour montrer qu'on a l'interface
+		// sinon il est impossible de deslectionner toutes les rubriques
+		$menu = $modif
+			? "<input type='hidden' name='restreintes[]' value='0' />\n"
+			: '';
+
+		while ($row_admin = spip_fetch_array($result_admin)) {
+			$id_rubrique = $row_admin["id_rubrique"];
+
+			$menu .= "\n<li id='rubrest_$id_rubrique'>"
+			. ($modif
+				? "<input type='checkbox' checked='checked' name='restreintes[]' value='$id_rubrique' />\n"
+				: ''
+			)
+			. "<a href='?exec=naviguer&amp;id_rubrique=$id_rubrique'>"
+			. typo($row_admin["multi"])
+			. "</a>"
+			. '</li>';
+		}
+
+		$phrase = _T('info_admin_gere_rubriques');
+	}
+
+	if ($auteur['statut'] != '0minirezo')
+		$phrase = '';
+
+	$res = "<p>$phrase</p>\n"
+		. "<ul id='liste_rubriques_restreintes' style='list-style-image: url("
+		. _DIR_IMG_PACK
+		. "rubrique-12.gif)'>"
+		. $menu
+		. "</ul>\n";
+
+	// Ajouter une rubrique a un administrateur restreint
+	if ($connect_toutes_rubriques AND $connect_id_auteur != $id_auteur) {
+
+		$label = $restreint
+			? _T('info_ajouter_rubrique')
+			: _T('info_restreindre_rubrique');
+
+		$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
+
+		$res .= debut_block_visible("statut$id_auteur")
+		. "\n<div id='ajax_rubrique' class='arial1'><br />\n"
+		. "<b>"
+		. $label 
+		. "</b><br />"
+		. "\n<input name='id_auteur' value='"
+		. $id_auteur
+		. "' type='hidden' />"
+		. $chercher_rubrique(0, 'auteur', false)
+		. "</div>\n"
+
+		// onchange = pour le menu
+		// l'evenement doit etre provoque a la main par le selecteur ajax
+		. "<script type='text/javascript'><!--
+		jQuery('input[@name=id_parent]')
+		.bind('change', function(){
+			var id_parent = this.value;
+			var titre = jQuery('#titreparent').attr('value') || this.options[this.selectedIndex].text;
+			// Ajouter la rubrique selectionnee au formulaire,
+			// sous la forme d'un input name='rubriques[]'
+			var el = '<input type=\'checkbox\' checked=\'checked\' name=\'restreintes[]\' value=\''+id_parent+'\' /> ' + '<a href=\'?exec=naviguer&amp;id_rubrique='+id_parent+'\'>'+titre+'</a>';
+			if (jQuery('#rubrest_'+id_parent).size() == 0) {
+				jQuery('#liste_rubriques_restreintes')
+				.append('<li id=\'rubrest_'+id_parent+'\'>'+el+'</li>');
+			}
+		}); //--></script>\n"
+
+		. fin_block();
+	}
+
+	return $res;
+}
+
+
 ?>

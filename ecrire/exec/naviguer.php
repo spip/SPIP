@@ -177,7 +177,7 @@ function infos_naviguer($id_rubrique, $statut, $ze_logo)
 
 			  echo 
 				http_img_pack('admin-12.gif','',''),
-			    " <a href='", generer_url_ecrire('auteurs_edit', "id_auteur=$id"),
+			    " <a href='", generer_url_ecrire('auteur_infos', "id_auteur=$id"),
 				"'>",
 				extraire_multi($row['nom']),
 				'</a><br />';

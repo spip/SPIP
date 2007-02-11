@@ -20,8 +20,6 @@ function action_editer_auteurs_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 	$redirect = urldecode(_request('redirect'));
-	if ($script_aut = _request('script_aut'))
-		$redirect = parametre_url($redirect,'script_aut',$script_aut,'&');
 	if ($script = _request('script'))
 		$redirect = parametre_url($redirect,'script',$script,'&');
 	if ($titre = _request('titre'))

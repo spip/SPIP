@@ -310,6 +310,7 @@ function autoriser_webmestre_dist($faire, $type, $id, $qui, $opt) {
 // Attention tout depend de ce qu'on veut modifier
 // http://doc.spip.org/@autoriser_auteur_modifier_dist
 function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
+
 	// Ni admin ni redacteur => non
 	if (!in_array($qui['statut'], array('0minirezo', '1comite')))
 		return false;
@@ -319,14 +320,42 @@ function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 	if ($qui['statut'] == '1comite') {
 		if ($opt['statut'] OR $opt['restreintes'])
 			return false;
-		if ($id == $qui['id_auteur'])
+		else if ($id == $qui['id_auteur'])
 			return true;
-		return false;
+		else
+			return false;
 	}
 
+	// Un admin restreint peut modifier/creer un auteur non-admin mais il
+	// n'a le droit ni de le promouvoir admin, ni de changer les rubriques
+	if ($qui['restreint']) {
+		if ($opt['statut'] == '0minirezo'
+		OR $opt['restreintes']) {
+			return false;
+		} else {
+			if ($id == $qui['id_auteur']) {
+				if ($opt['statut'])
+					return false;
+				else
+					return true;
+			}
+			else if ($id_auteur = intval($id)) {
+				$s = spip_query("SELECT statut FROM spip_auteurs WHERE id_auteur=$id_auteur");
+				if ($t = spip_fetch_array($s)
+				AND $t['statut'] != '0minirezo')
+					return true;
+				else
+					return false;
+			}
+			// id = 0 => creation
+			else
+				return true;
+		}
+	}
+
+	// Un admin complet fait ce qu'elle veut
 	return
 		true;
 }
-
 
 ?>

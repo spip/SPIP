@@ -101,7 +101,7 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 			$suppression = false;
 			$controle = "<br /><span style='color: red; font-weight: bold;'>"._T('info_message_supprime')." $forum_ip</span>";
 			if($forum_id_auteur)
-				$controle .= " - <a href='" . generer_url_ecrire('auteurs_edit', "id_auteur=$forum_id_auteur") .
+				$controle .= " - <a href='" . generer_url_ecrire('auteur_infos', "id_auteur=$forum_id_auteur") .
 				  "'>" ._T('lien_voir_auteur'). "</a>";
 			break;
 		# forum propose (a moderer) sur le site public

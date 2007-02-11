@@ -54,7 +54,7 @@ function inc_informer_auteur_dist($id)
 	return 	"<div class='arial2' style='padding: 5px; background-color: white; border: 1px solid $couleur_foncee; border-top: 0px;'>"
 	. (!$res ? '' : $res)
 	. "<div><a href='"
-	. generer_url_ecrire('auteur_infos', "id_auteur=$id&initial=-1")
+	. generer_url_ecrire('auteur_infos', "id_auteur=$id")
 	. "'>"
 	. bonhomme_statut($row)
 	. "</a> "

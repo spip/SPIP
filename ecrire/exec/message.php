@@ -223,7 +223,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $che
 				$ifond = 1 - $ifond;
 
 				$auteurs_tmp[] = "<a href='" .
-				  generer_url_ecrire('auteurs_edit',"id_auteur=" . $id_auteur) ."'>". $nom_auteur . "</a>";
+				  generer_url_ecrire('auteur_infos',"id_auteur=" . $id_auteur) ."'>". $nom_auteur . "</a>";
 
 				$aut =  (($id_auteur != $expediteur) ? '' :
 					 ("<span class='arial0'>".  _T('info_auteur_message') ."</span> "));

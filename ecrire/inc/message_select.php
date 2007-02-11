@@ -94,7 +94,7 @@ function afficher_message_boucles($row, &$messages_vus, $voir_logo, $afficher_au
 		$auteurs = '';
 		while ($row_auteurs = spip_fetch_array($result_auteurs)) {
 			$id_auteur = $row_auteurs['id_auteur'];
-			$auteurs[] = "<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "'>".typo($row_auteurs['nom'])."</a>";
+			$auteurs[] = "<a href='" . generer_url_ecrire("auteur_infos","id_auteur=$id_auteur") . "'>".typo($row_auteurs['nom'])."</a>";
 		}
 
 		if ($auteurs AND $type == 'normal') {

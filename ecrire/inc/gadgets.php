@@ -101,7 +101,7 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 	
 		// Infos perso
 	$bandeau .= "\n<div id='bandeauinfoperso' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 200px;'>"
-	. "<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$connect_id_auteur") . "' class='lien_sous'>"
+	. "<a href='" . generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur") . "' class='lien_sous'>"
 	. _T('icone_informations_personnelles')
 	. "</a>"
 	. "</div>";

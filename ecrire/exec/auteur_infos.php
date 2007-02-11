@@ -13,44 +13,43 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/acces');
+include_spip('inc/autoriser');
 
-// http://doc.spip.org/@exec_auteur_infos_dist
-function exec_auteur_infos_dist()
-{
-	global $id_auteur, $redirect, $echec, $initial, $spip_display,
-	  $connect_statut, $connect_toutes_rubriques, $connect_id_auteur;
+function exec_auteur_infos_dist() {
+	global $connect_id_auteur;
 
-	$id_auteur = intval($id_auteur);
+	$id_auteur = intval(_request('id_auteur'));
 
 	pipeline('exec_init',
 		array('args' => array(
-			'exec'=>'auteur_infos',
+			'exec'=> 'auteur_infos',
 			'id_auteur'=>$id_auteur),
-			'data'=>'')	);
+			'data'=>''
+		)
+	);
 
-
-	// id_auteur nul ==> creation, et seuls les admins complets creent
-	if (!$id_auteur AND $connect_toutes_rubriques) {
-		$arg = "0/";
-		include_spip('inc/headers');
-		redirige_par_entete(generer_action_auteur('legender_auteur', $arg, $redirect, true));
-		exit;
+	if ($id_auteur) {
+		$s = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur");
+		$auteur = spip_fetch_array($s);
+	} else {
+		$auteur = array();
+		if (strlen(_request('nom')))
+			$auteur['nom'] = _request('nom');
 	}
 
-	$auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
+	$auteur_infos = charger_fonction('auteur_infos', 'inc');
+	$fiche = $auteur_infos($auteur, _request('redirect'));
 
-	if (!$auteur) {
-                gros_titre(_T('info_acces_interdit'));
-                exit;
-        }
 
-	$legender_auteur = charger_fonction('legender_auteur', 'inc');
-	$legender_auteur_r = $legender_auteur($id_auteur, $auteur, $initial, $echec, $redirect);
-
-	if (_request('var_ajaxcharset'))
-		ajax_retour($legender_auteur_r);
+/*	// Si on est appele en ajax, on renvoie la fiche
+	if (_request('var_ajaxcharset')) {
+		ajax_retour($fiche);
+	}
+	
+	// Sinon on la met en page
 	else {
-
+*/
+		// Entete
 		if ($connect_id_auteur == $id_auteur) {
 			$commencer_page = charger_fonction('commencer_page', 'inc');
 			echo $commencer_page($auteur['nom'], "auteurs", "perso");
@@ -65,20 +64,12 @@ function exec_auteur_infos_dist()
 		echo cadre_auteur_infos($id_auteur, $auteur);
 
 		echo pipeline('affiche_gauche',
-			      array('args' => array(
-						    'exec'=>'auteur_infos',
-						    'id_auteur'=>$id_auteur),
-				    'data'=>'')
-			      );
+			array('args' => array (
+				'exec'=>'auteur_infos',
+				'id_auteur'=>$id_auteur),
+			'data'=>'')
+		);
 
-  // charger ça tout de suite pour diposer de la fonction ci-dessous
-		$instituer_auteur = charger_fonction('instituer_auteur', 'inc');
-		$instituer_auteur_r = $instituer_auteur($id_auteur, $auteur['statut'], "auteurs_edit");
-
-		if (statut_modifiable_auteur($id_auteur, $auteur) AND ($spip_display != 4)) {
-			$iconifier = charger_fonction('iconifier', 'inc');
-			$icone = $iconifier('id_auteur', $id_auteur, 'auteur_infos');
-		} else $icone ='';
 
 		creer_colonne_droite();
 		echo pipeline('affiche_droite',
@@ -87,9 +78,26 @@ function exec_auteur_infos_dist()
 						    'id_auteur'=>$id_auteur),
 				    'data'=>'')
 			      );
-		echo $icone, debut_droite();
-		echo 	  debut_cadre_relief("redacteurs-24.gif", true),
-		  $legender_auteur_r, $instituer_auteur_r;
+
+
+		// Interface de logo
+		if ($id_auteur > 0
+		AND $spip_display != 4) {
+			$iconifier = charger_fonction('iconifier', 'inc');
+			echo $iconifier('id_auteur', $id_auteur, 'auteur_infos');
+		}
+
+		echo debut_droite();
+
+		echo debut_cadre_relief("redacteurs-24.gif", true);
+
+		// $fiche est vide si on demande par exemple
+		// a creer un auteur alors que c'est interdit
+		if ($fiche) {
+			echo $fiche;
+		} else {
+			gros_titre(_T('info_acces_interdit'));
+		}
 
 		echo pipeline('affiche_milieu',
 			      array('args' => array(
@@ -97,12 +105,13 @@ function exec_auteur_infos_dist()
 						    'id_auteur'=>$id_auteur),
 				    'data'=>''));
 		
-		auteurs_interventions($id_auteur, $auteur['statut']);
+		auteurs_interventions($auteur);
 		
 		echo fin_cadre_relief(true),
-		  fin_gauche(),
-		  fin_page();
-	}
+			fin_gauche(),
+			fin_page();
+/*	} */
+
 }
 
 // http://doc.spip.org/@cadre_auteur_infos
@@ -132,9 +141,13 @@ function cadre_auteur_infos($id_auteur, $auteur)
 
 
 // http://doc.spip.org/@auteurs_interventions
-function auteurs_interventions($id_auteur, $statut)
-{
+function auteurs_interventions($auteur) {
+	$id_auteur = $auteur['id_auteur'];
+	$statut = $auteur['statut'];
+
 	global $connect_statut, $connect_id_auteur;
+
+	include_spip('inc/message_select');
 
 	if ($connect_statut == "0minirezo") $aff_art = "'prepa','prop','publie','refuse'";
 	else if ($connect_id_auteur == $id_auteur) $aff_art = "'prepa','prop','publie'";

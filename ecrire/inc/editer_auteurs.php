@@ -20,14 +20,9 @@ define('_SPIP_SELECT_MIN_AUTEURS', 10); // en dessous: balise Select
 define('_SPIP_SELECT_MAX_AUTEURS', 100); // au-dessus: saisie + return
 
 // http://doc.spip.org/@inc_editer_auteurs_dist
-function inc_editer_auteurs_dist($type, $id, $flag, $cherche_auteur, $ids, $titre_boite = NULL, $script_edit_objet = NULL, $script_edit_auteur = NULL)
-{
+function inc_editer_auteurs_dist($type, $id, $flag, $cherche_auteur, $ids, $titre_boite = NULL, $script_edit_objet = NULL) {
 	global $options;
 	$arg_ajax = "&id_{$type}=$id";
-	if ($script_edit_auteur===NULL) 
-		$script_edit_auteur = 'auteur_infos';
-	else
-		$arg_ajax .= "&script_aut=$script_edit_auteur";
 	if ($script_edit_objet===NULL) $script_edit_objet = $type.'s';
 	if ($titre_boite===NULL) 
 		$titre_boite = _T('texte_auteurs'). aide("artauteurs");
@@ -36,7 +31,7 @@ function inc_editer_auteurs_dist($type, $id, $flag, $cherche_auteur, $ids, $titr
 
 
 	$cond_les_auteurs = "";
-	$aff_les_auteurs = afficher_auteurs_objet($type, $id, $flag, $cond_les_auteurs, $script_edit_objet, $script_edit_auteur, $arg_ajax);
+	$aff_les_auteurs = afficher_auteurs_objet($type, $id, $flag, $cond_les_auteurs, $script_edit_objet, $arg_ajax);
 	
 	if ($flag AND $options == 'avancees') {
 		$futurs = ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit_objet, $arg_ajax);
@@ -55,7 +50,7 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 
 	$bouton_creer_auteur =  $GLOBALS['connect_toutes_rubriques'];
 	$clic = _T('icone_creer_auteur');
-	$arg = "0/$id/"  . ($statut ? $statut : '1comite');
+
 //
 // complement de action/editer_auteurs.php pour notifier la recherche d'auteur
 //
@@ -67,8 +62,10 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 
 		if ($type=='article' && $bouton_creer_auteur) { // pas generique pour le moment
 
-			$legende = redirige_action_auteur("legender_auteur", $arg, "articles","id_article=$id");
+			$legende = generer_url_ecrire("bolino", "new=oui&lier_id_article=$id");
 			$legende = parametre_url($legende, 'nom', $cherche_auteur);
+			$legende = parametre_url($legende, 'redirect',
+				generer_url_ecrire('articles', "id_article=$id", '&'));
 
 			$reponse .="<div style='width: 200px;'>"
 			. icone_horizontale($clic, $legende, "redacteurs-24.gif", "creer.gif", false)
@@ -92,7 +89,10 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 
 		if ($type=='article' && $bouton_creer_auteur) { // pas generique pour le moment
 
-			$legende = redirige_action_auteur("legender_auteur",$arg, "articles","id_article=$id");
+			$legende = generer_url_ecrire("bolino", "new=oui&lier_id_article=$id");
+			$legende = parametre_url($legende, 'nom', $cherche_auteur);
+			$legende = parametre_url($legende, 'redirect',
+				generer_url_ecrire('articles', "id_article=$id", '&'));
 
 			$clic = "<span class='verdana1'><b>$clic</b></span>";
 			$res = "<div style='width:170px;'>"
@@ -201,7 +201,7 @@ function rechercher_auteurs_objet($cherche_auteur, $ids, $type, $id, $script_edi
 }
 
 // http://doc.spip.org/@afficher_auteurs_objet
-function afficher_auteurs_objet($type, $id, $flag_editable, $cond_les_auteurs, $script_edit, $script_edit_auteur, $arg_ajax)
+function afficher_auteurs_objet($type, $id, $flag_editable, $cond_les_auteurs, $script_edit, $arg_ajax)
 {
 	global $connect_statut, $options,$connect_id_auteur, $spip_display;
 	
@@ -236,7 +236,7 @@ function afficher_auteurs_objet($type, $id, $flag_editable, $cond_les_auteurs, $
 
 	while ($row = spip_fetch_array($result)) {
 		$id_auteur = $row['id_auteur'];
-		$vals = $formater_auteur($id_auteur, $script_edit_auteur);
+		$vals = $formater_auteur($id_auteur);
 
 		if ($flag_editable AND ($connect_id_auteur != $id_auteur OR $connect_statut == '0minirezo') AND $options == 'avancees') {
 			$vals[] =  ajax_action_auteur('editer_auteurs', "$id,$type,-$id_auteur", $script_edit, "id_{$type}=$id", array(_T('lien_retirer_auteur')."&nbsp;". http_img_pack('croix-rouge.gif', "X", " class='puce' style='vertical-align: bottom;'")),$arg_ajax);
