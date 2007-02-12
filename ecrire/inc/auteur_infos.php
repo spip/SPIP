@@ -327,10 +327,10 @@ function legender_auteur_voir($auteur) {
 		$res .= "<script type='text/javascript'><!--
 		jQuery('#bouton_modifier_auteur a')
 		.click(function() {
-			jQuery('#auteur_infos_edit')
-			.show();
 			jQuery('#auteur_infos_voir')
-			.hide();
+			.toggle();
+			jQuery('#auteur_infos_edit')
+			.toggle();
 			return false;
 		});
 		// --></script>\n";
