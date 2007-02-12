@@ -498,7 +498,8 @@ function plugin_verifie_conformite($plug,&$arbre){
 
 // http://doc.spip.org/@verifie_include_plugins
 function verifie_include_plugins() {
-	if (_request('exec')!="admin_plugin"){
+	if (_request('exec')!="admin_plugin"
+	AND $_SERVER['X-Requested-With'] != 'XMLHttpRequest'){
 		if (@is_readable(_DIR_PLUGINS)) {
 			include_spip('inc/headers');
 			redirige_par_entete(generer_url_ecrire("admin_plugin"));

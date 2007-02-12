@@ -205,7 +205,7 @@ function choix_rubriques_admin_restreint($auteur) {
 		// onchange = pour le menu
 		// l'evenement doit etre provoque a la main par le selecteur ajax
 		. "<script type='text/javascript'><!--
-		jQuery('input[@name=id_parent]')
+		jQuery('#id_parent')
 		.bind('change', function(){
 			var id_parent = this.value;
 			var titre = jQuery('#titreparent').attr('value') || this.options[this.selectedIndex].text;
