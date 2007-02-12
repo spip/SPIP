@@ -94,7 +94,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 	// verifier l'identite des posteurs pour les forums sur abo
 	if ($type == "abo") {
 		if (!$GLOBALS["auteur_session"]) {
-			return array('formulaires/formulaire_login_forum', 0,
+			return array('formulaires/login_forum', 0,
 				array('inscription' => generer_url_public('spip_inscription'),
 					'oubli' => generer_url_public('spip_pass')));
 		} else {
@@ -179,7 +179,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 	foreach ($ids as $id => $v)
 		$script_hidden = parametre_url($script_hidden, $id, $v, '&');
 
-	return array('formulaires/formulaire_forum', 0,
+	return array('formulaires/forum', 0,
 	array(
 		'auteur' => $auteur,
 		'readonly' => ($type == "abo")? "readonly" : '',
@@ -227,7 +227,7 @@ function inclure_previsu($texte,$titre, $email_auteur, $auteur, $url_site, $nom_
 	// (sinon on ne peut pas faire <cadre>...</cadre> dans les forums)
 	return preg_replace("@<(/?)f(orm[>[:space:]])@ism",
 			    "<\\1no-f\\2",
-		inclure_balise_dynamique(array('formulaires/formulaire_forum_previsu',
+		inclure_balise_dynamique(array('formulaires/forum_previsu',
 		      0,
 		      array(
 			'titre' => safehtml(typo($titre)),

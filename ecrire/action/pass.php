@@ -96,7 +96,7 @@ $message = '';
 		}
 	}
  }
- return array('formulaires/formulaire_oubli', 0, 
+ return array('formulaires/oubli', 0, 
 	      array('p' => $p,
 		    'message' => $message,
 		    'action' => generer_url_action('pass')));

@@ -56,7 +56,7 @@ function menu_lang_pour_tous($nom, $default) {
 	$cible = str_replace('&amp;', '&', parametre_url(self( /* racine */ true), 'lang' , '')); # lien a partir de /
 	$post = parametre_url(generer_url_action('cookie'), 'url', $cible, '&');
 
-	return array('formulaires/formulaire_menu_lang',
+	return array('formulaires/menu_lang',
 		3600,
 		array('nom' => $nom,
 			'url' => $post,
