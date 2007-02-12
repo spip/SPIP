@@ -343,6 +343,8 @@ if (@is_readable(_DIR_TMP."charger_plugins_options.php")){
 		spip_log("generation de charger_plugins_options.php impossible; pipeline desactives");
 }
 
+define('_OUTILS_DEVELOPPEURS',true);
+
 // charger systematiquement inc/autoriser dans l'espace restreint
 if (!_DIR_RESTREINT)
 	include_spip('inc/autoriser');
