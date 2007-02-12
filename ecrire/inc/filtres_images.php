@@ -525,6 +525,7 @@ function image_ratio ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
 }
 
 
+// http://doc.spip.org/@image_red_en_mem
 function image_red_en_mem ($srcImage, $destWidth, $destHeight, $srcWidth, $srcHeight) {
 		// Initialisation de l'image destination 
 		$destImage = ImageCreateTrueColor($destWidth, $destHeight); 
@@ -544,6 +545,7 @@ function image_red_en_mem ($srcImage, $destWidth, $destHeight, $srcWidth, $srcHe
 		return $destImage;
 }
 
+// http://doc.spip.org/@image_reduire_memoire
 function image_reduire_memoire($im, $taille_x, $taille_y) {
 
 	$monimg = $im;

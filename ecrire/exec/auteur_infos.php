@@ -15,6 +15,7 @@ include_spip('inc/presentation');
 include_spip('inc/acces');
 include_spip('inc/autoriser');
 
+// http://doc.spip.org/@exec_auteur_infos_dist
 function exec_auteur_infos_dist() {
 	global $connect_id_auteur;
 
