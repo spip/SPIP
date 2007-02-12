@@ -26,9 +26,7 @@ function inc_auteur_infos_dist($auteur, $redirect) {
 	}
 
 	if (!$new) {
-		$corps = "<div id='auteur_infos_voir'>"
-			. legender_auteur_voir($auteur, $redirect)
-			. "</div>\n";
+		$corps = legender_auteur_voir($auteur, $redirect);
 	} else
 		$corps = '';
 
@@ -275,17 +273,14 @@ function apparait_auteur_infos($id_auteur, $auteur) {
 		. "</label> ";
 	}
 
-	return
-		"<br />"
-		.debut_cadre_formulaire('', true)
-		. debut_cadre_relief("messagerie-24.gif", true, "", _T('info_liste_redacteurs_connectes'))
+	return 
+		debut_cadre_enfonce("messagerie-24.gif", true, "", _T('info_liste_redacteurs_connectes'))
 		. "\n<div>"
 		. _T('texte_auteur_messagerie')
 		. "</div>"
 		. $res
-		. fin_cadre_relief(true)
-		. "<br />"
-		. fin_cadre_formulaire(true);
+		. fin_cadre_enfonce(true)
+		. "<br />\n";
 }
 
 
@@ -297,13 +292,17 @@ function legender_auteur_voir($auteur) {
 		$new = true;
 	}
 
+	$res .= "<div id='auteur_infos_voir'>";
+
 	$res = "<table width='100%' cellpadding='0' border='0' cellspacing='0'>"
 	. "<tr>"
 	. "<td  style='width: 100%' valign='top'>"
 	. gros_titre(
 		sinon($auteur['nom'],_T('item_nouvel_auteur')),
-		'',false)
-	. "<div>&nbsp;</div>";
+		'',false);
+
+
+	$res .= "<div>&nbsp;</div>";
 
 	if (strlen($auteur['email']))
 		$res .= "<div>"._T('email_2')
@@ -325,18 +324,24 @@ function legender_auteur_voir($auteur) {
 		$res .= icone($clic, $h, "redacteurs-24.gif", "edit.gif", '', '',true);
 
 		$res .= "<script type='text/javascript'><!--
+		var intitule_bouton = "._q(_T('icone_retour')).";
 		jQuery('#bouton_modifier_auteur a')
 		.click(function() {
-			jQuery('#auteur_infos_voir')
-			.toggle();
 			jQuery('#auteur_infos_edit')
 			.toggle();
+			jQuery('#auteur_infos_voir')
+			.toggle();
+			jQuery('#bouton_modifier_auteur a span')
+			.each(function(){
+				var tmp = jQuery(this).html();
+				jQuery(this).html(intitule_bouton);
+				intitule_bouton = tmp;
+			});
 			return false;
 		});
 		// --></script>\n";
+		$res .= "</td><tr><td colspan='2'>\n";
 	}
-
-	$res .= "</td></tr></table>";
 
 	if (strlen($auteur['bio'])) {
 		$res .= propre("<quote>".$auteur['bio']."</quote>");
@@ -350,6 +355,10 @@ function legender_auteur_voir($auteur) {
 		include_spip('inc/extra');
 		$res .= extra_affichage($auteur['extra'], 'auteurs');
 	}
+
+	$res .= "</td></tr></table>";
+
+	$res .= "</div>\n";
 
 	return $res;
 
