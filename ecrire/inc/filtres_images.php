@@ -166,7 +166,7 @@ function image_imagegif($img,$fichier) {
 	rename($tmp, $fichier);
 	return $ret;
 }
-// http://doc.spip.org/@image_imagejpeg
+// http://doc.spip.org/@image_imagejpg
 function image_imagejpg($img,$fichier) {
 	$tmp = $fichier.".tmp";
 	$ret = imagejpeg($img,$tmp, 85);
@@ -175,6 +175,7 @@ function image_imagejpg($img,$fichier) {
 	return $ret;
 }
 
+// http://doc.spip.org/@image_gd_output
 function image_gd_output($img,$valeurs){
 	$fonction = "image_image".$valeurs['format_dest'];
 	$ret = false;
@@ -187,6 +188,7 @@ function image_gd_output($img,$valeurs){
 	return $ret;
 }
 
+// http://doc.spip.org/@reconstruire_image_intermediaire
 function reconstruire_image_intermediaire($fichier_manquant){
 	$reconstruire = array();
 	$fichier = $fichier_manquant;
@@ -210,6 +212,7 @@ function reconstruire_image_intermediaire($fichier_manquant){
 	ramasse_miettes($fichier_manquant);
 }
 
+// http://doc.spip.org/@ramasse_miettes
 function ramasse_miettes($fichier){
 	if (!lire_fichier($src = "$fichier.src",$source) 
 		OR !$valeurs=unserialize($source)) return;
@@ -227,6 +230,7 @@ function ramasse_miettes($fichier){
 	}
 }
 
+// http://doc.spip.org/@image_graver
 function image_graver($img){
 	$fichier = extraire_attribut($img, 'src');
 	if (($p=strpos($fichier,'?'))!==FALSE)
