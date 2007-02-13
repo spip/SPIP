@@ -441,6 +441,10 @@ function applique_filtres($p) {
 	if ($p->param)
 		$code = compose_filtres($p, $code);
 
+	// ramasser les images intermediaires inutiles et graver l'image finale
+	if ($p->ramasser_miettes)
+		$code = "filtrer('image_graver',$code)";
+
 	// Securite
 	if ($p->interdire_scripts
 	AND $p->etoile != '**')
@@ -451,7 +455,7 @@ function applique_filtres($p) {
 
 // Cf. function pipeline dans ecrire/inc_utils.php
 // http://doc.spip.org/@compose_filtres
-function compose_filtres($p, $code) {
+function compose_filtres(&$p, $code) {
 	foreach($p->param as $filtre) {
 		$fonc = array_shift($filtre);
 		if ($fonc) {
@@ -469,6 +473,8 @@ function compose_filtres($p, $code) {
 			// de maniere indirecte, pour charger au prealable sa definition
 			if (isset($GLOBALS['spip_matrice'][$fonc])) {
 				$code = "filtrer('$fonc',$code$arglist)";
+				if (substr($fonc,0,6)=='image_')
+					$p->ramasser_miettes = true;
 			}
 			// le filtre est defini sous forme de fonction ou de methode
 			// par ex. dans inc_texte, inc_filtres ou mes_fonctions
