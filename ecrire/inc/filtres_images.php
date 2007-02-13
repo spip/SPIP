@@ -64,7 +64,7 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 		$fichier = fichier_copie_locale($source);
 	}
 	
-	//if (!file_exists($fichier)) return false;
+	if (!file_exists($fichier)) return false;
 	
 	if (preg_match(",^(?>.*)(?<=\.(gif|jpg|png)),", $fichier, $regs)) {
 		$terminaison = $regs[1];
@@ -147,7 +147,7 @@ function image_imagegif($img,$fichier) {
 // http://doc.spip.org/@image_imagejpeg
 function image_imagejpeg($img,$fichier) {
 	$tmp = $fichier."tmp";
-	$ret = imagejpeg($img,$tmp,85);
+	$ret = imagejpeg($img,$tmp);
 	rename($tmp, $fichier);
 	return $ret;
 }
@@ -524,84 +524,8 @@ function image_ratio ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
 		max($ratioWidth,$ratioHeight));
 }
 
-
-// http://doc.spip.org/@image_red_en_mem
-function image_red_en_mem ($srcImage, $destWidth, $destHeight, $srcWidth, $srcHeight) {
-		// Initialisation de l'image destination 
-		$destImage = ImageCreateTrueColor($destWidth, $destHeight); 
-
-		// Recopie de l'image d'origine avec adaptation de la taille 
-		$ok = false; 
-		if (function_exists('ImageCopyResampled')) { 
-			// Conserver la transparence 
-			if (function_exists("imageAntiAlias")) imageAntiAlias($destImage,true); 
-			@imagealphablending($destImage, false); 
-			@imagesavealpha($destImage,true); 
-			$ok = @ImageCopyResampled($destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
-		}
-		if (!$ok)
-			$ok = ImageCopyResized($destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
-	
-		return $destImage;
-}
-
-// http://doc.spip.org/@image_reduire_memoire
-function image_reduire_memoire($im, $taille_x, $taille_y) {
-
-	$monimg = $im;
-	$im = $monimg["dest"];
-	if ($monimg["passe"] == 1) $monimg["fonction"] = "image_reduire(".$monimg["fonction"].",$taille_x,$taille_y)";
-
-
-	$srcWidth = $monimg["largeur"];
-	$srcHeight = $monimg["hauteur"];
-
-	$image = image_valeurs_trans($im, "reduire-{$taille_x}-{$taille_y}",'png');
-	if (!$image) return("");
-
-	$x_i = $image["largeur_dest"];
-	$y_i = $image["hauteur_dest"];
-	
-	
-	if ($x_i > $taille_x AND $y_i > $taille_y) return $monimg;
-	
-	$monimg["largeur"] = $x_i;
-	$monimg["hauteur"] = $y_i;
-
-	$im = $image["fichier"];
-	$dest = $image["fichier_dest"];
-
-		
-	$creer = $image["creer"];
-	if ($monimg["passe"] == 2) $creer = true;
-	if ($monimg["passe"] == 1) $creer = false;
-	
-	
-	// Methode precise
-	// resultat plus beau, mais tres lourd
-	// Et: indispensable pour preserver transparence!
-	if ($creer) {
-		$destWidth = $x_i;
-		$destHeight = $y_i;
-
-		$srcImage = $monimg["mem"];
-
-		$monimg["mem"] = image_red_en_mem ($srcImage, $destWidth, $destHeight, $srcWidth, $srcHeight);
-
-	}
-
-	$monimg["largeur"] = imagesx($monimg["mem"]);
-	$monimg["hauteur"] = imagesy($monimg["mem"]);
-	$monimg["dest"] = $dest;
-
-	return $monimg;
-
-}
-
-
 // http://doc.spip.org/@image_reduire
 function image_reduire($img, $taille = -1, $taille_y = -1, $force=false, $cherche_image=false, $process='AUTO') {
-
 	// Determiner la taille x,y maxi
 	// prendre le reglage de previsu par defaut
 	if ($taille == -1)
@@ -615,14 +539,6 @@ function image_reduire($img, $taille = -1, $taille_y = -1, $force=false, $cherch
 		$taille_y = 100000; # {300,0} -> c'est 300 qui compte
 	elseif ($taille == 0 AND $taille_y == 0)
 		return '';
-
-
-	// Detourner pour GD2 en mode "memoire"
-	// parce que sinon, ca va etre un peu complique...
-	if ($img["passe"] > 0) {
-		return image_reduire_memoire($img, $taille, $taille_y);
-	}
-
 
 	$image = image_valeurs_trans($img, "reduire-{$taille}-{$taille_y}",'png');
 
@@ -682,52 +598,18 @@ function image_reduire($img, $taille = -1, $taille_y = -1, $force=false, $cherch
 
 // Reduire une image d'un certain facteur
 // http://doc.spip.org/@image_reduire_par
-function image_reduire_par ($im, $val=1, $force=false) {
+function image_reduire_par ($img, $val=1, $force=false) {
+	list ($hauteur,$largeur) = taille_image($img);
 
-	if ($im["passe"] > 0) {
-		$monimg = $im;
-		$im = $monimg["dest"];
-		$monimg["fonction"] = "image_reduire_par(".$monimg["fonction"].",$val)";
-
-		$image = image_valeurs_trans($im, "image_reduire_par-$val");
-		if (!$image) return("");
-
-		$largeur = $monimg["largeur"];
-		$hauteur = $monimg["hauteur"];
-		$l = round($largeur/$val);
-		$h = round($hauteur/$val);
-
-
-		$im = $image["fichier"];
-		$dest = $image["fichier_dest"];
-		
-		if ($monimg["passe"] == 2) $creer = true;
-		if ($monimg["passe"] == 1) $creer = false;
-		
-		if ($creer) {
-			$im = image_red_en_mem ($monimg["mem"], $l, $h, $largeur, $hauteur);
-			$monimg["mem"] = $im;
-		}
-		
-		$monimg["dest"] = $dest;
-		$monimg["largeur"] = $l;
-		$monimg["hauteur"] = $h;
-		return $monimg;
-
-	} else {
-		list ($hauteur,$largeur) = taille_image($im);
-
-		$l = round($largeur/$val);
-		$h = round($hauteur/$val);
+	$l = round($largeur/$val);
+	$h = round($hauteur/$val);
 	
-		if ($l > $h) $h = 0;
-		else $l = 0;
+	if ($l > $h) $h = 0;
+	else $l = 0;
 	
-		$im = image_reduire($im, $l, $h, $force);
+	$img = image_reduire($img, $l, $h, $force);
 
-		return $im;
-	}
-
+	return $img;
 }
 
 // Transforme l'image en PNG transparent
@@ -736,41 +618,22 @@ function image_reduire_par ($im, $val=1, $force=false) {
 // http://doc.spip.org/@image_alpha
 function image_alpha($im, $alpha = 63)
 {
-	if ($im["passe"] > 0) {
-		$monimg = $im;
-		$im = $monimg["dest"];
-		if ($monimg["passe"] == 1) $monimg["fonction"] = "image_alpha(".$monimg["fonction"].",$alpha)";
-	}
-
-
 	$image = image_valeurs_trans($im, "alpha-$alpha", "png");
 	if (!$image) return("");
 	
 	$x_i = $image["largeur"];
 	$y_i = $image["hauteur"];
 	
-	if ($monimg["largeur"]) {
-		$x_i = $monimg["largeur"];
-		$y_i = $monimg["hauteur"];
-	}
-
 	$im = $image["fichier"];
 	$dest = $image["fichier_dest"];
-		
+	
 	$creer = $image["creer"];
-	if ($monimg["passe"] == 2) $creer = true;
-	if ($monimg["passe"] == 1) $creer = false;
-
+	
 	if ($creer) {
 		// Creation de l'image en deux temps
 		// de facon a conserver les GIF transparents
-
-		if (!$monimg["passe"]) {
-			$im = $image["fonction_imagecreatefrom"]($im);
-			imagepalettetotruecolor($im);
-		}
-		else $im = $monimg["mem"];
-
+		$im = $image["fonction_imagecreatefrom"]($im);
+		imagepalettetotruecolor($im);
 		$im2 = imagecreatetruecolor($x_i, $y_i);
 		@imagealphablending($im2, false);
 		@imagesavealpha($im2,true);
@@ -801,83 +664,58 @@ function image_alpha($im, $alpha = 63)
 				imagesetpixel ( $im_, $x, $y, $rgb );
 			}
 		}
-
-		if (!$monimg["passe"]) $image["fonction_image"]($im_, "$dest");
-		else $monimg["mem"] = $im_;
-
-//		imagedestroy($im_);
+		$image["fonction_image"]($im_, "$dest");
+		imagedestroy($im_);
 		imagedestroy($im);
 		imagedestroy($im2);
 	}
 	
-	if ($monimg["passe"]) {
-		$monimg["dest"] = $dest;
-		return $monimg;
-	} else {
-		return image_ecrire_tag($image,array('src'=>$dest));
-	}
+	$class = $image["class"];
+	if (strlen($class) > 1) $tags=" class='$class'";
+	$tags = "$tags alt='".$image["alt"]."'";
+	$style = $image["style"];
+	if (strlen($style) > 1) $tags="$tags style='$style'";
+	
+	return "<img src='$dest'$tags />";
 }
 
 // http://doc.spip.org/@image_recadre
 function image_recadre($im,$width,$height,$position='center', $background_color='white')
 {
-
-	if ($im["passe"] > 0) {
-		$monimg = $im;
-		$im = $monimg["dest"];
-		if ($monimg["passe"] == 1) $monimg["fonction"] = "image_recadre(".$monimg["fonction"].",$width,$height,'$position','$background_color')";
-	}
-
-
-
 	$image = image_valeurs_trans($im, "recadre-$width-$height-$position-$background_color");
 	if (!$image) return("");
 	
 	$x_i = $image["largeur"];
 	$y_i = $image["hauteur"];
 	
-
-	if ($monimg["largeur"]) {
-		$x_i = $monimg["largeur"];
-		$y_i = $monimg["hauteur"];
-	}
-
-	$im = $image["fichier"];
-	$dest = $image["fichier_dest"];
-		
-	$creer = $image["creer"];
-	if ($monimg["passe"] == 2) $creer = true;
-	if ($monimg["passe"] == 1) $creer = false;
-	
 	if ($width==0) $width=$x_i;
 	if ($height==0) $height=$y_i;
 	
-			
-	if ($creer) {
+	$offset_width = $x_i-$width;
+	$offset_height = $y_i-$height;
+	$position=strtolower($position);
+	if (strpos($position,'left')!==FALSE)
+		$offset_width=0;
+	elseif (strpos($position,'right')!==FALSE)
+		$offset_width=$offset_width;
+	else
+		$offset_width=intval(ceil($offset_width/2));
 
-		$offset_width = $x_i-$width;
-		$offset_height = $y_i-$height;
-		$position=strtolower($position);
-		if (strpos($position,'left')!==FALSE)
-			$offset_width=0;
-		elseif (strpos($position,'right')!==FALSE)
-			$offset_width=$offset_width;
-		else
-			$offset_width=intval(ceil($offset_width/2));
+	if (strpos($position,'top')!==FALSE)
+		$offset_height=0;
+	elseif (strpos($position,'bottom')!==FALSE)
+		$offset_height=$offset_height;
+	else
+		$offset_height=intval(ceil($offset_height/2));
 	
-		if (strpos($position,'top')!==FALSE)
-			$offset_height=0;
-		elseif (strpos($position,'bottom')!==FALSE)
-			$offset_height=$offset_height;
-		else
-			$offset_height=intval(ceil($offset_height/2));
-
-
-		if (!$monimg["passe"]) {
-			$im = $image["fonction_imagecreatefrom"]($im);
-			imagepalettetotruecolor($im);
-		}
-		else $im = $monimg["mem"];
+	$im = $image["fichier"];
+	$dest = $image["fichier_dest"];
+	
+	$creer = $image["creer"];
+	
+	if ($creer) {
+		$im = $image["fonction_imagecreatefrom"]($im);
+		imagepalettetotruecolor($im);
 		$im_ = imagecreatetruecolor($width, $height);
 		@imagealphablending($im_, false);
 		@imagesavealpha($im_,true);
@@ -891,56 +729,31 @@ function image_recadre($im,$width,$height,$position='center', $background_color=
 		imagefill ($im_, 0, 0, $color_t);
 		imagecopy($im_, $im, max(0,-$offset_width), max(0,-$offset_height), max(0,$offset_width), max(0,$offset_height), min($width,$x_i), min($height,$y_i));
 
-		if (!$monimg["passe"]) $image["fonction_image"]($im_, "$dest");
-		else $monimg["mem"] = $im_;
-
-		// imagedestroy($im_);
+		$image["fonction_image"]($im_, "$dest");
+		imagedestroy($im_);
 		imagedestroy($im);
 	}
-	if ($monimg["passe"]) {
-		$monimg["dest"] = $dest;
-		$monimg["largeur"] = $width;
-		$monimg["hauteur"] = $height;
-		return $monimg;
-	} else {
-		return image_ecrire_tag($image,array('src'=>$dest,'width'=>$width,'height'=>$height));
-	}
-}	
+	
+	return image_ecrire_tag($image,array('src'=>$dest,'width'=>$width,'height'=>$height));
+}
 
 // http://doc.spip.org/@image_flip_vertical
 function image_flip_vertical($im)
 {
-	if ($im["passe"] > 0) {
-		$monimg = $im;
-		$im = $monimg["dest"];
-		if ($monimg["passe"] == 1) $monimg["fonction"] = "image_flip_vertical(".$monimg["fonction"].")";
-	}
-
 	$image = image_valeurs_trans($im, "flip_v");
 	if (!$image) return("");
 	
 	$x_i = $image["largeur"];
 	$y_i = $image["hauteur"];
 	
-
-	if ($monimg["largeur"]) {
-		$x_i = $monimg["largeur"];
-		$y_i = $monimg["hauteur"];
-	}
-
 	$im = $image["fichier"];
 	$dest = $image["fichier_dest"];
-		
+	
 	$creer = $image["creer"];
-	if ($monimg["passe"] == 2) $creer = true;
-	if ($monimg["passe"] == 1) $creer = false;
 	
 	if ($creer) {
-		if (!$monimg["passe"]) {
-			$im = $image["fonction_imagecreatefrom"]($im);
-			imagepalettetotruecolor($im);
-		}
-		else $im = $monimg["mem"];
+		$im = $image["fonction_imagecreatefrom"]($im);
+		imagepalettetotruecolor($im);
 		$im_ = imagecreatetruecolor($x_i, $y_i);
 		@imagealphablending($im_, false);
 		@imagesavealpha($im_,true);
@@ -954,54 +767,31 @@ function image_flip_vertical($im)
 			}
 		}
 
-		if (!$monimg["passe"]) $image["fonction_image"]($im_, "$dest");
-		else $monimg["mem"] = $im_;
-
-		// imagedestroy($im_);
+		$image["fonction_image"]($im_, "$dest");
+		imagedestroy($im_);
 		imagedestroy($im);
 	}
-	if ($monimg["passe"]) {
-		$monimg["dest"] = $dest;
-		return $monimg;
-	} else {
-		return image_ecrire_tag($image,array('src'=>$dest));
-	}
+	
+	return image_ecrire_tag($image,array('src'=>$dest));
 }
 
 // http://doc.spip.org/@image_flip_horizontal
 function image_flip_horizontal($im)
 {
-	if ($im["passe"] > 0) {
-		$monimg = $im;
-		$im = $monimg["dest"];
-		if ($monimg["passe"] == 1) $monimg["fonction"] = "image_flip_horizontal(".$monimg["fonction"].")";
-	}
-
 	$image = image_valeurs_trans($im, "flip_h");
 	if (!$image) return("");
 	
 	$x_i = $image["largeur"];
 	$y_i = $image["hauteur"];
 	
-
-	if ($monimg["largeur"]) {
-		$x_i = $monimg["largeur"];
-		$y_i = $monimg["hauteur"];
-	}
-
 	$im = $image["fichier"];
 	$dest = $image["fichier_dest"];
-		
+	
 	$creer = $image["creer"];
-	if ($monimg["passe"] == 2) $creer = true;
-	if ($monimg["passe"] == 1) $creer = false;
-
+	
 	if ($creer) {
-		if (!$monimg["passe"]) {
-			$im = $image["fonction_imagecreatefrom"]($im);
-			imagepalettetotruecolor($im);
-		}
-		else $im = $monimg["mem"];
+		$im = $image["fonction_imagecreatefrom"]($im);
+		imagepalettetotruecolor($im);
 		$im_ = imagecreatetruecolor($x_i, $y_i);
 		@imagealphablending($im_, false);
 		@imagesavealpha($im_,true);
@@ -1014,17 +804,12 @@ function image_flip_horizontal($im)
    				imagecopy($im_, $im, $x, $y_i - $y - 1, $x, $y, 1, 1);
 			}
 		}
-		if (!$monimg["passe"]) $image["fonction_image"]($im_, "$dest");
-		else $monimg["mem"] = $im_;
-		// imagedestroy($im_);
+		$image["fonction_image"]($im_, "$dest");
+		imagedestroy($im_);
 		imagedestroy($im);
 	}
-	if ($monimg["passe"]) {
-		$monimg["dest"] = $dest;
-		return $monimg;
-	} else {
-		return image_ecrire_tag($image,array('src'=>$dest));
-	}
+	
+	return image_ecrire_tag($image,array('src'=>$dest));
 }
 
 // http://doc.spip.org/@image_masque
@@ -1056,6 +841,7 @@ function image_masque($im, $masque, $pos="") {
 
 	$mode = "masque";
 
+
 	$numargs = func_num_args();
 	$arg_list = func_get_args();
 	$texte = $arg_list[0];
@@ -1065,19 +851,9 @@ function image_masque($im, $masque, $pos="") {
 			$val_variable = substr($arg_list[$i], strpos($arg_list[$i], "=")+1, strlen($arg_list[$i]));
 			$variable["$nom_variable"] = $val_variable;
 			$defini["$nom_variable"] = 1;
-			
-			$sauver .= ",'$nom_variable=$val_variable'";
 		}
 	}
-	
 	if ($defini["mode"]) $mode = $variable["mode"];
-
-	if ($im["passe"] > 0) {
-		$monimg = $im;
-		$im = $monimg["dest"];
-		if ($monimg["passe"] == 1) $monimg["fonction"] = "image_masque(".$monimg["fonction"].",'$masque'$sauver)";
-	}
-
 
 	$pos = md5(serialize($variable));
 
@@ -1087,18 +863,10 @@ function image_masque($im, $masque, $pos="") {
 	$x_i = $image["largeur"];
 	$y_i = $image["hauteur"];
 	
-
-	if ($monimg["largeur"]) {
-		$x_i = $monimg["largeur"];
-		$y_i = $monimg["hauteur"];
-	}
-
 	$im = $image["fichier"];
 	$dest = $image["fichier_dest"];
-		
+	
 	$creer = $image["creer"];
-	if ($monimg["passe"] == 2) $creer = true;
-	if ($monimg["passe"] == 1) $creer = false;
 
 
 	if ($defini["right"] OR $defini["left"] OR $defini["bottom"] OR $defini["top"] OR $defini["text-align"] OR $defini["vertical-align"]) {
@@ -1179,12 +947,15 @@ function image_masque($im, $masque, $pos="") {
 				}
 			}
 			
+			
 			$im3 = imagecreatetruecolor($x_i, $y_i);
 			@imagealphablending($im3, false);
 			@imagesavealpha($im3,true);
 			if ($mode == "masque") $color_t = ImageColorAllocateAlpha( $im3, 128, 128, 128 , 0 );
 			else $color_t = ImageColorAllocateAlpha( $im3, 128, 128, 128 , 127 );
 			imagefill ($im3, 0, 0, $color_t);
+
+			
 
 			imagecopy ( $im3, $im2, $dx, $dy, 0, 0, $x_m, $y_m);	
 
@@ -1193,12 +964,14 @@ function image_masque($im, $masque, $pos="") {
 			@imagealphablending($im2, false);
 			@imagesavealpha($im2,true);
 			
+			
+			
 			imagecopy ( $im2, $im3, 0, 0, 0, 0, $x_i, $y_i);			
 			imagedestroy($im3);
 			$x_m = $x_i;
 			$y_m = $y_i;
 		}
-	
+		
 	
 		$rapport = $x_i / $x_m;
 		if (($y_i / $y_m) < $rapport ) {
@@ -1221,20 +994,14 @@ function image_masque($im, $masque, $pos="") {
 			$y_dec = round(($y_d - $y_m) /2);
 		}
 
- 
-		if (!$monimg["passe"]) {
-			$nouveau = image_valeurs_trans(image_reduire($im, $x_d, $y_d),"");
-			if (!is_array($nouveau)) return("");
-			$im_n = $nouveau["fichier"];
-			$im = $nouveau["fonction_imagecreatefrom"]($im_n);
-			imagepalettetotruecolor($im);
-		} else {
-			// Attention, c'est ici que l'on utilise la version en memoire,
-			// qu'on fait passer par un image_reduire virtuel
-			$im = image_red_en_mem ($monimg["mem"], $x_d, $y_d, $monimg["largeur"], $monimg["hauteur"]);
 
-		}
-
+		$nouveau = image_valeurs_trans(image_reduire($im, $x_d, $y_d),"");
+		if (!is_array($nouveau)) return("");
+		$im_n = $nouveau["fichier"];
+		
+	
+		$im = $nouveau["fonction_imagecreatefrom"]($im_n);
+		imagepalettetotruecolor($im);
 		if ($nouveau["format_source"] == "gif" AND function_exists('ImageCopyResampled')) { 
 			$im_ = imagecreatetruecolor($x_dest, $y_dest);
 			// Si un GIF est transparent, 
@@ -1253,6 +1020,7 @@ function image_masque($im, $masque, $pos="") {
 		$color_t = ImageColorAllocateAlpha( $im_, 255, 255, 255 , 127 );
 		imagefill ($im_, 0, 0, $color_t);
 
+
 		for ($x = 0; $x < $x_dest; $x++) {
 			for ($y=0; $y < $y_dest; $y++) {
 				$rgb = ImageColorAt($im2, $x, $y);
@@ -1267,6 +1035,8 @@ function image_masque($im, $masque, $pos="") {
 				$r2 = ($rgb2 >> 16) & 0xFF;
 				$g2 = ($rgb2 >> 8) & 0xFF;
 				$b2 = $rgb2 & 0xFF;
+				
+				
 				
 				if ($mode == "normal") {
 					$v = (127 - $a) / 127;
@@ -1368,24 +1138,15 @@ function image_masque($im, $masque, $pos="") {
 			}
 		}
 
-		if (!$monimg["passe"]) $image["fonction_image"]($im_, "$dest");
-		else $monimg["mem"] = $im_;
-
-//		imagedestroy($im_);
+		$image["fonction_image"]($im_, "$dest");
+		imagedestroy($im_);
 		imagedestroy($im);
 		imagedestroy($im2);
-	}
 
-	if ($monimg["passe"]) {
-		$monimg["largeur"] = imagesx($monimg["mem"]);
-		$monimg["hauteur"] = imagesy($monimg["mem"]);
-		$monimg["dest"] = $dest;
-		return $monimg;
-	} else {
-		$x_dest = largeur($dest);
-		$y_dest = hauteur($dest);
-		return image_ecrire_tag($image,array('src'=>$dest,'width'=>$x_dest,'height'=>$y_dest));
 	}
+	$x_dest = largeur($dest);
+	$y_dest = hauteur($dest);
+	return image_ecrire_tag($image,array('src'=>$dest,'width'=>$x_dest,'height'=>$y_dest));
 }
 
 // Passage de l'image en noir et blanc
@@ -1395,46 +1156,26 @@ function image_masque($im, $masque, $pos="") {
 // http://doc.spip.org/@image_nb
 function image_nb($im, $val_r = 299, $val_g = 587, $val_b = 114)
 {
-	
-	if ($im["passe"] > 0) {
-		$monimg = $im;
-		$im = $monimg["dest"];
-		if ($monimg["passe"] == 1) $monimg["fonction"] = "image_nb(".$monimg["fonction"].",$val_r,$val_g,$val_b)";
-	}
-
-
 	$image = image_valeurs_trans($im, "nb-$val_r-$val_g-$val_b");
 	if (!$image) return("");
 	
 	$x_i = $image["largeur"];
 	$y_i = $image["hauteur"];
 	
-
-	if ($monimg["largeur"]) {
-		$x_i = $monimg["largeur"];
-		$y_i = $monimg["hauteur"];
-	}
-
 	$im = $image["fichier"];
 	$dest = $image["fichier_dest"];
-		
-	$creer = $image["creer"];
-	if ($monimg["passe"] == 2) $creer = true;
-	if ($monimg["passe"] == 1) $creer = false;
 	
+	$creer = $image["creer"];
 	
 	// Methode precise
 	// resultat plus beau, mais tres lourd
 	// Et: indispensable pour preserver transparence!
+
 	if ($creer) {
 		// Creation de l'image en deux temps
 		// de facon a conserver les GIF transparents
-		if (!$monimg["passe"]) {
-			$im = $image["fonction_imagecreatefrom"]($im);
-			imagepalettetotruecolor($im);
-		}
-		else $im = $monimg["mem"];
-		
+		$im = $image["fonction_imagecreatefrom"]($im);
+		imagepalettetotruecolor($im);
 		$im_ = imagecreatetruecolor($x_i, $y_i);
 		@imagealphablending($im_, false);
 		@imagesavealpha($im_,true);
@@ -1459,19 +1200,12 @@ function image_nb($im, $val_r = 299, $val_g = 587, $val_b = 114)
 				imagesetpixel ($im_, $x, $y, $color);			
 			}
 		}
-		if (!$monimg["passe"]) $image["fonction_image"]($im_, "$dest");
-		else $monimg["mem"] = $im_;
-
-//		imagedestroy($im_);
+		$image["fonction_image"]($im_, "$dest");
+		imagedestroy($im_);
 		imagedestroy($im);
 	}
-	
-	if ($monimg["passe"]) {
-		$monimg["dest"] = $dest;
-		return $monimg;
-	} else {
-		return image_ecrire_tag($image,array('src'=>$dest));
-	}
+
+	return image_ecrire_tag($image,array('src'=>$dest));
 }
 
 // http://doc.spip.org/@image_flou
@@ -1480,39 +1214,7 @@ function image_flou($im,$niveau=3)
 	// Il s'agit d'une modification du script blur qu'on trouve un peu partout:
 	// + la transparence est geree correctement
 	// + les dimensions de l'image sont augmentees pour flouter les bords
-	
-	if ($im["passe"] > 0) {
-		$monimg = $im;
-		$im = $monimg["dest"];
-		if ($monimg["passe"] == 1) $monimg["fonction"] = "image_flou(".$monimg["fonction"].",$niveau)";
-	}
-
-	$image = image_valeurs_trans($im, "flou-$niveau");
-	if (!$image) return("");
-	
-	$x_i = $image["largeur"];
-	$y_i = $image["hauteur"];
-	
-
-	if ($monimg["largeur"]) {
-		$x_i = $monimg["largeur"];
-		$y_i = $monimg["hauteur"];
-	}
-
-	$im = $image["fichier"];
-	$dest = $image["fichier_dest"];
-		
-	$creer = $image["creer"];
-	if ($monimg["passe"] == 2) $creer = true;
-	if ($monimg["passe"] == 1) $creer = false;
-	
-	
-	// Methode precise
-	// resultat plus beau, mais tres lourd
-	// Et: indispensable pour preserver transparence!
-
-	if ($creer) {
-		$coeffs = array (
+	$coeffs = array (
 				array ( 1),
 				array ( 1, 1), 
 				array ( 1, 2, 1),
@@ -1526,17 +1228,28 @@ function image_flou($im,$niveau=3)
 				array ( 1, 10, 45, 120, 210, 252, 210, 120, 45, 10, 1),
 				array ( 1, 11, 55, 165, 330, 462, 462, 330, 165, 55, 11, 1)
 				);
+	
+	$image = image_valeurs_trans($im, "flou-$niveau");
+	if (!$image) return("");
+	
+	$x_i = $image["largeur"];
+	$y_i = $image["hauteur"];
+	$sum = pow (2, $niveau);
 
-		$sum = pow (2, $niveau);
+	$im = $image["fichier"];
+	$dest = $image["fichier_dest"];
+	
+	$creer = $image["creer"];
+	
+	// Methode precise
+	// resultat plus beau, mais tres lourd
+	// Et: indispensable pour preserver transparence!
 
-
+	if ($creer) {
 		// Creation de l'image en deux temps
 		// de facon a conserver les GIF transparents
-		if (!$monimg["passe"]) {
-			$im = $image["fonction_imagecreatefrom"]($im);
-			imagepalettetotruecolor($im);
-		}
-		else $im = $monimg["mem"];
+		$im = $image["fonction_imagecreatefrom"]($im);
+		imagepalettetotruecolor($im);
 		$temp1 = imagecreatetruecolor($x_i+$niveau, $y_i);
 		$temp2 = imagecreatetruecolor($x_i+$niveau, $y_i+$niveau);
 		
@@ -1610,20 +1323,12 @@ function image_flou($im,$niveau=3)
 				imagesetpixel($temp2,$i,$j,$color);
 			}
 		}
-		if (!$monimg["passe"]) $image["fonction_image"]($temp2, "$dest");
-		else $monimg["mem"] = $temp2;
 	
+		$image["fonction_image"]($temp2, "$dest");
 		imagedestroy($temp1);	
 	}
-	if ($monimg["passe"]) {
-		$monimg["largeur"] = $x_i+$niveau;
-		$monimg["hauteur"] = $y_i+$niveau;
-		$monimg["dest"] = $dest;
-		return $monimg;
-	} else {
-		return image_ecrire_tag($image,array('src'=>$dest,'width'=>($x_i+$niveau),'height'=>($y_i+$niveau)));
-	}
 	
+	return image_ecrire_tag($image,array('src'=>$dest,'width'=>($x_i+$niveau),'height'=>($y_i+$niveau)));
 }
 
 // http://doc.spip.org/@image_RotateBicubic
@@ -1804,35 +1509,18 @@ function image_RotateBicubic($src_img, $angle, $bicubic=0) {
 // http://doc.spip.org/@image_rotation
 function image_rotation($im, $angle, $crop=false)
 {
-	if ($im["passe"] > 0) {
-		$monimg = $im;
-		$im = $monimg["dest"];
-		if ($monimg["passe"] == 1) $monimg["fonction"] = "image_rotation(".$monimg["fonction"].",$angle,0)";
-	}
-
 	$image = image_valeurs_trans($im, "rot-$angle-$crop", "png");
 	if (!$image) return("");
 	
-	$x_i = $image["largeur"];
-	$y_i = $image["hauteur"];
-	
-
-	if ($monimg["largeur"]) {
-		$x_i = $monimg["largeur"];
-		$y_i = $monimg["hauteur"];
-	}
-
 	$im = $image["fichier"];
 	$dest = $image["fichier_dest"];
-		
+	
 	$creer = $image["creer"];
-	if ($monimg["passe"] == 2) $creer = true;
-	if ($monimg["passe"] == 1) $creer = false;
 	
 	if ($creer) {
 		$effectuer_gd = true;
-								// Faute de mieux, je desactive quand on utilise les filtres "en memoire"
-		if (function_exists(imagick_rotate) AND !$monimg["passe"]) {
+
+		if (function_exists(imagick_rotate)) {
 			$mask = imagick_getcanvas( "#ff0000", $x, $y );
 			$handle = imagick_readimage ($im);
 			if (imagick_isopaqueimage( $handle )) {
@@ -1844,30 +1532,15 @@ function image_rotation($im, $angle, $crop=false)
 		if ($effectuer_gd) {
 			// Creation de l'image en deux temps
 			// de facon a conserver les GIF transparents
-			if (!$monimg["passe"]) {
-				$im = $image["fonction_imagecreatefrom"]($im);
-				imagepalettetotruecolor($im);
-			}
-			else $im = $monimg["mem"];
-			
+			$im = $image["fonction_imagecreatefrom"]($im);
+			imagepalettetotruecolor($im);
 			$im = image_RotateBicubic($im, $angle, true);
-
-			if (!$monimg["passe"]) $image["fonction_image"]($im, "$dest");
-			else $monimg["mem"] = $im;
+			$image["fonction_image"]($im, "$dest");
+			imagedestroy($im);
 		}
 	}
-
-	if ($monimg["passe"]) {
-		$monimg["dest"] = $dest;
-		$monimg["largeur"] = imagesx($monimg["mem"]);
-		$monimg["hauteur"] = imagesy($monimg["mem"]);
-		return $monimg;
-	} else {
-		list ($src_y,$src_x) = taille_image($dest);
-		return image_ecrire_tag($image,array('src'=>$dest,'width'=>$src_x,'height'=>$src_y));
-	}
-
-
+	list ($src_y,$src_x) = taille_image($dest);
+	return image_ecrire_tag($image,array('src'=>$dest,'width'=>$src_x,'height'=>$src_y));
 }
 
 // Permet d'appliquer un filtre php_imagick a une image
@@ -1876,56 +1549,21 @@ function image_rotation($im, $angle, $crop=false)
 // http://doc.spip.org/@image_imagick
 function image_imagick () {
 	$tous = func_get_args();
-	$im = $tous[0];
+	$img = $tous[0];
 	$fonc = $tous[1];
 	$tous[0]="";
 	$tous_var = join($tous, "-");
-	
 
-	if ($im["passe"] > 0) {
-		$monimg = $im;
-		$im = $monimg["dest"];
-		
-		// Calculer les fonctions...
-		for ($i=1; $i<count($tous); $i++) {
-			$val = $tous[$i];
-			if ( !ereg("^-?[0-9\.]+$", $val) && !ereg("^[A-Z\_]$",$val) ) $val = "'$val'";
-			$valeur[] = $val;
-		}
-		if ($valeur) $vals = join($valeur, ",");
-		
-		if ($monimg["passe"] == 1) $monimg["fonction"] = "image_imagick(".$monimg["fonction"].",$vals)";
-	}
-
-
-
-	$image = image_valeurs_trans($im, "$tous_var", "png");
+	$image = image_valeurs_trans($img, "$tous_var", "png");
 	if (!$image) return("");
-	$x_i = $image["largeur"];
-	$y_i = $image["hauteur"];
 	
-
-	if ($monimg["largeur"]) {
-		$x_i = $monimg["largeur"];
-		$y_i = $monimg["hauteur"];
-	}
-
 	$im = $image["fichier"];
 	$dest = $image["fichier_dest"];
 	
-	
 	$creer = $image["creer"];
-	if ($monimg["passe"] == 2) $creer = true;
-	if ($monimg["passe"] == 1) $creer = false;
 	
 	if ($creer) {
 		if (function_exists($fonc)) {
-			if ($monimg["passe"] > 0) {
-				if (!file_exists($im)) {
-					imagepng($monimg["mem"], $im);
-					$effacer_im = true;
-				}
-			}
 
 			$handle = imagick_readimage ($im);
 			$arr[0] = $handle;
@@ -1935,25 +1573,11 @@ function image_imagick () {
 			// de facon a eviter time_out pendant creation de l'image definitive
 			$tmp = ereg_replace("\.png$", "-tmp.png", $dest);
 			imagick_writeimage( $handle, $tmp);
-			if ($monimg["passe"] > 0) {
-				$monimg["mem"] = imagecreatefrompng($tmp);
-				@unlink($dest);
-				if ($effacer_im) @unlink($im);
-			} else {
-				rename($tmp, $dest);
-			}
+			rename($tmp, $dest);
 		} 
 	}
-	
-	if ($monimg["passe"]) {
-		$monimg["dest"] = $dest;
-		return $monimg;
-	} else {
-		list ($src_y,$src_x) = taille_image($dest);
-		return image_ecrire_tag($image,array('src'=>$dest,'width'=>$src_x,'height'=>$src_y));
-	}
-	
-	
+	list ($src_y,$src_x) = taille_image($dest);
+	return image_ecrire_tag($image,array('src'=>$dest,'width'=>$src_x,'height'=>$src_y));
 
 }
 
@@ -1987,38 +1611,22 @@ function image_decal_couleur($coul, $gamma) {
 // http://doc.spip.org/@image_gamma
 function image_gamma($im, $gamma = 0)
 {
-	if ($im["passe"] > 0) {
-		$monimg = $im;
-		$im = $monimg["dest"];
-		if ($monimg["passe"] == 1) $monimg["fonction"] = "image_gamma(".$monimg["fonction"].",$gamma)";
-	}
 	$image = image_valeurs_trans($im, "gamma-$gamma");
 	if (!$image) return("");
-
+	
 	$x_i = $image["largeur"];
 	$y_i = $image["hauteur"];
-
-
-	if ($monimg["largeur"]) {
-		$x_i = $monimg["largeur"];
-		$y_i = $monimg["hauteur"];
-	}
-
+	
 	$im = $image["fichier"];
 	$dest = $image["fichier_dest"];
-		
+	
 	$creer = $image["creer"];
-	if ($monimg["passe"] == 2) $creer = true;
-	if ($monimg["passe"] == 1) $creer = false;
 	
 	if ($creer) {
 		// Creation de l'image en deux temps
 		// de facon a conserver les GIF transparents
-		if (!$monimg["passe"]) {
-			$im = $image["fonction_imagecreatefrom"]($im);
-			imagepalettetotruecolor($im);
-		}
-		else $im = $monimg["mem"];
+		$im = $image["fonction_imagecreatefrom"]($im);
+		imagepalettetotruecolor($im);
 		$im_ = imagecreatetruecolor($x_i, $y_i);
 		@imagealphablending($im_, false);
 		@imagesavealpha($im_,true);
@@ -2042,15 +1650,9 @@ function image_gamma($im, $gamma = 0)
 				imagesetpixel ($im_, $x, $y, $color);			
 			}
 		}
-		if (!$monimg["passe"]) $image["fonction_image"]($im_, "$dest");
-		else $monimg["mem"] = $im_;
+		$image["fonction_image"]($im_, "$dest");
 	}
-	if ($monimg["passe"]) {
-		$monimg["dest"] = $dest;
-		return $monimg;
-	} else {
-		return image_ecrire_tag($image,array('src'=>$dest));
-	}
+	return image_ecrire_tag($image,array('src'=>$dest));
 }
 
 // Passe l'image en "sepia"
@@ -2072,12 +1674,6 @@ function image_decal_couleur_127 ($coul, $val) {
 function image_sepia($im, $rgb = "896f5e")
 {
 	
-	if ($im["passe"] > 0) {
-		$monimg = $im;
-		$im = $monimg["dest"];
-		if ($monimg["passe"] == 1) $monimg["fonction"] = "image_sepia(".$monimg["fonction"].",$rgb)";
-	}
-
 	$couleurs = couleur_hex_to_dec($rgb);
 	$dr= $couleurs["red"];
 	$dv= $couleurs["green"];
@@ -2089,27 +1685,16 @@ function image_sepia($im, $rgb = "896f5e")
 	$x_i = $image["largeur"];
 	$y_i = $image["hauteur"];
 	
-
-	if ($monimg["largeur"]) {
-		$x_i = $monimg["largeur"];
-		$y_i = $monimg["hauteur"];
-	}
-
 	$im = $image["fichier"];
 	$dest = $image["fichier_dest"];
-		
+	
 	$creer = $image["creer"];
-	if ($monimg["passe"] == 2) $creer = true;
-	if ($monimg["passe"] == 1) $creer = false;
 	
 	if ($creer) {
 		// Creation de l'image en deux temps
 		// de facon a conserver les GIF transparents
-		if (!$monimg["passe"]) {
-			$im = $image["fonction_imagecreatefrom"]($im);
-			imagepalettetotruecolor($im);
-		}
-		else $im = $monimg["mem"];
+		$im = $image["fonction_imagecreatefrom"]($im);
+		imagepalettetotruecolor($im);
 		$im_ = imagecreatetruecolor($x_i, $y_i);
 		@imagealphablending($im_, false);
 		@imagesavealpha($im_,true);
@@ -2138,18 +1723,12 @@ function image_sepia($im, $rgb = "896f5e")
 				imagesetpixel ($im_, $x, $y, $color);			
 			}
 		}
-		if (!$monimg["passe"]) $image["fonction_image"]($im_, "$dest");
-		else $monimg["mem"] = $im_;
-		// imagedestroy($im_);
+		$image["fonction_image"]($im_, "$dest");
+		imagedestroy($im_);
 		imagedestroy($im);
 	}
 	
-	if ($monimg["passe"]) {
-		$monimg["dest"] = $dest;
-		return $monimg;
-	} else {
-		return image_ecrire_tag($image,array('src'=>$dest));
-	}
+	return image_ecrire_tag($image,array('src'=>$dest));
 }
 
 
@@ -2157,36 +1736,18 @@ function image_sepia($im, $rgb = "896f5e")
 // http://doc.spip.org/@image_renforcement
 function image_renforcement($im, $k=0.5)
 {
-	if ($im["passe"] > 0) {
-		$monimg = $im;
-		$im = $monimg["dest"];
-		if ($monimg["passe"] == 1) $monimg["fonction"] = "image_renforcement(".$monimg["fonction"].",$k)";
-	}
 	$image = image_valeurs_trans($im, "renforcement-$k");
 	if (!$image) return("");
 	
 	$x_i = $image["largeur"];
 	$y_i = $image["hauteur"];
-	
-
-	if ($monimg["largeur"]) {
-		$x_i = $monimg["largeur"];
-		$y_i = $monimg["hauteur"];
-	}
-
 	$im = $image["fichier"];
 	$dest = $image["fichier_dest"];
-		
 	$creer = $image["creer"];
-	if ($monimg["passe"] == 2) $creer = true;
-	if ($monimg["passe"] == 1) $creer = false;
 	
 	if ($creer) {
-		if (!$monimg["passe"]) {
-			$im = $image["fonction_imagecreatefrom"]($im);
-			imagepalettetotruecolor($im);
-		}
-		else $im = $monimg["mem"];
+		$im = $image["fonction_imagecreatefrom"]($im);
+		imagepalettetotruecolor($im);
 		$im_ = imagecreatetruecolor($x_i, $y_i);
 		@imagealphablending($im_, false);
 		@imagesavealpha($im_,true);
@@ -2236,16 +1797,10 @@ function image_renforcement($im, $k=0.5)
 		imagesetpixel ($im_, $x, $y, $color);			
 			}
 		}		
-		if (!$monimg["passe"]) $image["fonction_image"]($im_, "$dest");
-		else $monimg["mem"] = $im_;
+		$image["fonction_image"]($im_, "$dest");		
 	}
 
-	if ($monimg["passe"]) {
-		$monimg["dest"] = $dest;
-		return $monimg;
-	} else {
-		return image_ecrire_tag($image,array('src'=>$dest));
-	}
+	return image_ecrire_tag($image,array('src'=>$dest));
 }
 
 
