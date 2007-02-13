@@ -254,7 +254,7 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false,
 function nom_fichier_copie_locale($source, $extension) {
 	$dir = sous_repertoire(_DIR_IMG, 'distant'); # IMG/distant/
 	$dir2 = sous_repertoire($dir, $extension); 		# IMG/distant/pdf/
-	$chemin = $dir2 . substr(basename($source).'-'.md5($source),0,12).
+	$chemin = $dir2 . substr(preg_replace(',[^\w-],', '', basename($source)).'-'.md5($source),0,12).
 		substr(md5($source),0,4).'.'.$extension;
 
 	// on se place tout le temps comme si on etait a la racine
