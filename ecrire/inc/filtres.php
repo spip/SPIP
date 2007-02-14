@@ -1893,8 +1893,10 @@ function compacte_js($flux) {
 	// en cas d'echec (?) renvoyer l'original
 	if (strlen($t = $k->getClean($flux)))
 		return $t;
-	else
-		return $flux;
+
+	// erreur
+	spip_log('erreur de compacte_js');
+	return $flux;
 }
 
 // Si la source est un chemin, on retourne un chemin avec le contenu compacte
