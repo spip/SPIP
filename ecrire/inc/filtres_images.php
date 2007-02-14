@@ -121,7 +121,10 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 	}
 	else {
 		if (!file_exists($fichier)) {
-			if (!file_exists("$fichier.src")) return false;
+			if (!file_exists("$fichier.src")) {
+				spip_log("Image absente : $fichier");
+				return false;
+			}
 			# on reconstruit l'image source absente a partir de la chaine des .src
 			reconstruire_image_intermediaire($fichier);
 		}
@@ -179,10 +182,13 @@ function image_imagejpg($img,$fichier) {
 function image_gd_output($img,$valeurs){
 	$fonction = "image_image".$valeurs['format_dest'];
 	$ret = false;
+	#un flag pour reperer les images gravees
+	$lock = file_exists($valeurs['fichier_dest']) AND !file_exists($valeurs['fichier_dest'].'.src');
 	if (
 	     function_exists($fonction) 
 	  && ($ret = $fonction($img,$valeurs['fichier_dest'])) # on a reussi a creer l'image
 	  && isset($valeurs['reconstruction']) # et on sait comment la resonctruire le cas echeant
+	  && !$lock
 	  )
 		ecrire_fichier($valeurs['fichier_dest'].'.src',serialize($valeurs),true);
 	return $ret;
@@ -237,6 +243,9 @@ function image_graver($img){
 		$fichier=substr($fichier,0,$p);
 	if (strlen($fichier) < 1)
 		$fichier = $img;
+	# si jamais le fichier final n'a pas ete calcule car suppose temporaire
+	if (!file_exists($fichier)) 
+		reconstruire_image_intermediaire($fichier);
 	ramasse_miettes($fichier);
 	return $img; // on ne change rien
 }
@@ -1993,13 +2002,11 @@ function image_aplatir($im, $format='jpg', $coul='000000')
 // On peut forcer un point en fixant $x et $y, entre 0 et 20.
 // http://doc.spip.org/@image_couleur_extraire
 function image_couleur_extraire($img, $x=10, $y=6) {
-	$fichier = extraire_attribut($img, 'src');
-	if (strlen($fichier) < 1) $fichier = $img;
-
-	if (!file_exists($fichier)) return "F26C4E";
 
 	$cache = image_valeurs_trans($img, "coul-$x-$y", "php");
+	if (!$cache) return "F26C4E";
 	
+	$fichier = $cache["fichier"];
 	$dest = $cache["fichier_dest"];
 	
 	$creer = $cache["creer"];

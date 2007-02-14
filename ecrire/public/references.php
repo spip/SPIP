@@ -459,6 +459,13 @@ function compose_filtres(&$p, $code) {
 	foreach($p->param as $filtre) {
 		$fonc = array_shift($filtre);
 		if ($fonc) {
+			$is_filtre_image = (substr($fonc,0,6)=='image_') AND ($fonc!='image_graver');
+			if ($p->ramasser_miettes AND !$is_filtre_image){
+				// il faut graver maintenant car apres le filtre en cours
+				// on est pas sur d'avoir encore le nom du fichier dans le pipe
+				$code = "filtrer('image_graver',$code)";
+				$p->ramasser_miettes = false;
+			}
 			// recuperer les arguments du filtre, les separer par des virgules
 			// *sauf* dans le cas du filtre "?" qui demande un ":"
 			if ($fonc == '?') {
@@ -473,8 +480,7 @@ function compose_filtres(&$p, $code) {
 			// de maniere indirecte, pour charger au prealable sa definition
 			if (isset($GLOBALS['spip_matrice'][$fonc])) {
 				$code = "filtrer('$fonc',$code$arglist)";
-				if (substr($fonc,0,6)=='image_')
-					$p->ramasser_miettes = true;
+				if ($is_filtre_image) $p->ramasser_miettes = true;
 			}
 			// le filtre est defini sous forme de fonction ou de methode
 			// par ex. dans inc_texte, inc_filtres ou mes_fonctions
