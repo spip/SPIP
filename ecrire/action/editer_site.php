@@ -98,18 +98,14 @@ function insert_syndic($id_rubrique) {
 		$id_rubrique = $row['id_rubrique'];
 	}
 
-	/* pas de langue pour les sites
 
-	// La langue a la creation : c'est la langue de la rubrique
-	$row = spip_fetch_array(spip_query("SELECT lang, id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
-	$choisie = 'non';
-	$lang = $row['lang'];
-	$id_rubrique = $row['id_secteur']; // garantir la racine
-	*/
+	// Le secteur a la creation : c'est le secteur de la rubrique
+	$row = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+	$id_secteur = $row['id_secteur'];
 
 	$id_syndic = spip_abstract_insert("spip_syndic",
-		"(id_rubrique, statut, date)",
-		"($id_rubrique, 'prop', NOW())");
+		"(id_rubrique, id_secteur, statut, date)",
+		"($id_rubrique, $id_secteur, 'prop', NOW())");
 
 	return $id_syndic;
 }
