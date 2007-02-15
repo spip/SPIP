@@ -182,7 +182,9 @@ function calcul_introduction ($type, $texte, $chapo='', $descriptif='') {
 
 	switch ($type) {
 		case 'articles':
-			if (trim($descriptif))
+			# si descriptif contient juste des espaces ca produit une intro vide, 
+			# c'est une fonctionnalite, pas un bug
+			if ($descriptif)
 				return propre($descriptif);
 			else if (substr($chapo, 0, 1) == '=')	// article virtuel
 				return '';
