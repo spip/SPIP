@@ -341,7 +341,7 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 
 	if ($GLOBALS['var_mode'] == 'debug') {
 		include_spip('public/debug');
-		debug_dumpfile ($page['texte'], $fonc, 'resultat');
+		debug_dumpfile (strlen($page['texte'])?$page['texte']:" ", $fonc, 'resultat');
 	}
 	$page['contexte'] = $local;
 
