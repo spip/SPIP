@@ -285,7 +285,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 			}
 
 		$ret .= "<a id='document$id_document' name='document$id_document'></a>\n";
-		$ret .= debut_cadre_enfonce("doc-24.gif", true, "", lignes_longues(typo($cadre),30));
+		$ret .= debut_cadre_enfonce("doc-24.gif", true, "", lignes_longues(typo($cadre),20));
 
 		//
 		// Affichage de la vignette
@@ -345,7 +345,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 	//
 	else if ($mode == 'vignette') {
 	
-		$ret .= debut_cadre_relief("image-24.gif", true, "", lignes_longues(typo($cadre),30));
+		$ret .= debut_cadre_relief("image-24.gif", true, "", lignes_longues(typo($cadre),20));
 
 		//
 		// Afficher un apercu (pour les images)

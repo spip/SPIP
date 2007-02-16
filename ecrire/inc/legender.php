@@ -58,14 +58,14 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	}
 
 	$entete = basename($document['fichier']);
-	if (($n=strlen($entete)) > 20) 
+	if (($n=strlen($entete)) > 20)
 		$entete = substr($entete, 0, 10)."...".substr($entete, $n-10, $n);
 	if (strlen($document['titre']))
-		$entete = "<b>". typo($titre) . "</b>";
+		$entete = "<b>". lignes_longues(typo($titre),25) . "</b>";
 
 	$contenu = '';
 	if ($descriptif)
-	  $contenu .=  propre($descriptif)  . "<br />\n" ;
+	  $contenu .=  lignes_longues(propre($descriptif),25)  . "<br />\n" ;
 	if ($document['largeur'] OR $document['hauteur'])
 	  $contenu .= _T('info_largeur_vignette',
 		     array('largeur_vignette' => $document['largeur'],
