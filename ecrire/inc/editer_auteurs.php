@@ -285,7 +285,7 @@ function ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit, $arg_
 	    $clic = _T('bouton_ajouter');
 	}
 
-	return ajax_action_post('editer_auteurs', "$id,$type", $script_edit, "id_{$type}=$id", $sel, $clic, "class='fondo visible_au_chargement' id='valider_ajouter_auteur'", $arg_ajax);
+	return ajax_action_post('editer_auteurs', "$id,$type", $script_edit, "id_{$type}=$id", $sel, $clic, "class='fondo visible_au_chargement' id='valider_ajouter_auteur'", "", $arg_ajax);
 }
 
 // http://doc.spip.org/@objet_auteur_select

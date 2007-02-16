@@ -103,7 +103,7 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 
 
 // http://doc.spip.org/@ajax_action_post
-function ajax_action_post($action, $arg, $retour, $gra, $corps, $clic, $atts, $args_ajax='')
+function ajax_action_post($action, $arg, $retour, $gra, $corps, $clic, $atts_bouton, $atts_span = "", $args_ajax='')
 {
 	if (strpos($gra,"#")===FALSE)
 		$ancre = "$action-" . intval($arg);
@@ -119,21 +119,23 @@ function ajax_action_post($action, $arg, $retour, $gra, $corps, $clic, $atts, $a
 				      ("<div>"
 				       . $corps 
 				       . "<span"
-				       . $atts
+				       . $atts_span
 				       . "><input type='submit' class='fondo' value='"
 				       . $clic
-				       ."' /></span></div>"),
+				       ."' $atts_bouton/></span></div>"),
 				      "\nmethod='post'");
   } else { 
 
 	if ($gra AND !$args_ajax) $args_ajax = "&$gra";
 	$corps = "<div>"
 	  . $corps 
-	  . "<input type='submit' value='"
+	  . "<span"
+	  . $atts_span
+	  . "><input type='submit' value='"
 	  . $clic
 	  . "' onclick=" 
 	  . ajax_action_declencheur('this.form', $ancre)
-	  . " $atts/></div>";
+	  . " $atts_bouton/></span></div>";
 
 	return redirige_action_auteur($action,
 				      $arg,
