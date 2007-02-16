@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'Cap resultat',
 'avis_chemin_invalide_1' => 'El cam&iacute; que heu triat',
 'avis_chemin_invalide_2' => 'no sembla pas v&agrave;lid. Voleu tornar a la p&agrave;gina precedent i constrastar les informacions donades.',
-'avis_connexion_echec_1' => 'La connexi&oacute; al servidor MySQL ha acabat.',
+'avis_connexion_echec_1' => 'La connexi&oacute; al servidor MySQL ha fallat.',
 'avis_connexion_echec_2' => 'Tornar a la p&agrave;gina precedent per verificar les dades que heu ficat.',
 'avis_connexion_echec_3' => '<b>N.B.</b> A molts dels servidors, heu de <b>demanar</b> l\'activaci&oacute; del vostre acc&eacute;s a la base de dades MySQL abans de poder utilitzar-la. Si no podeu connectar-vos, verifiqueu que heu efectuat aquest pas.',
 'avis_connexion_ldap_echec_1' => ' La connexi&oacute; amb el servidor LDAP ha caigut.',
@@ -802,7 +802,7 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr&
 'texte_auteurs' => 'ELS AUTORS',
 'texte_breves' => 'Les breus son textes curts i simples que permeten posar r&agrave;pidament en l&iacute;nia informacions concises, gestionar una revista de premsa, un calendari d\'esdeveniments...',
 'texte_choix_base_1' => 'Trie la seua base:',
-'texte_choix_base_2' => 'El servidor MySQL cont&eacute; diverses  bases de dades.',
+'texte_choix_base_2' => 'El servidor MySQL cont&eacute; diverses bases de dades.',
 'texte_choix_base_3' => '<b>Seleccioneu</b> d\'aqu&iacute; sota quina us ha estat atribu&iuml;da pel vostre prove&iuml;dor d\'hostatge:',
 'texte_commande_vider_tables_indexation' => 'Utiliceu aquesta comanda per buidar les taules d\'indexaci&oacute; emprades
  pel motor de recerca integrat en SPIP. Aix&ograve; vos permetr&agrave;

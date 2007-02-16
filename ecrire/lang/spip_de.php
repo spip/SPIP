@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Programmfehler. Diese Funktion darf nicht in diesem Zusammenhang aufgerufen werden.',
 'avis_erreur_mysql' => 'MySQL-Fehler',
 'avis_erreur_sauvegarde' => 'Fehler in der Sicherung (@type@ @id_objet@) ! ',
-'avis_erreur_visiteur' => '<NEW>Probl&egrave;me d\'acc&egrave;s &agrave; l\'espace priv&eacute;',
+'avis_erreur_visiteur' => 'Ein Problem beim Zugang zum Redaktionssystem ist aufgetreten.',
 
 
 // B
@@ -82,6 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_semaine' => 'Wochenkalender',
 'choix_couleur_interface' => 'Farbe',
 'choix_interface' => 'Oberfl&auml;chenfarbe',
+'colonne' => 'Spalte',
 'confirm_changer_statut' => 'Achtung, Sie werden den Status dieses Elementes &auml;ndern. Wollen Sie fortfahren?',
 'correcte' => 'korrekt',
 
@@ -196,6 +197,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <p>Um das Problem zu l&ouml;sen, verwenden Sie bitte Ihren FTP-Client, um die Zugriffsrechte f&uuml;r diese
 Verzeichnisse zu setzen.Die Installationsanleitung erl&auml;utert die Details dazu.</p>
 <p>Wenn Sie diesen Vorgang abgeschlossen haben, k&ouml;nnen Sie',
+'double_occurrence' => 'Dublette',
 
 
 // E
@@ -203,6 +205,9 @@ Verzeichnisse zu setzen.Die Installationsanleitung erl&auml;utert die Details da
 'entree_titre_document' => 'Titel des Dokuments:',
 'entree_titre_image' => 'Titel des Bilds:',
 'envoi_via_le_site' => 'Gesendet &uuml;ber Website ',
+'erreur' => 'Fehler',
+'erreur_balise_non_fermee' => 'Letzter Tag nicht geschlossen:',
+'erreur_texte' => 'Fehler',
 
 
 // F
@@ -543,6 +548,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'lien_visite_site' => 'Website anzeigen',
 'lien_visites' => '@visites@ Besuche',
 'lien_voir_auteur' => 'Autor anzeigen',
+'ligne' => 'Zeile',
 'login_acces_prive' => 'Login zum Redaktionssystem',
 'login_autre_identifiant' => 'Unter anderem Namen anmelden',
 'login_connexion_refusee' => 'Zugang verweigert.',
@@ -579,9 +585,11 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 
 // N
 'navigateur_pas_redirige' => 'Wenn Ihr Browser keine automatische Weiterleitung unterst&uuml;tzt, klicken Sie hier.',
+'numero' => 'Nummer',
 
 
 // O
+'occurence' => 'Vorkommen',
 'onglet_affacer_base' => 'Datenbank l&ouml;schen',
 'onglet_auteur' => 'Autor',
 'onglet_contenu_site' => 'Inhalte der Website',
@@ -640,6 +648,7 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
 
 
 // S
+'spip_conforme_dtd' => 'SPIP erkennt dieses Dokument als dem DOCTYPE entsprechend:',
 'squelette' => 'Skelett',
 'squelette_inclus_ligne' => 'eingebettetes Skelett, Zeile',
 'squelette_ligne' => 'Skelett, Zeile',
@@ -659,7 +668,7 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
 'texte_erreur_mise_niveau_base' => 'Datenbankfehler beim Einrichten der neuen Version. Das Bild <b>@fichier@</b> wurde nicht &uuml;bernommen (Artikel @id_article@).
  Bitte notieren Sie diesen Hinweis, starten Sie die Aktualisierung erneut und pr&uuml;fen Sie, ob die Bilder
  in den Artikeln angezeigt werden.',
-'texte_erreur_visiteur' => '<NEW>Vous avez tent&eacute; de d\'acc&eacute;der &agrave; l\'espace priv&eacute; avec un login qui ne le permet pas.',
+'texte_erreur_visiteur' => 'Sie haben versucht sich unter einer Identit&auml;t einzuloggen, die das nicht erlaubt.',
 'texte_inc_auth_1' => 'Sie sind angemeldet als <b>@auth_login@</b>, aber diese ID existiert nicht bzw. nicht mehr in der Datenbank.
  Versuchen Sie,',
 'texte_inc_auth_2' => 'sich erneut anzumelden',
@@ -715,19 +724,38 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
 'zbug_code' => 'Code',
 'zbug_critere_inconnu' => 'unbekanntes Kriterium @critere@',
 'zbug_distant_interdit' => 'extern unzul&auml;ssig',
+'zbug_doublon_table_sans_index' => 'Dublette in Tabelle ohne Index',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: doppelt vorhanden',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: Schluss-Tag fehlt',
 'zbug_erreur_boucle_syntaxe' => 'Syntax der Schleife fehlerhaft',
+'zbug_erreur_compilation' => 'Fehler beim Kompilieren',
 'zbug_erreur_execution_page' => 'Fehler beim Ausf&uuml;hren der Seite',
 'zbug_erreur_filtre' => 'Fehler: Filter<b>&laquo; @filtre@ &raquo;</b> ist nicht definiert',
 'zbug_erreur_meme_parent' => '{meme_parent} nur in den Schleifen (FORUMS) und (RUBRIQUES) verwenden.',
 'zbug_erreur_squelette' => 'Fehler in Layoutvorlage (Skelett)',
 'zbug_info_erreur_squelette' => 'Irrtum auf der Seite',
 'zbug_inversion_ordre_inexistant' => 'Umkehrung einer inexistenten Sortierung ',
+'zbug_pagination_sans_critere' => '#PAGINATION ohne Kriterium {pagination} oder in rekursiver Schleife',
 'zbug_parametres_inclus_incorrects' => 'INCLUDE-Parameter fehlerhaft',
 'zbug_resultat' => 'Ergebnis',
 'zbug_serveur_indefini' => 'SQL-Server nicht definiert',
-'zbug_table_inconnue' => 'SQL-Tabelle &laquo; @table@ &raquo; unbekannt'
+'zbug_table_inconnue' => 'SQL-Tabelle &laquo; @table@ &raquo; unbekannt',
+'zxml_connus_attributs' => 'bekannte Attribute',
+'zxml_de' => 'von',
+'zxml_inconnu_attribut' => 'Attribut unbekannt',
+'zxml_inconnu_balise' => 'Tag unbekannt',
+'zxml_inconnu_entite' => 'Entity unbekannt',
+'zxml_inconnu_id' => 'ID unbekannt',
+'zxml_mais_de' => 'aber',
+'zxml_non_conforme' => 'entspricht nicht dem Motiv',
+'zxml_non_fils' => 'ist kein Kind von',
+'zxml_nonvide_balise' => 'kein leerer Tag',
+'zxml_obligatoire_attribut' => 'obligatorisches Attribut fehlt in',
+'zxml_succession_fils_incorrecte' => 'Objektreihenfolge inkorrekt',
+'zxml_survoler' => 'Mouseover zeigt korrekte',
+'zxml_valeur_attribut' => 'Attributwert',
+'zxml_vide_balise' => 'leerer Tag',
+'zxml_vu' => 'bereits gesehen'
 
 );
 

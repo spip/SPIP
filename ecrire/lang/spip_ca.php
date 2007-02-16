@@ -398,7 +398,7 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'info_contact_developpeur' => 'Contacteu amb un desenvolupador.',
 'info_contenance' => 'Aquest lloc cont&eacute;:',
 'info_contribution' => 'contribucions del f&ograve;rum',
-'info_copyright' => '@spip@ &eacute;s un programari lliure distribu&iuml;t @lien_gpl@.',
+'info_copyright' => '@spip@ &eacute;s programari lliure distribu&iuml;t @lien_gpl@.',
 'info_copyright_doc' => 'Per a m&eacute;s informaci&oacute;, veure el lloc <a href=\'http://www.spip.net/ca\'>http://www.spip.net/ca</a>.',
 'info_copyright_gpl' => 'sota llic&egrave;ncia GPL',
 'info_cours_edition' => 'Els vostres articles en proc&eacute;s de redacci&oacute;',

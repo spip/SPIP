@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_non_acces_message' => 'Sie haben keinen Zugriff auf diese Nachricht.',
 'avis_non_acces_page' => 'Sie haben keinen Zugriff auf diese Seite.',
 'avis_operation_echec' => 'Operation fehlgeschlagen.',
-'avis_operation_impossible' => '<NEW>Op&eacute;ration impossible',
+'avis_operation_impossible' => 'Aktion nicht m&ouml;glich',
 'avis_probleme_archive' => 'Fehler beim Lesen der Archivdatei @archive@',
 'avis_site_introuvable' => 'Website nicht auffindbar',
 'avis_site_syndique_probleme' => 'Achtung! Bei der Syndikation dieser Website ist ein Problem aufgetreten und das System ist vor&uuml;bergehend unterbrochen. &Uuml;berpr&uuml;fen Sie die Adresse der backend-Datei der Website (<b>@url_syndic@</b>) und versuchen Sie, die Informationen erneut abzurufen.',
@@ -43,11 +43,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // B
-'bouton_acces_ldap' => '<MODIF>LDAP Zugang hinzuf&uuml;gen >>',
+'bouton_acces_ldap' => 'LDAP Zugang hinzuf&uuml;gen',
 'bouton_ajouter' => 'Hinzuf&uuml;gen',
 'bouton_ajouter_participant' => 'TEILNEHMER HINZUF&Uuml;GEN:',
 'bouton_annonce' => 'ANK&Uuml;NDIGUNG',
-'bouton_annuler' => '<NEW>Annuler',
+'bouton_annuler' => 'Abbrechen',
 'bouton_checkbox_envoi_message' => 'Verschicken einer Nachricht erm&ouml;glichen',
 'bouton_checkbox_indiquer_site' => 'obligatorische Angabe einer Website',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'Administratoren der Website',
@@ -105,7 +105,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cache_mode_non_compresse' => 'Cache-Dateien werden unkomprimiert gespeichert.',
 'cache_modifiable_webmestre' => 'Dieser Parameter kann vom Webmaster eingestellt werden.',
 'calendrier_synchro' => 'Wenn Sie eine mit <b>iCal</b> kompatibles PIM-Programm verwenden, k&ouml;nne Sie es mit den Eintr&auml;gen dieser Website synchronisieren.',
-'connexion_ldap' => '<NEW>Connexion :',
+'connexion_ldap' => 'Verbindung:',
 
 
 // D
@@ -167,14 +167,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // F
-'forum_info_original' => '<NEW>original',
+'forum_info_original' => 'Original',
 
 
 // I
 'ical_info1' => 'Diese Seite erm&ouml;glicht auf mehrere Arten an der Entwicklung der Website teilzunehmen.',
 'ical_info2' => 'Um mehr &uuml;ber diese Techniken zu erfahren, lesen Sie bitte die <a href="http://www.spip.net/de_suivi">SPIP Dokumentation</a>.',
 'ical_info_calendrier' => 'Sie verf&uuml;gen &uuml;ber zwei Kalender. Einer gibt Ihnen eine &Uuml;bersicht &uuml;ber die Website und alle dort ver&ouml;ffentlichten Artikel. Der zweite enth&auml;lt editorische Ank&uuml;ndigungen und Ihre pers&ouml;nlichen Nachrichten. Sie allein haben Zugriff auf ihn indem Sie Ihr Passwort eingeben. Sie k&ouml;nne es &auml;ndern, indem Sie Ihr Zugangspasswort f&uuml;r diese Website &auml;ndern.',
-'ical_lien_rss_breves' => '<NEW>Syndication des br&egrave;ves du site',
+'ical_lien_rss_breves' => 'Syndikation der Meldungen dieser Website',
 'ical_methode_http' => 'Download',
 'ical_methode_webcal' => 'Synchronisieren (webcal://)',
 'ical_texte_js' => 'Mit nur einer Zeile Javascript k&ouml;nnen Sie auf Ihrer Website die neuesten Artikel dieser Website anzeigen.',
@@ -196,7 +196,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_rubrique_2' => 'Neue Rubrik anlegen',
 'icone_ecrire_nouvel_article' => 'Meldungen in dieser Rubrik',
 'icone_envoyer_message' => 'Nachricht abschicken',
-'icone_evolution_visites' => '<MODIF>Besuchsentwicklung<br />@visites@ Abrufe',
+'icone_evolution_visites' => 'Besuchsentwicklung<br />@visites@ Abrufe',
 'icone_modif_groupe_mots' => 'Schlagwort-Kategorie bearbeiten',
 'icone_modifier_article' => 'Artikel bearbeiten',
 'icone_modifier_breve' => 'Meldung bearbeiten',
@@ -384,7 +384,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 'info_message_technique' => 'Technische Nachricht:',
 'info_messagerie_interne' => 'Interne Nachrichten',
 'info_mise_a_niveau_base' => 'Update Ihrer MySQL-Datenbank',
-'info_mise_a_niveau_base_2' => '<MODIF>{{ACHTUNG!}} Sie haben eine {&auml;ltere} Version der SPIP-Dateien installiert als sich vorher auf Ihrem Server befand. Ihre Datenbank wird m&ouml;glicherweise zerst&ouml;rt und Ihre Website wird nict mehr funktionieren.<br />{{Installieren Sie noch einmal die aktuelle Version von SPIP.}}',
+'info_mise_a_niveau_base_2' => '{{ACHTUNG!}} Sie haben eine {&auml;ltere} Version der SPIP-Dateien installiert als sich vorher auf Ihrem Server befand. Ihre Datenbank wird m&ouml;glicherweise zerst&ouml;rt und Ihre Website wird nict mehr funktionieren.<br />{{Installieren Sie SPIP noch einmal.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Standardmodus der &ouml;ffentlichen Foren',
 'info_modifier_breve' => 'Meldung bearbeiten:',
 'info_modifier_rubrique' => 'Rubrik bearbeiten:',
@@ -456,13 +456,19 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 'info_principaux_correspondants' => 'Ihre wichtigsten Korrespondezpartner',
 'info_procedez_par_etape' => 'gehen Sie Schritt f&uuml;r Schritt vor',
 'info_procedure_maj_version' => 'Sie m&uuml;ssen die Update-Funktion starten, um Ihre Datenbank an die neue Version von SPIP anzupassen.',
-'info_proxy_ok' => '<NEW>Test du proxy r&eacute;ussi.',
+'info_proxy_ok' => 'Proxytest erfolgreich.',
 'info_ps' => 'P.S.',
 'info_publier' => 'ver&ouml;ffentlichen',
 'info_publies' => 'Ihre ver&ouml;ffentlichten Artikel',
 'info_question_accepter_visiteurs' => 'Bitte aktivieren Sie die folgende Option, wenn sich Besucher Ihrer Website als <i>Leser ohne Zugang zum Redaktionssystem</i> anmelden k&ouml;nnen.',
 'info_question_gerer_statistiques' => 'Soll SPIP Besucherstatistiken anlegen?',
-'info_question_inscription_nouveaux_redacteurs' => '<MODIF>M&ouml;chten Sie, dass sich neue Redakteure vom &ouml;ffentlichen Bereich aus anmelden k&ouml;nnen? Wenn Sie das erm&ouml;glichen, k&ouml;nnen sich Besucher &uuml;ber ein automatisch erstelltes Formular anmelden und Artikel vorschlagen. <blockquote><i>Nach der Anmeldung erhalten die neuen Redakteure automatisch eine E-Mail mit ihren Zugangsdaten. manche Webhoster unterbinden den Mailversand von ihren Webservern aus. In diesem Fall funktioniert die automatische Anmeldung nicht.',
+'info_question_inscription_nouveaux_redacteurs' => 'M&ouml;chten Sie, dass sich neue Redakteure vom &ouml;ffentlichen Bereich
+ aus anmelden k&ouml;nnen?&nbsp; Wenn Sie das erm&ouml;glichen, k&ouml;nnen sich Besucher &uuml;ber ein automatisch
+ erstelltes Formular anmelden und Artikel vorschlagen.
+ <blockquote><i>Nach der Anmeldung erhalten die neuen Redakteure automatisch
+ eine E-Mail mit ihren Zugangsdaten. Manche Webhoster unterbinden den Mailversand
+ von ihren Webservern aus.
+ In diesem Fall funktioniert die automatische Anmeldung nicht.',
 'info_question_mots_cles' => 'M&ouml;chten Sie Schlagworte f&uuml;r Ihre Website verwenden?',
 'info_question_proposer_site' => 'Wer darf Websites zur Verlinkung vorschlagen?',
 'info_question_utilisation_moteur_recherche' => 'Wollen Sie die integrierte Suchfunktion von SPIP verwenden? (ohne Suchfunktion wird Ihr System schneller.)',
@@ -591,7 +597,7 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'install_echec_annonce' => 'Die Installation wird wahrscheinlich fehlschlagen oder eine nicht funktionierende Site ergeben.',
 'install_extension_mbstring' => 'SPIP funktioniert nicht mit:',
 'install_extension_php_obligatoire' => 'SPIP ben&ouml;tigt die Dateierweiterung php:',
-'install_php_version' => '<NEW>PHP version @version@ insuffisant (minimum = @minimum@)',
+'install_php_version' => 'Die PHP-Version @version@ ist zu alt. (Mindestens erforderlich = @minimum@)',
 'install_select_langue' => 'W&auml;hlen Sie eine Sprache aus und klicken Sie auf &laquo;Weiter&raquo;, um die Installation zu starten.',
 'intem_redacteur' => 'Redakteur',
 'item_accepter_inscriptions' => 'Anmeldungen erlauben',
@@ -679,7 +685,7 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'lien_supprimer_rubrique' => 'Rubrik l&ouml;schen',
 'lien_tout_deplier' => 'Alle anzeigen',
 'lien_tout_replier' => 'Alle ausblenden',
-'lien_tout_supprimer' => '<NEW>Tout supprimer',
+'lien_tout_supprimer' => 'Alles l&ouml;schen',
 'lien_trier_nom' => 'Nach Namen sortieren',
 'lien_trier_nombre_articles' => 'Nach Zahl der Artikel sortieren',
 'lien_trier_statut' => 'Nach Status sortieren',
@@ -727,7 +733,7 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'plugin_etat_stable' => 'Stabil',
 'plugin_etat_test' => 'Im Test',
 'plugins_liste' => 'Liste der Plugins',
-'protocole_ldap' => '<NEW>Version du protocole :',
+'protocole_ldap' => 'Version des Protokolls:',
 
 
 // R
@@ -735,8 +741,8 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 
 
 // S
-'sauvegarde_fusionner' => '<NEW>Fusionner la base actuelle et la sauvegarde',
-'sauvegarde_url_origine' => '<NEW>Eventuellement, URL du site d\'origine :',
+'sauvegarde_fusionner' => 'Aktuelle Datenbank und Sicherungskopie zusammenf&uuml;hren',
+'sauvegarde_url_origine' => 'Wenn gew&uuml;nscht URL der Quelle:',
 'statut_admin_restreint' => '(Rubrik-Admin)',
 'syndic_choix_moderation' => 'Was soll mit weiteren Links dieser Seite geschehen?',
 'syndic_choix_oublier' => 'Was soll mit Links geschehen, die nicht mehr im Feed &uuml;bertragen werden?',
@@ -785,7 +791,9 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'texte_compresse_ou_non' => '(kann komprimiert oder unkomprimiert sein)',
 'texte_compte_element' => '@count@ Element',
 'texte_compte_elements' => '@count@ Elemente',
-'texte_config_groupe_mots_cles' => '<MODIF>M&ouml;chten Sie die erweiterten Einstellungen f&uuml;r Schlagworte einschalten? Sie k&ouml;nnen dann z.B. die Zuordnungen auf ein Wort pro Kategorie begrenzen, eine Kategorie als besonders wichtig definieren etc.',
+'texte_config_groupe_mots_cles' => 'M&ouml;chten Sie die erweiterten Einstellungen f&uuml;r
+ Schlagworte einschalten? Sie k&ouml;nnen dann z.B. die Zuordnungen auf ein Wort
+ pro Kategorie begrenzen, eine Kategorie als besonders wichtig definieren etc.',
 'texte_connexion_mysql' => 'Sie erhalten die erforderlichen Informationen von Ihrem Webspace-Provider. Sie erfahren von ihm, ob Ihr Server MySQL unterst&uuml;tzt und welche Verbindungsdaten erforderlich sind.',
 'texte_contenu_article' => '(Zusammenfassung des Artikels in wenigen Worten.)',
 'texte_contenu_articles' => 'Ja nach Vorlage, die Sie f&uuml;r Ihre Website verwenden, k&ouml;nnen Sie Elemente von Artikeln aktivieren oder abschalten. Bitte bestimmen Sie mit dieser Liste, welche Elemente verf&uuml;gbar sein sollen.',
@@ -843,7 +851,7 @@ ew&ouml;hnlich.        Wenn Sie Webmaster dieser Site sind, l&ouml;schen Sie bit
 'texte_plusieurs_articles' => 'Mehrere Autoren f&uuml;r &bdquo;@cherche_auteur@&ldquo; gefunden:',
 'texte_port_annuaire' => '(Der Standardwert kann meistens beibehalten werden.)',
 'texte_presente_plugin' => 'Diese Seite zeigt eine Liste der auf dieser Website verf&uuml;gbaren Plugins. Sie k&ouml;nnen sie aktivieren, indem sie die entsprechenden Eintr&auml;ge mit einem H&auml;kchen merkieren.',
-'texte_proposer_publication' => '<MODIF>Wenn Ihr Artikel fertig ist,<br /> k&ouml;nnen Sie ihn zur Ver&ouml;ffentlichung vorschlagen.',
+'texte_proposer_publication' => 'Wenn Ihr Artikel fertig ist,<br /> k&ouml;nnen Sie ihn zur Ver&ouml;ffentlichung vorschlagen.',
 'texte_proxy' => 'In manchen F&auml;llen (Intranet, Rechner hinter einer Firewall...),
 kann ein <i>HTTP-Proxy</i> erforderlich sein, um die syndizierten Websites zu erreichen.
  In diesem Fall geben Sie seine Adresse im Format
@@ -855,7 +863,7 @@ Meistens kann dieses Feld aber leer bleiben.',
 'texte_recapitiule_liste_documents' => 'Diese Seite enth&auml;lt eine Liste der Dokumente, die Sie in Rubriken eingeordnet haben. Um die Angaben zu den Dokumenten zu bearbeiten, benutzen Sie bitte den Link zur jeweiligen Rubrik.',
 'texte_recuperer_base' => 'Datenbank reparieren',
 'texte_reference_mais_redirige' => 'Artikel Ihrer Website, der eine Umleitung zu einem anderen URL enth&auml;lt.',
-'texte_referencement_automatique' => '<MODIF><b>Automatische Verlinkung einer Website</b><br />Sie k&ouml;nnen eine Website im Schnellverfahren verlinken, indem Sie seinen URL oder den seiner Backend-Datei angeben. SPIP wird dann die Daten der Website selbst&auml;ndig einlesen (Titel, Beschreibung ...).',
+'texte_referencement_automatique' => '<b>Automatische Verlinkung einer Website</b><br />Sie k&ouml;nnen eine Website im Schnellverfahren verlinken, indem Sie seinen URL oder den seiner Backend-Datei angeben. SPIP wird dann die Daten der Website selbst&auml;ndig einlesen (Titel, Beschreibung ...).',
 'texte_requetes_echouent' => '<b>Wenn manche SQL-Befehle ohne ersichtlichen Grund systematisch fehlschlagen, kann es an einer besch&auml;digten Datenbank liegen.</b><p>
 MySQL kann Tabellen reparieren, die besch&auml;digt worden sind. Starten Sie hier einen Reparaturversuch. Sollte das fehlschlagen, notieren Sie bitte die Fehlermeldung, die u.U. einen Hinweis auf den Grund des Problems gibt ...<p>
 Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf.<p>',
@@ -890,7 +898,10 @@ Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf
 'texte_travail_collaboratif' => 'Wenn es &ouml;fter vorkommt, dass mehrere Redakteure gemeinsam an Artikeln arbeiten, kann SPIP die vor kurzem &bdquo;ge&ouml;ffneten&ldquo; Artikel anzeigen, um gleichzeitige &Auml;nderungen vorzubeugen. Diese Funktion ist normalerweise abgeschaltet, um st&ouml;rende Meldungen zu reduzieren.',
 'texte_trop_resultats_auteurs' => 'Zu viele Ergebnisse f&uuml;r &bdquo;@cherche_auteur@&ldquo;. Bitte pr&auml;zisieren Sie Ihre Suchanfrage.',
 'texte_unpack' => 'neue Version laden.',
-'texte_utilisation_moteur_syndiques' => '<MODIF>Wenn Sie die Suchmaschine von SPIP einsetzen, k&ouml;nnen Sie syndizierte Artikel und Websites auf zwei Arten behandeln. <br />- Im einfachen Fall werden nur Titel und Beschreibung der Artikel durchsucht. <br /><img src=\'puce.gif\'> Die zweite, wesentlich leistungsf&auml;higere Methode erlaubt es, auch den Text der syndizierten Websites zu durchsuchen. Wenn Sie eine Website verlinken, erfasst SPIP vollautomatisch den Inhalt der Website selber. ',
+'texte_utilisation_moteur_syndiques' => 'Wenn Sie die Suchmaschine von SPIP einsetzen,
+ k&ouml;nnen Sie syndizierte Artikel und Websites auf zwei Arten behandeln. <br />- Im einfachsten Fall werden nur Titel und Beschreibung der Artikel durchsucht. <br />-
+ Die zweite, wesentlich leistungsf&auml;higere Methode erlaubt es, auch den Text der
+ syndizierten Websites zu durchsuchen. Wenn Sie eine Website verlinken, erfasst SPIP vollautomatisch den Inhalt der Website selber. ',
 'texte_utilisation_moteur_syndiques_2' => 'Diese Methode zwingt SPIP, die verlinkten Websites in regelm&auml;ssigen Abst&auml;nden abzurufen, wodurch Ihre Website etwas langsamer werden kann.',
 'texte_vide' => 'leer',
 'texte_vider_cache' => 'Cache leeren',
@@ -968,7 +979,7 @@ Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf
 'titre_sites_tous' => 'Verlinkte Websites',
 'titre_suivi_petition' => 'Petitionen verwalten',
 'titre_syndication' => 'Website Syndikation',
-'tls_ldap' => '<NEW>Transport Layer Security :',
+'tls_ldap' => 'Transport Layer Security:',
 'tout_dossier_upload' => 'Das ganze Verzeichnis @upload@',
 'trad_article_inexistant' => 'Es gibt keinen Artikel mit dieser Nummer.',
 'trad_article_traduction' => 'Alle Fassungen dieses Artikels:',
