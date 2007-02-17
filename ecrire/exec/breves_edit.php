@@ -19,8 +19,7 @@ include_spip ('inc/barre');
 // http://doc.spip.org/@exec_breves_edit_dist
 function exec_breves_edit_dist()
 {
-	global $connect_statut, $connect_id_rubrique, $spip_ecran;
-
+	global $connect_statut, $connect_id_rubrique;
 	$id_breve = intval(_request('id_breve'));
 	$id_rubrique  = intval(_request('id_rubrique'));
 	$new = _request('new');
@@ -53,54 +52,53 @@ function exec_breves_edit_dist()
 	}
 
 	if ($new != "oui") {
-	$result = spip_query("SELECT * FROM spip_breves WHERE id_breve=$id_breve");
+		$result = spip_query("SELECT * FROM spip_breves WHERE id_breve=$id_breve");
 
 	
-	if ($row=spip_fetch_array($result)) {
-		$id_breve=$row['id_breve'];
-		$titre=$row['titre'];
-		$texte=$row['texte'];
-		$lien_titre=$row['lien_titre'];
-		$lien_url=$row['lien_url'];
-		$statut=$row['statut'];
-		$id_rubrique=$row['id_rubrique'];
-		$extra = $row['extra'];
-	} 
-	else {
-		include_spip('minipres');
-		echo minipres();
-		exit;
-	}
+		if ($row=spip_fetch_array($result)) {
+			$id_breve=$row['id_breve'];
+			$titre=$row['titre'];
+			$texte=$row['texte'];
+			$lien_titre=$row['lien_titre'];
+			$lien_url=$row['lien_url'];
+			$statut=$row['statut'];
+			$id_rubrique=$row['id_rubrique'];
+			$extra = $row['extra'];
+			$onfocus = '';
+		} else {
+			include_spip('minipres');
+			echo minipres();
+			exit;
+		}
 
 	} else {
-	$titre = filtrer_entites(_T('titre_nouvelle_breve'));
-	$texte = "";
-	$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
-	$lien_titre='';
-	$lien_url='';
-	$statut = "prop";
-	$row = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique = ".intval($id_rubrique)));
-	$id_rubrique = $row['id_secteur'];
+		$titre = filtrer_entites(_T('titre_nouvelle_breve'));
+		$texte = "";
+		$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
+		$lien_titre='';
+		$lien_url='';
+		$statut = "prop";
+		$row = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique = ".intval($id_rubrique)));
+		$id_rubrique = $row['id_secteur'];
 	}
 
-pipeline('exec_init',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''));
+	pipeline('exec_init',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''));
 
-echo $commencer_page(_T('titre_page_breves_edit', array('titre' => $titre)), "naviguer", "breves", $id_rubrique);
+	echo $commencer_page(_T('titre_page_breves_edit', array('titre' => $titre)), "naviguer", "breves", $id_rubrique);
 
 
-debut_grand_cadre();
+	debut_grand_cadre();
+	echo afficher_hierarchie($id_rubrique);
 
-echo afficher_hierarchie($id_rubrique);
-
-fin_grand_cadre();
-debut_gauche();
-if ($new != 'oui' AND ($connect_statut=="0minirezo" OR $statut=="prop")) {
+	fin_grand_cadre();
+	debut_gauche();
+	if ($new != 'oui' AND ($connect_statut=="0minirezo" OR $statut=="prop")) {
 	# affichage sur le cote des images, en reperant les inserees
 	# note : traiter_modeles($texte, true) repere les doublons
 	# aussi efficacement que propre(), mais beaucoup plus rapidement
-	traiter_modeles("$titre$texte", true);
-	afficher_documents_colonne($id_breve, "breve");
-}
+		traiter_modeles("$titre$texte", true);
+		afficher_documents_colonne($id_breve, "breve");
+	}
 echo pipeline('affiche_gauche',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''));
 creer_colonne_droite();
 echo pipeline('affiche_droite',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''));
@@ -122,19 +120,11 @@ if ($new != "oui") {
 	echo "</td></tr></table><br />";
 }
 
-
 if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	if ($id_breve) $lien = "id_breve=$id_breve";
 
 	$titre = entites_html($titre);
 	$lien_titre = entites_html($lien_titre);
-
-	$form = _T('entree_titre_obligatoire')
-	. "<input type='text' class='formo' name='titre' value=\"$titre\" size='40' $onfocus />"
-
-
-	/// Dans la rubrique....
-	. "<input type='hidden' name='id_rubrique_old' value=\"$id_rubrique\" /><br />";
 
 	if ($id_rubrique == 0) $logo_parent = "racine-site-24.gif";
 	else {
@@ -147,26 +137,19 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 		else $logo_parent = "rubrique-24.gif";
 	}
 
-
-	$form .= debut_cadre_couleur("$logo_parent", true, "",_T('entree_interieur_rubrique').aide ("brevesrub"));
-
 	// selecteur de rubrique (en general pas d'ajax car toujours racine)
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
-	$form .= $chercher_rubrique($id_rubrique, 'breve', ($statut == 'publie'));
 
-	$form .= fin_cadre_couleur(true);
-
-	$form .= pipeline('affiche_gauche',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''));
-
-	
-	if ($spip_ecran == "large") $rows = 28;
-	else $rows = 15;
-	
-	$form .= "<br /><b>"._T('entree_texte_breve')."</b><br />\n"
-	. afficher_barre('document.formulaire.texte')
-	. "<textarea name='texte' ".$GLOBALS['browser_caret']." rows='$rows' class='formo' cols='40'>"
-	. entites_html($texte)
-	. "</textarea><br />\n"
+	$form = _T('entree_titre_obligatoire')
+	. "<input type='text' class='formo' name='titre' value=\"$titre\" size='40' $onfocus />"
+	 . "<input type='hidden' name='id_rubrique_old' value=\"$id_rubrique\" /><br />"
+	. debut_cadre_couleur($logo_parent, true, "",_T('entree_interieur_rubrique').aide ("brevesrub"))
+	. $chercher_rubrique($id_rubrique, 'breve', ($statut == 'publie')) 
+	. fin_cadre_couleur(true)
+	 . pipeline('affiche_gauche',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''))
+	. "<br /><b>"._T('entree_texte_breve')."</b><br />\n"
+	. afficher_textarea_barre($texte)
+	. "<br />\n"
 	. _T('entree_liens_sites')
 	. aide ("breveslien")
 	. "<br />\n"

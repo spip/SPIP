@@ -217,4 +217,12 @@ spip_log('entites_unicode() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAM
 	return charset2unicode($texte);
 }
 
+
+// utiliser directement le corps a present.
+
+// http://doc.spip.org/@afficher_claret
+function afficher_claret() {
+	include_spip('inc/layer');
+	return $GLOBALS['browser_caret'];
+}
 ?>

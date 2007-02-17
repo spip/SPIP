@@ -124,12 +124,19 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	return $ret;
 }
 
-// pour compatibilite arriere. utiliser directement le corps a present.
+function afficher_textarea_barre($texte, $forum=false)
+{
+	global $spip_display, $spip_ecran;
 
-// http://doc.spip.org/@afficher_claret
-function afficher_claret() {
-	include_spip('inc/layer');
-	return $GLOBALS['browser_caret'];
+	$rows = ($spip_ecran == "large") ? 28 : 15;
+
+	return (($spip_display == 4) ? '' :
+		afficher_barre('document.formulaire.texte', $forum))
+	. "<textarea name='texte' id='texte' "
+	. $GLOBALS['browser_caret']
+	. " rows='$rows' class='formo' cols='40'>"
+	. entites_html($texte)
+	. "</textarea>\n";
 }
 
 ?>
