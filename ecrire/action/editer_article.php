@@ -145,7 +145,7 @@ function revisions_articles ($id_article, $c=false) {
 }
 
 
-// $c est un array ('statut', 'id_rubrique')
+// $c est un array ('statut', 'id_parent' = changement de rubrique)
 //
 // statut et rubrique sont lies, car un admin restreint peut deplacer
 // un article publie vers une rubrique qu'il n'administre pas
