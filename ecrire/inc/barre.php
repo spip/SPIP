@@ -124,6 +124,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	return $ret;
 }
 
+// http://doc.spip.org/@afficher_textarea_barre
 function afficher_textarea_barre($texte, $forum=false)
 {
 	global $spip_display, $spip_ecran;
