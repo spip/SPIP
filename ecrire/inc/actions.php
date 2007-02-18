@@ -220,7 +220,7 @@ function determine_upload()
 
 	if (!$connect_statut) {
 		$auth = charger_fonction('auth', 'inc');
-		$auth = $auth();
+		if ($auth()) {echo minipres();exit;}
 	}
 	if ($connect_statut != '0minirezo') return false;
 	$repertoire = _DIR_TRANSFERT;

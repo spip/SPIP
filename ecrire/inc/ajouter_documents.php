@@ -306,7 +306,7 @@ function traite_svg($file)
 	// Trop expeditif, a ameliorer
 
 	$auth = charger_fonction('auth', 'inc');
-	$auth();
+	if ($auth()) {echo minipres();exit;}
 
 	if ($connect_statut != '0minirezo') {
 		include_spip('inc/texte');
