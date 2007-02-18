@@ -133,9 +133,10 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 			} else $lien = generer_url_action('cookie');
 		}
 	}
-	// attention, en Ajax ce select doit etre suivi par le submit
+	// attention, en Ajax ce select doit etre suivi de
+	// <span><input type='submit'
 	$change = ($lien === 'ajax')
-	? "\nonchange=\"this.nextSibling.style.visibility='visible';\""
+	? "\nonchange=\"this.nextSibling.firstChild.style.visibility='visible';\""
 	: ("\nonchange=\"document.location.href='"
 	   . parametre_url($lien, 'url', str_replace('&amp;', '&', $cible))
 	   ."&amp;$nom_select='+this.options[this.selectedIndex].value\"");
