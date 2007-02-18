@@ -73,7 +73,7 @@ function install_debut_html($titre = 'AUTO', $onLoad = '') {
 	font-size: 0.8em;
 	font-family: Verdana,Arial,Sans,sans-serif; }\n".
 	  "\n\n]]>\n--></style>\n\n
-	<script type='text/javascript' src='" . url_de_base() 
+	<script type='text/javascript' src='"
 	  . _DIR_JAVASCRIPT . "spip_barre.js'></script>
 </head>
 <body".$onLoad.">
