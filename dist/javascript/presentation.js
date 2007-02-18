@@ -48,8 +48,10 @@ function selec_statut(id, type, decal, puce, script) {
 	changestyle (bloc, 'marginLeft', decal+'px');
 	cacher (bloc);
 
- // eventuel message d'erreur (TODO)
-	$.get(script, function (c) {if (!c)node.src = puce; else alert(c);});
+	$.get(script, function (c) {if (!c)node.src = puce; else {
+				      r = window.open();
+				      r.document.write(c);
+				      r.document.close();}})
 }
 
 function prepare_selec_statut(nom, type, id, action)
