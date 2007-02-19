@@ -453,8 +453,10 @@ function taille_en_octets ($taille) {
 // Rend une chaine utilisable sans dommage comme attribut HTML
 // http://doc.spip.org/@attribut_html
 function attribut_html($texte) {
-	$texte = ereg_replace('"', '&quot;', supprimer_tags($texte));
-	return $texte;
+	$texte = texte_backend(supprimer_tags($texte));
+	$texte = str_replace(array("'",'"'),array('&#039;', '&#034;'), $texte);
+	
+	return preg_replace("/&(?![A-Za-z]{0,4}\w{2,3};|#[0-9]{2,5};)/","&#38;" , $texte);
 }
 
 // Vider les url nulles comme 'http://' ou 'mailto:'
