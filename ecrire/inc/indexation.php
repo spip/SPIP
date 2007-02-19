@@ -200,7 +200,7 @@ function mots_indexation($texte, $min_long = 3) {
 	$texte = strtolower($texte);
 
 	// Retourner sous forme de table
-	return preg_split("/ +/", trim($texte));
+	return pipeline('mots_indexation',array('args'=>array('min_long'=>$min_long),'data'=>preg_split("/ +/", trim($texte))));
 }
 
 // http://doc.spip.org/@indexer_chaine
@@ -744,19 +744,12 @@ function requete_dico($val, $min_long = 3) {
 	//set logical operator between the various where parts
 	$val = $mod[2];
 	// cas normal
+	$res = array();
 	if (strlen($val) > $min_long)
-	  return array("dico LIKE "._q($val. "%"), "dico = " . _q($val),$mode);
-	else {
-		if (preg_match("/^([A-Z][0-9A-Z]{1,".($min_long - 1)."})$/",$val))
-			return array("dico = "._q($val."___"), "dico = "._q($val."___"),$mode);
-		else if (strlen($val)==$min_long)
-			return array("dico LIKE "._q($val."_%"), "dico = "._q($val),$mode);
-		else if (strlen($val))
-			return array("dico LIKE "._q($val.substr("______",0,$min_long+1-strlen($val))), "dico = " . _q($val),$mode);
-		else
-			return array("0=1","0=1");
-	}
-
+	  $res = array("dico LIKE "._q($val. "%"), "dico = " . _q($val),$mode);
+	else
+		$res = array("dico = "._q($val."___"), "dico = "._q($val."___"),$mode);
+	return pipeline('requete_dico',array('args'=>array('val'=>$val,'min_long'=>$min_long),'data'=>$res));
 }
 
 

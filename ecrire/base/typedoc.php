@@ -50,7 +50,8 @@ $tables_sequences = array(
 			  'swf' => 'Flash',
 			  'wav' => 'WAV',
 			  'wmv' => 'Windows Media',
-			  'svg' => 'Scalable Vector Graphics'
+			  'svg' => 'Scalable Vector Graphics',
+				'mp4' => 'MPEG4'
 			  );
 
 // Documents varies
@@ -106,7 +107,8 @@ $tables_documents = array(
 			'ott' => 'opendocument text-template',
 			'ots' => 'opendocument spreadsheet-template',
 			'otp' => 'opendocument presentation-template',
-			'otg' => 'opendocument graphics-template'
+			'otg' => 'opendocument graphics-template',
+		
 			  );
 
 $tables_mime = array(
@@ -139,6 +141,7 @@ $tables_mime = array(
 		'wav'=>'audio/x-wav',
 		'wmv'=>'video/x-ms-wmv',
 		'svg'=>'image/svg+xml',
+		'mp4' => 'application/mp4',
 
 		// Documents varies
 		'ai' =>'application/illustrator',
@@ -193,5 +196,6 @@ $tables_mime = array(
 		'ots' => 'application/vnd.oasis.opendocument.spreadsheet-template',
 		'otp' => 'application/vnd.oasis.opendocument.presentation-template',
 		'otg' => 'application/vnd.oasis.opendocument.graphics-template'
+		
 	);
 ?>

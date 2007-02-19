@@ -1297,6 +1297,12 @@ function maj_base($version_cible = 0) {
 		}
 		maj_version('1.925');
 	}
+	// Ajout de MP4
+	if (upgrade_vers(1.926, $version_installee, $version_cible)) {
+		spip_query("INSERT IGNORE INTO spip_types_documents (extension, titre, inclus) VALUES ('mp4', 'MPEG4', 'embed')");
+		spip_query("UPDATE spip_types_documents	SET mime_type='application/mp4' WHERE extension='mp4'");
+		maj_version('1.926');
+	}
 
 }
 
