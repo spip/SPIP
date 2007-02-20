@@ -25,13 +25,6 @@ function public_stats_dist() {
 	$_SERVER['HTTP_USER_AGENT']))
 		return;
 
-	// Ne pas compter les visiteurs sur les flux rss (qui sont pourtant
-	// des pages web comme les autres) [hack pourri en attendant de trouver
-	// une meilleure idee ?]
-	if (preg_match(',^backend,', $GLOBALS['fond']))
-		return;
-
-
 	// Identification du client
 	$client_id = substr(md5(
 		$GLOBALS['ip'] . $_SERVER['HTTP_USER_AGENT']
