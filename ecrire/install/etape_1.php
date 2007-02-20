@@ -52,7 +52,7 @@ function install_etape_1_dist()
 		array(
 			'adresse_db' => array(
 				'label' => _T('entree_base_donnee_2'),
-				'value' => $adresse_db
+				'valeur' => $adresse_db
 			),
 		)
 	);
@@ -61,7 +61,7 @@ function install_etape_1_dist()
 		array(
 			'login_db' => array(
 				'label' => _T('entree_login_connexion_2'),
-				'value' => $login_db
+				'valeur' => $login_db
 			),
 		)
 	);
@@ -70,7 +70,7 @@ function install_etape_1_dist()
 		array(
 			'pass_db' => array(
 				'label' => _T('entree_mot_passe_2'),
-				'value' => $pass_db
+				'valeur' => $pass_db
 			),
 		)
 	);
