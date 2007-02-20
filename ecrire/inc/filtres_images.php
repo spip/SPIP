@@ -50,7 +50,7 @@ function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
 function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_creation = NULL) {
 	if (strlen($img)==0) return false;
 	
-	$source = extraire_attribut($img, 'src');
+	$source = trim(extraire_attribut($img, 'src'));
 	if (($p=strpos($source,'?'))!==FALSE)
 		$source=substr($source,0,$p);
 	if (strlen($source) < 1){
