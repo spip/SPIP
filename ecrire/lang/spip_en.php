@@ -193,7 +193,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   Please check that the case of the letters in the names of these directories match what is displayed
   above. If they don\'t, rename the directories using your FTP client in order to correct the error.</p>
   <p>Once this is done, you can',
-'dirs_repertoires_suivants' => '<p><b>The following directories do not have write permission: </b></p><ul>@bad_dirs@.</ul>
+'dirs_repertoires_suivants' => '<p><b>The following directories do not have write permission: </b></p><ul>@bad_dirs@</ul>
 <p>To change this, use your FTP client to set access permissions for each
  of these directories. The procedure is detailed in the installation guide.</p>
   <p>Once you have done this, you can ',
