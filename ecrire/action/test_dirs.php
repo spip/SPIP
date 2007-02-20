@@ -16,6 +16,8 @@ if (defined("_TEST_DIRS")) return;
 define("_TEST_DIRS", "1");
 
 include_spip('inc/minipres');
+include_spip('inc/lang');
+utiliser_langue_visiteur();
 
 //
 // Tente d'ecrire
