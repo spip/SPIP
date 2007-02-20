@@ -126,6 +126,14 @@ if (defined('_INC_PUBLIC')) {
 
 	// Execution de la page calculee
 
+	// decomptage des visites, on peut forcer a oui ou non avec le header X-Spip-Visites
+	// par defaut on ne compte que les pages en html (ce qui exclue les js,css et flux rss)
+	$spip_compter_visites = $html?'oui':'non';
+	if (isset($page['entetes']['X-Spip-Visites'])){
+		$spip_compter_visites = in_array($page['entetes']['X-Spip-Visites'],array('oui','non'))?$page['entetes']['X-Spip-Visites']:$spip_compter_visites;
+		unset($page['entetes']['X-Spip-Visites']);
+	}
+	
 	// 0. xml-hack
 	if ($xml_hack = isset($page['entetes']['X-Xml-Hack']))
 		unset($page['entetes']['X-Xml-Hack']);
@@ -210,7 +218,8 @@ if (defined('_INC_PUBLIC')) {
 	echo pipeline('affichage_final', $page['texte']);
 
 	// Gestion des statistiques du site public
-	if ($GLOBALS['meta']["activer_statistiques"] != "non") {
+	if (($GLOBALS['meta']["activer_statistiques"] != "non")
+	  AND $spip_compter_visites!='non') {
 		$stats = charger_fonction('stats', 'public');
 		$stats();
 	}
