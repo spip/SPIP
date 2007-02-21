@@ -215,7 +215,7 @@ function formulaire_taille($document) {
 // http://doc.spip.org/@date_formulaire_legender
 function date_formulaire_legender($date, $id_document) {
 
-	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)){
+	if (preg_match(",([0-9]{4})-([0-9]{2})-([0-9]{2}),", $date, $regs)){
 		$mois = $regs[2];
 		$jour = $regs[3];
 		$annee = $regs[1];

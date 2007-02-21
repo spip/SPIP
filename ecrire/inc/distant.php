@@ -347,8 +347,7 @@ function recuperer_infos_distantes($source, $max=0) {
 	if (preg_match(',^image/(jpeg|gif|png|swf),', $mime_type)) {
 		if ($max == 0
 		    AND $a['taille'] < 1024*1024
-		AND ereg(",".$a['extension'].",",
-		','.$GLOBALS['meta']['formats_graphiques'].',')){
+		    AND (strpos($GLOBALS['meta']['formats_graphiques'],$a['extension'])!==false) ){
 			$a = recuperer_infos_distantes($source, 1024*1024);
 		}
 		else if ($a['body']) {

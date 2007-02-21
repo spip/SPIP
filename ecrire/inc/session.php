@@ -81,7 +81,7 @@ function supprimer_sessions($id_auteur) {
 	$dir = opendir(_DIR_SESSIONS);
 	$t = time()  - (48 * 3600);
 	while(($f = readdir($dir)) !== false) {
-		if (ereg("^session_([0-9]+)_[a-z0-9]+\.php[3]?$", $f, $regs)){
+		if (preg_match(",^session_([0-9]+)_[a-z0-9]+\.php[3]?$,", $f, $regs)){
 			$f = _DIR_SESSIONS . $f;
 			if (($regs[1] == $id_auteur) OR ($t > filemtime($f)))
 				@unlink($f);
@@ -159,7 +159,7 @@ function rejouer_session()
 //
 // http://doc.spip.org/@fichier_session
 function fichier_session($id_session, $alea) {
-	if (ereg("^([0-9]+_)", $id_session, $regs))
+	if (preg_match(",^([0-9]+_),", $id_session, $regs))
 		$id_auteur = $regs[1];
 		
 	$repertoire = _DIR_SESSIONS;

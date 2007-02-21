@@ -88,8 +88,7 @@ function boutons_rotateurs($document, $type, $id, $id_document, $script, $id_vig
 	// qu'elle n'a pas de vignette perso ; et qu'on a la bibli !
 	if ($document['distant']!='oui' AND !$id_vignette
 	AND isset($ftype[$document['id_type']])
-	AND strstr($GLOBALS['meta']['formats_graphiques'],
-		   $ftype[$document['id_type']])
+	AND (strpos($GLOBALS['meta']['formats_graphiques'], $ftype[$document['id_type']])!==false)
 	AND ($process == 'imagick'
 		OR $process == 'gd2'
 		OR $process == 'convert'

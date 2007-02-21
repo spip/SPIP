@@ -29,9 +29,9 @@ function changer_langue($lang) {
 	if (!$lang)
 		return false;
 
-	if (ereg(",$lang,", $liste_langues)
+	if (strpos($liste_langues,",$lang,")!==false
 	OR ($lang = preg_replace(',_.*,', '', $lang)
-	AND ereg(",$lang,", $liste_langues))) {
+	AND strpos($liste_langues,",$lang,")!==false)) {
 
 		$GLOBALS['spip_lang'] = $lang;
 		$spip_lang_rtl =   lang_dir($lang, '', '_rtl');
@@ -86,7 +86,7 @@ function lang_typo($lang) {
 function changer_typo($lang = '', $source = '') {
 	global $lang_objet, $lang_dir, $dir_lang;
 
-	if (ereg("^(article|rubrique|breve|auteur)([0-9]+)", $source, $regs)) {
+	if (preg_match(",^(article|rubrique|breve|auteur)([0-9]+),", $source, $regs)) {
 		$r = spip_fetch_array(spip_query("SELECT lang FROM spip_".$regs[1]."s WHERE id_".$regs[1]."=".$regs[2]));
 		$lang = $r['lang'];
 	}
@@ -332,7 +332,7 @@ function init_langues() {
 	if (!$all_langs || !$langue_site || !_DIR_RESTREINT) {
 		if (!$d = @opendir(repertoire_lang())) return;
 		while (($f = readdir($d)) !== false) {
-			if (ereg('^spip_([a-z_]+)\.php[3]?$', $f, $regs))
+			if (preg_match(',^spip_([a-z_]+)\.php[3]?$,', $f, $regs))
 				$toutes_langs[] = $regs[1];
 		}
 		closedir($d);
@@ -344,7 +344,7 @@ function init_langues() {
 			$all_langs = $all_langs2;
 			if (!$langue_site) {
 				// Initialisation : le francais par defaut, sinon la premiere langue trouvee
-				if (ereg(',fr,', ",$all_langs,")) $langue_site = 'fr';
+				if (strpos(',fr,',",$all_langs,")!==false) $langue_site = 'fr';
 				else list(, $langue_site) = each($toutes_langs);
 				ecrire_meta('langue_site', $langue_site);
 			}

@@ -168,7 +168,7 @@ function verif_butineur() {
 
 	global $browser_name, $browser_version;
 	global $browser_description, $browser_rev, $browser_layer, $browser_barre;
-	ereg("^([A-Za-z]+)/([0-9]+\.[0-9]+) (.*)$", $_SERVER['HTTP_USER_AGENT'], $match);
+	preg_match(",^([A-Za-z]+)/([0-9]+\.[0-9]+) (.*)$,", $_SERVER['HTTP_USER_AGENT'], $match);
 	$browser_name = $match[1];
 	$browser_version = $match[2];
 	$browser_description = $match[3];
@@ -205,7 +205,7 @@ function verif_butineur() {
 	else if (eregi("mozilla", $browser_name) AND $browser_version >= 5) {
 		$browser_layer = http_script('', _DIR_JAVASCRIPT . 'layer.js','');
 		// Numero de version pour Mozilla "authentique"
-		if (ereg("rv:([0-9]+\.[0-9]+)", $browser_description, $match))
+		if (preg_match(",rv:([0-9]+\.[0-9]+),", $browser_description, $match))
 			$browser_rev = doubleval($match[1]);
 		// Autres Gecko => equivalents 1.4 par defaut (Galeon, etc.)
 		else if (strpos($browser_description, "Gecko") and !strpos($browser_description, "KHTML"))

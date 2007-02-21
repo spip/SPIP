@@ -168,8 +168,8 @@ function erreur_upload_trop_gros() {
 //
 // http://doc.spip.org/@accepte_fichier_upload
 function accepte_fichier_upload ($f) {
-	if (!ereg(".*__MACOSX/", $f)
-	AND !ereg("^\.", basename($f))) {
+	if (!preg_match(",.*__MACOSX/,", $f)
+	AND !preg_match(",^\.,", basename($f))) {
 		$ext = corriger_extension((strtolower(substr(strrchr($f, "."), 1))));
 		$row =  @spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE extension=" . _q($ext) . " AND upload='oui'"));
 		return $row;
