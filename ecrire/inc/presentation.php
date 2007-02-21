@@ -1696,8 +1696,10 @@ function debut_droite($rubrique="", $return= false) {
 
 	$res .= "\n<td style='width:" . $largeur. "px' valign='top' align='" . $spip_lang_left."' rowspan='1' class='serif'>";
 
-	// touche d'acces rapide au debut du contenu
-	$res .= "\n<a name='saut' href='#saut' accesskey='s'></a>\n";
+	// touche d'acces rapide au debut du contenu : z
+	// Attention avant c'etait 's' mais c'est incompatible avec
+	// le ctrl-s qui fait "enregistrer"
+	$res .= "\n<a name='saut' href='#saut' accesskey='z'></a>\n";
 
 	if ($return) return $res; else echo $res;
 }
