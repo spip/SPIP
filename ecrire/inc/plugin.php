@@ -104,7 +104,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz'){
 	// charger_plugins_options.php
 	// charger_plugins_fonctions.php
 	foreach(array('options','fonctions') as $charge){
-		$s = "";
+		$s = "error_reporting(SPIP_ERREUR_REPORT_INCLUDE_PLUGINS);\n";
 		$splugs = "";
 		if (is_array($infos)){
 			foreach($infos as $plug=>$info){
@@ -118,12 +118,13 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz'){
 				}
 				if (isset($info[$charge])){
 					foreach($info[$charge] as $file){
-						$s .= "@include_once _DIR_PLUGINS.'$plug/".trim($file)."';\n";
+						$s .= "include_once _DIR_PLUGINS.'$plug/".trim($file)."';\n";
 						$liste_fichier_verif[] = "_DIR_PLUGINS.'$plug/".trim($file)."'";
 					}
 				}
 			}
 		}
+		$s .= "error_reporting(SPIP_ERREUR_REPORT);\n";
 		ecrire_fichier(_DIR_TMP."charger_plugins_$charge.php",
 			$start_file . $splugs . $s . $end_file);
 	}
@@ -185,7 +186,7 @@ function pipeline_precompile(){
 			$s_call .= '$val = minipipe(\''.$fonc.'\', $val);'."\n";
 			if (isset($spip_matrice[$fonc])){
 				$file = $spip_matrice[$fonc];
-				$s_inc .= '@include_once(';
+				$s_inc .= 'include_once(';
 				// si _DIR_PLUGINS est dans la chaine, on extrait la constante
 				if (($p = strpos($file,'_DIR_PLUGINS'))!==FALSE){
 					$f = "";
@@ -205,7 +206,9 @@ function pipeline_precompile(){
 		}
 		$content .= "// Pipeline $action \n";
 		$content .= "function execute_pipeline_$action(\$val){\n";
+		$content .= $s_inc?"error_reporting(SPIP_ERREUR_REPORT_INCLUDE_PLUGINS);\n":"";
 		$content .= $s_inc;
+		$content .= $s_inc?"error_reporting(SPIP_ERREUR_REPORT);\n":"";
 		$content .= $s_call;
 		$content .= "return \$val;\n}\n\n";
 	}
