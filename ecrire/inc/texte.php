@@ -274,7 +274,7 @@ function couper($texte, $taille=50) {
 	$texte = str_replace("\r", "\n", $texte);
 
 	// sauts de ligne et paragraphes
-	$texte = preg_replace("/\n\n+/" "\r", $texte);
+	$texte = preg_replace("/\n\n+/", "\r", $texte);
 	$texte = preg_replace("/<(p|br)( [^>]*)?".">/", "\r", $texte);
 
 	// supprimer les traits, lignes etc
