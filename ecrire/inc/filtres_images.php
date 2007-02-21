@@ -592,6 +592,7 @@ function image_ratio ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
 }
 
 // Calculer le ratio ajuste sur la plus petite dimension
+// http://doc.spip.org/@ratio_passe_partout
 function ratio_passe_partout ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
 	$ratioWidth = $srcWidth/$maxWidth;
 	$ratioHeight = $srcHeight/$maxHeight;
@@ -611,6 +612,7 @@ function ratio_passe_partout ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
 		min($ratioWidth,$ratioHeight));
 }
 
+// http://doc.spip.org/@image_passe_partout
 function image_passe_partout($img,$taille_x = -1, $taille_y = -1,$force = false,$cherche_image=false,$process='AUTO'){
 	list ($hauteur,$largeur) = taille_image($img);
 	if ($taille_x == -1)
@@ -650,6 +652,7 @@ function image_reduire($img, $taille = -1, $taille_y = -1, $force=false, $cherch
 	return process_image_reduire($fonction,$img,$taille,$taille_y,$force,$cherche_image,$process);
 }
 
+// http://doc.spip.org/@process_image_reduire
 function process_image_reduire($fonction,$img,$taille,$taille_y,$force,$cherche_image,$process){
 	$image = false;
 	if (($process == 'AUTO') AND isset($GLOBALS['meta']['image_process']))
