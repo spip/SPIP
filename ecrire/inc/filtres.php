@@ -192,8 +192,8 @@ function taille_image($img) {
 	// $meme remplace $logo, pour unifier certains fichiers dont on sait qu'ils ont la meme taille
 	$mem = $logo;
 	if (strrpos($mem,"/") > 0) $mem = substr($mem, strrpos($mem,"/")+1, strlen($mem));
-	$mem = ereg_replace("\-flip\_v|\-flip\_h", "", $mem);
-	$mem = ereg_replace("\-nb\-[0-9]+(\.[0-9]+)?\-[0-9]+(\.[0-9]+)?\-[0-9]+(\.[0-9]+)?", "", $mem);
+	$mem = preg_replace(",\-flip\_v|\-flip\_h,", "", $mem);
+	$mem = preg_replace(",\-nb\-[0-9]+(\.[0-9]+)?\-[0-9]+(\.[0-9]+)?\-[0-9]+(\.[0-9]+)?,", "", $mem);
 
 	$srcsize = false;
 	if (isset($largeur_img[$mem]))
@@ -345,7 +345,7 @@ function supprimer_tags($texte, $rempl = "") {
 // Convertit les <...> en la version lisible en HTML
 // http://doc.spip.org/@echapper_tags
 function echapper_tags($texte, $rempl = "") {
-	$texte = ereg_replace("<([^>]*)>", "&lt;\\1&gt;", $texte);
+	$texte = preg_replace("/<([^>]*)>/", "&lt;\\1&gt;", $texte);
 	return $texte;
 }
 
@@ -375,9 +375,9 @@ function liens_ouvrants ($texte) {
 // Transformer les sauts de paragraphe en simples passages a la ligne
 // http://doc.spip.org/@PtoBR
 function PtoBR($texte){
-	$texte = eregi_replace("</p>", "\n", $texte);
-	$texte = eregi_replace("<p([[:space:]][^>]*)?".">", "<br />", $texte);
-	$texte = ereg_replace("^[[:space:]]*<br />", "", $texte);
+	$texte = preg_replace("@</p>@i", "\n", $texte);
+	$texte = preg_replace("@<p([\s][^>]*)?".">@i", "<br />", $texte);
+	$texte = preg_replace("@^[\s]*<br />@", "", $texte);
 	return $texte;
 }
 
@@ -510,7 +510,7 @@ function extraire_date($texte) {
 function antispam($texte) {
 	include_spip('inc/acces');
 	$masque = creer_pass_aleatoire(3);
-	return ereg_replace("@", " $masque ", $texte);
+	return preg_replace("/@/", " $masque ", $texte);
 }
 
 // |sinon{rien} : affiche "rien" si la chaine est vide, affiche la chaine si non vide
@@ -548,7 +548,7 @@ function normaliser_date($date) {
 		if (ereg("^([12][0-9]{3})([-/]00)?( [-0-9:]+)?$", $date, $regs))
 			$date = $regs[1]."-01-01".$regs[3];
 		else if (ereg("^([12][0-9]{3}[-/][01]?[0-9])([-/]00)?( [-0-9:]+)?$", $date, $regs))
-			$date = ereg_replace("/","-",$regs[1])."-01".$regs[3];
+			$date = preg_replace("@/@","-",$regs[1])."-01".$regs[3];
 		else
 			$date = date("Y-m-d H:i:s", strtotime($date));
 	}
@@ -902,8 +902,8 @@ function filtrer_ical($texte) {
 	#include_spip('inc/charsets');
 	$texte = html2unicode($texte);
 	$texte = unicode2charset(charset2unicode($texte, $GLOBALS['meta']['charset'], 1), 'utf-8');
-	$texte = ereg_replace("\n", " ", $texte);
-	$texte = ereg_replace(",", "\,", $texte);
+	$texte = preg_replace("/\n/", " ", $texte);
+	$texte = preg_replace("/,/", "\,", $texte);
 
 	return $texte;
 }

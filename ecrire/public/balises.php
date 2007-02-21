@@ -783,7 +783,7 @@ function calculer_balise_logo_dist ($p) {
 			$code_lien = str_replace('#'.$match[2], "'.".$c.".'", $code_lien);
 		}
 		// supprimer les '' disgracieux
-		$code_lien = ereg_replace("^''\.|\.''$", "", $code_lien);
+		$code_lien = preg_replace("@^''\.|\.''$@", "", $code_lien);
 	}
 
 	if ($flag_fichier)

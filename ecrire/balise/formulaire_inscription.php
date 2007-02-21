@@ -195,12 +195,12 @@ function envoyer_inscription_dist($ids, $nom, $mode, $id) {
 function test_login($nom, $mail) {
 	include_spip('inc/charsets');
 	$nom = strtolower(translitteration($nom));
-	$login_base = ereg_replace("[^a-zA-Z0-9_]", "_", $nom);
+	$login_base = preg_replace("/[^\w\d_]/", "_", $nom);
 
 	// il faut eviter que le login soit vraiment trop court
 	if (strlen($login_base) < 3) {
 		$mail = strtolower(translitteration(preg_replace('/@.*/', '', $mail)));
-		$login_base = ereg_replace("[^a-zA-Z0-9]", "_", $nom);
+		$login_base = preg_replace("/[^\w\d]/", "_", $nom);
 	}
 	if (strlen($login_base) < 3)
 		$login_base = 'user';

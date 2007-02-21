@@ -35,9 +35,9 @@ function creer_pass_aleatoire($longueur = 8, $sel = "") {
 		$pass .= $x;
 		$s = substr($s, 2);
 	}
-	$pass = ereg_replace("[./]", "a", $pass);
-	$pass = ereg_replace("[I1l]", "L", $pass);
-	$pass = ereg_replace("[0O]", "o", $pass);
+	$pass = preg_replace("@[./]@", "a", $pass);
+	$pass = preg_replace("@[I1l]@", "L", $pass);
+	$pass = preg_replace("@[0O]@", "o", $pass);
 	return $pass;
 }
 

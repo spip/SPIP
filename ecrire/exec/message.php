@@ -152,10 +152,10 @@ function http_ajouter_participants($ze_auteurs, $id_message)
 			}
 
 			if ($statut_auteur != $statut_old) {
-				$s =ereg_replace("0minirezo", _T('info_statut_administrateur'), $statut_auteur);
-				$s=ereg_replace("1comite", _T('info_statut_redacteur'), $s);
-				$s=ereg_replace("2redac", _T('info_statut_redacteur'), $s);
-				$s=ereg_replace("5poubelle", _T('info_statut_efface'), $s);
+				$s =str_replace(
+					array("0minirezo","1comite","2redac","5poubelle"),
+					array(_T('info_statut_administrateur'),_T('info_statut_redacteur'),_T('info_statut_redacteur'), _T('info_statut_efface')),
+					$statut_auteur);
 				$res .=  "\n<option value=\"x\"></option>";
 				$res .=  "\n<option value=\"x\"> " . $s . 's</option>';
 			}

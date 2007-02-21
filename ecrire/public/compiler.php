@@ -185,7 +185,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 
 
 	if (count($boucle->separateur))
-	  $code_sep = ("'" . ereg_replace("'","\'",join('',$boucle->separateur)) . "'"); 
+	  $code_sep = ("'" . preg_replace("/'/","\'",join('',$boucle->separateur)) . "'"); 
 
 	// La boucle doit-elle selectionner la langue ?
 	// -. par defaut, les boucles suivantes le font
@@ -471,7 +471,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 		switch($p->type) {
 		// texte seul
 		case 'texte':
-			$code = "'".ereg_replace("([\\\\'])", "\\\\1", $p->texte)."'";
+			$code = "'".preg_replace("/([\\\\'])/", "\\\\1", $p->texte)."'";
 
 			$commentaire= strlen($p->texte) . " signes";
 			$avant='';
@@ -483,9 +483,9 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 			$code = "";
 			foreach($p->traductions as $k => $v) {
 			  $code .= ",'" .
-			    ereg_replace("([\\\\'])", "\\\\1", $k) .
+			    preg_replace("/([\\\\'])/", "\\\\1", $k) .
 			    "' => '" .
-			    ereg_replace("([\\\\'])", "\\\\1", $v) .
+			    preg_replace("/([\\\\'])/", "\\\\1", $v) .
 			    "'";
 			}
 			$code = "multi_trad(array(" .
@@ -630,7 +630,7 @@ function code_boucle(&$boucles, $id, $nom)
 	  }
 
 	$pretty = "BOUCLE$id(".strtoupper($boucle->type_requete) . ")" .
-		ereg_replace("[\r\n]", " ", $pretty);
+		preg_replace("/[\r\n]/", " ", $pretty);
 
 	return $pretty;
 }
@@ -751,7 +751,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 		if (!function_exists($f)) $f = 'boucle_DEFAUT';
 		if (!function_exists($f)) $f = 'boucle_DEFAUT_dist';
 		$boucles[$id]->return = 
-			"function BOUCLE" . ereg_replace("-","_",$id) . $nom .
+			"function BOUCLE" . preg_replace("/-/","_",$id) . $nom .
 			'(&$Cache, &$Pile, &$doublons, &$Numrows, $SP) {' .
 			$f($id, $boucles) .
 			"\n}\n\n";

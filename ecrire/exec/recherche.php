@@ -64,7 +64,7 @@ function exec_recherche_dist()
 	$query_articles['WHERE']= ($testnum ? "(articles.id_article = $recherche)" :'') . $where;
 	$query_breves['WHERE']= ($testnum ? "(id_breve = $recherche)" : '') . $where;
 	$query_rubriques['WHERE']= ($testnum ? "(id_rubrique = $recherche)" : '') . $where;
-	$query_sites['WHERE']= ($testnum ? "(id_syndic = $recherche)" : '') . ereg_replace("titre LIKE", "nom_site LIKE",$where);
+	$query_sites['WHERE']= ($testnum ? "(id_syndic = $recherche)" : '') . preg_replace("/titre LIKE/", "nom_site LIKE",$where);
 
 	$query_articles['ORDER BY']= "date_modif DESC";
 	$query_breves['ORDER BY']= "maj DESC";

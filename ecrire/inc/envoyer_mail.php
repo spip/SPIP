@@ -132,9 +132,9 @@ function inc_envoyer_mail_dist($email, $sujet, $texte, $from = "", $headers = ""
 		$texte = wordwrap($texte);
 
 	if (os_serveur == 'windows') {
-		$texte = ereg_replace ("\r*\n","\r\n", $texte);
-		$headers = ereg_replace ("\r*\n","\r\n", $headers);
-		$sujet = ereg_replace ("\r*\n","\r\n", $sujet);
+		$texte = preg_replace ("@\r*\n@","\r\n", $texte);
+		$headers = preg_replace ("@\r*\n@","\r\n", $headers);
+		$sujet = preg_replace ("@\r*\n@","\r\n", $sujet);
 	}
 
 	switch($hebergeur) {

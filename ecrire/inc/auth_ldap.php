@@ -43,7 +43,7 @@ function auth_ldap_search($login, $pass)
 
 	// Attributs testes pour egalite avec le login
 	$atts = array('sAMAccountName', 'uid', 'login', 'userid', 'cn', 'sn');
-	$login_search = ereg_replace("[^-@._[:space:][:alnum:]]", "", $login); // securite
+	$login_search = preg_replace("/[^-@._\s\d\w]/", "", $login); // securite
 
 	// Tenter une recherche pour essayer de retrouver le DN
 	reset($atts);

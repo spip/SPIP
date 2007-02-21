@@ -97,7 +97,7 @@ function login_hebergeur() {
 	// Altern
 	else if (ereg('altern\.com$', $SERVER_NAME)) {
 		ereg('([^.]*\.[^.]*)$', $HTTP_HOST, $regs);
-		$login_hebergeur = ereg_replace('[^a-zA-Z0-9]', '_', $regs[1]);
+		$login_hebergeur = preg_replace('[^\w\d]', '_', $regs[1]);
 	}
 	// Free
 	else if (ereg('(.*)\.free\.fr$', $SERVER_NAME, $regs)) {
