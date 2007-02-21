@@ -591,6 +591,45 @@ function image_ratio ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
 		max($ratioWidth,$ratioHeight));
 }
 
+// Calculer le ratio ajuste sur la plus petite dimension
+function ratio_passe_partout ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
+	$ratioWidth = $srcWidth/$maxWidth;
+	$ratioHeight = $srcHeight/$maxHeight;
+
+	if ($ratioWidth <=1 AND $ratioHeight <=1) {
+		$destWidth = $srcWidth;
+		$destHeight = $srcHeight;
+	} else if ($ratioWidth > $ratioHeight) {
+		$destWidth = $srcWidth/$ratioHeight;
+		$destHeight = $maxHeight;
+	}
+	else {
+		$destWidth = $maxWidth;
+		$destHeight = $srcHeight/$ratioWidth;
+	}
+	return array (floor($destWidth), floor($destHeight),
+		min($ratioWidth,$ratioHeight));
+}
+
+function image_passe_partout($img,$taille_x = -1, $taille_y = -1,$force = false,$cherche_image=false,$process='AUTO'){
+	list ($hauteur,$largeur) = taille_image($img);
+	if ($taille_x == -1)
+		$taille_x = isset($GLOBALS['meta']['taille_preview'])?$GLOBALS['meta']['taille_preview']:150;
+	if ($taille_y == -1)
+		$taille_y = $taille;
+
+	if ($taille_x == 0 AND $taille_y > 0)
+		$taille_x = 1; # {0,300} -> c'est 300 qui compte
+	elseif ($taille_x > 0 AND $taille_y == 0)
+		$taille_y = 1; # {300,0} -> c'est 300 qui compte
+	elseif ($taille_x == 0 AND $taille_y == 0)
+		return '';
+	
+	list($destWidth,$destHeight,$ratio) = ratio_passe_partout($largeur,$hauteur,$taille_x,$taille_y);
+	$fonction = array('image_passe_partout', func_get_args());
+	return process_image_reduire($fonction,$img,$taille_x,$taille_y,$force,$cherche_image,$process);
+}
+
 // http://doc.spip.org/@image_reduire
 function image_reduire($img, $taille = -1, $taille_y = -1, $force=false, $cherche_image=false, $process='AUTO') {
 	// Determiner la taille x,y maxi
@@ -608,7 +647,10 @@ function image_reduire($img, $taille = -1, $taille_y = -1, $force=false, $cherch
 		return '';
 
 	$fonction = array('image_reduire', func_get_args());
+	return process_image_reduire($fonction,$img,$taille,$taille_y,$force,$cherche_image,$process);
+}
 
+function process_image_reduire($fonction,$img,$taille,$taille_y,$force,$cherche_image,$process){
 	$image = false;
 	if (($process == 'AUTO') AND isset($GLOBALS['meta']['image_process']))
 		$process = $GLOBALS['meta']['image_process'];
