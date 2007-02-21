@@ -331,7 +331,7 @@ function couper($texte, $taille=50) {
 // prendre <intro>...</intro> sinon couper a la longueur demandee
 // http://doc.spip.org/@couper_intro
 function couper_intro($texte, $long) {
-	$texte = extraire_multi(eregi_replace("(</?)intro>", "\\1intro>", $texte)); // minuscules
+	$texte = extraire_multi(preg_replace(",(</?)intro>,i", "\\1intro>", $texte)); // minuscules
 	$intro = '';
 	while ($fin = strpos($texte, "</intro>")) {
 		$zone = substr($texte, 0, $fin);
@@ -861,7 +861,7 @@ function traiter_tableau($bloc) {
 		// Sinon ligne normale
 		if ($l) {
 			// Gerer les listes a puce dans les cellules
-			if (ereg("\n-[*#]", $ligne))
+			if (strpos($ligne,"\n-*")!==false OR strpos($ligne,"\n-#")!==false)
 				$ligne = traiter_listes($ligne);
 
 			// Pas de paragraphes dans les cellules
@@ -1416,7 +1416,7 @@ function traiter_raccourcis($letexte) {
 	$letexte = "\n".trim($letexte);
 
 	// les listes
-	if (ereg("\n-[*#]", $letexte))
+	if (strpos($letexte,"\n-*")!==false OR strpos($letexte,"\n-#")!==false)
 		$letexte = traiter_listes($letexte);
 
 	// Puce

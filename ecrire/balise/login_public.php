@@ -102,7 +102,7 @@ function login_pour_tous($login, $cible, $action) {
 	$auth_http = '';	
 	if ($echec_cookie AND !$ignore_auth_http) {
 		if (($GLOBALS['flag_sapi_name']
-		     AND eregi("apache", @php_sapi_name()))
+		     AND preg_match(",apache,i", @php_sapi_name()))
 		OR preg_match(",^Apache.* PHP,", $_SERVER['SERVER_SOFTWARE']))
 			$auth_http = $pose_cookie;
 	}

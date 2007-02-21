@@ -195,7 +195,7 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false,
 			$headers = '';
 			while ($s = trim(fgets($f, 16384))) {
 				$headers .= $s."\n";
-				if (eregi('^Location: (.*)', $s, $r)) {
+				if (preg_match(',^Location: (.*),i', $s, $r)) {
 					include_spip('inc/filtres');
 					$location = suivre_lien($url, $r[1]);
 					spip_log("Location: $location");
@@ -380,7 +380,7 @@ function recuperer_infos_distantes($source, $max=0) {
 function init_http($get, $url, $refuse_gz=false, $uri_referer = '') {
 	$via_proxy = ''; $proxy_user = ''; $fopen = false;
 	$http_proxy = $GLOBALS['meta']["http_proxy"];
-	if (!eregi("^http://", $http_proxy))
+	if (strncmp("http://", $http_proxy,7)!=0)
 		$http_proxy = '';
 	else
 		$via_proxy = " (proxy $http_proxy)";

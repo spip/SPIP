@@ -327,12 +327,12 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 	      $par = array_shift($tri);
 	      $par = $par->texte;
     // par multi champ
-	      if (ereg("^multi[[:space:]]*(.*)$",$par, $m)) {
+	      if (preg_match(",^multi[\s]*(.*)$,",$par, $m)) {
 		  $texte = $boucle->id_table . '.' . trim($m[1]);
 		  $boucle->select[] =  " \".creer_objet_multi('".$texte."', \$GLOBALS['spip_lang']).\"" ;
 		  $order = "multi";
 	// par num champ(, suite)
-	      }	else if (ereg("^num[[:space:]]*(.*)$",$par, $m)) {
+	      }	else if (preg_match(",^num[\s]*(.*)$,",$par, $m)) {
 		  $texte = '0+' . $boucle->id_table . '.' . trim($m[1]);
 		  $suite = calculer_liste($tri, array(), $boucles, $boucle->id_parent);
 		  if ($suite !== "''")
@@ -552,10 +552,10 @@ function calculer_critere_parties_aux($idb, &$boucles, $param) {
 	if ($param[0]->type != 'texte')
 	  {
 	    $a1 = calculer_liste(array($param[0]), array('id_mere' => $idb), $boucles, $boucles[$idb]->id_parent);
-	  ereg('^ *(-([0-9]+))? *$', $param[1]->texte, $m);
+	  preg_match(',^ *(-([0-9]+))? *$,', $param[1]->texte, $m);
 	  return array("intval($a1)", ($m[2] ? $m[2] : 0));
 	  } else {
-	    ereg('^ *(([0-9]+)|n) *(- *([0-9]+)? *)?$', $param[0]->texte, $m);
+	    preg_match(',^ *(([0-9]+)|n) *(- *([0-9]+)? *)?$,', $param[0]->texte, $m);
 	    $a1 = $m[1];
 	    if (!$m[3])
 	      return array($a1, 0);
@@ -1168,7 +1168,7 @@ function calculer_critere_infixe_date($idb, &$boucles, $regs)
 
 // http://doc.spip.org/@calculer_param_date
 function calculer_param_date($date_compare, $date_orig) {
-	if (ereg("'\" *\.(.*)\. *\"'", $date_compare, $r)) {
+	if (preg_match(",'\" *\.(.*)\. *\"',", $date_compare, $r)) {
 	  $init = "'\" . (\$x = $r[1]) . \"'";
 	  $date_compare = '\'$x\'';
 	}

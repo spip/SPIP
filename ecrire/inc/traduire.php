@@ -112,7 +112,7 @@ function inc_traduire_dist($ori, $lang) {
 	}
 
 	// filet pour traduction pas finies 
-	if (($lang<>'fr') AND ereg("^<(NEW|MODIF)>", $text))
+	if (($lang<>'fr') AND preg_match(",^<(NEW|MODIF)>,", $text))
 		  $text = inc_traduire_dist($ori, 'fr');
 	$deja_vu[$lang][$code] = $text;
 

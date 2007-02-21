@@ -175,34 +175,34 @@ function verif_butineur() {
 	$browser_layer = '';
 	$browser_barre = '';
 
-	if (!eregi("opera", $browser_description)&&eregi("opera", $browser_name)) {
+	if (!preg_match(",opera,i", $browser_description)&&preg_match(",opera,i", $browser_name)) {
 		$browser_name = "Opera";
 		$browser_version = $match[2];
 		$browser_layer = (($browser_version < 7) ? '' :  http_script('', _DIR_JAVASCRIPT . 'layer.js',''));
 		$browser_barre = ($browser_version >= 8.5); 
 	}
-	else if (eregi("opera", $browser_description)) {
-		eregi("Opera ([^\ ]*)", $browser_description, $match);
+	else if (preg_match(",opera,i", $browser_description)) {
+		preg_match(",Opera ([^\ ]*),i", $browser_description, $match);
 		$browser_name = "Opera";
 		$browser_version = $match[1];
 		$browser_layer = (($browser_version < 7) ? '' :  http_script('', _DIR_JAVASCRIPT . 'layer.js',''));
 		$browser_barre = ($browser_version >= 8.5); 
 	}
-	else if (eregi("msie", $browser_description)) {
-		eregi("MSIE ([^;]*)", $browser_description, $match);
+	else if (preg_match(",msie,i", $browser_description)) {
+		preg_match(",MSIE ([^;]*),i", $browser_description, $match);
 		$browser_name = "MSIE";
 		$browser_version = $match[1];
 		$browser_layer = (($browser_version < 5) ? '' :  http_script('', _DIR_JAVASCRIPT . 'layer.js',''));
 		$browser_barre = ($browser_version >= 5.5);
 	}
-	else if (eregi("KHTML", $browser_description) &&
-		eregi("Safari/([^;]*)", $browser_description, $match)) {
+	else if (preg_match(",KHTML,i", $browser_description) &&
+		preg_match(",Safari/([^;]*),", $browser_description, $match)) {
 		$browser_name = "Safari";
 		$browser_version = $match[1];
 		$browser_layer = http_script('', _DIR_JAVASCRIPT . 'layer.js','');
 		$browser_barre = ($browser_version >= 5.0);
 	}
-	else if (eregi("mozilla", $browser_name) AND $browser_version >= 5) {
+	else if (preg_match(",mozilla,i", $browser_name) AND $browser_version >= 5) {
 		$browser_layer = http_script('', _DIR_JAVASCRIPT . 'layer.js','');
 		// Numero de version pour Mozilla "authentique"
 		if (preg_match(",rv:([0-9]+\.[0-9]+),", $browser_description, $match))
@@ -257,7 +257,7 @@ ondblclick='storeCaret(this);'");
 
 	// Hack pour forcer largeur des formo/forml sous Mozilla >= 1.7
 	// meme principe que le behavior win_width.htc pour MSIE
-$GLOBALS['browser_verifForm'] = (eregi("mozilla", $GLOBALS["browser_name"]) AND $GLOBALS["browser_rev"] >= 1.7) ?  "verifForm();" : "";
+$GLOBALS['browser_verifForm'] = (preg_match(",mozilla,i", $GLOBALS["browser_name"]) AND $GLOBALS["browser_rev"] >= 1.7) ?  "verifForm();" : "";
 
 // http://doc.spip.org/@http_script
 function http_script($script, $src='', $noscript='') {

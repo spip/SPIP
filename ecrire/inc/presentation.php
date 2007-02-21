@@ -337,7 +337,7 @@ function afficher_liste_display_neq4($largeurs, $t, $styles = '') {
 
 	global $spip_lang_left,$browser_name;
 
-	$evt = (eregi("msie", $browser_name) ? " onmouseover=\"changeclass(this,'tr_liste_over');\" onmouseout=\"changeclass(this,'tr_liste');\"" :'');
+	$evt = (preg_match(",msie,i", $browser_name) ? " onmouseover=\"changeclass(this,'tr_liste_over');\" onmouseout=\"changeclass(this,'tr_liste');\"" :'');
 
 	reset($largeurs);
 	if ($styles) reset($styles);

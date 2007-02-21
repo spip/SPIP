@@ -29,7 +29,7 @@ function action_virtualiser_dist() {
 // http://doc.spip.org/@action_virtualiser_post
 function action_virtualiser_post($r, $url)
 {
-	$url = eregi_replace("^ *https?://$", "", rtrim($url));
+	$url = preg_replace(",^ *https?://$,i", "", rtrim($url));
 	if ($url) $url = corriger_caracteres("=$url");
 	spip_query("UPDATE spip_articles SET chapo=" . _q($url) . ", date_modif=NOW() WHERE id_article=" . $r[1]);
 }

@@ -28,9 +28,9 @@ function stats_load_engines() {
 		{
 			$data = trim(chop($data));
 
-			if (!ereg('^#', $data) && $data != '')
+			if (strncmp('#',$data,1)==0 && $data != '')
 			{
-				if (ereg('^\[(.*)\]$', $data, $engines))
+				if (preg_match(',^\[(.*)\]$,', $data, $engines))
 				{
 					// engine
 					$engine = $engines[1];
@@ -65,7 +65,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 
 		// initialiser la recherche interne
 		$url_site = $GLOBALS['meta']['adresse_site'];
-		$url_site = strtolower(eregi_replace("^((https?|ftp)://)?(www\.)?", "", $url_site));
+		$url_site = preg_replace(",^((https?|ftp)://)?(www\.)?,", "", strtolower($url_site));
 	}
 
 	$url   = @parse_url( $kw_referer );
@@ -80,8 +80,8 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 	$found = false;
 	
 	
-	if (strpos('-'.$kw_referer, eregi_replace("^(https?:?/?/?)?(www\.)?", "",$url_site))) {
-		if (eregi("(s|search|r|recherche)=([^&]+)", $kw_referer, $regs))
+	if (strpos('-'.$kw_referer, preg_replace(",^(https?:?/?/?)?(www\.)?,", "",$url_site))!==false) {
+		if (preg_match(",(s|search|r|recherche)=([^&]+),i", $kw_referer, $regs))
 			$keywords = urldecode($regs[2]);
 			
 			
@@ -90,18 +90,19 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 	} else
 	for ($cnt = 0; $cnt < sizeof($arr_engines) && !$found; $cnt++)
 	{
-		if ($found = (ereg($arr_engines[$cnt][2], $host)) OR $found = (ereg($arr_engines[$cnt][2], $path)))
+		if ( $found = (strpos($host,$arr_engines[$cnt][2])!==false) 
+		  OR $found = (strpos($path,$arr_engines[$cnt][2])!==false))
 		{
 			$kw_referer_host = $arr_engines[$cnt][0];
 			
-			if (ereg('=', $arr_engines[$cnt][1])) {
+			if (strpos($arr_engines[$cnt][1],'=')!==false) {
 			
 				// Fonctionnement simple: la variable existe
 				$keywords = ${str_replace('=', '', $arr_engines[$cnt][1])};
 				
 				// Si on a defini le nom de la variable en expression reguliere, chercher la bonne variable
 				if (! strlen($keywords) > 0) {
-					if (ereg($arr_engines[$cnt][1]."([^\&]*)", $query, $vals)) {
+					if (preg_match(",".preg_quote($arr_engines[$cnt][1],',')."([^\&]*),", $query, $vals)) {
 						$keywords = urldecode($vals[2]);
 					}
 				}
@@ -110,7 +111,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 			}
 						
 			if ((  ($kw_referer_host == "Google")
-				|| ($kw_referer_host == "AOL" && !ereg('enc=iso', $query))
+				|| ($kw_referer_host == "AOL" && strpos($query,'enc=iso')===false)
 				|| ($kw_referer_host == "MSN")
 				)) {
 				include_spip('inc/charsets');
@@ -220,7 +221,7 @@ function aff_referers ($result, $limit, $plus) {
 			} else {
 				$aff .= $ret;
 				$lien = $lesreferers[$numero][0];
-				if (eregi("^(<a [^>]+>)([^ ]*)( \([0-9]+\))?", $lien, $regs)) {
+				if (preg_match(",^(<a [^>]+>)([^ ]*)( \([0-9]+\))?,i", $lien, $regs)) {
 					$lien = quote_amp($regs[1]).$lesdomaines[$numero].$regs[2];
 					if (!strpos($lien, '</a>')) $lien .= '</a>';
 				} else

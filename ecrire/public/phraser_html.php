@@ -29,9 +29,9 @@ define('SPEC_BOUCLE','/\s*\(\s*([^\s)]+)(\s*[^)]*)\)/');
 define('NOM_DE_BOUCLE', "[0-9]+|[-_][-_.a-zA-Z0-9]*");
 # ecriture alambiquee pour rester compatible avec les hexadecimaux des vieux squelettes
 define('NOM_DE_CHAMP', "#((" . NOM_DE_BOUCLE . "):)?(([A-F]*[G-Z_][A-Z_0-9]*)|[A-Z_]+)(\*{0,2})");
-define('CHAMP_ETENDU', '\[([^]\[]*)\(' . NOM_DE_CHAMP . '([^[)]*\)[^]\[]*)\]');
+define('CHAMP_ETENDU', '/\[([^]\[]*)\(' . NOM_DE_CHAMP . '([^[)]*\)[^]\[]*)\]/S');
 
-define('BALISE_INCLURE','<INCLU[DR]E[[:space:]]*(\(([^)]*)\))?');
+define('BALISE_INCLURE','/<INCLU[DR]E[[:space:]]*(\(([^)]*)\))?/S');
 
 define('SQL_ARGS', '(\([^)]*\))');
 define('CHAMP_SQL_PLUS_FONC', '`?([A-Z_][A-Z_0-9]*)' . SQL_ARGS . '?`?');
@@ -56,11 +56,11 @@ function phraser_arguments_inclure($p,$rejet_filtres = false){
 					erreur_squelette(_T('zbug_parametres_inclus_incorrects'),$var);
 			else {
 				$champ->param[$k] = $v;
-				ereg("^([^=]*)(=)?(.*)$", $var->texte,$m);
+				preg_match(",^([^=]*)(=)?(.*)$,", $var->texte,$m);
 				if ($m[2]) {
 					$champ->param[$k][0] = $m[1];
 					$val = $m[3];
-					if (ereg('^[\'"](.*)[\'"]$', $val, $m)) $val = $m[1];
+					if (preg_match(',^[\'"](.*)[\'"]$,', $val, $m)) $val = $m[1];
 					$champ->param[$k][1][0]->texte = $val;
 				}
 				else
@@ -74,7 +74,7 @@ function phraser_arguments_inclure($p,$rejet_filtres = false){
 // http://doc.spip.org/@phraser_inclure
 function phraser_inclure($texte, $ligne, $result) {
 
-	while (ereg(BALISE_INCLURE, $texte, $match)) {
+	while (preg_match(BALISE_INCLURE, $texte, $match)) {
 		$p = strpos($texte,$match[0]);
 		$debut = substr($texte, 0, $p);
 		if ($p) $result = phraser_idiomes($debut, $ligne, $result);
@@ -143,7 +143,7 @@ function phraser_polyglotte($texte,$ligne, $result) {
 function phraser_idiomes($texte,$ligne,$result) {
 
 	// Reperer les balises de traduction <:toto:>
-	while (eregi("<:(([a-z0-9_]+):)?([a-z0-9_]+)((\|[^:>]*)?:>)", $texte, $match)) {
+	while (preg_match(",<:(([a-z0-9_]+):)?([a-z0-9_]+)((\|[^:>]*)?:>),iS", $texte, $match)) {
 		$p = strpos($texte, $match[0]);
 		$debut = substr($texte, 0, $p);
 		if ($p) $result = phraser_champs($debut, $ligne, $result);
@@ -164,7 +164,7 @@ function phraser_idiomes($texte,$ligne,$result) {
 
 // http://doc.spip.org/@phraser_champs
 function phraser_champs($texte,$ligne,$result) {
-	while (ereg(NOM_DE_CHAMP, $texte, $match)) {
+	while (preg_match("/".NOM_DE_CHAMP."/S", $texte, $match)) {
 	  $p = strpos($texte, $match[0]);
 	  $suite = substr($texte,$p+strlen($match[0]));
 	  if ($match[5] || (strpos($suite[0], "[0-9]") === false)) {
@@ -265,7 +265,7 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 			$collecte[] = $champ;
 			$args = ltrim($regs[count($regs)-1]);
 		} else {
-		  if (!ereg(NOM_DE_CHAMP ."[{|]", $arg, $r)) {
+		  if (!preg_match("/".NOM_DE_CHAMP ."[{|]/", $arg, $r)) {
 		    // 0 est un aveu d'impuissance. A completer
 		    $arg = phraser_champs_exterieurs($arg, 0, $sep, $result);
 
@@ -277,7 +277,7 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 		    $n = strpos($args,$r[0]);
 		    $pred = substr($args, 0, $n);
 		    $par = ',}';
-		    if (ereg('^(.*)\($', $pred, $m))
+		    if (preg_match('/^(.*)\($/', $pred, $m))
 		      {$pred = $m[1]; $par =')';}
 		    if ($pred) {
 			$champ = new Texte;
@@ -341,7 +341,7 @@ function phraser_champs_interieurs($texte, $ligne, $sep, $result) {
 	while (true) {
 		$j=$i;
 		$n = $ligne;
-		while (ereg(CHAMP_ETENDU, $texte, $match)) {
+		while (preg_match(CHAMP_ETENDU, $texte, $match)) {
 			$p = strpos($texte, $match[0]);
 			$debut = substr($texte, 0, $p);
 			if ($p) {
@@ -378,7 +378,7 @@ function phraser_champs_interieurs($texte, $ligne, $sep, $result) {
 				$x.=$z;
 			$j++;
 		}
-		if (ereg(CHAMP_ETENDU, $x))
+		if (preg_match(CHAMP_ETENDU, $x))
 			$texte = $x;
 		else
 			return phraser_champs_exterieurs($x, $ligne, $sep, $result);
@@ -396,7 +396,7 @@ function phraser_criteres($params, &$result) {
 	foreach($params as $v) {
 		$var = $v[1][0];
 		$param = ($var->type != 'texte') ? "" : $var->texte;
-		if ((count($v) > 2) && (!eregi("[^A-Za-z]IN[^A-Za-z]",$param)))
+		if ((count($v) > 2) && (!preg_match(",[^A-Za-z]IN[^A-Za-z],i",$param)))
 		  {
 // plus d'un argument et pas le critere IN:
 // detecter comme on peut si c'est le critere implicite LIMIT debut, fin
@@ -453,7 +453,7 @@ function phraser_criteres($params, &$result) {
 			else { 
 			  // pas d'emplacement statique, faut un dynamique
 			  /// mais il y a 2 cas qui ont les 2 !
-			  if (($param == 'unique') || (ereg('^!?doublons *', $param)))
+			  if (($param == 'unique') || (preg_match(',^!?doublons *,', $param)))
 			    {
 			      // cette variable sera inseree dans le code
 			      // et son nom sert d'indicateur des maintenant
@@ -463,12 +463,12 @@ function phraser_criteres($params, &$result) {
 			  elseif ($param == 'recherche')
 			    // meme chose (a cause de #nom_de_boucle:URL_*)
 			      $result->hash = true;
-			  if (ereg('^ *([0-9-]+) *(/) *(.+) *$', $param, $m)) {
+			  if (preg_match(',^ *([0-9-]+) *(/) *(.+) *$,', $param, $m)) {
 			    $crit = phraser_critere_infixe($m[1], $m[3],$v, '/', '', '');
 			  } elseif (preg_match(',^(' . CHAMP_SQL_PLUS_FONC . 
 					 ')[[:space:]]*(\??)(!?)(<=?|>=?|==?|\b(?:IN|LIKE)\b)(.*)$,is', $param, $m)) {
 			    $a2 = trim($m[7]);
-			    if (ereg("^'.*'$", $a2) OR ereg('^".*"$', $a2))
+			    if (($a2{0}=="'" OR $a2{0}=='"') AND ($a2{0}==substr($a2,-1)))
 			      $a2 = substr($a2,1,-1);
 			    $crit = phraser_critere_infixe($m[1], $a2, $v,
 							   (($m[1] == 'lang_select') ? $m[1] : $m[6]),
@@ -495,7 +495,7 @@ function phraser_criteres($params, &$result) {
 			    erreur_squelette(_T('zbug_critere_inconnu',
 						array('critere' => $param)));
 			  }
-			  if ((!ereg('^!?doublons *', $param)) || $crit->not)
+			  if ((!preg_match(',^!?doublons *,', $param)) || $crit->not)
 			    $args[] = $crit;
 			  else 
 			    $doublons[] = $crit;
@@ -537,7 +537,7 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 
 # attention: reperer la premiere des 2 balises: pre_boucle ou boucle
 
-		$n = ereg(BALISE_PRE_BOUCLE . '[0-9_]', $texte, $r);
+		$n = preg_match(",".BALISE_PRE_BOUCLE . '[0-9_],', $texte, $r);
 		if ($n) $n = strpos($texte, $r[0]);
 		if (($n === false) || ($n > $p)) {
 		  $debut = substr($texte, 0, $p);
@@ -563,7 +563,7 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 				       strlen(BALISE_PRE_BOUCLE),
 				       $k - strlen(BALISE_PRE_BOUCLE));
 
-		  if (!ereg(BALISE_BOUCLE . $id_boucle . "[[:space:]]*\(", $milieu, $r))
+		  if (!preg_match(",".BALISE_BOUCLE . $id_boucle . "[[:space:]]*\(,", $milieu, $r))
 		    erreur_squelette((_T('zbug_erreur_boucle_syntaxe')), $id_boucle);
 		  $p = strpos($milieu, $r[0]);
 		  $result->avant = substr($milieu, $k+1, $p-$k-1);
@@ -593,7 +593,7 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 		//
 		// analyser les criteres et distinguer la boucle recursive
 		//
-		if (substr($soustype, 0, 6) == TYPE_RECURSIF) {
+		if (strncmp($soustype, TYPE_RECURSIF, strlen(TYPE_RECURSIF)) == 0) {
 			$result->type_requete = TYPE_RECURSIF;
 			$result->param[0] = substr($type, strlen(TYPE_RECURSIF));
 			$milieu = substr($milieu, strpos($milieu, '>')+1);

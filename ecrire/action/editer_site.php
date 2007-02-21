@@ -299,13 +299,13 @@ function analyser_site($url) {
 	else {
 		$result['syndication'] = 'non';
 		$result['url_site'] = $url;
-		if (eregi('<head>(.*)', $texte, $regs))
-			$head = filtrer_entites(eregi_replace('</head>.*', '', $regs[1]));
+		if (preg_match(',<head>(.*),i', $texte, $regs))
+			$head = filtrer_entites(preg_replace(',</head>.*,i', '', $regs[1]));
 		else
 			$head = $texte;
-		if (eregi('<title[^>]*>(.*)', $head, $regs))
-			$result['nom_site'] = filtrer_entites(supprimer_tags(eregi_replace('</title>.*', '', $regs[1])));
-		if (eregi('<meta[[:space:]]+(name|http\-equiv)[[:space:]]*=[[:space:]]*[\'"]?description[\'"]?[[:space:]]+(content|value)[[:space:]]*=[[:space:]]*[\'"]([^>]+)[\'"]>', $head, $regs))
+		if (preg_match(',<title[^>]*>(.*),i', $head, $regs))
+			$result['nom_site'] = filtrer_entites(supprimer_tags(preg_replace(',</title>.*,i', '', $regs[1])));
+		if (preg_match(',<meta[[:space:]]+(name|http\-equiv)[[:space:]]*=[[:space:]]*[\'"]?description[\'"]?[[:space:]]+(content|value)[[:space:]]*=[[:space:]]*[\'"]([^>]+)[\'"]>,i', $head, $regs))
 			$result['descriptif'] = filtrer_entites(supprimer_tags($regs[3]));
 
 		// Cherchons quand meme un backend

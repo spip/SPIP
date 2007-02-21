@@ -291,7 +291,7 @@ function utiliser_langue_visiteur() {
 			return $l;
 
 	foreach (explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']) as $s)  {
-		if (eregi('^([a-z]{2,3})(-[a-z]{2,3})?(;q=[0-9.]+)?$', trim($s), $r)) {
+		if (preg_match('#^([a-z]{2,3})(-[a-z]{2,3})?(;q=[0-9.]+)?$#', trim($s), $r)) {
 			if (changer_langue($l=strtolower($r[1]))) return $l;
 		}
 	}

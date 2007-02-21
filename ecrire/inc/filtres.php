@@ -1420,9 +1420,9 @@ function email_valide($adresses) {
 	foreach (explode(',', $adresses) as $v) {
 		// nettoyer certains formats
 		// "Marie Toto <Marie@toto.com>"
-		$adresse = trim(eregi_replace("^[^<>\"]*<([^<>\"]+)>$", "\\1", $v));
+		$adresse = trim(preg_replace(",^[^<>\"]*<([^<>\"]+)>$,i", "\\1", $v));
 		// RFC 822
-		if (!eregi('^[^()<>@,;:\\"/[:space:]]+(@([-_0-9a-z]+\.)*[-_0-9a-z]+)$', $adresse))
+		if (!preg_match('#^[^()<>@,;:\\"/[:space:]]+(@([-_0-9a-z]+\.)*[-_0-9a-z]+)$#i', $adresse))
 			return false;
 	}
 	return $adresse;
