@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_non_acces_message' => 'Nu ave&#355;i acces la acest mesaj.',
 'avis_non_acces_page' => 'Nu ave&#355;i acces la aceast&#259; pagin&#259;.',
 'avis_operation_echec' => 'Opera&#355;ia a e&#351;uat.',
+'avis_operation_impossible' => 'Opera&#355;ie imposibil&#259;',
 'avis_probleme_archive' => 'Problem&#259; la citirea fi&#351;ierului @archive@',
 'avis_site_introuvable' => 'Site neg&#259;sit',
 'avis_site_syndique_probleme' => 'Aten&#355;ie: sindicalizarea acestui site nu a fost posibil&#259;&nbsp;; sistemul este pentru moment &icirc;ntrerupt. Verifica&#355;i adresa fi&#351;ierului de sindicalizare a acestui site (<b>@url_syndic@</b>), &#351;i re&icirc;ncerca&#355;i opera&#355;ia.',
@@ -46,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_ajouter' => 'Ad&#259;uga&#355;i',
 'bouton_ajouter_participant' => 'AD&#258;UGA&#354;I UN PARTICIPANT&nbsp;:',
 'bouton_annonce' => 'ANUN&#354;',
+'bouton_annuler' => 'Anula&#355;i',
 'bouton_checkbox_envoi_message' => 'posibilitate de trimitere mesaj',
 'bouton_checkbox_indiquer_site' => 'indicare obligatorie a unui site Web',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'administratorii site-ului',
@@ -105,6 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cache_mode_non_compresse' => 'Fi&#351;ierele de tampon sunt &icirc;nregistrate &icirc;n mod necomprimat.',
 'cache_modifiable_webmestre' => 'Acest parametru est modificabil de c&#259;tre webmaster-ul acestui site.',
 'calendrier_synchro' => 'Dac&#259; folosi&#355;i un soft de agend&#259; compatibil <b>iCal</b>, pute&#355;i s&#259;-l sincroniza&#355;i cu informa&#355;iile de pe site.',
+'connexion_ldap' => 'Conexiune :',
 
 
 // D
@@ -166,10 +169,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_version_manquant' => 'Versiunea plugin-ului lips&#259;',
 
 
+// F
+'forum_info_original' => 'original',
+
+
 // I
 'ical_info1' => 'Aceast&#259; pagin&#259; prezint&#259; mai multe metode pentru a r&#259;m&acirc;ne &icirc;n contact cu activitatea de pe acest site.',
 'ical_info2' => 'Pentru mai multe detalii asupra acestor tehnici, nu ezita&#355;i s&#259; consulta&#355;i <a href="http://www.spip.net/">documenta&#355;ia SPIP</a>.',
 'ical_info_calendrier' => 'Dou&#259; calendare v&#259; sunt la dispozi&#355;ie: Primul este un plan al site-ului care anun&#355;&#259; toate articolele publicate. Al doilea con&#355;ine at&acirc;t anun&#355;urile editoriale c&acirc;t &#351;i ultimele mesaje private&nbsp;: acesta v&#259; este rezervat gra&#355;ie unei chei personale pe care o pute&#355;i modifica oric&acirc;nd prin simpla schimbare a parolei dumneavoastr&#259;.  ',
+'ical_lien_rss_breves' => 'Sindicalizarea &#351;tirilor site-ului',
 'ical_methode_http' => 'Desc&#259;rcare',
 'ical_methode_webcal' => 'Sincronizare (webcal://)',
 'ical_texte_js' => 'O linie de cod javascript v&#259; permite s&#259; afi&#351;a&#355;i de o manier&#259; simpl&#259;, pe orice site care v&#259; apar&#355;ine, articolele recente publicate pe aceste site.',
@@ -467,6 +475,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_procedez_par_etape' => 'proceda&#355;i etap&#259; cu etap&#259;',
 'info_procedure_maj_version' => 'procedura de aducere la zi trebuie lansat&#259; pentru a adapta
  baza de date la noua versiune SPIP.',
+'info_proxy_ok' => 'Test de proxy reu&#351;it.',
 'info_ps' => 'P.S.',
 'info_publier' => 'publica&#355;i',
 'info_publies' => 'Articolele dumneavoatr&#259; publicate &icirc;n direct',
@@ -480,7 +489,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   care le va furniza codurile de acces la site-ul privat. Anumi&#355;i
   furnizori de hosting dezactiveaz&#259; trimiterea de email-uri de pe
   server-ele lor&nbsp;: &icirc;n acest caz &icirc;nscrierea automatic&#259; este
-  imposibil&#259;.</i></blockquote>',
+  imposibil&#259;.',
 'info_question_mots_cles' => 'Dori&#355;i s&#259; utiliza&#355;i cuvintele-cheie pe site-ul dumneavoastr&#259;&nbsp;?',
 'info_question_proposer_site' => 'Cine poate propune site-uri referen&#355;iate&nbsp;?',
 'info_question_utilisation_moteur_recherche' => 'Dori&#355;i s&#259; utiliza&#355;i motorul de c&#259;utare integrat &icirc;n SPIP&nbsp;?
@@ -610,6 +619,7 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'install_echec_annonce' => 'Instalarea va e&#351;ua probabil sau va conduce la un site nefunc&#355;ional...',
 'install_extension_mbstring' => 'SPIP nu fonc&#355;ioneaz&#259; cu&nbsp;:',
 'install_extension_php_obligatoire' => 'SPIP are nevoie de extensia php&nbsp;:',
+'install_php_version' => 'Versiune PHP @version@ nesatisf&#259;c&#259;toare (minimum = @minimum@)',
 'install_select_langue' => 'Selec&#355;iona&#355;i o limb&#259; &#351;i face&#355;i click pe butonul &laquo;&nbsp;urm&#259;torul&nbsp;&raquo; pentru a lansa procedura de instalare.',
 'intem_redacteur' => 'redactor',
 'item_accepter_inscriptions' => 'Accepta&#355;i &icirc;nscrierile',
@@ -697,6 +707,7 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'lien_supprimer_rubrique' => '&#351;terge&#355;i aceast&#259; rubric&#259;',
 'lien_tout_deplier' => 'Desf&#259;&#351;ura&#355;i totul',
 'lien_tout_replier' => 'Str&acirc;nge&#355;i totul',
+'lien_tout_supprimer' => '&#350;terge&#355;i totul',
 'lien_trier_nom' => 'Tria&#355;i dup&#259; nume',
 'lien_trier_nombre_articles' => 'Tria&#355;i dup&#259; num&#259;rul articolelor',
 'lien_trier_statut' => 'Tria&#355;i dup&#259; stare',
@@ -744,6 +755,7 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'plugin_etat_stable' => 'stabil',
 'plugin_etat_test' => '&icirc;n test',
 'plugins_liste' => 'Lista plugin-urilor',
+'protocole_ldap' => 'Versiunea protocolului :',
 
 
 // R
@@ -751,6 +763,8 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 
 
 // S
+'sauvegarde_fusionner' => '&Icirc;mbina&#355;i baza curent&#259; cu cea salvat&#259;',
+'sauvegarde_url_origine' => 'Eventual, URL-ul site-ului de origine :',
 'statut_admin_restreint' => '(administrator cu drepturi restr&acirc;nse)',
 'syndic_choix_moderation' => 'Ce s&#259; fac cu urm&#259;toarele leg&#259;turi provenind de la acest site&nbsp;?',
 'syndic_choix_oublier' => 'Ce s&#259; fac cu leg&#259;turile care nu mai figureaz&#259; &icirc;n fi&#351;ierul de sindicalizare&nbsp;?',
@@ -1030,6 +1044,7 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_sites_tous' => 'Site-urile referen&#355;iate',
 'titre_suivi_petition' => 'Urm&#259;rirea peti&#355;iilor',
 'titre_syndication' => 'Sindicalizarea site-urilor',
+'tls_ldap' => 'Transport Layer Security :',
 'tout_dossier_upload' => 'Tot dosarul @upload@',
 'trad_article_inexistant' => 'Nu exist&#259; un articol care s&#259; aib&#259; acest numar.',
 'trad_article_traduction' => 'Toate versiunile acestui articol&nbsp;:',

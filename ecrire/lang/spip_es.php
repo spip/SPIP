@@ -191,15 +191,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => 'Para empezar realmente la instalaci&oacute;n',
 'dirs_preliminaire' => 'Preliminar: <b>Regular los derechos de acceso</b>',
 'dirs_probleme_droits' => 'Problema de derechos de acceso',
-'dirs_repertoires_absents' => '<b>No se pudieron encontrar las siguientes carpetas : <ul>@bad_dirs@.</ul> </b>
+'dirs_repertoires_absents' => '<p><b>No se pudieron encontrar las siguientes carpetas:</b></p><ul>@bad_dirs@.</ul> </b>
 <p>Es probable que se deba a un problema de escritura entre may&uacute;sculas y min&uacute;sculas.
-  Verifique que las may&uacute;sculas y min&uacute;sculas de los nombres de estas carpetas corresponden a lo se visualiza a continuaci&oacute;n; si no es el caso, cambia el nombre de las carpetas con tu software de FTP, de modo que se corrijan los errores.
+  Verifique que las may&uacute;sculas y min&uacute;sculas de los nombres de estas carpetas corresponden a lo se visualiza a continuaci&oacute;n; si no es el caso, cambia el nombre de las carpetas con tu software de FTP, de modo que se corrijan los errores.</p>
   <p>Cuando hayas hecho esta operaci&oacute;n podr&aacute;s  ',
-'dirs_repertoires_suivants' => '<b>Las carpetas siguientes no est&aacute;n accesibles en escritura: <ul>@bad_dirs@.</ul> </b>
+'dirs_repertoires_suivants' => '<p><b>Las carpetas siguientes no est&aacute;n accesibles en escritura&nbsp;:</b></p><ul>@bad_dirs@.</ul>
 <p>Para solucionar el problema debes utilizar un cliente FTP para cambiar los derechos de acceso a cada una
-de las carpetas mencionadas. El procedimiento se explica detalladamente en la gu&iacute;a de instalaci&oacute;n.
-<p>Una vez terminado este proceso, podr&aacute;s  
-',
+de las carpetas mencionadas. El procedimiento se explica detalladamente en la gu&iacute;a de instalaci&oacute;n.</p>
+<p>Una vez terminado este proceso, podr&aacute;s ',
 'double_occurrence' => 'Doble ocurrencia',
 
 
@@ -380,10 +379,10 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_a_valider' => '[a validar]',
 'info_acces_interdit' => 'Acceso prohibido',
 'info_acces_refuse' => 'Acceso rechazado',
-'info_action' => 'Acci&oacute;n : @action@',
+'info_action' => 'Acci&oacute;n: @action@',
 'info_administrer_rubriques' => 'Puedes administrar esta secci&oacute;n y sus subsecciones',
 'info_adresse_non_indiquee' => '&iexcl;No has indicado la direcci&oacute;n a probar&nbsp;!',
-'info_aide' => 'Ayuda :',
+'info_aide' => 'AYUDA:',
 'info_ajouter_mot' => 'A&ntilde;adir esta palabra',
 'info_annonce' => 'Anuncio',
 'info_annonces_generales' => 'Anuncios generales',
@@ -404,7 +403,7 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_connexion_refusee' => 'Conexi&oacute;n rechazada',
 'info_contact_developpeur' => 'Debes contactar con un programador.',
 'info_contenance' => 'Este sitio contiene:',
-'info_contribution' => 'contribuciones de foro',
+'info_contribution' => 'contribuciones del foro',
 'info_copyright' => '@spip@ es un software libre distribu&iacute;do @lien_gpl@.',
 'info_copyright_doc' => 'Para mayor informaci&oacute;n, ver el sitio <a href=\'http://www.spip.net/es\'>http://www.spip.net/es</a>.',
 'info_copyright_gpl' => 'bajo licencia GPL',
@@ -419,7 +418,9 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_dimension' => 'Dimensiones',
 'info_document' => 'Documento',
 'info_documents' => 'Documentos',
-'info_echange_message' => 'En funci&oacute;n de las prefenrencias, SPIP permite el intercambio de mensajes y la existencia de foros internos',
+'info_echange_message' => 'En funci&oacute;n de las preferencias, SPIP permite el intercambio de mensajes y la existencia de foros internos
+ privados entre los participantes del sitio. Esta funcionalidad
+se puede activar o desactivar .',
 'info_ecire_message_prive' => 'Escribir un mensaje privado',
 'info_email_invalide' => 'La direcci&oacute;n de correo electr&oacute;nico no es v&aacute;lida.',
 'info_en_cours_validation' => 'Tus art&iacute;culos en curso',
@@ -427,7 +428,7 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_envoyer_message_prive' => 'Enviar un mensaje privado a este autor o autora',
 'info_erreur_requete' => 'Error en la petici&oacute;n:',
 'info_erreur_squelette2' => 'No hay ning&uacute;n esqueleto <b>@fichier@</b>  disponible...',
-'info_erreur_systeme' => 'Error sistema (errno @errsys@)',
+'info_erreur_systeme' => 'Error del sistema (errno @errsys@)',
 'info_erreur_systeme2' => 'El disco duro puede estar lleno o la base de datos da&ntilde;ada.<br />
  <font color=\'red\'>Intenta <a href=\'@script@\'>reparar la base</a>,
  o contacta tu hospedaje.</font>',
@@ -569,7 +570,7 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'login_erreur_pass' => 'Error de contrase&ntilde;a.',
 'login_espace_prive' => 'espacio privado',
 'login_identifiant_inconnu' => 'El nombre de usuario &laquo;@login@&raquo; es desconocido.',
-'login_login' => 'Nombre de usuario :',
+'login_login' => 'Nombre de usuario:',
 'login_login2' => 'Login (nombre de usuario para conexi&oacute;n al sitio)&nbsp;:',
 'login_login_pass_incorrect' => '(Nombre de usuario o contrase&ntilde;a incorrecta.)',
 'login_motpasseoublie' => '&iquest;contrase&ntilde;a&nbsp;olvidada?',
@@ -707,8 +708,8 @@ Intenta',
 'titre_image_administrateur' => 'Administrador/a',
 'titre_image_aide' => 'Ayuda sobre este elemento',
 'titre_image_auteur_supprime' => 'Autor suprimido',
-'titre_image_redacteur' => 'Redactoro redactora sin acceso',
-'titre_image_redacteur_02' => 'Redactoro redactora',
+'titre_image_redacteur' => 'Redactor o redactora sin acceso',
+'titre_image_redacteur_02' => 'Redactor o redactora',
 'titre_image_visiteur' => 'Visitante',
 'titre_joindre_document' => 'A&ntilde;adir un documento',
 'titre_liens_entrants' => 'Los enlaces entrantes ',

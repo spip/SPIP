@@ -83,6 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_semaine' => 'calend&aacute;rio por semana',
 'choix_couleur_interface' => 'c&ocirc;r',
 'choix_interface' => 'escolha da interface',
+'colonne' => 'Coluna',
 'confirm_changer_statut' => 'Aten&ccedil;&atilde;o, voc&ecirc; solicitou a altera&ccedil;&atilde;o de status deste elemento. Deseja continuar?',
 'correcte' => 'correta',
 
@@ -192,9 +193,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <p>&Eacute; prov&aacute;vel que isto se deva a um problema de letras em mai&uacute;sculas e min&uacute;sculas.
 Verifique se as mai&uacute;sculas e min&uacute;suculas destes diret&oacute;rios coincidem exatamente com o que est&aacute; sendo exibido abaixo; se este n&atilde;o for o caso, renomeie os diret&oacute;rios com o seu programa de FTP de modo a corrigir o erro.
 <p>Uma v&ecirc;z feita esta manipula&ccedil;&atilde;o, voc&ecirc; poder&aacute; ',
-'dirs_repertoires_suivants' => '<p><b>Os diret&oacute;rios a seguir n&atilde;o s&atilde;o acessiveis para leitura:</b></p><ul>@bad_dirs@.</ul>
+'dirs_repertoires_suivants' => '<p><b>Os diret&oacute;rios a seguir n&atilde;o est&atilde;o acessiveis para leitura:</b></p><ul>@bad_dirs@.</ul>
 <p>Para corrigir, utilize o seu programa de FTP para configurar os direitos de acesso de cada um destes diret&oacute;rios. O procedimento est&aacute; explicado em detalhes no guia de instala&ccedil;&atilde;o.</p>
 <p>Uma v&ecirc;z feita esta altera&ccedil;&atilde;o, voc&ecirc; poder&aacute; ',
+'double_occurrence' => 'Duplica&ccedil;&atilde;o',
 
 
 // E
@@ -202,6 +204,9 @@ Verifique se as mai&uacute;sculas e min&uacute;suculas destes diret&oacute;rios 
 'entree_titre_document' => 'T&iacute;tulo do documento:',
 'entree_titre_image' => 'T&iacute;tulo da imagem:',
 'envoi_via_le_site' => 'Envio pelo site',
+'erreur' => 'Erro',
+'erreur_balise_non_fermee' => '&Uacute;ltima tag em aberto:',
+'erreur_texte' => 'erro(s)',
 
 
 // F
@@ -546,6 +551,7 @@ Obrigado por participar
 'lien_visite_site' => 'visitar este site',
 'lien_visites' => '@visites@&nbsp;visitas',
 'lien_voir_auteur' => 'Ver este autor',
+'ligne' => 'Linha',
 'login_acces_prive' => 'acesso ao espa&ccedil;o privado',
 'login_autre_identifiant' => 'conectar-se com outra identifica&ccedil;&atilde;o',
 'login_connexion_refusee' => 'Conex&atilde;o recusada.',
@@ -583,9 +589,11 @@ Se voc&ecirc; n&atilde;o quiser que a sua senha possa ser interceptada na rede, 
 
 // N
 'navigateur_pas_redirige' => 'Se o seu navegador n&atilde;o o redirecionar, clique aqui para continuar.',
+'numero' => 'N&uacute;mero',
 
 
 // O
+'occurence' => 'Ocorr&ecirc;ncia',
 'onglet_affacer_base' => 'Apagar a base',
 'onglet_auteur' => 'O autor',
 'onglet_contenu_site' => 'Conte&uacute;do do site',
@@ -646,6 +654,7 @@ e reconectar-se com o site.
 
 
 // S
+'spip_conforme_dtd' => 'O SPIP considera este documento de acordo com o seu DOCTYPE:',
 'squelette' => 'esqueleto',
 'squelette_inclus_ligne' => 'esqueleto inclu&iacute;do, linha',
 'squelette_ligne' => 'esqueleto, linha',
@@ -722,19 +731,38 @@ Tente se',
 'zbug_code' => 'c&oacute;digo',
 'zbug_critere_inconnu' => 'crit&eacute;rio @critere@ desconhecido',
 'zbug_distant_interdit' => 'externa interditada',
+'zbug_doublon_table_sans_index' => 'doublons em uma tabela sem index',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: dupla defini&ccedil;&atilde;o',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: falta a tag de fechamento',
 'zbug_erreur_boucle_syntaxe' => 'Sintaxe do la&ccedil;o est&aacute; incorreta',
+'zbug_erreur_compilation' => 'Erro de compila&ccedil;&atilde;o',
 'zbug_erreur_execution_page' => 'erro de execu&ccedil;&atilde;o da p&aacute;gina',
 'zbug_erreur_filtre' => 'Erro: filtro <b>&laquo; @filtre@ &raquo;</b> n&atilde;o definido',
 'zbug_erreur_meme_parent' => '{meme_parent} aplica-se exclusivamente aos la&ccedil;os (FORUMS) ou (RUBRIQUES)',
 'zbug_erreur_squelette' => 'Erro(s) no gabarito',
 'zbug_info_erreur_squelette' => 'Erro no site',
 'zbug_inversion_ordre_inexistant' => 'invers&atilde;o de uma ordem inexistente',
+'zbug_pagination_sans_critere' => '#PAGINATION sem crit&eacute;rio {pagination} ou usada dentro de uma boucle recursiva',
 'zbug_parametres_inclus_incorrects' => 'Par&acirc;metros de inclus&atilde;o incorretos',
 'zbug_resultat' => 'resultado',
 'zbug_serveur_indefini' => 'sevidor SQL n&atilde;o definido',
-'zbug_table_inconnue' => 'Tabela SQL &laquo;@table@&raquo; desconhecida'
+'zbug_table_inconnue' => 'Tabela SQL &laquo;@table@&raquo; desconhecida',
+'zxml_connus_attributs' => 'atributos conhecidos',
+'zxml_de' => 'de',
+'zxml_inconnu_attribut' => 'atributo desconhecido',
+'zxml_inconnu_balise' => 'tag desconhecida',
+'zxml_inconnu_entite' => 'entidade desconhecida',
+'zxml_inconnu_id' => 'ID desconhecida',
+'zxml_mais_de' => 'mas de',
+'zxml_non_conforme' => 'n&atilde;o est&aacute; de acordo com o motivo',
+'zxml_non_fils' => 'n&atilde;o &eacute; filho de',
+'zxml_nonvide_balise' => 'tag n&atilde;o vazia',
+'zxml_obligatoire_attribut' => 'atributo obrigat&oacute;rio mas ausente em',
+'zxml_succession_fils_incorrecte' => 'sucess&atilde;o de filhos incorreta',
+'zxml_survoler' => 'sobrepor para ver os corretos',
+'zxml_valeur_attribut' => 'valor do atributo',
+'zxml_vide_balise' => 'tag vazia',
+'zxml_vu' => 'previsualiza&ccedil;&atilde;o'
 
 );
 

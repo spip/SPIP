@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_non_acces_message' => 'Voc&ecirc; n&atilde;o tem acesso a esta mensagem.',
 'avis_non_acces_page' => 'Voc&ecirc; n&atilde;o tem acessoa a esta p&aacute;gina.',
 'avis_operation_echec' => 'A opera&ccedil;&atilde;o falhou.',
+'avis_operation_impossible' => 'Opera&ccedil;&atilde;o imposs&iacute;vel',
 'avis_probleme_archive' => 'Problema de leitura do arquivo @archive@',
 'avis_site_introuvable' => 'Site n&atilde;o encontrado',
 'avis_site_syndique_probleme' => 'Aten&ccedil;&atilde;o: a sindica&ccedil;&atilde;o deste site encontrou um problema; no momento, o sistema foi tempor&aacute;riamente interrompido. Verifique o endere&ccedil;o do arquivo de sindica&ccedil;&atilde;o deste site (<b>@url_syndic@</b>) e tente uma nova recupera&ccedil;&atilde;o das informa&ccedil;&otilde;es.',
@@ -54,6 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_ajouter' => 'Incluir',
 'bouton_ajouter_participant' => 'INCLUIR UM PARTICIPANTE:',
 'bouton_annonce' => 'AVISO',
+'bouton_annuler' => 'Anular',
 'bouton_checkbox_envoi_message' => 'possibilidade de enviar uma mensagem',
 'bouton_checkbox_indiquer_site' => 'informar obrigatoriamente um website',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'os administradores do site',
@@ -112,6 +114,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cache_mode_non_compresse' => 'Os arquivos do cache s&atilde;o gravados em modo n&atilde;o compactado.',
 'cache_modifiable_webmestre' => 'Este par&acirc;metro &eacute; modific&aacute;vel pelo webmaster do site.',
 'calendrier_synchro' => 'Se voc&ecirc; usa um programa de agenda compat&iacute;vel com <b>iCal</b>, voc&ecirc; pode sincroniz&aacute;-lo com as informa&ccedil;&otilde;es deste site.',
+'connexion_ldap' => 'Conex&atilde;o:',
 
 
 // D
@@ -173,10 +176,15 @@ Estas informa&ccedil;&otilde;es dever&atilde;o ser fornecidas pelo administrador
 'erreur_plugin_version_manquant' => 'Vers&atilde;o do plugin ausente',
 
 
+// F
+'forum_info_original' => 'original',
+
+
 // I
 'ical_info1' => 'Esta p&aacute;gina apresenta diversos m&eacute;todos para se manter em contato com a vida deste site.',
 'ical_info2' => 'Para mais informa&ccedil;&otilde;es sobre todas estas t&eacute;cnicas, n&atilde;o deixe de consultar <a href="http://www.spip.net/fr_suivi">a documenta&ccedil;&atilde;o do SPIP</a>.',
 'ical_info_calendrier' => 'Dois calend&aacute;rios est&atilde;o &agrave; sua disposi&ccedil;&atilde;o. O primeiro &eacute; um mapa do site anunciando todas as mat&eacute;rias publicadas. O segundo cont&eacute;m os avisos editoriais bem como suas &uacute;ltimas mensagens privadas: ele lhe &eacute; reservado gra&ccedil;as a uma chave pessoal, que voc&ecirc; pode alterar a qualquer momento ao renovar a sua senha.',
+'ical_lien_rss_breves' => 'Sindica&ccedil;&atilde;o das notas do site',
 'ical_methode_http' => 'Transfer&ecirc;ncia',
 'ical_methode_webcal' => 'Sincroniza&ccedil;&atilde;o (webcal://)',
 'ical_texte_js' => 'Uma linha de javascript permite-lhe exibir de forma simples, em qualquer site que lhe perten&ccedil;a, as mat&eacute;rias recentemente publicadas neste site.',
@@ -460,12 +468,13 @@ Os idiomas j&aacute; utilizados no site (no topo da lista) n&atilde;o podem ser 
 'info_principaux_correspondants' => 'Seus correspondentes principais',
 'info_procedez_par_etape' => 'proceder passo-a-passo',
 'info_procedure_maj_version' => 'o procedimento de atualiza&ccedil;&atilde;o deve ser rodado para adaptar a base de dados &agrave; nova vers&atilde;o do SPIP.',
+'info_proxy_ok' => 'Teste do proxy com sucesso',
 'info_ps' => 'P.S.',
 'info_publier' => 'publicar',
 'info_publies' => 'Suas mat&eacute;rias publicadas online',
 'info_question_accepter_visiteurs' => 'Se os gabaritos do seu site prev&ecirc;em o cadastramento de visitantes sem acesso ao espa&ccedil;o privado, por favor, ative a op&ccedil;&atilde;o abaixo:',
 'info_question_gerer_statistiques' => 'O seu site deve gerenciar as estat&iacute;sticas de visitas?',
-'info_question_inscription_nouveaux_redacteurs' => 'Voc&ecirc; quer aceitar inscri&ccedil;&otilde;es de novos redatores a partir do site p&uacute;blico? Se voc&ecirc; aceitar, os visitantes poder&atilde;o se cadastrar atrav&eacute;s de um formul&aacute;rio automatizado, tendo acesso ao espa&ccedil;o privado para prop&ocirc;r as suas pr&oacute;prias mat&eacute;rias. <blockquote><i>J&aacute; na fase de inscri&ccedil;&atilde;o, os usu&aacute;rios recebem um e-mail autom&aacute;tico. fornecendo-lhes os seus c&oacute;digos de acesso ao site privado. Alguns servi&ccedil;os de hospedagem desativam o envio de e-mails a partir dos seus servidores: nesse caso, a inscri&ccedil;&atilde;o autom&aacute;tica &eacute; imposs&iacute;vel.',
+'info_question_inscription_nouveaux_redacteurs' => 'Voc&ecirc; quer aceitar inscri&ccedil;&otilde;es de novos redatores a partir do site p&uacute;blico? Se voc&ecirc; aceitar, os visitantes poder&atilde;o se cadastrar atrav&eacute;s de um formul&aacute;rio automatizado, tendo acesso ao espa&ccedil;o privado para prop&ocirc;r as suas pr&oacute;prias mat&eacute;rias.<blockquote><i>J&aacute; na fase de inscri&ccedil;&atilde;o, os usu&aacute;rios recebem um e-mail autom&aacute;tico. fornecendo-lhes os seus c&oacute;digos de acesso ao site privado. Alguns servi&ccedil;os de hospedagem desativam o envio de e-mails a partir dos seus servidores: nesse caso, a inscri&ccedil;&atilde;o autom&aacute;tica &eacute; imposs&iacute;vel.',
 'info_question_mots_cles' => 'Deseja utilizar palavras-chave no seu site?',
 'info_question_proposer_site' => 'Quem pode prop&ocirc;r os sites referenciados?',
 'info_question_utilisation_moteur_recherche' => 'Voc&ecirc; deseja usar o motor de busca integrado ao SPIP? (desativ&aacute;-lo acelera o funcionamento do sistema.)',
@@ -593,6 +602,7 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'install_echec_annonce' => 'A instala&ccedil;&atilde;o ir&aacute;, provavelmente, falhar, ou levar a um site que n&atilde;o funciona...',
 'install_extension_mbstring' => 'O SPIP n&atilde;o funciona com:',
 'install_extension_php_obligatoire' => 'O SPIP exige a extens&atilde;o php:',
+'install_php_version' => 'PHP vers&atilde;o @version@ &eacute; insuficiente (m&iacute;nimo = @minimum@)',
 'install_select_langue' => 'Escolha um idioma e clique no bot&atilde;o &laquo;avan&ccedil;ar&raquo; para iniciar o procedimento de instala&ccedil;&atilde;o.',
 'intem_redacteur' => 'redator',
 'item_accepter_inscriptions' => 'Aceitar as inscri&ccedil;&otilde;es',
@@ -680,6 +690,7 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'lien_supprimer_rubrique' => 'excluir esta se&ccedil;&atilde;o',
 'lien_tout_deplier' => 'Expandir tudo',
 'lien_tout_replier' => 'Retrair tudo',
+'lien_tout_supprimer' => 'Excluir tudo',
 'lien_trier_nom' => 'Ordenar pelo nome',
 'lien_trier_nombre_articles' => 'Ordenar por n&uacute;mero de mat&eacute;rias',
 'lien_trier_statut' => 'Ordenar pelo status',
@@ -727,6 +738,7 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'plugin_etat_stable' => 'est&aacute;vel',
 'plugin_etat_test' => 'em teste',
 'plugins_liste' => 'Lista dos plugins',
+'protocole_ldap' => 'Vers&atilde;o do protocolo:',
 
 
 // R
@@ -734,6 +746,8 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 
 
 // S
+'sauvegarde_fusionner' => 'Combinar a base atual e a c&oacute;pia de seguran&ccedil;a',
+'sauvegarde_url_origine' => 'Eventualmente, URL do site de origem:',
 'statut_admin_restreint' => '(admin limitado)',
 'syndic_choix_moderation' => 'O que fazer com os pr&oacute;ximos links que venham deste site?',
 'syndic_choix_oublier' => 'O que fazer com os links que n&atilde;o constam mais do arquivo de sindica&ccedil;&atilde;o?',
@@ -958,6 +972,7 @@ neste caso, voc&ecirc; n&atilde;o poder&aacute; usar a sindica&ccedil;&atilde;o 
 'titre_sites_tous' => 'Os sites referenciados',
 'titre_suivi_petition' => 'Acompanhamento das peti&ccedil;&otilde;es',
 'titre_syndication' => 'Sindica&ccedil;&atilde;o de sites',
+'tls_ldap' => 'Transport Layer Security:',
 'tout_dossier_upload' => 'Todo o diret&oacute;rio @upload@',
 'trad_article_inexistant' => 'N&atilde;o h&aacute; nenhuma mat&eacute;ria com este n&uacute;mero.',
 'trad_article_traduction' => 'Todas as vers&otilde;es desta mat&eacute;ria:',

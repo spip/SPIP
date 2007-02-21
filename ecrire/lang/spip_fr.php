@@ -601,7 +601,7 @@ Merci de votre participation
 
 
 // O
-'occurence' => 'Occurence',
+'occurence' => 'Occurrence',
 'onglet_affacer_base' => 'Effacer la base',
 'onglet_auteur' => 'L\'auteur',
 'onglet_contenu_site' => 'Contenu du site',
