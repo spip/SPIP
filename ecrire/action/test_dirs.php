@@ -78,7 +78,7 @@ function action_test_dirs_dist()
   $chmod = 0;
 
 if ($test_dir) {
-  if (!ereg("/$", $test_dir)) $test_dir .= '/';
+  if (substr($test_dir,-1)!=='/') $test_dir .= '/';
   if (!in_array($test_dir, $test_dirs)) $test_dirs[] = $test_dir;
  }
 else {

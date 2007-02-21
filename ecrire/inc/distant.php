@@ -186,7 +186,7 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false,
 
 			// Reponse du serveur distant
 			$s = trim(fgets($f, 16384));
-			if (ereg('^HTTP/[0-9]+\.[0-9]+ ([0-9]+)', $s, $r)) {
+			if (preg_match(',^HTTP/[0-9]+\.[0-9]+ ([0-9]+),', $s, $r)) {
 				$status = $r[1];
 			}
 			else return;

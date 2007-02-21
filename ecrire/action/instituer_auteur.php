@@ -29,7 +29,7 @@ function action_instituer_auteur_dist() {
 			spip_abstract_insert('spip_auteurs_rubriques', "(id_auteur,id_rubrique)", "(" .$id_auteur .',' . $id_parent . ')');
 		}
 		if ($statut = _request('statut')) {
-			if (!ereg("^(0minirezo|1comite|5poubelle|6forum)$",$statut))
+			if (!in_array($s,array('0minirezo','1comite','5poubelle','6forum')))
 			  spip_log("action_instituer_auteur_dist: $statut incompris  pour $id_auteur");
 			else {
 				spip_query("UPDATE spip_auteurs SET statut='".$statut . "' WHERE id_auteur=" . $id_auteur);

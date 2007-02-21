@@ -63,7 +63,7 @@ function action_legender_auteur_post($r) {
 		$source = 'spip';
 		$statut = '1comite'; // statut par defaut
 		if ($s) {
-		  if (ereg("^(0minirezo|1comite|5poubelle|6forum)$",$s))
+		  if (in_array($s,array('0minirezo','1comite','5poubelle','6forum')))
 		    $statut = $s;
 		  else spip_log("action_legender_auteur_dist: statut $s incompris");
 		}
@@ -199,7 +199,7 @@ function action_legender_auteur_post($r) {
 	if ($statut = _request('statut')
 	AND autoriser('modifier', 'auteur', $id_auteur, $qui = null,
 	$opt = array('statut'=>$statut))) {
-		if (!ereg("^(0minirezo|1comite|5poubelle|6forum)$",$statut)) {
+		if (!in_array($s,array('0minirezo','1comite','5poubelle','6forum'))) {
 		  spip_log("action_instituer_auteur_dist: $statut incompris  pour $id_auteur");
 		} else {
 			spip_query("UPDATE spip_auteurs SET statut="._q($statut) . " WHERE id_auteur=" . _q($id_auteur));

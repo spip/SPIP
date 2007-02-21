@@ -407,7 +407,7 @@ function exec_affiche_message_dist($id_message, $cherche_auteur, $forcer_dest)
 		  {
 		    foreach ($v as $l => $e)
 		      {
-			if (ereg("=$id_message$", $e['URL']))
+			if (preg_match(",=$id_message$,", $e['URL']))
 			  {
 			    $ah[$k][$l]['CATEGORIES'] = "calendrier-nb";
 			    break;

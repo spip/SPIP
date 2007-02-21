@@ -48,7 +48,7 @@ function tester_compatibilite_hebergement() {
 	$err = array();
 
 	$p = phpversion();
-	if (ereg('^([0-9]+)\.([0-9]+)\.([0-9]+)', $p, $regs)) {
+	if (preg_match(',^([0-9]+)\.([0-9]+)\.([0-9]+),', $p, $regs)) {
 		$php = array($regs[1], $regs[2], $regs[3]);
 		$m = '4.0.8';
 		$min = explode('.', $m);
@@ -91,16 +91,16 @@ function login_hebergeur() {
 
 	// Lycos (ex-Multimachin)
 	if ($HTTP_X_HOST == 'membres.lycos.fr') {
-		ereg('^/([^/]*)', $REQUEST_URI, $regs);
+		preg_match(',^/([^/]*),', $REQUEST_URI, $regs);
 		$login_hebergeur = $regs[1];
 	}
 	// Altern
-	else if (ereg('altern\.com$', $SERVER_NAME)) {
-		ereg('([^.]*\.[^.]*)$', $HTTP_HOST, $regs);
+	else if (preg_match(',altern\.com$,', $SERVER_NAME)) {
+		preg_match(',([^.]*\.[^.]*)$,', $HTTP_HOST, $regs);
 		$login_hebergeur = preg_replace('[^\w\d]', '_', $regs[1]);
 	}
 	// Free
-	else if (ereg('(.*)\.free\.fr$', $SERVER_NAME, $regs)) {
+	else if (preg_match(',(.*)\.free\.fr$,', $SERVER_NAME, $regs)) {
 		$base_hebergeur = 'sql.free.fr';
 		$login_hebergeur = $regs[1];
 	}

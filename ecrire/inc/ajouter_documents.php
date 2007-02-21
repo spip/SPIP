@@ -63,7 +63,7 @@ function inc_ajouter_documents_dist ($source, $nom_envoye, $type_lien, $id_lien,
 		// - interdit a l'upload ?
 		// - quel numero dans spip_types_documents ?  =-(
 		// - est-ce "inclus" comme une image ?
-		ereg("\.([^.]+)$", $nom_envoye, $match);
+		preg_match(",\.([^.]+)$,", $nom_envoye, $match);
 		$ext = (corriger_extension(strtolower($match[1])));
 
 		// Si le fichier est de type inconnu, on va le stocker en .zip

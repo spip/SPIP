@@ -50,7 +50,7 @@ function login_explicite($login, $cible) {
 		$cible = parametre_url($cible, 'var_erreur', '', '&');
 		$cible = parametre_url($cible, 'var_login', '', '&');
 	} else {
-		if (ereg("[?&]url=([^&]*)", $action, $m))
+		if (preg_match(",[?&]url=([^&]*),", $action, $m))
 			$cible = rawurldecode($m[1]);
 		else
 			$cible = _DIR_RESTREINT ;
@@ -103,7 +103,7 @@ function login_pour_tous($login, $cible, $action) {
 	if ($echec_cookie AND !$ignore_auth_http) {
 		if (($GLOBALS['flag_sapi_name']
 		     AND eregi("apache", @php_sapi_name()))
-		OR ereg("^Apache.* PHP", $_SERVER['SERVER_SOFTWARE']))
+		OR preg_match(",^Apache.* PHP,", $_SERVER['SERVER_SOFTWARE']))
 			$auth_http = $pose_cookie;
 	}
 	// Attention dans le cas 'intranet' la proposition de se loger
@@ -113,7 +113,7 @@ function login_pour_tous($login, $cible, $action) {
 
 	// Le login est memorise dans le cookie d'admin eventuel
 	if (!$login) {
-		if (ereg("^@(.*)$", $_COOKIE['spip_admin'], $regs))
+		if (preg_match(",^@(.*)$,", $_COOKIE['spip_admin'], $regs))
 			$login = $regs[1];
 	} else if ($login == '-1')
 		$login = '';

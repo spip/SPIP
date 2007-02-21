@@ -127,7 +127,7 @@ function action_tester_dist() {
 	}
 
 	// et maintenant envoyer la vignette de tests
-	if (ereg("^(gd1|gd2|imagick|convert|netpbm)$", $arg)) {
+	if (in_array($arg,array("gd1","gd2","imagick","convert","netpbm"))) {
 		include_spip('inc/filtres');
 		include_spip('inc/filtres_images');
 		//$taille_preview = $GLOBALS['meta']["taille_preview"];

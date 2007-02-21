@@ -24,7 +24,7 @@ if ($HTTP_X_HOST == 'membres.lycos.fr') {
 	$hebergeur = 'lycos';
 }
 // Altern
-else if (ereg('altern\.com$', $SERVER_NAME)) {
+else if (preg_match(',altern\.com$,', $SERVER_NAME)) {
 	$hebergeur = 'altern';
 }
 // NexenServices
