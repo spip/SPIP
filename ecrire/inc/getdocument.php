@@ -50,7 +50,7 @@ function effacer_repertoire_temporaire($nom) {
 function copier_document($ext, $orig, $source) {
 
 	$dir = creer_repertoire_documents($ext);
-	$dest = preg_replace("/[^._=-\w\d]+", "_", 
+	$dest = preg_replace("/[^._=-\w\d]+/", "_", 
 			translitteration(preg_replace("/\.([^.]+)$/", "", 
 						      preg_replace("/<[^>]*>/", '', basename($orig)))));
 
