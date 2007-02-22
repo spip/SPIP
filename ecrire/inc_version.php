@@ -14,11 +14,13 @@
 if (defined("_ECRIRE_INC_VERSION")) return;
 define("_ECRIRE_INC_VERSION", "1");
 
+# masquer les eventuelles erreurs sur les premiers define
+error_reporting(E_ALL ^ E_NOTICE);
 # compatibilite anciennes versions
 # si vous n'avez aucun fichier .php3, redefinissez a ""
 # ca fera foncer find_in_path
 define('_EXTENSION_PHP', '.php3');
-#@define('_EXTENSION_PHP', '');
+#define('_EXTENSION_PHP', '');
 
 # le nom du repertoire ecrire/
 define('_DIR_RESTREINT_ABS', 'ecrire/');
