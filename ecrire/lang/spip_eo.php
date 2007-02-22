@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Program-eraro. Tiu funkcio ne alvokeblas en tiu &#265;i kunteksto.',
 'avis_erreur_mysql' => 'MySQL-eraro',
 'avis_erreur_sauvegarde' => 'Konservo-eraro (@type@ @id_objet@)! ',
-'avis_erreur_visiteur' => '<NEW>Probl&egrave;me d\'acc&egrave;s &agrave; l\'espace priv&eacute;',
+'avis_erreur_visiteur' => 'Alir-problemo al la privata spaco',
 
 
 // B
@@ -82,7 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_semaine' => 'semajn-kalendaro',
 'choix_couleur_interface' => 'koloro',
 'choix_interface' => 'elekto de interfaco',
-'colonne' => '<NEW>Colonne',
+'colonne' => 'Kolumno',
 'confirm_changer_statut' => 'Atentu, vi petis por &#349;an&#285;i la statuton de tiu elemento. &#264;u vi deziras da&#365;rigi ?',
 'correcte' => 'korekta',
 
@@ -193,12 +193,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   Kontrolu ke la majuskloj ja kongruas kun tio kio estas afi&#349;ita &#265;i-supre;
   se ili ne kongruas, bonvolu renomi la dosierujon per via FTP-programo por korekti la eraron.
   <p />Post tio, vi povos',
-'dirs_repertoires_suivants' => '<b>La jenaj dosierujoj ne estas skribe alireblaj&nbsp;: 
+'dirs_repertoires_suivants' => '<b>La jenaj dosierujoj ne estas skribe modifeblaj&nbsp;: 
 <ul>@bad_dirs@.</ul></b>
 <p />Por solvi tion, uzu vian FTP-klienton por reguligi la alir-rajtojn de &#265;iu
- el tiuj dosierujoj. La proceduron oni detale klarigis en la instalgvidlibro.
+ el tiuj dosierujoj. La proceduron oni detale klarigas en la instalgvidlibro.
 <p />Post tio, vi povos ',
-'double_occurrence' => '<NEW>Double occurrence',
+'double_occurrence' => '<MODIF>Duobla trafo',
 
 
 // E
@@ -206,9 +206,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_document' => 'Titolo de la dokumento&nbsp;:',
 'entree_titre_image' => 'Bildtitolo&nbsp;:',
 'envoi_via_le_site' => 'Sendo tra la retejo',
-'erreur' => '<NEW>Erreur',
-'erreur_balise_non_fermee' => '<NEW>derni&egrave;re balise non referm&eacute;e :',
-'erreur_texte' => '<NEW>erreur(s)',
+'erreur' => 'Eraro',
+'erreur_balise_non_fermee' => 'lasta ne fermita marko :',
+'erreur_texte' => 'eraro(j)',
 
 
 // F
@@ -293,7 +293,7 @@ Dankon pro via partopreno
 'forum_non_inscrit' => 'Vi ne estas registrita, a&#365; la adreso a&#365; la pasvorto ne &#285;ustas.',
 'forum_page_url' => '(Se via mesa&#285;o rilatas al artikolo publikigita &#265;e la reto, a&#365; al pa&#285;o donanta pli da informoj, bonvolu indiki &#265;i-poste la titolon de la pa&#285;o kaj ties ret-adreson.)',
 'forum_par_auteur' => 'de @auteur@',
-'forum_poste_par' => '<MODIF>Mesa&#285;o post&eacute;@parauteur@ post via artikolo &laquo; @titre@ &raquo;.',
+'forum_poste_par' => 'Mesa&#285;o post&eacute;@parauteur@ reage al via artikolo &laquo; @titre@ &raquo;.',
 'forum_probleme_database' => 'Datenbazo-problemo, via mesa&#285;o ne estas registrita.',
 'forum_qui_etes_vous' => '<b>Kiu vi estas?</b> (nedeviga)',
 'forum_texte' => 'Teksto de via mesa&#285;o:',
@@ -425,8 +425,8 @@ Dankon pro via partopreno
 'info_erreur_requete' => 'Eraro en la peto: ',
 'info_erreur_squelette2' => 'Neniu skeleto <b>@fichier@</b> disponeblas...',
 'info_erreur_systeme' => 'Sistemo-eraro (errno @errsys@)',
-'info_erreur_systeme2' => '<MODIF>Eble la fiksdisko plenas, a&#365; la datenbazo estas difektita. <br />
- <font color=\'red\'><a href=\'@script@\'>Provu ripari la datenbazon</a>,
+'info_erreur_systeme2' => 'Eble la fiksdisko plenas, a&#365; la datenbazo estas difektita. <br />
+ <font color=\'red\'>Provu<a href=\'@script@\'>ripari la datenbazon</a>,
  a&#365; kontaktu vian retgastiganton.</font></br>',
 'info_fini' => 'Finite !',
 'info_format_image' => 'Bildaj formatoj uzeblaj por krei vinjetojn&nbsp;: @gd_formats@.',
@@ -434,7 +434,7 @@ Dankon pro via partopreno
 'info_grand_ecran' => 'Granda ekrano',
 'info_image_aide' => 'HELPILO',
 'info_image_process_titre' => 'Metodo pri vinjet-farado',
-'info_impossible_lire_page' => '<MODIF><b>Eraro!</b> Ne eblas legi la pa&#285;on <tt> <html>@test_proxy@</html> </tt> tra la prokura servilo <tt>',
+'info_impossible_lire_page' => '<b>Eraro!</b> Ne eblas legi la pa&#285;on <tt> <html>@test_proxy@</html> </tt> tra la prokura servilo <tt>',
 'info_inclusion_directe' => 'Rekta inkludo&nbsp;:',
 'info_inclusion_vignette' => 'Inkludo de la vinjeto&nbsp;:',
 'info_installation_systeme_publication' => 'Instalo de la publikiga sistemo...',
@@ -510,9 +510,9 @@ Dankon pro via partopreno
 'info_site_refuse' => 'Rifuzita retejo',
 'info_sites_referencer' => 'Referenci retejon',
 'info_supprimer_vignette' => 'forigi la vinjeton',
-'info_symbole_bleu' => '<MODIF>La <b>blua</b> simbolo indikas <b>memorigilon</b> : tio estas al vi persone adresata memoriga mesa&#285;o.',
-'info_symbole_jaune' => '<MODIF>La <b>flava</b> simbolo indikas <b>anoncon al &#265;iuj redaktantoj</b>&nbsp;: modifebla de &#265;iuj mastrumantoj, kaj videbla de &#265;iuj redaktantoj.',
-'info_symbole_vert' => '<MODIF>La <b>verda</b> simbolo indikas la <b>mesa&#285;ojn inter&#349;an&#285;itajn kun aliaj uzantoj</b> de la retejo.',
+'info_symbole_bleu' => 'La <b>blua</b> simbolo indikas <b>memorigilon</b> : tio estas al vi persone adresata memoriga mesa&#285;o.',
+'info_symbole_jaune' => 'La <b>flava</b> simbolo indikas <b>anoncon al &#265;iuj redaktantoj</b>&nbsp;: modifebla de &#265;iuj mastrumantoj, kaj videbla de &#265;iuj redaktantoj.',
+'info_symbole_vert' => 'La <b>verda</b> simbolo indikas la <b>mesa&#285;ojn inter&#349;an&#285;itajn kun aliaj uzantoj</b> de la retejo.',
 'info_syndication' => 'abonrilato&nbsp;:',
 'info_syndication_articles' => 'artikolo(j)',
 'info_telecharger' => 'Al&#349;uti ekde via komputilo&nbsp;:',
@@ -556,7 +556,7 @@ Dankon pro via partopreno
 'lien_visite_site' => 'viziti tiun retejon',
 'lien_visites' => '@visites@&nbsp;vizitoj',
 'lien_voir_auteur' => 'Vidu tiun a&#365;toron',
-'ligne' => '<NEW>Ligne',
+'ligne' => 'Linio',
 'login_acces_prive' => 'aliro al la privata spaco',
 'login_autre_identifiant' => 'ensaluti per alia kromnomo',
 'login_connexion_refusee' => 'Ensaluto rifuzita.',
@@ -596,11 +596,11 @@ Dankon pro via partopreno
 
 // N
 'navigateur_pas_redirige' => 'Se via retumilo ne redirekti&#285;as, da&#365;rigu musklakante &#265;i tie.',
-'numero' => '<NEW>Num&eacute;ro',
+'numero' => 'Numero',
 
 
 // O
-'occurence' => '<NEW>Occurence',
+'occurence' => '<MODIF>Trafo',
 'onglet_affacer_base' => 'Forigi la datenbazon',
 'onglet_auteur' => 'La a&#365;toro',
 'onglet_contenu_site' => 'Enhavo de la retejo',
@@ -668,7 +668,7 @@ kaj ensaluti.
 
 
 // S
-'spip_conforme_dtd' => '<NEW>SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE :',
+'spip_conforme_dtd' => 'SPIP konsideras tiun dokumenton konforma al sia DOCTYPE :',
 'squelette' => 'skeleto',
 'squelette_inclus_ligne' => 'skeleto inkluzivita, linio',
 'squelette_ligne' => 'skeleto, linio',
@@ -688,23 +688,23 @@ kaj ensaluti.
     sed ili ne estis rekte enmetitaj en &#285;in.
     La&#365; la enpa&#285;igo de la publika spaco,
     ili povos aperi en formo de alkro&#265;itaj dokumentoj.',
-'texte_erreur_mise_niveau_base' => '<MODIF>Datenbazo-eraro dum la alniveligo.
-  La bildo <b>@fichier@</b> ne aperis (artikolo @id_article@).
-  Notu bone tiun referencon, reprovu la alniveligon,
-  kaj fine kontrolu ke la bildoj aperu
-  plu en la artikoloj.',
-'texte_erreur_visiteur' => '<NEW>Vous avez tent&eacute; de d\'acc&eacute;der &agrave; l\'espace priv&eacute; avec un login qui ne le permet pas.',
-'texte_inc_auth_1' => '<MODIF>Vi ensalutis la&#365; la
-  salutnomo <b>@auth_login@</b>, sed tiu ne/ne plu ekzistas en la bazo.
+'texte_erreur_mise_niveau_base' => 'Datenbazo-eraro dum la alniveligo.
+  La bildo <b>@fichier@</b> ne trans&#349;uti&#285;is (artikolo @id_article@).
+  Bone notu tiun referencon, reprovu la alniveligon,
+  kaj fine kontrolu ke la bildoj plu aperu
+en la artikoloj.',
+'texte_erreur_visiteur' => 'Vi provis eniri la privatan spacon pere de ne alir-rajtiga salutnomo.',
+'texte_inc_auth_1' => 'Vi ensalutis la&#365; la
+  salutnomo <b>@auth_login@</b>, sed tiu ne/ne plu ekzistas en la datenbazo.
   Provu',
 'texte_inc_auth_2' => 'rekonekti&#285;i',
 'texte_inc_auth_3' => ', post esti eventuale ferminta kaj
   restartiginta via retumilon.',
-'texte_inc_config' => '<MODIF>La &#349;an&#285;oj faritaj en tiuj &#265;i pa&#285;oj influas grave la
- funkcionadon de via retejo. Ni konsilas vin ne plu interveni anta&#365; ol esti pli
- kutimi&#285;inta pri la funkcionado de la sistemo SPIP. <br /><br /><b>Pli
+'texte_inc_config' => 'La &#349;an&#285;oj faritaj en tiuj &#265;i pa&#285;oj influas grave la
+ funkciadon de via retejo. Ni konsilas al vi ne plu interveni anta&#365; ol esti pli
+ kutimi&#285;inta pri la funkciado de la SPIP-sistemo. <br /><br /><b>Pli
  &#285;enerale, estas tre konsilinde lasi la mastrumadon de tiuj &#265;i pa&#285;oj
- al la &#265;efa retejestro .</b>',
+sub la respondeco de la &#265;efa retejestro .</b>',
 'texte_inc_meta_1' => 'La sistemo detektis eraron dum skribado de la dosiero <code>@fichier@</code>. Bonvolu, kiel mastrumanto de la retejo,',
 'texte_inc_meta_2' => 'kontroli la skriborajtojn',
 'texte_inc_meta_3' => 'en la dosierujo <code>@repertoire@</code>.',
@@ -759,7 +759,7 @@ kaj ensaluti.
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: duobla difino',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: mankas fermanta marko',
 'zbug_erreur_boucle_syntaxe' => 'Ne valida ma&#349;a sintakso',
-'zbug_erreur_compilation' => '<NEW>Erreur de compilation',
+'zbug_erreur_compilation' => 'Kompil-eraro',
 'zbug_erreur_execution_page' => 'eraro dum plenumo de pa&#285;-afi&#349;o',
 'zbug_erreur_filtre' => 'Eraro : filtrilo <b>&laquo; @filtre@ &raquo;</b> nedifinita',
 'zbug_erreur_meme_parent' => '{meme_parent} nur apliki&#285;as je ma&#349;oj (FORUMS) a&#365; (RUBRIQUES)',
@@ -772,12 +772,12 @@ kaj ensaluti.
 'zbug_serveur_indefini' => 'nedifinata SQL servilo',
 'zbug_table_inconnue' => 'nekonata SQL &laquo; @table@ &raquo; tabelo',
 'zxml_connus_attributs' => '<NEW>attributs connus',
-'zxml_de' => '<NEW>de',
+'zxml_de' => 'de',
 'zxml_inconnu_attribut' => '<NEW>attribut inconnu',
-'zxml_inconnu_balise' => '<NEW>balise inconnue',
-'zxml_inconnu_entite' => '<NEW>entit&eacute; inconnue',
-'zxml_inconnu_id' => '<NEW>ID inconnu',
-'zxml_mais_de' => '<NEW>mais de',
+'zxml_inconnu_balise' => 'ne konita marko',
+'zxml_inconnu_entite' => 'ne konata ento',
+'zxml_inconnu_id' => 'ne konata ID',
+'zxml_mais_de' => 'sed',
 'zxml_non_conforme' => '<NEW>n\'est pas conforme au motif',
 'zxml_non_fils' => '<NEW>n\'est pas un fils de',
 'zxml_nonvide_balise' => '<NEW>balise non vide',

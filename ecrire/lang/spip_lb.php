@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Programm-Fehler. D&euml;s Fonktioun d&auml;rf n&euml;t an d&euml;sem Kontext opgeruff ginn.',
 'avis_erreur_mysql' => 'MySQL-Fehler',
 'avis_erreur_sauvegarde' => 'Fehler am Backup (@type@ @id_objet@)!',
+'avis_erreur_visiteur' => 'Zougangs-Problem zum privaten Deel',
 
 
 // B
@@ -81,6 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_semaine' => 'Kalenner vun der Woch',
 'choix_couleur_interface' => 'Farw',
 'choix_interface' => 'Wiel vum Interface',
+'colonne' => 'Kolonn',
 'confirm_changer_statut' => 'Opgepasst, dir w&euml;llt de Status vun d&euml;sem Element &auml;nneren. W&euml;llt dir weiderfueren?',
 'correcte' => 'richteg',
 
@@ -192,9 +194,10 @@ Kontroll&eacute;iert op d&eacute;i grouss an d&eacute;i kleng Buchstawen mat dee
 wann dat n&euml;t de Fall ass, &auml;nnert de Numm vun den Dossier\'en mat &auml;rer FTP-Software fir de Fehler ze verbesseren.
 <p>Wann dat gemaach ass, da k&euml;nnt dier',
 'dirs_repertoires_suivants' => '<p><b>D&euml;s Dossier\'en k&euml;nnen n&euml;t beschriwwen ginn:</b></p><ul>@bad_dirs@.</ul>
-<p>Fir dat ze verbesseren, benotzt &auml;r FTP-Software fir d\'Zougangsrechter vun jidfer Dossier anzestellen.
-D&euml;s Prozedur ass am Detail an der Installatiouns-Prozedur beschriwwen.<p>
+<p>Fir dat ze verbesseren, benotzt &auml;ren FTP-Client fir d\'Zougangsrechter vun jidfer Dossier anzestellen.
+D&euml;s Prozedur ass am Detail am Installatiouns-Guide beschriwwen.<p>
 <p>Wann dat gemaach ass, da k&euml;nnt dier ',
+'double_occurrence' => 'K&euml;nnt duebel fir',
 
 
 // E
@@ -202,6 +205,9 @@ D&euml;s Prozedur ass am Detail an der Installatiouns-Prozedur beschriwwen.<p>
 'entree_titre_document' => 'Titel vum Dokument:',
 'entree_titre_image' => 'Titel vum Bild:',
 'envoi_via_le_site' => 'Via &auml;ren Site sch&eacute;cken',
+'erreur' => 'Fehler',
+'erreur_balise_non_fermee' => 'L&auml;schten Tag deen n&euml;t zou ass:',
+'erreur_texte' => 'Fehler(en)',
 
 
 // F
@@ -543,6 +549,7 @@ oder kontakt&eacute;iert &auml;re Provider.</span>',
 'lien_visite_site' => 'd&euml;se Site kucken',
 'lien_visites' => '@visites@&nbsp;Visiten',
 'lien_voir_auteur' => 'D&euml;sen Auteur weisen',
+'ligne' => 'Ligne',
 'login_acces_prive' => 'Zougang zum privaten Deel',
 'login_autre_identifiant' => 'sech &euml;nnert engem aneren Login umelden',
 'login_connexion_refusee' => 'Login refus&eacute;iert.',
@@ -580,9 +587,11 @@ Wann dir n&euml;t w&euml;llt dat &auml;rt Passwuert ka um Internet ofgefaangen g
 
 // N
 'navigateur_pas_redirige' => 'Wann &auml;re Browser n&euml;t weider geleed g&euml;tt, da klickt hei.',
+'numero' => 'Nummer',
 
 
 // O
+'occurence' => 'K&euml;nnt fir',
 'onglet_affacer_base' => 'Datebank l&auml;schen',
 'onglet_auteur' => 'Den Auteur',
 'onglet_contenu_site' => 'Inhalt vum Site',
@@ -641,6 +650,7 @@ Dir k&euml;nnt do e neit Passwuert agin an Iech um Site umelden.
 
 
 // S
+'spip_conforme_dtd' => 'SPIP h&euml;lt d&euml;st Dokument als konform zu s&euml;ngem DOCTYPE un:',
 'squelette' => 'Skelett',
 'squelette_inclus_ligne' => 'Skelett abegraff, Zeil',
 'squelette_ligne' => 'Skelett, Zeil',
@@ -660,6 +670,7 @@ Dir k&euml;nnt do e neit Passwuert agin an Iech um Site umelden.
 'texte_erreur_mise_niveau_base' => 'Datebank-Fehler beim Update.
 D\'Bild <b>@fichier@</b> ass n&euml;t duerchgaang (Artikel @id_article@).
 Not&eacute;iert d&euml;s Referenz, prob&eacute;iert nach eng K&eacute;ier, a kontroll&eacute;iert op d\'Biller an den Artikelen gewisen ginn.',
+'texte_erreur_visiteur' => 'Dir hutt prob&eacute;iert mat engem n&euml;t erlaabten Login an de privaten Deel ze go&euml;n.',
 'texte_inc_auth_1' => 'Dir sidd identifi&eacute;iert als <b>@auth_login@</b>, awer deen Login g&euml;t &euml;t n&euml;t m&eacute;i an der Datebank.
 Versicht',
 'texte_inc_auth_2' => 'Iech unzemelden',
@@ -715,19 +726,38 @@ Versicht',
 'zbug_code' => '-Code-',
 'zbug_critere_inconnu' => 'Onbekannten Crit&egrave;re @critere@',
 'zbug_distant_interdit' => 'extern verbueden',
+'zbug_doublon_table_sans_index' => 'Verduebelung an enger Tabell ouni Index',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: duebel Definitioun',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: Schluss-Tag fehlt',
 'zbug_erreur_boucle_syntaxe' => 'Falsch Syntax vun der Schleef',
+'zbug_erreur_compilation' => 'Kompilatiouns-Fehler',
 'zbug_erreur_execution_page' => 'Fehler beim Berechnen vun der S&auml;it',
 'zbug_erreur_filtre' => 'Fehler: Filter <b>"@filtre@"</b> n&euml;t defin&eacute;iert',
 'zbug_erreur_meme_parent' => '{meme_parent} ass just fir d\'Bouclen (FORUMS) oder (RUBRIQUES)',
 'zbug_erreur_squelette' => 'Fehler am Skelett',
 'zbug_info_erreur_squelette' => 'Fehler um Site',
 'zbug_inversion_ordre_inexistant' => 'Inversioun vun enger Uerdnung d&eacute;i &euml;t n&euml;t g&euml;tt',
+'zbug_pagination_sans_critere' => '#PAGINATION ouni {pagination}-Crit&egrave;re oder an &euml;nger rekursiver Schl&auml;if gebraucht',
 'zbug_parametres_inclus_incorrects' => 'Falsch Parameteren fir d\'Inclusioun',
 'zbug_resultat' => '-eidel-',
 'zbug_serveur_indefini' => 'SQL-Server n&euml;t defin&eacute;iert',
-'zbug_table_inconnue' => 'Onbekannten SQL-Tabell "@table@"'
+'zbug_table_inconnue' => 'Onbekannten SQL-Tabell "@table@"',
+'zxml_connus_attributs' => 'Bekannten Attributer',
+'zxml_de' => 'vun',
+'zxml_inconnu_attribut' => 'Onbekanntent Attribut',
+'zxml_inconnu_balise' => 'Onbekannten Tag',
+'zxml_inconnu_entite' => 'Onbekannten Entit&eacute;it',
+'zxml_inconnu_id' => 'Onbekannten ID',
+'zxml_mais_de' => 'mais vun',
+'zxml_non_conforme' => 'ass n&euml;t konform zum Motiv',
+'zxml_non_fils' => 'ass kee Kand vun',
+'zxml_nonvide_balise' => 'Tag n&euml;t eidel',
+'zxml_obligatoire_attribut' => 'Obligator&euml;scht Attribut, fehlt awer an',
+'zxml_succession_fils_incorrecte' => 'Reihenfolge vun de Kanner n&euml;t richteg',
+'zxml_survoler' => 'driwer fl&eacute;ien fir d&eacute;i Richteg ze gesinn',
+'zxml_valeur_attribut' => 'Valeur vum Attribut',
+'zxml_vide_balise' => 'Eidelen Tag',
+'zxml_vu' => 'virdru gesinn'
 
 );
 
