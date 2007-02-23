@@ -69,36 +69,35 @@ function argumenter_inclure($struct, $descr, &$boucles, $id_boucle, $echap=true)
 //
 // http://doc.spip.org/@calculer_inclure
 function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
-	$fichier = $struct->texte;
 
-	# raccourci <INCLURE{fond=xxx}> sans fichier .php
-	if (!strlen($fichier))
-		$path = _DIR_RESTREINT.'public.php';
-
-	# sinon chercher le fichier, eventuellement en changeant.php3 => .php
+	# Si pas raccourci <INCLURE{fond=xxx}> 
+	# chercher le fichier, eventuellement en changeant.php3 => .php
 	# et en gardant la compatibilite <INCLURE(page.php3)>
-	else if (!($path = find_in_path($fichier))
-	AND !(
-		preg_match(',^(.*[.]php)3$,', $fichier, $r)
-		AND (
-			($path = find_in_path($r[1]))
-			OR ($path = ($r[1] == 'page.php') ? _DIR_RESTREINT.'public.php':'')
-		)
-	)) {
-		spip_log("ERREUR: <INCLURE($fichier)> impossible");
-		erreur_squelette(_T('zbug_info_erreur_squelette'),
+	if ($fichier = $struct->texte) {
+		if (preg_match(',^(.*[.]php)3$,', $fichier, $r)) {
+			$fichier = $r[1];
+		}
+		if ($fichier == 'page.php') {
+			$fichier = '';
+		} else {
+			$path = find_in_path($fichier);
+			if (!$path) {
+			spip_log("ERREUR: <INCLURE($fichier)> impossible");
+			erreur_squelette(_T('zbug_info_erreur_squelette'),
 				 "&lt;INCLURE($fichier)&gt; - "
 				 ._T('fichier_introuvable', array('fichier' => $fichier)));
-		return "'<!-- Erreur INCLURE(".texte_script($fichier).") -->'";
+			return "'<!-- Erreur INCLURE(".texte_script($fichier).") -->'";
+			}
+		}
 	}
-
-	$l = argumenter_inclure($struct, $descr, $boucles, $id_boucle);
 
 	return "\n'<".
 		"?php\n\t\$contexte_inclus = array(" .
-		join(",\n\t",$l) .
+		join(",\n\t", argumenter_inclure($struct, $descr, $boucles, $id_boucle)) .
 		");" .
-		"\n\tinclude(\\'$path\\');" .
+		"\n\tinclude(" .
+		($fichier ? "\\'$path\\'" : ('_DIR_RESTREINT . "public.php"')).
+		");" .
 		"\n?'." . "'>'";
  }
 
