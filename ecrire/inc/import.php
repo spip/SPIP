@@ -79,15 +79,13 @@ function xml_fetch_tag($f, &$before, $_fread='fread', $skip='!') {
 // http://doc.spip.org/@xml_parse_tag
 function xml_parse_tag($t) {
 
-	preg_match(',^(!?\w*),s', $t, $res);
+	preg_match(',^([\w[?!%.;:-]*),s', $t, $res);
 	$t = substr($t,strlen($res[0]));
 	$res[1] = array();
 
 	// pourquoi on ne peut pas mettre \3 entre crochets ?
-	while (preg_match(',^\s*(--.*?--)?\s*([^=]*)\s*=\s*([\'"])([^"]*)\3(.*)$,s', $t, $r)) {		
-
-		$res[1][$r[2]] = $r[4];
-		$t = $r[5];
+	if (preg_match_all(',\s*(--.*?--)?\s*([^=]*)\s*=\s*([\'"])([^"]*)\3,sS', $t, $m, PREG_SET_ORDER)) {
+		foreach($m as $r) $res[1][$r[2]] = $r[4];
 	}
 	return $res;
 }
