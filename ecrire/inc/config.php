@@ -151,7 +151,7 @@ function appliquer_modifs_config() {
 	global $retour_proxy;
 
 	if (_request('adresse_site'))
-		$_POST['adresse_site'] = preg_replace(",/$,", "", _request('adresse_site'));
+		$_POST['adresse_site'] = preg_replace(",/?\s*$,", "", _request('adresse_site'));
 
 	// Purger les squelettes si un changement de meta les affecte
 	if ($post_dates AND ($post_dates != $GLOBALS['meta']["post_dates"]))
