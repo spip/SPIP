@@ -218,7 +218,7 @@ function synthetiser_balise_dynamique($nom, $args, $file, $lang, $ligne) {
 		('<'.'?php 
 include_spip(\'inc/lang\');
 lang_select("'.$lang.'");
-include_once(_DIR_RESTREINT  . "'
+include_once(_DIR_RACINE . "'
 		. $file
 		. '");
 inclure_balise_dynamique(balise_'
@@ -253,7 +253,8 @@ function executer_balise_dynamique($nom, $args, $filtres, $lang, $ligne) {
 	if (!is_array($r))
 		return $r;
 	else {
-		$file = substr($file, strlen(_DIR_RESTREINT));
+		if (!_DIR_RESTREINT) 
+			$file = _DIR_RESTREINT_ABS . $file;
 		return synthetiser_balise_dynamique($nom, $r, $file, $lang, $ligne);
 	}
 }
