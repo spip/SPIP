@@ -15,7 +15,7 @@ rien=
 [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+
 
 [Google]
-(^q|[&]q|as_q)=
+(^q|\&q|as_q)=
 (www|ww)\.(google|gogole)\.(.*)
 (web|www).toile.com
 www\.cegetel\.net
