@@ -136,21 +136,8 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 		. "<td> &nbsp; </td>"
 		. "<td class='bandeau_couleur' style='text-align: $spip_lang_right;' valign='middle'>";
 
-			// Choix display
-		//	$res .="<img src=_DIR_IMG_PACK . 'rien.gif' width='10' />";
-		if ($options != "avancees") {
-				$lien = parametre_url(self(), 'set_options', 'avancees');
-				$icone = "interface-display-comp.png";
-				$alt =_T('icone_interface_complet');
-		} else {
-				$lien = parametre_url(self(), 'set_options', 'basiques');
-				$icone = "interface-display.png";
-				$alt =_T('icone_interface_simple');
-		}
-		$res .= "<a href='$lien' class='icone26' onmouseover=\"changestyle('bandeaudisplay');\" onfocus=\"changestyle('bandeaudisplay');\" onblur=\"changestyle('bandeaudisplay');\">"
-		. http_img_pack($icone, "$alt", "width='26' height='20'")."</a>"
-		. http_img_pack("rien.gif", "", "width='10' height='1'")
-		. http_img_pack("choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".gif", _T('choix_interface'), "class='format_png' style='vertical-align: middle' width='59' height='15' usemap='#map_layout'")
+		// Choix du layout
+		$res .= http_img_pack("choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".gif", _T('choix_interface'), "class='format_png' style='vertical-align: middle' width='59' height='15' usemap='#map_layout'")
 		. http_img_pack("rien.gif", "", "width='10' height='1'");
 			// grand ecran
 		if ($spip_ecran == "large") {
@@ -165,13 +152,13 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 			$ecran = "<div><b>"._T('info_petit_ecran')."</b>/<a href='".parametre_url(self(),'set_ecran', 'large')."' class='lien_sous'>"._T('info_grand_ecran')."</a></div>";
 		}
 
+		// Choix de la couleur
 		$res .= "</td>"
 		. "<td class='bandeau_couleur' style='width: 60px; text-align:$spip_lang_left;' valign='middle'>"
 		. choix_couleur()
 		. "</td>";
-	//
-	// choix de la langue
-	//
+
+		// choix de la langue
 		if ($GLOBALS['all_langs']) {
 			$res .= "<td class='bandeau_couleur' style='width: 100px; text-align: $spip_lang_right;' valign='middle'>"
 			. menu_langues('var_lang_ecrire')

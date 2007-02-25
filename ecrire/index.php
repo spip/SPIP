@@ -105,8 +105,7 @@ if (autoriser_sans_cookie($exec)) {
 
 
 if (!isset($GLOBALS['auteur_session']['prefs']))
-	$GLOBALS['prefs'] = array('couleur' =>1, 'display'=>0, 
-			  'options'=> $var_auth ? 'avancees' : 'basiques');
+	$GLOBALS['prefs'] = array('couleur' =>1, 'display'=>0);
 else $GLOBALS['prefs'] = unserialize($GLOBALS['auteur_session']['prefs']);
 
 $prefs_mod = false;
@@ -117,10 +116,6 @@ if (isset($_GET['set_couleur'])) {
 }
 if (isset($_GET['set_disp'])) {
 	$GLOBALS['prefs']['display'] = floor($_GET['set_disp']);
-	$prefs_mod = true;
-}
-if (isset($_GET['set_options']) AND ($_GET['set_options'] == 'avancees' OR $_GET['set_options'] == 'basiques')) {
-	$GLOBALS['prefs']['options'] = $_GET['set_options'];
 	$prefs_mod = true;
 }
 if ($prefs_mod AND !$var_auth)
@@ -134,8 +129,7 @@ if (isset($_GET['set_ecran'])) {
  } else $GLOBALS['spip_ecran'] = isset($_COOKIE['spip_ecran']) ? $_COOKIE['spip_ecran'] : "etroit";
 
 
-// deux globales (compatibilite ascendante)
-$GLOBALS['options']      = $GLOBALS['prefs']['options'];
+// compatibilite ascendante
 $GLOBALS['spip_display'] = $GLOBALS['prefs']['display'];
 $choix_couleur = $GLOBALS['prefs']['couleur'];
 if (!isset($GLOBALS['couleurs_spip'][$choix_couleur])) $choix_couleur = 1;
@@ -143,16 +137,20 @@ if (!isset($GLOBALS['couleurs_spip'][$choix_couleur])) $choix_couleur = 1;
 $GLOBALS['couleur_foncee'] = $GLOBALS['couleurs_spip'][$choix_couleur]['couleur_foncee'];
 $GLOBALS['couleur_claire'] = $GLOBALS['couleurs_spip'][$choix_couleur]['couleur_claire'];
 
+// Options "avancees" pour tout le monde (en attendant de les supprimer dans le code)
+$GLOBALS['options'] = 'avancees';
+
+
 // charger l'affichage minimal et initialiser a la langue par defaut
 include_spip('inc/minipres');
 
 //  si la langue est specifiee par cookie alors ...
-if (isset($GLOBALS['_COOKIE']['spip_lang_ecrire'])) {
+if (isset($_COOKIE['spip_lang_ecrire'])) {
 
-	$spip_lang_ecrire = $GLOBALS['_COOKIE']['spip_lang_ecrire'];
+	$spip_lang_ecrire = $_COOKIE['spip_lang_ecrire'];
 	// si pas authentifie, changer juste pour cette execution
 	if ($var_auth)
-		changer_langue($GLOBALS['_COOKIE']['spip_lang_ecrire']);
+		changer_langue($_COOKIE['spip_lang_ecrire']);
 	// si authentifie, changer definitivement si ce n'est fait
 	else {	if (($spip_lang_ecrire <> $GLOBALS['auteur_session']['lang'])
 		AND changer_langue($spip_lang_ecrire)) {

@@ -128,28 +128,8 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 	else
 			$bandeau .= "<div><b>"._T('info_petit_ecran')."</b>/<a href='".parametre_url(self(),'set_ecran', 'large')."' class='lien_sous'>"._T('info_grand_ecran')."</a></div>";
 	$bandeau .= "</div>";
-		
-	$decal = $decal + 110;
-		
-	// En interface simplifiee, afficher en permanence l'indication de l'interface
-	if ($options != "avancees") {
-		$bandeau .= "\n<div id='displayfond' class='bandeau bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right; visibility: visible; background-color: white; color: $couleur_foncee; z-index: -1000; border: 1px solid $couleur_claire; border-top: 0px;'>"
-		. "<b>" . _T('icone_interface_simple')."</b>"
-		. "</div>\n";
-	}
-	$bandeau .= "\n<div id='bandeaudisplay' class='bandeau bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>";
 
-	if ($options != 'avancees') {
-		$bandeau .= "<b>"._T('icone_interface_simple')."</b>/<a href='".parametre_url(self(),'set_options', 'avancees')."' class='lien_sous'>"._T('icone_interface_complet')."</a>";
-	} else {
-		$bandeau .= "<a href='".parametre_url(self(),'set_options', 'basiques')."' class='lien_sous'>"._T('icone_interface_simple')."</a>/<b>"._T('icone_interface_complet')."</b>";
-	}
 
-	if ($options != "avancees") {
-		$bandeau .= "<div>&nbsp;</div><div style='width: 250px; text-align: $spip_lang_left;'>"._T('texte_actualite_site_1')."<a href='./?set_options=avancees'>"._T('texte_actualite_site_2')."</a>"._T('texte_actualite_site_3')."</div>\n";
-	}
-
-	$bandeau .= "</div>";
 	$bandeau .= "</div>";
 	$bandeau .= "</td></tr></table>\n";
 
@@ -262,7 +242,7 @@ function repercuter_gadgets($id_rubrique) {
 
 	."
 	jQuery('#gadget-messagerie')
-	.html('".addslashes(strtr(gadget_messagerie(),"\n\r","  "))."');
+	.html('".str_replace('</', '<\\/', addslashes(strtr(gadget_messagerie(),"\n\r","  ")))."');
 	"
 
 	// la case de recherche s'efface la premiere fois qu'on la clique
