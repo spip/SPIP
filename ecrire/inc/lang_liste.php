@@ -147,6 +147,7 @@ $GLOBALS['codes_langues'] = array(
 	'rm' => "Rhaeto-Romance",
 	'rn' => "Kirundi",
 	'ro' => "rom&#226;n&#259;",
+	'roa' => "ch'ti",
 	'ru' => "&#1088;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;",
 	'rw' => "Kinyarwanda",
 	'sa' => "&#2360;&#2306;&#2360;&#2381;&#2325;&#2371;&#2340;",
@@ -195,7 +196,8 @@ $GLOBALS['codes_langues'] = array(
 	'yi' => "Yiddish",
 	'yo' => "Yoruba",
 	'za' => "Zhuang",
-	'zh' => "&#20013;&#25991;",
+	'zh' => "&#20013;&#25991;", // chinois (ecriture simplifiee)
+	'zh_tw' => "&#21488;&#28771;&#20013;&#25991;", // chinois taiwan (ecr. traditionnelle)
 	'zu' => "Zulu"
 
 );
