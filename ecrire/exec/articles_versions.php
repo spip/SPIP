@@ -181,11 +181,13 @@ while ($row = spip_fetch_array($result)) {
 	}
 
 	if (isset($row['id_auteur'])) {
-		$t = spip_fetch_array(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur='".addslashes($row['id_auteur'])."'"));
-		if ($t)
+		if ($row['id_auteur'] == intval($row['id_auteur'])
+		AND $s = spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur='".addslashes($row['id_auteur'])."'")) {
+			$t = spip_fetch_array($s);
 			echo " (".typo($t['nom']).")";
-		else
+		} else {
 			echo " (".$row['id_auteur'].")"; #IP edition anonyme
+		}
 	}
 
 	if ($version_aff != $id_version) {
