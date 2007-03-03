@@ -57,13 +57,14 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 		$source = $img;
 		$img = "<img src='$source' />";
 	}
-	$fichier = $source;
+
 	// les protocoles web prennent au moins 3 lettres
 	if (preg_match(';^(\w{3,7}://);', $source)){
 		include_spip("inc/distant");
 		$fichier = copie_locale($source);
-	}
-	
+		if (!$fichier) return "";
+	} else 	$fichier = $source;
+
 	$terminaison_dest = "";
 	if (preg_match(",^(?>.*)(?<=\.(gif|jpg|png)),", $fichier, $regs)) {
 		$terminaison = $regs[1];
@@ -72,8 +73,9 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 		if ($terminaison == "gif") $terminaison_dest = "png";
 	}
 	if ($forcer_format!==false) $terminaison_dest = $forcer_format;
+
 	if (!$terminaison_dest) return false;
-	
+
 	$term_fonction = $terminaison;
 	if ($term_fonction == "jpg") $term_fonction = "jpeg";
 
