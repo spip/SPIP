@@ -97,7 +97,7 @@ function exec_breves_edit_dist()
 	# note : traiter_modeles($texte, true) repere les doublons
 	# aussi efficacement que propre(), mais beaucoup plus rapidement
 		traiter_modeles("$titre$texte", true);
-		afficher_documents_colonne($id_breve, "breve");
+		echo afficher_documents_colonne($id_breve, "breve");
 	}
 echo pipeline('affiche_gauche',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''));
 creer_colonne_droite();
