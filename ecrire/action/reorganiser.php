@@ -26,10 +26,10 @@ function gerer_deplacements($deplacements){
 				$id_quoi=intval($quoi[1]);$id_cible=intval($cible[1]);
 				if (($quoi[0]=='article')&&($id_cible!=0))
 					if (autoriser('modifier','rubrique',$id_cible)&& autoriser('modifier','article',$id_quoi))
-						spip_query("UPDATE spip_articles SET id_rubrique=".spip_abstract_quote($id_cible)." WHERE id_article=".spip_abstract_quote($id_quoi));
+						spip_query("UPDATE spip_articles SET id_rubrique="._q($id_cible)." WHERE id_article="._q($id_quoi));
 				if ($quoi[0]=='rubrique')
 					if (autoriser('modifier','rubrique',$id_cible)&& autoriser('modifier','rubrique',$id_quoi))
-						spip_query("UPDATE spip_rubriques SET id_parent=".spip_abstract_quote($id_cible)." WHERE id_rubrique=".spip_abstract_quote($id_quoi));
+						spip_query("UPDATE spip_rubriques SET id_parent="._q($id_cible)." WHERE id_rubrique="._q($id_quoi));
 			}
 		}
 		include_spip('inc/rubriques');
