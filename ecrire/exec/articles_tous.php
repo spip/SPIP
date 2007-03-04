@@ -37,7 +37,8 @@ function exec_articles_tous_dist()
 	else {
 
 		pipeline('exec_init',array('args'=>array('exec'=>'articles_tous'),'data'=>''));
-		debut_page(_T('titre_page_articles_tous'), "accueil", "tout-site");
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('titre_page_articles_tous'), "accueil", "tout-site");
 		$flux = "";
 		$flux.='<script type="text/javascript"><!--
 var img_deplierhaut = "'._DIR_IMG_PACK.'noeud_plus.gif";
