@@ -647,7 +647,7 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 		// envoyer la boucle au debugueur
 		if ($GLOBALS['var_mode']== 'debug') {
 		  boucle_debug ($nom, $id_parent, $id_boucle, 
-				$type . $jointures,
+				$type . ($jointures ? ' '.$jointures : ''),
 				$params,
 				$result->avant,
 				$milieu,
