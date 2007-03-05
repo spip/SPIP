@@ -1946,6 +1946,7 @@ function compacte($source, $format = null) {
 
 
 // clone de http://php.net/var_export compatible < 4.2.0 et sans ob_xx
+// http://doc.spip.org/@spip_var_export
 function spip_var_export($s) {
 	if (is_array($s)) {
 		foreach ($s as $k=>$v)
