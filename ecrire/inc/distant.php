@@ -316,19 +316,39 @@ function recuperer_infos_distantes($source, $max=0) {
 	// ca echoue l'utilisateur devra les entrer...
 	if ($headers = recuperer_page($source, false, true, $max)) {
 		list($headers, $a['body']) = split("\n\n", $headers, 2);
-		$t = preg_match(",\nContent-Type: *([^[:space:];]*),i",
-				"\n$headers", $regs);
-		if ($t) {
+
+		if (preg_match(",\nContent-Type: *([^[:space:];]*),i", "\n$headers", $regs))
 			$mime_type = (trim($regs[1]));
+		else
+			$mime_type = ''; // inconnu
 
-			// Appliquer les alias
-			while (isset($mime_alias[$mime_type]))
-				$mime_type = $mime_alias[$mime_type];
+		// Appliquer les alias
+		while (isset($mime_alias[$mime_type]))
+			$mime_type = $mime_alias[$mime_type];
 
-			$t = spip_fetch_array(spip_query("SELECT id_type,extension FROM spip_types_documents WHERE mime_type=" . _q($mime_type)));
+		// Si on a text/plain, c'est peut-etre que le serveur ne sait pas
+		// ce qu'il sert ; on va tenter de detecter via l'extension de l'url
+		$t = null;
+		if (($mime_type == 'text/plain' OR $mime_type == '')
+		AND preg_match(',\.([a-z0-9]+)(\?.*)?$,', $source, $rext)) {
+			$t = spip_fetch_array(spip_query("SELECT id_type,extension FROM spip_types_documents WHERE extension=" . _q($rext[1])));
 		}
+
+		// Autre mime/type (ou text/plain avec fichier d'extension inconnue)
+		if (!$t)
+			$t = spip_fetch_array(spip_query("SELECT id_type,extension FROM spip_types_documents WHERE mime_type=" . _q($mime_type)));
+
+		// Toujours rien ? (ex: audio/x-ogg au lieu de application/ogg)
+		// On essaie de nouveau avec l'extension
+		if (!$t
+		AND $mime_type != 'text/plain'
+		AND preg_match(',\.([a-z0-9]+)(\?.*)?$,', $source, $rext)) {
+			$t = spip_fetch_array(spip_query("SELECT id_type,extension FROM spip_types_documents WHERE extension=" . _q($rext[1])));
+		}
+
+
 		if ($t) {
-			spip_log("mime-type $mime_type ok");
+			spip_log("mime-type $mime_type ok, extension ".$t['extension']);
 			$a['id_type'] = $t['id_type'];
 			$a['extension'] = $t['extension'];
 		} else {
@@ -347,7 +367,7 @@ function recuperer_infos_distantes($source, $max=0) {
 
 	// Echec avec HEAD, on tente avec GET
 	if (!$a AND !$max) {
-	spip_log("tente $source");
+		spip_log("tenter GET $source");
 		$a = recuperer_infos_distantes($source, 1024*1024);
 	}
 

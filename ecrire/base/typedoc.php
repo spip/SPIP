@@ -199,6 +199,9 @@ $tables_mime = array(
 
 
 	$mime_alias = array (
+		'audio/x-mpeg' => 'audio/mpeg',
+		'application/x-ogg' => 'application/ogg',
+		'video/mp4' => 'application/mp4',
 		'video/flv' => 'video/x-flv'
 	);
 
