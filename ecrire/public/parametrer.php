@@ -316,6 +316,10 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 
 	$composer = charger_fonction('composer', 'public');
 
+	// Le debugueur veut afficher le contexte
+	if ($GLOBALS['var_mode'] == 'debug')
+		$GLOBALS['debug_objets']['contexte'][$sourcefile] = $local;
+
 	if ($fonc = $composer($skel, $mime_type, $gram, $sourcefile)){
 		spip_timer($a = 'calcul page '.rand(0,1000));
 		$page = $fonc(array('cache' => $cache), array($local));

@@ -89,7 +89,7 @@ function critere_lang_select_dist($idb, &$boucles, $crit) {
 // http://doc.spip.org/@critere_debut_dist
 function critere_debut_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
-	$boucle->limit = 'intval($GLOBALS["debut' .
+	$boucle->limit = 'intval($Pile[0]["debut' .
 	  $crit->param[0][0]->texte .
 	  '"]) . ",' .
 	  $crit->param[1][0]->texte .
@@ -110,7 +110,7 @@ function critere_pagination_dist($idb, &$boucles, $crit) {
 
 	$boucle = &$boucles[$idb];
 	$boucle->mode_partie = 'p+';
-	$boucle->partie = 'intval(_request("debut".'.$debut.'))';
+	$boucle->partie = 'intval($Pile[0][\'debut\'.'.$debut.'])';
 	$boucle->modificateur['debut_nom'] = $debut;
 	$boucle->total_parties = $pas;
 	if (!isset($boucle->modificateur['fragment']))
