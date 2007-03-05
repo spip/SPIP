@@ -14,9 +14,7 @@
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-## cette API ne sait pas gerer les aliases ; a revoir...
-
-global $tables_images, $tables_sequences, $tables_documents, $tables_mime;
+global $tables_images, $tables_sequences, $tables_documents, $tables_mime, $mime_alias;
 
 $tables_images = array(
 		       // Images reconnues par PHP
@@ -198,4 +196,10 @@ $tables_mime = array(
 		'otg' => 'application/vnd.oasis.opendocument.graphics-template'
 		
 	);
+
+
+	$mime_alias = array (
+		'video/flv' => 'video/x-flv'
+	);
+
 ?>
