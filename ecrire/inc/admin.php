@@ -54,37 +54,35 @@ function debut_admin($script, $action, $commentaire='') {
 			return true;
 		}
 		$form = $commentaire
-			. "<form action='./' method='post'>"
-			. copy_request($script)
-			. '<input type="hidden" name="validation_admin" value="'.$signal.'" />'
-			. bouton_suivant(_T('bouton_valider'))
-		. "</form>";
+		  . copy_request($script,
+				 ('<input type="hidden" name="validation_admin" value="'.$signal.'" />'
+				  . bouton_suivant(_T('bouton_valider'))));
+
 		$js = '';
 	}
 
 	else {
 		$form =  $commentaire
-		. "<form action='./' method='post'>"
-		. copy_request($script)
-		. fieldset(_T('info_authentification_ftp').aide("ftp_auth"),
-			array(
-				'fichier' => array(
-					'label' => _T('info_creer_repertoire'),
-					'valeur' => $signal
-					)),
-			('<br />'
-			 . _T('info_creer_repertoire_2', array('repertoire' => joli_repertoire($dir)))
-			 . bouton_suivant(_T('bouton_recharger_page'))))
-		. "</form>";
-		$js = " onload='document.forms[0].fichier.value=\"\";barre_inserer(\"$signal\", document.forms[0].fichier)'";
-	}
+		  . copy_request($script,
+				 (fieldset(_T('info_authentification_ftp').aide("ftp_auth"),
+					   array(
+						 'fichier' => array(
+								    'label' => _T('info_creer_repertoire'),
+								    'valeur' => $signal
+								    )),
+					   ('<br />'
+					    . _T('info_creer_repertoire_2', array('repertoire' => joli_repertoire($dir)))
+					    . bouton_suivant(_T('bouton_recharger_page'))))));
 
 	// code volontairement tordu:
 	// provoquer la copie dans le presse papier du nom du repertoire
 	// en remettant a vide le champ pour que ca marche aussi en cas
 	// de JavaScript inactif.
-	echo minipres(_T('info_action', array('action' => $action)),
-		 $form, $js);
+
+		$js = " onload='document.forms[0].fichier.value=\"\";barre_inserer(\"$signal\", document.forms[0].fichier)'";
+	}
+
+	echo minipres(_T('info_action', array('action' => $action)), $form, $js);
 	exit;
 }
 
@@ -103,7 +101,7 @@ function fin_admin($action) {
 
 
 // http://doc.spip.org/@copy_request
-function copy_request($script)
+function copy_request($script, $suite)
 {
 	$hidden = ""; 
 	$args = $_POST;
@@ -115,6 +113,7 @@ function copy_request($script)
 		  entites_html($c) .
 		  "'  />";
 	}
-	return $hidden;
+	return "<form action='" . generer_url_ecrire() .
+	  "' method='post'><div>$hidden$suite</div></form>";
 }
 ?>

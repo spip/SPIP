@@ -42,7 +42,7 @@ function action_editer_breve_dist() {
 	} 
 	// Erreur
 	else{
-		redirige_par_entete('./');
+		redirige_par_entete(generer_url_ecrire());
 	}
 
 	// Rediriger le navigateur

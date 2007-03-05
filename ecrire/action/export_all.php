@@ -79,7 +79,7 @@ function action_export_all_dist()
 		
 			echo "<p style='text-align: left'>".
 			  $n,
-			" <a href='" . _DIR_RESTREINT . "'>".
+			  " <a href='" . generer_url_ecrire() . "'>".
 			_T('info_sauvegarde_reussi_03')
 			. "</a> "
 			._T('info_sauvegarde_reussi_04')

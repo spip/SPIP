@@ -62,7 +62,7 @@ function exec_upgrade_dist() {
 
 	// Qu'est-ce que tu fais ici?
 	if ($spip_version == $version_installee)
-		redirige_par_entete('./');
+		redirige_par_entete(generer_url_ecrire());
 
 	// On passe a l'upgrade
 	include_spip('inc/admin');

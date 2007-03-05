@@ -21,7 +21,8 @@ function action_editer_rubrique_dist() {
 	$arg = $securiser_action();
 
 	if (!$id_rubrique = intval($arg)) {
-		if ($arg != 'oui') redirige_par_entete('./');
+		if ($arg != 'oui') 
+			redirige_par_entete(generer_url_ecrire());
 		$id_rubrique = insert_rubrique(_request('id_parent'));
 	}
 
