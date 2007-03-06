@@ -400,8 +400,17 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 	if ($row = spip_fetch_array($result)) {
 		$nouveau = !$row['flag'];
 		$id_version = $row['id_version'];
-		if ($nouveau) $id_version_new = $id_version + 1;
-		else $id_version_new = $id_version;
+		if ($nouveau) {
+			$id_version_new = $id_version + 1;
+		} else {
+			// On reprend une version existante ; pour qu'elle soit complete
+			// il faut merger ses champs avec ceux qu'on met a jour
+			$id_version_new = $id_version;
+			$champs = array_merge(
+				recuperer_version($id_article, $id_version),
+				$champs
+			);
+		}
 	}
 	else {
 		$nouveau = true;
