@@ -166,7 +166,7 @@ function afficher_si_rdv($date_heure, $date_fin, $choix)
 	return $res .
 	 "\n<div id='heure-rv' style='display: $display; padding-top: 4px; padding-left: 24px;'>" .
 	  afficher_jour_mois_annee_h_m($date_heure, $heures_debut, $minutes_debut) .
-	  "\n<br /><img src='puce$spip_lang_rtl.gif' alt=' '/> &nbsp; " .
+	  "<br />".
 	  afficher_jour_mois_annee_h_m($date_fin, $heures_fin, $minutes_fin, '_fin') .
 	  "</div>";
 }
