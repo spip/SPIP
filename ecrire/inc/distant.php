@@ -169,6 +169,7 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false,
 
 	for ($i=0;$i<10;$i++) {	// dix tentatives maximum en cas d'entetes 301...
 		list($f, $fopen) = init_http($get, $url, $refuser_gz, $uri_referer);
+		$gz = false;
 
 		// si on a utilise fopen() - passer a la suite
 		if ($fopen) {
