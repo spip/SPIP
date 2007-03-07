@@ -279,17 +279,20 @@ function conserver_original($id_forum) {
 
 	// recopier le forum
 	$t = spip_fetch_array(
-		spip_query("SELECT date_heure,titre,texte,auteur,email_auteur,nom_site,url_site,ip,id_auteur,idx,id_thread FROM spip_forum WHERE id_forum="._q($id_forum))
+		spip_query("SELECT * FROM spip_forum WHERE id_forum="._q($id_forum)),
+		SPIP_ASSOC
 	);
 
-	if ($t
-	AND spip_query("INSERT spip_forum (date_heure,titre,texte,auteur,email_auteur,nom_site,url_site,ip,id_auteur,idx,id_thread) VALUES (".join(',',array_map('_q', $t)).")")) {
-		$id_copie = spip_insert_id();
-		spip_query("UPDATE spip_forum SET id_parent="._q($id_forum).", statut='original' WHERE id_forum=$id_copie");
-		return ''; // pas d'erreur
+	if ($t) {
+		unset($t['id_forum']);
+		if (spip_query("INSERT spip_forum (".join(',',array_keys($t)).") VALUES (".join(',',array_map('_q', $t)).")")) {
+			$id_copie = spip_insert_id();
+			spip_query("UPDATE spip_forum SET id_parent="._q($id_forum).", statut='original' WHERE id_forum=$id_copie");
+			return ''; // pas d'erreur
+		}
 	}
 
-		return '&erreur';
+	return '&erreur';
 }
 
 // appelle conserver_original(), puis modifie le contenu via l'API inc/modifier
