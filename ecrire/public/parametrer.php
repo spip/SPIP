@@ -324,6 +324,8 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 		spip_timer($a = 'calcul page '.rand(0,1000));
 		$page = $fonc(array('cache' => $cache), array($local));
 
+		if ($n = calculer_notes()) spip_log("notes ignorees par $fonc: $n");
+
 		// spip_log: un joli contexte
 		$info = array();
 		foreach($local as $var => $val)

@@ -470,10 +470,11 @@ function argumenter_balise($fonctions, $sep) {
 // fonction appelee par la balise #NOTES
 // http://doc.spip.org/@calculer_notes
 function calculer_notes() {
-	$r = $GLOBALS["les_notes"];
-	$GLOBALS["les_notes"] = "";
-	$GLOBALS["compt_note"] = 0;
-	$GLOBALS["marqueur_notes"] ++;
+	if ($r = $GLOBALS["les_notes"]) {
+		$GLOBALS["les_notes"] = "";
+		$GLOBALS["compt_note"] = 0;
+		$GLOBALS["marqueur_notes"] ++;
+	}
 	return $r;
 }
 
