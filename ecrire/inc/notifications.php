@@ -26,8 +26,8 @@ function inc_notifications_dist($quoi, $id=0, $options=array()) {
 }
 
 // Fonction appelee par divers pipelines
-// http://doc.spip.org/@notifications_instituerarticle
-function notifications_instituerarticle($quoi, $id_article, $options) {
+// http://doc.spip.org/@notifications_instituerarticle_dist
+function notifications_instituerarticle_dist($quoi, $id_article, $options) {
 
 	// ne devrait jamais se produire
 	if ($options['statut'] == $options['statut_ancien']) {
