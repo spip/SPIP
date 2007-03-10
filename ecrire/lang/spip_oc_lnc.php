@@ -86,6 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'calendrier_synchro_sync' => 'Sincronizar lo fichi&egrave;r <i>iCal</i><br /> (Mozilla Calendar, Apple iCal...)',
 'choix_couleur_interface' => 'color ',
 'choix_interface' => 'causir l\'interf&agrave;cia',
+'colonne' => 'Colomna',
 'confirm_changer_statut' => 'Atencion, av&egrave;tz demandat de cambiar l\'estatut d\'aquel element. Desiratz de contunhar? ',
 'correcte' => 'corr&egrave;cte',
 
@@ -200,6 +201,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>Per adobar aqu&ograve;, utilizatz v&ograve;stre client FTP per tal de reglar los dreches d\'acc&egrave;s de cadun
   d\'aqueles repert&ograve;ris. La guida d\'installacion explica en detalh coss&iacute; cal procedir.</p>
   <p>Tre qu\'auretz facha aquela manipulacion, poiretz ',
+'double_occurrence' => 'Dobla ocurr&eacute;ncia',
 
 
 // E
@@ -207,6 +209,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_document' => 'T&iacute;tol del document:',
 'entree_titre_image' => 'T&iacute;tol de l\'imatge:',
 'envoi_via_le_site' => 'Mandad&iacute;s amb lo biais del sit web',
+'erreur' => 'Error',
+'erreur_balise_non_fermee' => 'darri&egrave;ra balisa non tampada :',
+'erreur_texte' => 'error(s)',
 
 
 // F
@@ -554,6 +559,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'lien_visite_site' => 'vesitar aquel sit',
 'lien_visites' => '@visites@&nbsp;vesitas',
 'lien_voir_auteur' => 'Veire aquel autor',
+'ligne' => 'Linha',
 'login_acces_prive' => 'acc&egrave;s a l\'espaci privat',
 'login_autre_identifiant' => 'se connectar amb un autre identificant',
 'login_connexion_refusee' => 'Connexion refusada.',
@@ -593,9 +599,11 @@ Merc&eacute;s per v&ograve;stra participacion
 
 // N
 'navigateur_pas_redirige' => 'Se v&ograve;stre navigador es pas redirigit, clicatz aic&iacute; per contunhar.',
+'numero' => 'Num&egrave;ro',
 
 
 // O
+'occurence' => 'Ocurr&eacute;ncia',
 'onglet_affacer_base' => 'Escafar la basa',
 'onglet_auteur' => 'L\'autor',
 'onglet_contenu_site' => 'Contengut del sit',
@@ -663,6 +671,7 @@ e vos tornar connectar al sit.
 
 
 // S
+'spip_conforme_dtd' => 'SPIP consid&egrave;ra aquel document coma conf&ograve;rm a son DOCTYPE :',
 'squelette' => 'esqueleta',
 'squelette_inclus_ligne' => 'esqueleta inclusa, linha',
 'squelette_ligne' => 'esqueleta, linha',
@@ -749,19 +758,38 @@ e vos tornar connectar al sit.
 'zbug_code' => 'c&ograve;de',
 'zbug_critere_inconnu' => 'crit&egrave;ri inconegut @critere@',
 'zbug_distant_interdit' => 'ext&egrave;rne enebit',
+'zbug_doublon_table_sans_index' => 'doblons sus una taula sens ind&egrave;x',
 'zbug_erreur_boucle_double' => 'BLOCA@id@: definicion dobla',
 'zbug_erreur_boucle_fermant' => 'BLOCA@id@: lo tag barrador manca',
 'zbug_erreur_boucle_syntaxe' => 'Sintaxi bloca incorr&egrave;cta',
+'zbug_erreur_compilation' => 'Error de compilacion',
 'zbug_erreur_execution_page' => 'error d\'execucion de la pagina',
 'zbug_erreur_filtre' => 'Error: filtre <b>&laquo; @filtre@ &raquo;</b> non definit',
 'zbug_erreur_meme_parent' => '{meme_parent} s\'aplica sonque a las blocas (FORUMS) o (RUBRIQUES)',
 'zbug_erreur_squelette' => 'Error(s) dins l\'esqueleta',
 'zbug_info_erreur_squelette' => 'Error subre lo sit',
 'zbug_inversion_ordre_inexistant' => 'inversion d\'un &ograve;rdre inexistent',
+'zbug_pagination_sans_critere' => '#PAGINATION sens crit&egrave;ri {pagination} o emplegat dins una bocla recursiva',
 'zbug_parametres_inclus_incorrects' => 'Param&egrave;tres d\'inclusion incorr&egrave;ctes',
 'zbug_resultat' => 'resultat',
 'zbug_serveur_indefini' => 'servidor SQL indefinit',
-'zbug_table_inconnue' => 'Taula SQL &laquo; @table@ &raquo; inconeguda'
+'zbug_table_inconnue' => 'Taula SQL &laquo; @table@ &raquo; inconeguda',
+'zxml_connus_attributs' => 'atributs coneguts',
+'zxml_de' => 'de',
+'zxml_inconnu_attribut' => 'atribut inconegut',
+'zxml_inconnu_balise' => 'balisa inconeguda',
+'zxml_inconnu_entite' => 'entitat inconeguda',
+'zxml_inconnu_id' => 'ID inconegut',
+'zxml_mais_de' => 'mas de',
+'zxml_non_conforme' => 'es pas conf&ograve;rm al motiu',
+'zxml_non_fils' => 'es pas un filh de',
+'zxml_nonvide_balise' => 'balisa non voida',
+'zxml_obligatoire_attribut' => 'atribut obligat&ograve;ri mas absent dins',
+'zxml_succession_fils_incorrecte' => 'succession dels filhs incorr&egrave;cte',
+'zxml_survoler' => 'susvolar per veire los corr&egrave;ctes',
+'zxml_valeur_attribut' => 'valor de l\'atribut',
+'zxml_vide_balise' => 'balise voida',
+'zxml_vu' => 'vist aperavant'
 
 );
 

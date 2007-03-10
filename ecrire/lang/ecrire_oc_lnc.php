@@ -34,6 +34,7 @@ la documentacion d\'SPIP</a>.',
 'avis_non_acces_message' => 'Pod&egrave;tz pas accedir a aquel messatge.',
 'avis_non_acces_page' => 'Pod&egrave;tz pas accedir a aquela pagina.',
 'avis_operation_echec' => 'L\'operacion a abocat.',
+'avis_operation_impossible' => 'Operacion impossibla',
 'avis_probleme_archive' => 'Probl&egrave;ma de lectura del fichi&egrave;r @archive@',
 'avis_site_introuvable' => 'Sit introbable',
 'avis_site_syndique_probleme' => 'Atencion: la sindicacion d\'aquel sit a encontrat un probl&egrave;ma; lo sist&egrave;ma es doncas interromput tempor&agrave;riament. Verificatz l\'adrei&ccedil;a del fichi&egrave;r de sindicacion d\'aquel sit (<b>@url_syndic@</b>), e tornatz ensajar de recuperar las informacions.',
@@ -48,6 +49,7 @@ la documentacion d\'SPIP</a>.',
 'bouton_ajouter' => 'Apondre',
 'bouton_ajouter_participant' => 'APONDRE UN PARTICIPANT:',
 'bouton_annonce' => 'ANONCI',
+'bouton_annuler' => 'Anullar',
 'bouton_checkbox_envoi_message' => 'possibilitat de mandar un messatge',
 'bouton_checkbox_indiquer_site' => 'indicar obligat&ograve;riament un sit web',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'los administrators del sit',
@@ -111,6 +113,7 @@ la documentacion d\'SPIP</a>.',
 'cache_mode_non_compresse' => 'Los fichi&egrave;rs de l\'escondedor son registrats en m&ograve;de non comprimit.',
 'cache_modifiable_webmestre' => 'Lo webm&egrave;stre del sit p&ograve;t modificar aqueste param&egrave;tre.',
 'calendrier_synchro' => 'S\'utilizatz un logicial d\'agenda compatible <b>iCal</b>, lo pod&egrave;tz sincronizar amb las informacions d\'aqueste sit.',
+'connexion_ldap' => 'Conexion :',
 
 
 // D
@@ -173,10 +176,15 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'erreur_plugin_version_manquant' => 'Version de l\'ajuston mancanta',
 
 
+// F
+'forum_info_original' => 'original',
+
+
 // I
 'ical_info1' => 'Aquela pagina m&ograve;stra de met&ograve;des diferents per demorar en contacte amb la vida d\'aquel sit.',
 'ical_info2' => 'Per t&eacute;ner mai d\'informacions subre aquelas tecnicas, esitetz pas de consultar <a href="http://www.spip.net/fr_suivi">la documentacion d\'SPIP</a>.',
 'ical_info_calendrier' => 'I a dos calendi&egrave;rs a la v&ograve;stra disposicion. Lo primi&egrave;r es un plan del sit qu\'an&oacute;ncia totes los articles publicats. Lo segond conten los anoncis editorials en mai de v&ograve;stres darri&egrave;rs messatges privats: vos es reservat gr&agrave;cias a una clau personala, que la pod&egrave;tz modificar en tot moment en renovant v&ograve;stre mot de santa Clara. ',
+'ical_lien_rss_breves' => 'Sindicacion de las br&egrave;vas del sit',
 'ical_methode_http' => 'Telecargament',
 'ical_methode_webcal' => 'Sincronizacion (webcal://)',
 'ical_texte_js' => 'Los articles publicats en aquel sit se p&ograve;don afichar aisit, dins totes los sits v&ograve;stres, en far servir una linha javascript. ',
@@ -470,6 +478,7 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'info_procedez_par_etape' => 'procediss&egrave;tz estapa per estapa',
 'info_procedure_maj_version' => 'Cal lan&ccedil;ar la procedura d\'actualizacion per adaptar
  la basa de donadas a la version nov&egrave;la d\'SPIP.',
+'info_proxy_ok' => 'Ensag del proxy capitat.',
 'info_ps' => 'P.S.',
 'info_publier' => 'publicar',
 'info_publies' => 'Los v&ograve;stres articles publicats en linha',
@@ -610,6 +619,7 @@ una color indica lor estat:',
 'install_echec_annonce' => 'L\'installacion capitar&agrave; mal, o abotir&agrave; a un sit non foncional...',
 'install_extension_mbstring' => 'SPIP fonciona pas amb:',
 'install_extension_php_obligatoire' => 'SPIP exig&iacute;s l\'extension php:',
+'install_php_version' => 'PHP version @version@ insuffisanta (minimum = @minimum@)',
 'install_select_langue' => 'Seleccionatz una lenga pu&egrave;i clicatz lo boton &laquo;&nbsp;seguent&nbsp;&raquo; per amodar la procedura d\'installacion.',
 'intem_redacteur' => 'redactor',
 'item_accepter_inscriptions' => 'Acceptar las inscripcions',
@@ -697,6 +707,7 @@ una color indica lor estat:',
 'lien_supprimer_rubrique' => 'suprimir aquela rubrica',
 'lien_tout_deplier' => 'O desplegar tot',
 'lien_tout_replier' => 'Tornar plegar',
+'lien_tout_supprimer' => 'Suprimir tot',
 'lien_trier_nom' => 'Triar per nom',
 'lien_trier_nombre_articles' => 'Triar per nombre d\'articles',
 'lien_trier_statut' => 'Triar per estatut',
@@ -744,6 +755,7 @@ una color indica lor estat:',
 'plugin_etat_stable' => 'estable',
 'plugin_etat_test' => 'a l\'ensag',
 'plugins_liste' => 'Ti&egrave;ra dels ajustons',
+'protocole_ldap' => 'Version del protoc&ograve;l :',
 
 
 // R
@@ -751,6 +763,8 @@ una color indica lor estat:',
 
 
 // S
+'sauvegarde_fusionner' => 'Fusionar la basa actuala e lo salvament',
+'sauvegarde_url_origine' => 'Eventualament, URL del sit d\'origina :',
 'statut_admin_restreint' => '(admin. restrench)',
 'syndic_choix_moderation' => 'Que se p&ograve;t far amb los ligams venents que provenon d\'aquel sit?',
 'syndic_choix_oublier' => 'Que se p&ograve;t far amb los ligams que figuran pas pus dins lo fichi&egrave;r de sindicacion?',
@@ -1051,6 +1065,7 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura del sit.',
 'titre_sites_tous' => 'Los sits referenciats',
 'titre_suivi_petition' => 'Seguit de las peticions',
 'titre_syndication' => 'Sindicacion de sits',
+'tls_ldap' => 'Transport Layer Security :',
 'tout_dossier_upload' => 'Tot lo dorsi&egrave;r @upload@',
 'trad_article_inexistant' => 'I a pas cap d\'article que p&ograve;rte aquel num&egrave;ro.',
 'trad_article_traduction' => 'Totas las versions d\'aquel article:',
