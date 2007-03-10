@@ -260,6 +260,7 @@ function nettoyer_raccourcis_typo($texte){
 
 // http://doc.spip.org/@couper
 function couper($texte, $taille=50) {
+	if (!strlen($texte)) return '';
 	$offset = 400 + 2*$taille;
 	if (	$offset<strlen($texte)
 			&& ($p_tag_ouvrant = strpos($texte,'<',$offset))!==NULL){
