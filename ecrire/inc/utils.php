@@ -144,7 +144,7 @@ function pipeline($action,$val) {
 		// on passe $action en arg pour creer la fonction meme si le pipe
 		// n'est defini nul part ; vu qu'on est la c'est qu'il existe !
 		verif_plugin($action);
-		spip_log("fonction $f absente : pipeline desactive");
+		spip_log("fonction $fonc absente : pipeline desactive");
 	}
 	// si le flux est une table qui encapsule donnees et autres
 	// on ne ressort du pipe que les donnees
@@ -214,7 +214,7 @@ function spip_connect($serveur='') {
 	$base_serveur = charger_fonction($serveur, 'base', true);
 
 	if (!$base_serveur) {
-		spip_log("serveur inconnue $serveur");
+		spip_log("serveur inconnu $serveur");
 		return $t[$serveur] = false;
 	}
 	return $t[$serveur] = $base_serveur();

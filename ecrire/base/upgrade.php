@@ -1306,7 +1306,7 @@ function maj_base($version_cible = 0) {
 
 	// FLV est embeddable, l'upgrade precedent l'avait oublie
 	if (upgrade_vers(1.931, $version_installee, $version_cible)) {
-		spip_query("UPDATE spip spip_types_documents SET inclus='embed' WHERE extension='flv'");
+		spip_query("UPDATE spip_types_documents SET inclus='embed' WHERE extension='flv'");
 		maj_version('1.931');
 	}
 
