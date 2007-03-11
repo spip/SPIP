@@ -845,7 +845,7 @@ function http_calendrier_sans_date($annee, $mois, $evenements)
 function http_calendrier_sans_heure($ev)
 {
 	$desc = propre($ev['DESCRIPTION']);
-	$sum = $ev['SUMMARY'];
+	$sum = typo($ev['SUMMARY']);
 	if (!$sum) $sum = $desc;
 	$i = isset($ev['DESCRIPTION']) ? 11 : 9; // 11: article; 9:autre
 	if ($ev['URL'])
