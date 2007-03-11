@@ -885,6 +885,12 @@ function requete_hash ($rech) {
 function prepare_recherche($recherche, $primary = 'id_article', $id_table='articles',$nom_table='spip_articles', $cond=false) {
 	static $cache = array();
 	static $fcache = array();
+
+	// si recherche n'est pas dans le contexte, on va prendre en globals
+	// ca permet de faire des inclure simple.
+	if (!isset($recherche) AND isset($GLOBALS['recherche']))
+		$recherche = $GLOBALS['recherche'];
+
 	// traiter le cas {recherche?}
 	if ($cond AND !strlen($recherche))
 		return array("''" /* as points */, /* where */ '1');
