@@ -21,11 +21,22 @@ include_spip('inc/statistiques');
 // on prend donc le plus proche au-dessus de x de la forme 12,16,20,40,60,80,100
 // http://doc.spip.org/@maxgraph
 function maxgraph($max) {
-	$max = max(10,$max);
-	$p = pow(10, strlen($max)-2);
-	$m = $max/$p;
-	foreach (array(100,80,60,40,20,16,12,10) as $l)
-		if ($m<=$l) $maxgraph = $l*$p;
+	switch (strlen($max)) {
+	case 0:
+		$maxgraph = 1;
+		break;
+	case 1:
+		$maxgraph = 16;
+		break;
+	case 2:
+		$maxgraph = (floor($max / 8) + 1) * 8;
+		break;
+	case 3:
+		$maxgraph = (floor($max / 80) + 1) * 80;
+		break;
+	default:
+		$maxgraph = (floor($max / (2 * pow(10, strlen($max)-2))) + 1) * 2 * pow(10, strlen($max)-2);
+	}
 	return $maxgraph;
 }
 
@@ -655,6 +666,13 @@ if ($GLOBALS['accepte_svg']) {
 			$visites = $row['total_visites'];
 			$i++;
 			$entrees["$date"] = $visites;
+		}
+		// Pour la derniere date, rajouter les visites du jour sauf si premier jour du mois
+		if (date("d",time()) > 1) {
+			$entrees["$date"] += $visites_today;
+		} else { // Premier jour du mois : le rajouter dans le tableau des date (car il n'etait pas dans le resultat de la requete SQL precedente)
+			$date = date("Y-m",time());
+			$entrees["$date"] = $visites_today;
 		}
 		
 		if (count($entrees)>0){
