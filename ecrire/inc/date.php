@@ -54,11 +54,21 @@ function afficher_mois($mois, $attributs, $autre=false){
 }
 
 // http://doc.spip.org/@afficher_annee
-function afficher_annee($annee, $attributs, $debut=1996) {
-	$res = ($annee > 1996) ? '' : my_sel($annee,$annee,$annee);
-	for ($i=$debut; $i < date("Y") + 3; $i++) {
+function afficher_annee($annee, $attributs, $debut=null) {
+
+	if (!isset($debut)) $debut = $annee - 8;
+	$fin = max($annee, date('Y')) + 3;
+
+	if ($fin - $debut > 15)
+		return "<input type='text' value='$annee' size='4' $attributs />";
+
+	$res = ($annee > $debut) ? '' : my_sel($annee,$annee,$annee);
+	for ($i=$debut; $i < $fin; $i++) {
 		$res .= my_sel($i,$i,$annee);
 	}
+	// plus de choix... on met une vieille date arbitraire, et au tour
+	// suivant on aura un champ input a la place du select (pas genial...)
+	$res .= my_sel(date('Y')-10,'&nbsp; ...',$annee);
 	return "<select $attributs>\n$res</select>\n";
 }
 
@@ -103,7 +113,7 @@ function afficher_jour_mois_annee_h_m($date, $heures, $minutes, $suffixe='')
   return 
     afficher_jour(jour($date), "name='jour$suffixe' size='1' class='fondl verdana1'") .
     afficher_mois(mois($date), "name='mois$suffixe' size='1' class='fondl verdana1'") .
-    afficher_annee(annee($date), "name='annee$suffixe' size='1' class='fondl verdana1'", date('Y')-1) .
+    afficher_annee(annee($date), "name='annee$suffixe' class='fondl verdana1'", date('Y')-1) .
     "&nbsp;  <input type='text' class='fondl verdana1' name='heures$suffixe' value=\"".$heures."\" size='3'/>&nbsp;".majuscules(_T('date_mot_heures'))."&nbsp;" .
     "<input type='text' class='fondl verdana1' name='minutes$suffixe' value=\"$minutes\" size='3'/>";
 }

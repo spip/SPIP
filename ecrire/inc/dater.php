@@ -45,7 +45,7 @@ function inc_dater_dist($id, $flag, $statut, $type, $script, $date, $date_redac=
 
 	if ($statut == 'publie') {
 
-		$js = "size='1' class='fondl'
+		$js = "class='fondl'
 onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
 
 		$invite =  "<b><span class='verdana1'>"
