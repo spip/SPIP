@@ -81,9 +81,9 @@ function bandeau_auteurs($tri, $statut)
 {
 	global $options, $spip_lang_right, $connect_id_auteur,   $connect_statut,   $connect_toutes_rubriques;
 
-	if ($tri=='nom') $s = _T('info_par_nom');
-	if ($tri=='statut') $s = _T('info_par_statut');
-	if ($tri=='nombre') $s = _T('info_par_nombre_articles');
+//	if ($tri=='nom') $s = _T('info_par_nom');
+//	if ($tri=='statut') $s = _T('info_par_statut');
+//	if ($tri=='nombre') $s = _T('info_par_nombre_articles');
 	$s = ' ('._T('info_par_nombre_article').')';
 
 	if ($statut == '6forum') {
