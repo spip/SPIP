@@ -41,7 +41,8 @@ function balise_FORMULAIRE_SITE_dyn($id_rubrique) {
 	if ($nom = _request('nom_site')) {
 
 		// Tester le nom du site
-		if (strlen ($nom) < 2)
+		if (strlen ($nom) < 2
+		OR strlen(_request('nobot'))>0)
 			$message_erreur = _T('form_prop_indiquer_nom_site');
 
 		// Tester l'URL du site
