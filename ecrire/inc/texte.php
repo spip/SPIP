@@ -667,7 +667,6 @@ function calculer_url ($lien, $texte='', $pour='url') {
 			}
 
 			$res = $f($id, $texte, $ancre);
-			$res[2] = $res[2];
 			if ($pour == 'titre')
 				return $res[2];
 			if ($params)
@@ -716,8 +715,10 @@ function calculer_url_article($id, $texte='') {
 	$lien = generer_url_article($id);
 	$s = spip_query("SELECT titre,lang FROM spip_articles WHERE id_article=$id");
 	$row = spip_fetch_array($s);
-	if ($texte=='')
+	if (!trim($texte))
 		$texte = supprimer_numero($row['titre']);
+	if (!trim($texte))
+	  $texte = _T('article') . $id;
 	return array($lien, 'spip_in', $texte, $row['lang']);
 }
 
@@ -727,8 +728,10 @@ function calculer_url_rubrique($id, $texte='')
 	$lien = generer_url_rubrique($id);
 	$s = spip_query("SELECT titre,lang FROM spip_rubriques WHERE id_rubrique=$id");
 	$row = spip_fetch_array($s);
-	if ($texte=='')
+	if (!trim($texte))
 		$texte = supprimer_numero($row['titre']);
+	if (!trim($texte))
+	    $texte = $id;
 	return array($lien, 'spip_in', $texte, $row['lang']);
 }
 
@@ -738,8 +741,10 @@ function calculer_url_mot($id, $texte='')
 	$lien = generer_url_mot($id);
 	$s = spip_query("SELECT titre FROM spip_mots WHERE id_mot=$id");
 	$row = spip_fetch_array($s);
-	if ($texte=='')
+	if (!trim($texte))
 		$texte = supprimer_numero($row['titre']);
+	if (!trim($texte))
+	    $texte = $id;
 	return array($lien, 'spip_in', $texte);
 }
 
@@ -749,8 +754,10 @@ function calculer_url_breve($id, $texte='')
 	$lien = generer_url_breve($id);
 	$s = spip_query("SELECT titre,lang FROM spip_breves WHERE id_breve=$id");
 	$row = spip_fetch_array($s);
-	if ($texte=='')
+	if (!trim($texte))
 		$texte = supprimer_numero($row['titre']);
+	if (!trim($texte))
+	    $texte = $id;
 	return array($lien, 'spip_in', $texte, $row['lang']);
 }
 
@@ -774,8 +781,10 @@ function calculer_url_document($id, $texte='')
 		$s = spip_query("SELECT titre,fichier FROM spip_documents WHERE id_document=$id");
 		$row = spip_fetch_array($s);
 		$texte = $row['titre'];
-		if ($texte=='')
+		if (!trim($texte))
 			$texte = preg_replace(",^.*/,","",$row['fichier']);
+		if (!trim($texte))
+		    $texte = $id;
 	}
 	return array($lien, 'spip_in', $texte); # pas de hreflang
 }
@@ -789,8 +798,10 @@ function calculer_url_site($id, $texte='')
 	$row = spip_fetch_array($s);
 	if ($row) {
 		$lien = $row['url_site'];
-		if ($texte=='')
+		if (!trim($texte))
 			$texte = supprimer_numero($row['nom_site']);
+		if (!trim($texte))
+		    $texte = $id;
 	}
 	return array($lien, 'spip_out', $texte, $row['lang']);
 }
@@ -799,11 +810,12 @@ function calculer_url_site($id, $texte='')
 function calculer_url_forum($id, $texte='')
 {
 	$lien = generer_url_forum($id);
-	if ($texte=='') {
+	if (!trim($texte)) {
 		$s = spip_query("SELECT titre FROM spip_forum WHERE id_forum=$id AND statut='publie'");
 		$row = spip_fetch_array($s);
-		if ($texte=='')
-			$texte = $row['titre'];
+		$texte = $row['titre'];
+		if (!trim($texte))
+		    $texte = $id;
 	}
 	return array($lien, 'spip_in', $texte); # pas de hreflang
 }
