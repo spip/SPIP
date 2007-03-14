@@ -108,6 +108,10 @@ function deplacer_fichier_upload($source, $dest, $move=false) {
 // http://doc.spip.org/@check_upload_error
 function check_upload_error($error, $msg='') {
 	global $spip_lang_right;
+
+	if ($error)
+		spip_log("Erreur upload $error -- cf. http://php.net/manual/fr/features.file-upload.errors.php");
+
 	switch ($error) {
 		case 0:
 			return false;
