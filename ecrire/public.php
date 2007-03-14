@@ -19,8 +19,9 @@ if (defined('_INC_PUBLIC')) {
 		$fond = $contexte_inclus['fond'];
 	$subpage = inclure_page($fond, $contexte_inclus);
 
-	if ($subpage['process_ins'] == 'html')
+	if ($subpage['process_ins'] == 'html'){
 		echo $subpage['texte'];
+	}
 	else
 		eval('?' . '>' . $subpage['texte']);
 
@@ -210,7 +211,7 @@ if (defined('_INC_PUBLIC')) {
 	}
 
 	// Report du hack pour <?xml (cf. public/compiler.php)
-	if ($xml_hack)
+	if (strpos($page['texte'],"<\1?xml")!==FALSE)
 		$page['texte'] = str_replace("<\1?xml", '<'.'?xml', $page['texte']);
 
 	// (c'est ici qu'on fait var_recherche, tidy, boutons d'admin,

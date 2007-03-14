@@ -383,7 +383,7 @@ function message_erreur_404 ($erreur= "") {
 // fonction permettant de recuperer le resultat du calcul d'un squelette
 // pour une inclusion dans un flux
 // http://doc.spip.org/@recuperer_fond
-function recuperer_fond($fond, $contexte=array()) {
+function recuperer_fond($fond, $contexte=array(),$protect_xml=false) {
 
 	// on est peut etre dans l'espace prive au moment de l'appel
 	define ('_INC_PUBLIC', 1);
@@ -399,6 +399,8 @@ function recuperer_fond($fond, $contexte=array()) {
 		$page['texte'] = ob_get_contents();
 		ob_end_clean();
 	}
+	if (!$protect_xml && isset($page['entetes']['X-Xml-Hack']))
+		$page['texte'] = str_replace("<\1?xml", '<'.'?xml', $page['texte']);
 
 	return trim($page['texte']);
 }
