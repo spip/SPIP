@@ -847,7 +847,7 @@ function traiter_tableau($bloc) {
 			}
 		// - <thead> sous la forme |{{titre}}|{{titre}}|
 		//   Attention thead oblige a avoir tbody
-			else if (preg_match(',^(\|([[:space:]]*{{[^}]+}}[[:space:]]*|<))+$,sS',
+			else if (preg_match(',^(\|([[:space:]]*(:?{{[^}]+}}[[:space:]]*)?|<))+$,sS',
 				$ligne, $thead)) {
 			  	preg_match_all("/\|([^|]*)/S", $ligne, $cols);
 				$ligne='';$cols= $cols[1];
