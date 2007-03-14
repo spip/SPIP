@@ -300,7 +300,7 @@ $table_des_traitements['DESCRIPTIF_SITE_SPIP'][]= 'propre(%s)';
 $table_des_traitements['URL_SITE'][]= 'calculer_url(%s)';
 $table_des_traitements['URL_SOURCE'][]= 'vider_url(%s)';
 $table_des_traitements['URL_SYNDIC'][]= 'vider_url(%s)';
-$table_des_traitements['ENV'][]= 'entites_html(%s)';
+$table_des_traitements['ENV'][]= 'entites_html(%s,true)';
 
 
 // Articles syndiques : passage des donnees telles quelles, sans traitement typo
