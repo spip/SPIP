@@ -220,9 +220,12 @@ function revision_forum($id_forum, $c=false) {
 	}
 
 	// s'il y a vraiment eu une modif, on stocke le numero IP courant
-	// ainsi que le nouvel id_auteur dans le message modifie ;
+	// ainsi que le nouvel id_auteur dans le message modifie ; et on
+	// enregistre le nouveau date_thread
 	if ($r) {
 		spip_query("UPDATE spip_forum SET ip="._q($GLOBALS['ip']).", id_auteur="._q($GLOBALS['auteur_session']['id_auteur'])." WHERE id_forum="._q($id_forum));
+
+		spip_query("UPDATE spip_forum SET date_thread=NOW() WHERE id_thread=".$t['id_thread']);
 	}
 }
 
