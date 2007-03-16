@@ -1320,7 +1320,7 @@ function maj_base($version_cible = 0) {
 		spip_query("DROP TABLE IF EXISTS spip_tmp");
 		spip_query("CREATE TEMPORARY TABLE spip_tmp SELECT id_thread,MAX(date_heure) AS dt FROM spip_forum GROUP BY id_thread");
 		spip_query("ALTER TABLE spip_tmp ADD INDEX p (id_thread)");
-		spip_query("UPDATE spip_forum JOIN spip_tmp ON spip_forum.id_thread=spip_tmp.id_thread SET spip_forum.date_thread=spip_tmp.dt");
+		spip_query("UPDATE spip_forum AS F JOIN spip_tmp AS T ON F.id_thread=T.id_thread SET F.date_thread=T.dt");
 		spip_query("DROP TABLE spip_tmp");
 
 		maj_version('1.932');
