@@ -1228,7 +1228,7 @@ define('_RACCOURCI_LIEN', ",\[([^][]*)->(>?)([^]]*)\],msS");
 // http://doc.spip.org/@traiter_raccourcis
 function traiter_raccourcis($letexte) {
 	global $debut_intertitre, $fin_intertitre, $ligne_horizontale, $url_glossaire_externe;
-	global $debut_italiques, $fin_italiques;
+	global $debut_italique, $fin_italique;
 	global $debut_gras, $fin_gras;
 	global $compt_note;
 	global $marqueur_notes;
