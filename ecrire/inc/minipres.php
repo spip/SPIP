@@ -65,7 +65,7 @@ function install_debut_html($titre = 'AUTO', $onLoad = '') {
 	font-size: 0.8em;
 	font-family: Verdana,Arial,Sans,sans-serif; }\n".
 		".formo { width: 100%; display: block; padding: 3px;
-	margin-top: 1em;
+	margin-bottom: 1em;
 	background-color: #FFF; 
 	border: 1px solid #333; 
 	background-position: center bottom; 
