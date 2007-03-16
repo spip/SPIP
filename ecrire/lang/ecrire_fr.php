@@ -604,7 +604,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_surtitre' => 'Surtitre :',
 'info_syndication_integrale_1' => 'Votre site propose des fichiers de syndication (voir &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
 'info_syndication_integrale_2' => 'Souhaitez-vous transmettre les articles dans leur int&eacute;gralit&eacute;, ou ne diffuser qu\'un r&eacute;sum&eacute; de quelques centaines de caract&egrave;res&nbsp;?',
-'info_table_prefix' => 'Laissez "spip", &agrave; changez seulement si plusieurs spip dans une m&ecirc;me base, attention, si vide vous fonctionnerez sans préfixe pour les noms de table',
+'info_table_prefix' => 'Les donn&eacute;es de ce site sont enregistr&eacute;es dans des tables nomm&eacute;es <tt><b>spip</b>_articles</tt>, <tt><b>spip</b>_rubriques<tt>, etc. Si vous installez plusieurs sites dans la m&ecirc;me base de donn&eacute;es, vous pouvez modifier ce pr&eacute;fixe (attention, uniquement avec des lettres minuscules et sans accents).',
 'info_taille_maximale_vignette' => 'Taille maximale des vignettes g&eacute;n&eacute;r&eacute;es par le syst&egrave;me&nbsp;:',
 'info_terminer_installation' => 'Vous pouvez maintenant terminer la proc&eacute;dure d\'installation standard.',
 'info_texte' => 'Texte',
@@ -837,7 +837,7 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 'texte_choix_base_1' => 'Choisissez votre base :',
 'texte_choix_base_2' => 'Le serveur MySQL contient plusieurs bases de donn&eacute;es.',
 'texte_choix_base_3' => '<b>S&eacute;lectionnez</b> ci-apr&egrave;s celle qui vous a &eacute;t&eacute; attribu&eacute;e par votre h&eacute;bergeur:',
-'texte_choix_table_prefix' => 'Pr&eacute;fixe des noms de tables :',
+'texte_choix_table_prefix' => 'Pr&eacute;fixe des tables&nbsp;:',
 'texte_commande_vider_tables_indexation' => 'Utilisez cette commande afin de vider les tables d\'indexation utilis&eacute;es
 			par le moteur de recherche int&eacute;gr&eacute; &agrave; SPIP. Cela vous permettra
 			de gagner de l\'espace disque.',

@@ -527,7 +527,7 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'info_vignette_defaut' => 'Icona per defecte',
 'info_vignette_personnalisee' => 'Icona personalitzada',
 'info_visite' => 'visita:',
-'info_visites' => 'visites :',
+'info_visites' => 'visites:',
 'info_vos_rendez_vous' => 'Les vostres cites',
 'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'Els vostres recordatoris',

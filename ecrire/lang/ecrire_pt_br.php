@@ -463,7 +463,7 @@ Os idiomas j&aacute; utilizados no site (no topo da lista) n&atilde;o podem ser 
 'info_pour' => 'para',
 'info_preview_admin' => 'Apenas os administradores podem visualizar o site',
 'info_preview_comite' => 'Todos os redatores podem visualizar o site',
-'info_preview_desactive' => 'A &#381;visualiza&ccedil;&atilde;o est&aacute; totalmente desativada',
+'info_preview_desactive' => 'A visualiza&ccedil;&atilde;o est&aacute; totalmente desativada',
 'info_preview_texte' => '&Eacute; poss&iacute;vel visualizar o site como se todas as mat&eacute;rias e notas (tendo pelo menos o status de &laquo;proposta&raquo;) estivessem publicadas. Esta possibilidade deve estar dispon&iacute;vel apenas para os administradores, para todos os redatores, ou para ningu&eacute;m?',
 'info_principaux_correspondants' => 'Seus correspondentes principais',
 'info_procedez_par_etape' => 'proceder passo-a-passo',
