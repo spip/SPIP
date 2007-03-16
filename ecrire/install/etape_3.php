@@ -13,7 +13,10 @@
 // http://doc.spip.org/@inc_install_3
 function install_etape_3_dist()
 {
-	global $adresse_db, $login_db, $pass_db, $spip_lang_right, $chmod;
+	global $adresse_db, $login_db, $pass_db, $spip_lang_right, $chmod, $table_prefix;
+	if (is_null($table_prefix)) {
+		$table_prefix = 'spip';
+	}
 
 	echo install_debut_html();
 
@@ -80,6 +83,11 @@ function install_etape_3_dist()
 	if (!$checked) echo " checked='checked'";
 	echo " /> <label for='nou'>"._T('info_creer_base')."</label></p><p>";
 	echo "<input type='text' name='table_new' class='fondl' value=\"spip\" size='20' /></p></fieldset>";
+
+	echo "<fieldset><legend>"._T('texte_choix_table_prefix')."</legend>\n";
+	echo "<label for='table_prefix'>"._T('info_table_prefix')."</label></p><p>";
+	echo "<input type='text' name='table_prefix' class='fondl' value='" .
+		$table_prefix . "' size='10' /></p></fieldset>";
 
 	echo bouton_suivant();
 	echo "</form>";

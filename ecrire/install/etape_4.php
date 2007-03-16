@@ -17,7 +17,10 @@ include_spip('inc/headers');
 // http://doc.spip.org/@inc_install_4
 function install_etape_4_dist()
 {
-	global $adresse_db, $choix_db, $login_db, $pass_db, $spip_lang_right, $spip_version, $table_new, $chmod;
+	global $adresse_db, $choix_db, $login_db, $pass_db, $spip_lang_right, $spip_version, $table_new, $chmod, $table_prefix;
+	if (isset($_REQUEST['table_prefix'])) {
+		$table_prefix = $_REQUEST['table_prefix'];
+	}
 
 	echo install_debut_html('AUTO', ' onLoad="document.getElementById(\'suivant\').focus();return false;"');
 
@@ -56,6 +59,10 @@ function install_etape_4_dist()
 		$GLOBALS['mysql_rappel_nom_base'] = false;
 		$ligne_rappel = "\$GLOBALS['mysql_rappel_nom_base'] = false; ".
 		"/* echec du test sur `$sel_db`.spip_meta lors de l'installation. */\n";
+	}
+	
+	if ($table_prefix != 'spip') {
+		$ligne_rappel .= "\$GLOBALS['table_prefix'] = '" . $table_prefix . "';\n";
 	}
 
 	if ($nouvelle) {
