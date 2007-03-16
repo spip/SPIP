@@ -926,7 +926,7 @@ function traiter_tableau($bloc) {
 		$html = "<tr class=\"$class\">" . $ligne . "</tr>\n".$html;
 	}
 
-	return "\n\n<table class=\"spip\"$summary>\n"
+	return "\n\n<table".$GLOBALS['class_spip_plus'].$summary.">\n"
 		. $debut_table
 		. "<tbody>\n"
 		. $html
@@ -940,6 +940,7 @@ function traiter_tableau($bloc) {
 //
 // http://doc.spip.org/@traiter_listes
 function traiter_listes ($texte) {
+	global $class_spip;
 	$parags = preg_split(",\n[[:space:]]*\n,S", $texte);
 	$texte ='';
 
@@ -986,11 +987,11 @@ function traiter_listes ($texte) {
 				while ($niveau < $profond) {
 					if ($niveau == 0) $ajout .= "\n\n";
 					$niveau ++;
-					$ajout .= "<$type class=\"spip\">";
+					$ajout .= "<$type$class_spip>";
 					$pile_type[$niveau] = "</$type>";
 				}
 
-				$ajout .= "<li class=\"spip\">";
+				$ajout .= "<li$class_spip>";
 				$pile_li[$profond] = "</li>";
 			}
 			else {
@@ -1108,6 +1109,8 @@ function traiter_modeles($texte, $doublons=false, $echap='') {
 //
 // http://doc.spip.org/@paragrapher
 function paragrapher($letexte, $forcer=true) {
+	global $class_spip;
+
 	$letexte = trim($letexte);
 	if (!strlen($letexte))
 		return '';
@@ -1140,8 +1143,8 @@ function paragrapher($letexte, $forcer=true) {
 		$letexte = preg_replace(',<p\s[^>]*></p>\s*,iS', '',
 			$letexte);
 
-		// Renommer les paragraphes normaux avec class="spip"
-		$letexte = str_replace('<p >', '<p class="spip">',
+		// Renommer les paragraphes normaux
+		$letexte = str_replace('<p >', '<p$class_spip>',
 			$letexte);
 
 	}
@@ -1230,6 +1233,7 @@ function traiter_raccourcis($letexte) {
 	global $debut_intertitre, $fin_intertitre, $ligne_horizontale, $url_glossaire_externe;
 	global $debut_italique, $fin_italique;
 	global $debut_gras, $fin_gras;
+	global $class_spip, $class_spip_plus;
 	global $compt_note;
 	global $marqueur_notes;
 	global $ouvre_ref;
@@ -1248,13 +1252,18 @@ function traiter_raccourcis($letexte) {
 
 	// Verifier les variables de personnalisation
 	if (!$tester_variables++) {
-		tester_variable('debut_intertitre', "\n<h3 class=\"spip\">");
-		tester_variable('fin_intertitre', "</h3>\n");
-		tester_variable('debut_italique', '<i class="spip">');
+		// class_spip : savoir si on veut class="spip" sur p, i, strong & listes
+		// class_spip_plus : class="spip" sur les h3, hr, quote, tables...
+		// la difference c'est que des css specifiques existent pour les seconds
+		tester_variable('class_spip', '');  /*' class="spip"'*/
+		tester_variable('class_spip_plus', ' class="spip"');
+		tester_variable('debut_italique', "<i$class_spip>");
 		tester_variable('fin_italique', '</i>');
-		tester_variable('debut_gras', '<strong class="spip">');
+		tester_variable('debut_gras', "<strong$class_spip>");
 		tester_variable('fin_gras', '</strong>');
-		tester_variable('ligne_horizontale', "\n<hr class=\"spip\" />\n");
+		tester_variable('debut_intertitre', "\n<h3$class_spip_plus>");
+		tester_variable('fin_intertitre', "</h3>\n");
+		tester_variable('ligne_horizontale', "\n<hr$class_spip_plus />\n");
 		tester_variable('ouvre_ref', '&nbsp;[');
 		tester_variable('ferme_ref', ']');
 		tester_variable('ouvre_note', '[');
@@ -1272,7 +1281,7 @@ function traiter_raccourcis($letexte) {
 		foreach ($regs as $reg) {
 			$lecode = preg_replace(",\r\n?,S", "\n", $reg[2]);
 			$lecode = preg_replace("/\n[\s]*\n/", "\n&nbsp;\n",$lecode);
-			$lecode = "<div class=\"spip_poesie\">\n<div>".preg_replace("/\n+/", "</div>\n<div>", trim($lecode))."</div>\n</div>\n\n";
+			$lecode = "<blockquote class=\"spip_poesie\">\n<div>".preg_replace("/\n+/", "</div>\n<div>", trim($lecode))."</div>\n</blockquote>\n\n";
 			$letexte = str_replace($reg[0], $lecode, $letexte);
 		}
 	}
@@ -1490,7 +1499,7 @@ function traiter_raccourcis($letexte) {
 		/* 10 */	$fin_italique,
 		/* 11 */	"<p>",
 		/* 12 */	"<p>",
-		/* 13 */	"<blockquote class=\"spip\"><p>",
+		/* 13 */	"<blockquote$class_spip_plus><p>",
 		/* 14 */	"</blockquote><p>",
 		/* 15 */	""
 	);
@@ -1517,8 +1526,10 @@ function traiter_raccourcis($letexte) {
 // http://doc.spip.org/@traiter_les_notes
 function traiter_les_notes($mes_notes) {
 	$mes_notes = propre('<p>'.$mes_notes);
-	$mes_notes = str_replace(
-		'<p class="spip">', '<p class="spip_note">', $mes_notes);
+
+	if ($GLOBALS['class_spip'])
+		$mes_notes = str_replace('<p class="spip">', '<p class="spip_note">', $mes_notes);
+
 	$GLOBALS['les_notes'] .= $mes_notes;
 }
 
