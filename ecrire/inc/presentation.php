@@ -1176,7 +1176,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	if ($controle_id_article)
 		$res .= boutons_controle_forum($id_forum, $statut, $id_auteur, "id_article=$id_article", $ip);
 
-	$res .= safehtml(justifier(propre("<div style='font-weight: normal;'>$texte</div>")));
+	$res .= "<div style='font-weight: normal;'>".safehtml(justifier(propre($texte)))."</div>\n";
 
 	if ($nom_site) {
 		if (strlen($url_site) > 10)
