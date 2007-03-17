@@ -298,7 +298,7 @@ function AjaxSqueezeNode(trig, target, f, event)
 				    "after":function(res,status){
 		if(valid) searching_img.remove();
 		if(status=='error') return this.html('Erreur HTTP');
-		callback(res,status);
+		callback.apply(this,[res,status]);
 	},
 			"before":function (vars){
 			 vars.push({"name":"var_ajaxcharset","value":"utf-8"});
