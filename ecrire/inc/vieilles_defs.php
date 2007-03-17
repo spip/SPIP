@@ -225,4 +225,12 @@ function afficher_claret() {
 	include_spip('inc/layer');
 	return $GLOBALS['browser_caret'];
 }
+
+
+// http://doc.spip.org/@spip_insert_id
+function spip_insert_id() {
+	spip_log("spip_insert_id: utiliser spip_abstract_insert");
+	return mysql_insert_id();
+}
+
 ?>
