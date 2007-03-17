@@ -77,21 +77,21 @@
 					<BOUCLE_forum_parent(FORUMS) {id_forum}>
 					<h2 class="titre"><a href="#URL_FORUM">#TITRE</a></h2>
 					<small>[(#DATE|affdate_jourcourt)][&nbsp;(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> (#NOM)]</small>
-					[<div class="texte">(#INTRODUCTION|lignes_longues)</div>]
+					[<div class="texte introduction">(#INTRODUCTION|lignes_longues)</div>]
 					</BOUCLE_forum_parent>
 
 					<BOUCLE_article(ARTICLES) {id_article}>
 					[(#LOGO_ARTICLE||image_reduire{150,100})]
 					<h2 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h2>
 					<small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
-					[<div class="texte">(#INTRODUCTION)</div>]
+					[<div class="texte introduction">(#INTRODUCTION)</div>]
 					</BOUCLE_article>
 
 					<BOUCLE_breve(BREVES) {id_breve}>
 					[(#LOGO_BREVE||image_reduire{150,100})]
 					<h2 class="titre"><a href="#URL_BREVE">#TITRE</a></h2>
 					<small>[(#DATE|affdate_jourcourt)]</small>
-					[<div class="texte">(#INTRODUCTION)</div>]
+					[<div class="texte introduction">(#INTRODUCTION)</div>]
 					</BOUCLE_breve>
 
 					<BOUCLE_rubrique(RUBRIQUES) {id_rubrique}>
