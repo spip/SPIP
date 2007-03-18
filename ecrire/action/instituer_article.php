@@ -26,7 +26,13 @@ function action_instituer_article_dist() {
 
 	include_spip('action/editer_article');
 
-	instituer_article($id_article, array('statut' => $statut));
+	$c = array('statut' => $statut);
+
+	// si on a envoye une 'date_posterieure', l'enregistrer
+	if ($d = _request('date_posterieure'))
+		$c['date'] = $d;
+
+	instituer_article($id_article, $c);
 
 }
 

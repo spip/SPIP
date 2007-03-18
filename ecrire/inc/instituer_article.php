@@ -17,6 +17,12 @@ function inc_instituer_article_dist($id_article, $statut=-1)
 {
 	if ($statut == -1) return demande_publication($id_article);
 
+	// menu de date pour les articles post-dates (plugin)
+	if ($statut <> 'publie'
+	AND $GLOBALS['meta']['post_dates'] == 'non'
+	AND function_exists('menu_postdates'))
+		list($postdates,$postdates_js) = menu_postdates();
+
 	$res =
 	"\n<div style='text-align: center;' id='instituer_article-$id_article'>" .
 	"<b>" .
@@ -26,7 +32,9 @@ function inc_instituer_article_dist($id_article, $statut=-1)
 	"onchange=\"this.nextSibling.nextSibling.src='" .
 	_DIR_IMG_PACK .
 	"' + puce_statut(options[selectedIndex].value);" .
-	" setvisibility('valider_statut', 'visible');\">\n" .
+	" setvisibility('valider_statut', 'visible');"
+	. $postdates_js
+	. "\">\n" .
 	"<option"  . mySel("prepa", $statut)  ." style='background-color: white'>" ._T('texte_statut_en_cours_redaction') ."</option>\n" .
 	"<option"  . mySel("prop", $statut)  . " style='background-color: #FFF1C6'>" ._T('texte_statut_propose_evaluation') ."</option>\n" .
 	"<option"  . mySel("publie", $statut)  . " style='background-color: #B4E8C5'>" ._T('texte_statut_publie') ."</option>\n" .
@@ -41,6 +49,7 @@ function inc_instituer_article_dist($id_article, $statut=-1)
 	"<input type='submit' value='"._T('bouton_valider')."' class='fondo' />" .
 	"</span>" .
 	aide("artstatut")
+	. $postdates
 	. '</div>';
   
 	return redirige_action_auteur('instituer_article',$id_article,'articles', "id_article=$id_article", $res, " method='post'");
