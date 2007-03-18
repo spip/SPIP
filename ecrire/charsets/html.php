@@ -28,7 +28,7 @@ $GLOBALS['CHARSET']['html'] = array (
 'yacute'=>'&#253;', 'thorn'=>'&#254;', 'nbsp' => " ", 'copy' => "(c)",
 'reg' => "(r)", 'frac14' => "1/4", 'frac12' => "1/2", 'frac34' => "3/4",
 'apos' => "'", 'mdash' => '&#8212;', 'ndash' => '&#8211;',
-'euro' => '&#8364;', 'OElig' => '&#338;', 'oelig' => '&#339;'
+'euro' => '&#8364;', 'OElig' => '&#338;', 'oelig' => '&#339;','iexcl' => '&#161;'
 
 );
 
