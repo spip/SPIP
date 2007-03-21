@@ -253,16 +253,23 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false,
 // des filesystems
 // http://doc.spip.org/@nom_fichier_copie_locale
 function nom_fichier_copie_locale($source, $extension) {
-	$dir = sous_repertoire(_DIR_IMG, 'distant'); # IMG/distant/
-	$dir2 = sous_repertoire($dir, $extension); 		# IMG/distant/pdf/
-	$chemin = $dir2 . substr(preg_replace(',[^\w-],', '', basename($source)).'-'.md5($source),0,12).
-		substr(md5($source),0,4).'.'.$extension;
+
+	$d = creer_repertoire_documents('distant'); # IMG/distant/
+	$d = sous_repertoire($d, $extension); # IMG/distant/pdf/
 
 	// on se place tout le temps comme si on etait a la racine
 	if (_DIR_RACINE)
-		$chemin = preg_replace(',^'.preg_quote(_DIR_RACINE).',', '', $chemin);
+		$d = preg_replace(',^'.preg_quote(_DIR_RACINE).',', '', $d);
 
-	return $chemin;
+	$m = md5($source);
+
+	return $d
+	. substr(preg_replace(',[^\w-],', '', basename($source)).'-'.$m,0,12)
+	. substr($m,0,4)
+	. ".$extension";
+
+
+	
 }
 
 //
