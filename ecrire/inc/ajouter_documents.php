@@ -83,7 +83,6 @@ function inc_ajouter_documents_dist ($source, $nom_envoye, $type_lien, $id_lien,
 
 /* STOCKER LES DOCUMENTS INCONNUS AU FORMAT .ZIP */
 			$ext = 'zip';
-
 			$row = spip_fetch_array(spip_query("SELECT * FROM spip_types_documents WHERE extension='zip' AND upload='oui'"));
 			if (!$row) {
 				spip_log("Extension $ext interdite a l'upload");
@@ -91,12 +90,11 @@ function inc_ajouter_documents_dist ($source, $nom_envoye, $type_lien, $id_lien,
 			}
 			if (!$tmp_dir = tempnam(_DIR_TMP, 'tmp_upload')) return;
 			@unlink($tmp_dir); @mkdir($tmp_dir);
-			if (!is_dir(_DIR_IMG.'tmp')) @mkdir(_DIR_IMG.'tmp');
 			$tmp = $tmp_dir.'/'.translitteration($nom_envoye);
 			$nom_envoye .= '.zip'; # conserver l'extension dans le nom de fichier, par exemple toto.js => toto.js.zip
-			$fichier = deplacer_fichier_upload($source, $tmp);
+			deplacer_fichier_upload($source, $tmp);
 			include_spip('inc/pclzip');
-			$source = _DIR_IMG.'tmp/archive.zip';
+			$source = _DIR_TMP . 'archive.zip';
 			$archive = new PclZip($source);
 			$v_list = $archive->create($tmp,
 				PCLZIP_OPT_REMOVE_PATH, $tmp_dir,
@@ -106,16 +104,19 @@ function inc_ajouter_documents_dist ($source, $nom_envoye, $type_lien, $id_lien,
 				spip_log("Echec creation du zip ");
 				return;
 			}
-		}
-		$id_type = $row['id_type'];	# numero du type dans spip_types_documents:(
-		$type_inclus_image = ($row['inclus'] == 'image');
+			$fichier = copier_document($ext, $nom_envoye, $source);
+			@unlink($source);
 
-		// Recopier le fichier a son emplacement definitif
-		$fichier = copier_document($ext, $nom_envoye, $source);
+		} else $fichier = copier_document($ext, $nom_envoye, $source);
+
+		// Verifier que le fichier est a son emplacement definitif
+		
 		if (!$fichier) {
 			spip_log("Impossible de copier_document($ext, $nom_envoye, $source)");
 			return;
 		}
+		$id_type = $row['id_type'];	# numero du type dans spip_types_documents:(
+		$type_inclus_image = ($row['inclus'] == 'image');
 
 		// Prevoir traitement specifique pour videos
 		// (http://www.getid3.org/ peut-etre
