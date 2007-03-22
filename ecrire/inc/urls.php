@@ -85,7 +85,7 @@ function generer_url_ecrire_document($id_document, $statut='') {
 			return $row['fichier'];
 		} else {
 			if (($GLOBALS['meta']["creer_htaccess"]) != 'oui')
-				return _DIR_RACINE . ($row['fichier']);
+				return get_spip_doc($row['fichier']);
 			else 	return generer_url_action('autoriser', "arg=$id_document");
 		}
 	}

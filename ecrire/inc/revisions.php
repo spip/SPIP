@@ -77,7 +77,7 @@ function ajouter_fragments($id_article, $id_version, $fragments) {
 		if ($row = spip_fetch_array($result)) {
 			$fragment = $row['fragment'];
 			$version_min = $row['version_min'];
-			if ($row['compress'] > 0) $fragment = gzuncompress($fragment);
+			if ($row['compress'] > 0) $fragment = @gzuncompress($fragment);
 			$fragment = unserialize($fragment);
 			if (is_array($fragment)) {
 				unset($fragment[$id_version]);

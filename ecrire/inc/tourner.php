@@ -47,13 +47,13 @@ function inc_tourner_dist($id_document, $document, $script, $flag, $type)
 	// Indiquer les documents manquants avec un panneau de warning
 
 	if ($document['distant'] != 'oui') {
-		if (!@file_exists(_DIR_RACINE.$document['fichier'])) {
+		if (!@file_exists(get_spip_doc($document['fichier']))){
 			$c = _T('fichier_introuvable',
 					array('fichier'=>basename($document['fichier'])));
 			$res = "<img src='" . _DIR_IMG_PACK . "warning-24.gif'"
 				."\n\tstyle='float: right;'\n\talt=\"$c\"\n\ttitle=\"$c\" />";
-		} else 	if ($flag)
-			$res = boutons_rotateurs($document, $type, $id, $id_document,$script,  $id_vignette);
+		} else 	if ($flag AND !$id_vignette) 
+			$res = boutons_rotateurs($document, $type, $id, $id_document,$script);
 
 		$boite = '';
 
@@ -76,7 +76,7 @@ function inc_tourner_dist($id_document, $document, $script, $flag, $type)
 }
 
 // http://doc.spip.org/@boutons_rotateurs
-function boutons_rotateurs($document, $type, $id, $id_document, $script, $id_vignette) {
+function boutons_rotateurs($document, $type, $id, $id_document, $script) {
 	global $spip_lang_right;
 	static $ftype = array(1 => 'jpg', 2 => 'png', 3 => 'gif');
 
@@ -86,14 +86,14 @@ function boutons_rotateurs($document, $type, $id, $id_document, $script, $id_vig
 	// si c'est une image, qu'on sait la faire tourner, qu'elle
 	// n'est pas distante, qu'elle est bien presente dans IMG/
 	// qu'elle n'a pas de vignette perso ; et qu'on a la bibli !
-	if ($document['distant']!='oui' AND !$id_vignette
+	if ($document['distant']!='oui' 
 	AND isset($ftype[$document['id_type']])
 	AND (strpos($GLOBALS['meta']['formats_graphiques'], $ftype[$document['id_type']])!==false)
 	AND ($process == 'imagick'
 		OR $process == 'gd2'
 		OR $process == 'convert'
 		OR $process == 'netpbm')
-	AND @file_exists(_DIR_RACINE.$document['fichier'])
+	AND @file_exists(get_spip_doc($document['fichier']))
 	) {
 
 	  return "\n<div class='verdana1' style='float: $spip_lang_right; text-align: $spip_lang_right;'>" .

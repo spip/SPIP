@@ -57,7 +57,7 @@ function inc_ajouter_documents_dist ($source, $nom_envoye, $type_lien, $id_lien,
 			spip_log("Echec du lien vers le document $source, abandon");
 			return;
 		}
-	} else {$distant = 'non';
+	} else  {$distant = 'non';
 
 		// tester le type de document :
 		// - interdit a l'upload ?
@@ -229,8 +229,13 @@ function inc_ajouter_documents_dist ($source, $nom_envoye, $type_lien, $id_lien,
 		$update = "mode='$mode', ";
 	}
 
+	// Pour les fichiers distants remettre l'URL de base
+	$path =  ($distant == 'oui')
+	  ? _q($source)
+	  : ("'" . addslashes(set_spip_doc($fichier)) . "'");
+
 	// Mise a jour des donnees
-	spip_query("UPDATE spip_documents SET $update taille='$taille', largeur='$largeur', hauteur='$hauteur', fichier='$fichier' WHERE id_document=$id_document");
+	spip_query("UPDATE spip_documents SET $update taille='$taille', largeur='$largeur', hauteur='$hauteur', fichier=$path WHERE id_document=$id_document");
 
 	if ($id_document_lie) {
 		spip_query("UPDATE spip_documents SET id_vignette=$id_document	WHERE id_document=$id_document_lie");
@@ -240,17 +245,12 @@ function inc_ajouter_documents_dist ($source, $nom_envoye, $type_lien, $id_lien,
 	else
 		$documents_actifs[] = $id_document; 
 
-	// Pour les fichiers distants remettre l'URL de base
-	if ($distant == 'oui')
-		spip_query("UPDATE spip_documents SET fichier=" . _q($source) . " WHERE id_document = $id_document");
-
 	// Demander l'indexation du document
 	include_spip('inc/indexation');
 	marquer_indexer('spip_documents', $id_document);
 
 	return $type_image;
 }
-
 
 
 
