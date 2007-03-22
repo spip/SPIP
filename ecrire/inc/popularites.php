@@ -58,12 +58,13 @@ function calculer_popularites() {
 	// _DIR_TMP, sans tout casser...
 	$aujourdhui = date("Y-m-d");
 	if ($date = $GLOBALS['meta']['date_statistiques']
-	AND $date != $aujourdhui)
+	AND $date != $aujourdhui) {
+		ecrire_meta('date_statistiques', $aujourdhui);
+		ecrire_metas();
 		spip_query("UPDATE spip_referers SET visites_veille=visites_jour, visites_jour=0");
-	ecrire_meta('date_statistiques', $aujourdhui);
+	}
 
 	// et c'est fini pour cette fois-ci
-	ecrire_metas();
 	return 1;
 
 }
