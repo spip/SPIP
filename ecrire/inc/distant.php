@@ -254,6 +254,7 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false,
 // http://doc.spip.org/@nom_fichier_copie_locale
 function nom_fichier_copie_locale($source, $extension) {
 
+	include_spip('inc/getdocument');
 	$d = creer_repertoire_documents('distant'); # IMG/distant/
 	$d = sous_repertoire($d, $extension); # IMG/distant/pdf/
 
