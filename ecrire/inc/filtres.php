@@ -1618,18 +1618,25 @@ function calcul_pagination($total, $nom, $position, $pas, $liste = true, $modele
 	
 	if ($pas<1) return;
 
+	$debut = 'debut'.$nom; // 'debut_articles'
+	$ancre = 'pagination'.$nom; // #pagination_articles
+
+	// Si le contexte ne contient pas de debut_xx, on regarde les globales
+	// (de facon a permettre la pagination dans les modeles) ; c'est une
+	// legere entorse au schema de base (squelette+contexte => page), mais
+	// sinon il faut une usine a gaz pour passer debut_xx dans propre()...
+	if ($position === NULL)
+		$position = _request($debut);
+
 	if (function_exists("pagination"))
 		return pagination($total, $nom, $position, $pas, $liste);
-
-	$debut = 'debut'.$nom;
-	$ancre='pagination'.$nom;
 
 	// n'afficher l'ancre qu'une fois
 	if (!isset($ancres[$ancre]))
 		$bloc_ancre = $ancres[$ancre] = "<a name='$ancre' id='$ancre'></a>";
 
 	$pagination = array(
-		'debut' => 'debut'.$nom,
+		'debut' => $debut,
 		'url' => parametre_url(self(),'fragment',''), // nettoyer l'id ahah eventuel
 		'total' => $total,
 		'position' => intval($position),
@@ -1649,7 +1656,7 @@ function calcul_pagination($total, $nom, $position, $pas, $liste = true, $modele
 		return $bloc_ancre;
 
 	if ($modele) $modele = '_'.$modele;
-	return recuperer_fond("modeles/pagination$modele",$pagination);
+	return recuperer_fond("modeles/pagination$modele", $pagination);
 }
 
 // recuperere le chemin d'une css existante et :
