@@ -882,8 +882,14 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array(), $mi
 	else $akeys = $adesc['key'];
 	// priorite a la primaire, qui peut etre multiple
 	if ($v = (preg_split('/,\s*/', $keys['PRIMARY KEY'])))
-		$keys = $v;
-	$v = array_intersect($keys, $akeys); 
+		$v = array_intersect($v, $akeys); 
+	// regarder les autres cles sinon, qui peuvent aussi etre multiples
+	if (!$v){
+		$v = array();
+		foreach($keys as $lk)
+			$v = array_merge($v,preg_split('/,\s*/', $lk));
+		$v = array_intersect($v, $akeys); 
+	}
 	if ($v)
 		return array(array($dnom, $arrivee, array_shift($v)));
 	else    {
