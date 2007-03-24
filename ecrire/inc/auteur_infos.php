@@ -320,13 +320,21 @@ function legender_auteur_voir($auteur) {
 	// Bouton "modifier" ?
 	if (autoriser('modifier', 'auteur', $id_auteur)) {
 		$res .= "</td>\n<td id='bouton_modifier_auteur'>";
-		$clic = _T("admin_modifier_auteur");
+
+		if (_request('edit') == 'oui') {
+			$clic = _T('icone_retour');
+			$retour = _T('admin_modifier_auteur');
+		} else {
+			$clic = _T('admin_modifier_auteur');
+			$retour = _T('icone_retour');
+		}
+
 		$h = generer_url_ecrire("auteur_infos","id_auteur=$id_auteur&edit=oui");
 		$h = "<a\nhref='$h'>$clic</a>";
 		$res .= icone($clic, $h, "redacteurs-24.gif", "edit.gif", '', '',true);
 
 		$res .= "<script type='text/javascript'><!--
-		var intitule_bouton = "._q(_T('icone_retour')).";
+		var intitule_bouton = "._q($retour).";
 		jQuery('#bouton_modifier_auteur a')
 		.click(function() {
 			jQuery('#auteur_infos_edit')
