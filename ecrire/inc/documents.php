@@ -38,6 +38,7 @@ function get_spip_doc($fichier) {
 			: $fichier;
 }
 
+// http://doc.spip.org/@generer_url_document_dist
 function generer_url_document_dist($id_document) {
 	if (intval($id_document) <= 0)
 		return '';
