@@ -20,15 +20,17 @@ include_spip('base/abstract_sql');
 //  mais peu aussi etre appele avec le parametre file directement 
 //  il verifie soit que le demandeur est authentifie
 // soit que le fichier est joint a au moins 1 article, breve ou rubrique publie
-
+// TODO : a refaire avec l'API inc/autoriser
 // http://doc.spip.org/@action_acceder_document_dist
 function action_acceder_document_dist()
 {
-  global $auteur_session; // positionne par verifier_visiteur dans inc_version
-  if ($auteur_session['statut'] == '0minirezo' 
-      OR $auteur_session['statut'] == '1comite') 
-	      $auth_login = $auteur_session['login'];
-  else $auth_login = "";
+	include_spip('inc/documents');
+	global $auteur_session; // positionne par verifier_visiteur dans inc_version
+	if ($auteur_session['statut'] == '0minirezo' 
+	OR $auteur_session['statut'] == '1comite') 
+		$auth_login = $auteur_session['login'];
+	else
+		$auth_login = "";
 
     $file = rawurldecode(_request('file'));
     $arg = rawurldecode(_request('arg'));
