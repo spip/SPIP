@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function maj_version ($version, $test = true) {
 	if ($test) {
 		include_spip('inc/meta');
-		ecrire_meta('version_installee', $version);
+		ecrire_meta('version_installee', $version,'non');
 		ecrire_metas();
 		spip_log("mise a jour de la base vers $version");
 	} else {
@@ -52,8 +52,8 @@ function maj_base($version_cible = 0) {
 	// $version_installee = 1.702; quand on a besoin de forcer une MAJ
 
 	if (!$version_installee) {
-		spip_query_db("REPLACE spip_meta (nom, valeur)
-			VALUES ('version_installee', '$spip_version')");
+		spip_query_db("REPLACE spip_meta (nom, valeur,impt)
+			VALUES ('version_installee', '$spip_version','non')");
 		return true;
 	}
 
@@ -1324,6 +1324,10 @@ function maj_base($version_cible = 0) {
 		spip_query("DROP TABLE spip_tmp");
 
 		maj_version('1.932');
+	}
+	if (upgrade_vers(1.933, $version_installee, $version_cible)) {
+		// on ne fait que reecrire le numero de version installee en metant explicitement impt a 'non'
+		maj_version('1.933');
 	}
 
 }
