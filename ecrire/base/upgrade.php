@@ -48,15 +48,16 @@ function maj_base($version_cible = 0) {
 	// Si pas de version mentionnee dans spip_meta, c'est qu'il s'agit
 	// d'une nouvelle installation
 	//   => ne pas passer par le processus de mise a jour
+	// De meme en cas de version superieure: ca devait etre un test,
+	// il y a eu le message d'avertissement il doit savoir ce qu'il fa
 	//
 	// $version_installee = 1.702; quand on a besoin de forcer une MAJ
 
-	if (!$version_installee) {
+	if (!$version_installee OR ($spip_version < $version_installee)) {
 		spip_query_db("REPLACE spip_meta (nom, valeur,impt)
 			VALUES ('version_installee', '$spip_version','non')");
 		return true;
 	}
-
 
 	//
 	// Verification des droits de modification sur la base
@@ -1328,6 +1329,14 @@ function maj_base($version_cible = 0) {
 	if (upgrade_vers(1.933, $version_installee, $version_cible)) {
 		// on ne fait que reecrire le numero de version installee en metant explicitement impt a 'non'
 		maj_version('1.933');
+	}
+
+	// Retrait de _DIR_IMG dans le champ fichier de la table des doc
+	if (upgrade_vers(1.934, $version_installee, $version_cible)) {
+	  $dir_img = substr(_DIR_IMG,strlen(_DIR_RACINE));
+	  $n = strlen($dir_img) + 1;
+	  spip_query("UPDATE spip_documents SET fichier=substr(fichier,$n) WHERE fichier LIKE " . _q($dir_img . '%'));
+	  maj_version('1.934');
 	}
 
 }

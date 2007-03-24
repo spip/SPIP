@@ -64,7 +64,8 @@ function inc_import_1_3_dist($lecteur, $request, $gz='fread', $atts=array()) {
 				     $desc['field'],
 				     $gz,
 				     $phpmyadmin,
-				     '/' . $table);
+				     '/' . $table,
+				     $atts);
 
 	if ($values === false) return  ($import_ok = false);
 
@@ -152,10 +153,18 @@ function import_replace($values, $table, $desc, $request, $atts='') {
 }
 
 // http://doc.spip.org/@import_lire_champs
-function import_lire_champs($f, $fields, $gz, $phpmyadmin, $table)
+function import_lire_champs($f, $fields, $gz, $phpmyadmin, $table, $atts)
 {
 	$values = array();
-	
+	$dir_img = 0;
+
+
+	if (($atts['version_base'] < '1.934')
+	AND $table == '/spip_documents') {
+
+	  $dir_img = '@^'. preg_quote (isset($atts['dir_img']) ? $atts['dir_img']:'IMG/') . '@';
+	}
+
 	if (!isset($GLOBALS['meta']['charset_insertion']))
 		$charset = '';
 	else {
@@ -163,7 +172,6 @@ function import_lire_champs($f, $fields, $gz, $phpmyadmin, $table)
 		if ($charset == $GLOBALS['meta']['charset'])
 			$charset = '';
 	}
-
 	for (;;) {
 		$b = false;
 		if (!($col = xml_fetch_tag($f, $b, $gz))) return false;
@@ -179,6 +187,9 @@ function import_lire_champs($f, $fields, $gz, $phpmyadmin, $table)
 		if ($b) {
 			if ($phpmyadmin)
 				$value = str_replace($phpmyadmin[0],$phpmyadmin[1],$value);
+			elseif ($dir_img) {
+			  $value = preg_replace($dir_img, '', $value);
+			}
 			if ($charset) 
 				$value = importer_charset($value, $charset);
 			$values[$col]= $value;
