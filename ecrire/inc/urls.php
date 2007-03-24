@@ -77,19 +77,8 @@ function generer_url_ecrire_forum($id_forum, $statut='') {
 
 // http://doc.spip.org/@generer_url_ecrire_document
 function generer_url_ecrire_document($id_document, $statut='') {
-	if (intval($id_document) <= 0) 
-		return '';
-	$row = @spip_fetch_array(spip_query("SELECT fichier,distant	FROM spip_documents WHERE id_document = $id_document"));
-	  if ($row) {
-		if ($row['distant'] == 'oui') {
-			return $row['fichier'];
-		} else {
-			if (($GLOBALS['meta']["creer_htaccess"]) != 'oui')
-				return get_spip_doc($row['fichier']);
-			else 	return generer_url_action('autoriser', "arg=$id_document");
-		}
-	}
-
+	include_spip('inc/documents');
+	return generer_url_document_dist($id_document);
 }
 
 // http://doc.spip.org/@generer_url_ecrire_statistiques

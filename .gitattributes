@@ -332,8 +332,8 @@ dist/vignettes/xls.png -text
 dist/vignettes/xml.png -text
 dist/vignettes/zip.png -text
 dist/win_width.htc -text
+ecrire/action/acceder_document.php -text
 ecrire/action/activer_plugins.php -text
-ecrire/action/autoriser.php -text
 ecrire/action/converser.php -text
 ecrire/action/dater.php -text
 ecrire/action/desinstaller_plugin.php -text

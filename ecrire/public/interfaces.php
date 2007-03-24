@@ -275,6 +275,7 @@ $table_des_traitements['DATE_MODIF'][]= 'vider_date(%s)';
 $table_des_traitements['DATE_NOUVEAUTES'][]= 'vider_date(%s)';
 $table_des_traitements['DATE_REDAC'][]= 'vider_date(%s)';
 $table_des_traitements['DESCRIPTIF'][]= 'propre(%s)';
+$table_des_traitements['FICHIER']['documents']= 'get_spip_doc(%s)';
 $table_des_traitements['LIEN_TITRE'][]= 'typo(%s)';
 $table_des_traitements['LIEN_URL'][]= 'vider_url(%s)';
 $table_des_traitements['MESSAGE'][]= 'propre(%s)';
