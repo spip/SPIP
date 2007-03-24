@@ -179,7 +179,7 @@ function import_lire_champs($f, $fields, $gz, $phpmyadmin, $table)
 		if ($b) {
 			if ($phpmyadmin)
 				$value = str_replace($phpmyadmin[0],$phpmyadmin[1],$value);
-			if ($char) 
+			if ($charset) 
 				$value = importer_charset($value, $charset);
 			$values[$col]= $value;
 		}
