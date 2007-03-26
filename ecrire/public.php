@@ -17,17 +17,20 @@ if (defined('_INC_PUBLIC')) {
 	// $fond passe par INCLURE(){fond=...}
 	if (isset($contexte_inclus['fond']))
 		$fond = $contexte_inclus['fond'];
-	$subpage = inclure_page($fond, $contexte_inclus);
-
-	if ($subpage['process_ins'] == 'html'){
-		echo $subpage['texte'];
+	$fonds = array($fond);
+	if (is_array($fond)) $fonds=$fond;
+	foreach($fonds as $fond){
+		$subpage = inclure_page($fond, $contexte_inclus);
+	
+		if ($subpage['process_ins'] == 'html'){
+			echo $subpage['texte'];
+		}
+		else
+			eval('?' . '>' . $subpage['texte']);
+	
+		if ($subpage['lang_select'] === true)
+			lang_dselect();
 	}
-	else
-		eval('?' . '>' . $subpage['texte']);
-
-	if ($subpage['lang_select'] === true)
-		lang_dselect();
-
 } else {
 	define ('_INC_PUBLIC', 1);
 

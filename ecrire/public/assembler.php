@@ -201,6 +201,7 @@ function inclure_page($fond, $contexte_inclus) {
 		'process_ins' => 'html'
 		);
 	}
+	$contexte_inclus['fond'] = $fond; // securite, necessaire pour calculer correctement le cache
 
 	// Si on a inclus sans fixer le critere de lang, on prend la langue courante
 	if (!isset($contexte_inclus['lang']))
@@ -384,25 +385,28 @@ function message_erreur_404 ($erreur= "") {
 // pour une inclusion dans un flux
 // http://doc.spip.org/@recuperer_fond
 function recuperer_fond($fond, $contexte=array(),$protect_xml=false) {
-
 	// on est peut etre dans l'espace prive au moment de l'appel
 	define ('_INC_PUBLIC', 1);
 	if (($fond=='')&&isset($contexte['fond']))
 		$fond = $contexte['fond'];
+
+	$fonds = array($fond);
+	if (is_array($fond)) $fonds=$fond;
+	$texte = "";
+	foreach($fonds as $fond){
+		$page = inclure_page($fond, $contexte);
+		if ($GLOBALS['flag_ob'] AND ($page['process_ins'] != 'html')) {
+			ob_start();
+			eval('?' . '>' . $page['texte']);
+			$page['texte'] = ob_get_contents();
+			ob_end_clean();
+		}
+		if (!$protect_xml && isset($page['entetes']['X-Xml-Hack']))
+			$page['texte'] = str_replace("<\1?xml", '<'.'?xml', $page['texte']);
 	
-	$contexte['fond'] = $fond; // necessaire pour calculer correctement le cache
-
-	$page = inclure_page($fond, $contexte);
-	if ($GLOBALS['flag_ob'] AND ($page['process_ins'] != 'html')) {
-		ob_start();
-		eval('?' . '>' . $page['texte']);
-		$page['texte'] = ob_get_contents();
-		ob_end_clean();
+		$texte .= $page['texte']; // pas de trim, pour etre homogene avec <INCLURE>
 	}
-	if (!$protect_xml && isset($page['entetes']['X-Xml-Hack']))
-		$page['texte'] = str_replace("<\1?xml", '<'.'?xml', $page['texte']);
-
-	return trim($page['texte']);
+	return $texte;
 }
 
 // temporairement ici : a mettre dans le futur inc/modeles
