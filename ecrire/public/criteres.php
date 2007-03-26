@@ -863,6 +863,7 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
   return $n;
 }
 
+// http://doc.spip.org/@liste_champs_jointures
 function liste_champs_jointures($nom,$desc){
 	var_dump(array($nom,$desc));
 	$join = array();
