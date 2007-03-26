@@ -865,7 +865,6 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
 
 // http://doc.spip.org/@liste_champs_jointures
 function liste_champs_jointures($nom,$desc){
-	var_dump(array($nom,$desc));
 	$join = array();
 	// les champs declares explicitement pour les jointures
 	if (isset($desc['join'])) return $desc['join'];
