@@ -27,7 +27,7 @@ function public_styliser_dist($fond, $id_rubrique, $lang) {
 		erreur_squelette(_T('info_erreur_squelette2',
 			array('fichier'=>"'$fond'")),
 			$GLOBALS['dossier_squelettes']);
-		$f = find_in_path("404.$ext");
+		$f = find_in_path(".$ext"); // on ne renvoie rien ici, c'est le resultat vide qui provoquere un 404 si necessaire
 		return array(substr($f, 0, -strlen(".$ext")),
 			     $ext,
 			     $ext,
