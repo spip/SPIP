@@ -25,9 +25,18 @@ define('_REGEXP_ID', '/^'  . _SUB_REGEXP_SYMBOL . '$/');
 
 define('_REGEXP_ENTITY_USE', '/%('  . _SUB_REGEXP_SYMBOL . ');/');
 define('_REGEXP_ENTITY_DEF', '/^%('  . _SUB_REGEXP_SYMBOL . ');/');
+define('_REGEXP_TYPE_XML', 'PUBLIC|SYSTEM|INCLUDE|IGNORE|CDATA');
 define('_REGEXP_ENTITY_DECL', '/^<!ENTITY\s+(%?)\s*(' .
 		_SUB_REGEXP_SYMBOL .
-		';?)\s+(PUBLIC|SYSTEM|INCLUDE|IGNORE|CDATA)?\s*"([^"]*)"\s*(--.*?--)?("([^"]*)")?\s*>\s*(.*)$/s');
+		';?)\s+(' .
+		_REGEXP_TYPE_XML .
+		')?\s*(' .
+		"('([^']*)')" .
+		'|("([^"]*)")' .
+                '|\s*(%' . _SUB_REGEXP_SYMBOL . ';)\s*' .
+       		')\s*(--.*?--)?("([^"]*)")?\s*>\s*(.*)$/s');
+
+define('_REGEXP_INCLUDE_USE', '/^<!\[\s*%\s*([^;]*);\s*\[\s*(.*)$/s');
 
 // Document Type Compilation
 

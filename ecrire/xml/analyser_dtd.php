@@ -128,24 +128,34 @@ function analyser_dtd_lexeme($dtd, &$dtc, $grammaire){
 
 	list(,$s) = $m;
 	$n = $dtc->macros[$s];
+
 	if (is_array($n)) {
 	    // en cas d'inclusion, l'espace de nom est le meme
+	  // mais gaffe aux DTD dont l'URL est relative a l'engloblante
+		if (!preg_match("%^http://%", $n[1])) {
+			$n[1] = substr($grammaire,0, strrpos($grammaire,'/')+1) . $n[1];
+		}
 		analyser_dtd($n[1], $n[0], $dtc);
 	}
 	
 	return ltrim(substr($dtd,strlen($m[0])));
 }
 
-// il faudrait prevoir plusieurs niveaux d'inclusion.
-// (Ruby en utilise mais l'erreur est transparente. Scandaleux coup de pot)
+// il faudrait gerer plus proprement les niveaux d'inclusion:
+// ca ne depasse pas 3 ici.
 
 // http://doc.spip.org/@analyser_dtd_data
 function analyser_dtd_data($dtd, &$dtc, $grammaire){
-	if (!preg_match('/^<!\[\s*%\s*([^;]*);\s*\[\s*(.*?)\]\]>\s*(.*)$/s',$dtd, $m))
+
+	if (!preg_match(_REGEXP_INCLUDE_USE,$dtd,$m))
 		return -11;
+	if (!preg_match('/^((\s*<!(\[\s*%\s*[^;]*;\s*\[([^]<]*<[^>]*>)*[^]<]*\]\]>)|([^]>]*>))*[^]<]*)\]\]>\s*/s',$m[2], $r))
+	  return -12;
+
 	if ($dtc->macros[$m[1]] == 'INCLUDE')
-		$retour = $m[2] . $m[3];
-	else $retour = $m[3]; 
+	  $retour = $r[1] . substr($m[2], strlen($r[0]));
+	else $retour = substr($m[2], strlen($r[0]));
+
 	return $retour;
 }
 
@@ -163,24 +173,33 @@ function analyser_dtd_entity($dtd, &$dtc, $grammaire)
 	if (!preg_match(_REGEXP_ENTITY_DECL, $dtd, $m))
 		return -2;
 
-	list($t, $term, $nom, $type, $val, $q, $c, $alt, $dtd) = $m;
+	list($t, $term, $nom, $type, $k1,$k2,$k3,$k4,$k5,$k6, $c, $q, $alt, $dtd) = $m;
 
 	if (isset($dtc->macros[$nom]) AND $dtc->macros[$nom])
 		return $dtd;
 	if (isset($dtc->entites[$nom]))
 		spip_log("redefinition de l'entite $nom");
+	if ($k6) return $k6 . $dtd; // cas du synonyme complet
+	$val = expanserEntite(($k2 ? $k3 : ($k4 ? $k5 : $k6)), $dtc->macros);
+
+	// cas particulier double evaluation: 'PUBLIC "..." "...."' 
+	if (preg_match('/(PUBLIC)\s+"([^"]*)"\s+"([^"]*)"$/s',$val,$r)) {
+	  list($t, $type, $val, $alt) = $r;
+	}
+	
 	if  (!$term)
-		$dtc->entites[$nom] = expanserEntite($val, $dtc->macros);
+		$dtc->entites[$nom] = $val; 
 	elseif (!$type)
-		$dtc->macros[$nom] = expanserEntite($val, $dtc->macros);
+	  $dtc->macros[$nom] = $val;
 	elseif (!$alt)
-		$dtc->macros[$nom] = expanserEntite($val, $dtc->macros);
+		$dtc->macros[$nom] = $val;
 	else {
 		if (strpos($alt, '/') === false)
 			$alt = preg_replace(',/[^/]+$,', '/', $grammaire)
 			. $alt ;
 		$dtc->macros[$nom] = array($type, $alt);
 	} 
+
 	return $dtd;
 }
 
@@ -202,6 +221,7 @@ function analyser_dtd_element($dtd, &$dtc, $grammaire)
 	list(,$nom, $val, $dtd) = $m;
 	$nom = expanserEntite($nom, $dtc->macros);
 	$val = compilerRegle(expanserEntite($val, $dtc->macros));
+
 	if (isset($dtc->elements[$nom])) {
 		spip_log("redefinition de l'element $nom dans la DTD");
 		return -4;
@@ -263,15 +283,13 @@ function expanserEntite($val, $macros)
 {
 	if (preg_match_all(_REGEXP_ENTITY_USE, $val, $r, PREG_SET_ORDER)){
 	  foreach($r as $m) {
-		  $ent = $m[1];
+		$ent = $m[1];
 		  // il peut valoir ""
-			if (isset($macros[$ent]))
-				$val = str_replace($m[0], $macros[$ent], $val);
+		if (isset($macros[$ent]))
+			$val = str_replace($m[0], $macros[$ent], $val);
 	  }
 	}
+
 	return trim(preg_replace('/\s+/', ' ', $val));
 }
-
-
-
 ?>
