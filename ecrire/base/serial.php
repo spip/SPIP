@@ -56,6 +56,9 @@ $spip_articles_key = array(
 		"KEY date_modif"	=> "date_modif",
 		"KEY idx"			=> "idx",
 		"KEY url_propre"	=> "url_propre");
+$spip_articles_join = array(
+		"id_article"=>"id_article",
+		"id_rubrique"=>"id_rubrique");
 
 $spip_auteurs = array(
 		"id_auteur"	=> "bigint(21) NOT NULL",
@@ -92,6 +95,10 @@ $spip_auteurs_key = array(
 		"KEY idx"	=> "idx",
 		"KEY en_ligne"	=> "en_ligne",
 		"KEY url_propre"	=> "url_propre");
+$spip_auteurs_join = array(
+		"id_auteur"=>"id_auteur",
+		"login"=>"login");
+
 
 $spip_breves = array(
 		"id_breve"	=> "bigint(21) NOT NULL",
@@ -114,6 +121,9 @@ $spip_breves_key = array(
 		"KEY idx"	=> "idx",
 		"KEY id_rubrique"	=> "id_rubrique",
 		"KEY url_propre"	=> "url_propre");
+$spip_breves_join = array(
+		"id_breve"=>"id_breve",
+		"id_rubrique"=>"id_rubrique");
 
 $spip_messages = array(
 		"id_message"	=> "bigint(21) NOT NULL",
@@ -216,6 +226,9 @@ $spip_documents_key = array(
 		"KEY id_vignette"	=> "id_vignette",
 		"KEY mode"	=> "mode",
 		"KEY id_type"	=> "id_type");
+$spip_documents_join = array(
+		"id_document"=>"id_document",
+		"id_type"=>"id_type");
 
 $spip_types_documents = array(
 		"id_type"	=> "bigint(21) NOT NULL",
@@ -262,7 +275,10 @@ $spip_syndic_key = array(
 		"KEY idx"		=> "idx",
 		"KEY statut"	=> "statut, date_syndic",
 		"KEY url_propre"	=> "url_propre");
-
+$spip_syndic_join = array(
+		"id_syndic"=>"id_syndic",
+		"id_rubrique"=>"id_rubrique");
+		
 $spip_syndic_articles = array(
 		"id_syndic_article"	=> "bigint(21) NOT NULL",
 		"id_syndic"	=> "bigint(21) DEFAULT '0' NOT NULL",
@@ -283,6 +299,9 @@ $spip_syndic_articles_key = array(
 		"KEY id_syndic"	=> "id_syndic",
 		"KEY statut"	=> "statut",
 		"KEY url"	=> "url");
+$spip_syndic_articles_join = array(
+		"id_syndic_article"=>"id_syndic_article",
+		"id_syndic"=>"id_syndic");
 
 $spip_forum = array(
 		"id_forum"	=> "bigint(21) NOT NULL",
@@ -318,6 +337,14 @@ $spip_forum_key = array(
 		"KEY idx"	=> "idx",
 		"KEY statut"	=> "statut, date_heure",
 		"KEY date_thread" => "date_thread");
+$spip_forum_join = array(
+		"id_forum"=>"id_forum",
+		"id_parent"=>"id_parent",
+		"id_article"=>"id_article",
+		"id_breve"=>"id_breve",
+		"id_message"=>"id_message",
+		"id_syndic"=>"id_syndic",
+		"id_rubrique"=>"id_rubrique");
 
 $spip_signatures = array(
 		"id_signature"	=> "bigint(21) NOT NULL",
@@ -337,6 +364,9 @@ $spip_signatures_key = array(
 		"KEY id_article"	=> "id_article",
 		"KEY idx"		=> "idx",
 		"KEY statut" => "statut");
+$spip_signatures_join = array(
+		"id_signature"=>"id_signature",
+		"id_article"=>"id_article");
 
 
 global $tables_principales;
@@ -345,11 +375,11 @@ global $tables_principales;
 /// il faut donc rajouter, mais pas reinitialiser
 
 $tables_principales['spip_articles'] =
-	array('field' => &$spip_articles, 'key' => &$spip_articles_key);
+	array('field' => &$spip_articles, 'key' => &$spip_articles_key, 'join' => &$spip_articles_join);
 $tables_principales['spip_auteurs']  =
-	array('field' => &$spip_auteurs, 'key' => &$spip_auteurs_key);
+	array('field' => &$spip_auteurs, 'key' => &$spip_auteurs_key,'join' => &$spip_auteurs_join);
 $tables_principales['spip_breves']   =
-	array('field' => &$spip_breves, 'key' => &$spip_breves_key);
+	array('field' => &$spip_breves, 'key' => &$spip_breves_key,'join' => &$spip_breves_join);
 $tables_principales['spip_messages'] =
 	array('field' => &$spip_messages, 'key' => &$spip_messages_key);
 $tables_principales['spip_mots']     =
@@ -359,16 +389,16 @@ $tables_principales['spip_groupes_mots'] =
 $tables_principales['spip_rubriques'] =
 	array('field' => &$spip_rubriques, 'key' => &$spip_rubriques_key);
 $tables_principales['spip_documents'] =
-	array('field' => &$spip_documents,  'key' => &$spip_documents_key);
+	array('field' => &$spip_documents,  'key' => &$spip_documents_key, 'join' => &$spip_documents_join);
 $tables_principales['spip_types_documents']	=
 	array('field' => &$spip_types_documents, 'key' => &$spip_types_documents_key);
 $tables_principales['spip_syndic'] =
-	array('field' => &$spip_syndic, 'key' => &$spip_syndic_key);
+	array('field' => &$spip_syndic, 'key' => &$spip_syndic_key, 'join' => &$spip_syndic_join);
 $tables_principales['spip_syndic_articles']	=
-	array('field' => &$spip_syndic_articles, 'key' => &$spip_syndic_articles_key);
+	array('field' => &$spip_syndic_articles, 'key' => &$spip_syndic_articles_key, 'join' => &$spip_syndic_articles_join);
 $tables_principales['spip_forum'] =
-	array('field' => &$spip_forum,	'key' => &$spip_forum_key);
+	array('field' => &$spip_forum,	'key' => &$spip_forum_key, 'join' => &$spip_forum_join);
 $tables_principales['spip_signatures'] =
-	array('field' => &$spip_signatures, 'key' => &$spip_signatures_key);
+	array('field' => &$spip_signatures, 'key' => &$spip_signatures_key, 'join' => &$spip_signatures_join);
 
 ?>

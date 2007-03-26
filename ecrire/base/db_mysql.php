@@ -304,7 +304,11 @@ function spip_mysql_showtable($nom_table)
 				if ($k && !isset($keys[$k])) $keys[$k] = $t; else $keys[] = $t;
 			}
 		}
-		return array('field' => $fields,	'key' => $keys);
+		if (isset($GLOBALS['tables_principales'][$nom_table]['join']))
+			return array('field' => $fields,	'key' => $keys, 'join'=>$GLOBALS['tables_principales'][$nom_table]['join']);
+		elseif (isset($GLOBALS['tables_auxiliaires'][$nom_table]['join']))
+			return array('field' => $fields,	'key' => $keys, 'join'=>$GLOBALS['tables_auxiliaires'][$nom_table]['join']);
+		else return array('field' => $fields,	'key' => $keys);
 	}
 } 
 

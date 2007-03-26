@@ -816,8 +816,6 @@ function trouver_champ($champ, $where)
 }
 
 // deduction automatique des jointures 
-// une jointure sur une table avec primary key doit se faire sur celle-ci. 
-
 // http://doc.spip.org/@calculer_jointure
 function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
 {
@@ -826,8 +824,7 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
   if (!$res) return "";
 
   list($dnom,$ddesc) = $depart;
-  $id_primary = $ddesc['key']['PRIMARY KEY'];
-	$keys = preg_split('/,\s*/', $id_primary);
+	$keys = liste_champs_jointures($dnom,$ddesc);
   $id_table = "";
   $cpt = &$num[$boucle->descr['nom']][$boucle->id_boucle];
   foreach($res as $r) {
@@ -866,6 +863,34 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
   return $n;
 }
 
+function liste_champs_jointures($nom,$desc){
+	var_dump(array($nom,$desc));
+	$join = array();
+	// les champs declares explicitement pour les jointures
+	if (isset($desc['join'])) return $desc['join'];
+	/*elseif (isset($GLOBALS['tables_principales'][$nom]['join'])) return $GLOBALS['tables_principales'][$nom]['join'];
+	elseif (isset($GLOBALS['tables_auxiliaires'][$nom]['join'])) return $GLOBALS['tables_auxiliaires'][$nom]['join'];*/
+	// sinon, les champs declares explicitement pour les jointures
+	elseif (isset($desc['key']['PRIMARY KEY'])) {
+		$v = $desc['key']['PRIMARY KEY'];
+		$v = preg_split('/,\s*/', $v);
+		foreach($v as $k)
+			$join[$k]=$k;
+	}
+	else { 
+		// ici on se rabat sur les cles secondaires, en eleminant celles qui sont pas pertinentes (idx, maj)
+		// si jamais le resultat n'est pas pertinent pour une table donnee, il faut declarer explicitement le champ 'join' de sa description
+		$keys = $desc['key'];
+		$v = array();
+		foreach($keys as $lk)
+			$v = array_merge($v,preg_split('/,\s*/', $lk));
+		foreach($v as $k)
+			if (!in_array($k,array('idx','maj','date','statut')))
+				$join[$k]=$k;
+	}
+	return $join;
+}
+
 // http://doc.spip.org/@calculer_chaine_jointures
 function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array(), $milieu_prec = false)
 {
@@ -874,21 +899,9 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array(), $mi
 	if (!count($vu))
 		$vu[] = $dnom; // ne pas oublier la table de depart
 
-	$keys = $ddesc['key'];
-	if ($v = $adesc['key']['PRIMARY KEY']) {
-		unset($adesc['key']['PRIMARY KEY']);
-		$akeys = array_merge(preg_split('/,\s*/', $v), $adesc['key']);
-	}
-	else $akeys = $adesc['key'];
-	// priorite a la primaire, qui peut etre multiple
-	if ($v = (preg_split('/,\s*/', $keys['PRIMARY KEY'])))
-		$v = array_intersect($v, $akeys); 
-	// regarder les autres cles sinon, qui peuvent aussi etre multiples
-	if (!$v){
-		$v = array();
-		foreach($keys as $lk)
-			$v = array_merge($v,preg_split('/,\s*/', $lk));
-		$v = array_intersect($v, $akeys); 
+	$akeys = $adesc['key'];
+	if ($keys = liste_champs_jointures($dnom,$ddesc)){
+		$v = array_intersect(array_values($keys), $akeys);
 	}
 	if ($v)
 		return array(array($dnom, $arrivee, array_shift($v)));
