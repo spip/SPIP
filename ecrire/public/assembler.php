@@ -193,7 +193,7 @@ function stop_inclure($fragment) {
 // http://doc.spip.org/@inclure_page
 function inclure_page($fond, $contexte_inclus) {
 	global $lastmodified;
-	//if (!defined('_PAS_DE_PAGE_404'))
+	if (!defined('_PAS_DE_PAGE_404'))
 		define('_PAS_DE_PAGE_404',1);
 
 	// Si un fragment est demande et deja obtenu, inutile de continuer a inclure
