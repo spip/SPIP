@@ -388,7 +388,7 @@ function message_erreur_404 ($erreur= "") {
 // fonction permettant de recuperer le resultat du calcul d'un squelette
 // pour une inclusion dans un flux
 // http://doc.spip.org/@recuperer_fond
-function recuperer_fond($fond, $contexte=array(),$protect_xml=false) {
+function recuperer_fond($fond, $contexte=array(),$protect_xml=false, $trim=true) {
 	// on est peut etre dans l'espace prive au moment de l'appel
 	define ('_INC_PUBLIC', 1);
 	if (($fond=='')&&isset($contexte['fond']))
@@ -409,6 +409,7 @@ function recuperer_fond($fond, $contexte=array(),$protect_xml=false) {
 			$page['texte'] = str_replace("<\1?xml", '<'.'?xml', $page['texte']);
 	
 		$texte .= $page['texte']; // pas de trim, pour etre homogene avec <INCLURE>
+		if ($trim) $texte = trim($texte);
 	}
 	return $texte;
 }
