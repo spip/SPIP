@@ -1091,8 +1091,8 @@ function traiter_modeles($texte, $doublons=false, $echap='') {
 			}
 
 			// hack pour tout l'espace prive
-			if (!_DIR_RESTREINT)
-			$GLOBALS['doublons_documents_inclus'][] = $regs[3];
+			if (((!_DIR_RESTREINT) OR ($doublons)) AND ($regs[3]) AND (in_array($regs[2],array('doc','emb','img'))))
+				$GLOBALS['doublons_documents_inclus'][] = $regs[3];
 		}
 	}
 

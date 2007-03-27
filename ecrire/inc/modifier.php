@@ -92,6 +92,10 @@ function modifier_contenu($type, $id, $options, $c=false) {
 		marquer_indexer('spip_'.$table_objet, $id);
 	}
 
+	// marquer les documents vus dans le texte si il y a lieu
+	if (isset($GLOBALS['tables_auxiliaires']["spip_documents_$table_objet"]["field"]["vu"]))
+		marquer_doublons_documents($champs,$id,$id_table_objet,$table_objet);
+	
 	// Notifications, gestion des revisions...
 	pipeline('post_edition',
 		array(
@@ -105,6 +109,35 @@ function modifier_contenu($type, $id, $options, $c=false) {
 	);
 
 	return true;
+}
+
+function marquer_doublons_documents($champs,$id,$id_table_objet,$table_objet){
+	if (!isset($champs['texte']) AND !isset($champs['chapo'])) return;
+	$load = "";
+	// charger le champ manquant en cas de modif partielle de l'objet
+	if (!isset($champs['texte'])) $load = 'texte';
+	if (!isset($champs['chapo'])) $load = 'chapo';
+	if ($load){
+		$champs[$load] = "";
+		$res = spip_query("SELECT $load FROM spip_$table_objet WHERE $id_table_objet="._q($id));
+		if ($row = spip_fetch_array($res) AND isset($row[$load]))
+			$champs[$load] = $row[$load];
+	}
+	include_spip('inc/texte');
+	include_spip('base/abstract_sql');
+	$GLOBALS['doublons_documents_inclus'] = array();
+	traiter_modeles($champs['chapo'].$champs['texte'],true); // detecter les doublons
+	spip_query("UPDATE spip_documents_$table_objet SET vu='non' WHERE $id_table_objet=$id");
+	if (count($GLOBALS['doublons_documents_inclus'])){
+		// on repasse par une requete sur spip_documents pour verifier que les documents existent bien !
+		$in_liste = calcul_mysql_in('id_document',implode(',',$GLOBALS['doublons_documents_inclus']));
+		$res = spip_query("SELECT id_document FROM spip_documents WHERE $in_liste");
+		$liste = "";
+		while ($row = spip_fetch_array($res))
+			$liste .= ",(".$row['id_document'].",$id,'oui')";
+		if (strlen($liste))
+			spip_query("REPLACE INTO spip_documents_$table_objet (id_document,$id_table_objet,vu) VALUES ".substr($liste,1));
+	}
 }
 
 // http://doc.spip.org/@revision_document

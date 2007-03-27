@@ -273,8 +273,9 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 	global $options, $couleur_foncee, $spip_lang_left, $spip_lang_right;
 
 	charger_generer_url();
-
-	$document = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document)));
+	$res = spip_query("SELECT docs.*,l.vu FROM spip_documents AS docs JOIN spip_documents_".$type."s AS l ON l.id_document=docs.id_document WHERE l.id_$type="._q($id)." AND l.id_document="._q($id_document));
+	if (!$document = spip_fetch_array($res)) return "";
+	//$document = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document)));
 
 	$id_vignette = $document['id_vignette'];
 	$id_type = $document['id_type'];

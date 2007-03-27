@@ -1338,7 +1338,27 @@ function maj_base($version_cible = 0) {
 	  spip_query("UPDATE spip_documents SET fichier=substr(fichier,$n) WHERE fichier LIKE " . _q($dir_img . '%'));
 	  maj_version('1.934');
 	}
-
+	if (upgrade_vers(1.935, $version_installee, $version_cible)) {
+		spip_query("ALTER TABLE spip_documents_articles ADD vu ENUM('non', 'oui') DEFAULT 'non' NOT NULL");
+		spip_query("ALTER TABLE spip_documents_rubriques ADD vu ENUM('non', 'oui') DEFAULT 'non' NOT NULL");
+		spip_query("ALTER TABLE spip_documents_breves ADD vu ENUM('non', 'oui') DEFAULT 'non' NOT NULL");
+		include_spip('inc/texte');
+		foreach(array('article'=>'id_article','rubrique'=>'id_rubrique','breve'=>'id_breve') as $type => $id_table_objet){
+			$table_objet = "$type"."s";
+			$chapo = $type=='article' ? ",a.chapo":"";
+			$res = spip_query("SELECT a.$id_table_objet,a.texte $chapo FROM spip_documents_$table_objet AS d JOIN spip_$table_objet AS a ON a.$id_table_objet=d.$id_table_objet GROUP BY $id_table_objet");
+			while ($row = spip_fetch_array($res)){
+				$GLOBALS['doublons_documents_inclus'] = array();
+				traiter_modeles(($chapo?$row['chapo']:"").$row['texte'],true); // detecter les doublons
+				if (count($GLOBALS['doublons_documents_inclus'])){
+					$id = $row[$id_table_objet];
+					$liste = "(".implode(",$id,'oui'),(",$GLOBALS['doublons_documents_inclus']).",$id,'oui')";
+					spip_query("REPLACE INTO spip_documents_$table_objet (id_document,$id_table_objet,vu) VALUES $liste");
+				}
+			}
+		}
+	  maj_version('1.935');
+	}
 }
 
 ?>

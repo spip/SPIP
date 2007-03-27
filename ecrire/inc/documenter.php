@@ -29,10 +29,10 @@ function inc_documenter_dist(
 
 	if (is_int($doc)) {
 		if ($ancre == 'portfolio') {
-			$lies = spip_query("SELECT docs.*,l.id_$type FROM spip_documents AS docs, spip_documents_".$type."s AS l, spip_types_documents AS lestypes WHERE l.id_$type=$doc AND l.id_document=docs.id_document AND docs.mode='document' AND docs.id_type=lestypes.id_type AND lestypes.extension IN ('gif', 'jpg', 'png') ORDER BY 0+docs.titre, docs.date");
+			$lies = spip_query("SELECT docs.*,l.id_$type,l.vu FROM spip_documents AS docs, spip_documents_".$type."s AS l, spip_types_documents AS lestypes WHERE l.id_$type=$doc AND l.id_document=docs.id_document AND docs.mode='document' AND docs.id_type=lestypes.id_type AND lestypes.extension IN ('gif', 'jpg', 'png') ORDER BY 0+docs.titre, docs.date");
 			$couleur = $couleur_claire;
 		} else {
-			$lies = spip_query("SELECT docs.*,l.id_$type FROM spip_documents AS docs, spip_documents_".$type."s AS l,spip_types_documents AS lestypes WHERE l.id_$type=$doc AND l.id_document=docs.id_document AND docs.mode='document' AND docs.id_type=lestypes.id_type AND lestypes.extension NOT IN ('gif', 'jpg', 'png') ORDER BY 0+docs.titre, docs.date");
+			$lies = spip_query("SELECT docs.*,l.id_$type,l.vu FROM spip_documents AS docs, spip_documents_".$type."s AS l,spip_types_documents AS lestypes WHERE l.id_$type=$doc AND l.id_document=docs.id_document AND docs.mode='document' AND docs.id_type=lestypes.id_type AND lestypes.extension NOT IN ('gif', 'jpg', 'png') ORDER BY 0+docs.titre, docs.date");
 			$couleur = '#aaaaaa';
 		}
 
@@ -54,12 +54,12 @@ function inc_documenter_dist(
 	$legender = charger_fonction('legender', 'inc');
 
 	// Pour les doublons d'article et en mode ajax, il faut faire propre()
-	if ($type=='article'
+	/*if ($type=='article'
 	AND !isset($GLOBALS['doublons_documents_inclus'])
 	AND is_int($doc)) {
 		$r = spip_fetch_array(spip_query("SELECT chapo,texte FROM spip_articles WHERE id_article="._q($doc)));
 		propre(join(" ",$r));
-	}
+	}*/
 
 	foreach ($documents as $document) {
 		$id_document = $document['id_document'];
@@ -70,7 +70,7 @@ function inc_documenter_dist(
 		  // ref a $exec inutilise en standard
 		  $script = $appelant ? $appelant : $GLOBALS['exec'];
 
-		$style = est_inclus($id_document) ? ' background-color: #cccccc;':'';
+		$style = ($document['vu']=='oui') ? ' background-color: #cccccc;':'';
 
 		$deplier = in_array($id_document, explode(',', _request('show_docs')));
 
