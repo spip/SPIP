@@ -111,6 +111,7 @@ function modifier_contenu($type, $id, $options, $c=false) {
 	return true;
 }
 
+// http://doc.spip.org/@marquer_doublons_documents
 function marquer_doublons_documents($champs,$id,$id_table_objet,$table_objet){
 	if (!isset($champs['texte']) AND !isset($champs['chapo'])) return;
 	$load = "";
