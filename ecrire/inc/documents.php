@@ -21,7 +21,7 @@ include_spip('base/abstract_sql');
 // pour stockage 'tel quel' dans la base de donnees
 // http://doc.spip.org/@set_spip_doc
 function set_spip_doc($fichier) {
-	if (strpos(_DIR_IMG, $fichier) === 0)
+	if (strpos($fichier, _DIR_IMG) === 0)
 		return substr($fichier, strlen(_DIR_IMG));
 	else
 		return $fichier; // ex: fichier distant
@@ -33,7 +33,7 @@ function get_spip_doc($fichier) {
 	if (preg_match(',^\w+://,', $fichier))
 		return $fichier;
 	else
-		return (strpos(_DIR_IMG, $fichier) === false)
+		return (strpos($fichier, _DIR_IMG) === false)
 			? _DIR_IMG . $fichier
 			: $fichier;
 }

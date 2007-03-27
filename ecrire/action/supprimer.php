@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/charsets');	# pour le nom de fichier
+include_spip('inc/documents');
 include_spip('base/abstract_sql');
 
 // Effacer un doc (et sa vignette)
