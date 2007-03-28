@@ -900,6 +900,10 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array(), $mi
 		$vu[] = $dnom; // ne pas oublier la table de depart
 
 	$akeys = $adesc['key'];
+	if ($v = $akeys['PRIMARY KEY']) {
+		unset($akeys['PRIMARY KEY']);
+		$akeys = array_merge(preg_split('/,\s*/', $v), $akeys);
+	}
 	if ($keys = liste_champs_jointures($dnom,$ddesc)){
 		$v = array_intersect(array_values($keys), $akeys);
 	}
