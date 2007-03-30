@@ -47,5 +47,6 @@ class DTC {
 	var 	$attributs = array();
 	var	$entites = array();
 	var	$regles = array();
+	var	$pcdata = array();
 }
 ?>
