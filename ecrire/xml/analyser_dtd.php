@@ -44,11 +44,12 @@ function charger_dtd($grammaire, $avail)
 // http://doc.spip.org/@compilerRegle
 function compilerRegle($val)
 {
-	$x = str_replace('\s*()\s*','',
+	$x = str_replace('()','',
 		preg_replace('/\s*,\s*/','',
 		preg_replace('/(\w+)\s*/','(\1 )',
+		preg_replace('/\s*\)/',')',
 		preg_replace('/\s*([(+*|])\s*/','\1',
-		preg_replace('/\s*#\w+\s*[,|]?\s*/','', $val)))));
+		preg_replace('/\s*#\w+\s*[,|]?\s*/','', $val))))));
 	return $x;
 }
 

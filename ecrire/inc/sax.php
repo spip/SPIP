@@ -148,9 +148,10 @@ function xml_parsestring($phraseur, $data)
 // http://doc.spip.org/@coordonnees_erreur
 function coordonnees_erreur($xml_parser)
 {
+  global $xml_entete_length;
   return
     ' ' .
-	xml_get_current_line_number($xml_parser) .
+	xml_get_current_line_number($xml_parser) + $xml_entete_length.
     ' ' .
 	xml_get_current_column_number($xml_parser);
 }
@@ -194,21 +195,19 @@ function inc_sax_dist($page, $apply=false)
 
 	// charger la DTD et transcoder les entites,
 	// et escamoter le doctype que sax mange en php 5
-	list($doctype,$page) = sax_bug($page);
+	list($entete,$page) = sax_bug($page);
+
+	$GLOBALS['xml_entete_length'] = substr_count($entete,"\n");
 
 	$res = $phraseur_xml->phraserTout($xml_parser, $page);
 
 	xml_parser_free($xml_parser);
 
-	if ($res[0] == '<'){
-		if (!preg_match(_REGEXP_DOCTYPE, substr($res,0,strlen($doctype))))
-			$res = $doctype . $res;
-		return $res;
-	}
+	if ($res[0] == '<') return $entete . $res;
 
 	$GLOBALS['xhtml_error'] = $res;
 
-	return $page;
+	return $entete . $page;
 }
 
 // SAX ne dit pas si une Entite est dans un attribut ou non.
@@ -222,49 +221,54 @@ function inc_sax_dist($page, $apply=false)
 function sax_bug($data)
 {
 	global  $phraseur_xml;
-	$doctype = "";
 
 	$r = analyser_doctype($data);
+
 	if (!$r) {
 		$data = _MESSAGE_DOCTYPE . _DOCTYPE_ECRIRE
 		. preg_replace(_REGEXP_DOCTYPE, '', $data);
 		$r =  analyser_doctype($data);
 	}
 
-	list($doctype, $topelement, $avail, $grammaire, $rotlvl) = $r;
+	list($doctype, $topelement, $avail, $grammaire, $rotlvl, $len) = $r;
 
-		//$data = str_replace('DOCTYPE','doctype',$doctype).substr($data,strlen($doctype));
 	$file = _DIR_CACHE_XML . preg_replace('/[^\w.]/','_', $rotlvl) . '.gz';
 
 	if (lire_fichier($file, $r)) {
 			$phraseur_xml->dtc = unserialize($r);
 	} else {
-			include_spip('xml/analyser_dtd');
-		    	$phraseur_xml->dtc = charger_dtd($grammaire, $avail);
-			if (($avail == 'PUBLIC' ) AND $phraseur_xml->dtc)
-				ecrire_fichier($file, serialize($phraseur_xml->dtc), true);
+		include_spip('xml/analyser_dtd');
+		$phraseur_xml->dtc = charger_dtd($grammaire, $avail);
+		if (($avail == 'PUBLIC' ) AND $phraseur_xml->dtc)
+			ecrire_fichier($file, serialize($phraseur_xml->dtc), true);
 	}
+
+	// l'entete contient eventuellement < ? xml... ? >, le Doctype, 
+	// et des commentaires autour d'eux
+	$entete = ltrim(substr($data,0,$len));
 
 	if ($phraseur_xml->dtc) {
 		$trans = array();
 		
-		foreach($phraseur_xml->dtc->entites as $k => $v)
+		foreach($phraseur_xml->dtc->entites as $k => $v) {
 			if (!strpos(" amp lt gt quot ", $k))
 			    $trans["&$k;"] = $v;
-		$data = strtr($data, $trans);
-	} else 
-		$data = html2unicode($data, true);
-		
-	return array($doctype,unicode2charset($data));
+		}
+		$data = strtr(substr($data,$len), $trans);
+	} else {
+		$data = html2unicode(substr($data,$len), true);
+	}
+	return array($entete,unicode2charset($data));
 }
 
 // http://doc.spip.org/@analyser_doctype
 function analyser_doctype($data)
 {
-	if (!preg_match(_REGEXP_DOCTYPE, $data, $r))
+
+	if (!preg_match(_REGEXP_DOCTYPE, $data, $page))
 		return array();
 
-	list($doctype,$pi,$co,$pico, $topelement, $avail,$suite) = $r;
+	list($doctype,$pi,$co,$pico, $topelement, $avail,$suite) = $page;
 
 	if (!preg_match('/^"([^"]*)"\s*(.*)$/', $suite, $r))
 		if (!preg_match("/^'([^']*)'\s*(.*)$/", $suite, $r))
@@ -283,7 +287,6 @@ function analyser_doctype($data)
 		$grammaire = $r[1];
 	}
 
-	return array(substr($doctype,strlen($pico)), $topelement, $avail, $grammaire, $rotlvl);
+	return array(substr($doctype,strlen($pico)), $topelement, $avail, $grammaire, $rotlvl, strlen($page[0]));
 }
-
 ?>

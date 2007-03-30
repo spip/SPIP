@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/sax');
 
 define('_REGEXP_DOCTYPE',
-	'/^((<[?][^>]*>)*\s*(<!--.*?-->)*)*<!DOCTYPE\s+(\w+)\s+(\w+)\s*([^>]*)>\s*/');
+	'/^((<\001?[?][^>]*>)*\s*(<!--.*?-->)*)*<!DOCTYPE\s+(\w+)\s+(\w+)\s*([^>]*)>\s*/');
 
 define('_MESSAGE_DOCTYPE', '<!-- SPIP CORRIGE -->');
 

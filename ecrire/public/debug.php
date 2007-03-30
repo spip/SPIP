@@ -519,15 +519,13 @@ function debug_fin()
 // http://doc.spip.org/@emboite_texte
 function emboite_texte($texte, $fonc='',$self='')
 {
- 
 	if (!$texte)
 		return array(ancre_texte($texte, array('','')), false);
-	elseif (!preg_match(",^[[:space:]]*([^<][^0-9]*)([0-9]*)(.*[^0-9])([0-9]*)$,",
-                     $GLOBALS['xhtml_error'],
-                     $eregs))
-
+	if (!isset($GLOBALS['xhtml_error']))
 		return array(ancre_texte($texte, array('', '')), true);
+
 	if (!isset($GLOBALS['debug_objets'])) {
+
 		preg_match_all(",(.*?)(\d+)(\D+(\d+)<br />),",
 				$GLOBALS['xhtml_error'],
 				$regs,
@@ -586,6 +584,9 @@ function emboite_texte($texte, $fonc='',$self='')
 		. " </table><a id='fin_err'></a>";
 		return array(ancre_texte($texte, $fautifs), $err);
 	} else {
+		preg_match(",^(.*?)(\d+)(\D+(\d+)<br />),",
+		     $GLOBALS['xhtml_error'],
+		     $eregs);
 		$fermant = $eregs[2];
 		$ouvrant = $eregs[4];
 		$rf = reference_boucle_debug($fermant, $fonc, $self);
