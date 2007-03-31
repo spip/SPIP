@@ -113,12 +113,11 @@ function critere_pagination_dist($idb, &$boucles, $crit) {
 	$boucle->partie = 'intval(isset($Pile[0][\'debut\'.'.$debut.']) ? $Pile[0][\'debut\'.'.$debut.'] : _request(\'debut\'.'.$debut.'))';
 	$boucle->modificateur['debut_nom'] = $debut;
 	$boucle->total_parties = $pas;
-/*	if (!isset($boucle->modificateur['fragment']))
-		$boucle->modificateur['fragment'] = 'fragment_'.$boucle->descr['nom'].$idb;
-*/
 }
 
 // {fragment}
+// provoque le reperage de la boucle dans le squelette pour permettre son extraction
+// dans une requete ajax sur l'url de la page avec &var_fragment=...
 // http://www.spip.net/@fragment
 // http://doc.spip.org/@critere_fragment_dist
 function critere_fragment_dist($idb, &$boucles, $crit) {

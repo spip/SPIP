@@ -156,16 +156,6 @@ if (defined('_INC_PUBLIC')) {
 		// envoi des entetes
 		if (!$flag_ob) {
 			foreach($page['entetes'] as $k => $v) @header("$k: $v");
-
-			// si un fragment est demande, on le provoque ici
-			// (mais ca peut planter)
-			if (($var_fragment=_request('var_fragment'))!==NULL) {
-				preg_match(',<div id="'.preg_quote($var_fragment)
-				.'" class="fragment">(.*)<!-- /'.preg_quote($var_fragment)
-				.' --></div>,Uims', $page['texte'], $r);
-				$page['texte'] = $r[1];
-			}
-
 			eval('?' . '>' . $page['texte']);
 			$page['texte'] = '';
 		}
@@ -204,14 +194,6 @@ if (defined('_INC_PUBLIC')) {
 	//
 	// Post-traitements et affichage final
 	//
-
-	// si un fragment est demande, l'isoler
-	if (($var_fragment=_request('var_fragment'))!==NULL) {
-		preg_match(',<div id="'.preg_quote($var_fragment)
-		.'" class="fragment">(.*)<!-- /'.preg_quote($var_fragment)
-		.' --></div>,Uims', $page['texte'], $r);
-			$page['texte'] = $r[1];
-	}
 
 	// Report du hack pour <?xml (cf. public/compiler.php)
 	if (strpos($page['texte'],"<\1?xml")!==FALSE)
