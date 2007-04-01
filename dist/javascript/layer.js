@@ -296,12 +296,12 @@ function AjaxSqueezeNode(trig, target, f, event)
 	}
 	
 	jQuery(trig).ajaxSubmit({"target":target,
-				    "after":function(res,status){
+				    "success":function(res,status){
 		if(valid) searching_img.remove();
 		if(status=='error') return this.html('Erreur HTTP');
 		callback.apply(this,[res,status]);
 	},
-			"before":function (vars){
+			"beforeSubmit":function (vars){
 			 vars.push({"name":"var_ajaxcharset","value":"utf-8"});
 			 if (valid)
 				vars.push({"name":"transformer_xml","value":"valider_xml"});
