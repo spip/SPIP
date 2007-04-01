@@ -32,16 +32,114 @@ function liste_plugin_files(){
 	return $plugin_files;
 }
 
+function plugin_version_egale($v1,$v2){
+	$v1 = explode('.',$v1);
+	$v2 = explode('.',$v2);
+	for ($i=0;$i<4;$i++){
+		$i1 = isset($v1[$i])?$v1[$i]:0;
+		$i2 = isset($v2[$i])?$v2[$i]:0;
+		if (intval($i1)!==intval($i2)) return false;
+	}
+	return true;
+}
+function plugin_version_plus_grande($v1,$v2){// test si v1>v2
+	$v1 = explode('.',$v1);
+	$v2 = explode('.',$v2);
+	for ($i=0;$i<4;$i++){
+		$i1 = isset($v1[$i])?$v1[$i]:0;
+		$i2 = isset($v2[$i])?$v2[$i]:0;
+		if (intval($i1)>intval($i2)) return true;
+		if (intval($i1)<intval($i2)) return false;
+	}
+	return false;
+}
+function plugin_version_plus_grande_ou_egale($v1,$v2){// test si v1>=v2
+	return (!plugin_version_plus_grande($v2,$v1));
+}
+function plugin_version_plus_petite($v1,$v2){// test si v1<v2
+	return (plugin_version_plus_grande($v2,$v1));
+}
+function plugin_version_plus_petite_ou_egale($v1,$v2){// test si v1<=v2
+	return (!plugin_version_plus_grande($v1,$v2));
+}
+function plugin_version_compatible($intervalle,$version){
+	if (!strlen($intervalle)) return true;
+	if (!preg_match(',^[\[\(]([0-9.]*)[;]([0-9]*)[\]\)]$,',$intervalle,$regs)) return false;
+	$mineure = $regs[1];
+	$majeure = $regs[2];
+	$mineure_inc = $intervalle{0}=="[";
+	$majeure_inc = substr($intervalle,-1)=="]";
+	#var_dump("$mineure_inc-$mineure-$majeure-$majeure_inc");
+	if (strlen($mineure)){
+		if ($mineure_inc AND plugin_version_plus_petite($version,$mineure)) return false;
+		if (!$mineure_inc AND plugin_version_plus_petite_ou_egale($version,$mineure)) return false;
+	}
+	if (strlen($majeure)){
+		if ($majeure_inc AND plugin_version_plus_grande($version,$majeure)) return false;
+		if (!$majeure_inc AND plugin_version_plus_grande_ou_egale($version,$majeure)) return false;
+	}
+	return true;
+}
+
 // http://doc.spip.org/@liste_plugin_valides
 function liste_plugin_valides($liste_plug,&$infos){
 	$liste = array();
 	$infos = array();
-	if (is_array($liste_plug))
-		foreach($liste_plug as $plug){
-			$infos[$plug] = plugin_get_infos($plug);
-			if (!isset($infos[$plug]['erreur']) && !isset($plugin_valides[$p=strtoupper($infos[$plug]['prefix'])]))
-				$liste[$p] = array('dir'=>$plug,'version'=>isset($infos[$plug]['version'])?$infos[$plug]['version']:NULL);
+	
+	if (is_array($liste_plug)){
+		// construire une liste ordonnee des plugins
+		$count = 0;
+		while ($c=count($liste_plug) AND $c!=$count){ // tant qu'il reste des plugins a classer, et qu'on ne stagne pas
+			#echo "tour::";var_dump($liste_plug);
+			$count = $c;
+			foreach($liste_plug as $k=>$plug){
+				if (!isset($infos[$plug]))
+					$infos[$plug] = plugin_get_infos($plug);
+				if (isset($infos[$plug]['erreur'])) unset($liste_plug[$k]);
+				else{
+					$version = isset($infos[$plug]['version'])?$infos[$plug]['version']:NULL;
+					if (isset($liste[$p=strtoupper($infos[$plug]['prefix'])])){
+						// prendre le plus recent
+						if (plugin_version_plus_grande($version,$liste[$p]['version']))
+							unset($liste[$p]);
+						else{
+							unset($liste_plug[$k]);
+							continue;
+						}
+					}
+					$activable = true;
+					if (isset($infos[$plug]['necessite']))
+						foreach($infos[$plug]['necessite'] as $need){
+							$id = strtoupper($need['id']);
+							if (!isset($liste[$id]) OR !plugin_version_compatible($need['version'],$liste[$id]['version'])){
+								$activable = false;
+								break;
+							}
+						}
+					if ($activable){
+						$liste[$p] = array('dir'=>$plug,'version'=>isset($infos[$plug]['version'])?$infos[$plug]['version']:NULL);
+						unset($liste_plug[$k]);
+					}
+				}
+			}
 		}
+		if (count($liste_plug)){
+			$erreurs = "";
+			foreach($liste_plug as $plug){
+				$necessite = "";
+				if (isset($infos[$plug]['necessite']))
+					foreach($infos[$plug]['necessite'] as $need){
+						$id = strtoupper($need['id']);
+						if (!isset($liste[$id]) OR !plugin_version_compatible($need['version'],$liste[$id]['version'])){
+							$necessite .= "<li>"._L("Necessite le plugin $id en version ".$need['version'])."</li>";
+						}
+					}
+				if (strlen($necessite)) $necessite="<ul>$necessite</ul>";
+				$erreurs .= "<li>"._L("Impossible d'activer le plugin $plug").$necessite."</li>";
+			}
+			ecrire_meta('plugin_erreur_activation',"<ul>$erreurs</ul>");
+		}
+	}
 	return $liste;
 }
 
@@ -138,16 +236,18 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz'){
 			$prefix = $info['prefix']."_";
 			if (isset($info['pipeline']) AND is_array($info['pipeline'])){
 				foreach($info['pipeline'] as $pipe){
-					$nom = trim(array_pop($pipe['nom']));
+					$nom = $pipe['nom'];
 					if (isset($pipe['action']))
-						$action = trim(array_pop($pipe['action']));
+						$action = $pipe['action'];
 					else
 						$action = $nom;
+					if (!isset($GLOBALS['spip_pipeline'][$nom])) // creer le pipeline eventuel
+						$GLOBALS['spip_pipeline'][$nom]="";
 					if (strpos($GLOBALS['spip_pipeline'][$nom],"|$prefix$action")===FALSE)
 						$GLOBALS['spip_pipeline'][$nom] .= "|$prefix$action";
 					if (isset($pipe['inclure'])){
 						$GLOBALS['spip_matrice']["$prefix$action"] = 
-							"_DIR_PLUGINS$plug/".array_pop($pipe['inclure']);
+							"_DIR_PLUGINS$plug/".$pipe['inclure'];
 					}
 				}
 			}
@@ -366,7 +466,9 @@ function plugin_get_infos($plug){
 		$ret = array();
 		if (isset($plugin_xml_cache[$plug])){
 			$info = $plugin_xml_cache[$plug];
-			if (isset($info['filemtime']) && (@filemtime(_DIR_PLUGINS."$plug/plugin.xml")<=$info['filemtime']))
+			if (isset($info['filemtime'])
+				AND @file_exists($f = _DIR_PLUGINS."$plug/plugin.xml")
+				AND (@filemtime($f)<=$info['filemtime']))
 				$ret = $info;
 		}
 		if (!count($ret)){
@@ -406,6 +508,8 @@ function plugin_get_infos($plug){
 					$ret['erreur'] = $arbre['erreur'];
 				if (isset($arbre['version_base']))
 					$ret['version_base'] = trim(end($arbre['version_base']));
+				$ret['necessite'] = $arbre['necessite'];
+				$ret['utilise'] = $arbre['utilise'];
 				
 				if ($t=@filemtime($f)){
 					$ret['filemtime'] = $t;
@@ -473,30 +577,63 @@ function plugin_verifie_conformite($plug,&$arbre){
 		if (isset($arbre['fonctions']))
 			$fonctions = $arbre['fonctions'];
 	  $liste_methodes_reservees = array('__construct','__destruct','plugin','install','uninstall',strtolower($prefix));
-		if (is_array($arbre['pipeline'])){
-			foreach($arbre['pipeline'] as $pipe){
-				$nom = trim(end($pipe['nom']));
-				if (isset($pipe['action']))
-					$action = trim(end($pipe['action']));
-				else
-					$action = $nom;
-				// verif que la methode a un nom autorise
-				if (in_array(strtolower($action),$liste_methodes_reservees)){
-					if (!$silence)
-						$arbre['erreur'][] = _T("erreur_plugin_nom_fonction_interdit")." : $action";
-				}
-				else{
-					// verif que le fichier de def est bien present
-					if (isset($pipe['inclure'])){
-						$inclure = _DIR_PLUGINS."$plug/".end($pipe['inclure']);
-						if (!@is_readable($inclure))
-		  				if (!$silence)
-								$arbre['erreur'][] = _T('erreur_plugin_fichier_absent')." : $inclure";
-					}
-				}
+	  plugin_pipeline_props($arbre);
+		foreach($arbre['pipeline'] as $pipe){
+			if (!isset($pipe['nom']))
+				if (!$silence)
+					$arbre['erreur'][] = _T("erreur_plugin_nom_pipeline_non_defini");
+			if (isset($pipe['action'])) $action = $pipe['action'];
+			else $action = $pipe['nom'];
+			// verif que la methode a un nom autorise
+			if (in_array(strtolower($action),$liste_methodes_reservees)){
+				if (!$silence)
+					$arbre['erreur'][] = _T("erreur_plugin_nom_fonction_interdit")." : $action";
+			}
+			if (isset($pipe['inclure'])) {
+				$inclure = _DIR_PLUGINS."$plug/".$pipe['inclure'];
+				if (!@is_readable($inclure))
+	  			if (!$silence)
+						$arbre['erreur'][] = _T('erreur_plugin_fichier_absent')." : $inclure";
 			}
 		}
+		$necessite = array();
+		if (spip_xml_match_nodes(',^necessite,',$arbre,$needs)){
+			foreach(array_keys($needs) as $tag){
+				list($tag,$att) = spip_xml_decompose_tag($tag);
+				$necessite[] = $att;
+				unset($arbre[$tag]);
+			}
+		}
+		$arbre['necessite'] = $necessite;
+		$utilise = array();
+		if (spip_xml_match_nodes(',^utilise,',$arbre,$uses)){
+			foreach(array_keys($uses) as $tag){
+				list($tag,$att) = spip_xml_decompose_tag($tag);
+				$utilise[] = $att;
+				unset($arbre[$tag]);
+			}
+		}
+		$arbre['utilise'] = $utilise;
 	}
+}
+function plugin_pipeline_props(&$arbre){
+	$pipeline = array();
+	if (spip_xml_match_nodes(',^pipeline,',$arbre,$pipes)){
+		foreach($pipes as $tag=>$p){
+			if (!is_array($p[0])){
+				list($tag,$att) = spip_xml_decompose_tag($tag);
+				$pipeline[] = $att;
+			}
+			else foreach($p as $pipe){
+				$att = array();
+				foreach($pipe as $k=>$t)
+					$att[$k] = trim(end($t));
+				$pipeline[] = $att;
+			}
+		}
+		unset($arbre[$tag]);
+	}
+	$arbre['pipeline'] = $pipeline;
 }
 
 // http://doc.spip.org/@verifie_include_plugins

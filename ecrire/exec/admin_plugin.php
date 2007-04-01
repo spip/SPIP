@@ -122,6 +122,10 @@ EOF;
 	installe_plugins();
 
 	echo debut_droite('plugin',true);
+	if (isset($GLOBALS['meta']['plugin_erreur_activation'])){
+		echo $GLOBALS['meta']['plugin_erreur_activation'];
+		effacer_meta('plugin_erreur_activation');
+	}
 
 	echo debut_cadre_relief('',true);
 
