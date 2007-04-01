@@ -66,7 +66,7 @@ function install_etape_4_dist()
 	}
 
 	if ($nouvelle) {
-		spip_query("INSERT INTO spip_meta (nom, valeur) VALUES ('nouvelle_install', 'oui')");
+		spip_query("INSERT INTO spip_meta (nom, valeur) VALUES ('nouvelle_install', '1')");
 		$result_ok = !spip_sql_errno();
 	} else {
 	  // en cas de reinstall sur mise a jour mal passee

@@ -212,8 +212,12 @@ AND $GLOBALS['auteur_session']['statut']=='0minirezo') {
 if (!preg_match(',^[a-z_][0-9a-z_]*$,i', $exec)) $exec = "accueil";
 
 // Trouver la fonction eventuellement surchagee
-
-$var_f = charger_fonction($exec);
+if (!strncmp($exec,"accueil",7)==0
+	OR !isset($GLOBALS['meta']['nouvelle_install']) 
+	OR !($e = $GLOBALS['meta']['nouvelle_install'])
+	OR !($var_f = charger_fonction("pas_$e",'premiers_pas',true))
+	)
+	$var_f = charger_fonction($exec);
 
 // Feu !
 

@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 
 // http://doc.spip.org/@inc_iconifier_dist
-function inc_iconifier_dist($id_objet, $id,  $script) {
+function inc_iconifier_dist($id_objet, $id,  $script, $visible=false) {
 
 	$texteon = $GLOBALS['logo_libelles'][($id OR $id_objet != 'id_rubrique') ? $id_objet : 'id_racine'];
 
@@ -27,11 +27,11 @@ function inc_iconifier_dist($id_objet, $id,  $script) {
 
 	if (!$logo = $chercher_logo($id, $id_objet, 'on')) {
 		$masque = indiquer_logo($texteon, $id_objet, 'on', $id, $script, $iframe);
-		$res = block_parfois_visible('on', "<b>$texteon</b>", $masque);
+		$res = block_parfois_visible('on', "<b>$texteon</b>", $masque,'',$visible);
 	} else {
 		list($img, $clic) = decrire_logo($id_objet,'on',$id, 170, 170, $logo, $texteon, $script);
 
-		$masque = block_parfois_visible('on', "<b>$texteon</b><br />$img", $clic, 'margin-bottom: -2px');
+		$masque = block_parfois_visible('on', "<b>$texteon</b><br />$img", $clic, 'margin-bottom: -2px',$visible);
 
 		$res = "<div style='text-align: center'>$masque</div><br /><br />";;
 		$texteoff = _T('logo_survol');

@@ -17,14 +17,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 
 // http://doc.spip.org/@inc_commencer_page_dist
-function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $id_rubrique = "") {
+function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $id_rubrique = "",$menu=true) {
 
 	include_spip('inc/headers');
 
 	http_no_cache();
 
 	return init_entete($titre, $id_rubrique)
-	. init_body($rubrique, $sous_rubrique, $id_rubrique)
+	. init_body($rubrique, $sous_rubrique, $id_rubrique,$menu)
 	. "<div id='page' align='center'>"
 	. avertissement_messagerie()
 	  . ((($rubrique == "messagerie") OR (_request('changer_config')!="oui"))
@@ -74,7 +74,7 @@ function init_entete($titre='', $id_rubrique=0) {
 
 // fonction envoyant la double serie d'icones de redac
 // http://doc.spip.org/@init_body
-function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='') {
+function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='',$menu=true) {
 	global $couleur_foncee, $couleur_claire;
 	global $connect_id_auteur, $auth_can_disconnect;
 	global $options, $spip_display, $spip_ecran;
@@ -102,10 +102,9 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 
 		return $res;
 	}
+	if ($menu){
+		$res .= bandeau_double_rangee($rubrique, $sous_rubrique, $largeur);
 
-	$res .= bandeau_double_rangee($rubrique, $sous_rubrique, $largeur);
-
-	if (true /*$bandeau_colore*/) {
 		if ($rubrique == "administration") {
 			$style = "background: url(" . _DIR_IMG_PACK . "rayures-danger.png); background-color: $couleur_foncee";
 			$res .= "<style>a.icone26 { color: white; }</style>";
