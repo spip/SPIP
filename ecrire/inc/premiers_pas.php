@@ -10,6 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+// http://doc.spip.org/@premiers_pas_etapes
 function premiers_pas_etapes($etape,$titre,$texte){
 	if (!autoriser('administrer','spip')) {
 		echo _T('avis_non_acces_page');
@@ -50,6 +51,7 @@ function premiers_pas_etapes($etape,$titre,$texte){
 	echo fin_gauche(), fin_page();
 }
 
+// http://doc.spip.org/@premiers_pas_barre_etapes
 function premiers_pas_barre_etapes($etape){
 	global $couleur_claire,$couleur_foncee;
 	$liste = find_all_in_path('premiers_pas/',"pas_[^.]*[.]php");
@@ -101,6 +103,7 @@ EOF;
 	echo "</ul>";
 	
 }
+// http://doc.spip.org/@premiers_pas_boutons_bas
 function premiers_pas_boutons_bas($etape){
 	global $spip_lang_right,$spip_lang_left;
 	echo "<div class='verdana3' style='margin-top:2em;text-align:$spip_lang_right'>";

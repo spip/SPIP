@@ -32,6 +32,7 @@ function liste_plugin_files(){
 	return $plugin_files;
 }
 
+// http://doc.spip.org/@plugin_version_egale
 function plugin_version_egale($v1,$v2){
 	$v1 = explode('.',$v1);
 	$v2 = explode('.',$v2);
@@ -42,6 +43,7 @@ function plugin_version_egale($v1,$v2){
 	}
 	return true;
 }
+// http://doc.spip.org/@plugin_version_plus_grande
 function plugin_version_plus_grande($v1,$v2){// test si v1>v2
 	$v1 = explode('.',$v1);
 	$v2 = explode('.',$v2);
@@ -53,15 +55,19 @@ function plugin_version_plus_grande($v1,$v2){// test si v1>v2
 	}
 	return false;
 }
+// http://doc.spip.org/@plugin_version_plus_grande_ou_egale
 function plugin_version_plus_grande_ou_egale($v1,$v2){// test si v1>=v2
 	return (!plugin_version_plus_grande($v2,$v1));
 }
+// http://doc.spip.org/@plugin_version_plus_petite
 function plugin_version_plus_petite($v1,$v2){// test si v1<v2
 	return (plugin_version_plus_grande($v2,$v1));
 }
+// http://doc.spip.org/@plugin_version_plus_petite_ou_egale
 function plugin_version_plus_petite_ou_egale($v1,$v2){// test si v1<=v2
 	return (!plugin_version_plus_grande($v1,$v2));
 }
+// http://doc.spip.org/@plugin_version_compatible
 function plugin_version_compatible($intervalle,$version){
 	if (!strlen($intervalle)) return true;
 	if (!preg_match(',^[\[\(]([0-9.]*)[;]([0-9]*)[\]\)]$,',$intervalle,$regs)) return false;
@@ -616,6 +622,7 @@ function plugin_verifie_conformite($plug,&$arbre){
 		$arbre['utilise'] = $utilise;
 	}
 }
+// http://doc.spip.org/@plugin_pipeline_props
 function plugin_pipeline_props(&$arbre){
 	$pipeline = array();
 	if (spip_xml_match_nodes(',^pipeline,',$arbre,$pipes)){

@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@action_premiers_pas_dist
 function action_premiers_pas_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$etape = $securiser_action();
@@ -37,6 +38,7 @@ function action_premiers_pas_dist() {
 	$redirect = generer_url_ecrire('accueil');
 }
 
+// http://doc.spip.org/@action_premiers_pas_pas_1_dist
 function action_premiers_pas_pas_1_dist(){
 	include_spip('inc/config');
 	appliquer_modifs_config();
