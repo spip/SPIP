@@ -49,8 +49,8 @@ if(!jQuery.load_handlers) {
       var dataType = type.dataType;
 			var ct = res.getResponseHeader("content-type");
 			var xml = !dataType && ct && ct.indexOf("xml") >= 0;
-			if(!dataType && !xml || dataType == "html") triggerAjaxLoad(document);
 			orig_complete(res,status);
+      if(!dataType && !xml || dataType == "html") triggerAjaxLoad(document);
 		};
 	
 	  return jQuery._ajax(type); 
