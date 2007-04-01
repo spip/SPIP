@@ -12,7 +12,7 @@ if(!jQuery.load_handlers) {
 	// Call the functions that have been added to onAjaxLoad
 	//
 	function triggerAjaxLoad(root) {
-		for ( var i = 0; i < jQuery.load_handlers.length; i++ )
+    for ( var i = 0; i < jQuery.load_handlers.length; i++ )
 			jQuery.load_handlers[i].apply( root );
 	};
 	
@@ -49,7 +49,7 @@ if(!jQuery.load_handlers) {
       var dataType = type.dataType;
 			var ct = res.getResponseHeader("content-type");
 			var xml = !dataType && ct && ct.indexOf("xml") >= 0;
-			if(dataType == "" && !xml || dataType == "html") triggerAjaxLoad(document);
+			if(!dataType && !xml || dataType == "html") triggerAjaxLoad(document);
 			orig_complete(res,status);
 		};
 	
