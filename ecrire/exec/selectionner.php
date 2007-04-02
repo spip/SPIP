@@ -24,7 +24,7 @@ function exec_selectionner_dist()
 
 	include_spip('inc/texte');
 	$selectionner = charger_fonction('selectionner', 'inc');
-	ajax_retour($selectionner($id, "choix_parent", "this.form.id_rubrique.value=::sel::;this.form.titreparent.value='::sel2::';findObj_forcer('selection_rubrique').style.display='none';", $exclus, $rac, $type!='breve'));
+	ajax_retour($selectionner($id, "choix_parent", $exclus, $rac, $type!='breve'));
 
 }
 ?>

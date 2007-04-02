@@ -463,7 +463,6 @@ ecrire/exec/rechercher.php -text
 ecrire/exec/rechercher_auteur.php -text
 ecrire/exec/referencer_traduction.php -text
 ecrire/exec/regler_moderation.php -text
-ecrire/exec/rubriquer.php -text
 ecrire/exec/rubriques_edit.php -text
 ecrire/exec/selectionner.php -text
 ecrire/exec/selectionner_auteur.php -text
