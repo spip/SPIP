@@ -243,14 +243,16 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz'){
 			if (isset($info['pipeline']) AND is_array($info['pipeline'])){
 				foreach($info['pipeline'] as $pipe){
 					$nom = $pipe['nom'];
-					if (isset($pipe['action']))
-						$action = $pipe['action'];
-					else
-						$action = $nom;
-					if (!isset($GLOBALS['spip_pipeline'][$nom])) // creer le pipeline eventuel
-						$GLOBALS['spip_pipeline'][$nom]="";
-					if (strpos($GLOBALS['spip_pipeline'][$nom],"|$prefix$action")===FALSE)
-						$GLOBALS['spip_pipeline'][$nom] .= "|$prefix$action";
+					if (is_string($nom)) {
+						if (isset($pipe['action']))
+							$action = $pipe['action'];
+						else
+							$action = $nom;
+						if (!isset($GLOBALS['spip_pipeline'][$nom])) // creer le pipeline eventuel
+							$GLOBALS['spip_pipeline'][$nom]="";
+						if (strpos($GLOBALS['spip_pipeline'][$nom],"|$prefix$action")===FALSE)
+							$GLOBALS['spip_pipeline'][$nom] .= "|$prefix$action";
+					}
 					if (isset($pipe['inclure'])){
 						$GLOBALS['spip_matrice']["$prefix$action"] = 
 							"_DIR_PLUGINS$plug/".$pipe['inclure'];
