@@ -241,6 +241,7 @@ function determine_upload()
 //  Verif d'un utilisateur authentifie en php_auth
 //
 
+// http://doc.spip.org/@lire_php_auth
 function lire_php_auth($user, $pw) {
 
 	$row = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE login=" . _q($user)));
@@ -255,6 +256,7 @@ function lire_php_auth($user, $pw) {
 }
 
 
+// http://doc.spip.org/@verifier_php_auth
 function verifier_php_auth() {
 
 	if (@$_SERVER['PHP_AUTH_USER'] && $_SERVER['PHP_AUTH_PW']
