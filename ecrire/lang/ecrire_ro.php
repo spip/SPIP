@@ -577,6 +577,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_surtitre' => 'Supratitlu :',
 'info_syndication_integrale_1' => 'Site-ul dumneavoastr&#259; propune fi&#351;iere de sindicalizare (vede&#355;i &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
 'info_syndication_integrale_2' => 'Dori&#355;i s&#259; transmite&#355;i articolele &icirc;n totalitatea lor, sau doar s&#259; difuza&#355;i un rezumat de c&acirc;teva sute de simboluri ?',
+'info_table_prefix' => 'Datele acestui site sunt inregistrate in tabele numite <tt><b>spip</b>_articles</tt>, <tt><b>spip</b>_rubriques</tt>, etc. Daca ati instalat mai multe site-uri in aceeasi baza de date, puteti modifica acest prefix.',
 'info_taille_maximale_vignette' => 'Talia maximal&#259; a vini&eacute;telor generate de c&#259;tre sistem&nbsp;:',
 'info_terminer_installation' => 'Acum pute&#355;i s&#259; termina&#355;i procedura standard de instalare.',
 'info_texte' => 'Text',
@@ -807,6 +808,7 @@ reinstalare a SPIP pentru a recrea o nou&#259; baz&#259; de date c&acirc;t &#351
 'texte_choix_base_1' => 'Alege&#355;i baza dumneavoastr&#259; :',
 'texte_choix_base_2' => 'Server-ul MySQL con&#355;ine mai multe baze de date.',
 'texte_choix_base_3' => '<b>Selec&#355;iona&#355;i</b> aici aceea care v-a fost atribuit&#259; de c&#259;tre furnizorul dumneavoastr&#259; de internet:',
+'texte_choix_table_prefix' => 'Prefixul tabelelor&nbsp;:',
 'texte_commande_vider_tables_indexation' => 'Utiliza&#355;i aceast&#259; comand&#259; pentru a goli tabelele de indexare utilizate
    de c&#259;tre motorul de c&#259;utare integrat &icirc;n SPIP. Aceast&#259; opera&#355;ie v&#259; va permite s&#259;
    c&acirc;&#351;tiga&#355;i spa&#355;iu pe disc.',

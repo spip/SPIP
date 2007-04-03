@@ -573,6 +573,7 @@ Risklo&ugrave; \'zo ma vefe distrujet ho tiaz-titouro&ugrave; pe ma n\'afe ket e
 'info_surtitre' => 'Ustitl',
 'info_syndication_integrale_1' => 'Kinnig a ra ho lec\'hienn restro&ugrave;-sindika&ntilde; (gwelet &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
 'info_syndication_integrale_2' => 'Daoust ha c\'hoant ho peus da ginnig ar pennado&ugrave; a-bezh, pe da embann ur verradennig outo, un nebeud a gant arouez enni ?',
+'info_table_prefix' => 'E-barzh diazo&ugrave; anvet <tt><b>spip</b>_articles</tt>, <tt><b>spip</b>_rubriques</tt>, ... e vez enrollet roado&ugrave; al lec\'hienn-ma&ntilde;. Ma staliit meur a lec\'hienn war ar memes diaz-titouro&ugrave; e c\'hellit kemm ar rakgerio&ugrave;-ma&ntilde;, met oc\'h ober gant lizherenno&ugrave; bihan hep sino&ugrave; ispisial (&ntilde;, &ugrave;, &eacute;, &agrave;, ...) hepken',
 'info_taille_maximale_vignette' => 'Ment brasa&ntilde; ar skeudennigo&ugrave; krouet gant ar poellad&nbsp;:',
 'info_terminer_installation' => 'Brema&ntilde; e c\'hellit echui&ntilde; gant al labour-stalia&ntilde;.',
 'info_texte' => 'Testenn',
@@ -802,6 +803,7 @@ adstalia&ntilde; SPIP evit kroui&ntilde; un diaz-titouro&ugrave; nevez ha d\'an 
 'texte_choix_base_1' => 'Dibabit ho tiaz :',
 'texte_choix_base_2' => 'Er servijer MySQL ez eus meur a ziaz-titouro&ugrave;.',
 'texte_choix_base_3' => '<b>Diuzit</b> ama&ntilde;-dindan an hini a zo bet roet deoc\'h gant ho boder :',
+'texte_choix_table_prefix' => 'Rakger an diazo&ugrave;&nbsp;:',
 'texte_commande_vider_tables_indexation' => 'Gant se e c\'hellit dilemel an taolio&ugrave;-listenna&ntilde; implijet gant benvegad-enklask diabarzh SPIP, a-benn gounid plas.',
 'texte_comment_lire_tableau' => 'Renk ar pennad,
 		hervez e vrud, a c\'haller gwelet a-gostez;

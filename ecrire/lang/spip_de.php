@@ -193,7 +193,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   &Uuml;berpr&uuml;fen Sie bitte die genaue Schreibweise der oben stehenden Verzeichnisse,
   sollten Sie Abweichungen feststellen, benennen Sie bitte mit Ihrem FTP-Programm die betreffenden Verzeichnisse um.
   <p>Danach k&ouml;nnen Sie ',
-'dirs_repertoires_suivants' => '<p><b>In die folgenden Verzeichnisse kann nicht geschrieben werden:</b></p><ul>@bad_dirs@</ul>
+'dirs_repertoires_suivants' => '<MODIF><p><b>In die folgenden Verzeichnisse kann nicht geschrieben werden:</b></p><ul>@bad_dirs@</ul>
 <p>Um das Problem zu l&ouml;sen, verwenden Sie bitte Ihren FTP-Client, um die Zugriffsrechte f&uuml;r diese
 Verzeichnisse zu setzen.Die Installationsanleitung erl&auml;utert die Details dazu.</p>
 <p>Wenn Sie diesen Vorgang abgeschlossen haben, k&ouml;nnen Sie',
@@ -589,7 +589,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 
 
 // O
-'occurence' => 'Vorkommen',
+'occurence' => '<MODIF>Vorkommen',
 'onglet_affacer_base' => 'Datenbank l&ouml;schen',
 'onglet_auteur' => 'Autor',
 'onglet_contenu_site' => 'Inhalte der Website',

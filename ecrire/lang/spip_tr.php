@@ -632,7 +632,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 
 
 // O
-'occurence' => 'Tekrar',
+'occurence' => 'Tekrarlan&#305;&#351;',
 'onglet_affacer_base' => 'Veritaban&#305;n&#305; sil',
 'onglet_agenda' => '-vide-',
 'onglet_auteur' => 'Yazar',
