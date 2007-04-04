@@ -759,26 +759,25 @@ function http_calendrier_ics_grille($debut, $fin, $dimheure, $dimjour, $fontsize
 
 	$total = '';
 	for ($i = $debut; $i < $fin; $i++) {
+		$c = " class='calendrier-heurepile'";
 		for ($j=0; $j < $slice; $j++) 
 		{
-			$total .= "\n<div class='calendrier-heure" .
-				($j  ? "face" : "pile") .
-				"' style='$spip_lang_left: 0px; top: ".
-				calendrier_top ("$i:".sprintf("%02d",floor(($j*60)/$slice)), $debut, $fin, $dimheure, $dimjour, $fontsize) .
-				"px;'>$i:" .
+			$n = calendrier_top ("$i:".sprintf("%02d",floor(($j*60)/$slice)), $debut, $fin, $dimheure, $dimjour, $fontsize);
+			$total .= "\n<div$c style='$spip_lang_left: 0px; top: $n" ."px;'>$i:" .
 				sprintf("%02d",floor(($j*60)/$slice)) . 
 				"</div>";
+			$c = " class='calendrier-heureface'";
 		}
 	}
 
+	$n = calendrier_top ("$fin:00", $debut, $fin, $dimheure, $dimjour, $fontsize);
+
+	$c = ($dimjour - $fontsize - 2);
+
 	return "\n<div class='calendrier-heurepile' style='border: 0px; $spip_lang_left: 0px; top: 2px;'>0:00</div>" .
 		$total .
-		"\n<div class='calendrier-heurepile' style='$spip_lang_left: 0px; top: ".
-		calendrier_top ("$fin:00", $debut, $fin, $dimheure, $dimjour, $fontsize).
-		"px;'>$fin:00</div>" .
-		"\n<div class='calendrier-heurepile' style='border: 0px; $spip_lang_left: 0px; top: ".
-		($dimjour - $fontsize - 2) .
-		"px;'>23:59</div>";
+		"\n<div class='calendrier-heurepile' style='$spip_lang_left: 0px; top: $n"."px;'>$fin:00</div>" .
+		"\n<div class='calendrier-heurepile' style='border: 0px; $spip_lang_left: 0px; top: $c"."px;'>23:59</div>";
 }
 
 # si la largeur le permet, les evenements sans duree, 
@@ -1225,6 +1224,7 @@ function http_calendrier_rv($messages, $type) {
 		  . heures($date).":".minutes($date)."<br />...</div>" ));
 		}
 
+		$c = (strtotime($date) <= $connect_quand) ? '' : " color: red;";
 		$total .= "<tr><td style='width: 24px' valign='middle'>" .
 		  http_href($row['URL'],
 				     ($rv ?
@@ -1233,9 +1233,7 @@ function http_calendrier_rv($messages, $type) {
 				      http_img_pack($bouton.".gif", $bouton, "")),
 				     '', '') .
 		"</td>\n" .
-		"<td valign='middle'><div style='font-weight: bold;" .
-		((strtotime($date) <= $connect_quand) ? '' : " color: red;") .
-		"'>" .
+		"<td valign='middle'><div style='font-weight: bold;$c'>" .
 		$rv .
 		http_href($row['URL'], typo($row['SUMMARY']), '', '', 'calendrier-verdana10') .
 		"</div></td></tr>\n";
