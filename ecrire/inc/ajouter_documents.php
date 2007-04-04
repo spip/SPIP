@@ -39,10 +39,11 @@ function inc_ajouter_documents_dist ($source, $nom_envoye, $type_lien, $id_lien,
 	if ($mode == 'distant') {
 		include_spip('inc/distant');
 		if ($a = recuperer_infos_distantes($source)) {
-			# fichier local pour creer la vignette (!!),
-			# on retablira la valeur de l'url a la fin
-			$fichier = $a['fichier'];
 
+			# NB: dans les bonnes conditions (fichier autorise et pas trop gros)
+			# $a['fichier'] est une copie locale du fichier
+
+			$fichier = $source;
 			$id_type = $a['id_type'];
 			$taille = $a['taille'];
 			$titre = $a['titre'];
@@ -231,7 +232,7 @@ function inc_ajouter_documents_dist ($source, $nom_envoye, $type_lien, $id_lien,
 	}
 
 	// Mise a jour des donnees
-	spip_query("UPDATE spip_documents SET $update taille='$taille', largeur='$largeur', hauteur='$hauteur', fichier="._q(set_spip_doc($fichier))." WHERE id_document=$id_document");
+	spip_query($q = "UPDATE spip_documents SET $update taille='$taille', largeur='$largeur', hauteur='$hauteur', fichier="._q(set_spip_doc($fichier))." WHERE id_document=$id_document");
 
 	if ($id_document_lie) {
 		spip_query("UPDATE spip_documents SET id_vignette=$id_document	WHERE id_document=$id_document_lie");
