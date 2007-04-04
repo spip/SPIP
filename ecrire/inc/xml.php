@@ -66,20 +66,18 @@ function spip_xml_parse($texte, $strict=true, $clean=true){
 			// tag fermant
 			$ncclos = strlen("</$closing_tag>");
 			$p = strpos($txt,"</$closing_tag>");
-			if ($p!==FALSE){
+			if ($p!==FALSE  AND (strpos($txt,"<")<$p)){
 				$nclose =0; $nopen = 0;
 				$d = 0;
 				while (
 					$p!==FALSE
-					AND (strpos($morceau,"<",$d)<$p)
-					AND ($morceau = substr($txt,$d,$p))
+					AND ($morceau = substr($txt,$d,$p-$d))
 					AND (($nopen+=preg_match_all("{<".preg_quote($closing_tag)."(\s*>|\s[^>]*[^/>]>)}is",$morceau,$matches,PREG_SET_ORDER))>$nclose)
 					){
 					$nclose++;
-					$d+=$p+$ncclos;
+					$d=$p+$ncclos;
 					$p = strpos($txt,"</$closing_tag>",$d);
 				}
-				if ($p!==FALSE) $p+=$d;
 			}
 			if ($p===FALSE){
 				if ($strict){
