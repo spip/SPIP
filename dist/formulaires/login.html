@@ -22,6 +22,7 @@
 			this.session_password_md5.value = calcMD5("[(#ENV{alea_actuel})]" + this.session_password.value);
 			this.next_session_password_md5.value = calcMD5("[(#ENV{alea_futur})]" + this.session_password.value);
 			this.session_password.value = "";
+			return true;
 			}']>
 	<fieldset>
 	<legend><:form_forum_identifiants:></legend>
