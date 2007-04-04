@@ -338,14 +338,18 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 	return $a . $ancre;
 }
 
-//
-// Prend une URL et lui ajoute/retire une ancre.
-// http://doc.spip.org/@ancre_url
+// Prend une URL et lui ajoute/retire une ancre après l'avoir nettoyee
+// pour l'ancre on translitere, vire les non alphanum du debut,
+// et on remplace ceux a l'interieur ou au bout par -
+// http://doc.spip.org/@ancre_url replace{}
 function ancre_url($url, $ancre) {
+	include_spip('inc/charsets');
 	// lever l'#ancre
 	if (preg_match(',^([^#]*)(#.*)$,', $url, $r)) {
 		$url = $r[1];
 	}
+	$ancre = preg_replace(array('/^[^-_a-zA-Z0-9]+/', '/[^-_a-zA-Z0-9]/'), array('', '-'),
+					translitteration($ancre));
 	return $url .'#'. $ancre;
 }
 
