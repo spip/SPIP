@@ -29,7 +29,7 @@ function charger_dtd($grammaire, $avail)
 	  } 
 	  
 	spip_log("Analyser DTD $avail $grammaire (" . spip_timer('dtd') . ") " . count($dtc->macros)  . ' macros, ' . count($dtc->elements)  . ' elements, ' . count($dtc->attributs) . " listes d'attributs, " . count($dtc->entites) . " entites");
-#	$r = $dtc->regles; ksort($r);foreach($r as $l => $v) echo "<b>$l</b> '$v' ", join (', ',array_keys($dtc->attributs[$l])), "<br />\n";exit;
+#	$r = $dtc->regles; ksort($r);foreach($r as $l => $v) {$t=array_keys($dtc->attributs[$l]);echo "<b>$l</b> '$v' ", count($t), " attributs: ", join (', ',$t);$t=$dtc->peres[$l];echo "<br />",count($t), " peres: ", @join (', ',$t), "<br />\n";}exit;
 	return $dtc;
 }
 
@@ -75,6 +75,7 @@ function analyser_dtd($loc, $avail, &$dtc)
 		}
 	}
 
+	$dtd = ltrim($dtd);
 	if (!$dtd) {
 		spip_log("DTD '$loc' inaccessible");
 		return false;
@@ -87,7 +88,8 @@ function analyser_dtd($loc, $avail, &$dtc)
 			$r = analyser_dtd_pi($dtd, $dtc, $loc);
 		elseif ($dtd[2] == '[')
 			$r = analyser_dtd_data($dtd, $dtc, $loc);
-		else switch ($dtd[3]) {
+		else {
+			switch ($dtd[3]) {
 	  case '%' : $r = analyser_dtd_data($dtd, $dtc, $loc); break;
 	  case 'T' : $r = analyser_dtd_attlist($dtd, $dtc, $loc);break;
 	  case 'L' : $r = analyser_dtd_element($dtd, $dtc, $loc);break;
@@ -95,6 +97,7 @@ function analyser_dtd($loc, $avail, &$dtc)
 	  case 'O' : $r = analyser_dtd_notation($dtd, $dtc, $loc);break;
 	  case '-' : $r = analyser_dtd_comment($dtd, $dtc, $loc); break;
 	  default: $r = -1;
+			}
 		  }
 		if (!is_string($r)) {
 			spip_log("erreur $r dans la DTD  " . substr($dtd,0,80) . ".....");
@@ -124,6 +127,7 @@ function analyser_dtd_pi($dtd, &$dtc, $grammaire){
 
 // http://doc.spip.org/@analyser_dtd_lexeme
 function analyser_dtd_lexeme($dtd, &$dtc, $grammaire){
+
 	if (!preg_match(_REGEXP_ENTITY_DEF,$dtd, $m))
 		return -9;
 
@@ -133,7 +137,8 @@ function analyser_dtd_lexeme($dtd, &$dtc, $grammaire){
 	if (is_array($n)) {
 	    // en cas d'inclusion, l'espace de nom est le meme
 	  // mais gaffe aux DTD dont l'URL est relative a l'engloblante
-		if (!preg_match("%^http://%", $n[1])) {
+		if (($n[0] == 'PUBLIC')
+		AND !preg_match("%^http://%", $n[1])) {
 			$n[1] = substr($grammaire,0, strrpos($grammaire,'/')+1) . $n[1];
 		}
 		analyser_dtd($n[1], $n[0], $dtc);
@@ -184,21 +189,25 @@ function analyser_dtd_entity($dtd, &$dtc, $grammaire)
 	$val = expanserEntite(($k2 ? $k3 : ($k4 ? $k5 : $k6)), $dtc->macros);
 
 	// cas particulier double evaluation: 'PUBLIC "..." "...."' 
-	if (preg_match('/(PUBLIC)\s+"([^"]*)"\s+"([^"]*)"$/s',$val,$r)) {
-	  list($t, $type, $val, $alt) = $r;
+	if (preg_match('/(PUBLIC|SYSTEM)\s+"([^"]*)"\s*("([^"]*)")?\s*$/s',$val,$r)) {
+		list($t, $type, $val, $q, $alt) = $r;
 	}
-	
+
 	if  (!$term)
 		$dtc->entites[$nom] = $val; 
 	elseif (!$type)
 	  $dtc->macros[$nom] = $val;
-	elseif (!$alt)
-		$dtc->macros[$nom] = $val;
 	else {
-		if (strpos($alt, '/') === false)
-			$alt = preg_replace(',/[^/]+$,', '/', $grammaire)
-			. $alt ;
-		$dtc->macros[$nom] = array($type, $alt);
+		if (($type == 'SYSTEM') AND !$alt) $alt = $val;
+		if (!$alt)
+			$dtc->macros[$nom] = $val;
+		else {
+			if (($type == 'PUBLIC')
+			AND (strpos($alt, '/') === false))
+				$alt = preg_replace(',/[^/]+$,', '/', $grammaire)
+				. $alt ;
+			$dtc->macros[$nom] = array($type, $alt);
+		}
 	} 
 
 	return $dtd;
