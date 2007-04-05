@@ -49,7 +49,7 @@ function maj_base($version_cible = 0) {
 	// d'une nouvelle installation
 	//   => ne pas passer par le processus de mise a jour
 	// De meme en cas de version superieure: ca devait etre un test,
-	// il y a eu le message d'avertissement il doit savoir ce qu'il fa
+	// il y a eu le message d'avertissement il doit savoir ce qu'il fait
 	//
 	// $version_installee = 1.702; quand on a besoin de forcer une MAJ
 
@@ -1162,12 +1162,12 @@ function maj_base($version_cible = 0) {
 	// Le logo du site n'est plus le logo par defaut des rubriques
 	// mais pour assurer la compatibilite ascendante, on le duplique
 	if (upgrade_vers(1.912, $version_installee, $version_cible)) {
-		@copy(_DIR_IMG.'rubon0.gif', _DIR_IMG.'siteon0.gif');
-		@copy(_DIR_IMG.'ruboff0.gif', _DIR_IMG.'siteoff0.gif');
-		@copy(_DIR_IMG.'rubon0.jpg', _DIR_IMG.'siteon0.jpg');
-		@copy(_DIR_IMG.'ruboff0.jpg', _DIR_IMG.'siteoff0.jpg');
-		@copy(_DIR_IMG.'rubon0.png', _DIR_IMG.'siteon0.png');
-		@copy(_DIR_IMG.'ruboff0.png', _DIR_IMG.'siteoff0.png');
+		@copy(_DIR_LOGOS.'rubon0.gif', _DIR_LOGOS.'siteon0.gif');
+		@copy(_DIR_LOGOS.'ruboff0.gif', _DIR_LOGOS.'siteoff0.gif');
+		@copy(_DIR_LOGOS.'rubon0.jpg', _DIR_LOGOS.'siteon0.jpg');
+		@copy(_DIR_LOGOS.'ruboff0.jpg', _DIR_LOGOS.'siteoff0.jpg');
+		@copy(_DIR_LOGOS.'rubon0.png', _DIR_LOGOS.'siteon0.png');
+		@copy(_DIR_LOGOS.'ruboff0.png', _DIR_LOGOS.'siteoff0.png');
 		maj_version(1.912);
 	}
 
