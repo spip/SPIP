@@ -579,46 +579,78 @@ function texte_script($texte) {
 //
 // find_in_path() : chercher un fichier nomme x selon le chemin rep1:rep2:rep3
 //
-// http://doc.spip.org/@creer_chemin
-function creer_chemin() {
-	static $path_a = array();
-	static $c = '';
 
-	// on calcule le chemin si le nombre de plugins a change
-	if ($c != count($GLOBALS['plugins']).$GLOBALS['dossier_squelettes']) {
-		$c = count($GLOBALS['plugins']).$GLOBALS['dossier_squelettes'];
 
+// la fonction _chemin ajoute un repertoire au chemin courant si un repertoire lui est passe en parametre
+// retourne le chemin courant sinon, sous forme de array
+// seul le dossier squelette peut etre modifie en dehors de cette fonction, pour raison historique
+function _chemin($dir_path=NULL){
+	static $path_base = NULL;
+	static $path_full = NULL;
+	if ($path_base==NULL){
 		// Chemin standard depuis l'espace public
 		$path = defined('_SPIP_PATH') ? _SPIP_PATH : 
 			_DIR_RACINE.':'.
 			_DIR_RACINE.'dist/:'.
 			_DIR_RESTREINT;
-
-		// Ajouter les repertoires des plugins
-		if ($GLOBALS['plugins'])
-			$path = _DIR_PLUGINS
-				. join(':'._DIR_PLUGINS, $GLOBALS['plugins'])
-				. ':' . $path;
-
 		// Ajouter squelettes/
 		if (@is_dir(_DIR_RACINE.'squelettes'))
 			$path = _DIR_RACINE.'squelettes/:' . $path;
-
-		// Et le(s) dossier(s) des squelettes nommes
-		if ($GLOBALS['dossier_squelettes'])
-			foreach (array_reverse(explode(':', $GLOBALS['dossier_squelettes'])) as $d)
-				$path = 
-					($d[0] == '/' ? '' : _DIR_RACINE) . $d . '/:' . $path;
-
-		// nettoyer les / du path
-		$path_a = array();
 		foreach (explode(':', $path) as $dir) {
 			if (strlen($dir) AND substr($dir,-1) != '/')
 				$dir .= "/";
-			$path_a[] = $dir;
+			$path_base[] = $dir;
+		}
+		$path_full = $path_base;
+		// Et le(s) dossier(s) des squelettes nommes
+		if (strlen($GLOBALS['dossier_squelettes']))
+			foreach (array_reverse(explode(':', $GLOBALS['dossier_squelettes'])) as $d)
+				array_unshift($path_full, ($d[0] == '/' ? '' : _DIR_RACINE) . $d . '/');
+		
+	}
+	if ($dir_path==NULL) return $path_full;
+
+	if (strlen($dir_path)){
+		if ($dir_path{0}!='/')
+			$dir_path = $dir_path;
+		if (substr($dir_path,-1) != '/')
+			$dir_path .= "/";
+		if (!in_array($dir_path,$path_base)){
+			$tete = "";
+			if (reset($path_base)==_DIR_RACINE.'squelettes/')
+				$tete = array_shift($path_base);
+			
+			array_unshift($path_base,$dir_path);
+			if (strlen($tete))
+				array_unshift($path_base,$tete);
 		}
 	}
+	$path_full = $path_base;
+	// Et le(s) dossier(s) des squelettes nommes
+	if (strlen($GLOBALS['dossier_squelettes']))
+		foreach (array_reverse(explode(':', $GLOBALS['dossier_squelettes'])) as $d)
+			array_unshift($path_full, ($d[0] == '/' ? '' : _DIR_RACINE) . $d . '/');
+		
+	return $path_full;
+}
 
+// http://doc.spip.org/@creer_chemin
+function creer_chemin() {
+	$path_a = _chemin();
+	static $c = '';
+
+	// provisoire, a remplacer par un @unlink sur les fichiers compiles lors d'un prochain upgrade
+	if (isset($GLOBALS['plugins'])){
+		$c = '';
+		foreach($GLOBALS['plugins'] as $dir) $path_base = _chemin(_DIR_PLUGINS.$dir);
+		unset($GLOBALS['plugins']);
+	}
+	// on calcule le chemin si le dossier skel a change
+	if ($c != $GLOBALS['dossier_squelettes']) {
+		// assurer le non plantage lors de la montee de version :
+		$c = $GLOBALS['dossier_squelettes'];
+		$path_a = _chemin(''); // forcer un recalcul du chemin
+	}
 	return $path_a;
 }
 
