@@ -1912,6 +1912,18 @@ function compacte_js($flux) {
 	spip_log('erreur de compacte_js');
 	return $flux;
 }
+// Compacte du php grace a javascriptcompressor
+function compacte_php($flux) {
+	include_spip('inc/compacte_js');
+	$k = new JavaScriptCompressor('php');
+	// en cas d'echec (?) renvoyer l'original
+	if (strlen($t = $k->getClean($flux)))
+		return $t;
+
+	// erreur
+	spip_log('erreur de compacte_php');
+	return $flux;
+}
 
 // Si la source est un chemin, on retourne un chemin avec le contenu compacte
 // dans _DIR_VAR/cache_$format/
