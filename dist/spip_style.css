@@ -56,6 +56,7 @@ table.spip th, table.spip td { padding: 3px; text-align: left; vertical-align: m
 img, .spip_logos { margin: 0; padding: 0; border: none; }
 
 .spip_documents { text-align: center; }
+.spip_documents p { margin-top: 1px; margin-bottom: 2px; }
 .spip_documents_center { clear: both; width: 100%; margin: auto; }
 span.spip_documents_center { display: block; margin-top:1em; }
 .spip_documents_left { float: left; margin-right: 15px; margin-bottom: 5px; }
