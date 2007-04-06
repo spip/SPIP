@@ -216,7 +216,6 @@ if (!verifier_low_sec ($id, $cle,
 		list($var, $val) = split('-', $bout, 2);
 		$a[$var] = $val;
 	}
-	include_spip('inc/lang');
 	lang_select($lang);
 }
 

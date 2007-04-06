@@ -297,13 +297,8 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 	if (!isset($lang))
 		$lang = $GLOBALS['meta']['langue_site'];
 
-	$lang_select = false;
-	if (!$GLOBALS['forcer_lang']
-	AND $lang <> $GLOBALS['spip_lang']
-	) {
-		lang_select($lang);
-		$lang_select = true;
-	}
+	$select = (!$GLOBALS['forcer_lang'] AND $lang <> $GLOBALS['spip_lang']);
+	if ($select) $select = lang_select($lang);
 
 	$styliser = charger_fonction('styliser', 'public');
 	list($skel,$mime_type, $gram, $sourcefile) =
@@ -357,8 +352,7 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 	}
 	$page['contexte'] = $local;
 
-	if ($lang_select)
-		lang_dselect();
+	if ($select) lang_select();
 
 	return $page;
 }

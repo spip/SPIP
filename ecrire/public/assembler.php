@@ -24,9 +24,8 @@ function public_assembler_dist($fond) {
 		include_spip('inc/lang');
 		verifier_lang_url();
 	}
-	if (isset($_GET['lang'])) {
-		include_spip('inc/lang');
-		lang_select($_GET['lang']);
+	if ($l = isset($_GET['lang'])) {
+		$l = lang_select($_GET['lang']);
 	}
 
 	// Si envoi pour un forum, enregistrer puis rediriger
@@ -57,6 +56,7 @@ function public_assembler_dist($fond) {
 		}
 	}
 
+	if ($l) $lang_select();
 	return assembler_page ($fond);
 }
 
@@ -210,8 +210,8 @@ function inclure_page($fond, $contexte_inclus) {
 		$contexte_inclus['lang'] = $GLOBALS['spip_lang'];
 
 	if ($contexte_inclus['lang'] != $GLOBALS['meta']['langue_site']) {
-		lang_select($contexte_inclus['lang']);
-		$lang_select = true; // pour lang_dselect en sortie
+		$lang_select = lang_select($contexte_inclus['lang']);
+
 	}
 
 	$cacher = charger_fonction('cacher', 'public');
@@ -241,8 +241,7 @@ function inclure_page($fond, $contexte_inclus) {
 			$cacher($contexte_inclus, $use_cache, $chemin_cache, $page,
 				$lastmodified);
 	}
-	if($lang_select)
-		lang_dselect();
+	if ($lang_select) lang_select();
 
 	return $page;
 }

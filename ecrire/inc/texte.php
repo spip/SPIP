@@ -572,7 +572,7 @@ function typo($letexte, $echapper=true) {
 	// sinon determiner la typo en fonction de la langue
 	if (!$lang = $GLOBALS['lang_objet'])
 		$lang = $GLOBALS['spip_lang'];
-	lang_select($lang);
+	$l = lang_select($lang);
 	switch (lang_typo($lang)) {
 		case 'fr':
 			$letexte = typo_fr($letexte);
@@ -601,7 +601,7 @@ function typo($letexte, $echapper=true) {
 		$letexte = apres_typo($letexte);
 
 	// remettre la langue precedente
-	lang_dselect();
+	if ($l) lang_select();
 
 	// reintegrer les echappements
 	if ($echapper)

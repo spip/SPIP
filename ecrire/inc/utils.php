@@ -1270,25 +1270,25 @@ function verifier_visiteur() {
 	return false;
 }
 
-// selectionner une langue
+// selectionne la langue donnee en argument et memorise la courante
+// ou restaure l'ancienne si appel sans argument
+// On pourrait economiser l'empilement en cas de non changemnt
+// et lui faire retour False pour prevenir l'appelant
+// Le noyau de Spip sait le faire, mais pour assurer la compatibilite
+// cette fonction retourne toujours non False
+
 // http://doc.spip.org/@lang_select
-function lang_select ($lang='') {
-	if (!is_array($GLOBALS['pile_langues'])) $GLOBALS['pile_langues'] = array();
-	array_push($GLOBALS['pile_langues'], $GLOBALS['spip_lang']);
-	if ($lang != $GLOBALS['spip_lang']) {
-		include_spip('inc/lang');
-		changer_langue($lang);
+function lang_select ($lang=NULL) {
+	static $pile_langues = array();
+	if ($lang === NULL)
+		$lang = array_pop($pile_langues);
+	else {
+		array_push($pile_langues, $GLOBALS['spip_lang']);
 	}
+	if ($lang == $GLOBALS['spip_lang'])
+		return $lang;
+	include_spip('inc/lang');
+	changer_langue($lang);
+	return $lang;
 }
-
-// revenir a la langue precedente
-// http://doc.spip.org/@lang_dselect
-function lang_dselect ($rien='') {
-	$lang = array_pop($GLOBALS['pile_langues']);
-	if ($lang != $GLOBALS['spip_lang']) {
-		include_spip('inc/lang');
-		changer_langue($lang);
-	}
-}
-
 ?>

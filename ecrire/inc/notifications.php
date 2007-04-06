@@ -85,9 +85,7 @@ function notifier_publication_article($id_article) {
 
 		if ($row = spip_fetch_array($result)) {
 
-			// selectionne langue
-			$lang_utilisateur = $GLOBALS['spip_lang'];
-			changer_langue($row['lang']);
+			$l = lang_select($row['lang']);
 
 			// URL de l'article
 			charger_generer_url();
@@ -107,8 +105,7 @@ function notifier_publication_article($id_article) {
 				. "\n";
 			envoyer_mail($adresse_suivi, $sujet, $courr);
 
-			// reinstalle la langue utilisateur (au cas ou)
-			changer_langue($lang_utilisateur);
+			if ($l) lang_select();
 		}
 	}
 }
@@ -153,7 +150,7 @@ function email_notification_forum ($t, $email) {
 
 	// Rechercher eventuellement la langue du destinataire
 	if ($l = spip_fetch_array(spip_query("SELECT lang FROM spip_auteurs WHERE email=" . _q($email))))
-		lang_select($l['lang']);
+		$l = lang_select($l['lang']);
 
 
 	charger_generer_url();
@@ -197,8 +194,7 @@ function email_notification_forum ($t, $email) {
 		."\n\n* ".textebrut(propre($t['texte']))
 		. "\n\n".$t['nom_site']."\n".$t['url_site']."\n";
 
-	if ($l)
-		lang_dselect();
+	if ($l)	lang_select();
 
 	return array('subject' => $sujet, 'body' => $corps);
 }

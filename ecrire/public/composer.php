@@ -218,8 +218,7 @@ function calcul_introduction ($type, $texte, $chapo='', $descriptif='') {
 function synthetiser_balise_dynamique($nom, $args, $file, $lang, $ligne) {
 	return
 		('<'.'?php 
-include_spip(\'inc/lang\');
-lang_select("'.$lang.'");
+$lang_select = lang_select("'.$lang.'");
 include_once(_DIR_RACINE . "'
 		. $file
 		. '");
@@ -228,7 +227,7 @@ inclure_balise_dynamique(balise_'
 		. '_dyn('
 		. join(", ", array_map('argumenter_squelette', $args))
 		. "),1, $ligne);
-lang_dselect();
+if ($lang_select) lang_select();
 ?"
 		.">");
 }

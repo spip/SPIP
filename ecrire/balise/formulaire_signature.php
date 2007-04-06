@@ -269,9 +269,9 @@ function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $
 		$passw = test_pass();
 
 		$row = spip_fetch_array(spip_abstract_select('titre,lang', 'spip_articles', "id_article=$id_article"));
-		lang_select($row['lang']);
+		$l = lang_select($row['lang']);
 		$titre = textebrut(typo($row['titre']));
-		lang_dselect();
+		if ($l) lang_select();
 
 		// preparer l'url de confirmation
 		$url = parametre_url($url_page,	'var_confirm',$passw,'&');

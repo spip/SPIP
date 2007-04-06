@@ -42,10 +42,10 @@ function menu_lang_pour_tous($nom, $default) {
 	include_spip('inc/lang');
 
 	if ($GLOBALS['spip_lang'] <> $default) {
-		lang_select($default);	# et remplace
+		$opt = lang_select($default);	# et remplace
 		if ($GLOBALS['spip_lang'] <> $default) {
 			$default = '';	# annule tout choix par defaut
-			lang_dselect();		#annule la selection
+			if ($opt) lang_select();
 		}
 	}
 
