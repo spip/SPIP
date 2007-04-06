@@ -586,6 +586,8 @@ ecrire/safehtml/classes/safehtml.php -text
 ecrire/safehtml/license.txt -text
 ecrire/safehtml/readme-SPIP.txt -text
 ecrire/safehtml/readme.txt -text
+ecrire/typographie/en.php -text
+ecrire/typographie/fr.php -text
 ecrire/urls/page.php -text
 ecrire/urls/propres-qs.php -text
 ecrire/win_png.htc -text

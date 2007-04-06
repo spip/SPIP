@@ -440,91 +440,6 @@ function safehtml($t) {
 	return interdire_scripts($t); // interdire le php (2 precautions)
 }
 
-// Correction typographique francaise
-// http://doc.spip.org/@typo_fr
-function typo_fr($letexte) {
-	static $trans;
-
-	// Nettoyer 160 = nbsp ; 187 = raquo ; 171 = laquo ; 176 = deg ; 147 = ldquo; 148 = rdquo
-	if (!$trans) {
-		$trans = array(
-			"&nbsp;" => "~",
-			"&raquo;" => "&#187;",
-			"&laquo;" => "&#171;",
-			"&rdquo;" => "&#8221;",
-			"&ldquo;" => "&#8220;",
-			"&deg;" => "&#176;"
-		);
-		$chars = array(160 => '~', 187 => '&#187;', 171 => '&#171;', 148 => '&#8221;', 147 => '&#8220;', 176 => '&#176;');
-		$chars_trans = array_keys($chars);
-		$chars = array_values($chars);
-		$chars_trans = implode(' ',array_map('chr',$chars_trans));
-		$chars_trans = unicode2charset(charset2unicode($chars_trans, 'iso-8859-1', 'forcer'));
-		$chars_trans = explode(" ",$chars_trans);
-		foreach($chars as $k=>$r)
-			$trans[$chars_trans[$k]] = $r;
-	}
-
-	$letexte = strtr($letexte, $trans);
-
-	$cherche1 = array(
-		/* 1 */ 	'/((?:^|[^\#0-9a-zA-Z\&])[\#0-9a-zA-Z]*)\;/S',
-		/* 2 */		'/&#187;| --?,|(?::| %)(?:\W|$)/S',
-		/* 3 */		'/([^[<!?])([!?])/S',
-		/* 4 */		'/&#171;|(?:M(?:M?\.|mes?|r\.?)|[MnN]&#176;) /S'
-	);
-	$remplace1 = array(
-		/* 1 */		'\1~;',
-		/* 2 */		'~\0',
-		/* 3 */		'\1~\2',
-		/* 4 */		'\0~'
-	);
-	$letexte = preg_replace($cherche1, $remplace1, $letexte);
-	$letexte = preg_replace("/ *~+ */S", "~", $letexte);
-
-	$cherche2 = array(
-		'/([^-\n]|^)--([^-]|$)/S',
-		'/(http|https|ftp|mailto)~:/S',
-		'/~/'
-	);
-	$remplace2 = array(
-		'\1&mdash;\2',
-		'\1:',
-		'&nbsp;'
-	);
-	$letexte = preg_replace($cherche2, $remplace2, $letexte);
-
-	return $letexte;
-}
-
-// rien sauf les "~" et "-,"
-// http://doc.spip.org/@typo_en
-function typo_en($letexte) {
-
-	$cherche1 = array(
-		'/ --?,/S'
-	);
-	$remplace1 = array(
-		'~\0'
-	);
-	$letexte = preg_replace($cherche1, $remplace1, $letexte);
-
-	$letexte = str_replace("&nbsp;", "~", $letexte);
-	$letexte = preg_replace("/ *~+ */", "~", $letexte);
-
-	$cherche2 = array(
-		'/([^-\n]|^)--([^-]|$)/',
-		'/~/'
-	);
-	$remplace2 = array(
-		'\1&mdash;\2',
-		'&nbsp;'
-	);
-
-	$letexte = preg_replace($cherche2, $remplace2, $letexte);
-
-	return $letexte;
-}
 
 //
 // Typographie generale
@@ -563,25 +478,12 @@ function typo($letexte, $echapper=true) {
 		}
 	}
 
-	// zouli apostrophe
-	$letexte = str_replace("'", "&#8217;", $letexte);
 
-	// typo francaise ou anglaise ?
-	// $lang_objet est fixee dans l'interface privee pour editer
-	// un texte anglais en interface francaise (ou l'inverse) ;
-	// sinon determiner la typo en fonction de la langue
-	if (!$lang = $GLOBALS['lang_objet'])
-		$lang = $GLOBALS['spip_lang'];
-	$l = lang_select($lang);
-	switch (lang_typo($lang)) {
-		case 'fr':
-			$letexte = typo_fr($letexte);
-			break;
-		default:
-			$letexte = typo_en($letexte);
-			break;
-	}
+	$lang = lang_typo();
+	lang_select($lang);
+	$typographie = charger_fonction($lang, 'typographie');
 
+	$letexte = $typographie($letexte);
 	// Retablir les caracteres proteges
 	$letexte = strtr($letexte, $illegal, $protege);
 
@@ -601,7 +503,7 @@ function typo($letexte, $echapper=true) {
 		$letexte = apres_typo($letexte);
 
 	// remettre la langue precedente
-	if ($l) lang_select();
+	if ($lang) lang_select();
 
 	// reintegrer les echappements
 	if ($echapper)

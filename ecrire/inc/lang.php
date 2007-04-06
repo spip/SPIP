@@ -71,14 +71,20 @@ function lang_dir($lang, $droitier='ltr', $gaucher='rtl') {
 		return $droitier;
 }
 
+// typo francaise ou anglaise ?
+// $lang_objet est fixee dans l'interface privee pour editer
+// un texte anglais en interface francaise (ou l'inverse) ;
+// sinon determiner la typo en fonction de la langue courante
+
 // http://doc.spip.org/@lang_typo
-function lang_typo($lang) {
+function lang_typo($lang='') {
+	if (!$lang) {
+		if (!$lang = $GLOBALS['lang_objet'])
+			$lang = $GLOBALS['spip_lang'];
+	}
 	if ($lang == 'eo' OR $lang == 'fr' OR substr($lang, 0, 3) == 'fr_' OR $lang == 'cpf')
 		return 'fr';
-	else if ($lang)
-		return 'en';
-	else
-		return false;
+	else	return 'en';
 }
 
 // service pour que l'espace prive reflete la typo et la direction des objets affiches
