@@ -58,40 +58,12 @@ function charger_fonction($nom, $dossier='exec', $continue=false) {
 	exit;
 }
 
-// definition des lots de fichier precharges en blocs pour reduire les find_in_path en usage courant
-// mecanisme desactivable par define('_PAS_DE_PRECHARGEMENT_PHP',1);
-// cas typique de service d'une page en cache
-$GLOBALS['prefetch']['inc/meta']['fetch']='service_mini';
-$GLOBALS['prefetch']['inc/session']['fetch']='service_mini';
-$GLOBALS['prefetch']['public/assembler']['fetch']='service_mini';
-$GLOBALS['prefetch']['public/cacher']['fetch']='service_mini';
-$GLOBALS['prefetch']['public/stats']['fetch']='service_mini';
-
-// cas typique de calcul d'un squelette
-$GLOBALS['prefetch']['inc/charsets']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['inc/filtres']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['base/abstract_sql']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['base/auxiliaires']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['base/db_mysql']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['base/serial']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['base/typedoc']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['inc/actions']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['inc/acces']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['inc/date']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['inc/texte']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['public/parametrer']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['public/styliser']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['public/composer']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['public/interfaces']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['inc/documents']['fetch']='calcul_skel';
-
 // inclusion anticipee par bloc pour optimisation des find_in_path
 // chaque fichier inclus est place dans une fonction ad-hoc pour ne pas etre execute
 // avant qu'il ne soit reellement necessaire, et en particulier ne pas bloquer les
 // surcharges par redefinition de fonction (charger_fonction)
 // on inclue un numero de version de format du prefetch dans le nom du fichier
 // ce qui permet les upgrades sans soucis
-define('_PREFETCH_PREFIXE_FICHIERS','prefetch-v01-noyau-');
 function include_prefetch($f){
 	static $encours=false;
 	if ($GLOBALS['prefetch'][$f]['fetch']==false) return false;// fichier charge et execute
@@ -131,6 +103,12 @@ function include_prefetch($f){
 	ecrire_fichier($nom_fetch,$source); #compacte_php($source) si on a un compacteur qui marche ...
 	return true;
 }
+// invalidation des fichiers de prechargement
+function invalide_prefetch(){
+	$fetches = preg_files(_DIR_TMP,_PREFETCH_PREFIXE_FICHIERS.".*[.]php$",10,false);
+	foreach($fetches as $f) @unlink($f);
+}
+
 //
 // une fonction cherchant un fichier dans une liste de repertoires
 //

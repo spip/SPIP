@@ -158,7 +158,11 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz'){
 			$plugin = array_diff($plugin_valides,$plugin);
 	}
 	
+	// recharcher le xml des plugins a activer
 	$plugin_valides = liste_plugin_valides($plugin,$infos,true);
+	// invalider les fichiers precompiles du noyau
+	invalide_prefetch();
+	
 	ecrire_meta('plugin',serialize($plugin_valides));
 	$plugin_header_info = array();
 	foreach($plugin_valides as $p=>$info){
