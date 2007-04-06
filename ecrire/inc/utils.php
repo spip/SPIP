@@ -84,15 +84,30 @@ $GLOBALS['prefetch']['public/composer']['fetch']='calcul_skel';
 $GLOBALS['prefetch']['inc/documents']['fetch']='calcul_skel'; // ne passe pas dans le compacteur a cause des <<<
 
 // inclusion anticipee par bloc pour optimisation des find_in_path
+// chaque fichier inclus est place dans une fonction ad-hoc pour ne pas etre execute
+// avant qu'il ne soit reellement necessaire, et en particulier ne pas bloquer les
+// surcharges par redefinition de fonction (charger_fonction)
+// on inclue un numero de version de format du prefetch dans le nom du fichier
+// ce qui permet les upgrades sans soucis
+define('_PREFETCH_PREFIXE_FICHIERS','prefetch-v01-noyau-');
 function include_prefetch($f){
 	static $encours=false;
-	if (($fetch=$GLOBALS['prefetch'][$f]['fetch'])==false) return false; // le chargement anticipe est deja fait, ne plus rien inclure
-	if ($encours) return true;// la construction du chargeur est en cours, inclure normalement pour ne pas boucler
-	if (@is_readable(($nom_fetch = _DIR_TMP."prefetch-noyau-$fetch.php"))){
-		include_once($nom_fetch);
-		return $GLOBALS['prefetch'][$f]['fetch']; // false si le fichier est bien dans le prefetch
+	if ($GLOBALS['prefetch'][$f]['fetch']==false) return false;// fichier charge et execute
+	if (($fun=$GLOBALS['prefetch'][$f]['fonction'])){// fichier deja en memoire mais pas encore execute
+		$fun(); // simule l'inclusion du code precedemment charge
+		return false; // le chargement anticipe est deja fait, ne plus rien inclure
 	}
-	$encours = true; // ne plus fetcher ce hit la
+	if ($encours) return true;// la construction du chargeur est en cours, inclure normalement pour ne pas boucler
+	$fetch=$GLOBALS['prefetch'][$f]['fetch'];
+	if (@is_readable(($nom_fetch = _DIR_TMP._PREFETCH_PREFIXE_FICHIERS."$fetch.php"))){
+		include_once($nom_fetch);
+		if (($fun=$GLOBALS['prefetch'][$f]['fonction'])){
+			$fun(); // simule l'inclusion du code precedemment charge
+			return false; // le chargement anticipe est deja fait, ne plus rien inclure
+		}
+		return true; // le fichier n'est pas dans le prefetch, il faut l'inclure unitairement
+	}
+	$encours = true; // ne plus fetcher lors de ce hit la, on construit
 	$prologue = "";
 	$source = "";
 	foreach($GLOBALS['prefetch'] as $fichier=>$pre)
@@ -100,8 +115,10 @@ function include_prefetch($f){
 			$s = include_spip($fichier,false);
 			lire_fichier($s,$contenu);
 			if (strlen($contenu)){
+				$fun = 'prefetch_'.str_replace("/","_",$fichier);
 				$prologue .= "\$GLOBALS['prefetch']['$fichier']['fichier']='$s';\n";
-				$prologue .= "\$GLOBALS['prefetch']['$fichier']['fetch']=false;\n";
+				$prologue .= "\$GLOBALS['prefetch']['$fichier']['fonction']='$fun';\n";
+				$contenu = "<"."?php\nfunction $fun(){\n\$GLOBALS['prefetch']['$fichier']['fetch']=false; ?".">" . $contenu . "<"."?php } ?".">";
 				$source .= $contenu;
 			}
 		}
@@ -118,8 +135,8 @@ function include_prefetch($f){
 function include_spip($f, $include = true) {
 	$s = "";
 	if (isset($GLOBALS['prefetch'][$f])){
-		$include = ($include AND include_prefetch($f));
-		if (isset($GLOBALS['prefetch'][$f]['fichier']))
+		$include = ($include AND include_prefetch($f)); // si include est deja false, on ne prefetch pas
+		if (isset($GLOBALS['prefetch'][$f]['fichier'])) // mais si on sait ou est le fichier, on repond
 			$s = $GLOBALS['prefetch'][$f]['fichier'];
 	}
 	if(!$s) {
