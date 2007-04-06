@@ -98,8 +98,10 @@ function include_prefetch($f){
 				$source .= $contenu;
 			}
 		}
+
 	$source = "<"."?php\n$prologue?".">".$source;
 	$source = preg_replace(',\?'.'>\s*<'.'\?php,ms','',$source); // remplacer les successions fermeture/ouverture des balises php
+	spip_log('ecrire prefetch: '.$nom_fetch.', '.strlen($source).'b');
 	ecrire_fichier($nom_fetch,$source); #compacte_php($source) si on a un compacteur qui marche ...
 	return true;
 }
