@@ -35,9 +35,9 @@ function exec_articles_dist()
 
 		$res = debut_gauche('accueil',true)
 		.  articles_affiche($id_article, $row, _request('cherche_auteur'), _request('ids'), _request('cherche_mot'), _request('select_groupe'), _request('trad_err'))
-		. "<br /><br />\n<div align='center'>"
-		  . icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=prive&id=$id_article&script=articles") ."#formulaire", "forum-interne-24.gif", "creer.gif", '', false)
-		. "</div><br />"
+		. "<br /><br />"
+		  . icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=prive&id=$id_article&script=articles") ."#formulaire", "forum-interne-24.gif", "creer.gif", 'center', false)
+		. "<br />"
 		. $discuter($id_article, false,  _request('debut'))
 		. fin_gauche()
 ;
@@ -56,8 +56,7 @@ function exec_articles_dist()
 // http://doc.spip.org/@articles_affiche
 function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot,  $select_groupe, $trad_err)
 {
-	global $spip_display, $spip_lang_left, $spip_lang_right, $dir_lang;
-	global $connect_id_auteur, $connect_statut, $options;
+	global $spip_display, $spip_lang_left, $spip_lang_right, $dir_lang, $connect_id_auteur;
 
 	$id_rubrique = $row['id_rubrique'];
 	$statut_article = $row['statut'];
@@ -175,8 +174,10 @@ function articles_documents($flag_editable, $type, $id)
 {
 	global $spip_lang_left;
 	
-	if  ($GLOBALS['meta']["documents_$type"]!='non' AND $flag_editable) {
+	if  ($GLOBALS['meta']["documents_$type"]=='non' OR !$flag_editable)
 
+	  $res = '';
+	else {
 		$joindre = charger_fonction('joindre', 'inc');
 
 		$res = debut_cadre_relief("image-24.gif", true, "", _T('titre_joindre_document'))
@@ -186,19 +187,15 @@ function articles_documents($flag_editable, $type, $id)
 	// eviter le formulaire upload qui se promene sur la page
 	// a cause des position:relative incompris de MSIE
 
-    $align = "";
-		if ($GLOBALS['browser_name']!='MSIE') {
-			$res = "\n<table width='50%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td style='text-align: $spip_lang_left;'>\n$res</td></tr></table>";
-			$align = " align='right'";
-		}
-		$res = "\n<div$align>$res</div>";
-    $res .= "<script src='"._DIR_JAVASCRIPT."async_upload.js' type='text/javascript'></script>\n";
-    $res .= <<<EOF
-    <script type='text/javascript'>
-    $("form.form_upload").async_upload(async_upload_portfolio_documents);
-    </script>
-EOF;
-	} else $res = '';
+	if ($GLOBALS['browser_name']!='MSIE') {
+		$res = "\n<table align='right' width='50%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td style='text-align: $spip_lang_left;'>\n$res</td></tr></table>";
+	}
+
+	$res .= "<script src='"._DIR_JAVASCRIPT."async_upload.js' type='text/javascript'></script>
+<script type='text/javascript'>
+$(\"form.form_upload\").async_upload(async_upload_portfolio_documents);
+</script>";
+	} 
 	
 	$documenter = charger_fonction('documenter', 'inc');
 
@@ -210,7 +207,7 @@ EOF;
 // http://doc.spip.org/@boite_info_articles
 function boite_info_articles($id_article, $statut_article, $visites, $id_version)
 {
-	global $connect_statut, $options, $flag_revisions;
+	global $options, $flag_revisions;
 
 	$res = "\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>" 
 	. _T('info_numero_article')
@@ -334,7 +331,7 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 
 		$texte_case .=  ($nom_site OR $url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
 
-		$res .= "<br />\n<div align='$spip_lang_left' $dir_lang style='padding: 4px; border: 1px dashed #aaaaaa; background-color: #e4e4e4; ' class='Verdana1 spip_x-small'>"
+		$res .= "<br />\n<div $dir_lang style='padding: 4px; border: 1px dashed #aaaaaa; background-color: #e4e4e4; text-align: $spip_lang_left;' class='Verdana1 spip_x-small'>"
 		. propre($texte_case)
 		. "</div>";
 	}
