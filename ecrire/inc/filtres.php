@@ -1913,6 +1913,7 @@ function compacte_js($flux) {
 	return $flux;
 }
 // Compacte du php grace a javascriptcompressor
+// http://doc.spip.org/@compacte_php
 function compacte_php($flux) {
 	if (strpos($flux,'<<<')!==false) return $flux; // le compacteur ne sait pas traiter le heredoc
 	include_spip('inc/compacte_js');
