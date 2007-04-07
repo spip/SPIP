@@ -56,7 +56,7 @@ function exec_articles_dist()
 // http://doc.spip.org/@articles_affiche
 function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot,  $select_groupe, $trad_err)
 {
-	global $spip_display, $spip_lang_left, $spip_lang_right, $dir_lang, $connect_id_auteur;
+	global $spip_display, $spip_lang_left, $spip_lang_right, $connect_id_auteur;
 
 	$id_rubrique = $row['id_rubrique'];
 	$statut_article = $row['statut'];
@@ -311,18 +311,18 @@ function bouton_modifier_articles($id_article, $id_rubrique, $flag_modif, $mode,
 // http://doc.spip.org/@titres_articles
 function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descriptif, $url_site, $nom_site, $flag_editable, $id_article, $id_rubrique, $modif)
 {
-	global  $dir_lang, $spip_lang_left, $spip_lang_right;
+	global  $lang_dir, $spip_lang_left, $spip_lang_right;
 
 	$res = '';
 
 	if ($surtitre) {
-		$res .= "<span $dir_lang class='arial1 spip_medium'><b>" . typo($surtitre) . "</b></span>\n";
+		$res .= "<span  dir='$lang_dir' class='arial1 spip_medium'><b>" . typo($surtitre) . "</b></span>\n";
 	}
 	 
 	$res .= gros_titre($titre, "puce-".puce_statut($statut_article).".gif", false);
 	
 	if ($soustitre) {
-		$res .= "<span $dir_lang class='arial1 spip_medium'><b>" . typo($soustitre) . "</b></span>\n";
+		$res .= "<span  dir='$lang_dir' class='arial1 spip_medium'><b>" . typo($soustitre) . "</b></span>\n";
 	}
 	
 	if ($descriptif OR $url_site OR $nom_site) {
@@ -331,7 +331,7 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 
 		$texte_case .=  ($nom_site OR $url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
 
-		$res .= "<br />\n<div $dir_lang style='padding: 4px; border: 1px dashed #aaaaaa; background-color: #e4e4e4; text-align: $spip_lang_left;' class='Verdana1 spip_x-small'>"
+		$res .= "<br />\n<div  dir='$lang_dir' style='padding: 4px; border: 1px dashed #aaaaaa; background-color: #e4e4e4; text-align: $spip_lang_left;' class='Verdana1 spip_x-small'>"
 		. propre($texte_case)
 		. "</div>";
 	}
@@ -356,7 +356,7 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 // http://doc.spip.org/@afficher_corps_articles
 function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)
 {
-  global $champs_extra, $les_notes, $dir_lang;
+  global $champs_extra, $les_notes, $lang_dir;
 
 // HACK TEMPORAIRE POUR TESTER les crayons dans l'espace prive
 global $id_article;
@@ -374,19 +374,19 @@ global $id_article;
 	} else {
 
 		if (strlen($chapo) > 0) {
-			$res .= "\n<div $dir_lang style='font-weight: bold;' class='spip_small crayon article-chapo-$id_article'>"
+			$res .= "\n<div  dir='$lang_dir' style='font-weight: bold;' class='spip_small crayon article-chapo-$id_article'>"
 			. propre($chapo)
 			. "</div>";
 		}
 
-		$res .= "\n<div $dir_lang class='crayon article-texte-$id_article'>"
+		$res .= "\n<div  dir='$lang_dir' class='crayon article-texte-$id_article'>"
 		.  propre($texte)
 		.  "<br style='clear: both;' />"
 		.  "</div>";
 
 		if ($ps) {
 			$res .= debut_cadre_enfonce('',true)
-			. "\n<div $dir_lang style='font-size: small;' class='verdana1 crayon article-ps-$id_article'>"
+			. "\n<div  dir='$lang_dir' style='font-size: small;' class='verdana1 crayon article-ps-$id_article'>"
 			. justifier("<b>"._T('info_ps')."</b> ".propre($ps))
 			. "</div>"
 			. fin_cadre_enfonce(true);
@@ -394,7 +394,7 @@ global $id_article;
 
 		if ($les_notes) {
 			$res .= debut_cadre_relief('',true)
-			. "\n<div $dir_lang class='arial11'>"
+			. "\n<div  dir='$lang_dir' class='arial11'>"
 			. justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes)
 			. "</div>"
 			. fin_cadre_relief(true);

@@ -32,7 +32,7 @@ function afficher_para_modifies ($texte, $court = false) {
 
 // http://doc.spip.org/@afficher_suivi_versions
 function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = false, $lang = "", $court = false, $rss = false) {
-	global $dir_lang;
+	global $lang_dir;
 	
 	$nb_aff = 10;
 	$champs = array('surtitre', 'titre', 'soustitre', 'descriptif', 'nom_site', 'url_site', 'chapo', 'texte', 'ps');
@@ -120,7 +120,7 @@ $revisions .= "<a href='".generer_url_ecrire('suivi_revisions', "debut=$next&id_
 					$revisions .= "<img src='" . _DIR_IMG_PACK . "$logo_statut' alt=' ' />&nbsp;";
 					$revisions .= "<a class='$statut' style='font-weight: bold;' href='" . generer_url_ecrire("articles_versions","id_article=$id_article") . "'>$titre</a>";
 					$revisions .= "</span>";
-					$revisions .= "<span class='arial1'$dir_lang>";
+					$revisions .= "<span class='arial1' dir='$lang_dir'>";
 					$revisions .= " ".date_relative($date)." "; # laisser un peu de privacy aux redacteurs
 					if (strlen($nom)>0) $revisions .= "($nom)";
 					$revisions .= "</span>";

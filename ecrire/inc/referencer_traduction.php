@@ -17,7 +17,7 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@inc_referencer_traduction_dist
 function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_trad, $trad_err='')
 {
-	global $connect_statut, $couleur_claire, $options, $connect_toutes_rubriques, $spip_lang_right, $spip_display, $dir_lang;
+	global $connect_statut, $couleur_claire, $options, $connect_toutes_rubriques, $spip_lang_right, $spip_display;
 
 	if (! (($GLOBALS['meta']['multi_articles'] == 'oui')
 		OR (($GLOBALS['meta']['multi_rubriques'] == 'oui') 
@@ -75,7 +75,7 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 		. "</div>";
 	} else $liste = '';
 
-	// changer les globales $dir_lang etc
+	// changer les globales de direction de langue
 	changer_typo($langue_article);
 
 	// Participation aux Traductions pas pour Mal-voyant. A completer
@@ -154,7 +154,7 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 // http://doc.spip.org/@articles_traduction
 function articles_traduction($id_article, $id_trad)
 {
-	global $connect_toutes_rubriques, $dir_lang;
+	global $connect_toutes_rubriques, $lang_dir;
 
 	$result_trad = spip_query("SELECT id_article, id_rubrique, titre, lang, statut FROM spip_articles WHERE id_trad = $id_trad");
 	
@@ -169,7 +169,7 @@ function articles_traduction($id_article, $id_trad)
 		$statut_trad = $row["statut"];
 
 		changer_typo($lang_trad);
-		$titre_trad = "<span $dir_lang>$titre_trad</span>";
+		$titre_trad = "<span dir='$lang_dir'>$titre_trad</span>";
 
 		$vals[] = http_img_pack("puce-".puce_statut($statut_trad).'.gif', "", " class='puce'");
 		

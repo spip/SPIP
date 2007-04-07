@@ -89,7 +89,7 @@ function lang_typo($lang='') {
 // service pour que l'espace prive reflete la typo et la direction des objets affiches
 // http://doc.spip.org/@changer_typo
 function changer_typo($lang = '', $source = '') {
-	global $lang_objet, $lang_dir, $dir_lang;
+	global $lang_objet, $lang_dir;
 
 	if (preg_match(",^(article|rubrique|breve|auteur)([0-9]+),", $source, $regs)) {
 		$r = spip_fetch_array(spip_query("SELECT lang FROM spip_".$regs[1]."s WHERE id_".$regs[1]."=".$regs[2]));
@@ -101,7 +101,6 @@ function changer_typo($lang = '', $source = '') {
 
 	$lang_objet = $lang;
 	$lang_dir = lang_dir($lang);
-	$dir_lang = " dir='$lang_dir'";
 }
 
 //

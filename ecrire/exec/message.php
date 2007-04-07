@@ -254,7 +254,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $che
 // http://doc.spip.org/@http_affiche_message
 function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, $titre, $rv, $date_heure, $date_fin, $cherche_auteur, $forcer_dest)
 {
-  global $connect_id_auteur,$connect_statut, $les_notes;
+  global $connect_id_auteur,$connect_statut, $les_notes, $lang_dir; 
 
 	if ($type == 'normal') {
 		$le_type = _T('info_message_2').aide ("messut");
@@ -313,7 +313,7 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 
 	if ($les_notes) {
 		echo debut_cadre_relief();
-		echo "<div $dir_lang class='arial11'>";
+		echo "<div dir='$lang_dir' class='arial11'>";
 		echo justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes);
 		echo "</div>";
 		echo fin_cadre_relief();

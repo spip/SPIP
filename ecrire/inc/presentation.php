@@ -500,7 +500,7 @@ function afficher_liste_fin_tableau() {
 
 // http://doc.spip.org/@puce_statut_article
 function puce_statut_article($id, $statut, $id_rubrique, $type='article', $ajax = false) {
-	global $spip_lang_left, $dir_lang, $connect_statut, $options;
+	global $spip_lang_left, $lang_dir, $connect_statut, $options;
 	
 	if (!$id) {
 	  $id = $id_rubrique;
@@ -571,14 +571,14 @@ function puce_statut_article($id, $statut, $id_rubrique, $type='article', $ajax 
 	  $over = "\nonmouseover=\"$action\"";
 	}
 
-	return 	"<span class='puce_article' id='$nom$type$id'$dir_lang$over>"
+	return 	"<span class='puce_article' id='$nom$type$id' dir='$lang_dir'$over>"
 	. $inser_puce
 	. '</span>';
 }
 
 // http://doc.spip.org/@puce_statut_breve
 function puce_statut_breve($id, $statut, $id_rubrique, $type) {
-	global $spip_lang_left, $dir_lang;
+	global $spip_lang_left, $lang_dir;
 
 	$puces = array(
 		       0 => 'puce-orange-breve.gif',
@@ -616,7 +616,7 @@ function puce_statut_breve($id, $statut, $id_rubrique, $type) {
 	$type2 = "statutdecal$type$id";
 	$action = "\nonmouseover=\"montrer('$type2');\"";
 
-	return	"<span class='puce_breve' id='$type1'$dir_lang>"
+	return	"<span class='puce_breve' id='$type1' dir='$lang_dir'>"
 		. "<span class='puce_breve_fixe' $action>"
 		. $inser_puce
 		. "</span>"
@@ -755,7 +755,7 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 // http://doc.spip.org/@afficher_articles_trad_boucle
 function afficher_articles_trad_boucle($row)
 {
-  	global $dir_lang,  $spip_lang_right, $spip_display;
+  	global $lang_dir,  $spip_lang_right, $spip_display;
 
 	$vals = '';
 
@@ -827,7 +827,7 @@ function afficher_articles_trad_boucle($row)
 	if (acces_restreint_rubrique($id_rubrique))
 		$s .= http_img_pack("admin-12.gif", _T('titre_image_administrateur'), "width='12' height='12'", _T('titre_image_admin_article'));
 
-	$s .= "<a href='" . generer_url_ecrire("articles","id_article=$id_article") . "'$dir_lang style=\"display:block;\">";
+	$s .= "<a href='" . generer_url_ecrire("articles","id_article=$id_article") . " dir='$lang_dir' style=\"display:block;\">";
 			
 			
 	if ($id_article == $id_trad) $titre = "<b>$titre</b>";
@@ -835,7 +835,7 @@ function afficher_articles_trad_boucle($row)
 	$s .= typo($titre);
 
 	if ($afficher_langue AND $lang != $langue_defaut)
-		$s .= " <span class='spip_xx-small' style='color: #666666'$dir_lang>(".traduire_nom_langue($lang).")</span>";
+		$s .= " <span class='spip_xx-small' style='color: #666666'  dir='$lang_dir'>(".traduire_nom_langue($lang).")</span>";
 
 	$s .= "</a>";
 	$s .= "</div>";
@@ -889,7 +889,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 // http://doc.spip.org/@afficher_breves_boucle
 function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 {
-  global  $dir_lang, $options, $connect_statut, $spip_lang_right;
+	global  $lang_dir, $options, $connect_statut, $spip_lang_right;
 	$droit = ($connect_statut == '0minirezo' && $options == 'avancees');
 	list($afficher_langue, $affrub, $langue_defaut) = $own;
 	$vals = '';
@@ -924,7 +924,7 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 		}
 		$s .= typo($titre);
 		if ($afficher_langue AND $lang != $langue_defaut)
-			$s .= " <span class='spip_xx-small' style='color: #666666'$dir_lang>(".traduire_nom_langue($lang).")</span>";
+			$s .= " <span class='spip_xx-small' style='color: #666666' dir='$lang_dir'>(".traduire_nom_langue($lang).")</span>";
 		$s .= "</a>";
 	
 	
@@ -1748,7 +1748,7 @@ function liste_articles_bloques()
 	
 //
 // Fin de page de l'interface privee. 
-// Elle comporte une image invisble declenchant une tache de fond
+// Elle comporte une image invisible declenchant une tache de fond
 
 // http://doc.spip.org/@fin_page
 function fin_page()
