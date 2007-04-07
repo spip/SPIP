@@ -211,16 +211,17 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 			OR $type_boucle == 'breves'
 			)))
 	  {
-	      $corps .= 
+		// Memoriser la langue avant la boucle et la restituer apres
+	        // afin que le corps de boucle affecte la globale directement
+		$init = "\n	lang_select(\$GLOBALS['spip_lang']);";
+		$fin = "\n	lang_select();";
+
+		$corps .= 
 		  (($boucle->lang_select != 'oui') ? 
 			"\t\tif (!\$GLOBALS['forcer_lang'])\n\t " : '')
-		  . "\t\t\$GLOBALS['spip_lang'] = (\$x = "
+		  . "\t\tif (\$x = "
 		  . index_pile($id_boucle, 'lang', $boucles)
-		  . ') ? $x : $old_lang;';
-		// Memoriser la langue avant la boucle pour la restituer apres
-	      $init = "\n	\$old_lang = \$GLOBALS['spip_lang'];";
-	      $fin = "\n	\$GLOBALS['spip_lang'] = \$old_lang;";
-
+		  . ') $GLOBALS["spip_lang"] = $x;';
 	  }
 	else {
 		$init = '';
