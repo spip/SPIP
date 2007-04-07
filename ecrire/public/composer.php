@@ -226,9 +226,11 @@ inclure_balise_dynamique(balise_'
 		. $nom
 		. '_dyn('
 		. join(", ", array_map('argumenter_squelette', $args))
-		. "),1, $ligne);
+		. '),1, '
+		. $ligne
+		. ');
 if ($lang_select) lang_select();
-?"
+?'
 		.">");
 }
 // http://doc.spip.org/@argumenter_squelette
