@@ -2012,7 +2012,7 @@ function enfant_rub($collection){
 
 // http://doc.spip.org/@sous_enfant_rub
 function sous_enfant_rub($collection2){
-	global $lang_dir, $spip_lang_dir, $spip_lang_left;
+	global $lang_dir, $spip_lang_left;
 
 	$result3 = spip_query("SELECT * FROM spip_rubriques WHERE id_parent='$collection2' ORDER BY 0+titre,titre");
 

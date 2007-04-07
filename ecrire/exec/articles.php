@@ -125,14 +125,12 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 
 	.	debut_droite('',true);
 
-
 // affecter les globales dictant les regles de typographie de la langue
-	changer_typo('','article'.$id_article);
+	changer_typo($row['lang']);
 
 	return $res
 	. debut_cadre_relief('', true)
 	. titres_articles($titre, $statut_article,$surtitre, $soustitre, $descriptif, $url_site, $nom_site, $flag_editable, $id_article, $id_rubrique, $modif)
-
 	. "\n<div>&nbsp;</div>"
 	. "\n<div class='serif' align='$spip_lang_left'>"
 

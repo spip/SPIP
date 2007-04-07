@@ -37,7 +37,6 @@ function changer_langue($lang) {
 		$spip_lang_rtl =   lang_dir($lang, '', '_rtl');
 		$spip_lang_left =  lang_dir($lang, 'left', 'right');
 		$spip_lang_right = lang_dir($lang, 'right', 'left');
-		$spip_lang_dir =   lang_dir($lang);
 
 		return true;
 	} else
@@ -88,13 +87,8 @@ function lang_typo($lang='') {
 
 // service pour que l'espace prive reflete la typo et la direction des objets affiches
 // http://doc.spip.org/@changer_typo
-function changer_typo($lang = '', $source = '') {
+function changer_typo($lang = '') {
 	global $lang_objet, $lang_dir;
-
-	if (preg_match(",^(article|rubrique|breve|auteur)([0-9]+),", $source, $regs)) {
-		$r = spip_fetch_array(spip_query("SELECT lang FROM spip_".$regs[1]."s WHERE id_".$regs[1]."=".$regs[2]));
-		$lang = $r['lang'];
-	}
 
 	if (!$lang)
 		$lang = $GLOBALS['meta']['langue_site'];

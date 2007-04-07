@@ -50,6 +50,7 @@ function exec_articles_versions_dist()
 	$referers = $row["referers"];
 	$extra = $row["extra"];
 	$id_trad = $row["id_trad"];
+	$lang = $row["lang"];
 
 	$last_version = false;
 	if (!($id_version = intval($id_version))) {
@@ -89,7 +90,7 @@ echo bloc_des_raccourcis(icone_horizontale(_T('icone_retour_article'), generer_u
 
 debut_droite();
 
-changer_typo('','article'.$id_article);
+ changer_typo($lang);
 
 echo "<a name='diff'></a>\n";
 

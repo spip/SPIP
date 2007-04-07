@@ -30,13 +30,14 @@ function exec_naviguer_dist()
 		$texte=$row['texte'];
 		$statut = $row['statut'];
 		$extra = $row["extra"];
+		$lang = $row["lang"];
 	} elseif ($id_rubrique)
 	      {include_spip('minipres');
 		echo minipres();
 		exit;
 	      }
 
-	else $statut = $titre = $descriptif = $texte = $extra = $id_parent='';
+	else $lang = $statut = $titre = $descriptif = $texte = $extra = $id_parent='';
 
 	if ($id_rubrique ==  0) $ze_logo = "racine-site-24.gif";
 	else if ($id_parent == 0) $ze_logo = "secteur-24.gif";
@@ -59,7 +60,7 @@ function exec_naviguer_dist()
 	  else $titre = _T('info_racine_site').": ". $GLOBALS['meta']["nom_site"];
 	  fin_grand_cadre();
 
-	  changer_typo('', 'rubrique'.$id_rubrique);
+	  changer_typo($lang);
 	  
 	  if (!autoriser('voir','rubrique',$id_rubrique)){
 			echo "<strong>"._T('avis_acces_interdit')."</strong>";
