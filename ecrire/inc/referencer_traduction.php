@@ -154,7 +154,7 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 // http://doc.spip.org/@articles_traduction
 function articles_traduction($id_article, $id_trad)
 {
-	global $connect_toutes_rubriques, $lang_dir;
+	global $connect_toutes_rubriques;
 
 	$result_trad = spip_query("SELECT id_article, id_rubrique, titre, lang, statut FROM spip_articles WHERE id_trad = $id_trad");
 	
@@ -169,6 +169,7 @@ function articles_traduction($id_article, $id_trad)
 		$statut_trad = $row["statut"];
 
 		changer_typo($lang_trad);
+		$lang_dir = lang_dir($lang_trad);
 		$titre_trad = "<span dir='$lang_dir'>$titre_trad</span>";
 
 		$vals[] = http_img_pack("puce-".puce_statut($statut_trad).'.gif', "", " class='puce'");

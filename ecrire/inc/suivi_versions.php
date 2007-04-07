@@ -32,8 +32,9 @@ function afficher_para_modifies ($texte, $court = false) {
 
 // http://doc.spip.org/@afficher_suivi_versions
 function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = false, $lang = "", $court = false, $rss = false) {
-	global $lang_dir;
 	
+	changer_typo($lang);
+	$lang_dir = lang_dir($lang);
 	$nb_aff = 10;
 	$champs = array('surtitre', 'titre', 'soustitre', 'descriptif', 'nom_site', 'url_site', 'chapo', 'texte', 'ps');
 

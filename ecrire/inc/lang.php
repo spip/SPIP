@@ -19,7 +19,7 @@ include_spip('inc/actions');
 //
 // http://doc.spip.org/@changer_langue
 function changer_langue($lang) {
-	global $all_langs, $spip_lang_rtl, $spip_lang_right, $spip_lang_left, $spip_lang_dir;
+	global $all_langs, $spip_lang_rtl, $spip_lang_right, $spip_lang_left;
 
 	$liste_langues = ',' . $all_langs.','.@$GLOBALS['meta']['langues_multilingue'] . ',';
 
@@ -35,8 +35,8 @@ function changer_langue($lang) {
 
 		$GLOBALS['spip_lang'] = $lang;
 		$spip_lang_rtl =   lang_dir($lang, '', '_rtl');
-		$spip_lang_left =  lang_dir($lang, 'left', 'right');
-		$spip_lang_right = lang_dir($lang, 'right', 'left');
+		$spip_lang_right = $spip_lang_rtl ? 'left' : 'right';
+		$spip_lang_left =  $spip_lang_rtl ? 'right' : 'left';
 
 		return true;
 	} else
@@ -55,18 +55,18 @@ function traduire_nom_langue($lang) {
 // Filtres de langue
 //
 
+
 // Donne la direction d'ecriture a partir de la langue. Retourne 'gaucher' si
 // la langue est arabe, persan, kurde, pachto, ourdou (langues ecrites en
 // alphabet arabe a priori), hebreu, yiddish (langues ecrites en alphabet
 // hebreu a priori), 'droitier' sinon.
 // C'est utilise par #LANG_DIR, #LANG_LEFT, #LANG_RIGHT.
 // http://doc.spip.org/@lang_dir
-function lang_dir($lang, $droitier='ltr', $gaucher='rtl') {
-	if ($lang=='ar' OR $lang=='fa' OR $lang == 'ku' OR $lang == 'ps'
-	OR $lang == 'ur' OR $lang == 'he' OR $lang == 'yi')
-		return $gaucher;
-	else
-		return $droitier;
+function lang_dir($lang='', $droitier='ltr', $gaucher='rtl') {
+	static $lang_rtl = array('ar', 'fa', 'ku', 'ps', 'ur', 'he', 'yi');
+
+	return in_array(($lang ? $lang : $GLOBALS['spip_lang']), $lang_rtl) ?
+		$gaucher : $droitier;
 }
 
 // typo francaise ou anglaise ?
@@ -85,16 +85,13 @@ function lang_typo($lang='') {
 	else	return 'en';
 }
 
-// service pour que l'espace prive reflete la typo et la direction des objets affiches
+// gestion de la globale $lang_objet pour que les textes soient affiches
+// avec les memes typo et direction dans l'espace prive que dans le public
 // http://doc.spip.org/@changer_typo
 function changer_typo($lang = '') {
-	global $lang_objet, $lang_dir;
+	global $lang_objet;
 
-	if (!$lang)
-		$lang = $GLOBALS['meta']['langue_site'];
-
-	$lang_objet = $lang;
-	$lang_dir = lang_dir($lang);
+	return $lang_objet = $lang ? $lang : $GLOBALS['meta']['langue_site'];
 }
 
 //
@@ -105,7 +102,7 @@ function changer_typo($lang = '') {
 // 
 // http://doc.spip.org/@menu_langues
 function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $herit = '', $lien='') {
-	global $couleur_foncee, $connect_id_auteur;
+	global $couleur_foncee;
 
 	$ret = liste_options_langues($nom_select, $default, $herit);
 
@@ -318,10 +315,9 @@ function repertoire_lang($module='spip', $lang='fr') {
 //
 // http://doc.spip.org/@init_langues
 function init_langues() {
-	global $all_langs, $langue_site,  $lang_objet, $lang_dir;
+	global $all_langs, $langue_site,  $lang_dir;
 
 	$all_langs = @$GLOBALS['meta']['langues_proposees'];
-	$lang_objet = '';
 	$lang_dir = '';
 
 	$toutes_langs = Array();

@@ -44,8 +44,7 @@ function definir_puce() {
 	// l'espace prive (spip_lang est la langue de l'interface, lang_dir
 	// celle du texte) et public (spip_lang est la langue du texte)
 	#include_spip('inc/lang');
-	$dir = _DIR_RESTREINT ?
-		lang_dir($GLOBALS['spip_lang']) : $GLOBALS['lang_dir'];
+	$dir = _DIR_RESTREINT ? lang_dir() : $GLOBALS['lang_dir'];
 	$p = ($dir == 'rtl') ? 'puce_rtl' : 'puce';
 
 	if (!isset($les_puces[$p])) {

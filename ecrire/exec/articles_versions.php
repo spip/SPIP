@@ -21,7 +21,7 @@ function exec_articles_versions_dist()
 {
 	include_spip('inc/suivi_versions');
 
-	global $champs_extra, $chapo, $descriptif, $lang_dir, $id_article, $id_diff, $id_version, $les_notes, $nom_site, $options, $ps, $soustitre, $surtitre, $texte, $titre, $url_site;
+	global $champs_extra, $chapo, $descriptif, $id_article, $id_diff, $id_version, $les_notes, $nom_site, $options, $ps, $soustitre, $surtitre, $texte, $titre, $url_site;
 
 
 //
@@ -90,7 +90,7 @@ echo bloc_des_raccourcis(icone_horizontale(_T('icone_retour_article'), generer_u
 
 debut_droite();
 
- changer_typo($lang);
+ $lang_dir = lang_dir(changer_typo($lang));
 
 echo "<a name='diff'></a>\n";
 

@@ -19,7 +19,7 @@ include_spip('base/abstract_sql');
 function exec_mots_edit_dist()
 {
 // attention, ajouter_id_article n'est pas forcement un id d'article
-global $ajouter_id_article, $champs_extra, $connect_statut, $descriptif, $id_groupe,  $id_mot, $table_id, $new, $options, $redirect, $spip_display, $table, $texte, $titre, $titre_mot, $lang_dir, $les_notes;
+global $ajouter_id_article, $champs_extra, $connect_statut, $descriptif, $id_groupe,  $id_mot, $table_id, $new, $options, $redirect, $spip_display, $table, $texte, $titre, $titre_mot, $les_notes;
 
  $id_groupe = intval($id_groupe);
  $id_mot = intval($id_mot);
@@ -147,7 +147,7 @@ global $ajouter_id_article, $champs_extra, $connect_statut, $descriptif, $id_gro
 
 	if ($les_notes) {
 		$out .= debut_cadre_relief('',true);
-		$out .= "<div dir='$lang_dir' class='arial11'>";
+		$out .= "<div dir='" . lang_dir() ."' class='arial11'>";
 		$out .= justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes);
 		$out .= "</div>";
 		$out .= fin_cadre_relief(true);
