@@ -43,7 +43,7 @@ function definir_puce() {
 	// Attention au sens, qui n'est pas defini de la meme facon dans
 	// l'espace prive (spip_lang est la langue de l'interface, lang_dir
 	// celle du texte) et public (spip_lang est la langue du texte)
-	#include_spip('inc/lang');
+
 	$dir = _DIR_RESTREINT ? lang_dir() : $GLOBALS['lang_dir'];
 	$p = ($dir == 'rtl') ? 'puce_rtl' : 'puce';
 
@@ -1073,7 +1073,6 @@ function traiter_raccourci_lien($regs) {
 		// {hreflang} ?
 		if ($m[4]) {
 			// si c'est un code de langue connu, on met un hreflang
-			include_spip('inc/lang');
 			if (traduire_nom_langue($m[5]) <> $m[5]) {
 				$hlang = $m[5];
 			}
@@ -1087,7 +1086,6 @@ function traiter_raccourci_lien($regs) {
 		else if (preg_match(',^[a-z_]+$,', $m[3])) {
 			// si c'est un code de langue connu, on met un hreflang
 			// mais on laisse le title (c'est arbitraire tout ca...)
-			include_spip('inc/lang');
 			if (traduire_nom_langue($m[3]) <> $m[3]) {
 				$hlang = $m[3];
 			}

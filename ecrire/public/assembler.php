@@ -56,7 +56,7 @@ function public_assembler_dist($fond) {
 		}
 	}
 
-	if ($l) $lang_select();
+	if ($l) lang_select();
 	return assembler_page ($fond);
 }
 
