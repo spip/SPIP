@@ -119,11 +119,14 @@ function invalide_prefetch(){
 // http://doc.spip.org/@include_spip
 function include_spip($f, $include = true) {
 	$s = "";
+	/*
 	if (isset($GLOBALS['prefetch'][$f]) AND !defined('_PAS_DE_PRECHARGEMENT_PHP')){
+
 		$include = ($include AND include_prefetch($f)); // si include est deja false, on ne prefetch pas
 		if (isset($GLOBALS['prefetch'][$f]['fichier'])) // mais si on sait ou est le fichier, on repond
 			$s = $GLOBALS['prefetch'][$f]['fichier'];
 	}
+	  */
 	if(!$s) {
 		// Dans le noyau ?
 		if (isset($GLOBALS['noyau'][$f])) {
