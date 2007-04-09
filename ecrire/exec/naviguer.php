@@ -18,9 +18,11 @@ include_spip('inc/forum');
 // http://doc.spip.org/@exec_naviguer_dist
 function exec_naviguer_dist()
 {
-	global $id_rubrique, $spip_display, $cherche_mot,  $select_groupe;
+	global $spip_display;
 
-	$id_rubrique = intval($id_rubrique);
+	$cherche_mot = _request('cherche_mot');
+	$id_rubrique = intval(_request('id_rubrique'));
+	$select_groupe = intval(_request('select_groupe'));
 
 	$row = spip_fetch_array(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique'"));
 	if ($row) {
@@ -366,7 +368,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 		AND (autoriser('creersitedans','rubrique',$id_rubrique))) {
 	
 		$res .= "<br /><div align='$spip_lang_right'>"
-		. icone(_T('info_sites_referencer'), generer_url_ecrire('sites_edit', "id_rubrique=$id_rubrique&redirect=" . generer_url_retour('naviguer', "id_rubrique=$id_rubrique")), "site-24.gif", "creer.gif",'', 'non')
+		. icone(_T('info_sites_referencer'), generer_url_ecrire('sites_edit', "id_rubrique=$id_rubrique"), "site-24.gif", "creer.gif",'', 'non')
 		. "</div>";
 		}
 	}
