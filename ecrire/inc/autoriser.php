@@ -357,4 +357,14 @@ function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 		true;
 }
 
+
+//
+// Peut-on voir un document ?
+// par defaut tout le monde (y compris visiteurs non enregistres)
+// peut lire tous les documents dans IMG/
+//
+function autoriser_document_voir_dist($faire, $type, $id, $qui, $opt) {
+	return true;
+}
+
 ?>
