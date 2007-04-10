@@ -333,9 +333,16 @@ function definir_barre_gadgets() {
 function bandeau_principal($rubrique, $sous_rubrique, $largeur)
 {
 	$res = '';
-	foreach($GLOBALS['boutons_admin'] as $page => $detail) {
+	$decal = 0;
+	//cherche les espacement pour determiner leur largeur 
+  $num_espacements = 0;
+  foreach($GLOBALS['boutons_admin'] as $page => $detail) {
+	 if ($page=='espacement') $num_espacements++;
+	}
+	$larg_espacements = ($largeur-(count($GLOBALS['boutons_admin'])-$num_espacements)*_LARGEUR_ICONES_BANDEAU)/$num_espacements;
+  foreach($GLOBALS['boutons_admin'] as $page => $detail) {
 		if ($page=='espacement') {
-			$res .= "<td> &nbsp; </td>";
+			$res .= "<li class='cellule48' style='width:".$larg_espacements."px'><span class='menu-item' style='width:"._LARGEUR_ICONES_BANDEAU."px'>&nbsp</span></li>";
 		} else {
 			if ($detail->url)
 				$lien_noscript = $detail->url;
@@ -348,22 +355,23 @@ function bandeau_principal($rubrique, $sous_rubrique, $largeur)
 				$lien = $lien_noscript;
 
 			$res .= icone_bandeau_principal(
-					_T($detail->libelle),
+					$detail,
 					$lien,
-					$detail->icone,
 					$page,
 					$rubrique,
 					$lien_noscript,
 					$page,
-					$sous_rubrique);
+					$sous_rubrique,
+          $largeur,$decal);
 		}
+		$decal += _LARGEUR_ICONES_BANDEAU;
 	}
 
-	return "<div class='bandeau-icones'>\n<table width='$largeur' cellpadding='0' cellspacing='0' border='0'><tr>\n$res</tr></table></div>\n";
+	return $res;
 }
 
 // http://doc.spip.org/@icone_bandeau_principal
-function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide", $rubrique = "", $lien_noscript = "", $sous_rubrique_icone = "", $sous_rubrique = ""){
+function icone_bandeau_principal($detail, $lien, $rubrique_icone = "vide", $rubrique = "", $lien_noscript = "", $sous_rubrique_icone = "", $sous_rubrique = "",$largeur,$decal){
 	global $spip_display, $menu_accesskey, $compteur_survol;
 
 	$alt = '';
@@ -371,8 +379,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 	if ($spip_display == 1){
 	}
 	else if ($spip_display == 3){
-		$title = "title=\"$texte\"";
-		$alt = $texte;
+		$title = " title=\"$texte\"";
 	}
 	
 	if (!$menu_accesskey = intval($menu_accesskey)) $menu_accesskey = 1;
@@ -385,7 +392,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 		$menu_accesskey++;
 	}
 
-	$class_select = ($sous_rubrique_icone == $sous_rubrique) ? " class='selection'" : '';
+	$class_select = " class='menu-item boutons_admin".($sous_rubrique_icone == $sous_rubrique ? " selection" : "")."'";
 
 	if (strncasecmp("javascript:",$lien,11)==0) {
 		$a_href = "\nonclick=\"$lien; return false;\" href='$lien_noscript' ";
@@ -398,49 +405,52 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 
 	if ($spip_display != 1 AND $spip_display != 4) {
 		$class ='cellule48';
-		$texte = http_img_pack($fond, $alt, "$title width='48' height='48'")
-		. ($spip_display == 3 ? '' :  "<span>$texte</span>");
+		$texte = "<span class='icon_fond'><span".http_style_background($detail->icone)."></span></span>".($spip_display == 3 ? '' :  "<span>"._T($detail->libelle)."</span>");
 	} else {
 		$class = 'cellule-texte';
 	}  
 		
-	return "<td style='width: "
+	return "<li style='width: "
 	. _LARGEUR_ICONES_BANDEAU
-	. "px' class='$class' onmouseover=\"changestyle('bandeau$rubrique_icone');\"><a$accesskey$a_href$class_select>"
-	.  $texte
-	. "</a></td>\n";
+	. "px' class='$class boutons_admin' onmouseover=\"changestyle('bandeau$rubrique_icone');\"><a$accesskey$a_href$class_select$title>"
+	. $texte
+	. "</a>\n"
+	. bandeau_principal2($detail->sousmenu,$rubrique, $sous_rubrique, $largeur, $decal)
+  . "</li>\n";
 }
 
 // http://doc.spip.org/@bandeau_principal2
-function bandeau_principal2($rubrique, $sous_rubrique, $largeur) {
+function bandeau_principal2($sousmenu,$rubrique, $sous_rubrique, $largeur, $decal) {
 	global $spip_lang_left;
 
 	$res = '';
-	$decal=0;
 	$coeff_decalage = 0;
 	if ($GLOBALS['browser_name']=="MSIE") $coeff_decalage = 1.0;
 	$largeur_maxi_menu = $largeur-100;
 	$largitem_moy = 85;
 
-	foreach($GLOBALS['boutons_admin'] as $page => $detail) {
-		if (($rubrique == $page) AND (!_SPIP_AJAX)) {
+    if (($rubrique == $page) AND (!_SPIP_AJAX)) {
 			$class = "visible_au_chargement";
 		} else {
 			$class = "invisible_au_chargement";
 		}
-
-		$sousmenu= $detail->sousmenu;
+    
+    
 		if($sousmenu) {
 			$offset = (int)round($decal-$coeff_decalage*max(0,($decal+count($sousmenu)*$largitem_moy-$largeur_maxi_menu)));
 			if ($offset<0){	$offset = 0; }
 
-			$res .= "<div class='$class bandeau' id='bandeau$page' style='position: absolute; $spip_lang_left: ".$offset."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
 			$width=0;
+			$max_width=0;
 			foreach($sousmenu as $souspage => $sousdetail) {
-				if ($width+1.25*$largitem_moy>$largeur_maxi_menu){$res .= "</tr><tr>\n";$width=0;}
+				if ($width+1.25*$largitem_moy>$largeur_maxi_menu){
+          $res .= "</ul><ul><li>\n";
+          if($width>$max_width) $max_width=$width;
+          $width=0;
+        }
 				if($souspage=='espacement') {
 					if ($width>0){
-						$res .= "<td class='separateur'></td>\n";
+						$res .= "<li class='separateur'></li>\n";
 						$largitem = 0;
 					}
 				} else {
@@ -448,12 +458,12 @@ function bandeau_principal2($rubrique, $sous_rubrique, $largeur) {
 				  $res .= $html;
 				}
 				$width+=$largitem+10;
+				if($width>$max_width) $max_width+=$largitem;
 			}
-			$res .= "</tr></table></div></div>";
+			$res .= "</ul></div>\n";
+			$res = "<div class='bandeau_sec h-list' style='width:{$max_width}px;$spip_lang_left:{$offse}px;'><ul>".$res;
 		}
 		
-		$decal += _LARGEUR_ICONES_BANDEAU;
-	}
 	return $res;
 }
 
@@ -464,15 +474,21 @@ function bandeau_double_rangee($rubrique, $sous_rubrique, $largeur)
 	definir_barre_boutons();
 
 	return "<div class='invisible_au_chargement' style='position: absolute; height: 0px; visibility: hidden;'><a href='oo'>"._T("access_mode_texte")."</a></div>"
-	. "<div id='haut-page'>"
-	. "<div id='bandeau-principal' align='center'>\n"
+	. "<div id='haut-page'>\n"
+	. "<div id='bandeau-principal'>\n"
+  . "<div class='h-list centered' style='width:{$largeur}px'><ul>\n"
 	. bandeau_principal($rubrique, $sous_rubrique, $largeur)
-	. "<table width='$largeur' cellpadding='0' cellspacing='0'><tr><td>"
-	. "<div style='text-align: $spip_lang_left; width: ".$largeur."px; position: relative; z-index: 2000;'>"
-	. bandeau_principal2($rubrique, $sous_rubrique, $largeur)
-	. "</div>"
-	. "</td></tr></table>"
-	. "</div>\n"; 
+	. "</ul></div>\n"
+  . "</div>"
+  //script to show the submenus in IE6, not supporting :hover on li elements
+  . "<script type='text/javascript'>\n"
+  . "var boutons_admin = jQuery('#bandeau-principal li.boutons_admin');\n"
+  . "if(jQuery.browser.msie) boutons_admin.hover(\n"
+  . "function(){jQuery(this).addClass('sfhover')},\n"
+  . "function(){jQuery(this).removeClass('sfhover')}\n"
+  . ");\n"
+  . "boutons_admin.one('mouseover',decaleSousMenu);\n"
+  . "</script>\n"; 
 }
 
 
@@ -517,22 +533,22 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 	}
 	if ($spip_display == 3) $accesskey_icone = $accesskey;
 
-	$class_select =  ($rubrique_icone != $rubrique) ? '' : " class='selection'";
+	$class_select = "class='menu-item".($rubrique_icone != $rubrique ? "" : " selection")."'";
 	$compteur_survol ++;
 
 	$a_href = "<a$accesskey href=\"$lien\"$class_select>";
 
 	if ($spip_display != 1) {
-		$res = "<td class='cellule36' style='width: ".$largeur."px;'>";
+		$res = "<li class='cellule36' style='width: ".$largeur."px;'>";
 		$res .= $a_href .
 		  http_img_pack("$fond", $alt, "$title");
 		if ($aide AND $spip_display != 3) $res .= aide($aide)." ";
 		if ($spip_display != 3) {
 			$res .= "<span>$texte</span>";
 		}
-		$res .= "</a></td>\n";
+		$res .= "</a></li>\n";
 	}
-	else $res = "<td style='width: $largeur" . "px' class='cellule-texte'>$a_href". $texte . "</a></td>\n";
+	else $res = "<li style='width: $largeur" . "px' class='cellule-texte'>$a_href". $texte . "</a></li>\n";
 
 	return array($res, $largeur);
 }
