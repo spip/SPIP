@@ -267,7 +267,6 @@ function http_calendrier_mois_navigation($annee, $mois, $premier_jour, $dernier_
 
 // http://doc.spip.org/@http_calendrier_mois_noms
 function http_calendrier_mois_noms($annee, $mois, $jour, $script, $ancre){
-	global $couleur_claire;
 
 	$bandeau ="";
 	for ($j=1; $j<8;$j++){
@@ -276,9 +275,7 @@ function http_calendrier_mois_noms($annee, $mois, $jour, $script, $ancre){
 		  _T('date_jour_' . (($j%7)+1)) .
 		  "</th>";
 	}
-	return "\n<tr" .
-	  (!isset($couleur_claire) ? "" : " style='background-color: $couleur_claire'") . 
-	  ">$bandeau\n</tr>";
+	return "\n<tr class='toile_claire'>$bandeau\n</tr>";
 }
 
 # dispose les lignes d'un calendrier de 7 colonnes (les jours)
@@ -447,7 +444,6 @@ function http_calendrier_semaine_navigation($annee, $mois, $jour, $echelle, $par
 
 // http://doc.spip.org/@http_calendrier_semaine_noms
 function http_calendrier_semaine_noms($annee, $mois, $jour, $script, $finurl, $ancre){
-	global $couleur_claire;
 
 	$bandeau = '';
 
@@ -463,9 +459,7 @@ function http_calendrier_semaine_noms($annee, $mois, $jour, $script, $finurl, $a
 		  calendrier_href($script, date("Y",$nom), $numois, $num, 'jour', $finurl, $ancre, '', $clic, '', '', $clic) .
 		  "</th>";
 	}
-	return "\n<tr" .
-	  (!isset($couleur_claire) ? "" : " style='background-color: $couleur_claire'") . 
-	  ">$bandeau\n</tr>";
+	return "\n<tr class='toile_claire'>$bandeau\n</tr>";
 }
 
 // http://doc.spip.org/@http_calendrier_semaine_sept
@@ -1014,13 +1008,11 @@ function http_calendrier_navigation($annee, $mois, $jour, $echelle, $partie_cal,
 // http://doc.spip.org/@http_calendrier_invisible
 function http_calendrier_invisible($annee, $mois, $jour, $script, $finurl, $ancre, $id)
 {
-	global $spip_lang_right, $spip_lang_left, $couleur_claire;
+	global $spip_lang_right, $spip_lang_left;
 	$gadget = "<div style='position: relative;z-index: 1000;'
 			onmouseover=\"findObj_test_forcer('$id',true).style.visibility='visible';\"
 			onmouseout=\"cacher('$id');\">"
-	  . "<table id='$id' class='calendrier-cadreagenda'"
-	  . (!isset($couleur_claire) ? "" : " style='background-color: $couleur_claire'")
-	  . ">\n<tr><td colspan='3' style='text-align:$spip_lang_left;'>";
+	  . "<table id='$id' class='calendrier-cadreagenda toile_claire'"	  . ">\n<tr><td colspan='3' style='text-align:$spip_lang_left;'>";
 
 	$annee_avant = $annee - 1;
 	$annee_apres = $annee + 1;
