@@ -12,9 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/charsets');	# pour le nom de fichier
 include_spip('inc/headers');
-include_spip('base/abstract_sql');
 
 // acces aux documents joints securise
 // verifie soit que le demandeur est authentifie
@@ -24,7 +22,8 @@ include_spip('base/abstract_sql');
 // Definir une fonction d'autorisation specifique
 // sauf si on a deja eu cette idee
 // TODO: ne devrait pas figurer dans ce fichier
-if (!function_exists('autoriser_document_voir')) {
+if ($GLOBALS['meta']["creer_htaccess"] == 'oui'
+AND !function_exists('autoriser_document_voir')) {
 
 // http://doc.spip.org/@autoriser_document_voir
 function autoriser_document_voir($faire, $type, $id, $qui, $opt) {
@@ -60,9 +59,6 @@ function action_acceder_document_dist() {
 	} else {
 		$where = "documents.fichier="._q(set_spip_doc($file))
 		. ($arg ? " AND documents.id_document=".intval($arg): '');
-	}
-
-	if (!$status) {
 
 		$s = spip_query("SELECT documents.id_document, documents.titre, documents.descriptif, documents.distant, documents.fichier, types.mime_type FROM spip_documents AS documents LEFT JOIN spip_types_documents AS types ON documents.id_type=types.id_type WHERE ".$where);
 		if (!$doc = spip_fetch_array($s)) {
@@ -79,10 +75,6 @@ function action_acceder_document_dist() {
 				header('ETag: '.$ETag);
 			}
 
-			$dcc = $doc['titre']. ($doc['descriptif']
-				? ' - '.$doc['descriptif']
-				: '');
-
 			//
 			// Verifier les droits de lecture du document
 			//
@@ -91,44 +83,41 @@ function action_acceder_document_dist() {
 		}
 	}
 
-	if ($status == 403) {
-		spip_log("403: acces refuse (erreur $refus) au document " . $arg . ': ' . $file);
+	switch($status) {
+
+	case 403:
 		http_status(403);
 		include_spip('inc/minipres');
 		echo minipres(_L('Status').' 403',
 			_T('ecrire:avis_acces_interdit'));
-	} else if ($status == 404) {
-		spip_log("404: Le document $file n'existe pas");
+		break;
+
+	case 404:
 		http_status(404);
 		include_spip('inc/minipres');
 		echo minipres(_L('Erreur').' 404',
 			_L('Ce document n\'est pas disponible sur le site.'));
-	}
-	else {
+		break;
 
+	default:
 		// Content-Type ; pour les images ne pas passer en attachment
-		// sinon, lorsqu'on pointe directement sur leur adresse, le navigateur
-		// les downloade au lieu de les afficher
+		// sinon, lorsqu'on pointe directement sur leur adresse,
+		// le navigateur les downloade au lieu de les afficher
 		header("Content-Type: ". $doc['mime_type']);
 
 		if (!preg_match(',^image/,', $doc['mime_type'])) {
 			header("Content-Disposition: attachment; filename=\""
 				. basename($file) ."\";");
-			if ($dcc) {
-				include_spip('inc/texte');
-				$dcc = preg_replace(',\s+,',' ', couper(textebrut(typo($dcc)),60, '...'));
-				spip_log('description: '.$dcc);
-				header("Content-Description: " . $dcc);
-			}
 			header("Content-Transfer-Encoding: binary");
 		}
 
 		if ($cl = filesize($file))
 			header("Content-Length: ". $cl);
 
-
 		readfile($file);
+		break;
 	}
+
 }
 
 ?>
