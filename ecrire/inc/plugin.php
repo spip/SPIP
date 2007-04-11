@@ -71,7 +71,7 @@ function liste_plugin_valides($liste_plug,&$infos, $force = false){
 					$version = isset($infos[$plug]['version'])?$infos[$plug]['version']:NULL;
 					if (isset($liste[$p=strtoupper($infos[$plug]['prefix'])])){
 						// prendre le plus recent
-						if (plugin_version_plus_grande($version,$liste[$p]['version']))
+						if (version_compare($version,$liste[$p]['version'],'>'))
 							unset($liste[$p]);
 						else{
 							unset($liste_plug[$k]);
@@ -82,9 +82,15 @@ function liste_plugin_valides($liste_plug,&$infos, $force = false){
 					if (isset($infos[$plug]['necessite']))
 						foreach($infos[$plug]['necessite'] as $need){
 							$id = strtoupper($need['id']);
-							if (!isset($liste[$id]) OR !plugin_version_compatible($need['version'],$liste[$id]['version'])){
+							if ($id=='SPIP'){
+								if (!plugin_version_compatible($need['version'],$GLOBALS['spip_version_code'])){
+									$activable = false;
+									continue;
+								}
+							}
+							elseif (!isset($liste[$id]) OR !plugin_version_compatible($need['version'],$liste[$id]['version'])){
 								$activable = false;
-								break;
+								continue;
 							}
 						}
 					if ($activable){
@@ -101,7 +107,10 @@ function liste_plugin_valides($liste_plug,&$infos, $force = false){
 				if (isset($infos[$plug]['necessite']))
 					foreach($infos[$plug]['necessite'] as $need){
 						$id = strtoupper($need['id']);
-						if (!isset($liste[$id]) OR !plugin_version_compatible($need['version'],$liste[$id]['version'])){
+						if ($id=='SPIP' AND !plugin_version_compatible($need['version'],$GLOBALS['spip_version_code'])){
+							$necessite .= "<li>"._L("Necessite SPIP en version ".$need['version'])."</li>";
+						}
+						elseif (!isset($liste[$id]) OR !plugin_version_compatible($need['version'],$liste[$id]['version'])){
 							$necessite .= "<li>"._L("Necessite le plugin $id en version ".$need['version'])."</li>";
 						}
 					}
@@ -538,6 +547,9 @@ function plugin_verifie_conformite($plug,&$arbre){
 	else{
 		$prefix = "";
 		$prefix = trim(end($arbre['prefix']));
+		if (strtoupper($prefix)=='SPIP'){
+			$arbre['erreur'][] = _T('erreur_plugin_prefix_interdit');
+		}
 		if (isset($arbre['etat'])){
 			$etat = trim(end($arbre['etat']));
 			if (!in_array($etat,array('dev','experimental','test','stable')))
@@ -599,6 +611,7 @@ function plugin_verifie_conformite($plug,&$arbre){
 		}
 		$arbre['utilise'] = $utilise;
 		$path = array(array('dir'=>'')); // initialiser par defaut (provisoire)
+		$path = array();
 		if (spip_xml_match_nodes(',^chemin,',$arbre,$paths)){
 			foreach(array_keys($paths) as $tag){
 				list($tag,$att) = spip_xml_decompose_tag($tag);
