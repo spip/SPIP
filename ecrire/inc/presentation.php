@@ -1548,7 +1548,7 @@ function gros_titre($titre, $ze_logo='', $aff=true){
 		$res = "\n<h1>".typo($titre)."</h1>&nbsp;\n";
 	}
 	else {
-		$res = "\n<div class='verdana2 spip_large' style='color: $couleur_foncee; font-weight: bold;'>" .
+		$res = "\n<div class='verdana2 spip_large ligne_foncee' style='font-weight: bold;'>" .
 		  (strlen($ze_logo) <= 3 ? '':  (http_img_pack($ze_logo, "", "style='vertical-align: bottom'") . " &nbsp; ")) .
 		  typo($titre) .
 		  "</div>\n";
@@ -1676,8 +1676,7 @@ function formulaire_large()
 
 // http://doc.spip.org/@debut_droite
 function debut_droite($rubrique="", $return= false) {
-	global $options, $spip_ecran, $spip_display;
-	global $spip_lang_left, $couleur_foncee, $couleur_claire;
+	global $options, $spip_ecran, $spip_display, $spip_lang_left; 
 
 	$res = '';
 
@@ -1952,7 +1951,6 @@ function afficher_hierarchie($id_rubrique) {
 
 // http://doc.spip.org/@enfant_rub
 function enfant_rub($collection){
-	global $couleur_foncee;
 	global $spip_display, $spip_lang_left, $spip_lang_right, $spip_lang;
 
 	$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND isset($GLOBALS['meta']['image_process']) AND $GLOBALS['meta']['image_process'] != "non");

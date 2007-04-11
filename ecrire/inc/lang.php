@@ -102,13 +102,10 @@ function changer_typo($lang = '') {
 // 
 // http://doc.spip.org/@menu_langues
 function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $herit = '', $lien='') {
-	global $couleur_foncee;
 
 	$ret = liste_options_langues($nom_select, $default, $herit);
 
 	if (!$ret) return '';
-
-	if (!$couleur_foncee) $couleur_foncee = '#044476';
 
 	if (!$lien)
 		$lien = self();
@@ -141,8 +138,7 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	  . (_DIR_RESTREINT ?
 	     ("class='forml' style='vertical-align: top; max-height: 24px; margin-bottom: 5px; width: 120px;'") :
 	     (($nom_select == 'var_lang_ecrire')  ?
-	      ("class='verdana1' style='background-color: " . $couleur_foncee
-	       . "; max-height: 24px; border: 1px solid white; color: white; width: 100px;'") :
+	      ("class='verdana1 toile_foncee' style='max-height: 24px; border: 1px solid white; color: white; width: 100px;'") :
 	      "class='fondl'"))
 	  . $change
 	  . ">\n"

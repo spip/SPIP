@@ -87,8 +87,8 @@ function signatures_edit($script, $id, $debut, $row) {
 			$res .= "<table width='100%' cellpadding='2' cellspacing='0' border='0'><tr><td style='background-color: #ff0000'>";
 		}
 		
-		$res .= "<table width='100%' cellpadding='3' cellspacing='0'><tr><td class='verdana2' style='background-color: $couleur_foncee; color: white;'><b>"
-		.  ($nom_site ? "$nom_site / " : "")
+		$res .= "<table width='100%' cellpadding='3' cellspacing='0'><tr><td class='verdana2 toile_foncee' style='color: white;'><b>"
+ 		.  ($nom_site ? "$nom_site / " : "")
 		.  $nom_email
 		.  "</b></td></tr>"
 		.  "<tr><td style='background-color: #ffffff' class='serif'>";

@@ -196,7 +196,8 @@ function aff_referers ($result, $limit, $plus) {
 
 		$aff = '';
 		for (reset($nbvisites); $numero = key($nbvisites); next($nbvisites)) {
-			if ($lesdomaines[$numero] == '') next;
+			$dom =  $lesdomaines[$numero];
+			if (!$dom) next;
 
 			$visites = pos($nbvisites);
 			$ret = "\n<li>";
@@ -207,26 +208,27 @@ function aff_referers ($result, $limit, $plus) {
 			else if ($visites > 1) $ret .= "$visites "._T('info_visites')." ";
 			else $ret .= "<span style='color: #999999'>$visites "._T('info_visite')."</span> ";
 		
-			if ($lesdomaines[$numero] == "(email)") {
-				$aff .= $ret;
-				$aff .= "<b>".$lesdomaines[$numero]."</b>";
+
+			if ($dom == "(email)") {
+				$aff .= $ret . "<b>".$dom."</b>";
 			}
 			else if ((count($lesreferers[$numero]) > 1) || ((substr(supprimer_tags($lesreferers[$numero][0]),0,1) != '/') && (count($lesreferers[$numero]) > 0))) {
-				global $couleur_foncee;
-				$referers = join ("</li><li>",$lesreferers[$numero]);
-				$aff .= $ret;
-				$aff .= "<a href='http://".quote_amp($lesurls[$numero])."'><span style='color: $couleur_foncee; font-weight: bold;'>".$lesdomaines[$numero]."</span></a>";
-				if ($rac = $lesliensracine[$numero]) $aff .= " <span class='spip_x-small'>($rac)</span>";
-				$aff .= "\n<ul style='font-size:x-small;'><li>$referers</li></ul>\n";
-				$aff .= "</li></ul>\n<ul style='font-size:small;'>\n";
+				$rac = $lesliensracine[$numero];
+				$aff .= $ret
+				. "<a href='http://".quote_amp($lesurls[$numero])."' style='font-weight: bold;'>".$dom."</a>"
+				. (!$rac ? '':" <span class='spip_x-small'>($rac)</span>")
+				. "\n<ul style='font-size:x-small;'><li>"
+				. join ("</li><li>",$lesreferers[$numero])
+				. "</li></ul>\n"
+				. "</li></ul>\n<ul style='font-size:small;'>\n";
 			} else {
 				$aff .= $ret;
 				$lien = $lesreferers[$numero][0];
 				if (preg_match(",^(<a [^>]+>)([^ ]*)( \([0-9]+\))?,i", $lien, $regs)) {
-					$lien = quote_amp($regs[1]).$lesdomaines[$numero].$regs[2];
+					$lien = quote_amp($regs[1]).$dom.$regs[2];
 					if (!strpos($lien, '</a>')) $lien .= '</a>';
 				} else
-					$lien = "<a href='http://".$lesdomaines[$numero]."'>".$lesdomaines[$numero]."</a>";
+					$lien = "<a href='http://".$dom."'>".$dom."</a>";
 				$aff .= "<b>".quote_amp($lien)."</b>";
 				$aff .= "</li>\n";
 			}
