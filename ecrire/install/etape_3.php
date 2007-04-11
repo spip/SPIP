@@ -85,7 +85,7 @@ function install_etape_3_dist()
 	echo "<input type='text' name='table_new' class='fondl' value=\"spip\" size='20' /></p></fieldset>";
 
 	echo "<fieldset><legend>"._T('texte_choix_table_prefix')."</legend>\n";
-	echo "<label for='table_prefix'>"._T('info_table_prefix')."</label></p><p>";
+	echo "<p><label for='table_prefix'>"._T('info_table_prefix')."</label></p><p>";
 	echo "<input type='text' name='table_prefix' class='fondl' value='" .
 		$table_prefix . "' size='10' /></p></fieldset>";
 

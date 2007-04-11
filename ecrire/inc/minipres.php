@@ -73,10 +73,11 @@ function install_debut_html($titre = 'AUTO', $onLoad = '') {
 	behavior: url(../dist/win_width.htc);
 	font-size: 0.8em;
 	font-family: Verdana,Arial,Sans,sans-serif; }\n".
-	  "\n\n]]>\n--></style>\n\n
-	<script type='text/javascript' src='"
-	  . _DIR_JAVASCRIPT . "spip_barre.js'></script>
-</head>
+	  "\n\n]]>\n--></style>\n\n".
+	"<script type='text/javascript' src='" . _DIR_JAVASCRIPT . "spip_barre.js'></script>\n". // cet appel permet d'assurer un copier-coller du nom du repertoire a creer dans tmp (esj)
+
+#	"<script type='text/javascript' src='" . _DIR_JAVASCRIPT . "jquery.js'></script>".
+"</head>
 <body".$onLoad.">
 	<div id='minipres'>
 	<h1>".
