@@ -108,7 +108,7 @@ if (spip_num_rows($result) > 0) {
 	echo "<div style='height: 12px;'></div>";
 	echo "<div class='liste'>";
 
-	bandeau_titre_boite2('<b>' . _T('info_principaux_correspondants') . '</b>', "redacteurs-24.gif", "#333333", "white");
+	echo bandeau_titre_boite2('<b>' . _T('info_principaux_correspondants') . '</b>', "redacteurs-24.gif",  'toile_gris_sombre', 'ligne_blanche');
 
 	echo "<table width='100%' cellpadding='0' cellspacing='0'>";
 	echo "<tr><td valign='top' width='50%'>";

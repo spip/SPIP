@@ -23,11 +23,13 @@ function exec_menu_navigation_dist() {
 	$gadget = '<div style="width: 300px;">';
 
 	$vos_articles = spip_query("SELECT articles.id_article, articles.id_rubrique, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa' ORDER BY articles.date DESC LIMIT 5");
+
 	if (spip_num_rows($vos_articles) > 0) {
-			$gadget .= "<div>&nbsp;</div>";
-			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			$gadget .= bandeau_titre_boite2(afficher_plus(generer_url_ecrire("articles_page","")) . '<b>' ._T('info_en_cours_validation')  . '</b>', "article-24.gif", $couleur_foncee, 'white', false);
-			$gadget .= "\n<div class='plan-articles'>\n";
+			$t = _T('info_en_cours_validation');
+			$gadget .= "<div>&nbsp;</div>"
+			. "<div class='bandeau_rubriques' style='z-index: 1;'>"
+			. bandeau_titre_boite2(afficher_plus(generer_url_ecrire('articles_page')) . '<b>' . $t . '</b>', "article-24.gif", 'toile_foncee', 'ligne_blanche')
+			. "\n<div class='plan-articles'>\n";
 			while($row = spip_fetch_array($vos_articles)) {
 				$id_article = $row['id_article'];
 				$titre = typo(sinon($row['titre'], _T('ecrire:info_sans_titre')));
@@ -42,7 +44,7 @@ function exec_menu_navigation_dist() {
 	if (spip_num_rows($vos_articles) > 0) {
 			$gadget .= "<div>&nbsp;</div>";
 			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			$gadget .= bandeau_titre_boite2(afficher_plus(generer_url_ecrire()) . '<b>' . _T('info_articles_proposes') . '</b>', "article-24.gif", $couleur_foncee, 'white', false);
+			$gadget .= bandeau_titre_boite2(afficher_plus(generer_url_ecrire()) . '<b>' . _T('info_articles_proposes') . '</b>', "article-24.gif",  'toile_foncee', 'ligne_blanche');
 			$gadget .= "<div class='plan-articles'>";
 			while($row = spip_fetch_array($vos_articles)) {
 				$id_article = $row['id_article'];
@@ -59,7 +61,7 @@ function exec_menu_navigation_dist() {
 	if (spip_num_rows($vos_articles) > 0) {
 			$gadget .= "<div>&nbsp;</div>";
 			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			$gadget .= bandeau_titre_boite2(afficher_plus(generer_url_ecrire("breves")).'<b>' . _T('info_breves_valider') . '</b>', "breve-24.gif", "$couleur_foncee", "white", false);
+			$gadget .= bandeau_titre_boite2(afficher_plus(generer_url_ecrire("breves")).'<b>' . _T('info_breves_valider') . '</b>', "breve-24.gif",  'toile_foncee', 'ligne_blanche');
 			$gadget .= "<div class='plan-articles'>";
 			while($row = spip_fetch_array($vos_articles)) {
 				$id_breve = $row['id_breve'];

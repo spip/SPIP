@@ -68,7 +68,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 
 			$revisions .= "\n<div style='height: 12px;'></div>";
 			$revisions .= "\n<div class='liste'>";
-			$revisions .= bandeau_titre_boite2($titre_table, "historique-24.gif", "white", "black", false);
+			$revisions .= bandeau_titre_boite2($titre_table, "historique-24.gif", 'toile_blanche', 'ligne_noire');
 	
 			$total = spip_num_rows(spip_query("SELECT versions.*, articles.statut, articles.titre FROM spip_versions AS versions, spip_articles AS articles WHERE $req_where LIMIT 0, 149"));
 		

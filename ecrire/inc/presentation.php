@@ -251,24 +251,21 @@ function fin_boite_info($return=false) {
 // une autre boite
 //
 // http://doc.spip.org/@bandeau_titre_boite2
-function bandeau_titre_boite2($titre, $logo="", $fond="white", $texte="black", $af = true) {
+function bandeau_titre_boite2($titre, $logo="", $fond="toile_blanche", $texte="ligne_noire") {
 	global $spip_lang_left, $spip_display, $browser_name;
 	
-	$logo = $logo ? http_img_pack($logo, "", "") : '&nbsp;';
 	if (strlen($logo) > 0 AND $spip_display != 1 AND $spip_display != 4) {
 		$ie_style = ($browser_name == "MSIE") ? "height:1%" : '';
 
-		$retour = "\n<div style='position: relative;$ie_style'>"
+		return "\n<div style='position: relative;$ie_style'>"
 		. "\n<div style='position: absolute; top: -12px; $spip_lang_left: 3px;'>"
-		. $logo  
+		. http_img_pack($logo, "", "")
 		. "</div>"
-		. "\n<div style='background-color: $fond; color: $texte; padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2'>$titre</div>"
+		. "\n<div style='padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2 $fond $texte'>$titre</div>"
 		 . "</div>";
 	} else {
-		$retour = "<h3 style='background-color: $fond; color: $texte; padding: 3px; border-bottom: 1px solid #444444; margin: 0px;' class='verdana2'>$titre</h3>";
+		return "<h3 style='padding: 3px; border-bottom: 1px solid #444444; margin: 0px;' class='verdana2 $fond $texte'>$titre</h3>";
 	}
-
-	if ($af) echo $retour; return $retour;
 }
 
 //
@@ -449,7 +446,7 @@ function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, 
 
 	if (! ($force OR ($cpt = $cpt['n']))) return '';
 
-	$res = bandeau_titre_boite2($titre, $icone, $fg, $bg, false);
+	$res = bandeau_titre_boite2($titre, $icone, $fg, $bg);
 	if (isset($requete['LIMIT'])) $cpt = min($requete['LIMIT'], $cpt);
 
 	$deb_aff = intval(_request($tmp_var));
@@ -742,8 +739,7 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 
 	$res =  "\n<div style='height: 12px;'></div>"
 	. "\n<div class='liste'>"
-	. bandeau_titre_boite2($texte, $icone, 'white', 'black',false)
-
+	. bandeau_titre_boite2($texte, $icone, 'toile_blanche', 'ligne_noire')
 	. (($cpt <= $nb_aff) ? ''
 	   : afficher_tranches_requete($cpt, $tmp_var, generer_url_ecrire('memoriser', "hash=$hash&trad=$trad"), $nb_aff))
 	. afficher_liste_debut_tableau()
@@ -884,7 +880,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 		$styles = array('','arial11', 'arial1');
 	}
 
-	return affiche_tranche_bandeau($requete, "breve-24.gif", $couleur_foncee, "white", $tmp_var, $titre_table, false, $largeurs, $styles, 'afficher_breves_boucle', array( $afficher_langue, $affrub, $langue_defaut));
+	return affiche_tranche_bandeau($requete, "breve-24.gif", 'toile_foncee', "ligne_blanche", $tmp_var, $titre_table, false, $largeurs, $styles, 'afficher_breves_boucle', array( $afficher_langue, $affrub, $langue_defaut));
 
 }
 
@@ -965,7 +961,7 @@ function afficher_rubriques($titre_table, $requete) {
         $tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);
 	$largeurs = array('12','', '');
 	$styles = array('', 'arial2', 'arial11');
-	return affiche_tranche_bandeau($requete, "rubrique-24.gif", "#999999", "white", $tmp_var, $titre_table, false, $largeurs, $styles, 'afficher_rubriques_boucle');
+	return affiche_tranche_bandeau($requete, "rubrique-24.gif", 'toile_gris_fort', 'ligne_blanche', $tmp_var, $titre_table, false, $largeurs, $styles, 'afficher_rubriques_boucle');
 }
 
 // http://doc.spip.org/@afficher_rubriques_boucle
@@ -1719,7 +1715,7 @@ function liste_articles_bloques()
 		if (count($articles_ouverts)) {
 			$res .= "\n<div>&nbsp;</div>"
 			. "\n<div class='bandeau_rubriques' style='z-index: 1;'>"
-			. bandeau_titre_boite2('<b>' . _T('info_cours_edition')  . '</b>', "article-24.gif", $couleur_foncee, 'white', false)
+			. bandeau_titre_boite2('<b>' . _T('info_cours_edition')  . '</b>', "article-24.gif", 'toile_foncee', 'ligne_blanche')
 			. "\n<div class='plan-articles-bloques'>";
 
 			foreach ($articles_ouverts as $row) {
@@ -1859,7 +1855,7 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 	$icone =  $puce_rubrique . '<b>' . _T('info_meme_rubrique')  . '</b>';
 	
 
-	$retour = bandeau_titre_boite2($icone,  'article-24.gif','white','black',false)
+	$retour = bandeau_titre_boite2($icone,  'article-24.gif', 'toile_blanche', 'ligne_noire')
 	. "\n<table class='spip_x-small' style='background-color: #e0e0e0;border: 0px; padding-left:4px; width: 100%;'>"
 	. $retour;
 	
