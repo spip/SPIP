@@ -60,6 +60,7 @@ function install_debut_html($titre = 'AUTO', $onLoad = '') {
 		".petit-centre { font-family: Verdana,Arial,Sans,sans-serif; font-size: 10px; }\n".
 		".petit-centre p { text-align: center; }\n".
 		".suivant { text-align: $spip_lang_right; display: block; margin-top: 1em; }\n".
+		".toile_foncee { background: #777; }\n".
 		".fondl { padding: 3px; background-color: #eee; border: 1px solid #333; 
 	background-position: center bottom; 
 	font-size: 0.8em;
