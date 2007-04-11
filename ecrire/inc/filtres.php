@@ -41,6 +41,7 @@ $GLOBALS['spip_matrice']['image_select'] = '';
 $GLOBALS['spip_matrice']['image_renforcement'] = '';
 $GLOBALS['spip_matrice']['image_imagick'] = '';
 $GLOBALS['spip_matrice']['image_ramasse_miettes'] = '';
+$GLOBALS['spip_matrice']['image_passe_partout'] = '';
 
 $inc_filtres_images = _DIR_RESTREINT."inc/filtres_images.php"; # find_in_path('inc/filtres_images');
 $GLOBALS['spip_matrice']['couleur_dec_to_hex'] = $inc_filtres_images;
