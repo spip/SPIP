@@ -129,9 +129,8 @@ EOF;
 
 	echo debut_cadre_relief('',true);
 
-	global $couleur_foncee;
 	echo "<table border='0' cellspacing='0' cellpadding='5' width='100%'>";
-	echo "<tr><td style='background-color: $couleur_foncee' colspan='4'><b>";
+	echo "<tr><td class='toile_foncee' colspan='4'><b>";
 	echo "<span style='color: #ffffff;' class='verdana1 spip_medium'>", _T('plugins_liste')."</span></b></td></tr>";
 
 	echo "<tr><td class='serif' colspan='4'>";

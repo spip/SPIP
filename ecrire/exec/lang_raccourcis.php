@@ -17,7 +17,7 @@ include_spip('inc/traduire');
 
 // http://doc.spip.org/@exec_lang_raccourcis_dist
 function exec_lang_raccourcis_dist() {
-	global $changer_config, $couleur_foncee,  $spip_lang, $spip_lang_left;
+	global $changer_config,  $spip_lang, $spip_lang_left;
 
 
 	##### a revoir : des repertoires lang, il peut y en avoir plusieurs
@@ -47,7 +47,7 @@ function exec_lang_raccourcis_dist() {
 
 	if (count($modules) > 1) {
 		echo debut_cadre_relief();
-		echo "<div class='verdana3' style='background-color: $couleur_foncee; color: white; padding: 3px;'><b>"._T('module_fichiers_langues').":</b></div><br />\n";
+		echo "<div class='verdana3 toile_foncee' style='color: white; padding: 3px;'><b>"._T('module_fichiers_langues').":</b></div><br />\n";
 
 		foreach ($modules as $nom_module) {
 			if ($nom_module == $module) echo "<div style='padding-$spip_lang_left: 10px;' class='verdana3'><b>$nom_module</b></div>";
@@ -96,7 +96,7 @@ function afficher_raccourcis($module = "public") {
 	}
 
 	echo "\n<table cellpadding='3' cellspacing='1' border='0'>";
-	echo "\n<tr style='background-color: $couleur_foncee; color:white;'><td class='verdana1'><b>"._T('module_raccourci')."</b></td>\n<td class='verdana2'><b>"._T('module_texte_affiche')."</b></td></tr>\n";
+	echo "\n<tr class='toile_foncee' style='color:white;'><td class='verdana1'><b>"._T('module_raccourci')."</b></td>\n<td class='verdana2'><b>"._T('module_texte_affiche')."</b></td></tr>\n";
 
 	$i = 0;
 	foreach ($tableau as $raccourci => $val) {

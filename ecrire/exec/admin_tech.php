@@ -17,7 +17,7 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_admin_tech_dist
 function exec_admin_tech_dist()
 {
-  global $connect_statut, $connect_login, $connect_toutes_rubriques, $couleur_foncee, $flag_gz, $options;
+  global $connect_statut, $connect_login, $connect_toutes_rubriques, $flag_gz, $options;
 
  $commencer_page = charger_fonction('commencer_page', 'inc');
  echo $commencer_page(_T('titre_admin_tech'), "configuration", "base");
@@ -65,8 +65,7 @@ function exec_admin_tech_dist()
    $dir_img = _DIR_IMG;
 
  echo "<table border='0' cellspacing='0' cellpadding='5' width=\"100%\">",
-   "<tr><td style='background-color: ", $couleur_foncee, ";'><b>",
-   "<span style='color: #FFFFFF;' class='verdana1 spip_medium'>",   _T('texte_sauvegarde'), "</span></b></td></tr><tr><td class='serif'>",
+   "<tr><td style='color: #FFFFFF;' class='toile_foncee verdana1 spip_medium'><b>",   _T('texte_sauvegarde'), "</b></td></tr><tr><td class='serif'>",
    generer_url_post_ecrire("export_all", "reinstall=non"),
    "\n<div><p style='text-align: justify;'>",
    http_img_pack('warning.gif', _T('info_avertissement'), 
