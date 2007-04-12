@@ -194,7 +194,7 @@ function http_label_img($statut, $etat, $var, $img, $texte) {
 // http://doc.spip.org/@formulaire_affiche_tous
 function formulaire_affiche_tous($aff_art, $aff_statut,$sel_lang)
 {
-	global $spip_lang_left, $spip_lang_right, $spip_lang, $couleur_claire;
+	global $spip_lang_left, $spip_lang_right, $spip_lang;
 	
 	$action = generer_url_ecrire("articles_tous");
 

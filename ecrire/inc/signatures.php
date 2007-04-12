@@ -69,8 +69,6 @@ function inc_signatures_dist($script, $id, $debut, $where, $order, $limit='') {
 // http://doc.spip.org/@signatures_edit
 function signatures_edit($script, $id, $debut, $row) {
 
-		global $couleur_foncee;
-
 		$id_signature = $row['id_signature'];
 		$id_article = $row['id_article'];
 		$date_time = $row['date_time'];

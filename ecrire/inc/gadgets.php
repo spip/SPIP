@@ -26,7 +26,7 @@ include_spip('inc/presentation');
 
 // http://doc.spip.org/@bandeau_gadgets
 function bandeau_gadgets($largeur, $options, $id_rubrique) {
-	global $connect_id_auteur, $connect_login, $connect_statut, $couleur_claire,$couleur_foncee, $spip_lang_left, $spip_lang_right, $spip_ecran;
+	global $connect_id_auteur, $connect_login, $connect_statut, $spip_lang_left, $spip_lang_right, $spip_ecran;
 
 	$bandeau = "<div id='bandeau-gadgets'>".
 	"\n<table width='$largeur' cellpadding='0' cellspacing='0'><tr><td>\n<div style='position: relative; z-index: 1000;'>"

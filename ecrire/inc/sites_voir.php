@@ -17,8 +17,6 @@ include_spip('inc/actions');
 // http://doc.spip.org/@afficher_sites
 function afficher_sites($titre_table, $requete)
 {
-	global $couleur_claire;
-
 	$tmp_var = 't_' . substr(md5(join(' ',$requete)), 0, 4);
 
 	return affiche_tranche_bandeau($requete, "site-24.gif", 'toile_claire', 'ligne_noire', $tmp_var, $titre_table, false,  array('','',''), array('arial11', 'arial1', 'arial1'), 'afficher_sites_boucle');

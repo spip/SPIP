@@ -278,7 +278,7 @@ function est_inclus($id_document) {
 
 // http://doc.spip.org/@afficher_case_document
 function afficher_case_document($id_document, $id, $script, $type, $deplier=false) {
-	global $options, $couleur_foncee, $spip_lang_left, $spip_lang_right;
+	global $options, $spip_lang_left, $spip_lang_right;
 
 	charger_generer_url();
 	$res = spip_query("SELECT docs.*,l.vu FROM spip_documents AS docs JOIN spip_documents_".$type."s AS l ON l.id_document=docs.id_document WHERE l.id_$type="._q($id)." AND l.id_document="._q($id_document));

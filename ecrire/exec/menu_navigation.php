@@ -16,7 +16,7 @@ include_spip('inc/presentation');
 
 // http://doc.spip.org/@exec_menu_navigation_dist
 function exec_menu_navigation_dist() {
-	global $connect_id_auteur, $connect_statut, $couleur_claire,$couleur_foncee, $spip_lang_left, $spip_lang_right, $spip_ecran;
+	global $connect_id_auteur, $connect_statut, $spip_lang_left, $spip_lang_right, $spip_ecran;
 
 	$id_rubrique = intval(_request('id_rubrique'));
 

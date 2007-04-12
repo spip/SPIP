@@ -75,8 +75,6 @@ function exec_statistiques_visites_dist()
   global
     $aff_jours,
     $connect_statut,
-    $couleur_claire,
-    $couleur_foncee,
     $id_article,
     $limit,
     $origine,

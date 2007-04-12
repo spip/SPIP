@@ -60,6 +60,44 @@ body {
 	background-color: #eeeeee;
 }
 
+.bordure_claire {
+	border: 1px solid ##ENV{couleur_claire,edf3fe};
+}
+
+.bordure_foncee {
+	border: 1px solid ##ENV{couleur_foncee,3874b0};
+}
+
+.bordure_claire_basse {
+	border-bottom: 1px solid ##ENV{couleur_claire,edf3fe};
+}
+
+.bordure_claire_left {
+	border-[(#ENV{ltr}|choixsiegal{left,left,right})]: 1px solid ##ENV{couleur_claire,edf3fe};
+}
+
+.bordure_claire_right {
+	border-[(#ENV{ltr}|choixsiegal{left,right,left})]: 1px solid ##ENV{couleur_claire,edf3fe};
+}
+
+.bordure_grise_basse {
+	border-bottom: 1px solid #999999;
+}
+
+.bordure_grise_left {
+	border-[(#ENV{ltr}|choixsiegal{left,left,right})]: 1px solid #999999;
+}
+
+.bordure_grise_right {
+	border-[(#ENV{ltr}|choixsiegal{left,right,left})]: 1px solid #999999;
+}
+
+.bordure_foncee_pointillee {
+	border: 2px;
+	border-style: dotted;
+	border-color: ##ENV{couleur_foncee,3874b0};
+}
+
 .ligne_claire {
 	color: ##ENV{couleur_claire,edf3fe};
 }

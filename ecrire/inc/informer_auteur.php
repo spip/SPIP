@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@inc_informer_auteur_dist
 function inc_informer_auteur_dist($id)
 {
-	global $couleur_foncee,$spip_display,$spip_lang_right ;
+	global $spip_display,$spip_lang_right ;
 
 	include_spip('inc/presentation');
 	include_spip('inc/formater_auteur');
@@ -51,7 +51,7 @@ function inc_informer_auteur_dist($id)
 		}
 	}
 
-	return 	"<div class='arial2' style='padding: 5px; background-color: white; border: 1px solid $couleur_foncee; border-top: 0px;'>"
+	return "<div class='arial2 bordure_foncee toile_blanche' style='padding: 5px; border-top: 0px;'>"
 	. (!$res ? '' : $res)
 	. "<div><a href='"
 	. generer_url_ecrire('auteur_infos', "id_auteur=$id")

@@ -46,11 +46,10 @@ function enfants($id_parent, $critere){
 // http://doc.spip.org/@enfants_aff
 function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 
-	global $ifond;
 	global $niveau;
 	global $nombre_vis;
 	global $nombre_abs;
-	global $couleur_claire, $couleur_foncee, $spip_lang_right, $spip_lang_left;
+	global $spip_lang_right, $spip_lang_left;
 	global $abs_total;
 	global $taille;
 

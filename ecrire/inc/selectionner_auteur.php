@@ -22,8 +22,6 @@ include_spip('inc/selectionner');
 // http://doc.spip.org/@inc_selectionner_auteur_dist
 function inc_selectionner_auteur_dist($id_article)
 {
-	global $spip_lang_right, $couleur_foncee;
-
 	$idom = 'bloc_selectionner_auteur';
 
 	$futurs = selectionner_auteur_boucle(determiner_non_auteurs('article',$id_article,'', "nom, statut"), $idom);
