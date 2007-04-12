@@ -244,8 +244,9 @@ function determine_upload()
 // http://doc.spip.org/@lire_php_auth
 function lire_php_auth($user, $pw) {
 
-	$row = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE login=" . _q($user)));
+	$row = spip_query("SELECT * FROM spip_auteurs WHERE login=" . _q($user));
 
+	$row = spip_fetch_array($row);
 	if ($row AND $row['source'] != 'ldap')
 		return ($row['pass'] == md5($row['alea_actuel'] . $pw)) ? $row : false;
 	elseif ($GLOBALS['ldap_present']) {
