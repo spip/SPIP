@@ -342,7 +342,7 @@ function bandeau_principal($rubrique, $sous_rubrique, $largeur)
 	$larg_espacements = ($largeur-(count($GLOBALS['boutons_admin'])-$num_espacements)*_LARGEUR_ICONES_BANDEAU)/$num_espacements;
   foreach($GLOBALS['boutons_admin'] as $page => $detail) {
 		if ($page=='espacement') {
-			$res .= "<li class='cellule48' style='width:".$larg_espacements."px'><span class='menu-item' style='width:"._LARGEUR_ICONES_BANDEAU."px'>&nbsp</span></li>";
+			$res .= "<li class='cellule48' style='width:".$larg_espacements."px'><span class='menu-item' style='width:"._LARGEUR_ICONES_BANDEAU."px'>&nbsp;</span></li>";
 		} else {
 			if ($detail->url)
 				$lien_noscript = $detail->url;
@@ -392,7 +392,7 @@ function icone_bandeau_principal($detail, $lien, $rubrique_icone = "vide", $rubr
 		$menu_accesskey++;
 	}
 
-	$class_select = "style='width:"._LARGEUR_ICONES_BANDEAU."px' class='menu-item boutons_admin".($sous_rubrique_icone == $sous_rubrique ? " selection" : "")."'";
+	$class_select = " style='width:"._LARGEUR_ICONES_BANDEAU."px' class='menu-item boutons_admin".($sous_rubrique_icone == $sous_rubrique ? " selection" : "")."'";
 
 	if (strncasecmp("javascript:",$lien,11)==0) {
 		$a_href = "\nonclick=\"$lien; return false;\" href='$lien_noscript' ";
@@ -461,7 +461,7 @@ function bandeau_principal2($sousmenu,$rubrique, $sous_rubrique, $largeur, $deca
 				if($width>$max_width) $max_width+=$largitem;
 			}
 			$res .= "</ul></div>\n";
-			$res = "<div class='bandeau_sec h-list' style='width:{$max_width}px;$spip_lang_left:{$offse}px;'><ul>".$res;
+			$res = "<div class='bandeau_sec h-list' style='width:{$max_width}px;$spip_lang_left:{$offset}px;'><ul>".$res;
 		}
 		
 	return $res;
@@ -533,7 +533,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 	}
 	if ($spip_display == 3) $accesskey_icone = $accesskey;
 
-	$class_select = "class='menu-item".($rubrique_icone != $rubrique ? "" : " selection")."'";
+	$class_select = " class='menu-item".($rubrique_icone != $rubrique ? "" : " selection")."'";
 	$compteur_survol ++;
 
 	$a_href = "<a$accesskey href=\"$lien\"$class_select>";

@@ -208,15 +208,15 @@ AND $l = @unserialize($l)) {
 	}
 }
 
+// si nom pas plausible, prendre le script par defaut
+if (!preg_match(',^[a-z_][0-9a-z_]*$,i', $exec)) $exec = "accueil";
+
 // Passer la main aux outils XML a la demande.
 if (isset($GLOBALS['transformer_xml'])
 AND $GLOBALS['auteur_session']['statut']=='0minirezo') {
 	set_request('var_url', $exec);
 	$exec = $GLOBALS['transformer_xml'];
  }
-
-// si nom pas plausible, prendre le script par defaut
-if (!preg_match(',^[a-z_][0-9a-z_]*$,i', $exec)) $exec = "accueil";
 
 // Trouver la fonction eventuellement surchagee
 if (!strncmp($exec,"accueil",7)==0
