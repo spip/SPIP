@@ -91,7 +91,7 @@ function encours_accueil()
 // http://doc.spip.org/@colonne_droite_eq4
 function colonne_droite_eq4($activer_breves)
 {
-	global  $spip_display, $connect_statut, $connect_toutes_rubriques, $connect_id_auteur, $connect_login;
+	global  $connect_statut, $connect_toutes_rubriques;
 
 	$res = spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1"));
 	if ($res) {
@@ -120,7 +120,7 @@ function colonne_droite_eq4($activer_breves)
 function colonne_droite_neq4($id_rubrique, $activer_breves,
 				$activer_sites, $articles_mots)
 {
-  global  $spip_display, $connect_statut, $connect_toutes_rubriques, $connect_id_auteur, $connect_login;
+  global  $connect_statut, $connect_id_auteur, $connect_login;
 
 	$gadget = '';
 
@@ -396,7 +396,7 @@ function etat_base_accueil()
 // http://doc.spip.org/@exec_accueil_dist
 function exec_accueil_dist()
 {
-  global $id_rubrique, $meta, $connect_statut, $options,  $connect_id_auteur, $spip_display, $connect_id_rubrique;
+  global $id_rubrique, $connect_statut, $options, $connect_id_auteur, $spip_display, $connect_id_rubrique;
 
 	$id_rubrique =  intval($id_rubrique);
  	pipeline('exec_init',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
