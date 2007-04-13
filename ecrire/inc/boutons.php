@@ -444,7 +444,7 @@ function bandeau_principal2($sousmenu,$rubrique, $sous_rubrique, $largeur, $deca
 			$max_width=0;
 			foreach($sousmenu as $souspage => $sousdetail) {
 				if ($width+1.25*$largitem_moy>$largeur_maxi_menu){
-          $res .= "</ul><ul><li>\n";
+          $res .= "</ul><ul>\n";
           if($width>$max_width) $max_width=$width;
           $width=0;
         }
