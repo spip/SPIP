@@ -18,14 +18,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@inc_commencer_page_dist
 function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $id_rubrique = "",$menu=true) {
-
+  global $spip_ecran;
+  
 	include_spip('inc/headers');
 
 	http_no_cache();
-
+  
+  if ($spip_ecran == "large") $largeur = 974; else $largeur = 750;
+  
 	return init_entete($titre, $id_rubrique)
 	. init_body($rubrique, $sous_rubrique, $id_rubrique,$menu)
-	. "<div id='page' align='center'>"
+	. "<div id='page' class='centered' style='width:{$largeur}px'>"
 	. avertissement_messagerie()
 	  . ((($rubrique == "messagerie") OR (_request('changer_config')!="oui"))
 	     ? auteurs_recemment_connectes() : '');
