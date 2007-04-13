@@ -50,12 +50,9 @@ if ($connect_statut != '0minirezo') {
 	header("Content-type: image/svg+xml");
 
 	echo "<"."?xml version=\"1.0\" standalone=\"no\"?>\n";
+	echo '<', '?xml-stylesheet type="text/css" href="', generer_url_public('style_svg', _SENS_ET_COULEURS, true), '" ?', ">\n";
 	echo "<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n";
 	echo "<svg  xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"450\" height=\"310\" x=\"0\" y=\"0\">\n";
-	echo "<style type='text/css'>\n";
-	echo ".gris {fill: #aaaaaa; fill-opacity: 0.2;}\n";
-	echo ".trait {stroke:black;stroke-width:1;}\n";
-	echo "</style>\n";
 	echo '<defs>';
 	echo '<linearGradient id="orange_red" x1="0%" y1="0%" x2="0%" y2="150%">';
 	echo '<stop offset="0%" style="stop-color:rgb(255,255,0); stop-opacity:1" />';
@@ -64,8 +61,8 @@ if ($connect_statut != '0minirezo') {
 	echo '</defs>';
 	echo "<defs>\n";
 	echo '<linearGradient id="claire" x1="0%" y1="0%" x2="0%" y2="100%">';
-	echo '<stop offset="0%" style="stop-color:'.$couleur_claire.'; stop-opacity:0.3"/>';
-	echo '<stop offset="100%" style="stop-color:'.$couleur_foncee.'; stop-opacity:1"/>';
+	echo '<stop offset="0%" class="svg-stop0" />';
+	echo '<stop offset="100%" class="svg-stop100" />';
 	echo "</linearGradient>\n";
 	echo "</defs>\n";
 
@@ -227,14 +224,14 @@ if ($connect_statut != '0minirezo') {
 
 
 			if (date("w",$key) == "0") // Dimanche en couleur foncee
-				$fill = $couleur_foncee;
+				$fill = "class='svg-rect-foncee'";
 			else 
-				$fill = "url(#claire)";
+				$fill = "style='fill: url(#claire)'";
 
 
 
-			echo "<rect x='".(($n-1)*$largeur)."' y='".(300-$hauteur)."' width='$largeur' height='$hauteur' style='fill:$fill'/>\n";	
-			echo "<rect x='".(($n-1)*$largeur)."' y='".(300-$hauteur)."' width='$largeur' height='1' style='fill:$couleur_foncee;'/>\n";	
+			echo "<rect x='".(($n-1)*$largeur)."' y='".(300-$hauteur)."' width='$largeur' height='$hauteur' $fill />\n";	
+			echo "<rect x='".(($n-1)*$largeur)."' y='".(300-$hauteur)."' width='$largeur' height='1' $fill />\n";	
 
 			if (date("d", $key) == "1") 
 				echo "<line x1='".(($n-1)*$largeur)."' y1='".(300-$hauteur_moyenne)."' x2='".(($n-1)*$largeur)."' y2='300' class='trait'/>\n";	

@@ -1261,15 +1261,7 @@ function afficher_forum_4($compteur_forum, $nb_forum, $thread)
 
 // http://doc.spip.org/@envoi_link
 function envoi_link($nom_site_spip) {
-	global $connect_toutes_rubriques, $spip_display;
-	global $spip_lang, $couleur_claire, $couleur_foncee;
-
-	$args = "couleur_claire=" .
-		substr($couleur_claire,1) .
-		'&couleur_foncee=' .
-		substr($couleur_foncee,1) .
-		'&ltr=' . 
-		$GLOBALS['spip_lang_left'];
+	global $connect_toutes_rubriques, $spip_display, $spip_lang;
 
 	// CSS de secours en cas de non fonct de la suivante
 	$res = '<link rel="stylesheet" type="text/css" href="'
@@ -1278,10 +1270,10 @@ function envoi_link($nom_site_spip) {
 	
 	// CSS espace prive : la vraie
 	. '<link rel="stylesheet" type="text/css" href="'
-	. generer_url_public('style_prive', $args) .'" />' . "\n"
+	. generer_url_public('style_prive', _SENS_ET_COULEURS) .'" />' . "\n"
   . "<!-- [if IE lt 8] -->\n"
   . '<link rel="stylesheet" type="text/css" href="'
-  . generer_url_public('style_prive_ie', $args) .'" />' . "\n"
+  . generer_url_public('style_prive_ie', _SENS_ET_COULEURS) .'" />' . "\n"
   . "<!-- [endif] -->"
   
 	// CSS calendrier

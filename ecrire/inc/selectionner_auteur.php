@@ -35,8 +35,6 @@ function inc_selectionner_auteur_dist($id_article)
 // http://doc.spip.org/@selectionner_auteur_boucle
 function selectionner_auteur_boucle($query, $idom)
 {
-	global  $spip_lang_left;
-
 	$info = generer_url_ecrire('informer_auteur', "id=");
 	$args = "'$idom" . "_selection', '$info', event";
 	$res = '';

@@ -1,0 +1,26 @@
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+[(#REM)
+
+	Ce squelette definit les styles pour le code SVG dans SPIP
+]
+
+.svg-rect-foncee {
+	fill: ##ENV{couleur_foncee,3874b0};
+}
+
+.svg-stop0 {
+	stop-color: ##ENV{couleur_claire,edf3fe};
+	stop-opacity:0.3;
+}
+
+.svg-stop100 {
+	stop-color: ##ENV{couleur_foncee,3874b0};
+	stop-opacity:1;
+}
+
+.gris {fill: #aaaaaa; fill-opacity: 0.2;}
+
+.trait {stroke:black;stroke-width:1;}
