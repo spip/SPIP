@@ -376,9 +376,8 @@ function icone_bandeau_principal($detail, $lien, $rubrique_icone = "vide", $rubr
 
 	$alt = '';
 	$title = '';
-	if ($spip_display == 1){
-	}
-	else if ($spip_display == 3){
+	$texte = _T($detail->libelle);
+	if ($spip_display == 3){
 		$title = " title=\"$texte\"";
 	}
 	
@@ -405,7 +404,7 @@ function icone_bandeau_principal($detail, $lien, $rubrique_icone = "vide", $rubr
 
 	if ($spip_display != 1 AND $spip_display != 4) {
 		$class ='cellule48';
-		$texte = "<span class='icon_fond'><span".http_style_background($detail->icone)."></span></span>".($spip_display == 3 ? '' :  "<span>"._T($detail->libelle)."</span>");
+		$texte = "<span class='icon_fond'><span".http_style_background($detail->icone)."></span></span>".($spip_display == 3 ? '' :  "<span>$texte</span>");
 	} else {
 		$class = 'cellule-texte';
 	}  
