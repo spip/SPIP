@@ -103,30 +103,31 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 	}
 	if ($menu){
 		$res .= bandeau_double_rangee($rubrique, $sous_rubrique, $largeur)
-		. "\n<div align='center' style='max-height: 40px; width: 100%; border-bottom: solid 1px white;' class='toile_claire'>"
-	. "<table cellpadding='0' style='background: none;' width='$largeur'><tr>"
-		. "<td valign='middle' class='bandeau_couleur' style='text-align: $spip_lang_left;'>"
+		. "\n<div id='bandeau_couleur' style='max-height: 40px; width: 100%; border-bottom: solid 1px white;' class='toile_claire'>"
+	  . "<div class='h-list centered vcentered' style='width:{$largeur}px'><ul>"
+		. "<li id='bandeau_couleur1' class='bandeau_couleur'><div class='menu-item'>"
 		.  installer_gadgets($id_rubrique)
-		. "</td>"
-		. "<td valign='middle' class='bandeau_couleur' style='text-align: $spip_lang_left;'>"
+		. "</div></li>"
+		. "<li id='bandeau_couleur2' class='bandeau_couleur' style='width:"
 
 	// Redacteur connecte
 	// overflow pour masquer les noms tres longs
 	// (et eviter debords, notamment en ecran etroit)
 
-		. "<div style='width: "
+		//. "<div style='width: "
 		. (($spip_ecran == "large") ? 300 : 110)
-		. "px; height: 14px; overflow: hidden;'>"
+		. "px;'><div class='menu-item' style='width:"
+    . (($spip_ecran == "large") ? 300 : 110)
+    . "px; overflow: hidden;'>"
 		. "<a href='"
 		. generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur") 
 		. "' class='icone26' title=\""
 		. entites_html(_T('icone_informations_personnelles'))
 		. '">'
 		. typo($GLOBALS['auteur_session']['nom'])
-		. "</a></div>"
-		. "</td>"
-		. "<td> &nbsp; </td>"
-		. "<td class='bandeau_couleur' style='text-align: $spip_lang_right;' valign='middle'>";
+		. "</a></div></li>"
+		. "<li style='width:20px'><div class='menu-item'> &nbsp; </div></li>"
+		. "<li id='bandeau_couleur3' class='bandeau_couleur'><div class='menu-item'>";
 
 		// Choix du layout
 		$res .= http_img_pack("choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".gif", _T('choix_interface'), "class='format_png' style='vertical-align: middle' width='59' height='15' usemap='#map_layout'")
@@ -145,19 +146,19 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 		}
 
 		// Choix de la couleur
-		$res .= "</td>"
-		. "<td class='bandeau_couleur' style='width: 60px; text-align:$spip_lang_left;' valign='middle'>"
+		$res .= "</div></li>"
+		. "<li id='bandeau_couleur4' class='bandeau_couleur'><div class='menu-item'>"
 		. choix_couleur()
-		. "</td>";
+		. "</div></li>";
 
 		// choix de la langue
 		if ($GLOBALS['all_langs']) {
-			$res .= "<td class='bandeau_couleur' style='width: 100px; text-align: $spip_lang_right;' valign='middle'>"
+			$res .= "<li id='bandeau_couleur5' class='bandeau_couleur'><div class='menu-item'>"
 			. menu_langues('var_lang_ecrire')
-			. "</td>";
+			. "</div></li>";
 		}
 
-		$res .= "<td class='bandeau_couleur' style='text-align: $spip_lang_right; width: 28px;' valign='middle'>";
+		$res .= "<li id='bandeau_couleur6' class='bandeau_couleur'><div class='menu-item'>";
 
 		if ($auth_can_disconnect) {
 			$alt=_T('icone_deconnecter');
@@ -167,8 +168,8 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 			  http_img_pack("deconnecter-24.gif", "$alt", "") .
 			  "</a>";
 		}
-		$res .= "</td>"
-		. "</tr></table>";
+		$res .= "</div></li>"
+		. "</ul></div>";
 
 	} // fin bandeau colore
 

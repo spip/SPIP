@@ -392,7 +392,7 @@ function icone_bandeau_principal($detail, $lien, $rubrique_icone = "vide", $rubr
 		$menu_accesskey++;
 	}
 
-	$class_select = " class='menu-item boutons_admin".($sous_rubrique_icone == $sous_rubrique ? " selection" : "")."'";
+	$class_select = "style='width:"._LARGEUR_ICONES_BANDEAU."px' class='menu-item boutons_admin".($sous_rubrique_icone == $sous_rubrique ? " selection" : "")."'";
 
 	if (strncasecmp("javascript:",$lien,11)==0) {
 		$a_href = "\nonclick=\"$lien; return false;\" href='$lien_noscript' ";
