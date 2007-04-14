@@ -196,12 +196,7 @@ function formulaire_affiche_tous($aff_art, $aff_statut,$sel_lang)
 {
 	global $spip_lang_left, $spip_lang_right, $spip_lang;
 	
-	$action = generer_url_ecrire("articles_tous");
-
-	$out = "<form action='$action' method='post'>"
-	. debut_boite_info(true)
-	. form_hidden($action)
-	. "\n<input type='hidden' name='aff_art[]' value='x' />\n"
+	$out = "\n<input type='hidden' name='aff_art[]' value='x' />\n"
 	. "<b>"._T('titre_cadre_afficher_article')."&nbsp;:</b><br />\n";
 	
 	if ($aff_statut['prepa'])
@@ -270,15 +265,13 @@ function formulaire_affiche_tous($aff_art, $aff_statut,$sel_lang)
 			}
 			$out .= "</select></div>\n";
 	
-			$out .= "\n<div align='$spip_lang_right'><input type='submit' name='Changer' class='fondo' value='"._T('bouton_changer')."' /></div>";
+			$out .= "\n<div align='$spip_lang_right'><input type='submit' class='fondo' value='"._T('bouton_changer')."' /></div>";
 		}
-	
 	}
 
-	$out .= fin_boite_info(true);
-	$out .= "</form>";
-	
-	return $out;
+	$out = debut_boite_info(true) . $out  . fin_boite_info(true);
+
+	return generer_post_ecrire('articles_tous', $out);
 }
 
 // http://doc.spip.org/@couche_formulaire_tous

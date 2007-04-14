@@ -938,13 +938,27 @@ function generer_url_prive($script, $args="", $no_entities=false) {
 	return url_de_base() . _DIR_RESTREINT_ABS . $action;
 }
 
+function generer_post_ecrire($script, $corps, $atts='', $submit='') {
+	global $spip_lang_right;
+
+	return "<form action='"
+	. generer_url_ecrire($script)
+	. "' "
+	. ($atts ? $atts : " method='post'")
+	.  "><div>\n"
+	. "<input type='hidden' name='exec' value='$script' />"
+	. $corps
+	. (!$submit ? '' :
+	     ("<div style='text-align: $spip_lang_right'><input class='fondo' type='submit' value='$submit' /></div>"))
+	. "</div></form>\n";
+}
+
 // http://doc.spip.org/@generer_url_action
 function generer_url_action($script, $args="", $no_entities=false) {
 
 	return  generer_url_public('',
 				  "action=$script" .($args ? "&$args" : ''),
 				  $no_entities);
-	
 }
 
 

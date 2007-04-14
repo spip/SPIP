@@ -1372,7 +1372,7 @@ function debut_javascript($admin, $stat)
 function debut_onglet(){
 
 	return "
-\n<div style='padding: 7px;'><table cellpadding='0' cellspacing='0' border='0' align='center'><tr>
+\n<div style='padding: 7px;'><table cellpadding='0' cellspacing='0' border='0' class='centered'><tr>
 ";
 }
 
