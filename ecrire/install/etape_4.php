@@ -25,7 +25,16 @@ function install_etape_4_dist()
 
 	$link = mysql_connect("$adresse_db", "$login_db", "$pass_db");
 
+	// Prefix des tables :
+	// contrairement a ce qui est dit dans le message (trop strict mais c'est
+	// pour notre bien), on va tolerer les chiffres en plus des minuscules
+	$p = trim(preg_replace(',[^a-z0-9],', '',
+		strtolower(_request('table_prefix'))));
+	if ($p AND $p != 'spip')
+		$GLOBALS['table_prefix'] = $p;
+
 	echo "<"."!-- $link ";
+	echo "(".$GLOBALS['table_prefix'].")";
 
 	if ($choix_db == "new_spip") {
 		$sel_db = $table_new;
@@ -58,14 +67,8 @@ function install_etape_4_dist()
 		"/* echec du test sur `$sel_db`.spip_meta lors de l'installation. */\n";
 	}
 
-	// Prefix des tables :
-	// contrairement a ce qui est dit dans le message (trop strict mais c'est
-	// pour notre bien), on va tolerer les chiffres en plus des minuscules
-	$table_prefix = trim(preg_replace(',[^a-z0-9],', '',
-		strtolower(_request('table_prefix'))));
-	if ($table_prefix
-	AND $table_prefix != 'spip') {
-		$ligne_rappel .= "\$GLOBALS['table_prefix'] = '" . $table_prefix . "';\n";
+	if ($GLOBALS['table_prefix'] != 'spip') {
+		$ligne_rappel .= "\$GLOBALS['table_prefix'] = '" . $GLOBALS['table_prefix'] . "';\n";
 	}
 
 	if ($nouvelle) {
