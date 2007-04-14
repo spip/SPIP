@@ -30,14 +30,14 @@ function exec_brouteur_dist()
 		$hauteur_table = 300;
 		$nb_col = 3;
 	}
-	$largeur_col = round($largeur_table/$nb_col);
+	$largeur_col = floor($largeur_table/$nb_col);
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_articles_tous'), "accueil", "tout-site", " hauteurFrame($nb_col);");
 
 	echo "\n<div>&nbsp;</div>";
 
-	echo "\n<table border='0' cellpadding='0' cellspacing='2' width='$largeur_table'>";
+	echo debut_grand_cadre(true);
 
 	if ($id_rubrique) {
 		$j = $nb_col;
@@ -85,7 +85,7 @@ function exec_brouteur_dist()
 			$lien = $dest[$nb_col-$compteur-2];
 
 			// Afficher la hierarchie pour "remonter"
-			echo "<tr><td colspan='$nb_col' style='text-align: $spip_lang_left;'>";
+			echo "<div style='text-align: $spip_lang_left;'>";
 			
 			echo "<div id='brouteur_hierarchie'>"; // pour calculer hauteur de iframe
 			echo "<div ",
@@ -98,26 +98,20 @@ function exec_brouteur_dist()
 				"</a></div>",
 				"\n<div style='margin-$spip_lang_left: 28px;'>$ret</div>",
 				"</div>";
-			echo "</div></td></tr>";
+			echo "</div>";
 		}
 	} else {
 		$dest[0] = '0';
 	}
 
-	echo "\n<tr>";
-
-	for ($i=0; $i < $nb_col; $i++) {
-		echo "\n<td valign='top' width='$largeur_col'>";
-		
-		echo "<iframe width='100%' id='iframe$i' name='iframe$i'",
+	for ($i=0; $i < $nb_col; $i++) {		
+		echo "<iframe width='{$largeur_col}px' style='float:$spip_lang_left' id='iframe$i' name='iframe$i'",
 			(" src='" . generer_url_ecrire('brouteur_frame',"rubrique=".$dest[$i]."&frame=$i'")),
 		  " class='iframe-brouteur' height='",
 		  $hauteur_table,
 		  "'></iframe>";
-
-		echo "</td>";
 	}
-	echo "\n</tr></table>";
+	echo fin_grand_cadre(true);
 
 	// fixer la hauteur du brouteur de maniere a remplir l'ecran
 	// nota: code tire du plugin dimensions.js

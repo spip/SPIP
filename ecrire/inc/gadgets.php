@@ -32,7 +32,7 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 	"\n<div style='width:{$largeur}px' class='centered'>\n<div style='position: relative; z-index: 1000; height:1%'>"
 
 	// GADGET Menu rubriques
-	. "\n<div id='bandeautoutsite' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 0px;'>"
+	. "\n<div id='bandeautoutsite' class='bandeau bandeau_couleur_sous' style='text-align:$spip_lang_left;$spip_lang_left: 0px;'>"
 	. "<a href='"
 	. generer_url_ecrire("articles_tous")
 	. "' class='lien_sous'" 
@@ -45,14 +45,14 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 
 
 	// GADGET Navigation rapide
-	$bandeau .= "<div id='bandeaunavrapide' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 30px;'>"
+	$bandeau .= "<div id='bandeaunavrapide' class='bandeau bandeau_couleur_sous' style='text-align:$spip_lang_left;$spip_lang_left: 30px;'>"
 	. "<a href='" . generer_url_ecrire("brouteur", ($id_rubrique ? "id_rubrique=$id_rubrique" : '')) . "' class='lien_sous'>" . _T('icone_brouteur') . "</a>"
 	. "\n<div id='gadget-navigation'></div>\n"
 	. "</div>\n";
 	// FIN GADGET Navigation rapide
 
 	// GADGET Recherche
-	$bandeau .= "\n<div id='bandeaurecherche' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 60px;'>"
+	$bandeau .= "\n<div id='bandeaurecherche' class='bandeau bandeau_couleur_sous' style='text-align:$spip_lang_left;$spip_lang_left: 60px;'>"
 	. "<form method='get' style='margin: 0px; position: relative;' action='"
 	 . generer_url_ecrire("recherche")
 	. "'><div>"
@@ -65,7 +65,7 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 	// FIN GADGET recherche
 
 	// GADGET Agenda
-	$bandeau .= "<div id='bandeauagenda' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 100px;'>"
+	$bandeau .= "<div id='bandeauagenda' class='bandeau bandeau_couleur_sous' style='text-align:$spip_lang_left;$spip_lang_left: 100px;'>"
 	. "<a href='" . generer_url_ecrire("calendrier","type=semaine") . "' class='lien_sous'>"
 	. _T('icone_agenda')
 	. "</a>"
