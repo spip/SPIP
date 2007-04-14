@@ -21,7 +21,7 @@ include_spip('inc/texte');
 
 // http://doc.spip.org/@install_debut_html
 function install_debut_html($titre = 'AUTO', $onLoad = '') {
-	global $spip_lang_right;
+	global $spip_lang_right,$spip_lang_left;
 	
 	include_spip('inc/filtres');
 	include_spip('inc/headers');
@@ -36,46 +36,96 @@ function install_debut_html($titre = 'AUTO', $onLoad = '') {
 	# lors de l'installation
 	if (!headers_sent())
 		header('Content-Type: text/html; charset=utf-8');
-
+	$dir_img_pack = _DIR_IMG_PACK;
+	
 	return  _DOCTYPE_ECRIRE.
 		html_lang_attributes().
 		"<head>\n".
 		"<title>".
 		textebrut($titre).
-		"</title>
-		<style type='text/css'><!--\n/*<![CDATA[*/\n\n\n".
-		"body { background: #FFF; color: #000; }\n".
-		"h1 { color: #970038; margin-top: 50px; font-family: Verdana; font-weigth: bold; font-size: 18px }\n".
-		"h2 { font-family: Verdana,Arial,Sans,sans-serif; font-weigth: normal; }\n".
-		"a { color: #E86519; text-decoration: none; }\n".
-		"a:visited { color: #6E003A; }\n".
-		"a:active { color: #FF9900; }\n".
-		"img { border: 0; }\n".
-		"p { text-align: justify; }\n".
-		"ul { text-align: justify; list-style-type: none; }\n".
-		"fieldset, .fieldset { font-weigth: bold; text-align: justify; border: 1px solid #444; padding: 10px; margin-top: 1em; }\n".
-		"legend { font-weight: bold; }\n".
-		"label {}\n".
-		"#minipres { width: 30em; text-align: center; margin-left: auto; margin-right: auto; }\n".
-		".petit-centre { font-family: Verdana,Arial,Sans,sans-serif; font-size: 10px; }\n".
-		".petit-centre p { text-align: center; }\n".
-		".suivant { text-align: $spip_lang_right; display: block; margin-top: 1em; }\n".
-		".toile_foncee { background: #777; }\n".
-		".fondl { padding: 3px; background-color: #eee; border: 1px solid #333; 
+		"</title>".<<<styles
+<style type='text/css'><!--
+/*<![CDATA[*/
+body { 
+	background: #FFF; 
+	color: #000; 
+	font-family: Verdana,Arial,Sans,sans-serif;
+	font-size:0.9em;
+}
+h1 { 
+	color: #970038; 
+	margin:1em 0 1em 0;
+	font-family: Verdana; 
+	font-weigth: bold; 
+	font-size: 1.3em;
+}
+h2 { 
+	font-weigth: normal; 
+	font-size: 1.2em;
+}
+a { color: #E86519; text-decoration: none; }
+a:visited { color: #6E003A; }
+a:active { color: #FF9900; }
+img { border: 0; }
+p { text-align: justify; }
+ul { text-align: justify; list-style-type: none; }
+fieldset, .fieldset {
+	text-align:$spip_lang_left;
+	border: none; 
+	padding: 0px; 
+	margin-top: 1em; 
+	font-size:0.9em;
+}
+legend { font-weight: bold; font-size:1.1em;}
+label {}
+#minipres {
+	border:2px solid #888888;
+	width: 30em; 
+	text-align: center; 
+	margin: 1em auto 1em auto;
+	padding:1em;
+	background:#cccc99;
+}
+.petit-centre { font-family: Verdana,Arial,Sans,sans-serif; font-size: 1em; }
+.petit-centre p { text-align: center; }
+.suivant { text-align: $spip_lang_right; display: block; margin-top: 1em; }
+.toile_foncee { background: #777; }
+.fondl { 
+	padding: 3px; background-color: #eee; border: 1px solid #333; 
 	background-position: center bottom; 
-	font-size: 0.8em;
-	font-family: Verdana,Arial,Sans,sans-serif; }\n".
-		".formo { width: 100%; display: block; padding: 3px;
+	font-size: 0.9em;
+	font-family: Verdana,Arial,Sans,sans-serif; 
+}
+.formo { 
+	width: 100%; display: block; padding: 3px;
 	margin-bottom: 1em;
 	background-color: #FFF; 
 	border: 1px solid #333; 
 	background-position: center bottom; 
 	behavior: url(../dist/win_width.htc);
-	font-size: 0.8em;
-	font-family: Verdana,Arial,Sans,sans-serif; }\n".
-	  "\n\n]]>\n--></style>\n\n".
-	"<script type='text/javascript' src='" . _DIR_JAVASCRIPT . "spip_barre.js'></script>\n". // cet appel permet d'assurer un copier-coller du nom du repertoire a creer dans tmp (esj)
+	font-size: 1em;
+	font-family: Verdana,Arial,Sans,sans-serif; 
+}
+#etapes { display:block;}
+#etapes span { 
+	display:block;
+	float:$spip_lang_left;
+	width:48px;
+	height:44px;
+	margin-right:5px;
+	font-size:28px;
+	font-weight:bold;
+	padding-top:4px;
+}
+#etapes span.ok {background:url($dir_img_pack/etape-ok.png)}
+#etapes span.encours {background:url($dir_img_pack/etape-encours.png)}
+#etapes span.todo {background:url($dir_img_pack/etape-todo.png)}
+.nettoyeur {clear:both;height:0px;line-height:0px;font-size:0px;padding:0;margin:0;}
 
+]]>
+--></style>
+styles
+	. "<script type='text/javascript' src='" . _DIR_JAVASCRIPT . "spip_barre.js'></script>\n". // cet appel permet d'assurer un copier-coller du nom du repertoire a creer dans tmp (esj)
 #	"<script type='text/javascript' src='" . _DIR_JAVASCRIPT . "jquery.js'></script>".
 "</head>
 <body".$onLoad.">
@@ -93,7 +143,22 @@ function install_fin_html() {
 
 // http://doc.spip.org/@info_etape
 function info_etape($titre, $complement = ''){
-	return "\n<h2>".$titre."</h2>\n" .
+	$en_cours = _request('etape')?_request('etape'):"";
+	$liste = find_all_in_path('install/','etape_([0-9])+[.]php');
+	$debut = 1; $etat = "ok";
+	
+	$aff_etapes = "<span id='etapes'>";
+	foreach($liste as $etape=>$fichier){
+		if ($etape=="etape_{$en_cours}.php")
+			$etat = "encours";
+		$aff_etapes .= "<span class='$etat'>$debut</span>";
+		if ($etat == "encours")
+			$etat = 'todo';
+		$debut++;
+	}
+	$aff_etapes .= "</span><br class='nettoyeur' />\n";
+	
+	return $aff_etapes."\n<h2>".$titre."</h2>\n" .
 	($complement ? "<p>".$complement."</p>\n":'');
 }
 
