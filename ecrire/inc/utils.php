@@ -225,8 +225,10 @@ function pipeline($action,$val) {
 // http://doc.spip.org/@spip_log
 function spip_log($message, $logname='spip') {
 	static $compteur;
-	if ($compteur++ > 100) return;
+	global $nombre_de_logs, $taille_des_logs;
+	if ($compteur++ > 100 || !$nombre_de_logs || !$taille_des_logs) return;
 
+	$rotate = 0;
 	$pid = '(pid '.@getmypid().')';
 
 	// accepter spip_log( Array )
@@ -237,20 +239,22 @@ function spip_log($message, $logname='spip') {
 
 	$logfile = _DIR_TMP . $logname . '.log';
 	if (@is_readable($logfile)
-	AND (!$s = @filesize($logfile) OR $s > 50*1024)) {
-		$rotate = true;
+	AND (!$s = @filesize($logfile) OR $s > $taille_des_logs * 1024)) {
+		$rotate = $nombre_de_logs;
 		$message .= "[-- rotate --]\n";
-	} else $rotate = '';
+	}
+	
 	$f = @fopen($logfile, "ab");
 	if ($f) {
 		fputs($f, htmlspecialchars($message));
 		fclose($f);
 	}
-	if ($rotate) {
-		@unlink($logfile.'.3');
-		@rename($logfile.'.2',$logfile.'.3');
-		@rename($logfile.'.1',$logfile.'.2');
-		@rename($logfile,$logfile.'.1');
+
+	if ($rotate-- > 0) {
+		@unlink($logfile . '.' . $rotate);
+		while ($rotate--) {
+			@rename($logfile . ($rotate ? '.' . $rotate : ''), $logfile . '.' . ($rotate + 1));
+		}
 	}
 
 	// recopier les spip_log mysql (ce sont uniquement des erreurs)
