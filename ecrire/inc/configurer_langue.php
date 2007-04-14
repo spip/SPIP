@@ -18,6 +18,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/lang');
 
+// http://doc.spip.org/@inc_configurer_langue_dist
 function inc_configurer_langue_dist()
 {
  $l_site = $GLOBALS['meta']['langue_site'];

@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
-// http://doc.spip.org/@exec_discuter_dist
+// http://doc.spip.org/@exec_configurer_langue_dist
 function exec_configurer_langue_dist()
 {
 	$configurer_langue = charger_fonction('configurer_langue', 'inc');
