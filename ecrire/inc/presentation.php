@@ -1555,13 +1555,13 @@ function debut_grand_cadre($return=false){
 	
 	if ($spip_ecran == "large") $largeur = 974;
 	else $largeur = 750;
-	$res =  "\n<br /><br />\n<table width='$largeur' cellpadding='0' cellspacing='0' border='0'>\n<tr><td style='width: ${largeur}px' class='serif'>";
+	$res =  "\n<br /><br />\n<div class='table_page' style='width:${largeur}px;'>\n";
 	if ($return) return $res; else echo $res;
 }
 
 // http://doc.spip.org/@fin_grand_cadre
 function fin_grand_cadre($return=false){
-	$res = "\n</td></tr></table>";
+	$res = "\n</div>";
 	if ($return) return $res; else echo $res;
 }
 
@@ -1604,7 +1604,7 @@ function debut_gauche($rubrique = "accueil", $return=false) {
 	// table fermee par fin_gauche()
 	// div fermee par debut_droite() ou creer_colonne_droite
 
-	$res = "<br /><table width='$largeur_ecran' cellpadding='0' cellspacing='0' border='0'>
+	$res = "<br /><table class='table_page' width='$largeur_ecran' cellpadding='0' cellspacing='0' border='0'>
 		<tr>\n<td style='width: 200px' class='colonne_etroite serif' valign='top' $rspan>
 		\n<div style='width: 200px; overflow:hidden;'>
 \n";
