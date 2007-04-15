@@ -33,7 +33,7 @@ function inc_configurer_langue_dist()
 
  $res = ajax_action_post('configurer_langue',
 			 '',
-			 'configurer_langue',
+			 'config_lang',
 			 '',
 			 _T('info_langue_principale') .
 			 " : <select name='changer_langue_site' class='fondl'>\n$res</select>\n",

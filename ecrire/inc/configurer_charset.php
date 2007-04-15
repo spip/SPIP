@@ -44,7 +44,7 @@ function inc_configurer_charset_dist()
 
 	$res = ajax_action_post('configurer_charset',
 				'',
-				'configurer_charset',
+				'config_lang',
 				'',
 				$res,
 				_T('bouton_valider'),
