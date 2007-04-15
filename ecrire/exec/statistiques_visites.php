@@ -840,7 +840,7 @@ echo "<br /><br /><br />";
 gros_titre(_T("onglet_origine_visites"));
 
 echo "<div style='font-size:small;overflow:hidden;' class='verdana1'><br />";
-echo aff_referers ($result, $limit, generer_url_ecrire('statistiques_visites', ('limit=' . strval($limit+200))));
+echo aff_referers ($result, $limit, generer_url_ecrire('statistiques_visites', ($id_article?"id_article=$id_article&":'').('limit=' . strval($limit+200))));
 echo "<br /></div>";	
 
 echo fin_gauche(), fin_page();
