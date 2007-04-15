@@ -39,11 +39,11 @@ function install_etape_5_dist()
 		_T('info_laisser_champs_vides')
 	);
 
-	echo generer_url_post_ecrire('install');
+	echo generer_post_ecrire('install', (
 
-	echo "<input type='hidden' name='etape' value='6' />";
+	  "\n<input type='hidden' name='etape' value='6' />"
 
-	echo fieldset(_T('info_identification_publique'),
+	. fieldset(_T('info_identification_publique'),
 		array(
 			'nom' => array(
 				'label' => "<b>"._T('entree_signature')."</b><br />\n"._T('entree_nom_pseudo_1')."\n",
@@ -54,9 +54,9 @@ function install_etape_5_dist()
 				'valeur' => $email
 			)
 		)
-	);
+	)
 
-	echo fieldset(_T('entree_identifiants_connexion'),
+	. fieldset(_T('entree_identifiants_connexion'),
 		array(
 			'login' => array(
 				'label' => "<b>"._T('entree_login')."</b><br />\n"._T('info_plus_trois_car')."\n",
@@ -71,23 +71,21 @@ function install_etape_5_dist()
 				'valeur' => $pass
 			)
 		)
-	);
+	)
 
-	echo bouton_suivant();
-	echo "</form>\n";
+	. bouton_suivant()));
 
 	if (function_exists('ldap_connect') AND !$ldap_present) {
-		echo generer_url_post_ecrire('install');
-		echo fieldset(_T('info_authentification_externe'),
-			array(
+		echo generer_post_ecrire('install', (
+			fieldset(_T('info_authentification_externe'),
+				array(
 				'etape' => array(
 					'label' => _T('texte_annuaire_ldap_1'),
 					'valeur' => 'ldap1',
 					'hidden' => true
-				)),
-			bouton_suivant(_T('bouton_acces_ldap'))
-		);
-		echo "</form>\n";
+					)),
+				 bouton_suivant(_T('bouton_acces_ldap'))
+				 )));
 	}
 
 	echo install_fin_html();
