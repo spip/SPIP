@@ -19,12 +19,12 @@ function install_etape_2_dist()
 
 	echo info_etape(_T('info_connexion_base'));
 
-	echo "<!--";
+	echo "<!-- ";
 	$link = mysql_connect("$adresse_db","$login_db","$pass_db");
 	$db_connect = mysql_errno();
-	echo "-->";
+	echo " -->";
 
-	if (($db_connect==="0") && $link){
+	if (($db_connect == 0) && $link){
 		echo "<p><b>"._T('info_connexion_ok')."</b></p><p> "._T('info_etape_suivante_2')."</p>";
 
 		echo generer_post_ecrire('install', (
