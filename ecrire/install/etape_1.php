@@ -46,8 +46,14 @@ function install_etape_1_dist()
 		}
 	}
 	echo generer_post_ecrire('install', (
-	  "\n<input type='hidden' name='etape' value='2' />" 
+	  "\n<input type='hidden' name='etape' value='3' />" 
 	. "\n<input type='hidden' name='chmod' value='$chmod' />"
+	
+	. (_request('echec')?
+			("<p><b>"._T('avis_connexion_echec_1').
+			"</b></p><p>"._T('avis_connexion_echec_2')."</p><p style='font-size: small;'>"._T('avis_connexion_echec_3')."</p>")
+			:"")
+
 	. fieldset(_T('entree_base_donnee_1'),
 		array(
 			'adresse_db' => array(
@@ -56,7 +62,7 @@ function install_etape_1_dist()
 			),
 		)
 	)
-
+	
 	. fieldset(_T('entree_login_connexion_1'),
 		array(
 			'login_db' => array(

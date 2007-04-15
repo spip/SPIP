@@ -20,6 +20,15 @@ function install_etape_3_dist()
 
 	echo install_debut_html();
 
+	// prenons toutes les dispositions possibles pour que rien ne s'affiche !
+	echo "<!--";
+	$link = mysql_connect("$adresse_db","$login_db","$pass_db");
+	$db_connect = mysql_errno();
+	echo "-->";
+
+	if (($db_connect=="0") && $link){
+
+	echo "<p><b>"._T('info_connexion_ok')."</b></p>";
 	echo info_etape(_T('info_choix_base')." "._T('menu_aide_installation_choix_base').aide ("install2"));
 
 	$link = mysql_connect("$adresse_db","$login_db","$pass_db");
@@ -71,7 +80,7 @@ function install_etape_3_dist()
 	}
 
 	echo generer_post_ecrire('install', (
-	  "\n<input type='hidden' name='etape' value='4' />"
+	  "\n<input type='hidden' name='etape' value='5' />"
 	. "\n<input type='hidden' name='chmod' value='$chmod' />"
 	. "\n<input type='hidden' name='adresse_db'  value=\"$adresse_db\" />"
 	. "\n<input type='hidden' name='login_db' value=\"$login_db\" />"
@@ -87,6 +96,13 @@ function install_etape_3_dist()
 	. "\n<input type='text' id='table_prefix' name='table_prefix' class='fondl' value='" .
 		$table_prefix . "' size='10' /></p></fieldset>"
 	. bouton_suivant()));
+	}
+	else {
+		echo info_etape(_T('info_connexion_base'));
+		echo "<p><b>"._T('avis_connexion_echec_1')."</b></p>";
+		echo "<p>"._T('avis_connexion_echec_2')."</p>";
+		echo "<p style='font-size: small;'>"._T('avis_connexion_echec_3')."</p>";
+	}
 
 	echo install_fin_html();
 }

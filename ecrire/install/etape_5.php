@@ -13,6 +13,96 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 include_spip('inc/headers');
+function install_bases(){
+	global $adresse_db, $choix_db, $login_db, $pass_db, $spip_lang_right, $spip_version, $table_new, $chmod;
+	$link = mysql_connect("$adresse_db", "$login_db", "$pass_db");
+
+	// Prefix des tables :
+	// contrairement a ce qui est dit dans le message (trop strict mais c'est
+	// pour notre bien), on va tolerer les chiffres en plus des minuscules
+	$p = trim(preg_replace(',[^a-z0-9],', '',
+		strtolower(_request('table_prefix'))));
+	if ($p AND $p != 'spip')
+		$GLOBALS['table_prefix'] = $p;
+
+	echo "<"."!-- $link ";
+	echo "(".$GLOBALS['table_prefix'].")";
+
+	if ($choix_db == "new_spip") {
+		$sel_db = $table_new;
+		mysql_query("CREATE DATABASE `$sel_db`");
+	}
+	else {
+		$sel_db = $choix_db;
+	}
+	echo "$sel_db ";
+
+	mysql_select_db($sel_db);
+	spip_query("SELECT COUNT(*) FROM spip_meta");
+	$nouvelle = spip_sql_errno();
+	creer_base();
+	include_spip('base/upgrade');
+	maj_base();
+	
+	// Tester $mysql_rappel_nom_base
+	$GLOBALS['mysql_rappel_nom_base'] = true;
+	$GLOBALS['spip_mysql_db'] = $sel_db;
+	$ok_rappel_nom = spip_query("INSERT INTO spip_meta (nom,valeur) VALUES ('mysql_rappel_nom_base', 'test')");
+	if ($ok_rappel_nom) {
+		echo " (ok rappel nom base `$sel_db`.spip_meta) ";
+		$ligne_rappel = '';
+		spip_query("DELETE FROM spip_meta WHERE nom='mysql_rappel_nom_base'");
+	} else {
+		echo " (erreur rappel nom base `$sel_db`.spip_meta $nouvelle) ";
+		$GLOBALS['mysql_rappel_nom_base'] = false;
+		$ligne_rappel = "\$GLOBALS['mysql_rappel_nom_base'] = false; ".
+		"/* echec du test sur `$sel_db`.spip_meta lors de l'installation. */\n";
+	}
+
+	if ($GLOBALS['table_prefix'] != 'spip') {
+		$ligne_rappel .= "\$GLOBALS['table_prefix'] = '" . $GLOBALS['table_prefix'] . "';\n";
+	}
+
+	if ($nouvelle) {
+		spip_query("INSERT INTO spip_meta (nom, valeur) VALUES ('nouvelle_install', '1')");
+		$result_ok = !spip_sql_errno();
+	} else {
+	  // en cas de reinstall sur mise a jour mal passee
+	  spip_query("DELETE FROM spip_meta WHERE nom='debut_restauration'");
+		$result = spip_query("SELECT COUNT(*) FROM spip_articles");
+		$result_ok = (spip_num_rows($result) > 0);
+	}
+	echo "($result_ok) -->";
+
+	if($chmod) {
+		$conn = "<"."?php\n";
+		$conn .= "if (!defined(\"_ECRIRE_INC_VERSION\")) return;\n";
+		$conn .= "define('_SPIP_CHMOD', ".$chmod.");\n";
+		$conn .= "?".">";
+		if (!ecrire_fichier(_FILE_CHMOD_INS . _FILE_TMP . '.php',
+		$conn))
+			redirige_par_entete(generer_url_ecrire('install'));
+	}
+	if ($result_ok) {
+		if (preg_match(',(.*):(.*),', $adresse_db, $r))
+			list(,$adresse_db, $port) = $r;
+		else
+			$port = '';
+		$conn = "<"."?php\n";
+		$conn .= "if (!defined(\"_ECRIRE_INC_VERSION\")) return;\n";
+		$conn .= "\$GLOBALS['spip_connect_version'] = 0.4;\n";
+		$conn .= $ligne_rappel;
+		$conn .= "spip_connect_db("
+			. "'$adresse_db','$port','$login_db','$pass_db','$sel_db'"
+			. ");\n";
+		$conn .= "?".">";
+
+		if (!ecrire_fichier(_FILE_CONNECT_INS . _FILE_TMP . '.php',
+		$conn))
+			redirige_par_entete(generer_url_ecrire('install'));
+	}
+	return $result_ok;
+}
 
 // http://doc.spip.org/@inc_install_5
 function install_etape_5_dist()
@@ -20,6 +110,9 @@ function install_etape_5_dist()
 	global $email, $ldap_present, $login, $nom, $pass, $spip_lang_right;
 
 	echo install_debut_html();
+	$result_ok = install_bases();
+	if ($result_ok) {
+		echo "<p><b>"._T('info_base_installee')."</b></p>";
 
 	if (@file_exists(_FILE_CONNECT_INS . _FILE_TMP . '.php'))
 		include(_FILE_CONNECT_INS . _FILE_TMP . '.php');
@@ -86,6 +179,13 @@ function install_etape_5_dist()
 					)),
 				 bouton_suivant(_T('bouton_acces_ldap'))
 				 )));
+	}
+	}
+	else if ($result_ok) {
+		echo _T('alerte_maj_impossible', array('version' => $spip_version));
+	}
+	else {
+		echo "<b>"._T('avis_operation_echec')."</b> "._T('texte_operation_echec');
 	}
 
 	echo install_fin_html();
