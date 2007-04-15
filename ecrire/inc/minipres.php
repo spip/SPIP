@@ -62,6 +62,7 @@ h1 {
 h2 { 
 	font-weigth: normal; 
 	font-size: 1.2em;
+	margin:0.8em 0 0.8em 0;
 }
 a { color: #E86519; text-decoration: none; }
 a:visited { color: #6E003A; }
@@ -76,7 +77,7 @@ fieldset, .fieldset {
 	margin-top: 1em; 
 	font-size:0.9em;
 }
-legend { font-weight: bold; font-size:1.1em;}
+legend { font-weight: bold; font-size:1.1em;color:#0033cc;}
 label {}
 #minipres {
 	border:2px solid #888888;
@@ -111,15 +112,15 @@ label {}
 	display:block;
 	float:$spip_lang_left;
 	width:48px;
-	height:44px;
+	height:42px;
 	margin-right:5px;
-	font-size:28px;
+	font-size:26px;
 	font-weight:bold;
-	padding-top:4px;
+	padding-top:6px;
 }
-#etapes span.ok {background:url($dir_img_pack/etape-ok.png)}
-#etapes span.encours {background:url($dir_img_pack/etape-encours.png)}
-#etapes span.todo {background:url($dir_img_pack/etape-todo.png)}
+#etapes span.ok {background:url($dir_img_pack/etape-ok.gif)}
+#etapes span.encours {background:url($dir_img_pack/etape-encours.gif)}
+#etapes span.todo {background:url($dir_img_pack/etape-todo.gif)}
 .nettoyeur {clear:both;height:0px;line-height:0px;font-size:0px;padding:0;margin:0;}
 
 ]]>
@@ -146,17 +147,22 @@ function info_etape($titre, $complement = ''){
 	$en_cours = _request('etape')?_request('etape'):"";
 	$liste = find_all_in_path('install/','etape_([0-9])+[.]php');
 	$debut = 1; $etat = "ok";
+	$last = count($liste);
 	
 	$aff_etapes = "<span id='etapes'>";
 	foreach($liste as $etape=>$fichier){
-		if ($etape=="etape_{$en_cours}.php")
-			$etat = "encours";
-		$aff_etapes .= "<span class='$etat'>$debut</span>";
+		if ($etape=="etape_{$en_cours}.php"){
+			if ($debut<$last)
+				$etat = "encours";
+			else
+				$etat = "ok";
+		}
+		$aff_etapes .= "<span class='$etat'>".(($debut<$last)?$debut:"GO")."</span>";
 		if ($etat == "encours")
 			$etat = 'todo';
 		$debut++;
 	}
-	$aff_etapes .= "</span><br class='nettoyeur' />\n";
+	$aff_etapes .= "<br class='nettoyeur' />&nbsp;</span>\n";
 	
 	return $aff_etapes."\n<h2>".$titre."</h2>\n" .
 	($complement ? "<p>".$complement."</p>\n":'');
