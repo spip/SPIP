@@ -1430,6 +1430,7 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $echo=false){
 	if ($echo) echo $retour; else return $retour;
 }
 
+// http://doc.spip.org/@icone_inline
 function icone_inline($texte, $lien, $fond, $fonction="", $align=""){	
 	global $spip_display;
 
