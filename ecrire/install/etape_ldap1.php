@@ -31,10 +31,10 @@ function install_etape_ldap1_dist()
 
 	echo info_etape(_T('titre_connexion_ldap'), _T('entree_informations_connexion_ldap'));
 
-	echo generer_url_post_ecrire('install');
-	echo "<input type='hidden' name='etape' value='ldap2' />";
+	echo generer_post_ecrire('install', (
+	 "\n<input type='hidden' name='etape' value='ldap2' />"
 
-	echo fieldset(_T('entree_adresse_annuaire'),
+	. fieldset(_T('entree_adresse_annuaire'),
 		array(
 			'adresse_ldap' => array(
 				'label' => _T('texte_adresse_annuaire_1'),
@@ -61,10 +61,10 @@ function install_etape_ldap1_dist()
 				)
 			)
 		)
-	);
+	)
 
-	echo '<p>'._T('texte_acces_ldap_anonyme_1').'</p>';
-	echo fieldset(_T('connexion_ldap'),
+	. "\n<p>"._T('texte_acces_ldap_anonyme_1').'</p>'
+	. fieldset(_T('connexion_ldap'),
 		array(
 			'login_ldap' => array(
 				'label' => _T('texte_login_ldap_1'),
@@ -75,10 +75,9 @@ function install_etape_ldap1_dist()
 				'valeur' => ''
 			)
 		)
-	);
+	)
 
-	echo bouton_suivant();
-	echo "</form>";
+	. bouton_suivant()));
 
 	echo install_fin_html();
 }

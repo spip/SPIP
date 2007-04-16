@@ -54,10 +54,10 @@ function install_etape_ldap4_dist()
 		$conn .= "?".">";
 		ecrire_fichier(_FILE_CONNECT_INS . _FILE_TMP . '.php', $conn);
 
-		echo generer_url_post_ecrire('install');
-		echo "<input type='hidden' name='etape' value='ldap5' />";
+		echo generer_post_ecrire('install', (
+		"<input type='hidden' name='etape' value='ldap5' />"
 		
-		echo fieldset(_T('info_statut_utilisateurs_1'),
+		. fieldset(_T('info_statut_utilisateurs_1'),
 			array(
 				'statut_ldap' => array(
 					'label' => _T('info_statut_utilisateurs_2').'<br />',
@@ -69,10 +69,8 @@ function install_etape_ldap4_dist()
 					)
 				)
 			)
-		);
-
-		echo bouton_suivant();
-		echo "</form>";
+		)
+		. bouton_suivant()));
 	}
 
 	echo install_fin_html();

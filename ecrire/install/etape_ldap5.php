@@ -18,10 +18,10 @@ function install_etape_ldap5_dist()
 {
 	global $spip_lang_right, $statut_ldap;
 
-	echo install_debut_html('AUTO', ' onLoad="document.getElementById(\'suivant\').focus();return false;"');
+	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
 
 	// simuler ecrire_meta/s pour pouvoir sauver le statut
-	// car _FILE_CONNECT est defa a False a ce moment.
+	// car _FILE_CONNECT n'existe pas encore
 
 	if (@file_exists(_FILE_CONNECT_INS . _FILE_TMP . '.php'))
 		include(_FILE_CONNECT_INS . _FILE_TMP . '.php');
@@ -33,11 +33,9 @@ function install_etape_ldap5_dist()
 
 	echo info_etape(_T('info_ldap_ok'), _T('info_terminer_installation'));
 
-	echo generer_url_post_ecrire('install');
-	echo "<input type='hidden' name='etape' value='5' />";
-
-	echo bouton_suivant();
-	echo "</form>";
+	echo generer_post_ecrire('install', (
+		"<input type='hidden' name='etape' value='5' />"
+		. bouton_suivant()));
 
 	echo install_fin_html();
 }

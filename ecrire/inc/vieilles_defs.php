@@ -243,4 +243,14 @@ function lang_dselect () {
 }
 // toujours disponible pour PHP > 4.0.1
 $GLOBALS['flag_revisions'] = function_exists("gzcompress");
+
+// http://doc.spip.org/@generer_url_post_ecrire
+function generer_url_post_ecrire($script, $args='', $name='', $ancre='', $onchange='') {
+	spip_log("generer_url_post_ecrire utiliser generer_post_ecrire");
+	include_spip('inc/filtres');
+	$action = generer_url_ecrire($script, $args);
+	if ($name) $name = " name='$name'";
+	return "\n<form action='$action$ancre'$name method='post'$onchange>"
+	.form_hidden($action);
+}
 ?>

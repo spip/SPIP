@@ -165,7 +165,7 @@ function info_etape($titre, $complement = ''){
 	$aff_etapes .= "<br class='nettoyeur' />&nbsp;</span>\n";
 	
 	return $aff_etapes."\n<h2>".$titre."</h2>\n" .
-	($complement ? "<p>".$complement."</p>\n":'');
+	($complement ? "<br />".$complement."\n":'');
 }
 
 // http://doc.spip.org/@fieldset
@@ -175,16 +175,18 @@ function fieldset($legend, $champs = array(), $horchamps='') {
 	foreach ($champs as $nom => $contenu) {
 		$type = $contenu['hidden'] ? 'hidden' : (preg_match(',^pass,', $nom) ? 'password' : 'text');
 		$class = $contenu['hidden'] ? '' : "class='formo' size='40' ";
-		$fieldset .= "<label for='".$nom."'>".$contenu['label']."</label>\n";
 		if(is_array($contenu['alternatives'])) {
+			$fieldset .= $contenu['label'] ."\n";
 			foreach($contenu['alternatives'] as $valeur => $label) {
 				$fieldset .= "<input type='radio' name='".$nom .
-				"'\nvalue='".$valeur."' ".(($valeur==$contenu['valeur'])?"checked='checked'":'')."/>\n";
-				$fieldset .= "<label for='".$valeur."'>".$label."</label>\n";
+				"' id='$nom-$valeur' value='$valeur'"
+				  .(($valeur==$contenu['valeur'])?"\nchecked='checked'":'')."/>\n";
+				$fieldset .= "<label for='$nom-$valeur'>".$label."</label>\n";
 			}
 			$fieldset .= "<br />\n";
 		}
 		else {
+			$fieldset .= "<label for='".$nom."'>".$contenu['label']."</label>\n";
 			$fieldset .= "<input ".$class."type='".$type."' id='" . $nom . "' name='".$nom."'\nvalue='".$contenu['valeur']."' />\n";
 		}
 	}
@@ -406,21 +408,4 @@ function http_style_background($img, $att='')
   return " style='background: url(\"".http_wrapper($img)."\")" .
 	    ($att ? (' ' . $att) : '') . ";'";
 }
-
-// Pour les formulaires en methode POST,
-// mettre les arguments a la fois en input-hidden et dans le champ action:
-// 1) on peut ainsi memoriser le signet comme si c'etait un GET
-// 2) ca suit http://en.wikipedia.org/wiki/Representational_State_Transfer
-
-// Attention: generer_url_ecrire peut rajouter des args
-
-// http://doc.spip.org/@generer_url_post_ecrire
-function generer_url_post_ecrire($script, $args='', $name='', $ancre='', $onchange='') {
-	include_spip('inc/filtres');
-	$action = generer_url_ecrire($script, $args);
-	if ($name) $name = " name='$name'";
-	return "\n<form action='$action$ancre'$name method='post'$onchange>"
-	.form_hidden($action);
-}
-
 ?>
