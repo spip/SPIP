@@ -90,7 +90,7 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 }
 
 // http://doc.spip.org/@fin_cadre
-function fin_cadre($style) {
+function fin_cadre($style='') {
 
 	$ret = ($style == "e") ? "</div></div></div>\n" : "</div></div>\n";
 
