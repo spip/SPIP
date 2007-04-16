@@ -1,24 +1,26 @@
 var bandeau_elements = false;
+var dir_page = $("html").attr("dir");
+
+function getBiDiOffset(el) {
+    var offset = el.offsetLeft;
+    if(dir_page=="rtl")
+      offset = (window.innerWidth || el.offsetParent.clientWidth)-(offset+el.offsetWidth);
+    return offset;
+}
 
 function decaleSousMenu() {
   var sousMenu = $("div.bandeau_sec",this).css({visibility:'hidden',display:'block'});
   if(!sousMenu.length) return;
   var left;
   if($.browser.msie) {
-    var version = navigator.appVersion.match(/MSIE ([^;]+)/);
-    version = parseInt(version[1]);
-    left = parseInt(sousMenu[0].parentNode.offsetLeft);
-    if(version>6) {
-      left += parseInt($("#bandeau-principal div")[0].offsetLeft);
-    }
-  } else left = parseInt(sousMenu[0].offsetLeft);
+    left = getBiDiOffset(sousMenu[0].parentNode) + getBiDiOffset($("#bandeau-principal div")[0]);
+  } else left = getBiDiOffset(sousMenu[0]);
   if (left > 0) {
 		var demilargeur = Math.floor( sousMenu[0].offsetWidth / 2 );
-		var gauche = left
-			- demilargeur
+    var gauche = left - demilargeur
 			+ Math.floor(largeur_icone / 2);
 		if (gauche < 0) gauche = 0;
-    sousMenu.css("left",gauche+"px");
+    sousMenu.css(dir_page=="rtl"?"right":"left",gauche+"px");
 	}
 	sousMenu.css({display:'',visibility:''});
 }
