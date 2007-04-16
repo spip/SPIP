@@ -88,8 +88,8 @@ function exec_sites_dist()
 	fin_boite_info();
 
 
-	echo "\n<br /><div align='center'>";
-	icone (_T('icone_voir_sites_references'), generer_url_ecrire("sites_tous",""), "site-24.gif","rien.gif");
+	echo "\n<br /><div class='centered'>";
+	echo icone(_T('icone_voir_sites_references'), generer_url_ecrire("sites_tous",""), "site-24.gif","rien.gif");
 	echo "</div>";
 
 	if ($id_syndic AND $flag_administrable AND ($spip_display != 4)) {

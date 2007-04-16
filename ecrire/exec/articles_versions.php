@@ -21,7 +21,7 @@ function exec_articles_versions_dist()
 {
 	include_spip('inc/suivi_versions');
 
-	global $champs_extra, $chapo, $descriptif, $id_article, $id_diff, $id_version, $les_notes, $nom_site, $options, $ps, $soustitre, $surtitre, $texte, $titre, $url_site;
+	global $champs_extra, $chapo, $descriptif, $id_article, $id_diff, $id_version, $les_notes, $nom_site, $options, $ps, $soustitre, $surtitre, $texte, $titre, $url_site, $spip_lang_left, $spip_lang_right;
 
 
 //
@@ -130,25 +130,24 @@ if ($soustitre) {
 
 
 if ($descriptif OR $url_site OR $nom_site) {
-	echo "<div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;'  dir='$lang_dir'>";
+	echo "<div style='text-align: $spip_lang_left; padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;'  dir='$lang_dir'>";
 	$texte_case = ($descriptif) ? "{{"._T('info_descriptif')."}} $descriptif\n\n" : '';
 	$texte_case .= ($nom_site.$url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
 	echo "<span class='verdana1 spip_small'>", propre($texte_case), "</span>";
 	echo "</div>";
 }
 
-echo "</td>";
-
-echo "<td align='center'>";
+echo "</td><td>";
 
 // Icone de modification
 if (autoriser('modifier', 'article', $id_article))
-	icone(
+	echo icone_inline(
 		_T('icone_modifier_article').'<br />('._T('version')." $id_version)",
 		generer_url_ecrire("articles_edit",
 			"id_article=$id_article".((!$last_version)?"&id_version=$id_version":"")),
 		"article-24.gif",
-		"edit.gif"
+		"edit.gif",
+		$spip_lang_right
 	);
 
 echo "</td>";

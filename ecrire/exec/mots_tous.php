@@ -18,9 +18,9 @@ include_spip('inc/actions');
 // http://doc.spip.org/@exec_mots_tous_dist
 function exec_mots_tous_dist()
 {
-	global $conf_mot, $spip_lang, $spip_lang_right, $son_groupe;
+	global $spip_lang, $spip_lang_left, $spip_lang_right, $son_groupe;
 
-	$conf_mot = intval($conf_mot);
+	$conf_mot = intval(_request('conf_mot'));
 
 	pipeline('exec_init',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -123,17 +123,15 @@ function exec_mots_tous_dist()
 			echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
 			echo "<tr>";
 			echo "<td>";
-			icone(_T('icone_modif_groupe_mots'), generer_url_ecrire("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.gif", "edit.gif");
+			echo icone_inline(_T('icone_modif_groupe_mots'), generer_url_ecrire("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.gif", "edit.gif", $spip_lang_left);
 			echo "</td>";
 			echo "\n<td id='editer_mot-$id_groupe-supprimer'",
 			  (!$groupe ? '' : " style='visibility: hidden'"),
 			  ">";
-			icone(_T('icone_supprimer_groupe_mots'), redirige_action_auteur('instituer_groupe_mots', "-$id_groupe", "mots_tous"), "groupe-mot-24.gif", "supprimer.gif");
+			echo icone_inline(_T('icone_supprimer_groupe_mots'), redirige_action_auteur('instituer_groupe_mots', "-$id_groupe", "mots_tous"), "groupe-mot-24.gif", "supprimer.gif", $spip_lang_left);
 			echo "</td>";
 			echo "<td>";
-			echo "<div align='$spip_lang_right'>";
-			icone(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit","new=oui&id_groupe=$id_groupe&redirect=" . generer_url_retour('mots_tous', "#mots_tous-$id_groupe")), "mot-cle-24.gif", "creer.gif");
-			echo "</div>";
+			echo icone_inline(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit","new=oui&id_groupe=$id_groupe&redirect=" . generer_url_retour('mots_tous', "#mots_tous-$id_groupe")), "mot-cle-24.gif", "creer.gif", $spip_lang_right);
 			echo "</td></tr></table>";
 		}	
 

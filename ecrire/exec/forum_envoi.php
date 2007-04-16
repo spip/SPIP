@@ -113,7 +113,7 @@ function forum_envoi(
 	// formulaire
 	$corps .= debut_cadre_formulaire(($statut == 'privac') ? "" : 'background-color: #dddddd;', true)
 	. forum_envoi_formulaire($id, generer_url_ecrire($script, $retour), $statut, $texte, $titre_message,  $nom_site, $url_site)
-	. "<div align='right'><input class='fondo' type='submit' value='"
+	. "<div style='text-align: right'><input class='fondo' type='submit' value='"
 	. _T('bouton_voir_message')
 	. "' /></div>"
 	. fin_cadre_formulaire(true);
@@ -126,7 +126,7 @@ function forum_envoi(
 
 	echo  $parent,
 	  "\n<div>&nbsp;</div>"
-	  . redirige_action_auteur('poster_forum_prive',$cat, $script, $retour, $corps, "\nmethod='post' name='formulaire' id='formulaire'")
+	  . redirige_action_auteur('poster_forum_prive',$cat, $script, $retour, $corps, "\nmethod='post' id='formulaire'")
 	  . fin_gauche()
 	  . fin_page();
 }

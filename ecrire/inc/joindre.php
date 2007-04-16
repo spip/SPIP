@@ -62,7 +62,7 @@ function inc_joindre_dist($script, $args, $id=0, $intitule='', $mode='', $type='
 			"' style='float: $spip_lang_right;' alt=\"\" />\n" .
 			_T('info_referencer_doc_distant') .
 			"<br />\n\t<input name='url' class='fondo' value='http://' />" .
-			"\n\t<div align='$spip_lang_right'><input name='sousaction2' type='submit' value='".
+			"\n\t<div style='text-align: $spip_lang_right'><input name='sousaction2' type='submit' value='".
 			_T('bouton_choisir').
 			"' class='fondo' /></div>" .
 			"\n</div>";
@@ -70,7 +70,7 @@ function inc_joindre_dist($script, $args, $id=0, $intitule='', $mode='', $type='
 
 	$res = "<input name='fichier' type='file' class='forml spip_xx-small' size='15' />"
 	. "\n\t\t<input type='hidden' name='ancre' value='$ancre' />"
-	. "\n\t\t<div align='$spip_lang_right'><input name='sousaction1' type='submit' value='"
+	. "\n\t\t<div style='text-align: $spip_lang_right'><input name='sousaction1' type='submit' value='"
 	. _T('bouton_telecharger')
 	. "' class='fondo' /></div>";
 
@@ -161,7 +161,7 @@ function afficher_transferer_upload($texte_upload, $dir)
 		"\n<select name='chemin' size='1' class='fondl'>" .
 		$texte_upload .
 		"\n</select>" .
-		"\n<div align='".
+		"\n<div style=text-align: ".
 		$GLOBALS['spip_lang_right'] .
 		"'><input name='sousaction3' type='submit' value='" .
 		_T('bouton_choisir').

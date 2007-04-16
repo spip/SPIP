@@ -136,7 +136,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	if ($flag_editable) {
 		echo "<td>", http_img_pack("rien.gif", ' ', "width='5'") ."</td>\n";
 		echo "<td  align='right'>";
-		icone(
+		echo icone(
 			// TODO -- _L("Fil a travaille sur cette breve il y a x minutes")
 			!$modif ? _T('icone_modifier_breve')
 				: _T('texte_travail_article', $modif),

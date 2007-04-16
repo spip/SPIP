@@ -57,7 +57,7 @@ function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='',
 	. editer_article_ps($row['ps'], $config, $aider)
 	. editer_article_extra($row['extra'], $id_secteur, $config, $aider)
 	. $hidden
-	. ("<div align='right'><input class='fondo' type='submit' value='"
+	. ("<div style='text-align: right'><input class='fondo' type='submit' value='"
 	. _T('bouton_enregistrer')
 	. "' /></div>");
 

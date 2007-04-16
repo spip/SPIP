@@ -110,7 +110,7 @@ if ($new != "oui") {
 	echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
 	echo "\n<tr>";
 	echo "<td>";
-		icone(_T('icone_retour'), generer_url_ecrire("breves_voir","id_breve=$id_breve"), "breve-24.gif", "rien.gif");
+	echo icone(_T('icone_retour'), generer_url_ecrire("breves_voir","id_breve=$id_breve"), "breve-24.gif", "rien.gif");
 	
 	echo "</td>";
 	echo "\n<td>", http_img_pack("rien.gif", ' ', "width='10'"), "</td>\n";

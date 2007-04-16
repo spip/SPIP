@@ -239,7 +239,7 @@ function legender_auteur_saisir($auteur, $auteur_infos_voir, $bloc_statut, $redi
 	if ($redirect)
 		$corps .= "<input type='hidden' name='redirect' value=\"".attribut_html($redirect)."\" />\n";
 
-	$corps .= "<div align='right'><input type='submit' value='"._T('bouton_enregistrer')."' class='fondo' /></div>";
+	$corps .= "<div style='text-align: right'><input type='submit' value='"._T('bouton_enregistrer')."' class='fondo' /></div>";
 
 
 	$arg = intval($id_auteur);

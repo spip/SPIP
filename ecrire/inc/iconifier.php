@@ -106,7 +106,7 @@ function indiquer_logo($titre, $id_objet, $mode, $id, $script, $iframe_script) {
 				array('upload' => '<b>' . joli_repertoire($dir_ftp) . '</b>')) .
 			":</div>" .
 			"\n<select name='source' class='forml' size='1'>$afficher\n</select>" .
-			"\n<div align='" .
+			"\n<div style='text-align:" .
 			$GLOBALS['spip_lang_right'] .
 			"'><input name='sousaction2' type='submit' value='".
 			_T('bouton_choisir') .
@@ -117,7 +117,7 @@ function indiquer_logo($titre, $id_objet, $mode, $id, $script, $iframe_script) {
 		_T('info_telecharger_nouveau_logo') .
 		"<br />" .
 		"\n<input name='image' type='file' class='forml spip_xx-small' size='15' />" .
-		"<div align='" .  $GLOBALS['spip_lang_right'] . "'>" .
+		"<div style='text-align: " .  $GLOBALS['spip_lang_right'] . "'>" .
 		"\n<input name='sousaction1' type='submit' value='" .
 		_T('bouton_telecharger') .
 		"' class='fondo spip_xx-small' /></div>" .
