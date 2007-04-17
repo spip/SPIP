@@ -89,7 +89,7 @@ function exec_sites_dist()
 
 
 	echo "\n<br /><div class='centered'>";
-	echo icone(_T('icone_voir_sites_references'), generer_url_ecrire("sites_tous",""), "site-24.gif","rien.gif");
+	echo icone_inline(_T('icone_voir_sites_references'), generer_url_ecrire("sites_tous",""), "site-24.gif","rien.gif");
 	echo "</div>";
 
 	if ($id_syndic AND $flag_administrable AND ($spip_display != 4)) {
@@ -129,10 +129,9 @@ function exec_sites_dist()
 	echo "<a href='$url_site'><b>$url_affichee</b></a>";
 
 	if (strlen($descriptif) > 1) {
-		echo "<div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4; margin-top: 5px; ' class='verdana1 spip_small'>";
+		echo "<div style='text-align: left padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4; margin-top: 5px; ' class='verdana1 spip_small'>";
 		echo "<b>"._T('info_descriptif')."</b> ";
 		echo propre($descriptif);
-		echo "&nbsp; ";
 		echo "</div>";
 	}
 	echo "</td>";
@@ -140,7 +139,7 @@ function exec_sites_dist()
 	if ($flag_editable) {
 		echo "<td>". http_img_pack('rien.gif', " ", "width='5'") . "</td>\n";
 		echo "<td  align='right'>";
-		icone(_T('icone_modifier_site'), generer_url_ecrire('sites_edit',"id_syndic=$id_syndic"), "site-24.gif", "edit.gif");
+		echo icone_inline(_T('icone_modifier_site'), generer_url_ecrire('sites_edit',"id_syndic=$id_syndic"), "site-24.gif", "edit.gif");
 		echo "</td>";
 	}
 	echo "</tr></table><br />\n";
@@ -213,10 +212,9 @@ function exec_sites_dist()
 	// afficher la date de dernier acces a la syndication
 
 		if ($date_syndic)
-			echo "<div align='left'>".
-			  "<span class='verdana1 spip_small'>",  _T('info_derniere_syndication').' '.affdate_heure($date_syndic)	.".</span></div>\n";
+		  echo "<div style='text-align: left' class='verdana1 spip_small'>",  _T('info_derniere_syndication').' '.affdate_heure($date_syndic), ".</div>\n";
 
-		echo "<div align='right'>\n";
+		echo "<br /><div style='float: right'>\n";
 		echo generer_action_auteur('editer_site',
 			$id_syndic,
 			generer_url_ecrire('sites'),
@@ -226,7 +224,7 @@ function exec_sites_dist()
 			. "\" class='fondo spip_xx-small' />",
 					   " method='post'"
 					   );
-		echo "</div>\n";
+		echo "</div><br />\n";
 
 	// Options
 		if ($flag_administrable && $options=='avancees') {
@@ -234,9 +232,7 @@ function exec_sites_dist()
 			$moderation = $mod;
 			if ($moderation != 'oui') $moderation='non';
 
-		$res = '';
-
-		$res .= "<div align='".$GLOBALS['spip_lang_left']."'>".
+		$res .= "<div style='text-align: ".$GLOBALS['spip_lang_left']."'>".
 		  _T('syndic_choix_moderation')
 		. "<div style='padding-$spip_lang_left: 40px;'>"
 		. afficher_choix('moderation', $moderation,
@@ -249,8 +245,8 @@ function exec_sites_dist()
 		// Depublier les liens qui ne figurent plus ?
 
 		$res .= "\n<div>&nbsp;</div>"
-		. "\n<div align='".$GLOBALS['spip_lang_left']."'>"._T('syndic_choix_oublier'). '</div>'
-		. "\n<ul align='".$GLOBALS['spip_lang_left']."'>\n";
+		. "\n<div style='text-align:".$GLOBALS['spip_lang_left']."'>"._T('syndic_choix_oublier'). '</div>'
+		. "\n<ul style='text-align:".$GLOBALS['spip_lang_left']."'>\n";
 
 		$on = array('oui' => _T('item_oui'), 'non' => _T('item_non'));
 		if (!$miroir = $row['miroir']) $miroir = 'non';
@@ -267,7 +263,7 @@ function exec_sites_dist()
 
 		// Prendre les resumes ou le texte integral ?
 		if (!$resume = $row['resume']) $resume = 'oui';
-		$res .= "\n<div align='$spip_lang_left'>"
+		$res .= "\n<div style='text-align: $spip_lang_left'>"
 		.  _T('syndic_choix_resume') 
 		. "\n<div style='padding-$spip_lang_left: 40px;'>"
 		. afficher_choix('resume', $resume,
@@ -299,7 +295,7 @@ else if (preg_match(',^\s*select: (.*),', $url_syndic, $regs)) {
 		$res .= "<input type='hidden' name='$var' value=\"".entites_html($$var)."\" />\n";
 	}
 
-	$res .= "<div align='$spip_lang_left'>\n";
+	$res .= "<div style='text-align: $spip_lang_left'>\n";
 	$res .= "<div><input type='radio' name='syndication' value='non' id='syndication_non' checked='checked' />";
 	$res .= " <b><label for='syndication_non'>"._T('bouton_radio_non_syndication')."</label></b></div>\n";
 	$res .= "<div><input type='radio' name='syndication' value='oui' id='syndication_oui' />";
@@ -311,7 +307,7 @@ else if (preg_match(',^\s*select: (.*),', $url_syndic, $regs)) {
 	}
 	$res .= "</select>\n";
 	$res .= aide("rubsyn");
-	$res .= "<div align='$spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>\n";
+	$res .= "<div style='text-align: $spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>\n";
 	$res .= "</div>\n";
 	echo debut_cadre_relief();
 	echo redirige_action_auteur('editer_site',
@@ -339,9 +335,9 @@ fin_cadre_relief();
 // Forums
 //
 
- echo "<br /><br />\n<div align='center'>";
+ echo "<br /><br />\n<div class='centered'>";
 
- icone (_T('icone_poster_message'), generer_url_ecrire('forum_envoi', "id=$id_syndic&statut=prive&script=sites") . '#formulaire', "forum-interne-24.gif", "creer.gif");
+ echo icone (_T('icone_poster_message'), generer_url_ecrire('forum_envoi', "id=$id_syndic&statut=prive&script=sites") . '#formulaire', "forum-interne-24.gif", "creer.gif");
 
  echo "</div>\n";
 

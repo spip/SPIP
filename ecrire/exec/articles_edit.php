@@ -109,7 +109,7 @@ function articles_edit_presentation($new, $id_rubrique, $lier_trad, $id_article,
 		"\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>" .
 		"<tr>" .
 		"\n<td>" .
-		icone(_T('icone_retour'), $oups, "article-24.gif", "rien.gif", '',false) .
+		icone_inline(_T('icone_retour'), $oups, "article-24.gif", "rien.gif") .
 		"</td>\n<td>" .
 		"<img src='" .
 	  	_DIR_IMG_PACK .	"rien.gif' width='10' alt='' />" .

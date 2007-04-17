@@ -1841,7 +1841,7 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 		$statut = $row['statut'];
 		$statut = $fstatut($id, $statut, $id_rubrique, $type);
 		$href = "<a class='verdana1' href='"
-		. generer_url_ecrire($table,"$key=$id")
+		. generer_url_ecrire($type=='article' ? $table : 'breves_voir',"$key=$id")
 		. "'>"
 		. typo($row['titre'])
 		. "</a>";

@@ -270,7 +270,7 @@ function forum_envoi_entete($parent, $titre_parent, $texte, $titre_texte, $nom_s
 		.  debut_cadre_thread_forum("", true, "", typo($titre_texte))
 		. propre($texte)
 		. (!$nom_site ? '' : "<p><a href='$url_site'>$nom_site</a></p>")
-		. "\n<div align='right'><input class='fondo' type='submit' name='valider_forum' value='"
+		. "\n<div style='text-align: right'><input class='fondo' type='submit' name='valider_forum' value='"
 		. _T('bouton_envoyer_message')
 		. "' /></div>"
 		. fin_cadre_thread_forum(true)

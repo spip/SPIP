@@ -234,7 +234,7 @@ function formulaire_affiche_tous($aff_art, $aff_statut,$sel_lang)
 				    'puce-poubelle-breve.gif',
 				    _T('texte_statut_poubelle'));
 	
-	$out .= "\n<div align='$spip_lang_right'><input type='submit' class='fondo' value='"._T('bouton_changer')."' /></div>";
+	$out .= "\n<div style='text-align: $spip_lang_right'><input type='submit' class='fondo' value='"._T('bouton_changer')."' /></div>";
 	
 	
 	// GERER LE MULTILINGUISME
@@ -265,7 +265,7 @@ function formulaire_affiche_tous($aff_art, $aff_statut,$sel_lang)
 			}
 			$out .= "</select></div>\n";
 	
-			$out .= "\n<div align='$spip_lang_right'><input type='submit' class='fondo' value='"._T('bouton_changer')."' /></div>";
+			$out .= "\n<div style='text-align: $spip_lang_right'><input type='submit' class='fondo' value='"._T('bouton_changer')."' /></div>";
 		}
 	}
 
