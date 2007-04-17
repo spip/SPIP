@@ -167,7 +167,7 @@ function controle_un_forum($row) {
 	<a href='$url'>$titre</a></b>" . justifier(propre($forum_texte));
 
 	if (strlen($forum_url_site) > 10 AND strlen($forum_nom_site) > 3)
-		$suite .= "\n<div align='left' class='serif'><b><a href='$forum_url_site'>$forum_nom_site</a></b></div>";
+		$suite .= "\n<div style='text-align: left' class='serif'><b><a href='$forum_url_site'>$forum_nom_site</a></b></div>";
 
 	$controle .= safehtml($suite);
 

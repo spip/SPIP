@@ -215,7 +215,7 @@ global $ajouter_id_article, $champs_extra, $connect_statut, $descriptif, $id_gro
 			$res .= extra_saisie($extra, 'mots', $id_groupe);
 		}
 
-		$res .= "<div align='right'><input type='submit' value='"._T('bouton_enregistrer')."' class='fondo' /></div>";
+		$res .= "<div style='text-align: right'><input type='submit' value='"._T('bouton_enregistrer')."' class='fondo' /></div>";
 	
 		$res .= "</div>";
 

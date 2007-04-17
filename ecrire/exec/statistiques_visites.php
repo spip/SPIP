@@ -88,7 +88,8 @@ function exec_statistiques_visites_dist()
 
 
   $titre = $pourarticle = "";
-  $style = "class='arial1 spip_x-small' style='color: #999999'";
+  $class = " class='arial1 spip_x-small'";
+  $style = 'color: #999999';
 
 if ($id_article = intval($id_article)){
 	$result = spip_query("SELECT titre, visites, popularite FROM spip_articles WHERE statut='publie' AND id_article=$id_article");
@@ -121,7 +122,7 @@ if ($origine) {
 
 	debut_gauche();
 	debut_boite_info();
-	echo "<p align='left' style='font-size:small;' class='verdana1'>"._T('info_gauche_statistiques_referers')."</p>";
+	echo "<p style='text-align: left' style='font-size:small;' class='verdana1'>"._T('info_gauche_statistiques_referers')."</p>";
 	fin_boite_info();
 	
 	debut_droite();
@@ -420,11 +421,11 @@ if ($GLOBALS['accepte_svg']) {
 	}
 } else {
 	
-	echo "<table cellpadding='0' cellspacing='0' border='0'><tr>",
-	  "<td ".http_style_background("fond-stats.gif").">";
-	echo "<table cellpadding='0' cellspacing='0' border='0'><tr>";
+	echo "\n<table cellpadding='0' cellspacing='0' border='0'><tr>",
+	  "\n<td ".http_style_background("fond-stats.gif").">";
+	echo "\n<table cellpadding='0' cellspacing='0' border='0'><tr>";
 	
-	echo "<td style='background-color: black'>", http_img_rien(1,200), "</td>";
+	echo "\n<td style='background-color: black'>", http_img_rien(1,200), "</td>";
 	
 	$test_agreg = $decal = $jour_prec = $val_prec = $total_loc =0;
 
@@ -461,7 +462,7 @@ if ($GLOBALS['accepte_svg']) {
 						$moyenne = $moyenne / count($tab_moyenne);
 		
 						$hauteur_moyenne = round(($moyenne) * $rapport) - 1;
-						echo "<td valign='bottom' width='$largeur'>";
+						echo "\n<td valign='bottom' style='width: ${largeur}px'>";
 						$difference = ($hauteur_moyenne) -1;
 						$moyenne = round($moyenne,2); // Pour affichage harmonieux
 						$tagtitle= attribut_html(supprimer_tags("$jour | "
@@ -491,7 +492,7 @@ if ($GLOBALS['accepte_svg']) {
 				$hauteur_moyenne = round($moyenne * $rapport) - 1;
 				$hauteur = round($value * $rapport) - 1;
 				$moyenne = round($moyenne,2); // Pour affichage harmonieux
-				echo "<td valign='bottom' width='$largeur'>";
+				echo "\n<td valign='bottom'  style='width: ${largeur}px'>";
 	
 				$tagtitle= attribut_html(supprimer_tags("$jour | "
 				._T('info_visites')." ".$value));
@@ -535,7 +536,7 @@ if ($GLOBALS['accepte_svg']) {
 			// Dernier jour
 			$hauteur = round($visites_today * $rapport)	- 1;
 			$total_absolu = $total_absolu + $visites_today;
-			echo "<td valign='bottom' width='$largeur'>";
+			echo "\n<td valign='bottom'  style='width: ${largeur}px'>";
 			// prevision de visites jusqu'a minuit
 			// basee sur la moyenne (site) ou popularite (article)
 			if (! $id_article) $val_popularite = $moyenne;
@@ -557,45 +558,45 @@ if ($GLOBALS['accepte_svg']) {
 			echo "</td>";
 
 
-			echo "<td style='background-color: black'>",http_img_rien(1, 1),"</td>";
+			echo "\n<td style='background-color: black'>",http_img_rien(1, 1),"</td>";
 			echo "</tr></table>";
 			echo "</td>",
-			  "<td ".http_style_background("fond-stats.gif")."  valign='bottom'>", http_img_rien(3, 1, 'toile_noire'),"</td>";
-			echo "<td>", http_img_rien(5, 1),"</td>";
-			echo "<td valign='top'><div style='font-size:small;' class='verdana1'>";
-			echo "<table cellpadding='0' cellspacing='0' border='0'>";
-			echo "<tr><td height='15' valign='top'>";		
+			  "\n<td ".http_style_background("fond-stats.gif")."  valign='bottom'>", http_img_rien(3, 1, 'toile_noire'),"</td>";
+			echo "\n<td>", http_img_rien(5, 1),"</td>";
+			echo "\n<td valign='top'><div style='font-size:small;' class='verdana1'>";
+			echo "\n<table cellpadding='0' cellspacing='0' border='0'>";
+			echo "\n<tr><td style='height: 15' valign='top'>";		
 			echo "<span class='arial1 spip_x-small'><b>".round($maxgraph)."</b></span>";
 			echo "</td></tr>";
-			echo "<tr><td height='25' valign='middle' $style>";		
+			echo "\n<tr><td valign='middle' $class style='$style;height: 25px'>";		
 			echo round(7*($maxgraph/8));
 			echo "</td></tr>";
-			echo "<tr><td height='25' valign='middle'>";		
+			echo "\n<tr><td style='height: 25px' valign='middle'>";		
 			echo "<span class='arial1 spip_x-small'>".round(3*($maxgraph/4))."</span>";
 			echo "</td></tr>";
-			echo "<tr><td height='25' valign='middle' $style>";		
+			echo "\n<tr><td valign='middle' $class style='$style;height: 25px'>";		
 			echo round(5*($maxgraph/8));
 			echo "</td></tr>";
-			echo "<tr><td height='25' valign='middle'>";		
+			echo "\n<tr><td style='height: 25px' valign='middle'>";		
 			echo "<span class='arial1 spip_x-small'><b>".round($maxgraph/2)."</b></span>";
 			echo "</td></tr>";
-			echo "<tr><td height='25' valign='middle' $style>";		
+			echo "\n<tr><td valign='middle' $class style='$style;height: 25px'>";		
 			echo round(3*($maxgraph/8));
 			echo "</td></tr>";
-			echo "<tr><td height='25' valign='middle'>";		
+			echo "\n<tr><td style='height: 25px' valign='middle'>";		
 			echo "<span class='arial1 spip_x-small'>".round($maxgraph/4)."</span>";
 			echo "</td></tr>";
-			echo "<tr><td height='25' valign='middle' $style>";		
+			echo "\n<tr><td valign='middle' $class style='$style;height: 25px'>";		
 			echo round(1*($maxgraph/8));
 			echo "</td></tr>";
-			echo "<tr><td height='10' valign='bottom'>";		
+			echo "\n<tr><td style='height: 10px' valign='bottom'>";		
 			echo "<span class='arial1 spip_x-small'><b>0</b></span>";
 			echo "</td>";
 			echo "</tr></table>";
 			echo "</div></td>";
 			echo "</tr></table>";
 			
-			echo "<div style='position: relative; height: 15px;'>";
+			echo "<div style='position: relative; height: 15px'>";
 			$gauche_prec = -50;
 			for ($jour = $date_debut; $jour <= $date_today; $jour = $jour + (24*3600)) {
 				$ce_jour = date("d", $jour);
@@ -623,14 +624,14 @@ if ($GLOBALS['accepte_svg']) {
 
 		echo "<span class='arial1 spip_x-small'>"._T('texte_statistiques_visites')."</span>";
 		echo "<br /><table cellpadding='0' cellspacing='0' border='0' width='100%'><tr style='width:100%;'>";
-		echo "<td valign='top' style='width: 33%; ' class='verdana1'>", _T('info_maximum')." ".$max, "<br />"._T('info_moyenne')." ".round($moyenne), "</td>";
-		echo "<td valign='top' style='width: 33%; ' class='verdana1'>";
+		echo "\n<td valign='top' style='width: 33%; ' class='verdana1'>", _T('info_maximum')." ".$max, "<br />"._T('info_moyenne')." ".round($moyenne), "</td>";
+		echo "\n<td valign='top' style='width: 33%; ' class='verdana1'>";
 		echo '<a href="' . generer_url_ecrire("statistiques_referers","").'" title="'._T('titre_liens_entrants').'">'._T('info_aujourdhui').'</a> '.$visites_today;
 		if ($val_prec > 0) echo '<br /><a href="' . generer_url_ecrire("statistiques_referers","jour=veille").'"  title="'._T('titre_liens_entrants').'">'._T('info_hier').'</a> '.$val_prec;
 		if ($id_article) echo "<br />"._T('info_popularite_5').' '.$val_popularite;
 
 		echo "</td>";
-		echo "<td valign='top' style='width: 33%; ' class='verdana1'>";
+		echo "\n<td valign='top' style='width: 33%; ' class='verdana1'>";
 		echo "<b>"._T('info_total')." ".$total_absolu."</b>";
 		
 		if ($id_article) {
@@ -651,7 +652,6 @@ if ($GLOBALS['accepte_svg']) {
 		echo "<br />";
 		echo "<span class='verdana1 spip_small'><b>"._T('info_visites_par_mois')."</b></span>";
 
-		echo "<div align='left'>";
 		///////// Affichage par mois
 		$result=spip_query("SELECT FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%Y-%m') AS date_unix, SUM(visites) AS total_visites  FROM $table WHERE $where AND date > DATE_SUB(NOW(),INTERVAL 2700 DAY) GROUP BY date_unix ORDER BY date");
 
@@ -682,11 +682,10 @@ if ($GLOBALS['accepte_svg']) {
 			if ($largeur > 50) $largeur = 50;
 		}
 		
-		echo "<table cellpadding='0' cellspacing='0' border='0'><tr>",
-		  "<td ".http_style_background("fond-stats.gif").">";
-		echo "<table cellpadding='0' cellspacing='0' border='0'><tr>";
-		echo "<td class='toile_noire'>", http_img_rien(1, 200),"</td>";
-	
+		echo "\n<table cellpadding='0' cellspacing='0' border='0'><tr>",
+		  "\n<td ".http_style_background("fond-stats.gif").">";
+		echo "\n<table cellpadding='0' cellspacing='0' border='0'><tr>";
+		echo "\n<td class='toile_noire'>", http_img_rien(1, 200),"</td>";
 		// Presentation graphique
 		$decal = 0;
 		$tab_moyenne = "";
@@ -709,7 +708,7 @@ if ($GLOBALS['accepte_svg']) {
 			
 			$hauteur_moyenne = round($moyenne * $rapport) - 1;
 			$hauteur = round($value * $rapport) - 1;
-			echo "<td valign='bottom' width='$largeur'>";
+			echo "\n<td valign='bottom'  style='width: ${largeur}px'>";
 
 			$tagtitle= attribut_html(supprimer_tags("$mois | "
 			._T('info_visites')." ".$value));
@@ -754,44 +753,43 @@ if ($GLOBALS['accepte_svg']) {
 			echo "</td>\n";
 		}
 		
-		echo "<td style='background-color: black'>", http_img_rien(1, 1),"</td>";
+		echo "\n<td style='background-color: black'>", http_img_rien(1, 1),"</td>";
 		echo "</tr></table>";
 		echo "</td>",
-		  "<td ".http_style_background("fond-stats.gif")." valign='bottom'>", http_img_rien(3, 1, 'toile_noire'),"</td>";
-		echo "<td>", http_img_rien(5, 1),"</td>";
-		echo "<td valign='top'><div style='font-size:small;' class='verdana1'>";
-		echo "<table cellpadding='0' cellspacing='0' border='0'>";
-		echo "<tr><td height='15' valign='top'>";		
+		  "\n<td ".http_style_background("fond-stats.gif")." valign='bottom'>", http_img_rien(3, 1, 'toile_noire'),"</td>";
+		echo "\n<td>", http_img_rien(5, 1),"</td>";
+		echo "\n<td valign='top'><div style='font-size:small;' class='verdana1'>";
+		echo "\n<table cellpadding='0' cellspacing='0' border='0'>";
+		echo "\n<tr><td style='height: 15' valign='top'>";		
 		echo "<span class='arial1 spip_x-small'><b>".round($maxgraph)."</b></span>";
 		echo "</td></tr>";
-		echo "<tr><td height='25' valign='middle' $style>";		
+		echo "\n<tr><td valign='middle' $class style='$style;height: 25px'>";		
 		echo round(7*($maxgraph/8));
 		echo "</td></tr>";
-		echo "<tr><td height='25' valign='middle'>";		
+		echo "\n<tr><td style='height: 25px' valign='middle'>";		
 		echo "<span class='arial1 spip_x-small'>".round(3*($maxgraph/4))."</span>";
 		echo "</td></tr>";
-		echo "<tr><td height='25' valign='middle' $style>";		
+		echo "\n<tr><td valign='middle' $class style='$style;height: 25px'>";		
 		echo round(5*($maxgraph/8));
 		echo "</td></tr>";
-		echo "<tr><td height='25' valign='middle'>";		
+		echo "\n<tr><td style='height: 25px' valign='middle'>";		
 		echo "<span class='arial1 spip_x-small'><b>".round($maxgraph/2)."</b></span>";
 		echo "</td></tr>";
-		echo "<tr><td height='25' valign='middle' $style>";		
+		echo "\n<tr><td valign='middle' $class style='$style;height: 25px'>";		
 		echo round(3*($maxgraph/8));
 		echo "</td></tr>";
-		echo "<tr><td height='25' valign='middle'>";		
+		echo "\n<tr><td style='height: 25px' valign='middle'>";		
 		echo "<span class='arial1 spip_x-small'>".round($maxgraph/4)."</span>";
 		echo "</td></tr>";
-		echo "<tr><td height='25' valign='middle' $style>";		
+		echo "\n<tr><td valign='middle' $class style='$style;height: 25px'>";		
 		echo round(1*($maxgraph/8));
 		echo "</td></tr>";
-		echo "<tr><td height='10' valign='bottom'>";		
+		echo "\n<tr><td style='height: 10px' valign='bottom'>";		
 		echo "<span class='arial1 spip_x-small'><b>0</b></span>";
 		echo "</td>";
 
 		echo "</tr></table>";
 		echo "</div></td></tr></table>";
-		echo "</div>";
 	}
 	
 	/////
@@ -805,14 +803,12 @@ if ($GLOBALS['accepte_svg']) {
 	} else {
 		$lien = 'oui'; $alter = 'SVG';
 	}
-	echo "\n<div align='".$GLOBALS['spip_lang_right']."' style='font-size:x-small;' class='verdana1'>
+	echo "\n<div style='text-align:".$GLOBALS['spip_lang_right'] . "; font-size:x-small;' class='verdana1'>
 	<a href='".
 	parametre_url(self(), 'var_svg', $lien)."'>$alter</a> | <a href='".
 	parametre_url(self(), 'format', 'csv')."'>CSV</a>".
 	"</div>\n";
-
 }
-
 
 
 //

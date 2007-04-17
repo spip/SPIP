@@ -194,9 +194,9 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $che
 	global $connect_id_auteur ;
 
 	if ($cherche_auteur) {
-		echo "\n<div align='left'><div class='cadre-info'>"
+		echo "\n<div style='text-align: left' class='cadre-info'>"
 		. http_auteurs_ressemblants($cherche_auteur , $id_message)
-		. "\n</div></div>";
+		. "\n</div>";
 	  }
 
 	//

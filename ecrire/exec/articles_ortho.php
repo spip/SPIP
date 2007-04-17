@@ -192,7 +192,7 @@ if ($soustitre) {
 }
 
 if ($descriptif OR $url_site OR $nom_site) {
-	echo "<div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;'  dir='$lang_dir'>";
+	echo "<div style='text-align: $spip_lang_left; padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;'  dir='$lang_dir'>";
 	$t = ($descriptif) ? "{{"._T('info_descriptif')."}} $descriptif\n\n" : '';
 	$t .= ($nom_site.$url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
 	echo "<span class='verdana1 spip_small'>", $t, "</span>";
