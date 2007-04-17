@@ -678,7 +678,7 @@ function _chemin($dir_path=NULL){
 				array_unshift($path_full, ($d[0] == '/' ? '' : _DIR_RACINE) . $d . '/');
 		
 	}
-	if ($dir_path==NULL) return $path_full;
+	if ($dir_path===NULL) return $path_full;
 
 	if (strlen($dir_path)){
 		if ($dir_path{0}!='/')
