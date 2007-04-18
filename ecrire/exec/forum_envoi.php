@@ -215,10 +215,7 @@ function forum_envoi_formulaire($id, $retour, $statut, $texte, $titre_page, $nom
 
 	return "\n<table border='0' cellpadding='0' cellspacing='0' width='100%'><tr><td>"
 	  . icone(_T('icone_retour'), $retour, $logo, '','', false)
-	  ."</td>"
-	  ."\n<td><img src='"
-	  . _DIR_IMG_PACK
-	  . "rien.gif' style='width: 10px; border: 0px;' alt=''/></td><td style='width: 100%'>"
+	  ."</td><td style='width: 100%'>"
 	  ."<b><label for='titre_message'>"
 	  . _T('info_titre')
 	  ."</label></b><br />\n"

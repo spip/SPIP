@@ -340,9 +340,10 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 /////////////////////////
 
 	  $res .= afficher_articles(_T('info_tous_articles_presents'), array("WHERE" => "statut='publie' AND id_rubrique='$id_rubrique'", 'ORDER BY' => "date DESC"));
-
+	  
 	if (autoriser('creerarticledans','rubrique',$id_rubrique)){
-	  $res .= icone(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.gif", "creer.gif", $spip_lang_right, 'non');
+	  $res .=  "<div style='float:$spip_lang_right'>" .
+	    icone_inline(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.gif", "creer.gif", $spip_lang_right, 'non') . "</div><br class='nettoyeur' />";
 	}
 
 //// Les breves
@@ -351,7 +352,8 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 
 
 	if (autoriser('creerbrevedans','rubrique',$id_rubrique,NULL,array('id_parent'=>$id_parent))){
-	  $res .= icone(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","id_rubrique=$id_rubrique&new=oui"), "breve-24.gif", "creer.gif",$spip_lang_right, 'non');
+	  $res .=  "<div style='float:$spip_lang_right'>" .
+	    icone_inline(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","id_rubrique=$id_rubrique&new=oui"), "breve-24.gif", "creer.gif",$spip_lang_right, 'non') . "</div><br class='nettoyeur' />";
 	}
 
 //// Les sites references
@@ -362,7 +364,9 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 
 		if ($id_rubrique > 0
 		AND (autoriser('creersitedans','rubrique',$id_rubrique))) {
-			$res .= icone(_T('info_sites_referencer'), generer_url_ecrire('sites_edit', "id_rubrique=$id_rubrique"), "site-24.gif", "creer.gif",$spip_lang_right, 'non');
+			$res .= "<div style='float:$spip_lang_right'>" .
+icone_inline(_T('info_sites_referencer'), generer_url_ecrire('sites_edit', "id_rubrique=$id_rubrique"), "site-24.gif", "creer.gif",$spip_lang_right, 'non')
+			  . "</div><br class='nettoyeur' />";
 		}
 	}
 	return $res;

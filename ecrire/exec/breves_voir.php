@@ -134,8 +134,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	echo "</td>";
 
 	if ($flag_editable) {
-		echo "<td>", http_img_pack("rien.gif", ' ', "width='5'") ."</td>\n";
-		echo "<td  align='right'>";
+		echo "<td >";
 		echo icone(
 			// TODO -- _L("Fil a travaille sur cette breve il y a x minutes")
 			!$modif ? _T('icone_modifier_breve')
@@ -240,7 +239,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	echo "<br /><br />";
 	
 	echo "\n<div class='centered'>";
-	echo icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=prive&id=$id_breve&script=breves_voir") . '#formulaire',
+	echo icone_inline(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=prive&id=$id_breve&script=breves_voir") . '#formulaire',
 	     "forum-interne-24.gif", "creer.gif");
 	echo "</div>";
 	
