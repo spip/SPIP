@@ -1388,38 +1388,22 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 	global $spip_display, $spip_lang_left ;
 
 	$res = "<td>";
-	
-	if ($onglet != $onglet_ref) {
-		$res .= "\n<div style='position: relative;'>";
-		if ($spip_display != 1) {
-			if (strlen($icone) > 0) {
-				$res .= "\n<div style='z-index: 2; position: absolute; top: 0px; $spip_lang_left: 5px;'>" .
-				  http_img_pack("$icone", "", "") . "</div>";
-				$style = " top: 7px; padding-$spip_lang_left: 32px; z-index: 1;";
-			} else {
-				$style = " top: 7px;";
-			}
+	$res .= "\n<div style='position: relative;'>";
+	if ($spip_display != 1) {
+		if (strlen($icone) > 0) {
+			$res .= "\n<div style='z-index: 2; position: absolute; top: 0px; $spip_lang_left: 5px;'>" .
+			  http_img_pack("$icone", "", "") . "</div>";
+			$style = " top: 7px; padding-$spip_lang_left: 32px; z-index: 1;";
+		} else {
+			$style = " top: 7px;";
 		}
-		
+	}
+
+	if ($onglet != $onglet_ref) {
 		$res .= "\n<div onmouseover=\"changeclass(this, 'onglet_on');\" onmouseout=\"changeclass(this, 'onglet');\" class='onglet' style='position: relative;$style'><a href='$lien'>$texte</a></div>";
-		
-		
 		$res .= "</div>";
 	} else {
-		$res .= "\n<div style='position: relative;'>";
-		if ($spip_display != 1) {
-			if (strlen($icone) > 0) {
-				$res .= "\n<div style='z-index: 2; position: absolute; top: 0px; $spip_lang_left: 5px;'>" .
-				  http_img_pack("$icone", "", "") . "</div>";
-				$style = " top: 7px; padding-$spip_lang_left: 32px; z-index: 1;";
-			} else {
-				$style = " top: 7px;";
-			}
-		}
-		
 		$res .= "\n<div class='onglet_off' style='position: relative;$style'>$texte</div>";
-		
-		
 		$res .= "</div>";
 	}
 	$res .= "</td>";
