@@ -16,6 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // apres sa modification par appel du script action/configurer 
 // redirigeant ici.
 
+// http://doc.spip.org/@exec_configurer_dist
 function exec_configurer_dist()
 {
 	$configuration = charger_fonction(_request('configuration'), 'configuration');

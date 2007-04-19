@@ -20,6 +20,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/lang');
 include_spip('inc/config');
 
+// http://doc.spip.org/@action_configurer_dist
 function action_configurer_dist() {
 	
 	$securiser_action = charger_fonction('securiser_action', 'inc');
