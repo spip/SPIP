@@ -204,7 +204,7 @@ if ($options == "avancees") {
 
 	echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 	echo "\n<tr><td class='verdana2'>";
-	echo "<blockquote><i>"._T('info_hebergeur_desactiver_envoi_email')."</i></blockquote>";
+	echo "<blockquote><p><i>"._T('info_hebergeur_desactiver_envoi_email')."</i></p></blockquote>";
 	echo "</td></tr></table>";
 
 	debut_cadre_relief("", false, "", _T('info_envoi_forum'));
@@ -247,11 +247,11 @@ if ($options == "avancees") {
 			else $style = "display: none;";			
 			echo "<div id='config-edito' style='$style'>";
 			echo "<div style='text-align: center;'><input type='text' name='adresse_suivi' value='$adresse_suivi' size='30' class='fondl' /></div>";
-			echo "<blockquote class='spip'>";
+			echo "<blockquote class='spip'><p>";
 			if (!$adresse_suivi) $adresse_suivi = "mailing@monsite.net";
 			echo _T('info_config_suivi', array('adresse_suivi' => $adresse_suivi));
 			echo "<br />\n<input type='text' name='adresse_suivi_inscription' value='$adresse_suivi_inscription' size='50' class='fondl' />";
-			echo "</blockquote>";
+			echo "</p></blockquote>";
 			echo "</div>";
 
 		echo "<br />\n";

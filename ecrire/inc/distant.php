@@ -175,15 +175,15 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false,
 		} else {
 			// Fin des entetes envoyees par SPIP
 			if($get == 'POST') {
-				fputs($f, $content_type);
-				fputs($f, 'Content-Length: '.strlen($postdata)."\r\n");
-				fputs($f, "\r\n".$postdata);
+				@fputs($f, $content_type);
+				@fputs($f, 'Content-Length: '.strlen($postdata)."\r\n");
+				@fputs($f, "\r\n".$postdata);
 			} else {
-				fputs($f,"\r\n");
+				@fputs($f,"\r\n");
 			}
 
 			// Reponse du serveur distant
-			$s = trim(fgets($f, 16384));
+			$s = @trim(fgets($f, 16384));
 			if (preg_match(',^HTTP/[0-9]+\.[0-9]+ ([0-9]+),', $s, $r)) {
 				$status = $r[1];
 			}

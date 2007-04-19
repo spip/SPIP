@@ -137,6 +137,8 @@ function configuration_bloc_votre_site($bouton = true){
 //
 // http://doc.spip.org/@configuration_bloc_les_articles
 function configuration_bloc_les_articles(){
+	global $spip_lang_left, $spip_lang_right;
+
 	debut_cadre_trait_couleur("article-24.gif", false, "", _T('titre_les_articles'));
 	//
 	// Champs optionnels des articles
@@ -262,6 +264,7 @@ function configuration_bloc_les_articles(){
 //
 // http://doc.spip.org/@configuration_bloc_les_breves
 function configuration_bloc_les_breves(){
+	global $spip_lang_left, $spip_lang_right;
 	debut_cadre_trait_couleur("breve-24.gif", false, "", _T('titre_breves').aide ("confbreves"));
 
 	$activer_breves = $GLOBALS['meta']["activer_breves"];
@@ -291,6 +294,7 @@ function configuration_bloc_les_breves(){
 //
 // http://doc.spip.org/@configuration_bloc_mots_cles
 function configuration_bloc_mots_cles(){
+	global $spip_lang_left, $spip_lang_right;
 	debut_cadre_trait_couleur("mot-cle-24.gif", false, "", _T('info_mots_cles'));
 
 	$articles_mots = $GLOBALS['meta']["articles_mots"];
@@ -370,7 +374,9 @@ function configuration_bloc_mots_cles(){
 // Actives/desactiver systeme de syndication
 //
 // http://doc.spip.org/@configuration_bloc_syndication
+
 function configuration_bloc_syndication(){
+	global $spip_lang_left, $spip_lang_right;
 	debut_cadre_trait_couleur("site-24.gif", false, "", _T('titre_referencement_sites').aide ("reference"));
 	
 	$activer_sites = $GLOBALS['meta']['activer_sites'];
@@ -433,7 +439,7 @@ function configuration_bloc_syndication(){
 	echo "<div id='config-syndic' style='$style'>";
 		
 	// Moderation par defaut des sites syndiques
-	echo "<hr /><p align='$spip_lang_left'>";
+	echo "<hr /><p style='text-align: $spip_lang_left'>";
 	echo _T('texte_liens_sites_syndiques')."</p>";
 
 	echo afficher_choix('moderation_sites', $moderation_sites,
@@ -444,9 +450,9 @@ function configuration_bloc_syndication(){
 
 	$activer_moteur = $GLOBALS['meta']["activer_moteur"];
 	if ($activer_moteur == "oui") {
-		echo "<hr /><p align='$spip_lang_left'>";
+		echo "<hr /><p style='text-align: $spip_lang_left'>";
 		echo _T('texte_utilisation_moteur_syndiques')." ";
-		echo "</p><blockquote><i>"._T('texte_utilisation_moteur_syndiques_2')."</i></blockquote>";
+		echo "</p><blockquote><p><i>"._T('texte_utilisation_moteur_syndiques_2')."</i></p></blockquote>";
 
 		echo afficher_choix('visiter_sites', $visiter_sites,
 			array('non' => _T('item_limiter_recherche'),
@@ -503,6 +509,7 @@ function configuration_bloc_syndication(){
 //
 // http://doc.spip.org/@configuration_bloc_documents_joints
 function configuration_bloc_documents_joints(){
+	global $spip_lang_left, $spip_lang_right;
 	debut_cadre_trait_couleur("doc-24.gif", false, "", _T('titre_documents_joints'));
 	
 	$documents_rubrique = $GLOBALS['meta']["documents_rubrique"];

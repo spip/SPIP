@@ -181,13 +181,20 @@ function appliquer_modifs_config() {
 	if (preg_match(',:\*\*\*\*@,', $http_proxy))
 		$http_proxy = $GLOBALS['meta']['http_proxy'];
 
+	spip_log("$http_proxy '$tester_proxy' '$test_proxy'");
+
 	$retour_proxy = '';
 	if ($tester_proxy) {
 		if (!$test_proxy) {
 			$retour_proxy = _T('info_adresse_non_indiquee');
 		} else {
-			include_spip('inc/distant');
-			$page = recuperer_page($test_proxy, true);
+			include_spip('inc/minipres');
+			if (strncmp("http://", $http_proxy,7)!=0)
+			  $page = '';
+			else {
+			  include_spip('inc/distant');
+			  $page = recuperer_page($test_proxy, true);
+			}
 			if ($page)
 				$retour_proxy = "<p>"._T('info_proxy_ok')."</p>\n<tt>".couper(entites_html($page),300)."</tt>";
 			else

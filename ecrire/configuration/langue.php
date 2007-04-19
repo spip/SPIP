@@ -17,9 +17,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 
 include_spip('inc/lang');
+include_spip('inc/presentation');
 
-// http://doc.spip.org/@inc_configurer_langue_dist
-function inc_configurer_langue_dist()
+function configuration_langue_dist()
 {
  $l_site = $GLOBALS['meta']['langue_site'];
  $langue_site = traduire_nom_langue($l_site);
@@ -31,13 +31,13 @@ function inc_configurer_langue_dist()
 		$res .= "<option value='$l'>".traduire_nom_langue($l)."</option>\n";
  }
 
- $res = ajax_action_post('configurer_langue',
-			 '',
+ $res = ajax_action_post('configurer',
+			 'langue',
 			 'config_lang',
 			 '',
 			 _T('info_langue_principale') .
 			 " : <select name='changer_langue_site' class='fondl'>\n$res</select>\n",
-			 _T('bouton_valider'),
+			 '',
 			 " class='fondo'");
 
  $res =  debut_cadre_couleur("langues-24.gif", true, "", _T('info_langue_principale') . "&nbsp;:&nbsp;" . $langue_site) .
@@ -45,6 +45,6 @@ function inc_configurer_langue_dist()
 	  $res .
 	   fin_cadre_couleur(true);
 
- return ajax_action_greffe("configurer_langue-0", $res);
+ return ajax_action_greffe("configurer-langue", $res);
 }
 ?>

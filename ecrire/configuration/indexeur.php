@@ -13,11 +13,25 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
+include_spip('inc/config');
 
-// http://doc.spip.org/@exec_configurer_langue_dist
-function exec_configurer_langue_dist()
+function configuration_indexeur_dist()
 {
-	$configurer_langue = charger_fonction('configurer_langue', 'inc');
-	ajax_retour($configurer_langue());
+	global $spip_lang_right;
+
+	$res = "<div class='verdana2'>"
+	.  _T('info_question_utilisation_moteur_recherche')
+	.  "</div>"
+	.  "<div class='verdana2'>"
+	.  afficher_choix('activer_moteur', $GLOBALS['meta']["activer_moteur"],
+		array('oui' => _T('item_utiliser_moteur_recherche'),
+			'non' => _T('item_non_utiliser_moteur_recherche')), ' &nbsp; ')
+	  .  "</div>";
+
+	return ajax_action_greffe("configurer-indexeur", 
+	  debut_cadre_trait_couleur("racine-site-24.gif", true, "", _T('info_moteur_recherche').aide ("confmoteur"))
+	.  ajax_action_post('configurer', 'indexeur', 'config_fonctions', '', $res)
+	.  fin_cadre_trait_couleur(true)
+	.  "<br />");
 }
 ?>

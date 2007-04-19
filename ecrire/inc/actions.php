@@ -101,47 +101,58 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 	}
 }
 
-
+// Comme ci-dessus, mais reduit au cas POST et on fournit le bouton Submit.
+// 
 // http://doc.spip.org/@ajax_action_post
-function ajax_action_post($action, $arg, $retour, $gra, $corps, $clic, $atts_bouton, $atts_span = "", $args_ajax='')
+function ajax_action_post($action, $arg, $retour, $gra, $corps, $clic='', $atts_i='', $atts_span = "", $args_ajax='')
 {
-	if (strpos($gra,"#")===FALSE)
-		$ancre = "$action-" . intval($arg);
-	else {
+	global $spip_lang_right;
+
+	if (strpos($gra,"#")===FALSE) {
+	  // A etudier: prendre systematiquement arg en trancodant les \W
+		$n = intval($arg);
+		$ancre = "$action-" . ($n ? $n : $arg);
+	} else {
 		$ancre = explode("#",$gra);
 		$args = $ancre[0];
 		$ancre = $ancre[1];
 	}
 
-	if (_SPIP_AJAX !== 1) {
-	  return redirige_action_auteur($action, $arg, $retour,
-					($gra . '#' . $ancre),
-				      ("<div>"
-				       . $corps 
-				       . "<span"
-				       . $atts_span
-				       . "><input type='submit' class='fondo' value='"
-				       . $clic
-				       ."' $atts_bouton/></span></div>"),
-				      "\nmethod='post'");
-  } else { 
+	if (!$atts_i) 
+		$atts_i = " class='fondo' style='float: $spip_lang_right'";
 
-	if ($gra AND !$args_ajax) $args_ajax = "&$gra";
+	if (is_array($clic)) {
+		$submit = "";
+		$atts_i .= "\nonclick='AjaxNamedSubmit(this)'";
+		foreach($clic as $n => $c)
+		  $submit .= "\n<input type='submit' name='$n' value='$c' $atts_i />";
+	} else {
+		if (!$clic)  $clic =  _T('bouton_valider');
+		$submit = "\n<input type='submit' value='$clic' $atts_i />";
+	}
 	$corps = "<div>"
 	  . $corps 
 	  . "<span"
 	  . $atts_span
-	  . "><input type='submit' value='"
-	  . $clic
-	  . "' $atts_bouton/></span></div>";
+	  . ">"
+	  . $submit
+	  . "</span></div>";
 
-	return redirige_action_auteur($action,
-				      $arg,
-				      $action,
-				"var_ajaxcharset=utf-8&script=$retour$args_ajax",
-				      $corps ,
-				      " method='post' onsubmit="
-				      . ajax_action_declencheur('this', $ancre));
+	if (_SPIP_AJAX !== 1) {
+	  return redirige_action_auteur($action, $arg, $retour,
+					($gra . '#' . $ancre),
+				        $corps ,
+					"\nmethod='post'");
+	} else { 
+
+		if ($gra AND !$args_ajax) $args_ajax = "&$gra";
+
+		return redirige_action_auteur($action,
+			$arg,
+			$action,
+			"var_ajaxcharset=utf-8&script=$retour$args_ajax",
+			$corps ,
+			" method='post' onsubmit=" . ajax_action_declencheur('this', $ancre));
 	}
 
 }

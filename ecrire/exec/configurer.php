@@ -12,12 +12,13 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@action_configurer_charset_dist
-function action_configurer_charset_dist() {
-	
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
-	include_spip('inc/config');
-	appliquer_modifs_config();
+// reaffichage du formulaire d'une option de configuration 
+// apres sa modification par appel du script action/configurer 
+// redirigeant ici.
+
+function exec_configurer_dist()
+{
+	$configuration = charger_fonction(_request('configuration'), 'configuration');
+	ajax_retour($configuration());
 }
 ?>
