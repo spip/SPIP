@@ -405,6 +405,8 @@ ecrire/charsets/iso-8859-9.php -text
 ecrire/charsets/mathml.php -text
 ecrire/charsets/translit.php -text
 ecrire/charsets/translitcomplexe.php -text
+ecrire/configuration/administrateurs.php -text
+ecrire/configuration/annonces.php -text
 ecrire/configuration/avertisseur.php -text
 ecrire/configuration/compteur.php -text
 ecrire/configuration/correcteur.php -text
@@ -412,12 +414,15 @@ ecrire/configuration/index.php -text
 ecrire/configuration/indexeur.php -text
 ecrire/configuration/langue.php -text
 ecrire/configuration/locuteur.php -text
+ecrire/configuration/participants.php -text
 ecrire/configuration/previsualiseur.php -text
+ecrire/configuration/redacteurs.php -text
 ecrire/configuration/reducteur.php -text
 ecrire/configuration/referenceur.php -text
 ecrire/configuration/relayeur.php -text
 ecrire/configuration/transcodeur.php -text
 ecrire/configuration/versionneur.php -text
+ecrire/configuration/visiteurs.php -text
 ecrire/exec/accueil.php -text
 ecrire/exec/admin_effacer.php -text
 ecrire/exec/admin_plugin.php -text
