@@ -22,7 +22,7 @@ function premiers_pas_pas_2_dist(){
 	global $connect_id_auteur;
 		
 	$texte = "";
-	echo premiers_pas_etapes(2,_L("Commencer &agrave; construire votre site SPIP"),$texte);
+	return premiers_pas_etapes(2,_L("Commencer &agrave; construire votre site SPIP"),$texte);
 }
 
 function premiers_pas_pas_2_milieu_dist(){
@@ -30,10 +30,10 @@ function premiers_pas_pas_2_milieu_dist(){
 	//
 	// Afficher les options de config
 	//
-	echo "<p>";
-	echo _L("Pour commencer &agrave; construire votre site Internet, voulez vous que SPIP cr&eacute;e un premier exemple de contenus ?");
-	echo "</p>";
-	echo afficher_choix('creer_contenu', 'oui',
+	return "<p>"
+	. _L("Pour commencer &agrave; construire votre site Internet, voulez vous que SPIP cr&eacute;e un premier exemple de contenus ?")
+	. "</p>"
+	. afficher_choix('creer_contenu', 'oui',
 		array('oui' => _L("Oui, je veux que SPIP cr&eacute;e un exemple de contenus"),
 		'non' => _L('Non merci, je vais cr&eacute;er moi-m&ecirc;me mes contenus')));
 

@@ -29,7 +29,7 @@ function premiers_pas_pas_1_dist(){
 	$texte .= _L("Vous venez d'installer SPIP.<br/> Prenons quelques instants pour le configurer ensemble avant de commencer &agrave; l'utiliser.");
 	$texte .= "</p>";
 	
-	echo premiers_pas_etapes(1,_L("F&eacute;licitations $nom !"),$texte);
+	return premiers_pas_etapes(1,_L("F&eacute;licitations $nom !"),$texte);
 }
 
 function premiers_pas_pas_1_gauche_dist(){
@@ -43,11 +43,11 @@ function premiers_pas_pas_1_gauche_dist(){
 }
 
 function premiers_pas_pas_1_milieu_dist(){
-	include_spip('exec/configuration');
+	include_spip('configuration/accueil');
 	//
 	// Afficher les options de config
 	//
-	echo configuration_bloc_votre_site(false);
+	return configuration_bloc_votre_site();
 }
 
 ?>
