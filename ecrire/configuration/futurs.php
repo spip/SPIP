@@ -15,20 +15,30 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/config');
 
-function configuration_administrateurs_dist()
+//
+// Articles post-dates
+//
+
+function configuration_futurs()
 {
-	$res .= "<div class='verdana2'>"
-	. _T('info_forum_ouvert')
-	. "<br />\n"
-	. afficher_choix('forum_prive_admin', $GLOBALS['meta']['forum_prive_admin'],
-		array('oui' => _T('item_activer_forum_administrateur'),
-			'non' => _T('item_desactiver_forum_administrateur')))
-	. "</div>";
+	global $spip_lang_left;
 
-	$res = debut_cadre_trait_couleur("forum-admin-24.gif", true, "", _T('titre_cadre_forum_administrateur'))
-	. ajax_action_post('configurer', 'administrateurs', 'config_contenu','',$res)
-	 . fin_cadre_trait_couleur(true);
+	$res = "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">"
+	. "<tr><td class='verdana2'>"
+	. _T('texte_publication_articles_post_dates')
+	. "</td></tr>"
 
-	return ajax_action_greffe('configurer-administrateurs', $res);
+	. "<tr><td align='$spip_lang_left' class='verdana2'>"
+	. afficher_choix('post_dates', $GLOBALS['meta']["post_dates"],
+		array('oui' => _T('item_publier_articles'),
+			'non' => _T('item_non_publier_articles')))
+	. "</td></tr>\n"
+	. "</table>\n";
+
+	$res = debut_cadre_relief("", true, "", _T('titre_publication_articles_post_dates').aide ("confdates"))
+	. ajax_action_post('configurer', 'futurs', 'configuration','',$res)
+ 	. fin_cadre_relief(true);
+
+	return ajax_action_greffe('configurer-futurs', $res);
 }
 ?>

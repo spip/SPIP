@@ -17,7 +17,7 @@ include_spip('inc/traduire');
 
 // http://doc.spip.org/@exec_lang_raccourcis_dist
 function exec_lang_raccourcis_dist() {
-	global $changer_config,  $spip_lang, $spip_lang_left;
+	global  $spip_lang_left;
 
 
 	##### a revoir : des repertoires lang, il peut y en avoir plusieurs

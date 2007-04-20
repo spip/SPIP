@@ -13,14 +13,12 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-include_spip('inc/mail');
 include_spip('inc/config');
 
 // http://doc.spip.org/@exec_config_contenu_dist
 function configuration_visiteurs_dist()
 {
-	global $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_right, $spip_lang_left,$changer_config, $envoi_now ;
-
+	global $spip_lang_left ;
 
 	if ($n = ($forums_publics<>'abo')) {
 			$n = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_articles WHERE accepter_forum='abo' LIMIT 1"));

@@ -18,7 +18,7 @@ include_spip('inc/config');
 // http://doc.spip.org/@exec_config_multilang_dist
 function exec_config_multilang_dist()
 {
-	global $connect_statut, $connect_toutes_rubriques, $spip_lang_right, $changer_config;
+	global $connect_statut, $connect_toutes_rubriques;
 
 	lire_metas();
 
