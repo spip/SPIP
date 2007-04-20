@@ -68,7 +68,9 @@ if ($prefs_mod AND !$var_auth) {
  }
 
 // compatibilite ascendante
-$GLOBALS['spip_display'] = $GLOBALS['auteur_session']['prefs']['display'];
+if (isset($GLOBALS['auteur_session']['prefs']['display'])) {
+	$GLOBALS['spip_display'] = $GLOBALS['auteur_session']['prefs']['display'];
+}
 
 // Options "avancees" pour tout le monde (en attendant de les supprimer dans le code)
 $GLOBALS['options'] = 'avancees';
