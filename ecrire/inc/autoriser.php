@@ -164,6 +164,7 @@ function autoriser_rubrique_creersitedans_dist($faire, $type, $id, $qui, $opt) {
 }
 
 // Autoriser a modifier un site
+// http://doc.spip.org/@autoriser_site_modifier_dist
 function autoriser_site_modifier_dist($faire, $type, $id, $qui, $opt) {
 	if ($qui['statut'] == '0minirezo')
 		return true;
