@@ -15,13 +15,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/config');
 
-
 //
 // Options des articles
 //
 
-function configuration_articles(){
-	global $spip_lang_left, $spip_lang_right;
+function configuration_articles_dist(){
+	global $spip_lang_left;
 
 	$articles_surtitre = $GLOBALS['meta']["articles_surtitre"];
 	$articles_soustitre = $GLOBALS['meta']["articles_soustitre"];
