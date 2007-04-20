@@ -20,8 +20,6 @@ function exec_statistiques_svg_dist()
 global
   $aff_jours,
   $connect_statut,
-  $couleur_claire,
-  $couleur_foncee,
   $id_article,
   $visites_today;
 
@@ -49,8 +47,13 @@ if ($connect_statut != '0minirezo') {
 	header("Expires: ".$expire." GMT");
 	header("Content-type: image/svg+xml");
 
+	$couleurs = charger_fonction('couleurs', 'inc');
+	$paramcss = 'ltr='
+	. $GLOBALS['spip_lang_left'] . '&'
+	. $couleurs($auteur_session['prefs']['couleur']);
+
 	echo "<"."?xml version=\"1.0\" standalone=\"no\"?>\n";
-	echo '<', '?xml-stylesheet type="text/css" href="', generer_url_public('style_svg', _SENS_ET_COULEURS, true), '" ?', ">\n";
+	echo '<', '?xml-stylesheet type="text/css" href="', generer_url_public('style_svg', $paramcss, true), '" ?', ">\n";
 	echo "<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n";
 	echo "<svg  xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"450\" height=\"310\" x=\"0\" y=\"0\">\n";
 	echo '<defs>';

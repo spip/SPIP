@@ -83,6 +83,8 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 
 	if ($spip_ecran == "large") $largeur = 974; else $largeur = 750;
 
+	$couleurs = charger_fonction('couleurs', 'inc');
+
 	$res = pipeline('body_prive',"<body class='$rubrique $sous_rubrique'"
 			. ($GLOBALS['spip_lang_rtl'] ? " dir='rtl'" : "")
 			.'>')
@@ -150,7 +152,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 		// Choix de la couleur
 		$res .= "</div></li>"
 		. "<li id='bandeau_couleur4' class='bandeau_couleur'><div class='menu-item'>"
-		. choix_couleur()
+		. $couleurs()
 		. "</div></li>";
 
 		// choix de la langue
@@ -183,31 +185,6 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 	. "</div>\n";
 
 	if ($options != "avancees") $res .= "<div style='height: 18px;'>&nbsp;</div>";
-	return $res;
-}
-
-// Choix dynamique de la couleur
-
-// http://doc.spip.org/@choix_couleur
-function choix_couleur() {
-	global $couleurs_spip;
-	$res = '';
-	if ($couleurs_spip) {
-		$evt = '
-onmouseover="changestyle(\'bandeauinterface\');"
-onfocus="changestyle(\'bandeauinterface\');"
-onblur="changestyle(\'bandeauinterface\');"';
-
-		foreach ($couleurs_spip as $key => $val) {
-			$res .= "<a href=\""
-			. parametre_url(self(), 'set_couleur', $key)
-			. "\"$evt>"
-			. http_img_pack("rien.gif",
-					_T('choix_couleur_interface') . $key,
-					"width='8' height='8' style='margin: 1px; background-color: "	. $val['couleur_claire'] . ";'")
-			. "</a>";
-		}
-	}
 	return $res;
 }
 

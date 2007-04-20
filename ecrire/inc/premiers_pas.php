@@ -52,7 +52,6 @@ function premiers_pas_etapes($etape,$titre,$texte){
 
 // http://doc.spip.org/@premiers_pas_barre_etapes
 function premiers_pas_barre_etapes($etape){
-	global $couleur_claire,$couleur_foncee;
 	$liste = find_all_in_path('premiers_pas/',"pas_[^.]*[.]php");
 	echo "<style type='text/css'>\n";
 	echo <<<EOF

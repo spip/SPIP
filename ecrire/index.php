@@ -10,56 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-// Placer definition des couleurs avant inc_version,
-// sinon impossible de les redefinir dans mes_options
-$GLOBALS['couleurs_spip'] = array(
-
-// Vert
-1 => array (
-		"couleur_foncee" => "#9DBA00",
-		"couleur_claire" => "#C5E41C",
-		"couleur_lien" => "#657701",
-		"couleur_lien_off" => "#A6C113"
-		),
-// Violet clair
-2 => array (
-		"couleur_foncee" => "#eb68b3",
-		"couleur_claire" => "#ffa9e6",
-		"couleur_lien" => "#8F004D",
-		"couleur_lien_off" => "#BE6B97"
-		),
-// Orange
-3 => array (
-		"couleur_foncee" => "#fa9a00",
-		"couleur_claire" => "#ffc000",
-		"couleur_lien" => "#FF5B00",
-		"couleur_lien_off" => "#B49280"
-		),
-// Saumon
-4 => array (
-		"couleur_foncee" => "#CDA261",
-		"couleur_claire" => "#FFDDAA",
-		"couleur_lien" => "#AA6A09",
-		"couleur_lien_off" => "#B79562"
-		),
-//  Bleu pastel
-5 => array (
-		"couleur_foncee" => "#5da7c5",
-		"couleur_claire" => "#97d2e1",
-		"couleur_lien" => "#116587",
-		"couleur_lien_off" => "#81B7CD"
-		),
-//  Gris
-6 => array (
-		"couleur_foncee" => "#85909A",
-		"couleur_claire" => "#C0CAD4",
-		"couleur_lien" => "#3B5063",
-		"couleur_lien_off" => "#6D8499"
-		),
-);
-
-
 if (!defined('_ECRIRE_INC_VERSION')) {
 	include 'inc_version.php';
 }
@@ -103,29 +53,25 @@ if (autoriser_sans_cookie($exec)) {
 // Preferences de presentation
 //
 
-
-if (!isset($GLOBALS['auteur_session']['prefs']))
-	$prefs = array('couleur' =>1, 'display'=>0);
-else $prefs = ($GLOBALS['auteur_session']['prefs']);
-
 $prefs_mod = false;
 
 if (isset($_GET['set_couleur'])) {
-	$prefs['couleur'] = floor($_GET['set_couleur']);
+	$GLOBALS['auteur_session']['prefs']['couleur'] = floor($_GET['set_couleur']);
 	$prefs_mod = true;
 }
 if (isset($_GET['set_disp'])) {
-	$prefs['display'] = floor($_GET['set_disp']);
+	$GLOBALS['auteur_session']['prefs']['display'] = floor($_GET['set_disp']);
 	$prefs_mod = true;
 }
+if ($prefs_mod AND !$var_auth) {
+	spip_query("UPDATE spip_auteurs SET prefs = " . _q(serialize($GLOBALS['auteur_session']['prefs'])) . " WHERE id_auteur = " .intval($GLOBALS['auteur_session']['id_auteur']));
+ }
+
 // compatibilite ascendante
-$GLOBALS['spip_display'] = $prefs['display'];
+$GLOBALS['spip_display'] = $GLOBALS['auteur_session']['prefs']['display'];
 
 // Options "avancees" pour tout le monde (en attendant de les supprimer dans le code)
 $GLOBALS['options'] = 'avancees';
-
-if ($prefs_mod AND !$var_auth)
-	spip_query("UPDATE spip_auteurs SET prefs = " . _q(serialize($prefs)) . " WHERE id_auteur = " .intval($GLOBALS['auteur_session']['id_auteur']));
 
 if (isset($_GET['set_ecran'])) {
 	// Poser un cookie,
@@ -134,11 +80,6 @@ if (isset($_GET['set_ecran'])) {
 	spip_setcookie('spip_ecran', $GLOBALS['spip_ecran'], time() + 365 * 24 * 3600);
  } else $GLOBALS['spip_ecran'] = isset($_COOKIE['spip_ecran']) ? $_COOKIE['spip_ecran'] : "etroit";
 
-if (!isset($GLOBALS['couleurs_spip'][$prefs['couleur']]))
-    $prefs['couleur'] = 1;
-
-$GLOBALS['auteur_session']['prefs'] = $prefs;
-$prefs = $GLOBALS['couleurs_spip'][$prefs['couleur']];
 
 // charger l'affichage minimal et initialiser a la langue par defaut
 include_spip('inc/minipres');
@@ -162,14 +103,6 @@ if (isset($_COOKIE['spip_lang_ecrire'])) {
 }
 
 utiliser_langue_visiteur(); 
-
-// parametres pour les feuilles de style calculees (cf commencer_page et svg)
-define('_SENS_ET_COULEURS', "couleur_claire=" .
-	substr($prefs['couleur_claire'],1).
-       '&couleur_foncee=' .
-	substr($prefs['couleur_foncee'],1) .
-       '&ltr=' . 
-       $GLOBALS['spip_lang_left']);
 
 define('_TRANCHES', 10);
 
