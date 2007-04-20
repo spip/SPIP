@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function enregistre_modif_plugin(){
 	include_spip('inc/plugin');
   // recuperer les plugins dans l'ordre des $_POST
-  $test = array();
+	$test = array();
 	foreach(liste_plugin_files() as $file){
 	  $test['s'.substr(md5("statusplug_$file"),0,16)] = $file;
 	}
@@ -30,8 +30,8 @@ function enregistre_modif_plugin(){
 		if (isset($test[$choix])&&$val=='O')
 			$plugin[]=$test[$choix];
 	}
-	global $connect_id_auteur, $connect_login;
-	spip_log("Changement des plugins actifs par auteur id=$connect_id_auteur :".implode(',',$plugin));
+
+	spip_log("Changement des plugins actifs par l'auteur " . $GLOBALS['auteur_session']['id_auteur']);
 	ecrire_plugin_actifs($plugin);
 	ecrire_metas();
 }
@@ -43,12 +43,6 @@ function action_activer_plugins_dist() {
 	$arg = $securiser_action();
 
 	enregistre_modif_plugin();
-	
-	if ($redirect = _request('redirect')){
-		include_spip('inc/headers');
-		$redirect = str_replace('&amp;','&',$redirect);
-		redirige_par_entete($redirect);
-	}
 }
 
 ?>

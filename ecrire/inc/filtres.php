@@ -1577,20 +1577,6 @@ function valeur_numerique($expr) {
 	return intval($a);
 }
 
-// Si on fait un formulaire qui GET ou POST des donnees sur un lien
-// comprenant des arguments, il faut remettre ces valeurs dans des champs
-// hidden ; cette fonction calcule les hidden en question
-// http://doc.spip.org/@form_hidden
-function form_hidden($action) {
-	$hidden = '';
-	if (false !== ($p = strpos($action, '?')))
-		foreach(preg_split('/&(amp;)?/S',substr($action,$p+1)) as $c) {
-			$hidden .= "\n<input name='" .
-				entites_html(rawurldecode(str_replace('=', "' value='", $c))) .
-				"' type='hidden' />";
-	}
-	return $hidden;
-}
 
 // http://doc.spip.org/@calcul_bornes_pagination
 function calcul_bornes_pagination($courante, $nombre, $max = 10) {

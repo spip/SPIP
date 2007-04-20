@@ -253,4 +253,20 @@ function generer_url_post_ecrire($script, $args='', $name='', $ancre='', $onchan
 	return "\n<form action='$action$ancre'$name method='post'$onchange>"
 	.form_hidden($action);
 }
+
+// Si on fait un formulaire qui GET ou POST des donnees sur un lien
+// comprenant des arguments, il faut remettre ces valeurs dans des champs
+// hidden ; cette fonction calcule les hidden en question
+// http://doc.spip.org/@form_hidden
+function form_hidden($action) {
+	spip_log("form_hidden utiliser generer_post_ecrire ou generer_post_ecrire");
+	$hidden = '';
+	if (false !== ($p = strpos($action, '?')))
+		foreach(preg_split('/&(amp;)?/S',substr($action,$p+1)) as $c) {
+			$hidden .= "\n<input name='" .
+				entites_html(rawurldecode(str_replace('=', "' value='", $c))) .
+				"' type='hidden' />";
+	}
+	return $hidden;
+}
 ?>
