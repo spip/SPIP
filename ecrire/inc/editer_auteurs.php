@@ -113,16 +113,14 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 			: bouton_block_invisible("auteurs$type")))
 	. $titre_boite;
 
-	$res = '<div><div>&nbsp;</div>' // pour placer le gif patienteur
-	. debut_cadre_enfonce("auteur-24.gif", true, "", $bouton)
+	$res = debut_cadre_enfonce("auteur-24.gif", true, "", $bouton)
 	. $reponse
 	.  ($flag === 'ajax' ?
 		debut_block_visible("auteurs$type") :
 		debut_block_invisible("auteurs$type"))
 	. $res
 	. fin_block()
-	. fin_cadre_enfonce(true)
-        . '</div>';
+	. fin_cadre_enfonce(true);
 
 	return ajax_action_greffe("editer_auteurs-$id", $res);
 }

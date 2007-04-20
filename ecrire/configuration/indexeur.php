@@ -28,10 +28,10 @@ function configuration_indexeur_dist()
 			'non' => _T('item_non_utiliser_moteur_recherche')), ' &nbsp; ')
 	  .  "</div>";
 
-	return ajax_action_greffe("configurer-indexeur", 
-	  debut_cadre_trait_couleur("racine-site-24.gif", true, "", _T('info_moteur_recherche').aide ("confmoteur"))
+	$res = debut_cadre_trait_couleur("racine-site-24.gif", true, "", _T('info_moteur_recherche').aide ("confmoteur"))
 	.  ajax_action_post('configurer', 'indexeur', 'config_fonctions', '', $res)
-	.  fin_cadre_trait_couleur(true)
-	.  "<br />");
+	.  fin_cadre_trait_couleur(true);
+
+	return ajax_action_greffe("configurer-indexeur", $res);
 }
 ?>

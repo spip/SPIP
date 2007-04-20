@@ -90,8 +90,7 @@ function inc_editer_mot_dist($objet, $id_objet, $cherche_mot, $select_groupe, $f
 
 	$bouton .= _T('titre_mots_cles').aide ("artmots");
 
-	$res =  '<div>&nbsp;</div>' // place pour l'animation pendant Ajax
-	. debut_cadre_enfonce("mot-cle-24.gif", true, "", $bouton)
+	$res = debut_cadre_enfonce("mot-cle-24.gif", true, "", $bouton)
 	  . $reponse
 	  . $form
 	  . fin_cadre_enfonce(true);

@@ -735,11 +735,8 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 	}
 	$texte .=  '<b>' . $titre_table  . '</b>';
 
-	$icone = "article-24.gif";
-
-	$res =  "\n<div style='height: 12px;'></div>"
-	. "\n<div class='liste'>"
-	. bandeau_titre_boite2($texte, $icone, 'toile_blanche', 'ligne_noire')
+	$res = "\n<div class='liste'>"
+	. bandeau_titre_boite2($texte, "article-24.gif", 'toile_blanche', 'ligne_noire')
 	. (($cpt <= $nb_aff) ? ''
 	   : afficher_tranches_requete($cpt, $tmp_var, generer_url_ecrire('memoriser', "hash=$hash&trad=$trad"), $nb_aff))
 	. afficher_liste_debut_tableau()

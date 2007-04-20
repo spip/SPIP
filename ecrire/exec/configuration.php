@@ -62,7 +62,6 @@ function exec_configuration_dist(){
 
 	$accueil = charger_fonction('accueil', 'configuration');
 	echo $accueil();
-	echo "<p>&nbsp;</p>";
 
 	echo debut_cadre_trait_couleur("article-24.gif", true, "", _T('titre_les_articles'));
 	$articles = charger_fonction('articles', 'configuration');
@@ -70,19 +69,15 @@ function exec_configuration_dist(){
 	$futurs = charger_fonction('futurs', 'configuration');
 	echo $futurs();
 	echo fin_cadre_trait_couleur(true);
-	echo "<br />\n";
 
 	$breves = charger_fonction('breves', 'configuration');
 	echo $breves();
-	echo "<br />\n";
 
 	$mots = charger_fonction('mots', 'configuration');
 	echo $mots();
-	echo "<br />\n";
 
 	$syndications = charger_fonction('syndications', 'configuration');
 	echo $syndications();
-	echo "<br />\n";
 
 	$documents = charger_fonction('documents', 'configuration');
 	echo $documents();
