@@ -44,10 +44,10 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 
 	// Qui ? auteur_session ?
 	if ($qui === NULL)
-		$qui = $GLOBALS['auteur_session'];
-	elseif (!is_array($qui)) {
+		$qui = $GLOBALS['auteur_session']; // "" si pas connecte
+	elseif (is_int($qui)) {
 		$qui = spip_fetch_array(spip_query(
-		"SELECT * FROM spip_auteurs WHERE id_auteur=".$qui));
+		"SELECT * FROM spip_auteurs WHERE id_auteur=$qui"));
 	}
 
 	// Admins restreints, les verifier ici (pas generique mais...)
