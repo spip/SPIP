@@ -18,7 +18,7 @@ function exec_referencer_traduction_dist()
 	$id_article = intval(_request('id_article'));
 
 	if (!autoriser('modifier','article',$id_article)) {
-		include_spip('inc/minipres');
+
 		echo minipres();
 		exit;
 	}

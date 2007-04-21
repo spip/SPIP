@@ -66,7 +66,7 @@ function exec_breves_edit_dist()
 			$extra = $row['extra'];
 			$onfocus = '';
 		} else {
-			include_spip('minipres');
+
 			echo minipres();
 			exit;
 		}

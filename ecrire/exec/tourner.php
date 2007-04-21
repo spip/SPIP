@@ -22,7 +22,7 @@ function exec_tourner_dist()
 	if (!($type == 'article' 
 		? autoriser('modifier','article',$id)
 		: autoriser('publierdans','rubrique',$id))) {
-		include_spip('inc/minipres');
+
 		echo minipres();
 		exit;
 	}

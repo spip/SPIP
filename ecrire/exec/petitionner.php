@@ -19,7 +19,7 @@ function exec_petitionner_dist()
 	$id_article = intval($id_article);
 
 	if (!autoriser('modifier','article',$id_article)) {
-		include_spip('inc/minipres');
+
 		echo minipres();
 		exit;
 	}

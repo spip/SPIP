@@ -41,7 +41,7 @@ function exec_documenter_dist()
 		}
 	}
 	if (!$editable) {
-		include_spip('inc/minipres');
+
 		echo minipres();
 		exit;
 	}
