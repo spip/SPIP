@@ -613,13 +613,13 @@ function puce_statut_breve($id, $statut, $id_rubrique, $type) {
 	if (!is_numeric($id_rubrique)) return $inser_puce;
 	
 	$type2 = "statutdecal$type$id";
-	$action = "\nonmouseover=\"montrer('$type2');\"";
+	$action = "onmouseover=\"montrer('$type2');\"";
 
 	return	"<span class='puce_breve' id='$type1' dir='$lang_dir'>"
 		. "<span class='puce_breve_fixe' $action>"
 		. $inser_puce
 		. "</span>"
-		. "<span class='puce_breve_popup' id='$type2'\nonmouseout=\"cacher('$type2');\" style=' margin-left: -".((9*$clip)+1)."px;'>\n"
+		. "<span class='puce_breve_popup' id='$type2'\nonmouseout=\"cacher('$type2');\" style='margin-left: -".((9*$clip)+1)."px;'>\n"
 		. afficher_script_statut($id, $type, -1, $puces[0], 'prop',_T('texte_statut_propose_evaluation'), $action)
 		. afficher_script_statut($id, $type, -10, $puces[1], 'publie',_T('texte_statut_publie'), $action)
 	  	. afficher_script_statut($id, $type, -19, $puces[2], 'refuse',_T('texte_statut_refuse'), $action)
@@ -629,13 +629,10 @@ function puce_statut_breve($id, $statut, $id_rubrique, $type) {
 // http://doc.spip.org/@afficher_script_statut
 function afficher_script_statut($id, $type, $n, $img, $statut, $title, $act)
 {
-  return http_href_img("javascript:selec_statut('$id', '$type', $n, '" .
-		      http_wrapper($img) .
-		      "', '" .
-		       generer_action_auteur("instituer_$type","$id-$statut") .
-		      "');",
-		       $img,'', '', $title,'','',
-		      $act);
+  $i = http_wrapper($img);
+  $h = generer_action_auteur("instituer_$type","$id-$statut");
+  return http_href("javascript:selec_statut('$id', '$type', $n, '$i', '$h');",
+		   "<img src='$i' alt=' ' />", $title,'','', $act);
 }
 
 //
