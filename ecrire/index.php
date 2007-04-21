@@ -72,9 +72,6 @@ if (isset($GLOBALS['auteur_session']['prefs']['display'])) {
 	$GLOBALS['spip_display'] = $GLOBALS['auteur_session']['prefs']['display'];
 }
 
-// Options "avancees" pour tout le monde (en attendant de les supprimer dans le code)
-$GLOBALS['options'] = 'avancees';
-
 if (isset($_GET['set_ecran'])) {
 	// Poser un cookie,
 	// car ce reglage depend plus du navigateur que de l'utilisateur

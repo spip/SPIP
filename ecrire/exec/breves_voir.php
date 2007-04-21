@@ -20,7 +20,7 @@ include_spip("inc/indexation");
 // http://doc.spip.org/@afficher_breves_voir
 function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 {
-	global $champs_extra, $options, $connect_statut, $les_notes,$spip_display;
+	global $champs_extra, $connect_statut, $les_notes,$spip_display;
 	$result = spip_query("SELECT * FROM spip_breves WHERE id_breve='$id_breve'");
 
 	if ($row = spip_fetch_array($result)) {
@@ -147,7 +147,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	}
 	echo "</tr></table>\n";
 
-	if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
+	if ($flag_editable AND ($statut == 'publie')) {
 	
 		if ($statut == 'publie') {	
 	

@@ -21,7 +21,7 @@ define('_SPIP_SELECT_MAX_AUTEURS', 100); // au-dessus: saisie + return
 
 // http://doc.spip.org/@inc_editer_auteurs_dist
 function inc_editer_auteurs_dist($type, $id, $flag, $cherche_auteur, $ids, $titre_boite = NULL, $script_edit_objet = NULL) {
-	global $options;
+
 	$arg_ajax = "&id_{$type}=$id";
 	if ($script_edit_objet===NULL) $script_edit_objet = $type.'s';
 	if ($titre_boite===NULL) 
@@ -33,7 +33,7 @@ function inc_editer_auteurs_dist($type, $id, $flag, $cherche_auteur, $ids, $titr
 	$cond_les_auteurs = "";
 	$aff_les_auteurs = afficher_auteurs_objet($type, $id, $flag, $cond_les_auteurs, $script_edit_objet, $arg_ajax);
 	
-	if ($flag AND $options == 'avancees') {
+	if ($flag) {
 		$futurs = ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit_objet, $arg_ajax);
 	} else $futurs = '';
 
@@ -46,7 +46,7 @@ function inc_editer_auteurs_dist($type, $id, $flag, $cherche_auteur, $ids, $titr
 // http://doc.spip.org/@editer_auteurs_objet
 function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_auteurs, $futurs, $statut, $titre_boite,$script_edit_objet, $arg_ajax)
 {
-	global $spip_lang_left, $spip_lang_right, $options;
+	global $spip_lang_left, $spip_lang_right;
 
 	$bouton_creer_auteur =  $GLOBALS['connect_toutes_rubriques'];
 	$clic = _T('icone_creer_auteur');
@@ -85,7 +85,7 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 //
 
 	$res = '';
-	if ($flag AND $options == 'avancees') {
+	if ($flag) {
 
 		if ($type=='article' && $bouton_creer_auteur) { // pas generique pour le moment
 
@@ -201,8 +201,7 @@ function rechercher_auteurs_objet($cherche_auteur, $ids, $type, $id, $script_edi
 // http://doc.spip.org/@afficher_auteurs_objet
 function afficher_auteurs_objet($type, $id, $flag_editable, $cond_les_auteurs, $script_edit, $arg_ajax)
 {
-	global $connect_statut, $options,$connect_id_auteur, $spip_display;
-	
+	global $connect_statut, $connect_id_auteur, $spip_display;
 	
 	$les_auteurs = array();
 	if (!preg_match(',^[a-z]*$,',$type)) return $les_auteurs; 
@@ -236,7 +235,7 @@ function afficher_auteurs_objet($type, $id, $flag_editable, $cond_les_auteurs, $
 		$id_auteur = $row['id_auteur'];
 		$vals = $formater_auteur($id_auteur);
 
-		if ($flag_editable AND ($connect_id_auteur != $id_auteur OR $connect_statut == '0minirezo') AND $options == 'avancees') {
+		if ($flag_editable AND ($connect_id_auteur != $id_auteur OR $connect_statut == '0minirezo')) {
 			$vals[] =  ajax_action_auteur('editer_auteurs', "$id,$type,-$id_auteur", $script_edit, "id_{$type}=$id", array(_T('lien_retirer_auteur')."&nbsp;". http_img_pack('croix-rouge.gif', "X", " class='puce' style='vertical-align: bottom;'")),$arg_ajax);
 		} else  $vals[] = "";
 		$table[] = $vals;

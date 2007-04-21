@@ -180,11 +180,11 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 	// <div> pour la barre des gadgets
 	// (elements invisibles qui s'ouvrent sous la barre precedente)
 
-	$res .= bandeau_gadgets($largeur, $options, $id_rubrique)
+	$res .= bandeau_gadgets($largeur, true, $id_rubrique)
 	. "</div>"
 	. "</div>\n";
 
-	if ($options != "avancees") $res .= "<div style='height: 18px;'>&nbsp;</div>";
+	$res .= "<div style='height: 18px;'>&nbsp;</div>";
 	return $res;
 }
 

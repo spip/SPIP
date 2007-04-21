@@ -79,7 +79,7 @@ function lettres_d_auteurs($query, $debut, $max_par_page, $tri)
 // http://doc.spip.org/@bandeau_auteurs
 function bandeau_auteurs($tri, $statut)
 {
-	global $options, $spip_lang_right, $connect_id_auteur,   $connect_statut,   $connect_toutes_rubriques;
+	global $connect_id_auteur,   $connect_statut,   $connect_toutes_rubriques;
 
 	if ($tri=='nom') $s = ' (' . _T('info_par_nom') . ')';
 	elseif ($tri=='statut') $s = ' (' . _T('info_par_statut') . ')';
@@ -140,7 +140,7 @@ function bandeau_auteurs($tri, $statut)
 // http://doc.spip.org/@auteurs_tranches
 function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_page, $nombre_auteurs)
 {
-	global $options, $spip_lang_right;
+	global $spip_lang_right;
 
 	$res ="\n<tr style='background-color: #dbe1c5'>"
 	. "\n<td style='width: 20px'>";
@@ -189,7 +189,7 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 		}
 		$res .= "</td></tr>\n";
 
-		if ($tri == 'nom' AND $options == 'avancees') {
+		if ($tri == 'nom') {
 			$res .= "\n<tr style='background-color: white'><td class='arial11' colspan='5'>";
 			foreach ($lettre as $key => $val) {
 				if ($val == $debut)
@@ -285,7 +285,6 @@ default:
 }
 
 
-
 //
 // La requete de base est tres sympa
 //
@@ -296,7 +295,6 @@ default:
 
 // http://doc.spip.org/@afficher_n_auteurs
 function afficher_n_auteurs($auteurs) {
-	global $connect_statut, $options;
 
 	$res = '';
 	$formater_auteur = charger_fonction('formater_auteur', 'inc');

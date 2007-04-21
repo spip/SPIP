@@ -307,20 +307,16 @@ function editer_article_extra($extra, $id_secteur, $config, $aider)
 // http://doc.spip.org/@articles_edit_config
 function articles_edit_config($row)
 {
-	global $champs_extra, $spip_ecran, $options, $spip_lang, $spip_display;
+	global $champs_extra, $spip_ecran, $spip_lang, $spip_display;
 
 	$config = $GLOBALS['meta'];
 	$config['lignes'] = ($spip_ecran == "large")? 8 : 5;
 	$config['afficher_barre'] = $spip_display != 4;
 	$config['langue'] = $spip_lang;
-	
-
-	if ($options != 'avancees') {
-		$config['articles_surtitre'] = 'non';
-		$config['articles_descriptif'] = "non";
-		$config['articles_urlref'] = "non";
-		$config['articles_ps'] = "non";
-	}
+	$config['articles_surtitre'] = 'non';
+	$config['articles_descriptif'] = "non";
+	$config['articles_urlref'] = "non";
+	$config['articles_ps'] = "non";
 
 	if ($champs_extra) {
 		include_spip('inc/extra');

@@ -17,7 +17,7 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_admin_tech_dist
 function exec_admin_tech_dist()
 {
-  global $connect_statut, $connect_toutes_rubriques, $flag_gz, $options;
+  global $connect_statut, $connect_toutes_rubriques, $flag_gz;
 
  $commencer_page = charger_fonction('commencer_page', 'inc');
  echo $commencer_page(_T('titre_admin_tech'), "configuration", "base");
@@ -174,7 +174,7 @@ else {
 // Lien vers la reparation
 //
 
-if ($options == "avancees" AND 	$connect_toutes_rubriques) {
+if ($connect_toutes_rubriques) {
 	$res = spip_mysql_version();
 	if ($res >= '3.23.14') {
 		$res = "\n<p style='text-align: justify;'>".

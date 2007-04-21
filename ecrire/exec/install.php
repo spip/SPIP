@@ -30,7 +30,8 @@ function exec_install_dist()
 	// sont les langues disponibles pour l'installation
 	@unlink(_FILE_META);
 	unset($GLOBALS['meta']);
-	init_langues(); // pourquoi faut-il l'appeler encore une fois ?
+	include_spip('inc/lang'); // contient du code en ligne
+	init_langues();
 
 	include_spip('base/create');
 	include_spip('base/db_mysql');
