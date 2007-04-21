@@ -38,8 +38,8 @@ function inc_instituer_article_dist($id_article, $statut=-1)
 	"<option"  . mySel("prepa", $statut)  ." style='background-color: white'>" ._T('texte_statut_en_cours_redaction') ."</option>\n" .
 	"<option"  . mySel("prop", $statut)  . " style='background-color: #FFF1C6'>" ._T('texte_statut_propose_evaluation') ."</option>\n" .
 	"<option"  . mySel("publie", $statut)  . " style='background-color: #B4E8C5'>" ._T('texte_statut_publie') ."</option>\n" .
-	"<option"  . mySel("poubelle", $statut) .
-	http_style_background('rayures-sup.gif')  . '>'  ._T('texte_statut_poubelle') ."</option>\n" .
+	"<option"  . mySel("poubelle", $statut)
+	. " class='danger'>"  ._T('texte_statut_poubelle') ."</option>\n" .
 	"<option"  . mySel("refuse", $statut)  . " style='background-color: #FFA4A4'>" ._T('texte_statut_refuse') ."</option>\n" .
 	"</select>" .
 	" &nbsp; " .

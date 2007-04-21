@@ -171,7 +171,6 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	if (!autoriser('joindredocument',$type,$id))
 		return "";
 
-	include_spip('inc/minipres'); // pour l'aide quand on appelle afficher_documents_colonne depuis un squelette
 	include_spip('inc/presentation'); // pour l'aide quand on appelle afficher_documents_colonne depuis un squelette
 	// seuls cas connus : article, breve ou rubrique
 	if ($script==NULL){

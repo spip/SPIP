@@ -168,7 +168,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 		. "<b>"._T('entree_breve_publiee')."</b>\n"
 		. "<select name='statut' size='1' class='fondl'>\n"
 		. "<option".mySel("prop",$statut)." style='background-color: white'>"._T('item_breve_proposee')."</option>\n"
-		. "<option".mySel("refuse",$statut). http_style_background('rayures-sup.gif'). ">"._T('item_breve_refusee')."</option>\n"
+		. "<option".mySel("refuse",$statut). " class='danger'>"._T('item_breve_refusee')."</option>\n"
 		. "<option".mySel("publie",$statut)." style='background-color: #B4E8C5'>"._T('item_breve_validee')."</option>\n"
 		. "</select>".aide ("brevesstatut")."<br />\n"
 		. fin_cadre_relief(true);
