@@ -292,8 +292,7 @@ function etat_base_accueil()
 	}
 	$res .= "<div class='verdana1'>";
 
-	$d = propre($GLOBALS['meta']["descriptif_site"]);
-	if ($d) $res .= "<div>$d</div><br />";
+	$res .= propre($GLOBALS['meta']["descriptif_site"]);
 
 	$q = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_articles GROUP BY statut HAVING cnt <>0");
   
@@ -410,7 +409,7 @@ function exec_accueil_dist()
 		echo personnel_accueil($_COOKIE['spip_admin']);
 		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
 		echo "\n<div>&nbsp;</div>";
-		$nom = propre($GLOBALS['meta']["nom_site"]);
+		$nom = typo($GLOBALS['meta']["nom_site"]);
 		if (!$nom) $nom=  _T('info_mon_site_spip');
 		echo debut_cadre_relief("racine-site-24.gif", true, "", $nom),
 		  etat_base_accueil(),
