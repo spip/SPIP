@@ -192,23 +192,15 @@ global $ajouter_id_article, $champs_extra, $connect_statut, $descriptif, $id_gro
 		$res .= determine_groupe_mots($table, $id_groupe);
 
 
-		if ($descriptif) {
-			$res .= "<b>"._T('texte_descriptif_rapide')."</b><br />";
-			$res .= "<textarea name='descriptif' class='forml' rows='4' cols='40'>";
-			$res .= $descriptif;
-			$res .= "</textarea><br />\n";
-		}
-		else
-			$res .= "<input type='hidden' name='descriptif' value=\"$descriptif\" />";
+		$res .= "<b>"._T('texte_descriptif_rapide')."</b><br />";
+		$res .= "<textarea name='descriptif' class='forml' rows='4' cols='40'>";
+		$res .= $descriptif;
+		$res .= "</textarea><br />\n";
 
-		if ($texte) {
-			$res .= "<b>"._T('info_texte_explicatif')."</b><br />";
-			$res .= "<textarea name='texte' rows='8' class='forml' cols='40'>";
-			$res .= $texte;
-			$res .= "</textarea><br />\n";
-		}
-		else
-			$res .= "<input type='hidden' name='texte' value=\"$texte\" />";
+		$res .= "<b>"._T('info_texte_explicatif')."</b><br />";
+		$res .= "<textarea name='texte' rows='8' class='forml' cols='40'>";
+		$res .= $texte;
+		$res .= "</textarea><br />";
 
 		if ($champs_extra) {
 			include_spip('inc/extra');

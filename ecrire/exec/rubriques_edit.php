@@ -136,13 +136,11 @@ function exec_rubriques_edit_dist()
 	$form .= fin_cadre_couleur(true)
 	. "<br />";
 
-	if ($descriptif) {
-		$form .= "<b>"._T('texte_descriptif_rapide')."</b><br />"
+	$form .= "<b>"._T('texte_descriptif_rapide')."</b><br />"
 		. _T('entree_contenu_rubrique')."<br />"
 		. "<textarea name='descriptif' class='forml' rows='4' cols='40'>"
 		. entites_html($descriptif)
 		. "</textarea>\n";
-	}
 
 	$form .= "<b>"._T('info_texte_explicatif')."</b>"
 	. aide ("raccourcis")
