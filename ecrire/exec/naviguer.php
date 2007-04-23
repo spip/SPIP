@@ -400,7 +400,7 @@ EOF;
 
 	$documenter = charger_fonction('documenter', 'inc');
 
-	return "<div id='portfolio'>".$documenter($id, $type, 'portfolio', $flag_editable)."</div>"
+	return "<div id='portfolio'>".$documenter($id, $type, 'portfolio', $flag_editable)."</div><br />"
 	."<div id='documents'>". $documenter($id, $type, 'documents', $flag_editable)."</div>"
 	. $res;
 }

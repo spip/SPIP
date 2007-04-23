@@ -88,7 +88,7 @@ function exec_sites_dist()
 	fin_boite_info();
 
 
-	echo "\n<br /><div class='centered'>";
+	echo "\n<br /><div class='centered' style='margin-top:10px'>";
 	echo icone_inline(_T('icone_voir_sites_references'), generer_url_ecrire("sites_tous",""), "site-24.gif","rien.gif");
 	echo "</div>";
 
@@ -137,8 +137,7 @@ function exec_sites_dist()
 	echo "</td>";
 
 	if ($flag_editable) {
-		echo "<td>". http_img_pack('rien.gif', " ", "width='5'") . "</td>\n";
-		echo "<td  align='right'>";
+		echo "<td  class='righted'><br /><br />";
 		echo icone_inline(_T('icone_modifier_site'), generer_url_ecrire('sites_edit',"id_syndic=$id_syndic"), "site-24.gif", "edit.gif");
 		echo "</td>";
 	}
