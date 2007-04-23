@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 // Donne la liste des champs/tables ou l'on sait chercher/remplacer
+// http://doc.spip.org/@liste_des_champs
 function liste_des_champs() {
 	return
 	array(
@@ -38,6 +39,7 @@ function liste_des_champs() {
 
 
 // Effectue une recherche sur toutes les tables de la base de donnees
+// http://doc.spip.org/@recherche_en_base
 function recherche_en_base($recherche='', $tables=NULL) {
 	if (!is_array($tables))
 		$tables = liste_des_champs();
@@ -88,6 +90,7 @@ function recherche_en_base($recherche='', $tables=NULL) {
 
 
 // Effectue une recherche sur toutes les tables de la base de donnees
+// http://doc.spip.org/@remplace_en_base
 function remplace_en_base($recherche='', $remplace=NULL, $tables=NULL, $callback=NULL) {
 	if (!is_array($tables))
 		$tables = liste_des_champs();
