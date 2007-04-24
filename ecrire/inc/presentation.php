@@ -654,7 +654,7 @@ function afficher_articles($titre, $requete, $formater='') {
 	if (!$cpt = $cpt['n']) return '' ;
 
 
-	$requete['FROM'] = preg_replace("/(spip_articles AS \w*)/", "\\1 LEFT JOIN spip_petitions AS petitions USING (id_article)", $requete['FROM']);
+	$requete['FROM'] = preg_replace("/(spip_articles( AS \w*)?)/", "\\1 LEFT JOIN spip_petitions AS petitions USING (id_article)", $requete['FROM']);
 
 	$requete['SELECT'] .= ", petitions.id_article AS petition ";
 
