@@ -112,7 +112,7 @@ function install_etape_5_dist()
 	echo install_debut_html();
 	$result_ok = install_bases();
 	if ($result_ok) {
-		echo "<p><b>"._T('info_base_installee')."</b></p>";
+		echo "<p class='resultat'><b>"._T('info_base_installee')."</b></p>";
 
 	if (@file_exists(_FILE_CONNECT_INS . _FILE_TMP . '.php'))
 		include(_FILE_CONNECT_INS . _FILE_TMP . '.php');
@@ -185,9 +185,10 @@ function install_etape_5_dist()
 		echo _T('alerte_maj_impossible', array('version' => $spip_version));
 	}
 	else {
-		echo "<b>"._T('avis_operation_echec')."</b> "._T('texte_operation_echec');
+		echo "<p class='resultat'><b>"._T('avis_operation_echec')."</b></p>"._T('texte_operation_echec');
 	}
 
+	echo info_progression_etape(5,'etape_','install/');
 	echo install_fin_html();
 }
 

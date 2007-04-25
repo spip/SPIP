@@ -1,0 +1,78 @@
+body { 
+	background: #F8F7F3; 
+	color: #000; 
+	font-family: Verdana,Arial,Sans,sans-serif;
+	font-size:0.9em;
+}
+h1 { 
+	color: #970038; 
+	margin:1em 0 1em 0;
+	font-family: Verdana; 
+	font-weigth: bold; 
+	font-size: 1.3em;
+}
+h2 { 
+	font-weigth: normal; 
+	font-size: 1.2em;
+	margin:0.8em 0 0.8em 0;
+}
+a { color: #E86519; text-decoration: none; }
+a:visited { color: #6E003A; }
+a:active { color: #FF9900; }
+img { border: 0; }
+p { text-align: justify; }
+ul { text-align: justify; list-style-type: none; }
+fieldset, .fieldset {
+	text-align:left;
+	border: none; 
+	padding: 0px; 
+	margin-top: 1em; 
+	font-size:0.9em;
+}
+legend { font-weight: bold; font-size:1.1em;color:#0033cc;}
+label {}
+#minipres {
+	border:2px solid #888888;
+	width: 30em;
+	text-align: center; 
+	margin: 1em auto 1em auto;
+	padding:1em;
+	background:#fff;
+}
+.petit-centre { font-family: Verdana,Arial,Sans,sans-serif; font-size: 1em; }
+.petit-centre p { text-align: center; }
+.suivant { text-align: right; display: block; margin-top: 1em; }
+.toile_foncee { background: #777; }
+.fondl { 
+	padding: 3px; background-color: #eee; border: 1px solid #333; 
+	background-position: center bottom; 
+	font-size: 0.9em;
+	font-family: Verdana,Arial,Sans,sans-serif; 
+}
+.formo { 
+	width: 100%; display: block; padding: 3px;
+	margin-bottom: 1em;
+	background-color: #FFF; 
+	border: 1px solid #333; 
+	background-position: center bottom; 
+	behavior: url(win_width.htc);
+	font-size: 1em;
+	font-family: Verdana,Arial,Sans,sans-serif; 
+}
+p.resultat { background:#000;color:#fff;padding:0.2em 0.1em;}
+#etapes { display:block;position:absolute;top:10px;left:10px;}
+#etapes span { 
+	margin-top:-0.5em;
+	display:block;
+	padding:12px 14px;
+	margin-bottom:5px;
+}
+#etapes span em{
+	font-size:2em;
+	font-weight:bold;
+}
+#etapes span span{position:absolute;top:-100px;left:-100px;} 
+#etapes span.ok {background:url(images/etape-ok.gif) center no-repeat;}
+#etapes span.encours {background:url(images/etape-encours.gif) center no-repeat;}
+#etapes span.todo {background:url(images/etape-todo.gif) center no-repeat;}
+.nettoyeur {clear:both;height:0px;line-height:0px;font-size:0px;padding:0;margin:0;}

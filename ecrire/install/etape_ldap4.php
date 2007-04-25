@@ -27,9 +27,9 @@ function install_etape_ldap4_dist()
 	$fail = (ldap_errno($ldap_link) == 32);
 
 	if ($fail) {
-		info_etape(_T('info_chemin_acces_annuaire'),
-			"<b>"._T('avis_operation_echec')."</b> "._T('avis_chemin_invalide_1')." (<tt>".htmlspecialchars($base_ldap)."</tt>) "._T('avis_chemin_invalide_2')
-		);
+		echo info_etape(_T('info_chemin_acces_annuaire')),
+			"<p class='resultat'><b>"._T('avis_operation_echec')."</b></p><p>"._T('avis_chemin_invalide_1'),
+			" (<tt>".htmlspecialchars($base_ldap)."</tt>) "._T('avis_chemin_invalide_2')."</p>";
 	}
 	else {
 		info_etape(_T('info_reglage_ldap'));
@@ -73,6 +73,7 @@ function install_etape_ldap4_dist()
 		. bouton_suivant()));
 	}
 
+	echo info_progression_etape(4,'etape_ldap','install/');
 	echo install_fin_html();
 }
 ?>

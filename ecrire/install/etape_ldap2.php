@@ -53,14 +53,15 @@ function install_etape_ldap2_dist()
 		. bouton_suivant()));
 	}
 	else {
-		echo info_etape(_T('titre_connexion_ldap'),
-			_T('avis_connexion_ldap_echec_1').
-			"<br />"._T('avis_connexion_ldap_echec_2').
+		echo info_etape(_T('titre_connexion_ldap')),
+			"<p class='resultat'>"._T('avis_connexion_ldap_echec_1')."</p>",
+			"<p>"._T('avis_connexion_ldap_echec_2').
 			"<br />\n"._T('avis_connexion_ldap_echec_3') .
-			'<br /><br />'. $erreur. '<b> ?</b>'
-		);
+			'<br /><br />'. $erreur. '<b> ?</b></p>'
+		;
 	}
 
+	echo info_progression_etape(2,'etape_ldap','install/');
 	echo install_fin_html();
 }
 

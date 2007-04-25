@@ -23,7 +23,7 @@ function install_etape_6_dist()
 		echo minipres(
 			'AUTO',
 			"<h2>"._T('info_passes_identiques')."</h2>\n".
-			"<p>"._T('avis_connexion_echec_2')."</p>"
+			"<p class='resultat'>"._T('avis_connexion_echec_2')."</p>"
 		);
 		exit;
 	}
@@ -106,6 +106,8 @@ function install_etape_6_dist()
 	echo "<form action='", generer_url_ecrire(), "' method='post'><div>";
 	echo bouton_suivant();
 	echo "</div></form>";
+
+	echo info_progression_etape(6,'etape_','install/');
 	echo install_fin_html();
 }
 

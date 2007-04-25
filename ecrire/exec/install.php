@@ -112,27 +112,8 @@ function login_hebergeur() {
 
 // http://doc.spip.org/@info_etape
 function info_etape($titre, $complement = ''){
-	$en_cours = _request('etape')?_request('etape'):"";
-	$liste = find_all_in_path('install/','etape_([0-9])+[.]php');
-	$debut = 1; $etat = "ok";
-	$last = count($liste);
-	
-	$aff_etapes = "<span id='etapes'>";
-	foreach($liste as $etape=>$fichier){
-		if ($etape=="etape_{$en_cours}.php"){
-			if ($debut<$last)
-				$etat = "encours";
-			else
-				$etat = "ok";
-		}
-		$aff_etapes .= "<span class='$etat'>".(($debut<$last)?$debut:"go")."</span>";
-		if ($etat == "encours")
-			$etat = 'todo';
-		$debut++;
-	}
-	$aff_etapes .= "<br class='nettoyeur' />&nbsp;</span>\n";
-	
-	return $aff_etapes."\n<h2>".$titre."</h2>\n" .
+	return "<h2>".$titre."</h2>\n" .
 	($complement ? "<br />".$complement."\n":'');
 }
+
 ?>
