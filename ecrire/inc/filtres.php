@@ -242,7 +242,7 @@ function corriger_entites_html($texte) {
 // http://doc.spip.org/@corriger_toutes_entites_html
 function corriger_toutes_entites_html($texte) {
 	if (strpos($texte,'&amp;') === false) return $texte;
-	return preg_replace(',&amp;(#?[a-z0-9]+;),S', '&\1', $texte);
+	return preg_replace(',&amp;(#?[a-z0-9]+;),iS', '&\1', $texte);
 }
 
 // http://doc.spip.org/@entites_html
