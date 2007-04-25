@@ -104,8 +104,8 @@ function install_bases(){
 	return $result_ok;
 }
 
-// http://doc.spip.org/@inc_install_5
-function install_etape_5_dist()
+
+function install_etape_3_dist()
 {
 	global $email, $ldap_present, $login, $nom, $pass, $spip_lang_right;
 
@@ -134,7 +134,7 @@ function install_etape_5_dist()
 
 	echo generer_post_ecrire('install', (
 
-	  "\n<input type='hidden' name='etape' value='6' />"
+	  "\n<input type='hidden' name='etape' value='4' />"
 
 	. fieldset(_T('info_identification_publique'),
 		array(
@@ -188,7 +188,7 @@ function install_etape_5_dist()
 		echo "<p class='resultat'><b>"._T('avis_operation_echec')."</b></p>"._T('texte_operation_echec');
 	}
 
-	echo info_progression_etape(5,'etape_','install/');
+	echo info_progression_etape(3,'etape_','install/');
 	echo install_fin_html();
 }
 
