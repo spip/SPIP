@@ -56,15 +56,15 @@ function exec_mots_type_dist()
 		}
 	}
 
-	pipeline('exec_init',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>''));
+	pipeline('exec_init',array('args'=>array('exec'=>'mots_type','id_groupe'=>$id_groupe),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page("&laquo; $titre &raquo;", "naviguer", "mots");
 	
 	debut_gauche();
 
-	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>''));
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_type','id_groupe'=>$id_groupe),'data'=>''));
 	creer_colonne_droite();
-	echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>''));
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_type','id_groupe'=>$id_groupe),'data'=>''));
 	debut_droite();
 
 	if ($connect_statut != "0minirezo") {
@@ -178,7 +178,7 @@ function exec_mots_type_dist()
 	.  fin_cadre_formulaire(true)
 	. "</div>";
 
-	$res .= pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>''));
+	$res .= pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_type','id_groupe'=>$id_groupe),'data'=>''));
 
 
 	echo redirige_action_auteur('instituer_groupe_mots', $id_groupe, "mots_tous", "id_groupe=$id_groupe", $res),
