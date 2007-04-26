@@ -423,7 +423,7 @@ if ($GLOBALS['accepte_svg']) {
 	
 	echo "\n<table cellpadding='0' cellspacing='0' border='0'><tr>",
 	  "\n<td ".http_style_background("fond-stats.gif").">";
-	echo "\n<table cellpadding='0' cellspacing='0' border='0'><tr>";
+	echo "\n<table cellpadding='0' cellspacing='0' border='0' class='bottom'><tr>";
 	
 	echo "\n<td style='background-color: black'>", http_img_rien(1,200), "</td>";
 	
@@ -462,7 +462,7 @@ if ($GLOBALS['accepte_svg']) {
 						$moyenne = $moyenne / count($tab_moyenne);
 		
 						$hauteur_moyenne = round(($moyenne) * $rapport) - 1;
-						echo "\n<td valign='bottom' style='width: ${largeur}px'>";
+						echo "\n<td style='width: ${largeur}px'>";
 						$difference = ($hauteur_moyenne) -1;
 						$moyenne = round($moyenne,2); // Pour affichage harmonieux
 						$tagtitle= attribut_html(supprimer_tags("$jour | "
@@ -492,7 +492,7 @@ if ($GLOBALS['accepte_svg']) {
 				$hauteur_moyenne = round($moyenne * $rapport) - 1;
 				$hauteur = round($value * $rapport) - 1;
 				$moyenne = round($moyenne,2); // Pour affichage harmonieux
-				echo "\n<td valign='bottom'  style='width: ${largeur}px'>";
+				echo "\n<td style='width: ${largeur}px'>";
 	
 				$tagtitle= attribut_html(supprimer_tags("$jour | "
 				._T('info_visites')." ".$value));
@@ -536,7 +536,7 @@ if ($GLOBALS['accepte_svg']) {
 			// Dernier jour
 			$hauteur = round($visites_today * $rapport)	- 1;
 			$total_absolu = $total_absolu + $visites_today;
-			echo "\n<td valign='bottom'  style='width: ${largeur}px'>";
+			echo "\n<td style='width: ${largeur}px'>";
 			// prevision de visites jusqu'a minuit
 			// basee sur la moyenne (site) ou popularite (article)
 			if (! $id_article) $val_popularite = $moyenne;
@@ -684,7 +684,7 @@ if ($GLOBALS['accepte_svg']) {
 		
 		echo "\n<table cellpadding='0' cellspacing='0' border='0'><tr>",
 		  "\n<td ".http_style_background("fond-stats.gif").">";
-		echo "\n<table cellpadding='0' cellspacing='0' border='0'><tr>";
+		echo "\n<table cellpadding='0' cellspacing='0' border='0' class='bottom'><tr>";
 		echo "\n<td class='toile_noire'>", http_img_rien(1, 200),"</td>";
 		// Presentation graphique
 		$decal = 0;
@@ -708,7 +708,7 @@ if ($GLOBALS['accepte_svg']) {
 			
 			$hauteur_moyenne = round($moyenne * $rapport) - 1;
 			$hauteur = round($value * $rapport) - 1;
-			echo "\n<td valign='bottom'  style='width: ${largeur}px'>";
+			echo "\n<td style='width: ${largeur}px'>";
 
 			$tagtitle= attribut_html(supprimer_tags("$mois | "
 			._T('info_visites')." ".$value));
