@@ -2233,7 +2233,9 @@ function couleur_eclaircir_si_foncee ($couleur) {
 
 // http://doc.spip.org/@printWordWrapped
 function printWordWrapped($image, $top, $left, $maxWidth, $font, $couleur, $text, $textSize, $align="left", $hauteur_ligne = 0) {
-	
+	// imageftbbox exige un float, et settype aime le double pour php < 4.2.0
+	settype($textSize, 'double');
+
 	// calculer les couleurs ici, car fonctionnement different selon TTF ou PS
 	$black = imagecolorallocatealpha($image, hexdec("0x{".substr($couleur, 0,2)."}"), hexdec("0x{".substr($couleur, 2,2)."}"), hexdec("0x{".substr($couleur, 4,2)."}"), 0);
 	$grey2 = imagecolorallocatealpha($image, hexdec("0x{".substr($couleur, 0,2)."}"), hexdec("0x{".substr($couleur, 2,2)."}"), hexdec("0x{".substr($couleur, 4,2)."}"), 127);
