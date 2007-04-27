@@ -20,17 +20,19 @@ function action_purger_dist()
 
 	include_spip('inc/invalideur');
 
+	spip_log('purger $arg');
+
 	switch ($arg) {
 
 	case 'index': 
 		include_spip('inc/indexation');
-		spip_log("purger_indx");
 		purger_index();
 		creer_liste_indexation();
 		break;
 
 	case 'cache': 
 		supprime_invalideurs();
+		@unlink(_CACHE_RUBRIQUES);
 		purger_repertoire(_DIR_CACHE);
 		break;
 
@@ -39,7 +41,6 @@ function action_purger_dist()
 		break;
 
 	case 'vignettes':
-		spip_log('vider le cache');
 		purger_repertoire(_DIR_VAR);
 		supprime_invalideurs();
 		purger_repertoire(_DIR_CACHE);

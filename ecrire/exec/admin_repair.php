@@ -21,47 +21,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 
 $GLOBALS['connect_statut'] = '0minirezo';
-
-include_spip('inc/admin');
-include_spip('inc/texte');
-
+$GLOBALS['connect_toutes_rubriques']= true;
 include_spip('base/db_mysql');
-
-// http://doc.spip.org/@verifier_base
-function verifier_base() {
-	$res1= spip_query("SHOW TABLES");
-	if (!$res1) return false;
-
-	$res = "";
-	while ($tab = spip_fetch_array($res1,SPIP_NUM)) {
-		$res .= "<p><b>".$tab[0]."</b> ";
-
-		$result_repair = spip_query("REPAIR TABLE ".$tab[0]);
-		if (!$result_repair) return false;
-
-		$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM ".$tab[0]));
-		if (!$result) return false;
-
-		$count = $result['n'];
-		if ($count>1)
-			$res .= "("._T('texte_compte_elements', array('count' => $count)).")\n";
-		else if ($count==1)
-			$res .= "("._T('texte_compte_element', array('count' => $count)).")\n";
-		else
-			$res .= "("._T('texte_vide').")\n";
-
-		$row = spip_fetch_array($result_repair,SPIP_NUM);
-		$ok = ($row[3] == 'OK');
-
-		if (!$ok)
-			$res .= "<pre><span style='color: red; font-weight: bold;'>".htmlentities(join("\n", $row))."</span></pre>\n";
-		else
-			$res .= " "._T('texte_table_ok')."<br />\n";
-
-	}
-
-	return $res;
-}
 
 // http://doc.spip.org/@exec_admin_repair_dist
 function exec_admin_repair_dist()
@@ -82,15 +43,12 @@ function exec_admin_repair_dist()
 	$action = _T('texte_tenter_reparation');
 
 	if ($ok) {
-		debut_admin("admin_repair", $action, $message);
-
-		if (! $res = verifier_base())
-			$res = "<br /><br /><span style='color: red; font-weight: bold;'><tt>"._T('avis_erreur_mysql').' '.spip_sql_errno().': '.spip_sql_error() ."</tt></span><br /><br /><br />\n";
-		fin_admin($action);
-		echo minipres(_T('texte_tentative_recuperation'), $res);
+		$admin = charger_fonction('admin', 'inc');
+		$admin('admin_repair', $action, $message);
 	}
 	else {
 	  echo minipres(_T('titre_reparation'), "<p>$message</p>");
+	  exit;
 	}
 }
 ?>

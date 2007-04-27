@@ -13,6 +13,19 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function base_upgrade_dist($titre)
+{
+	include_spip('base/create');
+	creer_base();
+	maj_base();
+
+	include_spip('inc/acces');
+	include_spip('inc/config');
+	include_spip('inc/lang');
+	ecrire_acces();
+	init_config();
+}
+
 // http://doc.spip.org/@maj_version
 function maj_version ($version, $test = true) {
 	if ($test) {

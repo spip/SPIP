@@ -68,7 +68,7 @@ function install_bases(){
 		$result_ok = !spip_sql_errno();
 	} else {
 	  // en cas de reinstall sur mise a jour mal passee
-	  spip_query("DELETE FROM spip_meta WHERE nom='debut_restauration'");
+	  spip_query("DELETE FROM spip_meta WHERE nom='import_all'");
 		$result = spip_query("SELECT COUNT(*) FROM spip_articles");
 		$result_ok = (spip_num_rows($result) > 0);
 	}

@@ -20,7 +20,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // son evolution. Si vous n'en utilisez pas, neutraliser cette ligne pour
 // gagner du temps au chargement.
 
-include(_DIR_RESTREINT . 'inc/vieilles_defs.php');
+if (is_readable($f =_DIR_RESTREINT . 'inc/vieilles_defs.php')) include $f;
 
 // charge un fichier perso ou, a defaut, standard
 // et retourne si elle existe le nom de la fonction homonyme (exec_$nom),
@@ -943,7 +943,7 @@ function generer_url_prive($script, $args="", $no_entities=false) {
 }
 
 // Pour les formulaires en methode POST,
-// mettre les arguments a la fois en input-hidden et dans le champ action:
+// mettre le nom du script a la fois en input-hidden et dans le champ action:
 // 1) on peut ainsi memoriser le signet comme si c'etait un GET
 // 2) ca suit http://en.wikipedia.org/wiki/Representational_State_Transfer
 
@@ -1040,7 +1040,7 @@ function spip_register_globals() {
 }
 
 
-// Fonction d'initialisation, appelle dans inc_version ou mes_options
+// Fonction d'initialisation, appellee dans inc_version ou mes_options
 // Elle definit les repertoires et fichiers non partageables
 // et indique dans $test_dirs ceux devant etre accessibles en ecriture
 // mais ne touche pas a cette variable si elle est deja definie
@@ -1083,7 +1083,7 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	:	(@is_readable($f = _DIR_RESTREINT . 'inc_connect.php3') ? $f
 	:	false))));
 
-	// Le fichier de connexion a la base de donnees
+	// Le fichier de reglages des droits
 	define('_FILE_CHMOD_INS', _DIR_ETC . 'chmod');
 	define('_FILE_CHMOD',
 		(@is_readable($f = _FILE_CHMOD_INS . '.php') ? $f
@@ -1113,6 +1113,7 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	define('_ACCESS_FILE_NAME', '.htaccess');
 	define('_AUTH_USER_FILE', '.htpasswd');
 	define('_SPIP_DUMP', 'dump@nom_site@@stamp@.xml');
+	define('_CACHE_RUBRIQUES', _DIR_TMP.'cache-menu-rubriques.txt');
 
 	define('_DOCTYPE_ECRIRE', 
 		// "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n");
