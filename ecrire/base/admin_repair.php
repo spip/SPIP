@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@verifier_base
+// http://doc.spip.org/@base_admin_repair_dist
 function base_admin_repair_dist() {
 	$res1= spip_query("SHOW TABLES");
 

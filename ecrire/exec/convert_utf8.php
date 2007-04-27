@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // En cas d'erreur, une page admin normale avec bouton de retour
 
+// http://doc.spip.org/@convert_utf8_non
 function convert_utf8_non($action, $message) {
 
 	echo minipres($action, ('<p>'.$message. "</p>\n<p style='text-align: right'><a href='" . generer_url_ecrire("config_lang"). "'> &gt;&gt; "._T('icone_retour')."</a>"));
