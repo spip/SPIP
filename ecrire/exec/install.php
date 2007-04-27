@@ -116,4 +116,15 @@ function info_etape($titre, $complement = ''){
 	($complement ? "<br />".$complement."\n":'');
 }
 
+// http://doc.spip.org/@bouton_suivant
+function bouton_suivant($code = '') {
+	if($code=='') $code = _T('bouton_suivant');
+	static $suivant = 0;
+	$id = 'suivant'.(($suivant>0)?strval($suivant):'');
+	$suivant +=1;
+	return "\n<span class='suivant'><input id='".$id."' type='submit' class='fondl'\nvalue=\"" .
+		$code .
+		" >>\" /></span>\n";
+}
+
 ?>
