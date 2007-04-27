@@ -35,7 +35,8 @@ function action_premiers_pas_dist() {
 	}
 	
 	ecrire_metas();
-	$redirect = generer_url_ecrire('accueil');
+	include_spip('inc/headers');
+	redirige_par_entete(generer_url_ecrire('accueil', '', true));
 }
 
 // http://doc.spip.org/@action_premiers_pas_pas_1_dist

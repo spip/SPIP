@@ -1239,7 +1239,8 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 		include_spip('inc/meta');
 		ecrire_metas();
 	}
-	$GLOBALS['langue_site'] = $GLOBALS['meta']['langue_site'];
+	// La meta est indefinie a la premiere installation
+	$GLOBALS['langue_site'] = @$GLOBALS['meta']['langue_site'];
 	
 	# nombre de pixels maxi pour calcul de la vignette avec gd
 	define('_IMG_GD_MAX_PIXELS', isset($GLOBALS['meta']['max_taille_vignettes'])?$GLOBALS['meta']['max_taille_vignettes']:0); 
