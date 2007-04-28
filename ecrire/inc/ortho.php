@@ -494,24 +494,6 @@ function panneau_ortho($ortho_result) {
 	if (!count($mauvais) && !count($bons)) return;
 	ksort($mauvais);
 
-	$panneau = "<script type='text/javascript'><!--
-	var curr_suggest = null;
-// http://doc.spip.org/@suggest
-	function suggest(id) {
-		var menu_box;
-		if (curr_suggest)
-			document.getElementById('suggest' + curr_suggest).className = 'suggest-inactif';
-		if (1 || id!=curr_suggest) {
-			document.getElementById('suggest' + id).className = 'suggest-actif';
-			curr_suggest = id;
-		}
-		else curr_suggest = null;
-		menu_box = document.getElementById('select_ortho');
-		if (menu_box.length > id) menu_box.selectedIndex = id;
-	}";
-	$panneau .= "//--></script>";
-
-	$panneau .= "<form class='form-ortho verdana2' action='' method='get'>\n";
 	$panneau .= "<select name='select_ortho' id='select_ortho' onChange='suggest(this.selectedIndex);'>\n";
 	$panneau .= "<option value='0'>... "._T('ortho_mots_a_corriger')." ...</option>\n";
 	foreach ($mauvais as $mot => $suggest) {
@@ -525,7 +507,27 @@ function panneau_ortho($ortho_result) {
 		$i++;
 	}
 	$panneau .= "</select>\n";
-	$panneau .= "</form>\n";
+
+	$script = "<script type='text/javascript'><!--
+	var curr_suggest = null;
+// http://doc.spip.org/@suggest
+	function suggest(id) {
+		var menu_box;
+		if (curr_suggest)
+			document.getElementById('suggest' + curr_suggest).className = 'suggest-inactif';
+		if (1 || id!=curr_suggest) {
+			document.getElementById('suggest' + id).className = 'suggest-actif';
+			curr_suggest = id;
+		}
+		else curr_suggest = null;
+		menu_box = document.getElementById('select_ortho');
+		if (menu_box.length > id) menu_box.selectedIndex = id;
+	}
+	//--></script>";
+
+	$panneau = $script
+	  . generer_post_ecrire('',$panneau, "class='form-ortho verdana2' method='get'"); // l'action n'est jamais executee
+
 	// Mots mal orthographies :
 	// liste des suggestions plus lien pour ajouter au dico
 	foreach ($mauvais as $mot => $suggest) {

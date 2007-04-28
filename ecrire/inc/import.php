@@ -273,13 +273,13 @@ function import_init_meta($tag, $atts, $charset, $request)
 function import_affiche_javascript($taille)
 {
 	$max_time = ini_get('max_execution_time')*1000;
+	$t = _T('info_recharger_page');
+	$t = "
+<input type='text' size='10' name='taille' value='$taille' />
+<input type='text' class='forml' name='recharge' value='$t' />";
 	echo debut_boite_alerte(),
 	  "<span style='color: black;' class='verdana1 spip_large'><b>",  _T('info_base_restauration'),  "</b></span>",
-	  "<form name='progression'><div style='text-align: center'><input type='text' size='10' name='taille' value='",
-	  $taille,
-	  "'></div><div style='text-align: center'><input type='text' class='forml' name='recharge' value='",
-	  _T('info_recharger_page'),
-	  "'></div></form>",
+	  generer_post_ecrire('', $t, " style='text-align: center' name='progression' method='get' "),
 	  fin_boite_alerte(),
 	  "<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"",
 	  self(),

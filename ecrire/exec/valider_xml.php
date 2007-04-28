@@ -60,10 +60,9 @@ function exec_valider_xml_dist()
 	echo $commencer_page($titre);
 
 	echo "<div style='margin: 10px; text-align: center'>", "<h1>", $titre, '</h1>';
-	echo "<form style='margin: 0px;' action='", generer_url_ecrire('valider_xml') . "'>";
-	echo "<div><input type='hidden' name='exec' value='valider_xml' />";
-	echo '<input type="text" size="70" value="',$url_aff,'" name="var_url" onfocus="'.$onfocus . '" />';
-	echo "</div></form>";
+	echo generer_post_ecrire('valider_xml',
+				 ('<input type="text" size="70" value="' .$url_aff .'" name="var_url" onfocus="'.$onfocus . '" />'),
+				 "method='get'");
 
 	echo  $err, "</div>";
 	echo "<div style='margin: 10px; text-align: left'>",$texte, '</div>', fin_page();
