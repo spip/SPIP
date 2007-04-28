@@ -130,11 +130,13 @@ function remplace_en_base($recherche='', $remplace=NULL, $tables=NULL, $options=
 	$preg = '/'.$recherche.'/' . $options['flags'];
 
 	foreach ($results as $table => $r) {
+		$_id_table = id_table_objet($table);
 		foreach ($r as $id => $x) {
 			if ($options['toutmodifier']
 			OR autoriser('modifier', $table, $id)) {
 				$modifs = array();
 				foreach ($x as $key => $val) {
+					if ($key == $_id_table) next;
 					$repl = preg_replace($preg, $remplace, $val);
 					if ($repl <> $val)
 						$modifs[$key] = $repl;
