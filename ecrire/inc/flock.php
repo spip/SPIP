@@ -146,7 +146,7 @@ function supprimer_fichier($fichier) {
 // subdir valant alors ce qui suit le dernier / dans $base
 //
 // http://doc.spip.org/@sous_repertoire
-function sous_repertoire($base, $subdir='', $nobase = false) {
+function sous_repertoire($base, $subdir='', $nobase = false, $tantpis=false) {
 	$base = str_replace("//", "/", $base);
 	if (preg_match(',[/_]$,', $base)) $base = substr($base,0,-1);
 	if (!strlen($subdir)) {
@@ -192,8 +192,9 @@ function sous_repertoire($base, $subdir='', $nobase = false) {
 		if (!_DIR_RESTREINT)
 			$base = preg_replace(',^' . _DIR_RACINE .',', '',$base);
 		if ($test) $base .= $subdir;
+		if ($tantpis) return '';
 		include_spip('inc/headers');
-		redirige_par_entete(generer_url_action('test_dirs',"test_dir=$base",true));
+		redirige_par_entete(generer_test_dirs($base, true));
 	}
 	spip_log("faux sous-repertoire $base${subdir}");
 	return "$baseaff${subdir}";

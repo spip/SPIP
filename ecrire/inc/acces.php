@@ -165,8 +165,8 @@ function ecrire_acces() {
 		ecrire_logins($fichier, $logins);
 		fclose($fichier);
 	} else {
-	  include_spip('inc/headers');
-	  redirige_par_entete(generer_url_action('test_dirs', '', true));
+		include_spip('inc/headers');
+		redirige_par_entete(generer_test_dirs('', true));
 	}
 
 	$result = spip_query_db("SELECT login, htpass FROM spip_auteurs WHERE statut = '0minirezo'");

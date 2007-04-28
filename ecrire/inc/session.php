@@ -66,7 +66,7 @@ function ajouter_session($auteur) {
 
 	if (!ecrire_fichier($fichier_session, $texte)) {
 		include_spip('inc/headers');
-		redirige_par_entete(generer_url_action('test_dirs','test_dir=' . _DIR_SESSIONS,true));
+		redirige_par_entete(generer_test_dirs(_DIR_SESSIONS,true));
 	} else return $spip_session;
 }
 
@@ -104,13 +104,13 @@ function verifier_session($change=false) {
 	if (!$spip_session) return false;
 
 	// Tester avec alea courant
-	$fichier_session = fichier_session($spip_session, $GLOBALS['meta']['alea_ephemere']);
-	if (@file_exists($fichier_session)) {
+	$fichier_session = fichier_session($spip_session, $GLOBALS['meta']['alea_ephemere'], true);
+	if ($fichier_session AND @file_exists($fichier_session)) {
 		include($fichier_session);
 	} else {
 		// Sinon, tester avec alea precedent
-		$fichier_session = fichier_session($spip_session, $GLOBALS['meta']['alea_ephemere_ancien']);
-		if (!@file_exists($fichier_session)) return false;
+	  $fichier_session = fichier_session($spip_session, $GLOBALS['meta']['alea_ephemere_ancien'], true);
+		if (!$fichier_session OR !@file_exists($fichier_session)) return false;
 
 		// Renouveler la session avec l'alea courant
 		include($fichier_session);
@@ -158,12 +158,13 @@ function rejouer_session()
 // Calcule le nom du fichier session
 //
 // http://doc.spip.org/@fichier_session
-function fichier_session($id_session, $alea) {
+function fichier_session($id_session, $alea, $tantpis=false) {
 	if (preg_match(",^([0-9]+_),", $id_session, $regs))
 		$id_auteur = $regs[1];
 		
 	$repertoire = _DIR_SESSIONS;
 	if(!@file_exists($repertoire)) {
+		if ($tantpis) return '';
 		$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
 		$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
 	}

@@ -17,20 +17,17 @@ function install_etape__dist()
 {
 	global $spip_lang_right;
 
+	include_spip('inc/headers');
 	$menu_langues = menu_langues('var_lang_ecrire');
 	if (!$menu_langues) {
-		include_spip('inc/headers');
-		redirige_par_entete(generer_url_action('test_dirs'));
+		redirige_par_entete(generer_test_dirs());
 	} else {
 		echo install_debut_html();
 		echo "<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n",
 			"<div class='petit-centre'><p>",info_copyright(),"</p></div>\n",
 			"<p>",_T('install_select_langue'),"</p>",
 			"<div>",$menu_langues,"</div>\n",
-			"<form action='", generer_url_action('test_dirs'),"'>\n",
-			'<input type="hidden" name="action" value="test_dirs" />',
-			bouton_suivant(),
-			"</form>";
+			generer_test_dirs(bouton_suivant());
 		echo install_fin_html();
 	}
 }

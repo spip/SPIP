@@ -93,7 +93,7 @@ function deplacer_fichier_upload($source, $dest, $move=false) {
 			fclose ($f);
 		} else {
 			include_spip('inc/headers');
-			redirige_par_entete(generer_url_action("test_dirs", "test_dir=". dirname($dest), true));
+			redirige_par_entete(generer_test_dirs(dirname($dest), true));
 		}
 		@unlink($dest);
 	}

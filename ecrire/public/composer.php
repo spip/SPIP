@@ -39,7 +39,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $sourcefile) {
 	if (function_exists($nom))
 		return $nom;
 
-	$phpfile = sous_repertoire(_DIR_SKELS) . $nom . '.php';
+	$phpfile = sous_repertoire(_DIR_SKELS,'',false,true) . $nom . '.php';
 
 	// si squelette est deja compile et perenne, le charger
 	if (!squelette_obsolete($phpfile, $sourcefile)
