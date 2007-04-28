@@ -898,10 +898,8 @@ function get_spip_script($default='') {
 		return $default;
 }
 
-
 // http://doc.spip.org/@generer_url_public
-function generer_url_public($script, $args="", $no_entities=false, $rel=false) {
-
+function generer_url_public($script='', $args="", $no_entities=false, $rel=false) {
 	// si le script est une action (spip_pass, spip_inscription),
 	// standardiser vers la nouvelle API
   	// [hack temporaire pour faire fonctionner #URL_PAGE{spip_pass} ]
@@ -961,6 +959,21 @@ function generer_form_ecrire($script, $corps, $atts='', $submit='') {
 	. (!$submit ? '' :
 	     ("<div style='text-align: $spip_lang_right'><input class='fondo' type='submit' value='$submit' /></div>"))
 	. "</div></form>\n";
+}
+
+// Attention, JS/Ajax n'aime pas le melange de param GET/POST
+// On n'applique pas la recommandation ci-dessus pour les scripts publics
+// qui ne sont pas destines a etre mis en signets 
+
+function generer_form_public($script, $corps, $atts='') {
+	return "\n<form action='" . generer_url_public() .
+	  "'" .
+	  $atts .
+	  ">\n" .
+	  "<div>" .
+  	  "\n<input type='hidden' name='action' value='$script' />" .
+	  $corps .
+	  "</div></form>";
 }
 
 // http://doc.spip.org/@generer_url_action

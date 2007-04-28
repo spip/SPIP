@@ -45,18 +45,14 @@ function securiser_action_auteur($action, $arg, $redirect="", $mode=false, $att=
 	$hash = _action_auteur("$action-$arg", $id_auteur, $pass, 'alea_ephemere');
 	$r = rawurlencode($redirect);
 	if (!is_string($mode))
-	  return generer_url_action($action, "arg=$arg&hash=$hash" . (!$r ? '' : "&redirect=$r"), $mode);
+		return generer_url_action($action, "arg=$arg&hash=$hash" . (!$r ? '' : "&redirect=$r"), $mode);
 
-	// Attention, JS n'aime pas le melange de param GET/POST
-	return "\n<form style='margin: 0px; border: 0px' action='" .
-		generer_url_public('') .
-		"'$att>\n\t<div>
-		<input name='hash' type='hidden' value='$hash' />
-		<input name='action' type='hidden' value='$action' />
-		<input name='arg' type='hidden' value='$arg' />" .
-		(!$r ? '' : "\n\t\t<input name='redirect' type='hidden' value='$r' />") .
-		$mode .
-		"\n\t</div>\n</form>\n";
+	$att .=	" style='margin: 0px; border: 0px'";
+	$mode .= (!$r ? '' : "\n\t\t<input name='redirect' type='hidden' value='$r' />") . "
+<input name='hash' type='hidden' value='$hash' />
+<input name='arg' type='hidden' value='$arg' />";
+
+	return generer_form_public($action, $mode, $att);
 }
 
 // http://doc.spip.org/@caracteriser_auteur
