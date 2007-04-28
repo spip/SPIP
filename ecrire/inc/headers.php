@@ -110,6 +110,7 @@ function envoie_image_vide() {
 	flush();
 }
 
+// http://doc.spip.org/@generer_test_dirs
 function generer_test_dirs($arg='', $redirect=false)
 {
 	if (!is_string($redirect))

@@ -965,6 +965,7 @@ function generer_form_ecrire($script, $corps, $atts='', $submit='') {
 // On n'applique pas la recommandation ci-dessus pour les scripts publics
 // qui ne sont pas destines a etre mis en signets 
 
+// http://doc.spip.org/@generer_form_public
 function generer_form_public($script, $corps, $atts='') {
 	return "\n<form action='" . generer_url_public() .
 	  "'" .
