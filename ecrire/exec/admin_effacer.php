@@ -59,7 +59,7 @@ function exec_admin_effacer_dist()
 
 	$res .= "\n<input type='hidden' name='reinstall' value='non' />";
 
-	$res = generer_post_ecrire('delete_all', $res, '', _T('bouton_effacer_tout'));
+	$res = generer_form_ecrire('delete_all', $res, '', _T('bouton_effacer_tout'));
 
 	echo "<table border='0' cellspacing='1' cellpadding='8' width='100%'>",
 		"<tr><td style='font-weight: bold; color: #FFFFFF;' class='toile_foncee verdana1 spip_medium'>",

@@ -1582,7 +1582,7 @@ function valeur_numerique($expr) {
 // d'eviter les redondances de calcul et d'ecriture qu'elle induit.
 // Elle fournit la suite de Input-Hidden correspondant aux parametres de 
 // l'URL donnee en argument. Ce besoin de ne devrait pas apparaitre,
-// utiliser plutot generer_post_ecrire.
+// utiliser plutot generer_form_ecrire.
 // http://doc.spip.org/@form_hidden
 function form_hidden($action) {
 	$hidden = '';

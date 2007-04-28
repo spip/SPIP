@@ -947,8 +947,8 @@ function generer_url_prive($script, $args="", $no_entities=false) {
 // 1) on peut ainsi memoriser le signet comme si c'etait un GET
 // 2) ca suit http://en.wikipedia.org/wiki/Representational_State_Transfer
 
-// http://doc.spip.org/@generer_post_ecrire
-function generer_post_ecrire($script, $corps, $atts='', $submit='') {
+// http://doc.spip.org/@generer_form_ecrire
+function generer_form_ecrire($script, $corps, $atts='', $submit='') {
 	global $spip_lang_right;
 
 	return "<form action='"

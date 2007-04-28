@@ -279,7 +279,7 @@ function import_affiche_javascript($taille)
 <input type='text' class='forml' name='recharge' value='$t' />";
 	echo debut_boite_alerte(),
 	  "<span style='color: black;' class='verdana1 spip_large'><b>",  _T('info_base_restauration'),  "</b></span>",
-	  generer_post_ecrire('', $t, " style='text-align: center' name='progression' method='get' "),
+	  generer_form_ecrire('', $t, " style='text-align: center' name='progression' method='get' "),
 	  fin_boite_alerte(),
 	  "<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"",
 	  self(),

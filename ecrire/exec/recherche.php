@@ -44,7 +44,7 @@ function exec_recherche_dist() {
 		$onfocus = " onfocus=\"this.value='';\"";
 	}
 
-	echo generer_post_ecrire("recherche", 
+	echo generer_form_ecrire("recherche", 
 				 ('<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" accesskey="r"' . $onfocus . ' />'),
 				 " method='get'");
 

@@ -42,7 +42,7 @@ function install_etape_ldap2_dist()
 	if ($ldap_link) {
 		echo info_etape(_T('titre_connexion_ldap'),_T('info_connexion_ldap_ok'));
 
-		echo generer_post_ecrire('install', (
+		echo generer_form_ecrire('install', (
 		  "\n<input type='hidden' name='etape' value='ldap3' />"
 		. "\n<input type='hidden' name='adresse_ldap' value=\"$adresse_ldap\" />"
 		. "\n<input type='hidden' name='port_ldap' value=\"$port_ldap\" />"

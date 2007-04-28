@@ -78,7 +78,7 @@ function install_etape_2_dist()
 		}
 	}
 
-	echo generer_post_ecrire('install', (
+	echo generer_form_ecrire('install', (
 	  "\n<input type='hidden' name='etape' value='3' />"
 	. "\n<input type='hidden' name='chmod' value='$chmod' />"
 	. "\n<input type='hidden' name='adresse_db'  value=\"$adresse_db\" />"

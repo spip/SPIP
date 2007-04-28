@@ -54,7 +54,7 @@ function install_etape_ldap4_dist()
 		$conn .= "?".">";
 		ecrire_fichier(_FILE_CONNECT_INS . _FILE_TMP . '.php', $conn);
 
-		echo generer_post_ecrire('install', (
+		echo generer_form_ecrire('install', (
 		"<input type='hidden' name='etape' value='ldap5' />"
 		
 		. fieldset(_T('info_statut_utilisateurs_1'),

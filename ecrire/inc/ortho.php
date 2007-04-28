@@ -526,7 +526,7 @@ function panneau_ortho($ortho_result) {
 	//--></script>";
 
 	$panneau = $script
-	  . generer_post_ecrire('',$panneau, "class='form-ortho verdana2' method='get'"); // l'action n'est jamais executee
+	  . generer_form_ecrire('',$panneau, "class='form-ortho verdana2' method='get'"); // l'action n'est jamais executee
 
 	// Mots mal orthographies :
 	// liste des suggestions plus lien pour ajouter au dico

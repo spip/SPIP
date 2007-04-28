@@ -134,6 +134,6 @@ function copy_request($script, $suite, $submit='')
 		  entites_html($c) .
 		  "'  />";
 	}
-	return  generer_post_ecrire($script, $suite, '', $submit);
+	return  generer_form_ecrire($script, $suite, '', $submit);
 }
 ?>

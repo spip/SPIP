@@ -271,7 +271,7 @@ function formulaire_affiche_tous($aff_art, $aff_statut,$sel_lang)
 
 	$out = debut_boite_info(true) . $out  . fin_boite_info(true);
 
-	return generer_post_ecrire('articles_tous', $out);
+	return generer_form_ecrire('articles_tous', $out);
 }
 
 // http://doc.spip.org/@couche_formulaire_tous

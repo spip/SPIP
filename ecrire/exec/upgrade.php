@@ -34,7 +34,7 @@ function exec_upgrade_dist() {
 				. "</b><p> "
 				. _T('texte_nouvelle_version_spip_2',
 				   array('connect' => '<tt>' . _FILE_CONNECT . '</tt>'))
-				. generer_post_ecrire('upgrade', "<input name='reinstall' value='non' />",'',	_T('bouton_relancer_installation')));
+				. generer_form_ecrire('upgrade', "<input name='reinstall' value='non' />",'',	_T('bouton_relancer_installation')));
 		exit;
 	}
 

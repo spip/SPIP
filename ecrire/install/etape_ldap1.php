@@ -31,7 +31,7 @@ function install_etape_ldap1_dist()
 
 	echo info_etape(_T('titre_connexion_ldap'), _T('entree_informations_connexion_ldap'));
 
-	echo generer_post_ecrire('install', (
+	echo generer_form_ecrire('install', (
 	 "\n<input type='hidden' name='etape' value='ldap2' />"
 
 	. fieldset(_T('entree_adresse_annuaire'),

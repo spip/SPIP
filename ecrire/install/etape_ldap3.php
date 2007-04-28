@@ -58,7 +58,7 @@ function install_etape_ldap3_dist()
 	$res .= " />"
 	. "\n<label for='manuel'>"._T('entree_chemin_acces')."</label> ";
 
-	echo generer_post_ecrire('install', ($res
+	echo generer_form_ecrire('install', ($res
 	. "\n<input type='hidden' name='etape' value='ldap4' />"
 	. "\n<input type='hidden' name='adresse_ldap' value=\"$adresse_ldap\" />"
 	. "\n<input type='hidden' name='port_ldap' value=\"$port_ldap\" />"

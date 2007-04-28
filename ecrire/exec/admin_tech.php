@@ -111,7 +111,7 @@ else {
  echo "<table border='0' cellspacing='0' cellpadding='5' width='100%'>",
    "<tr><td style='color: #ffffff;' class='toile_foncee verdana1 spip_medium'><b>", 
    _T('texte_sauvegarde'), "</b></td></tr><tr><td class='serif'>",
-   generer_post_ecrire('export_all', $res, '', _T('texte_sauvegarde_base')),
+   generer_form_ecrire('export_all', $res, '', _T('texte_sauvegarde_base')),
    "</td></tr></table>";
 
 //
@@ -165,7 +165,7 @@ else {
 	echo "\n<table border='0' cellspacing='1' cellpadding='8' width='100%'>",
 	"\n<tr><td style='background-color: #eeeecc; color: #000000;' class='verdana1 spip_medium'><b>", _T('texte_restaurer_base')."</b></td></tr>",
 	  "<tr><td class='serif'>" .
-	  generer_post_ecrire('import_all', $res, '', _T('bouton_restaurer_base')).
+	  generer_form_ecrire('import_all', $res, '', _T('bouton_restaurer_base')).
 	  "\n</td></tr>",
 	  "</table>";
  }
@@ -185,7 +185,7 @@ if ($connect_toutes_rubriques) {
 		echo "<tr><td style='background-color: #eeeecc;'><b>";
 		echo "<span style='color: #000000;' class='verdana1 spip_medium'>", _T('texte_recuperer_base'), "</span></b></td></tr>",
 			"<tr><td class='serif'>",
-			generer_post_ecrire('admin_repair', $res, '', _T('bouton_tenter_recuperation')),
+			generer_form_ecrire('admin_repair', $res, '', _T('bouton_tenter_recuperation')),
 			"</td></tr>",
 			"</table>";
 	}
