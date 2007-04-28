@@ -28,7 +28,11 @@ function exec_recherche_dist() {
 		include_spip('inc/rechercher');
 		include_spip('base/abstract_sql');
 
-		$results = recherche_en_base($recherche);
+		$tables = liste_des_champs();
+		unset($tables['document']);
+		unset($tables['forum']);
+
+		$results = recherche_en_base($recherche, $tables);
 		$modifier = false;
 		foreach ($results as $table => $r) {
 			foreach ($r as $id => $x) {
