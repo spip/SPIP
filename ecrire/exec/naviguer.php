@@ -246,7 +246,10 @@ if ($id_rubrique>0 AND $GLOBALS['meta']['multi_rubriques'] == 'oui' AND ($GLOBAL
 
 	echo debut_block_invisible('languesrubrique');
 	echo "<div class='verdana2' style='text-align: center;'>";
-	echo menu_langues('changer_lang', $langue_rubrique, '', $langue_parent, redirige_action_auteur('instituer_langue_rubrique', "$id_rubrique-$id_parent","naviguer","id_rubrique=$id_rubrique"));
+	if ($menu = liste_options_langues('changer_lang', $langue_rubrique, $langue_parent)) {
+		echo select_langues('changer_lang', redirige_action_auteur('instituer_langue_rubrique', "$id_rubrique-$id_parent","naviguer","id_rubrique=$id_rubrique"), $menu);
+
+	}
 	echo "</div>\n";
 	echo fin_block();
 

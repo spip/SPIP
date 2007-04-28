@@ -98,7 +98,7 @@ function changer_typo($lang = '') {
 // Afficher un menu de selection de langue
 // - 'var_lang_ecrire' = langue interface privee,
 // - 'var_lang' = langue de l'article, espace public
-// - 'changer_lang' = langue de l'article, espace prive
+// pour 'changer_lang' (langue de l'article, espace prive), c'est en Ajax
 // 
 // http://doc.spip.org/@menu_langues
 function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $herit = '', $lien='') {
@@ -110,21 +110,26 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	if (!$lien)
 		$lien = self();
 
-	if ($nom_select == 'changer_lang') {
-		$lien = parametre_url($lien, 'changer_lang', '');
-		$lien = parametre_url($lien, 'url', '');
-		$cible = '';
-	} else {
-		if (_DIR_RESTREINT) {
+	if (_DIR_RESTREINT) {
 			$cible = $lien;
 			$lien = generer_url_action('cookie');
-		} else {
+	} else {
 			$cible = _DIR_RESTREINT_ABS . $lien;
 			if (_FILE_CONNECT) {
 			  $lien = generer_action_auteur('converser','');
 			} else $lien = generer_url_action('cookie');
-		}
 	}
+
+	return "\n<form action='$lien' method='post' style='margin:0px; padding:0px;'>\n<div>"
+	  . (!$cible ? '' : "<input type='hidden' name='url' value='$cible' />")
+	  . $texte
+	  . select_langues($nom_select, $lien, $ret, $cible)
+	  . "<noscript><div><input type='submit' class='fondo' value='". _T('bouton_changer')."' /></div></noscript>"
+	  . "</div></form>\n";
+}
+
+function select_langues($nom_select, $lien, $options, $cible='')
+{
 	// attention, en Ajax ce select doit etre suivi de
 	// <span><input type='submit'
 	$change = ($lien === 'ajax')
@@ -133,8 +138,7 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	   . parametre_url($lien, 'url', str_replace('&amp;', '&', $cible))
 	   ."&amp;$nom_select='+this.options[this.selectedIndex].value\"");
 
-	$ret = $texte
-	  . "<select name='$nom_select' "
+	return "<select name='$nom_select' "
 	  . (_DIR_RESTREINT ?
 	     ("class='forml' style='vertical-align: top; max-height: 24px; margin-bottom: 5px; width: 120px;'") :
 	     (($nom_select == 'var_lang_ecrire')  ?
@@ -142,16 +146,8 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	      "class='fondl'"))
 	  . $change
 	  . ">\n"
-	  . $ret
+	  . $options
 	  . "</select>";
-	if ($lien === 'ajax') return $ret;
-
-	$ret .= "<noscript><div><input type='submit' class='fondo' value='". _T('bouton_changer')."' /></div></noscript>";
-
-	return "\n<form action='$lien' method='post' style='margin:0px; padding:0px;'>\n<div>"
-	  . (!$cible ? '' : "<input type='hidden' name='url' value='$cible' />")
-	  . $ret
-	  . "</div></form>\n";
 }
 
 // http://doc.spip.org/@liste_options_langues

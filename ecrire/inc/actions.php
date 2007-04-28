@@ -128,7 +128,7 @@ function ajax_action_post($action, $arg, $retour, $gra, $corps, $clic='', $atts_
 		  $submit .= "\n<input type='submit' name='$n' value='$c' $atts_i />";
 	} else {
 		if (!$clic)  $clic =  _T('bouton_valider');
-		$submit = "\n<input type='submit' value='$clic' $atts_i />";
+		$submit = "<input type='submit' value='$clic' $atts_i />";
 	}
 	$corps = "<div>"
 	  . $corps 

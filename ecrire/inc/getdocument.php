@@ -109,12 +109,12 @@ function deplacer_fichier_upload($source, $dest, $move=false) {
 function check_upload_error($error, $msg='') {
 	global $spip_lang_right;
 
-	if ($error)
-		spip_log("Erreur upload $error -- cf. http://php.net/manual/fr/features.file-upload.errors.php");
+	if (!$error) return false;
+
+	spip_log("Erreur upload $error -- cf. http://php.net/manual/fr/features.file-upload.errors.php");
 
 	switch ($error) {
-		case 0:
-			return false;
+			
 		case 4: /* UPLOAD_ERR_NO_FILE */
 			return true;
 
@@ -140,13 +140,13 @@ function check_upload_error($error, $msg='') {
 
 	spip_log ("erreur upload $error");
 
-  if(_request("iframe")=="iframe") {
-    echo "<div class='upload_answer upload_error'>$msg</div>";
-    exit;
-  }
+  	if(_request("iframe")=="iframe") {
+	  echo "<div class='upload_answer upload_error'>$msg</div>";
+	  exit;
+	}
   
- #ici method='post' permet d'aller au bon endroit, alors qu'en GET on perd les variables... mais c'est un hack sale.
-	echo minipres($msg, "<form method='post' action='" .	rawurldecode($GLOBALS['redirect']) . "'><div style='text-align: $spip_lang_right'><input type='submit' class='fondl'  value='".	_T('ecrire:bouton_suivant') . " &gt;&gt;' /></div></form>");
+	echo minipres($msg,
+		      "<div style='text-align: $spip_lang_right'><a href='"  . rawurldecode($GLOBALS['redirect']) . "'><button type='button'>" . _T('ecrire:bouton_suivant') . "</button></a></div>");
 	exit;
 }
 
