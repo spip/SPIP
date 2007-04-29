@@ -122,6 +122,7 @@ function menu_langues($nom_select) {
 				     " method='post'");
 }
 
+// http://doc.spip.org/@select_langues
 function select_langues($nom_select, $change, $options)
 {
 	return "<select name='$nom_select' "
