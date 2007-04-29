@@ -97,47 +97,33 @@ function changer_typo($lang = '') {
 //
 // Afficher un menu de selection de langue
 // - 'var_lang_ecrire' = langue interface privee,
-// - 'var_lang' = langue de l'article, espace public
+// pour var_lang' = langue de l'article, espace public, voir les squelettes
 // pour 'changer_lang' (langue de l'article, espace prive), c'est en Ajax
 // 
 // http://doc.spip.org/@menu_langues
-function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $herit = '', $lien='') {
+function menu_langues($nom_select) {
 
-	$ret = liste_options_langues($nom_select, $default, $herit);
+	$ret = liste_options_langues($nom_select);
 
 	if (!$ret) return '';
 
-	if (!$lien)
-		$lien = self();
-
 	if (_DIR_RESTREINT) {
-			$cible = $lien;
-			$lien = generer_url_action('cookie');
+		$cible = self();
+		$base = '';
 	} else {
-			$cible = _DIR_RESTREINT_ABS . $lien;
-			if (_FILE_CONNECT) {
-			  $lien = generer_action_auteur('converser','');
-			} else $lien = generer_url_action('cookie');
+		$cible = _DIR_RESTREINT_ABS . self();
+		$base = _FILE_CONNECT ? 'base' : '';
 	}
 
-	return "\n<form action='$lien' method='post' style='margin:0px; padding:0px;'>\n<div>"
-	  . (!$cible ? '' : "<input type='hidden' name='url' value='$cible' />")
-	  . $texte
-	  . select_langues($nom_select, $lien, $ret, $cible)
-	  . "<noscript><div><input type='submit' class='fondo' value='". _T('bouton_changer')."' /></div></noscript>"
-	  . "</div></form>\n";
+	$change = ("\nonchange=\"this.parentNode.parentNode.submit()\"");
+	return generer_action_auteur('converser',$base, $cible,
+		(select_langues($nom_select, $change, $ret)
+		 . "<noscript><div><input type='submit' class='fondo' value='". _T('bouton_changer')."' /></div></noscript>"),
+				     " method='post'");
 }
 
-function select_langues($nom_select, $lien, $options, $cible='')
+function select_langues($nom_select, $change, $options)
 {
-	// attention, en Ajax ce select doit etre suivi de
-	// <span><input type='submit'
-	$change = ($lien === 'ajax')
-	? "\nonchange=\"this.nextSibling.firstChild.style.visibility='visible';\""
-	: ("\nonchange=\"document.location.href='"
-	   . parametre_url($lien, 'url', str_replace('&amp;', '&', $cible))
-	   ."&amp;$nom_select='+this.options[this.selectedIndex].value\"");
-
 	return "<select name='$nom_select' "
 	  . (_DIR_RESTREINT ?
 	     ("class='forml' style='vertical-align: top; max-height: 24px; margin-bottom: 5px; width: 120px;'") :

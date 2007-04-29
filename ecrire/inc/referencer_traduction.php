@@ -41,7 +41,11 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 			$langue_article = $langue_parent;
 
 		if ($menu = liste_options_langues('changer_lang', $langue_article, $langue_parent)) {
-			$menu =  _T('info_multi_cet_article').' ' . select_langues('changer_lang', 'ajax', $menu);
+// attention ce onchange doit etre suivi de <span><input type='submit'
+			$lien = "\nonchange=\"this.nextSibling.firstChild.style.visibility='visible';\"";
+			$menu =  _T('info_multi_cet_article')
+			  . select_langues('changer_lang', $lien, $menu);
+
 			$menu = ajax_action_post('referencer_traduction', "$id_article,$id_rubrique","articles","id_article=$id_article", $menu, _T('bouton_changer'), " class='visible_au_chargement fondo'");
 
 			$reponse .= debut_cadre_couleur('',true)

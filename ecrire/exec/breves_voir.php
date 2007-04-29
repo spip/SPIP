@@ -188,7 +188,8 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 		echo "<div style='text-align: center'>";
 
 		if ($menu = liste_options_langues('changer_lang', $langue_breve, $langue_parent))
-			$menu = select_langues('changer_lang', 'ajax', $menu)
+			$lien = "\nonchange=\"this.nextSibling.firstChild.style.visibility='visible';\"";
+			$menu = select_langues('changer_lang', $lien, $menu)
 			. "<span><input type='submit' class='visible_au_chargement fondo' value='". _T('bouton_changer')."' /></span>";
 
 		echo redirige_action_auteur('editer_breve', "$id_breve/$id_rubrique", "breves_voir","id_breve=$id_breve", $menu);

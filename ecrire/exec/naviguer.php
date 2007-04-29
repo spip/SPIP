@@ -247,8 +247,10 @@ if ($id_rubrique>0 AND $GLOBALS['meta']['multi_rubriques'] == 'oui' AND ($GLOBAL
 	echo debut_block_invisible('languesrubrique');
 	echo "<div class='verdana2' style='text-align: center;'>";
 	if ($menu = liste_options_langues('changer_lang', $langue_rubrique, $langue_parent)) {
-		echo select_langues('changer_lang', redirige_action_auteur('instituer_langue_rubrique', "$id_rubrique-$id_parent","naviguer","id_rubrique=$id_rubrique"), $menu);
-
+		$lien = redirige_action_auteur('instituer_langue_rubrique', "$id_rubrique-$id_parent","naviguer","id_rubrique=$id_rubrique");
+		$lien = ("\nonchange=\"document.location.href='$lien" .
+			 "&amp;changer_lang='+this.options[this.selectedIndex].value\"");
+		echo select_langues('changer_lang', $lien, $menu);
 	}
 	echo "</div>\n";
 	echo fin_block();

@@ -15,7 +15,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 include_spip('inc/cookie');
 
-
 // http://doc.spip.org/@action_cookie_dist
 function action_cookie_dist() {
 
@@ -119,20 +118,6 @@ function action_cookie_dist() {
 	else if (($set_cookie_admin OR $set_cookie_admin = _request('cookie_admin'))
 	AND $set_cookie_admin != $_COOKIE['spip_admin']) {
 		spip_setcookie('spip_admin', $set_cookie_admin, time() + 3600 * 24 * 14);
-	}
-
-	// changement de langue espace public
-	if ($l = _request('var_lang')) {
-		include_spip('inc/lang');
-		if (changer_langue($l)) {
-			spip_setcookie('spip_lang', $l, time() + 365 * 24 * 3600);
-			$redirect = parametre_url($redirect,'lang',$l,'&');
-		}
-	}
-	// changer de langue espace prive avant le login (i.e. pas authentfie)
-	if (_request('var_lang_ecrire')) {
-		include_spip('action/converser');
-		action_converser_post();
 	}
 
 	// Redirection finale
