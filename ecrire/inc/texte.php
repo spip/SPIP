@@ -143,7 +143,7 @@ function traiter_echap_cadre_dist($regs) {
 	$echap = trim(entites_html($regs[3]));
 	$n = substr_count($echap, "\n") + 1;
 	$echap = "\n<textarea readonly='readonly' cols='40' rows='$n' class='spip_cadre' dir='ltr'>$echap</textarea>";
-	return generer_form_ecrire('', $echap, "action='' method='get'");
+	return generer_form_ecrire('', $echap, " method='get'");
 }
 // http://doc.spip.org/@traiter_echap_frame_dist
 function traiter_echap_frame_dist($regs) {

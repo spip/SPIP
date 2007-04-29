@@ -10,11 +10,9 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/sites_voir');
-
 
 // http://doc.spip.org/@exec_recherche_dist
 function exec_recherche_dist() {
@@ -46,11 +44,10 @@ function exec_recherche_dist() {
 	if (!strlen($recherche)) {
 		$recherche_aff = _T('info_rechercher');
 		$onfocus = " onfocus=\"this.value='';\"";
-	}
+	} else $onfocus = '';
 
-	echo generer_form_ecrire("recherche", 
-				 ('<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" accesskey="r"' . $onfocus . ' />'),
-				 " method='get'");
+	$onfocus = '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" accesskey="r"' . $onfocus . ' />';
+	echo generer_form_ecrire("recherche", $onfocus, " method='get'");
 
 /*
 	// Si on est autorise a modifier, proposer le choix de REMPLACER
@@ -59,7 +56,6 @@ function exec_recherche_dist() {
 	echo '<br /><input type="text" size="10" value="'.entites_html(_request('remplacer')).'" name="remplacer" class="spip_recherche" />';
 	}
 */
-	echo "</div></form>";
 
 	debut_droite();
 
@@ -96,7 +92,7 @@ function exec_recherche_dist() {
 				break;
 			}
 
-			echo $a = $fn($titre,
+			echo $fn($titre,
 				array(
 					// gasp: la requete spip_articles exige AS articles...
 					'FROM' => 'spip_'.table_objet($table).' AS '.$table.'s',

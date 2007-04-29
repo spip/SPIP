@@ -21,6 +21,11 @@ function exec_valider_xml_dist()
 		exit;
 	}
 
+	$titre = _T('analyse_xml');
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+
+	echo $commencer_page($titre);
+
 	$url = urldecode(_request('var_url'));
 
 	if (!$url) {
@@ -30,41 +35,38 @@ function exec_valider_xml_dist()
 
 	} else {
 
-	  list($server, $script) = preg_split('/[?]/', $url);
-	  if ((!$server) OR ($server == './') 
-	      OR strpos($server, url_de_base()) === 0) {
-	    	    include_spip('inc/headers');
-	    	    redirige_par_entete(parametre_url($url,'transformer_xml','valider_xml', '&'));
-	  }
+		list($server, $script) = preg_split('/[?]/', $url);
+		if ((!$server) OR ($server == './') 
+		OR strpos($server, url_de_base()) === 0) {
+	    		include_spip('inc/headers');
+			redirige_par_entete(parametre_url($url,'transformer_xml','valider_xml', '&'));
+		}
 
-	  include_spip('public/debug');
-	  include_spip('inc/distant');
-	  $url_aff = entites_html($url);
-	  $onfocus = "this.value='" . addslashes($url) . "';";
+		include_spip('public/debug');
+		include_spip('inc/distant');
+		$url_aff = entites_html($url);
+		$onfocus = "this.value='" . addslashes($url) . "';";
 
-	  $transformer_xml = charger_fonction('valider_xml', 'inc');
+		$transformer_xml = charger_fonction('valider_xml', 'inc');
 
-	  if (preg_match(',^[a-z][0-9a-z_]*$,i', $url))
-		$texte = $transformer_xml(charger_fonction($url, 'exec'), true);
-	  else 	$texte = $transformer_xml(recuperer_page($url));
+		if (preg_match(',^[a-z][0-9a-z_]*$,i', $url))
+			$texte = $transformer_xml(charger_fonction($url, 'exec'), true);
+		else 	$texte = $transformer_xml(recuperer_page($url));
 
-	  if (isset($GLOBALS['xhtml_error'])) 
-	  	list($texte, $err) = emboite_texte($texte);
-	  else {
-	    $err = '<h3>' . _T('spip_conforme_dtd') . '</h3>';
-	    list($texte, ) = emboite_texte($texte);
-	  }
+		if (isset($GLOBALS['xhtml_error'])) 
+			list($texte, $err) = emboite_texte($texte);
+		else {
+			$err = '<h3>' . _T('spip_conforme_dtd') . '</h3>';
+			list($texte, ) = emboite_texte($texte);
+		}
 	}
-	$titre = _T('analyse_xml');
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page($titre);
 
-	echo "<div style='margin: 10px; text-align: center'>", "<h1>", $titre, '</h1>';
-	echo generer_form_ecrire('valider_xml',
-				 ('<input type="text" size="70" value="' .$url_aff .'" name="var_url" onfocus="'.$onfocus . '" />'),
-				 "method='get'");
+	$onfocus = '<input type="text" size="70" value="' .$url_aff .'" name="var_url" onfocus="'.$onfocus . '" />';
+	$onfocus = generer_form_ecrire('valider_xml', $onfocus, " method='get'");
 
-	echo  $err, "</div>";
-	echo "<div style='margin: 10px; text-align: left'>",$texte, '</div>', fin_page();
+	echo "<h1>", $titre, '</h1>',
+	  "<div style='text-align: center'>", $onfocus,  $err, "</div>",
+	  "<div style='margin: 10px; text-align: left'>", $texte, '</div>',
+	  fin_page();
 }
 ?>
