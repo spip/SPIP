@@ -92,8 +92,6 @@ debut_droite();
 
  $lang_dir = lang_dir(changer_typo($lang));
 
-echo "<a name='diff'></a>\n";
-
 debut_cadre_relief();
 
 //
@@ -117,7 +115,7 @@ else if ($statut_article == 'poubelle') {
 }
 
 
-echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
+echo "\n<table id='diff' cellpadding='0' cellspacing='0' border='0' width='100%'>";
 echo "<tr><td style='width: 100%' valign='top'>";
 if ($surtitre) {
 	echo "<span  dir='$lang_dir'><span class='arial1 spip_medium'><b>", propre_diff($surtitre), "</b></span></span>\n";
