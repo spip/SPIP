@@ -34,16 +34,6 @@ if ($f = include_spip('mes_fonctions', false)) {
 	@include_once ($f); 
 }
 
-// http://doc.spip.org/@import_charge_version
-function import_charge_version($version_archive)
-{
-	if (preg_match("{^phpmyadmin::}is",$version_archive)){
-		$fimport = 'import_1_3'; 
-	} else 	$fimport = 'import_' . str_replace('.','_',$version_archive);
-
-	return  charger_fonction($fimport, 'inc', true);
-}
-
 // http://doc.spip.org/@base_import_all_dist
 function base_import_all_dist($titre, $reprise=false)
 {
