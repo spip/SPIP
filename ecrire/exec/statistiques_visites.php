@@ -50,20 +50,18 @@ function http_img_rien($width, $height, $class='', $title='') {
 
 // pondre les stats sous forme d'un fichier csv tres basique
 // http://doc.spip.org/@statistiques_csv
-function statistiques_csv($id_article) {
-	if ($id = intval($id_article))
-		$q = "SELECT date, visites FROM spip_visites_articles WHERE id_article=$id ORDER BY date";
-	else
-		$q = "SELECT date, visites FROM spip_visites ORDER BY date";
+function statistiques_csv($id) {
 
 	if (!autoriser('voirstats', $id ? 'article':'', $id)) exit;
-
 
 	$filename = 'stats_'.($id ? 'article'.$id : 'total').'.csv';
 	header('Content-Type: text/csv');
 	header('Content-Disposition: attachment; filename='.$filename);
-
-	$s = spip_query($q);
+	
+	if ($id)
+		$s = spip_query("SELECT date, visites FROM spip_visites_articles WHERE id_article=$id ORDER BY date");
+	else
+		$s = spip_query("SELECT date, visites FROM spip_visites ORDER BY date");
 	while ($t = spip_fetch_array($s)) {
 		echo $t['date'].";".$t['visites']."\n";
 	}
@@ -72,48 +70,44 @@ function statistiques_csv($id_article) {
 // http://doc.spip.org/@exec_statistiques_visites_dist
 function exec_statistiques_visites_dist()
 {
-  global
-    $aff_jours,
-    $connect_statut,
-    $id_article,
-    $limit,
-    $origine,
-    $spip_lang_left;
+	global $connect_statut, $origine, $spip_lang_left;
+
+	$id_article = intval(_request('id_article'));
+	$aff_jours = intval(_request('aff_jours'));
+	if (!$aff_jours) $aff_jours = 105;
+	// nombre de referers a afficher
+	$limit = intval(_request('limit'));
+	if ($limit == 0) $limit = 100;
 
 	if (_request('format') == 'csv')
 		return statistiques_csv($id_article);
 
-
 	$GLOBALS['accepte_svg'] = flag_svg();
 
+	$titre = $pourarticle = "";
+	$class = " class='arial1 spip_x-small'";
+	$style = 'color: #999999';
 
-  $titre = $pourarticle = "";
-  $class = " class='arial1 spip_x-small'";
-  $style = 'color: #999999';
+	if ($id_article){
+		$result = spip_query("SELECT titre, visites, popularite FROM spip_articles WHERE statut='publie' AND id_article=$id_article");
 
-if ($id_article = intval($id_article)){
-	$result = spip_query("SELECT titre, visites, popularite FROM spip_articles WHERE statut='publie' AND id_article=$id_article");
+		if ($row = spip_fetch_array($result)) {
+			$titre = typo($row['titre']);
+			$total_absolu = $row['visites'];
+			$val_popularite = round($row['popularite']);
+		}
+	} else {
+		$result = spip_query("SELECT SUM(visites) AS total_absolu FROM spip_visites");
 
 
-	if ($row = spip_fetch_array($result)) {
-		$titre = typo($row['titre']);
-		$total_absolu = $row['visites'];
-		$val_popularite = round($row['popularite']);
+		if ($row = spip_fetch_array($result)) {
+			$total_absolu = $row['total_absolu'];
+		}
 	}
-} 
-else {
-	$result = spip_query("SELECT SUM(visites) AS total_absolu FROM spip_visites");
 
+	if ($titre) $pourarticle = " "._T('info_pour')." &laquo; $titre &raquo;";
 
-	if ($row = spip_fetch_array($result)) {
-		$total_absolu = $row['total_absolu'];
-	}
-}
-
-
-if ($titre) $pourarticle = " "._T('info_pour')." &laquo; $titre &raquo;";
-
-if ($origine) {
+	if ($origine) {
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_statistiques_referers'), "statistiques_visites", "statistiques");
 	echo "<br /><br />";
@@ -266,11 +260,8 @@ else {
 		}
 	}
 
-
-
 	debut_droite();
-}
-
+ }
 
 
 if ($connect_statut != '0minirezo') {
@@ -281,8 +272,6 @@ if ($connect_statut != '0minirezo') {
 
 
 //////
-
- if (!($aff_jours = intval($aff_jours))) $aff_jours = 105;
 
  if (!$origine) {
 
@@ -364,15 +353,17 @@ if ($connect_statut != '0minirezo') {
 		$pour_article = $id_article ? "&id_article=$id_article" : '';
 		
 		if ($date_premier < $date_debut)
-		  echo http_href_img(generer_url_ecrire("statistiques_visites","aff_jours=$aff_jours_plus$pour_article"),
-				     'loupe-moins.gif',
-				     "style='border: 0px; vertical-align: middle;'",
-				     _T('info_zoom'). '-'), "&nbsp;";
+		  echo http_href(generer_url_ecrire("statistiques_visites","aff_jours=$aff_jours_plus$pour_article"),
+				 http_img_pack('loupe-moins.gif',
+					       _T('info_zoom'). '-', 
+					       "style='border: 0px; vertical-align: middle;'"),
+				 "&nbsp;");
 		if ( (($date_today - $date_debut) / (24*3600)) > 30)
-		  echo http_href_img(generer_url_ecrire("statistiques_visites","aff_jours=$aff_jours_moins$pour_article"), 
-				     'loupe-plus.gif',
-				     "style='border: 0px; vertical-align: middle;'",
-				     _T('info_zoom'). '+'), "&nbsp;";
+		  echo http_href(generer_url_ecrire("statistiques_visites","aff_jours=$aff_jours_moins$pour_article"), 
+				 http_img_pack('loupe-plus.gif',
+					       _T('info_zoom'). '+', 
+					       "style='border: 0px; vertical-align: middle;'"),
+				 "&nbsp;");
 	
 	
 if ($GLOBALS['accepte_svg']) {
@@ -808,17 +799,12 @@ if ($GLOBALS['accepte_svg']) {
 	parametre_url(self(), 'var_svg', $lien)."'>$alter</a> | <a href='".
 	parametre_url(self(), 'format', 'csv')."'>CSV</a>".
 	"</div>\n";
-}
+ }
 
 
 //
 // Affichage des referers
 //
-
-// nombre de referers a afficher
-$limit = intval($limit);	//secu
-if ($limit == 0)
-	$limit = 100;
 
 // afficher quels referers ?
 $vis = "visites";
@@ -830,7 +816,7 @@ if ($origine) {
 
 
 $result = spip_query("SELECT referer, $vis AS vis FROM $table_ref WHERE $where ORDER BY vis DESC LIMIT $limit");
-	
+
 
 echo "<br /><br /><br />";
 gros_titre(_T("onglet_origine_visites"));
@@ -841,11 +827,4 @@ echo "<br /></div>";
 
 echo fin_gauche(), fin_page();
      }
-
-// http://doc.spip.org/@http_href_img
-function http_href_img($href, $img, $att, $alt, $title='', $style='', $class='', $evt='') {
-	if (!$title) $title = $alt;
-	return  http_href($href, http_img_pack($img, $alt, $att), $title, $style, $class, $evt);
-}
-
 ?>
