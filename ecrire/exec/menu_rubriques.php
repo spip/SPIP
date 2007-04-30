@@ -98,7 +98,7 @@ onmouseover=\"montrer('$idom');\"
 onmouseout=\"cacher('$idom'); \">"
 	. '<div class="brt">'
 	. $nav
-	. "</div>\n<div class='bandeau_rub' style='top: 14px; left: "
+	. "</div>\n<div class='bandeau_rub' style='top: 14px; $spip_lang_left: "
 	. $pxdecal
 	. "; z-index: "
 	. ($zdecal+1)
