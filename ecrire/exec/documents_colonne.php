@@ -15,8 +15,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@exec_documents_colonne_dist
 function exec_documents_colonne_dist()
 {
-	global $id, $type, $show_docs;
-	$id = intval($id);
+	$id = intval(_request('id'));
+	$show = _request('show_docs');
+	$type = _request('type');
 
 	if (!($type == 'article' 
 		? autoriser('modifier','article',$id)
@@ -26,20 +27,16 @@ function exec_documents_colonne_dist()
 		exit;
 	}
 
-	include_spip("inc/documents");
-	include_spip("inc/presentation");
-
-	// TODO: return au lieu de echo
-	$documents = explode(",",$show_docs);
+	include_spip('inc/documents');
+	include_spip('inc/presentation');
+	spip_log("edcd $show");
 	$script = $type."s_edit";
 	$res = "";
-	foreach($documents as $doc) {
-    $res .= afficher_case_document($doc, $id, $script, $type, $deplier = false);
-  }
+	foreach(explode(",",$show) as $doc) {
+		$res .= afficher_case_document($doc, $id, $script, $type, false);
+	}
   
-  ajax_retour("<div class='upload_answer upload_document_added'>".
-	$res.
-	"</div>",false);
+	ajax_retour("<div class='upload_answer upload_document_added'>". $res.	"</div>",false);
 }
 
 ?>
