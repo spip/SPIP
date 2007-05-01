@@ -554,7 +554,6 @@ function calculer_url ($lien, $texte='', $pour='url') {
 		// ou calculer_url_raccourci si on n'a besoin que du lien
 		$f=(($pour == 'url') ? 'generer' : 'calculer') . '_url_' . $f;
 		charger_generer_url();
-		spip_log("$f,$objet,$id,$params,$ancre");
 		if (function_exists($f)) {
 			if ($pour == 'url') {
 				$url = $f($id);
@@ -1064,27 +1063,29 @@ function traiter_raccourci_lien($regs) {
 	$bulle = $hlang = '';
 	// title et hreflang donnes par le raccourci ?
 	if (preg_match(',^(.*?)([|]([^<>]*?))?([{]([a-z_]+)[}])?$,', $regs[1], $m)) {
+		$n =count($m);
 		// |infobulle ?
-		if ($m[2])
+		if ($n > 2) {
 			$bulle = ' title="'.texte_backend($m[3]).'"';
-		// {hreflang} ?
-		if ($m[4]) {
+			// {hreflang} ?
+			if ($n > 4) {
 			// si c'est un code de langue connu, on met un hreflang
-			if (traduire_nom_langue($m[5]) <> $m[5]) {
-				$hlang = $m[5];
-			}
+				if (traduire_nom_langue($m[5]) <> $m[5]) {
+					$hlang = $m[5];
+				}
 			// sinon c'est un italique
-			else {
-				$m[1] .= $m[4];
-			}
-		}
-		// S'il n'y a pas de hreflang sous la forme {}, ce qui suit le |
-		// est peut-etre une langue
-		else if (preg_match(',^[a-z_]+$,', $m[3])) {
+				else {
+					$m[1] .= $m[4];
+				}
+			
+	// S'il n'y a pas de hreflang sous la forme {}, ce qui suit le |
+	// est peut-etre une langue
+			} else if (preg_match(',^[a-z_]+$,', $m[3])) {
 			// si c'est un code de langue connu, on met un hreflang
 			// mais on laisse le title (c'est arbitraire tout ca...)
-			if (traduire_nom_langue($m[3]) <> $m[3]) {
-				$hlang = $m[3];
+				if (traduire_nom_langue($m[3]) <> $m[3]) {
+				  $hlang = $m[3];
+				}
 			}
 		}
 		$regs[1] = $m[1];
