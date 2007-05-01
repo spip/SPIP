@@ -72,12 +72,9 @@ function afficher_erreurs_auteur($echec) {
 function legender_auteur_saisir($auteur, $auteur_infos_voir, $bloc_statut, $redirect) {
 	global $options, $connect_statut, $connect_id_auteur, $connect_toutes_rubriques;
 
+	include_spip('inc/autoriser');
+
 	$id_auteur = $auteur['id_auteur'];
-
-
-
-	$setmail = ($connect_statut == "0minirezo"
-		AND ($connect_toutes_rubriques OR $auteur['statut']<>'0minirezo'));
 
 	$setconnecte = ($connect_id_auteur == $id_auteur);
 
@@ -95,7 +92,9 @@ function legender_auteur_saisir($auteur, $auteur_infos_voir, $bloc_statut, $redi
 	. " />\n<br />"
 	. "<b>"._T('entree_adresse_email')."</b>";
 
-	if ($setmail) {
+	// Modification de l'email
+	// ou message disant que seuls les admins peuvent le modifier
+	if (autoriser('modifier', 'auteur', $id_auteur, NULL, array('email'=>'?'))) {
 		$corps .= "<br /><input type='text' name='email' class='formo' size='40' value=\""
 		. entites_html($auteur['email'])
 		. "\"  />\n<br />\n";
