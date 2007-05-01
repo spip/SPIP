@@ -63,6 +63,7 @@ function base_convert_utf8_dist($titre, $reprise=false)
 		'spip_messages' => 'titre'
 	);
 
+	include_spip('inc/meta');
 	if (!$reprise) convert_utf8_init($tables_a_convertir);
 
 	echo install_debut_html($titre);

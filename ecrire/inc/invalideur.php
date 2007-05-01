@@ -14,6 +14,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('base/serial');
+include_spip('inc/meta');
 
 // http://doc.spip.org/@supprime_invalideurs
 function supprime_invalideurs() {
@@ -67,7 +68,6 @@ function insere_invalideur($inval, $fichier) {
 //
 // http://doc.spip.org/@suivre_invalideur
 function suivre_invalideur($cond, $modif=true) {
-	include_spip('inc/meta');
 	if ($modif) {
 		ecrire_meta('derniere_modif', time());
 		ecrire_metas();
@@ -193,7 +193,6 @@ function retire_cache($cache) {
 // http://doc.spip.org/@retire_caches
 function retire_caches($chemin = '') {
 	include_spip('base/abstract_sql');
-	include_spip('inc/meta');
 	lire_metas();
 	// recuperer la liste des caches voues a la suppression
 	$suppr = array();

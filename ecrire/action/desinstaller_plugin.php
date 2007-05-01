@@ -25,6 +25,7 @@ function action_desinstaller_plugin_dist() {
 		// desactiver si il a bien ete desinstalle
 		if (!$etat)
 			ecrire_plugin_actifs(array($plug_file),false,'enleve');
+		include_spip('inc/meta');
 		ecrire_metas();
 	}
 	if ($redirect = _request('redirect')){

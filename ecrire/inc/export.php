@@ -160,6 +160,7 @@ function export_objets($table, $etape, $cpt, $dir, $archive, $gz, $total) {
 	  : '';
 	$debut = $cpt * _EXPORT_TRANCHES_LIMITE;
 
+	include_spip('inc/meta');
 	while (1){ // on ne connait pas le nb de paquets d'avance
 
 		$string = build_while($debut, $table, $prim);

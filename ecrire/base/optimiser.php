@@ -16,7 +16,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // heure de reference pour le garbage collector = 24h auparavant
 // http://doc.spip.org/@optimiser_base
 function optimiser_base($attente = 86400) {
-	spip_log ("optimisation de la base");
 
 	# format = 20060610110141, si on veut forcer une optimisation tout de suite
 	$mydate = date("YmdHis", time() - $attente);
@@ -37,6 +36,7 @@ function optimiser_base($attente = 86400) {
 
 	if ($tables) {
 		$table_op = intval($GLOBALS['meta']['optimiser_table']+1) % sizeof($tables);
+		include_spip('inc/meta');
 		ecrire_meta('optimiser_table', $table_op);
 		ecrire_metas();
 		$query = "OPTIMIZE TABLE ".$tables[$table_op];
