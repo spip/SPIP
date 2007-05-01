@@ -29,7 +29,8 @@ if (defined('_INC_PUBLIC')) {
 			eval('?' . '>' . $subpage['texte']);
 	
 		// est-ce possible ?
-		if ($subpage['lang_select'] === true)
+		if (isset($subpage['lang_select'])
+		AND $subpage['lang_select'] === true)
 			lang_select();
 	}
 } else {
@@ -78,7 +79,7 @@ if (defined('_INC_PUBLIC')) {
 		// traiter le cas pathologique d'un upload de document ayant echoue
 		// car trop gros
 		if (empty($_GET) AND empty($_POST) AND empty($_FILES)
-		AND strlen($_SERVER["CONTENT_LENGTH"]) >= 7
+		AND isset($_SERVER["CONTENT_LENGTH"])
 		AND strstr($_SERVER["CONTENT_TYPE"], "multipart/form-data;")) {
 			include_spip('inc/getdocument');
 			erreur_upload_trop_gros();

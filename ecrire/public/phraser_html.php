@@ -82,7 +82,7 @@ function phraser_inclure($texte, $ligne, $result) {
 		$champ = new Inclure;
 		$champ->ligne = $ligne;
 		$ligne += substr_count($match[0], "\n");
-		$champ->texte = $match[2];
+		$champ->texte = @$match[2];
 		$texte = substr($texte, $p+strlen($match[0]));
 		// on assimile {var=val} a une liste de un argument sans fonction
 		phraser_args($texte,">","",$result,$champ);
@@ -155,7 +155,7 @@ function phraser_idiomes($texte,$ligne,$result) {
 		$champ->nom_champ = strtolower($match[3]);
 		$champ->module = $match[2] ? $match[2] : 'public/spip/ecrire';
 		// pas d'imbrication pour les filtres sur langue
-		phraser_args($match[5], ":", '', array(), $champ);
+		phraser_args(@$match[5], ":", '', array(), $champ);
 		$result[] = $champ;
 	}
 	if ($texte!=="")  $result = phraser_champs($texte,$ligne,$result);

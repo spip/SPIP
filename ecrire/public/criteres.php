@@ -720,6 +720,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 			else if (isset($exceptions_des_jointures[$col]))
 			  // on ignore la table, quel luxe!
 				list($t, $col) = $exceptions_des_jointures[$col];
+			else $t ='';
 			$table = $calculer_critere_externe($boucle, $boucle->jointures, $col, $desc, ($crit->cond OR $op !='='), $t);
 	  }
 	}

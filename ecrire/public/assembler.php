@@ -211,8 +211,7 @@ function inclure_page($fond, $contexte_inclus) {
 
 	if ($contexte_inclus['lang'] != $GLOBALS['meta']['langue_site']) {
 		$lang_select = lang_select($contexte_inclus['lang']);
-
-	}
+	} else $lang_select ='';
 
 	$cacher = charger_fonction('cacher', 'public');
 	// Garnir ces quatre parametres avec les infos sur le cache :
