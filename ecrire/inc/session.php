@@ -54,6 +54,7 @@ function ajouter_session($auteur) {
 	$fichier_session = fichier_session($spip_session, $GLOBALS['meta']['alea_ephemere']);
 
 	if (!isset($auteur['hash_env'])) $auteur['hash_env'] = hash_env();
+	if (!isset($auteur['ip_change'])) $auteur['ip_change'] = false;
 
 	$texte = "<"."?php\n";
 	foreach (array('id_auteur', 'nom', 'login', 'email', 'statut', 'lang', 'ip_change', 'hash_env') AS $var) {

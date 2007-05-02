@@ -1679,9 +1679,10 @@ function direction_css ($css, $voulue='') {
 	else
 		$voulue =  lang_dir();
 
-	$right = $r[1] ? 'left' : 'right'; // 'right' de la css lue en entree
-	$dir = $r[1] ? 'rtl' : 'ltr';
-	$ndir = $r[1] ? 'ltr' : 'rtl';
+	$r = count($r) > 1;
+	$right = $r ? 'left' : 'right'; // 'right' de la css lue en entree
+	$dir = $r ? 'rtl' : 'ltr';
+	$ndir = $r ? 'ltr' : 'rtl';
 
 	if ($voulue == $dir)
 		return $css;
