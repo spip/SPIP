@@ -264,7 +264,7 @@ else {
  }
 
 
-if ($connect_statut != '0minirezo') {
+if (!autoriser('voirstats', $id ? 'article':'', $id)) {
 	echo _T('avis_non_acces_page');
 	echo fin_gauche(), fin_page();
 	exit;
