@@ -106,7 +106,7 @@ function exec_mots_tous_dist()
 
 		echo "<div\nid='editer_mot-$id_groupe' style='position: relative;'>";
 
-		// Preliminaire: confirmation de suppression d'un mot lie à qqch
+		// Preliminaire: confirmation de suppression d'un mot lie a qqch
 		// (cf fin de afficher_groupe_mots_boucle executee a l'appel precedent)
 		if ($conf_mot  AND $son_groupe==$id_groupe) {
 			include_spip('inc/grouper_mots');

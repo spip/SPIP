@@ -67,7 +67,7 @@ function exec_mots_type_dist()
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_type','id_groupe'=>$id_groupe),'data'=>''));
 	debut_droite();
 
-	if ($connect_statut != "0minirezo") {
+	if (!autoriser($id_groupe?'modifier' : 'creer', 'groupemots', $id_groupe)) {
 		echo "<h3>"._T('avis_non_acces_page')."</h3>";
 		exit;
 	}
