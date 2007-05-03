@@ -25,9 +25,8 @@ function balise_MENU_LANG_ECRIRE ($p) {
 // s'il n'y a qu'une langue proposee eviter definitivement la balise ?php 
 // http://doc.spip.org/@balise_MENU_LANG_ECRIRE_stat
 function balise_MENU_LANG_ECRIRE_stat ($args, $filtres) {
-	global $all_langs;
 	include_spip('inc/lang');
-	if (strpos($all_langs,',') === false) return '';
+	if (strpos($GLOBALS['meta']['langues_proposees'],',') === false) return '';
 	return $filtres ? $filtres : $args;
 }
 

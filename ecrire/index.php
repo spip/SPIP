@@ -94,7 +94,7 @@ if (isset($_COOKIE['spip_lang_ecrire'])) {
 	else {	if (($spip_lang_ecrire <> $GLOBALS['auteur_session']['lang'])
 		AND changer_langue($spip_lang_ecrire)) {
 			spip_query("UPDATE spip_auteurs SET lang = " . _q($spip_lang_ecrire) . " WHERE id_auteur = " . intval($GLOBALS['auteur_session']['id_auteur']));
-			$GLOBALS['auteur_session']['lang'] = $var_lang_ecrire;
+			$GLOBALS['auteur_session']['lang'] = $spip_lang_ecrire;
 			$session = charger_fonction('session', 'inc');
 			$session($GLOBALS['auteur_session']);
 		}

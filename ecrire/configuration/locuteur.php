@@ -23,7 +23,7 @@ function configuration_locuteur_dist()
 	$langues = $GLOBALS['codes_langues'];
 	$cesure = floor((count($langues) + 1) / 2);
 
-	$langues_installees = explode(',', $GLOBALS['all_langs']);
+	$langues_installees = explode(',', $GLOBALS['meta']['langues_proposees']);
 	$langues_autorisees = explode(',', $GLOBALS['meta']['langues_multilingue']);
 
 	while (list(,$l) = each ($langues_installees)) {

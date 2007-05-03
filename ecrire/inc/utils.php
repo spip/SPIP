@@ -1268,22 +1268,12 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 			include_spip('inc/acces');
 			renouvelle_alea();
 		}
+		// s'il y a un cookie ou PHP_AUTH, initialiser auteur_session
+		verifier_visiteur();
 	}
-
-	// La meta est indefinie a la premiere installation
-	$GLOBALS['langue_site'] = @$GLOBALS['meta']['langue_site'];
-	
-	// Langue principale du site
-
-	if (!isset($GLOBALS['langue_site'])) include_spip('inc/lang');
-	$GLOBALS['spip_lang'] = $GLOBALS['langue_site'];
-
-	// Verifier le visiteur
-	if (_FILE_CONNECT) verifier_visiteur();
 
 	# nombre de pixels maxi pour calcul de la vignette avec gd
 	define('_IMG_GD_MAX_PIXELS', isset($GLOBALS['meta']['max_taille_vignettes'])?$GLOBALS['meta']['max_taille_vignettes']:0); 
-
 }
 
 // Annuler les magic quotes \' sur GET POST COOKIE et GLOBALS ;
@@ -1331,7 +1321,7 @@ function verifier_visiteur() {
 // selectionne la langue donnee en argument et memorise la courante
 // ou restaure l'ancienne si appel sans argument
 // On pourrait economiser l'empilement en cas de non changemnt
-// et lui faire retour False pour prevenir l'appelant
+// et lui faire retourner False pour prevenir l'appelant
 // Le noyau de Spip sait le faire, mais pour assurer la compatibilite
 // cette fonction retourne toujours non False
 

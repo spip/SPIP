@@ -16,7 +16,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Configuration i18n
 //
 
-include_spip('inc/lang');
 include_spip('inc/presentation');
 
 function configuration_langue_dist()
@@ -26,7 +25,7 @@ function configuration_langue_dist()
 
  $res = "<option value='$l_site' selected='selected'>$langue_site</option>\n";
  
- foreach (split(",",$GLOBALS['all_langs']) as $l) {
+ foreach (split(",",$GLOBALS['meta']['langues_proposees']) as $l) {
 	if ($l <> $l_site)
 		$res .= "<option value='$l'>".traduire_nom_langue($l)."</option>\n";
  }
