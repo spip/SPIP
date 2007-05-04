@@ -605,6 +605,7 @@ function calculer_url ($lien, $texte='', $pour='url') {
 	return ($pour == 'url') ? $lien : array($lien, $class, $texte, '');
 }
 
+// http://doc.spip.org/@calculer_url_article_dist
 function calculer_url_article_dist($id, $texte='') {
 	$lien = generer_url_article($id);
 	$s = spip_query("SELECT titre,lang FROM spip_articles WHERE id_article=$id");
@@ -616,6 +617,7 @@ function calculer_url_article_dist($id, $texte='') {
 	return array($lien, 'spip_in', $texte, $row['lang']);
 }
 
+// http://doc.spip.org/@calculer_url_rubrique_dist
 function calculer_url_rubrique_dist($id, $texte='')
 {
 	$lien = generer_url_rubrique($id);
@@ -628,6 +630,7 @@ function calculer_url_rubrique_dist($id, $texte='')
 	return array($lien, 'spip_in', $texte, $row['lang']);
 }
 
+// http://doc.spip.org/@calculer_url_mot_dist
 function calculer_url_mot_dist($id, $texte='')
 {
 	$lien = generer_url_mot($id);
@@ -640,6 +643,7 @@ function calculer_url_mot_dist($id, $texte='')
 	return array($lien, 'spip_in', $texte);
 }
 
+// http://doc.spip.org/@calculer_url_breve_dist
 function calculer_url_breve_dist($id, $texte='')
 {
 	$lien = generer_url_breve($id);
@@ -652,6 +656,7 @@ function calculer_url_breve_dist($id, $texte='')
 	return array($lien, 'spip_in', $texte, $row['lang']);
 }
 
+// http://doc.spip.org/@calculer_url_auteur_dist
 function calculer_url_auteur_dist($id, $texte='')
 {
 	$lien = generer_url_auteur($id);
@@ -663,6 +668,7 @@ function calculer_url_auteur_dist($id, $texte='')
 	return array($lien, 'spip_in', $texte); # pas de hreflang
 }
 
+// http://doc.spip.org/@calculer_url_document_dist
 function calculer_url_document_dist($id, $texte='')
 {
 	$lien = generer_url_document($id);
@@ -678,6 +684,7 @@ function calculer_url_document_dist($id, $texte='')
 	return array($lien, 'spip_in', $texte); # pas de hreflang
 }
 
+// http://doc.spip.org/@calculer_url_site_dist
 function calculer_url_site_dist($id, $texte='')
 {
 	# attention dans le cas des sites le lien pointe non pas sur
@@ -694,6 +701,7 @@ function calculer_url_site_dist($id, $texte='')
 	return array($lien, 'spip_out', $texte, $row['lang']);
 }
 
+// http://doc.spip.org/@calculer_url_forum_dist
 function calculer_url_forum_dist($id, $texte='')
 {
 	$lien = generer_url_forum($id);
