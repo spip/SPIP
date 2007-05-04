@@ -266,8 +266,9 @@ function info_progression_etape($en_cours,$phase,$dir){
 		if ($etape=="$phase$en_cours.php"){
 			$etat = "encours";
 		}
-		$aff_etapes .= "<span class='$etat'><em>".(($debut<$last)?$debut:"go")."</em><span>"
-		 .(($debut<$last)?", ":" !")."</span></span>";
+		$aff_etapes .= ($debut<$last)
+			? "<span class='$etat'><em>$debut</em><span>,</span> </span>"
+			: '';
 		if ($etat == "encours")
 			$etat = 'todo';
 		$debut++;
