@@ -1257,54 +1257,46 @@ function calendrier_categories($table, $num, $objet)
   }
 }
 
-
-// icones standards, fonction de la direction de la langue
-
-global $bleu, $vert, $jaune, $spip_lang_rtl;
-$bleu = http_img_pack("m_envoi_bleu$spip_lang_rtl.gif", 'B', "class='calendrier-icone'");
-$vert = http_img_pack("m_envoi$spip_lang_rtl.gif", 'V', "class='calendrier-icone'");
-$jaune= http_img_pack("m_envoi_jaune$spip_lang_rtl.gif", 'J', "class='calendrier-icone'");
-
 // http://doc.spip.org/@http_calendrier_ics_message
 function http_calendrier_ics_message($annee, $mois, $jour, $large)
 {	
-  global $bleu, $vert,$jaune, $connect_login;
+  global $connect_login;
   $b = _T("lien_nouvea_pense_bete");
   $v = _T("lien_nouveau_message");
   $j=  _T("lien_nouvelle_annonce");
 
   if (!$connect_login) return '';
-  return 
+  return "&nbsp;" .
     http_href(generer_action_auteur("editer_message","pb/$annee-$mois-$jour"), 
-	      $bleu . ($large ? $b : ''), 
+	       ($large ? $b : '&nbsp;'), 
 	      $b,
 	      'color: blue;',
-	      'calendrier-arial10') .
+	      'calendrier-arial10 pense-bete') .
     "\n" .
     http_href(generer_action_auteur("editer_message","normal/$annee-$mois-$jour"), 
-	      $vert . ($large ? $v : ''), 
+	       ($large ? $v : '&nbsp;'), 
 	      $v,
 	      'color: green;',
-	      'calendrier-arial10') .
+	      'calendrier-arial10 message') .
     (($GLOBALS['connect_statut'] != "0minirezo") ? "" :
      ("\n" .
     http_href(generer_action_auteur("editer_message","affich/$annee-$mois-$jour"), 
-		$jaune . ($large ? $j : ''), 
+		($large ? $j : '&nbsp;'), 
 		$j,
 		'color: #ff9900;',
-		'calendrier-arial10')));
+		'calendrier-arial10 annonce')));
 }
 
 // http://doc.spip.org/@http_calendrier_aide_mess
 function http_calendrier_aide_mess()
 {
-  global $bleu, $vert, $jaune, $spip_lang_left, $connect_login;
+  global $spip_lang_left, $connect_login;
   if (!$connect_login) return '';
   return
    "\n<br /><br /><br />\n<table width='700' class='arial1 spip_xx-small'>\n<tr><th style='text-align: $spip_lang_left; font-weight: bold;'> " . _T('info_aide').
-    "</th></tr><tr><td>$bleu\n"._T('info_symbole_bleu')."\n" .
-    "</td></tr><tr><td>$vert\n"._T('info_symbole_vert')."\n" .
-    "</td></tr><tr><td>$jaune\n"._T('info_symbole_jaune')."\n" .
+    "</th></tr><tr><td class='pense-bete'>" ._T('info_symbole_bleu')."\n" .
+    "</td></tr><tr><td class='message'>" . _T('info_symbole_vert')."\n" .
+    "</td></tr><tr><td class='annonce'>" . _T('info_symbole_jaune')."\n" .
     "</td></tr>\n</table>\n";
  }
 
