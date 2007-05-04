@@ -149,10 +149,13 @@ function liste_options_langues($nom_select, $default='', $herit='') {
 		case 'changer_lang':
 			$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
 			break;
-		# menu de l'interface (privee, installation et panneau de login)
-		# les langues presentes sous forme de fichiers de langue
+	# menu de l'interface (privee, installation et panneau de login)
+	# les langues presentes sous forme de fichiers de langue
+	# on force la relecture du repertoire des langues pour etre synchrone.
 		case 'var_lang_ecrire':
 		default:
+			$GLOBALS['meta']['langues_proposees'] = '';
+			init_langues();
 			$langues = explode(',', $GLOBALS['meta']['langues_proposees']);
 			break;
 
@@ -290,20 +293,19 @@ function repertoire_lang($module='spip', $lang='fr') {
 }
 
 //
-// Initialisation de
-// - la meta langues proposees (qui ne change pas)
-// - la globale spip_lang: langue courante (qui peut changer)
+// Initialisation des meta
+// - langues proposeesxb
+// - langue site
 //
 // http://doc.spip.org/@init_langues
 function init_langues() {
-	global $spip_lang;
 
 	// liste des langues dans les meta, sauf a l'install
 
 	$all_langs = @$GLOBALS['meta']['langues_proposees'];
 
 	$tout = array();
-	if (!$all_langs || !isset($GLOBALS['meta']['langue_site']) || !_DIR_RESTREINT) {
+	if (!$all_langs) {
 		if (!$d = @opendir(repertoire_lang())) return;
 		while (($f = readdir($d)) !== false) {
 			if (preg_match(',^spip_([a-z_]+)\.php[3]?$,', $f, $regs))
@@ -311,22 +313,22 @@ function init_langues() {
 		}
 		closedir($d);
 		sort($tout);
-		if (!isset($GLOBALS['meta']['langue_site'])) {
-// Initialisation : le francais si dispo, sinon la premiere langue trouvee
-			$spip_lang = $GLOBALS['meta']['langue_site'] =
-			(strpos(',fr,',",$all_langs,")!==false)
-			? 'fr' :  $tout[0];
-			ecrire_meta('langue_site', $spip_lang);
-		}
 		$tout = join(',', $tout);
 		// Si les langues n'ont pas change, ne rien faire
 		if ($tout != $all_langs) {
 			include_spip('inc/meta');
 			$GLOBALS['meta']['langues_proposees'] =	$tout;
 			ecrire_meta('langues_proposees', $tout);
-		}
-		ecrire_metas();
+		} else $tout = '';
 	}
+	if (!isset($GLOBALS['meta']['langue_site'])) {
+// Initialisation : le francais si dispo, sinon la premiere langue trouvee
+		$GLOBALS['meta']['langue_site'] = $tout =
+		(strpos(',fr,',",$all_langs,")!==false)
+		  ? 'fr' :  substr($all_langs,0,strpos($all_langs,','));
+		ecrire_meta('langue_site', $tout);
+	}
+	if ($tout) ecrire_metas();
 }
 
 // http://doc.spip.org/@html_lang_attributes
