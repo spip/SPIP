@@ -34,12 +34,11 @@ function changer_langue($lang) {
 	OR ($lang = preg_replace(',_.*,', '', $lang)
 	AND strpos($liste_langues,",$lang,")!==false)) {
 
-		$GLOBALS['spip_lang'] = $lang;
 		$spip_lang_rtl =   lang_dir($lang, '', '_rtl');
 		$spip_lang_right = $spip_lang_rtl ? 'left' : 'right';
 		$spip_lang_left =  $spip_lang_rtl ? 'right' : 'left';
 
-		return true;
+		return $GLOBALS['spip_lang'] = $lang;
 	} else
 		return false;
 
@@ -253,7 +252,7 @@ function verifier_lang_url() {
 //
 // http://doc.spip.org/@utiliser_langue_site
 function utiliser_langue_site() {
-	changer_langue($GLOBALS['meta']['langue_site']);
+	return changer_langue($GLOBALS['meta']['langue_site']);
 }
 
 // http://doc.spip.org/@utiliser_langue_visiteur
@@ -273,7 +272,7 @@ function utiliser_langue_visiteur() {
 		}
 	}
 
-	return changer_langue($GLOBALS['langue_site']);
+	return utiliser_langue_site();
 }
 
 // Une fonction qui donne le repertoire ou trouver des fichiers de langue
