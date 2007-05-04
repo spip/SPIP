@@ -27,6 +27,9 @@ function action_configurer_dist() {
 	$r = rawurldecode(_request('redirect'));
 	$r = parametre_url($r, 'configuration', $arg,"&");
 	appliquer_modifs_config();
+
+	// Cette globale est fixee par appliquer_modifs_config();
+	// c'est un message a afficher dans l'exec de retour (relayeur si comme ici on est en ajax)
 	if ($arg == 'relayeur')
 		$r = parametre_url($r, 'retour_proxy', $GLOBALS['retour_proxy'],"&");
 	else if ($arg == 'langue') {

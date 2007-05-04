@@ -18,7 +18,6 @@ include_spip('inc/config');
 function configuration_relayeur_dist()
 {
 	global $spip_lang_right, $spip_lang_left;
-	global $retour_proxy;
 
 	$res = $submit = '';
 
@@ -34,7 +33,10 @@ function configuration_relayeur_dist()
 			. "<input type='text' name='test_proxy' value='http://www.spip.net/' size='40' class='forml' />"
 			. "</p>";
 
-			if($retour_proxy) {
+			// ce retour_proxy provient soit de l'url, si on est en ajax,
+			// soit des globales si on est en mode sans javascript. Joli :(
+			if($retour_proxy = _request('retour_proxy')
+			OR $retour_proxy = $GLOBALS['retour_proxy']) {
 				$res .= debut_boite_info(true)
 				. $retour_proxy
 				. fin_boite_info(true);

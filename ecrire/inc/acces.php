@@ -129,25 +129,20 @@ function initialiser_sel() {
 }
 
 
-// http://doc.spip.org/@ecrire_logins
-function ecrire_logins($fichier, $tableau_logins) {
-	reset($tableau_logins);
-
-	while(list($login, $htpass) = each($tableau_logins)) {
-		if ($login && $htpass) {
-			fputs($fichier, "$login:$htpass\n");
-		}
-	}
-}
-
-
+// Cette fonction ne sert plus que pour l'option "activer le htpasswd"
+// dont le reglage se fait depuis le plugin "acces restreint"
+// Toutefois elle reste ici par mesure de precaution/securite
+// pour les sites qui dependent de la production de ces fichiers.
 // http://doc.spip.org/@ecrire_acces
 function ecrire_acces() {
 	$htaccess = _DIR_RESTREINT . _ACCESS_FILE_NAME;
 	$htpasswd = _DIR_TMP . _AUTH_USER_FILE;
 
+	// Cette variable de configuration peut etre posee par un plugin
+	// par exemple acces_restreint ;
 	// si .htaccess existe, outrepasser spip_meta
-	if (($GLOBALS['meta']['creer_htpasswd'] == 'non') AND !@file_exists($htaccess)) {
+	if (($GLOBALS['meta']['creer_htpasswd'] != 'oui')
+	AND !@file_exists($htaccess)) {
 		@unlink($htpasswd);
 		@unlink($htpasswd."-admin");
 		return;
@@ -156,29 +151,24 @@ function ecrire_acces() {
 	# remarque : ici on laisse passer les "nouveau" de maniere a leur permettre
 	# de devenir "1comite" le cas echeant (auth http)... a nettoyer
 	// attention, il faut au prealable se connecter a la base (necessaire car utilise par install)
-	$result = spip_query_db("SELECT login, htpass FROM spip_auteurs WHERE statut != '5poubelle' AND statut!='6forum'");
+	// on fait spip_query_db() car on est pas forcement encore installe
+	$p1 = ''; // login:htpass pour tous
+	$p2 = ''; // login:htpass pour les admins/0minirezo
+	$s = spip_query_db("SELECT login, htpass, statut FROM spip_auteurs WHERE statut != '5poubelle' AND statut!='6forum'");
+	while ($t = spip_fetch_array($s)) {
+		$p1 .= $t['login'].':'.$t['htpass']."\n";
+		if ($t['statut'] == '0minirezo')
+			$p2 .= $t['login'].':'.$t['htpass']."\n";
+	}
 
-	$logins = array();
-	while($row = spip_fetch_array($result)) $logins[$row['login']] = $row['htpass'];
-
-	$fichier = @fopen($htpasswd, "w");
-	if ($fichier) {
-		ecrire_logins($fichier, $logins);
-		fclose($fichier);
+	if (ecrire_fichier($htpasswd, $p1)
+	AND ecrire_fichier($htpasswd.'-admin', $p2)) {
+		spip_log("Ecriture de $htpasswd et $htpasswd-admin: OK");
 	} else {
+		spip_log("Erreur $htpasswd / $htpasswd-admin!");
 		include_spip('inc/headers');
 		redirige_par_entete(generer_test_dirs('', true));
 	}
-
-	$result = spip_query_db("SELECT login, htpass FROM spip_auteurs WHERE statut = '0minirezo'");
-
-
-	$logins = array();
-	while($row = spip_fetch_array($result)) $logins[$row['login']] = $row['htpass'];
-
-	$fichier = fopen("$htpasswd-admin", "w");
-	ecrire_logins($fichier, $logins);
-	fclose($fichier);
 }
 
 
@@ -221,16 +211,18 @@ function verifier_htaccess($rep) {
 
 // http://doc.spip.org/@gerer_htaccess
 function gerer_htaccess() {
-	$mode = $GLOBALS['meta']['creer_htaccess'];
+	// Cette variable de configuration peut etre posee par un plugin
+	// par exemple acces_restreint
+	$GLOBALS['meta']['creer_htaccess'];
 	$r = spip_query("SELECT extension FROM spip_types_documents");
 	while ($e = spip_fetch_array($r)) {
 		if (is_dir($dir = _DIR_IMG . $e['extension'])) {
-			if ($mode == 'oui')
+			if ($GLOBALS['meta']['creer_htaccess'] == 'oui')
 				verifier_htaccess($dir);
 			else @unlink("$dir/" . _ACCESS_FILE_NAME);
 		}
 	}
-	return $mode;
+	return $GLOBALS['meta']['creer_htaccess'];
 }
 
 initialiser_sel();
