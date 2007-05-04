@@ -142,7 +142,10 @@ function login_pour_tous($login, $cible, $action) {
 			// on laisse le menu decider de la langue
 			unset($row['lang']);
 		}
-	} $row = array();
+	} else {
+		$row = array();
+	}
+
 	// afficher "erreur de mot de passe" si &var_erreur=pass
 	if (_request('var_erreur') == 'pass')
 		$erreur = _T('login_erreur_pass');
