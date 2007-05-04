@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-include_spip('inc/texte');
 include_spip('inc/editer_auteurs'); #pour determiner_auteurs_objet()
 
 // http://doc.spip.org/@exec_iconifier_dist

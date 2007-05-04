@@ -24,7 +24,6 @@ function base_upgrade_dist($titre)
 
 	include_spip('inc/acces');
 	include_spip('inc/config');
-	include_spip('inc/lang');
 	ecrire_acces();
 	init_config();
 }

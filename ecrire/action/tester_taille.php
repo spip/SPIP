@@ -47,7 +47,7 @@ function action_tester_taille_dist() {
 			include_spip('inc/presentation');
 			include_spip('inc/charsets');
 			include_spip('inc/documents');
-			include_spip('inc/lang');
+			include_spip('inc/minipres');
 			include_spip('inc/texte');
 			$dummy = propre("<doc1>");
 

@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-include_spip('inc/texte');
 include_spip('inc/actions');
 
 // http://doc.spip.org/@exec_articles_dist

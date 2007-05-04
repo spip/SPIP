@@ -12,10 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
 include_spip('inc/headers');
 include_spip('inc/layer');
-include_spip('inc/texte');
 
 /////////////////////////////
 // La frame de base

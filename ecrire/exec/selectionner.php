@@ -22,9 +22,7 @@ function exec_selectionner_dist()
 	$type = _request('type');
 	$rac = _request('racine');
 
-	include_spip('inc/texte');
 	$selectionner = charger_fonction('selectionner', 'inc');
 	ajax_retour($selectionner($id, "choix_parent", $exclus, $rac, $type!='breve'));
-
 }
 ?>

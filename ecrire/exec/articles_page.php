@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-include_spip('inc/texte');
 charger_generer_url();
 
 // http://doc.spip.org/@exec_articles_page_dist

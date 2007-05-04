@@ -287,12 +287,12 @@ function appliquer_modifs_config() {
 
 	// langue_site : la globale est mangee par inc_version
 	if ($lang = $GLOBALS['changer_langue_site']) {
-		$lang2 = $GLOBALS['spip_lang'];
 		include_spip('inc/lang');
 		if (changer_langue($lang)) {
 			ecrire_meta('langue_site', $lang);
 			changer_langue($lang2);
 		}
+		utiliser_langue_visiteur(); 
 	}
 
 	ecrire_metas();
