@@ -293,7 +293,7 @@ function repertoire_lang($module='spip', $lang='fr') {
 
 //
 // Initialisation des meta
-// - langues proposeesxb
+// - langues proposees
 // - langue site
 //
 // http://doc.spip.org/@init_langues
@@ -305,7 +305,7 @@ function init_langues() {
 
 	$tout = array();
 	if (!$all_langs) {
-		if (!$d = @opendir(repertoire_lang())) return;
+		if (!$d = @opendir(repertoire_lang())) break;
 		while (($f = readdir($d)) !== false) {
 			if (preg_match(',^spip_([a-z_]+)\.php[3]?$,', $f, $regs))
 				$tout[] = $regs[1];
@@ -323,7 +323,7 @@ function init_langues() {
 	if (!isset($GLOBALS['meta']['langue_site'])) {
 // Initialisation : le francais si dispo, sinon la premiere langue trouvee
 		$GLOBALS['meta']['langue_site'] = $tout =
-		(strpos(',fr,',",$all_langs,")!==false)
+		(!$all_langs OR (strpos(',fr,',",$all_langs,")!==false))
 		  ? 'fr' :  substr($all_langs,0,strpos($all_langs,','));
 		ecrire_meta('langue_site', $tout);
 	}

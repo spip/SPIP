@@ -157,9 +157,9 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 		. "</div></li>";
 
 		// choix de la langue
-		if ($GLOBALS['meta']['langues_proposees']) {
+		if ($i = menu_langues('var_lang_ecrire')) {
 			$res .= "<li id='bandeau_couleur5' class='bandeau_couleur'><div class='menu-item'>"
-			. menu_langues('var_lang_ecrire')
+			. $i
 			. "</div></li>";
 		}
 
