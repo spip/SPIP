@@ -84,7 +84,7 @@ function calendrier_href($script, $annee, $mois, $jour, $type, $fin, $ancre, $im
 	$t = ($titre ? " title=\"$titre\"" : '');
 	$s = ($style ? " style=\"$style\"" : '');
 
-	$moi = preg_match("/exec=" . $GLOBALS['exec'] .'$/', $script);
+	$moi = preg_match("/exec=" . _request('exec') .'$/', $script);
 	if ($img) $clic =  http_img_pack($img, ($alt ? $alt : $titre), $c);
 	  // pas d'Ajax pour l'espace public pour le moment ou si indispo
 	if (_DIR_RESTREINT  || !$moi || (_SPIP_AJAX !== 1 ))
@@ -252,7 +252,7 @@ function http_calendrier_mois_navigation($annee, $mois, $premier_jour, $dernier_
 	  "\n<tr><td colspan='7'>" .
 	  http_calendrier_navigation($annee,
 				   $mois,
-				   $jour,
+				   0,
 				   $echelle,
 				   $partie_cal,
 				   $periode,

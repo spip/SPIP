@@ -547,7 +547,7 @@ function calculer_critere_parties_aux($idb, &$boucles, $param) {
 	  } else {
 	    preg_match(',^ *(([0-9]+)|n) *(- *([0-9]+)? *)?$,', $param[0]->texte, $m);
 	    $a1 = $m[1];
-	    if (!$m[3])
+	    if (!@$m[3])
 	      return array($a1, 0);
 	    elseif ($m[4])
 	      return array($a1, $m[4]);
@@ -693,7 +693,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	}
 
 	// Cas particulier : expressions de date
-	else if ($table_date[$type]
+	else if (isset($table_date[$type])
 	AND preg_match(",^((age|jour|mois|annee)_relatif|date|mois|annee|jour|heure|age)(_[a-z]+)?$,",
 	$col, $regs)) {
 		list($col, $table) =
@@ -841,10 +841,11 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
   // et operateur d'egalite (http://trac.rezo.net/trac/spip/ticket/477)
 
   if ($pk = (count($boucle->from) == 1) && !$cond) {
-    if ($pk = $a[1]['key']['PRIMARY KEY']) {
-	$pk=preg_match("/^$id_primary, *$col$/", $pk) OR
-	  preg_match("/^$col, *$id_primary$/", $pk);
-    }
+  	if ($pk = $a[1]['key']['PRIMARY KEY']) {
+		$id_primary = $ddesc['key']['PRIMARY KEY'];
+		$pk = preg_match("/^$id_primary, *$col$/", $pk) OR
+			preg_match("/^$col, *$id_primary$/", $pk);
+	}
   }
   // la clause Group by est en conflit avec ORDER BY, a completer
 
@@ -1043,7 +1044,7 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit)
 			if (count($params)==1
 					AND count($params[0]==3)
 					AND $params[0][0]->type == 'texte' 
-					AND $params[0][2]->type == 'texte' 
+					AND @$params[0][2]->type == 'texte' 
 					AND ($p=$params[0][0]->texte) == $params[0][2]->texte
 					AND (($p == "'") OR ($p == '"'))
 					AND $params[0][1]->type == 'champ' ) {

@@ -468,7 +468,7 @@ function phraser_criteres($params, &$result) {
 			  } elseif (preg_match(',^(' . CHAMP_SQL_PLUS_FONC . 
 					 ')[[:space:]]*(\??)(!?)(<=?|>=?|==?|\b(?:IN|LIKE)\b)(.*)$,is', $param, $m)) {
 			    $a2 = trim($m[7]);
-			    if (($a2{0}=="'" OR $a2{0}=='"') AND ($a2{0}==substr($a2,-1)))
+			    if ($a2 AND ($a2[0]=="'" OR $a2[0]=='"') AND ($a2[0]==substr($a2,-1)))
 			      $a2 = substr($a2,1,-1);
 			    $crit = phraser_critere_infixe($m[1], $a2, $v,
 							   (($m[1] == 'lang_select') ? $m[1] : $m[6]),
