@@ -83,7 +83,7 @@ function login_explicite($login, $cible) {
 
 // http://doc.spip.org/@login_pour_tous
 function login_pour_tous($login, $cible, $action) {
-	global $ignore_auth_http, $_SERVER, $_COOKIE;
+	global $ignore_auth_http;
 
 	// en cas d'echec de cookie, inc_auth a renvoye vers le script de
 	// pose de cookie ; s'il n'est pas la, c'est echec cookie

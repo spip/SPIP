@@ -36,7 +36,8 @@ function inc_session_dist($auteur=false)
 		return supprimer_sessions($auteur);
 	else if (is_array($auteur))
 		return ajouter_session($auteur);
-	else return verifier_session($auteur);
+	else
+		return verifier_session($auteur);
 }
 
 //
@@ -45,13 +46,9 @@ function inc_session_dist($auteur=false)
 
 // http://doc.spip.org/@ajouter_session
 function ajouter_session($auteur) {
+	$_COOKIE['spip_session'] = $auteur['id_auteur'].'_'.md5(uniqid(rand(),true));
 
-	global $spip_session;
-
-	if (!$spip_session) 
-		$spip_session = $auteur['id_auteur'].'_'.md5(uniqid(rand(),true));
-
-	$fichier_session = fichier_session($spip_session, $GLOBALS['meta']['alea_ephemere']);
+	$fichier_session = fichier_session($_COOKIE['spip_session'], $GLOBALS['meta']['alea_ephemere']);
 
 	if (!isset($auteur['hash_env'])) $auteur['hash_env'] = hash_env();
 	if (!isset($auteur['ip_change'])) $auteur['ip_change'] = false;
@@ -66,7 +63,12 @@ function ajouter_session($auteur) {
 	if (!ecrire_fichier($fichier_session, $texte)) {
 		include_spip('inc/headers');
 		redirige_par_entete(generer_test_dirs(_DIR_SESSIONS,true));
-	} else return $spip_session;
+	} else {
+		include_spip('inc/cookie');
+		spip_setcookie('spip_session', $_COOKIE['spip_session'],
+			2 * _RENOUVELLE_ALEA);
+		return $_COOKIE['spip_session'];
+	}
 }
 
 //
@@ -97,18 +99,17 @@ function supprimer_sessions($id_auteur) {
 // http://doc.spip.org/@verifier_session
 function verifier_session($change=false) {
 
-	global $auteur_session, $spip_session; 
-
 	// si pas de cookie, c'est fichu
-	if (!$spip_session) return false;
+	if (!isset($_COOKIE['spip_session']))
+		return false;
 
 	// Tester avec alea courant
-	$fichier_session = fichier_session($spip_session, $GLOBALS['meta']['alea_ephemere'], true);
+	$fichier_session = fichier_session($_COOKIE['spip_session'], $GLOBALS['meta']['alea_ephemere'], true);
 	if ($fichier_session AND @file_exists($fichier_session)) {
 		include($fichier_session);
 	} else {
 		// Sinon, tester avec alea precedent
-	  $fichier_session = fichier_session($spip_session, $GLOBALS['meta']['alea_ephemere_ancien'], true);
+	  $fichier_session = fichier_session($_COOKIE['spip_session'], $GLOBALS['meta']['alea_ephemere_ancien'], true);
 		if (!$fichier_session OR !@file_exists($fichier_session)) return false;
 
 		// Renouveler la session avec l'alea courant
@@ -122,24 +123,22 @@ function verifier_session($change=false) {
 	// Seul celui qui a l'IP d'origine est rejoue
 	// ainsi un eventuel voleur de cookie ne pourrait pas deconnecter
 	// sa victime, mais se ferait deconnecter par elle.
-
 	if (hash_env() != $GLOBALS['auteur_session']['hash_env']) {
-	    if (!$GLOBALS['auteur_session']['ip_change']) {
-		$GLOBALS['rejoue_session'] = rejouer_session();
-		$GLOBALS['auteur_session']['ip_change'] = true;
-		ajouter_session($GLOBALS['auteur_session']);
-	    } else if ($change)
-	      spip_log("session non rejouee, vol de cookie ?");
-	} else { if ($change) {
-		spip_log("rejoue session $fichier_session $spip_session");
+		if (!$GLOBALS['auteur_session']['ip_change']) {
+			$GLOBALS['rejoue_session'] = rejouer_session();
+			$GLOBALS['auteur_session']['ip_change'] = true;
+			ajouter_session($GLOBALS['auteur_session']);
+		} else if ($change) {
+			spip_log("session non rejouee, vol de cookie ?");
+		}
+	} else if ($change) {
+		spip_log("rejoue session $fichier_session ".$_COOKIE['spip_session']);
 		@unlink($fichier_session);
-		$auteur_session['ip_change'] = false;
-		unset($spip_session);
-		$cookie= ajouter_session($auteur_session);
-		spip_setcookie('spip_session', $cookie);
-	  }
+		$GLOBALS['auteur_session']['ip_change'] = false;
+		unset($_COOKIE['spip_session']);
+		ajouter_session($GLOBALS['auteur_session']);
 	}
-	return 	$auteur_session['id_auteur'];
+	return $GLOBALS['auteur_session']['id_auteur'];
 }
 
 // Code a inserer par inc/presentation pour rejouer la session
@@ -158,7 +157,7 @@ function rejouer_session()
 //
 // http://doc.spip.org/@fichier_session
 function fichier_session($id_session, $alea, $tantpis=false) {
-	if (preg_match(",^([0-9]+_),", $id_session, $regs))
+	if (preg_match(",^([0-9]+)_,", $id_session, $regs))
 		$id_auteur = $regs[1];
 		
 	$repertoire = _DIR_SESSIONS;
@@ -167,7 +166,7 @@ function fichier_session($id_session, $alea, $tantpis=false) {
 		$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
 		$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
 	}
-	return $repertoire . 'session_'.$id_auteur.md5($id_session.' '.$alea). '.php';
+	return $repertoire . 'session_'.$id_auteur.'_'.md5($id_session.' '.$alea). '.php';
 }
 
 //

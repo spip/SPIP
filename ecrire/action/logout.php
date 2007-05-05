@@ -29,10 +29,10 @@ function action_logout_dist()
 	if (is_numeric($auteur_session['id_auteur'])) {
 		spip_query("UPDATE spip_auteurs SET en_ligne = DATE_SUB(NOW(),INTERVAL 15 MINUTE) WHERE id_auteur = ".$auteur_session['id_auteur']);
 	// le logout explicite vaut destruction de toutes les sessions
-		if ($_COOKIE['spip_session']) {
+		if (isset($_COOKIE['spip_session'])) {
 			$session = charger_fonction('session', 'inc');
 			$session($auteur_session['id_auteur']);
-			spip_setcookie('spip_session', '', 0);
+			spip_setcookie('spip_session', $_COOKIE['spip_session'], time()-3600);
 		}
 		if (isset($_SERVER['PHP_AUTH_USER']) AND !$ignore_auth_http) {
 			include_spip('inc/actions');
