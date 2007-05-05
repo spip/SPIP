@@ -191,7 +191,7 @@ function colonne_droite_neq4($id_rubrique, $activer_breves,
 // Modification du cookie
 //
 
-	if (!$_COOKIE['spip_admin']) {
+	if (!@$_COOKIE['spip_admin']) {
 		$cookie = rawurlencode("@$connect_login");
 		$retour = rawurlencode(_DIR_RESTREINT_ABS . _SPIP_ECRIRE_SCRIPT);
 		$lien = generer_url_public('spip_cookie', "cookie_admin=$cookie&url=$retour");
@@ -406,7 +406,7 @@ function exec_accueil_dist()
 	debut_gauche();
 
 	if ($spip_display != 4) {
-		echo personnel_accueil($_COOKIE['spip_admin']);
+		echo personnel_accueil(@$_COOKIE['spip_admin']);
 		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
 		echo "\n<div>&nbsp;</div>";
 		$nom = typo($GLOBALS['meta']["nom_site"]);
