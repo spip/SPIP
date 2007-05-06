@@ -50,7 +50,7 @@ function afficher_taille_cache_vignettes() {
 // http://doc.spip.org/@exec_admin_vider_dist
 function exec_admin_vider_dist()
 {
-  global $connect_toutes_rubriques,  $quota_cache, $spip_lang;
+  global $quota_cache, $spip_lang;
 
 $commencer_page = charger_fonction('commencer_page', 'inc');
 echo $commencer_page(_T('onglet_vider_cache'), "configuration", "cache");
@@ -71,7 +71,8 @@ fin_boite_info();
 
 debut_droite();
 
-if (!$connect_toutes_rubriques) {
+// autorisation a affiner
+if (!autoriser('configurer', 'admin_vider')) {
 	echo _T('avis_non_acces_page');
 	echo fin_gauche(), fin_page();
 	exit;
