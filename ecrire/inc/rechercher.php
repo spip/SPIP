@@ -116,8 +116,12 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array()) {
 				$score = 0;
 				$matches = array();
 
-				if ($recherche == "$id")
-					$champs_vus[$_id_table] = $id;
+				$vu = false;
+				if ($recherche == "$id") {
+					$vu = true;
+					if ($options['champs'])
+						$champs_vus[$_id_table] = $id;
+				}
 
 				foreach ($champs as $champ) {
 					if ($n = 
@@ -125,22 +129,28 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array()) {
 						? preg_match_all($preg, $t[$champ], $regs, PREG_SET_ORDER)
 						: preg_match($preg, $t[$champ])
 					) {
-						$champs_vus[$_id_table] = $id;
+						$vu = true;
+
 						if ($options['champs'])
 							$champs_vus[$champ] = $t[$champ];
 						if ($options['score'])
 							$score += $n; // * valeur du champ
 						if ($options['matches'])
 							$matches[$champ] = $regs;
+
+						if (!$options['champs']
+						AND !$options['score']
+						AND !$options['matches'])
+							break;
 					}
 				}
 
-				if ($champs_vus) {
+				if ($vu) {
 					if (!isset($results[$table]))
 						$results[$table] = array();
-					$results[$table][$id] = array(
-						'champs' => $champs_vus
-					);
+					$results[$table][$id] = array();
+					if ($champs_vus)
+						$results[$table][$id]['champs'] = $champs_vus;
 					if ($score)
 						$results[$table][$id]['score'] = $score;
 					if ($matches)
