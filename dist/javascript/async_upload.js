@@ -68,7 +68,7 @@ jQuery.fn.clone2 = jQuery.browser.mozilla ? jQuery.fn.clone : jQuery.fn.html;
 function async_upload_article_edit(res,jForm){
       var cont;
       //verify if a new document or a customized vignette
-      var anchor = jQuery(res.find(">a:first"));
+      var anchor = jQuery(res.find(">a:first[@id^=document]"));
 			if(jQuery("#"+anchor.attr('id')).size()) {
 				cont = jQuery("#"+anchor.attr('id')).next().next().html(anchor.next().next().html());
 			} else {
