@@ -12,8 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/lang');
-include_spip('inc/texte');
+include_spip('inc/texte'); //inclue inc/lang et inc/filtres
+include_spip('inc/headers');
 
 //
 // Presentation des pages d'installation et d'erreurs
@@ -23,8 +23,6 @@ include_spip('inc/texte');
 function install_debut_html($titre = 'AUTO', $onLoad = '') {
 	global $spip_lang_right,$spip_lang_left;
 	
-	include_spip('inc/filtres');
-	include_spip('inc/headers');
 	utiliser_langue_visiteur();
 
 	http_no_cache();
@@ -91,6 +89,8 @@ function fieldset($legend, $champs = array(), $horchamps='') {
 function minipres($titre='', $corps="", $onload='')
 {
 	if (!$titre) {
+		http_status(403);
+		header("Connection: close");
 		$titre = _T('info_acces_interdit');
 		$corps = _request(_DIR_RESTREINT ? 'action' : 'exec');
 		spip_log($GLOBALS['auteur_session']['nom'] . " $titre " . $_SERVER['REQUEST_URI']);
@@ -172,7 +172,6 @@ function exec_test_ajax_dist() {
 		// on est appele par <noscript>
 		case -1:
 			spip_setcookie('spip_accepte_ajax', -1);
-			include_spip('inc/headers');
 			redirige_par_entete(_DIR_IMG_PACK.'puce-orange-anim.gif');
 			break;
 

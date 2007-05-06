@@ -52,6 +52,10 @@ function exec_admin_vider_dist()
 {
   global $quota_cache, $spip_lang;
 
+if (!$connect_toutes_rubriques) {
+	echo minipres();
+	exit;
+}
 $commencer_page = charger_fonction('commencer_page', 'inc');
 echo $commencer_page(_T('onglet_vider_cache'), "configuration", "cache");
 
@@ -70,13 +74,6 @@ echo _T('info_gauche_admin_vider');
 fin_boite_info();
 
 debut_droite();
-
-// autorisation a affiner
-if (!autoriser('configurer', 'admin_vider')) {
-	echo _T('avis_non_acces_page');
-	echo fin_gauche(), fin_page();
-	exit;
-}
 
 debut_cadre_trait_couleur("cache-24.gif", false, "", _T('texte_vider_cache'));
 
