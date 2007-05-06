@@ -166,6 +166,7 @@ function remplace_en_base($recherche='', $remplace=NULL, $tables=NULL, $options=
 		),
 		$options
 	);
+	$options['champs'] = true;
 
 
 	if (!is_array($tables))
@@ -181,7 +182,7 @@ function remplace_en_base($recherche='', $remplace=NULL, $tables=NULL, $options=
 			if ($options['toutmodifier']
 			OR autoriser('modifier', $table, $id)) {
 				$modifs = array();
-				foreach ($x as $key => $val) {
+				foreach ($x['champs'] as $key => $val) {
 					if ($key == $_id_table) next;
 					$repl = preg_replace($preg, $remplace, $val);
 					if ($repl <> $val)
