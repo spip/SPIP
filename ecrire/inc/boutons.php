@@ -185,9 +185,9 @@ function definir_barre_boutons() {
 	// sous menu configuration
 	$sousmenu = array();
 	if (autoriser('configurer', 'lang')) {
-		$soumenu['config_lang'] =
+		$sousmenu['config_lang'] =
 			new Bouton("langues-24.gif", "icone_gestion_langues");
-		$soumenu['espacement'] = null;
+		$sousmenu['espacement'] = null;
 	}
 
 	if (autoriser('sauvegarder')) {
