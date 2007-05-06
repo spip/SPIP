@@ -89,11 +89,10 @@ function assembler_page ($fond) {
 	// demande de previsualisation ?
 	// -> inc-calcul n'enregistrera pas les fichiers caches
 	// -> inc-boucles acceptera les objets non 'publie'
-	if (is_preview()) {
-			$var_mode = 'recalcul';
-			$var_preview = true;
-			spip_log('preview !');
-		} else	$var_preview = false;
+	if ($var_preview = is_preview()) {
+		$var_mode = 'recalcul';
+		spip_log('preview !');
+	}
 
 	$headers_only = ($_SERVER['REQUEST_METHOD'] == 'HEAD');
 
