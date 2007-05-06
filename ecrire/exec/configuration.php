@@ -18,18 +18,12 @@ include_spip('inc/meta');
 
 // http://doc.spip.org/@exec_configuration_dist
 function exec_configuration_dist(){
-	global $connect_statut, $connect_toutes_rubriques, $spip_display;
+	global $spip_display;
 
-
-	if ($connect_statut != '0minirezo') {
+	if (!autoriser('configurer', 'configuration')) {
 		echo _T('avis_non_acces_page');
 		echo fin_gauche(), fin_page();
 		exit;
-	}
-
-	if (!$connect_toutes_rubriques) {
-		include_spip('inc/headers');
-		redirige_par_entete(generer_url_ecrire('admin_tech','',true));
 	}
 
 	init_config();

@@ -53,7 +53,6 @@ class Bouton {
 function definir_barre_boutons() {
 	global $boutons_admin;
 
-	global $REQUEST_URI, $HTTP_HOST;
 	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
 
 	$boutons_admin=array(
@@ -70,9 +69,16 @@ function definir_barre_boutons() {
 		  new Bouton('statistiques-48.png', 'icone_statistiques_visites');
 	}
 
-	if ($GLOBALS['connect_statut'] == '0minirezo') {
+	// autoriser('configurer') => forcement admin complet (ou webmestre)
+	if (autoriser('configurer')) {
 		$boutons_admin['configuration']=
 		  new Bouton('administration-48.png', 'icone_configuration_site');
+	}
+	// autres admins (restreints ou non webmestres) peuvent aller sur les backups
+	else
+	if (autoriser('backup', 'admin_tech')) {
+		$boutons_admin['admin_tech']=
+		  new Bouton('administration-48.png', 'icone_maintenance_site');
 	}
 
 	$boutons_admin['espacement']=null;
@@ -88,7 +94,7 @@ function definir_barre_boutons() {
 
 	// les sous menu des boutons, que si on est admin
 	if ($GLOBALS['connect_statut'] == '0minirezo'
-		AND $GLOBALS['connect_toutes_rubriques']) {
+	AND $GLOBALS['connect_toutes_rubriques']) {
 
 	// sous menu edition
 
@@ -177,22 +183,32 @@ function definir_barre_boutons() {
 	}
 	
 	// sous menu configuration
+	$sousmenu = array();
+	if (autoriser('configurer', 'lang')) {
+		$soumenu['config_lang'] =
+			new Bouton("langues-24.gif", "icone_gestion_langues");
+		$soumenu['espacement'] = null;
+	}
 
-	$sousmenu=array(
-		'config_lang' => 
-			new Bouton("langues-24.gif", "icone_gestion_langues"),
-		'espacement' => null
-	);
-
-	$sousmenu['admin_tech']= 
+	if (autoriser('backup')) {
+		$sousmenu['admin_tech']= 
 			new Bouton("base-24.gif", "icone_maintenance_site");
-	$sousmenu['admin_vider']=
+	}
+	if (autoriser('configurer', 'admin_vider')) {
+		$sousmenu['admin_vider']=
 			new Bouton("cache-24.gif", "onglet_vider_cache");
-  	if ((@file_exists(_DIR_PLUGINS))&&(is_dir(_DIR_PLUGINS)))
-			$sousmenu['admin_plugin']=
-				new Bouton("plugin-24.gif", "icone_admin_plugin");
+	}
 
-	$boutons_admin['configuration']->sousmenu= $sousmenu;
+	if (@file_exists(_DIR_PLUGINS)
+	AND is_dir(_DIR_PLUGINS)
+	AND autoriser('configurer', 'admin_plugins')
+	) {
+		$sousmenu['admin_plugin']=
+			new Bouton("plugin-24.gif", "icone_admin_plugin");
+	}
+
+	if ($sousmenu)
+		$boutons_admin['configuration']->sousmenu= $sousmenu;
 
 	} // fin si admin
 
@@ -247,12 +263,16 @@ function definir_barre_onglets($rubrique) {
 	break;
 
 	case 'administration':
-		$onglets['sauver']=
-		  new Bouton('base-24.gif', 'onglet_save_restaur_base',
-			generer_url_ecrire("admin_tech",""));
-		$onglets['effacer']=
-		  new Bouton('supprimer.gif', 'onglet_affacer_base',
-			generer_url_ecrire("admin_effacer",""));
+		if (autoriser('backup')) {
+			$onglets['sauver']=
+			  new Bouton('base-24.gif', 'onglet_save_restaur_base',
+				generer_url_ecrire("admin_tech"));
+		}
+		if (autoriser('destroy')) {
+			$onglets['effacer']=
+			  new Bouton('supprimer.gif', 'onglet_affacer_base',
+				generer_url_ecrire("admin_effacer"));
+		}
 	break;
 
 	case 'auteur':

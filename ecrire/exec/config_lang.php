@@ -18,16 +18,15 @@ include_spip('inc/config');
 // http://doc.spip.org/@exec_config_lang_dist
 function exec_config_lang_dist()
 { 
-	global $connect_statut, $connect_toutes_rubriques;
 
+	if (!autoriser('configurer', 'lang')) {
+		echo _T('avis_non_acces_page');
+		echo fin_gauche(), fin_page();
+		exit;
+	}
 	pipeline('exec_init',array('args'=>array('exec'=>'config_lang'),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_config_contenu'), "configuration", "langues");
-
-	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
-		echo _T('avis_non_acces_page');
-		exit;
-	}
 
 	init_config();
 

@@ -15,6 +15,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@exec_delete_all_dist
 function exec_delete_all_dist()
 {
+	include_spip('inc/autoriser');
+	if (!autoriser('destroy')) {
+		include_spip('inc/minipres');
+		echo minipres();
+		exit;
+	}
+
 	$r = generer_url_ecrire('install','',true);
 	$admin = charger_fonction('admin', 'inc');
 	$admin('delete_all', _T('titre_page_delete_all'), '', $r);

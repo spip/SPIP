@@ -21,9 +21,6 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_admin_effacer_dist
 function exec_admin_effacer_dist()
 {
-
-	global $connect_statut, $connect_toutes_rubriques;
-
 	pipeline('exec_init',array('args'=>array('exec'=>'admin_effacer'),'data'=>''));
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -49,7 +46,7 @@ function exec_admin_effacer_dist()
 	debut_droite();
 
 
-	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
+	if (!autoriser('destroy')) {
 		echo _T('avis_non_acces_page');
 		echo fin_gauche(), fin_page();
 		exit;
