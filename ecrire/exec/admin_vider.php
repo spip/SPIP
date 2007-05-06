@@ -50,14 +50,15 @@ function afficher_taille_cache_vignettes() {
 // http://doc.spip.org/@exec_admin_vider_dist
 function exec_admin_vider_dist()
 {
-  global $quota_cache, $spip_lang;
+	global $quota_cache, $spip_lang;
 
-if (!$connect_toutes_rubriques) {
-	echo minipres();
-	exit;
-}
-$commencer_page = charger_fonction('commencer_page', 'inc');
-echo $commencer_page(_T('onglet_vider_cache'), "configuration", "cache");
+	// autorisation a affiner 
+	if (!autoriser('configurer', 'admin_vider')){
+	    echo minipres();
+	    exit;
+	  }
+	  $commencer_page = charger_fonction('commencer_page', 'inc');
+	  echo $commencer_page(_T('onglet_vider_cache'), "configuration", "cache");
 
 
 echo "<br /><br /><br />";
