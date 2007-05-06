@@ -70,8 +70,9 @@ function login_explicite($login, $cible) {
 					include_spip('inc/headers');
 					redirige_par_entete($cible);
 				} else {
-					include_spip('inc/minipres');
-					return http_href($cible, _T('login_par_ici'));
+					return "<a href='$cible'>" .
+					  _T('login_par_ici') .
+					  "</a>";
 				}
 			} else
 				return ''; # on est arrive on bon endroit, et logue'...

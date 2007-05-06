@@ -73,10 +73,40 @@ function filtrer($filtre) {
 // http://doc.spip.org/@spip_version
 function spip_version() {
 	$version = $GLOBALS['spip_version_affichee'];
-	include_spip('inc/minipres');
 	if ($svn_revision = version_svn_courante(_DIR_RACINE))
 		$version .= ($svn_revision<0 ? ' SVN':'').' ['.abs($svn_revision).']';
 	return $version;
+}
+
+
+//
+// Mention de la revision SVN courante de l'espace restreint standard
+// (numero non garanti pour l'espace public et en cas de mutualisation)
+// on est negatif si on est sur .svn, et positif si on utilise svn.revision
+// http://doc.spip.org/@version_svn_courante
+function version_svn_courante($dir) {
+	if (!$dir) $dir = '.';
+
+	// version installee par paquet ZIP
+	if (lire_fichier($dir.'/svn.revision', $c)
+	AND preg_match(',Revision: (\d+),', $c, $d))
+		return intval($d[1]);
+
+	// version installee par SVN
+	if (lire_fichier($dir . '/.svn/entries', $c)
+	AND (
+	(preg_match_all(
+	',committed-rev="([0-9]+)",', $c, $r1, PREG_PATTERN_ORDER)
+	AND $v = max($r1[1])
+	)
+	OR
+	(preg_match(',^8.*dir[\r\n]+(\d+),ms', $c, $r1) # svn >= 1.4
+	AND $v = $r1[1]
+	)))
+		return -$v;
+
+	// Bug ou paquet fait main
+	return 0;
 }
 
 //
@@ -1014,7 +1044,6 @@ function agenda_memo($date=0 , $descriptif='', $titre='', $url='', $cal='')
 function agenda_affiche($i)
 {
 	include_spip('inc/agenda');
-	include_spip('inc/minipres');
 	$args = func_get_args();
 	$nb = array_shift($args); // nombre d'evenements (on pourrait l'afficher)
 	$sinon = array_shift($args);

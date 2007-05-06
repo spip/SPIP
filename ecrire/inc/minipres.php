@@ -101,36 +101,6 @@ function minipres($titre='', $corps="", $onload='')
 	. install_fin_html();
 }
 
-//
-// Mention de la revision SVN courante de l'espace restreint standard
-// (numero non garanti pour l'espace public et en cas de mutualisation)
-// on est negatif si on est sur .svn, et positif si on utilise svn.revision
-// http://doc.spip.org/@version_svn_courante
-function version_svn_courante($dir) {
-	if (!$dir) $dir = '.';
-
-	// version installee par paquet ZIP
-	if (lire_fichier($dir.'/svn.revision', $c)
-	AND preg_match(',Revision: (\d+),', $c, $d))
-		return intval($d[1]);
-
-	// version installee par SVN
-	if (lire_fichier($dir . '/.svn/entries', $c)
-	AND (
-	(preg_match_all(
-	',committed-rev="([0-9]+)",', $c, $r1, PREG_PATTERN_ORDER)
-	AND $v = max($r1[1])
-	)
-	OR
-	(preg_match(',^8.*dir[\r\n]+(\d+),ms', $c, $r1) # svn >= 1.4
-	AND $v = $r1[1]
-	)))
-		return -$v;
-
-	// Bug ou paquet fait main
-	return 0;
-}
-
 // http://doc.spip.org/@info_copyright
 function info_copyright() {
 	global $spip_version_affichee, $spip_lang;
@@ -183,25 +153,6 @@ function exec_test_ajax_dist() {
 	}
 }
 
-
-// Fabrique une balise A, avec tous les attributs possibles
-// attention au cas ou la href est du Javascript avec des "'"
-// pour un href conforme au validateur W3C, faire & --> &amp; avant
-
-// http://doc.spip.org/@http_href
-function http_href($href, $clic, $title='', $style='', $class='', $evt='') {
-	return '<a href="' .
-		$href .
-		'"' .
-		(!$title ? '' : ("\ntitle=\"" . supprimer_tags($title)."\"")) .
-		(!$style ? '' : ("\nstyle=\"" . $style . "\"")) .
-		(!$class ? '' : ("\nclass=\"" . $class . "\"")) .
-		($evt ? "\n$evt" : '') .
-		'>' .
-		$clic .
-		'</a>';
-}
-
 // produit une balise img avec un champ alt d'office si vide
 // attention le htmlentities et la traduction doivent etre appliques avant.
 
@@ -236,14 +187,14 @@ function http_wrapper($img){
 	return $f;
 }
 // http://doc.spip.org/@http_img_pack
-function http_img_pack($img, $alt, $att, $title='') {
+function http_img_pack($img, $alt, $atts='', $title='') {
 
 	return  "<img src='" . http_wrapper($img)
 	  . ("'\nalt=\"" .
 	     str_replace('"','', textebrut($alt ? $alt : ($title ? $title : '')))
 	     . '" ')
 	  . ($title ? "title=\"$title\" " : '')
-	  . $att
+	  . $atts
 	  . " />";
 }
 
