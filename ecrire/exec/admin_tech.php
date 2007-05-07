@@ -114,11 +114,13 @@ else {
    generer_form_ecrire('export_all', $res, '', _T('texte_sauvegarde_base')),
    "</td></tr></table>";
 
+
 //
 // Restauration de la base
 //
 
- if ($connect_toutes_rubriques) {
+ // restaurer est equivalent a detruire, ou pas (cas des restaurations partielles, a affiner ?)
+ if (autoriser('detruire')) {
 
  	$liste_dump = preg_files(_DIR_DUMP,'\.xml(\.gz)?$',50,false);
  	$selected = end($liste_dump);
@@ -174,7 +176,7 @@ else {
 // Lien vers la reparation
 //
 
-if ($connect_toutes_rubriques) {
+if (autoriser('webmestre')) {
 	$res = spip_mysql_version();
 	if ($res >= '3.23.14') {
 		$res = "\n<p style='text-align: justify;'>".
