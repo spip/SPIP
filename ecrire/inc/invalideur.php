@@ -152,7 +152,8 @@ function cron_invalideur($t) {
 	// En cas de quota sur le CACHE/, nettoyer les fichiers les plus vieux
 
 	// A revoir: il semble y avoir une desynchro ici.
-	$t = spip_fetch_array(spip_query("SELECT SUM(taille) AS n FROM spip_caches WHERE type IN ('t', 'x')"));
+	$s = spip_query("SELECT SUM(taille) AS n FROM spip_caches WHERE type IN ('t', 'x')");
+	$t = spip_fetch_array($t);
 	$total_cache = $t['n'];
 	spip_log("Taille du CACHE: $total_cache octets");
 
