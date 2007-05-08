@@ -752,6 +752,7 @@ Aliet oc\'h da chom hep kemm tra pe dra keit ha ma n\'oc\'h ket boaz ouzh SPIP.
 'zbug_inversion_ordre_inexistant' => 'eilpenna&ntilde; un urzh n\'eus ket outa&ntilde;',
 'zbug_pagination_sans_critere' => '#PAJENNAOUI&Ntilde; hep dezverk ebet, pe impijet en un droiad askizat',
 'zbug_parametres_inclus_incorrects' => 'Arventerio&ugrave;-ensoc\'ha&ntilde; direizh',
+'zbug_profile' => 'Amzer jedi&ntilde;&nbsp;: @time@',
 'zbug_resultat' => 'disoc\'h',
 'zbug_serveur_indefini' => 'servijer SQL didermen',
 'zbug_table_inconnue' => 'Taol SQL &laquo; @table@ &raquo; dianavez',

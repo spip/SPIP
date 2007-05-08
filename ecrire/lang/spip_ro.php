@@ -818,6 +818,7 @@ Ve&#355;i putea dup&#259; aceea alege o nou&#259; parol&#259; &#351;i ve&#355;i 
 'zbug_inversion_ordre_inexistant' => 'inversie de un ordin necunoscut',
 'zbug_pagination_sans_critere' => '#PAGINATION f&#259;r&#259; criteriu {pagination} sau folosit &icirc;ntr-o bucl&#259; recursiv&#259;',
 'zbug_parametres_inclus_incorrects' => 'Parametrii de includere incorec&#355;i',
+'zbug_profile' => 'Timp de calcul&nbsp;: @time@',
 'zbug_resultat' => 'rezultat',
 'zbug_serveur_indefini' => 'server SQL nedefinit',
 'zbug_table_inconnue' => 'Tabela SQL &laquo; @table@ &raquo; necunoscut&#259;',

@@ -751,6 +751,7 @@ i tornar-vos a connectar al lloc.
 'zbug_inversion_ordre_inexistant' => 'inversi&oacute; d\'un ordre inexistent',
 'zbug_pagination_sans_critere' => '#PAGINATION sense criteri {pagination} o  fet servir a dins d\'un bucle recursiu.',
 'zbug_parametres_inclus_incorrects' => 'Par&agrave;metres d\'inclusi&oacute; incorrectes',
+'zbug_profile' => 'Temps de c&agrave;lcul&nbsp;: @time@',
 'zbug_resultat' => 'resultat',
 'zbug_serveur_indefini' => 'servidor SQL sense definir',
 'zbug_table_inconnue' => 'Taula SQL &laquo; @table@ &raquo; desconeguda',

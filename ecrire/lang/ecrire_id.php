@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_non_acces_message' => 'Anda tidak memiliki akses ke pesan ini.',
 'avis_non_acces_page' => 'Anda tidak memiliki akses ke halaman ini.',
 'avis_operation_echec' => 'Operasi gagal.',
+'avis_operation_impossible' => 'Operasi tidak mungkin dijalankn',
 'avis_probleme_archive' => 'Kesalahan membaca pada berkas @archive@',
 'avis_site_introuvable' => 'Situs tidak ditemukan',
 'avis_site_syndique_probleme' => 'Peringatan: sindikasi situs ini mengalami gangguan; oleh karena itu sistem dihentikan untuk sementara waktu. Silakan verifikasi alamat berkas sindikasi situs (<b>@url_syndic@</b>), dan coba sekali lagi untuk melanjutkan proses pengambilan informasi.',
@@ -54,6 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_ajouter' => 'Tambah',
 'bouton_ajouter_participant' => 'TAMBAH SEORANG PESERTA:',
 'bouton_annonce' => 'PENGUMUMAN',
+'bouton_annuler' => 'Batal',
 'bouton_checkbox_envoi_message' => 'kemungkinan untuk mengirimkan sebuah pesan',
 'bouton_checkbox_indiquer_site' => 'Anda harus mengisi nama untuk sebuah situs web',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'administrator situs',
@@ -117,6 +119,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cache_mode_non_compresse' => 'Berkas-berkas cache ditulis dalam bentuk tidak terkompresi.',
 'cache_modifiable_webmestre' => 'Parameter ini dapat dimodifikasi oleh webmaster.',
 'calendrier_synchro' => 'Jika anda menggunakan aplikasi kalender yang kompatibel dengan <b>iCal</b>, anda dapat mensinkronisasikannya dengan informasi situs ini.',
+'connexion_ldap' => 'Koneksi:',
 
 
 // D
@@ -177,10 +180,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_version_manquant' => 'Versi plugin yang hilang',
 
 
+// F
+'forum_info_original' => 'asli',
+
+
 // I
 'ical_info1' => 'Halaman ini memberikan sejumlah metode untuk mengetahui dan berhubungan dengan aktivitas situs ini.',
 'ical_info2' => 'Untuk informasi lebih lanjut, jangan segan-segan untuk mengunjungi <a href="http://www.spip.net/en_suivi">dokumentasi SPIP</a>.',
 'ical_info_calendrier' => 'Dua kalender berada di tangan anda siap untuk dipakai. Yang pertama adalah peta situs yang menampilkan semua artikel yang dipublikasi. Yang kedua berisikan pengumuman editorial sekaligus pesan-pesan pribadi terbaru anda: semuanya dapat disimpan berkat kunci pribadi yang bisa anda modifikasi setiap saat dengan jalan memperbaharui kata sandi.',
+'ical_lien_rss_breves' => 'Sindikasi artikel berita situs',
 'ical_methode_http' => 'Mengunduh',
 'ical_methode_webcal' => 'Sinkronisasi (webcal://)',
 'ical_texte_js' => 'Sebuah kode javascript mengizinkan anda untuk menampilkan secara mudah dan di setiap situs yang anda miliki, semua artikel terbaru yang dipublikasikan di situs ini.',
@@ -459,7 +467,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ou' => 'atau...',
 'info_oui_suppression_mot_cle' => 'Saya ingin menghapus kata kunci ini selamanya.',
 'info_page_interdite' => 'Halaman terlarang',
+'info_par_nom' => 'berdasarkan nama',
 'info_par_nombre_article' => '(berdasarkan jumlah artikel)',
+'info_par_statut' => 'berdasarkan status',
 'info_par_tri' => '(Oleh @tri@)',
 'info_pas_de_forum' => 'tidak ada forum',
 'info_passe_trop_court' => 'Kata sandi terlalu pendek.',
@@ -483,6 +493,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_procedez_par_etape' => 'silakan dilanjutkan langkah demi langkah',
 'info_procedure_maj_version' => 'prosedur pembaharuan hendaknya dijalankan untuk
 	mengadaptasi database degan versi terbaru SPIP.',
+'info_proxy_ok' => 'Percobaan proxy berhasil.',
 'info_ps' => 'P.S.',
 'info_publier' => 'publikasi',
 'info_publies' => 'Artikel anda dipublikasi secara online',
@@ -584,6 +595,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_surtitre' => 'Judul atas:',
 'info_syndication_integrale_1' => 'Situs anda menyediakan berkas-berkas sindikasi (lihat &#147;<a href="@url@">@titre@</a>&#148;).',
 'info_syndication_integrale_2' => 'Apakah anda ingin mengirim seluruh artikel atau ringkasannya saja yang terdiri dari beberapa ratus karakter?',
+'info_table_prefix' => 'Data situs ini disimpan di tabel bernama <tt><b>spip</b>_articles</tt>, <tt><b>spip</b>_rubriques</tt>, dst. Jika anda menginstal sejumlah situs dalam database yang sama, anda dapat mengubah prefiks dari nama tabel (Catatan: Gunakan hanya huruf-huruf kecil dan tidak beraksen.).',
 'info_taille_maximale_vignette' => 'Ukuran maksimum gambar-gambar kecil yang dihasilkan oleh sistem:',
 'info_terminer_installation' => 'Anda dapat menyelesaikan sekarang proses instalasi standar.',
 'info_texte' => 'Teks',
@@ -626,6 +638,7 @@ dalam warna yang menunjukkan statusnya:',
 'install_echec_annonce' => 'Instalasi ini tidak akan bekerja, atau akan menghasilkan situs yang tidak berfungsi sebagaimana mestinya...',
 'install_extension_mbstring' => 'SPIP tidak dapat bekerja dengan:',
 'install_extension_php_obligatoire' => 'SPIP membutuhkan sebuah ekstensi php:',
+'install_php_version' => 'Versi PHP @version@ terlalu tua (minimum = @minimum@)',
 'install_select_langue' => 'Pilih sebuah bahasa dengan mengklik tombol "selanjutnya" untuk memulasi prosedur instalasi.',
 'intem_redacteur' => 'editor',
 'item_accepter_inscriptions' => 'Izinkan pendaftaran',
@@ -693,6 +706,7 @@ dalam warna yang menunjukkan statusnya:',
 
 
 // L
+'les_deux' => 'kedua-duanya',
 'lien_ajout_destinataire' => 'Tambahkan penerima ini',
 'lien_ajouter_auteur' => 'Tambahkan penulis ini',
 'lien_ajouter_participant' => 'Tambahkan seorang peserta',
@@ -712,6 +726,7 @@ dalam warna yang menunjukkan statusnya:',
 'lien_supprimer_rubrique' => 'hapus bagian ini',
 'lien_tout_deplier' => 'Buka semuanya',
 'lien_tout_replier' => 'Tutup semuanya',
+'lien_tout_supprimer' => 'Hapus semua',
 'lien_trier_nom' => 'Disusun berdasarkan nama',
 'lien_trier_nombre_articles' => 'Disusun berdasarkan jumlah artikel',
 'lien_trier_statut' => 'Disusun berdasarkan status',
@@ -759,6 +774,7 @@ dalam warna yang menunjukkan statusnya:',
 'plugin_etat_stable' => 'stabil',
 'plugin_etat_test' => 'sedang dites',
 'plugins_liste' => 'Daftar plugin',
+'protocole_ldap' => 'Versi protokol:',
 
 
 // R
@@ -766,6 +782,8 @@ dalam warna yang menunjukkan statusnya:',
 
 
 // S
+'sauvegarde_fusionner' => 'Gabung database sekarang dengan backup',
+'sauvegarde_url_origine' => 'Jika diperlukan, URL situs sumber:',
 'statut_admin_restreint' => '(admin terbatas)',
 'syndic_choix_moderation' => 'Apa yang akan dilakukan dengan tautan berikut dari situs ini?',
 'syndic_choix_oublier' => 'Apa yang akan dilakukan dengan tautan yang tidak ada lagi dalam berkas sindikasi?',
@@ -809,6 +827,7 @@ menginstal kembali SPIP untuk membuat database baru dan akses administrator pert
 'texte_choix_base_1' => 'Pilih database anda:',
 'texte_choix_base_2' => 'Server MySQL berisikan sejumlah database.',
 'texte_choix_base_3' => '<B>Pilih</B> di bawah salah satu yang diberikan hosting anda kepada anda:',
+'texte_choix_table_prefix' => 'Prefiks untuk tabel:',
 'texte_commande_vider_tables_indexation' => 'Gunakan perintah ini untuk mengosongkan tabel terindeksasi
 			yang digunakan oleh mesin pencari SPIP. Ini akan memberi anda
 			sejumlah ruangan di disk.',
@@ -1054,6 +1073,7 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'titre_sites_tous' => 'Situs-situs referensi',
 'titre_suivi_petition' => 'Tindak lanjut petisi',
 'titre_syndication' => 'Sindikasi situs',
+'tls_ldap' => 'Pengamanan layer transportasi:',
 'tout_dossier_upload' => 'Seluruh direktori @upload@',
 'trad_article_inexistant' => 'Tidak ada artikel dengan nomor ini',
 'trad_article_traduction' => 'Semua versi artikel ini:',

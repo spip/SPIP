@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'barre_a_accent_grave' => 'Inserire una A maiscola con accento grave',
-'barre_aide' => 'Utilizzare le scorciatoie tipografiche di SPIP per migliorare l\'impaginazione del testo',
+'barre_aide' => 'Utilizzare le scorciatoie tipografiche di SPIP per migliorare l\\\'impaginazione del testo',
 'barre_e_accent_aigu' => 'Inserire una E maiscola con accento acuto',
 'barre_eo' => 'Inserire una E nell\'O',
 'barre_eo_maj' => 'Inserire una E nell\'O maiuscola',
@@ -764,6 +764,7 @@ funzionamento del sito. Non intervenire finch&eacute; non conosci bene i meccani
 'zbug_inversion_ordre_inexistant' => 'inversione di un ordine non esistente',
 'zbug_pagination_sans_critere' => '#PAGINATION senza criterio {pagination} oppure usato in un ciclo ricorsivo',
 'zbug_parametres_inclus_incorrects' => 'Parametri di inclusione non corretti',
+'zbug_profile' => '<NEW>Tempo di calcolo&nbsp;: @time@',
 'zbug_resultat' => 'risultato',
 'zbug_serveur_indefini' => 'server SQL non definito',
 'zbug_table_inconnue' => 'Tabella SQL &laquo; @table@ &raquo; sconosciuta',

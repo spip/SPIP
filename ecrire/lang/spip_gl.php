@@ -767,6 +767,7 @@ e reconectar co web.
 'zbug_inversion_ordre_inexistant' => 'inversi&oacute;n dunha orde inexistente',
 'zbug_pagination_sans_critere' => '#PAGINATION sen criterio {pagination} ou empregado nun bucle recursivo',
 'zbug_parametres_inclus_incorrects' => 'Par&aacute;metros de inclusi&oacute;n incorrectos',
+'zbug_profile' => 'Tempo de c&aacute;lculo&nbsp;: @time@',
 'zbug_resultat' => 'resultado',
 'zbug_serveur_indefini' => 'servidor SQL indefinido',
 'zbug_table_inconnue' => 'T&aacute;boa SQL &laquo; @table@ &raquo; desco&ntilde;ecida',

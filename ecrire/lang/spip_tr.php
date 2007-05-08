@@ -802,6 +802,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'zbug_inversion_ordre_inexistant' => 'olmayan bir s&#305;ralama ters &ccedil;evrilemez',
 'zbug_pagination_sans_critere' => 'kritersiz veya kendini &ccedil;a&#287;&#305;ran d&ouml;ng&uuml;de kullan&#305;lan #PAGINATION {pagination} ',
 'zbug_parametres_inclus_incorrects' => 'Ekleme parametreleri hatal&#305;',
+'zbug_profile' => 'Hesaplama s&uuml;resi&nbsp;: @time@',
 'zbug_resultat' => 'sonu&ccedil;',
 'zbug_serveur_indefini' => 'SQL hizmet birimi tan&#305;ms&#305;z',
 'zbug_table_inconnue' => '&laquo; @table@ &raquo; SQL tablosu tan&#305;ms&#305;z',
