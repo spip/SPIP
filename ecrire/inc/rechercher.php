@@ -92,10 +92,6 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array()) {
 		$a = array();
 		$_id_table = id_table_objet($table);
 
-		// Recherche par identifiant
-		if (preg_match(',^[0-9]+$,', $recherche))
-			$a[] = $_id_table.' = '.$recherche;
-
 		// Recherche fulltext
 		foreach ($champs as $champ)
 			$a[] = $champ.' '.$methode.' '.$q;
@@ -117,12 +113,6 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array()) {
 				$matches = array();
 
 				$vu = false;
-				if ($recherche == "$id") {
-					$vu = true;
-					if ($options['champs'])
-						$champs_vus[$_id_table] = $id;
-				}
-
 				foreach ($champs as $champ) {
 					if ($n = 
 						($options['score'] || $options['matches'])
