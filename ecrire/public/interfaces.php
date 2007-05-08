@@ -221,13 +221,13 @@ $table_date['syndic_articles']='date';
 global $tables_jointures;
 
 $tables_jointures['spip_articles'][]= 'mots_articles';
-$tables_jointures['spip_articles'][]= 'auteurs_articles';
+$tables_jointures['spip_articles']['id_auteur']= 'auteurs_articles';
 $tables_jointures['spip_articles'][]= 'documents_articles';
 $tables_jointures['spip_articles'][]= 'mots';
 $tables_jointures['spip_articles'][]= 'signatures';
 
 $tables_jointures['spip_auteurs'][]= 'auteurs_articles';
-$tables_jointures['spip_auteurs'][]= 'mots';
+$tables_jointures['spip_auteurs'][]= 'mots'; // ??
 
 $tables_jointures['spip_breves'][]= 'mots_breves';
 $tables_jointures['spip_breves'][]= 'documents_breves';

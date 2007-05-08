@@ -131,7 +131,8 @@ function determiner_auteurs_objet($type, $id, $cond='', $limit='')
 	$les_auteurs = array();
 	if (!preg_match(',^[a-z]*$,',$type)) return $les_auteurs; 
 
-	$result = spip_query("SELECT id_auteur FROM spip_auteurs_{$type}s WHERE id_{$type}="._q($id) 
+	$jointure = table_jointure('auteur', $type);
+	$result = spip_query("SELECT id_auteur FROM spip_{$jointure} WHERE id_{$type}="._q($id) 
 	. ($cond ? " AND $cond" : '')
 	. ($limit? " LIMIT $limit": '')
 	);
@@ -260,9 +261,9 @@ function ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit, $arg_
 
 	if (!$determiner_non_auteurs = charger_fonction('determiner_non_auteurs_'.$type,'inc',true))
 		$determiner_non_auteurs = 'determiner_non_auteurs';
+
 	$query = $determiner_non_auteurs($type, $id, $cond_les_auteurs, "statut, nom");
 	if (!$num = spip_num_rows($query)) return '';
-
 	$js = "findObj_forcer('valider_ajouter_auteur').style.visibility='visible';";
 
 	$text = "<span class='verdana1'><b>"
