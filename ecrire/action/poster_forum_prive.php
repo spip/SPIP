@@ -27,27 +27,25 @@ function action_poster_forum_prive_dist() {
 // http://doc.spip.org/@action_poster_forum_prive_post
 function action_poster_forum_prive_post($r)
 {
-	global $redirect, $nom_site, $texte, $titre_message, $url_site,  $modif_forum,  $valider_forum;
+	list(,$id, $id_parent, $statut, $script, $objet) = $r;
 
-	list($x,$id,$id_parent,$statut,$script,$objet) = $r;
-
-	if ($valider_forum AND ($statut!='')) {
+	if (_request('valider_forum') AND ($statut!='')) {
 		include_spip('inc/texte');
 		include_spip('base/abstract_sql');
 		include_spip('inc/forum');
 
-		$titre_message = corriger_caracteres($titre_message);
-		$texte = corriger_caracteres($texte);
+		$titre_message = corriger_caracteres(_request('titre_message'));
+		$texte = corriger_caracteres(_request('texte'));
 
-		$id_forum = spip_abstract_insert('spip_forum', "($objet, titre, texte, date_heure, nom_site, url_site, statut, id_auteur,	auteur, email_auteur, id_parent)", "($id, " . _q($titre_message) . ", " . _q($texte) . ", NOW(), " . _q($nom_site) . ", " . _q($url_site) . ", " . _q($statut) . ", " . $GLOBALS['auteur_session']['id_auteur'] . ", " . _q($GLOBALS['auteur_session']['nom']) . ", " . _q($GLOBALS['auteur_session']['email']) . ", $id_parent)");
+		$id_forum = spip_abstract_insert('spip_forum', "($objet, titre, texte, date_heure, nom_site, url_site, statut, id_auteur,	auteur, email_auteur, id_parent)", "($id, " . _q($titre_message) . ", " . _q($texte) . ", NOW(), " . _q(_request('nom_site')) . ", " . _q(_request('url_site')) . ", " . _q($statut) . ", " . $GLOBALS['auteur_session']['id_auteur'] . ", " . _q($GLOBALS['auteur_session']['nom']) . ", " . _q($GLOBALS['auteur_session']['email']) . ", $id_parent)");
 
 		calculer_threads();
 
-		if ($objet == 'message') {
+		if ($objet == 'id_message') {
 			spip_query("UPDATE spip_auteurs_messages SET vu = 'non' WHERE id_message=$id");
 
 		}
-		redirige_par_entete(urldecode($redirect)."#id".$id_forum);
+		redirige_par_entete(urldecode(_request('redirect'))."#id".$id_forum);
 		
 	 } else {
 	   // previsualisation : on ne fait que passer .... 
