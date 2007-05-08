@@ -378,7 +378,6 @@ ecrire/action/legender.php -text
 ecrire/action/logout.php -text
 ecrire/action/petitionner.php -text
 ecrire/action/poster_forum_prive.php -text
-ecrire/action/premiers_pas.php -text
 ecrire/action/purger.php -text
 ecrire/action/redirect.php -text
 ecrire/action/referencer_traduction.php -text
@@ -578,7 +577,6 @@ ecrire/inc/petitionner.php -text
 ecrire/inc/plonger.php -text
 ecrire/inc/plugin.php -text
 ecrire/inc/popularites.php -text
-ecrire/inc/premiers_pas.php -text
 ecrire/inc/rechercher.php -text
 ecrire/inc/referencer_traduction.php -text
 ecrire/inc/regler_moderation.php -text
@@ -626,10 +624,6 @@ ecrire/lang/spip_cs.php -text
 ecrire/lang/spip_id.php -text
 ecrire/lang/spip_it_fem.php -text
 ecrire/lang/spip_ru.php -text
-ecrire/premiers_pas/index.php -text
-ecrire/premiers_pas/pas_1.php -text
-ecrire/premiers_pas/pas_2.php -text
-ecrire/premiers_pas/pas_fin.php -text
 ecrire/prive.php -text
 ecrire/public/index.php -text
 ecrire/rien.gif -text
