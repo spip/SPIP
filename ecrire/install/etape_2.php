@@ -28,7 +28,7 @@ function install_etape_2_dist()
 	if (($db_connect=="0") && $link){
 
 	echo "<p class='resultat'><b>"._T('info_connexion_ok')."</b></p>";
-	echo info_etape(_T('info_choix_base')." "._T('menu_aide_installation_choix_base').aide ("install2"));
+	echo info_etape(_T('menu_aide_installation_choix_base').aide ("install2"));
 
 	$link = mysql_connect("$adresse_db","$login_db","$pass_db");
 	$result = @mysql_list_dbs();
