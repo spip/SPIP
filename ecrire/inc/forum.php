@@ -232,19 +232,27 @@ function calculer_threads() {
 // http://doc.spip.org/@racine_forum
 function racine_forum($id_forum){
 	if (!$id_forum = intval($id_forum)) return;
-	$result = spip_query("SELECT id_parent, id_rubrique, id_article, id_breve, id_syndic FROM spip_forum WHERE id_forum=".$id_forum);
+	$result = spip_query("SELECT id_parent, id_rubrique, id_article, id_breve, id_syndic, id_thread FROM spip_forum WHERE id_forum=".$id_forum);
 
-	if($row = spip_fetch_array($result)){
-		if($row['id_parent']) {
-			return racine_forum($row['id_parent']);
-		}
-		else {
-			if($row['id_rubrique']) return array('rubrique',$row['id_rubrique'], $id_forum);
- 			if($row['id_article']) return array('article',$row['id_article'], $id_forum);
-			if($row['id_breve']) return array('breve',$row['id_breve'], $id_forum);
-			if($row['id_syndic']) return array('site',$row['id_syndic'], $id_forum);
-		}
-	}
+	if (!$row = spip_fetch_array($result))
+		return false;
+
+	if ($row['id_rubrique'])
+		return array('rubrique', $row['id_rubrique'], $id_forum);
+	if ($row['id_article'])
+		return array('article', $row['id_article'], $id_forum);
+	if ($row['id_breve'])
+		return array('breve', $row['id_breve'], $id_forum);
+	if ($row['id_syndic'])
+		return array('site', $row['id_syndic'], $id_forum);
+
+	if ($row['id_thread'] <> $id_forum)
+		return racine_forum($row['id_thread']);
+
+	// On ne devrait jamais arriver ici, mais prevoir des cas de forums
+	// poses sur autre chose que les objets prevus...
+	spip_log("erreur racine_forum $id_forum");
+	return false;
 } 
 
 // http://doc.spip.org/@generer_url_forum_dist
