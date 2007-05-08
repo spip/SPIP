@@ -114,9 +114,9 @@ function autoriser_defaut_dist($faire, $type, $id, $qui, $opt) {
 function autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt) {
 	return
 		($qui['statut'] == '0minirezo')
-		AND (!$qui['restreint']
-			? true
-			: in_array($id, $qui['restreint'])
+		AND (
+			!$qui['restreint']
+			OR in_array($id, $qui['restreint'])
 		);
 }
 

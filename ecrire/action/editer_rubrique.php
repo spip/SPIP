@@ -78,6 +78,7 @@ function revisions_rubriques($id_rubrique, $c=false) {
 
 		if ($id_parent != $old_parent
 		AND autoriser('publierdans', 'rubrique', $id_parent)
+		AND autoriser('creerrubriquedans', 'rubrique', $id_parent)
 		AND autoriser('publierdans', 'rubrique', $old_parent)
 		) {
 			$champs['id_parent'] = $id_parent;

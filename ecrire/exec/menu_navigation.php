@@ -82,7 +82,7 @@ function exec_menu_navigation_dist() {
 				$dans_rub = "&id_rubrique=$id_rubrique";
 				$dans_parent = "&id_parent=$id_rubrique";
 			} else $dans_rub = $dans_parent = '';
-			if ($connect_statut == "0minirezo") {	
+			if (autoriser('creerrubriquedans', 'rubrique', $id_rubrique)) {	
 				$gadget .= "<div style='width: 140px; float: $spip_lang_left;'>";
 				if ($id_rubrique > 0)
 					$gadget .= icone_horizontale(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui$dans_parent"), "rubrique-24.gif", "creer.gif", false);

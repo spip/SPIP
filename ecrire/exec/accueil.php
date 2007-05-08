@@ -89,8 +89,7 @@ function encours_accueil()
 //
 
 // http://doc.spip.org/@colonne_droite_eq4
-function colonne_droite_eq4($activer_breves)
-{
+function colonne_droite_eq4($id_rubrique, $activer_breves, $activer_sites, $articles_mots) {
 	global  $connect_statut, $connect_toutes_rubriques;
 
 	$res = spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1"));
@@ -106,7 +105,7 @@ function colonne_droite_eq4($activer_breves)
 			$res = "<div class='verdana2'>"._T('info_ecrire_article')."</div>";
 		}
 	}
-	if ($connect_toutes_rubriques) {
+	if (autoriser('creerrubriquedans', 'rubrique', $id_rubrique)) {
 		$res .= icone_horizontale(_T('icone_creer_rubrique_2'), generer_url_ecrire("rubriques_edit","new=oui"), "rubrique-24.gif","creer.gif", false);
 	}
 	return  bloc_des_raccourcis($res);
@@ -117,9 +116,7 @@ function colonne_droite_eq4($activer_breves)
 //
 
 // http://doc.spip.org/@colonne_droite_neq4
-function colonne_droite_neq4($id_rubrique, $activer_breves,
-				$activer_sites, $articles_mots)
-{
+function colonne_droite_neq4($id_rubrique, $activer_breves, $activer_sites, $articles_mots) {
   global  $connect_statut, $connect_id_auteur, $connect_login;
 
 	$gadget = '';
@@ -129,7 +126,7 @@ function colonne_droite_neq4($id_rubrique, $activer_breves,
 		$dans_parent = "&id_parent=$id_rubrique";
 	} else $dans_rub = $dans_parent = '';
 
-	if ($connect_statut == "0minirezo") {
+	if (autoriser('creerrubriquedans', 'rubrique', $id_rubrique)) {
 		$gadget .= "<td>"
 			. icone_horizontale(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui"), "rubrique-24.gif", "creer.gif", false)
 			. "</td>";
@@ -436,7 +433,10 @@ function exec_accueil_dist()
 	echo afficher_articles(afficher_plus(generer_url_ecrire('articles_page'))._T('info_en_cours_validation'),	array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa'", "ORDER BY" => "articles.date DESC"));
 
 	if ($spip_display == 4)
-	  echo colonne_droite_eq4($GLOBALS['meta']["activer_breves"]);
+	  echo colonne_droite_eq4($id_rubrique,
+			 $GLOBALS['meta']["activer_breves"],
+			 $GLOBALS['meta']["activer_sites"],
+			 $GLOBALS['meta']['articles_mots']);
 	else {
 	  echo colonne_droite_neq4($id_rubrique,
 			 $GLOBALS['meta']["activer_breves"],
