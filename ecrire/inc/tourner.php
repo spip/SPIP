@@ -58,8 +58,14 @@ function inc_tourner_dist($id_document, $document, $script, $flag, $type)
 		$boite = '';
 
 	} else {
-	// Signaler les documents distants par une icone de trombone
-		$boite = "\n<img src='"._DIR_IMG_PACK.'attachment.gif'."'\n\t style='float: $spip_lang_right;'\n\talt=\"$fichier\"\n\ttitle=\"$fichier\" />\n";
+		$res = "\n<div class='verdana1' style='float: $spip_lang_right; text-align: $spip_lang_right;'>";
+		
+		// Signaler les documents distants par une icone de trombone
+		$res .= "<img src='"._DIR_IMG_PACK.'attachment.gif'."'\n\t \n\talt=\"$fichier\"\n\ttitle=\"$fichier\" />\n";
+		// Bouton permettant de copier en local le fichier
+		$res .= bouton_copier_local($document, $type, $id, $id_document, $script);
+		
+		$res .= "</div>\n";
 	}
 
 	$res .= "<div style='text-align: center;'>";
@@ -69,8 +75,6 @@ function inc_tourner_dist($id_document, $document, $script, $flag, $type)
 	$res .= "<div style='text-align: center; color: 333333;' class='verdana1 spip_x-small'>&lt;doc"
 	.  $id_document
 	. "&gt;</div>";
-
-	if ($boite) return "$boite<div>$res</div>";
 
 	return ajax_action_greffe("tourner-$id_document", $res, '');
 }
@@ -117,5 +121,32 @@ function bouton_tourner_document($id, $id_document, $script, $rot, $type, $img, 
 			    array(http_img_pack($img, $title, ''),
 				  " class='bouton_rotation'"),
 			    "&id_document=$id_document&id=$id&type=$type");
+}
+
+// Retourne le code HTML du bouton "copier en local".
+// http://doc.spip.org/@bouton_copier_local
+function bouton_copier_local($document, $type, $id, $id_document, $script) {
+	global $spip_lang_right;
+
+	// pour etre sur qu'il s'agit bien d'un doc distant
+	// et qu'il existe
+	$bouton_copier = '';
+	if ($document['distant'] == 'oui' /* on pourrait verifier l'existence du
+	 	// fichier ici, mais ne risque pas-t-on de degrader les performances ?
+	 	// il sera toujours temps de le verifier lorsque l'utilisateur cliquera
+	 	// sur le bouton. */) {
+		$bouton_copier = ajax_action_auteur("copier_local",
+			    "$id_document",
+			    $script,
+			    "show_docs=$id_document&id_$type=$id#tourner-$id_document",
+			    array(http_img_pack('telecharger.gif', _T('copier_en_local'), ''),
+				  " class='bouton_rotation'"),
+				  // on aurait pu faire un nouveau style 'bouton-telecharger',
+				  // mais pour l'instant on se contente de reutiliser celui-ci
+				  // afin de garder une homogeneite entre les differents boutons.
+			    "&id_document=$id_document&id=$id&type=$type");
+			    
+	}
+	return $bouton_copier;
 }
 ?>
