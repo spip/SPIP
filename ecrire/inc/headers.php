@@ -60,6 +60,7 @@ function http_status($status) {
 	global $REDIRECT_STATUS, $flag_sapi_name;
 	static $status_string = array(
 		200 => '200 OK',
+		204 => 'No Content',
 		301 => '301 Moved Permanently',
 		302 => '302 Found',
 		304 => '304 Not Modified',
