@@ -596,7 +596,7 @@ function calculer_url ($lien, $texte='', $pour='url') {
 }
 
 // http://doc.spip.org/@calculer_url_article_dist
-function calculer_url_article_dist($id, $texte, $lien) {
+function calculer_url_article_dist($id, $texte='', $lien='') {
 	$s = spip_query("SELECT titre,lang FROM spip_articles WHERE id_article=$id");
 	$row = spip_fetch_array($s);
 	if (!trim($texte))
@@ -607,7 +607,7 @@ function calculer_url_article_dist($id, $texte, $lien) {
 }
 
 // http://doc.spip.org/@calculer_url_rubrique_dist
-function calculer_url_rubrique_dist($id, $texte, $lien)
+function calculer_url_rubrique_dist($id, $texte='', $lien='')
 {
 	$s = spip_query("SELECT titre,lang FROM spip_rubriques WHERE id_rubrique=$id");
 	$row = spip_fetch_array($s);
@@ -620,7 +620,7 @@ function calculer_url_rubrique_dist($id, $texte, $lien)
 }
 
 // http://doc.spip.org/@calculer_url_breve_dist
- function calculer_url_breve_dist($id, $texte, $lien)
+ function calculer_url_breve_dist($id, $texte='', $lien='')
 {
 	$s = spip_query("SELECT titre,lang FROM spip_breves WHERE id_breve=$id");
 	$row = spip_fetch_array($s);
@@ -633,7 +633,7 @@ function calculer_url_rubrique_dist($id, $texte, $lien)
 }
 
 // http://doc.spip.org/@calculer_url_auteur_dist
- function calculer_url_auteur_dist($id, $texte, $lien)
+ function calculer_url_auteur_dist($id, $texte='', $lien='')
 {
 	if ($texte=='') {
 		$s = spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$id");
@@ -644,7 +644,7 @@ function calculer_url_rubrique_dist($id, $texte, $lien)
 }
 
 // http://doc.spip.org/@calculer_url_mot_dist
-function calculer_url_mot_dist($id, $texte, $lien)
+function calculer_url_mot_dist($id, $texte='', $lien='')
 {
 	if (!trim($texte)) {
 		$s = spip_query("SELECT titre FROM spip_mots WHERE id_mot=$id");
@@ -657,7 +657,7 @@ function calculer_url_mot_dist($id, $texte, $lien)
 }
 
 // http://doc.spip.org/@calculer_url_document_dist
- function calculer_url_document_dist($id, $texte, $lien)
+ function calculer_url_document_dist($id, $texte='', $lien='')
 {
 	if ($texte=='') {
 		$s = spip_query("SELECT titre,fichier FROM spip_documents WHERE id_document=$id");
@@ -672,7 +672,7 @@ function calculer_url_mot_dist($id, $texte, $lien)
 }
 
 // http://doc.spip.org/@calculer_url_site_dist
-function calculer_url_site_dist($id, $texte, $lien)
+function calculer_url_site_dist($id, $texte='', $lien='')
 {
 	# attention dans le cas des sites le lien pointe non pas sur
 	# la page locale du site, mais directement sur le site lui-meme
@@ -689,7 +689,7 @@ function calculer_url_site_dist($id, $texte, $lien)
 }
 
 // http://doc.spip.org/@calculer_url_forum_dist
-function calculer_url_forum_dist($id, $texte, $lien)
+function calculer_url_forum_dist($id, $texte='', $lien='')
 {
 	if (!trim($texte)) {
 		$s = spip_query("SELECT titre FROM spip_forum WHERE id_forum=$id AND statut='publie'");

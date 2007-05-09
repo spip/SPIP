@@ -962,7 +962,7 @@ function prepare_recherche($recherche, $primary = 'id_article', $id_table='artic
 
 		# calculer le {id_article IN()} et le {... as points}
 		if (!count($points)) {
-			$cache[$recherche][$primary] = array("''", 0);
+			$cache[$recherche][$primary] = array("''", '0');
 		} else {
 			$ids = array();
 			$select = '0';
