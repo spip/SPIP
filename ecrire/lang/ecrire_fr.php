@@ -120,6 +120,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cache_modifiable_webmestre' => 'Ce param&egrave;tre est modifiable par le webmestre du site.',
 'calendrier_synchro' => 'Si vous utilisez un logiciel d\'agenda compatible <b>iCal</b>, vous pouvez le synchroniser avec les informations de ce site.',
 'connexion_ldap' => 'Connexion :',
+'copier_en_local' => 'Copier en local',
 
 
 // D
