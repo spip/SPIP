@@ -88,15 +88,20 @@ function debut_admin($script, $action='', $commentaire='') {
 
 		$js = '';
 	} else {
-		$form = fieldset(_T('info_authentification_ftp').aide("ftp_auth"),
-					   array(
-						 'fichier' => array(
-								    'label' => _T('info_creer_repertoire'),
-								    'valeur' => $signal
-								    )),
-					   ('<br />'
-					    . _T('info_creer_repertoire_2', array('repertoire' => joli_repertoire($dir)))));
-		  $suivant = _T('bouton_recharger_page');
+		$form = "<fieldset><legend>"
+		. _T('info_authentification_ftp')
+		. aide("ftp_auth")
+		. "</legend>\n<label for='fichier'>"
+		. _T('info_creer_repertoire')
+		. "</label>\n"
+		. "<input class='formo' size='40' id='fichier' name='fichier' value='"
+		. $signal
+		. "' /><br />"
+		. _T('info_creer_repertoire_2', array('repertoire' => joli_repertoire($dir)))
+		. "</fieldset>";
+
+
+		$suivant = _T('bouton_recharger_page');
 
 	// code volontairement tordu:
 	// provoquer la copie dans le presse papier du nom du repertoire

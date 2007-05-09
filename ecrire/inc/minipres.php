@@ -59,32 +59,6 @@ function install_fin_html() {
 	return "\n\t</div>\n\t</div>\n</body>\n</html>";
 }
 
-// http://doc.spip.org/@fieldset
-function fieldset($legend, $champs = array(), $horchamps='') {
-	$fieldset = "<fieldset>\n" .
-	($legend ? "<legend>".$legend."</legend>\n" : '');
-	foreach ($champs as $nom => $contenu) {
-		$type = $contenu['hidden'] ? 'hidden' : (preg_match(',^pass,', $nom) ? 'password' : 'text');
-		$class = $contenu['hidden'] ? '' : "class='formo' size='40' ";
-		if(is_array($contenu['alternatives'])) {
-			$fieldset .= $contenu['label'] ."\n";
-			foreach($contenu['alternatives'] as $valeur => $label) {
-				$fieldset .= "<input type='radio' name='".$nom .
-				"' id='$nom-$valeur' value='$valeur'"
-				  .(($valeur==$contenu['valeur'])?"\nchecked='checked'":'')."/>\n";
-				$fieldset .= "<label for='$nom-$valeur'>".$label."</label>\n";
-			}
-			$fieldset .= "<br />\n";
-		}
-		else {
-			$fieldset .= "<label for='".$nom."'>".$contenu['label']."</label>\n";
-			$fieldset .= "<input ".$class."type='".$type."' id='" . $nom . "' name='".$nom."'\nvalue='".$contenu['valeur']."' />\n";
-		}
-	}
-	$fieldset .= "$horchamps</fieldset>\n";
-	return $fieldset;
-}
-
 // http://doc.spip.org/@minipres
 function minipres($titre='', $corps="", $onload='')
 {
@@ -203,27 +177,5 @@ function http_style_background($img, $att='')
 {
   return " style='background: url(\"".http_wrapper($img)."\")" .
 	    ($att ? (' ' . $att) : '') . ";'";
-}
-// http://doc.spip.org/@info_progression_etape
-function info_progression_etape($en_cours,$phase,$dir){
-	//$en_cours = _request('etape')?_request('etape'):"";
-	$liste = find_all_in_path($dir,$phase.'(([0-9])+|fin)[.]php');
-	$debut = 1; $etat = "ok";
-	$last = count($liste);
-	
-	$aff_etapes = "<span id='etapes'>";
-	foreach($liste as $etape=>$fichier){
-		if ($etape=="$phase$en_cours.php"){
-			$etat = "encours";
-		}
-		$aff_etapes .= ($debut<$last)
-			? "<span class='$etat'><em>$debut</em><span>,</span> </span>"
-			: '';
-		if ($etat == "encours")
-			$etat = 'todo';
-		$debut++;
-	}
-	$aff_etapes .= "<br class='nettoyeur' />&nbsp;</span>\n";
-	return $aff_etapes;
 }
 ?>
