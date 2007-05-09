@@ -57,6 +57,7 @@ function exec_brouteur_dist()
 			}
 		}
 
+		spip_log ("rub " . $dest[0] . ' ' . $dest[$nb_col-2]);
 		if ($dest[0] > 0 AND $dest[$nb_col-2]) {
 			
 			$la_rubrique = $dest[0];
@@ -69,17 +70,15 @@ function exec_brouteur_dist()
 			$compteur = 0;
 			$ret = '';
 			while ($la_rubrique > 0) {
-				$result = spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique ='$la_rubrique'");
+				$result = spip_query("SELECT titre, id_parent FROM spip_rubriques WHERE id_rubrique ='$la_rubrique'");
 				if ($row = spip_fetch_array($result)) {
 					$compteur++;
 					$titre = typo($row['titre']);
-					$la_rubrique =$row['id_parent'];
 					$lien = $dest[$nb_col-$compteur-1];
-					if ($la_rubrique == 0) $icone = "secteur-24.gif";
-					else $icone = "rubrique-24.gif";
-					$ret = "\n<div " .
-					  http_style_background($icone,
-								"$spip_lang_left no-repeat; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px") . "><a href='" . generer_url_ecrire("brouteur","id_rubrique=$lien") . "'>$titre</a></div>\n<div style='margin-$spip_lang_left: 28px;'>$ret</div>";
+					if (!$la_rubrique=$row['id_parent'])
+					  $class = "brouteur_icone_secteur";
+					else $class = "brouteur_icone_rubrique";
+					$ret = "\n<div class='$class'><a href='" . generer_url_ecrire("brouteur","id_rubrique=$lien") . "'>$titre</a></div>\n<div style='margin-$spip_lang_left: 28px;'>$ret</div>";
 				}
 			}
 			$lien = $dest[$nb_col-$compteur-2];
@@ -88,10 +87,7 @@ function exec_brouteur_dist()
 			echo "<div style='text-align: $spip_lang_left;'>";
 			
 			echo "<div id='brouteur_hierarchie'>"; // pour calculer hauteur de iframe
-			echo "<div ",
-				http_style_background("racine-site-24.gif",
-						"$spip_lang_left no-repeat; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px"),
-				"><a href='",
+			echo "<div class='brouteur_icone_racine'><a href='",
 				generer_url_ecrire("brouteur","id_rubrique=$lien"),
 				"'>",
 				_T('info_racine_site'),

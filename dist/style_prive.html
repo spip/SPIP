@@ -1308,7 +1308,7 @@ span.icone {
 li.art span.icone {	margin-[(#ENV{ltr}|choixsiegal{left,left,right})]:0px;}
 
 span.holder {}
-li.sec span.icone {	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=secteur-24.gif) [(#ENV{ltr}|choixsiegal{left,left,right})] bottom no-repeat;}
+li.sec span.icone,  {	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=secteur-24.gif) [(#ENV{ltr}|choixsiegal{left,left,right})] bottom no-repeat;}
 li.rub span.icone {	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=rubrique-24.gif) [(#ENV{ltr}|choixsiegal{left,left,right})] top no-repeat;}
 li.art span.icone {	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=article-24.gif) [(#ENV{ltr}|choixsiegal{left,left,right})] top no-repeat;}
 li.sec ul{display:none;}
@@ -1439,6 +1439,43 @@ div.brouteur_rubrique div a {
 
 div.brouteur_rubrique_on div a {
 	color: #000;
+}
+
+.brouteur_icone_racine {
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=racine-site-24.gif) [(#ENV{ltr}|choixsiegal{left,left,right})] no-repeat;
+	padding-top: 5px; 
+	padding-bottom: 5px; 
+	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 28px
+}
+
+.brouteur_icone_secteur {
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=secteur-24.gif) [(#ENV{ltr}|choixsiegal{left,left,right})] no-repeat;
+	padding-top: 5px; 
+	padding-bottom: 5px; 
+	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 28px
+}
+
+.brouteur_icone_rubrique {
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=rubrique-24.gif) [(#ENV{ltr}|choixsiegal{left,left,right})] no-repeat;
+	padding-top: 5px; 
+	padding-bottom: 5px; 
+	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 28px
+}
+
+.brouteur_icone_article {
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=article-24.gif) [(#ENV{ltr}|choixsiegal{left,left,right})] no-repeat;
+	margin: 3px;
+	padding-top: 5px; 
+	padding-bottom: 5px; 
+	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 28px
+}
+
+.brouteur_icone_site {
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=site-24.gif) [(#ENV{ltr}|choixsiegal{left,left,right})] center no-repeat;
+	margin: 3px;
+	padding-top: 5px; 
+	padding-bottom: 5px; 
+	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 28px
 }
 
 .iframe-brouteur {
