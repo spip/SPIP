@@ -88,7 +88,7 @@ function notifier_publication_article($id_article) {
 
 			// URL de l'article
 			charger_generer_url();
-			$url = url_absolue(generer_url_article($id_article, true));
+			$url = url_absolue(generer_url_article($id_article, '','', 'publie'));
 
 			$titre = nettoyer_titre_email($row['titre']);
 

@@ -257,23 +257,22 @@ function racine_forum($id_forum){
 } 
 
 // http://doc.spip.org/@generer_url_forum_dist
-function generer_url_forum_dist($id_forum, $show_thread=false) {
+function generer_url_forum_dist($id_forum, $args='', $ancre='') {
 	if (!$id_forum) return '';
 	list($type, $id, $id_thread) = racine_forum($id_forum);
-	if ($id_thread>0 AND $show_thread)
-		$id_forum = $id_thread;
+	if (!$ancre) $ancre = "forum$id_forum";
 	switch($type) {
 		case 'article':
-			return generer_url_article($id)."#forum$id_forum";
+			return generer_url_article($id, $args, $ancre);
 			break;
 		case 'breve':
-			return generer_url_breve($id)."#forum$id_forum";
+			return generer_url_breve($id, $args, $ancre);
 			break;
 		case 'rubrique':
-			return generer_url_rubrique($id)."#forum$id_forum";
+			return generer_url_rubrique($id, $args, $ancre);
 			break;
 		case 'site':
-			return generer_url_site($id)."#forum$id_forum";
+			return generer_url_site($id, $args, $ancre);
 			break;
 		default:
 		  return '';

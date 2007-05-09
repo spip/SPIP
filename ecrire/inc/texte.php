@@ -16,7 +16,6 @@ include_spip('inc/filtres');
 include_spip('inc/charsets');
 include_spip('inc/lang');
 
-
 //
 // Gerer les variables de personnalisation, qui peuvent provenir
 // des fichiers d'appel, en verifiant qu'elles n'ont pas ete passees
@@ -514,13 +513,13 @@ function typo($letexte, $echapper=true) {
 	return $letexte;
 }
 
-// traitement des raccourcis issus de [TITRE->RACCOURCInnn] et connexes
+// analyse des raccourcis issus de [TITRE->RACCOURCInnn] et connexes
 
-define('_RACCOURCI_URL', ',^(\S*?)\s*(\d+)(\?.*?)?(#[^\s]*)?$,S');
+define('_RACCOURCI_URL', ',^\s*(\w*?)\s*(\d+)(\?(.*?))?(#([^\s]*))?\s*$,S');
 
 // http://doc.spip.org/@typer_raccourci
 function typer_raccourci ($lien) {
-	if (!preg_match(_RACCOURCI_URL, trim($lien), $match)) return false;
+	if (!preg_match(_RACCOURCI_URL, $lien, $match)) return array();
 	$f = $match[1];
 	// valeur par defaut et alias historiques
 	if (!$f) $f = 'article';
@@ -539,37 +538,28 @@ function typer_raccourci ($lien) {
 // associe a une fonction generer_url_raccourci()
 //
 // Valeur retournee selon le parametre $pour:
-// 'tout' : <a href="L">T</a>
+// 'tout' : tableau [U,C,T,L] (vise <a href="U" class='C' hreflang='L'>T</a>)
 // 'titre': seulement T ci-dessus (i.e. le TITRE ci-dessus ou dans table SQL)
-// 'url':   seulement L (i.e. generer_url_RACCOURCI)
+// 'url':   seulement U  (i.e. generer_url_RACCOURCI)
 
 // http://doc.spip.org/@calculer_url
 function calculer_url ($lien, $texte='', $pour='url') {
-	$lien = vider_url($lien); # supprimer 'http://' ou 'mailto:'
+	$lien = vider_url($lien); # 'http://' ou 'mailto:' seuls == ""
 	if ($match = typer_raccourci ($lien)) {
-		@list($f,$objet,$id,$params,$ancre) = $match;
-		// chercher la fonction nommee generer_url_$raccourci
-		// ou calculer_url_raccourci si on n'a besoin que du lien
-		$f=(($pour == 'url') ? 'generer' : 'calculer') . '_url_' . $f;
+		@list($f,,$id,,$param,,$ancre) = $match;
 		charger_generer_url();
-		if (function_exists($f) OR function_exists($f .= '_dist')) {
-			if ($pour == 'url') {
-				$url = $f($id);
-				if ($params)
-					$url .= (strstr($url, '?') ? '&amp;' : '?')
-						. substr($params,1);
-				return $url . $ancre;
-			}
-
-			$res = $f($id, $texte, $ancre);
-			if ($pour == 'titre')
+		$g = 'generer_url_' . $f;
+		if (function_exists($g) OR function_exists($g .= '_dist')) {
+			$res = $g($id, $param, $ancre);
+			if ($pour == 'url') return $res;
+			$g = 'calculer_url_' . $f;
+			if (function_exists($g) OR function_exists($g .= '_dist')) { 
+				if ($pour == 'tout')
+					return $g($id, $texte, $res);
+				$res = $g($id, $texte, $res);
 				return $res[2];
-			if ($params)
-				$res[0] .= (strstr($res[0], '?') ? '&amp;' : '?')
-					. substr($params,1);
-			$res[0] .= $ancre;
-			return $res;
-		}
+			}
+		} else spip_log("raccourci indefini $f");
 	}
   
 	$lien = ltrim($lien);
@@ -606,8 +596,7 @@ function calculer_url ($lien, $texte='', $pour='url') {
 }
 
 // http://doc.spip.org/@calculer_url_article_dist
-function calculer_url_article_dist($id, $texte='') {
-	$lien = generer_url_article($id);
+function calculer_url_article_dist($id, $texte, $lien) {
 	$s = spip_query("SELECT titre,lang FROM spip_articles WHERE id_article=$id");
 	$row = spip_fetch_array($s);
 	if (!trim($texte))
@@ -618,60 +607,58 @@ function calculer_url_article_dist($id, $texte='') {
 }
 
 // http://doc.spip.org/@calculer_url_rubrique_dist
-function calculer_url_rubrique_dist($id, $texte='')
+function calculer_url_rubrique_dist($id, $texte, $lien)
 {
-	$lien = generer_url_rubrique($id);
 	$s = spip_query("SELECT titre,lang FROM spip_rubriques WHERE id_rubrique=$id");
 	$row = spip_fetch_array($s);
-	if (!trim($texte))
+	if (!trim($texte)) {
 		$texte = supprimer_numero($row['titre']);
-	if (!trim($texte))
-	    $texte = $id;
+		if (!trim($texte))
+		  $texte = $id;
+	}
 	return array($lien, 'spip_in', $texte, $row['lang']);
 }
 
-// http://doc.spip.org/@calculer_url_mot_dist
-function calculer_url_mot_dist($id, $texte='')
-{
-	$lien = generer_url_mot($id);
-	$s = spip_query("SELECT titre FROM spip_mots WHERE id_mot=$id");
-	$row = spip_fetch_array($s);
-	if (!trim($texte))
-		$texte = supprimer_numero($row['titre']);
-	if (!trim($texte))
-	    $texte = $id;
-	return array($lien, 'spip_in', $texte);
-}
-
 // http://doc.spip.org/@calculer_url_breve_dist
-function calculer_url_breve_dist($id, $texte='')
+ function calculer_url_breve_dist($id, $texte, $lien)
 {
-	$lien = generer_url_breve($id);
 	$s = spip_query("SELECT titre,lang FROM spip_breves WHERE id_breve=$id");
 	$row = spip_fetch_array($s);
-	if (!trim($texte))
+	if (!trim($texte)) {
 		$texte = supprimer_numero($row['titre']);
-	if (!trim($texte))
-	    $texte = $id;
+		if (!trim($texte))
+		  $texte = $id;
+	}
 	return array($lien, 'spip_in', $texte, $row['lang']);
 }
 
 // http://doc.spip.org/@calculer_url_auteur_dist
-function calculer_url_auteur_dist($id, $texte='')
+ function calculer_url_auteur_dist($id, $texte, $lien)
 {
-	$lien = generer_url_auteur($id);
 	if ($texte=='') {
 		$s = spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$id");
-	$row = spip_fetch_array($s);
+		$row = spip_fetch_array($s);
 		$texte = $row['nom'];
 	}
 	return array($lien, 'spip_in', $texte); # pas de hreflang
 }
 
-// http://doc.spip.org/@calculer_url_document_dist
-function calculer_url_document_dist($id, $texte='')
+// http://doc.spip.org/@calculer_url_mot_dist
+function calculer_url_mot_dist($id, $texte, $lien)
 {
-	$lien = generer_url_document($id);
+	if (!trim($texte)) {
+		$s = spip_query("SELECT titre FROM spip_mots WHERE id_mot=$id");
+		$row = spip_fetch_array($s);
+		$texte = supprimer_numero($row['titre']);
+		if (!trim($texte))
+		  $texte = $id;
+	}
+	return array($lien, 'spip_in', $texte);
+}
+
+// http://doc.spip.org/@calculer_url_document_dist
+ function calculer_url_document_dist($id, $texte, $lien)
+{
 	if ($texte=='') {
 		$s = spip_query("SELECT titre,fichier FROM spip_documents WHERE id_document=$id");
 		$row = spip_fetch_array($s);
@@ -685,7 +672,7 @@ function calculer_url_document_dist($id, $texte='')
 }
 
 // http://doc.spip.org/@calculer_url_site_dist
-function calculer_url_site_dist($id, $texte='')
+function calculer_url_site_dist($id, $texte, $lien)
 {
 	# attention dans le cas des sites le lien pointe non pas sur
 	# la page locale du site, mais directement sur le site lui-meme
@@ -702,9 +689,8 @@ function calculer_url_site_dist($id, $texte='')
 }
 
 // http://doc.spip.org/@calculer_url_forum_dist
-function calculer_url_forum_dist($id, $texte='')
+function calculer_url_forum_dist($id, $texte, $lien)
 {
-	$lien = generer_url_forum($id);
 	if (!trim($texte)) {
 		$s = spip_query("SELECT titre FROM spip_forum WHERE id_forum=$id AND statut='publie'");
 		$row = spip_fetch_array($s);
@@ -714,7 +700,6 @@ function calculer_url_forum_dist($id, $texte='')
 	}
 	return array($lien, 'spip_in', $texte); # pas de hreflang
 }
-
 
 //
 // Tableaux

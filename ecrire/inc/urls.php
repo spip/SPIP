@@ -16,69 +16,89 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // des items des tables SQL principales, selon le statut de publication
 
 // http://doc.spip.org/@generer_url_ecrire_article
-function generer_url_ecrire_article($id_article, $statut='') {
-	$args = "id_article=" . intval($id_article);
-	if (!$statut)
-		$statut = spip_fetch_array(spip_query("SELECT statut FROM spip_articles WHERE $args"));
-	if ($statut['statut'] == 'publie')
-		return generer_url_action('redirect', $args);
-	else	return generer_url_ecrire('articles', $args);
+function generer_url_ecrire_article($id, $suite='', $ancre='', $statut='') {
+	$a = "id_article=" . intval($id);
+	if (!$statut) {
+		$statut = spip_fetch_array(spip_query("SELECT statut FROM spip_articles WHERE $a"), SPIP_NUM);
+		$statut = $statut[0];
+	}
+	if ($suite) $a .= "&$suite";
+	if ($statut == 'publie') {
+		$a .= "&ancre=" . $ancre;
+		return generer_url_action('redirect', $a);
+	} else	return generer_url_ecrire('articles', $a) . ($ancre ? "#$ancre" : '');
 }
 
 // http://doc.spip.org/@generer_url_ecrire_rubrique
-function generer_url_ecrire_rubrique($id_rubrique, $statut='') {
-	$args = "id_rubrique=" . intval($id_rubrique);
-	if (!$statut)
-		$statut = spip_fetch_array(spip_query("SELECT statut FROM spip_rubriques WHERE $args"));
-	if ($statut['statut'] == 'publie')
-		return generer_url_action('redirect', $args);
-	else	return generer_url_ecrire('naviguer',$args);
+function generer_url_ecrire_rubrique($id, $suite='', $ancre='', $statut='') {
+	$a = "id_rubrique=" . intval($id);
+	if (!$statut) {
+		$statut = spip_fetch_array(spip_query("SELECT statut FROM spip_rubriques WHERE $a"), SPIP_NUM);
+		$statut = $statut[0];
+	}
+	if ($suite) $a .= "&$suite";
+	if ($statut == 'publie') {
+		$a .= "&ancre=" . $ancre;
+		return generer_url_action('redirect', $a);
+	} else	return generer_url_ecrire('naviguer',$a) . ($ancre ? "#$ancre" : '');
 }
 
 // http://doc.spip.org/@generer_url_ecrire_breve
-function generer_url_ecrire_breve($id_breve, $statut='') {
-	$args = "id_breve=" . intval($id_breve);
-	if (!$statut)
-		$statut = spip_fetch_array(spip_query("SELECT statut FROM spip_breves WHERE $args"));
-	if ($statut['statut'] == 'publie')
-		return generer_url_action('redirect', $args);
-	else	return generer_url_ecrire('breves_voir',$args);
+function generer_url_ecrire_breve($id, $suite='', $ancre='', $statut='') {
+	$a = "id_breve=" . intval($id);
+	if (!$statut) {
+		$statut = spip_fetch_array(spip_query("SELECT statut FROM spip_breves WHERE $a"), SPIP_NUM);
+		$statut = $statut[0];
+	}
+	if ($suite) $a .= "&$suite";
+	if ($statut == 'publie') {
+		$a .= "&ancre=" . $ancre;
+		return generer_url_action('redirect', $a);
+	} else	return generer_url_ecrire('breves_voir',$a) . ($ancre ? "#$ancre" : '');
 }
 
 // http://doc.spip.org/@generer_url_ecrire_mot
-function generer_url_ecrire_mot($id_mot, $statut='') {
-	$args = "id_mot=" . intval($id_mot);
-	if (!$statut)
-		return generer_url_action('redirect', $args);
-	else	return generer_url_ecrire('mots_edit',$args);
+function generer_url_ecrire_mot($id, $suite='', $ancre='', $statut='') {
+	$a = "id_mot=" . intval($id);
+	if ($suite) $a .= "&$suite";
+	if (!$statut) {
+		$a .= "&ancre=" . $ancre;
+		return generer_url_action('redirect', $a);
+	} else	return generer_url_ecrire('mots_edit',$a) . ($ancre ? "#$ancre" : '');
 }
 
 // http://doc.spip.org/@generer_url_ecrire_site
-function generer_url_ecrire_site($id_syndic, $statut='') {
-	$args = "id_syndic=" . intval($id_syndic);
-	if (!$statut)
-		return generer_url_action('redirect', $args);
-	else	return generer_url_ecrire('sites',$args);
+function generer_url_ecrire_site($id, $suite='', $ancre='', $statut='') {
+	$a = "id_syndic=" . intval($id);
+	if ($suite) $a .= "&$suite";
+	if (!$statut) {
+		$a .= "&ancre=" . $ancre;
+		return generer_url_action('redirect', $a);
+	} else	return generer_url_ecrire('sites',$a) . ($ancre ? "#$ancre" : '');
 }
 
 // http://doc.spip.org/@generer_url_ecrire_auteur
-function generer_url_ecrire_auteur($id_auteur, $statut='') {
-	$args = "id_auteur=" . intval($id_auteur);
-	if (!$statut)
-		return generer_url_action('redirect', $args);
-	else
-		return generer_url_ecrire('auteur_infos',$args);
+function generer_url_ecrire_auteur($id, $suite='', $ancre='', $statut='') {
+	$a = "id_auteur=" . intval($id);
+	if ($suite) $a .= "&$suite";
+	if (!$statut) {
+		$a .= "&ancre=" . $ancre;
+		return generer_url_action('redirect', $a);
+	} else	return generer_url_ecrire('auteur_infos',$a) . ($ancre ? "#$ancre" : '');
 }
 
 // http://doc.spip.org/@generer_url_ecrire_forum
-function generer_url_ecrire_forum($id_forum, $statut='') {
-	return generer_url_action('redirect', "id_forum=$id_forum");
+function generer_url_ecrire_forum($id, $suite='', $ancre='', $statut='') {
+	$a = "id_forum=" . intval($id);
+	if ($suite) $a .= "&$suite"; 
+	$a .= "&ancre=" . $ancre;
+	return generer_url_action('redirect', $a);
 }
 
 // http://doc.spip.org/@generer_url_ecrire_document
-function generer_url_ecrire_document($id_document, $statut='') {
+function generer_url_ecrire_document($id, $suite='', $ancre='', $statut='') {
 	include_spip('inc/documents');
-	return generer_url_document_dist($id_document);
+	return generer_url_document_dist($id);
 }
 
 // http://doc.spip.org/@generer_url_ecrire_statistiques
@@ -93,43 +113,43 @@ if (!_DIR_RESTREINT) {
 
   if (!function_exists('generer_url_article')) {
 // http://doc.spip.org/@generer_url_article
-	function generer_url_article($id, $stat='')
-		{ return generer_url_ecrire_article($id, $stat);}
+	function generer_url_article($id, $args='', $ancre='', $stat='')
+		{ return generer_url_ecrire_article($id, $args, $ancre, $stat);}
   }
   if (!function_exists('generer_url_rubrique')) {
 // http://doc.spip.org/@generer_url_rubrique
-	function generer_url_rubrique($id, $stat='')
-		{ return generer_url_ecrire_rubrique($id, $stat);}
+	function generer_url_rubrique($id, $args='', $ancre='', $stat='')
+		{ return generer_url_ecrire_rubrique($id, $args, $ancre, $stat);}
   }
   if (!function_exists('generer_url_breve')) {
 // http://doc.spip.org/@generer_url_breve
-	function generer_url_breve($id, $stat='')
-		{ return generer_url_ecrire_breve($id, $stat);}
+	function generer_url_breve($id, $args='', $ancre='', $stat='')
+		{ return generer_url_ecrire_breve($id, $args, $ancre, $stat);}
   }
   if (!function_exists('generer_url_mot')) {
 // http://doc.spip.org/@generer_url_mot
-	function generer_url_mot($id, $stat='')
-		{ return generer_url_ecrire_mot($id, $stat);}
+	function generer_url_mot($id, $args='', $ancre='', $stat='')
+		{ return generer_url_ecrire_mot($id, $args, $ancre, $stat);}
   }
   if (!function_exists('generer_url_site')) {
 // http://doc.spip.org/@generer_url_site
-	function generer_url_site($id, $stat='')
-		{ return generer_url_ecrire_site($id, $stat);}
+	function generer_url_site($id, $args='', $ancre='', $stat='')
+		{ return generer_url_ecrire_site($id, $args, $ancre, $stat);}
   }
   if (!function_exists('generer_url_auteur')) {
 // http://doc.spip.org/@generer_url_auteur
-	function generer_url_auteur($id, $stat='')
-		{ return generer_url_ecrire_auteur($id, $stat);}
+	function generer_url_auteur($id, $args='', $ancre='', $stat='')
+		{ return generer_url_ecrire_auteur($id, $args, $ancre, $stat);}
   }
   if (!function_exists('generer_url_forum')) {
 // http://doc.spip.org/@generer_url_forum
-	function generer_url_forum($id, $stat='')
-		{ return generer_url_ecrire_forum($id, $stat);}
+	function generer_url_forum($id, $args='', $ancre='', $stat='')
+		{ return generer_url_ecrire_forum($id, $args, $ancre, $stat);}
   }
   if (!function_exists('generer_url_document')) {
 // http://doc.spip.org/@generer_url_document
-	function generer_url_document($id, $stat='')
-		{ return generer_url_ecrire_document($id, $stat);}
+	function generer_url_document($id, $args='', $ancre='', $stat='')
+		{ return generer_url_ecrire_document($id, $args, $ancre, $stat);}
   }
  }
 ?>
