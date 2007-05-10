@@ -38,7 +38,7 @@ function action_copier_local_dist() {
 function action_copier_local_post($id_document) {
 
 	// Il faut la source du document pour le copier
-	$s = spip_query("SELECT fichier FROM spip_documents WHERE id_document=$id_document");
+	$s = spip_query("SELECT fichier, descriptif FROM spip_documents WHERE id_document=$id_document");
 	$row = spip_fetch_array($s);
 	$source = $row['fichier'];
 
@@ -46,12 +46,22 @@ function action_copier_local_post($id_document) {
 	include_spip('inc/documents'); // pour 'set_spip_doc'
 
 	if ($fichier = copie_locale($source)) {
+		$taille = filesize($fichier);
+		// On le sort du repertoire IMG/distant/
+		$dest = preg_replace(',^.*/distant/[^/_]+[/_],', '', $fichier);
+		$dest = sous_repertoire(_DIR_IMG, preg_replace(',^.*\.,', '', $fichier)) . $dest;
+		if ($dest != $fichier
+		AND @rename($fichier, $dest))
+			$fichier = $dest;
+
+		// On indique l'ancien URL dans le descriptif (pis-aller)
+		$row['descriptif'] .= ($row['descriptif'] ? "\n\n":'') . "[->$source]";
+
 		// $fichier contient IMG/distant/...
 		// or, dans la table documents, IMG doit etre exclu.
-		$taille = filesize($fichier);
 		$fichier = set_spip_doc($fichier);
 		spip_log("convertit doc $id_document en local: $source => $fichier");
-		spip_query("UPDATE spip_documents SET fichier="._q($fichier).", distant='non', taille='$taille' WHERE id_document=".$id_document);
+		spip_query("UPDATE spip_documents SET fichier="._q($fichier).", distant='non', taille='$taille', descriptif="._q($row['descriptif'])." WHERE id_document=".$id_document);
 		
 	} else {
 		spip_log("echec copie locale $source");
