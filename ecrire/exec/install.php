@@ -20,10 +20,9 @@ function exec_install_dist()
 {
 	$etape = _request('etape');
 	if (_FILE_CONNECT) {
-		echo minipres('AUTO', _T('avis_espace_interdit') .
-			      generer_form_ecrire('accueil', bouton_suivant()));
+		echo minipres();
 		exit;
-	} else {
+	}
 
 	// On va supprimer les eventuelles vieilles valeurs de meta,
 	// on perd l'init des langues, mais elle est refaite par menu_langue
@@ -34,7 +33,6 @@ function exec_install_dist()
 
 	$fonc = charger_fonction("etape_$etape", 'install');
 	$fonc();
-	}
 }
 
 //

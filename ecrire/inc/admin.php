@@ -54,8 +54,7 @@ function debut_admin($script, $action='', $commentaire='') {
 
 	if ((!$action) || ($connect_statut != "0minirezo")) {
 		include_spip('inc/minipres');
-		echo minipres(_T('info_acces_refuse') .
-			      ($action ? " ($action)" : ''));
+		echo minipres();
 		exit;
 	}
 	if ($connect_toutes_rubriques) {

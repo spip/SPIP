@@ -64,9 +64,11 @@ function minipres($titre='', $corps="", $onload='')
 {
 	if (!$titre) {
 		http_status(403);
-		header("Connection: close");
-		$titre = _T('info_acces_interdit');
-		$corps = _request(_DIR_RESTREINT ? 'action' : 'exec');
+		$titre = _request(_DIR_RESTREINT ? 'action' : 'exec');
+		$titre = ($titre == 'install')
+		  ?  _T('avis_espace_interdit')
+		  : $titre . '&nbsp;: '. _T('info_acces_interdit');
+		$corps = generer_form_ecrire('accueil', '','',_T('ecrire:accueil_site'));
 		spip_log($GLOBALS['auteur_session']['nom'] . " $titre " . $_SERVER['REQUEST_URI']);
 	}
 

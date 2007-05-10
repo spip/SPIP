@@ -22,19 +22,14 @@ function exec_message_dist()
 	global $cherche_auteur, $connect_id_auteur,$forcer_dest,$id_message;
 
 	$id_message = intval($id_message);
-	charger_generer_url();
 
 	$row = spip_fetch_array(spip_query("SELECT type FROM spip_messages WHERE id_message=$id_message"));
 
 	if ($row['type'] != "affich"){
 		$res = spip_fetch_array(spip_query("SELECT vu FROM spip_auteurs_messages WHERE id_auteur=$connect_id_auteur AND id_message=$id_message"));
 		if (!$res) {
-			$commencer_page = charger_fonction('commencer_page', 'inc');
-			echo $commencer_page(_T('info_acces_refuse'));
-			debut_gauche();
-			debut_droite();
-			echo "<b>"._T('avis_non_acces_message')."</b>";
-			echo fin_gauche(), fin_page();
+			include_spip('inc/minipres');
+			echo minipres();
 			exit;
 		}
 	// Marquer le message vu pour le visiteur
@@ -43,7 +38,7 @@ function exec_message_dist()
 			redirige_par_entete(redirige_action_auteur("editer_message","$id_message/:$connect_id_auteur", 'message', "id_message=$id_message", true));
 		}
 	}
-
+	charger_generer_url();
 	exec_affiche_message_dist($id_message, $cherche_auteur, $forcer_dest);
 }
 
@@ -362,7 +357,7 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 // http://doc.spip.org/@exec_affiche_message_dist
 function exec_affiche_message_dist($id_message, $cherche_auteur, $forcer_dest)
 {
-  global $connect_id_auteur, $echelle, $partie_cal;
+  global $echelle, $partie_cal;
   $row = spip_fetch_array(spip_query("SELECT * FROM spip_messages WHERE id_message=$id_message"));
   if ($row) {
 	$id_message = $row['id_message'];
@@ -378,8 +373,6 @@ function exec_affiche_message_dist($id_message, $cherche_auteur, $forcer_dest)
 	$lejour=journum($row['date_heure']);
 	$lemois = mois($row['date_heure']);		
 	$lannee = annee($row['date_heure']);		
-
-	
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page($titre, "accueil", "messagerie");
