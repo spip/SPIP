@@ -261,7 +261,7 @@ function balise_URL_FORUM_dist($p) {
 	$_id_forum = interprete_argument_balise(1,$p);
 	if (!$_id_forum)
 		$_id_forum = champ_sql('id_forum',$p);
-	$p->code = "generer_url_forum($_id_forum, $show_thread)";
+	$p->code = "generer_url_forum($_id_forum)";
 
 	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
