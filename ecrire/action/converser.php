@@ -53,7 +53,6 @@ function action_converser_post($lang, $ecrire=false)
 	if ($lang) {
 		include_spip('inc/lang');
 		if (changer_langue($lang)) {
-  spip_log ("acp $lang");
 			spip_setcookie('spip_lang', $lang, time() + 365 * 24 * 3600);
 			if ($ecrire)
 				spip_setcookie('spip_lang_ecrire', $lang, time() + 365 * 24 * 3600);

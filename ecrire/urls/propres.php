@@ -137,7 +137,6 @@ function _generer_url_propre($type, $id_objet) {
 
 // http://doc.spip.org/@generer_url_article
 function generer_url_article($id_article, $args='', $ancre='') {
-  spip_log("generer_url_article($id_article, $args='', $ancre");
 	$url = _generer_url_propre('article', $id_article);
 	if ($url)
 		$url = _debut_urls_propres . $url . _terminaison_urls_propres  . ($args ? "?$args" : '');
