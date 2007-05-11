@@ -214,22 +214,41 @@ function calculer_langues_rubriques() {
 	}
 
 	if ($GLOBALS['meta']['multi_rubriques'] == 'oui') {
-		// Ecrire meta liste langues utilisees dans rubriques
-		include_spip('inc/meta');
-		$s = spip_query("SELECT lang FROM spip_rubriques
-		WHERE lang != '' GROUP BY lang");
-		while ($row = spip_fetch_array($s)) {
-			$lang_utilisees[] = $row['lang'];
-		}
-		if ($lang_utilisees) {
-			$lang_utilisees = join (',', $lang_utilisees);
-			ecrire_meta('langues_utilisees', $lang_utilisees);
-		} else {
-			ecrire_meta('langues_utilisees', "");
-		}
+		calculer_langues_utilisees ();
 	}
 }
 
+// Cette fonction calcule la liste des langues reellement utilisees dans le
+// site public
+// http://doc.spip.org/@calculer_langues_utilisees
+function calculer_langues_utilisees () {
+	$langues = array();
+
+	$langues[$GLOBALS['meta']['langue_site']] = 1;
+
+	$result = spip_query("SELECT DISTINCT lang FROM spip_articles WHERE statut='publie'");
+	while ($row = spip_fetch_array($result)) {
+		$langues[$row['lang']] = 1;
+	}
+
+	$result = spip_query("SELECT DISTINCT lang FROM spip_breves WHERE statut='publie'");
+	while ($row = spip_fetch_array($result)) {
+		$langues[$row['lang']] = 1;
+	}
+
+	$result = spip_query("SELECT DISTINCT lang FROM spip_rubriques WHERE statut='publie'");
+	while ($row = spip_fetch_array($result)) {
+		$langues[$row['lang']] = 1;
+	}
+
+	$langues = array_filter(array_keys($langues));
+	sort($langues);
+	$langues = join(',',$langues);
+	spip_log("langues utilisees: $langues");
+	include_spip('inc/meta');
+	ecrire_meta('langues_utilisees', $langues);
+	ecrire_metas();
+}
 
 // http://doc.spip.org/@calcul_generation
 function calcul_generation ($generation) {

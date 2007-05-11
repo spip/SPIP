@@ -89,6 +89,7 @@ function init_config() {
 
 	if ($modifs) ecrire_metas();
 
+	include_spip('inc/rubriques');
 	calculer_langues_utilisees();
 }
 
