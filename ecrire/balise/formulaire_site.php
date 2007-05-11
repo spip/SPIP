@@ -46,7 +46,7 @@ function balise_FORMULAIRE_SITE_dyn($id_rubrique) {
 			$message_erreur = _T('form_prop_indiquer_nom_site');
 
 		// Tester l'URL du site
-		include_spip('inc/sites');
+		include_spip('inc/distant');
 		$url = _request('url_site');
 		if (!recuperer_page($url))
 			$message_erreur = _T('form_pet_url_invalide');
