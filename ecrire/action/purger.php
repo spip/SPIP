@@ -20,7 +20,7 @@ function action_purger_dist()
 
 	include_spip('inc/invalideur');
 
-	spip_log('purger $arg');
+	spip_log("purger $arg");
 
 	switch ($arg) {
 
