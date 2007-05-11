@@ -99,7 +99,7 @@ function http_auteurs_ressemblants($cherche_auteur, $id_message)
 	 ("<br />\n<span class='spip_x-small'>".propre(couper($bio_auteur, 100))."</span>\n")) .
 	"</li>\n";
     }
-    return  "<b>"._T('info_recherche_auteur_ok', array('cherche_auteur' => $cherche_auteur))."</b><br /><ul>$res</ul>";
+    return  "<b>"._T('info_recherche_auteur_ok', array('cherche_auteur' => $cherche_auteur))."</b><br />" .($res ? "<ul>$res</ul>" : '');
   }
   else {
     return "<b>"._T('info_recherche_auteur_a_affiner', array('cherche_auteur' => $cherche_auteur))."</b><br />";
@@ -109,13 +109,12 @@ function http_auteurs_ressemblants($cherche_auteur, $id_message)
 // http://doc.spip.org/@http_visualiser_participants
 function http_visualiser_participants($auteurs_tmp)
 {
-  return "\n<table border='0' cellspacing='0' cellpadding='3' width='100%'><tr><td style='background-color: #EEEECC'>" .
+  return "\n<table border='0' cellspacing='0' cellpadding='3' width='100%'><tr><td style='background-color: #EEEECC' class='arial2'>" .
     bouton_block_invisible("auteurs,ajouter_auteur") .
     "<span class='serif2'><b>" .
     _T('info_nombre_partcipants') .
     "</b></span>" .
-    ((count($auteurs_tmp) == 0) ? '' :
-     (" <span class='arial2'>".join($auteurs_tmp,", ")."</span>")) .
+     $auteurs_tmp .
     "</td></tr></table>\n";
 }
 
@@ -166,7 +165,7 @@ function http_ajouter_participants($ze_auteurs, $id_message)
 		$res .=  "</select>"
 		.  "<input type='submit' value='"._T('bouton_ajouter')."' class='fondo' />";
 	}
-	return redirige_action_auteur('editer_message', "$id_message,", 'message', "id_message=$id_message", "<div style='text-align: left'>$res</div>", " method='post'");
+	return redirige_action_auteur('editer_message', "$id_message,", 'message', "id_message=$id_message", "<div style='text-align: left'>\n$res</div>\n", " method='post'");
 }
 
 // http://doc.spip.org/@http_afficher_forum_perso
@@ -175,11 +174,11 @@ function http_afficher_forum_perso($id_message)
 
 	echo "<br /><br />\n<div class='centered'>";
 	echo icone_inline(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=perso&id=$id_message&script=message"). '#formulaire', "forum-interne-24.gif", "creer.gif");
-	echo  "</div>\n<p style='text-align: left'>";
+	echo  "</div>\n<div style='text-align: left'>";
 
 	$query_forum = spip_query("SELECT * FROM spip_forum WHERE statut='perso' AND id_message='$id_message' AND id_parent=0 ORDER BY date_heure DESC LIMIT 20");
 	echo afficher_forum($query_forum, "message","id_message=$id_message");
-	echo "\n</p>";
+	echo "\n</div>";
 }
 
 
@@ -203,31 +202,33 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $che
 	$total_dest = spip_num_rows($result_auteurs);
 
 	if ($total_dest > 0) {
-			$couleurs = array('toile_gris_leger','toile_claire');
-			$auteurs_tmp = array();
-			$ze_auteurs = array();
-			$ifond = 0;
-			$res = '';
-			while($row = spip_fetch_array($result_auteurs)) {
-				$id_auteur = $row["id_auteur"];
-				$nom_auteur = typo($row["nom"]);
-				$statut_auteur = $row["statut"];
-				$ze_auteurs[] = $id_auteur;
+		$couleurs = array('toile_gris_leger','toile_claire');
+		$auteurs_tmp = array();
+		$ze_auteurs = array();
+		$ifond = 0;
+		$res = $exp = '';
+		$formater_auteur = charger_fonction('formater_auteur', 'inc');
+		$t = _T('lien_retrait_particpant');
+		while($row = spip_fetch_array($result_auteurs)) {
+			$id_auteur = $row["id_auteur"];
+			$nom_auteur = typo($row["nom"]);
+			$ze_auteurs[] = $id_auteur;
+			$couleur = $couleurs[$ifond];
+			$ifond = 1 - $ifond;
 
-				$couleur = $couleurs[$ifond];
-				$ifond = 1 - $ifond;
-
-				$auteurs_tmp[] = "<a href='" .
+			$aut = "<a href='" .
 				  generer_url_ecrire('auteur_infos',"id_auteur=" . $id_auteur) ."'>". $nom_auteur . "</a>";
+				
+			if ($id_auteur != $expediteur)
+					$auteurs_tmp[] = $aut;
+			else $exp = "<div><span class='arial0' style='margin-left: 10px'>".  _T('info_auteur_message') ."</span> $aut</div>";
 
-				$aut =  (($id_auteur != $expediteur) ? '' :
-					 ("<span class='arial0'>".  _T('info_auteur_message') ."</span> "));
-
-				$res .= "<tr><td class='$couleur verdana1 spip_small'>&nbsp;". bonhomme_statut($row)."&nbsp;" .  $aut .	  $nom_auteur .  "</td>" .
-				  "<td  align='right' class='$couleur verdana1 spip_x-small'>" . (($id_auteur == $connect_id_auteur) ?  "&nbsp;" : ("[<a href='" . redirige_action_auteur("editer_message","$id_message/-$id_auteur", 'message', "id_message=$id_message") . "'>"._T('lien_retrait_particpant')."</a>]")) .  "</td></tr>\n";
+			list($status, $mail, $nom, $site,) = $formater_auteur($id_auteur);
+			$res .= "<tr>\n<td class='$couleur verdana1 spip_small'>$status $amil $nom $site</td>" .
+			  "\n<td align='right' class='$couleur verdana1 spip_x-small'>" . (($id_auteur == $connect_id_auteur) ?  "&nbsp;" : ("[<a href='" . redirige_action_auteur("editer_message","$id_message/-$id_auteur", 'message', "id_message=$id_message") . "'>$t</a>]")) .  "</td></tr>\n";
 			}
 			echo
-			  http_visualiser_participants($auteurs_tmp),
+			  http_visualiser_participants(join(', ', $auteurs_tmp) . $exp),
 			  debut_block_invisible("auteurs"),
 			  "\n<table border='0' cellspacing='0' cellpadding='3' width='100%'>",
 			  $res,
