@@ -58,7 +58,7 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 
 #	spip_log("Pas vu $nom_champ");
 	// esperons qu'il y sera
-	return('@$Pile[0][\''. strtolower($nom_champ) . '\']');
+	return('$Pile[0][\''. strtolower($nom_champ) . '\']');
 }
 
 /**
