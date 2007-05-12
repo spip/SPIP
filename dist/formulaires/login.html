@@ -47,9 +47,11 @@ document.write("<p><:login_login:>&nbsp;<strong>[(#ENV{login_alt})]<" + "/strong
 
 	<p><label[ for="var_login_(#ENV{login})"]><:login_pass2:></label><br />
 	<input type="password" class="forml" name="session_password"[ id="var_login_(#ENV{login})"] value="" size="20" /></p>
+
+[(#ENV{rester_connecte})
 	<p><input type="checkbox" name="session_remember" id="session[_(#ENV{login})]" value="oui"[(#ENV*{prefs}|filtre_rester_connecte)checked="checked"]/>
 	<label for="session[_(#ENV{login})]"><:login_rester_identifie:></label></p>
-
+]
 	<input type="hidden" name="session_password_md5" value="" />
 	<input type="hidden" name="next_session_password_md5" value="" />
 	<input type="hidden" name="essai_login" value="oui" />

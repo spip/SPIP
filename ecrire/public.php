@@ -60,7 +60,8 @@ if (defined('_INC_PUBLIC')) {
 			redirige_par_entete(urldecode($redirect));
 		else if (!headers_sent()) {
 			http_status(204);
-			spip_log("action $action renvoie status 204");
+			# trop verbeux : chaque cron() provoque un 204
+			# spip_log("action $action renvoie status 204");
 		} else {
 			spip_log("action $action renvoie du contenu");
 		}

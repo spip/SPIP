@@ -203,8 +203,11 @@ function verifier_lang_url() {
 	AND changer_langue($lang_demandee)
 	AND $lang_demandee != @$_GET['lang']) {
 		$destination = parametre_url(self(),'lang', $lang_demandee, '&');
-		if (isset($GLOBALS['var_mode']))
-			$destination = parametre_url($destination, 'var_mode', $GLOBALS['var_mode'], '&');
+		// ici on a besoin des var_truc
+		foreach ($_GET as $var => $val) {
+			if (!strncmp('var_', $var, 4))
+				$destination = parametre_url($destination, $var, $val, '&');
+		}
 		include_spip('inc/headers');
 		redirige_par_entete($destination);
 	}

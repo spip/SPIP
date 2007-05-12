@@ -1247,7 +1247,7 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	include_once _DIR_RESTREINT . 'inc/flock.php';
 
 	// Duree de validite de l'alea pour les cookies et ce qui s'ensuit.
-	define('_RENOUVELLE_ALEA', 4 * 3600);
+	define('_RENOUVELLE_ALEA', 12 * 3600);
 
 	// Lire les meta cachees et init noyau (espace public uniquement)
 

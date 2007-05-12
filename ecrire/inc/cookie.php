@@ -18,7 +18,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@spip_setcookie
 function spip_setcookie ($name='', $value='', $expire=0, $path='AUTO', $domain='', $secure='') {
 	$name = preg_replace ('/^spip_/', $GLOBALS['cookie_prefix'].'_', $name);
-	if ($path == 'AUTO') $path=$GLOBALS['cookie_path'];
+	if ($path == 'AUTO')
+		$path = preg_replace(',^\w+://[^/]*,', '', url_de_base());
+
+spip_log("path cookie = $path");
 
 	if ($secure)
 		@setcookie ($name, $value, $expire, $path, $domain, $secure);

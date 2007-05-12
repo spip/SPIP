@@ -191,7 +191,7 @@ function colonne_droite_neq4($id_rubrique, $activer_breves, $activer_sites, $art
 	if (!@$_COOKIE['spip_admin']) {
 		$cookie = rawurlencode("@$connect_login");
 		$retour = rawurlencode(_DIR_RESTREINT_ABS . _SPIP_ECRIRE_SCRIPT);
-		$lien = generer_url_public('spip_cookie', "cookie_admin=$cookie&url=$retour");
+		$lien = generer_url_action('cookie', "cookie_admin=$cookie&url=$retour");
 		$gadget .= "<div>&nbsp;</div>".
 			  "<table width='95%'><tr>".
 			  "<td style='width: 100%'>".
@@ -248,7 +248,7 @@ function personnel_accueil($coockcookie)
 	//
 	
 	if ($coockcookie) {
-		$lien = generer_url_public("spip_cookie", "cookie_admin=non&url=".rawurlencode(_DIR_RESTREINT_ABS . _SPIP_ECRIRE_SCRIPT));
+		$lien = generer_url_action('cookie', "cookie_admin=non&url=".rawurlencode(_DIR_RESTREINT_ABS . _SPIP_ECRIRE_SCRIPT));
 		$t = _T('icone_supprimer_cookie');
 		$t = icone_horizontale($t, $lien, "cookie-24.gif", "", false);
 		if ($GLOBALS['spip_display'] != 1) 

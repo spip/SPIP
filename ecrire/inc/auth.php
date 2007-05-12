@@ -171,12 +171,11 @@ function inc_auth_dist() {
 		$session = charger_fonction('session', 'inc');
 		if ($spip_session = $session($row)) {
 			include_spip('inc/cookie');
-			preg_match(',^[^/]*//[^/]*(.*)/$,',
-				   url_de_base(),
-				   $r);
-			spip_setcookie('spip_session',
+			spip_setcookie(
+				'spip_session',
 				$_COOKIE['spip_session'] = $spip_session,
-				time() + 3600 * 24 * 14, $r[1]);
+				time() + 3600 * 24 * 14
+			);
 		}
 	}
 
