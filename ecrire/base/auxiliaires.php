@@ -19,7 +19,7 @@ $spip_petitions = array(
 		"site_obli"	=> "CHAR (3) NOT NULL",
 		"site_unique"	=> "CHAR (3) NOT NULL",
 		"message"	=> "CHAR (3) NOT NULL",
-		"texte"	=> "LONGBLOB NOT NULL",
+		"texte"	=> "LONGTEXT NOT NULL",
 		"maj"	=> "TIMESTAMP");
 
 $spip_petitions_key = array(
@@ -214,7 +214,7 @@ $spip_versions_fragments = array(
 		"version_max"	=> "int unsigned DEFAULT '0' NOT NULL",
 		"id_article"	=> "bigint(21) NOT NULL",
 		"compress"	=> "tinyint NOT NULL",
-		"fragment"	=> "longblob NOT NULL");
+		"fragment"	=> "longtext NOT NULL");
 
 $spip_versions_fragments_key = array(
 	     "PRIMARY KEY"	=> "id_article, id_fragment, version_min");
@@ -234,7 +234,7 @@ $spip_ortho_cache = array(
 	"lang" => "VARCHAR(10) NOT NULL",
 	"mot" => "VARCHAR(255) BINARY NOT NULL",
 	"ok" => "TINYINT NOT NULL",
-	"suggest" => "BLOB NOT NULL",
+	"suggest" => "TEXT NOT NULL",
 	"maj" => "TIMESTAMP");
 $spip_ortho_cache_key = array(
 	"PRIMARY KEY" => "lang, mot",

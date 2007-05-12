@@ -228,8 +228,8 @@ function spip_connect_db($host, $port, $login, $pass, $db) {
 
 	if (defined('_MYSQL_SQL_MODE_TEXT_NOT_NULL'))
 		mysql_query("set sql_mode=''");
-	if (isset($GLOBALS['meta']['charset_sql_base']))
-		mysql_query("SET NAMES "._q($GLOBALS['meta']['charset_sql_base']));
+	if (isset($GLOBALS['meta']['charset_sql_connexion']))
+		mysql_query("SET NAMES "._q($GLOBALS['meta']['charset_sql_connexion']));
 	
 	$GLOBALS['db_ok'] = $ok
 	AND !!@spip_num_rows(@spip_query_db('SELECT COUNT(*) FROM spip_meta'));
@@ -252,6 +252,29 @@ function spip_connect_db($host, $port, $login, $pass, $db) {
 // si $autoinc, c'est une auto-increment (i.e. serial) sur la Primary Key
 // Le nom des caches doit etre inferieur a 64 caracteres
 
+function spip_mysql_character_set($charset){
+	$sql_charset_coll = array(
+	'cp1250'=>array('charset'=>'cp1250','collation'=>'cp1250_general_ci'),
+	'cp1251'=>array('charset'=>'cp1251','collation'=>'cp1251_general_ci'),
+	'cp1256'=>array('charset'=>'cp1256','collation'=>'cp1256_general_ci'),
+	
+	'iso-8859-1'=>array('charset'=>'latin1','collation'=>'latin1_swedish_ci'),
+	//'iso-8859-6'=>array('charset'=>'latin1','collation'=>'latin1_swedish_ci'),
+	'iso-8859-9'=>array('charset'=>'latin5','collation'=>'latin5_turkish_ci'),
+	//'iso-8859-15'=>array('charset'=>'latin1','collation'=>'latin1_swedish_ci'),
+	
+	'utf-8'=>array('charset'=>'utf8','collation'=>'utf8_general_ci')
+	);
+	if (isset($sql_charset_coll[$charset])){
+		// verifier que le character set vise est bien supporte par mysql
+		$res = mysql_query("SHOW CHARACTER SET LIKE "._q($sql_charset_coll[$charset]['charset']));
+		if ($row = mysql_fetch_assoc($res))
+			return $sql_charset_coll[$charset];
+	}
+
+	return false;
+}
+
 // http://doc.spip.org/@spip_mysql_create
 function spip_mysql_create($nom, $champs, $cles, $autoinc=false, $temporary=false) {
 	$query = ''; $keys = ''; $s = ''; $p='';
@@ -268,14 +291,28 @@ function spip_mysql_create($nom, $champs, $cles, $autoinc=false, $temporary=fals
 		$s = ",";
 	}
 	$s = '';
+	
+	$character_set = "";
+	if (isset($GLOBALS['meta']['charset_sql_base']))
+		$character_set .= " CHARACTER SET ".$GLOBALS['meta']['charset_sql_base'];
+	if (isset($GLOBALS['meta']['charset_collation_sql_base']))
+		$character_set .= " COLLATE ".$GLOBALS['meta']['charset_collation_sql_base'];
 
 	foreach($champs as $k => $v) {
+		if (preg_match(',([a-z]*\s*(\(\s*[0-9]*\s*\))?),i',$v,$defs)){
+			if (preg_match(',(char|text),i',$defs[1])){
+				$v = $defs[1] . $character_set . ' ' . substr($v,strlen($defs[1]));
+			}
+		}
+		
 		$query .= "$s\n\t\t$k $v" .
 		(($autoinc && ($p == $k)) ? " auto_increment" : '');
 		$s = ",";
 	}
 	$temporary = $temporary ? 'TEMPORARY':'';
-	spip_query_db("CREATE $temporary TABLE IF NOT EXISTS $nom ($query" . ($keys ? ",$keys" : '') . ")\n");
+	spip_query_db("CREATE $temporary TABLE IF NOT EXISTS $nom ($query" . ($keys ? ",$keys" : '') . ")".
+	($character_set?" DEFAULT $character_set":"")
+	."\n");
 }
 
 // http://doc.spip.org/@spip_mysql_showtable

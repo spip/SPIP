@@ -22,8 +22,11 @@ function install_bases(){
 	// pour notre bien), on va tolerer les chiffres en plus des minuscules
 	$p = trim(preg_replace(',[^a-z0-9],', '',
 		strtolower(_request('table_prefix'))));
-	if ($p AND $p != 'spip')
+	$rappel_prefix = false;
+	if ($p AND ($p != 'spip' OR (isset($GLOBALS['table_prefix']) AND $p!=$GLOBALS['table_prefix']))){
 		$GLOBALS['table_prefix'] = $p;
+		$rappel_prefix = true;
+	}
 
 	echo "<"."!-- $link ";
 	echo "(".$GLOBALS['table_prefix'].")";
@@ -40,6 +43,16 @@ function install_bases(){
 	mysql_select_db($sel_db);
 	spip_query("SELECT COUNT(*) FROM spip_meta");
 	$nouvelle = spip_sql_errno();
+	if ($nouvelle){
+		include_spip('db_mysql');
+		// mettre les nouvelles install en utf-8 si mysql le supporte
+		if ($charset = spip_mysql_character_set('utf-8')){
+			$GLOBALS['meta']['charset_sql_base'] = $charset['charset'];
+			$GLOBALS['meta']['charset_collation_sql_base'] = $charset['collation'];
+			$GLOBALS['meta']['charset_sql_connexion'] = $charset['charset'];
+			spip_query("SET NAMES "._q($charset['charset']));
+		}
+	}
 	creer_base();
 	include_spip('base/upgrade');
 	maj_base();
@@ -59,11 +72,18 @@ function install_bases(){
 		"/* echec du test sur `$sel_db`.spip_meta lors de l'installation. */\n";
 	}
 
-	if ($GLOBALS['table_prefix'] != 'spip') {
+	if ($rappel_prefix) {
 		$ligne_rappel .= "\$GLOBALS['table_prefix'] = '" . $GLOBALS['table_prefix'] . "';\n";
 	}
 
 	if ($nouvelle) {
+		if (isset($GLOBALS['meta']['charset_sql_base']))
+			spip_query("INSERT INTO spip_meta (nom, valeur, impt) VALUES ('charset_sql_base', '".$GLOBALS['meta']['charset_sql_base']."', 'non')");
+		if (isset($GLOBALS['meta']['charset_collation_sql_base']))
+			spip_query("INSERT INTO spip_meta (nom, valeur, impt) VALUES ('charset_sql_base', '".$GLOBALS['meta']['charset_collation_sql_base']."', 'non')");
+		if (isset($GLOBALS['meta']['charset_sql_connexion']))
+			spip_query("INSERT INTO spip_meta (nom, valeur, impt) VALUES ('charset_sql_connexion', '".$GLOBALS['meta']['charset_sql_connexion']."', 'non')");
+		
 		spip_query("INSERT INTO spip_meta (nom, valeur) VALUES ('nouvelle_install', '1')");
 		$result_ok = !spip_sql_errno();
 	} else {
