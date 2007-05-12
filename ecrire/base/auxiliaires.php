@@ -15,11 +15,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $spip_petitions = array(
 		"id_article"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-		"email_unique"	=> "CHAR (3) NOT NULL",
-		"site_obli"	=> "CHAR (3) NOT NULL",
-		"site_unique"	=> "CHAR (3) NOT NULL",
-		"message"	=> "CHAR (3) NOT NULL",
-		"texte"	=> "LONGTEXT NOT NULL",
+		"email_unique"	=> "CHAR (3)",
+		"site_obli"	=> "CHAR (3)",
+		"site_unique"	=> "CHAR (3)",
+		"message"	=> "CHAR (3)",
+		"texte"	=> "LONGTEXT",
 		"maj"	=> "TIMESTAMP");
 
 $spip_petitions_key = array(
@@ -27,7 +27,7 @@ $spip_petitions_key = array(
 
 $spip_visites = array(
 		"date"	=> "DATE NOT NULL",
-		"visites"	=> "INT UNSIGNED NOT NULL",
+		"visites"	=> "INT UNSIGNED",
 		"maj"	=> "TIMESTAMP");
 
 $spip_visites_key = array(
@@ -35,8 +35,8 @@ $spip_visites_key = array(
 
 $spip_visites_articles = array(
 		"date"	=> "DATE NOT NULL",
-		"id_article"	=> "INT UNSIGNED NOT NULL",
-		"visites"	=> "INT UNSIGNED NOT NULL",
+		"id_article"	=> "INT UNSIGNED",
+		"visites"	=> "INT UNSIGNED",
 		"maj"	=> "TIMESTAMP");
 
 $spip_visites_articles_key = array(
@@ -44,11 +44,11 @@ $spip_visites_articles_key = array(
 
 $spip_referers = array(
 		"referer_md5"	=> "BIGINT UNSIGNED NOT NULL",
-		"date"		=> "DATE NOT NULL",
-		"referer"	=> "VARCHAR (255) NOT NULL",
-		"visites"	=> "INT UNSIGNED NOT NULL",
-		"visites_jour"	=> "INT UNSIGNED NOT NULL",
-		"visites_veille"=> "INT UNSIGNED NOT NULL",
+		"date"		=> "DATE",
+		"referer"	=> "VARCHAR (255)",
+		"visites"	=> "INT UNSIGNED",
+		"visites_jour"	=> "INT UNSIGNED",
+		"visites_veille"=> "INT UNSIGNED",
 		"maj"		=> "TIMESTAMP");
 
 $spip_referers_key = array(
@@ -56,10 +56,10 @@ $spip_referers_key = array(
 
 $spip_referers_articles = array(
 		"id_article"	=> "INT UNSIGNED NOT NULL",
-		"referer_md5"	=> "BIGINT UNSIGNED NOT NULL",
-		"date"		=> "DATE NOT NULL",
-		"referer"	=> "VARCHAR (255) NOT NULL",
-		"visites"	=> "INT UNSIGNED NOT NULL",
+		"referer_md5"	=> "BIGINT UNSIGNED",
+		"date"		=> "DATE",
+		"referer"	=> "VARCHAR (255)",
+		"visites"	=> "INT UNSIGNED",
 		"maj"		=> "TIMESTAMP");
 
 $spip_referers_articles_key = array(
@@ -85,7 +85,7 @@ $spip_auteurs_rubriques_key = array(
 $spip_auteurs_messages = array(
 		"id_auteur"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
 		"id_message"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-		"vu"		=> "CHAR (3) NOT NULL");
+		"vu"		=> "CHAR (3)");
 
 $spip_auteurs_messages_key = array(
 		"PRIMARY KEY"	=> "id_auteur, id_message",
@@ -179,8 +179,8 @@ $spip_meta_key = array(
 $spip_index = array(
  		"`hash`"	=> "BIGINT UNSIGNED NOT NULL",
  		"points"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
-		"id_objet"	=> "INT UNSIGNED NOT NULL",
-		"id_table"	=> "TINYINT UNSIGNED NOT NULL"	);
+		"id_objet"	=> "INT UNSIGNED",
+		"id_table"	=> "TINYINT UNSIGNED"	);
 
 $spip_index_key = array(
  		"KEY `hash`"	=> "`hash`",
@@ -189,7 +189,7 @@ $spip_index_key = array(
 
 $spip_index_dico = array(
 		"`hash`"	=> "BIGINT UNSIGNED NOT NULL",
-		"dico"		=> "VARCHAR (30) NOT NULL");
+		"dico"		=> "VARCHAR (30)");
 
 $spip_index_dico_key = array(
 		"PRIMARY KEY"	=> "dico");
@@ -198,10 +198,10 @@ $spip_versions = array (
 		"id_article"	=> "bigint(21) NOT NULL",
 		"id_version"	=> "int unsigned DEFAULT '0' NOT NULL",
 		"date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-		"id_auteur"	=> "VARCHAR(23) NOT NULL", # stocke aussi IP(v6)
+		"id_auteur"	=> "VARCHAR(23)", # stocke aussi IP(v6)
 		"titre_version"	=> "text DEFAULT '' NOT NULL",
-		"permanent"	=> "char(3) NOT NULL",
-		"champs"	=> "text NOT NULL");
+		"permanent"	=> "char(3)",
+		"champs"	=> "text");
 
 $spip_versions_key = array (
 		"PRIMARY KEY"	=> "id_article, id_version",
@@ -212,9 +212,9 @@ $spip_versions_fragments = array(
 		"id_fragment"	=> "int unsigned DEFAULT '0' NOT NULL",
 		"version_min"	=> "int unsigned DEFAULT '0' NOT NULL",
 		"version_max"	=> "int unsigned DEFAULT '0' NOT NULL",
-		"id_article"	=> "bigint(21) NOT NULL",
-		"compress"	=> "tinyint NOT NULL",
-		"fragment"	=> "longtext NOT NULL");
+		"id_article"	=> "bigint(21)",
+		"compress"	=> "tinyint",
+		"fragment"	=> "longtext");
 
 $spip_versions_fragments_key = array(
 	     "PRIMARY KEY"	=> "id_article, id_fragment, version_min");
@@ -233,8 +233,8 @@ $spip_caches_key = array(
 $spip_ortho_cache = array(
 	"lang" => "VARCHAR(10) NOT NULL",
 	"mot" => "VARCHAR(255) BINARY NOT NULL",
-	"ok" => "TINYINT NOT NULL",
-	"suggest" => "TEXT NOT NULL",
+	"ok" => "TINYINT",
+	"suggest" => "TEXT",
 	"maj" => "TIMESTAMP");
 $spip_ortho_cache_key = array(
 	"PRIMARY KEY" => "lang, mot",
@@ -243,7 +243,7 @@ $spip_ortho_cache_key = array(
 $spip_ortho_dico = array(
 	"lang" => "VARCHAR(10) NOT NULL",
 	"mot" => "VARCHAR(255) BINARY NOT NULL",
-	"id_auteur" => "BIGINT UNSIGNED NOT NULL",
+	"id_auteur" => "BIGINT UNSIGNED",
 	"maj" => "TIMESTAMP");
 $spip_ortho_dico_key = array(
 	"PRIMARY KEY" => "lang, mot");
