@@ -198,6 +198,17 @@ function revision_mot($id_mot, $c=false) {
 		$c);
 }
 
+// http://doc.spip.org/@revision_petition
+function revision_petition($id_article, $c=false) {
+
+	modifier_contenu('petition', $id_article,
+		array(
+			'champs' => array('texte')
+		),
+		$c);
+}
+
+
 // Nota: quand on edite un forum existant, il est de bon ton d'appeler
 // au prealable conserver_original($id_forum)
 // http://doc.spip.org/@revision_forum

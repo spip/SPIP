@@ -25,23 +25,24 @@ function action_petitionner_dist() {
 	if (!autoriser('modererpetition', 'article', $id_article))
 		return;
 
-	$message = _request('message');
-	$site_obli = _request('site_obli');
-	$site_unique = _request('site_unique');
-	$email_unique = _request('email_unique');
-	$texte_petition = _request('texte_petition');
-	$change_petition = _request('change_petition');
+	switch(_request('change_petition')) {
+	case 'on':
+		$email_unique = (_request('email_unique') == 'on') ? 'oui' : 'non';
+		$site_obli = (_request('site_obli') == 'on') ? 'oui' : 'non';
+		$site_unique = (_request('site_unique') == 'on') ? 'oui' : 'non';
+		$message =  (_request('message') == 'on') ? 'oui' : 'non';
 
-	if ($change_petition == "on") {
-	  	$email_unique = ($email_unique == 'on') ? 'oui' : "non";
-		$site_obli = ($site_obli == 'on') ? 'oui' : "non";
-		$site_unique = ($site_unique == 'on') ? 'oui' : "non";
-		$message =  ($message == 'on') ? 'oui' : "non";
+		spip_query("REPLACE spip_petitions (id_article, email_unique, site_obli, site_unique, message) VALUES ($id_article, '$email_unique', '$site_obli', '$site_unique', '$message')");
+		include_spip('inc/modifier');
+		revision_petition($id_article,
+			array('texte' => _request('texte_petition'))
+		);
+		break;
+	case 'off':
+		spip_query("DELETE FROM spip_petitions WHERE id_article=$id_article");
+		break;
+	}
 
-		$result_pet = spip_query("REPLACE spip_petitions (id_article, email_unique, site_obli, site_unique, message, texte) VALUES ($id_article, '$email_unique', '$site_obli', '$site_unique', '$message', " . _q($texte_petition) . ")");
-		}
-	else if ($change_petition == "off") {
-		$result_pet = spip_query("DELETE FROM spip_petitions WHERE id_article=$id_article");
-		}
 }
+
 ?>
