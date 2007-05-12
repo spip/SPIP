@@ -139,7 +139,7 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 			     "creer.gif", 'right', 'non');
 	}
 
-	if ($boutons) $controle .= "<div style='float:".$GLOBALS['spip_lang_right'] ."; width: 70%;'>". $boutons . "</div>";
+	if ($boutons) $controle .= "<div style='float:".$GLOBALS['spip_lang_right'] ."; width: 80px;'>". $boutons . "</div>";
 
 	// TODO: un bouton retablir l'original ?
 	if ($original) {
