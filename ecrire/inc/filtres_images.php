@@ -164,7 +164,7 @@ function image_imagepng($img,$fichier) {
 	$tmp = $fichier.".tmp";
 	$ret = imagepng($img,$tmp);
 	@unlink($fichier); // le fichier peut deja exister
-	rename($tmp, $fichier);
+	@rename($tmp, $fichier);
 	return $ret;
 }
 
@@ -173,7 +173,7 @@ function image_imagegif($img,$fichier) {
 	$tmp = $fichier.".tmp";
 	$ret = imagegif($img,$tmp);
 	@unlink($fichier); // le fichier peut deja exister
-	rename($tmp, $fichier);
+	@rename($tmp, $fichier);
 	return $ret;
 }
 // http://doc.spip.org/@image_imagejpg
@@ -181,7 +181,7 @@ function image_imagejpg($img,$fichier) {
 	$tmp = $fichier.".tmp";
 	$ret = imagejpeg($img,$tmp, 85);
 	@unlink($fichier); // le fichier peut deja exister
-	rename($tmp, $fichier);
+	@rename($tmp, $fichier);
 	return $ret;
 }
 
