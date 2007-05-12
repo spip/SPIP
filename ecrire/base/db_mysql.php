@@ -252,6 +252,7 @@ function spip_connect_db($host, $port, $login, $pass, $db) {
 // si $autoinc, c'est une auto-increment (i.e. serial) sur la Primary Key
 // Le nom des caches doit etre inferieur a 64 caracteres
 
+// http://doc.spip.org/@spip_mysql_character_set
 function spip_mysql_character_set($charset){
 	$sql_charset_coll = array(
 	'cp1250'=>array('charset'=>'cp1250','collation'=>'cp1250_general_ci'),

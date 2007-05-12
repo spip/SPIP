@@ -47,6 +47,7 @@ function upgrade_vers($version, $version_installee, $version_cible = 0){
 	);
 }
 
+// http://doc.spip.org/@convertir_un_champ_blob_en_text
 function convertir_un_champ_blob_en_text($table,$champ,$type){
 	$res = spip_query("SHOW FULL COLUMNS FROM spip_articles LIKE '$champ'");
 	if ($row = spip_fetch_array($res)){
