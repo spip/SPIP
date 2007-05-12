@@ -1480,7 +1480,6 @@ function afficher_enclosures($tags) {
 	foreach (extraire_tags($tags) as $tag) {
 		if (extraire_attribut($tag, 'rel') == 'enclosure'
 		AND $t = extraire_attribut($tag, 'href')) {
-			include_spip('inc/minipres'); #pour http_img_pack (quel bazar)
 			$s[] = preg_replace(',>[^<]+</a>,S', 
 				'>'
 				.http_img_pack('attachment.gif', $t,
@@ -2031,4 +2030,55 @@ function spip_var_export($s) {
 		);
 }
 
+// produit une balise img avec un champ alt d'office si vide
+// attention le htmlentities et la traduction doivent etre appliques avant.
+
+// http://doc.spip.org/@http_wrapper
+function http_wrapper($img){
+	static $wrapper_state=NULL;
+	static $wrapper_table = array();
+	
+	if (strpos($img,'/')===FALSE) // on ne prefixe par _DIR_IMG_PACK que si c'est un nom de fichier sans chemin
+		$f = _DIR_IMG_PACK . $img;
+	else { // sinon, le path a ete fourni
+		$f = $img;
+		// gerer quand meme le cas des hacks pre 1.9.2 ou l'on faisait un path relatif depuis img_pack
+		if (substr($f,0,strlen("../"._DIR_PLUGINS))=="../"._DIR_PLUGINS)
+			$f = substr($img,3); // on enleve le ../ qui ne faisait que ramener au rep courant
+	}
+	
+	if ($wrapper_state==NULL){
+		global $browser_name;
+		if (!strlen($browser_name)){include_spip('inc/layer');}
+		$wrapper_state = ($browser_name=="MSIE");
+	}
+	if ($wrapper_state){
+		if (!isset($wrapper_table[$d=dirname($f)])) {
+			$wrapper_table[$d] = false;
+			if (file_exists("$d/wrapper.php"))
+				$wrapper_table[$d] = "$d/wrapper.php?file=";
+		}
+		if ($wrapper_table[$d])
+			$f = $wrapper_table[$d] . urlencode(basename($img));
+	}
+	return $f;
+}
+// http://doc.spip.org/@http_img_pack
+function http_img_pack($img, $alt, $atts='', $title='') {
+
+	return  "<img src='" . http_wrapper($img)
+	  . ("'\nalt=\"" .
+	     str_replace('"','', textebrut($alt ? $alt : ($title ? $title : '')))
+	     . '" ')
+	  . ($title ? "title=\"$title\" " : '')
+	  . $atts
+	  . " />";
+}
+
+// http://doc.spip.org/@http_style_background
+function http_style_background($img, $att='')
+{
+  return " style='background: url(\"".http_wrapper($img)."\")" .
+	    ($att ? (' ' . $att) : '') . ";'";
+}
 ?>

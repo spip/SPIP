@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/minipres');
+include_spip('inc/filtres');
 
 // http://doc.spip.org/@inc_aider_dist
 function inc_aider_dist($aide='') {

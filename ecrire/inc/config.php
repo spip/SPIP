@@ -186,7 +186,7 @@ function appliquer_modifs_config() {
 		if (!$test_proxy) {
 			$retour_proxy = _T('info_adresse_non_indiquee');
 		} else {
-			include_spip('inc/minipres'); // pour aide, couper, lang
+			include_spip('inc/texte'); // pour aide, couper, lang
 			if (strncmp("http://", $http_proxy,7)!=0)
 			  $page = '';
 			else {

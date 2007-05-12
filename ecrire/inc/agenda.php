@@ -12,9 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/minipres'); 
 include_spip('inc/layer');
-include_spip('inc/texte'); // inclut inc_filtre
+include_spip('inc/texte'); // inclut inc_filtre 
 charger_generer_url();
 
 //  Typographie generale des calendriers de 3 type: jour/semaine/mois(ou plus)
