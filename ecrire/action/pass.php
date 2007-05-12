@@ -106,7 +106,7 @@ $message = '';
 function action_pass_dist()
 {
 	utiliser_langue_visiteur();
-	echo install_debut_html(_T('pass_mot_oublie'));
+	echo install_debut_html(_T('pass_mot_oublie'), " class='pass'");
 	inclure_balise_dynamique(formulaire_oubli_dyn(_request('p'), _request('oubli')));
 	echo install_fin_html();
 }
