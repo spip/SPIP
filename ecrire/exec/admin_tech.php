@@ -17,17 +17,17 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_admin_tech_dist
 function exec_admin_tech_dist()
 {
-  global $flag_gz;
+	global $flag_gz;
+	if (!autoriser('sauvegarder')){
+		include_spip('inc/minipres');
+		echo minipres();
+		exit;
+	}
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('titre_admin_tech'), "configuration", "base");
 
- if (!autoriser('sauvegarder')){
-	echo minipres();
-	exit;
- }
- $commencer_page = charger_fonction('commencer_page', 'inc');
- echo $commencer_page(_T('titre_admin_tech'), "configuration", "base");
 
-
- if ($GLOBALS['connect_toutes_rubriques']) {
+	if ($GLOBALS['connect_toutes_rubriques']) {
 
 		debut_gauche();
 		echo "<br /><br /><br /><br />";
@@ -49,12 +49,12 @@ function exec_admin_tech_dist()
 
 	$dir_dump = joli_repertoire($dir_dump);
 
- debut_droite();
+	debut_droite();
 
- echo "<div style='text-align: center'>",
-   gros_titre(_T('titre_admin_tech'),'',true),
-   '</div>',
-   $onglet;
+	echo "<div style='text-align: center'>",
+	  gros_titre(_T('titre_admin_tech'),'',true),
+	  '</div>',
+	  $onglet;
 
 //
 // Sauvegarde de la base

@@ -23,6 +23,7 @@ function install_etape__dist()
 	if (!$menu_langues) {
 		redirige_par_entete(generer_test_dirs());
 	} else {
+		include_spip('inc/presentation'); // pour info_copyright
 		echo install_debut_html();
 		echo "<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n",
 			"<div class='petit-centre'><p>",info_copyright(),"</p></div>\n",
@@ -32,5 +33,4 @@ function install_etape__dist()
 		echo install_fin_html();
 	}
 }
-
 ?>

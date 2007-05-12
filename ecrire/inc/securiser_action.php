@@ -80,7 +80,7 @@ function caracteriser_auteur() {
 		$t = spip_query("SELECT id_auteur, pass FROM spip_auteurs WHERE id_auteur=$id_auteur");
 		if ($t = spip_fetch_array($t))
 			return $caracterisation = array($t['id_auteur'], $t['pass']);
-		include_spip('minipres');
+		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	}

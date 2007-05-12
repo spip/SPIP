@@ -22,6 +22,7 @@ include_spip('inc/presentation');
 function exec_admin_effacer_dist()
 {
 	if (!autoriser('detruire')) {
+		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	}
@@ -30,7 +31,6 @@ function exec_admin_effacer_dist()
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_admin_effacer'), "configuration", "base");
-
 
 	echo "\n<br /><br /><br />";
 	gros_titre(_T('titre_admin_effacer'));

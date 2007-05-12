@@ -20,6 +20,7 @@ include_spip('inc/meta');
 function exec_config_fonctions_dist()
 {
 	if (!autoriser('configurer', 'fonctions')) {
+		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	}

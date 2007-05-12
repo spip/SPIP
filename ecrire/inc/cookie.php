@@ -10,8 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-//
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 //
@@ -55,5 +53,24 @@ function recuperer_cookies_spip($cookie_prefix) {
 
 }
 
+// Idem faudrait creer exec/test_ajax, mais c'est si court.
+// Tester si Ajax fonctionne pour ce brouteur
+// (si on arrive la c'est que c'est bon, donc poser le cookie)
 
+// http://doc.spip.org/@exec_test_ajax_dist
+function exec_test_ajax_dist() {
+	switch (_request('js')) {
+		// on est appele par <noscript>
+		case -1:
+			spip_setcookie('spip_accepte_ajax', -1);
+			redirige_par_entete(_DIR_IMG_PACK.'puce-orange-anim.gif');
+			break;
+
+		// ou par ajax
+		case 1:
+		default:
+			spip_setcookie('spip_accepte_ajax', 1);
+			break;
+	}
+}
 ?>

@@ -12,6 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/actions');
+
 # afficher un mini-navigateur de rubriques
 
 // http://doc.spip.org/@exec_selectionner_dist

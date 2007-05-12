@@ -12,6 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/minipres');
+
 define("_ECRIRE_INSTALL", "1");
 define('_FILE_TMP', '_install');
 
@@ -30,7 +32,6 @@ function exec_install_dist()
 	$GLOBALS['meta'] = array();
 	include_spip('base/create');
 	include_spip('base/db_mysql');
-
 	$fonc = charger_fonction("etape_$etape", 'install');
 	$fonc();
 }

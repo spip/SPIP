@@ -19,10 +19,11 @@ function exec_petitionner_dist()
 	$id_article = intval($id_article);
 
 	if (!autoriser('modererpetition','article',$id_article)) {
+		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	}
-
+	include_spip('inc/actions');
 	$petitionner = charger_fonction('petitionner', 'inc');
 	ajax_retour($petitionner($id_article, $script, "&id_article=$id_article", 'ajax'));
 }

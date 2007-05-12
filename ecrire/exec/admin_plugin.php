@@ -20,14 +20,12 @@ include_spip('inc/actions');
 include_spip('inc/securiser_action');
 
 // http://doc.spip.org/@exec_admin_plugin
-function exec_admin_plugin() {
+function exec_admin_plugin_dist() {
 	global $spip_lang_right;
 
 	if (!autoriser('configurer', 'plugins')) {
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
-		echo _T('avis_non_acces_page');
-		echo fin_gauche(), fin_page();
+		include_spip('inc/minipres');
+		echo minipres();
 		exit;
 	}
 

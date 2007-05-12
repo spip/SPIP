@@ -19,10 +19,11 @@ function exec_regler_moderation_dist()
 	$id_article = intval($id_article);
 
 	if (!autoriser('modererforum','article',$id_article)) {
+		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	}
-
+	include_spip('inc/actions');
 	$regler_moderation = charger_fonction('regler_moderation', 'inc');
 	ajax_retour($regler_moderation($id_article, $script, "&id_article=$id_article", true));
 }

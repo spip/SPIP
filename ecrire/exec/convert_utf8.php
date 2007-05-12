@@ -23,6 +23,7 @@ function convert_utf8_non($action, $message) {
 
 // http://doc.spip.org/@exec_convert_utf8_dist
 function exec_convert_utf8_dist() {
+	include_spip('inc/minipres');
 	include_spip('inc/meta');
 	include_spip('inc/charsets');
 	lire_metas();

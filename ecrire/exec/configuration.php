@@ -21,6 +21,7 @@ function exec_configuration_dist(){
 	global $spip_display;
 
 	if (!autoriser('configurer', 'configuration')) {
+		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	}

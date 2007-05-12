@@ -22,6 +22,7 @@ function exec_plonger_dist()
 	$exclus = intval($exclus);
 	$col = intval($col);
 
+	include_spip('inc/actions');
 	$plonger = charger_fonction('plonger', 'inc');
 	ajax_retour($plonger($id, htmlentities($rac), array(), $col, $exclus));
 }

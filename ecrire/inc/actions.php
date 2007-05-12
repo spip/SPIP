@@ -234,7 +234,11 @@ function determine_upload()
 
 	if (!$connect_statut) {
 		$auth = charger_fonction('auth', 'inc');
-		if ($auth()) {echo minipres();exit;}
+		if ($auth()) {
+			include_spip('inc/minipres');
+			echo minipres();
+			exit;
+		}
 	}
 	if ($connect_statut != '0minirezo') return false;
 	$repertoire = _DIR_TRANSFERT;

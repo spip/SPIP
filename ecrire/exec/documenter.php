@@ -12,8 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/presentation');
-
 // http://doc.spip.org/@exec_documenter_dist
 function exec_documenter_dist()
 {
@@ -41,11 +39,12 @@ function exec_documenter_dist()
 		}
 	}
 	if (!$editable) {
-
+		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	}
 
+	include_spip('inc/actions');
 	$documenter = charger_fonction('documenter', 'inc');
 	if(_request("iframe")=="iframe") { 
 	 $res = $documenter($id, $type, "portfolio", 'ajax', '', $script).

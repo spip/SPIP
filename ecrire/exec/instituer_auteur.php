@@ -19,10 +19,12 @@ function exec_instituer_auteur_dist()
 	$id_auteur = intval(_request('id_auteur'));
 	if (!preg_match('/^\w+$/', $script))
 	      {
+		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	      }
 
+	include_spip('inc/actions');
 	$r = spip_fetch_array(spip_query("SELECT statut FROM spip_auteurs WHERE id_auteur=$id_auteur"));
 
 	$instituer_auteur = charger_fonction('instituer_auteur', 'inc');

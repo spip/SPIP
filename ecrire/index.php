@@ -10,9 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined('_ECRIRE_INC_VERSION')) {
-	include 'inc_version.php';
-}
+if (!defined('_ECRIRE_INC_VERSION')) include 'inc_version.php';
 
 include_spip('inc/cookie');
 
@@ -80,7 +78,7 @@ if (isset($_GET['set_ecran'])) {
  } else $GLOBALS['spip_ecran'] = isset($_COOKIE['spip_ecran']) ? $_COOKIE['spip_ecran'] : "etroit";
 
 
-// charger l'affichage minimal et initialiser a la langue par defaut
+// initialiser a la langue par defaut
 include_spip('inc/minipres');
 
 //  si la langue est specifiee par cookie alors ...
@@ -155,5 +153,4 @@ $var_f = charger_fonction($exec);
 
 // Z'y va
 $var_f();
-
 ?>

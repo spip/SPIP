@@ -36,7 +36,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 		$id_rubrique=$row['id_rubrique'];
 	}
 	else {
-
+		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	}

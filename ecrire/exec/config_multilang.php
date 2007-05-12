@@ -22,6 +22,7 @@ function exec_config_multilang_dist()
 {
 
 	if (!autoriser('configurer', 'multilang')) {
+		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	}

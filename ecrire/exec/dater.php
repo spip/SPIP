@@ -21,6 +21,7 @@ function exec_dater_dist()
 	// securite
 	if (!preg_match('/^\w+$/',$type)
 	OR !autoriser('voir',$type,$id)) {
+		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	}
