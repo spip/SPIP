@@ -148,9 +148,7 @@ function critere_recherche_dist($idb, &$boucles, $crit) {
 	// Ne pas executer la requete en cas de hash vide
 	$boucle->hash = '
 	// RECHERCHE
-	spip_timer("rech");
 	list($rech_select, $rech_where) = prepare_recherche('.$quoi.', "'.$boucle->primary.'", "'.$boucle->id_table.'", "'.$t.'", "'.$crit->cond.'");
-	spip_log("indexation ".'.$quoi.'." : ".spip_timer("rech"));
 	';
 
 	// Sauf si le critere est conditionnel {recherche ?}
