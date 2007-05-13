@@ -1400,7 +1400,6 @@ function maj_base($version_cible = 0) {
 		convertir_un_champ_blob_en_text("spip_syndic","extra","LONGTEXT");
 		convertir_un_champ_blob_en_text("spip_syndic_articles","descriptif","LONGTEXT");
 		convertir_un_champ_blob_en_text("spip_petitions","texte","LONGTEXT");
-		convertir_un_champ_blob_en_text("spip_versions_fragments","fragment","LONGTEXT");
 		convertir_un_champ_blob_en_text("spip_ortho_cache","suggest","TEXT");
 		maj_version('1.937');
 	}
