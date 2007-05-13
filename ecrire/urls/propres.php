@@ -142,7 +142,9 @@ function _generer_url_propre($type, $id_objet) {
 function generer_url_article($id_article, $args='', $ancre='') {
 	$url = _generer_url_propre('article', $id_article);
 	if ($url)
-		$url = _debut_urls_propres . $url . _terminaison_urls_propres  . ($args ? "?$args" : '');
+		$url = _debut_urls_propres . $url . _terminaison_urls_propres 
+		. (!$args ? ''
+		: (((strpos(_debut_urls_propres, '?')===false) ? '?' : '&') . $args));
 	else
 		$url = get_spip_script('./')."?page=article&id_article=$id_article" . ($args ? "&$args" : '');
 	if ($ancre) $url .= "#$ancre";
@@ -153,7 +155,9 @@ function generer_url_article($id_article, $args='', $ancre='') {
 function generer_url_rubrique($id_rubrique, $args='', $ancre='') {
 	$url = _generer_url_propre('rubrique', $id_rubrique);
 	if ($url)
-		$url = _debut_urls_propres . '-'.$url.'-'._terminaison_urls_propres . ($args ? "?$args" : '');
+		$url = _debut_urls_propres . '-'.$url.'-'._terminaison_urls_propres
+		. (!$args ? ''
+		: (((strpos(_debut_urls_propres, '?')===false) ? '?' : '&') . $args));
 	else
 		$url = get_spip_script('./')."?page=rubrique&id_rubrique=$id_rubrique" . ($args ? "&$args" : '');
 	if ($ancre) $url .= "#$ancre";
@@ -164,7 +168,9 @@ function generer_url_rubrique($id_rubrique, $args='', $ancre='') {
 function generer_url_breve($id_breve, $args='', $ancre='') {
 	$url = _generer_url_propre('breve', $id_breve);
 	if ($url)
-		$url = _debut_urls_propres . '+'.$url.'+'._terminaison_urls_propres . ($args ? "?$args" : '');
+		$url = _debut_urls_propres . '+'.$url.'+'._terminaison_urls_propres
+		. (!$args ? ''
+		: (((strpos(_debut_urls_propres, '?')===false) ? '?' : '&') . $args));
 	else
 		$url = get_spip_script('./')."?page=breve&id_breve=$id_breve"  . ($args ? "&$args" : '');
 	if ($ancre) $url .= "#$ancre";
@@ -181,7 +187,9 @@ function generer_url_forum($id_forum, $args='', $ancre='') {
 function generer_url_mot($id_mot, $args='', $ancre='') {
 	$url = _generer_url_propre('mot', $id_mot);
 	if ($url)
-		$url = _debut_urls_propres . '+-'.$url.'-+'._terminaison_urls_propres . ($args ? "?$args" : '');
+		$url = _debut_urls_propres . '+-'.$url.'-+'._terminaison_urls_propres
+		. (!$args ? ''
+		: (((strpos(_debut_urls_propres, '?')===false) ? '?' : '&') . $args));
 	else
 		$url = get_spip_script('./')."?page=mot&id_mot=$id_mot" . ($args ? "&$args" : '');
 	if ($ancre) $url .= "#$ancre";
@@ -192,7 +200,9 @@ function generer_url_mot($id_mot, $args='', $ancre='') {
 function generer_url_auteur($id_auteur, $args='', $ancre='') {
 	$url = _generer_url_propre('auteur', $id_auteur);
 	if ($url)
-		$url = _debut_urls_propres . '_'.$url.'_'._terminaison_urls_propres . ($args ? "?$args" : '');
+		$url = _debut_urls_propres . '_'.$url.'_'._terminaison_urls_propres
+		. (!$args ? ''
+		: (((strpos(_debut_urls_propres, '?')===false) ? '?' : '&') . $args));
 	else
 		$url = get_spip_script('./')."?page=auteur&id_auteur=$id_auteur" . ($args ? "&$args" : '');
 	if ($ancre) $url .= "#$ancre";
@@ -203,7 +213,9 @@ function generer_url_auteur($id_auteur, $args='', $ancre='') {
 function generer_url_site($id_syndic, $args='', $ancre='') {
 	$url = _generer_url_propre('site', $id_syndic);
 	if ($url)
-		$url = _debut_urls_propres . '@'.$url.'@'._terminaison_urls_propres . ($args ? "?$args" : '');
+		$url = _debut_urls_propres . '@'.$url.'@'._terminaison_urls_propres
+		. (!$args ? ''
+		: (((strpos(_debut_urls_propres, '?')===false) ? '?' : '&') . $args));
 	else
 		$url = get_spip_script('./')."?page=site&id_syndic=$id_syndic" . ($args ? "&$args" : '');
 	if ($ancre) $url .= "#$ancre";
