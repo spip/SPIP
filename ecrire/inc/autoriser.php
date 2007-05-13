@@ -337,6 +337,7 @@ function autoriser_configurer_dist($faire, $type, $id, $qui, $opt) {
 function autoriser_sauvegarder_dist($faire, $type, $id, $qui, $opt) {
 	return
 		$qui['statut'] == '0minirezo'
+		AND !$qui['restreint']
 		;
 }
 
