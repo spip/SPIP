@@ -259,4 +259,18 @@ function generer_url_post_ecrire($script, $args='', $name='', $ancre='', $onchan
 	return "\n<form action='$action$ancre'$name method='post'$onchange>"
 	.form_hidden($action);
 }
+
+function afficher_articles($titre, $requete, $formater='') {
+	afficher_objets('article',$titre,$requete,$formater);
+}
+function afficher_auteurs ($titre_table, $requete) {
+	afficher_objets('auteur',$titre_table,$requete,'');
+}
+function afficher_sites($titre_table, $requete){
+	afficher_objets('site',$titre_table,$requete,'');	
+}
+function afficher_syndic_articles($titre_table, $requete, $id = 0) {
+	afficher_objets('syndic_article',$titre_table,$requete,$id);	
+}
+
 ?>

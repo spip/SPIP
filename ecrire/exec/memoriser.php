@@ -26,6 +26,7 @@ function exec_memoriser_dist()
 		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $r['FROM'] . ($r['WHERE'] ? (' WHERE ' . $r['WHERE']) : '') . ($r['GROUP BY'] ? (' GROUP BY ' . $r['GROUP BY']) : '')));
 
 		include_spip('inc/presentation');
+		include_spip('inc/afficher_objets');
 		ajax_retour(afficher_articles_trad($t, $r, $f, $p, $hash, $cpt['n'], _request('trad')));
 
 	} else

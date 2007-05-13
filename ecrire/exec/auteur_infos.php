@@ -161,7 +161,7 @@ function auteurs_interventions($auteur) {
 	else if ($connect_id_auteur == $id_auteur) $aff_art = "'prepa','prop','publie'";
 	else $aff_art = "'prop','publie'";
 
-	echo afficher_articles(_T('info_articles_auteur'),  array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien",  "WHERE" => "lien.id_auteur='$id_auteur' AND lien.id_article=articles.id_article AND articles.statut IN ($aff_art)",  'ORDER BY' => "articles.date DESC"));
+	echo afficher_objets('article',_T('info_articles_auteur'),  array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien",  "WHERE" => "lien.id_auteur='$id_auteur' AND lien.id_article=articles.id_article AND articles.statut IN ($aff_art)",  'ORDER BY' => "articles.date DESC"));
 
 	if ($id_auteur != $connect_id_auteur
 	    AND ($statut == '0minirezo' OR $statut == '1comite')) {

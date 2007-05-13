@@ -12,10 +12,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
-include_spip('inc/sites_voir');
 
 // http://doc.spip.org/@exec_recherche_dist
 function exec_recherche_dist() {
+	global $spip_lang_right;
 	$recherche = _request('recherche');
 	$recherche_aff = entites_html($recherche);
 
@@ -52,8 +52,8 @@ function exec_recherche_dist() {
 		}
 
 	}
-
-	debut_gauche();
+	
+	echo debut_grand_cadre();
 
 	if (!strlen($recherche)) {
 		$recherche_aff = _T('info_rechercher');
@@ -61,7 +61,7 @@ function exec_recherche_dist() {
 	} else $onfocus = '';
 
 	$onfocus = '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" accesskey="r"' . $onfocus . ' />';
-	echo generer_form_ecrire("recherche", $onfocus, " method='get'");
+	echo "<div style='width:200px;float:$spip_lang_right;'>".generer_form_ecrire("recherche", $onfocus, " method='get'")."</div>";
 
 /*
 	// Si on est autorise a modifier, proposer le choix de REMPLACER
@@ -71,42 +71,44 @@ function exec_recherche_dist() {
 	}
 */
 
-	debut_droite();
-
 	if ($results) {
 		echo "<span class='verdana1'><b>"._T('info_resultat_recherche')."</b></span><br />";
 		echo "<span class='ligne_foncee verdana1 spip_large'><b>$recherche_aff</b></span>";
+		include_spip('inc/afficher_objets');
 
 		foreach($results as $table => $r) {
 			switch ($table) {
 			case 'article':
-				$fn = 'afficher_articles';
 				$titre = _T('info_articles_trouves');
 				$order = 'date DESC';
 				break;
 			case 'breve':
-				$fn = 'afficher_breves';
 				$titre = _T('info_breves_touvees');
 				$order = 'date_heure DESC';
 				break;
 			case 'rubrique':
-				$fn = 'afficher_rubriques';
 				$titre = _T('info_rubriques_trouvees');
 				$order = 'date DESC';
 				break;
 			case 'site':
-				$fn = 'afficher_sites';
 				$titre = _T('info_sites_trouves');
 				$order = 'date DESC';
 				break;
 			case 'auteur':
-				$fn = 'afficher_auteurs';
 				$titre = _T('info_auteurs_trouves');
 				$order = 'nom';
 				break;
+			case 'mot':
+				$titre = _T('titre_page_mots_tous');
+				$order = 'titre';
+				break;
+			default:
+				$titre = _T("info_trouves");
+				$order = "id_$table";
+				break;
 			}
 
-			echo $fn($titre,
+			echo afficher_objets($table,$titre,
 				array(
 					// gasp: la requete spip_articles exige AS articles...
 					'FROM' => 'spip_'.table_objet($table).' AS '.$table.'s',
@@ -124,61 +126,7 @@ function exec_recherche_dist() {
 		if (strlen($recherche))
 			echo "<p class='verdana1'>"._T('avis_aucun_resultat')."</p>";
 
-	echo fin_gauche(), fin_page();
-}
-
-
-// old style, devrait etre dans inc/presentation
-// http://doc.spip.org/@afficher_auteurs
-function afficher_auteurs ($titre_table, $requete) {
-
-	if (!$requete['SELECT']) $requete['SELECT'] = '*' ;
-
-	$tous_id = array();
-	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
-	if (! ($cpt = $cpt['n'])) return 0 ;
-	if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
-
-	$tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);
-	$nb_aff = floor(1.5 * _TRANCHES);
-	$deb_aff = intval(_request($tmp_var));
-	$tranches = '';
-	if ($cpt > $nb_aff) {
-		$nb_aff = (_TRANCHES); 
-		$tranches = afficher_tranches_requete($cpt, $tmp_var, '', $nb_aff);
-	}
-
-	debut_cadre_relief("auteur-24.gif");
-
-	if ($titre_table) {
-			echo "<p><table width='100%' cellpadding='0' cellspacing='0' border='0'>";
-			echo "<tr><td style='width: 100%'>";
-			echo "<table width='100%' cellpadding='3' cellspacing='0' border='0'>";
-			echo "<tr style='background-color: #333333'><td style='width: 100%' colspan='5'><span style='color: #FFFFFF;' class='verdana1 spip_medium'><b>$titre_table</b></span></td></tr>";
-		}
-	else {
-			echo "<p><table width='100%' cellpadding='3' cellspacing='0' border='0'>";
-		}
-
-	echo $tranches;
-
-	$result = spip_query("SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
-
-	$table = array();
-	while ($row = spip_fetch_array($result)) {
-		$tous_id[] = $row['id_auteur'];
-		$formater_auteur = charger_fonction('formater_auteur', 'inc');
-		$table[]= $formater_auteur($row['id_auteur']);
-	}
-	spip_free_result($result);
-	$largeurs = array(20, 20, 200, 20, 50);
-	$styles = array('','','arial2','arial1','arial1');
-	echo afficher_liste($largeurs, $table, $styles);
-
-	if ($titre_table) echo "</table></td></tr>";
-	echo "</table>";
-	fin_cadre_relief();
-
+	echo fin_grand_cadre(), fin_page();
 }
 
 ?>
