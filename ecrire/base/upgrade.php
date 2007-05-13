@@ -49,10 +49,12 @@ function upgrade_vers($version, $version_installee, $version_cible = 0){
 
 // http://doc.spip.org/@convertir_un_champ_blob_en_text
 function convertir_un_champ_blob_en_text($table,$champ,$type){
-	$res = spip_query("SHOW FULL COLUMNS FROM spip_articles LIKE '$champ'");
+	$res = spip_query("SHOW FULL COLUMNS FROM $table LIKE '$champ'");
 	if ($row = spip_fetch_array($res)){
 		if (strtolower($row['Type'])!=strtolower($type))
-			spip_query("ALTER TABLE $table CHANGE $champ $champ $type NOT NULL");
+			$default = $row2['Default']?(" DEFAULT "._q($row2['Default'])):"";
+			$notnull = ($row2['Null']=='YES')?"":" NOT NULL";
+			spip_query("ALTER TABLE $table CHANGE $champ $champ $type $default $notnull");
 	}
 }
 
@@ -1380,7 +1382,7 @@ function maj_base($version_cible = 0) {
 		}
 	  maj_version('1.935');
 	}
-	if (upgrade_vers(1.936, $version_installee, $version_cible)) {
+	if (upgrade_vers(1.937, $version_installee, $version_cible)) {
 		// convertir les champs blob des tables spip en champs texte
 		convertir_un_champ_blob_en_text("spip_articles","texte","LONGTEXT");
 		convertir_un_champ_blob_en_text("spip_articles","extra","LONGTEXT");
@@ -1400,7 +1402,7 @@ function maj_base($version_cible = 0) {
 		convertir_un_champ_blob_en_text("spip_petitions","texte","LONGTEXT");
 		convertir_un_champ_blob_en_text("spip_versions_fragments","fragment","LONGTEXT");
 		convertir_un_champ_blob_en_text("spip_ortho_cache","suggest","TEXT");
-		maj_version('1.936');
+		maj_version('1.937');
 	}
 }
 
