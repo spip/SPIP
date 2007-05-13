@@ -156,7 +156,7 @@ function format_choisi()
 					else $margin_left += $l;
 				}
 				for (;$i<=$maxtest;$i+=$j) $lbad += $l;
-				if ($lbad) echo "<img src='"._DIR_IMG_PACK . 'jauge-rouge.gif'."' width='$lbad' height='8' style='margin-left:{$margin_left}px;' alt='' />";
+				if ($lbad) $res .= "<img src='"._DIR_IMG_PACK . 'jauge-rouge.gif'."' width='$lbad' height='8' style='margin-left:{$margin_left}px;' alt='' />";
 				$res .= "</div>";
 			}
 			$res .= "</div><br style='clear:both;' />";

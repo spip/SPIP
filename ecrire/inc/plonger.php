@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/filtres');
+include_spip('inc/texte');
 
 // http://doc.spip.org/@inc_plonger_dist
 function inc_plonger_dist($id_rubrique, $idom="", $list=array(), $col = 1, $exclu=0) {
