@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
+include_spip('inc/afficher_objets');
 // Fonction appelee dans une boucle, calculer les invariants au premier appel.
 
 // http://doc.spip.org/@inc_formater_article_dist

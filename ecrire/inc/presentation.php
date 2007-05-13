@@ -1512,6 +1512,7 @@ function debloquer_article($arg, $texte) {
 // http://doc.spip.org/@meme_rubrique
 function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $ajax=false)
 {
+	include_spip('inc/afficher_objets');
 
 	// propose de tout publier + nombre d'elements
 	// du code experimental qu'on peut activer via un switch
