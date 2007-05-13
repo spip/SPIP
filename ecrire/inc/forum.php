@@ -256,28 +256,37 @@ function racine_forum($id_forum){
 	return false;
 } 
 
+
+function parent_forum($id_forum) {
+	if (!$id_forum = intval($id_forum)) return;
+	$result = spip_query("SELECT id_parent, id_rubrique, id_article, id_breve, id_syndic FROM spip_forum WHERE id_forum=".$id_forum);
+	if($row = spip_fetch_array($result)){
+		if($row['id_parent']) return array('forum', $row['id_parent']);
+		if($row['id_rubrique']) return array('rubrique', $row['id_rubrique']);
+		if($row['id_article']) return array('article', $row['id_article']);
+		if($row['id_breve']) return array('breve', $row['id_breve']);
+		if($row['id_syndic']) return array('site', $row['id_syndic']);
+	}
+} 
+
+
 // http://doc.spip.org/@generer_url_forum_dist
 function generer_url_forum_dist($id_forum, $args='', $ancre='') {
 	if (!$id_forum) return '';
 	list($type, $id, $id_thread) = racine_forum($id_forum);
 	if (!$ancre) $ancre = "forum$id_forum";
-	switch($type) {
-		case 'article':
-			return generer_url_article($id, $args, $ancre);
-			break;
-		case 'breve':
-			return generer_url_breve($id, $args, $ancre);
-			break;
-		case 'rubrique':
-			return generer_url_rubrique($id, $args, $ancre);
-			break;
-		case 'site':
-			return generer_url_site($id, $args, $ancre);
-			break;
-		default:
-		  return '';
-	}
+	if (function_exists($f = 'generer_url_'.$type))
+		return $f($id, $args, $ancre);
 }
+
+
+function generer_url_forum_parent($id_forum) {
+	if (!$id_forum = intval($id_forum)) return;
+	list($type, $id) = parent_forum($id_forum);
+	if (function_exists($f = 'generer_url_'.$type))
+		return $f($id);
+} 
+
 
 // Quand on edite un forum, on tient a conserver l'original
 // sous forme d'un forum en reponse, de statut 'original'

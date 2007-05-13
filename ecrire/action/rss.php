@@ -56,6 +56,7 @@ function rss_suivi_forums($a, $from, $where, $lien_moderation=false) {
 		else
 			$item['url'] = generer_url_forum($t['id_forum']);
 
+		$item['in_reply_to_url'] = generer_url_forum_parent($t['id_forum']);
 		$item['description'] = propre($t['texte']);
 		if ($GLOBALS['les_notes']) {
 			$item['description'] .= '<hr />'.$GLOBALS['les_notes'];
