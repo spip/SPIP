@@ -76,7 +76,8 @@ function maj_base($version_cible = 0) {
 	// il y a eu le message d'avertissement il doit savoir ce qu'il fait
 	//
 	// $version_installee = 1.702; quand on a besoin de forcer une MAJ
-
+	
+	spip_log("version anterieure: $version_installee");
 	if (!$version_installee OR ($spip_version < $version_installee)) {
 		spip_query_db("REPLACE spip_meta (nom, valeur,impt)
 			VALUES ('version_installee', '$spip_version','non')");
@@ -1355,7 +1356,7 @@ function maj_base($version_cible = 0) {
 	if (upgrade_vers(1.934, $version_installee, $version_cible)) {
 	  $dir_img = substr(_DIR_IMG,strlen(_DIR_RACINE));
 	  $n = strlen($dir_img) + 1;
-	  spip_query("UPDATE spip_documents SET fichier=substr(fichier,$n) WHERE fichier LIKE " . _q($dir_img . '%'));
+	  spip_query("UPDATE spip_documents SET fichier=substring(fichier,$n) WHERE fichier LIKE " . _q($dir_img . '%'));
 	  maj_version('1.934');
 	}
 	if (upgrade_vers(1.935, $version_installee, $version_cible)) {
