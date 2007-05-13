@@ -307,6 +307,7 @@ function afficher_plus($lien) {
 // Fonctions d'affichage
 //
 
+// http://doc.spip.org/@afficher_objets
 function afficher_objets($type, $titre_table,$requete,$formater=''){
 	$afficher_objets = charger_fonction('afficher_objets','inc');
 	return $afficher_objets($type, $titre_table,$requete,$formater);
@@ -634,6 +635,7 @@ function puce_statut_breve($id, $statut, $id_rubrique, $type) {
 		.  "</span></span>";
 }
 
+// http://doc.spip.org/@puce_statut_site
 function puce_statut_site($id_site, $statut, $id_rubrique, $type){
 	switch ($statut) {
 		case 'publie':
@@ -661,6 +663,7 @@ function puce_statut_site($id_site, $statut, $id_rubrique, $type){
 	return http_img_pack($puce, $statut, "class='puce'",$title);
 }
 
+// http://doc.spip.org/@puce_statut_syndic_article
 function puce_statut_syndic_article($id_syndic, $statut, $id_rubrique, $type){
 		if ($statut=='publie') {
 				$puce='puce-verte.gif';

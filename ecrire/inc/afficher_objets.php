@@ -11,12 +11,14 @@
 \***************************************************************************/
 
 
+// http://doc.spip.org/@icone_table
 function icone_table($type){
 	$derog = array('mot'=>'mot-cle-24.gif','syndic_article'=>'site-24.gif');
 	if (isset($derog[$type]))
 		return $derog[$type];
 	return "$type-24.gif";
 }
+// http://doc.spip.org/@icone_objet
 function icone_objet($type,$statut){
 	$derog = array(
 	'mot'=>'petite-cle.gif','rubrique'=>'rubrique-12.gif',
@@ -33,9 +35,11 @@ function icone_objet($type,$statut){
 }
 
 
+// http://doc.spip.org/@lien_editer_objet
 function lien_editer_objet($type,$key,$id){
 	return generer_url_ecrire($type . "s_edit","$key=$id");
 }
+// http://doc.spip.org/@lien_voir_objet
 function lien_voir_objet($type,$key,$id){
 	$exec = array('article'=>'articles','breve'=>'breves_voir','rubrique'=>'naviguer','mot'=>'mots_tous');
 	$exec = isset($exec[$type])?$exec[$type]:$type . "s";
@@ -96,6 +100,7 @@ function afficher_numero_edit($id, $key, $type,$row=NULL) {
 // libelle du titre de l'objet :
 // la partie du titre a afficher dans un lien
 // puis la partie hors lien
+// http://doc.spip.org/@afficher_titre_objet
 function afficher_titre_objet($type,$row){
 	if (function_exists($f = "afficher_titre_$type"))
 		return $f($row);
@@ -103,6 +108,7 @@ function afficher_titre_objet($type,$row){
 	  (isset($row['nom'])?sinon($row['nom'], _T('ecrire:info_sans_titre')):"");
 	 return array(typo($titre),'');
 }
+// http://doc.spip.org/@afficher_titre_site
 function afficher_titre_site($row){
 	$syndication = $row['syndication'];
 	$s = "";
@@ -112,6 +118,7 @@ function afficher_titre_site($row){
 	
 	return array($s,$s2);
 }
+// http://doc.spip.org/@afficher_titre_syndic_article
 function afficher_titre_syndic_article($row){
 	$titre=safehtml($row["titre"]);
 	$url=$row["url"];
@@ -161,12 +168,14 @@ function afficher_titre_syndic_article($row){
 	return array('',$s);
 }
 
+// http://doc.spip.org/@afficher_complement_objet
 function afficher_complement_objet($type,$row){
 	if (function_exists($f = "afficher_complement_$type"))
 		return $f($row);
 	 return "";
 }
 
+// http://doc.spip.org/@afficher_complement_site
 function afficher_complement_site($row){
 	$syndication = $row['syndication'];
 	$s = "";
@@ -186,6 +195,7 @@ function afficher_complement_site($row){
 	}
 	return $s;
 }
+// http://doc.spip.org/@afficher_complement_syndic_article
 function afficher_complement_syndic_article($row){
 	if ($GLOBALS['exec'] != 'sites') {
 		$id_syndic = $row['id_syndic'];
@@ -206,6 +216,7 @@ function afficher_complement_syndic_article($row){
 
 // affichage des liste d'objets
 // Cas generique, utilise pour tout sauf article
+// http://doc.spip.org/@inc_afficher_objets_dist
 function inc_afficher_objets_dist($type, $titre_table,$requete,$formater=''){
 	if ($afficher = charger_fonction("afficher_{$type}s",'inc',true)){
 		return $afficher($titre_table,$requete,$formater);
@@ -234,6 +245,7 @@ function inc_afficher_objets_dist($type, $titre_table,$requete,$formater=''){
 	return affiche_tranche_bandeau($requete, icone_table($type), 'toile_foncee', "ligne_blanche", $tmp_var, $titre_table, false, $largeurs, $styles, $fonction_ligne, $arg);
 }
 
+// http://doc.spip.org/@afficher_objet_boucle
 function afficher_objet_boucle($row, &$tous_id,  $voir_logo, $own)
 {
 	global $connect_statut, $spip_lang_right;
@@ -317,6 +329,7 @@ function afficher_objet_boucle($row, &$tous_id,  $voir_logo, $own)
 //
 // Afficher tableau d'articles
 //
+// http://doc.spip.org/@inc_afficher_articles_dist
 function inc_afficher_articles_dist($titre, $requete, $formater='') {
 
 	if (!isset($requete['FROM'])) $requete['FROM'] = 'spip_articles AS articles';

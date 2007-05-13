@@ -260,15 +260,19 @@ function generer_url_post_ecrire($script, $args='', $name='', $ancre='', $onchan
 	.form_hidden($action);
 }
 
+// http://doc.spip.org/@afficher_articles
 function afficher_articles($titre, $requete, $formater='') {
 	afficher_objets('article',$titre,$requete,$formater);
 }
+// http://doc.spip.org/@afficher_auteurs
 function afficher_auteurs ($titre_table, $requete) {
 	afficher_objets('auteur',$titre_table,$requete,'');
 }
+// http://doc.spip.org/@afficher_sites
 function afficher_sites($titre_table, $requete){
 	afficher_objets('site',$titre_table,$requete,'');	
 }
+// http://doc.spip.org/@afficher_syndic_articles
 function afficher_syndic_articles($titre_table, $requete, $id = 0) {
 	afficher_objets('syndic_article',$titre_table,$requete,$id);	
 }

@@ -257,6 +257,7 @@ function racine_forum($id_forum){
 } 
 
 
+// http://doc.spip.org/@parent_forum
 function parent_forum($id_forum) {
 	if (!$id_forum = intval($id_forum)) return;
 	$result = spip_query("SELECT id_parent, id_rubrique, id_article, id_breve, id_syndic FROM spip_forum WHERE id_forum=".$id_forum);
@@ -280,6 +281,7 @@ function generer_url_forum_dist($id_forum, $args='', $ancre='') {
 }
 
 
+// http://doc.spip.org/@generer_url_forum_parent
 function generer_url_forum_parent($id_forum) {
 	if (!$id_forum = intval($id_forum)) return;
 	list($type, $id) = parent_forum($id_forum);
