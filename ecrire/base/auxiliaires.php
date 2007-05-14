@@ -214,7 +214,8 @@ $spip_versions_fragments = array(
 		"version_max"	=> "int unsigned DEFAULT '0' NOT NULL",
 		"id_article"	=> "bigint(21)",
 		"compress"	=> "tinyint",
-		"fragment"	=> "longtext");
+		"fragment"	=> "longblob"  # ici c'est VRAIMENT un blob (on y stocke du gzip)
+	);
 
 $spip_versions_fragments_key = array(
 	     "PRIMARY KEY"	=> "id_article, id_fragment, version_min");

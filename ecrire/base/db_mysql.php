@@ -269,7 +269,7 @@ function spip_mysql_character_set($charset){
 	if (isset($sql_charset_coll[$charset])){
 		// verifier que le character set vise est bien supporte par mysql
 		$res = mysql_query("SHOW CHARACTER SET LIKE "._q($sql_charset_coll[$charset]['charset']));
-		if ($row = mysql_fetch_assoc($res))
+		if ($res && $row = mysql_fetch_assoc($res))
 			return $sql_charset_coll[$charset];
 	}
 
