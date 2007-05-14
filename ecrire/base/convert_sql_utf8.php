@@ -45,7 +45,7 @@ function base_convert_sql_utf8_dist($titre, $reprise=false)
 function convert_sql_utf8(){
 	include_spip('base/db_mysql');
 
-	define(_DEBUG_CONVERT, true);
+	define(_DEBUG_CONVERT, false);
 	$charset_spip = $GLOBALS['meta']['charset'];
 	$charset_supporte = false;
 	$utf8_supporte = false;	
@@ -87,7 +87,7 @@ function convert_sql_utf8(){
 		if (preg_match(',^'.$GLOBALS['table_prefix'].'_(.*)$,',$nom,$regs)){
 			$count++;
 			$nom = $regs[1];
-			echo "<hr/>$nom<br/>";
+			echo "<hr /><h2>$nom</h2>";
 			// lister les champs de la table
 			$res2 = spip_query("SHOW FULL COLUMNS FROM spip_$nom");
 			while ($row2 = spip_fetch_array($res2)){
@@ -106,29 +106,29 @@ function convert_sql_utf8(){
 					// sauf si blob expressement demande dans la description !
 					if ((
 					$a = $GLOBALS['tables_principales']['spip_'.$nom]['field'][$champ]
-					OR $a = $GLOBALS['tables_auxiliaires']['spip_'.$nom]['field'][$champ])
+					OR $a = $GLOBALS['tables_auxiliaires']['spip_'.$nom]['field'][$champ]
 					) AND preg_match(',blob,i', $a)) {
-						echo "On ignore le champ blob `$nom`.$champ <hr />\n";
+						echo "On ignore le champ blob $nom.$champ <hr />\n";
 					} else {
 
 						$default = $row2['Default']?(" DEFAULT "._q($row2['Default'])):"";
 						$notnull = ($row2['Null']=='YES')?"":" NOT NULL";
 						$q = "ALTER TABLE spip_$nom CHANGE $champ $champ $type_blob $default $notnull";
 						if (!_DEBUG_CONVERT)
-							$a = spip_query($q);
-						echo "<pre>$q</pre>$a<hr />\n";
+							$b = spip_query($q);
+						echo "<pre>$q</pre>$b\n";
 						$q = "ALTER TABLE spip_$nom CHANGE $champ $champ $type_texte CHARACTER SET $sql_charset COLLATE $sql_collation  $default $notnull";
 						if (!_DEBUG_CONVERT)
-							$a = spip_query($q);
-						echo "<pre>$q</pre>$a<hr />\n";
+							$b = spip_query($q);
+						echo "<pre>$q</pre>\n";
 					}
 				}
 			}
 			// on ne change le charset par defaut de la table que quand tous ses champs sont convertis
 			$q = "ALTER TABLE spip_$nom DEFAULT CHARACTER SET $sql_charset COLLATE $sql_collation";
 			if (!_DEBUG_CONVERT)
-				$a = spip_query($q);
-			echo "<pre>$q</pre>$a<hr />\n";
+				$b = spip_query($q);
+			echo "<pre>$q</pre>$b\n";
 		}
 	}
 	ecrire_meta('charset_sql_base',$sql_charset,'non');
