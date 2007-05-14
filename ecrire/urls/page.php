@@ -29,7 +29,7 @@ define ('_debut_urls_page', get_spip_script('./').'?');
 function composer_url_page($page,$id, $args='', $ancre='') {
 	$url = _debut_urls_page . $page . _separateur_urls_page
 	  . $id . _terminaison_urls_page;
-	if ($args) $args = strpos($url,'?') ? "&args" : "?$args";
+	if ($args) $args = strpos($url,'?') ? "&$args" : "?$args";
 	return $url . $args . ($ancre ? "#$ancre" : '');
 }
 
