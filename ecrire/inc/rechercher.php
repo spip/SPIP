@@ -92,19 +92,42 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array()) {
 	$preg = '/'.$recherche.'/' . $options['preg_flags'];
 
 	foreach ($tables as $table => $champs) {
-		$a = array();
-		$_id_table = id_table_objet($table);
+		$requete = array(
+		"SELECT"=>array(),
+		"FROM"=>array(),
+		"WHERE"=>array(),
+		"GROUPBY"=>array(),
+		"ORDERBY"=>array(),
+		"LIMIT"=>"",
+		"HAVING"=>array(),
+		);
 
+		$_id_table = id_table_objet($table);
+		$requete['SELECT'][] = "t.".$_id_table;
+		$a = "";
 		// Recherche fulltext
-		foreach ($champs as $champ)
-			$a[] = $champ.' '.$methode.' '.$q;
-		$s = spip_query(
-			'SELECT '.$_id_table.','
-			.join(',', $champs)
-			.' FROM spip_'.table_objet($table)
-			.' WHERE ('
-			. join (' OR ', $a)
-			. ")");
+		foreach ($champs as $champ){
+			// il est possible de passer des elements de requete par la table des champs
+			// (jointure par exemple)
+			if (is_array($champ)){
+				foreach($champ as $sousreq=>$partie)
+					foreach($partie as $elt)
+						$requete[$sousreq][] = $elt;
+			}
+			else {
+				if (strpos($champ,".")===FALSE)
+					$champ = "t.$champ";
+				$requete['SELECT'][] = $champ;
+				$a .= " OR ".$champ.' '.$methode.' '.$q;
+			}
+		}
+		$requete['WHERE'][] = substr($a,4);
+		$requete['FROM'][] = 'spip_'.table_objet($table).' AS t';
+
+		$s = spip_abstract_select (
+		  $requete['SELECT'],$requete['FROM'],$requete['WHERE'],
+		 implode(" ",$requete['GROUPBY']),$requete['ORDERBY'],$requete['LIMIT'],'',
+		  $requete['HAVING']);
 
 		while ($t = spip_fetch_array($s)) {
 			$id = intval($t[$_id_table]);
@@ -117,6 +140,8 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array()) {
 
 				$vu = false;
 				foreach ($champs as $champ) {
+					$champ = explode('.',$champ);
+					$champ = end($champ);
 					if ($n = 
 						($options['score'] || $options['matches'])
 						? preg_match_all($preg, $t[$champ], $regs, PREG_SET_ORDER)
