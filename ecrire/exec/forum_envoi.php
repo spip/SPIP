@@ -74,6 +74,7 @@ function forum_envoi(
 
 // Chercher a quoi on repond pour l'afficher au debut
 
+// http://doc.spip.org/@forum_envoi_parent
 function forum_envoi_parent($id)
 {
 	$r = spip_query("SELECT * FROM spip_forum WHERE id_forum=" . _q($id));
@@ -109,6 +110,7 @@ function forum_envoi_parent($id)
 	return $row;
 }
 
+// http://doc.spip.org/@forum_envoi_affiche
 function forum_envoi_affiche($id, $id_parent, $script, $statut, $titre, $corps, $id_message, $form, $num, $objet, $retour) {
 
 	$cat = intval($id) . '/'
