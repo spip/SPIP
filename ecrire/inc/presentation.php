@@ -884,7 +884,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	  	$tm = rawurlencode($titre);
 		$res .= "\n<div style='text-align: right' class='verdana1'>"
 		. "<b><a href='"
-		  . generer_url_ecrire("forum_envoi", "id_parent=$id_forum&titre_message=$tm&script=" . urlencode("$retour?$arg")) . '#formulaire'
+		  . generer_url_ecrire("forum_envoi", "statut=$statut&id_parent=$id_forum&titre_message=$tm&script=" . urlencode("$retour?$arg")) . '#formulaire'
 		. "'>"
 		. _T('lien_repondre_message')
 		. "</a></b></div>";
