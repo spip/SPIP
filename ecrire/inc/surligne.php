@@ -21,6 +21,7 @@ define("MARQUEUR_SURLIGNE",  'debut_surligneconditionnel');
 define("MARQUEUR_FSURLIGNE", 'finde_surligneconditionnel');
 
 
+// http://doc.spip.org/@surligner_mots
 function surligner_mots($page) {
   $surlignejs_engines = array(
       array(",".str_replace(array("/","."),array("\/","\."),$GLOBALS['meta']['adresse_site']).",i", ",recherche=([^&]+),i"), //SPIP
