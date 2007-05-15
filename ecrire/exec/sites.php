@@ -229,6 +229,7 @@ function exec_sites_dist()
 			$moderation = $mod;
 			if ($moderation != 'oui') $moderation='non';
 
+		$res = '';
 		$res .= "<div style='text-align: ".$GLOBALS['spip_lang_left']."'>".
 		  _T('syndic_choix_moderation')
 		. "<div style='padding-$spip_lang_left: 40px;'>"
