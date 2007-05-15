@@ -185,9 +185,6 @@ function balise_URL_ARTICLE_dist($p) {
 		if (!$_id_article)
 			$_id_article = champ_sql('id_article', $p);
 		$p->code = "generer_url_article($_id_article)";
-
-		if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
-			$p->code = "url_var_recherche(" . $p->code . ")";
 	}
 
 	$p->interdire_scripts = false;
@@ -201,9 +198,6 @@ function balise_URL_RUBRIQUE_dist($p) {
 		$_id_rubrique = champ_sql('id_rubrique',$p);
 	$p->code = "generer_url_rubrique($_id_rubrique)" ;
 
-	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
-	$p->code = "url_var_recherche(" . $p->code . ")";
-
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -215,9 +209,6 @@ function balise_URL_BREVE_dist($p) {
 		$_id_breve = champ_sql('id_breve',$p);
 	$p->code = "generer_url_breve($_id_breve)";
 	
-	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
-	$p->code = "url_var_recherche(" . $p->code . ")";
-
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -228,9 +219,6 @@ function balise_URL_MOT_dist($p) {
 	if (!$_id_mot)
 		$_id_mot = champ_sql('id_mot',$p);
 	$p->code = "generer_url_mot($_id_mot)";
-
-	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
-	$p->code = "url_var_recherche(" . $p->code . ")";
 
 	$p->interdire_scripts = false;
 	return $p;
@@ -263,9 +251,6 @@ function balise_URL_FORUM_dist($p) {
 		$_id_forum = champ_sql('id_forum',$p);
 	$p->code = "generer_url_forum($_id_forum)";
 
-	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
-	$p->code = "url_var_recherche(" . $p->code . ")";
-
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -287,9 +272,6 @@ function balise_URL_AUTEUR_dist($p) {
 	if (!$_id_auteur)
 		$_id_auteur = champ_sql('id_auteur',$p);
 	$p->code = "generer_url_auteur($_id_auteur)";
-
-	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
-	$p->code = "url_var_recherche(" . $p->code . ")";
 
 	$p->interdire_scripts = false;
 	return $p;
@@ -480,13 +462,13 @@ function balise_EMBED_DOCUMENT_dist($p) {
 // http://doc.spip.org/@balise_DEBUT_SURLIGNE_dist
 function balise_DEBUT_SURLIGNE_dist($p) {
 	include_spip('inc/surligne');
-	$p->code = "'<" . MARQUEUR_SURLIGNE . "'";
+	$p->code = "'<!-- " . MARQUEUR_SURLIGNE . " -->'";
 	return $p;
 }
 // http://doc.spip.org/@balise_FIN_SURLIGNE_dist
 function balise_FIN_SURLIGNE_dist($p) {
 	include_spip('inc/surligne');
-	$p->code = "'<" . MARQUEUR_FSURLIGNE . "'";
+	$p->code = "'<!-- " . MARQUEUR_FSURLIGNE . "-->'";
 	return $p;
 }
 

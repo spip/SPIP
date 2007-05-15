@@ -41,9 +41,8 @@ function public_stats_dist() {
 			url_de_base()));
 		if (!(($url_site_spip<>'')
 		AND strpos('-'.strtolower($_SERVER['HTTP_REFERER']), strtolower($url_site_spip))
-		AND !isset($_GET['var_recherche']))) {
+		AND strpos("recherche=",$_SERVER['HTTP_REFERER'])===false) {
 			$log_referer = $_SERVER['HTTP_REFERER'];
-			$referer_md5 = '0x'.substr(md5($log_referer), 0, 15);
 		}
 	}
 
