@@ -1,5 +1,5 @@
 /**
- * SEhighlight plugin for jQuery
+ * SearchHighlight plugin for jQuery
  * 
  * Thanks to Scott Yang <http://scott.yang.id.au/>
  * for the original idea and some code
@@ -39,25 +39,25 @@
  */
 
 (function($){
-  jQuery.fn.SEhighlight = function(options) {
+  jQuery.fn.SearchHighlight = function(options) {
     var ref = options.debug_referrer || document.referrer;
     if(!ref && options.keys==undefined) return this;
     
-    SEhighlight.options = $.extend({exact:"exact",style_name:'hilite',style_name_suffix:true},options);
+    SearchHighlight.options = $.extend({exact:"exact",style_name:'hilite',style_name_suffix:true},options);
     
-    if(options.engines) SEhighlight.engines.unshift(options.engines);  
-    var q = options.keys!=undefined?options.keys.split(/[\s,\+\.]+/):SEhighlight.decodeURL(ref,SEhighlight.engines);
+    if(options.engines) SearchHighlight.engines.unshift(options.engines);  
+    var q = options.keys!=undefined?options.keys.split(/[\s,\+\.]+/):SearchHighlight.decodeURL(ref,SearchHighlight.engines);
     if(q && q.join("")) {
-      SEhighlight.buildReplaceTools(q);
+      SearchHighlight.buildReplaceTools(q);
       return this.each(function(){
         var el = this;
         if(el==document) el = $("body")[0];
-        SEhighlight.hiliteElement(el, q); 
+        SearchHighlight.hiliteElement(el, q); 
       })
     } else return this;
   }    
 
-  var SEhighlight = {
+  var SearchHighlight = {
     options: {},
     regex: [],
     engines: [
@@ -107,22 +107,22 @@
     ],
     matchAccent : /[\x91\x92\u2018\u2019\xC0-\xC5\xC7-\xCF\xD1-\xD6\xD8-\xDC\xFF]/ig,  
 		replaceAccent: function(q) {
-		  SEhighlight.matchAccent.lastIndex = 0;
-      if(SEhighlight.matchAccent.test(q)) {
-        for(var i=0,l=SEhighlight.regexAccent.length;i<l;i++)
-          q = q.replace(SEhighlight.regexAccent[i][0],SEhighlight.regexAccent[i][1]);
+		  SearchHighlight.matchAccent.lastIndex = 0;
+      if(SearchHighlight.matchAccent.test(q)) {
+        for(var i=0,l=SearchHighlight.regexAccent.length;i<l;i++)
+          q = q.replace(SearchHighlight.regexAccent[i][0],SearchHighlight.regexAccent[i][1]);
       }
       return q;
     },
     buildReplaceTools : function(query) {
         re = new Array();
         for (var i = 0, l=query.length; i < l; i ++) {
-            query[i] = SEhighlight.replaceAccent(query[i].toLowerCase());
+            query[i] = SearchHighlight.replaceAccent(query[i].toLowerCase());
             re.push(query[i]);
         }
         
         var regex = re.join("|");
-        switch(SEhighlight.options.exact) {
+        switch(SearchHighlight.options.exact) {
           case "exact":
             regex = '\\b(?:'+regex+')\\b';
             break;
@@ -130,18 +130,18 @@
             regex = '\\b\\w*('+regex+')\\w*\\b';
             break;
         }    
-        SEhighlight.regex = new RegExp(regex, "gi");
+        SearchHighlight.regex = new RegExp(regex, "gi");
         
         for (var i = 0, l = query.length; i < l; i ++) {
-            SEhighlight.subs[query[i]] = SEhighlight.options.style_name+
-              (SEhighlight.options.style_name_suffix?i+1:''); 
+            SearchHighlight.subs[query[i]] = SearchHighlight.options.style_name+
+              (SearchHighlight.options.style_name_suffix?i+1:''); 
         }        
     },
     nosearch: /s(?:cript|tyle)|textarea/i,
     hiliteElement: function(el, query) {
-        var startIndex, endIndex, comment = false, opt = SEhighlight.options;
+        var startIndex, endIndex, comment = false, opt = SearchHighlight.options;
         if(!opt.startHighlightComment || !opt.stopHighlightComment)
-          return SEhighlight.hiliteTree(0,el.childNodes.length,el,query);
+          return SearchHighlight.hiliteTree(0,el.childNodes.length,el,query);
         if($.browser.msie) {
           var item = el.firstChild, i = 0, parents = [], startComment = false;
           while(item) {
@@ -151,7 +151,7 @@
                 startIndex= i+1;
               } else if($.trim(item.data)==opt.stopHighlightComment) {
                 endIndex = i;
-                SEhighlight.hiliteTree(startIndex,endIndex,item.parentNode,query);
+                SearchHighlight.hiliteTree(startIndex,endIndex,item.parentNode,query);
                 startComment = false;
               }
             }
@@ -182,25 +182,25 @@
               startIndex++;
             } else if($.trim(currComment.data)==opt.stopHighlightComment) {
               while(el.childNodes[endIndex-1]!=currComment) endIndex--;
-              SEhighlight.hiliteTree(startIndex,endIndex,el,query);
+              SearchHighlight.hiliteTree(startIndex,endIndex,el,query);
             }
           }
         }
-        if(!comment) SEhighlight.hiliteTree(0,el.childNodes.length,el,query);
+        if(!comment) SearchHighlight.hiliteTree(0,el.childNodes.length,el,query);
     },
     hiliteTree : function(startIndex,endIndex,el,query) {
-        var matchIndex = SEhighlight.options.exact=="whole"?1:0;
+        var matchIndex = SearchHighlight.options.exact=="whole"?1:0;
         for(;startIndex<endIndex;startIndex++) {
           var item = el.childNodes[startIndex];
           if ( item.nodeType != 8 ) {//comment node
   				  //text node
             if(item.nodeType==3) {
-              var text = item.data, textNoAcc = SEhighlight.replaceAccent(text);
+              var text = item.data, textNoAcc = SearchHighlight.replaceAccent(text);
               var newtext="",match,index=0;
-              SEhighlight.regex.lastIndex = 0;
-              while(match = SEhighlight.regex.exec(textNoAcc)) {
+              SearchHighlight.regex.lastIndex = 0;
+              while(match = SearchHighlight.regex.exec(textNoAcc)) {
                 newtext += text.substr(index,match.index-index)+'<span class="'+
-                SEhighlight.subs[match[matchIndex].toLowerCase()]+'">'+text.substr(match.index,match[0].length)+"</span>";
+                SearchHighlight.subs[match[matchIndex].toLowerCase()]+'">'+text.substr(match.index,match[0].length)+"</span>";
                 index = match.index+match[0].length;
               }
               if(newtext) {
@@ -212,8 +212,8 @@
                 $(item).before(repl).remove();
               }                
             } else {
-              if(item.nodeType==1 && item.nodeName.search(SEhighlight.nosearch)==-1)
-                SEhighlight.hiliteTree(0,item.childNodes.length,item,query);
+              if(item.nodeType==1 && item.nodeName.search(SearchHighlight.nosearch)==-1)
+                SearchHighlight.hiliteTree(0,item.childNodes.length,item,query);
             }	
           }
         }    
