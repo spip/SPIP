@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'afficher_trad' => 'visualizzare le traduzioni',
 'alerte_maj_impossible' => '<b>Attenzione!</b> L\'aggiornamento del database MySQL alla versione @version@ &egrave; impossibile, forse non si possiedono i diritti di modifica nel database. Contattare il proprio fornitore di hosting.',
 'analyse_xml' => 'Analisi XML',
+'annuler' => 'Annulla',
 'antispam_champ_vide' => 'Si prega di lasciare vuoto questo campo:',
 'avis_archive_incorrect' => 'il file archivio non &egrave; un file SPIP',
 'avis_archive_invalide' => 'il file archivio non &egrave; valido',
@@ -666,6 +667,10 @@ e riconnetterti all\'area riservata.
 'previsualiser' => 'Visualizzare l\'anteprima',
 
 
+// R
+'retour' => 'Indietro',
+
+
 // S
 'spip_conforme_dtd' => 'SPIP ritiene che questo documento &egrave; conforme al proprio DOCTYPE:',
 'squelette' => 'modello di layout',
@@ -764,6 +769,7 @@ funzionamento del sito. Non intervenire finch&eacute; non conosci bene i meccani
 'zbug_inversion_ordre_inexistant' => 'inversione di un ordine non esistente',
 'zbug_pagination_sans_critere' => '#PAGINATION senza criterio {pagination} oppure usato in un ciclo ricorsivo',
 'zbug_parametres_inclus_incorrects' => 'Parametri di inclusione non corretti',
+'zbug_profile' => 'Tempo di elaborazione: @time@',
 'zbug_resultat' => 'risultato',
 'zbug_serveur_indefini' => 'server SQL non definito',
 'zbug_table_inconnue' => 'Tabella SQL &laquo; @table@ &raquo; sconosciuta',

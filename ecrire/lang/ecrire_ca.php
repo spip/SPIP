@@ -119,6 +119,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'cache_modifiable_webmestre' => 'Aquest par&agrave;metre &eacute;s modificable pel webmestre del lloc Web.',
 'calendrier_synchro' => 'Si utilitzeu un programari d\'agenda compatible <b>iCal</b>, el podeu sincronitzar amb les informacions d\'aquest lloc.',
 'connexion_ldap' => 'Connexi&oacute;:',
+'copier_en_local' => 'Copiar en local',
 
 
 // D
@@ -299,16 +300,16 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_config_suivi' => 'Si aquesta adre&ccedil;a correspon a una llista de correu, podeu indicar m&eacute;s avall l\'adre&ccedil;a a la que els participants es poden registrar. Aquesta adre&ccedil;a pot ser una URL (per exemple la p&agrave;gina de registre a la llista per la Web), o un correu electr&ograve;nic amb un assumpte espec&iacute;fic: <tt>@adresse_suivi@?assumpte=subscriure\'s</tt>):',
 'info_config_suivi_explication' => 'Us podeu subscriure a la llista de correu d\'aquest lloc. Si ho feu, rebreu per correu electr&ograve;nic els anuncis dels articles i de les breus que es proposen per ser publicats.',
 'info_confirmer_passe' => 'Confirmar la nova contrasenya:',
-'info_connexion_base' => 'Segon pas: <b>Intent de connexi&oacute; a la base de dades</b>',
+'info_connexion_base' => 'Intent de connexi&oacute; a la base de dades',
 'info_connexion_ldap_ok' => 'La connexio LDAP ha reexit.</b><p> Podeu passar al seg&uuml;ent pas.',
-'info_connexion_mysql' => 'Primer pas: <b>La vostra connexi&oacute; MySQL</b>',
+'info_connexion_mysql' => 'La vostra connexi&oacute; MySQL',
 'info_connexion_ok' => 'La connexi&oacute; ha reexit.',
 'info_contact' => 'Contacte',
 'info_contenu_articles' => 'Contingut dels articles',
 'info_creation_mots_cles' => 'Crear i configurar aqu&iacute; les paraules clau del lloc',
 'info_creation_paragraphe' => '(Per crear par&agrave;grafs, deixeu simplement  unes l&iacute;nies buides.)',
 'info_creation_rubrique' => 'Abans de poder escriure articles,<br /> heu de crear com a m&iacute;nim una secci&oacute;.<br />',
-'info_creation_tables' => 'Quart pas: <b>Creaci&oacute; de les taules de la base de dades</b>',
+'info_creation_tables' => 'Creaci&oacute; de les taules de la base de dades',
 'info_creer_base' => '<b>Crear</b> una nova base de dades:',
 'info_dans_groupe' => 'Dins el grup:',
 'info_dans_rubrique' => 'Dins la secci&oacute;:',
@@ -317,7 +318,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_delet_mots_cles' => 'Heu sol&middot;licitat la supressi&oacute; de la
  paraula clau <b>@titre_mot@</b> (@type_mot@). Donat que la paraula-clau est&agrave; lligada a
 <b>@texte_lie@</b> heu de confirmar aquesta decisi&oacute;:',
-'info_derniere_etape' => '&Uacute;ltim pas: S\'ha acabat!',
+'info_derniere_etape' => 'S\'ha acabat!',
 'info_derniere_syndication' => 'La &uacute;ltima sindicaci&oacute; d\'aquest lloc ha estat realitzada el',
 'info_derniers_articles_publies' => 'El m&eacute;s nou dels vostres articles editats',
 'info_desactiver_forum_public' => 'Inhabilitar l\'&uacute;s dels f&ograve;rums p&uacute;blics.
@@ -381,7 +382,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_image_process' => 'Vulgueu seleccionar el millor m&egrave;tode de fabricaci&oacute; de vinyetes fent un clic damunt de la imatge corresponent. ',
 'info_image_process2' => '<b>N.B.</b> <i>Si no apareix cap imatge, aleshores &eacute;s que el servidor que allotja la vostra web no ha estat configurat per utilitzar aquestes eines. Si desitgeu emprar aquestes funcions, poseu-vos en contacte amb el responsable t&egrave;cnic i demaneu les extensions &laquo;GD&raquo; o &laquo;Imagick&raquo;.</i>',
 'info_images_auto' => 'Imatges calculades autom&agrave;ticament',
-'info_informations_personnelles' => 'Cinqu&egrave; pas: <b>Informacions personals</b>',
+'info_informations_personnelles' => 'Informacions personals',
 'info_inscription_automatique' => 'Inscripci&oacute; autom&agrave;tica dels nous redactors',
 'info_jeu_caractere' => 'Joc de car&agrave;cters del lloc',
 'info_jours' => 'dies',
@@ -576,7 +577,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_surtitre' => 'Sobret&iacute;tol:',
 'info_syndication_integrale_1' => 'El vostre lloc Web proposa fitxers de sindicaci&oacute; (veure &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
 'info_syndication_integrale_2' => 'Desitgeu transmetre els articles en la seva totalitat, o difondre\'n nom&eacute;s alguns centenars de car&agrave;cters?',
-'info_table_prefix' => 'Les dades d\'aquest lloc Web estan registrades en unes taules anomenades <tt><b>spip</b>_articles</tt>, <tt><b>spip</b>_rubriques</tt>, etc. Si instal&middot;leu diversos llocs a dins de la mateixa base de dades, podeu modificar aquest prefix (atenci&oacute;, nom&eacute;s amb lletres min&uacute;scules i sense accents).',
+'info_table_prefix' => 'Podeu modificar el prefix del nom de les taules de dades (aquest &eacute;s indispensable quan es volen instal&middot;lar diversos llocs Web en una mateixa base de dades). Aquest prefix s\'escriu en lletres min&uacute;scules, sense accents i sense espais.',
 'info_taille_maximale_vignette' => 'Mida m&agrave;xima de les vinyetes generades pel sistema:',
 'info_terminer_installation' => 'Ara podeu finalitzar el proc&eacute;s d\'instal&middot;laci&oacute; est&agrave;ndard. ',
 'info_texte' => 'Text',

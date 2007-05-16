@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'afficher_trad' => '&Uuml;bersetzungen anzeigen',
 'alerte_maj_impossible' => '<b>Achtung!</b> Ihre MySQL Datenbank konnte nicht auf die Version @version@ umgestellt werden. M&ouml;glicherweise gibt es ein Problem mit den Zugriffsrechten. Bitte setzen Sie sich mit Ihrem Webspace-Provider in Verbindung.',
 'analyse_xml' => 'XML-Analyse',
+'annuler' => 'Abbrechen',
 'antispam_champ_vide' => 'Bitte lassen Sie dieses Feld leer:',
 'avis_archive_incorrect' => 'Die archivierte Datei ist keine SPIP-Datei',
 'avis_archive_invalide' => 'Die archivierte Datei ist keine SPIP-Datei',
@@ -193,7 +194,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   &Uuml;berpr&uuml;fen Sie bitte die genaue Schreibweise der oben stehenden Verzeichnisse,
   sollten Sie Abweichungen feststellen, benennen Sie bitte mit Ihrem FTP-Programm die betreffenden Verzeichnisse um.
   <p>Danach k&ouml;nnen Sie ',
-'dirs_repertoires_suivants' => '<MODIF><p><b>In die folgenden Verzeichnisse kann nicht geschrieben werden:</b></p><ul>@bad_dirs@</ul>
+'dirs_repertoires_suivants' => '<p><b>In die folgenden Verzeichnisse kann nicht geschrieben werden:</b></p><ul>@bad_dirs@</ul>
 <p>Um das Problem zu l&ouml;sen, verwenden Sie bitte Ihren FTP-Client, um die Zugriffsrechte f&uuml;r diese
 Verzeichnisse zu setzen.Die Installationsanleitung erl&auml;utert die Details dazu.</p>
 <p>Wenn Sie diesen Vorgang abgeschlossen haben, k&ouml;nnen Sie',
@@ -589,7 +590,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 
 
 // O
-'occurence' => '<MODIF>Vorkommen',
+'occurence' => 'Vorkommen',
 'onglet_affacer_base' => 'Datenbank l&ouml;schen',
 'onglet_auteur' => 'Autor',
 'onglet_contenu_site' => 'Inhalte der Website',
@@ -645,6 +646,10 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
 'precedent' => 'zur&uuml;ck',
 'previsualisation' => 'Vorschau',
 'previsualiser' => 'Vorschau anzeigen',
+
+
+// R
+'retour' => 'Zur&uuml;ck',
 
 
 // S
@@ -737,7 +742,7 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
 'zbug_inversion_ordre_inexistant' => 'Umkehrung einer inexistenten Sortierung ',
 'zbug_pagination_sans_critere' => '#PAGINATION ohne Kriterium {pagination} oder in rekursiver Schleife',
 'zbug_parametres_inclus_incorrects' => 'INCLUDE-Parameter fehlerhaft',
-'zbug_profile' => '<NEW>Temps de calcul&nbsp;: @time@',
+'zbug_profile' => 'Rechenzeit: @time@',
 'zbug_resultat' => 'Ergebnis',
 'zbug_serveur_indefini' => 'SQL-Server nicht definiert',
 'zbug_table_inconnue' => 'SQL-Tabelle &laquo; @table@ &raquo; unbekannt',
