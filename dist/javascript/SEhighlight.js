@@ -46,8 +46,8 @@
     SEhighlight.options = $.extend({exact:"exact",style_name:'hilite',style_name_suffix:true},options);
     
     if(options.engines) SEhighlight.engines.unshift(options.engines);  
-    var q = (options.keys?options.keys.split(/[\s,\+\.]+/):false) || SEhighlight.decodeURL(ref,SEhighlight.engines);
-    if(q) {
+    var q = options.keys!=undefined?options.keys.split(/[\s,\+\.]+/):SEhighlight.decodeURL(ref,SEhighlight.engines);
+    if(q && q.join("")) {
       SEhighlight.buildReplaceTools(q);
       return this.each(function(){
         var el = this;
