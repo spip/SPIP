@@ -49,5 +49,13 @@ function action_redirect_dist()
 // Ne pas masquer cette eventuelle erreur (aide a detecter des lignes vides
 // dans inc-urls ou mes_fonctions/mes_options)
   else $redirect = _DIR_RESTREINT_ABS;
+
+// Compatibilite avec l'ancienne interface a un seul argument des generer_url_
+  if ($mode AND !strpos($redirect, 'var_mode')) {
+	$sep =  (strpos($redirect,'?') !== false) ? '&' : '?';
+	if (strpos($redirect,'#'))
+		$redirect = str_replace('#', "$sep$mode#", $redirect);
+	else $redirect .= "$sep$mode";
+  }
 }
 ?>
