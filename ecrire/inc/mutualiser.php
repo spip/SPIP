@@ -32,9 +32,12 @@ function demarrer_site($site = '', $options = array()) {
 	);
 
 	// Le prefixe = max 10 caracteres a-z0-9, qui ressemblent au domaine
+	// et ne commencent pas par un chiffre
 	if ($options['cookie_prefix'] OR $options['table_prefix']) {
 		$prefix = preg_replace(',^www\.|[^a-z0-9],', '', strtolower($site));
 		$prefix = substr($prefix, 0, 10);
+		if (!preg_match(',^[a-z],', $prefix))
+			$prefix = 'a'.$prefix;
 		if ($options['cookie_prefix'])
 			$GLOBALS['cookie_prefix'] = $prefix;
 		if ($options['table_prefix'])
