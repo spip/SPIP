@@ -12,16 +12,29 @@
 
 function install_etape_2_dist()
 {
-	global $adresse_db, $login_db, $pass_db, $spip_lang_right, $chmod, $table_prefix;
-	if (is_null($table_prefix)) {
-		$table_prefix = 'spip';
-	}
+	global $spip_lang_right;
+
+	$adresse_db = defined('_INSTALL_HOST_DB')
+		? _INSTALL_HOST_DB
+		: _request('adresse_db');
+
+	$login_db = defined('_INSTALL_USER_DB')
+		? _INSTALL_USER_DB
+		: _request('login_db');
+
+	$pass_db = defined('_INSTALL_PASS_DB')
+		? _INSTALL_PASS_DB
+		: _request('pass_db');
+
+	$chmod = defined('_SPIP_CHMOD')
+		? _SPIP_CHMOD
+		: _request('chmod');
 
 	echo install_debut_html();
 
 	// prenons toutes les dispositions possibles pour que rien ne s'affiche !
 	echo "<!--";
-	$link = mysql_connect("$adresse_db","$login_db","$pass_db");
+	$link = mysql_connect($adresse_db,$login_db,$pass_db);
 	$db_connect = mysql_errno();
 	echo "-->";
 
@@ -30,7 +43,7 @@ function install_etape_2_dist()
 	echo "<p class='resultat'><b>"._T('info_connexion_ok')."</b></p>";
 	echo info_etape(_T('menu_aide_installation_choix_base').aide ("install2"));
 
-	$link = mysql_connect("$adresse_db","$login_db","$pass_db");
+	$link = mysql_connect($adresse_db,$login_db,$pass_db);
 	$result = @mysql_list_dbs();
 
 
@@ -80,21 +93,45 @@ function install_etape_2_dist()
 
 	echo generer_form_ecrire('install', (
 	  "\n<input type='hidden' name='etape' value='3' />"
-	. "\n<input type='hidden' name='chmod' value='$chmod' />"
-	. "\n<input type='hidden' name='adresse_db'  value=\"$adresse_db\" />"
-	. "\n<input type='hidden' name='login_db' value=\"$login_db\" />"
-	. "\n<input type='hidden' name='pass_db' value=\"$pass_db\" />"
-	. "\n<fieldset><legend>"._T('texte_choix_base_1')."</legend>\n"
-	. $res    
-	. "\n<input name=\"choix_db\" value=\"new_spip\" type='radio' id='nou'"
-	. ($checked  ? '' : " checked='checked'")
-	. " />\n<label for='nou'>"._T('info_creer_base')."</label></p>\n<p>"
-	. "\n<input type='text' name='table_new' class='fondl' value=\"spip\" size='20' /></p></fieldset>\n"
-	. "<fieldset><legend>"._T('texte_choix_table_prefix')."</legend>\n"
+
+	. (defined('_SPIP_CHMOD')
+		? ''
+		: "\n<input type='hidden' name='chmod' value='".htmlspecialchars($chmod)."' />"
+	)
+	. (defined('_INSTALL_HOST_DB')
+		? ''
+		: "\n<input type='hidden' name='adresse_db'  value=\"".htmlspecialchars($adresse_db)."\" />"
+	)
+	. (defined('_INSTALL_USER_DB')
+		? ''
+		: "\n<input type='hidden' name='login_db' value=\"".htmlspecialchars($login_db)."\" />"
+	)
+	. (defined('_INSTALL_PASS_DB')
+		? ''
+		: "\n<input type='hidden' name='pass_db' value=\"".htmlspecialchars($pass_db)."\" />"
+	)
+
+	. (defined('_INSTALL_NAME_DB')
+		? '<h3>'._L('Nom de la base attribu&#233; par l\'h&#233;bergeur').'</h3>'
+		: "\n<fieldset><legend>"._T('texte_choix_base_1')."</legend>\n"
+		. $res
+		. "\n<input name=\"choix_db\" value=\"new_spip\" type='radio' id='nou'"
+		. ($checked  ? '' : " checked='checked'")
+		. " />\n<label for='nou'>"._T('info_creer_base')."</label></p>\n<p>"
+		. "\n<input type='text' name='table_new' class='fondl' value=\"spip\" size='20' /></p></fieldset>\n"
+	)
+
+	. (isset($GLOBALS['table_prefix'])
+		? '<h3>'._L('Pr&#233;fixe de table attribu&#233; par l\'h&#233;bergeur').'</h3>'
+		: "<fieldset><legend>"._T('texte_choix_table_prefix')."</legend>\n"
 	. "<p><label for='table_prefix'>"._T('info_table_prefix')."</label></p><p>"
-	. "\n<input type='text' id='table_prefix' name='table_prefix' class='fondl' value='" .
-		$table_prefix . "' size='20' /></p></fieldset>"
+	. "\n<input type='text' id='tprefix' name='tprefix' class='fondl' value='"
+		. 'spip' # valeur par defaut
+		. "' size='20' /></p></fieldset>"
+	)
+
 	. bouton_suivant()));
+
 	}
 	else {
 		echo info_etape(_T('info_connexion_base'));

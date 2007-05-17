@@ -54,7 +54,9 @@ function install_etape_1_dist()
 			"</b></p><p>"._T('avis_connexion_echec_2')."</p><p style='font-size: small;'>"._T('avis_connexion_echec_3')."</p>")
 			:"")
 
-	. fieldset(_T('entree_base_donnee_1'),
+	. (defined('_INSTALL_HOST_DB')
+	? '<h3>'._T('entree_base_donnee_1').'</h3>'
+	: fieldset(_T('entree_base_donnee_1'),
 		array(
 			'adresse_db' => array(
 				'label' => _T('entree_base_donnee_2'),
@@ -62,8 +64,11 @@ function install_etape_1_dist()
 			),
 		)
 	)
-	
-	. fieldset(_T('entree_login_connexion_1'),
+	)
+
+	. (defined('_INSTALL_USER_DB')
+	? '<h3>'._T('entree_login_connexion_1').'</h3>'
+	: fieldset(_T('entree_login_connexion_1'),
 		array(
 			'login_db' => array(
 				'label' => _T('entree_login_connexion_2'),
@@ -71,14 +76,18 @@ function install_etape_1_dist()
 			),
 		)
 	)
+	)
 
-	. fieldset(_T('entree_mot_passe_1'),
+	. (defined('_INSTALL_PASS_DB')
+	? '<h3>'._T('entree_mot_passe_1').'</h3>'
+	: fieldset(_T('entree_mot_passe_1'),
 		array(
 			'pass_db' => array(
 				'label' => _T('entree_mot_passe_2'),
 				'valeur' => $pass_db
 			),
 		)
+	)
 	)
 
 	. bouton_suivant()));

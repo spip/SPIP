@@ -14,26 +14,51 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 include_spip('inc/headers');
 function install_bases(){
-	global $adresse_db, $choix_db, $login_db, $pass_db, $spip_lang_right, $spip_version, $table_new, $chmod;
-	$link = mysql_connect("$adresse_db", "$login_db", "$pass_db");
+	global $spip_lang_right, $spip_version;
+
+	$adresse_db = defined('_INSTALL_HOST_DB')
+		? _INSTALL_HOST_DB
+		: _request('adresse_db');
+
+	$login_db = defined('_INSTALL_USER_DB')
+		? _INSTALL_USER_DB
+		: _request('login_db');
+
+	$pass_db = defined('_INSTALL_PASS_DB')
+		? _INSTALL_PASS_DB
+		: _request('pass_db');
+
+	$choix_db = defined('_INSTALL_NAME_DB')
+		? _INSTALL_NAME_DB
+		: _request('choix_db');
+
+	$chmod = defined('_SPIP_CHMOD')
+		? _SPIP_CHMOD
+		: _request('chmod');
+
+
+	$link = mysql_connect($adresse_db, $login_db, $pass_db);
 
 	// Prefix des tables :
 	// contrairement a ce qui est dit dans le message (trop strict mais c'est
 	// pour notre bien), on va tolerer les chiffres en plus des minuscules
-	$p = trim(preg_replace(',[^a-z0-9],', '',
-		strtolower(_request('table_prefix'))));
-	$rappel_prefix = false;
-	if ($p AND ($p != 'spip' OR (isset($GLOBALS['table_prefix']) AND $p!=$GLOBALS['table_prefix']))){
-		$GLOBALS['table_prefix'] = $p;
-		$rappel_prefix = true;
+	if (!isset($GLOBALS['table_prefix'])) {
+		$p = trim(preg_replace(',[^a-z0-9],', '',
+			strtolower(_request('tprefix'))));
+		$rappel_prefix = false;
+		if ($p AND $p != 'spip') {
+			$GLOBALS['table_prefix'] = $p;
+			$rappel_prefix = true;
+		}
 	}
 
 	echo "<"."!-- $link ";
 	echo "(".$GLOBALS['table_prefix'].")";
 
 	if ($choix_db == "new_spip") {
-		$sel_db = $table_new;
-		mysql_query("CREATE DATABASE `$sel_db`");
+		$sel_db = _request('table_new');
+		if (preg_match(',^[a-z_0-9-]+$,i', $sel_db)
+			mysql_query("CREATE DATABASE `$sel_db`");
 	}
 	else {
 		$sel_db = $choix_db;
@@ -44,7 +69,7 @@ function install_bases(){
 	spip_query("SELECT COUNT(*) FROM spip_meta");
 	$nouvelle = spip_sql_errno();
 	if ($nouvelle){
-		include_spip('db_mysql');
+		include_spip('base/db_mysql');
 		// mettre les nouvelles install en utf-8 si mysql le supporte
 		if ($charset = spip_mysql_character_set('utf-8')){
 			$GLOBALS['meta']['charset_sql_base'] = $charset['charset'];
