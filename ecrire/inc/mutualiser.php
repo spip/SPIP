@@ -73,7 +73,12 @@ function echec_init_mutualisation($e, $options) {
 	include_spip('inc/minipres');
 
 	if ($options['creer_site']) {
-		$ok = mkdir($e, _SPIP_CHMOD)
+		$ok_dir =
+		is_dir(_DIR_RACINE . $options['repertoire'])
+		AND is_writable(_DIR_RACINE . $options['repertoire']);
+
+		$ok = $ok_dir
+		AND mkdir($e, _SPIP_CHMOD)
 		AND chmod($e, _SPIP_CHMOD)
 		AND mkdir($e._NOM_PERMANENTS_INACCESSIBLES, _SPIP_CHMOD)
 		AND mkdir($e._NOM_PERMANENTS_ACCESSIBLES, _SPIP_CHMOD)
@@ -92,6 +97,7 @@ function echec_init_mutualisation($e, $options) {
 					? _L('OK, vous pouvez <a href="'.generer_url_ecrire('install').'">installer votre site</a>.')
 					: _L('erreur')
 				).'</h3>'
+				. (!$ok_dir ? _L('Le r&#233;pertoire <tt>'.$options['repertoire'].'/</tt> n\'est pas accessible en &#233;criture') : '')
 		);
 	} else {
 		echo minipres(
