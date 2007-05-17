@@ -1505,7 +1505,8 @@ function afficher_tags($tags, $rels='tag,directory') {
 // attention length="zz" devient title="zz", pour rester conforme
 // http://doc.spip.org/@enclosure2microformat
 function enclosure2microformat($e) {
-	$url = filtrer_entites(extraire_attribut($e, 'url'));
+	if (!$url = filtrer_entites(extraire_attribut($e, 'url')))
+		$url = filtrer_entites(extraire_attribut($e, 'href'));
 	$type = extraire_attribut($e, 'type');
 	$length = extraire_attribut($e, 'length');
 	$fichier = basename($url);

@@ -72,11 +72,14 @@ function ajouter_tags($matches, $item) {
 		$type = ($match[3] == 'category' OR $match[3] == 'directory')
 			? 'directory':'tag';
 		$mot = supprimer_tags($match[0]);
-		if (!strlen($mot)) break;
+		if (!strlen($mot)
+		AND !strlen($mot = extraire_attribut($match[0], 'label')))
+			break;
 		// rechercher un url
 		if ($url = extraire_attribut($match[0], 'domain')
 		OR $url = extraire_attribut($match[0], 'resource')
-		OR $url = extraire_attribut($match[0], 'url'))
+		OR $url = extraire_attribut($match[0], 'url')
+		)
 			{}
 
 		## cas particuliers
@@ -86,7 +89,14 @@ function ajouter_tags($matches, $item) {
 				'http://www.flickr.com/photos/tags/'.rawurlencode($petit).'/'))
 					$tags[] = $t;
 			$mot = '';
-		} else {
+		}
+		else if (
+			// cas atom1, a faire apres flickr
+			$url = extraire_attribut($match[0], 'scheme')
+				.extraire_attribut($match[0], 'term')
+		) {
+		}
+		else {
 			# type del.icio.us
 			foreach(explode(' ', $mot) as $petit)
 				if (preg_match(',<rdf[^>]* resource=["\']([^>]*/'
@@ -281,6 +291,8 @@ function analyser_backend($rss, $url_syndic='') {
 		if (preg_match(',<([^>]*xml:)?lang(uage)?'.'>([^<>]+)<,i',
 			$item, $match))
 			$data['lang'] = trim($match[3]);
+		else if ($lang = trim(extraire_attribut($item, 'xml:lang')))
+			$data['lang'] = $lang;
 		else
 			$data['lang'] = trim($langue_du_site);
 
@@ -306,13 +318,24 @@ function analyser_backend($rss, $url_syndic='') {
 		.'(.*?)</\1>,ims',
 		$item, $matches, PREG_SET_ORDER))
 			$tags = ajouter_tags($matches, $item); # array()
+		elseif (preg_match_all(
+		',<(([a-z]+:)?(subject|category|directory|keywords?|tags?|type))[^>]*/>'
+		.',ims',
+		$item, $matches, PREG_SET_ORDER))
+			$tags = ajouter_tags($matches, $item); # array()
 		// Pieces jointes : s'il n'y a pas de microformat relEnclosure,
 		// chercher <enclosure> au format RSS et les passer en microformat
-		if (!afficher_enclosures(join(', ', $tags)))
+		if (!afficher_enclosures(join(', ', $tags))) {
 			if (preg_match_all(',<enclosure[[:space:]][^<>]+>,i',
 			$item, $matches, PREG_PATTERN_ORDER))
 				$data['enclosures'] = join(', ',
 					array_map('enclosure2microformat', $matches[0]));
+			else if (
+			preg_match_all(',<link\b[^<>]+rel=["\']?enclosure["\'][^<>]+>,i',
+			$item, $matches, PREG_PATTERN_ORDER))
+				$data['enclosures'] = join(', ',
+					array_map('enclosure2microformat', $matches[0]));
+		}
 		$data['item'] = $item;
 
 		// Nettoyer les donnees et remettre les CDATA en place
