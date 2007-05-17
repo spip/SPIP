@@ -16,7 +16,13 @@ include_spip('inc/headers');
 
 function install_etape_4_dist()
 {
-	global $email,$login,$nom,$pass, $pass_verif,$spip_lang_right;
+	global $spip_lang_right;
+
+	$login = _request('login');
+	$email = _request('email');
+	$nom = _request('nom');
+	$pass = _request('pass');
+	$pass_verif = _request('pass_verif');
 
 	if($login!='' AND ($pass!=$pass_verif OR strlen($pass)<5 OR strlen($login)<3)) {
 		echo minipres(

@@ -121,7 +121,7 @@ function install_etape_2_dist()
 		. "\n<input type='text' name='table_new' class='fondl' value=\"spip\" size='20' /></p></fieldset>\n"
 	)
 
-	. (isset($GLOBALS['table_prefix'])
+	. (($GLOBALS['table_prefix'] != 'spip')
 		? '<h3>'._L('Pr&#233;fixe de table attribu&#233; par l\'h&#233;bergeur').'</h3>'
 		: "<fieldset><legend>"._T('texte_choix_table_prefix')."</legend>\n"
 	. "<p><label for='table_prefix'>"._T('info_table_prefix')."</label></p><p>"

@@ -36,28 +36,30 @@ function install_bases(){
 		? _SPIP_CHMOD
 		: _request('chmod');
 
-
-	$link = mysql_connect($adresse_db, $login_db, $pass_db);
-
 	// Prefix des tables :
 	// contrairement a ce qui est dit dans le message (trop strict mais c'est
 	// pour notre bien), on va tolerer les chiffres en plus des minuscules
-	if (!isset($GLOBALS['table_prefix'])) {
-		$p = trim(preg_replace(',[^a-z0-9],', '',
-			strtolower(_request('tprefix'))));
-		$rappel_prefix = false;
-		if ($p AND $p != 'spip') {
-			$GLOBALS['table_prefix'] = $p;
-			$rappel_prefix = true;
-		}
-	}
+	// S'il n'est pas defini par mes_options/inc/mutualiser, on va le creer
+	// a partir de ce qui est envoye a l'installation
+	$table_prefix = ($GLOBALS['table_prefix'] != 'spip')
+		? $GLOBALS['table_prefix']
+		: trim(preg_replace(',[^a-z0-9],','',strtolower(_request('tprefix'))));
+	// S'il est vide on remet spip
+	if (!$table_prefix)
+		$table_prefix = 'spip';
+	// Et si ce n'est pas spip, on le stocke dans le config/connect.php
+	$rappel_prefix = ($table_prefix != 'spip');
+	// Enfin on l'installe pour notre connexion sur ce hit
+	$GLOBALS['table_prefix'] = $table_prefix;
+
+	$link = mysql_connect($adresse_db, $login_db, $pass_db);
 
 	echo "<"."!-- $link ";
 	echo "(".$GLOBALS['table_prefix'].")";
 
 	if ($choix_db == "new_spip") {
 		$sel_db = _request('table_new');
-		if (preg_match(',^[a-z_0-9-]+$,i', $sel_db)
+		if (preg_match(',^[a-z_0-9-]+$,i', $sel_db))
 			mysql_query("CREATE DATABASE `$sel_db`");
 	}
 	else {
@@ -68,7 +70,7 @@ function install_bases(){
 	mysql_select_db($sel_db);
 	spip_query("SELECT COUNT(*) FROM spip_meta");
 	$nouvelle = spip_sql_errno();
-	if ($nouvelle){
+	if ($nouvelle) {
 		include_spip('base/db_mysql');
 		// mettre les nouvelles install en utf-8 si mysql le supporte
 		if ($charset = spip_mysql_character_set('utf-8')){

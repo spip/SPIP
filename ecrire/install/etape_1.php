@@ -55,7 +55,7 @@ function install_etape_1_dist()
 			:"")
 
 	. (defined('_INSTALL_HOST_DB')
-	? '<h3>'._T('entree_base_donnee_1').'</h3>'
+	? '<h3>'._T('entree_base_donnee_1')._L(' attribu&eacute;e par l\'h&#233;bergeur').'</h3>'
 	: fieldset(_T('entree_base_donnee_1'),
 		array(
 			'adresse_db' => array(
@@ -67,7 +67,7 @@ function install_etape_1_dist()
 	)
 
 	. (defined('_INSTALL_USER_DB')
-	? '<h3>'._T('entree_login_connexion_1').'</h3>'
+	? '<h3>'._T('entree_login_connexion_1')._L(' attribu&eacute; par l\'h&#233;bergeur').'</h3>'
 	: fieldset(_T('entree_login_connexion_1'),
 		array(
 			'login_db' => array(
@@ -79,7 +79,7 @@ function install_etape_1_dist()
 	)
 
 	. (defined('_INSTALL_PASS_DB')
-	? '<h3>'._T('entree_mot_passe_1').'</h3>'
+	? '<h3>'._T('entree_mot_passe_1')._L(' attribu&eacute; par l\'h&#233;bergeur').'</h3>'
 	: fieldset(_T('entree_mot_passe_1'),
 		array(
 			'pass_db' => array(
