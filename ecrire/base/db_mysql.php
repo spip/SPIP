@@ -300,7 +300,7 @@ function spip_mysql_create($nom, $champs, $cles, $autoinc=false, $temporary=fals
 		$character_set .= " COLLATE ".$GLOBALS['meta']['charset_collation_sql_base'];
 
 	foreach($champs as $k => $v) {
-		if (preg_match(',([a-z]*\s*(\(\s*[0-9]*\s*\))?),i',$v,$defs)){
+		if (preg_match(',([a-z]*\s*(\(\s*[0-9]*\s*\))?(\s*binary)?),i',$v,$defs)){
 			if (preg_match(',(char|text),i',$defs[1])){
 				$v = $defs[1] . $character_set . ' ' . substr($v,strlen($defs[1]));
 			}
@@ -311,9 +311,10 @@ function spip_mysql_create($nom, $champs, $cles, $autoinc=false, $temporary=fals
 		$s = ",";
 	}
 	$temporary = $temporary ? 'TEMPORARY':'';
-	spip_query_db("CREATE $temporary TABLE IF NOT EXISTS $nom ($query" . ($keys ? ",$keys" : '') . ")".
+	$q = "CREATE $temporary TABLE IF NOT EXISTS $nom ($query" . ($keys ? ",$keys" : '') . ")".
 	($character_set?" DEFAULT $character_set":"")
-	."\n");
+	."\n";
+	spip_query_db($q);
 }
 
 // http://doc.spip.org/@spip_mysql_showtable
