@@ -54,6 +54,6 @@ style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{alig
 [(#INCLURE{fond=modeles/img}{id_document}{align=#ENV{align}}{embed=oui}{lien=#ENV{lien}}{lien_class=#ENV{lien_class}})]
 ]
 ][(#INCLUS|=={embed}|?{' '})[(#ENV{controls,''}|?{'',' '})
-[<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>][<div class='spip_doc_descriptif'>(#DESCRIPTIF)</div>]</div>
+[<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>][<div class='spip_doc_descriptif'>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</div>]</div>
 ]]
 </BOUCLE_tous>
