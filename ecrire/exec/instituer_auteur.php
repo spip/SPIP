@@ -15,19 +15,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@exec_instituer_auteur_dist
 function exec_instituer_auteur_dist()
 {
-	$script = _request('script');
 	$id_auteur = intval(_request('id_auteur'));
-	if (!preg_match('/^\w+$/', $script))
-	      {
-		include_spip('inc/minipres');
-		echo minipres();
-		exit;
-	      }
 
 	include_spip('inc/actions');
-	$r = spip_fetch_array(spip_query("SELECT statut FROM spip_auteurs WHERE id_auteur=$id_auteur"));
+	$auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
 
 	$instituer_auteur = charger_fonction('instituer_auteur', 'inc');
-	ajax_retour($instituer_auteur($id_auteur, $r['statut'], $script));
+	ajax_retour($instituer_auteur($auteur));
 }
 ?>
