@@ -46,7 +46,7 @@
     SearchHighlight.options = $.extend({exact:"exact",style_name:'hilite',style_name_suffix:true},options);
     
     if(options.engines) SearchHighlight.engines.unshift(options.engines);  
-    var q = options.keys!=undefined?options.keys.split(/[\s,\+\.]+/):SearchHighlight.decodeURL(ref,SearchHighlight.engines);
+    var q = options.keys!=undefined?options.keys.toLowerCase().split(/[\s,\+\.]+/):SearchHighlight.decodeURL(ref,SearchHighlight.engines);
     if(q && q.join("")) {
       SearchHighlight.buildReplaceTools(q);
       return this.each(function(){
@@ -81,7 +81,7 @@
         if(n[0].test(URL)) {
           var match = URL.match(n[1]);
           if(match) {
-            query = match[1];
+            query = match[1].toLowerCase();
             return false;
           }
         }
@@ -116,14 +116,15 @@
       }
       return q;
     },
+    escapeRegEx : /((?:\\{2})*)([[\]{}*?|])/g, //the special chars . and + are already gone at this point because they are considered split chars
     buildReplaceTools : function(query) {
-        re = new Array();
-        for (var i = 0, l=query.length; i < l; i ++) {
-            query[i] = SearchHighlight.replaceAccent(query[i].toLowerCase());
-            re.push(query[i]);
-        }
+        var re = [], regex;
+        $.each(query,function(i,n){
+            if(n = SearchHighlight.replaceAccent(n).replace(SearchHighlight.escapeRegEx,"$1\\$2"))
+              re.push(n);        
+        });
         
-        var regex = re.join("|");
+        regex = re.join("|");
         switch(SearchHighlight.options.exact) {
           case "exact":
             regex = '\\b(?:'+regex+')\\b';
@@ -134,10 +135,10 @@
         }    
         SearchHighlight.regex = new RegExp(regex, "gi");
         
-        for (var i = 0, l = query.length; i < l; i ++) {
-            SearchHighlight.subs[query[i]] = SearchHighlight.options.style_name+
+        $.each(re,function(i,n){
+            SearchHighlight.subs[n] = SearchHighlight.options.style_name+
               (SearchHighlight.options.style_name_suffix?i+1:''); 
-        }        
+        });       
     },
     nosearch: /s(?:cript|tyle)|textarea/i,
     hiliteElement: function(el, query) {
@@ -206,7 +207,7 @@
                 index = match.index+match[0].length;
               }
               if(newtext) {
-                //add ther last part of the text
+                //add the last part of the text
                 newtext += text.substring(index);
                 var repl = $.merge([],$("<span>"+newtext+"</span>")[0].childNodes);
                 endIndex += repl.length-1;
