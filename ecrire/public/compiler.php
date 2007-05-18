@@ -661,7 +661,7 @@ function code_boucle(&$boucles, $id, $nom)
 
 // http://doc.spip.org/@public_compiler_dist
 function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
-  global  $table_des_tables, $tables_des_serveurs_sql, $tables_principales,
+  global  $table_des_tables, $tables_des_serveurs_sql, $tables_principales, $tables_auxiliaires,
     $tables_jointures;
 
 	// Pre-traitement : reperer le charset du squelette, et le convertir
@@ -695,6 +695,10 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 		    if ((!$boucles[$id]->jointures)
 			AND (is_array($x = $tables_jointures['spip_' . $x])))
 		      $boucles[$id]->jointures = $x;
+		  } else if (isset($tables_auxiliaires[$type])) {
+		  	// table auxiliaire
+		    $boucles[$id]->id_table = $type;
+		    $boucles[$id]->primary = $tables_auxiliaires[$type]['key']["PRIMARY KEY"];
 		  } else {
 			// table non Spip.
 		    $boucles[$id]->id_table = $type;
