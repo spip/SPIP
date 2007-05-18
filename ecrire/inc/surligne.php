@@ -41,7 +41,7 @@ function surligner_mots($page) {
     
   $ref = $_SERVER['HTTP_REFERER'];
   //avoid a js injection
-  $surcharge_surligne = preg_replace(",(?<!\\\\)',","\'",$_GET["var_recherche"]);
+  $surcharge_surligne = preg_replace(",(?:\\\\{2})*(?:\\\\)',","\'",$_GET["var_recherche"]);
   foreach($surlignejs_engines as $engine) 
     if($surcharge_surligne || (preg_match($engine[0],$ref) && preg_match($engine[1],$ref))) { 
       //good referrer found or var_recherche is not null
