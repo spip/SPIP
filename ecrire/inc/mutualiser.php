@@ -72,6 +72,7 @@ function demarrer_site($site = '', $options = array()) {
 // Cette fonction cree un prefixe acceptable par MySQL a partir du nom
 // du site ; a utiliser comme prefixe des tables, comme suffixe du nom
 // de la base de donnees ou comme prefixe des cookies...
+// http://doc.spip.org/@prefixe_mutualisation
 function prefixe_mutualisation($site) {
 	static $prefix;
 

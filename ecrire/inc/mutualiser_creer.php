@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-// http://doc.spip.org/@echec_init_mutualisation
+// http://doc.spip.org/@mutualiser_creer
 function mutualiser_creer($e, $options) {
 	include_spip('inc/minipres');
 	$GLOBALS['meta']["charset"] = 'utf-8'; // pour que le mail fonctionne

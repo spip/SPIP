@@ -91,6 +91,7 @@ function choix_statut_auteur($statut, $id_auteur, $ancre) {
 	. "</select>\n";
 }
 
+// http://doc.spip.org/@liste_statuts_instituer
 function liste_statuts_instituer($courant, $id_auteur) {
 	$recom = array("info_administrateurs" => _T('item_administrateur_2'),
 		       "info_redacteurs" =>  _T('intem_redacteur'),
