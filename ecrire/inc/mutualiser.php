@@ -24,8 +24,10 @@ function demarrer_site($site = '', $options = array()) {
 	$options = array_merge(
 		array(
 			'creer_site' => false,
-			'cookie_prefix' => true,
-			'table_prefix' => true,
+			'creer_base' => false,
+			'mail' => '',
+			'table_prefix' => false,
+			'cookie_prefix' => false,
 			'repertoire' => 'sites'
 		),
 		$options
@@ -33,20 +35,15 @@ function demarrer_site($site = '', $options = array()) {
 
 	// Le prefixe = max 10 caracteres a-z0-9, qui ressemblent au domaine
 	// et ne commencent pas par un chiffre
-	if ($options['cookie_prefix'] OR $options['table_prefix']) {
-		$prefix = preg_replace(',^www\.|[^a-z0-9],', '', strtolower($site));
-		$prefix = substr($prefix, 0, 10);
-		if (!preg_match(',^[a-z],', $prefix))
-			$prefix = 'a'.$prefix;
-		if ($options['cookie_prefix'])
-			$GLOBALS['cookie_prefix'] = $prefix;
-		if ($options['table_prefix'])
-			$GLOBALS['table_prefix'] = $prefix;
-	}
+	if ($options['cookie_prefix'])
+		$GLOBALS['cookie_prefix'] = prefixe_mutualisation($site);
+	if ($options['table_prefix'])
+		$GLOBALS['table_prefix'] = prefixe_mutualisation($site);
 
 	if (!is_dir($e = _DIR_RACINE . $options['repertoire'].'/' . $site . '/')) {
 		spip_initialisation();
-		echec_init_mutualisation($e, $options);
+		include_spip('inc/mutualiser_creer');
+		mutualiser_creer($e, $options);
 		exit;
 	}
 
@@ -72,55 +69,20 @@ function demarrer_site($site = '', $options = array()) {
 
 }
 
+// Cette fonction cree un prefixe acceptable par MySQL a partir du nom
+// du site ; a utiliser comme prefixe des tables, comme suffixe du nom
+// de la base de donnees ou comme prefixe des cookies...
+function prefixe_mutualisation($site) {
+	static $prefix;
 
-// http://doc.spip.org/@echec_init_mutualisation
-function echec_init_mutualisation($e, $options) {
-	include_spip('inc/minipres');
-
-	if ($options['creer_site']) {
-		$ok_dir =
-		is_dir(_DIR_RACINE . $options['repertoire'])
-		AND is_writable(_DIR_RACINE . $options['repertoire']);
-
-		$ok = $ok_dir
-		AND mkdir($e, _SPIP_CHMOD)
-		AND chmod($e, _SPIP_CHMOD)
-		AND mkdir($e._NOM_PERMANENTS_INACCESSIBLES, _SPIP_CHMOD)
-		AND mkdir($e._NOM_PERMANENTS_ACCESSIBLES, _SPIP_CHMOD)
-		AND mkdir($e._NOM_TEMPORAIRES_INACCESSIBLES, _SPIP_CHMOD)
-		AND mkdir($e._NOM_TEMPORAIRES_ACCESSIBLES, _SPIP_CHMOD)
-		AND chmod($e._NOM_PERMANENTS_INACCESSIBLES, _SPIP_CHMOD)
-		AND chmod($e._NOM_PERMANENTS_ACCESSIBLES, _SPIP_CHMOD)
-		AND chmod($e._NOM_TEMPORAIRES_INACCESSIBLES, _SPIP_CHMOD)
-		AND chmod($e._NOM_TEMPORAIRES_ACCESSIBLES, _SPIP_CHMOD);
-
-		echo minipres(
-			_L('Creation du r&eacute;pertoire du site (<tt>'.$e.'</tt>)'),
-
-				"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n"
-				.'<h3>'.($ok
-					? _L('OK, vous pouvez <a href="'.generer_url_ecrire('install').'">installer votre site</a>.')
-					: _L('erreur')
-				).'</h3>'
-				. (!$ok_dir ? _L('Le r&#233;pertoire <tt>'.$options['repertoire'].'/</tt> n\'est pas accessible en &#233;criture') : '')
-		);
-	} else {
-		echo minipres(
-			_L('Le r&eacute;pertoire du site (<tt>'.$e.'</tt>) n\'existe pas'),
-			"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n".
-			'<h3>'
-			._L('Veuillez créer le répertoire '.$e.' et ses sous répertoires:')
-			.'</h3>'
-			.'<ul>'
-			.'<li>'.$e._NOM_PERMANENTS_INACCESSIBLES.'</li>'
-			.'<li>'.$e._NOM_PERMANENTS_ACCESSIBLES.'</li>'
-			.'<li>'.$e._NOM_TEMPORAIRES_INACCESSIBLES.'</li>'
-			.'<li>'.$e._NOM_TEMPORAIRES_ACCESSIBLES.'</li>'
-			.'</ul>'
-		);
+	if (!isset($prefix)) {
+		$prefix = preg_replace(',^www\.|[^a-z0-9],', '', strtolower($site));
+		$prefix = substr($prefix, 0, 10);
+		if (!preg_match(',^[a-z],', $prefix))
+			$prefix = 'a'.$prefix;
 	}
+	return $prefix;
+
 }
-
-
 
 ?>
