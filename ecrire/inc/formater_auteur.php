@@ -12,7 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
 //
 // Construit un tableau des 5 informations principales sur un auteur,
 // avec des liens vers les scripts associes:
@@ -20,8 +19,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // 2. l'icone du mail avec un lien mailto ou a defaut la messagerie de Spip
 // 3. le nom, avec lien vers la page complete des informations
 // 4. le mot "site" avec le lien vers le site Web personnelle
-// 5. le nombre d'articles publies
+// 5. le nombre d'objets publies
 //
+
+// Un auteur sans autorisation de modification de soi  est un visiteur;
+// il n'a pas de messagerie interne, et n'a publie que des messages de forum
 
 // http://doc.spip.org/@inc_formater_auteur_dist
 function inc_formater_auteur_dist($id_auteur) {
@@ -54,7 +56,7 @@ function inc_formater_auteur_dist($id_auteur) {
 	if ($url_site_auteur = $row["url_site"]) $vals[] =  "<a href='$url_site_auteur'>"._T('info_site_min')."</a>";
 	else $vals[] =  "&nbsp;";
 
-	if ($row['statut'] != '6forum') {
+	if (autoriser('modifier', 'auteur', $id_auteur, $row)) {
 	  $cpt = spip_fetch_array(spip_query("SELECT COUNT(articles.id_article) AS n FROM spip_auteurs_articles AS lien, spip_articles AS articles WHERE lien.id_auteur=$id_auteur AND articles.id_article=lien.id_article AND articles.statut IN " . ($connect_statut == "0minirezo" ? "('prepa', 'prop', 'publie', 'refuse')" : "('prop', 'publie')") . " GROUP BY lien.id_auteur"), SPIP_NUM);
 	  $t = _T('info_article_2');
 	  $t1 = _T('info_1_article'); 
@@ -78,9 +80,8 @@ function formater_auteur_mail($row, $id_auteur)
 {
 	global $spip_lang_rtl;
 
-	$email = $row['email'];
-	if (($row['statut'] == '6forum') || ($row['statut'] == '5poubelle'))
-		$href= 'mailto:' . $email;
+	if (!autoriser('modifier', 'auteur', $id_auteur, $row))
+		$href= 'mailto:' . $row['email'];
 	else $href = generer_action_auteur("editer_message","normal/$id_auteur");
 	return "<a href='$href' title=\""
 	  .  _T('info_envoyer_message_prive')

@@ -20,21 +20,17 @@ function configuration_visiteurs_dist()
 {
 	global $spip_lang_left ;
 
-	if ($n = ($forums_publics<>'abo')) {
-			$n = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_articles WHERE accepter_forum='abo' LIMIT 1"));
-			$n = !$n['n'];
-	}
-	if ($n) {
-		$res = "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
-		$res .= "\n<tr><td class='verdana2'>";
-		$res .= _T('info_question_accepter_visiteurs');
-		$res .= "</td></tr>";
-		$res .= "\n<tr><td style='text-align: $spip_lang_left' class='verdana2'>";
-		$res .= afficher_choix('accepter_visiteurs', $GLOBALS['meta']['accepter_visiteurs'],
+	if (!avoir_visiteurs()) {
+		$res = "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">"
+		. "\n<tr><td class='verdana2'>"
+		. _T('info_question_accepter_visiteurs')
+		. "</td></tr>"
+		. "\n<tr><td style='text-align: $spip_lang_left' class='verdana2'>"
+		. afficher_choix('accepter_visiteurs', $GLOBALS['meta']['accepter_visiteurs'],
 				       array('oui' => _T('info_option_accepter_visiteurs'),
-					'non' => _T('info_option_ne_pas_accepter_visiteurs')));
-		$res .= "</td></tr>\n";
-		$res .= "</td></tr></table>\n";
+					'non' => _T('info_option_ne_pas_accepter_visiteurs')))
+		. "</td></tr>\n"
+		. "</td></tr></table>\n";
 
 		$res = ajax_action_post('configurer', 'visiteurs', 'config_contenu','',$res);
 	} else {

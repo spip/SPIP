@@ -159,8 +159,8 @@ function autoriser_rubrique_creersitedans_dist($faire, $type, $id, $qui, $opt) {
 		AND $GLOBALS['meta']['activer_sites'] != 'non'
 		AND (
 			$qui['statut']=='0minirezo'
-			OR ($qui['statut']=='1comite' AND $GLOBALS['meta']["proposer_sites"]>=1)
-			OR ($qui['statut']=='6forum' AND $GLOBALS['meta']["proposer_sites"]>=2) );
+			OR ($GLOBALS['meta']["proposer_sites"] >= 
+			    ($qui['statut']=='1comite' ? 1 : 2)));
 }
 
 // Autoriser a modifier un site

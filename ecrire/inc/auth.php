@@ -71,9 +71,9 @@ function auth_rubrique($id_auteur, $statut)
 function acces_statut($id_auteur, $statut, $bio)
 {
 	if ($statut == 'nouveau') {
-		$statut = ($bio ? ($bio == 'redac' ? '1comite' : '6forum'):
-			   (($GLOBALS['meta']['accepter_inscriptions'] == 'oui') ? '1comite' : '6forum'));
-		spip_query("UPDATE spip_auteurs SET bio='', statut='$statut'	WHERE id_auteur=$id_auteur");
+		$statut = $bio ? $bio :
+		  (($GLOBALS['meta']['accepter_inscriptions'] == 'oui') ? '1comite' : '6forum');
+		spip_query("UPDATE spip_auteurs SET bio='', statut=" . _q($statut) . " WHERE id_auteur=$id_auteur");
 	}
 	return $statut;
 }

@@ -151,7 +151,7 @@ function determiner_non_auteurs($type, $id, $cond_les_auteurs, $order)
 	if (strlen($cond))
 		$cond = "id_auteur NOT IN (" . substr($cond,1) . ') AND ';
 
-	return spip_query("SELECT * FROM spip_auteurs WHERE $cond" . "statut!='5poubelle' AND statut!='6forum' AND statut!='nouveau' ORDER BY $order");
+	return spip_query("SELECT * FROM spip_auteurs WHERE $cond" . "statut='0minirezo' OR statut='1comite' ORDER BY $order");
 }
 
 // http://doc.spip.org/@rechercher_auteurs_objet

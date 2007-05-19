@@ -22,7 +22,7 @@ function balise_FORMULAIRE_INSCRIPTION ($p) {
 	return calculer_balise_dynamique($p, 'FORMULAIRE_INSCRIPTION', array());
 }
 
-// args[0] peut valoir "redac" ou "forum" 
+// args[0] un statut d'auteur (1comite par defaut)
 // args[1] indique la rubrique eventuelle de proposition
 // args[2] indique le focus eventuel
 // [(#FORMULAIRE_INSCRIPTION{nom_inscription, #ID_RUBRIQUE})]
@@ -31,7 +31,7 @@ function balise_FORMULAIRE_INSCRIPTION ($p) {
 function balise_FORMULAIRE_INSCRIPTION_stat($args, $filtres) {
 	list($mode, $id, $focus) = $args;
 	//initialiser_mode_inscription
-	if(!$mode) $mode = $GLOBALS['meta']['accepter_inscriptions'] == 'oui' ? 'redac' : ''; 
+	if(!$mode) $mode = $GLOBALS['meta']['accepter_inscriptions'] == 'oui' ? '1comite' : ''; 
 	if (!test_mode_inscription($mode))
 		return '';
 	else return array($mode, $focus, $id);
@@ -84,8 +84,9 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus, $id=0) {
 // http://doc.spip.org/@test_mode_inscription
 function test_mode_inscription($mode) {
 
-	return (($mode == 'redac' AND $GLOBALS['meta']['accepter_inscriptions'] == 'oui')
-		OR ($mode == 'forum'
+  return (($mode == '1comite'  OR ($mode == 'redac') // redac: compatibilite
+		AND $GLOBALS['meta']['accepter_inscriptions'] == 'oui')
+	  OR ($mode == addslashes($mode) // mode libre mais syntaxe propre
 		AND ($GLOBALS['meta']['accepter_visiteurs'] == 'oui'
 			OR $GLOBALS['meta']['forums_publics'] == 'abo')));
 }

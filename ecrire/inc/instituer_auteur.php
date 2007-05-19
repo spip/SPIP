@@ -68,71 +68,55 @@ function choix_statut_auteur($statut, $id_auteur, $ancre) {
 	null, array('statut' => '?')))
 		return '';
 
+	$autres = "";
+	// Chercher tous les statuts non standards.
+	// Le count(*) ne sert pas, mais en son absence
+	// SQL (enfin, une version de SQL) renvoie un ensemble vide !
+	$q = spip_query($r ="SELECT statut, count(*) FROM spip_auteurs WHERE statut NOT IN ('" . join("','", $GLOBALS['liste_des_statuts']) . "') GROUP BY statut");
+	while ($r = spip_fetch_array($q, SPIP_NUM)) {
+		$nom = htmlentities($r[0]);
+		$autres .= mySel($nom, $statut, _T('info_statut_auteur_autre') . ' ' . $nom);
+	}
+
 	// Calculer le menu
-	$menu = "<select name='statut' size='1' class='fondl'
-		onchange=\"(this.options[this.selectedIndex].value == '0minirezo')?jQuery('#$ancre').slideDown():jQuery('#$ancre:visible').slideUp();\">";
-
-	// A-t-on le droit de promouvoir cet auteur comme admin ?
-	if (autoriser('modifier', 'auteur', intval($id_auteur),
-	null, array('statut' => '0minirezo'))) {
-		$menu .= "\n<option" .
-			mySel("0minirezo",$statut) .
-			">" . _T('item_administrateur_2')
-			. '</option>';
-	}
-
-	// Ajouter le choix "comite"
-	$menu .=
-		"\n<option" .
-		mySel("1comite",$statut) .
-		">" .
-		_T('intem_redacteur') .
-		'</option>';
-
-	// Ajouter le choix "visiteur" si :
-	// - l'auteur est visiteur
-	// - OU, on accepte les visiteurs (ou forums sur abonnement)
-	// - OU il y a des visiteurs dans la base
-	$x = (($statut == '6forum')
-	      OR ($GLOBALS['meta']['accepter_visiteurs'] == 'oui')
-	      OR ($GLOBALS['meta']['forums_publics'] == 'abo'));
-	if (!$x) {
-	  $x = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_auteurs WHERE statut='6forum' LIMIT 1"));
-	  $x = $x['n'];
-	}
-	if ($x)
-		$menu .= "\n<option" .
-			mySel("6forum",$statut) .
-			">" .
-			_T('item_visiteur') .
-			'</option>';
-
-	// Ajouter l'option "nouveau" si l'auteur n'est pas confirme
-	if ($statut == 'nouveau')
-		$menu .= "\n<option" .
-			mySel('nouveau',$statut) .
-			">" .
-			_T('info_statut_auteur_a_confirmer') .
-			'</option>';
-
-	// Ajouter l'option "autre" si le statut est inconnu
-	elseif (!in_array($statut, $GLOBALS['liste_des_statuts']))
-		$menu .= "\n<option" .
-			mySel('autre','autre') .
-			">" .
-			_T('info_statut_auteur_autre').' '.htmlentities($statut).
-			'</option>';
-
-	$menu .= "\n<option" .
+	return "<select name='statut' size='1' class='fondl'
+		onchange=\"(this.options[this.selectedIndex].value == '0minirezo')?jQuery('#$ancre').slideDown():jQuery('#$ancre:visible').slideUp();\">"
+	. liste_statuts_instituer($statut, $id_auteur) 
+	. $autres
+	. "\n<option" .
 		mySel("5poubelle",$statut) .
-		" style='background:url(" . _DIR_IMG_PACK . "rayures-sup.gif)'>&gt; "
+		" class='danger'>&gt; "
 		._T('texte_statut_poubelle') .
-		'</option>' .
-		"</select>\n";
+		'</option>'
+	. "</select>\n";
+}
+
+function liste_statuts_instituer($courant, $id_auteur) {
+	$recom = array("info_administrateurs" => _T('item_administrateur_2'),
+		       "info_redacteurs" =>  _T('intem_redacteur'),
+		       "info_visiteurs" => _T('item_visiteur'));
+	
+	// A-t-on le droit de promouvoir cet auteur comme admin 
+	// et y a-t-il des visiteurs ?
+
+	$droits = array("info_administrateurs" =>
+		       autoriser('modifier', 'auteur', $id_auteur,
+				 null, array('statut' => '0minirezo')),
+		       "info_redacteurs" => true,
+		       "info_visiteurs" => avoir_visiteurs());
+	
+	$menu = '';
+	foreach($GLOBALS['liste_des_statuts'] as $k => $v) {
+		if (isset($recom[$k]) AND $droits[$k])
+			$menu .=  mySel($v, $courant, $recom[$k]);
+
+	}
+	// Ajouter l'option "nouveau" si l'auteur n'est pas confirme
+	if ($courant == 'nouveau')
+		$menu .= mySel('nouveau',$courant,_T('info_statut_auteur_a_confirmer'));
 
 	return $menu;
 }
-
 
 // http://doc.spip.org/@choix_rubriques_admin_restreint
 function choix_rubriques_admin_restreint($auteur) {
