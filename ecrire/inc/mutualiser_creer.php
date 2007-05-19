@@ -130,7 +130,7 @@ function mutualiser_creer($e, $options) {
 				include_spip('inc/mail');
 				envoyer_mail($options['mail'],
 					_L('Creation du site '.joli_repertoire($e)),
-					_L('Les répertoires du site '.$e.' ont &#233;t&#233; cr&#233;&#233;s.'),
+					_L('Les r&#233;pertoires du site '.$e.' ont &#233;t&#233; cr&#233;&#233;s.'),
 					$options['mail']
 				);
 			}
@@ -155,7 +155,7 @@ function mutualiser_creer($e, $options) {
 			_L('Le r&eacute;pertoire du site (<tt>'.joli_repertoire($e).'</tt>) n\'existe pas'),
 			"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n".
 			'<h3>'
-			._L('Veuillez créer le répertoire '.joli_repertoire($e).' et ses sous répertoires:')
+			._L('Veuillez cr&#233;er le r&#233;pertoire '.joli_repertoire($e).' et ses sous r&#233;pertoires:')
 			.'</h3>'
 			.'<ul>'
 			.'<li>'.joli_repertoire($e)._NOM_PERMANENTS_INACCESSIBLES.'</li>'
