@@ -97,8 +97,8 @@ function http_no_cache() {
 	header("Pragma: no-cache");
 }
 
+/* Code mort: le statut 204 c'est fait pour.
 
-// envoi de l'image demandee dans le code ci-dessus
 // http://doc.spip.org/@envoie_image_vide
 function envoie_image_vide() {
 	$image = pack("H*", "47494638396118001800800000ffffff00000021f90401000000002c0000000018001800000216848fa9cbed0fa39cb4da8bb3debcfb0f86e248965301003b");
@@ -110,6 +110,7 @@ function envoie_image_vide() {
 	echo $image;
 	flush();
 }
+*/
 
 // http://doc.spip.org/@generer_test_dirs
 function generer_test_dirs($arg='', $redirect=false)

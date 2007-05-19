@@ -26,7 +26,8 @@ function action_cookie_dist() {
 	if (_request('change_session') == 'oui') {
 		$session = charger_fonction('session', 'inc');
 		$session(true);
-		envoie_image_vide();
+		spip_log("statut 204 pour " . $_SERVER['REQUEST_URI']);
+		http_status(204); // No Content
 		return;
 	}
 
