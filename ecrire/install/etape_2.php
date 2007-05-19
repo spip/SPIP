@@ -112,7 +112,7 @@ function install_etape_2_dist()
 	)
 
 	. (defined('_INSTALL_NAME_DB')
-		? '<h3>'._L('Nom de la base attribu&#233; par l\'h&#233;bergeur').'</h3>'
+		? '<h3>'._L('Nom de la base attribu&#233; par l\'h&#233;bergeur : <tt>'._INSTALL_NAME_DB.'</tt>').'</h3>'
 		: "\n<fieldset><legend>"._T('texte_choix_base_1')."</legend>\n"
 		. $res
 		. "\n<input name=\"choix_db\" value=\"new_spip\" type='radio' id='nou'"
@@ -123,7 +123,7 @@ function install_etape_2_dist()
 
 	. ((defined('_INSTALL_TABLE_PREFIX')
 	OR $GLOBALS['table_prefix'] != 'spip')
-		? '<h3>'._L('Pr&#233;fixe de table attribu&#233; par l\'h&#233;bergeur').'</h3>'
+		? '<h3>'._L('Pr&#233;fixe de table attribu&#233; par l\'h&#233;bergeur : <tt>'.$GLOBALS['table_prefix'].'</tt>').'</h3>'
 		: "<fieldset><legend>"._T('texte_choix_table_prefix')."</legend>\n"
 	. "<p><label for='table_prefix'>"._T('info_table_prefix')."</label></p><p>"
 	. "\n<input type='text' id='tprefix' name='tprefix' class='fondl' value='"
