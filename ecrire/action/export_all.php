@@ -45,7 +45,7 @@ function action_export_all_dist()
 		  // suite=1 ne sert qu'a distinguer cette redirection
 		  // d'avec l'appel initial sinon FireFox croit malin
 		  // d'optimiser la redirection
-		  redirige_par_entete(generer_url_ecrire('export_all',"&suite=1"));
+		  redirige_par_entete(generer_url_ecrire('export_all',"suite=1", true));
 		} else {
 		  echo minipres(_T('info_sauvegarde'),
 				"<p>".

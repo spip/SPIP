@@ -17,9 +17,7 @@ include_spip('inc/flock');
 include_spip('inc/actions');
 include_spip('inc/export');
 
-
 $GLOBALS['flag_ob_flush'] = function_exists('ob_flush');
-
 
 // http://doc.spip.org/@exec_export_all_dist
 function exec_export_all_dist()
@@ -105,9 +103,15 @@ function exec_export_all_dist()
 
 	// Les sauvegardes partielles prennent le temps d'indiquer les logos
 	// Instancier une fois pour toutes, car on va boucler un max.
-	if ($GLOBALS['connect_id_rubrique'])
+	// Completer jusqu'au secteur (sans prendre les soeurs) pour pouvoir
+	// resituer dans l'arborescence
+	if ($GLOBALS['connect_id_rubrique']) {
 		$GLOBALS['chercher_logo'] = charger_fonction('chercher_logo', 'inc',true);
-	else	$GLOBALS['chercher_logo'] = false;
+		$les_rubriques = complete_secteurs($GLOBALS['connect_id_rubrique']);
+	} else {
+		$GLOBALS['chercher_logo'] = false;
+		$les_rubriques = '';
+	}
 
 	foreach($tables_for_dump as $table){
 		if ($etape_actuelle <= $etape) {
@@ -117,7 +121,7 @@ function exec_export_all_dist()
 		  echo "\n<br /><strong>",$etape, '. ', $table,"</strong> ";
 		  if (!$r) echo _T('texte_vide');
 		  else
-		    export_objets($table, $etape, $sous_etape,$dir, $archive, $gz, $r);
+		    export_objets($table, $etape, $sous_etape,$dir, $archive, $gz, $r, $les_rubriques);
 		  if ($GLOBALS['flag_ob_flush']) @ob_flush();
 		  flush();
 		  $sous_etape = 0;
@@ -137,4 +141,19 @@ function exec_export_all_dist()
 	echo install_fin_html();
 }
 
+function complete_secteurs($les_rubriques)
+{
+	foreach($les_rubriques as $r) {
+		do {
+			$r = spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$r");
+			$r = spip_fetch_array($r, SPIP_NUM);
+			if ($r AND $r = $r[0]) {
+				if (isset($les_rubriques[$r]))
+					$r = false;
+				else  $les_rubriques[$r] = $r;
+			}
+		} while ($r);
+	}
+	return $les_rubriques;
+}
 ?>
