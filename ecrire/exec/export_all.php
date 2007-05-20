@@ -141,6 +141,7 @@ function exec_export_all_dist()
 	echo install_fin_html();
 }
 
+// http://doc.spip.org/@complete_secteurs
 function complete_secteurs($les_rubriques)
 {
 	foreach($les_rubriques as $r) {
