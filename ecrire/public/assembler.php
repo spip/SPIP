@@ -363,6 +363,7 @@ function f_admin ($texte) {
 }
 
 //ajoute a la volee scripts a le squelette jquery.js.html
+// http://doc.spip.org/@ajouter_js_affichage_final
 function ajouter_js_affichage_final($page,$scripts,$inline = false) {
   if(!$scripts || (!$inline && !preg_match(",\w+\|?,",$scripts)) || ($inline && !preg_match(",^\s*<script.*</script>\s*$,Us",$scripts))) {
     spip_log("ajouter_js_afficaghe_final interdite $scripts");
@@ -382,6 +383,7 @@ function ajouter_js_affichage_final($page,$scripts,$inline = false) {
 
 //verifie si le squelette jquery.js.html est appelle dans un flux de page et donnee 
 //false ou un tableau avec la position et la chaine de l'appelle
+// http://doc.spip.org/@jquery_chargee
 function jquery_chargee($page) {
     $pos_debut_head=strpos($page,"<head>");
     $pos_fin_head=strpos($page,"</head>",$pos_debut_head);
@@ -397,6 +399,7 @@ function jquery_chargee($page) {
     return false;
 }
 
+// http://doc.spip.org/@analyse_js_ajoutee
 function analyse_js_ajoutee($page) {
   //verifie si jquery.js.html est chargee
   $corps = $page['texte'];
@@ -442,6 +445,7 @@ function analyse_js_ajoutee($page) {
   return $page;
 }
 
+// http://doc.spip.org/@push_script
 function push_script(&$scripts,$script,$inline = false) {
   if(($inline && preg_match(",^\s*<script.*</script>\s*$,Us",$script)) || (!$inline && preg_match(",^\w+$,",$script)))
     $scripts[]= $script;
