@@ -51,15 +51,15 @@ static $my_sites;
 function afficher_numero_edit($id, $key, $type,$row=NULL) {
 	global $spip_lang_right, $spip_lang_left;
 	static $numero , $style='' ;
-	if ($type=='syndic_article'){
+	if ($type=='syndic_article') {
+		$redirect = _request('id_syndic') ? 'id_syndic='._request('id_syndic') : '';
 		if (autoriser('modifier',$type,$id)) {
-			$redirect = self();	
 			if ($row['statut'] == "publie"){
-			  $s =  "[<a href='". redirige_action_auteur('instituer_syndic',"$id-refuse", $GLOBALS['exec'], $redirect) . "'><span style='color: black'>"._T('info_bloquer_lien')."</span></a>]";
+			  $s =  "[<a href='". redirige_action_auteur('instituer_syndic',"$id-refuse", _request('exec'), $redirect) . "'><span style='color: black'>"._T('info_bloquer_lien')."</span></a>]";
 			
 			}
 			else if ($row['statut'] == "refuse"){
-			  $s =  "[<a href='". redirige_action_auteur('instituer_syndic',"$id-publie", $GLOBALS['exec'], $redirect) . "'>"._T('info_retablir_lien')."</a>]";
+			  $s =  "[<a href='". redirige_action_auteur('instituer_syndic',"$id-publie", _request('exec'), $redirect) . "'>"._T('info_retablir_lien')."</a>]";
 			}
 			else if ($row['statut'] == "off"
 			AND $my_sites[$id_syndic]['miroir'] == 'oui') {
@@ -67,7 +67,7 @@ function afficher_numero_edit($id, $key, $type,$row=NULL) {
 			}
 			else /* 'dispo' ou 'off' (dans le cas ancien site 'miroir') */
 			{
-			  $s = "[<a href='". redirige_action_auteur('instituer_syndic',"$id-publie", $GLOBALS['exec'], $redirect) . "'>"._T('info_valider_lien')."</a>]";
+			  $s = "[<a href='". redirige_action_auteur('instituer_syndic',"$id-publie", _request('exec'), $redirect) . "'>"._T('info_valider_lien')."</a>]";
 			}
 			return $s;
 		}		
