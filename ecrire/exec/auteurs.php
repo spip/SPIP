@@ -146,7 +146,7 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 	  $res .= auteurs_href(http_img_pack('admin-12.gif', $t, "class='lang'"),"tri=statut$arg", " title=\"$t\"");
 	}
 
-	$res .= "</td><td style='width: 20px'></td><td colspan='2'>";
+	$res .= "</td><td style='width: 20px'></td><td>";
 
 	if ($tri=='nom')
 		$res .= '<b>'._T('info_nom').'</b>';
@@ -154,6 +154,13 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 		$res .= auteurs_href(_T('info_nom'), "tri=nom$arg", " title='"._T('lien_trier_nom'). "'");
 
 	$res .= "</td><td>";
+
+	if ($tri=='site')
+		$res .= '<b>'._T('info_site').'</b>';
+	else
+		$res .= auteurs_href(_T('info_site'), "tri=site$arg", " title='"._T('info_site'). "'");
+
+	$res .= '</td><td>';
 
 	$col = statut_min_redac($statut) ? _T('info_articles') : _T('message') ;
 
@@ -270,6 +277,10 @@ case 'nombre':
 	$sql_order = ' compteur DESC, unom';
 	break;
 
+case 'site':
+	$sql_order = ' site, unom';
+	break;
+
 case 'statut':
 	$sql_order = ' statut, unom';
 	break;
@@ -285,7 +296,7 @@ default:
 // La requete de base est tres sympa
 // (pour les visiteurs, ca postule que les messages concernent des articles)
 
- $row = spip_query("SELECT							aut.id_auteur AS id_auteur,							aut.statut AS statut,								aut.nom AS nom,								UPPER(aut.nom) AS unom,							count(lien.id_article) as compteur							$sql_sel									FROM spip_auteurs as aut " . ($visit ?		 			"LEFT JOIN spip_forum AS lien ON aut.id_auteur=lien.id_auteur " :		("LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur	 LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)")) .	" WHERE $sql_visible GROUP BY aut.id_auteur ORDER BY $sql_order");
+ $row = spip_query("SELECT							aut.id_auteur AS id_auteur,							aut.statut AS statut,								aut.nom_site AS site, aut.nom AS nom,								UPPER(aut.nom) AS unom,							count(lien.id_article) as compteur							$sql_sel									FROM spip_auteurs as aut " . ($visit ?		 			"LEFT JOIN spip_forum AS lien ON aut.id_auteur=lien.id_auteur " :		("LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur	 LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)")) .	" WHERE $sql_visible GROUP BY aut.id_auteur ORDER BY $sql_order");
  return $row;
 }
 
@@ -297,6 +308,11 @@ function afficher_n_auteurs($auteurs) {
 	foreach ($auteurs as $row) {
 
 		list($s, $mail, $nom, $w, $p) = $formater_auteur($row['id_auteur']);
+		if ($w) {
+		  if (preg_match(',^([^>]*>)[^<]*(.*)$,', $w,$r)) {
+		    $w = $r[1] . substr($row['site'],0,20) . $r[2];
+		  }
+		}
 		$res .= "\n<tr class='toile_gris_leger'>"
 		. "\n<td style='border-top: 1px solid #cccccc;'>"
 		. $s
