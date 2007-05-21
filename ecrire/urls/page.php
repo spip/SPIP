@@ -74,21 +74,38 @@ function recuperer_parametres_url(&$fond, $url) {
 	global $contexte;
 
 	// Ce bloc gere les urls page et la compatibilite avec les "urls standard"
-	if ($fond=='sommaire'
-	AND preg_match(
-	',^[^?]*[?/](article|rubrique|breve|mot|site|auteur)(?:\.php3?)?.*?([0-9]+),',
-	$url, $regs)) {
-		$fond = $regs[1];
-		if ($regs[1] == 'site') {
-			if (!isset($contexte['id_syndic']))
-				$contexte['id_syndic'] = $regs[2];
-		} else {
-			if (!isset($contexte['id_'.$fond]))
-				$contexte['id_'.$fond] = $regs[2];
+	if ($fond=='sommaire'){
+		if (preg_match(
+		',^[^?]*[?/](article|rubrique|breve|mot|site|auteur)(?:\.php3?)?.*?([0-9]+),',
+		$url, $regs)) {
+			$fond = $regs[1];
+			if ($regs[1] == 'site') {
+				if (!isset($contexte['id_syndic']))
+					$contexte['id_syndic'] = $regs[2];
+			} else {
+				if (!isset($contexte['id_'.$fond]))
+					$contexte['id_'.$fond] = $regs[2];
+			}
+	
+			return;
 		}
-
-		return;
+		/* Compatibilite urls-page avec formulaire en get !!! */
+		else if (preg_match(
+			',[?/&](article|breve|rubrique|mot|auteur|site)[=]?([0-9]+),',
+			$url, $regs)) {
+			$fond = $regs[1];
+			if ($regs[1] == 'site') {
+				if (!isset($contexte['id_syndic']))
+					$contexte['id_syndic'] = $regs[2];
+			} else {
+				if (!isset($contexte['id_'.$fond]))
+					$contexte['id_'.$fond] = $regs[2];
+			}
+			return;
+		}
+		/* Fin compatibilite urls-page */
 	}
+
 
 	/*
 	 * Le bloc qui suit sert a faciliter les transitions depuis
