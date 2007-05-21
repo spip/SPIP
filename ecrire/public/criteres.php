@@ -282,8 +282,11 @@ function critere_collecte_dist($idb,&$boucles, $crit) {
 	if (isset($crit->param[0])) {
 		$_coll = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
 		$boucle = $boucles[$idb];
-		$boucle->modificateur['collate'] = $_coll;
-	} else 
+		$boucle->modificateur['collate'] = "($_coll ?' COLLATE '.$_coll:'')";
+    $n = count($boucle->order);
+    if ($n && (strpos($boucle->order[$n-1],'COLLATE')===false))
+    	$boucle->order[$n-1] .= " . " . $boucle->modificateur['collate'];
+	} else
 		erreur_squelette(_T('zbug_info_erreur_squelette'),
 			"{collecte ?} BOUCLE$idb");
 }
@@ -323,6 +326,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 	global $table_des_tables, $tables_des_serveurs_sql,  $exceptions_des_jointures;
 	$boucle = &$boucles[$idb];
 	if ($crit->not) $sens = $sens ? "" : " . ' DESC'";
+	$collecte = (isset($boucle->modificateur['collecte']))?" . ".$boucle->modificateur['collecte']:"";
 
 	foreach ($crit->param as $tri) {
 
@@ -402,8 +406,9 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 	      }
 	  }
 	  if ($order)
-	    $boucle->order[] = ($fct ? "'$fct(' . $order . ')'" : $order) .
-	      (($order[0]=="'") ? $sens : "");
+	    $boucle->order[] = ($fct ? "'$fct(' . $order . ')'" : $order)
+	    	. $collecte
+	      . (($order[0]=="'") ? $sens : "");
 	}
 }
 
