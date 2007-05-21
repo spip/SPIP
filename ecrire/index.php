@@ -30,25 +30,31 @@ if (autoriser_sans_cookie($exec)) {
 } else {
 	$auth = charger_fonction('auth', 'inc');
 	$var_auth = $auth();
-	if ($var_auth!=="") {
-		if ($var_auth===-1) exit();
+
+	if (!autoriser('ecrire')) {
+		// Erreur SQL ?
+		if ($var_auth===-1) exit(); // un message d'erreur a deja ete envoye
+
+		// Sinon rediriger vers la page de login
 		include_spip('inc/headers');
-		redirige_par_entete(generer_url_public('login',
-			"url=" . 
-			rawurlencode(str_replace('/./', '/',
+		$redirect = generer_url_public('login',
+			"url=" . rawurlencode(str_replace('/./', '/',
 				(_DIR_RESTREINT ? "" : _DIR_RESTREINT_ABS)
-				. str_replace('&amp;', '&', self())))
-			// $var_auth indique si c'est le statut qui est insuffisant
-			// un echec au "bonjour" (login initial) quand var_auth renvoie
-			// 'inconnu' signale sans doute un probleme de cookies
-			. ((!isset($_GET['bonjour'])) ? ''
-			    : ($var_auth=='inconnu'
-					? '&var_echec_cookie=true'
-					: '&var_echec_visiteur=true'
-				)
-			),
-			true)
-		);
+				. str_replace('&amp;', '&', self()))), '&');
+
+		// $var_auth indique si c'est le statut qui est insuffisant
+		// un echec au "bonjour" (login initial) quand var_auth renvoie
+		// 'inconnu' signale sans doute un probleme de cookies
+		if (isset($_GET['bonjour']))
+			$redirect = parametre_url($redirect,
+				'var_erreur',
+				($var_auth == 'inconnu'
+					? 'cookie'
+					: 'statut'
+				),
+				'&'
+			);
+		redirige_par_entete($redirect);
 	}
  }
 
