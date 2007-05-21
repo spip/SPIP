@@ -312,7 +312,7 @@ function calculer_requete_sql(&$boucle)
 		     ('"' . join(", ", $boucle->group)) . '"') .
 		', # GROUP
 		array(' .
-			join(', ', $order) .
+			calculer_order($boucle) .
 		"), # ORDER
 		" . (strpos($boucle->limit, 'intval') === false ?
 			"'".$boucle->limit."'" :
@@ -355,6 +355,18 @@ function calculer_from(&$boucle)
   $res = "";
   foreach($boucle->from as $k => $v) $res .= ",'$k' => '$v'";
   return 'array(' . substr($res,1) . ')';
+}
+
+function calculer_order(&$boucle)
+{
+	$order = $boucle->order;
+	if (isset($boucle->modificateur['collate'])){
+		$col = $boucle->modificateur['collate'];
+		$col = ".($col ?' COLLATE '.$col:'')";
+		foreach($order as $k=>$o)
+			$order[$k] .= $col;
+	}
+	return join(', ', $order);
 }
 
 //

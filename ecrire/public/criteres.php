@@ -276,6 +276,18 @@ function critere_fusion_dist($idb,&$boucles, $crit) {
 			"{groupby ?} BOUCLE$idb");
 }
 
+// c'est la commande SQL "COLLATE"
+// qui peut etre appliquee sur les order by, group by, where like ...
+function critere_collecte_dist($idb,&$boucles, $crit) {
+	if (isset($crit->param[0])) {
+		$_coll = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+		$boucle = $boucles[$idb];
+		$boucle->modificateur['collate'] = $_coll;
+	} else 
+		erreur_squelette(_T('zbug_info_erreur_squelette'),
+			"{collecte ?} BOUCLE$idb");
+}
+
 // http://doc.spip.org/@calculer_critere_arg_dynamique
 function calculer_critere_arg_dynamique($idb, &$boucles, $crit, $suffix='')
 {
