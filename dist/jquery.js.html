@@ -18,8 +18,5 @@
 [(#INCLURE{javascript/form.js}|compacte_js)]
 [(#INCLURE{javascript/ajaxCallback.js}|compacte_js)]
 
-[(#REM) js ajoutee par les plugins]
-[(#PIPELINE{insert_js,#ARRAY{type,fichier}}|charge_scripts|compacte_js)]
-
-[(#REM) js ajoutee a la volee]
+[(#REM) js ajoutee par les plugin et a la volee]
 [(#ENV{script}|charge_scripts|compacte_js)]
