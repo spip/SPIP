@@ -323,15 +323,22 @@ function analyser_backend($rss, $url_syndic='') {
 		.',ims',
 		$item, $matches, PREG_SET_ORDER))
 			$tags = ajouter_tags($matches, $item); # array()
-		// Pieces jointes : s'il n'y a pas de microformat relEnclosure,
+		// Pieces jointes :
 		// chercher <enclosure> au format RSS et les passer en microformat
+		// ou des microformats relEnclosure,
+		// ou encore les media:content
 		if (!afficher_enclosures(join(', ', $tags))) {
 			if (preg_match_all(',<enclosure[[:space:]][^<>]+>,i',
 			$item, $matches, PREG_PATTERN_ORDER))
 				$data['enclosures'] = join(', ',
 					array_map('enclosure2microformat', $matches[0]));
 			else if (
-			preg_match_all(',<link\b[^<>]+rel=["\']?enclosure["\'][^<>]+>,i',
+			preg_match_all(',<link\b[^<>]+rel=["\']?enclosure["\']?[^<>]+>,i',
+			$item, $matches, PREG_PATTERN_ORDER))
+				$data['enclosures'] = join(', ',
+					array_map('enclosure2microformat', $matches[0]));
+			else if (
+			preg_match_all(',<media:content\b[^<>]+>,i',
 			$item, $matches, PREG_PATTERN_ORDER))
 				$data['enclosures'] = join(', ',
 					array_map('enclosure2microformat', $matches[0]));
