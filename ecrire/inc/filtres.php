@@ -1898,9 +1898,17 @@ function f_jQuery ($texte) {
 			array("#INSERT_HEAD",_T('double_occurrence')))
 		) . $texte;
 	} else {
-		$texte = "\n<script src=\"".generer_url_public('jquery.js')
-			. "\" type=\"text/javascript\"></script>\n"
-			. $texte;
+		$texte .= "\n<script src=\"".generer_url_public('jquery.js')
+			. "\" type=\"text/javascript\"></script>\n";
+		$inline_scripts = pipeline("insert_js",array("type" => "inline"));
+    $scripts = array();
+    foreach($inline_scripts as $script) {
+      if(preg_match(",^\s*<script.*</script>\s*$,Us",$script))
+        $scripts[] = $script;
+      else
+        spip_log("insert_js inline interdite $script");
+    } 
+    $texte .= join("\n",$scripts);
 	}
 	return $texte;
 }
