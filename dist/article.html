@@ -24,12 +24,12 @@
 		<div id="contenu">
 
 			<div class="cartouche">
-				#DEBUT_SURLIGNE
-				[(#LOGO_ARTICLE||image_reduire{200,200})]
-				[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
-				<h1 class="#EDIT{titre} titre">#TITRE</h1>
-				[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
-				#FIN_SURLIGNE
+				<div class="surlignable">
+  				[(#LOGO_ARTICLE||image_reduire{200,200})]
+  				[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
+  				<h1 class="#EDIT{titre} titre">#TITRE</h1>
+  				[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
+				</div>
 
 				<p><small>[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small></p>
 
@@ -38,12 +38,12 @@
 
 			</div>
 
-			#DEBUT_SURLIGNE
-			[<div class="#EDIT{chapo} chapo">(#CHAPO)</div>]
-			<br class="nettoyeur" />
-			[<p class="#EDIT{hyperlien} lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-			[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{520,0})</div>]
-			#FIN_SURLIGNE
+			<div class="surlignable">
+  			[<div class="#EDIT{chapo} chapo">(#CHAPO)</div>]
+  			<br class="nettoyeur" />
+  			[<p class="#EDIT{hyperlien} lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+  			[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{520,0})</div>]
+			</div>
 
 			[(#REM) Portfolio : album d'images ]
 			<B_documents_portfolio>
@@ -62,7 +62,7 @@
 			</div>
 			</BOUCLE_afficher_document>
 
-			[<div class="ps"><h2><:info_ps:></h2>#DEBUT_SURLIGNE<div class="#EDIT{ps}">(#PS)</div>#FIN_SURLIGNE</div>]
+			[<div class="ps surlignable"><h2 class="pas_surlignable"><:info_ps:></h2><div class="#EDIT{ps}">(#PS)</div></div>]
 
 			[(#REM) Autres documents joints a l'article ]
 			<B_documents_joints>
@@ -85,7 +85,7 @@
 				<INCLURE{fond=inc-petition}{id_article}{env}>
 			]
 
-			[<div class="notes"><h2><:info_notes:></h2>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
+			[<div class="notes surlignable"><h2 class="pas_surlignable"><:info_notes:></h2>(#NOTES)</div>]
 
 			[(#REM) Forum de l'article ]
 			<a href="#forum" name="forum" id="forum"></a>

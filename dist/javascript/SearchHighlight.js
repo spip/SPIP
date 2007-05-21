@@ -6,7 +6,7 @@
  *    
  * @author Renato Formato <renatoformato@virgilio.it> 
  *  
- * @version 0.32
+ * @version 0.33
  *
  *  Options
  *  - exact (string, default:"exact") 
@@ -29,13 +29,17 @@
  *    The second element is the regex to match the query string. 
  *    Ex: [/^http:\/\/my\.site\.net/i,/search=([^&]+)/i]        
  *            
- *  - startHighlightComment (string, default:null)
- *    The text of a comment that starts a block enabled for highlight.
- *    If null all the document is enabled for highlight.
+ *  - highlight (string, default:null)
+ *    A jQuery selector or object to set the elements enabled for highlight.
+ *    If null or no elements are found, all the document is enabled for highlight.
  *        
- *  - stopHighlightComment (string, default:null)  
- *    The text of a comment that ends a block enabled for highlight.
- *    If null all the document is enabled for highlight. 
+ *  - nohighlight (string, default:null)  
+ *    A jQuery selector or object to set the elements not enabled for highlight.
+ *    This option has priority on highlight. 
+ *    
+ *  - keys (string, default:null)
+ *    Disable the analisys of the referrer and search for the words given as argument    
+ *    
  */
 
 (function($){
@@ -142,58 +146,19 @@
     },
     nosearch: /s(?:cript|tyle)|textarea/i,
     hiliteElement: function(el, query) {
-        var startIndex, endIndex, comment = false, opt = SearchHighlight.options;
-        if(!opt.startHighlightComment || !opt.stopHighlightComment)
-          return SearchHighlight.hiliteTree(0,el.childNodes.length,el,query);
-        if($.browser.msie) {
-          var item = el.firstChild, i = 0, parents = [], startComment = false;
-          while(item) {
-            if(item.nodeType==8) {
-              if($.trim(item.data)==opt.startHighlightComment) {
-                comment = startComment = true;
-                startIndex= i+1;
-              } else if($.trim(item.data)==opt.stopHighlightComment) {
-                endIndex = i;
-                SearchHighlight.hiliteTree(startIndex,endIndex,item.parentNode,query);
-                startComment = false;
-              }
-            }
-            var next = item.nextSibling, back, child;
-            if(!startComment && (child = item.firstChild)) {
-              if(next)
-                parents.push([next,i+1]);
-              item = child;
-              i = 0;
-            } else {
-              if(!(item = next)) {
-                if(back = parents.pop()) {
-                  item = back[0];
-                  i =  back[1];
-                }
-              } else i++;
-            }
-          }
-        } else {
-          var walker = document.createTreeWalker(el,NodeFilter.SHOW_COMMENT,null,false), currComment;
-          while(currComment = walker.nextNode()) {
-            if($.trim(currComment.data)==opt.startHighlightComment) {
-              comment = true;
-              el = currComment.parentNode;
-              startIndex = 0;
-              endIndex = el.childNodes.length;
-              while(el.childNodes[startIndex]!=currComment) startIndex++;
-              startIndex++;
-            } else if($.trim(currComment.data)==opt.stopHighlightComment) {
-              while(el.childNodes[endIndex-1]!=currComment) endIndex--;
-              SearchHighlight.hiliteTree(startIndex,endIndex,el,query);
-            }
-          }
-        }
-        if(!comment) SearchHighlight.hiliteTree(0,el.childNodes.length,el,query);
+        var opt = SearchHighlight.options, elHighlight, noHighlight;
+        elHighlight = opt.highlight?$(opt.highlight):$("body"); 
+        if(!elHighlight.length) elHighlight = $("body"); 
+        noHighlight = opt.nohighlight?$(opt.nohighlight):$([]);
+                
+        elHighlight.each(function(){
+          SearchHighlight.hiliteTree(this,query,noHighlight);
+        });
     },
-    hiliteTree : function(startIndex,endIndex,el,query) {
+    hiliteTree : function(el,query,noHighlight) {
+        if(noHighlight.index(el)!=-1) return;
         var matchIndex = SearchHighlight.options.exact=="whole"?1:0;
-        for(;startIndex<endIndex;startIndex++) {
+        for(var startIndex=0,endIndex=el.childNodes.length;startIndex<endIndex;startIndex++) {
           var item = el.childNodes[startIndex];
           if ( item.nodeType != 8 ) {//comment node
   				  //text node
@@ -216,11 +181,10 @@
               }                
             } else {
               if(item.nodeType==1 && item.nodeName.search(SearchHighlight.nosearch)==-1)
-                SearchHighlight.hiliteTree(0,item.childNodes.length,item,query);
+                  SearchHighlight.hiliteTree(item,query,noHighlight);
             }	
           }
         }    
     }
-    
   };
 })(jQuery)
