@@ -358,6 +358,39 @@ function f_admin ($texte) {
 	return $texte;
 }
 
+//ajoute a la volee scripts a le squelette jquery.js.html
+function ajouter_js_affichage_final($page,$scripts,$inline = false) {
+  if(!$scripts || (!$inline && !preg_match(",\w+\|?,",$scripts)) || ($inline && !preg_match(",^\s*<script.*</script>\s*$,Us",$scripts))) {
+    spip_log("ajouter_js_afficaghe_final interdite $scripts");
+    return $page;
+  }
+  if($inline) {
+    $page = substr_replace($page,$scripts."\n",strpos($page,"</head>"),0);
+  }
+  //verifie c'est un script HTML et que jquery.js.html est la
+  else if($res = jquery_chargee($page)) {
+    list($pos_script,$appelle) = $res;
+    $params = $appelle.(strpos($appelle,"&")?"|":"&script=").$scripts; 
+    $page = substr_replace($page,$params,$pos_script,strlen($appelle));
+  }
+  return $page;
+}
+
+//verifie si le squelette jquery.js.html est appelle dans un flux de page et donnee 
+//false ou un tableau avec la position et la chaine de l'appelle
+function jquery_chargee($page) {
+  if(($pos_debut_head=strpos($page,"<head>")) && ($pos_fin_head=strpos($page,"</head>",$pos_debut_head))) { 
+    $head = substr($page,$pos_debut_head,$pos_fin_head-$pos_debut_head);
+    //verifie on a l'appelle a le squelette jquery.js
+    if($pos_script=strpos($head,'spip.php?page=jquery.js')){
+      $pos_script += $pos_debut_head;
+      $appelle = substr($page,$pos_script,strpos($page,'"',$pos_script)-$pos_script);
+      return array($pos_script,$appelle);          
+    } else
+      return false;
+  } 
+}
+
 // http://doc.spip.org/@message_erreur_404
 function message_erreur_404 ($erreur= "") {
 	if (defined('_PAS_DE_PAGE_404'))

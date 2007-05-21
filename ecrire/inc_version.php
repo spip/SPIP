@@ -237,6 +237,7 @@ $spip_pipeline = array(
 	'exec_init' => '',
 	'header_prive' => '|f_jQuery',
 	'insert_head' => '|f_jQuery',
+	'insert_js' => '',
 	'mots_indexation' => '',
 	'nettoyer_raccourcis_typo' => '',
 	'pre_propre' => '|extraire_multi',
