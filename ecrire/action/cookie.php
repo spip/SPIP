@@ -80,13 +80,13 @@ function action_cookie_dist() {
 			spip_log("login de $session_login vers $redirect");
 			// Si on se connecte dans l'espace prive, 
 			// ajouter "bonjour" (repere a peu pres les cookies desactives)
-			if (strpos($redirect,_DIR_RESTREINT_ABS)!==false) {
-				$redirect .= ((false !== strpos($redirect, "?")) ? "&" : "?")
-					. 'bonjour=oui';
-			}
+			if (strpos($redirect,_DIR_RESTREINT_ABS)!==false)
+				$redirect = parametre_url($redirect, 'bonjour', 'oui', '&');
+
+			// Prevoir de demander un cookie de correspondance
 			if ($row_auteur['statut'] == '0minirezo')
 				$set_cookie_admin = "@".$session_login;
-				
+
 			$session = charger_fonction('session', 'inc');
 			$cookie_session = $session($row_auteur);
 	
