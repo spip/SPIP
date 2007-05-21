@@ -298,7 +298,12 @@ function afficher_objet_boucle($row, &$tous_id,  $voir_logo, $own)
 				$s .= "</span>";
 			}
 			elseif ($lang != $langue_defaut)
-				$s .= " <span class='spip_xx-small' style='color: #666666' dir='$lang_dir'>(".traduire_nom_langue($lang).")</span>";
+				$s .= " <span class='spip_xx-small' style='color: #666666' dir='$lang_dir'>".
+					($lang
+						? "(".traduire_nom_langue($lang).")"
+						: ''
+					)
+				."</span>";
 		}
 		$vals[] = $s;
 		
