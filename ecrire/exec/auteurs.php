@@ -14,6 +14,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
+// Constante pour le nombre d'auteurs par page.
+@define('MAX_AUTEURS_PAR_PAGE', 30);
+
 // http://doc.spip.org/@exec_auteurs_dist
 function exec_auteurs_dist()
 {
@@ -23,14 +26,14 @@ function exec_auteurs_dist()
 
 	$result = requete_auteurs($tri, $statut);
 	$nombre_auteurs = spip_num_rows($result);
-	$max_par_page = 30;
+
 	$debut = intval(_request('debut'));
-	if ($debut > $nombre_auteurs - $max_par_page)
-		$debut = max(0,$nombre_auteurs - $max_par_page);
+	if ($debut > $nombre_auteurs - MAX_AUTEURS_PAR_PAGE)
+		$debut = max(0,$nombre_auteurs - MAX_AUTEURS_PAR_PAGE);
 
-	list($auteurs, $lettre)= lettres_d_auteurs($result, $debut, $max_par_page, $tri);
+	list($auteurs, $lettre)= lettres_d_auteurs($result, $debut, MAX_AUTEURS_PAR_PAGE, $tri);
 
-	$res = auteurs_tranches(afficher_n_auteurs($auteurs), $debut, $lettre, $tri, $statut, $max_par_page, $nombre_auteurs);
+	$res = auteurs_tranches(afficher_n_auteurs($auteurs), $debut, $lettre, $tri, $statut, MAX_AUTEURS_PAR_PAGE, $nombre_auteurs);
 
 	if (_request('var_ajaxcharset'))
 	  ajax_retour($res);
@@ -255,7 +258,7 @@ if ($connect_statut == '0minirezo') {
 	if (!$statut) {
 		$sql_visible = "aut.statut IN ('0minirezo','1comite','5poubelle')";
 	} else {
-		if ($statut[0]="!") {
+		if ($statut[0]=='!') {
 		  $statut = substr($statut,1); $not = " NOT";
 		} else $not = '';
 		$statut = preg_replace('/\W+/',"','",$statut); 
@@ -296,7 +299,8 @@ default:
 // La requete de base est tres sympa
 // (pour les visiteurs, ca postule que les messages concernent des articles)
 
- $row = spip_query("SELECT							aut.id_auteur AS id_auteur,							aut.statut AS statut,								aut.nom_site AS site, aut.nom AS nom,								UPPER(aut.nom) AS unom,							count(lien.id_article) as compteur							$sql_sel									FROM spip_auteurs as aut " . ($visit ?		 			"LEFT JOIN spip_forum AS lien ON aut.id_auteur=lien.id_auteur " :		("LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur	 LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)")) .	" WHERE $sql_visible GROUP BY aut.id_auteur ORDER BY $sql_order");
+ $row = spip_query($q="SELECT							aut.id_auteur AS id_auteur,							aut.statut AS statut,								aut.nom_site AS site, aut.nom AS nom,								UPPER(aut.nom) AS unom,							count(lien.id_article) as compteur							$sql_sel									FROM spip_auteurs as aut " . ($visit ?		 			"LEFT JOIN spip_forum AS lien ON aut.id_auteur=lien.id_auteur " :		("LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur	 LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)")) .	" WHERE $sql_visible GROUP BY aut.id_auteur ORDER BY $sql_order");
+ spip_log($q);
  return $row;
 }
 
