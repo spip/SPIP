@@ -59,7 +59,7 @@
         SearchHighlight.hiliteElement(el, q); 
       })
     } else return this;
-  }    
+  };    
 
   var SearchHighlight = {
     options: {},
@@ -75,7 +75,7 @@
     [/^http:\/\/(www\.)?feedster\./i, /q=([^&]+)/i],                          // Feedster
     [/^http:\/\/(www\.)?search\.lycos\./i, /q=([^&]+)/i],                     // Lycos
     [/^http:\/\/(www\.)?alltheweb\./i, /q=([^&]+)/i],                         // AllTheWeb
-    [/^http:\/\/(www\.)?technorati\.com/i, /([^\?\/]+)(?:\?.*)$/i],           // Technorati
+    [/^http:\/\/(www\.)?technorati\.com/i, /([^\?\/]+)(?:\?.*)$/i]           // Technorati
     ],
     subs: {},
     decodeURL: function(URL,reg) {
@@ -89,7 +89,7 @@
             return false;
           }
         }
-      })
+      });
       
       if (query) {
       query = query.replace(/(\'|")/, '\$1');
