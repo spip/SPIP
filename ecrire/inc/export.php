@@ -247,7 +247,7 @@ function export_select($row, $les_rubriques) {
 // Conversion texte -> xml (ajout d'entites)
 // http://doc.spip.org/@text_to_xml
 function text_to_xml($string) {
-	return str_replace('<', '&lt;', str_replace('&', '&amp;', $string));
+	return str_replace(array('&','<','>'), array('&amp;','&lt;','&gt;'), $string);
 }
 
 // production de l'entete du fichier d'archive

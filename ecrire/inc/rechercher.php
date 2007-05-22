@@ -18,30 +18,32 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@liste_des_champs
 function liste_des_champs() {
 	return
-	array(
-		'article' => array(
-			'surtitre', 'titre', 'soustitre', 'chapo', 'texte', 'ps', 'nom_site', 'url_site'
-		),
-		'breve' => array(
-			'titre', 'texte', 'lien_titre', 'lien_url'
-		),
-		'rubrique' => array(
-			'titre', 'descriptif', 'texte'
-		),
-		'site' => array(
-			'nom_site', 'url_site', 'descriptif'
-		),
-		'mot' => array(
-			'titre', 'texte', 'descriptif'
-		),
-		'auteur' => array(
-			'nom', 'bio', 'email', 'nom_site', 'url_site', 'login'
-		),
-		'forum' => array(
-			'titre', 'texte', 'auteur', 'email_auteur', 'nom_site', 'url_site'
-		),
-		'document' => array(
-			'titre', 'descriptif'
+	pipeline('rechercher_liste_des_champs',
+		array(
+			'article' => array(
+				'surtitre', 'titre', 'soustitre', 'chapo', 'texte', 'ps', 'nom_site', 'url_site'
+			),
+			'breve' => array(
+				'titre', 'texte', 'lien_titre', 'lien_url'
+			),
+			'rubrique' => array(
+				'titre', 'descriptif', 'texte'
+			),
+			'site' => array(
+				'nom_site', 'url_site', 'descriptif'
+			),
+			'mot' => array(
+				'titre', 'texte', 'descriptif'
+			),
+			'auteur' => array(
+				'nom', 'bio', 'email', 'nom_site', 'url_site', 'login'
+			),
+			'forum' => array(
+				'titre', 'texte', 'auteur', 'email_auteur', 'nom_site', 'url_site'
+			),
+			'document' => array(
+				'titre', 'descriptif'
+			)
 		)
 	);
 }
