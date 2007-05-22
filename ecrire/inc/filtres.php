@@ -1271,10 +1271,10 @@ function tester_config($ignore, $quoi) {
 	switch ($quoi) {
 		case 'mode_inscription':
 			if ($GLOBALS['meta']["accepter_inscriptions"] == "oui")
-				return 'redac';
+				return '1comite';
 			else if ($GLOBALS['meta']["accepter_visiteurs"] == "oui"
 			OR $GLOBALS['meta']['forums_publics'] == 'abo')
-				return 'forum';
+				return '6forum';
 			else
 				return '';
 
