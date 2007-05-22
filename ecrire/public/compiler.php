@@ -357,6 +357,7 @@ function calculer_from(&$boucle)
   return 'array(' . substr($res,1) . ')';
 }
 
+// http://doc.spip.org/@calculer_order
 function calculer_order(&$boucle)
 {
 	$order = $boucle->order;
