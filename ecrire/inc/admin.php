@@ -22,14 +22,16 @@ include_spip('inc/meta');
 // http://doc.spip.org/@inc_admin_dist
 function inc_admin_dist($script, $titre, $comment='', $retour='')
 {
+	$reprise = true;
 	if (!isset($GLOBALS['meta'][$script])) {
+		$reprise = false;
 		debut_admin($script, $titre, $comment); 
 		spip_log("meta: $script " . join(',', $_POST));
 		ecrire_meta($script, serialize($_POST));
 		ecrire_metas();
 	} else spip_log("reprise de $script");
 	$base = charger_fonction($script, 'base');
-	$base($titre);
+	$base($titre,$reprise);
 	effacer_meta($script);
 	ecrire_metas();
 	@unlink(_FILE_META);
