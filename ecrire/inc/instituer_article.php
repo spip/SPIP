@@ -59,7 +59,8 @@ function inc_instituer_article_dist($id_article, $statut=-1)
 // http://doc.spip.org/@demande_publication
 function demande_publication($id_article)
 {
-	return debut_cadre_relief('',true) .
+	return "<br style='clear:both;' />" .
+		debut_cadre_relief('',true) .
 		"<div style='text-align: center'>" .
 		"<b>" ._T('texte_proposer_publication') . "</b>" .
 		aide ("artprop") .
