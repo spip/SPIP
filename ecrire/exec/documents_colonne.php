@@ -19,10 +19,7 @@ function exec_documents_colonne_dist()
 	$show = _request('show_docs');
 	$type = _request('type');
 
-	if (!($type == 'article' 
-		? autoriser('modifier','article',$id)
-		: autoriser('publierdans','rubrique',$id))) {
-
+	if (!autoriser('joindredocument', $type, $id)) {
 		include_spip('inc/minipres');
 		echo minipres();
 		exit;

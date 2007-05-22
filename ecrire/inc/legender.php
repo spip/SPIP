@@ -65,11 +65,11 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	if (($n=strlen($entete)) > 20)
 		$entete = substr($entete, 0, 10)."...".substr($entete, $n-10, $n);
 	if (strlen($document['titre']))
-		$entete = "<b>". lignes_longues(typo($titre),25) . "</b>";
+		$entete = "<strong>". lignes_longues(typo($titre),25) . "</strong>";
 
 	$contenu = '';
 	if ($descriptif)
-	  $contenu .=  lignes_longues(propre($descriptif),25)  . "<br />\n" ;
+	  $contenu .=  "<p>".PtoBR(lignes_longues(propre($descriptif),25)) . "</p>\n";
 	if ($document['largeur'] OR $document['hauteur'])
 	  $contenu .= _T('info_largeur_vignette',
 		     array('largeur_vignette' => $document['largeur'],
@@ -81,7 +81,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 
 	$corps =
 	  (!$contenu ? '' :
-	   "<br /><div class='verdana1' style='text-align: center;'>$contenu</div>") .
+	   "<div class='verdana1' style='text-align: center;'>$contenu</div>") .
 	  "<b>$label</b><br />\n" .
 
 	  "<input type='text' name='titre_document' class='formo' value=\"".entites_html($titre).

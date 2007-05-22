@@ -25,7 +25,7 @@ function action_legender_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
-	if (!preg_match(",^\W*(\d+)$,", $arg, $r)) {
+	if (!preg_match(",^\W*(-?\d+)$,", $arg, $r)) {
 		 spip_log("action_legender_dist $arg pas compris");
 	} else action_legender_post($r);
 }

@@ -19,10 +19,7 @@ function exec_legender_dist()
 	$id = intval($id);
 	$id_document = intval($id_document);
 
-	if (!($type == 'article' 
-		? autoriser('modifier','article',$id)
-		: autoriser('publierdans','rubrique',$id))) {
-
+	if (!autoriser('joindredocument',$type, $id)) {
 		include_spip('inc/minipres');
 		echo minipres();
 		exit;
