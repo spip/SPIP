@@ -53,7 +53,12 @@ function xml_fetch_tag($f, &$before, $_fread='fread', $skip='!') {
 		if (!($x = $_fread($f, 1024))) return '';
 		if ($before)
 			$buf .= $x;
-		else $buf = $x;
+		else {
+			if (_DEBUG_IMPORT)
+				$GLOBALS['debug_import_avant'] .= $buf;
+			$abs_pos += strlen($buf);
+			$buf = $x;
+		}
 	}
 	if ($before) $before = str_replace($ent,$brut,substr($buf,0,$b));
 #	else { spip_log("position: $abs_pos" . substr($buf,0,12));flush();}
@@ -66,13 +71,22 @@ function xml_fetch_tag($f, &$before, $_fread='fread', $skip='!') {
 	}
 
 	if ($buf[++$b]!=$skip) {
+		if (_DEBUG_IMPORT){
+			$GLOBALS['debug_import_avant'] .= substr($buf,0,$e+1);
+			$GLOBALS['debug_import_avant'] = substr($GLOBALS['debug_import_avant'],-1024);
+		}
 		$tag = substr($buf, $b, $e-$b);
 		$buf = substr($buf,++$e);
+		if (_DEBUG_IMPORT)
+			$GLOBALS['debug_import_apres'] = $buf;
 		$abs_pos += $e;
 		return $tag;
 	}
-
+	if (_DEBUG_IMPORT)
+		$GLOBALS['debug_import_avant'] .= substr($buf,0,$e+1);
 	$buf = substr($buf,++$e);
+	if (_DEBUG_IMPORT)
+		$GLOBALS['debug_import_apres'] = $buf;
 	$abs_pos += $e;
 	return xml_fetch_tag($f,$before,$_fread,$skip);
 }
@@ -118,6 +132,23 @@ function import_debut($f, $gz='fread') {
 			$r[2] = $charset;
 			return $r;
 		}
+	}
+	// basculer la connexion sql dans le bon charset si on est pas
+	// dans le mode par defaut de mysql
+	// ou si le charset de la base est iso-xx
+	// (on ne peut garder une connexion utf dans ce cas)
+	if (isset($GLOBALS['meta']['charset_sql_connexion'])
+		OR (strncmp($charset,'iso-',3)==0)
+		){
+		include_spip('base/db_mysql');
+		if ($sql_char = spip_mysql_character_set($charset)){
+			$sql_char = $sql_char[0];
+			ecrire_meta('charset_sql_connexion',$sql_char);
+			ecrire_metas();
+			spip_query("SET NAMES "._q($sql_char));
+		}
+		else
+			spip_log("charset de restauration inconnu de sql : $charset");
 	}
 }
 
@@ -219,6 +250,9 @@ function import_tables($request, $dir) {
 	}
 
 
+	@define('_DEBUG_IMPORT',false);
+	if (_DEBUG_IMPORT)
+		ecrire_fichier(_DIR_TMP."debug_import.log","#####".date('Y-m-d H:i:s')."\n",false,false);
 	$fimport = import_charge_version($version_archive);
 
 	import_affiche_javascript($taille);
@@ -233,6 +267,9 @@ function import_tables($request, $dir) {
 	  // mais pas d'ecriture sur fichier, ca ralentit trop
 		ecrire_meta("status_restauration", "$abs_pos",'non');
 		if ($oldtable != $table) {
+			if (_DEBUG_IMPORT){
+				ecrire_fichier(_DIR_TMP."debug_import.log","----\n".$GLOBALS['debug_import_avant']."\n<<<<\n$table\n>>>>\n".$GLOBALS['debug_import_apres']."\n----\n",false,false);
+			}
 			if ($oldtable) spip_log("$cpt entrees");
 			spip_log("Analyse de $table (commence en $pos)");
 			affiche_progression_javascript($abs_pos,$size,$table);
