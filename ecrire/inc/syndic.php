@@ -383,13 +383,6 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 	// exloserait la base de donnees
 	$le_lien = substr($data['url'], 0,255);
 
-	// Si le site a des liens vides, il faut ruser : essayer de mettre a jour les liens
-	// vides existants, puis supprimer ceux qui restent
-	if (!strlen($le_lien)) {
-		$nettoyage_vides[$now_id_syndic]++;
-		$le_lien = '#'.$compteur[$now_id_syndic];
-	}
-
 	$s = spip_query("SELECT * FROM spip_syndic_articles WHERE url=" . _q($le_lien) . " AND id_syndic=$now_id_syndic ORDER BY maj LIMIT 0,1");
 	if ($a = spip_fetch_array($s)) {
 		$id_syndic_article = $a['id_syndic_article'];
