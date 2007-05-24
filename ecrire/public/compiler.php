@@ -701,16 +701,16 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 		$type = $boucle->type_requete;
 		if ($type != 'boucle') {
 		  $boucles[$id]->descr = &$descr;
-		  if ($x = $table_des_tables[$type]) {
-		    $boucles[$id]->id_table = $x;
+		  if (isset($table_des_tables[$type])) {
+		    $boucles[$id]->id_table = $x = $table_des_tables[$type];
 		    $boucles[$id]->primary = $tables_principales["spip_$x"]['key']["PRIMARY KEY"];
 		    if ((!$boucles[$id]->jointures)
 			AND (is_array($x = $tables_jointures['spip_' . $x])))
 		      $boucles[$id]->jointures = $x;
-		  } else if (isset($tables_auxiliaires[$type])) {
+		  } else if (isset($tables_auxiliaires['spip_' .$type])) {
 		  	// table auxiliaire
 		    $boucles[$id]->id_table = $type;
-		    $boucles[$id]->primary = $tables_auxiliaires[$type]['key']["PRIMARY KEY"];
+		    $boucles[$id]->primary = $tables_auxiliaires['spip_' . $type]['key']["PRIMARY KEY"];
 		  } else {
 			// table non Spip.
 		    $boucles[$id]->id_table = $type;

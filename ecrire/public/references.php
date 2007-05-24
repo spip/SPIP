@@ -70,23 +70,24 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
  */
 // http://doc.spip.org/@description_type_requete
 function description_type_requete($type, $serveur='') {
-	global $table_des_tables, $tables_des_serveurs_sql;
+	global $table_des_tables, $tables_des_serveurs_sql, $tables_auxiliaires;
 
 	if (!$serveur) {
 		$s = 'localhost';
-    	// indirection (pour les rares cas ou le nom de la table!=type)
-		$t = $table_des_tables[$type];
 	} else $s = $serveur;
 	// pour les tables non Spip
-	if (!$t) {
-		$nom_table = $t = $type;
-	} else {
+	if (isset($table_des_tables[$type])) {
+    	// indirection (pour les rares cas ou le nom de la table!=type)
+		$t = $table_des_tables[$type];
 		$nom_table = 'spip_' . $t;
-	}
+	} elseif (isset($tables_auxiliaires['spip_' .$type])) {
+		$t = $type;
+		$nom_table = 'spip_' . $t;
+	} else	$nom_table = $t = $type;
 
 	$desc = $tables_des_serveurs_sql[$s][$nom_table];
 	if (!isset($desc['field'])) {
-		$desc = $table_des_tables[$type] ?
+		$desc = ($nom_table != $type) ?
 			(($GLOBALS['table_prefix'] ? $GLOBALS['table_prefix'] : 'spip')
 				. '_' . $t) : $nom_table;
 
