@@ -416,6 +416,7 @@ function liste_archive_jointe($valables, $zip, $type, $id, $mode, $id_document, 
 	} else { return minipres(_T('upload_fichier_zip'), $texte); }
 }
 
+// http://doc.spip.org/@liste_archive_taille
 function liste_archive_taille($files)
 {
   $res = '';
