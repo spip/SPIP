@@ -64,15 +64,15 @@ function inc_formater_article_dist($row)
 	. "'"
 	. (!$descriptif ? '' : 
 	     (' title="'.attribut_html(typo($descriptif)).'"'))
-	. " dir='$lang_dir'"
-	. " style=\"display:block;\">"
+	. " dir='$lang_dir'>"
 	. (!$logo ? '' :
 	   ("<span style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>" . $logo . "</span>"))
 	. (acces_restreint_rubrique($id_rubrique) ? $img_admin : '')
 	. typo($titre)
 	. (!($afficher_langue AND $lang != $GLOBALS['meta']['langue_site']) ? '' :
 	   (" <span class='spip_xx-small' style='color: #666666' dir='$lang_dir'>(".traduire_nom_langue($lang).")</span>"))
-	. (!$row['petition'] ? '' : (" <span class='spip_xx-small' style='color: red'>"._T('lien_petitions')."</span>"))
+	  . (!$row['petition'] ? '' :
+	     ("</a> <a href='" . generer_url_ecrire('controle_petition', "id_article=$id_article") . "' class='spip_xx-small' style='color: red'>"._T('lien_petitions')))
 	. "</a>"
 	. "</div>";
 	
