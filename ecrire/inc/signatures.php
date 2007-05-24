@@ -10,10 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
-charger_generer_url();
 
 // http://doc.spip.org/@message_de_signature
 function message_de_signature($row)
@@ -37,6 +34,8 @@ function inc_signatures_dist($script, $id, $debut, $where, $order, $limit='') {
 	$a = "editer_signature-$id";
 
 	$q = spip_query("SELECT date_time FROM spip_signatures " . ($where ? "WHERE $where" : '') . " ORDER BY date_time DESC");
+
+	charger_generer_url();
 
 	while ($row = spip_fetch_array($q)) {
 		if($c++%$limit==0) {	
@@ -111,7 +110,8 @@ function signatures_edit($script, $id, $debut, $row) {
 		if ($statut=="poubelle"){
 			$res .= "<span class='spip_x-small' style='color: red;'>"._T('info_message_efface')."</span><br />";
 		}
-		if (strlen($url_site)>6 AND strlen($nom_site)>0){
+		if (strlen($url_site)>6) {
+			if (!$nom_site) $nom_site = _T('info_site');
 			$res .= "<span class='spip_x-small'>"._T('info_site_web')."</span> <a href='$url_site'>$nom_site</a><br />";
 		}
 		if (strlen($ad_email)>0){
@@ -126,16 +126,15 @@ function signatures_edit($script, $id, $debut, $row) {
 			$res .= "<span class='arial1' style='float: $spip_lang_right; color: black; padding-$spip_lang_left: 4px;'><b>"
 			. _T('info_numero_abbreviation')
 			. $id_article
-			. " </b></span>";
-		
-		$res .= "<a href='"
-		.  (($statut == 'publie') ? 
-		   generer_url_action('redirect', "id_article=$id_article") :
-		   generer_url_ecrire('articles', "id_article=$id_article"))
-		. "'>"
-		. typo($titre['titre'])
-		. "</a>"
-		. "</td></tr></table>";
+			. " </b></span><a href='"
+			  .  (($statut == 'publie') ? 
+			      generer_url_action('redirect', "id_article=$id_article") :
+			      generer_url_ecrire('articles', "id_article=$id_article"))
+			  . "'>"
+			  . typo($titre['titre'])
+			  . "</a>";
+
+		$res .= "</td></tr></table>";
 		
 		if ($statut=="poubelle"){
 			$res .= "</td></tr></table>";

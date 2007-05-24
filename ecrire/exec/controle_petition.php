@@ -12,37 +12,36 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
 // http://doc.spip.org/@exec_controle_petition_dist
 function exec_controle_petition_dist()
 {
 	include_spip('inc/presentation');
-	include_spip('inc/signatures');
 
 	$id_article = intval(_request('id_article'));
+	if ($id_article) {
+		$titre = spip_fetch_array(spip_query("SELECT titre FROM spip_articles WHERE id_article=$id_article"));
+		if (!$titre) $id_article = 0; else $titre = $titre['titre'];
+	} else $titre =' ';
 
-	if (
+	if (!(
 		autoriser('modererpetition')
 		OR (
 			$id_article > 0
 			AND autoriser('modererpetition', 'article', $id_article)
-		)
-	) {
+			)
+		))
+	  {include_spip('inc/minipres'); echo minipres(); exit;}
 
-		$debut = intval(_request('debut'));
+	$debut = intval(_request('debut'));
 
-		$signatures = charger_fonction('signatures', 'inc');
+	$signatures = charger_fonction('signatures', 'inc');
 
-		$r = $signatures('controle_petition',
+	$r = $signatures('controle_petition',
 			$id_article,
 			$debut, 
 			"(statut='publie' OR statut='poubelle')",
 			"date_time DESC",
 			10);
-	}
-	else
-		$r = "<b>"._T('avis_non_acces_page')."</b>";
-
 
 	if (_request('var_ajaxcharset'))
 		ajax_retour($r);
@@ -56,9 +55,27 @@ function exec_controle_petition_dist()
   
 		gros_titre(_T('titre_suivi_petition'));
 
-		$a = "editer_signature-" . $id_article;
+		if (!$titre)
+		  echo _T('trad_article_inexistant');
+		else {
+		  if ($id_article) {
+			  echo  "<a href='",
+			  (($statut == 'publie') ? 
+			   generer_url_action('redirect', "id_article=$id_article") :
+			   generer_url_ecrire('articles', "id_article=$id_article")),
+			  "'>",
+			  typo($titre),
+			  "</a>",
+			  " <span class='arial1'>(",
+			  _T('info_numero_abbreviation'),
+			  $id_article,
+			  ")</span>";
+		  }
+		  $a = "editer_signature-" . $id_article;
 
-		echo  "<div id='", $a, "' class='serif2'>", $r, "</div>", fin_gauche(), fin_page();
+		  echo  "<div id='", $a, "' class='serif2'>", $r, "</div>";
+		}
+		echo fin_gauche(), fin_page();
 	}
 }
 
