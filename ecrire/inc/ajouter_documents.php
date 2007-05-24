@@ -271,10 +271,10 @@ function verifier_compactes($zip) {
 	$aff_fichiers = array();
 	foreach ($list as $file) {
 		if (accepte_fichier_upload($f = $file['stored_filename']))
-			$aff_fichiers[]= $f;
+			$aff_fichiers[$f] = $file;
 		else spip_log("chargement de $f interdit");
 		}
-	sort($aff_fichiers);
+	ksort($aff_fichiers);
 	return $aff_fichiers;
 }
 
@@ -391,9 +391,9 @@ function liste_archive_jointe($valables, $zip, $type, $id, $mode, $id_document, 
 		"<br />".
 		"<input type='radio' name='sousaction5' value='6' />".
 		_T('upload_zip_decompacter').
-		"<ol><li><tt>" .
-		join("</tt></li>\n<li><tt>", $valables) .
-		"</tt></li></ol>".
+		"<ol>" .
+		liste_archive_taille($valables) .
+		"</ol>".
 		"<br /><input type='checkbox' name='sousaction4' value='4' />".
 		_T('les_deux').
 		"</div>".
@@ -414,5 +414,21 @@ function liste_archive_jointe($valables, $zip, $type, $id, $mode, $id_document, 
 		  $texte .
 		  "</div>";
 	} else { return minipres(_T('upload_fichier_zip'), $texte); }
+}
+
+function liste_archive_taille($files)
+{
+  $res = '';
+  foreach ($files as $nom => $file)
+    {
+      $res .= "\n<li><tt>$nom ("
+	. _T('taille_octets', array("taille" => $file['size']))
+	. '; '
+	. _T('date')
+	. '&nbsp;: '
+	. affdate_heure(date("Y-m-d H:i:s", $file['mtime']))
+	.")</tt></li>";
+    }
+  return$res;
 }
 ?>
