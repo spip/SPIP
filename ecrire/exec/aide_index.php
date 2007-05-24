@@ -325,11 +325,9 @@ jQuery(function(){
 	'
 </head>
 <body bgcolor="#FFFFFF" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" topmargin="5" leftmargin="5" marginwidth="5" marginheight="5"';
-
 	if ($spip_lang_rtl)
 		echo " dir='rtl'";
 	echo " lang='$lang_aide'>";
-
 
 	// Recuperation et analyse de la structure de l'aide demandee
 	$sections = analyse_aide($html);
@@ -485,7 +483,7 @@ else {
 	header("Content-Type: text/html; charset=utf-8");
 	echo _DOCTYPE_AIDE, html_lang_attributes();
 	echo "<head><title>", _T('info_aide_en_ligne'),	"</title>\n";
-	echo f_jQuery("");
+	echo '<script type="text/javascript" src="'._DIR_JAVASCRIPT.'jquery.js"></script>';
 
 	if ($frame == 'menu')
 		help_menu($aide, $html, $lang);
