@@ -433,6 +433,7 @@ function autoriser_document_voir_dist($faire, $type, $id, $qui, $opt) {
 
 // Renvoie la liste des rubriques liees a cet auteur, independamment de son
 // statut (pour les admins restreints, il faut donc aussi verifier statut)
+// http://doc.spip.org/@liste_rubriques_auteur
 function liste_rubriques_auteur($id_auteur) {
 	$id_auteur = intval($id_auteur);
 	$q = spip_query("SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur=$id_auteur AND id_rubrique!=0");
