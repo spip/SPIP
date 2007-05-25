@@ -18,38 +18,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@stats_load_engines
 function stats_load_engines() {
-	// le moteur de recherche interne
 	$arr_engines = Array();
-
-	$file_name = 'engines-list.txt';
-	if ($fp = @fopen($file_name, 'r'))
-	{
-		while ($data = fgets($fp, 256))
-		{
-			$data = trim(chop($data));
-
-			if (strncmp('#',$data,1) AND $data != '')
-			{
-				if (preg_match(',^\[(.*)\]$,m', $data, $engines))
-				{
-					// engine
-					$engine = $engines[1];
-
-					// query | dir
-					if (!feof($fp))
-					{
-						$data = fgets($fp, 256);
-						$query_or_dir = trim(chop($data));
-					}
-				}
-				else
-				{
-					$host = $data;
-					$arr_engines[] = Array($engine, $query_or_dir, $host);
-				}
-			}
-		}
-		fclose($fp);
+	lire_fichier(find_in_path('engines-list.txt'), $moteurs);
+	foreach (array_filter(preg_split("/([\r\n]|#.*)+/", $moteurs)) as $ligne) {
+		$ligne = trim($ligne);
+		if (preg_match(',^\[([^][]*)\]$,S', $ligne, $regs)) {
+			$moteur = $regs[1];
+			$query = '';
+		} else if (preg_match(',=$,', $ligne, $regs))
+			$query = $ligne;
+		else
+			$arr_engines[] = array($moteur,$query,$ligne);
 	}
 	return $arr_engines;
 }
