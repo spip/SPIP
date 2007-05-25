@@ -19,26 +19,8 @@ function exec_documenter_dist()
 	$script = _request("script"); // generalisation a tester
 	$album = !_request("s") ? 'documents' :  'portfolio';
 	$id = intval(_request(id_table_objet($type)));
-	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
-	$statut = $GLOBALS['auteur_session']['statut'];
 
-	$droits = auth_rubrique($id_auteur, $statut);
-
-	if ($type == 'rubrique')
-		$editable = is_array($droits) ? $droits[$id] : is_int($droits);
-	elseif (is_int($droits)) // i.e. admin complet
-		$editable = true;
-	else {
-
-		$row = spip_fetch_array(spip_query("SELECT id_rubrique, statut FROM spip_articles WHERE id_article=$id"));
-
-		$editable = (is_array($droits) AND $droits[$row['id_rubrique']]);
-		if (!$editable) {
-			if ($row['statut'] == 'prepa' OR $row['statut'] == 'prop')
-				$editable = spip_num_rows(auteurs_article($id, "id_auteur=$id_auteur"));
-		}
-	}
-	if (!$editable) {
+	if (!autoriser('modifier', $type, $id)) {
 		include_spip('inc/minipres');
 		echo minipres();
 		exit;

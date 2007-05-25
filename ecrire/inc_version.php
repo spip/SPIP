@@ -108,6 +108,7 @@ $auto_compress = true;
 // Pour le javascript, trois modes : parano (-1), prive (0), ok (1)
 // parano le refuse partout, ok l'accepte partout
 // le mode par defaut le signale en rouge dans l'espace prive
+// Si < 1, les fichiers SVG sont traites s'ils emanent d'un redacteur
 $filtrer_javascript = 0;
 // PS: dans les forums, petitions, flux syndiques... c'est *toujours* securise
 

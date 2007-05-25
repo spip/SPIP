@@ -223,6 +223,7 @@ spip_log('entites_unicode() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAM
 
 // http://doc.spip.org/@afficher_claret
 function afficher_claret() {
+spip_log('afficher_claret() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
 	include_spip('inc/layer');
 	return $GLOBALS['browser_caret'];
 }
@@ -230,7 +231,7 @@ function afficher_claret() {
 
 // http://doc.spip.org/@spip_insert_id
 function spip_insert_id() {
-	spip_log("spip_insert_id: utiliser spip_abstract_insert");
+spip_log('spip_insert_id() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
 	return mysql_insert_id();
 }
 
@@ -238,7 +239,7 @@ function spip_insert_id() {
 // revenir a la langue precedente
 // http://doc.spip.org/@lang_dselect
 function lang_dselect () {
-	spip_log("lang_dselect: utiliser lang_select sans argument");
+spip_log('lang_dselect() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
 	lang_select();
 }
 // toujours disponible pour PHP > 4.0.1
@@ -252,7 +253,7 @@ $GLOBALS['langue_site'] = $GLOBALS['meta']['langue_site'];
 $GLOBALS['all_langs'] = @$GLOBALS['meta']['langues_proposees'];
 // http://doc.spip.org/@generer_url_post_ecrire
 function generer_url_post_ecrire($script, $args='', $name='', $ancre='', $onchange='') {
-	spip_log("generer_url_post_ecrire utiliser generer_form_ecrire");
+spip_log('generer_url_post_ecrire() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
 	include_spip('inc/filtres');
 	$action = generer_url_ecrire($script, $args);
 	if ($name) $name = " name='$name'";
@@ -262,19 +263,52 @@ function generer_url_post_ecrire($script, $args='', $name='', $ancre='', $onchan
 
 // http://doc.spip.org/@afficher_articles
 function afficher_articles($titre, $requete, $formater='') {
+spip_log('afficher_articles() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
 	afficher_objets('article',$titre,$requete,$formater);
 }
 // http://doc.spip.org/@afficher_auteurs
 function afficher_auteurs ($titre_table, $requete) {
+spip_log('afficher_auteurs() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
 	afficher_objets('auteur',$titre_table,$requete,'');
 }
 // http://doc.spip.org/@afficher_sites
 function afficher_sites($titre_table, $requete){
+spip_log('afficher_sites() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
 	afficher_objets('site',$titre_table,$requete,'');	
 }
 // http://doc.spip.org/@afficher_syndic_articles
 function afficher_syndic_articles($titre_table, $requete, $id = 0) {
+spip_log('afficher_syndic_articles() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
 	afficher_objets('syndic_article',$titre_table,$requete,$id);	
 }
 
+// Retourne les droits de publication d'un auteur selon le codage suivant:
+// - le tableau de ses rubriques si c'est un admin restreint
+// - 0 si c'est un admin de plein droit
+// - la chaine indiquant son statut s'il n'est pas admin
+
+// http://doc.spip.org/@auth_rubrique
+function auth_rubrique($id_auteur, $statut)
+{
+spip_log('auth_rubrique() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
+
+	if ($statut != '0minirezo') return $statut;
+
+	$result = spip_query("SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur=$id_auteur AND id_rubrique!='0'");
+	if (!spip_num_rows($result)) {
+		return 0;
+	}
+	$rubriques = array();
+	for (;;) {
+		$r = array();
+		while ($row = spip_fetch_array($result)) {
+			$id_rubrique = $row['id_rubrique'];
+			$r[]= $rubriques[$id_rubrique] = $id_rubrique;
+		}
+		if (!$r) return $rubriques;
+		$r = join(',', $r);
+
+		$result = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent IN ($r) AND id_rubrique NOT IN ($r)");
+	}
+}
 ?>
