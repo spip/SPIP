@@ -76,7 +76,7 @@ function is_preview()
 //
 // http://doc.spip.org/@assembler_page
 function assembler_page ($fond) {
-	global $flag_ob, $flag_preserver,$lastmodified,
+	global $flag_preserver,$lastmodified,
 		$use_cache, $var_mode, $var_preview;
 
 	// Cette fonction est utilisee deux fois
@@ -148,7 +148,7 @@ function assembler_page ($fond) {
 
 		// Definir les entetes si ce n'est fait 
 		if (!$flag_preserver) {
-			if ($flag_ob) {
+			if ($GLOBALS['flag_ob']) {
 				// Si la page est vide, produire l'erreur 404 ou message d'erreur pour les inclusions
 				if (trim($page['texte']) === ''
 				AND $var_mode != 'debug') {

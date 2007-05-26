@@ -17,8 +17,6 @@ include_spip('inc/flock');
 include_spip('inc/actions');
 include_spip('inc/export');
 
-$GLOBALS['flag_ob_flush'] = function_exists('ob_flush');
-
 // http://doc.spip.org/@exec_export_all_dist
 function exec_export_all_dist()
 {
@@ -95,7 +93,7 @@ function exec_export_all_dist()
 	// script de rechargement auto sur timeout
 	echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".$redirect."\";',$timeout);</script>\n");
 
-	if ($GLOBALS['flag_ob_flush']) @ob_flush();
+	if (function_exists('ob_flush')) @ob_flush();
 	flush();
 
 	echo "<div style='text-align: left'>\n";
@@ -122,7 +120,7 @@ function exec_export_all_dist()
 		  if (!$r) echo _T('texte_vide');
 		  else
 		    export_objets($table, $etape, $sous_etape,$dir, $archive, $gz, $r, $les_rubriques);
-		  if ($GLOBALS['flag_ob_flush']) @ob_flush();
+		  if (function_exists('ob_flush')) @ob_flush();
 		  flush();
 		  $sous_etape = 0;
 		  // on utilise l'index comme ca c'est pas grave si on ecrit plusieurs fois la meme

@@ -137,7 +137,6 @@ table.spip td {
 // http://doc.spip.org/@help_body
 function help_body($aide, $html, $lang_aide='') {
   global $help_server, $spip_lang_rtl;
-
 	// Recuperation du contenu de l'aide demandee
 
 	if ($aide) {
@@ -298,7 +297,7 @@ define('AIDE_STYLE_MENU', '<style type="text/css">
 //
 // http://doc.spip.org/@help_menu
 function help_menu($aide, $html, $lang_aide='') {
-	global $spip_lang_rtl; 
+	global $spip_lang_rtl;
 
 	echo AIDE_STYLE_MENU, '<script type="text/javascript"><!--
 var curr_article;
@@ -399,7 +398,6 @@ function fin_rubrique() {
 
 // http://doc.spip.org/@article
 function article($titre, $lien, $statut = "redac") {
-	global $aide;
 	global $ligne;
 	global $ligne_rubrique;
 	global $rubrique;
@@ -414,7 +412,7 @@ function article($titre, $lien, $statut = "redac") {
 		$texte[$ligne] = '';
 		$id = "ligne$ligne";
 
-		if ($aide == $lien) {
+		if (_request('aide') == $lien) {
 			$ouvrir_rubrique = 1;
 			$class = "article-actif";
 			$texte[$ligne] .= "<script type='text/javascript'><!--\ncurr_article = '$id';\n// --></script>\n";
@@ -451,13 +449,13 @@ function analyse_aide($html, $aide=false) {
 // http://doc.spip.org/@exec_aide_index_dist
 function exec_aide_index_dist()
 {
-  global $img, $frame, $aide, $var_lang, $lang, $help_server, $spip_lang;
+  global $help_server, $spip_lang;
 
-if ($var_lang) changer_langue($var_lang);
-if ($lang) changer_langue($lang); # pour le cas ou on a fait appel au menu de changement de langue (aide absente dans la langue x)
- else $lang = $spip_lang;
+if (_request('var_lang')) changer_langue($lang = _request('var_lang'));
+if (_request('lang')) changer_langue($lang = _request('lang')); # pour le cas ou on a fait appel au menu de changement de langue (aide absente dans la langue x)
+else $lang = $spip_lang;
 
-if (preg_match(',^([^-.]*)-([^-.]*)-([^\.]*\.(gif|jpg|png))$,', $img, $regs))
+if (preg_match(',^([^-.]*)-([^-.]*)-([^\.]*\.(gif|jpg|png))$,', _request('img'), $regs))
 	help_img($regs);
 else {
 	list($html, $lastmodified) = fichier_aide();
@@ -485,13 +483,13 @@ else {
 	echo "<head><title>", _T('info_aide_en_ligne'),	"</title>\n";
 	echo '<script type="text/javascript" src="'._DIR_JAVASCRIPT.'jquery.js"></script>';
 
-	if ($frame == 'menu')
-		help_menu($aide, $html, $lang);
-	else if ($frame == 'body') {
-		help_body($aide, $html, $lang);
+	if (_request('frame') == 'menu')
+		help_menu(_request('aide'), $html, $lang);
+	else if (_request('frame') == 'body') {
+		help_body(_request('aide'), $html, $lang);
 	} else {
 		echo '</head>';
-		help_frame($aide, $lang);
+		help_frame(_request('aide'), $lang);
 	}
 	echo "\n</html>";
  }

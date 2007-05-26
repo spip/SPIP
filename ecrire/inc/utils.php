@@ -1010,14 +1010,17 @@ function generer_url_action($script, $args="", $no_entities=false) {
 // http://doc.spip.org/@spip_register_globals
 function spip_register_globals() {
 
+	define('_FEED_GLOBALS', true);
+
 	// Liste des variables dont on refuse qu'elles puissent provenir du client
 	$refuse_gpc = array (
 		# inc-public
-		'fond', 'delais',
+		'fond', 'delais' /*,
 
-		# ecrire/inc_auth
+		# ecrire/inc_auth (ceux-ci sont bien verifies dans $_SERVER)
 		'REMOTE_USER',
 		'PHP_AUTH_USER', 'PHP_AUTH_PW'
+		*/
 	);
 
 	// Liste des variables (contexte) dont on refuse qu'elles soient cookie
@@ -1057,7 +1060,7 @@ function spip_register_globals() {
 
 	// sinon il faut les passer nous-memes, a l'exception des interdites.
 	// (A changer en une liste des variables admissibles...)
-	else {
+	else if (_FEED_GLOBALS) {
 		foreach (array('_SERVER', '_COOKIE', '_POST', '_GET') as $_table) {
 			foreach ($GLOBALS[$_table] as $var => $val) {
 				if (!isset($GLOBALS[$var]) # indispensable securite
@@ -1068,6 +1071,7 @@ function spip_register_globals() {
 			}
 		}
 	}
+
 }
 
 
