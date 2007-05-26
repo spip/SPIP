@@ -19,15 +19,13 @@ include_spip('inc/ortho');
 // http://doc.spip.org/@exec_articles_ortho_dist
 function exec_articles_ortho_dist()
 {
-  global $champs_extra, $chapo, $descriptif, $id_article, $les_notes, $ps, $soustitre, $spip_lang_left, $spip_lang_right, $surtitre, $texte, $titre;
+  global $champs_extra, $spip_lang_left, $spip_lang_right;
 
-
-//charset_texte('utf-8');
 
 //
 // Lire l'article
 //
-  $id_article = intval($id_article);
+  $id_article = intval(_request('id_article'));
   if (!autoriser('voir', 'article', $id_article))
 	      {
 		echo minipres();
@@ -195,7 +193,7 @@ if ($descriptif OR $url_site OR $nom_site) {
 	echo "<div style='text-align: $spip_lang_left; padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;'  dir='$lang_dir'>";
 	$t = ($descriptif) ? "{{"._T('info_descriptif')."}} $descriptif\n\n" : '';
 	$t .= ($nom_site.$url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
-	echo "<span class='verdana1 spip_small'>", $t, "</span>";
+	echo "<div class='verdana1 spip_small'>", propre($t), "</div>";
 	echo "</div>";
 }
 
@@ -264,7 +262,7 @@ function debut_html($titre = "", $rubrique="") {
 	echo _DOCTYPE_ECRIRE,
 	  html_lang_attributes(),
 	  "<head>\n",
-	  "<title>[",$nom_site_spip,"]", $titre, "</title>\n";
+	  "<title>[",$nom_site_spip,"] ", $titre, "</title>\n";
 	echo f_jQuery("");
 	echo  $rubrique, "\n";
 	echo envoi_link($nom_site_spip),
