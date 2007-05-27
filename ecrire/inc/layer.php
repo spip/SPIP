@@ -48,7 +48,7 @@ function fin_block() {
 function bouton_block_depliable($texte,$deplie,$ids=""){
 	if (!_SPIP_AJAX) $deplie=true; // forcer un bouton deplie si pas de js
 	$bouton_id = substr(md5($texte.microtime()),8);
-	$class= ($deplie==true)?" deplie":(($deplie==-1)?" impliable":" replie");
+	$class= ($deplie===true)?" deplie":(($deplie==-1)?" impliable":" replie");
 	if (strlen($ids)){
 		$cible = explode(',',$ids);
 		$cible = 'div#'.implode(",div#",$cible);
