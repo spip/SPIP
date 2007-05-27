@@ -287,7 +287,6 @@ define('AIDE_STYLE_MENU', '<style type="text/css">
 		font-weight: bold;
 		color: black;
 		background-color: #EEEECC;
-		-moz-border-radius: 4px;
 	}
 -->
 </style>');

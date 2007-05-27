@@ -31,8 +31,6 @@ body {
 	border-bottom: 1px solid black;
 	border-left: 1px solid black;
 	border-right: 1px solid black;
-	-moz-border-radius-bottomleft: 5px;
-	-moz-border-radius-bottomright: 5px;
 	z-index: 100;
 }
 */
@@ -69,8 +67,6 @@ body {
 	font-size: 11px;
 	border-bottom: 1px solid white;
 	border-right: 1px solid white;
-	-moz-border-radius-bottomleft: 5px;
-	-moz-border-radius-bottomright: 5px;
 }
 
 a.lien_sous {
