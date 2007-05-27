@@ -262,7 +262,7 @@ function bandeau_titre_boite2($titre, $logo="", $fond="toile_blanche", $texte="l
 		. http_img_pack($logo, "", "")
 		. "</div>"
 		. "\n<div style='padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2 $fond $texte'>$titre</div>"
-		 . "</div>";
+		. "</div>";
 	} else {
 		return "<h3 style='padding: 3px; border-bottom: 1px solid #444444; margin: 0px;' class='verdana2 $fond $texte'>$titre</h3>";
 	}
@@ -388,7 +388,7 @@ function afficher_tranches_requete($num_rows, $tmp_var, $url='', $nb_aff = 10, $
 	$self = self();
 	$ie_style = ($browser_name == "MSIE") ? "height:1%" : '';
 
-	$texte = "\n<div style='position: relative;$ie_style; background-color: #dddddd; border-bottom: 1px solid #444444; padding: 2px;' class='arial1' id='a$ancre'>";
+	$texte = "\n<div style='position: relative;$ie_style; background-color: #dddddd; border-bottom: 1px solid #444444; padding: 2px;' class='arial1 tranches' id='a$ancre'>";
 	$on ='';
 
 	for ($i = 0; $i < $num_rows; $i += $nb_aff){
@@ -441,8 +441,8 @@ function afficher_tranches_requete($num_rows, $tmp_var, $url='', $nb_aff = 10, $
 // http://doc.spip.org/@affiche_tranche_bandeau
 function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, $force, $largeurs, $styles, $skel, $own='')
 {
-
 	global $spip_display ;
+	$res = "";
 
 	$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND isset($GLOBALS['meta']['image_process'])) ? ($GLOBALS['meta']['image_process'] != "non") : false;
 
@@ -452,18 +452,20 @@ function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, 
 
 	if (! ($force OR ($cpt = $cpt['n']))) return '';
 
-	$res = bandeau_titre_boite2($titre, $icone, $fg, $bg);
 	if (isset($requete['LIMIT'])) $cpt = min($requete['LIMIT'], $cpt);
 
 	$deb_aff = intval(_request($tmp_var));
 	$nb_aff = floor(1.5 * _TRANCHES);
 
+	$tranches = "";
 	if ($cpt > $nb_aff) {
 		$nb_aff = (_TRANCHES); 
-		$res .= afficher_tranches_requete($cpt, $tmp_var, '', $nb_aff);
+		$tranches = afficher_tranches_requete($cpt, $tmp_var, '', $nb_aff);
 	}
 
 	$result = spip_query($u = "SELECT " . (isset($requete["SELECT"]) ? $requete["SELECT"] : "*") . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
+	$id_liste = 't'.substr(md5($u),0,8);
+	$bouton = bouton_block_depliable($titre,true,$id_liste);
 
 	$table = array();
 	while ($row = spip_fetch_array($result)) {
@@ -477,11 +479,12 @@ function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, 
 	    . $t
 	    . "</table>";
 	return
-	  (!$titre ? '': "\n<div style='height: 12px;'></div>")
-	  . "\n<div class='liste'>"
-	  . $res
+	  debut_cadre('liste',$icone,'',$bouton)
+	  . debut_block_depliable(true,$id_liste)
+	  . $tranches
 	  . $t
-	  . "</div>\n";
+	  . fin_block()
+	  . fin_cadre();
 }
 
 

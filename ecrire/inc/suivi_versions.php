@@ -66,11 +66,12 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 				$titre_table = afficher_plus(generer_url_ecrire("suivi_revisions"))
 				. $titre_table;
 
-			$revisions .= "\n<div style='height: 12px;'></div>";
-			$revisions .= "\n<div class='liste'>";
-			$revisions .= bandeau_titre_boite2($titre_table, "historique-24.gif", 'toile_blanche', 'ligne_noire');
 	
-			$total = spip_num_rows(spip_query("SELECT versions.*, articles.statut, articles.titre FROM spip_versions AS versions, spip_articles AS articles WHERE $req_where LIMIT 0, 149"));
+			$total = spip_num_rows(spip_query($u="SELECT versions.*, articles.statut, articles.titre FROM spip_versions AS versions, spip_articles AS articles WHERE $req_where LIMIT 0, 149"));
+			$id_liste = 't'.substr(md5($u),0,8);
+			$bouton = bouton_block_depliable($titre_table,true,$id_liste);
+	  	$revisions .= debut_cadre('liste',"historique-24.gif",'',$bouton)
+	 		 . debut_block_depliable(true,$id_liste);
 		
 			if ($total > $nb_aff) {
 				$nb_tranches = ceil($total / $nb_aff);
@@ -125,7 +126,7 @@ $revisions .= "<a href='".generer_url_ecrire('suivi_revisions', "debut=$next&id_
 					if (strlen($nom)>0) $titre_bouton .= "($nom)";
 					$titre_bouton .= "</span>";
 					if (!$court)
-						$revisions .= bouton_block_depliable($titre_bouton,true,"$id_version-$id_article-$id_auteur");
+						$revisions .= bouton_block_depliable($titre_bouton,false,"$id_version-$id_article-$id_auteur");
 					else
 						$revisions .= $titre_bouton;
 				} else {
@@ -142,7 +143,7 @@ $revisions .= "<a href='".generer_url_ecrire('suivi_revisions', "debut=$next&id_
 				if (!$court) {
 					$textes = revision_comparee($id_article, $id_version, 'diff');
 					if (!$rss)
-						$revisions .= debut_block_depliable(true,"$id_version-$id_article-$id_auteur");
+						$revisions .= debut_block_depliable(false,"$id_version-$id_article-$id_auteur");
 	
 					if (is_array($textes))
 					foreach ($textes as $var => $t) {
@@ -169,7 +170,7 @@ $revisions .= "<a href='".generer_url_ecrire('suivi_revisions', "debut=$next&id_
 					$items[] = $item;
 			}
 		}		
-		if (!$rss) $revisions .= "</div>";
+		if (!$rss) $revisions .= fin_block() . fin_cadre();
 	}
 
 	if ($rss)

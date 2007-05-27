@@ -1207,11 +1207,14 @@ span.creer {
 	margin-top: 4px;
 }
 
-div.liste {
+div.liste,div.cadre-liste {
 	border: 1px solid #444;
 	margin-top: 3px; 
 	margin-bottom: 3px;
+	background:white;
 }
+div.cadre-liste .cadre-padding{padding:0;}
+div.cadre-liste .tranches{border-top:1px solid black;}
 
 	
 .tout-site #page ul#articles_tous,.tout-site ul#articles_tous ul {
@@ -1671,12 +1674,17 @@ a.ical {
 	background-position: [(#ENV{ltr}|choixsiegal{left,left,right})] 6px;
 	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 16px;
 	}
+.cadre-couleur-foncee .titrem {background-color:##ENV{couleur_foncee,3874b0}}
+.cadre-liste .titrem {background-color:#fff;}
+.cadre-liste .titrem.hover {background-color:##ENV{couleur_claire,edf3fe}}
+.cadre-liste .tr_liste .titrem {background-color:#eee;}
+
 /* Deplier / Replier */
 .replie { background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierhaut[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif); }
 .hover { background-color: ##ENV{couleur_claire,edf3fe}; }
 .deplie { background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierbas.gif); }
 .impliable {}
-.bloc_depliable { display: none; }
+.bloc_depliable.replie { display: none; }
 .bloc_depliable.deplie { display: block; background: none; }
 
 td.pense-bete, a.pense-bete {

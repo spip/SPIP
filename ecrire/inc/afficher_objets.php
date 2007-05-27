@@ -412,7 +412,9 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 	$nb_aff = ($cpt  > floor(1.5 * _TRANCHES)) ? _TRANCHES : floor(1.5 * _TRANCHES) ;
 	$deb_aff = intval(_request($tmp_var));
 
-	$q = spip_query("SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
+	$q = spip_query($u = "SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
+	$id_liste = 't'.substr(md5($u),0,8);
+
 	$t = '';
 	while ($r = spip_fetch_array($q))
 		if (autoriser('voir','article',$r['id_article']))
@@ -435,13 +437,14 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 		. "<img\nsrc='". _DIR_IMG_PACK . $icone ."' alt='$alt' /></a></span>";
 	}
 	$texte .=  '<b>' . $titre_table  . '</b>';
-
-	$res = "\n<div class='liste'>"
-	. bandeau_titre_boite2($texte, "article-24.gif", 'toile_blanche', 'ligne_noire')
+	
+	$res = debut_cadre('liste',"article-24.gif",'',$bouton = bouton_block_depliable($texte,true,$id_liste))
+	. debut_block_depliable(true,$id_liste)
 	. (($cpt <= $nb_aff) ? ''
 	   : afficher_tranches_requete($cpt, $tmp_var, generer_url_ecrire('memoriser', "hash=$hash&trad=$trad"), $nb_aff))
 	. $t
-	. "</div>\n";
+	. fin_block()
+	. fin_cadre();
 
 	return ajax_action_greffe($tmp_var,$res);
 }

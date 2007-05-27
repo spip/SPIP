@@ -35,23 +35,23 @@ function debut_block_depliable($deplie,$id=""){
 	$class=' deplie';
 	// si on n'accepte pas js, ne pas fermer
 	if (_SPIP_AJAX AND !$deplie)
-		$class="";
+		$class=" replie";
 	return "<div ".($id?"id='$id' ":"")."class='bloc_depliable$class'>";	
 }
 // http://doc.spip.org/@fin_block
 function fin_block() {
-	return "<br class='nettoyeur' /></div>";
+	return "<div class='nettoyeur' /></div></div>";
 }
 // $texte : texte du bouton
 // $deplie : true (deplie) ou false (plie) ou -1 (inactif)
 // $ids : id des div lies au bouton (facultatif, par defaut c'est le div.bloc_depliable qui suit)
 function bouton_block_depliable($texte,$deplie,$ids=""){
 	if (!_SPIP_AJAX) $deplie=true; // forcer un bouton deplie si pas de js
-	$bouton_id = substr(md5($texte.microtime()),8);
+	$bouton_id = 'b'.substr(md5($texte.microtime()),8);
 	$class= ($deplie===true)?" deplie":(($deplie==-1)?" impliable":" replie");
 	if (strlen($ids)){
 		$cible = explode(',',$ids);
-		$cible = 'div#'.implode(",div#",$cible);
+		$cible = '#'.implode(",#",$cible);
 		$bouton_id = "";
 	}
 	else{
@@ -60,7 +60,7 @@ function bouton_block_depliable($texte,$deplie,$ids=""){
 	return "<div "
 	  .($bouton_id?"id='$bouton_id' ":"")
 	  ."class='titrem$class'"
-	  . (($deplie==-1)?"":
+	  . (($deplie===-1)?"":
 	  " onclick=\"toggleBouton(jQuery(this),jQuery('$cible'));\""
 	  ." onmouseover=\"jQuery(this).addClass('hover');\""
 	  ." onmouseout=\"jQuery(this).removeClass('hover');\"")
