@@ -82,7 +82,7 @@ function inc_editer_mot_dist($objet, $id_objet, $cherche_mot, $select_groupe, $f
 	// Envoyer titre + div-id + formulaire + fin
 	$bouton = _T('titre_mots_cles').aide ("artmots");
 	if ($flag)
-		$bouton = bouton_block_depliable($bouton,$visible,"lesmots");
+		$bouton = bouton_block_depliable($bouton,'incertain',"lesmots"); // on n'est pas sur de l'etat du bloc, le bouton se mettra dans le bon etat au chargement
 	$res = debut_cadre_enfonce("mot-cle-24.gif", true, "", $bouton)
 	  . $reponse
 	  . $form
