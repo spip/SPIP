@@ -17,6 +17,7 @@ include_spip('inc/presentation');
 function exec_sites_edit_dist()
 {
 	global $connect_statut, $descriptif, $id_rubrique, $id_secteur, $id_syndic, $new, $nom_site, $syndication, $url_site, $url_syndic, $connect_id_rubrique;
+	global $spip_lang_right;
 
 	$result = spip_query("SELECT * FROM spip_syndic WHERE id_syndic=" . intval($id_syndic));
 
@@ -72,18 +73,12 @@ function exec_sites_edit_dist()
 	debut_droite();
 	debut_cadre_formulaire();
 
-	echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>\n<tr>";
-
 	if ($new != 'oui') {
-		echo "<td><br /><br />";
-		echo icone_inline(_T('icone_retour'), generer_url_ecrire("sites","id_syndic=$id_syndic"), 'site-24.gif', "rien.gif");
-		echo "</td>";
-		echo "<td>". http_img_pack('rien.gif', " ", "width='10'") . "</td>\n";
+		echo icone_inline(_T('icone_retour'), generer_url_ecrire("sites","id_syndic=$id_syndic"), 'site-24.gif', "rien.gif", $spip_lang_right);
 	}
-	echo "<td style='width: 100%'>";
 	echo _T('titre_referencer_site');
-	gros_titre($nom_site);
-	echo "</td></tr></table><br />\n";
+	echo gros_titre($nom_site,'',false);
+	echo "<div class='nettoyeur'></div>";
 
 	if ($new == 'oui'
 	AND ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0)){

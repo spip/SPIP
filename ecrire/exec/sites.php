@@ -122,33 +122,24 @@ function exec_sites_dist()
 
 	if (strlen($url_affichee) > 40) $url_affichee = substr($url_affichee, 0, 30)."...";
 
-	echo "<div style='text-align: center;'>";
-	echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
-	echo "<tr><td style='width: 100%' valign='top'>";
-	gros_titre($nom_site, $logo_statut);
+	if ($flag_editable) {
+		echo icone_inline(_T('icone_modifier_site'), generer_url_ecrire('sites_edit',"id_syndic=$id_syndic"), "site-24.gif", "edit.gif",$spip_lang_right);
+	}
+	echo gros_titre($nom_site, $logo_statut,false);
 	echo "<a href='$url_site'><b>$url_affichee</b></a>";
+	echo "<div class='nettoyeur'></div>";
 
 	if (strlen($descriptif)) {
 		echo "<div style='text-align: left; padding: 0 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4; margin: 5px 15px 0 0; ' class='verdana1 spip_xsmall'>";
 		echo propre('{{'._T('info_descriptif').'}} '. $descriptif);
 		echo "</div>";
 	}
-	echo "</td>";
-
-	if ($flag_editable) {
-		echo "<td  class='righted'><br /><br />";
-		echo icone_inline(_T('icone_modifier_site'), generer_url_ecrire('sites_edit',"id_syndic=$id_syndic"), "site-24.gif", "edit.gif");
-		echo "</td>";
-	}
-	echo "</tr></table><br />\n";
 
 	if ($flag_editable AND ($statut == 'publie')) {
 		if ($statut == 'publie') {
 
-			debut_cadre_enfonce();
 			$dater = charger_fonction('dater', 'inc');
 			echo $dater($id_syndic, $flag_editable, $statut, 'syndic', 'sites', $date_heure);
-			fin_cadre_enfonce();	
 		} else {
 			echo "<br />\n<span class='verdana1 spip_medium'>"._T('info_site_propose')." <b>".affdate($date_heure)."&nbsp;</b></span>";
 	}
