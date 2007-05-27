@@ -13,8 +13,9 @@
 #CACHE{3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
-body { 
-	font-family: Verdana, Geneva, Sans, sans-serif; color: #000000;
+
+body {
+	color: #000000;
 	background-color: #f8f7f3; 
 	border: none;
 	margin: 0px;
@@ -26,6 +27,7 @@ body {
 	scrollbar-track-color: ##ENV{couleur_foncee,3874b0};
 	scrollbar-arrow-color: ##ENV{couleur_foncee,3874b0};
 }
+body, body * { font-family: Verdana, Geneva, Sans, sans-serif; }
 
 .toile_claire {
 	background-color: ##ENV{couleur_claire,edf3fe};
@@ -131,8 +133,7 @@ td {
 	background-position: center bottom; 
 	float: none;
 	behavior: url(../dist/win_width.htc);
-	font-size: 12px;
-	font-family: Verdana, Geneva, Sans, sans-serif;}
+	font-size: 12px;}
 .formo { 
 	width: 100%; 
 	display: block;
@@ -141,20 +142,17 @@ td {
 	border: 1px solid ##ENV{couleur_claire,edf3fe}; 
 	background-position: center bottom; float: none; 
 	behavior: url(../dist/win_width.htc);
-	font-size: 12px;
-	font-family: Verdana, Geneva, Sans, sans-serif;}
+	font-size: 12px;}
 .fondl { 
 	padding: 3px; 
 	background-color: #e4e4e4; 
 	border: 1px solid ##ENV{couleur_claire,edf3fe}; 
 	background-position: center bottom; 
 	float: none;
-	font-size: 11px;
-	font-family: Verdana, Geneva, Sans, sans-serif;}
+	font-size: 11px;}
 .fondo { background-color: ##ENV{couleur_foncee,3874b0}; 
 	background-position: center bottom; float: none; color: #FFF;
-	font-size: 11px;
-	font-family: Verdana, Geneva, Sans, sans-serif;font-weight: bold;
+	font-size: 11px;font-weight: bold;
 }
 .fondf { background-color: #fff; border-style: solid ; border-width: 1px; border-color: #e86519; color: #e86519; 
 }
@@ -445,14 +443,12 @@ a.icone26:hover img {
 	border: 2px solid red;
 }
 .icone36-danger span {
-	font-family: Verdana, Geneva, Sans, sans-serif;
 	font-weight: bold;
 	font-size: 10px;
 	color: red; display: block; margin: 2px;
 	width: 100%
 }
 .icone36 span {
-	font-family: Verdana, Geneva, Sans, sans-serif;
 	font-weight: bold;
 	font-size: 10px;
 	color: ##ENV{couleur_foncee,3874b0}; 
@@ -461,7 +457,6 @@ a.icone26:hover img {
 	width: 100%
 }
 .icone36 a:hover span {
-	font-family: Verdana, Geneva, Sans, sans-serif;
 	font-weight: bold;
 	font-size: 10px;
 	color: #000; display: block; margin: 2px;
@@ -475,7 +470,6 @@ a.icone26:hover img {
 	border: none;
 	padding: 0;
 	vertical-align: top;
-	font-family: Verdana, Geneva, Sans, sans-serif;
 	font-weight: bold;
 	text-align: center;
 	text-decoration: none;
@@ -582,7 +576,6 @@ img.aide {
 	padding: 0;
 	margin: 0;
 	vertical-align: top;
-	font-family: Verdana, Geneva, Sans, sans-serif;
 	font-weight: bold;
 	text-align: center;
 	text-decoration: none;
@@ -626,7 +619,6 @@ a.cellule-h {
 	display: block;
 }
 a.cellule-h {
-	font-family: Verdana, Geneva, Sans, sans-serif;
 	font-weight: bold;
 	font-size: 10px;
 	text-align: [(#ENV{ltr}|choixsiegal{left,left,right})];
@@ -634,7 +626,6 @@ a.cellule-h {
 	color: #666;
 }
 a.cellule-h:hover, a.cellule-h:hover a.cellule-h, a.cellule-h a.cellule-h:hover {
-	font-family: Verdana, Geneva, Sans, sans-serif;
 	font-weight: bold;
 	font-size: 10px;
 	text-align: [(#ENV{ltr}|choixsiegal{left,left,right})];
@@ -801,9 +792,9 @@ div.onglet_off {
 .arial1 { font-family: Arial, Sans, sans-serif; font-size: 10px; }
 .arial11 { font-family: Arial, Sans, sans-serif; font-size: 11px; }
 .arial2 { font-family: Arial, Sans, sans-serif; font-size: 12px; }
-.verdana1 { font-family: Verdana, Geneva, Sans, sans-serif; font-size: 10px; }
-.verdana2 { font-family: Verdana, Geneva, Sans, sans-serif; font-size: 11px; }
-.verdana3 { font-family: Verdana, Geneva, Sans, sans-serif; font-size: 13px; }
+.verdana1 { font-size: 10px; }
+.verdana2 { font-size: 11px; }
+.verdana3 { font-size: 13px; }
 .serif { font-family: Georgia, Garamond, Times New Roman, serif; }
 .serif1 { font-family: Georgia, Garamond, Times New Roman, serif; font-size: 11px; }
 .serif2 { font-family: Georgia, Garamond, Times New Roman, serif; font-size: 13px; }
@@ -967,8 +958,7 @@ td.icone table {
 }
 td.icone a {
 	color: #000;
-	text-decoration: none;
-	font-family: Verdana, Geneva, Sans, sans-serif;font-size: 10px;
+	text-decoration: none;font-size: 10px;
 	font-weight: bold;
 }
 td.icone a:hover {
@@ -1154,7 +1144,6 @@ td.icone a img {
 	border-bottom: 1px solid #ccc;
 	background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat;
 	background-color: #e0e0e0;
-	font-family: Verdana, Geneva, Sans, sans-serif;
 	font-size: 11px;
 	text-decoration: none;
 }
@@ -1546,8 +1535,7 @@ table.spip {
 	margin: auto;
 	margin-bottom: 1em;
 	border: 1px solid;
-	border-collapse: collapse;
-	font-family: Verdana, Geneva, Sans, sans-serif;font-size: 0.90em; }
+	border-collapse: collapse;font-size: 0.90em; }
 table.spip caption {
 	caption-side: top; /* bottom pas pris en compte par IE */
 	text-align: center;
@@ -1562,7 +1550,7 @@ table.spip th, table.spip td { padding: 3px; text-align: left; vertical-align: m
 /* Logos, documents et images */
 img, .spip_logos { margin: 0; padding: 0; border: none; }
 
-.spip_documents { text-align: center; font-family: Verdana, Geneva, Sans, sans-serif;font-size: 0.90em; }
+.spip_documents { text-align: center;font-size: 0.90em; }
 .spip_documents p { margin-top: 1px; margin-bottom: 2px; }
 .spip_documents_center { clear: both; width: 100%; margin: auto; }
 span.spip_documents_center { display:block; margin-top:1em; }
@@ -1584,8 +1572,7 @@ span.spip_documents_center { display:block; margin-top:1em; }
 	margin-right: -1px;
 }
 
-.boutonlien {
-	font-family: Verdana, Geneva, Sans, sans-serif;font-weight: bold;
+.boutonlien {font-weight: bold;
 	font-size: 9px;
 }
 a.boutonlien:hover {

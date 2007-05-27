@@ -1,7 +1,5 @@
-body { 
-	font-family: Verdana, Geneva, Sans, sans-serif; 
-	border: 0;
-}
+body, body * { font-family: Verdana, Geneva, Sans, sans-serif; }
+body { border: 0; }
 
 /*
  * Icones et bandeaux
