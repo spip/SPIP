@@ -105,7 +105,7 @@ body {
 	font-family: Georgia, Garamond, Times New Roman, serif;
 }
 h3.spip {
-	font-family: Verdana,Arial,Sans,sans-serif;
+	font-family: Verdana, Geneva, Sans, sans-serif;
 	font-weight: bold;
 	font-size: 115%;
 	text-align: center;

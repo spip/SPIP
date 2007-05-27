@@ -15,11 +15,11 @@
 }
 
 .calendrier-verdana10 {
-	font-family: Verdana, Arial, Sans, sans-serif; font-size: 10px;
+	font-family: Verdana, Geneva, Sans, sans-serif; font-size: 10px;
 }
 
 .calendrier-helvetica16 {
-	font-family: arial,helvetica,sans-serif;
+	font-family: arial, helvetica, sans-serif;
 	font-size: 16px; 
 	color: #000;
 }
@@ -27,7 +27,7 @@
 div.navigation-calendrier {
 	color: #FFF;
 	background-color: #CCC;
-	font-family: verdana, arial, sans,sans-serif;
+	font-family: Verdana, Geneva, Sans, sans-serif;
 	font-weight: bold;
 	font-size: 14px;
 }
@@ -42,7 +42,7 @@ div.navigation-calendrier img {
 	background: #AAA;
 	padding: 3px;
 	margin: 1px;
-	font-family: verdana, arial, sans,sans-serif;
+	font-family: Verdana, Geneva, Sans, sans-serif;
 	font-size: 10px;
 	font-weight: bold;
 	color: #FFF;
@@ -82,7 +82,7 @@ div.navigation-calendrier img {
   	vertical-align: middle;
 	font-size: 10px;
 	font-weight: bold;
-	font-family: Verdana, Arial, Sans, sans-serif;
+	font-family: Verdana, Geneva, Sans, sans-serif;
  }
 
 .calendrier-th a { 

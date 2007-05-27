@@ -31,7 +31,7 @@ spip_log('debut_raccourcis() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NA
 
         debut_cadre_enfonce();
         if ($spip_display != 4) {
-                echo "<font face='Verdana,Arial,Sans,sans-serif' size=1>";
+                echo "<font face='Verdana, Geneva, Sans, sans-serif' size=1>";
                 echo "<b>"._T('titre_cadre_raccourcis')."</b><p />";
         } else {
                 echo "<h3>"._T('titre_cadre_raccourcis')."</h3>";
@@ -146,7 +146,7 @@ spip_log('bandeau_titre_boite() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT
 		$couleur_fond = '#EEEECC';
 		$couleur_texte = '#000000';
 	}
-	echo "<tr bgcolor='$couleur_fond'><td width=\"100%\"><font face='Verdana,Arial,Sans,sans-serif' size='3' color='$couleur_texte'>";
+	echo "<tr bgcolor='$couleur_fond'><td width=\"100%\"><font face='Verdana, Geneva, Sans, sans-serif' size='3' color='$couleur_texte'>";
 	echo "<b>$titre</b></font></td>";
 	if ($afficher_auteurs){
 		echo "<td width='100'>";
