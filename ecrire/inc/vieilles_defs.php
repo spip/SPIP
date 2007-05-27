@@ -311,4 +311,28 @@ spip_log('auth_rubrique() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'
 		$result = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent IN ($r) AND id_rubrique NOT IN ($r)");
 	}
 }
+
+// http://doc.spip.org/@bouton_block_invisible
+function bouton_block_invisible($nom_block, $icone='') {
+	include_spip('inc/layer');
+	return bouton_block_depliable(_T("info_sans_titre"),false,$nom_block);
+}
+
+// http://doc.spip.org/@bouton_block_visible
+function bouton_block_visible($nom_block){
+	include_spip('inc/layer');
+	return bouton_block_depliable(_T("info_sans_titre"),true,$nom_block);
+}
+
+// http://doc.spip.org/@debut_block_visible
+function debut_block_visible($id=""){
+	include_spip('inc/layer');
+	return debut_block_depliable(true,$id);
+}
+
+// http://doc.spip.org/@debut_block_invisible
+function debut_block_invisible($id=""){
+	include_spip('inc/layer');
+	return debut_block_depliable(false,$id);
+}
 ?>

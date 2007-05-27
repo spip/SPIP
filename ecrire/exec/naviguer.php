@@ -237,15 +237,9 @@ if ($id_rubrique>0 AND $GLOBALS['meta']['multi_rubriques'] == 'oui' AND ($GLOBAL
 		$langue_rubrique = $langue_parent;
 
 	debut_cadre_enfonce('langues-24.gif');
-	echo "<table border='0' cellspacing='0' cellpadding='3' width='100%'><tr><td style='background-color: #eeeecc' class='serif2'>";
-	echo bouton_block_invisible('languesrubrique');
-	echo "<b>";
-	echo _T('titre_langue_rubrique');
-	echo "&nbsp; (".traduire_nom_langue($langue_rubrique).")";
-	echo "</b>";
-	echo "</td></tr></table>";
+	echo bouton_block_depliable(_T('titre_langue_rubrique')."&nbsp; (".traduire_nom_langue($langue_rubrique).")",false,'languesrubrique');
 
-	echo debut_block_invisible('languesrubrique');
+	echo debut_block_depliable(false,'languesrubrique');
 	echo "<div class='verdana2' style='text-align: center;'>";
 	if ($menu = liste_options_langues('changer_lang', $langue_rubrique, $langue_parent)) {
 		$lien = redirige_action_auteur('instituer_langue_rubrique', "$id_rubrique-$id_parent","naviguer","id_rubrique=$id_rubrique");

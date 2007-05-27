@@ -176,15 +176,8 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	
 		debut_cadre_enfonce('langues-24.gif');
 	
-		echo "<table border='0' cellspacing='0' cellpadding='3' width='100%'><tr><td style='background-color: #eeeecc' class='serif2'>";
-		echo bouton_block_invisible('languesbreve');
-		echo "<b>";
-		echo _T('titre_langue_breve');
-		echo "&nbsp; (".traduire_nom_langue($langue_breve).")";
-		echo "</b>";
-		echo "</td></tr></table>";
-	
-		echo debut_block_invisible('languesbreve');
+		echo bouton_block_depliable(_T('titre_langue_breve')."&nbsp; (".traduire_nom_langue($langue_breve).")",false,'languesbreve');
+		echo debut_block_depliable(false,'languesbreve');
 		echo "<div style='text-align: center'>";
 
 		if ($menu = liste_options_langues('changer_lang', $langue_breve, $langue_parent))

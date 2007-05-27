@@ -107,15 +107,8 @@ function http_auteurs_ressemblants($cherche_auteur, $id_message)
 }
 
 // http://doc.spip.org/@http_visualiser_participants
-function http_visualiser_participants($auteurs_tmp)
-{
-  return "\n<table border='0' cellspacing='0' cellpadding='3' width='100%'><tr><td style='background-color: #EEEECC' class='arial2'>" .
-    bouton_block_invisible("auteurs,ajouter_auteur") .
-    "<span class='serif2'><b>" .
-    _T('info_nombre_partcipants') .
-    "</b></span>" .
-     $auteurs_tmp .
-    "</td></tr></table>\n";
+function http_visualiser_participants($auteurs_tmp){
+  return bouton_block_depliable(_T('info_nombre_partcipants'),false,"auteurs,ajouter_auteur");
 }
 
 // http://doc.spip.org/@http_ajouter_participants
@@ -229,7 +222,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $che
 			}
 			echo
 			  http_visualiser_participants(join(', ', $auteurs_tmp) . $exp),
-			  debut_block_invisible("auteurs"),
+			  debut_block_depliable(false,"auteurs"),
 			  "\n<table border='0' cellspacing='0' cellpadding='3' width='100%'>",
 			  $res,
 			    "</table>\n",
@@ -240,7 +233,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $che
 		  echo http_ajouter_participants(join(',', $ze_auteurs), $id_message);
 	  else {
 		  echo
-		    debut_block_invisible("ajouter_auteur"),
+		    debut_block_depliable(false,"ajouter_auteur"),
 		    "<br />\n<div style='text-align: right' class='verdana1 spip_small'><a href='" . generer_url_ecrire("message","id_message=$id_message&forcer_dest=oui") . "'>"._T('lien_ajouter_participant')."</a></div>",
 		    fin_block();
 		}

@@ -24,7 +24,6 @@ function inc_joindre_dist($script, $args, $id=0, $intitule='', $mode='', $type='
 	global $spip_lang_right;
 	$vignette_de_doc = ($mode == 'vignette' AND $id_document>0);
 	$distant = ($mode == 'document' AND $type);
-	if ($intitule) $intitule = "<span>$intitule</span><br />";
 
 	$dir_ftp = '';
 	if (!_DIR_RESTREINT AND !$vignette_de_doc AND $GLOBALS['flag_upload']) {
@@ -49,8 +48,8 @@ function inc_joindre_dist($script, $args, $id=0, $intitule='', $mode='', $type='
 	if ($dir_ftp OR $distant OR $vignette_de_doc) {
 		$bloc = "ftp_$mode" .'_'. intval($id_document);
 		$debut = "\n\t<div style='float:".$GLOBALS['spip_lang_left'].";position:relative'>"
-			. bouton_block_invisible($bloc) ."</div>\n";
-		$milieu = debut_block_invisible($bloc);
+			. bouton_block_depliable($libelle,false,$bloc) ."</div>\n";
+		$milieu = debut_block_depliable(false,$bloc);
 		$fin = "\n\t" . fin_block();
 
 	} else $debut = $milieu = $fin = '';
@@ -82,7 +81,7 @@ function inc_joindre_dist($script, $args, $id=0, $intitule='', $mode='', $type='
 	return generer_action_auteur('joindre',
 		(intval($id) .'/' .intval($id_document) . "/$mode/$type"),
 		(_DIR_RESTREINT)?$script:generer_url_ecrire($script, $args, true),
-		"$iframe$debut$intitule$res$dir_ftp$distant$fin",
+		"$iframe$debut$res$dir_ftp$distant$fin",
 		" method='post' enctype='multipart/form-data' class='form_upload'");
 }
 

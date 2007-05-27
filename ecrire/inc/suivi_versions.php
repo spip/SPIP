@@ -116,15 +116,18 @@ $revisions .= "<a href='".generer_url_ecrire('suivi_revisions', "debut=$next&id_
 					$logo_statut = "puce-".puce_statut($statut).".gif";
 					$revisions .= "\n<div class='tr_liste' style='padding: 5px; border-top: 1px solid #aaaaaa;'>";
 		
-					$revisions .= "<span class='arial2'>";
-					if (!$court) $revisions .= bouton_block_visible("$id_version-$id_article-$id_auteur");
-					$revisions .= "<img src='" . _DIR_IMG_PACK . "$logo_statut' alt=' ' />&nbsp;";
-					$revisions .= "<a class='$statut' style='font-weight: bold;' href='" . generer_url_ecrire("articles_versions","id_article=$id_article") . "'>$titre</a>";
-					$revisions .= "</span>";
-					$revisions .= "<span class='arial1' dir='$lang_dir'>";
-					$revisions .= " ".date_relative($date)." "; # laisser un peu de privacy aux redacteurs
-					if (strlen($nom)>0) $revisions .= "($nom)";
-					$revisions .= "</span>";
+					$titre_bouton = "<span class='arial2'>";
+					$titre_bouton .= "<img src='" . _DIR_IMG_PACK . "$logo_statut' alt=' ' />&nbsp;";
+					$titre_bouton .= "<a class='$statut' style='font-weight: bold;' href='" . generer_url_ecrire("articles_versions","id_article=$id_article") . "'>$titre</a>";
+					$titre_bouton .= "<span class='arial1' dir='$lang_dir'>";
+					$titre_bouton .= " ".date_relative($date)." "; # laisser un peu de privacy aux redacteurs
+					$titre_bouton .= "</span>";
+					if (strlen($nom)>0) $titre_bouton .= "($nom)";
+					$titre_bouton .= "</span>";
+					if (!$court)
+						$revisions .= bouton_block_depliable($titre_bouton,true,"$id_version-$id_article-$id_auteur");
+					else
+						$revisions .= $titre_bouton;
 				} else {
 					$item = array(
 						'title' => $titre,
@@ -139,7 +142,7 @@ $revisions .= "<a href='".generer_url_ecrire('suivi_revisions', "debut=$next&id_
 				if (!$court) {
 					$textes = revision_comparee($id_article, $id_version, 'diff');
 					if (!$rss)
-						$revisions .= debut_block_visible("$id_version-$id_article-$id_auteur");
+						$revisions .= debut_block_depliable(true,"$id_version-$id_article-$id_auteur");
 	
 					if (is_array($textes))
 					foreach ($textes as $var => $t) {

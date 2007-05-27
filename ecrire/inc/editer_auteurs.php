@@ -106,18 +106,10 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 		. $res;
 	}
 
-	$bouton = (!$flag 
-		   ? ''
-		   : (($flag === 'ajax')
-			? bouton_block_visible("auteurs$type")
-			: bouton_block_invisible("auteurs$type")))
-	. $titre_boite;
-
+	$bouton = (!$flag ? $titre_boite : bouton_block_depliable($titre_boite,$flag === 'ajax',"auteurs$type"));
 	$res = debut_cadre_enfonce("auteur-24.gif", true, "", $bouton)
 	. $reponse
-	.  ($flag === 'ajax' ?
-		debut_block_visible("auteurs$type") :
-		debut_block_invisible("auteurs$type"))
+	. debut_block_depliable($flag === 'ajax',"auteurs$type")
 	. $res
 	. fin_block()
 	. fin_cadre_enfonce(true);
