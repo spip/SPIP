@@ -18,6 +18,7 @@ include_spip('base/abstract_sql');
 // http://doc.spip.org/@exec_mots_edit_dist
 function exec_mots_edit_dist()
 {
+	global $spip_lang_right;
 // attention, ajouter_id_article n'est pas forcement un id d'article
 global $ajouter_id_article, $champs_extra, $connect_statut, $descriptif, $id_groupe,  $id_mot, $table_id, $new, $redirect, $spip_display, $table, $texte, $titre, $titre_mot, $les_notes;
 
@@ -122,11 +123,9 @@ global $ajouter_id_article, $champs_extra, $connect_statut, $descriptif, $id_gro
 
 	$out .= debut_cadre_relief("mot-cle-24.gif",true);
 
-
-	$out .= "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
-	$out .= "<tr>";
-	$out .= "<td style='width: 100%' valign='top'>";
+	$out .= icone_inline(_T('icone_retour'), generer_url_ecrire('mots_tous'), "mot-cle-24.gif", "rien.gif",$spip_lang_right);
 	$out .= gros_titre($titre_mot,'',false);
+	$out .= "<div class='nettoyeur'></div>";
 
 	if ($descriptif) {
 		$out .= "<div style='border: 1px dashed #aaaaaa; ' class='verdana1 spip_small'>";
@@ -135,10 +134,6 @@ global $ajouter_id_article, $champs_extra, $connect_statut, $descriptif, $id_gro
 		$out .= "&nbsp; ";
 		$out .= "</div>";
 	}
-
-	$out .= "</td>";
-	$out .= "</tr></table>\n";
-
 
 	if (strlen($texte)>0){
 		$out .= "<p class='verdana1 spip_small'>";
