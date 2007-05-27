@@ -164,8 +164,6 @@ onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
 	}
   }
 
-  $res =  debut_cadre_couleur('',true) . $res .  fin_cadre_couleur(true);
-
   return ajax_action_greffe("dater-$id", $res);
 }
 

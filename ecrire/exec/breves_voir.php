@@ -125,36 +125,27 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	debut_droite();
 	
 	debut_cadre_relief("breve-24.gif");
-	echo "<table width='100%' cellpadding='0' cellspacing='0' border='0'>";
-	echo "<tr><td class='serif'>";
-
-	echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
-	echo "<tr><td style='width: 100%' valign='top'>";
-	gros_titre($titre);
-	echo "</td>";
+	//echo "</td>";
 
 	if ($flag_editable) {
-		echo "<td >";
-		echo icone(
+		echo icone_inline(
 			// TODO -- _L("Fil a travaille sur cette breve il y a x minutes")
 			!$modif ? _T('icone_modifier_breve')
 				: _T('texte_travail_article', $modif),
 			generer_url_ecrire("breves_edit","id_breve=$id_breve&retour=nav"),
 			!$modif ? "breve-24.gif" : "warning-24.gif",
-			!$modif ? "edit.gif" : ''
+			!$modif ? "edit.gif" : '',
+			$GLOBALS['spip_lang_right']
 		);
-		echo "</td>";
 	}
-	echo "</tr></table>\n";
+	echo gros_titre($titre). "<br class='nettoyeur' />";
 
 	if ($flag_editable AND ($statut == 'publie')) {
 	
 		if ($statut == 'publie') {	
 	
-			debut_cadre_enfonce();
 			$dater = charger_fonction('dater', 'inc');
 			echo $dater($id_breve, $flag_editable, $statut, 'breve', 'breves_voir', $date_heure);
-			fin_cadre_enfonce();	
 		}
 		else {
 			echo "<p><span class='verdana1 spip_medium'><b>".affdate($date_heure)."&nbsp;</b></span></p>";
@@ -174,9 +165,9 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 		$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_breves WHERE id_breve=$id_breve"));
 		$langue_breve = $row['lang'];
 	
-		debut_cadre_enfonce('langues-24.gif');
+		$bouton = bouton_block_depliable(_T('titre_langue_breve')."&nbsp; (".traduire_nom_langue($langue_breve).")",false,'languesbreve');
+		echo debut_cadre_enfonce('langues-24.gif',true,'',$bouton);
 	
-		echo bouton_block_depliable(_T('titre_langue_breve')."&nbsp; (".traduire_nom_langue($langue_breve).")",false,'languesbreve');
 		echo debut_block_depliable(false,'languesbreve');
 		echo "<div style='text-align: center'>";
 
@@ -224,7 +215,6 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 		echo "</div>";
 	}	
 
-	echo "</td></tr></table>";
 
 	fin_cadre_relief();
 	

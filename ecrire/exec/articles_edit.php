@@ -98,6 +98,7 @@ function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new,
 // http://doc.spip.org/@articles_edit_presentation
 function articles_edit_presentation($new, $id_rubrique, $lier_trad, $id_article, $titre)
 {
+	global $spip_lang_right;
 	$oups = ($lier_trad ?
 	     generer_url_ecrire("articles","id_article=$lier_trad")
 	     : ($new
@@ -106,17 +107,9 @@ function articles_edit_presentation($new, $id_rubrique, $lier_trad, $id_article,
 		));
 
 	return
-		"\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>" .
-		"<tr>" .
-		"\n<td>" .
-		icone_inline(_T('icone_retour'), $oups, "article-24.gif", "rien.gif") .
-		"</td>\n<td>" .
-		"<img src='" .
-	  	_DIR_IMG_PACK .	"rien.gif' width='10' alt='' />" .
-		"</td>\n" .
-		"<td style='width: 100%'>" .
+		icone_inline(_T('icone_retour'), $oups, "article-24.gif", "rien.gif",$spip_lang_right) .
 	 	_T('texte_modifier_article') .
 		gros_titre($titre,'',false) . 
-		"</td></tr></table><hr />\n";
+		"<hr />\n";
 }
 ?>
