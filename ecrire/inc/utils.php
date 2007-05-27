@@ -1125,10 +1125,12 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	:	false));
 
 	// Definition des droits d'acces en ecriture
-	if(!_FILE_CHMOD)
-		define('_SPIP_CHMOD', 0777);
-	else
-		include_once _FILE_CHMOD;
+	if (!defined('_SPIP_CHMOD')) {
+		if(_FILE_CHMOD)
+			include_once _FILE_CHMOD;
+		else
+			define('_SPIP_CHMOD', 0777);
+	}
 
 	// la taille maxi des logos (0 : pas de limite)
 	define('_LOGO_MAX_SIZE', 0); # poids en ko

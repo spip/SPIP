@@ -128,7 +128,7 @@ function install_bases(){
 	if($chmod) {
 		$conn = "<"."?php\n";
 		$conn .= "if (!defined(\"_ECRIRE_INC_VERSION\")) return;\n";
-		$conn .= "define('_SPIP_CHMOD', ".$chmod.");\n";
+		$conn .= "@define('_SPIP_CHMOD', ". sprintf('0%3o',$chmod).");\n";
 		$conn .= "?".">";
 		if (!ecrire_fichier(_FILE_CHMOD_INS . _FILE_TMP . '.php',
 		$conn))

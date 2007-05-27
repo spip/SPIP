@@ -60,10 +60,9 @@ function caracteriser_auteur() {
 
 	if ($caracterisation) return $caracterisation;
 
-	$id_auteur = $auteur_session['id_auteur'];
-	if (!$id_auteur) {
+	if (!isset($auteur_session['id_auteur'])) {
   // si l'auteur courant n'est pas connu alors qu'il peut demander une action
-  // c'est une connexion par php_auth, on se rabat sur le cookie.
+  // c'est une connexion par php_auth ou 1 instal, on se rabat sur le cookie.
   // S'il n'avait pas le droit de realiser cette action, le hash sera faux.
 		if (isset($_COOKIE['spip_session'])
 		AND (preg_match('/^(\d+)/',$_COOKIE['spip_session'],$r))) {
@@ -73,7 +72,7 @@ function caracteriser_auteur() {
 		} else return array('',''); 	  
 	}
 	// Eviter l'acces SQL si le pass est connu de PHP
-
+	$id_auteur = $auteur_session['id_auteur'];
 	if (isset($auteur_session['pass']) AND $auteur_session['pass'])
 		return $caracterisation = array($id_auteur, $auteur_session['pass']); 
 	else {
@@ -88,7 +87,7 @@ function caracteriser_auteur() {
 
 // http://doc.spip.org/@_action_auteur
 function _action_auteur($action, $id_auteur, $pass, $nom_alea) {
-	return md5($action.$id_auteur.$pass .$GLOBALS['meta'][$nom_alea]);
+	return md5($action.$id_auteur.$pass .@$GLOBALS['meta'][$nom_alea]);
 }
 
 // http://doc.spip.org/@calculer_action_auteur

@@ -224,7 +224,7 @@ function verifier_lang_url() {
 //
 // http://doc.spip.org/@utiliser_langue_site
 function utiliser_langue_site() {
-	return changer_langue($GLOBALS['meta']['langue_site']);
+	return changer_langue(@$GLOBALS['meta']['langue_site']);//@:install
 }
 
 // http://doc.spip.org/@utiliser_langue_visiteur

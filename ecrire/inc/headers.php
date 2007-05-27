@@ -82,7 +82,7 @@ function http_status($status) {
 // http://doc.spip.org/@http_no_cache
 function http_no_cache() {
 	if (headers_sent()) return;
-	if (!$charset = $GLOBALS['meta']['charset']) $charset = 'utf-8';
+	$charset = empty($GLOBALS['meta']['charset']) ? 'utf-8' : $GLOBALS['meta']['charset'];
 
 	// selon http://developer.apple.com/internet/safari/faq.html#anchor5
 	// il faudrait aussi pour Safari
