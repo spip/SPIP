@@ -126,8 +126,11 @@ function afficher_titre_syndic_article($row){
 	$lesauteurs=typo($row["lesauteurs"]);
 	$statut=$row["statut"];
 	$descriptif=safehtml($row["descriptif"]);
-	
-	$s = "<a href='$url'>$titre</a>";
+
+	if ($url)
+		$s = "<a href='$url'>$titre</a>";
+	else
+		$s = $titre;
 
 	$date = affdate_court($date);
 	if (strlen($lesauteurs) > 0) $date = $lesauteurs.', '.$date;

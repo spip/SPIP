@@ -377,16 +377,35 @@ function analyser_backend($rss, $url_syndic='') {
 // Insere un article syndique (renvoie true si l'article est nouveau)
 //
 // http://doc.spip.org/@inserer_article_syndique
-function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $url_syndic, $resume, $documents) {
+function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $url_syndic, $resume, $documents, &$faits) {
 	// Creer le lien s'il est nouveau - cle=(id_syndic,url)
-	// On coupe a 255 caracteres pour eviter tout doublon sur une URL de plus de 255 qui
-	// exloserait la base de donnees
+	// On coupe a 255 caracteres pour eviter tout doublon
+	// sur une URL de plus de 255 qui exloserait la base de donnees
 	$le_lien = substr($data['url'], 0,255);
 
-	$s = spip_query("SELECT * FROM spip_syndic_articles WHERE url=" . _q($le_lien) . " AND id_syndic=$now_id_syndic ORDER BY maj LIMIT 0,1");
-	if ($a = spip_fetch_array($s)) {
+	// Chercher les liens de meme cle
+	$s = spip_query("SELECT id_syndic_article,titre FROM spip_syndic_articles WHERE url=" . _q($le_lien) . " AND id_syndic=$now_id_syndic ORDER BY maj DESC");
+
+	// S'il y a plusieurs liens qui repondent, il faut choisir le plus proche
+	// (ie meme titre et pas deja fait), le mettre a jour et ignorer les autres
+	if (spip_num_rows($s) > 1) {
+		while ($a = spip_fetch_array($s))
+			if ($a['titre'] == $data['titre']
+			AND !in_array($a['id_syndic_article'], $faits)) {
+				$id_syndic_article = $a['id_syndic_article'];
+				break;
+			}
+	}
+
+	// Sinon, s'il y en a un, on verifie qu'on ne vient pas de l'ecrire avec
+	// un autre item du meme feed qui aurait le meme link
+	else if ($a = spip_fetch_array($s)
+	AND !in_array($a['id_syndic_article'], $faits)) {
 		$id_syndic_article = $a['id_syndic_article'];
-	} else {
+	}
+
+	// Si l'article n'existe pas, on le cree
+	if (!isset($id_syndic_article)) {
 		if (spip_sql_error()) {
 			return;
 		} else {
@@ -395,6 +414,7 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 			$ajout = true;
 		}
 	}
+	$faits[] = $id_syndic_article;
 
 	// Descriptif, en mode resume ou mode 'full text'
 	// on prend en priorite data['descriptif'] si on est en mode resume,
@@ -482,22 +502,22 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	// Les enregistrer dans la base
 	if (is_array($articles)) {
 		$urls = array();
+		$faits = array();
 		foreach ($articles as $data) {
-			inserer_article_syndique ($data, $now_id_syndic, $moderation, $url_site, $url_syndic, $row['resume'], $row['documents']);
-			$urls[] = $data['url'];
+			inserer_article_syndique ($data, $now_id_syndic, $moderation, $url_site, $url_syndic, $row['resume'], $row['documents'], $faits);
 		}
 
 		// moderation automatique des liens qui sont sortis du feed
-		if (count($urls) > 0
+		if (count($faits) > 0
 		AND $row['miroir'] == 'oui') {
-			spip_query("UPDATE spip_syndic_articles	SET statut='off', maj=maj WHERE id_syndic=$now_id_syndic AND NOT (url IN ("	. join(",", array_map('_q',$urls))	. "))");
+			spip_query("UPDATE spip_syndic_articles	SET statut='off', maj=maj WHERE id_syndic=$now_id_syndic AND NOT (id_syndic_article IN (" . join(",", $faits) . "))");
 		}
 
 		// suppression apres 2 mois des liens qui sont sortis du feed
-		if (count($urls) > 0
+		if (count($faits) > 0
 		AND $row['oubli'] == 'oui') {
 			$time = date('U') - 61*24*3600; # deux mois
-			spip_query("DELETE FROM spip_syndic_articles WHERE id_syndic=$now_id_syndic AND UNIX_TIMESTAMP(maj) < $time AND UNIX_TIMESTAMP(date) < $time AND NOT (url IN (" . join(",", array_map('_q',$urls)) . "))");
+			spip_query("DELETE FROM spip_syndic_articles WHERE id_syndic=$now_id_syndic AND UNIX_TIMESTAMP(maj) < $time AND UNIX_TIMESTAMP(date) < $time AND NOT (id_syndic_article IN (" . join(",", $faits) . "))");
 		}
 
 
