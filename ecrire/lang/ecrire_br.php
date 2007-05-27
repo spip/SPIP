@@ -106,6 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cache_modifiable_webmestre' => 'Gant webmestr al lec\'hienn e c\'hell an dilenn-se beza&ntilde; kemmet',
 'calendrier_synchro' => 'Ma implijit ur meziant deiziataer heglot gant <b>iCal</b> e c\'hellit e adkenamzeria&ntilde; ouzh titouro&ugrave; al lec\'hienn-ma&ntilde;.',
 'connexion_ldap' => 'Kennaska&ntilde; :',
+'copier_en_local' => 'Kopia&ntilde; en diabarzh',
 
 
 // D

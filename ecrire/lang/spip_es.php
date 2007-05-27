@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'afficher_trad' => 'Mostrar las traducciones',
 'alerte_maj_impossible' => '<b>&iexcl;Alerta!</b> La actualizaci&oacute;n de la base MySQL hacia la versi&oacute;n  @version@ es imposible, quiz&aacute; por un problema de derechos de modificaci&oacute;n en la base de datos. Por favor, contacta al administrador de tu hospedaje.',
 'analyse_xml' => 'An&aacute;lisis XML',
+'annuler' => '<NEW>Annuler',
 'antispam_champ_vide' => 'Por favor, deje este campo vac&iacute;o&nbsp;:',
 'avis_archive_incorrect' => 'El archivo de respaldo no es un archivo SPIP.',
 'avis_archive_invalide' => 'el archivo de respaldo no es v&aacute;lido',
@@ -660,6 +661,10 @@ volver a conectarte al sitio.
 'precedent' => 'precedente',
 'previsualisation' => 'Previsualizaci&oacute;n',
 'previsualiser' => 'Previsualizar',
+
+
+// R
+'retour' => '<NEW>Retour',
 
 
 // S

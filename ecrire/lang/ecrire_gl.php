@@ -116,6 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cache_modifiable_webmestre' => 'Este par&aacute;metro &eacute; modific&aacute;bel polo webm&aacute;ster do web.',
 'calendrier_synchro' => 'Se usa un programa de axenda compatible <b>iCal</b>, poder&aacute; sincronizalo coas informaci&oacute;ns deste web.',
 'connexion_ldap' => 'Conexi&amp;oacute;n :',
+'copier_en_local' => 'Copiar en local',
 
 
 // D
@@ -298,16 +299,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_config_suivi' => 'Se este enderezo corresponde &aacute; unha lista de correo, vostede pode indicar aqu&iacute; abaixo o enderezo co cal os participantes no web se poden inscribir. Este enderezo pode ser un URL (por exemplo a p&aacute;xina de inscrici&oacute;n &aacute; lista via web), ou un enderezo de correo electr&oacute;nico dotado dun asunto espec&iacute;fico (por exemplo: <tt>@adresse_suivi@?subject=subscribirse</tt>):',
 'info_config_suivi_explication' => 'Pode subscribirse &aacute; lista de correo deste web. Recibir&aacute; ent&oacute;n por correo os anuncios de artigos e de breves propostas para publicaci&oacute;n.',
 'info_confirmer_passe' => 'Confirmar a nova chave:',
-'info_connexion_base' => 'Segunda etapa: <b>Proba de conexi&amp;oacute; &amp;aacute; base</b>',
+'info_connexion_base' => 'Proba de conexi&oacute;n coa base de datos',
 'info_connexion_ldap_ok' => 'Conexi&oacute;n LDAP conquerida.</b><p/> Pode pasar &aacute; etapa seguinte.',
-'info_connexion_mysql' => 'Primeira etapa: <b>A s&amp;uacute;a conexi&oacute;n MySQL</b>',
+'info_connexion_mysql' => 'A s&uacute;a conexi&oacute;n MySQL',
 'info_connexion_ok' => 'Conexi&oacute;n feita.',
 'info_contact' => 'Contacto',
 'info_contenu_articles' => 'Contido dos artigos',
 'info_creation_mots_cles' => 'Crea e configura aqu&iacute; as palabras chave do web',
 'info_creation_paragraphe' => '(Para crear par&aacute;grafos, simplemente deixe li&ntilde;as baleiras.)',
 'info_creation_rubrique' => 'Antes de poder escribir artigos,<br /> ten que crear, cando menos un tema ou secci&amp;oacute;n.<br />',
-'info_creation_tables' => 'Cuarta etapa: <b>Creaci&amp;oacute;n das t&amp;aacute;boas da base</b>',
+'info_creation_tables' => 'Creaci&oacute;n das t&aacute;boas da base de datos',
 'info_creer_base' => '<b>Crear</b> unha nova base de datos:',
 'info_dans_groupe' => 'No grupo:',
 'info_dans_rubrique' => 'No tema:',
@@ -316,7 +317,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_delet_mots_cles' => 'Solicitouse eliminar a palabra clave
 <b>@titre_mot@</b> (@type_mot@). Esta palabra clave est&amp;aacute; ligada a
 <b>@texte_lie@</b>, ten que confirmar a s&amp;uacute;a decisi&amp;oacute;n&nbsp;:',
-'info_derniere_etape' => 'Derradeira etapa: Acabouse!',
+'info_derniere_etape' => 'Acabouse!',
 'info_derniere_syndication' => 'A &uacute;ltima afiliaci&oacute;n deste web f&iacute;xose o',
 'info_derniers_articles_publies' => 'Os teus &uacute;ltimos artigos publicados en li&ntilde;a',
 'info_desactiver_forum_public' => 'Desactivar o uso dos foros
@@ -386,7 +387,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_image_process' => 'Probe a seleccionar o mellor m&eacute;todo de fabricaci&oacute;n de vi&ntilde;etas premendo sobre a imaxe correspondente.',
 'info_image_process2' => '<b>N.B.</b> <i>Se non aparece ningunha imaxe, significa que o servidor que aloxa o web non foi configurado para para usar tales utilidades. Se desexa empregar estas funci&oacute;ns, contacte co responsable t&eacute;cnico e solic&iacute;telle as extensi&oacute;ns &laquo;GD&raquo; ou &laquo;Imagick&raquo;.</i>',
 'info_images_auto' => 'Imaxes calculadas automaticamente',
-'info_informations_personnelles' => 'Quinta etapa: <b>Datos persoais</b>',
+'info_informations_personnelles' => 'Datos persoais',
 'info_inscription_automatique' => 'Rexistro autom&aacute;tico de novos redactores',
 'info_jeu_caractere' => 'Xogo de caracteres do web',
 'info_jours' => 'd&iacute;as',
@@ -594,7 +595,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_surtitre' => 'Sobret&iacute;tulo:',
 'info_syndication_integrale_1' => 'O seu web prop&oacute;n ficheiros de sindicaci&oacute;n (ver &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
 'info_syndication_integrale_2' => 'Quere transmitir os seus artigos &iacute;ntegros, ou non difundir m&aacute;is ca un resumo dalg&uacute;ns centos de car&aacute;cteres&nbsp;?',
-'info_table_prefix' => 'Os datos deste web quedan rexistrados nas t&aacute;boas chamadas <tt><b>spip</b>_articles</tt>, <tt><b>spip</b>_rubriques</tt>, etc. Se instala varios webs na mesma base de datos, pode modificar este prefixo (ollo, unicamente con letras min&uacute;sculas e sen acentos).',
+'info_table_prefix' => 'Pode modificarse o prefixo do nome das t&aacute;boas da base de datos (iso &eacute; imprescindible s&oacute; cando se quere instalar varios spip na mesma base de datos). Este prefixo debe escribirse unicamente con letras min&uacute;sculas e sen acentos nin espazos en branco.',
 'info_taille_maximale_vignette' => 'Tama&ntilde;o m&aacute;ximo das vi&ntilde;etas xeradas polo sistema:',
 'info_terminer_installation' => 'Agora podes rematar o proceso de instalaci&oacute;n est&aacute;ndar.',
 'info_texte' => 'Texto',

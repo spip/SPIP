@@ -6,7 +6,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
+'activer_plugin' => '<NEW>Activer le plugin',
 'aide_non_disponible' => 'Esta parte da ajuda em linha ainda n&atilde;o est&aacute; dispon&iacute;vel nesta l&iacute;ngua ',
+'auteur' => '<NEW>Auteur&nbsp;:',
 'avis_acces_interdit' => 'Accesso proibido ',
 'avis_article_modifie' => 'Aten&ccedil;&atilde;o, @nom_auteur_modif@  trabalhou neste artigo h&aacute; @date_diff@ minutes',
 'avis_aucun_resultat' => 'Nenhum resultado ',
@@ -31,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     N&atilde;o valide este pedido de importa&ccedil;&atilde;o.
     <p />Para mais informa&ccedil;&otilde;es, leia
     <a href=\'http://www.spip.net/fr_article1489.html\'>a documenta&ccedil;&atilde;o do SPIP</a>.',
-'avis_espace_interdit' => '<b>Espa&ccedil;o interdito</b><p>SPIP j&aacute; est&aacute; instalado.',
+'avis_espace_interdit' => '<MODIF><b>Espa&ccedil;o interdito</b><p>SPIP j&aacute; est&aacute; instalado.',
 'avis_lecture_noms_bases_1' => 'O programa de instala&ccedil;&atilde;o n&atilde;o conseguiu ler os nomes das bases de dados instaladas. ',
 'avis_lecture_noms_bases_2' => 'Ou nenhuma base est&aacute; dispon&iacute;vel, ou a fun&ccedil;&atilde;o que permite listar as bases foi desactivada
  por raz&otilde;es de seguran&ccedil;a( o que &eacute; o caso em muitos servi&ccedil;os de hospedagem).  ',
@@ -39,6 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_non_acces_message' => 'N&atilde;o tem acesso a esta mensagem. ',
 'avis_non_acces_page' => 'N&atilde;o tem acesso a esta p&aacute;gina. ',
 'avis_operation_echec' => 'A opera&ccedil;&atilde;o falhou. ',
+'avis_operation_impossible' => '<NEW>Op&eacute;ration impossible',
 'avis_probleme_archive' => 'Problema de leitura do ficheiro @archive@',
 'avis_site_introuvable' => 'N&atilde;o se encontra o s&iacute;tio',
 'avis_site_syndique_probleme' => 'Aten&ccedil;&atilde;o: a liga&ccedil;&atilde;o deste s&iacute;tio teve um problema &nbsp;; o sistema est&aacute; portanto temporariamente interrompido. Verifique o endere&ccedil;o do ficheiro de liga&ccedil;&atilde;o deste s&iacute;tio (<b>@url_syndic@</b>), e tente uma nova recupera&ccedil;&atilde;o das informa&ccedil;&otilde;es. ',
@@ -49,10 +52,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // B
-'bouton_acces_ldap' => 'Acrescentar o acesso a LDAP >>',
+'bouton_acces_ldap' => '<MODIF>Acrescentar o acesso a LDAP >>',
 'bouton_ajouter' => 'Acrescentar ',
 'bouton_ajouter_participant' => 'ACRESCENTAR UM PARTICIPANTE&nbsp;:',
 'bouton_annonce' => 'AN&Uacute;NCIO',
+'bouton_annuler' => '<NEW>Annuler',
 'bouton_checkbox_envoi_message' => 'possibilidade de mandar uma mensagem',
 'bouton_checkbox_indiquer_site' => 'indicar obrigatoriamente um s&iacute;tio Web',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'os administradores do s&iacute;tio',
@@ -61,11 +65,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_signature_unique_email' => 'uma &uacute;nica assinatura por endere&ccedil;o email',
 'bouton_checkbox_signature_unique_site' => 'uma &uacute;nica assinatura por s&iacute;tio Web',
 'bouton_demande_publication' => 'Pedir a publica&ccedil;&atilde;o deste artigo ',
+'bouton_desactive_tout' => '<NEW>Tout d&eacute;sactiver',
 'bouton_effacer_index' => 'Apagar os &iacute;ndices',
 'bouton_effacer_tout' => 'Apagar TUDO',
 'bouton_envoi_message_02' => 'MANDAR UMA MENSAGEM',
 'bouton_envoyer_message' => 'Mensagem definitiva: mandar',
-'bouton_forum_petition' => 'F&Oacute;RUM &amp; ABAIXO-ASSINADO',
+'bouton_forum_petition' => '<MODIF>F&Oacute;RUM &amp; ABAIXO-ASSINADO',
 'bouton_modifier' => 'Modificar',
 'bouton_pense_bete' => 'MEMORANDO DE USO PESSOAL',
 'bouton_radio_activer_messagerie' => 'Activar a caixa do correio interno',
@@ -95,8 +100,8 @@ utilizadores devem ter uma assinatura ao fornecer o seu endere&ccedil;o e-mail a
 'bouton_radio_petition_activee' => 'Abaixo-assinado activado',
 'bouton_radio_publication_immediate' => 'Publica&ccedil;&atilde;o imediata das mensagens
  (as contribui&ccedil;&otilde;es afixam-se logo que s&atilde;o enviadas, os administradores podem suprimi-las depois).',
-'bouton_radio_sauvegarde_compressee' => 'Salvaguarda comprimida como @fichier@',
-'bouton_radio_sauvegarde_non_compressee' => 'salvaguarda n&atilde;o comprimida como   @fichier@',
+'bouton_radio_sauvegarde_compressee' => '<MODIF>Salvaguarda comprimida como @fichier@',
+'bouton_radio_sauvegarde_non_compressee' => '<MODIF>salvaguarda n&atilde;o comprimida como   @fichier@',
 'bouton_radio_supprimer_petition' => 'Suprimir o abaixo-assinado',
 'bouton_radio_syndication' => 'Vincula&ccedil;&atilde;o',
 'bouton_redirection' => 'REDIRIGIR',
@@ -114,6 +119,8 @@ utilizadores devem ter uma assinatura ao fornecer o seu endere&ccedil;o e-mail a
 'cache_mode_non_compresse' => 'Os ficheiros da cache s&atilde;o gravados em modo n&atilde;o comprimido.',
 'cache_modifiable_webmestre' => 'Este par&acirc;metro &eacute; modific&aacute;vel pelo webmaster do site.',
 'calendrier_synchro' => 'Se utilizar um software de agenda compat&iacute;vel <b>iCal</b>, pode sincroniz&aacute;-lo com as informa&ccedil;&otilde;es deste s&iacute;tio.',
+'connexion_ldap' => '<NEW>Connexion :',
+'copier_en_local' => '<NEW>Copier en local',
 
 
 // D
@@ -132,13 +139,13 @@ utilizadores devem ter uma assinatura ao fornecer o seu endere&ccedil;o e-mail a
 'email_2' => 'email :',
 'entree_adresse_annuaire' => 'Endere&ccedil;o do anu&aacute;rio',
 'entree_adresse_email' => 'O seu endere&ccedil;o email',
-'entree_adresse_fichier_syndication' => 'Endere&ccedil;o do ficheiro  &laquo;&nbsp;backend&nbsp;&raquo; para a vincula&ccedil;&atilde;o&nbsp;:',
+'entree_adresse_fichier_syndication' => '<MODIF>Endere&ccedil;o do ficheiro  &laquo;&nbsp;backend&nbsp;&raquo; para a vincula&ccedil;&atilde;o&nbsp;:',
 'entree_adresse_site' => '<b>Endere&ccedil;o do s&iacute;tio</b> [Obrigat&oacute;rio]',
 'entree_base_donnee_1' => 'Endere&ccedil;o da base de dados',
 'entree_base_donnee_2' => '(Muitas vezes, este endere&ccedil;o corresponde ao do seu s&iacute;tio, outras vezes, corresponde &agrave; men&ccedil;&atilde;o &laquo;localhost&raquo;, &agrave;s vezes, fica totalmente vazio.)',
 'entree_biographie' => 'Curta biografia, em poucas palavras',
 'entree_breve_publiee' => 'Deve-se publicar esta not&iacute;cia?',
-'entree_chemin_acces' => '<b>Introduzir</b> o caminho de acesso&nbsp;:',
+'entree_chemin_acces' => '<MODIF><b>Introduzir</b> o caminho de acesso&nbsp;:',
 'entree_cle_pgp' => 'A sua chave PGP',
 'entree_contenu_rubrique' => '(Conte&uacute;do da rubrica em poucas palavras.)',
 'entree_description_site' => 'Descri&ccedil;&atilde;o do s&iacute;tio',
@@ -148,7 +155,7 @@ Essas informa&ccedil;&otilde;es devem poder ser fornecidas pelo administrador do
 ou da rede',
 'entree_infos_perso' => 'Quem &eacute; voc&ecirc;?',
 'entree_interieur_rubrique' => 'Dentro da rubrica&nbsp;:',
-'entree_liens_sites' => '<b>La&ccedil;o hipertexto</b> (refer&ecirc;ncia, s&iacute;tio a visitar ...)',
+'entree_liens_sites' => '<MODIF><b>La&ccedil;o hipertexto</b> (refer&ecirc;ncia, s&iacute;tio a visitar ...)',
 'entree_login' => 'O seu login',
 'entree_login_connexion_1' => 'O login de liga&ccedil;&atilde;o',
 'entree_login_connexion_2' => '(Corresponde &agrave;s vezes ao seu login de acesso ao FTP; deixado vazio outrs vezes)',
@@ -165,14 +172,26 @@ ou da rede',
 'entree_port_annuaire' => 'O n&uacute;mero de porta do anu&aacute;rio',
 'entree_signature' => 'Assinatura',
 'entree_texte_breve' => 'Texto da not&iacute;cia',
-'entree_titre_obligatoire' => '<b>T&iacute;tulo</b> [Obrigat&oacute;rio]<br />',
+'entree_titre_obligatoire' => '<MODIF><b>T&iacute;tulo</b> [Obrigat&oacute;rio]<br />',
 'entree_url' => 'O endere&ccedil;o (URL) do seu s&iacute;tio',
+'erreur_plugin_fichier_absent' => '<NEW>Fichier absent',
+'erreur_plugin_fichier_def_absent' => '<NEW>Fichier de d&eacute;finition absent',
+'erreur_plugin_nom_fonction_interdit' => '<NEW>Nom de fonction interdit',
+'erreur_plugin_nom_manquant' => '<NEW>Nom du plugin manquant',
+'erreur_plugin_prefix_manquant' => '<NEW>Espace de nommage du plugin non d&eacute;fini',
+'erreur_plugin_tag_plugin_absent' => '<NEW>&lt;plugin&gt; manquant dans le fichier de d&eacute;finition',
+'erreur_plugin_version_manquant' => '<NEW>Version du plugin manquante',
+
+
+// F
+'forum_info_original' => '<NEW>original',
 
 
 // I
 'ical_info1' => 'Esta p&aacute;gina apresenta muitos m&eacute;todos para permanecer em contacto com a vida deste s&iacute;tio.',
 'ical_info2' => 'Para mais informa&ccedil;&otilde;es sobre estas t&eacute;cnicas, consultar  <a href="http://www.spip.net/fr_suivi">a documenta&ccedil;&atilde;o de SPIP</a>.',
 'ical_info_calendrier' => 'Dois calend&aacute;rios est&atilde;o &agrave; sua disposi&ccedil;&atilde;o. O primeiro &eacute; uma planta do s&iacute;tio anunciando todos os artigos publicados. O segundo cont&eacute;m os an&uacute;ncios editoriais assim como as &uacute;ltimas mensagens privadas&nbsp;: est&aacute; reservado para si gra&ccedil;as a uma chave pessoal, que pode modificar a qualquer momento com a renova&ccedil;&atilde;o da sua palavra-passe.',
+'ical_lien_rss_breves' => '<NEW>Syndication des br&egrave;ves du site',
 'ical_methode_http' => 'Telecarregamento',
 'ical_methode_webcal' => 'Sincroniza&ccedil;&atilde;o (webcal://)',
 'ical_texte_js' => 'Uma linha de javascript permite-lhe exibir, muito simplesmente, em qualquer s&iacute;tio que lhe perten&ccedil;a, os artigos recentes publicados neste s&iacute;tio.',
@@ -181,8 +200,9 @@ ou da rede',
 'ical_texte_rss' => 'Pode vincular as novidades deste s&iacute;tio em qualquer leitor de ficheiros de formato XML/RSS (Rich Site Summary). &Eacute; tamb&eacute;m o formato que permite a SPIP ler as novidades publicadas em outros s&iacute;tios que utilizam um formato de troca compat&iacute;vel.',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Mailing-list',
-'ical_titre_rss' => 'Ficheiros &laquo; backend &raquo;',
+'ical_titre_rss' => '<MODIF>Ficheiros &laquo; backend &raquo;',
 'icone_activer_cookie' => 'Activar o cookie de correspond&ecirc;ncia',
+'icone_admin_plugin' => '<NEW>Gestion des plugins',
 'icone_afficher_auteurs' => 'Exibir os autores',
 'icone_afficher_visiteurs' => 'Exibir os visitantes',
 'icone_arret_discussion' => 'N&atilde;o voltar a participar nesta discuss&atilde;o',
@@ -193,7 +213,7 @@ ou da rede',
 'icone_creer_rubrique_2' => 'Criar uma nova rubrica',
 'icone_ecrire_nouvel_article' => 'As not&iacute;cias contidas nesta rubrica',
 'icone_envoyer_message' => 'Enviar esta mensagem',
-'icone_evolution_visites' => 'Evolu&ccedil;&atilde;o das visitas <br />@visites@ visitas',
+'icone_evolution_visites' => '<MODIF>Evolu&ccedil;&atilde;o das visitas <br />@visites@ visitas',
 'icone_modif_groupe_mots' => 'Modificar este grupo de palavras',
 'icone_modifier_article' => 'Modificar este artigo',
 'icone_modifier_breve' => 'Modificar esta not&iacute;cia',
@@ -220,7 +240,7 @@ ou da rede',
 'info_1_site' => '1 s&iacute;tio',
 'info_activer_cookie' => 'Pode activar um <b>cookie de correspond&ecirc;ncia</b>, o que lhe
  permitir&aacute; passar facilmente do s&iacute;tio p&uacute;blico ao s&iacute;tio privado ',
-'info_activer_forum_public' => '<i>Para activar os f&oacute;runs p&uacute;blicos, favor escolher o seu modo
+'info_activer_forum_public' => '<MODIF><i>Para activar os f&oacute;runs p&uacute;blicos, favor escolher o seu modo
   de modera&ccedil;&atilde;o por defeito </i>',
 'info_admin_gere_rubriques' => 'Este administrador gere as seguintes rubricas:',
 'info_admin_gere_toutes_rubriques' => 'Este administrador gere <b>todas as rubricas</b>.',
@@ -274,9 +294,9 @@ ou da rede',
 'info_changer_nom_groupe' => 'Modificar o nome deste grupo',
 'info_chapeau' => 'Cabe&ccedil;alho',
 'info_chapeau_2' => 'Cabe&ccedil;alho&nbsp;:',
-'info_chemin_acces_1' => 'Op&ccedil;&otilde;es : <b>Caminho de acesso no anu&aacute;rio</b>',
+'info_chemin_acces_1' => '<MODIF>Op&ccedil;&otilde;es : <b>Caminho de acesso no anu&aacute;rio</b>',
 'info_chemin_acces_2' => 'Doravante, deve configurar o caminho de acesso &agrave;s informa&ccedil;&otilde;es no anu&aacute;rio. Esta informa&ccedil;&atilde;o &eacute; indispens&aacute;vel para ler os perfis de utilizador armazenados no anu&aacute;rio.',
-'info_chemin_acces_annuaire' => 'Op&ccedil;&otilde;es : <b>Caminho de acesso no anu&aacute;rio',
+'info_chemin_acces_annuaire' => '<MODIF>Op&ccedil;&otilde;es : <b>Caminho de acesso no anu&aacute;rio',
 'info_choix_base' => 'Terceira etapa&nbsp;:',
 'info_classement_1' => '<sup>er</sup> no @liste@',
 'info_classement_2' => '<sup>e</sup> no @liste@',
@@ -285,25 +305,25 @@ ou da rede',
 'info_config_suivi' => 'Se este endere&ccedil;o corresponder a uma mailing-list, pode indicar, a seguir, o endere&ccedil;o no qual os participantes no s&iacute;tio podem inscrever-se. Este endere&ccedil;o pode ser uma URL (por exemplo a p&aacute;gina de inscri&ccedil;&atilde;o na lista pela Web), ou um endere&ccedil;o email com um assunto espec&iacute;fico (por exemplo: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => ' Pode assinar a  mailing-list deste s&iacute;tio. Receber&aacute; ent&atilde;o, por correio electr&oacute;nico, os an&uacute;ncios de artigos e de not&iacute;cias propostos para publica&ccedil;&atilde;o.',
 'info_confirmer_passe' => 'Confirmar esta nova palavra-passe',
-'info_connexion_base' => 'Segunda etapa: <b>Teste de liga&ccedil;&atilde;o &agrave; base</b>',
+'info_connexion_base' => '<MODIF>Segunda etapa: <b>Teste de liga&ccedil;&atilde;o &agrave; base</b>',
 'info_connexion_ldap_ok' => 'A liga&ccedil;&atilde;o LDAP foi bem sucedida.</b><p /> Pode passar para a etapa seguinte.',
-'info_connexion_mysql' => 'Primeira etapa : <b>A sua liga&ccedil;&atilde;o MySQL<b>',
+'info_connexion_mysql' => '<MODIF>Primeira etapa : <b>A sua liga&ccedil;&atilde;o MySQL<b>',
 'info_connexion_ok' => 'A liga&ccedil;&atilde;o foi bem sucedida.',
 'info_contact' => 'Contacto',
 'info_contenu_articles' => 'Conte&uacute;do dos artigos',
 'info_creation_mots_cles' => 'Crie e configure aqui as palavras-chave do s&iacute;tio',
 'info_creation_paragraphe' => '(Para criar par&aacute;grafos, deixe simplesmente linhas vazias.)',
-'info_creation_rubrique' => 'Antes de poder escrever artigos, <br />deve criar pelo menos uma rubrica.<br />',
-'info_creation_tables' => 'Quarta etapa : <b>Cria&ccedil;&atilde;o das tabelas da base<b>',
-'info_creer_base' => '<b>Criar</b> uma nova base de dados',
+'info_creation_rubrique' => '<MODIF>Antes de poder escrever artigos, <br />deve criar pelo menos uma rubrica.<br />',
+'info_creation_tables' => '<MODIF>Quarta etapa : <b>Cria&ccedil;&atilde;o das tabelas da base<b>',
+'info_creer_base' => '<MODIF><b>Criar</b> uma nova base de dados',
 'info_dans_groupe' => 'No grupo :',
 'info_dans_rubrique' => 'Na rubrica :',
 'info_date_publication_anterieure' => 'Data de publica&ccedil;&atilde;o anterior:',
 'info_date_referencement' => 'DATA DE REFERENCIAMENTO DESTE S&Iacute;TIO&nbsp;:',
-'info_delet_mots_cles' => 'Pediu para suprimir a palavra-chave
+'info_delet_mots_cles' => '<MODIF>Pediu para suprimir a palavra-chave
 <b>@titre_mot@</b> (@type_mot@). Esta palavra-chave estando ligada a
  <b>@texte_lie@</b> deve confirmar esta decis&atilde;o&nbsp;:',
-'info_derniere_etape' => '&Uacute;ltima etapa : <b>Acabou !',
+'info_derniere_etape' => '<MODIF>&Uacute;ltima etapa : <b>Acabou !',
 'info_derniere_syndication' => 'A &uacute;ltima vincula&ccedil;&atilde;o deste s&iacute;tio foi efectuada a',
 'info_derniers_articles_publies' => 'Os seus &uacute;ltimos artigos publicados em linha',
 'info_desactiver_forum_public' => 'Desactivar a utiliza&ccedil;&atilde;o dos f&oacute;runs
@@ -349,8 +369,8 @@ Os estatuto dos autores &eacute; indicado pela cor dos &iacute;cones (administra
 'info_gauche_numero_auteur' => 'AUTOR N&Uacute;MERO',
 'info_gauche_numero_breve' => 'NOT&Iacute;CIA N&Uacute;MERO',
 'info_gauche_statistiques_referers' => 'Esta p&aacute;gina apresenta a lista dos  <i>referers</i>, ou seja, dos sites que cont&ecirc;m links para o seu site, unicamente para ontem e hoje; esta lista &eacute; actualizada a cada 24 horas.',
-'info_gauche_suivi_forum' => 'A p&aacute;gina de <i>acompanhamento dos f&oacute;runs </i> &eacute; um instrumento de gest&atilde;o do seu s&iacute;tio (e n&atilde;o um espa&ccedil;o de discuss&atilde;o ou de redac&ccedil;&atilde;o). Exibe todas as contribui&ccedil;&otilde;es do f&oacute;rum p&uacute;blico deste artigo e permite-lhe gerir essas contribui&ccedil;&otilde;es. ',
-'info_gauche_suivi_forum_2' => 'A p&aacute;gina <i>acompanhamento dos f&oacute;runs </i> &eacute; um instrumento de gest&atilde;o do seu s&iacute;tio (e n&atilde;o um espa&ccedil;o de discuss&atilde;o ou de redac&ccedil;&atilde;o). Exibe todas as contribui&ccedil;&otilde;es do f&oacute;rum p&uacute;blico deste artigo e permite-lhe gerir essas contribui&ccedil;&otilde;es. ',
+'info_gauche_suivi_forum' => '<MODIF>A p&aacute;gina de <i>acompanhamento dos f&oacute;runs </i> &eacute; um instrumento de gest&atilde;o do seu s&iacute;tio (e n&atilde;o um espa&ccedil;o de discuss&atilde;o ou de redac&ccedil;&atilde;o). Exibe todas as contribui&ccedil;&otilde;es do f&oacute;rum p&uacute;blico deste artigo e permite-lhe gerir essas contribui&ccedil;&otilde;es. ',
+'info_gauche_suivi_forum_2' => '<MODIF>A p&aacute;gina <i>acompanhamento dos f&oacute;runs </i> &eacute; um instrumento de gest&atilde;o do seu s&iacute;tio (e n&atilde;o um espa&ccedil;o de discuss&atilde;o ou de redac&ccedil;&atilde;o). Exibe todas as contribui&ccedil;&otilde;es do f&oacute;rum p&uacute;blico deste artigo e permite-lhe gerir essas contribui&ccedil;&otilde;es. ',
 'info_gauche_visiteurs_enregistres' => 'Encontrar&aacute; aqui os visitantes registados
  no espa&ccedil;o p&uacute;blico do s&iacute;tio (f&oacute;runs por assinatura).',
 'info_generation_miniatures_images' => 'Gera&ccedil;&atilde;o de miniaturas das imagens',
@@ -372,7 +392,7 @@ Os estatuto dos autores &eacute; indicado pela cor dos &iacute;cones (administra
 'info_image_process' => 'Seleccione o melhor m&eacute;todo de criar as vinhetas clicando sobre a imagem correspondente.',
 'info_image_process2' => '<b>N.B.</b> <i> Se nenhuma imagem aparece, ent&atilde;o o servidor que alberga o seu s&iacute;tio n&atilde;o foi configurado para utilizar tais ferramentas. Se deseja utilizar essas fun&ccedil;&otilde;es, contacte o responsavel t&eacute;cnico e pe&ccedil;a as extens&otilde;es  &laquo;GD&raquo; ou &laquo;Imagick&raquo;.</i>',
 'info_images_auto' => 'Imagens calculadas automaticamente',
-'info_informations_personnelles' => 'Quinta etapa : <b>Informa&ccedil;&otilde;es pessoais<b>',
+'info_informations_personnelles' => '<MODIF>Quinta etapa : <b>Informa&ccedil;&otilde;es pessoais<b>',
 'info_inscription_automatique' => 'Inscri&ccedil;&atilde;o autom&aacute;tica de novos redactores',
 'info_jeu_caractere' => 'Jogo de car&aacute;cteres do s&iacute;tio',
 'info_jours' => 'dias',
@@ -398,7 +418,7 @@ Os estatuto dos autores &eacute; indicado pela cor dos &iacute;cones (administra
 'info_message_technique' => 'Mensagem t&eacute;cnica:',
 'info_messagerie_interne' => 'Correio interno',
 'info_mise_a_niveau_base' => 'nivela&ccedil;&atilde;o da sua base MySQL',
-'info_mise_a_niveau_base_2' => '{{Aten&ccedil;&atilde;o!}} Instalou uma vers&atilde;o
+'info_mise_a_niveau_base_2' => '<MODIF>{{Aten&ccedil;&atilde;o!}} Instalou uma vers&atilde;o
  dos ficheiros SPIP {anterior} &agrave; que se encontrava
  antes neste s&iacute;tio: a sua base de dados corre o risco de se perder
  e o seu s&iacute;tio j&aacute; n&atilde;o funcionar&aacute; .<br />{{Re-instalar os
@@ -453,7 +473,10 @@ Os estatuto dos autores &eacute; indicado pela cor dos &iacute;cones (administra
 'info_ou' => 'ou...',
 'info_oui_suppression_mot_cle' => 'quero suprimir definitivamente esta palavra-chave.',
 'info_page_interdite' => 'P&aacute;gina proibida',
-'info_par_nombre_article' => '(por n&uacute;mero de artigos)',
+'info_par_nom' => '<NEW>par nom',
+'info_par_nombre_article' => '<MODIF>(por n&uacute;mero de artigos)',
+'info_par_statut' => '<NEW>par statut',
+'info_par_tri' => '<NEW>\'(par @tri@)\'',
 'info_pas_de_forum' => 'n&atilde;o h&aacute; f&oacute;rum',
 'info_passe_trop_court' => 'Palavra-passe demasiado curta',
 'info_passes_identiques' => 'As duas palavras-passe n&atilde;o s&atilde;o id&ecirc;nticas.',
@@ -476,12 +499,13 @@ Os estatuto dos autores &eacute; indicado pela cor dos &iacute;cones (administra
 'info_procedez_par_etape' => 'proceder etapa por etapa',
 'info_procedure_maj_version' => 'o procedimento de actualiza&ccedil;&atilde;o deve ser lan&ccedil;ado para adaptar
 a base de dados &agrave; nova vers&atilde;o de SPIP.',
-'info_ps' => 'P.S',
+'info_proxy_ok' => '<NEW>Test du proxy r&eacute;ussi.',
+'info_ps' => '<MODIF>P.S',
 'info_publier' => 'publicar',
 'info_publies' => 'Os seus artigos publicados em linha',
 'info_question_accepter_visiteurs' => 'Se os par&acirc;metros do seu site prev&ecirc;em o registo de visitantes sem acesso ao espa&ccedil;o privado, por favor, active a op&ccedil;&atilde;o abaixo:',
 'info_question_gerer_statistiques' => 'O seu s&iacute;tio deve gerir as estat&iacute;sticas das visitas&nbsp;?',
-'info_question_inscription_nouveaux_redacteurs' => 'Aceita as inscri&ccedil;&otilde;es de novos redactores a
+'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Aceita as inscri&ccedil;&otilde;es de novos redactores a
  partir do s&iacute;tio p&uacute;blico&nbsp;? Se aceitar, os visitantes poder&atilde;o inscrever-se
  a partir de um formul&aacute;rio automatizado e aceder&atilde;o ent&atilde;o ao espa&ccedil;o privado para
 propor os seus pr&oacute;prios artigos. <blockquote><i>Durante a fase de inscri&ccedil;&atilde;o,
@@ -508,8 +532,8 @@ servi&ccedil;os de hospedagem desactivam o envio de mails a partir dos seus
 'info_redirection' => 'Redirigir',
 'info_referencer_doc_distant' => 'Referenciar um documento na internet&nbsp;:',
 'info_refuses' => 'Os seus artigos recusados',
-'info_reglage_ldap' => 'Op&ccedil;&otilde;es : <b>Acerto da importa&ccedil;&atilde;o LDAP</b>',
-'info_renvoi_article' => '<b>Redirigir.</b> Este artigo remete para a p&aacute;gina:',
+'info_reglage_ldap' => '<MODIF>Op&ccedil;&otilde;es : <b>Acerto da importa&ccedil;&atilde;o LDAP</b>',
+'info_renvoi_article' => '<MODIF><b>Redirigir.</b> Este artigo remete para a p&aacute;gina:',
 'info_reserve_admin' => 'S&oacute; os administradores podem modificar este endere&ccedil;o.',
 'info_restauration_sauvegarde' => 'restauro da salvaguarda @archive@',
 'info_restreindre_rubrique' => 'Limitar a gest&atilde;o &agrave; rubrica : ',
@@ -534,7 +558,7 @@ servi&ccedil;os de hospedagem desactivam o envio de mails a partir dos seus
 'info_sauvegarde_petitions' => 'Salvaguardar os abaixo-assinados',
 'info_sauvegarde_refers' => 'Salvaguardar os referers',
 'info_sauvegarde_reussi_01' => 'Salvaguarda bem sucedida',
-'info_sauvegarde_reussi_02' => 'A base foi salvaguardada em @archive@. Pode',
+'info_sauvegarde_reussi_02' => '<MODIF>A base foi salvaguardada em @archive@. Pode',
 'info_sauvegarde_reussi_03' => 'voltar &agrave; gest&atilde;o',
 'info_sauvegarde_reussi_04' => 'do seu s&iacute;tio',
 'info_sauvegarde_rubriques' => 'Salvaguardar as rubricas',
@@ -562,6 +586,8 @@ servi&ccedil;os de hospedagem desactivam o envio de mails a partir dos seus
 'info_sous_titre' => 'Sub-t&iacute;tulo :',
 'info_statut_administrateur' => 'Administrador',
 'info_statut_auteur' => 'Estatuto deste autor :',
+'info_statut_auteur_a_confirmer' => '<NEW>Inscription &agrave; confirmer',
+'info_statut_auteur_autre' => '<NEW>Autre statut&nbsp;:',
 'info_statut_efface' => 'Apagado',
 'info_statut_redacteur' => 'Redactor',
 'info_statut_site_1' => 'Este s&iacute;tio &eacute;&nbsp;:',
@@ -573,6 +599,9 @@ servi&ccedil;os de hospedagem desactivam o envio de mails a partir dos seus
 'info_suivi_activite' => 'Acompanhamento da actividade editorial',
 'info_supprimer_mot' => 'suprimir&nbsp;esta&nbsp;palavra',
 'info_surtitre' => 'Antet&iacute;tulo',
+'info_syndication_integrale_1' => '<NEW>Votre site propose des fichiers de syndication (voir &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
+'info_syndication_integrale_2' => '<NEW>Souhaitez-vous transmettre les articles dans leur int&eacute;gralit&eacute;, ou ne diffuser qu\'un r&eacute;sum&eacute; de quelques centaines de caract&egrave;res&nbsp;?',
+'info_table_prefix' => '<NEW>Vous pouvez modifier le pr&eacute;fixe du nom des tables de donn&eacute;es (ceci est indispensable lorsque l\'on souhaite installer plusieurs sites dans la m&ecirc;me base de donn&eacute;es). Ce pr&eacute;fixe s\'&eacute;crit en lettres minuscules, non accentu&eacute;es, et sans espace.',
 'info_taille_maximale_vignette' => 'Tamanho m&aacute;ximo das vinhetas geradas pelo sistema&nbsp;:',
 'info_terminer_installation' => 'Pode agora acabar o procedimento de instala&ccedil;&atilde;o tipo.',
 'info_texte' => 'Texto',
@@ -602,8 +631,8 @@ numa cor que indica o seu estado:',
 'info_une_breve' => 'uma not&iacute;cia,',
 'info_une_rubrique' => 'uma rubrica,',
 'info_une_rubrique_02' => '1 rubrica',
-'info_url' => 'URL :',
-'info_url_site' => 'URL DO S&Iacute;TIO :',
+'info_url' => '<MODIF>URL :',
+'info_url_site' => '<MODIF>URL DO S&Iacute;TIO :',
 'info_urlref' => 'Liga&ccedil;&atilde;o hipertexto&nbsp;:',
 'info_utilisation_spip' => 'Pode come&ccedil;ar agora a utilizar o sistema de publica&ccedil;&atilde;o assistida...',
 'info_visites_par_mois' => 'Exibi&ccedil;&atilde;o por m&ecirc;s :',
@@ -615,6 +644,7 @@ numa cor que indica o seu estado:',
 'install_echec_annonce' => 'A instala&ccedil;&atilde;o vai provavelmente falhar,ou criar um s&iacute;tio n&atilde;o funcional',
 'install_extension_mbstring' => 'O SPIP n&atilde;o funciona com&nbsp;:',
 'install_extension_php_obligatoire' => 'O SPIP exige a extens&atilde;o php&nbsp;:',
+'install_php_version' => '<NEW>PHP version @version@ insuffisant (minimum = @minimum@)',
 'install_select_langue' => 'Seleccione uma l&iacute;ngua e depois clique no bot&atilde;o "&nbsp;seguinte&nbsp;" para lan&ccedil;ar o procedimento de instala&ccedil;&atilde;o.',
 'intem_redacteur' => 'redactor',
 'item_accepter_inscriptions' => 'Aceitar as inscri&ccedil;&otilde;es',
@@ -625,6 +655,7 @@ numa cor que indica o seu estado:',
 'item_ajout_mots_cles' => 'Autorizar a adi&ccedil;&atilde;o de palavras-chave aos f&oacute;runs',
 'item_autoriser_documents_joints' => 'Autorizar os documentos juntos aos artigos',
 'item_autoriser_documents_joints_rubriques' => 'Autorizar os documentos nas rubricas',
+'item_autoriser_syndication_integrale' => '<NEW>Diffuser l\'int&eacute;gralit&eacute; des articles dans les fichiers de syndication',
 'item_bloquer_liens_syndiques' => 'Impedir os la&ccedil;os vinculados para valida&ccedil;&atilde;o',
 'item_breve_refusee' => 'N&Atilde;O - Not&iacute;cia recusada',
 'item_breve_validee' => 'SIM - Not&iacute;cia validada',
@@ -650,6 +681,7 @@ numa cor que indica o seu estado:',
 'item_non_ajout_mots_cles' => 'Proibir a utiliza&ccedil;&atilde;o das palavras-chave nos f&oacute;runs',
 'item_non_autoriser_documents_joints' => 'N&atilde;o autorizar os documentos nos artigos',
 'item_non_autoriser_documents_joints_rubriques' => 'N&atilde;o autorizar os documentos nas rubricas',
+'item_non_autoriser_syndication_integrale' => '<NEW>Ne diffuser qu\'un r&eacute;sum&eacute;',
 'item_non_bloquer_liens_syndiques' => 'N&atilde;o impedir os la&ccedil;os resultantes da vincula&ccedil;&atilde;o',
 'item_non_creer_fichiers_authent' => 'N&atilde;o criar estes ficheiros',
 'item_non_gerer_annuaire_site_web' => 'Desactivar o anu&aacute;rio de s&iacute;tios Web',
@@ -680,6 +712,7 @@ numa cor que indica o seu estado:',
 
 
 // L
+'les_deux' => '<NEW>les deux',
 'lien_ajout_destinataire' => 'Acrescentar este destinat&aacute;rio',
 'lien_ajouter_auteur' => 'Acrescentar este autor',
 'lien_ajouter_participant' => 'Acrescentar um participante',
@@ -699,6 +732,7 @@ numa cor que indica o seu estado:',
 'lien_supprimer_rubrique' => 'suprimir esta rubrica',
 'lien_tout_deplier' => 'Expandir tudo',
 'lien_tout_replier' => 'Recolher tudo',
+'lien_tout_supprimer' => '<NEW>Tout supprimer',
 'lien_trier_nom' => 'Seleccionar por nome',
 'lien_trier_nombre_articles' => 'seleccionar por n&uacute;mero de artgos',
 'lien_trier_statut' => 'Seleccionar por estatuto',
@@ -740,20 +774,38 @@ numa cor que indica o seu estado:',
 'ortho_verifier' => 'Verificar a ortografia',
 
 
+// P
+'plugin_etat_developpement' => '<NEW>en d&eacute;veloppement',
+'plugin_etat_experimental' => '<NEW>exp&eacute;rimental',
+'plugin_etat_stable' => '<NEW>stable',
+'plugin_etat_test' => '<NEW>en test',
+'plugins_liste' => '<NEW>Liste des plugins',
+'protocole_ldap' => '<NEW>Version du protocole :',
+
+
+// R
+'repertoire_plugins' => '<NEW>R&eacute;pertoire&nbsp;:',
+
+
 // S
+'sauvegarde_fusionner' => '<NEW>Fusionner la base actuelle et la sauvegarde',
+'sauvegarde_url_origine' => '<NEW>Eventuellement, URL du site d\'origine :',
 'statut_admin_restreint' => '(admin restrito)',
 'syndic_choix_moderation' => 'Que fazer com as novas liga&ccedil;&otilde;es provenientes deste s&iacute;tio&nbsp;?',
 'syndic_choix_oublier' => 'Que fazer com as liga&ccedil;&otilde;es que n&atilde;o aparecem mais no ficheiro de sindica&ccedil;&atilde;o &nbsp;?',
+'syndic_choix_resume' => '<NEW>Certains sites diffusent le texte complet des articles. Lorsque celui-ci est disponible souhaitez-vous syndiquer&nbsp;:',
 'syndic_lien_obsolete' => 'liga&ccedil;&atilde;o desactualizada',
 'syndic_option_miroir' => 'bloquear automaticamente',
 'syndic_option_oubli' => 'eliminar (ap&oacute;s @m&ecirc;s@&nbsp;m&ecirc;s)',
+'syndic_option_resume_non' => '<NEW>le contenu complet des articles (au format HTML)',
+'syndic_option_resume_oui' => '<NEW>un simple r&eacute;sum&eacute; (au format texte)',
 'syndic_options' => 'Op&ccedil;&otilde;es de sindica&ccedil;&atilde;o&nbsp;:',
 
 
 // T
 'taille_cache_image' => 'As imagens calculadas automaticamente pelo SPIP (miniaturas dos documentos, t&iacute;tulos apresentados sob forma gr&aacute;fica, fun&ccedil;&otilde;es matem&aacute;ticas no formato TeX...) ocupam no direct&oacute;rio @dir@ um total de @taille@.',
-'taille_cache_infinie' => 'Este site n&atilde;o prev&ecirc; limita&ccedil;&atilde;o de tamanho do diret&oacute;rio <code>CACHE/</code>.',
-'taille_cache_maxi' => 'O SPIP tenta limitar o tamanho do diret&oacute;rio <code>CACHE/</code> deste site em cerca de <b>@octets@</b>.',
+'taille_cache_infinie' => '<MODIF>Este site n&atilde;o prev&ecirc; limita&ccedil;&atilde;o de tamanho do diret&oacute;rio <code>CACHE/</code>.',
+'taille_cache_maxi' => '<MODIF>O SPIP tenta limitar o tamanho do diret&oacute;rio <code>CACHE/</code> deste site em cerca de <b>@octets@</b>.',
 'taille_cache_octets' => 'O tamanho da cache &eacute; atualmente de  @octets@.',
 'taille_cache_vide' => 'A cache est&aacute; vazia.',
 'taille_repertoire_cache' => 'Tamanho do direct&oacute;rio cache',
@@ -762,7 +814,7 @@ numa cor que indica o seu estado:',
 'texte_admin_effacer_01' => 'Este comando apaga <i>todo</i> o conte&uacute;do da base de dados,
 inclusive <i>todos</i> os acessos de redactores e administradores. Depois de o ter executado, dever&aacute; lan&ccedil;ar a
 reinstala&ccedil;&atilde;o de SPIP para recriar uma nova base assim como um primeiro acesso administrador.',
-'texte_admin_tech_01' => 'Esta op&ccedil;&atilde;o permite-lhe salvaguardar o conte&uacute;do da base num ficheiro que ser&aacute; armazenado no direct&oacute;rio @dossier@.N&atilde;o esquecer tamb&eacute;m recuperar a totalidade do direct&oacute;rio <i>IMG/</i>, que cont&eacute;m as imagens e os documentos utlizados nos artigos e rubricas.',
+'texte_admin_tech_01' => '<MODIF>Esta op&ccedil;&atilde;o permite-lhe salvaguardar o conte&uacute;do da base num ficheiro que ser&aacute; armazenado no direct&oacute;rio @dossier@.N&atilde;o esquecer tamb&eacute;m recuperar a totalidade do direct&oacute;rio <i>IMG/</i>, que cont&eacute;m as imagens e os documentos utlizados nos artigos e rubricas.',
 'texte_admin_tech_02' => 'Aten&ccedil;&atilde;o: esta salvaguarda s&oacute; poder&aacute; ser restaurada
  num s&iacute;tio instalado sob a mesma vers&atilde;o de SPIP. Nunca apague a sua base de dados esperando que esta seja reinstalada ap&oacute;s a actualiza&ccedil;&atilde;o. Consulte <a href="http://www.spip.net/fr_article1489.html">a documenta&ccedil;&atilde;o de SPIP</a>.',
 'texte_admin_tech_03' => 'Pode escolher a salvaguarda do ficheiro sob a forma comprimida, para
@@ -782,7 +834,8 @@ encurtar a sua transfer&ecirc;ncia para o seu computador ou para um servidor de 
 uma revista de imprensa, um calend&aacute;rio dos acontecimentos...',
 'texte_choix_base_1' => 'Escolher a sua base',
 'texte_choix_base_2' => 'O servidor MySQL contem muitas bases de dados.',
-'texte_choix_base_3' => '<b>Seleccione</b> a seguir a que lhe foi atribuida pelo seu servi&ccedil;o de hospedagem.',
+'texte_choix_base_3' => '<MODIF><b>Seleccione</b> a seguir a que lhe foi atribuida pelo seu servi&ccedil;o de hospedagem.',
+'texte_choix_table_prefix' => '<NEW>Pr&eacute;fixe des tables&nbsp;:',
 'texte_commande_vider_tables_indexation' => 'Utilize este comando para esvaziar as tabelas de indexa&ccedil;&atilde;o utilizadas
   pelo motor integrado de pesquisa em SPIP. Isso permitir-lhe-&aacute; ganhar espa&ccedil;o em disco',
 'texte_comment_lire_tableau' => 'O lugar do artigo,
@@ -794,7 +847,7 @@ desde o in&iacute;cio s&atilde;o exibidos no bal&atilde;o que
 'texte_compresse_ou_non' => '(este pode ser comprimido ou n&atilde;o)',
 'texte_compte_element' => '@count@ elemento',
 'texte_compte_elements' => '@count@ elementos',
-'texte_config_groupe_mots_cles' => 'Deseja activar a configura&ccedil;&atilde;o avan&ccedil;ada das palavras-chave,
+'texte_config_groupe_mots_cles' => '<MODIF>Deseja activar a configura&ccedil;&atilde;o avan&ccedil;ada das palavras-chave,
  indicando por exemplo que se pode seleccionar uma &uacute;nica
  palavra por grupo, que um grupo &eacute; importante... ?',
 'texte_connexion_mysql' => 'Consulte as informa&ccedil;&otilde;es fornecidas pelo seu servi&ccedil;o de hospedagem&nbsp;: deve encontrar nelas, se o seu hospedeiro suporta MySQL, os c&oacute;digos de liga&ccedil;&atilde;o ao servidoe MySQL.',
@@ -805,7 +858,7 @@ que alguns elementos dos artigos n&atilde;o s&atilde;o utilizados.
 'texte_crash_base' => 'Se a sua base de dados foi
  destru&iacute;da, pode tentar uma repara&ccedil;&atilde;o
  autom&aacute;tica.',
-'texte_creer_rubrique' => 'Antes de poder escrever artigos, <br /> deve criar uma rubrica.',
+'texte_creer_rubrique' => '<MODIF>Antes de poder escrever artigos, <br /> deve criar uma rubrica.',
 'texte_date_creation_article' => 'DATA DE CRIA&Ccedil;&Atilde;O DO ARTIGO:',
 'texte_date_publication_anterieure' => 'Data de redac&ccedil;&atilde;o anterior&nbsp;:',
 'texte_date_publication_anterieure_nonaffichee' => 'N&atilde;o exibir a data de redac&ccedil;&atilde;o anterior',
@@ -818,7 +871,7 @@ que alguns elementos dos artigos n&atilde;o s&atilde;o utilizados.
 'texte_effacer_donnees_indexation' => 'Apagar os dados de indexa&ccedil;&atilde;o',
 'texte_en_cours_validation' => 'Os artigos e not&iacute;cias seguintes est&atilde;o propostos para publica&ccedil;&atilde;o. N&atilde;o hesite em dar a sua opini&atilde;o gra&ccedil;as aos f&oacute;runs que lhes est&atilde;o ligados.',
 'texte_enrichir_mise_a_jour' => 'Pode enriquecer a pagina&ccedil;&atilde;o do seu texto, utilizando &laquo;&nbsp;atalhos tipogr&aacute;ficos&nbsp;&raquo;.',
-'texte_fichier_authent' => '<b>SPIP dever&aacute; criar os ficheiros especiais<tt>.htpasswd-admin</tt> no repert&oacute;rio<tt>ecrire/data/<tt> ?</b><p>
+'texte_fichier_authent' => '<MODIF><b>SPIP dever&aacute; criar os ficheiros especiais<tt>.htpasswd-admin</tt> no repert&oacute;rio<tt>ecrire/data/<tt> ?</b><p>
   Estes ficheiros podem servir-lhe para restringir o acesso aos autores
 e administradores em outros lugares do seu sites
 (programa externo de estat&iacute;sticas, por exemplo).<p>
@@ -828,16 +881,19 @@ no seu valor por defeito (n&atilde;o h&aacute; cria&ccedil;&atilde;o
 'texte_informations_personnelles_1' => 'O sistema vai agora criar-lhe um acesso personalizado ao s&iacute;tio',
 'texte_informations_personnelles_2' => '(Nota : se se tratar de uma reinstala&ccedil;&atilde;o e se o seu acesso continua funcional, pode',
 'texte_introductif_article' => '(Texto introdut&oacute;rio do artigo.)',
-'texte_jeu_caractere' => 'Esta op&ccedil;&atilde;o &eacute; &uacute;til se o seu s&iacute;tio precisa de exibir alfabetos
+'texte_jeu_caractere' => '<MODIF>Esta op&ccedil;&atilde;o &eacute; &uacute;til se o seu s&iacute;tio precisa de exibir alfabetos
  diferentes do alfabeto romano ( ou  &laquo;&nbsp;ocidental&nbsp;&raquo;) e seus derivados.
  Nesse caso, pode ser prefer&iacute;vel mudar a defini&ccedil;&atilde;o por defeito para utilizar
  um jogo de car&aacute;cteres adequado&nbsp;; aconselhamos, em todos os casos, a proceder a experi&ecirc;ncias
  a fim de encontrar uma solu&ccedil;&atilde;o satisfat&oacute;ria. Se modificar este par&acirc;metro, n&atilde;o esque&ccedil;a tamb&eacute;m de adaptar
 o s&iacute;tio p&uacute;blico (balisa<tt>#CHARSET</tt>).',
-'texte_jeu_caractere_2' => 'Esta defini&ccedil;&atilde;o n&atilde;o tem efeito retroactivo. Por
+'texte_jeu_caractere_2' => '<MODIF>Esta defini&ccedil;&atilde;o n&atilde;o tem efeito retroactivo. Por
  conseguinte, os textos j&aacute; introduzidos podem ser exibidos
  incorrectamente depois de uma modifica&ccedil;&atilde;o da defini&ccedil;&atilde;o. Em todo
  o caso, poder&aacute; voltar &agrave; defini&ccedil;&atilde;o anterior sem preju&iacute;zo.',
+'texte_jeu_caractere_3' => '<NEW>Votre site est actuellement install&eacute; dans le jeu de caract&egrave;res&nbsp;:',
+'texte_jeu_caractere_4' => '<NEW>Si cela ne correspond pas &agrave; la r&eacute;alit&eacute; de vos donn&eacute;es (suite, par exemple, &agrave; une restauration de base de donn&eacute;es), ou si <em>vous d&eacute;marrez ce site</em> et souhaitez partir sur un autre jeu de caract&egrave;res, veuillez indiquer ce dernier ici&nbsp;:',
+'texte_jeu_caractere_conversion' => '<NEW>Note&nbsp;: vous pouvez d&eacute;cider de convertir une fois pour toutes l\'ensemble des textes de votre site (articles, br&egrave;ves, forums, etc.) vers l\'alphabet <tt>utf-8</tt>, en vous rendant sur <a href="@url@">la page de conversion vers l\'utf-8</a>.',
 'texte_lien_hypertexte' => '(Se a sua mensagem se refere a um artigo publicado na Web, ou a uma p&aacute;gina que fornece mais informa&ccedil;&otilde;es, favor indicar a seguir o t&iacute;tulo da p&aacute;gina e o endere&ccedil;o URL.)',
 'texte_liens_sites_syndiques' => 'Os la&ccedil;os resultantes dos s&iacute;tios vinculados podem
  ser bloqueados a priori&nbsp;; a defini&ccedil;&atilde;o
@@ -872,13 +928,14 @@ de uma salvaguarda por exemplo). Note que os documentos modificados de
 'texte_nouveau_message' => 'Nova mensagem',
 'texte_nouveau_mot' => 'Nova palavra',
 'texte_nouvelle_version_spip_1' => 'Instalou uma nova vers&atilde;o de SPIP.',
-'texte_nouvelle_version_spip_2' => 'Esta nova vers&atilde;o precisa de uma actualiza&ccedil;&atilde;o mais completa do que o normal. Se &eacute; o webmaster do site, por favor, apague o ficheiro <tt>inc_connect.php3</tt> do direct&oacute;rio <tt>ecrire</tt> e retome a instala&ccedil;&atilde;o de forma a incluir os seus par&acirc;metros de liga&ccedil;&atilde;o &agrave; base de dados.<p /> (NB.: se n&atilde;o se lembra dos seus par&acirc;metros de liga&ccedil;&atilde;o, consulte o arquivo <tt>inc_connect.php3</tt> antes de apag&aacute;-lo...)',
+'texte_nouvelle_version_spip_2' => '<MODIF>Esta nova vers&atilde;o precisa de uma actualiza&ccedil;&atilde;o mais completa do que o normal. Se &eacute; o webmaster do site, por favor, apague o ficheiro <tt>inc_connect.php3</tt> do direct&oacute;rio <tt>ecrire</tt> e retome a instala&ccedil;&atilde;o de forma a incluir os seus par&acirc;metros de liga&ccedil;&atilde;o &agrave; base de dados.<p /> (NB.: se n&atilde;o se lembra dos seus par&acirc;metros de liga&ccedil;&atilde;o, consulte o arquivo <tt>inc_connect.php3</tt> antes de apag&aacute;-lo...)',
 'texte_operation_echec' => 'Volte &agrave; p&aacute;gina anterior, seleccione uma outra base ou crie uma nova. Verifique as informa&ccedil;&otilde;es fornecidas pelo seu servi&ccedil;o de hospedagem.',
 'texte_plus_trois_car' => 'mais de 3 car&aacute;cteres',
 'texte_plusieurs_articles' => 'Muitos autores encontrados para "@cherche_auteur@":',
 'texte_port_annuaire' => '(O valor indicado por defeito conv&eacute;m geralmente.)',
-'texte_proposer_publication' => 'Quando acabar o seu artigo, <br /> pode propor a sua publica&ccedil;&atilde;o.',
-'texte_proxy' => 'Em alguns caso (intranet, redes protegidas...),
+'texte_presente_plugin' => '<NEW>Cette page liste les plugins disponibles sur le site. Vous pouvez activer les plugins n&eacute;cessaires en cochant la case correspondante.',
+'texte_proposer_publication' => '<MODIF>Quando acabar o seu artigo, <br /> pode propor a sua publica&ccedil;&atilde;o.',
+'texte_proxy' => '<MODIF>Em alguns caso (intranet, redes protegidas...),
  pode ser necess&aacute;rio utilizar um <i>proxy HTTP</i>  para atingir os s&iacute;tios vinculados.
  Se for o caso, indique a seguir o endere&ccedil;o, sob a forma
  <tt><html>http://proxy:8080</html></tt>. Em geral,
@@ -891,7 +948,7 @@ recompor uma &uacute;nica p&aacute;gina, passe pelo espa&ccedil;o p&uacute;blico
 'texte_recapitiule_liste_documents' => 'Esta p&aacute;gina recapitula a lista dos documentos que colocou nas rubricas. Para modificar as informa&ccedil;&otilde;es de cada documento, siga o link para a p&aacute;gina da rubrica.',
 'texte_recuperer_base' => 'Reparar a base de dados',
 'texte_reference_mais_redirige' => 'artigo referenciado no seu s&iacute;tio SPIP, mas redirigido para uma outra URL.',
-'texte_referencement_automatique' => '<b>Referenciamento automatizado de um s&iacute;tio</b><br />Pode referenciar rapidamente um s&iacute;tio Web indicando a seguir o endere&ccedil;o URL desejado, ou o endere&ccedil;o do seu backend. SPIP vai recuperar automaticamente as informa&ccedil;&otilde;es relativas a esse s&iacute;tio (t&iacute;tulo, descri&ccedil;&atilde;o...).',
+'texte_referencement_automatique' => '<MODIF><b>Referenciamento automatizado de um s&iacute;tio</b><br />Pode referenciar rapidamente um s&iacute;tio Web indicando a seguir o endere&ccedil;o URL desejado, ou o endere&ccedil;o do seu backend. SPIP vai recuperar automaticamente as informa&ccedil;&otilde;es relativas a esse s&iacute;tio (t&iacute;tulo, descri&ccedil;&atilde;o...).',
 'texte_requetes_echouent' => '<b>Quando alguns pedidos MySQL falharem
  sistematicamente e sem zaz&atilde;o aparente, &eacute; poss&iacute;vel
  que seja por causa da  pr&oacute;pria base de dados
@@ -901,13 +958,13 @@ recompor uma &uacute;nica p&aacute;gina, passe pelo espa&ccedil;o p&uacute;blico
  ind&iacute;cios daquilo que n&atilde;o funciona...<p>
  Se o problema persistir, contacte com o seu servi&ccedil;o de hospedagem.<p />',
 'texte_restaurer_base' => 'Restaurar o conte&uacute;do de uma salvaguarda da base',
-'texte_restaurer_sauvegarde' => 'Esta op&ccedil;&atilde;o permite restaurar uma salvaguarda da base anteriormente
+'texte_restaurer_sauvegarde' => '<MODIF>Esta op&ccedil;&atilde;o permite restaurar uma salvaguarda da base anteriormente
   efectuada. Para esse efeito, o ficheiro que cont&eacute;m a salvaguarda deve ter sido
  posto no direct&oacute;rio @dossier@.
  Seja prudente com esta funcionalidade&nbsp;: <b>as eventuais modifica&ccedil;&otilde;es, e/ou perdas s&atilde;o irrevers&iacute;veis.</b>  ',
 'texte_sauvegarde' => 'Salvaguardar o conte&uacute;do da base',
 'texte_sauvegarde_base' => 'Salvaguardar a base',
-'texte_sauvegarde_compressee' => 'A salvaguarda far-se-&aacute; no ficheiro n&atilde;o comprimido @fichier@.',
+'texte_sauvegarde_compressee' => '<MODIF>A salvaguarda far-se-&aacute; no ficheiro n&atilde;o comprimido @fichier@.',
 'texte_selection_langue_principale' => 'Pode seleccionar a seguir a  &laquo;&nbsp;l&iacute;ngua principal&nbsp;&raquo; do s&iacute;tio. Esta op&ccedil;&atilde;o n&atilde;o o obriga - felizmente&nbsp;! - a escrever os seus artigos na l&iacute;ngua seleccionada, mas permite determinar&nbsp;:
  <u><li> o formato por defeito das datas no s&iacute;tio p&uacute;blico&nbsp;;</li>
  <li> a natureza do motor tipogr&aacute;fico que SPIP deve utilizar para a restitui&ccedil;&atilde;o dos textos&nbsp;;</li>
@@ -935,7 +992,7 @@ a partir do seu s&iacute;tio.</i></blockquote>',
 'texte_test_proxy' => 'Para experimentar este proxy, indique aqui o endere&ccedil;o de um s&iacute;tio Web
   que deseje testar;',
 'texte_titre_02' => 'T&iacute;tulo',
-'texte_titre_obligatoire' => '<b>T&iacute;tulo</b> [Obrigat&oacute;rio]',
+'texte_titre_obligatoire' => '<MODIF><b>T&iacute;tulo</b> [Obrigat&oacute;rio]',
 'texte_travail_article' => '@nom_auteur_modif@ trabalhou sobre este artigo h&aacute; @date_diff@ minutes',
 'texte_travail_collaboratif' => 'Se &eacute; frequente muitos redactores
  trabalharem no mesmo artigo, o sistema
@@ -946,7 +1003,7 @@ a fim de evitar as modifica&ccedil;&otilde;es simult&acirc;neas.
  intempestivas.',
 'texte_trop_resultats_auteurs' => 'Demasiado resultados para "@cherche_auteur@" ; favor afinar a pesquisa.',
 'texte_unpack' => 'telecarregamento da &uacute;ltima vers&atilde;o',
-'texte_utilisation_moteur_syndiques' => 'Quando utilizar o motor integrado de pesquisa 
+'texte_utilisation_moteur_syndiques' => '<MODIF>Quando utilizar o motor integrado de pesquisa 
   no SPIP, pode efectuar as pesquisas nos s&iacute;tios e
  nos artigos vinculados de duas maneiras
  diferentes. <br /><img src=\'puce.gif\'> A mais
@@ -974,7 +1031,7 @@ ao SPIP pesquisar igualmente no texto dos
 'titre_cadre_forum_interne' => 'F&oacute;rum interno',
 'titre_cadre_interieur_rubrique' => 'Dentro da rubrica',
 'titre_cadre_numero_auteur' => 'AUTOR N&Uacute;MERO',
-'titre_cadre_signature_obligatoire' => '<b>Assinatura</b> [Obrigat&oacute;rio]<br />',
+'titre_cadre_signature_obligatoire' => '<MODIF><b>Assinatura</b> [Obrigat&oacute;rio]<br />',
 'titre_config_fonctions' => 'Configura&ccedil;&atilde;o do s&iacute;tio',
 'titre_config_groupe_mots_cles' => 'Configura&ccedil;&atilde;o dos grupos de palavras-chave',
 'titre_configuration' => 'Configura&ccedil;&atilde;o do s&iacute;tio',
@@ -1036,16 +1093,30 @@ ao SPIP pesquisar igualmente no texto dos
 'titre_sites_tous' => 'Os s&iacute;tios referenciados',
 'titre_suivi_petition' => 'Seguimento dos abaixo-assinados',
 'titre_syndication' => 'Vincula&ccedil;&atilde;o de s&iacute;tios',
+'tls_ldap' => '<NEW>Transport Layer Security :',
 'tout_dossier_upload' => 'Todo o diret&oacute;rio @upload@',
 'trad_article_inexistant' => 'N&atilde;o h&aacute; artigo com este n&uacute;mero',
 'trad_article_traduction' => 'Todas as vers&otilde;es deste artigo&nbsp;:',
-'trad_deja_traduit' => 'Este artigo &eacute; j&aacute; uma tradu&ccedil;&atilde;o do presente artigo.',
+'trad_deja_traduit' => '<MODIF>Este artigo &eacute; j&aacute; uma tradu&ccedil;&atilde;o do presente artigo.',
 'trad_delier' => 'N&atilde;o voltar a ligar este artigo a estas tradu&ccedil;&otilde;es',
 'trad_lier' => 'Este artigo &eacute; uma tradu&ccedil;&atilde;o do artigo n&uacute;mero&nbsp;:',
 'trad_new' => 'Escrever uma nova tradu&ccedil;&atilde;o deste artigo',
 
 
+// U
+'utf8_convert_attendez' => '<NEW>Attendez quelques instants et rechargez cette page.',
+'utf8_convert_avertissement' => '<NEW>Vous vous appr&ecirc;tez &agrave; convertir le contenu de votre base de donn&eacute;es (articles, br&egrave;ves, etc) du jeu de caract&egrave;res <b>@orig@</b> vers le jeu de caract&egrave;res <b>@charset@</b>.',
+'utf8_convert_backup' => '<NEW>N\'oubliez pas de faire auparavant une sauvegarde compl&egrave;te de votre site. Vous devrez aussi v&eacute;rifier que vos squelettes et fichiers de langue sont compatibles @charset@.',
+'utf8_convert_erreur_deja' => '<NEW>Votre site est d&eacute;j&agrave; en @charset@, inutile de le convertir...',
+'utf8_convert_erreur_orig' => '<NEW>Erreur&nbsp;: le jeu de caract&egrave;res @charset@ n\'est pas support&eacute;.',
+'utf8_convert_termine' => '<NEW>C\'est termin&eacute;&nbsp;!',
+'utf8_convert_timeout' => '<NEW><b>Important&nbsp;:</b> en cas de <i>timeout</i> du serveur, veuillez recharger la page jusqu\'&agrave; ce qu\'elle indique &laquo;&nbsp;termin&eacute;&nbsp;&raquo;.',
+'utf8_convert_verifier' => '<NEW>Vous devez maintenant aller vider le cache, et v&eacute;rifier que tout se passe bien sur les pages publiques du site. En cas de gros probl&egrave;me, une sauvegarde de vos donn&eacute;es a &eacute;t&eacute; r&eacute;alis&eacute;e (au format SQL) dans le r&eacute;pertoire @rep@.',
+'utf8_convertir_votre_site' => '<NEW>Convertir votre site en utf-8',
+
+
 // V
+'version' => '<NEW>Version&nbsp;:',
 'version_initiale' => 'vers&atilde;o inicial'
 
 );

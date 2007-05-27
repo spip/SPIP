@@ -34,6 +34,7 @@ la documentacion de SPIP</a>.',
 'avis_non_acces_message' => 'Av&egrave;tz pas acc&egrave;s a aqueu messatge.',
 'avis_non_acces_page' => 'Av&egrave;tz pas acc&egrave;s a aquela p&agrave;gina.',
 'avis_operation_echec' => 'L\'operacion a so&iuml;t.',
+'avis_operation_impossible' => 'Operacion impossibla',
 'avis_probleme_archive' => 'Probl&egrave;ma de lectura dau fichier @archive@',
 'avis_site_introuvable' => 'Sit introbable',
 'avis_site_syndique_probleme' => 'Atencion : la sindicacion d\'aqueu sit a encontrat un problema&nbsp;; lo sistema es doncas temporarament interromput per a&uuml;ra. Verificatz l\'adre&ccedil;a dau fichier de sindicacion d\'aqueu sit (<b>@url_syndic@</b>), e provatz mai una recuperacion dei informacions.',
@@ -48,6 +49,7 @@ la documentacion de SPIP</a>.',
 'bouton_ajouter' => 'Ajustar',
 'bouton_ajouter_participant' => 'AJUSTAR UN PARTICIPANT&nbsp;:',
 'bouton_annonce' => 'ANON&Ccedil;A',
+'bouton_annuler' => 'Anular',
 'bouton_checkbox_envoi_message' => 'possibilitat de mandar un messatge',
 'bouton_checkbox_indiquer_site' => 'indicar obligat&ograve;riament un sit web',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'Lu administrators dau sit',
@@ -105,6 +107,8 @@ la documentacion de SPIP</a>.',
 'cache_mode_non_compresse' => 'Lu fichi&egrave;rs de l\'amagador son registrats en m&ograve;de non comprimit.',
 'cache_modifiable_webmestre' => 'Lo webm&egrave;stre dau sit p&ograve;ut modificar aqu&egrave;u param&egrave;tre.',
 'calendrier_synchro' => 'S\'utilisatz un logiciau d\'agenda compatible <b>iCal</b>, lo pod&egrave;tz sincronisar emb li informacions d\'aqueu sit.',
+'connexion_ldap' => 'Conexion :',
+'copier_en_local' => 'Copiar localament',
 
 
 // D
@@ -166,10 +170,15 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 'erreur_plugin_version_manquant' => 'Pas de version dau plugin',
 
 
+// F
+'forum_info_original' => 'originau',
+
+
 // I
 'ical_info1' => 'Aquela p&agrave;gina m&ograve;stra de met&ograve;des diferents per restar en contacte emb la vida d\'aqueu sit.',
 'ical_info2' => 'Per aver mai d\'informacions sobre aquelas tecnicas, esitetz pas da consultar <a href="http://www.spip.net/fr_suivi">la documentacion de SPIP</a>.',
 'ical_info_calendrier' => 'I a doi calendiers a la voastra disposicion. Lo promier es un plan dau sit qu\'anon&ccedil;a toi lu articles publicats. Lo segond conten lu anoncis editoriaus en mai dei voastres darri&egrave;rs messatges privats: vos es reservat gra&ccedil;as a una clau personala, que la pod&egrave;tz modificar en tot moment en renovant lo voastre m&ograve;t de santa Clara.',
+'ical_lien_rss_breves' => 'Sindicacion dei br&egrave;vas dau sit',
 'ical_methode_http' => 'Telecargament',
 'ical_methode_webcal' => 'Sincronisacion (webcal://)',
 'ical_texte_js' => 'Lu articles publicats en aqueu sit se p&ograve;don afichar aisit, dins toi lu sits voastres, en far servir una linha javascript. ',
@@ -278,16 +287,16 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 'info_config_suivi' => 'S\'aquela adre&ccedil;a corresponde a una mailing-list, pod&egrave;tz indicar &ccedil;ai sota l\'adre&ccedil;a dont lu participants au sit si p&ograve;don inscriure. Aquela adre&ccedil;a p&ograve;ut &egrave;stre una URL (per exemple la p&agrave;gina d\'inscripcion a la lista per lo web), &ograve; una adre&ccedil;a e-mail tenent un subjecte especific (per exemple&nbsp;: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Vos pod&egrave;tz abonar a la mailing-list d\'aqueu sit. Receber&egrave;tz per corri&egrave;r electonic li anon&ccedil;as dei articles e br&egrave;vas prepauats a la publication.',
 'info_confirmer_passe' => 'Confirmar aqueu nov&egrave;u m&ograve;t de santa Clara:',
-'info_connexion_base' => 'Segonda estapa&nbsp;: <b>Pr&ograve;va de connexion a la basa</b>',
+'info_connexion_base' => 'Pr&ograve;va de connexion &agrave; la basa',
 'info_connexion_ldap_ok' => 'La connexion LDAP a capitat.</b><p> Pod&egrave;tz passar a l\'estapa seguenta.',
-'info_connexion_mysql' => 'Promi&egrave;ra estapa: <b>la voastra connexion MySQL</b>',
+'info_connexion_mysql' => 'La voastra connexion MySQL',
 'info_connexion_ok' => 'La connexion a capitat.',
 'info_contact' => 'Contact',
 'info_contenu_articles' => 'Contengut dei articles',
 'info_creation_mots_cles' => 'Creatz e configuratz aqu&iacute; lu m&ograve;ts claus dau sit',
 'info_creation_paragraphe' => '(Per crear de paragrafs, laissatz de linhas vueii, tot simplament)',
 'info_creation_rubrique' => 'Denant de poder escriure d\'articles,<br /> dev&egrave;tz crear aumens una rubrica.<br />',
-'info_creation_tables' => 'Quatren estapa&nbsp;: <b>Creacion dei taulas de la basa</b>',
+'info_creation_tables' => 'Creacion dei taulas de la basa',
 'info_creer_base' => '<b>Crear</b> una basa n&ograve;va de donadas:',
 'info_dans_groupe' => 'Dins lo grop:',
 'info_dans_rubrique' => 'Dins la rubrica:',
@@ -295,7 +304,7 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 'info_date_referencement' => 'DATA DE REFEREN&Ccedil;AMENT D\'AQUEU SIT&nbsp;:',
 'info_delet_mots_cles' => 'Av&egrave;tz demandat de suprimir lo m&ograve;t clau
 <b>@titre_mot@</b> (@type_mot@). Aqueu m&ograve;t clau es ligat a <b>@texte_lie@</b>. Dev&egrave;tz confirmar aquela decision&nbsp;:',
-'info_derniere_etape' => 'Darriera estapa: es acabat!',
+'info_derniere_etape' => 'Es acabat !',
 'info_derniere_syndication' => 'La darriera sindicacion d\'aqueu sit si fagu&egrave;t lo',
 'info_derniers_articles_publies' => 'Lu voastres darriers articles publicats en linha',
 'info_desactiver_forum_public' => 'Desactivar l\'utilisacion dei forums publics. Lu forums publics podr&agrave;n &egrave;stre autorisats au cas per cas sus lu articles; ser&agrave;n pro&iuml;bits sus li rubricas, br&egrave;vas, etc.',
@@ -354,7 +363,7 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 'info_image_process' => 'Vorgatz seleccionar lo melhor met&ograve;de de fabricacion dei vinhetas en clicar sus l\'imatge correspondent.',
 'info_image_process2' => '<b>N.B.</b> <i>Se minga d\'imatge apareisse, alora lo servidor qu\'auberga lo voastre site es pas estat configurat per utilisar de tau autis. Se desiratz utilisar aqueli foncions, contactatz lo responsable tecnic e demandatz li extensions &laquo;GD&raquo; o &laquo;Imagick&raquo;.</i>',
 'info_images_auto' => 'Imagtes calculats automaticament',
-'info_informations_personnelles' => 'Cinquena estapa: <b>Informacions personali</b>',
+'info_informations_personnelles' => 'Informacions personali',
 'info_inscription_automatique' => 'Inscripcion automatica de redactors nov&egrave;us',
 'info_jeu_caractere' => 'Ju&egrave;c de caract&egrave;rs dau sit',
 'info_jours' => 'jorns',
@@ -457,13 +466,21 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 'info_principaux_correspondants' => 'Lu voastres correspondents principaus',
 'info_procedez_par_etape' => 'proced&egrave;tz estapa per estapa',
 'info_procedure_maj_version' => 'la procedura de mesa a jorn deu &egrave;stre lan&ccedil;ada per adaptar la basa de donadas a la nov&egrave;la version de SPIP.',
+'info_proxy_ok' => 'Pr&ograve;va dau proxy capitat.',
 'info_ps' => 'P.-S.',
 'info_publier' => 'publicar',
 'info_publies' => 'Lu voastres articles publicats en linha',
 'info_question_accepter_visiteurs' => 'Se lu esquelets dau voastre site prevehon lo registrament de visitors sensa acc&egrave;s a l\'espaci privat, vorgatz activar l\'opcion seguenta&nbsp;:',
 'info_question_gerer_statistiques' => 'Lo voastre site deu gerar li estadisticas dei visitas&nbsp;?',
-'info_question_inscription_nouveaux_redacteurs' => 'Acceptatz li inscripcions de nov&egrave;us redactors a partir dau sit public&nbsp;? Se l\'acceptatz, lu visitaires si podr&agrave;n inscriure desp&iacute; un formulari automatisat e accedir&agrave;n alora a l\'espaci privat per prepauar lu sieus articles pr&ograve;pis.<blockquote><i>Durant la fasa d\'inscripcion, lu utilisaires recebon un corrier electronic automatic que li fornisse lu sieus c&ograve;des d\'acc&egrave;s au sit privat.
-I son d\'aubergadors que desactivan lo mandad&iacute;s d\'e-mails desp&iacute; lu sieus servidors: en aqueu cas, l\'inscripcion automatica es impossibla.',
+'info_question_inscription_nouveaux_redacteurs' => 'Acceptatz li inscripcions de nov&egrave;us redactors &agrave;
+ partir dau sit public&nbsp;? Se l\'acceptatz, lu visitaires si podr&agrave;n inscriure
+ desp&iacute; un formulari automatisat e accedir&agrave;n alora &agrave; l\'espaci privat per
+ prepauar lu sieus articles pr&ograve;pis.<blockquote><i>Durant la fasa d\'inscripcion,
+ lu utilisaires recebon un corrier electronic automatic
+ que li fornisse lu sieus c&ograve;des d\'acc&egrave;s au sit privat. D\'unu
+ aubergadors desactivon lo mandad&iacute;s d\'e-mails desp&iacute; lu sieus
+ servidors: en aqueu cas, l\'inscripcion automatica es
+ impossibla.',
 'info_question_mots_cles' => 'Desiratz d\'utilisar lu m&ograve;ts claus sus lo voastre sit?',
 'info_question_proposer_site' => 'Cu p&ograve;ut prepauar de sits referen&ccedil;ats?',
 'info_question_utilisation_moteur_recherche' => 'Desiratz d\'utilisar lo motor de recerca integrat a SPIP? (s\'es desactivat, accel&egrave;ra lo foncionament dau sistema.)',
@@ -550,6 +567,7 @@ I son d\'aubergadors que desactivan lo mandad&iacute;s d\'e-mails desp&iacute; l
 'info_surtitre' => 'Sobretitre:',
 'info_syndication_integrale_1' => 'Lo voastre site propausa de fichiers de syndicacion (veire &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
 'info_syndication_integrale_2' => 'Desiratz transmetre l\'integralitat dei articles, &ograve; difusar ren qu\'un resumit de quauqui centenas de caract&egrave;rs&nbsp;?',
+'info_table_prefix' => 'Pod&egrave;tz modifiar lo prefixe dau nom dei taulas de donadas (aqu&ograve; es indispensable quora si v&ograve;u installar mantu sits dins la mema basa de donadas). Aquest prefixe s\'ecriu en letras minuscules, non accentuadi, e sensa espaci.',
 'info_taille_maximale_vignette' => 'Talha maximala dei vinhetas generadi per lo sistema:',
 'info_terminer_installation' => 'A&uuml;ra pod&egrave;tz acabar la procedura d\'installacion estandard.',
 'info_texte' => 'T&egrave;xt',
@@ -592,6 +610,7 @@ una color indica lo sieu estat:',
 'install_echec_annonce' => 'L\'installacion capitar&agrave; mau, &ograve; abotir&agrave; a un sit non foncionau...',
 'install_extension_mbstring' => 'SPIP fonciona pas emb:',
 'install_extension_php_obligatoire' => 'SPIP esige l\'estension PHP:',
+'install_php_version' => 'PHP version @version@ insuffisanta (minimum = @minimum@)',
 'install_select_langue' => 'Seleccionatz una lenga pi clicatz sus lo boton &laquo;&nbsp;seguent&nbsp;&raquo; per amodar la procedura d\'installacion.',
 'intem_redacteur' => 'redactor',
 'item_accepter_inscriptions' => 'Acceptar li inscripcions',
@@ -679,6 +698,7 @@ una color indica lo sieu estat:',
 'lien_supprimer_rubrique' => 'suprimir aquela rubrica',
 'lien_tout_deplier' => 'Desplegar tot',
 'lien_tout_replier' => 'Repeglar',
+'lien_tout_supprimer' => 'Suprimar tot',
 'lien_trier_nom' => 'Triar per nom',
 'lien_trier_nombre_articles' => 'Triar per nombre d\'articles',
 'lien_trier_statut' => 'Triar per estatut',
@@ -726,6 +746,7 @@ una color indica lo sieu estat:',
 'plugin_etat_stable' => 'estable',
 'plugin_etat_test' => 'en test',
 'plugins_liste' => 'Tiera dei plugins',
+'protocole_ldap' => 'Version dau protoc&ograve;l :',
 
 
 // R
@@ -733,6 +754,8 @@ una color indica lo sieu estat:',
 
 
 // S
+'sauvegarde_fusionner' => 'Fusionar la basa actuala e lo sauvament',
+'sauvegarde_url_origine' => 'Eventualament, URL dau sit d\'origina :',
 'statut_admin_restreint' => '(admin limitat)',
 'syndic_choix_moderation' => 'Que faire dei estacs venentsen provenen&ccedil;a d\'aqu&egrave;u sit&nbsp;?',
 'syndic_choix_oublier' => 'Que faire dei estacs que figuran pas plus dins lo fichi&egrave;r de syndicacion&nbsp;?',
@@ -775,6 +798,7 @@ una color indica lo sieu estat:',
 'texte_choix_base_1' => 'Chausiss&egrave;tz la voastra basa:',
 'texte_choix_base_2' => 'Lo servidor MySQL conten mai d\'una basa de donadas.',
 'texte_choix_base_3' => '<b>Chausiss&egrave;tz</b> &ccedil;ai sota la que lo voastre aubergador vos a atribuida:',
+'texte_choix_table_prefix' => 'Prefixe dei taulas&nbsp;:',
 'texte_commande_vider_tables_indexation' => 'Utilisatz aquela comanda per vuar li taulas d\'indexacion utilisadi per lo motor de recerca integrat a SPIP. Aqu&ograve; permetr&agrave; de ganhar d\'espaci disc.',
 'texte_comment_lire_tableau' => 'Lo reng de l\'article,
 dins lo classament per popularitat, es indicat dins lo marge; la popularitat de l\'article 
@@ -1031,6 +1055,7 @@ s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.'
 'titre_sites_tous' => 'Lu sits referen&ccedil;ats',
 'titre_suivi_petition' => 'Seguit dei peticions',
 'titre_syndication' => 'Sindicacion dei sits',
+'tls_ldap' => 'Transport Layer Security :',
 'tout_dossier_upload' => 'Tot lo dorsier @upload@',
 'trad_article_inexistant' => 'I a minga d\'article que poartan aqueu n&uacute;mero.',
 'trad_article_traduction' => 'Toti li versions d\'aquel article&nbsp;:',

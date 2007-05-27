@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'afficher_trad' => 'exibir as tradu&ccedil;&otilde;es',
 'alerte_maj_impossible' => 'Aten&ccedil;&atilde;o! A atualiza&ccedil;&atilde;o da base de dados MySQL para a vers&atilde;o @version@ n&atilde;o &eacute; poss&iacute;vel, provavelmente por problema de direitos de edi&ccedil;&atilde;o na base de dados. Por favor, contate o seu provedor de hospedagem.',
 'analyse_xml' => 'Analisar XML',
+'annuler' => 'Cancelar',
 'antispam_champ_vide' => 'Deixe, por favor, este campo vazio:',
 'avis_archive_incorrect' => 'a c&oacute;pia de seguran&ccedil;a n&atilde;o &eacute; um arquivo do SPIP',
 'avis_archive_invalide' => 'a c&oacute;pia de seguran&ccedil;a n&atilde;o &eacute; v&aacute;lida',
@@ -653,6 +654,10 @@ e reconectar-se com o site.
 'previsualiser' => 'Visualizar',
 
 
+// R
+'retour' => 'Voltar',
+
+
 // S
 'spip_conforme_dtd' => 'O SPIP considera este documento de acordo com o seu DOCTYPE:',
 'squelette' => 'esqueleto',
@@ -744,6 +749,7 @@ Tente se',
 'zbug_inversion_ordre_inexistant' => 'invers&atilde;o de uma ordem inexistente',
 'zbug_pagination_sans_critere' => '#PAGINATION sem crit&eacute;rio {pagination} ou usada dentro de uma boucle recursiva',
 'zbug_parametres_inclus_incorrects' => 'Par&acirc;metros de inclus&atilde;o incorretos',
+'zbug_profile' => 'Tempo de processamento: @time@',
 'zbug_resultat' => 'resultado',
 'zbug_serveur_indefini' => 'sevidor SQL n&atilde;o definido',
 'zbug_table_inconnue' => 'Tabela SQL &laquo;@table@&raquo; desconhecida',

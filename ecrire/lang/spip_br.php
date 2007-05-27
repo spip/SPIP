@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'afficher_trad' => 'diskouez an droidigezhio&ugrave;',
 'alerte_maj_impossible' => '<b>Diwallit&nbsp;!</b> N\'eus ket tu da hizivaat an diaz MySQL etrezek ar stumm @version@, marteze abalamour d\'ur gudenn aotre evit kemm an diaz titouro&ugrave;. Mar plij kit en darempred gant ho poder.',
 'analyse_xml' => 'Dielfenna&ntilde; XML',
+'annuler' => 'Nulla&ntilde;',
 'antispam_champ_vide' => 'Na lakait netra ama&ntilde;&nbsp;:',
 'avis_archive_incorrect' => 'N\'eo ket ar restr-diell ur restr SPIP',
 'avis_archive_invalide' => 'N\'eo ket reizh ar restr diell',
@@ -654,6 +655,10 @@ kevrea&ntilde; en-dro ouzh al lec\'hienn.
 'precedent' => 'kent',
 'previsualisation' => 'Rakwelet',
 'previsualiser' => 'Rakwelet',
+
+
+// R
+'retour' => 'Distrei&ntilde;',
 
 
 // S
