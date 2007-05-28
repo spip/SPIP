@@ -21,12 +21,16 @@ $var_auth = $auth();
 
 if ($var_auth !== '') {
 	if ($var_auth===-1) exit();
-	// A quoi sert cette redirection ???
+
 	include_spip('inc/headers');
-	if ($GLOBALS['auteur_session']['statut'] == '6forum') {
+	// si l'authentifie' n'a pas acces a l'espace de redac
+	// c'est qu'on voulait forcer sa reconnaissance en tant que visiteur.
+	// On reexecute pour deboucher sur le include public.
+	if (!autoriser('ecrire')) {
 		$redir = '../?' . $_SERVER['QUERY_STRING'];
 		spip_setcookie('spip_session', $_COOKIE['spip_session'], time() + 3600 * 24 * 14);
 	} else {
+	// autrement on insiste
 		$redir = generer_url_public('login',
 			"url=" . 
 			rawurlencode(str_replace('/./', '/',
