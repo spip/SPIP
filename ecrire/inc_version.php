@@ -396,7 +396,7 @@ if (@is_readable(_DIR_TMP."charger_plugins_options.php")){
 define('_OUTILS_DEVELOPPEURS',true);
 
 // charger systematiquement inc/autoriser dans l'espace restreint
-if (!_DIR_RESTREINT)
+if (test_espace_prive())
 	include_spip('inc/autoriser');
 //
 // Installer Spip si pas installe... sauf si justement on est en train
@@ -408,7 +408,7 @@ OR _request('action') == 'converser'
 OR _request('action') == 'test_dirs')) {
 
 	// Si on peut installer, on lance illico
-	if (!_DIR_RESTREINT) {
+	if (test_espace_prive()) {
 		include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire("install"));
 	} else {
@@ -428,7 +428,10 @@ OR _request('action') == 'test_dirs')) {
 //
 
 // si un buffer est deja ouvert, stop
-if (_DIR_RESTREINT AND _request('action')===NULL AND $flag_ob AND strlen(ob_get_contents())==0 AND !headers_sent()) {
+if (!test_espace_prive()
+AND $flag_ob
+AND strlen(ob_get_contents())==0
+AND !headers_sent()) {
 	@header("Vary: Cookie, Accept-Encoding");
 
 	if (

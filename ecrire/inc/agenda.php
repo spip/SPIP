@@ -84,7 +84,7 @@ function calendrier_href($script, $annee, $mois, $jour, $type, $fin, $ancre, $im
 	$moi = preg_match("/exec=" . _request('exec') .'$/', $script);
 	if ($img) $clic =  http_img_pack($img, ($alt ? $alt : $titre), $c);
 	  // pas d'Ajax pour l'espace public pour le moment ou si indispo
-	if (_DIR_RESTREINT  || !$moi || (_SPIP_AJAX !== 1 ))
+	if (!test_espace_prive() || !$moi || (_SPIP_AJAX !== 1 ))
 
 		return http_href("$h$a", $clic, $titre, $style, $class, $evt);
 	else {
@@ -237,7 +237,7 @@ function http_calendrier_mois($annee, $mois, $jour, $echelle, $partie_cal, $scri
 	  $evt .
 	  '</table>' .
 	  http_calendrier_sans_date($annee, $mois, $evenements) .
-	  (_DIR_RESTREINT ? "" : http_calendrier_aide_mess());
+	  (!test_espace_prive() ? "" : http_calendrier_aide_mess());
 }
 
 // si la periore a plus de 31 jours, c'est du genre trimestre, semestre etc
@@ -345,7 +345,7 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 		$ligne .= "\n\t\t<td style='height: 100px;' class='calendrier-td $fond bordure_claire_basse bordure_claire_$spip_lang_right" .
 		  ($ligne ? "" : " bordure_claire_$spip_lang_left") .
 		  "'>" .
-		  (!_DIR_RESTREINT ? 
+		  (test_espace_prive() ? 
 		   (calendrier_href($script,$annee_en_cours, $mois_en_cours, $jour, "jour", $finurl, $ancre, '', $jour, 'calendrier-helvetica16', '', $jour, "color: $couleur_texte") . 
 		    http_calendrier_ics_message($annee_en_cours, $mois_en_cours, $jour, false)):
 		   http_calendrier_mois_clics($annee_en_cours, $mois_en_cours, $jour, $script, $finurl, $ancre)) .
@@ -416,7 +416,7 @@ function http_calendrier_semaine($annee, $mois, $jour, $echelle, $partie_cal, $s
 	  $evt .
 	  "</table>" .
 	  $sd .
-	  (_DIR_RESTREINT ? "" : http_calendrier_aide_mess());
+	  (!test_espace_prive() ? "" : http_calendrier_aide_mess());
 }
 
 // http://doc.spip.org/@http_calendrier_semaine_navigation
@@ -488,7 +488,7 @@ function http_calendrier_semaine_sept($annee, $mois, $jour, $echelle, $partie_ca
 	for ($j=$jour; $j<$jour+7;$j++){
 		$v = mktime(0,0,0,$mois, $j, $annee);
 		$total .= "\n<td class='calendrier-td'>" .
-		  http_calendrier_ics($annee,$mois,$j, $echelle, $partie_cal, $largeur, $evt, $style, $class . ( (date("w",$v)==0 && !_DIR_RESTREINT) ? 
+		  http_calendrier_ics($annee,$mois,$j, $echelle, $partie_cal, $largeur, $evt, $style, $class . ( (date("w",$v)==0 && test_espace_prive()) ? 
 			  " toile_claire" :
 			  ((date("Ymd", $v) == $today) ? 
 			   " toile_blanche" :
@@ -531,18 +531,18 @@ function http_calendrier_jour_noms($annee, $mois, $jour, $echelle, $partie_cal, 
 	global $spip_ecran;
 	$finurl = "&amp;echelle=$echelle&amp;partie_cal=$partie_cal";
 
-	$gauche = (_DIR_RESTREINT  || ($spip_ecran != "large"));
+	$gauche = (!test_espace_prive()  || ($spip_ecran != "large"));
 	return
 	  "\n<tr><td class='calendrier-td-gauche'>" .
 	  ($gauche ? '' :
 	   http_calendrier_ics_titre($annee,$mois,$jour-1,$script, $finurl, $ancre)) .
 	  "</td><td colspan='5' class='calendrier-td-centre'>" .
-	  (_DIR_RESTREINT ? '' :
+	  (!test_espace_prive() ? '' :
 		   ("\n\t<div class='calendrier-titre'>" .
 		    http_calendrier_ics_message($annee, $mois, $jour, true) .
 		    '</div>')) .
 	  "</td><td class='calendrier-td-droit calendrier-arial10'> " .
-	  (_DIR_RESTREINT ? '' : http_calendrier_ics_titre($annee,$mois,$jour+1,$script, $finurl, $ancre)) .
+	  (!test_espace_prive() ? '' : http_calendrier_ics_titre($annee,$mois,$jour+1,$script, $finurl, $ancre)) .
 	  "</td></tr>";
 }
 
@@ -550,7 +550,7 @@ function http_calendrier_jour_noms($annee, $mois, $jour, $echelle, $partie_cal, 
 function http_calendrier_jour_sept($annee, $mois, $jour, $echelle,  $partie_cal, $script, $ancre, $evt){
 	global $spip_ecran;
 
-	$gauche = (_DIR_RESTREINT  || ($spip_ecran != "large"));
+	$gauche = (!test_espace_prive()  || ($spip_ecran != "large"));
 	if ($partie_cal!= DEFAUT_PARTIE_R)
 		return
 		  "<tr class='calendrier-verdana10'>" .
@@ -564,7 +564,7 @@ function http_calendrier_jour_sept($annee, $mois, $jour, $echelle,  $partie_cal,
 			# afficher en reduction le tableau du jour suivant
 		  "\n<td class='calendrier-td-droit'>" .
 	
-		  (_DIR_RESTREINT ? '' :
+		  (!test_espace_prive() ? '' :
 		   http_calendrier_ics($annee, $mois, $jour+1, $echelle, $partie_cal, 0, $evt)) .
 		  '</td>' .
 		  "\n</tr>";
@@ -589,7 +589,7 @@ function http_calendrier_jour_sept($annee, $mois, $jour, $echelle,  $partie_cal,
 		  '</td>' .
 			# afficher en reduction le tableau du jour suivant
 		  "\n<td class='calendrier-td-droit'>" .
-		  (_DIR_RESTREINT ? '' :
+		  (!test_espace_prive() ? '' :
 		  "<table width='100%'>".
 		   http_calendrier_mois_sept($annee, $mois, $jour+1, $jour+1,$evenements, $script, '', $ancre)
 		   ."</table>"
@@ -1011,7 +1011,7 @@ function http_calendrier_navigation($annee, $mois, $jour, $echelle, $partie_cal,
 	  . $args_suiv
 	  . "&nbsp;&nbsp;"
 	  . $nom
-	  . (_DIR_RESTREINT ? '' :  aide("messcalen"))
+	  . (!test_espace_prive() ? '' :  aide("messcalen"))
 	  . "</div></div>"
 	  . http_calendrier_invisible($annee, $mois, $jour, $script, "&amp;echelle=$echelle&amp;partie_cal=$partie_cal", $ancre, $id);
 }
@@ -1113,7 +1113,7 @@ function http_calendrier_agenda_rv ($annee, $mois, $les_rv, $fclic,
 	$jour_semaine = date("w", mktime(1,1,1,$mois,1,$annee));
 	if ($jour_semaine==0) $jour_semaine=7;
 	for ($i=1;$i<$jour_semaine;$i++) $ligne .= "\n\t<td></td>";
-	$classe0 = !_DIR_RESTREINT ? "" : " bordure_foncee";
+	$classe0 = test_espace_prive() ? "" : " bordure_foncee";
 	for ($j=1; (checkdate($mois,$j,$annee)); $j++) {
 		$toile = "";
 		$nom = mktime(1,1,1,$mois,$j,$annee);
@@ -1134,7 +1134,7 @@ function http_calendrier_agenda_rv ($annee, $mois, $les_rv, $fclic,
 		  $couleur = "black";
 		} else {
 		  if ($j == $jour_today AND $cemois) {
-			$toile = !_DIR_RESTREINT ? 'toile_foncee' : 'toile_gris_sombre';
+			$toile = test_espace_prive() ? 'toile_foncee' : 'toile_gris_sombre';
 			$couleur = "white";
 		    } else {
 			if ($jour_semaine == 7) {

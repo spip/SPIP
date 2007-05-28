@@ -26,7 +26,9 @@ function inc_joindre_dist($script, $args, $id=0, $intitule='', $mode='', $type='
 	$distant = ($mode == 'document' AND $type);
 
 	$dir_ftp = '';
-	if (!_DIR_RESTREINT AND !$vignette_de_doc AND $GLOBALS['flag_upload']) {
+	if (test_espace_prive()
+	AND !$vignette_de_doc
+	AND $GLOBALS['flag_upload']) {
 		if($dir = determine_upload()) {
 			// quels sont les docs accessibles en ftp ?
 			$l = texte_upload_manuel($dir, '', $mode);
@@ -84,7 +86,7 @@ function inc_joindre_dist($script, $args, $id=0, $intitule='', $mode='', $type='
 
 	return generer_action_auteur('joindre',
 		(intval($id) .'/' .intval($id_document) . "/$mode/$type"),
-		(_DIR_RESTREINT)?$script:generer_url_ecrire($script, $args, true),
+		(!test_espace_prive())?$script:generer_url_ecrire($script, $args, true),
 		"$iframe$debut$res$dir_ftp$distant$fin",
 		" method='post' enctype='multipart/form-data' class='form_upload'");
 }

@@ -175,7 +175,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 // Mode auteur authentifie appelant de ecrire/ : il ne faut rien lire du cache
 // et n'y ecrire que la compilation des squelettes (pas les pages produites)
 // car les references aux repertoires ne sont pas relatifs a l'espace public
-	OR !_DIR_RESTREINT) {
+	OR test_espace_prive()) {
 		$use_cache = -1;
 		$lastmodified = 0;
 		$chemin_cache = "";
