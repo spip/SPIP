@@ -112,7 +112,7 @@ function menu_langues($nom_select) {
 
 	if (!$ret) return '';
 
-	if (_DIR_RESTREINT) {
+	if (!test_espace_prive()) {
 		$cible = self();
 		$base = '';
 	} else {
@@ -120,7 +120,7 @@ function menu_langues($nom_select) {
 		$base = _FILE_CONNECT ? 'base' : '';
 	}
 
-	$change = ("\nonchange=\"this.parentNode.parentNode.submit()\"");
+	$change = ' onchange="this.parentNode.parentNode.submit()"';
 	return generer_action_auteur('converser',$base, $cible,
 		(select_langues($nom_select, $change, $ret)
 		 . "<noscript><div><input type='submit' class='fondo' value='". _T('bouton_changer')."' /></div></noscript>"),
@@ -131,7 +131,7 @@ function menu_langues($nom_select) {
 function select_langues($nom_select, $change, $options)
 {
 	return "<select name='$nom_select' "
-	  . (_DIR_RESTREINT ?
+	  . ((!test_espace_prive()) ?
 	     ("class='forml' style='vertical-align: top; max-height: 24px; margin-bottom: 5px; width: 120px;'") :
 	     (($nom_select == 'var_lang_ecrire')  ?
 	      ("class='verdana1 toile_foncee' style='max-height: 24px; border: 1px solid white; color: white; width: 100px;'") :
@@ -236,7 +236,7 @@ function utiliser_langue_site() {
 // http://doc.spip.org/@utiliser_langue_visiteur
 function utiliser_langue_visiteur() {
 
-	$l = (_DIR_RESTREINT  ? 'spip_lang' : 'spip_lang_ecrire');
+	$l = (!test_espace_prive()  ? 'spip_lang' : 'spip_lang_ecrire');
 	if (isset($_COOKIE[$l]))
 		if (changer_langue($l = $_COOKIE[$l])) return $l;
 
