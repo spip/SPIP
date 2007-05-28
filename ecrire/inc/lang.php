@@ -77,11 +77,17 @@ function lang_dir($lang='', $droitier='ltr', $gaucher='rtl') {
 // http://doc.spip.org/@lang_typo
 function lang_typo($lang='') {
 	if (!$lang) {
-		$lang = isset($GLOBALS['lang_objet']) ? $GLOBALS['lang_objet'] : $GLOBALS['spip_lang'];
+		$lang = isset($GLOBALS['lang_objet'])
+			? $GLOBALS['lang_objet']
+			: $GLOBALS['spip_lang'];
 	}
-	if ($lang == 'eo' OR $lang == 'fr' OR substr($lang, 0, 3) == 'fr_' OR $lang == 'cpf')
+	if ($lang == 'eo'
+	OR $lang == 'fr'
+	OR substr($lang, 0, 3) == 'fr_'
+	OR $lang == 'cpf')
 		return 'fr';
-	else	return 'en';
+	else
+		return 'en';
 }
 
 // gestion de la globale $lang_objet pour que les textes soient affiches

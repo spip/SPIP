@@ -21,6 +21,7 @@ charger_generer_url();
 function action_redirect_dist()
 {
   global $redirect;
+  $redirect = _request('redirect');
 
   if ($mode = _request('var_mode')) $mode = "var_mode=$mode";
 
