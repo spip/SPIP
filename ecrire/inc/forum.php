@@ -120,7 +120,7 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 			return;
 	}
 
-	$lien = str_replace('&amp;', '&', self()) . "#id$id_forum";
+	$lien = self('&') . "#id$id_forum";
 	$boutons ='';
 	if ($suppression)
 	  $boutons .= icone_inline(_T('icone_supprimer_message'), generer_action_auteur('instituer_forum',"$id_forum-$suppression", _DIR_RESTREINT_ABS . $lien),

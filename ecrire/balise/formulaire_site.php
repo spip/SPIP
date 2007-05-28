@@ -62,7 +62,7 @@ function balise_FORMULAIRE_SITE_dyn($id_rubrique) {
 
 	return array('formulaires/site', $GLOBALS['delais'],
 		array(
-			'self' => str_replace('&amp;', '&', self()),
+			'self' => self('&'),
 			'message_ok' => $message_ok,
 			'message_erreur' => $message_erreur,
 			'nom_site' => $nom,

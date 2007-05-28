@@ -1027,7 +1027,7 @@ function agenda_affiche($i)
 	$sinon = array_shift($args);
 	$type = array_shift($args);
 	if (!$nb){ 
-		return http_calendrier_init('', ($type != 'periode') ? $type : 'mois', '', '', str_replace('&amp;', '&', self()), $sinon);
+		return http_calendrier_init('', ($type != 'periode') ? $type : 'mois', '', '', self('&'), $sinon);
 	}	
 	$agenda = agenda_memo(0);
 	$evt = array();
@@ -1058,7 +1058,7 @@ function agenda_affiche($i)
 		$evt = array('', $evt, $min, $max);
 		$type = 'mois';
 	}
-	return http_calendrier_init($start, $type, '', '', str_replace('&amp;', '&', self()), $evt);
+	return http_calendrier_init($start, $type, '', '', self('&'), $evt);
 }
 
 //

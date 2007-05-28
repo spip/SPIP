@@ -78,7 +78,9 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus, $id=0) {
 				'commentaire' => $commentaire,
 				'nom_inscription' => _request('nom_inscription'),
 				'mail_inscription' => _request('mail_inscription'),
-				'self' => str_replace('&amp;','&',(self()))));
+				'self' => self('&')
+			)
+		);
 }
 
 // http://doc.spip.org/@test_mode_inscription
