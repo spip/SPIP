@@ -262,11 +262,15 @@ function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
 function ligne_plug($plug_file, $actif, $id){
 	global $spip_lang_right;
 	static $id_input=0;
+	static $versions = array();
 
 	$erreur = false;
 	$vals = array();
 	$info = plugin_get_infos($plug_file);
-	$s = "<a name='{$info[prefix]}'></a><div class='nomplugin ".($actif?'nomplugin_on toile_claire':'')."'>";
+	$versions[$info['prefix']] = isset($versions[$info['prefix']]) ?
+			$versions[$info['prefix']] + 1 : '';
+	$s = "<a name='" . $info['prefix'] . $versions[$info['prefix']] . 
+		"'></a><div class='nomplugin ".($actif?'nomplugin_on toile_claire':'')."'>";
 	if (isset($info['erreur'])){
 		$s .=  "<div class='toile_claire'>";
 		$erreur = true;
