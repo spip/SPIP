@@ -48,7 +48,7 @@ function generer_url_document_dist($id_document, $args='', $ancre='') {
 	// par exemple acces_restreint
 	if ($GLOBALS['meta']["creer_htaccess"] == 'oui'
 	AND $row['distant'] != 'oui') {
-	  $args .= ($args ? "&" : '') . "arg=$id_document&file=" . $row['fichier'] . ($ancre ? "&ancre=$ancre" : '');
+	  $args .= ($args ? "&" : '') . "arg=$id_document&file=" . rawurlencode($row['fichier']) . ($ancre ? "&ancre=$ancre" : '');
 		return generer_url_action('acceder_document', $args);
 	} else	return get_spip_doc($row['fichier']);
 }
