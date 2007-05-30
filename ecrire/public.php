@@ -56,6 +56,7 @@ if (defined('_INC_PUBLIC')) {
 		include_spip('inc/headers');
 		$var_f = charger_fonction($action, 'action');
 		$var_f();
+		define('_ESPACE_PRIVE', true);
 		if ($GLOBALS['redirect']
 		OR $GLOBALS['redirect'] = _request('redirect'))
 			redirige_par_entete(urldecode($GLOBALS['redirect']));
