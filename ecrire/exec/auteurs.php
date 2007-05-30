@@ -144,7 +144,7 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 
 	$arg = $statut ? ("&statut=" .urlencode($statut)) : '';
 	$res ="\n<tr class='toile_gris_moyen'>"
-	. "\n<td style='width: 20px'>";
+	. "\n<th style='width: 20px'>";
 
 	if ($tri=='statut')
   		$res .= http_img_pack('admin-12.gif','', " class='lang'");
@@ -153,21 +153,21 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 	  $res .= auteurs_href(http_img_pack('admin-12.gif', $t, "class='lang'"),"tri=statut$arg", " title=\"$t\"");
 	}
 
-	$res .= "</td><td style='width: 20px'></td><td>";
+	$res .= "</th><th style='width: 20px'></th><th>";
 
 	if ($tri=='nom')
 		$res .= '<b>'._T('info_nom').'</b>';
 	else
 		$res .= auteurs_href(_T('info_nom'), "tri=nom$arg", " title='"._T('lien_trier_nom'). "'");
 
-	$res .= "</td><td>";
+	$res .= "</th><th>";
 
 	if ($tri=='site')
 		$res .= '<b>'._T('info_site').'</b>';
 	else
 		$res .= auteurs_href(_T('info_site'), "tri=site$arg", " title='"._T('info_site'). "'");
 
-	$res .= '</td><td>';
+	$res .= '</th><th>';
 
 	$col = statut_min_redac($statut) ? _T('info_articles') : _T('message') ;
 
@@ -176,7 +176,7 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 	else
 		$res .= auteurs_href($col, "tri=nombre$arg", " title=\""._T('lien_trier_nombre_articles'). '"');
 
-	$res .= "</td></tr>\n";
+	$res .= "</th></tr>\n";
 
 	if ($nombre_auteurs > $max_par_page) {
 		$res .= "\n<tr class='toile_blanche'><td class='arial1' colspan='5'>";
