@@ -342,4 +342,20 @@ function init_config(){
 	include_spip('inc/config');
 	inc_config_dist();
 }
+
+/*
+// synonyme de extraire_balises (et utilises nulle part sur la zone)
+// http://doc.spip.org/@extraire_tags
+function extraire_tags($texte) {
+	spip_log('extraire_tags() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
+	return extraire_balises($texte, 'a');
+}
+// synonyme de extraire_balise
+// http://doc.spip.org/@extraire_tag
+function extraire_tag($texte, $tag='a') {
+	spip_log('extraire_tag() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
+	return extraire_balise($texte, $tag);
+}
+*/
+
 ?>

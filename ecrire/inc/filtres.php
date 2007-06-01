@@ -1190,22 +1190,28 @@ function alterner($i) {
 	return $args[(intval($i)-1)%($num-1)+1];
 }
 
-// recuperer une balise HTML de type "xxx"
-// exemple : [(#DESCRIPTIF|extraire_tag{img})] (pour flux RSS-photo)
-// http://doc.spip.org/@extraire_tag
-function extraire_tag($texte, $tag) {
-	if (preg_match(",<$tag(\\s.*)?".">,UimsS", $texte, $regs))
-		return $regs[0];
-}
-
-
 // recuperer un attribut d'une balise html
 // ($complet demande de retourner $r)
+// la regexp est mortelle : cf. tests/filtres/extraire_attribut.php
+// Si on a passe un tableau de balises, renvoyer un tableau de resultats
+// (dans ce cas l'option $complet n'est pas disponible)
 // http://doc.spip.org/@extraire_attribut
 function extraire_attribut($balise, $attribut, $complet = false) {
+	if (is_array($balise)) {
+		array_walk($balise,
+			create_function('&$a,$key,$t',
+				'$a = extraire_attribut($a,$t);'
+			),
+			$attribut);
+		return $balise;
+	}
+
+
 	if (preg_match(
-//	',(.*?<[^>]*)(\s'.$attribut.'=\s*([\'"]?)([^\\3]*?)\\3)([^>]*>.*),isS',
-	',(^.*?<(?:(?>\s*)(?>[\w:]+)(?>(?:=(?:"[^"]*"|\'[^\']*\'|[^\'"]\S*))?))*?)(\s+'.$attribut.'(?:=\s*("[^"]*"|\'[^\']*\'|[^\'"]\S*))?)()([^>]*>.*),isS',
+	',(^.*?<(?:(?>\s*)(?>[\w:]+)(?>(?:=(?:"[^"]*"|\'[^\']*\'|[^\'"]\S*))?))*?)(\s+'
+	.$attribut
+	.'(?:=\s*("[^"]*"|\'[^\']*\'|[^\'"]\S*))?)()([^>]*>.*),isS',
+
 	$balise, $r)) {
 		if ($r[3][0] == '"' || $r[3][0] == "'") {
 			$r[4] = substr($r[3], 1, -1);
@@ -1441,21 +1447,10 @@ function email_valide($adresses) {
 	return $adresse;
 }
 
-// Pour un champ de microformats :
-// afficher les tags
-// ou afficher les enclosures
-// http://doc.spip.org/@extraire_tags
-function extraire_tags($tags) {
-	if (preg_match_all(',<a([[:space:]][^>]*)?[[:space:]][^>]*>.*</a>,UimsS',
-	$tags, $regs, PREG_PATTERN_ORDER))
-		return $regs[0];
-	else
-		return array();
-}
 // http://doc.spip.org/@afficher_enclosures
 function afficher_enclosures($tags) {
 	$s = array();
-	foreach (extraire_tags($tags) as $tag) {
+	foreach (extraire_balises($tags, 'a') as $tag) {
 		if (extraire_attribut($tag, 'rel') == 'enclosure'
 		AND $t = extraire_attribut($tag, 'href')) {
 			$s[] = preg_replace(',>[^<]+</a>,S', 
@@ -1470,7 +1465,7 @@ function afficher_enclosures($tags) {
 // http://doc.spip.org/@afficher_tags
 function afficher_tags($tags, $rels='tag,directory') {
 	$s = array();
-	foreach (extraire_tags($tags) as $tag) {
+	foreach (extraire_balises($tags, 'a') as $tag) {
 		$rel = extraire_attribut($tag, 'rel');
 		if (strstr(",$rels,", ",$rel,"))
 			$s[] = $tag;
@@ -1498,7 +1493,7 @@ function enclosure2microformat($e) {
 // http://doc.spip.org/@microformat2enclosure
 function microformat2enclosure($tags) {
 	$enclosures = array();
-	foreach (extraire_tags($tags) as $e)
+	foreach (extraire_balises($tags, 'a') as $e)
 	if (extraire_attribut($e, 'rel') == 'enclosure') {
 		$url = filtrer_entites(extraire_attribut($e, 'href'));
 		$type = extraire_attribut($e, 'type');
@@ -1517,7 +1512,7 @@ function microformat2enclosure($tags) {
 // http://doc.spip.org/@tags2dcsubject
 function tags2dcsubject($tags) {
 	$subjects = '';
-	foreach (extraire_tags($tags) as $e) {
+	foreach (extraire_balises($tags, 'a') as $e) {
 		if (extraire_attribut($e, rel) == 'tag') {
 			$subjects .= '<dc:subject>'
 				. texte_backend(textebrut($e))
@@ -1536,11 +1531,40 @@ function boutonne($t, $n, $v, $a='') {
 
 // retourne la premiere balise du type demande
 // ex: [(#DESCRIPTIF|extraire_balise{img})]
+// Si on a passe un tableau de textes, renvoyer un tableau de resultats
 // http://doc.spip.org/@extraire_balise
-function extraire_balise($texte, $tag) {
-	if (preg_match(",<$tag\\s.*>,UimsS", $texte, $regs))
+function extraire_balise($texte, $tag='a') {
+	if (is_array($texte)) {
+		array_walk($texte,
+			create_function('&$a,$key,$t', '$a = extraire_balise($a,$t);'),
+			$tag);
+		return $texte;
+	}
+
+	if (preg_match(
+	",<$tag\s[^>]*(/>|>.*</$tag>|>),UimsS",
+	$texte, $regs))
 		return $regs[0];
 }
+
+// extraire toutes les balises du type demande, sous forme de tableau
+// Si on a passe un tableau de textes, renvoyer un tableau de resultats
+function extraire_balises($texte, $tag='a') {
+	if (is_array($texte)) {
+		array_walk($texte,
+			create_function('&$a,$key,$t', '$a = extraire_balises($a,$t);'),
+			$tag);
+		return $texte;
+	}
+
+	if (preg_match_all(
+	",<$tag\s[^>]*(/>|>.*</$tag>|>),UimsS",
+	$texte, $regs, PREG_PATTERN_ORDER))
+		return $regs[0];
+	else
+		return array();
+}
+
 
 // construit une balise textarea avec la barre de raccourcis std de Spip.
 // ATTENTION: cette barre injecte un script JS que le squelette doit accepter
