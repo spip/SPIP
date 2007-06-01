@@ -177,8 +177,7 @@ else {
 //
 
 if (autoriser('webmestre')) {
-	$res = spip_mysql_version();
-	if ($res >= '3.23.14') {
+	if (spip_mysql_version() >= '3.23.14') {
 		$res = "\n<p style='text-align: justify;'>".
 			_T('texte_crash_base') .
 			"\n</p>";
