@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-include_spip('inc/config');
 include_spip('inc/meta');
 
 // http://doc.spip.org/@exec_config_fonctions_dist
@@ -25,7 +24,8 @@ function exec_config_fonctions_dist()
 		exit;
 	}
 
-	init_config();
+	$config = charger_fonction('config', 'inc');
+	$config();
 
 	pipeline('exec_init',array('args'=>array('exec'=>'config_fonctions'),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');

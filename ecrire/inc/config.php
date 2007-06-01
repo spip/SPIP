@@ -18,10 +18,14 @@ include_spip('inc/meta');
 // Appliquer les valeurs par defaut pour les options non initialisees
 // (pour les langues c'est fait)
 //
-// http://doc.spip.org/@init_config
-function init_config() {
 
-	$liste_meta = array(
+function inc_config_dist() {
+	actualise_metas(liste_metas());
+}
+
+function liste_metas()
+{
+	return array(
 		'nom_site' => _T('info_mon_site_spip'),
 		'descriptif_site' => '',
 		'activer_breves' => 'oui',
@@ -70,6 +74,10 @@ function init_config() {
 		'multi_secteurs' => 'non',
 		'gerer_trad' => 'non',
 	);
+}
+
+function actualise_metas($liste_meta)
+{
 	while (list($nom, $valeur) = each($liste_meta)) {
 		if (!$GLOBALS['meta'][$nom]) {
 			ecrire_meta($nom, $valeur);

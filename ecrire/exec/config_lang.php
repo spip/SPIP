@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-include_spip('inc/config');
 
 // http://doc.spip.org/@exec_config_lang_dist
 function exec_config_lang_dist()
@@ -24,11 +23,13 @@ function exec_config_lang_dist()
 		echo minipres();
 		exit;
 	}
+
+	$config = charger_fonction('config', 'inc');
+	$config();
+
 	pipeline('exec_init',array('args'=>array('exec'=>'config_lang'),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_config_contenu'), "configuration", "langues");
-
-	init_config();
 
 	debut_gauche();
 

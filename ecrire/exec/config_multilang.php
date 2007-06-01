@@ -14,8 +14,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/rubriques');
-include_spip('inc/config');
-include_spip('inc/meta');
 
 // http://doc.spip.org/@exec_config_multilang_dist
 function exec_config_multilang_dist()
@@ -27,6 +25,8 @@ function exec_config_multilang_dist()
 		exit;
 	}
 
+	$config = charger_fonction('config', 'inc');
+	$config();
 	lire_metas();
 
 	pipeline('exec_init',array('args'=>array('exec'=>'config_multilang'),'data'=>''));
@@ -35,8 +35,6 @@ function exec_config_multilang_dist()
 
 	echo "<br /><br /><br />";
 	gros_titre(_T('info_langues'));
-
-	init_config();
 
 	echo barre_onglets("config_lang", "multi");
 
