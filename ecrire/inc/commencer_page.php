@@ -201,6 +201,7 @@ function avertissement_messagerie() {
 	else return '';
 }
 
+// http://doc.spip.org/@alertes_auteur
 function alertes_auteur() {
 	global $connect_statut;
 	if ($connect_statut == '0minirezo'

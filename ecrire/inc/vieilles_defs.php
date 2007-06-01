@@ -336,6 +336,7 @@ function debut_block_invisible($id=""){
 	return debut_block_depliable(false,$id);
 }
 
+// http://doc.spip.org/@init_config
 function init_config(){
 	spip_log('init_config() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
 	inc_config_dist();

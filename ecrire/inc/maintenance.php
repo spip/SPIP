@@ -29,6 +29,7 @@ function cron_maintenance ($t) {
 }
 
 
+// http://doc.spip.org/@verifier_crash_tables
 function verifier_crash_tables() {
 	if (spip_connect()) {
 		include_spip('base/serial');
@@ -57,6 +58,7 @@ function verifier_crash_tables() {
 	return false;
 }
 
+// http://doc.spip.org/@message_crash_tables
 function message_crash_tables() {
 	if ($crash = verifier_crash_tables()) {
 		return 
