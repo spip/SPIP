@@ -636,7 +636,7 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 		  // on repere l'utilisation brute de #ENV**{X}, 
 		  // c'est-a-dire sa  traduction en ($PILE[0][X]).
 		  // et on deballe mais en rajoutant l'anti XSS
-		  $x .= "\n\tif (!(is_array($v)))\n\t\t$var" ."[]= $v;\n\telse $var = array_merge($var, $v);";
+		  $x .= "\n\tif (!(is_array(\$a = ($v))))\n\t\t$var" ."[]= \$a;\n\telse $var = array_merge($var, \$a);";
 		}
 	}
 
