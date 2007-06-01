@@ -18,6 +18,7 @@ define('_FILE_PLUGIN_CONFIG', "plugin.xml");
 
 // besoin de inc_meta
 include_spip('inc/meta');
+include_spip('inc/texte');
 
 // lecture des sous repertoire plugin existants
 // http://doc.spip.org/@liste_plugin_files
