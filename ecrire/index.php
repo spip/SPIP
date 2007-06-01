@@ -95,7 +95,7 @@ if (isset($_GET['set_ecran'])) {
 
 
 // initialiser a la langue par defaut
-include_spip('inc/minipres');
+include_spip('inc/lang');
 
 //  si la langue est specifiee par cookie alors ...
 if (isset($_COOKIE['spip_lang_ecrire'])) {
