@@ -32,7 +32,7 @@ function exec_admin_repair_dist()
 	if (!$version_mysql)
 	  $message = _T('avis_erreur_connexion_mysql');
 	else {
-	  if ($version_mysql < '3.23.14')
+	  if (version_compare($version_mysql,'3.23.14','<'))
 	    $message = _T('avis_version_mysql', array('version_mysql' => $version_mysql));
 	  else {
 	    $message = _T('texte_requetes_echouent');
