@@ -49,7 +49,7 @@ if ($connect_statut == '0minirezo') {
   echo afficher_objets('site','<b>' . _T('info_sites_refuses') . '</b>', array("FROM" => 'spip_syndic', 'WHERE' => "statut='refuse'", 'ORDER BY' => "nom_site"));
 }
 
- echo afficher_objets('syndic_article','<b>' . _T('titre_dernier_article_syndique') . '</b>', array('FROM' => 'spip_syndic_articles', 'ORDER BY' => "date DESC",  'LIMIT' => "50"));
+ echo afficher_objets('syndic_article','<b>' . _T('titre_dernier_article_syndique') . '</b>', array('FROM' => 'spip_syndic_articles', 'ORDER BY' => "date DESC"));
 
 echo fin_gauche(), fin_page();
 }
