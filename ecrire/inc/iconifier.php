@@ -26,9 +26,11 @@ function inc_iconifier_dist($id_objet, $id,  $script, $visible=false) {
 	$iframe = "<input type='hidden' name='iframe_redirect' value='".rawurlencode($iframe_script)."' />\n";
 
 	if (!$logo = $chercher_logo($id, $id_objet, 'on')) {
-		$masque = indiquer_logo($texteon, $id_objet, 'on', $id, $script, $iframe);
-		$bouton = bouton_block_depliable($texteon,$visible,'on');
-		$res = debut_block_depliable($visible,'on') . $masque . fin_block();
+		if ($GLOBALS['meta']['activer_logos'] != 'non') {
+			$masque = indiquer_logo($texteon, $id_objet, 'on', $id, $script, $iframe);
+			$bouton = bouton_block_depliable($texteon,$visible,'on');
+			$res = debut_block_depliable($visible,'on') . $masque . fin_block();
+		}
 	} else {
 		list($img, $clic) = decrire_logo($id_objet,'on',$id, 170, 170, $logo, $texteon, $script);
 
@@ -44,8 +46,10 @@ function inc_iconifier_dist($id_objet, $id,  $script, $visible=false) {
 			$masque = block_parfois_visible('off', "$texteoff<br />$img", $clic, 'margin-bottom: -2px');
 			$res .= "<div style='text-align: center'>$masque</div>";
 		} else {
-		  $masque = indiquer_logo($texteoff, $id_objet, 'off', $id, $script, $iframe);
-		  $res .= block_parfois_visible('off', "$texteoff", $masque);
+			if ($GLOBALS['meta']['activer_logos_survol'] == 'oui') {
+				$masque = indiquer_logo($texteoff, $id_objet, 'off', $id, $script, $iframe);
+				$res .= block_parfois_visible('off', "$texteoff", $masque);
+			}
 		}
 	}
 
@@ -87,8 +91,12 @@ function indiquer_logo($titre, $id_objet, $mode, $id, $script, $iframe_script) {
 	$afficher = "";
 	$reg = '[.](' . join('|', $formats_logos) . ')$';
 
+
+/*
+	# CODE MORT SI ON DECIDE DE NE PAS LAISSER UPLOADER DES LOGOS PAR FTP
+
 	if ($GLOBALS['flag_upload']
-	AND $dir_ftp = determine_upload()
+	AND $dir_ftp = determine_upload('logos')
 	AND $fichiers = preg_files($dir_ftp, $reg)) {
 		foreach ($fichiers as $f) {
 			$f = substr($f, strlen($dir_ftp));
@@ -112,6 +120,7 @@ function indiquer_logo($titre, $id_objet, $mode, $id, $script, $iframe_script) {
 			_T('bouton_choisir') .
 			"' class='fondo spip_xx-small'  /></div>";
 	}
+*/
 
 	$afficher = "\n" .
 		_T('info_telecharger_nouveau_logo') .

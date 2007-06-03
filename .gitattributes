@@ -427,6 +427,7 @@ ecrire/configuration/index.php -text
 ecrire/configuration/indexeur.php -text
 ecrire/configuration/langue.php -text
 ecrire/configuration/locuteur.php -text
+ecrire/configuration/logos.php -text
 ecrire/configuration/mots.php -text
 ecrire/configuration/participants.php -text
 ecrire/configuration/previsualiseur.php -text

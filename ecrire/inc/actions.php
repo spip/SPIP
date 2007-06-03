@@ -228,32 +228,22 @@ function ajax_debug_retour($corps, $c)
 */
 
 // http://doc.spip.org/@determine_upload
-function determine_upload()
-{
-	global $connect_toutes_rubriques, $connect_login, $connect_statut ;
+function determine_upload($type) {
 
-	if (!$connect_statut) {
-		$auth = charger_fonction('auth', 'inc');
-		if ($auth()) {
-			include_spip('inc/minipres');
-			echo minipres();
-			exit;
-		}
-	}
-	if ($connect_statut != '0minirezo') return false;
+	if (!autoriser('chargerftp')
+	OR $type == 'logos') # on ne le permet pas pour les logos
+		return false;
+
 	$repertoire = _DIR_TRANSFERT;
-	if(!@file_exists($repertoire)) {
-		$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
+	if(!@is_dir($repertoire)) {
+		$repertoire = str_replace(_DIR_TMP, '', $repertoire);
 		$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
 	}
-	if($connect_toutes_rubriques) return $repertoire;
 
-	$sous_rep = $repertoire . $connect_login ;
-	if(!@file_exists($sous_rep)) {
-		$sous_rep = sous_repertoire($repertoire, $connect_login);
-	}
-
-	return $sous_rep . '/';
+	if ($GLOBALS['connect_toutes_rubriques'])
+		return $repertoire;
+	else
+		return sous_repertoire($repertoire, $GLOBALS['connect_login']);
 }
 
 //

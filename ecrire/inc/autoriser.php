@@ -421,6 +421,16 @@ function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 
 
 //
+// Peut-on faire de l'upload ftp ?
+// par defaut, les administrateurs
+//
+// http://doc.spip.org/@autoriser_document_voir_dist
+function autoriser_chargerftp_dist($faire, $type, $id, $qui, $opt) {
+	return $qui['statut'] == '0minirezo';
+}
+
+
+//
 // Peut-on voir un document ?
 // par defaut tout le monde (y compris visiteurs non enregistres)
 // peut lire tous les documents dans IMG/

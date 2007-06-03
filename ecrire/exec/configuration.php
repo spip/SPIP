@@ -71,11 +71,14 @@ function exec_configuration_dist(){
 	$mots = charger_fonction('mots', 'configuration');
 	echo $mots();
 
-	$syndications = charger_fonction('syndications', 'configuration');
-	echo $syndications();
+	$logos = charger_fonction('logos', 'configuration');
+	echo $logos();
 
 	$documents = charger_fonction('documents', 'configuration');
 	echo $documents();
+
+	$syndications = charger_fonction('syndications', 'configuration');
+	echo $syndications();
 
 	$res = pipeline('affiche_milieu',array('args'=>array('exec'=>'configuration'),'data'=>''));
 	if ($res)
