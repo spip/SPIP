@@ -375,6 +375,7 @@ function afficher_liste_display_eq4($largeurs, $t, $styles = '') {
 	return $res;
 }
 
+// http://doc.spip.org/@navigation_pagination
 function navigation_pagination($num_rows, $nb_aff=10, $href=null, $onclick=false, $tmp_var=null) {
 
 	$texte = '';
