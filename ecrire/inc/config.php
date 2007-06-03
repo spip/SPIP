@@ -126,12 +126,12 @@ function bouton_radio($nom, $valeur, $titre, $actif = false, $onClick="") {
 	static $id_label = 0;
 	
 	if (strlen($onClick) > 0) $onClick = " onclick=\"$onClick\"";
-	$texte = "<input type='radio' name='$nom' value='$valeur' id='label_$id_label'$onClick";
+	$texte = "<input type='radio' name='$nom' value='$valeur' id='label_${nom}_${id_label}'$onClick";
 	if ($actif) {
 		$texte .= ' checked="checked"';
 		$titre = '<b>'.$titre.'</b>';
 	}
-	$texte .= " /> <label for='label_$id_label'>$titre</label>\n";
+	$texte .= " /> <label for='label_${nom}_${id_label}'>$titre</label>\n";
 	$id_label++;
 	return $texte;
 }
