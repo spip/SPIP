@@ -13,9 +13,13 @@
 // http://doc.spip.org/@inc_install_ldap4
 function install_etape_ldap4_dist()
 {
-	global $adresse_ldap, $login_ldap, $pass_ldap, $port_ldap, $tls_ldap, $protocole_ldap, $base_ldap, $base_ldap_text, $spip_lang_right;
+	global $adresse_ldap, $login_ldap, $pass_ldap, $port_ldap, $tls_ldap, $protocole_ldap, $base_ldap, $base_ldap_text;
 
 	echo install_debut_html();
+
+	$statut_ldap = defined('_INSTALL_STATUT_LDAP')
+		? _INSTALL_STATUT_LDAP
+		: '1comite';
 
 	if (!$base_ldap) $base_ldap = $base_ldap_text;
 
@@ -61,7 +65,7 @@ function install_etape_ldap4_dist()
 			array(
 				'statut_ldap' => array(
 					'label' => _T('info_statut_utilisateurs_2').'<br />',
-					'valeur' => '1comite',
+					'valeur' => $statut_ldap,
 					'alternatives' => liste_statuts_ldap()
 					)
 				)

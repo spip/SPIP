@@ -13,11 +13,30 @@
 // http://doc.spip.org/@inc_install_ldap1
 function install_etape_ldap1_dist()
 {
-	global $spip_lang_right;
+	$adresse_ldap = defined('_INSTALL_HOST_LDAP')
+		? _INSTALL_HOST_LDAP
+	  : 'localhost';
 
-	$protocole_ldap = 3; // on essaie 2 en cas d'echec
-	$adresse_ldap = 'localhost';
-	$port_ldap = 389;
+	$port_ldap = defined('_INSTALL_PORT_LDAP')
+		? _INSTALL_PORT_LDAP
+		: 389;
+
+	$tls_ldap = defined('_INSTALL_TLS_LDAP')
+		? _INSTALL_TLS_LDAP
+		: 'non';
+
+	$protocole_ldap = defined('_INSTALL_PROTOCOLE_LDAP')
+		? _INSTALL_PROTOCOLE_LDAP
+		: 3 ; // on essaie 2 en cas d'echec
+
+	$login_ldap = defined('_INSTALL_USER_LDAP')
+		? _INSTALL_USER_LDAP
+		: '';
+
+	$pass_ldap = defined('_INSTALL_PASS_LDAP')
+		? _INSTALL_PASS_LDAP
+		: '';
+
 
 	// Recuperer les anciennes donnees (si presentes)
 	if (@file_exists(_FILE_CONNECT_INS . _FILE_TMP . '.php')) {
@@ -46,7 +65,7 @@ function install_etape_ldap1_dist()
 			),
 			'tls_ldap' => array(
 				'label' => '<b>'._T('tls_ldap').'</b>',
-				'valeur' => 'non',
+				'valeur' => $tls_ldap,
 				'alternatives' => array(
 					'non' => _T('item_non'),
 					'oui' => _T('item_oui')
