@@ -43,6 +43,7 @@ function help_frame ($aide, $lang) {
 // http://doc.spip.org/@erreur_aide_indisponible
 function erreur_aide_indisponible() {
 	global $help_server;
+	include_spip('inc/minipres');
 	echo minipres(_T('forum_titre_erreur'),
 		 "<div>$help_server: "._T('aide_non_disponible')."</div><div align='right'>".menu_langues('var_lang_ecrire')."</div>");
 	exit;
