@@ -42,7 +42,7 @@ function configuration_logos_dist(){
 	$res .= "</td></tr>";
 	$res .= "</table>\n";
 
-	$res = debut_cadre_trait_couleur("image-24.gif", true, "", _L('Logos'))
+	$res = debut_cadre_trait_couleur("image-24.gif", true, "", _L('Les logos'))
 	. ajax_action_post('configurer', 'logos', 'configuration','',$res) 
 	. fin_cadre_trait_couleur(true);
 
