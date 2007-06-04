@@ -23,6 +23,7 @@ if ($var_auth !== '') {
 	if ($var_auth===-1) exit();
 
 	include_spip('inc/headers');
+	include_spip('inc/autoriser');
 	// si l'authentifie' n'a pas acces a l'espace de redac
 	// c'est qu'on voulait forcer sa reconnaissance en tant que visiteur.
 	// On reexecute pour deboucher sur le include public.
