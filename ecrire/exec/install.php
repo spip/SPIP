@@ -38,6 +38,7 @@ function exec_install_dist()
 
 //  Pour ecrire les fichiers memorisant les parametres de connexion
 
+// http://doc.spip.org/@install_fichier_connexion
 function install_fichier_connexion($nom, $texte)
 {
 	$texte = "<"."?php\n"
