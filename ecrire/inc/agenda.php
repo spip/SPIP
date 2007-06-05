@@ -169,7 +169,7 @@ function calendrier_height ($heure, $heurefin, $debut, $fin, $dimheure, $dimjour
 //
 
 // http://doc.spip.org/@http_calendrier_init
-function http_calendrier_init($time='', $ltype='', $lechelle='', $lpartie_cal='', $script='', $evt='')
+function http_calendrier_init($time='', $ltype='', $lechelle='', $lpartie_cal='', $script='', $evt=null)
 {
 	global $mois, $annee, $jour, $type, $echelle, $partie_cal;
 	if (!$time) 
@@ -192,7 +192,7 @@ function http_calendrier_init($time='', $ltype='', $lechelle='', $lpartie_cal=''
 		$lpartie_cal = $partie_cal ? $partie_cal : DEFAUT_PARTIE;
 	list($script, $ancre) = 
 	  calendrier_retire_args_ancre($script); 
-	if (!$evt) {
+  if (is_null($evt)) {
 	  $g = 'sql_calendrier_' . $ltype;
 	  $evt = sql_calendrier_interval($g($annee,$mois, $jour));
 	  sql_calendrier_interval_articles("'$annee-$mois-00'", "'$annee-$mois-1'", $evt[0]);
