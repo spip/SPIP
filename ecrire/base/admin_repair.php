@@ -47,6 +47,8 @@ function base_admin_repair_dist() {
 	if (!$res) {
 		$res = "<br /><br /><span style='color: red; font-weight: bold;'><tt>"._T('avis_erreur_mysql').' '.spip_sql_errno().': '.spip_sql_error() ."</tt></span><br /><br /><br />\n";
 	}
+	include_spip('inc/minipres');
 	echo minipres(_T('texte_tentative_recuperation'), $res);
+	exit;
 }
 ?>
