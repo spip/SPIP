@@ -119,35 +119,26 @@ function install_bases(){
 		$result_ko = (spip_num_rows($result) == 0);
 	}
 
-	if (!$result_ko) {
-		if($chmod) {
-			$conn = "<"."?php\n";
-			$conn .= "if (!defined(\"_ECRIRE_INC_VERSION\")) return;\n";
-			$conn .= "@define('_SPIP_CHMOD', ". sprintf('0%3o',$chmod).");\n";
-			$conn .= "?".">";
-			if (!ecrire_fichier(_FILE_CHMOD_INS . _FILE_TMP . '.php',
-		$conn))
-			  redirige_par_entete(generer_url_ecrire('install'));
-		}
+	if ($result_ko) return "<!--\n$res\n-->";
 
-		if (preg_match(',(.*):(.*),', $adresse_db, $r))
-			list(,$adresse_db, $port) = $r;
-		else
-			$port = '';
-		$conn = "<"."?php\n";
-		$conn .= "if (!defined(\"_ECRIRE_INC_VERSION\")) return;\n";
-		$conn .= "\$GLOBALS['spip_connect_version'] = 0.4;\n";
-		$conn .= $ligne_rappel;
-		$conn .= "spip_connect_db("
-			. "'$adresse_db','$port','$login_db','" . addcslashes($pass_db, "'\\") . "','$sel_db'"
-			. ");\n";
-		$conn .= "?".">";
-
-		if (!ecrire_fichier(_FILE_CONNECT_INS . _FILE_TMP . '.php',
-		$conn))
-			redirige_par_entete(generer_url_ecrire('install'));
+	if($chmod) {
+		install_fichier_connexion(_FILE_CHMOD_INS . _FILE_TMP . '.php', "@define('_SPIP_CHMOD', ". sprintf('0%3o',$chmod).");\n");
 	}
-	return $result_ko ? "<!--\n$res\n-->" : '';
+
+	if (preg_match(',(.*):(.*),', $adresse_db, $r))
+		list(,$adresse_db, $port) = $r;
+	else
+		$port = '';
+
+	$conn =  "\$GLOBALS['spip_connect_version'] = 0.4;\n"
+	. $ligne_rappel
+	. "spip_connect_db("
+	. "'$adresse_db','$port','$login_db','"
+	. addcslashes($pass_db, "'\\") . "','$sel_db'"
+	. ");\n";
+
+	install_fichier_connexion(_FILE_CONNECT_INS . _FILE_TMP . '.php', $conn);
+	return '';
 }
 
 function install_propose_ldap()
@@ -167,20 +158,7 @@ function install_propose_ldap()
 
 function install_premier_auteur($email, $login, $nom, $pass)
 {
-	if (file_exists(_FILE_CONNECT_INS . _FILE_TMP . '.php'))
-	  include(_FILE_CONNECT_INS . _FILE_TMP . '.php');
-	else
-	  redirige_par_entete(generer_url_ecrire('install', 'connect=1'));
-	
-	if (file_exists(_FILE_CHMOD_INS . _FILE_TMP . '.php'))
-	  include(_FILE_CHMOD_INS . _FILE_TMP . '.php');
-	else
-	  redirige_par_entete(generer_url_ecrire('install', 'chmod=1'));
-
-	return "<p class='resultat'><b>"
-	. _T('info_base_installee')
-	. "</b></p>"
-	. info_etape(_T('info_informations_personnelles'),
+	return info_etape(_T('info_informations_personnelles'),
 		     "<b>"._T('texte_informations_personnelles_1')."</b>" .
 			     aide ("install5") .
 			     "</p><p>" .
@@ -231,11 +209,26 @@ function install_etape_3_dist()
 	if ($res)
 		$res .= "<p class='resultat'><b>"._T('avis_operation_echec')."</b></p>"._T('texte_operation_echec');
 	
-	else $res = install_premier_auteur(_request('email'),
+	else {
+		if (file_exists(_FILE_CONNECT_INS . _FILE_TMP . '.php'))
+			include(_FILE_CONNECT_INS . _FILE_TMP . '.php');
+		else
+			redirige_par_entete(generer_url_ecrire('install'));
+	
+		if (file_exists(_FILE_CHMOD_INS . _FILE_TMP . '.php'))
+			include(_FILE_CHMOD_INS . _FILE_TMP . '.php');
+		else
+			redirige_par_entete(generer_url_ecrire('install'));
+
+		$res =  "<p class='resultat'><b>"
+		. _T('info_base_installee')
+		. "</b></p>"
+		. install_premier_auteur(_request('email'),
 					   _request('login'),
 					   _request('nom'),
 					   _request('pass'))
-	  . ($ldap_present ?  '' : install_propose_ldap());
+		. ($ldap_present ?  '' : install_propose_ldap());
+	}
 
 	echo install_debut_html();
 	echo $res;

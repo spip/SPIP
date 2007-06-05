@@ -16,10 +16,6 @@ include_spip('inc/headers');
 // http://doc.spip.org/@inc_install_ldap5
 function install_etape_ldap5_dist()
 {
-	global $spip_lang_right, $statut_ldap;
-
-	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
-
 	// simuler ecrire_meta/s pour pouvoir sauver le statut
 	// car _FILE_CONNECT n'existe pas encore
 
@@ -28,8 +24,10 @@ function install_etape_ldap5_dist()
 	else
 		redirige_par_entete(generer_url_ecrire('install'));
 
-	spip_query("REPLACE spip_meta (nom, valeur) VALUES ('ldap_statut_import', " . _q($statut_ldap) . " )");
+	spip_query("REPLACE spip_meta (nom, valeur) VALUES ('ldap_statut_import', " . _q(_request('statut_ldap')) . " )");
 	@unlink(_FILE_META);
+
+	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
 
 	echo info_etape(_T('info_ldap_ok'), _T('info_terminer_installation'));
 

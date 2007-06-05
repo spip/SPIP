@@ -16,8 +16,6 @@ include_spip('inc/headers');
 
 function install_etape_4_dist()
 {
-	global $spip_lang_right;
-
 	$login = _request('login');
 	$email = _request('email');
 	$nom = _request('nom');
