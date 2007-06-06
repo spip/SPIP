@@ -105,11 +105,13 @@ function spip_mysql_trace($query, $start, $result)
 function spip_mysql_timing($m1, $m2, $query, $result)
 {
 	static $tt = 0;
+	global $tableau_des_temps;
+
 	list($usec, $sec) = explode(" ", $m1);
 	list($usec2, $sec2) = explode(" ", $m2);
  	$dt = $sec2 + $usec2 - $sec - $usec;
 	$tt += $dt;
-	echo "<small>", htmlentities($query), " -> <span style='color: blue'>", sprintf("%3f", $dt),"</span> (", $tt, ")</small> $result<p>\n";
+	$tableau_des_temps[] = array(sprintf("%3f", $dt), "$query -> $result");
 }
 
 // fonction appelant la precedente  specifiquement pour l'espace public

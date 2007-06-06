@@ -112,7 +112,7 @@ if (defined('_INC_PUBLIC')) {
 	// Aller chercher la page
 	//
 
-	$tableau_des_erreurs = array();
+	$tableau_des_erreurs = 	$tableau_des_temps = array();
 	$assembler = charger_fonction('assembler', 'public');
 	$page = $assembler($fond);
 
@@ -211,8 +211,7 @@ if (defined('_INC_PUBLIC')) {
 		}
 	}
 	
-  if($html) 
-    $page = analyse_js_ajoutee($page);
+	if ($html) $page = analyse_js_ajoutee($page);
   
 	// Passer la main au debuggueur le cas echeant
 	if ($var_mode == 'debug') {
@@ -236,6 +235,11 @@ if (defined('_INC_PUBLIC')) {
 	// (c'est ici qu'on fait var_recherche, tidy, boutons d'admin,
 	// cf. public/assembler.php)
 	echo pipeline('affichage_final', $page['texte']);
+
+	if (count($tableau_des_temps) AND $affiche_boutons_admin) {
+		include_spip('public/debug');
+		chrono_requete($tableau_des_temps);
+	}
 
 	// Gestion des statistiques du site public
 	if (($GLOBALS['meta']["activer_statistiques"] != "non")
