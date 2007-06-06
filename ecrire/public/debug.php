@@ -66,6 +66,7 @@ function affiche_erreurs_page($tableau_des_erreurs, $message='') {
 	. "</ul></ul></div>";
 }
 
+// http://doc.spip.org/@chrono_requete
 function chrono_requete($tableau_des_temps)
 {
 	foreach ($tableau_des_temps as $key => $row) {
