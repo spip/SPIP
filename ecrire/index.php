@@ -170,10 +170,4 @@ $var_f = charger_fonction($exec);
 
 // Z'y va
 $var_f();
-
-// avec &var_profile=1 on a le tableau de mesures SQL
-if (count($tableau_des_temps)) {
-	include_spip('public/debug');
-	chrono_requete($tableau_des_temps);
-}
 ?>

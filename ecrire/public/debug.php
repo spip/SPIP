@@ -51,19 +51,18 @@ function affiche_erreurs_page($tableau_des_erreurs, $message='') {
 	$GLOBALS['bouton_admin_debug'] = true;
 	$res = '';
 	foreach ($tableau_des_erreurs as $err) {
-		$res .= "<li>" .$err[0] . ", <small>".$err[1]."</small><br /></li>\n";
+		$res .= "<tr><td>" .$err[0] . "</td><td>".$err[1]."</td></tr>\n";
 	}
-	return "\n<div id='spip-debug' style='"
-	. "position: absolute; top: 90px; left: 10px; z-index: 1000;"
-	. "filter:alpha(opacity=95); -moz-opacity:0.9; opacity: 0.95;"
-	. "'><ul><li>"
-	  . ($message ? $message : _T('zbug_erreur_squelette'))
+	$style = _DIR_RESTREINT ? "position: absolute; top: 90px; left: 10px; width: 200px; z-index: 1000; filter:alpha(opacity=95); -moz-opacity:0.9; opacity: 0.95;" : '';
+
+	return "\n<table border='1' id='spip-debug' 
+	style='text-align: left; $style'><tr><th colspan='2'>"
+	. ($message ? $message : _T('zbug_erreur_squelette'))
 ## aide locale courte a ecrire, avec lien vers une grosse page de documentation
 #		aide('erreur_compilation'),
-	. "<br /></li>"
-	. "<ul>"
+	. '</th></tr>'
 	. $res
-	. "</ul></ul></div>";
+	. "</table>";
 }
 
 // http://doc.spip.org/@chrono_requete
@@ -74,7 +73,7 @@ function chrono_requete($tableau_des_temps)
 		  $q[$key] = $row[1];
 		}
 	array_multisort($t, SORT_DESC, $q, $tableau_des_temps);
-	echo affiche_erreurs_page($tableau_des_temps,
+	return affiche_erreurs_page($tableau_des_temps,
 				  _T('zbug_profile', array('time'=>'')));
 }
 

@@ -238,7 +238,7 @@ if (defined('_INC_PUBLIC')) {
 
 	if (count($tableau_des_temps) AND $affiche_boutons_admin) {
 		include_spip('public/debug');
-		chrono_requete($tableau_des_temps);
+		echo chrono_requete($tableau_des_temps);
 	}
 
 	// Gestion des statistiques du site public
