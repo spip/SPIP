@@ -26,6 +26,8 @@ function exec_brouteur_frame_dist() {
 	include_spip('inc/headers');
 	http_no_cache();
 
+	$profile = _request('var_profile') ? "&var_profile=1" : '';
+
 	echo _DOCTYPE_ECRIRE
 	. html_lang_attributes()
 	. "<head>\n"
@@ -57,7 +59,7 @@ jQuery(function(){
 	if ($effacer_suivant == "oui" && $frame < $nb_col) {
 	  echo '<script type="text/javascript">';
 		for ($i = $frame+1; $i < $nb_col; $i++) {
-		  echo "\nparent.iframe$i.location.href='", generer_url_ecrire('brouteur_frame',"frame=$i"), "'";
+		  echo "\nparent.iframe$i.location.href='", generer_url_ecrire('brouteur_frame',"frame=$i$profile"), "'";
 		}
 	  echo '</script>';
 	}
@@ -65,7 +67,7 @@ jQuery(function(){
 
 
 	if ($special == "redac") {
-		$result=spip_query("SELECT articles.id_article, articles.id_rubrique, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur GROUP BY id_article ORDER BY articles.date DESC");
+		$result=spip_query("SELECT articles.id_article, articles.id_rubrique, articles.titre, articles.statut FROM spip_articles AS articles LEFT JOIN spip_auteurs_articles AS lien USING (id_article) WHERE articles.statut = 'prepa' AND lien.id_auteur = $connect_id_auteur GROUP BY id_article ORDER BY articles.date DESC");
 		if (spip_num_rows($result)>0) {
 			echo "\n<div style='padding-top: 6px; padding-bottom: 3px;'><b class='verdana2'>"._T("info_cours_edition")."</b></div>";
 			echo "\n<div class='plan-articles'>";
@@ -146,18 +148,18 @@ jQuery(function(){
 	onmouseout=\"changeclass(this, 'brouteur_rubrique');\">";
 	
 				if ($id_parent == '0') 	{
-				  echo "\n<div style='", frame_background_image("secteur-24.gif"), ";'><a href='", generer_url_ecrire('brouteur_frame', "rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui"), "' class='iframe' rel='", ($frame+1), "'>",
+				  echo "\n<div style='", frame_background_image("secteur-24.gif"), ";'><a href='", generer_url_ecrire('brouteur_frame', "rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui$profile"), "' class='iframe' rel='", ($frame+1), "'>",
 				    $titre,
 				    "</a></div>";
 				}
 				else {
 					if ($frame+1 < $nb_col)
 					  echo "\n<div style='",
-					    frame_background_image("rubrique-24.gif"), ";'><a href='", generer_url_ecrire('brouteur_frame', "rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui"), "' class='iframe' rel='",
+					    frame_background_image("rubrique-24.gif"), ";'><a href='", generer_url_ecrire('brouteur_frame', "rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui$profile"), "' class='iframe' rel='",
 					    ($frame+1),
 					    "'>$titre</a></div>";
 					else  echo "\n<div style='",
-					  frame_background_image("rubrique-24.gif"), ";'><a href='javascript:window.parent.location=\"" . generer_url_ecrire('brouteur',"id_rubrique=$ze_rubrique")."\"'>",$titre,"</a></div>";
+					  frame_background_image("rubrique-24.gif"), ";'><a href='javascript:window.parent.location=\"" . generer_url_ecrire('brouteur',"id_rubrique=$ze_rubrique$profile")."\"'>",$titre,"</a></div>";
 				}
 				echo "</div>\n";
 			}
@@ -221,7 +223,7 @@ jQuery(function(){
 			$cpt=spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur GROUP BY articles.id_article"));
 			if ($cpt['n']) {
 
-			  echo "\n<div class='brouteur_icone_article'><b class='verdana2'><a href='", generer_url_ecrire('brouteur_frame', "special=redac&frame=".($frame+1)."&effacer_suivant=oui"), "' class='iframe' rel='",($frame+1),"'>",
+			  echo "\n<div class='brouteur_icone_article'><b class='verdana2'><a href='", generer_url_ecrire('brouteur_frame', "special=redac&frame=".($frame+1)."&effacer_suivant=oui$profile"), "' class='iframe' rel='",($frame+1),"'>",
 			    _T("info_cours_edition"),"</a></b></div>";
 			}
 			
@@ -229,14 +231,19 @@ jQuery(function(){
 			if (!$cpt['n'])
 				$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_breves WHERE statut = 'prop'"));
 			if ($cpt['n'])
-				echo "\n<div class='brouteur_icone_article'><b class='verdana2'><a href='", generer_url_ecrire('brouteur_frame', "special=valider&frame=".($frame+1)."&effacer_suivant=oui"), "' class='iframe' rel='",
+				echo "\n<div class='brouteur_icone_article'><b class='verdana2'><a href='", generer_url_ecrire('brouteur_frame', "special=valider&frame=".($frame+1)."&effacer_suivant=oui$profile"), "' class='iframe' rel='",
 			    ($frame+1)."'>",
 			    _T("info_articles_proposes"),
 			    " / "._T("info_breves_valider")."</a></b></div>";
 		}
 	}
    }
+	if (count($GLOBALS['tableau_des_temps'])) {
+		include_spip('public/debug');
+		echo chrono_requete($GLOBALS['tableau_des_temps']);
+	}
 	echo "</div>";
+
 
 	echo "</body></html>";
 }
