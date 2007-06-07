@@ -194,8 +194,6 @@ function infos_naviguer($id_rubrique, $statut, $ze_logo)
 // http://doc.spip.org/@raccourcis_naviguer
 function raccourcis_naviguer($id_rubrique, $id_parent)
 {
-	global $connect_statut;
-
 	$res = icone_horizontale(_T('icone_tous_articles'), generer_url_ecrire("articles_page"), "article-24.gif", '',false);
 	
 	$n = spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1"));
@@ -210,11 +208,10 @@ function raccourcis_naviguer($id_rubrique, $id_parent)
 	}
 	else {
 		// Post-install = ici pas de rubrique, veuillez en creer une
-		if ($connect_statut == '0minirezo') {
+		if (autoriser('creerrubriquedans','rubrique',$id_rubrique))
 			$res .= "<br />"._T('info_creation_rubrique');
-		}
 	}
-	
+
 	echo bloc_des_raccourcis($res);
 }
 
@@ -257,7 +254,7 @@ if ($id_rubrique>0 AND $GLOBALS['meta']['multi_rubriques'] == 'oui' AND ($GLOBAL
 // http://doc.spip.org/@contenu_naviguer
 function contenu_naviguer($id_rubrique, $id_parent) {
 
-	global  $connect_toutes_rubriques, $spip_lang_right, $spip_lang_left;
+	global  $spip_lang_right;
 
 //
 // Verifier les boucles a mettre en relief
@@ -273,7 +270,9 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 		$relief = spip_num_rows(spip_query("SELECT id_syndic FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND statut='prop' LIMIT 1"));
  }
 
-	if (!$relief AND $GLOBALS['meta']['activer_syndic'] != 'non' AND $connect_toutes_rubriques) {
+	if (!$relief AND $GLOBALS['meta']['activer_syndic'] != 'non'
+	AND autoriser('publierdans','rubrique',$id_rubrique)) {
+
 		$relief = spip_num_rows(spip_query("SELECT id_syndic FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND (syndication='off' OR syndication='sus') AND statut='publie' LIMIT 1"));
 	}
 
@@ -306,12 +305,16 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 	//
 	// Les sites a probleme
 	//
-	if ($GLOBALS['meta']['activer_sites'] != 'non' AND $connect_toutes_rubriques) {
+	if ($GLOBALS['meta']['activer_sites'] != 'non'
+	AND autoriser('publierdans','rubrique',$id_rubrique)) {
+
 		$res .= afficher_objets('site','<b>' . _T('avis_sites_syndiques_probleme') . '</b>', array('FROM' => 'spip_syndic', 'WHERE' => "id_rubrique='$id_rubrique' AND (syndication='off' OR syndication='sus') AND statut='publie'", 'ORDER BY' => "nom_site"));
 	}
 
 	// Les articles syndiques en attente de validation
-	if ($id_rubrique == 0 AND $connect_toutes_rubriques) {
+	if ($id_rubrique == 0 
+	AND autoriser('publierdans','rubrique',$id_rubrique)) {
+
 		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_syndic_articles WHERE statut='dispo'"));
 		if ($cpt = $cpt['n'])
 			$res .= "<br /><small><a href='" .
@@ -371,7 +374,7 @@ icone_inline(_T('info_sites_referencer'), generer_url_ecrire('sites_edit', "id_r
 
 // http://doc.spip.org/@naviguer_doc
 function naviguer_doc ($id, $type = "article", $script, $flag_editable) {
-	global $spip_lang_left, $spip_lang_right;
+	global $spip_lang_left;
 
 	if ($GLOBALS['meta']["documents_$type"]!='non' AND $flag_editable) {
 
