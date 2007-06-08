@@ -252,9 +252,8 @@ function afficher_objet_boucle($row, &$tous_id,  $voir_logo, $own)
 		$lang_dir = lang_dir($lang);
 		$id_rubrique = isset($row['id_rubrique'])?$row['id_rubrique']:0;
 		
-		if (function_exists($f = "puce_statut_$type"))
-			$vals[] = $f($id_objet, $statut, $id_rubrique, $type);
-		else $vals[] = "<img src='"._DIR_IMG_PACK.icone_objet($type,$statut)."' />";
+		$puce_statut = charger_fonction('puce_statut', 'inc');
+		$vals[] = $puce_statut($id_objet, $statut, $id_rubrique, $type);
 	
 		list($titre,$suite) = afficher_titre_objet($type,$row);
 		$s = "\n<div>";
