@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@inc_puce_statut_dist
 function inc_puce_statut_dist($id_objet, $statut, $id_rubrique, $type)
 {
   // le function_exists n'est utile qu'au greffons 
@@ -21,6 +22,7 @@ function inc_puce_statut_dist($id_objet, $statut, $id_rubrique, $type)
 }
 
 
+// http://doc.spip.org/@puce_statut_auteur
 function puce_statut_auteur($id, $statut, $id_rubrique, $type) {
   
 	return bonhomme_statut(array('statut' => $statut));
@@ -54,11 +56,13 @@ function bonhomme_statut($row) {
 }
 
 
+// http://doc.spip.org/@puce_statut_mot
 function puce_statut_mot($id, $statut, $id_rubrique, $type) {
 
 	return "<img src='"._DIR_IMG_PACK. 'petite-cle.gif' . "' />";
 }
 
+// http://doc.spip.org/@puce_statut_rubrique
 function puce_statut_rubrique($id, $statut, $id_rubrique, $type) {
 
 	return "<img src='"._DIR_IMG_PACK. 'rubrique-12.gif' . "' />";
