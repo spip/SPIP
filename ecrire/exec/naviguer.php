@@ -266,7 +266,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 		$relief = spip_num_rows(spip_query("SELECT id_breve FROM spip_breves WHERE id_rubrique='$id_rubrique' AND (statut='prepa' OR statut='prop') LIMIT 1"));
  }
 
-	if (!$relief AND $GLOBALS['meta']['activer_syndic'] != 'non') {
+	if (!$relief AND $GLOBALS['meta']['activer_sites'] != 'non') {
 		$relief = spip_num_rows(spip_query("SELECT id_syndic FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND statut='prop' LIMIT 1"));
  }
 
