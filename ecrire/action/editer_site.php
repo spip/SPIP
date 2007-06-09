@@ -139,6 +139,8 @@ function revisions_sites ($id_syndic, $c=false) {
 	include_spip('inc/autoriser');
 	include_spip('inc/rubriques');
 
+	$id_auteur = isset($c['id_auteur']) ? $c['id_auteur'] : NULL;   
+
 	// Ces champs seront pris nom pour nom (_POST[x] => spip_syndic.x)
 	$champs_normaux = array('nom_site', 'url_site', 'descriptif', 'url_syndic', 'syndication', 'url_propre');
 
@@ -156,13 +158,14 @@ function revisions_sites ($id_syndic, $c=false) {
 	$s = spip_query("SELECT statut, id_rubrique FROM spip_syndic WHERE id_syndic=$id_syndic");
 	$row = spip_fetch_array($s);
 	$id_rubrique = $row['id_rubrique'];
-	$statut = $row['statut'];
 
-	if (_request('statut', $c)
-	AND _request('statut', $c) != $statut
-	AND autoriser('publierdans','rubrique',$id_rubrique)) {
-		$statut = $champs['statut'] = _request('statut', $c);
-	}
+	$statut = _request('statut', $c);
+
+	if ($statut
+	AND $statut != $row['statut']
+	AND autoriser('publierdans','rubrique',$id_rubrique, $id_auteur)) {
+		$champs['statut'] = $statut;
+	} else $statut = $row['statut'];
 
 	// Changer de rubrique ?
 	// Verifier que la rubrique demandee est differente
@@ -176,7 +179,7 @@ function revisions_sites ($id_syndic, $c=false) {
 		// et que le demandeur n'est pas admin de la rubrique
 		// repasser le site en statut 'prop'.
 		if ($statut == 'publie') {
-			if (!autoriser('publierdans','rubrique',$id_parent))
+			if (!autoriser('publierdans','rubrique',$id_parent, $id_auteur))
 				$champs['statut'] = $statut = 'prop';
 		}
 	}
