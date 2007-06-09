@@ -39,7 +39,7 @@ function configuration_breves_dist(){
 	. ajax_action_post('configurer', 'breves', 'configuration','',$res)
 	. fin_cadre_trait_couleur(true);
 
-	return ajax_action_greffe('configurer-breves', $res);
+	return ajax_action_greffe('configurer-breves', '', $res);
 
 }
 

@@ -83,7 +83,7 @@ function configuration_mots_dist(){
 	. ajax_action_post('configurer', 'mots', 'configuration','',$res) 
 	. fin_cadre_trait_couleur(true);
 
-	return ajax_action_greffe('configurer-mots', $res);
+	return ajax_action_greffe('configurer-mots', '', $res);
 
 }
 ?>

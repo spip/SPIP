@@ -62,6 +62,6 @@ function configuration_referenceur_dist()
 	. ajax_action_post('configurer', 'referenceur', 'config_multilang', '', $res)
 	. fin_cadre_couleur(true);
 
-	return ajax_action_greffe("configurer-referenceur", $res);
+	return ajax_action_greffe("configurer-referenceur", '', $res);
 }
 ?>

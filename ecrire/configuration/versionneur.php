@@ -32,6 +32,6 @@ function configuration_versionneur_dist()
 	.  ajax_action_post('configurer', 'versionneur', 'config_fonctions', '', $res)
 	.  fin_cadre_trait_couleur(true);
 
-	return ajax_action_greffe("configurer-versionneur", $res);
+	return ajax_action_greffe("configurer-versionneur", '', $res);
 }
 ?>

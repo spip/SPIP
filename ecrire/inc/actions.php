@@ -184,14 +184,15 @@ function ajax_action_declencheur($request, $noeud, $fct_ajax='') {
 
 // Place un element HTML dans une div nommee,
 // sauf si c'est un appel Ajax car alors la div y est deja 
-// Rajoute <br /> en debut pour que l'animation AjaxSqueeze soit visible
-
+// $fonction : denomination semantique du bloc, que l'on retouve en attribut class
+// $id : id de l'objet concerne si il y a lieu ou "", sert a construire un identifiant unique au bloc ("fonction-id")
 // http://doc.spip.org/@ajax_action_greffe
-function ajax_action_greffe($idom, $corps, $br='')
+function ajax_action_greffe($fonction, $id, $corps)
 {
+	$idom = $fonction.(strlen($id)?"-$id":"");
 	return _request('var_ajaxcharset')
-	? "$br$corps"
-	: "\n<div id='$idom' style='padding-top:1px;'>$br$corps\n</div>\n";
+	? "$corps"
+	: "\n<div id='$idom' class='ajax-action $fonction'>$corps\n</div>\n";
 }
 
 // http://doc.spip.org/@ajax_retour

@@ -164,7 +164,7 @@ onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
 	}
   }
 
-  return ajax_action_greffe("dater-$id", $res);
+  return ajax_action_greffe("dater", $id, $res);
 }
 
 ?>

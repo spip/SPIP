@@ -114,7 +114,7 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 	. fin_block()
 	. fin_cadre_enfonce(true);
 
-	return ajax_action_greffe("editer_auteurs-$id", $res);
+	return ajax_action_greffe("editer_auteurs", $id, $res);
 }
 
 // http://doc.spip.org/@determiner_auteurs_objet

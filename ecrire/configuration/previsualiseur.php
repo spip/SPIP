@@ -38,6 +38,6 @@ function configuration_previsualiseur_dist()
 	. ajax_action_post('configurer', 'previsualiseur', 'config_fonctions', '', $res)
 	. fin_cadre_trait_couleur(true);
 
-	return ajax_action_greffe("configurer-previsualiseur", $res);
+	return ajax_action_greffe("configurer-previsualiseur", '', $res);
 }
 ?>

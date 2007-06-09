@@ -114,7 +114,7 @@ function configuration_articles_dist(){
 	. ajax_action_post('configurer', 'articles', 'configuration','',$res)
 	. fin_cadre_relief(true);
 
-	return ajax_action_greffe('configurer-articles', $res);
+	return ajax_action_greffe('configurer-articles', '', $res);
 
 }
 ?>

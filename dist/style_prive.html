@@ -1680,10 +1680,18 @@ a.ical {
 	background-position: [(#ENV{ltr}|choixsiegal{left,left,right})] 6px;
 	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 16px;
 	}
-.cadre-couleur-foncee .titrem {background-color:##ENV{couleur_foncee,3874b0}}
+.cadre-couleur-foncee .titrem {background-color:##ENV{couleur_foncee,3874b0};color:#fff;}
+.cadre-couleur-foncee .cadre .titrem {color:#000;}
+
+.cadre-trait-couleur .titrem {background-color:##ENV{couleur_foncee,3874b0};color:#fff;}
+.cadre-trait-couleur .cadre .titrem {background-color: #eee;color:#000;}
+
 .cadre-liste .titrem {background-color:#fff;}
 .cadre-liste .titrem.hover {background-color:##ENV{couleur_claire,edf3fe}}
 .cadre-liste .tr_liste .titrem {background-color:#eee;}
+
+#navigation .titrem {text-align:center;}
+#extra .titrem {text-align:center;}
 
 /* Deplier / Replier */
 .replie { background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierhaut[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif); }
@@ -1707,3 +1715,9 @@ td.message, a.message {
 	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=m_envoi[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) center left no-repeat;
 	padding-left: 10px;
 }
+
+.ajax-action {padding-top:1px;}
+.dater,.dater .titrem {background-color:##ENV{couleur_claire,edf3fe};}
+.dater .titrem.hover {background-color:##ENV{couleur_foncee,3874b0};}
+#contenu .ajax-action .cadre .titrem {background-color:##ENV{couleur_claire,edf3fe};}
+#contenu .ajax-action .titrem.hover {background-color:##ENV{couleur_foncee,3874b0};}

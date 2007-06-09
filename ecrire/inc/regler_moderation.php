@@ -75,6 +75,6 @@ function inc_regler_moderation_dist($id_article, $script, $args) {
 
 	$r = ajax_action_post('regler_moderation', $id_article, $script, $args, $r,_T('bouton_changer'), $atts);
 
-	return ajax_action_greffe("regler_moderation-$id_article", $r);
+	return ajax_action_greffe("regler_moderation", $id_article, $r);
 }
 ?>

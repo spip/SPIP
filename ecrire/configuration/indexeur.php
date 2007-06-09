@@ -32,6 +32,6 @@ function configuration_indexeur_dist()
 	.  ajax_action_post('configurer', 'indexeur', 'config_fonctions', '', $res)
 	.  fin_cadre_trait_couleur(true);
 
-	return ajax_action_greffe("configurer-indexeur", $res);
+	return ajax_action_greffe("configurer-indexeur", '', $res);
 }
 ?>

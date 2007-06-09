@@ -47,6 +47,6 @@ function configuration_documents_dist(){
 	. ajax_action_post('configurer', 'documents', 'configuration','',$res) 
 	. fin_cadre_trait_couleur(true);
 
-	return ajax_action_greffe('configurer-documents', $res);
+	return ajax_action_greffe('configurer-documents', '', $res);
 }
 ?>
