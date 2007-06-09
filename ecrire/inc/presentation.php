@@ -309,9 +309,9 @@ function afficher_plus($lien) {
 //
 
 // http://doc.spip.org/@afficher_objets
-function afficher_objets($type, $titre_table,$requete,$formater=''){
+function afficher_objets($type, $titre_table,$requete,$formater='',$force=false){
 	$afficher_objets = charger_fonction('afficher_objets','inc');
-	return $afficher_objets($type, $titre_table,$requete,$formater);
+	return $afficher_objets($type, $titre_table,$requete,$formater,$force);
 }
 
 // http://doc.spip.org/@afficher_liste
@@ -478,7 +478,7 @@ function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, 
 
 	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
 
-	if (! ($force OR ($cpt = $cpt['n']))) return '';
+	if (! (($cpt = $cpt['n']) OR $force)) return '';
 
 	if (isset($requete['LIMIT'])) $cpt = min($requete['LIMIT'], $cpt);
 

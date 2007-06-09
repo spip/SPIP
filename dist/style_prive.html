@@ -1686,8 +1686,23 @@ a.ical {
 .cadre-trait-couleur .titrem {background-color:##ENV{couleur_foncee,3874b0};color:#fff;}
 .cadre-trait-couleur .cadre .titrem {background-color: #eee;color:#000;}
 
-.cadre-liste .titrem {background-color:#fff;}
-.cadre-liste .titrem.hover {background-color:##ENV{couleur_claire,edf3fe}}
+.ajax-action {padding-top:1px;}
+.dater,.dater .titrem {background-color:##ENV{couleur_claire,edf3fe};}
+.dater .titrem.hover {background-color:##ENV{couleur_foncee,3874b0};}
+#contenu .ajax-action .cadre .titrem {background-color:##ENV{couleur_claire,edf3fe};}
+#contenu .ajax-action .titrem.hover {background-color:##ENV{couleur_foncee,3874b0};}
+.mots_tous #contenu .titrem.impliable {background-color:##ENV{couleur_claire,edf3fe};}
+
+.configuration #contenu .ajax-action .cadre .titrem {background-color:#eee;}
+.configuration #contenu .ajax-action .titrem.hover {background-color:##ENV{couleur_claire,edf3fe};}
+.configuration #contenu .ajax-action .cadre-trait-couleur .titrem {background-color:##ENV{couleur_foncee,3874b0};color:#fff;}
+.configuration #contenu .ajax-action .cadre-trait-couleur .cadre .titrem {background-color: #eee;color:#000;}
+
+.cadre-liste .titrem,
+#contenu .ajax-action .cadre-liste .titrem {background-color:#fff;}
+.cadre-liste .titrem.hover,
+#contenu .ajax-action .cadre-liste .titrem.hover 
+{background-color:##ENV{couleur_claire,edf3fe}}
 .cadre-liste .tr_liste .titrem {background-color:#eee;}
 
 #navigation .titrem {text-align:center;}
@@ -1715,9 +1730,3 @@ td.message, a.message {
 	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=m_envoi[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) center left no-repeat;
 	padding-left: 10px;
 }
-
-.ajax-action {padding-top:1px;}
-.dater,.dater .titrem {background-color:##ENV{couleur_claire,edf3fe};}
-.dater .titrem.hover {background-color:##ENV{couleur_foncee,3874b0};}
-#contenu .ajax-action .cadre .titrem {background-color:##ENV{couleur_claire,edf3fe};}
-#contenu .ajax-action .titrem.hover {background-color:##ENV{couleur_foncee,3874b0};}

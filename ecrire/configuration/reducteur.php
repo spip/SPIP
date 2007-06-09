@@ -138,7 +138,7 @@ function format_choisi()
 			if ($max_size >= ($maxtest-20)*($maxtest-20)) $maxtest = 2380; // 6MPixels
 			$top = 16;
 			for ($j = 320;$j>=20;$j = $j/2){
-				$res .= "<div style='position:relative;top:{$top}px;$spip_lang_left:0px;'>";
+				$res .= "<div style='position:relative;top:{$top}px;$spip_lang_left:0px;font-size:1px;'>";
 				$l = round($j/10);
 				$lok = 0; $lbad =0;
 				$margin_left = 0;
