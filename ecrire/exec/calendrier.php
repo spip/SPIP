@@ -44,7 +44,9 @@ function exec_calendrier_dist()
 
 	  $commencer_page = charger_fonction('commencer_page', 'inc');
 	  echo $commencer_page($titre, "accueil", "calendrier");
+	  echo debut_grand_cadre(true);
 	  echo "\n<div>&nbsp;</div>\n<div id='", $ancre, "'>",$r,'</div>';
+	  echo fin_grand_cadre(true);
 	  echo fin_page();
   }
 }
