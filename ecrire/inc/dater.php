@@ -108,7 +108,7 @@ onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
 		.  "</b>";
 
 		$masque = 
- "<div style='float: $spip_lang_left; width: 80%;'>" .
+ "<div style=''>" .
  '<input type="radio" name="avec_redac" value="non" id="avec_redac_on"' .
  ($possedeDateRedac ? '' : ' checked="checked"') .
  " onclick=$js" .
@@ -129,16 +129,16 @@ onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
  "</div></div>";
 
 
-		$masque =  "<div style='margin: 5px; margin-$spip_lang_left: 20px;position:relative;display:inline;'>" .
+		$masque =  "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>" .
 		  ajax_action_post("dater", 
 				   "$id/$type",
 				   $script,
 				   "id_$type=$id",
 				   $masque,
 				   _T('bouton_changer'),
-				   " style='float: $spip_lang_right; margin-top: 20px;position:relative;display:inline;' class='fondo visible_au_chargement' id='valider_date_redac'", "",
+				   " style='float:$spip_lang_right;margin-top:-2em;position:relative;' class='fondo visible_au_chargement' id='valider_date_redac'", "",
 				   "&id=$id&type=$type")
-				   ."<br class='nettoyeur' />"
+				   ."<div class='nettoyeur' /></div>"
 		. '</div>';
 
 		$res .= block_parfois_visible('dateredac', $invite, $masque, 'text-align: left');

@@ -48,49 +48,11 @@ function toggleBouton(bouton,cible){
 	//alert(jQuery(bouton));
 	if (jQuery(bouton).is('.deplie')){
 		jQuery(bouton).addClass('replie').removeClass('deplie');
-		jQuery(cible).addClass('replie').removeClass('deplie');
+		jQuery(cible).slideUp('fast').addClass('blocreplie').removeClass('blocdeplie');
 	}
 	else if (jQuery(bouton).is('.replie')){
 		jQuery(bouton).addClass('deplie').removeClass('replie');
-		jQuery(cible).addClass('deplie').removeClass('replie');
-	}
-}
-
-function swap_couche(couche, rtl, dir, no_swap) {
-	var layer;
-	var triangle = document.getElementById('triangle' + couche);
-	if (!(layer = findObj('Layer' + couche))) return;
-	if (layer.style.display == "none"){
-		if (!no_swap && triangle) triangle.src = dir + 'deplierbas.gif';
-		layer.style.display = 'block';
-	} else {
-		if (!no_swap && triangle) triangle.src = dir + 'deplierhaut' + rtl + '.gif';
-		layer.style.display = 'none';
-	}
-}
-function ouvrir_couche(couche, rtl,dir) {
-	var layer;
-	var triangle = document.getElementById('triangle' + couche);
-	if (!(layer = findObj('Layer' + couche))) return;
-	if (triangle) triangle.src = dir + 'deplierbas.gif';
-	layer.style.display = 'block';
-}
-function fermer_couche(couche, rtl, dir) {
-	var layer;
-	var triangle = document.getElementById('triangle' + couche);
-	if (!(layer = findObj('Layer' + couche))) return;
-	if (triangle) triangle.src = dir + 'deplierhaut' + rtl + '.gif';
-	layer.style.display = 'none';
-}
-function manipuler_couches(action,rtl,first,last, dir) {
-	if (action=='ouvrir') {
-		for (j=first; j<=last; j+=1) {
-			ouvrir_couche(j,rtl, dir);
-		}
-	} else {
-		for (j=first; j<=last; j+=1) {
-			fermer_couche(j,rtl, dir);
-		}
+		jQuery(cible).slideDown('fast').addClass('blocdeplie').removeClass('blocreplie');
 	}
 }
 

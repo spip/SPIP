@@ -113,11 +113,9 @@ function exec_auteur_infos_dist() {
 						    'id_auteur'=>$id_auteur),
 				    'data'=>''));
 		
-		auteurs_interventions($auteur);
-		
-		echo fin_cadre_relief(true),
-			fin_gauche(),
-			fin_page();
+		echo fin_cadre_relief(true);
+		echo auteurs_interventions($auteur);
+		echo fin_gauche(), fin_page();
 /*	} */
 
 }
@@ -165,7 +163,7 @@ function auteurs_interventions($auteur) {
 
 	if ($id_auteur != $connect_id_auteur
 	    AND ($statut == '0minirezo' OR $statut == '1comite')) {
-		echo "<div>&nbsp;</div>";
+		echo "<div class='nettoyeur'>&nbsp;</div>";
 		debut_cadre_couleur();
 
 		$vus = array();
