@@ -46,8 +46,7 @@ function exec_lang_raccourcis_dist() {
 	debut_gauche();
 
 	if (count($modules) > 1) {
-		echo debut_cadre_relief();
-		echo "<div class='verdana3 toile_foncee' style='color: white; padding: 3px;'><b>"._T('module_fichiers_langues').":</b></div><br />\n";
+		echo debut_cadre_relief('',true,'',_T('module_fichiers_langues'));
 
 		foreach ($modules as $nom_module) {
 			if ($nom_module == $module) echo "<div style='padding-$spip_lang_left: 10px;' class='verdana3'><b>$nom_module</b></div>";
@@ -94,16 +93,17 @@ function afficher_raccourcis($module = "public") {
 		echo "</div><div>&nbsp;</div>";
 	}
 
-	echo "\n<table cellpadding='3' cellspacing='1' border='0'>";
-	echo "\n<tr class='toile_foncee' style='color:white;'><td class='verdana1'><b>"._T('module_raccourci')."</b></td>\n<td class='verdana2'><b>"._T('module_texte_affiche')."</b></td></tr>\n";
+	echo debut_cadre_relief('',true,'','','raccourcis');
+	echo "\n<table class='spip' style='border:0;'>";
+	echo "\n<tr class='titrem'><th class='verdana1'>"._T('module_raccourci')."</th>\n<th class='verdana2'>"._T('module_texte_affiche')."</th></tr>\n";
 
 	$i = 0;
 	foreach ($tableau as $raccourci => $val) {
-		$bgcolor = alterner($i++, '#eeeeee','white');
-		echo "\n<tr style='background-color: $bgcolor'><td class='verdana2'><b>&lt;:$aff_nom_module$raccourci:&gt;</b></td>\n<td class='arial2'>".$val."</td></tr>";
+		$bgcolor = alterner(++$i, 'row_even','row_odd');
+		echo "\n<tr class='$bgcolor'><td class='verdana2'><b>&lt;:$aff_nom_module$raccourci:&gt;</b></td>\n<td class='arial2'>".$val."</td></tr>";
 	}
 
-	echo "</table>";
+	echo "</table>",fin_cadre_relief(true);
 }
 
 ?>
