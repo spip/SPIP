@@ -440,7 +440,7 @@ function afficher_tranches_requete($num_rows, $tmp_var, $url='', $nb_aff = 10, $
 	$self = self();
 	$ie_style = ($browser_name == "MSIE") ? "height:1%" : '';
 
-	$texte = "\n<div style='position: relative;$ie_style; background-color: #dddddd; border-bottom: 1px solid #444444; padding: 2px;' class='arial1 tranches' id='a$ancre'>";
+	$texte = "\n<div style='position: relative;$ie_style;' class='arial1 tranches' id='a$ancre'>";
 
 	$texte .= navigation_pagination($num_rows, $nb_aff, $url, $onclick=true, $tmp_var);
 

@@ -1176,7 +1176,12 @@ div.liste,div.cadre-liste {
 	background:white;
 }
 div.cadre-liste .cadre_padding {padding:0;}
-div.cadre-liste .tranches{border-top:1px solid black;}
+div.cadre-liste .tranches{
+	border-top:1px solid black;
+	background-color: #dddddd;
+	border-bottom: 1px solid #444444;
+	padding: 2px;
+}
 
 	
 .tout-site #page ul#articles_tous,.tout-site ul#articles_tous ul {
@@ -1629,14 +1634,16 @@ a.ical {
 
 /* Titre d'une boite */
 .titrem { 
-	display: block; background-color: #eee;
+	background-color: #eee;
 	font-weight: bold;
+}
+div.titrem{	
+	display: block; 
 	padding-top: 6px; padding-bottom: 4px;
 	background-repeat: no-repeat;
-	background-position: #GET{left} 6px;
+	background-position: [(#GET{left})] 6px;
 	padding-#GET{left}: 16px;
-
-	}
+}
 
 .cadre-couleur-foncee .titrem {background-color:#GET{foncee};color:#fff;}
 .cadre-couleur-foncee .cadre_padding .titrem {color:#000;}
