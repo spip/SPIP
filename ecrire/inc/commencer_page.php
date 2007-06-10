@@ -106,7 +106,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 	}
 	if ($menu){
 		$res .= bandeau_double_rangee($rubrique, $sous_rubrique, $largeur)
-		. "\n<div id='bandeau_couleur' style='max-height: 40px; width: 100%; border-bottom: solid 1px white;' class='toile_claire'>"
+		. "\n<div id='bandeau_couleur'>"
 	  . "<div class='h-list centered vcentered' style='width:{$largeur}px'><ul>"
 		. "<li id='bandeau_couleur1' class='bandeau_couleur'><div class='menu-item'>"
 		.  installer_gadgets($id_rubrique)
