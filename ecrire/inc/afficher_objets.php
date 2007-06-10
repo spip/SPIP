@@ -102,6 +102,7 @@ function afficher_titre_site($row){
 	
 	return array($s,$s2);
 }
+// http://doc.spip.org/@afficher_titre_auteur
 function afficher_titre_auteur($row){
 	return array($row['nom'],
 		((isset($row['restreint']) AND $row['restreint'])
@@ -540,6 +541,7 @@ function afficher_articles_trad_boucle($row)
 	: afficher_liste_display_eq4($largeurs, $vals, $styles);
 }
 
+// http://doc.spip.org/@afficher_auteurs_boucle
 function afficher_auteurs_boucle($row, &$tous_id,  $voir_logo, $own){
 	$vals = array();
 	$formater_auteur = charger_fonction('formater_auteur', 'inc');
