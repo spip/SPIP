@@ -252,10 +252,10 @@ function determine_upload($type='') {
 		$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
 	}
 
-	if ($GLOBALS['connect_toutes_rubriques'])
+	if (!$GLOBALS['auteur_session']['restreint'])
 		return $repertoire;
 	else
-		return sous_repertoire($repertoire, $GLOBALS['connect_login']);
+		return sous_repertoire($repertoire, $GLOBALS['auteur_session']['login']);
 }
 
 //
