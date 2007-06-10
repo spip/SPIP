@@ -82,7 +82,6 @@ function inc_tourner_dist($id_document, $document, $script, $flag, $type)
 // http://doc.spip.org/@boutons_rotateurs
 function boutons_rotateurs($document, $type, $id, $id_document, $script) {
 	global $spip_lang_right;
-	static $ftype = array(1 => 'jpg', 2 => 'png', 3 => 'gif');
 
 	$process = $GLOBALS['meta']['image_process'];
 
@@ -91,8 +90,8 @@ function boutons_rotateurs($document, $type, $id, $id_document, $script) {
 	// n'est pas distante, qu'elle est bien presente dans IMG/
 	// qu'elle n'a pas de vignette perso ; et qu'on a la bibli !
 	if ($document['distant']!='oui' 
-	AND isset($ftype[$document['id_type']])
-	AND (strpos($GLOBALS['meta']['formats_graphiques'], $ftype[$document['id_type']])!==false)
+	AND in_array($document['extension'], array('gif', 'jpg', 'png'))
+	AND (strpos($GLOBALS['meta']['formats_graphiques'], $document['extension'])!==false)
 	AND ($process == 'imagick'
 		OR $process == 'gd2'
 		OR $process == 'convert'

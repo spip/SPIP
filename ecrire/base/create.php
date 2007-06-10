@@ -34,11 +34,7 @@ function creer_base() {
 		spip_mysql_create($k, $v['field'], $v['key'], false);
 
 	foreach($tables_images as $k => $v)
-		spip_query_db("INSERT IGNORE INTO spip_types_documents (extension, inclus, titre, id_type) VALUES ('$k', 'image', '" .
-			      (is_numeric($v) ?
-			       (strtoupper($k) . "', $v") :
-			       "$v', 0") .
-			      ")");
+		spip_query_db("INSERT IGNORE INTO spip_types_documents (extension, inclus, titre) VALUES ("._q($k).", 'image'," . _q($v).')');
 
 	foreach($tables_sequences as $k => $v)
 		spip_query_db("INSERT IGNORE INTO spip_types_documents (extension, titre, inclus) VALUES ('$k', '$v', 'embed')");

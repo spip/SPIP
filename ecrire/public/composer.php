@@ -361,12 +361,12 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 	if (!$id_document) return '';
 	if ($doubdoc) $doublons["documents"] .= ','.$id_document;
 
-	if (!($row = spip_abstract_select(array('id_type', 'id_vignette', 'fichier', 'mode'), array('spip_documents'), array("id_document = $id_document"))))
+	if (!($row = spip_abstract_select(array('extension', 'id_vignette', 'fichier', 'mode'), array('spip_documents'), array("id_document = $id_document"))))
 		// pas de document. Ne devrait pas arriver
 		return ''; 
 
 	$row = spip_abstract_fetch($row);
-	$id_type = $row['id_type'];
+	$extension = $row['extension'];
 	$id_vignette = $row['id_vignette'];
 	$fichier = get_spip_doc($row['fichier']);
 	$mode = $row['mode'];
@@ -393,14 +393,12 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 		$y = intval($r[2]);
 	}
 
-	// Retrouver l'extension et le type mime
+	// Retrouver le type mime
 	$ex = spip_abstract_fetch(spip_abstract_select(
-		array('extension', 'mime_type'),
+		array('mime_type'),
 		array('spip_types_documents'),
-		array("id_type = " . intval($id_type))));
-	$extension = $ex['extension'];
+		array("extension = " . _q($extension))));
 	$mime = $ex['mime_type'];
-	if (!$extension) $extension = 'txt';
 
 	if ($logo AND @file_exists($logo)) {
 		if ($x OR $y)
