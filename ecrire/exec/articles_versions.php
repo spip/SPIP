@@ -98,29 +98,12 @@ debut_cadre_relief();
 // Titre, surtitre, sous-titre
 //
 
-if ($statut_article=='publie') {
-	$logo_statut = "puce-verte.gif";
-}
-else if ($statut_article=='prepa') {
-	$logo_statut = "puce-blanche.gif";
-}
-else if ($statut_article=='prop') {
-	$logo_statut = "puce-orange.gif";
-}
-else if ($statut_article == 'refuse') {
-	$logo_statut = "puce-rouge.gif";
-}
-else if ($statut_article == 'poubelle') {
-	$logo_statut = "puce-poubelle.gif";
-}
-
-
 echo "\n<table id='diff' cellpadding='0' cellspacing='0' border='0' width='100%'>";
 echo "<tr><td style='width: 100%' valign='top'>";
 if ($surtitre) {
 	echo "<span  dir='$lang_dir'><span class='arial1 spip_medium'><b>", propre_diff($surtitre), "</b></span></span>\n";
 }
- gros_titre(propre_diff($titre), $logo_statut);
+ echo gros_titre(propre_diff($titre), puce_statut($statut_article, " style='vertical-align: bottom'") . " &nbsp; ", true);
 
 if ($soustitre) {
 	echo "<span  dir='$lang_dir'><span class='arial1 spip_medium'><b>", propre_diff($soustitre), "</b></span></span>\n";

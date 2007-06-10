@@ -114,12 +114,12 @@ $revisions .= "<a href='".generer_url_ecrire('suivi_revisions', "debut=$next&id_
 				}
 		
 				if (!$rss) {
-					$logo_statut = "puce-".puce_statut($statut).".gif";
+
 					$revisions .= "\n<div class='tr_liste' style='padding: 5px; border-top: 1px solid #aaaaaa;'>";
 		
 					$titre_bouton = "<span class='arial2'>";
-					$titre_bouton .= "<img src='" . _DIR_IMG_PACK . "$logo_statut' alt=' ' />&nbsp;";
-					$titre_bouton .= "<a class='$statut' style='font-weight: bold;' href='" . generer_url_ecrire("articles_versions","id_article=$id_article") . "'>$titre</a>";
+					$titre_bouton .= puce_statut($statut);
+					$titre_bouton .= " &nbsp;<a class='$statut' style='font-weight: bold;' href='" . generer_url_ecrire("articles_versions","id_article=$id_article") . "'>$titre</a>";
 					$titre_bouton .= "<span class='arial1' dir='$lang_dir'>";
 					$titre_bouton .= " ".date_relative($date)." "; # laisser un peu de privacy aux redacteurs
 					$titre_bouton .= "</span>";
