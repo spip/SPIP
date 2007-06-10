@@ -484,7 +484,7 @@ function http_calendrier_semaine_sept($annee, $mois, $jour, $echelle, $partie_ca
 	$today=date("Ymd");
 	$total = '';
 	$style = " border-top: 0px; border-right: 0px;";
-	$class = ' bordure_claire_$spip_lang_left bordure_claire_basse';
+	$class = " bordure_claire_$spip_lang_left bordure_claire_basse";
 	for ($j=$jour; $j<$jour+7;$j++){
 		$v = mktime(0,0,0,$mois, $j, $annee);
 		$total .= "\n<td class='calendrier-td'>" .
@@ -1026,7 +1026,7 @@ function http_calendrier_invisible($annee, $mois, $jour, $script, $finurl, $ancr
 	$gadget = "<div style='position: relative;z-index: 1000;'
 			onmouseover=\"findObj_test_forcer('$id',true).style.visibility='visible';\"
 			onmouseout=\"cacher('$id');\">"
-	  . "<table id='$id' class='calendrier-cadreagenda toile_claire'"	  . ">\n<tr><td colspan='3' style='text-align:$spip_lang_left;'>";
+	  . "<table id='$id' class='calendrier-cadreagenda'"	  . ">\n<tr><td colspan='3' style='text-align:$spip_lang_left;'>";
 
 	$annee_avant = $annee - 1;
 	$annee_apres = $annee + 1;
