@@ -70,14 +70,13 @@ function bouton_block_depliable($texte,$deplie,$ids=""){
 		$cible = "#$bouton_id + div.bloc_depliable";
 	}
 	$extra_js = "";
-	if ($a = extraire_balise($texte,'a')){
+	if (($deplie!==-1) && ($a = extraire_balise($texte,'a'))){
 		$ar = inserer_attribut($a,'onclick','return false;',false);
 		$texte = str_replace($a,$ar,$texte);
 		$extra_js .= "\njQuery('#$bouton_id a').dblclick(function(){window.location.replace($(this).attr('href'));});";
 	}
 	if ($deplie==='incertain')
 		$extra_js .= "\nif (jQuery('$cible').is(':visible')) $('#$bouton_id').addClass('deplie').removeClass('replie');";
-	//$extra_js .= "\njQuery('#$bouton_id').hover(function(){jQuery(this).addClass('hover');},function(){jQuery(this).removeClass('hover');});";
 
 	return "<div "
 	  .($bouton_id?"id='$bouton_id' ":"")

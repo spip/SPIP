@@ -289,11 +289,16 @@ a.lien_sous:hover {
 	color: #000;
 }
 
-
-div.bandeau_rubriques {
+.cadre-bandeau-rubriques {
 	background-color: #eee; 
 	border: 1px solid #555555;
+	z-index: 1;
 }
+.cadre-bandeau-rubriques .titrem {	background : #GET{foncee};}
+.cadre-bandeau-rubriques .cadre_padding {padding:0px;}
+.cadre-meme-rubriques { background:#eee;border:1px solid #444;}
+.cadre-meme-rubriques .cadre_padding {padding:0px;}
+
 a.bandeau_rub {
 	display: block;
 	font-size: 10px;
@@ -1788,12 +1793,14 @@ td.message, a.message {
 
 .couleur_cumul {background:#666;}
 .couleur_nombre {background:#eee;}
+.couleur_langue {background:#GET{foncee};}
 
 /* agenda */
 .bandeau_agenda { background:#GET{claire};}
-.jour_dimanche { background:#GET{claire};}
-.jour_encours { background:#fff;}
-.jour_gris { background:#eee;}
+.jour_dimanche { background:#GET{claire};color:#fff;}
+.jour_encours { background:#fff;color:#000;}
+.jour_gris { background:#eee;color:#000;}
+.jour_pris { background:#fff;color:#000;}
 .calendrier-cadreagenda { background:#GET{claire};}
 
 /* lang_raccourcis */

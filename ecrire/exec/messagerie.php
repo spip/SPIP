@@ -104,10 +104,7 @@ $result = spip_query("SELECT auteurs.id_auteur, auteurs.nom, COUNT(*) AS total F
 if (spip_num_rows($result) > 0) {
 
 	echo "<div style='height: 12px;'></div>";
-	echo "<div class='liste'>";
-
-	echo bandeau_titre_boite2('<b>' . _T('info_principaux_correspondants') . '</b>', "redacteurs-24.gif",  'toile_gris_sombre', 'ligne_blanche');
-
+	echo debut_cadre('liste',"redacteurs-24.gif",'',_T('info_principaux_correspondants'));
 	echo "<table width='100%' cellpadding='0' cellspacing='0'>";
 	echo "<tr><td valign='top' style='width: 50%'>";
 	$count = 0;
@@ -122,7 +119,7 @@ if (spip_num_rows($result) > 0) {
 		if ($count == ceil(spip_num_rows($result)/2)) echo "</td><td valign='top' style='width: 50%' class='toile_gris_leger'>";
 	}
 	echo "</td></tr></table>";
-	echo "</div>";
+	echo fin_cadre('liste');
 }
 
  echo afficher_messages('<b>' . _T('info_pense_bete_ancien') . '</b>', '', "id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui'",  $messages_vus, false, false);

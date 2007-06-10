@@ -350,7 +350,8 @@ div.navigation-calendrier img {
 }
 /* agenda */
 .bandeau_agenda { background:#ddd;}
-.jour_dimanche { background:#eee;}
-.jour_encours { background:#fff;}
-.jour_gris { background:#eee;}
+.jour_dimanche { background:#eee;color:#000;}
+.jour_encours { background:#fff;color:#000;}
+.jour_gris { background:#eee;color:#000;}
+.jour_pris { background:#fff;color:#000;}
 .calendrier-cadreagenda { background:#eee;}

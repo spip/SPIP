@@ -1134,21 +1134,17 @@ function http_calendrier_agenda_rv ($annee, $mois, $les_rv, $fclic,
 		  $couleur = "black";
 		} else {
 		  if ($j == $jour_today AND $cemois) {
-			$toile = test_espace_prive() ? 'toile_foncee' : 'toile_gris_sombre';
-			$couleur = "white";
+			$toile = 'jour_encours';
 		    } else {
 			if ($jour_semaine == 7) {
-				$toile = "toile_gris_fort";
-				$couleur = 'white';
+				$toile = "jour_dimanche";
 			} else {
-				$toile = 'toile_blanche';
-				$couleur = "#aaaaaa";
+				$toile = 'jour_gris';
 			}
-			if (isset($les_rv[$j])) {
-			  $toile = 'toile_blanche';
-			  $couleur = "black";
-			  $title = textebrut($les_rv[$j]['SUMMARY']);
-			}
+				if (isset($les_rv[$j])) {
+				  $toile = "jour_pris $toile";
+				  $title = textebrut($les_rv[$j]['SUMMARY']);
+				}
 		  }
 		  $class= 'calendrier-arial11 calendrier-agenda';
 		  $type = ($semaine ? 'semaine' : 'jour') ;
