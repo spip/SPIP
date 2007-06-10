@@ -492,7 +492,7 @@ function propre_diff($texte) {
 	// < tag <span diff> >
 	$texte = preg_replace(',<([^>]*?@@@SPIP_DIFF[0-9]+@@@),',
 		'&lt;\1', $texte);
-		var_dump($texte);
+
 	# attention ici astuce seulement deux @@ finals car on doit eviter
 	# deux patterns a suivre, afin de pouvoir prendre [ mais eviter [[
 	$texte = preg_replace(',(^|[^[])[[]([^[\]]*@@@SPIP_DIFF[0-9]+@@),',
