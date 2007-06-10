@@ -460,11 +460,11 @@ if ($GLOBALS['accepte_svg']) {
 						._T('info_visites')." | "
 						._T('info_moyenne')." $moyenne"));
 						if ($difference > 0) {	
-						  echo http_img_rien($largeur,1, 'toile_gris_sombre', $tagtitle);
+						  echo http_img_rien($largeur,1, 'trait_moyen', $tagtitle);
 						  echo http_img_rien($largeur, $hauteur_moyenne, '', $tagtitle);
 						}
 						echo 
-						    http_img_rien($largeur,1,'toile_noire', $tagtitle);
+						    http_img_rien($largeur,1,'trait_bas', $tagtitle);
 						echo "</td>";
 					}
 				}
@@ -491,32 +491,32 @@ if ($GLOBALS['accepte_svg']) {
 				if ($hauteur > 0){
 					if ($hauteur_moyenne > $hauteur) {
 						$difference = ($hauteur_moyenne - $hauteur) -1;
-						echo http_img_rien($largeur, 1,'toile_gris_sombre',$tagtitle);
+						echo http_img_rien($largeur, 1,'trait_moyenne',$tagtitle);
 						echo http_img_rien($largeur, $difference, '', $tagtitle);
-						echo http_img_rien($largeur,1, "toile_foncee", $tagtitle);
+						echo http_img_rien($largeur,1, "trait_haut", $tagtitle);
 						if (date("w",$key) == "0") // Dimanche en couleur foncee
-						  echo http_img_rien($largeur, $hauteur, "toile_foncee", $tagtitle);
+						  echo http_img_rien($largeur, $hauteur, "couleur_dimanche", $tagtitle);
 						else
-						  echo http_img_rien($largeur,$hauteur, "toile_claire", $tagtitle);
+						  echo http_img_rien($largeur,$hauteur, "couleur_jour", $tagtitle);
 					} else if ($hauteur_moyenne < $hauteur) {
 						$difference = ($hauteur - $hauteur_moyenne) -1;
-						echo http_img_rien($largeur,1,"toile_foncee", $tagtitle);
+						echo http_img_rien($largeur,1,"trait_haut", $tagtitle);
 						if (date("w",$key) == "0") // Dimanche en couleur foncee
-							$couleur =  'toile_foncee';
+							$couleur =  'couleur_dimanche';
 						else
-							$couleur = 'toile_claire';
+							$couleur = 'couleur_jour';
 						echo http_img_rien($largeur, $difference, $couleur, $tagtitle);
-						echo http_img_rien($largeur,1,"toile_gris_sombre", $tagtitle);
+						echo http_img_rien($largeur,1,"trait_moyenne", $tagtitle);
 						echo http_img_rien($largeur, $hauteur_moyenne, $couleur, $tagtitle);
 					} else {
-					  echo http_img_rien($largeur, 1, "toile_foncee", $tagtitle);
+					  echo http_img_rien($largeur, 1, "trait_haut", $tagtitle);
 						if (date("w",$key) == "0") // Dimanche en couleur foncee
-						  echo http_img_rien($largeur, $hauteur, "toile_foncee", $tagtitle);
+						  echo http_img_rien($largeur, $hauteur, "couleur_dimanche", $tagtitle);
 						else
-						  echo http_img_rien($largeur,$hauteur, "toile_claire", $tagtitle);
+						  echo http_img_rien($largeur,$hauteur, "couleur_jour", $tagtitle);
 					}
 				}
-				echo http_img_rien($largeur, 1, 'toile_noire', $tagtitle);
+				echo http_img_rien($largeur, 1, 'trait_bas', $tagtitle);
 				echo "</td>\n";
 			
 				$jour_prec = $key;
@@ -535,24 +535,24 @@ if ($GLOBALS['accepte_svg']) {
 			$hauteurprevision = ceil($prevision * $rapport);
 			// Afficher la barre tout en haut
 			if ($hauteur+$hauteurprevision>0)
-				echo http_img_rien($largeur, 1, "toile_foncee");
+				echo http_img_rien($largeur, 1, "trait_haut");
 			// preparer le texte de survol (prevision)
 			$tagtitle= attribut_html(supprimer_tags(_T('info_aujourdhui')." $visites_today &rarr; ".(round($prevision,0)+$visites_today)));
 			// afficher la barre previsionnelle
 			if ($hauteurprevision>0)
-				echo http_img_rien($largeur, $hauteurprevision,'toile_gris_leger', $tagtitle);
+				echo http_img_rien($largeur, $hauteurprevision,'couleur_prevision', $tagtitle);
 				// afficher la barre deja realisee
 			if ($hauteur>0)
-				echo http_img_rien($largeur, $hauteur, 'toile_gris_moyen', $tagtitle);
+				echo http_img_rien($largeur, $hauteur, 'couleur_realise', $tagtitle);
 			// et afficher la ligne de base
-			echo http_img_rien($largeur, 1, 'toile_noire');
+			echo http_img_rien($largeur, 1, 'trait_bas');
 			echo "</td>";
 
 
 			echo "\n<td style='background-color: black'>",http_img_rien(1, 1),"</td>";
 			echo "</tr></table>";
 			echo "</td>",
-			  "\n<td ".http_style_background("fond-stats.gif")."  valign='bottom'>", http_img_rien(3, 1, 'toile_noire'),"</td>";
+			  "\n<td ".http_style_background("fond-stats.gif")."  valign='bottom'>", http_img_rien(3, 1, 'trait_bas'),"</td>";
 			echo "\n<td>", http_img_rien(5, 1),"</td>";
 			echo "\n<td valign='top'><div style='font-size:small;' class='verdana1'>";
 			echo "\n<table cellpadding='0' cellspacing='0' border='0'>";
@@ -676,7 +676,7 @@ if ($GLOBALS['accepte_svg']) {
 		echo "\n<table cellpadding='0' cellspacing='0' border='0'><tr>",
 		  "\n<td ".http_style_background("fond-stats.gif").">";
 		echo "\n<table cellpadding='0' cellspacing='0' border='0' class='bottom'><tr>";
-		echo "\n<td class='toile_noire'>", http_img_rien(1, 200),"</td>";
+		echo "\n<td class='trait_bas'>", http_img_rien(1, 200),"</td>";
 		// Presentation graphique
 		$decal = 0;
 		$tab_moyenne = "";
@@ -707,47 +707,47 @@ if ($GLOBALS['accepte_svg']) {
 			if ($hauteur > 0){
 				if ($hauteur_moyenne > $hauteur) {
 					$difference = ($hauteur_moyenne - $hauteur) -1;
-					echo http_img_rien($largeur, 1, 'toile_gris_sombre');
+					echo http_img_rien($largeur, 1, 'trait_moyen');
 					echo http_img_rien($largeur, $difference, '', $tagtitle);
-					echo http_img_rien($largeur,1,"toile_foncee");
+					echo http_img_rien($largeur,1,"trait_haut");
 					if (preg_match(",-01,",$key)){ // janvier en couleur foncee
-					  echo http_img_rien($largeur,$hauteur,"toile_foncee", $tagtitle);
+					  echo http_img_rien($largeur,$hauteur,"couleur_janvier", $tagtitle);
 					} 
 					else {
-					  echo http_img_rien($largeur,$hauteur,"toile_claire", $tagtitle);
+					  echo http_img_rien($largeur,$hauteur,"couleur_mois", $tagtitle);
 					}
 				}
 				else if ($hauteur_moyenne < $hauteur) {
 					$difference = ($hauteur - $hauteur_moyenne) -1;
-					echo http_img_rien($largeur,1,"toile_foncee", $tagtitle);
+					echo http_img_rien($largeur,1,"trait_haut", $tagtitle);
 					if (preg_match(",-01,",$key)){ // janvier en couleur foncee
-						$couleur =  'toile_foncee';
+						$couleur =  'couleur_janvier';
 					} 
 					else {
-						$couleur = 'toile_claire';
+						$couleur = 'couleur_mois';
 					}
 					echo http_img_rien($largeur,$difference, $couleur, $tagtitle);
-					echo http_img_rien($largeur,1,'toile_gris_sombre',$tagtitle);
+					echo http_img_rien($largeur,1,'trait_moyen',$tagtitle);
 					echo http_img_rien($largeur,$hauteur_moyenne, $couleur, $tagtitle);
 				}
 				else {
-				  echo http_img_rien($largeur,1,"toile_foncee", $tagtitle);
+				  echo http_img_rien($largeur,1,"trait_haut", $tagtitle);
 					if (preg_match(",-01,",$key)){ // janvier en couleur foncee
-					  echo http_img_rien($largeur, $hauteur, "toile_foncee", $tagtitle);
+					  echo http_img_rien($largeur, $hauteur, "couleur_janvier", $tagtitle);
 					} 
 					else {
-					  echo http_img_rien($largeur,$hauteur, "toile_claire", $tagtitle);
+					  echo http_img_rien($largeur,$hauteur, "couleur_mois", $tagtitle);
 					}
 				}
 			}
-			echo http_img_rien($largeur,1,'toile_noire', $tagtitle);
+			echo http_img_rien($largeur,1,'trait_bas', $tagtitle);
 			echo "</td>\n";
 		}
 		
 		echo "\n<td style='background-color: black'>", http_img_rien(1, 1),"</td>";
 		echo "</tr></table>";
 		echo "</td>",
-		  "\n<td ".http_style_background("fond-stats.gif")." valign='bottom'>", http_img_rien(3, 1, 'toile_noire'),"</td>";
+		  "\n<td ".http_style_background("fond-stats.gif")." valign='bottom'>", http_img_rien(3, 1, 'trait_bas'),"</td>";
 		echo "\n<td>", http_img_rien(5, 1),"</td>";
 		echo "\n<td valign='top'><div style='font-size:small;' class='verdana1'>";
 		echo "\n<table cellpadding='0' cellspacing='0' border='0'>";
