@@ -36,19 +36,19 @@ function inc_iconifier_dist($id_objet, $id,  $script, $visible=false) {
 
 		$bouton = bouton_block_depliable("$texteon<br />$img",$visible,'on');
 		$masque = debut_block_depliable($visible,'on') . $clic . fin_block();
-		$res = "<div style='text-align: center'>$masque</div><br /><br />";;
-		$texteoff = _T('logo_survol');
+		$res = "<div style='text-align: center'>$masque</div>";;
 
+		$texteoff = _T('logo_survol');
 		if ($logo = $chercher_logo($id, $id_objet, 'off')) {
 
 			list($img, $clic) = decrire_logo($id_objet, 'off', $id, 170, 170, $logo, $texteoff, $script);
 
 			$masque = block_parfois_visible('off', "$texteoff<br />$img", $clic, 'margin-bottom: -2px');
-			$res .= "<div style='text-align: center'>$masque</div>";
+			$res .= "<br /><br /><div style='text-align: center'>$masque</div>";
 		} else {
 			if ($GLOBALS['meta']['activer_logos_survol'] == 'oui') {
 				$masque = indiquer_logo($texteoff, $id_objet, 'off', $id, $script, $iframe);
-				$res .= block_parfois_visible('off', "$texteoff", $masque);
+				$res .= "<br /><br />".block_parfois_visible('off', "$texteoff", $masque);
 			}
 		}
 	}
