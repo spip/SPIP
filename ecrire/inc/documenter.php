@@ -30,12 +30,8 @@ function inc_documenter_dist(
 	if (is_int($doc)) {
 		if ($ancre == 'portfolio') {
 			$lies = spip_query("SELECT docs.*,l.id_$type,l.vu FROM spip_documents AS docs, spip_documents_".$type."s AS l WHERE l.id_$type=$doc AND l.id_document=docs.id_document AND docs.mode='document' AND docs.extension IN ('gif', 'jpg', 'png') ORDER BY 0+docs.titre, docs.date");
-			$toile = 'toile_claire';
-			$couleur = 'bordure_claire_';
 		} else {
 			$lies = spip_query("SELECT docs.*,l.id_$type,l.vu FROM spip_documents AS docs, spip_documents_".$type."s AS l WHERE l.id_$type=$doc AND l.id_document=docs.id_document AND docs.mode='document' AND docs.extension NOT IN ('gif', 'jpg', 'png') ORDER BY 0+docs.titre, docs.date");
-			$toile = 'toile_gris_fort';
-			$couleur = 'bordure_grise_';
 		}
 
 		$documents = array();
@@ -45,8 +41,6 @@ function inc_documenter_dist(
 		$documents = $doc;
 
 	if (!$documents) return '';
-
-	$class = "${couleur}basse $couleur$spip_lang_left";
 
 	charger_generer_url();
 	// la derniere case d'une rangee
@@ -74,15 +68,13 @@ function inc_documenter_dist(
 		  // ref a $exec inutilise en standard
 		  $script = $appelant ? $appelant : $GLOBALS['exec'];
 
-		$style = ($document['vu']=='oui') ? ' background-color: #cccccc;':'';
+		$vu = ($document['vu']=='oui') ? ' vu':'';
 
 		$deplier = in_array($id_document, explode(',', _request('show_docs')));
 
 		if (!$case)
-			$res .= "<tr style='border-top: 1px solid black;'>";
-		else if ($case == $bord_droit)
-			$class .= " ${couleur}$spip_lang_right";
-		$res .= "\n<td  class='$class' style='width:33%; text-align: $spip_lang_left; $style' valign='top'>"
+			$res .= "<tr>";
+		$res .= "\n<td  class='document$vu'>"
 		.  $tourner($id_document, $document, $script, $flag, $type)
 		. (!$flag  ? '' :
 		   $legender($id_document, $document, $script, $type, $document["id_$type"], $ancre, $deplier))
@@ -91,35 +83,37 @@ function inc_documenter_dist(
 		. "</td>\n";
 
 		$case++;
-				
 		if ($case > $bord_droit) {
 			  $case = 0;
 			  $res .= "</tr>\n";
 		}
-
 	}
 
 	// fermer la derniere ligne
 	if ($case) {
-		$res .= "<td class='$couleur$spip_lang_left'>&nbsp;</td>";
+		$res .= "<td></td>";
 		$res .= "</tr>";
 	}
 
 	$s = ($ancre =='documents' ? '': '-');
+	$head = $pied = "";
 	if (is_int($doc)) {
-		$head = "\n<div style='padding: 4px; color: black;' class='verdana2 $toile'>\n<b>".majuscules(_T("info_$ancre"))."</b></div>";
-
+		$bouton = bouton_block_depliable(majuscules(_T("info_$ancre")),true,"portfolio_$ancre");
+		$head = debut_cadre("$ancre","","",$bouton);
 		if (count($documents) > 3) {
-			$head .= "<div style='background-color: #dddddd; padding: 4px; color: black; text-align: right' class='arial1'>"
+			$head .= "<div class='lien_tout_supprimer'>"
 			. ajax_action_auteur('documenter', "$s$doc/$type", $script, "id_$type=$doc&s=$s&type=$type",array(_T('lien_tout_supprimer')))
 			. "</div>\n";
 		}
-	} else $head = '';
+		$head .= debut_block_depliable(true,"portfolio_$ancre");
+		$pied = fin_block();
+	}
 
 	$res = $head
 	. "\n<table width='100%' cellspacing='0' cellpadding='4'>"
 	. $res
-	. "</table>";	  
+	. "</table>"
+	. $pied;
 
 	return ajax_action_greffe("documenter", "$s$doc", $res, '');
 }
