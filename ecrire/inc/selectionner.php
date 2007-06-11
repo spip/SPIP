@@ -105,7 +105,7 @@ function construire_selectionner_hierarchie($idom, $liste, $racine, $url, $name,
 	. " />"
 	. "\n</td></tr></table><div id='"
 	.  $idom2
-	.  "' class='toile_blanche bordure_foncee' style='position: relative; height: 170px; overflow: auto;'><div id='$idom4'"
+	.  "'><div id='$idom4'"
 	. " class='arial1'>" 
 	. $liste
 	. "</div></div>\n<div id='$idom3'></div></div>\n";

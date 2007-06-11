@@ -238,7 +238,7 @@ function inc_afficher_objets_dist($type, $titre_table,$requete,$formater='', $fo
 		$fonction_ligne = "afficher_objet_boucle";
 		$arg = array($type,id_table_objet($type),$afficher_langue, $affrub, $langue_defaut);
 	}
-	return affiche_tranche_bandeau($requete, icone_table($type), 'toile_foncee', "ligne_blanche", $tmp_var, $titre_table, $force, $largeurs, $styles, $fonction_ligne, $arg);
+	return affiche_tranche_bandeau($requete, icone_table($type), NULL, NULL, $tmp_var, $titre_table, $force, $largeurs, $styles, $fonction_ligne, $arg);
 }
 
 // http://doc.spip.org/@afficher_objet_boucle

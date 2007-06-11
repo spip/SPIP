@@ -51,7 +51,7 @@ function inc_informer_auteur_dist($id)
 		}
 	}
 
-	return "<div class='arial2 bordure_foncee toile_blanche' style='padding: 5px; border-top: 0px;'>"
+	return "<div class='informer'>"
 	. (!$res ? '' : $res)
 	. "<div><a href='"
 	. generer_url_ecrire('auteur_infos', "id_auteur=$id")

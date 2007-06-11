@@ -58,9 +58,9 @@ function inc_informer_dist($id, $col, $exclus, $rac, $type)
 	. entites_html($titre)
 	. "\" />"
 	. "</div>"
-	. "<div class='arial2 bordure_foncee toile_blanche' style='padding: 5px; border-top: 0px;'>"
+	. "<div class='informer' style='padding: 5px; border-top: 0px;'>"
 	. (!$res ? '' : $res)
-	. "<div><p><b>$titre</b></p></div>"
+	. "<p><b>$titre</b></p>"
 	. (!$descriptif ? '' : "<div>$descriptif</div>")
 	. "<div style='text-align: $spip_lang_right;'>"
 	. "<input type='submit' class='fondo' value='"

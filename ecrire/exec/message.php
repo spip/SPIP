@@ -106,11 +106,6 @@ function http_auteurs_ressemblants($cherche_auteur, $id_message)
   }
 }
 
-// http://doc.spip.org/@http_visualiser_participants
-function http_visualiser_participants($auteurs_tmp){
-  return bouton_block_depliable(_T('info_nombre_partcipants'),false,"auteurs,ajouter_auteur");
-}
-
 // http://doc.spip.org/@http_ajouter_participants
 function http_ajouter_participants($ze_auteurs, $id_message)
 {	
@@ -185,6 +180,8 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $che
 		. http_auteurs_ressemblants($cherche_auteur , $id_message)
 		. "\n</div>";
 	  }
+	$bouton = bouton_block_depliable(_T('info_nombre_partcipants'),true,"auteurs,ajouter_auteur");
+	echo debut_cadre_enfonce("redacteurs-24.gif", true, '', $bouton, 'participants');
 
 	//
 	// Liste des participants
@@ -195,7 +192,6 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $che
 	$total_dest = spip_num_rows($result_auteurs);
 
 	if ($total_dest > 0) {
-		$couleurs = array('toile_gris_leger','toile_claire');
 		$auteurs_tmp = array();
 		$ze_auteurs = array();
 		$ifond = 0;
@@ -206,8 +202,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $che
 			$id_auteur = $row["id_auteur"];
 			$nom_auteur = typo($row["nom"]);
 			$ze_auteurs[] = $id_auteur;
-			$couleur = $couleurs[$ifond];
-			$ifond = 1 - $ifond;
+			$class = alterner (++$ifond,'row_even','row_odd');
 
 			$aut = "<a href='" .
 				  generer_url_ecrire('auteur_infos',"id_auteur=" . $id_auteur) ."'>". $nom_auteur . "</a>";
@@ -216,28 +211,28 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $che
 					$auteurs_tmp[] = $aut;
 			else $exp = "<div><span class='arial0' style='margin-left: 10px'>".  _T('info_auteur_message') ."</span> $aut</div>";
 
-			list($status, $mail, $nom, $site,) = $formater_auteur($id_auteur);
-			$res .= "<tr>\n<td class='$couleur verdana1 spip_small'>$status $amil $nom $site</td>" .
-			  "\n<td align='right' class='$couleur verdana1 spip_x-small'>" . (($id_auteur == $connect_id_auteur) ?  "&nbsp;" : ("[<a href='" . redirige_action_auteur("editer_message","$id_message/-$id_auteur", 'message', "id_message=$id_message") . "'>$t</a>]")) .  "</td></tr>\n";
-			}
-			echo
-			  http_visualiser_participants(join(', ', $auteurs_tmp) . $exp),
-			  debut_block_depliable(false,"auteurs"),
-			  "\n<table border='0' cellspacing='0' cellpadding='3' width='100%'>",
-			  $res,
-			    "</table>\n",
-			  fin_block();
-	  }
-
-	  if ($statut == 'redac' OR $forcer_dest)
-		  echo http_ajouter_participants(join(',', $ze_auteurs), $id_message);
-	  else {
-		  echo
-		    debut_block_depliable(false,"ajouter_auteur"),
-		    "<br />\n<div style='text-align: right' class='verdana1 spip_small'><a href='" . generer_url_ecrire("message","id_message=$id_message&forcer_dest=oui") . "'>"._T('lien_ajouter_participant')."</a></div>",
-		    fin_block();
+			list($status, $mail, $nom, $site,) = $formater_auteur($id_auteur, $row);
+			$res .= "<tr class='$class'>\n<td class='nom'>$status $amil $nom $site</td>" .
+			  "\n<td align='right' class='lien'>" . (($id_auteur == $connect_id_auteur) ?  "&nbsp;" : ("[<a href='" . redirige_action_auteur("editer_message","$id_message/-$id_auteur", 'message', "id_message=$id_message") . "'>$t</a>]")) .  "</td></tr>\n";
 		}
-	  return $total_dest;
+		echo
+			debut_block_depliable(true,"auteurs"),
+			"\n<table class='spip' width='100%'>",
+			$res,
+			  "</table>\n",
+			fin_block();
+	}
+
+	if ($statut == 'redac' OR $forcer_dest)
+		echo http_ajouter_participants(join(',', $ze_auteurs), $id_message);
+	else {
+		echo
+		  debut_block_depliable(true,"ajouter_auteur"),
+		  "<br />\n<div style='text-align: right' class='verdana1 spip_small'><a href='" . generer_url_ecrire("message","id_message=$id_message&forcer_dest=oui") . "'>"._T('lien_ajouter_participant')."</a></div>",
+		  fin_block();
+	}
+	echo fin_cadre_enfonce(true);
+	return $total_dest;
 }
 
 // http://doc.spip.org/@http_affiche_message
@@ -282,11 +277,8 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 	// Message avec participants
 	//
 	
-	if ($type == 'normal') {
-	  echo debut_cadre_enfonce("redacteurs-24.gif", true);
+	if ($type == 'normal')
 	  $total_dest = http_message_avec_participants($id_message, $statut, $forcer_dest, $cherche_auteur, $expediteur);
-	  fin_cadre_enfonce();
-	}
 
 	if ($rv != "non") http_afficher_rendez_vous($date_heure, $date_fin);
 
@@ -295,9 +287,8 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 	// Le message lui-meme
 	//
 
-	echo "\n<table width='100%' cellpadding='0' cellspacing='0' border='0'>",
-	  "<tr><td>",
-	  "<div class='serif'>$texte</div>";
+	echo "\n<br />"
+	  . "<div class='serif'>$texte</div>";
 
 	if ($les_notes) {
 		echo debut_cadre_relief();

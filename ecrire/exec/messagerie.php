@@ -104,7 +104,9 @@ $result = spip_query("SELECT auteurs.id_auteur, auteurs.nom, COUNT(*) AS total F
 if (spip_num_rows($result) > 0) {
 
 	echo "<div style='height: 12px;'></div>";
-	echo debut_cadre('liste',"redacteurs-24.gif",'',_T('info_principaux_correspondants'));
+	$bouton = bouton_block_depliable(_T('info_principaux_correspondants'),true,'principaux');
+	echo debut_cadre('liste',"redacteurs-24.gif",'',$bouton);
+	echo debut_block_depliable(true,'principaux');
 	echo "<table width='100%' cellpadding='0' cellspacing='0'>";
 	echo "<tr><td valign='top' style='width: 50%'>";
 	$count = 0;
@@ -116,9 +118,10 @@ if (spip_num_rows($result) > 0) {
 		echo "<div class='tr_liste'\nonmouseover=\"changeclass(this,'tr_liste_over');\"\nonmouseout=\"changeclass(this,'tr_liste');\"\nstyle='padding: 2px; padding-left: 10px; border-bottom: 1px solid #cccccc;'><div class='verdana1'><img src='" . _DIR_IMG_PACK . "redac-12.gif'\nstyle='border: 0px' alt=' ' /> <a href='" . generer_url_ecrire("auteur_infos","id_auteur=$id_auteur"), "'>",
 		  $nom,
 		  "</a> ($total)</div></div>";
-		if ($count == ceil(spip_num_rows($result)/2)) echo "</td><td valign='top' style='width: 50%' class='toile_gris_leger'>";
+		if ($count == ceil(spip_num_rows($result)/2)) echo "</td><td valign='top' style='width: 50%'>";
 	}
 	echo "</td></tr></table>";
+	echo fin_block();
 	echo fin_cadre('liste');
 }
 
