@@ -76,7 +76,7 @@ function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
 			if ($titre['type']) $type = $titre['type'];
 			$table = "articles";
 		}
-		if (!$type == 'non') return false;
+		if ($type == 'non') return false;
 	} else {
 		if ($type == 'non') return false;
 		if ($idb) {
@@ -122,6 +122,7 @@ $titre, $table, $type, $script,
 $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic,
 $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 {
+
 	// verifier l'identite des posteurs pour les forums sur abo
 	if ($type == "abo") {
 		if (!$GLOBALS["auteur_session"]) {
