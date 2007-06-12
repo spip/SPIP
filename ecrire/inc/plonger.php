@@ -23,23 +23,48 @@ function inc_plonger_dist($id_rubrique, $idom="", $list=array(), $col = 1, $excl
 	$ret = '';
 
 	# recherche les filles et petites-filles de la rubrique donnee
+	# en excluant une eventuelle rubrique interdite (par exemple, lorsqu'on
+	# deplace une rubrique, on peut la deplacer partout a partir de la
+	# racine... sauf vers elle-meme ou sa propre branche)
 	$ordre = array();
 	$rub = array();
 
-	$res = spip_query("SELECT rub1.id_rubrique, rub1.titre, rub1.id_parent, rub1.lang, rub1.langue_choisie FROM spip_rubriques AS rub1, spip_rubriques AS rub2 WHERE ((rub1.id_parent = $id_rubrique) OR (rub2.id_parent = $id_rubrique AND rub1.id_parent=rub2.id_rubrique)) AND rub1.id_rubrique!=$exclu GROUP BY rub1.id_rubrique");
+	$res = spip_query("
+	SELECT
+		rub1.id_rubrique, rub1.titre, rub1.id_parent, rub1.lang, rub1.langue_choisie
+		FROM spip_rubriques AS rub1
+		WHERE rub1.id_parent = "._q($id_rubrique)."
+		AND rub1.id_rubrique!="._q($exclu)."
+
+	UNION
+
+	SELECT
+		rub1.id_rubrique, rub1.titre, rub1.id_parent, rub1.lang, rub1.langue_choisie
+		FROM spip_rubriques AS rub1, spip_rubriques AS rub2
+		WHERE rub2.id_parent = "._q($id_rubrique)."
+		AND rub1.id_parent=rub2.id_rubrique
+		AND rub1.id_rubrique!="._q($exclu)."
+
+	ORDER BY 0+titre,titre
+	"
+	);
+
 
 	while ($row = spip_fetch_array($res)) {
 		if (autoriser('voir','rubrique',$row['id_rubrique'])){
 			$rub[$row['id_parent']]['enfants'] = true;
-			if ($row['id_parent'] == $id_rubrique)
-				$ordre[$row['id_rubrique']]= trim(typo($row['titre']))
-				. (($row['langue_choisie'] != 'oui')
-				   ? '' : (' [' . $row['lang'] . ']'));
+			if ($row['id_parent'] == $id_rubrique) {
+				$t = trim(typo(supprimer_numero($row['titre'])));
+				if ($row['langue_choisie'] != 'oui')
+					$t .= ' <small title="'
+						.traduire_nom_langue($row['lang'])
+						.'">[' . $row['lang'] . ']</small>';
+					$ordre[$row['id_rubrique']] = $t;
+			}
 		}
 	}
 	$next = isset($list[$col]) ? $list[$col] : 0;
 	if ($ordre) {
-		asort($ordre);
 		$rec = generer_url_ecrire('plonger',"rac=$idom&exclus=$exclu&col=".($col+1));
 		$info = generer_url_ecrire('informer', "type=rubrique&rac=$idom&id=");
 		$args = "'$idom',this,$col,'$spip_lang_left','$info',event";
