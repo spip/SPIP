@@ -2106,9 +2106,9 @@ function image_couleur_extraire($img, $x=10, $y=6) {
 			
 				$thumb = imagecreate($newwidth, $newheight);
 	
-				if (strncmp($terminaison,"jpg",3)) $source = imagecreatefromjpeg($fichier);
-				if (strncmp($terminaison,"gif",3)) $source = imagecreatefromgif($fichier);
-				if (strncmp($terminaison,"png",3)) $source = imagecreatefrompng($fichier);
+				if (strncmp($terminaison,"jpg",3)==0) $source = imagecreatefromjpeg($fichier);
+				if (strncmp($terminaison,"gif",3)==0) $source = imagecreatefromgif($fichier);
+				if (strncmp($terminaison,"png",3)==0) $source = imagecreatefrompng($fichier);
 				imagepalettetotruecolor($source);
 
 				imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
