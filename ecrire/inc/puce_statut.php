@@ -13,25 +13,22 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@inc_puce_statut_dist
-function inc_puce_statut_dist($id_objet, $statut, $id_rubrique, $type)
-{
-  // le function_exists n'est utile qu'au greffons 
+function inc_puce_statut_dist($id_objet, $statut, $id_rubrique, $type) {
+	// le function_exists n'est utile qu'aux greffons
 	if (function_exists($f = "puce_statut_$type"))
 		return $f($id_objet, $statut, $id_rubrique, $type);
-	else return "<img src='"._DIR_IMG_PACK.	"$type-24.gif" . "' />";
+	else
+		return "<img src='"._DIR_IMG_PACK. "$type-24.gif" . "' />";
 }
 
 
 // http://doc.spip.org/@puce_statut_auteur
 function puce_statut_auteur($id, $statut, $id_rubrique, $type) {
-  
 	return bonhomme_statut(array('statut' => $statut));
 }
 
 // http://doc.spip.org/@bonhomme_statut
 function bonhomme_statut($row) {
-	global $connect_statut;
-
 	switch($row['statut']) {
 		case "nouveau":
 			return '';
@@ -41,7 +38,8 @@ function bonhomme_statut($row) {
 					_T('titre_image_administrateur'));
 			break;
 		case "1comite":
-			if ($connect_statut == '0minirezo' AND ($row['source'] == 'spip' AND !($row['pass'] AND $row['login'])))
+			if (($GLOBALS['auteur_session']['statut'] == '0minirezo')
+			AND ($row['source'] == 'spip' AND !($row['pass'] AND $row['login'])))
 			  return http_img_pack("visit-12.gif",_T('titre_image_redacteur'), "", _T('titre_image_redacteur'));
 			else
 			  return http_img_pack("redac-12.gif",_T('titre_image_redacteur'), "", _T('titre_image_redacteur_02'));
@@ -58,7 +56,6 @@ function bonhomme_statut($row) {
 
 // http://doc.spip.org/@puce_statut_mot
 function puce_statut_mot($id, $statut, $id_rubrique, $type) {
-
 	return "<img src='"._DIR_IMG_PACK. 'petite-cle.gif' . "' />";
 }
 
@@ -142,25 +139,25 @@ function puce_statut_breve($id, $statut, $id_rubrique, $type) {
 		       3 => 'puce-blanche-breve.gif');
 
 	switch ($statut) {
-			case 'prop':
-				$clip = 0;
-				$puce = $puces[0];
-				$title = _T('titre_breve_proposee');
-				break;
-			case 'publie':
-				$clip = 1;
-				$puce = $puces[1];
-				$title = _T('titre_breve_publiee');
-				break;
-			case 'refuse':
-				$clip = 2;
-				$puce = $puces[2];
-				$title = _T('titre_breve_refusee');
-				break;
-			default:
-				$clip = 0;
-				$puce = $puces[3];
-				$title = '';
+		case 'prop':
+			$clip = 0;
+			$puce = $puces[0];
+			$title = _T('titre_breve_proposee');
+			break;
+		case 'publie':
+			$clip = 1;
+			$puce = $puces[1];
+			$title = _T('titre_breve_publiee');
+			break;
+		case 'refuse':
+			$clip = 2;
+			$puce = $puces[2];
+			$title = _T('titre_breve_refusee');
+			break;
+		default:
+			$clip = 0;
+			$puce = $puces[3];
+			$title = '';
 	}
 
 	$type1 = "statut$type$id"; 
@@ -187,8 +184,9 @@ function puce_statut_breve($id, $statut, $id_rubrique, $type) {
 // http://doc.spip.org/@puce_statut_site
 function puce_statut_site($id_site, $statut, $id_rubrique, $type){
 
-	$droit = autoriser('publierdans','rubrique',$id_rubrique) ?
-	  'anim' : 'breve';
+	$droit = autoriser('publierdans','rubrique',$id_rubrique)
+		? 'anim'
+		: 'breve';
 	switch ($statut) {
 		case 'publie': 
 			$puce = 'puce-verte-' . $droit .'.gif';
@@ -209,21 +207,19 @@ function puce_statut_site($id_site, $statut, $id_rubrique, $type){
 
 // http://doc.spip.org/@puce_statut_syndic_article
 function puce_statut_syndic_article($id_syndic, $statut, $id_rubrique, $type){
-		if ($statut=='publie') {
-				$puce='puce-verte.gif';
-		}
-		else if ($statut == "refuse") {
-				$puce = 'puce-poubelle.gif';
-		}
-	
-		else if ($statut == "dispo") { // moderation : a valider
-				$puce = 'puce-rouge.gif';
-		}
-	
-		else  // i.e. $statut=="off" feed d'un site en mode "miroir"
-				$puce = 'puce-rouge-anim.gif';
-	
-		return http_img_pack($puce, $statut, "class='puce'");
+	if ($statut=='publie') {
+		$puce='puce-verte.gif';
+	}
+	else if ($statut == "refuse") {
+		$puce = 'puce-poubelle.gif';
+	}
+	else if ($statut == "dispo") { // moderation : a valider
+		$puce = 'puce-rouge.gif';
+	}
+	else  // i.e. $statut=="off" feed d'un site en mode "miroir"
+		$puce = 'puce-rouge-anim.gif';
+
+	return http_img_pack($puce, $statut, "class='puce'");
 }
 
 
@@ -256,13 +252,12 @@ function puce_statut($statut, $atts='') {
 }
 
 // http://doc.spip.org/@afficher_script_statut
-function afficher_script_statut($id, $type, $n, $img, $statut, $titre, $act)
-{
-  $i = http_wrapper($img);
-  $h = generer_action_auteur("instituer_$type","$id-$statut");
-  $h = "javascript:selec_statut('$id', '$type', $n, '$i', '$h');";
-  $t = supprimer_tags($titre);
-  return "<a href=\"$h\"\ntitle=\"$t\"$act><img src='$i' alt=' '/></a>";
+function afficher_script_statut($id, $type, $n, $img, $statut, $titre, $act) {
+	$i = http_wrapper($img);
+	$h = generer_action_auteur("instituer_$type","$id-$statut");
+	$h = "javascript:selec_statut('$id', '$type', $n, '$i', '$h');";
+	$t = supprimer_tags($titre);
+	return "<a href=\"$h\"\ntitle=\"$t\"$act><img src='$i' alt=' '/></a>";
 }
 
 ?>
