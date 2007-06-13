@@ -143,34 +143,10 @@ function calculer_boucle($id_boucle, &$boucles) {
 
 // http://doc.spip.org/@calculer_boucle_rec
 function calculer_boucle_rec($id_boucle, &$boucles) {
-
-  // Moche. Faut revoir la structure de donnees 
-	$x = $boucles[$id_boucle];
-	$l = $x->param;
-	$nom = array_shift($l);
-	$x->param = $l;
-
-	$l = argumenter_inclure($x,
-				array('id_mere' => $id_boucle),
-				$boucles, $id_boucle, false);
-
-	foreach($l as $k=>$v) {
-	  $l[$k] = preg_replace(',(Pile\[)([^[]]*)(\]\[' . "'$k'),",
-				'\1($savenum ? $SP-1 :  \2)\3',
-				substr($v,strpos($v,'=>')+2));
-	}
-	$save = $set = $rest = '';
-	foreach($l as $k=>$v) {
-	  $save .= "\n\t\$save['$k']=\$Pile[\$SP]['$k'];";
-	  $set .= "\n\t\$Pile[\$SP]['$k'] = $v;";
-	  $rest .= "\n\t\$Pile[\$SP]['$k'] = \$save['$k'];";
-	}
-
-	return "\n\tstatic \$savenum=array();spip_log(\"recur \$SP \" . \$Pile[\$SP-1]['prefixe'] );
-	$save
-$set\n\tarray_push(\$savenum, \$Numrows['$nom']);"
-	. "\n\t\$t0 = " . $boucles[$id_boucle]->return . ";\n\nspip_log(\"----recur \$SP $nom\");"
-	. "\n\t\$Numrows['$nom'] = array_pop(\$savenum);$rest";
+	$nom = $boucles[$id_boucle]->param[0];
+	return "\n\t\$save_numrows = (\$Numrows['$nom']);"
+	. "\n\t\$t0 = " . $boucles[$id_boucle]->return . ";"
+	. "\n\t\$Numrows['$nom'] = (\$save_numrows);";
 }
 
 // compil d'une boucle non recursive. 
@@ -481,7 +457,6 @@ function calculer_parties($boucles, $id_boucle) {
 
 // http://doc.spip.org/@calculer_liste
 function calculer_liste($tableau, $descr, &$boucles, $id_boucle='') {
-
 	if (!$tableau) return "''";
 	if (!isset($descr['niv'])) $descr['niv'] = 0;
 	$codes = compile_cas($tableau, $descr, $boucles, $id_boucle);
@@ -563,7 +538,6 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 			  str_replace("-","_", $nom) . $descr['nom'] .
 			  '($Cache, $Pile, $doublons, $Numrows, $SP)';
 			$commentaire= "?$nom";
-			spip_log("%%% $code");
 			$avant = calculer_liste($p->avant,
 				$newdescr, $boucles, $id_boucle);
 			$apres = calculer_liste($p->apres,
@@ -632,7 +606,6 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 			}
 
 		}
-
 		if ($code != "''")
 			$codes[]= (($mode == 'validation') ?
 				"array(" . $p->ligne . ", '$commentaire', $code)"
@@ -755,7 +728,6 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 		if ($boucle->type_requete == 'boucle') {
 			$boucles[$id]->descr = &$descr;
 			$rec = &$boucles[$boucle->param[0]];
-			spip_log("boucle%%%%%%%%% $id " . $rec->type);
 			if (!$rec) {
 				return array(_T('zbug_info_erreur_squelette'),
 						($boucle->param[0]
