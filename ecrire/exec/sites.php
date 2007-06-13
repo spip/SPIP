@@ -105,18 +105,9 @@ function exec_sites_dist()
 
 	debut_cadre_relief("site-24.gif");
 
-	if ($syndication == 'off' OR $syndication == 'sus') {
-		$logo_statut = "puce-orange-anim.gif";
-	} 
-	else if ($statut == 'publie') {
-		$logo_statut = "puce-verte.gif";
-	}
-	else if ($statut == 'prop') {
-		$logo_statut = "puce-blanche.gif";
-	}
-	else if ($statut == 'refuse') {
-		$logo_statut = "puce-rouge.gif";
-	}
+	if ($syndication == 'off' OR $syndication == 'sus') 
+	  $droit = $id_rubrique;
+	else $droit = 0;
 
 	$url_affichee = $url_site;
 
@@ -125,7 +116,8 @@ function exec_sites_dist()
 	if ($flag_editable) {
 		echo icone_inline(_T('icone_modifier_site'), generer_url_ecrire('sites_edit',"id_syndic=$id_syndic"), "site-24.gif", "edit.gif",$spip_lang_right);
 	}
-	echo gros_titre($nom_site, $logo_statut,false);
+	$puce_statut = charger_fonction('puce_statut', 'inc');
+	echo gros_titre($nom_site, $puce_statut(0,$statut,0,'site'), false);
 	echo "<a href='$url_site'><b>$url_affichee</b></a>";
 	echo "<div class='nettoyeur'></div>";
 
