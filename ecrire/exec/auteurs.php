@@ -79,7 +79,7 @@ function bandeau_auteurs($tri, $visiteurs)
 		$ret .= "\n<p class='arial1'>"._T('info_gauche_auteurs'). '</p>';
 
 	if ($connect_statut == '0minirezo')
-		$ret .= "\n<br />". _T('info_gauche_auteurs_exterieurs');
+		$ret .= "\n<p class='arial1'>". _T('info_gauche_auteurs_exterieurs') . '</p>';
 
 	$ret .= fin_boite_info(true);
 
