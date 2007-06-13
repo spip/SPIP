@@ -457,7 +457,8 @@ function afficher_articles_trad_boucle($row)
 	$lang = $row['lang'];
 
 	// La petite puce de changement de statut
-	$vals[] = puce_statut_article($id_article, $statut, $id_rubrique);
+	$puce_statut = charger_fonction('puce_statut', 'inc');
+	$vals[] = $puce_statut($id_article, $statut, $id_rubrique,'article');
 
 	// Le titre (et la langue)
 	

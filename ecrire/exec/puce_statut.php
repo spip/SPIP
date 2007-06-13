@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 
 // http://doc.spip.org/@exec_puce_statut_article_dist
-function exec_puce_statut_article_dist()
+function exec_puce_statut_dist()
 {
 	$id = intval(_request('id'));
 	$type = _request('type');
@@ -30,6 +30,7 @@ function exec_puce_statut_article_dist()
 		$id = 0;
 		$statut = 'prop'; // arbitraire
 	}
-	ajax_retour(puce_statut_article($id,$statut,$id_rubrique,$type, true));
+	$puce_statut = charger_fonction('puce_statut', 'inc');
+	ajax_retour($puce_statut($id,$statut,$id_rubrique,$type, true));
 }
 ?>
