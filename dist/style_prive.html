@@ -330,7 +330,7 @@ div.bandeau_rub {
 }
 
 div.brt {
-	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) #GET{right} center no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) [(#GET{right})] center no-repeat;
 }
 div.pos_r {
 	position: relative;
@@ -790,7 +790,7 @@ div.onglet_off {
 
 
 /* Liens hypertexte */
-a { text-decoration: none; color: #GET{foncee} }
+a { text-decoration: none; color: #GET{foncee}; }
 a:hover { text-decoration: none; }
 a.icone { text-decoration: none; }
 a.icone:hover { text-decoration: none; }
@@ -1246,9 +1246,9 @@ span.icone {
 li.art span.icone {	margin-#GET{left}:0px;}
 
 span.holder {}
-li.sec span.icone { background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=secteur-24.gif) #GET{left} bottom no-repeat;}
-li.rub span.icone {	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=rubrique-24.gif) #GET{left} top no-repeat;}
-li.art span.icone {	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=article-24.gif) #GET{left} top no-repeat;}
+li.sec span.icone { background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=secteur-24.gif) [(#GET{left})] bottom no-repeat;}
+li.rub span.icone {	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=rubrique-24.gif) [(#GET{left})] top no-repeat;}
+li.art span.icone {	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=article-24.gif) [(#GET{left})] top no-repeat;}
 li.sec ul{display:none;}
 li.rub ul{display:none;}
 
@@ -1265,7 +1265,7 @@ li img.expandImage{
 li.selected {background-color: ##GET{claire}}
 
 a.liste-mot {
-	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=petite-cle.gif) #GET{left} center no-repeat; 
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=petite-cle.gif) [(#GET{left})] center no-repeat; 
 	padding-#GET{left}: 30px;
 }
 
@@ -1339,7 +1339,7 @@ div.brouteur_rubrique {
 	border-bottom: 1px solid #GET{foncee};
 	border-left: 1px solid #GET{foncee};
 	border-right: 1px solid #GET{foncee};
-	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif)#GET{right} center no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) [(#GET{right})] center no-repeat;
 	background-color: #fff;
 }
 
@@ -1351,7 +1351,7 @@ div.brouteur_rubrique_on {
 	border-bottom: 1px solid #GET{foncee};
 	border-left: 1px solid #GET{foncee};
 	border-right: 1px solid #GET{foncee};
-	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) #GET{right} center no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) [(#GET{right})] center no-repeat;
 	background-color: #e0e0e0;
 }
 
@@ -1379,28 +1379,28 @@ div.brouteur_rubrique_on div a {
 }
 
 .brouteur_icone_racine {
-	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=racine-site-24.gif) #GET{left} no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=racine-site-24.gif) [(#GET{left})] no-repeat;
 	padding-top: 5px; 
 	padding-bottom: 5px; 
 	padding-#GET{left}: 28px
 }
 
 .brouteur_icone_secteur {
-	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=secteur-24.gif) #GET{left} no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=secteur-24.gif) [(#GET{left})] no-repeat;
 	padding-top: 5px; 
 	padding-bottom: 5px; 
 	padding-#GET{left}: 28px
 }
 
 .brouteur_icone_rubrique {
-	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=rubrique-24.gif) #GET{left} no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=rubrique-24.gif) [(#GET{left})] no-repeat;
 	padding-top: 5px; 
 	padding-bottom: 5px; 
 	padding-#GET{left}: 28px
 }
 
 .brouteur_icone_article {
-	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=article-24.gif) #GET{left} no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=article-24.gif) [(#GET{left})] no-repeat;
 	margin: 3px;
 	padding-top: 5px; 
 	padding-bottom: 5px; 
@@ -1408,7 +1408,7 @@ div.brouteur_rubrique_on div a {
 }
 
 .brouteur_icone_site {
-	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=site-24.gif) #GET{left} center no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=site-24.gif) [(#GET{left})] center no-repeat;
 	margin: 3px;
 	padding-top: 5px; 
 	padding-bottom: 5px; 
@@ -1464,7 +1464,7 @@ a.spip_in {
 	border-bottom: 1px dashed;
 }
 a.spip_out {
-	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=spip_out.gif)#GET{right} center no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=spip_out.gif) [(#GET{right})] center no-repeat;
 	padding-#GET{right}: 10px;
 	border-bottom: 1px solid;
 }
@@ -1586,7 +1586,7 @@ a.triangle_block:hover {
 }
 
 .fond-agenda {
-	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=fond-agenda.gif) #GET{right} center no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=fond-agenda.gif) [(#GET{right})] center no-repeat;
 	float: #GET{left}; 
 	margin-#GET{right}: 3px;
 	padding-#GET{right}: 4px;
@@ -1635,7 +1635,7 @@ div.petit-secteur, a.petit-secteur {
 }
 div.rub-ouverte, a.rub-ouverte {
 	padding-#GET{right}: 10px;
-	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) #GET{right} center no-repeat;
+	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) [(#GET{right})] center no-repeat;
 }
 
 a.ical {
