@@ -30,6 +30,7 @@ function configuration_articles_dist(){
 	$articles_ps = $GLOBALS['meta']["articles_ps"];
 	$articles_redac = $GLOBALS['meta']["articles_redac"];
 	$articles_urlref = $GLOBALS['meta']["articles_urlref"];
+	$articles_redirection = $GLOBALS['meta']["articles_redirection"];
 
 	$res = "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">"
 
@@ -108,6 +109,17 @@ function configuration_articles_dist(){
 	. afficher_choix('articles_urlref', $articles_urlref,
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ")
 	. "</td></tr>\n"
+
+	. "<tr>"
+	. "<td align='$spip_lang_left' class='verdana2'>"
+	. _T('info_redirection')
+	. "</td>"
+	. "<td align='$spip_lang_left' class='verdana2'>"
+	. afficher_choix('articles_redirection', $articles_redirection,
+		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ")
+	. "</td></tr>\n"
+
+
 	. "</table>";
 
 	$res = debut_cadre_relief("", true, "", _T('info_contenu_articles').aide ("confart"))
