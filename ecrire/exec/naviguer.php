@@ -378,11 +378,22 @@ function naviguer_doc ($id, $type = "article", $script, $flag_editable) {
 	global $spip_lang_left;
 
 	if ($GLOBALS['meta']["documents_$type"]!='non' AND $flag_editable) {
-
-	  $joindre = charger_fonction('joindre', 'inc');
-	  $res = debut_cadre_relief("image-24.gif", true, "", _T('titre_joindre_document'))
-	  . $joindre($script, "id_$type=$id", $id, _T('info_telecharger_ordinateur'), 'document', $type,'',0,generer_url_ecrire("documenter","id_rubrique=$id&type=$type",true))
-	  . fin_cadre_relief(true);
+		$joindre = charger_fonction('joindre', 'inc');
+		$res = $joindre(array(
+			'cadre' => 'relief',
+			'icone' => 'image-24.gif',
+			'fonction' => 'creer.gif',
+			'titre' => _T('titre_joindre_document'),
+			'script' => $script,
+			'args' => "id_$type=$id",
+			'id' => $id,
+			'intitule' => _T('info_telecharger_ordinateur'),
+			'mode' => 'document',
+			'type' => $type,
+			'ancre' => '',
+			'id_document' => 0,
+			'iframe_script' => generer_url_ecrire("documenter","id_rubrique=$id&type=$type",true)
+		));
 
 	// eviter le formulaire upload qui se promene sur la page
 	// a cause des position:relative incompris de MSIE

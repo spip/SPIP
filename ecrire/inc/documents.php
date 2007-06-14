@@ -183,17 +183,26 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	}
 	$id_document_actif = _request('show_docs');
 
-	/// Ajouter nouvelle image
 
-	$titre_cadre = _T('bouton_ajouter_image').aide("ins_img");
-
+	// Ajouter nouvelle image
 	$joindre = charger_fonction('joindre', 'inc');
-
 	$ret = "<div id='images'>\n" 
-	  . debut_cadre_relief("image-24.gif", true, "creer.gif", $titre_cadre)
-	. $joindre($script, "id_$type=$id", $id, _T('info_telecharger'),'vignette',$type,'',0,generer_url_ecrire("documents_colonne","id=$id&type=$type",true))
-	. fin_cadre_relief(true)
-	. '</div><br />';
+		. $joindre(array(
+			'cadre' => 'relief',
+			'icone' => 'image-24.gif',
+			'fonction' => 'creer.gif',
+			'titre' => _T('bouton_ajouter_image').aide("ins_img"),
+			'script' => $script,
+			'args' => "id_$type=$id",
+			'id' => $id,
+			'intitule' => _T('info_telecharger'),
+			'mode' => 'vignette',
+			'type' => $type,
+			'ancre' => '',
+			'id_document' => 0,
+			'iframe_script' => generer_url_ecrire("documents_colonne","id=$id&type=$type",true)
+		))
+		. '</div><br />';
 
 	//// Documents associes
 	$res = spip_query("SELECT docs.id_document FROM spip_documents AS docs, spip_documents_".$type."s AS l WHERE l.id_".$type."=$id AND l.id_document=docs.id_document AND docs.mode='document' ORDER BY docs.id_document");
@@ -222,12 +231,23 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	}
 
 	/// Ajouter nouveau document
-	$ret .= "</div><div id='documents'></div>\n<div id='portfolio'></div>\n";
+	$ret .= "</div><br /><br /><div id='documents'></div>\n<div id='portfolio'></div>\n";
 	if (!isset($GLOBALS['meta']["documents_$type"]) OR $GLOBALS['meta']["documents_$type"]!='non') {
-		$titre_cadre = _T('bouton_ajouter_document').aide("ins_doc");
-		$ret .= debut_cadre_enfonce("doc-24.gif", true, "creer.gif", $titre_cadre);
-		$ret .= $joindre($script, "id_$type=$id", $id, _T('info_telecharger_ordinateur'), 'document',$type,'',0,generer_url_ecrire("documents_colonne","id=$id&type=$type",true));
-		$ret .= fin_cadre_enfonce(true);
+		$ret .= $joindre(array(
+			'cadre' => 'enfonce',
+			'icone' => 'doc-24.gif',
+			'fonction' => 'creer.gif',
+			'titre' => _T('bouton_ajouter_document').aide("ins_doc"),
+			'script' => $script,
+			'args' => "id_$type=$id",
+			'id' => $id,
+			'intitule' => _T('info_telecharger'),
+			'mode' => 'document',
+			'type' => $type,
+			'ancre' => '',
+			'id_document' => 0,
+			'iframe_script' => generer_url_ecrire("documents_colonne","id=$id&type=$type",true)
+		));
 	}
 
 	// Afficher les documents lies

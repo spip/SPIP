@@ -174,9 +174,21 @@ function articles_documents($flag_editable, $type, $id)
 	else {
 		$joindre = charger_fonction('joindre', 'inc');
 
-		$res = debut_cadre_relief("image-24.gif", true, "", _T('titre_joindre_document'))
-		. $joindre('articles', "id_article=$id", $id, _T('info_telecharger_ordinateur'), 'document', 'article','',0,generer_url_ecrire("documenter","id_article=$id&type=$type",true))
-		. fin_cadre_relief(true);
+		$res = $joindre(array(
+			'cadre' => 'relief',
+			'icone' => 'image-24.gif',
+			'fonction' => 'creer.gif',
+			'titre' => _T('titre_joindre_document'),
+			'script' => 'articles',
+			'args' => "id_article=$id",
+			'id' => $id,
+			'intitule' => _T('info_telecharger_ordinateur'),
+			'mode' => 'document',
+			'type' => 'article',
+			'ancre' => '',
+			'id_document' => 0,
+			'iframe_script' => generer_url_ecrire("documenter","id_article=$id&type=$type",true)
+		));
 
 	// eviter le formulaire upload qui se promene sur la page
 	// a cause des position:relative incompris de MSIE
@@ -267,9 +279,12 @@ function boites_de_config_articles($id_article)
 // http://doc.spip.org/@boite_article_virtuel
 function boite_article_virtuel($id_article, $virtuel, $flag)
 {
+	if (!strlen($virtuel)
+	AND $GLOBALS['meta']['articles_redirection'] != 'oui')
+		return '';
+
 
 	$virtualiser = charger_fonction('virtualiser', 'inc');
-
 	$masque = $virtualiser($id_article, $flag, $virtuel, "articles", "id_article=$id_article");
 
 	if (!$masque) return '';
