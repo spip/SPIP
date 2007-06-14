@@ -70,27 +70,66 @@ jQuery.fn.toggleother = function(cible) {
 		return this.showother(cible);
 }
 
-// deplier lors du premier hover
-// on le fait subtilement : on attend presque 1sec avant de deplier, periode
-// durant laquelle si la souris  sort du controle, on annule le depliement
-jQuery.fn.showonhover = function(cible) {
-// decommenter pour ne rien faire au hover
-//	return this;
-	if (!this.is('.dejahover'))
-	return this
-		.each(function(){
-			var me = this;
-			var t = setTimeout(function(){
-				jQuery(me)
-				//.addClass('dejahover')
-				.toggleother(cible);
-			}, 350);
-			jQuery(me).one('mouseout', function() {
-				clearTimeout(t);
-			}).click(function(){clearTimeout(t);});
-		});
-}
+// deplier/replier en hover
+// on le fait subtilement : on attend 350ms avant de deplier, periode
+// durant laquelle, si la souris  sort du controle, on annule le depliement
+// idem au repliement, mais avec une periode plus longue (1000s)
+// Cette fonction est appelee a chaque hover d'un bloc depliable
+// la premiere fois, elle initialise le fonctionnement du bloc ; ensuite
+// elle ne fait plus rien
+jQuery.fn.depliant = function(cible) {
+	// premier passage
+	if (!this.is('.depliant')) {
+		var timed = 400;
+		var timer = 700;
 
+		var me = this;
+		this
+		.addClass('depliant')
+
+		// effectuer le premier hover
+		.addClass('hover')
+		.addClass('hoverwait');
+		var t = setTimeout(function(){
+			me
+			.toggleother(cible)
+			.removeClass('hoverwait');
+		},
+			me.is('.deplie') ? timer : timed
+		);
+
+		// programmer les futurs clics
+		me.click(function(e){
+			if (t) { clearTimeout(t); t = null; }
+			// ne pas agir si on clic sur un lien (ou un enfant de...)
+			// sinon agir tout de suite
+			if (!jQuery(e.target).parent('a').length)
+				me
+				.toggleother(cible)
+				.removeClass('hoverwait');
+		})
+
+		// et les futurs hover
+		.hover(function(e){
+			me.addClass('hover')
+			.addClass('hoverwait');
+			if (t) { clearTimeout(t); t = null; }
+			t = setTimeout(function(){
+				me.toggleother(cible)
+				.removeClass('hoverwait');
+				},
+				me.is('.deplie') ? timer : timed
+			);
+		}
+		, function(e){
+			if (t) { clearTimeout(t); t = null; }
+			jQuery(this)
+			.removeClass('hover')
+			.removeClass('hoverwait');
+		})
+	}
+	return this;
+}
 
 
 //
@@ -115,16 +154,14 @@ function slide_horizontal (couche, slide, align, depart, etape ) {
 }
 
 function changerhighlight (couche) {
-	var kids = couche.parentNode.childNodes;
-	for (var i = 0; i < kids.length; i++) {
-		kids[i].className = "pashighlight";
-	}
-	couche.className = "highlight";
+	jQuery(couche)
+	.removeClass('off')
+	.siblings()
+		.not(couche)
+		.addClass('off');
 }
 
-function aff_selection (arg, idom, url, event)
-{
-
+function aff_selection (arg, idom, url, event) {
 	noeud = findObj_forcer(idom);
 	if (noeud) {
 		noeud.style.display = "none";
@@ -325,18 +362,15 @@ function AjaxSqueezeNode(trig, target, f, event)
 // Cette fonction clone le bouton de soumission en hidden
 // Voir l'utilisation dans ajax_action_post dans inc/actions
 
-function AjaxNamedSubmit(input)
-{
-	x=document.createElement('input');
-	x.setAttribute('type', 'hidden');
-	x.setAttribute('name', input.name);
-	x.setAttribute('value', input.value)
-	input.parentNode.appendChild(x);
+function AjaxNamedSubmit(input) {
+	jQuery('<input type="hidden" />')
+	.attr('name', input.name)
+	.attr('value', input.value)
+	.insertAfter(input);
 	return true;
 }
 
-function AjaxRet(res,status, target, callback)
-{
+function AjaxRet(res,status, target, callback) {
 	if (res.aborted) return;
 	if (status=='error') return jQuery(target).html('HTTP Error');
 

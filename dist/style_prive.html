@@ -1594,24 +1594,22 @@ a.triangle_block:hover {
 	color: #666; 
 }
 
-a.highlight, div.highlight {
-	color: #000;
-	padding: 2px;
-	background-color: #GET{claire};
-	display:block;
-}
 
-a.pashighlight, div.pashighlight {
+.highlight, .highlight {
+	padding: 2px;
+	display:block;
 	color: #666;
-	padding: 2px;
 	background-color: white;
-	display:block;
 }
-
-a.highlight:hover, a.pashighlight:hover {
+a.highlight:hover {
 	color: #000;
 	cursor: pointer;
 }
+.highlight.on, .highlight.on {
+	color: #000;
+	background-color: #GET{claire};
+}
+
 
 
 div.petite-racine, a.petite-racine {
@@ -1695,9 +1693,9 @@ div.titrem{
 
 
 /* Deplier / Replier */
-.replie { background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierhaut[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif); }
+.replie, .deplie.hoverwait { background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierhaut[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif); }
 .hover { background-color: #GET{claire}; }
-.deplie { background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierbas.gif); }
+.deplie, .replie.hoverwait { background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierbas.gif); }
 .impliable {}
 .blocreplie { display: none; }
 .blocdeplie { display: block; background: none; }

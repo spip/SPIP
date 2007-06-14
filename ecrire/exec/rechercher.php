@@ -107,7 +107,7 @@ function proposer_item ($ids, $titles, $rac, $type)
 				
 		$titre = strtr(str_replace("'", "&#8217;", str_replace('"', "&#34;", textebrut($titles[$id]["titre"]))), "\n\r", "  ");
 
-		$ret .= "<div class='pashighlight'\nonclick=\"changerhighlight(this); "
+		$ret .= "<div class='highlight off'\nonclick=\"changerhighlight(this); "
 		. $onClick
 		. "\"\nondblclick=\""
 		. $ondbClick

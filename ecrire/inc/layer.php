@@ -61,7 +61,7 @@ function fin_block() {
 function bouton_block_depliable($texte,$deplie,$ids=""){
 	if (!_SPIP_AJAX) $deplie=true; // forcer un bouton deplie si pas de js
 	$bouton_id = 'b'.substr(md5($texte.microtime()),0,8);
-	$class= ($deplie===true)?" deplie":(($deplie==-1)?" impliable":" replie");
+	$class = ($deplie===true)?" deplie":(($deplie==-1)?" impliable":" replie");
 	if (strlen($ids)){
 		$cible = explode(',',$ids);
 		$cible = '#'.implode(",#",$cible);
@@ -69,22 +69,16 @@ function bouton_block_depliable($texte,$deplie,$ids=""){
 	else{
 		$cible = "#$bouton_id + div.bloc_depliable";
 	}
-	$extra_js = "";
-	if (($deplie!==-1) && ($a = extraire_balise($texte,'a'))){
-		$ar = inserer_attribut($a,'onclick','return false;',false);
-		$texte = str_replace($a,$ar,$texte);
-		$extra_js .= "\njQuery('#$bouton_id a').dblclick(function(){window.location.replace($(this).attr('href'));});";
-	}
-	if ($deplie==='incertain')
-		$extra_js .= "\nif (jQuery('$cible').is(':visible')) $('#$bouton_id').addClass('deplie').removeClass('replie');";
+	$extra_js = ($deplie==='incertain')
+		? "\nif (jQuery('$cible').is(':visible')) $('#$bouton_id').addClass('deplie').removeClass('replie');"
+		: '';
 
 	return "<div "
 	  .($bouton_id?"id='$bouton_id' ":"")
 	  ."class='titrem$class'"
-	  . (($deplie===-1)?"":
-	  " onclick=\"jQuery(this).toggleother('$cible');\""
-	  ." onmouseover=\"jQuery(this).addClass('hover').showonhover('$cible');\""
-	  ." onmouseout=\"jQuery(this).removeClass('hover');\""
+	  . (($deplie===-1)
+	  	?""
+	  	:" onmouseover=\"jQuery(this).depliant('$cible');\""
 	  )
 	  .">$texte</div>"
 	  . (strlen($extra_js)?"<script><!--

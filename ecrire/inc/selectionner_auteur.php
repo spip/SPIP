@@ -49,7 +49,7 @@ function selectionner_auteur_boucle($query, $idom)
 		// autour de la valeur pertinente pour que aff_selection
 		// fonctionne (faudrait concentrer tout ca).
 
-		$res .= "<a class='pashighlight'"
+		$res .= "<a class='highlight off'"
 		. "\nonclick=\"changerhighlight(this);"
 		. "findObj_forcer('nouv_auteur').value="
 		. $id
