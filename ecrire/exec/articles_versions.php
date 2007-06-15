@@ -30,15 +30,15 @@ function exec_articles_versions_dist()
 
 	$id_article = intval($id_article);
 	$row = spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article='$id_article'"));
-	$commencer_page = charger_fonction('commencer_page', 'inc');
+
 	if (!autoriser('voirrevisions', 'article', $id_article) 
 		OR !$row) {
-		echo $commencer_page(_T('info_historique'), "naviguer", "articles", isset($row["id_rubrique"])?$row["id_rubrique"]:0);
-		echo "<strong>"._T('avis_acces_interdit')."</strong>";
-		echo fin_page();
+		include_spip('inc/minipres');
+		echo minipres();
 		exit;
 	}
 
+	$commencer_page = charger_fonction('commencer_page', 'inc');
 	$id_article = $row["id_article"];
 	$id_rubrique = $row["id_rubrique"];
 	$titre_defaut = $titre = $row["titre"];
@@ -66,21 +66,21 @@ function exec_articles_versions_dist()
 
 	echo $commencer_page(_T('info_historique')." &laquo; $titre &raquo;", "naviguer", "articles", $id_rubrique);
 
-	debut_grand_cadre();
+	echo debut_grand_cadre(true);
 
 	echo afficher_hierarchie($id_rubrique);
 
-	fin_grand_cadre();
+	echo fin_grand_cadre(true);
 
 
 //////////////////////////////////////////////////////
 // Affichage de la colonne de gauche
 //
 
-debut_gauche();
+	debut_gauche();
 
-echo bloc_des_raccourcis(icone_horizontale(_T('icone_retour_article'), generer_url_ecrire("articles","id_article=$id_article"), "article-24.gif","rien.gif", false) .
-		    icone_horizontale(_T('icone_suivi_revisions'), generer_url_ecrire("suivi_revisions",""), "historique-24.gif","rien.gif", false));
+	echo bloc_des_raccourcis(icone_horizontale(_T('icone_retour_article'), generer_url_ecrire("articles","id_article=$id_article"), "article-24.gif","rien.gif", false) .
+				 icone_horizontale(_T('icone_suivi_revisions'), generer_url_ecrire("suivi_revisions",""), "historique-24.gif","rien.gif", false));
 
 
 
@@ -88,108 +88,111 @@ echo bloc_des_raccourcis(icone_horizontale(_T('icone_retour_article'), generer_u
 // Affichage de la colonne de droite
 //
 
-debut_droite();
+	debut_droite();
 
- $lang_dir = lang_dir(changer_typo($lang));
+	$lang_dir = lang_dir(changer_typo($lang));
 
-debut_cadre_relief();
+	echo debut_cadre_relief(true);
 
 //
 // Titre, surtitre, sous-titre
 //
 
-echo "\n<table id='diff' cellpadding='0' cellspacing='0' border='0' width='100%'>";
-echo "<tr><td style='width: 100%' valign='top'>";
-if ($surtitre) {
-	echo "<span  dir='$lang_dir'><span class='arial1 spip_medium'><b>", propre_diff($surtitre), "</b></span></span>\n";
+	echo "\n<table id='diff' cellpadding='0' cellspacing='0' border='0' width='100%'>";
+	echo "<tr><td style='width: 100%' valign='top'>";
+	if ($surtitre) {
+		echo "<span  dir='$lang_dir'><span class='arial1 spip_medium'><b>", propre_diff($surtitre), "</b></span></span>\n";
 }
- echo gros_titre(propre_diff($titre), puce_statut($statut_article, " style='vertical-align: bottom'") . " &nbsp; ", true);
+	echo gros_titre(propre_diff($titre), puce_statut($statut_article, " style='vertical-align: bottom'") . " &nbsp; ", true);
 
-if ($soustitre) {
-	echo "<span  dir='$lang_dir'><span class='arial1 spip_medium'><b>", propre_diff($soustitre), "</b></span></span>\n";
-}
-
-
-if ($descriptif OR $url_site OR $nom_site) {
-	echo "<div style='text-align: $spip_lang_left; padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;'  dir='$lang_dir'>";
-	$texte_case = ($descriptif) ? "{{"._T('info_descriptif')."}} $descriptif\n\n" : '';
-	$texte_case .= ($nom_site.$url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
-	echo "<span class='verdana1 spip_small'>", propre($texte_case), "</span>";
-	echo "</div>";
+	if ($soustitre) {
+		echo "<span  dir='$lang_dir'><span class='arial1 spip_medium'><b>", propre_diff($soustitre), "</b></span></span>\n";
 }
 
-echo "</td><td>";
+
+	if ($descriptif OR $url_site OR $nom_site) {
+		echo "<div style='text-align: $spip_lang_left; padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;'  dir='$lang_dir'>";
+		$texte_case = ($descriptif) ? "{{"._T('info_descriptif')."}} $descriptif\n\n" : '';
+		$texte_case .= ($nom_site.$url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
+		echo "<span class='verdana1 spip_small'>", propre($texte_case), "</span>";
+		echo "</div>";
+	}
+
+	echo "</td><td>";
 
 // Icone de modification
-if (autoriser('modifier', 'article', $id_article))
-	echo icone_inline(
+	if (autoriser('modifier', 'article', $id_article))
+		echo icone_inline(
 		_T('icone_modifier_article').'<br />('._T('version')." $id_version)",
 		generer_url_ecrire("articles_edit",
 			"id_article=$id_article".((!$last_version)?"&id_version=$id_version":"")),
 		"article-24.gif",
 		"edit.gif",
 		$spip_lang_right
-	);
+		);
 
-echo "</td>";
+	echo "</td>";
 
-echo "</tr></table>";
+	echo "</tr></table>";
 
-fin_cadre_relief();
+	echo fin_cadre_relief(true);
 
 //////////////////////////////////////////////////////
 // Affichage des versions
 //
 
-debut_cadre_relief();
 
-$result = spip_query("SELECT id_version, titre_version, date, id_auteur	FROM spip_versions WHERE id_article=$id_article ORDER BY id_version DESC");
+	$result = spip_query("SELECT id_version, titre_version, date, id_auteur	FROM spip_versions WHERE id_article=$id_article ORDER BY id_version DESC");
 
+	$zap = spip_num_rows($result);
+
+	if (!$zap) return; 
+
+	debut_cadre_relief();
 // s'il y en a trop on en zappe (pagination a la va-vite)
-$zap = (spip_num_rows($result) > 50);
-$zaps = '<li>...</li>';
-$zapn = 0;
+	$zap = ($zap > 50);
+	$zaps = '<li>...</li>';
+	$zapn = 0;
 
-echo "<ul class='verdana3'>";
-while ($row = spip_fetch_array($result)) {
+	echo "<ul class='verdana3'>";
+	while ($row = spip_fetch_array($result)) {
 
 	// points de pagination
-	if ($zap
-	AND $zapn++>10
-	AND abs($id_version - $row['id_version']) > 20) {
-		echo $zaps;
-		$zaps = '';
-		if ($id_version > $row['id_version']) {
-			echo '<li>...</li>';
-			break;
+		if ($zap
+		    AND $zapn++>10
+		    AND abs($id_version - $row['id_version']) > 20) {
+			echo $zaps;
+			$zaps = '';
+			if ($id_version > $row['id_version']) {
+				echo '<li>...</li>';
+				break;
+			}
+			continue;
 		}
-		continue;
-	}
 
-	echo "<li>\n";
-	$date = affdate_heure($row['date']);
-	$version_aff = $row['id_version'];
-	$titre_version = typo($row['titre_version']);
-	$titre_aff = $titre_version ? $titre_version : $date;
-	if ($version_aff != $id_version) {
-		$lien = parametre_url(self(), 'id_version', $version_aff);
-		$lien = parametre_url($lien, 'id_diff', '');
-		echo "<a href='".($lien.'#diff')."' title=\""._T('info_historique_affiche')."\">$titre_aff</a>";
-	}
-	else {
-		echo "<b>$titre_aff</b>";
-	}
-
-	if (isset($row['id_auteur'])) {
-		if ($row['id_auteur'] == intval($row['id_auteur'])
-		AND $s = spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur='".addslashes($row['id_auteur'])."'")) {
-			$t = spip_fetch_array($s);
-			echo " (".typo($t['nom']).")";
+		echo "<li>\n";
+		$date = affdate_heure($row['date']);
+		$version_aff = $row['id_version'];
+		$titre_version = typo($row['titre_version']);
+		$titre_aff = $titre_version ? $titre_version : $date;
+		if ($version_aff != $id_version) {
+			$lien = parametre_url(self(), 'id_version', $version_aff);
+			$lien = parametre_url($lien, 'id_diff', '');
+			echo "<a href='".($lien.'#diff')."' title=\""._T('info_historique_affiche')."\">$titre_aff</a>";
 		} else {
-			echo " (".$row['id_auteur'].")"; #IP edition anonyme
+			echo "<b>$titre_aff</b>";
 		}
-	}
 
+		if (isset($row['id_auteur'])) {
+			if ($row['id_auteur'] == intval($row['id_auteur'])
+			AND $s = spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur='".addslashes($row['id_auteur'])."'")) {
+				$t = spip_fetch_array($s);
+				echo " (".typo($t['nom']).")";
+			} else {
+				echo " (".$row['id_auteur'].")"; #IP edition anonyme
+			}
+		}
+		
 	if ($version_aff != $id_version) {
 		echo " <span class='verdana2'>";
 		if ($version_aff == $id_diff) {
@@ -202,7 +205,7 @@ while ($row = spip_fetch_array($result)) {
 			"'>"._T('info_historique_comparaison')."</a>)";
 		}
 		echo "</span>";
-	}
+		}
 	echo "</li>\n";
 }
 echo "</ul>\n";
@@ -255,7 +258,7 @@ if ($id_version) {
 	}
 }
 
-fin_cadre_relief();
+echo fin_cadre_relief();
 
 
 echo  fin_gauche(), fin_page();
