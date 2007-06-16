@@ -65,6 +65,9 @@ function exec_configuration_dist(){
 	echo $futurs();
 	echo fin_cadre_trait_couleur(true);
 
+	$rubriques = charger_fonction('rubriques', 'configuration');
+	echo $rubriques();
+
 	$breves = charger_fonction('breves', 'configuration');
 	echo $breves();
 

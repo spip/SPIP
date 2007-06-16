@@ -171,7 +171,7 @@ function editer_article_soustitre($soustitre, $config, $aider)
 // http://doc.spip.org/@editer_article_descriptif
 function editer_article_descriptif($descriptif, $config, $aider)
 {
-	if (($config['articles_descriptif'] == "non") AND !$descriptif)
+	if (($config['articles_descriptif'] == "non") AND !strlen($descriptif))
 		return '';
 
 	$msg = _T('texte_contenu_article');

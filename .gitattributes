@@ -434,6 +434,7 @@ ecrire/configuration/redacteurs.php -text
 ecrire/configuration/reducteur.php -text
 ecrire/configuration/referenceur.php -text
 ecrire/configuration/relayeur.php -text
+ecrire/configuration/rubriques.php -text
 ecrire/configuration/syndications.php -text
 ecrire/configuration/transcodeur.php -text
 ecrire/configuration/versionneur.php -text
