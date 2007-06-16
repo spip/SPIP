@@ -250,8 +250,8 @@ function autoriser_groupemots_modifier_dist($faire, $type, $id, $qui, $opt) {
 // http://doc.spip.org/@autoriser_mot_modifier_dist
 function autoriser_mot_modifier_dist($faire, $type, $id, $qui, $opt) {
 	return
-	isset($opt['id_groupe']))
-		? autoriser('modifier', 'groupemots', $opt['id_groupe'], $qui, $opt);
+	isset($opt['id_groupe'])
+		? autoriser('modifier', 'groupemots', $opt['id_groupe'], $qui, $opt)
 		: (
 			$s = spip_query(
 				"SELECT id_groupe FROM spip_mots WHERE id_mot="._q($id)
