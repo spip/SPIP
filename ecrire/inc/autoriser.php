@@ -56,6 +56,10 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 
 	if (_DEBUG_AUTORISER) spip_log("autoriser $faire $type $id ($qui[nom]) ?");
 
+	// Aliases pour les types pas generiques (a etendre et ameliorer)
+	if ($type == 'groupes_mot') $type = 'groupemots';
+	#if ($type == 'syndic_article') $type = 'syndicarticle';
+
 	// Chercher une fonction d'autorisation explicite
 	if (
 	// 1. Sous la forme "autoriser_type_faire"
