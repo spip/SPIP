@@ -42,7 +42,7 @@ global $ajouter_id_article, $champs_extra, $connect_statut, $descriptif, $id_gro
 		$id_groupe = $row['id_groupe'];
 		$onfocus ='';
 	 } else {
-		if (!$new OR !autoriser('modifier','groupemots',$id_groupe)) {
+		if (!$new OR !autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe))) {
 			include_spip('inc/minipres');
 			echo minipres(_T('info_mot_sans_groupe'));
 			exit;
@@ -92,7 +92,7 @@ global $ajouter_id_article, $champs_extra, $connect_statut, $descriptif, $id_gro
 
 		// Logos du mot-clef
 
-		if (autoriser('modifier','groupemots',$id_groupe) AND ($spip_display != 4)) {
+		if (autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe)) AND ($spip_display != 4)) {
 			$iconifier = charger_fonction('iconifier', 'inc');
 			$out .= $iconifier('id_mot', $id_mot, 'mots_edit');
 		}
@@ -169,7 +169,7 @@ global $ajouter_id_article, $champs_extra, $connect_statut, $descriptif, $id_gro
 
 	$out .= pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
 
-	if (autoriser('modifier','groupemots',$id_groupe)){
+	if (autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe))){
 
 		$out .= debut_cadre_formulaire('',true);
 
