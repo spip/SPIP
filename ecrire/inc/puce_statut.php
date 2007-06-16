@@ -25,6 +25,7 @@ function inc_puce_statut_dist($id_objet, $statut, $id_rubrique, $type, $ajax=fal
 // http://doc.spip.org/@puce_statut_auteur
 // Hack de compatibilite: les appels directs ont un  $type != 'auteur'
 // si l'auteur ne peut pas se connecter
+// http://doc.spip.org/@puce_statut_auteur
 function puce_statut_auteur($id, $statut, $id_rubrique, $type, $ajax='') {
 	switch($statut) {
 		case "nouveau":
