@@ -1192,10 +1192,10 @@ function http_calendrier_messages($annee='', $mois='', $jour='', $heures='')
 
 // http://doc.spip.org/@http_calendrier_rv
 function http_calendrier_rv($messages, $type) {
-	global $spip_lang_rtl, $spip_lang_left, $spip_lang_right, $connect_id_auteur, $connect_quand;
 
 	$total = $date_rv = '';
 	if (!$messages) return $total;
+	$connect_quand = $GLOBALS['auteur_session']['quand'];
 
 	foreach ($messages as $row) {
 		$rv = ($row['LOCATION'] == 'oui');
@@ -1270,12 +1270,13 @@ function calendrier_categories($table, $num, $objet)
 // http://doc.spip.org/@http_calendrier_ics_message
 function http_calendrier_ics_message($annee, $mois, $jour, $large)
 {	
-  global $connect_login;
+
+  if (!autoriser('ecrire')) return '';
+
   $b = _T("lien_nouvea_pense_bete");
   $v = _T("lien_nouveau_message");
   $j=  _T("lien_nouvelle_annonce");
 
-  if (!$connect_login) return '';
   return "&nbsp;" .
     http_href(generer_action_auteur("editer_message","pb/$annee-$mois-$jour"), 
 	       ($large ? $b : '&nbsp;'), 
@@ -1300,8 +1301,9 @@ function http_calendrier_ics_message($annee, $mois, $jour, $large)
 // http://doc.spip.org/@http_calendrier_aide_mess
 function http_calendrier_aide_mess()
 {
-  global $spip_lang_left, $connect_login;
-  if (!$connect_login) return '';
+  global $spip_lang_left;
+
+  if (!autoriser('ecrire')) return '';
   return
    "\n<br /><br /><br />\n<table width='700' class='arial1 spip_xx-small'>\n<tr><th style='text-align: $spip_lang_left; font-weight: bold;'> " . _T('info_aide').
     "</th></tr><tr><td class='pense-bete'>" ._T('info_symbole_bleu')."\n" .
