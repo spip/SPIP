@@ -1320,18 +1320,30 @@ function balise_TOTAL_UNIQUE_dist($p) {
 //
 // http://doc.spip.org/@balise_ARRAY_dist
 function balise_ARRAY_dist($p) {
-	$_code= "";
+	$_code = array();
 	$n=1;
-	$_key = interprete_argument_balise($n++,$p);
-	$_val = interprete_argument_balise($n++,$p);
-	while ($_key && $_val){
-		$_code .= ", $_key => $_val";
+	do {
 		$_key = interprete_argument_balise($n++,$p);
 		$_val = interprete_argument_balise($n++,$p);
-	}
-	if (strlen($_code))
-		$_code = substr($_code,2);
-	$p->code = "array($_code)";
+		if ($_key AND $_val) $_code[] = "$_key => $_val";
+	} while ($_key && $_val);
+	$p->code = 'array(' . join(', ',$_code).')';
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+
+// Appelle la fonction autoriser et renvoie ' ' si OK, '' si niet
+// A noter : la priorite des operateurs exige && plutot que AND
+// Par nature cette balise doit etre utilisee dans #CACHE{0} ou dans
+// un contexte lie au profil du visiteur
+// http://doc.spip.org/@balise_AUTORISER_dist
+function balise_AUTORISER_dist($p) {
+	$_code = array();
+	$n=1;
+	while ($_v = interprete_argument_balise($n++,$p))
+		$_code[] = $_v;
+	$p->code = '(include_spip("inc/autoriser")&&autoriser(' . join(', ',$_code).')?" ":"")';
 	$p->interdire_scripts = false;
 	return $p;
 }

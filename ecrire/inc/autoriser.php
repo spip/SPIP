@@ -471,4 +471,12 @@ function liste_rubriques_auteur($id_auteur, $raz=false) {
 	return $restreint[$id_auteur] = $rubriques;
 }
 
+// Deux fonctions sans surprise pour permettre les tests
+// Dire toujours OK
+// http://doc.spip.org/@autoriser_ok_dist
+function autoriser_ok_dist($faire, $type, $id, $qui, $opt) { return true; }
+// Dire toujours niet
+// http://doc.spip.org/@autoriser_niet_dist
+function autoriser_niet_dist($faire, $type, $id, $qui, $opt) { return false; }
+
 ?>
