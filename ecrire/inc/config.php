@@ -183,6 +183,7 @@ function appliquer_modifs_config() {
 		ecrire_meta('accepter_visiteurs', 'oui');
 
 	// Test du proxy : $tester_proxy est le bouton "submit"
+	include_spip('configuration/relayeur');
 	configuration_relayeur_post(_request('http_proxy'), _request('http_noproxy'), _request('test_proxy'), _request('tester_proxy'));
 
 	// Activer le moteur : dresser la liste des choses a indexer
