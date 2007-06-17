@@ -190,7 +190,7 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 	$res .= "</th></tr>\n";
 
 	if ($nombre_auteurs > $max_par_page) {
-		$res .= "\n<tr class='' ><td colspan='5'><div class='arial1 tranches'><div>";
+		$res .= "\n<tr class='' ><td colspan='5'><div class='arial1 tranches'>";
 
 		for ($j=0; $j < $nombre_auteurs; $j+=$max_par_page) {
 			if ($j > 0) 	$res .= " | ";

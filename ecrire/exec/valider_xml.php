@@ -16,16 +16,13 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_valider_xml_dist
 function exec_valider_xml_dist()
 {
-	if ($GLOBALS['connect_statut'] != '0minirezo') {
+	if (!autoriser('ecrire')) {
 		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	}
 
 	$titre = _T('analyse_xml');
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-
-	echo $commencer_page($titre);
 
 	$url = urldecode(_request('var_url'));
 
@@ -62,6 +59,9 @@ function exec_valider_xml_dist()
 		}
 	}
 
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+
+	echo $commencer_page($titre);
 	$onfocus = '<input type="text" size="70" value="' .$url_aff .'" name="var_url" onfocus="'.$onfocus . '" />';
 	$onfocus = generer_form_ecrire('valider_xml', $onfocus, " method='get'");
 
