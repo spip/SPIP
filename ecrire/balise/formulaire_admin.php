@@ -123,19 +123,17 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	// Bouton "preview" si l'objet demande existe et est previsualisable
 	$preview = false;
 
-	if (!$GLOBALS['var_preview'] AND (
-	(($GLOBALS['meta']['preview']=='1comite'
-		AND $statut =='1comite')
-	OR ($GLOBALS['meta']['preview']<>''
-		AND $statut =='0minirezo'))
-	)) {
-		$p = ($objet_affiche == 'article' AND $GLOBALS['meta']['post_dates'] != 'oui');
+	if (!$GLOBALS['var_preview']) {
+		include_spip('inc/autoriser');
+		if (autoriser('previsualiser')) {
+			$p = ($objet_affiche == 'article' AND $GLOBALS['meta']['post_dates'] != 'oui');
 
-		if ($objet_affiche == 'article'
-		OR $objet_affiche == 'breve'
-		OR $objet_affiche == 'rubrique'
-		OR $objet_affiche == 'syndic')
-		  $preview = spip_num_rows(spip_query("SELECT id_$objet_affiche FROM spip_".table_objet($objet_affiche)." WHERE ".id_table_objet($objet_affiche)."=".$$_id_type." AND ((statut IN ('prop', 'prive')) " . (!$p ? '' : "OR (statut='publie' AND date>NOW())") .")"));
+			if ($objet_affiche == 'article'
+			OR $objet_affiche == 'breve'
+			OR $objet_affiche == 'rubrique'
+			OR $objet_affiche == 'syndic')
+				$preview = spip_num_rows(spip_query("SELECT id_$objet_affiche FROM spip_".table_objet($objet_affiche)." WHERE ".id_table_objet($objet_affiche)."=".$$_id_type." AND ((statut IN ('prop', 'prive')) " . (!$p ? '' : "OR (statut='publie' AND date>NOW())") .")"));
+		}
 	}
 
 	//

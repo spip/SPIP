@@ -1534,16 +1534,13 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af =
 	if ($en_ligne == 'calcul')
 		$message = _T('icone_voir_en_ligne');
 	else if ($en_ligne == 'preview') {
-		// est-ce autorise ?
-		if (($GLOBALS['meta']['preview'] == 'oui' AND $connect_statut=='0minirezo')
-			OR ($GLOBALS['meta']['preview'] == '1comite'))
+		if (autoriser('previsualiser'))
 			$message = _T('previsualiser');
 		else
-			$message = '';
+			return '';
 	}
 
-	if ($message)
-	  return icone_horizontale($message, generer_url_action('redirect', "id_$type=$id&var_mode=$en_ligne"), $image, "rien.gif", $af);
+	return icone_horizontale($message, generer_url_action('redirect', "id_$type=$id&var_mode=$en_ligne"), $image, "rien.gif", $af);
 
 }
 

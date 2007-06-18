@@ -111,6 +111,13 @@ function autoriser_ecrire_dist($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
+function autoriser_previsualiser_dist($faire, $type, $id, $qui, $opt) {
+
+	return ($GLOBALS['meta']['preview'] == '1comite'
+		OR ($GLOBALS['meta']['preview']== 'oui' AND
+		    $qui['statut']=='0minirezo')); 
+}
+
 // Autoriser a publier dans la rubrique $id
 // http://doc.spip.org/@autoriser_rubrique_publierdans_dist
 function autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt) {
