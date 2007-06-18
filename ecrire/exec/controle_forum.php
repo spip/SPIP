@@ -198,7 +198,7 @@ function exec_controle_forum_dist()
 {
 	$id_rubrique = intval(_request('id_rubrique'));
 
-	if (autoriser('publierdans','rubrique',$id_rubrique)) {
+	if (!autoriser('publierdans','rubrique',$id_rubrique)) {
 		include_spip('inc/minipres');
 		echo minipres();
 		exit;
