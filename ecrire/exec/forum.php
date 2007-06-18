@@ -36,6 +36,7 @@ function exec_forum_dist()
 	forum_affiche(intval(_request('debut')));
 }
 
+// http://doc.spip.org/@forum_affiche
 function forum_affiche($debut, $admin=false)
 {
 	pipeline('exec_init',array('args'=>array('exec'=>'forum'),'data'=>''));

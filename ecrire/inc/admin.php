@@ -40,6 +40,7 @@ function inc_admin_dist($script, $titre, $comment='', $retour='')
 	if ($retour) redirige_par_entete($retour);
 }
 
+// http://doc.spip.org/@dir_admin
 function dir_admin()
 {
 	if (autoriser('configurer')) {
