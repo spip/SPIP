@@ -14,9 +14,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@exec_forum_admin_dist
 function exec_forum_admin_dist() {
-	include_spip('exec/forum');
-	$GLOBALS['admin'] = 'oui';
-	exec_forum_dist();
-}
 
+  if (!autoriser('configurer')) {
+	include_spip('inc/minipres');
+	echo minipres();
+  } else {
+	include_spip('exec/forum');
+	forum_affiche(intval(_request('debut')), true);
+  }
+}
 ?>
