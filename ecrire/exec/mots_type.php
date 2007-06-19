@@ -17,11 +17,11 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_mots_type_dist
 function exec_mots_type_dist()
 {
-	global $connect_statut, $descriptif, $id_groupe, $new, $options, $texte, $titre;
+	$id_groupe= intval(_request('id_groupe'));
 
-	if ($new == "oui") {
-	  $id_groupe = 0;
-	  $type = filtrer_entites(_T('titre_nouveau_groupe'));
+	if (!$id_groupe) {
+
+	  $type = $titre = filtrer_entites(_T('titre_nouveau_groupe'));
 	  $onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 	  $ancien_type = '';
 	  $unseul = 'non';
@@ -33,11 +33,12 @@ function exec_mots_type_dist()
 	  $acces_minirezo = 'oui';
 	  $acces_comite = 'oui';
 	  $acces_forum = 'non';
+	  $row = array();
 	} else {
-		$id_groupe= intval($id_groupe);
+
 		$result_groupes = spip_query("SELECT * FROM spip_groupes_mots WHERE id_groupe=$id_groupe");
 
-		while($row = spip_fetch_array($result_groupes)) {
+		if ($row = spip_fetch_array($result_groupes)) {
 			$id_groupe = $row['id_groupe'];
 			$type = $row['titre'];
 			$titre = typo($type);
@@ -56,6 +57,13 @@ function exec_mots_type_dist()
 		}
 	}
 
+	if (($id_groupe AND !$row) OR
+	    !autoriser($id_groupe?'modifier' : 'creer', 'groupemots', $id_groupe)) {
+		include_spip('inc/minipres');
+		echo minipres();
+		exit;
+	}
+
 	pipeline('exec_init',array('args'=>array('exec'=>'mots_type','id_groupe'=>$id_groupe),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page("&laquo; $titre &raquo;", "naviguer", "mots");
@@ -66,12 +74,6 @@ function exec_mots_type_dist()
 	creer_colonne_droite();
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_type','id_groupe'=>$id_groupe),'data'=>''));
 	debut_droite();
-
-	if (!autoriser($id_groupe?'modifier' : 'creer', 'groupemots', $id_groupe)) {
-		echo "<h3>"._T('avis_non_acces_page')."</h3>";
-		exit;
-	}
-
 
 	$type = entites_html(rawurldecode($type));
 
