@@ -21,13 +21,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://www.spip.net/@racine
 // http://doc.spip.org/@critere_racine_dist
 function critere_racine_dist($idb, &$boucles, $crit) {
+	global $exceptions_des_tables;
 	$not = $crit->not;
 	$boucle = &$boucles[$idb];
+	$id_parent = isset($exceptions_des_tables[$boucle->id_table]['id_parent']) ?
+		$exceptions_des_tables[$boucle->id_table]['id_parent'] :
+		'id_parent';
 
 	if ($not)
 		erreur_squelette(_T('zbug_info_erreur_squelette'), $crit->op);
 
-	$boucle->where[]= array("'='", "'$boucle->id_table." . "id_parent'", 0);
+	$boucle->where[]= array("'='", "'$boucle->id_table." . "$id_parent'", 0);
 }
 
 // {exclus}
@@ -210,11 +214,15 @@ function critere_origine_traduction_dist($idb, &$boucles, $crit) {
 // http://www.spip.net/@meme_parent
 // http://doc.spip.org/@critere_meme_parent_dist
 function critere_meme_parent_dist($idb, &$boucles, $crit) {
+	global $exceptions_des_tables;
 	$boucle = &$boucles[$idb];
 	$arg = kwote(calculer_argument_precedent($idb, 'id_parent', $boucles));
-	$mparent = $boucle->id_table . '.id_parent';
+	$id_parent = isset($exceptions_des_tables[$boucle->id_table]['id_parent']) ?
+		$exceptions_des_tables[$boucle->id_table]['id_parent'] :
+		'id_parent';
+	$mparent = $boucle->id_table . '.' . $id_parent;
 
-	if ($boucle->type_requete == 'rubriques') {
+	if ($boucle->type_requete == 'rubriques' OR isset($exceptions_des_tables[$boucle->id_table]['id_parent'])) {
 		$boucle->where[]= array("'='", "'$mparent'", $arg);
 
 	} else if ($boucle->type_requete == 'forums') {
@@ -689,7 +697,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit)
 function calculer_critere_infixe($idb, &$boucles, $crit) {
 
 	global $table_des_tables, $tables_principales, $table_date;
-	global $exceptions_des_jointures;
+	global $exceptions_des_jointures, $exceptions_des_tables;
 	$boucle = &$boucles[$idb];
 	$type = $boucle->type_requete;
 	$table = $boucle->id_table;
@@ -701,6 +709,12 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	// Cas particulier : id_enfant => utiliser la colonne id_objet
 	if ($col == 'id_enfant')
 	  $col = $boucle->primary;
+
+	// Cas particulier : id_parent => verifier les exceptions de tables
+	if ($col == 'id_parent')
+	  $col = isset($exceptions_des_tables[$table]['id_parent']) ?
+		$exceptions_des_tables[$table]['id_parent'] :
+		'id_parent';
 
 	// Cas particulier : id_secteur pour certaines tables
 	else if (($col == 'id_secteur')&&($type == 'breves')) {
