@@ -1009,15 +1009,11 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $af = true
 // http://doc.spip.org/@gros_titre
 function gros_titre($titre, $ze_logo='', $aff=true){
 	global $spip_display;
-	if ($spip_display == 4) {
-		$res = "\n<h1>".typo($titre)."</h1>&nbsp;\n";
+	$res = "\n<h1>";
+	if ($spip_display != 4) {
+		$res .= $ze_logo;
 	}
-	else {
-		$res = "\n<div class='verdana2 spip_large ligne_foncee' style='font-weight: bold;'>" .
-		  $ze_logo .
-		  typo($titre) .
-		  "</div>\n";
-	}
+	$res .= typo($titre)."</h1>\n";
 	if ($aff) echo $res; else return $res;
 }
 

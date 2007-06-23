@@ -54,33 +54,23 @@ function configuration_reducteur_dist()
 	OR function_exists('ImageJpeg')
 	OR function_exists('ImagePng')
 	) {
-		$nb_process ++;
 		$res .= afficher_choix_vignette($p = 'gd1');
-
 		if (function_exists("ImageCreateTrueColor")) {
 			$res .= afficher_choix_vignette($p = 'gd2');
-			$nb_process ++;
 		}
 	}
 
 	if (_PNMSCALE_COMMAND!='') {
 		$res .= afficher_choix_vignette($p = 'netpbm');
-		$nb_process ++;
 	}
 
 	if (function_exists('imagick_readimage')) {
 		$res .=afficher_choix_vignette('imagick');
-		$nb_process ++;
 	}
 
 	if (_CONVERT_COMMAND!='') {
 		$res .= afficher_choix_vignette($p = 'convert');
-		$nb_process ++;
 	}
-
-	$cell = $nb_process%3?(3-$nb_process%3):0;
-	while($cell--)
-		$res .= "\n".'<td>&nbsp;</td>';
 
 	return ajax_action_greffe("configurer-reducteur", '', 
 	  debut_cadre_trait_couleur("image-24.gif", true)
@@ -88,10 +78,9 @@ function configuration_reducteur_dist()
 	.  "<p class='verdana2'>"
 	. _T('info_image_process')
 	. "</p>"
-	. "<table width='100%'><tr>"
 	. $res
-	. "</tr></table>\n"
-	.  "<p class='verdana2'>"
+	. "<br class='nettoyeur' />"
+	. "<p class='verdana2'>"
 	. _T('info_image_process2')
 	. "</p>"
 	. fin_cadre_relief(true)
@@ -199,17 +188,16 @@ function afficher_choix_vignette($process) {
 		$retour = '';
 	}
 
+	$class = '';
 	if ($process == $GLOBALS['meta']['image_process']) {
-	  $style = " font-weight: bold;";
-	  $class = " class='bordure_foncee_pointillee'";
-	} else $style = $class = '';
-
-	return 	$retour . "\n<td style='text-align: center; vertical-align:center; width: ".($taille_preview+4)."px;$style'$class"
+	  $class = " selected";
+	} 
+	return 	$retour . "\n<div class='vignette_reducteur$class'"
 	. "><a href='"
 	. generer_url_ecrire("config_fonctions", "image_process=$process")
 	. "'><img src='"
 	. generer_url_action("tester", "arg=$process")
-	. "' alt='$process' /></a><br />$process</td>\n";
+	. "' alt='$process' /></a><span>$process</span></div>\n";
 
 }
 
