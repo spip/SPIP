@@ -316,7 +316,7 @@ function AjaxSqueezeNode(trig, target, f, event)
 	valid = false;
 	if (typeof(window['_OUTILS_DEVELOPPEURS']) != 'undefined'){
 		if (!(navigator.userAgent.toLowerCase().indexOf("firefox/1.0")))
-			valid = (typeof event != 'object') ? false : ((event.altKey || event.metaKey) == true);
+			valid = (typeof event == 'object') && (event.altKey || event.metaKey);
 	}
 
 	if (typeof(trig) == 'string') {
@@ -327,8 +327,13 @@ function AjaxSqueezeNode(trig, target, f, event)
 		if  (valid) {
 		   window.open(trig+'&transformer_xml=valider_xml');
 		}
-		res = jQuery.ajax({"url":trig,
-	       "complete":function(r,s){AjaxRet(r,s,target, callback)}});
+		res = jQuery.ajax({
+			"url":trig,
+			"complete": function(r,s) {
+				AjaxRet(r,s,target, callback);
+//				jQuery(target).Pulsate();
+			}
+		});
 		return res;
 		
 	}
@@ -345,18 +350,21 @@ function AjaxSqueezeNode(trig, target, f, event)
 		target = doc.body;
 	}
 	
-	jQuery(trig).ajaxSubmit({"target":target,
-				    "success":function(res,status){
-		if(valid) searching_img.remove();
-		if(status=='error') return this.html('Erreur HTTP');
-		callback.apply(this,[res,status]);
-	},
-			"beforeSubmit":function (vars){
-			 vars.push({"name":"var_ajaxcharset","value":"utf-8"});
-			 if (valid)
+	jQuery(trig).ajaxSubmit({
+		"target": target,
+		"success": function(res,status) {
+			if(valid) searching_img.remove();
+			if(status=='error') return this.html('Erreur HTTP');
+			callback.apply(this,[res,status]);
+//			jQuery(this).Pulsate();
+		},
+		"beforeSubmit":function (vars) {
+			vars.push({"name":"var_ajaxcharset","value":"utf-8"});
+			if (valid)
 				vars.push({"name":"transformer_xml","value":"valider_xml"});
-			 return true;
-				  }});
+			return true;
+		}
+	});
 	return true; 
 }
 
@@ -377,12 +385,12 @@ function AjaxRet(res,status, target, callback) {
 	if (status=='error') return jQuery(target).html('HTTP Error');
 
 	// Inject the HTML into all the matched elements
-	jQuery(target).html(res.responseText)
-	  // Execute all the scripts inside of the newly-injected HTML
-	  .evalScripts()
-	  // Execute callback
-	  .each( callback, [res.responseText, status] );
-	//callback(res,status);
+	jQuery(target)
+		.html(res.responseText)
+		// Execute all the scripts inside of the newly-injected HTML
+		.evalScripts()
+		// Execute callback
+		.each(callback, [res.responseText, status]);
 }
 
 

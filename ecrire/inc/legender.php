@@ -146,7 +146,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	if (!($id < 0) && $document['vu']=='non')
 		$corps .= icone_horizontale($texte, $action, $supp, "supprimer.gif", false);
 
-	$corps = block_parfois_visible("legender-aff-$id_document", $entete, $corps, "text-align:center;", $flag);
+	$corps = block_parfois_visible("legender-aff-$id_document", sinon($entete,_T('info_sans_titre')), $corps, "text-align:center;", $flag);
 	return ajax_action_greffe("legender", $id_document, $corps,'');
 }
 
