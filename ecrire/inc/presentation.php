@@ -1005,6 +1005,46 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $af = true
 	if ($af) echo $retour; else return $retour;
 }
 
+// Fonction standard pour le pipeline 'boite_infos'
+function f_boite_infos($flux) {
+	$boite = $flux['data'];
+	$args = $flux['args'];
+	$type = $args['type'];
+	$id = $args['id'];
+	$row = $args['row'];
+
+	if ($type == 'article') {
+		$boite .= "\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>" 
+		. _T('info_numero_article')
+		.  "<br /><span class='spip_xx-large'>"
+		.  $id
+		.  '</span></div>';
+	}
+
+	$boite .= voir_en_ligne($type, $id, $row['statut'], 'racine-24.gif', false);
+
+	// statistiques
+	if ($type == 'article') {
+		if ($row['statut'] == 'publie'
+		AND $row['visites'] > 0
+		AND $GLOBALS['meta']["activer_statistiques"] != "non"
+		AND autoriser('voirstats', $type, $id)) {
+			$boite .= icone_horizontale(_T('icone_evolution_visites', array('visites' => $row['visites'])), generer_url_ecrire("statistiques_visites","id_article=$id"), "statistiques-24.gif","rien.gif", false);
+		}
+	}
+
+	// revisions d'articles
+	if ($type == 'article') {
+		if (($GLOBALS['meta']["articles_versions"]=='oui')
+		AND $row['id_version']>1
+		AND autoriser('voirrevisions', $type, $id))
+			$boite .= icone_horizontale(_T('info_historique_lien'), generer_url_ecrire("articles_versions","id_article=$id_article"), "historique-24.gif", "rien.gif", false);
+	}
+
+	$flux['data'] = $boite;
+	return $flux;
+}
+
 
 // http://doc.spip.org/@gros_titre
 function gros_titre($titre, $ze_logo='', $aff=true){

@@ -63,8 +63,6 @@ function exec_config_fonctions_dist()
 
 	  $versionneur(), // Gestion des revisions des articles
 
-	  $correcteur(), // Correcteur d'orthographe
-
 	  $previsualiseur(), // Previsualisation sur le site public
 
 	  $relayeur(_request('retour_proxy')); // Proxy pour syndication & doc

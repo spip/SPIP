@@ -232,6 +232,7 @@ $spip_pipeline = array(
 	'affiche_droite' => '',
 	'affiche_gauche' => '',
 	'affiche_milieu' => '',
+	'boite_infos' => 'f_boite_infos',
 	'ajouter_boutons' => '',
 	'ajouter_onglets' => '',
 	'body_prive' => '',
@@ -307,7 +308,7 @@ $spip_version = 1.938;
 // (ce qui marche pour yy ne marchera pas forcement sur une version plus ancienne)
 // type nouvelles fonctionnalites, deplacement de fonctions ...
 $spip_version_affichee = '1.9.3 dev';
-$spip_version_code = '1.9256';
+$spip_version_code = '1.9257';
 
 // ** Securite **
 $auteur_session = $connect_statut = $connect_toutes_rubriques =  $hash_recherche = $hash_recherche_strict = $ldap_present ='';
