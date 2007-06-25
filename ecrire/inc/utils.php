@@ -58,89 +58,15 @@ function charger_fonction($nom, $dossier='exec', $continue=false) {
 	exit;
 }
 
-// inclusion anticipee par bloc pour optimisation des find_in_path
-// chaque fichier inclus est place dans une fonction ad-hoc pour ne pas etre execute
-// avant qu'il ne soit reellement necessaire, et en particulier ne pas bloquer les
-// surcharges par redefinition de fonction (charger_fonction)
-// on inclue un numero de version de format du prefetch dans le nom du fichier
-// ce qui permet les upgrades sans soucis
-// http://doc.spip.org/@include_prefetch
-function include_prefetch($f){
-	static $encours=false;
-	if ($GLOBALS['prefetch'][$f]['fetch']==false) return false;// fichier charge et execute
-	if (($fun=$GLOBALS['prefetch'][$f]['fonction'])){// fichier deja en memoire mais pas encore execute
-		$fun(); // simule l'inclusion du code precedemment charge
-		return false; // le chargement anticipe est deja fait, ne plus rien inclure
-	}
-	if ($encours) return true;// la construction du chargeur est en cours, inclure normalement pour ne pas boucler
-	$fetch=$GLOBALS['prefetch'][$f]['fetch'];
-	if (@is_readable(($nom_fetch = _DIR_TMP._PREFETCH_PREFIXE_FICHIERS."$fetch.php"))){
-		include_once($nom_fetch);
-		if (($fun=$GLOBALS['prefetch'][$f]['fonction'])){
-			$fun(); // simule l'inclusion du code precedemment charge
-			return false; // le chargement anticipe est deja fait, ne plus rien inclure
-		}
-		return true; // le fichier n'est pas dans le prefetch, il faut l'inclure unitairement
-	}
-	$encours = true; // ne plus fetcher lors de ce hit la, on construit
-	$prologue = "";
-	$source = "";
-	include_spip('inc/filtres');
-	foreach($GLOBALS['prefetch'] as $fichier=>$pre)
-		if ($pre['fetch']==$fetch){
-			$s = include_spip($fichier,false);
-			lire_fichier($s,$contenu);
-			if (strlen($contenu)){
-				$fun = 'prefetch_'.str_replace("/","_",$fichier);
-				$prologue .= "\$GLOBALS['prefetch']['$fichier']['fichier']='$s';\n";
-				$prologue .= "\$GLOBALS['prefetch']['$fichier']['fonction']='$fun';\n";
-				$contenu = "<"."?php\nfunction $fun(){\n\$GLOBALS['prefetch']['$fichier']['fetch']=false; ?".">" 
-				  . compacte_php($contenu) . "<"."?php } ?".">";
-				$source .= $contenu;
-			}
-		}
-
-	$source = "<"."?php\n$prologue?".">".$source;
-	$source = preg_replace(',\?'.'>\s*<'.'\?php,ms','',$source); // remplacer les successions fermeture/ouverture des balises php
-	spip_log('ecrire prefetch: '.$nom_fetch.', '.strlen($source).'b');
-	ecrire_fichier($nom_fetch,$source); #compacte_php($source) si on a un compacteur qui marche ...
-	return true;
-}
-// invalidation des fichiers de prechargement
-// http://doc.spip.org/@invalide_prefetch
-function invalide_prefetch(){
-	$fetches = preg_files(_DIR_TMP,_PREFETCH_PREFIXE_FICHIERS.".*[.]php$",10,false);
-	foreach($fetches as $f) @unlink($f);
-}
 
 //
 // une fonction cherchant un fichier dans une liste de repertoires
 //
 // http://doc.spip.org/@include_spip
 function include_spip($f, $include = true) {
-	$s = "";
-	/*
-	if (isset($GLOBALS['prefetch'][$f]) AND !defined('_PAS_DE_PRECHARGEMENT_PHP')){
-
-		$include = ($include AND include_prefetch($f)); // si include est deja false, on ne prefetch pas
-		if (isset($GLOBALS['prefetch'][$f]['fichier'])) // mais si on sait ou est le fichier, on repond
-			$s = $GLOBALS['prefetch'][$f]['fichier'];
-	}
-	  */
-	if(!$s) {
-		// Dans le noyau ?
-		if (isset($GLOBALS['noyau'][$f])) {
-			$s = $GLOBALS['noyau'][$f];
-		}
-		// Sinon le chercher et mettre a jour le noyau
-		else {
-			if (!$s = find_in_path($f . '.php')
-			AND (!_EXTENSION_PHP OR !$s = find_in_path($f . '.php3'))) {
-				return $GLOBALS['noyau'][$f] = false;
-			} else
-				$GLOBALS['noyau'][$f] = $s;
-		}
-	}
+	if (!$s = find_in_path($f . '.php')
+		AND (!_EXTENSION_PHP OR !$s = find_in_path($f . '.php3')))
+			return false;
 
 	// On charge le fichier (sauf si on ne voulait que son chemin)
 	if ($include && $s) {
@@ -751,18 +677,31 @@ function creer_chemin() {
 	return $path_a;
 }
 
-// http://doc.spip.org/@find_in_path
-function find_in_path ($filename) {
-	// Parcourir le chemin
-	foreach (creer_chemin() as $dir) {
-		if (@is_readable($f = "$dir$filename")) {
-# spip_log("find_in_path trouve $f");
-			return $f;
+// Cette fonction est appelee une seule fois par hit et par dir du chemin
+function memoriser_fichiers($dir) {
+	$fichiers = array();
+	if (is_dir($dir)
+	AND $t = @opendir($dir)) {
+		while (($f = readdir($t)) !== false) {
+			$fichiers[$f] = true;
 		}
 	}
+	return $fichiers;
+}
 
-# spip_log("find_in_path n'a pas vu '$filename' dans " . join(':',creer_chemin()));
-	return false;
+// http://doc.spip.org/@find_in_path
+function find_in_path ($filename) {
+	static $ram;
+	$dirs = creer_chemin();
+
+	$p = pathinfo($filename);
+	foreach($dirs as $dir) {
+		$sous = $dir.$p['dirname'];
+		if (!isset($ram[$sous]))
+			$ram[$sous] = memoriser_fichiers($sous);
+		if ($ram[$sous][$p['basename']])
+			return $sous.'/'.$p['basename'];
+	}
 }
 
 
@@ -1273,18 +1212,9 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	// Duree de validite de l'alea pour les cookies et ce qui s'ensuit.
 	define('_RENOUVELLE_ALEA', 12 * 3600);
 
-	// Lire les meta cachees et init noyau (espace public uniquement)
-	$GLOBALS['noyau'] = array();
-	if (lire_fichier(_FILE_META, $meta)) {
+	// Lire les meta cachees
+	if (lire_fichier(_FILE_META, $meta))
 		$GLOBALS['meta'] = @unserialize($meta);
-		if (_DIR_RESTREINT
-		AND !isset($_REQUEST['var_mode'])
-		AND isset($GLOBALS['meta']['noyau'])
-		AND is_array($GLOBALS['meta']['noyau'])) {
-			$GLOBALS['noyau'] = $GLOBALS['meta']['noyau'];
-			unset ($GLOBALS['meta']['noyau']);
-		}
-	}
 
 	if  (_FILE_CONNECT) {
 	// en cas d'echec refaire le fichier
