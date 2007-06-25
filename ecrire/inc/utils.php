@@ -680,7 +680,7 @@ function creer_chemin() {
 // Cette fonction est appelee une seule fois par hit et par dir du chemin
 function memoriser_fichiers($dir) {
 	$fichiers = array();
-	if (is_dir($dir)
+	if (@is_dir($dir)
 	AND $t = @opendir($dir)) {
 		while (($f = readdir($t)) !== false) {
 			$fichiers[$f] = true;
