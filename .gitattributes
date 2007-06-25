@@ -419,7 +419,6 @@ ecrire/configuration/articles.php -text
 ecrire/configuration/avertisseur.php -text
 ecrire/configuration/breves.php -text
 ecrire/configuration/compteur.php -text
-ecrire/configuration/correcteur.php -text
 ecrire/configuration/documents.php -text
 ecrire/configuration/futurs.php -text
 ecrire/configuration/index.php -text
