@@ -32,13 +32,25 @@ function configuration_logos_dist(){
 	
 	$res .= "<tr>";
 	$res .= "<td align='$spip_lang_left' class='verdana2'>";
-	$res .= afficher_choix('activer_logos', $activer_logos,
-		array('oui' => _L('Utiliser les logos'),
-			'non' => _T('item_non')), " &nbsp; ");
-	$res .= "<br /><br />\n";
+	
+	
+	$res .= bouton_radio("activer_logos", "oui", _L('Utiliser les logos'), $activer_logos == "oui", "changeVisible(this.checked, 'logos_survol_config', 'block', 'none');")
+	. " <br /> "
+	. bouton_radio("activer_logos", "non", _L('Ne pas utiliser les logos'), $activer_logos == "non", "changeVisible(this.checked, 'logos_survol_config', 'none', 'block');");
+
+	if ($activer_logos != "non") $style = "display: block;";
+	else $style = "display: none;";
+	
+	$res .= "<br /><br /><div id='logos_survol_config' style='$style'>";
+	
+
 	$res .= afficher_choix('activer_logos_survol', $activer_logos_survol,
 		array('oui' => _L('Utiliser les logos de survol'),
-			'non' => _T('item_non')), " &nbsp; ");
+			'non' => _L('Ne pas utiliser les logos de survol')), " <br /> ");
+			
+			
+	$res .= "</div>";
+	
 	$res .= "</td></tr>";
 	$res .= "</table>\n";
 
