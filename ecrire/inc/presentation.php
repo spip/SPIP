@@ -1051,7 +1051,7 @@ function gros_titre($titre, $ze_logo='', $aff=true){
 	global $spip_display;
 	$res = "\n<h1>";
 	if ($spip_display != 4) {
-		$res .= $ze_logo;
+		$res .= $ze_logo.' ';
 	}
 	$res .= typo($titre)."</h1>\n";
 	if ($aff) echo $res; else return $res;
