@@ -1006,6 +1006,7 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $af = true
 }
 
 // Fonction standard pour le pipeline 'boite_infos'
+// http://doc.spip.org/@f_boite_infos
 function f_boite_infos($flux) {
 	$boite = $flux['data'];
 	$args = $flux['args'];
