@@ -73,9 +73,10 @@ function choix_statut_auteur($statut, $id_auteur, $ancre) {
 	// Le count(*) ne sert pas, mais en son absence
 	// SQL (enfin, une version de SQL) renvoie un ensemble vide !
 	$q = spip_query($r ="SELECT statut, count(*) FROM spip_auteurs WHERE statut NOT IN ('" . join("','", $GLOBALS['liste_des_statuts']) . "') GROUP BY statut");
+	$hstatut = htmlentities($statut);
 	while ($r = spip_fetch_array($q, SPIP_NUM)) {
 		$nom = htmlentities($r[0]);
-		$autres .= mySel($nom, $statut, _T('info_statut_auteur_autre') . ' ' . $nom);
+		$autres .= mySel($nom, $hstatut, _T('info_statut_auteur_autre') . ' ' . $nom);
 	}
 
 	// Calculer le menu
