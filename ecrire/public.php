@@ -61,9 +61,8 @@ if (defined('_INC_PUBLIC')) {
 		OR $GLOBALS['redirect'] = _request('redirect'))
 			redirige_par_entete(urldecode($GLOBALS['redirect']));
 
-#		# pour un appel ajax ca provoque une erreur 500
-#		if (!headers_sent())
-#			http_status(204); // No Content
+		if (!headers_sent())
+			http_status(204); // No Content
 		exit;
 	}
 
