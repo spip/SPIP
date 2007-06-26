@@ -910,7 +910,7 @@ function traiter_listes ($texte) {
 // http://doc.spip.org/@supprime_img
 function supprime_img($letexte) {
 	$message = _T('img_indisponible');
-	return preg_replace(',<(img|doc|emb)([0-9]+)(\|([^>]*))?'.'>,i',
+	return preg_replace(',<(img|doc|emb)([0-9]+)(\|([^>]*))?'.'\s*/?'.'>,i',
 		"($message)", $letexte);
 }
 
@@ -925,12 +925,12 @@ function supprime_img($letexte) {
 define('_RACCOURCI_MODELE', 
 	 '(<([a-z_-]{3,})' # <modele
 	.'\s*([0-9]*)\s*' # id
-	.'([|](?:<[^<>]*>|[^>])*)?' # |arguments (y compris des tags <...>)
-	.'>)' # fin du modele >
+	.'([|](?:<[^<>]*>|[^>])*?)?' # |arguments (y compris des tags <...>)
+	.'\s*/?'.'>)' # fin du modele >
 	.'\s*(<\/a>)?' # eventuel </a>
        );
 
-define('_RACCOURCI_MODELE_DEBUT', '/^' . _RACCOURCI_MODELE .'/is');
+define('_RACCOURCI_MODELE_DEBUT', '@^' . _RACCOURCI_MODELE .'@is');
 
 // http://doc.spip.org/@traiter_modeles
 function traiter_modeles($texte, $doublons=false, $echap='') {
