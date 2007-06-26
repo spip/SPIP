@@ -126,7 +126,8 @@ function document_et_vignette($document, $url, $portfolio=false) {
 				$image = filtrer('image_reduire', get_spip_doc($vignette['fichier']), 120, 110, false, true);
 			}
 	}
-	else if (strpos($GLOBALS['meta']['formats_graphiques'], $extension)!==false
+	else if (in_array($extension,
+		explode(',', $GLOBALS['meta']['formats_graphiques']))
 	AND $GLOBALS['meta']['creer_preview'] == 'oui') {
 		include_spip('inc/distant');
 		include_spip('inc/filtres');
