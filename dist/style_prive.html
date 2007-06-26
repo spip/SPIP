@@ -974,7 +974,7 @@ td.icone a img {
 .cadre { 
 	margin:5px 0 5px 0;
 	font-family: Verdana, Geneva, helvetica, sans;
-	font-size: 12px;
+	font-size: 11px;
 	position:relative;
 }
 
@@ -1647,7 +1647,7 @@ a.ical {
 .titrem { 
 	font-weight: bold;
 }
-div.titrem{	
+div.titrem {
 	display: block; 
 	padding-top: 6px; padding-bottom: 4px;
 	background-repeat: no-repeat;
@@ -1693,10 +1693,14 @@ div.titrem{
 
 .cadre-couleur .titrem {background-color:#fff;}
 
-#navigation .titrem, #extra .titrem {text-align:center; background-color: white;}
+.joindre .titrem, #navigation .joindre .titrem {background-color: #GET{claire};}
 .accueil #navigation .titrem {background-color: #GET{foncee};}
-#navigation .hover, #extra .hover {background-color:#GET{claire};}
 
+#navigation .titrem, #extra .titrem {text-align:center;}
+#navigation .titrem, #extra .titrem {background-color: white;}
+#liste_images .titrem, #liste_documents .titrem { background-color: #ccc; }
+#liste_images .legender .titrem, #liste_documents .legender .titrem { background-color: #fff; }
+#navigation .hover, #extra .hover, .joindre .hover, #liste_images .hover, #liste_documents .hover {background-color:#GET{claire};}
 
 /* Deplier / Replier */
 .replie, .deplie.hoverwait { background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierhaut[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif); }
