@@ -154,7 +154,7 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 
 // recuperer le critere SQL qui selectionne nos forums
 // http://doc.spip.org/@critere_statut_controle_forum
-function critere_statut_controle_forum($page, $id_rubrique=0) {
+function critere_statut_controle_forum($type, $id_rubrique=0, $recherche='') {
 
 	if (is_array($id_rubrique))   $id_rubrique = join(',',$id_rubrique);
 	if (!$id_rubrique) {
@@ -171,7 +171,7 @@ function critere_statut_controle_forum($page, $id_rubrique=0) {
 		$and = ' AND ';
 	}
    
-	switch ($page) {
+	switch ($type) {
 	case 'public':
 		$and .= "F.statut IN ('publie', 'off', 'prop') AND F.texte!=''";
 		break;
@@ -189,6 +189,10 @@ function critere_statut_controle_forum($page, $id_rubrique=0) {
 		$and ='';
 		break;
 	}
+
+	if ($recherche) 
+		$and .= " AND F.texte REGEXP " . _q($recherche);
+
 	return array($from, "$where$and");
 }
 
