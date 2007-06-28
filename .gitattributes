@@ -430,6 +430,7 @@ ecrire/configuration/mots.php -text
 ecrire/configuration/participants.php -text
 ecrire/configuration/previsualiseur.php -text
 ecrire/configuration/redacteurs.php -text
+ecrire/configuration/redirection.php -text
 ecrire/configuration/reducteur.php -text
 ecrire/configuration/referenceur.php -text
 ecrire/configuration/relayeur.php -text
