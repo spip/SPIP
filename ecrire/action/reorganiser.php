@@ -34,6 +34,7 @@ function gerer_deplacements($deplacements){
 		}
 		include_spip('inc/rubriques');
 		propager_les_secteurs();
+		calculer_rubriques();
 	}
 }
 
