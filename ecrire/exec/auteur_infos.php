@@ -162,7 +162,7 @@ function auteurs_interventions($auteur) {
 	echo afficher_objets('article',_T('info_articles_auteur'),  array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien",  "WHERE" => "lien.id_auteur='$id_auteur' AND lien.id_article=articles.id_article AND articles.statut IN ($aff_art)",  'ORDER BY' => "articles.date DESC"));
 
 	if ($id_auteur != $connect_id_auteur
-	AND autoriser('ecrire', $auteur)) {
+	AND autoriser('ecrire', '', '', $auteur)) {
 		echo "<div class='nettoyeur'>&nbsp;</div>";
 		debut_cadre_couleur();
 
