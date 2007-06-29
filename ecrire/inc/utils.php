@@ -702,8 +702,9 @@ function find_in_path ($filename) {
 		$sous = $dir.$p['dirname'];
 		if (!isset($ram[$sous]))
 			$ram[$sous] = memoriser_fichiers($sous);
-		if ($ram[$sous][$p['basename']]
-		AND is_readable($f = $sous.'/'.$p['basename']))
+		$f = $p['basename'];
+		if (isset($ram[$sous][$f])
+		AND is_readable($f = $sous.'/'.$f))
 			return $f;
 	}
 }
@@ -839,7 +840,7 @@ function generer_url_ecrire($script='', $args="", $no_entities=false, $rel=false
 		$rel = _DIR_RESTREINT ? _DIR_RESTREINT :
 			('./'  . _SPIP_ECRIRE_SCRIPT);
 
-	list($script, $ancre) = split('#', $script);
+	@list($script, $ancre) = split('#', $script);
 	if ($script AND $script<>'accueil') 
 		$args = "?exec=$script" . (!$args ? '' : "&$args");
 	elseif ($args)

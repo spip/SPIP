@@ -400,7 +400,7 @@ function navigation_pagination($num_rows, $nb_aff=10, $href=null, $onclick=false
 					. $tmp_var
 					. '\');"';
 				}
-				$texte .= "<a href=\"$script#a$ancre\"$on>$deb</a>";
+				$texte .= "<a href=\"$script\"$on>$deb</a>";
 			}
 		}
 	}
@@ -1215,7 +1215,7 @@ function fin_page()
 	global $spip_display;
 
 	// avec &var_profile=1 on a le tableau de mesures SQL
-	if (count($GLOBALS['tableau_des_temps'])) {
+	if (@count($GLOBALS['tableau_des_temps'])) {
 		include_spip('public/debug');
 		$chrono = chrono_requete($GLOBALS['tableau_des_temps']);
 	} else $chrono = '';

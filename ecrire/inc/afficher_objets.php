@@ -229,14 +229,13 @@ function inc_afficher_objets_dist($type, $titre_table,$requete,$formater='', $fo
 
 	$tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);
 
-	if ($affrub) $largeurs = array('7', '', '', '', '188', '38');
-	else $largeurs = array('7','', '', '', '100', '38');
+	$largeurs = array('7','', '', '', '100', '38');
 	$styles = array('arial11', 'arial11', 'arial1', 'arial1', 'arial1 centered', 'arial1');
 
-	$arg = array( $afficher_langue, $affrub, $langue_defaut);
+	$arg = array( $afficher_langue, false, $langue_defaut);
 	if (!function_exists($fonction_ligne = "afficher_{$type}s_boucle")){
 		$fonction_ligne = "afficher_objet_boucle";
-		$arg = array($type,id_table_objet($type),$afficher_langue, $affrub, $langue_defaut);
+		$arg = array($type,id_table_objet($type),$afficher_langue, false, $langue_defaut);
 	}
 	return affiche_tranche_bandeau($requete, icone_table($type), NULL, NULL, $tmp_var, $titre_table, $force, $largeurs, $styles, $fonction_ligne, $arg);
 }
