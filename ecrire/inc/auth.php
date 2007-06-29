@@ -30,6 +30,14 @@ function auteurs_article($id_article, $cond='')
 	return spip_query("SELECT id_auteur FROM spip_auteurs_articles WHERE id_article=$id_article". ($cond ? " AND $cond" : ''));
 }
 
+function auteurs_autorises($cond='', $order='')
+{
+  return spip_query("SELECT * FROM spip_auteurs WHERE statut IN ('0minirezo','1comite')" . ($cond ? " AND $cond" : '') . ($order ? " ORDER BY $order" : ''));
+}
+
+
+
+
 // Un nouvel inscrit prend son statut definitif a la 1ere connexion
 // Le statut a ete memorise dans bio (cf formulaire_inscription)
 // Si vide se rabattre sur le mode d'inscription 
@@ -69,7 +77,7 @@ function inc_auth_dist() {
 	//
 	// Recuperer les donnees d'identification
 	//
-	
+
 	// Session valide en cours ?
 	if (isset($_COOKIE['spip_session'])) {
 		$session = charger_fonction('session', 'inc');
@@ -113,6 +121,7 @@ function inc_auth_dist() {
 	  (!$connect_login ? '' : "login=" . _q($connect_login));
 
 	// pas authentifie par cookie ni http_auth:
+
 
 	if (!$where) return "inconnu";
 
@@ -160,45 +169,28 @@ function inc_auth_dist() {
 		@spip_query("UPDATE spip_auteurs SET en_ligne=NOW() WHERE id_auteur='$connect_id_auteur'");
 	}
 
-
 	// Etablir les droits selon le codage attendu
 	// dans ecrire/index.php ecrire/prive.php
-
 
 	// Pas autorise a acceder a ecrire ? on renvoie le statut
 	// A noter : le premier appel a autoriser() a le bon gout
 	// d'initialiser $GLOBALS['auteur_session']['restreint'],
 	// qui ne figure pas dans le fichier de session
 	include_spip('inc/autoriser');
+
 	if (!autoriser('ecrire'))
 		return $connect_statut;
 
+	// autoriser('ecrire') ne laisse passer que les Admin et les Redac
+
 	// Administrateurs
 	if ($connect_statut == '0minirezo') {
-		// Non restreints
-		if (!$GLOBALS['auteur_session']['restreint']) {
-			$connect_toutes_rubriques = true;
-			$connect_id_rubrique = array();
-			return '';
-		}
-
-		// Restreint
-		$connect_toutes_rubriques = false;
 		$connect_id_rubrique = $GLOBALS['auteur_session']['restreint'];
-		return '';
-	}
+		$connect_toutes_rubriques = !$connect_id_rubrique;
+	} 
+	// Pour les redacteurs, inc_version a fait l'initialisation minimale
 
-	// Redacteur ?
-	if ($connect_statut == '1comite') {
-		$connect_toutes_rubriques = false;
-		$connect_id_rubrique = array();
-		return '';
-	}
-
-	// On ne devrait jamais arriver ici sauf si on a autoriser('ecrire')
-	// des non-redacteurs ; le cas n'est pour l'instant pas prevu => erreur -1
-	spip_log("Erreur statut auth($droits) non prevu");
-	return -1;
+	return ''; // i.e. pas de pb.
 }
 
 // Cas ou l'auteur a ete identifie mais on n'a pas d'info sur lui

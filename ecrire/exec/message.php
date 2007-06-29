@@ -109,48 +109,22 @@ function http_auteurs_ressemblants($cherche_auteur, $id_message)
 // http://doc.spip.org/@http_ajouter_participants
 function http_ajouter_participants($ze_auteurs, $id_message)
 {	
-	$result_ajout_auteurs = spip_query("SELECT * FROM spip_auteurs WHERE " . (!$ze_auteurs ? '' : "id_auteur NOT IN ($ze_auteurs) AND ") . " messagerie<>'non' AND statut IN ('0minirezo', '1comite') ORDER BY statut, nom");
+	$result = auteurs_autorises((!$ze_auteurs ? '' : "id_auteur NOT IN ($ze_auteurs) AND  ") . "messagerie<>'non'",  "statut, nom");
 
-	if (!spip_num_rows($result_ajout_auteurs) > 0) return '';
+	if (!spip_num_rows($result) > 0) return '';
 
 	$res = "<span class='verdana1 spip_small'><b>" .
 	  _T('bouton_ajouter_participant') ." &nbsp; </b></span>\n" .
 	  "<input type='hidden' name='id_message' value=\"$id_message\" />";
 
-	if (spip_num_rows($result_ajout_auteurs) > 50) {
+	if (spip_num_rows($result) > 50) {
 		$res .=  "\n<input type='text' name='cherche_auteur' class='fondl' value='' size='20' />";
 		$res .=  "\n<input type='submit' value='"._T('bouton_chercher')."' class='fondo' />";
 	} else {
-		$res .=  "<select name='nouv_auteur' size='1' style='width: 150px' class='fondl'>";
-		while($row=spip_fetch_array($result_ajout_auteurs)) {
-			$id_auteur = $row['id_auteur'];
-			$nom = $row['nom'];
-			$email = $row['email'];
-			$statut_auteur = $row['statut'];
-			$premiere = strtoupper(substr(trim($nom), 0, 1));
-
-			if ($GLOBALS['connect_statut'] != '0minirezo') {
-				if ($p = strpos($email, '@')) $email = substr($email, 0, $p).'@...';
-			}
-
-			if ($statut_auteur != $statut_old) {
-				$s =str_replace(
-					array("0minirezo","1comite","2redac","5poubelle"),
-					array(_T('info_statut_administrateur'),_T('info_statut_redacteur'),_T('info_statut_redacteur'), _T('info_statut_efface')),
-					$statut_auteur);
-				$res .=  "\n<option value=\"x\"></option>";
-				$res .=  "\n<option value=\"x\"> " . $s . 's</option>';
-			}
-						
-			if ($premiere != $premiere_old AND ($statut_auteur != '0minirezo' OR !$premiere_old))
-				$res .=  "\n<option value=\"x\"></option>";
-	  
-			$res .=  "\n<option value=\"$id_auteur\">&nbsp;&nbsp;&nbsp;&nbsp;" .supprimer_tags(couper("$nom ($email) ", 40)) . "</option>";
-			$statut_old = $statut_auteur;
-			$premiere_old = $premiere;
-		}
-	
-		$res .=  "</select>"
+		include_spip('inc/editer_auteurs');
+		$res .=  "<select name='nouv_auteur' size='1' style='width: 150px' class='fondl'>"
+		. objet_auteur_select($result)	
+		.  "</select>"
 		.  "<input type='submit' value='"._T('bouton_ajouter')."' class='fondo' />";
 	}
 	return redirige_action_auteur('editer_message', "$id_message,", 'message', "id_message=$id_message", "<div style='text-align: left'>\n$res</div>\n", " method='post'");

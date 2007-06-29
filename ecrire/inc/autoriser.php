@@ -285,15 +285,13 @@ function autoriser_voirstats_dist($faire, $type, $id, $qui, $opt) {
 // Voir un objet
 // http://doc.spip.org/@autoriser_voir_dist
 function autoriser_voir_dist($faire, $type, $id, $qui, $opt) {
-	if (
-		($qui['statut'] == '0minirezo')
-		OR ($type != 'article')
-	)
-		return true;
+	if ($qui['statut'] == '0minirezo') return true;
+	if ($type == 'auteur') return false;
+	if ($type != 'article') return true;
+	if (!$id) return false;
 
 	// un article 'prepa' ou 'poubelle' dont on n'est pas auteur : interdit
-	$s = spip_query(
-	"SELECT statut FROM spip_articles WHERE id_article="._q($id));
+	$s = spip_query("SELECT statut FROM spip_articles WHERE id_article="._q($id));
 	$r = spip_fetch_array($s);
 	return
 		in_array($r['statut'], array('prop', 'publie'))

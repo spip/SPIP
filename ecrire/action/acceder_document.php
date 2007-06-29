@@ -30,7 +30,7 @@ AND !function_exists('autoriser_document_voir')) {
 
 // http://doc.spip.org/@autoriser_document_voir
 function autoriser_document_voir($faire, $type, $id, $qui, $opt) {
-	if (in_array($qui['statut'], array('0minirezo', '1comite')))
+	if (autoriser('ecrire'))
 		return true;
 
 	return
