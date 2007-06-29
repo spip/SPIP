@@ -13,35 +13,12 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/headers');
+include_spip('inc/autoriser');
 
 // acces aux documents joints securise
 // verifie soit que le demandeur est authentifie
 // soit que le document est publie, c'est-a-dire
 // joint a au moins 1 article, breve ou rubrique publie
-
-// Cette variable de configuration peut etre posee par un plugin
-// par exemple acces_restreint
-
-// Definir une fonction d'autorisation specifique
-// sauf si on a deja eu cette idee
-// TODO: ne devrait pas figurer dans ce fichier
-if ($GLOBALS['meta']["creer_htaccess"] == 'oui'
-AND !function_exists('autoriser_document_voir')) {
-
-// http://doc.spip.org/@autoriser_document_voir
-function autoriser_document_voir($faire, $type, $id, $qui, $opt) {
-	if (autoriser('ecrire'))
-		return true;
-
-	return
-		spip_num_rows(spip_query("SELECT articles.id_article FROM spip_documents_articles AS rel_articles, spip_articles AS articles WHERE rel_articles.id_article = articles.id_article AND articles.statut = 'publie' AND rel_articles.id_document = $id  LIMIT 1")) > 0
-	OR
-		spip_num_rows(spip_query("SELECT rubriques.id_rubrique FROM spip_documents_rubriques AS rel_rubriques, spip_rubriques AS rubriques WHERE rel_rubriques.id_rubrique = rubriques.id_rubrique AND rubriques.statut = 'publie' AND rel_rubriques.id_document = $id LIMIT 1")) > 0
-	OR
-		spip_num_rows(spip_query("SELECT breves.id_breve FROM spip_documents_breves AS rel_breves, spip_breves AS breves WHERE rel_breves.id_breve = breves.id_breve AND breves.statut = 'publie' AND rel_breves.id_document = $id_document  LIMIT 1")) > 0
-	;
-}
-}
 
 // http://doc.spip.org/@action_acceder_document_dist
 function action_acceder_document_dist() {

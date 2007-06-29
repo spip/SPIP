@@ -285,6 +285,8 @@ function autoriser_voirstats_dist($faire, $type, $id, $qui, $opt) {
 // Voir un objet
 // http://doc.spip.org/@autoriser_voir_dist
 function autoriser_voir_dist($faire, $type, $id, $qui, $opt) {
+	if ($type == 'document')
+		return autoriser_document_voir_dist($faire, $type, $id, $qui, $opt);
 	if ($qui['statut'] == '0minirezo') return true;
 	if ($type == 'auteur') return false;
 	if ($type != 'article') return true;
@@ -450,15 +452,27 @@ function autoriser_chargerftp_dist($faire, $type, $id, $qui, $opt) {
 
 
 //
-// Peut-on voir un document ?
-// par defaut tout le monde (y compris visiteurs non enregistres)
-// peut lire tous les documents dans IMG/
+// Peut-on voir un document dans _DIR_IMG ?
+// Tout le monde (y compris les visiteurs non enregistres)
+// sauf si une extension comme acces_restreint a positionne creer_htaccees
 //
 // http://doc.spip.org/@autoriser_document_voir_dist
-function autoriser_document_voir_dist($faire, $type, $id, $qui, $opt) {
-	return true;
-}
 
+function autoriser_document_voir_dist($faire, $type, $id, $qui, $opt) {
+	if ($GLOBALS['meta']["creer_htaccess"] != 'oui')
+		return true;
+
+	if (in_array($qui['statut'], array('0minirezo', '1comite')))
+		return true;
+
+	return
+		spip_num_rows(spip_query("SELECT articles.id_article FROM spip_documents_articles AS rel_articles, spip_articles AS articles WHERE rel_articles.id_article = articles.id_article AND articles.statut = 'publie' AND rel_articles.id_document = $id  LIMIT 1")) > 0
+	OR
+		spip_num_rows(spip_query("SELECT rubriques.id_rubrique FROM spip_documents_rubriques AS rel_rubriques, spip_rubriques AS rubriques WHERE rel_rubriques.id_rubrique = rubriques.id_rubrique AND rubriques.statut = 'publie' AND rel_rubriques.id_document = $id LIMIT 1")) > 0
+	OR
+		spip_num_rows(spip_query("SELECT breves.id_breve FROM spip_documents_breves AS rel_breves, spip_breves AS breves WHERE rel_breves.id_breve = breves.id_breve AND breves.statut = 'publie' AND rel_breves.id_document = $id_document  LIMIT 1")) > 0
+	;
+}
 
 // Renvoie la liste des rubriques liees a cet auteur, independamment de son
 // statut (pour les admins restreints, il faut donc aussi verifier statut)
