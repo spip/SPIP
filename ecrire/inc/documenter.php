@@ -115,5 +115,5 @@ function inc_documenter_dist(
 	. "</table>"
 	. $pied;
 
-	return ajax_action_greffe("documenter", "$s$doc", $res, '');
+	return ajax_action_greffe("documenter", "$s$doc", $res);
 }
