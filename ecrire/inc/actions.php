@@ -150,7 +150,7 @@ function ajax_action_post($action, $arg, $retour, $gra, $corps, $clic='', $atts_
 	} else { 
 
 		if ($gra AND !$args_ajax) $args_ajax = "&$gra";
-		if ($GLOBALS['var_profile'])
+		if (isset($GLOBALS['var_profile']))
 			$args_ajax .= '&var_profile=1';
 
 		return redirige_action_auteur($action,

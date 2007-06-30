@@ -1335,9 +1335,8 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 		. "\n<table style='background-color: #e0e0e0;border: 0px; padding-left:4px; width: 100%;'>"
 		. $retour;
 	
-	if (_MODE_MEME_RUBRIQUE == 'oui')
-	$retour .= (($limit <= 0) ? ''
-		: "<tr><td colspan='3' style='text-align: center'>+ $limit</td></tr>");
+
+	//	$retour .= (($limit <= 0) ? '' : "<tr><td colspan='3' style='text-align: center'>+ $limit</td></tr>");
 
 	$retour .= "</table>"
 		. fin_block()

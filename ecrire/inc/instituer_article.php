@@ -23,6 +23,7 @@ function inc_instituer_article_dist($id_article, $statut=-1)
 	AND function_exists('menu_postdates'))
 		list($postdates,$postdates_js) = menu_postdates();
 
+	else $postdates = $postdates_js = '';
 	$res =
 	"\n<div style='text-align: center;' id='instituer_article-$id_article'>" .
 	"<b>" .
