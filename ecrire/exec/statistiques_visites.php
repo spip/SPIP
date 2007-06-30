@@ -264,7 +264,7 @@ else {
  }
 
 
-if (!autoriser('voirstats', $id ? 'article':'', $id)) {
+if (!autoriser('voirstats', $id_article ? 'article':'', $id_article)) {
 	echo _T('avis_non_acces_page');
 	echo fin_gauche(), fin_page();
 	exit;
