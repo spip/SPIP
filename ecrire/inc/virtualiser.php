@@ -14,11 +14,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 
 // http://doc.spip.org/@inc_virtualiser_dist
-function inc_virtualiser_dist($id_article, $flag, $virtuel, $script, $args){
-	global $spip_lang_right, $connect_statut;
-
-	if (!($connect_statut=='0minirezo' && $flag))
-	  return '';
+function inc_virtualiser_dist($id_article, $virtuel, $script, $args){
+	global $spip_lang_right;
 
 	$res = "<input type='text' name='virtuel' class='formo spip_xx-small' value='"
 	. ($virtuel ? "" : "http://")
@@ -26,12 +23,14 @@ function inc_virtualiser_dist($id_article, $flag, $virtuel, $script, $args){
 	. "' size='40' /><br />\n"
 	. "<span class='verdana1 spip_x-small'>(<b>"
 	. _T('texte_article_virtuel')
-	. "&nbsp;:</b>"
+	. (!$virtuel ? '' : " $virtuel")
+	. "&nbsp;:</b> "
 	.  _T('texte_reference_mais_redirige')
 	. ")</span><br />";
 
 	$res = ajax_action_post('virtualiser', $id_article, $script, $args, $res, _T('bouton_changer'), " class='fondo spip_xx-small' style='float: $spip_lang_right'")
 	  . "<br class='nettoyeur' />";
+
 	return ajax_action_greffe("virtualiser", $id_article, $res);
 }
 ?>
