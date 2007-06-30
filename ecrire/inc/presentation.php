@@ -1321,7 +1321,7 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 		$href = "<a class='verdana1' href='"
 		. generer_url_ecrire($type=='article' ? $table : 'breves_voir',"$key=$id")
 		. "'>"
-		. typo($row['titre'])
+		. sinon(typo($row['titre']), _T('info_sans_titre'))
 		. "</a>";
 		$retour .= "<tr class='tr_liste' style='background-color: #e0e0e0;'><td>$statut</td><td>$href</td><td style='width: 25%;'>$num</td></tr>";
 	}
