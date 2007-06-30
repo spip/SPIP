@@ -176,7 +176,7 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0) {
 	$init = " disabled='disabled' type='text' value=\"" . $titre . '" style=\'width:300px;\'';
 
 	$url = generer_url_ecrire('selectionner',"id=$id_rubrique&type=$type" . (!$idem ? '' : ("&exclus=$idem&racine=" . ($restreint ? 'non' : 'oui')))
-  . ($GLOBALS['var_profile'] ? '&var_profile=1' : ''));
+	. (isset($GLOBALS['var_profile']) ? '&var_profile=1' : ''));
 
 	return construire_selecteur($url, '', 'selection_rubrique', 'id_parent', $init, $id_rubrique);
 }

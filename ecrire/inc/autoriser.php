@@ -43,7 +43,7 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 
 	// Qui ? auteur_session ?
 	if ($qui === NULL)
-		$qui = $GLOBALS['auteur_session']; // "" si pas connecte
+	  $qui = $GLOBALS['auteur_session'] ? $GLOBALS['auteur_session'] : array('statut' => '', 'id_auteur' =>0);
 	elseif (is_numeric($qui)) {
 		$s = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=".$qui);
 		$qui = spip_fetch_array($s);
@@ -125,7 +125,7 @@ function autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt) {
 	return
 		($qui['statut'] == '0minirezo')
 		AND (
-			!$qui['restreint']
+			!$qui['restreint'] OR !$id
 			OR in_array($id, $qui['restreint'])
 		);
 }

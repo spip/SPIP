@@ -12,76 +12,32 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
 // Affiche la fiche de renseignements d'un auteur
 // eventuellement editable
 // http://doc.spip.org/@inc_auteur_infos_dist
-function inc_auteur_infos_dist($auteur, $redirect) {
-	if (!$auteur['id_auteur']) {
-		if (_request('new') == 'oui') {
-			$new = true;
-		} else {
-			include_spip('inc/headers');
-			redirige_par_entete(generer_url_ecrire('auteurs'));
-		}
-	}
+function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redirect) {
 
 	if (!$new) {
-		$corps = legender_auteur_voir($auteur, $redirect);
+		$infos = legender_auteur_voir($auteur, $redirect);
 	} else
-		$corps = '';
+		$infos = '';
 
-	if (_request('echec'))
-		$corps .= afficher_erreurs_auteur(_request('echec'));
-
+	if ($echec)
+		$infos .= afficher_erreurs_auteur($echec);
 
 	// Calculer le bloc de statut (modifiable ou non selon)
 	$instituer_auteur = charger_fonction('instituer_auteur', 'inc');
 	$bloc_statut = $instituer_auteur($auteur);
+	$id_auteur = intval($auteur['id_auteur']);
 
-	// Calculer le formulaire general
-	if (autoriser('modifier', 'auteur', $auteur['id_auteur'])) {
-		$corps = legender_auteur_saisir($auteur, $corps, $bloc_statut, $redirect);
-	} else {
-		// Indiquer le bloc statut (cas non modifiable) ?
-		$corps .= $bloc_statut;
-	}
+	if (!autoriser('modifier', 'auteur', $id_auteur))
+		return $infos . $bloc_statut;
 
-	return $corps;
-
-}
-
-// http://doc.spip.org/@afficher_erreurs_auteur
-function afficher_erreurs_auteur($echec) {
-	foreach (split('@@@',$echec) as $e)
-		$corps .= '<p>' . _T($e) . "</p>\n";
-
-	$corps = debut_cadre_relief('', true)
-	.  "<span style='color: red; left-margin: 5px'>"
-	.  http_img_pack("warning.gif", _T('info_avertissement'), "style='width: 48px; height: 48px; float: left; margin: 5px;'")
-	. $corps
-	.  _T('info_recommencer')
-	.  "</span>\n"
-	. fin_cadre_relief(true);
-
-	return $corps;
-}
-
-
-// http://doc.spip.org/@legender_auteur_saisir
-function legender_auteur_saisir($auteur, $auteur_infos_voir, $bloc_statut, $redirect) {
-	global $options, $connect_statut, $connect_id_auteur, $connect_toutes_rubriques;
-
-	include_spip('inc/autoriser');
-
-	$id_auteur = $auteur['id_auteur'];
-
-	$setconnecte = ($connect_id_auteur == $id_auteur);
-
+	$setconnecte = $GLOBALS['auteur_session']['id_auteur'] == $id_auteur;
 
 	// Elaborer le formulaire
-	$corps = '';
-	$corps .= _T('titre_cadre_signature_obligatoire')
+
+	$corps = _T('titre_cadre_signature_obligatoire')
 	. "("
 	. _T('entree_nom_pseudo')
 	. ")<br />\n"
@@ -124,8 +80,7 @@ function legender_auteur_saisir($auteur, $auteur_infos_voir, $bloc_statut, $redi
 	. fin_cadre_enfonce(true)
 	. "\n<br />";
 
-	if ($options == "avancees"
-	OR strlen($auteur['pgp'])) {
+	if ($auteur['pgp']) {
 		$corps .= debut_cadre_enfonce("cadenas-24.gif", true, "", _T('entree_cle_pgp'))
 		. "<textarea name='pgp' class='forml' rows='4' cols='40'>"
 		. entites_html($auteur['pgp'])
@@ -149,11 +104,11 @@ function legender_auteur_saisir($auteur, $auteur_infos_voir, $bloc_statut, $redi
 		$edit_login = false;
 		$edit_pass = false;
 	}
-	else if (($connect_statut == "0minirezo") AND $connect_toutes_rubriques) {
+	else if (autoriser('modifier', 'auteur', $id_auteur, NULL, array('restreintes' => true))) {
 		$edit_login = true;
 		$edit_pass = true;
 	}
-	else if ($connect_id_auteur == $id_auteur) {
+	else if ($setconnecte) {
 		$edit_login = false;
 		$edit_pass = true;
 	}
@@ -165,7 +120,7 @@ function legender_auteur_saisir($auteur, $auteur_infos_voir, $bloc_statut, $redi
 	$corps .= debut_cadre_relief("base-24.gif", true);
 
 // Avertissement en cas de modifs de ses propres donnees
-	if (($edit_login OR $edit_pass) AND $connect_id_auteur == $id_auteur) {
+	if (($edit_login OR $edit_pass) AND $setconnecte) {
 		$corps .= debut_cadre_enfonce('', true)
 		.  http_img_pack("warning.gif", _T('info_avertissement'), 
 				 "style='width: 48px; height: 48px; float: right;margin: 5px;'")
@@ -196,13 +151,7 @@ function legender_auteur_saisir($auteur, $auteur_infos_voir, $bloc_statut, $redi
 
 	$corps .= fin_cadre_relief(true);
 
-
-	
-	//
-	// Retour
-	//
-
-	$corps = $auteur_infos_voir
+	$corps =  $infos
 		. "<div id='auteur_infos_edit'>\n"
 		. '<div>&nbsp;</div>'
 		. "\n<div class='serif'>"
@@ -216,22 +165,19 @@ function legender_auteur_saisir($auteur, $auteur_infos_voir, $bloc_statut, $redi
 
 	// Installer la fiche "auteur_infos_voir"
 	// et masquer le formulaire si on n'en a pas besoin
-	$new = ($auteur_infos_voir == '');
-	if (!$new
-	AND !_request('echec')
-	AND !_request('edit')) {
+
+	if (!$new AND !$echec AND !$edit) {
 		$corps .= "<script>jQuery('#auteur_infos_edit').hide()</script>\n";
 	} else {
 		$corps .= "<script>jQuery('#auteur_infos_voir').hide()</script>\n";
 	}
-
 
 	// Formulaire de statut
 	$corps .= $bloc_statut;
 
 
 	// Lier a un article (creation d'un auteur depuis un article)
-	if ($id_article = intval(_request('lier_id_article')))
+	if ($id_article)
 		$corps .= "<input type='hidden' name='lier_id_article' value='$id_article' />\n";
 
 	// Redirection apres enregistrement ?
@@ -241,12 +187,28 @@ function legender_auteur_saisir($auteur, $auteur_infos_voir, $bloc_statut, $redi
 	$corps .= "<div style='text-align: right'><input type='submit' value='"._T('bouton_enregistrer')."' class='fondo' /></div>";
 
 
-	$arg = intval($id_auteur);
-	$ret .= generer_action_auteur('editer_auteur', $arg, $redirect, $corps, ' method="POST"');
+	return generer_action_auteur('editer_auteur', $id_auteur, $redirect, $corps, ' method="post"');
 
-	return $ret;
 }
 
+// http://doc.spip.org/@afficher_erreurs_auteur
+function afficher_erreurs_auteur($echec) {
+	foreach (split('@@@',$echec) as $e)
+		$corps .= '<p>' . _T($e) . "</p>\n";
+
+	$corps = debut_cadre_relief('', true)
+	.  "<span style='color: red; left-margin: 5px'>"
+	.  http_img_pack("warning.gif", _T('info_avertissement'), "style='width: 48px; height: 48px; float: left; margin: 5px;'")
+	. $corps
+	.  _T('info_recommencer')
+	.  "</span>\n"
+	. fin_cadre_relief(true);
+
+	return $corps;
+}
+
+
+// http://doc.spip.org/@legender_auteur_saisir
 //
 // Apparaitre dans la liste des redacteurs connectes
 //
@@ -283,13 +245,10 @@ function apparait_auteur_infos($id_auteur, $auteur) {
 
 // http://doc.spip.org/@legender_auteur_voir
 function legender_auteur_voir($auteur) {
-	global $connect_toutes_rubriques, $connect_statut, $connect_id_auteur, $champs_extra, $options, $spip_lang_right;
+	global $spip_lang_right;
 	$res = "";
 
-	if (!$id_auteur = $auteur['id_auteur']) {
-		$new = true;
-	}
-
+	$id_auteur = $auteur['id_auteur'];
 
 	// Bouton "modifier" ?
 	if (autoriser('modifier', 'auteur', $id_auteur)) {
