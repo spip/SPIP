@@ -261,16 +261,10 @@ function verifForm(racine) {
 
 
 // animation de la cible pour faire patienter
-// 0 = demarre ; 1 = fin
 jQuery.fn.animeajax = function(end) {
-	if (end) {
-		this.css('opacity', 1.0);
-	} else {
-		this.css('opacity', 0.5);
-		if (typeof ajax_image_searching != 'undefined') {
-			this.prepend(ajax_image_searching);
-		}
-	}
+	this.children().css('opacity', 0.5);
+	if (typeof ajax_image_searching != 'undefined')
+		this.prepend(ajax_image_searching);
 }
 
 // Si Ajax est disponible, cette fonction l'utilise pour envoyer la requete.
@@ -326,13 +320,13 @@ function AjaxSqueezeNode(trig, target, f, event)
 		// laisser le choix de la touche enfoncee au moment du clic
 		// car beaucoup de systemes en prenne une a leur usage
 		if  (valid) {
-		   window.open(trig+'&transformer_xml=valider_xml');
+			window.open(trig+'&transformer_xml=valider_xml');
+		} else {
+			target.animeajax();
 		}
-		target.animeajax(0);
 		res = jQuery.ajax({
 			"url":trig,
 			"complete": function(r,s) {
-				target.animeajax(1);
 				AjaxRet(r,s,target, callback);
 			}
 		});
@@ -349,12 +343,13 @@ function AjaxSqueezeNode(trig, target, f, event)
 		//set the element receiving the ajax post
 		target = doc.body;
 	}
+	else {
+		target.animeajax();
+	}
 
-	target.animeajax(0);
 	jQuery(trig).ajaxSubmit({
 		"target": target,
 		"success": function(res,status) {
-			target.animeajax(1);
 			if(status=='error') return this.html('Erreur HTTP');
 			callback.apply(this,[res,status]);
 		},
