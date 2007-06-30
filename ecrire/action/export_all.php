@@ -35,23 +35,14 @@ function action_export_all_dist()
 	if ($quoi =='start'){
 		// creer l'en tete du fichier et retourner dans l'espace prive
 		include_spip('inc/export');
-		if (ecrire_fichier($file, export_entete(),false)) {
-		
-		  ecrire_meta("status_dump", "$gz::$archive::1::0",'non');
-		  ecrire_metas();
-		  include_spip('inc/headers');
+		ecrire_fichier($file, export_entete(),false);
+		ecrire_meta("status_dump", "$gz::$archive::1::0",'non');
+		ecrire_metas();
+		include_spip('inc/headers');
 		  // suite=1 ne sert qu'a distinguer cette redirection
 		  // d'avec l'appel initial sinon FireFox croit malin
 		  // d'optimiser la redirection
-		  redirige_par_entete(generer_url_ecrire('export_all',"suite=1", true));
-		} else {
-		  echo minipres(_T('info_sauvegarde'),
-				"<p>".
-				_T('avis_erreur_sauvegarde',
-				   array('type'=>'.', 'id_objet'=>'. .')) .
-				"</p>\n");
-		  exit;
-		}
+		redirige_par_entete(generer_url_ecrire('export_all',"suite=1", true));
 	}elseif ($quoi=='end'){
 		lire_metas();
 		$tables_sauvegardees = isset($GLOBALS['meta']['status_dump_tables'])?unserialize($GLOBALS['meta']['status_dump_tables']):array();

@@ -14,7 +14,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@lire_metas
 function lire_metas() {
-	if (!_FILE_CONNECT && !@file_exists(_FILE_CONNECT_INS .'.php')) return;
+	if (!_FILE_CONNECT && !@file_exists(_FILE_CONNECT_INS .'.php'))
+		return false;
 	if ($result = @spip_query("SELECT nom,valeur FROM spip_meta")) {
 
 		$GLOBALS['meta'] = array();
@@ -24,6 +25,7 @@ function lire_metas() {
 		if (!$GLOBALS['meta']['charset'])
 			ecrire_meta('charset', _DEFAULT_CHARSET);
 	}
+	return $GLOBALS['meta'];
 }
 
 // http://doc.spip.org/@ecrire_meta
@@ -51,25 +53,8 @@ function effacer_meta($nom) {
 //
 // http://doc.spip.org/@ecrire_metas
 function ecrire_metas() {
-	if (!_FILE_CONNECT && !@file_exists(_FILE_CONNECT_INS .'.php')) return;
 
-	lire_metas();
-
-	if (is_array($GLOBALS['meta'])) {
-		$ok = ecrire_fichier (_FILE_META, serialize($GLOBALS['meta']));
-		if (!$ok && $GLOBALS['connect_statut'] == '0minirezo') {
-			include_spip('inc/headers');
-			include_spip('inc/minipres');
-			echo minipres(_T('texte_inc_meta_2'), "<h4 style='color: red'>"
-			. _T('texte_inc_meta_1', array('fichier' => _FILE_META))
-			. " <a href='" . generer_test_dirs() . "'>"
-			. _T('texte_inc_meta_2')
-			. "</a> "
-			. _T('texte_inc_meta_3',
-				array('repertoire' => joli_repertoire(_DIR_TMP)))
-			. "</h4>\n");
-			exit;
-		}
-	}
+	if (lire_metas())
+		ecrire_fichier(_FILE_META, serialize($GLOBALS['meta']));
 }
 ?>

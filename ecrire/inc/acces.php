@@ -160,14 +160,9 @@ function ecrire_acces() {
 			$p2 .= $t['login'].':'.$t['htpass']."\n";
 	}
 
-	if (ecrire_fichier($htpasswd, $p1)
-	AND ecrire_fichier($htpasswd.'-admin', $p2)) {
-		spip_log("Ecriture de $htpasswd et $htpasswd-admin: OK");
-	} else {
-		spip_log("Erreur $htpasswd / $htpasswd-admin!");
-		include_spip('inc/headers');
-		redirige_par_entete(generer_test_dirs('', true));
-	}
+	ecrire_fichier($htpasswd, $p1);
+	ecrire_fichier($htpasswd.'-admin', $p2);
+	spip_log("Ecriture de $htpasswd et $htpasswd-admin: OK");
 }
 
 
