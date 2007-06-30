@@ -387,6 +387,7 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 // Il vaudrait mieux rajouter une table des statuts (ou un groupe de mots)
 // et un table de jointure entre ca et la table des groupes de mots.
 
+// http://doc.spip.org/@editer_mot_droits
 function editer_mot_droits($select, $cond)
 {
 	$droit = substr($GLOBALS['auteur_session']['statut'],1);
