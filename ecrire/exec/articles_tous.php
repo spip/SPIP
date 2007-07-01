@@ -115,13 +115,13 @@ function texte_articles_tous(&$sel_lang, $flag_trad, $aff_art,$spip_lang_dir){
 
 	$sel_lang[$spip_lang] = $spip_lang;
 
-	if ($GLOBALS['auteur_session']['statut'] == "0minirezo")
+	if (autoriser('publierdans', 'rubrique', 0))
 		$result = spip_query("SELECT id_article, titre, statut, id_rubrique, lang, id_trad, date_modif FROM spip_articles ORDER BY date DESC");
 	else 
 		$result = spip_query("SELECT articles.id_article, articles.titre, 
 			articles.statut, articles.id_rubrique, articles.lang, articles.id_trad,
 			articles.date_modif FROM spip_articles AS articles LEFT JOIN
-			spip_auteurs_articles AS lien ON articles.id_article =	lien.id_article	 WHERE articles.statut = 'publie' OR articles.statut =	'prop' OR (articles.statut = 'prepa'  AND lien.id_auteur=" . _q($GLOBALS['auteur_session']['id_auteur']) . " GROUP BY id_article ORDER BY articles.date DESC");
+			spip_auteurs_articles AS lien ON articles.id_article =	lien.id_article	 WHERE articles.statut = 'publie' OR articles.statut =	'prop' OR (articles.statut = 'prepa'  AND lien.id_auteur=" . _q($GLOBALS['auteur_session']['id_auteur']) . ") GROUP BY id_article ORDER BY articles.date DESC");
 
 	while($row = spip_fetch_array($result)) {
 		$id_rubrique=$row['id_rubrique'];
