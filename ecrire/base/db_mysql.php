@@ -56,12 +56,19 @@ function base_db_mysql_dist()
 // http://doc.spip.org/@spip_query_db
 function spip_query_db($query) {
 
+	static $trace = '?';
 	$query = traite_query($query);
 
-	$start = (isset($_GET['var_profile'])
-		AND isset($GLOBALS['auteur_session']['statut'])
-		AND ($GLOBALS['auteur_session']['statut'] == '0minirezo')
-		) ? microtime() : 0;
+	$start = 0;
+	if (isset($_GET['var_profile'])) {
+		if ($trace === '?') {
+			include_spip('inc/autoriser');
+		// gare au bouclage sur calcul de droits au premier appel
+			$trace = true;
+			$trace = autoriser('voirstats');
+		}
+		if ($trace) $start = microtime();
+	}
 
 	return spip_mysql_trace($query, 
 				$start,
@@ -84,13 +91,14 @@ function spip_mysql_trace($query, $start, $result)
 		if (in_array($s, array(2006,2013)))
 			define('spip_interdire_cache', true);
 		$s .= ' '.mysql_error();
-		if ($GLOBALS['mysql_debug']
-		AND (isset($GLOBALS['auteur_session']['statut']))
-		AND ($GLOBALS['auteur_session']['statut'] == '0minirezo')) {
-			include_spip('public/debug');
-			$tableau_des_erreurs[] = array(
+		if ($GLOBALS['mysql_debug']) {
+			include_spip('inc/autoriser');
+			if (autoriser('voirstats')) {
+				include_spip('public/debug');
+				$tableau_des_erreurs[] = array(
 				_T('info_erreur_requete'). " "  .  htmlentities($query),
 				"&laquo; " .  htmlentities($result = $s)," &raquo;");
+			}
 		}
 		spip_log($GLOBALS['REQUEST_METHOD'].' '.$GLOBALS['REQUEST_URI'], 'mysql');
 		spip_log("$result - $query", 'mysql');
