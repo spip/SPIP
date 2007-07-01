@@ -453,11 +453,11 @@ function autoriser_chargerftp_dist($faire, $type, $id, $qui, $opt) {
 
 //
 // Peut-on voir un document dans _DIR_IMG ?
-// Tout le monde (y compris les visiteurs non enregistres)
-// sauf si une extension comme acces_restreint a positionne creer_htaccees
+// Tout le monde (y compris les visiteurs non enregistres), puisque par
+// defaut ce repertoire n'est pas protege ; si une extension comme
+// acces_restreint a positionne creer_htaccess, on regarde
+// si le document est lie a un element publie
 //
-// http://doc.spip.org/@autoriser_document_voir_dist
-
 // http://doc.spip.org/@autoriser_document_voir_dist
 function autoriser_document_voir_dist($faire, $type, $id, $qui, $opt) {
 	if ($GLOBALS['meta']["creer_htaccess"] != 'oui')
