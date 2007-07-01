@@ -450,7 +450,7 @@ AND !headers_sent()) {
 	// si la compression est deja commencee, stop
 	&& !@ini_get("zlib.output_compression")
 	&& !@ini_get("output_handler")
-	&& !isset($GLOBALS['var_mode']) # bug avec le debugueur qui appelle ob_end_clean()
+	&& !isset($_GET['var_mode']) # bug avec le debugueur qui appelle ob_end_clean()
 	)
 		ob_start('ob_gzhandler');
 }

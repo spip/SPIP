@@ -65,7 +65,7 @@ function spip_query_db($query) {
 			include_spip('inc/autoriser');
 		// gare au bouclage sur calcul de droits au premier appel
 			$trace = true;
-			$trace = autoriser('voirstats');
+			$trace = autoriser('debug');
 		}
 		if ($trace) $start = microtime();
 	}
