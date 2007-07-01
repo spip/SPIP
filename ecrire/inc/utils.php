@@ -697,14 +697,20 @@ function find_in_path ($filename) {
 	static $ram;
 	$dirs = creer_chemin();
 
-	$p = pathinfo($filename);
+	$a = strrpos($filename,'/');
+	if ($a === false) {
+		$dirname = '';
+		$basename = $filename;
+	} else {
+		$dirname = substr($filename, 0, $a+1);
+		$basename = substr($filename, $a+1);
+	}
 	foreach($dirs as $dir) {
-		$sous = $dir.$p['dirname'];
+		$sous = $dir.$dirname;
 		if (!isset($ram[$sous]))
 			$ram[$sous] = memoriser_fichiers($sous);
-		$f = $p['basename'];
-		if (isset($ram[$sous][$f])
-		AND is_readable($f = $sous.'/'.$f))
+		if (isset($ram[$sous][$basename])
+		AND is_readable($f = $sous.$basename))
 			return $f;
 	}
 }
