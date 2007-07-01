@@ -1173,7 +1173,7 @@ function balise_INCLURE_dist($p) {
 		) {
 			$flag_env = true;
 			unset($_contexte['env']);
-		}
+		} else $flag_env = false;
 		$l = 'array(' . join(",\n\t", $_contexte) .')';
 		if ($flag_env) {
 			$l = "array_merge(\$Pile[0],$l)";

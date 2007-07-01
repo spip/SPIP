@@ -33,7 +33,7 @@ function exec_valider_xml_dist()
 
 	} else {
 
-		list($server, $script) = preg_split('/[?]/', $url);
+		@list($server, $script) = preg_split('/[?]/', $url);
 		if ((!$server) OR ($server == './') 
 		OR strpos($server, url_de_base()) === 0) {
 	    		include_spip('inc/headers');

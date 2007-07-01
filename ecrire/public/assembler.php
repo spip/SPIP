@@ -486,15 +486,13 @@ function message_erreur_404 ($erreur= "") {
 // http://doc.spip.org/@recuperer_fond
 function recuperer_fond($fond, $contexte=array(),$protect_xml=false, $trim=true) {
 	// on est peut etre dans l'espace prive au moment de l'appel
-	define ('_INC_PUBLIC', 1);
+	if  (!defined ('_INC_PUBLIC')) define ('_INC_PUBLIC', 1);
 	if (($fond=='')&&isset($contexte['fond']))
 		$fond = $contexte['fond'];
 
-	$fonds = array($fond);
-	if (is_array($fond)) $fonds=$fond;
 	$texte = "";
-	foreach($fonds as $fond){
-		$page = inclure_page($fond, $contexte);
+	foreach(is_array($fond) ? $fond : array($fond) as $f){
+		$page = inclure_page($f, $contexte);
 		if ($GLOBALS['flag_ob'] AND ($page['process_ins'] != 'html')) {
 			ob_start();
 			eval('?' . '>' . $page['texte']);
@@ -503,11 +501,10 @@ function recuperer_fond($fond, $contexte=array(),$protect_xml=false, $trim=true)
 		}
 		if (!$protect_xml && isset($page['entetes']['X-Xml-Hack']))
 			$page['texte'] = str_replace("<\1?xml", '<'.'?xml', $page['texte']);
-	
-		$texte .= $page['texte']; // pas de trim, pour etre homogene avec <INCLURE>
-		if ($trim) $texte = trim($texte);
+	// pas de trim, pour etre homogene avec <INCLURE>
+		$texte .= $trim ? rtrim($page['texte']) : $page['texte'];
 	}
-	return $texte;
+	return $trim ?  ltrim($texte) : $texte;
 }
 
 // temporairement ici : a mettre dans le futur inc/modeles
