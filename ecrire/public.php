@@ -204,8 +204,7 @@ if (defined('_INC_PUBLIC')) {
 			// en cas d'erreur lors du eval,
 			// la memoriser dans le tableau des erreurs
 			// On ne revient pas ici si le nb d'erreurs > 4
-			if ($res === false AND $affiche_boutons_admin
-			AND $auteur_session['statut'] == '0minirezo') {
+			if ($res === false AND $affiche_boutons_admin) {
 				include_spip('public/debug');
 				erreur_squelette(_T('zbug_erreur_execution_page'));
 			}

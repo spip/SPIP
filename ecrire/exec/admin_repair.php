@@ -15,13 +15,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /*
  * REMARQUE IMPORTANTE : SECURITE
  * Ce systeme de reparation doit pouvoir fonctionner meme si
- * la table spip_auteurs est en panne : on n'appelle donc pas
+ * la table spip_auteurs est en panne : index.php n'appelle donc pas
  * inc_auth ; seule l'authentification ftp est exigee
  *
  */
 
-$GLOBALS['connect_statut'] = '0minirezo';
-$GLOBALS['connect_toutes_rubriques']= true;
 include_spip('base/db_mysql');
 
 // http://doc.spip.org/@exec_admin_repair_dist

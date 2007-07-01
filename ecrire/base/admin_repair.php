@@ -49,6 +49,5 @@ function base_admin_repair_dist() {
 	}
 	include_spip('inc/minipres');
 	echo minipres(_T('texte_tentative_recuperation'), $res);
-	exit;
 }
 ?>
