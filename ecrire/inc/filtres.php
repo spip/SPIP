@@ -58,7 +58,7 @@ $GLOBALS['spip_matrice']['couleur_eclaircir_si_foncee'] = $inc_filtres_images;
 // http://doc.spip.org/@filtrer
 function filtrer($filtre) {
 	if (isset($GLOBALS['spip_matrice'][$filtre])
-	AND $GLOBALS['spip_matrice'][$filtre])
+	AND $f = $GLOBALS['spip_matrice'][$filtre])
 		include_once($f);
 
 	$tous = func_get_args();
