@@ -28,8 +28,6 @@ function exec_config_contenu_dist()
 	$config = charger_fonction('config', 'inc');
 	$config();
 
-	lire_metas();
-
 	pipeline('exec_init',array('args'=>array('exec'=>'config_contenu'),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_config_contenu'), "configuration", "configuration");

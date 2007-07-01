@@ -10,8 +10,8 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/meta');
 
 //
@@ -29,6 +29,7 @@ function liste_metas()
 {
 	return array(
 		'nom_site' => _T('info_mon_site_spip'),
+		'adresse_site' => preg_replace(",/$,", "", url_de_base()),
 		'descriptif_site' => '',
 		'activer_breves' => 'non',
 		'activer_logos' => 'oui',
@@ -64,6 +65,10 @@ function liste_metas()
 		'accepter_visiteurs' => 'non',
 		'prevenir_auteurs' => 'non',
 		'suivi_edito' => 'non',
+		'adresse_suivi' =>'',
+		'adresse_suivi_inscription' =>'',
+		'adresse_neuf' => '',
+		'jours_neuf' => '',
 		'quoi_de_neuf' => 'non',
 		'forum_prive_admin' => 'non',
 
@@ -81,46 +86,41 @@ function liste_metas()
 		'multi_rubriques' => 'non',
 		'multi_secteurs' => 'non',
 		'gerer_trad' => 'non',
+		'langues_multilingue' => ''
 	);
 }
 
-// http://doc.spip.org/@actualise_metas
+// mets les meta a des valeurs conventionnelles quand elles sont vides
+// et recalcule les langues
+
 function actualise_metas($liste_meta)
 {
 	while (list($nom, $valeur) = each($liste_meta)) {
 		if (!$GLOBALS['meta'][$nom]) {
 			ecrire_meta($nom, $valeur);
-			$modifs = true;
 		}
 	}
-	// initialiser adresse_site au besoin
-	if (strlen($GLOBALS['meta']["adresse_site"])<10) {
-		ecrire_meta('adresse_site', preg_replace(",/$,", "", url_de_base()));
-		$modifs = true;
-	}
-
-	if ($modifs) ecrire_metas();
 
 	include_spip('inc/rubriques');
-	calculer_langues_utilisees();
+	$langues = calculer_langues_utilisees();
+	ecrire_meta('langues_utilisees', $langues);
+	ecrire_metas();
 }
 
 
 // http://doc.spip.org/@avertissement_config
 function avertissement_config() {
 	global $spip_lang_right, $spip_lang_left;
-	$texte = debut_boite_info(true);
 
-	$texte .= "\n<div class='verdana2' style='text-align: justify'>
-	<p style='text-align: center'><b>"._T('avis_attention')."</b></p>";
-	$texte .= http_img_pack("warning.gif", (_T('avis_attention')),
-		"width='48' height='48' style='float: $spip_lang_right; padding-$spip_lang_left: 10px;'");
-	$texte .= _T('texte_inc_config');
-	$texte .= "</div>";
-	$texte .= fin_boite_info(true);
-	$texte .= "<p>&nbsp;</p>\n";
-	
-	return $texte;
+	return debut_boite_info(true)
+	. "\n<div class='verdana2' style='text-align: justify'>
+	<p style='text-align: center'><b>"._T('avis_attention')."</b></p>"
+	. http_img_pack("warning.gif", (_T('avis_attention')),
+		"width='48' height='48' style='float: $spip_lang_right; padding-$spip_lang_left: 10px;'")
+	. _T('texte_inc_config')
+	. "</div>"
+	. fin_boite_info(true)
+	. "<p>&nbsp;</p>\n";
 }
 
 
@@ -204,68 +204,8 @@ function appliquer_modifs_config() {
 		ecrire_meta("email_envoi", $email_envoi);
 	if ($charset == 'custom') $charset = $charset_custom;
 
-	$liste_meta = array(
-		'nom_site',
-		'adresse_site',
-		'descriptif_site',
+	$liste_meta = array_keys(liste_metas());
 
-		'activer_breves',
-		'activer_logos',
-		'activer_logos_survol',
-		'config_precise_groupes',
-		'mots_cles_forums',
-		'articles_surtitre',
-		'articles_soustitre',
-		'articles_descriptif',
-		'articles_chapeau',
-		'articles_texte',
-		'articles_ps',
-		'articles_redac',
-		'articles_mots',
-		'post_dates',
-		'articles_urlref',
-		'articles_redirection',
-		'creer_preview',
-		'taille_preview',
-		'articles_modif',
-
-		'rubriques_descriptif',
-		'rubriques_texte',
-
-		'activer_sites',
-		'proposer_sites',
-		'activer_syndic',
-		'visiter_sites',
-		'moderation_sites',
-
-		'forums_publics',
-		'accepter_inscriptions',
-		'accepter_visiteurs',
-		'prevenir_auteurs',
-		'suivi_edito',
-		'adresse_suivi',
-		'adresse_suivi_inscription',
-		'quoi_de_neuf',
-		'adresse_neuf',
-		'jours_neuf',
-		'forum_prive_admin',
-
-		'activer_moteur',
-		'articles_versions',
-		'preview',
-		'activer_statistiques',
-
-		'documents_article',
-		'documents_rubrique',
-		'syndication_integrale',
-
-		'charset',
-		'multi_articles',
-		'multi_rubriques',
-		'multi_secteurs',
-		'gerer_trad',
-		'langues_multilingue'
-	);
 	// Modification du reglage accepter_inscriptions => vider le cache
 	// (pour repercuter la modif sur le panneau de login)
 	if (isset($GLOBALS['accepter_inscriptions'])
