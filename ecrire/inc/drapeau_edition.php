@@ -87,7 +87,7 @@ function qui_edite ($id, $type='article') {
 
 	$edition = lire_tableau_edition();
 
-	return $edition ? $edition[$type][$id] : '';
+	return $edition ? $edition[$type][$id] : array();
 }
 
 // http://doc.spip.org/@mention_qui_edite
