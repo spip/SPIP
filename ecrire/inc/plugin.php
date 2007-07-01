@@ -720,7 +720,7 @@ function affiche_bloc_plugin($plug_file, $info) {
 function plugin_propre($texte) {
 	$mem = $GLOBALS['toujours_paragrapher'];
 	$GLOBALS['toujours_paragrapher'] = false;
-	$regexp = "|<:([^>]*):>|";
+	$regexp = "|\[:([^>]*):\]|";
 	if (preg_match_all($regexp, $texte, $matches, PREG_SET_ORDER))
 	foreach ($matches as $regs)
 		$texte = str_replace($regs[0],
