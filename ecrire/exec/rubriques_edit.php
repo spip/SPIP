@@ -18,7 +18,9 @@ include_spip('inc/documents');
 // http://doc.spip.org/@exec_rubriques_edit_dist
 function exec_rubriques_edit_dist()
 {
-	global $connect_toutes_rubriques, $champs_extra, $connect_statut, $id_parent, $id_rubrique, $new,$spip_lang_right;
+	global $connect_toutes_rubriques, $champs_extra, $connect_statut, $spip_lang_right;
+
+	$new = _request('new');
 
 	if ($new == "oui") {
 		$id_rubrique = 0;
@@ -26,13 +28,13 @@ function exec_rubriques_edit_dist()
 		$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 		$descriptif = "";
 		$texte = "";
-		$id_parent = intval($id_parent);
+		$id_parent = intval(_request('id_parent'));
 
 		if (!autoriser('creerrubriquedans','rubrique',$id_parent)) {
 			$id_parent = reset($GLOBALS['connect_id_rubrique']);
 		}
 	} else {
-		$id_rubrique = intval($id_rubrique);
+		$id_rubrique = intval(_request('id_rubrique'));
 
 		$row = spip_fetch_array(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique'"));
 	
