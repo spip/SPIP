@@ -96,7 +96,7 @@ function exec_menu_navigation_dist() {
 			
 		if (autoriser('creersitedans', 'rubrique', $une_rubrique)) {
 			$gadget .= "<div style='width: 140px; float: $spip_lang_left;'>"
-			. icone_horizontale(_T('info_sites_referencer'), generer_url_ecrire("sites_edit","new=oui$dans_parent"), "site-24.gif","creer.gif", false)
+			. icone_horizontale(_T('info_sites_referencer'), generer_url_ecrire("sites_edit","new=oui$dans_rub"), "site-24.gif","creer.gif", false)
 			. "</div>";
 		}
 			
