@@ -19,6 +19,7 @@ include_spip('inc/actions');
 // http://doc.spip.org/@action_joindre_dist
 function action_joindre_dist()
 {
+	global $redirect;
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
@@ -30,20 +31,21 @@ function action_joindre_dist()
 
 	list(, $id, $id_document, $mode, $type) = $r;
 	$actifs = array();
-	action_joindre_sous_action($id, $id_document, $mode, $type, $actifs);
+	$redirect = action_joindre_sous_action($id, $id_document, $mode, $type, $actifs);
 }
 
 // http://doc.spip.org/@action_joindre_sous_action
 function action_joindre_sous_action($id, $id_document, $mode, $type, &$documents_actifs)
 {
-	global $redirect, $hash, $url, $chemin, $ancre,
-	  $sousaction1,
-	  $sousaction2,
-	  $sousaction3,
-	  $sousaction4,
-	  $sousaction5,
-	  $_FILES,  $HTTP_POST_FILES;
-
+	$hash = _request('hash');
+	$url = _request('url');
+	$chemin = _request('chemin');
+	$ancre = _request('ancre');
+	$sousaction1 = _request('sousaction1');
+	$sousaction2 = _request('sousaction2');
+	$sousaction3 = _request('sousaction3');
+	$sousaction4 = _request('sousaction4');
+	$sousaction5 = _request('sousaction5');
 	$redirect = _request('redirect');
 	$iframe_redirect = _request('iframe_redirect');
 
@@ -56,7 +58,7 @@ function action_joindre_sous_action($id, $id_document, $mode, $type, &$documents
 	  ($sousaction4 ? 4 :
 	   $sousaction5 ))));
 
-     $path = ($sousaction1 ? ($_FILES ? $_FILES : $HTTP_POST_FILES) :
+     $path = ($sousaction1 ? ($_FILES ? $_FILES : $GLOBALS['HTTP_POST_FILES']) :
 	     ($sousaction2 ? $url : $chemin));
 
      $sousaction = charger_fonction('joindre' . $sousaction, 'inc');
@@ -87,6 +89,7 @@ function action_joindre_sous_action($id, $id_document, $mode, $type, &$documents
 	if(_request("iframe") == 'iframe') {
 		$redirect = parametre_url(urldecode($iframe_redirect),"show_docs",join(',',$documents_actifs),'&')."&iframe=iframe";
 	}
+	return $redirect;
 }
 
 // Cas d'un document distant reference sur internet
