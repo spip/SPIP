@@ -20,13 +20,6 @@ include_spip('inc/message_select');
 include_spip('inc/autoriser');
 
 
-// Deux constantes surchargeables, cf. plugin autorite :
-	// statut par defaut a la creation
-	define('_STATUT_AUTEUR_CREATION', '1comite');
-	// statuts associables a des rubriques (separes par des virgules)
-	define('_STATUT_AUTEUR_RUBRIQUE', '0minirezo');
-
-
 //  affiche le statut de l'auteur dans l'espace prive
 // les admins voient et peuvent modifier les droits d'un auteur
 // les admins restreints les voient mais 
@@ -36,7 +29,7 @@ include_spip('inc/autoriser');
 function inc_instituer_auteur_dist($auteur) {
 
 	if (!$id_auteur = $auteur['id_auteur']) {
-		$statut = _STATUT_AUTEUR_CREATION; 
+		$statut = _STATUT_AUTEUR_CREATION;
 	} else
 		$statut = $auteur['statut'];
 

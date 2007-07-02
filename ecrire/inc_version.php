@@ -308,40 +308,11 @@ $spip_version = 1.938;
 // (ce qui marche pour yy ne marchera pas forcement sur une version plus ancienne)
 // type nouvelles fonctionnalites, deplacement de fonctions ...
 $spip_version_affichee = '1.9.3 dev';
-$spip_version_code = '1.9257';
+$spip_version_code = '1.9258';
 
 // ** Securite **
 $auteur_session = $connect_statut = $connect_toutes_rubriques =  $hash_recherche = $hash_recherche_strict = $ldap_present ='';
 $connect_id_rubrique = array();
-
-// definition des lots de fichier precharges en blocs pour reduire les find_in_path en usage courant
-// mecanisme desactivable par 
-define('_PREFETCH_PREFIXE_FICHIERS','prefetch-v01-noyau-');
-#define('_PAS_DE_PRECHARGEMENT_PHP',1);
-// scenario typique de service d'une page en cache
-$GLOBALS['prefetch']['inc/meta']['fetch']='service_mini';
-$GLOBALS['prefetch']['inc/session']['fetch']='service_mini';
-$GLOBALS['prefetch']['public/assembler']['fetch']='service_mini';
-$GLOBALS['prefetch']['public/cacher']['fetch']='service_mini';
-$GLOBALS['prefetch']['public/stats']['fetch']='service_mini';
-
-// scenario typique de calcul d'un squelette
-$GLOBALS['prefetch']['inc/charsets']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['inc/filtres']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['base/abstract_sql']['fetch']='calcul_skel';
-//$GLOBALS['prefetch']['base/auxiliaires']['fetch']='calcul_skel'; // appele parfois sur un hit en cache
-$GLOBALS['prefetch']['base/db_mysql']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['base/serial']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['base/typedoc']['fetch']='calcul_skel';
-//$GLOBALS['prefetch']['inc/actions']['fetch']='calcul_skel'; // appele parfois sur un hit en cache
-$GLOBALS['prefetch']['inc/acces']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['inc/date']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['inc/texte']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['public/parametrer']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['public/styliser']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['public/composer']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['public/interfaces']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['inc/documents']['fetch']='calcul_skel';
 
 // *** Fin des globales *** //
 
