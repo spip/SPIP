@@ -42,10 +42,10 @@ function exec_admin_plugin_dist() {
 	echo debut_boite_info(true);
 	$s = "";
 	$s .= _T('info_gauche_admin_tech');
-	$s .= "<p><img src='"._DIR_IMG_PACK . "puce-poubelle.gif' width='9' height='9' alt='dev' /> "._T('plugin_etat_developpement')."</p>";
-	$s .= "<p><img src='"._DIR_IMG_PACK . "puce-orange.gif' width='9' height='9' alt='dev' /> "._T('plugin_etat_test')."</p>";
-	$s .= "<p><img src='"._DIR_IMG_PACK . "puce-verte.gif' width='9' height='9' alt='dev' /> "._T('plugin_etat_stable')."</p>";
-	$s .= "<p><img src='"._DIR_IMG_PACK . "puce-rouge.gif' width='9' height='9' alt='dev' /> "._T('plugin_etat_experimental')."</p>";
+	$s .= "<p><img src='"._DIR_IMG_PACK . "puce-poubelle.gif' width='9' height='9' alt='' /> "._T('plugin_etat_developpement')."</p>";
+	$s .= "<p><img src='"._DIR_IMG_PACK . "puce-orange.gif' width='9' height='9' alt='' /> "._T('plugin_etat_test')."</p>";
+	$s .= "<p><img src='"._DIR_IMG_PACK . "puce-verte.gif' width='9' height='9' alt='' /> "._T('plugin_etat_stable')."</p>";
+	$s .= "<p><img src='"._DIR_IMG_PACK . "puce-rouge.gif' width='9' height='9' alt='' /> "._T('plugin_etat_experimental')."</p>";
 	echo $s;
 	echo fin_boite_info(true);
 
