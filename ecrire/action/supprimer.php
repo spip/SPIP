@@ -37,16 +37,12 @@ function action_supprimer_dist() {
 
 // http://doc.spip.org/@action_supprimer_document
 function action_supprimer_document($arg) {
-	global $redirect;
 	supprimer_document_et_vignette(intval($arg));
-	$redirect = rawurldecode($redirect);
-	if (strpos($redirect, 'id_rubrique=')) {
+	if (strpos(_request('redirect'), 'id_rubrique=')) {
 		include_spip('inc/rubriques');
 		calculer_rubriques();
 	}
-	redirige_par_entete($redirect);
 }
-
 
 // http://doc.spip.org/@action_supprimer_rubrique
 function action_supprimer_rubrique($id_rubrique)
