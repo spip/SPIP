@@ -52,8 +52,6 @@ function http_img_rien($width, $height, $class='', $title='') {
 // http://doc.spip.org/@statistiques_csv
 function statistiques_csv($id) {
 
-	if (!autoriser('voirstats', $id ? 'article':'', $id)) exit;
-
 	$filename = 'stats_'.($id ? 'article'.$id : 'total').'.csv';
 	header('Content-Type: text/csv');
 	header('Content-Disposition: attachment; filename='.$filename);
@@ -70,10 +68,18 @@ function statistiques_csv($id) {
 // http://doc.spip.org/@exec_statistiques_visites_dist
 function exec_statistiques_visites_dist()
 {
-	global $connect_statut, $origine, $spip_lang_left;
+	global $connect_statut, $spip_lang_left;
 
 	$id_article = intval(_request('id_article'));
 	$aff_jours = intval(_request('aff_jours'));
+	$origine = _request('origine');
+
+	if (!autoriser('voirstats', $id_article ? 'article':'', $id_article)) {
+	  include_spip('minipres');
+	  echo minipres();
+	  exit;
+	}
+
 	if (!$aff_jours) $aff_jours = 105;
 	// nombre de referers a afficher
 	$limit = intval(_request('limit'));
@@ -262,13 +268,6 @@ else {
 
 	debut_droite();
  }
-
-
-if (!autoriser('voirstats', $id_article ? 'article':'', $id_article)) {
-	echo _T('avis_non_acces_page');
-	echo fin_gauche(), fin_page();
-	exit;
-}
 
 
 //////
