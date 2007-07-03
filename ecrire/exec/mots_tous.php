@@ -89,12 +89,12 @@ function exec_mots_tous_dist()
 		if ($acces_forum == "oui") $res .= "> "._T('info_visiteurs_02')." &nbsp;&nbsp;";
 
  		echo "<span class='verdana1 spip_x-small'>", $res, "</span>";
-		if ($descriptif) {
-			echo "<div style='border: 1px dashed #aaaaaa; ' class='verdana1 spip_small'>", "<b>",_T('info_descriptif'),"</b> ", propre($descriptif), "&nbsp; </div>";
+		if (strlen($descriptif)) {
+			echo "<div style='border: 1px dashed #aaa; background-color: #fff;' class='verdana1 spip_x-small '>", propre("{{"._T('info_descriptif')."}} ".$descriptif), "&nbsp; </div>";
 		}
 
 		if (strlen($texte)>0){
-			echo "<span class='verdana1 spip_small'>", propre($texte), "</span>";
+			echo "<div class='verdana1 spip_small'>", propre($texte), "</div>";
 		}
 
 		//
