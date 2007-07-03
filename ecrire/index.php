@@ -25,11 +25,11 @@ include_spip('inc/cookie');
 //
 
 $exec = _request('exec');
+$reinstall = _request('reinstall');
 
 //
 // Authentification, redefinissable
 //
-
 if (autoriser_sans_cookie($exec)) {
 	if (!isset($reinstall)) $reinstall = 'non';
 	$var_auth = true;
