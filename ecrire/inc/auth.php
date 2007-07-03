@@ -186,7 +186,8 @@ function inc_auth_dist() {
 
 	// Administrateurs
 	if ($connect_statut == '0minirezo') {
-		$connect_id_rubrique = $GLOBALS['auteur_session']['restreint'];
+		if (is_array($GLOBALS['auteur_session']['restreint']))
+			$connect_id_rubrique = $GLOBALS['auteur_session']['restreint'];
 		$connect_toutes_rubriques = !$connect_id_rubrique;
 	} 
 	// Pour les redacteurs, inc_version a fait l'initialisation minimale
