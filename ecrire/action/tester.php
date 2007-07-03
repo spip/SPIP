@@ -16,7 +16,7 @@ include_spip('inc/meta');
 // Tester nos capacites
 // http://doc.spip.org/@action_tester_dist
 function action_tester_dist() {
-	global $arg;
+	$arg = _request('arg');
 
 	// verifier les formats acceptes par GD
 	if ($arg == "gd1") {

@@ -18,13 +18,13 @@ include_spip('inc/headers');
 // Tester nos capacites a creer des images avec GD2 (taille memoire)
 // http://doc.spip.org/@action_tester_taille_dist
 function action_tester_taille_dist() {
-	global $arg;
+
 	//$securiser_action = charger_fonction('securiser_action', 'inc');
 	//$arg = $securiser_action();
 	$max_size = isset($GLOBALS['meta']['max_taille_vignettes'])?$GLOBALS['meta']['max_taille_vignettes']:0;
 	$max_size_echec = isset($GLOBALS['meta']['max_taille_vignettes_echec'])?$GLOBALS['meta']['max_taille_vignettes_echec']:0;
 	$max_size_test = isset($GLOBALS['meta']['max_taille_vignettes_test'])?$GLOBALS['meta']['max_taille_vignettes_test']:0;
-	$taille = intval($arg);
+	$taille = intval(_request('arg'));
 	$file = _DIR_IMG_PACK . 'jauge-vert.gif';
 	$file_size = 94;
 	
