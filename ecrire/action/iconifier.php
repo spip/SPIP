@@ -25,7 +25,7 @@ function action_iconifier_dist()
 	if (!preg_match(',^-?\d*(\D)(.*)$,',$arg, $r))
 		spip_log("action iconifier: $arg pas compris");
 	elseif ($r[1] == '+')
-		action_spip_image_ajouter_dist($r[2]);
+		action_spip_image_ajouter_dist($r[2], _request('sousaction2'), _request('source'));
 	else	action_spip_image_effacer_dist($r[2]);
 	
 	if(_request("iframe") == 'iframe') {
@@ -48,8 +48,8 @@ function action_spip_image_effacer_dist($arg) {
 // $source = $_FILES[0]
 // $dest = arton12.xxx
 // http://doc.spip.org/@action_spip_image_ajouter_dist
-function action_spip_image_ajouter_dist($arg) {
-	global $sousaction2, $source, $formats_logos;
+function action_spip_image_ajouter_dist($arg,$sousaction2,$source) {
+	global $formats_logos;
 
 	include_spip('inc/getdocument');
 	if (!$sousaction2) {
