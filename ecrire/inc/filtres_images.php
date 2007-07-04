@@ -194,11 +194,11 @@ function image_gd_output($img,$valeurs, $qualite=85){
 	$lock = file_exists($valeurs['fichier_dest']) AND !file_exists($valeurs['fichier_dest'].'.src');
 	if (
 	     function_exists($fonction) 
-	  && ($ret = $fonction($img,$valeurs['fichier_dest'],$qualite)) # on a reussi a creer l'image
-	  && isset($valeurs['reconstruction']) # et on sait comment la resonctruire le cas echeant
-	  && !$lock
+			  && ($ret = $fonction($img,$valeurs['fichier_dest'],$qualite)) # on a reussi a creer l'image
+			  && isset($valeurs['reconstruction']) # et on sait comment la resonctruire le cas echeant
+			  && !$lock
 	  )
-		ecrire_fichier($valeurs['fichier_dest'].'.src',serialize($valeurs),true);
+		if (file_exists($valeurs['fichier_dest'])) ecrire_fichier($valeurs['fichier_dest'].'.src',serialize($valeurs),true);
 	return $ret;
 }
 
@@ -1210,7 +1210,15 @@ function image_masque($im, $masque, $pos="") {
 							$r_ = $r2;
 							$g_ = $g2;
 							$b_ = $b2;
-						} else {
+						} else if ($v2 ==0) {
+							$r_ = $r;
+							$g_ = $g;
+							$b_ = $b;
+						} else if ($v == 0) {
+							$r_ = $r2;
+							$g_ = $g2;
+							$b_ = $b2;
+						}else {
 							$r_ = $r + (($r2 - $r) * $v2 * (1 - $v));
 							$g_ = $g + (($g2 - $g) * $v2 * (1 - $v));
 							$b_ = $b + (($b2 - $b) * $v2 * (1 - $v));
@@ -1439,14 +1447,17 @@ function image_flou($im,$niveau=3)
 					
 					if ($i_ < 0 OR $i_ >= $x_i) $a = 127;
 					
-					$suma += $a*$coeffs[$niveau][$k];
+					$coef = $coeffs[$niveau][$k];
+					$suma += $a*$coef;
 					$ac = ((127-$a) / 127);
-										
-					$sumr += $r * $coeffs[$niveau][$k] * $ac;
-					$sumg += $g * $coeffs[$niveau][$k] * $ac;
-					$sumb += $b * $coeffs[$niveau][$k] * $ac;
-					$sum += $coeffs[$niveau][$k] * $ac;
-					$sum_ += $coeffs[$niveau][$k];
+					
+					$ac = $ac*$ac;
+					
+					$sumr += $r * $coef * $ac;
+					$sumg += $g * $coef * $ac;
+					$sumb += $b * $coef * $ac;
+					$sum += $coef * $ac;
+					$sum_ += $coef;
 				}
 				if ($sum > 0) $color = ImageColorAllocateAlpha ($temp1, $sumr/$sum, $sumg/$sum, $sumb/$sum, $suma/$sum_);
 				else $color = ImageColorAllocateAlpha ($temp1, 255, 255, 255, 127);
