@@ -206,7 +206,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	}
 
 	// Cas sans jamais de cache pour raison interne
-	if (isset($GLOBALS['var_mode']) &&
+	if ($GLOBALS['var_mode'] &&
 		(isset($_COOKIE['spip_session'])
 		|| isset($_COOKIE['spip_admin'])
 		|| @file_exists(_ACCESS_FILE_NAME))) {
@@ -222,7 +222,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 			@filemtime(_DIR_CACHE . $chemin_cache) : 0;
 		$page = @unserialize($page);
 		$use_cache = cache_valide($page, $lastmodified);
-		if (!$use_cache) return; // cache utilisable
+		if (!$use_cache) return; // $page est un cache utilisable
 	} else
 		$use_cache = 1; // fichier cache absent : provoque le calcul
 
