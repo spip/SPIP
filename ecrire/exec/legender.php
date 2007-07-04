@@ -15,9 +15,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@exec_legender_dist
 function exec_legender_dist()
 {
-	global $id_document, $id, $type, $ancre, $script;
-	$id = intval($id);
-	$id_document = intval($id_document);
+	$type = _request('type');
+	$ancre = _request('ancre');
+	$script = _request('script');
+	$id = intval(_request('id'));
+	$id_document = intval(_request('id_document'));
 
 	if (!autoriser('joindredocument',$type, $id)) {
 		include_spip('inc/minipres');
