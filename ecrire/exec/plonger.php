@@ -17,14 +17,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@exec_plonger_dist
 function exec_plonger_dist()
 {
-	global $id, $exclus, $col, $rac;
-	$id = intval($id);
-	$exclus = intval($exclus);
-	$col = intval($col);
+	$rac = _request('rac');
+	$id = intval(_request('id'));
+	$exclus = intval(_request('exclus'));
+	$col = intval(_request('col'));
 
 	include_spip('inc/actions');
 	$plonger = charger_fonction('plonger', 'inc');
 	ajax_retour($plonger($id, htmlentities($rac), array(), $col, $exclus));
 }
-
 ?>
