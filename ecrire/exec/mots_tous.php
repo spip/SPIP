@@ -18,9 +18,10 @@ include_spip('inc/actions');
 // http://doc.spip.org/@exec_mots_tous_dist
 function exec_mots_tous_dist()
 {
-	global $spip_lang, $spip_lang_left, $spip_lang_right, $son_groupe;
+	global $spip_lang, $spip_lang_left, $spip_lang_right;
 
 	$conf_mot = intval(_request('conf_mot'));
+	$son_groupe = intval(_request('son_groupe'));
 
 	pipeline('exec_init',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
