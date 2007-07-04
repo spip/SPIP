@@ -179,10 +179,14 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 		OR ($champs['statut'] == 'prop'
 			AND !in_array($statut_ancien, array('publie', 'prop'))
 		)) {
-			if ($d = _request('date', $c))
+			if ($d = _request('date', $c)) {
 				$champs['date'] = $d;
-			else
-				$champs['date'] = date('Y-m-d H:i:s');
+			} else {
+				# on prend la date de MySQL pour eviter un decalage cf. #975
+				$d = spip_query("SELECT NOW() AS d");
+				$d = spip_fetch_array($d);
+				$champs['date'] = $d['d'];
+			}
 		}
 	}
 
