@@ -61,7 +61,8 @@ if (defined('_INC_PUBLIC')) {
 		OR $GLOBALS['redirect'] = _request('redirect'))
 			redirige_par_entete(urldecode($GLOBALS['redirect']));
 
-		if (!headers_sent())
+		if (!headers_sent()
+		AND !ob_get_length())
 			http_status(204); // No Content
 		exit;
 	}
