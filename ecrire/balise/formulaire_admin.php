@@ -98,7 +98,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 			OR $GLOBALS['bouton_admin_debug']
 			OR (
 				$GLOBALS['var_mode'] == 'debug'
-				AND $GLOBALS['_COOKIE']['spip_debug']
+				AND $_COOKIE['spip_debug']
 			)
 		) AND (
 			$statut == '0minirezo'

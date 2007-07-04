@@ -130,7 +130,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 			("\n\t$init = array();") : '') .
 		calculer_requete_sql($boucles[$id_boucle]);
     }
-  $notrace = isset($GLOBALS['var_mode_affiche']) ? ($GLOBALS['var_mode_affiche'] != 'resultat') : true;
+  $notrace = (_request('var_mode_affiche') != 'resultat');
   return $req . $corps 
 	. ($notrace ? "" : "
 		boucle_debug_resultat('$id_boucle', 'resultat', \$t0);")
@@ -463,8 +463,7 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='') {
 	$n = count($codes);
 	if (!$n) return "''";
 	$tab = str_repeat("\t", $descr['niv']);
-	if (!isset($GLOBALS['var_mode_affiche'])
-	OR $GLOBALS['var_mode_affiche'] != 'validation')
+	if (_request('var_mode_affiche') != 'validation')
 	  return
 		(($n==1) ? $codes[0] : 
 			 "(" . join (" .\n$tab", $codes) . ")");
@@ -484,7 +483,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 	  $id_boucle = $id_boucle[0];
 	$type = !$id_boucle ? '' : $boucles[$id_boucle]->type_requete;
 	$tab = str_repeat("\t", ++$descr['niv']);
-	$mode = isset($GLOBALS['var_mode_affiche']) ? $GLOBALS['var_mode_affiche'] : '';
+	$mode = _request('var_mode_affiche');
 	// chaque commentaire introduit dans le code doit commencer
 	// par un caractere distinguant le cas, pour exploitation par debug.
 	foreach ($tableau as $p) {
