@@ -14,8 +14,12 @@
 // http://doc.spip.org/@inc_install_ldap3
 function install_etape_ldap3_dist()
 {
-	global $adresse_ldap, $login_ldap, $pass_ldap, $port_ldap, $tls_ldap, $protocole_ldap;
-
+	$adresse_ldap = _request('adresse_ldap');
+	$login_ldap = _request('login_ldap');
+	$pass_ldap = _request('pass_ldap');
+	$port_ldap = _request('port_ldap');
+	$tls_ldap = _request('tls_ldap');
+	$protocole_ldap = _request('protocole_ldap');
 
 	$base_ldap_text = defined('_INSTALL_BASE_LDAP')
 		? _INSTALL_BASE_LDAP

@@ -13,14 +13,21 @@
 // http://doc.spip.org/@inc_install_ldap4
 function install_etape_ldap4_dist()
 {
-	global $adresse_ldap, $login_ldap, $pass_ldap, $port_ldap, $tls_ldap, $protocole_ldap, $base_ldap, $base_ldap_text;
+	$adresse_ldap = _request('adresse_ldap');
+	$login_ldap = _request('login_ldap');
+	$pass_ldap = _request('pass_ldap');
+	$port_ldap = _request('port_ldap');
+	$tls_ldap = _request('tls_ldap');
+	$protocole_ldap = _request('protocole_ldap');
+	$base_ldap = _request('base_ldap');
+	$base_ldap_text = _request('base_ldap_text');
 
 	echo install_debut_html();
 
 	if (!$base_ldap) $base_ldap = $base_ldap_text;
 
-	$ldap_link = @ldap_connect("$adresse_ldap", "$port_ldap");
-	@ldap_bind($ldap_link, "$login_ldap", "$pass_ldap");
+	$ldap_link = @ldap_connect($adresse_ldap, $port_ldap);
+	@ldap_bind($ldap_link, $login_ldap, $pass_ldap);
 
 	// Essayer de verifier le chemin fourni
 	$r = @ldap_compare($ldap_link, $base_ldap, "objectClass", "");
