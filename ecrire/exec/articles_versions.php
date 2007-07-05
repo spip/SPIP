@@ -21,14 +21,16 @@ function exec_articles_versions_dist()
 {
 	include_spip('inc/suivi_versions');
 
-	global $champs_extra, $chapo, $descriptif, $id_article, $id_diff, $id_version, $les_notes, $nom_site, $ps, $soustitre, $surtitre, $texte, $titre, $url_site, $spip_lang_left, $spip_lang_right;
+	global $les_notes, $champs_extra, $spip_lang_left, $spip_lang_right;
 
+	$id_article = intval(_request('id_article'));
+	$id_version = intval(_request('id_version'));
+	$id_diff = intval(_request('id_diff')); // code mort ?
 
 //
 // Lire l'article
 //
 
-	$id_article = intval($id_article);
 	$row = spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article='$id_article'"));
 
 	if (!autoriser('voirrevisions', 'article', $id_article) 
@@ -53,16 +55,18 @@ function exec_articles_versions_dist()
 	$lang = $row["lang"];
 
 	$last_version = false;
-	if (!($id_version = intval($id_version))) {
+	if (!$id_version) {
 		$id_version = $row['id_version'];
 		$last_version = true;
 	}
-	$id_diff = intval($id_diff);
 
 	$textes = revision_comparee($id_article, $id_version, 'complet', $id_diff);
-	if (is_array($textes)) foreach ($textes as $var => $t) $$var = $t;
-
-
+	if (is_array($textes)) foreach ($textes as $var => $t) 
+	  { 
+	    //	cles de $textes = array('surtitre', 'titre', 'soustitre', 'descriptif', 'nom_site', 'url_site', 'chapo', 'texte', 'ps');
+	    // defini dans suivi_versions.
+	    // Suicidaire. A reerire.
+	    $$var = $t;}
 
 	echo $commencer_page(_T('info_historique')." &laquo; $titre &raquo;", "naviguer", "articles", $id_rubrique);
 
