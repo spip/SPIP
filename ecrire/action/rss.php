@@ -197,7 +197,6 @@ function action_rss_dist()
 	$lang = _request('lang');
 	$op  = _request('op');
 
-	spip_log("$id $fmt $op");
 	charger_generer_url();
 
 //

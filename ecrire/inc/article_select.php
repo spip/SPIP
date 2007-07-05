@@ -12,6 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/autoriser'); // necessaire si appel de l'espace public
+
 // Recupere les donnees d'un article pour composer un formulaire d'edition
 // (utilise par exec/article_edit)
 // id_article = numero d'article existant
