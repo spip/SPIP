@@ -88,8 +88,6 @@ function exec_statistiques_visites_dist()
 	if (_request('format') == 'csv')
 		return statistiques_csv($id_article);
 
-	$GLOBALS['accepte_svg'] = flag_svg();
-
 	$titre = $pourarticle = "";
 	$class = " class='arial1 spip_x-small'";
 	$style = 'color: #999999';
@@ -365,7 +363,9 @@ else {
 				 "&nbsp;");
 	
 	
-if ($GLOBALS['accepte_svg']) {
+	$accepte_svg = flag_svg();
+
+	if ($accepte_svg) {
 	echo "\n<div>";
 	echo "<object data='", generer_url_ecrire('statistiques_svg',"id_article=$id_article&aff_jours=$aff_jours"), "' width='450' height='310' type='image/svg+xml'>";
 	echo "<embed src='", generer_url_ecrire('statistiques_svg',"id_article=$id_article&aff_jours=$aff_jours"), "' width='450' height='310' type='image/svg+xml' />";
@@ -788,7 +788,7 @@ if ($GLOBALS['accepte_svg']) {
 
 
 	// Le bouton pour passer de svg a htm
-	if ($GLOBALS['accepte_svg']) {
+	if ($accepte_svg) {
 		$lien = 'non'; $alter = 'HTML';
 	} else {
 		$lien = 'oui'; $alter = 'SVG';

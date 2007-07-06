@@ -17,17 +17,17 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_statistiques_svg_dist
 function exec_statistiques_svg_dist()
 {
-global
-  $aff_jours,
-  $connect_statut,
-  $id_article,
-  $visites_today;
+;
+	$aff_jours = intval(_request('aff_jours'));
+	$id_article = intval(_request('id_article'));
+	$visites_today = intval(_request('visites_today'));
 
-if ($connect_statut != '0minirezo') {
-	echo _T('avis_non_acces_page');
-	echo fin_gauche(), fin_page();
-	exit;
-}
+	if (!autoriser('voirstats', $id_article ? 'article':'', $id_article)) {
+	  include_spip('minipres');
+	  echo minipres();
+	  exit;
+	}
+
 	$date = date("U");
 	$expire = gmdate("D, d M Y H:i:s", $date + 2 * 3600);
 	if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
@@ -69,8 +69,8 @@ if ($connect_statut != '0minirezo') {
 	echo "</linearGradient>\n";
 	echo "</defs>\n";
 
-	if (!($aff_jours = intval($aff_jours))) $aff_jours = 105;
-	if ($id_article = intval($id_article)){
+	if (!$aff_jours) $aff_jours = 105;
+	if ($id_article){
 		$table = "spip_visites_articles";
 		$table_ref = "spip_referers_articles";
 		$where = "id_article=$id_article";
@@ -88,7 +88,6 @@ if ($connect_statut != '0minirezo') {
 
 	$result = spip_query("SELECT UNIX_TIMESTAMP(date) AS date_unix, visites FROM $table WHERE $where AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) ORDER BY date");
 
-
 	while ($row = spip_fetch_array($result)) {
 		$date = $row['date_unix'];
 		$visites = $row['visites'];
@@ -97,7 +96,6 @@ if ($connect_statut != '0minirezo') {
 		if ($i == 0) $date_debut = $date;
 		$i++;
 	}
-
 
 	if (count($log)>0) {
 		$max = max(max($log),$visites_today);
