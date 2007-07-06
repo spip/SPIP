@@ -1069,6 +1069,20 @@ function balise_EVAL_dist($p) {
 	return $p;
 }
 
+
+// #VALEUR{x} renvoie 'x' (permet d'appliquer un filtre a une chaine)
+// Attention #VALEUR{1,2} renvoie '1', indiquer #VALEUR{'1,2'}
+// http://doc.spip.org/@balise_VALEUR_dist
+function balise_VALEUR_dist($p){
+	$p->code = interprete_argument_balise(1,$p);
+	if (!strlen($p->code))
+		$p->code = "''";
+	return $p;
+}
+// #NOOP est un alias pour regler #948, ne pas documenter
+// http://doc.spip.org/@balise_NOOP_dist
+function balise_NOOP_dist($p) { return balise_VALEUR_dist($p); }
+
 //
 // #REM
 // pour les remarques : renvoie toujours ''
