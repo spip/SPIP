@@ -158,9 +158,9 @@ AND $l = @unserialize($l)) {
 }
 
 // Passer la main aux outils XML a la demande (meme les redac s'ils veulent).
-if (isset($GLOBALS['transformer_xml'])) {
+if ($var_f = _request('transformer_xml')) {
 	set_request('var_url', $exec);
-	$exec = $GLOBALS['transformer_xml'];
+	$exec = $var_f;
  }
 
 // Trouver la fonction eventuellement surchagee
