@@ -306,9 +306,9 @@ function spip_mysql_create($nom, $champs, $cles, $autoinc=false, $temporary=fals
 	$s = '';
 	
 	$character_set = "";
-	if (isset($GLOBALS['meta']['charset_sql_base']))
+	if (@$GLOBALS['meta']['charset_sql_base'])
 		$character_set .= " CHARACTER SET ".$GLOBALS['meta']['charset_sql_base'];
-	if (isset($GLOBALS['meta']['charset_collation_sql_base']))
+	if (@$GLOBALS['meta']['charset_collation_sql_base'])
 		$character_set .= " COLLATE ".$GLOBALS['meta']['charset_collation_sql_base'];
 
 	foreach($champs as $k => $v) {

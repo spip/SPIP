@@ -1409,6 +1409,7 @@ function maj_base($version_cible = 0) {
 	}
 
 	if (upgrade_vers(1.938, $version_installee, $version_cible)) {
+		// Des champs NULL a l'installation
 		// Ajouter un champ extension aux spip_documents, et le
 		// remplir avec les valeurs ad hoc
 		spip_query("ALTER TABLE spip_documents ADD extension VARCHAR(10) NOT NULL DEFAULT ''");
@@ -1425,6 +1426,16 @@ function maj_base($version_cible = 0) {
 		## recreer la PRIMARY KEY sur spip_types_documents.extension
 		spip_query("ALTER TABLE spip_types_documents ADD PRIMARY KEY (extension)");
 		maj_version('1.938');
+	}
+
+	if (upgrade_vers(1.939, $version_installee, $version_cible)) {
+		spip_query("ALTER TABLE spip_visites CHANGE `visites` `visites` INT UNSIGNED DEFAULT '0' NOT NULL");
+		spip_query("ALTER TABLE spip_visites_articles CHANGE `visites` `visites` INT UNSIGNED DEFAULT '0' NOT NULL");
+		spip_query("ALTER TABLE spip_referers CHANGE `visites` `visites` INT UNSIGNED DEFAULT '0' NOT NULL");
+		spip_query("ALTER TABLE spip_referers CHANGE `visites_jour` `visites_jour` INT UNSIGNED DEFAULT '0' NOT NULL");
+		spip_query("ALTER TABLE spip_referers CHANGE `visites_veille` `visites_veille` INT UNSIGNED DEFAULT '0' NOT NULL");
+		spip_query("ALTER TABLE spip_referers_articles CHANGE `visites` `visites` INT UNSIGNED DEFAULT '0' NOT NULL");
+		maj_version('1.939');
 	}
 
 }

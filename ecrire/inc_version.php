@@ -300,7 +300,7 @@ $liste_des_statuts = array(
 // (utilise pour les modifs de la base de donnees)
 
 // version de la base
-$spip_version = 1.938;
+$spip_version = 1.939;
 
 // version de spip en chaine
 // et en numerique a incrementer sur les evolutions qui cassent la compatibilite descendante
