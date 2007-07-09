@@ -124,9 +124,11 @@ function exec_naviguer_dist()
 	    
 	fin_cadre_relief();
 
+	echo "<div>\n";
 	echo afficher_enfant_rub($id_rubrique, autoriser('creerrubriquedans','rubrique',$id_rubrique), false);
 
 	echo contenu_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable);
+	echo "</div>\n";
 
 
 /// Documents associes a la rubrique
