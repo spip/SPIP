@@ -142,13 +142,19 @@ function inc_auth_dist() {
 	$connect_login = $row['login'];
 	$connect_statut = acces_statut($connect_id_auteur, $row['statut'], $row['bio']);
 
-	// Le tableau global auteur_session contient toutes les infos.
+	// Le tableau global auteur_session contient toutes les infos pertinentes
+	// et a jour (tandis que $auteur_session peut avoir des valeurs un peu datees
+	// s'il est pris dans le fichier de session)
 	// Les plus utiles sont aussi dans les variables simples ci-dessus
-	$GLOBALS['auteur_session'] = $row;
+	$GLOBALS['auteur_session'] = array_merge($GLOBALS['auteur_session'], $row);
 	$r = @unserialize($row['prefs']);
 	$GLOBALS['auteur_session']['prefs'] =
 	  (@isset($r['couleur'])) ? $r : array('couleur' =>1, 'display'=>0);
-
+	// au cas ou : ne pas memoriser les champs sensibles
+	unset($GLOBALS['auteur_session']['pass']);
+	unset($GLOBALS['auteur_session']['htpass']);
+	unset($GLOBALS['auteur_session']['alea_actuel']);
+	unset($GLOBALS['auteur_session']['alea_futur']);
 
 	// rajouter les sessions meme en mode auth_http
 	// pour permettre les connexions multiples et identifier les visiteurs
