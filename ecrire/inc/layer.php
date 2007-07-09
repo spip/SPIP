@@ -81,7 +81,7 @@ function bouton_block_depliable($texte,$deplie,$ids=""){
 	  	:" onmouseover=\"jQuery(this).depliant('$cible');\""
 	  )
 	  .">$texte</div>"
-	  . (strlen($extra_js)?"<script><!--
+	  . (strlen($extra_js)?"<script type='text/javascript'><!--
 	  jQuery(document).ready(function(){ $extra_js
 	  });
 	  //--></script>":"")
