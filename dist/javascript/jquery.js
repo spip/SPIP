@@ -7,8 +7,8 @@ if(typeof window.jQuery == "undefined") {
  * Dual licensed under the MIT (MIT-LICENSE.txt)
  * and GPL (GPL-LICENSE.txt) licenses.
  *
- * $Date: 2007-07-05 00:43:24 -0400 (Thu, 05 Jul 2007) $
- * $Rev: 2243 $
+ * $Date: 2007-07-05 10:19:18 +0200 (Thu, 05 Jul 2007) $
+ * $Rev: 2248 $
  */
 
 // Global undefined variable
@@ -847,7 +847,7 @@ jQuery.extend({
 
 		// Match: :even, :last-chlid, #id, .class
 		new RegExp("^([:.#]*)(" + 
-			( jQuery.chars = jQuery.browser.safari && jQuery.browser.version < "3.0.0" ? "\\w" : "(?:[\\w\u0128-\uFFFF*_-]|\\\\.)" ) + "+)")
+			( jQuery.chars = jQuery.browser.safari && parseInt(jQuery.browser.version) < 417 ? "(?:[\\w*_-]|\\\\.)" : "(?:[\\w\u0128-\uFFFF*_-]|\\\\.)" ) + "+)")
 	],
 
 	multiFilter: function( expr, elems, not ) {
@@ -970,7 +970,7 @@ jQuery.extend({
 					t = " " + t.substr(1,t.length);
 
 				} else {
-					// Optomize for the case nodeName#idName
+					// Optimize for the case nodeName#idName
 					var re2 = new RegExp("^(" + jQuery.chars + "+)(#)(" + jQuery.chars + "+)");
 					var m = re2.exec(t);
 					
