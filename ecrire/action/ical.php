@@ -28,7 +28,11 @@ function ligne_uid ($texte) {
 // http://doc.spip.org/@action_ical_dist
 function action_ical_dist()
 {
-	global $id_auteur, $arg, $action, $titres;
+	global $titres;
+
+	$id_auteur = _request('id_auteur');
+	$action = _request('action');
+	$arg = _request('arg');
 
 	// compatibilite des URLs spip_cal.php3?id=xxx&cle=yyy (SPIP 1.8)
 	if (!$id_auteur AND _request('id')) {
@@ -41,7 +45,7 @@ function action_ical_dist()
 
 		if ($row = spip_fetch_array($result)) {
 			$id_utilisateur=$row['id_auteur'];
-			$nom_utilisateur=extraire_multi($row['nom']);
+			$nom_utilisateur=preg_replace('/\W/', '_', extraire_multi($row['nom']));
 			$statut_utilisateur=$row['statut'];
 			$langue_utilisateur=$row['lang'];
 		}
@@ -59,18 +63,18 @@ function action_ical_dist()
 	header("Content-Type: text/calendar; charset=utf-8");
 	echo	filtrer_ical ("BEGIN:VCALENDAR"), "\n",
 		filtrer_ical ("CALSCALE:GREGORIAN"), "\n",
-		filtrer_ical ("PRODID: $spip"), "\n",
+		filtrer_ical ("PRODID:$spip"), "\n",
 		filtrer_ical ("VERSION:2.0"), "\n",
-		filtrer_ical ("X-WR-CALNAME;VALUE=TEXT:$nom_site / $nom_utilisateur"), "\n",
-		filtrer_ical ("X-WR-RELCALID:cal$id_utilisateur @ $adresse_site"), "\n";
+		filtrer_ical ("X-WR-CALNAME:$nom_site / $nom_utilisateur"), "\n",
+		filtrer_ical ("X-WR-RELCALID:$adresse_site?id_auteur=$id_utilisateur"), "\n";
 	spip_ical_rendez_vous($id_utilisateur, $nom_site);
 	spip_ical_taches($id_utilisateur, $nom_site);
 
-	$titres = Array();
-	$nb_articles = spip_ical_articles($nom_site);
+	$titre_prop = array();
+	$titres = spip_ical_articles($nom_site);
 	$nb_breves = spip_ical_breves($nom_site);
-	if ($nb_articles || $nb_breves) {
-		if ($nb_articles > 0) $titre_prop[] = _T('info_articles_proposes').": ".$nb_articles;
+	if ($titres || $nb_breves) {
+		if ($titres) $titre_prop[] = _T('info_articles_proposes').": ". count($titres);
 		if ($nb_breves > 0) $titre_prop[] = _T('info_breves_valider').": ".$nb_breves;
 		$titre = join($titre_prop," / ");
 		echo	filtrer_ical ("BEGIN:VTODO"), "\n",
@@ -195,14 +199,12 @@ function spip_ical_taches($id_utilisateur, $nom_site)
 // http://doc.spip.org/@spip_ical_articles
 function spip_ical_articles($nom_site)
 {
-	global $titres;
 	$result_articles = spip_query("SELECT id_article, titre, date FROM spip_articles WHERE statut = 'prop'");
 	while($row=spip_fetch_array($result_articles)){
 		$id_article=$row['id_article'];
 		$titre = supprimer_numero($row['titre']);
 		$titres[] = $titre;
 		$date_heure = $row['date'];
-		$nb_articles ++;
 		echo filtrer_ical ("BEGIN:VEVENT"), "\n",
 		filtrer_ical ("SUMMARY:[$nom_site] $titre ("._T('info_article_propose').")"), "\n";
 		ligne_uid ("article$id_article");
@@ -212,7 +214,7 @@ function spip_ical_articles($nom_site)
 			filtrer_ical ("URL:" . generer_url_ecrire("articles","id_article=$id_article")), "\n",
 			filtrer_ical ("END:VEVENT"), "\n";
 	}
-	return $nb_articles;
+	return $titres;
 }
 
 
