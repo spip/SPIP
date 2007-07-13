@@ -19,9 +19,11 @@ include_spip('inc/mots');
 // http://doc.spip.org/@exec_message_dist
 function exec_message_dist()
 {
-	global $cherche_auteur, $connect_id_auteur,$forcer_dest,$id_message;
+	global  $connect_id_auteur;
 
-	$id_message = intval($id_message);
+	$id_message = intval(_request('id_message'));
+	$forcer_dest = _request('forcer_dest');
+	$cherche_auteur = _request('cherche_auteur');
 
 	$row = spip_fetch_array(spip_query("SELECT type FROM spip_messages WHERE id_message=$id_message"));
 
@@ -283,7 +285,7 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 	}
 	echo "</td></tr></table>\n";
 
-	echo "</td></tr></table>\n"; //fin_cadre_relief();
+	//	echo "</td></tr></table>\n"; //fin_cadre_relief();
 	echo "</div>";			// fin du cadre de couleur
 	
 	// Les boutons
