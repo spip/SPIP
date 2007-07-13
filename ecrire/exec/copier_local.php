@@ -15,14 +15,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@exec_copier_local_dist
 function exec_copier_local_dist()
 {
-	global $id_document, $script, $id, $type, $ancre;
-	$id = intval($id);
-	$id_document = intval($id_document);
 
-	// oui, ca parait bizarre d'appeler tourner, mais en fait la copie locale est
-	// etroitement liee a la mise en page des icones 'tourner'
-	$tourner = charger_fonction('tourner', 'inc');
-	ajax_retour($tourner($id_document, array(), $script, 'ajax', $type));
+// oui, ca parait bizarre d'appeler tourner, mais en fait la copie locale est
+// etroitement liee a la mise en page des icones 'tourner'
+
+	$var_f = charger_fonction('tourner');
+	$var_f();
 }
 
 ?>

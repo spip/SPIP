@@ -79,7 +79,7 @@ function action_ical_dist()
 		echo	filtrer_ical ("BEGIN:VTODO"), "\n",
 			filtrer_ical ("SUMMARY:[$nom_site] $titre"), "\n";
 		ligne_uid ("prop");
-		$texte = join($titres," / ");
+		$texte = join(" / ", $titres) . '/' . join(" / ", $titres_breves);
 		echo filtrer_ical ("DESCRIPTION:$texte"), "\n";
 	
 		$today=getdate(time());
