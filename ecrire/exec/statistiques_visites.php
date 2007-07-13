@@ -68,14 +68,14 @@ function statistiques_csv($id) {
 // http://doc.spip.org/@exec_statistiques_visites_dist
 function exec_statistiques_visites_dist()
 {
-	global $connect_statut, $spip_lang_left;
+	global $spip_lang_left;
 
 	$id_article = intval(_request('id_article'));
 	$aff_jours = intval(_request('aff_jours'));
 	$origine = _request('origine');
 
 	if (!autoriser('voirstats', $id_article ? 'article':'', $id_article)) {
-	  include_spip('minipres');
+	  include_spip('inc/minipres');
 	  echo minipres();
 	  exit;
 	}
@@ -255,13 +255,8 @@ else {
 	}
 
 
-	//
-	// Afficher les boutons de creation d'article et de breve
-	//
-	if ($connect_statut == '0minirezo') {
-		if ($id_article > 0) {
+	if ($id_article > 0) {
 			echo bloc_des_raccourcis(icone_horizontale(_T('icone_retour_article'), generer_url_ecrire("articles","id_article=$id_article"), "article-24.gif","rien.gif", false));
-		}
 	}
 
 	debut_droite();
