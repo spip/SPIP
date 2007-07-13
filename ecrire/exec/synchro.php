@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-charger_generer_url();
 include_spip('inc/acces'); // pour low_sec (iCal)
 
 // http://doc.spip.org/@afficher_liens_calendrier
@@ -34,73 +33,59 @@ function afficher_liens_calendrier($lien, $icone, $texte) {
 // http://doc.spip.org/@exec_synchro_dist
 function exec_synchro_dist()
 {
-global   $connect_id_auteur;
-///// debut de la page
-$commencer_page = charger_fonction('commencer_page', 'inc');
-echo $commencer_page(_T("icone_suivi_activite"),  "accueil", "synchro");
+	///// debut de la page
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T("icone_suivi_activite"),  "accueil", "synchro");
 
-echo "<br /><br /><br />";
-gros_titre(_T("icone_suivi_activite"));
+	echo "<br /><br />";
+	gros_titre(_T("icone_suivi_activite"));
 
+	debut_gauche();
 
-debut_gauche();
+	debut_boite_info();
 
-debut_boite_info();
+	echo "<div class='verdana2'>";
 
-echo "<div class='verdana2'>";
+	echo _T('ical_info1').'<br /><br />';
 
-echo _T('ical_info1').'<br /><br />';
+	echo _T('ical_info2');
 
-echo _T('ical_info2');
+	echo "</div>";
 
-echo "</div>";
+	fin_boite_info();
 
-fin_boite_info();
+	$adresse_suivi_inscription=$GLOBALS['meta']["adresse_suivi_inscription"];
 
-
-$suivi_edito=$GLOBALS['meta']["suivi_edito"];
-$adresse_suivi=$GLOBALS['meta']["adresse_suivi"];
-$adresse_suivi_inscription=$GLOBALS['meta']["adresse_suivi_inscription"];
-
-debut_droite();
+	debut_droite();
 
 
 ///
 /// Suivi par mailing-list
 ///
 
-if ($suivi_edito == "oui" AND strlen($adresse_suivi) > 3 AND strlen($adresse_suivi_inscription) > 3) {
-	debut_cadre_enfonce("racine-site-24.gif", false, "", _T('ical_titre_mailing'));
-	$lien = propre("[->$adresse_suivi_inscription]");
-
-
-	echo _T('info_config_suivi_explication');
-	echo "<p align='center'><b>$lien</b></p>\n";
-
-	fin_cadre_enfonce();
-}
+	if ($GLOBALS['meta']["suivi_edito"] == "oui" AND strlen($GLOBALS['meta']["adresse_suivi"]) > 3 AND strlen($adresse_suivi_inscription) > 3) {
+		debut_cadre_enfonce("racine-site-24.gif", false, "", _T('ical_titre_mailing'));
+		echo _T('info_config_suivi_explication'), 
+		propre("<b style='text-align: center'>[->$adresse_suivi_inscription]</b>");
+		fin_cadre_enfonce();
+	}
 
 
 ///
 /// Suivi par agenda iCal (taches + rendez-vous)
 ///
 
-debut_cadre_relief("agenda-24.gif", false, "", _T('icone_calendrier'));
+	debut_cadre_relief("agenda-24.gif", false, "", _T('icone_calendrier'));
 
-echo _T('calendrier_synchro');
+	echo _T('calendrier_synchro');
+	echo '<p>'._T('ical_info_calendrier').'</p>';
 
-echo '<p>'._T('ical_info_calendrier').'</p>';
+	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+	afficher_liens_calendrier(generer_url_public('ical'),'', _T('ical_texte_public'));
 
+	afficher_liens_calendrier(generer_url_action("ical", "id_auteur=$id_auteur&arg=".afficher_low_sec($id_auteur,'ical')),'cadenas-24.gif',  _T('ical_texte_prive'));
 
-
- afficher_liens_calendrier(generer_url_public('ical'),'', _T('ical_texte_public'));
-
- afficher_liens_calendrier(generer_url_action("ical", "id_auteur=$connect_id_auteur&arg=".afficher_low_sec($connect_id_auteur,'ical')),'cadenas-24.gif',  _T('ical_texte_prive'));
-
-
-fin_cadre_relief();
-
-
+	fin_cadre_relief();
 
 ///
 /// Suivi par RSS
@@ -120,22 +105,20 @@ fin_cadre_relief();
 
 	$h = http_img_pack( 'feed.png', 'RSS', '');
 	if (spip_num_rows($result) > 0) {
-		echo "<ul>";
-
+		echo "\n<ul>";
 
 		while($row=spip_fetch_array($result)){
 			$id_rubrique=$row['id_rubrique'];
 			$titre_rubrique = typo($row['titre']);
 			$titre = htmlspecialchars($titre_rubrique);
 			
-			echo "<li><a href='" . generer_url_public('backend', "id_rubrique=$id_rubrique") . "' title=\"$titre\">$h&nbsp; $titre_rubrique</li>\n";
+			echo "\n<li><a href='" . generer_url_public('backend', "id_rubrique=$id_rubrique") . "' title=\"$titre\">$h&nbsp; $titre_rubrique</a></li>";
 		}
-		echo "</ul>";
+		echo "\n</ul>";
 	}
 	
-	$activer_breves = $GLOBALS['meta']['activer_breves'];
 	
-	if ($activer_breves == "oui") {
+	if ($GLOBALS['meta']['activer_breves'] == "oui") {
 		
 		echo "<p>"._T("ical_texte_rss_breves")."</p>";
 		echo "<ul><li><a href='",
@@ -155,20 +138,20 @@ fin_cadre_relief();
 /// Suivi par Javascript
 ///
 
-debut_cadre_relief("doc-24.gif", false, "", _T('ical_titre_js'));
+	  debut_cadre_relief("doc-24.gif", false, "", _T('ical_titre_js'));
 
-echo _T('ical_texte_js').'<br />';
+	  echo _T('ical_texte_js').'<br />';
 
-echo propre('<code>
+	  echo propre('<code>
 <script
     type="text/javascript"
     src="'.generer_url_public('distrib').'">
 </script>
 </code>');
 
-fin_cadre_relief();
+	  fin_cadre_relief();
 
 
-echo fin_gauche(), fin_page();
+	  echo fin_gauche(), fin_page();
 }
 ?>
