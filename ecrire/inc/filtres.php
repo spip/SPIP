@@ -1955,14 +1955,15 @@ function charge_scripts($scripts) {
   return $flux;
 }
 
-// Compacte du javascript grace a javascriptcompressor
+// Compacte du javascript grace a Dean Edward's JavaScriptPacker
 // utile pour dist/jquery.js par exemple
 // http://doc.spip.org/@compacte_js
 function compacte_js($flux) {
-	include_spip('inc/compacte_js');
-	$k = new JavaScriptCompressor();
+	include_spip('inc/class.JavaScriptPacker');
+	$packer = new JavaScriptPacker($flux, 0, true, false);
+
 	// en cas d'echec (?) renvoyer l'original
-	if (strlen($t = $k->getClean($flux)))
+	if (strlen($t = $packer->pack()))
 		return $t;
 
 	// erreur
