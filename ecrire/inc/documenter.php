@@ -60,6 +60,8 @@ function inc_documenter_dist(
 
 	$show_docs = explode(',', _request('show_docs'));
 
+	$tous_autorises = true;
+
 	foreach ($documents as $document) {
 		$id_document = $document['id_document'];
 
@@ -77,6 +79,7 @@ function inc_documenter_dist(
 			$res .= "<tr>";
 
 		$flag = autoriser('modifier', 'document', $id_document);
+		$tous_autorises &= $flag;
 
 		$res .= "\n<td  class='document$vu'>"
 		.  $tourner($id_document, $document, $script, $flag, $type)
@@ -104,7 +107,8 @@ function inc_documenter_dist(
 	if (is_int($doc)) {
 		$bouton = bouton_block_depliable(majuscules(_T("info_$ancre")),true,"portfolio_$ancre");
 		$head = debut_cadre("$ancre","","",$bouton);
-		if (count($documents) > 3) {
+		if (count($documents) > 3
+		AND $tous_autorises) {
 			$head .= "<div class='lien_tout_supprimer'>"
 			. ajax_action_auteur('documenter', "$s$doc/$type", $script, "id_$type=$doc&s=$s&type=$type",array(_T('lien_tout_supprimer')))
 			. "</div>\n";

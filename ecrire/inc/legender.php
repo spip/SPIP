@@ -143,7 +143,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 
 	// le cas $id<0 correspond a un doc charge dans un article pas encore cree,
 	// et ca buggue si on propose de supprimer => on ne propose pas
-	if (!($id < 0) && $document['vu']=='non')
+	if (!($id < 0) && ($document['vu']=='non' OR is_null($document['vu'])))
 		$corps .= icone_horizontale($texte, $action, $supp, "supprimer.gif", false);
 
 	$corps = block_parfois_visible("legender-aff-$id_document", sinon($entete,_T('info_sans_titre')), $corps, "text-align:center;", $flag);
