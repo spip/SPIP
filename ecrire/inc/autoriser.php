@@ -213,6 +213,47 @@ function autoriser_joindredocument_dist($faire, $type, $id, $qui, $opt){
 			AND autoriser('ecrire', $type, $id, $qui, $opt)
 		);
 }
+
+// On ne peut modifier un document que s'il est lie a un objet qu'on a le droit
+// d'editer *et* qu'il n'est pas lie a un objet qu'on n'a pas le droit d'editer
+// http://doc.spip.org/@autoriser_document_modifier_dist
+function autoriser_document_modifier_dist($faire, $type, $id, $qui, $opt){
+	static $m = array();
+
+	if ($qui['statut'] == '0minirezo'
+	AND !$qui['restreint'])
+		return true;
+
+	if (!isset($m[$id])) {
+		$interdit = false;
+		$vu = true;
+		include_spip('public/interfaces');
+		$jointures = array_diff(
+			$GLOBALS['tables_jointures']['spip_documents'],
+			array('types_documents', 'mots')
+		);
+		foreach($jointures as $j) {
+			$type = preg_replace(',s?_?documents?_?|s$,', '', $j);
+			$id_table = id_table_objet($type);
+			$s = spip_query("SELECT $id_table FROM spip_$j WHERE id_document="._q($id));
+			while ($t = spip_fetch_array($s)) {
+				spip_log($t);
+				if (autoriser('modifier', $type, $t[$id_table], $qui, $opt)) {
+					$vu = true;
+				}
+				else {
+					$interdit = true;
+					break 2;
+				}
+			}
+		}
+		$m[$id] = ($vu && !$interdit);
+	}
+
+	return $m[$id];
+}
+
+
 // Autoriser a modifier la breve $id
 // = admins & redac si la breve n'est pas publiee
 // = admins de rubrique parente si publiee
