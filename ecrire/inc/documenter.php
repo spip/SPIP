@@ -21,7 +21,7 @@ function inc_documenter_dist(
 	$doc,		# tableau des documents ou numero de l'objet attachant
 	$type = "article",	# article ou rubrique ?
 	$ancre = 'portfolio',	# album d'images ou de documents ?
-	$flag = false,	# a-t-on le droit de modifier ?
+	$ignore_flag = false,	# IGNORE, remplace par autoriser(modifier,document)
 	$couleur='',		# couleur des cases du tableau
 	$appelant =''		# pour le rappel (cf plugin)
 ) {
@@ -75,6 +75,9 @@ function inc_documenter_dist(
 
 		if (!$case)
 			$res .= "<tr>";
+
+		$flag = autoriser('modifier', 'document', $id_document);
+
 		$res .= "\n<td  class='document$vu'>"
 		.  $tourner($id_document, $document, $script, $flag, $type)
 		. (!$flag  ? '' :
