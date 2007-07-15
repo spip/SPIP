@@ -115,6 +115,9 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 	
 	$fichier_dest = $cache . $fichier_dest . "." .$terminaison_dest;
 	
+	$GLOBALS["images_calculees"][] =  $fichier_dest;
+	
+	
 	$creer = true;
 	$date_src = 0;
 	$date_dest = 0;
