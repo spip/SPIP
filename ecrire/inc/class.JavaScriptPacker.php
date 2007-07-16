@@ -148,9 +148,14 @@ class JavaScriptPacker {
 		$script = $parser->exec($script);
 
 		// remove white-space
-		$parser->add('/(\\b|\\x24)\\s+(\\b|\\x24)/', '$2 $3');
-		$parser->add('/([+\\-])\\s+([+\\-])/', '$2 $3');
-		$parser->add('/\\s+/', '');
+#		$parser->add('/(\\b|\\x24)\\s+(\\b|\\x24)/', '$2 $3');
+#		$parser->add('/([+\\-])\\s+([+\\-])/', '$2 $3');
+#		$parser->add('/\\s+/', '');
+# Modif fil@rezo.net pour conserver les \n
+		$parser->add('/(\\b|\\x24)[\\t ]+(\\b|\\x24)/', '$2 $3');
+		$parser->add('/([+\\-])[\\t ]+([+\\-])/', '$2 $3');
+		$parser->add('/[\\t ]+/', '');
+		$parser->add('/\\s+/', "\n");
 		// done
 		return $parser->exec($script);
 	}
