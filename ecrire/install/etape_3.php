@@ -161,7 +161,7 @@ function install_premier_auteur($email, $login, $nom, $pass)
 	return info_etape(_T('info_informations_personnelles'),
 		     "<b>"._T('texte_informations_personnelles_1')."</b>" .
 			     aide ("install5") .
-			     "</p><p>" .
+			     "<p>" .
 			     _T('texte_informations_personnelles_2') . " " .
 			     _T('info_laisser_champs_vides')
 			     )
