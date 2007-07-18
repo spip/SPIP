@@ -90,12 +90,12 @@ echo "\n<div>&nbsp;</div>";
 //
 debut_cadre_relief("", false, "", _T('taille_repertoire_cache'));
 
-$cpt = spip_fetch_array(spip_query("SELECT SUM(taille) AS n FROM spip_caches WHERE type='t'"));
-
-if ($cpt = $cpt['n']) {
-	$info = _T('taille_cache_octets', array('octets' => taille_en_octets($cpt)));
-} else
+include_spip('inc/invalideur');
+if ($n = taille_du_cache())
+	$info = _T('taille_cache_octets', array('octets' => taille_en_octets($n)));
+else
 	$info = _T('taille_cache_vide');
+
 
 echo "<p style='text-align: justify;'><b>$info</b></p>\n";
 

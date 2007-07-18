@@ -220,17 +220,6 @@ $spip_versions_fragments = array(
 $spip_versions_fragments_key = array(
 	     "PRIMARY KEY"	=> "id_article, id_fragment, version_min");
 
-$spip_caches = array(
-		"fichier" => "char (64) NOT NULL",
-		"id" => "char (64) NOT NULL",
-		// i=par id, t=timer, x=suppression
-		"type" => "CHAR (1) DEFAULT 'i' NOT NULL",
-		"taille" => "integer DEFAULT '0' NOT NULL");
-$spip_caches_key = array(
-		"PRIMARY KEY"	=> "fichier, id",
-		"KEY fichier" => "fichier",
-		"KEY id" => "id");
-
 
 
 
@@ -303,7 +292,4 @@ $tables_auxiliaires['spip_versions'] = array(
 $tables_auxiliaires['spip_versions_fragments'] = array(
 	'field' => &$spip_versions_fragments,
 	'key' => &$spip_versions_fragments_key);
-$tables_auxiliaires['spip_caches'] = array(
-	'field' => &$spip_caches,
-	'key' => &$spip_caches_key);
 ?>

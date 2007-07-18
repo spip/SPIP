@@ -1182,7 +1182,8 @@ function maj_base($version_cible = 0) {
 		spip_query("ALTER IGNORE TABLE spip_mots_syndic DROP INDEX id_syndic");
 		spip_query("ALTER IGNORE TABLE spip_mots_forum DROP INDEX id_forum");
 		spip_query("ALTER IGNORE TABLE spip_mots_documents DROP INDEX id_document");
-		spip_query("ALTER IGNORE TABLE spip_caches DROP	INDEX fichier");
+# 18 juillet 2007: table depreciee
+#		spip_query("ALTER IGNORE TABLE spip_caches DROP	INDEX fichier");
 		maj_version(1.911);
 	}
 
@@ -1436,6 +1437,11 @@ function maj_base($version_cible = 0) {
 		spip_query("ALTER TABLE spip_referers CHANGE `visites_veille` `visites_veille` INT UNSIGNED DEFAULT '0' NOT NULL");
 		spip_query("ALTER TABLE spip_referers_articles CHANGE `visites` `visites` INT UNSIGNED DEFAULT '0' NOT NULL");
 		maj_version('1.939');
+	}
+
+	if (upgrade_vers(1.940, $version_installee, $version_cible)) {
+		spip_query("DROP TABLE spip_caches");
+		maj_version('1.940');
 	}
 
 }
