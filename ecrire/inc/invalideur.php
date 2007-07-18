@@ -104,7 +104,11 @@ function purger_repertoire($dir, $options=array()) {
 function appliquer_quota_cache() {
 	global $quota_cache;
 
-	$l = dechex(rand(0,15));
+	$tour_quota_cache = intval(1+$GLOBALS['meta']['tour_quota_cache'])%16;
+	ecrire_meta('tour_quota_cache', $tour_quota_cache);
+	ecrire_metas();
+
+	$l = dechex($tour_quota_cache);
 	$dir = sous_repertoire(_DIR_CACHE, $l);
 	$nombre = nombre_de_fichiers_repertoire($dir);
 	$total_cache = _TAILLE_MOYENNE_FICHIER_CACHE * $nombre;
