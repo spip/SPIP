@@ -169,39 +169,36 @@ function calendrier_height ($heure, $heurefin, $debut, $fin, $dimheure, $dimjour
 //
 
 // http://doc.spip.org/@http_calendrier_init
-function http_calendrier_init($time='', $ltype='', $lechelle='', $lpartie_cal='', $script='', $evt=null)
+function http_calendrier_init($time='', $type='mois', $lechelle='', $lpartie_cal='', $script='', $evt=null)
 {
-	global $mois, $annee, $jour, $type, $echelle, $partie_cal;
 	if (!$time) 
 	  {
-	    if (!$mois)
-	      $time = time();
-	    else
-	      $time = mktime(0,0,0,$mois,$jour,$annee);
-	    $type= 'mois';
+		$mindate = ($j=_request('jour')) + ($m=_request('mois')) + ($a=_request('annee'));  
+  		if ($mindate)
+			$time = mktime(0,0,0, $m, $j, $a);
+  		else $time = time();
 	  }
 
 	$jour = date("d",$time);
 	$mois = date("m",$time);
 	$annee = date("Y",$time);
-	if (!$ltype) $ltype = $type ? $type : 'mois';
-	if (!$lechelle) $lechelle = $echelle;
-
+	if (!$lechelle) $lechelle = _request('echelle');
 
 	if (!$lpartie_cal) 
-		$lpartie_cal = $partie_cal ? $partie_cal : DEFAUT_PARTIE;
+		if (!($lpartie_cal = _request('partie_cal')))
+			$partie_cal = DEFAUT_PARTIE;
 	list($script, $ancre) = 
 	  calendrier_retire_args_ancre($script); 
   if (is_null($evt)) {
-	  $g = 'sql_calendrier_' . $ltype;
+	  $g = 'sql_calendrier_' . $type;
 	  $evt = sql_calendrier_interval($g($annee,$mois, $jour));
 	  sql_calendrier_interval_articles("'$annee-$mois-00'", "'$annee-$mois-1'", $evt[0]);
 	  // si on veut les forums, decommenter
 #	  sql_calendrier_interval_forums($g($annee,$mois,$jour), $evt[0]);
 	}
-	$f = 'http_calendrier_' . $ltype;
+	$f = 'http_calendrier_' . $type;
+	if (!function_exists($f)) $f = 'http_calendrier_mois';
 	return $f($annee, $mois, $jour, $lechelle, $lpartie_cal, $script, $ancre, $evt);
-
 }
 
 # affichage d'un calendrier de plusieurs semaines
@@ -1166,10 +1163,8 @@ function http_calendrier_agenda_rv ($annee, $mois, $les_rv, $fclic,
 // Fonctions pour la messagerie, la page d'accueil et les gadgets
 
 // http://doc.spip.org/@http_calendrier_messages
-function http_calendrier_messages($annee='', $mois='', $jour='', $heures='')
+function http_calendrier_messages($annee='', $mois='', $jour='', $heures='', $partie_cal='', $echelle='')
 {
-	global  $partie_cal, $echelle;
-
 	$evtm = sql_calendrier_agenda($annee, $mois);
 	if ($evtm OR !$heures)
 		$evtm = http_calendrier_agenda($annee, $mois, $jour, $mois, $annee, false, generer_url_ecrire('calendrier'), '', $evtm);
