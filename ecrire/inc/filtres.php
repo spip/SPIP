@@ -185,7 +185,9 @@ function image_filtrer($args){
 // commencent par "image_"
 // http://doc.spip.org/@reduire_image
 function reduire_image($texte, $taille = -1, $taille_y = -1) {
-	return filtrer('image_reduire',$texte, $taille, $taille_y);
+	return filtrer('image_graver',
+		filtrer('image_reduire',$texte, $taille, $taille_y)
+	);
 }
 // http://doc.spip.org/@valeurs_image_trans
 function valeurs_image_trans($img, $effet, $forcer_format = false) {
