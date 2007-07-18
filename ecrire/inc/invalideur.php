@@ -24,6 +24,7 @@ define('_AGE_CACHE_ATIME', 3600);
 
 // Donne le nombre de fichiers dans un repertoire (plat, pour aller vite)
 // false si erreur
+// http://doc.spip.org/@nombre_de_fichiers_repertoire
 function nombre_de_fichiers_repertoire($dir) {
 	if (!$h = @opendir($dir)) return false;
 	$total = 0;
@@ -101,6 +102,7 @@ function purger_repertoire($dir, $options=array()) {
 // on considere qu'il fait 1/16e de la taille du cache
 // et on le ratiboise
 //
+// http://doc.spip.org/@appliquer_quota_cache
 function appliquer_quota_cache() {
 	global $quota_cache;
 
