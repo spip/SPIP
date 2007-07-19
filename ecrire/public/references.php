@@ -455,6 +455,7 @@ function applique_filtres($p) {
 	return $code;
 }
 
+// http://doc.spip.org/@chercher_filtre
 function chercher_filtre($fonc) {
 		foreach (
 		array('filtre_'.$fonc, 'filtre_'.$fonc.'_dist', $fonc) as $f)

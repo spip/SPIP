@@ -2108,6 +2108,7 @@ function http_style_background($img, $att='')
 }
 
 //[(#ENV*|unserialize|foreach)]
+// http://doc.spip.org/@filtre_foreach_dist
 function filtre_foreach_dist($balise_deserializee, $modele = 'foreach') {
 	$texte = '';
 	foreach($balise_deserializee as $k => $v)
