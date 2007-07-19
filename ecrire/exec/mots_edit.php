@@ -174,8 +174,6 @@ global  $champs_extra, $connect_statut, $spip_display, $les_notes;
 
 	if (autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe))){
 
-		$out .= debut_cadre_formulaire('',true);
-
 		$res = "<div class='serif'>";
 
 		$titre_mot = entites_html($titre_mot);
@@ -215,9 +213,9 @@ global  $champs_extra, $connect_statut, $spip_display, $les_notes;
 			$redirect = rawurldecode($redirect);
 		$arg = !$table ? $id_mot : "$id_mot,$ajouter_id_article,$table,$table_id";
 
-		$out .= generer_action_auteur("instituer_mot", $arg, _DIR_RESTREINT_ABS . $redirect, $res);
-
-		$out .= fin_cadre_formulaire(true);
+		$out .= debut_cadre_formulaire('',true)
+			. generer_action_auteur("instituer_mot", $arg, _DIR_RESTREINT_ABS . $redirect, $res, " method='post'")
+			. fin_cadre_formulaire(true);
 	}
 
 	echo $out, fin_gauche(), fin_page();
