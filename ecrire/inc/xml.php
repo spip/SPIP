@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@spip_xml_load
-function spip_xml_load($fichier, $strict=true, $clean=true, $taille_max = 1048576, $datas=''){
+function spip_xml_load($fichier, $strict=true, $clean=true, $taille_max = 1048576, $datas='', $profondeur = -1){
 	$contenu = "";
 	if (preg_match(",^(http|ftp)://,",$fichier)){
 		include_spip('inc/distant');
@@ -22,28 +22,30 @@ function spip_xml_load($fichier, $strict=true, $clean=true, $taille_max = 104857
 	else lire_fichier ($fichier, $contenu);
 	$arbre = array();
 	if ($contenu)
-		$arbre = spip_xml_parse($contenu, $strict, $clean);
+		$arbre = spip_xml_parse($contenu, $strict, $clean, $profondeur);
 		
 	return count($arbre)?$arbre:false;
 }
 
 // http://doc.spip.org/@spip_xml_parse
-function spip_xml_parse($texte, $strict=true, $clean=true){
+function spip_xml_parse(&$texte, $strict=true, $clean=true, $profondeur = -1){
 	$out = array();
   // enlever les commentaires
-  if ($clean){
-  	$charset = 'AUTO';
+  $charset = 'AUTO';
+  if ($clean===true){
   	if (preg_match(",<\?xml\s(.*?)encoding=['\"]?(.*?)['\"]?(\s(.*))?\?>,im",$texte,$regs))
   		$charset = $regs[2];
 	  $texte = preg_replace(',<!--(.*?)-->,is','',$texte);
 	  $texte = preg_replace(',<\?(.*?)\?>,is','',$texte);
 		include_spip('inc/charsets');
-		$texte = importer_charset($texte,$charset);
+		$clean = $charset;
+		//$texte = importer_charset($texte,$charset);
   }
+  if (is_string($clean)) $charset = $clean;
   $txt = $texte;
 
 	// tant qu'il y a des tags
-	$chars = preg_split("{<([^>]*?)>}s",$txt,2,PREG_SPLIT_DELIM_CAPTURE);
+	$chars = preg_split("{<([^>]*?)>}sS",$txt,2,PREG_SPLIT_DELIM_CAPTURE);
 	while(count($chars)>=2){
 		// tag ouvrant
 		//$chars = preg_split("{<([^>]*?)>}s",$txt,2,PREG_SPLIT_DELIM_CAPTURE);
@@ -52,17 +54,19 @@ function spip_xml_parse($texte, $strict=true, $clean=true){
 		$before = trim($chars[0]);
 
 		if (strlen($before)>0)
-			return $texte; // before non vide, donc on est dans du texte
+			return importer_charset($texte,$charset);//$texte; // before non vide, donc on est dans du texte
 	
 		$tag = rtrim($chars[1]);
-		$closing_tag = explode(" ",trim($tag));$closing_tag=reset($closing_tag);
 		$txt = $chars[2];
-	
+		
+		if (strncmp($tag,'<![CDATA[',9)==0) return importer_charset($texte,$charset);//$texte;
 		if(substr($tag,-1)=='/'){ // self closing tag
 			$tag = rtrim(substr($tag,0,strlen($tag)-1));
 			$out[$tag][]="";
 		}
 		else{
+			$closing_tag = explode(" ",trim($tag));
+			$closing_tag=reset($closing_tag);
 			// tag fermant
 			$ncclos = strlen("</$closing_tag>");
 			$p = strpos($txt,"</$closing_tag>");
@@ -84,21 +88,21 @@ function spip_xml_parse($texte, $strict=true, $clean=true){
 					$out[$tag][]="erreur : tag fermant $tag manquant::$txt"; 
 					return $out;
 				}
-				else return $texte; // un tag qui constitue du texte a reporter dans $before
+				else return importer_charset($texte,$charset);//$texte // un tag qui constitue du texte a reporter dans $before
 			}
 			$content = substr($txt,0,$p);
 			$txt = substr($txt,$p+$ncclos);
-			if (strpos($content,"<")===FALSE) // eviter une recursion si pas utile
-				$out[$tag][] = $content;
+			if ($profondeur==0 OR strpos($content,"<")===FALSE) // eviter une recursion si pas utile
+				$out[$tag][] = importer_charset($content,$charset);//$content;
 			else
-				$out[$tag][]=spip_xml_parse($content, $strict, false);
+				$out[$tag][]=spip_xml_parse($content, $strict, $clean, $profondeur-1);
 		}
-		$chars = preg_split("{<([^>]*?)>}s",$txt,2,PREG_SPLIT_DELIM_CAPTURE);
+		$chars = preg_split("{<([^>]*?)>}sS",$txt,2,PREG_SPLIT_DELIM_CAPTURE);
 	}
 	if (count($out)&&(strlen(trim($txt))==0))
 		return $out;
 	else
-		return $texte;
+		return importer_charset($texte,$charset);//$texte;
 }
 
 // http://doc.spip.org/@spip_xml_aplatit
