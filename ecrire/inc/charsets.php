@@ -142,7 +142,8 @@ function plage_punct_unicode() {
 // corriger caracteres non-conformes : 128-159
 // cf. charsets/iso-8859-1.php (qu'on recopie ici pour aller plus vite)
 // http://doc.spip.org/@corriger_caracteres_windows
-function corriger_caracteres_windows($texte, $charset='AUTO') {
+// on peut passer un charset cible en parametre pour accelerer le passage iso-8859-1 -> autre charset
+function corriger_caracteres_windows($texte, $charset='AUTO', $charset_cible='unicode') {
 	static $trans;
 
 	if ($charset=='AUTO') $charset = $GLOBALS['meta']['charset'];
@@ -153,8 +154,8 @@ function corriger_caracteres_windows($texte, $charset='AUTO') {
 	} else
 		return $texte;
 
-	if (!isset($trans[$charset])) {
-		$trans[$charset] = array(
+	if (!isset($trans[$charset][$charset_cible])) {
+		$trans[$charset][$charset_cible] = array(
 			$p.chr(128) => "&#8364;",
 			$p.chr(129) => ' ', # pas affecte
 			$p.chr(130) => "&#8218;",
@@ -188,8 +189,12 @@ function corriger_caracteres_windows($texte, $charset='AUTO') {
 			$p.chr(158) => "&#382;",
 			$p.chr(159) => "&#376;",
 		);
+		if ($charset_cible!='unicode'){
+			foreach($trans[$charset][$charset_cible] as $k=>$c)
+				$trans[$charset][$charset_cible][$k] = unicode2charset($c, $charset_cible);
+		}
 	}
-	return strtr($texte, $trans[$charset]);
+	return str_replace(array_keys($trans[$charset]),array_values($trans[$charset]),$texte);
 }
 
 
@@ -210,10 +215,10 @@ function html2unicode($texte, $secure=false) {
 	}
 
 	if ($secure)
-		return strtr($texte, $trans);
+		return str_replace(array_keys($trans),array_values($trans),$texte);
 	else
-		return strtr(strtr($texte, $trans),
-			array('&amp;'=>'&', '&quot;'=>'"', '&lt;'=>'<', '&gt;'=>'>')
+		return str_replace(array('&amp;', '&quot;', '&lt;', '&gt;'),array('&', '"', '<', '>'),
+		  str_replace(array_keys($trans),array_values($trans),$texte)			
 		);
 }
 
@@ -231,7 +236,7 @@ function mathml2unicode($texte) {
 			$trans["&$key;"] = $val;
 	}
 
-	return strtr($texte, $trans);
+	return str_replace(array_keys($trans),array_values($trans),$texte);
 }
 
 
@@ -279,7 +284,7 @@ function charset2unicode($texte, $charset='AUTO' /* $forcer: obsolete*/) {
 			}
 		}
 		if (count($trans[$charset]))
-			return strtr($texte, $trans[$charset]);
+			return str_replace(array_keys($trans[$charset]),array_values($trans[$charset]),$texte);
 
 		// Sinon demander a iconv (malgre le fait qu'il coupe quand un
 		// caractere n'appartient pas au charset, mais c'est un probleme
@@ -335,7 +340,7 @@ function unicode2charset($texte, $charset='AUTO') {
 				}
 			}
 		}
-		$texte = strtr($texte, $trans[$charset]);
+		$texte = str_replace(array_keys($trans[$charset]),array_values($trans[$charset]),$texte);
 		return $texte;
 	}
 }
@@ -493,17 +498,17 @@ function unicode_to_utf_8($texte) {
 		if ($reg[1]>127 AND !isset($vu[$reg[0]]))
 			$vu[$reg[0]] = caractere_utf_8($reg[1]);
 	}
-	$texte = str_replace(array_keys($vu), $vu, $texte);
+	//$texte = str_replace(array_keys($vu), array_values($vu), $texte);
 
 	// 2. Entites > &#xFF;
-	$vu = array();
+	//$vu = array();
 	if (preg_match_all(',&#x0*([1-9a-f][0-9a-f][0-9a-f]+);,iS',
 	$texte, $regs, PREG_SET_ORDER))
 	foreach ($regs as $reg) {
 		if (!isset($vu[$reg[0]]))
 			$vu[$reg[0]] = caractere_utf_8(hexdec($reg[1]));
 	}
-	return str_replace(array_keys($vu), $vu, $texte);
+	return str_replace(array_keys($vu), array_values($vu), $texte);
 
 }
 
@@ -563,7 +568,7 @@ function translitteration($texte, $charset='AUTO', $complexe='') {
 			$trans[$complexe][caractere_utf_8($key)] = $val;
 	}
 
-	return strtr($texte, $trans[$complexe]);
+	return str_replace(array_keys($trans[$complexe]),array_values($trans[$complexe]),$texte);
 }
 
 // &agrave; est retourne sous la forme "a`" et pas "a"
