@@ -27,16 +27,16 @@ function configuration_logos_dist(){
 	
 	$res = "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 	$res .= "<tr><td class='verdana2'>";
-	$res .= _L('Chaque objet du site peut avoir un logo, ainsi qu\'un logo &#171;&nbsp;de survol&nbsp;&#187;').aide('logoart');
+	$res .= _T('config_info_logos').aide('logoart');
 	$res .= "</td></tr>";
 	
 	$res .= "<tr>";
 	$res .= "<td align='$spip_lang_left' class='verdana2'>";
 	
 	
-	$res .= bouton_radio("activer_logos", "oui", _L('Utiliser les logos'), $activer_logos == "oui", "changeVisible(this.checked, 'logos_survol_config', 'block', 'none');")
+	$res .= bouton_radio("activer_logos", "oui", _T('config_info_logos_utiliser'), $activer_logos == "oui", "changeVisible(this.checked, 'logos_survol_config', 'block', 'none');")
 	. " <br /> "
-	. bouton_radio("activer_logos", "non", _L('Ne pas utiliser les logos'), $activer_logos == "non", "changeVisible(this.checked, 'logos_survol_config', 'none', 'block');");
+	. bouton_radio("activer_logos", "non", _T('config_info_logos_utiliser_non'), $activer_logos == "non", "changeVisible(this.checked, 'logos_survol_config', 'none', 'block');");
 
 	if ($activer_logos != "non") $style = "display: block;";
 	else $style = "display: none;";
@@ -45,8 +45,8 @@ function configuration_logos_dist(){
 	
 
 	$res .= afficher_choix('activer_logos_survol', $activer_logos_survol,
-		array('oui' => _L('Utiliser les logos de survol'),
-			'non' => _L('Ne pas utiliser les logos de survol')), " <br /> ");
+		array('oui' => _T('config_info_logos_utiliser_survol'),
+			'non' => _T('config_info_logos_utiliser_survol_non')), " <br /> ");
 			
 			
 	$res .= "</div>";
@@ -54,7 +54,7 @@ function configuration_logos_dist(){
 	$res .= "</td></tr>";
 	$res .= "</table>\n";
 
-	$res = debut_cadre_trait_couleur("image-24.gif", true, "", _L('Les logos'))
+	$res = debut_cadre_trait_couleur("image-24.gif", true, "", _T('info_logos'))
 	. ajax_action_post('configurer', 'logos', 'configuration','',$res) 
 	. fin_cadre_trait_couleur(true);
 
