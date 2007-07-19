@@ -233,32 +233,4 @@ function appliquer_modifs_config() {
 	}
 }
 
-// Function glue_url : le pendant de parse_url 
-// http://doc.spip.org/@glue_url
-function glue_url ($url){
-	if (!is_array($url)){
-		return false;
-	}
-	// scheme
-	$uri = (!empty($url['scheme'])) ? $url['scheme'].'://' : '';
-	// user & pass
-	if (!empty($url['user'])){
-		$uri .= $url['user'].':'.$url['pass'].'@';
-	}
-	// host
-	$uri .= $url['host'];
-	// port
-	$port = (!empty($url['port'])) ? ':'.$url['port'] : '';
-	$uri .= $port;
-	// path
-	$uri .= $url['path'];
-// fragment or query
-	if (isset($url['fragment'])){
-		$uri .= '#'.$url['fragment'];
-	} elseif (isset($url['query'])){
-		$uri .= '?'.$url['query'];
-	}
-	return $uri;
-}
-
 ?>
