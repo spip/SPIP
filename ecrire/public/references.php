@@ -156,7 +156,7 @@ function index_exception(&$boucle, $desc, $nom_champ, $excep)
 	global $tables_des_serveurs_sql;
 
 	if (is_array($excep)) {
-		// permettre aux plugins de gerer eux meme des jointures derogatoire ingérables
+		// permettre aux plugins de gerer eux meme des jointures derogatoire ingÃ©rables
 		$t = NULL;
 		if (count($excep)==3){
 			$index_exception_derogatoire = array_pop($excep);
@@ -455,6 +455,17 @@ function applique_filtres($p) {
 	return $code;
 }
 
+function chercher_filtre($fonc) {
+		foreach (
+		array('filtre_'.$fonc, 'filtre_'.$fonc.'_dist', $fonc) as $f)
+			if (function_exists($f)
+			OR (preg_match("/^(\w*)::(\w*)$/", $f, $regs)                            
+				AND is_callable(array($regs[1], $regs[2]))
+			)) {
+				return $f;
+			}
+		return NULL;
+}
 // Cf. function pipeline dans ecrire/inc_utils.php
 // http://doc.spip.org/@compose_filtres
 function compose_filtres(&$p, $code) {
@@ -490,15 +501,8 @@ function compose_filtres(&$p, $code) {
 			// le filtre est defini sous forme de fonction ou de methode
 			// par ex. dans inc_texte, inc_filtres ou mes_fonctions
 			else {
-				foreach (
-				array('filtre_'.$fonc, 'filtre_'.$fonc.'_dist', $fonc) as $f)
-					if (function_exists($f)
-					OR (preg_match("/^(\w*)::(\w*)$/", $f, $regs)                            
-						AND is_callable(array($regs[1], $regs[2]))
-					)) {
-						$code = "$f($code$arglist)";
-						break;
-					}
+				if($fonc = chercher_filtre($fonc))
+					$code = "$fonc($code$arglist)";
 			}
 
 			if (!isset($code))
