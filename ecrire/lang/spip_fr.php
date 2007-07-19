@@ -37,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur' => 'Erreur: voir ci-dessous',
 'avis_erreur_connexion' => 'Erreur de connexion',
 'avis_erreur_cookie' => 'probl&egrave;me de cookie',
-'avis_erreur_fonction_contexte' => 'Erreur de programmation. Cette fonction ne doit pas etre appelee dans ce contexte.',
+'avis_erreur_fonction_contexte' => 'Erreur de programmation. Cette fonction ne doit pas &ecirc;tre appel&eacute;e dans ce contexte.',
 'avis_erreur_mysql' => 'Erreur MySQL',
 'avis_erreur_sauvegarde' => 'Erreur dans la sauvegarde (@type@ @id_objet@) !',
 'avis_erreur_visiteur' => 'Probl&egrave;me d\'acc&egrave;s &agrave; l\'espace priv&eacute;',
@@ -260,6 +260,7 @@ Merci de votre participation
 ',
 'form_pet_message_commentaire' => 'Un message, un commentaire&nbsp;?',
 'form_pet_nom_site2' => 'Nom de votre site Web',
+'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.',
 'form_pet_probleme_technique' => 'Probl&egrave;me technique, les signatures sont temporairement suspendues.',
 'form_pet_signature_pasprise' => 'Votre signature n\'est pas prise en compte.',
 'form_pet_signature_validee' => 'Votre signature est valid&eacute;e. Merci&nbsp;!',
@@ -415,6 +416,7 @@ Merci de votre participation
 'info_description_2' => 'Description&nbsp;:',
 'info_dimension' => 'Dimensions&nbsp;:',
 'info_document' => 'Document',
+'info_document_indisponible' => 'Ce document n\'est pas disponible',
 'info_documents' => 'Documents',
 'info_echange_message' => 'SPIP permet l\'&eacute;change de messages et la constitution de forums de discussion
 		priv&eacute;s entre les participants du site. Vous pouvez activer ou
@@ -507,6 +509,8 @@ Merci de votre participation
 'info_sans_titre_2' => 'sans titre',
 'info_selectionner_fichier' => 'Vous pouvez s&eacute;lectionner un fichier du dossier @upload@',
 'info_selectionner_fichier_2' => 'S&eacute;lectionner un fichier&nbsp;:',
+'info_signature_supprimee' => 'Signature supprim&eacute;e',
+'info_signature_supprimee_erreur' => 'Erreur&nbsp;: ce code de suppression ne correspond a aucune signature',
 'info_site_attente' => 'Site Web en attente de validation',
 'info_site_reference' => 'Site r&eacute;f&eacute;renc&eacute; en ligne',
 'info_site_refuse' => 'Site Web refus&eacute;',
@@ -699,7 +703,7 @@ et vous reconnecter au site.
 		Notez bien cette r&eacute;f&eacute;rence, r&eacute;essayez la mise &agrave;
 		niveau, et enfin v&eacute;rifiez que les images apparaissent
 		toujours dans les articles.',
-'texte_erreur_visiteur' => 'Vous avez tent&eacute; de d\'acc&eacute;der &agrave; l\'espace priv&eacute; avec un login qui ne le permet pas.',
+'texte_erreur_visiteur' => 'Vous avez tent&eacute; d\'acc&eacute;der &agrave; l\'espace priv&eacute; avec un login qui ne le permet pas.',
 'texte_inc_auth_1' => 'Vous &ecirc;tes identifi&eacute; sous le
 		login <b>@auth_login@</b>, mais celui-ci n\'existe pas/plus dans la base. 
 		Essayez de vous',
