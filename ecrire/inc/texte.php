@@ -122,18 +122,20 @@ function traiter_echap_html_dist($regs) {
 // http://doc.spip.org/@traiter_echap_code_dist
 function traiter_echap_code_dist($regs) {
 	$echap = entites_html($regs[3]);
-	// supprimer les sauts de ligne debut/fin
-	// (mais pas les espaces => ascii art).
-	$echap = preg_replace("/^\n+|\n+$/", "", $echap);
 
 	// ne pas mettre le <div...> s'il n'y a qu'une ligne
 	if (is_int(strpos($echap,"\n"))) {
-		$echap = nl2br("<div style='text-align: left;' "
+		// supprimer les sauts de ligne debut/fin
+		// (mais pas les espaces => ascii art).
+		$echap = preg_replace("/^[\n\r]+|[\n\r]+$/ms", "", $echap);
+		$echap = nl2br($echap);
+		$echap = "<div style='text-align: left;' "
 		. "class='spip_code' dir='ltr'><code>"
-		.$echap."</code></div>");
-	} else
+		.$echap."</code></div>";
+	} else {
 		$echap = "<code class='spip_code' "
 		."dir='ltr'>".$echap."</code>";
+	}
 
 	$echap = str_replace("\t",
 		"&nbsp; &nbsp; &nbsp; &nbsp; ", $echap);
