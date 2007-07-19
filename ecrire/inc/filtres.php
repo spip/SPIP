@@ -2106,4 +2106,16 @@ function http_style_background($img, $att='')
   return " style='background: url(\"".http_wrapper($img)."\")" .
 	    ($att ? (' ' . $att) : '') . ";'";
 }
+
+//[(#ENV*|unserialize|foreach)]
+function filtre_foreach_dist($balise_deserializee, $modele = 'foreach') {
+	$texte = '';
+	foreach($balise_deserializee as $k => $v)
+		$texte .= recuperer_fond(
+			'modeles/'.$modele,
+			array('cle' => $k, 'valeur' => $v)
+		);
+	return $texte;
+}
+
 ?>
