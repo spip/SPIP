@@ -80,7 +80,7 @@ function purger_repertoire($dir, $options=array()) {
 		if (is_file($chemin)) {
 			if (!isset($options['date'])
 			OR (@fileatime($chemin) < $options['date'])) {
-				@unlink($chemin);
+				supprimer_fichier($chemin);
 				$total ++;
 			}
 		}
@@ -182,7 +182,7 @@ function retire_caches($chemin = '') {
 // en cas de premier post sur le forum
 // http://doc.spip.org/@code_invalideur_forums
 function code_invalideur_forums($p, $code) {
-	return "''"; // code compile ne faisant rien
+	return $code;
 }
 
 
