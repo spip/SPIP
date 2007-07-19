@@ -485,7 +485,7 @@ else {
 				if ($hauteur > 0){
 					if ($hauteur_moyenne > $hauteur) {
 						$difference = ($hauteur_moyenne - $hauteur) -1;
-						echo http_img_rien($largeur, 1,'trait_moyenne',$tagtitle);
+						echo http_img_rien($largeur, 1,'trait_moyen',$tagtitle);
 						echo http_img_rien($largeur, $difference, '', $tagtitle);
 						echo http_img_rien($largeur,1, "trait_haut", $tagtitle);
 						if (date("w",$key) == "0") // Dimanche en couleur foncee
@@ -500,7 +500,7 @@ else {
 						else
 							$couleur = 'couleur_jour';
 						echo http_img_rien($largeur, $difference, $couleur, $tagtitle);
-						echo http_img_rien($largeur,1,"trait_moyenne", $tagtitle);
+						echo http_img_rien($largeur,1,"trait_moyen", $tagtitle);
 						echo http_img_rien($largeur, $hauteur_moyenne, $couleur, $tagtitle);
 					} else {
 					  echo http_img_rien($largeur, 1, "trait_haut", $tagtitle);
