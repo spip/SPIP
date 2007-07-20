@@ -34,11 +34,19 @@ function action_charger_plugin_dist() {
 		exit;
 	}
 
+	if ($url = _request('supprimer_flux')) {
+		$syndic_plug = @unserialize($GLOBALS['meta']['syndic_plug']);
+		unset($syndic_plug[$url]);
+		ecrire_meta('syndic_plug', serialize($syndic_plug));
+		ecrire_metas();
+	}
+
 	if (!preg_match(',^(https?|ftp)://.*\.zip,',
-		$zip = _request('url_zip_plugin2'))
+		$zip = _request('url_zip_plugin'))
 	AND !preg_match(',^(https?|ftp)://.*\.zip,',
-		$zip = _request('url_zip_plugin')))
+		$zip = _request('url_zip_plugin2')))
 	{
+		essaie_ajouter_liste_plugins($zip);
 		include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire('admin_plugin'));
 	}
@@ -100,14 +108,16 @@ function action_charger_plugin_dist() {
 	include_spip('exec/install'); // pour bouton_suivant()
 	echo minipres($retour,
 		_request('extract')
-			? generer_form_ecrire('admin_plugin&plug='.$status['dirname'],
+			? generer_form_ecrire('admin_plugin&plug='.preg_replace(',^[^/]+/|/$,', '', $status['dirname']),
 				$texte . bouton_suivant())
 			: "<form action='".self()."' method='post'>"
 				.form_hidden(
 					'?action='._request('action')
 					.'&url_zip_plugin='.$zip.'&extract=oui'
 				)
-				.$texte.bouton_suivant()."</form>\n"
+				.$texte
+				."<a class='suivant' href='".generer_url_ecrire('admin_plugin')."'>Annuler</a>"
+				.bouton_suivant()."</form>\n"
 	);
 	exit;
 

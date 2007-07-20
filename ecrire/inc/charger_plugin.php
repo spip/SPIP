@@ -65,29 +65,25 @@ function formulaire_charger_plugin($retour='') {
 
 	$res .= "<tr><td class='verdana2'>";
 
-	// TODO une liste multilingue a telecharger
-	$liste = array(
-		'http://files.spip.org/spip-zone/crayons.zip' => 'Les Crayons',
-		'http://files.spip.org/spip-zone/forms_et_tables_1_9_1.zip' => 'Forms &amp; tables',
-		'http://files.spip.org/spip-zone/autorite.zip' => 'Autorit&#233;',
-		'http://files.spip.org/spip-zone/cfg.zip' => 'CFG, outil de configuration',
-		'http://files.spip.org/spip-zone/ortho.zip' => 'Correcteur d\'orthographe'
-	);
-
-
-	$res .= _L('<p>S&#233;lectionnez ci-dessous un plugin : SPIP le t&#233;l&#233;chargera et l\'installera dans le r&#233;pertoire <code>'.joli_repertoire(_DIR_PLUGINS_AUTO).'</code>&nbsp;; si ce plugin existe d&#233;j&#224;, il sera mis &#224; jour.</p>');
+	$liste = liste_plugins_distants();
 
 	if ($liste) {
+		$res .= _L('<p>S&#233;lectionnez ci-dessous un plugin : SPIP le t&#233;l&#233;chargera et l\'installera dans le r&#233;pertoire <code>'.joli_repertoire(_DIR_PLUGINS_AUTO).'</code>&nbsp;; si ce plugin existe d&#233;j&#224;, il sera mis &#224; jour.</p>');
+
 		$menu = '';
 		foreach ($liste as $url => $titre)
-		$menu .= '<option value="'.entites_html($url).'">'.$titre."</option>\n";
+		$menu .= '<option value="'.entites_html($url).'">'.couper(typo($titre),50)."</option>\n";
 		$res .= "<p><select name='url_zip_plugin'>\n"
 			."<option>"._L('choisir...')."</option>"
 			.$menu."\n</select></p>\n";
 
-		$res .= _L("<p><label>... ou entrez l'adresse URL du fichier ZIP du plugin &#224; t&#233;l&#233;charger :");
-	} else
-		$res .= _L("<p><label>entrez l'adresse URL du fichier ZIP du plugin &#224; t&#233;l&#233;charger");
+		$res .= _L("ou...");
+	}
+
+
+	$res .= _L("<p><label>indiquez ci-dessous l'adresse d'un fichier zip de plugin &#224; t&#233;l&#233;charger, ou encore l'adresse d'une liste de plugins.");
+	
+	$res .= '<p>('._L('exemples :').' http://files.spip.org/spip-zone/paquets.rss.xml.gz ; http://www.spip-contrib.net/spip.php?page=backend&amp;id_mot=112)</p>';
 
 	// TODO: OU l'adresse d'une liste de plugins
 	// TODO: OU uploadez un fichier ZIP ou une liste de plugins
@@ -99,6 +95,8 @@ function formulaire_charger_plugin($retour='') {
 
 	$res = ajax_action_post('charger_plugin', '', 'admin_plugin', '', $res);
 
+
+	$res .= afficher_liste_listes_plugins();
 
 	$res = debut_cadre_trait_couleur("spip-pack-24.png", true, "", _L('Ajouter un plugin'))
 	. $res
@@ -309,6 +307,83 @@ function liste_fichiers_pclzip($status) {
 		$date = '<div>' . affdate($t[1]) .'</div>';
 
 	return $ret . $rev . $date . $l;
+}
+
+// Attention on ne sait pas ce que vaut cette URL
+function essaie_ajouter_liste_plugins($url) {
+	if (!preg_match(',^https?://[^.]+\.[^.]+.*/.*[^/]$,', $url))
+		return;
+
+	include_spip('inc/distant');
+	if (!$rss = recuperer_page($url)
+	OR !preg_match(',<item,i', $rss))
+		return;
+
+	$liste = chercher_enclosures_zip($rss);
+	if (!$liste)
+		return;
+
+	// Ici c'est bon, on conserve l'url dans spip_meta
+	// et une copie du flux dans tmp/
+	ecrire_fichier(_DIR_TMP.'syndic_plug_'.md5($url).'.xml', $rss);
+	$syndic_plug = @unserialize($GLOBALS['meta']['syndic_plug']);
+	$syndic_plug[$url] = count($liste);
+	ecrire_meta('syndic_plug', serialize($syndic_plug));
+	ecrire_metas();
+}
+
+// Recherche les enclosures de type zip dans un flux rss ou atom
+// les renvoie sous forme de tableau url => titre
+function chercher_enclosures_zip($rss) {
+	$liste = array();
+	include_spip('inc/syndic');
+	foreach(analyser_backend($rss) as $item)
+		if ($item['enclosures']
+		AND $zips = extraire_balises($item['enclosures'], 'a'))
+			foreach ($zips as $zip)
+				if (extraire_attribut($zip, 'type') == 'application/zip')
+					$liste[extraire_attribut($zip, 'href')] = $item['titre'];
+	return $liste;
+}
+
+
+// Renvoie la liste des plugins distants (accessibles a travers
+// l'une des listes de plugins)
+function liste_plugins_distants() {
+	// TODO une liste multilingue a telecharger
+	$liste = array(
+		'http://files.spip.org/spip-zone/crayons.zip' => 'Les Crayons',
+		'http://files.spip.org/spip-zone/forms_et_tables_1_9_1.zip' => 'Forms &amp; tables',
+		'http://files.spip.org/spip-zone/autorite.zip' => 'Autorit&#233;',
+		'http://files.spip.org/spip-zone/cfg.zip' => 'CFG, outil de configuration',
+		'http://files.spip.org/spip-zone/ortho.zip' => 'Correcteur d\'orthographe'
+	);
+
+	if (is_array($flux = @unserialize($GLOBALS['meta']['syndic_plug']))) {
+		foreach ($flux as $url => $c) {
+			if (file_exists($cache=_DIR_TMP.'syndic_plug_'.md5($url).'.xml')
+			AND lire_fichier($cache, $rss))
+				$liste = array_merge($liste,chercher_enclosures_zip($rss));
+		}
+	}
+
+	return $liste;
+}
+
+function afficher_liste_listes_plugins() {
+	if (!is_array($flux = @unserialize($GLOBALS['meta']['syndic_plug'])))
+		return '';
+
+	$ret = '<p>'._L('Vos listes de plugins :').'</p><ul>';
+		$ret .= '<li>'._L('les plugins officiels').'</li>';
+	foreach ($flux as $url => $c) {
+		$a = '<a href="'.generer_url_action('charger_plugin', 'supprimer_flux='.rawurlencode($url)).'">x</a>';
+		$ret .= '<li>'.PtoBR(propre("[->$url]")).' ('.$c
+			.' plugins) '.$a.'</li>';
+	}
+	$ret .= '</ul>';
+
+	return $ret;
 }
 
 ?>
