@@ -37,7 +37,12 @@ function action_charger_plugin_dist() {
 		exit;
 	}
 
-	if ($url = _request('supprimer_flux')) {
+	if ($arg == 'update_flux') {
+		if (is_array($syndic_plug = @unserialize($GLOBALS['meta']['syndic_plug'])))
+			foreach ($syndic_plug as $url => $c)
+				essaie_ajouter_liste_plugins($url);
+	} else if ($arg == 'supprimer_flux'
+	AND $url = _request('supprimer_flux')) {
 		$syndic_plug = @unserialize($GLOBALS['meta']['syndic_plug']);
 		unset($syndic_plug[$url]);
 		ecrire_meta('syndic_plug', serialize($syndic_plug));

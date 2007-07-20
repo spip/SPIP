@@ -544,25 +544,30 @@ function my_strtotime($la_date) {
 
 	// format complet
 	if (preg_match(
-	',^([0-9]+-[0-9]+-[0-9]+[T ][0-9]+:[0-9]+(:[0-9]+)?)(\.[0-9]+)?'
-	.'(Z|([-+][0-9][0-9]):[0-9]+)?$,',
+	',^(\d+-\d+-\d+[T ]\d+:\d+(:\d+)?)(\.\d+)?'
+	.'(Z|([-+]\d{2}):\d+)?$,',
 	$la_date, $match)) {
 		$la_date = str_replace("T", " ", $match[1])." GMT";
 		return strtotime($la_date) - intval($match[5]) * 3600;
 	}
 
 	// YYYY
-	if (preg_match(',^([0-9][0-9][0-9][0-9])$,', $la_date, $match))
-		return strtotime($match[1]."-01-01");
+	if (preg_match(',^\d{4}$,', $la_date, $match))
+		return strtotime($match[0]."-01-01");
 
 	// YYYY-MM
-	if (preg_match(',^([0-9][0-9][0-9][0-9]-[0-9][0-9])$,', $la_date, $match))
-		return strtotime($match[1]."-01");
+	if (preg_match(',^\d{4}-\d{2}$,', $la_date, $match))
+		return strtotime($match[0]."-01");
 
 	// utiliser strtotime en dernier ressort
 	$s = strtotime($la_date);
 	if ($s > 0)
 		return $s;
+
+	// YYYY-MM-DD hh:mm:ss
+	if (preg_match(',^\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}\b,', $la_date, $match))
+		return strtotime($match[0]);
+
 
 	// erreur
 	spip_log("Impossible de lire le format de date '$la_date'");
