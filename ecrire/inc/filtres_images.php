@@ -339,10 +339,13 @@ function image_ecrire_tag($valeurs,$surcharge){
 	}
 	$is_png = preg_match(',[.]png($|\?),i',$src);
 	$p = strpos($class,'format_png');
-	if ($is_png && $p===FALSE) $class .= " format_png";
-	if (!$is_png && $p!==FALSE) $class = preg_replace(",\s*format_png,","",$class);
-	$tag = inserer_attribut($tag,'class',$class);
-	
+	if ($is_png && $p===FALSE)
+		$class .= " format_png";
+	if (!$is_png && $p!==FALSE)
+		$class = preg_replace(",\s*format_png,","",$class);
+	if(strlen($class))
+		$tag = inserer_attribut($tag,'class',$class);
+
 	if (count($surcharge))
 		foreach($surcharge as $attribut=>$valeur)
 			$tag = inserer_attribut($tag,$attribut,$valeur);
