@@ -57,6 +57,7 @@ function plugin_version_compatible($intervalle,$version){
 function liste_plugin_valides($liste_plug,&$infos, $force = false){
 	$liste = array();
 	$infos = array();
+
 	foreach($liste_plug as $plug)
 		$infos[$plug] = plugin_get_infos($plug,$force);
 	
@@ -101,7 +102,9 @@ function liste_plugin_valides($liste_plug,&$infos, $force = false){
 				}
 			}
 		}
-		if (count($liste_plug)){
+		if (count($liste_plug)) {
+			include_spip('inc/lang');
+			utiliser_langue_visiteur();
 			$erreurs = "";
 			foreach($liste_plug as $plug){
 				$necessite = "";
@@ -128,7 +131,8 @@ function liste_plugin_valides($liste_plug,&$infos, $force = false){
 					array('plugin' => $plug)
 				)."</li>";
 			}
-			ecrire_meta('plugin_erreur_activation',"<ul>$erreurs</ul>");
+			ecrire_meta('plugin_erreur_activation',
+				"<ul>$erreurs</ul>$necessite");
 		}
 	}
 	return $liste;
@@ -739,6 +743,5 @@ function plugin_propre($texte) {
 	$GLOBALS['toujours_paragrapher'] = $mem;
 	return $texte;
 }
-
 
 ?>

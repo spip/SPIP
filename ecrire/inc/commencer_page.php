@@ -202,18 +202,19 @@ function avertissement_messagerie() {
 // http://doc.spip.org/@alertes_auteur
 function alertes_auteur() {
 
-	if (autoriser('detruire')
-	AND (
-		@$GLOBALS['meta']['message_crash_tables']
-		OR false // autres alertes administrateur
-	)) {
-		$alertes = array();
+	$alertes = array();
 
-		if (@$GLOBALS['meta']['message_crash_tables']) {
-			include_spip('inc/maintenance');
-			if ($msg = message_crash_tables())
-				$alertes[] = $msg;
-		}
+	if (isset($GLOBALS['meta']['message_crash_tables'])
+	AND autoriser('detruire')) {
+		include_spip('inc/maintenance');
+		if ($msg = message_crash_tables())
+			$alertes[] = $msg;
+	}
+
+	if (isset($GLOBALS['meta']['plugin_erreur_activation'])
+	AND autoriser('configurer', 'plugins')) {
+		$alertes[] = $GLOBALS['meta']['plugin_erreur_activation'];
+		effacer_meta('plugin_erreur_activation'); // pas normal que ce soit ici
 	}
 
 	$alertes[] = avertissement_messagerie();
