@@ -230,9 +230,15 @@ else {
 	$result = spip_query("SELECT id_article, titre, popularite, visites FROM spip_articles WHERE statut='publie' AND popularite > 0 ORDER BY visites DESC LIMIT 30");
 
 		
-	if (spip_num_rows($result) > 0) {
+	if (spip_num_rows($result) > 0
+	OR $id_article > 0)
 		creer_colonne_droite();
 
+	if ($id_article > 0) {
+		echo bloc_des_raccourcis(icone_horizontale(_T('icone_retour_article'), generer_url_ecrire("articles","id_article=$id_article"), "article-24.gif","rien.gif", false));
+	}
+
+	if (spip_num_rows($result) > 0) {
 		echo "<br /><div class='iconeoff' style='padding: 5px;'>";
 		echo "<div style='font-size:small;overflow:hidden;' class='verdana1'>";
 		echo typo(_T('info_affichier_visites_articles_plus_visites'));
@@ -256,10 +262,6 @@ else {
 		echo "</div>";
 	}
 
-
-	if ($id_article > 0) {
-			echo bloc_des_raccourcis(icone_horizontale(_T('icone_retour_article'), generer_url_ecrire("articles","id_article=$id_article"), "article-24.gif","rien.gif", false));
-	}
 
 	debut_droite();
  }
