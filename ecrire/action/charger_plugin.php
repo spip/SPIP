@@ -66,9 +66,6 @@ function action_charger_plugin_dist() {
 	# destination des fichiers
 	$dest = _DIR_PLUGINS_AUTO;
 
-	# eliminer plugins/ du chemin indique
-	$remove = 'plugins';
-
 	# dispose-t-on du fichier ?
 	$status = null;
 	$fichier = $dest.basename($zip);
@@ -87,7 +84,6 @@ function action_charger_plugin_dist() {
 		$status = chargeur_charger_zip(
 			array(
 				'zip' => $zip,
-				'remove' => $remove,
 				'dest' => $dest,
 				'fichier' => $fichier,
 				'extract' => _request('extract')

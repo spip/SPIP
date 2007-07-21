@@ -134,7 +134,9 @@ function chargeur_charger_zip($quoi = array())
 					'plugin' => null,
 					'cache_cache' => null,
 					'rename' => array(),
-					'edit' => array())
+					'edit' => array(),
+					'root_extract' => false # extraire a la racine de dest ?
+				)
 				as $opt=>$def) {
 		isset($quoi[$opt]) || ($quoi[$opt] = $def);
 	}
@@ -145,58 +147,37 @@ function chargeur_charger_zip($quoi = array())
 	include_spip('inc/pclzip');
 	$zip = new PclZip($fichier);
 	$list = $zip->listContent();
-	$i = count($list) - 1;
-	$path = explode('/', $list[$i]['filename']);
-	while ($i--) {
-		$act = explode('/', $list[$i]['filename']);
-		for ($j = 0; $j < count($path); ++$j) {
-			if ($j >= count($path) || $act[$j] != $path[$j]) {
-				break;
-			}
-		}
-		for ( ; $j < count($path); ++$j) {
-			unset($path[$j]);
-		}
-	}
 
-	$aremove = explode('/', $quoi['remove']);
-	$jmax = count($path);
-	for ($j = 0; $j < $jmax; ++$j) {
-		if ($j >= count($aremove) || $path[$j] != $aremove[$j]) {
-			break;
+	// on cherche la plus longue racine commune a tous les fichiers
+	foreach($list as $n) {
+		$p = array();
+		foreach(explode('/', $n['filename']) as $n => $x) {
+			$paths[$n][join('/',$p)]++;
+			$p[] = $x;
 		}
-		unset($path[$j]);
 	}
+	$i = 0;
+	while (count($paths[$i])<=1)
+		$i++;
+	$racine = $i
+		? array_pop(array_keys($paths[$i-1])).'/'
+		: '';
 
-	$adest = explode('/', $quoi['dest']);
-	$kmax = count($adest);
-	for ($k = 0 ; $k < $kmax && $j < $jmax; ++$j, ++$k) {
-		if ($path[$j] != $adest[$k]) {
-			break;
-		}
-		unset($adest[$k]);
-	}
-	$quoi['dest'] = implode('/', $adest);
+	$quoi['remove'] = $racine;
 
-	// si le zip veut se poser a la racine, on le colle dans un sous-repertoire
-	// a son nom
-	if (!$path) {
-		$dirname = $quoi['dest'] = preg_replace(',\.zip$,', '/', $fichier);
-		$removex = ',^'.preg_quote($quoi['remove'] . '/', ',').',';
-		spip_log("zip racine, $dirname, $remove");
-	} else {
-		$dirname = $quoi['dest'] . implode('/', $path).'/';
-		$removex =  ',^('.preg_quote($quoi['remove'] . '/', ',').')?'
-			. preg_quote(implode('/', $path).'/',',').',';
-		spip_log("zip bien forme, $dirname, $remove");
-	}
+	if (!strlen($nom = basename($racine)))
+		$nom = basename($fichier, '.zip');
+
+	$dir_export = $quoi['root_extract']
+		? $quoi['dest']
+		: $quoi['dest'] . $nom.'/';
 
 	if ($quoi['extract']) {
 		$ok = $zip->extract(
-			PCLZIP_OPT_PATH, $quoi['dest'],
+			PCLZIP_OPT_PATH, $dir_export,
 			PCLZIP_OPT_SET_CHMOD, _SPIP_CHMOD,
 			PCLZIP_OPT_REPLACE_NEWER,
-			PCLZIP_OPT_REMOVE_PATH, $quoi['remove'] . "/");
+			PCLZIP_OPT_REMOVE_PATH, $quoi['remove']);
 		if ($zip->error_code < 0) {
 			spip_log('charger_decompresser erreur zip ' . $zip->error_code .
 				' pour paquet: ' . $quoi['zip']);
@@ -210,7 +191,7 @@ function chargeur_charger_zip($quoi = array())
 			chargeur_rename($quoi);
 		}
 		if ($quoi['edit']) {
-			chargeur_edit($quoi['dest'], $quoi['edit']);
+			chargeur_edit($dir_export, $quoi['edit']);
 		}
 
 		if ($quoi['plugin']) {
@@ -221,6 +202,7 @@ function chargeur_charger_zip($quoi = array())
 	}
 
 	$size = $compressed_size = 0;
+	$removex = ',^'.preg_quote($quoi['remove'], ',').',';
 	foreach ($list as $a => $f) {
 		$size += $f['size'];
 		$compressed_size += $f['compressed_size'];
@@ -231,7 +213,7 @@ function chargeur_charger_zip($quoi = array())
 		'files' => $list,
 		'size' => $size,
 		'compressed_size' => $compressed_size,
-		'dirname' => $dirname #.preg_replace(',/.*,', '', $list[0])
+		'dirname' => $dir_export
 	);
 }
 
