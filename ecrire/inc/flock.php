@@ -17,8 +17,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function spip_file_get_contents ($fichier) {
 	if (substr($fichier, -3) != '.gz') {
 		if (function_exists('file_get_contents')
-		AND os_serveur != 'windows') # windows retourne ''
-			return @file_get_contents ($fichier);
+		AND ( 
+		  ($contenu = @file_get_contents ($fichier)) # windows retourne '' ?
+		  OR $os_serveur != 'windows')
+		)
+			return $contenu;
 		else
 			return join('', @file($fichier));
 	} else
