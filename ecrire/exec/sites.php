@@ -154,8 +154,12 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row)
 		.  "<select name='statut' size='1' class='fondl'>\n"
 		.  my_sel("prop",_T('info_statut_site_3'),$statut)
 		.  my_sel("publie",_T('info_statut_site_2'),$statut)
-		.  my_sel("refuse",_T('info_statut_site_4'),$statut)
-		. "</select>\n"
+		.  my_sel("refuse",_T('info_statut_site_4'),$statut);
+
+		if (!in_array($statut, array('prop', 'publie', 'refuse')))
+			$corps .=  my_sel($statut,$statut,$statut);
+
+		$corps .= "</select>\n"
 		. " &nbsp;&nbsp;&nbsp; "
 		. "<input type='submit' value='"
 		. _T('bouton_valider')
@@ -311,9 +315,7 @@ if ($GLOBALS['champs_extra'] AND $extra) {
 		echo extra_affichage($extra, "sites");
 	}
 
- echo '</div>';
 fin_cadre_relief();
-
 
 
 //////////////////////////////////////////////////////
