@@ -351,6 +351,31 @@ function unicode2charset($texte, $charset='AUTO') {
 // (les caracteres non resolus sont transformes en &#123;)
 // http://doc.spip.org/@importer_charset
 function importer_charset($texte, $charset = 'AUTO') {
+	static $trans = array();
+	// on traite le cas le plus frequent iso-8859-1 vers utf directement pour aller plus vite !
+	if (($charset == 'iso-8859-1') && ($GLOBALS['meta']['charset']=='utf-8')){
+		$texte = corriger_caracteres_windows($texte, 'iso-8859-1',$GLOBALS['meta']['charset']);
+		if (init_mb_string()) {
+			if ($order = mb_detect_order() # mb_string connait-il $charset?
+			AND mb_detect_order($charset)) {
+				$s = mb_convert_encoding($texte, 'utf-8', $charset);
+			}
+			mb_detect_order($order); # remettre comme precedemment
+			return $s;
+		}
+		// Sinon, peut-etre connaissons-nous ce charset ?
+		if (!isset($trans[$charset])) {
+			global $CHARSET;
+			if ($cset = load_charset($charset)
+			AND is_array($CHARSET[$cset]))
+				foreach ($CHARSET[$cset] as $key => $val) {
+					$trans[$charset][chr($key)] = unicode2charset('&#'.$val.';');
+			}
+		}
+		if (count($trans[$charset]))
+			return str_replace(array_keys($trans[$charset]),array_values($trans[$charset]),$texte);
+		return $texte;
+	}
 	return unicode2charset(charset2unicode($texte, $charset));
 }
 
