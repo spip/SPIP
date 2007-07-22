@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'afficher_trad' => 'Iwersetzunge weisen',
 'alerte_maj_impossible' => '<b>Alarm&nbsp;!</b> Den Update vun der MySQL-Datekank op d\'Versioun @version@ ass onm&eacute;iglech, vill&auml;icht w&eacute;int engem Problem mat den &Auml;nnerungs-Rechter vun der Datebank. Kontakt&eacute;iert weg &auml;ren Provider.',
 'analyse_xml' => 'XML-Analyse',
+'annuler' => 'Ofbriechen',
 'antispam_champ_vide' => 'Loosst d&euml;st Feld eidel:',
 'avis_archive_incorrect' => 'de Backup-Fichier ass kee SPIP-Fichier',
 'avis_archive_invalide' => 'de Backup-Fichier ass ong&uuml;lteg',
@@ -649,6 +650,10 @@ Dir k&euml;nnt do e neit Passwuert agin an Iech um Site umelden.
 'previsualiser' => 'Pr&eacute;visualis&eacute;ieren',
 
 
+// R
+'retour' => 'Zer&euml;ck',
+
+
 // S
 'spip_conforme_dtd' => 'SPIP h&euml;lt d&euml;st Dokument als konform zu s&euml;ngem DOCTYPE un:',
 'squelette' => 'Skelett',
@@ -739,6 +744,7 @@ Versicht',
 'zbug_inversion_ordre_inexistant' => 'Inversioun vun enger Uerdnung d&eacute;i &euml;t n&euml;t g&euml;tt',
 'zbug_pagination_sans_critere' => '#PAGINATION ouni {pagination}-Crit&egrave;re oder an &euml;nger rekursiver Schl&auml;if gebraucht',
 'zbug_parametres_inclus_incorrects' => 'Falsch Parameteren fir d\'Inclusioun',
+'zbug_profile' => 'Rechenz&auml;it: @time@',
 'zbug_resultat' => '-eidel-',
 'zbug_serveur_indefini' => 'SQL-Server n&euml;t defin&eacute;iert',
 'zbug_table_inconnue' => 'Onbekannten SQL-Tabell "@table@"',

@@ -35,7 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_espace_interdit' => '<b>Area terlarang</b><p>SPIP telah diinstal.',
 'avis_lecture_noms_bases_1' => 'Sistem instalasi tidak dapat membaca nama-nama database yang terinstal.',
 'avis_lecture_noms_bases_2' => 'Bisa jadi tidak ada database yang tersedia, atau fitur yang mengizinkan penampilan daftar database dinonaktifkan
-		dengan alasan keamanan (yang sering ditemui pada banyak hosting).',
+  dengan alasan keamanan (yang sering ditemui pada banyak hosting).',
 'avis_lecture_noms_bases_3' => 'Jika alternatif kedua benar, sangat mungkin sebuah database dinamai sama dengan log masuk anda:',
 'avis_non_acces_message' => 'Anda tidak memiliki akses ke pesan ini.',
 'avis_non_acces_page' => 'Anda tidak memiliki akses ke halaman ini.',
@@ -120,6 +120,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cache_modifiable_webmestre' => 'Parameter ini dapat dimodifikasi oleh webmaster.',
 'calendrier_synchro' => 'Jika anda menggunakan aplikasi kalender yang kompatibel dengan <b>iCal</b>, anda dapat mensinkronisasikannya dengan informasi situs ini.',
 'connexion_ldap' => 'Koneksi:',
+'copier_en_local' => 'Kopi ke situs lokal',
 
 
 // D
@@ -371,8 +372,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gerer_trad' => 'Aktifkan tautan penerjemahan?',
 'info_groupe_important' => 'Kelompok penting',
 'info_hebergeur_desactiver_envoi_email' => 'Sejumlah hosting menonaktifkan pengiriman e-mail
-		otomatis di server mereka. Dalam hal ini fitur-fitur SPIP berikut tidak
-		dapat diimplementasikan.',
+  otomatis di server mereka. Dalam hal ini fitur-fitur SPIP berikut tidak
+  dapat diimplementasikan.',
 'info_hier' => 'kemarin:',
 'info_historique' => 'Revisi:',
 'info_historique_activer' => 'Aktifkan pelacakan revisi',
@@ -413,10 +414,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_messagerie_interne' => 'Sistem pesan internal',
 'info_mise_a_niveau_base' => 'Pembaharuan database MySQL',
 'info_mise_a_niveau_base_2' => '{{Peringatan!}} Anda telah menginstal berkas SPIP
-		{yang lebih tua} daripada berkas yang terdapat sebelumnya
-		di situs ini: database anda terancam hilang dan situs anda
-		tidak akan bekerja sebagaimana mestinya lagi.<br>{{Instal kembali
-		berkas-berkas SPIP}}',
+  {yang lebih tua} daripada berkas yang terdapat sebelumnya
+  di situs ini: database anda terancam hilang dan situs anda
+  tidak akan bekerja sebagaimana mestinya lagi.<br>{{Instal kembali
+  berkas-berkas SPIP}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Mode operasi standar forum-forum umum',
 'info_modifier_breve' => 'Modifikasi artikel berita:',
 'info_modifier_rubrique' => 'Modifikasi bagian:',
@@ -500,14 +501,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_accepter_visiteurs' => 'Jika templat situs anda mengizinkan pengunjung untuk mendaftar tanpa perlu memasuki area pribadi, silakan aktifkan opsi berikut:',
 'info_question_gerer_statistiques' => 'Apakah situs anda ingin mengelola statistik kunjungan?',
 'info_question_inscription_nouveaux_redacteurs' => 'Apakah anda mengizinkan registrasi editor baru dari
-		situs yang dipublikasi? Jika anda setuju, pengunjung dapat mendaftar
-		melalui formulir terotomasi, dan akan mengakses area pribadi untuk
-		melihat artikel-artikel mereka. <blockquote><i>Selama proses registrasi,
-		pengguna menerima sebuah e-mail terotomasi
-		yang memberikan kode akses ke situs pribadi. Sejumlah
-		hosting menonaktifkan pengiriman e-mail di server mereka:
-		dalam hal ini ini registrasi terotomasi tidak dapat
-		diimplementasikan.',
+  situs yang dipublikasi? Jika anda setuju, pengunjung dapat mendaftar
+  melalui formulir terotomasi, dan akan mengakses area pribadi untuk
+  melihat artikel-artikel mereka. <blockquote><i>Selama proses registrasi,
+  pengguna menerima sebuah e-mail terotomasi
+  yang memberikan kode akses ke situs pribadi. Sejumlah
+  hosting menonaktifkan pengiriman e-mail di server mereka:
+  dalam hal ini ini registrasi terotomasi tidak dapat
+  diimplementasikan.',
 'info_question_mots_cles' => 'Apakah anda ingin menggunakan kata-kata kunci di situs anda?',
 'info_question_proposer_site' => 'Siapa yang dapat menyarankan situs-situs referensi?',
 'info_question_utilisation_moteur_recherche' => 'Apakah anda ingin mengunakan mesin pencari yang terintegrasi dengan SPIP?
@@ -668,7 +669,7 @@ dalam warna yang menunjukkan statusnya:',
 'item_mots_cles_association_breves' => 'artikel berita',
 'item_mots_cles_association_rubriques' => 'bagian',
 'item_mots_cles_association_sites' => 'situs-situs referensi atau tersindikasi.',
-'item_non' => 'Tidak',
+'item_non' => 'No',
 'item_non_accepter_inscriptions' => 'Jangan izinkan pendaftaran',
 'item_non_activer_messages_avertissement' => 'Tidak ada pesan-pesan kesalahan',
 'item_non_afficher_calendrier' => 'Jangan tampilkan dalam kalender',
@@ -846,8 +847,8 @@ menginstal kembali SPIP untuk membuat database baru dan akses administrator pert
 'texte_connexion_mysql' => 'Merujuk kepada informasi yang diberikan hosting anda kepada anda: mereka seharusnya memberikan anda, jika hosting anda mendukung MySQL, kode koneksi ke server MySQL.',
 'texte_contenu_article' => '(Isi artikel dalam beberapa kata.)',
 'texte_contenu_articles' => 'Berdasarkan tampilan yang dipilih untuk situs anda, anda dapat memilih
-		sejumlah elemen artikel tidak digunakan.
-		Gunakan daftar berikut untuk memilih elemen mana yang akan dipakai.',
+  sejumlah elemen artikel tidak digunakan.
+  Gunakan daftar berikut untuk memilih elemen mana yang akan dipakai.',
 'texte_crash_base' => 'Jika database anda
 			rusak, anda dapat mencoba memperbaikinya
 			secara otomatis.',
@@ -978,10 +979,10 @@ dalam cache SPIP. Ini mengizinkan anda, antara lain, untuk memaksa semua halaman
 anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'texte_sur_titre' => 'Judul atas',
 'texte_syndication' => 'Jika sebuah situs mengizinkannya, daftar isi terbaru dari situs tersebut
-		dapat diambil secara otomatis. Untuk melakukannya, anda harus mengaktifkan sindikasi.
-		<blockquote><i>Sejumlah hosting menonaktifkan fungsi ini; 
-		dalam hal ini, anda tidak dapat menggunakan sindikasi isi
-		dari situs anda.</i></blockquote>',
+  dapat diambil secara otomatis. Untuk melakukannya, anda harus mengaktifkan sindikasi.
+  <blockquote><i>Sejumlah hosting menonaktifkan fungsi ini; 
+  dalam hal ini, anda tidak dapat menggunakan sindikasi isi
+  dari situs anda.</i></blockquote>',
 'texte_table_ok' => ': tabel ini OK.',
 'texte_tables_indexation_vides' => 'Tabel terindeksasi mesin kosong.',
 'texte_tentative_recuperation' => 'Usaha perbaikan',

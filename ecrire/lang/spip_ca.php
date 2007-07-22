@@ -37,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur' => 'Error: veure ac&iacute; baix',
 'avis_erreur_connexion' => 'Error de connexi&oacute;',
 'avis_erreur_cookie' => 'problema de galeta (cookie)',
-'avis_erreur_fonction_contexte' => ' Error de programaci&oacute;. Aquesta funci&oacute; no ha de ser cridada dins d\'aquest context.',
+'avis_erreur_fonction_contexte' => 'Error de programaci&oacute;. Aquesta funci&oacute; no ha de ser cridada en aquest context.',
 'avis_erreur_mysql' => ' Error MySQL',
 'avis_erreur_sauvegarde' => ' Error al desar (@type@ @id_objet@) !',
 'avis_erreur_visiteur' => 'Problema d\'acc&eacute;s a l\'espai privat',
@@ -259,6 +259,7 @@ Gr&agrave;cies per la participaci&oacute;
 ',
 'form_pet_message_commentaire' => 'Un missatge, un commentari?',
 'form_pet_nom_site2' => 'Nom del vostre lloc Web',
+'form_pet_probleme_liens' => 'Vulgueu reprendre el vostre missatge suprimint-ne els enlla&ccedil;os.',
 'form_pet_probleme_technique' => 'Problema t&egrave;cnic, les signatures estan temporalment suspeses.',
 'form_pet_signature_pasprise' => 'La seva signatura no s\'ha tingut en compte.',
 'form_pet_signature_validee' => 'La seva signatura ha estat validada. Gr&agrave;cies!',
@@ -412,6 +413,7 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'info_description_2' => 'Descripci&oacute;:',
 'info_dimension' => 'Mida:',
 'info_document' => 'Document',
+'info_document_indisponible' => 'Aquest document no est&agrave; disponible',
 'info_documents' => 'Documents',
 'info_echange_message' => 'SPIP permet l\'intercanvi de missatges i la creaci&oacute; de f&ograve;rums de discussi&oacute;
   privats entre els participants d\'un lloc. Podeu habilitar o
@@ -504,6 +506,8 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'info_sans_titre_2' => 'sense t&iacute;tol',
 'info_selectionner_fichier' => 'Podeu seleccionar un fitxer de la carpeta @upload@',
 'info_selectionner_fichier_2' => 'Seleccionar un fitxer:',
+'info_signature_supprimee' => 'Signatura eliminada',
+'info_signature_supprimee_erreur' => 'Error: el codi de supressi&oacute; no correspon a cap signatura',
 'info_site_attente' => 'Lloc Web pendent de validaci&oacute;',
 'info_site_reference' => 'Lloc referenciat en l&iacute;nia',
 'info_site_refuse' => 'Lloc Web rebutjat',
@@ -683,7 +687,7 @@ i tornar-vos a connectar al lloc.
   Anoteu aquesta refer&egrave;ncia, proveu altre cop
  l\'actualitzaci&oacute; i, finalment, verifiqueu que les imatges
  apareixen sempre als articles.',
-'texte_erreur_visiteur' => 'Heu intentat accedir a l\'espai privat amb una clau d\'acc&eacute;s que no ho permet.',
+'texte_erreur_visiteur' => 'Heu intentat accedir a l\'espai privat amb un login que no li permet.',
 'texte_inc_auth_1' => 'Us heu identificat amb el login
  (nom d\'usuari/&agrave;ria) <b>@auth_login@</b>, per&ograve; aquest no existeix a la base de dades.
   Proveu de ',
