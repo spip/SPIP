@@ -707,14 +707,10 @@ function affiche_bloc_plugin($plug_file, $info) {
 	if (isset($info['icon']))
 		$s .= "<img src='". _DIR_PLUGINS.$plug_file.'/'.trim($info['icon'])."' style='float:$spip_lang_right;' alt=' ' />\n";
 
-	$s .= _T('version') .' '.  $info['version'] . " | <strong>$titre_etat</strong><br/>";
-	$s .= _T('repertoire_plugins') .' '. $plug_file . "<br/>";
-
-
 	// TODO: le traiter_multi ici n'est pas beau
 	// cf. description du plugin/_stable_/ortho/plugin.xml
 	if (isset($info['description']))
-		$s .= "<hr/>" . plugin_propre($info['description']) . "<br/>";
+		$s .= plugin_propre($info['description']) . "<br/>";
 
 	if (isset($info['auteur']))
 		$s .= "<hr/>" . _T('auteur') .' '. plugin_propre($info['auteur']) . "<br/>";
@@ -725,7 +721,41 @@ function affiche_bloc_plugin($plug_file, $info) {
 		else
 			$s .= "<hr/>" . _T('info_url') .' '. plugin_propre($info['lien']) . "<br/>";
 	}
+
 	$s .= "</div>";
+
+	//
+	// Ajouter les infos techniques
+	//
+	$infotech = array();
+
+	$version = _T('version') .' '.  $info['version'];
+	if ($svn_revision = version_svn_courante(_DIR_PLUGINS.$plug_file))
+		$version .= ($svn_revision<0 ? ' SVN':'').' ['.abs($svn_revision).']';
+
+	$infotech[] = $version;
+	$infotech[] = "<strong>$titre_etat</strong>";
+
+	// Version SVN
+
+	// bouton de desinstallation
+	if (plugin_est_installe($plug_file)){
+		$action = generer_action_auteur('desinstaller_plugin',$plug_file,generer_url_ecrire('admin_plugin'));
+		$infotech[] = "<a href='$action' 
+		onclick='return confirm(\""._T('bouton_desinstaller')
+		." ".basename($plug_file)." ?\\n"._T('info_desinstaller_plugin')."\")'
+		title=\""._T('info_desinstaller_plugin')."\">"
+		. http_img_pack('spip-pack-24.png','spip-pack','',
+			'')
+		."</a>"
+		;
+	}
+
+	$s .= "<div style='text-align:$spip_lang_right' class='spip_pack'>"
+		. join(' &mdash; ', $infotech) .
+		 '<br />' . _T('repertoire_plugins') .' '. $plug_file;
+		"</div>";
+
 
 	return $s;
 }

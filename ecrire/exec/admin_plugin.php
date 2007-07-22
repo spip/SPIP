@@ -209,9 +209,6 @@ function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
 			}
 			return false;
 		});
-		var pack=jQuery('div.spip_pack');
-		jQuery(pack).find('a').hide();
-		jQuery(pack).find('img').bind('click',function(){jQuery(this).siblings('a').toggle();});
 	});
 	")
 	.  "<ul>"
@@ -238,15 +235,6 @@ function ligne_plug($plug_file, $actif, $id){
 		foreach($info['erreur'] as $err)
 			$s .= "/!\ $err <br/>";
 		$s .=  "</div>";
-	}
-	
-	// bouton de desinstallation
-	if ($actif && plugin_est_installe($plug_file)){
-		$s .= "<div style='float:$spip_lang_right' class='spip_pack'>";
-		$action = generer_action_auteur('desinstaller_plugin',$plug_file,generer_url_ecrire('admin_plugin'));
-		$s .= "<a href='$action'>"._T('bouton_effacer_tout')."</a>";
-		$s .= http_img_pack('spip-pack-24.png','spip-pack','','spip-pack');
-		$s .= "</div>";
 	}
 
 	$etat = 'dev';
