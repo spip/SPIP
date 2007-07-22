@@ -92,9 +92,8 @@ function ajouter_tags($matches, $item) {
 		}
 		else if (
 			// cas atom1, a faire apres flickr
-			$url = extraire_attribut($match[0], 'scheme')
-				.extraire_attribut($match[0], 'term')
-		) {
+			$url = suivre_lien(extraire_attribut($match[0], 'scheme'),
+				extraire_attribut($match[0], 'term'))) {
 		}
 		else {
 			# type del.icio.us
