@@ -135,7 +135,8 @@ function chargeur_charger_zip($quoi = array())
 					'cache_cache' => null,
 					'rename' => array(),
 					'edit' => array(),
-					'root_extract' => false # extraire a la racine de dest ?
+					'root_extract' => false, # extraire a la racine de dest ?
+					'tmp' => sous_repertoire(_DIR_TMP, 'chargeur')
 				)
 				as $opt=>$def) {
 		isset($quoi[$opt]) || ($quoi[$opt] = $def);
@@ -174,18 +175,29 @@ function chargeur_charger_zip($quoi = array())
 		? $quoi['dest']
 		: $quoi['dest'] . $nom.'/';
 
-	if ($quoi['extract']) {
-		$ok = $zip->extract(
-			PCLZIP_OPT_PATH, $dir_export,
-			PCLZIP_OPT_SET_CHMOD, _SPIP_CHMOD,
-			PCLZIP_OPT_REPLACE_NEWER,
-			PCLZIP_OPT_REMOVE_PATH, $quoi['remove']);
-		if ($zip->error_code < 0) {
-			spip_log('charger_decompresser erreur zip ' . $zip->error_code .
-				' pour paquet: ' . $quoi['zip']);
-			return $zip->error_code;
-		}
+	$tmpname = $quoi['tmp'].$nom;
 
+	// On extrait, mais dans tmp/ si on ne veut pas vraiment le faire
+	$ok = $zip->extract(
+		PCLZIP_OPT_PATH,
+			$quoi['extract']
+				? $dir_export
+				: $tmpname
+		,
+		PCLZIP_OPT_SET_CHMOD, _SPIP_CHMOD,
+		PCLZIP_OPT_REPLACE_NEWER,
+		PCLZIP_OPT_REMOVE_PATH, $quoi['remove']
+	);
+	if ($zip->error_code < 0) {
+		spip_log('charger_decompresser erreur zip ' . $zip->error_code .
+			' pour paquet: ' . $quoi['zip']);
+		return $zip->error_code;
+	}
+
+/*
+ * desactive pour l'instant
+ *
+ *
 		if (!$quoi['cache_cache']) {
 			chargeur_montre_tout($quoi);
 		}
@@ -199,9 +211,11 @@ function chargeur_charger_zip($quoi = array())
 		if ($quoi['plugin']) {
 			chargeur_activer_plugin($quoi['plugin']);
 		}
+*/
 
-		spip_log('charger_decompresser OK pour paquet: ' . $quoi['zip']);
-	}
+	spip_log('charger_decompresser OK pour paquet: ' . $quoi['zip']);
+
+
 
 	$size = $compressed_size = 0;
 	$removex = ',^'.preg_quote($quoi['remove'], ',').',';
@@ -215,7 +229,8 @@ function chargeur_charger_zip($quoi = array())
 		'files' => $list,
 		'size' => $size,
 		'compressed_size' => $compressed_size,
-		'dirname' => $dir_export
+		'dirname' => $dir_export,
+		'tmpname' => $tmpname
 	);
 }
 

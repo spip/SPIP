@@ -265,8 +265,8 @@ function ligne_plug($plug_file, $actif, $id){
 	$url_stat = generer_url_ecrire(_request('exec'),"plug=".urlencode($plug_file));
 	$s .= "<a href='$url_stat' rel='info'>$nom</a>";
 
+	// afficher les details d'un plug en secours ; la div sert pour l'ajax
 	$s .= "<div class='info'>";
-	// afficher les details d'un plug en secours
 	if (urldecode(_request('plug'))==$plug_file)
 		$s .= affiche_bloc_plugin($plug_file, $info);
 	$s .= "</div>";

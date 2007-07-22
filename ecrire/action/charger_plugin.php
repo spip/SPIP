@@ -23,6 +23,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@action_charger_plugin_dist
 function action_charger_plugin_dist() {
+	global $spip_lang_left;
+
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
@@ -63,12 +65,18 @@ function action_charger_plugin_dist() {
 	## si ici on n'est pas en POST c'est qu'il y a un loup
 	if (!$_POST) die('pas normal');
 
-	# destination des fichiers
+	# destination finale des fichiers
 	$dest = _DIR_PLUGINS_AUTO;
+
+	# si premiere lecture, destination temporaire des fichiers
+	$tmp = _request('extract')
+		? $dest
+		: sous_repertoire(_DIR_CACHE,'chargeur');
+	
 
 	# dispose-t-on du fichier ?
 	$status = null;
-	$fichier = $dest.basename($zip);
+	$fichier = $tmp.basename($zip);
 	if (!@file_exists($fichier)) {
 		include_spip('inc/distant');
 		$contenu = recuperer_page($zip, false, false,
@@ -86,39 +94,71 @@ function action_charger_plugin_dist() {
 				'zip' => $zip,
 				'dest' => $dest,
 				'fichier' => $fichier,
+				'tmp' => $tmp,
 				'extract' => _request('extract')
 			)
 		);
-		if (_request('extract')) @unlink($fichier);
+		if (_request('extract')) {
+			@unlink($fichier);
+			@rename($tmp, $dest);
+		}
 	}
 
+	// Vers quoi pointe le bouton "suite"
+	$suite = '';
 
+	// le fichier .zip est la et bien forme
 	if (is_array($status)) {
-		if (_request('extract')) {
-			$retour = _L('Plugin install&#233;');
-			$texte = '<p>'._L('Le fichier '.$zip.' a &#233;t&#233; d&#233;compact&#233; et install&#233;').'</p>';
-			$texte .= _L("<h2 style='text-align:center;'>Vous pouvez maintenant l'activer.</h2>");
+		if (!lire_fichier($xml=$status['tmpname'].'/plugin.xml', $pluginxml)) {
+			$retour = _L('Erreur plugin.xml absent');
+			$texte = _L("Le zip n'a pas de fichier plugin.xml, d&#233;sol&#233;");
 		} else {
-			$retour = _L('Plugin charg&#233;');
-			$texte = '<p>'._L('Le fichier '.$zip.' a &#233;t&#233; t&#233;l&#233;charg&#233;').'</p>';
-			$texte .= liste_fichiers_pclzip($status);
-			$texte .= _L("<h2 style='text-align:center;'>Vous pouvez maintenant l'installer.</h2>");
-		}
+			include_spip('inc/xml');
+			$arbre = spip_xml_load($xml);
+			$retour = typo(spip_xml_aplatit($arbre['plugin'][0]['nom']));
 
-	} else if ($status < 0) {
+			// l'icone ne peut pas etre dans tmp/ (lecture http oblige)
+			// on la copie donc dans local/chargeur/
+			if ($image = trim($arbre['plugin'][0]['icon'][0])) {
+				$dir = sous_repertoire(_DIR_VAR,'chargeur');
+				@copy($status['tmpname'].'/'.$image, $image2 = $dir.basename($image));
+				$retour = "<img src='".$image2."' style='float:right;' />"
+					. $retour;
+			}
+
+			if (_request('extract')) {
+				$texte = plugin_propre(
+					spip_xml_aplatit($arbre['plugin'][0]['description']));
+
+				$texte .= '<p>'._L('Le fichier '.$zip.' a &#233;t&#233; d&#233;compact&#233; et install&#233;').'</p>';
+				$texte .= _L("<h2 style='text-align:center;'>Continuez pour l'activer.</h2>");
+			} else {
+				$texte = '<p>'._L('Le fichier '.$zip.' a &#233;t&#233; t&#233;l&#233;charg&#233;').'</p>';
+				$texte .= liste_fichiers_pclzip($status);
+				$texte .= _L("<h2 style='text-align:center;'>Vous pouvez maintenant l'installer.</h2>");
+				$suite = 'extract';
+			}
+		}
+	}
+
+	// fichier la mais pas bien dezippe
+	else if ($status < 0) {
 		$retour = _T('erreur');
 		$texte = _L("echec pclzip : erreur ").$status;
-	} else if ($status == 0) {
+	}
+
+	// fichier absent
+	else if ($status == 0) {
 		$retour = _T('erreur');
 		$texte = _L('erreur : impossible de charger '.$zip);
 	}
 
 	include_spip('exec/install'); // pour bouton_suivant()
+
+	$texte = "<div style='text-align:$spip_lang_left;'>$texte</div>\n";
 	echo minipres($retour,
-		_request('extract')
-			? generer_form_ecrire('admin_plugin&plug='.preg_replace(',^[^/]+/|/$,', '', $status['dirname']),
-				$texte . bouton_suivant())
-			: redirige_action_auteur(_request('action'),
+		$suite == 'extract'
+			? redirige_action_auteur(_request('action'),
 				0,
 				'',
 				'',
@@ -133,6 +173,9 @@ function action_charger_plugin_dist() {
 					."'>Annuler</a>"
 				.bouton_suivant(),
 				"\nmethod='post'")
+			: generer_form_ecrire('admin_plugin&plug='.
+				preg_replace(',^[^/]+/|/$,', '', $status['dirname']),
+				$texte . bouton_suivant())
 	);
 	exit;
 
