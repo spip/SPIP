@@ -19,7 +19,7 @@ function afficher_messages($titre, $from, $where, &$messages_vus, $afficher_aute
 
 	$tmp_var = 't_' . substr(md5($where.$from), 0, 4);
 
-	$requete = array('FROM' => "spip_messages AS messages$from", 'WHERE' => $where .(!$messages_vus ? '' : ' AND messages.id_message NOT IN ('.join(',', $messages_vus).')'), 'ORDER BY'=> 'date_heure');
+	$requete = array('FROM' => "spip_messages AS messages$from", 'WHERE' => $where .(!$messages_vus ? '' : ' AND messages.id_message NOT IN ('.join(',', $messages_vus).')'), 'ORDER BY'=> 'date_heure DESC');
 
 	if ($afficher_auteurs) {
 			$largeurs = array('', 130, 20, 120);
