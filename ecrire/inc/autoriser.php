@@ -51,6 +51,9 @@ if (!function_exists('autoriser')) {
 // http://doc.spip.org/@autoriser_dist
 function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 
+	// Charger les fonctions d'autorisation supplementaires
+	pipeline('autoriser');
+
 	// Qui ? auteur_session ?
 	if ($qui === NULL)
 	  $qui = $GLOBALS['auteur_session'] ? $GLOBALS['auteur_session'] : array('statut' => '', 'id_auteur' =>0);

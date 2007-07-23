@@ -106,7 +106,7 @@ function minipipe($fonc,$val){
 
 // chargement du pipeline sous la forme d'un fichier php prepare
 // http://doc.spip.org/@pipeline
-function pipeline($action,$val) {
+function pipeline($action, $val=null) {
 	static $charger;
 
 	// chargement initial des fonctions mises en cache, ou generation du cache

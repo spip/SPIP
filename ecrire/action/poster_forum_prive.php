@@ -46,11 +46,10 @@ function action_poster_forum_prive_post($r)
 
 		}
 
-	// Notification
-	if ($notifications = charger_fonction('notifications', 'inc'))
-		$notifications('forumprive', $id_forum);
-
-
+		// Notification
+		if ($notifications = charger_fonction('notifications', 'inc')) {
+			$notifications('forumprive', $id_forum);
+		}
 
 		redirige_par_entete(urldecode(_request('redirect'))."#id".$id_forum);
 		
