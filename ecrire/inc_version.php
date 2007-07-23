@@ -255,7 +255,8 @@ $spip_pipeline = array(
 	'requete_dico' => '',
 	'agenda_rendu_evenement' => '',
 	'taches_generales_cron' => '',
-	'calculer_rubriques' => ''
+	'calculer_rubriques' => '',
+	'notifications' => ''
 );
 
 # pour activer #INSERT_HEAD sur tous les squelettes, qu'ils aient ou non

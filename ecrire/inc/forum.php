@@ -236,7 +236,7 @@ function calculer_threads() {
 // http://doc.spip.org/@racine_forum
 function racine_forum($id_forum){
 	if (!$id_forum = intval($id_forum)) return;
-	$result = spip_query("SELECT id_parent, id_rubrique, id_article, id_breve, id_syndic, id_thread FROM spip_forum WHERE id_forum=".$id_forum);
+	$result = spip_query("SELECT id_parent, id_rubrique, id_article, id_breve, id_syndic, id_message, id_thread FROM spip_forum WHERE id_forum=".$id_forum);
 
 	if (!$row = spip_fetch_array($result))
 		return false;
@@ -245,6 +245,8 @@ function racine_forum($id_forum){
 	AND $row['id_thread'] != $id_forum) // eviter boucle infinie
 		return racine_forum($row['id_thread']);
 
+	if ($row['id_message'])
+		return array('message', $row['id_message'], $id_forum);
 	if ($row['id_rubrique'])
 		return array('rubrique', $row['id_rubrique'], $id_forum);
 	if ($row['id_article'])

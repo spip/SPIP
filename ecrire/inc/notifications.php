@@ -16,6 +16,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // La fonction de notification de base, qui dispatche le travail
 // http://doc.spip.org/@inc_notifications_dist
 function inc_notifications_dist($quoi, $id=0, $options=array()) {
+	list($quoi, $id, $options)
+		= pipeline('notifications', array($quoi, $id, $options));
+
 	if (function_exists($f = 'notifications_'.$quoi)
 	OR function_exists($f = $f.'_dist')) {
 		spip_log("$f($quoi,$id"
@@ -154,10 +157,17 @@ function email_notification_forum ($t, $email) {
 	charger_generer_url();
 
 	if ($t['statut'] == 'prop') # forum modere
+	{
 		$url = generer_url_ecrire('controle_forum', "debut_id_forum=".$t['id_forum']);
-	else if (function_exists('generer_url_forum'))
+	}
+	else if ($t['statut'] == 'prive') # forum prive
+	{
+		if ($t['id_article'])
+			$url = generer_url_ecrire('articles', 'id_article='.$t['id_article']).'#id'.$t['id_forum'];
+	}
+	else if (function_exists('generer_url_forum')) {
 		$url = generer_url_forum($t['id_forum']);
-	else {
+	} else {
 		spip_log('inc-urls personnalise : ajoutez generer_url_forum() !');
 		if ($t['id_article'])
 			$url = generer_url_article($t['id_article']).'#'.$t['id_forum'];
@@ -168,6 +178,10 @@ function email_notification_forum ($t, $email) {
 	if ($t['id_article']) {
 		$article = spip_fetch_array(spip_query("SELECT titre FROM spip_articles WHERE id_article="._q($t['id_article'])));
 		$titre = textebrut(typo($article['titre']));
+	}
+	if ($t['id_message']) {
+		$message = spip_fetch_array(spip_query("SELECT titre FROM spip_messages WHERE id_message="._q($t['id_message'])));
+		$titre = textebrut(typo($message['titre']));
 	}
 
 	$sujet = "[" .
@@ -180,19 +194,22 @@ function email_notification_forum ($t, $email) {
 	  ) . 
 	   ($t['email_auteur'] ? ' <' . $t['email_auteur'] . '>' : ''));
 
+	$forum_poste_par = $t['id_article']
+		? _T('forum_poste_par', array(
+			'parauteur' => $parauteur, 'titre' => $titre)). "\n\n"
+		: $parauteur . ' (' . $titre . ')';
+
 	// TODO: squelettiser
-	$corps = _T('form_forum_message_auto') .
-		"\n\n" .
-		_T('forum_poste_par', array('parauteur' => $parauteur,
-	  	'titre' => $titre)).
-		"\n\n"
+	$corps = _T('form_forum_message_auto') . "\n\n"
+		. $forum_poste_par
 		. (($t['statut'] == 'publie') ? _T('forum_ne_repondez_pas')."\n" : '')
 		. url_absolue($url)
 		. "\n\n\n** ".textebrut(typo($t['titre']))
 		."\n\n* ".textebrut(propre($t['texte']))
 		. "\n\n".$t['nom_site']."\n".$t['url_site']."\n";
 
-	if ($l)	lang_select();
+	if ($l)
+		lang_select();
 
 	return array('subject' => $sujet, 'body' => $corps);
 }
@@ -206,6 +223,10 @@ function email_notification_forum ($t, $email) {
 function notifications_forumvalide_dist($quoi, $id_forum) {
 	$s = spip_query("SELECT * FROM spip_forum WHERE id_forum="._q($id_forum));
 	if (!$t = spip_fetch_array($s))
+		return;
+
+	// forum sur un message prive : pas de notification ici (cron)
+	if ($t['statut'] == 'perso')
 		return;
 
 	include_spip('inc/texte');
@@ -311,7 +332,7 @@ function notifications_forumposte_dist($quoi, $id_forum) {
 	// TODO: a passer en meta
 	// define('_MODERATEURS_FORUM', 'email1,email2,email3');
 	if (defined('_MODERATEURS_FORUM'))
-	foreach (explode(',', _SPIP_MODERATEURS_FORUM) as $m) {
+	foreach (explode(',', _MODERATEURS_FORUM) as $m) {
 		$tous[] = $m;
 	}
 
