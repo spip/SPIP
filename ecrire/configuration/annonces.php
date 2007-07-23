@@ -25,19 +25,6 @@ function configuration_annonces_dist()
 	. "<blockquote><p><i>"._T('info_hebergeur_desactiver_envoi_email')."</i></p></blockquote>"
 	. "</td></tr></table>";
 
-	$res .= debut_cadre_relief("", true, "", _T('info_envoi_forum'))
-	. "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">"
-	. "\n<tr><td class='verdana2'>"
-	. _T('info_option_email')
-	. "</td></tr>";
-
-	$res .= "\n<tr><td style='text-align: $spip_lang_left' class='verdana2'>"
-	. afficher_choix('prevenir_auteurs', $GLOBALS['meta']["prevenir_auteurs"],
-		array('oui' => _T('info_option_faire_suivre'),
-			'non' => _T('info_option_ne_pas_faire_suivre')))
-	. "</td></tr></table>\n"
-	. fin_cadre_relief(true);
-
 	//
 	// Suivi editorial (articles proposes & publies)
 	//
