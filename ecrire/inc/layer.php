@@ -24,9 +24,11 @@ $compteur_block = rand(1,2500)*500;	// astuce idiote pour que les blocs ahah n'a
 function cadre_depliable($icone,$titre,$deplie,$contenu,$ids='',$style_cadre='r'){
 	$bouton = bouton_block_depliable($titre,$deplie,$ids);
 	return 
-		debut_cadre($style_cadre,$icone,'',$bouton)
+		debut_cadre($style_cadre,$icone,'',$bouton, '', '', false)
 		. debut_block_depliable($deplie,$ids)
+		. "<div class='cadre_padding'>\n"
 		. $contenu
+		. "</div>\n"
 		. fin_block()
 		. fin_cadre();
 }

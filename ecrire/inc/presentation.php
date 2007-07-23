@@ -33,7 +33,7 @@ function hr($color, $retour = false) {
 //
 
 // http://doc.spip.org/@debut_cadre
-function debut_cadre($style, $icone = "", $fonction = "", $titre = "", $id="", $class="") {
+function debut_cadre($style, $icone = "", $fonction = "", $titre = "", $id="", $class="", $padding=true) {
 	global $spip_display, $spip_lang_left;
 	static $accesskey = 97; // a
 
@@ -85,10 +85,10 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "", $id="", $
 			$ret .= bouton_block_depliable($titre,-1);
 		}
 	}
-	
-	return $ret
-	."<div class='cadre_padding'>"
-	;
+
+	$ret .= "<div". ($padding ?" class='cadre_padding'" : '') .">";
+
+	return $ret;
 }
 
 // http://doc.spip.org/@fin_cadre
