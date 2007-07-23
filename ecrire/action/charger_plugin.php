@@ -100,7 +100,6 @@ function action_charger_plugin_dist() {
 		);
 		if (_request('extract')) {
 			@unlink($fichier);
-			@rename($tmp, $dest);
 		}
 	}
 
@@ -132,6 +131,12 @@ function action_charger_plugin_dist() {
 
 				$texte .= '<p>'._L('Le fichier '.$zip.' a &#233;t&#233; d&#233;compact&#233; et install&#233;').'</p>';
 				$texte .= _L("<h2 style='text-align:center;'>Continuez pour l'activer.</h2>");
+
+				// Indiquer par un fichier install.log
+				// a la racine que c'est chargeur qui a installe ce plugin
+				ecrire_fichier($status['dirname'].'/install.log',
+					'installation / charger_plugin / '.gmdate('Y-m-d\TH:i:s\Z', time()));
+
 			} else {
 				$texte = '<p>'._L('Le fichier '.$zip.' a &#233;t&#233; t&#233;l&#233;charg&#233;').'</p>';
 				$texte .= liste_fichiers_pclzip($status);
