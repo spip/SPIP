@@ -206,7 +206,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz'){
 				// definir le plugin, donc le path avant l'include du fichier options
 				// permet de faire des include_ecrire pour attraper un inc_ du plugin
 				if ($charge=='options'){
-					$prefix = strtoupper($info['prefix']);
+					$prefix = strtoupper(preg_replace(',\W,','_',$info['prefix']));
 					$splugs .= "define('_DIR_PLUGIN_$prefix',_DIR_PLUGINS.'$plug/');\n";
 					foreach($info['path'] as $chemin){
 						if (!isset($chemin['version']) OR plugin_version_compatible($chemin['version'],$GLOBALS['spip_version_code'])){
