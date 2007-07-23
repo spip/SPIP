@@ -254,30 +254,6 @@ function notifications_forumvalide_dist($quoi, $id_forum) {
 		}
 	}
 
-	// 2. Tous les participants a ce *thread* (desactive pour l'instant)
-	// TODO: proposer une case a cocher ou un lien dans le message
-	// pour se retirer d'un troll (hack: replacer @ par % dans l'email)
-	if (defined('_SUIVI_FORUM_THREAD')
-	AND _SUIVI_FORUM_THREAD) {
-		$s = spip_query("SELECT DISTINCT(email_auteur) FROM spip_forum WHERE id_thread=".$t['id_thread']." AND email_auteur != ''");
-		while ($r = spip_fetch_array($s))
-			$tous[] = $r['email_auteur'];
-	}
-
-
-	// 3. Tous les auteurs des messages qui precedent (desactive egalement)
-	// (possibilite exclusive de la possibilite precedente)
-	// TODO: est-ce utile, par rapport au thread ?
-	else if (defined('_SUIVI_FORUMS_REPONSES')
-	AND _SUIVI_FORUMS_REPONSES
-	AND $t['statut'] == 'publie') {
-		$id_parent = $id_forum;
-		while ($r = spip_fetch_array(spip_query("SELECT email_auteur, id_parent FROM spip_forum WHERE id_forum=$id_parent AND statut='publie'"))) {
-			$tous[] = $r['email_auteur'];
-			$id_parent = $r['id_parent'];
-		}
-	}
-
 	// Nettoyer le tableau
 	// Ne pas ecrire au posteur du message, ni au moderateur qui active le mail,
 	// ni aux auteurs deja notifies precedemment
@@ -327,15 +303,6 @@ function notifications_forumposte_dist($quoi, $id_forum) {
 				$tous[] = $qui['email'];
 		}
 	}
-
-	// 2. Les moderateurs definis par mes_options
-	// TODO: a passer en meta
-	// define('_MODERATEURS_FORUM', 'email1,email2,email3');
-	if (defined('_MODERATEURS_FORUM'))
-	foreach (explode(',', _MODERATEURS_FORUM) as $m) {
-		$tous[] = $m;
-	}
-
 
 	// Nettoyer le tableau
 	// Ne pas ecrire au posteur du message !
