@@ -46,6 +46,7 @@ function exec_config_contenu_dist()
 	$participants = charger_fonction('participants', 'configuration');
 	$redacteurs = charger_fonction('redacteurs', 'configuration');
 	$visiteurs = charger_fonction('visiteurs', 'configuration');
+	$contenu_forums = charger_fonction('contenu_forums', 'configuration');
 	$annonces = charger_fonction('annonces', 'configuration');
 	$notifications_forum = charger_fonction('notifications_forum', 'configuration');
 	$administrateurs = charger_fonction('administrateurs', 'configuration');
@@ -59,6 +60,9 @@ function exec_config_contenu_dist()
 // (la balise FORMULAIRE_INSCRIPTION sert au deux)
 //
 	echo  $redacteurs(),  $visiteurs(), "<br />";
+
+// Champs actives sur les forums
+	echo $contenu_forums();
 
 //
 // Activer/desactiver mails automatiques

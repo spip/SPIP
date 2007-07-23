@@ -36,14 +36,22 @@
 
 	<fieldset>
 	<legend><:form_pet_message_commentaire:></legend>
+
+[(#CONFIG{forums_titre}|=={oui}|?{
 	<p><label for="titre"><:forum_titre:></label>
 	<input type="text" class="forml" name="titre" id="titre"[ value="(#ENV{titre})"] size="40" /></p>
+,
+	<input type="hidden" name="titre" id="titre"[ value="(#ENV{titre})"] />
+})]
 
+[(#CONFIG{forums_texte}|=={oui}|?{
 	<label><:forum_texte:></label>
 	<p><small><:info_creation_paragraphe:></small></p>
 	[(#ENV**{texte}|barre_textarea{12,40})]
 	</fieldset>
+})]
 
+[(#CONFIG{forums_urlref}|=={oui}|?{
 	<fieldset>
 	<legend><:forum_lien_hyper:></legend>
 	<p><:forum_page_url:></p>
@@ -52,6 +60,7 @@
 	<p><label for="url_site"><:forum_url:></label>
 	<input type="text" class="forml" name="url_site" id="url_site" style="text-align: left;" dir="ltr" size="40" value="#ENV{url_site}" /></p>
 	</fieldset>
+})]
 
 	<fieldset>
 	<legend><:forum_qui_etes_vous:></legend>
