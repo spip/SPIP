@@ -617,7 +617,7 @@ function _chemin($dir_path=NULL){
 		$path = defined('_SPIP_PATH') ? _SPIP_PATH : 
 			_DIR_RACINE.':'.
 			_DIR_RACINE.'dist/:'.
-			_DIR_RESTREINT;
+			_DIR_RESTREINT.':';
 		// Ajouter squelettes/
 		if (@is_dir(_DIR_RACINE.'squelettes'))
 			$path = _DIR_RACINE.'squelettes/:' . $path;
@@ -677,6 +677,22 @@ function creer_chemin() {
 		$path_a = _chemin(''); // forcer un recalcul du chemin
 	}
 	return $path_a;
+}
+
+
+// chercher une librairie (lib/$lib/)
+// destine aux plugins qui veulent des lib non spip
+// dans le chemin mais aussi dans _DIR_PLUGINS_AUTO
+function find_lib($lib) {
+	if (!$lib)
+		return null;
+	return (
+		($b = find_in_path($a = 'lib/'.$lib) AND is_dir($b))
+		OR (_DIR_PLUGINS AND @is_dir($b = _DIR_PLUGINS.$a))
+		OR (_DIR_PLUGINS_AUTO AND @is_dir($b = _DIR_PLUGINS_AUTO.$a))
+		)
+			? $b.'/'
+			: false;
 }
 
 // Cette fonction est appelee une seule fois par hit et par dir du chemin

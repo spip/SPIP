@@ -15,6 +15,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // librairie pour parametrage plugin
 //
 define('_FILE_PLUGIN_CONFIG', "plugin.xml");
+# l'adresse du repertoire de telechargement et de decompactage des plugins
+define('_DIR_PLUGINS_AUTO', _DIR_PLUGINS.'auto/');
 
 // besoin de inc_meta
 include_spip('inc/meta');
@@ -53,6 +55,60 @@ function plugin_version_compatible($intervalle,$version){
 	return true;
 }
 
+
+// Prend comme argument le tableau des <necessite> et retourne false si
+// tout est bon, et un message d'erreur sinon
+function erreur_necessite($n, $liste) {
+	if (!is_array($n) OR !count($n))
+		return false;
+
+	$msg = "";
+	foreach($n as $need){
+		$id = strtoupper($need['id']);
+
+		// Necessite SPIP version x ?
+		if ($id=='SPIP' AND !plugin_version_compatible($need['version'], $GLOBALS['spip_version_code'])) {
+			$msg .= "<li>"
+			._T('plugin_necessite_spip',
+			array('version' => $need['version'])
+			)."</li>";
+		}
+
+		// Necessite une librairie ?
+		else if (preg_match(',^LIB:(.*),i', $id, $r)) {
+			$lib = trim($r[1]);
+			if (!find_lib($lib)) {
+				$lien_download = '';
+				if (isset($n[0]['src'])) {
+					$url = $n[0]['src'];
+					include_ecrire('inc/charger_plugin');
+					$lien_download = '<br />'
+						.bouton_telechargement_plugin($url);
+				}
+				$msg .= "<li>"
+				._L('Ce plugin n&#233;cessite la librairie '.$lib)
+				. $lien_download
+				."</li>";
+			}
+		}
+
+		// Necessite un autre plugin version x ?
+		else if (!isset($liste[$id])
+		OR !plugin_version_compatible($need['version'],$liste[$id]['version'])
+		) {
+			$msg .= "<li>"
+			._T('plugin_necessite_plugin',
+			array('plugin' => $id,
+				'version' => $need['version'])
+			)."</li>";
+		}
+	}
+	if (strlen($msg))
+		$msg="<ul>$msg</ul>";
+	return $msg;
+}
+
+
 // http://doc.spip.org/@liste_plugin_valides
 function liste_plugin_valides($liste_plug,&$infos, $force = false){
 	$liste = array();
@@ -80,22 +136,7 @@ function liste_plugin_valides($liste_plug,&$infos, $force = false){
 							continue;
 						}
 					}
-					$activable = true;
-					if (isset($infos[$plug]['necessite']))
-						foreach($infos[$plug]['necessite'] as $need){
-							$id = strtoupper($need['id']);
-							if ($id=='SPIP'){
-								if (!plugin_version_compatible($need['version'],$GLOBALS['spip_version_code'])){
-									$activable = false;
-									continue;
-								}
-							}
-							elseif (!isset($liste[$id]) OR !plugin_version_compatible($need['version'],$liste[$id]['version'])){
-								$activable = false;
-								continue;
-							}
-						}
-					if ($activable){
+					if (!erreur_necessite($infos[$plug]['necessite'], $liste)) {
 						$liste[$p] = array('dir'=>$plug,'version'=>isset($infos[$plug]['version'])?$infos[$plug]['version']:NULL);
 						unset($liste_plug[$k]);
 					}
@@ -107,26 +148,7 @@ function liste_plugin_valides($liste_plug,&$infos, $force = false){
 			utiliser_langue_visiteur();
 			$erreurs = "";
 			foreach($liste_plug as $plug){
-				$necessite = "";
-				if (isset($infos[$plug]['necessite']))
-					foreach($infos[$plug]['necessite'] as $need){
-						$id = strtoupper($need['id']);
-						if ($id=='SPIP' AND !plugin_version_compatible($need['version'],$GLOBALS['spip_version_code'])){
-							$necessite .= "<li>"
-							._T('plugin_necessite_spip',
-								array('version' => $need['version'])
-							)."</li>";
-						}
-						elseif (!isset($liste[$id]) OR !plugin_version_compatible($need['version'],$liste[$id]['version'])){
-							$necessite .= "<li>"
-							._T('plugin_necessite_plugin',
-								array('plugin' => $id,
-								'version' => $need['version'])
-							)."</li>";
-						}
-					}
-				if (strlen($necessite))
-					$necessite="<ul>$necessite</ul>";
+				$necessite = erreur_necessite($infos[$plug]['necessite'], $liste);
 				$erreurs .= "<li>" . _T('plugin_impossible_activer',
 					array('plugin' => $plug)
 				)."</li>";
@@ -751,10 +773,17 @@ function affiche_bloc_plugin($plug_file, $info) {
 		;
 	}
 
+	// source zip le cas echeant
+	$source = (lire_fichier(_DIR_PLUGINS.$plug_file.'/install.log', $log)
+	AND preg_match(',^source:(.*)$,m', $log, $r))
+		? '<br />'._L('source:').' '.trim($r[1])
+		:'';
+
 	$s .= "<div style='text-align:$spip_lang_right' class='spip_pack'>"
 		. join(' &mdash; ', $infotech) .
-		 '<br />' . _T('repertoire_plugins') .' '. $plug_file;
-		"</div>";
+		 '<br />' . _T('repertoire_plugins') .' '. $plug_file
+		. $source
+		."</div>";
 
 
 	return $s;
