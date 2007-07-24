@@ -30,6 +30,10 @@ define('_STATUT_AUTEUR_RUBRIQUE', _ADMINS_RESTREINTS ? '0minirezo' : '');
 if (!function_exists('autoriser')) {
 // http://doc.spip.org/@autoriser
 	function autoriser() {
+		// Charger les fonctions d'autorisation supplementaires
+		static $pipe;
+		if (!isset($pipe)) { $pipe = 1; pipeline('autoriser'); }
+
 		$args = func_get_args();
 		return call_user_func_array('autoriser_dist', $args);
 	}
@@ -50,9 +54,6 @@ if (!function_exists('autoriser')) {
 //
 // http://doc.spip.org/@autoriser_dist
 function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
-
-	// Charger les fonctions d'autorisation supplementaires
-	pipeline('autoriser');
 
 	// Qui ? auteur_session ?
 	if ($qui === NULL)
