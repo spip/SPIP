@@ -684,15 +684,7 @@ function creer_chemin() {
 // destine aux plugins qui veulent des lib non spip
 // dans le chemin mais aussi dans _DIR_PLUGINS_AUTO
 function find_lib($lib) {
-	if (!$lib)
-		return null;
-	return (
-		($b = find_in_path($a = 'lib/'.$lib) AND is_dir($b))
-		OR (_DIR_PLUGINS AND @is_dir($b = _DIR_PLUGINS.$a))
-		OR (_DIR_PLUGINS_AUTO AND @is_dir($b = _DIR_PLUGINS_AUTO.$a))
-		)
-			? $b.'/'
-			: false;
+	return find_in_path('lib/'.$lib);
 }
 
 // Cette fonction est appelee une seule fois par hit et par dir du chemin
