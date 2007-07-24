@@ -680,14 +680,6 @@ function creer_chemin() {
 }
 
 
-// chercher une librairie (lib/$lib/)
-// destine aux plugins qui veulent des lib non spip
-// dans le chemin mais aussi dans _DIR_PLUGINS_AUTO
-// http://doc.spip.org/@find_lib
-function find_lib($lib) {
-	return find_in_path('lib/'.$lib);
-}
-
 // Cette fonction est appelee une seule fois par hit et par dir du chemin
 // http://doc.spip.org/@memoriser_fichiers
 function memoriser_fichiers($dir) {
@@ -716,6 +708,7 @@ function find_in_path ($filename) {
 		$dirname = substr($filename, 0, $a+1);
 		$basename = substr($filename, $a+1);
 	}
+#var_dump(creer_chemin());
 	foreach(creer_chemin() as $dir) {
 		$sous = $dir.$dirname;
 		if (!isset($ram[$sous]))
