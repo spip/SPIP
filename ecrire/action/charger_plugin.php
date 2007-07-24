@@ -131,7 +131,9 @@ function action_charger_plugin_dist() {
 				@copy($status['tmpname'].'/'.$image, $image2 = $dir.basename($image));
 				$retour = "<img src='".$image2."' style='float:right;' />"
 					. $retour;
-			}
+			} else 
+				$retour = "<img src='".find_in_path('images/plugin-24.gif')."' style='float:right;' />"
+					. $retour;
 
 			if (_request('extract')) {
 				$texte = plugin_propre(
@@ -175,7 +177,7 @@ function action_charger_plugin_dist() {
 
 	$texte = "<div style='text-align:$spip_lang_left;'>$texte</div>\n";
 
-	echo minipres($retour,
+	echo minipres($retour." ",
 		$suite
 			? redirige_action_auteur(_request('action'),
 				$suite,

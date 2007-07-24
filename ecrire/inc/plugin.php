@@ -67,11 +67,14 @@ function erreur_necessite($n, $liste) {
 		$id = strtoupper($need['id']);
 
 		// Necessite SPIP version x ?
-		if ($id=='SPIP' AND !plugin_version_compatible($need['version'], $GLOBALS['spip_version_code'])) {
-			$msg .= "<li>"
-			._T('plugin_necessite_spip',
-			array('version' => $need['version'])
-			)."</li>";
+		if ($id=='SPIP') {
+			if (!plugin_version_compatible($need['version'],
+			$GLOBALS['spip_version_code'])) {
+				$msg .= "<li>"
+				._T('plugin_necessite_spip',
+				array('version' => $need['version'])
+				)."</li>";
+			}
 		}
 
 		// Necessite une librairie ?
