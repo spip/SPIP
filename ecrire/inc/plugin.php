@@ -58,6 +58,7 @@ function plugin_version_compatible($intervalle,$version){
 
 // Prend comme argument le tableau des <necessite> et retourne false si
 // tout est bon, et un message d'erreur sinon
+// http://doc.spip.org/@erreur_necessite
 function erreur_necessite($n, $liste) {
 	if (!is_array($n) OR !count($n))
 		return false;
