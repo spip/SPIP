@@ -1156,19 +1156,6 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 
 	// *********** traiter les variables ************
 
-	// Recuperer les superglobales $_GET si non definies
-	// (en theorie c'est impossible depuis PHP 4.0.3, cf. track_vars)
-	// et les identifier aux $HTTP_XX_VARS
-	foreach (array('_GET', '_POST', '_COOKIE', '_SERVER') as $_table) {
-		$http_table_vars = 'HTTP'.$_table.'_VARS';
-		if (!is_array($GLOBALS[$_table])) {
-			$GLOBALS[$_table] = array();
-			if (is_array($GLOBALS[$http_table_vars]))
-				$GLOBALS[$_table] = & $GLOBALS[$http_table_vars];
-		}
-			$GLOBALS[$http_table_vars] = & $GLOBALS[$_table];
-	}
-
 	//
 	// Securite
 	//
@@ -1185,8 +1172,7 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	// Par ailleurs on ne veut pas de magic_quotes au cours de l'execution
 	@set_magic_quotes_runtime(0);
 
-	// Remplir $GLOBALS avec $_GET et $_POST (methode a revoir pour fonctionner
-	// completement en respectant register_globals = off)
+	// Remplir $GLOBALS avec $_GET et $_POST
 	spip_register_globals();
 
 	// appliquer le cookie_prefix
