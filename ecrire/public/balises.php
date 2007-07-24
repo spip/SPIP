@@ -1356,9 +1356,8 @@ function balise_FOREACH_dist($p) {
         if($_code == "''" OR $_code == NULL) $_code = "'foreach'";
        
         $_tableau = str_replace("'", "", strtoupper($_tableau));
-        $balise = function_exists($f ='balise_'.$_tableau) ? $f :
-                function_exists($g = $f.'_dist') ? $g : '';
-
+        $f ='balise_'.$_tableau;
+        $balise = function_exists($g = $f.'_dist') ? $g : (function_exists($f) ? $f : '');
 
         if($balise) {
                 $p->param = @array_shift(@array_shift($p->param));
