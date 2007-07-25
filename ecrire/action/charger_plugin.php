@@ -123,8 +123,8 @@ function action_charger_plugin_dist() {
 		if (!@is_dir($dest)
 		OR !@is_writeable($dest)) {
 			$retour = _L("Erreur");
-			$texte = "<p>"._L("Le r&#233;pertoire $dest n'est pas accessible en &#233;criture.")."</p>"
-				. "<p>"._L("Veuillez v&#233;rifier les droits sur ce r&#233;pertoire et recommencer, ou installer les fichiers par FTP.")."</p>";
+			$texte = "<p>"._L("Le r&#233;pertoire <code>$dest</code> n'est pas accessible en &#233;criture.")."</p>"
+				. "<p>"._L("Veuillez v&#233;rifier les droits sur ce r&#233;pertoire (et le cr&#233;er le cas &#233;ch&#233;ant), ou installer les fichiers par FTP.").aide('install0')."</p>";
 		}
 		else
 
@@ -204,7 +204,7 @@ function action_charger_plugin_dist() {
 					."'>Annuler</a>"
 				.bouton_suivant(),
 				"\nmethod='post'")
-			: generer_form_ecrire('admin_plugin&plug='.
+			: generer_form_ecrire('admin_plugin&'.$type.'='.
 				preg_replace(',^[^/]+/|/$,', '', $status['dirname']),
 				$texte . bouton_suivant())
 	);
