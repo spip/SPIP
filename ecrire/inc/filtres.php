@@ -1296,6 +1296,7 @@ function vider_attribut ($balise, $attribut) {
 // Si mode inconnu laisser faire, c'est une extension non std
 // mais verifier que la syntaxe est compatible avec SQL
 
+// http://doc.spip.org/@tester_config
 function tester_config($id, $mode='') {
 
 	$s = array_search($mode, $GLOBALS['liste_des_statuts']);
