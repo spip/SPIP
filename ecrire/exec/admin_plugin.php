@@ -57,7 +57,8 @@ function exec_admin_plugin_dist($retour='') {
 
 
 	// Si on a CFG, ajoute un lien (oui c'est mal)
-	if (isset($GLOBALS['meta']['plugin']['CFG'])) {
+	$plugs = @unserialize($GLOBALS['meta']['plugin']);
+	if (isset($plugs['CFG'])) {
 		debut_cadre_enfonce();
 		echo icone_horizontale('CFG &ndash; '._T('configuration'), generer_url_ecrire('cfg'), 'plugin-24.gif', '', true);
 		fin_cadre_enfonce();
