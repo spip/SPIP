@@ -464,6 +464,7 @@ ecrire/exec/breves_edit.php -text
 ecrire/exec/breves_voir.php -text
 ecrire/exec/brouteur.php -text
 ecrire/exec/brouteur_frame.php -text
+ecrire/exec/charger_plugin_descr.php -text
 ecrire/exec/config_contenu.php -text
 ecrire/exec/config_fonctions.php -text
 ecrire/exec/config_lang.php -text

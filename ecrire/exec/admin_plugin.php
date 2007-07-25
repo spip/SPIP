@@ -34,7 +34,12 @@ function exec_admin_plugin_dist($retour='') {
 	echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
 	
 
-	// barre_onglets("configuration", "plugin"); // a creer dynamiquement en fonction des plugin charges qui utilisent une page admin ? // cfg
+	echo "<br />\n";
+	echo "<br />\n";
+
+
+	echo gros_titre(_T('icone_admin_plugin'),'',false);
+
 	
 	echo debut_gauche('plugin',true);
 	echo debut_boite_info(true);
@@ -50,14 +55,18 @@ function exec_admin_plugin_dist($retour='') {
 	// on fait l'installation ici, cela permet aux scripts d'install de faire des affichages ...
 	installe_plugins();
 
-	echo debut_droite('plugin', true);
 
-	echo gros_titre(_T('icone_admin_plugin'),'',false);
+	// Si on a CFG, ajoute un lien (oui c'est mal)
+	if (isset($GLOBALS['meta']['plugin']['CFG'])) {
+		debut_cadre_enfonce();
+		echo icone_horizontale('CFG &ndash; '._T('configuration'), generer_url_ecrire('cfg'), 'plugin-24.gif', '', true);
+		fin_cadre_enfonce();
+	}
+
+	echo debut_droite('plugin', true);
 
 	$lpf = liste_plugin_files();
 	$lcpa = liste_chemin_plugin_actifs();
-
-	echo "<br />\n";
 
 	if ($lpf) {
 		echo debut_cadre_trait_couleur('plugin-24.gif',true,'',_T('plugins_liste'),
@@ -75,11 +84,11 @@ function exec_admin_plugin_dist($retour='') {
 		if (count($lpf) - count($lcpa) > 9
 		AND _request('afficher_tous_plugins') != 'oui') {
 
-			$dir_auto  = substr(_DIR_PLUGINS_AUTO, strlen(_DIR_PLUGINS));
+			$dir_auto = substr(_DIR_PLUGINS_AUTO, strlen(_DIR_PLUGINS));
 			$lcpaffiche = array();
 			foreach ($lpf as $f)
 				if (!strpos($f, '/')
-				or substr($f, 0, strlen($dir_auto)) == $dir_auto
+				OR ($dir_auto AND substr($f, 0, strlen($dir_auto)) == $dir_auto)
 				OR in_array($f, $lcpa))
 					$lcpaffiche[] = $f;
 			$corps = "<p>"._L(count($lcpa).' plugins activ&#233;s.')."</p>\n"
@@ -147,7 +156,7 @@ function tree_open_close_dir(&$current,$target,$deplie=array()){
 }
 
 // http://doc.spip.org/@affiche_arbre_plugins
-function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
+function affiche_arbre_plugins($liste_plugins, $liste_plugins_actifs){
 	$racine = basename(_DIR_PLUGINS);
 	$init_dir = $current_dir = "";
 	// liste des repertoires deplies : construit en remontant l'arbo de chaque plugin actif
@@ -192,7 +201,7 @@ function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
 				unset($liste_plugins[$key]);
 			}
 	}
-	$res .= tree_open_close_dir($current_dir,$init_dir);
+	$res .= tree_open_close_dir($current_dir,$init_dir, true);
 
 	return http_script("
 	jQuery(function(){

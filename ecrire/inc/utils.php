@@ -439,7 +439,7 @@ function _L($text, $args=array()) {
 	if ($GLOBALS['test_i18n'])
 		return "<span style='color:red;'>$text</span>";
 	else
-		return str_replace('_', ' ',$text);
+		return $text;
 }
 
 // Afficher "ecrire/data/" au lieu de "data/" dans les messages

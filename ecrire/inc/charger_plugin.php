@@ -44,8 +44,9 @@ function formulaire_charger_plugin($retour='') {
 			$auto = _L("Si vous souhaitez autoriser l'installation automatique des plugins, veuillez&nbsp;:
 			<ul>
 			<li>cr&#233;er un r&#233;pertoire <code>".joli_repertoire(_DIR_PLUGINS_AUTO)."</code>&nbsp;;
-			<li>v&#233;rifier que le serveur est autoris&#233; &#224; &#233;crire dans ce r&#233;pertoire.".aide("droits")."</li>
+			<li>v&#233;rifier que le serveur est autoris&#233; &#224; &#233;crire dans ce r&#233;pertoire.".aide("install0")."</li>
 			</ul>");
+			$auto .= "<p>"._L("Certains plugins demandent aussi &#224; pouvoir t&#233;l&#233;charger des fichiers dans le r&#233;pertoire <code>lib/</code>, &#224; cr&#233;er le cas &#233;ch&#233;ant &#224; la racine du site.")."</p>";
 		}
 
 		if (!$auto)
@@ -96,15 +97,30 @@ function interface_plugins_auto($retour) {
 			
 			
 			$nick = strtolower(basename($url, '.zip'));
-			$menu[$nick] = '<div style="height:1.9em;overflow:hidden;border-bottom:1px dotted grey;"><label><input type="radio" name="url_zip_plugin" value="'.entites_html($url).'" />'."<b title='$url'>$nick</b></label> | ".$titre."</div>\n";
+			$menu[$nick] = '<div class="desc_plug"><label><input type="radio" name="url_zip_plugin" value="'.entites_html($url).'" />'."<b title='$url'>$nick</b></label> | ".$titre."</div>\n";
 		}
 		ksort($menu);
+
+		$res .= "<style type='text/css'><!--
+		.desc_plug {
+	height:1.9em;overflow:hidden;border-bottom:1px dotted grey;
+} // --></style>\n";
+
 		$res .= "<div style='border: solid 1px $couleur_foncee; padding:3px; background-color:white; height: 200px; overflow:auto;overflow-y: auto;' class='cadre-trait-couleur'>\n";
 # <select name='url_zip_plugin'>
 #			."<option>"._L('choisir...')."</option>"
 			$res .= join("\n",$menu);
 #			."\n</select></p>\n";
 		$res .= "</div>\n";
+
+		$res .= http_script("
+		jQuery('.desc_plug').click(function() {
+			var me = this;
+			jQuery('#desc').load('".generer_url_ecrire('charger_plugin_descr', 'url=', '\\x26')."'+$(me).find('input').attr('value'));
+		});")
+		."\n<div id='desc'></div>\n";
+
+
 
 		$res .= _L("ou...");
 	}
@@ -404,16 +420,22 @@ function essaie_ajouter_liste_plugins($url) {
 
 // Recherche les enclosures de type zip dans un flux rss ou atom
 // les renvoie sous forme de tableau url => titre
+// si $desc on ramene aussi le descriptif du paquet desc
 // http://doc.spip.org/@chercher_enclosures_zip
-function chercher_enclosures_zip($rss) {
+function chercher_enclosures_zip($rss, $desc) {
 	$liste = array();
 	include_spip('inc/syndic');
 	foreach(analyser_backend($rss) as $item)
 		if ($item['enclosures']
 		AND $zips = extraire_balises($item['enclosures'], 'a'))
 			foreach ($zips as $zip)
-				if (extraire_attribut($zip, 'type') == 'application/zip')
-					$liste[extraire_attribut($zip, 'href')] = array($item['titre'], $item['url']);
+				if (extraire_attribut($zip, 'type') == 'application/zip') {
+					if ($url = extraire_attribut($zip, 'href')) {
+						$liste[$url] = array($item['titre'], $item['url']);
+						if ($desc == $url)
+							$liste[$url][] = $item;
+					}
+				}
 	spip_log(count($liste).' enclosures au format zip');
 	return $liste;
 }
@@ -421,8 +443,9 @@ function chercher_enclosures_zip($rss) {
 
 // Renvoie la liste des plugins distants (accessibles a travers
 // l'une des listes de plugins)
+// Si on passe desc = un url, ramener le descriptif de ce paquet
 // http://doc.spip.org/@liste_plugins_distants
-function liste_plugins_distants() {
+function liste_plugins_distants($desc = false) {
 	// TODO une liste multilingue a telecharger
 	$liste = array(
 		'http://files.spip.org/spip-zone/crayons.zip' =>
@@ -441,7 +464,7 @@ function liste_plugins_distants() {
 		foreach ($flux as $url => $c) {
 			if (file_exists($cache=_DIR_TMP.'syndic_plug_'.md5($url).'.xml')
 			AND lire_fichier($cache, $rss))
-				$liste = array_merge(chercher_enclosures_zip($rss),$liste);
+				$liste = array_merge(chercher_enclosures_zip($rss, $desc),$liste);
 		}
 	}
 
