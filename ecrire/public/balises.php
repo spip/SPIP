@@ -1350,28 +1350,34 @@ function balise_ARRAY_dist($p) {
 //
 // http://doc.spip.org/@balise_FOREACH_dist
 function balise_FOREACH_dist($p) {
-        $_tableau = interprete_argument_balise(1,$p);
-        if($_tableau == "''" OR $_tableau == NULL) $_tableau = "'ENV'";
-        $_code = interprete_argument_balise(2,$p);
-        if($_code == "''" OR $_code == NULL) $_code = "'foreach'";
-       
-        $_tableau = str_replace("'", "", strtoupper($_tableau));
-        $f ='balise_'.$_tableau;
-        $balise = function_exists($g = $f.'_dist') ? $g : (function_exists($f) ? $f : '');
+	$_tableau = interprete_argument_balise(1,$p);
+	$_tableau = str_replace("'", "", strtoupper($_tableau));
+	$_tableau = sinon($_tableau, 'ENV');
+	$f = 'balise_'.$_tableau;
+	$balise = function_exists($f) ? $f : (function_exists($g = $f.'_dist') ? $g : '');
 
-        if($balise) {
-                $p->param = @array_shift(@array_shift($p->param));
-                $p = $balise($p);
-                //retirer le serialize
-                $p->code = preg_replace(',^serialize\((.*)\)$,', '\1', $p->code);
-                $filtre = chercher_filtre('foreach');
-                $p->code = $filtre . "(" . $p->code . ", " . $_code . ")";
-        }
-        //On a pas trouve la balise correspondant au tableau a traiter
-        else {
-                $p->code = "''";
-        }
-        return $p;
+	if($balise) {
+		$_modele = interprete_argument_balise(2,$p);
+		$_modele = str_replace("'", "", strtolower($_modele));
+		$__modele = 'foreach_'.strtolower($_tableau);
+		$_modele = (!$_modele AND ($f = find_in_path('modeles/'.$__modele.'.html'))) ? $__modele : ($_modele ? $_modele : 'foreach');
+
+		$p->param = @array_shift(@array_shift($p->param));
+		$p = $balise($p);
+		//retirer le serialize
+		$p->code = preg_replace(',serialize\((.*)\),', '\1', $p->code);
+		$filtre = chercher_filtre('foreach');
+		$p->code = $filtre . "(" . $p->code . ", '" . $_modele . "')";
+	}
+	//On a pas trouve la balise correspondant au tableau a traiter
+	else {
+		erreur_squelette(
+			_L(/*zbug*/'erreur #FOREACH: la balise #'.$_tableau.' n\'existe pas'),
+			$p->id_boucle
+		);
+		$p->code = "''";
+	}
+	return $p;
 }
 
 // Appelle la fonction autoriser et renvoie ' ' si OK, '' si niet
