@@ -1289,22 +1289,32 @@ function vider_attribut ($balise, $attribut) {
 }
 
 
-// Un filtre ad hoc, qui retourne ce qu'il faut pour les tests de config
-// dans les squelettes : [(#URL_SITE_SPIP|tester_config{quoi})]
-// http://doc.spip.org/@tester_config
-function tester_config($ignore, $quoi) {
-	switch ($quoi) {
-		case 'mode_inscription':
-			if ($GLOBALS['meta']["accepter_inscriptions"] == "oui")
-				return '1comite';
-			else if ($GLOBALS['meta']["accepter_visiteurs"] == "oui"
-			OR $GLOBALS['meta']['forums_publics'] == 'abo')
-				return '6forum';
-			else
-				return '';
+// Un filtre pour determiner le nom du mode des librement inscrits,
+// a l'aide de la liste globale des statuts (tableau mode => nom du mode)
+// Utile pour le formulaire d'inscription.
+// Si un mode est fourni, verifier que la configuration l'accepte.
+// Si mode inconnu laisser faire, c'est une extension non std
+// mais verifier que la syntaxe est compatible avec SQL
 
-		default:
-			return '';
+function tester_config($id, $mode='') {
+
+	$s = array_search($mode, $GLOBALS['liste_des_statuts']);
+	switch ($s) {
+
+	case 'info_redacteurs' :
+	  return (($GLOBALS['meta']['accepter_inscriptions'] == 'oui') ? $mode : '');
+
+	case 'info_visiteurs' : 
+	  return (($GLOBALS['meta']['accepter_visiteurs'] == 'oui' OR $GLOBALS['meta']['forums_publics'] == 'abo') ? $mode : '');
+
+	default:
+	  if ($mode AND $mode == addslashes($mode))
+	    return $mode;
+	  if ($GLOBALS['meta']["accepter_inscriptions"] == "oui")
+	    return $GLOBALS['liste_des_statuts']['info_redacteurs'];
+	  if ($GLOBALS['meta']["accepter_visiteurs"] == "oui")
+	    return $GLOBALS['liste_des_statuts']['info_visiteurs'];
+	  return '';
 	}
 }
 
