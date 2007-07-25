@@ -53,6 +53,19 @@ $GLOBALS['spip_matrice']['couleur_foncer'] = $inc_filtres_images;
 $GLOBALS['spip_matrice']['couleur_foncer_si_claire'] = $inc_filtres_images;
 $GLOBALS['spip_matrice']['couleur_eclaircir_si_foncee'] = $inc_filtres_images;
 
+// http://doc.spip.org/@chercher_filtre
+function chercher_filtre($fonc) {
+		foreach (
+		array('filtre_'.$fonc, 'filtre_'.$fonc.'_dist', $fonc) as $f)
+			if (function_exists($f)
+			OR (preg_match("/^(\w*)::(\w*)$/", $f, $regs)                            
+				AND is_callable(array($regs[1], $regs[2]))
+			)) {
+				return $f;
+			}
+		return NULL;
+}
+
 // Appliquer un filtre (eventuellement defini dans la matrice) aux donnees
 // et arguments
 // http://doc.spip.org/@filtrer
