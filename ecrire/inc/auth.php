@@ -33,7 +33,7 @@ function auteurs_article($id_article, $cond='')
 // http://doc.spip.org/@auteurs_autorises
 function auteurs_autorises($cond='', $order='')
 {
-  return spip_query("SELECT * FROM spip_auteurs WHERE statut IN ('0minirezo','1comite')" . ($cond ? " AND $cond" : '') . ($order ? " ORDER BY $order" : ''));
+  return spip_query("SELECT * FROM spip_auteurs WHERE en_ligne<>0" . ($cond ? " AND $cond" : '') . ($order ? " ORDER BY $order" : ''));
 }
 
 // Un nouvel inscrit prend son statut definitif a la 1ere connexion.
@@ -166,12 +166,6 @@ function inc_auth_dist() {
 		}
 	}
 
-	// Indiquer la connexion. A la minute pres ca suffit.
-	$connect_quand = $row['quand'];
-	if ((time() - $connect_quand)  >= 60) {
-		@spip_query("UPDATE spip_auteurs SET en_ligne=NOW() WHERE id_auteur='$connect_id_auteur'");
-	}
-
 	// Etablir les droits selon le codage attendu
 	// dans ecrire/index.php ecrire/prive.php
 
@@ -193,6 +187,12 @@ function inc_auth_dist() {
 		$connect_toutes_rubriques = !$connect_id_rubrique;
 	} 
 	// Pour les redacteurs, inc_version a fait l'initialisation minimale
+
+	// Indiquer la connexion. A la minute pres ca suffit.
+	$connect_quand = $row['quand'];
+	if ((time() - $connect_quand)  >= 60) {
+		@spip_query("UPDATE spip_auteurs SET en_ligne=NOW() WHERE id_auteur='$connect_id_auteur'");
+	}
 
 	return ''; // i.e. pas de pb.
 }
