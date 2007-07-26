@@ -15,20 +15,19 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 // http://doc.spip.org/@inc_install_
 function install_etape__dist()
 {
-	include_spip('inc/headers');
 	utiliser_langue_visiteur();
 	$menu_langues = menu_langues('var_lang_ecrire');
 	if (!$menu_langues) {
-		redirige_par_entete(generer_test_dirs());
+		redirige_par_entete(generer_url_ecrire('install', "etape=chmod", true));
 	} else {
 		include_spip('inc/presentation'); // pour info_copyright
-		echo install_debut_html();
-		echo "<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip2.gif' /></div>\n",
-			"<div class='petit-centre'><p>",info_copyright(),"</p></div>\n",
-			"<p>",_T('install_select_langue'),"</p>",
-			"<div>",$menu_langues,"</div>\n",
-			generer_test_dirs('', bouton_suivant());
-		echo install_fin_html();
+
+		$res = "<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip2.gif' /></div>\n" .
+			"<div class='petit-centre'><p>" .info_copyright() ."</p></div>\n" .
+			"<p>" ._T('install_select_langue') ."</p>" .
+			"<div>" .$menu_langues ."</div>\n" .
+			generer_form_ecrire('install', "<input type='hidden' name='etape' value='chmod' />" . bouton_suivant());
+		echo minipres('AUTO', $res);
 	}
 }
 ?>

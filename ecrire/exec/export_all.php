@@ -27,12 +27,6 @@ function exec_export_all_dist()
 		$dir = _DIR_DUMP;
 	else $dir = determine_upload();
 
-	if (!is_writable($dir)) {
-		include_spip('inc/headers');
-		$dir = preg_replace(",^" . _DIR_RACINE .",", '', $dir);
-		redirige_par_entete(generer_test_dirs($dir, true));
-	}
-
 	// utiliser une version fraiche des metas (ie pas le cache)
 	include_spip('inc/meta');
 	lire_metas();
