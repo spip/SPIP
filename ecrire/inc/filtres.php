@@ -1987,7 +1987,7 @@ function charge_scripts($scripts) {
 function compacte_js($flux) {
 	if (!strlen($flux))
 		return $flux;
-	include_spip('lib/class.JavaScriptPacker');
+	include_spip('lib/JavaScriptPacker/class.JavaScriptPacker');
 	$packer = new JavaScriptPacker($flux, 0, true, false);
 
 	// en cas d'echec (?) renvoyer l'original

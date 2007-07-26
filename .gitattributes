@@ -639,7 +639,7 @@ ecrire/lang/spip_cs.php -text
 ecrire/lang/spip_id.php -text
 ecrire/lang/spip_it_fem.php -text
 ecrire/lang/spip_ru.php -text
-ecrire/lib/class.JavaScriptPacker.php -text
+ecrire/lib/JavaScriptPacker/class.JavaScriptPacker.php -text
 ecrire/lib/safehtml/classes/HTMLSax3.php -text
 ecrire/lib/safehtml/classes/HTMLSax3/Decorators.php -text
 ecrire/lib/safehtml/classes/HTMLSax3/States.php -text
