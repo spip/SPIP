@@ -123,9 +123,8 @@ function autoriser_ecrire_dist($faire, $type, $id, $qui, $opt) {
 
 // http://doc.spip.org/@autoriser_previsualiser_dist
 function autoriser_previsualiser_dist($faire, $type, $id, $qui, $opt) {
-	return ($GLOBALS['meta']['preview'] == '1comite'
-		OR ($GLOBALS['meta']['preview']== 'oui' AND
-		    $qui['statut']=='0minirezo')); 
+	return strpos($GLOBALS['meta']['preview'], ",". $qui['statut'] .",")
+		!==false;
 }
 
 // Autoriser a publier dans la rubrique $id

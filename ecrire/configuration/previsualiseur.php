@@ -15,22 +15,35 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/config');
 
-# non = personne n'est autorise a previsualiser (defaut)
-# oui = les admins
-# 1comite = admins et redacteurs
+// Formulaire pour fixer qui peut previsualiser
+// Gestion des libelles a revoir
 
 function configuration_previsualiseur_dist()
 {
+	$recom = array("info_administrateurs" => _T('info_preview_admin'),
+                       "info_redacteurs" =>  _T('info_preview_comite'));
+
+	$voir = $GLOBALS['meta']["preview"];
+
+	$res = '';
+
+	foreach($GLOBALS['liste_des_statuts'] as $k => $v) {
+		if (isset($recom[$k])) {
+			$vu = strpos($voir,",$v,")!==false;
+			$lib = _T($k);
+
+			$res .= "<input type='checkbox' name='preview[]' value='$v' id='preview$v'"
+			. ($vu ? " checked='checked'" : '')
+			. " /> "
+			. ($vu ? "<b>$lib</b>" : $lib)
+			.  "<br />";
+		}
+	}
+
 	$res = "<div class='verdana2'>"
 	. _T('info_preview_texte')
-	. "</div>"
-	. "<div class='verdana2'>"
-	. afficher_choix('preview', $GLOBALS['meta']["preview"],
-		array('oui' => _T('info_preview_admin'),
-			'1comite' => _T('info_preview_comite'),
-			'non' => _T('info_preview_desactive')
-		      )
-			 )
+	. "<br /><br />"
+	. $res
 	. "</div>";
 
 	$res = debut_cadre_trait_couleur("naviguer-site.png", true, "", _T('previsualisation')
