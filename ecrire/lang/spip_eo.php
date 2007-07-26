@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'afficher_trad' => 'afi&#349;i la tradukojn',
 'alerte_maj_impossible' => '<b>Alarmo&nbsp;!</b> La &#285;isdatigo de la MySQL-datenbazo al versio @version@ ne eblas pro datenbazo-modif-rajtaj kialoj. Bonvolu kontakti vian retgastiganton.',
 'analyse_xml' => 'XML analizo',
+'annuler' => 'Nuligi',
 'antispam_champ_vide' => 'Bonvolu forlasi tiun tajpujon malplena&nbsp;:',
 'avis_archive_incorrect' => 'Tiu arkivo ne estas SPIP-dosiero',
 'avis_archive_invalide' => 'Tiu arkiva dosiero ne validas',
@@ -198,7 +199,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <p />Por solvi tion, uzu vian FTP-klienton por reguligi la alir-rajtojn de &#265;iu
  el tiuj dosierujoj. La proceduron oni detale klarigas en la instalgvidlibro.
 <p />Post tio, vi povos ',
-'double_occurrence' => '<MODIF>Duobla trafo',
+'double_occurrence' => 'Duobla trafo',
 
 
 // E
@@ -258,6 +259,7 @@ Dankon pro via partopreno
 ',
 'form_pet_message_commentaire' => '&#264;u mesa&#285;on, &#265;u komenton&nbsp;?',
 'form_pet_nom_site2' => 'Nomo de via retejo',
+'form_pet_probleme_liens' => 'Bonvolu retrakti vian mesa&#285;on forigante hiperteskajn ligilojn.',
 'form_pet_probleme_technique' => 'Teknika problemo, la subskribeblo estas portempe ne ebla.',
 'form_pet_signature_pasprise' => 'Via subskribo ne estas enmemorigita.',
 'form_pet_signature_validee' => 'Via subskribo estas validigita. Dankon&nbsp;!',
@@ -413,6 +415,7 @@ Dankon pro via partopreno
 'info_description_2' => 'Priskribo&nbsp;:',
 'info_dimension' => 'Dimensioj&nbsp;:',
 'info_document' => 'Dokumento ',
+'info_document_indisponible' => 'Tiu &#265;i dokumento ne disponeblas',
 'info_documents' => 'Dokumentoj',
 'info_echange_message' => 'SPIP ebligas inter&#349;an&#285;on de mesa&#285;oj kaj la starigon de privataj diskutforumoj
  inter la partoprenantoj de la retejo. Vi povas aktivigi a&#365;
@@ -505,6 +508,8 @@ Dankon pro via partopreno
 'info_sans_titre_2' => 'sen titolo',
 'info_selectionner_fichier' => 'Vi povas selekti dosieron el la dosierujo @upload@',
 'info_selectionner_fichier_2' => 'Elektu dosieron&nbsp;:',
+'info_signature_supprimee' => 'Subskribo forvi&#349;ita',
+'info_signature_supprimee_erreur' => 'Eraro&nbsp;: tiu &#265;i forvi&#349;cela kodo kongruas kun neniu subskribo',
 'info_site_attente' => 'Retejo atendanta validigon',
 'info_site_reference' => 'Retejo rete referencita',
 'info_site_refuse' => 'Rifuzita retejo',
@@ -600,7 +605,7 @@ Dankon pro via partopreno
 
 
 // O
-'occurence' => '<MODIF>Trafo',
+'occurence' => 'Trafo',
 'onglet_affacer_base' => 'Forigi la datenbazon',
 'onglet_auteur' => 'La a&#365;toro',
 'onglet_contenu_site' => 'Enhavo de la retejo',
@@ -665,6 +670,10 @@ kaj ensaluti.
 'precedent' => 'anta&#365;an',
 'previsualisation' => 'Anta&#365;rigardo',
 'previsualiser' => 'Anta&#365;rigardi',
+
+
+// R
+'retour' => 'Reen',
 
 
 // S
@@ -768,7 +777,7 @@ sub la respondeco de la &#265;efa retejestro .</b>',
 'zbug_inversion_ordre_inexistant' => 'inversigo de ne ekzistanta ordo',
 'zbug_pagination_sans_critere' => '<NEW>#PAGINATION sans crit&egrave;re {pagination} ou employ&eacute; dans une boucle recursive',
 'zbug_parametres_inclus_incorrects' => 'Ne korektaj inkludaj parametroj',
-'zbug_profile' => '<NEW>Temps de calcul&nbsp;: @time@',
+'zbug_profile' => 'Kalkulda&#365;ro&nbsp;: @time@',
 'zbug_resultat' => 'rezulto',
 'zbug_serveur_indefini' => 'nedifinata SQL servilo',
 'zbug_table_inconnue' => 'nekonata SQL &laquo; @table@ &raquo; tabelo',
