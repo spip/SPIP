@@ -16,12 +16,13 @@ include_spip('inc/presentation');
 
 // http://doc.spip.org/@exec_brouteur_frame_dist
 function exec_brouteur_frame_dist() {
-	global $connect_statut,$connect_id_auteur, $spip_ecran, $spip_lang_left;
+	global $connect_id_auteur, $spip_ecran, $spip_lang_left;
 
 	$id_rubrique = is_numeric(_request('rubrique')) ? intval(_request('rubrique')) : "";
 	$frame = _request('frame');
 	$effacer_suivant = _request('effacer_suivant');
 	$special = _request('special');
+	$peutpub = autoriser('publierdans','rubrique');
 
 	include_spip('inc/headers');
 	http_no_cache();
@@ -167,7 +168,7 @@ jQuery(function(){
 
 	
 		if ($id_rubrique > 0) {
-			if ($connect_statut == "0minirezo")
+			if ($peutpub)
 				$result = spip_query("SELECT id_article, id_rubrique, titre, statut FROM spip_articles WHERE id_rubrique=$id_rubrique ORDER BY date DESC");
 			else 
 				$result = spip_query("SELECT articles.id_article, articles.id_rubrique, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.id_rubrique=$id_rubrique AND (articles.statut = 'publie' OR articles.statut = 'prop' OR (articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur)) GROUP BY id_article ORDER BY articles.date DESC");

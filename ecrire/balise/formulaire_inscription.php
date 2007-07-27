@@ -47,10 +47,8 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus, $id=0) {
 	if (!tester_config($id, $mode)) return _T('pass_rien_a_faire_ici');
 	$nom = _request('nom_inscription');
 	$mail = _request('mail_inscription');
-	$commentaire = ($mode=='1comite') ? _T('pass_espace_prive_bla') : _T('pass_forum_bla');
-
+	
 	if ($mail) {
-		include_spip('inc/filtres'); // pour email_valide
 		$commentaire = message_inscription($mail, $nom, $mode, $id);
 		if (is_array($commentaire)) {
 			if (function_exists('envoyer_inscription'))
@@ -59,7 +57,7 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus, $id=0) {
 				$f = 'envoyer_inscription_dist';
 			$commentaire = $f($commentaire, $nom, $mode, $id);
 		}
-	}
+	} else $commentaire = ($mode=='1comite') ? _T('pass_espace_prive_bla') : _T('pass_forum_bla');
 
 	$message = $commentaire ? '' : _T('form_forum_identifiant_mail');
 

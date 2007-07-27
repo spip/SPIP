@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
+include_spip('inc/autoriser');
 
 // http://doc.spip.org/@balise_FORMULAIRE_ADMIN
 function balise_FORMULAIRE_ADMIN ($p) {
@@ -72,15 +73,12 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 		}
 	}
 
-	$statut = isset($GLOBALS['auteur_session']['statut']) ?
-		$GLOBALS['auteur_session']['statut'] : '';
-
 	// Bouton statistiques
 	$visites = $popularite = $statistiques = '';
 	if ($GLOBALS['meta']["activer_statistiques"] != "non" 
 	AND $id_article
 	AND !$var_preview
-	AND $statut == '0minirezo'
+	AND autoriser('voirstats')
 	) {
 		$result = spip_query("SELECT visites, popularite FROM spip_articles WHERE id_article=$id_article AND statut='publie'");
 
@@ -101,7 +99,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 				AND $_COOKIE['spip_debug']
 			)
 		) AND (
-			$statut == '0minirezo'
+		       autoriser('debug')
 		) AND (
 			!$var_preview
 		)

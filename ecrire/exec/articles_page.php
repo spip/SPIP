@@ -36,7 +36,7 @@ function exec_articles_page_dist()
 	if (spip_num_rows($result) > 0) {
 		echo bloc_des_raccourcis(icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","new=oui"), "article-24.gif", "creer.gif", false));
 	} else {
-		if ($connect_statut == '0minirezo') {
+		  if (autoriser('creerrubriquedans', 'rubrique')) {
 			echo _T('texte_creer_rubrique');
 			echo	bloc_des_raccourcis(icone_horizontale (_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "rubrique-24.gif", "creer.gif",false));
 	}
