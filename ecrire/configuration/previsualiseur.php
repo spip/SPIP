@@ -48,9 +48,9 @@ function configuration_previsualiseur_dist()
 
 	$res = debut_cadre_trait_couleur("naviguer-site.png", true, "", _T('previsualisation')
 	. aide("previsu"))
-	. ajax_action_post('configurer', 'previsualiseur', 'config_fonctions', '', $res)
+	. ajax_action_post('configurer_previsualiseur', 0, 'config_fonctions', '', $res)
 	. fin_cadre_trait_couleur(true);
 
-	return ajax_action_greffe("configurer-previsualiseur", '', $res);
+	return ajax_action_greffe("configurer_previsualiseur", 0, $res);
 }
 ?>

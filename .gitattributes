@@ -350,6 +350,7 @@ ecrire/action/acceder_document.php -text
 ecrire/action/activer_plugins.php -text
 ecrire/action/charger_plugin.php -text
 ecrire/action/configurer.php -text
+ecrire/action/configurer_previsualiseur.php -text
 ecrire/action/configurer_relayeur.php -text
 ecrire/action/converser.php -text
 ecrire/action/copier_local.php -text
@@ -470,6 +471,7 @@ ecrire/exec/config_lang.php -text
 ecrire/exec/config_multilang.php -text
 ecrire/exec/configuration.php -text
 ecrire/exec/configurer.php -text
+ecrire/exec/configurer_previsualiseur.php -text
 ecrire/exec/configurer_relayeur.php -text
 ecrire/exec/controle_forum.php -text
 ecrire/exec/controle_petition.php -text
