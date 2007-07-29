@@ -163,8 +163,8 @@ function help_body($aide, $html, $lang_aide='') {
 	// Recherche des images de l'aide
 	$suite = $html;
 	$html = "";
-	while (preg_match("@(<img([^<>]* +)? src=['\"])"
-		. "((AIDE|IMG)/([-_a-zA-Z0-9]*/?)([^'\"<>]*))@i",
+	while (preg_match("@(<img([^<>]* +)?\s*src=['\"])"
+		. "((AIDE|IMG|local)/([-_a-zA-Z0-9]*/?)([^'\"<>]*))@ims",
 	$suite, $r)) {
 		$p = strpos($suite, $r[0]);
 		$img = str_replace('/', '-', $r[3]);
@@ -173,6 +173,9 @@ function help_body($aide, $html, $lang_aide='') {
 		  generer_url_ecrire('aide_index', "img=$img", false, true);
 		$suite = substr($suite, $p + strlen($r[0]));
 	}
+	$html .= $suite;
+	// relocaliser img_pack au bon endroit ...
+	$html = preg_replace("@(<img([^<>]* +)?\s*src=['\"])img_pack\/@ims","\\1"._DIR_IMG_PACK,$html);
 	
 	echo '<script type="text/javascript"><!--
 
@@ -204,7 +207,7 @@ jQuery(function(){
 	// Il faut que la langue de typo() soit celle de l'aide en ligne
 	changer_typo($lang_aide);
 
-	$html = justifier($html . $suite );
+	$html = justifier($html);
 	// Remplacer les liens externes par des liens ouvrants (a cause des frames)
 	$html = preg_replace('@<a href="(http://[^"]+)"([^>]*)>@', '<a href="\\1"\\2 class="target_blank">', $html);
 
@@ -447,10 +450,10 @@ function exec_aide_index_dist()
 if (_request('var_lang')) changer_langue($lang = _request('var_lang'));
 if (_request('lang')) changer_langue($lang = _request('lang')); # pour le cas ou on a fait appel au menu de changement de langue (aide absente dans la langue x)
 else $lang = $spip_lang;
-
 if (preg_match(',^([^-.]*)-([^-.]*)-([^\.]*\.(gif|jpg|png))$,', _request('img'), $regs))
 	help_img($regs);
 else {
+
 	list($html, $lastmodified) = fichier_aide();
 
 	// si on a la doc dans un fichier, controler if_modified_since
@@ -476,8 +479,9 @@ else {
 	echo "<head><title>", _T('info_aide_en_ligne'),	"</title>\n";
 	echo '<script type="text/javascript" src="'._DIR_JAVASCRIPT.'jquery.js"></script>';
 
-	if (_request('frame') == 'menu')
+	if (_request('frame') == 'menu'){
 		help_menu(_request('aide'), $html, $lang);
+	}
 	else if (_request('frame') == 'body') {
 		help_body(_request('aide'), $html, $lang);
 	} else {
