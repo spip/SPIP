@@ -185,7 +185,7 @@ function afficher_transferer_upload($texte_upload, $dir)
 		"\n<div style='color: #505050;'>"
 		._T('info_selectionner_fichier', $doc)
 		."&nbsp;:<br />\n" .
-		"\n<select name='chemin' size='1' class='fondl'>" .
+		"\n<select name='chemin' size='1' class='fondl' style='width:100%;overflow:hidden;'>" .
 		$texte_upload .
 		"\n</select>" .
 		"\n<div style='text-align: ".
