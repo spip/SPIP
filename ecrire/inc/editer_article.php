@@ -53,7 +53,7 @@ function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='',
 	. editer_article_descriptif($row['descriptif'], $config, $aider)
 	. editer_article_url($row['url_site'], $row['nom_site'], $config, $aider)
 	. editer_article_chapo($row['chapo'], $config, $aider)
-	. editer_article_texte($row['texte'], $config, $aider)
+	. editer_article_texte($row['texte'], $config, $aider,$row['lang'])
 	. editer_article_ps($row['ps'], $config, $aider)
 	. editer_article_extra($row['extra'], $id_secteur, $config, $aider)
 	. $hidden
@@ -65,7 +65,7 @@ function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='',
 }
 
 // http://doc.spip.org/@editer_article_texte
-function editer_article_texte($texte, $config, $aider)
+function editer_article_texte($texte, $config, $aider, $lang='')
 {
 	// cette meta n'est pas activable par l'interface, mais elle peut venir
 	// d'ailleurs : http://www.spip-contrib.net/Personnaliser-les-champs-de-l
@@ -81,7 +81,7 @@ function editer_article_texte($texte, $config, $aider)
 	if ($config['afficher_barre']) {
 		include_spip('inc/barre');
 		$afficher_barre = '<div>' 
-		.  afficher_barre('document.formulaire.texte')
+		.  afficher_barre('document.formulaire.texte',false,$lang)
 		. '</div>';
 	} else $afficher_barre = '';
 
