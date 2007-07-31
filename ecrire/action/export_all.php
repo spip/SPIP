@@ -18,6 +18,8 @@ include_spip('inc/minipres');
 // http://doc.spip.org/@action_export_all_dist
 function action_export_all_dist()
 {
+	global $spip_lang_left,$spip_lang_right;
+	
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
@@ -60,7 +62,7 @@ function action_export_all_dist()
 	// qu'annonce' si certains etaient vides
 			$n = _T('taille_octets', array('taille' => number_format($size, 0, ' ', ' ')));
 		
-			$corps = "<p style='text-align: left'>".
+			$corps = "<p style='text-align: $spip_lang_left'>".
 			  _T('info_sauvegarde_reussi_02',
 			     array('archive' => ':<br /><b>'.joli_repertoire($file)."</b> ($n)")) .
 			  " <a href='" . generer_url_ecrire() . "'>".
@@ -68,6 +70,11 @@ function action_export_all_dist()
 			. "</a> "
 			._T('info_sauvegarde_reussi_04')
 			. "</p>\n";
+			
+			$corps .= "<p style='text-align: $spip_lang_right'>".
+			  " <a href='" . generer_url_ecrire() . "'>" .
+			  _T("retour") .
+			  "</a></p>";
 						
 			// afficher la liste des tables qu'on a sauvegarde
 			$tables_sauvegardees = array_keys($tables_sauvegardees);
