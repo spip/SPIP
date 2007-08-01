@@ -230,6 +230,7 @@ function spip_release_lock($nom) {
 	spip_query("SELECT RELEASE_LOCK(" . _q($nom) . ")");
 }
 
+// http://doc.spip.org/@spip_sql_version
 function spip_sql_version($nom) {
 	$row = spip_fetch_array(spip_query("SELECT version() AS n"));
 	return ($row['n']);
