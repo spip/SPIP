@@ -33,11 +33,15 @@ function ecrire_meta($nom, $valeur, $importable = NULL) {
 	if (strlen($nom)){
 		$GLOBALS['meta'][$nom] = $valeur; 
 		if (!_FILE_CONNECT && !@file_exists(_FILE_CONNECT_INS .'.php')) return;
+		$r = spip_query("SELECT impt FROM spip_meta WHERE nom=" . _q($nom));
+		$r = spip_fetch_array($r);
 		// conserver la valeur de impt si existante
-		if ($importable === NULL)
-			spip_query("REPLACE spip_meta (nom, valeur) VALUES ("._q($nom).", " . _q($valeur) . ")");
-		else
-			spip_query("REPLACE spip_meta (nom, valeur, impt) VALUES ("._q($nom).", " . _q($valeur) . ","._q($importable).")");
+		if ($r) {
+		  $r = ($importable === NULL) ? ''
+		    : ", impt=" .  _q($importable);
+			spip_query("UPDATE spip_meta SET valeur=" . _q($valeur) ."$r WHERE nom=" . _q($nom) );
+		} else
+			spip_query("INSERT INTO spip_meta (nom,valeur,impt) VALUES (" .  _q($nom) . "," . _q($valeur) ."," .  _q($importable) . ')');
 	}
 }
 

@@ -295,7 +295,7 @@ function etat_base_accueil()
 
 	$res .= propre($GLOBALS['meta']["descriptif_site"]);
 
-	$q = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_articles GROUP BY statut HAVING cnt <>0");
+	$q = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_articles GROUP BY statut HAVING COUNT(*)<>0");
   
 	$cpt = array();
 	$cpt2 = array();
@@ -320,7 +320,7 @@ function etat_base_accueil()
 		$res .= "</ul>";
 	}
 
-	$q = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_breves GROUP BY statut HAVING cnt <>0");
+	$q = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_breves GROUP BY statut HAVING COUNT(*)<>0");
 
 	$cpt = array();
 	$cpt2 = array();
@@ -345,7 +345,7 @@ function etat_base_accueil()
 		$res .= "</ul>";
 	}
 
-	$q = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_forum WHERE statut IN ('publie', 'prop') GROUP BY statut HAVING cnt <>0");
+	$q = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_forum WHERE statut IN ('publie', 'prop') GROUP BY statut HAVING COUNT(*)<>0");
 
 	$cpt = array();
 	$cpt2 = array();
@@ -387,7 +387,7 @@ function accueil_liste_participants()
 {
 	global $spip_lang_left;
 
-	$q = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_auteurs GROUP BY statut HAVING cnt <>0 AND statut IN (".  _q($GLOBALS['liste_des_statuts']) . ")");
+	$q = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_auteurs GROUP BY statut HAVING COUNT(*)<>0 AND statut IN (".  _q($GLOBALS['liste_des_statuts']) . ")");
 
 	$cpt = array();
 	while($row=spip_fetch_array($q)) $cpt[$row['statut']] = $row['cnt']; 

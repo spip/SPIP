@@ -100,7 +100,7 @@ function definir_barre_boutons() {
 
 	$sousmenu=array();
 
-	$nombre_articles = spip_num_rows(spip_query("SELECT art.id_article FROM spip_articles AS art, spip_auteurs_articles AS lien WHERE lien.id_auteur = '".$GLOBALS['connect_id_auteur']."' AND art.id_article = lien.id_article LIMIT 1"));
+	$nombre_articles = spip_num_rows(spip_query("SELECT art.id_article FROM spip_articles AS art, spip_auteurs_articles AS lien WHERE lien.id_auteur =".$GLOBALS['connect_id_auteur']." AND art.id_article = lien.id_article LIMIT 1"));
 	if ($nombre_articles > 0) {
 		$sousmenu['articles_page']=
 		  new Bouton('article-24.gif', 'icone_tous_articles');
