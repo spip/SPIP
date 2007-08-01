@@ -232,6 +232,8 @@ function spip_connect($serveur='') {
 
 	if (isset($t[$index])) return $t[$index];
 
+	include_spip('base/abstract_sql');
+
 	$f = $serveur
 	? (_FILE_CONNECT_INS . $serveur . '.php')
 	: ( _FILE_CONNECT ?  _FILE_CONNECT 
@@ -251,55 +253,14 @@ function spip_query($query, $serveur='') {
 	if ($f = spip_connect($serveur)) return $f($query);
 }
 
-// 2 interface de abstract_sql a demenager dans base/abstract_sql a terme
+// 1 interface de abstract_sql a demenager dans base/abstract_sql a terme
 
-// http://doc.spip.org/@spip_num_rows
-function spip_num_rows($r) {
-	include_spip('base/abstract_sql');
-	return spip_abstract_count($r);
-}
 
 // http://doc.spip.org/@_q
 function _q($a) {
 	return (is_int($a)) ? strval($a) : 
 		(!is_array($a) ? ("'" . addslashes($a) . "'")
 		 : join(",", array_map('_q', $a)));
-}
-
-//
-// Poser un verrou local a un SPIP donne
-//
-// http://doc.spip.org/@spip_get_lock
-function spip_get_lock($nom, $timeout = 0) {
-	global $spip_mysql_db, $table_prefix;
-	if ($table_prefix) $nom = "$table_prefix:$nom";
-	if ($spip_mysql_db) $nom = "$spip_mysql_db:$nom";
-
-	// Changer de nom toutes les heures en cas de blocage MySQL (ca arrive)
-	define('_LOCK_TIME', intval(time()/3600-316982));
-	$nom .= _LOCK_TIME;
-
-	$q = spip_query("SELECT GET_LOCK(" . _q($nom) . ", $timeout)");
-	list($lock_ok) = spip_fetch_array($q,SPIP_NUM);
-
-	if (!$lock_ok) spip_log("pas de lock sql pour $nom");
-	return $lock_ok;
-}
-
-// http://doc.spip.org/@spip_release_lock
-function spip_release_lock($nom) {
-	global $spip_mysql_db, $table_prefix;
-	if ($table_prefix) $nom = "$table_prefix:$nom";
-	if ($spip_mysql_db) $nom = "$spip_mysql_db:$nom";
-
-	$nom .= _LOCK_TIME;
-
-	spip_query("SELECT RELEASE_LOCK(" . _q($nom) . ")");
-}
-
-function spip_sql_version($nom) {
-	$row = spip_fetch_array(spip_query("SELECT version() AS n"));
-	return ($row['n']);
 }
 
 // Renvoie le _GET ou le _POST emis par l'utilisateur

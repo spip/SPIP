@@ -70,7 +70,7 @@ function spip_mysql_query($query) {
 	$query = traite_query($query); // traitement du prefixe de table
 
 	$re = ($GLOBALS['mysql_rappel_connexion'] AND $GLOBALS['spip_mysql_link']);
-#	echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', "re $re ";
+
 	return spip_sql_trace_end($query,
 				  spip_sql_trace_start(), 
 				  $re ?
@@ -266,7 +266,7 @@ function spip_mysql_selectdb($db) {
 }
 
 
-// Retourne les base accessibles
+// Retourne les bases accessibles
 
 function spip_mysql_listdbs() {
 	return mysql_list_dbs();
@@ -412,32 +412,5 @@ function spip_mysql_insert($table, $champs, $valeurs, $ignore='') {
 function spip_mysql_update($table, $exp, $where='') {
 	spip_mysql_query("UPDATE $table SET $exp" . ($where ? " WHERE $where" : ''));
 }
-
-// http://doc.spip.org/@creer_objet_multi
-function creer_objet_multi ($objet, $lang) {
-	$retour = "(TRIM(IF(INSTR(".$objet.", '<multi>') = 0 , ".
-		"     TRIM(".$objet."), ".
-		"     CONCAT( ".
-		"          LEFT(".$objet.", INSTR(".$objet.", '<multi>')-1), ".
-		"          IF( ".
-		"               INSTR(TRIM(RIGHT(".$objet.", LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))),'[".$lang."]') = 0, ".
-		"               IF( ".
-		"                     TRIM(RIGHT(".$objet.", LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))) REGEXP '^\\[[a-z\_]{2,}\\]', ".
-		"                     INSERT( ".
-		"                          TRIM(RIGHT(".$objet.", LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))), ".
-		"                          1, ".
-		"                          INSTR(TRIM(RIGHT(".$objet.", LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))), ']'), ".
-		"                          '' ".
-		"                     ), ".
-		"                     TRIM(RIGHT(".$objet.", LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))) ".
-		"                ), ".
-		"               TRIM(RIGHT(".$objet.", ( LENGTH(".$objet.") - (INSTR(".$objet.", '[".$lang."]')+ LENGTH('[".$lang."]')-1) ) )) ".
-		"          ) ".
-		"     ) ".
-		"))) AS multi ";
-
-	return $retour;
-}
-
 
 ?>

@@ -167,11 +167,12 @@ function spip_pg_free($res, $serveur='') {
 function spip_pg_insert($table, $champs, $valeurs, $ignore='') {
 	global $tables_principales;
 	global $spip_pg_link, $table_prefix;
-	include_spip('base/serial.php');
+	include_spip('base/serial');
 	if (isset($tables_principales[$table]['key']["PRIMARY KEY"]))
 		$ret = " RETURNING "
 		. $tables_principales[$table]['key']["PRIMARY KEY"];
 	else $ret = '';
+
 	if ($GLOBALS['table_prefix'])
 		$table = preg_replace('/^spip/',
 				    $GLOBALS['table_prefix'],
