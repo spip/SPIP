@@ -20,9 +20,8 @@ function spip_abstract_serveur($ins_sql, $serveur) {
   // le serveur par defaut est indique par spip_connect
   // qui etablira la premiere connexion si ce n'est fait.
 	if (!$serveur) {
-		if (spip_connect())
-			$f = 'spip_mysql_' . $ins_sql;
-		  else $f = '';
+		$g = spip_connect();
+		$f = $g ? str_replace('query', $ins_sql, $g) : '';
 	} else {
 	  // c'est un autre; s'y connecter si ce n'est fait
 		$f = 'spip_' . $serveur . '_' . $ins_sql;

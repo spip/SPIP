@@ -17,9 +17,8 @@ include_spip('base/serial');
 include_spip('base/auxiliaires');
 include_spip('base/typedoc');
 
-
 // http://doc.spip.org/@creer_base
-function creer_base() {
+function creer_base($server='mysql') {
   global $tables_principales, $tables_auxiliaires, $tables_images, $tables_sequences, $tables_documents, $tables_mime;
 
 	// ne pas revenir plusieurs fois (si, au contraire, il faut pouvoir
@@ -27,24 +26,35 @@ function creer_base() {
 	# static $vu = false;
 	# if ($vu) return; else $vu = true;
 
+	$fcreate = 'spip_'  . $server . '_create';
+	$finsert = 'spip_'  . $server . '_insert';
+	$fupdate = 'spip_'  . $server . '_update';
 	foreach($tables_principales as $k => $v)
-		spip_mysql_create($k, $v['field'], $v['key'], true);
+		$fcreate($k, $v['field'], $v['key'], true);
 
 	foreach($tables_auxiliaires as $k => $v)
-		spip_mysql_create($k, $v['field'], $v['key'], false);
+		$fcreate($k, $v['field'], $v['key'], false);
 
-	foreach($tables_images as $k => $v)
-		spip_query_db("INSERT IGNORE INTO spip_types_documents (extension, inclus, titre) VALUES ("._q($k).", 'image'," . _q($v).')');
+	foreach($tables_images as $k => $v) {
+		$finsert('spip_types_documents',
+		   "(extension, inclus, titre)",
+		   '('. _q($k).", 'image'," . _q($v).')');
+	}
 
 	foreach($tables_sequences as $k => $v)
-		spip_query_db("INSERT IGNORE INTO spip_types_documents (extension, titre, inclus) VALUES ('$k', '$v', 'embed')");
+		$finsert('spip_types_documents',
+			 "(extension, titre, inclus)",
+			 "('$k', '$v', 'embed')");
 
 	foreach($tables_documents as $k => $v)
-		spip_query_db("INSERT IGNORE INTO spip_types_documents (extension, titre, inclus) VALUES ('$k', '$v', 'non')");
+		$finsert('spip_types_documents',
+			 "(extension, titre, inclus)",
+			 "('$k', '$v', 'non')");
 
 	foreach ($tables_mime as $extension => $type_mime)
-	  spip_query_db("UPDATE spip_types_documents
-		SET mime_type='$type_mime' WHERE extension='$extension'");
+		$fupdate('spip_types_documents',
+			 "mime_type='$type_mime'",
+			 "extension='$extension'");
 }
 
 // http://doc.spip.org/@stripslashes_base

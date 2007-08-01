@@ -30,7 +30,7 @@ function install_etape_1_dist()
 			$adresse_db = $regs[1];
 			$login_db = $regs[2];
 		}
-		else if (preg_match("#spip_connect_db\('(.*)','(.*)','(.*)','(.*)','(.*)'\)#", $s, $regs)) {
+		else if (preg_match("#spip_connect_db\('(.*)','(.*)','(.*)','(.*)'#", $s, $regs)) {
 			$adresse_db = $regs[1];
 			if ($port_db = $regs[2]) $adresse_db .= ':'.$port_db;
 			$login_db = $regs[3];
@@ -47,7 +47,10 @@ function install_etape_1_dist()
 
 	$predef = array(defined('_INSTALL_HOST_DB'), defined('_INSTALL_USER_DB'), defined('_INSTALL_PASS_DB'));
 
-	echo info_etape(_T('info_connexion_mysql'), _T('texte_connexion_mysql').aide ("install1"));
+	// ces deux chaines de langues doivent etre reecrites
+#	echo info_etape(_T('info_connexion_mysql'), _T('texte_connexion_mysql').aide ("install1"));
+	echo info_etape(_L('Connexion &agrave; votre base de donn&eacute;es'),
+			_L("Consultez les informations fournies par votre h&eacute;bergeur : vous devez y trouver le serveur de base de donn&eacute;es qu'il propose et vos identifiants personnels pour vous y connecter. SPIP sait utiliser MySQL (le plus r&eacute;pandu) et PostGres (encore exp&eacute;rimental)."));
 	echo install_etape_1_form($req, $predef, "\n<input type='hidden' name='chmod' value='$chmod' />", 2);
 	echo info_progression_etape(1,'etape_','install/');
 	echo install_fin_html();
@@ -64,6 +67,8 @@ function install_etape_1_form($req, $predef, $hidden, $etape)
 			"</b></p><p>"._T('avis_connexion_echec_2')."</p><p style='font-size: small;'>"._T('avis_connexion_echec_3')."</p>")
 			:"")
 
+	. '<fieldset><legend>'._L('Indiquer le serveur de base de donn&eacute;es')
+	. "\n<select name='server_db'><option>mysql</option><option>pg</option></select></legend></fieldset>"
 	. ($predef[0]
 	? '<h3>'._T('install_adresse_base_hebergeur').'</h3>'
 	: fieldset(_T('entree_base_donnee_1'),

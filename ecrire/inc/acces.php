@@ -150,10 +150,10 @@ function ecrire_acces() {
 	# remarque : ici on laisse passer les "nouveau" de maniere a leur permettre
 	# de devenir redacteur le cas echeant (auth http)... a nettoyer
 	// attention, il faut au prealable se connecter a la base (necessaire car utilise par install)
-	// on fait spip_query_db() car on est pas forcement encore installe
+
 	$p1 = ''; // login:htpass pour tous
 	$p2 = ''; // login:htpass pour les admins
-	$s = spip_query_db("SELECT login, htpass, statut FROM spip_auteurs WHERE statut IN  ('1comite','0minirezo','nouveau')");
+	$s = spip_query("SELECT login, htpass, statut FROM spip_auteurs WHERE statut IN  ('1comite','0minirezo','nouveau')");
 	$n = spip_num_rows($s);
 	while ($t = spip_fetch_array($s)) {
 		$p1 .= $t['login'].':'.$t['htpass']."\n";

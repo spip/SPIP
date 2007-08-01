@@ -68,9 +68,9 @@ function maj_base($version_cible = 0) {
 	//
 	// Lecture de la version installee
 	//
-	// spip_query_db car on est peut-etre en cours d'installation
+
 	$version_installee = 0.0;
-	$result = spip_query_db ("SELECT valeur FROM spip_meta WHERE nom='version_installee'");
+	$result = spip_query("SELECT valeur FROM spip_meta WHERE nom='version_installee'");
 	if ($result) if ($row = spip_fetch_array($result)) $version_installee = (double) $row['valeur'];
 
 	//
@@ -84,7 +84,7 @@ function maj_base($version_cible = 0) {
 	
 	spip_log("version anterieure: $version_installee");
 	if (!$version_installee OR ($spip_version < $version_installee)) {
-		spip_query_db("REPLACE spip_meta (nom, valeur,impt)
+		spip_query("REPLACE spip_meta (nom, valeur,impt)
 			VALUES ('version_installee', '$spip_version','non')");
 		return true;
 	}
