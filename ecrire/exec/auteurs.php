@@ -130,7 +130,7 @@ function lettres_d_auteurs($query, $debut, $max_par_page, $tri)
 	$i = 0;
 	while ($auteur = spip_fetch_array($query)) {
 		if ($i>=$debut AND $i<$debut+$max_par_page) {
-			list($n) = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_auteurs_rubriques WHERE id_auteur=".$auteur['id_auteur'] . " LIMIT 0,1"), SPIP_NUM);
+			list($n) = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_auteurs_rubriques WHERE id_auteur=".$auteur['id_auteur'] . " LIMIT 1"), SPIP_NUM);
 			$auteur['restreint'] = $n;
 			$auteurs[] = $auteur;
 		}
@@ -327,7 +327,7 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 	// La requete de base est tres sympa
 	// (pour les visiteurs, ca postule que les messages concernent des articles)
 	
-	 $row = spip_query("SELECT							aut.id_auteur AS id_auteur,							aut.statut AS statut,								aut.nom_site AS site, aut.nom AS nom,								UPPER(aut.nom) AS unom,							count(lien.id_article) as compteur							$sql_sel									FROM spip_auteurs as aut " . ($visit ?		 			"LEFT JOIN spip_forum AS lien ON aut.id_auteur=lien.id_auteur " :		("LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur	 LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)")) .	" WHERE $sql_visible GROUP BY aut.id_auteur ORDER BY $sql_order");
+	 $row = spip_query("SELECT							aut.id_auteur AS id_auteur,							aut.statut AS statut,								aut.nom_site AS site, aut.nom AS nom,								UPPER(aut.nom) AS unom,							count(lien.id_article) as compteur							$sql_sel									FROM spip_auteurs as aut " . ($visit ?		 			"LEFT JOIN spip_forum AS lien ON aut.id_auteur=lien.id_auteur " :		("LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur	 LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)")) .	" WHERE $sql_visible GROUP BY aut.statut, aut.nom_site, aut.nom, aut.id_auteur ORDER BY $sql_order");
 	 return $row;
 }
 
