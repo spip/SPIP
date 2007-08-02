@@ -69,8 +69,7 @@ function modifier_contenu($type, $id, $options, $c=false) {
 	if (!count($update))
 		return false;
 
-	spip_query($q = "UPDATE spip_$table_objet SET ".join(', ',$update)." WHERE $id_table_objet=$id");
-	//spip_log($q);
+	spip_query("UPDATE spip_$table_objet SET ".join(', ',$update)." WHERE $id_table_objet=$id");
 
 	// marquer le fait que l'objet est travaille par toto a telle date
 	if ($GLOBALS['meta']['articles_modif'] != 'non') {
@@ -131,13 +130,11 @@ function marquer_doublons_documents($champs,$id,$id_table_objet,$table_objet){
 	spip_query("UPDATE spip_documents_$table_objet SET vu='non' WHERE $id_table_objet=$id");
 	if (count($GLOBALS['doublons_documents_inclus'])){
 		// on repasse par une requete sur spip_documents pour verifier que les documents existent bien !
-		$in_liste = calcul_mysql_in('id_document',implode(',',$GLOBALS['doublons_documents_inclus']));
-		$res = spip_query("SELECT id_document FROM spip_documents WHERE $in_liste");
-		$liste = "";
-		while ($row = spip_fetch_array($res))
-			$liste .= ",(".$row['id_document'].",$id,'oui')";
-		if (strlen($liste))
-			spip_query("REPLACE INTO spip_documents_$table_objet (id_document,$id_table_objet,vu) VALUES ".substr($liste,1));
+		$in_liste = implode(',',$GLOBALS['doublons_documents_inclus']);
+		$res = spip_query("SELECT id_document FROM spip_documents WHERE " . calcul_mysql_in('id_document', $in_liste));
+		while ($row = spip_fetch_array($res)) {
+			spip_query("UPDATE spip_documents_$table_objet SET vu='oui' WHERE $id_table_objet=$id AND id_document=" . $row['id_document']);
+		}
 	}
 }
 
