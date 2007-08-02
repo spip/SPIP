@@ -52,9 +52,9 @@ function exec_mots_tous_dist()
 // On boucle d'abord sur les groupes de mots
 //
 
-	$result_groupes = spip_query($q="SELECT *, ".creer_objet_multi ("titre", "$spip_lang")." FROM spip_groupes_mots ORDER BY multi");
+	$result = spip_query("SELECT *, ".spip_abstract_multi ("titre", "$spip_lang")." FROM spip_groupes_mots ORDER BY multi");
 
-	while ($row_groupes = spip_fetch_array($result_groupes)) {
+	while ($row_groupes = spip_fetch_array($result)) {
 		$id_groupe = $row_groupes['id_groupe'];
 		$titre_groupe = typo($row_groupes['titre']);
 		$descriptif = $row_groupes['descriptif'];
