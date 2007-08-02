@@ -379,11 +379,13 @@ function bandeau_titre_boite2($titre, $logo="", $fond="toile_blanche", $texte="l
 	}
 }
 
+// http://doc.spip.org/@spip_free_result
 function spip_free_result($r) {
 spip_log('spip_free_result() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
 	spip_abstract_free($r);
 }
 
+// http://doc.spip.org/@creer_objet_multi
 function creer_objet_multi($r) {
 spip_log('creer_objet_multi() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
 	spip_abstract_multi($r);

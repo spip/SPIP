@@ -186,6 +186,7 @@ function spip_mysql_select($select, $from, $where,
 // en le nombre qui commence x.
 // Pas portable malheureusement, on laisse pour le moment.
 
+// http://doc.spip.org/@spip_mysql_order
 function spip_mysql_order($orderby)
 {
 	return (is_array($orderby)) ? join(", ", $orderby) :  $orderby;
@@ -391,7 +392,7 @@ function spip_fetch_array($r, $t=SPIP_ASSOC) {
 	if ($r) return mysql_fetch_array($r, $t);
 }
 
-// http://doc.spip.org/@spip_sql_error
+// http://doc.spip.org/@spip_mysql_error
 function spip_mysql_error() {
 	return mysql_error();
 }
@@ -426,6 +427,7 @@ function spip_mysql_update($table, $exp, $where='') {
 	spip_mysql_query("UPDATE $table SET $exp" . ($where ? " WHERE $where" : ''));
 }
 
+// http://doc.spip.org/@spip_mysql_multi
 function spip_mysql_multi ($objet, $lang) {
 	$retour = "(TRIM(IF(INSTR(".$objet.", '<multi>') = 0 , ".
 		"     TRIM(".$objet."), ".

@@ -122,6 +122,7 @@ function spip_pg_select($select, $from, $where,
 // en le nombre qui commence x. PG ne sait pas faire, on elimine.
 // Comme SPIP utilise systematiquement 0+t,t on ne garde que le 2e.
 
+// http://doc.spip.org/@spip_pg_order
 function spip_pg_order($orderby)
 {
 	if (is_array($orderby)) $orderby = join(", ", $orderby);
@@ -130,6 +131,7 @@ function spip_pg_order($orderby)
 }
 
 
+// http://doc.spip.org/@calculer_pg_where
 function calculer_pg_where($v)
 {
 	if (!is_array($v))
@@ -322,6 +324,7 @@ function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false) 
 // Fonction PG a ecrire: selectionner la sous-chaine dans $objet
 // correspondant a $lang. Cf balise Multi de Spip
 
+// http://doc.spip.org/@spip_pg_multi
 function spip_pg_multi ($objet, $lang) {
 	return "$objet AS multi";
 }
