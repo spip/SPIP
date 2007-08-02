@@ -125,7 +125,8 @@ function spip_pg_select($select, $from, $where,
 function spip_pg_order($orderby)
 {
 	if (is_array($orderby)) $orderby = join(", ", $orderby);
-	return preg_replace('/0[+]([^, ]+)\s*,\s*\1\b/', '\1', $orderby);
+	$orderby = preg_replace('/0[+]([^, ]+)\s*,\s*\1\b/', '\1', $orderby);
+	return preg_replace('/0[+]([^, ]+\b)/', '\1', $orderby);
 }
 
 
