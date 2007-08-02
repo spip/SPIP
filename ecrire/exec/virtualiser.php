@@ -23,7 +23,7 @@ function exec_virtualiser_dist()
 		exit;
 	}
 	include_spip('inc/actions');
-	$r = spip_query("SELECT chapo FROM spip_articles WHERE id_article='$id_article'");
+	$r = spip_query("SELECT chapo FROM spip_articles WHERE id_article=$id_article");
 
 	list($virtuel) = spip_fetch_array($r, SPIP_NUM);
 

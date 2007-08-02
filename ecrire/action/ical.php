@@ -102,7 +102,7 @@ function action_ical_dist()
 // http://doc.spip.org/@spip_ical_rendez_vous
 function spip_ical_rendez_vous($id_utilisateur, $nom_site)
 {
-	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$id_utilisateur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
+	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur=$id_utilisateur AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
 	while($row=spip_fetch_array($result_messages)){
 		$id_message=$row['id_message'];
 		$date_heure=$row["date_heure"];
@@ -114,7 +114,7 @@ function spip_ical_rendez_vous($id_utilisateur, $nom_site)
 
 		if ($type == 'normal') {
 			$le_type = _T('info_message_2');
-			$result_auteurs=spip_query("SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE (lien.id_message='$id_message' AND lien.id_auteur=auteurs.id_auteur)");
+			$result_auteurs=spip_query("SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE (lien.id_message=$id_message AND lien.id_auteur=auteurs.id_auteur)");
 			while($row_auteur=spip_fetch_array($result_auteurs)){
 				$id_auteur=$row_auteur['id_auteur'];
 				$nom_auteur=$row_auteur['nom'];
@@ -153,7 +153,7 @@ function spip_ical_rendez_vous($id_utilisateur, $nom_site)
 // http://doc.spip.org/@spip_ical_taches
 function spip_ical_taches($id_utilisateur, $nom_site)
 {
-	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur='$id_utilisateur' AND lien.id_message=messages.id_message AND messages.type='pb' AND messages.rv!='oui' AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
+	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=$id_utilisateur AND lien.id_message=messages.id_message AND messages.type='pb' AND messages.rv!='oui' AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
 	while($row=spip_fetch_array($result_messages)){
 		$id_message=$row['id_message'];
 		$date_heure=$row["date_heure"];
@@ -163,7 +163,7 @@ function spip_ical_taches($id_utilisateur, $nom_site)
 
 		if ($type == 'normal') {
 			$le_type = _T('info_message_2');
-			$result_auteurs=spip_query("SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE (lien.id_message='$id_message' AND lien.id_auteur=auteurs.id_auteur)");
+			$result_auteurs=spip_query("SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE (lien.id_message=$id_message AND lien.id_auteur=auteurs.id_auteur)");
 			while($row_auteur=spip_fetch_array($result_auteurs)){
 				$id_auteur=$row_auteur['id_auteur'];
 				$nom_auteur=$row_auteur['nom'];
@@ -255,7 +255,7 @@ function spip_ical_messages($id_utilisateur, $nom_site)
 
 		if ($type == 'normal') {
 			$le_type = _T('info_message_2');
-			$result_auteurs=spip_query("SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE (lien.id_message='$id_message' AND lien.id_auteur=auteurs.id_auteur)");
+			$result_auteurs=spip_query("SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE (lien.id_message=$id_message AND lien.id_auteur=auteurs.id_auteur)");
 			while($row_auteur=spip_fetch_array($result_auteurs)){
 				$id_auteur=$row_auteur['id_auteur'];
 				$nom_auteur = $row_auteur['nom'];
@@ -266,7 +266,7 @@ function spip_ical_messages($id_utilisateur, $nom_site)
 				if ($id_auteur == $id_utilisateur) echo filtrer_ical ("ORGANIZER:$nom_auteur <$email>"), "\n";
 				else  echo filtrer_ical ("ATTENDEE:$nom_auteur <$email>"), "\n";
 			}
-			$result_forum = spip_query("SELECT * FROM spip_forum WHERE statut='perso' AND id_message='$id_message' ORDER BY date_heure DESC LIMIT 1");
+			$result_forum = spip_query("SELECT * FROM spip_forum WHERE statut='perso' AND id_message=$id_message ORDER BY date_heure DESC LIMIT 1");
 
 			if ($row_forum = spip_fetch_array($result_forum)) {
 				$date_heure = $row_forum["date_heure"];

@@ -140,7 +140,7 @@ function http_afficher_forum_perso($id_message)
 	echo icone_inline(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=perso&id=$id_message&script=message"). '#formulaire', "forum-interne-24.gif", "creer.gif");
 	echo  "</div>\n<div style='text-align: left'>";
 
-	$query_forum = spip_query("SELECT * FROM spip_forum WHERE statut='perso' AND id_message='$id_message' AND id_parent=0 ORDER BY date_heure DESC LIMIT 20");
+	$query_forum = spip_query("SELECT * FROM spip_forum WHERE statut='perso' AND id_message=$id_message AND id_parent=0 ORDER BY date_heure DESC LIMIT 20");
 	echo afficher_forum($query_forum, "message","id_message=$id_message");
 	echo "\n</div>";
 }

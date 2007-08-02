@@ -470,7 +470,7 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	include_spip('inc/texte');
 
-	$result = spip_query("SELECT * FROM spip_syndic WHERE id_syndic='$now_id_syndic'");
+	$result = spip_query("SELECT * FROM spip_syndic WHERE id_syndic=now_id_syndic");
 
 	if (!$row = spip_fetch_array($result))
 		return;
@@ -488,7 +488,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	if (!spip_get_lock("syndication $url_syndic"))
 		return;
 
-	spip_query("UPDATE spip_syndic SET syndication='$statut', date_syndic=NOW() WHERE id_syndic='$now_id_syndic'");
+	spip_query("UPDATE spip_syndic SET syndication='$statut', date_syndic=NOW() WHERE id_syndic=$now_id_syndic");
 
 	// Aller chercher les donnees du RSS et les analyser
 	include_spip('inc/distant');
@@ -521,7 +521,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 
 
 		// Noter que la syndication est OK
-		spip_query("UPDATE spip_syndic SET syndication='oui' WHERE id_syndic='$now_id_syndic'");
+		spip_query("UPDATE spip_syndic SET syndication='oui' WHERE id_syndic=$now_id_syndic");
 	}
 
 	// Ne pas oublier de liberer le verrou

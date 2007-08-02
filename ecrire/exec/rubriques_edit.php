@@ -31,12 +31,12 @@ function exec_rubriques_edit_dist()
 		$id_parent = intval(_request('id_parent'));
 
 		if (!autoriser('creerrubriquedans','rubrique',$id_parent)) {
-			$id_parent = reset($GLOBALS['connect_id_rubrique']);
+			$id_parent = intval(reset($GLOBALS['connect_id_rubrique']));
 		}
 	} else {
 		$id_rubrique = intval(_request('id_rubrique'));
 
-		$row = spip_fetch_array(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique'"));
+		$row = spip_fetch_array(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 	
 		if (!$row) exit;
 	
@@ -67,7 +67,7 @@ function exec_rubriques_edit_dist()
 
 	if ($id_parent == 0) $logo_parent = "racine-site-24.gif";
 	else {
-		$id_secteur = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique='$id_parent'"));
+		$id_secteur = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_parent"));
 		$id_secteur = $id_secteur['id_secteur'];
 		if ($id_parent == $id_secteur)
 			$logo_parent = "secteur-24.gif";
@@ -116,7 +116,7 @@ function exec_rubriques_edit_dist()
 
 // si c'est une rubrique-secteur contenant des breves, demander la
 // confirmation du deplacement
-	 $contient_breves = spip_fetch_array(spip_query("SELECT COUNT(*) AS cnt FROM spip_breves WHERE id_rubrique='$id_rubrique' LIMIT 1"));
+	 $contient_breves = spip_fetch_array(spip_query("SELECT COUNT(*) AS cnt FROM spip_breves WHERE id_rubrique=$id_rubrique LIMIT 1"));
 
 	 $contient_breves = $contient_breves['cnt'];
 
