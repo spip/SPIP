@@ -938,7 +938,7 @@ function prepare_recherche($recherche, $primary = 'id_article', $id_table='artic
 			while ($r = spip_fetch_array($s))
 				$points[$r['id']]
 				+= (1 + $strict[$r['hash']]) * $r['points'];
-			spip_free_result($s);
+			spip_abstract_free($s);
 			arsort($points, SORT_NUMERIC);
 		}
 

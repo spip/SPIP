@@ -162,7 +162,7 @@ function spip_mysql_select($select, $from, $where,
 		. (!$where ? '' : ("\nWHERE " . (!is_array($where) ? $where : (join("\n\tAND ", array_map('calculer_where', $where))))))
 		. ($groupby ? "\nGROUP BY $groupby" : '')
 		. (!$having ? '' : "\nHAVING " . (!is_array($having) ? $having : (join("\n\tAND ", array_map('calculer_where', $having)))))
-		. ($orderby ? ("\nORDER BY " . join(", ", $orderby)) : '')
+		. ($orderby ? ("\nORDER BY " . spip_mysql_order($orderby)) :'')
 		. ($limit ? "\nLIMIT $limit" : '');
 
 	// Erreur ? C'est du debug de squelette, ou une erreur du serveur
@@ -178,8 +178,19 @@ function spip_mysql_select($select, $from, $where,
 				      spip_sql_errno(),
 				      spip_sql_error());
 	}
+
 	return $res;
 }
+
+// 0+x avec un champ x commencant par des chiffres est converti par MySQL
+// en le nombre qui commence x.
+// Pas portable malheureusement, on laisse pour le moment.
+
+function spip_mysql_order($orderby)
+{
+	return (is_array($orderby)) ? join(", ", $orderby) :  $orderby;
+}
+
 
 // http://doc.spip.org/@calculer_where
 function calculer_where($v)
@@ -400,12 +411,6 @@ function spip_mysql_count($r) {
 // http://doc.spip.org/@spip_mysql_free
 function spip_mysql_free($r) {
 	return mysql_free_result($r);
-}
-
-// Vieux nom a laisser tomber
-// http://doc.spip.org/@spip_free_result
-function spip_free_result($r) {
-	if ($r)	return mysql_free_result($r);
 }
 
 // http://doc.spip.org/@spip_mysql_insert

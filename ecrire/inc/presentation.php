@@ -482,7 +482,7 @@ function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, 
 		if ($a = $skel($row, $tous_id, $voir_logo, $own))
 			$table[] = $a;
 	}
-	spip_free_result($result);
+	spip_abstract_free($result);
 
 	$t = afficher_liste($largeurs, $table, $styles);
 	if ($spip_display != 4)
@@ -553,7 +553,7 @@ function afficher_forum($request, $retour, $arg, $controle_id_article = false) {
 		$thread[$compteur_forum]++;
 	}
 
-	spip_free_result($request);
+	spip_abstract_free($request);
 	$compteur_forum--;
 	if ($spip_display == 4 AND $res) $res = "<ul>$res</ul>";	
 	return $res;
@@ -1405,13 +1405,13 @@ function enfant_rub($collection){
 
 	$res = "";
 
-	$result = spip_query("SELECT id_rubrique, id_parent, titre, descriptif, lang FROM spip_rubriques WHERE id_parent='$collection' ORDER BY 0+titre,titre");
+	$result = spip_abstract_select("id_rubrique, id_parent, titre, descriptif, lang ", "spip_rubriques", "id_parent=$collection",'', '0+titre,titre');
 
 	while($row=spip_fetch_array($result)){
 		$id_rubrique=$row['id_rubrique'];
 		$id_parent=$row['id_parent'];
 		$titre=$row['titre'];
-		
+
 		if (autoriser('voir','rubrique',$id_rubrique)){
 	
 			$les_sous_enfants = sous_enfant_rub($id_rubrique);
@@ -1462,7 +1462,7 @@ function enfant_rub($collection){
 function sous_enfant_rub($collection2){
 	global $spip_lang_left;
 
-	$result3 = spip_query("SELECT * FROM spip_rubriques WHERE id_parent='$collection2' ORDER BY 0+titre,titre");
+	$result3 =  spip_abstract_select("*", "spip_rubriques", "id_parent=$collection2",'', '0+titre,titre');
 
 	if (!spip_num_rows($result3)) return '';
 	$retour = debut_block_depliable(false,"enfants$collection2")."\n<ul style='margin: 0px; padding: 0px; padding-top: 3px;'>\n";

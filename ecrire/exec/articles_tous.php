@@ -86,7 +86,7 @@ function arbo_articles_tous()
 	global $numero_block, $compteur_block;
 
 	$enfant = array();
-	$result = spip_query("SELECT id_rubrique, titre, id_parent FROM spip_rubriques ORDER BY 0+titre,titre");
+	$result = spip_abstract_select("id_rubrique, titre, id_parent", "spip_rubriques", '','', '0+titre,titre');
 	$first_couche = 0;
 	while ($row = spip_fetch_array($result)) {
 		$id_rubrique = $row['id_rubrique'];

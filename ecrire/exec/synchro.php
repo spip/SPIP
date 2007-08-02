@@ -101,7 +101,7 @@ function exec_synchro_dist()
 
 	echo "<p>"._T("ical_texte_rss_articles2")."</p>";
 
-	$result = spip_query("SELECT * FROM spip_rubriques WHERE id_parent='0' ORDER BY 0+titre, titre");
+	$result = spip_abstract_select("id_rubrique, titre", "spip_rubriques", 'id_parent=0','', '0+titre,titre');
 
 	$h = http_img_pack( 'feed.png', 'RSS', '');
 	if (spip_num_rows($result) > 0) {

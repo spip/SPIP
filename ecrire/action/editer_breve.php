@@ -58,7 +58,7 @@ function insert_breve($id_rubrique) {
 	// Si id_rubrique vaut 0 ou n'est pas definie, creer la breve
 	// dans la premiere rubrique racine
 	if (!$id_rubrique = intval($id_rubrique)) {
-		$row = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 ORDER by 0+titre,titre LIMIT 1"));
+		$row = spip_fetch_array(spip_abstract_select("id_rubrique", "spip_rubriques", "id_parent=0",'', '0+titre,titre', "1"));
 		$id_rubrique = $row['id_rubrique'];
 	}
 

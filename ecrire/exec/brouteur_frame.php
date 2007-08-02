@@ -119,7 +119,8 @@ jQuery(function(){
 	else {
 	  if ($id_rubrique !== "" AND autoriser('voir','rubrique',$id_rubrique)) {
 
-		$result=spip_query("SELECT id_parent, id_rubrique, titre FROM spip_rubriques WHERE id_rubrique='$id_rubrique' ORDER BY 0+titre, titre");
+		$result = spip_abstract_select("id_rubrique, titre, id_parent", "spip_rubriques", "id_rubrique=$id_rubrique",'', '0+titre,titre');
+
 		if ($row=spip_fetch_array($result)){
 			$titre = typo($row['titre']);
 			$id_parent=$row['id_parent'];
@@ -136,8 +137,8 @@ jQuery(function(){
 			echo "</div>";
 		}
 
+		$result = spip_abstract_select("id_rubrique, titre, id_parent", "spip_rubriques", "id_parent=$id_rubrique",'', '0+titre,titre');
 
-		$result=spip_query("SELECT id_rubrique, id_parent, titre FROM spip_rubriques WHERE id_parent='$id_rubrique' ORDER BY 0+titre, titre");
 		while($row=spip_fetch_array($result)){
 			$ze_rubrique=$row['id_rubrique'];
 			if (autoriser('voir','rubrique',$ze_rubrique)){

@@ -379,4 +379,9 @@ function bandeau_titre_boite2($titre, $logo="", $fond="toile_blanche", $texte="l
 	}
 }
 
+function spip_free_result($r) {
+spip_log('spip_free_result() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
+	spip_abstract_free($r);
+}
+
 ?>

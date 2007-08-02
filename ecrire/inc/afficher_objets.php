@@ -410,7 +410,7 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 	while ($r = spip_fetch_array($q))
 		if (autoriser('voir','article',$r['id_article']))
 			$t .= $formater($r);
-	spip_free_result($q);
+	spip_abstract_free($q);
 
 	if ($t)
 	  $t = afficher_liste_debut_tableau()
