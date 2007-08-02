@@ -42,7 +42,7 @@ function exec_breves_dist()
 
 		$statuts = "'prop', 'publie'" . ($editable ? ", 'refuse'": "");
 
-		$res = afficher_objets('breve',$titre.aide ("breves"), array("SELECT" => 'id_rubrique, id_breve, date_heure, titre, statut', "FROM" => 'spip_breves', 'WHERE' => "id_rubrique='$id_rubrique' AND statut IN ($statuts)", 'ORDER BY' => "date_heure DESC"),'',true);
+		$res = afficher_objets('breve',$titre.aide ("breves"), array("SELECT" => 'id_rubrique, id_breve, date_heure, titre, statut', "FROM" => 'spip_breves', 'WHERE' => "id_rubrique=$id_rubrique AND statut IN ($statuts)", 'ORDER BY' => "date_heure DESC"),'',true);
 
 		echo $res ;
 

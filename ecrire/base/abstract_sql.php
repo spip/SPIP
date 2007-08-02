@@ -128,6 +128,11 @@ function spip_abstract_multi($sel, $lang, $serveur='')
 	return $f($sel, $lang);
 }
 
+function spip_sql_error($serveur='') {
+  	$f = spip_abstract_serveur('error', $serveur);
+	return $f();
+}
+
 # une composition tellement frequente...
 // http://doc.spip.org/@spip_abstract_fetsel
 function spip_abstract_fetsel(
@@ -203,6 +208,7 @@ function description_table($nom){
 function spip_num_rows($r) {
 	return spip_abstract_count($r);
 }
+
 
 //
 // Poser un verrou local a un SPIP donne
