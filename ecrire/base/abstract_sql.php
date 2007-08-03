@@ -149,6 +149,7 @@ $sousrequete, $having, $table, $id, $serveur),
 }
 
 # une composition tellement frequente...
+// http://doc.spip.org/@spip_abstract_countsel
 function spip_abstract_countsel($from = array(), $where = array(),
 	$groupby = '', $limit = '', $sousrequete = '', $having = array(),
 	$serveur='') {

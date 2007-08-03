@@ -178,6 +178,7 @@ function spip_fetch_array($r, $extra='') {
 	  if ($r) return pg_fetch_array($r);
 }
 
+// http://doc.spip.org/@spip_pg_countsel
 function spip_pg_countsel($from = array(), $where = array(),
 	$groupby='', $limit='', $sousrequete = '', $having = array())
 {

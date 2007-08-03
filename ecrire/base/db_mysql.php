@@ -392,6 +392,7 @@ function spip_fetch_array($r, $t=SPIP_ASSOC) {
 	if ($r) return mysql_fetch_array($r, $t);
 }
 
+// http://doc.spip.org/@spip_mysql_countsel
 function spip_mysql_countsel($from = array(), $where = array(),
 	$groupby = '', $limit = '', $sousrequete = '', $having = array())
 {
