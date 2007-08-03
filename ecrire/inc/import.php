@@ -371,6 +371,8 @@ function import_table_choix($request)
 	global $table_des_tables;
 	global $tables_jointures;
 
+	if (!isset($IMPORT_tables_noimport)) $IMPORT_tables_noimport=array();
+
 	// on construit un index des tables de liens
 	// pour les ajouter SI les deux tables qu'ils connectent sont sauvegardees
 	$tables_for_link = array();
