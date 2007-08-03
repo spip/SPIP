@@ -222,17 +222,17 @@ jQuery(function(){
 		// en derniere colonne, afficher articles et breves
 		if ($frame == 0 AND $id_rubrique==0) {
 
-			$cpt=spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur GROUP BY articles.id_article"));
-			if ($cpt['n']) {
+			$cpt = spip_abstract_countsel("spip_articles AS articles, spip_auteurs_articles AS lien", "articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur=$connect_id_auteur", "articles.id_article");
+			if ($cpt) {
 
-			  echo "\n<div class='brouteur_icone_article'><b class='verdana2'><a href='", generer_url_ecrire('brouteur_frame', "special=redac&frame=".($frame+1)."&effacer_suivant=oui$profile"), "' class='iframe' rel='",($frame+1),"'>",
-			    _T("info_cours_edition"),"</a></b></div>";
+				echo "\n<div class='brouteur_icone_article'><b class='verdana2'><a href='", generer_url_ecrire('brouteur_frame', "special=redac&frame=".($frame+1)."&effacer_suivant=oui$profile"), "' class='iframe' rel='",($frame+1),"'>",
+				_T("info_cours_edition"),"</a></b></div>";
 			}
 			
-			$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_articles AS articles WHERE articles.statut = 'prop'"));
-			if (!$cpt['n'])
-				$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_breves WHERE statut = 'prop'"));
-			if ($cpt['n'])
+			$cpt = spip_abstract_countsel("spip_articles AS articles", "articles.statut = 'prop'");
+			if (!$cpt)
+				$cpt = spip_abstract_countsel("spip_breves", "statut = 'prop'");
+			if ($cpt)
 				echo "\n<div class='brouteur_icone_article'><b class='verdana2'><a href='", generer_url_ecrire('brouteur_frame', "special=valider&frame=".($frame+1)."&effacer_suivant=oui$profile"), "' class='iframe' rel='",
 			    ($frame+1)."'>",
 			    _T("info_articles_proposes"),

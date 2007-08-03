@@ -153,7 +153,7 @@ function spip_sql_timing($m1, $m2, $query, $result)
 function spip_mysql_select($select, $from, $where,
 			   $groupby, $orderby, $limit,
 			   $sousrequete, $having,
-			   $table, $id, $server) {
+			   $table='', $id='', $server='') {
 
 	$query = (!is_array($select) ? $select : join(", ", $select)) .
 		(!$from ? '' :
@@ -390,6 +390,17 @@ function spip_mysql_fetch($r, $t=SPIP_ASSOC) {
 // http://doc.spip.org/@spip_fetch_array
 function spip_fetch_array($r, $t=SPIP_ASSOC) {
 	if ($r) return mysql_fetch_array($r, $t);
+}
+
+function spip_mysql_countsel($from = array(), $where = array(),
+	$groupby = '', $limit = '', $sousrequete = '', $having = array())
+{
+	$r = spip_mysql_select('COUNT(*)', $from, $where,
+			   $groupby, $orderby, $limit,
+			   $sousrequete, $having);
+	if ($r) list($r) = mysql_fetch_array($r, MYSQL_NUM);
+#	spip_log("$r  spip_mysql_countsel($from $where $limit");
+	return $r;
 }
 
 // http://doc.spip.org/@spip_mysql_error

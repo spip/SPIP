@@ -130,8 +130,8 @@ function lettres_d_auteurs($query, $debut, $max_par_page, $tri)
 	$i = 0;
 	while ($auteur = spip_fetch_array($query)) {
 		if ($i>=$debut AND $i<$debut+$max_par_page) {
-			list($n) = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_auteurs_rubriques WHERE id_auteur=".$auteur['id_auteur'] . " LIMIT 1"), SPIP_NUM);
-			$auteur['restreint'] = $n;
+			$auteur['restreint'] = spip_abstract_countsel("spip_auteurs_rubriques", "id_auteur=".$auteur['id_auteur'],'', "1");
+			
 			$auteurs[] = $auteur;
 		}
 		$i++;

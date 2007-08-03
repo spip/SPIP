@@ -45,8 +45,8 @@ function encours_accueil()
 	}
 
 	// Les articles syndiques en attente de validation
-		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_syndic_articles WHERE statut='dispo'"));
-		if ($cpt = $cpt['n'])
+		$cpt = spip_abstract_countsel("spip_syndic_articles", "statut='dispo'");
+		if ($cpt)
 			$res .= "\n<br /><small><a href='"
 			. generer_url_ecrire("sites_tous","")
 			. "' style='color: black;'>"
@@ -59,8 +59,8 @@ function encours_accueil()
 
 	// Les forums en attente de moderation
 
-		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_forum WHERE statut='prop'"), SPIP_NUM);
-		if ($cpt = $cpt[0]) {
+		$cpt = spip_abstract_countsel("spip_forum", "statut='prop'");
+		if ($cpt) {
 		if ($cpt>1)
 			$lien = _T('info_liens_syndiques_3')." "._T('info_liens_syndiques_4');
 		else
@@ -160,8 +160,8 @@ function colonne_droite_neq4($id_rubrique, $activer_breves, $activer_sites, $art
 	
 		$gadget .= "<table><tr>";
 	
-		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_articles AS art, spip_auteurs_articles AS lien WHERE lien.id_auteur = '$connect_id_auteur' AND art.id_article = lien.id_article LIMIT 1"));
-		if ($cpt['n'] > 0) {
+		$cpt = spip_abstract_countsel('spip_articles AS art, spip_auteurs_articles AS lien', "lien.id_auteur=$connect_id_auteur AND art.id_article=lien.id_article", '', 1);
+		if ($cpt) {
 			$gadget .= "<td>"
 			. icone_horizontale (_T('icone_tous_articles'), generer_url_ecrire("articles_page",""), "article-24.gif", "", false)
 			. "</td>";

@@ -107,9 +107,7 @@ function exec_export_all_dist()
 
 	foreach($tables_for_dump as $table){
 		if ($etape_actuelle <= $etape) {
-		  $r = spip_query("SELECT COUNT(*) FROM $table");
-		  $r = spip_fetch_array($r, SPIP_NUM);
-		  $r = $r[0];
+		  $r = spip_abstract_countsel($table);
 		  echo "\n<br /><strong>",$etape, '. ', $table,"</strong> ";
 		  if (!$r) echo _T('texte_vide');
 		  else
@@ -139,8 +137,8 @@ function complete_secteurs($les_rubriques)
 	foreach($les_rubriques as $r) {
 		do {
 			$r = spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$r");
-			$r = spip_fetch_array($r, SPIP_NUM);
-			if ($r AND $r = $r[0]) {
+			$r = spip_fetch_array($r);
+			if ($r AND $r = $r['id_parent']) {
 				if (isset($les_rubriques[$r]))
 					$r = false;
 				else  $les_rubriques[$r] = $r;

@@ -148,6 +148,14 @@ $sousrequete, $having, $table, $id, $serveur),
 				   $serveur);
 }
 
+# une composition tellement frequente...
+function spip_abstract_countsel($from = array(), $where = array(),
+	$groupby = '', $limit = '', $sousrequete = '', $having = array(),
+	$serveur='') {
+  	$f = spip_abstract_serveur('countsel', $serveur);
+	return $f($from, $where, $groupby, $limit, $sousrequete, $having);
+}
+
 //
 // IN (...) est limite a 255 elements, d'ou cette fonction assistante
 //

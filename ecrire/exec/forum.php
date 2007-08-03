@@ -68,14 +68,11 @@ function forum_affiche($debut, $admin=false)
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'forum'),'data'=>''));
 
-	$result_forum = spip_query("SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut='$statutforum' AND id_parent=0 LIMIT 11");
-
-	$total =  ($row = spip_fetch_array($result_forum)) ? $row['cnt'] : 0;
+	$total = spip_abstract_countsel("spip_forum", "statut='$statutforum' AND id_parent=0",'', 11);
 
 	if ($total > 10)
 		echo '<small>'.liste_numeros_forum($script, $debut, $total).'</small>';
 
-  
 	echo "\n<div class='centered'>\n";
 	echo icone_inline (_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=$statutforum&script=$script"), $logo, "creer.gif");
 	echo "\n</div>";
