@@ -233,11 +233,10 @@ function spip_get_lock($nom, $timeout = 0) {
 	define('_LOCK_TIME', intval(time()/3600-316982));
 	$nom .= _LOCK_TIME;
 
-	$q = spip_query("SELECT GET_LOCK(" . _q($nom) . ", $timeout)");
-	list($lock_ok) = spip_fetch_array($q,SPIP_NUM);
-
-	if (!$lock_ok) spip_log("pas de lock sql pour $nom");
-	return $lock_ok;
+	$q = spip_query("SELECT GET_LOCK(" . _q($nom) . ", $timeout) AS n");
+	$q = spip_fetch_array($q);
+	if (!$q) spip_log("pas de lock sql pour $nom");
+	return $q['n'];
 }
 
 // http://doc.spip.org/@spip_release_lock
@@ -246,9 +245,7 @@ function spip_release_lock($nom) {
 	if ($table_prefix) $nom = "$table_prefix:$nom";
 	if ($spip_mysql_db) $nom = "$spip_mysql_db:$nom";
 
-	$nom .= _LOCK_TIME;
-
-	spip_query("SELECT RELEASE_LOCK(" . _q($nom) . ")");
+	spip_query("SELECT RELEASE_LOCK(" . _q($nom . _LOCK_TIME) . ")");
 }
 
 // http://doc.spip.org/@spip_sql_version

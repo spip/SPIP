@@ -201,15 +201,15 @@ function maj_base($version_cible = 0) {
 	}
 
 	if (upgrade_vers(0.999, $version_installee, $version_cible)) {
-		global $htsalt;
+
 		spip_query("ALTER TABLE spip_auteurs CHANGE pass pass tinyblob NOT NULL");
 		spip_query("ALTER TABLE spip_auteurs ADD htpass tinyblob NOT NULL");
 		$result = spip_query("SELECT id_auteur, pass FROM spip_auteurs WHERE pass!=''");
 
-		while (list($id_auteur, $pass) = spip_fetch_array($result, SPIP_NUM)) {
-			$htpass = generer_htpass($pass);
+		while ($r= spip_fetch_array($result)) {
+			$htpass = generer_htpass($r['pass']);
 			$pass = md5($pass);
-			spip_query("UPDATE spip_auteurs SET pass='$pass', htpass='$htpass' WHERE id_auteur=$id_auteur");
+			spip_query("UPDATE spip_auteurs SET pass='$pass', htpass='$htpass' WHERE id_auteur=" . $r['id_auteur']);
 		}
 		maj_version (0.999);
 	}

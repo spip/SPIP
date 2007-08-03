@@ -19,9 +19,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function generer_url_ecrire_article($id, $suite='', $ancre='', $statut='') {
 	$a = "id_article=" . intval($id);
 	if (!$statut) {
-		$statut = spip_fetch_array(spip_query("SELECT statut FROM spip_articles WHERE $a"), SPIP_NUM);
-		$statut = $statut[0];
+		$statut = spip_fetch_array(spip_query("SELECT statut FROM spip_articles WHERE $a"));
+		$statut = $statut['statut'];
 	}
+	spip_log("url $id $statut");
 	if ($suite) $a .= "&$suite";
 	if ($statut == 'publie') {
 		$a .= "&ancre=" . $ancre;
@@ -33,8 +34,8 @@ function generer_url_ecrire_article($id, $suite='', $ancre='', $statut='') {
 function generer_url_ecrire_rubrique($id, $suite='', $ancre='', $statut='') {
 	$a = "id_rubrique=" . intval($id);
 	if (!$statut) {
-		$statut = spip_fetch_array(spip_query("SELECT statut FROM spip_rubriques WHERE $a"), SPIP_NUM);
-		$statut = $statut[0];
+		$statut = spip_fetch_array(spip_query("SELECT statut FROM spip_rubriques WHERE $a"));
+		$statut = $statut['statut'];
 	}
 	if ($suite) $a .= "&$suite";
 	if ($statut == 'publie') {
@@ -47,8 +48,8 @@ function generer_url_ecrire_rubrique($id, $suite='', $ancre='', $statut='') {
 function generer_url_ecrire_breve($id, $suite='', $ancre='', $statut='') {
 	$a = "id_breve=" . intval($id);
 	if (!$statut) {
-		$statut = spip_fetch_array(spip_query("SELECT statut FROM spip_breves WHERE $a"), SPIP_NUM);
-		$statut = $statut[0];
+		$statut = spip_fetch_array(spip_query("SELECT statut FROM spip_breves WHERE $a"));
+		$statut = $statut['statut'];
 	}
 	if ($suite) $a .= "&$suite";
 	if ($statut == 'publie') {
