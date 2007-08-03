@@ -2191,6 +2191,34 @@ function couleur_hex_to_dec($couleur) {
 	return $retour;
 }
 
+// http://doc.spip.org/@couleur_multiple_de_trois
+function couleur_multiple_de_trois($val) {
+	$val = hexdec($val);
+	$val = round($val / 3) * 3;
+	$val = dechex($val);
+	return $val;
+	
+}
+
+// http://doc.spip.org/@couleur_web
+function couleur_web($couleur) {
+	$r = couleur_multiple_de_trois(substr($couleur, 0, 1));
+	$v = couleur_multiple_de_trois(substr($couleur, 2, 1));
+	$b = couleur_multiple_de_trois(substr($couleur, 4, 1));
+	
+	return "$r$r$v$v$b$b";
+}
+
+// http://doc.spip.org/@couleur_4096
+function couleur_4096($couleur) {
+	$r = (substr($couleur, 0, 1));
+	$v = (substr($couleur, 2, 1));
+	$b = (substr($couleur, 4, 1));
+	
+	return "$r$r$v$v$b$b";
+}
+
+
 // http://doc.spip.org/@couleur_extreme
 function couleur_extreme ($couleur) {
 	// force la couleur au noir ou au blanc le plus proche
