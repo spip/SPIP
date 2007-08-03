@@ -17,16 +17,16 @@ function base_admin_repair_dist() {
 	$res1= spip_query("SHOW TABLES");
 
 	$res = "";
-	if ($res1) { while ($tab = spip_fetch_array($res1,SPIP_NUM)) {
-		$res .= "<p><b>".$tab[0]."</b> ";
+	if ($res1) { while ($r = spip_fetch_array($res1)) {
+		$tab = array_shift($r);
 
-		$result_repair = spip_query("REPAIR TABLE ".$tab[0]);
+		$res .= "<p><b>$tab</b> ";
+
+		$result_repair = spip_query("REPAIR TABLE ".$tab);
 		if (!$result_repair) return false;
 
-		$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM ".$tab[0]));
-		if (!$result) return false;
+		$count = spip_abstract_countsel($tab);
 
-		$count = $result['n'];
 		if ($count>1)
 			$res .= "("._T('texte_compte_elements', array('count' => $count)).")\n";
 		else if ($count==1)
@@ -34,11 +34,12 @@ function base_admin_repair_dist() {
 		else
 			$res .= "("._T('texte_vide').")\n";
 
-		$row = spip_fetch_array($result_repair,SPIP_NUM);
-		$ok = ($row[3] == 'OK');
+		$msg = join(" ", spip_fetch_array($result_repair)) . ' ';
+
+		$ok = strpos($msg, ' OK ');
 
 		if (!$ok)
-			$res .= "<pre><span style='color: red; font-weight: bold;'>".htmlentities(join("\n", $row))."</span></pre>\n";
+			$res .= "<pre><span style='color: red; font-weight: bold;'>".htmlentities($msg)."</span></pre>\n";
 		else
 			$res .= " "._T('texte_table_ok')."<br />\n";
 	  }
