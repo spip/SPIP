@@ -61,11 +61,11 @@ function boucle_ARTICLES_dist($id_boucle, &$boucles) {
 	// Restreindre aux elements publies
 	if (!isset($boucle->modificateur['criteres']['statut'])) {
 		if (!$GLOBALS['var_preview']) {
-			$boucle->where[]= array("'='", "'$mstatut'", "'\"publie\"'");
+			$boucle->where[]= array("'='", "'$mstatut'", "'\\'publie\\''");
 			if ($GLOBALS['meta']["post_dates"] == 'non')
 				$boucle->where[]= array("'<'", "'$id_table" . ".date'", "'NOW()'");
 		} else
-			$boucle->where[]= array("'IN'", "'$mstatut'", "'(\"publie\",\"prop\")'");
+			$boucle->where[]= array("'IN'", "'$mstatut'", "'(\\'publie\\',\\'prop\\')'");
 	}
 	return calculer_boucle($id_boucle, $boucles); 
 }
@@ -90,11 +90,11 @@ function boucle_AUTEURS_dist($id_boucle, &$boucles) {
 			$boucle->from["articles"] =  "spip_articles";
 			$boucle->where[]= array("'='", "'lien.id_auteur'", "'$id_table.id_auteur'");
 			$boucle->where[]= array("'='", "'lien.id_article'", "'articles.id_article'");
-			$boucle->where[]= array("'='", "'articles.statut'", "'\"publie\"'");
+			$boucle->where[]= array("'='", "'articles.statut'", "'\\'publie\\''");
 			$boucle->group[] = $boucle->id_table . '.' . $boucle->primary;  
 		}
 		// pas d'auteurs poubellises
-		$boucle->where[]= array("'!='", "'$mstatut'", "'\"5poubelle\"'");
+		$boucle->where[]= array("'!='", "'$mstatut'", "'\\'5poubelle\\''");
 	}
 
 	return calculer_boucle($id_boucle, $boucles); 
@@ -113,9 +113,9 @@ function boucle_BREVES_dist($id_boucle, &$boucles) {
 	// Restreindre aux elements publies
 	if (!isset($boucle->modificateur['criteres']['statut'])) {
 		if (!$GLOBALS['var_preview'])
-			$boucle->where[]= array("'='", "'$mstatut'", "'\"publie\"'");
+			$boucle->where[]= array("'='", "'$mstatut'", "'\\'publie\\''");
 		else
-			$boucle->where[]= array("'IN'", "'$mstatut'", "'(\"publie\",\"prop\")'");
+			$boucle->where[]= array("'IN'", "'$mstatut'", "'(\\'publie\\',\\'prop\\')'");
 	}
 
 	return calculer_boucle($id_boucle, $boucles); 
@@ -140,9 +140,9 @@ function boucle_FORUMS_dist($id_boucle, &$boucles) {
 	// Restreindre aux elements publies
 	if (!$boucle->modificateur['criteres']['statut']) {
 		if ($GLOBALS['var_preview'])
-			$boucle->where[]= array("'IN'", "'$mstatut'", "'(\"publie\",\"prive\")'");		
+			$boucle->where[]= array("'IN'", "'$mstatut'", "'(\\'publie\\',\\'prive\\')'");		
 		else
-			$boucle->where[]= array("'='", "'$mstatut'", "'\"publie\"'");
+			$boucle->where[]= array("'='", "'$mstatut'", "'\\'publie\\''");
 	}
 
 	return calculer_boucle($id_boucle, $boucles); 
@@ -162,7 +162,7 @@ function boucle_SIGNATURES_dist($id_boucle, &$boucles) {
 
 	// Restreindre aux elements publies
 	if (!$boucle->modificateur['criteres']['statut']) {
-		$boucle->where[]= array("'='", "'$mstatut'", "'\"publie\"'");
+		$boucle->where[]= array("'='", "'$mstatut'", "'\\'publie\\''");
 	}
 	return calculer_boucle($id_boucle, $boucles); 
 }
@@ -178,7 +178,7 @@ function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 	$boucle->from[$id_table] =  "spip_documents";
 	// on ne veut pas des fichiers de taille nulle,
 	// sauf s'ils sont distants (taille inconnue)
-	$boucle->where[]= array("'($id_table.taille > 0 OR $id_table.distant=\"oui\")'");
+	$boucle->where[]= array("'($id_table.taille > 0 OR $id_table.distant=\\'oui\\')'");
 
 	return calculer_boucle($id_boucle, $boucles);
 }
@@ -197,7 +197,7 @@ function boucle_RUBRIQUES_dist($id_boucle, &$boucles) {
 	if (!isset($boucle->modificateur['criteres']['statut'])) {
 		if (!$GLOBALS['var_preview'])
 			if (!isset($boucle->modificateur['tout']))
-				$boucle->where[]= array("'='", "'$mstatut'", "'\"publie\"'");
+				$boucle->where[]= array("'='", "'$mstatut'", "'\\'publie\\''");
 	}
 
 	return calculer_boucle($id_boucle, $boucles); 
@@ -247,9 +247,9 @@ function boucle_SYNDICATION_dist($id_boucle, &$boucles) {
 
 	if (!isset($boucle->modificateur['criteres']['statut'])) {
 		if (!$GLOBALS['var_preview']) {
-			$boucle->where[]= array("'='", "'$mstatut'", "'\"publie\"'");
+			$boucle->where[]= array("'='", "'$mstatut'", "'\\'publie\\''");
 		} else
-			$boucle->where[]= array("'IN'", "'$mstatut'", "'(\"publie\",\"prop\")'");
+			$boucle->where[]= array("'IN'", "'$mstatut'", "'(\\'publie\\',\\'prop\\')'");
 	}
 	return calculer_boucle($id_boucle, $boucles); 
 }
@@ -267,7 +267,7 @@ function boucle_SYNDIC_ARTICLES_dist($id_boucle, &$boucles) {
 	// Restreindre aux elements publies, sauf critere contraire
 	if ($boucle->modificateur['criteres']['statut']) {}
 	else if ($GLOBALS['var_preview'])
-		$boucle->where[]= array("'IN'", "'$mstatut'", "'(\"publie\",\"prop\")'");
+		$boucle->where[]= array("'IN'", "'$mstatut'", "'(\\'publie\\',\\'prop\\')'");
 	else {
 		$jointure = array_search("spip_syndic", $boucle->from);
 		if (!$jointure) {
@@ -276,8 +276,8 @@ function boucle_SYNDIC_ARTICLES_dist($id_boucle, &$boucles) {
 			$boucle->where[]= array("'='", "'$id_table" .".id_syndic'",
 						"\"$jointure" . '.id_syndic"');
 		}
-		$boucle->where[]= array("'='", "'$mstatut'", "'\"publie\"'");
-		$boucle->where[]= array("'='", "'$jointure" . ".statut'", "'\"publie\"'");
+		$boucle->where[]= array("'='", "'$mstatut'", "'\\'publie\\''");
+		$boucle->where[]= array("'='", "'$jointure" . ".statut'", "'\\'publie\\''");
 
 	}
 	return calculer_boucle($id_boucle, $boucles);
