@@ -160,8 +160,8 @@ function spip_pg_select_as($args)
 
 // http://doc.spip.org/@spip_pg_fetch
 function spip_pg_fetch($res, $t=PGSQL_ASSOC) {
-	static $n = array();
-	if ($res) $res = pg_fetch_array($res, $n[$res]++, $t);
+
+	if ($res) $res = pg_fetch_array($res, NULL, $t);
 	return $res;
 }
  
