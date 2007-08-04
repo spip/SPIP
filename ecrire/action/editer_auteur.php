@@ -35,7 +35,7 @@ function action_legender_auteur_post($r) {
 	global $auteur_session;
 
 	$bio = _request('bio');
-	$email = _request('email');
+	$email = trim(_request('email'));
 	$new_login = _request('new_login');
 	$new_pass = _request('new_pass');
 	$new_pass2 = _request('new_pass2');
@@ -52,70 +52,63 @@ function action_legender_auteur_post($r) {
 //
 // si id_auteur est hors table, c'est une creation sinon une modif
 //
-	  $auteur = array();
-	  if ($id_auteur) {
+	$auteur = array();
+	if ($id_auteur) {
 		$auteur = spip_abstract_fetch(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
 	  }
-	  if (!$auteur) {
+	if (!$auteur) {
 		$id_auteur = 0;
 		$source = 'spip';
 		if ($s) {
 		  if (in_array($s,$GLOBALS['liste_des_statuts']))
 		    $statut = $s;
 		  else {
-		    spip_log("action_legender_auteur_dist: statut $s incompris");
+		    spip_log("action_editer_auteur_dist: statut $s incompris");
 		    // statut par defaut
 		    $statut = $GLOBALS['liste_des_statuts']['info_redacteurs'];
 		  }
 		}
 	  }
-	  $acces = ($id_auteur == $auteur_session['id_auteur']) ? true : " a voir ";
-	  $auteur['nom'] = corriger_caracteres(_request('nom'));
+	$auteur['nom'] = corriger_caracteres(_request('nom'));
 
-	// login et mot de passe
+	  // login et mot de passe
 	$modif_login = false;
 	$old_login = $auteur['login'];
 
-	if (isset($new_login)
-	AND ($new_login<>$old_login)
-	AND ($auteur['source'] == 'spip' OR !$GLOBALS['ldap_present'])) {
-		if (admin_general($auteur_session)) {
-			$acces = true;
-			if ($new_login) {
-				if (strlen($new_login) < 4)
-					$echec[]= 'info_login_trop_court';
-				else {
-					$n = spip_abstract_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_auteurs WHERE login=" . _q($new_login) . " AND id_auteur!=$id_auteur AND statut!='5poubelle'"));
-					if ($n['n'])
-						$echec[]= 'info_login_existant';
-					else if ($new_login != $old_login) {
-						$modif_login = true;
-						$auteur['login'] = $new_login;
-					}
+	if (($new_login<>$old_login)
+	AND ($auteur['source'] == 'spip' OR !$GLOBALS['ldap_present'])
+	AND autoriser('modifier','auteur', $id_auteur, NULL, array('restreintes'=>1))) {
+		if ($new_login) {
+			if (strlen($new_login) < 4)
+				$echec[]= 'info_login_trop_court';
+			else {
+				$n = spip_abstract_countsel('spip_auteurs', "login=" . _q($new_login) . " AND id_auteur!=$id_auteur AND statut!='5poubelle'",'',1);
+				if ($n)
+					$echec[]= 'info_login_existant';
+				else if ($new_login != $old_login) {
+					$modif_login = true;
+					$auteur['login'] = $new_login;
 				}
 			}
+		} else {
 		// suppression du login
-			else {
-				$auteur['login'] = '';
-				$modif_login = true;
-			}
+
+			$auteur['login'] = '';
+			$modif_login = true;
 		}
 	}
 
 	// changement de pass, a securiser en jaja ?
 
-	if ($new_pass AND ($statut != '5poubelle') AND $auteur['login'] AND $auteur['source'] == 'spip') {
-		if (is_string($acces))
-			$acces = admin_general($auteur_session);
-		if ($acces) {
-			if ($new_pass != $new_pass2)
-				$echec[]= 'info_passes_identiques';
-			else if ($new_pass AND strlen($new_pass) < 6)
-				$echec[]= 'info_passe_trop_court';
-			else {
-				$modif_login = true;
-				$auteur['new_pass'] = $new_pass;
-			}
+	if ($new_pass AND ($statut != '5poubelle') AND $auteur['login'] AND $auteur['source'] == 'spip'
+	AND autoriser('modifier','auteur', $id_auteur)) {
+		if ($new_pass != $new_pass2)
+			$echec[]= 'info_passes_identiques';
+		else if ($new_pass AND strlen($new_pass) < 6)
+			$echec[]= 'info_passe_trop_court';
+		else {
+			$modif_login = true;
+			$auteur['new_pass'] = $new_pass;
 		}
 	}
 
@@ -128,18 +121,10 @@ function action_legender_auteur_post($r) {
 	// seuls les admins peuvent modifier le mail
 	// les admins restreints ne peuvent modifier celui des autres admins
 
-	if (is_string(_request('email')) AND $auteur_session['statut'] == '0minirezo') {
-		if (!($ok = ($statut <> '0minirezo'))) {
-			if (is_string($acces))
-				$acces = admin_general($auteur_session);
-		}
-
-		if ($ok OR $acces) {
-			$email = trim($email);	 
-			if ($email !='' AND !email_valide($email)) 
-				$echec[]= 'info_email_invalide';
-			$auteur['email'] = $email;
-		}
+	if (autoriser('modifier', 'auteur', $id_auteur, NULL, array('mail'=>1))) {
+		if ($email !='' AND !email_valide($email)) 
+			$echec[]= 'info_email_invalide';
+		$auteur['email'] = $email;
 	}
 
 	if ($auteur_session['id_auteur'] == $id_auteur) {
@@ -187,17 +172,16 @@ function action_legender_auteur_post($r) {
 				rename($logo, str_replace($id_hack, $id_auteur, $logo));
 		}
 
-		spip_query("UPDATE spip_auteurs SET $query_pass		nom=" . _q($auteur['nom']) . ",						login=" . _q($auteur['login']) . ",					bio=" . _q($auteur['bio']) . ",						email=" . _q($auteur['email']) . ",					nom_site=" . _q($auteur['nom_site']) . ",				url_site=" . _q($auteur['url_site']) . ",				pgp=" . _q($auteur['pgp']) .					(!$extra ? '' : (", extra = " . _q($extra) . "")) .			" WHERE id_auteur=".$auteur['id_auteur']);
+		spip_query($q="UPDATE spip_auteurs SET $query_pass		nom=" . _q($auteur['nom']) . ",						login=" . _q($auteur['login']) . 	",					bio=" . _q($auteur['bio']) . "," .						(isset($auteur['email']) ? ("email=" . _q($auteur['email'])) : '') . ",	nom_site=" . _q($auteur['nom_site']) . 	",				url_site=" . _q($auteur['url_site']) . 	",				pgp=" . _q($auteur['pgp']) .							(!$extra ? '' : (", extra = " . _q($extra) . "")) 	.			" WHERE id_auteur=".$auteur['id_auteur']);
 	}
 
 
 	//
 	// Modifications de statut
 	//
-	// TODO : autorisations correspondantes !
-	//
+
 	if ($statut = _request('statut')
-	AND autoriser('modifier', 'auteur', $id_auteur, $qui = null,
+	AND autoriser('modifier', 'auteur', $id_auteur, NULL,
 	$opt = array('statut'=>$statut))) {
 		  if ($statut != addslashes($statut)) {
 		  spip_log("action_editer_auteur_dist: $statut incompris  pour $id_auteur");
@@ -215,20 +199,16 @@ function action_legender_auteur_post($r) {
 			$restreintes = array($id_parent);
 	}
 	if (is_array($restreintes)
-	AND autoriser('modifier', 'auteur', $id_auteur, $qui = null,
-	$opt = array('restreint'=>$restreintes))) {
-		include_spip('base/abstract_sql');
+	AND autoriser('modifier', 'auteur', $id_auteur, NULL, array('restreint'=>$restreintes))) {
 		spip_query("DELETE FROM spip_auteurs_rubriques WHERE id_auteur="._q($id_auteur));
 		foreach (array_unique($restreintes) as $id_rub)
 			if ($id_rub = intval($id_rub)) // si '0' on ignore
 				spip_abstract_insert('spip_auteurs_rubriques', "(id_auteur,id_rubrique)", "($id_auteur,$id_rub)");
 	}
 
-
 	// Lier a un article
 	if ($id_article = intval(_request('lier_id_article'))
-	AND autoriser('modifier', 'article', $id_article)
-	) {
+	AND autoriser('modifier', 'article', $id_article)) {
 		spip_query("INSERT spip_auteurs_articles (id_article,id_auteur) VALUES ($id_article,$id_auteur)");
 	}
 
@@ -260,18 +240,4 @@ function action_legender_auteur_post($r) {
 		return $redirect;
 	}
 }
-
-// http://doc.spip.org/@admin_general
-function admin_general($session)
-{
-	static $ok;
-	if (!isset($ok)) {
-	        $ok = ($session['statut']=='0minirezo') 
-        	AND !spip_num_rows(spip_query("SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur=" .$session['id_auteur'] ." AND id_rubrique!='0' LIMIT 1"));
-	}
-
-	return $ok;
-}
-
-
 ?>
