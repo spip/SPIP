@@ -458,6 +458,7 @@ function applique_filtres($p) {
 // Cf. function pipeline dans ecrire/inc_utils.php
 // http://doc.spip.org/@compose_filtres
 function compose_filtres(&$p, $code) {
+	global $table_criteres_infixes;
 	foreach($p->param as $filtre) {
 		$fonc = array_shift($filtre);
 		if ($fonc) {
@@ -485,7 +486,7 @@ function compose_filtres(&$p, $code) {
 				if ($is_filtre_image) $p->ramasser_miettes = true;
 			}
 			// est-ce un test ?
-			else if (strpos("x < > <= >= == === != !== <> ? ", " $fonc "))
+			else if (in_array($fonc, $table_criteres_infixes))
 				$code = "($code $fonc " . substr($arglist,1) . ')';
 			// le filtre est defini sous forme de fonction ou de methode
 			// par ex. dans inc_texte, inc_filtres ou mes_fonctions
