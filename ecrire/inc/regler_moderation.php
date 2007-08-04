@@ -19,7 +19,7 @@ function get_forums_publics($id_article=0) {
 	if ($id_article) {
 		$res = spip_query("SELECT accepter_forum FROM spip_articles WHERE id_article=$id_article");
 
-		if ($obj = spip_fetch_array($res))
+		if ($obj = spip_abstract_fetch($res))
 			return $obj['accepter_forum'];
 	} else { // dans ce contexte, inutile
 		return substr($GLOBALS['meta']["forums_publics"],0,3);
@@ -36,7 +36,7 @@ function inc_regler_moderation_dist($id_article, $script, $args) {
 
 	$statut_forum = get_forums_publics($id_article);
 
-	$nb_forums = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_forum WHERE id_article=$id_article AND statut IN ('publie', 'off', 'prop')"));
+	$nb_forums = spip_abstract_fetch(spip_query("SELECT COUNT(*) AS count FROM spip_forum WHERE id_article=$id_article AND statut IN ('publie', 'off', 'prop')"));
 	$nb_forums = $nb_forums['count'];
 
 	if ($nb_forums) {

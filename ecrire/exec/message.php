@@ -25,10 +25,10 @@ function exec_message_dist()
 	$forcer_dest = _request('forcer_dest');
 	$cherche_auteur = _request('cherche_auteur');
 
-	$row = spip_fetch_array(spip_query("SELECT type FROM spip_messages WHERE id_message=$id_message"));
+	$row = spip_abstract_fetch(spip_query("SELECT type FROM spip_messages WHERE id_message=$id_message"));
 
 	if ($row['type'] != "affich"){
-		$res = spip_fetch_array(spip_query("SELECT vu FROM spip_auteurs_messages WHERE id_auteur=$connect_id_auteur AND id_message=$id_message"));
+		$res = spip_abstract_fetch(spip_query("SELECT vu FROM spip_auteurs_messages WHERE id_auteur=$connect_id_auteur AND id_message=$id_message"));
 		if (!$res) {
 			include_spip('inc/minipres');
 			echo minipres();
@@ -66,7 +66,7 @@ function http_auteurs_ressemblants($cherche_auteur, $id_message)
   $query = spip_query("SELECT id_auteur, nom FROM spip_auteurs WHERE messagerie<>'non' AND id_auteur<>'$connect_id_auteur' AND pass<>'' AND login<>''");
   $table_auteurs = array();
   $table_ids = array();
-  while ($row = spip_fetch_array($query)) {
+  while ($row = spip_abstract_fetch($query)) {
     $table_auteurs[] = $row['nom'];
     $table_ids[] = $row['id_auteur'];
   }
@@ -77,7 +77,7 @@ function http_auteurs_ressemblants($cherche_auteur, $id_message)
   else if (count($resultat) == 1) {
     // action/editer_message a du prendre en compte ce cas
     list(, $nouv_auteur) = each($resultat);
-    $row = spip_fetch_array(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$nouv_auteur"));
+    $row = spip_abstract_fetch(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$nouv_auteur"));
     $nom_auteur = $row['nom'];
     return "<b>"._T('info_ajout_participant')."</b><br />" .
       "<ul><li><span class='verdana1 spip_small'><b><span class='spip_medium'>$nom_auteur</span></b></span></li>\n</ul>";
@@ -86,7 +86,7 @@ function http_auteurs_ressemblants($cherche_auteur, $id_message)
     $res = '';
     $query = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur IN (" . join(',', $resultat) . ") ORDER BY nom");
 
-    while ($row = spip_fetch_array($query)) {
+    while ($row = spip_abstract_fetch($query)) {
       $id_auteur = $row['id_auteur'];
       $nom_auteur = $row['nom'];
       $email_auteur = $row['email'];
@@ -174,7 +174,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $che
 		$res = $exp = '';
 		$formater_auteur = charger_fonction('formater_auteur', 'inc');
 		$t = _T('lien_retrait_particpant');
-		while($row = spip_fetch_array($result_auteurs)) {
+		while($row = spip_abstract_fetch($result_auteurs)) {
 			$id_auteur = $row["id_auteur"];
 			$nom_auteur = typo($row["nom"]);
 			$ze_auteurs[] = $id_auteur;
@@ -319,7 +319,7 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 function exec_affiche_message_dist($id_message, $cherche_auteur, $forcer_dest)
 {
   global $echelle, $partie_cal;
-  $row = spip_fetch_array(spip_query("SELECT * FROM spip_messages WHERE id_message=$id_message"));
+  $row = spip_abstract_fetch(spip_query("SELECT * FROM spip_messages WHERE id_message=$id_message"));
   if ($row) {
 	$id_message = $row['id_message'];
 	$date_heure = $row["date_heure"];

@@ -184,7 +184,7 @@ function afficher_complement_site($row){
 	}
 	if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 		$id_syndic = $row['id_syndic'];
-		$total_art = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_syndic_articles WHERE id_syndic=$id_syndic"));
+		$total_art = spip_abstract_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_syndic_articles WHERE id_syndic=$id_syndic"));
 		$s .= " " . $total_art['n'] . " " . _T('info_syndication_articles');
 	} else {
 			$s .= "&nbsp;";
@@ -197,7 +197,7 @@ function afficher_complement_syndic_article($row){
 		$id_syndic = $row['id_syndic'];
 		// $my_sites cache les resultats des requetes sur les sites
 		if (!$my_sites[$id_syndic])
-			$my_sites[$id_syndic] = spip_fetch_array(spip_query("SELECT nom_site, moderation, miroir FROM spip_syndic WHERE id_syndic=$id_syndic"));
+			$my_sites[$id_syndic] = spip_abstract_fetch(spip_query("SELECT nom_site, moderation, miroir FROM spip_syndic WHERE id_syndic=$id_syndic"));
 
 		$aff = $my_sites[$id_syndic]['nom_site'];
 		if ($my_sites[$id_syndic]['moderation'] == 'oui')
@@ -306,7 +306,7 @@ function afficher_objet_boucle($row, &$tous_id,  $voir_logo, $own)
 		
 		$s = "";
 		if ($affrub && $id_rubrique) {
-			$rub = spip_fetch_array(spip_query("SELECT id_rubrique, titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+			$rub = spip_abstract_fetch(spip_query("SELECT id_rubrique, titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 			$id_rubrique = $rub['id_rubrique'];
 			$s .= "<a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "' style=\"display:block;\">".typo($rub['titre'])."</a>";
 		} else 
@@ -339,7 +339,7 @@ function inc_afficher_articles_dist($titre, $requete, $formater='') {
 	
 	if (!isset($requete['GROUP BY'])) $requete['GROUP BY'] = '';
 
-	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
+	$cpt = spip_abstract_fetch(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
 
 	if (!$cpt = $cpt['n']) return '' ;
 
@@ -407,7 +407,7 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 	$id_liste = 't'.substr(md5($u),0,8);
 
 	$t = '';
-	while ($r = spip_fetch_array($q))
+	while ($r = spip_abstract_fetch($q))
 		if (autoriser('voir','article',$r['id_article']))
 			$t .= $formater($r);
 	spip_abstract_free($q);
@@ -467,7 +467,7 @@ function afficher_articles_trad_boucle($row)
 
 	$res_trad = spip_query("SELECT id_article, lang, date_modif  FROM spip_articles WHERE id_trad = $id_trad AND id_trad > 0");
 
-	while ($row_trad = spip_fetch_array($res_trad)) {
+	while ($row_trad = spip_abstract_fetch($res_trad)) {
 
 		$id_article_trad = $row_trad["id_article"];
 		$lang_trad = $row_trad["lang"];

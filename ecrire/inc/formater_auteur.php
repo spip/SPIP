@@ -33,7 +33,7 @@ function inc_formater_auteur_dist($id_auteur, $row=NULL) {
 	$id_auteur = intval($id_auteur);
 
 	if ($row===NULL)
-		$row = spip_fetch_array(spip_query("SELECT *, (en_ligne<DATE_SUB(NOW(),INTERVAL 15 DAY)) AS parti FROM spip_auteurs where id_auteur=$id_auteur"));
+		$row = spip_abstract_fetch(spip_query("SELECT *, (en_ligne<DATE_SUB(NOW(),INTERVAL 15 DAY)) AS parti FROM spip_auteurs where id_auteur=$id_auteur"));
 
 	$vals = array();
 

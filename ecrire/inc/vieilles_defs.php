@@ -390,4 +390,11 @@ function creer_objet_multi($r, $l) {
 spip_log('creer_objet_multi() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
  spip_abstract_multi($r, $l);
 }
+
+// Pas de message pour cette fonction, si utilisee auparavant
+// http://doc.spip.org/@spip_fetch_array
+function spip_fetch_array($r, $t=MYSQL_ASSOC) {
+	if ($r) return mysql_fetch_array($r, $t);
+}
+
 ?>

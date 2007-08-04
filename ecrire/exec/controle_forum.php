@@ -19,7 +19,7 @@ include_spip('inc/forum');
 
 // http://doc.spip.org/@forum_parent
 function forum_parent($id_forum) {
-	$row=spip_fetch_array(spip_query("SELECT * FROM spip_forum WHERE id_forum=$id_forum AND statut != 'redac'"));
+	$row=spip_abstract_fetch(spip_query("SELECT * FROM spip_forum WHERE id_forum=$id_forum AND statut != 'redac'"));
 	if (!$row) return '';
 	$id_forum=$row['id_forum'];
 	$forum_id_parent=$row['id_parent'];
@@ -30,7 +30,7 @@ function forum_parent($id_forum) {
 	$forum_stat=$row['statut'];
 
 	if ($forum_id_article > 0) {
-	  $row=spip_fetch_array(spip_query("SELECT id_article, titre, statut FROM spip_articles WHERE id_article=$forum_id_article"));
+	  $row=spip_abstract_fetch(spip_query("SELECT id_article, titre, statut FROM spip_articles WHERE id_article=$forum_id_article"));
 	  $id_article = $row['id_article'];
 	  $titre = $row['titre'];
 	  $statut = $row['statut'];
@@ -50,7 +50,7 @@ function forum_parent($id_forum) {
 	  }
 	}
 	else if ($forum_id_rubrique > 0) {
-	  $row = spip_fetch_array(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique=$forum_id_rubrique"));
+	  $row = spip_abstract_fetch(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique=$forum_id_rubrique"));
 	  $id_rubrique = $row['id_rubrique'];
 	  $titre = $row['titre'];
 	  return array('pref' => _T('lien_reponse_rubrique'),
@@ -60,7 +60,7 @@ function forum_parent($id_forum) {
 		       'titre' => $titre);
 	}
 	else if ($forum_id_syndic > 0) {
-	  $row = spip_fetch_array(spip_query("SELECT * FROM spip_syndic WHERE id_syndic=$forum_id_syndic"));
+	  $row = spip_abstract_fetch(spip_query("SELECT * FROM spip_syndic WHERE id_syndic=$forum_id_syndic"));
 	  $id_syndic = $row['id_syndic'];
 	  $titre = $row['nom_site'];
 	  $statut = $row['statut'];
@@ -71,7 +71,7 @@ function forum_parent($id_forum) {
 		       'titre' => $titre);
 	}
 	else if ($forum_id_breve > 0) {
-	  $row = spip_fetch_array(spip_query("SELECT * FROM spip_breves WHERE id_breve=$forum_id_breve"));
+	  $row = spip_abstract_fetch(spip_query("SELECT * FROM spip_breves WHERE id_breve=$forum_id_breve"));
 	  $id_breve = $row['id_breve'];
 	  $date_heure = $row['date_heure'];
 	  $titre = $row['titre'];
@@ -175,7 +175,7 @@ function controle_un_forum($row) {
 	  $result_mots = spip_query("SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot");
 
 
-		while ($row_mots = spip_fetch_array($result_mots)) {
+		while ($row_mots = spip_abstract_fetch($result_mots)) {
 			$titre_mot = propre($row_mots['titre']);
 			$type_mot = propre($row_mots['type']);
 			$controle .= "\n<li> <b>$type_mot :</b> $titre_mot";
@@ -220,8 +220,8 @@ function exec_controle_forum_dist()
 
 	// Si un id_controle_forum est demande, on adapte le debut
 	if ($debut_id_forum = intval(_request('debut_id_forum'))
-	AND $d = spip_fetch_array(spip_query("SELECT date_heure FROM spip_forum WHERE id_forum=$debut_id_forum"))) {
-		$debut = spip_fetch_array(spip_query($q = "SELECT COUNT(*) AS n FROM $from " . (!$where ? '' : "WHERE $where ") . (!$d ? '' : (" AND F.date_heure > '".$d['date_heure']."'"))));
+	AND $d = spip_abstract_fetch(spip_query("SELECT date_heure FROM spip_forum WHERE id_forum=$debut_id_forum"))) {
+		$debut = spip_abstract_fetch(spip_query($q = "SELECT COUNT(*) AS n FROM $from " . (!$where ? '' : "WHERE $where ") . (!$d ? '' : (" AND F.date_heure > '".$d['date_heure']."'"))));
 		$debut = $debut['n'];
 	}
 
@@ -256,11 +256,11 @@ function exec_controle_forum_dist()
 		echo onglet(_T('onglet_messages_internes'), generer_url_ecrire('controle_forum', $args . "interne"), "interne", '', "forum-interne-24.gif");
 
 		list($from,$where) = critere_statut_controle_forum('vide', $id_rubrique);
-		$n = spip_fetch_array(spip_query("SELECT id_forum FROM $from WHERE $where LIMIT 1"));
+		$n = spip_abstract_fetch(spip_query("SELECT id_forum FROM $from WHERE $where LIMIT 1"));
 		if ($n) echo onglet(_T('onglet_messages_vide'), generer_url_ecrire('controle_forum', $args . "vide"), "vide", '');
 
 		list($from,$where) = critere_statut_controle_forum('prop', $id_rubrique);
-		$f = spip_fetch_array(spip_query("SELECT F.id_forum FROM $from " . (!$where ? '' : "WHERE $where ") . " LIMIT 1"));
+		$f = spip_abstract_fetch(spip_query("SELECT F.id_forum FROM $from " . (!$where ? '' : "WHERE $where ") . " LIMIT 1"));
 		if ($f)
 			echo onglet(_T('texte_statut_attente_validation'), generer_url_ecrire('controle_forum', $args . "prop"), "prop", '');
 
@@ -301,7 +301,7 @@ function affiche_tranche_forum($debut, $i, $pack, $query)
 {
 
   $res = '';
-  while ($row = spip_fetch_array($query)) {
+  while ($row = spip_abstract_fetch($query)) {
 	if (($i>=$debut) AND ($i<($debut + $pack)))
 		$res .= controle_un_forum($row);
 	$i ++;

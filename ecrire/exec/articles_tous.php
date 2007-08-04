@@ -88,7 +88,7 @@ function arbo_articles_tous()
 	$enfant = array();
 	$result = spip_abstract_select("id_rubrique, titre, id_parent", "spip_rubriques", '','', '0+titre,titre');
 	$first_couche = 0;
-	while ($row = spip_fetch_array($result)) {
+	while ($row = spip_abstract_fetch($result)) {
 		$id_rubrique = $row['id_rubrique'];
 		if (autoriser('voir','rubrique',$id_rubrique)){
 			$id_parent = $row['id_parent'];
@@ -123,7 +123,7 @@ function texte_articles_tous(&$sel_lang, $flag_trad, $aff_art,$spip_lang_dir){
 			articles.date_modif FROM spip_articles AS articles LEFT JOIN
 			spip_auteurs_articles AS lien ON articles.id_article =	lien.id_article	 WHERE articles.statut = 'publie' OR articles.statut =	'prop' OR (articles.statut = 'prepa'  AND lien.id_auteur=" . _q($GLOBALS['auteur_session']['id_auteur']) . ") GROUP BY id_article ORDER BY articles.date DESC");
 
-	while($row = spip_fetch_array($result)) {
+	while($row = spip_abstract_fetch($result)) {
 		$id_rubrique=$row['id_rubrique'];
 		$id_article = $row['id_article'];
 		if (autoriser('voir','article',$id_article)){
@@ -387,7 +387,7 @@ function trouve_auteurs_articles($id_article)
 {
 	$result = spip_query("SELECT nom FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE auteurs.id_auteur=lien.id_auteur AND lien.id_article=$id_article ORDER BY auteurs.nom");
 	$res = array();
-	while ($row = spip_fetch_array($result))  $res[] = extraire_multi($row["nom"]);
+	while ($row = spip_abstract_fetch($result))  $res[] = extraire_multi($row["nom"]);
 	return join(", ", $res);
 }
 ?>

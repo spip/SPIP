@@ -147,7 +147,7 @@ function reponse_confirmation($var_confirm = '') {
 			$result_sign = spip_abstract_select('*', 'spip_signatures', "statut=" . _q($var_confirm));
 
 			if (spip_num_rows($result_sign) > 0) {
-				while($row = spip_fetch_array($result_sign)) {
+				while($row = spip_abstract_fetch($result_sign)) {
 					$id_signature = $row['id_signature'];
 					$id_article = $row['id_article'];
 					$date_time = $row['date_time'];
@@ -160,7 +160,7 @@ function reponse_confirmation($var_confirm = '') {
 				}
 				$result_petition = spip_abstract_select('*', 'spip_petitions', "id_article=$id_article");
 
-				while ($row = spip_fetch_array($result_petition)) {
+				while ($row = spip_abstract_fetch($result_petition)) {
 					$id_article = $row['id_article'];
 					$email_unique = $row['email_unique'];
 					$site_obli = $row['site_obli'];
@@ -225,7 +225,7 @@ function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $
 
 	$result_petition = spip_abstract_select('*', 'spip_petitions', "id_article=$id_article");
 
-	if ($row = spip_fetch_array($result_petition)) {
+	if ($row = spip_abstract_fetch($result_petition)) {
 		$email_unique = $row['email_unique'];
 		$site_obli = $row['site_obli'];
 		$site_unique = $row['site_unique'];
@@ -268,7 +268,7 @@ function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $
 
 		$passw = test_pass();
 
-		$row = spip_fetch_array(spip_abstract_select('titre,lang', 'spip_articles', "id_article=$id_article"));
+		$row = spip_abstract_fetch(spip_abstract_select('titre,lang', 'spip_articles', "id_article=$id_article"));
 		$l = lang_select($row['lang']);
 		$titre = textebrut(typo($row['titre']));
 		if ($l) lang_select();

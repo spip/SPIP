@@ -267,7 +267,7 @@ function lire_php_auth($user, $pw) {
 
 	$row = spip_query("SELECT * FROM spip_auteurs WHERE login=" . _q($user));
 
-	$row = spip_fetch_array($row);
+	$row = spip_abstract_fetch($row);
 	if ($row AND $row['source'] != 'ldap')
 		return ($row['pass'] == md5($row['alea_actuel'] . $pw)) ? $row : false;
 	elseif ($GLOBALS['ldap_present']) {

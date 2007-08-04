@@ -18,7 +18,7 @@ function exec_instituer_auteur_dist()
 	$id_auteur = intval(_request('id_auteur'));
 
 	include_spip('inc/actions');
-	$auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
+	$auteur = spip_abstract_fetch(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
 
 	$instituer_auteur = charger_fonction('instituer_auteur', 'inc');
 	ajax_retour($instituer_auteur($auteur));

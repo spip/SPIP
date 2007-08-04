@@ -30,7 +30,7 @@ function action_supprimer_traduction_post($r)
 	// Si l'ancien groupe ne comporte plus qu'un seul article
 	// mettre a zero.
 
-	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_articles WHERE id_trad=" . $r[2]));
+	$cpt = spip_abstract_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_articles WHERE id_trad=" . $r[2]));
 
 	if ($cpt['n'] == 1)
 		spip_query("UPDATE spip_articles SET id_trad = 0 WHERE id_trad=" . $r[2]);

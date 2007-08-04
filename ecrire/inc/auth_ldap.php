@@ -33,7 +33,7 @@ function inc_auth_ldap_dist ($login, $pass) {
 	// avec le statut par defaut a l'install
 	if (!spip_num_rows($result))
 		$result = auth_ldap_inserer($dn, $GLOBALS['meta']["ldap_statut_import"]);
-	return $result ? spip_fetch_array($result) : array(); 
+	return $result ? spip_abstract_fetch($result) : array(); 
 }
 
 // http://doc.spip.org/@auth_ldap_search

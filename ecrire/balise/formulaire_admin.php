@@ -82,7 +82,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	) {
 		$result = spip_query("SELECT visites, popularite FROM spip_articles WHERE id_article=$id_article AND statut='publie'");
 
-		if ($row = @spip_fetch_array($result)) {
+		if ($row = @spip_abstract_fetch($result)) {
 			$visites = intval($row['visites']);
 			$popularite = ceil($row['popularite']);
 			$statistiques = str_replace('&amp;', '&', generer_url_ecrire_statistiques($id_article));

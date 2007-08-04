@@ -234,7 +234,7 @@ function personnel_accueil($coockcookie)
 		$q = spip_query("SELECT R.id_rubrique, R.titre, R.descriptif FROM spip_rubriques AS R, spip_auteurs_rubriques AS A WHERE A.id_auteur=$connect_id_auteur AND A.id_rubrique=R.id_rubrique ORDER BY titre");
 
 		$rubs = array();
-		while ($r = spip_fetch_array($q)) {
+		while ($r = spip_abstract_fetch($q)) {
 			$rubs[] = "<a title='" .
 			  typo($r['descriptif']) .
 			  "' href='" .
@@ -300,14 +300,14 @@ function etat_base_accueil()
 	$cpt = array();
 	$cpt2 = array();
 	$defaut = $where ? '0/' : '';
-	while($row = spip_fetch_array($q)) {
+	while($row = spip_abstract_fetch($q)) {
 	  $cpt[$row['statut']] = $row['cnt'];
 	  $cpt2[$row['statut']] = $defaut;
 	}
 	if ($cpt) {
 		if ($where) {
 			$q = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_articles$where GROUP BY statut");
-			while($row = spip_fetch_array($q)) {
+			while($row = spip_abstract_fetch($q)) {
 				$r = $row['statut'];
 				$cpt2[$r] = intval($row['cnt']) . '/';
 			}
@@ -325,7 +325,7 @@ function etat_base_accueil()
 	$cpt = array();
 	$cpt2 = array();
 	$defaut = $where ? '0/' : '';
-	while($row = spip_fetch_array($q)) {
+	while($row = spip_abstract_fetch($q)) {
 	  $cpt[$row['statut']] = $row['cnt'];
 	  $cpt2[$row['statut']] = $defaut;
 	}
@@ -333,7 +333,7 @@ function etat_base_accueil()
 	if ($cpt) {
 		if ($where) {
 			$q = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_breves$where GROUP BY statut");
-			while($row = spip_fetch_array($q)) {
+			while($row = spip_abstract_fetch($q)) {
 				$r = $row['statut'];
 				$cpt2[$r] = intval($row['cnt']) . '/';
 			}
@@ -350,7 +350,7 @@ function etat_base_accueil()
 	$cpt = array();
 	$cpt2 = array();
 	$defaut = $where ? '0/' : '';
-	while($row = spip_fetch_array($q)) {
+	while($row = spip_abstract_fetch($q)) {
 	  $cpt[$row['statut']] = $row['cnt'];
 	  $cpt2[$row['statut']] = $defaut;
 	}
@@ -360,7 +360,7 @@ function etat_base_accueil()
 		  include_spip('inc/forum');
 		  list($f, $w) = critere_statut_controle_forum('public',$ids);
 		  $q = spip_query("SELECT COUNT(*) AS cnt, F.statut FROM $f  WHERE $w GROUP BY F.statut");
-		  while($row = spip_fetch_array($q)) {
+		  while($row = spip_abstract_fetch($q)) {
 				$r = $row['statut'];
 				$cpt2[$r] = intval($row['cnt']) . '/';
 			}
@@ -390,7 +390,7 @@ function accueil_liste_participants()
 	$q = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_auteurs GROUP BY statut HAVING COUNT(*)<>0 AND statut IN (".  _q($GLOBALS['liste_des_statuts']) . ")");
 
 	$cpt = array();
-	while($row=spip_fetch_array($q)) $cpt[$row['statut']] = $row['cnt']; 
+	while($row=spip_abstract_fetch($q)) $cpt[$row['statut']] = $row['cnt']; 
 
 	if (!$cpt) return '';
 

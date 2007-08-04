@@ -50,7 +50,7 @@ function controler_forum($id) {
 	// Reglage forums d'article
 	if ($id) {
 		$q = spip_query("SELECT accepter_forum FROM spip_articles WHERE id_article=$id");
-		if ($r = spip_fetch_array($q))
+		if ($r = spip_abstract_fetch($q))
 			$id = $r['accepter_forum'];
 	}
 
@@ -183,7 +183,7 @@ function inc_forum_insert_dist() {
 	$id_message = spip_abstract_insert('spip_forum', '(date_heure)', '(NOW())');
 
 	if ($id_forum) {
-		$id_thread = spip_fetch_array(spip_query("SELECT id_thread FROM spip_forum WHERE id_forum = $id_forum"));
+		$id_thread = spip_abstract_fetch(spip_query("SELECT id_thread FROM spip_forum WHERE id_forum = $id_forum"));
 		$id_thread = $id_thread['id_thread'];
 	}
 	else

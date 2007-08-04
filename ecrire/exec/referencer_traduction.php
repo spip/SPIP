@@ -23,7 +23,7 @@ function exec_referencer_traduction_dist()
 		exit;
 	}
 	include_spip('inc/actions');
-	$row = spip_fetch_array(spip_query("SELECT id_trad, id_rubrique FROM spip_articles WHERE id_article=$id_article"));
+	$row = spip_abstract_fetch(spip_query("SELECT id_trad, id_rubrique FROM spip_articles WHERE id_article=$id_article"));
 
 	$referencer_traduction = charger_fonction('referencer_traduction', 'inc');
 	ajax_retour($referencer_traduction($id_article, 'ajax', $row['id_rubrique'], $row['id_trad'])); 

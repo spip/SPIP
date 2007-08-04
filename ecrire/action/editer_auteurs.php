@@ -101,7 +101,7 @@ function rechercher_auteurs($cherche_auteur)
 	$result = spip_query("SELECT id_auteur, nom FROM spip_auteurs");
 	$table_auteurs = array();
 	$table_ids = array();
-	while ($row = spip_fetch_array($result)) {
+	while ($row = spip_abstract_fetch($result)) {
 		$table_auteurs[] = $row["nom"];
 		$table_ids[] = $row["id_auteur"];
 	}

@@ -93,7 +93,7 @@ function low_sec($id_auteur) {
 	else {
 		$result = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur = $id_auteur");
 
-		if ($row = spip_fetch_array($result)) {
+		if ($row = spip_abstract_fetch($result)) {
 			$low_sec = $row["low_sec"];
 			if (!$low_sec) {
 				$low_sec = creer_pass_aleatoire();
@@ -155,7 +155,7 @@ function ecrire_acces() {
 	$p2 = ''; // login:htpass pour les admins
 	$s = spip_query("SELECT login, htpass, statut FROM spip_auteurs WHERE statut IN  ('1comite','0minirezo','nouveau')");
 	$n = spip_num_rows($s);
-	while ($t = spip_fetch_array($s)) {
+	while ($t = spip_abstract_fetch($s)) {
 		$p1 .= $t['login'].':'.$t['htpass']."\n";
 		if ($t['statut'] == '0minirezo')
 			$p2 .= $t['login'].':'.$t['htpass']."\n";
@@ -210,7 +210,7 @@ function gerer_htaccess() {
 	// par exemple acces_restreint
 	$GLOBALS['meta']['creer_htaccess'];
 	$r = spip_query("SELECT extension FROM spip_types_documents");
-	while ($e = spip_fetch_array($r)) {
+	while ($e = spip_abstract_fetch($r)) {
 		if (is_dir($dir = _DIR_IMG . $e['extension'])) {
 			if ($GLOBALS['meta']['creer_htaccess'] == 'oui')
 				verifier_htaccess($dir);

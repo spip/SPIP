@@ -56,7 +56,7 @@ function ajouter_nouveau_mot($id_groupe, $table, $table_id, $id_mot, $id)
 {
 	if (un_seul_mot_dans_groupe($id_groupe)) {
 		$mots = spip_query("SELECT id_mot FROM spip_mots WHERE id_groupe = $id_groupe");
-		while ($r = spip_fetch_array($mots))
+		while ($r = spip_abstract_fetch($mots))
 			spip_query("DELETE FROM spip_mots_$table WHERE id_mot=" . $r['id_mot'] ." AND $table_id=$id");
 	}
 	spip_abstract_insert("spip_mots_$table", "(id_mot, $table_id)", "($id_mot, $id)");
@@ -66,7 +66,7 @@ function ajouter_nouveau_mot($id_groupe, $table, $table_id, $id_mot, $id)
 // http://doc.spip.org/@un_seul_mot_dans_groupe
 function un_seul_mot_dans_groupe($id_groupe)
 {
-	$u = spip_fetch_array(spip_query("SELECT unseul FROM spip_groupes_mots WHERE id_groupe = $id_groupe"));
+	$u = spip_abstract_fetch(spip_query("SELECT unseul FROM spip_groupes_mots WHERE id_groupe = $id_groupe"));
 	return ($u['unseul'] == 'oui');
 }
 

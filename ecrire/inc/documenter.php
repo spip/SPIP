@@ -34,7 +34,7 @@ function inc_documenter_dist(
 		}
 
 		$documents = array();
-		while ($document = spip_fetch_array($lies))
+		while ($document = spip_abstract_fetch($lies))
 			$documents[] = $document;
 	} else
 		$documents = $doc;
@@ -54,7 +54,7 @@ function inc_documenter_dist(
 	/*if ($type=='article'
 	AND !isset($GLOBALS['doublons_documents_inclus'])
 	AND is_int($doc)) {
-		$r = spip_fetch_array(spip_query("SELECT chapo,texte FROM spip_articles WHERE id_article="._q($doc)));
+		$r = spip_abstract_fetch(spip_query("SELECT chapo,texte FROM spip_articles WHERE id_article="._q($doc)));
 		propre(join(" ",$r));
 	}*/
 

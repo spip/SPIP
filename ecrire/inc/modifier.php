@@ -120,7 +120,7 @@ function marquer_doublons_documents($champs,$id,$id_table_objet,$table_objet){
 	if ($load){
 		$champs[$load] = "";
 		$res = spip_query("SELECT $load FROM spip_$table_objet WHERE $id_table_objet="._q($id));
-		if ($row = spip_fetch_array($res) AND isset($row[$load]))
+		if ($row = spip_abstract_fetch($res) AND isset($row[$load]))
 			$champs[$load] = $row[$load];
 	}
 	include_spip('inc/texte');
@@ -132,7 +132,7 @@ function marquer_doublons_documents($champs,$id,$id_table_objet,$table_objet){
 		// on repasse par une requete sur spip_documents pour verifier que les documents existent bien !
 		$in_liste = implode(',',$GLOBALS['doublons_documents_inclus']);
 		$res = spip_query("SELECT id_document FROM spip_documents WHERE " . calcul_mysql_in('id_document', $in_liste));
-		while ($row = spip_fetch_array($res)) {
+		while ($row = spip_abstract_fetch($res)) {
 			spip_query("UPDATE spip_documents_$table_objet SET vu='oui' WHERE $id_table_objet=$id AND id_document=" . $row['id_document']);
 		}
 	}
@@ -180,7 +180,7 @@ function revision_mot($id_mot, $c=false) {
 	if (NULL !== ($id_groupe = _request('id_groupe',$c))
 	OR NULL !== ($type = _request('type',$c))) {
 		$result = spip_query("SELECT titre FROM spip_groupes_mots WHERE id_groupe="._q($id_groupe));
-		if ($row = spip_fetch_array($result))
+		if ($row = spip_abstract_fetch($result))
 			$type = $row['titre'];
 		else
 			$type = NULL;
@@ -212,7 +212,7 @@ function revision_petition($id_article, $c=false) {
 function revision_forum($id_forum, $c=false) {
 
 	$s = spip_query("SELECT * FROM spip_forum WHERE id_forum="._q($id_forum));
-	if (!$t = spip_fetch_array($s)) {
+	if (!$t = spip_abstract_fetch($s)) {
 		spip_log("erreur forum $id_forum inexistant");
 		return;
 	}
@@ -255,7 +255,7 @@ function revision_forum($id_forum, $c=false) {
 	AND count($cles = array_intersect(array_keys($c),
 		array('id_article', 'id_rubrique', 'id_syndic', 'id_breve')))
 	) {
-		$thread = spip_fetch_array(spip_query("SELECT id_thread FROM spip_forum WHERE id_forum=$id_forum"));
+		$thread = spip_abstract_fetch(spip_query("SELECT id_thread FROM spip_forum WHERE id_forum=$id_forum"));
 		foreach ($cles as $k)
 			spip_query("UPDATE spip_forum SET $k="._q($c[$k])." WHERE id_thread=".$thread['id_thread']." AND statut!='original'");
 		// on n'affecte pas $r, car un deplacement ne change pas l'auteur

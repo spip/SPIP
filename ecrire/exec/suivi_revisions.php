@@ -54,7 +54,7 @@ function exec_suivi_revisions_dist()
 
 	$result = spip_abstract_select("id_rubrique, titre", "spip_rubriques", 'id_parent=0','', '0+titre,titre');
 
-	while ($row = spip_fetch_array($result)) {
+	while ($row = spip_abstract_fetch($result)) {
 		$id_rubrique = $row['id_rubrique'];
 		$titre = typo($row['titre']);
 

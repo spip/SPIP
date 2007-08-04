@@ -31,7 +31,7 @@ function exec_articles_forum_dist()
 
 	$result = spip_query("SELECT titre, id_rubrique FROM spip_articles WHERE id_article=$id_article");
 
-	if ($row = spip_fetch_array($result)) {
+	if ($row = spip_abstract_fetch($result)) {
 		$titre = $row["titre"];
 		$id_rubrique = $row["id_rubrique"];
 	}

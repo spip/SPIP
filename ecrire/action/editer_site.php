@@ -28,7 +28,7 @@ function action_editer_site_dist() {
 		if (
 		(_request('url_syndic') OR _request('resume') OR _request('syndication'))
 		AND $s = spip_query("SELECT url_syndic,syndication,resume FROM spip_syndic WHERE id_syndic="._q($id_syndic))
-		AND $t = spip_fetch_array($s)
+		AND $t = spip_abstract_fetch($s)
 		AND (
 			(_request('url_syndic') AND _request('url_syndic') != $t['url_syndic'])
 			OR
@@ -77,7 +77,7 @@ function action_editer_site_dist() {
 			spip_query("DELETE FROM spip_syndic_articles WHERE id_syndic="._q($id_syndic));
 
 		$s = spip_query("SELECT id_syndic, descriptif FROM spip_syndic WHERE id_syndic=$id_syndic AND syndication IN ('oui', 'sus', 'off') LIMIT 1");
-		if ($t = spip_fetch_array($s)) {
+		if ($t = spip_abstract_fetch($s)) {
 			include_spip('inc/syndic');
 			syndic_a_jour($id_syndic);
 
@@ -112,13 +112,13 @@ function insert_syndic($id_rubrique) {
 	// Si id_rubrique vaut 0 ou n'est pas definie, creer le site
 	// dans la premiere rubrique racine
 	if (!$id_rubrique = intval($id_rubrique)) {
-		$row = spip_fetch_array(spip_abstract_select("id_rubrique", "spip_rubriques", "id_parent=0",'', '0+titre,titre', "1"));
+		$row = spip_abstract_fetch(spip_abstract_select("id_rubrique", "spip_rubriques", "id_parent=0",'', '0+titre,titre', "1"));
 		$id_rubrique = $row['id_rubrique'];
 	}
 
 
 	// Le secteur a la creation : c'est le secteur de la rubrique
-	$row = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+	$row = spip_abstract_fetch(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 	$id_secteur = $row['id_secteur'];
 
 	$id_syndic = spip_abstract_insert("spip_syndic",
@@ -156,7 +156,7 @@ function revisions_sites ($id_syndic, $c=false) {
 	}
 
 	$s = spip_query("SELECT statut, id_rubrique FROM spip_syndic WHERE id_syndic=$id_syndic");
-	$row = spip_fetch_array($s);
+	$row = spip_abstract_fetch($s);
 	$id_rubrique = $row['id_rubrique'];
 
 	$statut = _request('statut', $c);
@@ -171,7 +171,7 @@ function revisions_sites ($id_syndic, $c=false) {
 			} else {
 				# on prend la date de MySQL pour eviter un decalage cf. #975
 				$d = spip_query("SELECT NOW() AS d");
-				$d = spip_fetch_array($d);
+				$d = spip_abstract_fetch($d);
 				$champs['date'] = $d['d'];
 			}
 		}
@@ -183,7 +183,7 @@ function revisions_sites ($id_syndic, $c=false) {
 	// de la rubrique actuelle
 	if ($id_parent = intval(_request('id_parent', $c))
 	AND $id_parent != $id_rubrique
-	AND (spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_rubrique=$id_parent")))) {
+	AND (spip_abstract_fetch(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_rubrique=$id_parent")))) {
 		$champs['id_rubrique'] = $id_parent;
 
 		// si le site est publie
@@ -236,12 +236,12 @@ function revisions_sites ($id_syndic, $c=false) {
 	if (isset($champs['id_rubrique'])) {
 		propager_les_secteurs();
 
-		$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_syndic WHERE id_syndic=$id_syndic"));
+		$row = spip_abstract_fetch(spip_query("SELECT lang, langue_choisie FROM spip_syndic WHERE id_syndic=$id_syndic"));
 		$langue_old = $row['lang'];
 		$langue_choisie_old = $row['langue_choisie'];
 
 		if ($langue_choisie_old != "oui") {
-			$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+			$row = spip_abstract_fetch(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 			$langue_new = $row['lang'];
 			if ($langue_new != $langue_old)
 				spip_query("UPDATE spip_syndic SET lang = '$langue_new' WHERE id_syndic = $id_syndic");

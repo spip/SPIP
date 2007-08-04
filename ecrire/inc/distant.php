@@ -44,7 +44,7 @@ function copie_locale($source, $mode='auto') {
 			ecrire_fichier(_DIR_RACINE.$local, $contenu);
 
 			// signaler au moteur de recherche qu'il peut reindexer ce doc
-			$id_document = spip_fetch_array(spip_query("SELECT id_document FROM spip_documents WHERE fichier=" . _q($source)));
+			$id_document = spip_abstract_fetch(spip_query("SELECT id_document FROM spip_documents WHERE fichier=" . _q($source)));
 			$id_document = $id_document['id_document'];
 			if ($id_document) {
 				include_spip('inc/indexation');
@@ -284,7 +284,7 @@ function fichier_copie_locale($source) {
 
 	// Chercher d'abord le doc dans la table des documents, pour se baser sur son type reel
 	$s = spip_query("SELECT extension FROM spip_documents WHERE fichier=" . _q($source) . " AND distant='oui' AND extension>''");
-	if ($t = spip_fetch_array($s)) {
+	if ($t = spip_abstract_fetch($s)) {
 		$extension = $t['extension'];
 
 
@@ -297,7 +297,7 @@ function fichier_copie_locale($source) {
 		($path_parts = pathinfo($source) AND $ext = $path_parts['extension'])
 		) {
 			// verifier que c'est un type autorise
-			$t = spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE extension="._q($ext)));
+			$t = spip_abstract_fetch(spip_query("SELECT extension FROM spip_types_documents WHERE extension="._q($ext)));
 			if ($t)
 				$extension = $t['extension'];
 		}
@@ -338,19 +338,19 @@ function recuperer_infos_distantes($source, $max=0) {
 		$t = null;
 		if (($mime_type == 'text/plain' OR $mime_type == '')
 		AND preg_match(',\.([a-z0-9]+)(\?.*)?$,', $source, $rext)) {
-			$t = spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE extension=" . _q($rext[1])));
+			$t = spip_abstract_fetch(spip_query("SELECT extension FROM spip_types_documents WHERE extension=" . _q($rext[1])));
 		}
 
 		// Autre mime/type (ou text/plain avec fichier d'extension inconnue)
 		if (!$t)
-			$t = spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE mime_type=" . _q($mime_type)));
+			$t = spip_abstract_fetch(spip_query("SELECT extension FROM spip_types_documents WHERE mime_type=" . _q($mime_type)));
 
 		// Toujours rien ? (ex: audio/x-ogg au lieu de application/ogg)
 		// On essaie de nouveau avec l'extension
 		if (!$t
 		AND $mime_type != 'text/plain'
 		AND preg_match(',\.([a-z0-9]+)(\?.*)?$,', $source, $rext)) {
-			$t = spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE extension=" . _q($rext[1])));
+			$t = spip_abstract_fetch(spip_query("SELECT extension FROM spip_types_documents WHERE extension=" . _q($rext[1])));
 		}
 
 
@@ -360,7 +360,7 @@ function recuperer_infos_distantes($source, $max=0) {
 		} else {
 			# par defaut on retombe sur '.bin' si c'est autorise
 			spip_log("mime-type $mime_type inconnu");
-			$t = spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE extension='bin'"));
+			$t = spip_abstract_fetch(spip_query("SELECT extension FROM spip_types_documents WHERE extension='bin'"));
 			if (!$t) return false;
 			$a['extension'] = $t['extension'];
 		}

@@ -46,7 +46,7 @@ function calculer_popularites() {
 	spip_query("UPDATE spip_articles SET maj=maj, popularite = popularite * $a");
 
 	// enregistrer les metas...
-	$row = spip_fetch_array(spip_query("SELECT MAX(popularite) AS max, SUM(popularite) AS tot FROM spip_articles"));
+	$row = spip_abstract_fetch(spip_query("SELECT MAX(popularite) AS max, SUM(popularite) AS tot FROM spip_articles"));
 	ecrire_meta("popularite_max", $row['max']);
 	ecrire_meta("popularite_total", $row['tot']);
 

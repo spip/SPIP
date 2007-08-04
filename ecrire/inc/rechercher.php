@@ -131,7 +131,7 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array()) {
 		 implode(" ",$requete['GROUPBY']),$requete['ORDERBY'],$requete['LIMIT'],'',
 		  $requete['HAVING']);
 
-		while ($t = spip_fetch_array($s)) {
+		while ($t = spip_abstract_fetch($s)) {
 			$id = intval($t[$_id_table]);
 			if ($options['toutvoir']
 			OR autoriser('voir', $table, $id)) {

@@ -43,7 +43,7 @@ function inc_signatures_dist($script, $id, $debut, $where, $order, $limit='') {
 
 	$res .= '<br />';
 
- 	while($row=spip_fetch_array($request)){
+ 	while($row=spip_abstract_fetch($request)){
 		$res .= '<br />' . signatures_edit($script, $id, $debut, $row);
 	}
 	return $res;
@@ -105,7 +105,7 @@ function signatures_edit($script, $id, $debut, $row) {
 		$res .= '<br />' . message_de_signature($row);
 		
 		if (!$id) {
-			$r = spip_fetch_array(spip_query("SELECT titre, statut FROM spip_articles WHERE id_article=$id_article"));
+			$r = spip_abstract_fetch(spip_query("SELECT titre, statut FROM spip_articles WHERE id_article=$id_article"));
 
 			$res .= "<span class='arial1' style='float: $spip_lang_right; color: black; padding-$spip_lang_left: 4px;'><b>"
 			. _T('info_numero_abbreviation')

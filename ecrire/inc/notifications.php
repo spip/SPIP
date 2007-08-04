@@ -63,7 +63,7 @@ function extrait_article($row) {
 	$les_auteurs = "";
 	$result_auteurs = spip_query("SELECT nom FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article=$id_article AND auteurs.id_auteur=lien.id_auteur");
 
-	while ($row = spip_fetch_array($result_auteurs)) {
+	while ($row = spip_abstract_fetch($result_auteurs)) {
 		if ($les_auteurs) $les_auteurs .= ', ';
 		$les_auteurs .= trim(supprimer_tags(typo($row['nom'])));
 	}
@@ -85,7 +85,7 @@ function notifier_publication_article($id_article) {
 	if ($suivi_edito == "oui") {
 		$result = spip_query("SELECT * FROM spip_articles WHERE id_article = $id_article");
 
-		if ($row = spip_fetch_array($result)) {
+		if ($row = spip_abstract_fetch($result)) {
 
 			$l = lang_select($row['lang']);
 
@@ -119,7 +119,7 @@ function notifier_proposition_article($id_article) {
 	$suivi_edito = $GLOBALS['meta']["suivi_edito"];
 
 	if ($suivi_edito == "oui") {
-		$row = spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article = $id_article"));
+		$row = spip_abstract_fetch(spip_query("SELECT * FROM spip_articles WHERE id_article = $id_article"));
 		if ($row) {
 
 			if ($l = $row['lang']) $l = lang_select($l);
@@ -150,7 +150,7 @@ function notifier_proposition_article($id_article) {
 function email_notification_forum ($t, $email) {
 
 	// Rechercher eventuellement la langue du destinataire
-	if ($l = spip_fetch_array(spip_query("SELECT lang FROM spip_auteurs WHERE email=" . _q($email))))
+	if ($l = spip_abstract_fetch(spip_query("SELECT lang FROM spip_auteurs WHERE email=" . _q($email))))
 		$l = lang_select($l['lang']);
 
 
@@ -188,11 +188,11 @@ function email_notification_forum ($t, $email) {
 	}
 
 	if ($t['id_article']) {
-		$article = spip_fetch_array(spip_query("SELECT titre FROM spip_articles WHERE id_article="._q($t['id_article'])));
+		$article = spip_abstract_fetch(spip_query("SELECT titre FROM spip_articles WHERE id_article="._q($t['id_article'])));
 		$titre = textebrut(typo($article['titre']));
 	}
 	if ($t['id_message']) {
-		$message = spip_fetch_array(spip_query("SELECT titre FROM spip_messages WHERE id_message="._q($t['id_message'])));
+		$message = spip_abstract_fetch(spip_query("SELECT titre FROM spip_messages WHERE id_message="._q($t['id_message'])));
 		$titre = textebrut(typo($message['titre']));
 	}
 
@@ -234,7 +234,7 @@ function email_notification_forum ($t, $email) {
 // http://doc.spip.org/@notifications_forumvalide_dist
 function notifications_forumvalide_dist($quoi, $id_forum) {
 	$s = spip_query("SELECT * FROM spip_forum WHERE id_forum="._q($id_forum));
-	if (!$t = spip_fetch_array($s))
+	if (!$t = spip_abstract_fetch($s))
 		return;
 
 	// forum sur un message prive : pas de notification ici (cron)
@@ -257,7 +257,7 @@ function notifications_forumvalide_dist($quoi, $id_forum) {
 	AND $GLOBALS['meta']['prevenir_auteurs'] == 'oui') {
 		$result = spip_query("SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article="._q($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
 
-		while ($qui = spip_fetch_array($result)) {
+		while ($qui = spip_abstract_fetch($result)) {
 			if (!autoriser('modererforum', 'article', $t['id_article'], $qui['id_auteur']))
 				$tous[] = $qui['email'];
 			else
@@ -291,7 +291,7 @@ function notifications_forumvalide_dist($quoi, $id_forum) {
 // http://doc.spip.org/@notifications_forumposte_dist
 function notifications_forumposte_dist($quoi, $id_forum) {
 	$s = spip_query("SELECT * FROM spip_forum WHERE id_forum="._q($id_forum));
-	if (!$t = spip_fetch_array($s))
+	if (!$t = spip_abstract_fetch($s))
 		return;
 
 	include_spip('inc/texte');
@@ -310,7 +310,7 @@ function notifications_forumposte_dist($quoi, $id_forum) {
 	AND $GLOBALS['meta']['prevenir_auteurs'] == 'oui') {
 		$result = spip_query("SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article="._q($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
 
-		while ($qui = spip_fetch_array($result)) {
+		while ($qui = spip_abstract_fetch($result)) {
 			if (autoriser('modererforum', 'article', $t['id_article'], $qui['id_auteur']))
 				$tous[] = $qui['email'];
 		}

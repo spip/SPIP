@@ -218,7 +218,7 @@ function calculer_threads() {
 		$discussion = "0";
 		$precedent = 0;
 		$r = spip_query("SELECT fille.id_forum AS id,	maman.id_thread AS thread	FROM spip_forum AS fille, spip_forum AS maman	WHERE fille.id_parent = maman.id_forum AND fille.id_thread <> maman.id_thread	ORDER BY thread");
-		while ($row = spip_fetch_array($r)) {
+		while ($row = spip_abstract_fetch($r)) {
 			if ($row['thread'] == $precedent)
 				$discussion .= "," . $row['id'];
 			else {
@@ -238,7 +238,7 @@ function racine_forum($id_forum){
 	if (!$id_forum = intval($id_forum)) return;
 	$result = spip_query("SELECT id_parent, id_rubrique, id_article, id_breve, id_syndic, id_message, id_thread FROM spip_forum WHERE id_forum=".$id_forum);
 
-	if (!$row = spip_fetch_array($result))
+	if (!$row = spip_abstract_fetch($result))
 		return false;
 
 	if ($row['id_parent']
@@ -267,7 +267,7 @@ function racine_forum($id_forum){
 function parent_forum($id_forum) {
 	if (!$id_forum = intval($id_forum)) return;
 	$result = spip_query("SELECT id_parent, id_rubrique, id_article, id_breve, id_syndic FROM spip_forum WHERE id_forum=".$id_forum);
-	if($row = spip_fetch_array($result)){
+	if($row = spip_abstract_fetch($result)){
 		if($row['id_parent']) return array('forum', $row['id_parent']);
 		if($row['id_rubrique']) return array('rubrique', $row['id_rubrique']);
 		if($row['id_article']) return array('article', $row['id_article']);
@@ -306,7 +306,7 @@ function conserver_original($id_forum) {
 		return ''; // pas d'erreur
 
 	// recopier le forum
-	$t = spip_fetch_array(spip_query("SELECT * FROM spip_forum WHERE id_forum="._q($id_forum)));
+	$t = spip_abstract_fetch(spip_query("SELECT * FROM spip_forum WHERE id_forum="._q($id_forum)));
 
 	if ($t) {
 		unset($t['id_forum']);

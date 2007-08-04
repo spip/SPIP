@@ -466,7 +466,7 @@ function indexer_elements_associes($table, $id_objet, $table_associe, $valeur, $
 				$select.=',assoc.' . $quoi;
 			$r = spip_query("SELECT $select FROM $table_associe AS assoc,	spip_$table_rel AS lien	WHERE lien.$col_id=$id_objet AND assoc.$col_id_as=lien.$col_id_as");
 
-			while ($row = spip_fetch_array($r)) {
+			while ($row = spip_abstract_fetch($r)) {
 				indexer_les_champs($row,$INDEX_elements_associes[$table_associe],$valeur);
 			}
 		}
@@ -502,7 +502,7 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 
 	$result = spip_query("SELECT * FROM $table WHERE $col_id=$id_objet");
 
-	$row = spip_fetch_array($result);
+	$row = spip_abstract_fetch($result);
 
 	if (!$row) return;
 
@@ -524,7 +524,7 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 			while ($row['id_parent']) {
 				$id_forum = $row['id_parent'];
 				$s = spip_query("SELECT id_forum,id_parent FROM spip_forum WHERE id_forum=$id_forum");
-				$row = spip_fetch_array($s);
+				$row = spip_abstract_fetch($s);
 			}
 
 			// 2. chercher tous les forums du thread
@@ -535,7 +535,7 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 			while (!$fini) {
 				$s = spip_query("SELECT id_forum FROM spip_forum WHERE id_parent IN ($thread) AND id_forum NOT IN ($thread) AND statut='publie'");
 				if (spip_num_rows($s) == 0) $fini = true;
-				while ($t = spip_fetch_array($s))
+				while ($t = spip_abstract_fetch($s))
 					$thread.=','.$t['id_forum'];
 			}
 
@@ -545,7 +545,7 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 
 			// 4. Indexer le thread
 			$s = spip_query("SELECT * FROM spip_forum WHERE id_forum IN ($thread) AND idx!='non'");
-			while ($row = spip_fetch_array($s)) {
+			while ($row = spip_abstract_fetch($s)) {
 		    indexer_les_champs($row,$INDEX_elements_objet[$table],1,$min_long);
 		    if (isset($INDEX_objet_associes[$table]))
 		      foreach($INDEX_objet_associes[$table] as $quoi=>$poids)
@@ -569,7 +569,7 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 				if (($row['syndication'] = "oui")&&(isset($INDEX_elements_objet['syndic_articles']))) {
 					$result_syndic = spip_query("SELECT titre FROM spip_syndic_articles WHERE id_syndic=$id_objet AND statut='publie' ORDER BY date DESC LIMIT 100");
 
-					while ($row_syndic = spip_fetch_array($result_syndic)) {
+					while ($row_syndic = spip_abstract_fetch($result_syndic)) {
 		    		indexer_les_champs($row,$INDEX_elements_objet['syndic_articles'],1,$min_long);
 					}
 				}
@@ -666,7 +666,7 @@ function effectuer_une_indexation($nombre_indexations = 1) {
 		// l'indexation a precedemment echoue, p. ex. a cause d'un timeout)
 		foreach (array('1', '', 'idx') as $mode) {
 			$s = spip_query("SELECT $table_primary AS id FROM $table WHERE idx='$mode' AND $critere LIMIT $limit");
-			while ($t = spip_fetch_array($s)) {
+			while ($t = spip_abstract_fetch($s)) {
 				$vu[$table] .= $t['id'].", ";
 				indexer_objet($table, $t['id'], $mode);
 			}
@@ -679,7 +679,7 @@ function effectuer_une_indexation($nombre_indexations = 1) {
 // http://doc.spip.org/@executer_une_indexation_syndic
 function executer_une_indexation_syndic() {
 	$id_syndic = 0;
-	$row = spip_fetch_array(spip_query("SELECT id_syndic FROM spip_syndic WHERE statut='publie' AND date_index < DATE_SUB(NOW(), INTERVAL 7 DAY) ORDER BY date_index LIMIT 1"));
+	$row = spip_abstract_fetch(spip_query("SELECT id_syndic FROM spip_syndic WHERE statut='publie' AND date_index < DATE_SUB(NOW(), INTERVAL 7 DAY) ORDER BY date_index LIMIT 1"));
 	if ($row) {
 		$id_syndic = $row['id_syndic'];
 		spip_query("UPDATE spip_syndic SET date_index=NOW() WHERE id_syndic=$id_syndic");
@@ -752,7 +752,7 @@ function requete_hash ($rech) {
 	// Attention en MySQL 3.x il faut passer par HEX(hash)
 	// alors qu'en MySQL 4.1 c'est interdit !
 	$vers = spip_query("SELECT VERSION() AS v");
-	$vers = spip_fetch_array($vers);
+	$vers = spip_abstract_fetch($vers);
 	if (($vers['v']{0} == 4 AND $vers['v']{2} >= 1)
 		OR $vers['v']{0} > 4) {
 		$hex_fmt = '';
@@ -769,7 +769,7 @@ function requete_hash ($rech) {
 	if ($cond) {	
 		$result2 = spip_query("SELECT $select_hash FROM spip_index_dico WHERE ".$cond);
 
-		while ($row2 = spip_fetch_array($result2))
+		while ($row2 = spip_abstract_fetch($result2))
 			$h_strict[] = $hex_fmt.$row2['h'];
 	}
 
@@ -778,7 +778,7 @@ function requete_hash ($rech) {
 	if ($cond) {	
 		$result2 = spip_query("SELECT $select_hash FROM spip_index_dico WHERE ".$cond);
 
-		while ($row2 = spip_fetch_array($result2))
+		while ($row2 = spip_abstract_fetch($result2))
 			$h_strict_and[] = $hex_fmt.$row2['h'];
 		
 	}
@@ -788,7 +788,7 @@ function requete_hash ($rech) {
 	if ($cond) {	
 		$result2 = spip_query("SELECT $select_hash FROM spip_index_dico WHERE ".$cond);
 
-		while ($row2 = spip_fetch_array($result2))
+		while ($row2 = spip_abstract_fetch($result2))
 			$h[] = $hex_fmt.$row2['h'];
 	}
 	
@@ -798,7 +798,7 @@ function requete_hash ($rech) {
 	if ($cond) {	
 		$result2 = spip_query("SELECT $select_hash,dico FROM spip_index_dico WHERE ".$cond);
 
-		while ($row2 = spip_fetch_array($result2)) {
+		while ($row2 = spip_abstract_fetch($result2)) {
 			//store the condition that selected the hash (the word typed by the user)  
 			foreach($dico["AND"] as $key=>$val) {
 				$mot_and = substr($key,1);
@@ -819,7 +819,7 @@ function requete_hash ($rech) {
 	if ($cond) {	
 		$result2 = spip_query("SELECT $select_hash FROM spip_index_dico WHERE ".$cond);
 
-		while ($row2 = spip_fetch_array($result2))
+		while ($row2 = spip_abstract_fetch($result2))
 			$h_not[] = $hex_fmt.$row2['h'];
 	}
 	
@@ -914,12 +914,12 @@ function prepare_recherche($recherche, $primary = 'id_article', $id_table='artic
 			$s = spip_query("SELECT id_objet as id,COUNT(DISTINCT $count_groupes) as count_groupes FROM spip_index WHERE id_table=$index_id_table AND hash IN ($list_hashes) GROUP BY id HAVING count_groupes=".count($hash_recherche_and));
 			//if no ids are found, pass at least id = 0 in order to exclude any result
 			$objet_and[] = 0;
-			while ($r = spip_fetch_array($s)) 
+			while ($r = spip_abstract_fetch($s)) 
 				$objet_and[]=$r['id'];
 		}
 		if($hash_recherche_not) {
 			$s = spip_query("SELECT DISTINCT id_objet as id FROM spip_index WHERE hash IN ($hash_recherche_not) AND id_table=$index_id_table");
-			while ($r = spip_fetch_array($s))
+			while ($r = spip_abstract_fetch($s))
 				$objet_not[]=$r['id'];														
 		}
 		if(count($objet_and))
@@ -935,7 +935,7 @@ function prepare_recherche($recherche, $primary = 'id_article', $id_table='artic
 			
 			$s = spip_query($query);
 				
-			while ($r = spip_fetch_array($s))
+			while ($r = spip_abstract_fetch($s))
 				$points[$r['id']]
 				+= (1 + $strict[$r['hash']]) * $r['points'];
 			spip_abstract_free($s);

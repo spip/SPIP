@@ -121,7 +121,7 @@ function liste_drapeau_edition ($id_auteur, $type = 'article') {
 	{
 		if (isset($auteurs[$id_auteur])
 		AND (array_pop($auteurs[$id_auteur]) > time()-3600)) {
-			$row = spip_fetch_array(spip_query(
+			$row = spip_abstract_fetch(spip_query(
 			"SELECT titre, statut FROM spip_articles WHERE id_article=".$id
 			));
 			$articles_ouverts[] = array(

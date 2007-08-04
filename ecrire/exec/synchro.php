@@ -108,7 +108,7 @@ function exec_synchro_dist()
 	if (spip_num_rows($result) > 0) {
 		echo "\n<ul>";
 
-		while($row=spip_fetch_array($result)){
+		while($row=spip_abstract_fetch($result)){
 			$id_rubrique=$row['id_rubrique'];
 			$titre_rubrique = typo($row['titre']);
 			$titre = htmlspecialchars($titre_rubrique);

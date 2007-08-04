@@ -87,7 +87,7 @@ function action_editer_message_post_choisir($id_message) {
 		$query = spip_query("SELECT id_auteur, nom FROM spip_auteurs WHERE messagerie<>'non' AND id_auteur<>'$connect_id_auteur' AND pass<>'' AND login<>''");
 		$table_auteurs = array();
 		$table_ids = array();
-		while ($row = spip_fetch_array($query)) {
+		while ($row = spip_abstract_fetch($query)) {
 			$table_auteurs[] = $row['nom'];
 			$table_ids[] = $row['id_auteur'];
 		}

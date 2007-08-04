@@ -22,7 +22,7 @@ function exec_puce_statut_dist()
 
 	if ($type == 'article') {
 		$s = spip_query("SELECT id_rubrique,statut FROM spip_articles WHERE id_article=$id");
-		$r = spip_fetch_array($s);
+		$r = spip_abstract_fetch($s);
 		$statut = $r['statut'];
 		$id_rubrique = $r['id_rubrique'];
 	} else {

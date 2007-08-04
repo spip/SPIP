@@ -60,7 +60,7 @@ function forum_envoi(
 	if (!$titre_message) {
 		if ($table) {
 			$q = spip_query("SELECT $titre AS titre FROM spip_$table WHERE $objet=$id");
-			$q = spip_fetch_array($q);
+			$q = spip_abstract_fetch($q);
 			$titre_message = $q['titre'];
 		} else 	$titre_message = _T('texte_nouveau_message');
 	}
@@ -78,7 +78,7 @@ function forum_envoi(
 function forum_envoi_parent($id)
 {
 	$r = spip_query("SELECT * FROM spip_forum WHERE id_forum=" . _q($id));
-	if (!$row = spip_fetch_array($r))
+	if (!$row = spip_abstract_fetch($r))
 		return array('titre' =>'', 'texte' =>'', 'id_message' =>'');
 
 	$titre = typo($row['titre']);

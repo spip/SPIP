@@ -113,7 +113,7 @@ function affiche_mots_ressemblant($cherche_mot, $objet, $id_objet, $resultat, $t
 	$result = spip_query("SELECT * FROM spip_mots WHERE id_mot IN ($les_mots) ORDER BY titre LIMIT 17");
 
 	$res ="<ul>\n";
-	while ($row = spip_fetch_array($result)) {
+	while ($row = spip_abstract_fetch($result)) {
 		$id_mot = $row['id_mot'];
 		$titre_mot = $row['titre'];
 		$type_mot = typo($row['type']);

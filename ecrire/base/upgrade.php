@@ -50,7 +50,7 @@ function upgrade_vers($version, $version_installee, $version_cible = 0){
 // http://doc.spip.org/@convertir_un_champ_blob_en_text
 function convertir_un_champ_blob_en_text($table,$champ,$type){
 	$res = spip_query("SHOW FULL COLUMNS FROM $table LIKE '$champ'");
-	if ($row = spip_fetch_array($res)){
+	if ($row = spip_abstract_fetch($res)){
 		if (strtolower($row['Type'])!=strtolower($type)) {
 			$default = $row2['Default']?(" DEFAULT "._q($row2['Default'])):"";
 			$notnull = ($row2['Null']=='YES')?"":" NOT NULL";
@@ -71,7 +71,7 @@ function maj_base($version_cible = 0) {
 
 	$version_installee = 0.0;
 	$result = spip_query("SELECT valeur FROM spip_meta WHERE nom='version_installee'");
-	if ($result) if ($row = spip_fetch_array($result)) $version_installee = (double) $row['valeur'];
+	if ($result) if ($row = spip_abstract_fetch($result)) $version_installee = (double) $row['valeur'];
 
 	//
 	// Si pas de version mentionnee dans spip_meta, c'est qu'il s'agit
@@ -139,13 +139,13 @@ function maj_base($version_cible = 0) {
 	
 		$result = spip_query("SELECT DISTINCT id_article FROM spip_forum WHERE id_article!=0 AND id_parent=0");
 
-		while ($row = spip_fetch_array($result)) {
+		while ($row = spip_abstract_fetch($result)) {
 			unset($forums_article);
 			$id_article = $row['id_article'];
 			$result2 = spip_query("SELECT id_forum FROM spip_forum WHERE id_article=$id_article");
 			for (;;) {
 				unset($forums);
-				while ($row2 = spip_fetch_array($result2)) $forums[] = $row2['id_forum'];
+				while ($row2 = spip_abstract_fetch($result2)) $forums[] = $row2['id_forum'];
 				if (!$forums) break;
 				$forums = join(',', $forums);
 				$forums_article[] = $forums;
@@ -157,13 +157,13 @@ function maj_base($version_cible = 0) {
 	
 		$result = spip_query("SELECT DISTINCT id_breve FROM spip_forum WHERE id_breve!=0 AND id_parent=0");
 
-		while ($row = spip_fetch_array($result)) {
+		while ($row = spip_abstract_fetch($result)) {
 			unset($forums_breve);
 			$id_breve = $row['id_breve'];
 			$result2 = spip_query("SELECT id_forum FROM spip_forum WHERE id_breve=$id_breve");
 			for (;;) {
 				unset($forums);
-				while ($row2 = spip_fetch_array($result2)) $forums[] = $row2['id_forum'];
+				while ($row2 = spip_abstract_fetch($result2)) $forums[] = $row2['id_forum'];
 				if (!$forums) break;
 				$forums = join(',', $forums);
 				$forums_breve[] = $forums;
@@ -175,14 +175,14 @@ function maj_base($version_cible = 0) {
 	
 		$result = spip_query("SELECT DISTINCT id_rubrique FROM spip_forum WHERE id_rubrique!=0 AND id_parent=0");
 
-		while ($row = spip_fetch_array($result)) {
+		while ($row = spip_abstract_fetch($result)) {
 			unset($forums_rubrique);
 			$id_rubrique = $row['id_rubrique'];
 			$result2 = spip_query("SELECT id_forum FROM spip_forum WHERE id_rubrique=$id_rubrique");
 			for (;;) {
 
 				unset($forums);
-				while ($row2 = spip_fetch_array($result2)) $forums[] = $row2['id_forum'];
+				while ($row2 = spip_abstract_fetch($result2)) $forums[] = $row2['id_forum'];
 				if (!$forums) break;
 				$forums = join(',', $forums);
 				$forums_rubrique[] = $forums;
@@ -206,7 +206,7 @@ function maj_base($version_cible = 0) {
 		spip_query("ALTER TABLE spip_auteurs ADD htpass tinyblob NOT NULL");
 		$result = spip_query("SELECT id_auteur, pass FROM spip_auteurs WHERE pass!=''");
 
-		while ($r= spip_fetch_array($result)) {
+		while ($r= spip_abstract_fetch($result)) {
 			$htpass = generer_htpass($r['pass']);
 			$pass = md5($pass);
 			spip_query("UPDATE spip_auteurs SET pass='$pass', htpass='$htpass' WHERE id_auteur=" . $r['id_auteur']);
@@ -275,7 +275,7 @@ function maj_base($version_cible = 0) {
 		spip_query("ALTER TABLE spip_messages ADD id_auteur bigint(21) NOT NULL");
 		spip_query("ALTER TABLE spip_messages ADD INDEX id_auteur (id_auteur)");
 		$result = spip_query("SELECT id_auteur, id_message FROM spip_auteurs_messages WHERE statut='de'");
-		while ($row = spip_fetch_array($result)) {
+		while ($row = spip_abstract_fetch($result)) {
 			$id_auteur = $row['id_auteur'];
 			$id_message = $row['id_message'];
 			spip_query("UPDATE spip_messages SET id_auteur=$id_auteur WHERE id_message=$id_message");
@@ -358,7 +358,7 @@ function maj_base($version_cible = 0) {
 		spip_query("UPDATE spip_mots SET type='Mots sans groupe...' WHERE type=''");
 
 		$result = spip_query("SELECT * FROM spip_mots GROUP BY type");
-		while($row = spip_fetch_array($result)) {
+		while($row = spip_abstract_fetch($result)) {
 				$type = addslashes($row['type']);
 				// Old style, doit echouer
 				spip_log('ne pas tenir compte de l erreur spip_groupes_mots ci-dessous:', 'mysql');
@@ -374,7 +374,7 @@ function maj_base($version_cible = 0) {
 		spip_query("ALTER TABLE spip_mots ADD id_groupe bigint(21) NOT NULL");
 	
 		$result = spip_query("SELECT * FROM spip_groupes_mots");
-		while($row = spip_fetch_array($result)) {
+		while($row = spip_abstract_fetch($result)) {
 				$id_groupe = addslashes($row['id_groupe']);
 				$type = addslashes($row['titre']);
 				spip_query("UPDATE spip_mots SET id_groupe = '$id_groupe' WHERE type='$type'");
@@ -389,7 +389,7 @@ function maj_base($version_cible = 0) {
 
 		$types = array('jpg' => 1, 'png' => 2, 'gif' => 3);
 
-		while ($row = @spip_fetch_array($result)) {
+		while ($row = @spip_abstract_fetch($result)) {
 			$id_article = $row['id_article'];
 			$images = $row['images'];
 			$images = explode(",", $images);
@@ -454,7 +454,7 @@ function maj_base($version_cible = 0) {
 	if (upgrade_vers(1.418, $version_installee, $version_cible)) {
 		$result = spip_query("SELECT * FROM spip_auteurs WHERE statut = '0minirezo' AND email != '' ORDER BY id_auteur LIMIT 1");
 
-		if ($webmaster = spip_fetch_array($result)) {
+		if ($webmaster = spip_abstract_fetch($result)) {
 			ecrire_meta('email_webmaster', $webmaster['email']);
 			ecrire_metas();
 		}
@@ -556,7 +556,7 @@ function maj_base($version_cible = 0) {
 
 	if (upgrade_vers(1.459, $version_installee, $version_cible)) {
 		$result = spip_query("SELECT type FROM spip_mots GROUP BY type");
-		while ($row = spip_fetch_array($result)) {
+		while ($row = spip_abstract_fetch($result)) {
 			$type = addslashes($row['type']);
 			$res = spip_query("SELECT * FROM spip_groupes_mots WHERE titre='$type'");
 			if (spip_num_rows($res) == 0) {
@@ -574,7 +574,7 @@ function maj_base($version_cible = 0) {
 		// dans la precedente version du paragraphe de maj 1.459
 		// et supprimer ceux-ci
 		$result = spip_query("SELECT * FROM spip_groupes_mots ORDER BY id_groupe");
-		while ($row = spip_fetch_array($result)) {
+		while ($row = spip_abstract_fetch($result)) {
 			$titre = addslashes($row['titre']);
 			if (! $vu[$titre] ) {
 				$vu[$titre] = true;
@@ -601,7 +601,7 @@ function maj_base($version_cible = 0) {
 	// l'upgrade < 1.462 ci-dessus etait fausse, d'ou correctif
 	if (upgrade_vers(1.464, $version_installee, $version_cible) AND ($version_installee >= 1.462)) {
 		$res = spip_query("SELECT id_type, extension FROM spip_types_documents WHERE id_type NOT IN (1,2,3)");
-		while ($row = spip_fetch_array($res)) {
+		while ($row = spip_abstract_fetch($res)) {
 			$extension = $row['extension'];
 			$id_type = $row['id_type'];
 			spip_query("UPDATE spip_documents SET id_type=$id_type	WHERE fichier like '%.$extension'");
@@ -685,7 +685,7 @@ function maj_base($version_cible = 0) {
 	if (upgrade_vers(1.604, $version_installee, $version_cible)) {
 		spip_query("ALTER TABLE spip_auteurs ADD lang VARCHAR(10) DEFAULT '' NOT NULL");
 		$u = spip_query("SELECT * FROM spip_auteurs WHERE prefs LIKE '%spip_lang%'");
-		while ($row = spip_fetch_array($u)) {
+		while ($row = spip_abstract_fetch($u)) {
 			$prefs = unserialize($row['prefs']);
 			$l = $prefs['spip_lang'];
 			unset ($prefs['spip_lang']);
@@ -1297,7 +1297,7 @@ function maj_base($version_cible = 0) {
 		/* deplacement des upload */
 		$auteurs = array();
 		$req = spip_query("SELECT login FROM spip_auteurs WHERE statut = '0minirezo'");
-		while($row = spip_fetch_array($req))
+		while($row = spip_abstract_fetch($req))
 			$auteurs[] = $row['login']; 
 		$f_upload = preg_files('upload', -1, 10000, $auteurs);
 		$repertoire = _DIR_TRANSFERT;
@@ -1374,7 +1374,7 @@ function maj_base($version_cible = 0) {
 			$table_objet = "$type"."s";
 			$chapo = $type=='article' ? ",a.chapo":"";
 			$res = spip_query("SELECT a.$id_table_objet,a.texte $chapo FROM spip_documents_$table_objet AS d JOIN spip_$table_objet AS a ON a.$id_table_objet=d.$id_table_objet GROUP BY $id_table_objet");
-			while ($row = spip_fetch_array($res)){
+			while ($row = spip_abstract_fetch($res)){
 				$GLOBALS['doublons_documents_inclus'] = array();
 				traiter_modeles(($chapo?$row['chapo']:"").$row['texte'],true); // detecter les doublons
 				if (count($GLOBALS['doublons_documents_inclus'])){
@@ -1416,7 +1416,7 @@ function maj_base($version_cible = 0) {
 		spip_query("ALTER TABLE spip_documents ADD extension VARCHAR(10) NOT NULL DEFAULT ''");
 		spip_query("ALTER TABLE spip_documents ADD INDEX extension (extension)");
 		$s = spip_query("SELECT id_type,extension FROM spip_types_documents");
-		while ($t = spip_fetch_array($s)) {
+		while ($t = spip_abstract_fetch($s)) {
 			spip_query("UPDATE spip_documents
 				SET extension="._q($t['extension'])
 				." WHERE id_type="._q($t['id_type']));

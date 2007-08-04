@@ -35,10 +35,10 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	// retour d'Ajax
 	if ($id_document) {
 		$res = spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document));
-		$document = spip_fetch_array($res);
+		$document = spip_abstract_fetch($res);
 		$document['vu'] = 'non';
 		$res = spip_query("SELECT vu FROM spip_documents_".$type."s WHERE id_$type=$id AND id_document=".intval($id_document));
-		if ($row = spip_fetch_array($res))
+		if ($row = spip_abstract_fetch($res))
 			$document['vu'] = $row['vu'];
 		$flag = 'ajax';
 	}
