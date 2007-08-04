@@ -203,7 +203,7 @@ function build_while($debut, $table, $prim, $les_rubriques) {
 	$result = spip_query("SELECT * FROM $table LIMIT $debut," . _EXPORT_TRANCHES_LIMITE);
 
 	$string = '';
-	while ($row = spip_fetch_array($result,SPIP_ASSOC)) {
+	while ($row = spip_fetch_array($result)) {
 		if (export_select($row, $les_rubriques)) {
 			$attributs = "";
 			if ($chercher_logo) {
@@ -215,7 +215,7 @@ function build_while($debut, $table, $prim, $les_rubriques) {
 
 			$string .= "<$table$attributs>\n";
 			foreach ($row as $k => $v) {
-				$string .= "<$k>" . text_to_xml($row[$k]) . "</$k>\n";
+				$string .= "<$k>" . text_to_xml($v) . "</$k>\n";
 			}
 			$string .= "</$table>\n\n";
 		}

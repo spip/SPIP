@@ -104,7 +104,7 @@ function convert_table_utf8($f, $table, $champ)
 	if ($table == 'spip_groupes_mots') $id_champ = 'id_groupe';
 
 	// lire les donnees dans un array
-	while ($t = spip_fetch_array($s, SPIP_ASSOC)) {
+	while ($t = spip_fetch_array($s)) {
 		$query = array();
 		$query_no_convert = '';
 		$query_extra = '';

@@ -64,6 +64,7 @@ function install_bases(){
 	// c'est dans le meme fichier
 	$finsert = 'spip_' . $server_db . '_insert';
 	$fquery = 'spip_' . $server_db . '_query';
+	$ffetch = 'spip_' . $server_db . '_fetch';
 	$fdb = 'spip_' . $server_db . '_selectdb';
 
 	$link = $fconnect($adresse_db, 0, $login_db, $pass_db);
@@ -93,7 +94,7 @@ function install_bases(){
 	} else {
 
 	  $r = $fquery ("SELECT valeur FROM spip_meta WHERE nom='version_installee'");
-	  if ($r) $r = spip_fetch_array($r);
+	  if ($r) $r = $ffetch($r);
 	  if ($r) $version_installee = (double) $r['valeur'];
 	  if (!$version_installee OR ($spip_version < $version_installee))
 		$fquery("UPDATE spip_meta SET valeur=$spip_version, impt='non'
