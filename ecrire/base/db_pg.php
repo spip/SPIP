@@ -84,14 +84,14 @@ function spip_pg_select($select, $from, $where,
 		$count = $limatch[3];
 	}
 
-	$q =  (!is_array($select) ? $select : join(", ", $select)) .
+	$q =  spip_pg_nocast($select) .
 	  (!$from ? '' :
 			("\nFROM " .
 			(!is_array($from) ? $from : spip_pg_select_as($from))))
 	  . (!$where ? '' : ("\nWHERE " . (!is_array($where) ? $where : (join("\n\tAND ", array_map('calculer_pg_where', $where))))))
-	  . ($groupby ? "\nGROUP BY $groupby" : '')
+	  . spip_pg_groupby($groupby, $from, $select)
 	  . (!$having ? '' : "\nHAVING " . (!is_array($having) ? $having : (join("\n\tAND ", array_map('calculer_where', $having)))))
-	  . ($orderby ? ("\nORDER BY " . spip_pg_order($orderby)) :'')
+	  . ($orderby ? ("\nORDER BY " . spip_pg_nocast($orderby)) :'')
 	  . (!$limit ? '' : (" LIMIT $count" . (!$offset ? '' : " OFFSET $offset")));
 		$q = " SELECT ". $q;
 
@@ -113,16 +113,26 @@ function spip_pg_select($select, $from, $where,
 	return $res;
 }
 
+// Conversion a l'arrach' des jointures MySQL en jointures PG
+// A refaire pour tirer parti des possibilites de PG et de MySQL5
+
+function spip_pg_groupby($groupby, $from, $select)
+{
+	$join = is_array($from) ? (count($from) > 1) : strpos($from, ",");
+	if ($join) $join = !is_array($select) ? $select : join(", ", $select);
+	if ($join) $groupby = $groupby ? "$groupby, $join" : $join;
+	return ($groupby ? "\nGROUP BY $groupby" : '');
+}
+
 // 0+x avec un champ x commencant par des chiffres est converti par MySQL
 // en le nombre qui commence x. PG ne sait pas faire, on elimine.
 // Comme SPIP utilise systematiquement 0+t,t on ne garde que le 2e.
 
-// http://doc.spip.org/@spip_pg_order
-function spip_pg_order($orderby)
+function spip_pg_nocast($arg)
 {
-	if (is_array($orderby)) $orderby = join(", ", $orderby);
-	$orderby = preg_replace('/0[+]([^, ]+)\s*,\s*\1\b/', '\1', $orderby);
-	return preg_replace('/0[+]([^, ]+\b)/', '\1', $orderby);
+	if (is_array($arg)) $arg = join(", ", $arg);
+	$arg = preg_replace('/\b0[+]([^, ]+)\s*,\s*\1\b/', '\1', $arg);
+	return preg_replace('/\b0[+]([^, ]+\b)/', '\1', $arg);
 }
 
 
