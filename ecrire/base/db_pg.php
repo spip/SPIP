@@ -84,6 +84,12 @@ function spip_pg_select($select, $from, $where,
 		$count = $limatch[3];
 	}
 
+	if ($having) {
+	  if (is_array($having))
+	    $having = join("\n\tAND ", array_map('calculer_pg_where', $having));
+	  spip_log("SPIP-PG ne sait pas traduire HAVING $having"); # a revoir
+	  $having ='';
+	}
 	$q =  spip_pg_nocast($select) .
 	  (!$from ? '' :
 			("\nFROM " .
@@ -122,8 +128,11 @@ function spip_pg_groupby($groupby, $from, $select)
 	$join = is_array($from) ? (count($from) > 1) : strpos($from, ",");
 	if ($join) $join = !is_array($select) ? $select : join(", ", $select);
 	if ($join) $groupby = $groupby ? "$groupby, $join" : $join;
+	if (!$groupby) return '';
+	$groupby = spip_pg_nocast($groupby);
 	$groupby = preg_replace('/\s+AS\s+\w+/','', $groupby);
-	return (!$groupby ? '' : ("\nGROUP BY " . spip_pg_nocast($groupby)));
+	$groupby = trim(preg_replace('/SUM\(\w+\)\s*,/','', $groupby));
+	return "\nGROUP BY $groupby"; 
 }
 
 // 0+x avec un champ x commencant par des chiffres est converti par MySQL
@@ -133,8 +142,11 @@ function spip_pg_groupby($groupby, $from, $select)
 function spip_pg_nocast($arg)
 {
 	if (is_array($arg)) $arg = join(", ", $arg);
-	$arg = preg_replace('/\b0[+]([^, ]+)\s*,\s*\1\b/', '\1', $arg);
-	return preg_replace('/\b0[+]([^, ]+\b)/', '\1', $arg);
+	$res = preg_replace('/FIELD[(]([^,]*)[^)]*[)]/','1',$arg);
+	$res = preg_replace('/\b0[+]([^, ]+)\s*,\s*\1\b/', '\1', $res);
+	if ($res != $arg)
+	  spip_log("SPIP-PG ne sait pas traduire $arg"); # a revoir
+	return preg_replace('/\b0[+]([^, ]+\b)/', '\1', $res);
 }
 
 
@@ -233,7 +245,7 @@ function spip_pg_update($table, $exp, $where='') {
 
 // http://doc.spip.org/@spip_pg_error
 function spip_pg_error() {
-	return pg_last_error();
+	return str_replace('ERROR', 'errcode: 1000 ', pg_last_error());
 }
 
 // http://doc.spip.org/@spip_pg_errno
