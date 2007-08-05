@@ -859,7 +859,10 @@ function trouver_champ($champ, $where)
   }
 }
 
-// deduction automatique des jointures 
+// deduction automatique d'une chaine de jointures 
+// Pour chaque cle de jointure il faut regarder si le type est numerique
+// car PG ne veut pas d'apostrophe
+
 // http://doc.spip.org/@calculer_jointure
 function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
 {
@@ -873,8 +876,10 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
   $cpt = &$num[$boucle->descr['nom']][$boucle->id_boucle];
   foreach($res as $r) {
     list($d, $a, $j) = $r;
+    if (!$id_table) $id_table = $d;
+    $type = $a[1]['field'][$j];
     $n = ++$cpt;
-    $boucle->join[$n]= array(($id_table ? $id_table : $d), $j);
+    $boucle->join[$n]= array("'$id_table'", test_sql_int($type) ? $j : "'$j'");
     $boucle->from[$id_table = "L$n"] = $a[0];    
   }
 
@@ -1119,15 +1124,18 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit)
 	if ($op == '=' OR in_array($op, $table_criteres_infixes)) {
 		list($nom, $desc) = trouver_def_table($boucles[$idb]->id_table, $boucles[$idb]);
 		$type = $desc['field'][$col];
-		if (strpos($val[0], '_q(') === 0
-		  AND (strpos($type, 'bigint') === 0
-		       OR strpos($type, 'int') === 0
-		       OR strpos($type, 'tinyint') === 0))
-
-		  $val[0] = 'intval' . substr($val[0],2);
+		if (strpos($val[0], '_q(') === 0 AND test_sql_int($type))
+			$val[0] = 'intval' . substr($val[0],2);
 	}
 
 	return array($fct, $col, $op, $val, $args_sql);
+}
+
+function test_sql_int($type)
+{
+	return (strpos($type, 'bigint') === 0
+	OR strpos($type, 'int') === 0
+	OR strpos($type, 'tinyint') === 0);
 }
 
 // compatibilite ancienne version

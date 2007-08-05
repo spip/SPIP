@@ -90,7 +90,7 @@ function spip_pg_select($select, $from, $where,
 			(!is_array($from) ? $from : spip_pg_select_as($from))))
 	  . (!$where ? '' : ("\nWHERE " . (!is_array($where) ? $where : (join("\n\tAND ", array_map('calculer_pg_where', $where))))))
 	  . spip_pg_groupby($groupby, $from, $select)
-	  . (!$having ? '' : "\nHAVING " . (!is_array($having) ? $having : (join("\n\tAND ", array_map('calculer_where', $having)))))
+	  . (!$having ? '' : "\nHAVING " . (!is_array($having) ? $having : (join("\n\tAND ", array_map('calculer_pg_where', $having)))))
 	  . ($orderby ? ("\nORDER BY " . spip_pg_nocast($orderby)) :'')
 	  . (!$limit ? '' : (" LIMIT $count" . (!$offset ? '' : " OFFSET $offset")));
 		$q = " SELECT ". $q;
@@ -100,6 +100,7 @@ function spip_pg_select($select, $from, $where,
 	// actuellement dans erreur_requete_boucle
 
 	if ($GLOBALS['var_mode'] == 'debug') {
+		include_spip('public/debug');
 		boucle_debug_resultat($id, '', $q);
 	}
 
@@ -121,7 +122,8 @@ function spip_pg_groupby($groupby, $from, $select)
 	$join = is_array($from) ? (count($from) > 1) : strpos($from, ",");
 	if ($join) $join = !is_array($select) ? $select : join(", ", $select);
 	if ($join) $groupby = $groupby ? "$groupby, $join" : $join;
-	return ($groupby ? "\nGROUP BY $groupby" : '');
+	$groupby = preg_replace('/\s+AS\s+\w+/','', $groupby);
+	return (!$groupby ? '' : ("\nGROUP BY " . spip_pg_nocast($groupby)));
 }
 
 // 0+x avec un champ x commencant par des chiffres est converti par MySQL
