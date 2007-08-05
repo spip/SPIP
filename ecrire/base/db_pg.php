@@ -144,9 +144,11 @@ function spip_pg_nocast($arg)
 	if (is_array($arg)) $arg = join(", ", $arg);
 	$res = preg_replace('/FIELD[(]([^,]*)[^)]*[)]/','1',$arg);
 	$res = preg_replace('/\b0[+]([^, ]+)\s*,\s*\1\b/', '\1', $res);
+	$res = preg_replace('/\b0[+]([^, ]+\b)/', '\1', $res);
 	if ($res != $arg)
 	  spip_log("SPIP-PG ne sait pas traduire $arg"); # a revoir
-	return preg_replace('/\b0[+]([^, ]+\b)/', '\1', $res);
+	
+	return str_replace('REGEXP', '~', $res);
 }
 
 
@@ -156,7 +158,7 @@ function calculer_pg_where($v)
 	if (!is_array($v))
 	  return $v ;
 
-	$op = array_shift($v);
+	$op = str_replace('REGEXP', '~', array_shift($v));
 	if (!($n=count($v)))
 		return $op;
 	else {
@@ -349,6 +351,7 @@ function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false) 
 
 // http://doc.spip.org/@spip_pg_multi
 function spip_pg_multi ($objet, $lang) {
+	spip_log("SPIP-PG ne sait pas traduire multi $objet"); # a revoir
 	return "$objet AS multi";
 }
 
