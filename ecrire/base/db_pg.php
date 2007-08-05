@@ -123,6 +123,7 @@ function spip_pg_select($select, $from, $where,
 // Conversion a l'arrach' des jointures MySQL en jointures PG
 // A refaire pour tirer parti des possibilites de PG et de MySQL5
 
+// http://doc.spip.org/@spip_pg_groupby
 function spip_pg_groupby($groupby, $from, $select)
 {
 	$join = is_array($from) ? (count($from) > 1) : strpos($from, ",");
@@ -139,6 +140,7 @@ function spip_pg_groupby($groupby, $from, $select)
 // en le nombre qui commence x. PG ne sait pas faire, on elimine.
 // Comme SPIP utilise systematiquement 0+t,t on ne garde que le 2e.
 
+// http://doc.spip.org/@spip_pg_nocast
 function spip_pg_nocast($arg)
 {
 	if (is_array($arg)) $arg = join(", ", $arg);
