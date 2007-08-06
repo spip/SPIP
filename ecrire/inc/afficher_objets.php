@@ -403,8 +403,9 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 	$nb_aff = ($cpt  > floor(1.5 * _TRANCHES)) ? _TRANCHES : floor(1.5 * _TRANCHES) ;
 	$deb_aff = intval(_request($tmp_var));
 
-	$q = spip_query($u = "SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
-	$id_liste = 't'.substr(md5($u),0,8);
+	$q = spip_abstract_select($requete['SELECT'], $requete['FROM'], $requete['WHERE'], $requete['GROUP BY'], $requete['ORDER BY'], ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
+
+	$id_liste = 't'.substr(md5(join(',',$requete)),0,8);
 
 	$t = '';
 	while ($r = spip_abstract_fetch($q))

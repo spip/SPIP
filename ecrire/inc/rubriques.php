@@ -326,7 +326,7 @@ function calcul_branche ($generation) {
 // http://doc.spip.org/@calculer_prochain_postdate
 function calculer_prochain_postdate() {
 	include_spip('inc/meta');
-	$s = spip_query("SELECT UNIX_TIMESTAMP(date) AS ts FROM spip_articles WHERE statut='publie' AND date>"._q(date('Y-m-d H:i:s'))." ORDER BY date LIMIT 0,1");
+	$s = spip_query("SELECT UNIX_TIMESTAMP(date) AS ts FROM spip_articles WHERE statut='publie' AND date>"._q(date('Y-m-d H:i:s'))." ORDER BY date LIMIT 1");
 	if ($t = spip_abstract_fetch($s))
 		ecrire_meta('date_prochain_postdate', $t['ts']);
 	else

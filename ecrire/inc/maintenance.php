@@ -37,7 +37,7 @@ function verifier_crash_tables() {
 		$crash = array();
 		foreach (array('tables_principales', 'tables_auxiliaires') as $com) {
 			foreach ($GLOBALS[$com] as $table => $desc) {
-				if (!spip_query("SELECT * FROM $table LIMIT 0,1")
+				if (!spip_query("SELECT * FROM $table LIMIT 1")
 				AND !defined('spip_interdire_cache')) # cas "LOST CONNECTION"
 					$crash[] = $table;
 			}

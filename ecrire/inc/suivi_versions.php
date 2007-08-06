@@ -53,7 +53,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 
 	$req_where = "versions.id_article = articles.id_article AND versions.id_version > 1 $req_where";
 
-	$result = spip_query("SELECT versions.*, articles.statut, articles.titre FROM spip_versions AS versions, spip_articles AS articles WHERE $req_where ORDER BY versions.date DESC LIMIT $debut, $nb_aff");
+	$result = spip_abstract_select('versions.*, articles.statut, articles.titre', 'spip_versions AS versions, spip_articles AS articles', $req_where, '', 'versions.date DESC', "$debut, $nb_aff");
 
 	if (spip_num_rows($result) > 0) {
 
@@ -67,8 +67,8 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 				. $titre_table;
 
 	
-			$total = spip_num_rows(spip_query($u="SELECT versions.*, articles.statut, articles.titre FROM spip_versions AS versions, spip_articles AS articles WHERE $req_where LIMIT 0, 149"));
-			$id_liste = 't'.substr(md5($u),0,8);
+			$total = spip_num_rows(spip_abstract_select("versions.*, articles.statut, articles.titre", 'spip_versions AS versions, spip_articles AS articles', $req_where, '','', "0, 149"));
+			$id_liste = 't'.substr(md5("$req_where 149"),0,8);
 			$bouton = bouton_block_depliable($titre_table,true,$id_liste);
 	  	$revisions .= debut_cadre('liste',"historique-24.gif",'',$bouton)
 	 		 . debut_block_depliable(true,$id_liste);
@@ -189,7 +189,7 @@ function revision_comparee($id_article, $id_version, $format='diff', $id_diff=NU
 
 	// chercher le numero de la version precedente
 	if (!$id_diff) {
-		$result_diff = spip_query("SELECT id_version FROM spip_versions WHERE id_article=$id_article AND id_version<$id_version ORDER BY id_version DESC LIMIT 0,1");
+		$result_diff = spip_query("SELECT id_version FROM spip_versions WHERE id_article=$id_article AND id_version<$id_version ORDER BY id_version DESC LIMIT 1");
 		if ($result_diff) {
 			$row_diff = spip_abstract_fetch($result_diff);
 			$id_diff = $row_diff['id_version'];

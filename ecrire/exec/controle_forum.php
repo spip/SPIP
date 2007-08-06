@@ -231,7 +231,7 @@ function exec_controle_forum_dist()
 	$limitnb = $debut + $enplus - $limitdeb;
 	$args =  (!$id_rubrique ? "" : "id_rubrique=$id_rubrique&") . 'type=';
 
-	$query = spip_query("SELECT F.id_forum, F.id_parent, F.id_rubrique, F.id_article, F.id_breve, F.date_heure, F.titre, F.texte, F.auteur, F.email_auteur, F.nom_site, F.url_site, F.statut, F.ip, F.id_auteur FROM $from " . (!$where ? '' : "WHERE $where ") . "ORDER BY F.date_heure DESC LIMIT $limitdeb, $limitnb");
+	$query = spip_abstract_select("F.id_forum, F.id_parent, F.id_rubrique, F.id_article, F.id_breve, F.date_heure, F.titre, F.texte, F.auteur, F.email_auteur, F.nom_site, F.url_site, F.statut, F.ip, F.id_auteur", $from,  $where,'', "F.date_heure DESC", "$limitdeb, $limitnb");
 # LIMIT $limitnb OFFSET $limitdeb" #PG
   
 	$ancre = 'controle_forum';

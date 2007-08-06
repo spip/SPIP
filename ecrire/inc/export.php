@@ -200,7 +200,7 @@ function export_objets($table, $etape, $cpt, $dir, $archive, $gz, $total, $les_r
 function build_while($debut, $table, $prim, $les_rubriques) {
 	global  $chercher_logo ;
 
-	$result = spip_query("SELECT * FROM $table LIMIT $debut," . _EXPORT_TRANCHES_LIMITE);
+	$result = spip_abstract_select('*', $table, '', '', '', "$debut," . _EXPORT_TRANCHES_LIMITE);
 
 	$string = '';
 	while ($row = spip_abstract_fetch($result)) {
