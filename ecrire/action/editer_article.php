@@ -161,6 +161,7 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 	$id_rubrique = $row['id_rubrique'];
 	$statut_ancien = $statut = $row['statut'];
 	$champs = array();
+	$date = _request('date', $c);
 
 	$s = _request('statut', $c);
 	if ($s AND _request('statut', $c) != $statut) {
@@ -178,9 +179,9 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 		OR ($champs['statut'] == 'prop'
 			AND !in_array($statut_ancien, array('publie', 'prop'))
 		)) {
-			if ($d = _request('date', $c)) {
-				$champs['date'] = $d;
-			} else {
+			if ($date)
+				$champs['date'] = $date;
+			else {
 				# on prend la date de MySQL pour eviter un decalage cf. #975
 				$d = spip_query("SELECT NOW() AS d");
 				$d = spip_abstract_fetch($d);
@@ -202,7 +203,6 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 		if ($statut == 'publie'
 		AND !autoriser('publierdans', 'rubrique', $id_rubrique))
 			$champs['statut'] = 'prop';
-
 	}
 
 
@@ -248,15 +248,19 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 	include_spip('inc/invalideur');
 	suivre_invalideur("id='id_article/$id_article'");
 
-	// Recalculer les rubriques (statuts et dates) si l'on deplace
-	// un article publie, ou si on le publie/depublie
-	if (($statut == 'publie' AND isset($champs['id_rubrique']))
-	OR (isset($champs['statut'])
-		AND ($statut_ancien=='publie' OR $champs['statut']=='publie')
-		AND $calcul_rub
-		)
-	)
-		calculer_rubriques();
+	// Au besoin, changer le statut des rubriques concernees 
+	if ($calcul_rub)
+		calculer_rubriques_if($id_rubrique, $champs, $statut_ancien);
+
+	if ($date) {
+		$t = strtotime($date);
+		$p = @$GLOBALS['meta']['date_prochain_postdate'];
+		if ($t > time() AND (!$p OR ($t < $p))) {
+			include_spip('inc/meta');
+			ecrire_meta('date_prochain_postdate', $t['ts']);
+			ecrire_metas();
+		}
+	}
 
 	// Pipeline
 	pipeline('post_edition',

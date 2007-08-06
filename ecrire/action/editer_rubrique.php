@@ -68,12 +68,12 @@ function revisions_rubriques($id_rubrique, $c=false) {
 	// traitement de la rubrique parente
 	// interdiction de deplacer vers ou a partir d'une rubrique
 	// qu'on n'administre pas.
-	$parent = '';
+	$statut_ancien = $parent = '';
 	if (NULL !== ($id_parent = _request('id_parent', $c))
 	AND $id_parent != $id_rubrique // au fou
 	) {
 		$id_parent = intval($id_parent);
-		$s = spip_abstract_fetch(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique=".intval($id_rubrique)));
+		$s = spip_abstract_fetch(spip_query("SELECT id_parent, statut FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 		$old_parent = $s['id_parent'];
 
 		if ($id_parent != $old_parent
@@ -82,6 +82,7 @@ function revisions_rubriques($id_rubrique, $c=false) {
 		AND autoriser('publierdans', 'rubrique', $old_parent)
 		) {
 			$champs['id_parent'] = $id_parent;
+			$statut_ancien = $s['statut'];
 		} else {
 			spip_log("deplacement de $id_rubrique vers $id_parent refuse a " . $GLOBALS['auteur_session']['id_auteur'] . ' '.  $GLOBALS['auteur_session']['statut']);
 		}
@@ -131,7 +132,10 @@ function revisions_rubriques($id_rubrique, $c=false) {
 
 	propager_les_secteurs();
 
-	calculer_rubriques();
+	// Deplacement d'une rubrique publiee ==> chgt general de leur statut
+	if ($statut_ancien == 'publie')
+		calculer_rubriques();
+
 	calculer_langues_rubriques();
 
 	// invalider les caches marques de cette rubrique

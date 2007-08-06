@@ -158,11 +158,12 @@ function revisions_sites ($id_syndic, $c=false) {
 	$s = spip_query("SELECT statut, id_rubrique FROM spip_syndic WHERE id_syndic=$id_syndic");
 	$row = spip_abstract_fetch($s);
 	$id_rubrique = $row['id_rubrique'];
+	$statut_ancien = $row['statut'];
 
 	$statut = _request('statut', $c);
 
 	if ($statut
-	AND $statut != $row['statut']
+	AND $statut != $statut_ancien
 	AND autoriser('publierdans','rubrique',$id_rubrique, $id_auteur)) {
 		$champs['statut'] = $statut;
 		if ($statut == 'publie') {
@@ -176,7 +177,7 @@ function revisions_sites ($id_syndic, $c=false) {
 			}
 		}
 	} else
-		$statut = $row['statut'];
+		$statut = $statut_ancien;
 
 	// Changer de rubrique ?
 	// Verifier que la rubrique demandee est differente
@@ -264,13 +265,7 @@ function revisions_sites ($id_syndic, $c=false) {
 		marquer_indexer('spip_syndic', $id_syndic);
 	}
 
-	// Recalculer les rubriques (statuts et dates) si l'on deplace
-	// un site publie ou si on le publie/depublie
-	if (isset($champs['statut'])
-	OR ($statut == 'publie' AND isset($champ['id_rubrique']))
-	) {
-		calculer_rubriques();
-	}
+	calculer_rubriques_if($id_rubrique, $champs, $statut_ancien);
 
 	// Notification ?
 	pipeline('post_edition',
