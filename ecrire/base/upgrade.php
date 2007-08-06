@@ -1450,6 +1450,20 @@ function maj_base($version_cible = 0) {
 		spip_query("UPDATE spip_meta SET valeur = ',0minirezo,' WHERE nom='preview' AND valeur='oui' ");
 		maj_version('1.941');
 	}
+
+	if (upgrade_vers(1.942, $version_installee, $version_cible)) {
+		spip_query("ALTER TABLE spip_auteurs CHANGE `statut` `statut` varchar(255)  DEFAULT '0' NOT NULL");
+		spip_query("ALTER TABLE spip_breves CHANGE `statut` `statut`varchar(6)  DEFAULT '0' NOT NULL");
+		spip_query("ALTER TABLE spip_messages CHANGE `statut` `statut`varchar(6)  DEFAULT '0' NOT NULL");
+		spip_query("ALTER TABLE spip_rubriques CHANGE `statut` `statut`varchar(10) DEFAULT '0' NOT NULL");
+		spip_query("ALTER TABLE spip_rubriques CHANGE `statut_tmp` `statut_tmp` varchar(10) DEFAULT '0' NOT NULL");
+		spip_query("ALTER TABLE spip_syndic CHANGE `statut` `statut`varchar(10) DEFAULT '0' NOT NULL");
+		spip_query("ALTER TABLE spip_syndic_articles CHANGE `statut` `statut`varchar(10) DEFAULT '0' NOT NULL");
+		spip_query("ALTER TABLE spip_forum CHANGE `statut` `statut`varchar(8) DEFAULT '0' NOT NULL");
+		spip_query("ALTER TABLE spip_signatures CHANGE `statut` `statut`varchar(10) DEFAULT '0' NOT NULL");
+		maj_version('1.942');
+	}
+
 }
 
 ?>
