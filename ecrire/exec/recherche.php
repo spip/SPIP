@@ -29,8 +29,9 @@ function exec_recherche_dist() {
 		$tables = liste_des_champs();
 		unset($tables['document']);
 		unset($tables['forum']);
+		unset($tables['syndic_article']);
 
-		$results = recherche_en_base($recherche, $tables);
+		$results = recherche_en_base($recherche, $tables, array('jointures' => true, 'score' => false)); // true => a gerer dans l'affichage, autant faire un squelette
 
 /*		$modifier = false;
 		foreach ($results as $table => $r) {
@@ -103,7 +104,7 @@ function exec_recherche_dist() {
 				$order = 'titre';
 				break;
 			default:
-				$titre = _T("info_trouves");
+				$titre = _L("Autres");
 				$order = "id_$table";
 				break;
 			}
@@ -114,7 +115,7 @@ function exec_recherche_dist() {
 					'FROM' => 'spip_'.table_objet($table).' AS '.$table.'s',
 					'WHERE' => calcul_mysql_in(
 						$table.'s.'.id_table_objet($table),
-						join(',',array_keys($r))
+						array_keys($r)
 					),
 					'ORDER BY' => $order
 				)
