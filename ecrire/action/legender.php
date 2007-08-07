@@ -63,13 +63,6 @@ function action_legender_post($r)
 				  
 	spip_query("UPDATE spip_documents SET$d titre=" . _q($titre_document) . ", descriptif=" . _q($descriptif_document) . " $wh WHERE id_document=".$id_document);
 
-
-	if ($date) {
-			include_spip('inc/rubriques');
-			// Changement de date, ce qui nous oblige a :
-			calculer_rubriques();
-	}
-
 	// Demander l'indexation du document
 	include_spip('inc/indexation');
 	marquer_indexer('spip_documents', $id_document);
