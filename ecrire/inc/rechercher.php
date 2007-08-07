@@ -57,6 +57,7 @@ function liste_des_champs() {
 
 // Recherche des auteurs et mots-cles associes
 // en ne regardant que le titre ou le nom
+// http://doc.spip.org/@liste_des_jointures
 function liste_des_jointures() {
 	return array(
 		'article' => array(

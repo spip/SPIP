@@ -103,12 +103,14 @@ function spip_abstract_insert($table, $noms, $valeurs, $serveur='')
 	return $f($table, $noms, $valeurs);
 }
 
+// http://doc.spip.org/@spip_abstract_update
 function spip_abstract_update($table, $exp, $where, $serveur='')
 {
 	$f = spip_abstract_serveur('update', $serveur);
 	return $f($table, $exp, $where);
 }
 
+// http://doc.spip.org/@spip_abstract_delete
 function spip_abstract_delete($table, $where, $serveur='')
 {
 	$f = spip_abstract_serveur('delete', $serveur);

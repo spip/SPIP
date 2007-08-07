@@ -260,6 +260,7 @@ function spip_pg_update($table, $exp, $where='') {
 	pg_query($spip_pg_link, "UPDATE $table SET " . spip_pg_nocast($exp) .($where ? (" WHERE " . spip_pg_nocast($where)) : ''));
 }
 
+// http://doc.spip.org/@spip_pg_delete
 function spip_pg_delete($table, $where='') {
 	global $spip_pg_link, $table_prefix;
 	if ($GLOBALS['table_prefix'])
