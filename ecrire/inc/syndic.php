@@ -19,6 +19,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@executer_une_syndication
 function executer_une_syndication() {
 	$id_syndic = 0;
+	spip_connect();
 
 	## valeurs modifiables dans mes_options
 	## attention il est tres mal vu de prendre une periode < 20 minutes
@@ -31,7 +32,7 @@ function executer_une_syndication() {
 	AND statut='publie'
 	AND date_syndic < DATE_SUB(NOW(), INTERVAL
 	"._PERIODE_SYNDICATION_SUSPENDUE." MINUTE)";
-	$row = spip_abstract_fetch(spip_query("SELECT id_syndic FROM spip_syndic WHERE $where	ORDER BY date_syndic LIMIT 1"));
+	$row = spip_abstract_fetch(spip_abstract_select("id_syndic", "spip_syndic", $where, '', "date_syndic", "1"));
 	if ($row) {
 		$id_syndic = $row["id_syndic"];
 		syndic_a_jour($id_syndic, 'off');
@@ -41,7 +42,7 @@ function executer_une_syndication() {
 	$where = "syndication='oui'
 	AND statut='publie'
 	AND date_syndic < DATE_SUB(NOW(), INTERVAL "._PERIODE_SYNDICATION." MINUTE)";
-	$row = spip_abstract_fetch(spip_query("SELECT id_syndic FROM spip_syndic WHERE $where	ORDER BY date_syndic LIMIT 1"));
+	$row = spip_abstract_fetch(spip_abstract_select("id_syndic", "spip_syndic", $where, '', "date_syndic", "1"));
 
 	if ($row) {
 		$id_syndic = $row["id_syndic"];

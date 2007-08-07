@@ -103,6 +103,18 @@ function spip_abstract_insert($table, $noms, $valeurs, $serveur='')
 	return $f($table, $noms, $valeurs);
 }
 
+function spip_abstract_update($table, $exp, $where, $serveur='')
+{
+	$f = spip_abstract_serveur('update', $serveur);
+	return $f($table, $exp, $where);
+}
+
+function spip_abstract_delete($table, $where, $serveur='')
+{
+	$f = spip_abstract_serveur('delete', $serveur);
+	return $f($table, $where);
+}
+
 // http://doc.spip.org/@spip_abstract_showtable
 function spip_abstract_showtable($table, $serveur='', $table_spip = false)
 {

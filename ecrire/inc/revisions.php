@@ -395,7 +395,7 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 		$id_auteur = _q($GLOBALS['ip']);
 
 	// Examiner la derniere version
-	$result = spip_query("SELECT id_version, (id_auteur=$id_auteur AND date > DATE_SUB(NOW(), INTERVAL 1 HOUR) AND permanent!='oui') AS flag FROM spip_versions WHERE id_article=$id_article ORDER BY id_version DESC LIMIT 1");
+	$result = spip_abstract_select("id_version, (id_auteur=$id_auteur AND date > DATE_SUB(NOW(), INTERVAL 1 HOUR) AND permanent!='oui') AS flag", "spip_versions", "id_article=$id_article", '', "id_version DESC", "1");
 
 	if ($row = spip_abstract_fetch($result)) {
 		$nouveau = !$row['flag'];

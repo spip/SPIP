@@ -679,7 +679,8 @@ function effectuer_une_indexation($nombre_indexations = 1) {
 // http://doc.spip.org/@executer_une_indexation_syndic
 function executer_une_indexation_syndic() {
 	$id_syndic = 0;
-	$row = spip_abstract_fetch(spip_query("SELECT id_syndic FROM spip_syndic WHERE statut='publie' AND date_index < DATE_SUB(NOW(), INTERVAL 7 DAY) ORDER BY date_index LIMIT 1"));
+	spip_connect();
+	$row = spip_abstract_fetch(spip_abstract_select("id_syndic", "spip_syndic", "statut='publie' AND date_index < DATE_SUB(NOW(), INTERVAL 7 DAY)", '', "date_index", "1"));
 	if ($row) {
 		$id_syndic = $row['id_syndic'];
 		spip_query("UPDATE spip_syndic SET date_index=NOW() WHERE id_syndic=$id_syndic");

@@ -86,7 +86,7 @@ function exec_statistiques_svg_dist()
 		$date_premier = $row['date_unix'];
 	}
 
-	$result = spip_query("SELECT UNIX_TIMESTAMP(date) AS date_unix, visites FROM $table WHERE $where AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) ORDER BY date");
+	$result = spip_abstract_select('UNIX_TIMESTAMP(date) AS date_unix, visites', $table, "$where AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY)", '', "date");
 
 	while ($row = spip_abstract_fetch($result)) {
 		$date = $row['date_unix'];

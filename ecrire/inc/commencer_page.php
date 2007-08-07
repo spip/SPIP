@@ -230,12 +230,12 @@ function auteurs_recemment_connectes()
 {	
 	global $connect_id_auteur;
 	$res = '';
-	$result_auteurs = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE)");
+	$result = spip_abstract_select("*", "spip_auteurs",  "id_auteur!=$connect_id_auteur AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE)");
 
-	if (spip_num_rows($result_auteurs)) {
+	if (spip_num_rows($result)) {
 		$formater_auteur = charger_fonction('formater_auteur', 'inc');
 		$res = "<b>"._T('info_en_ligne'). "&nbsp;</b>";
-		while ($row = spip_abstract_fetch($result_auteurs)) {
+		while ($row = spip_abstract_fetch($result)) {
 			list($s, $mail, $nom, $w, $p) = $formater_auteur($row['id_auteur']);
 			$res .= "$mail&nbsp;$nom, ";
 		}

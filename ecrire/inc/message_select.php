@@ -32,7 +32,7 @@ function afficher_messages($titre, $from, $where, &$messages_vus, $afficher_aute
 
 	$res =  affiche_tranche_bandeau($requete, "messagerie-24.gif", NULL, NULL, $tmp_var, $titre, false, $largeurs, $styles, 'afficher_message_boucles', $afficher_auteurs);
 
-	$result = spip_query("SELECT messages.id_message FROM " . $requete['FROM'] . ' WHERE ' . $requete['WHERE']);
+	$result = spip_abstract_select('messages.id_message', $requete['FROM'], $requete['WHERE']);
 
 	while ($r = spip_abstract_fetch($result)) {
 		$r = $r['id_message'];

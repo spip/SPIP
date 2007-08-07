@@ -287,7 +287,7 @@ else {
 		$date_premier = $row['date_unix'];
 	}
 
-	$result=spip_query("SELECT UNIX_TIMESTAMP(date) AS date_unix, visites FROM $table WHERE $where AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) ORDER BY date");
+	$result= spip_abstract_select("UNIX_TIMESTAMP(date) AS date_unix, visites", $table, "$where AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY)", '', "date");
 
 	$date_debut = '';
 	$log = array();
@@ -640,7 +640,7 @@ else {
 		echo "<span class='verdana1 spip_small'><b>"._T('info_visites_par_mois')."</b></span>";
 
 		///////// Affichage par mois
-		$result=spip_query("SELECT FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%Y-%m') AS date_unix, SUM(visites) AS total_visites  FROM $table WHERE $where AND date > DATE_SUB(NOW(),INTERVAL 2700 DAY) GROUP BY date_unix ORDER BY date");
+		  $result = spip_abstract_select("FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%Y-%m') AS date_unix, SUM(visites) AS total_visites", $table,  "$where AND date > DATE_SUB(NOW(),INTERVAL 2700 DAY)", 'date_unix', "date");
 
 		
 		$i = 0;
