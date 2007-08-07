@@ -23,13 +23,8 @@ function balise_FORMULAIRE_RECHERCHE ($p)
 
 // http://doc.spip.org/@balise_FORMULAIRE_RECHERCHE_stat
 function balise_FORMULAIRE_RECHERCHE_stat($args, $filtres) {
-	// Si le moteur n'est pas active, pas de balise
-	if ($GLOBALS['meta']["activer_moteur"] != "oui")
-		return '';
-
 	// filtres[0] doit etre un script (a revoir)
-	else
-	  return array($filtres[0], $args[0]);
+	return array($filtres[0], $args[0]);
 }
  
 // http://doc.spip.org/@balise_FORMULAIRE_RECHERCHE_dyn

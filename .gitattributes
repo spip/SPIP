@@ -537,7 +537,6 @@ ecrire/exec/tourner.php -text
 ecrire/exec/upgrade.php -text
 ecrire/exec/valider_xml.php -text
 ecrire/exec/virtualiser.php -text
-ecrire/extract/index.php -text
 ecrire/inc/actions.php -text
 ecrire/inc/afficher_objets.php -text
 ecrire/inc/agenda.php -text

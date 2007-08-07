@@ -19,7 +19,12 @@ function optimiser_base($attente = 86400) {
 
 	optimiser_base_une_table();
 	optimiser_base_disparus($attente);
-	optimiser_base_indexation();
+
+	// optimisation a passer dans le plugin indexation
+	include_spip('inc/indexation');
+	if (function_exists('optimiser_base_indexation')) {
+		optimiser_base_indexation();
+	}
 }
 
 
@@ -396,30 +401,5 @@ function optimiser_base_disparus($attente = 86400) {
 	if (!$n) spip_log("Optimisation des tables: aucun lien mort");
 }
 
-
-// http://doc.spip.org/@optimiser_base_indexation
-function optimiser_base_indexation($attente) {
-	// les objets inutiles
-	include_spip('inc/indexation');
-	$liste_tables = liste_index_tables();
-	foreach ($liste_tables as $id_table => $table_objet) {
-		$col_id = primary_index_table($table_objet);
-		$critere = critere_optimisation($table_objet);
-		if (strlen($critere)>0)
-			$critere = "AND $critere";
-
-		spip_query("UPDATE $table_objet SET idx='' WHERE idx<>'non' $critere");
-
-		$suppr = '';
-		$s = spip_query("SELECT $col_id AS n FROM $table_objet WHERE idx='' $critere");
-		while ($t = spip_abstract_fetch($s))
-			$suppr .= ','.$t['n'];
-		$s = spip_query("SELECT $col_id AS n FROM $table_objet WHERE idx='non'");
-		while ($t = spip_abstract_fetch($s))
-			$suppr .= ','.$t['n'];
-		if ($suppr)
-			spip_query("DELETE FROM spip_index WHERE id_objet IN (0$suppr) AND id_table=$id_table");
-	}
-}
 
 ?>

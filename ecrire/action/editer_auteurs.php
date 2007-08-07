@@ -66,10 +66,18 @@ function supprimer_auteur_et_rediriger($type, $id, $id_auteur, $redirect)
 	$jointure = table_jointure('auteur', $type);
 	if (preg_match(',^[a-z]*$,',$type)){
 		spip_query("DELETE FROM spip_{$jointure} WHERE id_auteur="._q($id_auteur)." AND id_{$type}="._q($id));
-		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-				include_spip("inc/indexation");
-				marquer_indexer("spip_".table_objet($type), $id);
-		}
+
+		// Notifications, gestion des revisions, reindexation...
+		pipeline('post_edition',
+			array(
+				'args' => array(
+					'operation' => 'supprimer_auteur',
+					'table' => 'spip_'.table_objet($type),
+					'id_objet' => $id
+				),
+				'data' => null
+			)
+		);
 	}
 
 	if ($redirect) redirige_par_entete($redirect);
@@ -83,11 +91,18 @@ function ajouter_auteur_et_rediriger($type, $id, $id_auteur, $redirect)
 		$res = spip_query("SELECT id_$type FROM spip_{$jointure} WHERE id_auteur=" . _q($id_auteur) . " AND id_{$type}=" . $id);
 		if (!spip_num_rows($res))
 			spip_abstract_insert("spip_{$jointure}", "(id_auteur,id_{$type})", "($id_auteur,$id)");
-	
-		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-			include_spip("inc/indexation");
-			marquer_indexer("spip_".table_objet($type), $id);
-		}
+
+		// Notifications, gestion des revisions, reindexation...
+		pipeline('post_edition',
+			array(
+				'args' => array(
+					'operation' => 'ajouter_auteur',
+					'table' => 'spip_'.table_objet($type),
+					'id_objet' => $id
+				),
+				'data' => null
+			)
+		);
 	}
 
 	if ($redirect) redirige_par_entete($redirect);

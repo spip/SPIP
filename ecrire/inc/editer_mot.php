@@ -62,17 +62,24 @@ function inc_editer_mot_dist($objet, $id_objet, $cherche_mot, $select_groupe, $f
 
 	// La reponse
 	$reponse = '';
+	$modifier = false;
 	if ($flag AND $cherche_mot) {
-		$reindexer = false;
 		list($reponse, $nouveaux_mots) = recherche_mot_cle($cherche_mot, $select_groupe, $objet, $id_objet, $table, $table_id, $url_base);
 		foreach($nouveaux_mots as $nouv_mot) {
 			if ($nouv_mot!='x') {
-				$reindexer |= inserer_mot("spip_mots_$table", $table_id, $id_objet, $nouv_mot);
+				$modifier |= inserer_mot("spip_mots_$table", $table_id, $id_objet, $nouv_mot);
 			}
 		}
-		if ($reindexer AND ($GLOBALS['meta']['activer_moteur'] == 'oui')) {
-			include_spip("inc/indexation");
-			marquer_indexer("spip_$table", $id_objet);
+		if ($modifier) {
+			pipeline('post_edition',
+				array(
+					'args' => array(
+					'table' => 'spip_'.$table,
+					'id_objet' => $id_objet
+					),
+				'data' => null
+				)
+			);
 		}
 	}
 

@@ -125,11 +125,6 @@ function revisions_rubriques($id_rubrique, $c=false) {
 
 	spip_query("UPDATE spip_rubriques SET ".join(', ', $update)." WHERE id_rubrique=$id_rubrique");
 
-	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-		include_spip("inc/indexation");
-		marquer_indexer('spip_rubriques', $id_rubrique);
-	}
-
 	propager_les_secteurs();
 
 	// Deplacement d'une rubrique publiee ==> chgt general de leur statut

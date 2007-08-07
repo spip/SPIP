@@ -36,35 +36,28 @@ function action_legender_post($r)
 
 	$id_document = $r[1];
 
-	$titre_document = (corriger_caracteres(_request('titre_document')));
-	$descriptif_document = (corriger_caracteres(_request('descriptif_document')));
-
 	// taille du document (cas des embed)
 	if ($largeur_document = intval(_request('largeur_document'))
-	AND $hauteur_document = intval(_request('hauteur_document')))
-				$wh = ", largeur='$largeur_document',
-					hauteur='$hauteur_document'";
-	else $wh = "";
-
-			// Date du document (uniquement dans les rubriques)
-	if (!_request('jour_doc'))
-		  $d = '';
-	else {
-			$mois_doc = _request('mois_doc');
-			$jour_doc = _request('jour_doc');
-			if (_request('annee_doc') == "0000")
-					$mois_doc = "00";
-			if ($mois_doc == "00")
-					$jour_doc = "00";
-			$date = _request('annee_doc').'-'.$mois_doc.'-'.$jour_doc;
-
-			if (preg_match('/^[0-9-]+$/', $date)) $d=" date='$date',";
+	AND $hauteur_document = intval(_request('hauteur_document'))) {
+		set_request('largeur', $largeur_document);
+		set_request('hauteur', $hauteur_document);
 	}
-				  
-	spip_query("UPDATE spip_documents SET$d titre=" . _q($titre_document) . ", descriptif=" . _q($descriptif_document) . " $wh WHERE id_document=".$id_document);
 
-	// Demander l'indexation du document
-	include_spip('inc/indexation');
-	marquer_indexer('spip_documents', $id_document);
+	// Date du document (uniquement dans les rubriques)
+	if (_request('jour_doc') !== null) {
+		$mois_doc = _request('mois_doc');
+		$jour_doc = _request('jour_doc');
+		if (_request('annee_doc') == "0000")
+			$mois_doc = "00";
+		if ($mois_doc == "00")
+			$jour_doc = "00";
+		$date = _request('annee_doc').'-'.$mois_doc.'-'.$jour_doc;
+		if (preg_match('/^[0-9-]+$/', $date))
+			set_request('date', $date);
+	}
+
+	include_spip('inc/modifier');
+	revision_document($id_document);
 }
+
 ?>

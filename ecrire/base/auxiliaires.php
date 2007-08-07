@@ -176,24 +176,6 @@ $spip_meta = array(
 $spip_meta_key = array(
 		"PRIMARY KEY"	=> "nom");
 
-$spip_index = array(
- 		"`hash`"	=> "bigint UNSIGNED NOT NULL",
- 		"points"	=> "int UNSIGNED DEFAULT '0' NOT NULL",
-		"id_objet"	=> "int UNSIGNED NOT NULL",
-		"id_table"	=> "tinyint UNSIGNED NOT NULL"	);
-
-$spip_index_key = array(
- 		"KEY `hash`"	=> "`hash`",
-		"KEY id_objet"	=> "id_objet",
-		"KEY id_table"	=> "id_table");
-
-$spip_index_dico = array(
-		"`hash`"	=> "bigint UNSIGNED NOT NULL",
-		"dico"		=> "VARCHAR (30)");
-
-$spip_index_dico_key = array(
-		"PRIMARY KEY"	=> "dico");
-
 $spip_versions = array (
 		"id_article"	=> "bigint(21) NOT NULL",
 		"id_version"	=> "int unsigned DEFAULT '0' NOT NULL",
@@ -280,12 +262,6 @@ $tables_auxiliaires['spip_mots_documents'] = array(
 $tables_auxiliaires['spip_meta'] = array(
 	'field' => &$spip_meta,
 	'key' => &$spip_meta_key);
-$tables_auxiliaires['spip_index'] = array(
-	'field' => &$spip_index,
-	'key' => &$spip_index_key);
-$tables_auxiliaires['spip_index_dico'] = array(
-	'field' => &$spip_index_dico,
-	'key' => &$spip_index_dico_key);
 $tables_auxiliaires['spip_versions'] = array(
 	'field' => &$spip_versions,
 	'key' => &$spip_versions_key);

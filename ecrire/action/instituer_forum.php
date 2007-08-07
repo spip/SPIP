@@ -45,18 +45,23 @@ function action_instituer_forum_dist() {
 			$id_messages[] = $row['id_forum'];
 	}
 
-	// Signaler au moteur de recherche qu'il faut reindexer le thread
-	if ($id_parent) {
-		include_spip('inc/indexation');
-		marquer_indexer ('spip_forum', $id_parent);
-	}
-
 	// Notifier de la publication du message, s'il etait 'prop'
 	if ($old=='prop' AND $statut=='publie') {
 		if ($notifications = charger_fonction('notifications', 'inc')) {
 			$notifications('forumvalide', $id_forum);
 		}
 	}
+
+	// Reindexation du thread (par exemple)
+	pipeline('post_edition',
+		array(
+			'args' => array(
+				'table' => 'spip_forum',
+				'id_objet' => $id_forum
+			),
+			'data' => null
+		)
+	);
 }
 
 ?>

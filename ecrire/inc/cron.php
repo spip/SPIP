@@ -159,10 +159,6 @@ function taches_generales() {
 	if ($GLOBALS['meta']["activer_syndic"] == "oui") 
 		$taches_generales['syndic'] = 90;
 
-	// indexation
-	if ($GLOBALS['meta']["activer_moteur"] == "oui") 
-		$taches_generales['indexation'] = 90;
-		
 	// maintenance (ajax, verifications diverses)
 		$taches_generales['maintenance'] = 3600 * 2;
 
