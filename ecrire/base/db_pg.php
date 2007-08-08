@@ -272,6 +272,7 @@ function spip_pg_delete($table, $where='') {
 }
 
 
+// http://doc.spip.org/@spip_pg_replace
 function spip_pg_replace($table, $values, $desc) {
 	global $spip_pg_link, $table_prefix;
 	if ($GLOBALS['table_prefix'])
