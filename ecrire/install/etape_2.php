@@ -10,6 +10,10 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
+
+include_spip('base/abstract_sql');
+
 function install_etape_2_dist()
 {
 	$adresse_db = defined('_INSTALL_HOST_DB')
@@ -78,9 +82,10 @@ function install_etape_2_dist()
 
 function install_etape_2_bases($login_db, $server_db)
 {
-	$flistdbs = 'spip_' . $server_db . '_listdbs';
-	$fselectdb = 'spip_' . $server_db . '_selectdb';
-	$ffetch = 'spip_' . $server_db . '_fetch';
+
+	$flistdbs = spip_abstract_serveur('listdbs', $server_db);
+	$fselectdb = spip_abstract_serveur('selectdb', $server_db);
+	$ffetch = spip_abstract_serveur('fetch', $server_db);
 
 	$result = $flistdbs();
 	$bases = $checked = '';

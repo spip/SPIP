@@ -16,43 +16,45 @@ include_spip('inc/acces');
 include_spip('base/serial');
 include_spip('base/auxiliaires');
 include_spip('base/typedoc');
+include_spip('base/abstract_sql');
 
 // http://doc.spip.org/@creer_base
-function creer_base($server='mysql') {
-  global $tables_principales, $tables_auxiliaires, $tables_images, $tables_sequences, $tables_documents, $tables_mime;
+function creer_base($server='') {
+	global $tables_principales, $tables_auxiliaires, $tables_images, $tables_sequences, $tables_documents, $tables_mime;
 
-	// ne pas revenir plusieurs fois (si, au contraire, il faut pouvoir
-	// le faire car certaines mises a jour le demandent explicitement)
-	# static $vu = false;
-	# if ($vu) return; else $vu = true;
+	// Note: les mises à jour reexecutent ce code pour s'assurer
+	// de la conformite de la base
+	// pas de panique sur  "already exists" et "duplicate entry" donc.
 
-	$fcreate = 'spip_'  . $server . '_create';
-	$finsert = 'spip_'  . $server . '_insert';
-	$fupdate = 'spip_'  . $server . '_update';
+	$fcreate = spip_abstract_serveur('create', $server);
+	$finsert = spip_abstract_serveur('insert', $server);
+	$fupdate = spip_abstract_serveur('update', $server);
 	foreach($tables_principales as $k => $v)
 		$fcreate($k, $v['field'], $v['key'], true);
 
 	foreach($tables_auxiliaires as $k => $v)
 		$fcreate($k, $v['field'], $v['key'], false);
 
+
+	// Pas de panique avec les messages d'erreur a la mise a jour
 	foreach($tables_images as $k => $v) {
-		$finsert('spip_types_documents',
+		@$finsert('spip_types_documents',
 		   "(extension, inclus, titre)",
 		   '('. _q($k).", 'image'," . _q($v).')');
 	}
 
 	foreach($tables_sequences as $k => $v)
-		$finsert('spip_types_documents',
+		@$finsert('spip_types_documents',
 			 "(extension, titre, inclus)",
 			 "('$k', '$v', 'embed')");
 
 	foreach($tables_documents as $k => $v)
-		$finsert('spip_types_documents',
+		@$finsert('spip_types_documents',
 			 "(extension, titre, inclus)",
 			 "('$k', '$v', 'non')");
 
 	foreach ($tables_mime as $extension => $type_mime)
-		$fupdate('spip_types_documents',
+		@$fupdate('spip_types_documents',
 			 "mime_type='$type_mime'",
 			 "extension='$extension'");
 }

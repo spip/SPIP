@@ -419,14 +419,15 @@ function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false) 
 	}
 	$temporary = $temporary ? 'TEMPORARY':'';
 
-	// controler si la table existe deja serait pas mal
+	// En l'absence de "if not exists" en PG, on neutralise les erreurs
 
 	$q = "CREATE $temporary TABLE $nom ($query" . ($prim ? ",$prim" : '') . ")".
 	($character_set?" DEFAULT $character_set":"")
 	."\n";
 
-	pg_query($spip_pg_link, $q);
-	foreach($keys as $index)  {pg_query($spip_pg_link, $index);}
+	@pg_query($spip_pg_link, $q);
+
+	foreach($keys as $index)  {@pg_query($spip_pg_link, $index);}
 }
 
 // Fonction PG a ecrire: selectionner la sous-chaine dans $objet
