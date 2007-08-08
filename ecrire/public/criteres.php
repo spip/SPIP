@@ -1145,14 +1145,6 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit)
 	return array($fct, $col, $op, $val, $args_sql);
 }
 
-// http://doc.spip.org/@test_sql_int
-function test_sql_int($type)
-{
-	return (strpos($type, 'bigint') === 0
-	OR strpos($type, 'int') === 0
-	OR strpos($type, 'tinyint') === 0);
-}
-
 // compatibilite ancienne version
 
 // http://doc.spip.org/@calculer_vieux_in
