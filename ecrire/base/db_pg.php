@@ -46,14 +46,13 @@ function spip_pg_query($query)
 	$query = preg_replace('/([,\s])spip_/', '\1'.$table_prefix.'_', $query) . $suite;
 
 	$r = pg_query($spip_pg_link, $query);
-#	if (!$r) echo $query, '<br>';
+	if (!$r) {
+#	  echo $query, '<br>';
+	  $n = spip_pg_errno();
+	  $m = spip_pg_error();
+	  spip_log("erreur spip_pg_query $n $m $query", 'pg');
+	}
 	return $r;
-}
-
-
-// http://doc.spip.org/@spip_pg_replace
-function spip_pg_replace($query) {
-  spip_log("REPLACE a implementer en postgres");
 }
 
 
@@ -111,10 +110,12 @@ function spip_pg_select($select, $from, $where,
 	}
 
 	if (!($res = spip_pg_query($q))) {
-		include_spip('public/debug');
-		erreur_requete_boucle($q, $id, $table,
-				      spip_pg_errno(),
-				      spip_pg_error());
+#	  echo $query, '<br>';
+	  $n = spip_pg_errno();
+	  $m = spip_pg_error();
+	  spip_log("erreur $n $m $query", 'pg');
+	  include_spip('public/debug');
+	  erreur_requete_boucle($q, $id, $table, $n, $m);
 	}
 #	spip_log("querypg $q res=" . pg_numrows($res));
 	return $res;
@@ -271,6 +272,61 @@ function spip_pg_delete($table, $where='') {
 }
 
 
+function spip_pg_replace($table, $values, $desc) {
+	global $spip_pg_link, $table_prefix;
+	if ($GLOBALS['table_prefix'])
+		$table = preg_replace('/^spip/',
+				    $GLOBALS['table_prefix'],
+				    $table);
+
+	$prim = $desc['key']['PRIMARY KEY'];
+	$ids = preg_split('/,\s*/', $prim);
+	$noprims = $prims = array();
+
+	foreach($values as $k=>$v) {
+		$t = $desc['field'][$k];
+		if ((strpos($t, 'datetime') === 0)
+		AND strpos($v, "-00-00") === 4)
+			  { $values[$k] = $v = _q(substr($v,0,4)."-01-01".substr($v,10));}
+		elseif  (test_sql_int($t))
+		  $values[$k] = $v = intval($v);
+		else $values[$k] = $v = _q($v);
+
+		if (!in_array($k, $ids))
+			$noprims[$k]= "$k=$v";
+		else $prims[$k]= "$k=$v";
+	}
+
+	$where = join(' AND ', $prims);
+	if (!$where) {
+		spip_log("REPLACE en PG exige de connaitre la cle primaire de $table: $prim");
+		return 0;
+	}
+	$set = join(',', $noprims);
+	
+	if ($set) {
+	  $r = pg_query($spip_pg_link, $q = "UPDATE $table SET $set WHERE $where");
+	  if (!$r) {
+#	    echo $q, '<br>';
+	    $n = spip_pg_errno();
+	    $m = spip_pg_error();
+	    spip_log("erreur $n $m $q", 'pg');
+	  } else {
+	    $r = pg_affected_rows($r);
+	  }
+	}
+	if (!$r) {
+	    $r = pg_query($spip_pg_link, $q = "INSERT INTO $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',', $values) . ')');
+	    if (!$r) {
+#	      echo $q, '<br>';
+	      $n = spip_pg_errno();
+	      $m = spip_pg_error();
+	      spip_log("erreur $n $m $q", 'pg');
+	    }
+	}
+	return $r;
+}
+
 // http://doc.spip.org/@spip_pg_error
 function spip_pg_error() {
 	return str_replace('ERROR', 'errcode: 1000 ', pg_last_error());
@@ -393,7 +449,7 @@ function mysql2pg_type($v)
 		preg_replace("/tinytext/i", 'text',
 	  	str_replace("longblob", 'text',
 	  	str_replace("datetime", 'timestamp',
-		str_replace("0000-00-00",'1970-01-01',
+		str_replace("0000-00-00",'0000-01-01',
 		   preg_replace("/unsigned/i", '', 	
 		   preg_replace("/double/i", 'double precision', 	
 		   preg_replace("/tinyint/i", 'int', 	
