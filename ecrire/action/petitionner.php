@@ -32,7 +32,14 @@ function action_petitionner_dist() {
 		$site_unique = (_request('site_unique') == 'on') ? 'oui' : 'non';
 		$message =  (_request('message') == 'on') ? 'oui' : 'non';
 
-		spip_query("REPLACE spip_petitions (id_article, email_unique, site_obli, site_unique, message) VALUES ($id_article, '$email_unique', '$site_obli', '$site_unique', '$message')");
+		include_spip('base/auxiliaires');
+		spip_abstract_replace('spip_petitions',
+				      array('id_article' => $id_article,
+					    'email_unique' => $email_unique,
+					    'site_obli' => $site_obli,
+					    'site_unique' => $site_unique,
+					    'message' => $message),
+				      $GLOBALS['tables_auxiliaires']['spip_petitions']);
 		include_spip('inc/modifier');
 		revision_petition($id_article,
 			array('texte' => _request('texte_petition'))
