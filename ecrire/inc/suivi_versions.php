@@ -53,7 +53,9 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 
 	$req_where = "versions.id_article = articles.id_article AND versions.id_version > 1 $req_where";
 
-	$result = spip_abstract_select('versions.*, articles.statut, articles.titre', 'spip_versions AS versions, spip_articles AS articles', $req_where, '', 'versions.date DESC', "$debut, $nb_aff");
+	$req_sel = "versions.id_version, versions.id_auteur, versions.date, versions.id_article, articles.statut, articles.titre";
+
+	$result = spip_abstract_select($req_sel, 'spip_versions AS versions, spip_articles AS articles', $req_where, '', 'versions.date DESC', "$debut, $nb_aff");
 
 	if (spip_num_rows($result) > 0) {
 
@@ -67,10 +69,10 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 				. $titre_table;
 
 	
-			$total = spip_num_rows(spip_abstract_select("versions.*, articles.statut, articles.titre", 'spip_versions AS versions, spip_articles AS articles', $req_where, '','', "0, 149"));
+			$total = spip_num_rows(spip_abstract_select($req_sel, 'spip_versions AS versions, spip_articles AS articles', $req_where, '','', "0, 149"));
 			$id_liste = 't'.substr(md5("$req_where 149"),0,8);
 			$bouton = bouton_block_depliable($titre_table,true,$id_liste);
-	  	$revisions .= debut_cadre('liste',"historique-24.gif",'',$bouton)
+			$revisions .= debut_cadre('liste',"historique-24.gif",'',$bouton)
 	 		 . debut_block_depliable(true,$id_liste);
 		
 			if ($total > $nb_aff) {

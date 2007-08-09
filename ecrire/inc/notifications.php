@@ -255,7 +255,7 @@ function notifications_forumvalide_dist($quoi, $id_forum) {
 	// pas le droit de le moderer (les autres l'ont recu plus tot)
 	if ($t['id_article']
 	AND $GLOBALS['meta']['prevenir_auteurs'] == 'oui') {
-		$result = spip_query("SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article="._q($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
+		$result = spip_query("SELECT auteurs.id_auteur, auteurs.email FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article="._q($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
 
 		while ($qui = spip_abstract_fetch($result)) {
 			if (!autoriser('modererforum', 'article', $t['id_article'], $qui['id_auteur']))
@@ -308,7 +308,7 @@ function notifications_forumposte_dist($quoi, $id_forum) {
 	// avertis par la notifications_forumvalide).
 	if ($t['id_article']
 	AND $GLOBALS['meta']['prevenir_auteurs'] == 'oui') {
-		$result = spip_query("SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article="._q($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
+		$result = spip_query("SELECT auteurs.id_auteur, auteurs.email FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article="._q($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
 
 		while ($qui = spip_abstract_fetch($result)) {
 			if (autoriser('modererforum', 'article', $t['id_article'], $qui['id_auteur']))
