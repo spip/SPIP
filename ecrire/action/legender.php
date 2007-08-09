@@ -55,9 +55,10 @@ function action_legender_post($r)
 		if (preg_match('/^[0-9-]+$/', $date))
 			set_request('date', $date);
 	}
-
 	include_spip('inc/modifier');
-	revision_document($id_document);
-}
 
+	revision_document($id_document,
+			  array ('titre' => _request('titre_document'),
+				 'descriptif' => _request('descriptif_document')));
+}
 ?>
