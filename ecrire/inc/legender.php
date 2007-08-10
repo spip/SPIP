@@ -125,9 +125,10 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 
 	$texte = _T('icone_supprimer_document');
 	$s = ($ancre =='documents' ? '': '-');
+
 	if (preg_match('/_edit$/', $script)){
 		if ($id==0)
-			$action = redirige_action_auteur('supprimer', "document-$id_document", $script, "id_$type=$id#$ancre");
+			$action = redirige_action_auteur('supprimer', "document-$id_document-$script-$id", $script, "id_$type=$id#$ancre");
 		else
 			$action = redirige_action_auteur('documenter', "$s$id/$type/$id_document", $script, "id_$type=$id&type=$type&s=$s#$ancre");
 	}
@@ -159,7 +160,7 @@ function vignette_formulaire_legender($id_document, $document, $script, $type, $
 
 	if (preg_match('/_edit$/', $script)) {
 		$iframe_redirect = generer_url_ecrire("documents_colonne","id=$id&type=$type",true);
-		$action = redirige_action_auteur('supprimer', "document-$id_vignette", $script, "id_$type=$id&show_docs=$id_document#$ancre");
+		$action = redirige_action_auteur('supprimer', "document-$id_vignette-$script-$id", $script, "id_$type=$id&show_docs=$id_document#$ancre");
 	} else {
 		$iframe_redirect = generer_url_ecrire("documenter","id_$type=$id&type=$type",true);
 		$s = ($ancre =='documents' ? '': '-');

@@ -16,18 +16,17 @@ include_spip('inc/charsets');	# pour le nom de fichier
 include_spip('inc/documents');
 include_spip('base/abstract_sql');
 
-// Effacer un doc (et sa vignette)
+// Effacer un doc et sa vignette, ou une rubrique
 // http://doc.spip.org/@action_supprimer_dist
 function action_supprimer_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
-	preg_match('/^(\w+)\W(.*)$/', $arg, $r);
+	preg_match('/^(\w+)\W(\d+)(\W(\w+)\W(\d+))?$/', $arg, $r);
 	$var_nom = 'action_supprimer_' . $r[1];
 	if (function_exists($var_nom)) {
-		spip_log("$var_nom $r[2]");
-		$var_nom($r[2]);
+		$var_nom($r);
 	}
 	else
 		spip_log("action supprimer $arg incompris");
@@ -37,16 +36,18 @@ function action_supprimer_dist() {
 
 // http://doc.spip.org/@action_supprimer_document
 function action_supprimer_document($arg) {
-	supprimer_document_et_vignette(intval($arg));
-	if (strpos(_request('redirect'), 'id_rubrique=')) {
+	list(,,$id_document,, $type, $id) = $arg;
+	supprimer_document_et_vignette($id_document);
+	if (strpos($type,'rubrique') !== 'false') {
 		include_spip('inc/rubriques');
-		calculer_rubriques();
+		depublier_branche_rubrique_if($id);
 	}
 }
 
 // http://doc.spip.org/@action_supprimer_rubrique
-function action_supprimer_rubrique($id_rubrique)
+function action_supprimer_rubrique($r)
 {
+	list(,,$id_rubrique) = $r;
 	spip_query("DELETE FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
 	// Les admin restreints qui n'administraient que cette rubrique
 	// deviennent redacteurs
@@ -62,8 +63,9 @@ function action_supprimer_rubrique($id_rubrique)
 			spip_query("UPDATE spip_auteurs SET statut='1comite' WHERE id_auteur=$id_auteur");
 	}
 
+	// Une rubrique supprimable n'avait pas le statut "publie"
+	// donc rien de neuf pour la rubrique parente
 	include_spip('inc/rubriques');
-	calculer_rubriques();
 	calculer_langues_rubriques();
 
 	// invalider les caches marques de cette rubrique
