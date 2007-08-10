@@ -39,19 +39,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 //----------
 
-// Les taches sont dans un array ('nom de la tache' => periodicite)
+// Les taches sont dans un tableau ('nom de la tache' => periodicite)
 // Cette fonction execute la tache la plus urgente (celle dont la date
 // de derniere execution + la periodicite est minimale) sous reserve que
-// le serveur MySQL soit actif.
+// la base de donnees soit accessible.
 // La date de la derniere intervention est donnee par un fichier homonyme,
 // de suffixe ".lock", modifie a chaque intervention et des le debut
 // de celle-ci afin qu'un processus concurrent ne la demarre pas aussi.
 // Les taches les plus longues sont tronconnees, ce qui impose d'antidater
 // le fichier de verrouillage (avec la valeur absolue du code de retour).
-// La fonction executant la tache est un homonyme de prefixe "cron_"
-// Le fichier homonyme de prefixe "inc_"
-// est automatiquement charge si besoin, et est supposee la definir si ce
-// n'est fait ici.
+// La fonction executant la tache est un homonyme de prefixe "cron_".
+// Elle doit etre definie dans le fichier homonyme du repertoire "inc/"
+// qui est automatiquement lu.
 
 // http://doc.spip.org/@spip_cron
 function spip_cron($taches = array()) {
@@ -79,11 +78,11 @@ function spip_cron($taches = array()) {
 			$tache = $nom;
 			$last = $date_lock;
 		}
-		// debug : si la date du fichier est superieure a l'heure actuelle,
-		// c'est que le serveur a (ou a eu) des problemes de reglage horaire
-		// qui peuvent mettre en peril les taches cron : signaler dans le log
-		// (On laisse toutefois flotter sur une heure, pas la peine de s'exciter
-		// pour si peu)
+	// debug : si la date du fichier est superieure a l'heure actuelle,
+	// c'est que le serveur a (ou a eu) des problemes de reglage horaire
+	// qui peuvent mettre en peril les taches cron : signaler dans le log
+	// (On laisse toutefois flotter sur une heure, pas la peine de s'exciter
+	// pour si peu)
 		else if ($date_lock > $t + 3600)
 			spip_log("Erreur de date du fichier $lock : $date_lock > $t !");
 	}
@@ -92,7 +91,7 @@ function spip_cron($taches = array()) {
 	// Interdire des taches paralleles, de maniere a eviter toute concurrence
 	// entre deux SPIP partageant la meme base, ainsi que toute interaction
 	// bizarre entre des taches differentes
-	// Ne rien lancer non plus si serveur naze evidemment
+	// Ne rien lancer non plus evidemment si la base est inaccessible.
 
 	if (!spip_get_lock('cron')) {
 		spip_log("tache $tache: pas de lock cron");
@@ -121,7 +120,7 @@ function spip_cron($taches = array()) {
 		}# else spip_log("cron $tache a reprendre");
 	}
 
-	// relacher le lock mysql
+	// relacher le verrour
 	spip_release_lock('cron');
 }
 
@@ -136,7 +135,8 @@ function taches_generales() {
 	$taches_generales = array();
 
 	// MAJ des rubriques publiques (cas de la publication post-datee)
-	$taches_generales['rubriques'] = 3600;
+	// est fait au coup par coup a present
+	//	$taches_generales['rubriques'] = 3600;
 
 	// Optimisation de la base
 	$taches_generales['optimiser'] = 3600*48;

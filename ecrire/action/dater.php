@@ -28,12 +28,14 @@ function action_dater_dist() {
 function action_dater_post($r)
 {
 	include_spip('inc/date');
+	$type = $r[2];
+	$id = $r[1];
 	if (!isset($_REQUEST['avec_redac'])) {
 
 		$date = format_mysql_date(_request('annee'), _request('mois'), _request('jour'), _request('heure'), _request('minute'));
-		if ($r[2] == 'article')
+		if ($type == 'article')
 			spip_query("UPDATE spip_articles SET date=" . _q($date) . " WHERE id_article=$r[1]");
-		else action_dater_breve_syndic($r[1], $r[2]);
+		else action_dater_breve_syndic($id, $type);
 	} else {
 		if (_request('avec_redac') == 'non')
 			$annee_redac = $mois_redac = $jour_redac = $heure_redac = $minute_redac = 0;
@@ -48,12 +50,26 @@ function action_dater_post($r)
 					$annee_redac += 9000;
 		}
 
-		spip_query("UPDATE spip_articles SET date_redac='" . format_mysql_date($annee_redac, $mois_redac, $jour_redac, $heure_redac, $minute_redac) ."' WHERE id_article=$r[1]");
+		$date = format_mysql_date($annee_redac, $mois_redac, $jour_redac, $heure_redac, $minute_redac);
+		spip_query("UPDATE spip_articles SET date_redac=" . _q($date) . " WHERE id_article=$r[1]");
 
 	}
-	include_spip('inc/rubriques');
-	calculer_rubriques();
+
+	if (($type == 'article')
+	AND $GLOBALS['meta']["post_dates"] == "non") {
+		$t = spip_abstract_fetch(spip_query("SELECT statut, id_rubrique FROM spip_articles WHERE id_article=$id"));
+		if ($t['statut'] == 'publie') {
+			include_spip('inc/rubriques');
+			if  (strtotime($date) >  time())
+			  depublier_branche_rubrique_if($t['id_rubrique']);
+			else
+			  publier_branche_rubrique($t['id_rubrique']);
+			calculer_prochain_postdate();
+		}
+	}
 }
+
+// Breves et Syndications ne sont pas post-datables
 
 // http://doc.spip.org/@action_dater_breve_syndic
 function action_dater_breve_syndic($id, $type)
@@ -67,8 +83,6 @@ function action_dater_breve_syndic($id, $type)
 		if ($type == 'breve')
 		  spip_query("UPDATE spip_breves SET date_heure=" . _q("$annee-$mois-$jour") . " WHERE id_breve=$id");
 		else spip_query("UPDATE spip_syndic SET date=" . _q("$annee-$mois-$jour") . " WHERE id_syndic=$id");
-		include_spip('inc/rubriques');
-		calculer_rubriques();
 	}
 }
 ?>

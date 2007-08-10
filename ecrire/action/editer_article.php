@@ -257,7 +257,7 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 		$p = @$GLOBALS['meta']['date_prochain_postdate'];
 		if ($t > time() AND (!$p OR ($t < $p))) {
 			include_spip('inc/meta');
-			ecrire_meta('date_prochain_postdate', $t['ts']);
+			ecrire_meta('date_prochain_postdate', $t);
 			ecrire_metas();
 		}
 	}

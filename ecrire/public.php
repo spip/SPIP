@@ -244,9 +244,14 @@ if (defined('_INC_PUBLIC')) {
 
 	// Gestion des statistiques du site public
 	if (($GLOBALS['meta']["activer_statistiques"] != "non")
-	  AND $spip_compter_visites!='non') {
+	AND $spip_compter_visites!='non') {
 		$stats = charger_fonction('stats', 'public');
 		$stats();
+	}
+
+	if (@$GLOBALS['meta']['date_prochain_postdate'] <= time()) {
+		include_spip('inc/rubriques');
+		calculer_prochain_postdate(true);
 	}
 
 	// Effectuer une tache de fond ?
