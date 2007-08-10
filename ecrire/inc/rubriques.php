@@ -65,6 +65,7 @@ function publier_branche_rubrique($id_rubrique)
 // Fonction a appeler lorsqu'on depublie ou supprime qqch dans une rubrique
 // retourne Vrai si le statut change effectivement
 
+// http://doc.spip.org/@depublier_branche_rubrique_if
 function depublier_branche_rubrique_if($id_rubrique)
 {
 	$postdates = ($GLOBALS['meta']["post_dates"] == "non") ?
