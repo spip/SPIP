@@ -173,23 +173,20 @@ function infos_naviguer($id_rubrique, $statut, $ze_logo)
 		}
 		fin_boite_info();
 
-		$res = spip_query("SELECT DISTINCT A.nom, A.id_auteur FROM  spip_auteurs AS A, spip_auteurs_rubriques AS B WHERE A.id_auteur=B.id_auteur AND id_rubrique=$id_rubrique  AND A.statut='0minirezo'");
-		if (spip_num_rows($res))
-		  {
-			echo '<br />';
-			debut_cadre_relief("fiche-perso-24.gif", false, '', _T('info_administrateurs'));
-			while ($row = spip_abstract_fetch($res)) {
+		$res = '';
+		$q = spip_query("SELECT A.nom, A.id_auteur FROM spip_auteurs AS A LEFT JOIN spip_auteurs_rubriques AS R ON A.id_auteur=R.id_auteur WHERE R.id_rubrique=$id_rubrique");
+		while ($row = spip_abstract_fetch($q)) {
 			  $id = $row['id_auteur'];
 
-			  echo 
-				http_img_pack('admin-12.gif','',''),
-			    " <a href='", generer_url_ecrire('auteur_infos', "id_auteur=$id"),
-				"'>",
-				extraire_multi($row['nom']),
+			 $res .= 
+				http_img_pack('admin-12.gif','','') .
+			    " <a href='" . generer_url_ecrire('auteur_infos', "id_auteur=$id") .
+				"'>" .
+				extraire_multi($row['nom']) .
 				'</a><br />';
-			}
-			fin_cadre_relief();
-		  }
+		}
+		if ($res)
+			echo '<br />', debut_cadre_relief("fiche-perso-24.gif", false, '', _T('info_administrateurs')), $res, fin_cadre_relief();
 	}
 }
 
