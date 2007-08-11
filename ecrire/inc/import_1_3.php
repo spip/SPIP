@@ -69,6 +69,7 @@ function inc_import_1_3_dist($lecteur, $request, $gz='fread', $atts=array()) {
 
 	if ($values === false) return  ($import_ok = false);
 
+	import_verifie_session(); // verifier qu'on a toujours la main pour faire des insertions en base
 	if ($values) $boucle($values, $new, $desc, $request, $atts);
 
 	return $import_ok = $new;
