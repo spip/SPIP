@@ -12,6 +12,11 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@cron_syndic
+function cron_syndic_dist($t) {
+	return executer_une_syndication();
+}
+
 //
 // Effectuer la syndication d'un unique site, retourne 0 si aucun a faire.
 //
@@ -572,12 +577,6 @@ function my_strtotime($la_date) {
 	// erreur
 	spip_log("Impossible de lire le format de date '$la_date'");
 	return false;
-}
-
-
-// http://doc.spip.org/@cron_syndic
-function cron_syndic($t) {
-	return executer_une_syndication();
 }
 
 ?>

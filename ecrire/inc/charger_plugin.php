@@ -437,7 +437,7 @@ function essaie_ajouter_liste_plugins($url) {
 // http://doc.spip.org/@chercher_enclosures_zip
 function chercher_enclosures_zip($rss, $desc = '') {
 	$liste = array();
-	include_spip('inc/syndic');
+	include_spip('cron/syndic');
 	foreach(analyser_backend($rss) as $item)
 		if ($item['enclosures']
 		AND $zips = extraire_balises($item['enclosures'], 'a'))

@@ -133,16 +133,6 @@ function appliquer_quota_cache() {
 }
 
 
-// Cette fonction fait le menage dans le cache :
-// - elle peut retirer les fichiers perimes
-// - elle fait appliquer le quota
-// http://doc.spip.org/@cron_invalideur
-function cron_invalideur($t) {
-	// En cas de quota sur le CACHE/, nettoyer les fichiers les plus vieux
-	appliquer_quota_cache();
-	return 1;
-}
-
 //
 // Destruction des fichiers caches invalides
 //

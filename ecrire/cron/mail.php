@@ -12,19 +12,11 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@envoyer_mail
-function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
-	$envoyer_mail = charger_fonction('envoyer_mail','inc');
-	return $envoyer_mail($email,$sujet,$texte,$from,$headers);
-}
-
-
-
 //
 // Mail des nouveautes
 //
 // http://doc.spip.org/@cron_mail
-function cron_mail($t) {
+function cron_mail_dist($t) {
 	$adresse_neuf = $GLOBALS['meta']['adresse_neuf'];
 	$jours_neuf = $GLOBALS['meta']['jours_neuf'];
 	// $t = 0 si le fichier de lock a ete detruit

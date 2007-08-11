@@ -10,23 +10,21 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
 
 //
 // Popularite, modele logarithmique
 //
 
 // http://doc.spip.org/@calculer_popularites
-function calculer_popularites() {
+function cron_popularites_dist($t) {
 
 	// Si c'est le premier appel, ne pas calculer
 	$t = $GLOBALS['meta']['date_popularites'];
 	ecrire_meta('date_popularites', time());
 	ecrire_metas();
 	if (!$t)
-		return;
+		return 1;
 
 	$duree = time() - $t;
 	// duree de demi-vie d'une visite dans le calcul de la popularite (en jours)
@@ -68,15 +66,5 @@ function calculer_popularites() {
 	return 1;
 
 }
-
-//
-// Applique la regle de decroissance des popularites
-//
-// http://doc.spip.org/@cron_popularites
-function cron_popularites($t) {
-	calculer_popularites();
-	return 1;
-}
-
 
 ?>
