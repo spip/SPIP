@@ -27,6 +27,10 @@ function exec_admin_plugin_dist($retour='') {
 		echo minipres();
 		exit;
 	}
+	
+	$format = 'arbre';
+	if (_request('format')!==NULL)
+		$format = _request('format');
 
 	verif_plugin();
 
@@ -88,6 +92,9 @@ function exec_admin_plugin_dist($retour='') {
 		."' class='fondo' />" . "</div>";
 
 
+		$lien_format = $format=='arbre' ?
+		  "<a href='".parametre_url(self(),'format','liste')."'>"._L('Liste')."</a>"
+		  :"<a href='".parametre_url(self(),'format','arbre')."'>"._L('Hierarchie')."</a>";
 		// S'il y a plus de 10 plugins pas installes, les signaler a part ;
 		// mais on affiche tous les plugins mis a la racine ou dans auto/
 		if (count($lpf) - count($lcpa) > 9
@@ -100,16 +107,16 @@ function exec_admin_plugin_dist($retour='') {
 				OR ($dir_auto AND substr($f, 0, strlen($dir_auto)) == $dir_auto)
 				OR in_array($f, $lcpa))
 					$lcpaffiche[] = $f;
-			$corps = "<p>"._L(count($lcpa).' plugins activ&#233;s.')."</p>\n"
+			$corps = "<p>$lien_format | "._L(count($lcpa).' plugins activ&#233;s.')."</p>\n"
 				. "<p><a href='". parametre_url(self(),'afficher_tous_plugins', 'oui') ."'>"._L(count($lpf).' plugins disponibles.')."</a></p>\n"
-				. affiche_arbre_plugins($lcpaffiche, $lcpa);
+				. affiche_les_plugins($lcpaffiche, $lcpa, $format);
 
 		} else {
 			$corps = 
-				"<p>"._L(count($lcpa).' plugins activ&#233;s')."&nbsp;;\n"
+				"<p>$lien_format | "._L(count($lcpa).' plugins activ&#233;s')."&nbsp;;\n"
 				. ""._L(count($lpf).' plugins disponibles.')."</p>\n"
 				. (count($lpf)>20 ? $sub : '')
-				. affiche_arbre_plugins($lpf, $lcpa);
+				. affiche_les_plugins($lpf, $lcpa, $format);
 		}
 
 		$corps .= "\n<br />" . $sub;
@@ -127,6 +134,77 @@ function exec_admin_plugin_dist($retour='') {
 	echo fin_gauche(), fin_page();
 
 
+}
+
+function affiche_les_plugins($liste_plugins, $liste_plugins_actifs, $format='arbre'){
+	if ($format=='liste'){
+		$liste_plugins = array_flip($liste_plugins);
+		foreach(array_keys($liste_plugins) as $chemin) {
+			$info = plugin_get_infos($chemin);
+			$liste_plugins[$chemin] = strtoupper(trim(typo($info['nom'])));
+		}
+		asort($liste_plugins);
+		$res = affiche_liste_plugins($liste_plugins,$liste_plugins_actifs);
+	}
+	else
+		$res = affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs);
+	return http_script("
+	jQuery(function(){
+		jQuery('input.check').click(function(){
+			jQuery(this).parent().toggleClass('nomplugin_on');
+		});
+		jQuery('div.nomplugin a[@rel=info]').click(function(){
+			var prefix = jQuery(this).parent().prev().attr('name');
+			if (!jQuery(this).siblings('div.info').html()) {
+				jQuery(this).siblings('div.info').prepend(ajax_image_searching).load(
+					jQuery(this).attr('href').replace(/admin_plugin|plugins/, 'info_plugin'), {},
+					function() {
+						document.location = '#' + prefix;
+					}
+				);
+			} else {
+				if (jQuery(this).siblings('div.info').toggle().attr('display') != 'none') {
+					document.location = '#' + prefix;
+				}
+			}
+			return false;
+		});
+	});
+	") . $res;
+}
+
+function affiche_liste_plugins($liste_plugins, $liste_plugins_actifs){
+	$fast_liste_plugins_actifs = array_flip($liste_plugins_actifs);
+	$maxiter=1000;
+	$res = '';
+	$block = '';
+	$initiale = '';
+	$block_actif = false;
+	foreach($liste_plugins as $plug => $nom){
+		if (($i=substr($nom,0,1))!==$initiale){
+			if (strlen($block)){
+				$res .= "<li>"
+				  . bouton_block_depliable($initiale,$block_actif?true:false)
+				  . debut_block_depliable($block_actif)
+				  . "<ul>$block</ul>"
+				  . fin_block()
+				  . "</li>";
+			}
+			$initiale = $i;
+			$block = '';
+			$block_actif = false;
+		}
+		// le rep suivant
+		$actif = @isset($fast_liste_plugins_actifs[$plug]);
+		$block_actif = $block_actif | $actif;
+		$id = substr(md5($plug),0,16);
+		$block .= "<li>"
+			. ligne_plug($plug, $actif, $id)
+			. "</li>\n";
+	}
+	return "<ul>"
+	. $res
+	. "</ul>";
 }
 
 // http://doc.spip.org/@tree_open_close_dir
@@ -212,30 +290,7 @@ function affiche_arbre_plugins($liste_plugins, $liste_plugins_actifs){
 	}
 	$res .= tree_open_close_dir($current_dir,$init_dir, true);
 
-	return http_script("
-	jQuery(function(){
-		jQuery('input.check').click(function(){
-			jQuery(this).parent().toggleClass('nomplugin_on');
-		});
-		jQuery('div.nomplugin a[@rel=info]').click(function(){
-			var prefix = jQuery(this).parent().prev().attr('name');
-			if (!jQuery(this).siblings('div.info').html()) {
-				jQuery(this).siblings('div.info').prepend(ajax_image_searching).load(
-					jQuery(this).attr('href').replace(/admin_plugin|plugins/, 'info_plugin'), {},
-					function() {
-						document.location = '#' + prefix;
-					}
-				);
-			} else {
-				if (jQuery(this).siblings('div.info').toggle().attr('display') != 'none') {
-					document.location = '#' + prefix;
-				}
-			}
-			return false;
-		});
-	});
-	")
-	.  "<ul>"
+	return "<ul>"
 	. $res
 	. "</ul>";
 }
