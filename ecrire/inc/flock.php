@@ -13,6 +13,11 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function spip_flock($handle,$verrou){
+	if (_SPIP_FLOCK)
+		@flock($handle, $verrou);
+}
+
 // http://doc.spip.org/@spip_file_get_contents
 function spip_file_get_contents ($fichier) {
 	if (substr($fichier, -3) != '.gz') {
@@ -42,7 +47,7 @@ function lire_fichier ($fichier, &$contenu, $options=false) {
 	if ($fl = @fopen($fichier, 'r')) {
 
 		// verrou lecture
-		@flock($fl, LOCK_SH);
+		spip_flock($fl, LOCK_SH);
 
 		// a-t-il ete supprime par le locker ?
 		if (!@file_exists($fichier)) {
@@ -54,7 +59,7 @@ function lire_fichier ($fichier, &$contenu, $options=false) {
 		$contenu = spip_file_get_contents($fichier);
 
 		// liberer le verrou
-		@flock($fl, LOCK_UN);
+		spip_flock($fl, LOCK_UN);
 		@fclose($fl);
 
 		// Verifications
@@ -91,7 +96,7 @@ function ecrire_fichier ($fichier, $contenu, $ecrire_quand_meme = false, $trunca
 
 	// verrouiller le fichier destination
 	if ($fp = @fopen($fichier, 'a')) {
-		@flock($fp, LOCK_EX);
+		spip_flock($fp, LOCK_EX);
 	// ecrire les donnees, compressees le cas echeant
 	// (on ouvre un nouveau pointeur sur le fichier, ce qui a l'avantage
 	// de le recreer si le locker qui nous precede l'avait supprime...)
@@ -104,7 +109,7 @@ function ecrire_fichier ($fichier, $contenu, $ecrire_quand_meme = false, $trunca
 		$ok = ($s == $a);
 
 	// liberer le verrou et fermer le fichier
-		@flock($fp, LOCK_UN);
+		spip_flock($fp, LOCK_UN);
 		@fclose($fp);
 		@chmod($fichier, _SPIP_CHMOD & 0666);
 		if ($ok) return $ok;
@@ -140,27 +145,28 @@ function raler_fichier($fichier)
 // Supprimer le fichier de maniere sympa (flock)
 //
 // http://doc.spip.org/@supprimer_fichier
-function supprimer_fichier($fichier) {
+function supprimer_fichier($fichier, $lock=true) {
 	if (!@file_exists($fichier))
 		return;
 
-	// verrouiller le fichier destination
-	if ($fp = @fopen($fichier, 'a'))
-		@flock($fp, LOCK_EX);
-	else
-		return;
-
-	// liberer le verrou
-	@flock($fp, LOCK_UN);
-	@fclose($fp);
-
+	if ($lock) {
+		// verrouiller le fichier destination
+		if ($fp = @fopen($fichier, 'a'))
+			spip_flock($fp, LOCK_EX);
+		else
+			return;
+	
+		// liberer le verrou
+		spip_flock($fp, LOCK_UN);
+		@fclose($fp);
+	}
+	
 	// supprimer
-	spip_unlink($fichier);
+	unlink($fichier);
 }
 // Supprimer brutalement, si le fichier existe
 function spip_unlink($fichier) {
-	if (file_exists($fichier))
-		unlink($fichier);
+	supprimer_fichier($fichier,false);
 }
 
 //

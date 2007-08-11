@@ -1141,7 +1141,8 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 		else
 			define('_SPIP_CHMOD', 0777);
 	}
-
+	define('_SPIP_FLOCK',true); // autoriser l'utilisation des verrous fichiers
+	
 	// la taille maxi des logos (0 : pas de limite)
 	define('_LOGO_MAX_SIZE', 0); # poids en ko
 	define('_LOGO_MAX_WIDTH', 0); # largeur en pixels
