@@ -18,12 +18,13 @@ function cron_syndic_dist($t) {
 }
 
 //
-// Effectuer la syndication d'un unique site, retourne 0 si aucun a faire.
+// Effectuer la syndication d'un unique site,
+// retourne 0 si aucun a faire ou echec lors de la tentative
 //
 
 // http://doc.spip.org/@executer_une_syndication
 function executer_une_syndication() {
-	$id_syndic = 0;
+
 	spip_connect();
 
 	## valeurs modifiables dans mes_options
@@ -40,8 +41,8 @@ function executer_une_syndication() {
 	$row = spip_abstract_fetch(spip_abstract_select("id_syndic", "spip_syndic", $where, '', "date_syndic", "1"));
 	if ($row) {
 		$id_syndic = $row["id_syndic"];
-		syndic_a_jour($id_syndic, 'off');
-	}
+		$res1 = syndic_a_jour($id_syndic, 'off');
+	} else $res1 = true;
 
 	// Et un site 'oui' de plus de 2 heures, qui passe en 'sus' s'il echoue
 	$where = "syndication='oui'
@@ -51,9 +52,10 @@ function executer_une_syndication() {
 
 	if ($row) {
 		$id_syndic = $row["id_syndic"];
-		syndic_a_jour($id_syndic, 'sus');
-	}
-	return $id_syndic;
+		$res2 = syndic_a_jour($id_syndic, 'sus');
+	} else $res2 = true;
+
+	return ($res1 OR $res2) ? 0 : $id_syndic;
 }
 
 
@@ -472,6 +474,10 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 //
 // Mettre a jour le site
 //
+// Attention, cette fonction ne doit pas etre appellee simultanement
+// sur un meme site: un verrouillage a du etre pose en amont.
+//
+
 // http://doc.spip.org/@syndic_a_jour
 function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	include_spip('inc/texte');
@@ -489,11 +495,6 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	else
 		$moderation = 'publie';	// en ligne sans validation
 
-	// Section critique : n'autoriser qu'une seule syndication
-	// simultanee pour un site donne
-	if (!spip_get_lock("syndication $url_syndic"))
-		return;
-
 	spip_query("UPDATE spip_syndic SET syndication='$statut', date_syndic=NOW() WHERE id_syndic=$now_id_syndic");
 
 	// Aller chercher les donnees du RSS et les analyser
@@ -504,41 +505,33 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	else
 		$articles = analyser_backend($rss, $url_syndic);
 
+	// Renvoyer l'erreur le cas echeant (inutilise pour le moment)
+	if (!is_array($articles)) return $articles;
+
 	// Les enregistrer dans la base
-	if (is_array($articles)) {
-		$urls = array();
-		$faits = array();
-		foreach ($articles as $data) {
-			inserer_article_syndique ($data, $now_id_syndic, $moderation, $url_site, $url_syndic, $row['resume'], $row['documents'], $faits);
-		}
 
-		// moderation automatique des liens qui sont sortis du feed
-		if (count($faits) > 0
-		AND $row['miroir'] == 'oui') {
-			spip_query("UPDATE spip_syndic_articles	SET statut='off', maj=maj WHERE id_syndic=$now_id_syndic AND NOT (id_syndic_article IN (" . join(",", $faits) . "))");
-		}
-
-		// suppression apres 2 mois des liens qui sont sortis du feed
-		if (count($faits) > 0
-		AND $row['oubli'] == 'oui') {
-			$time = date('U') - 61*24*3600; # deux mois
-			spip_query("DELETE FROM spip_syndic_articles WHERE id_syndic=$now_id_syndic AND UNIX_TIMESTAMP(maj) < $time AND UNIX_TIMESTAMP(date) < $time AND NOT (id_syndic_article IN (" . join(",", $faits) . "))");
-		}
-
-
-		// Noter que la syndication est OK
-		spip_query("UPDATE spip_syndic SET syndication='oui' WHERE id_syndic=$now_id_syndic");
+	$faits = array();
+	foreach ($articles as $data) {
+		inserer_article_syndique ($data, $now_id_syndic, $moderation, $url_site, $url_syndic, $row['resume'], $row['documents'], $faits);
 	}
 
-	// Ne pas oublier de liberer le verrou
-	spip_release_lock($url_syndic);
+	// moderation automatique des liens qui sont sortis du feed
+	if (count($faits) > 0
+	AND $row['miroir'] == 'oui') {
+		spip_query("UPDATE spip_syndic_articles	SET statut='off', maj=maj WHERE id_syndic=$now_id_syndic AND NOT (id_syndic_article IN (" . join(",", $faits) . "))");
+	}
 
+	// suppression apres 2 mois des liens qui sont sortis du feed
+	if (count($faits) > 0
+	AND $row['oubli'] == 'oui') {
+		$time = date('U') - 61*24*3600; # deux mois
+		spip_query("DELETE FROM spip_syndic_articles WHERE id_syndic=$now_id_syndic AND UNIX_TIMESTAMP(maj) < $time AND UNIX_TIMESTAMP(date) < $time AND NOT (id_syndic_article IN (" . join(",", $faits) . "))");
+	}
 
-	// Renvoyer l'erreur le cas echeant
-	if (!is_array($articles))
-		return $articles;
-	else
-		return false; # c'est bon
+	// Noter que la syndication est OK
+	spip_query("UPDATE spip_syndic SET syndication='oui' WHERE id_syndic=$now_id_syndic");
+
+	return false; # c'est bon
 }
 
 
