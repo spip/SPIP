@@ -14,7 +14,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 include_spip('inc/acces');
 include_spip('inc/texte');
-include_spip('inc/mail');
 include_spip('inc/forum');
 include_spip('base/abstract_sql');
 spip_connect();
@@ -127,7 +126,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 	if ($type == "abo") {
 		if (!$GLOBALS["auteur_session"]) {
 			return array('formulaires/login_forum', 0,
-					array('inscription' => generer_url_public('', 'action=inscription'),
+					array('inscription' => generer_url_public('identifiants'),
 						'oubli' => generer_url_public('', 'action=pass')));
 		} else {
 		// forcer ces valeurs
