@@ -82,8 +82,8 @@ function tracer_erreur_forum($type='') {
 
 	define('_TRACER_ERREUR_FORUM', false);
 	if (_TRACER_ERREUR_FORUM) {
-		include_spip('inc/mail');
-		envoyer_mail($GLOBALS['meta']['email_webmaster'], "erreur forum ($type)",
+		$envoyer_mail = charger_fonction('envoyer_mail','inc');
+		$envoyer_mail($GLOBALS['meta']['email_webmaster'], "erreur forum ($type)",
 			"erreur sur le forum ($type) :\n\n".
 			'$_POST = '.print_r($_POST, true)."\n\n".
 			'$_SERVER = '.print_r($_SERVER, true));

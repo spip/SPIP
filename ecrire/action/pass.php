@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/minipres'); # charge lang et execute utiliser_lang
-include_spip('inc/mail'); # pour envoyer_mail
 include_spip('inc/acces'); # pour generer_htpass
 include_spip('public/assembler'); # pour calculer la page
 include_spip('inc/filtres'); # pour email_valide()
@@ -56,7 +55,9 @@ function message_oubli($email, $param)
 	spip_query("UPDATE spip_auteurs SET cookie_oubli = '$cookie' WHERE id_auteur=" . $row['id_auteur']);
 
 	$nom = $GLOBALS['meta']["nom_site"];
-	if ( envoyer_mail($email,
+	$envoyer_mail = charger_fonction('envoyer_mail','inc');
+
+	if ($envoyer_mail($email,
 			  ("[$nom] " .  _T('pass_oubli_mot')),
 			  _T('pass_mail_passcookie',
 			     array('nom_site_spip' => $nom,

@@ -221,7 +221,8 @@ function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $
 
 	include_spip('inc/texte');
 	include_spip('inc/filtres');
-	include_spip('inc/mail');
+
+	$envoyer_mail = charger_fonction('envoyer_mail','inc');
 
 	$result_petition = spip_abstract_select('*', 'spip_petitions', "id_article=$id_article");
 
@@ -281,7 +282,7 @@ function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $
 
 		$messagex = _T('form_pet_mail_confirmation', array('titre' => $titre, 'nom_email' => $nom_email, 'nom_site' => $nom_site, 'url_site' => $url_site, 'url' => $url, 'message' => $message));
 
-		if (envoyer_mail($adresse_email, _T('form_pet_confirmation')." ".$titre, $messagex)) {
+		if ($envoyer_mail($adresse_email, _T('form_pet_confirmation')." ".$titre, $messagex)) {
 			$id_signature = spip_abstract_insert('spip_signatures', "(id_article, date_time, statut)", "($id_article, NOW(), '$passw')");
 			include_spip('inc/modifier');
 			revision_signature($id_signature, array(
