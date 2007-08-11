@@ -204,9 +204,8 @@ function nom_fichier_dump()
 	if ($connect_toutes_rubriques AND file_exists(_DIR_DUMP))
 		$dir = _DIR_DUMP;
 	else $dir = determine_upload();
-
 	$site = isset($GLOBALS['meta']['nom_site'])
-	  ? preg_replace(",\W,is","_", couper(translitteration(trim(typo($GLOBALS['meta']['nom_site']))),20))
+	  ? preg_replace(array(",\W,is",",_(?=_),",",_$,"),array("_","",""), couper(translitteration(trim($GLOBALS['meta']['nom_site'])),30,""))
 	  : 'spip';
 
 	$site .= '_' . date('Ymd');
