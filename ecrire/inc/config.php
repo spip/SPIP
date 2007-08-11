@@ -77,6 +77,7 @@ function liste_metas()
 
 		'articles_versions' => 'non',
 		'activer_statistiques' => 'non',
+		'activer_captures_referers' => 'non',
 
 		'documents_article' => 'non',
 		'documents_rubrique' => 'non',

@@ -182,7 +182,9 @@ function aff_referers ($result, $limit, $plus) {
 			$visites = pos($nbvisites);
 			$ret = "\n<li>";
 
-			if (strlen($source_vignettes) > 0)
+			if (
+			  (strlen($source_vignettes) > 0) && 
+			  $GLOBALS['meta']["activer_captures_referers"]!='non')
 				$ret .= "\n<a href=\"http://".$lesurls[$numero]."\"><img src=\"$source_vignettes".rawurlencode($lesurls[$numero])."\"\nstyle=\"float: $spip_lang_right; margin-bottom: 3px; margin-left: 3px;\" alt='' /></a>";
 
 			if ($visites > 5) $ret .= "<span style='color: red'>$visites "._T('info_visites')."</span> ";
