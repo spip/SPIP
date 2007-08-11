@@ -187,33 +187,36 @@ function aff_referers ($result, $limit, $plus) {
 			  $GLOBALS['meta']["activer_captures_referers"]!='non')
 				$ret .= "\n<a href=\"http://".$lesurls[$numero]."\"><img src=\"$source_vignettes".rawurlencode($lesurls[$numero])."\"\nstyle=\"float: $spip_lang_right; margin-bottom: 3px; margin-left: 3px;\" alt='' /></a>";
 
-			if ($visites > 5) $ret .= "<span style='color: red'>$visites "._T('info_visites')."</span> ";
-			else if ($visites > 1) $ret .= "$visites "._T('info_visites')." ";
-			else $ret .= "<span style='color: #999999'>$visites "._T('info_visite')."</span> ";
+			$bouton = "";
+			if ($visites > 5) $bouton .= "<span style='color: red'>$visites "._T('info_visites')."</span> ";
+			else if ($visites > 1) $bouton .= "$visites "._T('info_visites')." ";
+			else $bouton .= "<span style='color: #999999'>$visites "._T('info_visite')."</span> ";
 
 			if ($dom == "(email)") {
-				$aff .= $ret . "<b>".$dom."</b>";
+				$aff .= $ret . $bouton . "<b>".$dom."</b>";
 			}
 			else {
 			  $n = isset($lesreferers[$numero]) ? count($lesreferers[$numero]) : 0;
 			  if (($n > 1) || ($n > 0 && substr(supprimer_tags($lesreferers[$numero][0]),0,1) != '/')) {
-				$rac = isset($lesliensracine[$numero]);
-				$aff .= $ret
-				. "<a href='http://".quote_amp($lesurls[$numero])."' style='font-weight: bold;'>".$dom."</a>"
-				. (!$rac ? '': (" <span class='spip_x-small'>(" . $lesliensracine[$numero] .")</span>"))
-				. "\n<ul><li>"
-				. join ("</li><li>",$lesreferers[$numero])
-				. "</li></ul>\n";
-			} else {
-				$aff .= $ret;
-				$lien = $n ? $lesreferers[$numero][0] : '';
-				if (preg_match(",^(<a [^>]+>)([^ ]*)( \([0-9]+\))?,i", $lien, $regs)) {
-					$lien = quote_amp($regs[1]).$dom.$regs[2];
-					if (!strpos($lien, '</a>')) $lien .= '</a>';
-				} else
-					$lien = "<a href='http://".$dom."'>".$dom."</a>";
-				$aff .= "<b>".quote_amp($lien)."</b>";
-			  }
+					$rac = isset($lesliensracine[$numero]);
+					$bouton .= "<a href='http://".quote_amp($lesurls[$numero])."' style='font-weight: bold;'>".$dom."</a>"
+					  . (!$rac ? '': (" <span class='spip_x-small'>(" . $lesliensracine[$numero] .")</span>"));
+					$aff .= $ret . bouton_block_depliable($bouton,false)
+					  . debut_block_depliable(false)
+					  . "\n<ul><li>"
+					  . join ("</li><li>",$lesreferers[$numero])
+					  . "</li></ul>"
+					  . fin_block();
+				} else {
+					$aff .= $ret . $bouton;
+					$lien = $n ? $lesreferers[$numero][0] : '';
+					if (preg_match(",^(<a [^>]+>)([^ ]*)( \([0-9]+\))?,i", $lien, $regs)) {
+						$lien = quote_amp($regs[1]).$dom.$regs[2];
+						if (!strpos($lien, '</a>')) $lien .= '</a>';
+					} else
+						$lien = "<a href='http://".$dom."'>".$dom."</a>";
+					$aff .= "<b>".quote_amp($lien)."</b>";
+				}
 			}
 			$aff .= "</li>\n";
 		}

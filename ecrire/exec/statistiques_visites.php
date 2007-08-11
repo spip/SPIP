@@ -116,7 +116,6 @@ function exec_statistiques_visites_dist()
 	if ($origine) {
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_statistiques_referers'), "statistiques_visites", "statistiques");
-	echo "<br /><br />";
 	gros_titre(_T('titre_liens_entrants'));
 	echo barre_onglets("statistiques", "referers");
 
@@ -131,7 +130,6 @@ function exec_statistiques_visites_dist()
 else {
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_statistiques_visites').$pourarticle, "statistiques_visites", "statistiques");
-	echo "<br /><br />";
 	gros_titre(_T('titre_evolution_visite')."<html>".aide("confstat")."</html>");
 //	barre_onglets("statistiques", "evolution");
 	if ($titre) gros_titre($titre);
@@ -814,7 +812,6 @@ if ($origine) {
 $result = spip_query("SELECT referer, $vis AS vis FROM $table_ref WHERE $where ORDER BY vis DESC LIMIT $limit");
 
 
-echo "<br /><br /><br />";
 gros_titre(_T("onglet_origine_visites"));
 
 echo "<div style='font-size:small;overflow:hidden;' class='verdana1'><br />";
