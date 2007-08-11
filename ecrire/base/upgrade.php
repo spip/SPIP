@@ -823,7 +823,6 @@ function maj_base($version_cible = 0) {
 	}
 
 	// Ici version 1.7 officielle
-echo "la";
 	if (upgrade_vers(1.728, $version_installee, $version_cible)) {
 		spip_query("ALTER TABLE spip_articles ADD id_version int unsigned DEFAULT '0' NOT NULL");
 		maj_version (1.728);
