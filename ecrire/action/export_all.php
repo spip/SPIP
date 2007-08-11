@@ -50,6 +50,7 @@ function action_export_all_dist()
 		$tables_sauvegardees = isset($GLOBALS['meta']['status_dump_tables'])?unserialize($GLOBALS['meta']['status_dump_tables']):array();
 		effacer_meta("status_dump");
 		effacer_meta("status_dump_tables");
+		effacer_meta("export_session_id");
 		ecrire_metas();
 
 		$size = @(!file_exists($file) ? 0 : filesize($file));

@@ -16,6 +16,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/flock');
 include_spip('inc/actions');
 include_spip('inc/export');
+include_spip('base/abstract_sql');
+include_spip('inc/meta');
+	include_spip('inc/acces');
 
 // http://doc.spip.org/@exec_export_all_dist
 function exec_export_all_dist()
@@ -27,8 +30,13 @@ function exec_export_all_dist()
 		$dir = _DIR_DUMP;
 	else $dir = determine_upload();
 
+	// creer un id de la session d'export qui sera utilise pour verifier qu'on a toujours la main
+	// avant chaque ecriture de morceau
+	// permet d'eviter les process concourants qui realisent le meme export
+	@define('_EXPORT_SESSION_ID',creer_uniqid());
+	ecrire_meta('export_session_id',_EXPORT_SESSION_ID,'non');
+	
 	// utiliser une version fraiche des metas (ie pas le cache)
-	include_spip('inc/meta');
 	lire_metas();
 
 	if (!isset($GLOBALS['meta']["status_dump"])) {
@@ -146,5 +154,11 @@ function complete_secteurs($les_rubriques)
 		} while ($r);
 	}
 	return $les_rubriques;
+}
+
+function export_verifie_session() {
+	$row = spip_abstract_fetsel(array('valeur'),array('spip_meta'),array("nom='export_session_id'"));
+	if ($row['valeur']!=_EXPORT_SESSION_ID)
+		die('la place est prise');
 }
 ?>

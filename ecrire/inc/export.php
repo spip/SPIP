@@ -172,6 +172,8 @@ function export_objets($table, $etape, $cpt, $dir, $archive, $gz, $total, $les_r
 		// car les admins restreints peuvent parcourir
 		// une portion de table vide pour eux.
 		if ($string) { 
+			// verifier qu'on a encore la main, sinon mourir, un autre process a pris la suite
+			export_verifie_session();
 			// on ecrit dans un fichier generique
 			// puis on le renomme pour avoir une operation atomique 
 			ecrire_fichier ($temp = $filetable . '.temp' . _EXTENSION_PARTIES, $string);
