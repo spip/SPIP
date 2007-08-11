@@ -44,13 +44,14 @@ function base_convert_sql_utf8_dist($titre, $reprise=false)
 // http://doc.spip.org/@convert_sql_utf8
 function convert_sql_utf8(){
 	include_spip('base/db_mysql');
+	include_spip('base/abstract_sql');
 
 	define(_DEBUG_CONVERT, false);
 	$charset_spip = $GLOBALS['meta']['charset'];
 	$charset_supporte = false;
 	$utf8_supporte = false;	
 	// verifier que mysql gere le charset courant pour effectuer les conversions 
-	if ($c = spip_mysql_character_set($charset_spip)){
+	if ($c = spip_sql_character_set($charset_spip)){
 		$sql_charset = $c['charset'];
 		$sql_collation = $c['collation'];
 		$charset_supporte = true;
