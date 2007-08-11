@@ -34,7 +34,7 @@ function inc_admin_dist($script, $titre, $comment='', $retour='')
 	$base($titre,$reprise);
 	effacer_meta($script);
 	ecrire_metas();
-	@unlink(_FILE_META);
+	spip_unlink(_FILE_META);
 	fin_admin($script);
 	spip_log("efface meta: $script " . ($retour ? $retour : ''));
 	if ($retour) redirige_par_entete($retour);
@@ -123,7 +123,7 @@ function debut_admin($script, $action='', $commentaire='') {
 // http://doc.spip.org/@fin_admin
 function fin_admin($action) {
 	$signal = dir_admin() . fichier_admin($action);
-	@unlink($signal);
+	spip_unlink($signal);
 	@rmdir($signal);
 }
 

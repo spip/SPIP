@@ -676,9 +676,9 @@ function maj_base($version_cible = 0) {
 
 	if (upgrade_vers(1.603, $version_installee, $version_cible)) {
 		// supprimer les fichiers deplaces
-		@unlink('inc_meta_cache.php');
-		@unlink('inc_meta_cache.php3');
-		@unlink('data/engines-list.ini');
+		spip_unlink('inc_meta_cache.php');
+		spip_unlink('inc_meta_cache.php3');
+		spip_unlink('data/engines-list.ini');
 		maj_version (1.603);
 	}
 

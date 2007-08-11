@@ -102,7 +102,7 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 				return;
 			}
 			if (!$tmp_dir = tempnam(_DIR_TMP, 'tmp_upload')) return;
-			@unlink($tmp_dir); @mkdir($tmp_dir);
+			spip_unlink($tmp_dir); @mkdir($tmp_dir);
 			$tmp = $tmp_dir.'/'.translitteration($nom_envoye);
 			$nom_envoye .= '.zip'; # conserver l'extension dans le nom de fichier, par exemple toto.js => toto.js.zip
 			deplacer_fichier_upload($source, $tmp);
@@ -118,7 +118,7 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 				return;
 			}
 			$fichier = copier_document($ext, $nom_envoye, $source);
-			@unlink($source);
+			spip_unlink($source);
 
 		} else $fichier = copier_document($ext, $nom_envoye, $source);
 
@@ -157,7 +157,7 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 		if (!$type_image) {
 			if (_DOC_MAX_SIZE > 0
 			AND $taille > _DOC_MAX_SIZE*1024) {
-				@unlink ($fichier);
+				spip_unlink ($fichier);
 				check_upload_error(6,
 				_T('info_logo_max_poids',
 					array('maxi' => taille_en_octets(_DOC_MAX_SIZE*1024),
@@ -167,7 +167,7 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 		else { // image
 			if (_IMG_MAX_SIZE > 0
 			AND $taille > _IMG_MAX_SIZE*1024) {
-				@unlink ($fichier);
+				spip_unlink ($fichier);
 				check_upload_error(6,
 				_T('info_logo_max_poids',
 					array('maxi' => taille_en_octets(_IMG_MAX_SIZE*1024),
@@ -177,7 +177,7 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 			if (_IMG_MAX_WIDTH * _IMG_MAX_HEIGHT
 			AND ($size_image[0] > _IMG_MAX_WIDTH
 			OR $size_image[1] > _IMG_MAX_HEIGHT)) {
-				@unlink ($fichier);
+				spip_unlink ($fichier);
 				check_upload_error(6, 
 				_T('info_logo_max_taille',
 					array(
@@ -197,13 +197,13 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 		if ($mode == 'vignette') {
 			if (!$type_inclus_image) {
 				spip_log ("le format de $fichier ne convient pas pour une image"); # SVG
-				@unlink($fichier);
+				spip_unlink($fichier);
 				return;
 			}
 
 			if (!($largeur * $hauteur)) {
 				spip_log('erreur upload vignette '.$fichier);
-				@unlink($fichier);
+				spip_unlink($fichier);
 				return;
 			}
 		}

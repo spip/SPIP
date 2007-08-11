@@ -339,7 +339,7 @@ function analyser_site($url) {
 				$result['logo'] = $image['fichier'];
 			}
 			else if ($image['fichier']) {
-				@unlink($image['fichier']);
+				spip_unlink($image['fichier']);
 			}
 		}
 	}

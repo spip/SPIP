@@ -132,7 +132,7 @@ function ramasse_parties($dir, $archive)
 	    if (!ecrire_fichier($but,$contenu,false,false))
 	      { $ok = false; break;}
 	  }
-	  @unlink($f);
+	  spip_unlink($f);
 	  $files_o[]=$f;
 	}
 	return $ok ? $files_o : false;
@@ -177,7 +177,7 @@ function export_objets($table, $etape, $cpt, $dir, $archive, $gz, $total, $les_r
 			ecrire_fichier ($temp = $filetable . '.temp' . _EXTENSION_PARTIES, $string);
 	// le fichier destination peut deja exister
 	// si on sort d'un timeout entre le rename et le ecrire_meta
-			if (file_exists($f = $filetable . sprintf('_%04d',$cpt) . _EXTENSION_PARTIES)) @unlink($f);
+			if (file_exists($f = $filetable . sprintf('_%04d',$cpt) . _EXTENSION_PARTIES)) spip_unlink($f);
 			rename($temp, $f);
 		}
 		// on se contente d'une ecriture en base pour aller plus vite

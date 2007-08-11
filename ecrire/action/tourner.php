@@ -96,7 +96,7 @@ function action_tourner_post($r)
 		spip_query("UPDATE spip_documents SET fichier=$f, largeur=$largeur, hauteur=$hauteur WHERE id_document=$arg");
 		if ($effacer) {
 			spip_log("j'efface $effacer");
-			@unlink($effacer);
+			spip_unlink($effacer);
 		}
 	}
 

@@ -177,7 +177,7 @@ function spip_log($message, $logname='spip') {
 	}
 
 	if ($rotate-- > 0) {
-		@unlink($logfile . '.' . $rotate);
+		spip_unlink($logfile . '.' . $rotate);
 		while ($rotate--) {
 			@rename($logfile . ($rotate ? '.' . $rotate : ''), $logfile . '.' . ($rotate + 1));
 		}
@@ -568,7 +568,7 @@ function spip_touch($fichier, $duree=0, $touch=true) {
 	|| ($duree == 0)
 	|| (@filemtime($fichier) < time() - $duree)) {
 		if ($touch) {
-			if (!@touch($fichier)) { @unlink($fichier); @touch($fichier); };
+			if (!@touch($fichier)) { spip_unlink($fichier); @touch($fichier); };
 			if (!$exists) @chmod($fichier, _SPIP_CHMOD & ~0111);
 		}
 		return true;
@@ -710,7 +710,7 @@ function creer_chemin() {
 	$path_a = _chemin();
 	static $c = '';
 
-	// provisoire, a remplacer par un @unlink sur les fichiers compiles lors d'un prochain upgrade
+	// provisoire, a remplacer par un spip_unlink sur les fichiers compiles lors d'un prochain upgrade
 	if (isset($GLOBALS['plugins'])){
 		$c = '';
 		foreach($GLOBALS['plugins'] as $dir) $path_base = _chemin(_DIR_PLUGINS.$dir);

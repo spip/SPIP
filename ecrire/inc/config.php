@@ -163,7 +163,7 @@ function appliquer_modifs_config() {
 
 	// provoquer l'envoi des nouveautes en supprimant le fichier lock
 	if (_request('envoi_now')) {
-		@unlink(_DIR_TMP . 'mail.lock');
+		spip_unlink(_DIR_TMP . 'mail.lock');
 	}
 
 	// Purger les squelettes si un changement de meta les affecte

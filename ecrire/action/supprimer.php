@@ -78,7 +78,7 @@ function supprimer_document_et_vignette($arg)
 {
 	$result = spip_query("SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$arg");
 	if ($row = spip_abstract_fetch($result)) {
-		@unlink(get_spip_doc($row['fichier']));
+		spip_unlink(get_spip_doc($row['fichier']));
 		spip_query("DELETE FROM spip_documents WHERE id_document=$arg");
 		spip_query("UPDATE spip_documents SET id_vignette=0 WHERE id_vignette=$arg");
 		spip_query("DELETE FROM spip_documents_articles WHERE id_document=$arg");
@@ -89,7 +89,7 @@ function supprimer_document_et_vignette($arg)
 			$result = spip_query("SELECT fichier FROM spip_documents	WHERE id_document=$id_vignette");
 
 			if ($row = spip_abstract_fetch($result)) {
-				@unlink(get_spip_doc($row['fichier']));
+				spip_unlink(get_spip_doc($row['fichier']));
 			}
 			spip_query("DELETE FROM spip_documents	WHERE id_document=$id_vignette");
 			spip_query("DELETE FROM spip_documents_articles	WHERE id_document=$id_vignette");

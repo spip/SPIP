@@ -77,7 +77,7 @@ function calculer_visites($t) {
 			spip_log("traite la session $item");
 			compte_fichier_visite($item,
 				$visites, $visites_a, $referers, $referers_a, $articles);
-			@unlink($item);
+			spip_unlink($item);
 			if (--$compteur <= 0)
 				break;
 		}

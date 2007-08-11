@@ -95,7 +95,7 @@ function supprimer_sessions($id_auteur) {
 		if (preg_match(",^\D*(\d+)_\w{32}\.php[3]?$,", $f, $regs)){
 			$f = _DIR_SESSIONS . $f;
 			if (($regs[1] == $id_auteur) OR ($t > filemtime($f)))
-				@unlink($f);
+				spip_unlink($f);
 		}
 	}
 }
@@ -124,7 +124,7 @@ function verifier_session($change=false) {
 
 		// Renouveler la session avec l'alea courant
 		include($fichier_session);
-		@unlink($fichier_session);
+		spip_unlink($fichier_session);
 		ajouter_session($GLOBALS['auteur_session']);
 	}
 
@@ -143,7 +143,7 @@ function verifier_session($change=false) {
 		}
 	} else if ($change) {
 		spip_log("rejoue session $fichier_session ".$_COOKIE['spip_session']);
-		@unlink($fichier_session);
+		spip_unlink($fichier_session);
 		$GLOBALS['auteur_session']['ip_change'] = false;
 		unset($_COOKIE['spip_session']);
 		ajouter_session($GLOBALS['auteur_session']);

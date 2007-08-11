@@ -55,7 +55,7 @@ function exec_export_all_dist()
 		$l = preg_files($file .  ".part_[0-9]+_[0-9]+");
 		if ($l) {
 			spip_log("menage d'une sauvegarde inachevee: " . join(',', $l));
-			foreach($l as $dummy)@unlink($dummy);
+			foreach($l as $dummy)spip_unlink($dummy);
 		}
 		$start = true; //  utilise pour faire un premier hit moitie moins long
 		$tables_sauvegardees = array();

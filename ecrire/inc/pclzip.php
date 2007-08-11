@@ -2211,7 +2211,7 @@
     {
       fclose($v_zip_temp_fd);
       $this->privCloseFd();
-      @unlink($v_zip_temp_name);
+      spip_unlink($v_zip_temp_name);
       $this->privSwapBackMagicQuotes();
 
       // ----- Return
@@ -2242,7 +2242,7 @@
         if (($v_result = $this->privWriteCentralFileHeader($v_header_list[$i])) != 1) {
           fclose($v_zip_temp_fd);
           $this->privCloseFd();
-          @unlink($v_zip_temp_name);
+          spip_unlink($v_zip_temp_name);
           $this->privSwapBackMagicQuotes();
 
           // ----- Return
@@ -2299,7 +2299,7 @@
 
     // ----- Delete the zip file
     // TBC : I should test the result ...
-    @unlink($this->zipname);
+    spip_unlink($this->zipname);
 
     // ----- Rename the temporary file
     // TBC : I should test the result ...
@@ -4828,7 +4828,7 @@
                 // ----- Close the zip file
                 $this->privCloseFd();
                 $v_temp_zip->privCloseFd();
-                @unlink($v_zip_temp_name);
+                spip_unlink($v_zip_temp_name);
 
                 // ----- Error log
                 PclZip::privErrorLog(PCLZIP_ERR_INVALID_ARCHIVE_ZIP, 'Invalid archive size');
@@ -4845,7 +4845,7 @@
                 // ----- Close the zip file
                 $this->privCloseFd();
                 $v_temp_zip->privCloseFd();
-                @unlink($v_zip_temp_name);
+                spip_unlink($v_zip_temp_name);
 
                 // ----- Return
                 //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
@@ -4864,7 +4864,7 @@
                 // ----- Close the zip file
                 $this->privCloseFd();
                 $v_temp_zip->privCloseFd();
-                @unlink($v_zip_temp_name);
+                spip_unlink($v_zip_temp_name);
 
                 // ----- Return
                 //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
@@ -4877,7 +4877,7 @@
                 // ----- Close the zip file
                 $this->privCloseFd();
                 $v_temp_zip->privCloseFd();
-                @unlink($v_zip_temp_name);
+                spip_unlink($v_zip_temp_name);
 
                 // ----- Return
                 //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
@@ -4897,7 +4897,7 @@
             if (($v_result = $v_temp_zip->privWriteCentralFileHeader($v_header_list[$i])) != 1) {
                 $v_temp_zip->privCloseFd();
                 $this->privCloseFd();
-                @unlink($v_zip_temp_name);
+                spip_unlink($v_zip_temp_name);
 
                 // ----- Return
                 //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
@@ -4925,7 +4925,7 @@
             unset($v_header_list);
             $v_temp_zip->privCloseFd();
             $this->privCloseFd();
-            @unlink($v_zip_temp_name);
+            spip_unlink($v_zip_temp_name);
 
             // ----- Return
             //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, $v_result);
@@ -4938,7 +4938,7 @@
 
         // ----- Delete the zip file
         // TBC : I should test the result ...
-        @unlink($this->zipname);
+        spip_unlink($this->zipname);
 
         // ----- Rename the temporary file
         // TBC : I should test the result ...
@@ -5238,7 +5238,7 @@
 
     // ----- Delete the zip file
     // TBC : I should test the result ...
-    @unlink($this->zipname);
+    spip_unlink($this->zipname);
 
     // ----- Rename the temporary file
     // TBC : I should test the result ...
@@ -5733,7 +5733,7 @@
         //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 5, "Fail to copy file");
         $v_result = 0;
       }
-      else if (!@unlink($p_src)) {
+      else if (!spip_unlink($p_src)) {
         //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 5, "Fail to unlink old filename");
         $v_result = 0;
       }

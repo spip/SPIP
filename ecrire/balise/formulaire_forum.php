@@ -301,7 +301,7 @@ function forum_fichier_tmp($arg)
 		while (($file = @readdir($dh)) !== false)
 			if (preg_match('/^forum_([0-9]+)\.lck$/', $file)
 			AND (time()-@filemtime(_DIR_TMP.$file) > 4*3600))
-				@unlink(_DIR_TMP.$file);
+				spip_unlink(_DIR_TMP.$file);
 	return $alea;
 }
 ?>

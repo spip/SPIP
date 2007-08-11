@@ -53,7 +53,7 @@ function install_etape_4_dist()
 		    _DIR_ETC . 'connect.php')) {
 		copy(_FILE_CONNECT_INS . _FILE_TMP . '.php', 
 		     _DIR_ETC . 'connect.php');
-		@unlink(_FILE_CONNECT_INS . _FILE_TMP . '.php');
+		spip_unlink(_FILE_CONNECT_INS . _FILE_TMP . '.php');
 	}
 
 	# maintenant on connait le vrai charset du site s'il est deja configure
@@ -104,8 +104,8 @@ function install_etape_4_dist()
 
 
 	$htpasswd = _DIR_TMP . _AUTH_USER_FILE;
-	@unlink($htpasswd);
-	@unlink($htpasswd."-admin");
+	spip_unlink($htpasswd);
+	spip_unlink($htpasswd."-admin");
 	ecrire_acces();
 	ecrire_metas();
 
@@ -113,7 +113,7 @@ function install_etape_4_dist()
 		    _DIR_ETC . 'chmod.php')) {
 		copy(_FILE_CHMOD_INS . _FILE_TMP . '.php', 
 		     _DIR_ETC . 'chmod.php');
-		@unlink(_FILE_CHMOD_INS . _FILE_TMP . '.php');
+		spip_unlink(_FILE_CHMOD_INS . _FILE_TMP . '.php');
 	}
 
 	// et on l'envoie dans l'espace prive
