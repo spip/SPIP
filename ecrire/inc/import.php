@@ -184,6 +184,7 @@ function detruit_restaurateur()
 // sinon cela signifie que la page a ete rechargee, et qu'une autre session a repris depuis le dernier abs_pos
 // il faut absolument ne plus rien faire et mourir ...
 
+// http://doc.spip.org/@import_verifie_session
 function import_verifie_session() {
 	$row = spip_abstract_fetsel(array('valeur'),array('spip_meta'),array("nom='restauration_session_id'"));
 	if ($row['valeur']!=_RESTAURATION_SESSION_ID)

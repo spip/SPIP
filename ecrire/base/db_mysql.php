@@ -61,6 +61,7 @@ function base_db_mysql_dist($host, $port, $login, $pass, $db='') {
 	return $ok ? 'spip_mysql_query' : false;
 }
 
+// http://doc.spip.org/@spip_mysql_set_connect_charset
 function spip_mysql_set_connect_charset($charset){
 	#spip_log("changement de charset sql : "."SET NAMES "._q($charset));
 	return mysql_query("SET NAMES "._q($charset));

@@ -136,6 +136,7 @@ function exec_admin_plugin_dist($retour='') {
 
 }
 
+// http://doc.spip.org/@affiche_les_plugins
 function affiche_les_plugins($liste_plugins, $liste_plugins_actifs, $format='arbre'){
 	if ($format=='liste'){
 		$liste_plugins = array_flip($liste_plugins);
@@ -173,6 +174,7 @@ function affiche_les_plugins($liste_plugins, $liste_plugins_actifs, $format='arb
 	") . $res;
 }
 
+// http://doc.spip.org/@affiche_liste_plugins
 function affiche_liste_plugins($liste_plugins, $liste_plugins_actifs){
 	$fast_liste_plugins_actifs = array_flip($liste_plugins_actifs);
 	$maxiter=1000;

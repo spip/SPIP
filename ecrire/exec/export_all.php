@@ -156,6 +156,7 @@ function complete_secteurs($les_rubriques)
 	return $les_rubriques;
 }
 
+// http://doc.spip.org/@export_verifie_session
 function export_verifie_session() {
 	$row = spip_abstract_fetsel(array('valeur'),array('spip_meta'),array("nom='export_session_id'"));
 	if ($row['valeur']!=_EXPORT_SESSION_ID)
