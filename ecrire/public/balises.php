@@ -574,7 +574,7 @@ function balise_RANG_dist ($p) {
 // http://doc.spip.org/@balise_PETITION_dist
 function balise_PETITION_dist ($p) {
 	$nom = $p->id_boucle;
-	$p->code = "sql_petitions(" .
+	$p->code = "quete_petitions(" .
 			champ_sql('id_article', $p) .
 			",'" .
 			$p->boucles[$nom]->type_requete .
@@ -791,7 +791,7 @@ function calculer_balise_logo_dist ($p) {
 			"', $_id_objet," .
 			(($suite_logo == '_RUBRIQUE') ? 
 			champ_sql("id_rubrique", $p) :
-			(($type_objet == 'RUBRIQUE') ? "sql_parent($_id_objet)" : "''")) .
+			(($type_objet == 'RUBRIQUE') ? "quete_parent($_id_objet)" : "''")) .
 			",  '$flag_fichier'), $code_lien)";
 	}
 
@@ -849,9 +849,9 @@ function balise_PARAMETRES_FORUM_dist($p) {
 	$_id_article = champ_sql('id_article', $p);
 	$p->code = '
 		// refus des forums ?
-		(sql_accepter_forum('.$_id_article.')=="non" OR
+		(quete_accepter_forum('.$_id_article.')=="non" OR
 		($GLOBALS["meta"]["forums_publics"] == "non"
-		AND sql_accepter_forum('.$_id_article.') == ""))
+		AND quete_accepter_forum('.$_id_article.') == ""))
 		? "" : // sinon:
 		';
 

@@ -163,7 +163,7 @@ function calcule_logo($type, $onoff, $id, $id_rubrique, $flag_fichier) {
 			$id = $id_rubrique;
 			$id_rubrique = 0;
 		} else if ($id AND $type == 'id_rubrique')
-			$id = sql_parent($id);
+			$id = quete_parent($id);
 		else return array('','');
 	}
 }
@@ -278,7 +278,7 @@ function calculer_hierarchie($id_rubrique, $exclure_feuille = false) {
 	if (!$exclure_feuille)
 		$hierarchie[] = $id_rubrique;
 
-	while ($id_rubrique = sql_parent($id_rubrique))
+	while ($id_rubrique = quete_parent($id_rubrique))
 		array_unshift($hierarchie, $id_rubrique);
 
 	if (count($hierarchie))
