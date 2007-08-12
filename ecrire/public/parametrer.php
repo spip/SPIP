@@ -89,6 +89,7 @@ function analyse_resultat_skel($nom, $cache, $corps) {
 // Calcul de la rubrique associee a la requete
 // (selection de squelette specifique par id_rubrique & lang)
 
+// http://doc.spip.org/@quete_rubrique_fond
 function quete_rubrique_fond($contexte) {
 
 	if (isset($contexte['id_rubrique'])) {
@@ -136,6 +137,7 @@ function quete_rubrique_fond($contexte) {
 
 # retourne le chapeau d'un article, et seulement s'il est publie
 
+// http://doc.spip.org/@quete_chapo
 function quete_chapo($id_article) {
 	$chapo= sql_fetsel(array('chapo'),
 		array('spip_articles'),
@@ -146,6 +148,7 @@ function quete_chapo($id_article) {
 
 # retourne le parent d'une rubrique
 
+// http://doc.spip.org/@quete_parent
 function quete_parent($id_rubrique) {
 	if (!$id_rubrique = intval($id_rubrique))
 		return 0;
@@ -162,6 +165,7 @@ function quete_parent($id_rubrique) {
 
 # retourne la profondeur d'une rubrique
 
+// http://doc.spip.org/@quete_profondeur
 function quete_profondeur($id) {
 	$n = 0;
 	while ($id) {
@@ -173,6 +177,7 @@ function quete_profondeur($id) {
 
 # retourne la rubrique d'un article
 
+// http://doc.spip.org/@quete_rubrique
 function quete_rubrique($id_article) {
 	$id_rubrique = sql_fetsel(array('id_rubrique'),
 			array('spip_articles'),
@@ -180,6 +185,7 @@ function quete_rubrique($id_article) {
 	return $id_rubrique['id_rubrique'];
 }
 
+// http://doc.spip.org/@quete_petitions
 function quete_petitions($id_article, $table, $id_boucle, $serveur, &$cache) {
 	$retour = sql_fetsel(
 		array('texte'),
@@ -196,6 +202,7 @@ function quete_petitions($id_article, $table, $id_boucle, $serveur, &$cache) {
 }
 
 # retourne le champ 'accepter_forum' d'un article
+// http://doc.spip.org/@quete_accepter_forum
 function quete_accepter_forum($id_article) {
 	static $cache = array();
 

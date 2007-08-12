@@ -623,6 +623,7 @@ function emboite_texte($texte, $fonc='',$self='')
 }
 
 
+// http://doc.spip.org/@trace_query_start
 function trace_query_start()
 {
 	static $trace = '?';
@@ -637,6 +638,7 @@ function trace_query_start()
 	return  $trace ?  microtime() : 0;
 }
 
+// http://doc.spip.org/@trace_query_end
 function trace_query_end($query, $start, $result, $err)
 {
 	global $tableau_des_erreurs;
@@ -652,6 +654,7 @@ function trace_query_end($query, $start, $result, $err)
 	return $err;
 }
 
+// http://doc.spip.org/@trace_query_chrono
 function trace_query_chrono($m1, $m2, $query, $result)
 {
 	static $tt = 0, $nb=0;

@@ -330,6 +330,7 @@ function spip_mysql_error($query='') {
 }
 
 // A transposer dans les portages
+// http://doc.spip.org/@spip_mysql_errno
 function spip_mysql_errno() {
 	$s = mysql_errno();
 	// 2006 MySQL server has gone away

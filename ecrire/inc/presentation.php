@@ -19,6 +19,7 @@ include_spip('inc/puce_statut');
 
 define('_ACTIVER_PUCE_RAPIDE', true);
 
+// http://doc.spip.org/@echo_log
 function echo_log($ret) {
 	spip_log("Page " . self() . ": echo ".substr($ret,0,50)."...",'echo');
 	echo 

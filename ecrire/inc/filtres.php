@@ -2136,6 +2136,7 @@ function filtre_foreach_dist($balise_deserializee, $modele = 'foreach') {
 // la valeur du second parametre si celui-ci renvoie a une information connue
 // cf liste_plugin_actifs() pour connaitre les informations affichables
 // appelee par la balise #PLUGIN
+// http://doc.spip.org/@calcul_info_plugin
 function calcul_info_plugin($plugin, $type_info) {
 	//surcharge possible pour afficher des donnees plus complexes
 	if(function_exists('info_plugin'))

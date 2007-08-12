@@ -29,6 +29,7 @@ function base_db_pg_dist($addr, $port, $login, $pass, $db='') {
 }
 
 // Par ou ca passe une fois les traductions faites
+// http://doc.spip.org/@spip_pg_trace_query
 function spip_pg_trace_query($query)
 {
 	global $spip_pg_link;
@@ -43,6 +44,7 @@ function spip_pg_trace_query($query)
 // Fonction de requete generale quand on est sur que c'est SQL standard.
 // Elle change juste le noms des tables ($table_prefix) dans le FROM etc
 
+// http://doc.spip.org/@spip_pg_query
 function spip_pg_query($query)
 {
 	global $table_prefix;
@@ -119,6 +121,7 @@ function spip_pg_select($select, $from, $where,
 // Le traitement des prefixes de table dans un Select se limite au FROM
 // car le reste de la requete utilise les alias (AS) systematiquement
 
+// http://doc.spip.org/@spip_pg_from
 function spip_pg_from($from)
 {
 	global $table_prefix;

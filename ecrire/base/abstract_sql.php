@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Chargement a la volee de la description d'un serveur de base de donnees
 
+// http://doc.spip.org/@sql_serveur
 function sql_serveur($ins_sql, $serveur) {
 
   // le serveur par defaut est indique par spip_connect
@@ -66,6 +67,7 @@ function spip_sql_set_connect_charset($charset,$serveur=''){
 // - le nom de la boucle (pour le message d'erreur e'ventuel)
 // - le serveur sollicite (pour retrouver la connexion)
 
+// http://doc.spip.org/@sql_select
 function sql_select (
 	$select = array(), $from = array(), $where = array(),
 	$groupby = '', $orderby = array(), $limit = '',
@@ -80,47 +82,55 @@ function sql_select (
 		  $table, $id, $serveur);
 }
 
+// http://doc.spip.org/@sql_fetch
 function sql_fetch($res, $serveur='') {
 	$f = sql_serveur('fetch', $serveur);
 	return $f($res);
 }
 
+// http://doc.spip.org/@sql_count
 function sql_count($res, $serveur='')
 {
 	$f = sql_serveur('count', $serveur);
 	return $f($res);
 }
 
+// http://doc.spip.org/@sql_free
 function sql_free($res, $serveur='')
 {
 	$f = sql_serveur('free', $serveur);
 	return $f($res);
 }
 
+// http://doc.spip.org/@sql_insert
 function sql_insert($table, $noms, $valeurs, $serveur='')
 {
 	$f = sql_serveur('insert', $serveur);
 	return $f($table, $noms, $valeurs);
 }
 
+// http://doc.spip.org/@sql_update
 function sql_update($table, $exp, $where, $serveur='')
 {
 	$f = sql_serveur('update', $serveur);
 	return $f($table, $exp, $where);
 }
 
+// http://doc.spip.org/@sql_delete
 function sql_delete($table, $where, $serveur='')
 {
 	$f = sql_serveur('delete', $serveur);
 	return $f($table, $where);
 }
 
+// http://doc.spip.org/@sql_replace
 function sql_replace($table, $values, $keys, $serveur='')
 {
 	$f = sql_serveur('replace', $serveur);
 	return $f($table, $values, $keys);
 }
 
+// http://doc.spip.org/@sql_showtable
 function sql_showtable($table, $serveur='', $table_spip = false)
 {
 	if ($table_spip){
@@ -133,28 +143,33 @@ function sql_showtable($table, $serveur='', $table_spip = false)
 	return $f($table);
 }
 
+// http://doc.spip.org/@sql_create
 function sql_create($nom, $champs, $cles, $autoinc=false, $temporary=false, $serveur='') {
 	$f = sql_serveur('create', $serveur);
 	return $f($nom, $champs, $cles, $autoinc, $temporary);
 }
 
+// http://doc.spip.org/@sql_multi
 function sql_multi($sel, $lang, $serveur='')
 {
   	$f = sql_serveur('multi', $serveur);
 	return $f($sel, $lang);
 }
 
+// http://doc.spip.org/@sql_error
 function sql_error($query, $serveur='') {
   	$f = sql_serveur('error', $serveur);
 	return $f($query);
 }
 
+// http://doc.spip.org/@sql_errno
 function sql_errno($serveur='') {
   	$f = sql_serveur('errno', $serveur);
 	return $f();
 }
 
 # une composition tellement frequente...
+// http://doc.spip.org/@sql_fetsel
 function sql_fetsel(
 	$select = array(), $from = array(), $where = array(),
 	$groupby = '', $orderby = array(), $limit = '',
@@ -167,6 +182,7 @@ $sousrequete, $having, $table, $id, $serveur),
 }
 
 # une composition tellement frequente...
+// http://doc.spip.org/@sql_countsel
 function sql_countsel($from = array(), $where = array(),
 	$groupby = '', $limit = '', $sousrequete = '', $having = array(),
 	$serveur='') {
