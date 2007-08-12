@@ -145,16 +145,18 @@ function spip_pg_groupby($groupby, $from, $select)
 	if ($join) $groupby = $groupby ? "$groupby, $join" : $join;
 	if (!$groupby) return '';
 	$groupby = spip_pg_frommysql($groupby);
-	$groupby = preg_replace('/\s+AS\s+\w+/','', $groupby);
+	$groupby = preg_replace('/\bAS\s+\w+/','', $groupby);
 
 	return "\nGROUP BY $groupby"; 
 }
 
 // Conversion des operateurs MySQL en PG
 // IMPORTANT: "0+X" est vu comme conversion numerique du debut de X 
-// Quelques manques encore sur les dates et surtout Field
-// Et le 'as' du 'CAST' est en minuscule pour echapper au dernier preg_replace
-// de spip_pg_groupby, c'est pas top.
+// Manque la traduction de Field
+// Les expressions de date ne sont pas gerees au-dela de 3 ()
+// Le 'as' du 'CAST' est en minuscule pour echapper au dernier preg_replace
+// de spip_pg_groupby
+// Bref, a revoir.
 
 // http://doc.spip.org/@spip_pg_frommysql
 function spip_pg_frommysql($arg)
@@ -163,9 +165,25 @@ function spip_pg_frommysql($arg)
 	$res = preg_replace('/FIELD[(]([^,]*)[^)]*[)]/','1',$arg);
 	if ($res != $arg)
 	  spip_log("SPIP-PG ne sait pas traduire $arg"); # a revoir
+
 	$res = preg_replace('/\b0[+]([^, ]+)\s*/',
 			    'CAST(substring(\1, \'^ *[0-9]+\') as int)',
 			    $res);
+	$res = preg_replace('/UNIX_TIMESTAMP\s*[(]([^)]*)[)]/',
+			    'EXTRACT(\'epoch\' FROM \1)', $res);
+
+	$res = preg_replace('/DAYOFMONTH\s*[(]([^(]*([(][^)]*[)][()]*)*)[)]/',
+			    'EXTRACT(\'day\' FROM \1)',
+			    $res);
+
+	$res = preg_replace('/MONTH\s*[(]([^(]*([(][^)]*[)][()]*)*)[)]/',
+			    'EXTRACT(\'month\' FROM \1)',
+			    $res);
+
+	$res = preg_replace('/YEAR\s*[(]([^(]*([(][^)]*[)][()]*)*)[)]/',
+			    'EXTRACT(\'year\' FROM \1)',
+			    $res);
+
 	$res = preg_replace('/DATE_SUB\s*[(]([^,]*),/', '(\1 -', $res);
 	$res = preg_replace('/DATE_ADD\s*[(]([^,]*),/', '(\1 +', $res);
 	$res = preg_replace('/INTERVAL\s+(\d+\s+\w+)/', 'INTERVAL \'\1\'', $res);
@@ -174,6 +192,10 @@ function spip_pg_frommysql($arg)
 
 	$res = preg_replace('/([+<>-]=?)\s*(\'\d+-\d+-\d+\')/', '\1 date \2', $res);
 	$res = preg_replace('/(\'\d+-\d+-\d+\')\s*([+<>-]=?)/', 'date \1 \2', $res);
+
+	$res = preg_replace('/TO_DAYS\s*[(]([^(]*([(][^)]*[)][()]*)*)[)]/',
+			    'date_part(\'day\', \1 - \'0000-01-01\')',
+			    $res);
 
 	return str_replace('REGEXP', '~', $res);
 }
