@@ -30,7 +30,7 @@ function inc_grouper_mots_dist($id_groupe, $cpt) {
 
 	if ($cpt > $nb_aff) {
 		$nb_aff = _TRANCHES; 
-		$tranches = afficher_tranches_requete($cpt, $tmp_var, generer_url_ecrire('grouper_mots',"id_groupe=$id_groupe"), $nb_aff);
+		$tranches = afficher_tranches_requete($cpt, $tmp_var, generer_url_ecrire('grouper_mots',"id_groupe=$id_groupe&total=$cpt"), $nb_aff);
 	} else $tranches = '';
 
 
@@ -44,7 +44,7 @@ function inc_grouper_mots_dist($id_groupe, $cpt) {
 	$table = array();
 	$occurrences = calculer_liens_mots($id_groupe);
 	while ($row = sql_fetch($result)) {
-		$table[] = afficher_groupe_mots_boucle($row, $occurrences, $cpt);
+		$table[] = afficher_groupe_mots_boucle($row, $occurrences, $cpt, "$tmp_var=$deb_aff");
 	}
 
 	if ($connect_statut=="0minirezo") {
@@ -66,7 +66,7 @@ function inc_grouper_mots_dist($id_groupe, $cpt) {
 }
 
 // http://doc.spip.org/@afficher_groupe_mots_boucle
-function afficher_groupe_mots_boucle($row, $occurrences, $total)
+function afficher_groupe_mots_boucle($row, $occurrences, $total, $deb_aff)
 {
 	global $connect_statut;
 
@@ -126,7 +126,7 @@ function afficher_groupe_mots_boucle($row, $occurrences, $total)
 			. generer_url_ecrire("mots_tous","conf_mot=$id_mot&na=$na&nb=$nb&nr=$nr&ns=$ns&son_groupe=$id_groupe") . "#editer_mot-$id_groupe"
 			. "'>$clic</a>";
 		else {
-			$href = generer_supprimer_mot($id_mot, $id_groupe, $clic, $total);
+			$href = generer_supprimer_mot($id_mot, $id_groupe, $clic, $total, $deb_aff);
 		} 
 
 		$vals[] = "<div style='text-align:right;'>$href</div>";
@@ -136,13 +136,13 @@ function afficher_groupe_mots_boucle($row, $occurrences, $total)
 }
 
 // http://doc.spip.org/@generer_supprimer_mot
-function generer_supprimer_mot($id_mot, $id_groupe, $clic, $total)
+function generer_supprimer_mot($id_mot, $id_groupe, $clic, $total, $deb_aff)
 {
 	$cont = ($total > 1)
 	? ''
 	: "function(r) {jQuery('#editer_mot-$id_groupe-supprimer').css('visibility','visible');}";
 
-	return ajax_action_auteur('editer_mot', "$id_groupe,$id_mot,,,",'grouper_mots', "id_groupe=$id_groupe", array($clic,''), '', $cont);
+	return ajax_action_auteur('editer_mot', "$id_groupe,$id_mot,,,",'grouper_mots', "id_groupe=$id_groupe&$deb_aff", array($clic,''), '', $cont);
 }
 
 //
