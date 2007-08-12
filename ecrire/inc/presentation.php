@@ -19,13 +19,19 @@ include_spip('inc/puce_statut');
 
 define('_ACTIVER_PUCE_RAPIDE', true);
 
+function echo_log($ret) {
+	spip_log("Page " . self() . ": echo ".substr($ret,0,50)."...",'echo');
+	echo 
+		(defined('_SIGNALER_ECHOS')?"#Echo#" :"")
+		. $ret;
+}
 // Faux HR, avec controle de couleur
 
 // http://doc.spip.org/@hr
 function hr($color, $retour = false) {
 	$ret = "\n<div style='height: 1px; margin-top: 5px; padding-top: 5px; border-top: 1px solid $color;'></div>";
 	
-	if ($retour) return $ret; else echo $ret;
+	if ($retour) return $ret; else echo_log($ret);
 }
 
 //
@@ -108,14 +114,14 @@ function fin_cadre($style='') {
 function debut_cadre_relief($icone='', $return = false, $fonction='', $titre = '', $id="", $class=""){
 	$retour_aff = debut_cadre('r', $icone, $fonction, $titre, $id, $class);
 
-	if ($return) return $retour_aff; else echo $retour_aff;
+	if ($return) return $retour_aff; else echo($retour_aff);
 }
 
 // http://doc.spip.org/@fin_cadre_relief
 function fin_cadre_relief($return = false){
 	$retour_aff = fin_cadre('r');
 
-	if ($return) return $retour_aff; else echo $retour_aff;
+	if ($return) return $retour_aff; else echo($retour_aff);
 }
 
 
@@ -123,7 +129,7 @@ function fin_cadre_relief($return = false){
 function debut_cadre_enfonce($icone='', $return = false, $fonction='', $titre = '', $id="", $class=""){
 	$retour_aff = debut_cadre('e', $icone, $fonction, $titre, $id, $class);
 
-	if ($return) return $retour_aff; else echo $retour_aff;
+	if ($return) return $retour_aff; else echo($retour_aff);
 }
 
 // http://doc.spip.org/@fin_cadre_enfonce
@@ -131,20 +137,20 @@ function fin_cadre_enfonce($return = false){
 
 	$retour_aff = fin_cadre('e');
 
-	if ($return) return $retour_aff; else echo $retour_aff;
+	if ($return) return $retour_aff; else echo_log($retour_aff);
 }
 
 
 // http://doc.spip.org/@debut_cadre_sous_rub
 function debut_cadre_sous_rub($icone='', $return = false, $fonction='', $titre = '', $id="", $class=""){
 	$retour_aff = debut_cadre('sous_rub', $icone, $fonction, $titre, $id, $class);
-	if ($return) return $retour_aff; else echo $retour_aff;
+	if ($return) return $retour_aff; else echo_log($retour_aff);
 }
 
 // http://doc.spip.org/@fin_cadre_sous_rub
 function fin_cadre_sous_rub($return = false){
 	$retour_aff = fin_cadre('sous_rub');
-	if ($return) return $retour_aff; else echo $retour_aff;
+	if ($return) return $retour_aff; else echo_log($retour_aff);
 }
 
 
@@ -153,28 +159,28 @@ function fin_cadre_sous_rub($return = false){
 function debut_cadre_forum($icone='', $return = false, $fonction='', $titre = '', $id="", $class=""){
 	$retour_aff = debut_cadre('forum', $icone, $fonction, $titre, $id, $class);
 
-	if ($return) return $retour_aff; else echo $retour_aff;
+	if ($return) return $retour_aff; else echo_log($retour_aff);
 }
 
 // http://doc.spip.org/@fin_cadre_forum
 function fin_cadre_forum($return = false){
 	$retour_aff = fin_cadre('forum');
 
-	if ($return) return $retour_aff; else echo $retour_aff;
+	if ($return) return $retour_aff; else echo_log($retour_aff);
 }
 
 // http://doc.spip.org/@debut_cadre_thread_forum
 function debut_cadre_thread_forum($icone='', $return = false, $fonction='', $titre = '', $id="", $class=""){
 	$retour_aff = debut_cadre('thread-forum', $icone, $fonction, $titre, $id, $class);
 
-	if ($return) return $retour_aff; else echo $retour_aff;
+	if ($return) return $retour_aff; else echo_log($retour_aff);
 }
 
 // http://doc.spip.org/@fin_cadre_thread_forum
 function fin_cadre_thread_forum($return = false){
 	$retour_aff = fin_cadre('thread-forum');
 
-	if ($return) return $retour_aff; else echo $retour_aff;
+	if ($return) return $retour_aff; else echo_log($retour_aff);
 }
 
 
@@ -182,14 +188,14 @@ function fin_cadre_thread_forum($return = false){
 function debut_cadre_couleur($icone='', $return = false, $fonction='', $titre='', $id="", $class=""){
 	$retour_aff = debut_cadre('couleur', $icone, $fonction, $titre, $id, $class);
 
-	if ($return) return $retour_aff; else echo $retour_aff;
+	if ($return) return $retour_aff; else echo_log($retour_aff);
 }
 
 // http://doc.spip.org/@fin_cadre_couleur
 function fin_cadre_couleur($return = false){
 	$retour_aff = fin_cadre('couleur');
 
-	if ($return) return $retour_aff; else echo $retour_aff;
+	if ($return) return $retour_aff; else echo_log($retour_aff);
 }
 
 
@@ -197,27 +203,27 @@ function fin_cadre_couleur($return = false){
 function debut_cadre_couleur_foncee($icone='', $return = false, $fonction='', $titre='', $id="", $class=""){
 	$retour_aff = debut_cadre('couleur-foncee', $icone, $fonction, $titre, $id, $class);
 
-	if ($return) return $retour_aff; else echo $retour_aff;
+	if ($return) return $retour_aff; else echo_log($retour_aff);
 }
 
 // http://doc.spip.org/@fin_cadre_couleur_foncee
 function fin_cadre_couleur_foncee($return = false){
 	$retour_aff = fin_cadre('couleur-foncee');
 
-	if ($return) return $retour_aff; else echo $retour_aff;
+	if ($return) return $retour_aff; else echo_log($retour_aff);
 }
 
 // http://doc.spip.org/@debut_cadre_trait_couleur
 function debut_cadre_trait_couleur($icone='', $return = false, $fonction='', $titre='', $id="", $class=""){
 	$retour_aff = debut_cadre('trait-couleur', $icone, $fonction, $titre, $id, $class);
-	if ($return) return $retour_aff; else echo $retour_aff;
+	if ($return) return $retour_aff; else echo_log($retour_aff);
 }
 
 // http://doc.spip.org/@fin_cadre_trait_couleur
 function fin_cadre_trait_couleur($return = false){
 	$retour_aff = fin_cadre('trait-couleur');
 
-	if ($return) return $retour_aff; else echo $retour_aff;
+	if ($return) return $retour_aff; else echo_log($retour_aff);
 }
 
 
@@ -241,13 +247,13 @@ function fin_boite_alerte() {
 // http://doc.spip.org/@debut_boite_info
 function debut_boite_info($return=false) {
 	$r = debut_cadre('info', '', '', '', '', 'verdana1');
-	if ($return) return $r; else echo $r;
+	if ($return) return $r; else echo_log($r);
 }
 
 // http://doc.spip.org/@fin_boite_info
 function fin_boite_info($return=false) {
 	$r = fin_cadre('info');
-	if ($return) return $r; else echo $r;
+	if ($return) return $r; else echo_log($r);
 }
 
 
@@ -901,7 +907,7 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 // http://doc.spip.org/@icone
 function icone($texte, $lien, $fond, $fonction="", $align="", $echo=false){
 	$retour = "<div style='padding-top: 20px;width:100px' class='icone36'>" . icone_inline($texte, $lien, $fond, $fonction, $align) . "</div>";
-	if ($echo) echo $retour; else return $retour;
+	if ($echo) echo_log($retour); else return $retour;
 }
 
 // http://doc.spip.org/@icone_inline
@@ -1003,7 +1009,7 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $af = true
 		$retour = "\n<li><a$lien>$texte</a></li>";
 	}
 
-	if ($af) echo $retour; else return $retour;
+	if ($af) echo_log($retour); else return $retour;
 }
 
 // Fonction standard pour le pipeline 'boite_infos'
@@ -1056,7 +1062,7 @@ function gros_titre($titre, $ze_logo='', $aff=true){
 		$res .= $ze_logo.' ';
 	}
 	$res .= typo($titre)."</h1>\n";
-	if ($aff) echo $res; else return $res;
+	if ($aff) echo_log($res); else return $res;
 }
 
 
@@ -1067,13 +1073,13 @@ function gros_titre($titre, $ze_logo='', $aff=true){
 // http://doc.spip.org/@debut_grand_cadre
 function debut_grand_cadre($return=false){
 	$res =  "\n<br /><br />\n<div class='table_page'>\n";
-	if ($return) return $res; else echo $res;
+	if ($return) return $res; else echo_log($res);
 }
 
 // http://doc.spip.org/@fin_grand_cadre
 function fin_grand_cadre($return=false){
 	$res = "\n</div>";
-	if ($return) return $res; else echo $res;
+	if ($return) return $res; else echo_log($res);
 }
 
 // Cadre formulaires
@@ -1083,12 +1089,12 @@ function debut_cadre_formulaire($style='', $return=false){
 	$x = "\n<div class='cadre-formulaire'" .
 	  (!$style ? "" : " style='$style'") .
 	   ">";
-	if ($return) return  $x; else echo $x;
+	if ($return) return  $x; else echo_log($x);
 }
 
 // http://doc.spip.org/@fin_cadre_formulaire
 function fin_cadre_formulaire($return=false){
-	if ($return) return  "</div>\n"; else echo "</div>\n";
+	if ($return) return  "</div>\n"; else echo_log("</div>\n");
 }
 
 
@@ -1112,7 +1118,7 @@ function debut_gauche($rubrique = "accueil", $return=false) {
 		
 	if ($spip_display == 4) $res .= "<!-- ";
 
-	if ($return) return $res; else echo $res;
+	if ($return) return $res; else echo_log($res);
 }
 
 // http://doc.spip.org/@fin_gauche
@@ -1135,7 +1141,7 @@ function creer_colonne_droite($rubrique="", $return= false){
 
 	$res = "\n</div><div id='extra'>";
 
-	if ($return) return $res; else echo $res;
+	if ($return) return $res; else echo_log($res);
 }
 
 // http://doc.spip.org/@formulaire_large
@@ -1164,7 +1170,7 @@ function debut_droite($rubrique="", $return= false) {
 	// le ctrl-s qui fait "enregistrer"
 	$res .= "\n<a id='saut' href='#saut' accesskey='z'></a>\n";
 
-	if ($return) return $res; else echo $res;
+	if ($return) return $res; else echo_log($res);
 }
 
 // http://doc.spip.org/@liste_articles_bloques
@@ -1520,7 +1526,7 @@ function afficher_enfant_rub($id_rubrique, $bouton=false, $return=false) {
 	. "</div>"
 	. "<br class='nettoyeur' />";
 
-	if ($return) return $res; else echo $res;
+	if ($return) return $res; else echo_log($res);
 }
 
 // Pour construire des menu avec SELECTED

@@ -67,28 +67,27 @@ gros_titre(_T('titre_admin_vider'));
 // barre_onglets("administration", "vider");
 
 
-debut_gauche();
+echo debut_gauche("",true);
 
-debut_boite_info();
+echo debut_boite_info(true);
 
 echo _T('info_gauche_admin_vider');
 
-fin_boite_info();
+echo fin_boite_info(true);
 
-debut_droite();
+echo debut_droite("",true);
 
-debut_cadre_trait_couleur("cache-24.gif", false, "", _T('texte_vider_cache'));
+echo debut_cadre_trait_couleur("cache-24.gif", true, "", _T('texte_vider_cache'));
 
 echo "\n<p style='text-align: justify;'>"._T('texte_suppression_fichiers')."</p>",
 	"<p style='text-align: justify;'>"._T('texte_recalcul_page')."</p>";
 
 echo "\n<div>&nbsp;</div>";
 
-
 //
 // Quota et taille du cache
 //
-debut_cadre_relief("", false, "", _T('taille_repertoire_cache'));
+echo debut_cadre_relief("", true, "", _T('taille_repertoire_cache'));
 
 include_spip('inc/invalideur');
 if ($n = taille_du_cache())
@@ -113,10 +112,10 @@ if ($quota_cache) {
 			 str_replace('"', '&quot;', _T('bouton_vider_cache')) .
 			 "\" /></div>",
 	" method='post'");
- fin_cadre_relief();
+ echo fin_cadre_relief(true);
 
 
- debut_cadre_relief("image-24.gif", false, "", _T('info_images_auto'));
+ echo debut_cadre_relief("image-24.gif", true, "", _T('info_images_auto'));
 
  echo afficher_taille_cache_vignettes();
 
@@ -126,9 +125,9 @@ if ($quota_cache) {
 			 "\" /></div>",
 	" method='post'");
 
-fin_cadre_relief();
+echo fin_cadre_relief(true);
 
-fin_cadre_trait_couleur();
+echo fin_cadre_trait_couleur(true);
 
 
 echo "<br />";
