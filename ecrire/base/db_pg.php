@@ -28,22 +28,10 @@ function base_db_pg_dist($addr, $port, $login, $pass, $db='') {
 	return false;
 }
 
-// Fonction de requete generale. 
-// Passe la main pour les idiosyncrasies MySQL a traduire
-
-// http://doc.spip.org/@spip_pg_query
-function spip_pg_query($query)
+// Par ou ca passe une fois les traductions faites
+function spip_pg_trace_query($query)
 {
-	global $spip_pg_link, $table_prefix;
-
-	if (strpos($query, 'REPLACE') ===0)
-		return spip_pg_replace($query);
-	// changer les noms des tables ($table_prefix)
-	if (preg_match('/\s(SET|VALUES|WHERE)\s/i', $query, $regs)) {
-		$suite = strstr($query, $regs[0]);
-		$query = substr($query, 0, -strlen($suite));
-	} else $suite ='';
-	$query = preg_replace('/([,\s])spip_/', '\1'.$table_prefix.'_', $query) . $suite;
+	global $spip_pg_link;
 
 	$t = !isset($_GET['var_profile']) ? 0 : trace_query_start();
 	$r = pg_query($spip_pg_link, $query);
@@ -52,6 +40,23 @@ function spip_pg_query($query)
 	return $t ? trace_query_end($query, $t, $r, $e) : $r;
 }
 
+// Fonction de requete generale quand on est sur que c'est SQL standard.
+// Elle change juste le noms des tables ($table_prefix) dans le FROM etc
+
+function spip_pg_query($query)
+{
+	global $table_prefix;
+
+	if (strpos($query, 'REPLACE') ===0) // a evacuer 
+		return spip_pg_replace($query);
+	if (preg_match('/\s(SET|VALUES|WHERE)\s/i', $query, $regs)) {
+		$suite = strstr($query, $regs[0]);
+		$query = substr($query, 0, -strlen($suite));
+	} else $suite ='';
+	$query = preg_replace('/([,\s])spip_/', '\1'.$table_prefix.'_', $query) . $suite;
+	return spip_pg_trace_query($query);
+
+}
 
 //  Qu'une seule base pour le moment
 
@@ -72,7 +77,7 @@ function spip_pg_select($select, $from, $where,
                            $groupby, $orderby, $limit,
                            $sousrequete, $having,
                            $table='', $id='', $serveur=''){
-	global $spip_pg_link;
+
 
 	$limit = preg_match("/^\s*(([0-9]+),)?\s*([0-9]+)\s*$/", $limit,$limatch);
 	if ($limit) {
@@ -86,10 +91,8 @@ function spip_pg_select($select, $from, $where,
 	  spip_log("SPIP-PG ne sait pas traduire HAVING $having"); # a revoir
 	  $having ='';
 	}
-	$q =  spip_pg_frommysql($select) .
-	  (!$from ? '' :
-			("\nFROM " .
-			(!is_array($from) ? $from : spip_pg_select_as($from))))
+	$q =  spip_pg_frommysql($select)
+	  . (!$from ? '' : ("\nFROM " . spip_pg_from($from)))
 	  . (!$where ? '' : ("\nWHERE " . (!is_array($where) ? calculer_pg_where($where) : (join("\n\tAND ", array_map('calculer_pg_where', $where))))))
 	  . spip_pg_groupby($groupby, $from, $select)
 	  . (!$having ? '' : "\nHAVING $having")
@@ -106,12 +109,24 @@ function spip_pg_select($select, $from, $where,
 		boucle_debug_resultat($id, '', $q);
 	}
 
-	if (!($res = spip_pg_query($q))) {
+	if (!($res = spip_pg_trace_query($q))) {
 	  include_spip('public/debug');
 	  erreur_requete_boucle($q, $id, $table, $n, $m);
 	}
-#	spip_log("querypg $q res=" . pg_numrows($res));
 	return $res;
+}
+
+// Le traitement des prefixes de table dans un Select se limite au FROM
+// car le reste de la requete utilise les alias (AS) systematiquement
+
+function spip_pg_from($from)
+{
+	global $table_prefix;
+	return  !$table_prefix ? $from :
+		preg_replace('/(\b)spip_/',
+			     '\1'.$table_prefix.'_', 
+			     (!is_array($from) ? $from : spip_pg_select_as($from)));
+
 }
 
 // Conversion a l'arrach' des jointures MySQL en jointures PG
@@ -238,7 +253,7 @@ function spip_pg_insert($table, $champs, $valeurs, $ignore='') {
 		$table = preg_replace('/^spip/',
 				    $GLOBALS['table_prefix'],
 				    $table);
-	$r = pg_query($spip_pg_link, "INSERT INTO $table $champs VALUES $valeurs $ret");
+	$r = spip_pg_trace_query("INSERT INTO $table $champs VALUES $valeurs $ret");
 	if (!$r) return 0;
 	if (!$ret) return -1;
 	$r = pg_fetch_array($r, NULL, PGSQL_NUM);
@@ -253,7 +268,7 @@ function spip_pg_update($table, $exp, $where='') {
 		$table = preg_replace('/^spip/',
 				    $GLOBALS['table_prefix'],
 				    $table);
-	pg_query($spip_pg_link, "UPDATE $table SET " . spip_pg_frommysql($exp) .($where ? (" WHERE " . spip_pg_frommysql($where)) : ''));
+	spip_pg_trace_query("UPDATE $table SET " . spip_pg_frommysql($exp) .($where ? (" WHERE " . spip_pg_frommysql($where)) : ''));
 }
 
 // http://doc.spip.org/@spip_pg_delete
@@ -263,7 +278,7 @@ function spip_pg_delete($table, $where='') {
 		$table = preg_replace('/^spip/',
 				    $GLOBALS['table_prefix'],
 				    $table);
-	pg_query($spip_pg_link, "DELETE FROM $table " . ($where ? (" WHERE " . spip_pg_frommysql($where)) : ''));
+	spip_pg_trace_query("DELETE FROM $table " . ($where ? (" WHERE " . spip_pg_frommysql($where)) : ''));
 }
 
 
