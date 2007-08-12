@@ -96,7 +96,7 @@ function inc_import_1_2_dist($f, $request, $gz='fread') {
 	}
    if ($values) {
 	if (!sql_replace($table, $values, $desc)) {
-		echo "--><br /><span style='color: red; font-weight: bold;'>"._T('avis_erreur_mysql')."</span>\n<span style='color: black'><tt>".spip_sql_error()."</tt></span>\n<!--";
+		echo "--><br /><span style='color: red; font-weight: bold;'>"._T('avis_erreur_mysql')."</span>\n<span style='color: black'><tt>".sql_error()."</tt></span>\n<!--";
 		$GLOBALS['erreur_restauration'] = true;
 	}
 
