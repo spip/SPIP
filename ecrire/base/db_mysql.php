@@ -46,14 +46,14 @@ function base_db_mysql_dist($host, $port, $login, $pass, $db='') {
 	  if (isset($GLOBALS['meta']['charset_sql_connexion']))
 		mysql_query("SET NAMES "._q($GLOBALS['meta']['charset_sql_connexion']));
 	
-	  if ($ok) 
+	  if ($ok)
 		  $ok = spip_mysql_count(spip_mysql_query('SELECT COUNT(*) FROM spip_meta'));
 	}
 	// En cas d'erreur marquer le fichier mysql_out
 	if (!$ok
 	AND !defined('_ECRIRE_INSTALL')) {
 		@touch(_DIR_TMP.'mysql_out');
-		$err = 'Echec connexion MySQL '.spip_mysql_errno().' '.spip_mysql_error();
+		$err = 'Echec connexion MySQL '.spip_mysql_errno().' '.spip_mysql_error('connexion');
 		spip_log($err);
 		spip_log($err, 'mysql');
 	} 
@@ -78,75 +78,16 @@ function spip_mysql_query($query) {
 
 	$query = traite_query($query); // traitement du prefixe de table
 
-	$re = ($GLOBALS['mysql_rappel_connexion'] AND $GLOBALS['spip_mysql_link']);
-
-	return spip_sql_trace_end($query,
-				  spip_sql_trace_start(), 
-				  $re ?
-				  mysql_query($query, $GLOBALS['spip_mysql_link']) :
-				  mysql_query($query));
+	$r = ($GLOBALS['mysql_rappel_connexion'] AND $GLOBALS['spip_mysql_link']);
+	$t = !isset($_GET['var_profile']) ? 0 : trace_query_start();
+	$r = $r ?
+		mysql_query($query, $GLOBALS['spip_mysql_link']) :
+		mysql_query($query);
+	if ($e = spip_mysql_errno())	// Log de l'erreur eventuelle
+		$e .= spip_mysql_error($query); // et du fautif
+	return $t ? trace_query_end($query, $t, $r, $e) : $r;
 }
 
-// http://doc.spip.org/@spip_sql_trace_start
-function spip_sql_trace_start()
-{
-	static $trace = '?';
-
-	if (!isset($_GET['var_profile'])) return 0;
-
-	if ($trace === '?') {
-		include_spip('inc/autoriser');
-		// gare au bouclage sur calcul de droits au premier appel
-		$trace = true;
-		$trace = autoriser('debug');
-	}
-	return  $trace ?  microtime() : 0;
-}
-
-// http://doc.spip.org/@spip_sql_trace_end
-function spip_sql_trace_end($query, $start, $result)
-{
-	global $tableau_des_erreurs;
-	$s = spip_mysql_errno();
-	if ($start) spip_sql_timing($start, microtime(), $query, $result);
-
-	if ($s) {
-		// 2006 MySQL server has gone away
-		// 2013 Lost connection to MySQL server during query
-		if (in_array($s, array(2006,2013)))
-			define('spip_interdire_cache', true);
-		$s .= ' '.spip_mysql_error();
-		if ($GLOBALS['mysql_debug']) {
-			include_spip('inc/autoriser');
-			if (autoriser('voirstats')) {
-				include_spip('public/debug');
-				$tableau_des_erreurs[] = array(
-				_T('info_erreur_requete'). " "  .  htmlentities($query),
-				"&laquo; " .  htmlentities($result = $s)," &raquo;");
-			}
-		}
-		spip_log("$result - $query", 'mysql');
-		spip_log($s, 'mysql');
-	}
-	return $result;
-}
-
-// http://doc.spip.org/@spip_sql_timing
-function spip_sql_timing($m1, $m2, $query, $result)
-{
-	static $tt = 0, $nb=0;
-	global $tableau_des_temps;
-
-	list($usec, $sec) = explode(" ", $m1);
-	list($usec2, $sec2) = explode(" ", $m2);
- 	$dt = $sec2 + $usec2 - $sec - $usec;
-	$tt += $dt;
-	$nb++;
-	$tableau_des_temps[] = array(sprintf("%3f", $dt), 
-				     "<table border='1'><tr><td>" .
-				     sprintf(" %3d", $nb) .
-				     "e</td><td>$query</td><td>$result</td></tr></table>");
-}
 
 // fonction appelant la precedente  specifiquement pour l'espace public
 // c'est une instance de sql_select, voir ses specs dans abstract.php
@@ -161,7 +102,8 @@ function spip_mysql_select($select, $from, $where,
 			   $sousrequete, $having,
 			   $table='', $id='', $server='') {
 
-	$query = (!is_array($select) ? $select : join(", ", $select)) .
+	$query = 'SELECT ' .
+		(!is_array($select) ? $select : join(", ", $select)) .
 		(!$from ? '' :
 			("\nFROM " .
 			(!is_array($from) ? $from : spip_select_as($from))))
@@ -175,14 +117,14 @@ function spip_mysql_select($select, $from, $where,
 
 	if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug') {
 		include_spip('public/debug');
-		boucle_debug_resultat($id, 'requete', "SELECT " . $query);
+		boucle_debug_resultat($id, 'requete', $query);
 	}
 
-	if (!($res = spip_mysql_query("SELECT ". $query, $server))) {
+	if (!($res = spip_mysql_query($query, $server))) {
 		include_spip('public/debug');
-		erreur_requete_boucle($query, $id, $table,
+		erreur_requete_boucle(substr($query, 7), $id, $table,
 				      spip_mysql_errno(),
-				      spip_mysql_error());
+				      spip_mysql_error($query) );
 	}
 
 	return $res;
@@ -381,12 +323,21 @@ function spip_mysql_countsel($from = array(), $where = array(),
 }
 
 // http://doc.spip.org/@spip_mysql_error
-function spip_mysql_error() {
-	return mysql_error();
+function spip_mysql_error($query='') {
+	$s = mysql_error();
+	if ($s) spip_log("$s - $query", 'mysql');
+	return $s;
 }
 
+// A transposer dans les portages
 function spip_mysql_errno() {
-	return mysql_errno();
+	$s = mysql_errno();
+	// 2006 MySQL server has gone away
+	// 2013 Lost connection to MySQL server during query
+	if (in_array($s, array(2006,2013)))
+		define('spip_interdire_cache', true);
+	if ($s) spip_log("Erreur mysql $s");
+	return $s;
 }
 
 // Interface de abstract_sql

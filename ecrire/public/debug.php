@@ -621,4 +621,50 @@ function emboite_texte($texte, $fonc='',$self='')
 		return array(ancre_texte($texte, array(array($ouvrant), array($fermant))), $err);
 	}
 }
+
+
+function trace_query_start()
+{
+	static $trace = '?';
+
+	if ($trace === '?') {
+		include_spip('inc/autoriser');
+		// gare au bouclage sur calcul de droits au premier appel
+		// A fortiori quand on demande une trace
+		$trace = !isset($_GET['var_profile']);
+		$trace = autoriser('debug');
+	}
+	return  $trace ?  microtime() : 0;
+}
+
+function trace_query_end($query, $start, $result, $err)
+{
+	global $tableau_des_erreurs;
+	if ($start) trace_query_chrono($start, microtime(), $query, $result);
+	if (!($err = sql_errno())) return $result;
+	$err .= ' '.sql_error();
+	if (autoriser('voirstats')) {
+		include_spip('public/debug');
+		$tableau_des_erreurs[] = array(
+		_T('info_erreur_requete'). " "  .  htmlentities($query),
+		"&laquo; " .  htmlentities($err)," &raquo;");
+	}
+	return $err;
+}
+
+function trace_query_chrono($m1, $m2, $query, $result)
+{
+	static $tt = 0, $nb=0;
+	global $tableau_des_temps;
+
+	list($usec, $sec) = explode(" ", $m1);
+	list($usec2, $sec2) = explode(" ", $m2);
+ 	$dt = $sec2 + $usec2 - $sec - $usec;
+	$tt += $dt;
+	$nb++;
+	$tableau_des_temps[] = array(sprintf("%3f", $dt), 
+				     "<table border='1'><tr><td>" .
+				     sprintf(" %3d", $nb) .
+				     "e</td><td>$query</td><td>$result</td></tr></table>");
+}
 ?>

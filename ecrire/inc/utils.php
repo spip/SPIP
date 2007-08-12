@@ -182,11 +182,6 @@ function spip_log($message, $logname='spip') {
 			@rename($logfile . ($rotate ? '.' . $rotate : ''), $logfile . '.' . ($rotate + 1));
 		}
 	}
-
-	// recopier les spip_log mysql (ce sont uniquement des erreurs)
-	// dans le spip_log general
-	if ($logname == 'mysql')
-		spip_log($message);
 }
 
 // Fonction appelee uniquement par le fichier cree dans config/ a l'instal'.
@@ -230,19 +225,17 @@ function spip_connect($serveur='') {
 	static $t = array();
 
 	$index = $serveur ? $serveur : 'principal';
-
 	if (isset($t[$index])) return $t[$index];
 
 	include_spip('base/abstract_sql');
+	if (isset($_GET['var_profile'])) include_spip('public/debug');
 
 	$f = $serveur
 	? (_FILE_CONNECT_INS . $serveur . '.php')
 	: ( _FILE_CONNECT ?  _FILE_CONNECT 
 	    : ((_request('exec') == 'install') ? (_FILE_CONNECT_INS .  '.php')
 	       : ''));
-	
 	if ($f) include($f);
-
 	if (!isset($GLOBALS['db_ok']))
 		spip_log("spip_connect: serveur $index inutilisable.");
 
