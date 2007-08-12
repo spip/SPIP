@@ -23,11 +23,11 @@ function inc_tourner_dist($id_document, $document, $script, $flag, $type)
 
 	if (!$document) {
 		// retour d'Ajax
-		$document = spip_abstract_fetch(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document)));
+		$document = sql_fetch(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document)));
 	}
 
 	if (preg_match('/^\w+$/',$type)) { // securite
-		$id = spip_abstract_fetch(spip_query("SELECT id_$type FROM spip_documents_$type" . "s WHERE id_document = " . intval($id_document)));
+		$id = sql_fetch(spip_query("SELECT id_$type FROM spip_documents_$type" . "s WHERE id_document = " . intval($id_document)));
 		$id = $id["id_$type"];
 	} else $id = 0; // le hash sera inutilisable
 

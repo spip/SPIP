@@ -123,10 +123,10 @@ function login_pour_tous($login, $cible, $action) {
 
 	$erreur = '';
 	if ($login) {
-		$row =  spip_abstract_fetsel('*', 'spip_auteurs', "login=" . _q($login));
+		$row =  sql_fetsel('*', 'spip_auteurs', "login=" . _q($login));
 		// Retrouver ceux qui signent de leur nom ou email
 		if (!$row AND !$GLOBALS['ldap_present']) {
-			$row = spip_abstract_fetsel('*', 'spip_auteurs', "(nom = " . _q($login) . " OR email = " . _q($login) . ") AND login<>'' AND statut<>'5poubelle'");
+			$row = sql_fetsel('*', 'spip_auteurs', "(nom = " . _q($login) . " OR email = " . _q($login) . ") AND login<>'' AND statut<>'5poubelle'");
 			if ($row) {
 				$login_alt = $login; # afficher ce qu'on a tape
 				$login = $row['login'];

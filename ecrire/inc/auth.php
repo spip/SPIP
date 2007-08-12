@@ -125,7 +125,7 @@ function inc_auth_dist() {
 	// Trouver les autres infos dans la table auteurs.
 	// le champ 'quand' est utilise par l'agenda
 	$result = spip_query("SELECT *, en_ligne AS quand FROM spip_auteurs WHERE $where AND statut!='5poubelle'");
-	if (!$row = spip_abstract_fetch($result)) {
+	if (!$row = sql_fetch($result)) {
 		// il n'est PLUS connu. c'est SQL qui est desyncrho
 		auth_areconnecter($connect_login);
 		return -1;

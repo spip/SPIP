@@ -54,7 +54,7 @@ function action_legender_auteur_post($r) {
 //
 	$auteur = array();
 	if ($id_auteur) {
-		$auteur = spip_abstract_fetch(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
+		$auteur = sql_fetch(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
 	  }
 	if (!$auteur) {
 		$id_auteur = 0;
@@ -82,7 +82,7 @@ function action_legender_auteur_post($r) {
 			if (strlen($new_login) < 4)
 				$echec[]= 'info_login_trop_court';
 			else {
-				$n = spip_abstract_countsel('spip_auteurs', "login=" . _q($new_login) . " AND id_auteur!=$id_auteur AND statut!='5poubelle'",'',1);
+				$n = sql_countsel('spip_auteurs', "login=" . _q($new_login) . " AND id_auteur!=$id_auteur AND statut!='5poubelle'",'',1);
 				if ($n)
 					$echec[]= 'info_login_existant';
 				else if ($new_login != $old_login) {
@@ -161,7 +161,7 @@ function action_legender_auteur_post($r) {
 	// l'entrer dans la base
 	if (!$echec) {
 		if (!$auteur['id_auteur']) { // creation si pas d'id
-			$auteur['id_auteur'] = $id_auteur = spip_abstract_insert("spip_auteurs", "(nom,statut)", "('temp','" . $statut . "')");
+			$auteur['id_auteur'] = $id_auteur = sql_insert("spip_auteurs", "(nom,statut)", "('temp','" . $statut . "')");
 
 			// recuperer l'eventuel logo charge avant la creation
 			$id_hack = 0 - $GLOBALS['auteur_session']['id_auteur'];
@@ -203,7 +203,7 @@ function action_legender_auteur_post($r) {
 		spip_query("DELETE FROM spip_auteurs_rubriques WHERE id_auteur="._q($id_auteur));
 		foreach (array_unique($restreintes) as $id_rub)
 			if ($id_rub = intval($id_rub)) // si '0' on ignore
-				spip_abstract_insert('spip_auteurs_rubriques', "(id_auteur,id_rubrique)", "($id_auteur,$id_rub)");
+				sql_insert('spip_auteurs_rubriques', "(id_auteur,id_rubrique)", "($id_auteur,$id_rub)");
 	}
 
 	// Lier a un article

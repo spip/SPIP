@@ -31,7 +31,7 @@ function inc_signatures_dist($script, $id, $debut, $where, $order, $limit='') {
 	}
 	else $args = "";
 
-	$t = spip_abstract_countsel("spip_signatures", $where);
+	$t = sql_countsel("spip_signatures", $where);
 	if ($t > ($nb_aff = floor(1.5*_TRANCHES))) {
 		$res = navigation_pagination($t, $nb_aff, generer_url_ecrire($script, $args), false, 'debut');
 	} else $res = '';
@@ -43,7 +43,7 @@ function inc_signatures_dist($script, $id, $debut, $where, $order, $limit='') {
 
 	$res .= '<br />';
 
- 	while($row=spip_abstract_fetch($request)){
+ 	while($row=sql_fetch($request)){
 		$res .= '<br />' . signatures_edit($script, $id, $debut, $row);
 	}
 	return $res;
@@ -105,7 +105,7 @@ function signatures_edit($script, $id, $debut, $row) {
 		$res .= '<br />' . message_de_signature($row);
 		
 		if (!$id) {
-			$r = spip_abstract_fetch(spip_query("SELECT titre, statut FROM spip_articles WHERE id_article=$id_article"));
+			$r = sql_fetch(spip_query("SELECT titre, statut FROM spip_articles WHERE id_article=$id_article"));
 
 			$res .= "<span class='arial1' style='float: $spip_lang_right; color: black; padding-$spip_lang_left: 4px;'><b>"
 			. _T('info_numero_abbreviation')

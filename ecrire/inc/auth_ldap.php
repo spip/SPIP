@@ -33,7 +33,7 @@ function inc_auth_ldap_dist ($login, $pass) {
 	// avec le statut par defaut a l'install
 	if (!spip_num_rows($result))
 		$result = auth_ldap_inserer($dn, $GLOBALS['meta']["ldap_statut_import"]);
-	return $result ? spip_abstract_fetch($result) : array(); 
+	return $result ? sql_fetch($result) : array(); 
 }
 
 // http://doc.spip.org/@auth_ldap_search
@@ -108,7 +108,7 @@ function auth_ldap_inserer($dn, $statut)
 	$login = strtolower(importer_charset($login, 'utf-8'));
 
 	include_spip('base/abstract_sql');
-	$n = spip_abstract_insert('spip_auteurs', '(source, nom, login, email, bio, statut, pass)', "('ldap', " . _q($nom) . ", " . _q($login) . ", " . _q($email) . ", " . _q($bio) . ", " . _q($statut) . ", '')");
+	$n = sql_insert('spip_auteurs', '(source, nom, login, email, bio, statut, pass)', "('ldap', " . _q($nom) . ", " . _q($login) . ", " . _q($email) . ", " . _q($bio) . ", " . _q($statut) . ", '')");
 
 	return spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$n");
 }

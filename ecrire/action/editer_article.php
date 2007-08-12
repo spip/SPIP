@@ -70,7 +70,7 @@ function insert_article($id_rubrique) {
 	// Si id_rubrique vaut 0 ou n'est pas definie, creer l'article
 	// dans la premiere rubrique racine
 	if (!$id_rubrique = intval($id_rubrique)) {
-		$row = spip_abstract_fetch(spip_abstract_select("id_rubrique", "spip_rubriques", "id_parent=0",'', '0+titre,titre', "1"));
+		$row = sql_fetch(sql_select("id_rubrique", "spip_rubriques", "id_parent=0",'', '0+titre,titre', "1"));
 		$id_rubrique = $row['id_rubrique'];
 	}
 
@@ -87,7 +87,7 @@ function insert_article($id_rubrique) {
 		}
 	}
 
-	$row = spip_abstract_fetch(spip_query("SELECT lang, id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+	$row = sql_fetch(spip_query("SELECT lang, id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 
 	$id_secteur = $row['id_secteur'];
 
@@ -97,12 +97,12 @@ function insert_article($id_rubrique) {
 		$lang = $row['lang'];
 	}
 
-	$id_article = spip_abstract_insert("spip_articles",
+	$id_article = sql_insert("spip_articles",
 		"(id_rubrique, id_secteur, statut, date, accepter_forum, lang, langue_choisie)",
 		"($id_rubrique, $id_secteur, 'prepa', NOW(), '"
 			. substr($GLOBALS['meta']['forums_publics'],0,3)
 			. "', '$lang', '$choisie')");
-	spip_abstract_insert('spip_auteurs_articles', "(id_auteur,id_article)", "('" . $GLOBALS['auteur_session']['id_auteur'] . "','$id_article')");
+	sql_insert('spip_auteurs_articles', "(id_auteur,id_article)", "('" . $GLOBALS['auteur_session']['id_auteur'] . "','$id_article')");
 
 	return $id_article;
 }
@@ -117,7 +117,7 @@ function revisions_articles ($id_article, $c=false) {
 	if (!is_array($c)) trop_longs_articles();
 
 	// Si l'article est publie, invalider les caches et demander sa reindexation
-	$t = spip_abstract_fetch(spip_query(
+	$t = sql_fetch(spip_query(
 	"SELECT statut FROM spip_articles WHERE id_article=$id_article"));
 	if ($t['statut'] == 'publie') {
 		$invalideur = "id='id_article/$id_article'";
@@ -157,7 +157,7 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 	include_spip('inc/modifier');
 
 	$s = spip_query("SELECT statut, id_rubrique FROM spip_articles WHERE id_article=$id_article");
-	$row = spip_abstract_fetch($s);
+	$row = sql_fetch($s);
 	$id_rubrique = $row['id_rubrique'];
 	$statut_ancien = $statut = $row['statut'];
 	$champs = array();
@@ -184,7 +184,7 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 			else {
 				# on prend la date de MySQL pour eviter un decalage cf. #975
 				$d = spip_query("SELECT NOW() AS d");
-				$d = spip_abstract_fetch($d);
+				$d = sql_fetch($d);
 				$champs['date'] = $d['d'];
 			}
 		}
@@ -194,7 +194,7 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 	// de la rubrique actuelle
 	if ($id_parent = _request('id_parent', $c)
 	AND $id_parent != $id_rubrique
-	AND (spip_abstract_fetch(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_rubrique=$id_parent")))) {
+	AND (sql_fetch(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_rubrique=$id_parent")))) {
 		$champs['id_rubrique'] = $id_parent;
 
 		// si l'article etait publie
@@ -232,12 +232,12 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 	if (isset($champs['id_rubrique'])) {
 		propager_les_secteurs();
 
-		$row = spip_abstract_fetch(spip_query("SELECT lang, langue_choisie FROM spip_articles WHERE id_article=$id_article"));
+		$row = sql_fetch(spip_query("SELECT lang, langue_choisie FROM spip_articles WHERE id_article=$id_article"));
 		$langue_old = $row['lang'];
 		$langue_choisie_old = $row['langue_choisie'];
 
 		if ($langue_choisie_old != "oui") {
-			$row = spip_abstract_fetch(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique="._q($champs['id_rubrique'])));
+			$row = sql_fetch(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique="._q($champs['id_rubrique'])));
 			$langue_new = $row['lang'];
 			if ($langue_new != $langue_old)
 				spip_query("UPDATE spip_articles SET lang='$langue_new' WHERE id_article=$id_article");
@@ -306,7 +306,7 @@ function article_referent ($id_article, $c) {
 
 	// selectionner l'article cible, qui doit etre different de nous-meme,
 	// et quitter s'il n'existe pas
-	if (!$row = spip_abstract_fetch(
+	if (!$row = sql_fetch(
 	spip_query("SELECT id_trad FROM spip_articles WHERE id_article=$lier_trad AND NOT(id_article=$id_article)")))
 	{
 		spip_log("echec lien de trad vers article inexistant ($lier_trad)");

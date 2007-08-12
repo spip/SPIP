@@ -62,7 +62,7 @@ function exec_statistiques_lang_dist()
 	$result = spip_query("SELECT SUM(".$critere.") AS total_visites FROM spip_articles");
 
 	$visites = 1;
-	if ($row = spip_abstract_fetch($result))
+	if ($row = sql_fetch($result))
 			$total_visites = $row['total_visites'];
 	else
 			$total_visites = 1;
@@ -73,7 +73,7 @@ function exec_statistiques_lang_dist()
 	$ifond = 1;
 		
 	$visites_abs = 0;
-	while ($row = spip_abstract_fetch($result)) {
+	while ($row = sql_fetch($result)) {
 
 		$lang = $row['lang'];
 		$visites = round($row['cnt'] / $total_visites * $taille);

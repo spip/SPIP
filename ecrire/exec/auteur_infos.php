@@ -34,7 +34,7 @@ function exec_auteur_infos_dist() {
 
 	if ($id_auteur) {
 		$s = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur");
-		$auteur = spip_abstract_fetch($s);
+		$auteur = sql_fetch($s);
 	} else {
 		$auteur = array();
 		if (strlen(_request('nom')))

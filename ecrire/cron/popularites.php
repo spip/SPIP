@@ -44,7 +44,7 @@ function cron_popularites_dist($t) {
 	spip_query("UPDATE spip_articles SET maj=maj, popularite = popularite * $a");
 
 	// enregistrer les metas...
-	$row = spip_abstract_fetch(spip_query("SELECT MAX(popularite) AS max, SUM(popularite) AS tot FROM spip_articles"));
+	$row = sql_fetch(spip_query("SELECT MAX(popularite) AS max, SUM(popularite) AS tot FROM spip_articles"));
 	ecrire_meta("popularite_max", $row['max']);
 	ecrire_meta("popularite_total", $row['tot']);
 

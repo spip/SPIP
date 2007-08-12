@@ -52,11 +52,11 @@ function inc_discuter_dist($id_article, $flag, $debut=1)
 	$debut = intval($debut);
 	$id_article = intval($id_article);
 
-	$res = spip_abstract_countsel('spip_forum', "statut='prive' AND id_article=$id_article AND id_parent=0");
+	$res = sql_countsel('spip_forum', "statut='prive' AND id_article=$id_article AND id_parent=0");
 
 	if ($res) {
 		$total_afficher = 8;
-		$forum = spip_abstract_select('*', 'spip_forum', "statut='prive' AND id_article=$id_article AND id_parent=0", '',  "date_heure DESC", "$debut,$total_afficher");
+		$forum = sql_select('*', 'spip_forum', "statut='prive' AND id_article=$id_article AND id_parent=0", '',  "date_heure DESC", "$debut,$total_afficher");
 
 		$res = formulaire_discuter($forum, $res, $debut, $total_afficher, 'articles', "id_article=$id_article");
 	} else $res ='';

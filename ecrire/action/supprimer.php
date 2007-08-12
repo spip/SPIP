@@ -55,7 +55,7 @@ function action_supprimer_rubrique($r)
 
 	$q = spip_query("SELECT id_auteur FROM spip_auteurs_rubriques WHERE id_rubrique=$id_rubrique");
 
-	while ($r = spip_abstract_fetch($q)) {
+	while ($r = sql_fetch($q)) {
 		$id_auteur = $r['id_auteur'];
 		spip_query("DELETE FROM spip_auteurs_rubriques WHERE id_rubrique=$id_rubrique AND id_auteur=$id_auteur");
 		$n = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_rubriques WHERE id_auteur=$id_auteur LIMIT 1"));
@@ -77,7 +77,7 @@ function action_supprimer_rubrique($r)
 function supprimer_document_et_vignette($arg)
 {
 	$result = spip_query("SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$arg");
-	if ($row = spip_abstract_fetch($result)) {
+	if ($row = sql_fetch($result)) {
 		spip_unlink(get_spip_doc($row['fichier']));
 		spip_query("DELETE FROM spip_documents WHERE id_document=$arg");
 		spip_query("UPDATE spip_documents SET id_vignette=0 WHERE id_vignette=$arg");
@@ -88,7 +88,7 @@ function supprimer_document_et_vignette($arg)
 		if ($id_vignette > 0) {
 			$result = spip_query("SELECT fichier FROM spip_documents	WHERE id_document=$id_vignette");
 
-			if ($row = spip_abstract_fetch($result)) {
+			if ($row = sql_fetch($result)) {
 				spip_unlink(get_spip_doc($row['fichier']));
 			}
 			spip_query("DELETE FROM spip_documents	WHERE id_document=$id_vignette");

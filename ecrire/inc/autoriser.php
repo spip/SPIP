@@ -60,7 +60,7 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 	  $qui = $GLOBALS['auteur_session'] ? $GLOBALS['auteur_session'] : array('statut' => '', 'id_auteur' =>0);
 	elseif (is_numeric($qui)) {
 		$s = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=".$qui);
-		$qui = spip_abstract_fetch($s);
+		$qui = sql_fetch($s);
 	}
 
 	// Admins restreints, on construit ici (pas generique mais...)
@@ -160,7 +160,7 @@ function autoriser_rubrique_creerarticledans_dist($faire, $type, $id, $qui, $opt
 function autoriser_rubrique_creerbrevedans_dist($faire, $type, $id, $qui, $opt) {
 	$s = spip_query(
 	"SELECT id_parent FROM spip_rubriques WHERE id_rubrique="._q($id));
-	$r = spip_abstract_fetch($s);
+	$r = sql_fetch($s);
 	return
 		$id
 		AND ($r['id_parent']==0)
@@ -188,7 +188,7 @@ function autoriser_site_modifier_dist($faire, $type, $id, $qui, $opt) {
 		return true;
 
 	$s = spip_query("SELECT id_rubrique,statut FROM spip_syndic WHERE id_syndic="._q($id));
-	return ($t = spip_abstract_fetch($s)
+	return ($t = sql_fetch($s)
 		AND autoriser('voir','rubrique',$t['id_rubrique'])
 		AND ($t['statut'] == 'prop')
 	);
@@ -239,7 +239,7 @@ function autoriser_document_modifier_dist($faire, $type, $id, $qui, $opt){
 			$type = preg_replace(',s?_?documents?_?|s$,', '', $j);
 			$id_table = id_table_objet($type);
 			$s = spip_query("SELECT $id_table FROM spip_$j WHERE id_document="._q($id));
-			while ($t = spip_abstract_fetch($s)) {
+			while ($t = sql_fetch($s)) {
 				spip_log($t);
 				if (autoriser('modifier', $type, $t[$id_table], $qui, $opt)) {
 					$vu = true;
@@ -264,7 +264,7 @@ function autoriser_document_modifier_dist($faire, $type, $id, $qui, $opt){
 function autoriser_breve_modifier_dist($faire, $type, $id, $qui, $opt) {
 	$s = spip_query(
 	"SELECT id_rubrique,statut FROM spip_breves WHERE id_breve="._q($id));
-	$r = spip_abstract_fetch($s);
+	$r = sql_fetch($s);
 	return
 		($r['statut'] == 'publie')
 			? autoriser('publierdans', 'rubrique', $r['id_rubrique'], $qui, $opt)
@@ -278,7 +278,7 @@ function autoriser_breve_modifier_dist($faire, $type, $id, $qui, $opt) {
 function autoriser_article_modifier_dist($faire, $type, $id, $qui, $opt) {
 	$s = spip_query(
 	"SELECT id_rubrique,statut FROM spip_articles WHERE id_article="._q($id));
-	$r = spip_abstract_fetch($s);
+	$r = sql_fetch($s);
 	include_spip('inc/auth'); // pour auteurs_article si espace public
 
 	return
@@ -318,7 +318,7 @@ function autoriser_mot_modifier_dist($faire, $type, $id, $qui, $opt) {
 			$s = spip_query(
 				"SELECT id_groupe FROM spip_mots WHERE id_mot="._q($id)
 			)
-			AND $t = spip_abstract_fetch($s)
+			AND $t = sql_fetch($s)
 			AND autoriser('modifier', 'groupemots', $t['id_groupe'], $qui, $opt)
 		);
 }
@@ -344,7 +344,7 @@ function autoriser_voir_dist($faire, $type, $id, $qui, $opt) {
 
 	// un article 'prepa' ou 'poubelle' dont on n'est pas auteur : interdit
 	$s = spip_query("SELECT statut FROM spip_articles WHERE id_article="._q($id));
-	$r = spip_abstract_fetch($s);
+	$r = sql_fetch($s);
 	include_spip('inc/auth'); // pour auteurs_article si espace public
 	return
 		in_array($r['statut'], array('prop', 'publie'))
@@ -474,7 +474,7 @@ function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 			}
 			else if ($id_auteur = intval($id)) {
 				$s = spip_query("SELECT statut FROM spip_auteurs WHERE id_auteur=$id_auteur");
-				if ($t = spip_abstract_fetch($s)
+				if ($t = sql_fetch($s)
 				AND $t['statut'] != '0minirezo')
 					return true;
 				else
@@ -550,7 +550,7 @@ function liste_rubriques_auteur($id_auteur, $raz=false) {
 	$rubriques = array();
 	while ($q AND spip_num_rows($q)) {
 		$r = array();
-		while ($row = spip_abstract_fetch($q)) {
+		while ($row = sql_fetch($q)) {
 			$id_rubrique = $row['id_rubrique'];
 			$r[]= $rubriques[$id_rubrique] = $id_rubrique;
 		}

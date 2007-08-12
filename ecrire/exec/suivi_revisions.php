@@ -52,9 +52,9 @@ function exec_suivi_revisions_dist()
 		$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
 	else $langues = array();
 
-	$result = spip_abstract_select("id_rubrique, titre", "spip_rubriques", 'id_parent=0','', '0+titre,titre');
+	$result = sql_select("id_rubrique, titre", "spip_rubriques", 'id_parent=0','', '0+titre,titre');
 
-	while ($row = spip_abstract_fetch($result)) {
+	while ($row = sql_fetch($result)) {
 		$id_rubrique = $row['id_rubrique'];
 		$titre = typo($row['titre']);
 

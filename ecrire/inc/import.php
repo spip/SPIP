@@ -172,7 +172,7 @@ function import_init_tables($request)
 // http://doc.spip.org/@detruit_restaurateur
 function detruit_restaurateur()
 {
-	$r = spip_abstract_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_auteurs"));
+	$r = sql_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_auteurs"));
 	if ($r['n'] > 1)
 		spip_query("DELETE FROM spip_auteurs WHERE id_auteur=0");
 	else {
@@ -186,7 +186,7 @@ function detruit_restaurateur()
 
 // http://doc.spip.org/@import_verifie_session
 function import_verifie_session() {
-	$row = spip_abstract_fetsel(array('valeur'),array('spip_meta'),array("nom='restauration_session_id'"));
+	$row = sql_fetsel(array('valeur'),array('spip_meta'),array("nom='restauration_session_id'"));
 	if ($row['valeur']!=_RESTAURATION_SESSION_ID)
 		die('la place est prise');
 }

@@ -43,7 +43,7 @@ function inc_plonger_dist($id_rubrique, $idom="", $list=array(), $col = 1, $excl
 	"
 	);
 
-	while ($row = spip_abstract_fetch($res)) {
+	while ($row = sql_fetch($res)) {
 		if (autoriser('voir','rubrique',$row['id_rubrique'])){
 			$rub[$row['id_rubrique']]['enfants'] = $row['id_enfant'];
 			if ($row['id_parent'] == $id_rubrique) {

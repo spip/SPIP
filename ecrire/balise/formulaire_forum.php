@@ -70,7 +70,7 @@ function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
 	$type = substr($GLOBALS['meta']["forums_publics"],0,3);
 
 	if ($ida) {
-		$titre = spip_abstract_fetsel('accepter_forum AS type, titre', 'spip_articles', "statut = 'publie' AND id_article = $ida");
+		$titre = sql_fetsel('accepter_forum AS type, titre', 'spip_articles', "statut = 'publie' AND id_article = $ida");
 		if ($titre) {
 			if ($titre['type']) $type = $titre['type'];
 			$table = "articles";
@@ -79,13 +79,13 @@ function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
 	} else {
 		if ($type == 'non') return false;
 		if ($idb) {
-			$titre = spip_abstract_fetsel('titre', 'spip_breves', "statut = 'publie' AND id_breve = $idb");
+			$titre = sql_fetsel('titre', 'spip_breves', "statut = 'publie' AND id_breve = $idb");
 			$table = "breves";
 		} else if ($ids) {
-			$titre = spip_abstract_fetsel('nom_site AS titre', 'spip_syndic', "statut = 'publie' AND id_syndic = $ids");
+			$titre = sql_fetsel('nom_site AS titre', 'spip_syndic', "statut = 'publie' AND id_syndic = $ids");
 			$table = "syndic";
 		} else if ($idr) {
-			$titre = spip_abstract_fetsel('titre', 'spip_rubriques', "statut = 'publie' AND id_rubrique = $idr");
+			$titre = sql_fetsel('titre', 'spip_rubriques', "statut = 'publie' AND id_rubrique = $idr");
 			$table = "rubriques";
 		}
 	}
@@ -93,7 +93,7 @@ function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
 	if (!$titre) return false; // inexistant ou non public
 
 	if ($idf) {
-		$titre_m = spip_abstract_fetsel('titre', 'spip_forum', "id_forum = $idf");
+		$titre_m = sql_fetsel('titre', 'spip_forum', "id_forum = $idf");
 		if (!$titre_m) return false; // URL fabriquee
 		$titre = $titre_m;
 	}

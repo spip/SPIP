@@ -179,14 +179,14 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array()) {
 		$requete['WHERE'][] = join(" OR ", $a);
 		$requete['FROM'][] = 'spip_'.table_objet($table).' AS t';
 
-		$s = spip_abstract_select (
+		$s = sql_select (
 			$requete['SELECT'], $requete['FROM'], $requete['WHERE'],
 			implode(" ",$requete['GROUPBY']),
 			$requete['ORDERBY'], $requete['LIMIT'], '',
 			$requete['HAVING']
 		);
 
-		while ($t = spip_abstract_fetch($s)) {
+		while ($t = sql_fetch($s)) {
 			$id = intval($t[$_id_table]);
 			if ($options['toutvoir']
 			OR autoriser('voir', $table, $id)) {

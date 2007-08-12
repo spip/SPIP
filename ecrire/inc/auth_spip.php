@@ -25,7 +25,7 @@ function inc_auth_spip_dist ($login, $pass) {
 	if (!$md5pass AND $pass) {
 			$result = spip_query("SELECT alea_actuel, alea_futur FROM spip_auteurs WHERE login=" . _q($login));
 
-			if ($row = spip_abstract_fetch($result)) {
+			if ($row = sql_fetch($result)) {
 				$md5pass = md5($row['alea_actuel'] . $pass);
 				$md5next = md5($row['alea_futur'] . $pass);
 			}
@@ -34,7 +34,7 @@ function inc_auth_spip_dist ($login, $pass) {
 	if (!$md5pass) return array();
 
 	$result = spip_query("SELECT * FROM spip_auteurs WHERE login=" . _q($login) . " AND pass=" . _q($md5pass) . " AND statut<>'5poubelle'");
-	$row = spip_abstract_fetch($result);
+	$row = sql_fetch($result);
 
 	// login/mot de passe incorrect
 	if (!$row) return array(); 

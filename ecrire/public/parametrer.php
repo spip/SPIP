@@ -93,7 +93,7 @@ function quete_rubrique_fond($contexte) {
 
 	if (isset($contexte['id_rubrique'])) {
 		$id = intval($contexte['id_rubrique']);
-		$row = spip_abstract_fetsel(array('lang'),
+		$row = sql_fetsel(array('lang'),
 					    array('spip_rubriques'),
 					    array("id_rubrique=$id"));
 		$lang = isset($row['lang']) ? $row['lang'] : '';
@@ -102,7 +102,7 @@ function quete_rubrique_fond($contexte) {
 
 	if (isset($contexte['id_breve'])) {
 		$id = intval($contexte['id_breve']);
-		$row = spip_abstract_fetsel(array('id_rubrique', 'lang'),
+		$row = sql_fetsel(array('id_rubrique', 'lang'),
 			array('spip_breves'), 
 			array("id_breve=$id"));
 		$id_rubrique_fond = $row['id_rubrique'];
@@ -112,11 +112,11 @@ function quete_rubrique_fond($contexte) {
 
 	if (isset($contexte['id_syndic'])) {
 		$id = intval($contexte['id_syndic']);
-		$row = spip_abstract_fetsel(array('id_rubrique'),
+		$row = sql_fetsel(array('id_rubrique'),
 			array('spip_syndic'),
 			array("id_syndic=$id"));
 		$id_rubrique_fond = $row['id_rubrique'];
-		$row = spip_abstract_fetsel(array('lang'),
+		$row = sql_fetsel(array('lang'),
 			array('spip_rubriques'),
 			array("id_rubrique='$id_rubrique_fond'"));
 		$lang = isset($row['lang']) ? $row['lang'] : '';
@@ -125,7 +125,7 @@ function quete_rubrique_fond($contexte) {
 
 	if (isset($contexte['id_article'])) {
 		$id = intval($contexte['id_article']);
-		$row = spip_abstract_fetsel(array('id_rubrique', 'lang'),
+		$row = sql_fetsel(array('id_rubrique', 'lang'),
 			array('spip_articles'),
 			array("id_article=$id"));
 		$id_rubrique_fond = $row['id_rubrique'];
@@ -137,7 +137,7 @@ function quete_rubrique_fond($contexte) {
 # retourne le chapeau d'un article, et seulement s'il est publie
 
 function quete_chapo($id_article) {
-	$chapo= spip_abstract_fetsel(array('chapo'),
+	$chapo= sql_fetsel(array('chapo'),
 		array('spip_articles'),
 		array("id_article=".intval($id_article),
 		"statut='publie'"));
@@ -150,7 +150,7 @@ function quete_parent($id_rubrique) {
 	if (!$id_rubrique = intval($id_rubrique))
 		return 0;
 
-	$id_parent = spip_abstract_fetsel(array('id_parent'),
+	$id_parent = sql_fetsel(array('id_parent'),
 		array('spip_rubriques'), 
 		array("id_rubrique=" . $id_rubrique));
 
@@ -174,14 +174,14 @@ function quete_profondeur($id) {
 # retourne la rubrique d'un article
 
 function quete_rubrique($id_article) {
-	$id_rubrique = spip_abstract_fetsel(array('id_rubrique'),
+	$id_rubrique = sql_fetsel(array('id_rubrique'),
 			array('spip_articles'),
 			array("id_article=" . intval($id_article)));
 	return $id_rubrique['id_rubrique'];
 }
 
 function quete_petitions($id_article, $table, $id_boucle, $serveur, &$cache) {
-	$retour = spip_abstract_fetsel(
+	$retour = sql_fetsel(
 		array('texte'),
 		array('spip_petitions'),
 		array("id_article=".intval($id_article)),
@@ -202,7 +202,7 @@ function quete_accepter_forum($id_article) {
 	if (!$id_article) return;
 
 	if (!isset($cache[$id_article])) {
-		$row = spip_abstract_fetsel(array('accepter_forum'),
+		$row = sql_fetsel(array('accepter_forum'),
 			array('spip_articles'),
 			array("id_article=".intval($id_article)));
 		$cache[$id_article] = $row['accepter_forum'];

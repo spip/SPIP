@@ -29,7 +29,7 @@ function action_referencer_traduction_dist() {
 	  // supprimer le lien de traduction
 		spip_query("UPDATE spip_articles SET id_trad=0 WHERE id_article=" . $r[1]);
 		// Verifier si l'ancien groupe ne comporte plus qu'un seul article. Alors mettre a zero.
-		$cpt = spip_abstract_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_articles WHERE id_trad=" . $r[2]));
+		$cpt = sql_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_articles WHERE id_trad=" . $r[2]));
 
 		if ($cpt['n'] == 1)
 			spip_query("UPDATE spip_articles SET id_trad = 0 WHERE id_trad=" . $r[2]);
@@ -56,7 +56,7 @@ function instituer_langue_article($id_article, $id_rubrique) {
 			ecrire_meta('langues_utilisees', $langues);
 			ecrire_metas();
 		} else {
-			$langue_parent = spip_abstract_fetch(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=" . $id_rubrique));
+			$langue_parent = sql_fetch(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=" . $id_rubrique));
 			$langue_parent=$langue_parent['lang'];
 			spip_query("UPDATE spip_articles SET lang=" . _q($langue_parent) . ", langue_choisie='non' WHERE id_article=$id_article");
 		}

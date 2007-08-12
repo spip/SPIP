@@ -126,7 +126,7 @@ function mini_hier ($id_rubrique) {
 
 // http://doc.spip.org/@mini_hierarchie_rub
 function mini_hierarchie_rub ($id_rubrique) {
-	$row = spip_abstract_fetch(spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique = " . intval($id_rubrique)));
+	$row = sql_fetch(spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique = " . intval($id_rubrique)));
 	return $row["id_parent"];
 }
 

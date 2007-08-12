@@ -43,12 +43,12 @@ debut_droite();
 
 	// recupere les titres des types
 	$res = spip_query("SELECT * FROM spip_types_documents");
-	while ($row = spip_abstract_fetch($res))
+	while ($row = sql_fetch($res))
 		$types[$row['extension']] = $row;
 
 	$result = spip_query("SELECT docs.id_document AS id_doc, docs.extension AS extension, docs.fichier AS fichier, docs.date AS date, docs.titre AS titre, docs.descriptif AS descriptif, lien.id_rubrique AS id_rub, rubrique.titre AS titre_rub FROM spip_documents AS docs, spip_documents_rubriques AS lien, spip_rubriques AS rubrique WHERE docs.id_document = lien.id_document AND rubrique.id_rubrique = lien.id_rubrique AND docs.mode = 'document' ORDER BY docs.date DESC");
 
-	while ($row=spip_abstract_fetch($result)){
+	while ($row=sql_fetch($result)){
 		$titre=$row['titre'];
 		$descriptif=$row['descriptif'];
 		$date=$row['date'];

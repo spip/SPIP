@@ -66,7 +66,7 @@ function action_editer_message_post_retirer($id_message, $id_auteur) {
 // http://doc.spip.org/@action_editer_message_post_ajouter
 function action_editer_message_post_ajouter($id_message, $id_auteur) {
 	spip_query("DELETE FROM spip_auteurs_messages WHERE id_auteur=$id_auteur AND id_message=$id_message");
-	spip_abstract_insert('spip_auteurs_messages',
+	sql_insert('spip_auteurs_messages',
 		"(id_auteur,id_message,vu)",
 		"($id_auteur,$id_message,'non')");
 
@@ -87,7 +87,7 @@ function action_editer_message_post_choisir($id_message) {
 		$query = spip_query("SELECT id_auteur, nom FROM spip_auteurs WHERE messagerie<>'non' AND id_auteur<>'$connect_id_auteur' AND pass<>'' AND login<>''");
 		$table_auteurs = array();
 		$table_ids = array();
-		while ($row = spip_abstract_fetch($query)) {
+		while ($row = sql_fetch($query)) {
 			$table_auteurs[] = $row['nom'];
 			$table_ids[] = $row['id_auteur'];
 		}
@@ -126,18 +126,18 @@ function action_editer_message_post_nouveau($type, $dest='', $rv='')
 
 	$titre = filtrer_entites(_T('texte_nouveau_message'));
 
-	$id_message = spip_abstract_insert("spip_messages", "(titre, date_heure, statut, type, id_auteur)", "(" . _q($titre) . ", NOW(), '$statut', '$type', $id_auteur)");
+	$id_message = sql_insert("spip_messages", "(titre, date_heure, statut, type, id_auteur)", "(" . _q($titre) . ", NOW(), '$statut', '$type', $id_auteur)");
 	
 	if ($rv) {
 		spip_query("UPDATE spip_messages SET rv='oui', date_heure=" . _q($rv . ' 12:00:00') . ", date_fin= " . _q($rv . ' 13:00:00') . " WHERE id_message = $id_message");
 	}
 
 	if ($type != "affich"){
-		spip_abstract_insert('spip_auteurs_messages',
+		sql_insert('spip_auteurs_messages',
 			"(id_auteur,id_message,vu)",
 			"('$id_auteur','$id_message','oui')");
 		if ($dest) {
-			spip_abstract_insert('spip_auteurs_messages',
+			sql_insert('spip_auteurs_messages',
 				"(id_auteur,id_message,vu)",
 				"('$dest','$id_message','non')");
 		}

@@ -73,7 +73,7 @@ function install_etape_4_dist()
 		$result = spip_query("SELECT id_auteur FROM spip_auteurs WHERE login=" . _q($login));
 
 		unset($id_auteur);
-		if ($row = spip_abstract_fetch($result)) $id_auteur = $row['id_auteur'];
+		if ($row = sql_fetch($result)) $id_auteur = $row['id_auteur'];
 
 		$mdpass = md5($pass);
 		$htpass = generer_htpass($pass);

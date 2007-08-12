@@ -115,7 +115,7 @@ function exec_export_all_dist()
 
 	foreach($tables_for_dump as $table){
 		if ($etape_actuelle <= $etape) {
-		  $r = spip_abstract_countsel($table);
+		  $r = sql_countsel($table);
 		  echo "\n<br /><strong>",$etape, '. ', $table,"</strong> ";
 		  if (!$r) echo _T('texte_vide');
 		  else
@@ -145,7 +145,7 @@ function complete_secteurs($les_rubriques)
 	foreach($les_rubriques as $r) {
 		do {
 			$r = spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$r");
-			$r = spip_abstract_fetch($r);
+			$r = sql_fetch($r);
 			if ($r AND $r = $r['id_parent']) {
 				if (isset($les_rubriques[$r]))
 					$r = false;
@@ -158,7 +158,7 @@ function complete_secteurs($les_rubriques)
 
 // http://doc.spip.org/@export_verifie_session
 function export_verifie_session() {
-	$row = spip_abstract_fetsel(array('valeur'),array('spip_meta'),array("nom='export_session_id'"));
+	$row = sql_fetsel(array('valeur'),array('spip_meta'),array("nom='export_session_id'"));
 	if ($row['valeur']!=_EXPORT_SESSION_ID)
 		die('la place est prise');
 }

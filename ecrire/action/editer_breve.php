@@ -58,17 +58,17 @@ function insert_breve($id_rubrique) {
 	// Si id_rubrique vaut 0 ou n'est pas definie, creer la breve
 	// dans la premiere rubrique racine
 	if (!$id_rubrique = intval($id_rubrique)) {
-		$row = spip_abstract_fetch(spip_abstract_select("id_rubrique", "spip_rubriques", "id_parent=0",'', '0+titre,titre', "1"));
+		$row = sql_fetch(sql_select("id_rubrique", "spip_rubriques", "id_parent=0",'', '0+titre,titre', "1"));
 		$id_rubrique = $row['id_rubrique'];
 	}
 
 	// La langue a la creation : c'est la langue de la rubrique
-	$row = spip_abstract_fetch(spip_query("SELECT lang, id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+	$row = sql_fetch(spip_query("SELECT lang, id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 	$choisie = 'non';
 	$lang = $row['lang'];
 	$id_rubrique = $row['id_secteur']; // garantir la racine
 
-	$id_breve = spip_abstract_insert("spip_breves",
+	$id_breve = sql_insert("spip_breves",
 		"(id_rubrique, statut, date_heure, lang, langue_choisie)",
 		"($id_rubrique, 'prop', NOW(), '$lang', '$choisie')");
 	return $id_breve;
@@ -99,7 +99,7 @@ function revisions_breves ($id_breve, $c=false) {
 
 	// Changer le statut de la breve ?
 	$s = spip_query("SELECT statut, id_rubrique FROM spip_breves WHERE id_breve=$id_breve");
-	$row = spip_abstract_fetch($s);
+	$row = sql_fetch($s);
 	$id_rubrique = $row['id_rubrique'];
 	$statut_ancien = $statut = $row['statut'];
 
@@ -114,7 +114,7 @@ function revisions_breves ($id_breve, $c=false) {
 	// de la rubrique actuelle
 	if ($id_parent = intval(_request('id_parent', $c))
 	AND $id_parent != $id_rubrique
-	AND (spip_abstract_fetch(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 AND id_rubrique=$id_parent")))) {
+	AND (sql_fetch(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 AND id_rubrique=$id_parent")))) {
 		$champs['id_rubrique'] = $id_parent;
 
 		// si la breve est publiee
@@ -166,12 +166,12 @@ function revisions_breves ($id_breve, $c=false) {
 	if (isset($champs['id_rubrique'])) {
 		propager_les_secteurs();
 
-		$row = spip_abstract_fetch(spip_query("SELECT lang, langue_choisie FROM spip_breves WHERE id_breve=$id_breve"));
+		$row = sql_fetch(spip_query("SELECT lang, langue_choisie FROM spip_breves WHERE id_breve=$id_breve"));
 		$langue_old = $row['lang'];
 		$langue_choisie_old = $row['langue_choisie'];
 
 		if ($langue_choisie_old != "oui") {
-			$row = spip_abstract_fetch(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+			$row = sql_fetch(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 			$langue_new = $row['lang'];
 			if ($langue_new != $langue_old)
 				spip_query("UPDATE spip_breves SET lang = '$langue_new' WHERE id_breve = $id_breve");
@@ -208,7 +208,7 @@ function revisions_breves ($id_breve, $c=false) {
 function revisions_breves_langue($id_breve, $id_rubrique, $changer_lang)
 {
 	if ($changer_lang == "herit") {
-		$row = spip_abstract_fetch(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+		$row = sql_fetch(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 		$langue_parent = $row['lang'];
 		spip_query("UPDATE spip_breves SET lang=" . _q($langue_parent) . ", langue_choisie='non' WHERE id_breve=$id_breve");
 	} else 	{

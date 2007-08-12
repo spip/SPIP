@@ -42,7 +42,7 @@ function selectionner_auteur_boucle($query, $idom)
 	$args = "'$idom" . "_selection', '$info', event";
 	$res = '';
 
-	while ($row = spip_abstract_fetch($query)) {
+	while ($row = sql_fetch($query)) {
 
 		$id = $row["id_auteur"];
 

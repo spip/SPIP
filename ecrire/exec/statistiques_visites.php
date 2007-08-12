@@ -60,7 +60,7 @@ function statistiques_csv($id) {
 		$s = spip_query("SELECT date, visites FROM spip_visites_articles WHERE id_article=$id ORDER BY date");
 	else
 		$s = spip_query("SELECT date, visites FROM spip_visites ORDER BY date");
-	while ($t = spip_abstract_fetch($s)) {
+	while ($t = sql_fetch($s)) {
 		echo $t['date'].";".$t['visites']."\n";
 	}
 }
@@ -97,7 +97,7 @@ function exec_statistiques_visites_dist()
 	if ($id_article){
 		$result = spip_query("SELECT titre, visites, popularite FROM spip_articles WHERE statut='publie' AND id_article=$id_article");
 
-		if ($row = spip_abstract_fetch($result)) {
+		if ($row = sql_fetch($result)) {
 			$titre = typo($row['titre']);
 			$total_absolu = $row['visites'];
 			$val_popularite = round($row['popularite']);
@@ -106,7 +106,7 @@ function exec_statistiques_visites_dist()
 		$result = spip_query("SELECT SUM(visites) AS total_absolu FROM spip_visites");
 
 
-		if ($row = spip_abstract_fetch($result)) {
+		if ($row = sql_fetch($result)) {
 			$total_absolu = $row['total_absolu'];
 		}
 	}
@@ -157,7 +157,7 @@ else {
 	$articles_recents[] = "0";
 	$result = spip_query("SELECT id_article FROM spip_articles WHERE statut='publie' AND popularite > 0 ORDER BY date DESC LIMIT 10");
 
-	while ($row = spip_abstract_fetch($result)) {
+	while ($row = sql_fetch($result)) {
 		$articles_recents[] = $row['id_article'];
 	}
 	$articles_recents = join($articles_recents, ",");
@@ -175,7 +175,7 @@ else {
 		$open = "<ol style='padding-left:40px; font-size:x-small;color:#666666;'>";
 		echo $open;
 		$liste = 0;
-		while ($row = spip_abstract_fetch($result)) {
+		while ($row = sql_fetch($result)) {
 			$titre = typo($row['titre']);
 			$l_article = $row['id_article'];
 			$visites = $row['visites'];
@@ -200,7 +200,7 @@ else {
 
 		if (spip_num_rows($result_suite) > 0) {
 		  echo "</ol><div style='text-align: center'>[...]</div>",$open;
-			while ($row = spip_abstract_fetch($result_suite)) {
+			while ($row = sql_fetch($result_suite)) {
 				$titre = typo($row['titre']);
 				$l_article = $row['id_article'];
 				$visites = $row['visites'];
@@ -242,7 +242,7 @@ else {
 		echo typo(_T('info_affichier_visites_articles_plus_visites'));
 		echo "<ol style='padding-left:40px; font-size:x-small;color:#666666;'>";
 
-		while ($row = spip_abstract_fetch($result)) {
+		while ($row = sql_fetch($result)) {
 			$titre = typo($row['titre']);
 			$l_article = $row['id_article'];
 			$visites = $row['visites'];
@@ -281,15 +281,15 @@ else {
 	
 	$result = spip_query("SELECT UNIX_TIMESTAMP(date) AS date_unix FROM $table WHERE $where ORDER BY date LIMIT 1");
 
-	while ($row = spip_abstract_fetch($result)) {
+	while ($row = sql_fetch($result)) {
 		$date_premier = $row['date_unix'];
 	}
 
-	$result= spip_abstract_select("UNIX_TIMESTAMP(date) AS date_unix, visites", $table, "$where AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY)", '', "date");
+	$result= sql_select("UNIX_TIMESTAMP(date) AS date_unix, visites", $table, "$where AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY)", '', "date");
 
 	$date_debut = '';
 	$log = array();
-	while ($row = spip_abstract_fetch($result)) {
+	while ($row = sql_fetch($result)) {
 		$date = $row['date_unix'];
 		if (!$date_debut) $date_debut = $date;
 		$log[$date] = $row['visites'];
@@ -638,11 +638,11 @@ else {
 		echo "<span class='verdana1 spip_small'><b>"._T('info_visites_par_mois')."</b></span>";
 
 		///////// Affichage par mois
-		  $result = spip_abstract_select("FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%Y-%m') AS date_unix, SUM(visites) AS total_visites", $table,  "$where AND date > DATE_SUB(NOW(),INTERVAL 2700 DAY)", 'date_unix', "date");
+		  $result = sql_select("FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%Y-%m') AS date_unix, SUM(visites) AS total_visites", $table,  "$where AND date > DATE_SUB(NOW(),INTERVAL 2700 DAY)", 'date_unix', "date");
 
 		
 		$i = 0;
-		while ($row = spip_abstract_fetch($result)) {
+		while ($row = sql_fetch($result)) {
 			$date = $row['date_unix'];
 			$visites = $row['total_visites'];
 			$i++;

@@ -104,7 +104,7 @@ function convert_table_utf8($f, $table, $champ)
 	if ($table == 'spip_groupes_mots') $id_champ = 'id_groupe';
 
 	// lire les donnees dans un array
-	while ($t = spip_abstract_fetch($s)) {
+	while ($t = sql_fetch($s)) {
 		$query = array();
 		$query_no_convert = '';
 		$query_extra = '';
@@ -150,7 +150,7 @@ function convert_table_utf8($f, $table, $champ)
 			echo '.           '; flush();
 			}
 	}
-	spip_abstract_free($s);
+	sql_free($s);
 }
 
 // stocker le nouvel extra

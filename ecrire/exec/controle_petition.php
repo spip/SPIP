@@ -19,7 +19,7 @@ function exec_controle_petition_dist()
 
 	$id_article = intval(_request('id_article'));
 	if ($id_article) {
-		$titre = spip_abstract_fetch(spip_query("SELECT titre FROM spip_articles WHERE id_article=$id_article"));
+		$titre = sql_fetch(spip_query("SELECT titre FROM spip_articles WHERE id_article=$id_article"));
 		if (!$titre) $id_article = 0; else $titre = $titre['titre'];
 	} else $titre =' ';
 

@@ -18,7 +18,7 @@ include_spip('inc/actions');
 function exec_grouper_mots_dist()
 {
 	$id_groupe = intval(_request('id_groupe'));
-	$cpt = spip_abstract_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_mots WHERE id_groupe=$id_groupe"));
+	$cpt = sql_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_mots WHERE id_groupe=$id_groupe"));
 	if (! ($cpt = $cpt['n'])) ajax_retour('') ;
 	$grouper_mots = charger_fonction('grouper_mots', 'inc');
 	ajax_retour($grouper_mots($id_groupe, $cpt));

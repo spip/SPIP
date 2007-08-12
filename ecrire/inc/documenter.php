@@ -28,13 +28,13 @@ function inc_documenter_dist(
 
 	if (is_int($doc)) {
 		if ($ancre == 'portfolio') {
-		  $lies = spip_abstract_select("D.id_document, D.id_vignette, D.extension, D.titre,  D.date,  D.descriptif,  D.fichier,  D.taille, D.largeur,  D.hauteur,  D.mode,  D.distant,l.id_$type,l.vu", "spip_documents AS D, spip_documents_".$type."s AS l", "l.id_$type=$doc AND l.id_document=D.id_document AND D.mode='document' AND D.extension IN ('gif', 'jpg', 'png')",'',  "0+D.titre, D.date");
+		  $lies = sql_select("D.id_document, D.id_vignette, D.extension, D.titre,  D.date,  D.descriptif,  D.fichier,  D.taille, D.largeur,  D.hauteur,  D.mode,  D.distant,l.id_$type,l.vu", "spip_documents AS D, spip_documents_".$type."s AS l", "l.id_$type=$doc AND l.id_document=D.id_document AND D.mode='document' AND D.extension IN ('gif', 'jpg', 'png')",'',  "0+D.titre, D.date");
 		} else {
-		  $lies = spip_abstract_select("D.id_document, D.id_vignette, D.extension, D.titre,  D.date,  D.descriptif,  D.fichier,  D.taille, D.largeur,  D.hauteur,  D.mode,  D.distant,l.id_$type,l.vu", "spip_documents AS D, spip_documents_".$type."s AS l", "l.id_$type=$doc AND l.id_document=D.id_document AND D.mode='document' AND D.extension NOT IN ('gif', 'jpg', 'png')",'', "0+D.titre, D.date");
+		  $lies = sql_select("D.id_document, D.id_vignette, D.extension, D.titre,  D.date,  D.descriptif,  D.fichier,  D.taille, D.largeur,  D.hauteur,  D.mode,  D.distant,l.id_$type,l.vu", "spip_documents AS D, spip_documents_".$type."s AS l", "l.id_$type=$doc AND l.id_document=D.id_document AND D.mode='document' AND D.extension NOT IN ('gif', 'jpg', 'png')",'', "0+D.titre, D.date");
 		}
 
 		$documents = array();
-		while ($document = spip_abstract_fetch($lies))
+		while ($document = sql_fetch($lies))
 			$documents[] = $document;
 	} else
 		$documents = $doc;
@@ -54,7 +54,7 @@ function inc_documenter_dist(
 	/*if ($type=='article'
 	AND !isset($GLOBALS['doublons_documents_inclus'])
 	AND is_int($doc)) {
-		$r = spip_abstract_fetch(spip_query("SELECT chapo,texte FROM spip_articles WHERE id_article="._q($doc)));
+		$r = sql_fetch(spip_query("SELECT chapo,texte FROM spip_articles WHERE id_article="._q($doc)));
 		propre(join(" ",$r));
 	}*/
 

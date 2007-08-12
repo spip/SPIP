@@ -191,7 +191,7 @@ function avertissement_messagerie() {
 	$result_messages = spip_query("SELECT lien.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message");
 	$total_messages = @spip_num_rows($result_messages);
 	if ($total_messages == 1) {
-		$row = @spip_abstract_fetch($result_messages);
+		$row = @sql_fetch($result_messages);
 		$ze_message=$row['id_message'];
 		return "<a href='" . generer_url_ecrire("message","id_message=$ze_message") . "' classe='ligne_foncee'>"._T('info_nouveau_message')."</a>";
 	} elseif ($total_messages > 1)
@@ -230,12 +230,12 @@ function auteurs_recemment_connectes()
 {	
 	global $connect_id_auteur;
 	$res = '';
-	$result = spip_abstract_select("*", "spip_auteurs",  "id_auteur!=$connect_id_auteur AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE)");
+	$result = sql_select("*", "spip_auteurs",  "id_auteur!=$connect_id_auteur AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE)");
 
 	if (spip_num_rows($result)) {
 		$formater_auteur = charger_fonction('formater_auteur', 'inc');
 		$res = "<b>"._T('info_en_ligne'). "&nbsp;</b>";
-		while ($row = spip_abstract_fetch($result)) {
+		while ($row = sql_fetch($result)) {
 			list($s, $mail, $nom, $w, $p) = $formater_auteur($row['id_auteur']);
 			$res .= "$mail&nbsp;$nom, ";
 		}

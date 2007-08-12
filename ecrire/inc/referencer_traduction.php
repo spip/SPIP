@@ -24,7 +24,7 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 			AND ($GLOBALS['meta']['gerer_trad'] == 'oui'))) )
 		return '';
 
-	$langue_article = spip_abstract_fetch(spip_query("SELECT lang FROM spip_articles WHERE id_article=$id_article"));
+	$langue_article = sql_fetch(spip_query("SELECT lang FROM spip_articles WHERE id_article=$id_article"));
 
 	$langue_article = $langue_article['lang'];
 
@@ -32,7 +32,7 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 	// Choix langue article
 	if ($GLOBALS['meta']['multi_articles'] == 'oui' AND $flag) {
 
-		$row = spip_abstract_fetch(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+		$row = sql_fetch(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 		$langue_parent = $row['lang'];
 
 		if (!$langue_parent)
@@ -151,7 +151,7 @@ function articles_traduction($id_article, $id_trad)
 	
 	$table= array();
 	$puce_statut = charger_fonction('puce_statut', 'inc');
-	while ($row = spip_abstract_fetch($result_trad)) {
+	while ($row = sql_fetch($result_trad)) {
 		$vals = array();
 		$id_article_trad = $row["id_article"];
 		$id_rubrique_trad = $row["id_rubrique"];

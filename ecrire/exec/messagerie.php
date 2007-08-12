@@ -110,7 +110,7 @@ if (spip_num_rows($result) > 0) {
 	echo "<table width='100%' cellpadding='0' cellspacing='0'>";
 	echo "<tr><td valign='top' style='width: 50%'>";
 	$count = 0;
-	while($row = spip_abstract_fetch($result)) {
+	while($row = sql_fetch($result)) {
 		$count ++;
 		$id_auteur = $row['id_auteur'];
 		$nom = typo($row["nom"]);

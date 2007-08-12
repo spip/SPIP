@@ -42,12 +42,12 @@ function action_editer_signatures_post($r)
 	// Invalider les pages ayant trait aux petitions
 	if ($id) {
 		include_spip('inc/invalideur');
-		$id_article = spip_abstract_fetch(spip_query("SELECT id_article FROM spip_signatures WHERE id_signature=$id"));
+		$id_article = sql_fetch(spip_query("SELECT id_article FROM spip_signatures WHERE id_signature=$id"));
 		$id_article = $id_article['id_article'];
 		suivre_invalideur("id='varia/pet$id_article'");
 	}
 
 	# cette requete devrait figurer dans l'optimisation
-	spip_abstract_delete("spip_signatures", "NOT (statut='publie' OR statut='poubelle') AND date_time<DATE_SUB(NOW(),INTERVAL 10 DAY)");
+	sql_delete("spip_signatures", "NOT (statut='publie' OR statut='poubelle') AND date_time<DATE_SUB(NOW(),INTERVAL 10 DAY)");
 }
 ?>

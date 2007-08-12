@@ -23,7 +23,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	global $champs_extra, $les_notes, $spip_display;
 	$result = spip_query("SELECT * FROM spip_breves WHERE id_breve=$id_breve");
 
-	if ($row = spip_abstract_fetch($result)) {
+	if ($row = sql_fetch($result)) {
 		$id_breve=$row['id_breve'];
 		$date_heure=$row['date_heure'];
 		$titre_breve=$row['titre'];
@@ -159,10 +159,10 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	// Langue de la breve
 	//
 	if (($GLOBALS['meta']['multi_articles'] == 'oui') AND ($flag_editable)) {
-		$row = spip_abstract_fetch(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+		$row = sql_fetch(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 		$langue_parent = $row['lang'];
 	
-		$row = spip_abstract_fetch(spip_query("SELECT lang, langue_choisie FROM spip_breves WHERE id_breve=$id_breve"));
+		$row = sql_fetch(spip_query("SELECT lang, langue_choisie FROM spip_breves WHERE id_breve=$id_breve"));
 		$langue_breve = $row['lang'];
 	
 		$bouton = bouton_block_depliable(_T('titre_langue_breve')."&nbsp; (".traduire_nom_langue($langue_breve).")",false,'languesbreve');
@@ -231,7 +231,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	
 	echo "<br />";
 	
-	echo afficher_forum(spip_abstract_select("*", 'spip_forum', "statut='prive' AND id_breve=$id_breve AND id_parent=0",'', "date_heure DESC",  "20"), "breves_voir", "id_breve=$id_breve");
+	echo afficher_forum(sql_select("*", 'spip_forum', "statut='prive' AND id_breve=$id_breve AND id_parent=0",'', "date_heure DESC",  "20"), "breves_voir", "id_breve=$id_breve");
 	
 	echo fin_gauche(), fin_page();
 }

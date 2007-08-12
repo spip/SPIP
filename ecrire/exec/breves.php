@@ -30,9 +30,9 @@ function exec_breves_dist()
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'breves'),'data'=>''));
 	debut_droite();
 
- 	$result = spip_abstract_select('*', "spip_rubriques", "id_parent=0",'', '0+titre,titre');
+ 	$result = sql_select('*', "spip_rubriques", "id_parent=0",'', '0+titre,titre');
 
- 	while($row=spip_abstract_fetch($result)){
+ 	while($row=sql_fetch($result)){
 		$id_rubrique=$row['id_rubrique'];
 		$id_parent=$row['id_parent'];
 		$titre=typo($row['titre']);

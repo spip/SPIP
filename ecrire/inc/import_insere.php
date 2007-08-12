@@ -77,7 +77,7 @@ function translate_init($request) {
 
 	$q = spip_query("SELECT * FROM spip_translate");
 	$trans = array();
-	while ($r = spip_abstract_fetch($q)) {
+	while ($r = sql_fetch($q)) {
 		$trans[$r['type']][$r['id_old']] = array($r['id_new'], $r['titre'], intval($r['ajout']));
 	}
 	return $trans;
@@ -94,7 +94,7 @@ function import_insere($values, $table, $desc, $request, $atts) {
 	OR (!($n = $f($values, $table, $desc, $request)))) {
 	  // pas d'importation de types_doc (a revoir)
 		if ($table == 'spip_types_documents') return;
-		$n = spip_abstract_insert($table, '', '()');
+		$n = sql_insert($table, '', '()');
 		if (!$n) {
 			$GLOBALS['erreur_restauration'] = spip_sql_error();
 			return;
@@ -105,7 +105,7 @@ function import_insere($values, $table, $desc, $request, $atts) {
 	if (is_array($n))
 		list($id, $titre) = $n; 
 	else {$id = $n; $titre = "";}
-	spip_abstract_insert('spip_translate',
+	sql_insert('spip_translate',
 				"(id_old, id_new, titre, type, ajout)",
 				     "(". $values[$type_id] .",$id, " . _q($titre) . ", '$type_id', '$ajout')");
 }
@@ -266,7 +266,7 @@ function import_identifie_id_document($values, $table, $desc, $request) {
 	$t = $values['taille'];
 	$f = $values['fichier'];
 	$h = $request['url_site'] . $f;
-	$r = spip_abstract_fetch(spip_query("SELECT id_document AS id, fichier AS titre FROM spip_documents WHERE taille=" . _q($t) . " AND (fichier=" . _q($f) . " OR fichier= " . _q($h) . ')'));
+	$r = sql_fetch(spip_query("SELECT id_document AS id, fichier AS titre FROM spip_documents WHERE taille=" . _q($t) . " AND (fichier=" . _q($f) . " OR fichier= " . _q($h) . ')'));
 	return array($r['id'], $r['titre']);
 }
 
@@ -277,14 +277,14 @@ function import_identifie_id_document($values, $table, $desc, $request) {
 function import_identifie_id_type($values, $table, $desc, $request) {
 	$e = $values['extension'];
 	$t = $values['titre'];
-	$r = spip_abstract_fetch(spip_query("SELECT id_type AS id, titre FROM spip_types_documents WHERE extension=" . _q($e) . " AND titre=" . _q($t)));
+	$r = sql_fetch(spip_query("SELECT id_type AS id, titre FROM spip_types_documents WHERE extension=" . _q($e) . " AND titre=" . _q($t)));
 	return array($r['id'], $r['titre']);
 }
 
 // deux groupes de mots ne peuvent avoir le meme titre ==> identification
 // http://doc.spip.org/@import_identifie_id_groupe
 function import_identifie_id_groupe($values, $table, $desc, $request)  {
-	$r = spip_abstract_fetch(spip_query("SELECT id_groupe AS id, titre FROM spip_groupes_mots WHERE titre=" . _q($values['titre'])));
+	$r = sql_fetch(spip_query("SELECT id_groupe AS id, titre FROM spip_groupes_mots WHERE titre=" . _q($values['titre'])));
 	return array($r['id'], $r['titre']);
 }
 
@@ -305,10 +305,10 @@ function import_identifie_parent_id_mot($id_groupe, $titre, $v)
 	if (isset($trans['id_groupe'])
 	AND isset($trans['id_groupe'][$id_groupe])) {
 		$new = $trans['id_groupe'][$id_groupe][0];
-		$r = spip_abstract_fetch(spip_query("SELECT id_mot FROM spip_mots WHERE titre=$titre AND id_groupe=$new" ));
+		$r = sql_fetch(spip_query("SELECT id_mot FROM spip_mots WHERE titre=$titre AND id_groupe=$new" ));
 		if ($r) return  (0 - $r['id_mot']);
 	}
-	$r = spip_abstract_insert('spip_mots', '', '()');
+	$r = sql_insert('spip_mots', '', '()');
 	spip_query("REPLACE spip_translate (id_old, id_new, titre, type, ajout) VALUES ($v,$r,$titre,'id_mot',1)");
 	return $r;
 }
@@ -327,10 +327,10 @@ function import_identifie_parent_id_article($id_parent, $titre, $v)
 	$id_parent = importe_translate_maj('id_rubrique', (0 - $id_parent));
 
 	$titre = _q($titre);
-	$r = spip_abstract_fetch(spip_query("SELECT id_article FROM spip_articles WHERE titre=$titre AND id_rubrique=$id_parent AND statut<>'poubelle'" ));
+	$r = sql_fetch(spip_query("SELECT id_article FROM spip_articles WHERE titre=$titre AND id_rubrique=$id_parent AND statut<>'poubelle'" ));
 	if ($r) return (0 - $r['id_article']);
 
-	$r = spip_abstract_insert('spip_articles', '', '()');
+	$r = sql_insert('spip_articles', '', '()');
 	spip_query("REPLACE spip_translate (id_old, id_new, titre, type, ajout) VALUES ($v,$r,$titre,'id_article',1)");
 	return $r;
 }
@@ -349,10 +349,10 @@ function import_identifie_parent_id_breve($id_parent, $titre, $v)
 	$id_parent = importe_translate_maj('id_rubrique', (0 - $id_parent));
 
 	$titre = _q($titre);
-	$r = spip_abstract_fetch(spip_query("SELECT id_breve FROM spip_breves WHERE titre=$titre AND id_rubrique=$id_parent AND statut<>'refuse'" ));
+	$r = sql_fetch(spip_query("SELECT id_breve FROM spip_breves WHERE titre=$titre AND id_rubrique=$id_parent AND statut<>'refuse'" ));
 	if ($r) return (0 - $r['id_breve']);
 
-	$r = spip_abstract_insert('spip_breves', '', '()');
+	$r = sql_insert('spip_breves', '', '()');
 	spip_query("REPLACE spip_translate (id_old, id_new, titre, type, ajout) VALUES ($v,$r,$titre,'id_breve',1)");
 	return $r;
 }
@@ -392,7 +392,7 @@ function import_identifie_parent_id_rubrique($id_parent, $titre, $v)
 			}
 		}
 
-		$r = spip_abstract_fetch(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE titre=" . _q($titre) . " AND id_parent=" . intval($id_parent)));
+		$r = sql_fetch(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE titre=" . _q($titre) . " AND id_parent=" . intval($id_parent)));
 		if ($r)  {
 		  return (0 - $r['id_rubrique']);
 		}
@@ -406,7 +406,7 @@ function import_identifie_parent_id_rubrique($id_parent, $titre, $v)
 // http://doc.spip.org/@import_alloue_id_rubrique
 function import_alloue_id_rubrique($id_parent, $titre, $v) {
 	$titre = _q($titre);
-	$r = spip_abstract_insert('spip_rubriques', '(titre, id_parent)', "($titre,$id_parent)");
+	$r = sql_insert('spip_rubriques', '(titre, id_parent)', "($titre,$id_parent)");
 	spip_query("REPLACE spip_translate (id_old, id_new, titre, type, ajout) VALUES ($v,$r,$titre,'id_rubrique',1)");
 	return $r;
 }

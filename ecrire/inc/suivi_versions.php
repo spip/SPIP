@@ -55,7 +55,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 
 	$req_sel = "versions.id_version, versions.id_auteur, versions.date, versions.id_article, articles.statut, articles.titre";
 
-	$result = spip_abstract_select($req_sel, 'spip_versions AS versions, spip_articles AS articles', $req_where, '', 'versions.date DESC', "$debut, $nb_aff");
+	$result = sql_select($req_sel, 'spip_versions AS versions, spip_articles AS articles', $req_where, '', 'versions.date DESC', "$debut, $nb_aff");
 
 	if (spip_num_rows($result) > 0) {
 
@@ -69,7 +69,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 				. $titre_table;
 
 	
-			$total = spip_num_rows(spip_abstract_select($req_sel, 'spip_versions AS versions, spip_articles AS articles', $req_where, '','', "0, 149"));
+			$total = spip_num_rows(sql_select($req_sel, 'spip_versions AS versions, spip_articles AS articles', $req_where, '','', "0, 149"));
 			$id_liste = 't'.substr(md5("$req_where 149"),0,8);
 			$bouton = bouton_block_depliable($titre_table,true,$id_liste);
 			$revisions .= debut_cadre('liste',"historique-24.gif",'',$bouton)
@@ -96,7 +96,7 @@ $revisions .= "<a href='".generer_url_ecrire('suivi_revisions', "debut=$next&id_
 		}
 
 		// Afficher les 10 elements
-		while ($row = spip_abstract_fetch($result)) {
+		while ($row = sql_fetch($result)) {
 			$id_version = $row['id_version'];
 			$id_auteur = $row['id_auteur'];
 			$date = $row['date'];
@@ -107,7 +107,7 @@ $revisions .= "<a href='".generer_url_ecrire('suivi_revisions', "debut=$next&id_
 				
 				// l'id_auteur peut etre un numero IP (edition anonyme)
 				if ($id_auteur == intval($id_auteur)
-				AND $row_auteur = spip_abstract_fetch(spip_query("SELECT nom,email FROM spip_auteurs	WHERE id_auteur = '".addslashes($id_auteur)."'"))) {
+				AND $row_auteur = sql_fetch(spip_query("SELECT nom,email FROM spip_auteurs	WHERE id_auteur = '".addslashes($id_auteur)."'"))) {
 					$nom = typo($row_auteur["nom"]);
 					$email = $row_auteur['email'];
 				} else {
@@ -193,7 +193,7 @@ function revision_comparee($id_article, $id_version, $format='diff', $id_diff=NU
 	if (!$id_diff) {
 		$result_diff = spip_query("SELECT id_version FROM spip_versions WHERE id_article=$id_article AND id_version<$id_version ORDER BY id_version DESC LIMIT 1");
 		if ($result_diff) {
-			$row_diff = spip_abstract_fetch($result_diff);
+			$row_diff = sql_fetch($result_diff);
 			$id_diff = $row_diff['id_version'];
 		}
 	}

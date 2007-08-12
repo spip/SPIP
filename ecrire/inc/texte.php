@@ -605,7 +605,7 @@ function calculer_url ($lien, $texte='', $pour='url') {
 // http://doc.spip.org/@calculer_url_article_dist
 function calculer_url_article_dist($id, $texte='', $lien='') {
 	$s = spip_query("SELECT titre,lang FROM spip_articles WHERE id_article=$id");
-	$row = spip_abstract_fetch($s);
+	$row = sql_fetch($s);
 	if (!trim($texte))
 		$texte = supprimer_numero($row['titre']);
 	if (!trim($texte))
@@ -617,7 +617,7 @@ function calculer_url_article_dist($id, $texte='', $lien='') {
 function calculer_url_rubrique_dist($id, $texte='', $lien='')
 {
 	$s = spip_query("SELECT titre,lang FROM spip_rubriques WHERE id_rubrique=$id");
-	$row = spip_abstract_fetch($s);
+	$row = sql_fetch($s);
 	if (!trim($texte)) {
 		$texte = supprimer_numero($row['titre']);
 		if (!trim($texte))
@@ -630,7 +630,7 @@ function calculer_url_rubrique_dist($id, $texte='', $lien='')
  function calculer_url_breve_dist($id, $texte='', $lien='')
 {
 	$s = spip_query("SELECT titre,lang FROM spip_breves WHERE id_breve=$id");
-	$row = spip_abstract_fetch($s);
+	$row = sql_fetch($s);
 	if (!trim($texte)) {
 		$texte = supprimer_numero($row['titre']);
 		if (!trim($texte))
@@ -644,7 +644,7 @@ function calculer_url_rubrique_dist($id, $texte='', $lien='')
 {
 	if ($texte=='') {
 		$s = spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$id");
-		$row = spip_abstract_fetch($s);
+		$row = sql_fetch($s);
 		$texte = $row['nom'];
 	}
 	return array($lien, 'spip_in', $texte); # pas de hreflang
@@ -655,7 +655,7 @@ function calculer_url_mot_dist($id, $texte='', $lien='')
 {
 	if (!trim($texte)) {
 		$s = spip_query("SELECT titre FROM spip_mots WHERE id_mot=$id");
-		$row = spip_abstract_fetch($s);
+		$row = sql_fetch($s);
 		$texte = supprimer_numero($row['titre']);
 		if (!trim($texte))
 		  $texte = $id;
@@ -668,7 +668,7 @@ function calculer_url_mot_dist($id, $texte='', $lien='')
 {
 	if ($texte=='') {
 		$s = spip_query("SELECT titre,fichier FROM spip_documents WHERE id_document=$id");
-		$row = spip_abstract_fetch($s);
+		$row = sql_fetch($s);
 		$texte = $row['titre'];
 		if (!trim($texte))
 			$texte = preg_replace(",^.*/,","",$row['fichier']);
@@ -684,7 +684,7 @@ function calculer_url_site_dist($id, $texte='', $lien='')
 	# attention dans le cas des sites le lien pointe non pas sur
 	# la page locale du site, mais directement sur le site lui-meme
 	$s = spip_query("SELECT nom_site,url_site FROM spip_syndic WHERE id_syndic=$id");
-	$row = spip_abstract_fetch($s);
+	$row = sql_fetch($s);
 	if ($row) {
 		$lien = $row['url_site'];
 		if (!trim($texte))
@@ -700,7 +700,7 @@ function calculer_url_forum_dist($id, $texte='', $lien='')
 {
 	if (!trim($texte)) {
 		$s = spip_query("SELECT titre FROM spip_forum WHERE id_forum=$id AND statut='publie'");
-		$row = spip_abstract_fetch($s);
+		$row = sql_fetch($s);
 		$texte = $row['titre'];
 		if (!trim($texte))
 		    $texte = $id;

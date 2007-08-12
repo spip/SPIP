@@ -19,7 +19,7 @@ function lire_metas() {
 	if ($result = @spip_query("SELECT nom,valeur FROM spip_meta")) {
 
 		$GLOBALS['meta'] = array();
-		while ($row = spip_abstract_fetch($result))
+		while ($row = sql_fetch($result))
 			$GLOBALS['meta'][$row['nom']] = $row['valeur'];
 
 		if (!$GLOBALS['meta']['charset'])
@@ -34,7 +34,7 @@ function ecrire_meta($nom, $valeur, $importable = NULL) {
 		$GLOBALS['meta'][$nom] = $valeur; 
 		if (!_FILE_CONNECT && !@file_exists(_FILE_CONNECT_INS .'.php')) return;
 		$r = spip_query("SELECT impt FROM spip_meta WHERE nom=" . _q($nom));
-		$r = spip_abstract_fetch($r);
+		$r = sql_fetch($r);
 		// conserver la valeur de impt si existante
 		if ($r) {
 		  $r = ($importable === NULL) ? ''
