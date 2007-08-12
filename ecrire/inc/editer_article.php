@@ -29,10 +29,7 @@ function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='',
 
 	// Gaffe: sans ceci, on ecrase systematiquement l'article d'origine
 	// (et donc: pas de lien de traduction)
-
 	$id_article = ($new OR $lier_trad) ? 'oui' : $row['id_article'];
-	$id_rubrique = $row['id_rubrique'];
-	$id_secteur = $row['id_secteur'];
 
 	$aider = charger_fonction('aider', 'inc');
 	$config = $config_fonc($row);
@@ -49,13 +46,13 @@ function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='',
 	. editer_article_surtitre($row['surtitre'], $config, $aider)
 	. editer_article_titre($row['titre'], $row['onfocus'], $config, $aider)
 	. editer_article_soustitre($row['soustitre'], $config, $aider)
-	. editer_article_rubrique($id_rubrique, $id_secteur, $config, $aider)
+	. editer_article_rubrique($row['id_rubrique'], $row['id_secteur'], $config, $aider)
 	. editer_article_descriptif($row['descriptif'], $config, $aider)
 	. editer_article_url($row['url_site'], $row['nom_site'], $config, $aider)
 	. editer_article_chapo($row['chapo'], $config, $aider)
 	. editer_article_texte($row['texte'], $config, $aider,$row['lang'])
 	. editer_article_ps($row['ps'], $config, $aider)
-	. editer_article_extra($row['extra'], $id_secteur, $config, $aider)
+	. editer_article_extra($row['extra'], $row['id_secteur'], $config, $aider)
 	. $hidden
 	. ("<div style='text-align: right'><input class='fondo' type='submit' value='"
 	. _T('bouton_enregistrer')
@@ -302,7 +299,7 @@ function editer_article_extra($extra, $id_secteur, $config, $aider)
 {
 	if (!$config['extra'])
 		return '';
-	include_spip('inc_extra');
+	include_spip('inc/extra');
 	return extra_saisie($extra, 'articles', $id_secteur);
 }
 

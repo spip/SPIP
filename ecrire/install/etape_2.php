@@ -35,6 +35,8 @@ function install_etape_2_dist()
 	$chmod = _request('chmod');
 
 	$fconnect = charger_fonction('db_' . $server_db, 'base', true);
+	if (!$fconnect) die(_T('erreur'));
+
 	$link = $fconnect($adresse_db, 0, $login_db, $pass_db);
 
 	echo install_debut_html();
