@@ -1311,7 +1311,6 @@ function http_calendrier_aide_mess()
 //------- fonctions d'appel MySQL. 
 // au dela cette limite, pas de production HTML
 
-// http://doc.spip.org/@quete_calendrier_mois
 function quete_calendrier_mois($annee,$mois,$jour) {
 	$avant = "'" . date("Y-m-d", mktime(0,0,0,$mois,1,$annee)) . "'";
 	$apres = "'" . date("Y-m-d", mktime(0,0,0,$mois+1,1,$annee)) .
@@ -1319,7 +1318,6 @@ function quete_calendrier_mois($annee,$mois,$jour) {
 	return array($avant, $apres);
 }
 
-// http://doc.spip.org/@quete_calendrier_semaine
 function quete_calendrier_semaine($annee,$mois,$jour) {
 	$w_day = date("w", mktime(0,0,0,$mois, $jour, $annee));
 	if ($w_day == 0) $w_day = 7; // Gaffe: le dimanche est zero
@@ -1332,7 +1330,6 @@ function quete_calendrier_semaine($annee,$mois,$jour) {
 
 // ici on prend en fait le jour, la veille et le lendemain
 
-// http://doc.spip.org/@quete_calendrier_jour
 function quete_calendrier_jour($annee,$mois,$jour) {
 	$avant = "'" . date("Y-m-d", mktime(0,0,0,$mois,$jour-1,$annee)) . "'";
 	$apres = "'" . date("Y-m-d", mktime(1,1,1,$mois,$jour+1,$annee)) .
@@ -1344,7 +1341,6 @@ function quete_calendrier_jour($annee,$mois,$jour) {
 // - le premier indique les evenements du jour, sans indication de duree
 // - le deuxime indique les evenements commencant ce jour, avec indication de duree
 
-// http://doc.spip.org/@quete_calendrier_interval
 function quete_calendrier_interval($limites) {
 	list($avant, $apres) = $limites;
 	$evt = array();
@@ -1354,7 +1350,6 @@ function quete_calendrier_interval($limites) {
 	return array($evt, quete_calendrier_interval_rv($avant, $apres));
 }
 
-// http://doc.spip.org/@quete_calendrier_interval_forums
 function  quete_calendrier_interval_forums($limites, &$evenements) {
 	list($avant, $apres) = $limites;
 	$result=spip_abstract_select("DISTINCT titre, date_heure, id_forum",	"spip_forum", "date_heure >= $avant AND date_heure < $apres", '',  "date_heure");
@@ -1375,7 +1370,6 @@ function  quete_calendrier_interval_forums($limites, &$evenements) {
 # le tableau retourne est indexe par les balises du format ics
 # afin qu'il soit facile de produire de tels documents.
 
-// http://doc.spip.org/@quete_calendrier_interval_articles
 function quete_calendrier_interval_articles($avant, $apres, &$evenements) {
 	
   $result=spip_abstract_select('id_article, titre, date, descriptif, chapo,  lang', 'spip_articles', "statut='publie' AND date >= $avant AND date < $apres", '', "date");
@@ -1397,7 +1391,6 @@ function quete_calendrier_interval_articles($avant, $apres, &$evenements) {
 	}
 }
 
-// http://doc.spip.org/@quete_calendrier_interval_rubriques
 function quete_calendrier_interval_rubriques($avant, $apres, &$evenements) {
 	
   $result=spip_abstract_select('DISTINCT R.id_rubrique, titre, descriptif, date', 'spip_rubriques AS R, spip_documents_rubriques AS L', "statut='publie' AND	date >= $avant AND	date < $apres AND	R.id_rubrique = L.id_rubrique",'', "date");
@@ -1414,7 +1407,6 @@ function quete_calendrier_interval_rubriques($avant, $apres, &$evenements) {
 	}
 }
 
-// http://doc.spip.org/@quete_calendrier_interval_breves
 function quete_calendrier_interval_breves($avant, $apres, &$evenements) {
   $result=spip_abstract_select("id_breve, titre, date_heure, id_rubrique", 'spip_breves',	"statut='publie' AND date_heure >= $avant AND date_heure < $apres", '', "date_heure");
 	while($row=spip_abstract_fetch($result)){
@@ -1430,7 +1422,6 @@ function quete_calendrier_interval_breves($avant, $apres, &$evenements) {
 	}
 }
 
-// http://doc.spip.org/@quete_calendrier_interval_rv
 function quete_calendrier_interval_rv($avant, $apres) {
 	global $connect_id_auteur;
 	$evenements= array();
@@ -1509,7 +1500,6 @@ function tache_redirige ($row) {
 	return generer_url_ecrire("message", "id_message=".$row['UID']);
 }
 
-// http://doc.spip.org/@quete_calendrier_taches_annonces
 function quete_calendrier_taches_annonces () {
 	global $connect_id_auteur;
 	$r = array();
@@ -1524,7 +1514,6 @@ function quete_calendrier_taches_annonces () {
 	return $r;
 }
 
-// http://doc.spip.org/@quete_calendrier_taches_pb
 function quete_calendrier_taches_pb () {
 	global $connect_id_auteur;
 	$r = array();
@@ -1540,7 +1529,6 @@ function quete_calendrier_taches_pb () {
 	return $r;
 }
 
-// http://doc.spip.org/@quete_calendrier_taches_rv
 function quete_calendrier_taches_rv () {
 	global $connect_id_auteur;
 	$r = array();
@@ -1555,7 +1543,6 @@ function quete_calendrier_taches_rv () {
 	return  $r;
 }
 
-// http://doc.spip.org/@quete_calendrier_agenda
 function quete_calendrier_agenda ($annee, $mois) {
 	global $connect_id_auteur;
 
