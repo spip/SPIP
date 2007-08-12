@@ -135,7 +135,8 @@ function spip_pg_groupby($groupby, $from, $select)
 	return "\nGROUP BY $groupby"; 
 }
 
-// Conversion des operateurs (parfois implicites) MySQL en PG
+// Conversion des operateurs MySQL en PG
+// IMPORTANT: "0+X" est vu comme conversion numerique du debut de X 
 // Quelques manques encore sur les dates et surtout Field
 // Et le 'as' du 'CAST' est en minuscule pour echapper au dernier preg_replace
 // de spip_pg_groupby, c'est pas top.
@@ -147,10 +148,7 @@ function spip_pg_frommysql($arg)
 	$res = preg_replace('/FIELD[(]([^,]*)[^)]*[)]/','1',$arg);
 	if ($res != $arg)
 	  spip_log("SPIP-PG ne sait pas traduire $arg"); # a revoir
-	$res = preg_replace('/\b0[+]([^, ]+)\s*,\s*\1\b/',
-			    'CAST(substring(\1, \'^ *[0-9]+\') as int)',
-			    $res);
-	$res = preg_replace('/\b0[+]([^, ]+\b)/',
+	$res = preg_replace('/\b0[+]([^, ]+)\s*/',
 			    'CAST(substring(\1, \'^ *[0-9]+\') as int)',
 			    $res);
 	$res = preg_replace('/DATE_SUB\s*[(]([^,]*),/', '(\1 -', $res);
