@@ -2138,7 +2138,7 @@ function filtre_foreach_dist($balise_deserializee, $modele = 'foreach') {
 // appelee par la balise #PLUGIN
 function calcul_info_plugin($plugin, $type_info) {
 	//surcharge possible pour afficher des donnees plus complexes
-	if(function_exists('info_plugin')
+	if(function_exists('info_plugin'))
 		return info_plugin($plugin, $type_info);
 
 	include_spip('inc/plugin');
