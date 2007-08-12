@@ -71,15 +71,15 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row)
 
 	$flag_editable = ($flag_administrable OR ($GLOBALS['meta']["proposer_sites"] > 0 AND ($statut == 'prop')));
 
-	debut_grand_cadre();
+	echo debut_grand_cadre(true);
 
 	echo afficher_hierarchie($id_rubrique);
 
-	fin_grand_cadre();
+	echo fin_grand_cadre(true);
 
-	debut_gauche();
+	echo debut_gauche('', true);
 
-	debut_boite_info();
+	echo debut_boite_info(true);
 
 	$res = "\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>"
 		  .  _T('titre_site_numero')
@@ -87,8 +87,8 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row)
 		  . $id_syndic
 		  . '</span></div>';
 	echo $res;
-	voir_en_ligne ('site', $id_syndic, $statut);
-	fin_boite_info();
+	echo voir_en_ligne ('site', $id_syndic, $statut,'', false);
+	echo fin_boite_info(true);
 
 
 	echo "\n<br /><div class='centered' style='margin-top:10px'>";
@@ -101,12 +101,12 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row)
 	}
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
 
-	creer_colonne_droite();
+	echo creer_colonne_droite(true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
 
-	debut_droite();
+	echo debut_droite('', true);
 
-	debut_cadre_relief("site-24.gif");
+	echo debut_cadre_relief("site-24.gif", true);
 
 	if ($syndication == 'off' OR $syndication == 'sus') 
 	  $droit = $id_rubrique;
@@ -146,7 +146,7 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row)
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
 
 	if ($flag_administrable) {
-		debut_cadre_relief("racine-site-24.gif");
+		echo debut_cadre_relief("racine-site-24.gif", true);
 
 		$corps = "\n<div style='text-align: center'><b>"
 		. _T('info_statut_site_1')
@@ -171,7 +171,7 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row)
 			'sites',
 			"id_syndic=$id_syndic&id_parent=$id_rubrique",
 			$corps);
-		fin_cadre_relief();
+		echo fin_cadre_relief(true);
 	}
 
 
@@ -180,7 +180,7 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row)
 
 
 		if ($syndication == "off" OR $syndication=="sus") {
-			debut_boite_info();
+			echo debut_boite_info(true);
 			echo _T('avis_site_syndique_probleme', array('url_syndic' => quote_amp($url_syndic)));
 
 			echo redirige_action_auteur('editer_site',
@@ -192,7 +192,7 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row)
 			. attribut_html(_T('lien_nouvelle_recuperation'))
 			. "\" class='fondo spip_xx-small' />"
 						    );
-			fin_boite_info();
+			echo fin_boite_info(true);
 		}
 		echo afficher_objets('syndic_article',_T('titre_articles_syndiques'), array('FROM' => 'spip_syndic_articles', 'WHERE' => "id_syndic=$id_syndic", 'ORDER BY' => "date DESC"), $id_syndic);
 
@@ -262,14 +262,14 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row)
 
 		// Bouton "Valider"
 		$res .= "\n<div style='text-align:$spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>\n";
-		echo debut_cadre_relief('feed.png', false, "", _T('syndic_options').aide('artsyn')),	
+		echo debut_cadre_relief('feed.png', true, "", _T('syndic_options').aide('artsyn')),	
 		  redirige_action_auteur('editer_site',
 					 "options/$id_syndic",
 					 'sites',
 					 '',
 					 $res,
 					 " method='post'"),
-		  fin_cadre_relief();
+		  fin_cadre_relief(true);
 	}
 	}
 
@@ -298,14 +298,14 @@ else if (preg_match(',^\s*select: (.*),', $url_syndic, $regs)) {
 	$res .= aide("rubsyn");
 	$res .= "<div style='text-align: $spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>\n";
 	$res .= "</div>\n";
-	echo debut_cadre_relief();
+	echo debut_cadre_relief('', true);
 	echo redirige_action_auteur('editer_site',
 		$id_syndic,
 		'sites',
 		'',
 		$res,
 		" method='post'");
-	echo fin_cadre_relief();
+	echo fin_cadre_relief(true);
 
 }
 
@@ -315,7 +315,7 @@ if ($GLOBALS['champs_extra'] AND $extra) {
 		echo extra_affichage($extra, "sites");
 	}
 
-fin_cadre_relief();
+echo fin_cadre_relief(true);
 
 
 //////////////////////////////////////////////////////

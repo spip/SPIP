@@ -54,17 +54,17 @@ function forum_affiche($debut, $admin=false)
 		$script = 'forum';
 	}
 
-  	debut_gauche();
+  	echo debut_gauche('', true);
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'forum'),'data'=>''));
-	creer_colonne_droite();
+	echo creer_colonne_droite(true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'forum'),'data'=>''));
 
-	debut_droite();
+	echo debut_droite('', true);
 
 	if ($admin)
-		gros_titre(_T('titre_cadre_forum_administrateur'));
+		echo gros_titre(_T('titre_cadre_forum_administrateur'),'', false);
 	else
-		gros_titre(_T('titre_cadre_forum_interne'));
+		echo gros_titre(_T('titre_cadre_forum_interne'),'', false);
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'forum'),'data'=>''));
 

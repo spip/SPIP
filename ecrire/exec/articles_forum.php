@@ -70,15 +70,15 @@ function exec_articles_forum_dist()
 // http://doc.spip.org/@articles_forum_cadres
 function articles_forum_cadres($id_rubrique, $id_article, $titre, $script, $args)
 {
-	debut_grand_cadre();
+	echo debut_grand_cadre(true);
 
 	echo afficher_hierarchie($id_rubrique);
 
-	fin_grand_cadre();
+	echo fin_grand_cadre(true);
 
-	debut_gauche();
+	echo debut_gauche('', true);
 
-	debut_boite_info();
+	echo debut_boite_info(true);
 
 	echo "<p style='text-align: left; ' class='verdana1 spip_x-small'>",
 	  _T('info_gauche_suivi_forum'),
@@ -91,12 +91,12 @@ function articles_forum_cadres($id_rubrique, $id_article, $titre, $script, $args
 	  . bouton_spip_rss('forum', array('id_article' => $id_article))
 	  . "</div>";
 
-	fin_boite_info();
+	echo fin_boite_info(true);
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'articles_forum','id_article'=>$id_article),'data'=>''));
-	creer_colonne_droite();
+	echo creer_colonne_droite(true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'articles_forum','id_article'=>$id_article),'data'=>''));
-	debut_droite();
+	echo debut_droite('', true);
 
 	echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
 	echo "<tr>";
@@ -108,7 +108,7 @@ function articles_forum_cadres($id_rubrique, $id_article, $titre, $script, $args
 	echo "<td>" . http_img_pack('rien.gif', " ", "width='10'") ."</td>\n";
 	echo "<td style='width: 100%'>";
 	echo _T('texte_messages_publics');
-	gros_titre($titre);
+	echo gros_titre($titre,'', false);
 	echo "</td></tr></table>";
 }
 ?>

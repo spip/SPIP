@@ -87,11 +87,11 @@ function exec_breves_edit_dist()
 	echo $commencer_page(_T('titre_page_breves_edit', array('titre' => $titre)), "naviguer", "breves", $id_rubrique);
 
 
-	debut_grand_cadre();
+	echo debut_grand_cadre(true);
 	echo afficher_hierarchie($id_rubrique);
 
-	fin_grand_cadre();
-	debut_gauche();
+	echo fin_grand_cadre(true);
+	echo debut_gauche('', true);
 	if ($new != 'oui' AND ($connect_statut=="0minirezo" OR $statut=="prop")) {
 	# affichage sur le cote des images, en reperant les inserees
 	# note : traiter_modeles($texte, true) repere les doublons
@@ -100,16 +100,16 @@ function exec_breves_edit_dist()
 		echo afficher_documents_colonne($id_breve, "breve");
 	}
 echo pipeline('affiche_gauche',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''));
-creer_colonne_droite();
+echo creer_colonne_droite(true);
 echo pipeline('affiche_droite',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''));
-debut_droite();
-debut_cadre_formulaire();
+echo debut_droite('', true);
+echo debut_cadre_formulaire("", true);
 
 
 if ($new != "oui") {
 	echo icone_inline(_T('icone_retour'), generer_url_ecrire("breves_voir","id_breve=$id_breve"), "breve-24.gif", "rien.gif",$spip_lang_right);
 	echo _T('info_modifier_breve');
-	gros_titre($titre);
+	echo gros_titre($titre,'', false);
 	echo "<br class='nettoyeur' />";
 }
 
@@ -179,7 +179,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 else
 	echo "<h2>"._T('info_page_interdite')."</h2>";
 
-fin_cadre_formulaire();
+echo fin_cadre_formulaire(true);
 echo fin_gauche(), fin_page();
 
 }

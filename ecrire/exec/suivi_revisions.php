@@ -30,13 +30,13 @@ function exec_suivi_revisions_dist()
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T("icone_suivi_revisions"));
 
-	debut_gauche();
+	echo debut_gauche('', true);
 
 	if (autoriser('voir', 'article'))
 	  $req_where = "('prepa','prop','publie')"; 
 	else $req_where = "('prop','publie')"; 
 
-	debut_cadre_relief();
+	echo debut_cadre_relief('', true);
 
 	echo "<div class='arial11'><ul>";
 
@@ -86,7 +86,7 @@ function exec_suivi_revisions_dist()
 
 	echo "<div style='text-align: ", $GLOBALS['spip_lang_right'], ";'>", $op, "</div>";
 
-	fin_cadre_relief();
+	echo fin_cadre_relief(true);
 
 	echo debut_droite("", true);
 	echo afficher_suivi_versions($debut, $id_secteur, $id_auteur, $lang_choisie);

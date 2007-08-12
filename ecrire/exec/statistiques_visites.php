@@ -116,25 +116,25 @@ function exec_statistiques_visites_dist()
 	if ($origine) {
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_statistiques_referers'), "statistiques_visites", "statistiques");
-	gros_titre(_T('titre_liens_entrants'));
+	echo gros_titre(_T('titre_liens_entrants'),'', false);
 	echo barre_onglets("statistiques", "referers");
 
-	debut_gauche();
-	debut_boite_info();
+	echo debut_gauche('', true);
+	echo debut_boite_info(true);
 	echo "<p style='text-align: left' style='font-size:small;' class='verdana1'>"._T('info_gauche_statistiques_referers')."</p>";
-	fin_boite_info();
+	echo fin_boite_info(true);
 	
-	debut_droite();
+	echo debut_droite('', true);
 
 }
 else {
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_statistiques_visites').$pourarticle, "statistiques_visites", "statistiques");
-	gros_titre(_T('titre_evolution_visite')."<html>".aide("confstat")."</html>");
+	echo gros_titre(_T('titre_evolution_visite')."<html>".aide("confstat")."</html>",'', false);
 //	barre_onglets("statistiques", "evolution");
-	if ($titre) gros_titre($titre);
+	if ($titre) echo gros_titre($titre,'', false);
 
-	debut_gauche();
+	echo debut_gauche('', true);
 
 	echo "<br />";
 
@@ -230,7 +230,7 @@ else {
 		
 	if (spip_num_rows($result) > 0
 	OR $id_article > 0)
-		creer_colonne_droite();
+		echo creer_colonne_droite(true);
 
 	if ($id_article > 0) {
 		echo bloc_des_raccourcis(icone_horizontale(_T('icone_retour_article'), generer_url_ecrire("articles","id_article=$id_article"), "article-24.gif","rien.gif", false));
@@ -261,7 +261,7 @@ else {
 	}
 
 
-	debut_droite();
+	echo debut_droite('', true);
  }
 
 
@@ -323,7 +323,7 @@ else {
 		}
 		if ($largeur > 50) $largeur = 50;
 
-		debut_cadre_relief("statistiques-24.gif");
+		echo debut_cadre_relief("statistiques-24.gif", true);
 		
 		
 		$largeur_abs = 420 / $aff_jours;
@@ -779,7 +779,7 @@ else {
 	
 	/////
 		
-	fin_cadre_relief();
+	echo fin_cadre_relief(true);
 
 
 	// Le bouton pour passer de svg a htm
@@ -812,7 +812,7 @@ if ($origine) {
 $result = spip_query("SELECT referer, $vis AS vis FROM $table_ref WHERE $where ORDER BY vis DESC LIMIT $limit");
 
 
-gros_titre(_T("onglet_origine_visites"));
+echo gros_titre(_T("onglet_origine_visites"),'', false);
 
 echo "<div style='font-size:small;overflow:hidden;' class='verdana1'><br />";
 echo aff_referers ($result, $limit, generer_url_ecrire('statistiques_visites', ($id_article?"id_article=$id_article&":'').('limit=' . strval($limit+200))));

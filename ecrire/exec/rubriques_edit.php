@@ -74,13 +74,13 @@ function exec_rubriques_edit_dist()
 		else	$logo_parent = "rubrique-24.gif";
 	}
 
-	debut_grand_cadre();
+	echo debut_grand_cadre(true);
 
 	echo afficher_hierarchie($id_parent);
 
-	fin_grand_cadre();
+	echo fin_grand_cadre(true);
 
-	debut_gauche();
+	echo debut_gauche('', true);
 
 	// Pave "documents associes a la rubrique"
 
@@ -93,17 +93,17 @@ function exec_rubriques_edit_dist()
 	} 
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'rubriques_edit','id_rubrique'=>$id_rubrique),'data'=>''));
-	creer_colonne_droite();
+	echo creer_colonne_droite(true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'rubriques_edit','id_rubrique'=>$id_rubrique),'data'=>''));	  
-	debut_droite();
+	echo debut_droite('', true);
 
-	debut_cadre_formulaire();
+	echo debut_cadre_formulaire("", true);
 
 	if ($id_rubrique) echo icone_inline(_T('icone_retour'), generer_url_ecrire("naviguer","id_rubrique=$id_rubrique"), $ze_logo, "rien.gif",$spip_lang_right);
 	else echo icone_inline(_T('icone_retour'), generer_url_ecrire("naviguer","id_rubrique=$id_parent"), $ze_logo, "rien.gif",$spip_lang_right);
 
 	echo _T('info_modifier_rubrique');
-	gros_titre($titre);
+	echo gros_titre($titre,'', false);
 	echo "<br class='nettoyeur' />";
 
 	$titre = entites_html($titre);
@@ -159,7 +159,7 @@ function exec_rubriques_edit_dist()
 
 	echo redirige_action_auteur("editer_rubrique", $id_rubrique ? $id_rubrique : 'oui', 'naviguer', '', $form, " method='post'");
 
-	echo fin_cadre_formulaire();
+	echo fin_cadre_formulaire(true);
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'rubriques_edit','id_rubrique'=>$id_rubrique),'data'=>''));	  
 

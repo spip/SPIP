@@ -81,7 +81,7 @@ function exec_articles_versions_dist()
 // Affichage de la colonne de gauche
 //
 
-	debut_gauche();
+	echo debut_gauche('', true);
 
 	echo bloc_des_raccourcis(icone_horizontale(_T('icone_retour_article'), generer_url_ecrire("articles","id_article=$id_article"), "article-24.gif","rien.gif", false) .
 				 icone_horizontale(_T('icone_suivi_revisions'), generer_url_ecrire("suivi_revisions",""), "historique-24.gif","rien.gif", false));
@@ -92,11 +92,11 @@ function exec_articles_versions_dist()
 // Affichage de la colonne de droite
 //
 
-	debut_droite();
+	echo debut_droite('', true);
 
 	$lang_dir = lang_dir(changer_typo($lang));
 
-	echo debut_cadre_relief(true);
+	echo debut_cadre_relief('', true);
 
 //
 // Titre, surtitre, sous-titre
@@ -107,7 +107,7 @@ function exec_articles_versions_dist()
 	if ($surtitre) {
 		echo "<span  dir='$lang_dir'><span class='arial1 spip_medium'><b>", propre_diff($surtitre), "</b></span></span>\n";
 }
-	echo gros_titre(propre_diff($titre), puce_statut($statut_article, " style='vertical-align: center'") . " &nbsp; ", true);
+	echo gros_titre(propre_diff($titre), puce_statut($statut_article, " style='vertical-align: center'") . " &nbsp; ", false);
 
 	if ($soustitre) {
 		echo "<span  dir='$lang_dir'><span class='arial1 spip_medium'><b>", propre_diff($soustitre), "</b></span></span>\n";
@@ -152,7 +152,7 @@ function exec_articles_versions_dist()
 
 	if (!$zap) return; 
 
-	debut_cadre_relief();
+	echo debut_cadre_relief('', true);
 // s'il y en a trop on en zappe (pagination a la va-vite)
 	$zap = ($zap > 50);
 	$zaps = '<li>...</li>';
@@ -229,10 +229,10 @@ if ($id_version) {
 	}
 	
 	if ($virtuel) {
-		debut_boite_info();
+		echo debut_boite_info(true);
 		echo _T('info_renvoi_article'),
 			propre("<span style='text-align: center'> [->$virtuel]</span>");
-		fin_boite_info();
+		echo fin_boite_info(true);
 	}
 	else {
 		echo "<div  dir='$lang_dir'><b>";
@@ -244,15 +244,15 @@ if ($id_version) {
 		echo "</div>";
 	
 		if ($ps) {
-			echo debut_cadre_enfonce();
+			echo debut_cadre_enfonce('',true);
 			echo "<div  dir='$lang_dir' class='verdana1 spip_small'>", justifier("<b>"._T('info_ps')."</b> ".propre_diff($ps)), "</div>";
-			echo fin_cadre_enfonce();
+			echo fin_cadre_enfonce(true);
 		}
 	
 		if ($les_notes) {
-			echo debut_cadre_relief();
+			echo debut_cadre_relief('', true);
 			echo "<div  dir='$lang_dir'><span class='spip_small'>", justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes), "</span></div>";
-			echo fin_cadre_relief();
+			echo fin_cadre_relief(true);
 		}
 	
 		if ($champs_extra AND $extra) {
@@ -262,7 +262,7 @@ if ($id_version) {
 	}
 }
 
-echo fin_cadre_relief();
+echo fin_cadre_relief(true);
 
 
 echo  fin_gauche(), fin_page();

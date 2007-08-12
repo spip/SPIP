@@ -54,7 +54,7 @@ function exec_recherche_dist() {
 
 	}
 	
-	echo debut_grand_cadre();
+	echo debut_grand_cadre(true);
 
 	if (!strlen($recherche)) {
 		$recherche_aff = _T('info_rechercher');

@@ -235,7 +235,7 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 	// affichage des caracteristiques du message
 
 	echo "<div style='border: 1px solid $la_couleur; background-color: $fond; padding: 5px;'>"; // debut cadre de couleur
-	//debut_cadre_relief("messagerie-24.gif");
+	//echo debut_cadre_relief("messagerie-24.gif", true);
 	echo "\n<table width='100%' cellpadding='0' cellspacing='0' border='0'>";
 	echo "<tr><td>"; # uniques
 
@@ -267,11 +267,11 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 	  . "<div class='serif'>$texte</div>";
 
 	if ($les_notes) {
-		echo debut_cadre_relief();
+		echo debut_cadre_relief('', true);
 		echo "<div dir=" . lang_dir() ."' class='arial11'>";
 		echo justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes);
 		echo "</div>";
-		echo fin_cadre_relief();
+		echo fin_cadre_relief(true);
 	}
 
 	if ($expediteur == $connect_id_auteur AND $statut == 'redac') {
@@ -285,7 +285,7 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 	}
 	echo "</td></tr></table>\n";
 
-	//	echo "</td></tr></table>\n"; //fin_cadre_relief();
+	//	echo "</td></tr></table>\n"; //echo fin_cadre_relief(true);
 	echo "</div>";			// fin du cadre de couleur
 	
 	// Les boutons
@@ -338,7 +338,7 @@ function exec_affiche_message_dist($id_message, $cherche_auteur, $forcer_dest)
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page($titre, "accueil", "messagerie");
 
-	debut_gauche();
+	echo debut_gauche('', true);
 	
 	if ($rv != 'non')
 	  echo http_calendrier_agenda ($lannee, $lemois, $lejour, $lemois, $lannee,false, generer_url_ecrire('calendrier'));
@@ -361,13 +361,13 @@ function exec_affiche_message_dist($id_message, $cherche_auteur, $forcer_dest)
 			  }
 		      }
 		  }
-		creer_colonne_droite();	
+		echo creer_colonne_droite(true);	
 
 		echo http_calendrier_ics_titre($lannee,$lemois,$lejour,generer_url_ecrire('calendrier'));
 		echo http_calendrier_ics($lannee,$lemois, $lejour, $echelle, $partie_cal, 90, array($sh, $ah));
 	}
 
-	debut_droite();
+	echo debut_droite('', true);
 
 	http_affiche_message($id_message, $expediteur, $statut, $type, $texte, $titre, $rv, $date_heure, $date_fin, $cherche_auteur, $forcer_dest);
 

@@ -37,16 +37,16 @@ function exec_statistiques_lang_dist()
 	echo "<table align='center' width='$largeur_table'><tr><td style='width: $largeur_table" . "px; text-align:center;' class='verdana2'>";
 	echo "<br /><br />";
 
-	gros_titre(_T('onglet_repartition_lang'));
+	echo gros_titre(_T('onglet_repartition_lang'),'', false);
 
 //barre_onglets("repartition", "langues");
 
 	if (_request('critere') == "debut") {
 		$critere = "visites";
-//	gros_titre(_T('onglet_repartition_debut'));	
+//	echo gros_titre(_T('onglet_repartition_debut','', false));	
 	} else {
 		$critere = "popularite";
-//	gros_titre(_T('onglet_repartition_actuelle'));	
+//	echo gros_titre(_T('onglet_repartition_actuelle','', false));	
 }
 
 	echo ($critere == "popularite") ? barre_onglets("rep_depuis", "popularite"): barre_onglets("rep_depuis", "debut");
@@ -57,7 +57,7 @@ function exec_statistiques_lang_dist()
 //
 
 
-	debut_cadre_enfonce("langues-24.gif");
+	echo debut_cadre_enfonce("langues-24.gif", true);
 
 	$result = spip_query("SELECT SUM(".$critere.") AS total_visites FROM spip_articles");
 
@@ -110,7 +110,7 @@ function exec_statistiques_lang_dist()
 
 //echo "<p><span class='verdana1 spip_medium'>"._T('texte_signification')."</span>";
 
-	fin_cadre_enfonce();
+	echo fin_cadre_enfonce(true);
 
 	echo "</td></tr></table>";
 	echo fin_page();

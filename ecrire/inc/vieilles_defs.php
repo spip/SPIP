@@ -27,9 +27,9 @@ function debut_raccourcis() {
 spip_log('debut_raccourcis() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
         global $spip_display;
         echo "<div>&nbsp;</div>";
-        creer_colonne_droite();
+        echo creer_colonne_droite(true);
 
-        debut_cadre_enfonce();
+        echo debut_cadre_enfonce('',true);
         if ($spip_display != 4) {
                 echo "<font face='Verdana, Geneva, Sans, sans-serif' size=1>";
                 echo "<b>"._T('titre_cadre_raccourcis')."</b><p />";
@@ -47,7 +47,7 @@ spip_log('fin_raccourcis() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME
         if ($spip_display != 4) echo "</font>";
         else echo "</ul>";
         
-        fin_cadre_enfonce();
+        echo fin_cadre_enfonce(true);
 }
 
 // http://doc.spip.org/@include_ecrire

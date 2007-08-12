@@ -57,21 +57,21 @@ function exec_naviguer_dist()
 		   "rubriques",
 		   $id_rubrique);
 
-	  debut_grand_cadre();
+	  echo debut_grand_cadre(true);
 
 	  if ($id_rubrique  > 0) echo afficher_hierarchie($id_parent);
 	  else $titre = _T('info_racine_site').": ". $GLOBALS['meta']["nom_site"];
-	  fin_grand_cadre();
+	  echo fin_grand_cadre(true);
 
 	  changer_typo($lang);
 	  
 	  if (!autoriser('voir','rubrique',$id_rubrique)){
 			echo "<strong>"._T('avis_acces_interdit')."</strong>";
-			fin_page();
+			echo fin_page();
 			exit;
 	  }
 
-	  debut_gauche();
+	  echo debut_gauche('', true);
 
 	if ($spip_display != 4) {
 
@@ -96,11 +96,11 @@ function exec_naviguer_dist()
 	}
 		
 
-		creer_colonne_droite();
+		echo creer_colonne_droite(true);
 		echo pipeline('affiche_droite',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''));	  
-		debut_droite();
+		echo debut_droite('', true);
 
-	  debut_cadre_relief($ze_logo);
+	  echo debut_cadre_relief($ze_logo, true);
 
 	  montre_naviguer($id_rubrique, $titre, $descriptif, $ze_logo, $flag_editable);
 
@@ -122,10 +122,10 @@ function exec_naviguer_dist()
 	
 	langue_naviguer($id_rubrique, $id_parent, $flag_editable);
 	    
-	fin_cadre_relief();
+	echo fin_cadre_relief(true);
 
 	echo "<div>\n";
-	echo afficher_enfant_rub($id_rubrique, autoriser('creerrubriquedans','rubrique',$id_rubrique), false);
+	echo afficher_enfant_rub($id_rubrique, autoriser('creerrubriquedans','rubrique',$id_rubrique), true);
 
 	echo contenu_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable);
 	echo "</div>\n";
@@ -157,9 +157,9 @@ function infos_naviguer($id_rubrique, $statut, $ze_logo)
 		  . $id_rubrique
 		  . '</span></div>';
 
-		debut_boite_info();
+		echo debut_boite_info(true);
 		echo $res;
-		voir_en_ligne ('rubrique', $id_rubrique, $statut);
+		voir_en_ligne ('rubrique', $id_rubrique, $statut, '', false);
 	
 		if (autoriser('publierdans','rubrique',$id_rubrique)) {
 			$id_parent = sql_fetch(spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
@@ -168,10 +168,10 @@ function infos_naviguer($id_rubrique, $statut, $ze_logo)
 			  $n = spip_num_rows(spip_query("SELECT id_forum FROM $from" .($where ? (" WHERE $where") : '')));
 
 			  if ($n)
-			    icone_horizontale(_T('icone_suivi_forum', array('nb_forums' => $n)), generer_url_ecrire("controle_forum","id_rubrique=$id_rubrique"), "suivi-forum-24.gif", "");
+			    echo icone_horizontale(_T('icone_suivi_forum', array('nb_forums' => $n)), generer_url_ecrire("controle_forum","id_rubrique=$id_rubrique"), "suivi-forum-24.gif", "", false);
 			}
 		}
-		fin_boite_info();
+		echo fin_boite_info(true);
 
 		$res = '';
 		$q = spip_query("SELECT A.nom, A.id_auteur FROM spip_auteurs AS A LEFT JOIN spip_auteurs_rubriques AS R ON A.id_auteur=R.id_auteur WHERE R.id_rubrique=$id_rubrique");
@@ -186,7 +186,7 @@ function infos_naviguer($id_rubrique, $statut, $ze_logo)
 				'</a><br />';
 		}
 		if ($res)
-			echo '<br />', debut_cadre_relief("fiche-perso-24.gif", false, '', _T('info_administrateurs')), $res, fin_cadre_relief();
+			echo '<br />', debut_cadre_relief("fiche-perso-24.gif", true, '', _T('info_administrateurs')), $res, fin_cadre_relief(true);
 	}
 }
 
@@ -233,7 +233,7 @@ if ($id_rubrique>0 AND $GLOBALS['meta']['multi_rubriques'] == 'oui' AND ($GLOBAL
 	if (!$langue_rubrique)
 		$langue_rubrique = $langue_parent;
 
-	debut_cadre_enfonce('langues-24.gif');
+	echo debut_cadre_enfonce('langues-24.gif', true);
 	echo bouton_block_depliable(_T('titre_langue_rubrique')."&nbsp; (".traduire_nom_langue($langue_rubrique).")",false,'languesrubrique');
 
 	echo debut_block_depliable(false,'languesrubrique');
@@ -247,7 +247,7 @@ if ($id_rubrique>0 AND $GLOBALS['meta']['multi_rubriques'] == 'oui' AND ($GLOBAL
 	echo "</div>\n";
 	echo fin_block();
 
-	fin_cadre_enfonce();
+	echo fin_cadre_enfonce(true);
  }
 }
 
@@ -423,10 +423,10 @@ function montre_naviguer($id_rubrique, $titre, $descriptif, $logo, $flag_editabl
 
   echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
   echo "<tr><td style='width: 100%' valign='top'>";
-  gros_titre((!acces_restreint_rubrique($id_rubrique) ? '' :
+  echo gros_titre((!acces_restreint_rubrique($id_rubrique) ? '' :
 		http_img_pack("admin-12.gif",'', "width='12' height='12'",
 			      _T('info_administrer_rubrique'))) .
-	     $titre);
+	     $titre,'', false);
   echo "</td>";
 
   if ($id_rubrique > 0 AND $flag_editable) {

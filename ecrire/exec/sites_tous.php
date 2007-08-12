@@ -22,11 +22,11 @@ function exec_sites_tous_dist()
 pipeline('exec_init',array('args'=>array('exec'=>'sites_tous'),'data'=>''));
 $commencer_page = charger_fonction('commencer_page', 'inc');
 echo $commencer_page(_T('titre_page_sites_tous'),"naviguer","sites");
-debut_gauche();
+echo debut_gauche('', true);
 echo pipeline('affiche_gauche',array('args'=>array('exec'=>'sites_tous'),'data'=>''));
-creer_colonne_droite();
+echo creer_colonne_droite(true);
 echo pipeline('affiche_droite',array('args'=>array('exec'=>'sites_tous'),'data'=>''));	  
-debut_droite();
+echo debut_droite('', true);
 
  echo afficher_objets('site','<b>' . _T('titre_sites_tous') . '</b>', array("FROM" => 'spip_syndic', 'WHERE' => "syndication='non' AND statut='publie'", 'ORDER BY'=> "nom_site"));
 

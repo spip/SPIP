@@ -67,7 +67,7 @@ function exec_auteur_infos_dist() {
 		}
 		echo "<br /><br /><br />";
 
-		debut_gauche();
+		echo debut_gauche('', true);
 
 		echo cadre_auteur_infos($id_auteur, $auteur);
 
@@ -79,7 +79,7 @@ function exec_auteur_infos_dist() {
 		);
 
 
-		creer_colonne_droite();
+		echo creer_colonne_droite(true);
 		echo pipeline('affiche_droite',
 			      array('args' => array(
 						    'exec'=>'auteur_infos',
@@ -102,7 +102,7 @@ function exec_auteur_infos_dist() {
 				'auteur_infos');
 		}
 
-		echo debut_droite();
+		echo debut_droite('', true);
 
 		echo debut_cadre_relief("redacteurs-24.gif", true);
 
@@ -111,7 +111,7 @@ function exec_auteur_infos_dist() {
 		if ($fiche) {
 			echo $fiche;
 		} else {
-			gros_titre(_T('info_acces_interdit'));
+			echo gros_titre(_T('info_acces_interdit'),'', false);
 		}
 
 		echo pipeline('affiche_milieu',
@@ -171,7 +171,7 @@ function auteurs_interventions($auteur) {
 	if ($id_auteur != $connect_id_auteur
 	AND autoriser('ecrire', '', '', $auteur)) {
 		echo "<div class='nettoyeur'>&nbsp;</div>";
-		debut_cadre_couleur();
+		echo debut_cadre_couleur('', true);
 
 		$vus = array();
 	
@@ -179,9 +179,9 @@ function auteurs_interventions($auteur) {
 	
 		echo afficher_messages('<b>' . _T('info_vos_rendez_vous') . '</b>', ", spip_auteurs_messages AS lien, spip_auteurs_messages AS lien2", "lien.id_auteur=$connect_id_auteur AND lien2.id_auteur = $id_auteur AND statut='publie' AND type='normal' AND rv='oui' AND date_fin > NOW() AND lien.id_message=messages.id_message AND lien2.id_message=messages.id_message", $vus, false, false);
 	
-		icone_horizontale(_T('info_envoyer_message_prive'), generer_action_auteur("editer_message","normal/$id_auteur"),
-				  "message.gif");
-		fin_cadre_couleur();
+		echo icone_horizontale(_T('info_envoyer_message_prive'), generer_action_auteur("editer_message","normal/$id_auteur"),
+				  "message.gif","", false);
+		echo fin_cadre_couleur(true);
 	}
 }
 ?>
