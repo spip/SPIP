@@ -190,11 +190,11 @@ function http_calendrier_init($time='', $type='mois', $lechelle='', $lpartie_cal
 	list($script, $ancre) = 
 	  calendrier_retire_args_ancre($script); 
   if (is_null($evt)) {
-	  $g = 'sql_calendrier_' . $type;
-	  $evt = sql_calendrier_interval($g($annee,$mois, $jour));
-	  sql_calendrier_interval_articles("'$annee-$mois-00'", "'$annee-$mois-1'", $evt[0]);
+	  $g = 'quete_calendrier_' . $type;
+	  $evt = quete_calendrier_interval($g($annee,$mois, $jour));
+	  quete_calendrier_interval_articles("'$annee-$mois-00'", "'$annee-$mois-1'", $evt[0]);
 	  // si on veut les forums, decommenter
-#	  sql_calendrier_interval_forums($g($annee,$mois,$jour), $evt[0]);
+#	  quete_calendrier_interval_forums($g($annee,$mois,$jour), $evt[0]);
 	}
 	$f = 'http_calendrier_' . $type;
 	if (!function_exists($f)) $f = 'http_calendrier_mois';
@@ -1065,7 +1065,7 @@ function http_calendrier_agenda ($annee, $mois, $jour_ved, $mois_ved, $annee_ved
 
   if (!$mois) {$mois = 12; $annee--;}
   elseif ($mois==13) {$mois = 1; $annee++;}
-  if (!$evt) $evt = sql_calendrier_agenda($annee, $mois);
+  if (!$evt) $evt = quete_calendrier_agenda($annee, $mois);
   $nom = affdate_mois_annee("$annee-$mois-1");
   return 
     "<div class='calendrier-titre calendrier-arial10'>" .
@@ -1165,20 +1165,20 @@ function http_calendrier_agenda_rv ($annee, $mois, $les_rv, $fclic,
 // http://doc.spip.org/@http_calendrier_messages
 function http_calendrier_messages($annee='', $mois='', $jour='', $heures='', $partie_cal='', $echelle='')
 {
-	$evtm = sql_calendrier_agenda($annee, $mois);
+	$evtm = quete_calendrier_agenda($annee, $mois);
 	if ($evtm OR !$heures)
 		$evtm = http_calendrier_agenda($annee, $mois, $jour, $mois, $annee, false, generer_url_ecrire('calendrier'), '', $evtm);
 	else $evtm= '';
 
-	$evtt = http_calendrier_rv(sql_calendrier_taches_annonces(),"annonces")
-	  . http_calendrier_rv(sql_calendrier_taches_pb(),"pb")
-	  . http_calendrier_rv(sql_calendrier_taches_rv(), "rv");
+	$evtt = http_calendrier_rv(quete_calendrier_taches_annonces(),"annonces")
+	  . http_calendrier_rv(quete_calendrier_taches_pb(),"pb")
+	  . http_calendrier_rv(quete_calendrier_taches_rv(), "rv");
 
 	$evtr= '';
 	if ($heures) {
 		$date = date("$annee-$mois-$jour");
 		$datef = "'$date $heures'";
-		if ($heures = sql_calendrier_interval_rv("'$date'", $datef))
+		if ($heures = quete_calendrier_interval_rv("'$date'", $datef))
 			$evtr = http_calendrier_ics_titre($annee,$mois,$jour,generer_url_ecrire('calendrier')) . http_calendrier_ics($annee, $mois, $jour, $echelle, $partie_cal, 90, array('', $heures));
 	}
 	return array($evtm, $evtt, $evtr);
@@ -1311,16 +1311,16 @@ function http_calendrier_aide_mess()
 //------- fonctions d'appel MySQL. 
 // au dela cette limite, pas de production HTML
 
-// http://doc.spip.org/@sql_calendrier_mois
-function sql_calendrier_mois($annee,$mois,$jour) {
+// http://doc.spip.org/@quete_calendrier_mois
+function quete_calendrier_mois($annee,$mois,$jour) {
 	$avant = "'" . date("Y-m-d", mktime(0,0,0,$mois,1,$annee)) . "'";
 	$apres = "'" . date("Y-m-d", mktime(0,0,0,$mois+1,1,$annee)) .
 	" 00:00:00'";
 	return array($avant, $apres);
 }
 
-// http://doc.spip.org/@sql_calendrier_semaine
-function sql_calendrier_semaine($annee,$mois,$jour) {
+// http://doc.spip.org/@quete_calendrier_semaine
+function quete_calendrier_semaine($annee,$mois,$jour) {
 	$w_day = date("w", mktime(0,0,0,$mois, $jour, $annee));
 	if ($w_day == 0) $w_day = 7; // Gaffe: le dimanche est zero
 	$debut = $jour-$w_day;
@@ -1332,8 +1332,8 @@ function sql_calendrier_semaine($annee,$mois,$jour) {
 
 // ici on prend en fait le jour, la veille et le lendemain
 
-// http://doc.spip.org/@sql_calendrier_jour
-function sql_calendrier_jour($annee,$mois,$jour) {
+// http://doc.spip.org/@quete_calendrier_jour
+function quete_calendrier_jour($annee,$mois,$jour) {
 	$avant = "'" . date("Y-m-d", mktime(0,0,0,$mois,$jour-1,$annee)) . "'";
 	$apres = "'" . date("Y-m-d", mktime(1,1,1,$mois,$jour+1,$annee)) .
 	" 23:59:59'";
@@ -1344,18 +1344,18 @@ function sql_calendrier_jour($annee,$mois,$jour) {
 // - le premier indique les evenements du jour, sans indication de duree
 // - le deuxime indique les evenements commencant ce jour, avec indication de duree
 
-// http://doc.spip.org/@sql_calendrier_interval
-function sql_calendrier_interval($limites) {
+// http://doc.spip.org/@quete_calendrier_interval
+function quete_calendrier_interval($limites) {
 	list($avant, $apres) = $limites;
 	$evt = array();
-	sql_calendrier_interval_articles($avant, $apres, $evt);
-	sql_calendrier_interval_breves($avant, $apres, $evt);
-	sql_calendrier_interval_rubriques($avant, $apres, $evt);
-	return array($evt, sql_calendrier_interval_rv($avant, $apres));
+	quete_calendrier_interval_articles($avant, $apres, $evt);
+	quete_calendrier_interval_breves($avant, $apres, $evt);
+	quete_calendrier_interval_rubriques($avant, $apres, $evt);
+	return array($evt, quete_calendrier_interval_rv($avant, $apres));
 }
 
-// http://doc.spip.org/@sql_calendrier_interval_forums
-function  sql_calendrier_interval_forums($limites, &$evenements) {
+// http://doc.spip.org/@quete_calendrier_interval_forums
+function  quete_calendrier_interval_forums($limites, &$evenements) {
 	list($avant, $apres) = $limites;
 	$result=spip_abstract_select("DISTINCT titre, date_heure, id_forum",	"spip_forum", "date_heure >= $avant AND date_heure < $apres", '',  "date_heure");
 	while($row=spip_abstract_fetch($result)){
@@ -1375,8 +1375,8 @@ function  sql_calendrier_interval_forums($limites, &$evenements) {
 # le tableau retourne est indexe par les balises du format ics
 # afin qu'il soit facile de produire de tels documents.
 
-// http://doc.spip.org/@sql_calendrier_interval_articles
-function sql_calendrier_interval_articles($avant, $apres, &$evenements) {
+// http://doc.spip.org/@quete_calendrier_interval_articles
+function quete_calendrier_interval_articles($avant, $apres, &$evenements) {
 	
   $result=spip_abstract_select('id_article, titre, date, descriptif, chapo,  lang', 'spip_articles', "statut='publie' AND date >= $avant AND date < $apres", '', "date");
 
@@ -1397,8 +1397,8 @@ function sql_calendrier_interval_articles($avant, $apres, &$evenements) {
 	}
 }
 
-// http://doc.spip.org/@sql_calendrier_interval_rubriques
-function sql_calendrier_interval_rubriques($avant, $apres, &$evenements) {
+// http://doc.spip.org/@quete_calendrier_interval_rubriques
+function quete_calendrier_interval_rubriques($avant, $apres, &$evenements) {
 	
   $result=spip_abstract_select('DISTINCT R.id_rubrique, titre, descriptif, date', 'spip_rubriques AS R, spip_documents_rubriques AS L', "statut='publie' AND	date >= $avant AND	date < $apres AND	R.id_rubrique = L.id_rubrique",'', "date");
 	while($row=spip_abstract_fetch($result)){
@@ -1414,8 +1414,8 @@ function sql_calendrier_interval_rubriques($avant, $apres, &$evenements) {
 	}
 }
 
-// http://doc.spip.org/@sql_calendrier_interval_breves
-function sql_calendrier_interval_breves($avant, $apres, &$evenements) {
+// http://doc.spip.org/@quete_calendrier_interval_breves
+function quete_calendrier_interval_breves($avant, $apres, &$evenements) {
   $result=spip_abstract_select("id_breve, titre, date_heure, id_rubrique", 'spip_breves',	"statut='publie' AND date_heure >= $avant AND date_heure < $apres", '', "date_heure");
 	while($row=spip_abstract_fetch($result)){
 		$amj = date_anneemoisjour($row['date_heure']);
@@ -1430,8 +1430,8 @@ function sql_calendrier_interval_breves($avant, $apres, &$evenements) {
 	}
 }
 
-// http://doc.spip.org/@sql_calendrier_interval_rv
-function sql_calendrier_interval_rv($avant, $apres) {
+// http://doc.spip.org/@quete_calendrier_interval_rv
+function quete_calendrier_interval_rv($avant, $apres) {
 	global $connect_id_auteur;
 	$evenements= array();
 	if (!$connect_id_auteur) return $evenements;
@@ -1509,8 +1509,8 @@ function tache_redirige ($row) {
 	return generer_url_ecrire("message", "id_message=".$row['UID']);
 }
 
-// http://doc.spip.org/@sql_calendrier_taches_annonces
-function sql_calendrier_taches_annonces () {
+// http://doc.spip.org/@quete_calendrier_taches_annonces
+function quete_calendrier_taches_annonces () {
 	global $connect_id_auteur;
 	$r = array();
 	if (!$connect_id_auteur) return $r;
@@ -1524,8 +1524,8 @@ function sql_calendrier_taches_annonces () {
 	return $r;
 }
 
-// http://doc.spip.org/@sql_calendrier_taches_pb
-function sql_calendrier_taches_pb () {
+// http://doc.spip.org/@quete_calendrier_taches_pb
+function quete_calendrier_taches_pb () {
 	global $connect_id_auteur;
 	$r = array();
 	if (!$connect_id_auteur) return $r;
@@ -1540,8 +1540,8 @@ function sql_calendrier_taches_pb () {
 	return $r;
 }
 
-// http://doc.spip.org/@sql_calendrier_taches_rv
-function sql_calendrier_taches_rv () {
+// http://doc.spip.org/@quete_calendrier_taches_rv
+function quete_calendrier_taches_rv () {
 	global $connect_id_auteur;
 	$r = array();
 	if (!$connect_id_auteur) return $r;
@@ -1555,8 +1555,8 @@ function sql_calendrier_taches_rv () {
 	return  $r;
 }
 
-// http://doc.spip.org/@sql_calendrier_agenda
-function sql_calendrier_agenda ($annee, $mois) {
+// http://doc.spip.org/@quete_calendrier_agenda
+function quete_calendrier_agenda ($annee, $mois) {
 	global $connect_id_auteur;
 
 	$rv = array();
