@@ -134,6 +134,7 @@ function spip_pg_from($from)
 
 }
 
+// http://doc.spip.org/@spip_pg_orderby
 function spip_pg_orderby($order, $select)
 {
 	$res = array();
@@ -218,6 +219,7 @@ function spip_pg_frommysql($arg)
 	return str_replace('REGEXP', '~', $res);
 }
 
+// http://doc.spip.org/@spip_pg_fromfield
 function spip_pg_fromfield($arg)
 {
 	while(preg_match('/^(.*?)FIELD\s*\(([^,]*)((,[^,)]*)*)\)/', $arg, $m)) {

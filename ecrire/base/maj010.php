@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@base_maj010_dist
 function base_maj010_dist($version_installee, $version_cible)
 {
 	

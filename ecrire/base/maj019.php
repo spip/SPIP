@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@base_maj019_dist
 function base_maj019_dist($version_installee, $version_cible)
 {
 	// Syndication : ajout de l'option resume=oui/non et de la langue
