@@ -222,13 +222,14 @@ function boucle_HIERARCHIE_dist($id_boucle, &$boucles) {
 	. (isset($boucle->modificateur['tout']) ? 'false' : 'true')
 	. ');';
 
-	$boucle->having[]= array("'<>'", "'rang'", 0);
-	$boucle->select[]= "FIELD($id_table" . '.id_rubrique, $hierarchie) AS rang';
+	$prim = $id_table . ".id_rubrique";
+	$boucle->where[]= array("'IN'", "'$prim'", '\'(\'. $hierarchie . \')\'');
 
+        $order = "FIELD($id_table" . '.id_rubrique, $hierarchie)';
 	if ($boucle->default_order[0] != " DESC")
-		$boucle->default_order[] = "'rang'" ;
+		$boucle->default_order[] = "\"$order\"";
 	else
-		$boucle->default_order[0] = "'rang DESC'" ;
+		$boucle->default_order[0] = "\"$order DESC\"";
 	return calculer_boucle($id_boucle, $boucles); 
 }
 
