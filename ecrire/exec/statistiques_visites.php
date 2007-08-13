@@ -279,9 +279,9 @@ else {
 		$where = "0=0";
 	}
 	
-	$result = spip_query("SELECT UNIX_TIMESTAMP(date) AS date_unix FROM $table WHERE $where ORDER BY date LIMIT 1");
+	$result = sql_select('UNIX_TIMESTAMP(date) AS date_unix', $table, $where, '',  'date', "1");
 
-	while ($row = sql_fetch($result)) {
+	if ($row = sql_fetch($result)) {
 		$date_premier = $row['date_unix'];
 	}
 
