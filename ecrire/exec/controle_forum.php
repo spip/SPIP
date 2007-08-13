@@ -221,8 +221,7 @@ function exec_controle_forum_dist()
 	// Si un id_controle_forum est demande, on adapte le debut
 	if ($debut_id_forum = intval(_request('debut_id_forum'))
 	AND $d = sql_fetch(spip_query("SELECT date_heure FROM spip_forum WHERE id_forum=$debut_id_forum"))) {
-		$debut = sql_fetch(spip_query($q = "SELECT COUNT(*) AS n FROM $from " . (!$where ? '' : "WHERE $where ") . (!$d ? '' : (" AND F.date_heure > '".$d['date_heure']."'"))));
-		$debut = $debut['n'];
+	  $debut = sql_countsel($from, $where . (!$d ? '' : (" AND F.date_heure > '".$d['date_heure']."'")));
 	}
 
 	$pack = 20;	// nb de forums affiches par page
@@ -234,7 +233,6 @@ function exec_controle_forum_dist()
 		$args = 'recherche='.rawurlencode($recherche).'&'.$args;
 
 	$query = sql_select("F.id_forum, F.id_parent, F.id_rubrique, F.id_article, F.id_breve, F.date_heure, F.titre, F.texte, F.auteur, F.email_auteur, F.nom_site, F.url_site, F.statut, F.ip, F.id_auteur", $from,  $where,'', "F.date_heure DESC", "$limitdeb, $limitnb");
-# LIMIT $limitnb OFFSET $limitdeb" #PG
   
 	$ancre = 'controle_forum';
 	$mess = affiche_navigation_forum('controle_forum', $args . $type, $debut, $limitdeb, $pack, $ancre, $query)
