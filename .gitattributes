@@ -403,6 +403,17 @@ ecrire/base/db_pg.php -text
 ecrire/base/delete_all.php -text
 ecrire/base/import_all.php -text
 ecrire/base/index.php -text
+ecrire/base/maj009.php -text
+ecrire/base/maj010.php -text
+ecrire/base/maj011.php -text
+ecrire/base/maj012.php -text
+ecrire/base/maj013.php -text
+ecrire/base/maj014.php -text
+ecrire/base/maj015.php -text
+ecrire/base/maj016.php -text
+ecrire/base/maj017.php -text
+ecrire/base/maj018.php -text
+ecrire/base/maj019.php -text
 ecrire/charsets/cp1250.php -text
 ecrire/charsets/cp1251.php -text
 ecrire/charsets/cp1256.php -text
