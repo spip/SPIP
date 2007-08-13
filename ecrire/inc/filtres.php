@@ -506,7 +506,7 @@ function taille_en_octets ($taille) {
 // Rend une chaine utilisable sans dommage comme attribut HTML
 // http://doc.spip.org/@attribut_html
 function attribut_html($texte) {
-	$texte = texte_backend(supprimer_tags($texte));
+	$texte = texte_backend(preg_replace(array(",\n,",",\s(?=\s),ms"),array(" ",""),textebrut($texte)));
 	$texte = str_replace(array("'",'"'),array('&#39;', '&#34;'), $texte);
 	
 	return preg_replace(array("/&(amp;|#38;)/","/&(?![A-Za-z]{0,4}\w{2,3};|#[0-9]{2,5};)/"),array("&","&#38;") , $texte);
