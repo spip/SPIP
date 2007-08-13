@@ -4,10 +4,10 @@
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
 <title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
-[<meta name="description" content="(#DESCRIPTIF|couper{150}|textebrut)" />]
+[<meta name="description" content="(#DESCRIPTIF|couper{150}|attribut_html)" />]
 <INCLURE{fond=inc-head}>
 [(#REM) Lien vers le flux RSS du mot cle ]
-<link rel="alternate" type="application/rss+xml" title="[(#TITRE|textebrut|texte_backend)]" href="[(#URL_PAGE{backend}|parametre_url{id_mot,#ID_MOT})]" />
+<link rel="alternate" type="application/rss+xml" title="[(#TITRE|attribut_html)]" href="[(#URL_PAGE{backend}|parametre_url{id_mot,#ID_MOT})]" />
 </head>
 
 <body class="page_mot">
