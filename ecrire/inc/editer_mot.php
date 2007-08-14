@@ -313,7 +313,13 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 	if (autoriser('modifier','groupemots')) {
 		$titre = _request('cherche_mot')
 			? "&titre=".rawurlencode(_request('cherche_mot')) : '';
-		$bouton_ajouter = icone_horizontale(_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&table_id=$table_id$titre&redirect=" . generer_url_retour($url_base, "$table_id=$id_objet")), "mot-cle-24.gif", "creer.gif", false)
+		$titre = _T('icone_creer_mot_cle');
+		$titres = array(
+			'articles'=>'icone_creer_mot_cle',
+			'breves'=>'icone_creer_mot_cle_breve',
+			'rubriques'=>'icone_creer_mot_cle_rubrique',
+			'sites'=>'icone_creer_mot_cle_site'			);
+		$bouton_ajouter = icone_horizontale(isset($titres[$table])?_T($titres[$table]):_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&table_id=$table_id$titre&redirect=" . generer_url_retour($url_base, "$table_id=$id_objet")), "mot-cle-24.gif", "creer.gif", false)
 		. "\n";
 	} else $bouton_ajouter = '';
 
