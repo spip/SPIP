@@ -20,6 +20,7 @@ if (_SPIP_LOCK_MODE==2)
 	include_spip('inc/nfslock');
 
 $GLOBALS['liste_verrous'] = array();
+// http://doc.spip.org/@spip_fopen_lock
 function spip_fopen_lock($fichier,$mode,$verrou){
 	if (_SPIP_LOCK_MODE==1){
 		if ($fl = @fopen($fichier,$mode))
@@ -36,6 +37,7 @@ function spip_fopen_lock($fichier,$mode,$verrou){
 	}
 	return @fopen($fichier,$mode);
 }
+// http://doc.spip.org/@spip_fclose_unlock
 function spip_fclose_unlock($handle){
 	if (_SPIP_LOCK_MODE==1){
 		@flock($handle, LOCK_UN);

@@ -88,6 +88,7 @@ include_spip('inc/acces');
 define('_DEFAULT_LOCKTIME',60);
 define('_NAME_LOCK','spip_nfs_lock');
 
+// http://doc.spip.org/@spip_nfslock
 function spip_nfslock($fichier,$max_age=0) {
 	$tries = 0;
 		
@@ -207,6 +208,7 @@ function spip_nfslock($fichier,$max_age=0) {
  *
  */
 
+// http://doc.spip.org/@spip_nfsunlock
 function spip_nfsunlock($fichier, $birth, $max_age=0, $test = false) {
 	$id = creer_uniqid();
 	if (!$max_age) $max_age = _DEFAULT_LOCKTIME;
@@ -285,6 +287,7 @@ function spip_nfsunlock($fichier, $birth, $max_age=0, $test = false) {
  * coded separately to make things as clear as possible.
  */
 
+// http://doc.spip.org/@spip_nfslock_test
 function spip_nfslock_test($fichier, $birth, $max_age=0) {
 	return spip_nfsunlock($fichier, $birth, $max_age, true);
 }
