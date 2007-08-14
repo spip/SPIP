@@ -217,13 +217,23 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 		$id_document = 0;
 	}
 
+	$chemin = set_spip_doc($fichier);
+
 	// Installer le document dans la base
 	// attention piege semantique : les images s'installent en mode 'vignette'
 	// note : la fonction peut "mettre a jour un document" si on lui
 	// passe "mode=document" et "id_document=.." (pas utilise)
 	if (!$id_document) {
+		// par defaut (upload ZIP ou ftp) integrer
+		// les images en mode 'vignette' et le reste en mode document
+		if (!in_array($mode, array('vignette', 'distant', 'document')))
+			if ($type_image AND $type_inclus_image)
+				$mode = 'vignette';
+			else
+				$mode = 'document';
+
 		// Inserer le nouveau doc et recuperer son id_
-		$id_document = sql_insert("spip_documents", "(extension, titre, date, distant)", "("._q($ext).", " . _q($titre) . ", NOW(), '$distant')");
+		$id_document = sql_insert("spip_documents", "(extension, titre, date, distant, mode, taille, largeur, hauteur, fichier)", "("._q($ext).", " . _q($titre) . ", NOW(), '$distant', '$mode', $taille, $largeur, $hauteur," . _q($chemin) .")");
 
 		if ($id_lien
 		AND preg_match('/^[a-z0-9_]+$/i', $type_lien) # securite
@@ -233,18 +243,8 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 				"($id_document, $id_lien)"
 			);
 		}
-		// par defaut (upload ZIP ou ftp) integrer
-		// les images en mode 'vignette' et le reste en mode document
-		if (!in_array($mode, array('vignette', 'distant', 'document')))
-			if ($type_image AND $type_inclus_image)
-				$mode = 'vignette';
-			else
-				$mode = 'document';
-		$update = "mode='$mode', ";
-	}
-
-	// Mise a jour des donnees
-	spip_query($q = "UPDATE spip_documents SET $update taille='$taille', largeur='$largeur', hauteur='$hauteur', fichier="._q(set_spip_doc($fichier))." WHERE id_document=$id_document");
+	} else 	// Mise a jour des descripteurs d'un vieux doc
+		spip_query("UPDATE spip_documents SET taille='$taille', largeur='$largeur', hauteur='$hauteur', fichier="._q($chemin) ." WHERE id_document=$id_document");
 
 	if ($id_document_lie) {
 		spip_query("UPDATE spip_documents SET id_vignette=$id_document	WHERE id_document=$id_document_lie");

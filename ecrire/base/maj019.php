@@ -441,8 +441,11 @@ function base_maj019_dist($version_installee, $version_cible)
 		spip_query("DROP TABLE spip_index_dico");
 		maj_version('1.943');
 	}
-	if (upgrade_vers(1.950, $version_installee, $version_cible)) {
-		maj_version('1.950');
+	if (upgrade_vers(1.944, $version_installee, $version_cible)) {
+		spip_query("ALTER TABLE spip_documents CHANGE taille taille integer");
+		spip_query("ALTER TABLE spip_documents CHANGE largeur largeur  integer");
+		spip_query("ALTER TABLE spip_documents CHANGE hauteur hauteur integer");
+		maj_version('1.944');
 	}
 }
 ?>
