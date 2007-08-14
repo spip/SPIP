@@ -373,6 +373,8 @@ function analyser_backend($rss, $url_syndic='') {
 			' rel="tag"', $regs[0]);
 
 		$data['tags'] = $tags;
+		// enlever le html des titre pour etre homogene avec les autres objets spip
+		$data['titre'] = textebrut($data['titre']);
 
 		$articles[] = $data;
 	}
