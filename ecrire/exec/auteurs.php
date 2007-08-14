@@ -50,14 +50,7 @@ function exec_auteurs_dist()
 
 		echo bandeau_auteurs($tri, !statut_min_redac($statut));
 
-		$recherche_aff = entites_html($recherche);
-		if (!strlen($recherche)) {
-			$recherche_aff = _T('info_rechercher');
-			$onfocus = " onfocus=\"this.value='';\"";
-		} else $onfocus = '';
-		$onfocus = '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" accesskey="r"' . $onfocus . ' />';
-		echo "<div style='width:200px;float:$spip_lang_right;'>".generer_form_ecrire("auteurs", $onfocus, " method='get'")."</div>"
-		 . "<br class='nettoyeur' />";
+		echo formulaire_recherche("auteurs") . "<br class='nettoyeur' />";
 
 		echo "<div id='auteurs'>", $res, "</div>";
 		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'auteurs'),'data'=>''));
