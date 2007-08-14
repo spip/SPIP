@@ -25,7 +25,7 @@ global $connect_id_auteur, $connect_statut, $spip_lang_rtl;
 $commencer_page = charger_fonction('commencer_page', 'inc');
 echo $commencer_page(_T('titre_page_messagerie'), "accueil", "messagerie");
 
-debut_gauche("messagerie");
+echo debut_gauche("messagerie",true);
 
 
 echo debut_boite_info(true);
@@ -69,7 +69,7 @@ echo fin_cadre_relief(true);
     fin_cadre_enfonce(true);
 
 
- debut_droite("messagerie");
+ echo debut_droite("messagerie", true);
 
  $messages_vus = array();
 
