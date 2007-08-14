@@ -61,8 +61,9 @@ function exec_recherche_dist() {
 		$onfocus = " onfocus=\"this.value='';\"";
 	} else $onfocus = '';
 
-	$onfocus = '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" accesskey="r"' . $onfocus . ' />';
-	echo "<div style='width:200px;float:$spip_lang_right;'>".generer_form_ecrire("recherche", $onfocus, " method='get'")."</div>";
+	$form = '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="recherche" accesskey="r"' . $onfocus . ' />';
+	$form .= "<input type='image' width='26' height='20' src='"._DIR_IMG_PACK."loupe.png' name='submit' class='submit' alt='"._T('info_rechercher')."' />";
+	echo "<div class='spip_recherche'>".generer_form_ecrire("recherche", $form, " method='get'")."</div>";
 
 /*
 	// Si on est autorise a modifier, proposer le choix de REMPLACER
@@ -127,7 +128,7 @@ function exec_recherche_dist() {
 		if (strlen($recherche))
 			echo "<p class='verdana1'>"._T('avis_aucun_resultat')."</p>";
 
-	echo fin_grand_cadre(), fin_page();
+	echo fin_grand_cadre(true), fin_page();
 }
 
 ?>
