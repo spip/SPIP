@@ -22,8 +22,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Modyfikuj s&#322;owo kluczowe',
 'admin_modifier_rubrique' => 'Modyfikuj dzia&#322;',
 'admin_recalculer' => 'Od&#347;wie&#380; ',
+'afficher_trad' => 'poka&#380; przek&#322;ady',
 'alerte_maj_impossible' => '<b>Uwaga&nbsp;!</b> Uaktualnienie bazy danych MySQL do wersji @version@ jest nie mo&#380;liwe. Powodem jest prawdopodobnie brak mo&#380;liwo&#347;ci modyfikacji bazy danych. Skontaktuj si&#281; z administratorem.',
 'analyse_xml' => 'Analiza XML',
+'annuler' => 'Anuluj',
 'antispam_champ_vide' => 'Pozostaw puste:',
 'avis_archive_incorrect' => 'ten plik archiwalny nie nale&#380;y do SPIP',
 'avis_archive_invalide' => 'plik archiwalny jest nieprawid&#322;owy',
@@ -35,9 +37,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur' => 'B&#322;&#261;d: zobacz poni&#380;ej\';',
 'avis_erreur_connexion' => 'B&#322;&#261;d po&#322;&#261;czenia',
 'avis_erreur_cookie' => 'problem z cookie',
-'avis_erreur_fonction_contexte' => 'B&#322;&#261;d programowania. Ta funkcja nie powinna by&#263; wywo&#322;ywana w tym kontek&#347;cie.',
+'avis_erreur_fonction_contexte' => 'B&#322;&#261;d programistyczny. Ta funkcja nie powinna by&#263; wywo&#322;ywana w tym kontek&#347;cie.',
 'avis_erreur_mysql' => 'B&#322;&#261;d MySQL',
 'avis_erreur_sauvegarde' => 'B&#322;&#261;d archiwizacji (@type@ @id_objet@)!',
+'avis_erreur_visiteur' => 'Problem z dost&#281;pem do stron administracyjnych',
 
 
 // B
@@ -78,6 +81,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => 'wg dni',
 'cal_par_mois' => 'wg miesi&#281;cy',
 'cal_par_semaine' => 'wg tygodni',
+'choix_couleur_interface' => 'kolor',
+'choix_interface' => 'wyb&oacute;r interfejsu',
+'colonne' => 'Kolumna',
 'confirm_changer_statut' => 'Uwaga, czy na pewno chcesz zmieni&#263; status tego elementu ? Kontynuowa&#263; ?',
 'correcte' => 'poprawna',
 
@@ -140,12 +146,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_jnum8' => '8',
 'date_jnum9' => '9',
 'date_jour_1' => 'Niedziela',
+'date_jour_1_abbr' => 'nie.',
+'date_jour_1_initiale' => 'n.',
 'date_jour_2' => 'Poniedzia&#322;ek',
+'date_jour_2_abbr' => 'pon.',
+'date_jour_2_initiale' => 'p.',
 'date_jour_3' => 'Wtorek',
+'date_jour_3_abbr' => 'wto.',
+'date_jour_3_initiale' => 'w.',
 'date_jour_4' => '&#346;roda',
+'date_jour_4_abbr' => '&#347;ro.',
+'date_jour_4_initiale' => '&#347;.',
 'date_jour_5' => 'Czwartek',
+'date_jour_5_abbr' => 'czw.',
+'date_jour_5_initiale' => 'c.',
 'date_jour_6' => 'Pi&#261;tek',
+'date_jour_6_abbr' => 'pi&#261;.',
+'date_jour_6_initiale' => 'p.',
 'date_jour_7' => 'Sobota',
+'date_jour_7_abbr' => 'sob.',
+'date_jour_7_initiale' => 's.',
 'date_jours' => 'dni',
 'date_minutes' => 'minuty',
 'date_mois' => 'miesi&#261;c',
@@ -169,15 +189,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => ' w celu rzeczywistego rozpocz&#281;cia instalacji',
 'dirs_preliminaire' => 'Wst&#281;p: <b>Ustawienia pozwole&#324; dost&#281;pu</b>',
 'dirs_probleme_droits' => 'Problem z prawami dost&#281;pu',
-'dirs_repertoires_absents' => '<b>Nast&#281;puj&#261;ce katalogi nie zosta&#322;y odnalezione&nbsp;: <ul>@bad_dirs@.</ul> </b>
+'dirs_repertoires_absents' => '<p><b>Nast&#281;puj&#261;ce katalogi nie zosta&#322;y odnalezione&nbsp;:</b></p> <ul>@bad_dirs@.</ul> 
   <p>Mo&#380;liwe, &#380;e powodem tego jest nazwa, w kt&oacute;rej pomylone zosta&#322;y du&#380;e i ma&#322;e litery.
   Sprawd&#378; nazwy pod wzgl&#281;dem ma&#322;ych i du&#380;ych liter.
   Je&#347;li rzeczywi&#347;cie wielko&#347;&#263; liter jest r&oacute;&#380;na, zmie&#324; nazwy katalog&oacute;w za pomoc&#261; dowolnego programu FTP
   <p>Po wykonaniu tej operacji b&#281;dziesz m&oacute;g&#322;',
-'dirs_repertoires_suivants' => '<b>Nast&#281;puj&#261;ce katalogi nie s&#261; skonfigurowane do zapisu&nbsp;: <ul>@bad_dirs@.</ul> </b>
+'dirs_repertoires_suivants' => '<p><b>Nast&#281;puj&#261;ce katalogi nie s&#261; skonfigurowane do zapisu&nbsp;:</b></p> <ul>@bad_dirs@.</ul> 
   <p>Aby temu zapobiec, skorzystaj z klienta FTP i ureguluj konieczne prawa dost&#281;pu
   do tych katalog&oacute;w. Procedura jest wyt&#322;umaczona od A-Z w przewodniku instalacji.
   <p>Kiedy dokonasz koniecznych zmian, b&#281;dziesz m&oacute;g&#322;',
+'double_occurrence' => 'Podw&oacute;jne wyst&#261;pienie',
 
 
 // E
@@ -185,6 +206,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_document' => 'Tytu&#322; dokumentu:',
 'entree_titre_image' => 'Tytu&#322; obrazka:',
 'envoi_via_le_site' => 'Wy&#347;lij ze strony',
+'erreur' => 'B&#322;&#261;d',
+'erreur_balise_non_fermee' => 'ostatni znacznik nie jest zamkni&#281;ty :',
+'erreur_texte' => 'b&#322;&#261;d/b&#322;&#281;dy',
 
 
 // F
@@ -236,6 +260,7 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 ',
 'form_pet_message_commentaire' => 'Jakie&#347; wiadomo&#347;ci lub komentarze?',
 'form_pet_nom_site2' => 'Nazwa Twojej strony internetowej',
+'form_pet_probleme_liens' => 'Spr&oacute;buj wys&#322;a&#263; wiadomo&#347;&#263; po usuni&#281;ciu link&oacute;w.',
 'form_pet_probleme_technique' => 'Problem techniczny, podpisy s&#261; tymczasowo zawieszone.',
 'form_pet_signature_pasprise' => 'Tw&oacute;j podpis zosta&#322; zlekcewa&#380;ony.',
 'form_pet_signature_validee' => 'Tw&oacute;j podpis zosta&#322; zatwierdzony. Dzi&#281;kujemy!',
@@ -259,6 +284,7 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'forum_acces_refuse' => 'Nie masz ju&#380; dost&#281;pu do tego forum.',
 'forum_attention_dix_caracteres' => '<b>Uwaga!</b> Twoja wiadomo&#347;&#263; powinna mie&#263; conajmniej 10 znak&oacute;w.',
 'forum_attention_trois_caracteres' => '<b>Uwaga!</b> Tw&oacute;j temat powinien mie&#263; conajmniej 3 znaki.',
+'forum_attention_trop_caracteres' => '<b>Uwaga&nbsp;!</b> Twoja wiadomo&#347;&#263; jest za d&#322;uga(@compte@ znak&oacute;w)&nbsp;: aby mog&#322;a zosta&#263; przyj&#281;ta nie mo&#380;e przekracza&#263; @max@ znak&oacute;w.',
 'forum_avez_selectionne' => 'Wybra&#322;e&#347;:',
 'forum_cliquer_retour' => 'Kliknij <a href=\'@retour_forum@\'>tutaj</a> aby kontynuowa&#263;.',
 'forum_forum' => 'forum',
@@ -270,7 +296,7 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'forum_non_inscrit' => 'Nie jeste&#347; zarejestrowany, lub adres b&#261;d&#378; has&#322;o s&#261; nieprawid&#322;owe.',
 'forum_page_url' => '(Je&#347;li twoja wiadomo&#347;&#263; odnosi si&#281; jakiego&#347; artyku&#322;y opublikowanego w internecie, wpisz poni&#380;ej tytu&#322; tej strony oraz jej adres).',
 'forum_par_auteur' => 'wg @auteur@',
-'forum_poste_par' => 'Wiadomo&#347;&#263; napisana przez@parauteur@ na temat twojego artyku&#322;u.',
+'forum_poste_par' => 'Wiadomo&#347;&#263; na temat twojego artyku&#322;u napisana przez@parauteur@.',
 'forum_probleme_database' => 'Problem z baz&#261; danych, Twoja wiadomo&#347;&#263; nie mog&#322;a by&#263; zapisana.',
 'forum_qui_etes_vous' => '<b>Kim jeste&#347;?</b> (nieobowi&#261;zkowe)',
 'forum_texte' => 'Tekst Twojej wiadomo&#347;ci:',
@@ -391,6 +417,7 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'info_description_2' => 'Opis:',
 'info_dimension' => 'Rozmiar:',
 'info_document' => 'Dokument',
+'info_document_indisponible' => 'Dokument niedost&#281;pny',
 'info_documents' => 'Dokumenty',
 'info_echange_message' => 'SPIP pozwala na wymian&#281; wiadomo&#347;ci i utworzenie Forum dyskusyjnego
   prywatnie pomi&#281;dzy u&#380;ytkownikami tej strony. Mo&#380;esz w&#322;&#261;czy&#263; lub wy&#322;&#261;czy&#263;
@@ -483,6 +510,8 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'info_sans_titre_2' => 'bez tytu&#322;u',
 'info_selectionner_fichier' => 'Mo&#380;esz wybra&#263; plik z folderu @upload@',
 'info_selectionner_fichier_2' => 'Wybierz plik:',
+'info_signature_supprimee' => 'Wpis usuni&#281;ty',
+'info_signature_supprimee_erreur' => 'B&#322;&#261;d: ten kod nie odpowiada &#380;adnemu wpisowi',
 'info_site_attente' => 'Strona internetowa oczekuj&#261;ca na zatwierdzenie',
 'info_site_reference' => 'Strona zlinkowana on-line',
 'info_site_refuse' => 'Strona internetowa odrzucona',
@@ -534,6 +563,7 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'lien_visite_site' => 'odwied&#378; stron&#281;',
 'lien_visites' => '@visites@ odwiedzin',
 'lien_voir_auteur' => 'Sprawd&#378; autora',
+'ligne' => 'Linia',
 'login_acces_prive' => 'dost&#281;p do obszaru prywatnego',
 'login_autre_identifiant' => 'zaloguj u&#380;ywaj&#261;c innego loginu',
 'login_connexion_refusee' => 'Po&#322;&#261;czenie odrzucone.',
@@ -566,14 +596,17 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 
 
 // M
+'masquer_trad' => 'ukryj tlumaczenia',
 'module_fichiers_langues' => 'Pliki j&#281;zykowe',
 
 
 // N
 'navigateur_pas_redirige' => 'Je&#347;li twoja przegl&#261;darka ci&#281; nie przekierowa&#322;a, kliknij tutaj, &#380;eby kontynuowa&#263;.',
+'numero' => 'Numer',
 
 
 // O
+'occurence' => 'Wyst&#261;pienie',
 'onglet_affacer_base' => 'Usu&#324; baz&#281; danych',
 'onglet_auteur' => 'Autor',
 'onglet_contenu_site' => 'Zawarto&#347;&#263; strony',
@@ -640,7 +673,12 @@ mo&#380;na ponownie po&#322;&#261;czy&#263; si&#281; ze stron&#261;.
 'previsualiser' => 'W&#322;&#261;cz podgl&#261;d',
 
 
+// R
+'retour' => 'Powr&oacute;t',
+
+
 // S
+'spip_conforme_dtd' => 'SPIP uznaje ten dokument za zgodny z jego DOCTYPE :',
 'squelette' => 'szkielet',
 'squelette_inclus_ligne' => 'szkielet zainkludowany, linia',
 'squelette_ligne' => 'szkielet, linia',
@@ -664,9 +702,10 @@ mo&#380;na ponownie po&#322;&#261;czy&#263; si&#281; ze stron&#261;.
   Obrazek <b>@fichier@</b> nie przeszed&#322; (artyku&#322; @id_article@).
   Zapisz te dane, i spr&oacute;buj ponownego uaktualnienia,
 a nast&#281;pnie sprawd&#378; czy obrazki pojawiaj&#261; si&#281; zawsze w artyku&#322;ach.',
+'texte_erreur_visiteur' => 'Pr&oacute;bujesz dosta&#263; si&#281; do panelu administracyjnego za pomoc&#261; loginu, kt&oacute;ry na to nie pozwala.',
 'texte_inc_auth_1' => 'Jeste&#347; zalogowany za pomoc&#261;
   loginu <b>@auth_login@</b>, ale nie istnieje on (ju&#380;) w bazie danych. 
-  Spr&oacute;bujcie si&#281;',
+  Spr&oacute;buj si&#281;',
 'texte_inc_auth_2' => 'po&#322;&#261;czy&#263;',
 'texte_inc_auth_3' => ', opuszczj&#261;c ewentualnie przegl&#261;dark&#281;
   i w&#322;&#261;czaj&#261;c j&#261; na powr&oacute;t.',
@@ -724,19 +763,39 @@ a nast&#281;pnie sprawd&#378; czy obrazki pojawiaj&#261; si&#281; zawsze w artyk
 'zbug_code' => 'kod',
 'zbug_critere_inconnu' => 'nieznane kryterium @critere@',
 'zbug_distant_interdit' => 'operacja niedozwolona w zewn&#281;trznej bazie',
+'zbug_doublon_table_sans_index' => 'podw&oacute;jny wpis w tablicy bez indeksu',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: podw&oacute;jna definicja',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: brakuje znacznika zamykaj&#261;cego',
 'zbug_erreur_boucle_syntaxe' => 'Sk&#322;adnia p&#281;tli (boucle) nieprawid&#322;owa',
+'zbug_erreur_compilation' => 'B&#322;&#261;d kompilacji',
 'zbug_erreur_execution_page' => 'b&#322;&#261;d w wykonaniu strony',
 'zbug_erreur_filtre' => 'B&#322;&#261;d : filtr <b>&laquo; @filtre@ &raquo;</b> nie zdefiniowany',
 'zbug_erreur_meme_parent' => '{meme_parent} stosuje si&#281; wy&#322;&#261;cznie do p&#281;tli (FORUMS) i (RUBRIQUES)',
 'zbug_erreur_squelette' => 'B&#322;&#261;d (b&#322;&#281;dy) w szkielecie',
 'zbug_info_erreur_squelette' => 'B&#322;&#261;d na stronie',
 'zbug_inversion_ordre_inexistant' => 'odwr&oacute;cenie nieistniej&#261;cego uporz&#261;dkowania',
+'zbug_pagination_sans_critere' => '#PAGINATION bez kryterium {pagination} lub u&#380;yta w p&#281;tli rekursywnej',
 'zbug_parametres_inclus_incorrects' => 'Z&#322;e parametry za&#322;&#261;czenia (include)',
+'zbug_profile' => 'Czas przeliczania: @time@',
 'zbug_resultat' => 'wynik',
 'zbug_serveur_indefini' => 'serwer SQL niezdefiniowany',
-'zbug_table_inconnue' => 'Tabela SQL &laquo; @table@ &raquo; nieznana'
+'zbug_table_inconnue' => 'Tabela SQL &laquo; @table@ &raquo; nieznana',
+'zxml_connus_attributs' => 'znane atrybuty',
+'zxml_de' => 'z',
+'zxml_inconnu_attribut' => 'atrybut nieznany',
+'zxml_inconnu_balise' => 'znacznik nieznany',
+'zxml_inconnu_entite' => 'nieznana warto&#347;&#263;',
+'zxml_inconnu_id' => 'ID nieznany',
+'zxml_mais_de' => 'ale z',
+'zxml_non_conforme' => 'nie jest zgodny',
+'zxml_non_fils' => 'nie jest z',
+'zxml_nonvide_balise' => 'znacznik nie jest pusty',
+'zxml_obligatoire_attribut' => 'nieobecny atrybut obowi&#261;zkowy',
+'zxml_succession_fils_incorrecte' => 'niepoprawne dziedziczenie',
+'zxml_survoler' => 'najed&#378; wska&#378;nikiem aby zobaczy&#263; poprawne',
+'zxml_valeur_attribut' => 'warto&#347;&#263; artybutu',
+'zxml_vide_balise' => 'pusty znacznik',
+'zxml_vu' => 'widziany wcze&#347;niej'
 
 );
 

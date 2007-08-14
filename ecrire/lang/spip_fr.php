@@ -328,7 +328,6 @@ Merci de votre participation
 'icone_brouteur' => 'Navigation rapide',
 'icone_configuration_site' => 'Configuration',
 'icone_configurer_site' => 'Configurer votre site',
-'icone_creer_mot_cle' => 'Cr&eacute;er un nouveau mot-cl&eacute; et le lier &agrave; cet article',
 'icone_creer_nouvel_auteur' => 'Cr&eacute;er un nouvel auteur',
 'icone_creer_rubrique' => 'Cr&eacute;er une rubrique',
 'icone_creer_sous_rubrique' => 'Cr&eacute;er une sous-rubrique',

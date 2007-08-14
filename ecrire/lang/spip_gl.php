@@ -37,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur' => 'Erro: ver abaixo',
 'avis_erreur_connexion' => 'Erro de conexi&oacute;n',
 'avis_erreur_cookie' => 'problema de cookie',
-'avis_erreur_fonction_contexte' => 'Erro de programaci&oacute;n. Esta funci&oacute;n non se debe chamar neste contexto.',
+'avis_erreur_fonction_contexte' => 'Erro de programaci&oacute;n. Esta funci&oacute;n non debe ser chamada neste contexto.',
 'avis_erreur_mysql' => 'Erro MySQL',
 'avis_erreur_sauvegarde' => 'Erro gardando (@type@ @id_objet@)!',
 'avis_erreur_visiteur' => 'Problema de acceso ao espazo privado',
@@ -260,6 +260,7 @@ Grazas pola s&uacute;a participaci&oacute;n
 ',
 'form_pet_message_commentaire' => 'Algunha mensaxe, un comentario?',
 'form_pet_nom_site2' => 'Nome do seu Web',
+'form_pet_probleme_liens' => 'Retome a s&uacute;a mensaxe logo de suprimir as ligaz&oacute;ns de hipertexto.',
 'form_pet_probleme_technique' => 'Problema t&eacute;cnico, as sinaturas foron suspendidas temporalmente.',
 'form_pet_signature_pasprise' => 'A t&uacute;a sinatura non foi tida en conta.',
 'form_pet_signature_validee' => 'A s&uacute;a sinatura foi validada. Deus llo pague!',
@@ -415,6 +416,7 @@ Grazas pola s&uacute;a participaci&oacute;n
 'info_description_2' => 'Descrici&oacute;n:',
 'info_dimension' => 'Dimensi&oacute;ns:',
 'info_document' => 'Documento',
+'info_document_indisponible' => 'Este documento non est&aacute; dispo&ntilde;ible',
 'info_documents' => 'Documentos',
 'info_echange_message' => 'SPIP permite o troco de mensaxes e a constituci&oacute;n de foros de discusi&oacute;n
   privados entre participantes do web. Pode activar ou
@@ -508,6 +510,8 @@ Grazas pola s&uacute;a participaci&oacute;n
 'info_sans_titre_2' => 'sen t&iacute;tulo',
 'info_selectionner_fichier' => 'Pode seleccionar un ficheiro do cartafol @upload@',
 'info_selectionner_fichier_2' => 'Seleccionar un ficheiro:',
+'info_signature_supprimee' => 'Sinatura suprimida',
+'info_signature_supprimee_erreur' => 'Erro&nbsp;: este c&oacute;digo de supresi&oacute;n non corresponde a ningunha sinatura',
 'info_site_attente' => 'Sitio web agardando pola validaci&oacute;n',
 'info_site_reference' => 'Web referido en li&ntilde;a',
 'info_site_refuse' => 'Web rexeitado',
@@ -698,7 +702,7 @@ e reconectar co web.
   Tome nota deste aviso, reintente a posta ao d&amp;iacute;a, 
   e finalmente verifique que as imaxes aparecen sempre
   nos artigos.',
-'texte_erreur_visiteur' => 'Vostede tentou de acceder ao espazo privado cun identificador que non o permite',
+'texte_erreur_visiteur' => 'Vostede tentou de acceder ao espazo privado cun identificador que non llo permite',
 'texte_inc_auth_1' => 'Identificouse baixo o
   identificador <b>@auth_login@</b>, por&amp;eacute;n este xa/non existe na base de datos.
   Probe',
