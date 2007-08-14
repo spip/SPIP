@@ -12,12 +12,41 @@
 
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+#define('_SPIP_LOCK_MODE',0); // ne pas utiliser de lock (deconseille)
+#define('_SPIP_LOCK_MODE',1); // utiliser le flock php
+#define('_SPIP_LOCK_MODE',2); // utiliser le nfslock de spip
 
-// http://doc.spip.org/@spip_flock
-function spip_flock($handle,$verrou){
-	if (_SPIP_FLOCK)
-		@flock($handle, $verrou);
+if (_SPIP_LOCK_MODE==2)
+	include_spip('inc/nfslock');
+
+$GLOBALS['liste_verrous'] = array();
+function spip_fopen_lock($fichier,$mode,$verrou){
+	if (_SPIP_LOCK_MODE==1){
+		if ($fl = @fopen($fichier,$mode))
+			// verrou
+			@flock($fl, $verrou);
+		return $fl;
+	}
+	elseif(_SPIP_LOCK_MODE==2) {
+		if (($verrou = spip_nfslock($fichier)) && ($fl = @fopen($fichier,$mode))){
+			$GLOBALS['liste_verrous'][$fl] = array($fichier,$verrou);
+			return $fl;
+		}
+		else return false;
+	}
+	return @fopen($fichier,$mode);
 }
+function spip_fclose_unlock($handle){
+	if (_SPIP_LOCK_MODE==1){
+		@flock($handle, LOCK_UN);
+	}
+	elseif(_SPIP_LOCK_MODE==2) {
+		spip_nfsunlock(reset($GLOBALS['liste_verrous'][$handle]),end($GLOBALS['liste_verrous'][$handle]));
+		unset($GLOBALS['liste_verrous'][$handle]);
+	}
+	return @fclose($handle);
+}
+
 
 // http://doc.spip.org/@spip_file_get_contents
 function spip_file_get_contents ($fichier) {
@@ -45,14 +74,10 @@ function lire_fichier ($fichier, &$contenu, $options=false) {
 
 	#spip_timer('lire_fichier');
 
-	if ($fl = @fopen($fichier, 'r')) {
-
-		// verrou lecture
-		spip_flock($fl, LOCK_SH);
-
+	if ($fl = @spip_fopen_lock($fichier, 'r', LOCK_SH)) {
 		// a-t-il ete supprime par le locker ?
 		if (!@file_exists($fichier)) {
-			@fclose($fl);
+			spip_fclose_unlock($fl);
 			return false;
 		}
 
@@ -60,8 +85,7 @@ function lire_fichier ($fichier, &$contenu, $options=false) {
 		$contenu = spip_file_get_contents($fichier);
 
 		// liberer le verrou
-		spip_flock($fl, LOCK_UN);
-		@fclose($fl);
+		spip_fclose_unlock($fl);
 
 		// Verifications
 		$ok = true;
@@ -96,8 +120,7 @@ function ecrire_fichier ($fichier, $contenu, $ecrire_quand_meme = false, $trunca
 	#spip_timer('ecrire_fichier');
 
 	// verrouiller le fichier destination
-	if ($fp = @fopen($fichier, 'a')) {
-		spip_flock($fp, LOCK_EX);
+	if ($fp = spip_fopen_lock($fichier, 'a',LOCK_EX)) {
 	// ecrire les donnees, compressees le cas echeant
 	// (on ouvre un nouveau pointeur sur le fichier, ce qui a l'avantage
 	// de le recreer si le locker qui nous precede l'avait supprime...)
@@ -110,8 +133,7 @@ function ecrire_fichier ($fichier, $contenu, $ecrire_quand_meme = false, $trunca
 		$ok = ($s == $a);
 
 	// liberer le verrou et fermer le fichier
-		spip_flock($fp, LOCK_UN);
-		@fclose($fp);
+		spip_fclose_unlock($fp);
 		@chmod($fichier, _SPIP_CHMOD & 0666);
 		if ($ok) return $ok;
 	}
@@ -152,14 +174,11 @@ function supprimer_fichier($fichier, $lock=true) {
 
 	if ($lock) {
 		// verrouiller le fichier destination
-		if ($fp = @fopen($fichier, 'a'))
-			spip_flock($fp, LOCK_EX);
-		else
+		if (!$fp = spip_fopen_lock($fichier, 'a', LOCK_EX))
 			return;
 	
 		// liberer le verrou
-		spip_flock($fp, LOCK_UN);
-		@fclose($fp);
+		spip_fclose_unlock($fp);
 	}
 	
 	// supprimer
