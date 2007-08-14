@@ -146,7 +146,6 @@ function spip_pg_orderby($order, $select)
 		  $res[] = $m[1];
 		} else $res[]=$v;
 	}
-	spip_log("orde $res");
 	return spip_pg_frommysql(join(',',$res));
 }
 
@@ -172,11 +171,10 @@ function spip_pg_groupby($groupby, $from, $select)
 
 // Conversion des operateurs MySQL en PG
 // IMPORTANT: "0+X" est vu comme conversion numerique du debut de X 
-// Manque la traduction de Field
 // Les expressions de date ne sont pas gerees au-dela de 3 ()
 // Le 'as' du 'CAST' est en minuscule pour echapper au dernier preg_replace
-// de spip_pg_groupby
-// Bref, a revoir.
+// de spip_pg_groupby.
+// A ameliorer.
 
 // http://doc.spip.org/@spip_pg_frommysql
 function spip_pg_frommysql($arg)
@@ -233,7 +231,6 @@ function spip_pg_fromfield($arg)
 			spip_log($v);
 			$res .= "\nwhen $index=$v then $n";
 		}
-		spip_log("---- " . substr($arg,strlen($m[0])+1));
 		$arg = $m[1] . "case $res else 0 end "
 		  . substr($arg,strlen($m[0]));
 	}
@@ -286,7 +283,6 @@ function spip_pg_countsel($from = array(), $where = array(),
 	$r = spip_pg_select('COUNT(*)', $from, $where,
 			    $groupby, '', $limit, $sousrequete, $having);
 	if ($r) list($r) = pg_fetch_array($r, NULL, PGSQL_NUM);
-#	spip_log("$r pg_mysql_countsel($from $where $limit");
 	return $r;
 }
 
@@ -314,7 +310,7 @@ function spip_pg_insert($table, $champs, $valeurs, $ignore='') {
 		$table = preg_replace('/^spip/',
 				    $GLOBALS['table_prefix'],
 				    $table);
-	$r = spip_pg_trace_query("INSERT INTO $table $champs VALUES $valeurs $ret");
+	$r = pg_query("INSERT INTO $table $champs VALUES $valeurs $ret");
 	if (!$r) return 0;
 	if (!$ret) return -1;
 	$r = pg_fetch_array($r, NULL, PGSQL_NUM);
