@@ -1095,7 +1095,7 @@ function debut_cadre_formulaire($style='', $return=false){
 
 // http://doc.spip.org/@fin_cadre_formulaire
 function fin_cadre_formulaire($return=false){
-	if ($return) return  "</div>\n"; else echo_log("</div>\n");
+	if ($return) return  "</div>\n"; else echo_log('fin_cadre_formulaire', "</div>\n");
 }
 
 
@@ -1131,7 +1131,7 @@ function debut_gauche($rubrique = "accueil", $return=false) {
 		
 	if ($spip_display == 4) $res .= "<!-- ";
 
-	if ($return) return $res; else echo_log('fin_cadre_formulaire',$res);
+	if ($return) return $res; else echo_log('debut_gauche',$res);
 }
 
 // http://doc.spip.org/@fin_gauche
