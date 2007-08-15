@@ -110,10 +110,12 @@ function maj_base($version_cible = 0) {
 	$n = floor($version_installee * 10);
 	$cible = ($version_cible ? $version_cible : $spip_version) * 10;
 	while ($n < $cible) {
-		$nom  = sprintf("maj%03d",$n);
-		$f = charger_fonction($nom, 'base', true);
-		spip_log("$f repercute les modifications de la version " . ($n/10));
-		if ($f) $f($version_installee, $version_cible);
+		$nom  = sprintf("v%03d",$n);
+		$f = charger_fonction($nom, 'maj', true);
+		if ($f) {
+			spip_log("$f repercute les modifications de la version " . ($n/10));
+			$f($version_installee, $version_cible);
+		} else spip_log("pas de fonction pour la maj $n $nom");
 		$n++;
 	}
 }
