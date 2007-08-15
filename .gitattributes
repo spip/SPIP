@@ -444,9 +444,6 @@ ecrire/configuration/syndications.php -text
 ecrire/configuration/transcodeur.php -text
 ecrire/configuration/versionneur.php -text
 ecrire/configuration/visiteurs.php -text
-ecrire/cron/maintenance.php -text
-ecrire/cron/popularites.php -text
-ecrire/cron/syndic.php -text
 ecrire/exec/accueil.php -text
 ecrire/exec/admin_effacer.php -text
 ecrire/exec/admin_plugin.php -text
@@ -540,6 +537,9 @@ ecrire/exec/tourner.php -text
 ecrire/exec/upgrade.php -text
 ecrire/exec/valider_xml.php -text
 ecrire/exec/virtualiser.php -text
+ecrire/genie/maintenance.php -text
+ecrire/genie/popularites.php -text
+ecrire/genie/syndic.php -text
 ecrire/inc/actions.php -text
 ecrire/inc/afficher_objets.php -text
 ecrire/inc/agenda.php -text

@@ -12,8 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@cron_syndic
-function cron_syndic_dist($t) {
+function genie_syndic_dist($t) {
 	return executer_une_syndication();
 }
 

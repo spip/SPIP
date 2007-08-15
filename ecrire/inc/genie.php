@@ -22,7 +22,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Solution:
 // Toute connexion a SPIP s'acheve par un appel a la fonction cron()
-// qui appelle la fonction surchargeable inc_cron().
+// qui appelle la fonction surchargeable genie dans inc/
 // Sa definition standard ci-dessous prend dans une liste de taches
 // la plus prioritaire, leurs dates etant donnees par leur fichier-verrou.
 // Une fonction executant une tache doit retourner un nombre:
@@ -31,7 +31,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // - negatif, si la tache doit etre poursuivie ou recommencee
 // Elle recoit en argument la date de la derniere execution de la tache.
 
-// On peut appeler inc_cron avec d'autres taches (pour etendre Spip)
+// On peut appeler cette fonction avec d'autres taches (pour etendre Spip)
 // specifiee par des fonctions respectant le protocole ci-dessus
 // On peut modifier la frequence de chaque tache et leur ordre d'analyse
 // en modifiant les variables ci-dessous.
@@ -46,12 +46,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // de celle-ci afin qu'un processus concurrent ne la demarre pas aussi.
 // Les taches les plus longues sont tronconnees, ce qui impose d'antidater
 // le fichier de verrouillage (avec la valeur absolue du code de retour).
-// La fonction executant la tache est un homonyme de prefixe "cron_".
-// Elle doit etre definie dans le fichier homonyme du repertoire "inc/"
-// qui est automatiquement lu.
+// La fonction executant la tache est un homonyme de prefixe "genie_".
+// Le fichier homonyme du repertoire "genie/" est automatiquement lu
+// et il est suppose definir cette fonction.
 
 // http://doc.spip.org/@inc_cron_dist
-function inc_cron_dist($taches = array()) {
+function inc_genie_dist($taches = array()) {
 
 	if (!$taches)
 		$taches = taches_generales();
@@ -81,7 +81,7 @@ function inc_cron_dist($taches = array()) {
 
 		spip_timer('tache');
 		touch($lock);
-		$cron = charger_fonction($tache, 'cron');
+		$cron = charger_fonction($tache, 'genie');
 		$retour = $cron($last);
 		// si la tache a eu un effet : log
 		if ($retour) {
@@ -140,7 +140,7 @@ function taches_generales() {
 // - elle fait appliquer le quota
 // En cas de quota sur le CACHE/, nettoyer les fichiers les plus vieux
 // http://doc.spip.org/@cron_invalideur_dist
-function cron_invalideur_dist($t) {
+function genie_invalideur_dist($t) {
 
 	include_spip('inc/invalideur');
 	appliquer_quota_cache();

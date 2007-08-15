@@ -100,7 +100,7 @@ function action_editer_site_dist() {
 	if ($resyndiquer) {
 	  // ah si PHP connaisait les fermetures...
 	  // Cette globale est utilisee exclusivement dans la fct suivante.
-		$GLOBALS['cron_syndic_now'] = $id_syndic;
+		$GLOBALS['genie_syndic_now'] = $id_syndic;
 		// forcer l'execution immediate de cette tache
 		// (i.e. appeler la fct suivante avec gestion du verrou)
 		cron(true, array('syndic' => -91));
@@ -112,13 +112,12 @@ function action_editer_site_dist() {
 }
 
 // Cette fonction redefinit la tache standard de syndication
-// pour la forcer a syndiquer le site dans la globale cron_syndic_now
+// pour la forcer a syndiquer le site dans la globale genie_syndic_now
 
-// http://doc.spip.org/@cron_syndic
-function cron_syndic($t) {
+function genie_syndic($t) {
 	include_spip('cron/syndic');
-	$t = syndic_a_jour($GLOBALS['cron_syndic_now']);
-	return $t ? 0 : $GLOBALS['cron_syndic_now'];
+	$t = syndic_a_jour($GLOBALS['genie_syndic_now']);
+	return $t ? 0 : $GLOBALS['genie_syndic_now'];
 }
 
 // http://doc.spip.org/@insert_syndic

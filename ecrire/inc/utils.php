@@ -589,7 +589,7 @@ function action_cron() {
 // cron() : execution des taches de fond
 // quand il est appele par public.php il n'est pas gourmand;
 // quand il est appele par ?action=cron, il est gourmand
-// On peut lui passer en 2e arg le tableau de taches attendu par inc_cron()
+// On peut lui passer en 2e arg le tableau de taches attendu par inc_genie()
 // Retourne Vrai si un tache a pu etre effectuee
 
 // http://doc.spip.org/@cron
@@ -611,9 +611,9 @@ function cron ($gourmand=false, $taches= array()) {
 	// les conflits sur la base entre taches.
 
 		if (spip_touch(_DIR_TMP.'cron.lock', 2)) {
-			$cron = charger_fonction('cron', 'inc', true);
-			if ($cron) {
-				$cron($taches);
+			$genie = charger_fonction('genie', 'inc', true);
+			if ($genie) {
+				$genie($taches);
 				// redater a la fin du cron
 				// car il peut prendre plus de 2 secondes.
 				spip_touch(_DIR_TMP.'cron.lock', 0);

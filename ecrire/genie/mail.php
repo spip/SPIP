@@ -15,8 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 // Mail des nouveautes
 //
-// http://doc.spip.org/@cron_mail
-function cron_mail_dist($t) {
+function genie_mail_dist($t) {
 	$adresse_neuf = $GLOBALS['meta']['adresse_neuf'];
 	$jours_neuf = $GLOBALS['meta']['jours_neuf'];
 	// $t = 0 si le fichier de lock a ete detruit

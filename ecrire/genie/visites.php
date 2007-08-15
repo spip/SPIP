@@ -178,8 +178,7 @@ function calculer_visites($t) {
 //
 // Calcule les stats en plusieurs etapes
 //
-// http://doc.spip.org/@cron_visites
-function cron_visites_dist($t) {
+function genie_visites_dist($t) {
 	$encore = calculer_visites($t);
 
 	// Si ce n'est pas fini on redonne la meme date au fichier .lock
