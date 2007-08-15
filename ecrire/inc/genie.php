@@ -50,7 +50,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Le fichier homonyme du repertoire "genie/" est automatiquement lu
 // et il est suppose definir cette fonction.
 
-// http://doc.spip.org/@inc_cron_dist
+// http://doc.spip.org/@inc_genie_dist
 function inc_genie_dist($taches = array()) {
 
 	if (!$taches)
@@ -139,7 +139,7 @@ function taches_generales() {
 // - elle peut retirer les fichiers perimes
 // - elle fait appliquer le quota
 // En cas de quota sur le CACHE/, nettoyer les fichiers les plus vieux
-// http://doc.spip.org/@cron_invalideur_dist
+// http://doc.spip.org/@genie_invalideur_dist
 function genie_invalideur_dist($t) {
 
 	include_spip('inc/invalideur');
