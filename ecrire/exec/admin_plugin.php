@@ -148,7 +148,7 @@ function affiche_les_plugins($liste_plugins, $liste_plugins_actifs, $format='arb
 		$liste_plugins = array_flip($liste_plugins);
 		foreach(array_keys($liste_plugins) as $chemin) {
 			$info = plugin_get_infos($chemin);
-			$liste_plugins[$chemin] = strtoupper(trim(typo($info['nom'])));
+			$liste_plugins[$chemin] = strtoupper(trim(typo(translitteration(unicode2charset(html2unicode($info['nom']))))));
 		}
 		asort($liste_plugins);
 		$res = affiche_liste_plugins($liste_plugins,$liste_plugins_actifs);
