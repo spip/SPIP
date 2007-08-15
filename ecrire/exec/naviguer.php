@@ -96,7 +96,7 @@ function exec_naviguer_dist()
 	}
 		
 
-		echo creer_colonne_droite(true);
+		echo creer_colonne_droite('', true);
 		echo pipeline('affiche_droite',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''));	  
 		echo debut_droite('', true);
 

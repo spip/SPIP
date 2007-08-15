@@ -71,7 +71,7 @@ function exec_sites_edit_dist()
 
 	echo debut_gauche('', true);
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'sites_edit','id_syndic'=>$id_syndic),'data'=>''));
-	echo creer_colonne_droite(true);
+	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'sites_edit','id_syndic'=>$id_syndic),'data'=>''));	  
 	echo debut_droite('', true);
 	echo debut_cadre_formulaire("", true);

@@ -49,7 +49,7 @@ function exec_configuration_dist(){
 	}
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'configuration'),'data'=>''));
-	echo creer_colonne_droite(true);
+	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'configuration'),'data'=>''));
 	echo debut_droite('', true);
 

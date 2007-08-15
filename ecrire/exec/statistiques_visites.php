@@ -230,7 +230,7 @@ else {
 		
 	if (spip_num_rows($result) > 0
 	OR $id_article > 0)
-		echo creer_colonne_droite(true);
+		echo creer_colonne_droite('', true);
 
 	if ($id_article > 0) {
 		echo bloc_des_raccourcis(icone_horizontale(_T('icone_retour_article'), generer_url_ecrire("articles","id_article=$id_article"), "article-24.gif","rien.gif", false));

@@ -24,7 +24,7 @@ $commencer_page = charger_fonction('commencer_page', 'inc');
 echo $commencer_page(_T('titre_page_sites_tous'),"naviguer","sites");
 echo debut_gauche('', true);
 echo pipeline('affiche_gauche',array('args'=>array('exec'=>'sites_tous'),'data'=>''));
-echo creer_colonne_droite(true);
+echo creer_colonne_droite('', true);
 echo pipeline('affiche_droite',array('args'=>array('exec'=>'sites_tous'),'data'=>''));	  
 echo debut_droite('', true);
 

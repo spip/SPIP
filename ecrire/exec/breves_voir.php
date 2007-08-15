@@ -111,7 +111,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 
 	
 
-	echo creer_colonne_droite(true);
+	echo creer_colonne_droite('', true);
 
 	echo pipeline('affiche_droite',
 		array(

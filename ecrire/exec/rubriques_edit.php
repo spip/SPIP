@@ -93,7 +93,7 @@ function exec_rubriques_edit_dist()
 	} 
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'rubriques_edit','id_rubrique'=>$id_rubrique),'data'=>''));
-	echo creer_colonne_droite(true);
+	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'rubriques_edit','id_rubrique'=>$id_rubrique),'data'=>''));	  
 	echo debut_droite('', true);
 

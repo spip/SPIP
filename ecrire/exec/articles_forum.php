@@ -94,7 +94,7 @@ function articles_forum_cadres($id_rubrique, $id_article, $titre, $script, $args
 	echo fin_boite_info(true);
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'articles_forum','id_article'=>$id_article),'data'=>''));
-	echo creer_colonne_droite(true);
+	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'articles_forum','id_article'=>$id_article),'data'=>''));
 	echo debut_droite('', true);
 

@@ -40,7 +40,7 @@ function exec_config_multilang_dist()
 	echo debut_gauche('', true);
 	
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'config_multilang'),'data'=>''));
-	echo creer_colonne_droite(true);
+	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'config_multilang'),'data'=>''));
 echo debut_droite('', true);
 

@@ -56,7 +56,7 @@ function forum_affiche($debut, $admin=false)
 
   	echo debut_gauche('', true);
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'forum'),'data'=>''));
-	echo creer_colonne_droite(true);
+	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'forum'),'data'=>''));
 
 	echo debut_droite('', true);

@@ -38,7 +38,7 @@ function exec_mots_tous_dist()
 	}
 
 
-	echo creer_colonne_droite(true);
+	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
 	echo debut_droite('', true);
 
