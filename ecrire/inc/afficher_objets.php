@@ -275,7 +275,9 @@ function afficher_objet_boucle($row, &$tous_id,  $voir_logo, $own)
 			}
 		}
 		if (strlen($titre)){
-			$s .= "<a href='" . lien_voir_objet($type,$primary,$id_objet) . "'"/*." style=\"display:block;\""*/ .">";
+			$s .= "<a href='" . lien_voir_objet($type,$primary,$id_objet) . "'"
+			  . "' title='" . _T('info_numero_abbreviation'). "$id_objet'"
+			  .">";
 			$s .= $titre;
 			$s .= "</a>";
 		}
@@ -517,7 +519,10 @@ function afficher_articles_trad_boucle($row)
 	if (acces_restreint_rubrique($id_rubrique))
 		$s .= http_img_pack("admin-12.gif", _T('titre_image_administrateur'), "width='12' height='12'", _T('titre_image_admin_article'));
 
-	$s .= "<a href='" . generer_url_ecrire("articles","id_article=$id_article") . " dir='$lang_dir' style=\"display:block;\">";
+	$s .= "<a href='" 
+	  . generer_url_ecrire("articles","id_article=$id_article") 
+	  . "' title='" . _T('info_numero_abbreviation'). "$id_article'"
+	  . " dir='$lang_dir' style=\"display:block;\">";
 			
 			
 	if ($id_article == $id_trad) $titre = "<b>$titre</b>";
