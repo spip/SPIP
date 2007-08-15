@@ -175,7 +175,9 @@ function assembler_page ($fond) {
 			if ($GLOBALS['flag_ob']) {
 				// Si la page est vide, produire l'erreur 404 ou message d'erreur pour les inclusions
 				if (trim($page['texte']) === ''
-				AND $GLOBALS['var_mode'] != 'debug') {
+				AND $GLOBALS['var_mode'] != 'debug'
+				AND !isset($page['entetes']['Location']) // cette page realise une redirection, donc pas d'erreur
+				) {
 					$page = message_erreur_404();
 				}
 				// pas de cache client en mode 'observation'
