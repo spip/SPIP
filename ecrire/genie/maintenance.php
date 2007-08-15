@@ -33,6 +33,7 @@ function verifier_crash_tables() {
 	if (spip_connect()) {
 		include_spip('base/serial');
 		include_spip('base/auxiliaires');
+		include_spip('inc/meta');
 		$crash = array();
 		foreach (array('tables_principales', 'tables_auxiliaires') as $com) {
 			foreach ($GLOBALS[$com] as $table => $desc) {
