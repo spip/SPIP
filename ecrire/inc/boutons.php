@@ -367,7 +367,12 @@ function definir_barre_gadgets() {
 	);
 }
 
-
+function bandeau_creer_url($url, $args=""){
+	if (preg_match(',[\/\?],',$url))
+		return $url;
+	else
+		return generer_url_ecrire($url,$args);
+}
 // http://doc.spip.org/@bandeau_principal
 function bandeau_principal($rubrique, $sous_rubrique, $largeur)
 {
@@ -384,12 +389,12 @@ function bandeau_principal($rubrique, $sous_rubrique, $largeur)
 			$res .= "<li class='cellule48' style='width:".$larg_espacements."px'><span class='menu-item' style='width:"._LARGEUR_ICONES_BANDEAU."px'>&nbsp;</span></li>";
 		} else {
 			if ($detail->url)
-				$lien_noscript = $detail->url;
+				$lien_noscript = bandeau_creer_url($detail->url);
 			else
 				$lien_noscript = generer_url_ecrire($page);
 
 			if ($detail->url2)
-				$lien = $detail->url2;
+				$lien = bandeau_creer_url($detail->url2);
 			else
 				$lien = $lien_noscript;
 
@@ -493,7 +498,10 @@ function bandeau_principal2($sousmenu,$rubrique, $sous_rubrique, $largeur, $deca
 						$res .= "<li class='separateur'></li>\n";
 					}
 				} else {
-				  list($html,$largitem) = icone_bandeau_secondaire (_T($sousdetail->libelle), generer_url_ecrire($sousdetail->url?$sousdetail->url:$souspage, $sousdetail->urlArg), $sousdetail->icone, $souspage, $sous_rubrique);
+				  list($html,$largitem) = icone_bandeau_secondaire (_T($sousdetail->libelle), 
+				    bandeau_creer_url($sousdetail->url?$sousdetail->url:$souspage, $sousdetail->urlArg), 
+				    $sousdetail->icone, $souspage, $sous_rubrique
+				  );
 				  $res .= $html;
 				}
 				$width+=$largitem+10;
