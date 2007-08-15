@@ -352,8 +352,8 @@ function spip_mysql_free($r) {
 }
 
 // http://doc.spip.org/@spip_mysql_insert
-function spip_mysql_insert($table, $champs, $valeurs, $ignore='') {
-	if (!spip_mysql_query("INSERT $ignore INTO $table $champs VALUES $valeurs"))
+function spip_mysql_insert($table, $champs, $valeurs, $desc='') {
+	if (!spip_mysql_query("INSERT INTO $table $champs VALUES $valeurs"))
 		return 0;
 	$r = mysql_insert_id();
 	return $r ? $r : (($r===0) ? -1 : 0);

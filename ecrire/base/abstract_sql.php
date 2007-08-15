@@ -103,10 +103,10 @@ function sql_free($res, $serveur='')
 }
 
 // http://doc.spip.org/@sql_insert
-function sql_insert($table, $noms, $valeurs, $serveur='')
+function sql_insert($table, $noms, $valeurs, $desc=array(), $serveur='')
 {
 	$f = sql_serveur('insert', $serveur);
-	return $f($table, $noms, $valeurs);
+	return $f($table, $noms, $valeurs, $desc);
 }
 
 // http://doc.spip.org/@sql_update
@@ -157,7 +157,7 @@ function sql_multi($sel, $lang, $serveur='')
 }
 
 // http://doc.spip.org/@sql_error
-function sql_error($query, $serveur='') {
+function sql_error($query='requete inconnue', $serveur='') {
   	$f = sql_serveur('error', $serveur);
 	return $f($query);
 }
