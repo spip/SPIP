@@ -30,8 +30,8 @@ function exec_auteurs_dist()
 	$nombre_auteurs = spip_num_rows($result);
 
 	$debut = intval(_request('debut'));
-	if ($debut > $nombre_auteurs - MAX_AUTEURS_PAR_PAGE)
-		$debut = max(0,$nombre_auteurs - MAX_AUTEURS_PAR_PAGE);
+	if ($debut > $nombre_auteurs-1)
+		$debut = max(0,$nombre_auteurs-1);
 
 	list($auteurs, $lettre)= lettres_d_auteurs($result, $debut, MAX_AUTEURS_PAR_PAGE, $tri);
 	$res = auteurs_tranches(afficher_n_auteurs($auteurs), $debut, $lettre, $tri, $statut, MAX_AUTEURS_PAR_PAGE, $nombre_auteurs);
@@ -201,11 +201,16 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 
 		if ($tri == 'nom') {
 			$res .= "</div><div>\n";
+			$val_prev = 0;
 			foreach ($lettre as $key => $val) {
 				if ($val == $debut)
 					$res .= "<b>$key</b>\n";
-				else
+				else {
+					if ($debut>$val_prev && $debut<$val)
+						$res .= "<b>..</b> ";
 					$res .= auteurs_href($key, "tri=$tri$arg&debut=$val") . "\n";
+				}
+				$val_prev = $val;
 			}
 			$res .= "</div></td></tr>\n";
 		}
