@@ -88,10 +88,14 @@ function maj_base($version_cible = 0) {
 	//
 	// $version_installee = 1.702; quand on a besoin de forcer une MAJ
 	
-	spip_log("version anterieure: $version_installee");
+	spip_log("Version anterieure: $version_installee. Courante: $spip_version");
 	if (!$version_installee OR ($spip_version < $version_installee)) {
-		spip_query("REPLACE spip_meta (nom, valeur,impt)
-			VALUES ('version_installee', '$spip_version','non')");
+		sql_replace('spip_meta', 
+		      array('nom' => 'version_installee',
+			    'valeur' => $spip_version,
+			    'impt' => 'non'),
+		      $GLOBALS['tables_principales']['spip_meta']);
+		spip_log("Pas necessaire de mettre a jour");
 		return true;
 	}
 
