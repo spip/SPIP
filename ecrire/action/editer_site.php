@@ -116,7 +116,7 @@ function action_editer_site_dist() {
 
 // http://doc.spip.org/@genie_syndic
 function genie_syndic($t) {
-	include_spip('cron/syndic');
+	include_spip('genie/syndic');
 	$t = syndic_a_jour($GLOBALS['genie_syndic_now']);
 	return $t ? 0 : $GLOBALS['genie_syndic_now'];
 }
