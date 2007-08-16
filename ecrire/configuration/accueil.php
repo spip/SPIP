@@ -22,22 +22,22 @@ function  configuration_bloc_votre_site()
 	$email_webmaster = entites_html($GLOBALS['meta']["email_webmaster"]);
 	$descriptif_site = entites_html($GLOBALS['meta']["descriptif_site"]);
 
-	return debut_cadre_relief("", true, "", _T('info_nom_site').aide ("confnom"))
-	. "<input type='text' name='nom_site' value=\"$nom_site\" size='40' class='forml' />"
+	return debut_cadre_relief("", true, "", "<label for='nom_site'>"._T('info_nom_site')."</label>".aide ("confnom"))
+	. "<input type='text' name='nom_site' id='nom_site' value=\"$nom_site\" size='40' class='forml' />"
 	. fin_cadre_relief(true)
 
-	. debut_cadre_relief("", true, "", _T('info_adresse_url'))
-	. "<input type='text' name='adresse_site' value=\"$adresse_site/\" size='40' class='forml' />"
+	. debut_cadre_relief("", true, "", "<label for='adresse_site'>"._T('info_adresse_url')."</label>")
+	. "<input type='text' name='adresse_site' id='adresse_site' value=\"$adresse_site/\" size='40' class='forml' />"
 	. fin_cadre_relief(true)
 
-	. debut_cadre_relief("", true, "", _T('entree_description_site'))
-	. "<textarea name='descriptif_site' class='forml' rows='4' cols='40'>$descriptif_site</textarea>"
+	. debut_cadre_relief("", true, "","<label for='descriptif_site'>". _T('entree_description_site')."</label>")
+	. "<textarea name='descriptif_site' id='descriptif_site' class='forml' rows='4' cols='40'>$descriptif_site</textarea>"
 	. fin_cadre_relief(true)
 
 	. "<div>&nbsp;</div>"
 	
-	. debut_cadre_relief("", true, "", _T('info_email_webmestre'))
-	. "<input type='text' name='email_webmaster' value=\"$email_webmaster\" size='40' class='formo' />"
+	. debut_cadre_relief("", true, "", "<label for='email_webmaster'>"._T('info_email_webmestre')."</label>")
+	. "<input type='text' name='email_webmaster' id='email_webmaster' value=\"$email_webmaster\" size='40' class='formo' />"
 	. fin_cadre_relief(true);
 }
 
