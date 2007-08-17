@@ -159,7 +159,7 @@ function infos_naviguer($id_rubrique, $statut, $ze_logo)
 
 		echo debut_boite_info(true);
 		echo $res;
-		voir_en_ligne ('rubrique', $id_rubrique, $statut, '', false);
+		echo voir_en_ligne ('rubrique', $id_rubrique, $statut, '', false);
 	
 		if (autoriser('publierdans','rubrique',$id_rubrique)) {
 			$id_parent = sql_fetch(spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
@@ -224,6 +224,7 @@ if ($id_rubrique>0 AND $GLOBALS['meta']['multi_rubriques'] == 'oui' AND ($GLOBAL
 	$row = sql_fetch(spip_query("SELECT lang, langue_choisie FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 	$langue_rubrique = $row['lang'];
 	$langue_choisie_rubrique = $row['langue_choisie'];
+	$langue_parent = '';
 	if ($id_parent) {
 		$row = sql_fetch(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_parent"));
 		$langue_parent = $row['lang'];

@@ -16,25 +16,57 @@ include_spip('inc/autoriser');
 
 // http://doc.spip.org/@gerer_deplacements
 function gerer_deplacements($deplacements){
-	$liste_dep = explode("\n",$deplacements);
-	if (count($liste_dep)){
-		foreach ($liste_dep as $dep){
-			$mouvement=explode(":",$dep);
-			$quoi=explode("-",$mouvement[0]);
-			$cible=explode("-",$mouvement[1]);
-			if (in_array($quoi[0],array('article','rubrique')) && $cible[0]=='rubrique'){
-				$id_quoi=intval($quoi[1]);$id_cible=intval($cible[1]);
-				if (($quoi[0]=='article')&&($id_cible!=0))
-					if (autoriser('modifier','rubrique',$id_cible)&& autoriser('modifier','article',$id_quoi))
-						spip_query("UPDATE spip_articles SET id_rubrique="._q($id_cible)." WHERE id_article="._q($id_quoi));
-				if ($quoi[0]=='rubrique')
-					if (autoriser('modifier','rubrique',$id_cible)&& autoriser('modifier','rubrique',$id_quoi))
-						spip_query("UPDATE spip_rubriques SET id_parent="._q($id_cible)." WHERE id_rubrique="._q($id_quoi));
-			}
-		}
+	foreach(explode("\n",$deplacements) as $dep){
+		$mouvement=explode(":",$dep);
+		list($quoi,$id_quoi) = explode("-",$mouvement[0]);
+		list($cible, $id_cible) =explode("-",$mouvement[1]);
+		$f = 'reorganiser_' . $quoi . '_' . $cible;
+		if (function_exists($f))
+			$f(intval($id_quoi), intval($id_cible));
+		else spip_log("reorganiser $dep: incompris");
+	}
+}
+
+function reorganiser_article_rubrique($id_article, $id_rubrique)
+{
+	if ($id_rubrique
+	AND autoriser('modifier','rubrique',$id_rubrique)
+	AND autoriser('modifier','article',$id_article)) {
+
+		include_spip('action/editer_article');
 		include_spip('inc/rubriques');
-		propager_les_secteurs();
-		calculer_rubriques();
+		$s = spip_query("SELECT statut, id_rubrique FROM spip_articles WHERE id_article=$id_article");
+		$s = sql_fetch($s);
+		editer_article_heritage($id_article,
+					$s['id_rubrique'], 
+					$s['statut'],
+					array('id_rubrique' => $id_rubrique));
+	}
+}
+
+function reorganiser_rubrique_rubrique($id_quoi, $id_cible)
+{
+	if (($id_quoi != $id_cible)
+	AND autoriser('modifier','rubrique',$id_cible)
+	AND autoriser('modifier','rubrique',$id_quoi)) {
+		if (!$id_cible)
+			$id_secteur = $id_quoi;
+		else {
+			$s = spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_cible");
+			$s = sql_fetch($s);
+			$id_secteur = $s['id_secteur'];
+		}
+
+		$s = spip_query("SELECT statut, id_parent FROM spip_rubriques WHERE id_rubrique=$id_quoi");
+
+		spip_query("UPDATE spip_rubriques SET id_parent="._q($id_cible).", id_secteur=$id_secteur WHERE id_rubrique="._q($id_quoi));
+
+		if ($s['statut'] == 'publie') {
+			include_spip('inc/rubriques');
+			calculer_rubriques_if($s['id_parent'],
+					      array('id_rubrique' => $id_cible),
+					      'publie');
+		}
 	}
 }
 
