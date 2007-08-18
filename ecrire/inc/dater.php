@@ -56,14 +56,14 @@ onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
 		. aide('artdate');
 
 		$masque = 
-		  afficher_jour($jour, "name='jour' $js", true)
-		. afficher_mois($mois, "name='mois' $js", true)
-		. afficher_annee($annee, "name='annee' $js")
+		  afficher_jour($jour, "name='jour' id='jour' $js", true)
+		. afficher_mois($mois, "name='mois' id='mois' $js", true)
+		. afficher_annee($annee, "name='annee' id='annee' $js")
 		. (($type != 'article')
 		   ? ''
 		   : (' - '
-			. afficher_heure($heure, "name='heure' $js")
-		      . afficher_minute($minute, "name='minute' $js")))
+			. afficher_heure($heure, "name='heure' id='heure' $js")
+		      . afficher_minute($minute, "name='minute' id='minute' $js")))
 		  . "&nbsp;\n";
 
 		$res = "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>"
@@ -120,12 +120,12 @@ onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
  " onclick=$js /> <label for='avec_redac_off'>" .
  _T('bouton_radio_afficher').
  ' :</label> ' .
- afficher_jour($jour_redac, "name='jour_redac' class='fondl' onchange=$js", true) .
- afficher_mois($mois_redac, "name='mois_redac' class='fondl' onchange=$js", true) .
- "<input type='text' name='annee_redac' class='fondl' value='".$annee_redac."' size='5' maxlength='4' onclick=$js />" .
+ afficher_jour($jour_redac, "name='jour_redac' id='jour_redac' class='fondl' onchange=$js", true) .
+ afficher_mois($mois_redac, "name='mois_redac' id='mois_redac' class='fondl' onchange=$js", true) .
+ "<input type='text' name='annee_redac' id='annee_redac' class='fondl' value='".$annee_redac."' size='5' maxlength='4' onclick=$js />" .
  '<div style="text-align: center; width: 80%;">' .
- afficher_heure($heure_redac, "name='heure_redac' class='fondl' onchange=$js", true) .
- afficher_minute($minute_redac, "name='minute_redac' class='fondl' onchange=$js", true) .
+ afficher_heure($heure_redac, "name='heure_redac' id='heure_redac' class='fondl' onchange=$js", true) .
+ afficher_minute($minute_redac, "name='minute_redac' id='minute_redac' class='fondl' onchange=$js", true) .
  "</div></div>";
 
 

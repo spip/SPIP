@@ -63,7 +63,7 @@ function petitionner_choisir($petition)
 		$res .= "<option" . (($val_menu == $val) ? " selected='selected'" : '') . " value='$val'>".$desc."</option>\n";
 	}
 
-	return "<select name='change_petition'
+	return "<select name='change_petition' id='change_petition'
 		class='fondl spip_xx-small'
 		onchange=\"setvisibility('valider_petition', 'visible');\"
 		>\n$res</select><br />\n";
@@ -89,8 +89,8 @@ function petitionner_decompte($id_article, $petition)
 // http://doc.spip.org/@petitionner_message
 function petitionner_message($petition)
 {
-	return "<br />"._T('texte_descriptif_petition')."&nbsp;:<br />"
-	. "<textarea name='texte_petition' class='forml' rows='4' cols='10'>"
+	return "<br /><label for='texte_petition'>"._T('texte_descriptif_petition')."</label>&nbsp;:<br />"
+	. "<textarea name='texte_petition' id='texte_petition' class='forml' rows='4' cols='10'>"
 	. entites_html($petition["texte"])
 	. "</textarea>\n";
 }
@@ -104,25 +104,22 @@ function petitionner_params($petition)
 	$message=$petition["message"];
 
 	$res ='';
-	if ($email_unique=="oui")
-			$res .= "<input type='checkbox' name='email_unique' id='emailunique' checked='checked' />";
-	else
-			$res .="<input type='checkbox' name='email_unique'  id='emailunique' />";
-	$res .=" <label for='emailunique'>"._T('bouton_checkbox_signature_unique_email')."</label><br />";
+	$res .= "<input type='checkbox' name='email_unique' id='emailunique' "
+	  . (($email_unique=="oui")?"checked='checked' />":"")
+	  . "/>";
+	$res .= " <label for='emailunique'>"._T('bouton_checkbox_signature_unique_email')."</label><br />";
 	if ($site_obli=="oui")
-			$res .="<input type='checkbox' name='site_obli' id='siteobli' checked='checked' />";
-	else
-			$res .="<input type='checkbox' name='site_obli'  id='siteobli' />";
+	$res .= "<input type='checkbox' name='site_obli' id='siteobli' "
+	  . ($site_obli=="oui"?"checked='checked'":"")
+	  . " />";
 	$res .=" <label for='siteobli'>"._T('bouton_checkbox_indiquer_site')."</label><br />";
-	if ($site_unique=="oui")
-		$res .="<input type='checkbox' name='site_unique' id='siteunique' checked='checked' />";
-	else
-			$res .="<input type='checkbox' name='site_unique'  id='siteunique' />";
+	$res .="<input type='checkbox' name='site_unique' id='siteunique' "
+	  . ($site_unique=="oui"?"checked='checked'":"")
+	  . " />";
 	$res .=" <label for='siteunique'>"._T('bouton_checkbox_signature_unique_site')."</label><br />";
-	if ($message=="oui")
-			$res .="<input type='checkbox' name='message' id='message' checked='checked' />";
-	else
-			$res .="<input type='checkbox' name='message'  id='message' />";
+	$res .="<input type='checkbox' name='message' id='message' "
+	  . ($message=="oui"?"checked='checked'":"")
+	  . " />";
 	$res .= " <label for='message'>"._T('bouton_checkbox_envoi_message')."</label>";
 
 	return $res;

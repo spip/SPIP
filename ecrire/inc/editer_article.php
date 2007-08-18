@@ -88,7 +88,7 @@ function editer_article_texte($texte, $config, $aider, $lang='')
 	  list($texte, $sup) = editer_article_recolle($texte, $att_text);
 	} else $sup='';
 
-	return	"\n<p><b>" ._T('info_texte') ."</b>"
+	return	"\n<p><label for='text_area'><b>" ._T('info_texte') ."</b></label>"
 	. $aider ("arttexte") . "<br />\n" 
 	. _T('texte_enrichir_mise_a_jour')
 	. $aider("raccourcis")
@@ -108,10 +108,11 @@ function editer_article_texte($texte, $config, $aider, $lang='')
 // http://doc.spip.org/@editer_article_titre
 function editer_article_titre($titre, $onfocus, $config, $aider)
 {
-	return	"\n<p>" .
-		_T('texte_titre_obligatoire') .
+	return	"\n<p><label for='titre' >" .
+		_T('texte_titre_obligatoire') . 
+		"</label>" .
 		$aider("arttitre") .
-		"\n<br /><input type='text' name='titre' style='font-weight: bold; ' class='formo spip_small' value=\"" .
+		"\n<br /><input type='text' name='titre' id='titre' style='font-weight: bold; ' class='formo spip_small' value=\"" .
 	  	entites_html($titre) .
 		"\" size='40' " .
 	  	$onfocus. // effacer le titre lorsque nouvel article
@@ -141,11 +142,11 @@ function editer_article_surtitre($surtitre, $config, $aider)
 	if (($config['articles_surtitre'] == 'non') AND !$surtitre)
 		return '';
 
-	return ( "\n<p><b>" .
+	return ( "\n<p><label for='surtitre'><b>" .
 		 _T('texte_sur_titre') .
-		"</b>" .
+		"</b></label>" .
 		$aider ("arttitre") .
-		"<br />\n<input type='text' name='surtitre' class='forml' value=\"" .
+		"<br />\n<input type='text' name='surtitre' id='surtitre' class='forml' value=\"" .
 		 entites_html($surtitre) .
 		 "\" size='40' /></p>");
 }
@@ -156,11 +157,11 @@ function editer_article_soustitre($soustitre, $config, $aider)
 	if (($config['articles_soustitre'] == "non") AND !$soustitre)
 		return '';
 
-	return ("\n<p><b>" .
+	return ("\n<p><b><label for='soustitre'>" .
 		  _T('texte_sous_titre') .
-		  "</b>" .
+		  "</b></label>" .
 		  $aider ("arttitre") .
-		  "\n<br /><input type='text' name='soustitre' class='forml' value=\"" .
+		  "\n<br /><input type='text' name='soustitre' id='soustitre' class='forml' value=\"" .
 		  entites_html($soustitre) .
 		"\" size='40' /><br /><br /></p>\n");
 }
@@ -172,11 +173,11 @@ function editer_article_descriptif($descriptif, $config, $aider)
 		return '';
 
 	$msg = _T('texte_contenu_article');
-	return ("\n<p><b>" ._T('texte_descriptif_rapide') ."</b>" .
+	return ("\n<p><label for='descriptif'><b>" ._T('texte_descriptif_rapide') ."</b></label>" .
 		  $aider("artdesc") .
 		"<br />\n" . 
 		(!trim($msg) ? '' : "$msg<br />\n") .
-		"<textarea name='descriptif' class='forml' rows='2' cols='40'>" .
+		"<textarea name='descriptif' id='descriptif' class='forml' rows='2' cols='40'>" .
 		entites_html($descriptif) .
 		"</textarea></p>");
 }
@@ -190,11 +191,11 @@ function editer_article_url($url, $nom, $config, $aider)
 	$url_site = entites_html($url);
 	$nom_site = entites_html($nom);
 
-	return '<br />' . _T('entree_liens_sites') ."<br />\n" .
-	  _T('info_titre') ." " .
-	  "\n<input type='text' name='nom_site' class='forml' size='40' value=\"$nom\"/><br />\n" .
-	  _T('info_url') .
-	  "\n<input type='text' name='url_site' class='forml' size='40' value=\"$url\"/>\n";
+	return "<br /><label for='nom_site'>" . _T('entree_liens_sites') ."<br />\n" .
+	  _T('info_titre') ."</label> " .
+	  "\n<input type='text' name='nom_site' id='nom_site' class='forml' size='40' value=\"$nom\"/><br />\n" .
+	  "<label for='url_site'>" . _T('info_url') . "</label>" .
+	  "\n<input type='text' name='url_site' id='url_site' class='forml' size='40' value=\"$url\"/>\n";
 }
 
 // http://doc.spip.org/@editer_article_ps
@@ -203,10 +204,10 @@ function editer_article_ps($ps, $config, $aider)
 	if (($config['articles_ps'] == "non") AND !$ps)
 		 return '';
 
-	return  "\n<p><b>"
+	return  "\n<p><label for='ps'><b>"
 		. _T('info_post_scriptum')
-		."</b><br />"
-		. "<textarea name='ps' class='forml' rows='5' cols='40'>"
+		."</b></label><br />"
+		. "<textarea name='ps' id='ps' class='forml' rows='5' cols='40'>"
 		. entites_html($ps)
 		. "</textarea></p>\n";
 }
@@ -270,11 +271,11 @@ function editer_article_chapo($chapo, $config, $aider)
 		return "<div style='border: 1px dashed #666666; background-color: #f0f0f0; padding: 5px;'>" .
 			"<table width='100%' cellspacing='0' cellpadding='0' border='0'>" .
 			"<tr><td valign='top'>" .
-			"<span class='verdana1 spip_small'><b><label for='confirme-virtuel'>"._T('info_redirection')."&nbsp;:</label></b>" .	$aider ("artvirt") . "</span>" .
+			"<span class='verdana1 spip_small'><b><label for='virtuel'>"._T('info_redirection')."&nbsp;:</label></b>" .	$aider ("artvirt") . "</span>" .
 			"</td>" .
 			"<td style='width: 10px'>&nbsp;</td>" .
 			"<td valign='top' style='width: 50%'>" .
-			"<input type='text' name='virtuel' class='forml spip_xx-small' value=\"$virtuel\" size='40' />" .
+			"<input type='text' name='virtuel' id='virtuel' class='forml spip_xx-small' value=\"$virtuel\" size='40' />" .
 			"<input type='hidden' name='changer_virtuel' value='oui' />" .
 			"</td></tr></table>\n" .
 			"<span class='verdana1 spip_small'>" . _T('texte_article_virtuel_reference') . "</span>" .
@@ -285,10 +286,10 @@ function editer_article_chapo($chapo, $config, $aider)
 			return '';
 
 		$rows = $config['lignes'];
-		return "\n<p><br /><b>"._T('info_chapeau')."</b>" .
+		return "\n<p><br /><label for='chapo'><b>"._T('info_chapeau')."</b></label>" .
 			$aider ("artchap") .
 		  	"\n<br />"._T('texte_introductif_article')."<br />\n" .
-			"<textarea name='chapo' class='forml' rows='$rows' cols='40'>" .
+			"<textarea name='chapo' id='chapo' class='forml' rows='$rows' cols='40'>" .
 			$chapo .
 			"</textarea></p>\n";
 	}

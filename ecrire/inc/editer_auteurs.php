@@ -255,17 +255,17 @@ function ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit, $arg_
 	if (!$num = spip_num_rows($query)) return '';
 	$js = "findObj_forcer('valider_ajouter_auteur').style.visibility='visible';";
 
-	$text = "<span class='verdana1'><b>"
+	$text = "<span class='verdana1'><label for='nouv_auteur'><b>"
 	. _T('titre_cadre_ajouter_auteur')
-	. "</b></span>\n";
+	. "</b></label></span>\n";
 
 	if ($num <= _SPIP_SELECT_MIN_AUTEURS){
-		$sel = "$text<select name='nouv_auteur' size='1' style='width:150px;' class='fondl' onchange=\"$js\">" .
+		$sel = "$text<select name='nouv_auteur' id='nouv_auteur' size='1' style='width:150px;' class='fondl' onchange=\"$js\">" .
 		   objet_auteur_select($query) .
 		   "</select>";
 		$clic = _T('bouton_ajouter');
 	} else if  ((_SPIP_AJAX < 1) OR ($num >= _SPIP_SELECT_MAX_AUTEURS)) {
-		  $sel = "$text <input type='text' name='cherche_auteur' onclick=\"$js\" class='fondl' value='' size='20' />";
+		  $sel = "$text <input type='text' name='cherche_auteur' id='nouv_auteur' onclick=\"$js\" class='fondl' value='' size='20' />";
 		  $clic = _T('bouton_chercher');
 	} else {
 	    $sel = selecteur_auteur_ajax($type, $id, $js, $text);

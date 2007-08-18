@@ -249,7 +249,7 @@ function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_
 	// forcer le recalcul du noeud car on est en Ajax
 	$jscript1 = "findObj_forcer('$ancre').style.visibility='visible';";
 
-	$corps = "\n<select name='nouv_mot' onchange=\"$jscript1\""
+	$corps = "\n<select name='nouv_mot' id='nouv_mot' onchange=\"$jscript1\""
 	. " class='fondl spip_xx-small' style='width:90px;'>"
 	. $s
 	. "</select>\n&nbsp;" ;
@@ -357,11 +357,11 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 		$jscript = "onfocus=\"$jscript1 $jscript2\"";
 
 		if ($obligatoire)
-			$res .= "<input type='text' name='cherche_mot' class='fondl' style='width: 180px; background-color:#E86519;' value=\"$titre_groupe\" size='20' $jscript />";
+			$res .= "<input type='text' name='cherche_mot' id='cherche_mot' class='fondl' style='width: 180px; background-color:#E86519;' value=\"$titre_groupe\" size='20' $jscript />";
 		else if ($unseul)
-			$res .= "<input type='text' name='cherche_mot' class='fondl' style='width: 180px; background-color:#cccccc;' value=\"$titre_groupe\" size='20' $jscript />";
+			$res .= "<input type='text' name='cherche_mot' id='cherche_mot' class='fondl' style='width: 180px; background-color:#cccccc;' value=\"$titre_groupe\" size='20' $jscript />";
 		else
-			$res .= "<input type='text' name='cherche_mot'  class='fondl' style='width: 180px; ' value=\"$titre_groupe\" size='20' $jscript />";
+			$res .= "<input type='text' name='cherche_mot' id='cherche_mot'  class='fondl' style='width: 180px; ' value=\"$titre_groupe\" size='20' $jscript />";
 
 		$res .= "<input type='hidden' name='select_groupe'  value='$id_groupe' />&nbsp;";
 		return array($res, _T('bouton_chercher')); 
@@ -370,11 +370,11 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 		$jscript = "onchange=\"$jscript1\"";
 	  
 		if ($obligatoire)
-			$res .= "<select name='nouv_mot' size='1' style='width: 180px; background-color:#E86519;' class='fondl' $jscript>";
+			$res .= "<select name='nouv_mot' id='nouv_mot' size='1' style='width: 180px; background-color:#E86519;' class='fondl' $jscript>";
 		else if ($unseul)
-			$res .= "<select name='nouv_mot' size='1' style='width: 180px; background-color:#cccccc;' class='fondl' $jscript>";
+			$res .= "<select name='nouv_mot' id='nouv_mot' size='1' style='width: 180px; background-color:#cccccc;' class='fondl' $jscript>";
 		else
-			$res .= "<select name='nouv_mot' size='1' style='width: 180px; ' class='fondl' $jscript>";
+			$res .= "<select name='nouv_mot' id='nouv_mot' size='1' style='width: 180px; ' class='fondl' $jscript>";
 
 		$res .= "\n<option value='x' style='font-variant: small-caps;'>$titre</option>";
 

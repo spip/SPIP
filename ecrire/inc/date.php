@@ -111,11 +111,11 @@ function afficher_minute($minute, $attributs, $autre=false){
 function afficher_jour_mois_annee_h_m($date, $heures, $minutes, $suffixe='')
 {
   return 
-    afficher_jour(jour($date), "name='jour$suffixe' size='1' class='fondl verdana1'") .
-    afficher_mois(mois($date), "name='mois$suffixe' size='1' class='fondl verdana1'") .
-    afficher_annee(annee($date), "name='annee$suffixe' class='fondl verdana1'", date('Y')-1) .
-    "&nbsp;  <input type='text' class='fondl verdana1' name='heures$suffixe' value=\"".$heures."\" size='3'/>&nbsp;".majuscules(_T('date_mot_heures'))."&nbsp;" .
-    "<input type='text' class='fondl verdana1' name='minutes$suffixe' value=\"$minutes\" size='3'/>";
+    afficher_jour(jour($date), "name='jour$suffixe' id='jour$suffixe' size='1' class='fondl verdana1'") .
+    afficher_mois(mois($date), "name='mois$suffixe' id='mois$suffixe' size='1' class='fondl verdana1'") .
+    afficher_annee(annee($date), "name='annee$suffixe' id='annee$suffixe' class='fondl verdana1'", date('Y')-1) .
+    "&nbsp;  <input type='text' class='fondl verdana1' name='heures$suffixe' id='heures$suffixe' value=\"".$heures."\" size='3'/>&nbsp;".majuscules(_T('date_mot_heures'))."&nbsp;" .
+    "<input type='text' class='fondl verdana1' name='minutes$suffixe' id='minutes$suffixe' value=\"$minutes\" size='3'/>";
 }
 
 ?>

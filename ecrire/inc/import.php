@@ -336,11 +336,11 @@ function import_affiche_javascript($taille)
 	$max_time = ini_get('max_execution_time')*1000;
 	$t = _T('info_recharger_page');
 	$t = "
-<input type='text' size='10' name='taille' value='$taille' />
-<input type='text' class='forml' name='recharge' value='$t' />";
+<input type='text' size='10' name='taille' id='taille' value='$taille' />
+<input type='text' class='forml' name='recharge' id='recharge' value='$t' />";
 	echo debut_boite_alerte(),
 	  "<span style='color: black;' class='verdana1 spip_large'><b>",  _T('info_base_restauration'),  "</b></span>",
-	  generer_form_ecrire('', $t, " style='text-align: center' name='progression' method='get' "),
+	  generer_form_ecrire('', $t, " style='text-align: center' name='progression' id='progression' method='get' "),
 	  fin_boite_alerte(),
 	  "<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"",
 	  self(),

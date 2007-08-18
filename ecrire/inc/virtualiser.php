@@ -17,14 +17,14 @@ include_spip('inc/actions');
 function inc_virtualiser_dist($id_article, $virtuel, $script, $args){
 	global $spip_lang_right;
 
-	$res = "<input type='text' name='virtuel' class='formo spip_xx-small' value='"
+	$res = "<input type='text' name='virtuel' id ='virtuel$id_article' class='formo spip_xx-small' value='"
 	. ($virtuel ? "" : "http://")
 	. $virtuel
 	. "' size='40' /><br />\n"
-	. "<span class='verdana1 spip_x-small'>(<b>"
+	. "<span class='verdana1 spip_x-small'>(<label for='virtuel$id_article'><b>"
 	. _T('texte_article_virtuel')
 	. (!$virtuel ? '' : " $virtuel")
-	. "&nbsp;:</b> "
+	. "&nbsp;:</b></label> "
 	.  _T('texte_reference_mais_redirige')
 	. ")</span><br />";
 
