@@ -34,112 +34,104 @@
 
 			<br class="nettoyeur" />
 
-			<div class="contre-encart">
+            [(#REM) Articles de la rubrique ]
+            <B_articles>
+            <div class="liste-articles">
+                #ANCRE_PAGINATION
+                <h2><:articles_rubrique:></h2>
+                <ul>
+                    <BOUCLE_articles(ARTICLES) {id_rubrique} {par date}{inverse} {pagination}>
+                    <li>
+                        <h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
+                        <small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
+                    </li>
+                    </BOUCLE_articles>
+                </ul>
+                [<p class="pagination">(#PAGINATION)</p>]
+            </div>
+            </B_articles>
 
-				[(#REM) Articles de la rubrique ]
-				<B_articles>
-				<div class="liste-articles">
-					#ANCRE_PAGINATION
-					<h2><:articles_rubrique:></h2>
-					<ul>
-						<BOUCLE_articles(ARTICLES) {id_rubrique} {par date}{inverse} {pagination}>
-						<li>
-							<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
-							<small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
-						</li>
-						</BOUCLE_articles>
-					</ul>
-					[<p class="pagination">(#PAGINATION)</p>]
-				</div>
-				</B_articles>
+            [(#REM) Si aucun article, affiche un plan de la rubrique ]
+            <B_sous_rubriques>
+            <div class="rubriques">
+                <h2 class="menu-titre"><:sous_rubriques:></h2>
+                <ul>
+                    <BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}>
+                    <li>
+                        <a href="#URL_RUBRIQUE">[(#TITRE)]</a>
 
-				[(#REM) Si aucun article, affiche un plan de la rubrique ]
-				<B_sous_rubriques>
-				<div class="rubriques">
-					<h2 class="menu-titre"><:sous_rubriques:></h2>
-					<ul>
-						<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}>
-						<li>
-							<a href="#URL_RUBRIQUE">[(#TITRE)]</a>
+                        [(#REM) Une boucle recursive pour le mini plan]
+                        <B_miniplan>
+                        <ul>
+                            <BOUCLE_miniplan(RUBRIQUES) {id_parent} {par num titre, titre}>
+                            <li>
+                                <a href="#URL_RUBRIQUE">[(#TITRE)]</a>
+                                <BOUCLE_m2(BOUCLE_miniplan)></BOUCLE_m2>
+                            </li>
+                            </BOUCLE_miniplan>
+                        </ul>
+                        </B_miniplan>
 
-							[(#REM) Une boucle recursive pour le mini plan]
-							<B_miniplan>
-							<ul>
-								<BOUCLE_miniplan(RUBRIQUES) {id_parent} {par num titre, titre}>
-								<li>
-									<a href="#URL_RUBRIQUE">[(#TITRE)]</a>
-									<BOUCLE_m2(BOUCLE_miniplan)></BOUCLE_m2>
-								</li>
-								</BOUCLE_miniplan>
-							</ul>
-							</B_miniplan>
+                    </li>
+                    </BOUCLE_sous_rubriques>
+                </ul>
+                </div>
+            </B_sous_rubriques>
 
-						</li>
-						</BOUCLE_sous_rubriques>
-					</ul>
-					</div>
-				</B_sous_rubriques>
-
-				<//B_articles>[(#REM) supprimer pour toujours avoir le miniplan]
+            <//B_articles>[(#REM) supprimer pour toujours avoir le miniplan]
 
 
-				[(#REM) Documents joints a la rubrique ]
-				<B_documents_joints>
-				<div id="documents_joints">
-					<h2><:titre_documents_joints:></h2>
-					<ul>
-						<BOUCLE_documents_joints(DOCUMENTS) {id_rubrique} {mode=document} {par num titre, date} {doublons}>
-						<li>
-							<div class="spip_doc_titre"><a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a> <small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small></div>
-							[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
-						</li>
-						</BOUCLE_documents_joints>
-					</ul>
-				</div>
-				</B_documents_joints>
+            [(#REM) Documents joints a la rubrique ]
+            <B_documents_joints>
+            <div id="documents_joints">
+                <h2><:titre_documents_joints:></h2>
+                <ul>
+                    <BOUCLE_documents_joints(DOCUMENTS) {id_rubrique} {mode=document} {par num titre, date} {doublons}>
+                    <li>
+                        <div class="spip_doc_titre"><a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a> <small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small></div>
+                        [<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
+                    </li>
+                    </BOUCLE_documents_joints>
+                </ul>
+            </div>
+            </B_documents_joints>
 
-			</div><!-- fin contre-encart -->
+            [(#REM) Breves du secteur ]
+            <B_breves>
+            <div class="breves">
+                #ANCRE_PAGINATION
+                <h2 class="menu-titre"><:breves:></h2>
+                [<p class="pagination">(#PAGINATION)</p>]
+                <ul>
+                    <BOUCLE_breves(BREVES) {id_secteur} {par date}{inverse} {pagination 5}>
+                    <li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_BREVE">#TITRE</a></li>
+                    </BOUCLE_breves>
+                </ul>
+            </div>
+            </B_breves>
 
-			<div class="encart">
+            [(#REM) Sites de la rubrique ]
+            <B_sites>
+            <div class="syndic">
+                <h2 class="menu-titre"><:sur_web:></h2>
+                <ul>
+                    <BOUCLE_sites(SITES) {id_rubrique} {par nom_site}>
+                    <li><a href="[(#ID_SYNDIC|generer_url_site)]">#NOM_SITE</a>
+                        <B_syndic>
+                        <ul>
+                            <BOUCLE_syndic(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {0,3}>
+                            <li><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></li>
+                            </BOUCLE_syndic>
+                        </ul>
+                        </B_syndic>
+                    </li>
+                    </BOUCLE_sites>
+                </ul>
+            </div>
+            </B_sites>
 
-				[(#REM) Breves du secteur ]
-				<B_breves>
-				<div class="breves">
-					#ANCRE_PAGINATION
-					<h2 class="menu-titre"><:breves:></h2>
-					[<p class="pagination">(#PAGINATION)</p>]
-					<ul>
-						<BOUCLE_breves(BREVES) {id_secteur} {par date}{inverse} {pagination 5}>
-						<li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_BREVE">#TITRE</a></li>
-						</BOUCLE_breves>
-					</ul>
-				</div>
-				</B_breves>
-
-				[(#REM) Sites de la rubrique ]
-				<B_sites>
-				<div class="syndic">
-					<h2 class="menu-titre"><:sur_web:></h2>
-					<ul>
-						<BOUCLE_sites(SITES) {id_rubrique} {par nom_site}>
-						<li><a href="[(#ID_SYNDIC|generer_url_site)]">#NOM_SITE</a>
-							<B_syndic>
-							<ul>
-								<BOUCLE_syndic(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {0,3}>
-								<li><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></li>
-								</BOUCLE_syndic>
-							</ul>
-							</B_syndic>
-						</li>
-						</BOUCLE_sites>
-					</ul>
-				</div>
-				</B_sites>
-
-				[(#REM) Proposer un site ]
-				#FORMULAIRE_SITE
-
-			</div><!-- fin encart -->
+            [(#REM) Proposer un site ]
+            #FORMULAIRE_SITE
 
 			[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
 		</div><!-- fin contenu -->

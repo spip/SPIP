@@ -27,101 +27,93 @@
 				<p class="soustitre">&#171;&nbsp;(#RECHERCHE)&nbsp;&#187;</p>
 			</div>]
 
-			<div class="contre-encart">
+            [(#REM) Articles trouves ]
+            <B_articles>
+            <div class="liste-articles">
+                #ANCRE_PAGINATION
+                <h2><:articles:></h2>
+                <ul>
+                    <BOUCLE_articles(ARTICLES) {recherche} {par points} {inverse} {pagination}>
+                    <li>
+                    <h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
+                    <small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small>
+                    </li>
+                    </BOUCLE_articles>
+                </ul>
+                [<p class="pagination">(#PAGINATION)</p>]
+            </div>
+            </B_articles>
 
-				[(#REM) Articles trouves ]
-				<B_articles>
-				<div class="liste-articles">
-					#ANCRE_PAGINATION
-					<h2><:articles:></h2>
-					<ul>
-						<BOUCLE_articles(ARTICLES) {recherche} {par points} {inverse} {pagination}>
-						<li>
-						<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
-						<small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small>
-						</li>
-						</BOUCLE_articles>
-					</ul>
-					[<p class="pagination">(#PAGINATION)</p>]
-				</div>
-				</B_articles>
+            [(#REM) Rubriques trouvees ]
+            <B_rubriques>
+            <div class="rubriques">
+                #ANCRE_PAGINATION
+                <h2 class="menu-titre"><:rubriques:></h2>
+                [<p class="pagination">(#PAGINATION)</p>]
+                <ul>
+                    <BOUCLE_rubriques(RUBRIQUES) {recherche} {par points}{inverse} {pagination 5}>
+                    <li><a href="#URL_RUBRIQUE">#TITRE</a></li>
+                    </BOUCLE_rubriques>
+                </ul>
+            </div>
+            </B_rubriques>
 
-			</div><!-- fin contre-encart -->
+            [(#REM) Mots-cles trouves ]
+            <B_mots>
+            <div class="divers">
+                #ANCRE_PAGINATION
+                <h2 class="menu-titre"><:mots_clefs:></h2>
+                [<p class="pagination">(#PAGINATION)</p>]
+                <ul>
+                    <BOUCLE_mots(MOTS) {recherche} {par points}{inverse} {pagination 5}>
+                    <li><a href="#URL_MOT">#TITRE</a></li>
+                    </BOUCLE_mots>
+                </ul>
+            </div>
+            </B_mots>
 
-			<div class="encart">
+            [(#REM) Breves trouvees ]
+            <B_breves>
+            <div class="breves">
+                #ANCRE_PAGINATION
+                <h2 class="menu-titre"><:breves:></h2>
+                [<p class="pagination">(#PAGINATION)</p>]
+                <ul>
+                    <BOUCLE_breves(BREVES) {recherche} {par points}{inverse} {pagination 5}>
+                    <li>[(#DATE|affdate_court) : ]<a href="#URL_BREVE">#TITRE</a></li>
+                    </BOUCLE_breves>
+                </ul>
+            </div>
+            </B_breves>
 
-				[(#REM) Rubriques trouvees ]
-				<B_rubriques>
-				<div class="rubriques">
-					#ANCRE_PAGINATION
-					<h2 class="menu-titre"><:rubriques:></h2>
-					[<p class="pagination">(#PAGINATION)</p>]
-					<ul>
-						<BOUCLE_rubriques(RUBRIQUES) {recherche} {par points}{inverse} {pagination 5}>
-						<li><a href="#URL_RUBRIQUE">#TITRE</a></li>
-						</BOUCLE_rubriques>
-					</ul>
-				</div>
-				</B_rubriques>
+            [(#REM) Messages trouves ]
+            <B_messages>
+            <div class="forums">
+                #ANCRE_PAGINATION
+                <h2 class="menu-titre"><:messages_forum:></h2>
+                [<p class="pagination">(#PAGINATION)</p>]
+                <ul>
+                    <BOUCLE_messages(FORUMS) {recherche} {par points}{inverse} {pagination 5}>
+                    <li>[(#DATE|affdate_court) : ]<a href="#URL_FORUM">#TITRE</a></li>
+                    </BOUCLE_messages>
+                </ul>
+            </div>
+            </B_messages>
 
-				[(#REM) Mots-cles trouves ]
-				<B_mots>
-				<div class="divers">
-					#ANCRE_PAGINATION
-					<h2 class="menu-titre"><:mots_clefs:></h2>
-					[<p class="pagination">(#PAGINATION)</p>]
-					<ul>
-						<BOUCLE_mots(MOTS) {recherche} {par points}{inverse} {pagination 5}>
-						<li><a href="#URL_MOT">#TITRE</a></li>
-						</BOUCLE_mots>
-					</ul>
-				</div>
-				</B_mots>
-
-				[(#REM) Breves trouvees ]
-				<B_breves>
-				<div class="breves">
-					#ANCRE_PAGINATION
-					<h2 class="menu-titre"><:breves:></h2>
-					[<p class="pagination">(#PAGINATION)</p>]
-					<ul>
-						<BOUCLE_breves(BREVES) {recherche} {par points}{inverse} {pagination 5}>
-						<li>[(#DATE|affdate_court) : ]<a href="#URL_BREVE">#TITRE</a></li>
-						</BOUCLE_breves>
-					</ul>
-				</div>
-				</B_breves>
-
-				[(#REM) Messages trouves ]
-				<B_messages>
-				<div class="forums">
-					#ANCRE_PAGINATION
-					<h2 class="menu-titre"><:messages_forum:></h2>
-					[<p class="pagination">(#PAGINATION)</p>]
-					<ul>
-						<BOUCLE_messages(FORUMS) {recherche} {par points}{inverse} {pagination 5}>
-						<li>[(#DATE|affdate_court) : ]<a href="#URL_FORUM">#TITRE</a></li>
-						</BOUCLE_messages>
-					</ul>
-				</div>
-				</B_messages>
-
-				[(#REM) Sites web trouves ]
-				<B_sites>
-				<div class="syndic">
-					#ANCRE_PAGINATION
-					<h2 class="menu-titre"><:sites_web:></h2>
-					[<p class="pagination">(#PAGINATION)</p>]
-					<ul>
-						<BOUCLE_sites(SITES) {recherche} {par points}{inverse} {pagination 5}>
-						<li><a href="[(#ID_SYNDIC|generer_url_site)]">#NOM_SITE</a></li>
-						</BOUCLE_sites>
-					</ul>
-				</div>
-				</B_sites>
-
-			</div><!-- fin encart -->
-
+            [(#REM) Sites web trouves ]
+            <B_sites>
+            <div class="syndic">
+                #ANCRE_PAGINATION
+                <h2 class="menu-titre"><:sites_web:></h2>
+                [<p class="pagination">(#PAGINATION)</p>]
+                <ul>
+                    <BOUCLE_sites(SITES) {recherche} {par points}{inverse} {pagination 5}>
+                    <li><a href="[(#ID_SYNDIC|generer_url_site)]">#NOM_SITE</a></li>
+                    </BOUCLE_sites>
+                </ul>
+            </div>
+            </B_sites>
+            
 		</div><!-- fin contenu -->
 
 		[(#REM) Menu de navigation laterale ]
