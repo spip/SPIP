@@ -34,9 +34,9 @@ function configuration_previsualiseur_dist()
 
 			$res .= "<input type='checkbox' name='preview[]' value='$v' id='preview$v'"
 			. ($vu ? " checked='checked'" : '')
-			. " /> "
+			. " /> <label for='preview$v'>"
 			. ($vu ? "<b>$lib</b>" : $lib)
-			.  "<br />";
+			.  "</label><br />";
 		}
 	}
 

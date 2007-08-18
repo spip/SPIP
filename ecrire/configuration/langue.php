@@ -33,9 +33,10 @@ function configuration_langue_dist()
  $res = ajax_action_post('configurer',
 			 'langue',
 			 'config_lang',
-			 '',
+			 "<label for='changer_langue_site'>" .
 			 _T('info_langue_principale') .
-			 " : <select name='changer_langue_site' class='fondl'>\n$res</select>\n",
+			 "</label>" .
+			 " : <select name='changer_langue_site' id='changer_langue_site' class='fondl'>\n$res</select>\n",
 			 '',
 			 " class='fondo'");
 
