@@ -36,7 +36,7 @@
 
 			[(#REM) Articles de l'auteur ]
 			<B_articles>
-            <div class="liste-articles">
+            <div class="menu articles">
                 #ANCRE_PAGINATION
                 <h2><:articles_auteur:></h2>
                 <ul>
@@ -63,15 +63,15 @@
 	
 			[(#REM) Autres auteurs ]
 			<B_auteurs>
-			<div class="forums">
+			<div class="menu forums">
 				#ANCRE_PAGINATION
-				<h2 class="menu-titre"><:info_auteurs:></h2>
-				[<p class="pagination">(#PAGINATION)</p>]
+				<h2><:info_auteurs:></h2>
 				<ul>
 					<BOUCLE_auteurs(AUTEURS) {par nom} {pagination 20}>
 					<li><a href="#URL_AUTEUR"[ class="(#EXPOSE)"]>[(#NOM|couper{80})]</a></li>
 					</BOUCLE_auteurs>
 				</ul>
+				[<p class="pagination">(#PAGINATION)</p>]
 			</div>
 			</B_auteurs>
 

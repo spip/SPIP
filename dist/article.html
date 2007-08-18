@@ -66,7 +66,7 @@
 
 			[(#REM) Autres documents joints a l'article ]
 			<B_documents_joints>
-			<div id="documents_joints">
+			<div class="menu" id="documents_joints">
 				<h2><:titre_documents_joints:></h2>
 				<ul>
 					<BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {par num titre, date} {doublons}>
@@ -89,7 +89,7 @@
 
 			[(#REM) Forum de l'article ]
 			<a href="#forum" name="forum" id="forum"></a>
-			[<h2 class="forum-repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:></a></h2>]
+			[<span class="forum-repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:></a></span>]
 			<INCLURE{fond=inc-forum}{id_article}>
 
 		</div><!-- fin contenu -->
@@ -103,8 +103,8 @@
 
 			[(#REM) Articles dans la meme rubrique ]
 			<B_articles_rubrique>
-			<div class="breves">
-				<h2 class="menu-titre"><a href="#URL_RUBRIQUE"><:meme_rubrique:></a></h2>
+			<div class="menu breves">
+				<h2><a href="#URL_RUBRIQUE"><:meme_rubrique:></a></h2>
 				<ul>
 					<BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {par date}{inverse} {0,10}>
 					<li><a href="#URL_ARTICLE"[ class="(#EXPOSE)"]>#TITRE</a></li>

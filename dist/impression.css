@@ -53,7 +53,7 @@ h3.spip { text-align: center; font-weight: bold; margin: 1.4em; font-size: 1.15e
 ---------------------------------------------- */
 q, blockquote { font-family: Georgia, Times, serif; }
 
-.lien, blockquote.spip, .spip_poesie, .spip_cadre, .liste-articles li .texte { background: #FFF; margin: 1em; padding: 1em; border: 1pt dotted #CCC; }
+.lien, blockquote.spip, .spip_poesie, .spip_cadre, .articles li .texte { background: #FFF; margin: 1em; padding: 1em; border: 1pt dotted #CCC; }
 
 /*  Messages de forums
 ---------------------------------------------- */
@@ -64,10 +64,10 @@ ul .forum-message { background: #EEE; border: 1pt solid #CCC; padding: 1em; marg
 
 /* Listes d'articles
 ----------------------------------------------- */
-.liste-articles li { margin-bottom: 1em; padding-top: 0.3em; }
-.liste-articles li .titre { font-size: 1.03em; font-weight: bold; }
-.liste-articles li p { margin: 0; padding: 0; }
-.liste-articles li small { display: block; font-size: 0.71em; }
+.articles li { margin-bottom: 1em; padding-top: 0.3em; }
+.articles li .titre { font-size: 1.03em; font-weight: bold; }
+.articles li p { margin: 0; padding: 0; }
+.articles li small { display: block; font-size: 0.71em; }
 
 /*  Plan du site
 ---------------------------------------------- */
