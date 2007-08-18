@@ -62,7 +62,7 @@ function exec_valider_xml_dist()
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 
 	echo $commencer_page($titre);
-	$onfocus = '<input type="text" size="70" value="' .$url_aff .'" name="var_url" onfocus="'.$onfocus . '" />';
+	$onfocus = '<input type="text" size="70" value="' .$url_aff .'" name="var_url" id="var_url" onfocus="'.$onfocus . '" />';
 	$onfocus = generer_form_ecrire('valider_xml', $onfocus, " method='get'");
 
 	echo "<h1>", $titre, '</h1>',

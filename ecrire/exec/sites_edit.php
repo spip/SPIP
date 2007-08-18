@@ -86,9 +86,10 @@ function exec_sites_edit_dist()
 	if ($new == 'oui'
 	AND ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0)){
 		$form_auto = "<span class='verdana1 spip_small'>"
+		. "<label for='url'>"
 		. _T('texte_referencement_automatique')
-		. "</span>"
-		. "\n<div style='text-align: right'><input type=\"text\" name=\"url\" class='fondl' size='40' value=\"http://\" />\n"
+		. "</label></span>"
+		. "\n<div style='text-align: right'><input type=\"text\" name=\"url\" id=\"url\" class='fondl' size='40' value=\"http://\" />\n"
 		. "<input type=\"submit\"  value=\""
 		. _T('bouton_ajouter')
 		. "\" class='fondo' />\n"
@@ -131,12 +132,14 @@ function exec_sites_edit_dist()
 	// selecteur de rubriques
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
 
-	$form .= _T('info_nom_site_2')
-	. "<br />\n<input type='text' class='formo' name='nom_site' value=\""
+	$form .= "<label for='nom_site'>" . _T('info_nom_site_2') . "</label>"
+	. "<br />\n<input type='text' class='formo' name='nom_site' id='nom_site' value=\""
 	. $nom_site
 	. "\" size='40' />\n<br />"
+	. "<label for='url_site'>"
 	. _T('entree_adresse_site')
-	. "<br />\n<input type='text' class='formo' name='url_site' value=\""
+	. "</label>"
+	. "<br />\n<input type='text' class='formo' name='url_site' id='url_site' value=\""
 	. $url_site
 	. "\" size='40' /><br />\n"
 	. debut_cadre_couleur($logo, true, "", _T('entree_interieur_rubrique'))
@@ -144,9 +147,10 @@ function exec_sites_edit_dist()
 	. fin_cadre_couleur(true)
 	. "\n<br />"
 	."<b>"
+	/ "<label for='descriptif'>"
 	. _T('entree_description_site')
-	. "</b><br />\n"
-	. "<textarea name='descriptif' rows='8' class='forml' cols='40' >"
+	. "</label></b><br />\n"
+	. "<textarea name='descriptif' id='descriptif' rows='8' class='forml' cols='40' >"
 	. entites_html($descriptif)
 	. "</textarea>"
 	. "\n<input type='hidden' name='syndication_old' value=\""
@@ -174,21 +178,22 @@ function exec_sites_edit_dist()
 		. "</label></b>"
 		. aide("rubsyn")
 		. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>\n<tr><td style='width: 10px;'>&nbsp;</td>\n<td>"
+		. "<label for='url_syndic'>"
 		. _T('entree_adresse_fichier_syndication')
-		. "<br />\n";
+		. "</label><br />\n";
 
 		if (strlen($url_syndic) < 8) $url_syndic = "http://";
 
 	// cas d'une liste de flux detectee par feedfinder : menu
 		if (preg_match(',^select: (.+),', $url_syndic, $regs)) {
 			$feeds = explode(' ',$regs[1]);
-			$form .= "<select name='url_syndic'>\n";
+			$form .= "<select name='url_syndic' id='url_syndic'>\n";
 			foreach ($feeds as $feed) {
 				$form .= '<option value="'.entites_html($feed).'">'.$feed."</option>\n";
 			}
 			$form .= "</select>\n";
 		} else {
-			$form .= "<input type='text' class='formo' name='url_syndic' value=\"$url_syndic\" size='40' />\n";
+			$form .= "<input type='text' class='formo' name='url_syndic' id='url_syndic' value=\"$url_syndic\" size='40' />\n";
 		}
 		$form .= "</td></tr></table>";
 		$form .= fin_cadre_enfonce(true);
