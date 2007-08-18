@@ -446,7 +446,7 @@ function import_alloue_id_rubrique($id_parent, $titre, $v) {
 		    'type' => 'id_rubrique',
 		    'ajout' => 1),
 	  $GLOBALS['tables_principales']['spip_translate']);
-	else spip_log("Impossible d'inserer dans spip_articles");
+	else spip_log("Impossible d'inserer dans spip_rubriques");
 	return $r;
 }
 ?>

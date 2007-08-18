@@ -360,8 +360,37 @@ function spip_mysql_insert($table, $champs, $valeurs, $desc='') {
 }
 
 // http://doc.spip.org/@spip_mysql_update
-function spip_mysql_update($table, $exp, $where='') {
-	spip_mysql_query("UPDATE $table SET $exp" . ($where ? " WHERE $where" : ''));
+function spip_mysql_update($table, $champs, $where='', $desc='') {
+	$r = '';
+	foreach ($champs as $champ => $val)
+		$r .= ',' . $champ . "=$val";
+	if ($r = substr($r, 1))
+		spip_mysql_query("UPDATE $table SET $r" . ($where ? " WHERE $where" : ''));
+}
+
+// idem, mais les valeurs sont des constantes a mettre entre apostrophes
+// sauf les expressions de date lorsqu'il s'agit de fonctions SQL (NOW etc)
+// http://doc.spip.org/@spip_mysql_update
+function spip_mysql_updateq($table, $champs, $where='', $desc=array()) {
+
+	if (!$champs) return;
+	if (!$desc) {
+		global $tables_principales;
+		include_spip('base/serial');
+		$desc = $tables_principales[$table];
+	}
+	$fields = $desc['field'];
+	$r = '';
+	foreach ($champs as $champ => $val) {
+		$t = $fields[$champ];
+		if (((strpos($t, 'datetime')!==0)
+		     AND (strpos($t, 'TIMESTAMP')!==0))
+		OR strpos("012345678", $val[0]) !==false)
+			$val = _q($val);
+		$r .= ',' . $champ . '=' . $val;
+	}
+	$r = "UPDATE $table SET " . substr($r, 1) . ($where ? " WHERE $where" : '');
+	spip_mysql_query($r);
 }
 
 // http://doc.spip.org/@spip_mysql_delete

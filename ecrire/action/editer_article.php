@@ -25,17 +25,17 @@ function action_editer_article_dist() {
 		$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 		if (!($id_parent AND $id_auteur))
 			redirige_par_entete(generer_url_ecrire());
-		$id_article = insert_article($id_parent);
+		if (($id_article = insert_article($id_parent)) > 0)
 		
 		# cf. GROS HACK ecrire/inc/getdocument
 		# rattrapper les documents associes a cet article nouveau
 		# ils ont un id = 0-id_auteur
 
-		spip_query("UPDATE spip_documents_articles SET id_article = $id_article WHERE id_article = ".(0-$id_auteur));
+			spip_query("UPDATE spip_documents_articles SET id_article = $id_article WHERE id_article = ".(0-$id_auteur));
 	} 
 
 	// Enregistre l'envoi dans la BD
-	$err = articles_set($id_article);
+	if ($id_article > 0) $err = articles_set($id_article);
 
 	$redirect = parametre_url(urldecode(_request('redirect')),
 		'id_article', $id_article, '&') . $err;
@@ -276,13 +276,9 @@ function editer_article_heritage($id_article, $id_rubrique, $statut, $champs, $c
 		if ($row) $champs['lang='] = $langue;
 	}
 
-	$update = array();
-	foreach ($champs as $champ => $val)
-		$update[] = $champ . '=' . _q($val);
+	if (!$champs) return;
 
-	if (!count($update)) return;
-
-	spip_query("UPDATE spip_articles SET ".join(', ', $update)." WHERE id_article=$id_article");
+	sql_updateq('spip_articles', $champs, "id_article=$id_article");
 
 	// Changer le statut des rubriques concernees 
 
@@ -330,7 +326,7 @@ function article_referent ($id_article, $c) {
 	if ($id_lier == 0) {
 		spip_query("UPDATE spip_articles SET id_trad = $lier_trad WHERE id_article IN ($lier_trad, $id_article)");
 	}
-	// sinon on ajouter notre article dans le groupe
+	// sinon ajouter notre article dans le groupe
 	else {
 		spip_query("UPDATE spip_articles SET id_trad = $id_lier WHERE id_article = $id_article");
 	}
