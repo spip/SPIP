@@ -358,7 +358,7 @@ function spip_pg_update($table, $champs, $where='', $desc=array()) {
 
 // idem, mais les valeurs sont des constantes a mettre entre apostrophes
 // sauf les expressions de date lorsqu'il s'agit de fonctions SQL (NOW etc)
-// http://doc.spip.org/@spip_mysql_update
+// http://doc.spip.org/@spip_pg_updateq
 function spip_pg_updateq($table, $champs, $where='', $desc=array()) {
 
 	if (!$champs) return;
@@ -439,6 +439,7 @@ function spip_pg_replace($table, $values, $desc) {
 // Explicite les conversions de Mysql d'une valeur $v de type $t
 // Dans le cas d'un champ date, pas d'apostrophe, c'est une syntaxe ad hoc
 
+// http://doc.spip.org/@spip_pg_cite
 function spip_pg_cite($v, $t)
 {
 	if ((strpos($t, 'datetime')===0) OR (strpos($t, 'TIMESTAMP')===0)) {

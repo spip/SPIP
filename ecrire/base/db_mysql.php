@@ -370,7 +370,7 @@ function spip_mysql_update($table, $champs, $where='', $desc='') {
 
 // idem, mais les valeurs sont des constantes a mettre entre apostrophes
 // sauf les expressions de date lorsqu'il s'agit de fonctions SQL (NOW etc)
-// http://doc.spip.org/@spip_mysql_update
+// http://doc.spip.org/@spip_mysql_updateq
 function spip_mysql_updateq($table, $champs, $where='', $desc=array()) {
 
 	if (!$champs) return;
