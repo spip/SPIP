@@ -49,9 +49,9 @@ function exec_admin_effacer_dist()
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'admin_effacer'),'data'=>''));	  
 	
 	echo debut_droite('',true);
-	echo debut_cadre_trait_couleur('',true,'',_T('texte_effacer_base'));
+	echo debut_cadre_trait_couleur('',true,'',"<label for='reinstall'>"._T('texte_effacer_base')."</label>");
 
-	$res = "\n<input type='hidden' name='reinstall' value='non' />";
+	$res = "\n<input type='hidden' name='reinstall' id='reinstall' value='non' />";
 
 	$res = generer_form_ecrire('delete_all', $res, '', _T('bouton_effacer_tout'));
 

@@ -79,8 +79,8 @@ function exec_admin_tech_dist()
 	"</p>";
 	
 	$file = nom_fichier_dump();
-	$nom = "\n<input name='nom_sauvegarde' size='40' value='$file' />";
-	$znom = "\n<input name='znom_sauvegarde' size='40' value='$file' />";
+	$nom = "\n<input name='nom_sauvegarde' id='nom_sauvegarde' size='40' value='$file' />";
+	$znom = "\n<input name='znom_sauvegarde' id='znom_sauvegarde' size='40' value='$file' />";
 	
 	if ($flag_gz) {
 	
@@ -100,10 +100,11 @@ function exec_admin_tech_dist()
 	  "</b>$nom<b>.xml</b></li></ul>\n";
 	}
 	else {
-	  $res .= "\n<p>" .
+	  $res .= "\n<p><label for='gz'>" .
 	    _T('texte_sauvegarde_compressee' .
 	       array('fichier'=>'<br /><b>' . $dir_dump . "</b>$nom<b>.xml</b>")) .
-	    "\n<input type='hidden' name='gz' value='0' /></p>";
+	       "</label>" .
+	    "\n<input type='hidden' name='gz' id='gz' value='0' /></p>";
 	}
 
 	$res .= "\n<input type='hidden' name='reinstall' value='non' />";
@@ -151,18 +152,20 @@ function exec_admin_tech_dist()
 		  '</p>' .
 		_T('entree_nom_fichier', array('texte_compresse' => $texte_compresse)) .
 		$liste_choix .
-		"\n<li style='list-style:none;'><input type='radio' name='archive' value='' />" .
-		"\n<span class='spip_x-small'><input type='text' name='archive_perso' value='$fichier_defaut' size='30' /></span></li></ul>";
+		"\n<li style='list-style:none;'><input type='radio' name='archive' id='archive' value='' />" .
+		"\n<span class='spip_x-small'><input type='text' name='archive_perso' id='archive_perso' value='$fichier_defaut' size='30' /></span></li></ul>";
 
 		// restauration partielle / fusion
 		$res .=
 		  debut_cadre_enfonce('',true) .
 		"<div>" .
-		 "<label><input name='insertion' type='checkbox' />&nbsp; ". 
+		 "<input name='insertion' id='insertion' type='checkbox' />&nbsp; <label for='insertion'>". 
 		  _T('sauvegarde_fusionner') .
 		  '</label><br />' .
+		  "<label ='url_site'>" .
 		  _T('sauvegarde_url_origine') .
-		  " &nbsp; <input name='url_site' type='text' size='25' />" .
+		  "</label>" .
+		  " &nbsp; <input name='url_site' id='url_site' type='text' size='25' />" .
 		  '</div>' .
 		  fin_cadre_enfonce(true);
 
