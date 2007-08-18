@@ -24,12 +24,13 @@
 			<h1>#NOM_SITE_SPIP</h1>
 			[<div class="chapo">(#DESCRIPTIF_SITE_SPIP)</div>]
 
-			[(#REM) Les deux derniers articles ]
+			[(#REM) Derniers articles ]
 			<B_articles_recents>
 			<div class="menu articles">
+                [(#ANCRE_PAGINATION)]
 				<h2><:derniers_articles:></h2>
 				<ul>
-					<BOUCLE_articles_recents(ARTICLES) {par date}{inverse} {0,2} {doublons}>
+					<BOUCLE_articles_recents(ARTICLES) {par date}{inverse} {pagination 5}>
 					<li>
 						[(#LOGO_ARTICLE_RUBRIQUE|#URL_ARTICLE|image_reduire{150,100})]
 						[<p class="surtitre">(#SURTITRE)</p>]
@@ -41,27 +42,9 @@
 					</li>
 					</BOUCLE_articles_recents>
 				</ul>
+                [<p class="pagination">(#PAGINATION)</p>]
 			</div>
 			</B_articles_recents>
-
-			<br class="nettoyeur" />
-
-			[(#REM) Articles suivants ]
-			<B_articles>
-            <div class="menu articles">
-                [(#ANCRE_PAGINATION)]
-                [(#ENV{debut_articles}|?{'',' '})<h2><:articles_recents:></h2>]
-                <ul>
-                    <BOUCLE_articles(ARTICLES) {par date}{inverse} {doublons} {pagination}>
-                    <li>
-                        <h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
-                        <small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
-                    </li>
-                    </BOUCLE_articles>
-                </ul>
-                [<p class="pagination">(#PAGINATION)</p>]
-            </div>
-			</B_articles>
             
             [(#REM) Breves ]
             <B_breves>
