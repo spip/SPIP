@@ -168,7 +168,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 
 	$onglet_proprietes = array(_L('Propri&eacute;t&eacute;s'),
 		($dater ? $dater($id_breve, $flag_editable, $statut, 'breve', 'breves_voir', $date_heure) : "")
-	  . $editer_mot('breve', $id_breve, $cherche_mot, $select_groupe, $flag_editable)
+	  . $editer_mot('breve', $id_breve, $cherche_mot, $select_groupe, $flag_editable, true)
 	  . ((($GLOBALS['meta']['multi_articles'] == 'oui') AND ($flag_editable)) ? langue_breve($id_breve,$row):"")
 	  . pipeline('affiche_milieu',array(
 			'args'=>array('exec'=>'breves_voir','id_breve'=>$id_breve),

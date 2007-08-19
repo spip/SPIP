@@ -179,7 +179,7 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 
 	$onglet_proprietes = array(_L('Propri&eacute;t&eacute;s'),
 		($dater ? $dater($id_syndic, $flag_editable, $statut, 'syndic', 'sites', $date_heure) : "")
-	  . $editer_mot('syndic', $id_syndic,  $cherche_mot,  $select_groupe, $flag_editable)
+	  . $editer_mot('syndic', $id_syndic,  $cherche_mot,  $select_groupe, $flag_editable, true)
 	  . ($flag_administrable ? options_moderation($row) : "")
 	  . pipeline('affiche_milieu',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''))
 	  );

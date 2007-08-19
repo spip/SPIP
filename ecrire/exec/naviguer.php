@@ -151,7 +151,7 @@ function exec_naviguer_dist()
 
 	$onglet_proprietes = array(_L('Proprietes'),
 		/// Mots-cles
-		($editer_mot ? $editer_mot('rubrique', $id_rubrique,  $cherche_mot,  $select_groupe, $flag_editable):"")
+		($editer_mot ? $editer_mot('rubrique', $id_rubrique,  $cherche_mot,  $select_groupe, $flag_editable, true):"")
 		. langue_naviguer($id_rubrique, $id_parent, $flag_editable)
 		. pipeline('affiche_milieu',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''))
 	);
