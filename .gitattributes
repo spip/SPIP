@@ -195,6 +195,7 @@ dist/images/suivi-forum-24.gif -text
 dist/images/suivi-petition-24.gif -text
 dist/images/supprimer.gif -text
 dist/images/synchro-24.gif -text
+dist/images/tab.png -text
 dist/images/telecharger.gif -text
 dist/images/test.gif -text
 dist/images/test.jpg -text
@@ -237,9 +238,12 @@ dist/javascript/bgiframe.js -text
 dist/javascript/dragdrop_interface.js -text
 dist/javascript/form.js -text
 dist/javascript/jquery.js -text
+dist/javascript/jquery.tabs.min.js -text
 dist/javascript/multilang.js -text
 dist/javascript/pause.js -text
 dist/jquery.js.html -text
+dist/jquery.tabs-ie.css -text
+dist/jquery.tabs.css -text
 dist/minipres.css -text
 dist/modeles/article_mots.html -text
 dist/modeles/article_traductions.html -text
@@ -257,6 +261,13 @@ dist/out.gif -text
 dist/polices/dustismo-license.txt -text svneol=unset#application/octet-stream
 dist/polices/dustismo.ttf -text
 dist/polices/dustismo_bold.ttf -text
+dist/prive/article_infos.html -text
+dist/prive/article_infos_fonctions.php -text
+dist/prive/breve_infos.html -text
+dist/prive/breve_infos_fonctions.php -text
+dist/prive/rubrique_infos.html -text
+dist/prive/site_infos.html -text
+dist/prive/site_infos_fonctions.php -text
 dist/puce.gif -text
 dist/puce_rtl.gif -text
 dist/spip.png -text
@@ -586,6 +597,8 @@ ecrire/inc/informer.php -text
 ecrire/inc/informer_auteur.php -text
 ecrire/inc/instituer_article.php -text
 ecrire/inc/instituer_auteur.php -text
+ecrire/inc/instituer_breve.php -text
+ecrire/inc/instituer_site.php -text
 ecrire/inc/joindre.php -text
 ecrire/inc/lang_liste.php -text
 ecrire/inc/legender.php -text

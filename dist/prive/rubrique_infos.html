@@ -1,0 +1,7 @@
+<BOUCLE_rub(RUBRIQUES){id_rubrique=#ENV{id}}{statut?}>
+<div class='infos'>
+<div class='numero'><:titre_numero_rubrique:><p>#ID_RUBRIQUE</p></div>
+<BOUCLE_docs(DOCUMENTS){id_article}></BOUCLE_docs><p class='nb_docs'>#TOTAL_BOUCLE <:documents:></p><//B_docs>
+[<p class='forums'>(#ENV{n_forums,''}|?{' '})[(#VAL{icone_suivi_forum}|_T{#ARRAY{nb_forums,#ENV{n_forums}}})]</p>]
+</div>
+</BOUCLE_rub>

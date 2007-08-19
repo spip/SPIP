@@ -39,6 +39,23 @@ function hr($color, $retour = false) {
 //
 // Cadres
 //
+function afficher_onglets_pages($onglets){
+	static $onglet_compteur = 0;
+	$res = "";
+	$corps = "";
+	$cpt = 0;
+	$actif = 0;
+	foreach($onglets as $id=>$contenu){
+		$cpt++;
+		$disabled = strlen(trim($contenu[1]))?"":" class='tabs-disabled'";
+		if (!$actif && !$disabled) $actif = $cpt;
+		$res .= "<li$disabled><a href='#$id'><span>" . $contenu[0] . "</span></a></li>";
+		$corps .= "<div id='$id' class='tabs-container'>" . $contenu[1] . "<br class='nettoyeur' /></div>";
+	}
+	$onglet_compteur++;
+	return "<div class='boite_onglets' id='boite_onglet_$onglet_compteur'><ul class='tabs-nav'>$res</ul>$corps</div>"
+	. "<script type='text/javascript'>$('#boite_onglet_$onglet_compteur').tabs(".($actif?"$actif,":"")."{ fxAutoHeight: true });</script>";
+}
 
 // http://doc.spip.org/@debut_cadre
 function debut_cadre($style, $icone = "", $fonction = "", $titre = "", $id="", $class="", $padding=true) {
@@ -622,8 +639,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 		. afficher_forum_4($compteur_forum, $nb_forum, $i)
 		. "\n<td style='width: 100%' valign='top'>";
 		if ($compteur_forum == 1) 
-			$res .= '<br />'
-			  . debut_cadre_forum(forum_logo($statut), true, "", $titre_boite);
+			$res .= debut_cadre_forum(forum_logo($statut), true, "", $titre_boite);
 		else $res .= debut_cadre_thread_forum("", true, "", $titre_boite);
 	}
 
@@ -689,7 +705,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	if ($statut == "off" OR $statut == "prop") $res .= "</div>";
 
 	if ($spip_display != 4) {
-		if ($compteur_forum == 1) $res .= fin_cadre_forum(true);
+		if ($compteur_forum == 1) $res .= fin_cadre_forum(true) . '<br />';
 		else $res .= fin_cadre_thread_forum(true);
 		$res .= "</td></tr></table>\n";
 	} else $res .= "</li>\n";
@@ -917,11 +933,12 @@ function icone_inline($texte, $lien, $fond, $fonction="", $align=""){
 	global $spip_display;
 
 	if ($fonction == "supprimer.gif") {
-		$style = 'icone36-danger';
+		$style = 'icone36 danger';
 	} else {
 		$style = 'icone36';
 		if (strlen($fonction) < 3) $fonction = "rien.gif";
 	}
+	$style .= " " . substr(basename($fond),0,-4);
 
 	if ($spip_display == 1){
 		$hauteur = 20;
@@ -961,7 +978,7 @@ function icone_inline($texte, $lien, $fond, $fonction="", $align=""){
 	else $atts = '';
 	
 	if ($align) $align = "float: $align; ";
-	$icone = "\n<a style='width: 72px;$align' class='$style'"
+	$icone = "\n<a style='$align' class='$style'"
 	. $atts
 	. "\nhref='"
 	. $lien
@@ -1023,33 +1040,12 @@ function f_boite_infos($flux) {
 	$id = $args['id'];
 	$row = $args['row'];
 
-	if ($type == 'article') {
-		$boite .= "\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>" 
-		. _T('info_numero_article')
-		.  "<br /><span class='spip_xx-large'>"
-		.  $id
-		.  '</span></div>';
-	}
+	unset($args['row']);
+	include_spip('public/assembler');
+	$boite .= recuperer_fond("prive/{$type}_infos",$args);
 
-	$boite .= voir_en_ligne($type, $id, $row['statut'], 'racine-24.gif', false);
-
-	// statistiques
-	if ($type == 'article') {
-		if ($row['statut'] == 'publie'
-		AND $row['visites'] > 0
-		AND $GLOBALS['meta']["activer_statistiques"] != "non"
-		AND autoriser('voirstats', $type, $id)) {
-			$boite .= icone_horizontale(_T('icone_evolution_visites', array('visites' => $row['visites'])), generer_url_ecrire("statistiques_visites","id_article=$id"), "statistiques-24.gif","rien.gif", false);
-		}
-	}
-
-	// revisions d'articles
-	if ($type == 'article') {
-		if (($GLOBALS['meta']["articles_versions"]=='oui')
-		AND $row['id_version']>1
-		AND autoriser('voirrevisions', $type, $id))
-			$boite .= icone_horizontale(_T('info_historique_lien'), generer_url_ecrire("articles_versions","id_article=$id"), "historique-24.gif", "rien.gif", false);
-	}
+	if (!in_array($type,array('article','rubrique','site','breve')))
+		$boite .= voir_en_ligne($type, $id, $row['statut'], 'racine-24.gif', false);
 
 	$flux['data'] = $boite;
 	return $flux;
@@ -1074,7 +1070,7 @@ function gros_titre($titre, $ze_logo='', $aff=true){
 
 // http://doc.spip.org/@debut_grand_cadre
 function debut_grand_cadre($return=false){
-	$res =  "\n<br /><br />\n<div class='table_page'>\n";
+	$res =  "\n<div class='table_page'>\n";
 	if ($return) return $res; else echo_log('debut_grand_cadre',$res);
 }
 
@@ -1383,6 +1379,8 @@ function afficher_hierarchie($id_rubrique) {
 	$parents = '';
 	$style1 = "$spip_lang_left center no-repeat; padding-$spip_lang_left: 15px";
 	$style2 = "margin-$spip_lang_left: 15px;";
+	$tag = "a";
+	$on = ' on';
 
 	while ($id_rubrique) {
 
@@ -1393,28 +1391,33 @@ function afficher_hierarchie($id_rubrique) {
 		$id_parent = $res['id_parent'];
 		changer_typo($res['lang']);
 
-		$logo = (!$id_parent) ? "secteur-12.gif"
+		$class = (!$id_parent) ? "secteur"
 		: (acces_restreint_rubrique($id_rubrique)
-		? "admin-12.gif" : "rubrique-12.gif");
+		? "admin" : "rubrique");
 
-		$parents = "\n<div class='verdana3' "
-		. http_style_background($logo, $style1)
-		. "><a href='"
-		. generer_url_ecrire("naviguer","id_rubrique=$id_rubrique")
-		. "'>"
-		. typo(sinon($res['titre'], _T('ecrire:info_sans_titre')))
-		. "</a></div>\n<div style='$style2'>"
+		$parents = "<ul><li><span><em> &gt; </em><$tag class='$class$on'"
+		. ($tag=='a'?" href='". generer_url_ecrire("naviguer","id_rubrique=$id_rubrique")."'":"")
+		. ">"
+		. supprimer_numero(typo(sinon($res['titre'], _T('ecrire:info_sans_titre'))))
+		. "</$tag></span>"
 		. $parents
-		. "</div>";
+		. "</li></ul>";
 
 		$id_rubrique = $id_parent;
+		$tag = 'a';
+		$on = '';
 	}
 
-	return "\n<div class='verdana3' " .
-		  http_style_background("racine-site-12.gif", $style1). 
-		  "><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'><b>"._T('lien_racine_site')."</b></a>".aide ("rubhier")."</div>\n<div style='$style2'>".$parents."</div>";
+	return "\n<ul id='chemin' class='verdana3' dir='".lang_dir()."'" 
+	  //. http_style_background("racine-site-12.gif", $style1)
+	  . "><li><span><$tag class='racine$on'" 
+		. ($tag=='a'?" href='". generer_url_ecrire("naviguer","id_rubrique=$id_rubrique")."'":"")
+	  . ">"._T('lien_racine_site')."</$tag>"
+ 	  . aide ("rubhier")
+ 	  . "</span>"
+	  . $parents
+ 	  . "</li></ul>";
 }
-
 
 // http://doc.spip.org/@enfant_rub
 function enfant_rub($collection){
@@ -1510,7 +1513,9 @@ function afficher_enfant_rub($id_rubrique, $bouton=false, $return=false) {
 	global  $spip_lang_left,$spip_lang_right, $spip_display;
 	
 	$les_enfants = enfant_rub($id_rubrique);
-	$n = strlen($les_enfants);
+	$n = strlen(trim($les_enfants));
+	
+	if (!$n && !$bouton) return "";
 	
 	if (!($x = strpos($les_enfants,"\n<div class='enfants'>",round($n/2)))) {
 		$les_enfants2="";
@@ -1523,11 +1528,11 @@ function afficher_enfant_rub($id_rubrique, $bouton=false, $return=false) {
 		}
 	}
 
-	$res = "\n<div>&nbsp;</div>"
-	. "<div style='float:$spip_lang_left;width:49%;position:relative;'>"
+	$res = 
+	"<div class='gauche'>"
 	. $les_enfants
 	. "</div>"
-	. "<div style='float:$spip_lang_right;width:49%;position:relative;'>"
+	. "<div class='droite'>"
 	. $les_enfants2
 	. "</div>"
 	. "&nbsp;"
@@ -1597,7 +1602,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af =
 	else
 		return '';
 
-	return icone_horizontale($message, generer_url_action('redirect', "id_$type=$id&var_mode=$en_ligne"), $image, "rien.gif", $af);
+	return icone_inline($message, generer_url_action('redirect', "id_$type=$id&var_mode=$en_ligne"), $image, "rien.gif", $GLOBALS['spip_lang_left']);
 
 }
 

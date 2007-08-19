@@ -1,0 +1,11 @@
+<BOUCLE_art(ARTICLES){id_article=#ENV{id}}{statut?}>
+<div class='infos'>
+<div class='numero'><:info_numero_article:><p>#ID_ARTICLE</p></div>
+[(#ID_ARTICLE|instituer_article{#ID_RUBRIQUE,#STATUT})]
+<p class='origine'>[(#DATE|affdate)][<br /><:par_auteur:><span class='lesauteurs'> (#LESAUTEURS|couper{150})]</span><p>
+<BOUCLE_docs(DOCUMENTS){id_article}></BOUCLE_docs><p class='nb_docs'>#TOTAL_BOUCLE <:documents:></p><//B_docs>
+<p class='statistiques'>Cet article a une popularite de #POPULARITE et a re&ccedil;u #VISITES visites</p>
+<p class='forums'>xx messages de forums</p>
+<p class='signatues'>xx signatures</p>
+</div>
+</BOUCLE_art>

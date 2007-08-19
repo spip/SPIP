@@ -35,7 +35,7 @@ body {
 	scrollbar-track-color: #GET{foncee};
 	scrollbar-arrow-color: #GET{foncee};
 }
-body, body * { font-family: Verdana, Geneva, Sans, sans-serif; }
+body, body * { font-size:100%;font-family: Verdana, Geneva, Sans, sans-serif; }
 
 /* Espaceur de blocs */
 .nettoyeur { clear: both; margin: 0; padding: 0; border: none; height: 0; line-height: 1px; font-size: 1px; }
@@ -44,17 +44,26 @@ body, body * { font-family: Verdana, Geneva, Sans, sans-serif; }
 .invisible { position: absolute; top: -3000em; height: 1%; }
 .none { display: none; }
 
+#page {font-size:small;}
 /* ecran etroit*/
-#conteneur,.table_page {margin:0 auto;text-align:left;width:750px;}
+#conteneur,.table_page {clear:both;margin-left:auto;margin-right:auto;text-align:left;width:750px;}
 #navigation {float:left;width:200px;min-height:100px;}
-#contenu {float:left;margin-left:35px;width:500px;}
+#contenu {float:left;margin-left:30px;width:505px;}
 #extra {float:left;width:200px;}
 
 /* ecran large*/
-.large #conteneur,.large .table_page {margin:0 auto;text-align:left;width:950px;}
+.large #conteneur,.large .table_page {margin-left:auto;margin-right:auto;text-align:left;width:950px;}
 .large #navigation {float:left;width:200px;}
 .large #contenu {float:left;margin-left:17px;width:540px;}
 .large #extra {float:right;width:170px;}
+
+div.table_page {margin-top:1em;}
+#contenu {font-size:small;}
+
+ul#chemin {font-size:0.9em;}
+ul#chemin li {list-style:none;float:#GET{left};}
+ul#chemin,ul#chemin ul,ul#chemin li {margin:0;padding:0;}
+ul#chemin ul,ul#chemin li,ul#chemin li span {display:block;float:#GET{left};}
 
 h1 { 
 	color: #GET{foncee};
@@ -379,64 +388,57 @@ a.icone26:hover img {
 }
 
 
-.icone36, icone36-danger {
+.icone36 {
 	border: none;
-	padding: 0;
+	padding: 5px 0;
 	margin: 0;
 	text-align: center;
 	text-decoration: none;
+	font-size: x-small;
+	width:72px;
 }
-.icone36 a, .icone36 a:hover, icone36-danger a, .icone36-danger a:hover {
+.icone36 a, .icone36 a,a.icone36, a.icone36:hover {
 	text-decoration: none;
 }
-.icone36 a img, .icone36 img {
-	margin: 0; 
+.icone36 a img, a.icone36 img {
+	margin: 0 auto;
 	display: inline;
 	padding: 4px;
 	background-color: #eee;
 	border: 2px solid #GET{foncee};
 }
-.icone36 a:hover img {
-	margin: 0; 
-	display: inline;
-	padding: 4px;
+.icone36 a:hover img,a.icone36:hover img {
 	background-color: #fff;
 	border: 2px solid #666;
 }
-.icone36-danger img {
-	margin: 0; 
-	display: inline;
-	padding: 3px;
+.icone36.danger img {
 	background-color: #fff;
 	border: 2px solid #ff9999;
 }
-.icone36-danger a:hover img {
-	margin: 0; 
-	display: inline;
-	padding: 3px;
+.icone36.danger a:hover img,a.icone36.danger:hover img {
 	background-color: #fff;
 	border: 2px solid red;
 }
-.icone36-danger span {
-	font-weight: bold;
-	font-size: 10px;
-	color: red; display: block; margin: 2px;
-	width: 100%
-}
 .icone36 span {
 	font-weight: bold;
-	font-size: 10px;
 	color: #GET{foncee}; 
 	display: block; 
-	margin: 2px;
-	width: 100%
-}
-.icone36 a:hover span {
-	font-weight: bold;
-	font-size: 10px;
-	color: #000; display: block; margin: 2px;
+	margin: 2px auto;
 	width: 100%;
+	height:3em;
 }
+.icone36 a:hover span,a.icone36:hover span {
+	color: #000; 
+}
+.icone36.danger span {
+	color: #ff9999;
+}
+.icone36.danger a:hover span,a.icone36.danger:hover span {
+	color: red; 
+}
+a.icone36.historique-24 {width:90px;}
+a.icone36.suivi-forum-24 {width:100px;}
+
 
 
 /* Icones 48 * 48 et 24 * 24 */
@@ -1922,3 +1924,64 @@ div.puce_article_popup, span.puce_article_popup {
 div.puce_breve_popup, span.puce_breve_popup {
 	width: 27px; 
 }
+
+[(#INCLURE{dist/jquery.tabs.css})]
+.boite_onglets {clear:both;margin-top:15px;}
+.tabs-nav a { color: #GET{foncee};}
+/* generique */
+
+#contenu #voir span.label {margin-top:1em;font-size:x-small;display:block;clear:both;font-style:italic;}
+#contenu #voir span p { margin-top:0;}
+#navigation .infos .numero {font-size:x-small;font-weight:bold;text-align:center;}
+#navigation .infos .numero p {
+	font-size:x-large;margin:5px 0;color:#333;
+	font-family: verdana, helvetica, arial, sans;
+}
+#contenu .bandeau_actions {border-top:1px solid #eee;border-bottom:1px solid #eee;margin:5px 0;clear:both;}
+#contenu .bandeau_actions a:hover {background:#fff;}
+#contenu .logo_titre {float:#GET{right};margin:5px 0;margin-#GET{left}:5px;}
+
+ul.instituer {
+	/*float:#GET{right};*/
+	text-align:#GET{left};
+	border-top:1px solid #eee;
+	border-bottom:1px solid #eee;
+	margin :0;
+	padding:5px 0;
+	/*font-size:0.9em;*/
+}
+ul.instituer li {list-style:none;margin:0;padding:0;}
+ul.instituer li ul {margin:0;padding:0;}
+ul.instituer li ul li a { display:block;}
+ul.instituer li ul li img {margin:1px 1px -1px;margin-#GET{right}:5px;visibility:hidden;border:1px solid #f8f7f3;}
+ul.instituer li.selected img,ul.instituer li a:hover img {visibility:visible;}
+ul.instituer a:hover {background:#eee;}
+ul.instituer li.prepa.selected a,ul.instituer li.prepa a:hover {background:#fff;}
+ul.instituer li.prop.selected a,ul.instituer li.prop a:hover {background:#f89058;color:#fff;}
+ul.instituer li.publie.selected a,ul.instituer li.publie a:hover {background:#9dba00;color:#fff;}
+ul.instituer li.poubelle.selected a,ul.instituer li.poubelle a:hover {background:#000;}
+ul.instituer li.refuse.selected a,ul.instituer li.refuse a:hover {background:#ff0000;color:#fff;}
+
+#voir.tabs-container {background:#fff; padding:5px;border:1px solid #999;}
+
+/* exec/articles */
+.articles h1 {color:#000;font-size:large;margin-top:5px;}
+#voir .article_prop {text-align:center;font-weight:bold;font-size:small;color:red;}
+
+/* exec/naviguer */
+.naviguer h1 {color:#000;font-size:large;margin-top:5px;}
+#contenu div.gauche {width:49%;float:#GET{left};}
+#contenu div.droite {width:49%;float:#GET{right};}
+
+/* exec/sites */
+.sites h1 {color:#000;font-size:large;margin-top:5px;}
+#voir .site_prop {text-align:center;font-weight:bold;font-size:small;color:red;}
+#voir .site_syndique {font-weight:bold;text-align:center;}
+#voir .site_syndique img {vertical-align:middle;}
+#voir .date_syndic {margin-top:1em;}
+#voir .mise_a_jour_syndic { float:#GET{right};}
+
+/* exec/breves_voir */
+.breves h1 {color:#000;font-size:large;margin-top:5px;}
+#voir .breve_prop {text-align:center;font-weight:bold;font-size:small;color:red;}
+#props .langue {text-align:center;}
