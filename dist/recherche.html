@@ -93,7 +93,7 @@
                 <h2><:messages_forum:></h2>
                 <ul>
                     <BOUCLE_messages(FORUMS) {recherche} {par points}{inverse} {pagination 5}>
-                    <li>[(#DATE|affdate_court) : ]<a href="#URL_FORUM">#TITRE</a></li>
+                    <li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_FORUM">[(#TEXTE|couper{80})]</a></li>
                     </BOUCLE_messages>
                 </ul>
                 [<p class="pagination">(#PAGINATION)</p>]

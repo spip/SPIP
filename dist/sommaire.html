@@ -33,11 +33,9 @@
 					<BOUCLE_articles_recents(ARTICLES) {par date}{inverse} {pagination 5}>
 					<li>
 						[(#LOGO_ARTICLE_RUBRIQUE|#URL_ARTICLE|image_reduire{150,100})]
-						[<p class="surtitre">(#SURTITRE)</p>]
 						<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
-						[<p class="soustitre">(#SOUSTITRE)</p>]
 						<small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
-						[<div class="#EDIT{intro} texte introduction">(#INTRODUCTION)</div>]
+						[<div class="#EDIT{intro} introduction">(#INTRODUCTION)</div>]
 						<br class="nettoyeur" />
 					</li>
 					</BOUCLE_articles_recents>
@@ -65,7 +63,7 @@
                 <p><:messages_recents:></p>
                 <ul>
                     <BOUCLE_forums_liens(FORUMS) {plat} {par date}{inverse} {0,8}>
-                    <li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_FORUM">#TITRE</a></li>
+                    <li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_FORUM">[(#TEXTE|couper{80})]</a></li>
                     </BOUCLE_forums_liens>
                 </ul>
             </div>

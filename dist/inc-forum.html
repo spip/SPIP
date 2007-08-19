@@ -1,7 +1,7 @@
 [(#PARAMETRES_FORUM|?) Cette balise (invisible) provoque le recalcul du forum la premiere fois qu'un message est poste (cf. inc/invalideur). ]
 
 [(#REM) Nombre total de messages ]
-<BOUCLE_decompte(FORUMS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {plat}></BOUCLE_decompte>[<h2 class="forum-decompte">(#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE,''})
+<BOUCLE_decompte(FORUMS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {plat}></BOUCLE_decompte>[<h2>(#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE,''})
 [(#TOTAL_BOUCLE|=={1}|?{<:message:>,<:messages_forum:>})]</h2>]<//B_decompte>
 
 [(#REM) Messages du forum ]
@@ -26,7 +26,7 @@
 
 		<B_forums_fils>
 		<ul>
-			<BOUCLE_forums_fils(FORUMS){id_parent}{par date}>
+			<BOUCLE_forums_fils(FORUMS) {id_parent} {par date}>
 
 			<li>
 				<div class="forum-message">
@@ -41,7 +41,7 @@
 					</div>
 				</div>
 
-				<BOUCLE_Forums_Boucle(boucle_forums_fils)></BOUCLE_Forums_Boucle>
+				<BOUCLE_forums_boucle(boucle_forums_fils)></BOUCLE_forums_boucle>
 
 			</li>
 
