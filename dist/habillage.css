@@ -90,9 +90,6 @@ span.spip_documents_center { display: block; margin-top: 1em; }
 .spip_doc_titre { font-weight: bold; font-size: 0.8em; margin-left: auto; margin-right: auto; }
 .spip_doc_descriptif { clear: both; font-size: 0.8em; margin-left: auto; margin-right: auto; }
 
-/* Images typographiques (via image_typo), URL a revoir... */
-.format_png { behavior: url(win_png.htc); }
-
 
 /* Blocs et elements du contenu
 ---------------------------------------------- */
@@ -181,7 +178,7 @@ ul.forum, ul.forum ul { list-style: none; }
 .forum-fil ul { display: block; margin: 0; padding: 0; margin-left: 1em; }
 .forum-chapo .forum-titre, .forum-chapo .forum-titre a { display: block; margin: 0; padding: 0; font-weight: bold; color: #333; }
 .forum-texte { margin: 0; padding: 0.5em 1em; color: #333; }
-.forum-texte .forum-lien {}
+.forum-texte .hyperlien {}
 .forum-texte .repondre { margin: 0; padding: .1em 0; text-align: right; }
 
 /* Boite d'un forum : eclaircissement progressif des bords */
