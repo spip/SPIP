@@ -108,7 +108,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 		include_spip('inc/extra');
 	
 	$actions = 
-		voir_en_ligne('article', $id_article, $statut_article, 'racine-24.gif', false)
+		voir_en_ligne('breve', $id_breve, $statut, 'racine-24.gif', false)
 	  . ($flag_editable ? icone_inline(
 			// TODO -- _L("Fil a travaille sur cette breve il y a x minutes")
 			!$modif ? _T('icone_modifier_breve')
