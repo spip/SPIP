@@ -39,6 +39,7 @@ function hr($color, $retour = false) {
 //
 // Cadres
 //
+// http://doc.spip.org/@afficher_onglets_pages
 function afficher_onglets_pages($onglets){
 	static $onglet_compteur = 0;
 	$res = "";

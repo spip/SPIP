@@ -201,6 +201,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	  . fin_page();
 }
 
+// http://doc.spip.org/@langue_breve
 function langue_breve($id_breve, $row){
 	$id_rubrique = $row['id_rubrique'];
 	//

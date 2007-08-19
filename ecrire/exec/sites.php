@@ -210,6 +210,7 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 	    'discuter'=>$onglet_discuter));
 }
 
+// http://doc.spip.org/@options_moderation
 function options_moderation($row) {
 	$id_syndic = $row['id_syndic'];
 	$moderation = $row['moderation'];
@@ -274,6 +275,7 @@ function options_moderation($row) {
 	 .  fin_cadre_relief(true);
 }
 
+// http://doc.spip.org/@choix_feed
 function choix_feed($id_syndic, $id_rubrique, $nom_site, $row) {
 	$url_site = $row["url_site"];
 	$url_syndic = $row["url_syndic"];
