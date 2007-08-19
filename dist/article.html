@@ -71,8 +71,8 @@
 					<BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {par num titre, date} {doublons}>
 					<li>
 						<strong><a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a></strong>
-                        <small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small>
-						[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
+                        <small>(#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)])</small>
+                        #DESCRIPTIF
 					</li>
 					</BOUCLE_documents_joints>
 				</ul>
@@ -92,7 +92,7 @@
 			<INCLURE{fond=inc-forum}{id_article}>
 			[<p class="forum-repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:></a></p>]
 
-		</div><!-- fin contenu -->
+		</div><!--#contenu-->
 
 
 		[(#REM) Menu de navigation laterale ]
@@ -103,7 +103,7 @@
 
 			[(#REM) Articles dans la meme rubrique ]
 			<B_articles_rubrique>
-			<div class="menu breves">
+			<div class="menu">
 				<h2><a href="#URL_RUBRIQUE"><:meme_rubrique:></a></h2>
 				<ul>
 					<BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {par date}{inverse} {0,10}>
@@ -116,14 +116,14 @@
 			[(#REM) Menu de navigation mots-cles ]
 			#MODELE{article_mots}
 
-		</div><!-- fin navigation -->
+		</div><!--#navigation-->
 
-	</div><!-- fin conteneur -->
+	</div><!--#conteneur-->
 
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 
-</div><!-- fin page -->
+</div><!--#page-->
 </body>
 </html>
 </BOUCLE_article_principal>

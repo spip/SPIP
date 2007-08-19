@@ -39,7 +39,7 @@
                 <ul>
                     <BOUCLE_articles(ARTICLES) {id_mot} {par popularite}{inverse} {pagination 10}>
                     <li>
-                    <h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
+                    <h3><a href="#URL_ARTICLE">#TITRE</a></h3>
                     <small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small></li>
                     </BOUCLE_articles>
                 </ul>
@@ -61,7 +61,7 @@
 
             [(#REM) Breves liees au mot-cle ]
             <B_breves>
-            <div class="menu breves">
+            <div class="menu">
                 <h2><:breves:></h2>
                 <ul>
                     <BOUCLE_breves(BREVES) {id_mot} {par titre}>
@@ -85,7 +85,7 @@
 
             [(#REM) Sites web lies au mot-cle ]
             <B_sites>
-            <div class="menu syndic">
+            <div class="menu">
                 <h2><:sites_web:></h2>
                 <ul>
                     <BOUCLE_sites(SITES) {id_mot} {par nom_site}>
@@ -97,7 +97,7 @@
 
 			[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
 
-		</div><!-- fin contenu -->
+		</div><!--#contenu-->
 
 		[(#REM) Menu de navigation laterale ]
 		<div id="navigation">
@@ -107,7 +107,7 @@
 
 			[(#REM) Menu de navigation mots-cles : les autres mots cles du meme groupe ]
 			<B_mots_freres>
-			<div class="menu divers">
+			<div class="menu">
 				#ANCRE_PAGINATION
 				<h2><:mots_clefs_meme_groupe:></h2>
 				<ul>
@@ -121,7 +121,7 @@
 
 			[(#REM) Menu de navigation mots-cles : les autres groupes avec un lien sur le premier mot du groupe ]
 			<B_groupes_freres>
-			<div class="menu divers">
+			<div class="menu">
 				<h2><:autres_groupes_mots_clefs:></h2>
 				<ul>
 					<BOUCLE_groupes_freres(GROUPES_MOTS) {par titre} {doublons}>
@@ -133,14 +133,14 @@
 			</div>
 			</B_groupes_freres>
 
-		</div><!-- fin navigation -->
+		</div><!--#navigation-->
 
-	</div><!-- fin conteneur -->
+	</div><!--#conteneur-->
 
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 
-</div><!-- fin page -->
+</div><!--#page-->
 </body>
 </html>
 </BOUCLE_mot_principal>

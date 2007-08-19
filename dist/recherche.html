@@ -23,32 +23,15 @@
 		<div id="contenu">
 
 			[<div class="cartouche">
-				<h1><:resultats_recherche:></h1>
-				<p class="soustitre">&#171;&nbsp;(#RECHERCHE)&nbsp;&#187;</p>
+				<p class="surtitre"><:resultats_recherche:></p>
+				<h1>&#171;&nbsp;(#RECHERCHE)&nbsp;&#187;</h1>
 			</div>]
-
-            [(#REM) Articles trouves ]
-            <B_articles>
-            <div class="menu articles">
-                #ANCRE_PAGINATION
-                <h2><:articles:></h2>
-                <ul>
-                    <BOUCLE_articles(ARTICLES) {recherche} {par points} {inverse} {pagination}>
-                    <li>
-                    <h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
-                    <small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small>
-                    </li>
-                    </BOUCLE_articles>
-                </ul>
-                [<p class="pagination">(#PAGINATION)</p>]
-            </div>
-            </B_articles>
 
             [(#REM) Rubriques trouvees ]
             <B_rubriques>
             <div class="menu rubriques">
                 #ANCRE_PAGINATION
-                <h2><:rubriques:></h2>
+                <h2><:rubriques:> (#GRAND_TOTAL)</h2>
                 <ul>
                     <BOUCLE_rubriques(RUBRIQUES) {recherche} {par points}{inverse} {pagination 5}>
                     <li><a href="#URL_RUBRIQUE">#TITRE</a></li>
@@ -58,11 +41,25 @@
             </div>
             </B_rubriques>
 
+            [(#REM) Articles trouves ]
+            <B_articles>
+            <div class="menu articles">
+                #ANCRE_PAGINATION
+                <h2><:articles:> (#GRAND_TOTAL)</h2>
+                <ul>
+                    <BOUCLE_articles(ARTICLES) {recherche} {par points}{inverse} {pagination}>
+                    <li><a href="#URL_ARTICLE">#TITRE</a></h3></li>
+                    </BOUCLE_articles>
+                </ul>
+                [<p class="pagination">(#PAGINATION)</p>]
+            </div>
+            </B_articles>
+
             [(#REM) Mots-cles trouves ]
             <B_mots>
-            <div class="menu divers">
+            <div class="menu">
                 #ANCRE_PAGINATION
-                <h2><:mots_clefs:></h2>
+                <h2><:mots_clefs:> (#GRAND_TOTAL)</h2>
                 <ul>
                     <BOUCLE_mots(MOTS) {recherche} {par points}{inverse} {pagination 5}>
                     <li><a href="#URL_MOT">#TITRE</a></li>
@@ -74,15 +71,15 @@
 
             [(#REM) Breves trouvees ]
             <B_breves>
-            <div class="menu breves">
+            <div class="menu">
                 #ANCRE_PAGINATION
-                <h2><:breves:></h2>
-                [<p class="pagination">(#PAGINATION)</p>]
+                <h2><:breves:> (#GRAND_TOTAL)</h2>
                 <ul>
                     <BOUCLE_breves(BREVES) {recherche} {par points}{inverse} {pagination 5}>
-                    <li>[(#DATE|affdate_court) : ]<a href="#URL_BREVE">#TITRE</a></li>
+                    <li><a href="#URL_BREVE">#TITRE</a></li>
                     </BOUCLE_breves>
                 </ul>
+                [<p class="pagination">(#PAGINATION)</p>]
             </div>
             </B_breves>
 
@@ -90,10 +87,10 @@
             <B_messages>
             <div class="menu forums">
                 #ANCRE_PAGINATION
-                <h2><:messages_forum:></h2>
+                <h2><:messages_forum:> (#GRAND_TOTAL)</h2>
                 <ul>
                     <BOUCLE_messages(FORUMS) {recherche} {par points}{inverse} {pagination 5}>
-                    <li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_FORUM">[(#TEXTE|couper{80})]</a></li>
+                    <li><a href="#URL_FORUM">[(#TEXTE|couper{80})]</a></li>
                     </BOUCLE_messages>
                 </ul>
                 [<p class="pagination">(#PAGINATION)</p>]
@@ -102,9 +99,9 @@
 
             [(#REM) Sites web trouves ]
             <B_sites>
-            <div class="menu syndic">
+            <div class="menu">
                 #ANCRE_PAGINATION
-                <h2><:sites_web:></h2>
+                <h2><:sites_web:> (#GRAND_TOTAL)</h2>
                 <ul>
                     <BOUCLE_sites(SITES) {recherche} {par points}{inverse} {pagination 5}>
                     <li><a href="[(#ID_SYNDIC|generer_url_site)]">#NOM_SITE</a></li>
@@ -114,7 +111,7 @@
             </div>
             </B_sites>
             
-		</div><!-- fin contenu -->
+		</div><!--#contenu-->
 
 		[(#REM) Menu de navigation laterale ]
 		<div id="navigation">
@@ -122,13 +119,13 @@
 			[(#REM) Menu de navigation par rubriques ]
 			<INCLURE{fond=inc-rubriques}>
 
-		</div><!-- fin navigation -->
+		</div><!--#navigation-->
 
-	</div><!-- fin conteneur -->
+	</div><!--#conteneur-->
 	
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 
-</div><!-- fin page -->
+</div><!--#page-->
 </body>
 </html>

@@ -33,7 +33,7 @@
 					<BOUCLE_articles_recents(ARTICLES) {par date}{inverse} {pagination 5}>
 					<li>
 						[(#LOGO_ARTICLE_RUBRIQUE|#URL_ARTICLE|image_reduire{150,100})]
-						<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
+						<h3><a href="#URL_ARTICLE">#TITRE</a></h3>
 						<small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
 						[<div class="#EDIT{intro} introduction">(#INTRODUCTION)</div>]
                         <br class="nettoyeur" />
@@ -46,7 +46,7 @@
             
             [(#REM) Breves ]
             <B_breves>
-            <div class="menu breves">
+            <div class="menu">
                 <h2><:dernieres_breves:></h2>
                 <ul>
                     <BOUCLE_breves(BREVES) {par date}{inverse} {0,5}>
@@ -71,7 +71,7 @@
 
             [(#REM) Sur le Web ]
             <B_syndic>
-            <div class="menu syndic">
+            <div class="menu">
                 <h2><:nouveautes_web:></h2>
                 <ul>
                 <BOUCLE_syndic(SYNDIC_ARTICLES) {age<180} {par date}{inverse} {0,6}>
@@ -81,7 +81,7 @@
             </div>
             </B_syndic>
 
-		</div><!-- fin contenu -->
+		</div><!--#contenu-->
 
 		[(#REM) Menu de navigation laterale ]
 		<div id="navigation">
@@ -92,13 +92,13 @@
 			[(#REM) Inscription au site ]
 			#FORMULAIRE_INSCRIPTION
 
-		</div><!-- fin navigation -->
+		</div><!--#navigation-->
 
-	</div><!-- fin conteneur -->
+	</div><!--#conteneur-->
 
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 
-</div><!-- fin page -->
+</div><!--#page-->
 </body>
 </html>
