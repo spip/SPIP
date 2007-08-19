@@ -105,6 +105,7 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 			)
 	));
 	echo fin_boite_info(true);
+	echo meme_rubrique($id_rubrique, $id_syndic, 'syndic');
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
 
