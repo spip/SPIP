@@ -3,7 +3,7 @@
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
 <title><:resultats_recherche:> - [(#NOM_SITE_SPIP|textebrut)]</title>
-
+<INCLURE{fond=inc-head}>
 <meta name="robots" content="none" />
 </head>
 
@@ -31,7 +31,7 @@
             #ANCRE_PAGINATION
             <h2><:rubriques:> (#GRAND_TOTAL)</h2>
             <ul>
-                
+                <BOUCLE_rubriques(RUBRIQUES) {recherche} {par points}{inverse} {pagination 5}>
                 <li><a href="#URL_RUBRIQUE">#TITRE</a></li>
                 </BOUCLE_rubriques>
             </ul>
@@ -45,7 +45,7 @@
             #ANCRE_PAGINATION
             <h2><:articles:> (#GRAND_TOTAL)</h2>
             <ul>
-                
+                <BOUCLE_articles(ARTICLES) {recherche} {par points}{inverse} {pagination}>
                 <li><a href="#URL_ARTICLE">#TITRE</a></h3></li>
                 </BOUCLE_articles>
             </ul>
@@ -59,7 +59,7 @@
             #ANCRE_PAGINATION
             <h2><:mots_clefs:> (#GRAND_TOTAL)</h2>
             <ul>
-                
+                <BOUCLE_mots(MOTS) {recherche} {par points}{inverse} {pagination 5}>
                 <li><a href="#URL_MOT">#TITRE</a></li>
                 </BOUCLE_mots>
             </ul>
@@ -73,7 +73,7 @@
             #ANCRE_PAGINATION
             <h2><:breves:> (#GRAND_TOTAL)</h2>
             <ul>
-                
+                <BOUCLE_breves(BREVES) {recherche} {par points}{inverse} {pagination 5}>
                 <li><a href="#URL_BREVE">#TITRE</a></li>
                 </BOUCLE_breves>
             </ul>
@@ -87,7 +87,7 @@
             #ANCRE_PAGINATION
             <h2><:messages_forum:> (#GRAND_TOTAL)</h2>
             <ul>
-                
+                <BOUCLE_messages(FORUMS) {recherche} {par points}{inverse} {pagination 5}>
                 <li><a href="#URL_FORUM">[(#TEXTE|couper{80})]</a></li>
                 </BOUCLE_messages>
             </ul>
@@ -101,7 +101,7 @@
             #ANCRE_PAGINATION
             <h2><:sites_web:> (#GRAND_TOTAL)</h2>
             <ul>
-                
+                <BOUCLE_sites(SITES) {recherche} {par points}{inverse} {pagination 5}>
                 <li><a href="[(#ID_SYNDIC|generer_url_site)]">#NOM_SITE</a></li>
                 </BOUCLE_sites>
             </ul>
@@ -126,8 +126,8 @@
     </div><!--#extra-->
 	
 	[(#REM) Pied de page ]
-	
-
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+    
 </div><!--#page-->
 </body>
 </html>
