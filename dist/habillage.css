@@ -59,7 +59,7 @@ body, #navigation, .formulaire_spip { font-family: Verdana, Tahoma, Geneva, sans
 /* Cartouche et titraille */
 h1 { margin-top: 0; font-size: 1.27em; font-weight: bold; color: #000; }
 h2 { margin: 0; padding: .2em; background: #666699; font-size: 1em; font-weight: normal; text-transform: uppercase; letter-spacing: .1em; }
-h2, h2 a, h2 a:hover { color: #eee; text-decoration: none; }
+h2, h2 a, h2 a:hover { color: #EEE; text-decoration: none; }
 h3 { font-family: Georgia, Times, serif; }
 h3.spip { margin: 2em 0 1em 0; font-weight: bold; border-bottom: 2px solid #CCCC66; color: #CCCC66; }
 
@@ -104,12 +104,13 @@ table.spip td { padding: .4em; vertical-align: top; }
 
 /* Images et documents */
 img { margin: 0; padding: 0; border: none; }
-.spip_logos { background: #eee; border: 4px solid #eee; }
+.spip_logos { background: #EEE; border: 4px solid #EEE; }
+a:hover .spip_logos { border-color: #CCC; }
 
 .spip_documents { text-align: center; line-height: normal; color: #666; }
-.spip_documents p { margin-top: 1px; margin-bottom: 2px; }
-.spip_documents_center { clear: both; width: 100%; margin: auto; }
-span.spip_documents_center { display: block; margin-top:1em; }
+/*.spip_documents p { margin-top: 1px; margin-bottom: 2px; }*/
+.spip_documents_center { clear: both; width: 100%; margin: 1em auto; }
+span.spip_documents_center { display: block; margin-top: 1em; }
 .spip_documents_left { float: left; margin-right: 15px; margin-bottom: 5px; }
 .spip_documents_right { float: right; margin-left: 15px; margin-bottom: 5px; }
 .spip_doc_titre { font-weight: bold; font-size: 0.8em; margin-left: auto; margin-right: auto; }
@@ -117,6 +118,11 @@ span.spip_documents_center { display: block; margin-top:1em; }
 
 /* Images typographiques (via image_typo), URL a revoir... */
 .format_png { behavior: url(win_png.htc); }
+
+/* Portfolio */
+#documents_portfolio { clear: both; margin-top: 1.4em; margin-bottom: 2em; text-align: center; }
+#documents_portfolio .spip_logos { margin: .1em; }
+#document_actif { margin-top: 1em; }
 
 
 /* Habillage des sommaires et menus
@@ -132,13 +138,13 @@ span.spip_documents_center { display: block; margin-top:1em; }
 .menu ul { margin: 0; padding: 0; list-style: none; }
 .menu ul li { margin: .2em 0; padding: .2em .1em; border-bottom: 1px solid #CCC; }
 .menu ul li ul { margin-left: 1em; }
-.menu ul li ul li { margin: 0; padding: 0; border: 0; }
+.menu ul li li { border: 0; }
 
 .pagination { clear: both; text-align: right; /*font-size: 0.90em;*/ }
 .pagination a { text-decoration: none; }
 
 /* Rubriques */
-.rubriques ul li { background: #eee; border: 0; text-transform: uppercase; }
+.rubriques ul li { background: #EEE; border: 0; text-transform: uppercase; }
 .rubriques ul li ul li { text-transform: none; }
 .rubriques a, .rubriques a:hover { text-decoration: none; }
 
@@ -148,10 +154,6 @@ span.spip_documents_center { display: block; margin-top:1em; }
 .articles ul li .spip_logos { float: right; clear: right; margin: 0 0 4px 16px; }
 .articles ul li .enclosures { float: right; text-align: right; max-width: 60%; margin: 0; }
 .articles ul li .introduction { margin-top: .5em; line-height: 1.4em; }
-
-/* Portfolio */
-#documents_portfolio { clear: both; margin-top: 1.4em; margin-bottom: 2em; }
-#document_actif { margin-top: 1em; }
 
 
 /* modeles par defaut */
