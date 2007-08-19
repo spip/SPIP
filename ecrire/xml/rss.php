@@ -20,8 +20,8 @@ function xml_rss_dist($rss, $intro = '') {
 	$u = '<'.'?xml version="1.0" encoding="'.$GLOBALS['meta']['charset'].'"?'.">\n";
 
 	$u .= '
-<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:thr="http://purl.org/syndication/thread/1.0">
-<channel>
+<rss version="2.0" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:thr="http://purl.org/syndication/thread/1.0">
+<channel xml:lang="'.texte_backend($intro['language']).'">
 	<title>'.texte_backend($intro['title']).'</title>
 	<link>'.texte_backend(url_absolue($intro['url'])).'</link>
 	<description>'.texte_backend($intro['description']).'</description>
@@ -33,7 +33,10 @@ function xml_rss_dist($rss, $intro = '') {
 		usort($rss, 'trier_par_date');
 		foreach ($rss as $article) {
 			$u .= '
-	<item>
+	<item';
+			if ($article['lang']) 
+				$u .= 'xml:lang="'.texte_backend($article['lang']).'"';
+			$u .= '>
 		<title>'.texte_backend($article['title']).'</title>
 		<link>'.texte_backend(url_absolue($article['url'])).'</link>
 		<guid isPermaLink="true">'.texte_backend(url_absolue($article['url'])).'</guid>

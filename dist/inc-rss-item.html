@@ -1,6 +1,6 @@
 #CACHE{3600}
 <BOUCLE_un_article(ARTICLES){id_article}>
-	<item>
+	<item[ xml:lang="(#LANG)"]>
 		<title>[(#TITRE|supprimer_numero|texte_backend)]</title>
 		<link>[(#URL_ARTICLE|url_absolue)]</link>
 		[<guid isPermaLink="true">(#URL_ARTICLE|url_absolue)</guid>]

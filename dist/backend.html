@@ -1,12 +1,13 @@
 #CACHE{3600}
-[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]
-<?xml version="1.0"[ encoding="(#CHARSET)"]?>
-<rss version="2.0"
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml 
+version="1.0"[ encoding="(#CHARSET)"]?>
+<rss version="2.0" [(#REM) rss 2.0.9)]
+	xmlns:xml="http://www.w3.org/XML/1998/namespace"
 	xmlns:dc="http://purl.org/dc/elements/1.1/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
 >
 
-<channel>
+<channel[ xml:lang="(#LANG)"]>
 	<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
 	<link>#URL_SITE_SPIP/</link>
 	[<description>(#DESCRIPTIF_SITE_SPIP|supprimer_tags|texte_backend)</description>]
