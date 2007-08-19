@@ -14,111 +14,113 @@
 	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}>
 
-	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
+	[(#REM) Contenu : poster un message dans le forum ]
+    <div id="conteneur">
+    <div id="contenu">
+    
+        [(#REM) Fil d'Ariane ]
+        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
+    
+            <BOUCLE_contexte_article(ARTICLES) {id_article}>
+            <BOUCLE_ariane_article(HIERARCHIE) {id_article}>
+            &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
+            </BOUCLE_ariane_article>
+            &gt; <a href="#URL_ARTICLE">[(#TITRE|couper{80})]</a>
+            </BOUCLE_contexte_article>
+            </B_contexte_article>
+    
+            <BOUCLE_contexte_breve(BREVES) {id_breve}>
+            <BOUCLE_ariane_breve(RUBRIQUES) {id_rubrique}>
+            &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
+            </BOUCLE_ariane_breve>
+            &gt; <a href="#URL_BREVE">[(#TITRE|couper{80})]</a>
+            </BOUCLE_contexte_breve>
+    
+            <BOUCLE_contexte_rubrique(RUBRIQUES) {id_rubrique}>
+            <BOUCLE_ariane_rubrique(HIERARCHIE) {id_rubrique}>
+            &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
+            </BOUCLE_ariane_rubrique>
+            &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
+            </BOUCLE_contexte_rubrique>
+    
+            <BOUCLE_contexte_site(SITES) {id_syndic}>
+            <BOUCLE_ariane_site(HIERARCHIE) {id_rubrique}>
+            &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
+            </BOUCLE_ariane_site>
+            &gt; <a href="[(#ID_SYNDIC|generer_url_site)]">[(#TITRE|couper{80})]</a>
+            </BOUCLE_contexte_site>
+    
+            <//B_contexte_site>
+            <//B_contexte_rubrique>
+            <//B_contexte_breve>
+            <//B_contexte_article>
+    
+            <BOUCLE_contexte_forum(FORUMS) {id_forum}>
+            &gt; <a href="#URL_FORUM">[(#TITRE|couper{80})]</a>
+            </BOUCLE_contexte_forum>
+    
+            &gt; <:poster_message:>
+            
+        </div><!--#hierarchie-->
 
-		<BOUCLE_contexte_article(ARTICLES) {id_article}>
-		<BOUCLE_ariane_article(HIERARCHIE) {id_article}>
-		&gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
-		</BOUCLE_ariane_article>
-		&gt; <a href="#URL_ARTICLE">[(#TITRE|couper{80})]</a>
-		</BOUCLE_contexte_article>
-		</B_contexte_article>
+        <div class="cartouche">
+            <h1><:poster_message:></h1>
+        </div>
 
-		<BOUCLE_contexte_breve(BREVES) {id_breve}>
-		<BOUCLE_ariane_breve(RUBRIQUES) {id_rubrique}>
-		&gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
-		</BOUCLE_ariane_breve>
-		&gt; <a href="#URL_BREVE">[(#TITRE|couper{80})]</a>
-		</BOUCLE_contexte_breve>
+        <div class="menu articles">
+            <h2><:en_reponse:></h2>
+        
+            <BOUCLE_forum_parent(FORUMS) {id_forum}>
+            <h3><a href="#URL_FORUM">#TITRE</a></h3>
+            <small>[(#DATE|affdate_jourcourt)][&nbsp;(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> (#NOM)]</small>
+            [<div class="introduction">(#INTRODUCTION|lignes_longues)</div>]
+            </BOUCLE_forum_parent>
+            
+            <BOUCLE_article(ARTICLES) {id_article}>
+            [(#LOGO_ARTICLE||image_reduire{150,100})]
+            <h3><a href="#URL_ARTICLE">#TITRE</a></h3>
+            <small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
+            [<div class="introduction">(#INTRODUCTION)</div>]
+            </BOUCLE_article>
+            
+            <BOUCLE_breve(BREVES) {id_breve}>
+            [(#LOGO_BREVE||image_reduire{150,100})]
+            <h3><a href="#URL_BREVE">#TITRE</a></h3>
+            <small>[(#DATE|affdate_jourcourt)]</small>
+            [<div class="introduction">(#INTRODUCTION)</div>]
+            </BOUCLE_breve>
+            
+            <BOUCLE_rubrique(RUBRIQUES) {id_rubrique}>
+            <h3><a href="#URL_RUBRIQUE">#TITRE</a></h3>
+            [<div class="texte">(#TEXTE)</div>]
+            </BOUCLE_rubrique>
+            
+            <BOUCLE_syndic(SITES) {id_syndic}>
+            <h3><a href="[(#ID_SYNDIC|generer_url_site)]">#NOM_SITE</a></h3>
+            [<div class="texte">(#DESCRIPTIF)</div>]
+            </BOUCLE_syndic>
+            
+            <//B_forum_parent>
+        
+        </div>
 
-		<BOUCLE_contexte_rubrique(RUBRIQUES) {id_rubrique}>
-		<BOUCLE_ariane_rubrique(HIERARCHIE) {id_rubrique}>
-		&gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
-		</BOUCLE_ariane_rubrique>
-		&gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
-		</BOUCLE_contexte_rubrique>
+        #FORMULAIRE_FORUM
 
-		<BOUCLE_contexte_site(SITES) {id_syndic}>
-		<BOUCLE_ariane_site(HIERARCHIE) {id_rubrique}>
-		&gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
-		</BOUCLE_ariane_site>
-		&gt; <a href="[(#ID_SYNDIC|generer_url_site)]">[(#TITRE|couper{80})]</a>
-		</BOUCLE_contexte_site>
-
-		<//B_contexte_site>
-		<//B_contexte_rubrique>
-		<//B_contexte_breve>
-		<//B_contexte_article>
-
-		<BOUCLE_contexte_forum(FORUMS) {id_forum}>
-		&gt; <a href="#URL_FORUM">[(#TITRE|couper{80})]</a>
-		</BOUCLE_contexte_forum>
-
-		&gt; <:poster_message:>
-		
-	</div>
-
-
-	<div id="conteneur">
-
-		[(#REM) Contenu : poster un message dans le forum ]
-		<div id="contenu">
-
-			<div class="cartouche">
-				<h1><:poster_message:></h1>
-			</div>
-
-			<div class="menu articles">
-				<h2><:en_reponse:></h2>
-			
-                <BOUCLE_forum_parent(FORUMS) {id_forum}>
-                <h3><a href="#URL_FORUM">#TITRE</a></h3>
-                <small>[(#DATE|affdate_jourcourt)][&nbsp;(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> (#NOM)]</small>
-                [<div class="introduction">(#INTRODUCTION|lignes_longues)</div>]
-                </BOUCLE_forum_parent>
-				
-                <BOUCLE_article(ARTICLES) {id_article}>
-                [(#LOGO_ARTICLE||image_reduire{150,100})]
-                <h3><a href="#URL_ARTICLE">#TITRE</a></h3>
-                <small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
-                [<div class="introduction">(#INTRODUCTION)</div>]
-                </BOUCLE_article>
-				
-                <BOUCLE_breve(BREVES) {id_breve}>
-                [(#LOGO_BREVE||image_reduire{150,100})]
-                <h3><a href="#URL_BREVE">#TITRE</a></h3>
-                <small>[(#DATE|affdate_jourcourt)]</small>
-                [<div class="introduction">(#INTRODUCTION)</div>]
-                </BOUCLE_breve>
-				
-                <BOUCLE_rubrique(RUBRIQUES) {id_rubrique}>
-                <h3><a href="#URL_RUBRIQUE">#TITRE</a></h3>
-                [<div class="texte">(#TEXTE)</div>]
-                </BOUCLE_rubrique>
-				
-                <BOUCLE_syndic(SITES) {id_syndic}>
-                <h3><a href="[(#ID_SYNDIC|generer_url_site)]">#NOM_SITE</a></h3>
-                [<div class="texte">(#DESCRIPTIF)</div>]
-                </BOUCLE_syndic>
-				
-                <//B_forum_parent>
-			
-			</div>
-
-			#FORMULAIRE_FORUM
-
-		</div><!--#contenu-->
-
-		[(#REM) Menu de navigation laterale ]
-		<div id="navigation">
-
-			[(#REM) Menu de navigation par rubriques ]
-			<INCLURE{fond=inc-rubriques}>
-
-		</div><!--#navigation-->
-
+	</div><!--#contenu-->
 	</div><!--#conteneur-->
+
+    [(#REM) Menu de navigation laterale ]
+    <div id="navigation">
+
+        [(#REM) Menu de navigation par rubriques ]
+        <INCLURE{fond=inc-rubriques}>
+
+    </div><!--#navigation-->
+    
+    [(#REM) Menu de navigation laterale ]
+    <div id="extra">
+	&nbsp;
+    </div><!--#extra-->
 
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
