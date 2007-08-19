@@ -176,7 +176,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 		  );
 
 	$onglet_documents = array(_L('Documents'),
-		($iconifier ? $iconifier('id_breve', $id_breve, 'breves_voir') : "")
+		($iconifier ? $iconifier('id_breve', $id_breve, 'breves_voir', true) : "")
 	  );
 	
 	$onglet_interactivite = array(_L('Interactivit&eacute;'),

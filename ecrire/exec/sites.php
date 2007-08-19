@@ -184,7 +184,7 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 	  );
 
 	$onglet_documents = array(_L('Documents'),
-	  $iconifier ? $iconifier('id_syndic', $id_syndic, 'sites') :""
+	  $iconifier ? $iconifier('id_syndic', $id_syndic, 'sites', true) :""
 	  //. articles_documents('article', $id_article)
 	  );
 	

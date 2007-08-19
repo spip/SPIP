@@ -110,7 +110,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 
 	if ($flag_editable AND ($spip_display != 4)) {
 		$iconifier = charger_fonction('iconifier', 'inc');
-		$icone = $iconifier('id_article', $id_article,'articles');
+		$icone = $iconifier('id_article', $id_article,'articles', true);
 	} else $icone = '';
 
 	$instituer_article = charger_fonction('instituer_article', 'inc');
@@ -147,13 +147,6 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 		AND autoriser('voirrevisions', 'article', $id_article))
 			$actions .= icone_inline(_T('info_historique_lien'), generer_url_ecrire("articles_versions","id_article=$id_article"), "historique-24.gif", "rien.gif", $spip_lang_left);
 
-	// statistiques
-	if ($row['statut'] == 'publie'
-		AND $row['visites'] > 0
-		AND $GLOBALS['meta']["activer_statistiques"] != "non"
-		AND autoriser('voirstats', $type, $id))
-			$actions .= icone_inline(_T('icone_evolution_visites', array('visites' => $row['visites'])), generer_url_ecrire("statistiques_visites","id_article=$id"), "statistiques-24.gif","rien.gif", $spip_lang_left);
-
 	$actions .= "<div class='nettoyeur'></div>";
 	
 	$haut =
@@ -179,7 +172,14 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	  );
 	
 	$onglet_interactivite = array(_L('Interactivit&eacute;'),
-	  boites_de_config_articles($id_article)
+		// statistiques
+		(($row['statut'] == 'publie'
+		AND $row['visites'] > 0
+		AND $GLOBALS['meta']["activer_statistiques"] != "non"
+		AND autoriser('voirstats', $type, $id)) ?
+		  icone_horizontale(_T('icone_evolution_visites', array('visites' => $row['visites'])), generer_url_ecrire("statistiques_visites","id_article=$id"), "statistiques-24.gif","rien.gif", false)
+		  : "")
+	  . boites_de_config_articles($id_article)
 		);
 		
 	$onglet_discuter = array(_L('Discuter'),
