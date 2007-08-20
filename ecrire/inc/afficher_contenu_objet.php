@@ -12,6 +12,7 @@
 
 // affichage du contenu d'un objet spip (onglet contenu)
 // Cas generique, utilise pour tous les objets
+// http://doc.spip.org/@inc_afficher_contenu_objet_dist
 function inc_afficher_contenu_objet_dist($type, $id,$row = NULL){
 	$table = table_objet($type);
 	$key = id_table_objet($type);
@@ -90,6 +91,7 @@ function inc_afficher_contenu_objet_dist($type, $id,$row = NULL){
 // donner la liste des champs a afficher dans l'espace prive
 // pour un objet
 // cette liste peut etre un englobant, les elements non pertinents pour l'objet considere seront enleves
+// http://doc.spip.org/@afficher_objet_champs_libelles
 function afficher_objet_champs_libelles($type,$table,$id, $row){
 	$liste = array(
 		'surtitre' => _T('texte_sur_titre'),

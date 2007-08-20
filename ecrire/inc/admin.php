@@ -49,7 +49,7 @@ function inc_admin_dist($script, $titre, $comment='', $retour='')
 // l'operation d'administration, 
 // Si le connecte n'est pas le bon, on refuse la connexion.
 
-// http://doc.spip.org/@import_verifie_session
+// http://doc.spip.org/@admin_verifie_session
 function admin_verifie_session($script) {
 
 	$signal = $script . ' ' . fichier_admin($action);
