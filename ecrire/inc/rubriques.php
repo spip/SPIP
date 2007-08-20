@@ -15,17 +15,19 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/meta');
 
 // Fonction a appeler lorsque le statut d'un objet change dans une rubrique
+// ou que la rubrique est déplacee.
+// Le 2e arg est un tableau ayant un index "statut" (indiquant le nouveau)
+// et eventuellement un index "id_rubrique" (indiquant le deplacement)
 
-// Si l'objet passe a "publie"
-// consequence sur ses parentes et les langues
-// Idem s'il est depublie'
-// s'il est deplace' alors qu'il etait publieé, double consequence.
-// (a refaire a terme par une Cascade SQL)
+// Si le statut passe a "publie", la rubrique et ses parents y passent aussi
+// et les langues utilisées sont recalculées. 
+// Conséquences symétriques s'il est depublie'.
+// S'il est deplace' alors qu'il etait publieé, double consequence.
+// Tout cela devrait passer en SQL, sous forme de Cascade SQL.
 
 // http://doc.spip.org/@calculer_rubriques_if
 function calculer_rubriques_if ($id_rubrique, $modifs, $statut_ancien='')
 {
-
 	$neuf = false;
 	if ($statut_ancien == 'publie') {
 		if (isset($modifs['statut']) OR isset($modifs['id_rubrique']))
@@ -102,12 +104,12 @@ function depublier_branche_rubrique_if($id_rubrique)
 }
 
 //
-// Fonction appelee lorsqu'on (de)publie dans une rubrique.
-// Restreindre ses appels le plus possible
-//
+// Fonction appelee apres importation:
+// calculer les meta-donnes resultantes,
+// remettre de la cohérence au cas où la base importee en manquait
+// Cette fonction doit etre invoque sans processus concurrent potentiel.
 // http://doc.spip.org/@calculer_rubriques
 function calculer_rubriques() {
-	if (!spip_get_lock($t="calcul_rubriques")) return;
 
 	calculer_rubriques_publiees();
 
@@ -121,8 +123,6 @@ function calculer_rubriques() {
 
 	// on calcule la date du prochain article post-date
 	calculer_prochain_postdate(); // fera le ecrire_metas();
-
-	spip_release_lock($t);
 }
 
 // Recalcule l'ensemble des donnees associees a l'arborescence des rubriques
