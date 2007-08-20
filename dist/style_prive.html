@@ -426,44 +426,47 @@ i.spip {}
 strong.spip {}
 hr.spip {}
 
+/* Listes SPIP */
 .spip_puce { list-style-position: outside; }
-
 ul.spip {}
 ol.spip {}
 li.spip {}
 
-h3.spip { margin: 2em 0 1.4em 0; border-bottom: 2px solid; font: 1.15em Verdana, Geneva, Sans, sans-serif; font-weight: bold; }
+.chapo { font-weight: bold; color: #333; }
+h3.spip { margin: 2em 0 1.4em 0; border-bottom: 2px solid; font: 1.15em Verdana, Geneva, Sans, sans-serif; color: #333; }
 
 p.spip { line-height: 1.4em; }
 p.spip_note { margin-bottom: 3px; margin-top: 3px; margin-#GET{left}: 17px; text-indent: -17px; }
 
-a.spip_in { border-bottom: 1px dashed; }
-a.spip_out { background: url(#EVAL{ _DIR_IMG_PACK}wrapper.php?file=spip_out.gif) [(#GET{right})] center no-repeat; padding-#GET{right}: 12px; border-bottom: 1px solid; }
-a.spip_note { background-color: #eee; }
-a.spip_glossaire:hover { text-decoration: underline overline; }
+#voir a { color: #604A7F; text-decoration: underline; }
+a.spip_note { background-color: #eee; font-weight: bold; }
+a.spip_in {}
+.spip_out, .spip_url, .spip_glossaire { background: url(#EVAL{ _DIR_IMG_PACK}wrapper.php?file=spip_out.gif) [(#GET{right})] center no-repeat; padding-#GET{right}: 12px; }
+#voir a:hover { color: #F57900; text-decoration: underline; }
+#voir a.spip_glossaire:hover { text-decoration: underline overline; }
 
 .spip_recherche { width: 240px; float: [(#GET{right})]; }
 .spip_recherche .recherche{ padding: 3px; width: 200px; font-size: 10px; border: 1px solid #fff; background-color: #GET{foncee}; color: #fff; margin: 0 3px 6px 0; }
 .spip_recherche .submit {}
 
 /* Citations, code et poesie */
-q, blockquote.spip, .spip_poesie, .spip_serif { font-family: Georgia, Times, serif; }
-blockquote.spip { margin-#GET{left}: 40px; margin-#GET{right}: 0; margin-top: 10px; margin-bottom: 10px; border: solid 1px #aaa; background-color: #fff; padding-left: 10px; padding-right: 10px; }
-
-div.spip_poesie { margin-#GET{left}: 10px; padding-#GET{left}: 10px; border-#GET{left}: 1px solid #999; }
-div.spip_poesie div { text-indent: -60px; margin-#GET{left}: 60px; }
-
-.spip_code, .spip_cadre { font-family: monospace; font-style: normal; font-size: 1.1em; }
-.spip_cadre { width: 100%; background-color: #eee; margin-top: 10px; padding: 5px; border: 1px solid #666; behavior: url(../dist/win_width.htc); }
+q, blockquote, .spip_poesie, .spip_serif { font-family: Georgia, Times, serif; }
+blockquote { padding-#GET{left}: 1em; border-#GET{left}: 4px solid #DDD; }
+.spip_poesie { margin: 1em 3em; padding-#GET{left}: 1em; border-#GET{left}: 1px solid #CCC; font-family: Garamond, Georgia, Times, serif; }
+.spip_poesie div { text-indent: -60px; margin-#GET{left}: 60px; }
+code, .spip_cadre { font-family: "Courier New", Courier, mono; font-size: 1.1em; color: #009; }
+div.spip_code, .spip_cadre { margin-bottom: 1em; }
+.spip_cadre { width: 99%; background-color: #F4F8F8; border: 1px inset; }
 
 /* Tableaux */
-table.spip { margin: auto; margin-bottom: 1em; border: 1px solid; border-collapse: collapse; font-size: 0.90em; }
-table.spip caption { caption-side: top; /* bottom pas pris en compte par IE */
-text-align: center; margin: auto; padding: 3px; font-weight: bold; }
-table.spip tr.row_first { background-color: #fcf4d0; }
-table.spip tr.row_odd { background-color: #d0d0d0; }
-table.spip tr.row_even { background-color: #f0f0f0; }
-table.spip th, table.spip td { padding: 3px; text-align: left; vertical-align: middle; }
+table.spip { margin-bottom: 1em; color: #633E6D; border-collapse: collapse; border-spacing: 0; }
+table.spip caption { caption-side: top; font-weight: bold; color: #9DBA00; line-height: normal; }
+table.spip tr.row_first { background: #C5E41C; background-image: url(#EVAL{ _DIR_IMG_PACK}wrapper.php?file=pale.gif); }
+table.spip tr.row_odd { background: #EEE; }
+table.spip tr.row_even { background: #DDD; }
+table.spip th, table.spip td { text-align: left; border: 2px solid #FFF; }
+table.spip th { padding: .2em; vertical-align: middle; font-weight: bold; }
+table.spip td { padding: .4em; vertical-align: top; }
 
 /* Logos, documents et images */
 img, .spip_logos { margin: 0; padding: 0; border: none; }
@@ -516,14 +519,8 @@ div.titrem { display: block; padding-top: 6px; padding-bottom: 4px; background-r
 .ajax-action {padding-top:1px;clear:both;position:relative; }
 
 .dater {position:relative; }
-.dater,
-	.dater .titrem,
-	.editer_mot .titrem,
-	.editer_auteurs .titrem { background-color: #GET{claire}; }
-
-.dater .hover,
-	.editer_mot .hover,
-	.editer_auteurs .hover { background-color: #GET{foncee}; }
+.dater, .dater .titrem,	.editer_mot .titrem, .editer_auteurs .titrem { background-color: #GET{claire}; }
+.dater .hover, .editer_mot .hover, .editer_auteurs .hover { background-color: #GET{foncee}; }
 
 .mots_tous #contenu .titrem.impliable {background-color: #GET{claire}; }
 .configuration #contenu .cadre .titrem {background-color:#eee; }
@@ -664,8 +661,8 @@ td.vu {background:#cccccc; }
 [(#REM)
 	pour les puces de changement rapide de statut ; NB: ca buggue car ca s'affiche en-dessous du cadre
 ]
-li .puce_statut{float: #GET{left}; padding-top: 5px; }
-li .puce_article_popup {padding:0px; }
+li .puce_statut { float: #GET{left}; padding-top: 5px; }
+li .puce_article_popup { padding: 0px; }
 div.puce_article, span.puce_article, div.puce_breve, span.puce_breve { position: relative; }
 div.puce_article_fixe, div.puce_breve_fixe, span.puce_article_fixe, span.puce_breve_fixe { position: relative; }
 
@@ -681,22 +678,21 @@ div.puce_breve_popup, span.puce_breve_popup { width: 27px; }
 .tabs-nav a { color: #GET{foncee}; }
 /* generique */
 
-#contenu #voir span.label {margin-top:1em;font-size:x-small;display:block;clear:both;font-style:italic; }
-#contenu #voir span p { margin-top:0; }
-#navigation .infos .numero {font-size:x-small;font-weight:bold; text-align: center; }
-#navigation .infos .numero p { font-size:x-large; margin:5px 0;color:#333; font-family: verdana, helvetica, arial, sans; }
-#contenu .bandeau_actions {border-top:1px solid #eee;border-bottom:1px solid #eee; margin:5px 0;clear:both; }
-#contenu .bandeau_actions a:hover {background:#fff; }
-#contenu .logo_titre {float: #GET{right}; margin:5px 0; margin-#GET{left}:5px; }
+#contenu #voir span.label { clear: both; display: block; background-color: #GET{claire}; background-image: url(#EVAL{ _DIR_IMG_PACK}wrapper.php?file=pale.gif); margin-top: 2em; padding: .1em; font-size: x-small; color: #777; }
+#contenu #voir span p { margin-top: 0; }
+#navigation .infos .numero {font-size: x-small;font-weight:bold; text-align: center; }
+#navigation .infos .numero p { font-size: x-large; margin:5px 0;color:#333; font-family: verdana, helvetica, arial, sans; }
+#contenu .bandeau_actions {border-top: 1px solid #eee; border-bottom:1px solid #eee; margin:5px 0;clear:both; }
+#contenu .bandeau_actions a:hover { background: #fff; }
+#contenu .logo_titre { float: #GET{right}; margin: 5px 0; margin-#GET{left}: 5px; }
 
-ul.instituer { /*float: #GET{right}; */
-	text-align: #GET{left}; border-top:1px solid #eee; border-bottom:1px solid #eee; margin: 0; padding:5px 0; /*font-size:0.9em; */ }
+ul.instituer { /*float: #GET{right}; */ text-align: #GET{left}; border-top:1px solid #eee; border-bottom:1px solid #eee; margin: 0; padding:5px 0; /*font-size:0.9em; */ }
 ul.instituer li {list-style:none; margin: 0;padding:0; }
 ul.instituer li ul {margin: 0;padding:0; }
 ul.instituer li ul li a { display:block; }
-ul.instituer li ul li img {margin:1px 1px -1px; margin-#GET{right}:5px;visibility:hidden;border:1px solid #f8f7f3; }
+ul.instituer li ul li img {margin: 1px 1px -1px; margin-#GET{right}: 5px; visibility: hidden; border: 1px solid #f8f7f3; }
 ul.instituer li.selected img,ul.instituer li a:hover img {visibility:visible; }
-ul.instituer a:hover {background:#eee; }
+ul.instituer a:hover { background: #eee; }
 ul.instituer li.prepa.selected a,ul.instituer li.prepa a:hover {background:#fff; }
 ul.instituer li.prop.selected a,ul.instituer li.prop a:hover {background:#f89058;color:#fff; }
 ul.instituer li.publie.selected a,ul.instituer li.publie a:hover {background:#9dba00;color:#fff; }
@@ -706,16 +702,16 @@ ul.instituer li.refuse.selected a,ul.instituer li.refuse a:hover {background:#ff
 #voir.tabs-container {background:#fff; padding:5px;border:1px solid #999; }
 
 /* exec/articles */
-.articles h1 {color:#000;font-size:large; margin-top:5px; }
-#voir .article_prop {text-align: center;font-weight:bold;font-size:small;color:red; }
+.articles h1 {color: #000; font-size: large; margin-top: 5px; }
+#voir .article_prop {text-align: center; font-weight: bold; font-size: small; color: red; }
 
 /* exec/naviguer */
-.naviguer h1 {color:#000;font-size:large; margin-top:5px; }
-#contenu div.gauche { width:49%;float: #GET{left}; }
-#contenu div.droite { width:49%;float: #GET{right}; }
+.naviguer h1 {color: #000;font-size: large; margin-top: 5px; }
+#contenu div.gauche { width: 49%; float: #GET{left}; }
+#contenu div.droite { width: 49%; float: #GET{right}; }
 
 /* exec/sites */
-.sites h1 {color:#000;font-size:large; margin-top:5px; }
+.sites h1 { color: #000;font-size: large; margin-top:5px; }
 #voir .site_prop {text-align: center;font-weight:bold;font-size:small;color:red; }
 #voir .site_syndique {font-weight:bold; text-align: center; }
 #voir .site_syndique img {vertical-align:middle; }

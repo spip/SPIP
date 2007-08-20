@@ -72,7 +72,7 @@ div.spip_code, .spip_cadre { margin-bottom: 1em; }
 table { border-collapse: collapse; border-spacing: 0; }
 table.spip { margin-bottom: 1em; color: #633E6D; }
 table.spip caption { caption-side: top; font-weight: bold; color: #9DBA00; line-height: normal; }
-table.spip tr.row_first { background: #C5E41C; }
+table.spip tr.row_first { background: #C5E41C url(pale.gif); }
 table.spip tr.row_odd { background: #EEE; }
 table.spip tr.row_even { background: #DDD; }
 table.spip th, table.spip td { text-align: left; border: 2px solid #FFF; }
@@ -111,7 +111,7 @@ span.spip_documents_center { display: block; margin-top: 1em; }
 .ps, .notes { line-height: 1.4em; margin-bottom: 2em; }
 .notes { clear: both; }
 
-.hyperlien { display: block; background: #EEE; padding: .5em 1em; font-weight: bold; color: #8B6F92; }
+.hyperlien { display: block; background: #EEE url(pale.gif); padding: .5em 1em; font-weight: bold; color: #8B6F92; }
 
 
 /* modeles par defaut */
@@ -125,11 +125,11 @@ span.spip_documents_center { display: block; margin-top: 1em; }
 
 /* Habillage des formulaires
 ---------------------------------------------- */
-.formulaire_spip { background: #CCCC99; margin-bottom: 2em; padding: 1em; text-align: left; }
-.formulaire_spip fieldset { margin: 0; margin-bottom: 1em; padding: 0; border: 0; }
-.formulaire_spip legend { margin: 0; padding: 0; font-weight: bold; color: #FFF; }
-.formulaire_spip label { display: block; color: #404040; }
-.forml, textarea, select { width: 99%; background: #F4F8F8; border: 1px inset; font-family: inherit; font-size: inherit; }
+.formulaire_spip { background: #CCCC99 url(pale.gif); margin-bottom: 2em; padding: 1em; text-align: left; }
+.formulaire_spip fieldset { margin: 0; margin-bottom: 1em; padding: 0; border: 0; border-top: 1px solid #CCCC99; }
+.formulaire_spip legend { margin: 0; padding: 0; padding-right: .5em; color: #666633; }
+.formulaire_spip label { display: block; color: #404040; color: #666633; font-size: .9em; }
+.forml, textarea, select { width: 99%; background: #F4F8F8; border: 1px inset; font-family: inherit; font-size: inherit; color: #000; }
 .formulaire_spip textarea { margin-bottom: 1em; }
 
 /* Boutons */
