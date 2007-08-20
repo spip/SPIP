@@ -159,15 +159,11 @@ function exec_naviguer_dist()
 	/*$onglet_enfants = array(_L('Enfants'),
 		afficher_enfant_rub($id_rubrique, false, true)
 	);*/
+	$afficher_contenu_objet = charger_fonction('afficher_contenu_objet', 'inc');
 
 	$onglet_contenu = array(_L('Contenu'),
 		($extra?extra_affichage($extra, "rubriques"):"")
-	  . (strlen($descriptif) > 1 ? 
-		  "<span class='label'>"._T('info_descriptif')."</span>"
-		  . "<span  dir='$lang_dir' class='descriptif crayon rubrique-descriptif-$id_rubrique'>" . propre($descriptif) . "</span>\n" :"")
-		. (strlen($texte) > 1 ? 
-		  "<span class='label'>"._T('info_texte')."</span>"
-		  . "<span  dir='$lang_dir' class='texte crayon rubrique-texte-$id_rubrique'>" . propre($texte) . "</span>\n" :"")
+		. $afficher_contenu_objet('rubrique', $id_rubrique,$row)
 		. contenu_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable)
 	);
 

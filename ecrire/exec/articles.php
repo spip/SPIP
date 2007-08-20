@@ -155,7 +155,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 		. "<div class='bandeau_actions'>$actions</div>";
 
 	$onglet_contenu = array(_L('Contenu'),
-	  afficher_corps_articles($virtuel,$statut_article,$surtitre, $soustitre, $descriptif, $url_site, $nom_site, $chapo, $texte, $ps, $extra)
+	  afficher_corps_articles($id_article,$virtuel,$row)
 	  );
 
 	$onglet_proprietes = array(_L('Propri&eacute;t&eacute;s'),
@@ -317,17 +317,14 @@ function bouton_modifier_articles($id_article, $id_rubrique, $flag_modif, $mode,
 }
 
 // http://doc.spip.org/@afficher_corps_articles
-function afficher_corps_articles($virtuel, $statut_article, $surtitre, $soustitre, $descriptif, $url_site, $nom_site, $chapo, $texte, $ps,  $extra)
+function afficher_corps_articles($id_article, $virtuel, $row)
 {
   global $champs_extra, $les_notes, $lang_objet;
 
-  $lang_dir = lang_dir($lang_objet);
-// HACK TEMPORAIRE POUR TESTER les crayons dans l'espace prive
-global $id_article;
+  //$lang_dir = lang_dir($lang_objet);
 
 	$res = '';
-	
-	if ($statut_article == 'prop')
+	if ($row['statut'] == 'prop')
 		$res .= "<p class='article_prop'>"._T('text_article_propose_publication')."</p>";
 
 	if ($virtuel) {
@@ -340,51 +337,8 @@ global $id_article;
 		.  fin_boite_info(true);
 	}
 	else {
-		if (strlen($surtitre)>0)
-			$res .= 
-			  "<span class='label'>"._T('texte_sur_titre')."</span>"
-			  . "<span  dir='$lang_dir' class='surtitre crayon article-surtitre-$id_article'>" . typo($surtitre) . "</span>\n";
-
-		if (strlen($soustitre)>0)
-			$res .= 
-			  "<span class='label'>"._T('texte_sous_titre')."</span>"
-			  . "<span  dir='$lang_dir' class='soustitre crayon article-soustitre-$id_article'>" . typo($soustitre) . "</span>\n";
-
-		if (strlen($descriptif)>0)
-			$res .= 
-			  "<span class='label'>"._T('info_descriptif')."</span>"
-			  . "<span  dir='$lang_dir' class='descriptif crayon article-descriptif-$id_article'>" . propre($descriptif) . "</span>\n";
-			
-		if ($url_site OR $nom_site)
-			$res .= 
-			  "<span class='label'>"._T('entree_liens_sites')."</span>"
-			  . "<span  dir='$lang_dir' class='url_site crayon article-url_site-$id_article'>" . propre("[".$nom_site."->".$url_site."]") . "</span>\n";
-	
-		if (strlen($chapo) > 0) 
-			$res .= 
-			  "<span class='label'>"._T('info_chapeau')."</span>"
-			  . "<span  dir='$lang_dir' class='chapo crayon article-chapo-$id_article'>" . propre($chapo) . "</span>\n";
-
-		if (strlen($texte) > 0)
-			$res .= 
-			  "<span class='label'>"._T('info_texte')."</span>"
-			  . "<span  dir='$lang_dir' class='texte crayon article-texte-$id_article'>" . propre($texte) . "</span>\n";
-
-		if (strlen($ps) > 0)
-			$res .= 
-			  "<span class='label'>"._T('info_ps')."</span>"
-			  . "<span  dir='$lang_dir' class='ps crayon article-ps-$id_article'>" . propre($ps) . "</span>\n";
-
-		if ($les_notes)
-			$res .= 
-			  "<span class='label'>"._T('info_notes')."</span>"
-			  . "<span  dir='$lang_dir' class='notes'>"
-			  . justifier($les_notes);
-		
-		if ($champs_extra AND $extra) {
-			include_spip('inc/extra');
-			$res .= extra_affichage($extra, "articles");
-		}
+		$afficher_contenu_objet = charger_fonction('afficher_contenu_objet', 'inc');
+		$res .= $afficher_contenu_objet('article', $id_article,$row);
 	}
 	return $res;
 }
