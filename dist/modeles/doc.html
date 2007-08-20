@@ -12,20 +12,20 @@
 ]
 [(#MODE|=={vignette}|?{' '})
 	#SET{fichier,#URL_DOCUMENT}
-	#SET{width,#LARGEUR}
+	#SET{ width,#LARGEUR}
 	#SET{height,#HAUTEUR}
 	#SET{url,#ENV{lien}}
 ]
 [(#MODE|=={vignette}|?{'',' '})
 	[(#SET{fichier,[(#LOGO_DOCUMENT||extraire_attribut{src})]})]
-	[(#SET{width,[(#LOGO_DOCUMENT||extraire_attribut{width})]})]
+	[(#SET{ width,[(#LOGO_DOCUMENT||extraire_attribut{ width})]})]
 	[(#SET{height,[(#LOGO_DOCUMENT||extraire_attribut{height})]})]
 	#SET{url,#ENV{lien,#URL_DOCUMENT}}
 ]
 
 <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
-<dt>[<a href="(#GET{url})"[ class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'[ (#ENV{lien}|?{'',type="#MIME_TYPE"})]>]<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]' />[(#GET{url}|?{</a>})]</dt>[
-<dt class='#EDIT{titre} spip_doc_titre'[ style='width:(#GET{width}|min{350}|max{120})px;']><strong>(#TITRE)</strong></dt>][
-<dd class='#EDIT{descriptif} spip_doc_descriptif'[ style='width:(#GET{width}|min{350}|max{120})px;']>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</dd>]
+<dt>[<a href="(#GET{url})"[ class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'[ (#ENV{lien}|?{'',type="#MIME_TYPE"})]>]<img src='#GET{fichier}' width='#GET{ width}' height='#GET{height}' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]' />[(#GET{url}|?{</a>})]</dt>[
+<dt class='#EDIT{titre} spip_doc_titre'[ style='width:(#GET{ width}|min{350}|max{120})px;']><strong>(#TITRE)</strong></dt>][
+<dd class='#EDIT{descriptif} spip_doc_descriptif'[ style='width:(#GET{ width}|min{350}|max{120})px;']>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</dd>]
 </dl>
 </BOUCLE_doc>

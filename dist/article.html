@@ -37,10 +37,10 @@
         </div>
 
         <div class="surlignable">
-        [<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{520,0})</div>]
+        [<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{500,0})</div>]
         
         [<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-        [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{520,0})</div>]
+        [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{500,0})</div>]
         </div>
 
         [(#REM) Portfolio : album d'images ]
@@ -54,13 +54,13 @@
         </B_documents_portfolio>
         <BOUCLE_afficher_document(DOCUMENTS) {id_article}{id_document} {mode=document}{extension IN png,jpg,gif}>
         <div class="spip_documents spip_documents_center" id="document_actif">
-            [(#EMBED_DOCUMENT|image_reduire{520,0})]
+            [(#EMBED_DOCUMENT|image_reduire{500,0})]
             [<div class="#EDIT{titre} spip_doc_titre">(#TITRE)</div>]
             [<div class="#EDIT{descriptif} spip_doc_descriptif">(#DESCRIPTIF)</div>]
         </div>
         </BOUCLE_afficher_document>
 
-        [<div class="ps surlignable"><h2 class="pas_surlignable"><:info_ps:></h2><div class="#EDIT{ps}">(#PS)</div></div>]
+        [<div class="ps surlignable"><h2 class="pas_surlignable"><:info_ps:></h2><div class="#EDIT{ps}">(#PS|image_reduire{500,0})</div></div>]
 
         [(#REM) Autres documents joints a l'article ]
         <B_documents_joints>
