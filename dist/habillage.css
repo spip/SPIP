@@ -9,7 +9,7 @@ body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 
 div#page { width: 48em; margin: 0 auto; text-align: left; }
 
-div#top { margin: 0; border-bottom: 2px solid #666699; line-height: 5em; }
+div#top { margin: 0; border-bottom: 2px solid #8B6F92; line-height: 5em; }
 div#top #nom_site_spip, #top a .spip_logos { display: block; float: left; font-weight: bold; font-size: 1.5em; }
 div#top .formulaire_recherche { float: right; width: 30%; background: 0; margin: 0; padding: 0; }
 div#top .formulaire_recherche label { display: none; }
@@ -21,7 +21,7 @@ div#contenu { float: left; width: 65%; padding-top: .3em; }
 div#navigation { float: right; width: 30%; }
 div#extra { float: right; clear: right; width: 30%; }
 
-div#pied { clear: both; width: 100%; margin: 1em 0; border-top: 2px solid #666699; text-align: center; }
+div#pied { clear: both; width: 100%; margin: 1em 0; border-top: 2px solid #8B6F92; text-align: center; }
 div#pied img { vertical-align: bottom; }
 
 /* Espaceur de blocs */
@@ -33,19 +33,20 @@ div#pied img { vertical-align: bottom; }
 
 /* Typographie generale du site
 ---------------------------------------------- */
-body { font-size: 100%; font-family: Verdana, Tahoma, Geneva, sans-serif; color: #333; }
+body { font-size: 100%; color: #333; }
 #top, #contenu, #navigation, #extra, #pied { font-size: .82em; }
 
-.texte, .ps, .notes, .introduction, h3 { font-family: Georgia, Times, serif; }
+h1, h2, .chapo, .hyperlien, .texte, .ps, .notes, .introduction, #contenu { font-family: "Trebuchet MS", Helvetica, sans-serif; }
+h3 { font-family: Georgia, Times, serif; }
+body, .formulaire_spip, #hierarchie, .pagination, small { font-family: Verdana, Tahoma, Geneva, sans-serif; }
 
 
 /* Personnalisation des styles HTML par defaut
 ---------------------------------------------- */
 
 /* Titraille */
-h1,h2 { font-family: "Trebuchet MS", Helvetica, sans-serif; }
 h1 { margin: 0; font-size: 1.5em; font-weight: bold; color: #000; }
-h2 { margin: 0; padding: .2em; background: #666699; font-size: 1em; font-weight: normal; text-transform: uppercase; letter-spacing: .1em; }
+h2 { margin: 0; padding: .2em; background: #8B6F92; font-size: 1em; font-weight: normal; text-transform: uppercase; letter-spacing: .1em; }
 h2, h2 a, h2 a:hover { color: #EEE; }
 h3 { margin: 2em 0 1em 0; border-bottom: 2px solid #CCCC66; font-size: 1.1em; font-weight: bold; }
 h3.spip { color: #CCCC66; }
@@ -69,9 +70,9 @@ div.spip_code, .spip_cadre { margin-bottom: 1em; }
 
 /* Tableaux */
 table { border-collapse: collapse; border-spacing: 0; }
-table.spip { margin-bottom: 1em; }
-table.spip caption { caption-side: top; font-weight: bold; color: #666; line-height: normal; }
-table.spip tr.row_first { background: #FFC; }
+table.spip { margin-bottom: 1em; color: #633E6D; }
+table.spip caption { caption-side: top; font-weight: bold; color: #9DBA00; line-height: normal; }
+table.spip tr.row_first { background: #C5E41C; }
 table.spip tr.row_odd { background: #EEE; }
 table.spip tr.row_even { background: #DDD; }
 table.spip th, table.spip td { text-align: left; border: 2px solid #FFF; }
@@ -81,7 +82,7 @@ table.spip td { padding: .4em; vertical-align: top; }
 /* Logos, documents et images */
 img, .spip_logos { margin: 0; padding: 0; border: none; }
 
-.spip_documents { text-align: center; line-height: normal; color: #666; }
+.spip_documents { text-align: center; line-height: normal; color: #633E6D; }
 /*.spip_documents p { margin-top: 1px; margin-bottom: 2px; }*/
 .spip_documents_center { clear: both; width: 100%; margin: 1em auto; }
 span.spip_documents_center { display: block; margin-top: 1em; }
@@ -96,7 +97,7 @@ span.spip_documents_center { display: block; margin-top: 1em; }
 
 #hierarchie { clear: both; margin-bottom: 2em; font-size: 0.77em; color: #666; }
 
-.surtitre, .soustitre { font-size: 0.90em; text-transform: uppercase; color: #666; color: #CCCC66; }
+.surtitre, .soustitre { font-size: 0.90em; text-transform: uppercase; color: #CCCC66; }
 
 .cartouche { margin-bottom: 2em; }
 .cartouche .spip_logos { float: right; margin-left: 16px; margin-bottom: 4px; }
@@ -106,13 +107,11 @@ span.spip_documents_center { display: block; margin-top: 1em; }
 .cartouche .traductions li { padding-left: 1em; }
 
 .chapo { margin-bottom: 1.5em; font-weight: bold; line-height: 1.4em; color: #666699; }
-
-.texte { line-height: 1.4em; color: #000; }
-
+.texte { line-height: 1.6em; }
 .ps, .notes { line-height: 1.4em; margin-bottom: 2em; }
 .notes { clear: both; }
 
-.hyperlien { display: block; background: #EEE; padding: .5em 1em; font-weight: bold; color: #666699; }
+.hyperlien { display: block; background: #EEE; padding: .5em 1em; font-weight: bold; color: #8B6F92; }
 
 
 /* modeles par defaut */
@@ -130,7 +129,7 @@ span.spip_documents_center { display: block; margin-top: 1em; }
 .formulaire_spip fieldset { margin: 0; margin-bottom: 1em; padding: 0; border: 0; }
 .formulaire_spip legend { margin: 0; padding: 0; font-weight: bold; color: #FFF; }
 .formulaire_spip label { display: block; color: #404040; }
-.forml, textarea { width: 99%; background: #FFF; border: 1px inset; font-family: inherit; font-size: inherit; }
+.forml, textarea, select { width: 99%; background: #F4F8F8; border: 1px inset; font-family: inherit; font-size: inherit; }
 .formulaire_spip textarea { margin-bottom: 1em; }
 
 /* Boutons */
@@ -158,7 +157,7 @@ ul.choix_mots label { display: inline; }
 .formulaire_recherche .forml {}
 
 /* menu langues */
-#menu_langues { vertical-align: top; max-height: 24px; margin-bottom: 5px; width: 120px; }
+#menu_langues { background: 0; margin: 0; margin-bottom: .5em; padding: 0; vertical-align: top; max-height: 24px; }
 
 /* Barre de raccourcis typographiques */
 table.spip_barre { width: 100%; }
@@ -215,7 +214,7 @@ ul ul ul ul ul .forum-chapo { background: #FFF; }
 .menu { clear: both; margin-bottom: 2em; text-align: left; }
 #contenu .menu { /*font-size: 0.82em;*/ }
 #navigation .menu { min-width: 10em; /*font-size: 0.77em;*/ }
-#navigation .menu a { }
+#navigation .menu a {}
 
 .menu p { margin: .2em 0; padding: .2em .1em; }
 .menu ul { margin: 0; padding: 0; list-style: none; }
@@ -224,7 +223,7 @@ ul ul ul ul ul .forum-chapo { background: #FFF; }
 .menu ul li li { padding: 0; border: 0; }
 
 .pagination { clear: both; text-align: right; font-size: 0.90em; color: #666; }
-.pagination .on { font-weight: bold; color: #000; }
+.pagination .on { font-weight: bold; color: #666; }
 
 /* Rubriques */
 .rubriques ul li { background: #EEE; border: 0; text-transform: uppercase; }
@@ -232,10 +231,10 @@ ul ul ul ul ul .forum-chapo { background: #FFF; }
 
 /* Listes d'articles et extraits introductifs */
 .articles ul li { clear: both; }
-.articles ul li h3 { margin: 0; padding: 0; border: 0; font-weight: bold; }
+.articles ul li h3 { margin: .3em 0; padding: 0; border: 0; font-weight: bold; }
 .articles ul li .spip_logos { float: right; clear: right; margin: 0 0 4px 16px; }
 .articles ul li .enclosures { float: right; text-align: right; max-width: 60%; margin: 0; }
-.articles ul li .introduction { margin-top: .5em; line-height: 1.4em; }
+.articles ul li .introduction { margin-top: .3em; line-height: 1.4em; }
 
 
 /* Couleurs des liens
