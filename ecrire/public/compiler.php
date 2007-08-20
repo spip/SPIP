@@ -695,31 +695,29 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 	// tableau des informations sur le squelette
 	$descr = array('nom' => $nom, 'sourcefile' => $sourcefile);
 
-	// une boucle documents est conditionnee par tout le reste!
+	// Initialiser les champs necessaires a la compilation
+	// et signaler une boucle documents (les autres influent dessus)
 	foreach($boucles as $id => $boucle) {
 		$type = $boucle->type_requete;
 		if ($type != 'boucle') {
-		  $boucles[$id]->descr = &$descr;
-		  if (isset($table_des_tables[$type])) {
-		    $boucles[$id]->id_table = $x = $table_des_tables[$type];
-		    $boucles[$id]->primary = $tables_principales["spip_$x"]['key']["PRIMARY KEY"];
-		    if ((!$boucles[$id]->jointures)
-			AND (is_array($x = $tables_jointures['spip_' . $x])))
-		      $boucles[$id]->jointures = $x;
-		  } else if (isset($tables_auxiliaires['spip_' .$type])) {
-		  	// table auxiliaire
-		    $boucles[$id]->id_table = $type;
-		    $boucles[$id]->primary = $tables_auxiliaires['spip_' . $type]['key']["PRIMARY KEY"];
-		  } else {
-			// table non Spip.
-		    $boucles[$id]->id_table = $type;
-		    $serveur = $boucle->sql_serveur;
-		    $x = $tables_des_serveurs_sql[$serveur ? $serveur : 'localhost'][$type]['key'];		
-		    $boucles[$id]->primary = ($x["PRIMARY KEY"] ? $x["PRIMARY KEY"] : $x["KEY"]);
-		  }
+			$table = isset($table_des_tables[$type])
+			? $table_des_tables[$type]
+			: $type;
+			$show = trouver_def_table($table, $boucles[$id]);
+			if ($show) {
+				$nom_table = $show[0];
+				$show = $show[1]['key'];
+				$boucles[$id]->descr = &$descr;
+				$boucles[$id]->id_table = $table;
+				$boucles[$id]->primary = $show["PRIMARY KEY"];
+				if ((!$boucles[$id]->jointures)
+				AND (is_array($x = $tables_jointures[$nom_table])))
+					$boucles[$id]->jointures = $x;
+				spip_log("j $nom_table  $x $table");
+				if (($type == 'documents') && $boucle->doublons)
+					{ $descr['documents'] = true;  }
+			}
 		}
-		if (($boucle->type_requete == 'documents') && $boucle->doublons)
-			{ $descr['documents'] = true;  }
 	}
 	// Commencer par reperer les boucles appelees explicitement 
 	// car elles indexent les arguments de maniere derogatoire

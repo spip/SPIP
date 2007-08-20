@@ -1048,7 +1048,8 @@ function trouver_def_table($nom, &$boucle)
 	  }
 	erreur_squelette(_T('zbug_table_inconnue', array('table' => $nom)),
 			 $boucle->id_boucle);
-	}
+	return false;
+}
 
 // http://doc.spip.org/@trouver_champ_exterieur
 function trouver_champ_exterieur($cle, $joints, &$boucle, $checkarrivee = false)
