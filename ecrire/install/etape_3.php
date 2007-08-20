@@ -97,7 +97,9 @@ function install_bases(){
 		$finsert('spip_meta', '(nom, valeur,impt)', "('version_installee', '$spip_version','non')");
 	} else {
 
-	  creer_base($server_db); // pour recrer les tables disparues au besoin
+	  // pour recreer les tables disparues au besoin
+	  creer_base($server_db); 
+
 	  $r = $fquery ("SELECT valeur FROM spip_meta WHERE nom='version_installee'");
 	  if ($r) $r = $ffetch($r);
 	  if ($r) $version_installee = (double) $r['valeur'];
@@ -138,8 +140,9 @@ function install_bases(){
 		
 		$result_ok = $finsert("spip_meta", "(nom, valeur)", "('nouvelle_install', '1')");
 	} else {
-	  // en cas de reinstall sur mise a jour mal passee
-		@$fquery("DELETE FROM spip_meta WHERE nom='import_all'");
+	  // eliminer la derniere operation d'admin mal terminee
+	  // notamment la mise a jour 
+		@$fquery("DELETE FROM spip_meta WHERE nom='import_all' OR  nom='admin'");
 		$result_ok = @$fquery("SELECT COUNT(*) FROM spip_meta");
 	}
 

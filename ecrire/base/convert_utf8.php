@@ -38,12 +38,6 @@ function convert_utf8_init($tables_a_convertir)
 // http://doc.spip.org/@base_convert_utf8_dist
 function base_convert_utf8_dist($titre, $reprise=false)
 {
-	// poser un verrou (et abandonner si l'action est en cours)
-
-	if (!spip_get_lock('conversion_charset')) {
-		echo minipres(_T('utf8_convert_attendez'));
-		exit;
-	}
 	// une liste des tables a convertir, avec le champ dans lequel on
 	// indique '<CONVERT charset>' ; on commence par les rubriques sinon
 	// ca fait desordre dans l'interface privee

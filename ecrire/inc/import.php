@@ -180,17 +180,6 @@ function detruit_restaurateur()
 	}
 }
 
-// verifier que l'id de session restauration place dans une meta correspond toujours a la session en cours
-// sinon cela signifie que la page a ete rechargee, et qu'une autre session a repris depuis le dernier abs_pos
-// il faut absolument ne plus rien faire et mourir ...
-
-// http://doc.spip.org/@import_verifie_session
-function import_verifie_session() {
-	$row = sql_fetsel(array('valeur'),array('spip_meta'),array("nom='restauration_session_id'"));
-	if ($row['valeur']!=_RESTAURATION_SESSION_ID)
-		die('la place est prise');
-}
-
 // http://doc.spip.org/@import_tables
 function import_tables($request, $dir) {
 	global $import_ok, $abs_pos,  $affiche_progression_pourcent;
@@ -228,12 +217,6 @@ function import_tables($request, $dir) {
 			$gz = 'fread';
 	}
 
-	// creer un id de la session d'import qui sera utilise pour verifier qu'on a toujours la main
-	// avant chaque insert/update
-	// permet d'eviter les process concourants qui realisent le meme insert/update
-	include_spip('inc/acces');
-	@define('_RESTAURATION_SESSION_ID',creer_uniqid());
-	ecrire_meta('restauration_session_id',_RESTAURATION_SESSION_ID,'non');
 	
 	if ($abs_pos==0) {
 		list($tag, $atts, $charset) = import_debut($file, $gz);
