@@ -153,8 +153,11 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 		. $afficher_contenu_objet('breve', $id_breve,$row)
 	);
 
+	
+
 	$onglet_proprietes = array(_L('Propri&eacute;t&eacute;s'),
-		($dater ? $dater($id_breve, $flag_editable, $statut, 'breve', 'breves_voir', $date_heure) : "")
+		afficher_breve_rubrique($id_breve, $id_rubrique, $statut)
+		. ($dater ? $dater($id_breve, $flag_editable, $statut, 'breve', 'breves_voir', $date_heure) : "")
 	  . $editer_mot('breve', $id_breve, $cherche_mot, $select_groupe, $flag_editable, true)
 	  . ((($GLOBALS['meta']['multi_articles'] == 'oui') AND ($flag_editable)) ? langue_breve($id_breve,$row):"")
 	  . pipeline('affiche_milieu',array(
@@ -225,4 +228,30 @@ function exec_breves_voir_dist()
 	afficher_breves_voir(intval(_request('id_breve')), _request('cherche_mot'), _request('select_groupe'));
 }
 
+
+function afficher_breve_rubrique($id_breve, $id_rubrique, $statut)
+{
+	global $spip_lang_right;
+	$aider = charger_fonction('aider', 'inc');
+	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
+	
+	$form = $chercher_rubrique($id_rubrique, 'breve', ($statut == 'publie'));
+	if (strpos($form,'<select')!==false) {
+		$form .= "<div style='text-align: $spip_lang_right;'>"
+			. '<input class="fondo" type="submit" value="'._T('bouton_choisir').'"/>'
+			. "</div>";
+	}
+	
+	$form = generer_action_auteur('editer_breve',		$id_breve,		generer_url_ecrire('breves_voir'),		$form,		" method='post' name='formulaire' class='submit_plongeur'"	);
+
+
+	if ($id_rubrique == 0) $logo = "racine-site-24.gif";
+	else $logo = "secteur-24.gif";
+
+	return 
+		debut_cadre_couleur($logo, true, "",_T('entree_interieur_rubrique').$aider ("brevesrub"))
+		. $form
+		. fin_cadre_couleur(true);
+
+}
 ?>
