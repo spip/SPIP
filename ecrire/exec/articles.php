@@ -344,6 +344,7 @@ function afficher_corps_articles($id_article, $virtuel, $row)
 	return $res;
 }
 
+// http://doc.spip.org/@afficher_article_rubrique
 function afficher_article_rubrique($id_article, $id_rubrique, $id_secteur, $statut)
 {
 	global $spip_lang_right;
