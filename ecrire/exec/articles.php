@@ -159,7 +159,8 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	  );
 
 	$onglet_proprietes = array(_L('Propri&eacute;t&eacute;s'),
-	  $dater($id_article, $flag_editable, $statut_article, 'article', 'articles', $date, $date_redac)
+		afficher_article_rubrique($id_article, $id_rubrique, $id_secteur, $statut)
+	  . $dater($id_article, $flag_editable, $statut_article, 'article', 'articles', $date, $date_redac)
 	  . $editer_auteurs('article', $id_article, $flag_editable, $cherche_auteur, $ids)
 	  . (!$editer_mot ? '' : $editer_mot('article', $id_article, $cherche_mot, $select_groupe, $flag_editable, true))
 	  . (!$referencer_traduction ? '' : $referencer_traduction($id_article, $flag_editable, $id_rubrique, $id_trad, $trad_err))
@@ -341,5 +342,25 @@ function afficher_corps_articles($id_article, $virtuel, $row)
 		$res .= $afficher_contenu_objet('article', $id_article,$row);
 	}
 	return $res;
+}
+
+function afficher_article_rubrique($id_article, $id_rubrique, $id_secteur, $statut)
+{
+	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
+	$aider = charger_fonction('aider', 'inc');
+
+	$form = $chercher_rubrique($id_rubrique, 'article', $statut=='publie');
+
+	$msg = _T('titre_cadre_interieur_rubrique') .
+	  ((preg_match('/^<input[^>]*hidden[^<]*$/', $form)) ? '' : $aider("artrub"));
+	  
+	$form = "<input type='hidden' name='editer_article' value='oui' />\n" . $form;
+	$form = generer_action_auteur("editer_article", $id_article, _DIR_RESTREINT_ABS . self(), $form, " method='post' name='formulaire' class='submit_plongeur'");
+
+	if ($id_rubrique == 0) $logo = "racine-site-24.gif";
+	elseif ($id_secteur == $id_rubrique) $logo = "secteur-24.gif";
+	else $logo = "rubrique-24.gif";
+
+	return debut_cadre_couleur($logo, true, "", $msg) . $form .fin_cadre_couleur(true);
 }
 ?>
