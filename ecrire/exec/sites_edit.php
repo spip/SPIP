@@ -147,7 +147,7 @@ function exec_sites_edit_dist()
 	. fin_cadre_couleur(true)
 	. "\n<br />"
 	."<b>"
-	/ "<label for='descriptif'>"
+	. "<label for='descriptif'>"
 	. _T('entree_description_site')
 	. "</label></b><br />\n"
 	. "<textarea name='descriptif' id='descriptif' rows='8' class='forml' cols='40' >"
