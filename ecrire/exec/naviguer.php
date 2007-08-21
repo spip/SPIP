@@ -18,6 +18,7 @@ include_spip('inc/forum');
 // http://doc.spip.org/@exec_naviguer_dist
 function exec_naviguer_dist()
 {
+	global $connect_toutes_rubriques;
 	global $spip_display,$spip_lang_left,$spip_lang_right;
 
 	$cherche_mot = _request('cherche_mot');
@@ -27,6 +28,7 @@ function exec_naviguer_dist()
 	$row = sql_fetch(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 	if ($row) {
 		$id_parent=$row['id_parent'];
+		$id_secteur=$row['id_secteur'];
 		$titre=$row['titre'];
 		$descriptif=$row['descriptif'];
 		$texte=$row['texte'];
@@ -73,8 +75,8 @@ function exec_naviguer_dist()
 	echo debut_gauche('', true);
 	
 	if (autoriser('publierdans','rubrique',$id_rubrique)) {
-		$id_parent = sql_fetch(spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
-		if (!$id_parent['id_parent']) {
+		$parent = sql_fetch(spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+		if (!$parent['id_parent']) {
 		  list($from, $where) = critere_statut_controle_forum('prop', $id_rubrique);
 		  $n_forums = spip_num_rows(spip_query("SELECT id_forum FROM $from" .($where ? (" WHERE $where") : '')));
 		}
@@ -150,8 +152,9 @@ function exec_naviguer_dist()
 		$editer_mot = charger_fonction('editer_mot', 'inc');
 
 	$onglet_proprietes = array(_L('Proprietes'),
+		afficher_rubrique_rubrique($id_rubrique, $id_parent, $id_secteur, $connect_toutes_rubriques)
 		/// Mots-cles
-		($editer_mot ? $editer_mot('rubrique', $id_rubrique,  $cherche_mot,  $select_groupe, $flag_editable, true):"")
+		. ($editer_mot ? $editer_mot('rubrique', $id_rubrique,  $cherche_mot,  $select_groupe, $flag_editable, true):"")
 		. langue_naviguer($id_rubrique, $id_parent, $flag_editable)
 		. pipeline('affiche_milieu',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''))
 	);
@@ -495,4 +498,28 @@ function bouton_supprimer_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_edi
 	return "";
 }
 
+function afficher_rubrique_rubrique($id_rubrique, $id_parent, $id_secteur, $connect_toutes_rubriques)
+{
+	global $spip_lang_right;
+	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
+	$aider = charger_fonction('aider', 'inc');
+
+	$form = $chercher_rubrique($id_parent, 'rubrique', !$connect_toutes_rubriques, $id_rubrique);
+	if (strpos($form,'<select')!==false) {
+		$form .= "<div style='text-align: $spip_lang_right;'>"
+			. '<input class="fondo" type="submit" value="'._T('bouton_choisir').'"/>'
+			. "</div>";
+	}
+
+	$msg = _T('titre_cadre_interieur_rubrique') .
+	  ((preg_match('/^<input[^>]*hidden[^<]*$/', $form)) ? '' : $aider("rubrub"));
+
+	$form = generer_action_auteur("editer_rubrique", $id_rubrique, generer_url_ecrire('naviguer'), $form, " method='post' name='formulaire' class='submit_plongeur'");
+
+	if ($id_parent == 0) $logo = "racine-site-24.gif";
+	elseif ($id_secteur == $id_parent) $logo = "secteur-24.gif";
+	else $logo = "rubrique-24.gif";
+
+	return debut_cadre_couleur($logo, true, "", $msg) . $form .fin_cadre_couleur(true);
+}
 ?>
