@@ -66,6 +66,13 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 			'data'=>''
 		)
 	);
+	if (($spip_display != 4) AND $id_breve>0 AND autoriser('publierdans','rubrique',$id_rubrique))
+		$iconifier = charger_fonction('iconifier', 'inc');
+	if ($flag_editable AND ($statut == 'publie'))
+		$dater = charger_fonction('dater', 'inc');
+	$editer_mot = charger_fonction('editer_mot', 'inc');
+	if ($champs_extra AND $extra)
+		include_spip('inc/extra');
 
 	echo $commencer_page("&laquo; $titre_breve &raquo;", "naviguer", "breves", $id_rubrique);
 	
@@ -90,7 +97,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 		'data'=>''
 		)
 	);
-	echo (_INTERFACE_ONGLETS?($iconifier ? $iconifier('id_breve', $id_breve, 'breves_voir', true) : ""):"");
+	echo ($iconifier ? $iconifier('id_breve', $id_breve, 'breves_voir', false) : "");
 	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',
 		array(
@@ -100,13 +107,6 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	);
 	echo meme_rubrique($id_rubrique, $id_breve, 'breve', 'date_heure');
 
-	if (($spip_display != 4) AND $id_breve>0 AND autoriser('publierdans','rubrique',$id_rubrique))
-		$iconifier = charger_fonction('iconifier', 'inc');
-	if ($flag_editable AND ($statut == 'publie'))
-		$dater = charger_fonction('dater', 'inc');
-	$editer_mot = charger_fonction('editer_mot', 'inc');
-	if ($champs_extra AND $extra)
-		include_spip('inc/extra');
 	$afficher_contenu_objet = charger_fonction('afficher_contenu_objet', 'inc');
 
 	$actions = 
@@ -154,9 +154,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 			'data'=>''))
 		  ;
 
-	$onglet_documents =
-		(_INTERFACE_ONGLETS?($iconifier ? $iconifier('id_breve', $id_breve, 'breves_voir', true) : ""):"")
-	  ;
+	$onglet_documents = "";
 	
 	$onglet_interactivite = ""
 		;

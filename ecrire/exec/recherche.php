@@ -27,7 +27,7 @@ function exec_recherche_dist() {
 		include_spip('base/abstract_sql');
 
 		$tables = liste_des_champs();
-		unset($tables['document']);
+		//unset($tables['document']);
 		unset($tables['forum']);
 		unset($tables['syndic_article']);
 
@@ -96,6 +96,10 @@ function exec_recherche_dist() {
 			case 'mot':
 				$titre = _T('titre_page_mots_tous');
 				$order = 'titre';
+				break;
+			case 'document':
+				$titre = _T('titre_documents_joints');
+				$order = "id_$table";
 				break;
 			default:
 				$titre = _L("Autres");

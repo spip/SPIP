@@ -95,12 +95,12 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 			)
 	));
 	echo fin_boite_info(true);
-	echo (_INTERFACE_ONGLETS?"":($iconifier ? $iconifier('id_syndic', $id_syndic, 'sites', true) :""));
-	echo meme_rubrique($id_rubrique, $id_syndic, 'syndic');
+	echo ($iconifier ? $iconifier('id_syndic', $id_syndic, 'sites', false) :"");
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
 
 	echo creer_colonne_droite('', true);
+	echo meme_rubrique($id_rubrique, $id_syndic, 'syndic');
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
 
 	echo debut_droite('', true);
@@ -177,8 +177,7 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 	  . pipeline('affiche_milieu',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''))
 	  ;
 
-	$onglet_documents = 
-	  (_INTERFACE_ONGLETS?($iconifier ? $iconifier('id_syndic', $id_syndic, 'sites', true) :""):"")
+	$onglet_documents = ""
 	  //. articles_documents('article', $id_article)
 	  ;
 	
