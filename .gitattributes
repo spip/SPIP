@@ -442,6 +442,7 @@ ecrire/configuration/documents.php -text
 ecrire/configuration/futurs.php -text
 ecrire/configuration/index.php -text
 ecrire/configuration/indexeur.php -text
+ecrire/configuration/interfaceur.php -text
 ecrire/configuration/langue.php -text
 ecrire/configuration/locuteur.php -text
 ecrire/configuration/logos.php -text
