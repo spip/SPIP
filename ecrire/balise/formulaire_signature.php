@@ -278,6 +278,7 @@ function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $
 // En cas d'acces concurrents il y aura des requetes de retraits d'elements
 // deja detruits. Bizarre ?  C'est mieux que de bloquer!
 
+// http://doc.spip.org/@signature_entrop
 function signature_entrop($query)
 {
 	$n = sql_count($query);
