@@ -713,7 +713,6 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 				if ((!$boucles[$id]->jointures)
 				AND (is_array($x = $tables_jointures[$nom_table])))
 					$boucles[$id]->jointures = $x;
-				spip_log("j $nom_table  $x $table");
 				if (($type == 'documents') && $boucle->doublons)
 					{ $descr['documents'] = true;  }
 			}

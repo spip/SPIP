@@ -723,9 +723,12 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 
 	global $table_des_tables, $tables_principales, $table_date;
 	global $exceptions_des_jointures, $exceptions_des_tables;
+	global $table_criteres_infixes;
 	$boucle = &$boucles[$idb];
 	$type = $boucle->type_requete;
 	$table = $boucle->id_table;
+	$nom = $table_des_tables[$type];
+	list(, $desc) = trouver_def_table($nom ? $nom : $type, $boucle);
 
 	list($fct, $col, $op, $val, $args_sql) =
 	  calculer_critere_infixe_ops($idb, $boucles, $crit);
@@ -763,8 +766,6 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 		$val[0] = str_replace('image', 'vignette', $val[0]);
 
 	else  {
-		$nom = $table_des_tables[$type];
-		list($nom, $desc) = trouver_def_table($nom ? $nom : $type, $boucle);
 		if (@!array_key_exists($col, $desc['field'])) {
 	  	$calculer_critere_externe = 'calculer_critere_externe_init';
 			// gestion par les plugins des jointures tordues pas automatiques mais necessaires
@@ -775,11 +776,19 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 					list($t, $col) = $exceptions_des_jointures[$table][$col];
 			}
 			else if (isset($exceptions_des_jointures[$col]))
-			  // on ignore la table, quel luxe!
 				list($t, $col) = $exceptions_des_jointures[$col];
-			else $t ='';
+			else $t =''; // jointure non declaree. La trouver.
 			$table = $calculer_critere_externe($boucle, $boucle->jointures, $col, $desc, ($crit->cond OR $op !='='), $t);
-	  }
+			list($nom, $desc) = trouver_champ_exterieur($col, $boucle->jointures, $boucle);
+		}
+	}
+	// En fonction du type de la colonne SQL
+	// la valeur comparee doit etre munie ou non d'apostrophes
+	if ($op == '=' OR in_array($op, $table_criteres_infixes)) {
+		if (strpos($val[0], '_q(') === 0
+		AND test_sql_int($desc['field'][$col]))
+				$val[0] = 'intval' . substr($val[0],2);
+		spip_log("typer $nom $col $idb $d $val[0]");
 	}
 	// tag du critere pour permettre aux boucles de modifier leurs requetes par defaut en fonction de ca
 	$boucles[$idb]->modificateur['criteres'][$col] = true;
@@ -1069,7 +1078,6 @@ function trouver_champ_exterieur($cle, $joints, &$boucle, $checkarrivee = false)
 // http://doc.spip.org/@calculer_critere_infixe_ops
 function calculer_critere_infixe_ops($idb, &$boucles, $crit)
 {
-	global $table_criteres_infixes;
 	// cas d'une valeur comparee a elle-meme ou son referent
 	if (count($crit->param) == 0)
 	  { $op = '=';
@@ -1133,13 +1141,6 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit)
 	    $args_sql = $m[2];
 	  }
 	  $args_sql .= $a[2];;
-	}
-
-	if ($op == '=' OR in_array($op, $table_criteres_infixes)) {
-		list($nom, $desc) = trouver_def_table($boucles[$idb]->id_table, $boucles[$idb]);
-		$type = $desc['field'][$col];
-		if (strpos($val[0], '_q(') === 0 AND test_sql_int($type))
-			$val[0] = 'intval' . substr($val[0],2);
 	}
 
 	return array($fct, $col, $op, $val, $args_sql);
