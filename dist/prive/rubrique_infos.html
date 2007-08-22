@@ -1,7 +1,12 @@
 <BOUCLE_rub(RUBRIQUES){id_rubrique=#ENV{id}}{statut?}>
 <div class='infos'>
 <div class='numero'><:titre_numero_rubrique:><p>#ID_RUBRIQUE</p></div>
-<BOUCLE_docs(DOCUMENTS){id_article}></BOUCLE_docs><p class='nb_docs'>#TOTAL_BOUCLE <:documents:></p><//B_docs>
+<p class='nb_elements'>
+<BOUCLE_arts(ARTICLES){id_rubrique}{statut!=poubelle}></BOUCLE_arts><div[(#TOTAL_BOUCLE|?{'',' class="noinfo"'})]>#TOTAL_BOUCLE <:info_articles:></div><//B_arts>
+<BOUCLE_breves(BREVES){id_rubrique}{statut!=poubelle}></BOUCLE_breves><div[(#TOTAL_BOUCLE|?{'',' class="noinfo"'})]>#TOTAL_BOUCLE <:info_breves_02:></div><//B_breves>
+<BOUCLE_sites(SITES){id_rubrique}{statut!=poubelle}></BOUCLE_sites><div[(#TOTAL_BOUCLE|?{'',' class="noinfo"'})]>#TOTAL_BOUCLE <:info_sites:></div><//B_sites>
+<BOUCLE_docs(DOCUMENTS){id_rubrique}></BOUCLE_docs><div[(#TOTAL_BOUCLE|?{'',' class="noinfo"'})]>#TOTAL_BOUCLE <:info_documents:></div><//B_docs>
+</p>
 [<p class='forums'>(#ENV{n_forums,''}|?{' '})[(#VAL{icone_suivi_forum}|_T{#ARRAY{nb_forums,#ENV{n_forums}}})]</p>]
 </div>
 </BOUCLE_rub>

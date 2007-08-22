@@ -3,9 +3,9 @@
 <div class='numero'><:info_numero_article:><p>#ID_ARTICLE</p></div>
 [(#ID_ARTICLE|instituer_article{#ID_RUBRIQUE,#STATUT})]
 <p class='origine'>[(#DATE|affdate)][<br /><:par_auteur:><span class='lesauteurs'> (#LESAUTEURS|couper{150})]</span><p>
-<BOUCLE_docs(DOCUMENTS){id_article}></BOUCLE_docs><p class='nb_docs'>#TOTAL_BOUCLE <:documents:></p><//B_docs>
-<p class='statistiques'>Cet article a une popularite de #POPULARITE et a re&ccedil;u #VISITES visites</p>
-<BOUCLE_forums(FORUMS){id_article}></BOUCLE_forums>[<p class='forums'>(#VAL{icone_suivi_forum}|_T{#ARRAY{nb_forums,#TOTAL_BOUCLE}})</p>]<//B_forums>
-<BOUCLE_sign(SIGNATURES){id_article}{statut IN publie,poubelle}></BOUCLE_sign><p class='signatues'>#TOTAL_BOUCLE&nbsp;<:info_signatures:></p><//B_sign>
+<BOUCLE_docs(DOCUMENTS){id_article}></BOUCLE_docs><p class='nb_elements[(#TOTAL_BOUCLE|?{'',' noinfo'})]'>#TOTAL_BOUCLE <:info_documents:></p><//B_docs>
+<p class='statistiques[(#VISITES|?{'',' noinfo'})]'>Cet article a une popularite de #POPULARITE et a re&ccedil;u #VISITES visites</p>
+<BOUCLE_forums(FORUMS){id_article}></BOUCLE_forums>[<p class='forums[(#TOTAL_BOUCLE|?{'',' noinfo'})]'>(#VAL{icone_suivi_forum}|_T{#ARRAY{nb_forums,#TOTAL_BOUCLE}})</p>]<//B_forums>
+<BOUCLE_sign(SIGNATURES){id_article}{statut IN publie,poubelle}></BOUCLE_sign><p class='signatues[(#TOTAL_BOUCLE|?{'',' noinfo'})]'>#TOTAL_BOUCLE&nbsp;<:info_signatures:></p><//B_sign>
 </div>
 </BOUCLE_art>

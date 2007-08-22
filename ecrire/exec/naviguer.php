@@ -159,7 +159,7 @@ function exec_naviguer_dist()
 
 	$onglet_enfants = 
 	  afficher_enfant_rub($id_rubrique, false, true)
-	  .(_INTERFACE_ONGLETS?"<br class='nettoyeur' />":
+	  .(_INTERFACE_ONGLETS?"":
 	   (autoriser('creerrubriquedans','rubrique',$id_rubrique)?
 	    (!$id_rubrique
 		    ? icone_inline(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "secteur-24.gif", "creer.gif",$spip_lang_right)
@@ -193,8 +193,7 @@ function exec_naviguer_dist()
 	  	'voir' =>_L('Contenu'),
 	  	'props' => _L('Propri&eacute;t&eacute;s'),
 	  	'docs' => _L('Documents'),
-	  	'interactivite' => _L('Interactivit&eacute;'),
-	  	'discuter' => _L('Discuter')),
+	  	'interactivite' => _L('Interactivit&eacute;')),
 	  	array(
 	    'voir'=>$onglet_contenu,
 	    'sousrub'=>$onglet_enfants,
@@ -382,7 +381,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 
 	$n = spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1"));
 	$bouton_article = $bouton_breves = $bouton_sites = "";
-	if ($n) {
+	if ($n && !_INTERFACE_ONGLETS) {
 		if (autoriser('creerarticledans','rubrique',$id_rubrique))
 		  $bouton_article .= icone_inline(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.gif","creer.gif", $spip_lang_right)
 		  . "<br class='nettoyeur' />";
