@@ -44,7 +44,7 @@ function sql_serveur($ins_sql, $serveur) {
 // http://doc.spip.org/@spip_sql_set_connect_charset
 function spip_sql_set_connect_charset($charset,$serveur=''){
 	$f = sql_serveur('set_connect_charset', $serveur);
-	return $f($charset);
+	return $f($charset, $serveur);
 }
 
 // Cette fonction est systematiquement appelee par les squelettes
@@ -92,7 +92,7 @@ function sql_fetch($res, $serveur='') {
 function sql_count($res, $serveur='')
 {
 	$f = sql_serveur('count', $serveur);
-	return $f($res);
+	return $f($res, $serveur);
 }
 
 // http://doc.spip.org/@sql_free
@@ -106,14 +106,14 @@ function sql_free($res, $serveur='')
 function sql_insert($table, $noms, $valeurs, $desc=array(), $serveur='')
 {
 	$f = sql_serveur('insert', $serveur);
-	return $f($table, $noms, $valeurs, $desc);
+	return $f($table, $noms, $valeurs, $desc, $serveur);
 }
 
 // http://doc.spip.org/@sql_update
 function sql_update($table, $exp, $where='', $desc=array(), $serveur='')
 {
 	$f = sql_serveur('update', $serveur);
-	return $f($table, $exp, $where, $desc);
+	return $f($table, $exp, $where, $desc, $serveur);
 }
 
 // Update est presque toujours appelee sur des constantes ou des dates
@@ -123,21 +123,21 @@ function sql_update($table, $exp, $where='', $desc=array(), $serveur='')
 function sql_updateq($table, $exp, $where='', $desc=array(), $serveur='')
 {
 	$f = sql_serveur('updateq', $serveur);
-	return $f($table, $exp, $where, $desc);
+	return $f($table, $exp, $where, $desc, $serveur);
 }
 
 // http://doc.spip.org/@sql_delete
 function sql_delete($table, $where, $serveur='')
 {
 	$f = sql_serveur('delete', $serveur);
-	return $f($table, $where);
+	return $f($table, $where, $serveur);
 }
 
 // http://doc.spip.org/@sql_replace
 function sql_replace($table, $values, $desc=array(), $serveur='')
 {
 	$f = sql_serveur('replace', $serveur);
-	return $f($table, $values, $desc);
+	return $f($table, $values, $desc, $serveur);
 }
 
 // http://doc.spip.org/@sql_showtable
@@ -150,13 +150,13 @@ function sql_showtable($table, $serveur='', $table_spip = false)
 	}
 	
 	$f = sql_serveur('showtable', $serveur);
-	return $f($table);
+	return $f($table, $serveur);
 }
 
 // http://doc.spip.org/@sql_create
 function sql_create($nom, $champs, $cles, $autoinc=false, $temporary=false, $serveur='') {
 	$f = sql_serveur('create', $serveur);
-	return $f($nom, $champs, $cles, $autoinc, $temporary);
+	return $f($nom, $champs, $cles, $autoinc, $temporary, $serveur);
 }
 
 // http://doc.spip.org/@sql_multi
@@ -197,7 +197,7 @@ function sql_countsel($from = array(), $where = array(),
 	$groupby = '', $limit = '', $sousrequete = '', $having = array(),
 	$serveur='') {
   	$f = sql_serveur('countsel', $serveur);
-	return $f($from, $where, $groupby, $limit, $sousrequete, $having);
+	return $f($from, $where, $groupby, $limit, $sousrequete, $having, $serveur);
 }
 
 //
