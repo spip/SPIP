@@ -1,7 +1,7 @@
 #CACHE{43200}
 <BOUCLE_breve_principal(BREVES) {id_breve}>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<html dir="#LANG_DIR" lang="#LANG">
 <head>
 <title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
 [<meta name="description" content="(#INTRODUCTION|couper{150}|attribut_html)" />]
@@ -16,73 +16,70 @@
 	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}>
 
-	[(#REM) Contenu : corps de la breve ]
-    <div id="conteneur">
-    <div id="contenu">
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/" ><:accueil_site:></a><BOUCLE_ariane(RUBRIQUES){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|couper{80})]</div>
 
-        [(#REM) Fil d'Ariane ]
-        <div id="hierarchie"><a href="#URL_SITE_SPIP/" ><:accueil_site:></a><BOUCLE_ariane(RUBRIQUES){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</div>
+	<div id="conteneur">
 
-        <div class="cartouche">
-            [(#LOGO_BREVE||image_reduire{200,200})]
-            <h1 class="#EDIT{titre}">#TITRE</h1>
-            <p><small>[(#DATE|nom_jour) ][(#DATE|affdate)]</small></p>
-        </div>
-        
-        [<div class="#EDIT{texte} texte">(#TEXTE)</div>]
-        [<p class="lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-        [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
-        
-        [(#REM) Forum de la breve
-        NB : pour desactiver les forums de breve, supprimez simplement les lignes ci-dessous ]
-        <a href="#forum" name="forum" id="forum"></a>
-        <INCLURE{fond=inc-forum}{id_breve}>
-        [<p class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_breve:></a></p>]
+		[(#REM) Contenu : corps de la breve ]
+		<div id="contenu">
 
-	</div><!--#contenu-->
-	</div><!--#conteneur-->
+			<div class="cartouche">
+				[(#LOGO_BREVE||image_reduire{200,200})]
+				<h1 class="#EDIT{titre} titre">#TITRE</h1>
+				<p><small>[(#DATE|nom_jour) ][(#DATE|affdate)]</small></p>
+			</div>
+			
+			[<div class="#EDIT{texte} texte">(#TEXTE)</div>]
+			[<p class="lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+			[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+			
+			[(#REM) Forum de la breve
+			NB : pour desactiver les forums de breve, supprimez simplement les lignes ci-dessous ]
+			<a href="#forum" name="forum" id="forum"></a>
+			[<h2 class="forum-repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_breve:></a></h2>]
+			<INCLURE{fond=inc-forum}{id_breve}>
 
-    [(#REM) Menu de navigation laterale ]
-    <div id="navigation">
+		</div><!-- fin contenu -->
 
-        [(#REM) Menu de navigation par rubriques ]
-        <INCLURE{fond=inc-rubriques}{id_rubrique}>
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
 
-    </div><!--#navigation-->
-    
-    [(#REM) Menu de navigation laterale ]
-    <div id="extra">
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}{id_rubrique}>
 
-        [(#REM) Breves dans la meme rubrique ]
-        <B_breves>
-        <div class="menu">
-            <h2><:autres_breves:></h2>
-            <ul>
-                <BOUCLE_breves(BREVES) {id_rubrique} {par date}{inverse} {0,10}>
-                <li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_BREVE"[ class="(#EXPOSE)"]>#TITRE</a></li>
-                </BOUCLE_breves>
-            </ul>
-        </div>
-        </B_breves>
+			[(#REM) Breves dans la meme rubrique ]
+			<B_breves>
+			<div class="breves">
+				<h2 class="menu-titre"><:autres_breves:></h2>
+				<ul>
+					<BOUCLE_breves(BREVES) {id_rubrique} {par date}{inverse} {0,10}>
+					<li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_BREVE"[ class="(#EXPOSE)"]>#TITRE</a></li>
+					</BOUCLE_breves>
+				</ul>
+			</div>
+			</B_breves>
 
-        [(#REM) Menu de navigation mots-cles ]
-        <B_mots>
-        <div class="menu">
-            <h2><:mots_clefs:></h2>
-            <ul>
-            <BOUCLE_mots(MOTS) {id_breve} {par titre}>
-                <li><a href="#URL_MOT" rel="tag">#TITRE</a></li>
-            </BOUCLE_mots>
-            </ul>
-        </div>
-        </B_mots>
-        
-    </div><!--#extra-->
+			[(#REM) Menu de navigation mots-cles ]
+			<B_mots>
+			<div class="divers">
+				<h2 class="menu-titre"><:mots_clefs:></h2>
+				<ul>
+				<BOUCLE_mots(MOTS) {id_breve} {par titre}>
+					<li><a href="#URL_MOT" rel="tag">#TITRE</a></li>
+				</BOUCLE_mots>
+				</ul>
+			</div>
+			</B_mots>
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
 
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 
-</div><!--#page-->
+</div><!-- fin page -->
 </body>
 </html>
 </BOUCLE_breve_principal>
