@@ -256,7 +256,7 @@ function spip_mysql_create($nom, $champs, $cles, $autoinc=false, $temporary=fals
 	$q = "CREATE $temporary TABLE IF NOT EXISTS $nom ($query" . ($keys ? ",$keys" : '') . ")".
 	($character_set?" DEFAULT $character_set":"")
 	."\n";
-	spip_mysql_query($q);
+	return spip_mysql_query($q);
 }
 
 // http://doc.spip.org/@spip_mysql_showtable

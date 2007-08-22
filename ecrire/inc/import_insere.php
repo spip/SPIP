@@ -28,14 +28,17 @@ $spip_translate_key = array(
 // La rajouter ici car sql_insert en a besoin
 global $tables_principales;;
 $tables_principales['spip_translate'] =
-	array('field' => &$spip_translate, 'key' => &$spip_translate_key, 'join' => &$spip_signatures_join);
+	array('field' => &$spip_translate, 'key' => &$spip_translate_key);
 
 // http://doc.spip.org/@insere_1_init
 function insere_1_init($request) {
 	global $tables_principales;
 	$v = $tables_principales['spip_translate'];
-	sql_create('spip_translate',  $v['field'], $v['key'], true);
-
+	$v = sql_create('spip_translate',  $v['field'], $v['key'], true);
+	if (!$v) {
+		spip_log("echec de la creation de la table de fusion");
+		return  false; 
+	}
 	// au cas ou la derniere fois ce serait terminee anormalement
 	spip_query("DELETE FROM spip_translate");
 	return insere_1bis_init($request);

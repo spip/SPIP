@@ -61,11 +61,9 @@ function base_import_all_dist($titre, $reprise=false)
 
 	echo debut_droite('', true);
 	
-	import_all_milieu($request);
+	$res = import_all_milieu($request);
 
-	echo "</body></html>\n";
-
-	if ($request['insertion'] == 'on') {
+	if (!$res AND $request['insertion'] == 'on') {
 			$request['insertion'] = 'passe2';
 			if ($request['url_site']
 			AND substr($request['url_site'],-1) != '/')
@@ -75,6 +73,8 @@ function base_import_all_dist($titre, $reprise=false)
 			$res = import_all_milieu($request);
 	}
  
+	echo $res, "</body></html>\n";
+
 	if ($charset = $GLOBALS['meta']['charset_restauration']) {
 			ecrire_meta('charset', $charset);
 			ecrire_metas();

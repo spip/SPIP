@@ -67,8 +67,8 @@ function verifier_sauvegarde ($archive) {
 	global $spip_version;
 
 	$g = preg_match(",\.gz$,", $archive);
-	$_fopen = ($g) ? gzopen : fopen;
-	$_fread = ($g) ? gzread : fread;
+	$_fopen = $g ? 'gzopen' : 'fopen';
+	$_fread = $g ? 'gzread' : 'fread';
 	$buf_len = 1024; // la version doit etre dans le premier ko
 
 	if (!(@file_exists($archive) AND $f = $_fopen($archive, "rb")))
