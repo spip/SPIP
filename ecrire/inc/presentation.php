@@ -1379,8 +1379,7 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 	if ($ajax) return $retour;
 
 	// id utilise dans puce_statut_article
-	return "\n<div>&nbsp;</div>"
-	. "\n<div id='imgstatut$idom$id_rubrique'>$retour</div>";
+	return "\n<div id='imgstatut$idom$id_rubrique'>$retour</div>";
 }
 
 //
