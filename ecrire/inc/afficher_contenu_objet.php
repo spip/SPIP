@@ -59,11 +59,11 @@ function inc_afficher_contenu_objet_dist($type, $id,$row = NULL){
 			$valeur = $row[$champ];
 		}
 		else $valeur = $GLOBALS['les_notes'];
-		if (($champ=='nom_site') && isset($row['url_site'])){
+		if (($champ=='nom_site') && isset($row['url_site']) && $row['url_site']){
 			$valeur = "[" . ($valeur?$valeur:$row['url_site']) . " -> " . $row['url_site'] ."]";
 			$valeur = propre($valeur);
 		}
-		elseif (($champ=='lien_titre') && isset($row['lien_url'])){
+		elseif (($champ=='lien_titre') && isset($row['lien_url']) && $row['lien_url']){
 			$valeur = "[" . ($valeur?$valeur:$row['lien_titre']) . " -> " . $row['lien_url'] ."]";
 			$valeur = propre($valeur);
 		}
@@ -77,7 +77,7 @@ function inc_afficher_contenu_objet_dist($type, $id,$row = NULL){
 		}
 		if ($champ!='notes' OR strlen($valeur))
 			$contenu_objet .= 
-				"<span class='champ contenu_$champ'>"
+				"<span class='champ contenu_$champ" .(strlen($valeur)?"":" vide") . "'>"
 				. "<span class='label'>$libelle</span>"
 				. "<span  dir='$lang_dir' class='$champ crayon $type-$champ-$id'>$valeur</span>"
 				. "</span>";
