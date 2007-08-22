@@ -132,7 +132,7 @@ function cadre_auteur_infos($id_auteur, $auteur)
 		)
 	));
 
-	return debut_boite_info(true) . $res . fin_boite_info(true);
+	return debut_boite_info(true) . $boite . fin_boite_info(true);
 }
 
 
