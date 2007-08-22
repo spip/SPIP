@@ -97,17 +97,6 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	$referencer_traduction = charger_fonction('referencer_traduction', 'inc');
 	$discuter = charger_fonction('discuter', 'inc');
 
-	$logo = '';
- 	$chercher_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
-	if ($chercher_logo) {
-		$chercher_logo = charger_fonction('chercher_logo', 'inc');
-		if ($logo = $chercher_logo($id_article, 'id_article', 'on')) {
-			list($fid, $dir, $nom, $format) = $logo;
-			include_spip('inc/filtres_images');
-			$logo = image_reduire("<img src='$fid' alt='' />", 75, 60);
-		}
-	}
-
 	if ($flag_editable AND ($spip_display != 4)) {
 		$iconifier = charger_fonction('iconifier', 'inc');
 		$icone = $iconifier('id_article', $id_article,'articles', true);
@@ -125,8 +114,10 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 
 	$navigation =
 	  debut_boite_info(true). $boite . fin_boite_info(true)
+	  . (_INTERFACE_ONGLETS?"":$icone)
+		. (_INTERFACE_ONGLETS?"":boites_de_config_articles($id_article))
 	  . ($flag_editable ? boite_article_virtuel($id_article, $virtuel):'')
-	  . meme_rubrique($id_rubrique, $id_article, 'article')
+		. meme_rubrique($id_rubrique, $id_article, 'article')
 	  . pipeline('affiche_gauche',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
 	
 	$extra = creer_colonne_droite('', true)
@@ -138,8 +129,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	
 	$actions = 
 		voir_en_ligne('article', $id_article, $statut_article, 'racine-24.gif', false)
-	 . ($flag_editable ? bouton_modifier_articles($id_article, $id_rubrique, $modif, _T('avis_article_modifie', $modif), "article-24.gif", "edit.gif",$spip_lang_right) : "")
-	 . icone_inline(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=prive&id=$id_article&script=articles") ."#formulaire", "forum-interne-24.gif", "creer.gif", $spip_lang_left);
+	 . ($flag_editable ? bouton_modifier_articles($id_article, $id_rubrique, $modif, _T('avis_article_modifie', $modif), "article-24.gif", "edit.gif",$spip_lang_right) : "");
 	 
 	// revisions d'articles
 	if (($GLOBALS['meta']["articles_versions"]=='oui')
@@ -150,29 +140,29 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	$actions .= "<div class='nettoyeur'></div>";
 	
 	$haut =
-		($logo ? "<div class='logo_titre'>$logo</div>" : "")
+		(_INTERFACE_ONGLETS?"":"<span $dir_lang class='arial1 spip_medium'><b>" . typo($surtitre) . "</b></span>\n")
 		. gros_titre($titre, '' , false)
+		. (_INTERFACE_ONGLETS?"":"<span $dir_lang class='arial1 spip_medium'><b>" . typo($soustitre) . "</b></span>\n")
 		. "<div class='bandeau_actions'>$actions</div>";
 
-	$onglet_contenu = array(_L('Contenu'),
-	  afficher_corps_articles($id_article,$virtuel,$row)
-	  );
+	$onglet_contenu =
+	  afficher_corps_articles($id_article,$virtuel,$row);
 
-	$onglet_proprietes = array(_L('Propri&eacute;t&eacute;s'),
+	$onglet_proprietes = 
 		afficher_article_rubrique($id_article, $id_rubrique, $id_secteur, $statut)
 	  . $dater($id_article, $flag_editable, $statut_article, 'article', 'articles', $date, $date_redac)
 	  . $editer_auteurs('article', $id_article, $flag_editable, $cherche_auteur, $ids)
 	  . (!$editer_mot ? '' : $editer_mot('article', $id_article, $cherche_mot, $select_groupe, $flag_editable, true))
 	  . (!$referencer_traduction ? '' : $referencer_traduction($id_article, $flag_editable, $id_rubrique, $id_trad, $trad_err))
 	  . pipeline('affiche_milieu',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''))
-	  );
+	  ;
 
-	$onglet_documents = array(_L('Documents'),
-	  $icone
+	$onglet_documents =
+	  (_INTERFACE_ONGLETS?$icone:"")
 	  . articles_documents('article', $id_article)
-	  );
+	  ;
 	
-	$onglet_interactivite = array(_L('Interactivit&eacute;'),
+	$onglet_interactivite =
 		// statistiques
 		(($row['statut'] == 'publie'
 		AND $row['visites'] > 0
@@ -180,25 +170,36 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 		AND autoriser('voirstats', $type, $id)) ?
 		  icone_horizontale(_T('icone_evolution_visites', array('visites' => $row['visites'])), generer_url_ecrire("statistiques_visites","id_article=$id"), "statistiques-24.gif","rien.gif", false)
 		  : "")
-	  . boites_de_config_articles($id_article)
-		);
+	  . (_INTERFACE_ONGLETS?boites_de_config_articles($id_article):"")
+		;
 		
-	$onglet_discuter = array(_L('Discuter'),
-		$discuter($id_article, false,  _request('debut'))
-		);
+	$onglet_discuter = 
+	 	icone_inline(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=prive&id=$id_article&script=articles") ."#formulaire", "forum-interne-24.gif", "creer.gif",'center')
+	 	.$discuter($id_article, false,  _request('debut'))
+		;
 
+	$hors_fiche = "";
 
 	return 
 	  $navigation
 	  . $extra 
+	  . "<div class='fiche_objet'>"
 	  . $haut 
-	  . afficher_onglets_pages(array(
-	    //'resume'=>$onglet_resume,
-	    'voir'=>$onglet_contenu,
+	  . afficher_onglets_pages(
+	  	array(
+	  	'voir' =>_L('Contenu'),
+	  	'props' => _L('Propri&eacute;t&eacute;s'),
+	  	'docs' => _L('Documents'),
+	  	'interactivite' => _L('Interactivit&eacute;'),
+	  	'discuter' => _L('Discuter')),
+	  	array(
 	    'props'=>$onglet_proprietes,
+	    'voir'=>$onglet_contenu,
 	    'docs'=>$onglet_documents,
-	    'interactivite'=>$onglet_interactivite,	    
-	    'discuter'=>$onglet_discuter));
+	    'interactivite'=>$onglet_interactivite,
+	    'discuter'=>_INTERFACE_ONGLETS?$onglet_discuter:""))
+	  . "</div>"
+	  . (_INTERFACE_ONGLETS?"":$onglet_discuter);
 }
 
 // http://doc.spip.org/@articles_documents
@@ -347,6 +348,7 @@ function afficher_corps_articles($id_article, $virtuel, $row)
 // http://doc.spip.org/@afficher_article_rubrique
 function afficher_article_rubrique($id_article, $id_rubrique, $id_secteur, $statut)
 {
+	if (!_INTERFACE_ONGLETS) return "";
 	global $spip_lang_right;
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
 	$aider = charger_fonction('aider', 'inc');

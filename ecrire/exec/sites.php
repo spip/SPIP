@@ -81,17 +81,6 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 		include_spip('inc/extra');
 	$afficher_contenu_objet = charger_fonction('afficher_contenu_objet', 'inc');
 
-	$logo = '';
- 	$chercher_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
-	if ($chercher_logo) {
-		$chercher_logo = charger_fonction('chercher_logo', 'inc');
-		if ($logo = $chercher_logo($id_syndic, 'id_syndic', 'on')) {
-			list($fid, $dir, $nom, $format) = $logo;
-			include_spip('inc/filtres_images');
-			$logo = image_reduire("<img src='$fid' alt='' />", 75, 60);
-		}
-	}
-
 	echo debut_grand_cadre(true);
 	echo afficher_hierarchie($id_rubrique);
 	echo fin_grand_cadre(true);
@@ -106,6 +95,7 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 			)
 	));
 	echo fin_boite_info(true);
+	echo (_INTERFACE_ONGLETS?"":($iconifier ? $iconifier('id_syndic', $id_syndic, 'sites', true) :""));
 	echo meme_rubrique($id_rubrique, $id_syndic, 'syndic');
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
@@ -126,18 +116,17 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 		voir_en_ligne('site', $id_syndic, $statut, 'racine-24.gif', false)
 	 . ($flag_editable ? icone_inline(_T('icone_modifier_site'), generer_url_ecrire('sites_edit',"id_syndic=$id_syndic"), "site-24.gif", "edit.gif",$spip_lang_right) : "")
 	 . icone_inline(_T('icone_voir_sites_references'), generer_url_ecrire("sites_tous",""), "site-24.gif","rien.gif", $spip_lang_left)
-	 . icone_inline (_T('icone_poster_message'), generer_url_ecrire('forum_envoi', "id=$id_syndic&statut=prive&script=sites") . '#formulaire', "forum-interne-24.gif", "creer.gif", $spip_lang_left)
 	 . "<div class='nettoyeur'></div>";
 
 	$haut =
-		($logo ? "<div class='logo_titre'>$logo</div>" : "")
-		. gros_titre($nom_site, '' , false)
+		gros_titre($nom_site, '' , false)
 	  . "<a href='$url_site' class='url_site'>$url_affichee</a>"
 		. "<div class='bandeau_actions'>$actions</div>";
 
-	$onglet_contenu = array(_L('Contenu'),
+	$onglet_contenu = 
+		(_INTERFACE_ONGLETS?
 		($statut == 'prop' ? "<p class='site_prop'>"._T('info_site_propose')." <b>".affdate($date_heure)."&nbsp;</b></p>" : "")
-		. $afficher_contenu_objet('site', $id_syndic,$row)
+		. $afficher_contenu_objet('site', $id_syndic,$row):"")
 
 		. (($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") ?
 		  "<p class='site_syndique'><a href='".htmlspecialchars($url_syndic)."'>"
@@ -170,42 +159,58 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 			. "</div>"
 			
 			: choix_feed($id_syndic, $id_rubrique, $nom_site, $row))
+		. (_INTERFACE_ONGLETS?"":($flag_administrable ? options_moderation($row) : ""))
 
 		. (($GLOBALS['champs_extra'] AND $extra) ? extra_affichage($extra, "sites") : "")
 
-	  );
+	  ;
 
-	$onglet_proprietes = array(_L('Propri&eacute;t&eacute;s'),
-		afficher_site_rubrique($id_syndic, $id_rubrique, $id_secteur)
+	$onglet_proprietes = 
+		(_INTERFACE_ONGLETS?"":
+		$afficher_contenu_objet('site', $id_syndic,$row)
+		. ($statut == 'prop' ? "<p class='site_prop'>"._T('info_site_propose')." <b>".affdate($date_heure)."&nbsp;</b></p>" : "")
+		)
+		. afficher_site_rubrique($id_syndic, $id_rubrique, $id_secteur)
 		. ($dater ? $dater($id_syndic, $flag_editable, $statut, 'syndic', 'sites', $date_heure) : "")
 	  . $editer_mot('syndic', $id_syndic,  $cherche_mot,  $select_groupe, $flag_editable, true)
-	  . ($flag_administrable ? options_moderation($row) : "")
+	  . (_INTERFACE_ONGLETS?($flag_administrable ? options_moderation($row) : ""):"")
 	  . pipeline('affiche_milieu',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''))
-	  );
+	  ;
 
-	$onglet_documents = array(_L('Documents'),
-	  $iconifier ? $iconifier('id_syndic', $id_syndic, 'sites', true) :""
+	$onglet_documents = 
+	  (_INTERFACE_ONGLETS?($iconifier ? $iconifier('id_syndic', $id_syndic, 'sites', true) :""):"")
 	  //. articles_documents('article', $id_article)
-	  );
+	  ;
 	
-	$onglet_interactivite = array(_L('Interactivit&eacute;'),
-		""
-	);
+	$onglet_interactivite = "";
 	
 	$r = spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_syndic=$id_syndic AND id_parent=0 ORDER BY date_heure DESC LIMIT 20");
-	$onglet_discuter = array(_L('Discuter'),
-				 ($r ? afficher_forum($r, "sites","id_syndic=$id_syndic") : "")
-				 );
+	$onglet_discuter = 
+		icone_inline (_T('icone_poster_message'), generer_url_ecrire('forum_envoi', "id=$id_syndic&statut=prive&script=sites") . '#formulaire', "forum-interne-24.gif", "creer.gif", 'center')
+	 . ($r ? afficher_forum($r, "sites","id_syndic=$id_syndic") : "");
 	
 	echo 
-	  $haut 
+	  "<div class='fiche_objet'>"
+	  . $haut 
 	  . afficher_onglets_pages(array(
-	    //'resume'=>$onglet_resume,
+	  	'voir' =>_L('Contenu'),
+	  	'props' => _L('Propri&eacute;t&eacute;s'),
+	  	'docs' => _L('Documents'),
+	  	'interactivite' => _L('Interactivit&eacute;'),
+	  	'discuter' => _L('Discuter')),
+	  _INTERFACE_ONGLETS?
+	  array(
 	    'voir'=>$onglet_contenu,
 	    'props'=>$onglet_proprietes,
 	    'docs'=>$onglet_documents,
 	    'interactivite'=>$onglet_interactivite,	    
-	    'discuter'=>$onglet_discuter));
+	    'discuter'=>$onglet_discuter)
+	  :array(
+	    'props'=>$onglet_proprietes,
+	    'voir'=>$onglet_contenu	    )
+	   )
+	  . "</div>"
+	  . (_INTERFACE_ONGLETS?"":$onglet_discuter);
 }
 
 // http://doc.spip.org/@options_moderation
@@ -324,6 +329,7 @@ function choix_feed($id_syndic, $id_rubrique, $nom_site, $row) {
 // http://doc.spip.org/@afficher_site_rubrique
 function afficher_site_rubrique($id_syndic, $id_rubrique, $id_secteur)
 {
+	if (!_INTERFACE_ONGLETS) return "";
 	global $spip_lang_right;
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
 	

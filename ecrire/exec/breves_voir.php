@@ -90,6 +90,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 		'data'=>''
 		)
 	);
+	echo (_INTERFACE_ONGLETS?($iconifier ? $iconifier('id_breve', $id_breve, 'breves_voir', true) : ""):"");
 	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',
 		array(
@@ -120,7 +121,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 			$GLOBALS['spip_lang_right']
 		) : "")
 	 . icone_inline(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui&id_rubrique=$id_rubrique"), "breve-24.gif","creer.gif", $spip_lang_left)
-	 . icone_inline(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=prive&id=$id_breve&script=breves_voir") . '#formulaire', "forum-interne-24.gif", "creer.gif", $spip_lang_left);
+	 ;
 	/*
 	if (autoriser('publierdans','rubrique',$id_rubrique) AND ($statut=="prop" OR $statut=="prepa")){
 		$actions .= icone_inline(_T('icone_refuser_breve'), 
@@ -131,31 +132,19 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	}	*/
 	 
 	$actions .= "<div class='nettoyeur'></div>";
-	
-	$logo = '';
- 	$chercher_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
-	if ($chercher_logo) {
-		$chercher_logo = charger_fonction('chercher_logo', 'inc');
-		if ($logo = $chercher_logo($id_breve, 'id_breve', 'on')) {
-			list($fid, $dir, $nom, $format) = $logo;
-			include_spip('inc/filtres_images');
-			$logo = image_reduire("<img src='$fid' alt='' />", 75, 60);
-		}
-	}
 
 	$haut =
-		($logo ? "<div class='logo_titre'>$logo</div>" : "")
-	  . gros_titre($titre,'', false)
+	   gros_titre($titre,'', false)
 		. "<div class='bandeau_actions'>$actions</div>";
 
-	$onglet_contenu = array(_L('Contenu'),
+	$onglet_contenu = 
 		(($flag_editable AND ($statut !== 'publie')) ? "<p class='breve_prop'>".affdate($date_heure)."</p>" : "")
 		. $afficher_contenu_objet('breve', $id_breve,$row)
-	);
+	;
 
 	
 
-	$onglet_proprietes = array(_L('Propri&eacute;t&eacute;s'),
+	$onglet_proprietes = 
 		afficher_breve_rubrique($id_breve, $id_rubrique, $statut)
 		. ($dater ? $dater($id_breve, $flag_editable, $statut, 'breve', 'breves_voir', $date_heure) : "")
 	  . $editer_mot('breve', $id_breve, $cherche_mot, $select_groupe, $flag_editable, true)
@@ -163,30 +152,45 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	  . pipeline('affiche_milieu',array(
 			'args'=>array('exec'=>'breves_voir','id_breve'=>$id_breve),
 			'data'=>''))
-		  );
+		  ;
 
-	$onglet_documents = array(_L('Documents'),
-		($iconifier ? $iconifier('id_breve', $id_breve, 'breves_voir', true) : "")
-	  );
+	$onglet_documents =
+		(_INTERFACE_ONGLETS?($iconifier ? $iconifier('id_breve', $id_breve, 'breves_voir', true) : ""):"")
+	  ;
 	
-	$onglet_interactivite = array(_L('Interactivit&eacute;'),
-		);
+	$onglet_interactivite = ""
+		;
 		
-	$onglet_discuter = array(_L('Discuter'),
-		afficher_forum(sql_select("*", 'spip_forum', "statut='prive' AND id_breve=$id_breve AND id_parent=0",'', "date_heure DESC",  "20"), "breves_voir", "id_breve=$id_breve")
-	  );
+	$onglet_discuter = 
+	  icone_inline(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=prive&id=$id_breve&script=breves_voir") . '#formulaire', "forum-interne-24.gif", "creer.gif", 'center')
+		. afficher_forum(sql_select("*", 'spip_forum', "statut='prive' AND id_breve=$id_breve AND id_parent=0",'', "date_heure DESC",  "20"), "breves_voir", "id_breve=$id_breve")
+	  ;
 
 
 	echo 
 		debut_droite('', true)
+	  . "<div class='fiche_objet'>"
 	  . $haut 
 	  . afficher_onglets_pages(array(
-	    //'resume'=>$onglet_resume,
-	    'voir'=>$onglet_contenu,
+	  	'voir' =>_L('Contenu'),
+	  	'props' => _L('Propri&eacute;t&eacute;s'),
+	  	'docs' => _L('Documents'),
+	  	'interactivite' => _L('Interactivit&eacute;'),
+	  	'discuter' => _L('Discuter')),
+	  _INTERFACE_ONGLETS?
+	  array(
 	    'props'=>$onglet_proprietes,
+	    'voir'=>$onglet_contenu,
 	    'docs'=>$onglet_documents,
 	    'interactivite'=>$onglet_interactivite,	    
-	    'discuter'=>$onglet_discuter))
+	    'discuter'=>$onglet_discuter)
+	    :
+	  array(
+	    'props'=>$onglet_proprietes,
+	    'voir'=>$onglet_contenu)
+	  )
+	  . "</div>"
+	  . (_INTERFACE_ONGLETS?"":$onglet_discuter)
 	  . fin_gauche()
 	  . fin_page();
 }
@@ -232,6 +236,7 @@ function exec_breves_voir_dist()
 // http://doc.spip.org/@afficher_breve_rubrique
 function afficher_breve_rubrique($id_breve, $id_rubrique, $statut)
 {
+	if (!_INTERFACE_ONGLETS) return "";
 	global $spip_lang_right;
 	$aider = charger_fonction('aider', 'inc');
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');

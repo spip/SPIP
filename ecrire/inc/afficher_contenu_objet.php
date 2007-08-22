@@ -40,6 +40,10 @@ function inc_afficher_contenu_objet_dist($type, $id,$row = NULL){
 	foreach($champs_libelles as $champ=>$libelle)
 		if ($champ!='notes' && !isset($row[$champ]))
 			unset($champs_libelles[$champ]);
+	if (isset($champs_libelles['nom_site']))
+		unset($champs_libelles['url_site']);
+	if (isset($champs_libelles['lien_titre']))
+		unset($champs_libelles['lien_url']);
 
 	/* TODO, mais il manque encore des concepts comme la boucle FOR pour y arriver
 	$contexte = array($key=>$id,'type'=>$type,'valeurs'=>$row, 'champs'=>$champs_libelles);
@@ -55,15 +59,25 @@ function inc_afficher_contenu_objet_dist($type, $id,$row = NULL){
 			$valeur = $row[$champ];
 		}
 		else $valeur = $GLOBALS['les_notes'];
-		$balise = strtoupper($champ);
-		if (isset($table_des_traitements[$balise])) {
-			$filtre = end($table_des_traitements[$balise]);
-			$filtre = str_replace('%s',"'".addslashes($valeur)."'", $filtre);
-			$valeur = eval("return $filtre;");
+		if (($champ=='nom_site') && isset($row['url_site'])){
+			$valeur = "[" . ($valeur?$valeur:$row['url_site']) . " -> " . $row['url_site'] ."]";
+			$valeur = propre($valeur);
+		}
+		elseif (($champ=='lien_titre') && isset($row['lien_url'])){
+			$valeur = "[" . ($valeur?$valeur:$row['lien_titre']) . " -> " . $row['lien_url'] ."]";
+			$valeur = propre($valeur);
+		}
+		else {
+			$balise = strtoupper($champ);
+			if (isset($table_des_traitements[$balise])) {
+				$filtre = end($table_des_traitements[$balise]);
+				$filtre = str_replace('%s',"'".addslashes($valeur)."'", $filtre);
+				$valeur = eval("return $filtre;");
+			}
 		}
 		if ($champ!='notes' OR strlen($valeur))
 			$contenu_objet .= 
-				"<span class='contenu_$champ'>"
+				"<span class='champ contenu_$champ'>"
 				. "<span class='label'>$libelle</span>"
 				. "<span  dir='$lang_dir' class='$champ crayon $type-$champ-$id'>$valeur</span>"
 				. "</span>";
@@ -99,9 +113,11 @@ function afficher_objet_champs_libelles($type,$table,$id, $row){
 		'soustitre' => _T('texte_sous_titre'),
 		'descriptif' => _T('info_descriptif'),
 		'chapo' => _T('info_chapeau'),
-		($type == breve ?'lien_titre':'nom_site') => ($type=='site'?_T('form_prop_nom_site'):_T('info_lien_hypertexte')),
-		($type == breve ?'lien_url':'url_site') => ($type=='site'?_T('form_prop_nom_site'):_T('info_lien_hypertexte')),
+		'nom_site' => ($type=='site'?_T('form_prop_nom_site'):_T('lien_voir_en_ligne')),
+		'url_site' => ($type=='site'?_T('form_prop_nom_site'):_T('info_lien_hypertexte')),
 		'texte' => _T('info_texte'),
+		'lien_titre' => _T('lien_voir_en_ligne'),
+		'lien_url' => _T('info_lien_hypertexte'),
 		'ps' => _T('info_ps'),
 		'notes' => _T('info_notes')
 	);

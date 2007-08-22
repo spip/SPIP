@@ -19,6 +19,7 @@ include_spip('inc/puce_statut');
 
 define('_ACTIVER_PUCE_RAPIDE', true);
 define('_SIGNALER_ECHOS', true);
+define('_INTERFACE_ONGLETS',$GLOBALS['meta']['interface_mode']=='192'?false:true);
 
 // http://doc.spip.org/@echo_log
 function echo_log($f, $ret) {
@@ -40,22 +41,28 @@ function hr($color, $retour = false) {
 // Cadres
 //
 // http://doc.spip.org/@afficher_onglets_pages
-function afficher_onglets_pages($onglets){
+function afficher_onglets_pages($ordre,$onglets){
 	static $onglet_compteur = 0;
 	$res = "";
 	$corps = "";
 	$cpt = 0;
 	$actif = 0;
-	foreach($onglets as $id=>$contenu){
+	// ordre des onglets
+	foreach($ordre as $id => $label) {
 		$cpt++;
-		$disabled = strlen(trim($contenu[1]))?"":" class='tabs-disabled'";
+		$disabled = strlen(trim($onglets[$id]))?"":" class='tabs-disabled'";
 		if (!$actif && !$disabled) $actif = $cpt;
-		$res .= "<li$disabled><a href='#$id'><span>" . $contenu[0] . "</span></a></li>";
-		$corps .= "<div id='$id' class='tabs-container'>" . $contenu[1] . "<br class='nettoyeur' /></div>";
+		$res .= "<li$disabled><a href='#$id'><span>" . $label . "</span></a></li>";
+	}
+	$res = "<ul class='tabs-nav'>$res</ul>";
+	foreach((_INTERFACE_ONGLETS ? array_keys($ordre):array_keys($onglets)) as $id){
+		$res .= "<div id='$id' class='tabs-container'>" . $onglets[$id] . "<br class='nettoyeur' /></div>";
 	}
 	$onglet_compteur++;
-	return "<div class='boite_onglets' id='boite_onglet_$onglet_compteur'><ul class='tabs-nav'>$res</ul>$corps</div>"
-	. "<script type='text/javascript'>$('#boite_onglet_$onglet_compteur').tabs(".($actif?"$actif,":"")."{ fxAutoHeight: true });</script>";
+	return "<div class='boite_onglets' id='boite_onglet_$onglet_compteur'>$res</div>"
+	. (_INTERFACE_ONGLETS ?
+	 "<script type='text/javascript'>$('#boite_onglet_$onglet_compteur').tabs(".($actif?"$actif,":"")."{ fxAutoHeight: true });</script>"
+	 :"");
 }
 
 // http://doc.spip.org/@debut_cadre
@@ -978,15 +985,17 @@ function icone_inline($texte, $lien, $fond, $fonction="", $align=""){
 		list($x,$lien,$atts,$texte)= $r;
 	else $atts = '';
 	
-	if ($align) $align = "float: $align; ";
-	$icone = "\n<a style='$align' class='$style'"
+	if ($align && $align!='center') $align = "float: $align; ";
+	$icone = ($align=='center'?"<div style='text-align:center;'>":"")
+	. "\n<a style='$align' class='$style'"
 	. $atts
 	. "\nhref='"
 	. $lien
 	. "'>"
 	. $icone
 	. (($spip_display == 3)	? '' : "<span>$texte</span>")
-	. "</a>\n";
+	. "</a>\n"
+	. ($align=='center'?"</div>":"");
 
 	return $icone;
 }
@@ -1125,7 +1134,7 @@ function debut_gauche($rubrique = "accueil", $return=false) {
 	// div contenu lui-meme ferme par fin_gauche() ainsi que
 	// div conteneur
 
-	$res = "<br /><div id='conteneur'>
+	$res = "<br /><div id='conteneur' class='".(_INTERFACE_ONGLETS ? "onglets" : "no_onglets")  ."'>
 		\n<div id='navigation'>\n";
 		
 	if ($spip_display == 4) $res .= "<!-- ";
@@ -1546,8 +1555,7 @@ function afficher_enfant_rub($id_rubrique, $bouton=false, $return=false) {
 		 : (!$id_rubrique
 		    ? icone(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "secteur-24.gif", "creer.gif",$spip_lang_right, false)
 		    : icone(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav&id_parent=$id_rubrique"), "rubrique-24.gif", "creer.gif",$spip_lang_right,false)))
-	. "</div>"
-	. "<br class='nettoyeur' />";
+	. "</div>";
 
 	if ($return) return $res; else echo_log('afficher_enfant_rub',$res);
 }
