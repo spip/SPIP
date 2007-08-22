@@ -105,7 +105,7 @@ function petitionner_params($petition)
 
 	$res ='';
 	$res .= "<input type='checkbox' name='email_unique' id='emailunique' "
-	  . (($email_unique=="oui")?"checked='checked' />":"")
+	  . (($email_unique=="oui")?"checked='checked' ":"")
 	  . "/>";
 	$res .= " <label for='emailunique'>"._T('bouton_checkbox_signature_unique_email')."</label><br />";
 	if ($site_obli=="oui")
