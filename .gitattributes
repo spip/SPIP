@@ -264,6 +264,7 @@ dist/polices/dustismo.ttf -text
 dist/polices/dustismo_bold.ttf -text
 dist/prive/article_infos.html -text
 dist/prive/article_infos_fonctions.php -text
+dist/prive/auteur_infos.html -text
 dist/prive/breve_infos.html -text
 dist/prive/breve_infos_fonctions.php -text
 dist/prive/rubrique_infos.html -text

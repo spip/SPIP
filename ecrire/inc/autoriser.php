@@ -438,6 +438,16 @@ function autoriser_detruire_dist($faire, $type, $id, $qui, $opt) {
 		;
 }
 
+//
+function autoriser_auteur_previsualiser_dist($faire, $type, $id, $qui, $opt) {
+	// les admins peuvent "previsualiser" une page auteur
+	if ($qui['statut'] == '0minirezo'
+		AND !$qui['restreint']) return true;
+	// "Voir en ligne" si l'auteur a un article publie
+	$n = spip_num_rows(spip_query("SELECT lien.id_article FROM spip_auteurs_articles AS lien, spip_articles AS articles WHERE lien.id_auteur="._q($id)." AND lien.id_article=articles.id_article AND articles.statut='publie'"));
+	if ($n) return true;
+	return false;		
+}
 
 // Modifier un auteur ?
 // Attention tout depend de ce qu'on veut modifier

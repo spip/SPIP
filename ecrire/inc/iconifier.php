@@ -16,7 +16,7 @@ include_spip('inc/actions');
 
 // http://doc.spip.org/@inc_iconifier_dist
 function inc_iconifier_dist($id_objet, $id,  $script, $visible=false) {
-
+	if ($GLOBALS['spip_display'] == 4) return "";
 	$texteon = $GLOBALS['logo_libelles'][($id OR $id_objet != 'id_rubrique') ? $id_objet : 'id_racine'];
 
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');

@@ -1054,8 +1054,9 @@ function f_boite_infos($flux) {
 	include_spip('public/assembler');
 	$boite .= recuperer_fond("prive/{$type}_infos",$args);
 
-	if (!in_array($type,array('article','rubrique','site','breve')))
-		$boite .= voir_en_ligne($type, $id, $row['statut'], 'racine-24.gif', false);
+	if (!in_array($type,array('article','rubrique','site','breve'))
+	 && autoriser('previsualiser', $type, $id))
+		$boite .= voir_en_ligne($type, $id, $row['statut'], 'racine-24.gif', false, false);
 
 	$flux['data'] = $boite;
 	return $flux;
@@ -1571,7 +1572,7 @@ function mySel($varaut,$variable, $option = NULL) {
 
 // Voir en ligne, ou apercu, ou rien (renvoie tout le bloc)
 // http://doc.spip.org/@voir_en_ligne
-function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af = true) {
+function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af = true, $inline=true) {
 
 	$en_ligne = $message = '';
 	switch ($type) {
@@ -1601,7 +1602,9 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af =
 			break;
 		case 'mot':
 		case 'auteur':
-			$en_ligne = 'calcul';
+			$n = spip_num_rows(spip_query("SELECT lien.id_article FROM spip_auteurs_articles AS lien, spip_articles AS articles WHERE lien.id_auteur="._q($id)." AND lien.id_article=articles.id_article AND articles.statut='publie'"));
+			if ($n) $en_ligne = 'calcul';
+			else $en_ligne = 'preview';
 			break;
 	}
 
@@ -1613,7 +1616,9 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af =
 	else
 		return '';
 
-	return icone_inline($message, generer_url_action('redirect', "id_$type=$id&var_mode=$en_ligne"), $image, "rien.gif", $GLOBALS['spip_lang_left']);
+	return
+		$inline ? icone_inline($message, generer_url_action('redirect', "id_$type=$id&var_mode=$en_ligne"), $image, "rien.gif", $GLOBALS['spip_lang_left'])		: 
+		icone_horizontale($message, generer_url_action('redirect', "id_$type=$id&var_mode=$en_ligne"), $image, "rien.gif",$af);
 
 }
 
