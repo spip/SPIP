@@ -12,16 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-//constantes spip pour mysql_fetch_array()
-define('SPIP_BOTH', MYSQL_BOTH);
-define('SPIP_ASSOC', MYSQL_ASSOC);
-define('SPIP_NUM', MYSQL_NUM);
-
-//
-// Appel de requetes SQL
-//
-
-// fonction pour la premiere connexion
+// fonction pour la premiere connexion a un serveur MySQL
 
 // http://doc.spip.org/@base_db_mysql_dist
 function base_db_mysql_dist($host, $port, $login, $pass, $db='') {
