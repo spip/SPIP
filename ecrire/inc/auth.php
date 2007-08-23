@@ -33,7 +33,7 @@ function auteurs_article($id_article, $cond='')
 // http://doc.spip.org/@auteurs_autorises
 function auteurs_autorises($cond='', $order='')
 {
-  return spip_query("SELECT * FROM spip_auteurs WHERE en_ligne<>0" . ($cond ? " AND $cond" : '') . ($order ? " ORDER BY $order" : ''));
+  return spip_query("SELECT * FROM spip_auteurs WHERE 1=1" /*WHERE en_ligne<>0*/ . ($cond ? " AND $cond" : '') . ($order ? " ORDER BY $order" : ''));
 }
 
 // Un nouvel inscrit prend son statut definitif a la 1ere connexion.
