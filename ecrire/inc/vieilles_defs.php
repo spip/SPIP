@@ -405,4 +405,8 @@ spip_log('creer_objet_multi() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_N
 	return $envoyer_mail($email,$sujet,$texte,$from,$headers);
 }
 
+//constantes spip pour mysql_fetch_array()
+define('SPIP_BOTH', MYSQL_BOTH);
+define('SPIP_ASSOC', MYSQL_ASSOC);
+define('SPIP_NUM', MYSQL_NUM);
 ?>
