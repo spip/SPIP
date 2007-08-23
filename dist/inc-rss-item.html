@@ -1,6 +1,6 @@
 #CACHE{3600}
 <BOUCLE_un_article(ARTICLES){id_article}>
-	<item>
+	<item[ xml:lang="(#LANG)"]>
 		<title>[(#TITRE|supprimer_numero|texte_backend)]</title>
 		<link>[(#URL_ARTICLE|url_absolue)]</link>
 		[<guid isPermaLink="true">(#URL_ARTICLE|url_absolue)</guid>]
@@ -38,7 +38,7 @@
 (#CONFIG{syndication_integrale}|=={oui}|?{' ',''})<content:encoded>[(#LOGO_ARTICLE|right||texte_backend)
 		][&lt;div class='rss_chapo'&gt;(#CHAPO|texte_backend)&lt;/div&gt;
 		][&lt;div class='rss_texte'&gt;(#TEXTE|
-			image_reduire{520,0}|texte_backend)&lt;/div&gt;
+			image_reduire{500,0}|texte_backend)&lt;/div&gt;
 		][&lt;hr /&gt;
 		&lt;div class='rss_notes'&gt;(#NOTES|texte_backend)&lt;/div&gt;
 		][&lt;div class='rss_ps'&gt;(#PS|texte_backend)&lt;/div&gt;]

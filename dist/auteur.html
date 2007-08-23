@@ -1,7 +1,7 @@
 #CACHE{86400}
 <BOUCLE_auteur_principal(AUTEURS) {id_auteur}>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
-<html dir="#LANG_DIR" lang="#LANG">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
 <title>[(#NOM|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
 [<meta name="description" content="(#BIO|couper{150}|attribut_html)" />]
@@ -14,81 +14,73 @@
 	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}>
 
-	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:info_auteurs:>[ &gt; (#NOM|couper{80})]</div>
+	[(#REM) Contenu principal : affichage de l'auteur ]
+    <div id="conteneur">
+    <div id="contenu">
+    
+        [(#REM) Fil d'Ariane ]
+        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:info_auteurs:>[ &gt; <strong class="on">(#NOM|couper{80})</strong>]</div>
 
-	<div id="conteneur">
+        <div class="cartouche">
+            [(#LOGO_AUTEUR||image_reduire{200,200})]
+            <h1 class="#EDIT{qui}">#NOM</h1>
+        </div>
 
-		[(#REM) Contenu principal : affichage de l'auteur ]
-		<div id="contenu">
+        [<div class="#EDIT{bio} texte">(#BIO)</div>]
+        [<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
 
-			<div class="cartouche">
-				[(#LOGO_AUTEUR||image_reduire{200,200})]
-				<h1 class="#EDIT{qui} titre">#NOM</h1>
-				[<p class="#EDIT{hyperlien} soustitre"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-			</div>
+        [(#REM) Articles de l'auteur ]
+        <B_articles>
+        <div class="menu articles">
+            #ANCRE_PAGINATION
+            <h2><:articles_auteur:> (#GRAND_TOTAL)</h2>
+            <ul>
+                <BOUCLE_articles(ARTICLES) {id_auteur} {par popularite}{inverse} {pagination 10}>
+                <li><a href="#URL_ARTICLE">#TITRE</a></h3></li>
+                </BOUCLE_articles>
+            </ul>
+            [<p class="pagination"><:suite:> : (#PAGINATION)</p>]
+        </div>
+        </B_articles>
 
-			[<div class="#EDIT{bio} texte">(#BIO)</div><br />]
+        #FORMULAIRE_ECRIRE_AUTEUR
 
-			<br class="nettoyeur" />
+        [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
 
-			[<div class="encart">
-			(#FORMULAIRE_ECRIRE_AUTEUR)
-			</div><!-- fin encart -->]
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
 
-			[(#REM) Articles de l'auteur ]
-			<B_articles>
-			<div class="contre-encart">
+    [(#REM) Menu de navigation laterale ]
+    <div id="navigation">
 
-				<div class="liste-articles">
-					#ANCRE_PAGINATION
-					<h2 class="invisible"><:articles_auteur:></h2>
-					<ul>
-						<BOUCLE_articles(ARTICLES) {id_auteur} {par date}{inverse} {pagination 10}>
-						<li>
-							<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
-							<small>[(#DATE|affdate_jourcourt)]</small>
-						</li>
-						</BOUCLE_articles>
-					</ul>
-					[<p class="pagination">(#PAGINATION)</p>]
-				</div>
+        [(#REM) Menu de navigation par rubriques ]
+        <INCLURE{fond=inc-rubriques}>
 
-			</div><!-- fin contre-encart -->
-			</B_articles>
+    </div><!--#navigation-->
+    
+    [(#REM) Menu de navigation laterale ]
+    <div id="extra">
 
-			[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
-
-		</div><!-- fin contenu -->
-
-		[(#REM) Menu de navigation laterale ]
-		<div id="navigation">
-
-			[(#REM) Menu de navigation par rubriques ]
-			<INCLURE{fond=inc-rubriques}>
-	
-			[(#REM) Autres auteurs ]
-			<B_auteurs>
-			<div class="forums">
-				#ANCRE_PAGINATION
-				<h2 class="menu-titre"><:info_auteurs:></h2>
-				[<p class="pagination">(#PAGINATION)</p>]
-				<ul>
-					<BOUCLE_auteurs(AUTEURS) {par nom} {pagination 20}>
-					<li><a href="#URL_AUTEUR"[ class="(#EXPOSE)"]>[(#NOM|couper{80})]</a></li>
-					</BOUCLE_auteurs>
-				</ul>
-			</div>
-			</B_auteurs>
-
-		</div><!-- fin navigation -->
-
-	</div><!-- fin conteneur -->
+        [(#REM) Autres auteurs ]
+        <B_auteurs>
+        <div class="menu">
+            #ANCRE_PAGINATION
+            <h2><:info_auteurs:></h2>
+            <ul>
+                <BOUCLE_auteurs(AUTEURS) {par nom} {pagination 20}>
+                <li><a href="#URL_AUTEUR"[ class="(#EXPOSE)"]>[(#NOM|couper{80})]</a></li>
+                </BOUCLE_auteurs>
+            </ul>
+            [<p class="pagination"><:suite:> : (#PAGINATION)</p>]
+        </div>
+        </B_auteurs>
+        
+    </div><!--#extra-->
 
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 
-</div><!-- fin page -->
+</div><!--#page-->
 </body>
 </html>
 </BOUCLE_auteur_principal>
