@@ -51,6 +51,7 @@ h3 { margin: 2em 0 1em 0; border-bottom: 2px solid #9DBA00; font-size: 1.10em; f
 h3.spip { color: #9DBA00; }
 
 /* Divers */
+hr.spip { width: 40%; height: 2px; margin: 4em auto; background-color: #9DBA00; color: #9DBA00; border: 0; }
 abbr, acronym { border-bottom: 1px dotted; cursor: help; }
 small { font-size: 0.71em; color: #666; }
 /* Attention : en dessous de 0.71em le texte devient illisible en text smallest sur MSIE */
