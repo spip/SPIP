@@ -998,6 +998,8 @@ function balise_CHEMIN_dist($p) {
 //
 // La syntaxe #ENV{toto, rempl} renverra 'rempl' si $toto est vide
 //
+// Si le tableau est vide on renvoie '' (utile pour #SESSION)
+//
 // http://doc.spip.org/@balise_ENV_dist
 function balise_ENV_dist($p, $src = NULL) {
 	// le tableau de base de la balise (cf #META ci-dessous)
@@ -1009,13 +1011,15 @@ function balise_ENV_dist($p, $src = NULL) {
 	if (!$_nom) {
 		// cas de #ENV sans argument : on retourne le serialize() du tableau
 		// une belle fonction [(#ENV|affiche_env)] serait pratique
-		$p->code = 'serialize('.$src.')';
+		$p->code = "($src ? serialize($src) : '')";
 	} else {
 		// admet deux arguments : nom de variable, valeur par defaut si vide
-		$p->code = $src."[$_nom]";
+		$p->code = 'is_array('.$src.') ? '.$src.'['.$_nom.'] : ""';
 		if ($_sinon)
 			$p->code = 'sinon('. 
 				$p->code.",$_sinon)";
+		else
+			$p->code = '('.$p->code.')';
 	}
 	#$p->interdire_scripts = true;
 
@@ -1037,6 +1041,23 @@ function balise_CONFIG_dist($p) {
 		return balise_ENV($p, '$GLOBALS["meta"]');
 	else
 		return balise_ENV_dist($p, '$GLOBALS["meta"]');
+}
+
+//
+// #SESSION
+// Cette balise est un tableau des donnees du visiteur (nom, email etc)
+// Si elle est invoquee, elle leve un drapeau dans le fichier cache, qui
+// permet a public/cacher d'invalider le cache si le visiteur suivant n'a
+// pas la meme session
+function balise_SESSION_dist($p) {
+	$p->descr['session'] = true;
+
+	$f = function_exists('balise_ENV')
+		? 'balise_ENV'
+		: 'balise_ENV_dist';
+
+	$p = $f($p, '$GLOBALS["auteur_session"]');
+	return $p;
 }
 
 
