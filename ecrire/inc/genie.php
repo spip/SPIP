@@ -78,7 +78,7 @@ function inc_genie_dist($taches = array()) {
 	}
 
 	if ($tache) {
-
+		include_spip('inc/meta');
 		spip_timer('tache');
 		touch($lock);
 		$cron = charger_fonction($tache, 'genie');
