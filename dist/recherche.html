@@ -25,20 +25,6 @@
             <h1>&#171;&nbsp;(#RECHERCHE)&nbsp;&#187;</h1>
         </div>]
 
-        [(#REM) Rubriques trouvees ]
-        <B_rubriques>
-        <div class="menu rubriques">
-            #ANCRE_PAGINATION
-            <h2><:rubriques:> (#GRAND_TOTAL)</h2>
-            <ul>
-                <BOUCLE_rubriques(RUBRIQUES) {recherche} {par points}{inverse} {pagination 5}>
-                <li><a href="#URL_RUBRIQUE">#TITRE</a></li>
-                </BOUCLE_rubriques>
-            </ul>
-            [<p class="pagination"><:suite:> : (#PAGINATION)</p>]
-        </div>
-        </B_rubriques>
-
         [(#REM) Articles trouves ]
         <B_articles>
         <div class="menu articles">
@@ -52,6 +38,20 @@
             [<p class="pagination"><:suite:> : (#PAGINATION)</p>]
         </div>
         </B_articles>
+
+        [(#REM) Rubriques trouvees ]
+        <B_rubriques>
+        <div class="menu rubriques">
+            #ANCRE_PAGINATION
+            <h2><:rubriques:> (#GRAND_TOTAL)</h2>
+            <ul>
+                <BOUCLE_rubriques(RUBRIQUES) {recherche} {par points}{inverse} {pagination 5}>
+                <li><a href="#URL_RUBRIQUE">#TITRE</a></li>
+                </BOUCLE_rubriques>
+            </ul>
+            [<p class="pagination"><:suite:> : (#PAGINATION)</p>]
+        </div>
+        </B_rubriques>
 
         [(#REM) Mots-cles trouves ]
         <B_mots>
