@@ -24,7 +24,7 @@ div#pied { clear: both; width: 100%; margin: 1em 0 0 0; padding: 0.20em 0; borde
 div#pied img { vertical-align: bottom; }
 
 /* Espaceur de blocs */
-.nettoyeur { clear: both; height: 0; margin: 0; padding: 0; border: none; line-height: 1px; font-size: 1px; }
+.nettoyeur { clear: both; height: 0; margin: 0; padding: 0; border: 0; line-height: 1px; font-size: 1px; }
 
 /* Non visible a l'ecran */
 .invisible { position: absolute; top: -3000em; height: 1%; }
@@ -47,8 +47,8 @@ body, .formulaire_spip, #hierarchie, .pagination, small { font-family: Verdana, 
 h1 { margin: 0; font-size: 1.50em; font-weight: bold; color: #000; }
 h2 { background: #8B6F92; margin: 0; padding: 0.20em; font-size: 1em; font-weight: normal; text-transform: uppercase; letter-spacing: 0.10em; }
 h2, h2 a, h2 a:hover { color: #EEE; }
-h3 { margin: 2em 0 1em 0; border-bottom: 2px solid #CC6; font-size: 1.10em; font-weight: bold; }
-h3.spip { color: #CC6; }
+h3 { margin: 2em 0 1em 0; border-bottom: 2px solid #9DBA00; font-size: 1.10em; font-weight: bold; }
+h3.spip { color: #9DBA00; }
 
 /* Divers */
 abbr, acronym { border-bottom: 1px dotted; cursor: help; }
@@ -71,7 +71,7 @@ div.spip_code, .spip_cadre { margin-bottom: 1em; }
 table { border-collapse: collapse; border-spacing: 0; }
 table.spip { margin-bottom: 1em; color: #633E6D; }
 table.spip caption { caption-side: top; font-weight: bold; color: #9DBA00; line-height: normal; }
-table.spip tr.row_first { background: #C5E41C url(pale.gif); }
+table.spip tr.row_first { background: #C4D665; }
 table.spip tr.row_odd { background: #EEE; }
 table.spip tr.row_even { background: #DDD; }
 table.spip th, table.spip td { text-align: left; border: 2px solid #FFF; }
@@ -96,7 +96,7 @@ span.spip_documents_center { display: block; margin-top: 1em; }
 
 #hierarchie { clear: both; margin-bottom: 2em; font-size: 0.77em; color: #666; }
 
-.surtitre, .soustitre { font-size: 0.90em; text-transform: uppercase; color: #CC6; }
+.surtitre, .soustitre { font-size: 0.90em; text-transform: uppercase; color: #9DBA00; }
 
 .cartouche { margin-bottom: 2em; }
 .cartouche .spip_logos { float: right; margin-left: 16px; margin-bottom: 4px; }
@@ -110,7 +110,7 @@ span.spip_documents_center { display: block; margin-top: 1em; }
 .ps, .notes { line-height: 1.40em; margin-bottom: 2em; }
 .notes { clear: both; }
 
-.hyperlien { display: block; background: #EEE url(pale.gif); padding: 0.50em 1em; font-weight: bold; color: #8B6F92; }
+.hyperlien { display: block; background: #EEE; padding: 0.50em 1em; font-weight: bold; color: #8B6F92; }
 
 /* modeles par defaut */
 .spip_modele { float: right; display: block; border: 1px dotted #666; width: 180px; }
@@ -125,11 +125,11 @@ span.spip_documents_center { display: block; margin-top: 1em; }
 
 /* Habillage des formulaires
 ---------------------------------------------- */
-.formulaire_spip { background: #CC9 url(pale.gif); margin-bottom: 2em; padding: 1em; text-align: left; }
+.formulaire_spip { background: #EEC; margin-bottom: 2em; padding: 1em; text-align: left; color: #330; }
 .formulaire_spip fieldset { margin: 0; margin-bottom: 1em; padding: 0; border: 0; border-top: 1px solid #CC9; }
-.formulaire_spip legend { margin: 0; padding: 0; padding-right: 0.50em; color: #663; }
-.formulaire_spip label { display: block; color: #404040; color: #663; font-size: 0.90em; }
-.forml, textarea, select { width: 99%; background: #F4F8F8; border: 1px inset; font-family: inherit; font-size: inherit; color: #000; }
+.formulaire_spip legend { margin: 0; padding: 0; padding-right: 0.50em; }
+.formulaire_spip label { display: block; font-size: 0.90em; }
+.forml, textarea, select { width: 99%; background: #F4F8F8; border: 1px inset #CC9; font-family: inherit; font-size: inherit; color: #000; }
 .formulaire_spip textarea { margin-bottom: 1em; }
 
 /* Boutons */
@@ -137,12 +137,14 @@ span.spip_documents_center { display: block; margin-top: 1em; }
 .spip_bouton input { float: right; }
 
 /* Reponse du formulaire */
-.reponse_formulaire { font-weight: bold; color: #e86519; }
-fieldset.reponse_formulaire { border-color: #e86519; font-weight: normal; }
+.reponse_formulaire { font-weight: bold; color: #F57900; }
+fieldset.reponse_formulaire { border-color: #F57900; font-weight: normal; }
 .spip_surligne { background: #FF6; }
 
 /* Previsualisation du message */
-fieldset.previsu { padding: 1em; }
+fieldset.previsu { background: #FFF; padding: 1em; border: 2px solid #F57900; }
+fieldset.previsu legend { padding: 0 .4em; color: #F57900; font-weight: bold; }
+fieldset.previsu .spip_bouton input { background: #F57900; border-color: #F57900; color: #FFF; }
 
 /* Formulaire de login au forum */
 .formulaire_login_forum .forml { width: 12em; }
@@ -162,9 +164,9 @@ ul.choix_mots label { display: inline; }
 
 /* Barre de raccourcis typographiques */
 table.spip_barre { width: 100%; }
-table.spip_barre a img { background: #FDA; padding: 3px; border: 1px outset #999; }
-table.spip_barre a:hover img { background: #FFF; border: 1px solid #999; }
-table.spip_barre input.barre { width: 100%; background: #EEE; }
+table.spip_barre a img { background: #FDA; padding: 3px; border: 1px outset #CC9; }
+table.spip_barre a:hover img { background: #FFF; border: 1px solid #CC9; }
+table.spip_barre input.barre { width: 99%; background: transparent; border: 0; color: #F57900; }
 
 
 /* Habillage des forums
