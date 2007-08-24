@@ -214,7 +214,10 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	}
 
 	// $delais par defaut (pour toutes les pages sans #CACHE{})
-	if (!isset($GLOBALS['delais'])) $GLOBALS['delais'] = 3600;
+	if (!isset($GLOBALS['delais'])) {
+		define('_DUREE_CACHE_DEFAUT', 24*3600);
+		$GLOBALS['delais'] = _DUREE_CACHE_DEFAUT;
+	}
 
 	// Lire le fichier cache et determiner sa validite
 	if (lire_fichier(_DIR_CACHE . $chemin_cache, $page)) {

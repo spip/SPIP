@@ -1,4 +1,6 @@
-#CACHE{3600*24}
+[(#REM)
+	Un cache plus court, pour la boucle syndic_articles
+]#CACHE{3600}
 <BOUCLE_site(SITES){id_syndic}>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 [(#REM) Les sites n'ont pas de "lang" a proprement parler ; on se base donc sur la langue de la rubrique qui les contient. Les articles syndiques, eux, ont une "lang". ]
