@@ -87,11 +87,7 @@ function description_type_requete($type, $serveur='') {
 
 	$desc = $tables_des_serveurs_sql[$s][$nom_table];
 	if (!isset($desc['field'])) {
-		$desc = ($nom_table != $type) ?
-			(($GLOBALS['table_prefix'] ? $GLOBALS['table_prefix'] : 'spip')
-				. '_' . $t) : $nom_table;
-
-		$desc = sql_showtable($desc, $serveur);
+		$desc = sql_showtable($nom_table, $serveur, ($nom_table != $type));
 		if (!isset($desc['field']))
 			return null;
 		$tables_des_serveurs_sql[$s][$nom_table]= $desc;

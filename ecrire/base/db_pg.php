@@ -15,27 +15,53 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Se connecte et retourne le nom de la fonction a connexion persistante
 
 // http://doc.spip.org/@base_db_pg_dist
-function base_db_pg_dist($addr, $port, $login, $pass, $db='') {
-	global $spip_pg_link;
+function base_db_pg_dist($addr, $port, $login, $pass, $db='', $prefixe='') {
 
 	@list($host, $p) = split(';', $addr);
 	if ($p >0) $port = " port=$p" ; else $port = '';
-	if ($db) $db= " dbname=$db";
-	$spip_pg_link = pg_connect("host=$host$port$db  user=$login password=$pass");
-	if ($spip_pg_link) return 'spip_pg_query';
+	if (!$db) {$db = 'spip'; $dbn='';} else $dbn =  " dbname=$db";
+	$link = pg_connect("host=$host$port$dbn user=$login password=$pass");
+#	spip_log("Connexion vers $host, base $db, prefixe $prefixe "
+#		 . ($link ? 'operationnelle' : 'impossible'));
 
-	spip_log("pas d'acces vers $host:$port sur $db pour $login");
-	return false;
+	return !$link ? false : array(
+		'link' => $link,
+		'db' => $db,
+		'prefixe' => $prefixe ? $prefixe : $db,
+		'count' => 'spip_pg_count',
+		'countsel' => 'spip_pg_countsel',
+		'create' => 'spip_pg_create',
+		'delete' => 'spip_pg_delete',
+		'errno' => 'spip_pg_errno',
+		'error' => 'spip_pg_error',
+		'fetch' => 'spip_pg_fetch',
+		'fetsel' => 'spip_pg_fetsel',
+		'free' => 'spip_pg_free',
+		'insert' => 'spip_pg_insert',
+		'listdbs' => 'spip_pg_listdbs',
+		'multi' => 'spip_pg_multi',
+		'query' => 'spip_pg_query',
+		'replace' => 'spip_pg_replace',
+		'select' => 'spip_pg_select',
+		'selectdb' => 'spip_pg_selectdb',
+		'showtable' => 'spip_pg_showtable',
+		'update' => 'spip_pg_update',
+		'updateq' => 'spip_pg_updateq',
+		);
 }
 
 // Par ou ca passe une fois les traductions faites
 // http://doc.spip.org/@spip_pg_trace_query
-function spip_pg_trace_query($query)
+function spip_pg_trace_query($query, $serveur='')
 {
-	global $spip_pg_link;
+	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$prefixe = $connexion['prefixe'];
+	$link = $connexion['link'];
+	$db = $connexion['db'];
 
 	$t = !isset($_GET['var_profile']) ? 0 : trace_query_start();
-	$r = pg_query($spip_pg_link, $query);
+	$r = pg_query($link, $query);
+
 	if ($e = spip_pg_errno())	// Log de l'erreur eventuelle
 		$e .= spip_pg_error($query); // et du fautif
 	return $t ? trace_query_end($query, $t, $r, $e) : $r;
@@ -45,19 +71,19 @@ function spip_pg_trace_query($query)
 // Elle change juste le noms des tables ($table_prefix) dans le FROM etc
 
 // http://doc.spip.org/@spip_pg_query
-function spip_pg_query($query)
+function spip_pg_query($query, $serveur='')
 {
-	global $table_prefix;
+	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$prefixe = $connexion['prefixe'];
+	$link = $connexion['link'];
+	$db = $connexion['db'];
 
-	if (strpos($query, 'REPLACE') ===0) // a evacuer 
-		return spip_pg_replace($query);
 	if (preg_match('/\s(SET|VALUES|WHERE)\s/i', $query, $regs)) {
 		$suite = strstr($query, $regs[0]);
 		$query = substr($query, 0, -strlen($suite));
 	} else $suite ='';
-	$query = preg_replace('/([,\s])spip_/', '\1'.$table_prefix.'_', $query) . $suite;
-	return spip_pg_trace_query($query);
-
+	$query = preg_replace('/([,\s])spip_/', '\1'.$prefixe.'_', $query) . $suite;
+	return spip_pg_trace_query($query, $serveur);
 }
 
 //  Qu'une seule base pour le moment
@@ -80,6 +106,10 @@ function spip_pg_select($select, $from, $where,
                            $sousrequete, $having,
                            $table='', $id='', $serveur=''){
 
+	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$prefixe = $connexion['prefixe'];
+	$link = $connexion['link'];
+	$db = $connexion['db'];
 
 	$limit = preg_match("/^\s*(([0-9]+),)?\s*([0-9]+)\s*$/", $limit,$limatch);
 	if ($limit) {
@@ -96,7 +126,7 @@ function spip_pg_select($select, $from, $where,
 	    $having = join("\n\tAND ", array_map('calculer_pg_where', $having));
 	}
 	$q =  spip_pg_frommysql($select)
-	  . (!$from ? '' : ("\nFROM " . spip_pg_from($from)))
+	  . (!$from ? '' : ("\nFROM " . spip_pg_from($from, $prefixe)))
 	  . (!$where ? '' : ("\nWHERE " . (!is_array($where) ? calculer_pg_where($where) : (join("\n\tAND ", array_map('calculer_pg_where', $where))))))
 	  . spip_pg_groupby($groupby, $from, $select)
 	  . (!$having ? '' : "\nHAVING $having")
@@ -113,10 +143,11 @@ function spip_pg_select($select, $from, $where,
 		boucle_debug_resultat($id, '', $q);
 	}
 
-	if (!($res = spip_pg_trace_query($q))) {
+	if (!($res = spip_pg_trace_query($q, $serveur))) {
 	  include_spip('public/debug');
 	  erreur_requete_boucle($q, $id, $table, $n, $m);
 	}
+
 	return $res;
 }
 
@@ -124,13 +155,12 @@ function spip_pg_select($select, $from, $where,
 // car le reste de la requete utilise les alias (AS) systematiquement
 
 // http://doc.spip.org/@spip_pg_from
-function spip_pg_from($from)
+function spip_pg_from($from, $prefixe)
 {
-	global $table_prefix;
-	return  !$table_prefix ? $from :
+	return !$prefixe ? $from :
 		preg_replace('/(\b)spip_/',
-			     '\1'.$table_prefix.'_', 
-			     (!is_array($from) ? $from : spip_pg_select_as($from)));
+			'\1'.$prefixe.'_', 
+			(!is_array($from) ? $from : spip_pg_select_as($from)));
 
 }
 
@@ -269,18 +299,18 @@ function spip_pg_select_as($args)
 }
 
 // http://doc.spip.org/@spip_pg_fetch
-function spip_pg_fetch($res, $t=PGSQL_ASSOC) {
+function spip_pg_fetch($res, $t='', $serveur='') {
 
-	if ($res) $res = pg_fetch_array($res, NULL, $t);
+	if ($res) $res = pg_fetch_array($res, NULL, PGSQL_ASSOC);
 	return $res;
 }
  
 // http://doc.spip.org/@spip_pg_countsel
 function spip_pg_countsel($from = array(), $where = array(),
-	$groupby='', $limit='', $sousrequete = '', $having = array())
+			  $groupby='', $limit='', $sousrequete = '', $having = array(), $serveur='')
 {
 	$r = spip_pg_select('COUNT(*)', $from, $where,
-			    $groupby, '', $limit, $sousrequete, $having);
+			    $groupby, '', $limit, $sousrequete, $having, '','', $serveur);
 	if ($r) list($r) = pg_fetch_array($r, NULL, PGSQL_NUM);
 	return $r;
 }
@@ -296,19 +326,23 @@ function spip_pg_free($res, $serveur='') {
 }
 
 // http://doc.spip.org/@spip_pg_delete
-function spip_pg_delete($table, $where='') {
-	global $spip_pg_link, $table_prefix;
-	if ($GLOBALS['table_prefix'])
-		$table = preg_replace('/^spip/',
-				    $GLOBALS['table_prefix'],
-				    $table);
-	spip_pg_trace_query("DELETE FROM $table " . ($where ? (" WHERE " . spip_pg_frommysql($where)) : ''));
+function spip_pg_delete($table, $where='', $serveur='') {
+
+	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$prefixe = $connexion['prefixe'];
+	$link = $connexion['link'];
+	$db = $connexion['db'];
+	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
+	spip_pg_trace_query("DELETE FROM $table " . ($where ? (" WHERE " . spip_pg_frommysql($where)) : ''), $serveur);
 }
 
 // http://doc.spip.org/@spip_pg_insert
-function spip_pg_insert($table, $champs, $valeurs, $desc=array()) {
+function spip_pg_insert($table, $champs, $valeurs, $desc=array(), $serveur='') {
+	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$prefixe = $connexion['prefixe'];
+	$link = $connexion['link'];
+	$db = $connexion['db'];
 
-	global $spip_pg_link, $table_prefix;
 	if (!$desc) {
 		global $tables_principales;
 		include_spip('base/serial');
@@ -322,11 +356,8 @@ function spip_pg_insert($table, $champs, $valeurs, $desc=array()) {
 	$seq = @$desc['key']["PRIMARY KEY"];
 	$ret = preg_match('/\w+/', $seq) ? " RETURNING $seq" : '';
 
-	if ($GLOBALS['table_prefix'])
-		$table = preg_replace('/^spip/',
-				    $GLOBALS['table_prefix'],
-				    $table);
-	$r = pg_query($spip_pg_link, $q="INSERT INTO $table $champs VALUES $valeurs $ret");
+	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
+	$r = pg_query($link, $q="INSERT INTO $table $champs VALUES $valeurs $ret");
 	if ($r) {
 		if (!$ret) return 0;
 		if ($r = pg_fetch_array($r, NULL, PGSQL_NUM))
@@ -339,7 +370,11 @@ function spip_pg_insert($table, $champs, $valeurs, $desc=array()) {
 
 // http://doc.spip.org/@spip_pg_update
 function spip_pg_update($table, $champs, $where='', $desc=array()) {
-	global $spip_pg_link, $table_prefix;
+
+	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$prefixe = $connexion['prefixe'];
+	$link = $connexion['link'];
+	$db = $connexion['db'];
 	$r = '';
 	foreach ($champs as $champ => $val) {
 		$r .= ',' . $champ . '=' . 
@@ -347,11 +382,7 @@ function spip_pg_update($table, $champs, $where='', $desc=array()) {
 	}
 
 	if ($r = substr($r, 1)) {
-		if ($GLOBALS['table_prefix'])
-			$table = preg_replace('/^spip/',
-				    $GLOBALS['table_prefix'],
-				    $table);
-
+		if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
 		spip_pg_trace_query("UPDATE $table SET $r" .($where ? (" WHERE " . spip_pg_frommysql($where)) : ''));
 	}
 }
@@ -359,7 +390,12 @@ function spip_pg_update($table, $champs, $where='', $desc=array()) {
 // idem, mais les valeurs sont des constantes a mettre entre apostrophes
 // sauf les expressions de date lorsqu'il s'agit de fonctions SQL (NOW etc)
 // http://doc.spip.org/@spip_pg_updateq
-function spip_pg_updateq($table, $champs, $where='', $desc=array()) {
+function spip_pg_updateq($table, $champs, $where='', $desc=array(), $serveur='') {
+
+	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$prefixe = $connexion['prefixe'];
+	$link = $connexion['link'];
+	$db = $connexion['db'];
 
 	if (!$champs) return;
 	if (!$desc) {
@@ -367,27 +403,25 @@ function spip_pg_updateq($table, $champs, $where='', $desc=array()) {
 		include_spip('base/serial');
 		$desc = $tables_principales[$table];
 	}
-	if ($GLOBALS['table_prefix'])
-		$table = preg_replace('/^spip/',
-				    $GLOBALS['table_prefix'],
-				    $table);
+	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
 	$fields = $desc['field'];
 	$r = '';
 	foreach ($champs as $champ => $val) {
 		$r .= ',' . $champ . '=' . spip_pg_cite($val, $fields[$champ]);
 	}
 	$r = "UPDATE $table SET " . substr($r, 1) . ($where ? " WHERE $where" : '');
-	return pg_query($r);
+	return pg_query($link, $r);
 }
 
 
 // http://doc.spip.org/@spip_pg_replace
-function spip_pg_replace($table, $values, $desc) {
-	global $spip_pg_link, $table_prefix;
-	if ($GLOBALS['table_prefix'])
-		$table = preg_replace('/^spip/',
-				    $GLOBALS['table_prefix'],
-				    $table);
+function spip_pg_replace($table, $values, $desc, $serveur='') {
+
+	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$prefixe = $connexion['prefixe'];
+	$link = $connexion['link'];
+	$db = $connexion['db'];
+	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
 
 	$prim = $desc['key']['PRIMARY KEY'];
 	$ids = preg_split('/,\s*/', $prim);
@@ -407,7 +441,7 @@ function spip_pg_replace($table, $values, $desc) {
 	}
 	$set = join(',', $noprims);
 	if ($set) {
-	  $set = pg_query($spip_pg_link, $q = "UPDATE $table SET $set WHERE $where");
+	  $set = pg_query($link, $q = "UPDATE $table SET $set WHERE $where");
 	  if (!$set) {
 	    $n = spip_pg_errno();
 	    $m = spip_pg_error($q);
@@ -416,7 +450,7 @@ function spip_pg_replace($table, $values, $desc) {
 	  }
 	}
 	if (!$set) {
-	    $set = pg_query($spip_pg_link, $q = "INSERT INTO $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',', $values) . ')');
+	    $set = pg_query($link, $q = "INSERT INTO $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',', $values) . ')');
 	    if (!$set) {
 	      $n = spip_pg_errno();
 	      $m = spip_pg_error($q);
@@ -489,12 +523,13 @@ function calcul_pg_in($val, $valeurs, $not='') {
 // si $autoinc, c'est une auto-increment (i.e. serial) sur la Primary Key
 // Le nom des caches doit etre inferieur a 64 caracteres
 // http://doc.spip.org/@spip_pg_create
-function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false) {
-	global $spip_pg_link;
-	if ($GLOBALS['table_prefix'])
-		$nom = preg_replace('/^spip/',
-				    $GLOBALS['table_prefix'],
-				    $nom);
+function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false, $serveur='') {
+
+	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$prefixe = $connexion['prefixe'];
+	$link = $connexion['link'];
+	$db = $connexion['db'];
+	if ($prefixe) $nom = preg_replace('/^spip/', $prefixe, $nom);
 	$query = $prim = $s = $p='';
 	$keys = array();
 
@@ -546,9 +581,9 @@ function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false) 
 	($character_set?" DEFAULT $character_set":"")
 	."\n";
 
-	$r = @pg_query($spip_pg_link, $q);
+	$r = @pg_query($link, $q);
 
-	foreach($keys as $index)  {@pg_query($spip_pg_link, $index);}
+	foreach($keys as $index)  {@pg_query($link, $index);}
 	return $r;
 }
 

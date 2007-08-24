@@ -184,24 +184,86 @@ function spip_log($message, $logname='spip') {
 	}
 }
 
-// Fonction appelee uniquement par le fichier cree dans config/ a l'instal'.
+// Fonction appelee par le fichier cree dans config/ a l'instal'.
 // Il contient un appel direct a cette fonction avec comme arguments
 // les identifants de connexion.
-// Si la connexion reussit, la globale db_ok memorise le nom du serveur
+// Si la connexion reussit, la globale db_ok memorise sa description.
+// C'est un tableau egalement retourne en valeur, pour les appels a l'install'
 
 // http://doc.spip.org/@spip_connect_db
-function spip_connect_db($host, $port, $login, $pass, $db, $serveur='mysql') {
+function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $prefixe='') {
 	global $db_ok;
 
-	$f = charger_fonction('db_' . $serveur, 'base', true);
-	if ($f AND $f = $f($host, $port, $login, $pass, $db)) {
+	## TODO : mieux differencier les serveurs
+	$f = _DIR_TMP . $type . 'out';
 
-	// Version courante = 0.5 (indication du serveur comme 5e arg)
+	if (@file_exists($f)
+	AND (time() - @filemtime($f) < 30)
+	AND !defined('_ECRIRE_INSTALL')) {
+		return;
+	}
+
+	if (!$prefixe) $prefixe = $db;
+	$db_ok = charger_fonction('db_' . $type, 'base', true);
+	if ($db_ok AND $db_ok = $db_ok($host, $port, $login, $pass, $db, $prefixe)) 
+
+		return $db_ok;
+
+	// En cas d'indisponibilite du serveur, eviter de le bombarder
+	if (!defined('_ECRIRE_INSTALL')) {
+		@touch($f);
+		$err = "Echec connexion $host $port $login $db";
+		spip_log($err);
+		spip_log($err, $type);
+	}
+}
+
+// API d'appel aux bases de donnees:
+// on charge le fichier config/connect$serveur ($serveur='' pour le principal)
+// qui est cense initaliser la connexion en appelant spip_connect_db
+// laquelle met dans la globale db_ok la description de la connexion
+// On la memorise dans un tableau pour permettre plusieurs serveurs.
+// A l'installation, il faut simuler l'existence de ce fichier
+
+// http://doc.spip.org/@spip_connect
+function spip_connect($serveur='') {
+	global $connexions;
+
+	$index = $serveur ? $serveur : 0;
+	if (isset($connexions[$index])) return $connexions[$index];
+
+	include_spip('base/abstract_sql');
+	if (isset($_GET['var_profile'])) include_spip('public/debug');
+	$install = (_request('exec') == 'install');
+
+	$f = ($serveur AND !$install)
+	? (_FILE_CONNECT_INS . $serveur . '.php')
+	  : (_FILE_CONNECT ?  _FILE_CONNECT 
+	    : ($install ? (_FILE_CONNECT_INS .  '.php')
+	       : ''));
+
+	if ($f AND is_readable($f)) include($f);
+	if (!isset($GLOBALS['db_ok'])) {
+		if ($install) return 'spip_' . $serveur . '_query';
+		spip_log("spip_connect: serveur $index mal defini dans '$f'.");
+		return false;
+	}
+
+	$connexions[$index] = $GLOBALS['db_ok'];
+
+	// Premiere connexion au serveur principal:
+	// verifier que la table principale est la
+	// et que le fichier de connexion n'est pas une version trop vieille
+
+	if (!$serveur) {
+
+	// Version courante = 0.6 (indication du prefixe comme 6e arg)
 	//
 	// La version 0.0 (non numerotee) doit etre refaite par un admin
 	// les autres fonctionnent toujours, meme si :
 	// - la version 0.1 est moins performante que la 0.2
 	// - la 0.2 fait un include_ecrire('inc_db_mysql.php3')
+	// - la version 0.5 indique le serveur comme 5e arg
 	//  On ne force pas la mise a niveau pour les autres.
 
 		if ($GLOBALS['spip_connect_version']< 0.1 AND _DIR_RESTREINT){
@@ -209,42 +271,22 @@ function spip_connect_db($host, $port, $login, $pass, $db, $serveur='mysql') {
 			redirige_par_entete(generer_url_ecrire('upgrade', 'reinstall=oui', true));
 		}
 
-		$db_ok = $f;
+		$f = str_replace('query', 'countsel', $GLOBALS['db_ok']['query']);
+		if (!$f('spip_meta', '', '', '', '', '', '', $index)) {
+			unset($connexions[$index]);
+			spip_log("spip_connect: table meta vide ($index)");
+			return false;
+		}
 	}
-}
 
-// API d'appel aux bases de donnees:
-// on charge le fichier config/connect$serveur ($serveur='' pour le principal)
-// qui est cense initaliser la connexion en appelant spip_connect_db
-// laquelle met dans la globale db_ok
-// le nom de la fonction a connexion persistante.
-// On la memorise dans un tableau statique pour permettre plusieurs serveurs.
-
-// http://doc.spip.org/@spip_connect
-function spip_connect($serveur='') {
-	static $t = array();
-
-	$index = $serveur ? $serveur : 'principal';
-	if (isset($t[$index])) return $t[$index];
-
-	include_spip('base/abstract_sql');
-	if (isset($_GET['var_profile'])) include_spip('public/debug');
-
-	$f = $serveur
-	? (_FILE_CONNECT_INS . $serveur . '.php')
-	: ( _FILE_CONNECT ?  _FILE_CONNECT 
-	    : ((_request('exec') == 'install') ? (_FILE_CONNECT_INS .  '.php')
-	       : ''));
-	if ($f) include($f);
-	if (!isset($GLOBALS['db_ok']))
-		spip_log("spip_connect: serveur $index inutilisable.");
-
-	return $t[$index] = $GLOBALS['db_ok'];
+	return $connexions[$index];
 }
 
 // http://doc.spip.org/@spip_query
 function spip_query($query, $serveur='') {
-	if ($f = spip_connect($serveur)) return $f($query);
+	if (!($desc = spip_connect($serveur))) return false;
+	$f = $desc['query'];
+	return $f($query, $serveur);
 }
 
 // 1 interface de abstract_sql a demenager dans base/abstract_sql a terme
