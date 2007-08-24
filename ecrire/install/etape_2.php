@@ -85,7 +85,7 @@ function install_etape_2_bases($login_db, $server_db)
 	$result = sql_listdbs($server_db);
 	$bases = $checked = '';
 	if ($result) {
-		while ($row = sql_fetch($result)) {
+		while ($row = sql_fetch($result, $server_db)) {
 
 			$table_nom = array_shift($row);
 			$base = "<li>\n<input name=\"choix_db\" value=\"".$table_nom."\" type='radio' id='tab$i'";
