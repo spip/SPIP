@@ -787,8 +787,8 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	// la valeur comparee doit etre munie ou non d'apostrophes
 	if ($op == '=' OR in_array($op, $table_criteres_infixes)) {
 		if (strpos($val[0], '_q(') === 0
-		AND test_sql_int($desc['field'][$col]))
-				$val[0] = 'intval' . substr($val[0],2);
+		AND $desc AND test_sql_int($desc['field'][$col]))
+			$val[0] = 'intval' . substr($val[0],2);
 	}
 	// tag du critere pour permettre aux boucles de modifier leurs requetes par defaut en fonction de ca
 	$boucles[$idb]->modificateur['criteres'][$col] = true;

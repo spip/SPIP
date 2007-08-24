@@ -282,14 +282,12 @@ function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $
 function signature_entrop($query)
 {
 	$n = sql_count($query);
-	spip_log("entrop $n");
 	if ($n>1) {
 		$entrop = array();
 		for ($i=$n-1;$i;$i--) {
 			$r = sql_fetch($query);
 			$entrop[]=$r['id_signature'];
 		}
-		spip_log("delete " . join(',', $entrop));
 		if ($entrop)
 			sql_delete('spip_signatures',
 				"id_signature IN (" . join(',',$entrop) .')');
