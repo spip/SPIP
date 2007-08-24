@@ -73,7 +73,7 @@ function sql_fetch($res, $serveur='') {
 	return $f($res, NULL, $serveur);
 }
 
-// http://doc.spip.org/@sql_count
+// http://doc.spip.org/@sql_selectdb
 function sql_selectdb($res, $serveur='')
 {
 	$f = sql_serveur('selectdb', $serveur);
@@ -248,6 +248,7 @@ function description_table($nom){
 	return array($nom,array());
 }
 
+// http://doc.spip.org/@sql_listdbs
 function sql_listdbs($serveur='') {
   	$f = sql_serveur('listdbs', $serveur);
 	return $f($serveur);
