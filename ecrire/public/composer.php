@@ -93,6 +93,12 @@ function squelette_obsolete($skel, $squelette) {
 	);
 }
 
+// Activer l'invalideur de session
+function invalideur_session(&$Cache) {
+	$Cache['session']=spip_session();
+	return '';
+}
+
 //
 // Des fonctions diverses utilisees lors du calcul d'une page ; ces fonctions
 // bien pratiques n'ont guere de logique organisationnelle ; elles sont
