@@ -52,6 +52,7 @@ function base_db_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='') {
 		'replace' => 'spip_mysql_replace',
 		'select' => 'spip_mysql_select',
 		'selectdb' => 'spip_mysql_selectdb',
+		'set_connect_charset' => 'spip_mysql_set_connect_charset',
 		'showtable' => 'spip_mysql_showtable',
 		'update' => 'spip_mysql_update',
 		'updateq' => 'spip_mysql_updateq',

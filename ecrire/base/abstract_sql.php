@@ -27,7 +27,7 @@ function sql_serveur($ins_sql, $serveur='') {
 }
 
 // http://doc.spip.org/@spip_sql_set_connect_charset
-function spip_sql_set_connect_charset($charset,$serveur=''){
+function sql_set_connect_charset($charset,$serveur=''){
 	$f = sql_serveur('set_connect_charset', $serveur);
 	return $f($charset, $serveur);
 }
@@ -139,7 +139,7 @@ function sql_showtable($table, $serveur='', $table_spip = false)
 	if ($table_spip){
 		$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 		$prefixe = $connexion['prefixe'];
-		$table = preg_replace('/^spip_/', $prefixe, $table);
+		$table = preg_replace('/^spip/', $prefixe, $table);
 	}
 	
 	$f = sql_serveur('showtable', $serveur);

@@ -234,7 +234,7 @@ function import_tables($request, $dir) {
 	// placer la connexion sql dans le bon charset
 	spip_log('meta restauration_charset_sql_connexion:'.$GLOBALS['meta']['restauration_charset_sql_connexion']);
 	if (isset($GLOBALS['meta']['restauration_charset_sql_connexion']))
-		spip_sql_set_connect_charset($GLOBALS['meta']['restauration_charset_sql_connexion']);
+		sql_set_connect_charset($GLOBALS['meta']['restauration_charset_sql_connexion']);
 
 	@define('_DEBUG_IMPORT',false);
 	if (_DEBUG_IMPORT)
