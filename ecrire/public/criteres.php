@@ -245,8 +245,7 @@ function critere_branche_dist($idb, &$boucles, $crit) {
 
 	//Trouver une jointure
 	$type = $boucle->type_requete;
-	$nom = $table_des_tables[$type];
-	list($nom, $desc) = trouver_def_table($nom ? $nom : $type, $boucle);
+	$desc = trouver_table($type, $boucle);
 	//Seulement si necessaire
 	if (!array_key_exists('id_rubrique', $desc['field'])) {
 		$cle = trouver_champ_exterieur('id_rubrique', $boucle->jointures, $boucle);
@@ -326,7 +325,7 @@ function calculer_critere_arg_dynamique($idb, &$boucles, $crit, $suffix='')
 	$arg = calculer_liste($crit, array(), $boucles, $boucle->id_parent);
 	$r = $boucle->type_requete;
 	$s = $boucles[$idb]->sql_serveur;
-	if (!$s) $s = 'localhost';
+	if (!$s) $s = 0;
 	$t = $table_des_tables[$r];
 	// pour les tables non Spip
 	if (!$t) $t = $r; else $t = "spip_$t";
@@ -417,7 +416,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 		else {
 		  $r = $boucle->type_requete;
 		  $s = $boucles[$idb]->sql_serveur;
-		  if (!$s) $s = 'localhost';
+		  if (!$s) $s = 0;
 		  $t = $table_des_tables[$r];
 		  // pour les tables non Spip
 		  if (!$t) $t = $r; else $t = "spip_$t";
@@ -454,15 +453,14 @@ function critere_par_jointure(&$boucle, $join)
   list($table, $champ) = $join;
   $t = array_search($table, $boucle->from);
   if (!$t) {
-    $type = $boucle->type_requete;
-    $nom = $table_des_tables[$type];
-    list($nom, $desc) = trouver_def_table($nom ? $nom : $type, $boucle);
+	$type = $boucle->type_requete;
+	$desc = trouver_table($type, $boucle);
 
-    $cle = trouver_champ_exterieur($champ, $boucle->jointures, $boucle);
-    if ($cle)
-      $cle = calculer_jointure($boucle, array($boucle->id_table, $desc), $cle, false);
-    if ($cle) $t = "L$cle"; 
-    else  erreur_squelette(_T('zbug_info_erreur_squelette'),  "{par ?} BOUCLE$idb");
+	$cle = trouver_champ_exterieur($champ, $boucle->jointures, $boucle);
+	if ($cle)
+		$cle = calculer_jointure($boucle, array($desc['table'], $desc), $cle, false);
+	if ($cle) $t = "L$cle"; 
+	else  erreur_squelette(_T('zbug_info_erreur_squelette'),  "{par ?} BOUCLE$idb");
 
   }
   return "'" . $t . '.' . $champ . "'";
@@ -728,8 +726,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$type = $boucle->type_requete;
 	$table = $boucle->id_table;
-	$nom = $table_des_tables[$type];
-	list(, $desc) = trouver_def_table($nom ? $nom : $type, $boucle);
+	$desc = trouver_table($type, $boucle);
 
 	list($fct, $col, $op, $val, $args_sql) =
 	  calculer_critere_infixe_ops($idb, $boucles, $crit);
@@ -831,8 +828,8 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 // http://doc.spip.org/@critere_secteur_forum
 function critere_secteur_forum($idb, &$boucles, $val, $crit)
 {
-	list($nom, $desc) = trouver_def_table('articles', $boucles[$idb]);
-	return calculer_critere_externe_init($boucles[$idb], array($nom), 'id_secteur', $desc, $crit->cond, true);
+	$desc = trouver_table('articles', $boucles[$idb]);
+	return calculer_critere_externe_init($boucles[$idb], array($desc['table']), 'id_secteur', $desc, $crit->cond, true);
 }
 
 // Champ hors table, ca ne peut etre qu'une jointure.
@@ -984,16 +981,15 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array(), $mi
 		$new = $vu;
 		foreach($boucle->jointures as $v) {
 			if ($v && (!in_array($v,$vu)) && 
-			    ($def = trouver_def_table($v, $boucle))) {
-				list($table,$join) = $def;
-				$milieu = array_intersect($ddesc['key'], trouver_cles_table($join['key']));
+			    ($def = trouver_table($v, $boucle))) {
+				$milieu = array_intersect($ddesc['key'], trouver_cles_table($def['key']));
 				$new[] = $v;
 				foreach ($milieu as $k)
 					if ($k!=$milieu_prec) // ne pas repasser par la meme cle car c'est un chemin inutilement long
 					{
-						$r = calculer_chaine_jointures($boucle, array($v, $join), $arrivee, $new, $k);
+					  $r = calculer_chaine_jointures($boucle, array($v, $def), $arrivee, $new, $k);
 						if ($r)	{
-							array_unshift($r, array($dnom, $def, $k));
+						  array_unshift($r, array($dnom, array($def['table'], $def), $k));
 							return $r;
 						}
 					}
@@ -1021,52 +1017,60 @@ function trouver_cles_table($keys)
   return array_keys($res);
 }
 
-// Trouve la description d'une table dans les globales de Spip
-// (le prefixe des tables y est toujours 'spip_', son chgt est ulterieur)
-// Si on ne la trouve pas, on demande au serveur SQL (marche pas toujours)
+// Trouve la description d'une table, en particulier celle d'une boucle
+// Si on ne la trouve pas, on demande au serveur SQL
+// retourne False si lui non plus  ne la trouve pas.
+// Si on la trouve, le tableau resultat a les entrees:
+// field (comme dans serial.php)
+// key (comme dans serial.php)
+// serveur = serveur bd associe
+// table = nom complet de la table (avec le prefixe spip_ pour les stds)
+// type = nom court (i.e. type de boucle)
 
-// http://doc.spip.org/@trouver_def_table
-function trouver_def_table($nom, &$boucle)
+function trouver_table($type, $boucle)
 {
-	global $tables_principales, $tables_auxiliaires, $table_des_tables, $tables_des_serveurs_sql;
+	global $tables_auxiliaires, $table_des_tables, $tables_des_serveurs_sql, $type_des_serveurs;
 
-	$nom_table = $nom;
-	$s = $boucle->sql_serveur;
-	if (!$s) {
-		$s = 'localhost';
-		if (in_array($nom, $table_des_tables))
-		   $nom_table = 'spip_' . $nom;
-	}
+	$serveur = $boucle->sql_serveur;
+	$s = $serveur ? $serveur : 0;
+	if (!isset($type_des_serveurs[$s])) spip_connect($serveur);
 
-	$desc = $tables_des_serveurs_sql[$s];
+	$spip = ($type_des_serveurs[$s] == 'spip');
 
-	if (isset($desc[$nom_table]))
-		return array($nom_table, $desc[$nom_table]);
+	if ($spip AND isset($table_des_tables[$type])) {
+    	// indirection (pour les rares cas ou le nom de la table!=type)
+		$t = $table_des_tables[$type];
+		$nom_table = 'spip_' . $t;
+	} elseif ($spip AND isset($tables_auxiliaires['spip_' .$type])) {
+		$t = $type;
+		$nom_table = 'spip_' . $t;
+	} else	$nom_table = $t = $type;
 
-	include_spip('base/auxiliaires');
-	$nom_table = 'spip_' . $nom;
-	if ($desc = $tables_auxiliaires[$nom_table])
-		return array($nom_table, $desc);
+	if (!isset($tables_des_serveurs_sql[$s][$nom_table])) {
+		$desc = sql_showtable($nom_table, $serveur, ($nom_table != $type));
+		if (!$desc) {
+			erreur_squelette(_T('zbug_table_inconnue', array('table' => $type)),
+					 $boucle->id_boucle);
+			return null;
+		}
+		$tables_des_serveurs_sql[$s][$nom_table] = $desc;
+	} else $desc = $tables_des_serveurs_sql[$s][$nom_table];
+	
+	$desc['table']= $nom_table;
+	$desc['serveur']= $s;
+	$desc['type']= $t;
 
-	if ($desc = sql_showtable($nom, $boucle->sql_serveur))
-	  if (isset($desc['field'])) {
-      // faudrait aussi prevoir le cas du serveur externe
-	    $tables_principales[$nom] = $desc;
-	    return array($nom, $desc);
-	  }
-	erreur_squelette(_T('zbug_table_inconnue', array('table' => $nom)),
-			 $boucle->id_boucle);
-	return false;
+	return $desc;
 }
 
 // http://doc.spip.org/@trouver_champ_exterieur
 function trouver_champ_exterieur($cle, $joints, &$boucle, $checkarrivee = false)
 {
   foreach($joints as $k => $join) {
-    if ($join && $table = trouver_def_table($join, $boucle)) {
-      if (array_key_exists($cle, $table[1]['field'])
-      	&& ($checkarrivee==false || $checkarrivee==$table[0])) // si on sait ou on veut arriver, il faut que ca colle
-	return  $table;
+    if ($join && $table = trouver_table($join, $boucle)) {
+      if (array_key_exists($cle, $table['field'])
+      	&& ($checkarrivee==false || $checkarrivee==$table['table'])) // si on sait ou on veut arriver, il faut que ca colle
+	return  array($table['table'], $table);
     }
   }
   return "";
@@ -1189,7 +1193,7 @@ function calculer_critere_infixe_date($idb, &$boucles, $regs)
 	if ($suite) {
 	# Recherche de l'existence du champ date_xxxx,
 	# si oui choisir ce champ, sinon choisir xxxx
-		list(,$t)= trouver_def_table($boucle->type_requete, $boucle);
+		$t = trouver_table($boucle->type_requete, $boucle);
 		if ($t['field']["date$suite"])
 			$date_orig = 'date'.$suite;
 		else

@@ -10,8 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-
 // fonctions de recherche et de reservation
 // dans l'arborescence des boucles
 
@@ -27,7 +25,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@index_pile
 function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
-  global $exceptions_des_tables, $table_des_tables, $tables_des_serveurs_sql;
+	global $exceptions_des_tables, $table_des_tables;
 
 	$i = 0;
 	if (strlen($explicite)) {
@@ -61,57 +59,15 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 	return('@$Pile[0][\''. strtolower($nom_champ) . '\']');
 }
 
-/**
- * retourne la description de la table associee a un type de boucle
- * retourne un tableau avec les entrees field et key (comme dans serial.php)
- * et type = type de boucle, serveur = serveur bdd associe et table = nom de
- * la table concernee
- * retourne null si on ne trouve pas la table
- */
-// http://doc.spip.org/@description_type_requete
-function description_type_requete($type, $serveur='') {
-	global $table_des_tables, $tables_des_serveurs_sql, $tables_auxiliaires;
-
-	if (!$serveur) {
-		$s = 'localhost';
-	} else $s = $serveur;
-	// pour les tables non Spip
-	if (isset($table_des_tables[$type])) {
-    	// indirection (pour les rares cas ou le nom de la table!=type)
-		$t = $table_des_tables[$type];
-		$nom_table = 'spip_' . $t;
-	} elseif (isset($tables_auxiliaires['spip_' .$type])) {
-		$t = $type;
-		$nom_table = 'spip_' . $t;
-	} else	$nom_table = $t = $type;
-
-	$desc = $tables_des_serveurs_sql[$s][$nom_table];
-	if (!isset($desc['field'])) {
-		$desc = sql_showtable($nom_table, $serveur, ($nom_table != $type));
-		if (!isset($desc['field']))
-			return null;
-		$tables_des_serveurs_sql[$s][$nom_table]= $desc;
-	}
-	$desc['serveur']= $s;
-	$desc['type']= $t;
-	$desc['table']= $nom_table;
-
-	return $desc;
-}
-
 // http://doc.spip.org/@index_tables_en_pile
 function index_tables_en_pile($idb, $nom_champ, &$boucles) {
 	global $exceptions_des_tables;
 
 	$r = $boucles[$idb]->type_requete;
-	$s = $boucles[$idb]->sql_serveur;
 
 	if ($r == 'boucle') return array();
-	$desc= description_type_requete($r, $s);
-
+	$desc = trouver_table($r, $boucle);
 	if(!$desc) {
-		erreur_squelette(_T('zbug_table_inconnue', array('table' => $r)),
-				   "'$idb'");
 		# continuer pour chercher l'erreur suivante
 		return  array("'#" . $r . ':' . $nom_champ . "'",'');
 	}
@@ -441,7 +397,7 @@ function applique_filtres($p) {
 
 	// S'il y a un lien avec la session, ajouter un code qui levera
 	// un drapeau dans la structure d'invalidation $Cache
-	if ($p->descr['session'])
+	if (isset($p->descr['session']))
 		$code = "$code . invalideur_session(\$Cache)";
 
 	// ramasser les images intermediaires inutiles et graver l'image finale
