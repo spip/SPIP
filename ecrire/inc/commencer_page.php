@@ -19,7 +19,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@inc_commencer_page_dist
 function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $id_rubrique = "",$menu=true,$minipres=false) {
 	global $spip_ecran;
-  
+	global $connect_id_auteur;
+
 	include_spip('inc/headers');
 
 	http_no_cache();
@@ -27,8 +28,8 @@ function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubri
 	return init_entete($titre, $id_rubrique, $minipres)
 	. init_body($rubrique, $sous_rubrique, $id_rubrique,$menu)
 	. "<div id='page' class='$spip_ecran'>"
-	. alertes_auteur()
-	. auteurs_recemment_connectes();
+	. alertes_auteur($connect_id_auteur)
+	. auteurs_recemment_connectes($connect_id_auteur);
 }
 
 // envoi du doctype et du <head><title>...</head> 
@@ -185,10 +186,9 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 }
 
 // http://doc.spip.org/@avertissement_messagerie
-function avertissement_messagerie() {
-	global $connect_id_auteur;
+function avertissement_messagerie($id_auteur) {
 
-	$result_messages = spip_query("SELECT lien.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message");
+	$result_messages = spip_query("SELECT lien.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur="._q($id_auteur)." AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message");
 	$total_messages = @spip_num_rows($result_messages);
 	if ($total_messages == 1) {
 		$row = @sql_fetch($result_messages);
@@ -200,24 +200,24 @@ function avertissement_messagerie() {
 }
 
 // http://doc.spip.org/@alertes_auteur
-function alertes_auteur() {
+function alertes_auteur($id_auteur) {
 
 	$alertes = array();
 
 	if (isset($GLOBALS['meta']['message_crash_tables'])
-	AND autoriser('detruire')) {
+	AND autoriser('detruire', null, null, $id_auteur)) {
 		include_spip('genie/maintenance');
 		if ($msg = message_crash_tables())
 			$alertes[] = $msg;
 	}
 
 	if (isset($GLOBALS['meta']['plugin_erreur_activation'])
-	AND autoriser('configurer', 'plugins')) {
+	AND autoriser('configurer', 'plugins', null, $id_auteur)) {
 		$alertes[] = $GLOBALS['meta']['plugin_erreur_activation'];
 		effacer_meta('plugin_erreur_activation'); // pas normal que ce soit ici
 	}
 
-	$alertes[] = avertissement_messagerie();
+	$alertes[] = avertissement_messagerie($id_auteur);
 
 	if ($alertes = array_filter($alertes))
 		return "<div class='messages'>".
@@ -226,9 +226,8 @@ function alertes_auteur() {
 }
 
 // http://doc.spip.org/@auteurs_recemment_connectes
-function auteurs_recemment_connectes()
+function auteurs_recemment_connectes($id_auteur)
 {	
-	global $connect_id_auteur;
 	$res = '';
 	$result = sql_select("*", "spip_auteurs",  "id_auteur!=$connect_id_auteur AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE)");
 
