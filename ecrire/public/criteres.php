@@ -1027,6 +1027,7 @@ function trouver_cles_table($keys)
 // table = nom complet de la table (avec le prefixe spip_ pour les stds)
 // type = nom court (i.e. type de boucle)
 
+// http://doc.spip.org/@trouver_table
 function trouver_table($type, $boucle)
 {
 	global $tables_auxiliaires, $table_des_tables, $tables_des_serveurs_sql, $type_des_serveurs;

@@ -1035,6 +1035,7 @@ function balise_CONFIG_dist($p) {
 // Si elle est invoquee, elle leve un drapeau dans le fichier cache, qui
 // permet a public/cacher d'invalider le cache si le visiteur suivant n'a
 // pas la meme session
+// http://doc.spip.org/@balise_SESSION_dist
 function balise_SESSION_dist($p) {
 	$p->descr['session'] = true;
 

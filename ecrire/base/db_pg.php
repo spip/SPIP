@@ -588,6 +588,7 @@ function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false, 
 	return $r;
 }
 
+// http://doc.spip.org/@spip_pg_set_connect_charset
 function spip_pg_set_connect_charset($charset, $serveur=''){
 	spip_log("changement de charset sql a ecrire en PG");
 }
