@@ -229,7 +229,7 @@ function alertes_auteur($id_auteur) {
 function auteurs_recemment_connectes($id_auteur)
 {	
 	$res = '';
-	$result = sql_select("*", "spip_auteurs",  "id_auteur!=$connect_id_auteur AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE)");
+	$result = sql_select("*", "spip_auteurs",  "id_auteur!=" .intval($id_auteur) . " AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE)");
 
 	if (spip_num_rows($result)) {
 		$formater_auteur = charger_fonction('formater_auteur', 'inc');
