@@ -49,7 +49,7 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 // Documents distants : pas trop de verifications bloquantes, mais un test
 // via une requete HEAD pour savoir si la ressource existe (non 404), si le
 // content-type est connu, et si possible recuperer la taille, voire plus.
-	spip_log ("ajout du document $nom_envoye  (M '$mode' T '$type_lien' L '$id_lien' D '$id_document')");
+	spip_log ("ajout du document $source $nom_envoye  (M '$mode' T '$type_lien' L '$id_lien' D '$id_document')");
 	if ($mode == 'distant') {
 		include_spip('inc/distant');
 		if ($a = recuperer_infos_distantes($source)) {
@@ -123,7 +123,9 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 			$fichier = copier_document($ext, $nom_envoye, $source);
 			spip_unlink($source);
 
-		} else $fichier = copier_document($ext, $nom_envoye, $source);
+		} else {
+			$fichier = copier_document($ext, $nom_envoye, $source);
+		}
 
 		// Verifier que le fichier est a son emplacement definitif
 		

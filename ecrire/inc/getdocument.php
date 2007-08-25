@@ -51,6 +51,7 @@ function effacer_repertoire_temporaire($nom) {
 // http://doc.spip.org/@copier_document
 function copier_document($ext, $orig, $source) {
 
+	$orig = preg_replace(',\.\.+,', '.', $orig); // pas de .. dans le nom du doc
 	$dir = creer_repertoire_documents($ext);
 	$dest = preg_replace("/[^._=-\w\d]+/", "_", 
 			translitteration(preg_replace("/\.([^.]+)$/", "", 
@@ -68,7 +69,7 @@ function copier_document($ext, $orig, $source) {
 	$n = 0;
 	while (@file_exists($newFile = $dir . $dest .($n++ ? ('-'.$n) : '').'.'.$ext));
 
-	return (deplacer_fichier_upload($source, $newFile)) ? $newFile : '';
+	return deplacer_fichier_upload($source, $newFile);
 }
 
 //
@@ -78,11 +79,7 @@ function copier_document($ext, $orig, $source) {
 // http://doc.spip.org/@deplacer_fichier_upload
 function deplacer_fichier_upload($source, $dest, $move=false) {
 	// Securite
-	## !! interdit pour le moment d'uploader depuis l'espace prive (UPLOAD_DIRECT)
-	if (strstr($dest, "..")) {
-		spip_log("stop deplacer_fichier_upload: '$dest'");
-		exit;
-	}
+	$dest = preg_replace(',\.\.+,', '.', $dest);
 
 	if ($move)	$ok = @rename($source, $dest);
 	else				$ok = @copy($source, $dest);
@@ -99,7 +96,7 @@ function deplacer_fichier_upload($source, $dest, $move=false) {
 		}
 		spip_unlink($dest);
 	}
-	return $ok;
+	return $ok ? $dest : false;
 }
 
 
