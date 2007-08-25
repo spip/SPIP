@@ -185,6 +185,17 @@ function quete_rubrique($id_article) {
 	return $id_rubrique['id_rubrique'];
 }
 
+# retourne le fichier d'un document
+
+// http://doc.spip.org/@quete_rubrique
+function quete_fichier($id_document, $serveur) {
+	$r = sql_fetsel(array('fichier'),
+			array('spip_documents'),
+			array("id_document=" . intval($id_document)),
+			'',array(),'','','', '', '', $serveur);
+	return $r['fichier'];
+}
+
 // http://doc.spip.org/@quete_petitions
 function quete_petitions($id_article, $table, $id_boucle, $serveur, &$cache) {
 	$retour = sql_fetsel(
@@ -217,6 +228,43 @@ function quete_accepter_forum($id_article) {
 
 	return $cache[$id_article];
 }
+
+// recuperer une meta sur un site distant (en local il y a plus simple)
+function quete_meta($nom, $serveur) {
+	$r = sql_fetsel("valeur", "spip_meta", "nom=" . _q($nom), '','','','','','','',$serveur);
+	return $r['valeur'];
+}
+
+// Produit les appels aux fonctions generer_url parametrees par $type_urls
+// demandees par les balise #URL_xxx
+// Si ces balises sont rencontrees dans une boucle de base distante
+// on produit le generer_url std faute de connaitre le $type_urls distant
+// et sous reserve que cette base distante est geree par SPIP.
+// Autrement cette balise est vu comme un champ normal dans cette base.
+
+function generer_generer_url($type, $p)
+{
+	$_id = interprete_argument_balise(1,$p);
+
+	if (!$_id) $_id = champ_sql('id_' . $type, $p);
+
+	if ($s = $p->id_boucle) $s = $p->boucles[$s]->sql_serveur;
+
+	if (!$s)
+		return "generer_url_$type($_id)";
+	elseif ($GLOBALS['type_des_serveurs'][$s] != 'spip')
+		return calculer_champ($p);
+	else {
+		$u = "quete_meta('adresse_site', '$s')";
+		if ($type != 'document')
+			return "$u . '?page=$type&amp;id_$type=' . " . $_id;
+		else {
+			$f = "$_id . '&amp;file=' . quete_fichier($_id,'$s')";
+			return "$u . '?action=acceder_document&amp;arg=' .$f";
+		}
+	}
+}
+
 
 # Determine les parametres d'URL (hors réécriture) et consorts
 # En deduit un contexte disant si la page est une redirection ou 
