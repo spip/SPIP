@@ -142,8 +142,10 @@ function calculer_visites($t) {
 		spip_query("INSERT IGNORE INTO spip_referers (date, referer, referer_md5) VALUES " . join(', ', $insert));
 		
 		// ajouter les visites
+		// attention on appelle calcul_mysql_in en mode texte et pas array
+		// pour ne pas passer _q() sur les '0x1234' de referer_md5, cf #849
 		foreach ($ar as $num => $liste) {
-			spip_query("UPDATE spip_referers SET visites = visites+$num, visites_jour = visites_jour+$num	WHERE ".calcul_mysql_in('referer_md5',$liste));
+			spip_query("UPDATE spip_referers SET visites = visites+$num, visites_jour = visites_jour+$num	WHERE ".calcul_mysql_in('referer_md5',join(', ', $liste)));
 		}
 	}
 	
