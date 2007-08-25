@@ -1011,10 +1011,10 @@ function balise_ENV_dist($p, $src = NULL) {
 	if (!$_nom) {
 		// cas de #ENV sans argument : on retourne le serialize() du tableau
 		// une belle fonction [(#ENV|affiche_env)] serait pratique
-		$p->code = "($src ? serialize($src) : '')";
+		$p->code = '($a = ('.$src.') ? serialize($a) : "")';
 	} else {
 		// admet deux arguments : nom de variable, valeur par defaut si vide
-		$p->code = 'is_array('.$src.') ? '.$src.'['.$_nom.'] : ""';
+		$p->code = 'is_array($a = ('.$src.')) ? $a['.$_nom.'] : ""';
 		if ($_sinon)
 			$p->code = 'sinon('. 
 				$p->code.",$_sinon)";
