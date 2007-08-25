@@ -1,7 +1,7 @@
 #ENV*{bloc_ancre}
 #SET{bornes,#ENV{page_courante}|calcul_bornes_pagination{#ENV{nombre_pages},10}}
-#SET{premiere, #GET{bornes}|reset}
-#SET{derniere, #GET{bornes}|end}
+#SET{premiere, #GET{bornes, array()}|reset}
+#SET{derniere, #GET{bornes, array()}|end}
 #SET{separateur,'|'}
 
 [<a href='[(#ENV{url}|parametre_url{#ENV{debut},''})]##ENV{ancre}' class='lien_pagination'>(#GET{premiere}|>{1}|?{'...',''})</a> #GET*{separateur}]
