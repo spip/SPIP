@@ -83,35 +83,7 @@ function exec_sites_edit_dist()
 	echo gros_titre($nom_site,'',false);
 	echo "<div class='nettoyeur'></div>";
 
-	if ($new == 'oui'
-	AND ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0)){
-		$form_auto = "<span class='verdana1 spip_small'>"
-		. "<label for='url'>"
-		. _T('texte_referencement_automatique')
-		. "</label></span>"
-		. "\n<div style='text-align: right'><input type=\"text\" name=\"url\" id=\"url\" class='fondl' size='40' value=\"http://\" />\n"
-		. "<input type=\"submit\"  value=\""
-		. _T('bouton_ajouter')
-		. "\" class='fondo' />\n"
-		. '</div>';
-
-		$form_auto = generer_action_auteur('editer_site',
-			'auto',
-			generer_url_ecrire('sites'),
-			$form_auto,
-			" method='post' name='formulaireauto'"
-						   );
-
-		echo	debut_cadre_relief("site-24.gif", true)
-		. $form_auto
-		. fin_cadre_relief(true)
-		. "\n<blockquote><b>"
-		. _T('texte_non_fonction_referencement')
-		. "</b>";
-
-		$cadre_ouvert = true;
-		$form = debut_cadre_enfonce("site-24.gif", true);
-	} else $cadre_ouvert = $form = '';
+	$form = '';
 
 	$url_syndic = entites_html($url_syndic);
 	$nom_site = entites_html($nom_site);
@@ -204,6 +176,30 @@ function exec_sites_edit_dist()
 		$form .= extra_saisie($extra, 'sites', intval($id_rubrique));
 	}
 
+	if ($new == 'oui'
+	AND ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0)){
+		$form_auto = "<span class='verdana1 spip_small'>"
+		. "<label for='url_auto'>"
+		. _T('texte_referencement_automatique')
+		. "</label></span>"
+		. "\n<div style='text-align: right'><input type=\"text\" name=\"url_auto\" id=\"url_auto\" class='fondl' size='40' value=\"http://\" />\n"
+		. "<input type=\"submit\" value=\""
+		. _T('bouton_ajouter')
+		. "\" class='fondo' />\n"
+		. '</div>';
+
+		$form = debut_cadre_relief("site-24.gif", true)
+		. $form_auto
+		. fin_cadre_relief(true)
+		. "\n<p><b>"
+		. _T('texte_non_fonction_referencement')
+		. "</b></p>\n"
+		. debut_cadre_enfonce("site-24.gif", true)
+		. $form
+		. fin_cadre_enfonce(true);
+
+	}
+
 	$form .= "\n<div style='text-align: right'><input type='submit' value='"
 	. _T('bouton_enregistrer')
 	. "' class='fondo' /></div>";
@@ -215,10 +211,6 @@ function exec_sites_edit_dist()
 				      " method='post' name='formulaire'"
 				      );
 
-	if ($cadre_ouvert) {
-		$form .= fin_cadre_enfonce(true);
-		$form .= "</blockquote>\n";
-	}
 
 	echo $form;
 	

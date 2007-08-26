@@ -1580,7 +1580,7 @@ function extraire_balise($texte, $tag='a') {
 	}
 
 	if (preg_match(
-	",<$tag\s[^>]*(/>|>.*</$tag>|>),UimsS",
+	",<$tag\b[^>]*(/>|>.*</$tag>|>),UimsS",
 	$texte, $regs))
 		return $regs[0];
 }
