@@ -150,9 +150,9 @@ function pipeline($action, $val=null) {
 //
 // http://doc.spip.org/@spip_log
 function spip_log($message, $logname='spip') {
-	static $compteur;
+	static $compteur = array();
 	global $nombre_de_logs, $taille_des_logs;
-	if ($compteur++ > 100 || !$nombre_de_logs || !$taille_des_logs) return;
+	if ($compteur[$logname]++ > 100 || !$nombre_de_logs || !$taille_des_logs) return;
 
 	$rotate = 0;
 	$pid = '(pid '.@getmypid().')';

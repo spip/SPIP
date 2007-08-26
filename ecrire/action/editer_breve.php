@@ -35,7 +35,7 @@ function action_editer_breve_dist() {
 	// Envoi depuis le formulaire de creation d'une breve
 	else if ($arg == 'oui') {
 		$id_breve = insert_breve(_request('id_parent'));
-		revisions_breves($id_breve);
+		if ($id_breve) revisions_breves($id_breve);
 	} 
 	// Erreur
 	else{
