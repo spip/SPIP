@@ -111,24 +111,9 @@ function install_bases(){
 			WHERE nom='version_installee'", $server_db);
 	}
 
-	$ligne_rappel = '';
-	// rustine provisoire le temps que l'equivalent postgres soit trouve
-	if ($server_db == 'mysql') {
-		// Tester $mysql_rappel_nom_base
-		$GLOBALS['mysql_rappel_nom_base'] = true;
-		$GLOBALS['spip_mysql_db'] = $sel_db;
-		$ok_rappel_nom = sql_insert('spip_meta', "(nom,valeur)", "('mysql_rappel_nom_base', 'test')",  array(), $server_db);
-		if ($ok_rappel_nom) {
-			$res ='';
-			$fquery("DELETE FROM spip_meta WHERE nom='mysql_rappel_nom_base'", $server_db);
-		} else {
-			$res = " (erreur rappel nom base `$sel_db`.spip_meta $nouvelle) ";
+	$ligne_rappel = ($server_db != 'mysql') ? ''
+	: test_rappel_nom_base_mysql($server_db);
 
-			$GLOBALS['mysql_rappel_nom_base'] = false;
-			$ligne_rappel = "\$GLOBALS['mysql_rappel_nom_base'] = false; ".
-			  "/* echec du test sur `$sel_db`.spip_meta lors de l'installation. */\n";
-		}
-	}
 	if ($nouvelle) {
 		if (isset($GLOBALS['meta']['charset_sql_base']))
 			@sql_insert('spip_meta', "(nom, valeur, impt)", "('charset_sql_base', '".$GLOBALS['meta']['charset_sql_base']."', 'non')", '', $server_db);
@@ -145,7 +130,7 @@ function install_bases(){
 	}
 
 	$result_ok = @$fquery("SELECT COUNT(*) FROM spip_meta", $server_db);
-	if (!$result_ok) return "<!--\n$nouvelle $res\n-->";
+	if (!$result_ok) return "<!--\n$nouvelle $ligne_rappel\n-->";
 
 	if($chmod) {
 		install_fichier_connexion(_FILE_CHMOD_INS . _FILE_TMP . '.php', "@define('_SPIP_CHMOD', ". sprintf('0%3o',$chmod).");\n");
@@ -264,5 +249,22 @@ function install_etape_3_dist()
 	echo $res;
 	echo info_progression_etape(3,'etape_','install/');
 	echo install_fin_html();
+}
+
+// Tester si mysql ne veut pas du nom de la base dans les requetes
+
+function test_rappel_nom_base_mysql($server_db)
+{
+	$GLOBALS['mysql_rappel_nom_base'] = true;
+	$ok = sql_insert('spip_meta', "(nom,valeur)", "('mysql_rappel_nom_base', 'test')",  array(), $server_db);
+
+	if ($ok) {
+		sql_delete('spip_meta', "nom='mysql_rappel_nom_base'", $server_db);
+		return '';
+	} else {
+		$GLOBALS['mysql_rappel_nom_base'] = false;
+		return "\$GLOBALS['mysql_rappel_nom_base'] = false; ".
+		"/* echec de test_rappel_nom_base_mysql a l'installation. */\n";
+	}
 }
 ?>
