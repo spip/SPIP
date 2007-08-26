@@ -211,6 +211,14 @@ function alertes_auteur($id_auteur) {
 			$alertes[] = $msg;
 	}
 
+	if (isset($GLOBALS['meta']['message_crash_plugins'])
+	AND autoriser('configurer', 'plugins', null, $id_auteur)) {
+		include_spip('inc/plugin');
+		if ($msg = message_crash_plugins())
+			$alertes[] = $msg;
+	}
+
+
 	if (isset($GLOBALS['meta']['plugin_erreur_activation'])
 	AND autoriser('configurer', 'plugins', null, $id_auteur)) {
 		$alertes[] = $GLOBALS['meta']['plugin_erreur_activation'];
