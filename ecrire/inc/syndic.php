@@ -509,17 +509,16 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 	else if ($a = sql_fetch($s)
 	AND !in_array($a['id_syndic_article'], $faits)) {
 		$id_syndic_article = $a['id_syndic_article'];
-	}
+	} 
 
 	// Si l'article n'existe pas, on le cree
 	if (!isset($id_syndic_article)) {
-		if (sql_error()) {
-			return;
-		} else {
-			include_spip('base/abstract_sql');
-			$id_syndic_article = sql_insert('spip_syndic_articles', '(id_syndic, url, date, statut)', '('._q($now_id_syndic).', '._q($le_lien). ', FROM_UNIXTIME('.$data['date'].'), '._q($statut).')');
-			$ajout = true;
-		}
+		$ajout = $id_syndic_article = sql_insertq('spip_syndic_articles',
+				array('id_syndic' => $now_id_syndic,
+				'url' => $le_lien,
+				'date' => date("Y-m-d H:i:s", $data['date']),
+				'statut'  => $statut));
+		if (!$ajout) return;
 	}
 	$faits[] = $id_syndic_article;
 
@@ -540,10 +539,6 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 		$desc = liens_absolus($desc, $url_syndic);
 	}
 
-	// Mettre a jour la date si lastbuilddate
-	$update_date = $data['lastbuilddate'] ?
-		"date = FROM_UNIXTIME(".$data['lastbuilddate'].")," : '';
-
 	// tags & enclosures (preparer spip_syndic_articles.tags)
 	$tags = $data['enclosures'];
 	# eviter les doublons (cle = url+titre) et passer d'un tableau a une chaine
@@ -557,7 +552,20 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 	}
 
 	// Mise a jour du contenu (titre,auteurs,description,date?,source...)
-	spip_query("UPDATE spip_syndic_articles SET				titre=" . _q($data['titre']) .			 ",	".$update_date."								lesauteurs=" . _q($data['lesauteurs']) . ",			descriptif=" . _q($desc) . ",					lang="._q(substr($data['lang'],0,10)).",			source="._q(substr($data['source'],0,255)).",			url_source="._q(substr($data['url_source'],0,255)).",		tags=" . _q($tags) .					 "	WHERE id_syndic_article=$id_syndic_article");
+	$vals = array(
+			'titre' => $data['titre'],
+			'lesauteurs' => $data['lesauteurs'],
+			'descriptif' => $desc,
+			'lang'=> substr($data['lang'],0,10),
+			'source' => substr($data['source'],0,255),
+			'url_source' => substr($data['url_source'],0,255),
+			'tags' => $tags);
+
+	// Mettre a jour la date si lastbuilddate
+	if ($data['lastbuilddate'])
+		$vals['date']= date("Y-m-d H:i:s", $data['lastbuilddate']);
+				    
+	sql_updateq('spip_syndic_articles', $vals, "id_syndic_article=$id_syndic_article");
 
 	// Point d'entree post_syndication
 	pipeline('post_syndication',

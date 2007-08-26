@@ -577,7 +577,7 @@ function enregistrer_premiere_revision($x) {
 					$date_modif = strtotime($date);
 				else
 					$date_modif = time()-7200;
-				spip_query("UPDATE spip_versions SET date=FROM_UNIXTIME($date_modif) WHERE id_article=$id_article AND id_version=$id_version");
+				sql_updateq('spip_versions', array('date' => date("Y-m-d H:i:s", $date_modif)), "id_article=$id_article AND id_version=$id_version");
 			}
 		}
 	}
