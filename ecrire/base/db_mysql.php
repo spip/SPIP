@@ -374,6 +374,7 @@ function spip_mysql_insert($table, $champs, $valeurs, $desc='', $serveur='') {
 	return $r ? $r : (($r===0) ? -1 : 0);
 }
 
+// http://doc.spip.org/@spip_mysql_insertq
 function spip_mysql_insertq($table, $couples, $desc=array(), $serveur='') {
 
 	foreach ($couples as $champ => $val) {

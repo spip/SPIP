@@ -785,6 +785,7 @@ function verifie_include_plugins() {
 }
 
 
+// http://doc.spip.org/@message_crash_plugins
 function message_crash_plugins() {
 	if (autoriser('configurer')
 	AND lire_fichier(_DIR_TMP.'verifier_plugins.txt',$l)
