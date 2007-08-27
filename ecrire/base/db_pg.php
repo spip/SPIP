@@ -517,7 +517,29 @@ function spip_pg_errno() {
 // http://doc.spip.org/@spip_pg_showtable
 function spip_pg_showtable($nom_table)
 {
-	spip_log("spip_pg_showtable('$nom_table') a definir");
+	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$link = $connexion['link'];
+
+	$res = pg_query($link, "SELECT column_name, column_default, data_type FROM information_schema.columns WHERE table_name=" . _q($nom_table));
+
+	if (!$res) return false;
+
+	$fields = array();
+	while($field = pg_fetch_array($res, NULL, PGSQL_NUM)) {
+		$fields[$field[0]] = $field[2] . (!$field[1] ? '' : (" DEFAULT " . $field[1]));
+	}
+
+	$res = pg_query($link, "SELECT indexdef FROM pg_indexes WHERE tablename=" . _q($nom_table));
+	$keys = array();
+	while($index = pg_fetch_array($res, NULL, PGSQL_NUM)) {
+		if (preg_match('/CREATE\s+(UNIQUE\s+)?INDEX.*\((.*)\)$/',
+			       $index[0],$r)) {
+			$index = split(',', $r[2]);
+			$keys[($r[1] ? "PRIMARY KEY " : "KEY ") . $index[0]] = 
+			  $r[2];
+		}
+	}
+	return array('field' => $fields, 'key' => $keys);
 }
 
 // http://doc.spip.org/@calcul_pg_in
