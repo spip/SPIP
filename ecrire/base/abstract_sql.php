@@ -67,6 +67,11 @@ function sql_select (
 		  $table, $id, $serveur);
 }
 
+function sql_alter($q, $serveur='') {
+	$f = sql_serveur('alter', $serveur);
+	return $f($q, $serveur);
+}
+
 // http://doc.spip.org/@sql_fetch
 function sql_fetch($res, $serveur='') {
 	$f = sql_serveur('fetch', $serveur);

@@ -28,6 +28,7 @@ function base_db_pg_dist($addr, $port, $login, $pass, $db='', $prefixe='') {
 		'link' => $link,
 		'db' => $db,
 		'prefixe' => $prefixe ? $prefixe : $db,
+		'alter' => 'spip_pg_alter',
 		'count' => 'spip_pg_count',
 		'countsel' => 'spip_pg_countsel',
 		'create' => 'spip_pg_create',
@@ -86,6 +87,21 @@ function spip_pg_query($query, $serveur='')
 	} else $suite ='';
 	$query = preg_replace('/([,\s])spip_/', '\1'.$prefixe.'_', $query) . $suite;
 	return spip_pg_trace_query($query, $serveur);
+}
+
+// Alter en PG ne traite pas les index
+// http://doc.spip.org/@spip_pg_selectdb
+function spip_pg_alter($query, $serveur='') {
+
+	if (!preg_match('/^\s*TABLE\s+(\w+)\s+(ADD|DROP)\s+(UNIQUE\s*|\s+)(INDEX|\w*\s*KEY)\s*(\w+)(.*)$/', $query, $r))
+		return spip_pg_query("ALTER $query", $serveur);
+
+	if ($r[2]=='DROP')
+		return spip_pg_query("DROP INDEX " . $r[1] .'_' . $r[6], $serveur);
+	else {
+		$q = "CREATE INDEX " . $r[3] . $r[5] . ' ON ' . $r[1] . $r[6];
+		return spip_pg_query($q,  $serveur);
+	}
 }
 
 //  Qu'une seule base pour le moment

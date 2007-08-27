@@ -36,6 +36,7 @@ function base_db_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='') {
 		'db' => $db,
 		'prefixe' => $prefixe ? $prefixe : $db,
 		'link' => $GLOBALS['mysql_rappel_connexion'] ? $link : false,
+		'alter' => 'spip_mysql_alter',
 		'count' => 'spip_mysql_count',
 		'countsel' => 'spip_mysql_countsel',
 		'create' => 'spip_mysql_create',
@@ -92,6 +93,9 @@ function spip_mysql_query($query, $serveur='') {
 	return $t ? trace_query_end($query, $t, $r, $e) : $r;
 }
 
+function spip_mysql_alter($query, $serveur=''){
+	return mysql_query("ALTER ".$query); # i.e. que PG se debrouille
+}
 
 // fonction appelant la precedente
 // c'est une instance de sql_select, voir ses specs dans abstract.php

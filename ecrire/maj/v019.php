@@ -565,21 +565,21 @@ function maj_v019_45()
 // http://trac.rezo.net/trac/spip/changeset/10150
 function maj_v019_46()
 {
-	spip_query("ALTER TABLE spip_forum DROP INDEX id_parent");
-	spip_query("ALTER TABLE spip_forum DROP INDEX id_article");
-	spip_query("ALTER TABLE spip_forum DROP INDEX id_breve");
-	spip_query("ALTER TABLE spip_forum DROP INDEX id_syndic");
-	spip_query("ALTER TABLE spip_forum DROP INDEX id_rubrique");
-	spip_query("ALTER TABLE spip_forum DROP INDEX date_thread");
-	spip_query("ALTER TABLE spip_forum DROP INDEX statut");
-	spip_query("ALTER TABLE spip_forum ADD INDEX optimal (statut,id_parent,id_article,date_heure,id_breve,id_syndic,id_rubrique)");
+	sql_alter("TABLE spip_forum DROP INDEX id_parent");
+	sql_alter("TABLE spip_forum DROP INDEX id_article");
+	sql_alter("TABLE spip_forum DROP INDEX id_breve");
+	sql_alter("TABLE spip_forum DROP INDEX id_syndic");
+	sql_alter("TABLE spip_forum DROP INDEX id_rubrique");
+	sql_alter("TABLE spip_forum DROP INDEX date_thread");
+	sql_alter("TABLE spip_forum DROP INDEX statut");
+	sql_alter("TABLE spip_forum ADD INDEX optimal (statut,id_parent,id_article,date_heure,id_breve,id_syndic,id_rubrique)");
 }
 
 // http://trac.rezo.net/trac/spip/changeset/10151
 function maj_v019_47()
 {
-	spip_query("ALTER TABLE spip_articles DROP INDEX url_site");
-	spip_query("ALTER TABLE spip_articles DROP INDEX date_modif");
-	spip_query("ALTER TABLE spip_auteurs  DROP INDEX lang");
+	sql_alter("TABLE spip_articles DROP INDEX url_site");
+	sql_alter("TABLE spip_articles DROP INDEX date_modif");
+	sql_alter("TABLE spip_auteurs  DROP INDEX lang");
 }
 ?>
