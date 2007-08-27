@@ -19,7 +19,7 @@ include_spip('inc/date');
 // http://doc.spip.org/@exec_message_edit_dist
 function exec_message_edit_dist()
 {
-	global  $connect_id_auteur, $connect_statut,   $spip_lang_rtl;
+	global  $connect_id_auteur, $connect_statut;
 
 	$id_message =  intval(_request('id_message'));
 	$dest = intval(_request('dest'));
@@ -121,8 +121,6 @@ function exec_message_edit_dist()
 // http://doc.spip.org/@afficher_si_rdv
 function afficher_si_rdv($date_heure, $date_fin, $choix)
 {
-	global $spip_lang_rtl;
-
 	$heures_debut = heures($date_heure);
 	$minutes_debut = minutes($date_heure);
 	$heures_fin = heures($date_fin);
