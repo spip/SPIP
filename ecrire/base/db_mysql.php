@@ -93,6 +93,7 @@ function spip_mysql_query($query, $serveur='') {
 	return $t ? trace_query_end($query, $t, $r, $e) : $r;
 }
 
+// http://doc.spip.org/@spip_mysql_alter
 function spip_mysql_alter($query, $serveur=''){
 	return mysql_query("ALTER ".$query); # i.e. que PG se debrouille
 }
