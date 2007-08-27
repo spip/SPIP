@@ -22,7 +22,6 @@ function generer_url_ecrire_article($id, $suite='', $ancre='', $statut='') {
 		$statut = sql_fetch(spip_query("SELECT statut FROM spip_articles WHERE $a"));
 		$statut = $statut['statut'];
 	}
-	spip_log("url $id $statut");
 	if ($suite) $a .= "&$suite";
 	if ($statut == 'publie') {
 		$a .= "&ancre=" . $ancre;
