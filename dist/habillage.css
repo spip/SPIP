@@ -1,3 +1,5 @@
+/* @override http://localhost/spip/dist/habillage.css */
+
 /* ----------------------------------------------------------- */
 /* Feuilles de styles des squelettes par defaut pour SPIP 1.9  */
 /* ----------------------------------------------------------- */
@@ -53,6 +55,7 @@ h3.spip { margin-top: 2em; margin-bottom: 1.4em; text-align: center; font-weight
 /* Divers */
 hr { width: 40%; height: 2px; margin: 4em auto; background-color: #999; color: #999; border: 0; }
 abbr, acronym { border-bottom: 1px dotted; cursor: help; }
+address {display: inline;}
 small { font-size: 0.71em; color: #666; }
 /* Attention : en dessous de 0.71em le texte devient illisible en text smallest sur MSIE */
 
