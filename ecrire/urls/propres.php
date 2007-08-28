@@ -117,10 +117,8 @@ function _generer_url_propre($type, $id_objet) {
 	$lock = "url $type $id_objet";
 	spip_get_lock($lock, 10);
 
-	$n = spip_num_rows(spip_query("SELECT $col_id FROM $table WHERE url_propre=" . _q($url) . " AND $col_id != $id_objet LIMIT 1"));
-	if ($n > 0) {
+	if (sql_countsel($table, "url_propre=" . _q($url) . " AND $col_id != $id_objet"))
 		$url = $url.','.$id_objet;
-	}
 
 	// Eviter de tamponner les URLs a l'ancienne (cas d'un article
 	// intitule "auteur2")
