@@ -1,4 +1,8 @@
-body { background-color: #babdb6; font-family: Trebuchet Ms,Verdana, Geneva, Sans, sans-serif; font-size: 0.9em; color: #2e3436; }
+/* @override http://localhost/spip/dist/minipres.css */
+
+body { font-family: Trebuchet Ms,Verdana, Geneva, Sans, sans-serif; font-size: 0.9em; color: #2e3436;
+	background: #babdb6 url(images/minipres-gris.png) repeat;
+}
 
 h1 { margin: 1em 0 1em 0; font-size: 1.3em; font-weigth: bold; color: #5c3566; }
 h2 { margin: 0.8em 0 0.8em 0; font-size: 1.2em; font-weigth: normal; }
@@ -15,7 +19,9 @@ fieldset, .fieldset { text-align: left; padding: 0; border: 0; margin-top: 1em; 
 legend { font-weight: bold; font-size: 1.1em; color: #000; }
 label {}
 
-#minipres { width: 40em; background: #FFF; margin: 1em auto; padding: 1em; border: 1px solid #888; text-align: center; }
+#minipres { width: 40em; background: #FFF repeat; margin: 1em auto; padding: 1em; border: 1px solid #888; text-align: center; }
+
+#minipres { width: 40em; background: #FFF repeat; margin: 1em auto; padding: 1em; border: 1px solid #888; text-align: center; }
 .pass #minipres { width: 90%; }
 
 .petit-centre { font-family: Verdana, Geneva, Sans, sans-serif; font-size: 1em; }
