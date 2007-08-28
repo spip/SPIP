@@ -1344,7 +1344,7 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 
 	$select = "$key AS id, $titre AS titre, statut";
 
-	$n = spip_num_rows(sql_select($select, "spip_$table", $where));
+	$n = sql_countsel("spip_$table", $where);
 
 	if (!$n) return '';
 

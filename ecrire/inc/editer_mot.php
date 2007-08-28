@@ -100,12 +100,11 @@ function inc_editer_mot_dist($objet, $id_objet, $cherche_mot, $select_groupe, $f
 // http://doc.spip.org/@inserer_mot
 function inserer_mot($table, $table_id, $id_objet, $id_mot)
 {
-	$result = spip_num_rows(spip_query("SELECT id_mot FROM $table WHERE id_mot=$id_mot AND $table_id=$id_objet"));
+	$r = sql_countsel($table, "id_mot=$id_mot AND $table_id=$id_objet");
 
-	if (!$result) {
-		spip_query("INSERT INTO $table (id_mot,$table_id) VALUES ($id_mot, $id_objet)");
-	}
-	return $result;
+	if (!$r) sql_insertq($table, array('id_mot' =>$id_mot,  $table_id => $id_objet));
+
+	return $r;
 }
 
 

@@ -52,6 +52,7 @@ function inc_admin_dist($script, $titre, $comment='', $retour='')
 // http://doc.spip.org/@admin_verifie_session
 function admin_verifie_session($script) {
 
+	include_spip('base/abstract_sql');
 	$signal = $script . ' ' . fichier_admin($action);
 	$row = sql_fetsel('valeur', 'spip_meta', "nom='admin'");
 	if (!$row) {
