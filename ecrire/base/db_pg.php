@@ -356,25 +356,30 @@ function spip_pg_delete($table, $where='', $serveur='') {
 
 // http://doc.spip.org/@spip_pg_insert
 function spip_pg_insert($table, $champs, $valeurs, $desc=array(), $serveur='') {
+	if (strlen($valeurs)<3) {spip_log("insert vide $table"); return 0;}
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
 	$db = $connexion['db'];
 
 	if (!$desc) {
-		global $tables_principales;
+		global $tables_principales, $tables_auxiliaires;
 		include_spip('base/serial');
-		$desc = @$tables_principales[$table];
+		if (!$desc = @$tables_principales[$table]) {
+			include_spip('base/auxiliaires');
+			$desc = @$tables_auxiliaires[$table];
+		}
 	}
+
+	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
 
 	// Dans les tables principales de SPIP, le numero de l'insertion
 	// est la valeur de l'unique et atomique cle primaire ===> RETURNING
 	// Le code actuel n'a pas besoin de ce numero dans les autres cas
 	// mais il faudra surement amelioer ca un jour.
-	$seq = @$desc['key']["PRIMARY KEY"];
-	$ret = preg_match('/\w+/', $seq) ? " RETURNING $seq" : '';
+	$seq = spip_pg_sequence($table, $desc);
+	$ret = !$seq ? '' : (" RETURNING currval('$seq')");
 
-	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
 	$r = pg_query($link, $q="INSERT INTO $table $champs VALUES $valeurs $ret");
 
 	if ($r) {
@@ -382,7 +387,9 @@ function spip_pg_insert($table, $champs, $valeurs, $desc=array(), $serveur='') {
 		if ($r2 = pg_fetch_array($r, NULL, PGSQL_NUM))
 			return $r2[0];
 	}
-	spip_log("Erreur $q '$r' '$r2'", 'pg'); // trace a minima
+	$n = spip_pg_errno();
+	$m = spip_pg_error($q);
+	spip_log("$n $m $q '$r' '$r2'", 'pg'); // trace a minima
 	return -1;
 }
 
@@ -390,11 +397,13 @@ function spip_pg_insert($table, $champs, $valeurs, $desc=array(), $serveur='') {
 function spip_pg_insertq($table, $couples, $desc=array(), $serveur='') {
 
 	if (!$desc) {
-		global $tables_principales;
+		global $tables_principales, $tables_auxiliaires;
 		include_spip('base/serial');
-		$desc = @$tables_principales[$table];
+		include_spip('base/auxiliaires');
+		if (!$desc = @$tables_principales[$table])
+			$desc = @$tables_auxiliaires[$table];
 	}
-	if (!$desc) die("insertion sans description");
+	if (!$desc) die("$table insertion sans description");
 	$fields =  $desc['field'];
 		
 	foreach ($couples as $champ => $val) {
@@ -436,7 +445,10 @@ function spip_pg_updateq($table, $champs, $where='', $desc=array(), $serveur='')
 	if (!$desc) {
 		global $tables_principales;
 		include_spip('base/serial');
-		$desc = $tables_principales[$table];
+		if (!$desc = @$tables_principales[$table]) {
+			include_spip('base/auxiliaires');
+			$desc = @$tables_auxiliaires[$table];
+		}
 	}
 	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
 	$fields = $desc['field'];
@@ -452,6 +464,7 @@ function spip_pg_updateq($table, $champs, $where='', $desc=array(), $serveur='')
 // http://doc.spip.org/@spip_pg_replace
 function spip_pg_replace($table, $values, $desc, $serveur='') {
 
+	if (!$values) {spip_log("replace vide $table"); return 0;}
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
@@ -485,15 +498,34 @@ function spip_pg_replace($table, $values, $desc, $serveur='') {
 	    $set = pg_affected_rows($set);
 	  }
 	}
-
 	if (!$set) {
-	    $set = pg_query($link, $q = "INSERT INTO $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',', $values) . ')');
+		$seqname = spip_pg_sequence($table, $desc);
+		$ret = !$seqname ? '' :
+		  (" RETURNING nextval('$seqname') < $prim");
+
+		$set = pg_query($link, $q = "INSERT INTO $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',', $values) . ")$ret");
 	    if (!$set) {
 	      $n = spip_pg_errno();
 	      $m = spip_pg_error($q);
+	    } elseif ($ret) {
+	      $r = pg_fetch_array($set, NULL, PGSQL_NUM);
+	      if ($r[0]) {
+		$q = "SELECT setval('$seqname', $prim) from $table";
+		$r = pg_query($link, $q);
+	      }
 	    }
 	}
+
 	return $set;
+}
+
+function spip_pg_sequence($table, $desc)
+{
+	$prim = @$desc['key']['PRIMARY KEY'];
+	if (!preg_match('/^\w+$/', $prim)
+	OR strpos($desc['field'][$prim], 'int') === false)
+		return '';
+	else  {	return $table . '_' . $prim . "_seq";}
 }
 
 // Explicite les conversions de Mysql d'une valeur $v de type $t
@@ -589,7 +621,7 @@ function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false, 
 	$link = $connexion['link'];
 	$db = $connexion['db'];
 	if ($prefixe) $nom = preg_replace('/^spip/', $prefixe, $nom);
-	$query = $prim = $s = $p='';
+	$query = $prim = $prim_name = $v = $s = $p='';
 	$keys = array();
 
 	// certains plugins declarent les tables  (permet leur inclusion dans le dump)
@@ -606,7 +638,7 @@ function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false, 
 		  $keys[] = "CREATE INDEX $i ON $nom ($v);";
 		} else $prim .= "$s\n\t\t" . str_replace('`','"',$k) ." ($v)";
 		if ($k == "PRIMARY KEY")
-			$p = $v;
+			$prim_name = $v;
 		$s = ",";
 	}
 	$s = '';
@@ -626,7 +658,7 @@ function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false, 
 		}
 
 		$query .= "$s\n\t\t$k "
-			. (($autoinc && ($p == $k) && preg_match(',\b(big)?int\b,i', $v))
+			. (($autoinc && ($prim_name == $k) && preg_match(',\b(big)?int\b,i', $v))
 				? " bigserial"
 			   : mysql2pg_type($v)
 			);
@@ -642,7 +674,11 @@ function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false, 
 
 	$r = @pg_query($link, $q);
 
-	foreach($keys as $index)  {@pg_query($link, $index);}
+	if (!$r)
+		spip_log("table $nom deja la");
+	else {
+		foreach($keys as $index) {@pg_query($link, $index);}
+	} 
 	return $r;
 }
 
