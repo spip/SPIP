@@ -16,7 +16,7 @@
 	<INCLURE{fond=inc-entete}>
 
 	[(#REM) Contenu principal : derniers articles publies ]
-	<div id="conteneur">
+	<div class="hfeed id="conteneur">
     <div id="contenu">
 		
         <div class="cartouche">
@@ -32,11 +32,11 @@
             <h2><:derniers_articles:></h2>
             <ul>
                 <BOUCLE_articles_recents(ARTICLES) {par date}{inverse} {pagination 5}>
-                <li>
+                <li class="hentry">
                     [(#LOGO_ARTICLE_RUBRIQUE|#URL_ARTICLE|image_reduire{150,100})]
-                    <h3><a href="#URL_ARTICLE">#TITRE</a></h3>
-                    <small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
-                    [<div class="#EDIT{intro} introduction">(#INTRODUCTION)</div>]
+                    <h3 class="entry-title"><a href="#URL_ARTICLE" rel="bookmark">#TITRE</a></h3>
+                    <small><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|affdate_jourcourt)]</abbr>[, <:par_auteur:> (#LESAUTEURS)]</small>
+                    [<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION)</div>]
                 </li>
                 </BOUCLE_articles_recents>
             </ul>
