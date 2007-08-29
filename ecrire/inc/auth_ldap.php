@@ -77,13 +77,13 @@ function auth_ldap_inserer($dn, $statut)
 	// refuser d'importer n'importe qui 
 	if (!$statut) return false;
 
-	// Lire les infos sur l'utilisateur depuis LDAP
-	$result = @ldap_read($ldap_link, $dn, "objectClass=*", array("uid", "cn", "mail", "description"));
+	// Lire les infos sur l'uid de l'utilisateur depuis LDAP 
+	$result = auth_ldap_retrouver($ldap_link, $dn, array("uid", "cn", "mail", "description"));
 		
-	// Si l'utilisateur ne peut lire ses infos, 
-	// se reconnecter avec le compte principal
+	// Si ça ne marche pas, essayer avec le samaccountname
 	if (!$result AND spip_connect_ldap())
-		$result = @ldap_read($ldap_link, $dn, "objectClass=*", array("uid", "cn", "mail", "description"));
+		$result = auth_ldap_retrouver($ldap_link, $dn, array("samaccountname", "cn", "mail", "description"));
+
 
 	if (!$result) return array();
 
@@ -112,4 +112,20 @@ function auth_ldap_inserer($dn, $statut)
 
 	return spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$n");
 }
+
+
+// Lire les infos sur l'utilisateur depuis LDAP
+
+function auth_ldap_retrouver($ldap_link, $dn, $champs)
+{
+	$r = @ldap_read($ldap_link, $dn, "objectClass=*", $champs);
+		
+	// Si l'utilisateur ne peut lire ses infos, 
+	// se reconnecter avec le compte principal
+	if (!$r AND spip_connect_ldap())
+		$r = @ldap_read($ldap_link, $dn, "objectClass=*",  $champs);
+
+	return $r;
+}
+
 ?>
