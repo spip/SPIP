@@ -116,6 +116,7 @@ function auth_ldap_inserer($dn, $statut)
 
 // Lire les infos sur l'utilisateur depuis LDAP
 
+// http://doc.spip.org/@auth_ldap_retrouver
 function auth_ldap_retrouver($ldap_link, $dn, $champs)
 {
 	$r = @ldap_read($ldap_link, $dn, "objectClass=*", $champs);
