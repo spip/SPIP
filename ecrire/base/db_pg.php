@@ -362,22 +362,13 @@ function spip_pg_insert($table, $champs, $valeurs, $desc=array(), $serveur='') {
 	$link = $connexion['link'];
 	$db = $connexion['db'];
 
-	if (!$desc) {
-		global $tables_principales, $tables_auxiliaires;
-		include_spip('base/serial');
-		if (!$desc = @$tables_principales[$table]) {
-			include_spip('base/auxiliaires');
-			$desc = @$tables_auxiliaires[$table];
-		}
+	if (!$desc) list($nom,$desc) = description_table($table);
+	$seq = spip_pg_sequence($table);
+
+	if ($prefixe) {
+		$table = preg_replace('/^spip/', $prefixe, $table);
+		$seq = preg_replace('/^spip/', $prefixe, $seq);
 	}
-
-	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
-
-	// Dans les tables principales de SPIP, le numero de l'insertion
-	// est la valeur de l'unique et atomique cle primaire ===> RETURNING
-	// Le code actuel n'a pas besoin de ce numero dans les autres cas
-	// mais il faudra surement amelioer ca un jour.
-	$seq = spip_pg_sequence($table, $desc);
 	$ret = !$seq ? '' : (" RETURNING currval('$seq')");
 
 	$r = pg_query($link, $q="INSERT INTO $table $champs VALUES $valeurs $ret");
@@ -396,13 +387,7 @@ function spip_pg_insert($table, $champs, $valeurs, $desc=array(), $serveur='') {
 // http://doc.spip.org/@spip_pg_insertq
 function spip_pg_insertq($table, $couples, $desc=array(), $serveur='') {
 
-	if (!$desc) {
-		global $tables_principales, $tables_auxiliaires;
-		include_spip('base/serial');
-		include_spip('base/auxiliaires');
-		if (!$desc = @$tables_principales[$table])
-			$desc = @$tables_auxiliaires[$table];
-	}
+	if (!$desc) list($nom,$desc) = description_table($table);
 	if (!$desc) die("$table insertion sans description");
 	$fields =  $desc['field'];
 		
@@ -435,21 +420,13 @@ function spip_pg_update($table, $champs, $where='', $desc=array()) {
 // sauf les expressions de date lorsqu'il s'agit de fonctions SQL (NOW etc)
 // http://doc.spip.org/@spip_pg_updateq
 function spip_pg_updateq($table, $champs, $where='', $desc=array(), $serveur='') {
-
+	if (!$champs) return;
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
 	$db = $connexion['db'];
 
-	if (!$champs) return;
-	if (!$desc) {
-		global $tables_principales;
-		include_spip('base/serial');
-		if (!$desc = @$tables_principales[$table]) {
-			include_spip('base/auxiliaires');
-			$desc = @$tables_auxiliaires[$table];
-		}
-	}
+	if (!$desc) list($nom,$desc) = description_table($table);
 	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
 	$fields = $desc['field'];
 	$r = '';
@@ -469,7 +446,6 @@ function spip_pg_replace($table, $values, $desc, $serveur='') {
 	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
 	$db = $connexion['db'];
-	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
 
 	$prim = $desc['key']['PRIMARY KEY'];
 	$ids = preg_split('/,\s*/', $prim);
@@ -487,41 +463,53 @@ function spip_pg_replace($table, $values, $desc, $serveur='') {
 		spip_log("REPLACE en PG exige de connaitre la cle primaire de $table: $prim");
 		return 0;
 	}
-	$set = join(',', $noprims);
+	$couples = join(',', $noprims);
 
-	if ($set) {
-	  $set = pg_query($link, $q = "UPDATE $table SET $set WHERE $where");
-	  if (!$set) {
+	$seq = spip_pg_sequence($table);
+	if ($prefixe) {
+		$table = preg_replace('/^spip/', $prefixe, $table);
+		$seq = preg_replace('/^spip/', $prefixe, $seq);
+	}
+
+	if ($couples) {
+	  $couples = pg_query($link, $q = "UPDATE $table SET $couples WHERE $where");
+	  if (!$couples) {
 	    $n = spip_pg_errno();
 	    $m = spip_pg_error($q);
 	  } else {
-	    $set = pg_affected_rows($set);
+	    $couples = pg_affected_rows($couples);
 	  }
 	}
-	if (!$set) {
-		$seqname = spip_pg_sequence($table, $desc);
-		$ret = !$seqname ? '' :
-		  (" RETURNING nextval('$seqname') < $prim");
+	if (!$couples) {
+		$ret = !$seq ? '' :
+		  (" RETURNING nextval('$seq') < $prim");
 
-		$set = pg_query($link, $q = "INSERT INTO $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',', $values) . ")$ret");
-	    if (!$set) {
+		$couples = pg_query($link, $q = "INSERT INTO $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',', $values) . ")$ret");
+	    if (!$couples) {
 	      $n = spip_pg_errno();
 	      $m = spip_pg_error($q);
 	    } elseif ($ret) {
-	      $r = pg_fetch_array($set, NULL, PGSQL_NUM);
+	      $r = pg_fetch_array($couples, NULL, PGSQL_NUM);
 	      if ($r[0]) {
-		$q = "SELECT setval('$seqname', $prim) from $table";
+		$q = "SELECT setval('$seq', $prim) from $table";
 		$r = pg_query($link, $q);
 	      }
 	    }
 	}
 
-	return $set;
+	return $couples;
 }
 
+// Donne la sequence eventuelle associee a une table 
+// Pas extensible pour le moment,
+
 // http://doc.spip.org/@spip_pg_sequence
-function spip_pg_sequence($table, $desc)
+function spip_pg_sequence($table)
 {
+	global $tables_principales;
+	include_spip('base/serial');
+	if (!isset($tables_principales[$table])) return false;
+	$desc = $tables_principales[$table];
 	$prim = @$desc['key']['PRIMARY KEY'];
 	if (!preg_match('/^\w+$/', $prim)
 	OR strpos($desc['field'][$prim], 'int') === false)
