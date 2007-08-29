@@ -234,13 +234,13 @@ function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $
 	// On traite donc le probleme a la confirmation.
 
 	if ($email_unique) {
-		$r = sql_countsel('spip_signatures', "id_article=$id_article AND ad_email=" . _q($adresse_email) . " AND statut='publie'","", 1);
+		$r = sql_countsel('spip_signatures', "id_article=$id_article AND ad_email=" . _q($adresse_email) . " AND statut='publie'");
 
 		if ($r)	return _T('form_pet_deja_signe');
 	}
 
 	if ($site_unique) {
-		$r = sql_countsel('spip_signatures', "id_article=$id_article AND url_site=" . _q($url_site) . " AND (statut='publie' OR statut='poubelle')",'',1);
+		$r = sql_countsel('spip_signatures', "id_article=$id_article AND url_site=" . _q($url_site) . " AND (statut='publie' OR statut='poubelle')");
 
 		if ($r)	return _T('form_pet_site_deja_enregistre');
 	}

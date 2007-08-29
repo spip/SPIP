@@ -33,10 +33,8 @@ function action_instituer_mot_post($r)
 	$id_groupe = intval(_request('id_groupe'));
 
 	if (!$id_mot AND $id_groupe) {
-		$id_mot = sql_insert("spip_mots",
-			'(id_groupe)', "($id_groupe)");
-
-		if ($r[2]) {
+		$id_mot = sql_insertq("spip_mots", array('id_groupe' => $id_groupe));
+		if ($id_mot AND $r[2]) {
 			list(,,,$ajouter_id_article, $table, $table_id) = $r;
 			ajouter_nouveau_mot($id_groupe, $table, $table_id, $id_mot, $ajouter_id_article);
 		}

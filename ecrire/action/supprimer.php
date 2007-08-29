@@ -58,7 +58,7 @@ function action_supprimer_rubrique($r)
 	while ($r = sql_fetch($q)) {
 		$id_auteur = $r['id_auteur'];
 		spip_query("DELETE FROM spip_auteurs_rubriques WHERE id_rubrique=$id_rubrique AND id_auteur=$id_auteur");
-		$n = sql_countsel("spip_auteurs_rubriques", "id_auteur=$id_auteur",'', 1);
+		$n = sql_countsel("spip_auteurs_rubriques", "id_auteur=$id_auteur");
 		if (!$n)
 			spip_query("UPDATE spip_auteurs SET statut='1comite' WHERE id_auteur=$id_auteur");
 	}

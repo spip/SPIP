@@ -309,7 +309,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 	// Verifier les boucles a mettre en relief
 	//
 
-	$relief = sql_countsel('spip_articles', "id_rubrique=$id_rubrique AND statut='prop' LIMIT 1");
+	$relief = sql_countsel('spip_articles', "id_rubrique=$id_rubrique AND statut='prop'");
 
 	if (!$relief) {
 		$relief = sql_countsel('spip_breves', "id_rubrique=$id_rubrique AND (statut='prepa' OR statut='prop')");
