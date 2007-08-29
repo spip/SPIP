@@ -203,7 +203,8 @@ function spip_pg_orderby($order, $select)
 // http://doc.spip.org/@spip_pg_groupby
 function spip_pg_groupby($groupby, $from, $select)
 {
-	$join = is_array($from) ? (count($from) > 1) : strpos($from, ",");
+	$join = is_array($from) ? (count($from) > 1) : 
+	  (strpos($from, ",") OR strpos($from, "JOIN"));
 	if ($join) $join = !is_array($select) ? $select : join(", ", $select);
 	if ($join) {
 	  $join = preg_replace('/(SUM|COUNT|MAX|MIN)\([^)]+\)\s*,/i','', $join);
