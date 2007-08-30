@@ -16,6 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Preparer les listes id_article IN (...) pour les parties WHERE
 // et points =  des requetes du moteur de recherche
+// http://doc.spip.org/@inc_prepare_recherche_dist
 function inc_prepare_recherche_dist($recherche, $primary = 'id_article', $id_table='articles',$nom_table='spip_articles', $cond=false) {
 	static $cache = array();
 	static $fcache = array();
