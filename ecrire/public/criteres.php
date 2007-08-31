@@ -1049,8 +1049,8 @@ function trouver_table($type, $boucle)
 
 	if (!isset($tables_des_serveurs_sql[$s][$nom_table])) {
 		$desc = sql_showtable($nom_table, $serveur, ($nom_table != $type));
-		if (!$desc) {
-			erreur_squelette(_T('zbug_table_inconnue', array('table' => $type)),
+		if (!$desc OR !$desc['field']) {
+		  erreur_squelette(_T('zbug_table_inconnue', array('table' => $s ? "$serveur:$type" : $type)),
 					 $boucle->id_boucle);
 			return null;
 		}

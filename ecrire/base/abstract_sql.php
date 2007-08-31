@@ -245,7 +245,7 @@ function calcul_mysql_in($val, $valeurs, $not='') {
 
 // http://doc.spip.org/@description_table
 function description_table($nom){
-	global $tables_principales, $tables_auxiliaires, $table_des_tables, $tables_des_serveurs_sql;
+	global $tables_principales, $tables_auxiliaires;
 	static $tables_externes = array();
 
 	if (isset($tables_externes[$nom]))
