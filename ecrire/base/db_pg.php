@@ -232,6 +232,9 @@ function spip_pg_frommysql($arg)
 
 	$res = spip_pg_fromfield($arg);
 
+	$res = preg_replace('/\b0\.0[+]([^, ]+)\s*/',
+			    'CAST(substring(\1, \'^ *[0-9.]+\') as float)',
+			    $res);
 	$res = preg_replace('/\b0[+]([^, ]+)\s*/',
 			    'CAST(substring(\1, \'^ *[0-9]+\') as int)',
 			    $res);
