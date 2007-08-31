@@ -188,9 +188,8 @@ function exec_articles_versions_dist()
 		}
 
 		if (isset($row['id_auteur'])) {
-			if ($row['id_auteur'] == intval($row['id_auteur'])
-			AND $s = spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur='".addslashes($row['id_auteur'])."'")) {
-				$t = sql_fetch($s);
+			if (is_numeric($row['id_auteur'])
+			AND $t = sql_fetsel('nom', 'spip_auteurs', "id_auteur=" . intval($row['id_auteur']))) {
 				echo " (".typo($t['nom']).")";
 			} else {
 				echo " (".$row['id_auteur'].")"; #IP edition anonyme
