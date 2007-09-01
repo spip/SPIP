@@ -997,7 +997,7 @@ function balise_ENV_dist($p, $src = NULL) {
 	if (!$_nom) {
 		// cas de #ENV sans argument : on retourne le serialize() du tableau
 		// une belle fonction [(#ENV|affiche_env)] serait pratique
-		$p->code = '($a = ('.$src.') ? serialize($a) : "")';
+		$p->code = '(is_array($a = ('.$src.')) ? serialize($a) : "")';
 	} else {
 		// admet deux arguments : nom de variable, valeur par defaut si vide
 		$p->code = 'is_array($a = ('.$src.')) ? $a['.$_nom.'] : ""';
@@ -1383,14 +1383,14 @@ function balise_FOREACH_dist($p) {
 		$_modele = interprete_argument_balise(2,$p);
 		$_modele = str_replace("'", "", strtolower($_modele));
 		$__modele = 'foreach_'.strtolower($_tableau);
-		$_modele = (!$_modele AND ($f = find_in_path('modeles/'.$__modele.'.html'))) ? $__modele : ($_modele ? $_modele : 'foreach');
+		$_modele = (!$_modele AND find_in_path('modeles/'.$__modele.'.html')) ?
+			$__modele : 
+			($_modele ? $_modele : 'foreach');
 
 		$p->param = @array_shift(@array_shift($p->param));
 		$p = $balise($p);
-		//retirer le serialize
-		$p->code = preg_replace(',serialize\((.*)\),', '\1', $p->code);
 		$filtre = chercher_filtre('foreach');
-		$p->code = $filtre . "(" . $p->code . ", '" . $_modele . "')";
+		$p->code = $filtre . "(unserialize(" . $p->code . "), '" . $_modele . "')";
 	}
 	//On a pas trouve la balise correspondant au tableau a traiter
 	else {
