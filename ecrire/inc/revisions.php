@@ -601,8 +601,7 @@ function enregistrer_premiere_revision($x) {
 
 		$id_article = $x['args']['id_objet'];
 
-		$query = spip_query("SELECT id_article FROM spip_versions WHERE id_article=$id_article LIMIT 1");
-		if (!spip_num_rows($query)) {
+		if (!sql_countsel('spip_versions',"id_article=$id_article")) {
 			$select = join(", ", liste_champs_versionnes($x['args']['table']));
 			$query = spip_query("SELECT $select, date, date_modif FROM spip_articles WHERE id_article=$id_article");
 			$champs_originaux = sql_fetch($query);
@@ -638,7 +637,6 @@ function enregistrer_nouvelle_revision($x) {
 			if (isset($x['data'][$key]))
 				$champs[$key] = $x['data'][$key];
 
-		spip_log("enregistrer_nouvelle_revision " . count($champs));
 		if (count($champs))
 			ajouter_version($x['args']['id_objet'], $champs, '', $GLOBALS['auteur_session']['id_auteur']);
 	}

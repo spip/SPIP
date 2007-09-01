@@ -186,9 +186,7 @@ $spip_versions = array (
 		"champs"	=> "text");
 
 $spip_versions_key = array (
-		"PRIMARY KEY"	=> "id_article, id_version",
-		"KEY date"	=> "id_article, date",
-		"KEY id_auteur"	=> "id_auteur");
+		"PRIMARY KEY"	=> "id_article, id_version");
 
 $spip_versions_fragments = array(
 		"id_fragment"	=> "int unsigned DEFAULT '0' NOT NULL",
