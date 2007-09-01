@@ -3,6 +3,17 @@
 /* ----------------------------------------------------------- */
 
 
+/*
+ * nota: CSS des raccourcis de SPIP -- spip_style.css
+ *
+ * La feuille de style dist/spip_style.css est chargee
+ * au prealable ; elle contient la definition standard
+ * des styles associes aux raccourcis de SPIP.
+ *
+ */
+
+
+
 /* Disposition a l'ecran des blocs principaux
 ---------------------------------------------- */
 body { background: #FFF; margin: 0; padding: 0; text-align: center; }
@@ -48,7 +59,7 @@ h1 { margin: 0; font-size: 1.50em; font-weight: bold; color: #000; }
 h2 { background: #8B6F92; margin: 0; padding: 0.20em; font-size: 1em; font-weight: normal; text-transform: uppercase; letter-spacing: 0.10em; }
 h2, h2 a, h2 a:hover { color: #EEE; }
 h3, h3 a, h3 a:hover { color: #000; }
-h3.spip { margin-top: 2em; margin-bottom: 1.4em; text-align: center; font-weight: bold; }
+h3.spip { margin-top: 2em; margin-bottom: 1.4em; text-align: center; font-weight: bold; color: #333; }
 
 /* Divers */
 hr { width: 40%; height: 2px; margin: 4em auto; background-color: #999; color: #999; border: 0; }

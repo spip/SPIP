@@ -1,11 +1,52 @@
-<BOUCLE_art(ARTICLES){id_article=#ENV{id}}{statut?}>
+<BOUCLE_art(ARTICLES){id_article=#ENV{id}}{statut?}{!lang_select}>
 <div class='infos'>
 <div class='numero'><:info_numero_article:><p>#ID_ARTICLE</p></div>
+
+[(#REM)
+
+	Bloc de changement de statut
+
+]
 [(#ID_ARTICLE|instituer_article{#ID_RUBRIQUE,#STATUT})]
-<p class='origine'>[(#DATE|affdate)][<br /><:par_auteur:><span class='lesauteurs'> (#LESAUTEURS|couper{150})]</span><p>
-<BOUCLE_docs(DOCUMENTS){id_article}></BOUCLE_docs><p class='nb_elements[(#TOTAL_BOUCLE|?{'',' noinfo'})]'>#TOTAL_BOUCLE <:info_documents:></p><//B_docs>
-<p class='statistiques[(#VISITES|?{'',' noinfo'})]'>Cet article a une popularite de #POPULARITE et a re&ccedil;u #VISITES visites</p>
-<BOUCLE_forums(FORUMS){id_article}></BOUCLE_forums>[<p class='forums[(#TOTAL_BOUCLE|?{'',' noinfo'})]'>(#VAL{icone_suivi_forum}|_T{#ARRAY{nb_forums,#TOTAL_BOUCLE}})</p>]<//B_forums>
-<BOUCLE_sign(SIGNATURES){id_article}{statut IN publie,poubelle}></BOUCLE_sign><p class='signatues[(#TOTAL_BOUCLE|?{'',' noinfo'})]'>#TOTAL_BOUCLE&nbsp;<:info_signatures:></p><//B_sign>
+
+
+
+[(#REM)
+
+	Bouton voir en ligne
+
+][(#VAL{article}|voir_en_ligne{#ID_ARTICLE,#STATUT,racine-24.gif,0,0})]
+
+
+
+
+
+
+[(#REM)
+
+	Bouton statistiques des articles
+
+]
+[(#CONFIG{activer_statistiques}|=={oui}|?{#STATUT}|=={publie}
+	|?{[(#AUTORISER{voirstats,article,#ID_ARTICLE})]}
+	|?{[(#VISITES|bouton_lien_statistiques{#ID_ARTICLE})]})]
+
+
+
+[(#REM)
+
+	Bouton revisions des articles
+
+]
+[(#CONFIG{articles_versions}|=={oui}
+	|?{#ID_VERSION}
+	|?{[(#AUTORISER{voirrevisions,article,#ID_ARTICLE})]}
+	|?{
+		[(#VAL{info_historique_lien}|_T
+		|icone_horizontale{?exec=articles_versions&id_article=#ID_ARTICLE,
+			historique-24.gif,rien.gif,0}
+	)]
+})]
+
 </div>
 </BOUCLE_art>

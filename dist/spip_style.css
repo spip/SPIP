@@ -1,7 +1,17 @@
 /* SPIP-STYLE                                              version 1.9  */
-/* Cette feuille contient les styles associes au code genere par SPIP.  */
-/* Ces styles sont indispensables et doivent necessairement etre        */
-/* definis pour le bon fonctionnement de vos squelettes.                */
+
+/*
+ * Cette feuille contient les styles associes aux raccourcis de SPIP.
+ * Ces styles sont indispensables et doivent necessairement etre
+ * definis pour le bon fonctionnement de vos squelettes.
+ *
+ * Ce fichier est appele par l'INCLURE(inc-head) de la 'dist', il sert
+ * aussi de reference.
+ *
+ * Vous pouvez l'appeler tel quel, ou l'adapter en copiant ses definitions
+ * dans la feuille de style la plus generale de votre site
+ *
+ */
 
 
 /* Raccourcis typographiques de SPIP */

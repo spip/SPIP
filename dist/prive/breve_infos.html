@@ -1,9 +1,20 @@
-<BOUCLE_breve(BREVES){id_breve=#ENV{id}}{statut?}>
+<BOUCLE_breve(BREVES){id_breve=#ENV{id}}{statut?}{!lang_select}>
 <div class='infos'>
 <div class='numero'><:info_gauche_numero_breve:><p>#ID_BREVE</p></div>
+
+[(#REM)
+
+	Bloc de changement de statut
+
+]
 [(#ID_BREVE|instituer_breve{#ID_RUBRIQUE,#STATUT})]
-<p class='origine'>[(#DATE|affdate)]</span><p>
-<BOUCLE_docs(DOCUMENTS){id_breve}></BOUCLE_docs><p class='nb_elements[(#TOTAL_BOUCLE|?{'',' noinfo'})]'>#TOTAL_BOUCLE <:info_documents:></p><//B_docs>
-<BOUCLE_forums(FORUMS){id_breve}></BOUCLE_forums>[<p class='forums[(#TOTAL_BOUCLE|?{'',' noinfo'})]'>(#VAL{icone_suivi_forum}|_T{#ARRAY{nb_forums,#TOTAL_BOUCLE}})</p>]<//B_forums>
+
+
+[(#REM)
+
+	Bouton voir en ligne
+
+][(#VAL{breve}|voir_en_ligne{#ID_BREVE,#STATUT,racine-24.gif,0,0})]
+
 </div>
 </BOUCLE_breve>
