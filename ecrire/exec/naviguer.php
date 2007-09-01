@@ -85,6 +85,11 @@ function exec_naviguer_dist()
 
 	echo infos_naviguer($id_rubrique, $statut, $ze_logo, $n_forums);
 	echo ($iconifier('id_rubrique', $id_rubrique, 'naviguer', false));
+
+
+	echo bloc_des_raccourcis(icone_horizontale(_T('icone_tous_articles'), generer_url_ecrire("articles_page"), "article-24.gif", '', false, false));
+
+
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''));
 
 	//
@@ -93,48 +98,33 @@ function exec_naviguer_dist()
 	/*if ($spip_display != 4) {
 		raccourcis_naviguer($id_rubrique, $id_parent);
 	}*/
-		
 
 	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''));	  
 	echo debut_droite('', true);
 
 	//  echo debut_cadre_relief($ze_logo, true);
-	$actions = 
-		voir_en_ligne ('rubrique', $id_rubrique, $statut, 'racine-24.gif', false)
-		. icone_inline(_T('icone_tous_articles'), generer_url_ecrire("articles_page"), "article-24.gif", '', $spip_lang_left)
-  	. (($id_rubrique > 0 AND $flag_editable)?icone_inline(_T('icone_modifier_rubrique'), generer_url_ecrire("rubriques_edit","id_rubrique=$id_rubrique&retour=nav"), $ze_logo, "edit.gif", $spip_lang_right):"")
-		////// Supprimer cette rubrique (si vide)
-		.	((($id_rubrique>0) AND tester_rubrique_vide($id_rubrique) AND $flag_editable)?
-	    icone_inline(_T('icone_supprimer_rubrique'), redirige_action_auteur('supprimer', "rubrique-$id_rubrique", "naviguer","id_rubrique=$id_parent"), $ze_logo, "supprimer.gif", $spip_lang_right)
-	    :"")
-	  . (autoriser('creerrubriquedans','rubrique',$id_rubrique)?
-	    (!$id_rubrique
-		    ? icone_inline(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "secteur-24.gif", "creer.gif",$spip_lang_left)
-		    : icone_inline(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav&id_parent=$id_rubrique"), "rubrique-24.gif", "creer.gif",$spip_lang_left))
-		    :"");
+	if ($flag_editable
+	AND $id_rubrique > 0) {
+		$actions = icone_inline(_T('icone_modifier_rubrique'),
+			generer_url_ecrire("rubriques_edit",
+				"id_rubrique=$id_rubrique&retour=nav"), $ze_logo, "edit.gif", $spip_lang_right);
 
-	$n = sql_countsel('spip_rubriques');
-	if ($n) {
-		if (autoriser('creerarticledans','rubrique',$id_rubrique))
-		  $actions .= icone_inline(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.gif","creer.gif", $spip_lang_left);
-	
-		$activer_breves = $GLOBALS['meta']["activer_breves"];
-		if (autoriser('creerbrevedans','rubrique',$id_rubrique,NULL,array('id_parent'=>$id_parent)))
-		  $actions .= icone_inline(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","id_rubrique=$id_rubrique&new=oui"), "breve-24.gif","creer.gif", $spip_lang_left);
-
-		if (autoriser('creersitedans','rubrique',$id_rubrique))
-			$actions .= icone_inline(_T('info_sites_referencer'), generer_url_ecrire('sites_edit', "id_rubrique=$id_rubrique"), "site-24.gif", "creer.gif", $spip_lang_left);
+		// Supprimer cette rubrique (si vide)
+		if (tester_rubrique_vide($id_rubrique))
+			$actions .= icone_inline(_T('icone_supprimer_rubrique'),
+				redirige_action_auteur('supprimer', "rubrique-$id_rubrique", "naviguer","id_rubrique=$id_parent"), $ze_logo, "supprimer.gif", $spip_lang_right);
 	}
-	
-	$actions .= "<div class='nettoyeur'></div>";
-	
-	$haut =
+	else
+		$actions = ''; // rubrique non editable
+
+	$haut = "<div class='bandeau_actions'>$actions</div>"
+		. 
 	  gros_titre((!acces_restreint_rubrique($id_rubrique) ? '' :
 	  http_img_pack("admin-12.gif",'', "width='12' height='12'",
 			      _T('info_administrer_rubrique'))) .
 	     $titre,'', false)
-		. "<div class='bandeau_actions'>$actions</div>";
+		. "<div class='nettoyeur'></div>\n";
 
 	if ($extra)
 		include_spip('inc/extra');

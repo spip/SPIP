@@ -89,7 +89,7 @@ function liste_metas()
 		'multi_secteurs' => 'non',
 		'gerer_trad' => 'non',
 		'langues_multilingue' => '',
-		'interface_mode' => '193'
+		'interface_mode' => ''
 	);
 }
 
