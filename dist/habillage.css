@@ -49,6 +49,7 @@ body { font-size: 100%; color: #333; }
 h1, h2, .chapo, .hyperlien, .texte, .ps, .notes, .introduction, #contenu { font-family: "Trebuchet MS", Helvetica, sans-serif; }
 h3 { font-family: Georgia, Times, serif; }
 body, .formulaire_spip, #hierarchie, .pagination, small { font-family: Verdana, Tahoma, Geneva, sans-serif; }
+.notes { font-size: 0.82em; }
 
 
 /* Personnalisation des styles HTML par defaut
