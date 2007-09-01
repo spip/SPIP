@@ -57,6 +57,7 @@ function base_delete_all_dist($titre)
 	spip_query("DROP TABLE spip_ortho_dico");
 	spip_query("DROP TABLE spip_versions");
 	spip_query("DROP TABLE spip_versions_fragments");
+	spip_query("DROP TABLE spip_urls");
 
 	// Tables pas necessairement la: pas de faux messages d'erreur
 	spip_log("tes index_table et forum_cache");

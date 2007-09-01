@@ -201,7 +201,18 @@ $spip_versions_fragments_key = array(
 	     "PRIMARY KEY"	=> "id_article, id_fragment, version_min");
 
 
+$spip_urls = array(
+	"url"			=> "VARCHAR(255) NOT NULL",
+	// la table cible
+	"type"			=> "varchar(15) DEFAULT 'article' NOT NULL",
+	// l'id dans la table
+	"id_objet"		=> "bigint(21) NOT NULL",
+	// pour connaitre la plus recente
+	"maj"			=> "TIMESTAMP");
 
+$spip_urls_key = array(
+	"PRIMARY KEY"		=> "url",
+	"KEY type"		=> "type, id_objet");
 
 global $tables_auxiliaires;
 
@@ -266,4 +277,7 @@ $tables_auxiliaires['spip_versions'] = array(
 $tables_auxiliaires['spip_versions_fragments'] = array(
 	'field' => &$spip_versions_fragments,
 	'key' => &$spip_versions_fragments_key);
+$tables_auxiliaires['spip_urls'] = array(
+	'field' => &$spip_urls,
+	'key' => &$spip_urls_key);
 ?>

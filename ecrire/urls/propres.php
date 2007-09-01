@@ -41,6 +41,8 @@ c'est-a-dire sans utilisation de .htaccess ; les adresses sont de la forme
 define ('_terminaison_urls_propres', '');
 define ('_debut_urls_propres', '');
 
+include_spip('base/abstract_sql');
+
 // http://doc.spip.org/@_generer_url_propre
 function _generer_url_propre($type, $id_objet) {
 	$table = "spip_".table_objet($type);
@@ -60,37 +62,28 @@ function _generer_url_propre($type, $id_objet) {
 	else
 		$statut = 'statut';
 
-	// D'abord, essayer de recuperer l'URL existante si possible
-	$result = spip_query("SELECT url_propre, $statut, $champ_titre FROM $table WHERE $col_id=$id_objet");
-	if (!($row = sql_fetch($result))) return ""; # objet inexistant
+	//  Recuperer une URL propre correspondant a l'objet.
+	$row = sql_fetsel("U.url, U.maj, O.$statut, O.$champ_titre", "$table AS O LEFT JOIN spip_urls AS U ON (U.type='$type' AND U.id_objet=O.$col_id)", "O.$col_id=$id_objet", '', 'U.maj DESC', 1);
 
-	// Si l'on n'est pas dans spip_redirect.php3 sur un objet non publie
-	// ou en preview (astuce pour corriger un url-propre) + admin connecte
-	// Ne pas recalculer l'url-propre,
-	// sauf si :
-	// 1) il n'existe pas, ou
-	// 2) l'objet n'est pas 'publie' et on est admin connecte, ou
-	// 3) on le demande explicitement (preview) et on est admin connecte
-	$modif_url_propre = false;
-	if (_request('action') == 'redirect'
-	AND (
-		(_request('var_mode') == 'preview' OR $row['statut'] <> 'publie')
-		OR
-		(defined('_URL_PROPRES_REGENERER') AND _URL_PROPRES_REGENERER)
-	)
-	AND $GLOBALS['auteur_session']['statut'] == '0minirezo')
-		$modif_url_propre = true;
+	if (!$row) return ""; # objet inexistant
 
-	if ($row['url_propre'] AND !$modif_url_propre)
-		return $row['url_propre'];
+	$url_propre = $row['url'];
 
-	// Sinon, creer l'URL
+	// Se contenter de cette URL si
+	// elle existe et qu'on n'est pas un admin invoquant spip_redirect.
+
+	if ($url_propre AND 
+	    (_request('action') != 'redirect' OR
+	     $GLOBALS['auteur_session']['statut'] != '0minirezo'))
+		return $url_propre;
+
+	// Sinon, creer une URL
 	include_spip('inc/filtres');
 	$url = translitteration(corriger_caracteres(
 		supprimer_tags(supprimer_numero(extraire_multi($row['titre'])))
 		));
-
 	$url = @preg_replace(',[[:punct:][:space:]]+,u', ' ', $url);
+
 	// S'il reste trop de caracteres non latins, ou trop peu
 	// de caracteres latins, utiliser l'id a la place
 	if (preg_match(",([^a-zA-Z0-9 ].*){5},", $url, $r)
@@ -113,27 +106,35 @@ function _generer_url_propre($type, $id_objet) {
 		if (strlen($url) < 2) $url = $type.$id_objet;
 	}
 
-	// Verifier les eventuels doublons et mettre a jour
-	$lock = "url $type $id_objet";
-	spip_get_lock($lock, 10);
-
-	if (sql_countsel($table, "url_propre=" . _q($url) . " AND $col_id != $id_objet"))
-		$url = $url.','.$id_objet;
-
 	// Eviter de tamponner les URLs a l'ancienne (cas d'un article
 	// intitule "auteur2")
 	if ($type == 'article'
 	AND preg_match(',^(article|breve|rubrique|mot|auteur)[0-9]+$,', $url))
 		$url = $url.','.$id_objet;
 
-	// Mettre a jour dans la base
-	spip_query("UPDATE $table SET url_propre=" . _q($url) . " WHERE $col_id=$id_objet");
+	// Le redirect n'était pas du a un chgt de titre. Rien de neuf.
+	if ($url == $url_propre) return $url;
 
-	spip_release_lock($lock);
+	$set = array('url' => $url, 'type' => $type, 'id_objet' => $id_objet);
+	// Si l'insertion echoue, c'est une violation d'unicite.
+	// Soit c'est un Come Back d'une ancienne url propre de l'objet
+	// Soit c'est un vrai conflit. Rajouter l'ID jusqu'a ce que ca passe, 
+	// mais se casser avant que ca ne casse.
+	while (!sql_insertq('spip_urls', $set)) {
+		$where = "U.type='$type' AND U.id_objet=$id_objet AND url=" ._q($set['url']);
+		if (sql_countsel('spip_urls AS U', $where)) {
+			sql_update('spip_urls AS U', array('maj' => 'NOW()'), $where);
+			spip_log("reordonne $type $id_objet");
+			return $set['url'];
+		}
+		$set['url'] .= ','.$id_objet;
+		if (strlen($set['url']) > 200)
+			return $url_propre; //serveur out ? retourner au mieux
+	}
 
-	spip_log("Creation de l'url propre '$url' pour $col_id=$id_objet");
+	spip_log("Creation de l'url propre '" . $set['url'] . "' pour $col_id=$id_objet");
 
-	return $url;
+	return $set['url'];
 }
 
 // http://doc.spip.org/@generer_url_article
@@ -284,12 +285,15 @@ function recuperer_parametres_url(&$fond, $url) {
 		$url_propre = $r[2];
 		$adapter_le_fond = true;
 	}
+
 	if (!$url_propre) return;
 
 	// Compatilibite avec propres2
 	$url_propre = preg_replace(',\.html$,i', '', $url_propre);
 
 	// Detecter les differents types d'objets demandes
+	// et retirer leurs marqueurs de l'URL propre
+	// Note: on pourrait evacuer ca maintenant qu'on a une seule table
 	if (preg_match(',^\+-(.*?)-?\+?$,', $url_propre, $regs)) {
 		$type = 'mot';
 		$url_propre = $regs[1];
@@ -316,12 +320,12 @@ function recuperer_parametres_url(&$fond, $url) {
 		$url_propre = $regs[1];
 	}
 
-	$table = "spip_".table_objet($type);
-	$col_id = id_table_objet($type);
-	$result = spip_query("SELECT $col_id FROM $table WHERE url_propre=" . _q($url_propre));
 
-	if ($row = sql_fetch($result)) {
-		$contexte[$col_id] = $row[$col_id];
+	$row = sql_fetch(spip_query("SELECT id_objet FROM spip_urls WHERE url=" . _q($url_propre)));
+
+	if ($row) {
+		$col_id = id_table_objet($type);
+		$contexte[$col_id] = $row['id_objet'];
 	}
 
 	// En mode Query-String, on fixe ici le $fond utilise
