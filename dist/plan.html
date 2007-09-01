@@ -30,7 +30,7 @@
         
         [(#REM) Articles et sous-rubriques ]
         <B_articles_racine>
-        <h3 class="spip"><:articles:></h3>
+        <h3><:articles:></h3>
         <ul>
             <BOUCLE_articles_racine(ARTICLES) {id_rubrique} {par titre}>
             <li><a href="#URL_ARTICLE">#TITRE</a></li>
@@ -60,7 +60,7 @@
         
         [(#REM) Breves ]
         <B_breves>
-        <h3 class="spip"><:breves:></h3>
+        <h3><:breves:></h3>
         <ul>
             <BOUCLE_breves(BREVES) {id_rubrique} {par date}{inverse}>
             <li><a href="#URL_BREVE">#TITRE</a></li>
@@ -70,7 +70,7 @@
         
         [(#REM) Sur le Web ]
         <B_sites>
-        <h3 class="spip"><:sites_web:></h3>
+        <h3><:sites_web:></h3>
         <ul>
             <BOUCLE_sites(SITES) {id_secteur} {par nom_site}>
             <li><a href="[(#ID_SYNDIC|generer_url_site)]">#NOM_SITE</a></li>

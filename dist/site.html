@@ -44,11 +44,11 @@
                     <h3><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></h3>
                     [<div class="enclosures">(#TAGS|afficher_enclosures)</div>]
                     <small>[(#DATE|affdate_court)][, <:par_auteur:> (#LESAUTEURS)][ &mdash; <em>(#TAGS|afficher_tags)</em>]</small>
-                    [<div class="texte">(#DESCRIPTIF|image_reduire{300})</div>]
+                    [<div class="introduction">(#DESCRIPTIF|image_reduire{300})</div>]
                 </li>
                 </BOUCLE_articles>
             </ul>
-            [<p class="pagination"><:suite:> : (#PAGINATION)</p>]
+            [<p class="pagination">(#PAGINATION)</p>]
         </div>
         </B_articles>
 
@@ -78,7 +78,7 @@
                 <li><a href="[(#ID_SYNDIC|generer_url_site)]"[ class="(#EXPOSE)"]>#NOM_SITE</a></li>
                 </BOUCLE_sites>
             </ul>
-            [<p class="pagination"><:suite:> : (#PAGINATION)</p>]
+            [<p class="pagination">(#PAGINATION)</p>]
         </div>
         </B_sites>
 
