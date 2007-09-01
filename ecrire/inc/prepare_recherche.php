@@ -13,6 +13,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/rechercher');
 
 // Preparer les listes id_article IN (...) pour les parties WHERE
 // et points =  des requetes du moteur de recherche
