@@ -6,4 +6,10 @@
 </p>
 [<p class='forums'>(#ENV{n_forums,''}|?{' '})[(#VAL{icone_suivi_forum}|_T{#ARRAY{nb_forums,#ENV{n_forums}}})]</p>]
 </div>
+
+[(#REM)
+
+	Bouton voir en ligne
+
+][(#VAL{auteur}|voir_en_ligne{#ID_AUTEUR,#STATUT,racine-24.gif,0,0})]
 </BOUCLE_auteur>
