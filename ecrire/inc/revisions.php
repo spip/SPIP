@@ -401,8 +401,6 @@ function supprimer_versions($id_article, $version_min, $version_max) {
 //
 // http://doc.spip.org/@ajouter_version
 function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) {
-	list($ms, $sec) = explode(' ', microtime());
-	$date = $sec . substr($ms,1);
 	$paras = $paras_old = $paras_champ = $fragments = array();
 
 	// Attention a une edition anonyme (type wiki): id_auteur n'est pas
@@ -411,16 +409,24 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 	$str_auteur = intval($id_auteur) ? intval($id_auteur) : $GLOBALS['ip'];
 	$permanent = empty($titre_version) ? 'non' : 'oui';
 
+	// Detruire les tentatives d'archivages non abouties en 1 heure
+
+	sql_delete('spip_versions', "id_article=$id_article AND id_version <= 0 AND date < DATE_SUB(NOW(), INTERVAL 1 HOUR)");
+
+        // Signaler qu'on opere en mettant un numero de version négatif
+        // distinctif (pour eviter la violation d'unicite)
+        // et un titre contenant en fait le moment de l'insertion
+	
+	list($ms, $sec) = explode(' ', microtime());
+	$date = $sec . substr($ms,1);
+	$datediff = ($sec - mktime(0,0,0,9,1,2007)) * 100000000 + substr($ms,2);
+
 	$valeurs = array('id_article' => $id_article,
-			 'id_version' => (0 - ($sec + substr($ms,2))),
+			 'id_version' => (0 - $datediff),
 			 'date' => 'NOW()',
 			 'id_auteur' => $str_auteur, //  varchar ici!
 			 'titre_version' => $date);
 			 
-	// Signaler qu'on opere en mettant un numero de version négatif
-	// distinctif (pour eviter la violation d'unicite)
-	// et un titre contenant en fait le moment de l'insertion
-
 	sql_insertq('spip_versions',  $valeurs);
 
 	// Eviter les validations entremelees en s'endormant s'il existe
@@ -435,9 +441,9 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 # 	  sleep(15);
 	$delai = $sec-30;
 	while (sql_countsel('spip_versions', "id_article=$id_article AND id_version < 0 AND 0.0+titre_version < $date AND 0.0+titre_version > $delai")) {
-	  spip_log("version $id_article:insertion < $date et > $delai");
-	  sleep(1);
-	  $delai++;
+		spip_log("version $id_article :insertion en cours avant $date ($delai)");
+		sleep(1);
+		$delai++;
 	}
 #   sleep(15); 	spip_log("sortie $sec $delai");
 	// Determiner le numero du prochain fragment
@@ -449,24 +455,22 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 	$onlylock = '';
 
 	if ($row = sql_fetch($result)) {
-	  spip_log($row['permanent'] . $row['id_auteur']. ' ' . strtotime($row['date']) . ' ' . (time()-3600));
 		$id_version = $row['id_version'];
 		$paras_old = recuperer_fragments($id_article, $id_version);
 		$champs_old = $row['champs'];
 		if ($row['id_auteur']!= $str_auteur
 		OR $row['permanent']=='oui'
-		OR strtotime($row['date']) < (time()-3600))
+		OR strtotime($row['date']) < (time()-3600)) {
 			$id_version++;
 
 	  // version precedente recente, on va la mettre a jour 
 	  // avec les nouveaux arrivants si presents
-		else {
+		} else {
 		  $champs = reconstuire_version(unserialize($champs_old), $paras_old, $champs);
 		  $onlylock = 're';
 		}
 	} else $id_version = 1;
 
-	spip_log("$id_version row $onlylock " . join(',', $row));
 	$next = !$next ? 1 : ($next['id_fragment'] + 1);
 
 	// Generer les nouveaux fragments
@@ -506,9 +510,9 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 	// la detruire apres mise a jour de l'ancienne entree,
 	// sinon la mise a jour efface en fait le verrou.
 
-	if (!$onlylock)
+	if (!$onlylock) {
 		spip_query("UPDATE spip_versions SET id_version=$id_version, date=NOW(), champs=" . _q(serialize($codes)) . ", permanent='$permanent', titre_version=" . _q($titre_version) . " WHERE id_article=$id_article AND id_version < 0 AND titre_version='$date'");
-	else {
+	} else {
 		spip_query("UPDATE spip_versions SET date=NOW(), champs=" . _q(serialize($codes)) . ", permanent='$permanent', titre_version=" . _q($titre_version) . " WHERE id_article=$id_article AND id_version=$id_version");
 
 		spip_query("DELETE FROM spip_versions WHERE id_article=$id_article AND id_version < 0 AND titre_version ='$date'");

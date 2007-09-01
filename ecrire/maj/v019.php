@@ -458,6 +458,10 @@ function maj_v019_dist($version_installee, $version_cible)
 	  maj_v019_47();
 	  maj_version('1.947');
 	}
+	if (upgrade_vers(1.948, $version_installee, $version_cible)) {
+	  maj_v019_48();
+	  maj_version('1.948');
+	}
 }
 
 function maj_v019_45()
@@ -581,5 +585,12 @@ function maj_v019_47()
 	sql_alter("TABLE spip_articles DROP INDEX url_site");
 	sql_alter("TABLE spip_articles DROP INDEX date_modif");
 	sql_alter("TABLE spip_auteurs  DROP INDEX lang");
+}
+
+// http://trac.rezo.net/trac/spip/changeset/10194
+// Gestion du verrou SQL par PHP
+function maj_v019_48()
+{
+	sql_alter("TABLE spip_versions CHANGE id_version bigint(21) DEFAULT 0 NOT NULL");
 }
 ?>
