@@ -41,6 +41,20 @@ c'est-a-dire sans utilisation de .htaccess ; les adresses sont de la forme
 define ('_terminaison_urls_propres', '');
 define ('_debut_urls_propres', '');
 
+// Ces chaines servaient de marqueurs a l'epoque ou les URL propres devaient
+// indiquer la table ou les chercher (articles, auteurs etc).
+// Maintenant que ce n'est plus necessaire, elles ne sont la que pour eviter
+// d'encombrer l'unique table des URL avec des doublons quasi identiques.
+// Si ce n'est pas un probleme, ou si le site est nouveau, 
+// les definir a '' produira des URL plus jolies.
+
+define ('_marqueur_rubrique', '-');
+define ('_marqueur_auteur', '_');
+define ('_marqueur_breve', '+');
+define ('_marqueur_site', '@');
+define ('_marqueur_mot_d', '+-');
+define ('_marqueur_mot_f', '-+');
+
 include_spip('base/abstract_sql');
 
 // http://doc.spip.org/@_generer_url_propre
@@ -154,7 +168,7 @@ function generer_url_article($id_article, $args='', $ancre='') {
 function generer_url_rubrique($id_rubrique, $args='', $ancre='') {
 	$url = _generer_url_propre('rubrique', $id_rubrique);
 	if ($url)
-		$url = _debut_urls_propres . '-'.$url.'-'._terminaison_urls_propres
+		$url = _debut_urls_propres . _marqueur_rubrique . $url._marqueur_rubrique._terminaison_urls_propres
 		. (!$args ? ''
 		: (((strpos(_debut_urls_propres, '?')===false) ? '?' : '&') . $args));
 	else
@@ -167,7 +181,7 @@ function generer_url_rubrique($id_rubrique, $args='', $ancre='') {
 function generer_url_breve($id_breve, $args='', $ancre='') {
 	$url = _generer_url_propre('breve', $id_breve);
 	if ($url)
-		$url = _debut_urls_propres . '+'.$url.'+'._terminaison_urls_propres
+		$url = _debut_urls_propres . _marqueur_breve . $url._marqueur_breve._terminaison_urls_propres
 		. (!$args ? ''
 		: (((strpos(_debut_urls_propres, '?')===false) ? '?' : '&') . $args));
 	else
@@ -186,7 +200,7 @@ function generer_url_forum($id_forum, $args='', $ancre='') {
 function generer_url_mot($id_mot, $args='', $ancre='') {
 	$url = _generer_url_propre('mot', $id_mot);
 	if ($url)
-		$url = _debut_urls_propres . '+-'.$url.'-+'._terminaison_urls_propres
+		$url = _debut_urls_propres . _marqueur_mot_d . $url._marqueur_mot_f._terminaison_urls_propres
 		. (!$args ? ''
 		: (((strpos(_debut_urls_propres, '?')===false) ? '?' : '&') . $args));
 	else
@@ -199,7 +213,7 @@ function generer_url_mot($id_mot, $args='', $ancre='') {
 function generer_url_auteur($id_auteur, $args='', $ancre='') {
 	$url = _generer_url_propre('auteur', $id_auteur);
 	if ($url)
-		$url = _debut_urls_propres . '_'.$url.'_'._terminaison_urls_propres
+		$url = _debut_urls_propres . _marqueur_auteur . $url._marqueur_auteur._terminaison_urls_propres
 		. (!$args ? ''
 		: (((strpos(_debut_urls_propres, '?')===false) ? '?' : '&') . $args));
 	else
@@ -212,7 +226,7 @@ function generer_url_auteur($id_auteur, $args='', $ancre='') {
 function generer_url_site($id_syndic, $args='', $ancre='') {
 	$url = _generer_url_propre('site', $id_syndic);
 	if ($url)
-		$url = _debut_urls_propres . '@'.$url.'@'._terminaison_urls_propres
+		$url = _debut_urls_propres . _marqueur_site . $url._marqueur_site._terminaison_urls_propres
 		. (!$args ? ''
 		: (((strpos(_debut_urls_propres, '?')===false) ? '?' : '&') . $args));
 	else
@@ -291,39 +305,30 @@ function recuperer_parametres_url(&$fond, $url) {
 	// Compatilibite avec propres2
 	$url_propre = preg_replace(',\.html$,i', '', $url_propre);
 
+	// Retirer les marqueurs de type dans l'URL propre
 	// Detecter les differents types d'objets demandes
-	// et retirer leurs marqueurs de l'URL propre
 	// Note: on pourrait evacuer ca maintenant qu'on a une seule table
-	if (preg_match(',^\+-(.*?)-?\+?$,', $url_propre, $regs)) {
-		$type = 'mot';
+	if (preg_match(',^\+\-(.*?)\-\+$,', $url_propre, $regs)) {
 		$url_propre = $regs[1];
 	}
 	else if (preg_match(',^-(.*?)-?$,', $url_propre, $regs)) {
-		$type = 'rubrique';
 		$url_propre = $regs[1];
 	}
 	else if (preg_match(',^\+(.*?)\+?$,', $url_propre, $regs)) {
-		$type = 'breve';
 		$url_propre = $regs[1];
 	}
 	else if (preg_match(',^_(.*?)_?$,', $url_propre, $regs)) {
-		$type = 'auteur';
 		$url_propre = $regs[1];
 	}
 	else if (preg_match(',^@(.*?)@?$,', $url_propre, $regs)) {
-		$type = 'syndic';
 		$url_propre = $regs[1];
 	}
-	else {
-		$type = 'article';
-		preg_match(',^(.*)$,', $url_propre, $regs);
-		$url_propre = $regs[1];
-	}
+	// les articles n'ont pas de marqueur
 
-
-	$row = sql_fetch(spip_query("SELECT id_objet FROM spip_urls WHERE url=" . _q($url_propre)));
+	$row = sql_fetch(spip_query("SELECT id_objet, type FROM spip_urls WHERE url=" . _q($url_propre)));
 
 	if ($row) {
+		$type = $row['type'];
 		$col_id = id_table_objet($type);
 		$contexte[$col_id] = $row['id_objet'];
 	}
