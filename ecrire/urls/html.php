@@ -74,6 +74,7 @@ function generer_url_document($id_document, $args='', $ancre='') {
 
 
 // retrouver les parametres d'une URL dite "html"
+// http://doc.spip.org/@urls_html_dist
 function urls_html_dist($fond, $url) {
 	global $contexte;
 

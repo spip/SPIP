@@ -395,6 +395,7 @@ function f_admin ($texte) {
 // * gestion du PNG transparent
 // * images background (TODO)
 // Cf. aussi inc/presentation, fonction fin_page();
+// http://doc.spip.org/@f_msie
 function f_msie ($texte) {
 	if (!$GLOBALS['html']) return $texte;
 
