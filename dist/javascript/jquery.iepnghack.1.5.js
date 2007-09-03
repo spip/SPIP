@@ -49,11 +49,14 @@
 	 * @cat Plugins/pngfix
 	 */
 	$.fn.pngfix = hack.ltie7 ? function() {
+
+	if (pixelspip) hack.pixel = pixelspip; // indiquer la valeur de l'exterieur du script
+
     	return this.each(function() {
 			var $$ = $(this);
 			var base = $('base').attr('href'); // need to use this in case you are using rewriting urls
 			if ($$.is('img') || $$.is('input')) { // hack image tags present in dom
-				if ($$.attr('src').match(/.*\.png$/i)) { // make sure it is png image
+				if ($$.attr('src').match(/.*\.png([?].*)?$/i)) { // make sure it is png image
 					// use source tag value if set 
 					var source = (base && $$.attr('src').substring(0,1)!='/') ? base + $$.attr('src') : $$.attr('src');
 					// apply filter
@@ -63,7 +66,7 @@
 				}
 			} else { // hack png css properties present inside css
 				var image = $$.css('backgroundImage');
-				if (image.match(/^url\(["']?(.*\.png)["']?\)$/i)) {
+				if (image.match(/^url\(["']?(.*\.png([?].*)?)["']?\)$/i)) {
 					image = RegExp.$1;
 					$$.css({backgroundImage:'none', filter:hack.filter(image)})
 					  .positionFix();
@@ -88,7 +91,7 @@
     	return this.each(function() {
 			var $$ = $(this);
 			var src = $$.css('filter');
-			if (src.match(/src=["']?(.*\.png)["']?/i)) { // get img source from filter
+			if (src.match(/src=["']?(.*\.png([?].*)?)["']?/i)) { // get img source from filter
 				src = RegExp.$1;
 				if ($$.is('img') || $$.is('input')) {
 					$$.attr({src:src}).css({filter:''});

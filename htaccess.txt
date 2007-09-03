@@ -87,9 +87,6 @@ RewriteRule ^[^/\.]+(\.html)?$		spip.php?page=type_urls [QSA,E=url_propre:$0,L]
 ###
 # Divers
 
-# Permettre a IE de reconnaitre le win_png.htc de retraitement des png transparents
-AddType text/x-component .htc
-
 # bloquer les acces aux repertoires .svn/ (SPIP, plugins, squelettes...)
 RewriteRule ^(.*/)?\.svn/ - [F]
 

@@ -399,7 +399,7 @@ function f_msie ($texte) {
 	if (!$GLOBALS['html']) return $texte;
 
 	// test si MSIE et sinon quitte
-	$msie = strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'MSIE')
+	$msie = strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'msie')
 	AND preg_match('/MSIE /i', $_SERVER['HTTP_USER_AGENT']);
 	if (!$msie) return $texte;
 
@@ -417,7 +417,7 @@ function f_msie ($texte) {
 	AND true /* ... autres tests si on veut affiner ... */) {
 		$texte .=
 "<script type='text/javascript'><!--
-if (window.jQuery && jQuery.browser.msie) jQuery.getScript( '".find_in_path('jquery.iepnghack.1.5.js')."' , function() { jQuery('img').pngfix(); } );
+if (window.jQuery && jQuery.browser.msie) jQuery.getScript( '".find_in_path('javascript/jquery.iepnghack.1.5.js')."' , function() { pixelspip = '".(_DIR_RACINE.'rien.gif')."'; jQuery('img').pngfix(); } );
 // --></script>\n";
 	}
 
