@@ -606,10 +606,9 @@ function maj_v019_49()
 function maj_v019_50()
 {
   // oubli de gerer le prefixe lors l'introduction de l'abstraction
-  // => on relance les 4 derniers en mode silencieux pour mettre au carre.
+  // => on relance les dernieres MAJ en mode silencieux pour mettre au carre.
 	@maj_v019_46();
 	@maj_v019_47();
-	@maj_v019_48();
 	@maj_v019_49();
 	global $tables_auxiliaires;
 	include_spip('base/auxiliaires');
