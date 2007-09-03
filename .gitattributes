@@ -695,7 +695,7 @@ ecrire/typographie/fr.php -text
 ecrire/typographie/index.php -text
 ecrire/urls/index.php -text
 ecrire/urls/page.php -text
-ecrire/urls/propres-qs.php -text
+ecrire/urls/propres_qs.php -text
 ecrire/win_png.htc -text
 ecrire/xml/analyser_dtd.php -text
 ecrire/xml/atom.php -text

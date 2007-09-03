@@ -73,8 +73,8 @@ function generer_url_document($id_document, $args='', $ancre='') {
 }
 
 
-// http://doc.spip.org/@recuperer_parametres_url
-function recuperer_parametres_url($fond, $url) {
+// retrouver les parametres d'une URL dite "html"
+function urls_html_dist($fond, $url) {
 	global $contexte;
 
 
