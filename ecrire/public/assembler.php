@@ -391,6 +391,33 @@ function f_admin ($texte) {
 	return $texte;
 }
 
+// Ajoute ce qu'il faut pour les clients MSIE et leurs debilites notoires
+// * gestion du PNG transparent
+// * images background (TODO)
+// Cf. aussi inc/presentation, fonction fin_page();
+function f_msie ($texte) {
+	if (!$GLOBALS['html']) return $texte;
+
+	// test si MSIE et sinon quitte
+	$msie = strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'MSIE')
+	AND preg_match('/MSIE /i', $_SERVER['HTTP_USER_AGENT']);
+	if (!$msie) return $texte;
+
+	// Si jQuery n'est pas la on ne fixe pas les PNG
+	// et comme MSIE est goret, on n'a pas honte d'inserer comme un goret
+	// en fin de page
+	if (strpos(strtolower($texte), 'jquery.js')
+	AND strpos(strtolower($texte), '.png')
+	AND true /* ... autres tests si on veut affiner ... */) {
+		$texte .=
+"<script type='text/javascript'><!--
+if (window.jQuery && jQuery.browser.msie) jQuery.getScript( '".find_in_path('jquery.iepnghack.1.5.js')."' , function() { jQuery('img').pngfix(); } );
+// --></script>";
+	}
+
+	return $texte;
+}
+
 //ajoute a la volee scripts a le squelette jquery.js.html
 // http://doc.spip.org/@ajouter_js_affichage_final
 function ajouter_js_affichage_final($page,$scripts,$inline = false) {

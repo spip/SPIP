@@ -381,7 +381,7 @@ function etat_base_accueil()
 	$res .= accueil_liste_participants()
 	. "</div>";
 
-	return pipeline('acceuil_informations',$res) ;
+	return pipeline('accueil_informations',$res) ;
 }
 
 
