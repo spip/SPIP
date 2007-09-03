@@ -173,6 +173,7 @@ $table_des_tables['mots']='mots';
 $table_des_tables['groupes_mots']='groupes_mots';
 $table_des_tables['rubriques']='rubriques';
 $table_des_tables['syndication']='syndic';
+$table_des_tables['syndic']='syndic';
 $table_des_tables['syndic_articles']='syndic_articles';
 $table_des_tables['hierarchie']='rubriques';
 $table_des_tables['index']='index';
