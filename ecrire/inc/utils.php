@@ -244,12 +244,13 @@ function spip_connect($serveur='') {
 	    : ($install ? (_FILE_CONNECT_INS .  '.php')
 	       : ''));
 
+	unset($GLOBALS['db_ok']);
 	unset($GLOBALS['spip_connect_version']);
 	if ($f AND is_readable($f)) include($f);
 	if (!isset($GLOBALS['db_ok'])) {
 		if ($install) return 'spip_' . $serveur . '_query';
 		spip_log("spip_connect: serveur $index mal defini dans '$f'.");
-		return false;
+		return $connexions[$index]=false;
 	}
 
 	$connexions[$index] = $GLOBALS['db_ok'];

@@ -715,7 +715,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 					$boucles[$id]->jointures = $x;
 				if (($type == 'documents') && $boucle->doublons)
 					{ $descr['documents'] = true;  }
-			}
+			} else $boucles[$id]->type_requete = '';
 		}
 	}
 	// Commencer par reperer les boucles appelees explicitement 
@@ -741,13 +741,13 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 	}
 	foreach($boucles as $id => $boucle) { 
 		$type = $boucle->type_requete;
-		if ($type != 'boucle') {
-		  if ($boucle->param) {
+		if ($type AND $type != 'boucle') {
+			if ($boucle->param) {
 				$res = calculer_criteres($id, $boucles);
 				if (is_array($res)) return $res; # erreur
 			}
-		  $descr['id_mere'] = $id;
-		  $boucles[$id]->return =
+			$descr['id_mere'] = $id;
+			$boucles[$id]->return =
 			  calculer_liste($boucle->milieu,
 					 $descr,
 					 $boucles,
@@ -765,20 +765,24 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 
 	foreach($boucles as $id => $boucle) {
 		// appeler la fonction de definition de la boucle
-		$f = 'boucle_'.strtoupper($boucle->type_requete);
+		$req = $boucle->type_requete;
+		if ($req) {
+			$f = 'boucle_'.strtoupper($req);
 		// si pas de definition perso, definition spip
-		if (!function_exists($f)) $f = $f.'_dist';
-		// laquelle a une definition par defaut
-		if (!function_exists($f)) $f = 'boucle_DEFAUT';
-		if (!function_exists($f)) $f = 'boucle_DEFAUT_dist';
+			if (!function_exists($f)) $f = $f.'_dist';
+			// laquelle a une definition par defaut
+			if (!function_exists($f)) $f = 'boucle_DEFAUT';
+			if (!function_exists($f)) $f = 'boucle_DEFAUT_dist';
+			$req = $f($id, $boucles);
+		}
 		$boucles[$id]->return = 
 			"function BOUCLE" . strtr($id,"-","_") . $nom .
 			'(&$Cache, &$Pile, &$doublons, &$Numrows, $SP) {' .
-			$f($id, $boucles) .
+			$req .
 			"\n}\n\n";
-		if ($GLOBALS['var_mode'] == 'debug')
-		  boucle_debug_compile ($id, $nom, $boucles[$id]->return);
 
+		if ($GLOBALS['var_mode'] == 'debug')
+			boucle_debug_compile ($id, $nom, $boucles[$id]->return);
 	}
 
 	$code = "";
