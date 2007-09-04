@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // fonction principale declenchant tout le service
 // elle-meme ne fait que traiter les cas particuliers, puis passe la main.
 // http://doc.spip.org/@public_assembler_dist
-function public_assembler_dist($fond) {
+function public_assembler_dist($fond, $connect='') {
 	  global $forcer_lang, $ignore_auth_http;
 
 	// multilinguisme
@@ -98,7 +98,7 @@ function public_assembler_dist($fond) {
 	}
 
 	if ($l) lang_select();
-	return assembler_page ($fond);
+	return assembler_page ($fond, $connect);
 }
 
 
@@ -106,7 +106,7 @@ function public_assembler_dist($fond) {
 // calcule la page et les entetes
 //
 // http://doc.spip.org/@assembler_page
-function assembler_page ($fond) {
+function assembler_page ($fond, $connect='') {
 	global $flag_preserver,$lastmodified,
 		$use_cache;
 
@@ -154,7 +154,7 @@ function assembler_page ($fond) {
 			}
 		} else {
 			$parametrer = charger_fonction('parametrer', 'public');
-			$page = $parametrer($fond, '', $chemin_cache);
+			$page = $parametrer($fond, '', $chemin_cache, $connect);
 
 			//ajouter les scripts poue le mettre en cache
 			$page['insert_js_fichier'] = pipeline("insert_js",array("type" => "fichier","data" => array()));
@@ -221,7 +221,7 @@ function stop_inclure($fragment) {
 	}
 }
 // http://doc.spip.org/@inclure_page
-function inclure_page($fond, $contexte_inclus) {
+function inclure_page($fond, $contexte_inclus, $connect='') {
 	global $lastmodified;
 	if (!defined('_PAS_DE_PAGE_404'))
 		define('_PAS_DE_PAGE_404',1);
@@ -265,7 +265,7 @@ function inclure_page($fond, $contexte_inclus) {
 	// sinon on la calcule
 	else {
 		$parametrer = charger_fonction('parametrer', 'public');
-		$page = $parametrer($fond, $contexte_inclus, $chemin_cache);
+		$page = $parametrer($fond, $contexte_inclus, $chemin_cache, $connect);
 		$lastmodified = time();
 		// et on l'enregistre sur le disque
 		if ($chemin_cache
@@ -546,7 +546,7 @@ function message_erreur_404 ($erreur= "") {
 // fonction permettant de recuperer le resultat du calcul d'un squelette
 // pour une inclusion dans un flux
 // http://doc.spip.org/@recuperer_fond
-function recuperer_fond($fond, $contexte=array(),$protect_xml=false, $trim=true) {
+function recuperer_fond($fond, $contexte=array(),$protect_xml=false, $trim=true, $connect='') {
 	// on est peut etre dans l'espace prive au moment de l'appel
 	if  (!defined ('_INC_PUBLIC')) define ('_INC_PUBLIC', 1);
 	if (($fond=='')&&isset($contexte['fond']))
@@ -554,7 +554,7 @@ function recuperer_fond($fond, $contexte=array(),$protect_xml=false, $trim=true)
 
 	$texte = "";
 	foreach(is_array($fond) ? $fond : array($fond) as $f){
-		$page = inclure_page($f, $contexte);
+		$page = inclure_page($f, $contexte, $connect);
 		if ($GLOBALS['flag_ob'] AND ($page['process_ins'] != 'html')) {
 			ob_start();
 			eval('?' . '>' . $page['texte']);
@@ -595,7 +595,7 @@ function creer_contexte_de_modele($args) {
 
 // Calcule le modele et retourne la mini-page ainsi calculee
 // http://doc.spip.org/@inclure_modele
-function inclure_modele($type, $id, $params, $lien) {
+function inclure_modele($type, $id, $params, $lien, $connect='') {
 	static $compteur;
 	if (++$compteur>10) return ''; # ne pas boucler indefiniment
 
@@ -673,7 +673,7 @@ function inclure_modele($type, $id, $params, $lien) {
 	$GLOBALS['compt_note'] = 0;
 
 	// Appliquer le modele avec le contexte
-	$retour = trim(recuperer_fond($fond, $contexte));
+	$retour = trim(recuperer_fond($fond, $contexte, false, true, $connect));
 
 	// On restitue les globales de notes telles qu'elles etaient avant l'appel
 	// du modele. Si le modele n'a pas affiche ses notes, tant pis (elles *doivent*

@@ -1717,7 +1717,7 @@ function filtre_find($array, $val) {
 //
 
 // http://doc.spip.org/@calcul_pagination
-function calcul_pagination($total, $nom, $position, $pas, $liste = true, $modele='') {
+function calcul_pagination($total, $nom, $position, $pas, $liste = true, $modele='', $connect='') {
 	static $ancres = array();
 	$bloc_ancre = "";
 	
@@ -1761,7 +1761,7 @@ function calcul_pagination($total, $nom, $position, $pas, $liste = true, $modele
 		return $bloc_ancre;
 
 	if ($modele) $modele = '_'.$modele;
-	return recuperer_fond("modeles/pagination$modele", $pagination);
+	return recuperer_fond("modeles/pagination$modele", $pagination, false, true, $connect);
 }
 
 // recuperere le chemin d'une css existante et :

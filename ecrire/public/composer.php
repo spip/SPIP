@@ -29,9 +29,8 @@ include_spip('public/debug'); # toujours prevoir le pire
 # Toutefois pour 2. et 3. preferer la technique de la surcharge
 
 // http://doc.spip.org/@public_composer_dist
-function public_composer_dist($squelette, $mime_type, $gram, $source) {
+function public_composer_dist($squelette, $mime_type, $gram, $source, $connect) {
 
-	$connect = _request('connect');
 	$nom = $mime_type . ($connect ?  "_$connect" : '') . '_' . md5($squelette);
 
 	// si squelette est deja en memoire (INCLURE  a repetition)
@@ -316,7 +315,7 @@ function calcul_exposer ($id, $type, $reference) {
 				list($table,$hierarchie) = $x;
 				$exposer[$element][$id_element] = true;
 				if ($hierarchie) {
-					 $row = sql_fetsel(array('id_rubrique'), array($table), array("$element=$id_element"));
+					$row = sql_fetsel(array('id_rubrique'), array($table), array("$element=" . _q($id_element)));
 					$hierarchie = calculer_hierarchie($row['id_rubrique']);
 				foreach (split(',',$hierarchie) as $id_rubrique)
 					$exposer['id_rubrique'][$id_rubrique] = true;

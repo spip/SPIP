@@ -158,7 +158,6 @@ function sql_showtable($table, $serveur='', $table_spip = false)
 	$f = sql_serveur('showtable', $serveur);
 	$f = $f($table, $serveur);
 	if (!$f) return array();
-	spip_log("show $table " . join(',',$f));
 	if (isset($GLOBALS['tables_principales'][$table]['join']))
 		$f['join'] = $GLOBALS['tables_principales'][$table]['join'];
 	elseif (isset($GLOBALS['tables_auxiliaires'][$table]['join']))

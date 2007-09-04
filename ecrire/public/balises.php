@@ -513,9 +513,13 @@ function balise_LESAUTEURS_dist ($p) {
 		$p->code = "safehtml($_lesauteurs)";
 		// $p->interdire_scripts = true;
 	} else {
+		$connect = $p->boucles[$p->id_boucle]->sql_serveur;
 		$p->code = "recuperer_fond(
 			'modeles/lesauteurs',
-			array('id_article' => ".champ_sql('id_article', $p)."))";
+			array('id_article' => ".champ_sql('id_article', $p)
+			."), false, true, "
+			. _q($connect)
+			.")";
 		$p->interdire_scripts = false; // securite apposee par recuperer_fond()
 	}
 
@@ -600,14 +604,14 @@ function balise_PAGINATION_dist($p, $liste='true') {
 	$__modele = $__modele?", $__modele":"";
 
 	$p->boucles[$b]->numrows = true;
-
+	$connect = $p->boucles[$b]->sql_serveur;
 	$p->code = "calcul_pagination(
 	(isset(\$Numrows['$b']['grand_total']) ?
 		\$Numrows['$b']['grand_total'] : \$Numrows['$b']['total']
 	), ".$p->boucles[$b]->modificateur['debut_nom'].",
 		\$Pile[0]['debut'.".$p->boucles[$b]->modificateur['debut_nom']."],"
 	. $p->boucles[$b]->total_parties
-	. ", $liste$__modele)";
+	  . ", $liste$__modele,''," . _q($connect) . ")";
 
 	$p->interdire_scripts = false;
 	return $p;
@@ -1213,7 +1217,8 @@ function balise_INCLURE_dist($p) {
 		if ($flag_env) {
 			$l = "array_merge(\$Pile[0],$l)";
 		}
-		$p->code = "recuperer_fond('',".$l.",true, false)";
+		$connect = $p->boucles[$p->id_boucle]->sql_serveur;
+		$p->code = "recuperer_fond('',".$l.",true, false, " . _q($connect) .")";
 	} else {
 		$n = interprete_argument_balise(1,$p);
 		$p->code = '(($c = find_in_path(' . $n . ')) ? spip_file_get_contents($c) : "")';
@@ -1265,9 +1270,10 @@ function balise_MODELE_dist($p) {
 		}
 	}
 
+	$connect = $p->boucles[$p->id_boucle]->sql_serveur;
 	$p->code = "( ((\$recurs=(isset(\$Pile[0]['recurs'])?\$Pile[0]['recurs']:0))<5)?
 	recuperer_fond('modeles/".$nom."',
-		creer_contexte_de_modele(array(".join(',', $code_contexte).",'recurs='.(++\$recurs), \$GLOBALS['spip_lang']))):'')";
+		creer_contexte_de_modele(array(".join(',', $code_contexte).",'recurs='.(++\$recurs), \$GLOBALS['spip_lang'])),false,true," . _q($connect) . "):'')";
 	$p->interdire_scripts = false; // securite assuree par le squelette
 
 	return $p;
