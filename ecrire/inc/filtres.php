@@ -1665,11 +1665,7 @@ function form_hidden($action) {
 	return $hidden;
 }
 
-// http://doc.spip.org/@calcul_bornes_pagination
-function calcul_bornes_pagination($courante, $nombre, $max = 10) {
-	if (function_exists("bornes_pagination"))
-		return bornes_pagination($max, $nombre, $courante);
-
+function filtre_bornes_pagination_dist($courante, $nombre, $max = 10) {
 	if($max<=0 OR $max>=$nombre)
 		return array(1, $nombre);
 
@@ -1716,8 +1712,7 @@ function filtre_find($array, $val) {
 // function pagination($total, $nom, $pas, $liste) {...}
 //
 
-// http://doc.spip.org/@calcul_pagination
-function calcul_pagination($total, $nom, $position, $pas, $liste = true, $modele='', $connect='') {
+function filtre_pagination_dist($total, $nom, $position, $pas, $liste = true, $modele='', $connect='') {
 	static $ancres = array();
 	$bloc_ancre = "";
 	
@@ -1732,9 +1727,6 @@ function calcul_pagination($total, $nom, $position, $pas, $liste = true, $modele
 	// sinon il faut une usine a gaz pour passer debut_xx dans propre()...
 	if ($position === NULL)
 		$position = _request($debut);
-
-	if (function_exists("pagination"))
-		return pagination($total, $nom, $position, $pas, $liste);
 
 	// n'afficher l'ancre qu'une fois
 	if (!isset($ancres[$ancre]))
@@ -2174,12 +2166,7 @@ function filtre_foreach_dist($balise_deserializee, $modele = 'foreach') {
 // la valeur du second parametre si celui-ci renvoie a une information connue
 // cf liste_plugin_actifs() pour connaitre les informations affichables
 // appelee par la balise #PLUGIN
-// http://doc.spip.org/@calcul_info_plugin
-function calcul_info_plugin($plugin, $type_info) {
-	//surcharge possible pour afficher des donnees plus complexes
-	if(function_exists('info_plugin'))
-		return info_plugin($plugin, $type_info);
-
+function filtre_info_plugin_dist($plugin, $type_info) {
 	include_spip('inc/plugin');
 	$plugin = strtoupper($plugin);
 	$plugins_actifs = liste_plugin_actifs();
