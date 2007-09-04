@@ -1,4 +1,4 @@
-#ENV*{bloc_ancrebornes_pagination}
+#ENV*{bloc_ancre}
 #SET{bornes,#ENV{page_courante}|bornes_pagination{#ENV{nombre_pages},10}}
 #SET{premiere, #GET{bornes}|reset}
 #SET{derniere, #GET{bornes}|end}
