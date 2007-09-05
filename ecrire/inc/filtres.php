@@ -1665,6 +1665,7 @@ function form_hidden($action) {
 	return $hidden;
 }
 
+// http://doc.spip.org/@filtre_bornes_pagination_dist
 function filtre_bornes_pagination_dist($courante, $nombre, $max = 10) {
 	if($max<=0 OR $max>=$nombre)
 		return array(1, $nombre);
@@ -1712,6 +1713,7 @@ function filtre_find($array, $val) {
 // function pagination($total, $nom, $pas, $liste) {...}
 //
 
+// http://doc.spip.org/@filtre_pagination_dist
 function filtre_pagination_dist($total, $nom, $position, $pas, $liste = true, $modele='', $connect='') {
 	static $ancres = array();
 	$bloc_ancre = "";
@@ -2166,6 +2168,7 @@ function filtre_foreach_dist($balise_deserializee, $modele = 'foreach') {
 // la valeur du second parametre si celui-ci renvoie a une information connue
 // cf liste_plugin_actifs() pour connaitre les informations affichables
 // appelee par la balise #PLUGIN
+// http://doc.spip.org/@filtre_info_plugin_dist
 function filtre_info_plugin_dist($plugin, $type_info) {
 	include_spip('inc/plugin');
 	$plugin = strtoupper($plugin);
