@@ -418,7 +418,7 @@ function f_msie ($texte) {
 	AND true /* ... autres tests si on veut affiner ... */) {
 		$texte .=
 "<script type='text/javascript'><!--
-if (window.jQuery && jQuery.browser.msie) jQuery.getScript( '".find_in_path('javascript/jquery.iepnghack.1.5.js')."' , function() { pixelspip = '".(_DIR_RACINE.'rien.gif')."'; jQuery('img').pngfix(); } );
+if (window.jQuery && jQuery.browser.msie) jQuery.getScript( '".find_in_path('javascript/jquery.iepnghack.js')."' , function() { $.pngfix('".(_DIR_RACINE.'rien.gif')."'); jQuery('img').pngfix(); } );
 // --></script>\n";
 	}
 
