@@ -100,14 +100,8 @@ function _generer_url_propre($type, $id_objet) {
 	else
 		$champ_titre = 'titre';
 
-	// Mots-cles : pas de champ statut
-	if ($type == 'mot')
-		$statut = "'publie' as statut";
-	else
-		$statut = 'O.statut';
-
 	//  Recuperer une URL propre correspondant a l'objet.
-	$row = sql_fetsel("U.url, U.maj, $statut, O.$champ_titre", "$table AS O LEFT JOIN spip_urls AS U ON (U.type='$type' AND U.id_objet=O.$col_id)", "O.$col_id=$id_objet", '', 'U.maj DESC', 1);
+	$row = sql_fetsel("U.url, U.maj, O.$champ_titre", "$table AS O LEFT JOIN spip_urls AS U ON (U.type='$type' AND U.id_objet=O.$col_id)", "O.$col_id=$id_objet", '', 'U.maj DESC', 1);
 
 	if (!$row) return ""; # objet inexistant
 
@@ -164,16 +158,19 @@ function _generer_url_propre($type, $id_objet) {
 	// Soit c'est un Come Back d'une ancienne url propre de l'objet
 	// Soit c'est un vrai conflit. Rajouter l'ID jusqu'a ce que ca passe, 
 	// mais se casser avant que ca ne casse.
-	while (!sql_insertq('spip_urls', $set)) {
-		$where = "U.type='$type' AND U.id_objet=$id_objet AND url=" ._q($set['url']);
-		if (sql_countsel('spip_urls AS U', $where)) {
-			sql_update('spip_urls AS U', array('maj' => 'NOW()'), $where);
+
+	while (@sql_insertq('spip_urls', $set) <= 0) {
+		$where = "U.type='$type' AND U.id_objet=$id_objet AND url=";
+		if (sql_countsel('spip_urls AS U', $where  ._q($set['url']))) {
+			sql_update('spip_urls AS U', array('maj' => 'NOW()'), $where  ._q($set['url']));
 			spip_log("reordonne $type $id_objet");
 			return $set['url'];
 		}
 		$set['url'] .= ','.$id_objet;
 		if (strlen($set['url']) > 200)
 			return $url_propre; //serveur out ? retourner au mieux
+		elseif (sql_countsel('spip_urls AS U', $where  ._q($set['url'])))
+			return $set['url']; 
 	}
 
 	spip_log("Creation de l'url propre '" . $set['url'] . "' pour $col_id=$id_objet");
