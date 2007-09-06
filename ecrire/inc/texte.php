@@ -445,12 +445,9 @@ function safehtml($t) {
 	return interdire_scripts($t); // interdire le php (2 precautions)
 }
 
-
-//
 // Typographie generale
-// note: $echapper = false lorsqu'on appelle depuis propre() [pour accelerer]
-//
-// http://doc.spip.org/@typo
+// avec protection prealable des balises HTML et SPIP
+
 function typo($letexte, $echapper=true) {
 
 	// Plus vite !
@@ -460,11 +457,35 @@ function typo($letexte, $echapper=true) {
 	if ($echapper)
 		$letexte = echappe_html($letexte, 'TYPO');
 
-	// Appeler les fonctions de pre-traitement
+	//
+	// Installer les modeles, notamment images et documents ;
+	//
+	// NOTE : dans propre() ceci s'execute avant les tableaux a cause du "|",
+	// et apres les liens a cause du traitement de [<imgXX|right>->URL]
+	$letexte = traiter_modeles($mem = $letexte, false, $echapper ? 'TYPO' : '');
+	if ($letexte != $mem) $echapper = true;
+	unset($mem);
+
+	$letexte = corriger_typo($letexte);
+
+	// reintegrer les echappements
+	if ($echapper)
+		$letexte = echappe_retour($letexte, 'TYPO');
+
+	// l'espace prive securise ici
+	$letexte = interdire_scripts($letexte);
+
+	return $letexte;
+}
+
+// Correcteur typographique
+
+function corriger_typo($letexte) {
+
+	// Plus vite !
+	if (!$letexte) return $letexte;
+
 	$letexte = pipeline('pre_typo', $letexte);
-	// old style
-	if (function_exists('avant_typo'))
-		$letexte = avant_typo($letexte);
 
 	// Caracteres de controle "illegaux"
 	$letexte = corriger_caracteres($letexte);
@@ -494,35 +515,19 @@ function typo($letexte, $echapper=true) {
 
 	}
 
-
-	//
-	// Installer les modeles, notamment images et documents ;
-	//
-	// NOTE : dans propre() ceci s'execute avant les tableaux a cause du "|",
-	// et apres les liens a cause du traitement de [<imgXX|right>->URL]
-	$letexte = traiter_modeles($mem = $letexte, false, $echapper ? 'TYPO' : '');
-	if ($letexte != $mem) $echapper = true;
-	unset($mem);
-
-	// Appeler les fonctions de post-traitement
 	$letexte = pipeline('post_typo', $letexte);
-	// old style
-	if (function_exists('apres_typo'))
-		$letexte = apres_typo($letexte);
-
-	// reintegrer les echappements
-	if ($echapper)
-		$letexte = echappe_retour($letexte, 'TYPO');
 
 	# un message pour abs_url - on est passe en mode texte
 	$GLOBALS['mode_abs_url'] = 'texte';
 
-	// Dans l'espace prive, securiser ici
-	if (!_DIR_RESTREINT)
-		$letexte = interdire_scripts($letexte);
-
 	return $letexte;
 }
+
+//
+
+// note: $echapper = false lorsqu'on appelle depuis propre() [pour accelerer]
+//
+// http://doc.spip.org/@typo
 
 // analyse des raccourcis issus de [TITRE->RACCOURCInnn] et connexes
 
@@ -942,7 +947,7 @@ define('_RACCOURCI_MODELE',
 define('_RACCOURCI_MODELE_DEBUT', '@^' . _RACCOURCI_MODELE .'@is');
 
 // http://doc.spip.org/@traiter_modeles
-function traiter_modeles($texte, $doublons=false, $echap='') {
+function traiter_modeles($texte, $doublons=false, $echap='', $connect='') {
 	// detecter les modeles (rapide)
 	if (preg_match_all('/<[a-z_-]{3,}\s*[0-9|]+/iS',
 	$texte, $matches, PREG_SET_ORDER)) {
@@ -972,7 +977,7 @@ function traiter_modeles($texte, $doublons=false, $echap='') {
 				$texte .= preg_replace(',[|][^|=]*,s',' ',$regs[4]);
 			# version normale
 			else {
-				$modele = inclure_modele($regs[2], $regs[3], $regs[4], $lien);
+			  $modele = inclure_modele($regs[2], $regs[3], $regs[4], $lien, $connect);
 
 				// le remplacer dans le texte
 				if ($modele !== false) {
