@@ -416,9 +416,10 @@ function f_msie ($texte) {
 	if (strpos(strtolower($texte), 'jquery.js')
 	AND strpos(strtolower($texte), '.png')
 	AND true /* ... autres tests si on veut affiner ... */) {
+		include_spip('inc/filtres'); # pour url_absolue :(
 		$texte .=
 "<script type='text/javascript'><!--
-if (window.jQuery && jQuery.browser.msie) jQuery.getScript( '".find_in_path('javascript/jquery.iepnghack.js')."' , function() { $.pngfix('".(_DIR_RACINE.'rien.gif')."'); jQuery('img').pngfix(); } );
+if (window.jQuery && jQuery.browser.msie) jQuery.getScript( '".url_absolue(find_in_path('javascript/jquery.iepnghack.js'))."' , function() { $.pngfix('".url_absolue(_DIR_RACINE.'rien.gif')."'); jQuery('img').pngfix(); } );
 // --></script>\n";
 	}
 
