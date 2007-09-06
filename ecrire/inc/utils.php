@@ -229,7 +229,7 @@ function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $pr
 
 // http://doc.spip.org/@spip_connect
 function spip_connect($serveur='') {
-	global $connexions, $type_des_serveurs;
+	global $connexions;
 
 	$index = $serveur ? $serveur : 0;
 	if (isset($connexions[$index])) return $connexions[$index];
@@ -255,8 +255,7 @@ function spip_connect($serveur='') {
 	}
 
 	$connexions[$index] = $GLOBALS['db_ok'];
-	$type_des_serveurs[$index] = isset($GLOBALS['spip_connect_version'])
-	? 'spip' : 'inconnu';
+	$connexions[$index]['spip_connect_version'] = isset($GLOBALS['spip_connect_version']) ? $GLOBALS['spip_connect_version'] : 0;
 
 	if ($serveur) return $connexions[$index];
 

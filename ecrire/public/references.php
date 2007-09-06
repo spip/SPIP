@@ -25,7 +25,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@index_pile
 function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
-	global $exceptions_des_tables, $table_des_tables;
 
 	$i = 0;
 	if (strlen($explicite)) {
@@ -105,8 +104,6 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles) {
 // http://doc.spip.org/@index_exception
 function index_exception(&$boucle, $desc, $nom_champ, $excep)
 {
-	global $tables_des_serveurs_sql;
-
 	if (is_array($excep)) {
 		// permettre aux plugins de gerer eux meme des jointures derogatoire ingerables
 		$t = NULL;
@@ -118,10 +115,9 @@ function index_exception(&$boucle, $desc, $nom_champ, $excep)
 			list($e, $x) = $excep;	#PHP4 affecte de gauche a droite
 			$excep = $x;		#PHP5 de droite a gauche !
 			if (!$t = array_search($e, $boucle->from)) {
+				$j = trouver_table($e, $boucle);
 				$t = 'J' . count($boucle->from);
-				$boucle->from[$t] = $e;
-				$j = $tables_des_serveurs_sql[$desc['serveur']][$e];
-	# essayer ca un jour: 	list($nom, $j) = trouver_def_table($e, $boucle);
+				$boucle->from[$t] = $j['table'];
 				$j = $j['key']['PRIMARY KEY'];
 				$boucle->where[]= array("'='", "'$boucle->id_table." . "$j'", "'$t.$j'");
 				}

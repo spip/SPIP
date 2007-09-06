@@ -318,19 +318,9 @@ function critere_collecte_dist($idb,&$boucles, $crit) {
 // http://doc.spip.org/@calculer_critere_arg_dynamique
 function calculer_critere_arg_dynamique($idb, &$boucles, $crit, $suffix='')
 {
-	global $table_des_tables, $tables_des_serveurs_sql;
-
 	$boucle = $boucles[$idb];
-
 	$arg = calculer_liste($crit, array(), $boucles, $boucle->id_parent);
-	$r = $boucle->type_requete;
-	$s = $boucles[$idb]->sql_serveur;
-	if (!$s) $s = 0;
-	$t = $table_des_tables[$r];
-	// pour les tables non Spip
-	if (!$t) $t = $r; else $t = "spip_$t";
-	$desc = $tables_des_serveurs_sql[$s][$t];
-
+	$desc = trouver_table($boucle->type_requete, $boucle);
 	if (is_array($desc['field'])){
 		$liste_field = implode(',',array_map('_q',array_keys($desc['field'])));
 		return	"((\$x = preg_replace(\"/\\W/\",'',$arg)) ? ( in_array(\$x,array($liste_field))  ? ('$boucle->id_table.' . \$x$suffix):(\$x$suffix) ) : '')";
@@ -347,7 +337,7 @@ function critere_par_dist($idb, &$boucles, $crit) {
 
 // http://doc.spip.org/@critere_parinverse
 function critere_parinverse($idb, &$boucles, $crit, $sens='') {
-	global $table_des_tables, $tables_des_serveurs_sql,  $exceptions_des_jointures;
+	global $exceptions_des_jointures;
 	$boucle = &$boucles[$idb];
 	if ($crit->not) $sens = $sens ? "" : " . ' DESC'";
 	$collecte = (isset($boucle->modificateur['collecte']))?" . ".$boucle->modificateur['collecte']:"";
@@ -414,17 +404,11 @@ function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 		}
 		// par champ. Verifier qu'ils sont presents.
 		else {
-		  $r = $boucle->type_requete;
-		  $s = $boucles[$idb]->sql_serveur;
-		  if (!$s) $s = 0;
-		  $t = $table_des_tables[$r];
-		  // pour les tables non Spip
-		  if (!$t) $t = $r; else $t = "spip_$t";
-		  $desc = $tables_des_serveurs_sql[$s][$t];
-		  if ($desc['field'][$par])
-		    $par = $boucle->id_table.".".$par;
+			$desc = trouver_table($boucle->type_requete, $boucle);
+			if ($desc['field'][$par])
+				$par = $boucle->id_table.".".$par;
 		  // sinon tant pis, ca doit etre un champ synthetise (cf points)
-		  $order = "'$par'";
+			$order = "'$par'";
 		}
 	      }
 	      }
@@ -447,7 +431,6 @@ function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 // http://doc.spip.org/@critere_par_jointure
 function critere_par_jointure(&$boucle, $join)
 {
-  global $table_des_tables;
   list($table, $champ) = $join;
   $t = array_search($table, $boucle->from);
   if (!$t) {
@@ -1013,54 +996,6 @@ function trouver_cles_table($keys)
     }
   }
   return array_keys($res);
-}
-
-// Trouve la description d'une table, en particulier celle d'une boucle
-// Si on ne la trouve pas, on demande au serveur SQL
-// retourne False si lui non plus  ne la trouve pas.
-// Si on la trouve, le tableau resultat a les entrees:
-// field (comme dans serial.php)
-// key (comme dans serial.php)
-// serveur = serveur bd associe
-// table = nom complet de la table (avec le prefixe spip_ pour les stds)
-// type = nom court (i.e. type de boucle)
-
-// http://doc.spip.org/@trouver_table
-function trouver_table($type, $boucle)
-{
-	global $tables_auxiliaires, $table_des_tables, $tables_des_serveurs_sql, $type_des_serveurs;
-
-	$serveur = $boucle->sql_serveur;
-	$s = $serveur ? $serveur : 0;
-	if (!isset($type_des_serveurs[$s])) {
-		if (!spip_connect($serveur)) return null;
-	}
-	$spip = ($type_des_serveurs[$s] == 'spip');
-
-	if ($spip AND isset($table_des_tables[$type])) {
-    	// indirection (pour les rares cas ou le nom de la table!=type)
-		$t = $table_des_tables[$type];
-		$nom_table = 'spip_' . $t;
-	} elseif ($spip AND isset($tables_auxiliaires['spip_' .$type])) {
-		$t = $type;
-		$nom_table = 'spip_' . $t;
-	} else	$nom_table = $t = $type;
-
-	if (!isset($tables_des_serveurs_sql[$s][$nom_table])) {
-		$desc = sql_showtable($nom_table, $serveur, ($nom_table != $type));
-		if (!$desc OR !$desc['field']) {
-		  erreur_squelette(_T('zbug_table_inconnue', array('table' => $s ? "$serveur:$type" : $type)),
-					 $boucle->id_boucle);
-			return null;
-		}
-		$tables_des_serveurs_sql[$s][$nom_table] = $desc;
-	} else $desc = $tables_des_serveurs_sql[$s][$nom_table];
-	
-	$desc['table']= $nom_table;
-	$desc['serveur']= $s;
-	$desc['type']= $t;
-
-	return $desc;
 }
 
 // http://doc.spip.org/@trouver_champ_exterieur
