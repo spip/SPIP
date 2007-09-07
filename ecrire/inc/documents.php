@@ -443,6 +443,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 
 // Etablit la liste des documents orphelins, c'est-a-dire qui ne sont lies
 // a aucun article ni breve ni rubrique ; renvoie un tableau (id_document)
+// http://doc.spip.org/@lister_les_documents_orphelins
 function lister_les_documents_orphelins() {
 	$s = sql_select("d.id_document, d.id_vignette",
 	"spip_documents AS d
@@ -485,6 +486,7 @@ function lister_les_documents_orphelins() {
 
 // Supprimer les documents orphelins de la table spip_documents, 
 // ainsi que les fichiers correspondants dans IMG/
+// http://doc.spip.org/@supprimer_les_documents_orphelins
 function supprimer_les_documents_orphelins() {
 	if (!$orphelins = lister_les_documents_orphelins())
 		return;
