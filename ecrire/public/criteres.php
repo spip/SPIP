@@ -739,11 +739,6 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 		calculer_critere_infixe_date($idb, $boucles, $regs);
 	}
 
-	// HACK : selection des documents selon mode 'image'
-	// => on cherche en fait 'vignette'
-	else if ($type == 'documents' AND $col == 'mode')
-		$val[0] = str_replace('image', 'vignette', $val[0]);
-
 	else  {
 		if (@!array_key_exists($col, $desc['field'])) {
 	  	$calculer_critere_externe = 'calculer_critere_externe_init';

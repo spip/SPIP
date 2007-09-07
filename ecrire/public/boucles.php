@@ -176,9 +176,52 @@ function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
 	$boucle->from[$id_table] =  "spip_documents";
+
 	// on ne veut pas des fichiers de taille nulle,
 	// sauf s'ils sont distants (taille inconnue)
 	$boucle->where[]= array("'($id_table.taille > 0 OR $id_table.distant=\\'oui\\')'");
+
+	// Supprimer les images et les vignettes
+	if (!$boucle->modificateur['criteres']['mode']
+	AND $boucle->modificateur['criteres']['tout']) {
+		$boucle->where[]= array("'='", "'$id_table.mode'", "'\\'document\\''");
+	}
+
+	// Pour une boucle generique (DOCUMENTS) sans critere de lien, verifier
+	// qu notre document est lie a un element publie
+	// (le critere {tout} permet de les afficher tous quand meme)
+	// S'il y a un critere de lien {id_article} par exemple, on zappe
+	// ces complications (et tant pis si la boucle n'a pas prevu de
+	// verification du statut de l'article)
+	if (!$boucle->modificateur['tout']
+	AND !$boucle->modificateur['criteres']['id_article']
+	AND !$boucle->modificateur['criteres']['id_breve']
+	AND !$boucle->modificateur['criteres']['id_rubrique']
+	AND !$boucle->modificateur['criteres']['id_document']
+	) {
+		# pallier un defaut du compilo sur le AS qui se met a la fin
+		unset($boucle->from[$id_table]);
+		$boucle->from[] = "spip_documents AS `${id_table}`
+		LEFT JOIN spip_documents_articles AS a
+			ON `$id_table`.id_document=a.id_document
+			LEFT JOIN spip_articles AS aa
+				ON a.id_article=aa.id_article
+		LEFT JOIN spip_documents_breves AS b
+			ON `$id_table`.id_document=b.id_document
+			LEFT JOIN spip_breves AS bb
+				ON b.id_breve=bb.id_breve
+		LEFT JOIN spip_documents_rubriques AS r
+			ON `$id_table`.id_document=r.id_rubrique
+			LEFT JOIN spip_rubriques AS rr
+				ON r.id_rubrique=rr.id_rubrique
+		";
+
+		if ($GLOBALS['var_preview'])
+			$boucle->where[]= "\"(aa.statut IN ('publie','prop') OR bb.statut  IN ('publie','prop') OR rr.statut IN ('publie','prive'))\"";
+		else
+			$boucle->where[]= "\"(aa.statut = 'publie' OR bb.statut = 'publie' OR rr.id_rubrique = 'publie')\"";
+	}
+
 
 	return calculer_boucle($id_boucle, $boucles);
 }

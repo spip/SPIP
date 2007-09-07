@@ -98,7 +98,7 @@ function vignette_par_defaut($ext, $size=true, $loop = true) {
 //
 // Attention : en mode 'doc', si c'est un fichier graphique on prefere
 // afficher une vue reduite, quand c'est possible (presque toujours, donc)
-// En mode 'vignette', l'image conserve sa taille
+// En mode 'image', l'image conserve sa taille
 //
 // A noter : dans le portfolio prive on pousse le vice jusqu'a reduire la taille
 // de la vignette -> c'est a ca que sert la variable $portfolio
@@ -197,7 +197,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 			'args' => "id_$type=$id",
 			'id' => $id,
 			'intitule' => _T('info_telecharger'),
-			'mode' => 'vignette',
+			'mode' => 'image',
 			'type' => $type,
 			'ancre' => '',
 			'id_document' => 0,
@@ -212,17 +212,8 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	while ($row = sql_fetch($res))
 		$documents_lies[]= $row['id_document'];
 
-	if (count($documents_lies)) {
-		$res = spip_query("SELECT DISTINCT id_vignette FROM spip_documents WHERE id_document in (".join(',', $documents_lies).")");
-		while ($v = sql_fetch($res))
-			$vignettes[]= $v['id_vignette'];
-		$docs_exclus = preg_replace('/^,/','',join(',', $vignettes).','.join(',', $documents_lies));
-
-		if ($docs_exclus) $docs_exclus = "AND l.id_document NOT IN ($docs_exclus) ";
-	} else $docs_exclus = '';
-
 	//// Images sans documents
-	$images_liees = spip_query("SELECT docs.id_document FROM spip_documents AS docs, spip_documents_".$type."s AS l "."WHERE l.id_".$type."=$id AND l.id_document=docs.id_document ".$docs_exclus."AND docs.mode='vignette' ORDER BY docs.id_document");
+	$images_liees = spip_query("SELECT docs.id_document FROM spip_documents AS docs, spip_documents_".$type."s AS l "."WHERE l.id_".$type."=$id AND l.id_document=docs.id_document AND docs.mode='image' ORDER BY docs.id_document");
 
 	$ret .= "\n<div id='liste_images'>";
 	while ($doc = sql_fetch($images_liees)) {
@@ -403,7 +394,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 
 		$ret .= fin_cadre_enfonce(true);
 
-	} else if ($mode == 'vignette') {
+	} else if ($mode == 'image') {
 
 	//
 	// Afficher une image inserable dans l'article
@@ -448,6 +439,68 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 		$ret .= fin_cadre_relief(true);
 	}
 	return $ret;
+}
+
+// Etablit la liste des documents orphelins, c'est-a-dire qui ne sont lies
+// a aucun article ni breve ni rubrique ; renvoie un tableau (id_document)
+function lister_les_documents_orphelins() {
+	$s = sql_select("d.id_document, d.id_vignette",
+	"spip_documents AS d
+	LEFT JOIN spip_documents_articles AS a
+		ON d.id_document=a.id_document
+	LEFT JOIN spip_documents_breves AS b
+		ON d.id_document=b.id_document
+	LEFT JOIN spip_documents_rubriques AS r
+		ON d.id_document=r.id_document
+	LEFT JOIN spip_articles AS aa
+		ON aa.id_article=a.id_article
+	LEFT JOIN spip_breves AS bb
+		ON bb.id_breve=b.id_breve
+	LEFT JOIN spip_rubriques AS rr
+		ON rr.id_rubrique=r.id_rubrique
+	",
+	"(a.id_article IS NULL OR aa.id_article IS NULL)
+	AND (b.id_breve IS NULL OR bb.id_breve IS NULL)
+	AND (r.id_rubrique IS NULL OR rr.id_rubrique IS NULL)
+	");
+
+	$orphelins = array();
+	while ($t = sql_fetch($s)) {
+		$orphelins[$t['id_document']] = true;
+		// la vignette d'un orphelin est orpheline
+		if ($t['id_vignette'])
+			$orphelins[$t['id_vignette']] = true;
+
+	}
+
+	// les vignettes qui n'appartiennent a aucun document sont aussi orphelines
+	$s = sql_select("v.id_document",
+	"spip_documents AS v LEFT JOIN spip_documents AS d ON v.id_document=d.id_vignette",
+	"v.mode='vignette' AND d.id_document IS NULL");
+	while ($t = sql_fetch($s))
+		$orphelins[$t['id_document']] = true;
+
+	return array_keys(array_filter($orphelins));
+}
+
+// Supprimer les documents orphelins de la table spip_documents, 
+// ainsi que les fichiers correspondants dans IMG/
+function supprimer_les_documents_orphelins() {
+	if (!$orphelins = lister_les_documents_orphelins())
+		return;
+
+	$in = calcul_mysql_in('id_document', $orphelins);
+
+	spip_log("supprime documents $in");
+	$s = sql_select("fichier", "spip_documents", $in." AND distant='non'");
+	while ($t = sql_fetch($s)) {
+		if (@file_exists($f = get_spip_doc($t['fichier']))) {
+			spip_log("efface $f");
+			supprimer_fichier($f);
+		}
+	}
+
+	sql_delete('spip_documents', $in);
 }
 
 ?>
