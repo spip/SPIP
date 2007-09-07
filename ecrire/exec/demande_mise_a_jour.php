@@ -18,13 +18,13 @@ function exec_demande_mise_a_jour_dist() {
 	include_spip('inc/presentation');
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page();
-	echo "<blockquote><blockquote><h4><span style='color: red'>",	_T('info_message_technique'),"</span><br /> ",
+	echo "<br /><br /><h4><span style='color: red'>",	_T('info_message_technique'),"</span><br /> ",
 	_T('info_procedure_maj_version'),
-	"</h4>",
+	"</h4><div>",
 	_T('info_administrateur_site_01'),
 	" <a href='" . generer_url_ecrire("upgrade","reinstall=non") . "'>",
 	_T('info_administrateur_site_02'),
-	"</a></blockquote></blockquote>";
+	"</a></div>";
 	echo fin_page();
 }
 ?>
