@@ -252,9 +252,10 @@ function generer_generer_url($type, $p)
 
 	if (!$s)
 		return "generer_url_$type($_id)";
-	elseif (!$GLOBALS['connexions'][$s]['spip_connect_version'])
-		return calculer_champ($p);
-	else {
+	elseif (!$GLOBALS['connexions'][$s]['spip_connect_version']) {
+		erreur_squelette("#URL_" . strtoupper($type). ' ' . _T('zbug_distant_interdit'));
+		return "";
+	} else {
 		$u = "quete_meta('adresse_site', '$s')";
 		if ($type != 'document')
 			return "$u . '?page=$type&amp;id_$type=' . " . $_id;

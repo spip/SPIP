@@ -436,8 +436,8 @@ function critere_par_jointure(&$boucle, $join)
   if (!$t) {
 	$type = $boucle->type_requete;
 	$desc = trouver_table($type, $boucle);
-
 	$cle = trouver_champ_exterieur($champ, $boucle->jointures, $boucle);
+
 	if ($cle)
 		$cle = calculer_jointure($boucle, array($desc['table'], $desc), $cle, false);
 	if ($cle) $t = "L$cle"; 
