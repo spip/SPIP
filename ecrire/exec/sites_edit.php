@@ -88,15 +88,12 @@ function exec_sites_edit_dist()
 	$url_syndic = entites_html($url_syndic);
 	$nom_site = entites_html($nom_site);
 	$url_site = entites_html($url_site);
-	if (strlen($url_site)<8) $url_site="http://";
+	if (strlen($url_site)<4) $url_site="http://";
 
 	if ($id_rubrique == 0) $logo = "racine-site-24.gif";
 	else {
-		$result=spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
-
-		while($row=sql_fetch($result)){
-			$parent_parent=$row['id_parent'];
-		}
+		$row = sql_fetsel('id_parent', 'spip_rubriques', "id_rubrique=$id_rubrique");
+		$parent_parent=$row['id_parent'];
 		if ($parent_parent == 0) $logo = "secteur-24.gif";
 		else $logo = "rubrique-24.gif";
 	}
@@ -204,15 +201,12 @@ function exec_sites_edit_dist()
 	. _T('bouton_enregistrer')
 	. "' class='fondo' /></div>";
 
-	$form = generer_action_auteur('editer_site',
+	echo generer_action_auteur('editer_site',
 				      ($new == 'oui') ? $new : $id_syndic,
 				      generer_url_ecrire('sites'),
 				      $form,
 				      " method='post' name='formulaire'"
 				      );
-
-
-	echo $form;
 	
 	echo fin_cadre_formulaire(true);
 	
