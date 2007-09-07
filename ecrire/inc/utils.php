@@ -211,10 +211,11 @@ function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $pr
 		return;
 	}
 	  
-	if ($g = $h($host, $port, $login, $pass, $db, $prefixe))
+	if ($g = $h($host, $port, $login, $pass, $db, $prefixe)) {
 
+		$g['type'] = $type;
 		return $db_ok = $g;
-
+	}
 	// En cas d'indisponibilite du serveur, eviter de le bombarder
 	if (!defined('_ECRIRE_INSTALL')) {
 		@touch($f);
