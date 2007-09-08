@@ -165,12 +165,12 @@ function calculer_balise($nom, $p) {
 
 	// Certaines des balises comportant un _ sont generiques
 	if ($f = strpos($nom, '_')
-	AND $f = charger_fonction(substr($nom,0,$f), 'balise', true)) {
+	AND $f = charger_fonction(substr($nom,0,$f+1), 'balise', true)) {
 		$res = $f($p);
 		if ($res !== NULL)
 			return $res;
 	}
-	spip_log("bal $nom");
+
 	// ca pourrait etre un champ SQL homonyme,
 	$p->code = index_pile($p->id_boucle, $nom, $p->boucles, $p->nom_boucle);
 

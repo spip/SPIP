@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // (les balises portant ce type de nom sont traitees en bloc ici)
 //
 
-function balise_logo__dist ($p) {
+function balise_LOGO__dist ($p) {
 
 	preg_match(",^LOGO_([A-Z]+)(_.*)?$,i", $p->nom_champ, $regs);
 	$type_objet = $regs[1];
@@ -89,6 +89,7 @@ function balise_logo__dist ($p) {
 	// Preparer le code du lien
 	//
 	// 1. filtre |lien
+
 	if ($flag_lien_auto AND !$lien)
 		$code_lien = '($lien = generer_url_'.$type_objet.'('.$_id_objet.')) ? $lien : ""';
 	// 2. lien indique en clair (avec des balises : imprimer#ID_ARTICLE.html)
@@ -115,8 +116,11 @@ function balise_logo__dist ($p) {
 		$code_lien .= ", '". $align . "'";
 	}
 
+	if ($p->id_boucle AND $p->boucles[$p->id_boucle]->sql_serveur) {
+		$p->code = "''";
+		spip_log("Logo distant indisponible");
 	// cas des documents
-	if ($type_objet == 'DOCUMENT') {
+	} elseif ($type_objet == 'DOCUMENT') {
 		$p->code = "calcule_logo_document($_id_objet, '" .
 			$p->descr['documents'] .
 			'\', $doublons, '. intval($flag_fichier).", $code_lien, '".
