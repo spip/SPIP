@@ -542,6 +542,7 @@ function table_objet($type) {
 		'emb' => 'documents',
 		'forum' => 'forum', # hum
 		'groupe_mots' => 'groupes_mots', # hum
+		'groupe' => 'groupes_mots', # hum (EXPOSE)
 		'message' => 'messages',
 		'mot' => 'mots',
 		'petition' => 'petitions',
@@ -550,7 +551,8 @@ function table_objet($type) {
 		'syndic' => 'syndic',
 		'site' => 'syndic', # hum hum
 		'syndic_article' => 'syndic_articles',
-		'type_document' => 'types_documents' # hum
+		'type_document' => 'types_documents', # hum
+		'extension' => 'types_documents' # hum
 	);
 	return isset($surnoms[$type]) ? $surnoms[$type] : $type."s";
 }
