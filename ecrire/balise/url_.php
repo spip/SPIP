@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@balise_URL__dist
 function balise_URL__dist($p) {
 
 	if ($f = charger_fonction($p->nom_champ, 'balise', true))

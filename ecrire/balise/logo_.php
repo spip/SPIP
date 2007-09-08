@@ -17,6 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // (les balises portant ce type de nom sont traitees en bloc ici)
 //
 
+// http://doc.spip.org/@balise_LOGO__dist
 function balise_LOGO__dist ($p) {
 
 	preg_match(",^LOGO_([A-Z]+)(_.*)?$,i", $p->nom_champ, $regs);
