@@ -183,7 +183,7 @@ function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 
 	// Supprimer les images et les vignettes
 	if (!$boucle->modificateur['criteres']['mode']
-	AND $boucle->modificateur['criteres']['tout']) {
+	AND !$boucle->modificateur['criteres']['tout']) {
 		$boucle->where[]= array("'='", "'$id_table.mode'", "'\\'document\\''");
 	}
 
