@@ -158,6 +158,7 @@ function import_init_tables($request)
 	}
 
 	// Bidouille pour garder l'acces admin actuel pendant toute la restauration
+	spip_query("DELETE FROM spip_auteurs WHERE id_auteur=0");
 	spip_query("UPDATE spip_auteurs SET id_auteur=0, extra=$connect_id_auteur WHERE id_auteur=$connect_id_auteur");
 	spip_query("DELETE FROM spip_auteurs WHERE id_auteur!=0");
 
@@ -172,8 +173,7 @@ function import_init_tables($request)
 // http://doc.spip.org/@detruit_restaurateur
 function detruit_restaurateur()
 {
-	$r = sql_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_auteurs"));
-	if ($r['n'] > 1)
+	if (sql_countsel("spip_auteurs") > 1)
 		spip_query("DELETE FROM spip_auteurs WHERE id_auteur=0");
 	else {
 	  	spip_query("UPDATE spip_auteurs SET id_auteur=extra WHERE id_auteur=0");

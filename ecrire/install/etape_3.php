@@ -100,6 +100,7 @@ function install_bases(){
 	} else {
 
 	  // pour recreer les tables disparues au besoin
+
 	  creer_base($server_db); 
 
 	  $r = $fquery("SELECT valeur FROM spip_meta WHERE nom='version_installee'", $server_db);

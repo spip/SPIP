@@ -44,7 +44,7 @@ function install_etape_2_dist()
 
 	echo "<!-- ", join(', ', $link), " $login_db ";
 	$db_connect = 0; // revoirfunction_exists($ferrno) ? $ferrno() : 0;
-	echo join(', ', $GLOBALS['connexions'][0]);
+	echo join(', ', $GLOBALS['connexions'][$server_db]);
 	echo "-->";
 
 	if (($db_connect=="0") && $link) {

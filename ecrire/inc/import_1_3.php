@@ -53,7 +53,7 @@ function inc_import_1_3_dist($lecteur, $request, $gz='fread', $atts=array()) {
 		$desc = $field_desc[$boucle][$table];
 	else {
 // recuperer la description de la table pour connaitre ses champs valides
-		list($nom,$desc) = description_table($table);
+		$desc = description_table($table);
 		if (!isset($desc['field']))
 			$desc = $defaut;
 		elseif (isset($request['insertion']) 

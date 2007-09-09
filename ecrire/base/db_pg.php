@@ -366,7 +366,7 @@ function spip_pg_insert($table, $champs, $valeurs, $desc=array(), $serveur='') {
 	$link = $connexion['link'];
 	$db = $connexion['db'];
 
-	if (!$desc) list($nom,$desc) = description_table($table);
+	if (!$desc) $desc = description_table($table);
 	$seq = spip_pg_sequence($table);
 
 	if ($prefixe) {
@@ -391,7 +391,7 @@ function spip_pg_insert($table, $champs, $valeurs, $desc=array(), $serveur='') {
 // http://doc.spip.org/@spip_pg_insertq
 function spip_pg_insertq($table, $couples, $desc=array(), $serveur='') {
 
-	if (!$desc) list($nom,$desc) = description_table($table);
+	if (!$desc) $desc = description_table($table);
 	if (!$desc) die("$table insertion sans description");
 	$fields =  $desc['field'];
 		
@@ -431,7 +431,7 @@ function spip_pg_updateq($table, $champs, $where='', $desc=array(), $serveur='')
 	$link = $connexion['link'];
 	$db = $connexion['db'];
 
-	if (!$desc) list($nom,$desc) = description_table($table);
+	if (!$desc) $desc = description_table($table);
 	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
 	$fields = $desc['field'];
 	$r = '';
