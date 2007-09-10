@@ -24,7 +24,6 @@ $tables_images = array(
 
 		       // Autres images (peuvent utiliser le tag <img>)
 		       'bmp' => 'BMP',
-		       'psd' => 'Photoshop',
 		       'tif' => 'TIFF'
 		       );
 
@@ -33,23 +32,25 @@ $tables_images = array(
 $tables_sequences = array(
 			  'aiff' => 'AIFF',
 			  'asf' => 'Windows Media',
-			  'avi' => 'Windows Media',
+			  'avi' => 'AVI',
 			  'flv' => 'Flash Video',
 			  'mid' => 'Midi',
 			  'mng' => 'MNG',
+			  'mka' => 'Matroska Audio',
+			  'mkv' => 'Matroska Video',
 			  'mov' => 'QuickTime',
 			  'mp3' => 'MP3',
+			  'mp4' => 'MPEG4',
 			  'mpg' => 'MPEG',
 			  'ogg' => 'Ogg',
 			  'qt' => 'QuickTime',
 			  'ra' => 'RealAudio',
 			  'ram' => 'RealAudio',
 			  'rm' => 'RealAudio',
+			  'svg' => 'Scalable Vector Graphics',
 			  'swf' => 'Flash',
 			  'wav' => 'WAV',
-			  'wmv' => 'Windows Media',
-			  'svg' => 'Scalable Vector Graphics',
-				'mp4' => 'MPEG4'
+			  'wmv' => 'Windows Media'
 			  );
 
 // Documents varies
@@ -61,6 +62,7 @@ $tables_documents = array(
 			  'blend' => 'Blender',
 			  'c' => 'C source',
 			  'css' => 'Cascading Style Sheet',
+			  'csv' => 'Comma Separated Values',
 			  'deb' => 'Debian',
 			  'doc' => 'Word',
 			  'djvu' => 'DjVu',
@@ -69,11 +71,14 @@ $tables_documents = array(
 			  'gz' => 'GZ',
 			  'h' => 'C header',
 			  'html' => 'HTML',
+			  'kml' => 'Keyhole Markup Language',
+			  'kmz' => 'Google Earth Placemark File',
 			  'pas' => 'Pascal',
 			  'pdf' => 'PDF',
 			  'pgn' => 'Portable Game Notation',
 			  'ppt' => 'PowerPoint',
 			  'ps' => 'PostScript',
+			  'psd' => 'Photoshop',
 			  'rpm' => 'RedHat/Mandrake/SuSE',
 			  'rtf' => 'RTF',
 			  'sdd' => 'StarOffice',
@@ -117,7 +122,6 @@ $tables_mime = array(
 
 		// Autres images (peuvent utiliser le tag <img>)
 		'bmp'=>'image/x-ms-bmp', // pas enregistre par IANA, variante: image/bmp
-		'psd'=>'image/x-photoshop',	// pas IANA
 		'tif'=>'image/tiff',
 
 		// Multimedia (peuvent utiliser le tag <embed>)
@@ -126,20 +130,22 @@ $tables_mime = array(
 		'avi'=>'video/x-msvideo',
 		'flv' => 'video/x-flv',
 		'mid'=>'audio/midi',
+		'mka' => 'audio/mka',
+		'mkv' => 'video/mkv',
 		'mng'=>'video/x-mng',
 		'mov'=>'video/quicktime',
 		'mp3'=>'audio/mpeg',
+		'mp4' => 'application/mp4',
 		'mpg'=>'video/mpeg',
 		'ogg'=>'application/ogg',
 		'qt' =>'video/quicktime',
 		'ra' =>'audio/x-pn-realaudio',
 		'ram'=>'audio/x-pn-realaudio',
 		'rm' =>'audio/x-pn-realaudio',
+		'svg'=>'image/svg+xml',
 		'swf'=>'application/x-shockwave-flash',
 		'wav'=>'audio/x-wav',
 		'wmv'=>'video/x-ms-wmv',
-		'svg'=>'image/svg+xml',
-		'mp4' => 'application/mp4',
 
 		// Documents varies
 		'ai' =>'application/illustrator',
@@ -149,6 +155,7 @@ $tables_mime = array(
 		'bz2'=>'application/x-bzip2',
 		'c'  =>'text/x-csrc',
 		'css'=>'text/css',
+		'csv'=>'text/csv',
 		'deb'=>'application/x-debian-package',
 		'doc'=>'application/msword',
 		'djvu'=>'image/vnd.djvu',
@@ -157,11 +164,14 @@ $tables_mime = array(
 		'gz' =>'application/x-gzip',
 		'h'  =>'text/x-chdr',
 		'html'=>'text/html',
+		'kml'=>'application/vnd.google-earth.kml+xml',
+		'kmz'=>'application/vnd.google-earth.kmz',
 		'pas'=>'text/x-pascal',
 		'pdf'=>'application/pdf',
 		'pgn' =>'application/x-chess-pgn',
 		'ppt'=>'application/vnd.ms-powerpoint',
 		'ps' =>'application/postscript',
+		'psd'=>'image/x-photoshop', // pas enregistre par IANA
 		'rpm'=>'application/x-redhat-package-manager',
 		'rtf'=>'application/rtf',
 		'sdd'=>'application/vnd.stardivision.impress',
