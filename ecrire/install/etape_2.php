@@ -42,16 +42,17 @@ function install_etape_2_dist()
 
 // prenons toutes les dispositions possibles pour que rien ne s'affiche !
 
-	echo "<!-- ", join(', ', $link), " $login_db ";
+	echo "\n<!--\n", join(', ', $link), " $login_db ";
 	$db_connect = 0; // revoirfunction_exists($ferrno) ? $ferrno() : 0;
 	echo join(', ', $GLOBALS['connexions'][$server_db]);
-	echo "-->";
+	echo "\n-->\n";
 
 	if (($db_connect=="0") && $link) {
-		echo "<p class='resultat'><b>"._T('info_connexion_ok')."</b></p>";
+		echo "<p class='resultat'><b>"._T('info_connexion_ok')."</b></p>\n";
 		echo info_etape(_T('menu_aide_installation_choix_base').aide ("install2"));
+		spip_connect_db($adresse_db, 0, $login_db, $pass_db, '',$server_db);
 
-		spip_connect_db($adresse_db, 0, $login_db, $pass_db);
+		echo "\n", '<!-- ',  sql_version($server_db), ' -->' ;
 		list($checked, $res) = install_etape_2_bases($login_db, $server_db);
 
 		$hidden = (defined('_SPIP_CHMOD')
@@ -82,7 +83,9 @@ function install_etape_2_dist()
 
 function install_etape_2_bases($login_db, $server_db)
 {
+
 	$result = sql_listdbs($server_db);
+
 	$bases = $checked = '';
 	if ($result) {
 		while ($row = sql_fetch($result, $server_db)) {
@@ -99,6 +102,7 @@ function install_etape_2_bases($login_db, $server_db)
 			}
 		}
 	}
+
 	if ($bases) 
 		return array($checked, 
 		       "<label for='choix_db'><b>"._T('texte_choix_base_2')."</b><br />"._T('texte_choix_base_3')."</label>"

@@ -12,15 +12,31 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+define('_DEFAULT_DB', 'spip');
+
 // Se connecte et retourne le nom de la fonction a connexion persistante
+// A la premiere connexion de l'installation (BD pas precisee)
+// si on ne peut se connecter sans la preciser
+// on reessaye avec le login comme nom de BD
+// et si ca marche toujours pas, avec "spip" (constante ci-dessus)
+// si ca ne marche toujours pas, echec.
 
 // http://doc.spip.org/@base_db_pg_dist
 function base_db_pg_dist($addr, $port, $login, $pass, $db='', $prefixe='') {
 
 	@list($host, $p) = split(';', $addr);
 	if ($p >0) $port = " port=$p" ; else $port = '';
-	if (!$db) {$db = 'spip'; $dbn='';} else $dbn =  " dbname=$db";
-	$link = pg_connect("host=$host$port$dbn user=$login password=$pass");
+	if ($db) {
+		@$link = pg_connect("host=$host$port dbname=$db user=$login password=$pass");
+	} elseif (!@$link = pg_connect("host=$host$port user=$login password=$pass")) {
+	    if (@$link = pg_connect("host=$host$port dbname=$login user=$login password=$pass")) {
+	      $db = $login;
+	    } else {
+	      $db = _DEFAULT_DB;
+	      $link = pg_connect("host=$host$port dbname=$db user=$login password=$pass");
+	    }
+	}
+
 #	spip_log("Connexion vers $host, base $db, prefixe $prefixe "
 #		 . ($link ? 'operationnelle' : 'impossible'));
 
@@ -115,7 +131,7 @@ function spip_pg_selectdb($db) {
 
 // http://doc.spip.org/@spip_pg_listdbs
 function spip_pg_listdbs() {
-	return array();
+	return pg_query("select * from pg_database");
 }
 
 // http://doc.spip.org/@spip_pg_select
