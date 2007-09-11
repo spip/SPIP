@@ -345,11 +345,15 @@ function trouver_table($nom, $boucle='')
 
 	$desc = sql_showtable($nom_sql, $serveur, ($nom_sql != $nom));
 	if (!$desc OR !$desc['field']) {
-		include_spip('public/debug');
-		erreur_squelette(_T('zbug_table_inconnue',
+		if (!$boucle) 
+		  spip_log("table inconnue $serveur $nom");
+		else {
+		  include_spip('public/debug');
+		  erreur_squelette(_T('zbug_table_inconnue',
 			array('table' => $s ? "$serveur:$nom" : $nom)),
 				$boucle->id_boucle);
-		return null;
+		  return null;
+		}
 	} else {
 		$desc['table']= $nom_sql;
 		$desc['id_table']= $nom;
