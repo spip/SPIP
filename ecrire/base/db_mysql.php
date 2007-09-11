@@ -493,6 +493,7 @@ function spip_release_lock($nom) {
 	@spip_query("SELECT RELEASE_LOCK(" . _q($nom) . ")");
 }
 
+// http://doc.spip.org/@spip_mysql_cite
 function spip_mysql_cite($val, $type) {
 	if ((strpos($type, 'datetime')===0) OR (strpos($type, 'TIMESTAMP')===0))
 	  return $val;

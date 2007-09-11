@@ -250,7 +250,7 @@ function spip_num_rows($r) {
 }
 
 
-// http://doc.spip.org/@spip_sql_version
+// http://doc.spip.org/@sql_version
 function sql_version($serveur='') {
 	$row = sql_fetch(spip_query("SELECT version() AS n", $serveur), $serveur);
 	return ($row['n']);
