@@ -181,10 +181,10 @@ function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 	// sauf s'ils sont distants (taille inconnue)
 	$boucle->where[]= array("'($id_table.taille > 0 OR $id_table.distant=\\'oui\\')'");
 
-	// Supprimer les images et les vignettes
+	// Supprimer les vignettes
 	if (!$boucle->modificateur['criteres']['mode']
 	AND !$boucle->modificateur['criteres']['tout']) {
-		$boucle->where[]= array("'='", "'$id_table.mode'", "'\\'document\\''");
+		$boucle->where[]= array("'!='", "'$id_table.mode'", "'\\'vignette\\''");
 	}
 
 	// Pour une boucle generique (DOCUMENTS) sans critere de lien, verifier
