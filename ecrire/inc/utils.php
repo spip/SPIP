@@ -301,7 +301,7 @@ function spip_query($query, $serveur='') {
 
 // http://doc.spip.org/@_q
 function _q($a) {
-	return (is_numeric($a)) ? strval($a) : 
+	return (is_int($a)) ? strval($a) : 
 		(!is_array($a) ? ("'" . addslashes($a) . "'")
 		 : join(",", array_map('_q', $a)));
 }
