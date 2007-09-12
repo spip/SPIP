@@ -997,10 +997,11 @@ function trouver_champ_exterieur($cle, $joints, &$boucle, $checkarrivee = false)
 {
   foreach($joints as $k => $join) {
     if ($join && $table = trouver_table($join, $boucle)) {
-      if (array_key_exists($cle, $table['field'])
+      if (isset($table['field']) && array_key_exists($cle, $table['field'])
       	&& ($checkarrivee==false || $checkarrivee==$table['table'])) // si on sait ou on veut arriver, il faut que ca colle
 	return  array($table['table'], $table);
     }
+
   }
   return "";
 }
