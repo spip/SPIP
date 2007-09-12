@@ -23,17 +23,66 @@ include_spip('inc/lang');
 // http://doc.spip.org/@tester_variable
 function tester_variable($var, $val){
 	if (!isset($GLOBALS[$var]))
-		$GLOBALS[$var] = $val;
+		return $GLOBALS[$var] = $val;
 
 	if (
 		isset($_REQUEST[$var])
 		AND $GLOBALS[$var] == $_REQUEST[$var]
 	)
 		die ("tester_variable: $var interdite");
+	return $GLOBALS[$var];
 }
 
-// on initialise la puce ici car il serait couteux de faire le find_in_path()
-// a chaque hit, alors qu'on n'a besoin de cette valeur que lors du calcul
+// Init des globales reglant la typo de propre 
+// voir aussi traiter_raccourci_glossaire et traiter_raccourci_notes
+// Retourne aussi un double tableau raccourci / texte-clair les utilisant.
+
+function traiter_variables_sales()
+{
+	global $class_spip, $class_spip_plus;
+// class_spip : savoir si on veut class="spip" sur p i strong & li
+// class_spip_plus : class="spip" sur les ul ol h3 hr quote table...
+// la difference c'est que des css specifiques existent pour les seconds
+	tester_variable('class_spip', '');  /*' class="spip"'*/
+	tester_variable('class_spip_plus', ' class="spip"');
+	tester_variable('toujours_paragrapher', true);
+
+	return array(array(
+		/* 0 */ 	"/\n(----+|____+)/S",
+		/* 3 */ 	"/\n_ +/S",
+		/* 4 */   "/(^|[^{])[{][{][{]/S",
+		/* 5 */   "/[}][}][}]($|[^}])/S",
+		/* 6 */ 	"/(( *)\n){2,}(<br\s*\/?".">)?/S",
+		/* 7 */ 	"/[{][{]/S",
+		/* 8 */ 	"/[}][}]/S",
+		/* 9 */ 	"/[{]/S",
+		/* 10 */	"/[}]/S",
+		/* 11 */	"/(?:<br\s*\/?".">){2,}/S",
+		/* 12 */	"/<p>\n*(?:<br\s*\/?".">\n*)*/S",
+		/* 13 */	"/<quote>/S",
+		/* 14 */	"/<\/quote>/S",
+		/* 15 */	"/<\/?intro>/S"
+				),
+		     array(
+		/* 0 */ 	"\n\n" . tester_variable('ligne_horizontale', "\n<hr$class_spip_plus />\n") . "\n\n",
+		/* 3 */ 	"\n<br />",
+		/* 4 */ 	"\$1\n\n" . tester_variable('debut_intertitre', "\n<h3$class_spip_plus>"),
+		/* 5 */ 	tester_variable('fin_intertitre', "</h3>\n") ."\n\n\$1",
+		/* 6 */ 	"<p>",
+		/* 7 */ 	tester_variable('debut_gras', "<strong$class_spip>"),
+		/* 8 */ 	tester_variable('fin_gras', '</strong>'),
+		/* 9 */ 	tester_variable('debut_italique', "<i$class_spip>"),
+		/* 10 */	tester_variable('fin_italique', '</i>'),
+		/* 11 */	"<p>",
+		/* 12 */	"<p>",
+		/* 13 */	"<blockquote$class_spip_plus><p>",
+		/* 14 */	"</blockquote><p>",
+		/* 15 */	""
+				)
+		     );
+}
+
+// On initialise la puce pour eviter find_in_path() a chaque rencontre de \n-
 // http://doc.spip.org/@definir_puce
 function definir_puce() {
 	static $les_puces = array();
@@ -525,11 +574,6 @@ function corriger_typo($letexte) {
 	return $letexte;
 }
 
-//
-
-// note: $echapper = false lorsqu'on appelle depuis propre() [pour accelerer]
-//
-// http://doc.spip.org/@typo
 
 // analyse des raccourcis issus de [TITRE->RACCOURCInnn] et connexes
 
@@ -1054,6 +1098,92 @@ function paragrapher($letexte, $forcer=true) {
 }
 
 //
+// Raccourcis ancre [#ancre<-]
+//
+
+define('_RACCOURCI_ANCRE', "|\[#?([^][]*)<-\]|S");
+
+function traiter_raccourci_ancre($letexte)
+{
+	if (preg_match_all(_RACCOURCI_ANCRE, $letexte, $m, PREG_SET_ORDER))
+	foreach ($m as $regs)
+		$letexte = str_replace($regs[0],
+		'<a name="'.entites_html($regs[1]).'"></a>', $letexte);
+	return $letexte;
+}
+
+//
+// Raccourcis automatiques [?SPIP] vers un glossaire
+// Ils sont ramenes a la forme [X->Y] (raccourcis liens std de SPIP)
+// traitee ensuite pour ne pas appliquer le correcteur typo sur les URLs 
+//
+
+define('_RACCOURCI_GLOSSAIRE', "|\[\?+\s*([^][<>]+)\]|S");
+
+function traiter_raccourci_glossaire($letexte)
+{
+	static $glosateur = NULL, $subst = NULL;
+	if ($glosateur === NULL) {
+		$glosateur = tester_variable('url_glossaire_externe',
+					 "http://@lang@.wikipedia.org/wiki/");
+		$subst = strpos($glosateur,"%s") !== 0;
+	}
+
+	if (empty($glosateur) 
+	OR !preg_match_all(_RACCOURCI_GLOSSAIRE, $letexte, $m, PREG_SET_ORDER))
+		return $letexte;
+
+	foreach ($m as $regs) {
+		list($tout, $terme) = $regs;
+		// Eviter les cas particulier genre "[?!?]"
+		if (preg_match(',^(.*\w\S*)\s*$,', $terme, $regs)) {
+			$terme = $regs[1];
+			$_terme = preg_replace(',\s+,', '_', $terme);
+// faire sauter l'eventuelle partie "|bulle d'aide" du lien
+// cf. http://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Conventions_sur_les_titres
+			$_terme = preg_replace(',[|].*,', '', $_terme);
+			if ($subst)
+				$url = str_replace("%s", rawurlencode($_terme),	$glosateur);
+			else $url = $glosateur.$_terme;
+			$url = str_replace("@lang@", $GLOBALS['spip_lang'], $url);
+			$url = '['.$terme.'->?'.$url.']';
+			$letexte = str_replace($tout, $url, $letexte);
+		}
+	}
+	return $letexte;
+}
+
+
+//
+// Raccourcis liens [xxx->url]
+// Note : complique car c'est ici qu'on applique typo(),
+// et en plus on veut pouvoir les passer en pipeline
+//
+
+// Regexp des raccouris, aussi utilisee pour la fusion de sauvegarde Spip
+define('_RACCOURCI_LIEN', ",\[([^][]*)->(>?)([^]]*)\],msS");
+
+function traiter_raccourcis_propre($letexte)
+{
+	$inserts = array();
+	if (preg_match_all(_RACCOURCI_LIEN, $letexte, $matches, PREG_SET_ORDER)) {
+		$i = 0;
+		foreach ($matches as $regs) {
+			$inserts[++$i] = traiter_raccourci_lien($regs);
+			$letexte = str_replace($regs[0], "@@SPIP_ECHAPPE_LIEN_$i@@",
+				$letexte);
+		}
+	}
+
+	$letexte = typo($letexte, /* echap deja fait, accelerer */ false);
+
+	foreach ($inserts as $i => $insert) {
+		$letexte = str_replace("@@SPIP_ECHAPPE_LIEN_$i@@", $insert, $letexte);
+	}
+	return $letexte;
+}
+
+//
 // Inserer un lien a partir du preg_match du raccourci [xx->url]
 // $regs:
 // 0=>tout le raccourci
@@ -1064,8 +1194,9 @@ function paragrapher($letexte, $forcer=true) {
 // http://doc.spip.org/@traiter_raccourci_lien
 function traiter_raccourci_lien($regs) {
 	$bulle = $hlang = '';
+	list(,$texte, ,$url) = $regs;
 	// title et hreflang donnes par le raccourci ?
-	if (preg_match(',^(.*?)([|]([^<>]*?))?([{]([a-z_]+)[}])?$,', $regs[1], $m)) {
+	if (preg_match(',^(.*?)([|]([^<>]*?))?([{]([a-z_]+)[}])?$,', $texte, $m)) {
 		$n =count($m);
 		// |infobulle ?
 		if ($n > 2) {
@@ -1091,10 +1222,10 @@ function traiter_raccourci_lien($regs) {
 				}
 			}
 		}
-		$regs[1] = $m[1];
+		$texte = $m[1];
 	}
 
-	list ($lien, $class, $texte, $lang) = calculer_url($regs[3], $regs[1], 'tout');
+	list ($lien, $class, $texte, $lang) = calculer_url($url, $texte, 'tout');
 
 	// Si l'objet n'est pas de la langue courante, on ajoute hreflang
 	if (!$hlang AND $lang AND ($lang!=$GLOBALS['spip_lang'])) $hlang=$lang;
@@ -1124,57 +1255,8 @@ function chapo_redirige($chapo)
 	return $m;
 }
 
-// Regexp des raccouris, aussi utilisee pour la fusion de sauvegarde Spip
-define('_RACCOURCI_LIEN', ",\[([^][]*)->(>?)([^]]*)\],msS");
-
-// Nettoie un texte, traite les raccourcis spip, la typo, etc.
-// http://doc.spip.org/@traiter_raccourcis
-function traiter_raccourcis($letexte) {
-	global $debut_intertitre, $fin_intertitre, $ligne_horizontale, $url_glossaire_externe;
-	global $debut_italique, $fin_italique;
-	global $debut_gras, $fin_gras;
-	global $class_spip, $class_spip_plus;
-	global $compt_note;
-	global $marqueur_notes;
-	global $ouvre_ref;
-	global $ferme_ref;
-	global $ouvre_note;
-	global $ferme_note;
-	static $notes_vues;
-	static $tester_variables=0;
-
-	// Appeler les fonctions de pre_traitement
-	$letexte = pipeline('pre_propre', $letexte);
-	// old style
-	if (function_exists('avant_propre'))
-		$letexte = avant_propre($letexte);
-
-	// Verifier les variables de personnalisation
-	if (!$tester_variables++) {
-		// class_spip : savoir si on veut class="spip" sur p i strong & li
-		// class_spip_plus : class="spip" sur les ul ol h3 hr quote table...
-		// la difference c'est que des css specifiques existent pour les seconds
-		tester_variable('class_spip', '');  /*' class="spip"'*/
-		tester_variable('class_spip_plus', ' class="spip"');
-		tester_variable('debut_italique', "<i$class_spip>");
-		tester_variable('fin_italique', '</i>');
-		tester_variable('debut_gras', "<strong$class_spip>");
-		tester_variable('fin_gras', '</strong>');
-		tester_variable('debut_intertitre', "\n<h3$class_spip_plus>");
-		tester_variable('fin_intertitre', "</h3>\n");
-		tester_variable('ligne_horizontale', "\n<hr$class_spip_plus />\n");
-		tester_variable('ouvre_ref', '&nbsp;[');
-		tester_variable('ferme_ref', ']');
-		tester_variable('ouvre_note', '[');
-		tester_variable('ferme_note', '] ');
-		tester_variable('url_glossaire_externe',
-			"http://@lang@.wikipedia.org/wiki/");
-		tester_variable('les_notes', '');
-		tester_variable('compt_note', 0);
-		tester_variable('toujours_paragrapher', true);
-	}
-
-	// Gestion de la <poesie>
+function traiter_poesie($letexte)
+{
 	if (preg_match_all(",<(poesie|poetry)>(.*)<\/(poesie|poetry)>,UimsS",
 	$letexte, $regs, PREG_SET_ORDER)) {
 		foreach ($regs as $reg) {
@@ -1184,17 +1266,120 @@ function traiter_raccourcis($letexte) {
 			$letexte = str_replace($reg[0], $lecode, $letexte);
 		}
 	}
+	return $letexte;
+}
+
+// Nettoie un texte, traite les raccourcis spip, la typo, etc.
+// http://doc.spip.org/@traiter_raccourcis
+function traiter_raccourcis($letexte) {
+
+	static $remplace = NULL;
+
+	// Appeler les fonctions de pre_traitement
+	$letexte = pipeline('pre_propre', $letexte);
+	// old style
+	if (function_exists('avant_propre'))
+		$letexte = avant_propre($letexte);
+
+	$letexte = traiter_poesie($letexte);
 
 	// Harmoniser les retours chariot
 	$letexte = preg_replace(",\r\n?,S", "\n", $letexte);
 
-	// Recuperer les para HTML
+	// Recuperer les paragraphes HTML
 	$letexte = preg_replace(",<p[>[:space:]],iS", "\n\n\\0", $letexte);
 	$letexte = preg_replace(",</p[>[:space:]],iS", "\\0\n\n", $letexte);
 
+	list($l, $mes_notes) = traite_raccourci_notes($letexte);
+	$letexte = traiter_raccourci_glossaire($l);
+	$letexte = traiter_raccourci_ancre($letexte);
+	$letexte = traiter_raccourcis_propre($letexte);
+
+	// A present on introduit des attributs class_spip*
+	// Init de leur valeur et connexes au premier appel
+	if (!$remplace) $remplace = traiter_variables_sales();
+
 	//
-	// Notes de bas de page
+	// Tableaux
 	//
+
+	// ne pas oublier les tableaux au debut ou a la fin du texte
+	$letexte = preg_replace(",^\n?[|],S", "\n\n|", $letexte);
+	$letexte = preg_replace(",\n\n+[|],S", "\n\n\n\n|", $letexte);
+	$letexte = preg_replace(",[|](\n\n+|\n?$),S", "|\n\n\n\n", $letexte);
+
+	if (preg_match_all(',[^|](\n[|].*[|]\n)[^|],UmsS', $letexte,
+	$regs, PREG_SET_ORDER))
+	foreach ($regs as $tab) {
+		$letexte = str_replace($tab[1], traiter_tableau($tab[1]), $letexte);
+	}
+
+	$letexte = "\n".trim($letexte);
+
+	// les listes
+	if (strpos($letexte,"\n-*")!==false OR strpos($letexte,"\n-#")!==false)
+		$letexte = traiter_listes($letexte);
+
+	// Proteger les caracteres actifs a l'interieur des tags html
+	$protege = "{}_-";
+	$illegal = "\x1\x2\x3\x4";
+	if (preg_match_all(",</?[a-z!][^<>]*[".preg_quote($protege)."][^<>]*>,imsS",
+	$letexte, $regs, PREG_SET_ORDER)) {
+		foreach ($regs as $reg) {
+			$insert = $reg[0];
+			// hack: on transforme les caracteres a proteger en les remplacant
+			// par des caracteres "illegaux". (cf corriger_caracteres())
+			$insert = strtr($insert, $protege, $illegal);
+			$letexte = str_replace($reg[0], $insert, $letexte);
+		}
+	}
+
+	// autres raccourcis
+	$puce = (strpos($letexte, "\n- ") == false) ? '' : definir_puce();
+	$puce_rac = array("/\n-- */S", "/\n- */S");
+	$puce_long = array("\n<br />&mdash;&nbsp;", "\n<br />$puce&nbsp;");
+
+	$letexte = preg_replace($puce_rac, $puce_long, $letexte);
+	$letexte = preg_replace($remplace[0], $remplace[1], $letexte);
+	$letexte = preg_replace("@^ <br />@S", "", $letexte);
+
+	// Retablir les caracteres proteges
+	$letexte = strtr($letexte, $illegal, $protege);
+
+	// Fermer les paragraphes ; mais ne pas en creer si un seul
+	$letexte = paragrapher($letexte, $GLOBALS['toujours_paragrapher']);
+
+	// Appeler les fonctions de post-traitement
+	$letexte = pipeline('post_propre', $letexte);
+	// old style
+	if (function_exists('apres_propre'))
+		$letexte = apres_propre($letexte);
+
+	if ($mes_notes) traiter_les_notes($mes_notes);
+
+	return $letexte;
+}
+
+//
+// Notes de bas de page
+//
+
+function traite_raccourci_notes($letexte)
+{
+	global $compt_note,  $marqueur_notes, $les_notes;
+	global $ouvre_ref, $ferme_ref, $ouvre_note, $ferme_note; #static ok
+	static $notes_vues = NULL;
+
+	if ($notes_vues === NULL) {
+		$ouvre_ref = tester_variable('ouvre_ref', '&nbsp;[');
+		$ferme_ref = tester_variable('ferme_ref', ']');
+		$ouvre_note = tester_variable('ouvre_note', '[');
+		$ferme_note = tester_variable('ferme_note', '] ');
+		$les_notes = tester_variable('les_notes', '');
+		$compt_note = tester_variable('compt_note', 0);
+		$notes_vues === array();
+	}
+
 	$mes_notes = '';
 	$regexp = ', *\[\[(.*?)\]\],msS';
 	if (preg_match_all($regexp, $letexte, $matches, PREG_SET_ORDER))
@@ -1255,172 +1440,11 @@ function traiter_raccourcis($letexte) {
 		// dans le texte, mettre l'appel de note a la place de la note
 		$pos = strpos($letexte, $note_source);
 		$letexte = substr($letexte, 0, $pos) . $insert
-			. substr($letexte, $pos + strlen($note_source));
+			.  substr($letexte, $pos + strlen($note_source));
 	}
-
-	//
-	// Raccourcis automatiques [?SPIP] vers un glossaire
-	// (on traite ce raccourci en deux temps afin de ne pas appliquer
-	//  la typo sur les URLs, voir raccourcis liens ci-dessous)
-	//
-	if ($url_glossaire_externe) {
-		$regexp = "|\[\?+([^][<>]+)\]|S";
-		if (preg_match_all($regexp, $letexte, $matches, PREG_SET_ORDER))
-		foreach ($matches as $regs) {
-			$terme = trim($regs[1]);
-			$terme_underscore = preg_replace(',\s+,', '_', $terme);
-			// faire sauter l'eventuelle partie "|bulle d'aide" du lien
-			// cf. http://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Conventions_sur_les_titres
-			$terme_underscore = preg_replace(',[|].*,', '', $terme_underscore);
-			if (strstr($url_glossaire_externe,"%s"))
-				$url = str_replace("%s", rawurlencode($terme_underscore),
-					$url_glossaire_externe);
-			else
-				$url = $url_glossaire_externe.$terme_underscore;
-			$url = str_replace("@lang@", $GLOBALS['spip_lang'], $url);
-			$code = '['.$terme.'->?'.$url.']';
-
-			// Eviter les cas particulier genre "[?!?]"
-			if (preg_match(',[a-z],i', $terme))
-				$letexte = str_replace($regs[0], $code, $letexte);
-		}
-	}
-
-
-	//
-	// Raccourcis ancre [#ancre<-]
-	//
-	$regexp = "|\[#?([^][]*)<-\]|S";
-	if (preg_match_all($regexp, $letexte, $matches, PREG_SET_ORDER))
-	foreach ($matches as $regs)
-		$letexte = str_replace($regs[0],
-		'<a name="'.entites_html($regs[1]).'"></a>', $letexte);
-
-	//
-	// Raccourcis liens [xxx->url]
-	// Note : complique car c'est ici qu'on applique typo(),
-	// et en plus on veut pouvoir les passer en pipeline
-	//
-
-	$inserts = array();
-	if (preg_match_all(_RACCOURCI_LIEN, $letexte, $matches, PREG_SET_ORDER)) {
-		$i = 0;
-		foreach ($matches as $regs) {
-			$inserts[++$i] = traiter_raccourci_lien($regs);
-			$letexte = str_replace($regs[0], "@@SPIP_ECHAPPE_LIEN_$i@@",
-				$letexte);
-		}
-	}
-
-	$letexte = typo($letexte, /* echap deja fait, accelerer */ false);
-
-	foreach ($inserts as $i => $insert) {
-		$letexte = str_replace("@@SPIP_ECHAPPE_LIEN_$i@@", $insert, $letexte);
-	}
-
-
-	//
-	// Tableaux
-	//
-
-	// ne pas oublier les tableaux au debut ou a la fin du texte
-	$letexte = preg_replace(",^\n?[|],S", "\n\n|", $letexte);
-	$letexte = preg_replace(",\n\n+[|],S", "\n\n\n\n|", $letexte);
-	$letexte = preg_replace(",[|](\n\n+|\n?$),S", "|\n\n\n\n", $letexte);
-
-	// traiter chaque tableau
-	if (preg_match_all(',[^|](\n[|].*[|]\n)[^|],UmsS', $letexte,
-	$regs, PREG_SET_ORDER))
-	foreach ($regs as $tab) {
-		$letexte = str_replace($tab[1], traiter_tableau($tab[1]), $letexte);
-	}
-
-	//
-	// Ensemble de remplacements implementant le systeme de mise
-	// en forme (paragraphes, raccourcis...)
-	//
-
-	$letexte = "\n".trim($letexte);
-
-	// les listes
-	if (strpos($letexte,"\n-*")!==false OR strpos($letexte,"\n-#")!==false)
-		$letexte = traiter_listes($letexte);
-
-	// Puce
-	if (strpos($letexte, "\n- ") !== false)
-		$puce = definir_puce();
-	else $puce = '';
-
-	// Proteger les caracteres actifs a l'interieur des tags html
-	$protege = "{}_-";
-	$illegal = "\x1\x2\x3\x4";
-	if (preg_match_all(",</?[a-z!][^<>]*[".preg_quote($protege)."][^<>]*>,imsS",
-	$letexte, $regs, PREG_SET_ORDER)) {
-		foreach ($regs as $reg) {
-			$insert = $reg[0];
-			// hack: on transforme les caracteres a proteger en les remplacant
-			// par des caracteres "illegaux". (cf corriger_caracteres())
-			$insert = strtr($insert, $protege, $illegal);
-			$letexte = str_replace($reg[0], $insert, $letexte);
-		}
-	}
-
-	// autres raccourcis
-	$cherche1 = array(
-		/* 0 */ 	"/\n(----+|____+)/S",
-		/* 1 */ 	"/\n-- */S",
-		/* 2 */ 	"/\n- */S",
-		/* 3 */ 	"/\n_ +/S",
-		/* 4 */   "/(^|[^{])[{][{][{]/S",
-		/* 5 */   "/[}][}][}]($|[^}])/S",
-		/* 6 */ 	"/(( *)\n){2,}(<br\s*\/?".">)?/S",
-		/* 7 */ 	"/[{][{]/S",
-		/* 8 */ 	"/[}][}]/S",
-		/* 9 */ 	"/[{]/S",
-		/* 10 */	"/[}]/S",
-		/* 11 */	"/(?:<br\s*\/?".">){2,}/S",
-		/* 12 */	"/<p>\n*(?:<br\s*\/?".">\n*)*/S",
-		/* 13 */	"/<quote>/S",
-		/* 14 */	"/<\/quote>/S",
-		/* 15 */	"/<\/?intro>/S"
-	);
-	$remplace1 = array(
-		/* 0 */ 	"\n\n$ligne_horizontale\n\n",
-		/* 1 */ 	"\n<br />&mdash;&nbsp;",
-		/* 2 */ 	"\n<br />$puce&nbsp;",
-		/* 3 */ 	"\n<br />",
-		/* 4 */ 	"\$1\n\n$debut_intertitre",
-		/* 5 */ 	"$fin_intertitre\n\n\$1",
-		/* 6 */ 	"<p>",
-		/* 7 */ 	$debut_gras,
-		/* 8 */ 	$fin_gras,
-		/* 9 */ 	$debut_italique,
-		/* 10 */	$fin_italique,
-		/* 11 */	"<p>",
-		/* 12 */	"<p>",
-		/* 13 */	"<blockquote$class_spip_plus><p>",
-		/* 14 */	"</blockquote><p>",
-		/* 15 */	""
-	);
-	$letexte = preg_replace($cherche1, $remplace1, $letexte);
-	$letexte = preg_replace("@^ <br />@S", "", $letexte);
-
-	// Retablir les caracteres proteges
-	$letexte = strtr($letexte, $illegal, $protege);
-
-	// Fermer les paragraphes ; mais ne pas en creer si un seul
-	$letexte = paragrapher($letexte, $GLOBALS['toujours_paragrapher']);
-
-	// Appeler les fonctions de post-traitement
-	$letexte = pipeline('post_propre', $letexte);
-	// old style
-	if (function_exists('apres_propre'))
-		$letexte = apres_propre($letexte);
-
-	if ($mes_notes) traiter_les_notes($mes_notes);
-
-	return $letexte;
+	return array($letexte, $mes_notes);
 }
+
 
 // http://doc.spip.org/@traiter_les_notes
 function traiter_les_notes($mes_notes) {
