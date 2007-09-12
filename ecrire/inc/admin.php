@@ -29,7 +29,8 @@ function inc_admin_dist($script, $titre, $comment='', $retour='')
 		spip_log("meta: $script " . join(',', $_POST));
 		ecrire_meta($script, serialize($_POST));
 		ecrire_metas();
-	} elseif  ($script !== 'admin_repair')
+	} 
+	if  ($script !== 'admin_repair')
 		admin_verifie_session($script);
 
 	$base = charger_fonction($script, 'base');
@@ -58,7 +59,7 @@ function inc_admin_dist($script, $titre, $comment='', $retour='')
 function admin_verifie_session($script) {
 
 	include_spip('base/abstract_sql');
-	$pref = sprintf("_%d_",$GLOBALS['auteur_session']['id_auteur']) .
+	$pref = sprintf("_%d_",$GLOBALS['auteur_session']['id_auteur']);
 	$signal = fichier_admin($script, "$script$pref");
 	$row = sql_fetsel('valeur', 'spip_meta', "nom='admin'");
 	if (!$row) {
