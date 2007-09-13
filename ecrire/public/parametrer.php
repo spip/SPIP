@@ -183,6 +183,15 @@ function quete_rubrique($id_article) {
 	return $id_rubrique['id_rubrique'];
 }
 
+# retourne le champ lang d'une table 
+
+function quete_lang($id, $table) {
+	$desc = trouver_table(table_objet($table));
+	if (!$desc OR !isset($desc['field']['lang'])) return '';
+	$lang = sql_fetsel('lang', $desc['table'],
+			array("id_$table=" . intval($id)));
+	return $lang['lang'];
+}
 # retourne le fichier d'un document
 
 // http://doc.spip.org/@quete_fichier

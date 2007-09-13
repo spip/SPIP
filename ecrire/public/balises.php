@@ -630,22 +630,36 @@ function balise_PARAMETRES_FORUM_dist($p) {
 		AND quete_accepter_forum('.$_id_article.') == ""))
 		? "" : // sinon:
 		';
+	// pas de calculs superflus si le site est monolingue
+	$lang = strpos($GLOBALS['meta']['langues_utilisees'], ',');
 
 	switch ($p->type_requete) {
 		case 'articles':
 			$c = '"id_article=".' . champ_sql('id_article', $p);
+			if ($lang) $lang = champ_sql('lang', $p);
 			break;
 		case 'breves':
 			$c = '"id_breve=".' . champ_sql('id_breve', $p);
+			if ($lang) $lang = champ_sql('lang', $p);
 			break;
 		case 'rubriques':
 			$c = '"id_rubrique=".' . champ_sql('id_rubrique', $p);
+			if ($lang) $lang = champ_sql('lang', $p);
 			break;
 		case 'syndication':
-			$c = '"id_syndic=".' . champ_sql('id_syndic', $p);
+		case 'syndic':
+			// passer par la rubrique pour avoir un champ Lang
+			// la table syndic n'en ayant pas
+			$c =  '"id_syndic=".' . champ_sql('id_syndic', $p);
+			if ($lang) $lang = 'quete_lang(' . champ_sql('id_rubrique', $p) . ',"rubrique")';
 			break;
 		case 'forums':
 		default:
+		// ATTENTION mettre 'id_rubrique' avant 'id_syndic':
+		// a l'execution  lang_parametres_forum
+		// y cherchera l'identifiant  donnant la langue
+		// et pour id_syndic c'est id_rubrique car sa table n'en a pas
+		  
 			$liste_champs = array ("id_article","id_breve","id_rubrique","id_syndic","id_forum");
 			$c = '';
 			foreach ($liste_champs as $champ) {
@@ -653,8 +667,12 @@ function balise_PARAMETRES_FORUM_dist($p) {
 				$c .= (($c) ? ".\n" : "") . "((!$x) ? '' : ('&$champ='.$x))";
 			}
 			$c = "substr($c,1)";
+
+			if ($lang) $lang = -1;
 			break;
 	}
+
+	if ($lang) $c = "lang_parametres_forum($c,$lang)";
 
 	// Syntaxe [(#PARAMETRES_FORUM{#SELF})] pour fixer le retour du forum
 	# note : ce bloc qui sert a recuperer des arguments calcules pourrait
