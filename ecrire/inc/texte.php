@@ -1147,7 +1147,7 @@ function traiter_raccourci_glossaire($letexte)
 				$url = str_replace("%s", rawurlencode($_terme),	$glosateur);
 			else $url = $glosateur.$_terme;
 			$url = str_replace("@lang@", $GLOBALS['spip_lang'], $url);
-			$url = '['.$terme.'->?'.$url.']';
+			$url = traiter_raccourci_lien(array('',$terme,'',$url));
 			$letexte = str_replace($tout, $url, $letexte);
 		}
 	}
@@ -1245,6 +1245,7 @@ function traiter_raccourci_lien_atts($texte) {
 		}
 		$texte = $m[1];
 	}
+
 	return array($texte, $bulle, $hlang);
 
 }
@@ -1293,6 +1294,7 @@ function traiter_raccourcis($letexte) {
 	if (function_exists('avant_propre'))
 		$letexte = avant_propre($letexte);
 
+	$letexte = traiter_raccourcis_propre($letexte);
 	$letexte = traiter_poesie($letexte);
 
 	// Harmoniser les retours chariot
@@ -1302,10 +1304,11 @@ function traiter_raccourcis($letexte) {
 	$letexte = preg_replace(",<p[>[:space:]],iS", "\n\n\\0", $letexte);
 	$letexte = preg_replace(",</p[>[:space:]],iS", "\\0\n\n", $letexte);
 
-	list($l, $mes_notes) = traite_raccourci_notes($letexte);
-	$letexte = traiter_raccourci_glossaire($l);
+	$letexte = traiter_raccourci_glossaire($letexte);
 	$letexte = traiter_raccourci_ancre($letexte);
-	$letexte = traiter_raccourcis_propre($letexte);
+
+
+	list($letexte, $mes_notes) = traite_raccourci_notes($letexte);
 
 	// A present on introduit des attributs class_spip*
 	// Init de leur valeur et connexes au premier appel
