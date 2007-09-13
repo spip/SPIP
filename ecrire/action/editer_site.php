@@ -108,8 +108,9 @@ function action_editer_site_dist() {
 
 	if ($resyndiquer) {
 	  // ah si PHP connaisait les fermetures...
-	  // Cette globale est utilisee exclusivement dans la fct suivante.
-		$GLOBALS['genie_syndic_now'] = $id_syndic;
+	  // A la place, une constante utilisee exclusivement
+	  // dans la fct suivante.
+		define('_GENIE_SYNDIC_NOW', $id_syndic);
 		// forcer l'execution immediate de cette tache
 		// (i.e. appeler la fct suivante avec gestion du verrou)
 		cron(0, array('syndic' => -91));
@@ -126,8 +127,8 @@ function action_editer_site_dist() {
 // http://doc.spip.org/@genie_syndic
 function genie_syndic($t) {
 	include_spip('genie/syndic');
-	$t = syndic_a_jour($GLOBALS['genie_syndic_now']);
-	return $t ? 0 : $GLOBALS['genie_syndic_now'];
+	$t = syndic_a_jour(_GENIE_SYNDIC_NOW);
+	return $t ? 0 : _GENIE_SYNDIC_NOW;
 }
 
 // http://doc.spip.org/@insert_syndic
