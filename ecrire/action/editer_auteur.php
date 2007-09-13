@@ -223,8 +223,21 @@ function action_legender_auteur_post($r) {
 		)
 	);
 
-	// ..et mettre a jour les fichiers .htpasswd et .htpasswd-admin
+	// .. mettre a jour les fichiers .htpasswd et .htpasswd-admin
 	ecrire_acces();
+
+	// .. mettre a jour les sessions de cet auteur
+	$sauve = $GLOBALS['auteur_session'];
+	include_spip('inc/session');
+	foreach(preg_files(_DIR_SESSIONS, '/'.$id_auteur.'_.*\.php') as $session) {
+		$GLOBALS['auteur_session'] = array();
+		include $session; # $GLOBALS['auteur_session'] est alors l'auteur cible
+		foreach (array('nom', 'login', 'email', 'statut', 'bio', 'pgp', 'nom_site', 'url_site') AS $var)
+			if (isset($auteur[$var]))
+				$GLOBALS['auteur_session'][$var] = $auteur[$var];
+		ecrire_fichier_session($session, $GLOBALS['auteur_session']);
+	}
+	$GLOBALS['auteur_session'] = $sauve;
 
 	$echec = $echec ? '&echec=' . join('@@@', $echec) : '';
 
