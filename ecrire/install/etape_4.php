@@ -56,7 +56,6 @@ function install_etape_4_dist()
 	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
 
 	echo info_etape(_T('info_derniere_etape'),
-			"<b>"._T('info_code_acces')."</b><br />" .
 			_T('info_utilisation_spip')
 	);
 
