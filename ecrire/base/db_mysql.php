@@ -505,9 +505,11 @@ function spip_release_lock($nom) {
 
 // http://doc.spip.org/@spip_mysql_cite
 function spip_mysql_cite($val, $type) {
-	if ((strpos($type, 'datetime')===0)
+	if (
+/*	(strpos($type, 'datetime')===0)
 	OR (strpos($type, 'TIMESTAMP')===0)
-	OR (strpos($type, 'int')===0)
+	OR
+*/	(strpos($type, 'int')===0)
 	OR (strpos($type, 'bigint')===0))
 	  return $val;
 	else return _q($val);

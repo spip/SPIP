@@ -107,12 +107,8 @@ function action_editer_site_dist() {
 	}
 
 	if ($resyndiquer) {
-	  // ah si PHP connaisait les fermetures...
-	  // Cette globale est utilisee exclusivement dans la fct suivante.
-		$GLOBALS['genie_syndic_now'] = $id_syndic;
-		// forcer l'execution immediate de cette tache
-		// (i.e. appeler la fct suivante avec gestion du verrou)
-		cron(true, array('syndic' => -91));
+		include_spip('inc/syndic');
+		syndic_a_jour($id_syndic);
 	}
 	// Rediriger le navigateur
 	$redirect = parametre_url(urldecode(_request('redirect')),
