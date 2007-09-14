@@ -1327,8 +1327,8 @@ function traiter_raccourcis($letexte) {
 	$letexte = preg_replace(",\r\n?,S", "\n", $letexte);
 
 	// Recuperer les paragraphes HTML
-	$letexte = preg_replace(',<p[>]\s,iS', "\n\n\\0", $letexte);
-	$letexte = preg_replace(',</p[>]\s,iS', "\\0\n\n", $letexte);
+	$letexte = preg_replace(',<p\b,iS', "\n\n\\0", $letexte);
+	$letexte = preg_replace(',</p\b,iS', "\\0\n\n", $letexte);
 
 	$letexte = traiter_raccourci_glossaire($letexte);
 	$letexte = traiter_raccourci_ancre($letexte);
@@ -1427,9 +1427,9 @@ function traite_raccourci_notes($letexte)
 		$num_note = false;
 
 		// note auto ou pas ?
-		if (preg_match(",^<([^>]*)>,", $note_texte, $regs)){
+		if (preg_match(",^<([^>]*)>,", ltrim($note_texte), $regs)){
 			$num_note = $regs[1];
-			$note_texte = str_replace($regs[0], "", $note_texte);
+			$note_texte = substr_replace(ltrim($note_texte), '', 0, strlen($regs[0]));
 		} else {
 			$compt_note++;
 			$num_note = $compt_note;
