@@ -263,7 +263,8 @@ $spip_pipeline = array(
 	'taches_generales_cron' => '',
 	'calculer_rubriques' => '',
 	'autoriser' => '',
-	'notifications' => ''
+	'notifications' => '',
+	'rechercher_liste_des_champs' => '' # inc/recherche; pas stabilise !
 );
 
 # pour activer #INSERT_HEAD sur tous les squelettes, qu'ils aient ou non
