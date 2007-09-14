@@ -474,12 +474,6 @@ function calculer_notes() {
 	return $r;
 }
 
-// Renvoie le titre du "lien hypertexte"
-// http://doc.spip.org/@construire_titre_lien
-function construire_titre_lien($nom,$url) {
-	return typo(supprimer_numero(calculer_url($url, $nom, 'titre')));
-}
-
 // Ajouter "&lang=..." si la langue de base n'est pas celle du site.
 // Si le 2e parametre est "-1", c'est qu'on n'a pas pu
 // determiner la table a la compil, on le fait maintenant.
