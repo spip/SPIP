@@ -62,7 +62,6 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	$descriptif = $row["descriptif"];
 	$nom_site = $row["nom_site"];
 	$url_site = $row["url_site"];
-	$chapo = $row["chapo"];
 	$texte = $row["texte"];
 	$ps = $row["ps"];
 	$date = $row["date"];
@@ -70,12 +69,8 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	$extra = $row["extra"];
 	$id_trad = $row["id_trad"];
 	
-	if (substr($chapo, 0, 1) != '=')
-	  $virtuel ='';
-	else {
-	  $virtuel = chapo_redirige(substr($chapo, 1));
-	  $virtuel = $virtuel[3];
-	}
+	$virtuel = ($row["chapo"][0]!='=') ? '' :
+		chapo_redirige(substr($row["chapo"], 1));
 
 	$statut_rubrique = autoriser('publierdans', 'rubrique', $id_rubrique);
 	$flag_editable = autoriser('modifier', 'article', $id_article);
