@@ -616,6 +616,7 @@ function typer_raccourci ($lien) {
 		$f = 'document';
 	else if (preg_match(',^br..?ve$,S', $f)) $f = 'breve'; # accents :(
 	$match[0] = $f;
+	$match[2] = entites_html($match[2]);
 	return $match;
 }
 
@@ -629,8 +630,8 @@ function typer_raccourci ($lien) {
 
 // http://doc.spip.org/@calculer_url
 function calculer_url ($lien, $texte='', $pour='url') {
-	$lien = vider_url($lien); # 'http://' ou 'mailto:' seuls == ""
-	if ($match = typer_raccourci ($lien)) {
+
+	if ($match = typer_raccourci($lien)) {
 		@list($f,,$id,,$param,,$ancre) = $match;
 		charger_generer_url();
 		$g = 'generer_url_' . $f;
@@ -644,16 +645,20 @@ function calculer_url ($lien, $texte='', $pour='url') {
 				$res = $g($id, $texte, $res);
 				return $res[2];
 			}
-		} else spip_log("raccourci indefini $f");
+		} 
+		spip_log("raccourci indefini $f");
 	}
-  
-	$lien = ltrim($lien);
-	if ($lien[0] == '?') {
-		if ($pour == 'titre') return $texte;
-		$lien = entites_html(substr($lien, 1));
-		return ($pour == 'url') ? $lien :
-			array($lien, 'spip_glossaire', $texte);
-	}
+	return calculer_url_sans_rac ($lien, $texte, $pour);
+}
+
+// cf specif ci-dessus
+
+function calculer_url_sans_rac ($lien, $texte='', $pour='url') {
+	if (preg_match(",^\s*(http:?/?/?|mailto:?)\s*$,iS", $lien))
+		return ($pour != 'tout') ? '' : array('','','','');
+
+	$lien = entites_html(trim($lien));
+
 	// Liens explicites
 	if (!$texte) {
 		$texte = str_replace('"', '', $lien);
@@ -664,8 +669,6 @@ function calculer_url ($lien, $texte='', $pour='url') {
 	} else 	$class = "spip_out";
 
 	if ($pour == 'titre') return $texte;
-
-	$lien = vider_url($lien);
 
 	// petites corrections d'URL
 	if (preg_match(",^www\.[^@]+$,S",$lien))
@@ -1138,8 +1141,6 @@ function traiter_raccourci_ancre($letexte)
 
 //
 // Raccourcis automatiques [?SPIP] vers un glossaire
-// Ils sont ramenes a la forme [X->Y] (raccourcis liens std de SPIP)
-// traitee ensuite pour ne pas appliquer le correcteur typo sur les URLs 
 //
 
 define('_RACCOURCI_GLOSSAIRE', "|\[\?+\s*([^][<>]+)\]|S");
@@ -1151,33 +1152,34 @@ function traiter_raccourci_glossaire($letexte)
 	if ($glosateur === NULL) {
 		$glosateur = tester_variable('url_glossaire_externe',
 					 "http://@lang@.wikipedia.org/wiki/");
-		$subst = strpos($glosateur,"%s") !== 0;
+		$subst = strpos($glosateur,"%s") !== false;
 	}
 
 	if (empty($glosateur) 
 	OR !preg_match_all(_RACCOURCI_GLOSSAIRE, $letexte, $m, PREG_SET_ORDER))
 		return $letexte;
 
+	$glosateur = str_replace("@lang@", $GLOBALS['spip_lang'], $glosateur);
 	foreach ($m as $regs) {
 		list($tout, $terme) = $regs;
 		// Eviter les cas particulier genre "[?!?]"
-		if (preg_match(',^(.*\w\S*)\s*$,', $terme, $regs)) {
-			$terme = $regs[1];
+		if (preg_match(',^(.*\w\S*)\s*$,', $terme, $r)) {
+			$terme = $r[1];
 			$_terme = preg_replace(',\s+,', '_', $terme);
 // faire sauter l'eventuelle partie "|bulle d'aide" du lien
 // cf. http://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Conventions_sur_les_titres
 			$_terme = preg_replace(',[|].*,', '', $_terme);
+
 			if ($subst)
 				$url = str_replace("%s", rawurlencode($_terme),	$glosateur);
-			else $url = $glosateur.$_terme;
-			$url = str_replace("@lang@", $GLOBALS['spip_lang'], $url);
-			$url = traiter_raccourci_lien(array('',$terme,'',$url));
+			else $url = $glosateur. $_terme;
+			list($terme, $bulle, $hlang) = traiter_raccourci_lien_atts($terme);
+			$url = traiter_raccourci_lien_lang($url, 'spip_glossaire', $terme, $hlang, $bulle);
 			$letexte = str_replace($tout, $url, $letexte);
 		}
 	}
 	return $letexte;
 }
-
 
 //
 // Raccourcis liens [xxx->url]
@@ -1221,9 +1223,13 @@ function traiter_raccourci_lien($regs, $connect='') {
 
 	list(,$texte, ,$url) = $regs;
 	list($texte, $bulle, $hlang) = traiter_raccourci_lien_atts($texte);
-	list ($lien, $class, $texte, $lang) = 
-		calculer_url($url, $texte, 'tout');
+	list ($lien, $class, $texte, $lang) =
+	  calculer_url($url, $texte, 'tout');
+	return traiter_raccourci_lien_lang($lien, $class, $texte, $hlang, $bulle, $connect);
+}
 
+function traiter_raccourci_lien_lang($lien, $class, $texte, $hlang, $bulle, $connect='')
+{		
 	// Si l'objet n'est pas de la langue courante, on ajoute hreflang
 	if (!$hlang AND $lang!=$GLOBALS['spip_lang'])
 		$hlang = $lang;
@@ -1278,7 +1284,6 @@ function traiter_raccourci_lien_atts($texte) {
 	}
 
 	return array($texte, $bulle, $hlang);
-
 }
 
 // Fonction pour les champs chapo commencant par =,  redirection qui peut etre:
