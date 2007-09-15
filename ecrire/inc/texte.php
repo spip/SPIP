@@ -1429,9 +1429,10 @@ function traite_raccourci_notes($letexte)
 		$num_note = false;
 
 		// note auto ou pas ?
-		if (preg_match(",^<([^>]*)>,", ltrim($note_texte), $regs)){
-			$num_note = $regs[1];
-			$note_texte = substr_replace(ltrim($note_texte), '', 0, strlen($regs[0]));
+		if (preg_match(",^\s*<([^>]*)>(.*)$,", $note_texte, $r)
+		AND strpos($r[2], '</' . $r[1] .'>') === false) {
+			$num_note = $r[1];
+                        $note_texte = $r[2];
 		} else {
 			$compt_note++;
 			$num_note = $compt_note;
