@@ -921,9 +921,7 @@ function url_de_base() {
 	$myself = preg_replace(',\?.*$,','', $myself);
 
 	# supprimer n sous-repertoires
-	$supprime_preg = '/+';
-	for ($i=0; $i<$GLOBALS['profondeur_url']; $i++)
-		$supprime_preg .= '[^/]+/+';
+	$supprime_preg = '/+' . str_repeat('[^/]+/+', $GLOBALS['profondeur_url']);
 	$url = preg_replace(','.$supprime_preg.'[^/]*$,', '/', $myself);
 	return $url;
 }
@@ -1333,6 +1331,15 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 		// s'il y a un cookie ou PHP_AUTH, initialiser auteur_session
 		verifier_visiteur();
 	}
+
+	// nombre de repertoires depuis la racine
+	if (isset($_SERVER['REQUEST_URI'])
+	AND isset($GLOBALS['meta']['adresse_site']))
+		$GLOBALS['profondeur_url'] =
+			substr_count(reset(explode('?', $_SERVER['REQUEST_URI'])),'/')
+			- substr_count($GLOBALS['meta']['adresse_site'],'/') + 1;
+	else
+		$GLOBALS['profondeur_url'] = _DIR_RESTREINT ? 0 : 1;
 
 	# nombre de pixels maxi pour calcul de la vignette avec gd
 	define('_IMG_GD_MAX_PIXELS', isset($GLOBALS['meta']['max_taille_vignettes'])?$GLOBALS['meta']['max_taille_vignettes']:0); 

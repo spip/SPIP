@@ -30,13 +30,10 @@ define('_DIR_RESTREINT',
 # ou inversement ?
 define('_DIR_RACINE', _DIR_RESTREINT ? '' : '../');
 
-// nombre de repertoires depuis la racine
-$profondeur_url = _DIR_RESTREINT ? 0 : 1;
-
 # le chemin http (relatif) vers les bibliotheques JavaScript
 define('_DIR_JAVASCRIPT', (_DIR_RACINE . 'dist/javascript/'));
 
-	// Icones
+// Icones
 # le chemin http (relatif) vers les images standard
 define('_DIR_IMG_PACK', (_DIR_RACINE . 'dist/images/'));
 # le chemin des vignettes de type de document
