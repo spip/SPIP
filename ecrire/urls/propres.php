@@ -344,9 +344,12 @@ function urls_propres_dist(&$fond, $url) {
 		$contexte[$col_id] = $row['id_objet'];
 	}
 
-	if ($type AND ($adapter_le_fond OR $fond='type_urls')) {
+	if ($type AND ($adapter_le_fond OR $fond=='type_urls')) {
 
-	$fond =  ($type == 'syndic') ?  'site' : $type;
+		$fond =  ($type == 'syndic') ?  'site' : $type;
+	} else if ($fond=='type_urls') {
+		$fond = '404';
+		$contexte['erreur'] = 'type_urls: propres';
 	}
 }
 } // function_exists
