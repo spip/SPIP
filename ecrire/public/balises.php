@@ -392,15 +392,17 @@ function balise_SPIP_CRON_dist ($p) {
 function balise_INTRODUCTION_dist ($p) {
 	$type = $p->type_requete;
 	$_texte = champ_sql('texte', $p);
-	if ($type == 'articles') {
-	  $_chapo = champ_sql('chapo', $p);
-	  $_descriptif =  champ_sql('descriptif', $p);
+	if ($type != 'articles') {
+		$code = $_texte;
 	} else {
-	  $_chapo = "''";
-	  $_descriptif =  "''";
+		$_chapo = champ_sql('chapo', $p);
+		$_descriptif =  champ_sql('descriptif', $p);
+		$code = "($_descriptif ? $_descriptif\n\t" .
+		": (chapo_redirigetil($_chapo) ? ''\n\t\t" .
+		": ($_chapo . \"\n\n\n\" . $_texte)))";
 	}
 	$f = chercher_filtre('introduction');
-	$p->code = $f."('$type', $_texte, $_chapo, $_descriptif)";
+	$p->code = "$f($code, '$type', \$connect)";
 
 	#$p->interdire_scripts = true;
 	return $p;
