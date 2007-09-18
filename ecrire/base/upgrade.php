@@ -118,7 +118,7 @@ function maj_base($version_cible = 0) {
 		$f = charger_fonction($nom, 'maj', true);
 		if ($f) {
 			spip_log("$f repercute les modifications de la version " . ($n/10));
-			$f($version_installee, $version_cible);
+			$f($version_installee, $spip_version);
 		} else spip_log("pas de fonction pour la maj $n $nom");
 		$n++;
 	}
