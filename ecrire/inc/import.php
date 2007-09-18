@@ -375,7 +375,6 @@ function import_table_choix($request)
 	global $IMPORT_tables_noimport;
 	global $tables_principales;
 	global $tables_auxiliaires;
-	global $table_des_tables;
 	global $tables_jointures;
 
 	if (!isset($IMPORT_tables_noimport)) $IMPORT_tables_noimport=array();

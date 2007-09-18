@@ -700,7 +700,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 				$boucles[$id]->sql_serveur = $connect;
 			$show = trouver_table($type, $boucles[$id]);
 			if ($show) {
-				$nom_table = $show['table'];
+				$boucle->from[$type] = $nom_table = $show['table'];
 				$boucles[$id]->id_table = $show['id_table'];
 				$boucles[$id]->primary = $show['key']["PRIMARY KEY"];
 				$boucles[$id]->descr = &$descr;

@@ -20,21 +20,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 // Boucle standard, sans condition rajoutee
 //
-// http://doc.spip.org/@boucle_DEFAUT_dist
+// http://doc.spip.org/@boucle_DEFAUT_dist 
 function boucle_DEFAUT_dist($id_boucle, &$boucles) {
-	global $table_des_tables, $tables_auxiliaires;
-	$boucle = &$boucles[$id_boucle];
-	$type = $boucle->type_requete;
-	;
-	if (isset($table_des_tables[$type]))
-	// les tables principales de spip ont un prefixe et un surnom 
-	  $boucle->from[$table_des_tables[$type]] =  'spip_' . $type ;
-	else if (isset($tables_auxiliaires['spip_' .$type]))
-	// les tables auxiliaires de spip ont un prefixe et pas de surnom
-		$boucle->from[$type] =  'spip_' . $type ;
-	  //	  table hors SPIP
-	else $boucle->from[$type] =  $type;
-
 	return calculer_boucle($id_boucle, $boucles); 
 }
 
