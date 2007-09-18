@@ -412,7 +412,7 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 	return $a . $ancre;
 }
 
-// Prend une URL et lui ajoute/retire une ancre après l'avoir nettoyee
+// Prend une URL et lui ajoute/retire une ancre apres l'avoir nettoyee
 // pour l'ancre on translitere, vire les non alphanum du debut,
 // et on remplace ceux a l'interieur ou au bout par -
 // http://doc.spip.org/@ancre_url
@@ -918,11 +918,11 @@ function url_de_base() {
 	$myself = $http.'://'.$server.$GLOBALS['REQUEST_URI'];
 
 	# supprimer la chaine de GET
-	$myself = preg_replace(',\?.*$,','', $myself);
+	list($myself) = explode('?', $myself);
 
 	# supprimer n sous-repertoires
-	$supprime_preg = '/+' . str_repeat('[^/]+/+', $GLOBALS['profondeur_url']);
-	$url = preg_replace(','.$supprime_preg.'[^/]*$,', '/', $myself);
+	$url = join('/', array_slice(explode('/', $myself), 0, -1-$GLOBALS['profondeur_url'])).'/';
+
 	return $url;
 }
 
