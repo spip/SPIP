@@ -244,12 +244,15 @@ function quete_meta($nom, $serveur) {
 	return $r['valeur'];
 }
 
-// Produit les appels aux fonctions generer_url parametrees par $type_urls
-// demandees par les balise #URL_xxx
-// Si ces balises sont rencontrees dans une boucle de base distante
-// on produit le generer_url std faute de connaitre le $type_urls distant
-// et sous reserve que cette base distante est geree par SPIP.
-// Autrement cette balise est vue comme un champ normal dans cette base.
+// Compilation finale des balise #URL_xxx
+// Si ces balises sont utilisees pour la base locale,
+// Producttion des appels aux fonctions generer_url parametrees par $type_urls
+// Si la base est externe et non geree par SPIP
+// on retourne NULL pour provoquer leur interpretation comme champ SQL normal.
+// Si la base est externe et sous SPIP,
+// on produit l'URL de l'objet si c'est une piece jointe
+// ou sinon l'URL du site local applique sur l'objet externe
+// ce qui permet de le voir a travers les squelettes du site local
 
 // http://doc.spip.org/@generer_generer_url
 function generer_generer_url($type, $p)
@@ -263,13 +266,13 @@ function generer_generer_url($type, $p)
 	if (!$s)
 		return "generer_url_$type($_id)";
 	elseif (!$GLOBALS['connexions'][$s]['spip_connect_version']) {
-		erreur_squelette("#URL_" . strtoupper($type). ' ' . _T('zbug_distant_interdit'));
-		return "";
+		return NULL;
 	} else {
-		$u = "quete_meta('adresse_site', '$s')";
+		$s = addslashes($s);
 		if ($type != 'document')
-			return "$u . '?page=$type&amp;id_$type=' . " . $_id;
+			return "'./?page=$type&amp;id_$type=' . $_id . '&connect=$s'";
 		else {
+			$u = "quete_meta('adresse_site', '$s')";
 			$f = "$_id . '&amp;file=' . quete_fichier($_id,'$s')";
 			return "$u . '?action=acceder_document&amp;arg=' .$f";
 		}
