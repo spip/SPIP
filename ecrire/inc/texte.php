@@ -1287,6 +1287,7 @@ function chapo_redirige($chapo, $url=false)
 	return !$url ? $m[3] : calculer_url($m[3]);
 }
 
+// http://doc.spip.org/@chapo_redirigetil
 function chapo_redirigetil($chapo) { return $chapo[0] == '=';}
 
 // http://doc.spip.org/@traiter_poesie

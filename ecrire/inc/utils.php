@@ -560,6 +560,7 @@ function table_objet($type) {
 	return isset($surnoms[$type]) ? $surnoms[$type] : $type."s";
 }
 
+// http://doc.spip.org/@table_objet_sql
 function table_objet_sql($type) {
 	return 'spip_' . table_objet($type);
 }

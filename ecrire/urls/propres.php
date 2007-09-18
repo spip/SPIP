@@ -75,6 +75,7 @@ function retirer_marqueurs_url_propre($url_propre) {
 // precedent, un tableau indiquant le titre de l'objet, son type, son id,
 // et doit donner en retour une chaine d'url, sans se soucier de la
 // duplication eventuelle, qui sera geree apres
+// http://doc.spip.org/@creer_chaine_url
 function creer_chaine_url($x) {
 	// NB: ici url_old ne sert pas, mais un plugin qui ajouterait une date
 	// pourrait l'utiliser pour juste ajouter la 
@@ -253,6 +254,7 @@ function _generer_url_propre($type, $id_objet) {
 	return $set['url'];
 }
 
+// http://doc.spip.org/@_generer_url_complete
 function _generer_url_complete($type, $id, $args='', $ancre='') {
 
 	// Mode compatibilite pour conserver la distinction -Rubrique-

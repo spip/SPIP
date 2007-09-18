@@ -20,7 +20,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 // Boucle standard, sans condition rajoutee
 //
-// http://doc.spip.org/@boucle_DEFAUT_dist 
+// http://doc.spip.org/@boucle_DEFAUT_dist
 function boucle_DEFAUT_dist($id_boucle, &$boucles) {
 	return calculer_boucle($id_boucle, $boucles); 
 }
