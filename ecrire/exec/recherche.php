@@ -45,7 +45,7 @@ function exec_recherche_dist() {
 		if (preg_match(',^[0-9]+$,', $recherche)
 		AND $id = intval($recherche))
 		foreach ($tables as $table => $x) {
-			$s = spip_query($q = "SELECT ".id_table_objet($table)." FROM spip_".table_objet($table)." WHERE ".id_table_objet($table)."="._q($id));
+			$s = spip_query("SELECT ".id_table_objet($table)." FROM " . table_objet_sql($table)." WHERE ".id_table_objet($table)."="._q($id));
 			if ($t = sql_fetch($s)
 			AND autoriser('voir', $table, $id)
 			AND !isset($results[$table][$id]))
@@ -110,7 +110,7 @@ function exec_recherche_dist() {
 			echo afficher_objets($table,$titre,
 				array(
 					// gasp: la requete spip_articles exige AS articles...
-					'FROM' => 'spip_'.table_objet($table).' AS '.$table.'s',
+					'FROM' => table_objet_sql($table).' AS '.$table.'s',
 					'WHERE' => calcul_mysql_in(
 						$table.'s.'.id_table_objet($table),
 						array_keys($r)

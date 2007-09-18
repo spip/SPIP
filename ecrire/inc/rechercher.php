@@ -177,7 +177,7 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array()) {
 			}
 		}
 		$requete['WHERE'][] = join(" OR ", $a);
-		$requete['FROM'][] = 'spip_'.table_objet($table).' AS t';
+		$requete['FROM'][] = table_objet_sql($table).' AS t';
 
 		$s = sql_select (
 			$requete['SELECT'], $requete['FROM'], $requete['WHERE'],

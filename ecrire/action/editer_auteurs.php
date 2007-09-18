@@ -72,7 +72,7 @@ function supprimer_auteur_et_rediriger($type, $id, $id_auteur, $redirect)
 			array(
 				'args' => array(
 					'operation' => 'supprimer_auteur',
-					'table' => 'spip_'.table_objet($type),
+					'table' => table_objet_sql($type),
 					'id_objet' => $id
 				),
 				'data' => null
@@ -97,7 +97,7 @@ function ajouter_auteur_et_rediriger($type, $id, $id_auteur, $redirect)
 			array(
 				'args' => array(
 					'operation' => 'ajouter_auteur',
-					'table' => 'spip_'.table_objet($type),
+					'table' => table_objet_sql($type),
 					'id_objet' => $id
 				),
 				'data' => null
