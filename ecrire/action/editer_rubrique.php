@@ -87,7 +87,7 @@ function revisions_rubriques($id_rubrique, $c=false) {
 				if ($s['statut'] != 'new') {
 					spip_log("deplacement de $id_rubrique vers $id_parent refuse a " . $GLOBALS['auteur_session']['id_auteur'] . ' '.  $GLOBALS['auteur_session']['statut']);
 				}
-			} elseif (editer_rubrique_breves($id_rubrique, $id_parent)) {
+			} elseif (editer_rubrique_breves($id_rubrique, $id_parent, $c)) {
 				$champs['id_parent'] = $id_parent;
 				$statut_ancien = $s['statut'];
 			}
@@ -146,7 +146,7 @@ function revisions_rubriques($id_rubrique, $c=false) {
 // breves en question
 
 // http://doc.spip.org/@editer_rubrique_breves
-function editer_rubrique_breves($id_rubrique, $id_parent)
+function editer_rubrique_breves($id_rubrique, $id_parent, $c=false)
 {
 	$t = sql_countsel('spip_breves', "id_rubrique=$id_rubrique");
 	if (!$t) return true;
