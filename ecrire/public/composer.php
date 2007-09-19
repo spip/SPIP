@@ -203,7 +203,7 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 			$zone = substr($zone, $deb + 7);
 		$intro .= $zone;
 	}
-	$texte = nettoyer_raccourcis_typo($intro ? $intro : $texte);
+	$texte = nettoyer_raccourcis_typo($intro ? $intro : $texte, $connect);
 
 	// On coupe
 	$texte = couper($texte, $longueur, _INTRODUCTION_SUITE);
