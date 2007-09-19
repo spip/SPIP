@@ -180,17 +180,22 @@ function calcule_logo($type, $onoff, $id, $id_rubrique, $flag_fichier) {
 //
 // fonction standard de calcul de la balise #INTRODUCTION
 // on peut la surcharger en definissant dans mes_fonctions :
-// function introduction ...
+// function filtre_introduction()
 //
 @define('_INTRODUCTION_SUITE', '&nbsp;(...)');
 
 // http://doc.spip.org/@filtre_introduction_dist
-function filtre_introduction_dist($texte, $type, $connect) {
+function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
+	// Si un descriptif est envoye, on l'utilise directement
+	if (strlen($descriptif))
+		return $descriptif;
 
-// prendre <intro>...</intro> sinon couper a la longueur demandee
-  
-	$texte = extraire_multi(preg_replace(",(</?)intro>,i", "\\1intro>", $texte)); // minuscules
+	// Prendre un extrait dans la bonne langue
+	$texte = extraire_multi($texte);
+
+	// De preference ce qui est marque <intro>...</intro>
 	$intro = '';
+	$texte = preg_replace(",(</?)intro>,i", "\\1intro>", $texte); // minuscules
 	while ($fin = strpos($texte, "</intro>")) {
 		$zone = substr($texte, 0, $fin);
 		$texte = substr($texte, $fin + strlen("</intro>"));
@@ -199,12 +204,12 @@ function filtre_introduction_dist($texte, $type, $connect) {
 		$intro .= $zone;
 	}
 	$texte = nettoyer_raccourcis_typo($intro ? $intro : $texte);
-	$long =  $type=='articles' ? 600 : 300;
 
-	// il faudrait optimiser un peu le traitement des raccourcis
-	// (car traiter_raccourcis ne fait pas que ce qu'elle dit)
-	return PtoBR(traiter_raccourcis(preg_replace(',([|]\s*)+,S', '; ', 
-		couper($texte, $long, _INTRODUCTION_SUITE))));
+	// On coupe
+	$texte = couper($texte, $longueur, _INTRODUCTION_SUITE);
+
+	// on nettoie un peu car ce sera traite par traiter_raccourcis()
+	return preg_replace(',([|]\s*)+,S', '; ', $texte);
 }
 
 //

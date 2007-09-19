@@ -387,22 +387,45 @@ function balise_SPIP_CRON_dist ($p) {
 
 
 // #INTRODUCTION
+// #INTRODUCTION{longueur}
 // http://www.spip.net/@introduction
 // http://doc.spip.org/@balise_INTRODUCTION_dist
-function balise_INTRODUCTION_dist ($p) {
+function balise_INTRODUCTION_dist($p) {
+
 	$type = $p->type_requete;
+
 	$_texte = champ_sql('texte', $p);
-	if ($type != 'articles') {
-		$code = $_texte;
-	} else {
+	$_descriptif = "''";
+
+	if ($type == 'articles') {
 		$_chapo = champ_sql('chapo', $p);
 		$_descriptif =  champ_sql('descriptif', $p);
-		$code = "($_descriptif ? $_descriptif\n\t" .
-		": (chapo_redirigetil($_chapo) ? ''\n\t\t" .
-		": ($_chapo . \"\n\n\n\" . $_texte)))";
+		$_texte = "(strlen($_descriptif) OR chapo_redirigetil($_chapo))
+		? ''
+		: $_chapo . \"\\n\\n\" . $_texte";
 	}
+
+	// longueur en parametre, ou valeur par defaut
+	if (($v = interprete_argument_balise(1,$p))!==NULL) {
+		$longueur = 'intval('.$v.')';
+	} else {
+		switch ($type) {
+			case 'articles':
+				$longueur = '500';
+				break;
+			case 'breves':
+				$longueur = '300';
+				break;
+			case 'forums':
+			case 'rubriques':
+			default:
+				$longueur = '600';
+				break;
+		}
+	}
+
 	$f = chercher_filtre('introduction');
-	$p->code = "$f($code, '$type', \$connect)";
+	$p->code = "$f($_descriptif, $_texte, $longueur, \$connect)";
 
 	#$p->interdire_scripts = true;
 	return $p;

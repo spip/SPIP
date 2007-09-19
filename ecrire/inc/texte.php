@@ -337,7 +337,7 @@ function nettoyer_raccourcis_typo($texte, $connect=''){
 
 // http://doc.spip.org/@couper
 function couper($texte, $taille=50, $suite = '&nbsp;(...)') {
-	if (!strlen($texte)) return '';
+	if (!strlen($texte) OR $taille <= 0) return '';
 	$offset = 400 + 2*$taille;
 	if (	$offset<strlen($texte)
 			&& ($p_tag_ouvrant = strpos($texte,'<',$offset))!==NULL){
