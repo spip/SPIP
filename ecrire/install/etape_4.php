@@ -109,7 +109,6 @@ function install_etape_4_dist()
 	spip_unlink($htpasswd);
 	spip_unlink($htpasswd."-admin");
 	ecrire_acces();
-	ecrire_metas();
 
 	if (!@rename(_FILE_CHMOD_INS . _FILE_TMP . '.php',
 		    _DIR_ETC . 'chmod.php')) {
