@@ -386,7 +386,11 @@ function maj_v019_dist($version_installee, $version_cible)
 				." WHERE id_type="._q($t['id_type']));
 		}
 		spip_query("ALTER TABLE spip_documents DROP INDEX id_type, DROP id_type");
-		spip_query("ALTER TABLE spip_types_documents DROP INDEX id_type, DROP id_type");
+		## supprimer l'autoincrement avant de supprimer la PRIMARY KEY
+		spip_query("ALTER TABLE `spip_types_documents` CHANGE `id_type` `id_type` BIGINT( 21 ) NOT NULL "); 
+		spip_query("ALTER TABLE spip_types_documents DROP PRIMARY KEY");
+
+		spip_query("ALTER TABLE spip_types_documents DROP id_type");
 
 		## recreer la PRIMARY KEY sur spip_types_documents.extension
 		spip_query("ALTER TABLE spip_types_documents ADD PRIMARY KEY (extension)");
@@ -487,6 +491,17 @@ function maj_v019_dist($version_installee, $version_cible)
 	  maj_v019_55();
 	  maj_version('1.955');
 	}
+	if (upgrade_vers(1.956, $version_installee, $version_cible)) {
+	  maj_v019_56();
+	  maj_version('1.956');
+	}
+	
+	
+}
+
+function maj_v019_38()
+{
+	sql_alter("TABLE spip_urls CHANGE maj date DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL");
 }
 
 function maj_v019_45()
@@ -713,6 +728,19 @@ function maj_v019_54()
 function maj_v019_55()
 {
 	sql_alter("TABLE spip_urls CHANGE maj date DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL");
+}
+
+function maj_v019_56()
+{
+	## repasser la fin de la mise a jour vers 1.938 qui contenait une erreur'
+	## supprimer l'autoincrement avant de supprimer la PRIMARY KEY
+	spip_query("ALTER TABLE `spip_types_documents` CHANGE `id_type` `id_type` BIGINT( 21 ) NOT NULL "); 
+	spip_query("ALTER TABLE spip_types_documents DROP PRIMARY KEY");
+
+	spip_query("ALTER TABLE spip_types_documents DROP id_type");
+
+	## recreer la PRIMARY KEY sur spip_types_documents.extension
+	spip_query("ALTER TABLE spip_types_documents ADD PRIMARY KEY (extension)");
 }
 
 ?>
