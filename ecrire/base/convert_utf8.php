@@ -102,6 +102,7 @@ function convert_table_utf8($f, $table, $champ)
 		$query = array();
 		$query_no_convert = '';
 		$query_extra = '';
+		$charset_source='AUTO';
 		foreach ($t as $c => $v) {
 			if ($c == $champ) {
 				preg_match(',^<CONVERT (.*?)>,', $v, $reg);
@@ -114,7 +115,7 @@ function convert_table_utf8($f, $table, $champ)
 					// traitement special car donnees serializees
 					if ($c == 'extra') {
 						$query_no_convert .= ", $c="._q($v);
-						$query_extra = convert_extra($v);
+						$query_extra = convert_extra($v, $charset_source);
 					} else
 						$query[] = "$c=" . _q($v);
 				} else
@@ -149,12 +150,12 @@ function convert_table_utf8($f, $table, $champ)
 
 // stocker le nouvel extra
 // http://doc.spip.org/@convert_extra
-function convert_extra($v) {
+function convert_extra($v, $charset_source) {
 	if ($extra = @unserialize($v)) {
 		foreach ($extra as $key=>$val)
 			$extra[$key] = unicode_to_utf_8(
 			charset2unicode($val, $charset_source));
-			return ", extra="._q(serialize($extra));
+		return ", extra="._q(serialize($extra));
 	}
 }
 ?>
