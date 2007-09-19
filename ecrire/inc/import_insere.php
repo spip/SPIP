@@ -53,7 +53,7 @@ function insere_1bis_init($request) {
 	unset($t[array_search('spip_auteurs', $t)]);
 	// ni celle-ci, les qui est liee implicitement a la precedente
 	unset($t[array_search('spip_messages', $t)]);
-	// et pour celles-ci restent à programmer les regles
+	// et pour celles-ci restent ï¿½ programmer les regles
 	unset($t[array_search('spip_forum', $t)]);
 	unset($t[array_search('spip_syndic', $t)]);
 	unset($t[array_search('spip_signatures', $t)]);
@@ -252,7 +252,7 @@ function importe_raccourci($v)
 				$g = importe_translate_maj($k, $id);
 				if ($g != $id) {
 
-				  $rac = '[' . $regs[1] . '->' . $reg[2] . $objet . $g . $params . $ancre .']';
+				  $rac = '[' . $regs[1] . '->' . $regs[2] . $objet . $g . $params . $ancre .']';
 				  $v = str_replace($regs[0], $rac, $v);
 				}
 			}
