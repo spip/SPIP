@@ -35,8 +35,8 @@ function maj_version ($version, $test = true) {
 			ecrire_meta('version_installee', $version,'non');
 		else {
 			// on le fait manuellement, car ecrire_meta utilise le champs impt qui est absent sur les vieilles versions
-			$GLOBALS['meta'][$nom] = $valeur;
-			spip_query("UPDATE spip_meta SET valeur=" . _q($valeur) ."$r WHERE nom=" . _q($nom) );
+			$GLOBALS['meta']['version_installee'] = $version;
+			spip_query("UPDATE spip_meta SET valeur=" . _q($version) ."$r WHERE nom=" . _q('version_installee') );
 		}
 		ecrire_metas();
 		spip_log("mise a jour de la base en $version");
@@ -58,8 +58,8 @@ function convertir_un_champ_blob_en_text($table,$champ,$type){
 	$res = spip_query("SHOW FULL COLUMNS FROM $table LIKE '$champ'");
 	if ($row = sql_fetch($res)){
 		if (strtolower($row['Type'])!=strtolower($type)) {
-			$default = $row2['Default']?(" DEFAULT "._q($row2['Default'])):"";
-			$notnull = ($row2['Null']=='YES')?"":" NOT NULL";
+			$default = $row['Default']?(" DEFAULT "._q($row['Default'])):"";
+			$notnull = ($row['Null']=='YES')?"":" NOT NULL";
 			$q = "ALTER TABLE $table CHANGE $champ $champ $type $default $notnull";
 			spip_log($q);
 			spip_query($q);
