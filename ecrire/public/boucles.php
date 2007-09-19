@@ -42,7 +42,6 @@ function boucle_BOUCLE_dist($id_boucle, &$boucles) {
 function boucle_ARTICLES_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
-	$boucle->from[$id_table] =  "spip_articles";
 	$mstatut = $id_table .'.statut';
 
 	// Restreindre aux elements publies
@@ -64,7 +63,6 @@ function boucle_ARTICLES_dist($id_boucle, &$boucles) {
 function boucle_AUTEURS_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
-	$boucle->from[$id_table] =  "spip_auteurs";
 	$mstatut = $id_table .'.statut';
 
 	// Restreindre aux elements publies
@@ -94,7 +92,6 @@ function boucle_AUTEURS_dist($id_boucle, &$boucles) {
 function boucle_BREVES_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
-	$boucle->from[$id_table] =  "spip_breves";
 	$mstatut = $id_table .'.statut';
 
 	// Restreindre aux elements publies
@@ -116,9 +113,7 @@ function boucle_BREVES_dist($id_boucle, &$boucles) {
 function boucle_FORUMS_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
-	$boucle->from[$id_table] =  "spip_forum";
 	$mstatut = $id_table .'.statut';
-
 	// Par defaut, selectionner uniquement les forums sans mere
 	// Les criteres {tout} et {plat} inversent ce choix
 	if (!isset($boucle->modificateur['tout']) AND !isset($boucle->modificateur['plat'])) {
@@ -145,8 +140,6 @@ function boucle_SIGNATURES_dist($id_boucle, &$boucles) {
 	$id_table = $boucle->id_table;
 	$mstatut = $id_table .'.statut';
 
-	$boucle->from[$id_table] =  "spip_signatures";
-
 	// Restreindre aux elements publies
 	if (!$boucle->modificateur['criteres']['statut']) {
 		$boucle->where[]= array("'='", "'$mstatut'", "'\\'publie\\''");
@@ -162,7 +155,6 @@ function boucle_SIGNATURES_dist($id_boucle, &$boucles) {
 function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
-	$boucle->from[$id_table] =  "spip_documents";
 
 	// on ne veut pas des fichiers de taille nulle,
 	// sauf s'ils sont distants (taille inconnue)
@@ -220,7 +212,6 @@ function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 function boucle_RUBRIQUES_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
-	$boucle->from[$id_table] =  "spip_rubriques";
 	$mstatut = $id_table .'.statut';
 
 	// Restreindre aux elements publies
@@ -271,7 +262,6 @@ function boucle_HIERARCHIE_dist($id_boucle, &$boucles) {
 function boucle_SYNDICATION_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
-	$boucle->from[$id_table] =  "spip_syndic";
 	$mstatut = $id_table .'.statut';
 
 	// Restreindre aux elements publies
@@ -292,7 +282,6 @@ function boucle_SYNDICATION_dist($id_boucle, &$boucles) {
 function boucle_SYNDIC_ARTICLES_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
-	$boucle->from[$id_table] =  "spip_syndic_articles" ;
 	$mstatut = $id_table .'.statut';
 
 	// Restreindre aux elements publies, sauf critere contraire
