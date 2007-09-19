@@ -21,7 +21,7 @@ function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
 		$nom = substr($nom,$n);
 	} else 	if (strncmp(_DIR_IMG_PACK, $nom,$n=strlen(_DIR_IMG_PACK))==0) {
 		$nom = substr($nom,$n);
-	} else if (strncmp(_DIR_IMG_ICONE_DIST, $nom,$nstrlen(_DIR_IMG_ICONES_DIST))==0) {
+	} else if (strncmp(_DIR_IMG_ICONE_DIST, $nom,$n=strlen(_DIR_IMG_ICONES_DIST))==0) {
 		$nom = substr($nom,$n);
 	}
 	$pos = strrpos($nom, "/");
@@ -630,7 +630,7 @@ function image_passe_partout($img,$taille_x = -1, $taille_y = -1,$force = false,
 	if ($taille_x == -1)
 		$taille_x = isset($GLOBALS['meta']['taille_preview'])?$GLOBALS['meta']['taille_preview']:150;
 	if ($taille_y == -1)
-		$taille_y = $taille;
+		$taille_y = $taille_x;
 
 	if ($taille_x == 0 AND $taille_y > 0)
 		$taille_x = 1; # {0,300} -> c'est 300 qui compte
@@ -2042,7 +2042,8 @@ function image_aplatir($im, $format='jpg', $coul='000000', $qualite=NULL)
 		$color_t = ImageColorAllocate( $im_, $dr, $dv, $db);
 		imagefill ($im_, 0, 0, $color_t);
 
-		$dist = abs($trait);
+		//??
+		//$dist = abs($trait);
 		for ($x = 0; $x < $x_i; $x++) {
 			for ($y=0; $y < $y_i; $y++) {
 			
@@ -2489,7 +2490,7 @@ function produire_image_typo() {
 		$grey2 = imagecolorallocatealpha($im, hexdec("0x{".substr($couleur, 0,2)."}"), hexdec("0x{".substr($couleur, 2,2)."}"), hexdec("0x{".substr($couleur, 4,2)."}"), 127);
 		ImageFilledRectangle ($im,0,0,$largeur+(2*$padding),$hauteur+5+(2*$padding),$grey2);
 		
-		// Le texte ˆ dessiner
+		// Le texte ï¿½ dessiner
 		// Remplacez le chemin par votre propre chemin de police
 		//global $text;
 				
@@ -2497,7 +2498,7 @@ function produire_image_typo() {
 		
 		
 		// Utiliser imagepng() donnera un texte plus claire,
-		// comparŽ ˆ l'utilisation de la fonction imagejpeg()
+		// comparï¿½ ï¿½ l'utilisation de la fonction imagejpeg()
 		imagepng($im, $fichier);
 		imagedestroy($im);
 		
