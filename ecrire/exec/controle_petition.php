@@ -18,10 +18,17 @@ function exec_controle_petition_dist()
 	include_spip('inc/presentation');
 
 	$id_article = intval(_request('id_article'));
+	$titre =' ';
+	$statut='new';
 	if ($id_article) {
-		$titre = sql_fetch(spip_query("SELECT titre FROM spip_articles WHERE id_article=$id_article"));
-		if (!$titre) $id_article = 0; else $titre = $titre['titre'];
-	} else $titre =' ';
+		if ($row = sql_fetch(spip_query("SELECT titre,statut FROM spip_articles WHERE id_article=$id_article")));
+		if (!$row)
+			$id_article = 0;
+		else {
+			$titre = $row['titre'];
+			$statut = $row['statut'];	
+		}
+	}
 
 	if (!(
 		autoriser('modererpetition')
