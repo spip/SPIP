@@ -164,10 +164,9 @@ function fin_admin($action) {
 	$signal = dir_admin() . fichier_admin($action);
 	@rmdir($signal); // par precaution
 	spip_unlink($signal);
-	spip_unlink(_FILE_META);
 	effacer_meta($action);
 	effacer_meta('admin');
-	ecrire_metas();
+	spip_unlink(_FILE_META);
 }
 
 // http://doc.spip.org/@copy_request
