@@ -54,6 +54,7 @@ function inc_afficher_contenu_objet_dist($type, $id,$row = NULL){
 	include_spip('public/interfaces');
 	// afficher chaque champ
 	// lui appliquer le traitement public
+	$contenu_objet = '';
 	foreach($champs_libelles as $champ=>$libelle) {
 		if ($champ!='notes') {
 			$valeur = $row[$champ];
@@ -130,9 +131,9 @@ function afficher_objet_champs_libelles($type,$table,$id, $row){
 	);
 
 	// gerer les champs desactives sur option
-	foreach(array_keys($liste) as $champ) {
-		if (isset($GLOBALS['meta']["$table_$champ"])
-			AND $GLOBALS['meta']["articles_$champ"]=='non'
+	foreach($liste as $champ => $x) {
+		if (isset($GLOBALS['meta'][$x = ($table . '_' . $champ)])
+			AND $GLOBALS['meta'][$x]=='non'
 			AND (!isset($row[$champ]) OR !strlen($row[$champ]))) {
 				unset($liste[$champ]);
 			}
