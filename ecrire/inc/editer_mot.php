@@ -188,9 +188,12 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 			if (autoriser('modifier', 'groupemots', $id_groupe))
 				$type_mot = "<a href='" . generer_url_ecrire("mots_type","id_groupe=$id_groupe") . "'>$type_mot</a>";
 
-			$flag_groupe = ($flag_editable
-			AND editer_mot_droits('id_groupe', "id_groupe = $id_groupe"));	
-
+			if (!$flag_editable)
+				$flag_groupe = false;
+			else {
+			  $flag_groupe = sql_fetch(editer_mot_droits('COUNT(*) AS n', "id_groupe = $id_groupe"));
+			  $flag_groupe = $flag_groupe['n'];
+			}
 			// Changer
 			if ($unseul == "oui" AND $flag_groupe) {
 				$vals[]= formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_id, $objet, $id_objet);
@@ -273,7 +276,8 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 	$cond_id_groupes_vus = "0";
 	if ($id_groupes_vus) $cond_id_groupes_vus = join(",",$id_groupes_vus);
 	
-	$nb_groupes = spip_num_rows(editer_mot_droits('*', "$table = 'oui' AND obligatoire = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus)"));
+	$nb_groupes = sql_fetch(editer_mot_droits('count(*) AS n', "$table = 'oui' AND obligatoire = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus)"));
+	$nb_groupes = $nb_groupes['n'];
 
 	$res = debut_block_depliable($visible OR ($nb_groupes > 0),"lesmots");
 	if ($nombre_mots_associes > 3) {
