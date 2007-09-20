@@ -99,6 +99,7 @@ function exec_naviguer_dist()
 	  fin_page();
 }
 
+// http://doc.spip.org/@naviguer_droite
 function naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $n_forums, $editer_mot, $flag_editable, $boucles, $extra)
 {
 	global $spip_lang_right, $connect_toutes_rubriques;

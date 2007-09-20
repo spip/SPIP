@@ -146,6 +146,7 @@ function sql_replace($table, $values, $desc=array(), $serveur='')
 	return $f($table, $values, $desc, $serveur);
 }
 
+// http://doc.spip.org/@sql_showbase
 function sql_showbase($spip=true, $serveur='')
 {
 	if ($spip){

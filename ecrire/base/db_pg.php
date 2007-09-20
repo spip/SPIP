@@ -572,6 +572,7 @@ function spip_pg_errno() {
 	return $s ? 1 : 0;
 }
 
+// http://doc.spip.org/@spip_pg_showbase
 function spip_pg_showbase($match, $serveur='')
 {
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
