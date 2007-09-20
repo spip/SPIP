@@ -53,7 +53,7 @@ function insere_1bis_init($request) {
 	unset($t[array_search('spip_auteurs', $t)]);
 	// ni celle-ci, les qui est liee implicitement a la precedente
 	unset($t[array_search('spip_messages', $t)]);
-	// et pour celles-ci restent � programmer les regles
+	// et pour celles-ci restent a programmer les regles
 	unset($t[array_search('spip_forum', $t)]);
 	unset($t[array_search('spip_syndic', $t)]);
 	unset($t[array_search('spip_signatures', $t)]);
