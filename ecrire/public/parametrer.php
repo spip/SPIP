@@ -92,18 +92,14 @@ function quete_rubrique_fond($contexte) {
 
 	if (isset($contexte['id_rubrique'])) {
 		$id = intval($contexte['id_rubrique']);
-		$row = sql_fetsel(array('lang'),
-					    array('spip_rubriques'),
-					    array("id_rubrique=$id"));
+		$row = sql_fetsel('lang', 'spip_rubriques',"id_rubrique=$id");
 		$lang = isset($row['lang']) ? $row['lang'] : '';
 		return array ($id, $lang);
 	}
 
 	if (isset($contexte['id_breve'])) {
 		$id = intval($contexte['id_breve']);
-		$row = sql_fetsel(array('id_rubrique', 'lang'),
-			array('spip_breves'), 
-			array("id_breve=$id"));
+		$row = sql_fetsel('id_rubrique, lang', 'spip_breves', "id_breve=$id");
 		$id_rubrique_fond = $row['id_rubrique'];
 		$lang = isset($row['lang']) ? $row['lang'] : '';
 		return array($id_rubrique_fond, $lang);
@@ -111,22 +107,16 @@ function quete_rubrique_fond($contexte) {
 
 	if (isset($contexte['id_syndic'])) {
 		$id = intval($contexte['id_syndic']);
-		$row = sql_fetsel(array('id_rubrique'),
-			array('spip_syndic'),
-			array("id_syndic=$id"));
+		$row = sql_fetsel('id_rubrique', 'spip_syndic', "id_syndic=$id");
 		$id_rubrique_fond = $row['id_rubrique'];
-		$row = sql_fetsel(array('lang'),
-			array('spip_rubriques'),
-			array("id_rubrique='$id_rubrique_fond'"));
+		$row = sql_fetsel('lang', 'spip_rubriques', "id_rubrique=$id_rubrique_fond");
 		$lang = isset($row['lang']) ? $row['lang'] : '';
 		return array($id_rubrique_fond, $lang);
 	}
 
 	if (isset($contexte['id_article'])) {
 		$id = intval($contexte['id_article']);
-		$row = sql_fetsel(array('id_rubrique', 'lang'),
-			array('spip_articles'),
-			array("id_article=$id"));
+		$row = sql_fetsel('id_rubrique, lang', 'spip_articles', "id_article=$id");
 		$id_rubrique_fond = $row['id_rubrique'];
 		$lang = isset($row['lang']) ? $row['lang'] : '';
 		return array($id_rubrique_fond, $lang);
@@ -137,10 +127,7 @@ function quete_rubrique_fond($contexte) {
 
 // http://doc.spip.org/@quete_chapo
 function quete_chapo($id_article) {
-	$chapo= sql_fetsel(array('chapo'),
-		array('spip_articles'),
-		array("id_article=".intval($id_article),
-		"statut='publie'"));
+	$chapo= sql_fetsel('chapo', 'spip_articles', array("id_article=".intval($id_article), "statut='publie'"));
 	return $chapo['chapo'];
 }
 
@@ -151,9 +138,7 @@ function quete_parent($id_rubrique) {
 	if (!$id_rubrique = intval($id_rubrique))
 		return 0;
 
-	$id_parent = sql_fetsel(array('id_parent'),
-		array('spip_rubriques'), 
-		array("id_rubrique=" . $id_rubrique));
+	$id_parent = sql_fetsel('id_parent','spip_rubriques',"id_rubrique=" . $id_rubrique);
 
 	if ($id_parent['id_parent']!=$id_rubrique)
 		return intval($id_parent['id_parent']);
@@ -177,9 +162,7 @@ function quete_profondeur($id) {
 
 // http://doc.spip.org/@quete_rubrique
 function quete_rubrique($id_article) {
-	$id_rubrique = sql_fetsel(array('id_rubrique'),
-			array('spip_articles'),
-			array("id_article=" . intval($id_article)));
+	$id_rubrique = sql_fetsel('id_rubrique', 'spip_articles',"id_article=" . intval($id_article));
 	return $id_rubrique['id_rubrique'];
 }
 
@@ -189,29 +172,20 @@ function quete_rubrique($id_article) {
 function quete_lang($id, $table) {
 	$desc = trouver_table(table_objet($table));
 	if (!$desc OR !isset($desc['field']['lang'])) return '';
-	$lang = sql_fetsel('lang', $desc['table'],
-			array("id_$table=" . intval($id)));
+	$lang = sql_fetsel('lang', $desc['table'], ("id_$table=" . intval($id)));
 	return $lang['lang'];
 }
 # retourne le fichier d'un document
 
 // http://doc.spip.org/@quete_fichier
 function quete_fichier($id_document, $serveur) {
-	$r = sql_fetsel(array('fichier'),
-			array('spip_documents'),
-			array("id_document=" . intval($id_document)),
-			'',array(),'','','', '', '', $serveur);
+	$r = sql_fetsel('fichier', 'spip_documents', ("id_document=" . intval($id_document)),	'',array(),'','','', '', '', $serveur);
 	return $r['fichier'];
 }
 
 // http://doc.spip.org/@quete_petitions
 function quete_petitions($id_article, $table, $id_boucle, $serveur, &$cache) {
-	$retour = sql_fetsel(
-		array('texte'),
-		array('spip_petitions'),
-		array("id_article=".intval($id_article)),
-		'',array(),'','','', 
-		$table, $id_boucle, $serveur);
+	$retour = sql_fetsel('texte', 'spip_petitions',("id_article=".intval($id_article)),'',array(),'','','', $table, $id_boucle, $serveur);
 
 	if (!$retour) return '';
 	# cette page est invalidee par toute petition
@@ -228,9 +202,7 @@ function quete_accepter_forum($id_article) {
 	if (!$id_article) return;
 
 	if (!isset($cache[$id_article])) {
-		$row = sql_fetsel(array('accepter_forum'),
-			array('spip_articles'),
-			array("id_article=".intval($id_article)));
+		$row = sql_fetsel('accepter_forum','spip_articles',("id_article=".intval($id_article)));
 		$cache[$id_article] = $row['accepter_forum'];
 	}
 

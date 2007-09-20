@@ -205,8 +205,7 @@ function formulaire_taille($document) {
 
 	// Donnees sur le type de document
 	$extension = $document['extension'];
-	$t = sql_fetsel('inclus',
-		'spip_types_documents', "extension="._q($extension));
+	$t = sql_fetsel('inclus','spip_types_documents', "extension="._q($extension));
 	$type_inclus = $t['inclus'];
 
 	# TODO -- pour le MP3 "l x h pixels" ne va pas

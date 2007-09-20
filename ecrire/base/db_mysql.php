@@ -44,7 +44,6 @@ function base_db_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='') {
 		'errno' => 'spip_mysql_errno',
 		'error' => 'spip_mysql_error',
 		'fetch' => 'spip_mysql_fetch',
-		'fetsel' => 'spip_mysql_fetsel',
 		'free' => 'spip_mysql_free',
 		'insert' => 'spip_mysql_insert',
 		'insertq' => 'spip_mysql_insertq',
