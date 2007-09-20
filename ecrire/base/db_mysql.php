@@ -55,6 +55,7 @@ function base_db_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='') {
 		'select' => 'spip_mysql_select',
 		'selectdb' => 'spip_mysql_selectdb',
 		'set_connect_charset' => 'spip_mysql_set_connect_charset',
+		'showbase' => 'spip_mysql_showbase',
 		'showtable' => 'spip_mysql_showtable',
 		'update' => 'spip_mysql_update',
 		'updateq' => 'spip_mysql_updateq',
@@ -269,6 +270,11 @@ function spip_mysql_create($nom, $champs, $cles, $autoinc=false, $temporary=fals
 	($character_set?" DEFAULT $character_set":"")
 	."\n";
 	return spip_mysql_query($q, $serveur);
+}
+
+function spip_mysql_showbase($match, $serveur='')
+{
+	return spip_mysql_query("SHOW TABLES LIKE '$match'", $serveur);
 }
 
 // http://doc.spip.org/@spip_mysql_showtable

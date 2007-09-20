@@ -63,6 +63,7 @@ function base_db_pg_dist($addr, $port, $login, $pass, $db='', $prefixe='') {
 		'select' => 'spip_pg_select',
 		'selectdb' => 'spip_pg_selectdb',
 		'set_connect_charset' => 'spip_pg_set_connect_charset',
+		'showbase' => 'spip_pg_showbase',
 		'showtable' => 'spip_pg_showtable',
 		'update' => 'spip_pg_update',
 		'updateq' => 'spip_pg_updateq',
@@ -570,6 +571,14 @@ function spip_pg_errno() {
 	$s = pg_last_error(); 
 	if ($s) spip_log("Erreur PG $s");
 	return $s ? 1 : 0;
+}
+
+function spip_pg_showbase($match, $serveur='')
+{
+	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$link = $connexion['link'];
+	  
+	return pg_query($link, "SELECT tablename FROM pg_tables WHERE tablename ILIKE '$match'");
 }
 
 // http://doc.spip.org/@spip_pg_showtable

@@ -146,6 +146,17 @@ function sql_replace($table, $values, $desc=array(), $serveur='')
 	return $f($table, $values, $desc, $serveur);
 }
 
+function sql_showbase($spip=true, $serveur='')
+{
+	if ($spip){
+		$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+		$prefixe = $connexion['prefixe'];
+	} else $prefixe ='';
+	
+	$f = sql_serveur('showbase', $serveur);
+	return $f("$prefixe%", $serveur);
+}
+
 // http://doc.spip.org/@sql_showtable
 function sql_showtable($table, $serveur='', $table_spip = false)
 {

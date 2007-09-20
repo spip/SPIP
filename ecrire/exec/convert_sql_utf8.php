@@ -62,11 +62,11 @@ function exec_convert_sql_utf8_dist() {
 		$commentaire = "";
 		//$commentaire = _T('utf8_convert_avertissement',
 		//	array('orig' => $charset_orig,'charset' => 'utf-8'));
-		$commentaire .=  "<p><small>"
+		$commentaire .=  "<small>"
 		. http_img_pack('warning.gif', _T('info_avertissement'), "style='width: 48px; height: 48px; float: right;margin: 10px;'");
 		$commentaire .= _T('utf8_convert_backup', array('charset' => 'utf-8'))
 		."</small>";
-		$commentaire .= '<p>'._T('utf8_convert_timeout');
+		$commentaire .= '<br />'._T('utf8_convert_timeout');
 		$commentaire .= "<hr />\n";
 
 		$admin = charger_fonction('admin', 'inc');
