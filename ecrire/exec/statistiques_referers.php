@@ -24,7 +24,7 @@ function exec_statistiques_referers_dist()
 	$jour = _request('jour');
 	$limit  = _request('limit');
 
-	if (!autoriser('voirstats', $id ? 'article':'', $id)) {
+	if (!autoriser('voirstats', $id_article ? 'article':'', $id_article)) {
 		include_spip('inc/minipres');
 		echo minipres();
 		exit;

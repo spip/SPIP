@@ -618,7 +618,7 @@ function calculer_url ($lien, $texte='', $pour='url', $connect='') {
 			$id_type = ($f != 'site') ? "id_$f" : 'id_syndic';
 			$res = get_spip_script('./')
 			. "?page=$f&$id_type=$id&connect=$connect"
-			. (!$params ? '' : "&$param");
+			. (!$param ? '' : "&$param");
 		} else {
 			charger_generer_url();
 			$g = 'generer_url_' . $f;

@@ -588,6 +588,7 @@ function afficher_forum($request, $retour, $arg, $controle_id_article = false) {
 
  	while($row = sql_fetch($request)) {
 		$statut=$row['statut'];
+		$id_parent=$row['id_parent'];
 		if (($controle_id_article) ? ($statut!="perso") :
 			(($statut=="prive" OR $statut=="privrac" OR $statut=="privadm" OR $statut=="perso")
 			 OR ($statut=="publie" AND $id_parent > 0))) {

@@ -516,7 +516,6 @@ function attribut_html($texte) {
 	$texte = str_replace(array("'",'"'),array('&#39;', '&#34;'), $texte);
 	
 	return preg_replace(array("/&(amp;|#38;)/","/&(?![A-Za-z]{0,4}\w{2,3};|#[0-9]{2,5};)/"),array("&","&#38;") , $texte);
-	return $texte;
 }
 
 // Vider les url nulles comme 'http://' ou 'mailto:'
