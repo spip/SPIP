@@ -149,7 +149,7 @@ function critere_recherche_dist($idb, &$boucles, $crit) {
 	$boucle->hash = '
 	// RECHERCHE
 	$prepare_recherche = charger_fonction(\'prepare_recherche\', \'inc\');
-	list($rech_select, $rech_where) = $prepare_recherche('.$quoi.', "'.$boucle->primary.'", "'.$boucle->id_table.'", "", "'.$crit->cond.'");
+	list($rech_select, $rech_where) = $prepare_recherche('.$quoi.', "'.$boucle->id_table.'", "'.$crit->cond.'");
 	';
 
 	// Sauf si le critere est conditionnel {recherche ?}
