@@ -150,7 +150,7 @@ define('_EXTENSION_PARTIES', '.gz');
 // et on memorise dans le serveur qu'on va passer a la table suivante.
 
 // http://doc.spip.org/@export_objets
-function export_objets($table, $etape, $cpt, $dir, $archive, $gz, $total, $les_rubriques, $rub, $meta) {
+function export_objets($table, $etape, $cpt, $dir, $archive, $gz, $total, $les_rubriques, $les_meres, $rub, $meta) {
 	global $tables_principales;
 
 	$filetable = $dir . $archive . '.part_' . sprintf('%03d',$etape);
@@ -162,7 +162,7 @@ function export_objets($table, $etape, $cpt, $dir, $archive, $gz, $total, $les_r
 	include_spip('inc/meta');
 	while (1){ // on ne connait pas le nb de paquets d'avance
 
-		$string = build_while($debut, $table, $prim, $les_rubriques);
+		$string = build_while($debut, $table, $prim, $les_rubriques, $les_meres);
 		$cpt++;
 		$debut +=  _EXPORT_TRANCHES_LIMITE;
 		$status_dump = "$gz::$archive::$rub::$etape::$cpt";
@@ -215,14 +215,14 @@ function echo_flush($texte)
 // Construit la version xml  des champs d'une table
 
 // http://doc.spip.org/@build_while
-function build_while($debut, $table, $prim, $les_rubriques) {
+function build_while($debut, $table, $prim, $les_rubriques, $les_meres) {
 	global  $chercher_logo ;
 
 	$result = sql_select('*', $table, '', '', '', "$debut," . _EXPORT_TRANCHES_LIMITE);
 
 	$string = '';
 	while ($row = sql_fetch($result)) {
-		if (export_select($row, $les_rubriques)) {
+		if (export_select($row, $les_rubriques, $les_meres)) {
 			$attributs = "";
 			if ($chercher_logo) {
 				if ($logo = $chercher_logo($row[$prim], $prim, 'on'))
@@ -243,28 +243,50 @@ function build_while($debut, $table, $prim, $les_rubriques) {
 }
 
 // dit si Row est exportable, 
-// en particulier quand on se restreint a un tableau non vide de rubriques
+// en particulier quand on se restreint a certaines rubriques
+// Attention, la table articles doit etre au debut 
+// et la table document_articles avant la table documents
+// (faudrait blinder, c'est un bug potentiel)
 
 // http://doc.spip.org/@export_select
-function export_select($row, $les_rubriques) {
+function export_select($row, $les_rubriques, $les_meres) {
 	static $articles = array();
+	static $documents = array();
 
 	if (isset($row['impt']) AND $row['impt'] !='oui') return false;
 	if (!$les_rubriques) return true;
-	// numero de rubrique present suffit, sauf pour les forums
-	if (isset($row['id_rubrique']) AND $row['id_rubrique']) {
-		if  (!in_array($row['id_rubrique'], $les_rubriques))
-		  return false;
-		$articles[$row['id_article']] = true;
-		return true;
-	}
-	//  petitions, signatures et documents associes aux articles
-	if (isset($row['id_article']) AND $row['id_article']) {
-		return array_search($row['id_article'], $articles);
-	}
 
+	// numero de rubrique non determinant pour les forums (0 à 99%)
+	if (isset($row['id_rubrique']) AND $row['id_rubrique']) {
+		if (in_array($row['id_rubrique'], $les_rubriques)) {
+			if (isset($row['id_article']))
+				$articles[] = $row['id_article'];
+			if (isset($row['id_document']))
+				$documents[]=$row['id_document'];
+			return true;
+		}
+		if (!in_array($row['id_rubrique'], $les_meres))
+			return false;
+		// la rubrique, mais rien d'autre
+		return (!isset($row['id_article'])
+			AND !isset($row['id_mot'])
+			AND !isset($row['id_document'])
+			AND !isset($row['id_breve']));
+	}
+	//  dependances d'articles (mots, petitions, signatures et documents)
+	if (isset($row['id_article']) AND $row['id_article']) {
+		if (in_array($row['id_article'], $articles)) {
+			if (isset($row['id_document']))
+				$documents[]= $row['id_document'];
+			return true;
+		}
+		return false;
+	}
+	if (isset($row['id_document']) AND $row['id_document']) {
+		return array_search($row['id_document'], $documents);
+	}
 	// a la louche pour le reste, mais c'est a peu pres ca.
-	return (isset($row['id_groupe']) OR isset($row['id_mot']) OR isset($row['mime_type']) OR isset($row['id_document']));
+	return (isset($row['id_groupe']) OR isset($row['id_mot']) OR isset($row['mime_type']));
 }
 
 // Conversion texte -> xml (ajout d'entites)
