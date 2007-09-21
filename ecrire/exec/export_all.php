@@ -150,6 +150,7 @@ function complete_secteurs($les_rubriques)
 }
 */
 
+// http://doc.spip.org/@complete_fils
 function complete_fils($rubriques)
 {
 	$r = $rubriques;
