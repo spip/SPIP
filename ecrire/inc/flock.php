@@ -188,11 +188,13 @@ function supprimer_fichier($fichier, $lock=true) {
 }
 // Supprimer brutalement, si le fichier existe
 // http://doc.spip.org/@spip_unlink
-function spip_unlink($fichier) {
-	if (is_dir($fichier))
-		@rmdir($fichier);
-	else 
-		supprimer_fichier($fichier,false);
+function spip_unlink($f) {
+	if (!is_dir($f))
+		supprimer_fichier($f,false);
+	else {
+		@unlink("$f/.ok");
+		@rmdir($f);
+	}
 }
 
 //
