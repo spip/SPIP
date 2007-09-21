@@ -49,7 +49,6 @@ function exec_config_fonctions_dist()
 	$versionneur = charger_fonction('versionneur', 'configuration');
 	$previsualiseur = charger_fonction('previsualiseur', 'configuration');
 	$relayeur = charger_fonction('relayeur', 'configuration');
-	$interfaceur = charger_fonction('interfaceur', 'configuration');
 
 	echo 
 
@@ -66,9 +65,9 @@ function exec_config_fonctions_dist()
 	  $previsualiseur(), // Previsualisation sur le site public
 
 	  $relayeur(_request('retour_proxy')), // Proxy pour syndication & doc
-	  
-	  $interfaceur(); // choix du mode de presentation de l'interface
-	  
+
+	'';
+
 //
 // Choix supplementaires proposees par les plugins
 //

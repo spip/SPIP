@@ -19,7 +19,7 @@ include_spip('inc/puce_statut');
 
 define('_ACTIVER_PUCE_RAPIDE', true);
 define('_SIGNALER_ECHOS', true);
-define('_INTERFACE_ONGLETS', $GLOBALS['meta']['interface_mode']==='onglets');
+define('_INTERFACE_ONGLETS', false);
 
 // http://doc.spip.org/@echo_log
 function echo_log($f, $ret) {

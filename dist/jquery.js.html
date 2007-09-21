@@ -5,7 +5,7 @@
 ]#CACHE{7*24*3600,cache-client}
 #HTTP_HEADER{'Content-Type: text/javascript'}
 /*
- * jQuery 1.1.3.1 - New Wave Javascript
+ * jQuery 1.2.1 - New Wave Javascript
  *
  * Copyright (c) 2007 John Resig (jquery.com)
  * Dual licensed under the MIT (MIT-LICENSE.txt)
@@ -15,18 +15,8 @@
  * + ajaxCallback.js (www.spip.net)
  */
 [(#INCLURE{javascript/jquery.js}|compacte_js)]
-[(#INCLURE{javascript/form.js}|compacte_js)]
+[(#INCLURE{javascript/jquery.form.js}|compacte_js)]
 [(#INCLURE{javascript/ajaxCallback.js}|compacte_js)]
-
-
-
-[(#REM)
-	onglets (interface experimentale)
-
-][(#CONFIG{interface_mode}|=={onglets}|?{
-	[(#INCLURE{javascript/jquery.tabs.min.js}|compacte_js)]}
-)]
-
 
 [(#REM) js ajoutee par les plugin et a la volee]
 [(#ENV{script}|charge_scripts|compacte_js)]
