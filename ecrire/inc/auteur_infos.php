@@ -81,7 +81,7 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 	. fin_cadre_enfonce(true)
 	. "\n<br />";
 
-	if ($auteur['pgp']) {
+	if (true /*strlen($auteur['pgp']) OR variable de config */) {
 		$corps .= debut_cadre_enfonce("cadenas-24.gif", true, "", "<label for='pgp'>" . _T('entree_cle_pgp') . "</label>")
 		. "<textarea name='pgp' id='pgp' class='forml' rows='4' cols='40'>"
 		. entites_html($auteur['pgp'])
