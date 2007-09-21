@@ -2083,29 +2083,6 @@ function compacte($source, $format = null) {
 }
 
 
-// clone de http://php.net/var_export compatible < 4.2.0 et sans ob_xx
-// http://doc.spip.org/@spip_var_export
-function spip_var_export($s) {
-	if (is_array($s)) {
-		foreach ($s as $k=>$v)
-			$s[$k] = spip_var_export($k) . ' => ' . spip_var_export($v);
-		return 'array(' . join(',',$s).')';
-	}
-
-	return is_null($s)
-		? 'null'
-		: (is_bool($s)
-			? ($s ? 'true' : 'false')
-			: (is_numeric($s)
-				? "$s"
-				: (is_string($s)
-					? "'".addslashes($s)."'"
-					: "'".gettype($s)."'"
-				)
-			)
-		);
-}
-
 // produit une balise img avec un champ alt d'office si vide
 // attention le htmlentities et la traduction doivent etre appliques avant.
 
