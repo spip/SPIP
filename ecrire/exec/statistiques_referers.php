@@ -75,7 +75,10 @@ echo barre_onglets("stat_referers", $jour);
 
 // afficher quels referers ?
 
- $result = spip_query("SELECT referer, visites_$jour AS vis FROM spip_referers WHERE visites_$jour>0 ORDER BY vis DESC LIMIT $limit");
+ $str_date = (($jour=='jour')?"DATE_FORMAT(NOW(),'%Y-%m-%d')":"DATE_SUB(DATE_FORMAT(NOW(),'%Y-%m-%d'), INTERVAL 1 DAY)");
+
+ $result = spip_query("SELECT J1.referer, visites_$jour AS vis, J2.id_article, J3.titre FROM spip_referers as J1 LEFT JOIN spip_referers_articles AS J2 ON J1.referer_md5 = J2.referer_md5 LEFT JOIN spip_articles AS J3 ON J2.id_article = J3.id_article WHERE visites_$jour>0 AND (J2.maj>=$str_date OR J2.maj IS NULL) ORDER BY vis DESC, id_article LIMIT $limit");
+
 
  echo "<br /><div style='font-size:small;' class='verdana1'>";
  echo aff_referers ($result, $limit, generer_url_ecrire('statistiques_referers', ("jour=$jour&limit=" . strval($limit+200))));
