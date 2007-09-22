@@ -157,6 +157,7 @@ function complete_secteurs($les_rubriques)
 	return $res;
 }
 
+// http://doc.spip.org/@complete_fils
 function complete_fils($rubriques)
 {
 	$r = $rubriques;
