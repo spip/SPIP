@@ -163,6 +163,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 	$les_mots = array();
 	$id_groupes_vus = array();
 	$groupes_vus = array();
+	$flag_tous = 0;
 	$result = spip_query("SELECT mots.id_mot, mots.titre, mots.descriptif, mots.id_groupe FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot ORDER BY mots.type, mots.titre");
 	if (spip_num_rows($result) > 0) {
 	
@@ -205,6 +206,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 
 			if ($flag_editable){
 				if ($flag_groupe) {
+					$flag_tous++;
 					$s =  _T('info_retirer_mot')
 					. "&nbsp;"
 					. http_img_pack('croix-rouge.gif', "X", " class='puce' style='vertical-align: bottom;'");
@@ -228,7 +230,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 	} else $res ='';
 
 	if ($flag_editable)
-	  $res .= formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $table_id, $url_base, $visible, $objet);
+	  $res .= formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $table_id, $url_base, $visible, $objet, $flag_tous);
 
 	return $res;
 }
@@ -263,15 +265,13 @@ function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_
 
 
 // http://doc.spip.org/@formulaire_mots_cles
-function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $table_id, $url_base, $visible, $objet) {
+function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $table_id, $url_base, $visible, $objet, $flag_tous) {
 	global  $spip_lang, $spip_lang_right;
 
 	if ($les_mots) {
-		$nombre_mots_associes = count($les_mots);
 		$les_mots = join($les_mots, ",");
 	} else {
 		$les_mots = "0";
-		$nombre_mots_associes = 0;
 	}
 	$cond_id_groupes_vus = "0";
 	if ($id_groupes_vus) $cond_id_groupes_vus = join(",",$id_groupes_vus);
@@ -280,7 +280,7 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 	$nb_groupes = $nb_groupes['n'];
 
 	$res = debut_block_depliable($visible OR ($nb_groupes > 0),"lesmots");
-	if ($nombre_mots_associes > 3) {
+	if ($flag_tous >= 3) {
 		$res .= "<div style='text-align: right' class='arial1'>"
 		  . ajax_action_auteur('editer_mot', "$id_objet,-1,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", array(_T('info_retirer_mots'),''),"&id_objet=$id_objet&objet=$objet")
 		. "</div><br />\n";
