@@ -57,7 +57,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 
 	$result = sql_select($req_sel, 'spip_versions AS versions, spip_articles AS articles', $req_where, '', 'versions.date DESC', "$debut, $nb_aff");
 
-	if (spip_num_rows($result) > 0) {
+	if (sql_count($result) > 0) {
 
 		$revisions = '';
 
@@ -69,7 +69,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 				. $titre_table;
 
 	
-			$total = spip_num_rows(sql_select($req_sel, 'spip_versions AS versions, spip_articles AS articles', $req_where, '','', "0, 149"));
+			$total = sql_count(sql_select($req_sel, 'spip_versions AS versions, spip_articles AS articles', $req_where, '','', "0, 149"));
 			$id_liste = 't'.substr(md5("$req_where 149"),0,8);
 			$bouton = bouton_block_depliable($titre_table,true,$id_liste);
 			$revisions .= debut_cadre('liste',"historique-24.gif",'',$bouton)

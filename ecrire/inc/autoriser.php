@@ -286,7 +286,7 @@ function autoriser_article_modifier_dist($faire, $type, $id, $qui, $opt) {
 		OR (
 			in_array($qui['statut'], array('0minirezo', '1comite'))
 			AND in_array($r['statut'], array('prop','prepa', 'poubelle'))
-			AND spip_num_rows(auteurs_article($id, "id_auteur=".$qui['id_auteur']))
+			AND sql_count(auteurs_article($id, "id_auteur=".$qui['id_auteur']))
 		);
 }
 
@@ -348,7 +348,7 @@ function autoriser_voir_dist($faire, $type, $id, $qui, $opt) {
 	include_spip('inc/auth'); // pour auteurs_article si espace public
 	return
 		in_array($r['statut'], array('prop', 'publie'))
-		OR spip_num_rows(auteurs_article($id, "id_auteur=".$qui['id_auteur']));
+		OR sql_count(auteurs_article($id, "id_auteur=".$qui['id_auteur']));
 }
 
 // Voir les revisions ?
@@ -556,7 +556,7 @@ function liste_rubriques_auteur($id_auteur, $raz=false) {
 
 	// Recurrence sur les sous-rubriques
 	$rubriques = array();
-	while ($q AND spip_num_rows($q)) {
+	while ($q AND sql_count($q)) {
 		$r = array();
 		while ($row = sql_fetch($q)) {
 			$id_rubrique = $row['id_rubrique'];

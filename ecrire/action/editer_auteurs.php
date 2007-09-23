@@ -89,7 +89,7 @@ function ajouter_auteur_et_rediriger($type, $id, $id_auteur, $redirect)
 	$jointure = table_jointure('auteur', $type);
 	if (preg_match(',^[a-z]*$,',$type)){
 		$res = spip_query("SELECT id_$type FROM spip_{$jointure} WHERE id_auteur=" . _q($id_auteur) . " AND id_{$type}=" . $id);
-		if (!spip_num_rows($res))
+		if (!sql_count($res))
 			sql_insert("spip_{$jointure}", "(id_auteur,id_{$type})", "($id_auteur,$id)");
 
 		// Notifications, gestion des revisions, reindexation...

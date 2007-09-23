@@ -20,7 +20,7 @@ function affiche_navigation_forum($script, $args, $debut, $i, $pack, $ancre, $qu
 
 	$e = (_SPIP_AJAX === 1 );
 
-	$n = spip_num_rows($query);
+	$n = sql_count($query);
 
 	for (;$n;$n--){
 
@@ -308,7 +308,7 @@ function generer_url_forum_parent($id_forum) {
 function conserver_original($id_forum) {
 	$s = spip_query("SELECT id_forum FROM spip_forum WHERE id_parent="._q($id_forum)." AND statut='original'");
 
-	if (spip_num_rows($s))
+	if (sql_count($s))
 		return ''; // pas d'erreur
 
 	// recopier le forum

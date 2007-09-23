@@ -135,7 +135,7 @@ function determiner_non_auteurs($type, $id, $cond_les_auteurs, $order)
 {
 	$cond = '';
 	$res = determiner_auteurs_objet($type, $id, $cond_les_auteurs);
-	if (spip_num_rows($res)<200){ // probleme de performance au dela, on ne filtre plus
+	if (sql_count($res)<200){ // probleme de performance au dela, on ne filtre plus
 		while ($row = sql_fetch($res))
 			$cond .= ",".$row['id_auteur'];
 	}
@@ -198,7 +198,7 @@ function afficher_auteurs_objet($type, $id, $flag_editable, $cond_les_auteurs, $
 	if (!preg_match(',^[a-z]*$,',$type)) return $les_auteurs; 
 
 	$result = determiner_auteurs_objet($type,$id,$cond_les_auteurs);
-	$cpt = spip_num_rows($result);
+	$cpt = sql_count($result);
 
 	$tmp_var = "editer_auteurs-$id";
 	$nb_aff = floor(1.5 * _TRANCHES);
@@ -218,7 +218,7 @@ function afficher_auteurs_objet($type, $id, $flag_editable, $cond_les_auteurs, $
 	if (!$formater_auteur = charger_fonction("formater_auteur_$type", 'inc',true))
 		$formater_auteur = charger_fonction('formater_auteur', 'inc');
 
-	if (!spip_num_rows($result)) return '';
+	if (!sql_count($result)) return '';
 
 	$table = array();
 
@@ -252,7 +252,7 @@ function ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit, $arg_
 		$determiner_non_auteurs = 'determiner_non_auteurs';
 
 	$query = $determiner_non_auteurs($type, $id, $cond_les_auteurs, "statut, nom");
-	if (!$num = spip_num_rows($query)) return '';
+	if (!$num = sql_count($query)) return '';
 	$js = "findObj_forcer('valider_ajouter_auteur').style.visibility='visible';";
 
 	$text = "<span class='verdana1'><label for='nouv_auteur'><b>"

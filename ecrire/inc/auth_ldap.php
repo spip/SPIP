@@ -31,7 +31,7 @@ function inc_auth_ldap_dist ($login, $pass) {
 
 	// sinon importer les infos depuis LDAP, 
 	// avec le statut par defaut a l'install
-	if (!spip_num_rows($result))
+	if (!sql_count($result))
 		$result = auth_ldap_inserer($dn, $GLOBALS['meta']["ldap_statut_import"]);
 	return $result ? sql_fetch($result) : array(); 
 }

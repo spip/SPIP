@@ -156,7 +156,7 @@ function exec_articles_versions_dist()
 
 	$result = spip_query("SELECT id_version, titre_version, date, id_auteur	FROM spip_versions WHERE id_article=$id_article ORDER BY id_version DESC");
 
-	$zap = spip_num_rows($result);
+	$zap = sql_count($result);
 
 	if (!$zap) return; 
 

@@ -165,7 +165,7 @@ function gen_liste_rubriques() {
 
 	// il ne faut pas filtrer le autoriser voir ici car on met le resultat en cache, commun a tout le monde
 	$GLOBALS['db_art_cache'] = array();
-	if (spip_num_rows($res) > 0) { 
+	if (sql_count($res) > 0) { 
 		while ($row = sql_fetch($res)) {
 			$id = $row['id_rubrique'];
 			$parent = $row['id_parent'];

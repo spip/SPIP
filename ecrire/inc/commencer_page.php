@@ -189,7 +189,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 function avertissement_messagerie($id_auteur) {
 
 	$result_messages = spip_query("SELECT lien.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur="._q($id_auteur)." AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message");
-	$total_messages = @spip_num_rows($result_messages);
+	$total_messages = @sql_count($result_messages);
 	if ($total_messages == 1) {
 		$row = @sql_fetch($result_messages);
 		$ze_message=$row['id_message'];
@@ -239,7 +239,7 @@ function auteurs_recemment_connectes($id_auteur)
 	$res = '';
 	$result = sql_select("*", "spip_auteurs",  "id_auteur!=" .intval($id_auteur) . " AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE)");
 
-	if (spip_num_rows($result)) {
+	if (sql_count($result)) {
 		$formater_auteur = charger_fonction('formater_auteur', 'inc');
 		$res = "<b>"._T('info_en_ligne'). "&nbsp;</b>";
 		while ($row = sql_fetch($result)) {

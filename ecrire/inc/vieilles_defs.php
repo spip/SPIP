@@ -295,7 +295,7 @@ spip_log('auth_rubrique() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'
 	if ($statut != '0minirezo') return $statut;
 
 	$result = spip_query("SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur=$id_auteur AND id_rubrique!='0'");
-	if (!spip_num_rows($result)) {
+	if (!sql_count($result)) {
 		return 0;
 	}
 	$rubriques = array();
@@ -403,6 +403,13 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 spip_log('creer_objet_multi() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
 	$envoyer_mail = charger_fonction('envoyer_mail','inc');
 	return $envoyer_mail($email,$sujet,$texte,$from,$headers);
+}
+
+
+// http://doc.spip.org/@spip_num_rows
+function spip_num_rows($r) {
+	spip_log('spip_num_rows() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
+	return sql_count($r);
 }
 
 //constantes spip pour mysql_fetch_array()

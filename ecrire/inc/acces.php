@@ -154,7 +154,7 @@ function ecrire_acces() {
 	$p1 = ''; // login:htpass pour tous
 	$p2 = ''; // login:htpass pour les admins
 	$s = spip_query("SELECT login, htpass, statut FROM spip_auteurs WHERE statut IN  ('1comite','0minirezo','nouveau')");
-	$n = spip_num_rows($s);
+	$n = sql_count($s);
 	while ($t = sql_fetch($s)) {
 		$p1 .= $t['login'].':'.$t['htpass']."\n";
 		if ($t['statut'] == '0minirezo')

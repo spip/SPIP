@@ -105,7 +105,7 @@ function exec_synchro_dist()
 	$result = sql_select("id_rubrique, titre", "spip_rubriques", 'id_parent=0','', '0+titre,titre');
 
 	$h = http_img_pack( 'feed.png', 'RSS', '');
-	if (spip_num_rows($result) > 0) {
+	if (sql_count($result) > 0) {
 		echo "\n<ul>";
 
 		while($row=sql_fetch($result)){

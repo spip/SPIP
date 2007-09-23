@@ -165,7 +165,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 	$groupes_vus = array();
 	$flag_tous = 0;
 	$result = spip_query("SELECT mots.id_mot, mots.titre, mots.descriptif, mots.id_groupe FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot ORDER BY mots.type, mots.titre");
-	if (spip_num_rows($result) > 0) {
+	if (sql_count($result) > 0) {
 	
 		$tableau= array();
 		$cle = http_img_pack('petite-cle.gif', "", "width='23' height='12'");

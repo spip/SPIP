@@ -166,7 +166,7 @@ else {
 	// Par popularite
 	$result = spip_query("SELECT id_article, titre, popularite, visites FROM spip_articles WHERE statut='publie' AND popularite > 0 ORDER BY popularite DESC");
 
-	$nombre_articles = spip_num_rows($result);
+	$nombre_articles = sql_count($result);
 	if ($nombre_articles > 0) {
 		echo "<br />\n";
 		echo "<div class='iconeoff' style='padding: 5px;'>\n";
@@ -198,7 +198,7 @@ else {
 		// Par popularite
 		$result_suite = spip_query("SELECT id_article, titre, popularite, visites FROM spip_articles WHERE statut='publie' AND id_article IN ($articles_recents) AND id_article NOT IN ($articles_vus) ORDER BY popularite DESC");
 
-		if (spip_num_rows($result_suite) > 0) {
+		if (sql_count($result_suite) > 0) {
 		  echo "</ol><div style='text-align: center'>[...]</div>",$open;
 			while ($row = sql_fetch($result_suite)) {
 				$titre = typo($row['titre']);
@@ -228,7 +228,7 @@ else {
 	$result = spip_query("SELECT id_article, titre, popularite, visites FROM spip_articles WHERE statut='publie' AND popularite > 0 ORDER BY visites DESC LIMIT 30");
 
 		
-	if (spip_num_rows($result) > 0
+	if (sql_count($result) > 0
 	OR $id_article > 0)
 		echo creer_colonne_droite('', true);
 
@@ -236,7 +236,7 @@ else {
 		echo bloc_des_raccourcis(icone_horizontale(_T('icone_retour_article'), generer_url_ecrire("articles","id_article=$id_article"), "article-24.gif","rien.gif", false));
 	}
 
-	if (spip_num_rows($result) > 0) {
+	if (sql_count($result) > 0) {
 		echo "<br /><div class='iconeoff' style='padding: 5px;'>";
 		echo "<div style='font-size:small;overflow:hidden;' class='verdana1'>";
 		echo typo(_T('info_affichier_visites_articles_plus_visites'));

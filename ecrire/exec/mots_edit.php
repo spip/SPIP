@@ -227,7 +227,7 @@ function determine_groupe_mots($table, $id_groupe) {
 
 	$q = spip_query("SELECT id_groupe, titre FROM spip_groupes_mots ". ($table ? "WHERE $table='oui'" : '') . " ORDER BY titre");
 
-	if (spip_num_rows($q)>1) {
+	if (sql_count($q)>1) {
 
 		$res = " &nbsp; <select name='id_groupe' id='id_groupe' class='fondl'>\n";
 		while ($row = sql_fetch($q)){
