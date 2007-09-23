@@ -468,6 +468,8 @@ function spip_pg_replace($table, $values, $desc, $serveur='') {
 	$link = $connexion['link'];
 	$db = $connexion['db'];
 
+	if (!$desc) $desc = description_table($table);
+	if (!$desc) die("$table insertion sans description");
 	$prim = $desc['key']['PRIMARY KEY'];
 	$ids = preg_split('/,\s*/', $prim);
 	$noprims = $prims = array();
