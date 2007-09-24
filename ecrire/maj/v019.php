@@ -518,7 +518,7 @@ function maj_v019_45()
 	spip_query("ALTER TABLE spip_articles CHANGE `soustitre` `soustitre` text DEFAULT '' NOT NULL");
 	spip_query("ALTER TABLE spip_articles CHANGE `descriptif` `descriptif` text DEFAULT '' NOT NULL");
 	spip_query("ALTER TABLE spip_articles CHANGE `chapo` `chapo` mediumtext DEFAULT '' NOT NULL");
-	spip_query("ALTER TABLE spip_articles CHANGE `texte` `texte` longtext` DEFAULT '' NOT NULL");
+	spip_query("ALTER TABLE spip_articles CHANGE `texte` `texte` longtext DEFAULT '' NOT NULL");
 	spip_query("ALTER TABLE spip_articles CHANGE `ps` `ps` mediumtext DEFAULT '' NOT NULL");
 	spip_query("ALTER TABLE spip_articles CHANGE `accepter_forum` `accepter_forum` CHAR(3) DEFAULT '' NOT NULL");
 	spip_query("ALTER TABLE spip_articles CHANGE `nom_site` `nom_site` tinytext DEFAULT '' NOT NULL");
