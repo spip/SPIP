@@ -21,6 +21,7 @@ function inc_puce_statut_dist($id_objet, $statut, $id_rubrique, $type, $ajax=fal
 		return "<img src='"._DIR_IMG_PACK. "$type-24.gif" . "' />";
 }
 
+// http://doc.spip.org/@puce_statut_document
 function puce_statut_document($id, $statut, $id_rubrique, $type, $ajax='') {
 	return "<img src='"._DIR_IMG_PACK. "attachment.gif" . "' />";
 }
