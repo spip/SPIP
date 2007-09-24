@@ -15,7 +15,7 @@ include_spip('inc/presentation');
 
 // http://doc.spip.org/@exec_recherche_dist
 function exec_recherche_dist() {
-	global $spip_lang_right;
+
 	$recherche = _request('recherche');
 	$recherche_aff = entites_html($recherche);
 
@@ -45,8 +45,8 @@ function exec_recherche_dist() {
 		if (preg_match(',^[0-9]+$,', $recherche)
 		AND $id = intval($recherche))
 		foreach ($tables as $table => $x) {
-			$s = spip_query("SELECT ".id_table_objet($table)." FROM " . table_objet_sql($table)." WHERE ".id_table_objet($table)."="._q($id));
-			if ($t = sql_fetch($s)
+			$t = sql_countsel(table_objet_sql($table), id_table_objet($table)."="._q($id));
+			if ($t
 			AND autoriser('voir', $table, $id)
 			AND !isset($results[$table][$id]))
 				$results[$table][$id] = array();
