@@ -55,6 +55,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	global $spip_display, $spip_lang_left, $spip_lang_right, $connect_id_auteur;
 
 	$id_rubrique = $row['id_rubrique'];
+	$id_secteur = $row['id_secteur'];
 	$statut_article = $row['statut'];
 	$titre = $row["titre"];
 	$surtitre = $row["surtitre"];
@@ -132,8 +133,8 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	$onglet_contenu =
 	  afficher_corps_articles($id_article,$virtuel,$row);
 
-	$onglet_proprietes = 
-		afficher_article_rubrique($id_article, $id_rubrique, $id_secteur, $statut)
+	$onglet_proprietes = (!_INTERFACE_ONGLETS) ? "" :
+		afficher_article_rubrique($id_article, $id_rubrique, $id_secteur, $statut_rubrique)
 	  . $dater($id_article, $flag_editable, $statut_article, 'article', 'articles', $date, $date_redac)
 	  . $editer_auteurs('article', $id_article, $flag_editable, $cherche_auteur, $ids)
 	  . (!$editer_mot ? '' : $editer_mot('article', $id_article, $cherche_mot, $select_groupe, $flag_editable, true))
@@ -324,7 +325,6 @@ function afficher_corps_articles($id_article, $virtuel, $row)
 // http://doc.spip.org/@afficher_article_rubrique
 function afficher_article_rubrique($id_article, $id_rubrique, $id_secteur, $statut)
 {
-	if (!_INTERFACE_ONGLETS) return "";
 	global $spip_lang_right;
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
 	$aider = charger_fonction('aider', 'inc');
