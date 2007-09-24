@@ -426,12 +426,13 @@ function urls_propres_dist(&$fond, $url) {
 		$contexte[$col_id] = $row['id_objet'];
 	}
 
-	if ($type AND ($adapter_le_fond OR $fond=='type_urls')) {
-
-		$fond =  ($type == 'syndic') ?  'site' : $type;
-	} else if ($fond=='type_urls') {
-		$fond = '404';
-		$contexte['erreur'] = ''; // qu'afficher ici ?  l'url n'existe pas... on ne sait plus dire de quel type d'objet il s'agit
+	if ($fond=='type_urls') {
+		if ($type)
+			$fond =  ($type == 'syndic') ?  'site' : $type;
+		else {
+			$fond = '404';
+			$contexte['erreur'] = ''; // qu'afficher ici ?  l'url n'existe pas... on ne sait plus dire de quel type d'objet il s'agit
+		}
 	}
 }
 } // function_exists
