@@ -21,6 +21,9 @@ function inc_puce_statut_dist($id_objet, $statut, $id_rubrique, $type, $ajax=fal
 		return "<img src='"._DIR_IMG_PACK. "$type-24.gif" . "' />";
 }
 
+function puce_statut_document($id, $statut, $id_rubrique, $type, $ajax='') {
+	return "<img src='"._DIR_IMG_PACK. "attachment.gif" . "' />";
+}
 
 // http://doc.spip.org/@puce_statut_auteur
 // Hack de compatibilite: les appels directs ont un  $type != 'auteur'
