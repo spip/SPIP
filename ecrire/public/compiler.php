@@ -698,7 +698,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 		if ($type != 'boucle') {
 			if (!$boucles[$id]->sql_serveur AND $connect)
 				$boucles[$id]->sql_serveur = $connect;
-			$show = trouver_table($type, $boucles[$id]);
+			$show = trouver_table($type, $boucles[$id]->sql_serveur);
 			if ($show) {
 				$boucles[$id]->id_table = $x = $show['id_table'];
 				$boucles[$id]->from[$x] = $nom_table = $show['table'];
@@ -709,7 +709,14 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 					$boucles[$id]->jointures = $x;
 				if (($type == 'documents') && $boucle->doublons)
 					{ $descr['documents'] = true;  }
-			} else $boucles[$id]->type_requete = '';
+			} else {
+				$boucles[$id]->type_requete = '';
+				$x = $boucles[$id]->sql_serveur;
+				$x = $x ? "$x:$type" : $type;
+				erreur_squelette(_T('zbug_table_inconnue',
+						    array('table' => $x )),
+						 $id);
+			}
 		}
 	}
 	// Commencer par reperer les boucles appelees explicitement 

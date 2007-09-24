@@ -312,11 +312,10 @@ function spip_sql_character_set($charset, $skip_verif=false){
 // mais aussi pour la balise contextuelle EXPOSE.
 
 // http://doc.spip.org/@trouver_table
-function trouver_table($nom, $boucle='')
+function trouver_table($nom, $serveur='')
 {
 	global $tables_principales, $tables_auxiliaires, $table_des_tables, $connexions;
 
-	$serveur = @$boucle->sql_serveur;
 	if (!spip_connect($serveur)) return null;
 	$s = $serveur ? $serveur : 0;
 	$nom_sql = $nom;
@@ -351,15 +350,8 @@ function trouver_table($nom, $boucle='')
 
 	$desc = sql_showtable($nom_sql, $serveur, ($nom_sql != $nom));
 	if (!$desc OR !$desc['field']) {
-		if (!$boucle) 
 		  spip_log("table inconnue $serveur $nom");
-		else {
-		  include_spip('public/debug');
-		  erreur_squelette(_T('zbug_table_inconnue',
-			array('table' => $s ? "$serveur:$nom" : $nom)),
-				$boucle->id_boucle);
 		  return null;
-		}
 	} else {
 		$desc['table']= $nom_sql;
 		$desc['id_table']= $nom;

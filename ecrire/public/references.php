@@ -65,7 +65,7 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles) {
 	$r = $boucles[$idb]->type_requete;
 
 	if ($r == 'boucle') return array();
-	$desc = trouver_table($r, $boucles[$idb]);
+	$desc = !$r ? '' : trouver_table($r, $boucles[$idb]->sql_serveur);
 	if(!$desc) {
 		# continuer pour chercher l'erreur suivante
 		return  array("'#" . $r . ':' . $nom_champ . "'",'');
@@ -115,12 +115,14 @@ function index_exception(&$boucle, $desc, $nom_champ, $excep)
 			list($e, $x) = $excep;	#PHP4 affecte de gauche a droite
 			$excep = $x;		#PHP5 de droite a gauche !
 			if (!$t = array_search($e, $boucle->from)) {
-				$j = trouver_table($e, $boucle);
-				$t = 'J' . count($boucle->from);
-				$boucle->from[$t] = $j['table'];
-				$j = $j['key']['PRIMARY KEY'];
-				$boucle->where[]= array("'='", "'$boucle->id_table." . "$j'", "'$t.$j'");
+				$j = trouver_table($e, $boucle->sql_serveur);
+				if ($j) {
+					$t = 'J' . count($boucle->from);
+					$boucle->from[$t] = $j['table'];
+					$j = $j['key']['PRIMARY KEY'];
+					$boucle->where[]= array("'='", "'$boucle->id_table." . "$j'", "'$t.$j'");
 				}
+			}
 		}
 	} 
 	else $t = $desc['id_table'];
