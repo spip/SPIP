@@ -384,8 +384,6 @@ function AjaxRet(res,status, target, callback) {
 	// Inject the HTML into all the matched elements
 	jQuery(target)
 		.html(res.responseText)
-		// Execute all the scripts inside of the newly-injected HTML
-		.evalScripts()
 		// Execute callback
 		.each(callback, [res.responseText, status]);
 }
