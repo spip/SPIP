@@ -451,53 +451,19 @@ function maj_v019_dist($version_installee, $version_cible)
 		spip_query("ALTER TABLE spip_documents CHANGE `hauteur` `hauteur` integer");
 		maj_version('1.944');
 	}
-	if (upgrade_vers(1.945, $version_installee, $version_cible)) {
-	  maj_v019_45();
-	  maj_version('1.945');
+	maj_v019_while($version_installee, $version_cible);
+}
+
+function maj_v019_while($version_installee, $version_cible)
+{
+	$cible = substr(strval($version_cible),3);
+	$installee = substr(strval($version_installee),3);
+	while ($installee < $cible) {
+		$installee++;
+		$f = 'maj_v019_' . $installee;
+		if (function_exists($f)) $f();
+		maj_version('1.9' . $installee);
 	}
-	if (upgrade_vers(1.946, $version_installee, $version_cible)) {
-	  maj_v019_46();
-	  maj_version('1.946');
-	}
-	if (upgrade_vers(1.947, $version_installee, $version_cible)) {
-	  maj_v019_47();
-	  maj_version('1.947');
-	}
-	// mauvaise manip
-	if (upgrade_vers(1.949, $version_installee, $version_cible)) {
-	  maj_v019_49();
-	  maj_version('1.949');
-	}
-	if (upgrade_vers(1.950, $version_installee, $version_cible)) {
-	  maj_v019_50();
-	  maj_version('1.950');
-	}
-	if (upgrade_vers(1.951, $version_installee, $version_cible)) {
-	  maj_v019_51();
-	  maj_version('1.951');
-	}
-	if (upgrade_vers(1.952, $version_installee, $version_cible)) {
-	  maj_v019_52() || exit('echec sur maj_v019_52()'); // tentative de mieux controler les cas d'echec
-	  maj_version('1.952');
-	}
-	if (upgrade_vers(1.953, $version_installee, $version_cible)) {
-	  maj_v019_53();
-	  maj_version('1.953');
-	}
-	if (upgrade_vers(1.954, $version_installee, $version_cible)) {
-	  maj_v019_54();
-	  maj_version('1.954');
-	}
-	if (upgrade_vers(1.955, $version_installee, $version_cible)) {
-	  maj_v019_55();
-	  maj_version('1.955');
-	}
-	if (upgrade_vers(1.956, $version_installee, $version_cible)) {
-	  maj_v019_56();
-	  maj_version('1.956');
-	}
-	
-	
 }
 
 function maj_v019_38()
@@ -628,6 +594,7 @@ function maj_v019_47()
 	sql_alter("TABLE spip_auteurs  DROP INDEX `lang`");
 }
 
+	// mauvaise manip
 function maj_v019_49()
 {
 	sql_alter("TABLE spip_versions DROP INDEX `date`");
@@ -683,23 +650,21 @@ function maj_v019_51()
 // - vignette => mode=vignette
 function maj_v019_52()
 {
-	$ok = true;
 
-	$ok &=
-		sql_alter("TABLE spip_documents CHANGE `mode` `mode` enum('vignette','image','document') DEFAULT NULL");
+	$ok = sql_alter("TABLE spip_documents CHANGE `mode` `mode` enum('vignette','image','document') DEFAULT NULL");
 
-	if(!$ok) return false;
+	if($ok) {
 
-	$s = sql_select("v.id_document as id_document", "spip_documents as d join spip_documents as v ON d.id_vignette=v.id_document");
+		$s = sql_select("v.id_document as id_document", "spip_documents as d join spip_documents as v ON d.id_vignette=v.id_document");
 
-	$vignettes = array();
-	while ($t = sql_fetch($s))
-		$vignettes[] = intval($t['id_document']);
+		$vignettes = array();
+		while ($t = sql_fetch($s))
+			$vignettes[] = intval($t['id_document']);
 
-	$ok &= spip_query("UPDATE spip_documents SET `mode`='image' WHERE `mode`='vignette'");
-	$ok &= spip_query("UPDATE spip_documents SET `mode`='vignette' WHERE `mode`='image' AND ".calcul_mysql_in('id_document', $vignettes));
-
-	return $ok;
+		$ok &= spip_query("UPDATE spip_documents SET `mode`='image' WHERE `mode`='vignette'");
+		$ok &= spip_query("UPDATE spip_documents SET `mode`='vignette' WHERE `mode`='image' AND ".calcul_mysql_in('id_document', $vignettes));
+	}
+	if (!$ok) die('echec sur maj_v019_52()'); 
 }
 
 function maj_v019_53()
