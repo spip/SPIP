@@ -61,7 +61,13 @@ function export_all_fin($file, $meta)
 		$subdir = dirname($file);
 		$dir = dirname($subdir);
 		$nom = basename($file);
-		if (@rename($file, $dir . '/' . $nom)) {
+		$dest = $dir . '/' . $nom;
+		if (file_exists($dest)) {
+			$n = 1;
+			while (@file_exists($new = "$dir/$n-$nom")) $n++;
+			@rename($dest, $new);
+		}
+		if (@rename($file, $dest)) {
 			spip_unlink($subdir);
 			spip_log("$file renomme en $dir/$nom");
 		}
