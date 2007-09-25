@@ -133,8 +133,8 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	$onglet_contenu =
 	  afficher_corps_articles($id_article,$virtuel,$row);
 
-	$onglet_proprietes = (!_INTERFACE_ONGLETS) ? "" :
-		afficher_article_rubrique($id_article, $id_rubrique, $id_secteur, $statut_rubrique)
+	$onglet_proprietes = ((!_INTERFACE_ONGLETS) ? "" :
+		afficher_article_rubrique($id_article, $id_rubrique, $id_secteur, $statut_rubrique))
 	  . $dater($id_article, $flag_editable, $statut_article, 'article', 'articles', $date, $date_redac)
 	  . $editer_auteurs('article', $id_article, $flag_editable, $cherche_auteur, $ids)
 	  . (!$editer_mot ? '' : $editer_mot('article', $id_article, $cherche_mot, $select_groupe, $flag_editable, true))
