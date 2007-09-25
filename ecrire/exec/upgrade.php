@@ -37,14 +37,12 @@ function exec_upgrade_dist() {
 		exit;
 	}
 
-	// Verifier la version
+	// Verifier la version, sans se fier au cache
+	@spip_unlink(_FILE_META);
+	lire_metas();
 	$version_installee = (double) str_replace(',','.',$GLOBALS['meta']['version_installee']);
 # NB: str_replace car, sur club-internet, il semble que version_installe soit
 # enregistree au format '1,812' et non '1.812'
-
-	// Qu'est-ce que tu fais ici?
-	if ($spip_version == $version_installee)
-		redirige_par_entete(generer_url_ecrire());
 
 	// Erreur downgrade
 	// (cas de double installation de fichiers SPIP sur une meme base)
