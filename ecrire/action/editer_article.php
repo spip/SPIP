@@ -274,7 +274,7 @@ function editer_article_heritage($id_article, $id_rubrique, $statut, $champs, $c
 		$champs['id_secteur'] = $row_rub['id_secteur'];
 
 		if (sql_countsel('spip_articles', "id_article=$id_article AND langue_choisie<>'oui' AND lang<>" . _q($langue)))
-			$champs['lang='] = $langue;
+			$champs['lang'] = $langue;
 	}
 
 	if (!$champs) return;
