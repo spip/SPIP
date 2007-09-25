@@ -23,7 +23,7 @@ define('_SPIP_SELECT_RUBRIQUES', 20); /* mettre 100000 pour desactiver ajax */
 //    n'importe ou (defaut), et les breves dans les secteurs.
 // $idem : en mode rubrique = la rubrique soi-meme
 // http://doc.spip.org/@inc_chercher_rubrique_dist
-function inc_chercher_rubrique_dist ($id_rubrique, $type, $restreint, $idem=0) {
+function inc_chercher_rubrique_dist ($id_rubrique, $type, $restreint, $idem=0, $do='aff_selection_titre') {
 	// Mode sans Ajax :
 	// - soit parce que le cookie ajax n'est pas la
 	// - soit parce qu'il y a peu de rubriques
@@ -32,8 +32,7 @@ function inc_chercher_rubrique_dist ($id_rubrique, $type, $restreint, $idem=0) {
 	OR sql_countsel('spip_rubriques') < _SPIP_SELECT_RUBRIQUES)
 		return selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem);
 
-	else
-		return selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem);
+	else return selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem, $do);
 
 }
 
@@ -156,7 +155,7 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem=0) {
 }
 
 // http://doc.spip.org/@selecteur_rubrique_ajax
-function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0) {
+function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0, $do) {
 
        ## $restreint indique qu'il faut limiter les rubriques affichees
        ## aux rubriques editables par l'admin restreint... or, ca ne marche pas.
@@ -176,8 +175,10 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0) {
 	$titre = str_replace('&amp;', '&', entites_html(textebrut(typo($titre))));
 	$init = " disabled='disabled' type='text' value=\"" . $titre . '" style=\'width:300px;\'';
 
-	$url = generer_url_ecrire('selectionner',"id=$id_rubrique&type=$type" . (!$idem ? '' : ("&exclus=$idem&racine=" . ($restreint ? 'non' : 'oui')))
+	$url = generer_url_ecrire('selectionner',"id=$id_rubrique&type=$type&do=$do"
+	. (!$idem ? '' : ("&exclus=$idem&racine=" . ($restreint ? 'non' : 'oui'))) 
 	. (isset($GLOBALS['var_profile']) ? '&var_profile=1' : ''));
+
 
 	return construire_selecteur($url, '', 'selection_rubrique', 'id_parent', $init, $id_rubrique);
 }

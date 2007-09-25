@@ -21,9 +21,12 @@ function exec_plonger_dist()
 	$id = intval(_request('id'));
 	$exclus = intval(_request('exclus'));
 	$col = intval(_request('col'));
+	$do  = _request('do');
+	if (!preg_match('/^\w+$/', $do)) die();
+	if (!$do) $do = 'aff_selection_titre';
 
 	include_spip('inc/actions');
 	$plonger = charger_fonction('plonger', 'inc');
-	ajax_retour($plonger($id, htmlentities($rac), array(), $col, $exclus));
+	ajax_retour($plonger($id, htmlentities($rac), array(), $col, $exclus, $do));
 }
 ?>

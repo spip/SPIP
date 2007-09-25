@@ -19,12 +19,12 @@ include_spip('inc/filtres');
 //
 
 // http://doc.spip.org/@inc_selectionner_dist
-function inc_selectionner_dist ($sel, $idom="", $exclus=0, $aff_racine=false, $recur=true) {
+function inc_selectionner_dist ($sel, $idom="", $exclus=0, $aff_racine=false, $recur=true, $do='aff_selection_titre') {
 
 	if ($recur) $recur = mini_hier($sel); else $sel = 0;
 
 	if ($aff_racine) {
-		$info = generer_url_ecrire('informer', "type=rubrique&rac=$idom&id=");
+		$info = generer_url_ecrire('informer', "type=rubrique&rac=$idom&do=$do&id=");
 		$idom3 = $idom . "_selection";
 
 		$onClick = " aff_selection(0, '$idom3', '$info', event);";
@@ -34,7 +34,7 @@ function inc_selectionner_dist ($sel, $idom="", $exclus=0, $aff_racine=false, $r
 					textebrut(_T('info_racine_site')))),
 				"\n\r", "  ");
 
-		$ondbClick = "aff_selection_titre('$ondbClick',0,'selection_rubrique','id_parent');";
+		$ondbClick = "$do('$ondbClick',0,'selection_rubrique','id_parent');";
 
 		$aff_racine = "<div class='arial11 petite-racine'\nonclick=\""
 		. $onClick
@@ -46,13 +46,13 @@ function inc_selectionner_dist ($sel, $idom="", $exclus=0, $aff_racine=false, $r
 		. "</div></div>";
 	} else $onClick = '';
 
-	$url_init = generer_url_ecrire('plonger',"rac=$idom&exclus=$exclus&id=0&col=1", true);
+	$url_init = generer_url_ecrire('plonger',"rac=$idom&exclus=$exclus&id=0&col=1&do=$do", true);
 
 	$plonger = charger_fonction('plonger', 'inc');
-	$plonger_r = $plonger($sel, $idom, $recur, 1, $exclus);
+	$plonger_r = $plonger($sel, $idom, $recur, 1, $exclus, $do);
 
 	// url completee par la fonction JS onkeypress_rechercher
-	$url = generer_url_ecrire('rechercher', "exclus=$exclus&rac=$idom&type=");
+	$url = generer_url_ecrire('rechercher', "exclus=$exclus&rac=$idom&do=$do&type=");
 	return construire_selectionner_hierarchie($idom, $plonger_r, $aff_racine, $url, 'id_parent', $url_init);
 }
 

@@ -22,6 +22,9 @@ function exec_rechercher_dist()
 	$exclus = intval(_request('exclus'));
 	$rac = htmlentities(_request('rac'));
 	$type = _request('type');
+	$do  = _request('do');
+	if (!preg_match('/^\w+$/', $do)) die();
+	if (!$do) $do = 'aff_selection_titre';
 
 	$where = split("[[:space:]]+", $type);
 	if ($where) {
@@ -81,7 +84,7 @@ function exec_rechercher_dist()
 		}
 	}
 
-	ajax_retour(proposer_item($points, $rub, $rac, $type));
+	ajax_retour(proposer_item($points, $rub, $rac, $type, $do));
 
 }
 
@@ -91,7 +94,7 @@ function exec_rechercher_dist()
 // ==> attention a composer le message d'erreur avec au moins 2 balises
 
 // http://doc.spip.org/@proposer_item
-function proposer_item ($ids, $titles, $rac, $type)
+function proposer_item ($ids, $titles, $rac, $type, $do)
 {
 
 	if (!$ids)
@@ -104,7 +107,7 @@ function proposer_item ($ids, $titles, $rac, $type)
 
 	$onClick = "aff_selection(this.firstChild.title,'$rac". "_selection','$info', event)";
 
-	$ondbClick = "aff_selection_titre(this.firstChild.firstChild.nodeValue,this.firstChild.title,'selection_rubrique', 'id_parent');";
+	$ondbClick = "$do(this.firstChild.firstChild.nodeValue,this.firstChild.title,'selection_rubrique', 'id_parent');";
 
 	foreach($ids as $id => $bof) {
 				

@@ -17,7 +17,7 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_admin_tech_dist
 function exec_admin_tech_dist()
 {
-	global $flag_gz;
+	global $flag_gz, $spip_lang_right;
 	if (!autoriser('sauvegarder')){
 		include_spip('inc/minipres');
 		echo minipres();
@@ -78,14 +78,22 @@ function exec_admin_tech_dist()
 	 _T('texte_admin_tech_02') .
 	"</p>";
 	
-	$res .= "\n<p><label for='id_rubrique'>" .
-	    _L('Vous pouvez limiter la sauvegarde &agrave; la rubrique: ') .
-	       "</label>" .
-	    "\n<input name='id_rubrique' id='id_rubrique' size='5' "
-	  .  "onchange='x=\"_rub\"+findObj_forcer(\"id_rubrique\").value;
-findObj_forcer(\"znom_sauvegarde\").value+=x;
-findObj_forcer(\"nom_sauvegarde\").value+=x;'"
-	  ." /></p>";
+	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
+
+	$form = $chercher_rubrique(0, 'rubrique', !$GLOBALS['connect_toutes_rubriques'], 0, 'admin_tech_selection_titre');
+	if (strpos($form,'<select')!==false) {
+		$form .= "<div style='text-align: $spip_lang_right;'>"
+		. '<input class="fondo" type="submit" value="'
+		. _T('bouton_choisir')
+		.'" />'
+		. "</div>";
+	}
+
+	$res .= "\n<p><label for='id_parent'>" .
+		  _L('Vous pouvez limiter la sauvegarde &agrave; la rubrique: ') .
+		  "</label>" .
+		  $form
+		  . "</p>";
 
 	$file = nom_fichier_dump();
 	$nom = "\n<input name='nom_sauvegarde' id='nom_sauvegarde' size='40' value='$file' />";

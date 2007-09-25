@@ -23,8 +23,11 @@ function exec_selectionner_dist()
 	$exclus = intval(_request('exclus'));
 	$type = _request('type');
 	$rac = _request('racine');
+	$do  = _request('do');
+	if (!preg_match('/^\w+$/', $do)) die();
+	if (!$do) $do = 'aff_selection_titre';
 
 	$selectionner = charger_fonction('selectionner', 'inc');
-	ajax_retour($selectionner($id, "choix_parent", $exclus, $rac, $type!='breve'));
+	ajax_retour($selectionner($id, "choix_parent", $exclus, $rac, $type!='breve', $do));
 }
 ?>
