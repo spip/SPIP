@@ -42,7 +42,6 @@ function configuration_reducteur_dist()
 			}
 		ecrire_meta('formats_graphiques', $formats_graphiques);
 		ecrire_meta('image_process', $image_process);
-		ecrire_metas();
 	} else 	$formats_graphiques = $GLOBALS['meta']["formats_graphiques"];
 
 	$nb_process = 0;
@@ -124,7 +123,6 @@ function format_choisi()
 			$max_size_test = isset($GLOBALS['meta']['max_taille_vignettes_test'])?$GLOBALS['meta']['max_taille_vignettes_test']:0;
 			if ($max_size_test<$max_size_echec OR  ($max_size_test AND !$max_size_echec)){
 				ecrire_meta('max_taille_vignettes_echec',$max_size_echec = $max_size_test,'non');
-				ecrire_metas();
 			}
 			$maxtest = 1740; // 3MPixels
 			$test = array();
@@ -159,7 +157,6 @@ function format_choisi()
 			effacer_meta('max_taille_vignettes');
 			effacer_meta('max_taille_vignettes_echec');
 			effacer_meta('max_taille_vignettes_test');
-			ecrire_metas();
 	}
 	$res .= '<br /><br />';
 	$res .= "</div>";

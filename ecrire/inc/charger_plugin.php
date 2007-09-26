@@ -370,7 +370,6 @@ function chargeur_activer_plugin($plugin)
 	spip_log('charger_decompresser activer plugin: ' . $plugin);
 	include_spip('inc/plugin');
 	ecrire_plugin_actifs(array($plugin), false, 'ajoute');
-	ecrire_metas();
 }
 
 
@@ -420,7 +419,6 @@ function essaie_ajouter_liste_plugins($url) {
 	$syndic_plug = @unserialize($GLOBALS['meta']['syndic_plug']);
 	$syndic_plug[$url] = count($liste);
 	ecrire_meta('syndic_plug', serialize($syndic_plug));
-	ecrire_metas();
 }
 
 // Recherche les enclosures de type zip dans un flux rss ou atom

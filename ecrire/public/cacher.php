@@ -95,7 +95,7 @@ function cache_valide(&$page, $date) {
 		include_spip('inc/meta');
 		include_spip('inc/rubriques');
 		ecrire_meta('derniere_modif', time());
-		calculer_prochain_postdate(); // fera le ecrire_metas()
+		calculer_prochain_postdate();
 		return 1;
 	}
 

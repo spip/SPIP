@@ -66,7 +66,6 @@ function action_tester_taille_dist() {
 		// et maintenant envoyer la vignette de tests
 		if ($src) {
 			ecrire_meta('max_taille_vignettes',$taille*$taille,'non');
-			ecrire_metas();
 			spip_unlink($src);
 		}
 		else {

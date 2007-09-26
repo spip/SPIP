@@ -216,7 +216,6 @@ function revisions_breves_langue($id_breve, $id_rubrique, $changer_lang)
 		include_spip('inc/rubriques');
 		$langues = calculer_langues_utilisees();
 		ecrire_meta('langues_utilisees', $langues);
-		ecrire_metas();
 	}
 
 }

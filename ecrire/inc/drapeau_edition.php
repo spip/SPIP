@@ -64,7 +64,6 @@ function lire_tableau_edition () {
 function ecrire_tableau_edition($edition) {
 	include_spip('inc/meta');
 	ecrire_meta('drapeau_edition', serialize($edition));
-	ecrire_metas();
 }
 
 // J'edite tel objet

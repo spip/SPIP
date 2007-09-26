@@ -318,7 +318,7 @@ $spip_version_code = '1.9262';
 
 // ** Securite **
 $auteur_session = $connect_statut = $connect_toutes_rubriques =  $hash_recherche = $hash_recherche_strict = $ldap_present ='';
-$connect_id_rubrique = array();
+$meta = $connect_id_rubrique = array();
 
 // *** Fin des globales *** //
 

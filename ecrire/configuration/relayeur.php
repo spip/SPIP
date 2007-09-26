@@ -98,14 +98,12 @@ function configuration_relayeur_post ($http_proxy, $http_noproxy, $test_proxy, $
 				. aide('confhttpproxy');
 		}
 	}
-	if ($t = ($http_proxy !== NULL)) {
+	if ($http_proxy !== NULL) {
 		ecrire_meta('http_proxy', $http_proxy);
 	}
 	if ($http_noproxy !== NULL) {
 		ecrire_meta('http_noproxy', $http_noproxy);
-		$t = true;
 	}
-	if ($t) ecrire_metas();
 	return $retour_proxy;
 }
 

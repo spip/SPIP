@@ -128,6 +128,5 @@ function convert_sql_utf8(){
 	}
 	ecrire_meta('charset_sql_base',$sql_charset,'non');
 	ecrire_meta('charset_sql_connexion',$sql_charset,'non');
-	ecrire_metas();
 }
 ?>

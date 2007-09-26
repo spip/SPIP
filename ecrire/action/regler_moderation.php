@@ -35,7 +35,6 @@ function action_regler_moderation_dist()
 	if ($statut == 'abo') {
 		include_spip('inc/meta');
 		ecrire_meta('accepter_visiteurs', 'oui');
-		ecrire_metas();
 	}
 	include_spip('inc/invalideur');
 	suivre_invalideur("id='id_forum/a$id_article'");

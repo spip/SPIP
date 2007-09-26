@@ -31,7 +31,6 @@ function action_export_all_dist()
 		// creer l'en tete du fichier et retourner dans l'espace prive
 		ecrire_fichier($file, export_entete(),false);
 		ecrire_meta($meta, "$gz::$archive::$rub::1::0",'non');
-		ecrire_metas();
 		include_spip('inc/headers');
 		  // rub=$rub sert AUSSI a distinguer cette redirection
 		  // d'avec l'appel initial sinon FireFox croit malin
@@ -50,7 +49,6 @@ function export_all_fin($file, $meta)
 	$tables_sauvegardees = isset($GLOBALS['meta'][$metatable])?unserialize($GLOBALS['meta'][$metatable]):array();
 	effacer_meta($meta);
 	effacer_meta($metatable);
-	ecrire_metas();
 
 	$size = @(!file_exists($file) ? 0 : filesize($file));
 

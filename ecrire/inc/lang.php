@@ -305,7 +305,6 @@ function init_langues() {
 		  ? 'fr' :  substr($all_langs,0,strpos($all_langs,','));
 		ecrire_meta('langue_site', $tout);
 	}
-	if ($tout) ecrire_metas();
 }
 
 // http://doc.spip.org/@html_lang_attributes

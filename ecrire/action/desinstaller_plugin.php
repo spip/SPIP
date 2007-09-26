@@ -26,7 +26,7 @@ function action_desinstaller_plugin_dist() {
 		if (!$etat)
 			ecrire_plugin_actifs(array($plug_file),false,'enleve');
 		include_spip('inc/meta');
-		ecrire_metas();
+		if (lire_metas()) ecrire_fichier(_FILE_META, serialize($GLOBALS['meta'])); 
 	}
 	if ($redirect = _request('redirect')){
 		include_spip('inc/headers');

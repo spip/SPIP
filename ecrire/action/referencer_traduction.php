@@ -54,7 +54,6 @@ function instituer_langue_article($id_article, $id_rubrique) {
 			include_spip('inc/rubriques');
 			$langues = calculer_langues_utilisees();
 			ecrire_meta('langues_utilisees', $langues);
-			ecrire_metas();
 		} else {
 			$langue_parent = sql_fetch(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=" . $id_rubrique));
 			$langue_parent=$langue_parent['lang'];

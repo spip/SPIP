@@ -92,8 +92,7 @@ function maj_v019_dist($version_installee, $version_cible)
 
 		spip_query("INSERT INTO spip_index (`hash`,`points`,`id_objet`,`id_table`) SELECT `hash`,`points`,`id_syndic` as id_objet,'9' as `id_table FROM spip_index_syndic");
 		spip_query("DROP TABLE IF EXISTS spip_index_syndic");
-		lire_metas();
-		ecrire_metas();
+		if (lire_metas()) ecrire_fichier(_FILE_META, serialize($GLOBALS['meta']));
 		maj_version(1.905);
 	}
 

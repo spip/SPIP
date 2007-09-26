@@ -55,7 +55,6 @@ function taille_du_cache() {
 function suivre_invalideur($cond, $modif=true) {
 	if ($modif) {
 		ecrire_meta('derniere_modif', time());
-		ecrire_metas();
 	}
 }
 
@@ -108,7 +107,6 @@ function appliquer_quota_cache() {
 
 	$tour_quota_cache = intval(1+$GLOBALS['meta']['tour_quota_cache'])%16;
 	ecrire_meta('tour_quota_cache', $tour_quota_cache);
-	ecrire_metas();
 
 	$l = dechex($tour_quota_cache);
 	$dir = sous_repertoire(_DIR_CACHE, $l);
@@ -163,7 +161,6 @@ function retire_cache($cache) {
 // http://doc.spip.org/@retire_caches
 function retire_caches($chemin = '') {
 	effacer_meta('invalider_caches'); # concurrence
-	ecrire_metas();
 }
 
 

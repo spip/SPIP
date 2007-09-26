@@ -126,7 +126,7 @@ function upgrade_test() {
 	return $result;
 }
 
-// pour version anterieures a 1.945
+// pour versions anterieures a 1.945
 // http://doc.spip.org/@maj_version
 function maj_version ($version, $test = true) {
 	if ($test) {
@@ -137,7 +137,6 @@ function maj_version ($version, $test = true) {
 			$GLOBALS['meta']['version_installee'] = $version;
 			spip_query("UPDATE spip_meta SET valeur=" . _q($version) ."$r WHERE nom=" . _q('version_installee') );
 		}
-		ecrire_metas();
 		spip_log("mise a jour de la base en $version");
 	} else {
 		echo _T('alerte_maj_impossible', array('version' => $version));
@@ -145,7 +144,7 @@ function maj_version ($version, $test = true) {
 	}
 }
 
-// pour version anterieures a 1.945
+// pour versions anterieures a 1.945
 // http://doc.spip.org/@upgrade_vers
 function upgrade_vers($version, $version_installee, $version_cible = 0){
 	return ($version_installee<$version

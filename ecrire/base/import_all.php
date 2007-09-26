@@ -23,7 +23,6 @@ if (isset($GLOBALS['meta']['IMPORT_tables_noimport'])){
 	$IMPORT_tables_noimport = unserialize($GLOBALS['meta']['IMPORT_tables_noimport']);
 	if (!is_array($IMPORT_tables_noimport)){
 		ecrire_meta('IMPORT_tables_noimport',serialize(array()),'non');
-		ecrire_metas();
 		$IMPORT_tables_noimport = unserialize($GLOBALS['meta']['IMPORT_tables_noimport']);
 	}
 }
@@ -31,7 +30,6 @@ else{
 	include_spip('inc/meta');
 	ecrire_meta('IMPORT_tables_noimport',
 		serialize($IMPORT_tables_noimport),'non');
-	ecrire_metas();
 }
 
 // NB: Ce fichier peut ajouter des tables (old-style)
@@ -77,7 +75,6 @@ function base_import_all_dist($titre, $reprise=false)
 
 	if ($charset = $GLOBALS['meta']['charset_restauration']) {
 			ecrire_meta('charset', $charset);
-			ecrire_metas();
 	}
 
 	detruit_restaurateur();
@@ -103,7 +100,6 @@ function import_all_milieu($request)
 // http://doc.spip.org/@import_all_debut
 function import_all_debut() {
 	ecrire_meta("status_restauration", "0",'non');
-	ecrire_metas();
 }
 
 // http://doc.spip.org/@import_all_fin
@@ -116,7 +112,6 @@ function import_all_fin($request) {
 	effacer_meta('version_archive_restauration');
 	effacer_meta('tag_archive_restauration');
 	effacer_meta('restauration_charset_sql_connexion');
-	ecrire_metas();
 	if ($request['insertion'] == 'passe2') 
 		spip_query("DROP TABLE spip_translate");
 	 

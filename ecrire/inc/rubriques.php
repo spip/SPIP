@@ -43,7 +43,6 @@ function calculer_rubriques_if ($id_rubrique, $modifs, $statut_ancien='')
 
 	$langues = calculer_langues_utilisees();
 	ecrire_meta('langues_utilisees', $langues);
-	ecrire_metas();
 }
 
 // Si premiere publication dans une rubrique, la passer en statut "publie"
@@ -122,7 +121,7 @@ function calculer_rubriques() {
 	ecrire_meta("date_calcul_rubriques", date("U"));
 
 	// on calcule la date du prochain article post-date
-	calculer_prochain_postdate(); // fera le ecrire_metas();
+	calculer_prochain_postdate();
 }
 
 // Recalcule l'ensemble des donnees associees a l'arborescence des rubriques
@@ -312,7 +311,6 @@ function calculer_langues_rubriques() {
 
 		$langues = calculer_langues_utilisees();
 		ecrire_meta('langues_utilisees', $langues);
-		ecrire_metas();
 	}
 }
 
@@ -395,7 +393,6 @@ function calculer_prochain_postdate($check= false) {
 		effacer_meta('date_prochain_postdate');
 
 	spip_log("prochain postdate: $t");
-	ecrire_metas(); // attention, sert aussi aux appelants
 }
 
 

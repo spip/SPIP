@@ -297,7 +297,6 @@ function import_init_meta($tag, $atts, $charset, $request)
 		if ($sql_char = spip_sql_character_set($charset)){
 			$sql_char = $sql_char['charset'];
 			ecrire_meta('restauration_charset_sql_connexion',$sql_char);
-			ecrire_metas();
 		}
 		else {
 			// faire la conversion de charset en php :(
@@ -308,7 +307,6 @@ function import_init_meta($tag, $atts, $charset, $request)
 			else	ecrire_meta('charset_restauration', $charset,'non');
 		}
 	}
-	ecrire_metas();
 	spip_log("Debut de l'importation (charset: $charset, format: $version_archive)" . ($request['insertion'] ? " insertion $i" : ''));
 	return $version_archive;
 }

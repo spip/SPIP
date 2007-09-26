@@ -72,7 +72,6 @@ function renouvelle_alea() {
 	ecrire_meta('alea_ephemere_ancien', @$GLOBALS['meta']['alea_ephemere'], 'non');
 	ecrire_meta('alea_ephemere', $alea, 'non');
 	ecrire_meta('alea_ephemere_date', time(), 'non');
-	ecrire_metas();
 	spip_log("renouvellement de l'alea_ephemere: $alea");
 }
 
@@ -87,7 +86,6 @@ function low_sec($id_auteur) {
 		if (!$low_sec = $GLOBALS['meta']['low_sec']) {
 			include_spip('inc/meta');
 			ecrire_meta('low_sec', $low_sec = creer_pass_aleatoire());
-			ecrire_metas();
 		}
 	}
 	else {
