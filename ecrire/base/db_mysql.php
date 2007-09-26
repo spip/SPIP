@@ -43,6 +43,7 @@ function base_db_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='') {
 		'delete' => 'spip_mysql_delete',
 		'errno' => 'spip_mysql_errno',
 		'error' => 'spip_mysql_error',
+		'explain' => 'spip_mysql_explain',
 		'fetch' => 'spip_mysql_fetch',
 		'free' => 'spip_mysql_free',
 		'insert' => 'spip_mysql_insert',
@@ -98,6 +99,15 @@ function spip_mysql_alter($query, $serveur=''){
 	return spip_mysql_query("ALTER ".$query); # i.e. que PG se debrouille
 }
 
+// http://doc.spip.org/@spip_mysql_alter
+function spip_mysql_explain($query, $serveur=''){
+	if (strpos($query, 'SELECT') !== 0) return array();
+	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$link = $connexion['link'];
+	$query = 'EXPLAIN ' . traite_query($query, $db, $prefixe);
+	$r = $link ? mysql_query($query, $link) : mysql_query($query);
+	return spip_mysql_fetch($r, NULL, $serveur);
+}
 // fonction appelant la precedente
 // c'est une instance de sql_select, voir ses specs dans abstract.php
 // traite_query pourrait y etre fait d'avance ce serait moins cher
