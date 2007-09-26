@@ -97,7 +97,7 @@ function creer_chaine_url($x) {
 	}
 
 	// S'il reste trop peu, on retombe sur article12
-	if (strlen($url) < _URL_PROPRES_MIN) {
+	if (strlen($url) < _URLS_PROPRES_MIN) {
 		$url = $objet['type'].$objet['id_objet'];
 	}
 
