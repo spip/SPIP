@@ -77,7 +77,6 @@ function serie_upgrade($serie, $q = array()) {
 			spip_log("etape $i: ".$req);
 			spip_query($req);
 			ecrire_meta('upgrade_etape_'.$serie, $i+1);
-			ecrire_metas();
 		}
 	}
 	effacer_meta('upgrade_etape_'.$serie);
