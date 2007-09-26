@@ -121,6 +121,7 @@ function spip_pg_alter($query, $serveur='') {
 	}
 }
 
+// http://doc.spip.org/@spip_pg_explain
 function spip_pg_explain($query, $serveur=''){
 	if (strpos($query, 'SELECT') !== 0) return array();
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];

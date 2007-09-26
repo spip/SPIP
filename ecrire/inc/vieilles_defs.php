@@ -75,6 +75,7 @@ function lire_meta($nom) {
 spip_log('lire_meta() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
  global $meta; return $meta[$nom];}
 
+// http://doc.spip.org/@ecrire_metas
 function ecrire_metas() {} // plus rien a faire
 
 // http://doc.spip.org/@afficher_script_layer
