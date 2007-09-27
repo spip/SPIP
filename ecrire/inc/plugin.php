@@ -219,7 +219,7 @@ function liste_chemin_plugin_actifs(){
 function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	static $liste_pipe_manquants=array();
 
-	include_spip('inc/meta');
+
 
 	$liste_fichier_verif = array();
 	if (($pipe_recherche)&&(!in_array($pipe_recherche,$liste_pipe_manquants)))
@@ -357,8 +357,6 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 		$liste_fichier_verif[$k] = (_DIR_RACINE?"":"../") . _DIR_PLUGINS . preg_replace(",(_DIR_PLUGINS\.)?',", "", $f);
 	ecrire_fichier(_DIR_TMP.'verifier_plugins.txt',
 		serialize($liste_fichier_verif));
-
-	if (lire_metas()) ecrire_fichier(_FILE_META, serialize($GLOBALS['meta']));
 }
 
 // precompilation des pipelines
@@ -530,8 +528,8 @@ function installe_plugins(){
 		}
 	}
 	ecrire_meta('plugin_installes',serialize($meta_plug_installes),'non');
-	ecrire_metas();
 }
+
 // http://doc.spip.org/@plugin_est_installe
 function plugin_est_installe($plug_path){
 	$plugin_installes = isset($GLOBALS['meta']['plugin_installes'])?unserialize($GLOBALS['meta']['plugin_installes']):array();
@@ -767,7 +765,6 @@ function plugin_pipeline_props(&$arbre){
 
 // http://doc.spip.org/@verifie_include_plugins
 function verifie_include_plugins() {
-	include_spip('inc/meta');
 	ecrire_meta('message_crash_plugins', 1);
 
 /*	if (_request('exec')!="admin_plugin"

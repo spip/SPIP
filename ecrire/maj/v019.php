@@ -63,8 +63,8 @@ function maj_v019_dist($version_installee, $version_cible)
 		$liste_tables[7]='spip_rubriques';
 		$liste_tables[8]='spip_signatures';
 		$liste_tables[9]='spip_syndic';
-		$s=addslashes(serialize($liste_tables));
-		spip_query("INSERT INTO spip_meta ( `nom` , `valeur` , `maj` ) VALUES ('index_table', '$s', NOW( ));");
+
+		ecrire_meta('index_table', serialize($liste_tables));
 
 		spip_query("INSERT INTO spip_index (`hash`,`points`,`id_objet`,`id_table`) SELECT `hash`,`points`,`id_article` as id_objet,'1' as id_table FROM spip_index_articles");
 		spip_query("DROP TABLE IF EXISTS spip_index_articles");
@@ -92,7 +92,7 @@ function maj_v019_dist($version_installee, $version_cible)
 
 		spip_query("INSERT INTO spip_index (`hash`,`points`,`id_objet`,`id_table`) SELECT `hash`,`points`,`id_syndic` as id_objet,'9' as `id_table FROM spip_index_syndic");
 		spip_query("DROP TABLE IF EXISTS spip_index_syndic");
-		if (lire_metas()) ecrire_fichier(_FILE_META, serialize($GLOBALS['meta']));
+
 		maj_version(1.905);
 	}
 
