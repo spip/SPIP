@@ -18,7 +18,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function init_metas()
 {
 	// Lire les meta, en cache si present, valide et lisible
-	if (@filemtime(_FILE_META) AND lire_fichier(_FILE_META, $meta))
+	if (jeune_fichier(_FILE_META, 1<<24)
+	AND lire_fichier(_FILE_META, $meta))
 		$GLOBALS['meta'] = @unserialize($meta);
 	// sinon le refaire.
 	if (!$GLOBALS['meta']) {
