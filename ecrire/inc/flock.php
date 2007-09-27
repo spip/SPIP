@@ -174,7 +174,7 @@ function jeune_fichier($fichier, $n)
 {
 	if (!file_exists($fichier)) return false;
 	if (!$c = @filemtime($fichier)) return false;
-	return (time()-$duree <= $c);
+	return (time()-$n <= $c);
 }
 
 //
