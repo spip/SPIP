@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Les parametres generaux du site sont dans une table SQL;
 // Recopie dans le tableau PHP global meta, car on en a souvent besoin
 
+// http://doc.spip.org/@init_metas
 function init_metas()
 {
 	// Lire les meta, en cache si present, valide et lisible
