@@ -293,7 +293,6 @@ function init_langues() {
 		$tout = join(',', $tout);
 		// Si les langues n'ont pas change, ne rien faire
 		if ($tout != $all_langs) {
-			include_spip('inc/meta');
 			$GLOBALS['meta']['langues_proposees'] =	$tout;
 			ecrire_meta('langues_proposees', $tout);
 		} else $tout = '';

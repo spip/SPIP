@@ -13,11 +13,9 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 @ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
 
-include_spip('inc/flock');
 include_spip('inc/actions');
 include_spip('inc/export');
 include_spip('base/abstract_sql');
-include_spip('inc/meta');
 include_spip('inc/acces');
 
 // http://doc.spip.org/@exec_export_all_dist

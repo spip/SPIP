@@ -68,7 +68,6 @@ function creer_uniqid() {
 // http://doc.spip.org/@renouvelle_alea
 function renouvelle_alea() {
 	$alea = md5(creer_uniqid());
-	include_spip('inc/meta');
 	ecrire_meta('alea_ephemere_ancien', @$GLOBALS['meta']['alea_ephemere'], 'non');
 	ecrire_meta('alea_ephemere', $alea, 'non');
 	ecrire_meta('alea_ephemere_date', time(), 'non');
@@ -84,7 +83,6 @@ function low_sec($id_auteur) {
 	// Pas d'id_auteur : low_sec
 	if (!$id_auteur = intval($id_auteur)) {
 		if (!$low_sec = $GLOBALS['meta']['low_sec']) {
-			include_spip('inc/meta');
 			ecrire_meta('low_sec', $low_sec = creer_pass_aleatoire());
 		}
 	}

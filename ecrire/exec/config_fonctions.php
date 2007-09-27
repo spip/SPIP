@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-include_spip('inc/meta');
 
 // http://doc.spip.org/@exec_config_fonctions_dist
 function exec_config_fonctions_dist()
@@ -40,7 +39,6 @@ function exec_config_fonctions_dist()
 	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'config_fonctions'),'data'=>''));
 	echo debut_droite('', true);
-	lire_metas();
 
 	$reducteur = charger_fonction('reducteur', 'configuration');
 #	$indexeur = charger_fonction('indexeur', 'configuration');

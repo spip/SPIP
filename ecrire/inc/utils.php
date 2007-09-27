@@ -1329,12 +1329,12 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	// pour le rendre surchargeable, on va provoquer un reecriture
 	// systematique du noyau ou une baisse de perfs => a etudier)
 	include_once _DIR_RESTREINT . 'inc/flock.php';
+	include_spip('inc/meta'); // surchargeable, mais difficilement.
 
 	// Duree de validite de l'alea pour les cookies et ce qui s'ensuit.
 	define('_RENOUVELLE_ALEA', 12 * 3600);
 
 	if  (_FILE_CONNECT) {
-		include_spip('inc/meta');
 		init_metas();
 		// Forcer le renouvellement de l'alea
 

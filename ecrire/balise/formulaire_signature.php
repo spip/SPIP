@@ -170,7 +170,6 @@ function reponse_confirmation($var_confirm = '') {
 		$confirm = _T('form_pet_signature_validee');
 		// invalider les pages ayant des boucles signatures
 		include_spip('inc/invalideur');
-		include_spip('inc/meta');
 		suivre_invalideur("id='varia/pet$id_article'");
 	}
 }

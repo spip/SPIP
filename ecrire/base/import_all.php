@@ -14,7 +14,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('base/serial');
 include_spip('base/auxiliaires');
-include_spip('inc/meta');
 
 // par defaut tout est importe sauf les tables ci-dessous
 // possibiliter de definir cela tables via la meta
@@ -27,7 +26,6 @@ if (isset($GLOBALS['meta']['IMPORT_tables_noimport'])){
 	}
 }
 else{
-	include_spip('inc/meta');
 	ecrire_meta('IMPORT_tables_noimport',
 		serialize($IMPORT_tables_noimport),'non');
 }

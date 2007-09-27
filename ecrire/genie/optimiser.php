@@ -52,7 +52,6 @@ function optimiser_base_une_table() {
 
 	if ($tables) {
 		$table_op = intval($GLOBALS['meta']['optimiser_table']+1) % sizeof($tables);
-		include_spip('inc/meta');
 		ecrire_meta('optimiser_table', $table_op);
 		$q = $tables[$table_op];
 		spip_log("debut d'optimisation de la table $q");

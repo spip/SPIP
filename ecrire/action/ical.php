@@ -15,7 +15,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/lang');
 include_spip('inc/texte');
 include_spip('inc/charsets');
-include_spip('inc/meta');
 include_spip('inc/acces');
 
 // avec le nouveau compilateur tout ceci me semble faisable en squelette.

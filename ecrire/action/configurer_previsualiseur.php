@@ -12,7 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/meta');
 
 // http://doc.spip.org/@action_configurer_previsualiseur_dist
 function action_configurer_previsualiseur_dist() {
