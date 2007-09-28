@@ -72,12 +72,13 @@ function base_db_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='') {
 		);
 }
 
-// http://doc.spip.org/@spip_mysql_set_connect_charset
+// http://doc.spip.org/@spip_mysql_set_charset
 function spip_mysql_set_charset($charset, $serveur=''){
 	#spip_log("changement de charset sql : "."SET NAMES "._q($charset));
 	return mysql_query("SET NAMES "._q($charset));
 }
 
+// http://doc.spip.org/@spip_mysql_get_charset
 function spip_mysql_get_charset($charset, $serveur=''){
 	return spip_mysql_fetch(mysql_query("SHOW CHARACTER SET LIKE "._q($charset['charset'])), NULL, $serveur);
 }
