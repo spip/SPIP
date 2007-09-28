@@ -80,7 +80,9 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 		// - est-ce "inclus" comme une image ?
 		preg_match(",^(.*)\.([^.]+)$,", $nom_envoye, $match);
 		@list(,$titre,$ext) = $match;
-		$titre = preg_replace(',[[:punct:][:space:]]+,u', ' ', $titre);
+		// Non: on ne recupere pas le titre automatiquement
+		// $titre = preg_replace(',[[:punct:][:space:]]+,u', ' ', $titre);
+		$titre = "";
 		$ext = corriger_extension(strtolower($ext));
 
 		// Si le fichier est de type inconnu, on va le stocker en .zip
