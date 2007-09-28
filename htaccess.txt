@@ -1,5 +1,5 @@
 ##############################################################
-# Fichier .htaccess                                SPIP v1.9 #
+# Fichier .htaccess                              SPIP v1.9.3 #
 #                                                            #
 # Permet de controler les URLs et la version de php utilisee #
 # Compatible avec les URLs 'html', 'propres' et 'propres2'   #
@@ -89,6 +89,15 @@ RewriteRule ^[^/\.]+(\.html)?$		spip.php?page=type_urls [QSA,E=url_propre:$0,L]
 
 # bloquer les acces aux repertoires .svn/ (SPIP, plugins, squelettes...)
 RewriteRule ^(.*/)?\.svn/ - [F]
+
+# expirer les images (pour contourner gros bug MSIE sur le cache)
+# note : a decommenter si vous voulez tester
+#<IfModule mod_expires.c>
+# ExpiresActive on
+# ExpiresByType image/gif A3600
+# ExpiresByType image/jpeg A3600
+# ExpiresByType image/png A3600
+#</IfModule>
 
 #
 ###
