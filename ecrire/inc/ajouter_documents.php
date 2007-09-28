@@ -19,12 +19,12 @@ include_spip('inc/documents');
 // Distinguer les deux cas pour commencer
 
 // http://doc.spip.org/@inc_ajouter_documents_dist
-function inc_ajouter_documents_dist ($sources, $file, $type, $id, $mode, $id_document, &$actifs, $hash='', $redirect='', $iframe_redirect='')
+function inc_ajouter_documents_dist ($sources, $file, $type, $id, $mode, $id_document, &$actifs, $hout='', $redirect='', $iframe_redirect='')
 {
 	if (is_array($sources))
-	  return liste_archive_jointe($sources, $file, $type, $id, $mode, $id_document, $hash, $redirect, $iframe_redirect);
+	  return liste_archive_jointe($sources, $file, $type, $id, $mode, $id_document, $hout, $redirect, $iframe_redirect);
 	else
-	  return ajouter_un_document($sources, $file, $type, $id, $mode, $id_document, $actifs);
+	  return ajouter_un_document($sources, $file, $type, $id, $mode, $id_document, $actifs, $hout);
 }
 
 //
@@ -42,7 +42,7 @@ function inc_ajouter_documents_dist ($sources, $file, $type, $id, $mode, $id_doc
 # $actifs	# les documents dont il faudra ouvrir la boite de dialogue
 
 // http://doc.spip.org/@ajouter_un_document
-function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, $id_document, &$documents_actifs) {
+function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, $id_document, &$documents_actifs, $titrer=false) {
 
 	include_spip('inc/modifier');
 
@@ -74,15 +74,16 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 	} else {
 		$distant = 'non';
 		$type_image = ''; // au pire
-		// calculer le titrer tester le type de document :
+		// tester le type de document :
 		// - interdit a l'upload ?
 		// - quelle extension dans spip_types_documents ?
 		// - est-ce "inclus" comme une image ?
+
 		preg_match(",^(.*)\.([^.]+)$,", $nom_envoye, $match);
 		@list(,$titre,$ext) = $match;
-		// Non: on ne recupere pas le titre automatiquement
-		// $titre = preg_replace(',[[:punct:][:space:]]+,u', ' ', $titre);
-		$titre = "";
+		if ($titrer) {
+			$titre = preg_replace(',[[:punct:][:space:]]+,u', ' ', $titre);
+		} else $titre = '';
 		$ext = corriger_extension(strtolower($ext));
 
 		// Si le fichier est de type inconnu, on va le stocker en .zip
@@ -408,9 +409,13 @@ function liste_archive_jointe($valables, $zip, $type, $id, $mode, $id_document, 
 		"<ol>" .
 		liste_archive_taille($valables) .
 		"</ol>".
-		"<br /><input type='checkbox' name='sousaction4' id='sousaction4_4' value='4' />".
+		"<input type='checkbox' name='sousaction4' id='sousaction4_4' value='4' />".
 		"<label for='sousaction4_4'>" . _T('les_deux') . "</label>" .
-		"</div>".
+		"<div style='border: 1px solid; padding: 5px; margin: 20px'>" .
+		"<label for='titrer'>" . 
+	  _L('Dans les deux derniers cas, cocher cette case pour que SPIP nomme chaque &eacute;l&eacute;ment d\'apr&egrave;s le nom du fichier.') .
+	  "</label><input style='float: right' type='checkbox' name='titrer' id='titrer' />".
+		"</div></div>".
 		"<div style='text-align: right;'><input class='fondo spip_xx-small' type='submit' value='".
 		_T('bouton_valider').
 		  "' />";

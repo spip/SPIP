@@ -254,11 +254,11 @@ function joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirec
 			      PCLZIP_CB_PRE_EXTRACT, 'callback_deballe_fichier'
 			      );
 	    $contenu = verifier_compactes($archive);
-
+	    $titrer = _request('titrer') == 'on';
 	    foreach ($contenu as $fichier => $size) {
 		$f = basename($fichier);
 		$x = $ajouter_documents(_tmp_dir. $f, $f,
-				    $type, $id, $mode, $id_document, $actifs);
+			$type, $id, $mode, $id_document, $actifs, $titrer);
 	    }
 	    effacer_repertoire_temporaire(_tmp_dir);
 	    return $x;
