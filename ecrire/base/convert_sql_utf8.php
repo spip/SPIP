@@ -16,7 +16,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@base_convert_sql_utf8_dist
 function base_convert_sql_utf8_dist($titre, $reprise=false)
 {
-
 	ecrire_meta('convert_sql_utf8','oui','non');
 	echo install_debut_html($titre);
 	
@@ -44,7 +43,7 @@ function convert_sql_utf8(){
 	$charset_supporte = false;
 	$utf8_supporte = false;	
 	// verifier que mysql gere le charset courant pour effectuer les conversions 
-	if ($c = spip_sql_character_set($charset_spip)){
+	if ($c = sql_get_charset($charset_spip)){
 		$sql_charset = $c['charset'];
 		$sql_collation = $c['collation'];
 		$charset_supporte = true;

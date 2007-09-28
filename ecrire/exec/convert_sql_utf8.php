@@ -26,8 +26,8 @@ function exec_convert_sql_utf8_dist() {
 	include_spip('inc/minipres');
 	include_spip('inc/charsets');
 	lire_metas();
-
 	$charset_spip = $GLOBALS['meta']['charset'];
+
 	// Definir le titre de la page (et le nom du fichier admin)
 	//$action = _T('utf8_convertir_votre_site');
 	$action = _L("Conversion de la base en $charset_spip"); #volontairement non traduit (obsolete)
@@ -41,7 +41,7 @@ function exec_convert_sql_utf8_dist() {
 		$utf8_supporte = false;	
 		// verifier que mysql gere le charset courant pour effectuer les conversions 
 		include_spip('base/abstract_sql');
-		if ($c = spip_sql_character_set($charset_spip)){
+		if ($c = sql_get_charset($charset_spip)){
 			$sql_charset = $c['charset'];
 			$sql_collation = $c['collation'];
 			$charset_supporte = true;

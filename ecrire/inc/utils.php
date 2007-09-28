@@ -67,7 +67,6 @@ function include_spip($f, $include = true) {
 	if (!$s = find_in_path($f . '.php')
 		AND (!_EXTENSION_PHP OR !$s = find_in_path($f . '.php3')))
 			return false;
-
 	// On charge le fichier (sauf si on ne voulait que son chemin)
 	if ($include && $s) {
 		include_once $s;
@@ -280,8 +279,8 @@ function spip_connect($serveur='') {
 		  $GLOBALS['meta']['charset_sql_connexion'] : -1;
 	}
 	if ($charset != -1) {
-		$f = $GLOBALS['db_ok']['set_connect_charset'];
-		$f($charset);
+		$f = $GLOBALS['db_ok']['set_charset'];
+		$f($charset, $serveur);
 	}
 	return $connexions[$index];
 }

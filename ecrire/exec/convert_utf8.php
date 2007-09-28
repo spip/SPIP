@@ -41,8 +41,10 @@ function exec_convert_utf8_dist() {
 			convert_utf8_non($action,
 					  _T('utf8_convert_erreur_orig', array('charset' => "<b>".$charset_orig."</b>")));
 
-		// ne pas convertir si deja utf8
-		else if ($charset_orig == 'utf-8')
+		// ne pas convertir si deja utf8 
+		// ou si l'interface du serveur ne comprend rien
+		else if (($charset_orig == 'utf-8')
+			 OR !sql_get_charset('utf-8'))
 			convert_utf8_non($action,
 					  _T('utf8_convert_erreur_deja',
 					     array('charset' => $charset_orig)));
