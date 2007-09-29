@@ -41,7 +41,7 @@ function install_etape_ldap4_dist()
 	else {
 		info_etape(_T('info_reglage_ldap'));
 
-		lire_fichier(_FILE_CONNECT_INS . _FILE_TMP . '.php', $conn);
+		lire_fichier(_FILE_CONNECT_TMP, $conn);
 		if ($p = strpos($conn, '?'.'>')) 
 			$conn = substr($conn, 0, $p);
 		if (!strpos($conn, 'spip_connect_ldap')) {
@@ -59,7 +59,7 @@ function install_etape_ldap4_dist()
 			$conn .= "\$GLOBALS['ldap_present'] = true;\n";
 		}
 		$conn .= "?".">";
-		ecrire_fichier(_FILE_CONNECT_INS . _FILE_TMP . '.php', $conn);
+		ecrire_fichier(_FILE_CONNECT_TMP, $conn);
 		$statuts = liste_statuts_ldap();
 		$statut_ldap = defined('_INSTALL_STATUT_LDAP')
 		? _INSTALL_STATUT_LDAP

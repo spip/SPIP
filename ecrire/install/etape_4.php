@@ -36,22 +36,13 @@ function install_etape_4_dist()
 		exit;
 	}
 
-	if (@file_exists(_FILE_CHMOD_INS . _FILE_TMP . '.php'))
-		include(_FILE_CHMOD_INS . _FILE_TMP . '.php');
+	if (@file_exists(_FILE_CHMOD_TMP))
+		include(_FILE_CHMOD_TMP);
 	else
 		redirige_par_entete(generer_url_ecrire('install'));
 
-	if (!@file_exists(_FILE_CONNECT_INS . _FILE_TMP . '.php'))
+	if (!@file_exists(_FILE_CONNECT_TMP))
 		redirige_par_entete(generer_url_ecrire('install'));
-
-	// Avec ce qui suit, spip_connect et consorts vont marcher.
-
-	if (!@rename(_FILE_CONNECT_INS . _FILE_TMP . '.php',
-		    _DIR_ETC . 'connect.php')) {
-		copy(_FILE_CONNECT_INS . _FILE_TMP . '.php', 
-		     _DIR_ETC . 'connect.php');
-		spip_unlink(_FILE_CONNECT_INS . _FILE_TMP . '.php');
-	}
 
 	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
 
@@ -110,17 +101,25 @@ function install_etape_4_dist()
 	spip_unlink($htpasswd."-admin");
 	ecrire_acces();
 
-	if (!@rename(_FILE_CHMOD_INS . _FILE_TMP . '.php',
-		    _DIR_ETC . 'chmod.php')) {
-		copy(_FILE_CHMOD_INS . _FILE_TMP . '.php', 
-		     _DIR_ETC . 'chmod.php');
-		spip_unlink(_FILE_CHMOD_INS . _FILE_TMP . '.php');
-	}
-
-	// et on l'envoie dans l'espace prive
+	// on l'envoie dans l'espace prive
 	echo generer_form_ecrire('accueil', bouton_suivant());
 	echo info_progression_etape(4,'etape_','install/');
 	echo install_fin_html();
+
+	// et on perennise
+
+	$f = str_replace( _FILE_TMP_SUFFIX, '.php', _FILE_CHMOD_TMP);
+	if (!@rename(_FILE_CHMOD_TMP, $f)) {
+		if (@copy(_FILE_CHMOD_TMP, $f))
+			spip_unlink(_FILE_CHMOD_TMP);
+	}
+
+	$f = str_replace( _FILE_TMP_SUFFIX, '.php', _FILE_CONNECT_TMP);
+	if (!@rename(_FILE_CONNECT_TMP, $f)) {
+		if (@copy(_FILE_CONNECT_TMP, $f))
+			@spip_unlink(_FILE_CONNECT_TMP);
+	}
+
 }
 
 ?>

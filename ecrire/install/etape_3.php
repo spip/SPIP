@@ -123,7 +123,8 @@ function install_bases(){
 			WHERE nom='version_installee'", $server_db);
 	  // eliminer la derniere operation d'admin mal terminee
 	  // notamment la mise a jour 
-	  @$fquery("DELETE FROM spip_meta WHERE nom='import_all' OR  nom='admin'", $server_db);	}
+	  @$fquery("DELETE FROM spip_meta WHERE nom='import_all' OR  nom='admin'", $server_db);
+	}
 
 	$ligne_rappel = ($server_db != 'mysql') ? ''
 	: test_rappel_nom_base_mysql($server_db);
@@ -132,7 +133,7 @@ function install_bases(){
 	if (!$result_ok) return "<!--\n$nouvelle $ligne_rappel\n-->";
 
 	if($chmod) {
-		install_fichier_connexion(_FILE_CHMOD_INS . _FILE_TMP . '.php', "@define('_SPIP_CHMOD', ". sprintf('0%3o',$chmod).");\n");
+		install_fichier_connexion(_FILE_CHMOD_TMP, "@define('_SPIP_CHMOD', ". sprintf('0%3o',$chmod).");\n");
 	}
 
 	if (preg_match(',(.*):(.*),', $adresse_db, $r))
@@ -147,7 +148,7 @@ function install_bases(){
 	. addcslashes($pass_db, "'\\") . "','$sel_db'"
 	. ",'$server_db', '$table_prefix');\n";
 
-	install_fichier_connexion(_FILE_CONNECT_INS . _FILE_TMP . '.php', $conn);
+	install_fichier_connexion(_FILE_CONNECT_TMP, $conn);
 	return '';
 }
 
@@ -224,13 +225,13 @@ function install_etape_3_dist()
 		$res .= "<p class='resultat'><b>"._T('avis_operation_echec')."</b></p>"._T('texte_operation_echec');
 	
 	else {
-		if (file_exists(_FILE_CONNECT_INS . _FILE_TMP . '.php'))
-			include(_FILE_CONNECT_INS . _FILE_TMP . '.php');
+		if (file_exists(_FILE_CONNECT_TMP))
+			include(_FILE_CONNECT_TMP);
 		else
 			redirige_par_entete(generer_url_ecrire('install'));
 	
-		if (file_exists(_FILE_CHMOD_INS . _FILE_TMP . '.php'))
-			include(_FILE_CHMOD_INS . _FILE_TMP . '.php');
+		if (file_exists(_FILE_CHMOD_TMP))
+			include(_FILE_CHMOD_TMP);
 		else
 			redirige_par_entete(generer_url_ecrire('install'));
 
@@ -255,7 +256,8 @@ function install_etape_3_dist()
 function test_rappel_nom_base_mysql($server_db)
 {
 	$GLOBALS['mysql_rappel_nom_base'] = true;
-	$ok = sql_insert('spip_meta', "(nom,valeur)", "('mysql_rappel_nom_base', 'test')",  array(), $server_db);
+	sql_delete('spip_meta', "nom='mysql_rappel_nom_base'", $server_db);
+	$ok = spip_query("INSERT INTO spip_meta (nom,valeur) VALUES ('mysql_rappel_nom_base', 'test')", $server_db);
 
 	if ($ok) {
 		sql_delete('spip_meta', "nom='mysql_rappel_nom_base'", $server_db);
