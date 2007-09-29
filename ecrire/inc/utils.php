@@ -256,7 +256,9 @@ function spip_connect($serveur='') {
 	unset($GLOBALS['spip_connect_version']);
 	if ($f AND is_readable($f)) include($f);
 	if (!isset($GLOBALS['db_ok'])) {
+		if ($install) return false; // fera mieux la prochaine fois
 		spip_log("spip_connect: serveur $index mal defini dans '$f'.");
+		// ne plus reessayer si ce n'est pas l'install
 		return $connexions[$index]=false;
 	}
 
@@ -1332,21 +1334,14 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	// pour le rendre surchargeable, on va provoquer un reecriture
 	// systematique du noyau ou une baisse de perfs => a etudier)
 	include_once _DIR_RESTREINT . 'inc/flock.php';
-	include_spip('inc/meta'); // surchargeable, mais difficilement.
 
 	// Duree de validite de l'alea pour les cookies et ce qui s'ensuit.
 	define('_RENOUVELLE_ALEA', 12 * 3600);
 
-	if  (_FILE_CONNECT) {
-		init_metas();
-		// Forcer le renouvellement de l'alea
-
-		if (test_espace_prive()
-		AND (time() > _RENOUVELLE_ALEA +  @$GLOBALS['meta']['alea_ephemere_date'])) {
-			include_spip('inc/acces');
-			renouvelle_alea();
-		}
-	}
+	// charger les meta si possible et renouveller l'alea au besoin
+	// charge aussi effacer_meta et ecrire_meta
+	$init_meta = charger_fonction('meta', 'inc'); 
+	$init_meta();
 
 	// nombre de repertoires depuis la racine
 	// on compare a l'adresse donnee en meta ; si celle-ci est fausse
