@@ -148,10 +148,15 @@ function pipeline($action, $val=null) {
 // Enregistrement des evenements
 //
 // http://doc.spip.org/@spip_log
-function spip_log($message, $logname='spip') {
+function spip_log($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 	static $compteur = array();
 	global $nombre_de_logs, $taille_des_logs;
-	if ($compteur[$logname]++ > 100 || !$nombre_de_logs || !$taille_des_logs) return;
+	if ($compteur[$logname]++ > 100 || !$nombre_de_logs || !$taille_des_logs)
+		return;
+
+	$logfile = ($logdir===NULL ? _DIR_LOG : $logdir)
+	  . ($logname===NULL ? _FILE_LOG : $logname)
+	  . ($logsuf===NULL ? _FILE_LOG_SUFFIX : $logname);
 
 	$rotate = 0;
 	$pid = '(pid '.@getmypid().')';
@@ -162,7 +167,7 @@ function spip_log($message, $logname='spip') {
 	$m = date("M d H:i:s").' '.$GLOBALS['ip'].' '.$pid.' '
 		.preg_replace("/\n*$/", "\n", $message);
 
-	$logfile = _DIR_TMP . $logname . '.log';
+
 	if (@is_readable($logfile)
 	AND (!$s = @filesize($logfile) OR $s > $taille_des_logs * 1024)) {
 		$rotate = $nombre_de_logs;
@@ -171,7 +176,7 @@ function spip_log($message, $logname='spip') {
 	
 	$f = @fopen($logfile, "ab");
 	if ($f) {
-		fputs($f, ($logname!='spip') ? $m : str_replace('<','&lt;',$m));
+		fputs($f, ($logname!==NULL) ? $m : str_replace('<','&lt;',$m));
 		fclose($f);
 	}
 
@@ -182,8 +187,8 @@ function spip_log($message, $logname='spip') {
 		}
 	}
 
-	if ($logname != 'spip')
-		spip_log($message, 'spip');
+	// Dupliquer l'erreur SQL dans le log general
+	if ($logname !== NULL)	spip_log($message);
 }
 
 // Fonction appelee par le fichier cree dans config/ a l'instal'.
@@ -1191,6 +1196,10 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	define('_DIR_VAR', $ta);
 
 	define('_DIR_ETC', $pi);
+
+	define('_DIR_LOG', _DIR_TMP);
+	define('_FILE_LOG', 'spip');
+	define('_FILE_LOG_SUFFIX', '.log');
 
 	if (!isset($GLOBALS['test_dirs']))
 		$GLOBALS['test_dirs'] =  array($pa, $ti, $ta);
