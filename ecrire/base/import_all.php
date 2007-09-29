@@ -45,8 +45,7 @@ function base_import_all_dist($titre, $reprise=false)
 	$request = unserialize($GLOBALS['meta']['import_all']);
 	// au rappel, on commence (voire on continue)
 	@ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
-	// utiliser une version fraiche des metas (ie pas le cache)
-	lire_metas();
+
 	include_spip('inc/import');
 	@ignore_user_abort(1);
 

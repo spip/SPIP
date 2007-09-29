@@ -46,6 +46,16 @@ function lire_metas() {
 	return $GLOBALS['meta'];
 }
 
+// http://doc.spip.org/@effacer_meta
+function effacer_meta($nom) {
+	// section critique sur le cache:
+	// l'invalider avant et apres la MAJ de la BD
+	// c'est un peu moints bien qu'un vrai verrou mais ca suffira
+	@touch(_FILE_META,0);
+	spip_query("DELETE FROM spip_meta WHERE nom='$nom'");
+	@touch(_FILE_META,0);
+}
+
 // http://doc.spip.org/@ecrire_meta
 function ecrire_meta($nom, $valeur, $importable = NULL) {
 
@@ -55,9 +65,11 @@ function ecrire_meta($nom, $valeur, $importable = NULL) {
 	include_spip('base/abstract_sql');
 	$res = sql_fetsel("impt,valeur", 'spip_meta', "nom=" . _q($nom));
 	// conserver la valeur de impt si existante
-	// et ne pas detruire le cache si affectation a l'identique
+	// et ne pas invalider le cache si affectation a l'identique
+	if ($res AND $valeur == $res['valeur']) return;
+	// cf effacer pour le double touch
+	@touch(_FILE_META, 0);
 	if ($res) {
-		if ($valeur == $res['valeur']) return;
 		$r = ($importable === NULL) ? ''
 		: (", impt=" .  _q($importable));
 		spip_query("UPDATE spip_meta SET valeur=" . _q($valeur) ."$r WHERE nom=" . _q($nom) );
@@ -66,9 +78,4 @@ function ecrire_meta($nom, $valeur, $importable = NULL) {
 	@touch(_FILE_META, 0);
 }
 
-// http://doc.spip.org/@effacer_meta
-function effacer_meta($nom) {
-	spip_query("DELETE FROM spip_meta WHERE nom='$nom'");
-	@touch(_FILE_META,0);
-}
 ?>
