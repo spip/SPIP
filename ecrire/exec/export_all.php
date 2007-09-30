@@ -13,11 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 @ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
 
-include_spip('inc/actions');
-include_spip('inc/export');
-include_spip('base/abstract_sql');
-include_spip('inc/acces');
-
 // http://doc.spip.org/@exec_export_all_dist
 function exec_export_all_dist()
 {
@@ -36,6 +31,11 @@ function exec_export_all_dist()
 		include_spip('inc/headers');
 		redirige_par_entete(generer_action_auteur("export_all", "start,$gz,$archive,$rub", '', true));
 	} 
+
+	include_spip('inc/actions');
+	include_spip('inc/export');
+	include_spip('base/abstract_sql');
+	include_spip('inc/acces');
 
 	$start = false;
 	list($gz, $archive, $rub, $etape_actuelle, $sous_etape) = 
@@ -97,9 +97,7 @@ function exec_export_all_dist()
 
 	// Les sauvegardes partielles prennent le temps d'indiquer les logos
 	// Instancier une fois pour toutes, car on va boucler un max.
-	// On ne complete par jusqu'au secteur
-	// (il faudrait, sans prendre les soeurs, pour pouvoir
-	// resituer dans l'arborescence)
+	// On complete jusqu'au secteur pour resituer dans l'arborescence)
 	if ($rub) {
 		$GLOBALS['chercher_logo'] = charger_fonction('chercher_logo', 'inc',true);
 		$les_rubriques = complete_fils(array($rub));
@@ -123,8 +121,6 @@ function exec_export_all_dist()
 		}
 		$etape++;
 		$status_dump = "$gz::$archive::$rub::" . $etape . "::0";
-	// on se contente d'une ecriture en base pour aller plus vite
-	// a la relecture on en profitera pour mettre le cache a jour
 		ecrire_meta($meta, $status_dump,'non');
 	}
 	echo_flush( "</div>\n");
