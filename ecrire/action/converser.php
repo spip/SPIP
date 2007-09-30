@@ -23,7 +23,7 @@ function action_converser_dist()
 	if ($lang = _request('var_lang'))
 		action_converser_post($lang);
 	elseif ($lang = _request('var_lang_ecrire')) {
-		if ( _request('arg') AND _FILE_CONNECT) {
+		if ( _request('arg') AND spip_connect()) {
 			$securiser_action = charger_fonction('securiser_action', 'inc');
 			$securiser_action();
 

@@ -16,7 +16,6 @@ if (defined("_TEST_DIRS")) return;
 define("_TEST_DIRS", "1");
 
 include_spip('inc/minipres');
-#include_spip('inc/headers'); // fait dans inc/public
 utiliser_langue_visiteur();
 
 //
@@ -81,8 +80,10 @@ function install_etape_chmod_dist()
 		if (substr($test_dir,-1)!=='/') $test_dir .= '/';
 		if (!in_array($test_dir, $test_dirs)) $test_dirs[] = _DIR_RACINE  . $test_dir;
 	} else {
-		if (!_FILE_CONNECT)
-			$test_dirs[] = _DIR_ETC;
+		if (!_FILE_CONNECT) {
+			$test_dirs[] = _DIR_CONNECT;
+			$test_dirs[] = _DIR_CHMOD;
+		}
 	}
 
 	$bad_dirs = array();
@@ -93,9 +94,9 @@ function install_etape_chmod_dist()
 		if (!$test) {
 			$m = preg_replace(',^' . _DIR_RACINE . ',', '',$my_dir);
 			if (@file_exists($my_dir)) {
-				$bad_dirs[] = "<li>".$m."</li>";
+				$bad_dirs["<li>".$m."</li>"] = 1;
 			} else
-				$absent_dirs[] = "<li>".$m."</li>";
+				$absent_dirs["<li>".$m."</li>"] = 1;
 		} else $chmod = max($chmod, $test);
 	}
 
@@ -113,14 +114,14 @@ function install_etape_chmod_dist()
 	if ($bad_dirs) {
 		$res .=
 		  _T('dirs_repertoires_suivants',
-			   array('bad_dirs' => join(" ", $bad_dirs))) .
+		     array('bad_dirs' => join("\n", array_keys($bad_dirs)))) .
 		  	"<b>". _T('login_recharger')."</b>.";
 	}
 
 	if ($absent_dirs) {
 	  	$res .=
 			_T('dirs_repertoires_absents',
-			   array('bad_dirs' => join(" ", $absent_dirs))) .
+			   array('bad_dirs' => join("\n", array_keys($absent_dirs)))) .
 			"<b>". _T('login_recharger')."</b>.";
 	}
 	$res = "<p>" . $continuer  . $res . aide ("install0") . "</p>";

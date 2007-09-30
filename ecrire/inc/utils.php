@@ -252,7 +252,7 @@ function spip_connect($serveur='') {
 
 	$f = (!preg_match('/^\w*$/', $serveur))	? ''
 	: (($serveur AND !$install) ?
-		( _DIR_ETC .'connect' . $serveur . '.php')
+		( _DIR_CONNECT. $serveur . '.php')
 		: (_FILE_CONNECT ? _FILE_CONNECT : _FILE_CONNECT_TMP));
 
 	unset($GLOBALS['db_ok']);
@@ -1196,19 +1196,23 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	define('_DIR_VAR', $ta);
 
 	define('_DIR_ETC', $pi);
+	define('_DIR_CONNECT', $pi);
+	define('_DIR_CHMOD', $pi);
 
 	define('_DIR_LOG', _DIR_TMP);
 	define('_FILE_LOG', 'spip');
 	define('_FILE_LOG_SUFFIX', '.log');
 
 	if (!isset($GLOBALS['test_dirs']))
+	  // Pas $pi car il est bon de le mettre hors ecriture apres intstall
+	  // il sera rajoute automatiquement si besoin a l'etape 2 de l'install
 		$GLOBALS['test_dirs'] =  array($pa, $ti, $ta);
 
 	// Le fichier de connexion a la base de donnees
 	// tient compte des anciennes versions (inc_connect...)
 	define('_FILE_CONNECT_INS', 'connect');
 	define('_FILE_CONNECT',
-		(@is_readable($f = _DIR_ETC . _FILE_CONNECT_INS . '.php') ? $f
+		(@is_readable($f = _DIR_CONNECT . _FILE_CONNECT_INS . '.php') ? $f
 	:	(@is_readable($f = _DIR_RESTREINT . 'inc_connect.php') ? $f
 	:	(@is_readable($f = _DIR_RESTREINT . 'inc_connect.php3') ? $f
 	:	false))));
@@ -1216,12 +1220,12 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	// Le fichier de reglages des droits
 	define('_FILE_CHMOD_INS', 'chmod');
 	define('_FILE_CHMOD',
-		(@is_readable($f = _DIR_ETC . _FILE_CHMOD_INS . '.php') ? $f
+		(@is_readable($f = _DIR_CHMOD . _FILE_CHMOD_INS . '.php') ? $f
 	:	false));
 
 	define('_FILE_TMP_SUFFIX', '.tmp.php');
-	define('_FILE_CONNECT_TMP', _DIR_ETC . _FILE_CONNECT_INS . _FILE_TMP_SUFFIX);
-	define('_FILE_CHMOD_TMP', _DIR_ETC . _FILE_CHMOD_INS . _FILE_TMP_SUFFIX);
+	define('_FILE_CONNECT_TMP', _DIR_CONNECT . _FILE_CONNECT_INS . _FILE_TMP_SUFFIX);
+	define('_FILE_CHMOD_TMP', _DIR_CHMOD . _FILE_CHMOD_INS . _FILE_TMP_SUFFIX);
 
 	// Definition des droits d'acces en ecriture
 	if (!defined('_SPIP_CHMOD')) {
