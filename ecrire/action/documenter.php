@@ -35,12 +35,13 @@ function action_documenter_post($r)
 		// supprimer_document_et_vignette($vignette);
 		// on dissocie, mais si le doc est utilise dans le texte, il sera reassocie ..., donc condition sur vu !
 		sql_delete("spip_documents_".$type."s",
-			"id_$type=$id AND id_document=$vignette AND (vu='non' OR vu IS NULL)");
+			"id_$type="._q($id)." AND id_document="._q($vignette)." AND (vu='non' OR vu IS NULL)");
 
 		// Ensuite on supprime les docs orphelins, ca supprimera
 		// physiquement notre document s'il n'est pas attache ailleurs
 		// Je mets l'option a *false* pour ne rien casser chez les
-		// experimentateurs, mais par defaut ca devrait etre *true*
+		// experimentateurs [FORMULAIRE_UPLOAD, FORMS&TABLES], mais
+		// par defaut ca devrait etre *true*
 		// Quoi qu'il en soit les boucles n'affichent plus les documents
 		// orphelins, sauf critere {tout}
 		define('_SUPPRIMER_DOCUMENTS_ORPHELINS', false);
@@ -48,6 +49,10 @@ function action_documenter_post($r)
 			include_spip('inc/documents');
 			supprimer_les_documents_orphelins();
 		}
+		// Version plus soft : on ne supprime que le doc en cours de suppression
+		include_spip('inc/documents');
+		if (in_array($vignette, lister_les_documents_orphelins()))
+			supprimer_documents(array($vignette));
 	}
 	else {
 		if ($sign)
