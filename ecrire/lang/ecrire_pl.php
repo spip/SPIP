@@ -217,6 +217,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creation_groupe_mots' => 'Utw&oacute;rz now&#261; grup&#281; s&#322;&oacute;w kluczowych',
 'icone_creation_mots_cles' => 'Utw&oacute;rz nowe s&#322;owo kluczowe',
 'icone_creer_auteur' => 'Stw&oacute;rz nowego autora i przypisz go do tego artyku&#322;u',
+'icone_creer_mot_cle' => 'Stw&oacute;rz nowe s&#322;owo kluczowe i skojarz je z tym artyku&#322;em',
+'icone_creer_mot_cle_breve' => 'Utw&oacute;rz nowe s&#322;owo kluczowe i po&#322;&#261;cz je z tym newsem',
+'icone_creer_mot_cle_rubrique' => 'Utw&oacute;rz nowe s&#322;owo kluczowe i po&#322;&#261;cz je z tym dzia&#322;em',
+'icone_creer_mot_cle_site' => 'Utw&oacute;rz nowe s&#322;owo kluczowe i po&#322;&#261;cz je z tym linkiem ',
 'icone_creer_rubrique_2' => 'Utw&oacute;rz nowy dzia&#322;',
 'icone_ecrire_nouvel_article' => 'Newsy w tym dziale',
 'icone_envoyer_message' => 'Wy&#347;lij t&#281; wiadomo&#347;&#263;',
@@ -297,7 +301,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_breves_liees_mot' => 'Newsy powi&#261;zane z tym s&#322;owem kluczowym',
 'info_breves_touvees' => 'Newsy znalezione',
 'info_breves_touvees_dans_texte' => 'Newsy znalezione (w tek&#347;cie)',
-'info_changer_nom_groupe' => 'Zmie&#324; nazw&#281; tej grupy:',
+'info_changer_nom_groupe' => 'Zmie&#324; nazw&#281; grupy:',
 'info_chapeau' => 'Wst&#281;p',
 'info_chapeau_2' => 'Wst&#281;p:',
 'info_chemin_acces_1' => 'Opcje: <b>&#346;cie&#380;ka dost&#281;pu do katalogu</b>',
@@ -921,7 +925,7 @@ multimedi&oacute;w, itd.) do artyku&#322;&oacute;w b&#261;d&#378; dzia&#322;&oac
 'texte_mise_a_niveau_base_1' => 'W&#322;a&#347;nie zaktualizowa&#322;e&#347; pliki SPIP.
  Teraz nale&#380;y uaktualni&#263; baz&#281; danych
  Twojego serwisu.',
-'texte_modifier_article' => 'Zmie&#324; artyku&#322;:',
+'texte_modifier_article' => 'Edytuj artyku&#322;',
 'texte_moteur_recherche_active' => '<b>Wyszukiwarka jest w&#322;&#261;czona</b> U&#380;yj tego polecenia
   je&#347;li &#380;yczysz sobie szybkiej reindeksacji (np. po odtworzeniu
   kopii bezpiecze&#324;stwa). Pami&#281;taj, &#380;e dokumenty zmodyfikowane
@@ -1063,12 +1067,12 @@ wyszukiwania w do&#322;&#261;czonej stronie.',
 'titre_nouvelle_rubrique' => 'Nowy dzia&#322;',
 'titre_numero_rubrique' => 'DZIA&#321; NUMER&nbsp;:',
 'titre_page_admin_effacer' => 'Konserwacja techniczna : wyczy&#347;&#263; baz&#281;',
-'titre_page_articles_edit' => 'Zmie&#324;: @titre@',
+'titre_page_articles_edit' => 'Edytuj: @titre@',
 'titre_page_articles_page' => 'Artyku&#322;y',
 'titre_page_articles_tous' => 'Ca&#322;a strona',
 'titre_page_auteurs' => 'Odwiedzaj&#261;cy',
 'titre_page_breves' => 'Newsy',
-'titre_page_breves_edit' => 'Zmie&#324; newsa: &laquo;@titre@&raquo;',
+'titre_page_breves_edit' => 'Edytuj newsa: &laquo;@titre@&raquo;',
 'titre_page_calendrier' => 'Kalendarz @nom_mois@ @annee@',
 'titre_page_config_contenu' => 'Konfiguracja strony',
 'titre_page_config_fonctions' => 'Konfiguracja strony',

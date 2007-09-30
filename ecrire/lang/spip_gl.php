@@ -328,7 +328,6 @@ Grazas pola s&uacute;a participaci&oacute;n
 'icone_brouteur' => 'Navegaci&oacute;n r&aacute;pida',
 'icone_configuration_site' => 'Configuraci&oacute;n',
 'icone_configurer_site' => 'Configurar o teu web',
-'icone_creer_mot_cle' => 'Crear unha nova palabra chave e asociala con este artigo',
 'icone_creer_nouvel_auteur' => 'Crear un/unha nov@ autor/a',
 'icone_creer_rubrique' => 'Crear un tema',
 'icone_creer_sous_rubrique' => 'Crear un apartado',

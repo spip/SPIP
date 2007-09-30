@@ -217,6 +217,10 @@ Se non conosci queste informazioni, richiedile all\'amministratore del sistema o
 'icone_creation_groupe_mots' => 'Crea un nuovo gruppo',
 'icone_creation_mots_cles' => 'Crea una nuova parola chiave',
 'icone_creer_auteur' => 'Crea un nuovo autore ed associalo a questo articolo',
+'icone_creer_mot_cle' => 'Crea una nuova parola chiave e collegala a questo articolo',
+'icone_creer_mot_cle_breve' => 'Creare una nuova parola chiave e collegarla a questa breve',
+'icone_creer_mot_cle_rubrique' => 'Creare una nuova parola chiave e collegarla a questa rubrica',
+'icone_creer_mot_cle_site' => 'Creare una nuova parola chiave e collegarla a questo sito',
 'icone_creer_rubrique_2' => 'Crea una nuova rubrica',
 'icone_ecrire_nouvel_article' => 'Le brevi contenute nella rubrica',
 'icone_envoyer_message' => 'Invia questo messaggio',
@@ -828,7 +832,7 @@ Le traduzioni sono associate all\'originale,
 'texte_admin_effacer_01' => 'Questo commando cancella <i>tutto</i> il contenuto del database,
  compresi <i>tutti</i> i login dei redattori e degli amministratori. Dopo averlo eseguito, dovrai riavviare la procedura di installazione per ricreare un nuovo database e un primo ID amministrativo.',
 'texte_admin_tech_01' => 'Questa opzione permette di salvare il contenuto del database in un file che sar&agrave; conservato nella cartella @dossier@.
-Non dimenticare di recuperare integralmente anche la cartella @img@, che contiene le immagini e i documentii utilizzati negli articoli e nelle rubriche.',
+Non dimenticare di recuperare integralmente anche la cartella @img@, che contiene le immagini e i documenti utilizzati negli articoli e nelle rubriche.',
 'texte_admin_tech_02' => 'Attenzione: questo salvaggio potr&agrave; essere ripristinato SOLO in un sito installato con la stessa versione di SPIP.
 In particolare &egrave; sbagliato cancellare il database pensando di ripristinare questo salvataggio su una nuova versione di SPIP...
 Per maggiori informazioni consulta <a href="http://www.spip.net/it_article2827.html">la documentazione di SPIP</a>.',

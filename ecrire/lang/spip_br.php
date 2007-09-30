@@ -324,7 +324,6 @@ Trugarez da gemer perzh
 'icone_brouteur' => 'Merdei&ntilde; prim',
 'icone_configuration_site' => 'Ardremmezi&ntilde;',
 'icone_configurer_site' => 'Ardremmezi&ntilde; ho lec\'hienn',
-'icone_creer_mot_cle' => 'Kroui&ntilde; ur ger-stur nevez hag e liamma&ntilde; ouzh ar pennad-ma&ntilde;',
 'icone_creer_nouvel_auteur' => 'Kroui&ntilde; ur skridaozer nevez',
 'icone_creer_rubrique' => 'Kroui&ntilde; ur rummad',
 'icone_creer_sous_rubrique' => 'Kroui&ntilde; un is-rummad',

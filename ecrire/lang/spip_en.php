@@ -329,7 +329,6 @@ Thank you for your participation!
 'icone_brouteur' => 'Quick browsing',
 'icone_configuration_site' => 'Configuration',
 'icone_configurer_site' => 'Configure your site',
-'icone_creer_mot_cle' => 'Create a new keyword and link it to this article',
 'icone_creer_nouvel_auteur' => 'Create a new author',
 'icone_creer_rubrique' => 'Create a section',
 'icone_creer_sous_rubrique' => 'Create a sub-section',

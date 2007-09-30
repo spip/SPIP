@@ -328,7 +328,6 @@ Merc&eacute; de la voastra participacion
 'icone_brouteur' => 'Navigacion rapida',
 'icone_configuration_site' => 'Configuracion',
 'icone_configurer_site' => 'Configurar lo voastre sit',
-'icone_creer_mot_cle' => 'Crear un nov&egrave;u m&ograve;t clau e lo ligar &agrave;-n-aquel article',
 'icone_creer_nouvel_auteur' => 'Crear un noveu autor',
 'icone_creer_rubrique' => 'Crear una rubrica',
 'icone_creer_sous_rubrique' => 'Crear una sosrubrica',
