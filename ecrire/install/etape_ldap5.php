@@ -16,11 +16,7 @@ include_spip('inc/headers');
 // http://doc.spip.org/@inc_install_ldap5
 function install_etape_ldap5_dist()
 {
-	//  _FILE_CONNECT n'existe pas encore
-
-	if (@file_exists(_FILE_CONNECT_TMP))
-		include(_FILE_CONNECT_TMP);
-	else
+	if (!@file_exists(_FILE_CONNECT_TMP))
 		redirige_par_entete(generer_url_ecrire('install'));
 
 	ecrire_meta('ldap_statut_import', _request('statut_ldap'));
