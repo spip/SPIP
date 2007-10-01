@@ -242,6 +242,20 @@ $sousrequete, $having, $table, $id, $serveur),
 				   $serveur);
 }
 
+# Retourne l'unique champ demande dans une requete Select a resultat unique
+// http://doc.spip.org/@sql_fetsel
+function sql_getfetsel(
+	$select, $from = array(), $where = array(),
+	$groupby = '', $orderby = array(), $limit = '',
+	$sousrequete = '', $having = array(),
+	$table = '', $id = '', $serveur='') {
+	$r = sql_fetch(sql_select(
+$select, $from, $where,	$groupby, $orderby, $limit,
+$sousrequete, $having, $table, $id, $serveur),
+				   $serveur);
+	return $r ? $r[$select] : NULL;
+}
+
 # une composition tellement frequente...
 // http://doc.spip.org/@sql_countsel
 function sql_countsel($from = array(), $where = array(),

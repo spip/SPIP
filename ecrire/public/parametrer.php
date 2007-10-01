@@ -162,36 +162,25 @@ function quete_profondeur($id) {
 
 // http://doc.spip.org/@quete_rubrique
 function quete_rubrique($id_article) {
-	$id_rubrique = sql_fetsel('id_rubrique', 'spip_articles',"id_article=" . intval($id_article));
-	return $id_rubrique['id_rubrique'];
+	return sql_getfetsel('id_rubrique', 'spip_articles',"id_article=" . intval($id_article));
 }
 
-# retourne le champ lang d'une table 
-
-// http://doc.spip.org/@quete_lang
-function quete_lang($id, $table) {
-	$desc = trouver_table(table_objet($table));
-	if (!$desc OR !isset($desc['field']['lang'])) return '';
-	$lang = sql_fetsel('lang', $desc['table'], ("id_$table=" . intval($id)));
-	return $lang['lang'];
-}
 # retourne le fichier d'un document
 
 // http://doc.spip.org/@quete_fichier
 function quete_fichier($id_document, $serveur) {
-	$r = sql_fetsel('fichier', 'spip_documents', ("id_document=" . intval($id_document)),	'',array(),'','','', '', '', $serveur);
-	return $r['fichier'];
+	return sql_getfetsel('fichier', 'spip_documents', ("id_document=" . intval($id_document)),	'',array(),'','','', '', '', $serveur);
 }
 
 // http://doc.spip.org/@quete_petitions
 function quete_petitions($id_article, $table, $id_boucle, $serveur, &$cache) {
-	$retour = sql_fetsel('texte', 'spip_petitions',("id_article=".intval($id_article)),'',array(),'','','', $table, $id_boucle, $serveur);
+	$retour = sql_getfetsel('texte', 'spip_petitions',("id_article=".intval($id_article)),'',array(),'','','', $table, $id_boucle, $serveur);
 
-	if (!$retour) return '';
+	if ($retour === NULL) return '';
 	# cette page est invalidee par toute petition
 	$cache['varia']['pet'.$id_article] = 1;
 	# ne pas retourner '' car le texte sert aussi de presence
-	return ($retour['texte'] ? $retour['texte'] : ' ');
+	return $retour ? $retour : ' ';
 }
 
 # retourne le champ 'accepter_forum' d'un article
@@ -212,8 +201,7 @@ function quete_accepter_forum($id_article) {
 // recuperer une meta sur un site distant (en local il y a plus simple)
 // http://doc.spip.org/@quete_meta
 function quete_meta($nom, $serveur) {
-	$r = sql_fetsel("valeur", "spip_meta", "nom=" . _q($nom), '','','','','','','',$serveur);
-	return $r['valeur'];
+	return sql_getfetsel("valeur", "spip_meta", "nom=" . _q($nom), '','','','','','','',$serveur);
 }
 
 // Compilation finale des balise #URL_xxx
