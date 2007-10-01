@@ -133,20 +133,20 @@ function exec_admin_tech_dist()
 	
 		$liste_dump = preg_files(_DIR_DUMP,'\.xml(\.gz)?$',50,false);
 		$selected = end($liste_dump);
-		$liste_choix = "<ul>"; 
-		foreach($liste_dump as $key=>$fichier){
-			$affiche_fichier = substr($fichier,strlen(_DIR_DUMP));
-			$liste_choix.="\n<li style='list-style:none;'><input type='radio' name='archive' value='"
-		. $affiche_fichier
-		. "' id='dump_$key' "
-		.  (($fichier==$selected)?"checked='checked' ":"")
-		. "/>\n<label for='dump_$key'>"
-		.   $file = str_replace('/', ' / ', $affiche_fichier)
-		. '&nbsp;&nbsp; ('
-		. taille_en_octets(filesize($fichier))
-		. ')</label></li>';
+		$liste = ""; 
+		$i = 0;
+		foreach($liste_dump as $k=>$f){
+		  $i++;
+		  $class = 'row_'.alterner($i, 'even', 'odd');
+		  $liste .= liste_sauvegardes($k, $f, $class, $selected);
 		}
- 	
+		$class = 'row_'.alterner($i+1, 'even', 'odd');
+		$liste = "<br /><br /><table class='spip'>"
+		.  $liste
+		. "\n<tr class='$class'><td><input type='radio' name='archive' id='archive' value='' /></td><td  colspan='3'>"
+		. "\n<span class='spip_x-small'><input type='text' name='archive_perso' id='archive_perso' value='$fichier_defaut' size='55' /></span></td></tr>"
+		. '</table>';
+
 		if ($flag_gz) {
 			$fichier_defaut = str_replace(array("@stamp@","@nom_site@"),array("",""),_SPIP_DUMP) . '.gz';
 			$texte_compresse = _T('texte_compresse_ou_non')."&nbsp;";
@@ -162,9 +162,7 @@ function exec_admin_tech_dist()
 		_T('texte_restaurer_sauvegarde', array('dossier' => '<i>'.$dir_dump.'</i>')) .
 		  '</p>' .
 		_T('entree_nom_fichier', array('texte_compresse' => $texte_compresse)) .
-		$liste_choix .
-		"\n<li style='list-style:none;'><input type='radio' name='archive' id='archive' value='' />" .
-		"\n<span class='spip_x-small'><input type='text' name='archive_perso' id='archive_perso' value='$fichier_defaut' size='30' /></span></li></ul>";
+		$liste  ;
 
 		// restauration partielle / fusion
 		$res .=
@@ -208,6 +206,22 @@ function exec_admin_tech_dist()
 	echo "<br />";
 
 	echo fin_gauche(), fin_page();
+}
+
+function liste_sauvegardes($key, $fichier, $class, $selected)
+{
+	$affiche_fichier = substr($fichier,strlen(_DIR_DUMP));
+	return "\n<tr class='$class'><td><input type='radio' name='archive' value='"
+		. $affiche_fichier
+		. "' id='dump_$key' "
+		.  (($fichier==$selected)?"checked='checked' ":"")
+		. "/></td><td>\n<label for='dump_$key'>"
+		.   $file = str_replace('/', ' / ', $affiche_fichier)
+		. '</label></td><td>'
+		. taille_en_octets(filesize($fichier))
+		. '</td><td>'
+		. affdate_heure(date('Y-m-d H:i:s',filemtime($fichier)))
+		. '</td></tr>';
 }
 
 // http://doc.spip.org/@nom_fichier_dump
