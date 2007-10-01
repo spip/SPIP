@@ -692,6 +692,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 	$descr = array('nom' => $nom, 'sourcefile' => $sourcefile);
 
 	// Signaler une boucle documents (les autres influent dessus)
+	// Et demander la description des tables une fois pour toutes
 
 	foreach($boucles as $id => $boucle) {
 		$type = $boucle->type_requete;
@@ -700,9 +701,12 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 				$boucles[$id]->sql_serveur = $connect;
 			$show = trouver_table($type, $boucles[$id]->sql_serveur);
 			if ($show) {
+				$boucles[$id]->show = $show;
+				// recopie des 2 infos les plus importantes
+				$boucles[$id]->primary = $show['key']["PRIMARY KEY"];
 				$boucles[$id]->id_table = $x = $show['id_table'];
 				$boucles[$id]->from[$x] = $nom_table = $show['table'];
-				$boucles[$id]->primary = $show['key']["PRIMARY KEY"];
+
 				$boucles[$id]->descr = &$descr;
 				if ((!$boucles[$id]->jointures)
 				AND (is_array($x = $tables_jointures[$nom_table])))

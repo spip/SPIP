@@ -65,23 +65,22 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles) {
 	$r = $boucles[$idb]->type_requete;
 
 	if ($r == 'boucle') return array();
-	$desc = !$r ? '' : trouver_table($r, $boucles[$idb]->sql_serveur);
-	if(!$desc) {
+	if (!$r) {
 		# continuer pour chercher l'erreur suivante
 		return  array("'#" . $r . ':' . $nom_champ . "'",'');
 	}
 
-	$t= $desc['id_table'];
+	$desc = $boucles[$idb]->show;
 	$excep = isset($exceptions_des_tables[$r]) ? $exceptions_des_tables[$r] : '';
 	if ($excep)
 		$excep = isset($excep[$nom_champ]) ? $excep[$nom_champ] : '';
-
 	if ($excep) {
 	  return index_exception($boucles[$idb], $desc, $nom_champ, $excep);
 	} else {
-		if (isset($desc['field'][$nom_champ]))
+		if (isset($desc['field'][$nom_champ])) {
+			$t = $boucles[$idb]->id_table;
 			return array("$t.$nom_champ", $nom_champ);
-		else {
+		} else {
 		  if ($boucles[$idb]->jointures_explicites) {
 		    $t = trouver_champ_exterieur($nom_champ, 
 						 $boucles[$idb]->jointures,
@@ -125,7 +124,7 @@ function index_exception(&$boucle, $desc, $nom_champ, $excep)
 			}
 		}
 	} 
-	else $t = $desc['id_table'];
+	else $t = $boucle->id_table;
 	// demander a SQL de gerer le synonyme
 	// ca permet que excep soit dynamique (Cedric, 2/3/06)
 	if ($excep != $nom_champ) $excep .= ' AS '. $nom_champ;
