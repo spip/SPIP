@@ -419,6 +419,7 @@ function liste_plugin_inactifs(){
 // risque de pb en php5 a cause du typage ou de null (verifier dans la doc php)
 // http://doc.spip.org/@verif_plugin
 function verif_plugin($pipe_recherche = false){
+	if (!spip_connect()) return;
 	$plugin_actifs = liste_chemin_plugin_actifs();
 	$plugin_liste = liste_plugin_files();
 	$plugin_new = array_intersect($plugin_actifs,$plugin_liste);

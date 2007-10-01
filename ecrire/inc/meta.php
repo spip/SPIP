@@ -82,9 +82,11 @@ function ecrire_meta($nom, $valeur, $importable = NULL) {
 		$r = ($importable === NULL) ? ''
 		: (", impt=" .  _q($importable));
 		spip_query("UPDATE spip_meta SET valeur=" . _q($valeur) ."$r WHERE nom=" . _q($nom) );
-	} else
-		spip_query("INSERT INTO spip_meta (nom,valeur,impt) VALUES (" .  _q($nom) . "," . _q($valeur) ."," .  _q($importable) . ')');
-	@touch(_FILE_META, 0);
+	} else {
+		  $r = array('nom' => $nom, 'valeur' => $valeur);
+		  if ($importable) $r['impt'] = $importable;
+		  sql_insertq('spip_meta', $r);
+		  @touch(_FILE_META, 0);
+	}
 }
-
 ?>
