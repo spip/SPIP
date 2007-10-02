@@ -24,7 +24,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Cette fonction intervient a la compilation, 
 // mais aussi pour la balise contextuelle EXPOSE.
 
-// http://doc.spip.org/@trouver_table
+// http://doc.spip.org/@base_trouver_table_dist
 function base_trouver_table_dist($nom, $serveur='')
 {
 	global $tables_principales, $tables_auxiliaires, $table_des_tables, $connexions;
