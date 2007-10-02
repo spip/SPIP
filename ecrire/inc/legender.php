@@ -227,15 +227,19 @@ function formulaire_taille($document) {
 // http://doc.spip.org/@date_formulaire_legender
 function date_formulaire_legender($date, $id_document) {
 
-	if (preg_match(",([0-9]{4})-([0-9]{2})-([0-9]{2}),", $date, $regs)){
+	if (preg_match(",([0-9]{4})-([0-9]{2})-([0-9]{2}([0-9]{2}):([0-9]{2}),", $date, $regs)){
 		$mois = $regs[2];
 		$jour = $regs[3];
 		$annee = $regs[1];
+		$heure = $regs[4];
+		$minute = $regs[5];
 	}
 	return  "<b>"._T('info_mise_en_ligne')."</b><br />\n" .
 		afficher_jour($jour, "name='jour_doc' id='jour_doc$id_document' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"") .
 		afficher_mois($mois, "name='mois_doc' id='mois_doc$id_document' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"") .
 		afficher_annee($annee, "name='annee_doc' id='annee_doc$id_document' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\"") .
+		afficher_heure($heure, "name='heure_doc' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\"") . 
+		afficher_minute($minute, "name='minute_doc' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\"") . 
 		"<br />\n";
 }
 
