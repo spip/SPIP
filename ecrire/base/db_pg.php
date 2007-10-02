@@ -390,7 +390,6 @@ function spip_pg_delete($table, $where='', $serveur='') {
 
 // http://doc.spip.org/@spip_pg_insert
 function spip_pg_insert($table, $champs, $valeurs, $desc=array(), $serveur='') {
-	if (strlen($valeurs)<3) {spip_log("insert vide $table"); return 0;}
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
@@ -404,8 +403,10 @@ function spip_pg_insert($table, $champs, $valeurs, $desc=array(), $serveur='') {
 		$seq = preg_replace('/^spip/', $prefixe, $seq);
 	}
 	$ret = !$seq ? '' : (" RETURNING currval('$seq')");
-
-	$r = pg_query($link, $q="INSERT INTO $table $champs VALUES $valeurs $ret");
+	$ins = (strlen($champs)<3)
+	  ? " DEFAULT VALUES"
+	  : "$champs VALUES $valeurs";
+	$r = pg_query($link, $q="INSERT INTO $table $ins $ret");
 
 	if ($r) {
 		if (!$ret) return 0;
