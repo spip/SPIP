@@ -103,6 +103,10 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles) {
 // http://doc.spip.org/@index_exception
 function index_exception(&$boucle, $desc, $nom_champ, $excep)
 {
+	static $trouver_table;
+	if (!$trouver_table)
+		$trouver_table = charger_fonction('trouver_table', 'base');
+
 	if (is_array($excep)) {
 		// permettre aux plugins de gerer eux meme des jointures derogatoire ingerables
 		$t = NULL;
@@ -114,7 +118,7 @@ function index_exception(&$boucle, $desc, $nom_champ, $excep)
 			list($e, $x) = $excep;	#PHP4 affecte de gauche a droite
 			$excep = $x;		#PHP5 de droite a gauche !
 			if (!$t = array_search($e, $boucle->from)) {
-				$j = trouver_table($e, $boucle->sql_serveur);
+				$j = $trouver_table($e, $boucle->sql_serveur);
 				if ($j) {
 					$t = 'J' . count($boucle->from);
 					$boucle->from[$t] = $j['table'];

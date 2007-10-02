@@ -799,7 +799,11 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 // http://doc.spip.org/@critere_secteur_forum
 function critere_secteur_forum($idb, &$boucles, $val, $crit)
 {
-	$desc = trouver_table('articles', $boucles[$idb]->sql_serveur);
+	static $trouver_table;
+	if (!$trouver_table)
+		$trouver_table = charger_fonction('trouver_table', 'base');
+
+	$desc = $trouver_table('articles', $boucles[$idb]->sql_serveur);
 	return calculer_critere_externe_init($boucles[$idb], array($desc['table']), 'id_secteur', $desc, $crit->cond, true);
 }
 
@@ -933,6 +937,10 @@ function liste_champs_jointures($nom,$desc){
 // http://doc.spip.org/@calculer_chaine_jointures
 function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array(), $milieu_prec = false)
 {
+	static $trouver_table;
+	if (!$trouver_table)
+		$trouver_table = charger_fonction('trouver_table', 'base');
+
 	list($dnom,$ddesc) = $depart;
 	list($anom,$adesc) = $arrivee;
 	if (!count($vu))
@@ -952,7 +960,7 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array(), $mi
 		$new = $vu;
 		foreach($boucle->jointures as $v) {
 			if ($v && (!in_array($v,$vu)) && 
-			    ($def = trouver_table($v, $boucle->sql_serveur))) {
+			    ($def = $trouver_table($v, $boucle->sql_serveur))) {
 				$milieu = array_intersect($ddesc['key'], trouver_cles_table($def['key']));
 				$new[] = $v;
 				foreach ($milieu as $k)
@@ -991,8 +999,12 @@ function trouver_cles_table($keys)
 // http://doc.spip.org/@trouver_champ_exterieur
 function trouver_champ_exterieur($cle, $joints, &$boucle, $checkarrivee = false)
 {
+  static $trouver_table;
+  if (!$trouver_table)
+		$trouver_table = charger_fonction('trouver_table', 'base');
+
   foreach($joints as $k => $join) {
-    if ($join && $table = trouver_table($join, $boucle->sql_serveur)) {
+    if ($join && $table = $trouver_table($join, $boucle->sql_serveur)) {
       if (isset($table['field']) && array_key_exists($cle, $table['field'])
       	&& ($checkarrivee==false || $checkarrivee==$table['table'])) // si on sait ou on veut arriver, il faut que ca colle
 	return  array($table['table'], $table);

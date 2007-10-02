@@ -670,6 +670,9 @@ function code_boucle(&$boucles, $id, $nom)
 // http://doc.spip.org/@public_compiler_dist
 function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect=''){
 	global $tables_jointures;
+	static $trouver_table;
+	if (!$trouver_table)
+		$trouver_table = charger_fonction('trouver_table', 'base');
 
 	// Pre-traitement : reperer le charset du squelette, et le convertir
 	// Bonus : supprime le BOM
@@ -699,7 +702,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 		if ($type != 'boucle') {
 			if (!$boucles[$id]->sql_serveur AND $connect)
 				$boucles[$id]->sql_serveur = $connect;
-			$show = trouver_table($type, $boucles[$id]->sql_serveur);
+			$show = $trouver_table($type, $boucles[$id]->sql_serveur);
 			if ($show) {
 				$boucles[$id]->show = $show;
 				// recopie des 2 infos les plus importantes
