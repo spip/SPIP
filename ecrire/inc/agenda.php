@@ -1453,7 +1453,7 @@ function quete_calendrier_interval_rv($avant, $apres) {
 		    else {
 		      $cat = 'calendrier-couleur9';
 		      $auteurs = array();
-		      $result_aut=spip_query("SELECT nom FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE	(lien.id_message=$id_message  AND	(auteurs.id_auteur!=$connect_id_auteur  AND	lien.id_auteur=auteurs.id_auteur))");
+		      $result_aut=sql_select("nom", "spip_auteurs AS auteurs, spip_auteurs_messages AS lien", "	(lien.id_message=$id_message  AND	(auteurs.id_auteur!=$connect_id_auteur  AND	lien.id_auteur=auteurs.id_auteur))");
 			while($row_auteur=sql_fetch($result_aut)){
 				$auteurs[] = $row_auteur['nom'];
 			}
@@ -1529,7 +1529,7 @@ function quete_calendrier_taches_pb () {
 	$r = array();
 	if (!$connect_id_auteur) return $r;
 
-	$result = spip_query("SELECT texte AS description, id_message AS uid, date_heure AS dtstart, date_fin AS dtend, titre AS summary, type AS category, rv AS location FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui'");
+	$result = sql_select("texte AS description, id_message AS uid, date_heure AS dtstart, date_fin AS dtend, titre AS summary, type AS category, rv AS location", "spip_messages AS messages", "id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui'");
 
 	while ($row = sql_fetch($result)) {
 		$row['url'] = tache_redirige($row);

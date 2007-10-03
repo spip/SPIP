@@ -306,7 +306,7 @@ function generer_url_forum_parent($id_forum) {
 // sous forme d'un forum en reponse, de statut 'original'
 // http://doc.spip.org/@conserver_original
 function conserver_original($id_forum) {
-	$s = spip_query("SELECT id_forum FROM spip_forum WHERE id_parent="._q($id_forum)." AND statut='original'");
+	$s = sql_select("id_forum", "spip_forum", "id_parent="._q($id_forum)." AND statut='original'");
 
 	if (sql_count($s))
 		return ''; // pas d'erreur

@@ -92,7 +92,7 @@ function afficher_message_boucles($row, &$messages_vus, $voir_logo, $afficher_au
 			// Auteurs
 
 	if ($afficher_auteurs) {
-		$result_auteurs = spip_query("SELECT auteurs.id_auteur, auteurs.nom FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE lien.id_message=$id_message AND lien.id_auteur!=$connect_id_auteur AND lien.id_auteur=auteurs.id_auteur");
+		$result_auteurs = sql_select("auteurs.id_auteur, auteurs.nom", "spip_auteurs AS auteurs, spip_auteurs_messages AS lien", "lien.id_message=$id_message AND lien.id_auteur!=$connect_id_auteur AND lien.id_auteur=auteurs.id_auteur");
 
 		$auteurs = '';
 		while ($row_auteurs = sql_fetch($result_auteurs)) {

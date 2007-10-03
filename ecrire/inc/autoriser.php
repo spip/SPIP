@@ -552,7 +552,7 @@ function liste_rubriques_auteur($id_auteur, $raz=false) {
 	if ($raz) unset($restreint[$id_auteur]);
 	elseif (isset($restreint[$id_auteur])) return $restreint[$id_auteur];
 
-	$q = spip_query("SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur=$id_auteur AND id_rubrique!=0");
+	$q = sql_select("id_rubrique", "spip_auteurs_rubriques", "id_auteur=$id_auteur AND id_rubrique!=0");
 
 	// Recurrence sur les sous-rubriques
 	$rubriques = array();

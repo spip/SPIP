@@ -26,7 +26,7 @@ function action_instituer_rubrique_breves_dist() {
 	$table = 'articles';
 	$key = 'id_article';
 
-	$voss = spip_query("SELECT $key AS id FROM spip_$table WHERE id_rubrique=$id AND (statut = 'publie' OR statut = 'prop')");
+	$voss = sql_select("$key AS id", "spip_$table", "id_rubrique=$id AND (statut = 'publie' OR statut = 'prop')");
 
 	while($row = sql_fetch($voss)) {
 		set_request('statut', $statut);

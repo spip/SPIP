@@ -27,7 +27,7 @@ function inc_auth_ldap_dist ($login, $pass) {
 	if (!($dn = auth_ldap_search($login, $pass))) return array();
 
 	// Si l'utilisateur figure deja dans la base, y recuperer les infos
-	$result = spip_query("SELECT * FROM spip_auteurs WHERE login=" . _q($login) . " AND source='ldap'");
+	$result = sql_select("*", "spip_auteurs", "login=" . _q($login) . " AND source='ldap'");
 
 	// sinon importer les infos depuis LDAP, 
 	// avec le statut par defaut a l'install

@@ -133,7 +133,7 @@ function supprimer_fragments($id_article, $version_debut, $version_fin) {
 
 
 	// Fragments chevauchant l'ensemble de l'intervalle, s'ils existent
-	$result = spip_query("SELECT id_fragment, compress, fragment, version_min, version_max FROM spip_versions_fragments WHERE id_article=$id_article AND version_min<$version_debut AND version_max>$version_fin");
+	$result = sql_select("id_fragment, compress, fragment, version_min, version_max", "spip_versions_fragments", "id_article=$id_article AND version_min<$version_debut AND version_max>$version_fin");
 
 	while ($row = sql_fetch($result)) {
 		$id_fragment = $row['id_fragment'];
@@ -154,7 +154,7 @@ function supprimer_fragments($id_article, $version_debut, $version_fin) {
 	}
 
 	// Fragments chevauchant le debut de l'intervalle, s'ils existent
-	$result = spip_query("SELECT id_fragment, compress, fragment, version_min, version_max FROM spip_versions_fragments WHERE id_article=$id_article AND version_min<$version_debut AND version_max>=$version_debut AND version_max<=$version_fin");
+	$result = sql_select("id_fragment, compress, fragment, version_min, version_max", "spip_versions_fragments", "id_article=$id_article AND version_min<$version_debut AND version_max>=$version_debut AND version_max<=$version_fin");
 
 	$deb_fragment = array();
 	while ($row = sql_fetch($result)) {
@@ -176,7 +176,7 @@ function supprimer_fragments($id_article, $version_debut, $version_fin) {
 	}
 
 	// Fragments chevauchant la fin de l'intervalle, s'ils existent
-	$result = spip_query("SELECT id_fragment, compress, fragment, version_min, version_max FROM spip_versions_fragments WHERE id_article=$id_article AND version_max>$version_fin AND version_min>=$version_debut AND version_min<=$version_fin");
+	$result = sql_select("id_fragment, compress, fragment, version_min, version_max", "spip_versions_fragments", "id_article=$id_article AND version_max>$version_fin AND version_min>=$version_debut AND version_min<=$version_fin");
 
 	while ($row = sql_fetch($result)) {
 		$id_fragment = $row['id_fragment'];
@@ -241,7 +241,7 @@ function recuperer_fragments($id_article, $id_version) {
 
 	if ($id_version == 0) return array();
 
-	$result = spip_query("SELECT id_fragment, version_min, version_max, compress, fragment FROM spip_versions_fragments WHERE id_article=$id_article AND version_min<=$id_version AND version_max>=$id_version");
+	$result = sql_select("id_fragment, version_min, version_max, compress, fragment", "spip_versions_fragments", "id_article=$id_article AND version_min<=$id_version AND version_max>=$id_version");
 
 	while ($row = sql_fetch($result)) {
 		$id_fragment = $row['id_fragment'];
@@ -364,7 +364,7 @@ function apparier_paras($src, $dest, $flou = true) {
 // http://doc.spip.org/@recuperer_version
 function recuperer_version($id_article, $id_version) {
 
-	$row = sql_fetch(spip_query("SELECT champs FROM spip_versions WHERE id_article=$id_article AND id_version=$id_version"));
+	$row = sql_fetsel("champs", "spip_versions", "id_article=$id_article AND id_version=$id_version");
 	if (!$row OR !is_array($champs = unserialize($row['champs'])))
 		return array();
 	else return reconstuire_version($champs,

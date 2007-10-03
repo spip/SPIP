@@ -122,7 +122,7 @@ function article_select_trad($lier_trad) {
 
 				$id_parent = $row_rub['id_parent'];
 			}
-			$row_rub = sql_fetch(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE lang='".$GLOBALS['spip_lang']."' AND id_parent=$id_parent"));
+			$row_rub = sql_fetsel("id_rubrique", "spip_rubriques", "lang='".$GLOBALS['spip_lang']."' AND id_parent=$id_parent");
 			if ($row_rub)
 				$row['id_rubrique'] = $row_rub['id_rubrique'];
 		}

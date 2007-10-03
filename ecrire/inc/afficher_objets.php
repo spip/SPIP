@@ -473,7 +473,7 @@ function afficher_articles_trad_boucle($row)
 	$dates_art = "";
 	$l = "";
 
-	$res_trad = spip_query("SELECT id_article, lang, date_modif  FROM spip_articles WHERE id_trad = $id_trad AND id_trad > 0");
+	$res_trad = sql_select("id_article, lang, date_modif", "spip_articles", "id_trad = $id_trad AND id_trad > 0");
 
 	while ($row_trad = sql_fetch($res_trad)) {
 

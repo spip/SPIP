@@ -734,7 +734,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 // http://doc.spip.org/@afficher_forum_mots
 function afficher_forum_mots($id_forum)
 {
-	$result = spip_query("SELECT titre, type FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot");
+	$result = sql_select("titre, type", "spip_mots AS mots, spip_mots_forum AS lien", "lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot");
 
 	$res = "";
 	while ($row = sql_fetch($result)) {
@@ -1605,7 +1605,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af =
 	switch ($type) {
 		case 'article':
 			if ($statut == "publie" AND $GLOBALS['meta']["post_dates"] == 'non') {
-				$n = sql_fetch(spip_query("SELECT id_article FROM spip_articles WHERE id_article=$id AND date<=NOW()"));
+				$n = sql_fetsel("id_article", "spip_articles", "id_article=$id AND date<=NOW()");
 				if (!$n) $statut = 'prop';
 			}
 			if ($statut == 'publie')

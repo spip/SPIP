@@ -298,7 +298,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 	global $spip_lang_right;
 
 	charger_generer_url();
-	$res = spip_query("SELECT docs.id_document, docs.id_vignette,docs.extension,docs.titre,docs.descriptif,docs.fichier,docs.largeur,docs.hauteur,docs.taille,docs.mode,docs.distant, docs.date, l.vu FROM spip_documents AS docs JOIN spip_documents_".$type."s AS l ON l.id_document=docs.id_document WHERE l.id_$type="._q($id)." AND l.id_document="._q($id_document));
+	$res = sql_select("docs.id_document, docs.id_vignette,docs.extension,docs.titre,docs.descriptif,docs.fichier,docs.largeur,docs.hauteur,docs.taille,docs.mode,docs.distant, docs.date, l.vu", "spip_documents AS docs JOIN spip_documents_".$type."s AS l ON l.id_document=docs.id_document", "l.id_$type="._q($id)." AND l.id_document="._q($id_document));
 	if (!$document = sql_fetch($res)) return "";
 	//$document = sql_fetsel("*", "spip_documents", "id_document = " . intval($id_document));
 

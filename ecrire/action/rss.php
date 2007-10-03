@@ -80,7 +80,7 @@ function rss_suivi_messagerie($a) {
 	$s = spip_query("SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=".$a['id_auteur']." AND lien.id_message=messages.id_message GROUP BY messages.id_message ORDER BY messages.date_heure DESC");
 	while ($t = sql_fetch($s)) {
 		if ($compte++<10) {
-			$auteur = sql_fetch(spip_query("SELECT		auteurs.nom AS nom, auteurs.email AS email					FROM spip_auteurs AS auteurs,	spip_auteurs_messages AS lien			WHERE lien.id_message=".$t['id_message']." AND lien.id_auteur!=".$t['id_auteur']."	AND lien.id_auteur = auteurs.id_auteur"));
+			$auteur = sql_fetsel("auteurs.nom AS nom, auteurs.email AS email", "spip_auteurs AS auteurs, spip_auteurs_messages AS lien", "lien.id_message=".$t['id_message']." AND lien.id_auteur!=".$t['id_auteur']." AND lien.id_auteur = auteurs.id_auteur");
 			$item = array(
 				'title' => typo($t['titre']),
 				'date' => $t['date_heure'],
@@ -127,7 +127,7 @@ function rss_articles($critere) {
 	$rss = array();
 	$s = spip_query("SELECT * FROM spip_articles WHERE $critere ORDER BY date DESC LIMIT 10");
 	while ($t = sql_fetch($s)) {
-		$auteur = sql_fetch(spip_query("SELECT	auteurs.nom AS nom, auteurs.email AS email	FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien	WHERE lien.id_article=".$t['id_article']." AND lien.id_auteur = auteurs.id_auteur"));
+		$auteur = sql_fetsel("	auteurs.nom AS nom, auteurs.email AS email	", "spip_auteurs AS auteurs, spip_auteurs_articles AS lien	", "lien.id_article=".$t['id_article']." AND lien.id_auteur = auteurs.id_auteur");
 		$item = array(
 			'title' => typo($t['titre']),
 			'date' => $t['date'],

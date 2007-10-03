@@ -83,7 +83,7 @@ function action_editer_message_post_choisir($id_message) {
 		include_spip('inc/charsets'); // pour tranlitteration
 		$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 		$cherche_auteur= _request('cherche_auteur');
-		$query = spip_query("SELECT id_auteur, nom FROM spip_auteurs WHERE messagerie<>'non' AND id_auteur<>'$connect_id_auteur' AND pass<>'' AND login<>''");
+		$query = sql_select("id_auteur, nom", "spip_auteurs", "messagerie<>'non' AND id_auteur<>'$connect_id_auteur' AND pass<>'' AND login<>''");
 		$table_auteurs = array();
 		$table_ids = array();
 		while ($row = sql_fetch($query)) {
