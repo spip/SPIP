@@ -75,7 +75,7 @@ function optimiser_sansref($table, $id, $sel)
 
 	if ($in) {
 		$in = join(',', array_keys($in));
-		spip_query("DELETE FROM $table WHERE " . calcul_mysql_in($id,$in));
+		sql_delete($table,  calcul_mysql_in($id,$in));
 		spip_log("Numeros des entrees $id supprimees dans la table $table: $in");
 	}
 	return count($in);
@@ -161,7 +161,7 @@ function optimiser_base_disparus($attente = 86400) {
 	// Articles
 	//
 
-	spip_query("DELETE FROM spip_articles WHERE statut='poubelle' AND maj < $mydate");
+	sql_delete("spip_articles", "statut='poubelle' AND maj < $mydate");
 
 	# les liens d'auteurs d'articles effaces
 	$res = spip_query("SELECT auteurs_articles.id_article AS id
@@ -204,7 +204,7 @@ function optimiser_base_disparus($attente = 86400) {
 	// Breves
 	//
 
-	spip_query("DELETE FROM spip_breves WHERE statut='refuse' AND maj < $mydate");
+	sql_delete("spip_breves", "statut='refuse' AND maj < $mydate");
 
 
 	# les liens de documents sur des breves effacees
@@ -240,7 +240,7 @@ function optimiser_base_disparus($attente = 86400) {
 	// Sites
 	//
 
-	spip_query("DELETE FROM spip_syndic WHERE maj < $mydate AND statut = 'refuse'");
+	sql_delete("spip_syndic", "maj < $mydate AND statut = 'refuse'");
 
 
 	# les articles syndiques appartenant a des sites effaces
@@ -314,7 +314,7 @@ function optimiser_base_disparus($attente = 86400) {
 
 	# supprimer les auteurs 'nouveau' qui n'ont jamais donne suite
 	# au mail de confirmation (45 jours pour repondre, ca devrait suffire)
-	spip_query("DELETE FROM spip_auteurs WHERE statut='nouveau' AND maj < ". _q(date('Y-m-d', time()-45*24*3600)));
+	sql_delete("spip_auteurs", "statut='nouveau' AND maj < ". _q(date('Y-m-d', time()-45*24*3600)));
 
 
 	//
@@ -334,7 +334,7 @@ function optimiser_base_disparus($attente = 86400) {
 	// Mots-cles
 	//
 
-	$result = spip_query("DELETE FROM spip_mots WHERE titre='' AND maj < $mydate");
+	$result = sql_delete("spip_mots", "titre='' AND maj < $mydate");
 
 
 	# les liens mots-articles sur des mots effaces
@@ -387,7 +387,7 @@ function optimiser_base_disparus($attente = 86400) {
 	// Forums
 	//
 
-	spip_query("DELETE FROM spip_forum WHERE statut='redac' AND maj < $mydate");
+	sql_delete("spip_forum", "statut='redac' AND maj < $mydate");
 
 
 	# les liens mots-forum sur des forums effaces

@@ -65,7 +65,7 @@ function supprimer_auteur_et_rediriger($type, $id, $id_auteur, $redirect)
 {
 	$jointure = table_jointure('auteur', $type);
 	if (preg_match(',^[a-z]*$,',$type)){
-		spip_query("DELETE FROM spip_{$jointure} WHERE id_auteur="._q($id_auteur)." AND id_{$type}="._q($id));
+		sql_delete("spip_{$jointure}", "id_auteur="._q($id_auteur)." AND id_{$type}="._q($id));
 
 		// Notifications, gestion des revisions, reindexation...
 		pipeline('post_edition',

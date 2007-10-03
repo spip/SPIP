@@ -46,7 +46,7 @@ function action_instituer_groupe_mots_post($id_groupe)
 	$unseul = _request('unseul');
 
 	if ($id_groupe < 0){
-		spip_query("DELETE FROM spip_groupes_mots WHERE id_groupe=" . (0- $id_groupe));
+		sql_delete("spip_groupes_mots", "id_groupe=" . (0- $id_groupe));
 	} else {
 		$change_type = (corriger_caracteres($change_type));
 		$texte = (corriger_caracteres($texte));

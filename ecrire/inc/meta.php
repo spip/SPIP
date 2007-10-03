@@ -60,7 +60,7 @@ function effacer_meta($nom) {
 	// l'invalider avant et apres la MAJ de la BD
 	// c'est un peu moints bien qu'un vrai verrou mais ca suffira
 	@touch(_FILE_META,0);
-	spip_query("DELETE FROM spip_meta WHERE nom='$nom'");
+	sql_delete("spip_meta", "nom='$nom'");
 	@touch(_FILE_META,0);
 }
 

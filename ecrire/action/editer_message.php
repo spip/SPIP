@@ -46,9 +46,9 @@ function action_editer_message_dist() {
 
 // http://doc.spip.org/@action_editer_message_post_supprimer
 function action_editer_message_post_supprimer($id_message) {
-	spip_query("DELETE FROM spip_messages WHERE id_message="._q($id_message));
-	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message="._q($id_message));
-	spip_query("DELETE FROM spip_forum WHERE id_message="._q($id_message));
+	sql_delete("spip_messages", "id_message="._q($id_message));
+	sql_delete("spip_auteurs_messages", "id_message="._q($id_message));
+	sql_delete("spip_forum", "id_message="._q($id_message));
 }
 
 // http://doc.spip.org/@action_editer_message_post_vu
@@ -60,12 +60,12 @@ function action_editer_message_post_vu($id_message, $id_auteur) {
 
 // http://doc.spip.org/@action_editer_message_post_retirer
 function action_editer_message_post_retirer($id_message, $id_auteur) {
-	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message=$id_message AND id_auteur=$id_auteur");
+	sql_delete("spip_auteurs_messages", "id_message=$id_message AND id_auteur=$id_auteur");
 }
 
 // http://doc.spip.org/@action_editer_message_post_ajouter
 function action_editer_message_post_ajouter($id_message, $id_auteur) {
-	spip_query("DELETE FROM spip_auteurs_messages WHERE id_auteur=$id_auteur AND id_message=$id_message");
+	sql_delete("spip_auteurs_messages", "id_auteur=$id_auteur AND id_message=$id_message");
 	sql_insert('spip_auteurs_messages',
 		"(id_auteur,id_message,vu)",
 		"($id_auteur,$id_message,'non')");
@@ -119,7 +119,7 @@ function action_editer_message_post_nouveau($type, $dest='', $rv='')
 	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 
 	$mydate = date("YmdHis", time() - 2 * 24 * 3600);
-	spip_query("DELETE FROM spip_messages WHERE (statut = 'redac') AND (date_heure < $mydate)");
+	sql_delete("spip_messages", "(statut = 'redac') AND (date_heure < $mydate)");
 
 	if ($type == 'pb') $statut = 'publie';
 	else $statut = 'redac';
