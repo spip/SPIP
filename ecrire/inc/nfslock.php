@@ -84,6 +84,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/acces');
 define('_DEFAULT_LOCKTIME',60);
 define('_NAME_LOCK','spip_nfs_lock');
