@@ -303,9 +303,11 @@ function calculer_balise_expose($p, $on, $off)
 	// Ne pas utiliser champ_sql, on jongle avec le nom boucle explicite
 	$c = index_pile($p->id_boucle, $type, $p->boucles);
 
-	if (isset($desc['field']['id_rubrique'])) {
+	if (isset($desc['field']['id_parent'])) {
+		$parent = 0; // pour if (!$parent) dans calculer_expose
+	} elseif (isset($desc['field']['id_rubrique'])) {
 		$parent = index_pile($p->id_boucle, 'id_rubrique', $p->boucles, $b);
-	} elseif (isset($desc['field']['id_groupe'])) {
+	} elseif  (isset($desc['field']['id_groupe'])) {
 		$parent = index_pile($p->id_boucle, 'id_groupe', $p->boucles, $b);
 	} else $parent = "''";
 		  
