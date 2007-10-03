@@ -21,7 +21,7 @@ include_spip("inc/indexation");
 function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 {
 	global $champs_extra, $les_notes, $spip_display, $spip_lang_left, $spip_lang_right;
-	$result = spip_query("SELECT * FROM spip_breves WHERE id_breve=$id_breve");
+	$result = sql_select("*", "spip_breves", "id_breve=$id_breve");
 
 	if ($row = sql_fetch($result)) {
 		$id_breve=$row['id_breve'];
@@ -199,7 +199,7 @@ function langue_breve($id_breve, $row){
 	//
 	// Langue de la breve
 	//
-	$row2 = sql_fetch(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+	$row2 = sql_fetsel("lang", "spip_rubriques", "id_rubrique=$id_rubrique");
 	$langue_parent = $row2['lang'];
 	
 	$langue_breve = $row['lang'];

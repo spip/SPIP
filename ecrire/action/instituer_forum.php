@@ -20,7 +20,7 @@ function action_instituer_forum_dist() {
 
 	list($id_forum, $statut) = preg_split('/\W/', $arg);
 	$id_forum = intval($id_forum);
-	$result = spip_query("SELECT * FROM spip_forum WHERE id_forum=$id_forum");
+	$result = sql_select("*", "spip_forum", "id_forum=$id_forum");
 	if (!($row = sql_fetch($result)))
 		return;
 

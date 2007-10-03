@@ -313,7 +313,7 @@ function import_identifie_id_type($values, $table, $desc, $request) {
 // deux groupes de mots ne peuvent avoir le meme titre ==> identification
 // http://doc.spip.org/@import_identifie_id_groupe
 function import_identifie_id_groupe($values, $table, $desc, $request)  {
-	$r = sql_fetch(spip_query("SELECT id_groupe AS id, titre FROM spip_groupes_mots WHERE titre=" . _q($values['titre'])));
+	$r = sql_fetsel("id_groupe AS id, titre", "spip_groupes_mots", "titre=" . _q($values['titre']));
 	return $r ? array($r['id'], $r['titre']) : false;
 }
 

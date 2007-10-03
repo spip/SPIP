@@ -26,7 +26,7 @@ function exec_sites_dist()
 		exit;
 	}
 
-	$result = spip_query("SELECT * FROM spip_syndic WHERE id_syndic=$id_syndic");
+	$result = sql_select("*", "spip_syndic", "id_syndic=$id_syndic");
 
 	if ($row = sql_fetch($result)) {
 		$id_rubrique = $row["id_rubrique"];

@@ -19,7 +19,7 @@ function exec_sites_edit_dist()
 	global $connect_statut, $connect_id_rubrique, $spip_lang_right;
 
 	$id_syndic = intval(_request('id_syndic'));
-	$result = spip_query("SELECT * FROM spip_syndic WHERE id_syndic=$id_syndic");
+	$result = sql_select("*", "spip_syndic", "id_syndic=$id_syndic");
 
 	if ($row = sql_fetch($result)) {
 		$id_syndic = $row["id_syndic"];
@@ -44,7 +44,7 @@ function exec_sites_edit_dist()
 		}
 		if (!autoriser('creersitedans','rubrique',$id_rubrique )){
 			// manque de chance, la rubrique n'est pas autorisee, on cherche un des secteurs autorises
-			$res = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0");
+			$res = sql_select("id_rubrique", "spip_rubriques", "id_parent=0");
 			while (!autoriser('creersitedans','rubrique',$id_rubrique ) && $row_rub = sql_fetch($res)){
 				$id_rubrique = $row_rub['id_rubrique'];
 			}

@@ -69,7 +69,7 @@ function insert_article($id_rubrique) {
 	// Si id_rubrique vaut 0 ou n'est pas definie, creer l'article
 	// dans la premiere rubrique racine
 	if (!$id_rubrique = intval($id_rubrique)) {
-		$row = sql_fetch(sql_select("id_rubrique", "spip_rubriques", "id_parent=0",'', '0+titre,titre', "1"));
+		$row = sql_fetsel("id_rubrique", "spip_rubriques", "id_parent=0",'', '0+titre,titre', "1");
 		$id_rubrique = $row['id_rubrique'];
 	}
 
@@ -86,7 +86,7 @@ function insert_article($id_rubrique) {
 		}
 	}
 
-	$row = sql_fetch(spip_query("SELECT lang, id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+	$row = sql_fetsel("lang, id_secteur", "spip_rubriques", "id_rubrique=$id_rubrique");
 
 	$id_secteur = $row['id_secteur'];
 
@@ -157,7 +157,7 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 	include_spip('inc/rubriques');
 	include_spip('inc/modifier');
 
-	$s = spip_query("SELECT statut, id_rubrique FROM spip_articles WHERE id_article=$id_article");
+	$s = sql_select("statut, id_rubrique", "spip_articles", "id_article=$id_article");
 	$row = sql_fetch($s);
 	$id_rubrique = $row['id_rubrique'];
 	$statut_ancien = $statut = $row['statut'];
@@ -266,7 +266,7 @@ function editer_article_heritage($id_article, $id_rubrique, $statut, $champs, $c
 	//  changer aussi son secteur et sa langue (si heritee)
 	if (isset($champs['id_rubrique'])) {
 
-		$row_rub = sql_fetch(spip_query("SELECT id_secteur, lang FROM spip_rubriques WHERE id_rubrique="._q($champs['id_rubrique'])));
+		$row_rub = sql_fetsel("id_secteur, lang", "spip_rubriques", "id_rubrique="._q($champs['id_rubrique']));
 
 		$langue = $row_rub['lang'];
 		$champs['id_secteur'] = $row_rub['id_secteur'];

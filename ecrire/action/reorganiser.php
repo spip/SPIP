@@ -36,7 +36,7 @@ function reorganiser_article_rubrique($id_article, $id_rubrique)
 
 		include_spip('action/editer_article');
 		include_spip('inc/rubriques');
-		$s = spip_query("SELECT statut, id_rubrique FROM spip_articles WHERE id_article=$id_article");
+		$s = sql_select("statut, id_rubrique", "spip_articles", "id_article=$id_article");
 		$s = sql_fetch($s);
 		editer_article_heritage($id_article,
 					$s['id_rubrique'], 
@@ -54,12 +54,12 @@ function reorganiser_rubrique_rubrique($id_quoi, $id_cible)
 		if (!$id_cible)
 			$id_secteur = $id_quoi;
 		else {
-			$s = spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_cible");
+			$s = sql_select("id_secteur", "spip_rubriques", "id_rubrique=$id_cible");
 			$s = sql_fetch($s);
 			$id_secteur = $s['id_secteur'];
 		}
 
-		$s = spip_query("SELECT statut, id_parent FROM spip_rubriques WHERE id_rubrique=$id_quoi");
+		$s = sql_select("statut, id_parent", "spip_rubriques", "id_rubrique=$id_quoi");
 
 		spip_query("UPDATE spip_rubriques SET id_parent="._q($id_cible).", id_secteur=$id_secteur WHERE id_rubrique="._q($id_quoi));
 

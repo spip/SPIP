@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function get_forums_publics($id_article=0) {
 
 	if ($id_article) {
-		$res = spip_query("SELECT accepter_forum FROM spip_articles WHERE id_article=$id_article");
+		$res = sql_select("accepter_forum", "spip_articles", "id_article=$id_article");
 
 		if ($obj = sql_fetch($res))
 			return $obj['accepter_forum'];

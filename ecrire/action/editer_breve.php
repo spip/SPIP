@@ -58,12 +58,12 @@ function insert_breve($id_rubrique) {
 	// Si id_rubrique vaut 0 ou n'est pas definie, creer la breve
 	// dans la premiere rubrique racine
 	if (!$id_rubrique = intval($id_rubrique)) {
-		$row = sql_fetch(sql_select("id_rubrique", "spip_rubriques", "id_parent=0",'', '0+titre,titre', "1"));
+		$row = sql_fetsel("id_rubrique", "spip_rubriques", "id_parent=0",'', '0+titre,titre', "1");
 		$id_rubrique = $row['id_rubrique'];
 	}
 
 	// La langue a la creation : c'est la langue de la rubrique
-	$row = sql_fetch(spip_query("SELECT lang, id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+	$row = sql_fetsel("lang, id_secteur", "spip_rubriques", "id_rubrique=$id_rubrique");
 	$choisie = 'non';
 	$lang = $row['lang'];
 	$id_rubrique = $row['id_secteur']; // garantir la racine
@@ -98,7 +98,7 @@ function revisions_breves ($id_breve, $c=false) {
 	}
 
 	// Changer le statut de la breve ?
-	$row = sql_fetch(spip_query("SELECT statut, id_rubrique,lang, langue_choisie FROM spip_breves WHERE id_breve=$id_breve"));
+	$row = sql_fetsel("statut, id_rubrique,lang, langue_choisie", "spip_breves", "id_breve=$id_breve");
 
 	$id_rubrique = $row['id_rubrique'];
 	$statut_ancien = $statut = $row['statut'];
@@ -192,7 +192,7 @@ function revisions_breves ($id_breve, $c=false) {
 function revisions_breves_langue($id_breve, $id_rubrique, $changer_lang)
 {
 	if ($changer_lang == "herit") {
-		$row = sql_fetch(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+		$row = sql_fetsel("lang", "spip_rubriques", "id_rubrique=$id_rubrique");
 		$langue_parent = $row['lang'];
 		spip_query("UPDATE spip_breves SET lang=" . _q($langue_parent) . ", langue_choisie='non' WHERE id_breve=$id_breve");
 	} else 	{

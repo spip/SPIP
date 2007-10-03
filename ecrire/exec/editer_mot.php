@@ -27,9 +27,9 @@ function exec_editer_mot_dist()
 		$droit = autoriser('publierdans','rubrique',$id_objet);
 	else {
 		if ($objet == 'breve')
-			$droit = spip_query("SELECT id_rubrique FROM spip_breves WHERE id_breve="._q($id_objet));
+			$droit = sql_select("id_rubrique", "spip_breves", "id_breve="._q($id_objet));
 		else
-			$droit = spip_query("SELECT id_rubrique FROM spip_syndic WHERE id_syndic="._q($id_objet));
+			$droit = sql_select("id_rubrique", "spip_syndic", "id_syndic="._q($id_objet));
 		$droit = autoriser('publierdans','rubrique',$droit['id_rubrique']);
 	}
 

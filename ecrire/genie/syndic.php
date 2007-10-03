@@ -39,7 +39,7 @@ function executer_une_syndication() {
 	AND statut='publie'
 	AND date_syndic < DATE_SUB(NOW(), INTERVAL
 	"._PERIODE_SYNDICATION_SUSPENDUE." MINUTE)";
-	$row = sql_fetch(sql_select("id_syndic", "spip_syndic", $where, '', "date_syndic", "1"));
+	$row = sql_fetsel("id_syndic", "spip_syndic", $where, '', "date_syndic", "1");
 	if ($row) {
 		$id_syndic = $row["id_syndic"];
 		$res1 = syndic_a_jour($id_syndic, 'off');
@@ -49,7 +49,7 @@ function executer_une_syndication() {
 	$where = "syndication='oui'
 	AND statut='publie'
 	AND date_syndic < DATE_SUB(NOW(), INTERVAL "._PERIODE_SYNDICATION." MINUTE)";
-	$row = sql_fetch(sql_select("id_syndic", "spip_syndic", $where, '', "date_syndic", "1"));
+	$row = sql_fetsel("id_syndic", "spip_syndic", $where, '', "date_syndic", "1");
 
 	if ($row) {
 		$id_syndic = $row["id_syndic"];
@@ -74,7 +74,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 		spip_log("syndic_a_jour doit etre appelee par Cron. Cf. " .
 			 "http://trac.rezo.net/trac/spip/changeset/10294",
 			 'vieilles_defs');
-	$result = spip_query("SELECT * FROM spip_syndic WHERE id_syndic=$now_id_syndic");
+	$result = sql_select("*", "spip_syndic", "id_syndic=$now_id_syndic");
 
 	if (!$row = sql_fetch($result))
 		return;

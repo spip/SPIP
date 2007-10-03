@@ -29,7 +29,7 @@ function exec_articles_forum_dist()
 	if (!$pack) $pack = 5; // nb de forums affiches par page
 	if (!$enplus) $enplus = 200;	// intervalle affiche autour du debut
 
-	$result = spip_query("SELECT titre, id_rubrique FROM spip_articles WHERE id_article=$id_article");
+	$result = sql_select("titre, id_rubrique", "spip_articles", "id_article=$id_article");
 
 	if ($row = sql_fetch($result)) {
 		$titre = $row["titre"];

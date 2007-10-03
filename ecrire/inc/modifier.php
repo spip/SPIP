@@ -106,7 +106,7 @@ function marquer_doublons_documents($champs,$id,$id_table_objet,$table_objet){
 	if (!isset($champs['chapo'])) $load = 'chapo';
 	if ($load){
 		$champs[$load] = "";
-		$res = spip_query("SELECT $load FROM spip_$table_objet WHERE $id_table_objet="._q($id));
+		$res = sql_select("$load", "spip_$table_objet", "$id_table_objet="._q($id));
 		if ($row = sql_fetch($res) AND isset($row[$load]))
 			$champs[$load] = $row[$load];
 	}
@@ -168,7 +168,7 @@ function revision_mot($id_mot, $c=false) {
 	// regler le groupe
 	if (NULL !== ($id_groupe = _request('id_groupe',$c))
 	OR NULL !== ($type = _request('type',$c))) {
-		$result = spip_query("SELECT titre FROM spip_groupes_mots WHERE id_groupe="._q($id_groupe));
+		$result = sql_select("titre", "spip_groupes_mots", "id_groupe="._q($id_groupe));
 		if ($row = sql_fetch($result))
 			$type = $row['titre'];
 		else
@@ -200,7 +200,7 @@ function revision_petition($id_article, $c=false) {
 // http://doc.spip.org/@revision_forum
 function revision_forum($id_forum, $c=false) {
 
-	$s = spip_query("SELECT * FROM spip_forum WHERE id_forum="._q($id_forum));
+	$s = sql_select("*", "spip_forum", "id_forum="._q($id_forum));
 	if (!$t = sql_fetch($s)) {
 		spip_log("erreur forum $id_forum inexistant");
 		return;
@@ -244,7 +244,7 @@ function revision_forum($id_forum, $c=false) {
 	AND count($cles = array_intersect(array_keys($c),
 		array('id_article', 'id_rubrique', 'id_syndic', 'id_breve')))
 	) {
-		$thread = sql_fetch(spip_query("SELECT id_thread FROM spip_forum WHERE id_forum=$id_forum"));
+		$thread = sql_fetsel("id_thread", "spip_forum", "id_forum=$id_forum");
 		foreach ($cles as $k)
 			spip_query("UPDATE spip_forum SET $k="._q($c[$k])." WHERE id_thread=".$thread['id_thread']." AND statut!='original'");
 		// on n'affecte pas $r, car un deplacement ne change pas l'auteur

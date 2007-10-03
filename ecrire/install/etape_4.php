@@ -64,7 +64,7 @@ function install_etape_4_dist()
 		# pour le passwd, bizarrement il faut le convertir comme s'il avait
 		# ete tape en iso-8859-1 ; car c'est en fait ce que voit md5.js
 		$pass = unicode2charset(utf_8_to_unicode($pass), 'iso-8859-1');
-		$result = spip_query("SELECT id_auteur FROM spip_auteurs WHERE login=" . _q($login));
+		$result = sql_select("id_auteur", "spip_auteurs", "login=" . _q($login));
 
 		unset($id_auteur);
 		if ($row = sql_fetch($result, $server_db)) $id_auteur = $row['id_auteur'];

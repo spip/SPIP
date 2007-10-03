@@ -93,7 +93,7 @@ function depublier_branche_rubrique_if($id_rubrique)
 		spip_query("UPDATE spip_rubriques SET statut='0' WHERE id_rubrique=$id_pred");
 #		spip_log("depublier_rubrique $id_pred");
 
-		$r = sql_fetch(spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_pred"));
+		$r = sql_fetsel("id_parent", "spip_rubriques", "id_rubrique=$id_pred");
 
 		$id_pred = $r['id_parent'];
 	}

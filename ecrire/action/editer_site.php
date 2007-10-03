@@ -140,13 +140,13 @@ function insert_syndic($id_rubrique) {
 	// Si id_rubrique vaut 0 ou n'est pas definie, creer le site
 	// dans la premiere rubrique racine
 	if (!$id_rubrique = intval($id_rubrique)) {
-		$row = sql_fetch(sql_select("id_rubrique", "spip_rubriques", "id_parent=0",'', '0+titre,titre', "1"));
+		$row = sql_fetsel("id_rubrique", "spip_rubriques", "id_parent=0",'', '0+titre,titre', "1");
 		$id_rubrique = $row['id_rubrique'];
 	}
 
 
 	// Le secteur a la creation : c'est le secteur de la rubrique
-	$row = sql_fetch(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+	$row = sql_fetsel("id_secteur", "spip_rubriques", "id_rubrique=$id_rubrique");
 	$id_secteur = $row['id_secteur'];
 
 	$id_syndic = sql_insert("spip_syndic",
@@ -182,7 +182,7 @@ function revisions_sites ($id_syndic, $c=false) {
 			$champs[$champ] = corriger_caracteres($val);
 	}
 
-	$s = spip_query("SELECT statut, id_rubrique, id_secteur FROM spip_syndic WHERE id_syndic=$id_syndic");
+	$s = sql_select("statut, id_rubrique, id_secteur", "spip_syndic", "id_syndic=$id_syndic");
 	$row = sql_fetch($s);
 	$id_rubrique = $row['id_rubrique'];
 	$statut_ancien = $row['statut'];

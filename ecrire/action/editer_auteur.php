@@ -54,7 +54,7 @@ function action_legender_auteur_post($r) {
 //
 	$auteur = array();
 	if ($id_auteur) {
-		$auteur = sql_fetch(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
+		$auteur = sql_fetsel("*", "spip_auteurs", "id_auteur=$id_auteur");
 	  }
 	if (!$auteur) {
 		$id_auteur = 0;

@@ -21,7 +21,7 @@ function inc_petitionner_dist($id_article, $script, $args)
 {
 	global $spip_lang_right;
 
-	$petition = sql_fetch(spip_query("SELECT * FROM spip_petitions WHERE id_article=$id_article"));
+	$petition = sql_fetsel("*", "spip_petitions", "id_article=$id_article");
 
 	$res = petitionner_choisir($petition);
 

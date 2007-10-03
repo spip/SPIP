@@ -87,7 +87,7 @@ function low_sec($id_auteur) {
 		}
 	}
 	else {
-		$result = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur = $id_auteur");
+		$result = sql_select("*", "spip_auteurs", "id_auteur = $id_auteur");
 
 		if ($row = sql_fetch($result)) {
 			$low_sec = $row["low_sec"];

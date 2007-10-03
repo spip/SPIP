@@ -21,7 +21,7 @@ function exec_controle_petition_dist()
 	$titre =' ';
 	$statut='new';
 	if ($id_article) {
-		if ($row = sql_fetch(spip_query("SELECT titre,statut FROM spip_articles WHERE id_article=$id_article")));
+		if ($row = sql_fetsel("titre,statut", "spip_articles", "id_article=$id_article"));
 		if (!$row)
 			$id_article = 0;
 		else {
