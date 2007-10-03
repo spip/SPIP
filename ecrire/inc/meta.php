@@ -69,7 +69,7 @@ function ecrire_meta($nom, $valeur, $importable = NULL) {
 
 	if (!$nom) return;
 	$GLOBALS['meta'][$nom] = $valeur;
-	$res = sql_select("impt,valeur", "spip_meta", "nom=" . _q($nom));
+	$res = spip_query("SELECT impt,valeur FROM spip_meta WHERE nom=" . _q($nom));
 	if (!$res) return; 
 	include_spip('base/abstract_sql');
 	$res = sql_fetch($res);
