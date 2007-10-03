@@ -14,16 +14,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'Aucun r&eacute;sultat.',
 'avis_chemin_invalide_1' => 'Le chemin que vous avez choisi',
 'avis_chemin_invalide_2' => 'ne semble pas valide. Veuillez retourner &agrave; la page pr&eacute;c&eacute;dente et v&eacute;rifier les informations fournies.',
-'avis_connexion_echec_1' => 'La connexion au serveur MySQL a &eacute;chou&eacute;.',
+'avis_connexion_echec_1' => 'La connexion au serveur SQL a &eacute;chou&eacute;.',
 'avis_connexion_echec_2' => 'Revenez &agrave; la page pr&eacute;c&eacute;dente, et v&eacute;rifiez les informations que vous avez fournies.',
-'avis_connexion_echec_3' => '<b>N.B.</b> Sur de nombreux serveurs, vous devez <b>demander</b> l\'activation de votre acc&egrave;s &agrave; la base MySQL avant de pouvoir l\'utiliser. Si vous ne pouvez vous connecter, v&eacute;rifiez que vous avez effectu&eacute; cette d&eacute;marche.',
+'avis_connexion_echec_3' => '<b>N.B.</b> Sur de nombreux serveurs, vous devez <b>demander</b> l\'activation de votre acc&egrave;s &agrave; la base SQL avant de pouvoir l\'utiliser. Si vous ne pouvez vous connecter, v&eacute;rifiez que vous avez effectu&eacute; cette d&eacute;marche.',
 'avis_connexion_ldap_echec_1' => 'La connexion au serveur LDAP a &eacute;chou&eacute;.',
 'avis_connexion_ldap_echec_2' => 'Revenez &agrave; la page pr&eacute;c&eacute;dente, et v&eacute;rifiez les informations que vous avez fournies.',
 'avis_connexion_ldap_echec_3' => 'Alternativement, n\'utilisez pas le support LDAP pour importer des utilisateurs.',
 'avis_conseil_selection_mot_cle' => '<b>Groupe important&nbsp;:</b> il est fortement conseill&eacute; de s&eacute;lectionner un mot-cl&eacute; dans ce groupe.',
 'avis_deplacement_rubrique' => 'Attention&nbsp;! Cette rubrique contient @contient_breves@ br&egrave;ve@scb@&nbsp;: si vous la d&eacute;placez, veuillez cocher cette case de confirmation.',
 'avis_destinataire_obligatoire' => 'Vous devez indiquer un destinataire avant d\'envoyer ce message.',
-'avis_erreur_connexion_mysql' => 'Erreur de connexion MySQL',
+'avis_erreur_connexion_mysql' => 'Erreur de connexion SQL',
 'avis_erreur_version_archive' => '<b>Attention! Le fichier @archive@ correspond &agrave;
     une autre version de SPIP que celle que vous avez
     install&eacute;e.</b> Vous allez au-devant de grosses
@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_sites_probleme_syndication' => 'Ces sites ont rencontr&eacute; un probl&egrave;me de syndication',
 'avis_sites_syndiques_probleme' => 'Ces sites syndiqu&eacute;s ont pos&eacute; un probl&egrave;me',
 'avis_suppression_base' => 'ATTENTION, la suppression des donn&eacute;es est irr&eacute;versible',
-'avis_version_mysql' => 'Votre version de MySQL (@version_mysql@) ne permet pas l\'auto-r&eacute;paration des tables de la base.',
+'avis_version_mysql' => 'Votre version de SQL (@version_mysql@) ne permet pas l\'auto-r&eacute;paration des tables de la base.',
 
 
 // B
@@ -320,7 +320,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_confirmer_passe' => 'Confirmer ce nouveau mot de passe :',
 'info_connexion_base' => 'Essai de connexion &agrave; la base',
 'info_connexion_ldap_ok' => 'La connexion LDAP a r&eacute;ussi.</b><p /> Vous pouvez passer &agrave; l\'&eacute;tape suivante.',
-'info_connexion_mysql' => 'Votre connexion MySQL',
+'info_connexion_mysql' => 'Votre connexion SQL',
 'info_connexion_ok' => 'La connexion a r&eacute;ussi.',
 'info_contact' => 'Contact',
 'info_contenu_articles' => 'Contenu des articles',
@@ -436,7 +436,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_message_en_redaction' => 'Vos messages en cours de r&eacute;daction',
 'info_message_technique' => 'Message technique :',
 'info_messagerie_interne' => 'Messagerie interne',
-'info_mise_a_niveau_base' => 'mise &agrave; niveau de votre base MySQL',
+'info_mise_a_niveau_base' => 'mise &agrave; niveau de votre base SQL',
 'info_mise_a_niveau_base_2' => '{{Attention!}} Vous avez install&eacute; une version
 		des fichiers SPIP {ant&eacute;rieure} &agrave; celle qui se trouvait
 		auparavant sur ce site: votre base de donn&eacute;es risque d\'&ecirc;tre
@@ -860,7 +860,7 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 	mettre en ligne rapidement des informations concises, de g&eacute;rer
 	une revue de presse, un calendrier d\'&eacute;v&eacute;nements...',
 'texte_choix_base_1' => 'Choisissez votre base :',
-'texte_choix_base_2' => 'Le serveur MySQL contient plusieurs bases de donn&eacute;es.',
+'texte_choix_base_2' => 'Le serveur SQL contient plusieurs bases de donn&eacute;es.',
 'texte_choix_base_3' => '<b>S&eacute;lectionnez</b> ci-apr&egrave;s celle qui vous a &eacute;t&eacute; attribu&eacute;e par votre h&eacute;bergeur:',
 'texte_choix_table_prefix' => 'Pr&eacute;fixe des tables&nbsp;:',
 'texte_commande_vider_tables_indexation' => 'Utilisez cette commande afin de vider les tables d\'indexation utilis&eacute;es
@@ -879,7 +879,7 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 'texte_config_groupe_mots_cles' => 'Souhaitez-vous activer la configuration avanc&eacute;e des mots-cl&eacute;s,
    en indiquant par exemple qu\'on peut s&eacute;lectionner un mot unique
    par groupe, qu\'un groupe est important...&nbsp;?',
-'texte_connexion_mysql' => 'Consultez les informations fournies par votre h&eacute;bergeur&nbsp;: vous devez y trouver, si votre h&eacute;bergeur supporte MySQL, les codes de connexion au serveur MySQL.',
+'texte_connexion_mysql' => 'Consultez les informations fournies par votre h&eacute;bergeur&nbsp;: vous devez y trouver, si votre h&eacute;bergeur supporte SQL, les codes de connexion au serveur SQL.',
 'texte_contenu_article' => '(Contenu de l\'article en quelques mots.)',
 'texte_contenu_articles' => 'Selon la maquette adopt&eacute;e pour votre site, vous pouvez d&eacute;cider
 		que certains &eacute;l&eacute;ments des articles ne sont pas utilis&eacute;s.
@@ -973,11 +973,11 @@ recalculer une seule page, passez plut&ocirc;t par l\'espace public et utilisez-
 'texte_recuperer_base' => 'R&eacute;parer la base de donn&eacute;es',
 'texte_reference_mais_redirige' => 'article r&eacute;f&eacute;renc&eacute; dans votre site SPIP, mais redirig&eacute; vers une autre URL.',
 'texte_referencement_automatique' => '<b>R&eacute;f&eacute;rencement automatis&eacute; d\'un site</b><br />Vous pouvez r&eacute;f&eacute;rencer rapidement un site Web en indiquant ci-dessous l\'adresse URL d&eacute;sir&eacute;e, ou l\'adresse de son fichier de syndication. SPIP va r&eacute;cup&eacute;rer automatiquement les informations concernant ce site (titre, description...).',
-'texte_requetes_echouent' => '<b>Lorsque certaines requ&ecirc;tes MySQL &eacute;chouent
+'texte_requetes_echouent' => '<b>Lorsque certaines requ&ecirc;tes SQL &eacute;chouent
   syst&eacute;matiquement et sans raison apparente, il est possible
   que ce soit &agrave; cause de la base de donn&eacute;es
   elle-m&ecirc;me.</b><p />
-  MySQL dispose d\'une facult&eacute; de r&eacute;paration de ses
+  SQL dispose d\'une facult&eacute; de r&eacute;paration de ses
   tables lorsqu\'elles ont &eacute;t&eacute; endommag&eacute;es par
   accident. Vous pouvez ici tenter cette r&eacute;paration&nbsp;; en
   cas d\'&eacute;chec, conservez une copie de l\'affichage, qui contient
