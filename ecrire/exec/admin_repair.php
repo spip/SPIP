@@ -25,26 +25,29 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function exec_admin_repair_dist()
 {
 	$ok = false;
-	spip_connect();
-	$version_mysql = sql_version();
-	if (!$version_mysql)
-	  $message = _T('avis_erreur_connexion_mysql');
+	if (!spip_connect())
+		$message =  _T('titre_probleme_technique');
 	else {
-	  if (version_compare($version_mysql,'3.23.14','<'))
-	    $message = _T('avis_version_mysql', array('version_mysql' => $version_mysql));
-	  else {
-	    $message = _T('texte_requetes_echouent');
-	    $ok = true;
-	  }
+		$version_sql = sql_version();
+		if (!$version_sql)
+			$message = _T('avis_erreur_connexion_mysql');
+		else {
+			$s = $GLOBALS['connexions'][0]['type'];
+		  
+			if ($s == 'mysql'
+			AND version_compare($version_sql,'3.23.14','<'))
+			  $message = _T('avis_version_mysql', array('version_mysql' => " MySQL $version_sql"));
+			else {
+				$message = _T('texte_requetes_echouent');
+				$ok = true;
+			}
+		}
+		$action = _T('texte_tenter_reparation');
 	}
-
-	$action = _T('texte_tenter_reparation');
-
 	if ($ok) {
 		$admin = charger_fonction('admin', 'inc');
 		$admin('admin_repair', $action, $message);
-	}
-	else {
+	} else {
 		include_spip('inc/minipres');
 		echo minipres(_T('titre_reparation'), "<p>$message</p>");
 		exit;
