@@ -12,7 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('base/abstract_sql');
 
 // http://doc.spip.org/@action_editer_auteurs_dist
 function action_editer_auteurs_dist() {

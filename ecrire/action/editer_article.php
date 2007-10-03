@@ -64,7 +64,6 @@ function articles_set($id_article, $c=false) {
 // http://doc.spip.org/@insert_article
 function insert_article($id_rubrique) {
 
-	include_spip('base/abstract_sql');
 
 	// Si id_rubrique vaut 0 ou n'est pas definie, creer l'article
 	// dans la premiere rubrique racine

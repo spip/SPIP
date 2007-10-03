@@ -27,7 +27,6 @@ function action_logout_dist()
 
 	// seul le loge peut se deloger (mais id_auteur peut valoir 0 apres une restauration avortee)
 	if (is_numeric($auteur_session['id_auteur'])) {
-		include_spip('base/abstract_sql');
 		sql_updateq('spip_auteurs', 
 			   array('en_ligne' => 'DATE_SUB(NOW(),INTERVAL 15 MINUTE)'),
 			"id_auteur=" . $auteur_session['id_auteur']);

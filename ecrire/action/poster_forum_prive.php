@@ -31,7 +31,6 @@ function action_poster_forum_prive_post($r)
 
 	if (_request('valider_forum') AND ($statut!='')) {
 		include_spip('inc/texte');
-		include_spip('base/abstract_sql');
 		include_spip('inc/forum');
 
 		$titre_message = corriger_caracteres(_request('titre_message'));

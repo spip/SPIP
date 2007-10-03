@@ -134,7 +134,6 @@ function genie_syndic($t) {
 // http://doc.spip.org/@insert_syndic
 function insert_syndic($id_rubrique) {
 
-	include_spip('base/abstract_sql');
 	include_spip('inc/rubriques');
 
 	// Si id_rubrique vaut 0 ou n'est pas definie, creer le site
