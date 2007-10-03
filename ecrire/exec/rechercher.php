@@ -24,7 +24,7 @@ function exec_rechercher_dist()
 	$type = _request('type');
 	$do  = _request('do');
 	if (!preg_match('/^\w+$/', $do)) die();
-	if (!$do) $do = 'aff_selection_titre';
+	if (!$do) $do = 'aff';
 
 	$where = split("[[:space:]]+", $type);
 	if ($where) {

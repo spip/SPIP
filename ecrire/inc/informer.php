@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 # Les information d'une rubrique selectionnee dans le mini navigateur
 
 // http://doc.spip.org/@inc_informer_dist
-function inc_informer_dist($id, $col, $exclus, $rac, $type, $do='aff_selection_rubrique')
+function inc_informer_dist($id, $col, $exclus, $rac, $type, $do='aff')
 {
 	global $spip_display,$spip_lang_right ;
 
@@ -52,6 +52,7 @@ function inc_informer_dist($id, $col, $exclus, $rac, $type, $do='aff_selection_r
 			str_replace('"', "&#34;", textebrut($titre))),
 		       "\n\r", "  ");
 
+	$js_func = $do . '_selection_titre';
 	return "<div style='display: none;'>"
 	. "<input type='text' id='".$rac."_sel' value='$id' />"
 	. "<input type='text' id='".$rac."_sel2' value=\""
@@ -65,7 +66,7 @@ function inc_informer_dist($id, $col, $exclus, $rac, $type, $do='aff_selection_r
 	. "<div style='text-align: $spip_lang_right;'>"
 	. "<input type='submit' class='fondo' value='"
 	. _T('bouton_choisir')
-	. "'\nonclick=\"$do('$titre',$id,'selection_rubrique','id_parent'); return false;\" />"
+	. "'\nonclick=\"$js_func('$titre',$id,'selection_rubrique','id_parent'); return false;\" />"
 	.  "</div>"
 	.  "</div>";
 }

@@ -80,7 +80,7 @@ function exec_admin_tech_dist()
 	
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
 
-	$form = $chercher_rubrique(0, 'rubrique', !$GLOBALS['connect_toutes_rubriques'], 0, 'admin_tech_selection_titre');
+	$form = $chercher_rubrique(0, 'rubrique', !$GLOBALS['connect_toutes_rubriques'], 0, 'admin_tech');
 
 	$res .= "\n<p><label for='id_parent'>" .
 		  _L("Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde &agrave; la rubrique: ") .
