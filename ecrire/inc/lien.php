@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@inc_lien_dist
 function inc_lien_dist($type,$id,$args,$ancre,$texte='',$pour='url',$connect='') {
 	if ($connect) {
 		$id_type = ($type != 'site') ? "id_$type" : 'id_syndic';
@@ -33,6 +34,7 @@ function inc_lien_dist($type,$id,$args,$ancre,$texte='',$pour='url',$connect='')
 	return $g($id, $texte, $res, $connect);
 }
 
+// http://doc.spip.org/@calculer_url_article_dist
 function calculer_url_article_dist($id, $texte='', $lien='', $connect='') {
 
 	$row = sql_fetsel('titre,lang', 'spip_articles', "id_article=$id",'','','','','','','',$connect);
@@ -43,6 +45,7 @@ function calculer_url_article_dist($id, $texte='', $lien='', $connect='') {
 	return array($lien, 'spip_in', $texte, $row['lang']);
 }
 
+// http://doc.spip.org/@calculer_url_rubrique_dist
 function calculer_url_rubrique_dist($id, $texte='', $lien='', $connect='')
 {
 	$row = sql_fetsel('titre,lang', 'spip_rubriques', "id_rubrique=$id",'','','','','','','',$connect);
@@ -54,6 +57,7 @@ function calculer_url_rubrique_dist($id, $texte='', $lien='', $connect='')
 	return array($lien, 'spip_in', $texte, $row['lang']);
 }
 
+// http://doc.spip.org/@calculer_url_breve_dist
 function calculer_url_breve_dist($id, $texte='', $lien='', $connect='')
 {
 	$row = sql_fetsel('titre,lang', 'spip_breves', "id_breve=$id",'','','','','','','',$connect);
@@ -64,6 +68,7 @@ function calculer_url_breve_dist($id, $texte='', $lien='', $connect='')
 	return array($lien, 'spip_in', $texte, $row['lang']);
 }
 
+// http://doc.spip.org/@calculer_url_auteur_dist
 function calculer_url_auteur_dist($id, $texte='', $lien='', $connect='')
 {
 	if ($texte=='') {
@@ -73,6 +78,7 @@ function calculer_url_auteur_dist($id, $texte='', $lien='', $connect='')
 	return array($lien, 'spip_in', $texte); # pas de hreflang
 }
 
+// http://doc.spip.org/@calculer_url_mot_dist
 function calculer_url_mot_dist($id, $texte='', $lien='', $connect='')
 {
 	if (!trim($texte)) {
@@ -83,6 +89,7 @@ function calculer_url_mot_dist($id, $texte='', $lien='', $connect='')
 	return array($lien, 'spip_in', $texte);
 }
 
+// http://doc.spip.org/@calculer_url_document_dist
 function calculer_url_document_dist($id, $texte='', $lien='', $connect='')
 {
 	if ($texte=='') {
@@ -97,6 +104,7 @@ function calculer_url_document_dist($id, $texte='', $lien='', $connect='')
 	return array($lien, 'spip_in', $texte); # pas de hreflang
 }
 
+// http://doc.spip.org/@calculer_url_site_dist
 function calculer_url_site_dist($id, $texte='', $lien='', $connect='')
 {
 	# attention dans le cas des sites le lien pointe non pas sur
@@ -111,6 +119,7 @@ function calculer_url_site_dist($id, $texte='', $lien='', $connect='')
 	return array($lien, 'spip_out', $texte, $row['lang']);
 }
 
+// http://doc.spip.org/@calculer_url_forum_dist
 function calculer_url_forum_dist($id, $texte='', $lien='', $connect='')
 {
 	if (!trim($texte)) {

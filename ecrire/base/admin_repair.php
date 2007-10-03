@@ -35,6 +35,7 @@ function base_admin_repair_dist() {
 			$res . generer_form_ecrire('accueil', '','',_T('public:accueil_site')));
 }
 
+// http://doc.spip.org/@admin_repair_tables
 function admin_repair_tables() {
 
 	$connexion = $GLOBALS['connexions'][0];
