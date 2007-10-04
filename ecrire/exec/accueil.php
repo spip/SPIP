@@ -362,7 +362,7 @@ function etat_base_accueil()
 		if ($where) {
 		  include_spip('inc/forum');
 		  list($f, $w) = critere_statut_controle_forum('public');
-		  $q = spip_query("SELECT COUNT(*) AS cnt, F.statut FROM $f  WHERE $w GROUP BY F.statut");
+		  $q = sql_select("COUNT(*) AS cnt, F.statut", "$f", "$w ", "F.statut");
 		  while($row = sql_fetch($q)) {
 				$r = $row['statut'];
 				$cpt2[$r] = intval($row['cnt']) . '/';

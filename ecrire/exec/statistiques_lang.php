@@ -67,7 +67,7 @@ function exec_statistiques_lang_dist()
 	else
 			$total_visites = 1;
 
-	$result = spip_query("SELECT lang, SUM(".$critere.") AS cnt FROM spip_articles WHERE statut='publie' GROUP BY lang");
+	$result = sql_select("lang, SUM(".$critere.") AS cnt", "spip_articles", "statut='publie' ", "lang");
 		
 	echo "\n<table cellpadding='2' cellspacing='0' border='0' width='100%' style='border: 1px solid #aaaaaa;'>";
 	$ifond = 1;
