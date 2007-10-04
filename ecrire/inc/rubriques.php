@@ -275,17 +275,17 @@ function calculer_langues_utilisees () {
 
 	$langues[$GLOBALS['meta']['langue_site']] = 1;
 
-	$result = spip_query("SELECT DISTINCT lang FROM spip_articles WHERE statut='publie'");
+	$result = sql_select("DISTINCT lang", "spip_articles", "statut='publie'");
 	while ($row = sql_fetch($result)) {
 		$langues[$row['lang']] = 1;
 	}
 
-	$result = spip_query("SELECT DISTINCT lang FROM spip_breves WHERE statut='publie'");
+	$result = sql_select("DISTINCT lang", "spip_breves", "statut='publie'");
 	while ($row = sql_fetch($result)) {
 		$langues[$row['lang']] = 1;
 	}
 
-	$result = spip_query("SELECT DISTINCT lang FROM spip_rubriques WHERE statut='publie'");
+	$result = sql_select("DISTINCT lang", "spip_rubriques", "statut='publie'");
 	while ($row = sql_fetch($result)) {
 		$langues[$row['lang']] = 1;
 	}
@@ -332,7 +332,7 @@ function calculer_prochain_postdate($check= false) {
 		$postdates = ($GLOBALS['meta']["post_dates"] == "non") ?
 			"AND A.date <= NOW()" : '';
 
-		$r = spip_query("SELECT DISTINCT A.id_rubrique AS id FROM spip_articles AS A LEFT JOIN spip_rubriques AS R ON A.id_rubrique=R.id_rubrique WHERE R.statut != 'publie' AND A.statut='publie'$postdates");
+		$r = sql_select("DISTINCT A.id_rubrique AS id", "spip_articles AS A LEFT JOIN spip_rubriques AS R ON A.id_rubrique=R.id_rubrique", "R.statut != 'publie' AND A.statut='publie'$postdates");
 		while ($row = sql_fetch($r))
 			publier_branche_rubrique($row['id']);
 	}
