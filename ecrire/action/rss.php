@@ -38,7 +38,7 @@ function rss_suivi_versions($a) {
 function rss_suivi_forums($a, $from, $where, $lien_moderation=false) {
 	$rss = array();
 
-	$result_forum = spip_query("SELECT * FROM $from " . (!$where ? '' : " WHERE $where ") . "ORDER BY date_heure DESC LIMIT 20");
+	$result_forum = sql_select('*', $from, $where,'', "date_heure DESC", 20);
 
 	while ($t = sql_fetch($result_forum)) {
 		$item = array();
@@ -95,7 +95,7 @@ function rss_suivi_messagerie($a) {
 
 	// 2. les reponses aux messages
 	if ($messages_vus) {
-		$s = spip_query("SELECT * FROM spip_forum WHERE id_message	IN (".join(',', $messages_vus).") ORDER BY date_heure DESC LIMIT 10");
+		$s = sql_select("*", "spip_forum", "id_message	IN (".join(',', $messages_vus).")", "", "date_heure DESC", "10");
 
 		while ($t = sql_fetch($s)) {
 			$item = array(
@@ -125,7 +125,7 @@ function rss_a_suivre($a) {
 // http://doc.spip.org/@rss_articles
 function rss_articles($critere) {
 	$rss = array();
-	$s = spip_query("SELECT * FROM spip_articles WHERE $critere ORDER BY date DESC LIMIT 10");
+	$s = sql_select("*", "spip_articles", "$critere", "", "date DESC", "10");
 	while ($t = sql_fetch($s)) {
 		$auteur = sql_fetsel("	auteurs.nom AS nom, auteurs.email AS email	", "spip_auteurs AS auteurs, spip_auteurs_articles AS lien	", "lien.id_article=".$t['id_article']." AND lien.id_auteur = auteurs.id_auteur");
 		$item = array(
@@ -147,7 +147,7 @@ function rss_articles($critere) {
 // http://doc.spip.org/@rss_breves
 function rss_breves($critere) {
 	$rss = array();
-	$s = spip_query("SELECT * FROM spip_breves WHERE $critere ORDER BY date_heure DESC LIMIT 10");
+	$s = sql_select("*", "spip_breves", "$critere", "", "date_heure DESC", "10");
 	while ($t = sql_fetch($s)) {
 		$item = array(
 			'title' => typo($t['titre']),
@@ -166,7 +166,7 @@ function rss_breves($critere) {
 // http://doc.spip.org/@rss_sites
 function rss_sites($critere) {
 	$rss = array();
-	$s = spip_query("SELECT * FROM spip_syndic WHERE $critere ORDER BY date DESC LIMIT 10");
+	$s = sql_select("*", "spip_syndic", "$critere", "", "date DESC", "10");
 	while ($t = sql_fetch($s)) {
 		$item = array(
 			'title' => typo($t['titre']." ".$t['url_site']),

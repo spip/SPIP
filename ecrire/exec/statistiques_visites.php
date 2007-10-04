@@ -155,7 +155,7 @@ else {
 	
 	// Par popularite
 	$articles_recents[] = "0";
-	$result = spip_query("SELECT id_article FROM spip_articles WHERE statut='publie' AND popularite > 0 ORDER BY date DESC LIMIT 10");
+	$result = sql_select("id_article", "spip_articles", "statut='publie' AND popularite > 0", "", "date DESC", "10");
 
 	while ($row = sql_fetch($result)) {
 		$articles_recents[] = $row['id_article'];
@@ -225,7 +225,7 @@ else {
 
 
 	// Par visites depuis le debut
-	$result = spip_query("SELECT id_article, titre, popularite, visites FROM spip_articles WHERE statut='publie' AND popularite > 0 ORDER BY visites DESC LIMIT 30");
+	$result = sql_select("id_article, titre, popularite, visites", "spip_articles", "statut='publie' AND popularite > 0", "", "visites DESC", "30");
 
 		
 	if (sql_count($result) > 0
@@ -809,7 +809,7 @@ if ($origine) {
 }
 
 
-$result = spip_query("SELECT referer, $vis AS vis FROM $table_ref WHERE $where ORDER BY vis DESC LIMIT $limit");
+$result = sql_select("referer, $vis AS vis", "$table_ref", "$where", "", "vis DESC", "$limit");
 
 
 echo gros_titre(_T("onglet_origine_visites"),'', false);

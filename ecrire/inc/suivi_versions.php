@@ -191,7 +191,7 @@ function revision_comparee($id_article, $id_version, $format='diff', $id_diff=NU
 
 	// chercher le numero de la version precedente
 	if (!$id_diff) {
-		$result_diff = spip_query("SELECT id_version FROM spip_versions WHERE id_article=$id_article AND id_version<$id_version ORDER BY id_version DESC LIMIT 1");
+		$result_diff = sql_select("id_version", "spip_versions", "id_article=$id_article AND id_version<$id_version", "", "id_version DESC", "1");
 		if ($result_diff) {
 			$row_diff = sql_fetch($result_diff);
 			$id_diff = $row_diff['id_version'];

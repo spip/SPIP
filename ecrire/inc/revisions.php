@@ -80,7 +80,7 @@ function ajouter_fragments($id_article, $id_version, $fragments) {
 	foreach ($fragments as $id_fragment => $texte) {
 		$nouveau = true;
 		// Recuperer la version la plus recente
-		$result = spip_query("SELECT compress, fragment, version_min, version_max FROM spip_versions_fragments WHERE id_article=$id_article AND id_fragment=$id_fragment AND version_min<=$id_version ORDER BY version_min DESC LIMIT 1");
+		$result = sql_select("compress, fragment, version_min, version_max", "spip_versions_fragments", "id_article=$id_article AND id_fragment=$id_fragment AND version_min<=$id_version", "", "version_min DESC", "1");
 
 		if ($row = sql_fetch($result)) {
 			$fragment = $row['fragment'];
@@ -447,7 +447,7 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 	}
 #   sleep(15); 	spip_log("sortie $sec $delai");
 	// Determiner le numero du prochain fragment
-	$next = sql_fetch(spip_query("SELECT id_fragment FROM spip_versions_fragments WHERE id_article=$id_article ORDER BY id_fragment DESC LIMIT 1"));
+	$next = sql_fetsel("id_fragment", "spip_versions_fragments", "id_article=$id_article", "", "id_fragment DESC", "1");
 
 	// Examiner la derniere version
 	$result = sql_select("id_version, champs, id_auteur, date, permanent", "spip_versions", "id_article=$id_article AND id_version > 0", '', "id_version DESC", "1"); // le champ id_auteur est un varchar dans cette table
