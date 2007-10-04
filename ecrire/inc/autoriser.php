@@ -555,9 +555,8 @@ function liste_rubriques_auteur($id_auteur, $raz=false) {
 		}
 
 		// Fin de la recurrence : $rubriques est complet
-		$q = count($r)
-			? spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent IN (".join(',',$r).") AND id_rubrique NOT IN (".join(',',$r).")")
-			: false;
+		if (!$r) break;
+		$q = sql_select('id_rubrique', 'spip_rubriques', "id_parent IN (".join(',',$r).") AND id_rubrique NOT IN (".join(',',$r).")");
 	}
 
 	// Affecter l'auteur session le cas echeant

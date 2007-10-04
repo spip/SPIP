@@ -67,7 +67,7 @@ function article_select($id_article, $id_rubrique=0, $lier_trad=0, $id_version=0
 		if ($connect_id_rubrique)
 			$row['id_rubrique'] = $id_rubrique = $connect_id_rubrique[0]; 
 		else {
-			$row_rub = sql_fetch(spip_query("SELECT id_rubrique FROM spip_rubriques ORDER BY id_rubrique DESC LIMIT 1"));
+			$row_rub = sql_fetsel("id_rubrique", "spip_rubriques", "", "", "id_rubrique DESC", 1);
 			$row['id_rubrique'] = $id_rubrique = $row_rub['id_rubrique'];
 		}
 		if (!autoriser('creerarticledans','rubrique',$row['id_rubrique'] )){

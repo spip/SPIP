@@ -223,7 +223,7 @@ function calculer_threads() {
 	do {
 		$discussion = "0";
 		$precedent = 0;
-		$r = spip_query("SELECT fille.id_forum AS id,	maman.id_thread AS thread	FROM spip_forum AS fille, spip_forum AS maman	WHERE fille.id_parent = maman.id_forum AND fille.id_thread <> maman.id_thread	ORDER BY thread");
+		$r = sql_select("fille.id_forum AS id,	maman.id_thread AS thread", 'spip_forum AS fille, spip_forum AS maman', "fille.id_parent = maman.id_forum AND fille.id_thread <> maman.id_thread",'', "thread");
 		while ($row = sql_fetch($r)) {
 			if ($row['thread'] == $precedent)
 				$discussion .= "," . $row['id'];
