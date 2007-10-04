@@ -116,9 +116,7 @@ function exec_rubriques_edit_dist()
 
 // si c'est une rubrique-secteur contenant des breves, demander la
 // confirmation du deplacement
-	 $contient_breves = sql_fetch(spip_query("SELECT COUNT(*) AS cnt FROM spip_breves WHERE id_rubrique=$id_rubrique LIMIT 1"));
-
-	 $contient_breves = $contient_breves['cnt'];
+	$contient_breves = sql_countsel('spip_breves', "id_rubrique=$id_rubrique",'',2);
 
 	if ($contient_breves > 0) {
 		$scb = ($contient_breves>1? 's':'');

@@ -448,20 +448,20 @@ function montre_naviguer($id_rubrique, $titre, $id_parent, $ze_logo, $flag_edita
 
 // http://doc.spip.org/@tester_rubrique_vide
 function tester_rubrique_vide($id_rubrique) {
-	$n = sql_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_rubriques WHERE id_parent=$id_rubrique LIMIT 1"));
-	if ($n['n'] > 0) return false;
+	if (sql_countsel('spip_rubriques', "id_parent=$id_rubrique"))
+		return false;
 
-	$n = sql_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_articles WHERE id_rubrique=$id_rubrique AND (statut='publie' OR statut='prepa' OR statut='prop') LIMIT 1"));
-	if ($n['n'] > 0) return false;
+	if (sql_countsel('spip_articles', "id_rubrique=$id_rubrique AND (statut='publie' OR statut='prepa' OR statut='prop')"))
+		return false;
 
-	$n = sql_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_breves WHERE id_rubrique=$id_rubrique AND (statut='publie' OR statut='prop') LIMIT 1"));
-	if ($n['n'] > 0) return false;
+	if (sql_countsel('spip_breves', "id_rubrique=$id_rubrique AND (statut='publie' OR statut='prop')"))
+		return false;
 
-	$n = sql_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_syndic WHERE id_rubrique=$id_rubrique AND (statut='publie' OR statut='prop') LIMIT 1"));
-	if ($n['n'] > 0) return false;
+	if (sql_countsel('spip_syndic', "id_rubrique=$id_rubrique AND (statut='publie' OR statut='prop')"))
+		return false;
 
-	$n = sql_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_documents_rubriques WHERE id_rubrique=$id_rubrique LIMIT 1"));
-	if ($n['n'] > 0) return false;
+	if (sql_countsel('spip_documents_rubriques', "id_rubrique=$id_rubrique"))
+		return false;
 
 	return true;
 }

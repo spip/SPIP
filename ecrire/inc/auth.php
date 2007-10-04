@@ -33,7 +33,7 @@ function auteurs_article($id_article, $cond='')
 // http://doc.spip.org/@auteurs_autorises
 function auteurs_autorises($cond='', $order='')
 {
-	return sql_select('*', 'spip_auteurs', "statut IN ('0minirezo','1comite')" . ($cond ? " AND $cond" : ''),'', ($order ? " ORDER BY $order" : ''));
+	return sql_select('*', 'spip_auteurs', "statut IN ('0minirezo','1comite')" . ($cond ? " AND $cond" : ''),'', $order);
 }
 
 // Un nouvel inscrit prend son statut definitif a la 1ere connexion.

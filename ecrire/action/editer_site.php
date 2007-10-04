@@ -26,12 +26,10 @@ function action_editer_site_dist() {
 		$resyndiquer = editer_site_options($id_syndic);
 	// Envoi depuis le formulaire d'edition d'un site existant
 	} else if ($id_syndic = intval($arg)) {
-
 		// reload si on change une des valeurs de syndication
 		if (
 		(_request('url_syndic') OR _request('resume') OR _request('syndication'))
-		AND $s = spip_query("SELECT url_syndic,syndication,resume FROM spip_syndic WHERE id_syndic="._q($id_syndic))
-		AND $t = sql_fetch($s)
+		AND $t = sql_fetsel('url_syndic,syndication,resume', 'spip_syndic', "id_syndic="._q($id_syndic))
 		AND (
 			(_request('url_syndic') AND _request('url_syndic') != $t['url_syndic'])
 			OR
@@ -41,7 +39,6 @@ function action_editer_site_dist() {
 			)
 		)
 			set_request('reload', 'oui');
-
 		revisions_sites($id_syndic);
 	
 	// Envoi normal depuis le formulaire de creation d'un site
@@ -86,13 +83,13 @@ function action_editer_site_dist() {
 		if (_request('syndication') == 'non')
 			sql_delete("spip_syndic_articles", "id_syndic="._q($id_syndic));
 
-		$s = spip_query("SELECT id_syndic, descriptif FROM spip_syndic WHERE id_syndic=$id_syndic AND syndication IN ('oui', 'sus', 'off') LIMIT 1");
-		if ($t = sql_fetch($s)) {
+		$t = sql_getfetsel('descriptif', 'spip_syndic', "id_syndic=$id_syndic AND syndication IN ('oui', 'sus', 'off')", '','', 1);
+		if ($t !== NULL) {
 
-			// Si on n'a pas de descriptif ou pas de logo, on va le chercher
+			// Si descriptif vide, chercher le logo si pas deja la
 			$chercher_logo = charger_fonction('chercher_logo', 'inc');
 			if (!$logo = $chercher_logo($id_syndic, 'id_syndic', 'on')
-			OR $t['descriptif'] == '') {
+			OR !$t) {
 				$auto = analyser_site(_request('url_syndic'));
 				revisions_sites($id_syndic,
 					array('descriptif' => $auto['descriptif'])
@@ -127,6 +124,7 @@ function action_editer_site_dist() {
 // http://doc.spip.org/@genie_syndic
 function genie_syndic($t) {
 	include_spip('genie/syndic');
+	define('_GENIE_SYNDIC', 2); // Pas de faux message d'erreur
 	$t = syndic_a_jour(_GENIE_SYNDIC_NOW);
 	return $t ? 0 : _GENIE_SYNDIC_NOW;
 }
@@ -212,10 +210,10 @@ function revisions_sites ($id_syndic, $c=false) {
 
 	if ($id_parent = intval(_request('id_parent', $c))
 	AND $id_parent != $id_rubrique
-	AND ($r = sql_fetch(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_parent")))) {
+	AND ($id_secteur = sql_getfetsel('id_secteur', 'spip_rubriques', "id_rubrique=$id_parent"))) {
 		$champs['id_rubrique'] = $id_parent;
-		if ($id_secteur_old != $r['id_secteur'])
-			$champs['id_secteur'] = $r['id_secteur'];
+		if ($id_secteur_old != $id_secteur)
+			$champs['id_secteur'] = $id_secteur;
 		// si le site est publie
 		// et que le demandeur n'est pas admin de la rubrique
 		// repasser le site en statut 'prop'.
