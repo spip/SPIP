@@ -164,7 +164,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 	$id_groupes_vus = array();
 	$groupes_vus = array();
 	$flag_tous = 0;
-	$result = spip_query("SELECT mots.id_mot, mots.titre, mots.descriptif, mots.id_groupe FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot ORDER BY mots.type, mots.titre");
+	$result = sql_select("mots.id_mot, mots.titre, mots.descriptif, mots.id_groupe", "spip_mots AS mots, spip_mots_$table AS lien", "lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot", "", "mots.type, mots.titre");
 	if (sql_count($result) > 0) {
 	
 		$tableau= array();
@@ -238,7 +238,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 // http://doc.spip.org/@formulaire_mot_remplace
 function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_id, $objet, $id_objet)
 {
-	$result = spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe = $id_groupe ORDER BY titre");
+	$result = sql_select("id_mot, titre", "spip_mots", "id_groupe = $id_groupe", "", "titre");
 
 	$s = '';
 
@@ -381,7 +381,7 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 
 		$res .= "\n<option value='x' style='font-variant: small-caps;'>$titre</option>";
 
-		$result = spip_query("SELECT id_mot, type, titre FROM spip_mots WHERE id_groupe =$id_groupe " . ($les_mots ? "AND id_mot NOT IN ($les_mots) " : '') .  "ORDER BY titre");
+		$result = sql_select("id_mot, type, titre", "spip_mots", "id_groupe =$id_groupe " . ($les_mots ? "AND id_mot NOT IN ($les_mots) " : '') .  "", "", "titre");
 
 
 		while($row = sql_fetch($result)) {

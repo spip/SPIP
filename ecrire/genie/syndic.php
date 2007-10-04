@@ -138,7 +138,7 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 	$le_lien = substr($data['url'], 0,255);
 
 	// Chercher les liens de meme cle
-	$s = spip_query("SELECT id_syndic_article,titre FROM spip_syndic_articles WHERE url=" . _q($le_lien) . " AND id_syndic=$now_id_syndic ORDER BY maj DESC");
+	$s = sql_select("id_syndic_article,titre", "spip_syndic_articles", "url=" . _q($le_lien) . " AND id_syndic=$now_id_syndic", "", "maj DESC");
 
 	// S'il y a plusieurs liens qui repondent, il faut choisir le plus proche
 	// (ie meme titre et pas deja fait), le mettre a jour et ignorer les autres

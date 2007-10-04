@@ -382,7 +382,7 @@ function afficher_article_tous_rubrique(&$text_article, $tous, $id_rubrique, $fl
 // http://doc.spip.org/@trouve_auteurs_articles
 function trouve_auteurs_articles($id_article)
 {
-	$result = spip_query("SELECT nom FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE auteurs.id_auteur=lien.id_auteur AND lien.id_article=$id_article ORDER BY auteurs.nom");
+	$result = sql_select("nom", "spip_auteurs AS auteurs, spip_auteurs_articles AS lien", "auteurs.id_auteur=lien.id_auteur AND lien.id_article=$id_article", "", "auteurs.nom");
 	$res = array();
 	while ($row = sql_fetch($result))  $res[] = extraire_multi($row["nom"]);
 	return join(", ", $res);

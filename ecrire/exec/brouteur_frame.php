@@ -85,7 +85,7 @@ jQuery(function(){
 	
 	}
 	else if ($special == "valider") {
-		$result=spip_query("SELECT id_article, id_rubrique, titre, statut FROM spip_articles WHERE statut = 'prop' ORDER BY date DESC");
+		$result=sql_select("id_article, id_rubrique, titre, statut", "spip_articles", "statut = 'prop'", "", "date DESC");
 		if (sql_count($result)>0) {
 			echo "\n<div style='padding-top: 6px; padding-bottom: 3px;'><b class='verdana2'>"._T("info_articles_proposes")."</b></div>";
 			echo "\n<div class='plan-articles'>";
@@ -170,7 +170,7 @@ jQuery(function(){
 	
 		if ($id_rubrique > 0) {
 			if ($peutpub)
-				$result = spip_query("SELECT id_article, id_rubrique, titre, statut FROM spip_articles WHERE id_rubrique=$id_rubrique ORDER BY date DESC");
+				$result = sql_select("id_article, id_rubrique, titre, statut", "spip_articles", "id_rubrique=$id_rubrique", "", "date DESC");
 			else 
 				$result = sql_select("articles.id_article, articles.id_rubrique, articles.titre, articles.statut", "spip_articles AS articles, spip_auteurs_articles AS lien", "articles.id_rubrique=$id_rubrique AND (articles.statut = 'publie' OR articles.statut = 'prop' OR (articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur)) ", " id_article ", " articles.date DESC");
 
@@ -205,7 +205,7 @@ jQuery(function(){
 
 			}
 	
-			$result=spip_query("SELECT * FROM spip_syndic WHERE id_rubrique=$id_rubrique AND statut!='refuse' ORDER BY nom_site");
+			$result=sql_select("*", "spip_syndic", "id_rubrique=$id_rubrique AND statut!='refuse'", "", "nom_site");
 			if (sql_count($result)>0) {
 				echo "\n<div style='padding-top: 6px;'><b class='verdana2'>"._T('icone_sites_references')."</b></div>";
 				while($row=sql_fetch($result)){

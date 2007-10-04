@@ -57,7 +57,7 @@ function statistiques_csv($id) {
 	header('Content-Disposition: attachment; filename='.$filename);
 	
 	if ($id)
-		$s = spip_query("SELECT date, visites FROM spip_visites_articles WHERE id_article=$id ORDER BY date");
+		$s = sql_select("date, visites", "spip_visites_articles", "id_article=$id", "", "date");
 	else
 		$s = spip_query("SELECT date, visites FROM spip_visites ORDER BY date");
 	while ($t = sql_fetch($s)) {
@@ -164,7 +164,7 @@ else {
 		
 
 	// Par popularite
-	$result = spip_query("SELECT id_article, titre, popularite, visites FROM spip_articles WHERE statut='publie' AND popularite > 0 ORDER BY popularite DESC");
+	$result = sql_select("id_article, titre, popularite, visites", "spip_articles", "statut='publie' AND popularite > 0", "", "popularite DESC");
 
 	$nombre_articles = sql_count($result);
 	if ($nombre_articles > 0) {
@@ -196,7 +196,7 @@ else {
 		$articles_vus = join($articles_vus, ",");
 			
 		// Par popularite
-		$result_suite = spip_query("SELECT id_article, titre, popularite, visites FROM spip_articles WHERE statut='publie' AND id_article IN ($articles_recents) AND id_article NOT IN ($articles_vus) ORDER BY popularite DESC");
+		$result_suite = sql_select("id_article, titre, popularite, visites", "spip_articles", "statut='publie' AND id_article IN ($articles_recents) AND id_article NOT IN ($articles_vus)", "", "popularite DESC");
 
 		if (sql_count($result_suite) > 0) {
 		  echo "</ol><div style='text-align: center'>[...]</div>",$open;

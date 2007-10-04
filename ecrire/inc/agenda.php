@@ -1514,7 +1514,7 @@ function quete_calendrier_taches_annonces () {
 	$r = array();
 	if (!$connect_id_auteur) return $r;
 
-	$result = spip_query("SELECT texte AS description, id_message AS uid, date_heure AS dtstart, date_fin AS dtend, titre AS summary, type AS category, rv AS location FROM spip_messages WHERE type = 'affich' AND rv != 'oui' AND statut = 'publie' ORDER BY date_heure DESC");
+	$result = sql_select("texte AS description, id_message AS uid, date_heure AS dtstart, date_fin AS dtend, titre AS summary, type AS category, rv AS location", "spip_messages", "type = 'affich' AND rv != 'oui' AND statut = 'publie'", "", "date_heure DESC");
 
 	while ($row = sql_fetch($result)) {
 		$row['url'] = tache_redirige($row);

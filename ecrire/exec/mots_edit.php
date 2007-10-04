@@ -225,7 +225,7 @@ global  $champs_extra, $connect_statut, $spip_display, $les_notes;
 // http://doc.spip.org/@determine_groupe_mots
 function determine_groupe_mots($table, $id_groupe) {
 
-	$q = spip_query("SELECT id_groupe, titre FROM spip_groupes_mots ". ($table ? "WHERE $table='oui'" : '') . " ORDER BY titre");
+	$q = sql_select('id_groupe, titre', 'spip_groupes_mots', ($table ? "$table='oui'" : ''),'', "titre");
 
 	if (sql_count($q)>1) {
 
