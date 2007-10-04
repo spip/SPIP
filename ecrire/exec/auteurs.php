@@ -328,7 +328,7 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 	// La requete de base est tres sympa
 	// (pour les visiteurs, ca postule que les messages concernent des articles)
 	
-	 $row = sql_select("							aut.id_auteur AS id_auteur,							aut.statut AS statut,								aut.nom_site AS site, aut.nom AS nom,								UPPER(aut.nom) AS unom,							count(lien.id_article) as compteur							$sql_sel									", "spip_auteurs as aut " . ($visit ?		 			"LEFT JOIN spip_forum AS lien ON aut.id_auteur=lien.id_auteur " :		("LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur	 LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)")) .	"", "$sql_visible ", " aut.statut, aut.nom_site, aut.nom, aut.id_auteur ", " $sql_order");
+	 $row = sql_select("							aut.id_auteur AS id_auteur,							aut.statut AS statut,								aut.nom_site AS site, aut.nom AS nom,								UPPER(aut.nom) AS unom,							COUNT(lien.id_article) AS compteur							$sql_sel									", "spip_auteurs as aut " . ($visit ?		 			"LEFT JOIN spip_forum AS lien ON aut.id_auteur=lien.id_auteur " :		("LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur	 LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)")) .	"", "$sql_visible ", " aut.statut, aut.nom_site, aut.nom, aut.id_auteur ", " $sql_order");
 	 return $row;
 }
 
