@@ -129,7 +129,8 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 //
 // http://doc.spip.org/@referes
 function referes($referermd5) {
-	$refarts = spip_query("SELECT J2.id_article, J2.titre FROM spip_referers_articles AS J1 LEFT JOIN spip_articles AS J2 ON J1.id_article = J2.id_article WHERE (referer_md5='$referermd5' AND J1.maj>=DATE_SUB(DATE_FORMAT(NOW(),'%Y-%m-%d'), INTERVAL 2 DAY)) ORDER BY titre");
+	$refarts = sql_select('J2.id_article, J2.titre', 'spip_referers_articles AS J1 LEFT JOIN spip_articles AS J2 ON J1.id_article = J2.id_article', "(referer_md5='$referermd5' AND J1.maj>=DATE_SUB(DATE_FORMAT(NOW(),'%Y-%m-%d'), INTERVAL 2 DAY))", '', "titre");
+
 	$retarts = array();
 	while ($rowart = sql_fetch($refarts)) {
 		$id_article = $rowart['id_article'];

@@ -107,7 +107,7 @@ $revisions .= "<a href='".generer_url_ecrire('suivi_revisions', "debut=$next&id_
 				
 				// l'id_auteur peut etre un numero IP (edition anonyme)
 				if ($id_auteur == intval($id_auteur)
-				AND $row_auteur = sql_fetch(spip_query("SELECT nom,email FROM spip_auteurs	WHERE id_auteur = '".addslashes($id_auteur)."'"))) {
+				AND $row_auteur = sql_fetsel('nom,email', 'spip_auteurs', "id_auteur = '".addslashes($id_auteur)."'")) {
 					$nom = typo($row_auteur["nom"]);
 					$email = $row_auteur['email'];
 				} else {
