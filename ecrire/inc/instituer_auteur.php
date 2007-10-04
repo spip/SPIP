@@ -75,7 +75,7 @@ function choix_statut_auteur($statut, $id_auteur, $ancre) {
 	// Chercher tous les statuts non standards.
 	// Le count(*) ne sert pas, mais en son absence
 	// SQL (enfin, une version de SQL) renvoie un ensemble vide !
-	$q = spip_query("SELECT statut, count(*) FROM spip_auteurs WHERE statut NOT IN (" . _q($GLOBALS['liste_des_statuts']) . ") GROUP BY statut");
+	$q = sql_select("statut, count(*)", 'spip_auteurs', "statut NOT IN (" . _q($GLOBALS['liste_des_statuts']) . ")",  "statut");
 
 	$hstatut = htmlentities($statut);
 	while ($r = sql_fetch($q)) {
