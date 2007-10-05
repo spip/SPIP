@@ -32,10 +32,10 @@ function action_editer_signatures_post($r)
 
 	if ($id < 0){
 		$id = 0 - $id;
-		$result_forum = spip_query("UPDATE spip_signatures SET statut='poubelle' WHERE id_signature=$id");
+		$result_forum = sql_updateq("spip_signatures", array("statut" => 'poubelle'), "id_signature=$id");
 
 	} elseif ($id > 0){
-		$result_forum = spip_query("UPDATE spip_signatures SET statut='publie' WHERE id_signature=$id");
+		$result_forum = sql_updateq("spip_signatures", array("statut" => 'publie'), "id_signature=$id");
 
 	}
 

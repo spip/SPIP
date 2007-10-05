@@ -121,7 +121,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	}
 
 	// Noter que la syndication est OK
-	spip_query("UPDATE spip_syndic SET syndication='oui' WHERE id_syndic=$now_id_syndic");
+	sql_updateq("spip_syndic", array("syndication" => 'oui'), "id_syndic=$now_id_syndic");
 
 	return false; # c'est bon
 }

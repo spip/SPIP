@@ -59,7 +59,7 @@ function action_supprimer_rubrique($r)
 		sql_delete("spip_auteurs_rubriques", "id_rubrique=$id_rubrique AND id_auteur=$id_auteur");
 		$n = sql_countsel("spip_auteurs_rubriques", "id_auteur=$id_auteur");
 		if (!$n)
-			spip_query("UPDATE spip_auteurs SET statut='1comite' WHERE id_auteur=$id_auteur");
+			sql_updateq("spip_auteurs", array("statut" => '1comite'), "id_auteur=$id_auteur");
 	}
 
 	// Une rubrique supprimable n'avait pas le statut "publie"
@@ -79,7 +79,7 @@ function supprimer_document_et_vignette($arg)
 	if ($row = sql_fetch($result)) {
 		spip_unlink(get_spip_doc($row['fichier']));
 		sql_delete("spip_documents", "id_document=$arg");
-		spip_query("UPDATE spip_documents SET id_vignette=0 WHERE id_vignette=$arg");
+		sql_updateq("spip_documents", array("id_vignette" => 0), "id_vignette=$arg");
 		sql_delete("spip_documents_articles", "id_document=$arg");
 		sql_delete("spip_documents_rubriques", "id_document=$arg");
 		sql_delete("spip_documents_breves", "id_document=$arg");

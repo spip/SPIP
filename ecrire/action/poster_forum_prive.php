@@ -41,7 +41,7 @@ function action_poster_forum_prive_post($r)
 		calculer_threads();
 
 		if ($objet == 'id_message') {
-			spip_query("UPDATE spip_auteurs_messages SET vu = 'non' WHERE id_message=$id");
+			sql_updateq("spip_auteurs_messages", array("vu" => 'non'), "id_message=$id");
 
 		}
 
