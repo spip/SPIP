@@ -267,7 +267,7 @@ function options_moderation($row) {
 	  . "</div></div>\n";
 
 	// Bouton "Valider"
-	$res .= "\n<div style='text-align:$spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>\n";
+	$res .= "\n<div style='text-align:".$GLOBALS['spip_lang_right'].";'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>\n";
 	
 	return
 	  debut_cadre_relief('feed.png', true, "", _T('syndic_options').aide('artsyn'))
