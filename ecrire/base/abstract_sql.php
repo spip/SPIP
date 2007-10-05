@@ -49,9 +49,12 @@ function sql_get_charset($charset, $serveur=''){
   // le nom http du charset differe parfois du nom SQL utf-8 ==> utf8 etc.
 	$desc = spip_connect($serveur);
 	$c = @$desc['charsets'][$charset];
-	if (!$c) return false;
-	if (!function_exists($f=@$desc['get_charset'])) return false;
-	if ($f($c, $serveur)) return $c;
+	if ($c) {
+		if (function_exists($f=@$desc['get_charset'])) 
+			if ($f($c, $serveur)) return $c;
+	}
+	spip_log("SPIP ne connait pas les Charsets disponibles sur le serveur $serveur. Le serveur choisira seul.");
+	return false;
 }
 
 // Cette fonction est systematiquement appelee par les squelettes
@@ -174,15 +177,15 @@ function sql_replace($table, $values, $desc=array(), $serveur='')
 }
 
 // http://doc.spip.org/@sql_showbase
-function sql_showbase($spip=true, $serveur='')
+function sql_showbase($spip=NULL, $serveur='')
 {
-	if ($spip){
+	if ($spip == NULL){
 		$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
-		$prefixe = $connexion['prefixe'];
-	} else $prefixe ='';
+		$spip = $connexion['prefixe'] . '%';
+	}
 	
 	$f = sql_serveur('showbase', $serveur);
-	return $f("$prefixe%", $serveur);
+	return $f($spip, $serveur);
 }
 
 // http://doc.spip.org/@sql_showtable
