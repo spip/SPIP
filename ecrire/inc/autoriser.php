@@ -12,10 +12,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('base/abstract_sql');
 
 # faut-il tracer les autorisations dans tmp/spip.log ?
 define ('_DEBUG_AUTORISER', false);
-
 
 // Constantes surchargeables, cf. plugin autorite
 // false pour ignorer la notion d'admin restreint # todo: une option a activer
@@ -59,8 +59,7 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 	if ($qui === NULL)
 	  $qui = $GLOBALS['auteur_session'] ? $GLOBALS['auteur_session'] : array('statut' => '', 'id_auteur' =>0);
 	elseif (is_numeric($qui)) {
-		$s = sql_select("*", "spip_auteurs", "id_auteur=".$qui);
-		$qui = sql_fetch($s);
+		$qui = sql_fetsel("*", "spip_auteurs", "id_auteur=".$qui);
 	}
 
 	// Admins restreints, on construit ici (pas generique mais...)
