@@ -19,7 +19,7 @@ function inc_editer_mot_dist($objet, $id_objet, $cherche_mot, $select_groupe, $f
 
 	if ($GLOBALS['meta']["articles_mots"] == 'non')	return '';
 
-	$visible = $visible OR ($cherche_mot OR ($flag === 'ajax'));
+	$visible = ($visible OR $cherche_mot OR ($flag === 'ajax'));
 
 	if ($objet == 'article') {
 		$table_id = 'id_article';
