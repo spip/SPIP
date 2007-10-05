@@ -618,6 +618,7 @@ ecrire/inc/lien.php -text
 ecrire/inc/message_select.php -text
 ecrire/inc/minipres.php -text
 ecrire/inc/modifier.php -text
+ecrire/inc/msiefix.php -text
 ecrire/inc/nfslock.php -text
 ecrire/inc/notifications.php -text
 ecrire/inc/petitionner.php -text

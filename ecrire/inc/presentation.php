@@ -1258,16 +1258,14 @@ function fin_page()
 
 	// cf. public/assembler, fonction f_msie()
 	// test si MSIE et sinon quitte
-	$msie = strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'msie')
-	AND preg_match('/MSIE /i', $_SERVER['HTTP_USER_AGENT']);
-	$fix_png = $msie
-		? "<script type='text/javascript'><!--
-			try { document.execCommand('BackgroundImageCache', false, true); } catch(err) {};
-			if (window.jQuery && jQuery.browser.msie) jQuery.getScript( '"
-			.url_absolue(find_in_path('javascript/jquery.ifixpng.js'))
-			."' , function() { $.ifixpng('".url_absolue(_DIR_RACINE.'rien.gif')."'); jQuery('img').ifixpng(); } );
-			// --></script>"
-		: '';
+	if (
+		strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'msie')
+		AND preg_match('/MSIE /i', $_SERVER['HTTP_USER_AGENT'])
+		AND $msiefix = charger_fonction('msiefix', 'inc')
+	)
+		$fix_png = presentation_msiefix();
+	else
+		$fix_png = '';
 
 	return debut_grand_cadre(true)
 	. (($spip_display == 4)
