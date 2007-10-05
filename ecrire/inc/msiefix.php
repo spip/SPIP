@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Inserer le script jquery.ifixpng.js si necessaire
 // Comme MSIE est goret, on n'a pas honte d'inserer comme un goret
 // en fin de page
-// http://doc.spip.org/@msiefix
+// http://doc.spip.org/@inc_msiefix_dist
 function inc_msiefix_dist($texte) {
 	$texte .= "<script type='text/javascript'><!--
 	try { document.execCommand('BackgroundImageCache', false, true); } catch(err) {};
@@ -41,6 +41,7 @@ jQuery.ifixpng('".str_repeat('../', $GLOBALS['profondeur_url']).'rien.gif'."');
 }
 
 
+// http://doc.spip.org/@presentation_msiefix
 function presentation_msiefix() {
 	lire_fichier(_DIR_RACINE.'dist/javascript/jquery.ifixpng.js', $ifixpng);
 	return "<script type='text/javascript'><!--
