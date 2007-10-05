@@ -31,7 +31,7 @@ function action_regler_moderation_dist()
 		return;
 
 	$statut = _request('change_accepter_forum');
-	spip_query("UPDATE spip_articles SET accepter_forum='$statut' WHERE id_article=". $id_article);
+	sql_updateq("spip_articles", array("accepter_forum" => $statut), "id_article=". $id_article);
 	if ($statut == 'abo') {
 		ecrire_meta('accepter_visiteurs', 'oui');
 	}

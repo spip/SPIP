@@ -52,7 +52,7 @@ function message_oubli($email, $param)
 
 	include_spip('inc/acces'); # pour creer_uniqid
 	$cookie = creer_uniqid();
-	spip_query("UPDATE spip_auteurs SET cookie_oubli = '$cookie' WHERE id_auteur=" . $row['id_auteur']);
+	sql_updateq("spip_auteurs", array("cookie_oubli" => $cookie), "id_auteur=" . $row['id_auteur']);
 
 	$nom = $GLOBALS['meta']["nom_site"];
 	$envoyer_mail = charger_fonction('envoyer_mail','inc');

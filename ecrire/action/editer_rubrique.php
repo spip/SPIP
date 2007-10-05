@@ -153,7 +153,7 @@ function editer_rubrique_breves($id_rubrique, $id_parent, $c=false)
 	if ($t) return false;
 	$id_secteur = sql_fetsel("id_secteur", "spip_rubriques", "id_rubrique=$id_parent");
 	if ($id_secteur= $id_secteur['id_secteur'])
-		spip_query("UPDATE spip_breves SET id_rubrique=$id_secteur WHERE id_rubrique=$id_rubrique");
+		sql_updateq("spip_breves", array("id_rubrique" => $id_secteur), "id_rubrique=$id_rubrique");
 	return true;
 }
 

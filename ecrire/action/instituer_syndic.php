@@ -21,7 +21,7 @@ function action_instituer_syndic_dist() {
 	list($id_syndic_article, $statut) = preg_split('/\W/', $arg);
 
 	$id_syndic_article = intval($id_syndic_article);
-	spip_query("UPDATE spip_syndic_articles SET statut='$statut' WHERE id_syndic_article=$id_syndic_article");
+	sql_updateq("spip_syndic_articles", array("statut" => $statut), "id_syndic_article=$id_syndic_article");
 
 
 }

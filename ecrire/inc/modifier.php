@@ -245,7 +245,7 @@ function revision_forum($id_forum, $c=false) {
 	) {
 		$thread = sql_fetsel("id_thread", "spip_forum", "id_forum=$id_forum");
 		foreach ($cles as $k)
-			spip_query("UPDATE spip_forum SET $k="._q($c[$k])." WHERE id_thread=".$thread['id_thread']." AND statut!='original'");
+			sql_updateq("spip_forum", array("$k" => $c[$k]), "id_thread=".$thread['id_thread']." AND statut!='original'");
 		// on n'affecte pas $r, car un deplacement ne change pas l'auteur
 	}
 

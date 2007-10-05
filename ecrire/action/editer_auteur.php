@@ -128,7 +128,7 @@ function action_legender_auteur_post($r) {
 
 	if ($auteur_session['id_auteur'] == $id_auteur) {
 		if ($perso_activer_imessage) {
-			spip_query("UPDATE spip_auteurs SET imessage='$perso_activer_imessage' WHERE id_auteur=$id_auteur");
+			sql_updateq("spip_auteurs", array("imessage" => $perso_activer_imessage), "id_auteur=$id_auteur");
 			$auteur['imessage'] = $perso_activer_imessage;
 		}
 	}
@@ -185,7 +185,7 @@ function action_legender_auteur_post($r) {
 		  if ($statut != addslashes($statut)) {
 		  spip_log("action_editer_auteur_dist: $statut incompris  pour $id_auteur");
 		} else {
-			spip_query("UPDATE spip_auteurs SET statut="._q($statut) . " WHERE id_auteur=" . _q($id_auteur));
+			sql_updateq("spip_auteurs", array("statut" => $statut), "id_auteur=" . _q($id_auteur));
 		}
 	}
 
