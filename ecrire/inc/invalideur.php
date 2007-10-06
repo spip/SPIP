@@ -61,7 +61,7 @@ function suivre_invalideur($cond, $modif=true) {
 
 // Utilisee pour vider le cache depuis l'espace prive
 // (ou juste les squelettes si un changement de config le necessite)
-// si $date est passee en argument, ne pas supprimer ce qui a servi
+// si $atime est passee en argument, ne pas supprimer ce qui a servi
 // plus recemment que cette date (via fileatime)
 // retourne le nombre de fichiers supprimes
 // http://doc.spip.org/@purger_repertoire
@@ -76,8 +76,8 @@ function purger_repertoire($dir, $options=array()) {
 		if ($fichier[0] == '.') continue;
 		$chemin = "$dir/$fichier";
 		if (is_file($chemin)) {
-			if (!isset($options['date'])
-			OR (@fileatime($chemin) < $options['date'])) {
+			if (!isset($options['atime'])
+			OR (@fileatime($chemin) < $options['atime'])) {
 				supprimer_fichier($chemin);
 				$total ++;
 			}
@@ -98,7 +98,8 @@ function purger_repertoire($dir, $options=array()) {
 //
 // Methode : on prend un des sous-repertoires de CACHE/
 // on considere qu'il fait 1/16e de la taille du cache
-// et on le ratiboise
+// et on le ratiboise en supprimant les fichiers qui n'ont pas
+// ete sollicites dans l'heure qui vient de s'ecouler
 //
 // http://doc.spip.org/@appliquer_quota_cache
 function appliquer_quota_cache() {
@@ -112,15 +113,17 @@ function appliquer_quota_cache() {
 	$nombre = nombre_de_fichiers_repertoire($dir);
 	$total_cache = _TAILLE_MOYENNE_FICHIER_CACHE * $nombre;
 	spip_log("Taille du CACHE estimee ($l): "
-		.(intval(16*$total_cache/102400)/10)." Mo");
+		.(intval(16*$total_cache/(1024*1024/10))/10)." Mo");
 
+	// Nombre max de fichiers a supprimer
 	if ($quota_cache > 0) {
 		$trop = $total_cache - ($quota_cache/16)*1024*1024;
+		$trop = 3 * intval($trop / _TAILLE_MOYENNE_FICHIER_CACHE);
 		if ($trop > 0) {
 			$n = purger_repertoire($dir,
 				array(
-					'atime' => time()-_AGE_CACHE_ATIME,
-					'limit' => intval($trop / _TAILLE_MOYENNE_FICHIER_CACHE)
+					'atime' => time() - _AGE_CACHE_ATIME,
+					'limit' => $trop
 				)
 			);
 			spip_log("$dir : $n caches supprimes");

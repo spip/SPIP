@@ -249,11 +249,10 @@ if (defined('_INC_PUBLIC')) {
 		$stats();
 	}
 
-	if (isset($GLOBALS['meta']['date_prochain_postdate'])) {
-	  if ($GLOBALS['meta']['date_prochain_postdate'] <= time()) {
+	if (isset($GLOBALS['meta']['date_prochain_postdate'])
+	AND $GLOBALS['meta']['date_prochain_postdate'] <= time()) {
 		include_spip('inc/rubriques');
 		calculer_prochain_postdate(true);
-	  }
 	}
 
 	// Effectuer une tache de fond ?
