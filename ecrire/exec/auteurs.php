@@ -307,28 +307,28 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 	// tri
 	switch ($tri) {
 	case 'nombre':
-		$sql_order = ' compteur DESC, unom';
+		$sql_order = 'compteur DESC, unom';
 		break;
 	
 	case 'site':
-		$sql_order = ' site, unom';
+		$sql_order = 'site, unom';
 		break;
 	
 	case 'statut':
-		$sql_order = ' statut, unom';
+		$sql_order = 'statut, unom';
 		break;
 	
 	case 'nom':
 	default:
 		$sql_sel = ", ".sql_multi ("nom", $spip_lang);
-		$sql_order = " multi";
+		$sql_order = "multi";
 	}
 	
 	//
 	// La requete de base est tres sympa
 	// (pour les visiteurs, ca postule que les messages concernent des articles)
 	
-	 $row = sql_select("							aut.id_auteur AS id_auteur,							aut.statut AS statut,								aut.nom_site AS site, aut.nom AS nom,								UPPER(aut.nom) AS unom,							COUNT(lien.id_article) AS compteur							$sql_sel									", "spip_auteurs as aut " . ($visit ?		 			"LEFT JOIN spip_forum AS lien ON aut.id_auteur=lien.id_auteur " :		("LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur	 LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)")) .	"", "$sql_visible ", " aut.statut, aut.nom_site, aut.nom, aut.id_auteur ", " $sql_order");
+	$row = sql_select("							aut.id_auteur AS id_auteur,							aut.statut AS statut,								aut.nom_site AS site, aut.nom AS nom,								UPPER(aut.nom) AS unom,							COUNT(lien.id_article) AS compteur							$sql_sel									", "spip_auteurs as aut " . ($visit ?		 			"LEFT JOIN spip_forum AS lien ON aut.id_auteur=lien.id_auteur " :		("LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur	 LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)")), $sql_visible, "aut.statut, aut.nom_site, aut.nom, aut.id_auteur", $sql_order);
 	 return $row;
 }
 
