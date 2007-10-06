@@ -91,8 +91,7 @@ function action_tourner_post($r)
 
 	// succes !
 	if ($largeur>0 AND $hauteur>0) {
-		$f = "'" . addslashes(set_spip_doc($dest)) . "'";
-		spip_query("UPDATE spip_documents SET fichier=$f, largeur=$largeur, hauteur=$hauteur WHERE id_document=$arg");
+		sql_updateq('spip_documents', array('fichier' => set_spip_doc($dest), 'largeur'=>$largeur, 'hauteur'=>$hauteur), "id_document=$arg");
 		if ($effacer) {
 			spip_log("j'efface $effacer");
 			spip_unlink($effacer);

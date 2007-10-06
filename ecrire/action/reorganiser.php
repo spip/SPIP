@@ -61,7 +61,7 @@ function reorganiser_rubrique_rubrique($id_quoi, $id_cible)
 
 		$s = sql_select("statut, id_parent", "spip_rubriques", "id_rubrique=$id_quoi");
 
-		spip_query("UPDATE spip_rubriques SET id_parent="._q($id_cible).", id_secteur=$id_secteur WHERE id_rubrique="._q($id_quoi));
+		sql_updateq('spip_rubriques', array('id_parent' => $id_cible, 'id_secteur'=>$id_secteur),  "id_rubrique="._q($id_quoi));
 
 		if ($s['statut'] == 'publie') {
 			include_spip('inc/rubriques');

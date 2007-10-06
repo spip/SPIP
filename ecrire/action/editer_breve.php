@@ -193,9 +193,9 @@ function revisions_breves_langue($id_breve, $id_rubrique, $changer_lang)
 	if ($changer_lang == "herit") {
 		$row = sql_fetsel("lang", "spip_rubriques", "id_rubrique=$id_rubrique");
 		$langue_parent = $row['lang'];
-		spip_query("UPDATE spip_breves SET lang=" . _q($langue_parent) . ", langue_choisie='non' WHERE id_breve=$id_breve");
+		sql_updateq('spip_breves', array('lang'=>$langue_parent, 'langue_choisie'=>'non'), "id_breve=$id_breve");
 	} else 	{
-		spip_query("UPDATE spip_breves SET lang=" . _q($changer_lang) . ", langue_choisie='oui' WHERE id_breve=$id_breve");
+		sql_updateq('spip_breves', array('lang'=>$changer_lang, 'langue_choisie'=>'oui'), "id_breve=$id_breve");
 		include_spip('inc/rubriques');
 		$langues = calculer_langues_utilisees();
 		ecrire_meta('langues_utilisees', $langues);
