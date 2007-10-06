@@ -61,7 +61,7 @@ function action_copier_local_post($id_document) {
 		// or, dans la table documents, IMG doit etre exclu.
 		$fichier = set_spip_doc($fichier);
 		spip_log("convertit doc $id_document en local: $source => $fichier");
-		spip_query("UPDATE spip_documents SET fichier="._q($fichier).", distant='non', taille='$taille', descriptif="._q($row['descriptif'])." WHERE id_document=".$id_document);
+		sql_updateq('spip_documents', array('fichier' =>$fichier, 'distant'=>'non', 'taille'=>$taille, 'descriptif'=> $row['descriptif']),"id_document=".$id_document);
 		
 	} else {
 		spip_log("echec copie locale $source");

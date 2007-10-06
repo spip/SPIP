@@ -242,16 +242,26 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 				$mode = 'document';
 
 		// Inserer le nouveau doc et recuperer son id_
-		$id_document = sql_insert("spip_documents", "(extension, titre, date, distant, mode, taille, largeur, hauteur, fichier)", "("._q($ext).", " . _q($titre) . ", NOW(), '$distant', '$mode', "._q($taille).", "._q($largeur).", "._q($hauteur)."," . _q($chemin) .")");
+		$id_document = sql_insertq("spip_documents",
+					   array(
+			'extension'=> $ext, 
+			'titre'=> $titre,
+			'date' => 'NOW()',
+			'distant' => $distant,
+			'mode' => $mode,
+			'taille' => intval($taille),
+			'largeur' => intval($largeur),
+			'hauteur' => intval($hauteur),
+			'fichier' => $chemin));
 
-		if ($id_lien
+		if ($id_lien AND $id_document
 		AND preg_match('/^[a-z0-9_]+$/i', $type_lien) # securite
 		) {
 			sql_insert("spip_documents_".$type_lien."s",
 				"(id_document, id_".$type_lien.")",
 				"($id_document, $id_lien)"
 			);
-		}
+		} else spip_log("Pb d'insertion $id_lien $type_lien");
 	} else 	// Mise a jour des descripteurs d'un vieux doc
 		spip_query("UPDATE spip_documents SET taille="._q($taille).", largeur="._q($largeur)."', hauteur="._q($hauteur).", fichier="._q($chemin) ." WHERE id_document=$id_document");
 

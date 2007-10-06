@@ -137,7 +137,7 @@ function revisions_articles ($id_article, $c=false) {
 		$c);
 
 	if ($r) {
-		spip_query("UPDATE spip_articles SET date_modif=NOW() WHERE id_article="._q($id_article));
+		sql_update("spip_articles", array("date_modif" => "NOW()"), "id_article="._q($id_article));
 	}
 
 	return ''; // pas d'erreur
