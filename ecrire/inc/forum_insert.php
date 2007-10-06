@@ -188,7 +188,7 @@ function inc_forum_insert_dist() {
 	else
 		$id_thread = $id_message; # id_thread oblige INSERT puis UPDATE.
 
-	spip_query("UPDATE spip_forum SET id_parent = $id_forum, id_rubrique = $id_rubrique, id_article = $id_article, id_breve = $id_breve, id_syndic = $id_syndic, id_thread = $id_thread, statut = '$statut' WHERE id_forum = $id_message");
+	sql_updateq('spip_forum', array('id_parent' => $id_forum, 'id_rubrique' => $id_rubrique, 'id_article' => $id_article, 'id_breve' => $id_breve, 'id_syndic' => $id_syndic, 'id_thread' => $id_thread, 'statut' => $statut), "id_forum = $id_message");
 
 	// Entrer les mots-cles associes
 	if (is_array($ajouter_mot)) mots_du_forum($ajouter_mot, $id_message);

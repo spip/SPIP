@@ -55,7 +55,7 @@ function publier_branche_rubrique($id_rubrique)
 
 	while ($r = sql_getfetsel('id_parent', 'spip_rubriques AS R', "R.id_rubrique=$id_pred AND  R.statut != 'publie'")) {
 
-	  sql_updateq('spip_rubriques', array('statut'=>'publie', 'date'=>'NOW()'), "id_rubrique=$id_pred");
+	  sql_update('spip_rubriques', array('statut'=>"'publie'", 'date'=>'NOW()'), "id_rubrique=$id_pred");
 		if (!($id_pred = $r)) break;
 	}
 #	spip_log(" publier_branche_rubrique($id_rubrique $id_pred");

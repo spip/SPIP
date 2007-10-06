@@ -47,7 +47,7 @@ function acces_statut($id_auteur, $statut, $bio)
 	if ($statut != 'nouveau') return $statut;
 	include_spip('inc/filtres');
 	if (!($s = tester_config('', $bio))) return $statut;
-	spip_query("UPDATE spip_auteurs SET bio='', statut=" . _q($s) . " WHERE id_auteur=$id_auteur");
+		sql_updateq('spip_auteurs', array('bio'=>'', 'statut'=> $s), "id_auteur=$id_auteur");
 	return $s;
 }
 
