@@ -100,7 +100,7 @@ function action_cookie_dist() {
 			$prefs = ($row_auteur['prefs']) ? unserialize($row_auteur['prefs']) : array();
 			$prefs['cnx'] = $session_remember;
 	
-			spip_query("UPDATE spip_auteurs SET prefs = " . _q(serialize($prefs)) . " WHERE id_auteur = " . $row_auteur['id_auteur']);
+			sql_updateq('spip_auteurs', array('prefs' => serialize($prefs)), "id_auteur = " . $row_auteur['id_auteur']);
 		}
 	}
 

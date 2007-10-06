@@ -202,13 +202,13 @@ function action_legender_auteur_post($r) {
 		sql_delete("spip_auteurs_rubriques", "id_auteur="._q($id_auteur));
 		foreach (array_unique($restreintes) as $id_rub)
 			if ($id_rub = intval($id_rub)) // si '0' on ignore
-				sql_insert('spip_auteurs_rubriques', "(id_auteur,id_rubrique)", "($id_auteur,$id_rub)");
+				sql_insertq('spip_auteurs_rubriques', array('id_auteur' => $id_auteur, 'id_rubrique'=>$id_rub));
 	}
 
 	// Lier a un article
 	if ($id_article = intval(_request('lier_id_article'))
 	AND autoriser('modifier', 'article', $id_article)) {
-		spip_query("INSERT spip_auteurs_articles (id_article,id_auteur) VALUES ($id_article,$id_auteur)");
+		sql_insertq('spip_auteurs_articles', array('id_article' => $id_article, 'id_auteur' =>$id_auteur));
 	}
 
 	// Notifications, gestion des revisions, reindexation...
