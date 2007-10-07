@@ -32,12 +32,15 @@ blockquote.spip_poesie div { text-indent: -60px; margin-left: 60px; }
 .spip_surligne { background: #FF6; }
 
 /* Tableaux */
-table.spip { margin: auto; margin-bottom: 1em; border: 1px solid; border-collapse: collapse; }
-table.spip caption { caption-side: top; /* bottom pas pris en compte par IE */ text-align: center; margin: auto; padding: 3px; font-weight: bold; }
+table.spip { margin: auto; margin-bottom: 1em; border-collapse: collapse; border-spacing: 0; }
+table.spip caption { caption-side: top; /* bottom pas pris en compte par IE */ text-align: center; margin: auto; font-weight: bold; }
 table.spip tr.row_first { background: #FFC; }
-table.spip tr.row_odd { background: #DDD; }
-table.spip tr.row_even { background: #EEE; }
-table.spip th, table.spip td { padding: 3px; text-align: left; vertical-align: middle; }
+table.spip tr.row_odd { background: #EEE; }
+table.spip tr.row_even { background: #DDD; }
+table.spip th, table.spip td { padding: 0.20em 0.40em; text-align: left; border: 1px solid; }
+table.spip th { vertical-align: bottom; font-weight: bold; }
+table.spip td { vertical-align: top; }
+
 
 /* Logos, documents et images */
 img, .spip_logos { margin: 0; padding: 0; border: 0; }
