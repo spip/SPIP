@@ -152,7 +152,7 @@ function import_init_tables($request)
 			if (isset($desc['field']['impt']))
 				sql_delete($table, "impt='oui'");
 			else
-				spip_delete($table);
+				sql_delete($table);
 		}
 	}
 

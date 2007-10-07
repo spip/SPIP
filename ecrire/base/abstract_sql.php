@@ -163,7 +163,7 @@ function sql_updateq($table, $exp, $where='', $desc=array(), $serveur='')
 }
 
 // http://doc.spip.org/@sql_delete
-function sql_delete($table, $where, $serveur='')
+function sql_delete($table, $where='', $serveur='')
 {
 	$f = sql_serveur('delete', $serveur);
 	return $f($table, $where, $serveur);
