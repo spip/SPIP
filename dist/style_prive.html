@@ -34,13 +34,13 @@ body, body * { font-size: 100%;font-family: Verdana, Geneva, Sans, sans-serif; }
 
 #page { font-size: small; }
 /* ecran etroit*/
-#conteneur,.table_page { clear: both; margin-left: auto; margin-right: auto; text-align: left; width: 750px; margin-top:0.5em;}
+#conteneur,.table_page { clear: both; margin-right: auto; margin-left: auto; text-align: left; width: 750px; margin-top:0.5em;}
 #navigation { float: left; width: 200px; min-height: 100px; }
 #contenu { float: left ; margin-left: 30px; width: 505px; }
 #extra { float: left; width: 200px; }
 
 /* ecran large*/
-.large #conteneur,.large .table_page { margin-left: auto; margin-right: auto; text-align: left; width: 950px; }
+.large #conteneur,.large .table_page { margin-right: auto; margin-left: auto; text-align: left; width: 950px; }
 .large #navigation { float: left; width: 200px; }
 .large #contenu { float: left; margin-left: 17px; width: 540px; }
 .large #extra { float: right; width: 170px; }
@@ -289,12 +289,6 @@ a.ortho-dico:hover { margin: -2px; border: 2px dashed #a0b890; color: inherit; t
 .diff-para-deplace .diff-supprime { background: #ffb8b8; border: 1px solid #808080; }
 .diff-para-deplace .diff-deplace { background: #b8b8ff; border: 1px solid #808080; }
 
-/* * Barre de raccourcis */
-table.spip_barre { width: 100%; border-#GET{right}: 1px solid #GET{claire}; }
-table.spip_barre td { text-align: #GET{left}; border-top: 1px solid #GET{claire}; border-#GET{left}: 1px solid #GET{claire}; }
-table.spip_barre a img { 3px; background-color: #eee; margin: 0; padding: border-#GET{right}: 1px solid #GET{claire}; }
-table.spip_barre a:hover img { background-color: #FFF; }
-
 td.icone table {}
 td.icone a { color: #000; text-decoration: none; font-size: 10px; font-weight: bold; }
 td.icone a:hover { text-decoration: none; }
@@ -418,62 +412,15 @@ table.bottom img { display: block; }
 
 /* * Styles generes par les raccourcis de mise en page */
 
-/* Listes SPIP */
-.spip_puce { list-style-position: outside; }
-ul.spip {}
-ol.spip {}
-li.spip {}
-
 .chapo { font-weight: bold; color: #333; }
-h3.spip { margin-top: 2em; margin-bottom: 1.4em; text-align: center; font-weight: bold; color: #333; }
 
-p.spip { line-height: 1.4em; }
-p.spip_note { margin-bottom: 3px; margin-top: 3px; margin-#GET{left}: 17px; text-indent: -17px; }
-
+#wysiwyg { line-height: 1.4em; }
 #wysiwyg a { color: #604A7F; text-decoration: underline; }
-a.spip_note { background-color: #eee; font-weight: bold; }
-a.spip_in {}
-.spip_out, .spip_url, .spip_glossaire { background: url(#EVAL{ _DIR_IMG_PACK}wrapper.php?file=spip_out.gif) [(#GET{right})] center no-repeat; padding-#GET{right}: 12px; }
 #wysiwyg a:hover { color: #F57900; text-decoration: underline; }
-#wysiwyg a.spip_glossaire:hover { text-decoration: underline overline; }
 
 .spip_recherche { width: 240px; float: [(#GET{right})]; }
 .spip_recherche .recherche{ padding: 3px; width: 200px; font-size: 10px; border: 1px solid #FFF; background-color: #GET{foncee}; color: #FFF; margin: 0 3px 6px 0; }
 .spip_recherche .submit {}
-
-/* Citations, code et poesie */
-q, blockquote, .spip_poesie, .spip_serif { font-family: Georgia, Times, serif; }
-blockquote { padding-#GET{left}: 1em; border-#GET{left}: 4px solid #DDD; }
-.spip_poesie { margin: 1em 3em; padding-#GET{left}: 1em; border-#GET{left}: 1px solid #CCC; font-family: Garamond, Georgia, Times, serif; }
-.spip_poesie div { text-indent: -60px; margin-#GET{left}: 60px; }
-code, .spip_cadre { font-family: "Courier New", Courier, mono; font-size: 1.1em; color: #009; }
-div.spip_code, .spip_cadre { margin-bottom: 1em; }
-.spip_cadre { width: 99%; background-color: #F4F8F8; border: 1px inset; }
-
-/* Tableaux */
-table.spip { margin: auto; margin-bottom: 1em; border-collapse: collapse; border-spacing: 0; }
-table.spip caption { caption-side: top; /* bottom pas pris en compte par IE */ text-align: center; margin: auto; font-weight: bold; }
-table.spip tr.row_first { background: #FFC; }
-table.spip tr.row_odd { background: #EEE; }
-table.spip tr.row_even { background: #DDD; }
-table.spip th, table.spip td { padding: 0.20em 0.40em; text-align: left; border: 1px solid; }
-table.spip th { vertical-align: bottom; font-weight: bold; }
-table.spip td { vertical-align: top; }
-
-/* Logos, documents et images */
-img, .spip_logos { margin: 0; padding: 0; border: 0; }
-
-.spip_documents { text-align: center; line-height: normal; color: #666; }
-.spip_documents p { margin: 0.10em; padding: 0; }
-.spip_documents_center { clear: both; width: 100%; margin: 1em auto; }
-span.spip_documents_center { display: block; margin-top: 1em; }
-.spip_documents_left { float: left; margin-right: 15px; margin-bottom: 5px; }
-.spip_documents_right { float: right; margin-left: 15px; margin-bottom: 5px; }
-.spip_doc_titre { font-weight: bold; font-size: 0.90em; margin-left: auto; margin-right: auto; }
-.spip_doc_descriptif { clear: both; font-size: 0.90em; margin-left: auto; margin-right: auto; }
-
-/* modeles par defaut */
-.spip_modele { float: right; display: block; border: 1px dotted #666; width: 180px; }
 
 /* pour le plugin "revision_nbsp" */
 .spip-nbsp { border-bottom: 2px solid #c8c8c8; padding-left: 2px; padding-right: 2px; margin-left: -1px; margin-right: -1px; }

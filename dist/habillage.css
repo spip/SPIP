@@ -3,17 +3,6 @@
 /* ----------------------------------------------------------- */
 
 
-/*
- * nota: CSS des raccourcis de SPIP -- spip_style.css
- *
- * La feuille de style dist/spip_style.css est chargee
- * au prealable ; elle contient la definition standard
- * des styles associes aux raccourcis de SPIP.
- *
- */
-
-
-
 /* Disposition a l'ecran des blocs principaux
 ---------------------------------------------- */
 body { background: #FFF; margin: 0; padding: 0; text-align: center; }
@@ -58,47 +47,42 @@ body, .formulaire_spip, #hierarchie, .pagination, small { font-family: Verdana, 
 h1 { margin: 0; font-size: 1.50em; font-weight: bold; color: #000; }
 h2 { margin: 0; padding: 0.20em 0.40em; background: #8B6F92; font-size: 1.10em; font-weight: bold; }
 h2, h2 a, h2 a:hover { color: #EEE; }
-h3.spip { margin-top: 2em; margin-bottom: 1.4em; text-align: center; }
+h3.spip {}  /*Cf.: spip_style.css*/
 
 /* Divers */
-hr { height: 2px; margin: 2em auto; background-color: #999; color: #999; border: 0; }
+hr {}
+hr.spip {} /*Cf.: spip_style.css*/
 abbr, acronym { border-bottom: 1px dotted; cursor: help; }
 small { font-size: 0.71em; color: #666; }
 /* Attention : en dessous de 0.71em le texte devient illisible en text smallest sur MSIE */
 
 /* Listes SPIP */
-/*.spip_puce { list-style-position: outside; }*/
-ul.spip {}
-ol.spip {}
+.spip_puce {} /*Cf.: spip_style.css*/
+ul.spip {} /*Cf.: spip_style.css*/
+ol.spip {} /*Cf.: spip_style.css*/
+li.spip {} /*Cf.: spip_style.css*/
 
 /* Citations, code et poesie */
-blockquote { margin: 1em 3em; padding-left: 1em; border-left: 4px solid #DDD; }
-blockquote.spip_poesie { border-left: 1px solid #CCC; font-family: Garamond, Georgia, Times, serif; }
-blockquote.spip_poesie div { text-indent: -60px; margin-left: 60px; }
-code, .spip_cadre { font-family: "Courier New", Courier, mono; color: #009; }
-div.spip_code, .spip_cadre { margin-bottom: 1em; }
+blockquote {}
+blockquote.spip {} /*Cf.: spip_style.css*/
+blockquote.spip_poesie {} /*Cf.: spip_style.css*/
+code {}
+.spip_code {} /*Cf.: spip_style.css*/
+.spip_cadre {} /*Cf.: spip_style.css*/
 
 /* Tableaux */
 table { border-collapse: collapse; border-spacing: 0; }
-table.spip { margin: auto; margin-bottom: 1em; border-collapse: collapse; border-spacing: 0; }
-table.spip caption { caption-side: top; /* bottom pas pris en compte par IE */ text-align: center; margin: auto; font-weight: bold; }
-table.spip tr.row_first { background: #FFC; }
-table.spip tr.row_odd { background: #EEE; }
-table.spip tr.row_even { background: #DDD; }
-table.spip th, table.spip td { padding: 0.20em 0.40em; text-align: left; border: 1px solid; }
-table.spip th { vertical-align: bottom; font-weight: bold; }
-table.spip td { vertical-align: top; }
+table.spip {} /*Cf.: spip_style.css*/
 
 /* Logos, documents et images */
-img, .spip_logos { margin: 0; padding: 0; border: 0; }
+img, .spip_logos {} /*Cf.: spip_style.css*/
 
-.spip_documents { text-align: center; line-height: normal; color: #666; }
-.spip_documents p { margin: 0.10em; padding: 0; }
-.spip_documents_center { display: block; clear: both; width: 100%; margin: 1em auto; }
-.spip_documents_left { float: left; margin-right: 15px; margin-bottom: 5px; }
-.spip_documents_right { float: right; margin-left: 15px; margin-bottom: 5px; }
-.spip_doc_titre { font-weight: bold; font-size: 0.90em; margin-left: auto; margin-right: auto; }
-.spip_doc_descriptif { clear: both; font-size: 0.90em; margin-left: auto; margin-right: auto; }
+.spip_documents {} /*Cf.: spip_style.css*/
+.spip_documents_center {} /*Cf.: spip_style.css*/
+.spip_documents_left {} /*Cf.: spip_style.css*/
+.spip_documents_right {} /*Cf.: spip_style.css*/
+.spip_doc_titre {} /*Cf.: spip_style.css*/
+.spip_doc_descriptif {} /*Cf.: spip_style.css*/
 
 
 /* Blocs et elements du contenu
@@ -124,8 +108,8 @@ img, .spip_logos { margin: 0; padding: 0; border: 0; }
 
 abbr.published { border: 0; }
 
-/* modeles par defaut */
-.spip_modele { float: right; display: block; border: 1px dotted #666; width: 180px; }
+/* Modeles par defaut */
+.spip_modele {} /*Cf.: spip_style.css*/
 
 /* Portfolio */
 #documents_portfolio { clear: both; margin: 2em auto; text-align: center; }
@@ -153,7 +137,7 @@ abbr.published { border: 0; }
 .reponse_formulaire { font-weight: bold; }
 .reponse_formulaire, .reponse_formulaire legend { color: #F57900; } /* preciser la couleur des legend pour IE/Win */
 fieldset.reponse_formulaire { border-color: #F57900; font-weight: normal; }
-.spip_surligne { background: #FF6; }
+.spip_surligne {} /*Cf.: spip_style.css*/
 
 /* Previsualisation du message */
 fieldset.previsu { padding: 1em; border: 2px solid #F57900; }
@@ -177,10 +161,8 @@ ul.choix_mots label { display: inline; }
 .formulaire_menu_lang { background: none; margin: 0; padding: 1em 0; }
 
 /* Barre de raccourcis typographiques */
-table.spip_barre { width: 100%; }
-table.spip_barre a img { background: #FDA; padding: 3px; border: 1px outset #CC9; }
-table.spip_barre a:hover img { background: #FFF; border: 1px solid #CC9; }
-table.spip_barre input.barre { width: 99%; background: transparent; border: 0; color: #F57900; }
+table.spip_barre {} /*Cf.: spip_style.css*/
+table.spip_barre input.barre {} /*Cf.: spip_style.css*/
 
 
 /* Habillage des forums
@@ -253,10 +235,4 @@ ul ul ul ul ul .forum-chapo { background: #FFF; }
 /* Couleurs des liens
 ---------------------------------------------- */
 a { color: #604A7F; text-decoration: none; }
-a.spip_note {} /* liens vers notes de bas de page */
-a.spip_in {} /* liens internes */
-a.spip_out {} /* liens sortants */
-a.spip_url {} /* liens url sortants */
-a.spip_glossaire {} /* liens vers encyclopedie */
-.on { font-weight: bold; } /* liens exposes */
 a:hover { color: #F57900; text-decoration: underline; }
