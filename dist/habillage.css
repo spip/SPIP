@@ -7,14 +7,14 @@
 ---------------------------------------------- */
 body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 
-div#page { width: 48em; margin: 0 auto; text-align: left; }
+div#page { width: 750px; margin: 0 auto; text-align: left; }
 
 div#top { margin: 0; border-bottom: 2px solid #8B6F92; padding-top: 1em; }
 div#top #nom_site_spip, #top a .spip_logos { display: block; float: left; font-weight: bold; font-size: 1.50em; }
 div#top .formulaire_recherche { float: right; width: 30%; background: none; margin: 0; padding: 1em 0; }
 div#top .formulaire_recherche label { display: none; }
 
-div#conteneur { clear: both; float: left; width: 67%; min-height: 450px; overflow: hidden; }
+div#conteneur { clear: both; float: left; width: 67%; overflow: hidden; }
 div#contenu { padding-top: 0.30em; }
 
 div#navigation { float: right; width: 30%; overflow: hidden; }
@@ -32,20 +32,17 @@ div#pied img { vertical-align: bottom; }
 
 /* Typographie generale du site
 ---------------------------------------------- */
-body { font-size: 100%; color: #333; }
-#top, #contenu, #navigation, #extra, #pied { font-size: 0.82em; }
-
-h1, h2, .chapo, .hyperlien, .texte, .ps, .notes, .introduction, #contenu { font-family: "Trebuchet MS", Helvetica, sans-serif; }
-h3 { font-family: Georgia, Times, serif; }
-body, .formulaire_spip, #hierarchie, .pagination, small { font-family: Verdana, Tahoma, Geneva, sans-serif; }
+/* Cf.: http://pompage.net/pompe/definir-des-tailles-de-polices-en-CSS */
+html { font-size: 100%; }
+body { font-size: 0.80em; font-family: "Trebuchet MS", Helvetica, sans-serif; color: #333; }
 
 
 /* Personnalisation des styles HTML par defaut
 ---------------------------------------------- */
 
 /* Titraille */
-h1 { margin: 0; font-size: 1.50em; font-weight: bold; color: #000; }
-h2 { margin: 0; padding: 0.20em 0.40em; background: #8B6F92; font-size: 1.10em; font-weight: bold; }
+h1 { margin: 0; padding: 0; font-size: 1.50em; font-weight: bold; color: #000; }
+h2 { margin: 0; padding: 0.20em 0.40em; background: #8B6F92; font-size: 1.20em; font-weight: bold; }
 h2, h2 a, h2 a:hover { color: #EEE; }
 h3.spip {}  /*Cf.: spip_style.css*/
 
@@ -54,7 +51,7 @@ hr {}
 hr.spip {} /*Cf.: spip_style.css*/
 abbr, acronym { border-bottom: 1px dotted; cursor: help; }
 small { font-size: 0.71em; color: #666; }
-/* Attention : en dessous de 0.71em le texte devient illisible en text smallest sur MSIE */
+/* Attention : en dessous de 0.71em le texte devient illisible en text smallest sur IE/Win */
 
 /* Listes SPIP */
 .spip_puce {} /*Cf.: spip_style.css*/
@@ -63,10 +60,8 @@ ol.spip {} /*Cf.: spip_style.css*/
 li.spip {} /*Cf.: spip_style.css*/
 
 /* Citations, code et poesie */
-blockquote {}
 blockquote.spip {} /*Cf.: spip_style.css*/
 blockquote.spip_poesie {} /*Cf.: spip_style.css*/
-code {}
 .spip_code {} /*Cf.: spip_style.css*/
 .spip_cadre {} /*Cf.: spip_style.css*/
 
@@ -108,9 +103,6 @@ img, .spip_logos {} /*Cf.: spip_style.css*/
 
 abbr.published { border: 0; }
 
-/* Modeles par defaut */
-.spip_modele {} /*Cf.: spip_style.css*/
-
 /* Portfolio */
 #documents_portfolio { clear: both; margin: 2em auto; text-align: center; }
 #documents_portfolio .spip_logos { margin: 6px 3px 0 3px; padding: 4px; border: 1px solid #DDD; }
@@ -126,7 +118,8 @@ abbr.published { border: 0; }
 .formulaire_spip fieldset { margin: 0; margin-bottom: 1em; padding: 0; border: 0; border-top: 1px solid #CC9; }
 .formulaire_spip legend { margin: 0; padding: 0; padding-right: 0.50em; color: #330; } /* preciser la couleur des legend pour IE/Win */
 .formulaire_spip label { display: block; font-size: 0.90em; }
-.forml, textarea, select { width: 99%; background: #F4F8F8; border: 1px inset #CC9; font-family: inherit; font-size: inherit; color: #000; }
+input, textarea, select { font-size: 100%; font-family: inherit; }
+.forml, textarea, select { width: 99%; background: #F4F8F8; border: 1px inset #CC9; color: #000; }
 .formulaire_spip textarea { margin-bottom: 1em; }
 
 /* Boutons */
@@ -159,10 +152,6 @@ ul.choix_mots label { display: inline; }
 /* menu langues */
 #menu_langues { background: none; margin: 0; padding: 1em 0; vertical-align: top; }
 .formulaire_menu_lang { background: none; margin: 0; padding: 1em 0; }
-
-/* Barre de raccourcis typographiques */
-table.spip_barre {} /*Cf.: spip_style.css*/
-table.spip_barre input.barre {} /*Cf.: spip_style.css*/
 
 
 /* Habillage des forums
