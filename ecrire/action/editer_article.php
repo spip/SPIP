@@ -155,15 +155,15 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 	include_spip('inc/rubriques');
 	include_spip('inc/modifier');
 
-	$s = sql_select("statut, id_rubrique", "spip_articles", "id_article=$id_article");
-	$row = sql_fetch($s);
+	$row = sql_fetsel("statut, id_rubrique", "spip_articles", "id_article=$id_article");
 	$id_rubrique = $row['id_rubrique'];
 	$statut_ancien = $statut = $row['statut'];
 	$champs = array();
 	$date = _request('date', $c);
 
 	$s = _request('statut', $c);
-	if ($s AND _request('statut', $c) != $statut) {
+
+	if ($s AND $s != $statut) {
 		if (autoriser('publierdans', 'rubrique', $id_rubrique))
 			$statut = $champs['statut'] = $s;
 		else if (autoriser('modifier', 'article', $id_article) AND $s != 'publie')
