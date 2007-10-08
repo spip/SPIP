@@ -51,9 +51,8 @@ function action_legender_auteur_post($r) {
 //
 // si id_auteur est hors table, c'est une creation sinon une modif
 //
-	$auteur = array();
 	if ($id_auteur) {
-		$auteur = sql_fetsel("*", "spip_auteurs", "id_auteur=$id_auteur");
+		$auteur = sql_fetsel("nom, login, bio, email, nom_site, url_site, pgp, extra, id_auteur, source, imessage", "spip_auteurs", "id_auteur=$id_auteur");
 	  }
 	if (!$auteur) {
 		$id_auteur = 0;
@@ -62,13 +61,14 @@ function action_legender_auteur_post($r) {
 		  if (in_array($s,$GLOBALS['liste_des_statuts']))
 		    $statut = $s;
 		  else {
-		    spip_log("action_editer_auteur_dist: statut $s incompris");
-		    // statut par defaut
 		    $statut = $GLOBALS['liste_des_statuts']['info_redacteurs'];
+		    spip_log("action_editer_auteur_dist: statut $s incompris;  $statut s'y susbstitue ");
+		    // statut par defaut
+
 		  }
 		}
+		$auteur = array();
 	  }
-	$auteur['nom'] = corriger_caracteres(_request('nom'));
 
 	  // login et mot de passe
 	$modif_login = false;
@@ -107,8 +107,19 @@ function action_legender_auteur_post($r) {
 			$echec[]= 'info_passe_trop_court';
 		else {
 			$modif_login = true;
-			$auteur['new_pass'] = $new_pass;
 		}
+	}
+
+	if ($new_pass AND $id_auteur) {
+		$htpass = generer_htpass($new_pass);
+		$alea_actuel = creer_uniqid();
+		$alea_futur = creer_uniqid();
+		$pass = md5($alea_actuel.$new_pass);
+		$auteur['pass'] = $pass;
+		$auteur['htpass'] = $htpass;
+		$auteur['alea_actuel'] = $alea_actuel;
+		$auteur['alea_futur'] = $alea_futur;
+		$auteur['low_sec'] = '';
 	}
 
 	if ($modif_login AND ($auteur['id_auteur']<>$auteur_session['id_auteur'])) {
@@ -127,35 +138,31 @@ function action_legender_auteur_post($r) {
 	}
 
 	if ($auteur_session['id_auteur'] == $id_auteur) {
-		if ($perso_activer_imessage) {
-			sql_updateq("spip_auteurs", array("imessage" => $perso_activer_imessage), "id_auteur=$id_auteur");
-			$auteur['imessage'] = $perso_activer_imessage;
-		}
+		$auteur['imessage'] = $perso_activer_imessage;
 	}
 
 	// variables sans probleme
 	$auteur['bio'] = corriger_caracteres($bio);
 	$auteur['pgp'] = corriger_caracteres($pgp);
+	$auteur['nom'] = corriger_caracteres(_request('nom'));
 	$auteur['nom_site'] = corriger_caracteres($nom_site_auteur); // attention mix avec $nom_site_spip ;(
 	$auteur['url_site'] = vider_url($url_site, false);
-
-	if ($new_pass) {
-		$htpass = generer_htpass($new_pass);
-		$alea_actuel = creer_uniqid();
-		$alea_futur = creer_uniqid();
-		$pass = md5($alea_actuel.$new_pass);
-		$query_pass = " pass='$pass', htpass='$htpass', alea_actuel='$alea_actuel', alea_futur='$alea_futur', ";
-		if ($auteur['id_auteur'])
-		  effacer_low_sec($auteur['id_auteur']);
-	} else
-		$query_pass = '';
 
 	// recoller les champs du extra
 	if ($GLOBALS['champs_extra']) {
 		include_spip('inc/extra');
-		$extra = extra_update('auteurs', $id_auteur);
+		$auteur['extra'] = extra_update('auteurs', $id_auteur);
 	} else
-		$extra = '';
+		$auteur['extra'] = '';
+
+	//
+	// Modifications de statut
+	//
+
+	if ($statut
+	AND autoriser('modifier', 'auteur', $id_auteur, NULL, array('statut'=>$statut))) {
+			$auteur["statut"] = $statut;
+	}
 
 	// l'entrer dans la base
 	if (!$echec) {
@@ -171,38 +178,24 @@ function action_legender_auteur_post($r) {
 				rename($logo, str_replace($id_hack, $id_auteur, $logo));
 		}
 
-		spip_query("UPDATE spip_auteurs SET $query_pass			nom=" . _q($auteur['nom']) . ",						login=" . _q($auteur['login']) . 	",					bio=" . _q($auteur['bio']) . "," .						(isset($auteur['email']) ? ("email=" . _q($auteur['email'])) : '') . ",	nom_site=" . _q($auteur['nom_site']) . 	",				url_site=" . _q($auteur['url_site']) . 	",				pgp=" . _q($auteur['pgp']) .							(!$extra ? '' : (", extra = " . _q($extra) . "")) 	.			" WHERE id_auteur=".$auteur['id_auteur']);
-	}
-
-
-	//
-	// Modifications de statut
-	//
-
-	if ($statut = _request('statut')
-	AND autoriser('modifier', 'auteur', $id_auteur, NULL,
-	$opt = array('statut'=>$statut))) {
-		  if ($statut != addslashes($statut)) {
-		  spip_log("action_editer_auteur_dist: $statut incompris  pour $id_auteur");
-		} else {
-			sql_updateq("spip_auteurs", array("statut" => $statut), "id_auteur=" . _q($id_auteur));
+		// Restreindre avant de declarer l'auteur
+		// (section critique sur les droits)
+		$restreintes = _request('restreintes');
+		if ($id_parent = intval(_request('id_parent'))) {
+			if (is_array($restreintes))
+				$restreintes[] = $id_parent;
+			else
+				$restreintes = array($id_parent);
 		}
-	}
+		if (is_array($restreintes)
+		AND autoriser('modifier', 'auteur', $id_auteur, NULL, array('restreint'=>$restreintes))) {
+			sql_delete("spip_auteurs_rubriques", "id_auteur="._q($id_auteur));
+			foreach (array_unique($restreintes) as $id_rub)
+				if ($id_rub = intval($id_rub)) // si '0' on ignore
+					sql_insertq('spip_auteurs_rubriques', array('id_auteur' => $id_auteur, 'id_rubrique'=>$id_rub));
+		}
 
-	// Rubriques restreintes
-	$restreintes = _request('restreintes');
-	if ($id_parent = intval(_request('id_parent'))) {
-		if (is_array($restreintes))
-			$restreintes[] = $id_parent;
-		else
-			$restreintes = array($id_parent);
-	}
-	if (is_array($restreintes)
-	AND autoriser('modifier', 'auteur', $id_auteur, NULL, array('restreint'=>$restreintes))) {
-		sql_delete("spip_auteurs_rubriques", "id_auteur="._q($id_auteur));
-		foreach (array_unique($restreintes) as $id_rub)
-			if ($id_rub = intval($id_rub)) // si '0' on ignore
-				sql_insertq('spip_auteurs_rubriques', array('id_auteur' => $id_auteur, 'id_rubrique'=>$id_rub));
+		sql_updateq('spip_auteurs', $auteur, "id_auteur=".$auteur['id_auteur']);
 	}
 
 	// Lier a un article

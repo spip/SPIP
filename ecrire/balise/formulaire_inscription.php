@@ -218,7 +218,7 @@ function creer_pass_pour_auteur($id_auteur) {
 	$pass = creer_pass_aleatoire(8, $id_auteur);
 	$mdpass = md5($pass);
 	$htpass = generer_htpass($pass);
-	spip_query("UPDATE spip_auteurs	SET pass='$mdpass', htpass='$htpass' WHERE id_auteur = ".intval($id_auteur));
+	sql_updateq('spip_auteurs', array('pass'=>$mdpass, 'htpass'=>$htpass),"id_auteur = ".intval($id_auteur));
 	ecrire_acces();
 	
 	return $pass;

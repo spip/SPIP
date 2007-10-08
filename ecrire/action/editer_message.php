@@ -156,9 +156,9 @@ function action_editer_message_post_nouveau($type, $dest='', $rv='')
 // http://doc.spip.org/@action_editer_message_post_vieux
 function action_editer_message_post_vieux($id_message)
 {
-	spip_query("UPDATE spip_messages SET titre=" . _q(_request('titre')) . ", texte=" . _q(_request('texte')) . " WHERE id_message=$id_message");
+	sql_updateq('spip_messages', array('titre'=>_request('titre'), 'texte' => _request('texte')), "id_message=$id_message");
 
-	spip_query("UPDATE spip_messages SET rv=" . _q(_request('rv')) . " WHERE id_message=$id_message");
+	sql_updateq('spip_messages', array('rv' => _request('rv')), "id_message=$id_message");
 
 	if (_request('jour'))
 		change_date_message($id_message, _request('heures'),_request('minutes'),_request('mois'), _request('jour'), _request('annee'), _request('heures_fin'),_request('minutes_fin'),_request('mois_fin'), _request('jour_fin'), _request('annee_fin'));
@@ -198,7 +198,7 @@ function change_date_message($id_message, $heures,$minutes,$mois, $jour, $annee,
 	$heures_fin = heures($date_fin);
 	$minutes_fin = minutes($date_fin);
 
-	spip_query("UPDATE spip_messages SET date_heure='$annee-$mois-$jour $heures:$minutes:00',  date_fin='$annee_fin-$mois_fin-$jour_fin $heures_fin:$minutes_fin:00' WHERE id_message=$id_message");
+	sql_updateq('spip_messages', array('date_heure'=>"$annee-$mois-$jour $heures:$minutes:00",  'date_fin'=>"$annee_fin-$mois_fin-$jour_fin $heures_fin:$minutes_fin:00"), "id_message=$id_message");
 }
 
 ?>

@@ -179,10 +179,10 @@ function appliquer_modifs_config() {
 	// forums_publics_appliquer : futur, saufnon, tous
 	
 	$sauf = _request('forums_publics_appliquer') == 'saufnon'
-	? " WHERE accepter_forum != 'non'"
+	? "accepter_forum != 'non'"
 	: '';
 	
-	spip_query("UPDATE spip_articles SET accepter_forum='$accepter_forum'$sauf");
+	sql_updateq('spip_articles', array('accepter_forum'=>$accepter_forum), $sauf);
 
 	if ($accepter_forum == 'abo')
 		ecrire_meta('accepter_visiteurs', 'oui');
