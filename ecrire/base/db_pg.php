@@ -125,6 +125,7 @@ function spip_pg_alter($query, $serveur='') {
 function spip_pg_explain($query, $serveur=''){
 	if (strpos($query, 'SELECT') !== 0) return array();
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
 	if (preg_match('/\s(SET|VALUES|WHERE)\s/i', $query, $regs)) {
 		$suite = strstr($query, $regs[0]);
@@ -193,7 +194,7 @@ function spip_pg_select($select, $from, $where='',
 
 	if (!($res = spip_pg_trace_query($q, $serveur))) {
 	  include_spip('public/debug');
-	  erreur_requete_boucle($q, $id, $table, $n, $m);
+	  erreur_requete_boucle($q, $id, $table, 0, 0);
 	}
 
 	return $res;

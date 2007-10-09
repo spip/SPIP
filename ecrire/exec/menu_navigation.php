@@ -67,10 +67,9 @@ function exec_menu_navigation_dist() {
 			$gadget .= fin_cadre('bandeau-rubriques');
 	}
 
-	$result = sql_fetch(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1"));
+	$une_rubrique = sql_getfetsel('id_rubrique', 'spip_rubriques', '','','', 1);
+	if ($une_rubrique) {
 
-	if ($result) {
-		$une_rubrique = $result['id_rubrique'];
 		$gadget .= "<div>&nbsp;</div>";
 		if ($id_rubrique > 0) {
 			$dans_rub = "&id_rubrique=$id_rubrique";

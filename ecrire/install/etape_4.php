@@ -71,7 +71,14 @@ function install_etape_4_dist()
 			sql_updateq('spip_auteurs', array("nom"=> $nom, 'email'=> $email, 'login'=>$login, 'pass'=>$mdpass, 'alea_actuel'=>'', 'alea_futur'=> $alea, 'htpass'=>$htpass, 'statut'=>'0minirezo'), "id_auteur=$id_auteur");
 		}
 		else {
-			spip_query("INSERT INTO spip_auteurs (nom, email, login, pass, htpass, alea_futur, statut) VALUES(" . _q($nom) . "," . _q($email) . "," . _q($login) . ",'$mdpass','$htpass', " . _q($alea) .",'0minirezo')");
+			sql_insertq('spip_auteurs', array(
+				'nom' => $nom,
+				'email' => $email,
+				'login' => $login,
+				'pass' => $mdpass,
+				'htpass' => $htpass,
+				'alea_futur' => $alea,
+				'statut' =>'0minirezo'));
 		}
 
 		// inserer email comme email webmaster principal
