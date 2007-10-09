@@ -103,12 +103,8 @@ function exec_statistiques_visites_dist()
 			$val_popularite = round($row['popularite']);
 		}
 	} else {
-		$result = spip_query("SELECT SUM(visites) AS total_absolu FROM spip_visites");
-
-
-		if ($row = sql_fetch($result)) {
-			$total_absolu = $row['total_absolu'];
-		}
+		$row = sql_fetsel("SUM(visites) AS total_absolu", "spip_visites");
+		$total_absolu = $row ? $row['total_absolu'] : 0;
 	}
 
 	if ($titre) $pourarticle = " "._T('info_pour')." &laquo; $titre &raquo;";

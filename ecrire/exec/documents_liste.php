@@ -42,7 +42,7 @@ echo fin_boite_info(true);
 echo debut_droite('', true);
 
 	// recupere les titres des types
-	$res = spip_query("SELECT * FROM spip_types_documents");
+	$res = sql_select('extension', "spip_types_documents");
 	while ($row = sql_fetch($res))
 		$types[$row['extension']] = $row;
 

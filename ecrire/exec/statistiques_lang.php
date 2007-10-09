@@ -59,13 +59,13 @@ function exec_statistiques_lang_dist()
 
 	echo debut_cadre_enfonce("langues-24.gif", true);
 
-	$result = spip_query("SELECT SUM(".$critere.") AS total_visites FROM spip_articles");
+	$r = sql_fetsel("SUM($critere) AS total_visites", "spip_articles");
 
 	$visites = 1;
-	if ($row = sql_fetch($result))
-			$total_visites = $row['total_visites'];
+	if ($r)
+		$total_visites = $r['total_visites'];
 	else
-			$total_visites = 1;
+		$total_visites = 1;
 
 	$result = sql_select("lang, SUM(".$critere.") AS cnt", "spip_articles", "statut='publie' ", "lang");
 		

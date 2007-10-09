@@ -38,9 +38,8 @@ function exec_sites_edit_dist()
 		$descriptif = $nom_site = $url_site = $url_syndic = '';
 		if (!$id_rubrique) {
 			$in = !$connect_id_rubrique ? ''
-			  : (' WHERE id_rubrique IN (' . join(',', $connect_id_rubrique) . ')');
-			$row = sql_fetch(spip_query("SELECT id_rubrique FROM spip_rubriques$in ORDER BY id_rubrique DESC LIMIT 1"));		
-			$id_rubrique = $row['id_rubrique'];
+			  : (' id_rubrique IN (' . join(',', $connect_id_rubrique) . ')');
+			$id_rubrique = sql_getfetsel('id_rubrique', 'spip_rubriques', $in, '',  'id_rubrique DESC',  1);
 		}
 		if (!autoriser('creersitedans','rubrique',$id_rubrique )){
 			// manque de chance, la rubrique n'est pas autorisee, on cherche un des secteurs autorises

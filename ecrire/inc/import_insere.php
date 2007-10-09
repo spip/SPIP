@@ -34,7 +34,7 @@ function insere_1_init($request) {
 		return  false; 
 	}
 	// au cas ou la derniere fois ce serait terminee anormalement
-	spip_query("DELETE FROM spip_translate");
+	sql_delete("spip_translate");
 	// pour PG
 	$GLOBALS['tables_principales']['spip_translate'] = 
 		array('field' => $field, 'key' => $key);
@@ -89,7 +89,7 @@ function translate_init($request) {
 	include_spip('inc/chercher_logo'); // pour les noms des logos
 	include_spip('inc/distant'); // pour recuperer les logos
 
-	$q = spip_query("SELECT * FROM spip_translate");
+	sql_select('*', "spip_translate");
 	$trans = array();
 	while ($r = sql_fetch($q)) {
 		$trans[$r['type']][$r['id_old']] = array($r['id_new'], $r['titre'], $r['ajout']);
