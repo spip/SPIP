@@ -115,6 +115,7 @@ function spip_mysql_alter($query, $serveur=''){
 	return spip_mysql_query("ALTER ".$query); # i.e. que PG se debrouille
 }
 
+// http://doc.spip.org/@spip_mysql_optimize
 function spip_mysql_optimize($table, $serveur=''){
 	spip_mysql_query("OPTIMIZE TABLE ". $table);
 	return true;

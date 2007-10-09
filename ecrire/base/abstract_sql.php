@@ -46,6 +46,7 @@ function sql_explain($q, $serveur='') {
 	return false;
 }
 
+// http://doc.spip.org/@sql_optimize
 function sql_optimize($q, $serveur='') {
 	$desc = spip_connect($serveur);
 	if (function_exists($f = @$desc['optimize'])) {
