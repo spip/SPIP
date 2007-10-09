@@ -63,8 +63,3 @@ a.spip_url { color: #009; } /* liens url sortants */
 a.spip_glossaire { color: #060; } /* liens vers encyclopedie */
 a.spip_glossaire:hover { text-decoration: underline overline; }
 .on { font-weight: bold; } /* liens exposes */
-
-
-/* Images typographiques (via image_typo), faudrait voir a pas tout casser a chaque update */
-.format_png { behavior: url(win_png.htc); }
-

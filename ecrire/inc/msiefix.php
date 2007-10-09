@@ -51,7 +51,7 @@ function presentation_msiefix() {
 	if (window.jQuery && jQuery.browser.msie) {
 $ifixpng
 		jQuery.ifixpng('".str_repeat('../', $GLOBALS['profondeur_url'])."rien.gif');
-		jQuery('img').ifixpng();
+		jQuery('img,#bandeau-principal .icon_fond span').ifixpng();
 	}
 	// --></script>";
 }
