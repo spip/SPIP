@@ -247,6 +247,9 @@ $preg='') {
 			$letexte);
 	}
 
+	if ($no_transform)
+		return $letexte;
+
 	// Gestion du TeX
 	if (strpos($letexte, "<math>") !== false) {
 		include_spip('inc/math');
