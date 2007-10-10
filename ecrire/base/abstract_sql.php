@@ -324,7 +324,8 @@ function sql_listdbs($serveur='') {
 
 // http://doc.spip.org/@sql_version
 function sql_version($serveur='') {
-	$row = sql_fetsel("version() AS n", $serveur);
+	$row = sql_fetsel("version() AS n", '','','','','','','','','',$serveur);
+
 	return ($row['n']);
 }
 
