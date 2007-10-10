@@ -234,7 +234,7 @@ function exec_controle_forum_dist()
 	$mess = affiche_navigation_forum('controle_forum', $args . $type, $debut, $limitdeb, $pack, $ancre, $query)
 	. affiche_tranche_forum($debut, $limitdeb, $pack, $query);
 
-	if (_request('var_ajaxcharset') AND !$droit) {
+	if (_request('var_ajaxcharset')) {
 		ajax_retour($mess);
 	} else {
 

@@ -524,7 +524,7 @@ function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, 
 
 	$bouton = bouton_block_depliable($titre,true,$id_liste);
 
-	$table = array();
+	$table = $tous_id = array(); // $tous_id obsolete.
 	while ($row = sql_fetch($result)) {
 		if ($a = $skel($row, $tous_id, $voir_logo, $own))
 			$table[] = $a;

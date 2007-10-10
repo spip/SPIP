@@ -210,13 +210,13 @@ function appliquer_modifs_config() {
 		if (!(_request($i)===NULL))
 			ecrire_meta($i, _request($i));
 
-	// langue_site : la globale est mangee par inc_version
 	if ($lang = _request('changer_langue_site')) {
 		include_spip('inc/lang');
+		// verif que la langue demandee est licite
 		if (changer_langue($lang)) {
 			ecrire_meta('langue_site', $lang);
-			changer_langue($lang2);
 		}
+		// le test a defait ca:
 		utiliser_langue_visiteur(); 
 	}
 
