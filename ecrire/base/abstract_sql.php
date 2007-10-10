@@ -55,6 +55,7 @@ function sql_optimize($q, $serveur='') {
 	spip_log("Le serveur '$serveur' ne dispose pas de 'optimize'");
 }
 
+// http://doc.spip.org/@sql_repair
 function sql_repair($table, $serveur='') {
 	$desc = spip_connect($serveur);
 	if (function_exists($f = @$desc['repair'])) {
