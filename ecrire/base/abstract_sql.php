@@ -55,6 +55,14 @@ function sql_optimize($q, $serveur='') {
 	spip_log("Le serveur '$serveur' ne dispose pas de 'optimize'");
 }
 
+function sql_repair($table, $serveur='') {
+	$desc = spip_connect($serveur);
+	if (function_exists($f = @$desc['repair'])) {
+		return $f($table, $serveur);
+	}
+	spip_log("Le serveur '$serveur' ne dispose pas de 'repair'");
+}
+
 // Demande si un charset est disponible. 
 // http://doc.spip.org/@sql_get_charset
 function sql_get_charset($charset, $serveur=''){
@@ -316,7 +324,7 @@ function sql_listdbs($serveur='') {
 
 // http://doc.spip.org/@sql_version
 function sql_version($serveur='') {
-	$row = sql_fetch(spip_query("SELECT version() AS n", $serveur), $serveur);
+	$row = sql_fetsel("version() AS n", $serveur);
 	return ($row['n']);
 }
 

@@ -15,12 +15,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@base_admin_repair_dist
 function base_admin_repair_dist() {
 
-	$connexion = $GLOBALS['connexions'][0];
-	if ($connexion['type'] == 'mysql')
-	  $res = admin_repair_tables();
-	else {
-	  spip_log("Pas d'instruction REPAIR dans ce serveur SQL");
-	  $res = '     ';
+	$desc = spip_connect();
+	if (function_exists($f = @$desc['repair'])) {
+		$res = admin_repair_tables();
+	} else {
+		spip_log("Pas d'instruction REPAIR dans ce serveur SQL");
+		$res = '     ';
 	}
 
 	if (!$res) {
@@ -40,14 +40,14 @@ function admin_repair_tables() {
 
 	$connexion = $GLOBALS['connexions'][0];
 	$prefixe = $connexion['prefixe'];
-	$res1= spip_query("SHOW TABLES LIKE " . _q("$prefixe%"));
+	$res1 = sql_showbase();
 	$res = "";
 	if ($res1) { while ($r = sql_fetch($res1)) {
 		$tab = array_shift($r);
 
 		$res .= "<p><b>$tab</b> ";
 		spip_log("Repare $tab");
-		$result_repair = spip_query("REPAIR TABLE ".$tab);
+		$result_repair = sql_repair($tab);
 		if (!$result_repair) return false;
 
 		$count = sql_countsel($tab);

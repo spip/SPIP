@@ -20,15 +20,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 // http://doc.spip.org/@base_delete_statistiques_dist
 function base_delete_statistiques_dist($titre)
 {
-	spip_query("DELETE FROM spip_visites");
-	spip_query("DELETE FROM spip_visites_articles");
-	spip_query("DELETE FROM spip_referers");
-	spip_query("DELETE FROM spip_referers_articles");
-	spip_query("UPDATE spip_articles SET visites=0, referers=0, popularite=0");
+	sql_delete("spip_visites");
+	sql_delete("spip_visites_articles");
+	sql_delete("spip_referers");
+	sql_delete("spip_referers_articles");
+	sql_update("spip_articles", array('visites'=>0, 'referers'=>0, 'popularite'=>0));
 
 	// un pipeline pour detruire les tables de stats installees par les plugins
 	pipeline('delete_statistiques', '');
-
 	spip_log("raz des stats operee redirige vers " . _request('redirect'));
 }
 ?>
