@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 include_spip('inc/headers');
 include_spip('base/abstract_sql');
 
-function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db, $chmod_db){
+function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db, $sel_db, $chmod_db){
 	global $spip_version;
 
 	// Prefix des tables :
@@ -39,13 +39,10 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 	$fquery = sql_serveur('query', $server_db);
 
 	if ($choix_db == "new_spip") {
-		$sel_db = _request('table_new');
 		if (preg_match(',^[a-z_0-9]+$,i', $sel_db))
 			$fquery("CREATE DATABASE $sel_db", $server_db);
 	}
-	else {
-		$sel_db = $choix_db;
-	}
+
 	sql_selectdb($sel_db, $server_db);
 	// Completer le tableau decrivant la connexion
 
@@ -190,39 +187,48 @@ function install_premier_auteur($email, $login, $nom, $pass, $hidden)
 
 function install_etape_3_dist()
 {
-	$adresse_db = defined('_INSTALL_HOST_DB')
+	$ldap_present = _request('ldap_present');
+
+	if (!$ldap_present) {
+		$adresse_db = defined('_INSTALL_HOST_DB')
 		? _INSTALL_HOST_DB
 		: _request('adresse_db');
 
-	$login_db = defined('_INSTALL_USER_DB')
+		$login_db = defined('_INSTALL_USER_DB')
 		? _INSTALL_USER_DB
 		: _request('login_db');
 
-	$pass_db = defined('_INSTALL_PASS_DB')
+		$pass_db = defined('_INSTALL_PASS_DB')
 		? _INSTALL_PASS_DB
 		: _request('pass_db');
 
-	$server_db = defined('_INSTALL_SERVER_DB')
+		$server_db = defined('_INSTALL_SERVER_DB')
 		? _INSTALL_SERVER_DB
 		: _request('server_db');
 
-	$choix_db = defined('_INSTALL_NAME_DB')
-		? _INSTALL_NAME_DB
-		: _request('choix_db');
-
-	$chmod_db = defined('_SPIP_CHMOD')
+		$chmod_db = defined('_SPIP_CHMOD')
 		? _SPIP_CHMOD
 		: _request('chmod');
 
-	$ldap_present = _request('ldap_present');
-	$res = $ldap_present ? '' : install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db, $chmod_db);
+		$choix_db = defined('_INSTALL_NAME_DB')
+		? _INSTALL_NAME_DB
+		: _request('choix_db');
 
-	if (!function_exists('ldap_connect')) $ldap_present = true;
+		$sel_db = ($choix_db == "new_spip")
+		? _request('table_new') : $choix_db;
 
-	if ($res)
-		$res .= "<p class='resultat'><b>"._T('avis_operation_echec')."</b></p>"._T('texte_operation_echec');
+		$res = install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db, $sel_db, $chmod_db);
+
+		if ($res)
+			$res .= "<p class='resultat'><b>"._T('avis_operation_echec')."</b></p>"._T('texte_operation_echec');
 	
-	else {
+	} else { 
+		$res = '';
+		list($adresse_db, $login_db, $pass_db, $sel_db, $server_db)
+		= analyse_fichier_connection(_FILE_CONNECT_TMP);
+	}
+
+	if (!$res) {
 		if (file_exists(_FILE_CONNECT_TMP))
 			include(_FILE_CONNECT_TMP);
 		else
@@ -235,10 +241,7 @@ function install_etape_3_dist()
 
 		$hidden = predef_ou_cache($adresse_db, $login_db, $pass_db, $server_db)
 		  . (defined('_INSTALL_NAME_DB') ? ''
-		     :  ("\n<input type='hidden' name='sel_db' value='"
-			 . (($choix_db == "new_spip") ? _request('table_new'): $choix_db)
-			 . "' />"));
-
+		     : "\n<input type='hidden' name='sel_db' value='$sel_db' />");
 		$res =  "<p class='resultat'><b>"
 		. _T('info_base_installee')
 		. "</b></p>"
@@ -247,7 +250,8 @@ function install_etape_3_dist()
 					_request('nom'),
 					_request('pass'),
 					 $hidden)
-		. ($ldap_present ?  '' : install_propose_ldap());
+		  . (($ldap_present  OR !function_exists('ldap_connect'))
+		     ?  '' : install_propose_ldap());
 	}
 
 	echo install_debut_html();
