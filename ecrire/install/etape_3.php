@@ -15,31 +15,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 include_spip('inc/headers');
 include_spip('base/abstract_sql');
 
-function install_bases(){
+function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db, $chmod_db){
 	global $spip_version;
-	$adresse_db = defined('_INSTALL_HOST_DB')
-		? _INSTALL_HOST_DB
-		: _request('adresse_db');
-
-	$login_db = defined('_INSTALL_USER_DB')
-		? _INSTALL_USER_DB
-		: _request('login_db');
-
-	$pass_db = defined('_INSTALL_PASS_DB')
-		? _INSTALL_PASS_DB
-		: _request('pass_db');
-
-	$choix_db = defined('_INSTALL_NAME_DB')
-		? _INSTALL_NAME_DB
-		: _request('choix_db');
-
-	$server_db = defined('_INSTALL_SERVER_DB')
-		? _INSTALL_SERVER_DB
-		: _request('server_db');
-
-	$chmod = defined('_SPIP_CHMOD')
-		? _SPIP_CHMOD
-		: _request('chmod');
 
 	// Prefix des tables :
 	// contrairement a ce qui est dit dans le message (trop strict mais c'est
@@ -132,8 +109,8 @@ function install_bases(){
 	$result_ok = @$fquery("SELECT COUNT(*) FROM spip_meta", $server_db);
 	if (!$result_ok) return "<!--\nvielle = $old rappel= $ligne_rappel\n-->";
 
-	if($chmod) {
-		install_fichier_connexion(_FILE_CHMOD_TMP, "@define('_SPIP_CHMOD', ". sprintf('0%3o',$chmod).");\n");
+	if ($chmod_db) {
+		install_fichier_connexion(_FILE_CHMOD_TMP, "@define('_SPIP_CHMOD', ". sprintf('0%3o',$chmod_db).");\n");
 	}
 
 	if (preg_match(',(.*):(.*),', $adresse_db, $r))
@@ -167,7 +144,7 @@ function install_propose_ldap()
 }
 
 
-function install_premier_auteur($email, $login, $nom, $pass)
+function install_premier_auteur($email, $login, $nom, $pass, $hidden)
 {
 	return info_etape(_T('info_informations_personnelles'),
 		     "<b>"._T('texte_informations_personnelles_1')."</b>" .
@@ -178,11 +155,8 @@ function install_premier_auteur($email, $login, $nom, $pass)
 			     )
 	. generer_form_ecrire('install', (
 			  "\n<input type='hidden' name='etape' value='4' />"
-			  . (defined('_INSTALL_SERVER_DB')
-			     ? ''
-			     : "\n<input type='hidden' name='server_db' value=\"".htmlspecialchars(_request('server_db'))."\" />"
-			     )
-			 . fieldset(_T('info_identification_publique'),
+			  . $hidden
+			  . fieldset(_T('info_identification_publique'),
 				    array(
 					  'nom' => array(
 							 'label' => "<b>"._T('entree_signature')."</b><br />\n"._T('entree_nom_pseudo_1')."\n",
@@ -216,8 +190,32 @@ function install_premier_auteur($email, $login, $nom, $pass)
 
 function install_etape_3_dist()
 {
+	$adresse_db = defined('_INSTALL_HOST_DB')
+		? _INSTALL_HOST_DB
+		: _request('adresse_db');
+
+	$login_db = defined('_INSTALL_USER_DB')
+		? _INSTALL_USER_DB
+		: _request('login_db');
+
+	$pass_db = defined('_INSTALL_PASS_DB')
+		? _INSTALL_PASS_DB
+		: _request('pass_db');
+
+	$server_db = defined('_INSTALL_SERVER_DB')
+		? _INSTALL_SERVER_DB
+		: _request('server_db');
+
+	$choix_db = defined('_INSTALL_NAME_DB')
+		? _INSTALL_NAME_DB
+		: _request('choix_db');
+
+	$chmod_db = defined('_SPIP_CHMOD')
+		? _SPIP_CHMOD
+		: _request('chmod');
+
 	$ldap_present = _request('ldap_present');
-	$res = $ldap_present ? '' : install_bases();
+	$res = $ldap_present ? '' : install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db, $chmod_db);
 
 	if (!function_exists('ldap_connect')) $ldap_present = true;
 
@@ -235,13 +233,20 @@ function install_etape_3_dist()
 		else
 			redirige_par_entete(generer_url_ecrire('install'));
 
+		$hidden = predef_ou_cache($adresse_db, $login_db, $pass_db, $server_db)
+		  . (defined('_INSTALL_NAME_DB') ? ''
+		     :  ("\n<input type='hidden' name='sel_db' value='"
+			 . (($choix_db == "new_spip") ? _request('table_new'): $choix_db)
+			 . "' />"));
+
 		$res =  "<p class='resultat'><b>"
 		. _T('info_base_installee')
 		. "</b></p>"
 		. install_premier_auteur(_request('email'),
-					   _request('login'),
-					   _request('nom'),
-					   _request('pass'))
+					_request('login'),
+					_request('nom'),
+					_request('pass'),
+					 $hidden)
 		. ($ldap_present ?  '' : install_propose_ldap());
 	}
 
