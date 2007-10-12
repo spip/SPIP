@@ -77,6 +77,8 @@ function install_etape_sup2_dist()
 
 	// le choix
 	$choix_db = _request('choix_db');
+	if (is_numeric($choix_db))
+		$choix_db = _request('table_new');
 
 	if (!$choix_db)
 		$res = "<!-- il ne sait pas ce qu'il veut -->";
