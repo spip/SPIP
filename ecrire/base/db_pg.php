@@ -241,11 +241,13 @@ function spip_pg_groupby($groupby, $from, $select)
 	  $join = str_replace('DISTINCT ','',$join);
 	  // fct SQL sur colonne et constante apostrophee ==> la colonne
 	  $join = preg_replace('/\w+\(\s*([^(),\']*),\s*\'[^\']*\'[^)]*\)/','\\1', $join);
+	  $join = preg_replace('/CAST\(\s*([^(),\' ]*\s+)as\s*\w+\)/','\\1', $join);
 	  // resultat d'agregat ne sont pas a mettre dans le groupby
-	  $join = preg_replace('/(SUM|COUNT|MAX|MIN|UPPER|CAST)\([^)]+\)(\s*AS\s+\w+)\s*,?/i','', $join);
+	  $join = preg_replace('/(SUM|COUNT|MAX|MIN|UPPER)\([^)]+\)(\s*AS\s+\w+)\s*,?/i','', $join);
 	  // idem sans AS (fetch numerique)
-	  $join = preg_replace('/(SUM|COUNT|MAX|MIN|UPPER|CAST)\([^)]+\)\s*,?/i','', $join);
+	  $join = preg_replace('/(SUM|COUNT|MAX|MIN|UPPER)\([^)]+\)\s*,?/i','', $join);
 	  // ne reste plus que les vrais colonnes, et parfois 1 virgule
+
 	  if (preg_match('/^(.*),\s*$/',$join,$m)) $join=$m[1];
 	}
 	if ($join) $groupby = $groupby ? "$groupby, $join" : $join;
