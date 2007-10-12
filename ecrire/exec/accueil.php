@@ -271,7 +271,7 @@ function personnel_accueil($coockcookie)
 	. fin_cadre_relief(true);
 }
 
-// Cartouche du site, avec le nombre d'aricles, breves et messages de forums
+// Cartouche du site, avec le nombre d'articles, breves et messages de forums
 
 // http://doc.spip.org/@etat_base_accueil
 function etat_base_accueil()
@@ -279,7 +279,7 @@ function etat_base_accueil()
 	global $spip_display, $spip_lang_left, $connect_id_rubrique;
 
 	$where = count($connect_id_rubrique)
-		? ' WHERE id_rubrique IN ('.join(',', $connect_id_rubrique).')'
+		? ' id_rubrique IN ('.join(',', $connect_id_rubrique).')'
 		: '';
 
 	$res = '';
