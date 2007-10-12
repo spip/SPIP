@@ -253,7 +253,8 @@ function spip_connect($serveur='') {
 	$f = (!preg_match('/^\w*$/', $serveur))	? ''
 	: (($serveur AND !$install) ?
 		( _DIR_CONNECT. $serveur . '.php')
-		: (_FILE_CONNECT ? _FILE_CONNECT : _FILE_CONNECT_TMP));
+		: (_FILE_CONNECT ? _FILE_CONNECT
+		   : ($install ? _FILE_CONNECT_TMP : '')));
 
 	unset($GLOBALS['db_ok']);
 	unset($GLOBALS['spip_connect_version']);
