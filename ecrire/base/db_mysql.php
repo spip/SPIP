@@ -81,8 +81,9 @@ function spip_mysql_set_charset($charset, $serveur=''){
 }
 
 // http://doc.spip.org/@spip_mysql_get_charset
-function spip_mysql_get_charset($charset, $serveur=''){
-	return spip_mysql_fetch(mysql_query("SHOW CHARACTER SET LIKE "._q($charset['charset'])), NULL, $serveur);
+function spip_mysql_get_charset($charset=array(), $serveur=''){
+	$c = !$charset ? '' : (" LIKE "._q($charset['charset']));
+	return spip_mysql_fetch(mysql_query("SHOW CHARACTER SET$c"), NULL, $serveur);
 }
 
 // obsolete, ne plus utiliser

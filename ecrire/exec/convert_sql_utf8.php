@@ -45,15 +45,12 @@ function exec_convert_sql_utf8_dist() {
 			$sql_collation = $c['collation'];
 			$charset_supporte = true;
 		}
-		if (!$charset_supporte){
-			$res = spip_query("SHOW CHARACTER SET");
-			while ($row = sql_fetch($res)){
-				if ($row['Charset']=='utf8') $utf8_supporte = true;
-			}
-			echo _L("Le charset SPIP actuel $charset_spip n'est pas supporte par votre serveur MySQL<br/>");
+		if (!$charset_supporte) {
+		  	$utf8_supporte = sql_get_charset('utf8');
+			$res = _L("Le charset SPIP actuel $charset_spip n'est pas supporte par votre serveur MySQL<br/>");
 			if ($utf8_supporte)
-				echo _L("Votre serveur supporte utf-8, vous devriez convertir votre site en utf-8 avant de recommencer cette operation");
-			echo install_fin_html();
+				$res .= _L("Votre serveur supporte utf-8, vous devriez convertir votre site en utf-8 avant de recommencer cette operation");
+			echo minipres($action, $res);
 			exit;
 		}
 

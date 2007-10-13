@@ -414,7 +414,18 @@ function spip_num_rows($r) {
 	spip_log('spip_num_rows() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
 	return sql_count($r);
 }
+/*
+// http://doc.spip.org/@stripslashes_base
+function stripslashes_base($table, $champs) {
+	$modifs = '';
+	reset($champs);
+	while (list(, $champ) = each($champs)) {
+		$modifs[] = $champ . '=REPLACE(REPLACE(' .$champ. ',"\\\\\'", "\'"), \'\\\\"\', \'"\')';
+	}
+	spip_query("UPDATE $table SET ".join(',', $modifs));
 
+}
+*/
 //constantes spip pour mysql_fetch_array()
 define('SPIP_BOTH', MYSQL_BOTH);
 define('SPIP_ASSOC', MYSQL_ASSOC);

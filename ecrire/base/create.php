@@ -61,16 +61,4 @@ function creer_base_types_doc($desc, $serveur='') {
 			  $desc, $serveur);
 	}
 }
-
-// http://doc.spip.org/@stripslashes_base
-function stripslashes_base($table, $champs) {
-	$modifs = '';
-	reset($champs);
-	while (list(, $champ) = each($champs)) {
-		$modifs[] = $champ . '=REPLACE(REPLACE(' .$champ. ',"\\\\\'", "\'"), \'\\\\"\', \'"\')';
-	}
-	spip_query("UPDATE $table SET ".join(',', $modifs));
-
-}
-
 ?>
