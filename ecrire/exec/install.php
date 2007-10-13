@@ -53,7 +53,7 @@ function analyse_fichier_connection($file)
 	if (preg_match("#mysql_connect\([\"'](.*)[\"'],[\"'](.*)[\"'],[\"'](.*)[\"']\)#", $s, $regs)) {
 		array_shift($regs);
 		return $regs;
-	} else if (preg_match("#spip_connect_db\('([^']*)','([^']*)','([^']*)','([^']*)','([^']*)','([^']*)#", $s, $regs)) {
+	} else if (preg_match("#spip_connect_db\('([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)#", $s, $regs)) {
 		$regs[2] = $regs[1] . (!$regs[2] ? '' : ":$port_db;");
 		array_shift($regs);
 		array_shift($regs);

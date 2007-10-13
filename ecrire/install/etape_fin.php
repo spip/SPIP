@@ -19,6 +19,8 @@ include_spip('inc/acces');
 
 function install_etape_fin_dist()
 {
+	ecrire_acces();
+
 	$f = str_replace( _FILE_TMP_SUFFIX, '.php', _FILE_CHMOD_TMP);
 	if (file_exists(_FILE_CHMOD_TMP)) {
 		if (!@rename(_FILE_CHMOD_TMP, $f)) {
@@ -34,10 +36,6 @@ function install_etape_fin_dist()
 			if (@copy(_FILE_CONNECT_TMP, $f))
 				@spip_unlink(_FILE_CONNECT_TMP);
 		}
-		$htpasswd = _DIR_TMP . _AUTH_USER_FILE;
-		spip_unlink($htpasswd);
-		spip_unlink($htpasswd."-admin");
-		ecrire_acces();
 	}
 
 	// on l'envoie dans l'espace prive
