@@ -29,6 +29,9 @@ div#pied img { vertical-align: bottom; }
 /* Non visible a l'ecran */
 .invisible { position: absolute; top: -3000em; height: 1%; }
 
+/* Affichage pour les petits ecrans (type 400 x 300) */
+@media handheld { div#page, div#conteneur, div#navigation, div#extra { width: auto; } }
+
 
 /* Typographie generale du site
 ---------------------------------------------- */
@@ -44,10 +47,9 @@ body { font-size: 0.80em; font-family: "Trebuchet MS", Helvetica, sans-serif; co
 h1 { margin: 0; padding: 0; font-size: 1.50em; font-weight: bold; color: #000; }
 h2 { margin: 0; padding: 0.20em 0.40em; background: #8B6F92; font-size: 1.20em; font-weight: bold; }
 h2, h2 a, h2 a:hover { color: #EEE; }
-h3.spip {}  /*Cf.: spip_style.css*/
+h3.spip {} /*Cf.: spip_style.css*/
 
 /* Divers */
-hr {}
 hr.spip {} /*Cf.: spip_style.css*/
 abbr, acronym { border-bottom: 1px dotted; cursor: help; }
 small { font-size: 0.71em; color: #666; }
@@ -70,8 +72,7 @@ table { border-collapse: collapse; border-spacing: 0; }
 table.spip {} /*Cf.: spip_style.css*/
 
 /* Logos, documents et images */
-img, .spip_logos {} /*Cf.: spip_style.css*/
-
+.spip_logos {} /*Cf.: spip_style.css*/
 .spip_documents {} /*Cf.: spip_style.css*/
 .spip_documents_center {} /*Cf.: spip_style.css*/
 .spip_documents_left {} /*Cf.: spip_style.css*/
@@ -149,7 +150,7 @@ ul.choix_mots label { display: inline; }
 .formulaire_recherche {}
 .formulaire_recherche .forml {}
 
-/* menu langues */
+/* Menu langues */
 #menu_langues { background: none; margin: 0; padding: 1em 0; vertical-align: top; }
 .formulaire_menu_lang { background: none; margin: 0; padding: 1em 0; }
 
