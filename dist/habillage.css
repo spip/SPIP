@@ -3,45 +3,12 @@
 /* ----------------------------------------------------------- */
 
 
-/* Disposition a l'ecran des blocs principaux
----------------------------------------------- */
-body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 
-div#page { width: 750px; margin: 0 auto; text-align: left; }
-
-div#top { margin: 0; border-bottom: 2px solid #8B6F92; padding-top: 1em; }
-div#top #nom_site_spip, #top a .spip_logos { display: block; float: left; font-weight: bold; font-size: 1.50em; }
-div#top .formulaire_recherche { float: right; width: 30%; background: none; margin: 0; padding: 1em 0; }
-div#top .formulaire_recherche label { display: none; }
-
-div#conteneur { clear: both; float: left; width: 67%; overflow: hidden; }
-div#contenu { padding-top: 0.30em; }
-
-div#navigation { float: right; width: 30%; overflow: hidden; }
-div#extra { float: right; clear: right; width: 30%; overflow: hidden; }
-
-div#pied { clear: both; width: 100%; margin: 0; padding: 0.40em 0; border-top: 1px solid #8B6F92; text-align: center; font-size: 0.77em; }
-div#pied img { vertical-align: bottom; }
-
-/* Espaceur de blocs */
-.nettoyeur { clear: both; height: 0; margin: 0; padding: 0; border: 0; line-height: 1px; font-size: 1px; }
-
-/* Non visible a l'ecran */
-.invisible { position: absolute; top: -3000em; height: 1%; }
-
-/* Affichage pour les petits ecrans (type 400 x 300) */
-@media handheld { div#page, div#conteneur, div#navigation, div#extra { width: auto; } }
-
-
-/* Typographie generale du site
----------------------------------------------- */
-/* Cf.: http://pompage.net/pompe/definir-des-tailles-de-polices-en-CSS */
-html { font-size: 100%; }
+/*  ------------------------------------------
+/* 	Typographie generale (style transversaux)
+/*  ------------------------------------------ */
+html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-de-polices-en-CSS */
 body { font-size: 0.80em; font-family: "Trebuchet MS", Helvetica, sans-serif; color: #333; }
-
-
-/* Personnalisation des styles HTML par defaut
----------------------------------------------- */
 
 /* Titraille */
 h1 { margin: 0; padding: 0; font-size: 1.50em; font-weight: bold; color: #000; }
@@ -81,8 +48,40 @@ table.spip {} /*Cf.: spip_style.css*/
 .spip_doc_descriptif {} /*Cf.: spip_style.css*/
 
 
-/* Blocs et elements du contenu
----------------------------------------------- */
+/*  ------------------------------------------
+/*  Disposition a l'ecran des blocs principaux
+/*  ------------------------------------------ */
+body { background: #FFF; margin: 0; padding: 0; text-align: center; }
+
+div#page { width: 750px; margin: 0 auto; text-align: left; }
+
+div#top { margin: 0; border-bottom: 2px solid #8B6F92; padding-top: 1em; }
+div#top #nom_site_spip, #top a .spip_logos { display: block; float: left; font-weight: bold; font-size: 1.50em; }
+div#top .formulaire_recherche { float: right; width: 30%; background: none; margin: 0; padding: 1em 0; }
+div#top .formulaire_recherche label { display: none; }
+
+div#conteneur { clear: both; float: left; width: 67%; overflow: hidden; }
+div#contenu { padding-top: 0.30em; }
+
+div#navigation { float: right; width: 30%; overflow: hidden; }
+div#extra { float: right; clear: right; width: 30%; overflow: hidden; }
+
+div#pied { clear: both; width: 100%; margin: 0; padding: 0.40em 0; border-top: 1px solid #8B6F92; text-align: center; font-size: 0.77em; }
+div#pied img { vertical-align: bottom; }
+
+/* Espaceur de blocs */
+.nettoyeur { clear: both; height: 0; margin: 0; padding: 0; border: 0; line-height: 1px; font-size: 1px; }
+
+/* Non visible a l'ecran */
+.invisible { position: absolute; top: -3000em; height: 1%; }
+
+/* Affichage pour les petits ecrans (type 400 x 300) */
+@media handheld { div#page, div#conteneur, div#navigation, div#extra { width: auto; } }
+
+
+/*  ------------------------------------------
+/*  Habillage des elements du contenu
+/*  ------------------------------------------ */
 
 #hierarchie { clear: both; margin-bottom: 2em; font-size: 0.77em; color: #666; }
 
@@ -115,12 +114,14 @@ abbr.published { border: 0; }
 
 /* Habillage des formulaires
 ---------------------------------------------- */
+input, textarea, select { font-size: 100%; font-family: inherit; }
+.forml, textarea, select { width: 99%; background: #F4F8F8; border: 1px inset #CC9; color: #000; }
+
+/* Formulaires de SPIP */
 .formulaire_spip { background: #EEC; margin-bottom: 2em; padding: 1em; text-align: left; color: #330; }
 .formulaire_spip fieldset { margin: 0; margin-bottom: 1em; padding: 0; border: 0; border-top: 1px solid #CC9; }
 .formulaire_spip legend { margin: 0; padding: 0; padding-right: 0.50em; color: #330; } /* preciser la couleur des legend pour IE/Win */
 .formulaire_spip label { display: block; font-size: 0.90em; }
-input, textarea, select { font-size: 100%; font-family: inherit; }
-.forml, textarea, select { width: 99%; background: #F4F8F8; border: 1px inset #CC9; color: #000; }
 .formulaire_spip textarea { margin-bottom: 1em; }
 
 /* Boutons */
@@ -196,8 +197,9 @@ ul ul ul ul ul .forum-chapo { background: #FFF; }
 #signatures td.signature-message { background: #F4F8F8; padding: 0.40em; /*font-size: 0.96em;*/ }
 
 
-/* Habillage des sommaires et menus
----------------------------------------------- */
+/*  ------------------------------------------
+/*  Sous-navigation et autres menus
+/*  ------------------------------------------ */
 
 /* Habillage general des menus de navigation */
 .menu { clear: both; margin-bottom: 2em; text-align: left; }
