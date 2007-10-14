@@ -13,16 +13,14 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-### Pour se débarrasser du md5, comment faire ? Un index sur 'referer' ?
+### Pour se debarrasser du md5, comment faire ? Un index sur 'referer' ?
 ### ou alors la meme notion, mais sans passer par des fonctions HEX ?
-
 
 //
 // prendre en compte un fichier de visite
 //
 // http://doc.spip.org/@compte_fichier_visite
-function compte_fichier_visite($fichier,
-&$visites, &$visites_a, &$referers, &$referers_a, &$articles) {
+function compte_fichier_visite($fichier, &$visites, &$visites_a, &$referers, &$referers_a) {
 
 	// Noter la visite du site (article 0)
 	$visites ++;
@@ -43,7 +41,6 @@ function compte_fichier_visite($fichier,
 		// S'il s'agit d'un article, noter ses visites
 		if ($log_type == 'article'
 		AND $id_article = intval($log_id_num)) {
-			$articles[] = $id_article;
 			$visites_a[$id_article] ++;
 			if ($log_referer)
 				$referers_a[$id_article][$log_referer]++;
@@ -61,7 +58,6 @@ function calculer_visites($t) {
 	$visites_a = array(); # tableau des visites des articles
 	$referers = array(); # referers du site
 	$referers_a = array(); # tableau des referers des articles
-	$articles = array(); # articles vus dans ce lot de visites
 
 	// charger un certain nombre de fichiers de visites,
 	// et faire les calculs correspondants
@@ -76,7 +72,7 @@ function calculer_visites($t) {
 		if (@filemtime($item) < $date_init) {
 			spip_log("traite la session $item");
 			compte_fichier_visite($item,
-				$visites, $visites_a, $referers, $referers_a, $articles);
+				$visites, $visites_a, $referers, $referers_a);
 			spip_unlink($item);
 			if (--$compteur <= 0)
 				break;
@@ -85,7 +81,6 @@ function calculer_visites($t) {
 	}
 
 	if (!$visites) return;
-	spip_log("analyse $visites visites");
 
 	// Maintenant on dispose de plusieurs tableaux qu'il faut ventiler dans
 	// les tables spip_visites, spip_visites_articles, spip_referers
@@ -94,56 +89,78 @@ function calculer_visites($t) {
 	$date = date("Y-m-d", time() - 1800);
 
 	// 1. les visites du site (facile)
-	spip_query("INSERT IGNORE INTO spip_visites (date) VALUES ('$date')");
-	sql_update('spip_visites', array('visites' => "visites+$visites"), "date='$date'");
+	if (!sql_countsel('spip_visites', "date='$date'"))
+		sql_insertq('spip_visites',
+			array('date' => $date, 'visites' => $visites));
+	else sql_update('spip_visites', array('visites' => "visites+$visites"), "date='$date'");
 
-	// 2. les visites des articles (en deux passes pour minimiser
-	// le nombre de requetes)
-	if ($articles) {
-		// s'assurer qu'un slot (date, visites, id) existe pour
-		// chaque article vu
-		spip_query("INSERT IGNORE INTO spip_visites_articles (date, id_article) VALUES ('$date',". join("), ('$date',", $articles) . ")");
-
-		// enregistrer les visites dans les deux tables
+	// 2. les visites des articles 
+	if ($visites_a) {
 		$ar = array();	# tableau num -> liste des articles ayant num visites
-		$tous = array();# liste des articles ayant des visites
-		foreach($visites_a as $id_article => $num) {
-			$ar[$num][] = $id_article;
-			$tous[] = $id_article;
+		foreach($visites_a as $id_article => $n) {
+		  if (!sql_countsel('spip_visites_articles',
+				 "id_article=$id_article AND date='$date'")){
+			sql_insertq('spip_visites_articles',
+					array('id_article' => $id_article,
+					      'visites' => $n,
+					      'date' => $date));
+			sql_update('spip_articles',
+				     array('visites' => "visites+" . ($n + (isset($referers_a[$id_article]) ? 1 : 0)),
+					   'popularite' => $n,
+					   'maj' => 'maj'),
+				     "id_article=$id_article");
+			} else $ar[$n][] = $id_article;
 		}
-		$tous = calcul_mysql_in('id_article', $tous);
-		$sum = '';
-		foreach ($ar as $num => $liste)
-			$sum .= ' + '.$num.'*'
-				. calcul_mysql_in('id_article', $liste);
+		foreach ($ar as $n => $liste) {
+			$tous = calcul_mysql_in('id_article', $liste);
+			sql_update('spip_visites_articles',
+				array('visites' => "visites+$n"),
+				   "date='$date' AND $tous");
 
-		# pour les popularites ajouter 1 point par referer
-		$sumref = '';
-		if ($referers_a)
-			$sumref = ' + '.calcul_mysql_in('id_article',
-			array_keys($referers_a));
-
-		sql_update('spip_visites_articles', array('visites' => "visites $sum"), "date='$date' AND $tous");
-
-		sql_update('spip_articles', array('visites' => "visites $sum$sumref", 'popularite' => "popularite $sum", 'maj' => 'maj'), $tous);
+			$ref = $noref = array();
+			foreach($liste as $id) {
+				if (isset($referers_a[$id]))
+					$ref[]= $id ;
+				else $noref[]=$id;
+			}
+			if ($noref)
+				sql_update('spip_articles',
+					array('visites' => "visites+$n",
+					 'popularite' => "popularite+$n",
+					 'maj' => 'maj'),
+					calcul_mysql_in('id_article',$noref));
+					   
+			if ($ref)
+				sql_update('spip_articles',
+					   array('visites' => "visites+".($n+1),
+					 'popularite' => "popularite+$n",
+					 'maj' => 'maj'),
+					calcul_mysql_in('id_article',$ref));
+					   
 			## Ajouter un JOIN sur le statut de l'article ?
+		}
 	}
-
 	// 3. Les referers du site
 	if ($referers) {
 		$ar = array();
-		// s'assurer d'un slot pour chacun
+	// inserer les nouveaux
+	// si echec ==> pas un nouveau, ajouter au tableau des increments
 		foreach ($referers as $referer => $num) {
 			$referer_md5 = '0x'.substr(md5($referer), 0, 15);
-			$insert[] = "('$date', " . _q($referer) . ",
-				$referer_md5)";
-			$ar[$num][] = $referer_md5;
+			if (!sql_countsel('spip_referers', "referer_md5=$referer_md5"))
+				sql_insertq('spip_referers',
+					array('visites' => $num,
+					      'visites_jour' => $num,
+					      'visites_veille' => $num,
+					      'date' => $date,
+					      'referer' => $referer,
+					      'referer_md5' => $referer_md5));
+			else $ar[$num][] = $referer_md5;
 		}
-		spip_query("INSERT IGNORE INTO spip_referers (date, referer, referer_md5) VALUES " . join(', ', $insert));
-		
-		// ajouter les visites
-		// attention on appelle calcul_mysql_in en mode texte et pas array
-		// pour ne pas passer _q() sur les '0x1234' de referer_md5, cf #849
+
+	// appliquer les increments sur les anciens
+	// attention on appelle calcul_mysql_in en mode texte et pas array
+	// pour ne pas passer _q() sur les '0x1234' de referer_md5, cf #849
 		foreach ($ar as $num => $liste) {
 			sql_update('spip_referers', array('visites' => "visites+$num", 'visites_jour' => "visites_jour+$num"), calcul_mysql_in('referer_md5',join(', ', $liste)));
 		}
@@ -157,12 +174,14 @@ function calculer_visites($t) {
 		foreach ($referers_a as $id_article => $referers)
 		foreach ($referers as $referer => $num) {
 			$referer_md5 = '0x'.substr(md5($referer), 0, 15);
-			$insert[] = "('$date', " . _q($referer) . ",
-				$referer_md5, $id_article)";
-			$ar[$num][] = "(id_article=$id_article AND referer_md5=$referer_md5)";
+			$prim = "(id_article=$id_article AND referer_md5=$referer_md5)";
+			if (!sql_countsel('spip_referers_articles', $prim))
+				sql_insert('spip_referers_articles',
+				     array('visites' => $num,
+					   'id_article' => $id_article,
+					   'referer_md5' => $referer_md5));
+			else $ar[$num][] = $prim;
 		}
-		spip_query("INSERT IGNORE INTO spip_referers_articles (date, referer, referer_md5, id_article) VALUES " . join(', ', $insert));
-		
 		// ajouter les visites
 		foreach ($ar as $num => $liste) {
 			sql_update('spip_referers_articles', array('visites' => "visites+$num"), join(" OR ", $liste));

@@ -38,7 +38,7 @@ function exec_delete_all_dist()
 		spip_log("Erreur base de donnees");
 		echo minipres(_T('info_travaux_titre'), _T('titre_probleme_technique'). "<p><tt>".sql_errno()." ".sql_error()."</tt></p>");
 		exit;
-	} else spip_log($res);
+	}
 
 	$res = "<ol style='text-align:left'>$res</ol>";
 	$r = generer_url_ecrire('install','',true);
