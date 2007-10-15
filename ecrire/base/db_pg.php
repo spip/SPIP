@@ -595,6 +595,7 @@ function spip_pg_errno() {
 	return $s ? 1 : 0;
 }
 
+// http://doc.spip.org/@spip_pg_drop_table
 function spip_pg_drop_table($table, $exist='', $serveur='')
 {
 	if ($exist) $exist =" IF EXISTS";
