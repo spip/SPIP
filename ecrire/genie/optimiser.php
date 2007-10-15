@@ -107,7 +107,7 @@ function optimiser_base_disparus($attente = 86400) {
 	$n+= optimiser_sansref('spip_articles', 'id_article', $res);
 
 	# les breves qui sont dans une id_rubrique inexistante
-	$res = spip_select("breves.id_breve AS id",
+	$res = sql_select("breves.id_breve AS id",
 		        "spip_breves AS breves
 		        LEFT JOIN spip_rubriques AS rubriques
 		          ON breves.id_rubrique=rubriques.id_rubrique",

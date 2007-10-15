@@ -23,7 +23,7 @@ function base_upgrade_dist($titre)
 		}
 		maj_base();
 	}
-	spip_log("Fin de mise a jour SQL. Debu m-a-j acces et config");
+	spip_log("Fin de mise a jour SQL. Debut m-a-j acces et config");
 	include_spip('inc/acces');
 	ecrire_acces();
 	$config = charger_fonction('config', 'inc');
@@ -132,15 +132,14 @@ function convertir_un_champ_blob_en_text($table,$champ,$type){
 	}
 }
 
-// A refaire pour PG
 // http://doc.spip.org/@upgrade_test
 function upgrade_test() {
-	spip_query("DROP TABLE IF EXISTS spip_test");
-	spip_query("CREATE TABLE spip_test (a INT)");
-	spip_query("ALTER TABLE spip_test ADD b INT");
-	spip_query("INSERT INTO spip_test (b) VALUES (1)");
-	$result = spip_query("SELECT b FROM spip_test");
-	spip_query("ALTER TABLE spip_test DROP b");
+	sql_drop_table("spip_test", true);
+	sql_create("spip_test", array('a' => 'int'));
+	sql_alter("TABLE spip_test ADD b INT");
+	sql_insertq('spip_test', array('b' => 1), array('b' => 'int'));
+	$result = sql_select('b', "spip_test");
+	sql_alter("TABLE spip_test DROP b");
 	return $result;
 }
 
