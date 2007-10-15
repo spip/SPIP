@@ -176,7 +176,7 @@ function calculer_visites($t) {
 			$referer_md5 = '0x'.substr(md5($referer), 0, 15);
 			$prim = "(id_article=$id_article AND referer_md5=$referer_md5)";
 			if (!sql_countsel('spip_referers_articles', $prim))
-				sql_insert('spip_referers_articles',
+				sql_insertq('spip_referers_articles',
 				     array('visites' => $num,
 					   'id_article' => $id_article,
 					   'referer_md5' => $referer_md5));
