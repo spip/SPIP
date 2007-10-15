@@ -19,23 +19,28 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function inc_meta_dist()
 {
 	// Lire les meta, en cache si present, valide et lisible
-	if ($old = jeune_fichier(_FILE_META, 1<<24)
+	if ($new = jeune_fichier(_FILE_META, 1<<24)
 #   AND (@filemtime(_FILE_META) > @filemtime(_DIR_RESTREINT . '.svn/entries'))
 	    AND lire_fichier(_FILE_META, $meta))
 		$GLOBALS['meta'] = @unserialize($meta);
 	// sinon lire en base
 
-	if (!$GLOBALS['meta']) $old = !lire_metas();
+	if (!$GLOBALS['meta']) $new = !lire_metas();
 	// renouveller l'alea au besoin
 	if (test_espace_prive()
 	AND $GLOBALS['meta']
-	AND (time() > _RENOUVELLE_ALEA +  @$GLOBALS['meta']['alea_ephemere_date'])) {
+	    AND (time() >/* _RENOUVELLE_ALEA + */ @$GLOBALS['meta']['alea_ephemere_date'])) {
+	  // si on n'a pas l'acces en ecriture sur le cache,
+	  // ne pas renouveller l'alea sinon le cache devient faux
+		if (supprimer_fichier(_FILE_META)) {
 			include_spip('inc/acces');
 			renouvelle_alea();
+			$new = false; 
+		} else spip_log("impossible d'ecrire dans " . _FILE_META);
 	}
-	// et refaire le cache si on a pu lire
+	// et refaire le cache si on a du lire en base
 
-	if (!$old) ecrire_fichier(_FILE_META, serialize($GLOBALS['meta']));
+	if (!$new) ecrire_fichier(_FILE_META, serialize($GLOBALS['meta']));
 }
 
 // fonctions aussi appelees a l'install ==> spip_query en premiere requete 

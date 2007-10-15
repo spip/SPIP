@@ -184,19 +184,19 @@ function jeune_fichier($fichier, $n)
 // http://doc.spip.org/@supprimer_fichier
 function supprimer_fichier($fichier, $lock=true) {
 	if (!@file_exists($fichier))
-		return;
+		return true;
 
 	if ($lock) {
 		// verrouiller le fichier destination
 		if (!$fp = spip_fopen_lock($fichier, 'a', LOCK_EX))
-			return;
+			return false;
 	
 		// liberer le verrou
 		spip_fclose_unlock($fp);
 	}
 	
 	// supprimer
-	@unlink($fichier);
+	return @unlink($fichier);
 }
 // Supprimer brutalement, si le fichier existe
 // http://doc.spip.org/@spip_unlink
