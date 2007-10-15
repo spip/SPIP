@@ -148,7 +148,7 @@ function ecrire_acces() {
 
 	$s = sql_select("login, htpass, statut", "spip_auteurs", "statut IN  ('1comite','0minirezo','nouveau')");
 	$n = sql_count($s);
-	if (!$n OR $GLOBALS['ldap_present']) return;
+	if (!$n OR spip_connect_ldap()) return;
 	$p1 = ''; // login:htpass pour tous
 	$p2 = ''; // login:htpass pour les admins
 	while ($t = sql_fetch($s)) {

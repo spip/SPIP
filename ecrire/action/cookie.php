@@ -61,7 +61,7 @@ function action_cookie_dist() {
 		if ($auth_spip) $row_auteur = $auth_spip($session_login, _request('session_password'));
 	
 		// Marche pas: essayer l'authentification par LDAP si present
-		if (!$row_auteur AND $GLOBALS['ldap_present']) {
+		if (!$row_auteur AND spip_connect_ldap()) {
 			$auth_ldap = charger_fonction('auth_ldap', 'inc', true);
 			if ($auth_ldap) $row_auteur = $auth_ldap($session_login, _request('session_password'));
 		}

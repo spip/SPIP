@@ -125,7 +125,7 @@ function login_pour_tous($login, $cible, $action) {
 	if ($login) {
 		$row =  sql_fetsel('*', 'spip_auteurs', "login=" . _q($login));
 		// Retrouver ceux qui signent de leur nom ou email
-		if (!$row AND !$GLOBALS['ldap_present']) {
+		if (!$row AND !spip_connect_ldap()) {
 			$row = sql_fetsel('*', 'spip_auteurs', "(nom = " . _q($login) . " OR email = " . _q($login) . ") AND login<>'' AND statut<>'5poubelle'");
 			if ($row) {
 				$login_alt = $login; # afficher ce qu'on a tape
@@ -133,7 +133,7 @@ function login_pour_tous($login, $cible, $action) {
 			}
 		}
 
-		if ((!$row AND !$GLOBALS['ldap_present']) OR
+		if ((!$row AND !spip_connect_ldap()) OR
 			($row['statut'] == '5poubelle') OR 
 			(($row['source'] == 'spip') AND $row['pass'] == '')) {
 			$erreur =  _T('login_identifiant_inconnu',

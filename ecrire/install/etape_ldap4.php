@@ -42,24 +42,20 @@ function install_etape_ldap4_dist()
 		info_etape(_T('info_reglage_ldap'));
 
 		lire_fichier(_FILE_CONNECT_TMP, $conn);
-		if (!strpos($conn, 'spip_connect_ldap')) {
-			$p = strpos($conn, '?'.'>');
-			$conn = substr($conn, 0, $p) 
-			. "\$GLOBALS['ldap_present'] = true;\n"
-			. '?'.'>';
-			ecrire_fichier(_FILE_CONNECT_TMP, $conn);
+		if ($p = strpos($conn, "'');")) {
+			ecrire_fichier(_FILE_CONNECT_TMP, 
+				       substr($conn, 0, $p+1) 
+				       . _FILE_LDAP
+				       . substr($conn, $p+1));
 		}
-		$conn = "function spip_connect_ldap() {\n"
-		. "\t\$GLOBALS['ldap_link'] = @ldap_connect(\"$adresse_ldap\",\"$port_ldap\");\n"
-		. "\t@ldap_set_option(\$GLOBALS['ldap_link'],LDAP_OPT_PROTOCOL_VERSION,\"$protocole_ldap\");\n"
+		$conn = "\$GLOBALS['ldap_link'] = @ldap_connect(\"$adresse_ldap\",\"$port_ldap\");\n"
+		. "@ldap_set_option(\$GLOBALS['ldap_link'],LDAP_OPT_PROTOCOL_VERSION,\"$protocole_ldap\");\n"
 		. (($tls_ldap != 'oui') ? '' :
-		   "\t@ldap_start_tls(\$GLOBALS['ldap_link']);\n")
-		. "\t@ldap_bind(\$GLOBALS['ldap_link'],\"$login_ldap\",\"$pass_ldap\");\n"
-		. "\treturn \$GLOBALS['ldap_link'];\n"
-		. "}\n"
+		   "@ldap_start_tls(\$GLOBALS['ldap_link']);\n")
+		. "@ldap_bind(\$GLOBALS['ldap_link'],\"$login_ldap\",\"$pass_ldap\");\n"
 		. "\$GLOBALS['ldap_base'] = \"$base_ldap\";\n";
 
-		install_fichier_connexion(_FILE_LDAP, $conn);
+		install_fichier_connexion(_DIR_CONNECT . _FILE_LDAP, $conn);
 		$statuts = liste_statuts_ldap();
 		$statut_ldap = defined('_INSTALL_STATUT_LDAP')
 		? _INSTALL_STATUT_LDAP

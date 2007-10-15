@@ -112,17 +112,17 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 
 	if (preg_match(',(.*):(.*),', $adresse_db, $r))
 		list(,$adresse_db, $port) = $r;
-	else
-		$port = '';
+	else $port = '';
 
-	$conn =  "\$GLOBALS['spip_connect_version'] = 0.6;\n"
-	. $ligne_rappel
-	. "spip_connect_db("
-	. "'$adresse_db','$port','$login_db','"
-	. addcslashes($pass_db, "'\\") . "','$sel_db'"
-	. ",'$server_db', '$table_prefix');\n";
-
-	install_fichier_connexion(_FILE_CONNECT_TMP, $conn);
+	install_fichier_connexion(_FILE_CONNECT_TMP, 
+				  $ligne_rappel
+				  . install_connexion($adresse_db,
+						      $port,
+						      $login_db,
+						      $pass_db,
+						      $sel_db,
+						      $server_db,
+						      $table_prefix));
 	return '';
 }
 
