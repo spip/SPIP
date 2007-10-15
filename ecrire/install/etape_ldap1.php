@@ -37,10 +37,9 @@ function install_etape_ldap1_dist()
 		? _INSTALL_PASS_LDAP
 		: '';
 
-
 	// Recuperer les anciennes donnees (si presentes)
-	if (@file_exists(_FILE_CONNECT_INS . _FILE_TMP . '.php')) {
-		$s = @join('', @file(_FILE_CONNECT_INS . _FILE_TMP . '.php'));
+	if (@file_exists(_FILE_LDAP)) {
+		$s = @join('', @file(_FILE_LDAP));
 		if (preg_match('#ldap_connect\("(.*)","(.*)"\)#', $s, $regs)) {
 			$adresse_ldap = $regs[1];
 			$port_ldap = $regs[2];

@@ -1224,6 +1224,8 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 		(@is_readable($f = _DIR_CHMOD . _FILE_CHMOD_INS . '.php') ? $f
 	:	false));
 
+	define('_FILE_LDAP', _DIR_CONNECT . 'ldap' . '.php');
+
 	define('_FILE_TMP_SUFFIX', '.tmp.php');
 	define('_FILE_CONNECT_TMP', _DIR_CONNECT . _FILE_CONNECT_INS . _FILE_TMP_SUFFIX);
 	define('_FILE_CHMOD_TMP', _DIR_CHMOD . _FILE_CHMOD_INS . _FILE_TMP_SUFFIX);
