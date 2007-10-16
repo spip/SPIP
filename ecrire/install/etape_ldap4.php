@@ -48,12 +48,12 @@ function install_etape_ldap4_dist()
 				       . _FILE_LDAP
 				       . substr($conn, $p+1));
 		}
-		$conn = "\$GLOBALS['ldap_link'] = @ldap_connect(\"$adresse_ldap\",\"$port_ldap\");\n"
+		$conn = "\$GLOBALS['ldap_base'] = \"$base_ldap\";\n"
+		. "\$GLOBALS['ldap_link'] = @ldap_connect(\"$adresse_ldap\",\"$port_ldap\");\n"
 		. "@ldap_set_option(\$GLOBALS['ldap_link'],LDAP_OPT_PROTOCOL_VERSION,\"$protocole_ldap\");\n"
 		. (($tls_ldap != 'oui') ? '' :
 		   "@ldap_start_tls(\$GLOBALS['ldap_link']);\n")
-		. "@ldap_bind(\$GLOBALS['ldap_link'],\"$login_ldap\",\"$pass_ldap\");\n"
-		. "\$GLOBALS['ldap_base'] = \"$base_ldap\";\n";
+		. "@ldap_bind(\$GLOBALS['ldap_link'],\"$login_ldap\",\"$pass_ldap\");\n";
 
 		install_fichier_connexion(_DIR_CONNECT . _FILE_LDAP, $conn);
 		$statuts = liste_statuts_ldap();
