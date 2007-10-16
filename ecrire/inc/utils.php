@@ -328,6 +328,7 @@ function spip_query($query, $serveur='') {
 	return $f($query, $serveur);
 }
 
+// http://doc.spip.org/@spip_connect_ldap
 function spip_connect_ldap($serveur='') {
 	$connexion = spip_connect($serveur);
 	if ($connexion['ldap'] AND is_string($connexion['ldap'])) {

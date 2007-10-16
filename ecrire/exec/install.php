@@ -48,6 +48,7 @@ function install_fichier_connexion($nom, $texte)
 // Attention etape_ldap4 suppose qu'il n'y aura qu'un seul appel de fonction
 // dans le fichier produit.
 
+// http://doc.spip.org/@install_connexion
 function install_connexion($adr, $port, $login, $pass, $base, $type, $pref, $ldap='')
 {
 	return "\$GLOBALS['spip_connect_version'] = 0.7;\n"

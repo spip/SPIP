@@ -123,6 +123,7 @@ function spip_pg_alter($query, $serveur='') {
 	}
 }
 	      
+// http://doc.spip.org/@spip_pg_alter_change
 function spip_pg_alter_change($table, $arg, $serveur='')
 {
   spip_log("spip_pg_alter_change($table, $arg, $serveur");
@@ -148,6 +149,7 @@ function spip_pg_alter_change($table, $arg, $serveur='')
 	}
 }
 
+// http://doc.spip.org/@spip_pg_alter_add
 function spip_pg_alter_add($table, $arg, $serveur='') {
 	if (!preg_match('/^(INDEX|KEY|PRIMARY\s+KEY|)\s*`?(\w+)`?(.*)$/', $arg, $r))
 	  spip_log("drop $arg  incompris", 'pg');
@@ -162,6 +164,7 @@ function spip_pg_alter_add($table, $arg, $serveur='') {
 	}
 }
 
+// http://doc.spip.org/@spip_pg_alter_drop
 function spip_pg_alter_drop($table, $arg, $serveur='') {
 	if (!preg_match('/^(INDEX|KEY|PRIMARY\s+KEY|)\s*`?(\w+)`?/', $arg, $r))
 	  spip_log("alter drop: $arg  incompris", 'pg');
