@@ -12,20 +12,23 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// Les balises URL_$type sont generiques:
+// Elles produisent un appel a generer_url_$type(id-courant)
+// sauf qq cas particuliers
+
 // http://doc.spip.org/@balise_URL__dist
 function balise_URL__dist($p) {
 
 	if ($f = charger_fonction($p->nom_champ, 'balise', true))
 		return $f($p);
-	else return NULL;
-}
-
-// http://doc.spip.org/@balise_URL_SITE_SPIP_dist
-function balise_URL_SITE_SPIP_dist($p) {
-	$p->code = "sinon(\$GLOBALS['meta']['adresse_site'],'.')";
-	$p->code = "htmlspecialchars(".$p->code.")";
-	$p->interdire_scripts = false;
-	return $p;
+	else {
+		$nom = strtolower(substr($p->nom_champ,4));
+		$code = generer_generer_url($nom, $p);
+		if ($code === NULL) return NULL;
+		$p->code = $code;
+		$p->interdire_scripts = false;
+		return $p;
+	}
 }
 
 // http://doc.spip.org/@balise_URL_ARTICLE_dist
@@ -40,62 +43,13 @@ function balise_URL_ARTICLE_dist($p) {
 	return $p;
 }
 
-// http://doc.spip.org/@balise_URL_AUTEUR_dist
-function balise_URL_AUTEUR_dist($p) {
+// Autres balises URL_*, qui ne concernent pas une table
+// (historique)
 
-	$code = generer_generer_url('auteur', $p);
-	if ($code === NULL) return NULL;
-	$p->code = $code;
-	$p->interdire_scripts = false;
-	return $p;
-}
-
-// http://doc.spip.org/@balise_URL_RUBRIQUE_dist
-function balise_URL_RUBRIQUE_dist($p) {
-
-	$code = generer_generer_url('rubrique', $p);
-	if ($code === NULL) return NULL;
-	$p->code = $code;
-	$p->interdire_scripts = false;
-	return $p;
-}
-
-// http://doc.spip.org/@balise_URL_BREVE_dist
-function balise_URL_BREVE_dist($p) {
-
-	$code = generer_generer_url('breve', $p);
-	if ($code === NULL) return NULL;
-	$p->code = $code;
-	$p->interdire_scripts = false;
-	return $p;
-}
-
-// http://doc.spip.org/@balise_URL_MOT_dist
-function balise_URL_MOT_dist($p) {
-
-	$code = generer_generer_url('mot', $p);
-	if ($code === NULL) return NULL;
-	$p->code = $code;
-	$p->interdire_scripts = false;
-	return $p;
-}
-
-// http://doc.spip.org/@balise_URL_FORUM_dist
-function balise_URL_FORUM_dist($p) {
-
-	$code = generer_generer_url('forum', $p);
-	if ($code === NULL) return NULL;
-	$p->code = $code;
-	$p->interdire_scripts = false;
-	return $p;
-}
-
-// http://doc.spip.org/@balise_URL_DOCUMENT_dist
-function balise_URL_DOCUMENT_dist($p) {
-
-	$code = generer_generer_url('document', $p);
-	if ($code === NULL) return NULL;
-	$p->code = $code;
+// http://doc.spip.org/@balise_URL_SITE_SPIP_dist
+function balise_URL_SITE_SPIP_dist($p) {
+	$p->code = "sinon(\$GLOBALS['meta']['adresse_site'],'.')";
+	$p->code = "htmlspecialchars(".$p->code.")";
 	$p->interdire_scripts = false;
 	return $p;
 }
