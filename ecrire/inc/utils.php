@@ -151,7 +151,8 @@ function pipeline($action, $val=null) {
 function spip_log($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 	static $compteur = array();
 	global $nombre_de_logs, $taille_des_logs;
-	if ($compteur[$logname]++ > 100 || !$nombre_de_logs || !$taille_des_logs)
+	if (($logname != 'maj') AND
+	    ($compteur[$logname]++ > 100 || !$nombre_de_logs || !$taille_des_logs))
 		return;
 
 	$logfile = ($logdir===NULL ? _DIR_LOG : $logdir)
@@ -187,8 +188,9 @@ function spip_log($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 		}
 	}
 
-	// Dupliquer l'erreur SQL dans le log general
-	if ($logname !== NULL)	spip_log($message);
+	// Dupliquer les erreurs specifiques dans le log general
+	if ($logname !== NULL)
+		spip_log($logname=='maj' ? 'cf maj.log' : $message);
 }
 
 // Fonction appelee par le fichier cree dans config/ a l'instal'.
