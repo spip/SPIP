@@ -66,12 +66,10 @@ function maj_base($version_cible = 0) {
 	}
 }
 
-// A partir de la version 1.945, le while ci-dessus aboutit ici.
+// A partir des > 1.926 (i.e SPIP 1.9.2), le while ci-dessus aboutit ici.
 // Se relancer soi-meme pour eviter l'interruption pendant une operation SQL
-// (qu'on espere pas trop longue chacune).
-// Ne pas perdre son temps a creer le fichier des meta,
-// le debut de exec/upgrade le refabrique pour etre certains de repartir
-// au point de relance.
+// (qu'on espere pas trop longue chacune)
+// evidemment en ecrivant dans la meta a quel numero on en est.
 
 define('_UPGRADE_TIME_OUT', 20);
 
