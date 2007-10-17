@@ -131,17 +131,17 @@ function autres_bases($adresse_db, $login_db, $pass_db, $server_db, $hidden)
 	$tables =  bases_referencees(_FILE_CONNECT_TMP);
 
 	if ($tables)
-		$tables = '<br /><br />'
-		  . _L('Bases d&eacute;j&agrave; interrogeables:')
+		$tables = _L('Bases suppl&eacute;mentaires interrogeables:')
 		  . "<ul>\n<li>"
 		  . join("</li>\n<li>",  $tables)
 		  . "</li>\n</ul>";
 	else $tables ='';
 
 	return "<br ><div style='padding: 10px; border: 1px solid; text-align: left'>" 
-	.  _L("Toutefois, si vous avez une autre base de donn&eacute;es &agrave; interroger avec SPIP, sur ce serveur ou un autre, d&eacute;clarez-la d&egrave;s maintenant. Si vous laissez les champs ci-dessous vides, les identifiants de connexion &agrave; la base principale seront utilis&eacute;s.")
 	  . $tables
+	.  _L("Si vous avez une autre base de donn&eacute;es &agrave; interroger &agrave; travers SPIP, avec ce serveur SQL ou avec un autre, d&eacute;clarez-la d&egrave;s maintenant. Si vous laissez les champs ci-dessous vides, les identifiants de connexion &agrave; la base principale seront utilis&eacute;s.")
+	  . '<div style="background-color: #eeeeee">'
 	  .  install_connexion_form(array($adresse_db), array($login_db), array($pass_db), array(), $hidden, 'sup1')
-	.  "</div>";
+	  .  "</div></div>";
 }
 ?>
