@@ -329,8 +329,6 @@ function maj_1_950($installee) {
 	$v = $tables_auxiliaires[$k='spip_urls'];
 	sql_create($k, $v['field'], $v['key'], false, false);
 
-	// assurer date et pas maj avant la recopie
-	sql_alter("TABLE spip_urls CHANGE maj date DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL");
 
 	foreach(array('article'=>'id_article',
 		      'rubrique'=>'id_rubrique',
@@ -419,10 +417,11 @@ $GLOBALS['maj'][1][954] = array(
     array('spip_query', "UPDATE spip_types_documents SET `mime_type`='application/vnd.google-earth.kmz' WHERE `extension`='kmz'")
 		);
 
-$GLOBALS['maj'][1][955] = array(
-
-  array('sql_alter', "TABLE spip_urls CHANGE `maj` date DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL")
-	);
+if ($GLOBALS['meta']['version_installee'] > 1.950)
+  // 1.950 lisait un bug dans auxiliaires.php corrige a present
+	$GLOBALS['maj'][1][955] = array(
+		  array('sql_alter', "TABLE spip_urls CHANGE `maj` date DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL")
+		  );
 
 $GLOBALS['maj'][1][956] = array(
 
