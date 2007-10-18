@@ -610,23 +610,18 @@ function table_objet_sql($type) {
 // http://doc.spip.org/@id_table_objet
 function id_table_objet($type) {
 	$type = preg_replace(',^spip_|s$,', '', $type);
-	if ($type == 'site' OR $type == 'syndic')
-		return 'id_syndic';
-	else if ($type == 'forum')
+	if ($type == 'forum')
 		return 'id_forum';
-	else if ($type=='doc' OR $type=='img' OR $type=='emb') # pour les modeles
-		return 'id_document';
-	else if ($type == 'petition')
-		return 'id_article';
 	else if ($type == 'type')
 		return 'extension';
 	else {
-		$t = table_objet_sql($type);
-		global $tables_principales;
-		if (isset($tables_principales[$t]['key']["PRIMARY KEY"]))
-			return $tables_principales[$t]['key']["PRIMARY KEY"];
+		$t = table_objet($type);
+		$trouver_table = charger_fonction('trouver_table', 'base');
+		$desc = $trouver_table($t);
+		if ($desc)
+			return $desc['key']["PRIMARY KEY"];
+		else return 'id_'.$type;
 	}
-	return 'id_'.$type;
 }
 
 // Recuperer le nom de la table de jointure xxxx sur l'objet yyyy

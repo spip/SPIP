@@ -34,6 +34,7 @@ function base_trouver_table_dist($nom, $serveur='')
 	$nom_sql = $nom;
 
 	if ($connexions[$s]['spip_connect_version']) {
+		include_spip('public/interfaces');
 		// base sous SPIP, le nom SQL peut etre autre
 		if (isset($table_des_tables[$nom])) {
 		  // indirection (table principale avec nom!=type)
