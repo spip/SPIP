@@ -179,6 +179,7 @@ function http_calendrier_init($time='', $type='mois', $lechelle='', $lpartie_cal
   		else $time = time();
 	  }
 
+	if (!$type) $type ='mois'; // ca suffit pas, l'entete
 	$jour = date("d",$time);
 	$mois = date("m",$time);
 	$annee = date("Y",$time);
