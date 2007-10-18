@@ -29,7 +29,9 @@ function base_trouver_table_dist($nom, $serveur='')
 {
 	global $tables_principales, $tables_auxiliaires, $table_des_tables, $connexions;
 
-	if (!spip_connect($serveur)) return null;
+	if (!spip_connect($serveur)
+	OR !preg_match('/^[a-zA-Z0-9._-]+/',$nom))
+		return null;
 	$s = $serveur ? $serveur : 0;
 	$nom_sql = $nom;
 
