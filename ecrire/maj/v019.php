@@ -116,7 +116,7 @@ $GLOBALS['maj'][1][938] = array(
 	// Des champs NULL a l'installation
 	// Ajouter un champ extension aux spip_documents, et le
 	// remplir avec les valeurs ad hoc
-	array('sql_alter', "TABLE spip_documents ADD `extension` VARCHAR(10) NOT NULL DEFAULT ''"),
+	array('sql_alter', "TABLE spip_documents ADD `extension` VARCHAR(10) DEFAULT ''  NOT NULL "),
 	array('sql_alter', "TABLE spip_documents ADD INDEX `extension` (`extension`)"),
 	array('maj_1_938'),
 
@@ -250,7 +250,7 @@ $GLOBALS['maj'][1][945] = array(
     array('sql_alter', "TABLE spip_rubriques CHANGE `descriptif` `descriptif` text DEFAULT '' NOT NULL"),
     array('sql_alter', "TABLE spip_rubriques CHANGE `texte` `texte` longtext DEFAULT '' NOT NULL"),
     array('sql_alter', "TABLE spip_rubriques CHANGE `url_propre` `url_propre` VARCHAR(255) DEFAULT '' NOT NULL"),
-#    array('sql_alter', "TABLE spip_documents CHANGE `extension` `extension` VARCHAR(10) DEFAULT '' NOT NULL"),
+    array('sql_alter', "TABLE spip_documents CHANGE `extension` `extension` VARCHAR(10) DEFAULT '' NOT NULL"),
     array('sql_alter', "TABLE spip_documents CHANGE `titre` `titre` text DEFAULT '' NOT NULL"),
     array('sql_alter', "TABLE spip_documents CHANGE `date` `date` datetime DEFAULT '0000-00-00 00:00:00' NOT NULL"),
     array('sql_alter', "TABLE spip_documents CHANGE `descriptif` `descriptif` text DEFAULT '' NOT NULL"),
@@ -420,15 +420,20 @@ if ($GLOBALS['meta']['version_installee'] > 1.950)
 // il faut supprimer l'autoincrement avant de supprimer la PRIMARY KEY
 
 $GLOBALS['maj'][1][938] = array(
-	array('sql_alter', "TABLE spip_types_documents CHANGE `id_type` `id_type` BIGINT( 21 ) NOT NULL ") ,
-	array('sql_alter', "TABLE spip_types_documents DROP PRIMARY KEY"),
 	array('sql_alter', "TABLE spip_types_documents DROP `id_type`"),
-	array('sql_alter', "TABLE spip_types_documents DROP INDEX `extension`"),
+	array('sql_alter', "TABLE spip_documents ADD `extension` VARCHAR(10) DEFAULT ''  NOT NULL "),
 	array('sql_alter', "TABLE spip_types_documents ADD PRIMARY KEY (`extension`)")
 	);
 // pour ceux pour qui c'est trop tard:
+// 
 if ($GLOBALS['meta']['version_installee'] > 1.938)
-	$GLOBALS['maj'][1][956] = $GLOBALS['maj'][1][938];
+	$GLOBALS['maj'][1][956] = array(
+	array('sql_alter', "TABLE spip_types_documents DROP PRIMARY KEY"),
+	array('sql_alter', "TABLE spip_types_documents DROP `id_type`"),
+	array('sql_alter', "TABLE spip_types_documents DROP INDEX `extension`"),
+	array('sql_alter', "TABLE spip_documents ADD `extension` VARCHAR(10) DEFAULT ''  NOT NULL "),
+	array('sql_alter', "TABLE spip_types_documents ADD PRIMARY KEY (`extension`)")
+	);
 
 // PG veut une valeur par defaut a l'insertion
 // http://trac.rezo.net/trac/spip/changeset/10482
