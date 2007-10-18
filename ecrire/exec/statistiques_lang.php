@@ -23,6 +23,7 @@ function exec_statistiques_lang_dist()
 	} else statistiques_lang_ok();
 }
 
+// http://doc.spip.org/@statistiques_lang_ok
 function statistiques_lang_ok()
 {
 	global $spip_ecran, $spip_lang_right;

@@ -34,6 +34,7 @@ function exec_articles_versions_dist()
 	} else articles_versions_ok($row, $id_article, $id_version, $id_diff);
 }
 
+// http://doc.spip.org/@articles_versions_ok
 function articles_versions_ok($row, $id_article, $id_version, $id_diff)
 {
 	global $les_notes, $champs_extra, $spip_lang_left, $spip_lang_right;

@@ -56,6 +56,7 @@ function exec_breves_edit_dist()
 	} else  breves_edit_ok($row, $id_breve, $id_rubrique, $new);
 }
 
+// http://doc.spip.org/@breves_edit_ok
 function breves_edit_ok($row, $id_breve, $id_rubrique, $new)
 {
 	global  $connect_statut, $spip_lang_right;
