@@ -288,7 +288,7 @@ function calculer_requete_sql(&$boucle)
 		. $boucle->in 
 		. $boucle->hash . 
 		"\n\n	// REQUETE
-	\$result = spip_optim_select(\n\t\tarray(\"" . 
+	\$result = calculer_select(\n\t\tarray(\"" . 
 		# En absence de champ c'est un decompte : 
 	  	# prendre une constante pour avoir qqch
 		(!$boucle->select ? 1 :

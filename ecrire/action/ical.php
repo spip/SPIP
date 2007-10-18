@@ -64,11 +64,11 @@ function action_ical_dist()
 		filtrer_ical ("VERSION:2.0"), "\n",
 		filtrer_ical ("X-WR-CALNAME:$nom_site / $nom_utilisateur"), "\n",
 		filtrer_ical ("X-WR-RELCALID:$adresse_site?id_auteur=$id_utilisateur"), "\n";
-	spip_ical_rendez_vous($id_utilisateur, $nom_site);
-	spip_ical_taches($id_utilisateur, $nom_site);
+	ical_rendez_vous($id_utilisateur, $nom_site);
+	ical_taches($id_utilisateur, $nom_site);
 
-	$titres = spip_ical_articles($nom_site);
-	$titres_breves = spip_ical_breves($nom_site);
+	$titres = ical_articles($nom_site);
+	$titres_breves = ical_breves($nom_site);
 	if ($titres || $titres_breves) {
 		$titre_prop = array();
 
@@ -91,15 +91,15 @@ function action_ical_dist()
 			filtrer_ical ("URL:$adresse_site" . _DIR_RESTREINT_ABS), "\n",
 			filtrer_ical ("END:VTODO"), "\n";
 	}
-	spip_ical_messages($id_utilisateur, $nom_site);
+	ical_messages($id_utilisateur, $nom_site);
 	if ($statut_utilisateur == "0minirezo") {
-		spip_ical_forums($id_utilisateur, $nom_site);
+		ical_forums($id_utilisateur, $nom_site);
 	}
 	echo filtrer_ical ("END:VCALENDAR"), "\n";
 }
 
-// http://doc.spip.org/@spip_ical_rendez_vous
-function spip_ical_rendez_vous($id_utilisateur, $nom_site)
+// http://doc.spip.org/@ical_rendez_vous
+function ical_rendez_vous($id_utilisateur, $nom_site)
 {
 	$result_messages=sql_select("messages.id_message, messages.id_message, messages.date_heure, messages.date_fin, messages.titre, messages.texte, messages.type", "spip_messages AS messages, spip_auteurs_messages AS lien", "((lien.id_auteur=$id_utilisateur AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.statut='publie' ", " messages.id_message ", " messages.date_heure");
         while($row=sql_fetch($result_messages)){
@@ -149,8 +149,8 @@ function spip_ical_rendez_vous($id_utilisateur, $nom_site)
 	}
 }
 
-// http://doc.spip.org/@spip_ical_taches
-function spip_ical_taches($id_utilisateur, $nom_site)
+// http://doc.spip.org/@ical_taches
+function ical_taches($id_utilisateur, $nom_site)
 {
 	$result_messages=sql_select("messages.id_message, messages.id_message, messages.date_heure, messages.date_fin, messages.titre, messages.texte, messages.type", "spip_messages AS messages, spip_auteurs_messages AS lien", "lien.id_auteur=$id_utilisateur AND lien.id_message=messages.id_message AND messages.type='pb' AND messages.rv!='oui' AND messages.statut='publie' ", " messages.id_message ", " messages.date_heure");
 	while($row=sql_fetch($result_messages)){
@@ -194,8 +194,8 @@ function spip_ical_taches($id_utilisateur, $nom_site)
 	}
 }
 
-// http://doc.spip.org/@spip_ical_articles
-function spip_ical_articles($nom_site)
+// http://doc.spip.org/@ical_articles
+function ical_articles($nom_site)
 {
 	$result_articles = sql_select("id_article, titre, date", "spip_articles", "statut = 'prop'");
 	$titres = array();
@@ -218,8 +218,8 @@ function spip_ical_articles($nom_site)
 }
 
 
-// http://doc.spip.org/@spip_ical_breves
-function spip_ical_breves($nom_site)
+// http://doc.spip.org/@ical_breves
+function ical_breves($nom_site)
 {
 	$titres = array();
 	$result = sql_select("id_breve, titre, date_heure", "spip_breves", "statut = 'prop'");
@@ -241,8 +241,8 @@ function spip_ical_breves($nom_site)
 }
 
 
-// http://doc.spip.org/@spip_ical_messages
-function spip_ical_messages($id_utilisateur, $nom_site)
+// http://doc.spip.org/@ical_messages
+function ical_messages($id_utilisateur, $nom_site)
 {
 	$result_messages = sql_select("messages.id_message, messages.id_message, messages.date_heure, messages.date_fin, messages.titre, messages.texte, messages.type", "spip_messages AS messages, spip_auteurs_messages AS lien", "lien.id_auteur=$id_utilisateur AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message");
 	while($row=sql_fetch($result_messages)){
@@ -302,8 +302,8 @@ function spip_ical_messages($id_utilisateur, $nom_site)
 	}	
 }
 
-// http://doc.spip.org/@spip_ical_forums
-function spip_ical_forums($id_utilisateur, $nom_site)
+// http://doc.spip.org/@ical_forums
+function ical_forums($id_utilisateur, $nom_site)
 {
 	$result_forum = sql_select("*", "spip_forum", "statut = 'prop'");
 
