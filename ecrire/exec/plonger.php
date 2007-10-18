@@ -22,11 +22,12 @@ function exec_plonger_dist()
 	$exclus = intval(_request('exclus'));
 	$col = intval(_request('col'));
 	$do  = _request('do');
-	if (!preg_match('/^\w+$/', $do)) die();
-	if (!$do) $do = 'aff';
+	if (preg_match('/^\w+$/', $do)) {
+		if (!$do) $do = 'aff';
 
-	include_spip('inc/actions');
-	$plonger = charger_fonction('plonger', 'inc');
-	ajax_retour($plonger($id, htmlentities($rac), array(), $col, $exclus, $do));
+		include_spip('inc/actions');
+		$plonger = charger_fonction('plonger', 'inc');
+		ajax_retour($plonger($id, htmlentities($rac), array(), $col, $exclus, $do));
+	}
 }
 ?>

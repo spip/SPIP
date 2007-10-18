@@ -19,7 +19,7 @@ include_spip ('inc/barre');
 // http://doc.spip.org/@exec_breves_edit_dist
 function exec_breves_edit_dist()
 {
-	global $connect_statut, $connect_id_rubrique,$spip_lang_right;
+	global $connect_id_rubrique;
 	$id_breve = intval(_request('id_breve'));
 	$id_rubrique  = intval(_request('id_rubrique'));
 	$new = _request('new');
@@ -42,35 +42,34 @@ function exec_breves_edit_dist()
 		}
 	}
 	
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	if ( ($new!='oui' AND (!autoriser('voir','breve',$id_breve) OR !autoriser('modifier','breve', $id_breve)))
-		OR ($new=='oui' AND !autoriser('creerbrevedans','rubrique',$id_rubrique)) ) {
-		echo $commencer_page("&laquo; $titre_breve &raquo;", "naviguer", "breves", $id_rubrique);
-		echo "<strong>"._T('avis_acces_interdit')."</strong>";
-		echo fin_page();
-		exit;
+
+	$row = false;
+	if (!( ($new!='oui' AND (!autoriser('voir','breve',$id_breve) OR !autoriser('modifier','breve', $id_breve)))
+	       OR ($new=='oui' AND !autoriser('creerbrevedans','rubrique',$id_rubrique)) )) {
+		if ($new != "oui") 
+			$row = sql_fetsel("*", "spip_breves", "id_breve=$id_breve");
+		else $row = true;
 	}
+	if (!$row) {
+		include_spip('inc/minipres');
+		echo minipres();
+	} else  breves_edit_ok($row, $id_breve, $id_rubrique, $new);
+}
 
-	if ($new != "oui") {
-		$result = sql_select("*", "spip_breves", "id_breve=$id_breve");
+function breves_edit_ok($row, $id_breve, $id_rubrique, $new)
+{
+	global  $connect_statut, $spip_lang_right;
 
-	
-		if ($row=sql_fetch($result)) {
-			$id_breve=$row['id_breve'];
-			$titre=$row['titre'];
-			$texte=$row['texte'];
-			$lien_titre=$row['lien_titre'];
-			$lien_url=$row['lien_url'];
-			$statut=$row['statut'];
-			$id_rubrique=$row['id_rubrique'];
-			$extra = $row['extra'];
-			$onfocus = '';
-		} else {
-			include_spip('inc/minipres');
-			echo minipres();
-			exit;
-		}
-
+	if ($new != 'oui') {
+		$id_breve=$row['id_breve'];
+		$titre=$row['titre'];
+		$texte=$row['texte'];
+		$lien_titre=$row['lien_titre'];
+		$lien_url=$row['lien_url'];
+		$statut=$row['statut'];
+		$id_rubrique=$row['id_rubrique'];
+		$extra = $row['extra'];
+		$onfocus = '';
 	} else {
 		$titre = filtrer_entites(_T('titre_nouvelle_breve'));
 		$texte = "";
@@ -82,6 +81,7 @@ function exec_breves_edit_dist()
 		$id_rubrique = $row['id_secteur'];
 	}
 
+	$commencer_page = charger_fonction('commencer_page', 'inc');
 	pipeline('exec_init',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''));
 
 	echo $commencer_page(_T('titre_page_breves_edit', array('titre' => $titre)), "naviguer", "breves", $id_rubrique);

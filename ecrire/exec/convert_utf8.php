@@ -18,7 +18,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function convert_utf8_non($action, $message) {
 
 	echo minipres($action, ('<p>'.$message. "</p>\n<p style='text-align: right'><a href='" . generer_url_ecrire("config_lang"). "'> &gt;&gt; "._T('icone_retour')."</a>"));
-	exit;
 }
 
 // http://doc.spip.org/@exec_convert_utf8_dist
@@ -47,7 +46,7 @@ function exec_convert_utf8_dist() {
 			convert_utf8_non($action,
 					  _T('utf8_convert_erreur_deja',
 					     array('charset' => $charset_orig)));
-
+		else {
 		$commentaire = _T('utf8_convert_avertissement',
 			array('orig' => $charset_orig,'charset' => 'utf-8'));
 		$commentaire .=  "<small>"
@@ -59,6 +58,7 @@ function exec_convert_utf8_dist() {
 
 		$admin = charger_fonction('admin', 'inc');
 		$admin('convert_utf8', $action, $commentaire);
+		}
 	}
 }
 ?>

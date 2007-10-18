@@ -23,8 +23,7 @@ function exec_dater_dist()
 	OR !autoriser('voir',$type,$id)) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
-	}
+	} else {
 
 	$table = ($type=='syndic') ? 'syndic' : ($type . 's');
 	$row = sql_fetsel("*", "spip_$table", "id_$type=$id");
@@ -36,5 +35,6 @@ function exec_dater_dist()
 	$script = ($type=='article')? 'articles' : ($type == 'breve' ? 'breves_voir' : 'sites');
 	$dater = charger_fonction('dater', 'inc');
 	ajax_retour($dater($id, 'ajax', $statut, $type, $script, $date, $date_redac));
+	}
 }
 ?>

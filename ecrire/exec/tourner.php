@@ -24,11 +24,11 @@ function exec_tourner_dist()
 		: autoriser('publierdans','rubrique',$id))) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
+	} else {
+	  include_spip('inc/actions');
+	  $tourner = charger_fonction('tourner', 'inc');
+	  ajax_retour($tourner($id_document, array(), _request('script'), 'ajax', $type));
 	}
-	include_spip('inc/actions');
-	$tourner = charger_fonction('tourner', 'inc');
-	ajax_retour($tourner($id_document, array(), _request('script'), 'ajax', $type));
 }
 
 ?>

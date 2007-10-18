@@ -21,10 +21,10 @@ function exec_petitionner_dist()
 	if (!autoriser('modererpetition','article',$id_article)) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
+	} else {
+		include_spip('inc/actions');
+		$petitionner = charger_fonction('petitionner', 'inc');
+		ajax_retour($petitionner($id_article, $script, "&id_article=$id_article", 'ajax'));
 	}
-	include_spip('inc/actions');
-	$petitionner = charger_fonction('petitionner', 'inc');
-	ajax_retour($petitionner($id_article, $script, "&id_article=$id_article", 'ajax'));
 }
 ?>

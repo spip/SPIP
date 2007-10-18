@@ -35,8 +35,7 @@ function exec_upgrade_dist() {
 		echo $r;
 		
 		@rename(_FILE_CONNECT, _FILE_CONNECT_TMP);
-		exit;
-	}
+	} else {
 
 	if (!isset($GLOBALS['meta']['version_installee']))
 		$GLOBALS['meta']['version_installee'] = 0.0;
@@ -57,5 +56,6 @@ function exec_upgrade_dist() {
 	$r = generer_action_auteur('purger', 'cache', _DIR_RESTREINT_ABS, true);
 	$admin = charger_fonction('admin', 'inc');
 	$admin('upgrade', _T('info_mise_a_niveau_base'), $commentaire, $r);
+	}
 }
 ?>

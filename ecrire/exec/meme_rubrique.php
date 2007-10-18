@@ -24,11 +24,11 @@ function exec_meme_rubrique_dist()
 	OR (!preg_match('/^[\w_-]+$/',$type))) {
 		include_spip('inc/minipres');
                 echo minipres();
-                exit;
-        }
-	include_spip('inc/presentation');
+        } else {
+		include_spip('inc/presentation');
 	// on connait pas le vrai 2e arg mais c'est pas dramatique
-	$res = meme_rubrique($id, 0, $type, $order, NULL, true);
-	ajax_retour($res);
+		$res = meme_rubrique($id, 0, $type, $order, NULL, true);
+		ajax_retour($res);
+	}
 }
 ?>

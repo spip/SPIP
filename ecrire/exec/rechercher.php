@@ -23,68 +23,69 @@ function exec_rechercher_dist()
 	$rac = htmlentities(_request('rac'));
 	$type = _request('type');
 	$do  = _request('do');
-	if (!preg_match('/^\w+$/', $do)) die();
-	if (!$do) $do = 'aff';
+	if (preg_match('/^\w+$/', $do)) {
+		if (!$do) $do = 'aff';
 
-	$where = split("[[:space:]]+", $type);
-	if ($where) {
+		$where = split("[[:space:]]+", $type);
+		if ($where) {
 		foreach ($where as $k => $v) 
 			$where[$k] = "'%" . substr(str_replace("%","\%", _q($v)),1,-1) . "%'";
 		$where_titre = ("(titre LIKE " . join(" AND titre LIKE ", $where) . ")");
 		$where_desc = ("(descriptif LIKE " . join(" AND descriptif LIKE ", $where) . ")");
 		$where_id = ("(id_rubrique = " . join(" AND id_rubrique = ", $where) . ")");
-	} else {
+		} else {
 		$where_titre = " 1=2";
 		$where_desc = " 1=2";
 		$where_id = " 1=2";
-	}
+		}
 
-	if ($exclus) {
+		if ($exclus) {
 		include_spip('inc/rubriques');
 		$where_exclus = " AND id_rubrique NOT IN (".calcul_branche($exclus).")";
-	} else
-		$where_exclus = '';
+		} else	$where_exclus = '';
 
-	$res = sql_select("id_rubrique, id_parent, titre", "spip_rubriques", "$where_id$where_exclus");
+		$res = sql_select("id_rubrique, id_parent, titre", "spip_rubriques", "$where_id$where_exclus");
 
-	$points = $rub = array();
+		$points = $rub = array();
 
-	while ($row = sql_fetch($res)) {
+		while ($row = sql_fetch($res)) {
 		$id_rubrique = $row["id_rubrique"];
 		$rub[$id_rubrique]["titre"] = typo ($row["titre"]);
 		$rub[$id_rubrique]["id_parent"] = $row["id_parent"];
 		$points[$id_rubrique] = $points[$id_rubrique] + 3;
-	}
-	$res = sql_select("id_rubrique, id_parent, titre", "spip_rubriques", "$where_titre$where_exclus");
-	while ($row = sql_fetch($res)) {
+		}
+		$res = sql_select("id_rubrique, id_parent, titre", "spip_rubriques", "$where_titre$where_exclus");
+
+		while ($row = sql_fetch($res)) {
 		$id_rubrique = $row["id_rubrique"];
 		$rub[$id_rubrique]["titre"] = typo ($row["titre"]);
 		$rub[$id_rubrique]["id_parent"] = $row["id_parent"];
 		if (isset($points[$id_rubrique]))
 		  $points[$id_rubrique] += 2;
 		else $points[$id_rubrique] = 0;
-	}
-	$res = sql_select("id_rubrique, id_parent, titre", "spip_rubriques", "$where_desc$where_exclus");
-	while ($row = sql_fetch($res)) {
+		}
+		$res = sql_select("id_rubrique, id_parent, titre", "spip_rubriques", "$where_desc$where_exclus");
+
+		while ($row = sql_fetch($res)) {
 		$id_rubrique = $row["id_rubrique"];
 		$rub[$id_rubrique]["titre"] = typo ($row["titre"]);
 		$rub[$id_rubrique]["id_parent"] = $row["id_parent"];
 		if (isset($points[$id_rubrique]))
 		  $points[$id_rubrique] += 1;
 		else $points[$id_rubrique] = 0;
-	}
-		
+		}
 
-	if ($points) {
-		arsort($points);
-		$style = " style='background-image: url(" . _DIR_IMG_PACK . "secteur-12.gif)'";
-		foreach($rub as $k => $v) {
+		if ($points) {
+			arsort($points);
+			$style = " style='background-image: url(" . _DIR_IMG_PACK . "secteur-12.gif)'";
+			foreach($rub as $k => $v) {
 			$rub[$k]['atts'] = ($v["id_parent"] ? $style : '')
 			. " class='arial11 petite-rubrique'";
+			}
 		}
-	}
 
-	ajax_retour(proposer_item($points, $rub, $rac, $type, $do));
+		ajax_retour(proposer_item($points, $rub, $rac, $type, $do));
+	}
 
 }
 

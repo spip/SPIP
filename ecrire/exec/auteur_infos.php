@@ -17,7 +17,6 @@ include_spip('inc/autoriser');
 
 // http://doc.spip.org/@exec_auteur_infos_dist
 function exec_auteur_infos_dist() {
-	global $connect_id_auteur, $spip_display;
 
 	$id_auteur = intval(_request('id_auteur'));
 	$redirect = _request('redirect');
@@ -42,9 +41,14 @@ function exec_auteur_infos_dist() {
 	}
 
 	if (!$auteur AND !$new AND !$echec) {
-		include_spip('inc/headers');
-		redirige_par_entete(generer_url_ecrire('auteurs'));
-	}
+		include_spip('inc/minipres');
+		echo minipres(_T('public:aucun_auteur'));
+	} else auteur_infos_ok($auteur, $id_auteur, $echec, $new, $redirect);
+}
+
+function auteur_infos_ok($auteur, $id_auteur, $echec, $new, $redirect)
+{
+	global $connect_id_auteur;
 
 	$auteur_infos = charger_fonction('auteur_infos', 'inc');
 	$fiche = $auteur_infos($auteur, $new, $echec, _request('edit'), intval(_request('lier_id_article')), $redirect);

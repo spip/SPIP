@@ -23,8 +23,7 @@ function exec_sites_dist()
 	if (!autoriser('voir','site',$id_syndic)){
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
-	}
+	} else {
 
 	$result = sql_select("*", "spip_syndic", "id_syndic=$id_syndic");
 
@@ -47,6 +46,7 @@ function exec_sites_dist()
 	else 
 		afficher_site($id_syndic, $id_rubrique, $nom_site, $row);
 	echo fin_page();
+	}
 }
 
 

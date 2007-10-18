@@ -48,30 +48,30 @@ global  $champs_extra, $connect_statut, $spip_display, $les_notes;
 		if (!$new OR !autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe))) {
 			include_spip('inc/minipres');
 			echo minipres(_T('info_mot_sans_groupe'));
-			exit;
-		}
-		$id_mot = 0;
-		$descriptif = $texte = '';
-		if (!$titre_mot = $titre) {
-			$titre_mot = filtrer_entites(_T('texte_nouveau_mot'));
-			$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
-		}
-		$res = sql_countsel('spip_groupes_mots', ($table ? "$table='oui'" : ''));
+		} else {
+			$id_mot = 0;
+			$descriptif = $texte = '';
+			if (!$titre_mot = $titre) {
+				$titre_mot = filtrer_entites(_T('texte_nouveau_mot'));
+				$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
+			}
+			$row = sql_countsel('spip_groupes_mots', ($table ? "$table='oui'" : ''));
 
-		if (!$res) {
+			if (!$row) {
 		  // cas pathologique: 
 		  // creation d'un mot sans groupe de mots cree auparavant
 		  // (ne devrait arriver qu'en cas d'appel explicite ou
 		  // destruction concomittante des groupes de mots idoines)
-			if ($redirect)
-				$redirect = '&redirect=' . $redirect;
-			if ($titre)
-				$titre = "&titre=".rawurlencode($titre);
-			include_spip('inc/headers');
-			redirige_par_entete(redirige_action_auteur('instituer_groupe_mots', $table, 'mots_edit', "new=$new&table=$table&table_id=$table_id&ajouter_id_article=$ajouter_id_article$titre$redirect", true));
+				if ($redirect)
+					$redirect = '&redirect=' . $redirect;
+				if ($titre)
+					$titre = "&titre=".rawurlencode($titre);
+				include_spip('inc/headers');
+				redirige_par_entete(redirige_action_auteur('instituer_groupe_mots', $table, 'mots_edit', "new=$new&table=$table&table_id=$table_id&ajouter_id_article=$ajouter_id_article$titre$redirect", true));
+			}
 		}
 	 }
-
+	 if ($row) {
 	 pipeline('exec_init',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
 
 	 $commencer_page = charger_fonction('commencer_page', 'inc');
@@ -219,6 +219,7 @@ global  $champs_extra, $connect_statut, $spip_display, $les_notes;
 	}
 
 	echo $out, fin_gauche(), fin_page();
+	 }
 }
 
 

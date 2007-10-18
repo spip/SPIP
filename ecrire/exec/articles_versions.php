@@ -21,15 +21,9 @@ function exec_articles_versions_dist()
 {
 	include_spip('inc/suivi_versions');
 
-	global $les_notes, $champs_extra, $spip_lang_left, $spip_lang_right;
-
 	$id_article = intval(_request('id_article'));
 	$id_version = intval(_request('id_version'));
 	$id_diff = intval(_request('id_diff')); // code mort ?
-
-//
-// Lire l'article
-//
 
 	$row = sql_fetsel("*", "spip_articles", "id_article=$id_article");
 
@@ -37,8 +31,12 @@ function exec_articles_versions_dist()
 		OR !$row) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
-	}
+	} else articles_versions_ok($row, $id_article, $id_version, $id_diff);
+}
+
+function articles_versions_ok($row, $id_article, $id_version, $id_diff)
+{
+	global $les_notes, $champs_extra, $spip_lang_left, $spip_lang_right;
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	$id_article = $row["id_article"];

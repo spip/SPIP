@@ -22,18 +22,18 @@ function exec_rechercher_auteur_dist()
 	      {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
-	      }
-	include_spip('inc/actions');
-	$where = split("[[:space:]]+", _request('nom'));
-	if ($where) {
-		foreach ($where as $k => $v) 
+	      } else {
+		include_spip('inc/actions');
+		$where = split("[[:space:]]+", _request('nom'));
+		if ($where) {
+		  foreach ($where as $k => $v) 
 			$where[$k] = "'%" . substr(str_replace("%","\%", _q($v)),1,-1) . "%'";
-		$where= ("(nom LIKE " . join(" AND nom LIKE ", $where) . ")");
-	}
+		  $where= ("(nom LIKE " . join(" AND nom LIKE ", $where) . ")");
+		}
 
-	$q = sql_select("*", "spip_auteurs", "$where", "", "nom");
-	include_spip('inc/selectionner_auteur');
-	ajax_retour(selectionner_auteur_boucle($q, $idom));
+		$q = sql_select("*", "spip_auteurs", "$where", "", "nom");
+		include_spip('inc/selectionner_auteur');
+		ajax_retour(selectionner_auteur_boucle($q, $idom));
+	}
 }
 ?>
