@@ -35,8 +35,6 @@ function base_convert_sql_utf8_dist($titre, $reprise=false)
 
 // http://doc.spip.org/@convert_sql_utf8
 function convert_sql_utf8(){
-	include_spip('base/db_mysql');
-	include_spip('base/abstract_sql');
 
 	define(_DEBUG_CONVERT, false);
 	$charset_spip = $GLOBALS['meta']['charset'];

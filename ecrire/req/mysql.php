@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // fonction pour la premiere connexion a un serveur MySQL
 
 // http://doc.spip.org/@base_db_mysql_dist
-function base_db_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='', $ldap='') {
+function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='', $ldap='') {
 	if ($port > 0) $host = "$host:$port";
 	$link = mysql_connect($host, $login, $pass);
 
