@@ -10,20 +10,20 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
-include_spip('inc/presentation');
-include_spip('inc/revisions');
 
 // http://doc.spip.org/@exec_articles_versions_dist
 function exec_articles_versions_dist()
 {
-	include_spip('inc/suivi_versions');
+	exec_articles_versions_args(intval(_request('id_article')),
+		intval(_request('id_version')),
+		intval(_request('id_diff'))); // code mort ?
+}
 
-	$id_article = intval(_request('id_article'));
-	$id_version = intval(_request('id_version'));
-	$id_diff = intval(_request('id_diff')); // code mort ?
+// http://doc.spip.org/@articles_versions_ok
+function exec_articles_versions_args($id_article, $id_version, $id_diff)
+{
+	global $les_notes, $champs_extra, $spip_lang_left, $spip_lang_right;
 
 	$row = sql_fetsel("*", "spip_articles", "id_article=$id_article");
 
@@ -31,14 +31,10 @@ function exec_articles_versions_dist()
 		OR !$row) {
 		include_spip('inc/minipres');
 		echo minipres();
-	} else articles_versions_ok($row, $id_article, $id_version, $id_diff);
-}
-
-// http://doc.spip.org/@articles_versions_ok
-function articles_versions_ok($row, $id_article, $id_version, $id_diff)
-{
-	global $les_notes, $champs_extra, $spip_lang_left, $spip_lang_right;
-
+	} else {
+	include_spip('inc/suivi_versions');
+	include_spip('inc/presentation');
+	include_spip('inc/revisions');
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	$id_article = $row["id_article"];
 	$id_rubrique = $row["id_rubrique"];
@@ -272,7 +268,7 @@ echo fin_cadre_relief(true);
 
 
 echo  fin_gauche(), fin_page();
-
+	}
 }
 
 ?>

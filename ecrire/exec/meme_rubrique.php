@@ -15,10 +15,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@exec_meme_rubrique_dist
 function exec_meme_rubrique_dist()
 {
-	$id = intval(_request('id'));
-	$type = _request('type');
-	$order = _request('order');
+	exec_meme_rubrique_args(intval(_request('id')), _request('type'), _request('order'));
+}
 
+function exec_meme_rubrique_args($id, $type, $order)
+{
         if ((!autoriser('publierdans','rubrique',$id))
 	OR (!preg_match('/^[\w_-]+$/',$order))
 	OR (!preg_match('/^[\w_-]+$/',$type))) {

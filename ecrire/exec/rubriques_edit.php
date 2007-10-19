@@ -18,9 +18,13 @@ include_spip('inc/documents');
 // http://doc.spip.org/@exec_rubriques_edit_dist
 function exec_rubriques_edit_dist()
 {
+	exec_rubriques_edit_args(intval(_request('id_rubrique')), intval(_request('id_parent')), _request('new'));
+}
+
+function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
+{
 	global $connect_toutes_rubriques, $champs_extra, $connect_statut, $spip_lang_right;
 
-	$new = _request('new');
 	$titre = false;
 
 	if ($new == "oui") {
@@ -29,25 +33,21 @@ function exec_rubriques_edit_dist()
 		$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 		$descriptif = "";
 		$texte = "";
-		$id_parent = intval(_request('id_parent'));
 
 		if (!autoriser('creerrubriquedans','rubrique',$id_parent)) {
 			$id_parent = intval(reset($GLOBALS['connect_id_rubrique']));
 		}
 	} else {
-		$id_rubrique = intval(_request('id_rubrique'));
-
 		$row = sql_fetsel("*", "spip_rubriques", "id_rubrique=$id_rubrique");
-	
 		if ($row) {
 	
-		$id_parent = $row['id_parent'];
-		$titre = $row['titre'];
-		$descriptif = $row['descriptif'];
-		$texte = $row['texte'];
-		$id_secteur = $row['id_secteur'];
-		$extra = $row["extra"];
-		$onfocus = '';
+			$id_parent = $row['id_parent'];
+			$titre = $row['titre'];
+			$descriptif = $row['descriptif'];
+			$texte = $row['texte'];
+			$id_secteur = $row['id_secteur'];
+			$extra = $row["extra"];
+			$onfocus = '';
 		}
 	}
 	$commencer_page = charger_fonction('commencer_page', 'inc');

@@ -15,9 +15,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@exec_dater_dist
 function exec_dater_dist()
 {
-	$type = _request('type');
-	$id = intval(_request('id'));
+	exec_dater_args(intval(_request('id')), _request('type'));
+}
 
+function exec_dater_args($id, $type)
+{
 	// securite
 	if (!preg_match('/^\w+$/',$type)
 	OR !autoriser('voir',$type,$id)) {

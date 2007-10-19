@@ -18,25 +18,26 @@ include_spip('base/abstract_sql');
 // http://doc.spip.org/@exec_mots_edit_dist
 function exec_mots_edit_dist()
 {
-	global $spip_lang_right;
-// attention, ajouter_id_article n'est pas forcement un id d'article
-global  $champs_extra, $connect_statut, $spip_display, $les_notes;
-
- $id_groupe = intval(_request('id_groupe'));
- $id_mot = intval(_request('id_mot'));
- $new = _request('new');
+	exec_mots_edit_args(intval(_request('id_mot')),
+		       intval(_request('id_groupe')),
+		       _request('new'),
  // Secu un peu superfetatoire car seuls les admin generaux les verront;
  // mais si un jour on relache les droits, vaut mieux blinder.
- $table = preg_replace('/\W/','',_request('table'));
- $table_id = preg_replace('/\W/','', _request('table_id'));
- $titre = _request('titre');
- $redirect = _request('redirect');
- $ajouter_id_article = intval(_request('ajouter_id_article'));
-//
-// Recupere les donnees
-//
+		       preg_replace('/\W/','',_request('table')),
+		       preg_replace('/\W/','', _request('table_id')),
+		       _request('titre'),
+		       _request('redirect'),
+		       intval(_request('ajouter_id_article')));
+}
+
+// attention, ajouter_id_article n'est pas forcement un id d'article
+
+function exec_mots_edit_args($id_mot, $id_groupe, $new, $table, $table_id, $titre, $redirect, $ajouter_id_article)
+{
+	global $spip_lang_right, $champs_extra, $connect_statut, $spip_display, $les_notes;
+
 	$row = sql_fetsel("*", "spip_mots", "id_mot=$id_mot");
-	 if ($row) {
+	if ($row) {
 		$id_mot = $row['id_mot'];
 		$titre_mot = $row['titre'];
 		$descriptif = $row['descriptif'];

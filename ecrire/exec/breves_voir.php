@@ -20,18 +20,19 @@ include_spip("inc/indexation");
 function exec_breves_voir_dist()
 {
 	$id_breve = intval(_request('id_breve'));
+	exec_breves_voir_args($id_breve, _request('cherche_mot'), _request('select_groupe'));
+}
+
+// http://doc.spip.org/@afficher_breves_voir
+function exec_breves_voir_args($id_breve, $cherche_mot, $select_groupe)
+{
+	global $champs_extra, $les_notes, $spip_display, $spip_lang_left, $spip_lang_right;
+
 	$row = sql_fetsel("*", "spip_breves", "id_breve=$id_breve");
 	if (!$row OR !autoriser('voir','breve',$id_breve)){
 		include_spip('inc/minipres');
 		echo minipres();
-	} else afficher_breves_voir($row, $id_breve, _request('cherche_mot'), _request('select_groupe'));
-}
-
-// http://doc.spip.org/@afficher_breves_voir
-function afficher_breves_voir($row, $id_breve, $cherche_mot, $select_groupe)
-{
-	global $champs_extra, $les_notes, $spip_display, $spip_lang_left, $spip_lang_right;
-
+	} else {
 	$id_breve=$row['id_breve'];
 	$date_heure=$row['date_heure'];
 	$titre_breve=$row['titre'];
@@ -180,6 +181,7 @@ function afficher_breves_voir($row, $id_breve, $cherche_mot, $select_groupe)
 	  . (_INTERFACE_ONGLETS?"":$onglet_discuter)
 	  . fin_gauche()
 	  . fin_page();
+	}
 }
 
 // http://doc.spip.org/@langue_breve

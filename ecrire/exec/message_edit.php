@@ -19,12 +19,13 @@ include_spip('inc/date');
 // http://doc.spip.org/@exec_message_edit_dist
 function exec_message_edit_dist()
 {
+	exec_message_edit_args(intval(_request('id_message')), intval(_request('dest')), _request('new'));
+}
+function exec_message_edit_args($id_message,$dest, $new)
+{
 	global  $connect_id_auteur, $connect_statut;
 
-	$id_message =  intval(_request('id_message'));
-	$dest = intval(_request('dest'));
-
-	if (_request('new')=='oui') {
+	if ($new == 'oui') {
 		$onfocus = "\nonfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 	} else $onfocus = '';
 
