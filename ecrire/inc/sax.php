@@ -188,7 +188,9 @@ function inc_sax_dist($page, $apply=false)
 
 	if ($apply) {
 		ob_start();
-		$page();
+		if (is_array($apply))
+		  call_user_func_array($page, $apply);
+		else $page();
 		$page = ob_get_contents();
 		ob_end_clean();
 	}
