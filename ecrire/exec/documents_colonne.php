@@ -20,6 +20,7 @@ function exec_documents_colonne_dist()
 		_request('show_docs'));
 }
 
+// http://doc.spip.org/@exec_documents_colonne_args
 function exec_documents_colonne_args($id, $type, $show)
 {
 	if (!$type OR !autoriser('joindredocument', $type, $id)) {

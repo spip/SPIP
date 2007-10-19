@@ -23,7 +23,7 @@ function exec_breves_voir_dist()
 	exec_breves_voir_args($id_breve, _request('cherche_mot'), _request('select_groupe'));
 }
 
-// http://doc.spip.org/@afficher_breves_voir
+// http://doc.spip.org/@exec_breves_voir_args
 function exec_breves_voir_args($id_breve, $cherche_mot, $select_groupe)
 {
 	global $champs_extra, $les_notes, $spip_display, $spip_lang_left, $spip_lang_right;

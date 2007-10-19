@@ -24,6 +24,7 @@ function exec_auteur_infos_dist() {
 		_request('redirect'));
 }
 
+// http://doc.spip.org/@exec_auteur_infos_args
 function exec_auteur_infos_args($id_auteur, $echec, $new, $redirect)
 {
 	pipeline('exec_init',

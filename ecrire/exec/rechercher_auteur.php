@@ -20,6 +20,7 @@ function exec_rechercher_auteur_dist()
 	exec_rechercher_auteur_args(_request('idom'));
 }
 
+// http://doc.spip.org/@exec_rechercher_auteur_args
 function exec_rechercher_auteur_args($idom)
 {
 	if (!preg_match('/\w+/',$idom))

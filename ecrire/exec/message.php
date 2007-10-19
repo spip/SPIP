@@ -22,6 +22,7 @@ function exec_message_dist()
 	exec_message_args(intval(_request('id_message')),_request('forcer_dest'),  _request('cherche_auteur'));
 }
 
+// http://doc.spip.org/@exec_message_args
 function exec_message_args($id_message, $forcer_dest, $cherche_auteur)
 {
 	global  $connect_id_auteur;

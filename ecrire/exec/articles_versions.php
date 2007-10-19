@@ -20,7 +20,7 @@ function exec_articles_versions_dist()
 		intval(_request('id_diff'))); // code mort ?
 }
 
-// http://doc.spip.org/@articles_versions_ok
+// http://doc.spip.org/@exec_articles_versions_args
 function exec_articles_versions_args($id_article, $id_version, $id_diff)
 {
 	global $les_notes, $champs_extra, $spip_lang_left, $spip_lang_right;

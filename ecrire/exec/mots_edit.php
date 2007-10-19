@@ -32,6 +32,7 @@ function exec_mots_edit_dist()
 
 // attention, ajouter_id_article n'est pas forcement un id d'article
 
+// http://doc.spip.org/@exec_mots_edit_args
 function exec_mots_edit_args($id_mot, $id_groupe, $new, $table, $table_id, $titre, $redirect, $ajouter_id_article)
 {
 	global $spip_lang_right, $champs_extra, $connect_statut, $spip_display, $les_notes;

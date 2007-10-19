@@ -21,6 +21,7 @@ function exec_articles_dist()
 	exec_articles_args(intval(_request('id_article')));
 }
 
+// http://doc.spip.org/@exec_articles_args
 function exec_articles_args($id_article)
 {
 	pipeline('exec_init',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));

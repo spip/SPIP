@@ -21,6 +21,7 @@ function exec_documenter_dist()
 	exec_documenter_args($id, $type, $script, _request('s'));
 }
 
+// http://doc.spip.org/@exec_documenter_args
 function exec_documenter_args($id, $type, $script, $album)
 {
 	if (!$id OR !autoriser('modifier', $type, $id)) {

@@ -18,6 +18,7 @@ function exec_dater_dist()
 	exec_dater_args(intval(_request('id')), _request('type'));
 }
 
+// http://doc.spip.org/@exec_dater_args
 function exec_dater_args($id, $type)
 {
 	// securite

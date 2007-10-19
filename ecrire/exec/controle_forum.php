@@ -202,6 +202,7 @@ function exec_controle_forum_dist()
 			   _request('recherche'));
 }
 
+// http://doc.spip.org/@exec_controle_forum_args
 function exec_controle_forum_args($id_rubrique,	$type,	$debut,	$recherche)
 {
 	if (!autoriser('publierdans','rubrique',$id_rubrique)) {

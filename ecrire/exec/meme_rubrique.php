@@ -18,6 +18,7 @@ function exec_meme_rubrique_dist()
 	exec_meme_rubrique_args(intval(_request('id')), _request('type'), _request('order'));
 }
 
+// http://doc.spip.org/@exec_meme_rubrique_args
 function exec_meme_rubrique_args($id, $type, $order)
 {
         if ((!autoriser('publierdans','rubrique',$id))

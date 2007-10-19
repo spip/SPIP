@@ -22,6 +22,7 @@ function exec_iconifier_dist()
 	iconifier_args(intval(_request($type)), $type,_request("script"));
 }
 
+// http://doc.spip.org/@iconifier_args
 function iconifier_args($id, $type, $script)
 {
 	global $connect_id_auteur, $connect_toutes_rubriques;;
