@@ -12,30 +12,30 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/headers');
-
 // demande/verifie le droit de creation de repertoire par le demandeur;
 // memorise dans les meta que ce script est en cours d'execution
 // si elle y est deja c'est qu'il y a eu suspension du script, on reprend.
 
 // http://doc.spip.org/@inc_admin_dist
-function inc_admin_dist($script, $titre, $comment='', $retour='')
+function inc_admin_dist($script, $titre, $comment='')
 {
 	$reprise = true;
 	if (!isset($GLOBALS['meta'][$script])
 	OR  !isset($GLOBALS['meta']['admin'])) {
 		$reprise = false;
-		debut_admin($script, $titre, $comment); 
+		$res = debut_admin($script, $titre, $comment); 
+		if ($res) return $res;
 		spip_log("meta: $script " . join(',', $_POST));
 		ecrire_meta($script, serialize($_POST));
 	} 
-	if  ($script !== 'admin_repair')
-		admin_verifie_session($script);
-
+	if  ($script !== 'admin_repair') {
+		$res = admin_verifie_session($script);
+		if ($res) return $res;
+	}
 	$base = charger_fonction($script, 'base');
 	$base($titre,$reprise);
 	fin_admin($script);
-	if ($retour) redirige_par_entete($retour);
+	return '';
 }
 
 // Gestion dans la meta "admin" du script d'administation demande,
@@ -66,13 +66,13 @@ function admin_verifie_session($script) {
 		if ($valeur != $signal) {
 			if (intval(substr($valeur, strpos($valeur,'_')+1))<>
 			    $GLOBALS['auteur_session']['id_auteur']) {
-			  include_spip('inc/minipres');
-			  echo minipres(_T('info_travaux_texte'));
-			  exit;
+				include_spip('inc/minipres');
+				return minipres(_T('info_travaux_texte'));
 			}
 		}
 	}
-	spip_log("admin $pref" . ($row ? " (reprise)" : ' (init)'));
+	spip_log("admin $pref" . ($valeur ? " (reprise)" : ' (init)'));
+	return '';
 }
 
 // http://doc.spip.org/@dir_admin
@@ -100,56 +100,54 @@ function debut_admin($script, $action='', $corps='') {
 
 	if ((!$action) || (!autoriser('chargerftp'))) {
 		include_spip('inc/minipres');
-		echo minipres();
-		exit;
-	}
-	$dir = dir_admin();
-	$signal = fichier_admin($script);
-	if (@file_exists($dir . $signal)) {
-		spip_log ("Action admin: $action");
-		return true;
-	}
-	include_spip('inc/minipres');
+		return minipres();
+	} else {
+		$dir = dir_admin();
+		$signal = fichier_admin($script);
+		if (@file_exists($dir . $signal)) {
+			spip_log ("Action admin: $action");
+			return '';
+		}
+		include_spip('inc/minipres');
 
 	// Si on est un super-admin, un bouton de validation suffit
 	// sauf dans les cas destroy
-	if ((autoriser('webmestre') OR $script === 'admin_repair')
-	AND $script != 'delete_all') {
-		if (_request('validation_admin') == $signal) {
-			spip_log ("Action super-admin: $action");
-			return;
-		}
-		$corps .= '<input type="hidden" name="validation_admin" value="'.$signal.'" />';
-		$suivant = _T('bouton_valider');
+		if ((autoriser('webmestre') OR $script === 'admin_repair')
+		AND $script != 'delete_all') {
+			if (_request('validation_admin') == $signal) {
+				spip_log ("Action super-admin: $action");
+				return '';
+			}
+			$corps .= '<input type="hidden" name="validation_admin" value="'.$signal.'" />';
+			$suivant = _T('bouton_valider');
+			$js = '';
+		} else {
+			$corps .= "<fieldset><legend>"
+			. _T('info_authentification_ftp')
+			. aide("ftp_auth")
+			. "</legend>\n<label for='fichier'>"
+			. _T('info_creer_repertoire')
+			. "</label>\n"
+			. "<input class='formo' size='40' id='fichier' name='fichier' value='"
+			. $signal
+			. "' /><br />"
+			. _T('info_creer_repertoire_2', array('repertoire' => joli_repertoire($dir)))
+			. "</fieldset>";
 
-		$js = '';
-	} else {
-		$corps .= "<fieldset><legend>"
-		. _T('info_authentification_ftp')
-		. aide("ftp_auth")
-		. "</legend>\n<label for='fichier'>"
-		. _T('info_creer_repertoire')
-		. "</label>\n"
-		. "<input class='formo' size='40' id='fichier' name='fichier' value='"
-		. $signal
-		. "' /><br />"
-		. _T('info_creer_repertoire_2', array('repertoire' => joli_repertoire($dir)))
-		. "</fieldset>";
-
-
-		$suivant = _T('bouton_recharger_page');
+			$suivant = _T('bouton_recharger_page');
 
 	// code volontairement tordu:
 	// provoquer la copie dans le presse papier du nom du repertoire
 	// en remettant a vide le champ pour que ca marche aussi en cas
 	// de JavaScript inactif.
 
-		$js = " onload='document.forms[0].fichier.value=\"\";barre_inserer(\"$signal\", document.forms[0].fichier)'";
-	}
+			$js = " onload='document.forms[0].fichier.value=\"\";barre_inserer(\"$signal\", document.forms[0].fichier)'";
+		}
 
-	$form = copy_request($script, $corps, $suivant);
-	echo minipres(_T('info_action', array('action' => $action)), $form, $js);
-	exit;
+		$form = copy_request($script, $corps, $suivant);
+		$info_action = _T('info_action', array('action' => $action));
+		return minipres($info_action, $form, $js);
+	}
 }
 
 // http://doc.spip.org/@fin_admin

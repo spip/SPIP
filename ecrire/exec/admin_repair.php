@@ -46,11 +46,10 @@ function exec_admin_repair_dist()
 	}
 	if ($ok) {
 		$admin = charger_fonction('admin', 'inc');
-		$admin('admin_repair', $action, $message);
+		echo $admin('admin_repair', $action, $message);
 	} else {
 		include_spip('inc/minipres');
 		echo minipres(_T('titre_reparation'), "<p>$message</p>");
-		exit;
 	}
 }
 ?>

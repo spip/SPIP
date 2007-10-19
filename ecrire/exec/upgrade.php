@@ -52,10 +52,10 @@ function exec_upgrade_dist() {
 	else $commentaire = _T('texte_mise_a_niveau_base_1');
 
 	$_POST['reinstall'] = 'non'; // pour copy_request dans admin
-
-	$r = generer_action_auteur('purger', 'cache', _DIR_RESTREINT_ABS, true);
+	include_spip('inc/headers');
 	$admin = charger_fonction('admin', 'inc');
-	$admin('upgrade', _T('info_mise_a_niveau_base'), $commentaire, $r);
+	$res = $admin('upgrade', _T('info_mise_a_niveau_base'), $commentaire);
+	if ($res) echo $res; else redirige_par_entete(generer_action_auteur('purger', 'cache', _DIR_RESTREINT_ABS, true));
 	}
 }
 ?>

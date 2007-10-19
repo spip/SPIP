@@ -35,7 +35,7 @@ function exec_import_all_dist()
 	$action = _T('info_restauration_sauvegarde', 
 		     array('archive' => $archive));
 	$admin = charger_fonction('admin', 'inc');
-	$admin('import_all', $action, $commentaire);
+	echo $admin('import_all', $action, $commentaire);
 }
 
 
