@@ -168,9 +168,9 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 	// et masquer le formulaire si on n'en a pas besoin
 
 	if (!$new AND !$echec AND !$edit) {
-		$corps .= "<script>jQuery('#auteur_infos_edit').hide()</script>\n";
+		$corps .= "<script type='text/javascript'>jQuery('#auteur_infos_edit').hide()</script>\n";
 	} else {
-		$corps .= "<script>jQuery('#auteur_infos_voir').hide()</script>\n";
+		$corps .= "<script type='text/javascript'>jQuery('#auteur_infos_voir').hide()</script>\n";
 	}
 
 	// Formulaire de statut

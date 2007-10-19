@@ -36,23 +36,25 @@ function exec_controle_petition_dist()
 			$id_article > 0
 			AND autoriser('modererpetition', 'article', $id_article)
 			)
-		))
-	  {include_spip('inc/minipres'); echo minipres(); exit;}
+		)) {
+	  include_spip('inc/minipres'); 
+	  echo minipres();}
+	else {
 
-	$debut = intval(_request('debut'));
+		$debut = intval(_request('debut'));
 
-	$signatures = charger_fonction('signatures', 'inc');
+		$signatures = charger_fonction('signatures', 'inc');
 
-	$r = $signatures('controle_petition',
+		$r = $signatures('controle_petition',
 			$id_article,
 			$debut, 
 			"(statut='publie' OR statut='poubelle')",
 			"date_time DESC",
 			10);
 
-	if (_request('var_ajaxcharset'))
-		ajax_retour($r);
-	else {
+		if (_request('var_ajaxcharset'))
+			ajax_retour($r);
+		else {
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('titre_page_controle_petition'), "forum", "suivi-petition");
@@ -83,6 +85,7 @@ function exec_controle_petition_dist()
 		  echo  "<div id='", $a, "' class='serif2'>", $r, "</div>";
 		}
 		echo fin_gauche(), fin_page();
+		}
 	}
 }
 

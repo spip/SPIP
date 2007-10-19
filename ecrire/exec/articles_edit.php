@@ -19,34 +19,34 @@ include_spip('inc/documents');
 // http://doc.spip.org/@exec_articles_edit_dist
 function exec_articles_edit_dist()
 {
-  articles_edit(_request('id_article'), // intval plus tard
+	exec_articles_edit_args(_request('id_article'), // intval plus tard
 		intval(_request('id_rubrique')),
 		intval(_request('lier_trad')),
 		intval(_request('id_version')),
-		((_request('new') == 'oui') ? 'new' : ''),
-		'articles_edit_config');
+		((_request('new') == 'oui') ? 'new' : ''));
 }
 
 
 // http://doc.spip.org/@articles_edit
-function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new, $config_fonc)
+function exec_articles_edit_args($id_article, $id_rubrique,$lier_trad,  $id_version, $new)
 {
 	$row = article_select($id_article ? $id_article : $new, $id_rubrique,  $lier_trad, $id_version);
-	$id_article = $row['id_article'];
-	$id_rubrique = $row['id_rubrique'];
-	$titre = sinon($row["titre"],_T('info_sans_titre'));
 	
-	$commencer_page = charger_fonction('commencer_page', 'inc');
 	if (!$row
 	  OR ($new AND !autoriser('creerarticledans','rubrique',$id_rubrique)) 
 	  OR (!$new AND (!autoriser('voir', 'article', $id_article)	OR !autoriser('modifier','article', $id_article))) 
 	  ) {
-		echo $commencer_page(_T('info_modifier_titre', array('titre' => $titre)), "naviguer", "rubriques", $id_rubrique);
-		echo "<strong>"._T('avis_acces_interdit')."</strong>";
-		echo fin_page();
-		exit;
-	}
+		include_spip('inc/minipres');
+		echo minipres(_T('public:aucun_article'));
+	} else articles_edit($id_article, $id_rubrique,$lier_trad, $id_version, $new, 'articles_edit_config', $row);
+}
 
+function articles_edit($id_article, $id_rubrique, $lier_trad, $id_version, $new, $config_fonc, $row)
+{
+	$id_article = $row['id_article'];
+	$id_rubrique = $row['id_rubrique'];
+	$titre = sinon($row["titre"],_T('info_sans_titre'));
+	$commencer_page = charger_fonction('commencer_page', 'inc');
 	pipeline('exec_init',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));
 	
 	if ($id_version) $titre.= ' ('._T('version')." $id_version)";

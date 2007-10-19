@@ -87,25 +87,26 @@ function valider_resultats($res)
 {
 	$i = 0;
 	$table = '';
+	rsort($res);
 	foreach($res as $l) {
 		$i++;
 		$class = 'row_'.alterner($i, 'even', 'odd');
-		list($script, $texte, $erreurs) = $l;
+		list($erreurs, $texte, $script) = $l;
 		if ($texte < 0) {
 			$texte = (0- $texte);
 			$color = ";color: red";
 		} else  {$color = '';}
 		$h = generer_url_ecrire('valider_xml', "var_url=$script");
 		$table .= "<tr class='$class'>"
+		. "<td style='text-align: right'>$erreurs</td>"
 		. "<td><a href='$h'>$script</a></td>"
-		. "<td style='text-align: right$color'>$texte</td>"
-		. "<td style='text-align: right'>$erreurs</td>";
+		. "<td style='text-align: right$color'>$texte</td>";
 	}
 	return "<table class='spip'>"
-	  . "<tr><th>script</th><th>"
-	  . _T('taille_octets', array('taille' => ' '))
-	  . "</th><th>" 
+	  . "<tr><th>" 
 	  . _T('erreur_texte')
+	  . "</th><th>script</th><th>"
+	  . _T('taille_octets', array('taille' => ' '))
 	  . "</th></tr>"
 	  . $table
 	  . "</table>";
@@ -120,7 +121,7 @@ function controle_une_url($transformer_xml, $script, $dir)
 	    OR $script=='index' 
 	    OR $script == 'export_all'
 	    OR $script == 'import_all')
-		return array($script, '/', '/'); 
+		return array('/', $script, '/'); 
 
 	unset($GLOBALS['xhtml_error']);
 	$f = charger_fonction($script, $dir, true);
@@ -152,6 +153,6 @@ function controle_une_url($transformer_xml, $script, $dir)
 		       PREG_SET_ORDER);
 		$n = count($regs);
 	} else $n = 0;
-	return array($script, $res, $n);
+	return array($n, $res, $script);
 }
 ?>

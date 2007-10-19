@@ -200,10 +200,10 @@ function ajax_retour($corps,$xml = true)
 	if (isset($GLOBALS['transformer_xml']) OR $GLOBALS['exec'] == 'valider_xml') {
 	 	echo _DOCTYPE_ECRIRE
 		. "<html><head><title>Debug Spip Ajax</title></head>"
-		.  "<body>\n\n"
+		.  "<body><div>\n\n"
 		. "<!-- %%%%%%%%%%%%%%%%%%% Ajax %%%%%%%%%%%%%%%%%%% -->\n"
 		. $corps
-		. '</body></html>';
+		. '</div></body></html>';
 		return;
 	}
 
