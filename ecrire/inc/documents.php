@@ -297,8 +297,14 @@ function est_inclus($id_document) {
 function afficher_case_document($id_document, $id, $script, $type, $deplier=false) {
 	global $spip_lang_right;
 
+	$table = 'spip_documents_' . $type . 's';
+	$prim = id_table_objet($table);
+	if (!$prim) return '';
+	$prim = 'id_' . $type;
+
 	charger_generer_url();
-	$res = sql_select("docs.id_document, docs.id_vignette,docs.extension,docs.titre,docs.descriptif,docs.fichier,docs.largeur,docs.hauteur,docs.taille,docs.mode,docs.distant, docs.date, l.vu", "spip_documents AS docs JOIN spip_documents_".$type."s AS l ON l.id_document=docs.id_document", "l.id_$type="._q($id)." AND l.id_document="._q($id_document));
+	$res = sql_select("docs.id_document, docs.id_vignette,docs.extension,docs.titre,docs.descriptif,docs.fichier,docs.largeur,docs.hauteur,docs.taille,docs.mode,docs.distant, docs.date, L.vu", "spip_documents AS docs JOIN $table AS L ON L.id_document=docs.id_document", "L.$prim="._q($id)." AND L.id_document="._q($id_document));
+
 	if (!$document = sql_fetch($res)) return "";
 	//$document = sql_fetsel("*", "spip_documents", "id_document = " . intval($id_document));
 

@@ -36,10 +36,9 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	if ($id_document) {
 		$res = sql_select("*", "spip_documents", "id_document = " . intval($id_document));
 		$document = sql_fetch($res);
-		$document['vu'] = 'non';
-		$res = sql_select("vu", "spip_documents_".$type."s", "id_$type=$id AND id_document=".intval($id_document));
-		if ($row = sql_fetch($res))
-			$document['vu'] = $row['vu'];
+		$document['vu'] = sql_getfetsel("vu", "spip_documents_".$type."s", "id_$type=" . intval($id) ." AND id_document=".intval($id_document));
+
+		if (!$document['vu']) $document['vu'] = 'non';
 		$flag = 'ajax';
 	}
 	else

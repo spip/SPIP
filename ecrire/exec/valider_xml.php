@@ -93,7 +93,7 @@ function valider_resultats($res)
 	foreach($res as $l) {
 		$i++;
 		$class = 'row_'.alterner($i, 'even', 'odd');
-		list($erreurs, $texte, $script) = $l;
+		list($erreurs, $texte, $script, $args) = $l;
 		if ($texte < 0) {
 			$texte = (0- $texte);
 			$color = ";color: red";
@@ -102,12 +102,13 @@ function valider_resultats($res)
 		$table .= "<tr class='$class'>"
 		. "<td style='text-align: right'>$erreurs</td>"
 		. "<td><a href='$h'>$script</a></td>"
+		. "<td>$args</td>"
 		. "<td style='text-align: right$color'>$texte</td>";
 	}
 	return "<table class='spip'>"
 	  . "<tr><th>" 
 	  . _T('erreur_texte')
-	  . "</th><th>script</th><th>"
+	  . "</th><th>script</th><th>args</th><th>"
 	  . _T('taille_octets', array('taille' => ' '))
 	  . "</th></tr>"
 	  . $table
@@ -124,31 +125,36 @@ function controle_une_url($transformer_xml, $script, $dir)
 	    OR $script=='index' 
 	    OR $script == 'export_all'
 	    OR $script == 'import_all')
-		return array('/', $script, '/'); 
+		return array('/', '/', $script,''); 
 
 	unset($GLOBALS['xhtml_error']);
 	$f = charger_fonction($script, $dir, true);
 	if(!$f) return false;
 	$page = $transformer_xml($f, true);
-
+	$res = strlen($page);
+	$appel = '';
+	
 	// s'il y a l'attribut minipres, le test est non significatif
-	// le script necessite peut-etre des arguments, on lui en donne un,
+	// le script necessite peut-etre des arguments, on lui en donne,
 	// en appelant la fonction _args associee si elle existe
-	// Si ca ne marche toujours pas l'argument n'est pas bon
+	// Si ca ne marche toujours pas, les arguments n'étaient pas bons
 	// ou c'est une authentification pour action d'administration;
 	// tant pis, on signale le cas par un resultat negatif
-	if (!strpos($page, "id='minipres'"))
-		$res = strlen($page);
-	else {
-		$f = charger_fonction($script . '_args', $dir, true);
-		if ($f) {
+
+	if (strpos($page, "id='minipres'")) {
+		if (!$f = charger_fonction($script . '_args', $dir, true)) {
+			$res = 0 - $res;
+		} else {
 			unset($GLOBALS['xhtml_error']);
-			$page2 = $transformer_xml($f, array(1));
+			$args = array(1, 'id_article', 1);
+			$page2 = $transformer_xml($f, $args);
+			$appel = join(', ', $args);
+			if (strpos($page2, "id='minipres'")) {
+				$res = 0 - strlen($page2);
+			} else $res = strlen($page2);
 		}
-	  	if (strpos($page2, "id='minipres'")) {
-			$res = 0 - strlen($page2);
-		} else	$res = 0 - strlen($page);
 	}
+	spip_log("validation de $script en appelant $f");
 	if (isset($GLOBALS['xhtml_error'])) {
 		preg_match_all(",(.*?)(\d+)(\D+(\d+)<br />),",
 		       $GLOBALS['xhtml_error'],
@@ -156,6 +162,6 @@ function controle_une_url($transformer_xml, $script, $dir)
 		       PREG_SET_ORDER);
 		$n = count($regs);
 	} else $n = 0;
-	return array($n, $res, $script);
+	return array($n, $res, $script, $appel);
 }
 ?>

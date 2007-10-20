@@ -19,12 +19,13 @@ include_spip('inc/editer_auteurs'); #pour determiner_auteurs_objet()
 function exec_iconifier_dist()
 {
 	$type =_request("type");
-	iconifier_args(intval(_request($type)), $type,_request("script"));
+	exec_iconifier_args(intval(_request($type)), $type,_request("script"));
 }
 
 // http://doc.spip.org/@iconifier_args
-function iconifier_args($id, $type, $script)
+function exec_iconifier_args($id, $type, $script)
 {
+  spip_log("iconifier_args($id, $type, $script");
 	global $connect_id_auteur, $connect_toutes_rubriques;;
 	if (!preg_match('/^\w+$/', "$type$script")) {
 		$droit = false;

@@ -16,10 +16,14 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_editer_mot_dist
 function exec_editer_mot_dist()
 {
-	$objet = _request('objet');
-	$id_objet = intval(_request('id_objet'));
+	exec_editer_mot_args(intval(_request('id_objet')), _request('objet'));
+}
 
-	if ($GLOBALS['connect_toutes_rubriques']) // pour eviter SQL
+function exec_editer_mot_args($id_objet, $objet)
+{
+	if (!$id_objet OR !$objet)
+		$droit = false;
+	elseif ($GLOBALS['connect_toutes_rubriques']) // pour eviter SQL
 		$droit = true;
 	elseif ($objet == 'article')
 		$droit = autoriser('modifier','article',$id_objet);

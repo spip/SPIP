@@ -15,13 +15,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@exec_tourner_dist
 function exec_tourner_dist()
 {
-	$type = _request('type');
-	$id = intval(_request('id'));
-	$id_document = intval(_request('id_document'));
+	exec_tourner_args(intval(_request('id_document')), _request('type'), intval(_request('id')));
+}
 
-	if (!($type == 'article' 
-		? autoriser('modifier','article',$id)
-		: autoriser('publierdans','rubrique',$id))) {
+function exec_tourner_args($id_document, $type, $id)
+{
+	if (!$id_document OR !($type == 'article' 
+			       ? autoriser('modifier','article',$id)
+			       : autoriser('publierdans','rubrique',$id))) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {

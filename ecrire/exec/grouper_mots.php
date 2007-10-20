@@ -17,10 +17,17 @@ include_spip('inc/actions');
 // http://doc.spip.org/@exec_grouper_mots_dist
 function exec_grouper_mots_dist()
 {
-	$id_groupe = intval(_request('id_groupe'));
-	$cpt = sql_fetsel("COUNT(*) AS n", "spip_mots", "id_groupe=$id_groupe");
-	if (! ($cpt = $cpt['n'])) ajax_retour('') ;
-	$grouper_mots = charger_fonction('grouper_mots', 'inc');
-	ajax_retour($grouper_mots($id_groupe, $cpt));
+	exec_grouper_mots_args(intval(_request('id_groupe')));
+}
+
+function exec_grouper_mots_args($id_groupe)
+{
+	$cpt = sql_countsel("spip_mots", "id_groupe=$id_groupe");
+	if (!$cpt) 
+	  ajax_retour('') ;
+	else {
+	  $grouper_mots = charger_fonction('grouper_mots', 'inc');
+	  ajax_retour($grouper_mots($id_groupe, $cpt));
+	}
 }
 ?>
