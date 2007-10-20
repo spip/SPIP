@@ -23,6 +23,7 @@ function exec_naviguer_dist()
 			   intval(_request('select_groupe')));
 }
 
+// http://doc.spip.org/@exec_naviguer_args
 function exec_naviguer_args($id_rubrique, $cherche_mot, $select_groupe)
 {
 	if (!$id_rubrique) {

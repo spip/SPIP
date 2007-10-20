@@ -42,6 +42,7 @@ function exec_statistiques_svg_dist()
 	}
 }
 
+// http://doc.spip.org/@exec_statistiques_svg_ok
 function exec_statistiques_svg_ok($id_article,  $aff_jours, $visites_today, $expire)
 {
 	$date = gmdate("D, d M Y H:i:s", $date);

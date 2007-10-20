@@ -22,6 +22,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 // Log des appels aux vieilles_defs
+// http://doc.spip.org/@vieilles_log
 function vieilles_log($quoi) {
 	static $vus = array();
 	$c = crc32($quoi);

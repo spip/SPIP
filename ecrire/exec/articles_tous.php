@@ -23,6 +23,7 @@ function exec_articles_tous_dist()
 				_request('var_ajaxcharset'));
 }
 
+// http://doc.spip.org/@exec_articles_tous_args
 function exec_articles_tous_args($id_rubrique, $aff_art, $sel_lang, $var_ajaxcharset)
 {
 	global $browser_layer,$spip_lang_right,$spip_lang_left;

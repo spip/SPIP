@@ -18,10 +18,12 @@ include_spip('inc/plugin');
 // des listes de plugins a telecharger, dans exec=admin_plugin
 // http://doc.spip.org/@exec_charger_plugin_descr_dist
 
+// http://doc.spip.org/@exec_charger_plugin_descr_dist
 function exec_charger_plugin_descr_dist() {
 	exec_charger_plugin_descr_args( _request('url'));
 }
 
+// http://doc.spip.org/@exec_charger_plugin_descr_args
 function exec_charger_plugin_descr_args($url_plugin) {
 
 	if (!autoriser('configurer', 'plugins')) {

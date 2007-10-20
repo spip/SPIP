@@ -20,6 +20,7 @@ function exec_grouper_mots_dist()
 	exec_grouper_mots_args(intval(_request('id_groupe')));
 }
 
+// http://doc.spip.org/@exec_grouper_mots_args
 function exec_grouper_mots_args($id_groupe)
 {
 	$cpt = sql_countsel("spip_mots", "id_groupe=$id_groupe");

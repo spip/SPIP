@@ -22,6 +22,7 @@ function exec_legender_dist()
 			   intval(_request('id')));
 }
 
+// http://doc.spip.org/@exec_legender_args
 function exec_legender_args($id_document, $type, $ancre, $script, $id)
 {
 	if (!$id_document OR !autoriser('joindredocument',$type, $id)) {
