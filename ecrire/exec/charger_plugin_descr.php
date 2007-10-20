@@ -17,15 +17,19 @@ include_spip('inc/plugin');
 // Un morceau d'ajax qui affiche le descriptif d'un plugin a partir
 // des listes de plugins a telecharger, dans exec=admin_plugin
 // http://doc.spip.org/@exec_charger_plugin_descr_dist
+
 function exec_charger_plugin_descr_dist() {
+	exec_charger_plugin_descr_args( _request('url'));
+}
+
+function exec_charger_plugin_descr_args($url_plugin) {
 
 	if (!autoriser('configurer', 'plugins')) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
-	}
+	} else {
 
-	if ($url_plugin = _request('url')) {
+	if ($url_plugin) {
 		include_spip('inc/charger_plugin');
 		include_spip('inc/texte');
 		$liste = liste_plugins_distants($url_plugin);
@@ -43,7 +47,7 @@ function exec_charger_plugin_descr_dist() {
 			);
 		echo fin_cadre_relief(true);
 	}
-
+	}
 }
 
 ?>

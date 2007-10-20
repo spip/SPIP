@@ -18,10 +18,13 @@ include_spip('inc/forum');
 // http://doc.spip.org/@exec_naviguer_dist
 function exec_naviguer_dist()
 {
-	$cherche_mot = _request('cherche_mot');
-	$id_rubrique = intval(_request('id_rubrique'));
-	$select_groupe = intval(_request('select_groupe'));
+	exec_naviguer_args(intval(_request('id_rubrique')),
+			   _request('cherche_mot'),
+			   intval(_request('select_groupe')));
+}
 
+function exec_naviguer_args($id_rubrique, $cherche_mot, $select_groupe)
+{
 	if (!$id_rubrique) {
 		$lang = $statut = $titre = $extra = $id_parent=$id_secteur='';
 		$ze_logo = "racine-site-24.gif";
@@ -31,18 +34,19 @@ function exec_naviguer_dist()
 		if (!$row OR !autoriser('voir','rubrique',$id_rubrique)) {
 			include_spip('inc/minipres');
 			echo minipres();
-			exit;
-		}
-		$id_parent=$row['id_parent'];
-		$id_secteur=$row['id_secteur'];
-		$titre=$row['titre'];
-		$statut = $row['statut'];
-		$lang = $row["lang"];
+		} else {
+			$id_parent=$row['id_parent'];
+			$id_secteur=$row['id_secteur'];
+			$titre=$row['titre'];
+			$statut = $row['statut'];
+			$lang = $row["lang"];
 
-		if ($id_parent == 0) $ze_logo = "secteur-24.gif";
-		else $ze_logo = "rubrique-24.gif";
+			if ($id_parent == 0) $ze_logo = "secteur-24.gif";
+			else $ze_logo = "rubrique-24.gif";
+		}
 	}
 
+	if ($ze_logo) {
 	pipeline('exec_init',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''));
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -97,6 +101,7 @@ function exec_naviguer_dist()
 	echo naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $n_forums, $editer_mot, $flag_editable, $boucles, $extra),
 	  fin_gauche(),
 	  fin_page();
+	}
 }
 
 // http://doc.spip.org/@naviguer_droite

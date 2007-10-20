@@ -79,8 +79,7 @@ function exec_statistiques_visites_dist()
 	if (!autoriser('voirstats', $id_article ? 'article':'', $id_article)) {
 	  include_spip('inc/minipres');
 	  echo minipres();
-	  exit;
-	}
+	} else {
 
 	if (!$aff_jours) $aff_jours = 105;
 	// nombre de referers a afficher
@@ -815,5 +814,6 @@ echo aff_referers ($result, $limit, generer_url_ecrire('statistiques_visites', (
 echo "<br /></div>";	
 
 echo fin_gauche(), fin_page();
+	}
      }
 ?>

@@ -128,8 +128,7 @@ function exec_statistiques_repartition_dist()
 	if (!autoriser('voirstats')) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
-	}
+	} else {
 
 	$taille = _request('taille');
 	$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -170,5 +169,6 @@ function exec_statistiques_repartition_dist()
 	echo fin_cadre_relief(true);
 	echo "</td></tr></table>"; 
 	echo fin_grand_cadre(true),fin_page();
+	}
 }
 ?>

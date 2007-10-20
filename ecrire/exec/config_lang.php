@@ -21,8 +21,7 @@ function exec_config_lang_dist()
 	if (!autoriser('configurer', 'lang')) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
-	}
+	} else {
 
 	$config = charger_fonction('config', 'inc');
 	$config();
@@ -48,5 +47,6 @@ function exec_config_lang_dist()
 	echo $transcodeur();
 
 	echo fin_gauche(), fin_page();
+	}
 }
 ?>

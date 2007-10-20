@@ -22,25 +22,28 @@ function exec_statistiques_svg_dist()
 	$visites_today = intval(_request('visites_today'));
 
 	if (!autoriser('voirstats', $id_article ? 'article':'', $id_article)) {
-	  include_spip('inc/minipres');
-	  echo minipres();
-	  exit;
+		include_spip('inc/minipres');
+		echo minipres();
+	} else {
+		$date = date("U");
+		$expire = gmdate("D, d M Y H:i:s", $date + 2 * 3600);
+		if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
+		AND !preg_match(',IIS/,', $_SERVER['SERVER_SOFTWARE'])) # MSoft IIS is dumb
+		  {
+			$if_modified_since = preg_replace('/;.*/', '',
+				$_SERVER['HTTP_IF_MODIFIED_SINCE']);
+			$if_modified_since = trim(str_replace('GMT', '', $if_modified_since));
+			if ($if_modified_since == $expire) {
+				include_spip('inc/headers');
+				http_status(304);
+			}
+		  }
+		exec_statistiques_svg_ok($id_article,  $aff_jours, $visites_today, $expire);
 	}
+}
 
-	$date = date("U");
-	$expire = gmdate("D, d M Y H:i:s", $date + 2 * 3600);
-	if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
-	AND !preg_match(',IIS/,', $_SERVER['SERVER_SOFTWARE'])) # MSoft IIS is dumb
-	{
-		$if_modified_since = preg_replace('/;.*/', '',
-			$_SERVER['HTTP_IF_MODIFIED_SINCE']);
-		$if_modified_since = trim(str_replace('GMT', '', $if_modified_since));
-		if ($if_modified_since == $expire) {
-			include_spip('inc/headers');
-			http_status(304);
-			exit;
-		}
-	}
+function exec_statistiques_svg_ok($id_article,  $aff_jours, $visites_today, $expire)
+{
 	$date = gmdate("D, d M Y H:i:s", $date);
 	header("Last-Modified: ".$date." GMT");
 	header("Expires: ".$expire." GMT");

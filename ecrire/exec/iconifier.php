@@ -25,7 +25,6 @@ function exec_iconifier_dist()
 // http://doc.spip.org/@iconifier_args
 function exec_iconifier_args($id, $type, $script)
 {
-  spip_log("iconifier_args($id, $type, $script");
 	global $connect_id_auteur, $connect_toutes_rubriques;;
 	if (!preg_match('/^\w+$/', "$type$script")) {
 		$droit = false;

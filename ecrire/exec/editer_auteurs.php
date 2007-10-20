@@ -24,12 +24,12 @@ function exec_editer_auteurs_dist()
 	if (! autoriser('modifier',$type,$id)) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
-	}
+	} else {
 	$script = _request('script');
 	$titre = ($titre=_request('titre'))?urldecode($titre):$titre;
 
 	$editer_auteurs = charger_fonction('editer_auteurs', 'inc');
 	ajax_retour($editer_auteurs($type, $id, 'ajax', _request('cherche_auteur'), _request('ids'),$titre,$script));
+	}
 }
 ?>

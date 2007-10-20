@@ -24,8 +24,7 @@ function exec_admin_effacer_dist()
 	if (!autoriser('detruire')) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
-	}
+	} else {
 
 	pipeline('exec_init',array('args'=>array('exec'=>'admin_effacer'),'data'=>''));
 
@@ -95,8 +94,6 @@ function exec_admin_effacer_dist()
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'admin_effacer'),'data'=>''));	  
 
 	echo fin_gauche(), fin_page();
-
-
-
+	}
 }
 ?>
