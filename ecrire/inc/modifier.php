@@ -79,6 +79,7 @@ function modifier_contenu($type, $id, $options, $c=false) {
 	}
 
 	// marquer les documents vus dans le texte si il y a lieu
+	include_spip('base/auxiliaires');
 	if (isset($GLOBALS['tables_auxiliaires']["spip_documents_$table_objet"]["field"]["vu"]))
 		marquer_doublons_documents($champs,$id,$id_table_objet,$table_objet);
 
@@ -101,6 +102,7 @@ function modifier_contenu($type, $id, $options, $c=false) {
 function marquer_doublons_documents($champs,$id,$id_table_objet,$table_objet){
 	if (!isset($champs['texte']) AND !isset($champs['chapo'])) return;
 	$load = "";
+
 	// charger le champ manquant en cas de modif partielle de l'objet
 	if (!isset($champs['texte'])) $load = 'texte';
 	if (!isset($champs['chapo'])) $load = 'chapo';
