@@ -559,6 +559,11 @@ function emboite_texte($texte, $fonc='',$self='')
 				$regs,
 			       PREG_SET_ORDER);
 
+		$colors = array('#e0e0f0', '#f8f8ff');
+		$encore = count_occ($regs);
+		$encore2 = array();
+		$fautifs = array();
+
 		$err = '<tr><th>'
 		.  _T('numero')
 		. "</th><th>"
@@ -571,17 +576,7 @@ function emboite_texte($texte, $fonc='',$self='')
 		. _T('erreur')
 		. "</th></tr>";
 
-		$fautifs = array();
 		$i = 0;
-		$encore = array();
-		foreach($regs as $r) {
-			if (isset($encore[$r[1]]))
-			   $encore[$r[1]]++;
-			else $encore[$r[1]] = 1;
-		}			
-		$encore2 = array();
-		$colors = array('#e0e0f0', '#f8f8ff');
-
 		foreach($regs as $r) {
 			$i++;
 			list(,$msg, $ligne, $fin, $col) = $r;
@@ -626,6 +621,16 @@ function emboite_texte($texte, $fonc='',$self='')
 	}
 }
 
+function count_occ($regs)
+{
+	$encore = array();
+	foreach($regs as $r) {
+		if (isset($encore[$r[1]]))
+			$encore[$r[1]]++;
+		else $encore[$r[1]] = 1;
+	}
+	return $encore;
+}
 
 // http://doc.spip.org/@trace_query_start
 function trace_query_start()
