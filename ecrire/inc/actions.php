@@ -323,9 +323,6 @@ function auth_http($url) {
 			     "url=".rawurlencode($url),
 			     _T('login_nouvelle_tentative'),
 			     (strpos($url,_DIR_RESTREINT_ABS)!==false));
-		exit;
 	}
 }
-
-
 ?>
