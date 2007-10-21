@@ -498,7 +498,7 @@ function afficher_rubrique_rubrique($id_rubrique, $id_parent, $id_secteur, $conn
 	$msg = _T('titre_cadre_interieur_rubrique') .
 	  ((preg_match('/^<input[^>]*hidden[^<]*$/', $form)) ? '' : $aider("rubrub"));
 
-	$form = generer_action_auteur("editer_rubrique", $id_rubrique, generer_url_ecrire('naviguer'), $form, " method='post' name='formulaire' class='submit_plongeur'");
+	$form = generer_action_auteur("editer_rubrique", $id_rubrique, generer_url_ecrire('naviguer'), $form, " method='post' class='submit_plongeur'");
 
 	if ($id_parent == 0) $logo = "racine-site-24.gif";
 	elseif ($id_secteur == $id_parent) $logo = "secteur-24.gif";

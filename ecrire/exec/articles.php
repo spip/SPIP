@@ -343,7 +343,7 @@ function afficher_article_rubrique($id_article, $id_rubrique, $id_secteur, $stat
 	  ((preg_match('/^<input[^>]*hidden[^<]*$/', $form)) ? '' : $aider("artrub"));
 	  
 	$form = "<input type='hidden' name='editer_article' value='oui' />\n" . $form;
-	$form = generer_action_auteur("editer_article", $id_article, generer_url_ecrire('articles'), $form, " method='post' name='formulaire' class='submit_plongeur'");
+	$form = generer_action_auteur("editer_article", $id_article, generer_url_ecrire('articles'), $form, " method='post' class='submit_plongeur'");
 
 	if ($id_rubrique == 0) $logo = "racine-site-24.gif";
 	elseif ($id_secteur == $id_rubrique) $logo = "secteur-24.gif";

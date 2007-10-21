@@ -38,7 +38,7 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 
 // http://doc.spip.org/@afficher_barre
 function afficher_barre($champ, $forum=false, $lang='') {
-	global $spip_lang, $spip_lang_right, $spip_lang_left, $spip_lang;
+	global $spip_lang, $spip_lang_right, $spip_lang_left;
 	static $num_barre = 0;
 	include_spip('inc/layer');
 	if (!$GLOBALS['browser_barre']) return '';
@@ -122,15 +122,16 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	return $ret;
 }
 
+// expliciter les 3 arguments pour avoir xhtml strict
+
 // http://doc.spip.org/@afficher_textarea_barre
-function afficher_textarea_barre($texte, $forum=false)
+function afficher_textarea_barre($texte, $forum=false, $form='document.formulaire.texte')
 {
 	global $spip_display, $spip_ecran;
 
 	$rows = ($spip_ecran == "large") ? 28 : 15;
 
-	return (($spip_display == 4) ? '' :
-		afficher_barre('document.formulaire.texte', $forum))
+	return (($spip_display == 4) ? '' : afficher_barre($form.'.texte', $forum))
 	. "<textarea name='texte' id='texte' "
 	. $GLOBALS['browser_caret']
 	. " rows='$rows' class='formo' cols='40'>"

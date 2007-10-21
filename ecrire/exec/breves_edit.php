@@ -146,7 +146,8 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	. fin_cadre_couleur(true)
 	 . pipeline('affiche_gauche',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''))
 	. "<br /><b>"._T('entree_texte_breve')."</b><br />\n"
-	. afficher_textarea_barre($texte)
+	  . afficher_textarea_barre($texte, false,
+				    "document.getElementById('form_breve')")
 	. "<br />\n"
 	. _T('entree_liens_sites')
 	. aide ("breveslien")
@@ -171,13 +172,13 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 		. "</select>".aide ("brevesstatut")."<br />\n"
 		. fin_cadre_relief(true);
 	}
-	$form .= "<p align='right'><input type='submit' value='"._T('bouton_enregistrer')."' class='fondo' /></p>";
+	$form .= "<div style='text-align: right'><input type='submit' value='"._T('bouton_enregistrer')."' class='fondo' /></div>";
 
 	echo generer_action_auteur('editer_breve',
 		$new ? $new : $id_breve,
 		generer_url_ecrire('breves_voir'),
 		$form,
-		" method='post' name='formulaire'"
+		" method='post' id='form_breve'"
 	);
 
 }

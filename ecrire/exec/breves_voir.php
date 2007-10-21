@@ -231,7 +231,7 @@ function afficher_breve_rubrique($id_breve, $id_rubrique, $statut)
 			. "</div>";
 	}
 	
-	$form = generer_action_auteur('editer_breve',		$id_breve,		generer_url_ecrire('breves_voir'),		$form,		" method='post' name='formulaire' class='submit_plongeur'"	);
+	$form = generer_action_auteur('editer_breve', $id_breve, generer_url_ecrire('breves_voir'), $form, " method='post' class='submit_plongeur'"	);
 
 
 	if ($id_rubrique == 0) $logo = "racine-site-24.gif";
