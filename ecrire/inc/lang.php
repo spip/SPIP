@@ -130,9 +130,10 @@ function menu_langues($nom_select) {
 // http://doc.spip.org/@select_langues
 function select_langues($nom_select, $change, $options)
 {
-	return "<select name='$nom_select' id='menu_langues' "
+	static $cpt = 0;
+	return "<select name='$nom_select' id='menu_langues" . $cpt++ . "' "
 	  . ((!test_espace_prive()) ?
-	     ("class='forml'") :
+	     ("class='forml menu_langues'") :
 	     (($nom_select == 'var_lang_ecrire')  ?
 	      ("class='lang_ecrire'") :
 	      "class='fondl'"))

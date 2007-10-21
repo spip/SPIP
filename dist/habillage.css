@@ -152,7 +152,7 @@ ul.choix_mots label { display: inline; }
 .formulaire_recherche .forml {}
 
 /* Menu langues */
-#menu_langues { background: none; margin: 0; padding: 1em 0; vertical-align: top; }
+.menu_langues { background: none; margin: 0; padding: 1em 0; vertical-align: top; }
 .formulaire_menu_lang { background: none; margin: 0; padding: 1em 0; }
 
 

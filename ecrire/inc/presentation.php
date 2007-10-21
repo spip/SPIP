@@ -1049,7 +1049,7 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $af = true
 		if ($fonction == "supprimer.gif")
 			$retour = "\n<div class='danger'>$retour</div>";
 	} else {
-		$retour = "\n<li><a$lien>$texte</a></li>";
+		$retour = "\n<a$lien>$texte</a>";
 	}
 
 	if ($af) echo_log('icone_horizontale',$retour); else return $retour;
@@ -1127,7 +1127,7 @@ function formulaire_recherche($page, $complement=""){
 	} else $onfocus = '';
 
 	$form = '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="recherche" accesskey="r"' . $onfocus . ' />';
-	$form .= "<input type='image' width='26' height='20' src='"._DIR_IMG_PACK."loupe.png' name='submit' class='submit' alt='"._T('info_rechercher')."' />";
+	$form .= "<input type='image' src='"._DIR_IMG_PACK."loupe.png' name='submit' class='submit' alt='"._T('info_rechercher')."' />";
 	return "<div class='spip_recherche'>".generer_form_ecrire($page, $form . $complement, " method='get'")."</div>";
 }
 
