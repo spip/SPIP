@@ -23,21 +23,22 @@ include_spip('base/abstract_sql');
 function inc_joindre_dist($v) {
 	global $spip_lang_right;
 
-	$vignette_de_doc = ($v['mode'] == 'vignette' AND $v['id_document']>0);
-	$distant = ($v['mode'] == 'document' AND $v['type']);
+	$mode = $v['mode'];
+	$vignette_de_doc = ($mode == 'vignette' AND $v['id_document']>0);
+	$distant = ($mode == 'document' AND $v['type']);
 
 	# indiquer un choix d'upload FTP
 	$dir_ftp = '';
 	if (test_espace_prive()
-	AND $v['mode'] == 'document' # si c'est pour un document
+	AND $mode == 'document' # si c'est pour un document
 	AND !$vignette_de_doc		# pas pour une vignette (NB: la ligne precedente suffit, mais si on la supprime il faut conserver ce test-ci)
 	AND $GLOBALS['flag_upload']) {
 		if ($dir = determine_upload('documents')) {
 			// quels sont les docs accessibles en ftp ?
-			$l = texte_upload_manuel($dir, $v['mode']);
+			$l = texte_upload_manuel($dir, $mode);
 			// s'il n'y en a pas, on affiche un message d'aide
 			// en mode document, mais pas en mode image
-			if ($l OR ($v['mode'] == 'document'))
+			if ($l OR ($mode == 'document'))
 				$dir_ftp = afficher_transferer_upload($l, $dir);
 		}
 	}
@@ -51,7 +52,7 @@ function inc_joindre_dist($v) {
 	// Un menu depliant si on a une possibilite supplementaire
 
 	if ($dir_ftp OR $distant OR $vignette_de_doc) {
-		$bloc = "ftp_". $v['mode'] .'_'. intval($v['id_document']);
+		$bloc = "ftp_". $mode .'_'. intval($v['id_document']);
 
 		if ($vignette_de_doc)
 			$debut = bouton_block_depliable($v['intitule'],false,$bloc);
@@ -79,7 +80,7 @@ function inc_joindre_dist($v) {
 			"\n</div>";
 	}
 
-	$res = "<input name='fichier' id='fichier' type='file' class='forml spip_xx-small' size='15' />"
+	$res = "<input name='fichier' id='fichier_$mode' type='file' class='forml spip_xx-small' size='15' />"
 	. ($v['ancre']
 		? "\n\t\t<input type='hidden' name='ancre' value='".$v['ancre']."' />"
 		: ''
@@ -95,7 +96,7 @@ function inc_joindre_dist($v) {
 
 
 	$res = generer_action_auteur('joindre',
-		(intval($v['id']) .'/' .intval($v['id_document']) . "/".$v['mode'].'/'.$v['type']),
+		(intval($v['id']) .'/' .intval($v['id_document']) . "/".$mode.'/'.$v['type']),
 		(!test_espace_prive())?$v['script']:generer_url_ecrire($v['script'], $v['args'], true),
 		"$iframe$debut$res$dir_ftp$distant$fin",
 		" method='post' enctype='multipart/form-data' class='form_upload'");
