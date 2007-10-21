@@ -173,7 +173,7 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0, $do) 
 		$titre = _T('info_racine_site');
 
 	$titre = str_replace('&amp;', '&', entites_html(textebrut(typo($titre))));
-	$init = " disabled='disabled' type='text' value=\"" . $titre . '" style=\'width:300px;\'';
+	$init = " disabled='disabled' type='text' value=\"" . $titre . "\"\nstyle='width:300px;'";
 
 	$url = generer_url_ecrire('selectionner',"id=$id_rubrique&type=$type&do=$do"
 	. (!$idem ? '' : ("&exclus=$idem&racine=" . ($restreint ? 'non' : 'oui'))) 
@@ -200,11 +200,11 @@ function construire_selecteur($url, $js, $idom, $name, $init='', $id=0)
 	. "', this.parentNode.nextSibling, this.nextSibling,'',event)\"><img src='"
 	. _DIR_IMG_PACK
 	. $icone
-	. "' style='vertical-align: middle;' alt=' ' /></a><img src='"
+	. "'\nstyle='vertical-align: middle;' alt=' ' /></a><img src='"
 	. _DIR_IMG_PACK
 	. "searching.gif' id='img_"
 	.  $idom
-	. "' style='visibility: hidden;' alt='*' />"
+	. "'\nstyle='visibility: hidden;' alt='*' />"
 	. "<input id='titreparent' name='titreparent'"
 	. $init
 	. " />" 
@@ -212,6 +212,6 @@ function construire_selecteur($url, $js, $idom, $name, $init='', $id=0)
 	. $id
 	. "' /><div class='nettoyeur'></div></div><div id='"
 	. $idom
-	. "' style='display: none;'></div>";
+	. "'\nstyle='display: none;'></div>";
 }
 ?>

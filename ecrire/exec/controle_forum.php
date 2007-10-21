@@ -177,8 +177,8 @@ function controle_un_forum($row) {
 
 		while ($row_mots = sql_fetch($result_mots)) {
 			$titre_mot = propre($row_mots['titre']);
-			$type_mot = propre($row_mots['type']);
-			$controle .= "\n<li> <b>$type_mot :</b> $titre_mot";
+			$type_mot = propre('<b>' . $row_mots['type'] .' :</b>');
+			$controle .= "\n$type_mot $titre_mot";
 		}
 	}
 
