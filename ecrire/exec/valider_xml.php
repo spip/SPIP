@@ -39,7 +39,7 @@ function valider_xml_ok($url)
 
 		if (is_dir($url)) {
 			$res = array();
-			foreach(preg_files($url, 'articles.php$') as $f) {
+			foreach(preg_files($url, '.php$') as $f) {
 				$res[]= controle_une_url($transformer_xml, basename($f, '.php'), $url);
 			}
 			$res = valider_resultats($res);
