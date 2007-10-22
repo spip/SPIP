@@ -29,7 +29,6 @@ function configuration_visiteurs_dist()
 		. afficher_choix('accepter_visiteurs', $GLOBALS['meta']['accepter_visiteurs'],
 				       array('oui' => _T('info_option_accepter_visiteurs'),
 					'non' => _T('info_option_ne_pas_accepter_visiteurs')))
-		. "</td></tr>\n"
 		. "</td></tr></table>\n";
 
 		$res = ajax_action_post('configurer', 'visiteurs', 'config_contenu','',$res);

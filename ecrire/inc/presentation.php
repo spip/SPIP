@@ -52,7 +52,7 @@ function afficher_onglets_pages($ordre,$onglets){
 		$cpt++;
 		$disabled = strlen(trim($onglets[$id]))?"":" class='tabs-disabled'";
 		if (!$actif && !$disabled) $actif = $cpt;
-		$res .= "<li$disabled rel='$cpt'><a href='#$id'><span>" . $label . "</span></a></li>";
+		$res .= "<li$disabled><a rel='$cpt' href='#$id'><span>" . $label . "</span></a></li>";
 	}
 	$res = "<ul class='tabs-nav'>$res</ul>";
 	foreach((_INTERFACE_ONGLETS ? array_keys($ordre):array_keys($onglets)) as $id){

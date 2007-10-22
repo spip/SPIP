@@ -51,12 +51,12 @@ function configuration_annonces_dist()
 	else $style = "display: none;";			
 
 	$res .= "<div id='config-edito' style='$style'>"
-	. "<div style='text-align: center;'><input type='text' name='adresse_suivi' id='adresse_suivi' value='$adresse_suivi' size='30' class='fondl' /></div>"
-	. "<blockquote class='spip'><p>";
+	. "\n<div style='text-align: center;'><input type='text' name='adresse_suivi' id='adresse_suivi' value='$adresse_suivi' size='30' class='fondl' /></div>"
+	. "\n<blockquote class='spip'><p>";
 
 	if (!$adresse_suivi) $adresse_suivi = "mailing@monsite.net";
 
-	$res .= "<label for='adresse_suivi_inscription'>"._T('info_config_suivi', array('adresse_suivi' => $adresse_suivi))."</for>"
+	$res .= "<label for='adresse_suivi_inscription'>"._T('info_config_suivi', array('adresse_suivi' => $adresse_suivi))."</label>"
 	. "<br />\n<input type='text' name='adresse_suivi_inscription' id='adresse_suivi_inscription' value='$adresse_suivi_inscription' size='50' class='fondl' />"
 	. "</p></blockquote>"
 	. "</div>"
