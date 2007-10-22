@@ -1049,10 +1049,18 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $af = true
 		if ($fonction == "supprimer.gif")
 			$retour = "\n<div class='danger'>$retour</div>";
 	} else {
-		$retour = "\n<a$lien>$texte</a>";
+		$retour = "\n<li><a$lien>$texte</a></li>";
 	}
 
 	if ($af) echo_log('icone_horizontale',$retour); else return $retour;
+}
+
+function icone_horizontale_display($texte, $lien, $fond = "", $fonction = "", $af = true, $js='') {
+	global $spip_display, $spip_lang_left;
+	$img = icone_horizontale($texte, $lien, $fond, $fonction, $af, $js);
+	if ($spip_display != 4)
+		return "<div style='float: $spip_lang_left; width:140px;'>$img</div>\n";
+	else return "<ul>$img</ul>";
 }
 
 // Fonction standard pour le pipeline 'boite_infos'

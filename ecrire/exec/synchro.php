@@ -18,15 +18,23 @@ include_spip('inc/acces'); // pour low_sec (iCal)
 // http://doc.spip.org/@afficher_liens_calendrier
 function afficher_liens_calendrier($lien, $icone, $texte) {
 
+	global $spip_display;
+	$charge = icone_horizontale_display(_T('ical_methode_http'), $lien, "calendrier-24.gif","", false);
+	$abonne = icone_horizontale_display (_T('ical_methode_webcal'), preg_replace("@https?://@", "webcal://", $lien), "calendrier-24.gif", "", false);
+
 	echo debut_cadre_enfonce($icone, true);
 	echo $texte;
+	if ($spip_display == 4)
+	  echo $charge,$abonne;
+	else {
 	echo "<table style='width: 100%;'><tr><td style='width: 200px;'>";
-	echo icone_horizontale (_T('ical_methode_http'), $lien, "calendrier-24.gif","", false);
+	echo $charge;
 	echo "</td>";
 	echo "<td> &nbsp; </td>";
 	echo "<td style='width: 200px;'>";
-	echo icone_horizontale (_T('ical_methode_webcal'), preg_replace("@https?://@", "webcal://", $lien), "calendrier-24.gif", "", false);
+	echo $abonne;
 	echo "</td></tr></table>";
+	}
 	echo fin_cadre_enfonce(true);
 }
 

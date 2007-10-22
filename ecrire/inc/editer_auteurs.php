@@ -97,9 +97,7 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 				generer_url_ecrire('articles', "id_article=$id", '&'));
 
 			$clic = "<span class='verdana1'><b>$clic</b></span>";
-			$res = "<div style='width:170px;'>"
-			. icone_horizontale($clic, $legende, "redacteurs-24.gif", "creer.gif", false)
-			. "</div>\n";
+			$res = icone_horizontale_display($clic, $legende, "redacteurs-24.gif", "creer.gif", false);
 		}
 
 		$res = "<div style='float:$spip_lang_right; width:280px;position:relative;display:inline;'>"
