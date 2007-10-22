@@ -1354,9 +1354,10 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 	global $spip_lang_right, $spip_lang_left;
 	include_spip('inc/afficher_objets');
 
+	if (!($table = table_objet_sql($type))) return '';
+
 	if (!$limit) $limit = 10;
 
-	$table = $type . ($type!='syndic'?'s':"");
 	$titre = ($type!='syndic'?'titre':'nom_site');
 	$exec = array('article'=>'articles','breve'=>'breves_voir','syndic'=>'sites');
 	$key = 'id_' . $type;
@@ -1367,16 +1368,16 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 
 	$select = "$key AS id, $titre AS titre, statut";
 
-	$n = sql_countsel("spip_$table", $where);
+	$n = sql_countsel($table, $where);
 
 	if (!$n) return '';
 
-	$voss = sql_select($select, "spip_$table", $where, '', "$order DESC", $limit);
+	$voss = sql_select($select, $table, $where, '', "$order DESC", $limit);
 
 	$limit = $n - $limit;
 	$retour = '';
 	$fstatut = 'puce_statut_' . ($type!='syndic'?$type:'site');
-	$idom = 'rubrique_' . $table;
+	$idom = 'rubrique_' . $type;
 
 	while($row = sql_fetch($voss)) {
 		$id = $row['id'];
