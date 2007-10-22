@@ -1055,6 +1055,7 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $af = true
 	if ($af) echo_log('icone_horizontale',$retour); else return $retour;
 }
 
+// http://doc.spip.org/@icone_horizontale_display
 function icone_horizontale_display($texte, $lien, $fond = "", $fonction = "", $af = true, $js='') {
 	global $spip_display, $spip_lang_left;
 	$img = icone_horizontale($texte, $lien, $fond, $fonction, $af, $js);

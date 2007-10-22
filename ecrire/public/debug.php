@@ -621,6 +621,7 @@ function emboite_texte($texte, $fonc='',$self='')
 	}
 }
 
+// http://doc.spip.org/@count_occ
 function count_occ($regs)
 {
 	$encore = array();
