@@ -25,16 +25,17 @@ function public_styliser_dist($fond, $id_rubrique, $lang='', $connect='', $ext='
 	if (!$base = find_in_path("$fond.$ext")) {
 		// Si pas de squelette regarder si c'est une table
 		$trouver_table = charger_fonction('trouver_table', 'base');
-		$table = $trouver_table($fond, $connect);
-		if ($table) {
-			$base = _DIR_TMP . $fond . ".$ext";
-			if (!file_exists($base)
-			OR  $GLOBALS['var_mode'] == 'recalcul') {
-				$vertebrer = charger_fonction('vertebrer', 'public');
-				$f = fopen($base, 'w');
-				fwrite($f, $vertebrer($table));
-				fclose($f);
-			}
+		include_spip('inc/autoriser');
+		if (autoriser('sauvegarder')
+		AND $table = $trouver_table($fond, $connect)) {
+				$base = _DIR_TMP . $fond . ".$ext";
+				if (!file_exists($base)
+				OR  $GLOBALS['var_mode'] == 'recalcul') {
+					$vertebrer = charger_fonction('vertebrer', 'public');
+					$f = fopen($base, 'w');
+					fwrite($f, $vertebrer($table));
+					fclose($f);
+				}
 		} else { // on est gentil, mais la ...
 		include_spip('public/debug');
 		erreur_squelette(_T('info_erreur_squelette2',
