@@ -346,7 +346,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 			$order = calculer_critere_arg_dynamique($idb, $boucles, $tri, $sens);
 			// et ajouter un champ hasard dans le select 
 			//pour supporter 'hasard' comme tri dynamique
-			$par = "UNIX_TIMESTAMP()";
+			$par = "rand()";
 			$boucle->select[]= $par . " AS hasard";
 	  } else {
 	      $par = array_shift($tri);
@@ -372,7 +372,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 		if (count($match)>2) { $par = substr($match[2],1,-1); $fct = $match[1]; }
 	// par hasard
 		if ($par == 'hasard') {
-			$par = "UNIX_TIMESTAMP()";
+			$par = "rand()";
 		  $boucle->select[]= $par . " AS alea";
 		  $order = "'alea'";
 		}
