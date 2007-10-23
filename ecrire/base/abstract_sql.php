@@ -357,6 +357,7 @@ function test_sql_int($type)
 	  OR preg_match('/^tinyint/i',$type));
 }
 
+// http://doc.spip.org/@test_sql_date
 function test_sql_date($type)
 {
   return (preg_match('/^datetime/i',$type)
