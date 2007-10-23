@@ -326,7 +326,7 @@ function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 
 	$styliser = charger_fonction('styliser', 'public');
 	list($skel,$mime_type, $gram, $sourcefile) =
-		$styliser($fond, $id_rubrique_fond, $GLOBALS['spip_lang']);
+		$styliser($fond, $id_rubrique_fond, $GLOBALS['spip_lang'], $connect);
 
 	// Charger le squelette en specifiant les langages cibles et source
 	// au cas il faudrait le compiler (source posterieure au resultat)
