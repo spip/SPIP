@@ -553,8 +553,7 @@ function spip_release_lock($nom) {
 
 // http://doc.spip.org/@spip_mysql_cite
 function spip_mysql_cite($val, $type) {
-	if(((strpos($type, 'datetime')===0) OR strpos($type, 'TIMESTAMP')===0)
-	 AND preg_match('/^\w+\(/', $val))
+	if (test_sql_date($type) AND preg_match('/^\w+\(/', $val))
 		return $val;
 	return _q($val);
 }

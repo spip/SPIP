@@ -352,13 +352,18 @@ function calcul_mysql_in($val, $valeurs, $not='') {
 // http://doc.spip.org/@test_sql_int
 function test_sql_int($type)
 {
-	return (strpos($type, 'bigint') === 0
-	OR strpos($type, 'int') === 0
-	OR strpos($type, 'tinyint') === 0);
+  return (preg_match('/^bigint/i',$type)
+	  OR preg_match('/^int/i',$type)
+	  OR preg_match('/^tinyint/i',$type));
 }
 
+function test_sql_date($type)
+{
+  return (preg_match('/^datetime/i',$type)
+	  OR preg_match('/^timestamp/i',$type));
+}
 
-// Cette fonction est vouee a disparaitre
+// Cette fonction devrait disparaitre
 
 // http://doc.spip.org/@description_table
 function description_table($nom){
