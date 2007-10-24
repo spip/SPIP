@@ -422,8 +422,14 @@ function calculer_pg_where($v)
 function spip_pg_select_as($args)
 {
 	$argsas = "";
-	foreach($args as $k => $v) {
-	  $argsas .= ', ' . $v . ((is_numeric($k) OR $v==$k) ? '' : " AS $k");
+        foreach($args as $k => $v) {
+		$as = '';
+		if (!is_numeric($k)) {
+			if (preg_match('/\.(.*)$/', $k, $r))
+				$v = $k;
+			elseif ($v != $k) $as = " AS $k"; 
+		}
+		$argsas .= ', ' . $v . $as; 
 	}
 	return substr($argsas,2);
 }

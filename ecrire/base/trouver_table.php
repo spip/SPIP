@@ -32,8 +32,11 @@ function base_trouver_table_dist($nom, $serveur='')
 	if (!spip_connect($serveur)
 	OR !preg_match('/^[a-zA-Z0-9._-]+/',$nom))
 		return null;
-	$s = $serveur ? $serveur : 0;
 	$nom_sql = $nom;
+	if (preg_match('/\.(.*)$/', $nom, $s))
+		$nom_sql = $s[1];
+	else $nom_sql = $nom;
+	$s = $serveur ? $serveur : 0;
 
 	if ($connexions[$s]['spip_connect_version']) {
 		include_spip('public/interfaces');
