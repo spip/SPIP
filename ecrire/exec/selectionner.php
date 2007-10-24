@@ -24,11 +24,13 @@ function exec_selectionner_dist()
 	$type = _request('type');
 	$rac = _request('racine');
 	$do  = _request('do');
-	if (preg_match('/^\w+$/', $do)) {
+	if (preg_match('/^\w*$/', $do)) {
 		if (!$do) $do = 'aff';
 
 		$selectionner = charger_fonction('selectionner', 'inc');
-		ajax_retour($selectionner($id, "choix_parent", $exclus, $rac, $type!='breve', $do));
-	}
+
+		$r = $selectionner($id, "choix_parent", $exclus, $rac, $type!='breve', $do);
+	} else $r = '';
+	ajax_retour($r);
 }
 ?>
