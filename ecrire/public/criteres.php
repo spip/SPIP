@@ -1219,6 +1219,7 @@ function calculer_param_date($date_compare, $date_orig) {
 	")))";
 }
 
+// http://doc.spip.org/@tester_param_date
 function tester_param_date($type, $col)
 {
 	global $table_date;
