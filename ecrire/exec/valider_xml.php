@@ -158,12 +158,12 @@ function controle_une_url($transformer_xml, $script, $dir)
 	// tant pis, on signale le cas par un resultat negatif
 
 	if (strpos($page, "id='minipres'")) {
-		if (!$f = charger_fonction($script . '_args', $dir, true)) {
+		if (!$g = charger_fonction($script . '_args', $dir, true)) {
 			$res = 0 - $res;
 		} else {
 			unset($GLOBALS['xhtml_error']);
 			$args = array(1, 'id_article', 1);
-			$page2 = $transformer_xml($f, $args);
+			$page2 = $transformer_xml($f=$g, $args);
 			$appel = join(', ', $args);
 			if (strpos($page2, "id='minipres'")) {
 				$res = 0 - strlen($page2);
@@ -171,7 +171,7 @@ function controle_une_url($transformer_xml, $script, $dir)
 		}
 	}
 	$n = isset($GLOBALS['xhtml_error']) ? $GLOBALS['xhtml_error'] : '';
-	spip_log("validation de $script en appelant $f : " . count($n) . " erreurs."); 
+	spip_log("validation de $script en appelant $f : " . ($n ? " des " : "pas d'") . "erreurs.", 'valid'); 
 	return array($n, $res, $script, $appel);
 }
 ?>

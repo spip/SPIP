@@ -21,14 +21,16 @@ function exec_dater_dist()
 // http://doc.spip.org/@exec_dater_args
 function exec_dater_args($id, $type)
 {
-	$table = table_objet_sql($type);
-	$prim = id_table_objet($table); // pour secu
-
-	if (!$prim OR !autoriser('voir',$type,$id)) {
+	if (!$id OR !autoriser('voir',$type,$id)) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-
+		$table = table_objet_sql($type);
+		if (!$table) {
+			spip_log("dater, type inconnu: $type");
+			$type = 'article';
+			$table = table_objet_sql($type);
+		}
 		$row = sql_fetsel("*", $table, "id_$type=$id");
 		$statut = $row['statut'];
 		$date = $row[($type!='breve')?"date":"date_heure"];

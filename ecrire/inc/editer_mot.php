@@ -37,14 +37,13 @@ function inc_editer_mot_dist($objet, $id_objet, $cherche_mot, $select_groupe, $f
 		$url_base = "naviguer";
 	}
 
-	else if ($objet == 'syndic') {
+	else {
+		if ($objet != 'syndic') 
+			spip_log("erreur dans formulaire_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag)");
+		// continuer avec des valeurs par defaut pour le validateur
 		$table_id = 'id_syndic';
 		$table = 'syndic';
 		$url_base = "sites";
-	}
-	else {
-		spip_log("erreur dans formulaire_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag)");
-		return '';
 	}
 
 	$cpt = sql_countsel("spip_mots AS mots, spip_mots_$table AS lien", "lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot");

@@ -28,7 +28,11 @@ function inc_tourner_dist($id_document, $document, $script, $flag, $type)
 
 	$table = 'spip_documents_' . $type . 's';
 	$prim = id_table_objet($table);
-	if (!$prim) return '';
+	if (!$prim) {
+		spip_log("tourner: $type table inconnue");
+		$type = 'article';
+		$table = 'spip_documents_' . $type . 's';
+	}
 	$prim = 'id_' . $type;
 	// si pas de doc le hash sera inutilisable
 	$id = intval(sql_getfetsel($prim, $table, "id_document = " . intval($id_document)));
@@ -54,11 +58,10 @@ function inc_tourner_dist($id_document, $document, $script, $flag, $type)
 					array('fichier'=>basename($document['fichier'])));
 			$res = "<img src='" . _DIR_IMG_PACK . "warning-24.gif'"
 				."\n\tstyle='float: right;'\n\talt=\"$c\"\n\ttitle=\"$c\" />";
-		} else 	if ($flag AND !$id_vignette) 
-			$res = boutons_rotateurs($document, $type, $id, $id_document,$script);
-
-		$boite = '';
-
+		} else {
+			if ($flag AND !$id_vignette) 
+				$res = boutons_rotateurs($document, $type, $id, $id_document,$script);
+		}
 	} else {
 		$res = "\n<div class='verdana1' style='float: $spip_lang_right; text-align: $spip_lang_right;'>";
 		
@@ -69,12 +72,15 @@ function inc_tourner_dist($id_document, $document, $script, $flag, $type)
 		
 		$res .= "</div>\n";
 	}
+	return tourner_greffe($id_document, $document, $url, $res);
+}
 
-	$res .= "<div style='text-align: center;'>";
-	$res .= document_et_vignette($document, $url, true);
-	$res .= "</div>\n";
-
-	$res .= "<div style='text-align: center; color: 333333;' class='verdana1 spip_x-small'>&lt;doc"
+function tourner_greffe($id_document, $document, $url, $res)
+{
+	$res .= "<div style='text-align: center;'>"
+	.document_et_vignette($document, $url, true)
+	."</div>\n"
+	."<div style='text-align: center; color: 333333;' class='verdana1 spip_x-small'>&lt;doc"
 	.  $id_document
 	. "&gt;</div>";
 

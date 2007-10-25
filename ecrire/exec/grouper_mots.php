@@ -24,11 +24,14 @@ function exec_grouper_mots_dist()
 function exec_grouper_mots_args($id_groupe)
 {
 	$cpt = sql_countsel("spip_mots", "id_groupe=$id_groupe");
-	if (!$cpt) 
-	  ajax_retour('') ;
-	else {
-	  $grouper_mots = charger_fonction('grouper_mots', 'inc');
-	  ajax_retour($grouper_mots($id_groupe, $cpt));
+	if (!$cpt) {
+		if ($cpt === NULL) {
+			include_spip('inc/minipres');
+			echo minipres();
+		} else ajax_retour('') ;
+	} else {
+	  	$grouper_mots = charger_fonction('grouper_mots', 'inc');
+		ajax_retour($grouper_mots($id_groupe, $cpt));
 	}
 }
 ?>
