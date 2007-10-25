@@ -166,17 +166,17 @@ function exec_admin_tech_dist()
 		// restauration partielle / fusion
 		$res .=
 		  debut_cadre_enfonce('',true) .
-		"<div>" .
+		"\n<div>" .
 		 "<input name='insertion' id='insertion' type='checkbox' />&nbsp; <label for='insertion'>". 
 		  _T('sauvegarde_fusionner') .
-		  '</label><br />' .
-		 "<input name='statut' id='statut' type='checkbox' />&nbsp; <label for='statut'>". 
+		  "</label><br />\n" .
+		 "<input name='statut' id='statut' type='checkbox' />&nbsp; <label for='statut'>\n". 
 		  _L('D&eacute;publier les objets fusionn&eacute;s') .
-		  '</label><br />' .
-		  "<label ='url_site'>" .
+		  "</label><br />\n" .
+		  "<label for='url_site'>" .
 		  _T('sauvegarde_url_origine') .
 		  "</label>" .
-		  " &nbsp; <input name='url_site' id='url_site' type='text' size='25' />" .
+		  " &nbsp;\n<input name='url_site' id='url_site' type='text' size='25' />" .
 		  '</div>' .
 		  fin_cadre_enfonce(true);
 
