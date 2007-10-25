@@ -604,7 +604,9 @@ function spip_pg_replace($table, $values, $desc, $serveur='') {
 	      $r = pg_fetch_array($couples, NULL, PGSQL_NUM);
 	      if ($r[0]) {
 		$q = "SELECT setval('$seq', $prim) from $table";
-		$r = pg_query($link, $q);
+		// Le code de SPIP met parfois la sequence a 0 (dans l'import)
+		// MySQL n'en dit rien, on fait pareil pour PG
+		$r = @pg_query($link, $q);
 	      }
 	    }
 	}
