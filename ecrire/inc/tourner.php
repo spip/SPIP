@@ -75,6 +75,7 @@ function inc_tourner_dist($id_document, $document, $script, $flag, $type)
 	return tourner_greffe($id_document, $document, $url, $res);
 }
 
+// http://doc.spip.org/@tourner_greffe
 function tourner_greffe($id_document, $document, $url, $res)
 {
 	$res .= "<div style='text-align: center;'>"
