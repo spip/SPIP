@@ -28,8 +28,9 @@ function sql_serveur($ins_sql, $serveur='') {
 
 	$desc = spip_connect($serveur);
 	if (function_exists($f = @$desc[$ins_sql])) return $f;
+	spip_log("Le serveur '$serveur' ne dispose pas de  '$ins_sql'");
 	include_spip('inc/minipres');
-	echo minipres("'$serveur' " ._T('zbug_serveur_indefini') .  " ($ins_sql)");
+	echo minipres(_T('info_travaux_titre'),  _T('titre_probleme_technique'));
 	exit;
 }
 
@@ -86,17 +87,11 @@ function sql_set_charset($charset,$serveur=''){
 	return $f($charset, $serveur);
 }
 
-// Cette fonction est systematiquement appelee par les squelettes
-// pour constuire une requete SQL de type "lecture" (SELECT) a partir
-// de chaque boucle.
-// Elle construit et exe'cute une reque^te SQL correspondant a` une balise
-// Boucle ; elle notifie une erreur SQL dans le flux de sortie et termine
-// le processus.
-// Sinon, retourne la ressource interrogeable par sql_fetch.
+// Fonction pour SELECT, retournant la ressource interrogeable par sql_fetch.
 // Recoit en argument:
-// - le tableau des champs a` ramener (Select)
-// - le tableau des tables a` consulter (From)
-// - le tableau des conditions a` remplir (Where)
+// - le tableau (ou chaîne) des champs a` ramener (Select)
+// - le tableau (ou chaîne) des tables a` consulter (From)
+// - le tableau (ou chaîne) des conditions a` remplir (Where)
 // - le crite`re de regroupement (Group by)
 // - le tableau de classement (Order By)
 // - le crite`re de limite (Limit)
@@ -168,9 +163,10 @@ function sql_free($res, $serveur='')
 	return $f($res);
 }
 
-// Cette fonction est destinee aux MAJ automatiques par Sed de vieux code.
-// Elle ne garantit pas une portabilite totale ===> lui preferer la suivante.
-// 
+// Cette fonction ne garantit pas une portabilite totale
+//  ===> lui preferer la suivante.
+// Elle est fournie pour permettre l'actualisation de vieux codes 
+// par un Sed brutal qui peut donner des resultats provisoirement acceptables
 // http://doc.spip.org/@sql_insert
 function sql_insert($table, $noms, $valeurs, $desc=array(), $serveur='')
 {
