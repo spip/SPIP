@@ -804,7 +804,7 @@ if ($origine) {
 }
 
 
-$result = sql_select("referer, $vis AS vis", "$table_ref", "$where", "", "vis DESC", "$limit");
+$result = sql_select("referer, referer_md5, $vis AS vis", "$table_ref", "$where", "", "vis DESC", "$limit");
 
 
 echo gros_titre(_T("onglet_origine_visites"),'', false);
