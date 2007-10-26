@@ -1355,23 +1355,24 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 	global $spip_lang_right, $spip_lang_left;
 	include_spip('inc/afficher_objets');
 
-	if (!($table = table_objet_sql($type))) {
+	$table = table_objet_sql($type);
+	if (!id_table_objet($table)) {
 		spip_log("meme_rubrique: $type table inconnue");
 		$type = 'article';
-		$table = table_objet_sql($type);
+		$table = 'spip_articles';
 	}
-
+	$prim = 'id_' . $type;
 	if (!$limit) $limit = 10;
 
 	$titre = ($type!='syndic'?'titre':'nom_site');
 	$exec = array('article'=>'articles','breve'=>'breves_voir','syndic'=>'sites');
-	$key = 'id_' . $type;
+
 	$where = (($GLOBALS['auteur_session']['statut'] == '0minirezo')
 		  ? ''
 		  :  "(statut = 'publie' OR statut = 'prop') AND ") 
-	. "id_rubrique=$id_rubrique AND ($key != $id)";
+	. "id_rubrique=$id_rubrique AND ($prim != $id)";
 
-	$select = "$key AS id, $titre AS titre, statut";
+	$select = "$prim AS id, $titre AS titre, statut";
 
 	$n = sql_countsel($table, $where);
 
@@ -1386,11 +1387,11 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 
 	while($row = sql_fetch($voss)) {
 		$id = $row['id'];
-		$num = afficher_numero_edit($id, $key, $type);
+		$num = afficher_numero_edit($id, $prim, $type);
 		$statut = $row['statut'];
 		$statut = $fstatut($id, $statut, $id_rubrique, $type);
 		$href = "<a class='verdana1' href='"
-		. generer_url_ecrire($exec[$type],"$key=$id")
+		. generer_url_ecrire($exec[$type],"$prim=$id")
 		. "'>"
 		. sinon(typo($row['titre']), _T('info_sans_titre'))
 		. "</a>";
