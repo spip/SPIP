@@ -67,7 +67,6 @@ function calculer_visites($t) {
 
 	$compteur = 100;
 	$date_init = time()-30*60;
-
 	foreach ($sessions as $item) {
 		if (@filemtime($item) < $date_init) {
 			spip_log("traite la session $item");
@@ -146,7 +145,7 @@ function calculer_visites($t) {
 	// inserer les nouveaux
 	// si echec ==> pas un nouveau, ajouter au tableau des increments
 		foreach ($referers as $referer => $num) {
-			$referer_md5 = '0x'.substr(md5($referer), 0, 15);
+			$referer_md5 = sql_hex(substr(md5($referer), 0, 15));
 			if (!sql_countsel('spip_referers', "referer_md5=$referer_md5"))
 				sql_insertq('spip_referers',
 					array('visites' => $num,
@@ -173,7 +172,7 @@ function calculer_visites($t) {
 		// s'assurer d'un slot pour chacun
 		foreach ($referers_a as $id_article => $referers)
 		foreach ($referers as $referer => $num) {
-			$referer_md5 = '0x'.substr(md5($referer), 0, 15);
+			$referer_md5 = sql_hex(substr(md5($referer), 0, 15));
 			$prim = "(id_article=$id_article AND referer_md5=$referer_md5)";
 			if (!sql_countsel('spip_referers_articles', $prim))
 				sql_insertq('spip_referers_articles',

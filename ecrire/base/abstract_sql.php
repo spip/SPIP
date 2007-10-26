@@ -345,6 +345,15 @@ function calcul_mysql_in($val, $valeurs, $not='') {
 	return "($in_sql)";
 }
 
+// prend une chaine sur l'aphabet hexa
+// et retourne sa representation numerique:
+// FF ==> 0xFF en MySQL mais x'FF' en PG
+function sql_hex($val, $serveur='')
+{
+	$f = sql_serveur('hex', $serveur);
+	return $f($val);
+}
+
 // http://doc.spip.org/@test_sql_int
 function test_sql_int($type)
 {
