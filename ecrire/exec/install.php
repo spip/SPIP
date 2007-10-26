@@ -236,8 +236,8 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 		$server_db = $mysql ? 'mysql' : 'pg';
 	else {
 	  $server_db ='';
-	  $m = ($predef != 'mysql') ? '' : " selected='selected'";
-	  $p = ($predef != 'pg') ? '' : " selected='selected'";
+	  $m = strcasecmp($predef[0], 'mysql') ? '' : " selected='selected'";
+	  $p = strcasecmp($predef[0], 'pg') ? '' : " selected='selected'";
 	}
 
 	return generer_form_ecrire('install', (
@@ -254,12 +254,12 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 		._L('Indiquer le type de base de donn&eacute;es :')
 		. "\n<select name='server_db'>"
 		. ($mysql
-			? "<option value='mysql'$m>"._L('MySQL')."</option>"
+			? "\n<option value='mysql'$m>"._L('MySQL')."</option>"
 			: '')
 		. ($pg
-			? "<option value='pg'$p>"._L('PostGreSQL')."</option>"
+			? "\n<option value='pg'$p>"._L('PostGreSQL')."</option>"
 			: '')
-		   . "</select></legend></fieldset>")
+		   . "\n</select></legend></fieldset>")
 	)
 
 	. ($predef[1]
