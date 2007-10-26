@@ -25,11 +25,11 @@ function exec_dater_args($id, $type)
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$table = 'spip_documents_' . $type . 's';
+		$table = table_objet_sql($type);
 		if (!id_table_objet($table)) {
 			spip_log("dater: $type table inconnue");
 			$type = 'article';
-			$table = 'spip_documents_' . $type . 's';
+			$table = $type . 's';
 		}
 		$prim = 'id_' . $type;
 		$row = sql_fetsel("*", $table, "$prim=$id");
