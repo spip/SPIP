@@ -1489,4 +1489,34 @@ function exec_info_dist() {
 	else
 		echo "pas admin";
 }
+
+
+
+
+/*
+ * Bloc de compatibilite : quasiment tous les plugins utilisent ces fonctions
+ * desormais depreciees ; plutot que d'obliger tout le monde a charger
+ * vieilles_defs, on va assumer l'histoire de ces 3 fonctions ubiquitaires
+ */
+// Fonction depreciee
+// http://doc.spip.org/@lire_meta
+function lire_meta($nom) {
+	return $GLOBALS['meta'][$nom];
+}
+
+// Fonction depreciee
+// http://doc.spip.org/@ecrire_metas
+function ecrire_metas() {}
+
+// Fonction depreciee, cf. http://doc.spip.org/@sql_fetch
+// http://doc.spip.org/@spip_fetch_array
+function spip_fetch_array($r, $t=NULL) {
+	if (!isset($t)) {
+		if ($r) return sql_fetch($r);
+	} else {
+		spip_log("appel deprecie de spip_fetch_array(..., $t)", 'vieilles_defs');
+		if ($r) return mysql_fetch_array($r, $t);
+	}
+}
+
 ?>
