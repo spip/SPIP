@@ -87,11 +87,12 @@ function afficher_numero_edit($id, $key, $type,$row=NULL) {
 // puis la partie hors lien
 // http://doc.spip.org/@afficher_titre_objet
 function afficher_titre_objet($type,$row){
+  spip_log("afficher_titre_objet($type,$row");
 	if (function_exists($f = "afficher_titre_$type"))
 		return $f($row);
 	$titre = isset($row['titre'])?sinon($row['titre'], _T('ecrire:info_sans_titre')):
 	  (isset($row['nom'])?sinon($row['nom'], _T('ecrire:info_sans_titre')):"");
-	 return array(typo($titre),'');
+	return array(typo(supprime_img($titre,'')),'');
 }
 // http://doc.spip.org/@afficher_titre_site
 function afficher_titre_site($row){
@@ -516,30 +517,27 @@ function afficher_articles_trad_boucle($row)
 
 	$vals[] = "\n<div style='text-align: center;'>$span_lang</div>";
 			
-			
-	$s = "\n<div>";
-	$s .= "\n<div style='float: $spip_lang_right; margin-right: -10px;'>$l</div>";
+
+	$s.= "\n<div style='float: $spip_lang_right; margin-right: -10px;'>$l</div>";
 	
 	if (acces_restreint_rubrique($id_rubrique))
 		$s .= http_img_pack("admin-12.gif", _T('titre_image_administrateur'), "width='12' height='12'", _T('titre_image_admin_article'));
 
+	if ($id_article == $id_trad) $titre = "<b>$titre</b>";
+			
+	$titre = typo(supprime_img($titre,''));
+
+	if ($afficher_langue AND $lang != $langue_defaut)
+		$titre .= " <span class='spip_xx-small' style='color: #666666'  dir='$lang_dir'>(".traduire_nom_langue($lang).")</span>";
+
 	$s .= "<a href='" 
 	  . generer_url_ecrire("articles","id_article=$id_article") 
 	  . "' title='" . _T('info_numero_abbreviation'). "$id_article'"
-	  . " dir='$lang_dir' style=\"display:block;\">";
-			
-			
-	if ($id_article == $id_trad) $titre = "<b>$titre</b>";
-			
-	$s .= typo($titre);
+	  . " dir='$lang_dir' style=\"display:block;\">"
+	  . $titre
+	  . "</a>";
 
-	if ($afficher_langue AND $lang != $langue_defaut)
-		$s .= " <span class='spip_xx-small' style='color: #666666'  dir='$lang_dir'>(".traduire_nom_langue($lang).")</span>";
-
-	$s .= "</a>";
-	$s .= "</div>";
-	
-	$vals[] = $s;
+	$vals[] = "\n<div>$s</div>";
 	
 	$vals[] = "";
 	

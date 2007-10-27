@@ -70,7 +70,7 @@ function inc_formater_article_dist($row)
 	. (!$logo ? '' :
 	   ("<span style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>" . $logo . "</span>"))
 	. (acces_restreint_rubrique($id_rubrique) ? $img_admin : '')
-	. typo($titre)
+	  . typo(supprime_img($titre,''))
 	. (!($afficher_langue AND $lang != $GLOBALS['meta']['langue_site']) ? '' :
 	   (" <span class='spip_xx-small' style='color: #666666' dir='$lang_dir'>(".traduire_nom_langue($lang).")</span>"))
 	  . (!$row['petition'] ? '' :
