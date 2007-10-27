@@ -785,7 +785,6 @@ function balise_CHEMIN_dist($p) {
 // http://doc.spip.org/@balise_ENV_dist
 function balise_ENV_dist($p, $src = NULL) {
 	// le tableau de base de la balise (cf #META ci-dessous)
-	if (!$src) $src = '@$Pile[0]';
 
 	$_nom = interprete_argument_balise(1,$p);
 	$_sinon = interprete_argument_balise(2,$p);
@@ -793,10 +792,14 @@ function balise_ENV_dist($p, $src = NULL) {
 	if (!$_nom) {
 		// cas de #ENV sans argument : on retourne le serialize() du tableau
 		// une belle fonction [(#ENV|affiche_env)] serait pratique
-		$p->code = '(is_array($a = ('.$src.')) ? serialize($a) : "")';
+		$p->code = $src 
+		? ('(is_array($a = ('.$src.')) ? serialize($a) : "")')
+		: '@serialize($Pile[0])';
 	} else {
 		// admet deux arguments : nom de variable, valeur par defaut si vide
-		$p->code = 'is_array($a = ('.$src.')) ? $a['.$_nom.'] : ""';
+		$p->code = $src 
+		? ('is_array($a = ('.$src.')) ? $a['.$_nom.'] : ""')
+		: ('@$Pile[0][' . $_nom . ']');
 		if ($_sinon)
 			$p->code = 'sinon('. 
 				$p->code.",$_sinon)";

@@ -20,6 +20,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // reperer un code ne calculant rien, meme avec commentaire
 define('CODE_MONOTONE', ",^(\n//[^\n]*\n)?\(?'([^'])*'\)?$,");
 
+// definition des structures de donnees
+include_spip('public/interfaces');
+
 // Definition de la structure $p, et fonctions de recherche et de reservation
 // dans l'arborescence des boucles
 include_spip('public/references');
