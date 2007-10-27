@@ -66,14 +66,17 @@ function effacer_meta($nom) {
 	// section critique sur le cache:
 	// l'invalider avant et apres la MAJ de la BD
 	// c'est un peu moints bien qu'un vrai verrou mais ca suffira
-	@touch(_FILE_META,0);
+	// et utiliser une statique pour eviter des acces disques a repetition
+	static $touch = true;
+	if ($touch) {@touch(_FILE_META, 0);}
 	sql_delete("spip_meta", "nom='$nom'");
-	@touch(_FILE_META,0);
+	if ($touch) {@touch(_FILE_META, 0); $touch = false;}
 }
 
 // http://doc.spip.org/@ecrire_meta
 function ecrire_meta($nom, $valeur, $importable = NULL) {
 
+	static $touch = true;
 	if (!$nom) return;
 	$GLOBALS['meta'][$nom] = $valeur;
 	$res = spip_query("SELECT impt,valeur FROM spip_meta WHERE nom=" . _q($nom));
@@ -84,7 +87,7 @@ function ecrire_meta($nom, $valeur, $importable = NULL) {
 	// et ne pas invalider le cache si affectation a l'identique
 	if ($res AND $valeur == $res['valeur']) return;
 	// cf effacer pour le double touch
-	@touch(_FILE_META, 0);
+	if ($touch) {@touch(_FILE_META, 0);}
 	if ($res) {
 		$r = ($importable === NULL) ? ''
 		: (", impt=" .  _q($importable));
@@ -93,7 +96,7 @@ function ecrire_meta($nom, $valeur, $importable = NULL) {
 		  $r = array('nom' => $nom, 'valeur' => $valeur);
 		  if ($importable) $r['impt'] = $importable;
 		  sql_insertq('spip_meta', $r);
-		  @touch(_FILE_META, 0);
 	}
+	if ($touch) {@touch(_FILE_META, 0); $touch = false;}
 }
 ?>
