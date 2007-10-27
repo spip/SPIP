@@ -87,7 +87,6 @@ function afficher_numero_edit($id, $key, $type,$row=NULL) {
 // puis la partie hors lien
 // http://doc.spip.org/@afficher_titre_objet
 function afficher_titre_objet($type,$row){
-  spip_log("afficher_titre_objet($type,$row");
 	if (function_exists($f = "afficher_titre_$type"))
 		return $f($row);
 	$titre = isset($row['titre'])?sinon($row['titre'], _T('ecrire:info_sans_titre')):
