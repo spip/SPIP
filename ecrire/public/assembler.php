@@ -353,8 +353,11 @@ function f_tidy ($texte) {
 		# Compatibilite ascendante
 		if (!is_string($xhtml)) $xhtml ='tidy';
 
-		if ($f = charger_fonction($xhtml, 'inc'))
-			$texte = $f($texte);
+		if (!$f = charger_fonction($xhtml, 'inc', true)) {
+			spip_log("tidy absent, l'indenteur SPIP le remplace");
+			$f = charger_fonction('sax', 'inc');
+		}
+		return $f($texte);
 	}
 
 	return $texte;
