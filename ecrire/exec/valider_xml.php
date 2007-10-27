@@ -116,7 +116,7 @@ function valider_resultats($res, $ext)
 			$color = ";color: red";
 		} else  {$color = '';}
 
-		$h = !strpos($ext,'php')
+		$h = (strpos($ext,'php') ===false)
 		? ($appel . '&var_mode=debug&var_mode_affiche=validation')
 		  : generer_url_ecrire('valider_xml', "var_url=" . urlencode($appel));
 		
@@ -178,6 +178,7 @@ function valider_script($transformer_xml, $f, $dir)
 			if (strpos($page2, "id='minipres'")) {
 				$res = 0 - strlen($page2);
 			} else $res = strlen($page2);
+#			$res = $page2;
 		}
 	}
 	return array($res, $script,

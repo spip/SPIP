@@ -19,13 +19,14 @@ include_spip('inc/autoriser');
 function exec_auteur_infos_dist() {
 
 	exec_auteur_infos_args(intval(_request('id_auteur')),
-		_request('echec'),
+		_request('nom'),
 		_request('new'),
+		_request('echec'),
 		_request('redirect'));
 }
 
 // http://doc.spip.org/@exec_auteur_infos_args
-function exec_auteur_infos_args($id_auteur, $echec, $new, $redirect)
+function exec_auteur_infos_args($id_auteur, $nom, $new, $echec='', $redirect='')
 {
 	pipeline('exec_init',
 		array('args' => array(
@@ -41,7 +42,7 @@ function exec_auteur_infos_args($id_auteur, $echec, $new, $redirect)
 	} else {
 		$auteur = array();
 		if (strlen(_request('nom')))
-			$auteur['nom'] = _request('nom');
+			$auteur['nom'] = $nom;
 	}
 
 	if (!$auteur AND !$new AND !$echec) {
