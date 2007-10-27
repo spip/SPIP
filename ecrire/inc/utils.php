@@ -980,7 +980,7 @@ function generer_url_ecrire($script='', $args="", $no_entities=false, $rel=false
 			('./'  . _SPIP_ECRIRE_SCRIPT);
 
 	@list($script, $ancre) = split('#', $script);
-	if ($script AND $script<>'accueil') 
+	if ($script AND ($script<>'accueil' OR $rel))
 		$args = "?exec=$script" . (!$args ? '' : "&$args");
 	elseif ($args)
 		$args ="?$args";
