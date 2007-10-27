@@ -141,7 +141,7 @@ function valider_resultats($res, $ext)
 	  . "</table>";
 }
 
-// http://doc.spip.org/@controle_une_url
+// http://doc.spip.org/@valider_script
 function valider_script($transformer_xml, $f, $dir)
 {
 // ne pas se controler soi-meme
@@ -184,6 +184,7 @@ function valider_script($transformer_xml, $f, $dir)
 		     generer_url_ecrire($script, $appel, false, true));
 }
 
+// http://doc.spip.org/@valider_skel
 function valider_skel($transformer_xml, $f, $dir)
 {
 	if (!lire_fichier ($f, $skel)) return array('/', '/', $f,''); 
@@ -208,6 +209,7 @@ function valider_skel($transformer_xml, $f, $dir)
 	return array(strlen($page), $skel, $url);
 }
 
+// http://doc.spip.org/@valider_dir
 function valider_dir($files, $ext, $dir)
 {
 	$res = array();
