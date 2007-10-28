@@ -134,6 +134,7 @@ table.spip td {
 
 --></style>');
 
+// http://doc.spip.org/@help_panneau
 function help_panneau() {
 
 	  return "<div align='center'>
@@ -149,6 +150,7 @@ function help_panneau() {
 			'</div>';
 }
 
+// http://doc.spip.org/@help_body
 function help_body($aide, $suite, $lang_aide='') {
 	global $help_server, $spip_lang_rtl;
 
@@ -478,6 +480,7 @@ function exec_aide_index_dist()
 	}
 }
 
+// http://doc.spip.org/@help_lastmodified
 function help_lastmodified($lastmodified)
 {
 	$gmoddate = gmdate("D, d M Y H:i:s", $lastmodified);
