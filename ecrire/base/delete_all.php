@@ -23,16 +23,16 @@ function base_delete_all_dist($titre)
 				$res[] = $table;
 			else spip_log("SPIP n'a pas pu detruire $table.");
 		}
-	}
 
 	// un pipeline pour detruire les tables installees par les plugins
-	pipeline('delete_tables', '');
+		pipeline('delete_tables', '');
 
-	spip_unlink(_FILE_CONNECT);
-	spip_unlink(_FILE_CHMOD);
-	spip_unlink(_FILE_META);
-	spip_unlink(_ACCESS_FILE_NAME);
-	spip_unlink(_CACHE_RUBRIQUES);
+		spip_unlink(_FILE_CONNECT);
+		spip_unlink(_FILE_CHMOD);
+		spip_unlink(_FILE_META);
+		spip_unlink(_ACCESS_FILE_NAME);
+		spip_unlink(_CACHE_RUBRIQUES);
+	}
 	$d = count($delete);
 	$r = count($res);
 	spip_log("Tables detruites: $r sur $d: " . join(', ',$res));

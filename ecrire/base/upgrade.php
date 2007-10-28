@@ -13,8 +13,9 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@base_upgrade_dist
-function base_upgrade_dist($titre)
+function base_upgrade_dist($titre='', $reprise='')
 {
+	if (!$titre) return; // anti-testeur automatique
 	if ($GLOBALS['spip_version']!=$GLOBALS['meta']['version_installee']) {
 		if (!is_numeric(_request('reinstall'))) {
 			include_spip('base/create');
