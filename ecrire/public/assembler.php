@@ -113,7 +113,9 @@ function assembler_page ($fond, $connect='') {
 	// Cette fonction est utilisee deux fois
 	$cacher = charger_fonction('cacher', 'public');
 	// Garnir ces quatre parametres avec les infos sur le cache
-	$cacher(NULL, $use_cache, $chemin_cache, $page, $lastmodified);
+	// Si un resultat est retourne, c'est un message d'impossibilite
+	$res = $cacher(NULL, $use_cache, $chemin_cache, $page, $lastmodified);
+	if ($res) {return array('texte' => $res);}
 
 	if (!$chemin_cache || !$lastmodified) $lastmodified = time();
 

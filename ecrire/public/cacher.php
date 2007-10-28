@@ -168,6 +168,8 @@ function nettoyer_petit_cache($prefix, $duree = 300) {
 // - chemin_cache qui est le chemin d'acces au fichier ou vide si pas cachable
 // - page qui est le tableau decrivant la page, si le cache la contenait
 // - lastmodified qui vaut la date de derniere modif du fichier.
+// Elle retourne '' si tout va bien
+// un message d'erreur si le calcul de la page est totalement impossible
 
 // http://doc.spip.org/@public_cacher_dist
 function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmodified) {
@@ -244,8 +246,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 		else {
 			spip_log("Erreur base de donnees, impossible utiliser $chemin_cache");
 			include_spip('inc/minipres');
-			echo minipres(_T('info_travaux_titre'),  _T('titre_probleme_technique'));
-			exit;
+			return minipres(_T('info_travaux_titre'),  _T('titre_probleme_technique'));
 		}
 	}
 
