@@ -44,9 +44,8 @@ function help_frame ($aide, $lang) {
 function erreur_aide_indisponible() {
 	global $help_server;
 	include_spip('inc/minipres');
-	echo minipres(_T('forum_titre_erreur'),
+	return  minipres(_T('forum_titre_erreur'),
 		 "<div>$help_server: "._T('aide_non_disponible')."</div><div align='right'>".menu_langues('var_lang_ecrire')."</div>");
-	exit;
 }
 
 // Selection de l'aide correspondant a la langue demandee
@@ -79,7 +78,7 @@ function fichier_aide($lang_aide = '') {
 	if (strlen($contenu) > 500) return array($contenu, $lastm);
 
 	// c'est cuit
-	erreur_aide_indisponible();
+	return array(-1, false);
 }
 
 define('_STYLE_AIDE_BODY', '
@@ -135,19 +134,9 @@ table.spip td {
 
 --></style>');
 
-// http://doc.spip.org/@help_body
-function help_body($aide, $html, $lang_aide='') {
-  global $help_server, $spip_lang_rtl;
-	// Recuperation du contenu de l'aide demandee
+function help_panneau() {
 
-	if ($aide) {
-		$html = analyse_aide($html, $aide);
-		if (!$html) {
-			erreur_aide_indisponible();
-		}
-	} else {
-		// panneau d'accueil
-		$html = "<div align='center'>
+	  return "<div align='center'>
 			<img src='" . _DIR_IMG_PACK.
 		  "logo-spip.gif' alt='SPIP' style='width: 267px; height: 170px; border: 0px' />
 			<br />
@@ -158,10 +147,12 @@ function help_body($aide, $html, $lang_aide='') {
 			font-size: 12px; '>" .
 		preg_replace(",<a ,i", "<a class='target_blank' ",_T('info_copyright_doc')).
 			'</div>';
-	}
+}
+
+function help_body($aide, $suite, $lang_aide='') {
+	global $help_server, $spip_lang_rtl;
 
 	// Recherche des images de l'aide
-	$suite = $html;
 	$html = "";
 	while (preg_match("@(<img([^<>]* +)?\s*src=['\"])"
 		. "((AIDE|IMG|local)/([-_a-zA-Z0-9]*/?)([^'\"<>]*))@ims",
@@ -173,9 +164,9 @@ function help_body($aide, $html, $lang_aide='') {
 		  generer_url_ecrire('aide_index', "img=$img", false, true);
 		$suite = substr($suite, $p + strlen($r[0]));
 	}
-	$html .= $suite;
+
 	// relocaliser img_pack au bon endroit ...
-	$html = preg_replace("@(<img([^<>]* +)?\s*src=['\"])img_pack\/@ims","\\1"._DIR_IMG_PACK,$html);
+	$html = preg_replace("@(<img([^<>]* +)?\s*src=['\"])img_pack\/@ims","\\1"._DIR_IMG_PACK,$html . $suite);
 	
 	echo '<script type="text/javascript"><!--
 
@@ -244,7 +235,6 @@ function help_img($regs) {
 		} else
 			redirige_par_entete("$help_server/$rep/$lang/$file");
 	}
-	exit;
 }
 
 
@@ -445,50 +435,65 @@ function analyse_aide($html, $aide=false) {
 // http://doc.spip.org/@exec_aide_index_dist
 function exec_aide_index_dist()
 {
-  global $help_server, $spip_lang;
+	global $help_server, $spip_lang;
 
-if (_request('var_lang')) changer_langue($lang = _request('var_lang'));
-if (_request('lang')) changer_langue($lang = _request('lang')); # pour le cas ou on a fait appel au menu de changement de langue (aide absente dans la langue x)
-else $lang = $spip_lang;
-if (preg_match(',^([^-.]*)-([^-.]*)-([^\.]*\.(gif|jpg|png))$,', _request('img'), $regs))
-	help_img($regs);
-else {
+	if (_request('var_lang')) changer_langue($lang = _request('var_lang'));
+	if (_request('lang'))
+	  changer_langue($lang = _request('lang')); # pour le cas ou on a fait appel au menu de changement de langue (aide absente dans la langue x)
+	else $lang = $spip_lang;
+
+	if (preg_match(',^([^-.]*)-([^-.]*)-([^\.]*\.(gif|jpg|png))$,', _request('img'), $regs))
+	  help_img($regs);
+	else {
 
 	list($html, $lastmodified) = fichier_aide();
 
+	if ($html === -1)
+	  echo erreur_aide_indisponible();
 	// si on a la doc dans un fichier, controler if_modified_since
-	if ($lastmodified) {
-		$gmoddate = gmdate("D, d M Y H:i:s", $lastmodified);
-		header("Last-Modified: ".$gmoddate." GMT");
-		if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
-			# MSoft IIS is dumb
-		AND !preg_match(',IIS/,', $_SERVER['SERVER_SOFTWARE'])) {
+	elseif ($lastmodified AND !help_lastmodified($lastmodified)) {
+		header("Content-Type: text/html; charset=utf-8");
+		echo _DOCTYPE_AIDE, html_lang_attributes();
+		echo "<head><title>", _T('info_aide_en_ligne'),	"</title>\n";
+		echo '<script type="text/javascript" src="'._DIR_JAVASCRIPT.'jquery.js"></script>';
 
-			$if_modified_since = preg_replace('/;.*/', '',
-				$_SERVER['HTTP_IF_MODIFIED_SINCE']);
-			$if_modified_since = trim(str_replace('GMT', '', $if_modified_since));
-			if ($if_modified_since == $gmoddate) {
-				http_status(304);
-				exit;
-			}
+		if (_request('frame') == 'menu'){
+			help_menu(_request('aide'), $html, $lang);
 		}
-	} 
-
-	header("Content-Type: text/html; charset=utf-8");
-	echo _DOCTYPE_AIDE, html_lang_attributes();
-	echo "<head><title>", _T('info_aide_en_ligne'),	"</title>\n";
-	echo '<script type="text/javascript" src="'._DIR_JAVASCRIPT.'jquery.js"></script>';
-
-	if (_request('frame') == 'menu'){
-		help_menu(_request('aide'), $html, $lang);
+		else if (_request('frame') == 'body') {
+			$aide = _request('aide');
+			if ($aide) {
+				$html = analyse_aide($html, $aide);
+				if (!$html) {
+					echo erreur_aide_indisponible();
+				}
+			} else 	$html = help_panneau();
+			help_body($aide, $html, $lang);
+		} else {
+			echo '</head>';
+			help_frame(_request('aide'), $lang);
+		}
+		echo "\n</html>";
 	}
-	else if (_request('frame') == 'body') {
-		help_body(_request('aide'), $html, $lang);
-	} else {
-		echo '</head>';
-		help_frame(_request('aide'), $lang);
 	}
-	echo "\n</html>";
- }
+}
+
+function help_lastmodified($lastmodified)
+{
+	$gmoddate = gmdate("D, d M Y H:i:s", $lastmodified);
+	header("Last-Modified: ".$gmoddate." GMT");
+	if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
+			# MSoft IIS is dumb
+	AND !preg_match(',IIS/,', $_SERVER['SERVER_SOFTWARE'])) {
+
+		$ims = preg_replace('/;.*/', '',
+				$_SERVER['HTTP_IF_MODIFIED_SINCE']);
+		$ims = trim(str_replace('GMT', '', $ims));
+		if ($ims == $gmoddate) {
+			http_status(304);
+			return true;
+		}
+	}
+	return false;
 }
 ?>
