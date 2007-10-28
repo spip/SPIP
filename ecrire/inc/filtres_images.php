@@ -2428,6 +2428,8 @@ function produire_image_typo() {
 	// Construire requete et nom fichier
 	$text = str_replace("&nbsp;", "~", $texte);	
 	$text = preg_replace(",(\r|\n)+,ms", " ", $text);
+	include_spip('inc/charsets');
+	$text = html2unicode($text);
 	if (strlen($text) == 0) return "";
 
 	$taille = $variable["taille"];
