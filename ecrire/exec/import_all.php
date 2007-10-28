@@ -29,15 +29,18 @@ function exec_import_all_dist()
 			$dir = import_queldir();
 			$_POST['dir'] = $dir;
 			$commentaire = verifier_sauvegarde($dir . $archive);
-	} elseif (!isset($GLOBALS['meta']['import_all']))
-			redirige_par_entete(generer_url_ecrire('accueil'));
-	else $commentaire ='';
-	$action = _T('info_restauration_sauvegarde', 
-		     array('archive' => $archive));
-	$admin = charger_fonction('admin', 'inc');
-	echo $admin('import_all', $action, $commentaire);
-}
+	} else 		$commentaire ='';
 
+	if ($commentaire OR isset($GLOBALS['meta']['import_all'])) {
+		$action = _T('info_restauration_sauvegarde', 
+			     array('archive' => $archive));
+		$admin = charger_fonction('admin', 'inc');
+		echo $admin('import_all', $action, $commentaire);
+	} else {
+		$f = charger_fonction('accueil');
+		$f();
+	}
+}
 
 // http://doc.spip.org/@import_queldir
 function import_queldir()
