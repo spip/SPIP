@@ -30,7 +30,7 @@ function public_styliser_dist($fond, $id_rubrique, $lang='', $connect='', $ext='
 		AND $table = $trouver_table($fond, $connect)) {
 				$base = _DIR_TMP . $fond . ".$ext";
 				if (!file_exists($base)
-				OR  $GLOBALS['var_mode'] == 'recalcul') {
+				OR  $GLOBALS['var_mode']) {
 					$vertebrer = charger_fonction('vertebrer', 'public');
 					$f = fopen($base, 'w');
 					fwrite($f, $vertebrer($table));

@@ -415,28 +415,32 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 	$a = array_shift($url);
 	if (!$a) $a= './';
 
+	$regexp = ',^(' . $c . ')(=.*)?$,';
+	$ajouts = array_flip(explode('|',$c));
+	$u = rawurlencode($v);
 	// lire les variables et agir
 	foreach ($url as $n => $val) {
-		if (preg_match(',^'.preg_quote($c,',').'(=.*)?$,', urldecode($val), $r)) {
+		if (preg_match($regexp, urldecode($val), $r)) {
 			if ($v === NULL) {
-				return $r[1]?substr($r[1],1):''; 
+				return $r[2]?substr($r[2],1):''; 
 			}
 			elseif (!$v) {// suppression
 				unset($url[$n]);
 			} else {
-				$url[$n] = $c.'='.rawurlencode($v);
-				$v = '';
+				$url[$n] = $r[1].'='.$u;
+				unset($ajouts[$r[1]]);
 			}
 		}
 	}
 
-	// ajouter notre parametre si on ne l'a pas encore trouve
+	// traiter les parametres pas encore trouves
 	if ($v === NULL
 	AND $args = func_get_args()
 	AND count($args)==2)
 		return $v;
-	elseif ($v)
-		$url[] = $c.'='.rawurlencode($v);
+	elseif ($v) {
+		foreach($ajouts as $k => $n) $url[] = $k .'=' . $u;
+	} 
 
 	// eliminer les vides
 	$url = array_filter($url);
