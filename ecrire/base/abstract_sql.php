@@ -329,12 +329,13 @@ function sql_hex($val, $serveur='')
 	return $f($val);
 }
 
+// http://doc.spip.org/@sql_in
 function sql_in($val, $valeurs, $not='', $serveur='') {
 	$f = sql_serveur('in', $serveur);
 	return $f($val, $valeurs, $not, $serveur);
 }
 
-// http://doc.spip.org/@test_sql_int
+// http://doc.spip.org/@sql_test_int
 function sql_test_int($type)
 {
   return (preg_match('/^bigint/i',$type)
@@ -342,7 +343,7 @@ function sql_test_int($type)
 	  OR preg_match('/^tinyint/i',$type));
 }
 
-// http://doc.spip.org/@test_sql_date
+// http://doc.spip.org/@sql_test_date
 function sql_test_date($type)
 {
   return (preg_match('/^datetime/i',$type)
