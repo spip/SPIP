@@ -1195,7 +1195,8 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	define('_DIR_TRANSFERT', $ti . "upload/");
 	define('_DIR_CACHE', $ti . "cache/");
 	define('_DIR_CACHE_XML', _DIR_CACHE . "xml/");
-	define('_DIR_SKELS', $ti . "cache/skel/");
+	define('_DIR_SKELS',  _DIR_CACHE . "skel/");
+	define('_DIR_AIDE',  _DIR_CACHE . "aide/");
 	define('_DIR_TMP', $ti);
 
 	define('_FILE_META', $ti . 'meta_cache.txt');
