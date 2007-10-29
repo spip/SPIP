@@ -487,7 +487,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 function debug_affiche($fonc, $tout, $objet, $affiche)
 {
 	if (!$objet) {if ($affiche == 'squelette') $objet = $fonc;}
-	if (!$objet OR !$res = $tout[$affiche][$objet]) return;
+	if (!$objet OR !$quoi = $tout[$affiche][$objet]) return;
 	$res = "<div id=\"debug_boucle\"><fieldset>";
 	if ($affiche == 'resultat') {
 		$res .= "<legend>" .$tout['pretty'][$objet] ."</legend>";
@@ -495,7 +495,7 @@ function debug_affiche($fonc, $tout, $objet, $affiche)
 		if (function_exists('traite_query'))
 			$req = traite_query($req);
 		$res .= ancre_texte($req);
-		foreach ($res as $view) 
+		foreach ($quoi as $view) 
 			if ($view) $res .= "\n<br /><fieldset>" .interdire_scripts($view) ."</fieldset>";
 
 	} else if ($affiche == 'code') {
