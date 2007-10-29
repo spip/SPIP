@@ -140,12 +140,16 @@ function calculer_visites($t) {
 		}
 	}
 	// 3. Les referers du site
+	// insertion pour les nouveaux, au tableau des increments sinon
 	if ($referers) {
 		$ar = array();
-	// inserer les nouveaux
-	// si echec ==> pas un nouveau, ajouter au tableau des increments
+		$trouver_table = charger_fonction('trouver_table', 'base');
+		$desc = $trouver_table('referers');
+		$n = preg_match('/(\d+)/',$desc['field']['referer'], $r);
+		$n = $n ? $r[1] : 255;
 		foreach ($referers as $referer => $num) {
 			$referer_md5 = sql_hex(substr(md5($referer), 0, 15));
+			$referer = substr($referer,0,$n);
 			if (!sql_countsel('spip_referers', "referer_md5=$referer_md5"))
 				sql_insertq('spip_referers',
 					array('visites' => $num,
