@@ -319,32 +319,6 @@ function sql_version($serveur='') {
 	return ($row['n']);
 }
 
-//
-// IN (...) est limite a 255 elements, d'ou cette fonction assistante
-//
-// http://doc.spip.org/@calcul_mysql_in
-function calcul_mysql_in($val, $valeurs, $not='') {
-	if (is_array($valeurs))
-		$valeurs = join(',', array_map('_q', $valeurs));
-	if (!strlen(trim($valeurs))) return ($not ? "0=0" : '0=1');
-
-	$n = $i = 0;
-	$in_sql ="";
-	while ($n = strpos($valeurs, ',', $n+1)) {
-	  if ((++$i) >= 255) {
-			$in_sql .= "($val $not IN (" .
-			  substr($valeurs, 0, $n) .
-			  "))\n" .
-			  ($not ? "AND\t" : "OR\t");
-			$valeurs = substr($valeurs, $n+1);
-			$i = $n = 0;
-		}
-	}
-	$in_sql .= "($val $not IN ($valeurs))";
-
-	return "($in_sql)";
-}
-
 // prend une chaine sur l'aphabet hexa
 // et retourne sa representation numerique:
 // FF ==> 0xFF en MySQL mais x'FF' en PG
@@ -355,8 +329,13 @@ function sql_hex($val, $serveur='')
 	return $f($val);
 }
 
+function sql_in($val, $valeurs, $not='', $serveur='') {
+	$f = sql_serveur('in', $serveur);
+	return $f($val, $valeurs, $not, $serveur);
+}
+
 // http://doc.spip.org/@test_sql_int
-function test_sql_int($type)
+function sql_test_int($type)
 {
   return (preg_match('/^bigint/i',$type)
 	  OR preg_match('/^int/i',$type)
@@ -364,7 +343,7 @@ function test_sql_int($type)
 }
 
 // http://doc.spip.org/@test_sql_date
-function test_sql_date($type)
+function sql_test_date($type)
 {
   return (preg_match('/^datetime/i',$type)
 	  OR preg_match('/^timestamp/i',$type));

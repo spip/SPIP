@@ -498,7 +498,7 @@ function supprimer_documents($liste = array()) {
 	if (!count($liste))
 		return;
 
-	$in = calcul_mysql_in('id_document', $liste);
+	$in = sql_in('id_document', $liste);
 
 	// Supprimer les fichiers locaux et les copies locales
 	// des docs distants

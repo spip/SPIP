@@ -290,7 +290,7 @@ function calcul_generation ($generation) {
 	$lesfils = array();
 	$result = sql_select(array('id_rubrique'),
 				array('spip_rubriques AS rubriques'),
-				array(calcul_mysql_in('id_parent', $generation)));
+				array(sql_in('id_parent', $generation)));
 	while ($row = sql_fetch($result))
 		$lesfils[] = $row['id_rubrique'];
 	return join(",",$lesfils);

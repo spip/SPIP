@@ -59,7 +59,7 @@ function critere_doublons_dist($idb, &$boucles, $crit) {
 		erreur_squelette(_T('zbug_doublon_table_sans_index'), "BOUCLE$idb");
 	$nom = !isset($crit->param[0]) ? "''" : calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
 	// mettre un tableau pour que ce ne soit pas vu comme une constante
-	$boucle->where[]= array("calcul_mysql_in('".$boucle->id_table . '.' . $boucle->primary .
+	$boucle->where[]= array("sql_in('".$boucle->id_table . '.' . $boucle->primary .
 	  "', " .
 	  '"0".$doublons[' . 
 	  ($crit->not ? '' : ($boucle->doublons . "[]= ")) .
@@ -248,7 +248,7 @@ function critere_branche_dist($idb, &$boucles, $crit) {
 			$cle = calculer_jointure($boucle, array($boucle->id_table, $desc), $cle, false);
 	}
 
-	$c = "calcul_mysql_in('" .
+	$c = "sql_in('" .
 		($cle ? "L$cle" : $boucle->id_table) .
 		".id_rubrique', calcul_branche($arg), '')";
 	if ($crit->cond) $c = "($arg ? $c : 1)";
@@ -266,7 +266,7 @@ function critere_logo_dist($idb, &$boucles, $crit) {
 	$not = $crit->not;
 	$boucle = &$boucles[$idb];
 
-	$c = "calcul_mysql_in('" .
+	$c = "sql_in('" .
 	  $boucle->id_table . '.' . $boucle->primary
 	  . "', lister_objets_avec_logos('". $boucle->primary ."'), '')";
 	if ($crit->cond) $c = "($arg ? $c : 1)";
@@ -739,7 +739,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	// la valeur comparee doit etre munie ou non d'apostrophes
 	if ($op == '=' OR in_array($op, $table_criteres_infixes)) {
 		if (strpos($val[0], '_q(') === 0
-		AND $desc AND test_sql_int($desc['field'][$col]))
+		AND $desc AND sql_test_int($desc['field'][$col]))
 			$val[0] = 'intval' . substr($val[0],2);
 	}
 	// tag du critere pour permettre aux boucles de modifier leurs requetes par defaut en fonction de ca
@@ -1023,7 +1023,6 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit)
 		$val = 'id_parent';
 	// un critere conditionnel sur date est traite a part
 	// car la date est mise d'office par SPIP, 
-	// il faut 
 	      if ($crit->cond AND tester_param_date('articles', $col))
 		  $val ='@$Pile["env"][\'' . $col ."']";
 	      else $val = calculer_argument_precedent($idb, $val, $boucles);

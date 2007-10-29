@@ -111,7 +111,7 @@ function exec_recherche_dist() {
 				array(
 					// gasp: la requete spip_articles exige AS articles...
 					'FROM' => table_objet_sql($table).' AS '.$table.'s',
-					'WHERE' => calcul_mysql_in(
+					'WHERE' => sql_in(
 						$table.'s.'.id_table_objet($table),
 						array_keys($r)
 					),
