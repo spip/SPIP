@@ -75,11 +75,9 @@ function exec_statistiques_svg_ok($id_article,  $aff_jours, $visites_today, $exp
 	if (!$aff_jours) $aff_jours = 105;
 	if ($id_article){
 		$table = "spip_visites_articles";
-		$table_ref = "spip_referers_articles";
 		$where = "id_article=$id_article";
 	} else {
 		$table = "spip_visites";
-		$table_ref = "spip_referers";
 		$where = "0=0";
 	}
 	

@@ -442,4 +442,9 @@ $GLOBALS['maj'][1][957] = array(
 	array('sql_alter', "TABLE spip_mots CHANGE `id_groupe` `id_groupe` bigint(21) DEFAULT 0 NOT NULL"),
     array('sql_alter', "TABLE spip_documents CHANGE `mode` `mode` ENUM('vignette', 'image', 'document') DEFAULT 'document' NOT NULL")
 	);
+
+// Ce champ est inutile et provoque une erreur a l'insertion qui l'oublie
+$GLOBALS['maj'][1][958] = array(
+	array('sql_alter', "TABLE spip_referers_articles DROP date")
+);
 ?>
