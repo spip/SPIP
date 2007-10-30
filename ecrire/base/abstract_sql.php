@@ -15,8 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Ce fichier definit la couche d'abstraction entre SPIP et ses serveurs SQL.
 // Cette couche n'est pour le moment qu'un ensemble de fonctions ecrites
 // rapidement pour generaliser le code strictement MySQL de SPIP < 1.9.3.
-// Une reconception generale est a prevoir apres l'experience des premiers
-// portages.
+// Des retouches sont a prevoir apres l'experience des premiers portages.
 
 // Cette fonction charge la description d'un serveur de base de donnees
 // (via la fonction spip_connect qui etablira la connexion si ce n'est fait)
@@ -24,14 +23,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Erreur fatale si la fonctionnalite est absente sauf si le 3e arg <> false
 
 // http://doc.spip.org/@sql_serveur
-function sql_serveur($ins_sql, $serveur='', $continue=false) {
+function sql_serveur($ins_sql='', $serveur='', $continue=false) {
 
 	$desc = spip_connect($serveur);
 	if (function_exists($f = @$desc[$ins_sql])) return $f;
-	spip_log("Le serveur '$serveur' ne dispose pas de  '$ins_sql'");
-	if ($continue) return false;
+	if ($ins_sql)
+		spip_log("Le serveur '$serveur' n'a pas '$ins_sql'");
+	if ($continue) return $desc;
 	include_spip('inc/minipres');
-	echo minipres(_T('info_travaux_titre'),  _T('titre_probleme_technique'));
+	echo minipres(_T('info_travaux_titre'), _T('titre_probleme_technique'));
 	exit;
 }
 
@@ -248,19 +248,19 @@ function sql_errno($serveur='') {
 // http://doc.spip.org/@sql_explain
 function sql_explain($q, $serveur='') {
 	$f = sql_serveur('explain', $serveur, true);
-	return $f ?  $f($q, $serveur) : false;
+	return @function_exists($f) ? $f($q, $serveur) : false;
 }
 
 // http://doc.spip.org/@sql_optimize
 function sql_optimize($q, $serveur='') {
 	$f = sql_serveur('optimize', $serveur, true);
-	return $f ?  $f($q, $serveur) : false;
+	return @function_exists($f) ? $f($q, $serveur) : false;
 }
 
 // http://doc.spip.org/@sql_repair
 function sql_repair($q, $serveur='') {
 	$f = sql_serveur('repair', $serveur, true);
-	return $f ?  $f($q, $serveur) : false;
+	return @function_exists($f) ? $f($q, $serveur) : false;
 }
 
 // Fonction la plus generale ... et la moins portable
