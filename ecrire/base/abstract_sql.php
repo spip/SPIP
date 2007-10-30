@@ -21,48 +21,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Cette fonction charge la description d'un serveur de base de donnees
 // (via la fonction spip_connect qui etablira la connexion si ce n'est fait)
 // et retourne la fonction produisant la requête SQL demandee
-// Erreur fatale si la fonctionnalite est absente
+// Erreur fatale si la fonctionnalite est absente sauf si le 3e arg <> false
 
 // http://doc.spip.org/@sql_serveur
-function sql_serveur($ins_sql, $serveur='') {
+function sql_serveur($ins_sql, $serveur='', $continue=false) {
 
 	$desc = spip_connect($serveur);
 	if (function_exists($f = @$desc[$ins_sql])) return $f;
 	spip_log("Le serveur '$serveur' ne dispose pas de  '$ins_sql'");
+	if ($continue) return false;
 	include_spip('inc/minipres');
 	echo minipres(_T('info_travaux_titre'),  _T('titre_probleme_technique'));
 	exit;
-}
-
-// Dans quelques cas, l'absence de fonctionnalite ne doit pas declencher
-// d'erreur fatale ==> ne pas utiliser la fonction generale
-
-// http://doc.spip.org/@sql_explain
-function sql_explain($q, $serveur='') {
-	$desc = spip_connect($serveur);
-	if (function_exists($f = @$desc['explain'])) {
-		return $f($q, $serveur);
-	}
-	spip_log("Le serveur '$serveur' ne dispose pas de 'explain'");
-	return false;
-}
-
-// http://doc.spip.org/@sql_optimize
-function sql_optimize($q, $serveur='') {
-	$desc = spip_connect($serveur);
-	if (function_exists($f = @$desc['optimize'])) {
-		return $f($q, $serveur);
-	}
-	spip_log("Le serveur '$serveur' ne dispose pas de 'optimize'");
-}
-
-// http://doc.spip.org/@sql_repair
-function sql_repair($table, $serveur='') {
-	$desc = spip_connect($serveur);
-	if (function_exists($f = @$desc['repair'])) {
-		return $f($table, $serveur);
-	}
-	spip_log("Le serveur '$serveur' ne dispose pas de 'repair'");
 }
 
 // Demande si un charset est disponible. 
@@ -273,6 +243,24 @@ function sql_error($query='requete inconnue', $serveur='') {
 function sql_errno($serveur='') {
   	$f = sql_serveur('errno', $serveur);
 	return $f();
+}
+
+// http://doc.spip.org/@sql_explain
+function sql_explain($q, $serveur='') {
+	$f = sql_serveur('explain', $serveur, true);
+	return $f ?  $f($q, $serveur) : false;
+}
+
+// http://doc.spip.org/@sql_optimize
+function sql_optimize($q, $serveur='') {
+	$f = sql_serveur('optimize', $serveur, true);
+	return $f ?  $f($q, $serveur) : false;
+}
+
+// http://doc.spip.org/@sql_repair
+function sql_repair($table, $serveur='') {
+	$f = sql_serveur('repair', $serveur, true);
+	return $f ?  $f($q, $serveur) : false;
 }
 
 // Fonction la plus generale ... et la moins portable
