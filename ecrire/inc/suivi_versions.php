@@ -30,6 +30,19 @@ function afficher_para_modifies ($texte, $court = false) {
 	return $texte;
 }
 
+
+// Retourne le titre de la rubrique demandee, pour affichage de la chaine
+// "deplace de XX vers YY"
+// http://doc.spip.org/@titre_rubrique
+function titre_rubrique($id_rubrique) {
+	if (!$id = intval($id_rubrique))
+		return _T('info_sans_titre');
+
+	$t = sql_fetsel('titre', 'spip_rubriques', "id_rubrique=$id");
+	return typo($t['titre']);
+}
+
+
 // http://doc.spip.org/@afficher_suivi_versions
 function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = false, $lang = "", $court = false, $rss = false) {
 	
@@ -212,7 +225,7 @@ function revision_comparee($id_article, $id_version, $format='diff', $id_diff=NU
 		// Mode "complet": on veut afficher tous les champs
 		switch ($format) {
 			case 'complet':
-				$champs = array('surtitre', 'titre', 'soustitre', 'descriptif', 'nom_site', 'url_site', 'chapo', 'texte', 'ps');
+				$champs = liste_champs_versionnes('spip_articles');
 				break;
 			case 'diff':
 			case 'apercu':
@@ -242,13 +255,26 @@ function revision_comparee($id_article, $id_version, $format='diff', $id_diff=NU
 			// si on a les deux, le diff nous interesse, plus ou moins court
 			if (isset($new[$champ])
 			AND isset($old[$champ])) {
-				$diff = new Diff(new DiffTexte);
-				$n = preparer_diff($new[$champ]);
-				$o = preparer_diff($old[$champ]);
-				$textes[$champ] = afficher_diff($diff->comparer($n,$o));
+				// cas particulier : id_rubrique
+				if (in_array($champ, array('id_rubrique'))) {
+					$textes[$champ] = _L("D&#233;plac&#233; de <b>&#171;&nbsp;"
+						. titre_rubrique($old[$champ])
+						. "&nbsp;&#187;</b> vers <b>&#171;&nbsp;"
+						. titre_rubrique($new[$champ])
+						. "&nbsp;&#187;</b>."
+					);
+				}
+				
+				// champs textuels
+				else {
+					$diff = new Diff(new DiffTexte);
+					$n = preparer_diff($new[$champ]);
+					$o = preparer_diff($old[$champ]);
+					$textes[$champ] = afficher_diff($diff->comparer($n,$o));
 
-				if ($format == 'diff' OR $format == 'apercu')
-					$textes[$champ] = afficher_para_modifies($textes[$champ], ($format == 'apercu'));
+					if ($format == 'diff' OR $format == 'apercu')
+						$textes[$champ] = afficher_para_modifies($textes[$champ], ($format == 'apercu'));
+				}
 			}
 		}
 	}
