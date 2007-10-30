@@ -78,7 +78,7 @@ if (isset($_GET['set_disp'])) {
 	$prefs_mod = true;
 }
 if ($prefs_mod AND !$var_auth) {
-	spip_query("UPDATE spip_auteurs SET prefs = " . _q(serialize($GLOBALS['auteur_session']['prefs'])) . " WHERE id_auteur = " .intval($GLOBALS['auteur_session']['id_auteur']));
+	sql_updateq('spip_auteurs', array('prefs' => serialize($GLOBALS['auteur_session']['prefs'])), "id_auteur=" .intval($GLOBALS['auteur_session']['id_auteur']));
  }
 
 // compatibilite ascendante
@@ -99,18 +99,17 @@ include_spip('inc/lang');
 //  si la langue est specifiee par cookie alors ...
 if (isset($_COOKIE['spip_lang_ecrire'])) {
 
-	$spip_lang_ecrire = $_COOKIE['spip_lang_ecrire'];
 	// si pas authentifie, changer juste pour cette execution
 	if ($var_auth)
 		changer_langue($_COOKIE['spip_lang_ecrire']);
 	// si authentifie, changer definitivement si ce n'est fait
-	else {	if (($spip_lang_ecrire <> $GLOBALS['auteur_session']['lang'])
-		AND changer_langue($spip_lang_ecrire)) {
-			spip_query("UPDATE spip_auteurs SET lang = " . _q($spip_lang_ecrire) . " WHERE id_auteur = " . intval($GLOBALS['auteur_session']['id_auteur']));
-			$GLOBALS['auteur_session']['lang'] = $spip_lang_ecrire;
+	elseif (($_COOKIE['spip_lang_ecrire'] <> $GLOBALS['auteur_session']['lang'])
+		AND changer_langue($_COOKIE['spip_lang_ecrire'])) {
+			sql_updateq('spip_auteurs', array('lang' => $_COOKIE['spip_lang_ecrire']), "id_auteur=" .intval($GLOBALS['auteur_session']['id_auteur']));
+
+			$GLOBALS['auteur_session']['lang'] = $_COOKIE['spip_lang_ecrire'];
 			$session = charger_fonction('session', 'inc');
 			$session($GLOBALS['auteur_session']);
-		}
 	}
 }
 
