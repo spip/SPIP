@@ -37,7 +37,9 @@ function vertebrer_sort($fields, $direction)
 		$url = vertebrer_sanstri($tri)
 		.  "|parametre_url{" . $tri . ",'" . $n . "'}";
 
-		$res .= "\n\t\t<th style='text-align: center'><a href='[(#SELF$url)]'>$n</a></th>";
+		$res .= "\n\t\t<th style='text-align: center'>"
+		. "\n\t\t\t<a href='[(#SELF$url)]'>$n</a>"
+		. "\n\t\t</th>";
 	}
 	return $res;
 }
@@ -86,25 +88,31 @@ function vertebrer_crit($v)
 
 
 // Class CSS en fonction de la parite du numero de ligne.
-// Si une colonne reference une table, ajoute un href sur sa page dynamique.
-// Ce serait encore mieux d'aller chercher sa cle primaire.
+// Style text-align en fonction du type SQL (numerique ou non).
+// Filtre de belle date sur type SQL signalant une date ou une estampille.
+// Si une colonne reference une table, ajoute un href sur sa page dynamique
+// (il faudrait aller chercher sa def pour ilustrer les jointures en SPIP)
 
 // http://doc.spip.org/@vertebrer_cell
 function vertebrer_cell($fields)
 {
-  $res = "";
-  foreach($fields as $n => $t) {
- {
-      $texte = "#" . strtoupper($n);
-      if (preg_match('/\s+references\s+([\w_]+)/' , $t, $r)) {
-	$url = "[(#SELF|parametre_url{page,'" . $r[1] . "'})]";
-	$texte = "<a href='$url'>" . $texte . "</a>";
-      }
-      $s = sql_test_int($t) ? " style='text-align: right;'" : '';
-      $res .= "\n\t\t<td$s>$texte</td>";
-    }
-  }
-  return $res;
+	$res = "";
+	foreach($fields as $n => $t) {
+		$texte = "#" . strtoupper($n);
+		if (preg_match('/\s+references\s+([\w_]+)/' , $t, $r)) {
+			$url = "[(#SELF|parametre_url{page,'" . $r[1] . "'})]";
+			$texte = "<a href='$url'>" . $texte . "</a>";
+		}
+		if (sql_test_int($t))
+			$s = " style='text-align: right;'";
+		else {
+			$s = '';
+			if (sql_test_date($t))
+				$texte = "[($texte|affdate_heure)]";
+		}
+		$res .= "\n\t\t<td$s>$texte</td>";
+	}
+	return $res;
 }
 
 // http://doc.spip.org/@public_vertebrer_dist
