@@ -258,7 +258,7 @@ function sql_optimize($q, $serveur='') {
 }
 
 // http://doc.spip.org/@sql_repair
-function sql_repair($table, $serveur='') {
+function sql_repair($q, $serveur='') {
 	$f = sql_serveur('repair', $serveur, true);
 	return $f ?  $f($q, $serveur) : false;
 }
