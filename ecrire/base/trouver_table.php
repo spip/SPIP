@@ -27,7 +27,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@base_trouver_table_dist
 function base_trouver_table_dist($nom, $serveur='')
 {
-	global $tables_principales, $tables_auxiliaires, $table_des_tables, $connexions;
+	global $tables_principales, $tables_auxiliaires, $table_des_tables;
 
 	if (!spip_connect($serveur)
 	OR !preg_match('/^[a-zA-Z0-9._-]+/',$nom))
@@ -36,18 +36,15 @@ function base_trouver_table_dist($nom, $serveur='')
 	if (preg_match('/\.(.*)$/', $nom, $s))
 		$nom_sql = $s[1];
 	else $nom_sql = $nom;
-	$s = $serveur ? $serveur : 0;
-
-	if ($connexions[$s]['spip_connect_version']) {
+	$desc = '';
+	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	// base sous SPIP: gerer les abreviations des noms de table
+	if ($connexion['spip_connect_version']) {
 		include_spip('public/interfaces');
-		// base sous SPIP, le nom SQL peut etre autre
 		if (isset($table_des_tables[$nom])) {
-		  // indirection (table principale avec nom!=type)
 			$t = $table_des_tables[$nom];
 			$nom_sql = 'spip_' . $t;
-			if (isset($connexions[$s]['tables'][$nom_sql])) 
-				return $connexions[$s]['tables'][$nom_sql];
-			else {
+			if (!isset($connexion['tables'][$nom_sql])) {
 				include_spip('base/serial');
 				$desc = $tables_principales[$nom_sql];
 				$nom = $t;
@@ -56,27 +53,26 @@ function base_trouver_table_dist($nom, $serveur='')
 			include_spip('base/auxiliaires');
 			if (isset($tables_auxiliaires['spip_' .$nom])) {
 				$nom_sql = 'spip_' . $nom;
-				if (isset($connexions[$s]['tables'][$nom_sql])) 
-					return $connexions[$s]['tables'][$nom_sql];
-				else {
-				  $desc = $tables_auxiliaires[$nom_sql];
+				if (!isset($connexion['tables'][$nom_sql])) {
+					$desc = $tables_auxiliaires[$nom_sql];
 				}
 			}  # table locale a cote de SPIP, comme non SPIP:
 		}
 	}
-	if (!isset($connexions[$s]['tables'][$nom_sql])) {
-		
-		$desc = sql_showtable($nom_sql, $serveur, ($nom_sql != $nom));
-		if (!$desc OR !$desc['field']) {
-			spip_log("table inconnue $serveur $nom");
-			return null;
+	if (!isset($connexion['tables'][$nom_sql])) {
+		if (!$desc) {
+			$t = ($nom_sql != $nom);
+			$desc = sql_showtable($nom_sql, $t, $serveur);
+			if (!$desc OR !$desc['field']) {
+				spip_log("table inconnue $serveur $nom");
+				return null;
+			}
 		}
+		$desc['table']= $nom_sql;
+		$desc['id_table']= $nom;
+		$desc['connexion']= $serveur;
+		$connexion['tables'][$nom_sql] = $desc;
 	}
-	$desc['table']= $nom_sql;
-	$desc['id_table']= $nom;
-	$desc['connexion']= $serveur;
-	$connexions[$s]['tables'][$nom_sql] = $desc;
-
-	return $connexions[$s]['tables'][$nom_sql];
+	return $connexion['tables'][$nom_sql];
 }
 ?>
