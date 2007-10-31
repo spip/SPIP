@@ -44,7 +44,11 @@ function req_pg_dist($addr, $port, $login, $pass, $db='', $prefixe='', $ldap='')
 		'db' => $db,
 		'prefixe' => $prefixe ? $prefixe : $db,
 		'link' => $link,
-		'ldap' => $ldap,
+		'ldap' => $ldap
+		);
+}
+
+$GLOBALS['spip_pg_functions_1'] = array(
 		'alter' => 'spip_pg_alter',
 		'count' => 'spip_pg_count',
 		'countsel' => 'spip_pg_countsel',
@@ -72,7 +76,6 @@ function req_pg_dist($addr, $port, $login, $pass, $db='', $prefixe='', $ldap='')
 		'update' => 'spip_pg_update',
 		'updateq' => 'spip_pg_updateq',
 		);
-}
 
 // Par ou ca passe une fois les traductions faites
 // http://doc.spip.org/@spip_pg_trace_query

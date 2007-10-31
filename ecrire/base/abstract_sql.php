@@ -12,35 +12,32 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// Ce fichier definit la couche d'abstraction entre SPIP et ses serveurs SQL.
-// Cette couche n'est pour le moment qu'un ensemble de fonctions ecrites
-// rapidement pour generaliser le code strictement MySQL de SPIP < 1.9.3.
-// Des retouches sont a prevoir apres l'experience des premiers portages.
+define('sql_ABSTRACT_VERSION', 1);
 
-// Cette fonction charge la description d'un serveur de base de donnees
-// (via la fonction spip_connect qui etablira la connexion si ce n'est fait)
-// et retourne la fonction produisant la requête SQL demandee
+// Ce fichier definit la couche d'abstraction entre SPIP et ses serveurs SQL.
+// Cette version 1 est un ensemble de fonctions ecrites rapidement
+// pour generaliser le code strictement MySQL de SPIP < 1.9.3.
+// Des retouches sont a prevoir apres l'experience des premiers portages.
+// Les symboles sql_* (constantes et nom de fonctions) sont reserves
+// a cette interface, sans quoi le gestionnaire de version dysfonctionnera.
+
+// Fonction principale. Elle charge l'interface au serveur de base de donnees
+// via la fonction spip_connect_version qui etablira la connexion au besoin.
+// Elle retourne la fonction produisant la requête SQL demandee
 // Erreur fatale si la fonctionnalite est absente sauf si le 3e arg <> false
 
 // http://doc.spip.org/@sql_serveur
 function sql_serveur($ins_sql='', $serveur='', $continue=false) {
-
-	$desc = spip_connect($serveur);
-	if (function_exists($f = @$desc[$ins_sql])) return $f;
-	if ($ins_sql)
-		spip_log("Le serveur '$serveur' n'a pas '$ins_sql'");
-	if ($continue) return $desc;
-	include_spip('inc/minipres');
-	echo minipres(_T('info_travaux_titre'), _T('titre_probleme_technique'));
-	exit;
+	return spip_connect_sql(sql_ABSTRACT_VERSION, $ins_sql, $serveur, $continue);
 }
 
 // Demande si un charset est disponible. 
 // http://doc.spip.org/@sql_get_charset
 function sql_get_charset($charset, $serveur=''){
   // le nom http du charset differe parfois du nom SQL utf-8 ==> utf8 etc.
-	$desc = spip_connect($serveur);
-	$c = @$desc['charsets'][$charset];
+	$desc = sql_serveur('', $serveur, true);
+	$desc = $desc[sql_ABSTRACT_VERSION];
+	$c = $desc['charsets'][$charset];
 	if ($c) {
 		if (function_exists($f=@$desc['get_charset'])) 
 			if ($f($c, $serveur)) return $c;

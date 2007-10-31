@@ -48,6 +48,9 @@ function install_etape_sup1_dist()
 	echo install_debut_html(_L("D&eacute;claration d'une base suppl&eacute;mentaire"));
 
 	$link = spip_connect_db($adresse_db, 0, $login_db, $pass_db, '', $server_db);
+	$GLOBALS['connexions'][$server_db][$GLOBALS['spip_sql_version']]
+	= $GLOBALS['spip_' . $server_db .'_functions_' . $GLOBALS['spip_sql_version']];
+
 	if ($link) {
 		$GLOBALS['connexions'][$server_db] = $link;
 

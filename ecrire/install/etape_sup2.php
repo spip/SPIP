@@ -21,6 +21,9 @@ function install_bases_sup($adresse_db, $login_db, $pass_db,  $server_db, $sup_d
 
 		return "<!-- connection perdue -->";
 
+	$GLOBALS['connexions'][$server_db][$GLOBALS['spip_sql_version']]
+	= $GLOBALS['spip_' . $server_db .'_functions_' . $GLOBALS['spip_sql_version']];
+
 	if (!sql_selectdb($sup_db, $server_db))
 		return "<!-- base inaccessible -->";
 

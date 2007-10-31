@@ -35,6 +35,10 @@ function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='', $ldap=
 		'prefixe' => $prefixe ? $prefixe : $db,
 		'link' => $GLOBALS['mysql_rappel_connexion'] ? $link : false,
 		'ldap' => $ldap,
+		);
+}
+
+$GLOBALS['spip_mysql_functions_1'] = array(
 		'alter' => 'spip_mysql_alter',
 		'count' => 'spip_mysql_count',
 		'countsel' => 'spip_mysql_countsel',
@@ -76,7 +80,6 @@ function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='', $ldap=
 //'iso-8859-15'=>array('charset'=>'latin1','collation'=>'latin1_swedish_ci'),
 'utf-8'=>array('charset'=>'utf8','collation'=>'utf8_general_ci'))
 		);
-}
 
 // http://doc.spip.org/@spip_mysql_set_charset
 function spip_mysql_set_charset($charset, $serveur=''){
