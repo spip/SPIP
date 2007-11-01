@@ -317,6 +317,7 @@ function spip_pg_groupby($groupby, $from, $select)
 
 	  if (preg_match('/^(.*),\s*$/',$join,$m)) $join=$m[1];
 	}
+	if (is_array($groupby)) $grouby = join(',',$groupby);
 	if ($join) $groupby = $groupby ? "$groupby, $join" : $join;
 	if (!$groupby) return '';
 
