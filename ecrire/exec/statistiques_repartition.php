@@ -80,29 +80,36 @@ function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 				echo "<table cellpadding='2' cellspacing='0' border='0' width='100%'>";
 				echo "\n<tr style='background-color: $couleur'>";
 				echo "\n<td style='border-bottom: 1px solid #aaaaaa; padding-$spip_lang_left: ".($niveau*20+5)."px;'>";
-				if ($niveau==0 OR 1==1){
-					$pourcent = round($nombre_vis[$id_rubrique]/$abs_total*1000)/10;
-					echo "\n<div class='verdana1' style='float: $spip_lang_right;'>$pourcent%</div>";
-				}
 
 				
 				if ( $largeur_rouge > 2) 
-					echo bouton_block_depliable("<a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "' style='color: black;' title=\"$descriptif\">$titre</a>","plie","stats$id_rubrique");
+					echo bouton_block_depliable("<a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "' style='color: black;' title=\"$descriptif\">$titre</a>","incertain", "stats$id_rubrique");
 				else
 					echo 	"<span class='verdana1'>",
 					  "<a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "' style='color: black;' title=\"$descriptif\">$titre</a>",
 					  "</span>";
-				echo "</td>\n<td align='right' style='border-bottom: 1px solid #aaaaaa; width:" . ($taille+5) ."px'>";
+				echo "</td>";
+				
+				
+				if ($niveau==0 OR 1==1){
+					$pourcent = round($nombre_vis[$id_rubrique]/$abs_total*1000)/10;
+					echo "\n<td class='verdana1' style='width: 40px; border-bottom: 1px solid #aaaaaa;'>$pourcent%</td>";
+				}
+				else { echo "<td style='width: 10px; border-bottom: 1px solid #aaaaaa;'></td>"; }
+				
+				
+				echo "\n<td align='right' style='border-bottom: 1px solid #aaaaaa; width:" . ($taille+5) ."px'>";
 				
 				
 				echo "\n<table cellpadding='0' cellspacing='0' border='0' width='".($decalage+1+$gauche)."'>";
 				echo "\n<tr>";
 				if ($gauche > 0) echo "<td style='width: " .$gauche."px'></td>";
-				echo "\n<td style='background-color: #eeeeee; border: 1px solid #999999; white-space: nowrap;'>";
-				if ($visites_abs > 0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' style='height: 8px; border: 0px; width: ".$visites_abs."px;' alt= ' '/>";
-				if ($largeur_rouge>0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' class='couleur_cumul' style='height: 8px; border: 0px; width: " . $largeur_rouge . "px;' alt=' ' />";
-				if ($largeur_vert>0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' class='couleur_nombre' style='width: " . $largeur_vert ."px; height: 8px; border: 0px' alt=' ' />";
-				
+				echo "\n<td style='border: 0px; white-space: nowrap;'>";
+				echo "<div style='border: 1px solid #999999; background-color: #dddddd; height: 8px; padding: 0px; margin: 0px;'>";
+				if ($visites_abs > 0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' style='vertical-align: top; height: 8px; border: 0px; width: ".$visites_abs."px;' alt= ' '/>";
+				if ($largeur_rouge>0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' class='couleur_cumul' style='vertical-align: top; height: 8px; border: 0px; width: " . $largeur_rouge . "px;' alt=' ' />";
+				if ($largeur_vert>0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' class='couleur_nombre' style='vertical-align: top; width: " . $largeur_vert ."px; height: 8px; border: 0px' alt=' ' />";
+				echo "</div>";
 				echo "</td></tr></table>\n";
 				echo "</td></tr></table>";
 			}	
