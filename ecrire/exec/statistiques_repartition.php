@@ -93,7 +93,7 @@ function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 				
 				if ($niveau==0 OR 1==1){
 					$pourcent = round($nombre_vis[$id_rubrique]/$abs_total*1000)/10;
-					echo "\n<td class='verdana1' style='width: 40px; border-bottom: 1px solid #aaaaaa;'>$pourcent%</td>";
+					echo "\n<td class='verdana1' style='text-align: $spip_lang_right; width: 40px; border-bottom: 1px solid #aaaaaa;'>$pourcent%</td>";
 				}
 				else { echo "<td style='width: 10px; border-bottom: 1px solid #aaaaaa;'></td>"; }
 				
