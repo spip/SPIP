@@ -348,7 +348,7 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 	if (!$id_document) return '';
 	if ($doubdoc) $doublons["documents"] .= ','.$id_document;
 
-	if (!($row = sql_fetsel('extension, id_vignette, fichier, mode', 'spip_documents', ("id_document = $id_document"), '','','','','','','',$connect))) {
+	if (!($row = sql_fetsel('extension, id_vignette, fichier, mode', 'spip_documents', ("id_document = $id_document"),'','','','',$connect))) {
 		// pas de document. Ne devrait pas arriver
 		spip_log("Erreur du compilateur doc $id_document inconnu");
 		return ''; 
@@ -363,7 +363,7 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 	// Y a t il une vignette personnalisee ?
 	// Ca va echouer si c'est en mode distant. A revoir.
 	if ($id_vignette) {
-		$vignette = sql_fetsel('fichier','spip_documents',("id_document = $id_vignette"), '','','','','','','',$connect);
+		$vignette = sql_fetsel('fichier','spip_documents',("id_document = $id_vignette"), '','','','',$connect);
 		if (@file_exists(get_spip_doc($vignette['fichier'])))
 			$logo = generer_url_document($id_vignette);
 	} else if ($mode == 'vignette') {
@@ -470,10 +470,9 @@ function lang_parametres_forum($qs, $lang) {
 
 // http://doc.spip.org/@calculer_select
 function calculer_select ($select = array(), $from = array(), 
-			    $where = array(), $join=array(),
-			    $groupby = '', $orderby = array(), $limit = '',
-			    $sousrequete = '', $having = array(),
-			    $table = '', $id = '', $serveur='') {
+			$where = array(), $join=array(),
+			$groupby = '', $orderby = array(), $limit = '',
+			$having, $table = '', $id = '', $serveur='') {
 
 // retirer les criteres vides:
 // {X ?} avec X absent de l'URL
@@ -510,11 +509,12 @@ function calculer_select ($select = array(), $from = array(),
 		else { unset($from[$cle]); unset($join[$k]);}
 	}
 
-	return sql_select($select, $from, $where,
-		  $groupby, array_filter($orderby), $limit,
-		  $sousrequete, $having,
-		  $table, $id, $serveur);
+	$GLOBALS['debug']['aucasou'] = array ($table, $id, $serveur);
 
+	$r = sql_select($select, $from, $where,
+		$groupby, array_filter($orderby), $limit, $having, $serveur);
+	unset($GLOBALS['debug']['aucasou']);
+	return $r;
 }
 
 //condition suffisante (mais non necessaire) pour qu'une jointure soit inutile

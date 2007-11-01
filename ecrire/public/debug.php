@@ -91,7 +91,7 @@ function chrono_requete($tableau_des_temps)
 // avec son code d'erreur
 //
 // http://doc.spip.org/@erreur_requete_boucle
-function erreur_requete_boucle($query, $id_boucle, $type, $errno, $erreur) {
+function erreur_requete_boucle($query, $errno, $erreur) {
 
 	$GLOBALS['bouton_admin_debug'] = true;
 
@@ -121,19 +121,19 @@ function erreur_requete_boucle($query, $id_boucle, $type, $errno, $erreur) {
 		. htmlspecialchars($erreur)
 		. "</b></span><br />";
 		
-		if ($id_boucle) {
-		  $err = "<blink>&lt;BOUCLE".$id_boucle."&gt;($type)</blink>"
+		if (isset($GLOBALS['debug']['aucasou'])) {
+		  list($table, $id, $serveur) = $GLOBALS['debug']['aucasou'];
+		  $err = "<blink>&lt;BOUCLE".$id."&gt;($able)</blink>"
 		    .   "<br />\n"
 		    . $err
-		    . "<blink>&lt;/BOUCLE".$id_boucle."&gt;</blink>\n";
+		    . "<blink>&lt;/BOUCLE".$id."&gt;</blink>\n";
 		}
 		$retour .= "<tt>$err</tt>" . aide('erreur_mysql');
-		spip_log("Erreur requete $id_boucle (".$GLOBALS['fond'].".html)");
+		spip_log("Erreur requete $id (".$GLOBALS['fond'].".html)");
 	}
 
 	erreur_squelette($retour);
 }
-
 
 //
 // Erreur de syntaxe des squelettes : memoriser le code fautif

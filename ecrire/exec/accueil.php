@@ -298,7 +298,7 @@ function etat_base_accueil()
 
 	$res .= propre($GLOBALS['meta']["descriptif_site"]);
 
-	$q = sql_select("COUNT(*) AS cnt, statut", 'spip_articles', '', 'statut', '','','', "COUNT(*)<>0");
+	$q = sql_select("COUNT(*) AS cnt, statut", 'spip_articles', '', 'statut', '','', "COUNT(*)<>0");
   
 	$cpt = array();
 	$cpt2 = array();
@@ -323,7 +323,7 @@ function etat_base_accueil()
 		$res .= "</ul>";
 	}
 
-	$q = sql_select("COUNT(*) AS cnt, statut", 'spip_breves', '', 'statut', '','','', "COUNT(*)<>0");
+	$q = sql_select("COUNT(*) AS cnt, statut", 'spip_breves', '', 'statut', '','', "COUNT(*)<>0");
 
 	$cpt = array();
 	$cpt2 = array();
@@ -348,7 +348,7 @@ function etat_base_accueil()
 		$res .= "</ul>";
 	}
 
-	$q = sql_select('COUNT(*) AS cnt, statut', 'spip_forum', "statut IN ('publie', 'prop')", 'statut', '','','', "COUNT(*)<>0");
+	$q = sql_select('COUNT(*) AS cnt, statut', 'spip_forum', "statut IN ('publie', 'prop')", 'statut', '','', "COUNT(*)<>0");
 
 	$cpt = array();
 	$cpt2 = array();
@@ -390,7 +390,7 @@ function accueil_liste_participants()
 {
 	global $spip_lang_left;
 
-	$q = sql_select("COUNT(*) AS cnt, statut", 'spip_auteurs', "statut IN (".  _q($GLOBALS['liste_des_statuts']) . ")", 'statut', '','','', "COUNT(*)<>0");
+	$q = sql_select("COUNT(*) AS cnt, statut", 'spip_auteurs', "statut IN (".  _q($GLOBALS['liste_des_statuts']) . ")", 'statut', '','', "COUNT(*)<>0");
 
 	$cpt = array();
 	while($row=sql_fetch($q)) $cpt[$row['statut']] = $row['cnt']; 
@@ -417,7 +417,7 @@ function exec_accueil_dist()
 
 	$id_rubrique =  intval($id_rubrique);
  	pipeline('exec_init',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
- 
+
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_index'), "accueil", "accueil");
 

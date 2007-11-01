@@ -19,7 +19,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function generer_url_ecrire_article($id, $suite='', $ancre='', $statut='', $connect='') {
 	$a = "id_article=" . intval($id);
 	if (!$statut) {
-		$statut = sql_fetsel('statut', 'spip_articles', $a,'','','','','','','',$connect);
+		$statut = sql_fetsel('statut', 'spip_articles', $a,'','','','',$connect);
 		$statut = $statut['statut'];
 	}
 	if ($suite) $a .= "&$suite";
@@ -33,7 +33,7 @@ function generer_url_ecrire_article($id, $suite='', $ancre='', $statut='', $conn
 function generer_url_ecrire_rubrique($id, $suite='', $ancre='', $statut='', $connect='') {
 	$a = "id_rubrique=" . intval($id);
 	if (!$statut) {
-		$statut = sql_fetsel('statut', 'spip_rubriques', $a,'','','','','','','',$connect);
+		$statut = sql_fetsel('statut', 'spip_rubriques', $a,'','','','',$connect);
 		$statut = $statut['statut'];
 	}
 	if ($suite) $a .= "&$suite";
@@ -47,7 +47,7 @@ function generer_url_ecrire_rubrique($id, $suite='', $ancre='', $statut='', $con
 function generer_url_ecrire_breve($id, $suite='', $ancre='', $statut='', $connect='') {
 	$a = "id_breve=" . intval($id);
 	if (!$statut) {
-		$statut = sql_fetsel('statut', 'spip_breves', $a,'','','','','','','',$connect);
+		$statut = sql_fetsel('statut', 'spip_breves', $a,'','','','',$connect);
 		$statut = $statut['statut'];
 	}
 	if ($suite) $a .= "&$suite";

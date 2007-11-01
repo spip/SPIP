@@ -220,8 +220,7 @@ function spip_pg_listdbs() {
 // http://doc.spip.org/@spip_pg_select
 function spip_pg_select($select, $from, $where='',
                            $groupby='', $orderby='', $limit='',
-                           $sousrequete='', $having='',
-                           $table='', $id='', $serveur=''){
+                           $having='', $serveur=''){
 
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$prefixe = $connexion['prefixe'];
@@ -262,7 +261,7 @@ function spip_pg_select($select, $from, $where='',
 
 	if (!($res = spip_pg_trace_query($q, $serveur))) {
 	  include_spip('public/debug');
-	  erreur_requete_boucle($q, $id, $table, 0, 0);
+	  erreur_requete_boucle($q, 0, 0);
 	}
 
 	return $res;
@@ -450,7 +449,7 @@ function spip_pg_fetch($res, $t='', $serveur='') {
  
 // http://doc.spip.org/@spip_pg_countsel
 function spip_pg_countsel($from = array(), $where = array(),
-			  $groupby='', $limit='', $sousrequete = '', $having = array(), $serveur='')
+			  $groupby='', $limit='', $having = array(), $serveur='')
 {
 	$r = spip_pg_select('COUNT(*)', $from, $where,
 			    $groupby, '', $limit, $sousrequete, $having, '','', $serveur);

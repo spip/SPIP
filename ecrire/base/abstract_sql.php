@@ -71,24 +71,20 @@ function sql_set_charset($charset,$serveur=''){
 // http://doc.spip.org/@sql_select
 function sql_select (
 	$select = array(), $from = array(), $where = array(),
-	$groupby = '', $orderby = array(), $limit = '',
-	$sousrequete = '', $having = array(),
-	$table = '', $id = '', $serveur='') {
+	$groupby = '', $orderby = array(), $limit = '', $having = array(),
+	$serveur='') {
 
 	$f = sql_serveur('select', $serveur);
 
-	return $f($select, $from, $where,
-		  $groupby, $orderby, $limit,
-		  $sousrequete, $having,
-		  $table, $id, $serveur);
+	return $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur);
 }
 
 // http://doc.spip.org/@sql_countsel
 function sql_countsel($from = array(), $where = array(),
-	$groupby = '', $limit = '', $sousrequete = '', $having = array(),
+	$groupby = '', $limit = '', $having = array(),
 	$serveur='') {
   	$f = sql_serveur('countsel', $serveur);
-	return $f($from, $where, $groupby, $limit, $sousrequete, $having, $serveur);
+	return $f($from, $where, $groupby, $limit, $having, $serveur);
 }
 
 // http://doc.spip.org/@sql_alter
@@ -274,33 +270,22 @@ function sql_query($ins, $serveur='') {
 function sql_fetsel(
 	$select = array(), $from = array(), $where = array(),
 	$groupby = '', $orderby = array(), $limit = '',
-	$sousrequete = '', $having = array(),
-	$table = '', $id = '', $serveur='') {
-	return sql_fetch(sql_select(
-$select, $from, $where,	$groupby, $orderby, $limit,
-$sousrequete, $having, $table, $id, $serveur),
-				   $serveur);
+	$having = array(), $serveur='') {
+	return sql_fetch(sql_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur), $serveur);
 }
 
 # Retourne l'unique champ demande dans une requete Select a resultat unique
 // http://doc.spip.org/@sql_getfetsel
 function sql_getfetsel(
-	$select, $from = array(), $where = array(),
-	$groupby = '', $orderby = array(), $limit = '',
-	$sousrequete = '', $having = array(),
-	$table = '', $id = '', $serveur='') {
-	$r = sql_fetch(sql_select(
-$select, $from, $where,	$groupby, $orderby, $limit,
-$sousrequete, $having, $table, $id, $serveur),
-				   $serveur);
+	$select, $from = array(), $where = array(), $groupby = '', 
+	$orderby = array(), $limit = '', $having = array(), $serveur='') {
+	$r = sql_fetch(sql_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur), $serveur);
 	return $r ? $r[$select] : NULL;
 }
 
-
 // http://doc.spip.org/@sql_version
 function sql_version($serveur='') {
-	$row = sql_fetsel("version() AS n", '','','','','','','','','',$serveur);
-
+	$row = sql_fetsel("version() AS n", '','','','','','',$serveur);
 	return ($row['n']);
 }
 
