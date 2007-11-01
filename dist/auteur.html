@@ -19,8 +19,8 @@
     
         [(#REM) Fil d'Ariane ]
         <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:info_auteurs:>[ &gt; <strong class="on">(#NOM|couper{80})</strong>]</div>
-<div class="vcard">
 
+		<div class="vcard">[(#REM) microformat vcard]
         <div class="cartouche">
             [(#LOGO_AUTEUR||image_reduire{200,200})]
             <h1 class="#EDIT{qui} fn">#NOM</h1>
@@ -28,7 +28,8 @@
 
         [<div class="#EDIT{bio} texte note">(#BIO)</div>]
         [<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="url org spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-</div>
+		</div>[(#REM) / vcard]
+
         [(#REM) Articles de l'auteur ]
         <B_articles>
         <div class="menu articles">
@@ -36,7 +37,7 @@
             <h2><:articles_auteur:> (#GRAND_TOTAL)</h2>
             <ul>
                 <BOUCLE_articles(ARTICLES) {id_auteur} {par popularite}{inverse} {pagination 10}>
-                <li><a href="#URL_ARTICLE">#TITRE</a></h3></li>
+                <li><a href="#URL_ARTICLE">#TITRE</a></li>
                 </BOUCLE_articles>
             </ul>
             [<p class="pagination">(#PAGINATION)</p>]
@@ -74,7 +75,7 @@
             [<p class="pagination">(#PAGINATION)</p>]
         </div>
         </B_auteurs>
-        
+
     </div><!--#extra-->
 
 	[(#REM) Pied de page ]
