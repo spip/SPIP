@@ -18,6 +18,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 if (!function_exists('envoyer_mail')) {
 	define('_FUNCTION_ENVOYER_MAIL', charger_fonction('envoyer_mail', 'inc'));
+// http://doc.spip.org/@envoyer_mail
 	function envoyer_mail() {
 		$args = func_get_args();
 		if (_FUNCTION_ENVOYER_MAIL)
