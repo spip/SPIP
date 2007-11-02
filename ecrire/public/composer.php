@@ -472,7 +472,7 @@ function lang_parametres_forum($qs, $lang) {
 function calculer_select ($select = array(), $from = array(), 
 			$where = array(), $join=array(),
 			$groupby = '', $orderby = array(), $limit = '',
-			$having, $table = '', $id = '', $serveur='') {
+			$having=array(), $table = '', $id = '', $serveur='') {
 
 // retirer les criteres vides:
 // {X ?} avec X absent de l'URL

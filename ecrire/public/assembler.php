@@ -633,11 +633,15 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 		'fond' => $fond, 
 		'dir_racine' => _DIR_RACINE # eviter de mixer un cache racine et un cache ecrire (meme si pour l'instant les modeles ne sont pas caches, le resultat etant different il faut que le contexte en tienne compte 
 	); 
-	// Fixer l'identifiant qu'on passe dans #ENV ;
-	// pour le modele <site1> on veut id_syndic => 1
-	// par souci de systematisme on ajoute aussi
-	// id => 1.
-	$contexte[id_table_objet($type)] = $contexte['id'] = $id;
+	// Le numerdo du modele est mis dans l'environnement 
+	// d'une part sous l'identifiant "id"
+	// et d'autre part sous l'identifiant de la cle primaire supposee
+	// par la fonction table_objet, 
+	// qui ne marche vraiment que pour les tables std de SPIP
+	// (<site1> =>> site =>> id_syndic =>> id_syndic=1)
+	$_id = 'id_' . table_objet($type);
+	if (preg_match('/s$/',$_id)) $_id = substr($_id,0,-1);
+	$contexte['id'] = $contexte[$_id] = $id;
 
 	if ($class)
 		$contexte['class'] = $class;
