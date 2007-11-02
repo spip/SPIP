@@ -30,9 +30,9 @@ function exec_import_all_dist()
 			$dir = import_queldir();
 			$_POST['dir'] = $dir;
 			$commentaire = verifier_sauvegarde($dir . $archive);
-	} else 		$commentaire = _T('avis_probleme_archive', array('archive' => $archive));
+	} else $commentaire = '';
 
-	if (!$commentaire OR isset($GLOBALS['meta']['import_all'])) {
+	if ($archive OR isset($GLOBALS['meta']['import_all'])) {
 		$action = _T('info_restauration_sauvegarde', 
 			     array('archive' => $archive));
 		$admin = charger_fonction('admin', 'inc');
