@@ -230,9 +230,12 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 	$pg = function_exists('pg_connect');
 	$mysql = function_exists('mysql_connect');
 
-	if ($predef[0] AND !is_string($predef[0]))
-		$server_db = _INSTALL_SERVER_DB;
-	else if (!($pg AND $mysql))
+	if ($predef[0]) {
+		if (!is_string($predef[0]))
+			$server_db = _INSTALL_SERVER_DB;
+		else
+			$server_db = $predef[0];
+	} else if (!($pg AND $mysql))
 		$server_db = $mysql ? 'mysql' : 'pg';
 	else {
 	  $server_db ='';
