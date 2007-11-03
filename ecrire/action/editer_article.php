@@ -68,9 +68,12 @@ function insert_article($id_rubrique) {
 	// Si id_rubrique vaut 0 ou n'est pas definie, creer l'article
 	// dans la premiere rubrique racine
 	if (!$id_rubrique = intval($id_rubrique)) {
-		$row = sql_fetsel("id_rubrique", "spip_rubriques", "id_parent=0",'', '0+titre,titre', "1");
+		$row = sql_fetsel("id_rubrique, id_secteur, lang", "spip_rubriques", "id_parent=0",'', '0+titre,titre', "1");
 		$id_rubrique = $row['id_rubrique'];
-	}
+	} else $row = sql_fetsel("lang, id_secteur", "spip_rubriques", "id_rubrique=$id_rubrique");
+
+	$id_secteur = $row['id_secteur'];
+	$lang_rub = $row['lang'];
 
 	// La langue a la creation : si les liens de traduction sont autorises
 	// dans les rubriques, on essaie avec la langue de l'auteur,
@@ -85,25 +88,24 @@ function insert_article($id_rubrique) {
 		}
 	}
 
-	$row = sql_fetsel("lang, id_secteur", "spip_rubriques", "id_rubrique=$id_rubrique");
-
-	$id_secteur = $row['id_secteur'];
-
 	if (!$lang) {
-		$lang = $GLOBALS['meta']['langue_site'];
 		$choisie = 'non';
-		$lang = $row['lang'];
+		$lang = $lang_rub ? $lang_rub : $GLOBALS['meta']['langue_site'];
 	}
 
-	$id_article = sql_insert("spip_articles",
-		"(id_rubrique, id_secteur, statut, date, accepter_forum, lang, langue_choisie)",
-		"($id_rubrique, $id_secteur, 'prepa', NOW(), '"
-			. substr($GLOBALS['meta']['forums_publics'],0,3)
-			. "', '$lang', '$choisie')");
+	$id_article = sql_insertq("spip_articles", array(
+		'id_rubrique' => $id_rubrique,
+		'id_secteur' =>  $id_secteur,
+		'statut' =>  'prepa',
+		'date' => 'NOW()',
+		'accepter_forum' => 
+			substr($GLOBALS['meta']['forums_publics'],0,3),
+		'lang' => $lang,
+		'langue_choisie' =>$choisie));
 
 	// controler si le serveur n'a pas renvoye une erreur
 	if ($id_article > 0) 
-		sql_insert('spip_auteurs_articles', "(id_auteur,id_article)", "('" . $GLOBALS['auteur_session']['id_auteur'] . "','$id_article')");
+		sql_insertq('spip_auteurs_articles', array('id_auteur' => $GLOBALS['auteur_session']['id_auteur'], 'id_article' => $id_article));;
 
 	return $id_article;
 }

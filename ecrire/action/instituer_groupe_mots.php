@@ -56,8 +56,21 @@ function action_instituer_groupe_mots_post($id_groupe)
 
 			sql_updateq("spip_groupes_mots", array("titre" =>$change_type,"texte"=>$texte,"descriptif"=>$descriptif,"unseul"=>$unseul,"obligatoire"=>$obligatoire,"articles"=>$articles,"breves"=>$breves,"rubriques"=>$rubriques,"syndic"=>$syndic,"minirezo"=>$acces_minirezo,"comite"=>$acces_comite,"forum"=>$acces_forum), "id_groupe=$id_groupe");
 
-		} else {	// creation groupe
-			sql_insert('spip_groupes_mots', "(titre, texte, descriptif, unseul,  obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum)", "(" . _q($change_type) . ", " . _q($texte) . " , " . _q($descriptif) . " , " . _q($unseul) . " , " . _q($obligatoire) . " , " . _q($articles) . " ," . _q($breves) . " , " . _q($rubriques) . " , " . _q($syndic) . " , " . _q($acces_minirezo) . " ,  " . _q($acces_comite) . " , " . _q($acces_forum) . " )");
+		} else {	//spip_log("creation groupe");
+		  sql_insertq('spip_groupes_mots', array(
+			'titre' => $change_type,
+			'texte' => $texte,
+			'descriptif' => $descriptif,
+			'unseul' => $unseul,
+			'obligatoire' => $obligatoire,
+			'articles' => $articles,
+			'breves' => $breves,
+			'rubriques' => $rubriques,
+			'syndic' => $syndic,
+			'minirezo' => $acces_minirezo,
+			'comite' => $acces_comite,
+			'forum' => $acces_forum
+			));
 		}
 	}
 }
@@ -67,8 +80,18 @@ function action_instituer_groupe_mots_post($id_groupe)
 function action_instituer_groupe_mots_get($table)
 {
 	$titre = _T('info_mot_sans_groupe');
-
-	$id_groupe = sql_insert("spip_groupes_mots", "(titre, unseul, obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum)", "(" . _q($titre) . ", 'non',  'non', '" . (($table=='articles') ? 'oui' : 'non') ."', '" . (($table=='breves') ? 'oui' : 'non') ."','" . (($table=='rubriques') ? 'oui' : 'non') ."','" . (($table=='syndic') ? 'oui' : 'non') ."', 'oui', 'non', 'non'" . ")");
+	spip_log("creation groupe $table");
+	$id_groupe = sql_insert("spip_groupes_mots", array(
+		'titre' => $titre,
+		'unseul' => 'non',
+		'obligatoire' => 'non',
+		'articles' =>  (($table=='articles') ? 'oui' : 'non'),
+		'breves' => (($table=='breves') ? 'oui' : 'non'),
+		'rubriques' => (($table=='rubriques') ? 'oui' : 'non'),
+		'syndic' =>  (($table=='syndic') ? 'oui' : 'non'),
+		'minirezo' =>  'oui',
+		'comite' =>  'non',
+		'forum' => 'non')) ;
 
         redirige_par_entete(parametre_url(urldecode(_request('redirect')),
 					  'id_groupe', $id_groupe, '&'));
