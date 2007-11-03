@@ -22,7 +22,7 @@ function base_convert_sql_utf8_dist($titre='', $reprise=false)
 	
 	echo "<p>", _T('utf8_convert_timeout'), "</p><hr />\n";
 	
-	convert_sql_utf8();
+	convert_sql_utf8($titre);
 
 	echo "<p><b>"._T('utf8_convert_termine')."</b></p>";
 	effacer_meta('convert_sql_utf8');
@@ -35,7 +35,7 @@ function base_convert_sql_utf8_dist($titre='', $reprise=false)
 }
 
 // http://doc.spip.org/@convert_sql_utf8
-function convert_sql_utf8(){
+function convert_sql_utf8($titre){
 
 	define(_DEBUG_CONVERT, false);
 	$charset_spip = $GLOBALS['meta']['charset'];
@@ -52,7 +52,7 @@ function convert_sql_utf8(){
 		while ($row = sql_fetch($res)){
 			if ($row['Charset']=='utf8') $utf8_supporte = true;
 		}
-		echo install_debut_html();
+		echo install_debut_html($titre);
 		echo _L("Le charset SPIP actuel $charset_spip n'est pas supporte par votre serveur MySQL<br/>");  # non traduit car complexe & obsolete
 		if ($utf8_supporte)
 			echo _L("Votre serveur supporte utf-8, vous devriez convertir votre site en utf-8 avant de recommencer cette operation");
