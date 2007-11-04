@@ -67,6 +67,7 @@ $GLOBALS['spip_pg_functions_1'] = array(
 		'listdbs' => 'spip_pg_listdbs',
 		'multi' => 'spip_pg_multi',
 		'query' => 'spip_pg_query',
+		'quote' => 'spip_pg_quote',
 		'replace' => 'spip_pg_replace',
 		'select' => 'spip_pg_select',
 		'selectdb' => 'spip_pg_selectdb',
@@ -669,6 +670,11 @@ function spip_pg_cite($v, $t)
 function spip_pg_hex($v)
 {
 	return "CAST(x'" . $v . "' as bigint)";
+}
+
+function spip_pg_quote($v)
+{
+	return _q($v);
 }
 
 // http://doc.spip.org/@calcul_pg_in

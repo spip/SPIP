@@ -32,9 +32,9 @@ function exec_editer_mot_args($id_objet, $objet)
 		$droit = autoriser('publierdans','rubrique',$id_objet);
 	else {
 		if ($objet == 'breve')
-			$droit = sql_select("id_rubrique", "spip_breves", "id_breve="._q($id_objet));
+			$droit = sql_select("id_rubrique", "spip_breves", "id_breve=".sql_quote($id_objet));
 		else
-			$droit = sql_select("id_rubrique", "spip_syndic", "id_syndic="._q($id_objet));
+			$droit = sql_select("id_rubrique", "spip_syndic", "id_syndic=".sql_quote($id_objet));
 		$droit = autoriser('publierdans','rubrique',$droit['id_rubrique']);
 	}
 

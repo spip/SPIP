@@ -106,19 +106,19 @@ function convert_table_utf8($f, $table, $champ)
 				preg_match(',^<CONVERT (.*?)>,', $v, $reg);
 				$v = substr($v, strlen($reg[0]));
 				$charset_source = $reg[1];
-				$query[] = "$c=" . _q($v);
+				$query[] = "$c=" . sql_quote($v);
 			} else {
 				if (!is_numeric($v)
 				AND !is_ascii($v)) {
 					// traitement special car donnees serializees
 					if ($c == 'extra') {
-						$query_no_convert .= ", $c="._q($v);
+						$query_no_convert .= ", $c=".sql_quote($v);
 						$query_extra = convert_extra($v, $charset_source);
 					} else
-						$query[] = "$c=" . _q($v);
+						$query[] = "$c=" . sql_quote($v);
 				} else
 					# pour le backup
-					$query_no_convert .= ", $c="._q($v);
+					$query_no_convert .= ", $c=".sql_quote($v);
 			}
 		}
 
@@ -153,7 +153,7 @@ function convert_extra($v, $charset_source) {
 		foreach ($extra as $key=>$val)
 			$extra[$key] = unicode_to_utf_8(
 			charset2unicode($val, $charset_source));
-		return ", extra="._q(serialize($extra));
+		return ", extra=".sql_quote(serialize($extra));
 	}
 }
 ?>

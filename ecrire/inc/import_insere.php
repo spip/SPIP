@@ -120,7 +120,7 @@ function import_insere($values, $table, $desc, $request, $atts) {
 	else {$id = $n; $titre = "";}
 	sql_insert('spip_translate',
 				"(id_old, id_new, titre, type, ajout)",
-				     "(". $values[$type_id] .",$id, " . _q($titre) . ", '$type_id', $ajout)");
+				     "(". $values[$type_id] .",$id, " . sql_quote($titre) . ", '$type_id', $ajout)");
 }
 
 // Renumerotation des entites collectees
@@ -291,7 +291,7 @@ function import_identifie_id_document($values, $table, $desc, $request) {
 	$t = $values['taille'];
 	$f = $values['fichier'];
 	$h = $request['url_site'] . $f;
-	$r = sql_fetsel("id_document AS id, fichier AS titre, distant", "spip_documents", "taille=" . _q($t) . " AND (fichier=" . _q($f) . " OR fichier= " . _q($h) . ')');
+	$r = sql_fetsel("id_document AS id, fichier AS titre, distant", "spip_documents", "taille=" . sql_quote($t) . " AND (fichier=" . sql_quote($f) . " OR fichier= " . sql_quote($h) . ')');
 	if (!$r) return false;
 	if (($r['distant'] != 'oui')
 	AND !file_exists(_DIR_IMG . $r['titre']))
@@ -306,14 +306,14 @@ function import_identifie_id_document($values, $table, $desc, $request) {
 function import_identifie_id_type($values, $table, $desc, $request) {
 	$e = $values['extension'];
 	$t = $values['titre'];
-	$r = sql_fetsel("id_type AS id, titre", "spip_types_documents", "extension=" . _q($e) . " AND titre=" . _q($t));
+	$r = sql_fetsel("id_type AS id, titre", "spip_types_documents", "extension=" . sql_quote($e) . " AND titre=" . sql_quote($t));
 	return $r ? array($r['id'], $r['titre']) : false;
 }
 
 // deux groupes de mots ne peuvent avoir le meme titre ==> identification
 // http://doc.spip.org/@import_identifie_id_groupe
 function import_identifie_id_groupe($values, $table, $desc, $request)  {
-	$r = sql_fetsel("id_groupe AS id, titre", "spip_groupes_mots", "titre=" . _q($values['titre']));
+	$r = sql_fetsel("id_groupe AS id, titre", "spip_groupes_mots", "titre=" . sql_quote($values['titre']));
 	return $r ? array($r['id'], $r['titre']) : false;
 }
 
@@ -329,7 +329,7 @@ function import_identifie_id_mot($values, $table, $desc, $request) {
 function import_identifie_parent_id_mot($id_groupe, $titre, $v)
 {
 	global $trans;
-	$titre = _q($titre);
+	$titre = sql_quote($titre);
 	$id_groupe = 0-$id_groupe;
 	if (isset($trans['id_groupe'])
 	AND isset($trans['id_groupe'][$id_groupe])) {
@@ -361,7 +361,7 @@ function import_identifie_parent_id_article($id_parent, $titre, $v)
 {
 	$id_parent = importe_translate_maj('id_rubrique', (0 - $id_parent));
 
-	$titre = _q($titre);
+	$titre = sql_quote($titre);
 	$r = sql_fetsel("id_article", "spip_articles", "titre=$titre AND id_rubrique=$id_parent AND statut<>'poubelle'" );
 	if ($r) return (0 - $r['id_article']);
 
@@ -391,7 +391,7 @@ function import_identifie_parent_id_breve($id_parent, $titre, $v)
 {
 	$id_parent = importe_translate_maj('id_rubrique', (0 - $id_parent));
 
-	$titre = _q($titre);
+	$titre = sql_quote($titre);
 	$r = sql_fetsel("id_breve", "spip_breves", "titre=$titre AND id_rubrique=$id_parent AND statut<>'refuse'" );
 	if ($r) return (0 - $r['id_breve']);
 
@@ -443,7 +443,7 @@ function import_identifie_parent_id_rubrique($id_parent, $titre, $v)
 			}
 		}
 
-		$r = sql_fetsel("id_rubrique", "spip_rubriques", "titre=" . _q($titre) . " AND id_parent=" . intval($id_parent));
+		$r = sql_fetsel("id_rubrique", "spip_rubriques", "titre=" . sql_quote($titre) . " AND id_parent=" . intval($id_parent));
 		if ($r)  {
 		  return (0 - $r['id_rubrique']);
 		}
@@ -456,7 +456,7 @@ function import_identifie_parent_id_rubrique($id_parent, $titre, $v)
 
 // http://doc.spip.org/@import_alloue_id_rubrique
 function import_alloue_id_rubrique($id_parent, $titre, $v) {
-	$titre = _q($titre);
+	$titre = sql_quote($titre);
 	if ($r = sql_insert('spip_rubriques', '(titre, id_parent)', "($titre,$id_parent)"))
 		sql_replace('spip_translate', array(
 		    'id_old' => $v,

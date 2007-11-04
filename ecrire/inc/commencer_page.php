@@ -188,7 +188,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 // http://doc.spip.org/@avertissement_messagerie
 function avertissement_messagerie($id_auteur) {
 
-	$result_messages = sql_select("lien.id_message", "spip_messages AS messages, spip_auteurs_messages AS lien", "lien.id_auteur="._q($id_auteur)." AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message");
+	$result_messages = sql_select("lien.id_message", "spip_messages AS messages, spip_auteurs_messages AS lien", "lien.id_auteur=".sql_quote($id_auteur)." AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message");
 	$total_messages = @sql_count($result_messages);
 	if ($total_messages == 1) {
 		$row = @sql_fetch($result_messages);

@@ -254,7 +254,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 
 		$corps = $init . '
 	$connect = ' .
-	_q($boucle->sql_serveur) . ';
+	sql_quote($boucle->sql_serveur) . ';
 
 	// RESULTATS
 	while ($Pile[$SP] = @sql_fetch($result,"' .

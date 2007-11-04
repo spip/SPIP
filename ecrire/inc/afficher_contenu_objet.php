@@ -17,7 +17,7 @@ function inc_afficher_contenu_objet_dist($type, $id,$row = NULL){
 	$table = table_objet($type);
 	$key = id_table_objet($type);
 	if (!$row) {
-		$res = sql_select(array('*'),array("spip_$table"),array("$key="._q($id)));
+		$res = sql_select(array('*'),array("spip_$table"),array("$key=".sql_quote($id)));
 		$row = sql_fetch($res);
 	}
 	if (!$row) return "";

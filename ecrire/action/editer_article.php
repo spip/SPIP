@@ -139,7 +139,7 @@ function revisions_articles ($id_article, $c=false) {
 		$c);
 
 	if ($r) {
-		sql_update("spip_articles", array("date_modif" => "NOW()"), "id_article="._q($id_article));
+		sql_update("spip_articles", array("date_modif" => "NOW()"), "id_article=".sql_quote($id_article));
 	}
 
 	return ''; // pas d'erreur
@@ -265,12 +265,12 @@ function editer_article_heritage($id_article, $id_rubrique, $statut, $champs, $c
 	//  changer aussi son secteur et sa langue (si heritee)
 	if (isset($champs['id_rubrique'])) {
 
-		$row_rub = sql_fetsel("id_secteur, lang", "spip_rubriques", "id_rubrique="._q($champs['id_rubrique']));
+		$row_rub = sql_fetsel("id_secteur, lang", "spip_rubriques", "id_rubrique=".sql_quote($champs['id_rubrique']));
 
 		$langue = $row_rub['lang'];
 		$champs['id_secteur'] = $row_rub['id_secteur'];
 
-		if (sql_countsel('spip_articles', "id_article=$id_article AND langue_choisie<>'oui' AND lang<>" . _q($langue)))
+		if (sql_countsel('spip_articles', "id_article=$id_article AND langue_choisie<>'oui' AND lang<>" . sql_quote($langue)))
 			$champs['lang'] = $langue;
 	}
 

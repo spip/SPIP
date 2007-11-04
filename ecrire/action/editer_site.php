@@ -29,7 +29,7 @@ function action_editer_site_dist() {
 		// reload si on change une des valeurs de syndication
 		if (
 		(_request('url_syndic') OR _request('resume') OR _request('syndication'))
-		AND $t = sql_fetsel('url_syndic,syndication,resume', 'spip_syndic', "id_syndic="._q($id_syndic))
+		AND $t = sql_fetsel('url_syndic,syndication,resume', 'spip_syndic', "id_syndic=".sql_quote($id_syndic))
 		AND (
 			(_request('url_syndic') AND _request('url_syndic') != $t['url_syndic'])
 			OR
@@ -81,7 +81,7 @@ function action_editer_site_dist() {
 	if (_request('reload') == 'oui') {
 		// Effacer les messages si on supprime la syndication
 		if (_request('syndication') == 'non')
-			sql_delete("spip_syndic_articles", "id_syndic="._q($id_syndic));
+			sql_delete("spip_syndic_articles", "id_syndic=".sql_quote($id_syndic));
 
 		$t = sql_getfetsel('descriptif', 'spip_syndic', "id_syndic=$id_syndic AND syndication IN ('oui', 'sus', 'off')", '','', 1);
 		if ($t !== NULL) {

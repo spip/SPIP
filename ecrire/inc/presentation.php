@@ -1647,7 +1647,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af =
 			break;
 		case 'mot':
 		case 'auteur':
-			$n = sql_countsel('spip_auteurs_articles AS lien, spip_articles AS articles', "lien.id_auteur="._q($id)." AND lien.id_article=articles.id_article AND articles.statut='publie'");
+			$n = sql_countsel('spip_auteurs_articles AS lien, spip_articles AS articles', "lien.id_auteur=".sql_quote($id)." AND lien.id_article=articles.id_article AND articles.statut='publie'");
 			if ($n) $en_ligne = 'calcul';
 			else $en_ligne = 'preview';
 			break;

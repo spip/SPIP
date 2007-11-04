@@ -35,7 +35,7 @@ function action_documenter_post($r)
 		// supprimer_document_et_vignette($vignette);
 		// on dissocie, mais si le doc est utilise dans le texte, il sera reassocie ..., donc condition sur vu !
 		sql_delete("spip_documents_".$type."s",
-			"id_$type="._q($id)." AND id_document="._q($vignette)." AND (vu='non' OR vu IS NULL)");
+			"id_$type=".sql_quote($id)." AND id_document=".sql_quote($vignette)." AND (vu='non' OR vu IS NULL)");
 
 		// Ensuite on supprime les docs orphelins, ca supprimera
 		// physiquement notre document s'il n'est pas attache ailleurs

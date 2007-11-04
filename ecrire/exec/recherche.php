@@ -45,7 +45,7 @@ function exec_recherche_dist() {
 		if (preg_match(',^[0-9]+$,', $recherche)
 		AND $id = intval($recherche))
 		foreach ($tables as $table => $x) {
-			$t = sql_countsel(table_objet_sql($table), id_table_objet($table)."="._q($id));
+			$t = sql_countsel(table_objet_sql($table), id_table_objet($table)."=".sql_quote($id));
 			if ($t
 			AND autoriser('voir', $table, $id)
 			AND !isset($results[$table][$id]))

@@ -196,7 +196,7 @@ function spip_connect_ldap($serveur='') {
 // 1 interface de abstract_sql a demenager dans base/abstract_sql a terme
 
 // http://doc.spip.org/@_q
-function _q($a) {
+function _q ($a) {
 	return (is_int($a)) ? strval($a) : 
 		(!is_array($a) ? ("'" . addslashes($a) . "'")
 		 : join(",", array_map('_q', $a)));

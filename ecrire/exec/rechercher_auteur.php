@@ -32,7 +32,7 @@ function exec_rechercher_auteur_args($idom)
 		$where = split("[[:space:]]+", _request('nom'));
 		if ($where) {
 		  foreach ($where as $k => $v) 
-			$where[$k] = "'%" . substr(str_replace("%","\%", _q($v)),1,-1) . "%'";
+			$where[$k] = "'%" . substr(str_replace("%","\%", sql_quote($v)),1,-1) . "%'";
 		  $where= ("(nom LIKE " . join(" AND nom LIKE ", $where) . ")");
 		}
 

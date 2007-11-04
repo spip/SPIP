@@ -603,9 +603,9 @@ function calculer_criteres ($idb, &$boucles) {
 function kwote($lisp)
 {
 	if (preg_match(",^(\n//[^\n]*\n)? *'(.*)' *$,", $lisp, $r))
-		return $r[1] . "\"" . _q(str_replace(array("\\'","\\\\"),array("'","\\"),$r[2])) . "\"" ;
+		return $r[1] . "\"" . sql_quote(str_replace(array("\\'","\\\\"),array("'","\\"),$r[2])) . "\"" ;
 	else
-		return "_q($lisp)"; 
+		return "sql_quote($lisp)"; 
 }
 
 // Si on a une liste de valeurs dans #ENV{x}, utiliser la double etoile
@@ -624,7 +624,7 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 			if (is_numeric($r[2]))
 				$x .= "\n\t$var" . "[]= $r[2];";
 			else
-				$x .= "\n\t$var" . "[]= " . _q($r[2]) . ";";
+				$x .= "\n\t$var" . "[]= " . sql_quote($r[2]) . ";";
 		} else {
 		  // Pour permettre de passer des tableaux de valeurs
 		  // on repere l'utilisation brute de #ENV**{X}, 
@@ -643,7 +643,7 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 	} else $op = '=';
 
 
-	$arg = "((_q($var)===\"''\") ? 0 : ('FIELD($arg,' . _q($var) . ')'))";
+	$arg = "((sql_quote($var)===\"''\") ? 0 : ('FIELD($arg,' . sql_quote($var) . ')'))";
 	$boucles[$idb]->select[]=  "\" . $arg . \" AS cpt$cpt";
 	$op = array("'$op'", $arg, 0);
 
@@ -735,12 +735,12 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 			list($nom, $desc) = trouver_champ_exterieur($col, $boucle->jointures, $boucle);
 		}
 	}
-	// En fonction du type de la colonne SQL
-	// la valeur comparee doit etre munie ou non d'apostrophes
+	// Si la colonne SQL est numerique
+	// forcer une conversion pour eviter un erreur au niveau SQL
 	if ($op == '=' OR in_array($op, $table_criteres_infixes)) {
-		if (strpos($val[0], '_q(') === 0
+		if (strpos($val[0], 'sql_quote(') === 0
 		AND $desc AND sql_test_int($desc['field'][$col]))
-			$val[0] = 'intval' . substr($val[0],2);
+			$val[0] = 'intval' . substr($val[0],strlen('sql_quote'));
 	}
 	// tag du critere pour permettre aux boucles de modifier leurs requetes par defaut en fonction de ca
 	$boucles[$idb]->modificateur['criteres'][$col] = true;

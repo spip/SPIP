@@ -299,6 +299,12 @@ function sql_hex($val, $serveur='')
 	return $f($val);
 }
 
+function sql_quote($val, $serveur='')
+{
+	$f = sql_serveur('quote', $serveur);
+	return $f($val);
+}
+
 // http://doc.spip.org/@sql_in
 function sql_in($val, $valeurs, $not='', $serveur='') {
 	$f = sql_serveur('in', $serveur);

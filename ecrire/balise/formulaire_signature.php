@@ -132,7 +132,7 @@ function reponse_confirmation($var_confirm = '') {
 		return '';
 	}
 
-	$row = sql_fetsel('*', 'spip_signatures', "statut=" . _q($var_confirm), '', "1");
+	$row = sql_fetsel('*', 'spip_signatures', "statut=" . sql_quote($var_confirm), '', "1");
 
 	if (!$row) {
 		$confirm = _T('form_pet_aucune_signature');
@@ -155,13 +155,13 @@ function reponse_confirmation($var_confirm = '') {
 
 	if ($email_unique) {
 
-		$r = sql_select('id_signature', 'spip_signatures', "id_article=$id_article AND ad_email=" . _q($adresse_email) . " AND statut='publie'","","date_time desc");
+		$r = sql_select('id_signature', 'spip_signatures', "id_article=$id_article AND ad_email=" . sql_quote($adresse_email) . " AND statut='publie'","","date_time desc");
 		if (signature_entrop($r))
 			  $confirm =  _T('form_pet_deja_signe');
 	} 
 
 	if ($site_unique) {
-		$r = sql_select('id_signature', 'spip_signatures', "id_article=$id_article AND url_site=" . _q($url_site) . " AND (statut='publie' OR statut='poubelle')",'',"date_time desc");
+		$r = sql_select('id_signature', 'spip_signatures', "id_article=$id_article AND url_site=" . sql_quote($url_site) . " AND (statut='publie' OR statut='poubelle')",'',"date_time desc");
 		if (signature_entrop($r))
 			$confirm = _T('form_pet_site_deja_enregistre');
 	}
@@ -233,13 +233,13 @@ function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $
 	// On traite donc le probleme a la confirmation.
 
 	if ($email_unique) {
-		$r = sql_countsel('spip_signatures', "id_article=$id_article AND ad_email=" . _q($adresse_email) . " AND statut='publie'");
+		$r = sql_countsel('spip_signatures', "id_article=$id_article AND ad_email=" . sql_quote($adresse_email) . " AND statut='publie'");
 
 		if ($r)	return _T('form_pet_deja_signe');
 	}
 
 	if ($site_unique) {
-		$r = sql_countsel('spip_signatures', "id_article=$id_article AND url_site=" . _q($url_site) . " AND (statut='publie' OR statut='poubelle')");
+		$r = sql_countsel('spip_signatures', "id_article=$id_article AND url_site=" . sql_quote($url_site) . " AND (statut='publie' OR statut='poubelle')");
 
 		if ($r)	return _T('form_pet_site_deja_enregistre');
 	}
@@ -256,7 +256,7 @@ function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $
 	if (!$envoyer_mail($adresse_email, _T('form_pet_confirmation')." ".$titre, $messagex)) 
 		return _T('form_pet_probleme_technique');
 
-	$id_signature = sql_insert('spip_signatures', "(id_article, date_time, statut, ad_email, url_site)", "($id_article, NOW(), '$passw', " .  _q($adresse_email) . "," . _q($url_site) .")");
+	$id_signature = sql_insert('spip_signatures', "(id_article, date_time, statut, ad_email, url_site)", "($id_article, NOW(), '$passw', " .  sql_quote($adresse_email) . "," . sql_quote($url_site) .")");
  
 	if (!$id_signature) return _T('form_pet_probleme_technique');
 	include_spip('inc/modifier');

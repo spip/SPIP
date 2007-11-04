@@ -93,8 +93,8 @@ function ecrire_meta($nom, $valeur, $importable = NULL) {
 	if ($touch) {@touch(_FILE_META, $antidate);}
 	if ($res) {
 		$r = ($importable === NULL) ? ''
-		: (", impt=" .  _q($importable));
-		spip_query("UPDATE spip_meta SET valeur=" . _q($valeur) ."$r WHERE nom=" . _q($nom) );
+		: (", impt=" .  sql_quote($importable));
+		spip_query("UPDATE spip_meta SET valeur=" . sql_quote($valeur) ."$r WHERE nom=" . sql_quote($nom) );
 	} else {
 		  $r = array('nom' => $nom, 'valeur' => $valeur);
 		  if ($importable) $r['impt'] = $importable;

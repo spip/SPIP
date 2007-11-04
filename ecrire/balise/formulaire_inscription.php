@@ -112,7 +112,7 @@ function message_inscription($mail, $nom, $mode, $id=0) {
 	if (is_string($declaration))
 		return  $declaration;
 
-	$row = sql_select("statut, id_auteur, login, email", "spip_auteurs", "email=" . _q($declaration['email']));
+	$row = sql_select("statut, id_auteur, login, email", "spip_auteurs", "email=" . sql_quote($declaration['email']));
 	$row = sql_fetch($row);
 
 	if (!$row) 

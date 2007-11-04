@@ -124,7 +124,7 @@ function determiner_auteurs_objet($type, $id, $cond='', $limit='')
 	if (!preg_match(',^[a-z]*$,',$type)) return $les_auteurs; 
 
 	$jointure = table_jointure('auteur', $type);
-	$result = sql_select("id_auteur", "spip_{$jointure}", "id_{$type}="._q($id) . ($cond ? " AND $cond" : ''),'','', $limit);
+	$result = sql_select("id_auteur", "spip_{$jointure}", "id_{$type}=".sql_quote($id) . ($cond ? " AND $cond" : ''),'','', $limit);
 
 	return $result;
 }

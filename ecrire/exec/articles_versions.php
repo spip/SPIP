@@ -26,7 +26,7 @@ function exec_articles_versions_args($id_article, $id_version, $id_diff)
 	global $les_notes, $champs_extra, $spip_lang_left, $spip_lang_right;
 
 	if (!autoriser('voirrevisions', 'article', $id_article) 
-	OR !$row = sql_fetsel("*", "spip_articles", "id_article="._q($id_article))){
+	OR !$row = sql_fetsel("*", "spip_articles", "id_article=".sql_quote($id_article))){
 		include_spip('inc/minipres');
 		echo minipres();
 		return;
@@ -171,7 +171,7 @@ function exec_articles_versions_args($id_article, $id_version, $id_diff)
 
 	$result = sql_select("id_version, titre_version, date, id_auteur",
 		"spip_versions",
-		"id_article="._q($id_article)." AND  id_version>0",
+		"id_article=".sql_quote($id_article)." AND  id_version>0",
 		"", "id_version DESC");
 
 	$zap = sql_count($result);

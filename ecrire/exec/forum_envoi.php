@@ -77,7 +77,7 @@ function forum_envoi(
 // http://doc.spip.org/@forum_envoi_parent
 function forum_envoi_parent($id)
 {
-	$r = sql_select("*", "spip_forum", "id_forum=" . _q($id));
+	$r = sql_select("*", "spip_forum", "id_forum=" . sql_quote($id));
 	if (!$row = sql_fetch($r))
 		return array('titre' =>'', 'texte' =>'', 'id_message' =>'');
 

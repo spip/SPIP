@@ -42,7 +42,7 @@ function message_oubli($email, $param)
 	if (!is_array($declaration))
 		return $declaration;
 
-	$res = sql_select("id_auteur,statut,pass", "spip_auteurs", "email =" . _q($declaration['mail']));
+	$res = sql_select("id_auteur,statut,pass", "spip_auteurs", "email =" . sql_quote($declaration['mail']));
 
 	if (!$row = sql_fetch($res)) 
 		return _T('pass_erreur_non_enregistre', array('email_oubli' => htmlspecialchars($email)));
@@ -82,14 +82,14 @@ $message = '';
  if (!$p) {
 	  if ($oubli) $message = message_oubli($oubli, 'p');
  } else {
-	$res = sql_select("login", "spip_auteurs", "cookie_oubli=" . _q($p) . " AND statut<>'5poubelle' AND pass<>''");
+	$res = sql_select("login", "spip_auteurs", "cookie_oubli=" . sql_quote($p) . " AND statut<>'5poubelle' AND pass<>''");
 	if (!$row = sql_fetch($res)) 
 		$message = _T('pass_erreur_code_inconnu');
 	else {
 		if ($oubli) {
 			$mdpass = md5($oubli);
 			$htpass = generer_htpass($oubli);
-			sql_updateq('spip_auteurs', array('htpass' =>$htpass, 'pass'=>$mdpass, 'alea_actuel'=>'', 'cookie_oubli'=>''), "cookie_oubli=" . _q($p));
+			sql_updateq('spip_auteurs', array('htpass' =>$htpass, 'pass'=>$mdpass, 'alea_actuel'=>'', 'cookie_oubli'=>''), "cookie_oubli=" . sql_quote($p));
 
 			$login = $row['login'];
 			$message = "<b>" . _T('pass_nouveau_enregistre') . "</b>".

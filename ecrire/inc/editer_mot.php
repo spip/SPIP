@@ -114,7 +114,7 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 	else if ($table == 'breves') $ou = _T('info_la_breve');
 	else if ($table == 'rubriques') $ou = _T('info_la_rubrique');
 
-	$result = sql_select("id_mot, titre", "spip_mots", "id_groupe=" . _q($id_groupe));
+	$result = sql_select("id_mot, titre", "spip_mots", "id_groupe=" . sql_quote($id_groupe));
 
 	$table_mots = array();
 	$table_ids = array();

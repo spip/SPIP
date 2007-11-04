@@ -175,7 +175,7 @@ function accepte_fichier_upload ($f) {
 	if (!preg_match(",.*__MACOSX/,", $f)
 	AND !preg_match(",^\.,", basename($f))) {
 		$ext = corriger_extension((strtolower(substr(strrchr($f, "."), 1))));
-		return sql_countsel('spip_types_documents', "extension=" . _q($ext) . " AND upload='oui'");
+		return sql_countsel('spip_types_documents', "extension=" . sql_quote($ext) . " AND upload='oui'");
 	}
 }
 

@@ -348,13 +348,13 @@ function creer_rubrique_nommee($titre, $id_parent=0) {
 	$arbo = explode('/', preg_replace(',^/,', '', $titre));
 	include_spip('base/abstract_sql');
 	foreach ($arbo as $titre) {
-		$r = sql_getfetsel("id_rubrique", "spip_rubriques", "titre = "._q($titre)." AND id_parent=".intval($id_parent));
+		$r = sql_getfetsel("id_rubrique", "spip_rubriques", "titre = ".sql_quote($titre)." AND id_parent=".intval($id_parent));
 		if ($r !== NULL) 	       
 			$id_parent = $r;
 		else {
 			$id_rubrique = sql_insert('spip_rubriques',
 				'(titre, id_parent, statut)',
-				'('._q($titre).", $id_parent, 'prive')"
+				'('.sql_quote($titre).", $id_parent, 'prive')"
 			);
 			if ($id_parent > 0) {
 				$data = sql_fetsel("id_secteur,lang", "spip_rubriques", "id_rubrique=$id_parent");

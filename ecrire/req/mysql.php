@@ -58,6 +58,7 @@ $GLOBALS['spip_mysql_functions_1'] = array(
 		'multi' => 'spip_mysql_multi',
 		'optimize' => 'spip_mysql_optimize',
 		'query' => 'spip_mysql_query',
+		'quote' => 'spip_mysql_quote',
 		'replace' => 'spip_mysql_replace',
 		'repair' => 'spip_mysql_repair',
 		'select' => 'spip_mysql_select',
@@ -523,6 +524,11 @@ function spip_mysql_multi ($objet, $lang) {
 function spip_mysql_hex($v)
 {
 	return "0x" . $v;
+}
+
+function spip_mysql_quote($v)
+{
+	return _q($v);
 }
 
 // pour compatibilite

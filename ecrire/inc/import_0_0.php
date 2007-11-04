@@ -54,7 +54,7 @@ function inc_import_0_0_dist($f, $request, $gz='fread') {
 		}
 		else if ($col != 'maj') {
 			$cols[] = $col;
-			$values[] = _q($value);
+			$values[] = sql_quote($value);
 			if ($is_art && ($col == 'id_article')) $id_article = $value;
 			if ($is_mot && ($col == 'id_mot')) $id_mot = $value;
 		}

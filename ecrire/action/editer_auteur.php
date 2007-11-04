@@ -81,7 +81,7 @@ function action_legender_auteur_post($r) {
 			if (strlen($new_login) < 4)
 				$echec[]= 'info_login_trop_court';
 			else {
-				$n = sql_countsel('spip_auteurs', "login=" . _q($new_login) . " AND id_auteur!=$id_auteur AND statut!='5poubelle'");
+				$n = sql_countsel('spip_auteurs', "login=" . sql_quote($new_login) . " AND id_auteur!=$id_auteur AND statut!='5poubelle'");
 				if ($n)
 					$echec[]= 'info_login_existant';
 				else if ($new_login != $old_login) {
@@ -189,7 +189,7 @@ function action_legender_auteur_post($r) {
 		}
 		if (is_array($restreintes)
 		AND autoriser('modifier', 'auteur', $id_auteur, NULL, array('restreint'=>$restreintes))) {
-			sql_delete("spip_auteurs_rubriques", "id_auteur="._q($id_auteur));
+			sql_delete("spip_auteurs_rubriques", "id_auteur=".sql_quote($id_auteur));
 			foreach (array_unique($restreintes) as $id_rub)
 				if ($id_rub = intval($id_rub)) // si '0' on ignore
 					sql_insertq('spip_auteurs_rubriques', array('id_auteur' => $id_auteur, 'id_rubrique'=>$id_rub));
