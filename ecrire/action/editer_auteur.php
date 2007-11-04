@@ -167,7 +167,7 @@ function action_legender_auteur_post($r) {
 	// l'entrer dans la base
 	if (!$echec) {
 		if (!$auteur['id_auteur']) { // creation si pas d'id
-			$auteur['id_auteur'] = $id_auteur = sql_insert("spip_auteurs", "(nom,statut)", "('temp','" . $statut . "')");
+			$auteur['id_auteur'] = $id_auteur = sql_insertq("spip_auteurs", array('nom' => 'temp', 'statut' => $statut));
 
 			// recuperer l'eventuel logo charge avant la creation
 			$id_hack = 0 - $GLOBALS['auteur_session']['id_auteur'];

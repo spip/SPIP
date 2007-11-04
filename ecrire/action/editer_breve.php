@@ -57,20 +57,20 @@ function insert_breve($id_rubrique) {
 	// Si id_rubrique vaut 0 ou n'est pas definie, creer la breve
 	// dans la premiere rubrique racine
 	if (!$id_rubrique = intval($id_rubrique)) {
-		$row = sql_fetsel("id_rubrique", "spip_rubriques", "id_parent=0",'', '0+titre,titre', "1");
-		$id_rubrique = $row['id_rubrique'];
+		$id_rubrique = sql_getfetsel("id_rubrique", "spip_rubriques", "id_parent=0",'', '0+titre,titre', "1");
 	}
 
 	// La langue a la creation : c'est la langue de la rubrique
 	$row = sql_fetsel("lang, id_secteur", "spip_rubriques", "id_rubrique=$id_rubrique");
-	$choisie = 'non';
 	$lang = $row['lang'];
 	$id_rubrique = $row['id_secteur']; // garantir la racine
 
-	$id_breve = sql_insert("spip_breves",
-		"(id_rubrique, statut, date_heure, lang, langue_choisie)",
-		"($id_rubrique, 'prop', NOW(), '$lang', '$choisie')");
-	return $id_breve;
+	return sql_insertq("spip_breves", array(
+		'id_rubrique' => $id_rubrique,
+		'statut' => 'prop',
+		'date_heure' => 'NOW()',
+		'lang' => $lang,
+		'langue_choisie' => 'non'));
 }
 
 
