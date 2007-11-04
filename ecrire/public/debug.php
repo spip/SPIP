@@ -501,7 +501,7 @@ function debug_affiche($fonc, $tout, $objet, $affiche)
 
 	} else if ($affiche == 'code') {
 		$res .=  "<legend>" .$tout['pretty'][$objet] ."</legend>";
-		$res .= ancre_texte("<"."?php\n".$res."\n?".">");
+		$res .= ancre_texte("<"."?php\n".$quoi."\n?".">");
 	} else if ($affiche == 'boucle') {
 		$res .=  "<legend>" .$tout['pretty'][$objet] ."</legend>";
 		$res .= ancre_texte($res);
