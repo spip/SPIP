@@ -100,7 +100,7 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 			// on garde la terminaison initiale car image simplement copiee, et on ne change pas son nom
 			$terminaison_dest = $terminaison;
 		else
-			$fichier_dest .= '-'.substr(md5("$fichier_dest-$effet"),0,5);
+			$fichier_dest .= '-'.substr(md5("$fichier-$effet"),0,5);
 		$cache = sous_repertoire(_DIR_VAR, $cache);
 		$cache = sous_repertoire($cache, $effet);
 		# cherche un cache existant
@@ -110,7 +110,7 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 			}*/
 	}
 	else 	{
-		$fichier_dest = md5("$fichier_dest-$effet");
+		$fichier_dest = md5("$fichier-$effet");
 		$cache = sous_repertoire(_DIR_VAR, $cache);
 	}
 	
@@ -275,7 +275,16 @@ function image_graver($img){
 		$w = imagesx($img);
 		$h = imagesy($img);
 		$img1 = imagecreatetruecolor($w,$h);
-		imagecopy($img1,$img,0,0,0,0,$w,$h);
+		//Conserver la transparence si possible
+		if(function_exists('ImageCopyResampled')) {
+			if (function_exists("imageAntiAlias")) imageAntiAlias($img1,true); 
+			@imagealphablending($img1, false); 
+			@imagesavealpha($img1,true); 
+			@ImageCopyResampled($img1, $img, 0, 0, 0, 0, $w, $h, $w, $h);
+		} else {
+			imagecopy($img1,$img,0,0,0,0,$w,$h);
+		}
+
 		$img = $img1;
 	}
 }
