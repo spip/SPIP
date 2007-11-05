@@ -178,14 +178,21 @@ function boucle_debug_resultat ($id, $type, $resultat) {
 	global $debug_objets;
 
 	$nom = $debug_objets['courant'];
-
-	if ($type == 'requete') {
-	  $debug_objets['requete']["$nom$id"] = $resultat;
-	}
-	else {
 	  // ne pas memoriser plus de 3 tours d'une meme boucle
 	  if (count($debug_objets['resultat']["$nom$id"]) < 3)
 	    $debug_objets['resultat']["$nom$id"][] = $resultat;
+}
+
+// appelee a chaque requete
+// on n'a pas le nom du squelette, d'ailleurs ca n'en vient peut-etre pas
+
+function boucle_debug_requete ($req) {
+	global $debug_objets;
+
+	if (isset($GLOBALS['debug']['aucasou'])) {
+		list($table, $id, $serveur) = $GLOBALS['debug']['aucasou'];
+		$nom = $debug_objets['courant'];
+		$debug_objets['requete']["$nom$id"] = $req;
 	}
 }
 
@@ -322,7 +329,7 @@ function reference_boucle_debug($n, $nom, $self)
 // affiche un texte avec numero de ligne et ancre.
 
 // http://doc.spip.org/@ancre_texte
-function ancre_texte($texte, $fautifs=array())
+function ancre_texte($texte, $fautifs=array(), $nocpt=false)
 {
 	$var_mode_ligne = _request('var_mode_ligne');
 	if ($var_mode_ligne) $fautifs[]= array($var_mode_ligne);
@@ -342,10 +349,10 @@ function ancre_texte($texte, $fautifs=array())
 	$tableau = explode("<br />", $s);
 
 	$ancre = md5($texte);
-	$n = strlen(count($tableau));
-	$format = "<a href='#T%s' title=\"%s\"><span id='L%d' style='text-align: right;color: black;%s'>%0"
-	. strval($n)
-	. "d&nbsp;&nbsp;</span></a>\n";
+	if (!$nocpt) {
+		$format = '%0' . strval(@strlen(count($tableau))). 'd';
+	} else $format ='%s';
+	$format = "<a href='#T%s' title=\"%s\"><span id='L%d' style='text-align: right;color: black;%s'>$format&nbsp;&nbsp;</span></a>\n";
 
 	$format10=str_replace('black','pink',$format);
 	$formaterr="background-color: pink;";
@@ -373,7 +380,7 @@ function ancre_texte($texte, $fautifs=array())
 	    $bg = $formaterr; 
 	  } else {$indexmesg = $ancre; $err= $bg='';}
 	  $res .= "<br />\n"
-	    .  sprintf((($i%10) ? $format :$format10), $indexmesg, $err, $i, $bg, $i)
+	    .  sprintf((($i%10) ? $format :$format10), $indexmesg, $err, $i, $bg, ($nocpt ? '' : $i))
 		.   $ligne;
 	  $i++;
 	}
@@ -388,6 +395,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	$var_mode_affiche = _request('var_mode_affiche');
 
 	$debug_objets[$type][$fonc . 'tout'] = $texte;
+
 	if (!$debug_objets['sourcefile']) return;
 	if ($texte && ($var_mode_objet != $fonc || $var_mode_affiche != $type))
 		return;
@@ -495,7 +503,7 @@ function debug_affiche($fonc, $tout, $objet, $affiche)
 		$req = $tout['requete'][$objet];
 		if (function_exists('traite_query'))
 			$req = traite_query($req);
-		$res .= ancre_texte($req);
+		$res .= ancre_texte($req, array(), true);
 		foreach ($quoi as $view) 
 			if ($view) $res .= "\n<br /><fieldset>" .interdire_scripts($view) ."</fieldset>";
 
@@ -504,7 +512,7 @@ function debug_affiche($fonc, $tout, $objet, $affiche)
 		$res .= ancre_texte("<"."?php\n".$quoi."\n?".">");
 	} else if ($affiche == 'boucle') {
 		$res .=  "<legend>" .$tout['pretty'][$objet] ."</legend>";
-		$res .= ancre_texte($res);
+		$res .= ancre_texte($quoi);
 	} else if ($affiche == 'squelette') {
 		$res .=  "<legend>" .$tout['sourcefile'][$objet] ."</legend>";
 		$res .= ancre_texte($tout['squelette'][$objet]);

@@ -153,11 +153,11 @@ function spip_mysql_select($select, $from, $where='',
 			   $groupby='', $orderby='', $limit='', $having='',
 			   $serveur='') {
 
+
+	$from = (!is_array($from) ? $from : spip_select_as($from));
 	$query = 'SELECT ' .
 		(!is_array($select) ? $select : join(", ", $select)) .
-		(!$from ? '' :
-			("\nFROM " .
-			(!is_array($from) ? $from : spip_select_as($from))))
+		(!$from ? '' :"\nFROM $from")
 		. (!$where ? '' : ("\nWHERE " . (!is_array($where) ? $where : (join("\n\tAND ", array_map('calculer_where', $where))))))
 		. (!$groupby ? '' : ("\nGROUP BY " . (is_array($groupby) ? join(',',$groupby) : $groupby)))
 		. (!$having ? '' : "\nHAVING " . (!is_array($having) ? $having : (join("\n\tAND ", array_map('calculer_where', $having)))))
@@ -168,7 +168,7 @@ function spip_mysql_select($select, $from, $where='',
 
 	if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug') {
 		include_spip('public/debug');
-		boucle_debug_resultat($id, 'requete', $query);
+		boucle_debug_requete($query);
 	}
 
 	if (!($res = spip_mysql_query($query, $serveur))) {
