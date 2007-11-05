@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // si elle y est deja c'est qu'il y a eu suspension du script, on reprend.
 
 // http://doc.spip.org/@inc_admin_dist
-function inc_admin_dist($script, $titre, $comment='')
+function inc_admin_dist($script, $titre, $comment='', $anonymous=false)
 {
 	$reprise = true;
 	if (!isset($GLOBALS['meta'][$script])
@@ -28,7 +28,8 @@ function inc_admin_dist($script, $titre, $comment='')
 		spip_log("meta: $script " . join(',', $_POST));
 		ecrire_meta($script, serialize($_POST));
 	} 
-	if  ($script !== 'admin_repair') {
+
+	if  (!$anonymous) {
 		$res = admin_verifie_session($script);
 		if ($res) return $res;
 	}

@@ -25,18 +25,23 @@ function exec_import_all_dist()
 {
 	$archive=_request('archive');
 	if (!strlen($archive)) $archive=_request('archive_perso');
+	$request = @unserialize($GLOBALS['meta']['import_all']);
 
 	if ($archive) {
-			$dir = import_queldir();
-			$_POST['dir'] = $dir;
-			$commentaire = verifier_sauvegarde($dir . $archive);
-	} else $commentaire = '';
-
-	if ($archive OR isset($GLOBALS['meta']['import_all'])) {
+		$dir = import_queldir();
+		$_POST['dir'] = $dir;
+		$commentaire = verifier_sauvegarde($dir . $archive);
+		$insert = _request('insertion');
+	} elseif ($archive = isset($GLOBALS['meta']['import_all'])) {
+		$request = @unserialize($GLOBALS['meta']['import_all']);
+		$insert = $request['insertion'];
+		$commentaire = '';
+	}
+	if ($archive) {
 		$action = _T('info_restauration_sauvegarde', 
 			     array('archive' => $archive));
 		$admin = charger_fonction('admin', 'inc');
-		echo $admin('import_all', $action, $commentaire);
+		echo $admin('import_all', $action, $commentaire, !$insert);
 	} else {
 		$f = charger_fonction('accueil');
 		$f();
