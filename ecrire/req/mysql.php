@@ -446,7 +446,7 @@ function spip_mysql_insert($table, $champs, $valeurs, $desc='', $serveur='') {
 }
 
 // http://doc.spip.org/@spip_mysql_insertq
-function spip_mysql_insertq($table, $couples, $desc=array(), $serveur='') {
+function spip_mysql_insertq($table, $couples=array(), $desc=array(), $serveur='') {
 
 	if (!$desc) $desc = description_table($table);
 	if (!$desc) die("$table insertion sans description");

@@ -111,7 +111,7 @@ function import_insere($values, $table, $desc, $request, $atts) {
 	OR (!($n = $f($values, $table, $desc, $request)))) {
           // pas d'importation de types_doc (a revoir)
 		if ($table == 'spip_types_documents') return;
-		$n = sql_insert($table, '()', '()');
+		$n = sql_insertq($table);
 		$ajout=1;
 	}
 
@@ -337,7 +337,7 @@ function import_identifie_parent_id_mot($id_groupe, $titre, $v)
 		$r = sql_fetsel("id_mot", "spip_mots", "titre=$titre AND id_groupe=$new" );
 		if ($r) return  (0 - $r['id_mot']);
 	}
-	if ($r = sql_insert('spip_mots', '()', '()'))
+	if ($r = sql_insertq('spip_mots'))
 		sql_replace('spip_translate', array(
 					    'id_old' => $v,
 					    'id_new' => $r,
@@ -365,7 +365,7 @@ function import_identifie_parent_id_article($id_parent, $titre, $v)
 	$r = sql_fetsel("id_article", "spip_articles", "titre=$titre AND id_rubrique=$id_parent AND statut<>'poubelle'" );
 	if ($r) return (0 - $r['id_article']);
 
-	if ($r = sql_insert('spip_articles', '()', '()'))
+	if ($r = sql_insertq('spip_articles'))
 		sql_replace('spip_translate', array(
 					    'id_old' => $v,
 					    'id_new' => $r,
@@ -395,7 +395,7 @@ function import_identifie_parent_id_breve($id_parent, $titre, $v)
 	$r = sql_fetsel("id_breve", "spip_breves", "titre=$titre AND id_rubrique=$id_parent AND statut<>'refuse'" );
 	if ($r) return (0 - $r['id_breve']);
 
-	if ($r = sql_insert('spip_breves', '()', '()'))
+	if ($r = sql_insertq('spip_breves'))
 		sql_replace('spip_translate', array(
 					    'id_old' => $v,
 					    'id_new' => $r,
@@ -456,8 +456,7 @@ function import_identifie_parent_id_rubrique($id_parent, $titre, $v)
 
 // http://doc.spip.org/@import_alloue_id_rubrique
 function import_alloue_id_rubrique($id_parent, $titre, $v) {
-	$titre = sql_quote($titre);
-	if ($r = sql_insert('spip_rubriques', '(titre, id_parent)', "($titre,$id_parent)"))
+	if ($r = sql_insertq('spip_rubriques', array('titre' => $titre, id_parent => $id_parent)))
 		sql_replace('spip_translate', array(
 		    'id_old' => $v,
 		    'id_new' => $r,
