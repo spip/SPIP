@@ -256,8 +256,13 @@ function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $
 	if (!$envoyer_mail($adresse_email, _T('form_pet_confirmation')." ".$titre, $messagex)) 
 		return _T('form_pet_probleme_technique');
 
-	$id_signature = sql_insert('spip_signatures', "(id_article, date_time, statut, ad_email, url_site)", "($id_article, NOW(), '$passw', " .  sql_quote($adresse_email) . "," . sql_quote($url_site) .")");
- 
+	$id_signature = sql_insertq('spip_signatures', array(
+		'id_article' => $id_article,
+		'date_time' => 'NOW()',
+		'statut' => $passw,
+		'ad_email' => $adresse_email,
+		'url_site' => $url_site));
+
 	if (!$id_signature) return _T('form_pet_probleme_technique');
 	include_spip('inc/modifier');
 	revision_signature($id_signature, array(

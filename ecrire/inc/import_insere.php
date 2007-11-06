@@ -118,9 +118,12 @@ function import_insere($values, $table, $desc, $request, $atts) {
 	if (is_array($n))
 		list($id, $titre) = $n; 
 	else {$id = $n; $titre = "";}
-	sql_insert('spip_translate',
-				"(id_old, id_new, titre, type, ajout)",
-				     "(". $values[$type_id] .",$id, " . sql_quote($titre) . ", '$type_id', $ajout)");
+	sql_insertq('spip_translate', array(
+		   'id_old' => $values[$type_id],
+		   'id_new' => $id,
+		   'titre' => $titre,
+		   'type' => $type_id,
+		   'ajout' => $ajout));
 }
 
 // Renumerotation des entites collectees

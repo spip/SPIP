@@ -352,10 +352,10 @@ function creer_rubrique_nommee($titre, $id_parent=0) {
 		if ($r !== NULL) 	       
 			$id_parent = $r;
 		else {
-			$id_rubrique = sql_insert('spip_rubriques',
-				'(titre, id_parent, statut)',
-				'('.sql_quote($titre).", $id_parent, 'prive')"
-			);
+			$id_rubrique = sql_insertq('spip_rubriques', array(
+				'titre' => $titre,
+				'id_parent' => $id_parent,
+				'statut' => 'prive'));
 			if ($id_parent > 0) {
 				$data = sql_fetsel("id_secteur,lang", "spip_rubriques", "id_rubrique=$id_parent");
 				$id_secteur = $data['id_secteur'];
