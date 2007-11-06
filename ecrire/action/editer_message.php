@@ -65,9 +65,10 @@ function action_editer_message_post_retirer($id_message, $id_auteur) {
 // http://doc.spip.org/@action_editer_message_post_ajouter
 function action_editer_message_post_ajouter($id_message, $id_auteur) {
 	sql_delete("spip_auteurs_messages", "id_auteur=$id_auteur AND id_message=$id_message");
-	sql_insert('spip_auteurs_messages',
-		"(id_auteur,id_message,vu)",
-		"($id_auteur,$id_message,'non')");
+	sql_insertq('spip_auteurs_messages',
+		   array('id_auteur' => $id_auteur,
+			 'id_message' => $id_message,
+			 'vu' =>'non'));
 
 	// Ne pas notifier ici, car si on se trompe d'auteur, on veut avoir le temps
 	// de supprimer celui qu'on vient d'ajouter... c'est fait en cron
@@ -83,7 +84,7 @@ function action_editer_message_post_choisir($id_message) {
 		include_spip('inc/charsets'); // pour tranlitteration
 		$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 		$cherche_auteur= _request('cherche_auteur');
-		$query = sql_select("id_auteur, nom", "spip_auteurs", "messagerie<>'non' AND id_auteur<>'$connect_id_auteur' AND pass<>'' AND login<>''");
+		$query = sql_select("id_auteur, nom", "spip_auteurs", "messagerie<>'non' AND id_auteur<>'$id_auteur' AND pass<>'' AND login<>''");
 		$table_auteurs = array();
 		$table_ids = array();
 		while ($row = sql_fetch($query)) {
@@ -98,8 +99,8 @@ function action_editer_message_post_choisir($id_message) {
 			action_editer_message_post_ajouter($id_message, $res[0]);
 		# renvoyer la valeur ==> formulaire de choix si n !=1
 		# notification que $res[0] a ete rajoute sinon
-		  redirige_par_entete(parametre_url(urldecode(_request('redirect')),
-					    'cherche_auteur', _request('chercher_auteur'), '&'));
+		redirige_par_entete(parametre_url(urldecode(_request('redirect')),
+					    'cherche_auteur', $cherche_auteur, '&'));
 	}
 }
 
@@ -141,15 +142,18 @@ function action_editer_message_post_nouveau($type, $dest='', $rv='')
 	$id_message = sql_insertq("spip_messages", $vals);
 
 	if ($type != "affich"){
-		sql_insert('spip_auteurs_messages',
-			"(id_auteur,id_message,vu)",
-			"('$id_auteur','$id_message','oui')");
+		sql_insertq('spip_auteurs_messages',
+		   array('id_auteur' => $id_auteur,
+			 'id_message' => $id_message,
+			 'vu' =>'oui'));
 		if ($dest) {
-			sql_insert('spip_auteurs_messages',
-				"(id_auteur,id_message,vu)",
-				"('$dest','$id_message','non')");
+			sql_insertq('spip_auteurs_messages',
+				    array('id_auteur' => $id_auteur,
+					  'id_message' => $id_message,
+					  'vu' =>'non'));
 		}
 	}
+
 	redirige_par_entete(generer_url_ecrire('message_edit', "id_message=$id_message&new=oui&dest=$dest",true));
 }
 
