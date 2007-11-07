@@ -347,10 +347,10 @@ function ancre_texte($texte, $fautifs=array(), $nocpt=false)
 	if (!$nocpt) {
 		$format = '%0' . strval(@strlen(count($tableau))). 'd';
 	} else $format ='%s';
-	$format = "<a href='#T%s' title=\"%s\"><span id='L%d' style='text-align: right;color: black;%s'>$format&nbsp;&nbsp;</span></a>\n";
+	$format = "<tr id='L%d'><td><a class='sinumerote' style='text-align: right; background-color: white;visibility: " . ($nocpt ? 'hidden' : 'visible') . ";%s' href='#T%s' title=\"%s\">$format</a></td><td style='padding-left:10px'>%s</td></tr>\n";
 
-	$format10=str_replace('black','pink',$format);
-	$formaterr="background-color: pink;";
+	$format10=str_replace('white','lightgrey',$format);
+	$formaterr="color: red;";
 	$i=1;
 
 	$flignes = array();
@@ -374,12 +374,19 @@ function ancre_texte($texte, $fautifs=array(), $nocpt=false)
 	    //  sprintf($formaterr, substr($ligne,$m));
 	    $bg = $formaterr; 
 	  } else {$indexmesg = $ancre; $err= $bg='';}
-	  $res .= "<br />\n"
-	    .  sprintf((($i%10) ? $format :$format10), $indexmesg, $err, $i, $bg, ($nocpt ? '' : $i))
-		.   $ligne;
+	  $res .= sprintf((($i%10) ? $format :$format10), $i, $bg, $indexmesg, $err, ($nocpt ? '' : $i), $ligne);
 	  $i++;
 	}
-	return "<div id='T$ancre'>$res</div>";
+	$js = "this.style.visibility=this.style.visibility=='visible'?'hidden' : 'visible'";
+
+	return "\n<table id='T$ancre' style='border: 0px;'>"
+	  . "\n<tr><th onclick=\"\$('.sinumerote').each(function(){ $js })\" >"
+	  . _T('info_numero_abbreviation')
+	  . "</th>\n<th style='text-align: center'>"
+	  . _T('info_texte')
+	  . "</th></tr>"
+	  . $res
+	  . "</table>";
 }
 
 // l'environnement graphique du debuggueur 
@@ -534,6 +541,8 @@ function debug_debut($titre)
 	  "<meta http-equiv='Content-Type' content='text/html" .
 	  (($c = $GLOBALS['meta']['charset']) ? "; charset=$c" : '') .
 	  "' />\n" .
+	  "\n<script src=\"".generer_url_public('jquery.js')
+	  . "\" type=\"text/javascript\"></script>\n" .
 	  "<link rel='stylesheet' href='".url_absolue(find_in_path('spip_admin.css'))
 	  . "' type='text/css' />" .
 	  "</head>\n<body style='margin:0 10px;'>" .
