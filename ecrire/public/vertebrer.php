@@ -131,8 +131,9 @@ function public_vertebrer_dist($desc)
 	$cell = vertebrer_cell($field);
 	$sort = vertebrer_sort($field,'');
 	$tros = vertebrer_sort($field,'_');
-	$titre =  "SPIPAdmin $connexion $surnom";
-	$skel = "./?page=$surnom&amp;var_mode=debug&amp;var_mode_affiche=squelette#debug_boucle";
+	$titre =  "[(#ENV{page}|image_typo{police=dustismo_bold.ttf,taille=36,couleur=4433bb})]";
+	$distant = !$connexion ? '' : "&amp;connect=$connexion";
+	$skel = "./?page=$surnom$distant&amp;var_mode=debug&amp;var_mode_affiche=squelette#debug_boucle";
 	  
 	return
 
