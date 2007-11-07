@@ -309,7 +309,7 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type) {
 			$exposer= array($type => array($principal => true));
 			if ($type == 'id_mot')
 				$exposer['id_groupe'][$parent] = true;
-			if ($type != 'id_groupe') {
+			else if ($type != 'id_groupe') {
 			  if (!$parent) $parent = $principal;
 			  $a = split(',',calculer_hierarchie($parent));
 			  foreach($a as $n) $exposer['id_rubrique'][$n] = true;
