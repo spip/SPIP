@@ -571,6 +571,13 @@ $GLOBALS[\'all_langs\'] = @$GLOBALS[\'meta\'][\'langues_proposees\'];
 
   ',
 
+'spip_create_table' => '($nom, $champs, $cles, $autoinc=false, $temporary=false) {
+	vieilles_log(\'spip_create_table()\');
+    return sql_create($nom, $champs, $cles, $autoinc, $temporary);
+  }
+
+  ',
+
 'spip_abstract_multi' => '($sel, $lang, $serveur=\'\') {
 	vieilles_log(\'spip_abstract_multi()\');
     return sql_multi($sel, $lang, $serveur);
