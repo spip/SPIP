@@ -75,7 +75,7 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 		}
 		spip_log("Creation des tables. Codage $charsetbase");
 		creer_base($server_db); // AT LAST
-
+		creer_base_types_doc($server_db);
 		// memoriser avec quel charset on l'a creee
 		if ($charset) {
 			@sql_insert('spip_meta', "(nom, valeur, impt)", "('charset_sql_base', '".$charset['charset']."', 'non')", '', $server_db);
@@ -88,13 +88,14 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 	  // pour recreer les tables disparues au besoin
 	  spip_log("Table des Meta deja la. Verification des autres.");
 	  creer_base($server_db); 
+	  $fupdateq = sql_serveur('updateq', $server_db);
 
 	  $r = $fquery("SELECT valeur FROM spip_meta WHERE nom='version_installee'", $server_db);
 
 	  if ($r) $r = sql_fetch($r, $server_db);
 	  $version_installee = !$r ? 0 : (double) $r['valeur'];
 	  if (!$version_installee OR ($spip_version < $version_installee)) {
-	    sql_updateq('spip_meta', array('valeur'=>$spip_version, 'impt'=>'non'), "nom='version_installee'", $server_db);
+	    $fupdateq('spip_meta', array('valeur'=>$spip_version, 'impt'=>'non'), "nom='version_installee'", $server_db);
 	    spip_log("nouvelle version installee: $spip_version");
 	  }
 	  // eliminer la derniere operation d'admin mal terminee

@@ -384,7 +384,7 @@ function maj_1_953()
 {
 	global $tables_principales;
 	include_spip('base/create');
-	creer_base_types_doc($tables_principales['spip_types_documents']);
+	creer_base_types_doc();
 }
 
 $GLOBALS['maj'][1][953] = array(array('maj_1_953'));
@@ -420,20 +420,26 @@ if ($GLOBALS['meta']['version_installee'] > 1.950)
 // il faut supprimer l'autoincrement avant de supprimer la PRIMARY KEY
 
 $GLOBALS['maj'][1][938] = array(
-	array('sql_alter', "TABLE spip_types_documents DROP `id_type`"),
+
+# creer un champ plus informatif, et son index
 	array('sql_alter', "TABLE spip_documents ADD `extension` VARCHAR(10) DEFAULT ''  NOT NULL "),
+# recopier l'ancien champ dans le nouveau
+	array('maj_1_938'),
+# supprimer l'ancien champ et son index
+	array('sql_alter', "TABLE spip_documents DROP INDEX `id_type`, DROP `id_type`"),
+# le champ id_type devient superflu 
+	array('sql_alter', "TABLE spip_types_documents DROP `id_type`"),
 	array('sql_alter', "TABLE spip_types_documents ADD PRIMARY KEY (`extension`)")
 	);
 // pour ceux pour qui c'est trop tard:
-// 
+// mais faudrait trouver mieux
+function maj_1_938_catastrophe ()
+{
+	spip_log("Verifier la colonne extension de la table spip_documents; si elle est toujours vide,  repartir d'une sauvegarde 1.9.2");
+}
+
 if ($GLOBALS['meta']['version_installee'] > 1.938)
-	$GLOBALS['maj'][1][956] = array(
-	array('sql_alter', "TABLE spip_types_documents DROP PRIMARY KEY"),
-	array('sql_alter', "TABLE spip_types_documents DROP `id_type`"),
-	array('sql_alter', "TABLE spip_types_documents DROP INDEX `extension`"),
-	array('sql_alter', "TABLE spip_documents ADD `extension` VARCHAR(10) DEFAULT ''  NOT NULL "),
-	array('sql_alter', "TABLE spip_types_documents ADD PRIMARY KEY (`extension`)")
-	);
+	$GLOBALS['maj'][1][956] = array(array('maj_1_938_catastrophe'));
 
 // PG veut une valeur par defaut a l'insertion
 // http://trac.rezo.net/trac/spip/changeset/10482
