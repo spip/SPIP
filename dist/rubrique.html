@@ -41,6 +41,7 @@
             <ul>
                 <BOUCLE_articles(ARTICLES) {id_rubrique} {par date}{inverse} {pagination}>
                 <li>
+                    [(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{150,100})]
                     <h3><a href="#URL_ARTICLE">#TITRE</a></h3>
                     <small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
                 </li>
