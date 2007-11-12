@@ -77,12 +77,26 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 		creer_base($server_db); // AT LAST
 		creer_base_types_doc($server_db);
 		// memoriser avec quel charset on l'a creee
+
 		if ($charset) {
-			@sql_insert('spip_meta', "(nom, valeur, impt)", "('charset_sql_base', '".$charset['charset']."', 'non')", '', $server_db);
-			@sql_insert('spip_meta', "(nom, valeur, impt)", "('charset_collation_sql_base', '".$charset['collation']."', 'non')", '', $server_db);
-			@sql_insert('spip_meta', "(nom, valeur, impt)", "('charset_sql_connexion', '".$charset['charset']."', 'non')", '', $server_db);
+			$t = array('nom' => 'charset_sql_base',
+				   'valeur' => $charset['charset'],
+				   'impt' => 'non');
+			@sql_insertq('spip_meta', $t, '', $server_db);
+			$t['nom'] = 'charset_collation_sql_base';
+			$t['valeur'] = $charset['collation'];
+			@sql_insertq('spip_meta', $t, '', $server_db);
+			$t['nom'] = 'charset_sql_connexion';
+			$t['valeur'] = $charset['charset'];
+			@sql_insertq('spip_meta', $t, '', $server_db);
 		}
-		sql_insert('spip_meta', '(nom, valeur,impt)', "('version_installee', '$spip_version','non')", array(), $server_db);		@sql_insert("spip_meta", "(nom, valeur)", "('nouvelle_install', '1')",  array(), $server_db);
+		$t = array('nom' => 'version_installee',
+			   'valeur' => $spip_version,
+			   'impt' => 'non');
+		@sql_insertq('spip_meta', $t, '', $server_db);
+		$t['nom'] = 'nouvelle_install';
+		$t['valeur'] = 1;
+		@sql_insertq('spip_meta', $t, '', $server_db);
 	} else {
 
 	  // pour recreer les tables disparues au besoin
