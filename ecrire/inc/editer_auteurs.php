@@ -22,7 +22,7 @@ define('_SPIP_SELECT_MAX_AUTEURS', 100); // au-dessus: saisie + return
 // http://doc.spip.org/@inc_editer_auteurs_dist
 function inc_editer_auteurs_dist($type, $id, $flag, $cherche_auteur, $ids, $titre_boite = NULL, $script_edit_objet = NULL) {
 
-	$arg_ajax = "&id_{$type}=$id";
+	$arg_ajax = "&id_{$type}=$id&type=$type";
 	if ($script_edit_objet===NULL) $script_edit_objet = $type.'s';
 	if ($titre_boite===NULL) 
 		$titre_boite = _T('texte_auteurs'). aide("artauteurs");
