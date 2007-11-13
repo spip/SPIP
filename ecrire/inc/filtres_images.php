@@ -2312,6 +2312,30 @@ function couleur_eclaircir_si_foncee ($couleur) {
 	else return $couleur;
 }
 
+
+// http://doc.spip.org/@couleur_saturation
+function couleur_saturation($couleur, $val) {
+	if ($couleur == "ffffff") $couleur = "eeeeee";
+
+	include_spip("inc/filtres_images");
+	$couleurs = couleur_hex_to_dec($couleur);
+	$r= 255 - $couleurs["red"];
+	$g= 255 - $couleurs["green"];
+	$b= 255 - $couleurs["blue"];
+
+	$max = max($r,$g,$b);
+
+	$r = 255 - $r / $max * 255 * $val;
+	$g = 255 - $g / $max * 255 * $val;
+	$b = 255 - $b / $max * 255 * $val;
+	
+	$couleur = couleur_dec_to_hex($r, $g, $b);
+	
+	return $couleur;
+		
+}
+
+
 // Image typographique
 
 // http://doc.spip.org/@printWordWrapped

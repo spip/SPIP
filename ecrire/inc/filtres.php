@@ -54,6 +54,7 @@ $GLOBALS['spip_matrice']['couleur_foncer_si_claire'] = $inc_filtres_images;
 $GLOBALS['spip_matrice']['couleur_eclaircir_si_foncee'] = $inc_filtres_images;
 $GLOBALS['spip_matrice']['couleur_web'] = $inc_filtres_images;
 $GLOBALS['spip_matrice']['couleur_4096'] = $inc_filtres_images;
+$GLOBALS['spip_matrice']['couleur_saturation'] = $inc_filtres_images;
 
 // http://doc.spip.org/@chercher_filtre
 function chercher_filtre($fonc) {
