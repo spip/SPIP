@@ -55,7 +55,7 @@ function exec_articles_args($id_article)
 // http://doc.spip.org/@articles_affiche
 function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot,  $select_groupe, $trad_err)
 {
-	global $spip_display, $spip_lang_left, $spip_lang_right, $connect_id_auteur;
+	global $spip_display, $spip_lang_left, $spip_lang_right, $connect_id_auteur,$dir_lang;
 
 	$id_rubrique = $row['id_rubrique'];
 	$id_secteur = $row['id_secteur'];
@@ -73,7 +73,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	$extra = $row["extra"];
 	$id_trad = $row["id_trad"];
 	
-	$virtuel = ($row["chapo"][0]!='=') ? '' :
+	$virtuel = (strncmp($row["chapo"],'=',1)!==0) ? '' :
 		chapo_redirige(substr($row["chapo"], 1));
 
 	$statut_rubrique = autoriser('publierdans', 'rubrique', $id_rubrique);

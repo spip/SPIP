@@ -48,7 +48,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 	}
 
 	if ($url = @parse_url( $kw_referer )) {
-		$query = $url['query'];
+		$query = isset($url['query'])?$url['query']:"";
 		$host  = strtolower($url['host']);
 		$path  = $url['path'];
 	} else $query = $host = $path ='';
@@ -78,7 +78,8 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 			if (strpos($arr_engines[$cnt][1],'=')!==false) {
 			
 				// Fonctionnement simple: la variable existe
-				$keywords = ${str_replace('=', '', $arr_engines[$cnt][1])};
+				$v = str_replace('=', '', $arr_engines[$cnt][1]);
+				$keywords = isset($$v)?$$v:"";
 				
 				// Si on a defini le nom de la variable en expression reguliere, chercher la bonne variable
 				if (! strlen($keywords) > 0) {
@@ -95,7 +96,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 				|| ($kw_referer_host == "MSN")
 				)) {
 				include_spip('inc/charsets');
-				if (!$cset = $ie) $cset = 'utf-8';
+				if (!isset($ie) OR !$cset = $ie) $cset = 'utf-8';
 				$keywords = importer_charset($keywords,$cset);
 			}
 			$buffer["hostname"] = $kw_referer_host;
@@ -104,7 +105,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 	}
 
 	$buffer["host"] = $host;
-	if (!$buffer["hostname"])
+	if (!isset($buffer["hostname"]) OR !$buffer["hostname"])
 		$buffer["hostname"] = $host;
 	
 	$buffer["path"] = substr($path, 1, strlen($path));
@@ -137,6 +138,7 @@ function referes($referermd5) {
 		$titre_article = $rowart['titre'];
 		$retarts[] = "<a href='".generer_url_article($id_article)."'><i>".typo($titre_article)."</i></a>";
 	}
+	$r = "";
 	if (count($retarts) > 1) $r = '<br />&rarr; '.join(',<br />&rarr; ',$retarts);
 	if (count($retarts) == 1) $r = '<br />&rarr; '.$retarts[0];
 	return $r;
@@ -162,13 +164,13 @@ function aff_referers ($result, $limit, $plus) {
 		
 		if ($buff["host"]) {
 			$numero = substr(md5($buff["hostname"]),0,8);
-	
+			if (!isset($nbvisites[$numero])) $nbvisites[$numero]=0;
 			
 			$nbvisites[$numero] += $visites;
 
-			if (strlen($buff["keywords"]) > 0) {
+			if (isset($buff["keywords"]) AND strlen($buff["keywords"]) > 0) {
 				$criteres = substr(md5($buff["keywords"]),0,8);
-				if (!$lescriteres[$numero][$criteres])
+				if (!isset($lescriteres[$numero][$criteres]))
 					$tmp = " &laquo;&nbsp;".$buff["keywords"]."&nbsp;&raquo;";
 				$lescriteres[$numero][$criteres] = true;
 			} else {
@@ -184,6 +186,7 @@ function aff_referers ($result, $limit, $plus) {
 			if ($tmp) {
 				$lesreferers[$numero][] = "<a href='".quote_amp($referer)."'><b>".quote_amp(urldecode($tmp))."</b></a>" . (($visites > 1)?" ($visites)":"").referes($referermd5);
 			} else {
+				if (!isset($lesliensracine[$numero])) $lesliensracine[$numero]=0;
 				$lesliensracine[$numero] += $visites;
 			}
 			$lesdomaines[$numero] = $buff["hostname"];

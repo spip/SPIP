@@ -79,6 +79,7 @@ function inc_afficher_contenu_objet_dist($type, $id,$row = NULL){
 				# dans l'espace prive on veut afficher le rang
 				# (temporaire, en attendant un vrai champ rang ??)
 				$filtre = str_replace('supprimer_numero(','(', $filtre);
+				$connect = "";
 
 				$valeur = eval("return $filtre;");
 			}

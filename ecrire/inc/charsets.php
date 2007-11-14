@@ -259,6 +259,7 @@ function charset2unicode($texte, $charset='AUTO' /* $forcer: obsolete*/) {
 
 	switch ($charset) {
 	case 'utf-8':
+	case 'utf8':
 		return utf_8_to_unicode($texte);
 
 	case 'iso-8859-1':

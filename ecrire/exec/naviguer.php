@@ -29,6 +29,7 @@ function exec_naviguer_args($id_rubrique, $cherche_mot, $select_groupe)
 	if (!$id_rubrique) {
 		$lang = $statut = $titre = $extra = $id_parent=$id_secteur='';
 		$ze_logo = "racine-site-24.gif";
+		$row = array();
 	} else {
 		$row = sql_fetsel('id_parent, id_secteur, titre, statut, extra,  lang, descriptif, texte', 'spip_rubriques', "id_rubrique=$id_rubrique");
 
@@ -94,7 +95,7 @@ function exec_naviguer_args($id_rubrique, $cherche_mot, $select_groupe)
 		$editer_mot = $editer_mot('rubrique', $id_rubrique,  $cherche_mot,  $select_groupe, $flag_editable, true);
 	} else $editer_mot = '';
 
-	if ($row['extra']) {
+	if (isset($row['extra']) && $row['extra']) {
 		include_spip('inc/extra');
 		$extra = extra_affichage($extra, "rubriques");
 	} else $extra = "";

@@ -645,7 +645,7 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 	if (preg_match('/s$/',$_id)) $_id = substr($_id,0,-1);
 	$contexte['id'] = $contexte[$_id] = $id;
 
-	if ($class)
+	if (isset($class))
 		$contexte['class'] = $class;
 
 	// Si un lien a ete passe en parametre, ex: [<modele1>->url]

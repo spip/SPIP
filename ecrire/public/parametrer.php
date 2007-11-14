@@ -285,8 +285,7 @@ function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 
 	if (!isset($lang))
 		$lang = $GLOBALS['meta']['langue_site'];
-
-	$select = (!$GLOBALS['forcer_lang'] AND $lang <> $GLOBALS['spip_lang']);
+	$select = ((!isset($GLOBALS['forcer_lang']) OR !$GLOBALS['forcer_lang']) AND $lang <> $GLOBALS['spip_lang']);
 	if ($select) $select = lang_select($lang);
 
 	$styliser = charger_fonction('styliser', 'public');
@@ -301,7 +300,7 @@ function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 	$composer = charger_fonction('composer', 'public');
 
 	// Le debugueur veut afficher le contexte
-	if ($GLOBALS['var_mode'] == 'debug')
+	if (isset($GLOBALS['var_mode']) && ($GLOBALS['var_mode'] == 'debug'))
 		$GLOBALS['debug_objets']['contexte'][$sourcefile] = $local;
 
 	if ($fonc = $composer($skel, $mime_type, $gram, $sourcefile, $connect)){
@@ -325,7 +324,7 @@ function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 			. join(', ',$info)
 			.' ('.strlen($page['texte']).' octets)'
 		);
-		if ($GLOBALS['var_mode'] == 'debug')
+		if (isset($GLOBALS['var_mode']) && ($GLOBALS['var_mode'] == 'debug'))
 			$GLOBALS['debug_objets']['profile'][$sourcefile] = $profile;
 
 		// Si #CACHE{} n'etait pas la, le mettre a $delais
@@ -335,7 +334,7 @@ function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 	} else
 		$page = array();
 
-	if ($GLOBALS['var_mode'] == 'debug') {
+	if (isset($GLOBALS['var_mode']) && ($GLOBALS['var_mode'] == 'debug')) {
 		include_spip('public/debug');
 		debug_dumpfile (strlen($page['texte'])?$page['texte']:" ", $fonc, 'resultat');
 	}
