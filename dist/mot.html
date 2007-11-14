@@ -128,7 +128,7 @@
         <div class="menu">
             <h2><:autres_groupes_mots_clefs:></h2>
             <ul>
-                <BOUCLE_groupes_freres(GROUPES_MOTS) {par titre} {doublons}>
+                <BOUCLE_groupes_freres(GROUPES_MOTS) {!id_groupe} {par titre} {doublons}>
                 <BOUCLE_mot_cousin(MOTS) {id_groupe} {par titre} {0,1}>
                 <li><a href="#URL_MOT">#TYPE</a></li>
                 </BOUCLE_mot_cousin>
