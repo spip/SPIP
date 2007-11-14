@@ -101,7 +101,7 @@ function login_pour_tous($login, $cible, $action) {
 	$echec_visiteur = (_request('var_erreur') == 'statut') ?' ':'';
 
 
-	$pose_cookie = generer_url_action('cookie');
+	$pose_cookie = generer_url_action('cookie',"",false,true);
 	$auth_http = '';	
 	if ($echec_cookie AND !$ignore_auth_http) {
 		if (($GLOBALS['flag_sapi_name']

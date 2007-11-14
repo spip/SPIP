@@ -157,8 +157,10 @@ function afficher_choix($nom, $valeur_actuelle, $valeurs, $sep = "<br />") {
 // http://doc.spip.org/@appliquer_modifs_config
 function appliquer_modifs_config() {
 
-	if ($i = _request('adresse_site'))
+	if (($i = _request('adresse_site'))!==NULL){
+		if (!strlen($i)) {$GLOBALS['profondeur_url']=0;$i = url_de_base();}
 		$_POST['adresse_site'] = preg_replace(",/?\s*$,", "", $i);
+	}
 
 	// provoquer l'envoi des nouveautes en supprimant le fichier lock
 	if (_request('envoi_now')) {
