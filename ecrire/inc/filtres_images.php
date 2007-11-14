@@ -121,7 +121,7 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 	
 	$creer = true;
 	// si recalcul des images demande, recalculer chaque image une fois
-	if ($GLOBALS['var_images'] && !isset($images_recalcul[$fichier_dest])){
+	if (isset($GLOBALS['var_images']) && $GLOBALS['var_images'] && !isset($images_recalcul[$fichier_dest])){
 		$images_recalcul[$fichier_dest] = true;
 	}
 	else {

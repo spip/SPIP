@@ -39,8 +39,8 @@ function configuration_reducteur_dist()
 					$image_process = 'non';
 					break;
 			}
-		ecrire_meta('formats_graphiques', $formats_graphiques);
-		ecrire_meta('image_process', $image_process);
+		ecrire_meta('formats_graphiques', $formats_graphiques,'non');
+		ecrire_meta('image_process', $image_process,'non');
 	} else 	$formats_graphiques = $GLOBALS['meta']["formats_graphiques"];
 
 	$nb_process = 0;

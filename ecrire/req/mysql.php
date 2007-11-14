@@ -450,7 +450,7 @@ function spip_mysql_insertq($table, $couples=array(), $desc=array(), $serveur=''
 
 	if (!$desc) $desc = description_table($table);
 	if (!$desc) die("$table insertion sans description");
-	$fields =  $desc['field'];
+	$fields =  isset($desc['field'])?$desc['field']:array();
 
 	foreach ($couples as $champ => $val) {
 		$couples[$champ]= spip_mysql_cite($val, $fields[$champ]);
