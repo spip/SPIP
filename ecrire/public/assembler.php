@@ -335,7 +335,7 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 // Traiter var_recherche ou le referrer pour surligner les mots
 // http://doc.spip.org/@f_surligne
 function f_surligne ($texte) {
-	if (isset($_SERVER['HTTP_REFERER']) || $_GET['var_recherche']) {
+	if (isset($_SERVER['HTTP_REFERER']) || isset($_GET['var_recherche'])) {
 		include_spip('inc/surligne');
 		$texte = surligner_mots($texte);
 	}
