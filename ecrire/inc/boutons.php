@@ -234,83 +234,84 @@ function definir_barre_boutons() {
 	$boutons_admin = pipeline('ajouter_boutons', $boutons_admin);
 }
 
-/**
- * definir la liste des onglets dans une page de l'interface privee
- * on passe la main au pipeline "ajouter_onglets".
- */
-// http://doc.spip.org/@definir_barre_onglets
-function definir_barre_onglets($rubrique) {
-	global $id_auteur, $connect_id_auteur, $connect_statut, $statut_auteur;
 
-	$onglets=array();
+/* code mort
+function barre_onglets_auteur() {
 
-	switch($rubrique) {
-	case 'statistiques_repartition':
-	case 'repartition':
-		if ($GLOBALS['meta']['multi_articles'] == 'oui' OR $GLOBALS['meta']['multi_rubriques'] == 'oui') {
-			$onglets['rubriques']=
-			  new Bouton('rubrique-24.gif', 'onglet_repartition_rubrique');
-			$onglets['langues']=
-			  new Bouton('langues-24.gif', 'onglet_repartition_lang');
-		}
-	break;
-
-	case 'rep_depuis':
-		$onglets['statistiques_lang']=
-		  new Bouton(null, 'icone_repartition_actuelle');
-		$onglets['debut']=
-		  new Bouton(null, 'onglet_repartition_debut',
-			generer_url_ecrire("statistiques_lang","critere=debut"));
-	break;
-
-	case 'stat_depuis':
-		$onglets['popularite']=
-		  new Bouton(null, 'icone_repartition_actuelle',
-			generer_url_ecrire("statistiques_repartition",""));
-		$onglets['debut']=
-		  new Bouton(null, 'onglet_repartition_debut',
-			generer_url_ecrire("statistiques_repartition","critere=debut"));
-	break;
-
-	case 'stat_referers':
-		$onglets['jour']=
-		  new Bouton(null, 'date_aujourdhui',
-			generer_url_ecrire("statistiques_referers",""));
-		$onglets['veille']=
-		  new Bouton(null, 'date_hier',
-			generer_url_ecrire("statistiques_referers","jour=veille"));
-	break;
-
-	case 'administration':
-		if (autoriser('sauvegarder')) {
-			$onglets['sauver']=
-			  new Bouton('base-24.gif', 'onglet_save_restaur_base',
-				generer_url_ecrire("admin_tech"));
-		}
-		if (autoriser('detruire')) {
-			$onglets['effacer']=
-			  new Bouton('supprimer.gif', 'onglet_affacer_base',
-				generer_url_ecrire("admin_effacer"));
-		}
-	break;
-
-	case 'auteur':
 		$onglets['auteur']=
 		  new Bouton('auteur-24.gif', 'onglet_auteur',
 			generer_url_ecrire("auteur_infos","id_auteur=$id_auteur"));
 		$onglets['infos']=
 		  new Bouton('fiche-perso-24.gif', 'icone_informations_personnelles',
 			generer_url_ecrire("auteur_infos","id_auteur=$id_auteur"));
-	break;
+	return $onglets;
+}
 
-	case 'configuration':
-		$onglets['contenu']=
+function barre_onglets_statistiques_repartition() {
+	return barre_onglets_repartition();
+}
+
+function barre_onglets_repartition() {
+
+	if ($GLOBALS['meta']['multi_articles'] == 'oui' OR $GLOBALS['meta']['multi_rubriques'] == 'oui') {
+		$onglets['rubriques']=
+			new Bouton('rubrique-24.gif', 'onglet_repartition_rubrique');
+		$onglets['langues']=
+			new Bouton('langues-24.gif', 'onglet_repartition_lang');
+	}
+	return $onglets;
+}
+
+*/
+
+function barre_onglets_rep_depuis() {
+
+	$onglets = array();
+	$onglets['statistiques_lang']=
+		  new Bouton(null, 'icone_repartition_actuelle');
+	$onglets['debut']=
+		  new Bouton(null, 'onglet_repartition_debut',
+			generer_url_ecrire("statistiques_lang","critere=debut"));
+	return $onglets;
+}
+
+function barre_onglets_stat_depuis() {
+	$onglets = array();
+	$onglets['popularite']=
+		  new Bouton(null, 'icone_repartition_actuelle',
+			generer_url_ecrire("statistiques_repartition",""));
+	$onglets['debut']=
+		  new Bouton(null, 'onglet_repartition_debut',
+			generer_url_ecrire("statistiques_repartition","critere=debut"));
+	return $onglets;
+}
+
+function barre_onglets_administration() {
+
+	$onglets = array();
+	if (autoriser('sauvegarder')) {
+			$onglets['sauver']=
+			  new Bouton('base-24.gif', 'onglet_save_restaur_base',
+				generer_url_ecrire("admin_tech"));
+	}
+	if (autoriser('detruire')) {
+			$onglets['effacer']=
+			  new Bouton('supprimer.gif', 'onglet_affacer_base',
+				generer_url_ecrire("admin_effacer"));
+		}
+	return $onglets;
+}
+
+function barre_onglets_configuration() {
+
+	$onglets = array();
+	$onglets['contenu']=
 		  new Bouton('racine-site-24.gif', 'onglet_contenu_site',
 			generer_url_ecrire("configuration"));
-		$onglets['interactivite']=
+	$onglets['interactivite']=
 		  new Bouton('forum-interne-24.gif', 'onglet_interactivite',
 			generer_url_ecrire("config_contenu"));
-		$onglets['fonctions']=
+	$onglets['fonctions']=
 		  new Bouton('image-24.gif', 'onglet_fonctions_avances',
 			generer_url_ecrire("config_fonctions"));
 /*
@@ -319,25 +320,36 @@ function definir_barre_onglets($rubrique) {
 		  new Bouton('plugin-24.gif', 'onglet_plugins',
 			generer_url_ecrire("config_plugins"));
 */
-	break;
+	return $onglets;
+}
 
-	case 'config_lang':
-		$onglets['langues']=
+
+function barre_onglets_config_lang() {
+
+	$onglets=array();
+	$onglets['langues']=
 		  new Bouton('langues-24.gif', 'info_langue_principale',
 			generer_url_ecrire("config_lang"));
-		$onglets['multi']=
+	$onglets['multi']=
 		  new Bouton('traductions-24.gif', 'info_multilinguisme',
 			generer_url_ecrire("config_multilang"));
 		$onglets['fichiers']=
 		  new Bouton('traductions-24.gif', 'module_fichiers_langues',
 			generer_url_ecrire("lang_raccourcis"));
-	break;
+	return $onglets;
+}
 
-	// inutilise
-	case 'suivi_forum':
-	break;
+/**
+ * definir la liste des onglets dans une page de l'interface privee
+ * on passe la main au pipeline "ajouter_onglets".
+ */
+// http://doc.spip.org/@definir_barre_onglets
+function definir_barre_onglets($script) {
 
-	}
+	if (function_exists($f = 'barre_onglets_' . $script))
+		$onglets = $f();
+	else  $onglets=array();
+
 	// ajouter les onglets issus des plugin via plugin.xml
 	if (function_exists('onglets_plugins')){
 		$liste_onglets_plugins = onglets_plugins();
@@ -354,10 +366,9 @@ function definir_barre_onglets($rubrique) {
 		}
 	}
 
-	$onglets = pipeline('ajouter_onglets', array('data'=>$onglets,'args'=>$rubrique));
-
-	return $onglets;
+	return pipeline('ajouter_onglets', array('data'=>$onglets,'args'=>$rubrique));
 }
+
 
 // http://doc.spip.org/@barre_onglets
 function barre_onglets($rubrique, $ongletCourant){
