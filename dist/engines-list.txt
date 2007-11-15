@@ -16,7 +16,7 @@ rien=
 
 [Google]
 (^q|\&q|as_q)=
-(www|ww|maps)\.(google|gogole)\.(.*)
+(www\.|ww\.|maps\.)?(google|gogole)\.(.*)
 (web|www).toile.com
 www\.cegetel\.net
 search\.conduit\.com
@@ -155,7 +155,7 @@ q=
 www\.francesurf\.net
 
 [n9uf]
-(K|k)eywords=
+((K|k)eywords|query)=
 (www\.)?neuf\.fr
 
 [MozBot]
