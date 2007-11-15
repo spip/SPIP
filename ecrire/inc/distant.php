@@ -181,6 +181,7 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false,
 // args comme ci-dessus (presque)
 // retourne l'URL en cas de 301, un tableau (entete, corps) si ok, false sinon
 
+// http://doc.spip.org/@recuperer_lapage
 function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576, $datas='', $boundary='', $refuser_gz = false, $date_verif = '', $uri_referer = '')
 {
 	list($f, $fopen) = init_http($get, $url, $refuser_gz, $uri_referer);

@@ -236,6 +236,7 @@ function definir_barre_boutons() {
 
 
 /* code mort
+// http://doc.spip.org/@barre_onglets_auteur
 function barre_onglets_auteur() {
 
 		$onglets['auteur']=
@@ -247,10 +248,12 @@ function barre_onglets_auteur() {
 	return $onglets;
 }
 
+// http://doc.spip.org/@barre_onglets_statistiques_repartition
 function barre_onglets_statistiques_repartition() {
 	return barre_onglets_repartition();
 }
 
+// http://doc.spip.org/@barre_onglets_repartition
 function barre_onglets_repartition() {
 
 	if ($GLOBALS['meta']['multi_articles'] == 'oui' OR $GLOBALS['meta']['multi_rubriques'] == 'oui') {
@@ -264,6 +267,7 @@ function barre_onglets_repartition() {
 
 */
 
+// http://doc.spip.org/@barre_onglets_rep_depuis
 function barre_onglets_rep_depuis() {
 
 	$onglets = array();
@@ -275,6 +279,7 @@ function barre_onglets_rep_depuis() {
 	return $onglets;
 }
 
+// http://doc.spip.org/@barre_onglets_stat_depuis
 function barre_onglets_stat_depuis() {
 	$onglets = array();
 	$onglets['popularite']=
@@ -286,6 +291,7 @@ function barre_onglets_stat_depuis() {
 	return $onglets;
 }
 
+// http://doc.spip.org/@barre_onglets_administration
 function barre_onglets_administration() {
 
 	$onglets = array();
@@ -302,6 +308,7 @@ function barre_onglets_administration() {
 	return $onglets;
 }
 
+// http://doc.spip.org/@barre_onglets_configuration
 function barre_onglets_configuration() {
 
 	$onglets = array();
@@ -324,6 +331,7 @@ function barre_onglets_configuration() {
 }
 
 
+// http://doc.spip.org/@barre_onglets_config_lang
 function barre_onglets_config_lang() {
 
 	$onglets=array();

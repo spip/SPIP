@@ -59,6 +59,7 @@ function exec_statistiques_referers_dist()
 	}
 }
 
+// http://doc.spip.org/@barre_onglets_stat_referers
 function barre_onglets_stat_referers() {
 
 	$onglets = array();
