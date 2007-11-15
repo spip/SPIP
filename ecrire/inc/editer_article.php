@@ -157,7 +157,7 @@ function editer_article_soustitre($soustitre, $config, $aider)
 	if (($config['articles_soustitre'] == "non") AND !$soustitre)
 		return '';
 
-	return ("\n<p><b><label for='soustitre'>" .
+	return ("\n<p><label for='soustitre'><b>" .
 		  _T('texte_sous_titre') .
 		  "</b></label>" .
 		  $aider ("arttitre") .
