@@ -141,7 +141,7 @@ function prepare_donnees_post($donnees, $boundary = '') {
 // et au besoin l'encode dans le charset local
 //
 // options : get_headers si on veut recuperer les entetes
-// taille_max : arreter le contenu au-dela (0 = seulement les entetes)
+// taille_max : arreter le contenu au-dela (0 = seulement les entetes ==>HEAD)
 // Par defaut taille_max = 1Mo.
 // datas, une chaine ou un tableau pour faire un POST de donnees
 // boundary, pour forcer l'envoi par cette methode
@@ -153,7 +153,6 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false,
 	$taille_max = 1048576, $datas='', $boundary='', $refuser_gz = false,
 	$date_verif = '', $uri_referer = '') {
   	$gz = false;
-
   // Accepter les URLs au format feed:// ou qui ont oublie le http://
 	$url = preg_replace(',^feed://,i', 'http://', $url);
 	if (!preg_match(',^[a-z]+://,i', $url)) $url = 'http://'.$url;
@@ -165,20 +164,35 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false,
 
 	if (!empty($datas)) {
 		$get = 'POST';
-		list($content_type, $postdata) = prepare_donnees_post($datas);
+		$datas = prepare_donnees_post($datas);
 	}
 
-	for ($i=0;$i<10;$i++) {	// dix tentatives maximum en cas d'entetes 301...
-		list($f, $fopen) = init_http($get, $url, $refuser_gz, $uri_referer);
-		$gz = false;
+	// dix tentatives maximum en cas d'entetes 301...
+	for ($i=0;$i<10;$i++) {
+		$url = recuperer_lapage($url, $munge_charset, $get, $taille_max, $datas, $boundary, $refuser_gz, $date_verif, $uri_referer);
+		if (!$url) return false;
+		if (is_array($url)) {
+			list($headers,  $result) = $url;
+			return ($get_headers ? $headers."\n" : '').$result;
+		}
+	}
+}
 
-		// si on a utilise fopen() - passer a la suite
-		if ($fopen) {
+// args comme ci-dessus (presque)
+// retourne l'URL en cas de 301, un tableau (entete, corps) si ok, false sinon
+
+function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576, $datas='', $boundary='', $refuser_gz = false, $date_verif = '', $uri_referer = '')
+{
+	list($f, $fopen) = init_http($get, $url, $refuser_gz, $uri_referer);
+	$gz = false;
+
+	// si on a utilise fopen() - passer a la suite
+	if ($fopen) {
 			spip_log('connexion via fopen');
-			break;
-		} else {
+	} else {
 			// Fin des entetes envoyees par SPIP
 			if($get == 'POST') {
+				list($content_type, $postdata) = $datas;
 				@fputs($f, $content_type);
 				@fputs($f, 'Content-Length: '.strlen($postdata)."\r\n");
 				@fputs($f, "\r\n".$postdata);
@@ -191,7 +205,7 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false,
 			if (preg_match(',^HTTP/[0-9]+\.[0-9]+ ([0-9]+),', $s, $r)) {
 				$status = $r[1];
 			}
-			else return;
+			else return false;
 
 			// Entetes HTTP de la page
 			$headers = '';
@@ -200,7 +214,6 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false,
 				if (preg_match(',^Location: (.*),i', $s, $r)) {
 					include_spip('inc/filtres');
 					$location = suivre_lien($url, $r[1]);
-					spip_log("Location: $location");
 				}
 				if ($date_verif AND preg_match(',^Last-Modified: (.*),', $s, $r)) {
 					if(strtotime($date_verif)>=strtotime($r[1])) {
@@ -212,23 +225,21 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false,
 				if (preg_match(",^Content-Encoding: .*gzip,i", $s))
 					$gz = true;
 			}
-			if ($status >= 300 AND $status < 400 AND $location)
-				$url = $location;
-			else if ($status != 200)
+			if ($status >= 300 AND $status < 400 AND $location) {
+				fclose($f);
+				return $location;
+			} else if ($status != 200)
 				return false;
-			else
-				break; # ici on est content
-			fclose($f);
-			$f = false;
+			; # sinon on est content
 		}
-	}
-
+		
 	// Contenu de la page
 	if (!$f) {
 		spip_log("ECHEC chargement $url");
 		return false;
 	}
 
+	if ($trans === NULL) return array($headers, '');
 	$result = '';
 	while (!feof($f) AND strlen($result)<$taille_max)
 		$result .= fread($f, 16384);
@@ -239,12 +250,12 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false,
 		$result = gzinflate(substr($result,10));
 
 	// Faut-il l'importer dans notre charset local ?
-	if ($munge_charset) {
+	if ($trans) {
 		include_spip('inc/charsets');
 		$result = transcoder_page ($result, $headers);
 	}
 
-	return ($get_headers ? $headers."\n" : '').$result;
+	return array($headers, $result);
 }
 
 
