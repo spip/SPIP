@@ -45,7 +45,7 @@ function exec_statistiques_svg_dist()
 // http://doc.spip.org/@exec_statistiques_svg_ok
 function exec_statistiques_svg_ok($id_article,  $aff_jours, $visites_today, $expire)
 {
-	$date = gmdate("D, d M Y H:i:s", $date);
+	$date = gmdate("D, d M Y H:i:s", time());
 	header("Last-Modified: ".$date." GMT");
 	header("Expires: ".$expire." GMT");
 	header("Content-type: image/svg+xml");
@@ -90,13 +90,13 @@ function exec_statistiques_svg_ok($id_article,  $aff_jours, $visites_today, $exp
 	$jour_prec =0;
 	$hauteur_moyenne=0;
 	$hauteur_moyenne_prec=0;
+	$date_debut = 0;
 	while ($row = sql_fetch($result)) {
 		$date = $row['date_unix'];
 		$visites = $row['visites'];
 
 		$log[$date] = $visites;
-		if ($i == 0) $date_debut = $date;
-		$i++;
+		if ($date_debut == 0) $date_debut = $date;
 	}
 
 	if (count($log)>0) {
@@ -111,7 +111,7 @@ function exec_statistiques_svg_ok($id_article,  $aff_jours, $visites_today, $exp
 		if (0.8*$maxgraph > $max) $maxgraph = 0.8 * $maxgraph;
 		$rapport = 300 / $maxgraph;
 
-		if (count($log) < 420) $largeur = floor(420 / ($nb_jours+1));
+		if ($nb_jours < 420) $largeur = round(420 / ($nb_jours+1));
 		if ($largeur < 1) {
 			$largeur = 1;
 			$agreg = ceil(count($log) / 420);	
@@ -148,7 +148,6 @@ function exec_statistiques_svg_ok($id_article,  $aff_jours, $visites_today, $exp
 		echo "<line x1='0' y1='187' x2='".round($largeur*$nb_jours/$agreg)."' y2='187' style='stroke:#eeeeee;stroke-width:1'/>\n";
 		echo "<line x1='0' y1='262' x2='".round($largeur*$nb_jours/$agreg)."' y2='262' style='stroke:#eeeeee;stroke-width:1'/>\n";
 
-
 		// Presentation graphique
 		while (list($key, $value) = each($log)) {
 			
@@ -173,7 +172,7 @@ function exec_statistiques_svg_ok($id_article,  $aff_jours, $visites_today, $exp
 					$tab_moyenne[$decal] = $value;
 
 					$ce_jour=date("Y-m-d", $jour_prec+(3600*24*($i+1)));
-						$jour = nom_jour($ce_jour).' '.affdate_jourcourt($ce_jour);
+					$jour = nom_jour($ce_jour).' '.affdate_jourcourt($ce_jour);
 
 					reset($tab_moyenne);
 					$moyenne = 0;
@@ -206,9 +205,9 @@ function exec_statistiques_svg_ok($id_article,  $aff_jours, $visites_today, $exp
 			}
 
 			$ce_jour=date("Y-m-d", $key);
-				$jour = nom_jour($ce_jour).' '.affdate_jourcourt($ce_jour);
+			$jour = nom_jour($ce_jour).' '.affdate_jourcourt($ce_jour);
 
-			$total_loc = $total_loc + $value;
+			//$total_loc = $total_loc + $value;
 			reset($tab_moyenne);
 
 			$moyenne = 0;

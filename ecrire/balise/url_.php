@@ -99,7 +99,7 @@ function balise_URL_SITE_SPIP_dist($p) {
 // http://doc.spip.org/@balise_URL_PAGE_dist
 function balise_URL_PAGE_dist($p) {
 
-	if ($p->boucles[$p->id_boucle]->sql_serveur) {
+	if ($p->id_boucle && $p->boucles[$p->id_boucle]->sql_serveur) {
 		$p->code = 'generer_url_public("404")';
 		return $p;
 	}

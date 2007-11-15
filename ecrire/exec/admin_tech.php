@@ -134,12 +134,15 @@ function exec_admin_tech_dist()
 		$liste_dump = preg_files(_DIR_DUMP,'\.xml(\.gz)?$',50,false);
 		$selected = end($liste_dump);
 		$liste = ""; 
+		$fichier_defaut = "";
 		$i = 0;
 		foreach($liste_dump as $k=>$f){
 		  $i++;
 		  $class = 'row_'.alterner($i, 'even', 'odd');
 		  $liste .= liste_sauvegardes($k, $f, $class, $selected);
+		  $fichier_defaut = $f;
 		}
+		$fichier_defaut = basename($f);
 		$class = 'row_'.alterner($i+1, 'even', 'odd');
 		$liste = "<br /><br /><table class='spip'>"
 		.  $liste

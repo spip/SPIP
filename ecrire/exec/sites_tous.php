@@ -17,7 +17,7 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_sites_tous_dist
 function exec_sites_tous_dist()
 {
-	global $connect_statut;
+	global $connect_statut,$spip_lang_right;
 
 pipeline('exec_init',array('args'=>array('exec'=>'sites_tous'),'data'=>''));
 $commencer_page = charger_fonction('commencer_page', 'inc');

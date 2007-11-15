@@ -366,7 +366,7 @@ function definir_barre_onglets($script) {
 		}
 	}
 
-	return pipeline('ajouter_onglets', array('data'=>$onglets,'args'=>$rubrique));
+	return pipeline('ajouter_onglets', array('data'=>$onglets,'args'=>$script));
 }
 
 
