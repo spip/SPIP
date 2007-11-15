@@ -503,7 +503,7 @@ function calculer_argument_precedent($idb, $nom_champ, &$boucles) {
 	// retourner $Pile[$SP] et pas $Pile[0] si recursion en 1ere boucle
 	$prec = $boucles[$idb]->id_parent;
 	return (($prec === '')
-		? ('isset($Pile[' . $zero . "]['$nom_champ'])") 
+		? ('$Pile[' . $zero . "]['$nom_champ']") 
 		: index_pile($prec, $nom_champ, $boucles));
 }
 
