@@ -14,16 +14,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'Disoc\'h ebet.',
 'avis_chemin_invalide_1' => 'An hent dibabet ganeoc\'h',
 'avis_chemin_invalide_2' => 'ne seblant ket beza&ntilde; reizh. Deuit en-dro d\'ar bajenn a-raok ha gwiriit an titouro&ugrave; roet ganeoc\'h.',
-'avis_connexion_echec_1' => 'C\'hwitet en deus ar kennaskadur ouzh ar servijer MySQL.',
+'avis_connexion_echec_1' => 'C\'hwitet en deus ar kennaskadur ouzh ar servijer SQL.',
 'avis_connexion_echec_2' => 'Deuit en dro d\'ar bajenn a-raok, ha gwiriit an titouro&ugrave; roet ganeoc\'h.',
-'avis_connexion_echec_3' => '<b>N.B.</b> War meur a servijer eo ret deoc\'h <b>goulenn</b> beza&ntilde; aotreet da dizhout an diaz MySQL a-raok gallout implijout anezha&ntilde;. Ma n\'hallit ket kennaska&ntilde;, gwiriit ha graet ho peus ar goulenn-se.',
+'avis_connexion_echec_3' => '<b>N.B.</b> War meur a servijer eo ret deoc\'h <b>goulenn</b> beza&ntilde; aotreet da dizhout an diaz SQL a-raok gallout implijout anezha&ntilde;. Ma n\'hallit ket kennaska&ntilde;, gwiriit ha graet ho peus ar goulenn-se.',
 'avis_connexion_ldap_echec_1' => 'C\'hwitet eo ar c\'hennaskadenn ouzh ar servijer LDAP.',
 'avis_connexion_ldap_echec_2' => 'Deuit en-dro d\'ar bajenn a-raok, ha gwiriit an titouro&ugrave; roet ganeoc\'h.',
 'avis_connexion_ldap_echec_3' => 'Bep eil tro, n\'implijit ket ar skor LDAP evit enporzhia&ntilde; implijourien.',
 'avis_conseil_selection_mot_cle' => '<b>Strollad pouezus&nbsp;:</b> kuzuliet start eo da zibab ur ger-stur er strollad-ma&ntilde;.',
 'avis_deplacement_rubrique' => 'Diwallit&nbsp;! Er rummad-ma&ntilde; ez eus @contient_breves@ berrskrid@scb@&nbsp;: kadarnait ama&ntilde;-dindan ma zilec\'hiit anezha&ntilde;.',
 'avis_destinataire_obligatoire' => 'Un degemerour a rankit diskleria&ntilde; a-raok kas ar c\'hemennadenn-ma&ntilde;.',
-'avis_erreur_connexion_mysql' => 'Fazi kennaska&ntilde; MySQL',
+'avis_erreur_connexion_mysql' => 'Fazi kennaska&ntilde; SQL',
 'avis_erreur_version_archive' => '<b>Diwallit! Ar restr @archive@ a glot gant ur stumm all eus SPIP dishe&ntilde;vel eus an hini staliet ganeoc\'h.</b> Emaoc\'h o vont da zegouezhout dirak diaesamanto&ugrave; bras: riskl da zistruja&ntilde; ho tiaz titouro&ugrave;, drougplego&ugrave; a bep seurt el lec\'hienn, hag all. Arrabat gwiria&ntilde; ar goulenn emporzhiadur-ma&ntilde;.<p>Evit muioc\'h a ditouro&ugrave;, sellit ouzh <a href=\'http://www.spip.net/fr_article1489.html\'>diello&ugrave; SPIP</a>.',
 'avis_espace_interdit' => '<b>Lec\'h difennet</b><div>Staliet eo SPIP dija.</div>',
 'avis_lecture_noms_bases_1' => 'Ar poellad-stalia&ntilde; n\'en deus ket gallet lenn anvio&ugrave; an diazo&ugrave; titouro&ugrave; staliet.',
@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_sites_probleme_syndication' => 'Al lec\'hienno&ugrave;-se o deus bet ur gudenn sindikadurezh',
 'avis_sites_syndiques_probleme' => 'Savet ez eus bet ur gudenn gant al lec\'hiennio&ugrave; sindiket-se',
 'avis_suppression_base' => 'DIWALLIT, n\'eus ket tu da zont war giz lamedigezh an titouro&ugrave;',
-'avis_version_mysql' => 'Ho stumm MySQL (@version_mysql@) ne aotre ket da emdresa&ntilde; taolenno&ugrave; an diaz.',
+'avis_version_mysql' => 'Ne aotre ket ho stumm SQL (@version_mysql@) taolenno&ugrave; an diaz da emdresa&ntilde;.',
 
 
 // B
@@ -304,7 +304,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_confirmer_passe' => 'Gwiria&ntilde; ar ger-tremen :',
 'info_connexion_base' => 'Klask kennaska&ntilde; ouzh an diaz-titouro&ugrave;',
 'info_connexion_ldap_ok' => 'Aet eo ar c\'hennaskadenn LDAP en-dro.</b><p />Gallout a rit tremen d\'ar prantad a zeu .',
-'info_connexion_mysql' => 'Ho kennaskadenn MySQL',
+'info_connexion_mysql' => 'Ho kennaskadenn SQL',
 'info_connexion_ok' => 'Aet eo ar c\'hennaskadenn en-dro',
 'info_contact' => 'Keja&ntilde; gant',
 'info_contenu_articles' => 'Endalc\'had ar pennado&ugrave;',
@@ -826,7 +826,7 @@ adstalia&ntilde; SPIP evit kroui&ntilde; un diaz-titouro&ugrave; nevez ha d\'an 
 'texte_auteurs' => 'AR SKRIDAOZERIEN',
 'texte_breves' => 'Skrido&ugrave; berr ha simpl eo ar berrskrido&ugrave;. Rei&ntilde; a reont da c\'houzout buan-ha-buan titouro&ugrave; liesseurt : pennado&ugrave;, lec\'hienno&ugrave;, darvoudo&ugrave;, hag all.',
 'texte_choix_base_1' => 'Dibabit ho tiaz :',
-'texte_choix_base_2' => 'Er servijer MySQL ez eus meur a ziaz-titouro&ugrave;.',
+'texte_choix_base_2' => 'Er servijer SQL ez eus meur a ziaz-titouro&ugrave;.',
 'texte_choix_base_3' => '<b>Diuzit</b> ama&ntilde;-dindan an hini a zo bet roet deoc\'h gant ho boder :',
 'texte_choix_table_prefix' => 'Rakger an diazo&ugrave;&nbsp;:',
 'texte_commande_vider_tables_indexation' => 'Gant se e c\'hellit dilemel an taolio&ugrave;-listenna&ntilde; implijet gant benvegad-enklask diabarzh SPIP, a-benn gounid plas.',
@@ -842,7 +842,7 @@ adstalia&ntilde; SPIP evit kroui&ntilde; un diaz-titouro&ugrave; nevez ha d\'an 
 'texte_config_groupe_mots_cles' => 'Ha c\'hoant ho peus ober gant ardremmezi&ntilde; lemm ar gerio&ugrave;-stur,
    o resisaat da skouer e c\'heller rei&ntilde; ur ger dre strollad, 
    eo a-bouez strollad-ma&ntilde;-strollad...&nbsp;?',
-'texte_connexion_mysql' => 'Sellit en diello&ugrave; roet deoc\'h gant ho boder&nbsp;: Ma vez gouza&ntilde;vet MySQL ganta&ntilde; e rankit kavout enno ar c\'hodo&ugrave;-kennaska&ntilde; MySQL.',
+'texte_connexion_mysql' => 'Sellit en diello&ugrave; roet deoc\'h gant ho boder&nbsp;: Ma vez gouza&ntilde;vet SQL ganta&ntilde; e rankit kavout enno ar c\'hodo&ugrave;-kennaska&ntilde; SQL.',
 'texte_contenu_article' => '(Un nebeud gerio&ugrave; da ginnig ar pennad.)',
 'texte_contenu_articles' => 'Hevez ar maketenn dibabet evit sevel ho lec\'hienn e c\'hellit divizout
 		ne vo ket implijet elfenno&ugrave; \'zo er pennado&ugrave;.
@@ -919,10 +919,10 @@ Ar re-se a c\'hell beza&ntilde; listennet er pennad, pe e-kichen.<p />',
 'texte_recuperer_base' => 'Kempenn an diaz-titouro&ugrave;',
 'texte_reference_mais_redirige' => 'pennad listennet en ho lec\'hienn SPIP, met adsturiet davet un URL all.',
 'texte_referencement_automatique' => '<b>Listenna&ntilde; emgefreek ul lec\'hienn</b><br />Gallout a rit listenna&ntilde; buan ul lec\'hienn Web o skriva&ntilde; ama&ntilde;-dindan e URL, pe chomlec\'h e restr sindika&ntilde;. SPIP a tezastumo e-unan an titouro&ugrave; diwar-benn al lec\'hienn (titl, deskrivadur, ...).',
-'texte_requetes_echouent' => '<b>Pa sank galvadenno&ugrave; MySQL en un doare ingal ha diabeg,
+'texte_requetes_echouent' => '<b>Pa sank galvadenno&ugrave; SQL en un doare ingal ha diabeg,
   e c\'hell beza&ntilde; dre fazi an diaz-titouro&ugrave;</b><p />
-  Gant MySQL e c\'hell an taolio&ugrave; mazaouet emgempenn.
-  Ama&ntilde; e c\'hellit klask emgempenn. Ma c\'hwit, mirit un eilskouerenn eus ar c\'hinnig, kenkazh ma vefe titouro&ugrave; talvoudus enna&ntilde;.<p />
+  Gant SQL e c\'hell an taolio&ugrave; mazaouet emgempenn.
+  Ama&ntilde; e c\'hellit klask emgempenn. Ma c\'hwit, mirit un eilskouerenn eus ar c\'hinnig, kenkaz ma vefe titouro&ugrave; talvoudus enna&ntilde;.<p />
   Kit e-darempred gant ho poder ma kendalc\'h ar gudenn.<p />',
 'texte_restaurer_base' => 'Resteurel endalc\'had ur savete eus an diaz-titouro&ugrave;',
 'texte_restaurer_sauvegarde' => 'Gant an dilenn-ma&ntilde; e c\'hellit resteurel ur skouerenn eus an diaz bet saveteet ganeoc\'h en a-raok.

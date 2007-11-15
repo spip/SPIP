@@ -14,16 +14,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'Cap resultat',
 'avis_chemin_invalide_1' => 'El cam&iacute; que heu triat',
 'avis_chemin_invalide_2' => 'no sembla pas v&agrave;lid. Voleu tornar a la p&agrave;gina precedent i constrastar les informacions donades.',
-'avis_connexion_echec_1' => 'La connexi&oacute; al servidor MySQL ha fallat.',
+'avis_connexion_echec_1' => 'La connexi&oacute; al servidor SQL ha fallat.',
 'avis_connexion_echec_2' => 'Tornar a la p&agrave;gina precedent per verificar les dades que heu ficat.',
-'avis_connexion_echec_3' => '<b>N.B.</b> A molts dels servidors, heu de <b>demanar</b> l\'activaci&oacute; del vostre acc&eacute;s a la base de dades MySQL abans de poder utilitzar-la. Si no podeu connectar-vos, verifiqueu que heu efectuat aquest pas.',
+'avis_connexion_echec_3' => '<b>N.B.</b> A molts dels servidors, heu de <b>demanar</b> l\'activaci&oacute; del vostre acc&eacute;s a la base de dades SQL abans de poder-la utilitzar. Si no podeu connectar-vos, verifiqueu que heu efectuat aquest pas.',
 'avis_connexion_ldap_echec_1' => ' La connexi&oacute; amb el servidor LDAP ha caigut.',
 'avis_connexion_ldap_echec_2' => 'Tornar a la p&agrave;gina precedent per verificar les dades que heu ficat.',
 'avis_connexion_ldap_echec_3' => 'Alternativament, no utilitzeu el support LDAP per a importar els usuaris.',
 'avis_conseil_selection_mot_cle' => '<b>Grup important&nbsp;:</b> &eacute;s molt aconssellable seleccionar una contrasenya a aquest grup. ',
 'avis_deplacement_rubrique' => 'Atenci&oacute;&nbsp;! Aquesta secci&oacute; cont&eacute; @contient_breves@ breu@scb@&nbsp;: si la moveu, assenyaleu-ho en aquesta casella de confirmaci&oacute;.',
 'avis_destinataire_obligatoire' => 'Ha d\'escriure un destinatari abans d\'enviar el missatge.',
-'avis_erreur_connexion_mysql' => 'Error de connexi&oacute; MySQL',
+'avis_erreur_connexion_mysql' => 'Error de connexi&oacute; SQL',
 'avis_erreur_version_archive' => '<b>Atenci&oacute;! El fitxer @archive@ correspon a una
     versi&oacute; diferent d\'SPIP de la instal&middot;lada.</b> Us
     podeu trobar amb grans dificultats: risc de
@@ -47,7 +47,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'avis_sites_probleme_syndication' => 'Aquests llocs han trobat un problema de sindicaci&oacute;',
 'avis_sites_syndiques_probleme' => 'Aquests llocs sindicats donen un problema ',
 'avis_suppression_base' => 'ATENCI&Oacute;, la supressi&oacute; de dades &eacute;s irreversible.',
-'avis_version_mysql' => 'La seva versi&oacute; de MySQL (@version_mysql@) no permet l\'autoreparaci&oacute; de les taules de la base de dades.',
+'avis_version_mysql' => 'La vostra versi&oacute; de SQL (@version_mysql@) no permet l\'auto reparaci&oacute; de les taules de la base de dades.',
 
 
 // B
@@ -315,7 +315,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_confirmer_passe' => 'Confirmar la nova contrasenya:',
 'info_connexion_base' => 'Intent de connexi&oacute; a la base de dades',
 'info_connexion_ldap_ok' => 'La connexio LDAP ha reexit.</b><p> Podeu passar al seg&uuml;ent pas.',
-'info_connexion_mysql' => 'La vostra connexi&oacute; MySQL',
+'info_connexion_mysql' => 'La vostra connexi&oacute; SQL',
 'info_connexion_ok' => 'La connexi&oacute; ha reexit.',
 'info_contact' => 'Contacte',
 'info_contenu_articles' => 'Contingut dels articles',
@@ -422,7 +422,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_message_en_redaction' => 'Els vostres missatges en curs de redacci&oacute;',
 'info_message_technique' => 'Missatge t&egrave;cnic:',
 'info_messagerie_interne' => 'Missatgeria interna',
-'info_mise_a_niveau_base' => 'actualitzaci&oacute; de la vostra base de dades MySQL',
+'info_mise_a_niveau_base' => 'actualitzaci&oacute; de la vostra base de dades SQL',
 'info_mise_a_niveau_base_2' => '{{Atenci&oacute;!}} Heu instal&middot;lat una versi&oacute; dels fitxers d\'SPIP {anterior} a la que hi havia anteriorment en aquest lloc: correu el risc de perdre la vostra base de dades i que el vostre lloc deixi de funcionar.<br />{{Torneu a instal&middot;lar els fitxers d\'SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Mode de funcionament per defecte dels f&ograve;rums p&uacute;blics',
 'info_modifier_breve' => 'Modificar la breu:',
@@ -828,7 +828,7 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr&
 'texte_auteurs' => 'ELS AUTORS',
 'texte_breves' => 'Les breus son textes curts i simples que permeten posar r&agrave;pidament en l&iacute;nia informacions concises, gestionar una revista de premsa, un calendari d\'esdeveniments...',
 'texte_choix_base_1' => 'Trie la seua base:',
-'texte_choix_base_2' => 'El servidor MySQL cont&eacute; diverses bases de dades.',
+'texte_choix_base_2' => 'El servidor SQL cont&eacute; diverses bases de dades.',
 'texte_choix_base_3' => '<b>Seleccioneu</b> d\'aqu&iacute; sota quina us ha estat atribu&iuml;da pel vostre prove&iuml;dor d\'hostatge:',
 'texte_choix_table_prefix' => 'Prefix de les taules:',
 'texte_commande_vider_tables_indexation' => 'Utiliceu aquesta comanda per buidar les taules d\'indexaci&oacute; emprades
@@ -844,7 +844,7 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr&
 'texte_config_groupe_mots_cles' => 'Voleu activar la configuraci&oacute; avan&ccedil;ada de les paraules clau,
   indicant per exemple que es pot seleccionar un mot &uacute;nic
   per grup, quin grup &eacute;s important...?',
-'texte_connexion_mysql' => 'Consulteu les informacions aportades pel vostre prove&iuml;dor d\'hostatge: heu de trobar-hi, si el vostre prove&iuml;dor d&oacute;na suport MyQSL, els codis de connexi&oacute; al servidor MySQL.',
+'texte_connexion_mysql' => 'Consulteu les informacions aportades pel vostre prove&iuml;dor d\'hostatge: heu de trobar-hi els identificadors de connexi&oacute; al servidor SQL.',
 'texte_contenu_article' => ' (Contingut de l\'article en poques paraules.)',
 'texte_contenu_articles' => 'Segons l\'esquelet triat per la vostra web, podeu decidir
  que certs elements dels articles  no siguen emprats.
@@ -920,8 +920,8 @@ enriquir la navegaci&oacute; del vostre lloc, incl&uacute;s utilitzar aquestes p
 'texte_recuperer_base' => 'Reparar la base de dades',
 'texte_reference_mais_redirige' => 'article referenciat a la web SPIP, pero redirigit cap a un altre URL.',
 'texte_referencement_automatique' => '<b>Referenciament automatitzat d\'un lloc Web</b><br />Podeu referenciar r&agrave;pidament un lloc Web nom&eacute;s indicant aqu&iacute; baix l\'adre&ccedil;a URL desitjada, o l\'adre&ccedil;a del seu fitxer de sindicaci&oacute;. SPIP recuperar&agrave; autom&agrave;ticament les informacions pel que fa a aquest lloc Web (t&iacute;tol, descripci&oacute;...).',
-'texte_requetes_echouent' => '<b>Quan algunes peticions MySQL fracassen sistem&agrave;ticament i sense ra&oacute; aparent, &eacute;s possible que sigui per culpa de la pr&ograve;pia base de dades.</b><p>
-  MySQL disposa d\'una facultat de reparaci&oacute; de les seves taules quan aquestes han estat deteriorades per accident. Aqu&iacute; podeu provar aquesta reparaci&oacute;; en cas de frac&agrave;s, conserveu una c&ograve;pia del resultat, que possiblement cont&eacute; indicis de quines coses no funcionen...<p>
+'texte_requetes_echouent' => '<b>Quan algunes peticions SQL fracassen sistem&agrave;ticament i sense tenir una ra&oacute; aparent, &eacute;s possible que sigui per culpa de la pr&ograve;pia base de dades.</b><p>
+  El vostre servidor SQL disposa d\'una facultat de reparaci&oacute; de les seves taules quan aquestes han estat deteriorades per accident. Aqu&iacute; podeu intentar aquesta reparaci&oacute;; en cas de frac&agrave;s, conserveu una c&ograve;pia del resultat ja que possiblement cont&eacute; indicis de quines coses no funcionen...<p>
   Si el problema persisteix, poseu-vos en contacte amb el vostre prove&iuml;dor d\'hostatge.<p>',
 'texte_restaurer_base' => 'Restaurar el contingut d\'una c&ograve;pia de seguretat de la base',
 'texte_restaurer_sauvegarde' => 'Aquesta opci&oacute; permet restaurar una c&ograve;pia de seguretat de la base de dades realitzada anteriorment. Per tal que aix&iacute; sigui, el fitxer que cont&eacute; la c&ograve;pia de seguretat s\'ha d\'haver situat dins del directori @dossier@.
