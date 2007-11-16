@@ -191,6 +191,7 @@ function autoriser_site_modifier_dist($faire, $type, $id, $qui, $opt) {
 	);
 }
 // Autoriser a voir un site $id_syndic
+// http://doc.spip.org/@autoriser_site_voir_dist
 function autoriser_site_voir_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser_site_modifier_dist($faire, $type, $id, $qui, $opt);
 }
