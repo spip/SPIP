@@ -68,9 +68,9 @@ function selec_statut(id, type, decal, puce, script) {
 
 function prepare_selec_statut(nom, type, id, action)
 {
-	$('#' + nom + type + id).load(action + '&type='+type+'&id='+id,
+	$('#' + nom + type + id).hover(function(){},function(){cacher('statutdecal'+type+id);}).load(action + '&type='+type+'&id='+id,
 		function(){ 
-			findObj_forcer('statutdecal'+type+id).style.visibility = 'visible';
+			//findObj_forcer('statutdecal'+type+id).style.visibility = 'visible';
 					  });
 }
 
