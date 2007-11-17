@@ -1,0 +1,118 @@
+<fieldset>
+  <ol>
+  	[(#ENV**{config}|table_valeur{articles_surtitre}|=={non}|?{#ENV**{surtitre,''},' '}|?{' '})
+    <li>
+      <label for="surtitre"><:texte_sur_titre:><em>#AIDER{arttitre}</em></label>
+      <input type='text' name='surtitre' id='surtitre' class='forml' value="[(#ENV{surtitre}|entites_html)]" />
+    </li>]
+    <li>
+      <label for="titre"><:texte_titre_obligatoire:><em>#AIDER{arttitre}</em></label>
+      <input type='text' name='titre' id='titre' class='formo' value="[(#ENV{titre,#REM|concat{info_nouvel_article}|_T}|entites_html)]" 
+			[(#ENV{titre,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
+    </li>
+  	[(#ENV**{config}|table_valeur{articles_soustitre}|=={non}|?{#ENV**{soustitre,''},' '}|?{' '})
+    <li>
+      <label for="soustitre"><:texte_sous_titre:><em>#AIDER{arttitre}</em></label>
+      <input type='text' name='soustitre' id='soustitre' class='forml' value="[(#ENV{soustitre}|entites_html)]" />
+    </li>]
+
+    [(#REM|sinon{titre_cadre_interieur_rubrique}|_T|concat{' ',#AIDER{artrub}}
+    |chercher_rubrique{#ENV{id_rubrique}, #ENV{id_secteur},#ENV**{config}|table_valeur{restreint}})]
+  
+  	[(#ENV**{config}|table_valeur{articles_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|?{' '})
+    <li>
+      <label for="descriptif"><:texte_descriptif_rapide:><em>#AIDER{artdesc}</em></label>
+      <textarea name='descriptif' id='descriptif' class='forml' rows='2' cols='40'>[(#ENV{descriptif}|entites_html)]</textarea>
+    </li>]
+  	[(#ENV**{config}|table_valeur{articles_urlref}|=={non}|?{#ENV**{url_site,#ENV**{nom_site,''}},' '}|?{' '})
+    <li>
+      <label for="nom_site"><:entree_liens_sites:><br />
+      <:info_titre:></label>
+      <input type='text' name='nom_site' id='nom_site' class='forml' value="[(#ENV{nom_site}|entites_html)]" />
+    </li>
+    <li>
+      <label for="url_site"><:info_url:></label>
+      <input type='text' name='url_site' id='url_site' class='forml' value="[(#ENV{url_site}|entites_html)]" />
+    </li>]
+  	[(#ENV**{config}|table_valeur{articles_chapeau}|=={non}|?{#ENV**{chapo,''},' '}|?{' '})
+    [<li class='redirection'>(#ENV**{chapo}|match{^=}|?{' '})
+			<label for='virtuel'><:info_redirection:>&nbsp;:<em>#AIDER{artvirt}</em></label>
+			<input type='text' name='virtuel' id='virtuel' class='forml' value="[(#ENV{chapo}|replace{^=,''}|entites_html)]" />
+			<input type='hidden' name='changer_virtuel' value='oui' />
+			<span class='verdana1 spip_small'><:texte_article_virtuel_reference:></span>
+		</li>]
+		[<li>(#ENV**{chapo}|match{^=}|?{'',' '})
+			<label for="chapo"><:texte_sous_titre:><em>#AIDER{arttitre}</em></label>
+			<textarea name='descriptif' id='descriptif' class='forml' rows='#ENV**{config}|table_valeur{lignes}' cols='40'>[(#ENV{descriptif}|entites_html)]</textarea>
+		</li>]
+		]
+  	[(#ENV**{config}|table_valeur{articles_texte}|=={non}|?{#ENV**{texte,''},' '}|?{' '})
+    <li>
+      <label for="text_area"><:info_texte:><em>#AIDER{arttexte}</em><br />
+      <span><:texte_enrichir_mise_a_jour:><em>#AIDER{raccourcis}</em></span></label>
+      [(#ENV**{config}|table_valeur{afficher_barre}|?{#REM|barre_typo{text_area,#LANG}})]
+      <textarea name='texte' id='text_area' class='formo' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[
+      (#ENV**{browser_caret,''})]>[(#ENV{texte}|entites_html)]</textarea>
+      <script type='text/javascript'><!--
+      jQuery(hauteurTextarea);
+      //--></script>
+    </li>]
+  	[(#ENV**{config}|table_valeur{articles_ps}|=={non}|?{#ENV**{ps,''},' '}|?{' '})
+    <li>
+      <label for="ps"><:info_post_scriptum:></label>
+      <textarea name='ps' id='ps' class='forml' rows='5' cols='40'>[(#ENV{ps}|entites_html)]</textarea>
+    </li>]
+    [(#ENV**{config}|table_valeur{extra}|=={non}|?{'',' '})
+    	[(#ENV{extra}|editer_extra{#ENV{id_secteur}})]
+    ]
+  </ol>
+</fieldset>
+<style type='text/css'>
+/**********************************
+Use: cmxform template Author: Nick Rigby
+***********************************/
+.cadre-formulaire form fieldset { margin: 0px; width:100%;border:0;padding:0;clear:both;}
+	
+.cadre-formulaire form legend { padding: 0 2px; font-weight: bold; _margin: 0 -7px; /* IE Win */	}
+.cadre-formulaire form label { display: inline-block;	line-height: 1.8; vertical-align: top; }
+.cadre-formulaire form fieldset ol { margin: 0; padding: 0; list-style: none; }
+.cadre-formulaire form fieldset li { margin: 0; padding: 5px; }
+.cadre-formulaire form fieldset li fieldset ul { margin: 0 0 0 203px; padding: 0; }
+.cadre-formulaire form fieldset li fieldset li { width: 160px; padding: .3em 0; padding-right: 10px; }
+.cadre-formulaire form fieldset fieldset { margin: 3px 0 0; background: none; border: 0; }
+.cadre-formulaire form fieldset fieldset legend {	padding: 0 0 5px; font-weight: normal; }
+.cadre-formulaire form fieldset fieldset label {	display: block;	width: auto; }
+.cadre-formulaire form fieldset li fieldset:after { clear: both; } /* safari */
+.cadre-formulaire form em { font-weight: bold; font-style: normal; color: #f00; }
+
+.cadre-formulaire form label { /*width: 120px;*/ width: 190px; padding-right: 10px; } /* Width of labels */
+.cadre-formulaire form fieldset fieldset label { margin-left: 0; }
+
+/*\*//*/ .cadre-formulaire form legend { display: inline-block; } /* IE Mac legend fix */
+
+.cadre-formulaire form fieldset li fieldset li { border: 0; float: left; }
+.cadre-formulaire form fieldset li fieldset li.odd { clear: left; }
+</style>
+<script type="text/javascript"><!--
+if( document.addEventListener ) document.addEventListener( 'DOMContentLoaded', cmxform, false );
+function cmxform(){
+  // Hide forms
+  $( 'div.cadre-formulaire form' ).hide().end();
+  
+  // Processing
+  $( 'div.cadre-formulaire form' ).find( 'ol/li/label' ).not( '.nocmx' ).each( function( i ){
+    var labelContent = this.innerHTML;
+    var labelWidth = document.defaultView.getComputedStyle( this, '' ).getPropertyValue( 'width' );
+    var labelSpan = document.createElement( 'span' );
+        labelSpan.style.display = 'block';
+        labelSpan.style.width = labelWidth;
+        labelSpan.innerHTML = labelContent;
+    this.style.display = '-moz-inline-box';
+    this.innerHTML = null;
+    this.appendChild( labelSpan );
+  } ).end();
+  
+  // Show forms
+  $( 'div.cadre-formulaire form' ).show().end();
+}
+//--></script>
