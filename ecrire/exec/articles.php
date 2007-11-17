@@ -320,7 +320,7 @@ function afficher_corps_articles($id_article, $virtuel, $row)
 	}
 	else {
 		$afficher_contenu_objet = charger_fonction('afficher_contenu_objet', 'inc');
-		$res .= $afficher_contenu_objet('article', $id_article,$row);
+		$res .= $afficher_contenu_objet('article', $id_article,$row['id_rubrique']);
 	}
 	return $res;
 }

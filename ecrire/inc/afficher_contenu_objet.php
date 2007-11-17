@@ -13,11 +13,11 @@
 // affichage du contenu d'un objet spip (onglet contenu)
 // Cas generique, utilise pour tous les objets
 // http://doc.spip.org/@inc_afficher_contenu_objet_dist
-function inc_afficher_contenu_objet_dist($type, $id,$row = NULL){	
+function inc_afficher_contenu_objet_dist($type, $id,$id_rubrique){	
 	include_spip('public/assembler');
 	if ($GLOBALS['champs_extra'] AND $row['extra'])
 		include_spip('inc/extra');
-	$contexte = array('id'=>$id,'champs_extra'=>$GLOBALS['champs_extra']);
+	$contexte = array('id'=>$id,'champs_extra'=>$GLOBALS['champs_extra'],'id_rubrique'=>$id_rubrique);
 	$contenu_objet .= recuperer_fond("prive/contenu/$type",$contexte);
 	
 	// permettre aux plugin de faire des modifs ou des ajouts
@@ -25,7 +25,7 @@ function inc_afficher_contenu_objet_dist($type, $id,$row = NULL){
 		'afficher_contenu_objet',
 		array(
 			'data'=>$contenu_objet,
-			'args'=>array('type'=>$type,$key=>$id)
+			'args'=>array('type'=>$type,'id'=>$id)
 		)
 	);
 	
