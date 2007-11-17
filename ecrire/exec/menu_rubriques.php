@@ -97,6 +97,7 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal, $largeur, $ima
 	$pxdecal = max(15, ceil($largeur/5)) . 'px';
 
 	$ret = "<script type='text/javascript'>
+// http://doc.spip.org/@bandeauHover
 	function bandeauHover(r) {
 		if (!$(r).is('.hovered'))
 			$(r)
