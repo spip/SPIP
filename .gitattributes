@@ -261,18 +261,18 @@ dist/modeles/paginationitem.html -text
 dist/polices/dustismo-license.txt -text svneol=unset#application/octet-stream
 dist/polices/dustismo.ttf -text
 dist/polices/dustismo_bold.ttf -text
-dist/prive/article_infos.html -text
-dist/prive/article_infos_fonctions.php -text
-dist/prive/auteur_infos.html -text
-dist/prive/breve_infos.html -text
-dist/prive/breve_infos_fonctions.php -text
 dist/prive/contenu/article.html -text
 dist/prive/contenu/breve.html -text
 dist/prive/contenu/rubrique.html -text
 dist/prive/contenu/site.html -text
-dist/prive/rubrique_infos.html -text
-dist/prive/site_infos.html -text
-dist/prive/site_infos_fonctions.php -text
+dist/prive/infos/article.html -text
+dist/prive/infos/article_fonctions.php -text
+dist/prive/infos/auteur.html -text
+dist/prive/infos/breve.html -text
+dist/prive/infos/breve_fonctions.php -text
+dist/prive/infos/rubrique.html -text
+dist/prive/infos/site.html -text
+dist/prive/infos/site_fonctions.php -text
 dist/puce.gif -text
 dist/puce_prive.gif -text
 dist/puce_prive_rtl.gif -text
