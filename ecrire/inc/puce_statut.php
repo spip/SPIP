@@ -120,11 +120,10 @@ function puce_statut_article($id, $statut, $id_rubrique, $type='article', $ajax 
 	$clip = 1+ (11*$coord[$statut]);
 
 	if ($ajax){
-		$action = "\nonmouseover=\"montrer('statutdecal$type$id');\"";
-		return 	"<span class='puce_article_fixe'\n$action>"
+		return 	"<span class='puce_article_fixe'>"
 		. $inser_puce
 		. "</span>"
-		. "<span class='puce_article_popup' id='statutdecal$type$id'\nonmouseout=\"cacher('statutdecal$type$id');\" style='margin-left: -$clip"."px;'>"
+		. "<span class='puce_article_popup' id='statutdecal$type$id' style='margin-left: -$clip"."px;'>"
 		  . afficher_script_statut($id, $type, -1, 'puce-blanche.gif', 'prepa', $titles['blanche'], $action)
 		  . afficher_script_statut($id, $type, -12, 'puce-orange.gif', 'prop', $titles['orange'], $action)
 		  . afficher_script_statut($id, $type, -23, 'puce-verte.gif', 'publie', $titles['verte'], $action)

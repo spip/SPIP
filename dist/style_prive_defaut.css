@@ -29,3 +29,7 @@ div.messages { padding: 5px; font-size: 10px; font-weight: bold; }
 a.icone26 { padding: 1px; font-size: 11px; color: #000; font-family: verdana, helvetica, arial, sans; font-weight: bold; text-decoration: none; }
 a.icone26:hover { text-decoration: none; }
 a.icone26 img { vertical-align: middle; }
+
+
+.puce_article .puce_article_popup { visibility: hidden; }
+.puce_article.on .puce_article_popup { visibility: visible; }

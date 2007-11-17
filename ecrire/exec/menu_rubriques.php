@@ -95,20 +95,31 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal, $largeur, $ima
 	}
 
 	$pxdecal = max(15, ceil($largeur/5)) . 'px';
-	$idom = 'b_' . $id_rubrique;
 
-	$ret = "<div class='pos_r' style='z-index: "
-	. $zdecal . ";'
-onmouseover=\"montrer('$idom');\"
-onmouseout=\"cacher('$idom'); \">"
+	$ret = "<script type='text/javascript'>
+	function bandeauHover(r) {
+		if (!$(r).is('.hovered'))
+			$(r)
+			.addClass('hovered')
+			.children('.bandeau_rub')
+				.css('visibility', 'visible') // bizarre
+				.show()
+			.end()
+			.hover(
+				function(){\$(this).children('.bandeau_rub').show();},
+				function(){\$(this).children('.bandeau_rub').hide();}
+			);
+		};
+	</script>\n";
+
+	$ret .= "<div class='pos_r' style='z-index: "
+	. $zdecal . ";' onmouseover=\"bandeauHover(this);\">"
 	. '<div class="brt">'
 	. $nav
 	. "</div>\n<div class='bandeau_rub' style='top: 14px; $spip_lang_left: "
 	. $pxdecal
 	. "; z-index: "
 	. ($zdecal+1)
-	. ";' id='"
-	. $idom
 	. "'><table cellspacing='0' cellpadding='0'><tr><td valign='top'>";
 
 	if ($nb_rub = count($arr_rub)) {
@@ -133,6 +144,7 @@ onmouseout=\"cacher('$idom'); \">"
 		}
 	$ret .= "</td></tr></table>\n";
 	$ret .= "</div></div>\n";
+
 	$zmax++;
 	return $ret;
 }
