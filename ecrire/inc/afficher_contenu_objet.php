@@ -17,7 +17,7 @@ function inc_afficher_contenu_objet_dist($type, $id,$id_rubrique){
 	include_spip('public/assembler');
 	if ($GLOBALS['champs_extra'] AND $row['extra'])
 		include_spip('inc/extra');
-	$contexte = array('id'=>$id,'champs_extra'=>$GLOBALS['champs_extra'],'id_rubrique'=>$id_rubrique);
+	$contexte = array('id'=>$id,'champs_extra'=>$GLOBALS['champs_extra']?1:0,'id_rubrique'=>$id_rubrique);
 	$contenu_objet .= recuperer_fond("prive/contenu/$type",$contexte);
 	
 	// permettre aux plugin de faire des modifs ou des ajouts
