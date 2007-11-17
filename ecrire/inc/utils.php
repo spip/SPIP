@@ -1125,11 +1125,11 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	// Sommes-nous dans l'empire du Mal ?
 	// (ou sous le signe du Pingouin, ascendant GNU ?)
 	if (strpos($_SERVER['SERVER_SOFTWARE'], '(Win') !== false){
-		define ('os_serveur', 'windows');
+		define ('_OS_SERVEUR', 'windows');
 		define('_SPIP_LOCK_MODE',1); // utiliser le flock php
 	}
 	else {
-		define ('os_serveur', '');
+		define ('_OS_SERVEUR', '');
 		define('_SPIP_LOCK_MODE',1); // utiliser le flock php
 		#define('_SPIP_LOCK_MODE',2); // utiliser le nfslock de spip mais link() est tres souvent interdite
 	}

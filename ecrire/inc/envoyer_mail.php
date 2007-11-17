@@ -137,7 +137,7 @@ function inc_envoyer_mail_dist($email, $sujet, $texte, $from = "", $headers = ""
 	if (function_exists('wordwrap'))
 		$texte = wordwrap($texte);
 
-	if (os_serveur == 'windows') {
+	if (_OS_SERVEUR == 'windows') {
 		$texte = preg_replace ("@\r*\n@","\r\n", $texte);
 		$headers = preg_replace ("@\r*\n@","\r\n", $headers);
 		$sujet = preg_replace ("@\r*\n@","\r\n", $sujet);
