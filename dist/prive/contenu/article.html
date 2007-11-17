@@ -1,0 +1,41 @@
+<BOUCLE_afficher_contenu(ARTICLES){id_article=#ENV{id}}{statut?}>
+<span class="champ contenu_surtitre[ (#SURTITRE*|?{'',vide})]">
+<span class='label'><:texte_sur_titre:></span>
+<span dir='#LANG_DIR' class='#EDIT{surtitre} surtitre'>#SURTITRE</span>
+</span>
+<span class="champ contenu_titre[ (#TITRE*|?{'',vide})]">
+<span class='label'><:info_titre:></span>
+<span dir='#LANG_DIR' class='#EDIT{titre} titre'>#TITRE</span>
+</span>
+<span class="champ contenu_soustitre[ (#SOUSTITRE*|?{'',vide})]">
+<span class='label'><:texte_sous_titre:></span>
+<span dir='#LANG_DIR' class='#EDIT{soustitre} soustitre'>#SOUSTITRE</span>
+</span>
+<span class="champ contenu_descriptif[ (#DESCRIPTIF*|?{'',vide})]">
+<span class='label'><:info_descriptif:></span>
+<span dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>#DESCRIPTIF</span>
+</span>
+<span class="champ contenu_chapo[ (#CHAPO*|?{'',vide})]">
+<span class='label'><:info_chapeau:></span>
+<span dir='#LANG_DIR' class='#EDIT{chapo} chapo'>#CHAPO</span>
+</span>
+<span class="champ contenu_nom_site[ (#NOM_SITE*|?{'',vide})]">
+<span class='label'><:lien_voir_en_ligne:></span>
+<span dir='#LANG_DIR' class='#EDIT{hyperlien} nom_site'><a href='#URL_SITE'>#NOM_SITE</a></span>
+</span>
+<span class="champ contenu_texte[ (#TEXTE*|?{'',vide})]">
+<span class='label'><:info_texte:></span>
+<span dir='#LANG_DIR' class='#EDIT{texte} texte'>#TEXTE</span>
+</span>
+<span class="champ contenu_ps[ (#PS*|?{'',vide})]">
+<span class='label'><:info_ps:></span>
+<span dir='#LANG_DIR' class='#EDIT{ps} ps'>#PS</span>
+</span>
+[<span class="champ contenu_notes">
+<span class='label'><:info_notes:></span>
+<span dir='#LANG_DIR' class='#EDIT{notes} notes'>(#NOTES)</span>
+</span>]
+[(#ENV{champs_extra}|?{' '})
+[(#EXTRA**|extra_affichage)]
+]
+</BOUCLE_afficher_contenu>
