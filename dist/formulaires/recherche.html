@@ -4,7 +4,7 @@
 	[<input type="hidden" name="lang" value="(#ENV{lang})" />]
 	<label for="recherche"><:info_rechercher:></label>
 	<input type="text" class="forml" size="10" name="recherche" id="recherche" value="[(#ENV{recherche}|sinon{<:info_rechercher:>})]" onfocus='this.value = "";' onblur='if (this.value == "") { this.value = "[(#ENV{recherche}|sinon{<:info_rechercher:>})]"; }' accesskey="4" />
-	<input type="image" src="#CHEMIN{recheche.png}" class="bouton" value="<:info_rechercher:>" />
+	<input type="image" src="#CHEMIN{recherche.png}" class="bouton" value="<:info_rechercher:>" />
 </div>
 </form>
 </div>
