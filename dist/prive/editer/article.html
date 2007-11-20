@@ -50,7 +50,7 @@
     <li>
       <label for="text_area"><:info_texte:><em>#AIDER{arttexte}</em><br />
       <span><:texte_enrichir_mise_a_jour:><em>#AIDER{raccourcis}</em></span></label>
-      [(#ENV**{config}|table_valeur{afficher_barre}|?{#REM|barre_typo{text_area,#LANG}})]
+      [(#ENV**{config}|table_valeur{afficher_barre}|?{#REM|concat{text_area}|barre_typo{#LANG}})]
       <textarea name='texte' id='text_area' class='formo' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[
       (#ENV**{browser_caret,''})]>[(#ENV{texte}|entites_html)]</textarea>
       <script type='text/javascript'><!--
