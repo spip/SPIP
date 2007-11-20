@@ -897,6 +897,7 @@ function balise_VAL_dist($p){
 	$p->code = interprete_argument_balise(1,$p);
 	if (!strlen($p->code))
 		$p->code = "''";
+	$p->interdire_scripts = false;
 	return $p;
 }
 // #NOOP est un alias pour regler #948, ne pas documenter
