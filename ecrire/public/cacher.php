@@ -229,12 +229,15 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 		}
 	}
 
-	// Cas sans jamais de cache pour raison interne
+	// Si un calcul, recalcul [ou preview, mais c'est recalcul] est demande,
+	// on supprime le cache, et ses voisins dans le cas des sessions
 	if ($GLOBALS['var_mode'] &&
 		(isset($_COOKIE['spip_session'])
 		|| isset($_COOKIE['spip_admin'])
-		|| @file_exists(_ACCESS_FILE_NAME))) {
-			supprimer_fichier(_DIR_CACHE . $f);
+		|| @file_exists(_ACCESS_FILE_NAME))
+	) {
+		if (in_array($GLOBALS['var_mode'], array('calcul', 'recalcul')))
+			array_map('supprimer_fichier', preg_files(_DIR_CACHE.$f, '.'));
 	}
 
 	// $delais par defaut (pour toutes les pages sans #CACHE{})
