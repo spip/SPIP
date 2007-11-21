@@ -149,7 +149,7 @@ function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
 		. _T('info_texte_explicatif')
 		. "</b></label>"
 		. aide ("raccourcis")
-		. "\n<br /><textarea name='texte' id='texte' rows='15' class='formo' cols='40'>"
+		. "\n<br /><textarea name='texte' id='texte' rows='15' class='formo barre_inserer' cols='40'>"
 		. entites_html($texte)
 		. "</textarea>\n";
 	}
