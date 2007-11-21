@@ -27,7 +27,9 @@ function public_styliser_dist($fond, $id_rubrique, $lang='', $connect='', $ext='
 		$trouver_table = charger_fonction('trouver_table', 'base');
 		include_spip('inc/autoriser');
 		if (autoriser('sauvegarder')
-		AND $table = $trouver_table($fond, $connect)) {
+		AND preg_match('/^table:(.*)$/', $fond, $r)
+		AND $table = $trouver_table($r[1], $connect)) {
+				$fond = $r[1];
 				$base = _DIR_TMP . $fond . ".$ext";
 				if (!file_exists($base)
 				OR  $GLOBALS['var_mode']) {
