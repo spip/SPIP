@@ -296,7 +296,7 @@ function notifications_forumvalide_dist($quoi, $id_forum) {
 function notifications_forumposte_dist($quoi, $id_forum) {
 	$t = sql_fetsel("*", "spip_forum", "id_forum=".sql_quote($id_forum));
 	if (!$t) return;
-	$id_article = $t['id_article];
+	$id_article = $t['id_article'];
 
 	include_spip('inc/texte');
 	include_spip('inc/filtres');
