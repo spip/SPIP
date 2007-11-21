@@ -35,12 +35,21 @@ function inc_regler_moderation_dist($id_article, $script, $args) {
 	global $spip_lang_right;
 
 	$statut_forum = get_forums_publics($id_article);
+	$choix_forum = $GLOBALS['liste_des_forums'];
+	$choix_forum['non'] = _T('info_pas_de_forum');
+	$opt = '';
+	foreach ($choix_forum as $desc => $val) {
+		$opt .= "\n\t<option";
+		if ($statut_forum == $val)
+			$opt .= " selected='selected'";
+		$opt .= " value='$val'>"._T($desc)."</option>";
+	}
 
-	$nb_forums = sql_fetsel("COUNT(*) AS count", "spip_forum", "id_article=$id_article AND statut IN ('publie', 'off', 'prop', 'spam')");
-	$nb_forums = $nb_forums['count'];
+
+	$nb_forums = sql_countsel("spip_forum", "id_article=$id_article AND statut IN ('publie', 'off', 'prop', 'spam')");
 
 	if ($nb_forums) {
-		$r = '<!-- visible -->' // message pour l'appelant
+		$res = '<!-- visible -->' // message pour l'appelant
 		. icone_horizontale(
 			_T('icone_suivi_forum', array('nb_forums' => $nb_forums)),
 			generer_url_ecrire("articles_forum","id_article=$id_article"),
@@ -49,32 +58,21 @@ function inc_regler_moderation_dist($id_article, $script, $args) {
 			false
 		);
 	} else
-		$r = '';
+		$res = '';
 
-	$r .= "\n\t<label for='change_accepter_forum'>"
+	$res .= "\n\t<label for='change_accepter_forum'>"
 	. _T('info_fonctionnement_forum') ."</label>"
 	. "\n\t<select name='change_accepter_forum' id='change_accepter_forum'
 		class='fondl spip_xx-small'
 		onchange=\"findObj_forcer('valider_regler_moderation_$id_article').style.visibility='visible';\"
-		>";
-
-	foreach (array(
-		'pos'=>_T('bouton_radio_modere_posteriori'),
-		'pri'=>_T('bouton_radio_modere_priori'),
-		'abo'=>_T('bouton_radio_modere_abonnement'),
-		'non'=>_T('info_pas_de_forum'))
-		as $val => $desc) {
-		$r .= "\n\t<option";
-		if ($statut_forum == $val)
-			$r .= " selected='selected'";
-		$r .= " value='$val'>".$desc."</option>";
-	}
-	$r .= "\n\t</select><br />\n";
+		>"
+	. $opt
+	."\n\t</select><br />\n";
 
 	$atts = " style='float: $spip_lang_right' id='valider_regler_moderation_$id_article' class='fondo visible_au_chargement spip_xx-small'";
 
-	$r = ajax_action_post('regler_moderation', $id_article, $script, $args, $r,_T('bouton_changer'), $atts);
+	$res = ajax_action_post('regler_moderation', $id_article, $script, $args, $res,_T('bouton_changer'), $atts);
 
-	return ajax_action_greffe("regler_moderation", $id_article, $r);
+	return ajax_action_greffe("regler_moderation", $id_article, $res);
 }
 ?>

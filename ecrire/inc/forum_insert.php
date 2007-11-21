@@ -45,12 +45,8 @@ function controler_forum_abo($retour)
 function controler_forum($id) {
 
 	// Reglage forums d'article
-	if ($id) {
-		$q = sql_select("accepter_forum", "spip_articles", "id_article=$id");
-		if ($r = sql_fetch($q))
-			$id = $r['accepter_forum'];
-	}
 
+	if ($id) $id = sql_getfetsel('accepter_forum','spip_articles',"id_article=$id");
 	// Valeur par defaut
 	return $id ? $id: substr($GLOBALS['meta']["forums_publics"],0,3);
 
