@@ -3,17 +3,17 @@
   	[(#ENV**{config}|table_valeur{articles_surtitre}|=={non}|?{#ENV**{surtitre,''},' '}|?{' '})
     <li>
       <label for="surtitre"><:texte_sur_titre:><em>#AIDER{arttitre}</em></label>
-      <input type='text' name='surtitre' id='surtitre' class='forml' value="[(#ENV{surtitre}|entites_html)]" />
+      <input type='text' name='surtitre' id='surtitre' class='forml' value="[(#ENV**{surtitre}|entites_html)]" />
     </li>]
     <li>
       <label for="titre"><:texte_titre_obligatoire:><em>#AIDER{arttitre}</em></label>
-      <input type='text' name='titre' id='titre' class='formo' value="[(#ENV{titre,#REM|concat{info_nouvel_article}|_T}|entites_html)]" 
+      <input type='text' name='titre' id='titre' class='formo' value="[(#ENV**{titre,#REM|concat{info_nouvel_article}|_T}|entites_html)]" 
 			[(#ENV{titre,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
     </li>
   	[(#ENV**{config}|table_valeur{articles_soustitre}|=={non}|?{#ENV**{soustitre,''},' '}|?{' '})
     <li>
       <label for="soustitre"><:texte_sous_titre:><em>#AIDER{arttitre}</em></label>
-      <input type='text' name='soustitre' id='soustitre' class='forml' value="[(#ENV{soustitre}|entites_html)]" />
+      <input type='text' name='soustitre' id='soustitre' class='forml' value="[(#ENV**{soustitre}|entites_html)]" />
     </li>]
 
     [(#REM|sinon{titre_cadre_interieur_rubrique}|_T|concat{' ',#AIDER{artrub}}
@@ -22,28 +22,28 @@
   	[(#ENV**{config}|table_valeur{articles_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|?{' '})
     <li>
       <label for="descriptif"><:texte_descriptif_rapide:><em>#AIDER{artdesc}</em></label>
-      <textarea name='descriptif' id='descriptif' class='forml' rows='2' cols='40'>[(#ENV{descriptif}|entites_html)]</textarea>
+      <textarea name='descriptif' id='descriptif' class='forml' rows='2' cols='40'>[(#ENV**{descriptif}|entites_html)]</textarea>
     </li>]
   	[(#ENV**{config}|table_valeur{articles_urlref}|=={non}|?{#ENV**{url_site,#ENV**{nom_site,''}},' '}|?{' '})
     <li>
       <label for="nom_site"><:entree_liens_sites:><br />
       <:info_titre:></label>
-      <input type='text' name='nom_site' id='nom_site' class='forml' value="[(#ENV{nom_site}|entites_html)]" />
+      <input type='text' name='nom_site' id='nom_site' class='forml' value="[(#ENV**{nom_site}|entites_html)]" />
     </li>
     <li>
       <label for="url_site"><:info_url:></label>
-      <input type='text' name='url_site' id='url_site' class='forml' value="[(#ENV{url_site}|entites_html)]" />
+      <input type='text' name='url_site' id='url_site' class='forml' value="[(#ENV**{url_site}|entites_html)]" />
     </li>]
   	[(#ENV**{config}|table_valeur{articles_chapeau}|=={non}|?{#ENV**{chapo,''},' '}|?{' '})
     [<li class='redirection'>(#ENV**{chapo}|match{^=}|?{' '})
 			<label for='virtuel'><:info_redirection:>&nbsp;:<em>#AIDER{artvirt}</em></label>
-			<input type='text' name='virtuel' id='virtuel' class='forml' value="[(#ENV{chapo}|replace{^=,''}|entites_html)]" />
+			<input type='text' name='virtuel' id='virtuel' class='forml' value="[(#ENV**{chapo}|replace{^=,''}|entites_html)]" />
 			<input type='hidden' name='changer_virtuel' value='oui' />
 			<span class='verdana1 spip_small'><:texte_article_virtuel_reference:></span>
 		</li>]
 		[<li>(#ENV**{chapo}|match{^=}|?{'',' '})
 			<label for="chapo"><:texte_sous_titre:><em>#AIDER{arttitre}</em></label>
-			<textarea name='descriptif' id='descriptif' class='forml' rows='#ENV**{config}|table_valeur{lignes}' cols='40'>[(#ENV{descriptif}|entites_html)]</textarea>
+			<textarea name='chapo' id='chapo' class='forml' rows='#ENV**{config}|table_valeur{lignes}' cols='40'>[(#ENV**{chapo}|entites_html)]</textarea>
 		</li>]
 		]
   	[(#ENV**{config}|table_valeur{articles_texte}|=={non}|?{#ENV**{texte,''},' '}|?{' '})
@@ -60,7 +60,7 @@
   	[(#ENV**{config}|table_valeur{articles_ps}|=={non}|?{#ENV**{ps,''},' '}|?{' '})
     <li>
       <label for="ps"><:info_post_scriptum:></label>
-      <textarea name='ps' id='ps' class='forml' rows='5' cols='40'>[(#ENV{ps}|entites_html)]</textarea>
+      <textarea name='ps' id='ps' class='forml' rows='5' cols='40'>[(#ENV**{ps}|entites_html)]</textarea>
     </li>]
     [(#ENV**{config}|table_valeur{extra}|=={non}|?{'',' '})
     	[(#ENV{extra}|editer_extra{#ENV{id_secteur}})]
