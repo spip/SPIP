@@ -309,8 +309,8 @@ function notifications_forumposte_dist($quoi, $id_forum) {
 	// seulement s'ils ont le droit de le moderer (les autres seront
 	// avertis par la notifications_forumvalide).
 	if ($id_article) {
-		$s = sql_getfetsel('accepter_forum','spip_articles',"id_article="$id_article);
-		if (!$s)  $s: substr($GLOBALS['meta']["forums_publics"],0,3);
+		$s = sql_getfetsel('accepter_forum','spip_articles',"id_article=" . $id_article);
+		if (!$s)  $s = substr($GLOBALS['meta']["forums_publics"],0,3);
 
 		if (strpos(@$GLOBALS['meta']['prevenir_auteurs'],",$s,")!==false
 		OR @$GLOBALS['meta']['prevenir_auteurs'] === 'oui') // compat
