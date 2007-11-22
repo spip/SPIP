@@ -1247,18 +1247,19 @@ function lang_select ($lang=NULL) {
 // Par convention cette chaine ne doit pas contenir de caracteres [^0-9A-Za-z]
 // Attention on ne peut *pas* inferer id_auteur a partir de la session, qui
 // est une chaine arbitraire
-// Cette chaine est courte (6 cars) pour pouvoir etre utilisee dans un nom
+// Cette chaine est courte (8 cars) pour pouvoir etre utilisee dans un nom
 // de fichier cache
 // http://doc.spip.org/@spip_session
-function spip_session() {
+function spip_session($force = false) {
 	static $session;
-	if (!isset($session)) {
-		$session = $GLOBALS['auteur_session']
-			? substr(md5(
-				$GLOBALS['auteur_session']['id_auteur']
-				.'_'
-				.$_COOKIE['spip_session']), 0, 6)
-			: '';
+	if ($force OR !isset($session)) {
+		$s = pipeline('definir_session',
+			$GLOBALS['auteur_session']
+			? $GLOBALS['auteur_session']['id_auteur']
+				. '_' . @$_COOKIE['spip_session']
+			: ''
+		);
+		$session = $s ? substr(md5($s), 0, 8) : '';
 	}
 	#spip_log('session: '.$session);
 	return $session;
@@ -1285,7 +1286,41 @@ function exec_info_dist() {
 		echo "pas admin";
 }
 
+// La fonction de base de SPIP : un squelette + un contexte => une page
+// on recupere le resultat sous la forme d'une $page['texte', 'headers'...]
+// options :
+// 'protect_xml' => false,  conserver le \1 du xml-hack
+function assembler($fond, $contexte=array(), $options=array(), $connect=null) {
+	charger_fonction('assembler', 'public');
 
+	// on est peut etre dans l'espace prive au moment de l'appel
+	if (!isset($GLOBALS['_INC_PUBLIC'])) $GLOBALS['_INC_PUBLIC'] = 0;
+	$GLOBALS['_INC_PUBLIC']++;
+
+	// option[s] par defaut
+	$options = array_merge( array('protect_xml' => false), $options);
+
+	if (isset($contexte['fond'])
+	AND $fond === '')
+		$fond = $contexte['fond'];
+
+	$page = inclure_page($fond, $contexte, $connect);
+	if ($GLOBALS['flag_ob'] AND ($page['process_ins'] != 'html')) {
+		ob_start();
+		eval('?' . '>' . $page['texte']);
+		$page['texte'] = ob_get_contents();
+		$page['process_ins'] = 'html';
+		ob_end_clean();
+	}
+
+	if (!isset($options['protect_xml'])
+	AND isset($page['entetes']['X-Xml-Hack']))
+		$page['texte'] = str_replace("<\1?xml", '<'.'?xml', $page['texte']);
+
+	$GLOBALS['_INC_PUBLIC']--;
+
+	return $page;
+}
 
 
 /*

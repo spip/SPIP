@@ -67,7 +67,7 @@ function inc_couleurs_dist($choix=NULL)
 );
 
 	if (is_numeric($choix)) {
-		// Compatibilite ascendente (plug-ins notamment)
+		// Compatibilite ascendante (plug-ins notamment)
 		$GLOBALS["couleur_claire"] = $couleurs_spip[$choix]['couleur_claire'];
 		$GLOBALS["couleur_foncee"] = $couleurs_spip[$choix]['couleur_foncee'];
 		$GLOBALS["couleur_lien"] = $couleurs_spip[$choix]['couleur_lien'];
@@ -86,16 +86,35 @@ onmouseover="changestyle(\'bandeauinterface\');"
 onfocus="changestyle(\'bandeauinterface\');"
 onblur="changestyle(\'bandeauinterface\');"';
 
+		$bloc = '<span id="selecteur_couleur"'. $evt .'>';
 		foreach ($couleurs_spip as $key => $val) {
-			$res .= "<a href=\""
-			. parametre_url(self(), 'set_couleur', $key)
-			. "\"$evt>"
+			$bloc .=
+			'<a href="'
+				. parametre_url(self(), 'set_couleur', $key)
+				. '"'
+			. ' rel="'.generer_url_public('style_prive','ltr='
+				. $GLOBALS['spip_lang_left'] . '&'
+				. inc_couleurs_dist($key)).'"'
+			.'>'
 			. http_img_pack("rien.gif",
 					_T('choix_couleur_interface') . $key,
 					"width='8' height='8' style='margin: 1px; background-color: "	. $val['couleur_claire'] . ";'")
 			. "</a>";
 		}
-	return $res;
+		$bloc .= "</span>\n";
+
+		// Ce js permet de changer de couleur sans recharger la page
+		$bloc .= "<script type='text/javascript'><!--
+			$('#selecteur_couleur a')
+			.click(function(){
+				$('#cssprivee')
+				.attr('href', $(this).attr('rel'));
+				$.get($(this).attr('href'));
+				return false;
+			});
+		// --></script>\n";
+
+		return $res . $bloc;
 	}
 }
 

@@ -70,16 +70,19 @@ if (autoriser_sans_cookie($exec)) {
 $prefs_mod = false;
 
 if (isset($_GET['set_couleur'])) {
-	$GLOBALS['auteur_session']['prefs']['couleur'] = floor($_GET['set_couleur']);
+	$GLOBALS['auteur_session']['prefs']['couleur'] = intval($_GET['set_couleur']);
 	$prefs_mod = true;
 }
 if (isset($_GET['set_disp'])) {
-	$GLOBALS['auteur_session']['prefs']['display'] = floor($_GET['set_disp']);
+	$GLOBALS['auteur_session']['prefs']['display'] = intval($_GET['set_disp']);
 	$prefs_mod = true;
 }
 if ($prefs_mod AND !$var_auth) {
 	sql_updateq('spip_auteurs', array('prefs' => serialize($GLOBALS['auteur_session']['prefs'])), "id_auteur=" .intval($GLOBALS['auteur_session']['id_auteur']));
- }
+
+	// Si modif des couleurs en ajax, stop ici
+	if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') exit;
+}
 
 // compatibilite ascendante
 $GLOBALS['spip_display'] = isset($GLOBALS['auteur_session']['prefs']['display'])

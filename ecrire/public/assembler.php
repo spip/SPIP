@@ -537,29 +537,19 @@ function message_erreur_404 ($erreur= "") {
 // fonction permettant de recuperer le resultat du calcul d'un squelette
 // pour une inclusion dans un flux
 // http://doc.spip.org/@recuperer_fond
-function recuperer_fond($fond, $contexte=array(),$protect_xml=false, $trim=true, $connect='') {
-	// on est peut etre dans l'espace prive au moment de l'appel
-	if (!isset($GLOBALS['_INC_PUBLIC'])) $GLOBALS['_INC_PUBLIC'] = 0;
-	$GLOBALS['_INC_PUBLIC']++;
-	if (($fond=='')&&isset($contexte['fond']))
-		$fond = $contexte['fond'];
+function recuperer_fond($fond, $contexte=array(), $protect_xml=false, $trim=true, $connect='') {
+	$options = array(
+		'protect_xml' => $protect_xml,
+		'trim' => $trim
+	);
 
 	$texte = "";
 	foreach(is_array($fond) ? $fond : array($fond) as $f){
-		$page = inclure_page($f, $contexte, $connect);
-		if ($GLOBALS['flag_ob'] AND ($page['process_ins'] != 'html')) {
-			ob_start();
-			eval('?' . '>' . $page['texte']);
-			$page['texte'] = ob_get_contents();
-			ob_end_clean();
-		}
-		if (!$protect_xml && isset($page['entetes']['X-Xml-Hack']))
-			$page['texte'] = str_replace("<\1?xml", '<'.'?xml', $page['texte']);
-	// pas de trim, pour etre homogene avec <INCLURE>
+		$page = assembler($f, $contexte, $options, $connect);
 		$texte .= $trim ? rtrim($page['texte']) : $page['texte'];
 	}
-	$GLOBALS['_INC_PUBLIC']--;
-	return $trim ?  ltrim($texte) : $texte;
+
+	return $trim ? ltrim($texte) : $texte;
 }
 
 // temporairement ici : a mettre dans le futur inc/modeles
@@ -635,7 +625,7 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 		'fond' => $fond, 
 		'dir_racine' => _DIR_RACINE # eviter de mixer un cache racine et un cache ecrire (meme si pour l'instant les modeles ne sont pas caches, le resultat etant different il faut que le contexte en tienne compte 
 	); 
-	// Le numerdo du modele est mis dans l'environnement 
+	// Le numero du modele est mis dans l'environnement
 	// d'une part sous l'identifiant "id"
 	// et d'autre part sous l'identifiant de la cle primaire supposee
 	// par la fonction table_objet, 
@@ -670,7 +660,14 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 	$GLOBALS['compt_note'] = 0;
 
 	// Appliquer le modele avec le contexte
-	$retour = trim(recuperer_fond($fond, $contexte, false, true, $connect));
+	$page = assembler($fond, $contexte, array(), $connect);
+	$retour = trim($page['texte']);
+
+	// Lever un drapeau (global) si le modele utilise #SESSION
+	// a destination de public/cacher
+	if (isset($page['invalideurs'])
+	AND isset($page['invalideurs']['session']))
+		$GLOBALS['cache_utilise_session'] = $page['invalideurs']['session'];
 
 	// On restitue les globales de notes telles qu'elles etaient avant l'appel
 	// du modele. Si le modele n'a pas affiche ses notes, tant pis (elles *doivent*
