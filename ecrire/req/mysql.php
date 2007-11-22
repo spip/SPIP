@@ -219,7 +219,8 @@ function spip_select_as($args)
 {
 	$argsas = "";
 	foreach($args as $k => $v) {
-		$argsas .= ', ' . $v . (is_numeric($k) ? '' : " AS `$k`");
+		if (strpos($v, 'JOIN') === false)  $argsas .= ', ';
+		$argsas .= $v . (is_numeric($k) ? '' : " AS `$k`");
 	}
 	return substr($argsas,2);
 }

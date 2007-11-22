@@ -329,7 +329,7 @@ function spip_pg_orderby($order, $select)
 function spip_pg_groupby($groupby, $from, $select)
 {
 	$join = is_array($from) ? (count($from) > 1) : 
-	  (strpos($from, ",") OR strpos($from, "JOIN"));
+	  (strpos($from, ","));
 	if ($join OR $groupby) $join = !is_array($select) ? $select : join(", ", $select);
 	if ($join) {
 	  $join = str_replace('DISTINCT ','',$join);
@@ -368,11 +368,15 @@ function spip_pg_frommysql($arg)
 
 	$res = spip_pg_fromfield($arg);
 
-	$res = preg_replace('/\brand[(][)]/','random()', $res);
+	$res = preg_replace('/\brand[(][)]/i','random()', $res);
+
 	$res = preg_replace('/\b0\.0[+]([a-zA-Z0-9_.]+)\s*/',
 			    'CAST(substring(\1, \'^ *[0-9.]+\') as float)',
 			    $res);
 	$res = preg_replace('/\b0[+]([a-zA-Z0-9_.]+)\s*/',
+			    'CAST(substring(\1, \'^ *[0-9]+\') as int)',
+			    $res);
+	$res = preg_replace('/\bconv[(]([^,]*)[^)]*[)]/i',
 			    'CAST(substring(\1, \'^ *[0-9]+\') as int)',
 			    $res);
 	$res = preg_replace('/UNIX_TIMESTAMP\s*[(]\s*[)]/',
@@ -463,7 +467,8 @@ function spip_pg_select_as($args)
 				$v = $k;
 			elseif ($v != $k) $as = " AS $k"; 
 		}
-		$argsas .= ', ' . $v . $as; 
+		if (strpos($v, 'JOIN') === false)  $argsas .= ', ';
+		$argsas .= $v . $as; 
 	}
 	return substr($argsas,2);
 }
