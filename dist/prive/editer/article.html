@@ -42,7 +42,7 @@
 			<span class='verdana1 spip_small'><:texte_article_virtuel_reference:></span>
 		</li>]
 		[<li>(#ENV**{chapo}|match{^=}|?{'',' '})
-			<label for="chapo"><:texte_sous_titre:><em>#AIDER{arttitre}</em></label>
+			<label for="chapo"><:info_chapeau:><em>#AIDER{arttitre}</em></label>
 			<textarea name='chapo' id='chapo' class='forml' rows='#ENV**{config}|table_valeur{lignes}' cols='40'>[(#ENV**{chapo}|entites_html)]</textarea>
 		</li>]
 		]
