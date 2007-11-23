@@ -86,7 +86,7 @@ function bandeau_auteurs($tri, $visiteurs)
 
 		$res .= icone_horizontale(_T('icone_informations_personnelles'), generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur"), "fiche-perso-24.gif","rien.gif", false);
 
-		if (avoir_visiteurs()) {
+		if (avoir_visiteurs(true)) {
                         if ($visiteurs)
 				$res .= icone_horizontale (_T('icone_afficher_auteurs'), generer_url_ecrire("auteurs"), "auteur-24.gif", "", false);
 			else
