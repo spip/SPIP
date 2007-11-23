@@ -238,6 +238,8 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	) {
 		if (in_array($GLOBALS['var_mode'], array('calcul', 'recalcul')))
 			array_map('supprimer_fichier', preg_files(_DIR_CACHE.$f, '.'));
+		else 
+			supprimer_fichier(_DIR_CACHE . $f);
 	}
 
 	// $delais par defaut (pour toutes les pages sans #CACHE{})
