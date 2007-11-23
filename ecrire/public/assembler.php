@@ -13,6 +13,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@init_var_mode
 function init_var_mode(){
 	static $done = false;
 	if (!$done) {
