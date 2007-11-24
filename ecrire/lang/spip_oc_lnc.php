@@ -23,8 +23,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_rubrique' => 'Modificar aquela rubrica',
 'admin_recalculer' => 'Tornar calcular la pagina',
 'afficher_trad' => 'mostrar las reviradas',
-'alerte_maj_impossible' => '<b>Al&egrave;rta!</b> Es impossible d\'actualizar la basa MySQL v&egrave;rs la version @version@; saique i a un probl&egrave;ma relatiu al drech de modificar la basa de donadas. Volgatz contactar v&ograve;stre albergador.',
+'alerte_maj_impossible' => '<b>Al&egrave;rta!</b> Es impossible d\'actualizar la basa SQL v&egrave;rs la version @version@; saique i a un probl&egrave;ma relatiu al drech de modificar la basa de donadas. Volgatz contactar v&ograve;stre albergador.',
 'analyse_xml' => 'Analisi XML',
+'annuler' => 'Anullar',
 'antispam_champ_vide' => 'Volgatz daissar aquel camp void&nbsp;:',
 'avis_archive_incorrect' => 'lo fichi&egrave;r archiu es pas un fichi&egrave;r SPIP',
 'avis_archive_invalide' => 'lo fichi&egrave;r archiu es pas valid',
@@ -37,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_connexion' => 'Error de connexion',
 'avis_erreur_cookie' => 'probl&egrave;ma de cookie',
 'avis_erreur_fonction_contexte' => 'Error de programacion. Cal pas apelar aquela foncion dins aquel cont&egrave;xt.',
-'avis_erreur_mysql' => 'Error MySQL ',
+'avis_erreur_mysql' => 'Error SQL ',
 'avis_erreur_sauvegarde' => 'Error dins la salvagarda (@type@ @id_objet@)! ',
 'avis_erreur_visiteur' => 'Probl&egrave;ma per accedir a l\'espaci privat',
 
@@ -263,6 +264,7 @@ Merc&eacute;s per v&ograve;stra participacion
 ',
 'form_pet_message_commentaire' => 'Un messatge, una remarca&nbsp;?',
 'form_pet_nom_site2' => 'Nom de v&ograve;stre sit Web',
+'form_pet_probleme_liens' => 'Volgatz tornar prene v&ograve;stre messatge en supprimir los ligams ipert&egrave;xt.',
 'form_pet_probleme_technique' => 'Probl&egrave;ma tecnic, las signaturas son tempor&agrave;riament arrestadas.',
 'form_pet_signature_pasprise' => 'V&ograve;stra signatura es pas presa en compte.',
 'form_pet_signature_validee' => 'V&ograve;stra signatura es validada. Merc&eacute;s!',
@@ -330,7 +332,6 @@ Merc&eacute;s per v&ograve;stra participacion
 'icone_brouteur' => 'Navigacion rapida',
 'icone_configuration_site' => 'Configuracion',
 'icone_configurer_site' => 'Configurar v&ograve;stre sit',
-'icone_creer_mot_cle' => 'Crear un mot clau n&ograve;u e lo ligar a aquel article',
 'icone_creer_nouvel_auteur' => 'Crear un autor n&ograve;u',
 'icone_creer_rubrique' => 'Crear una rubrica',
 'icone_creer_sous_rubrique' => 'Crear una sosrubrica',
@@ -418,6 +419,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_description_2' => 'Descripcion&nbsp;:',
 'info_dimension' => 'Dimensions&nbsp;:',
 'info_document' => 'Document ',
+'info_document_indisponible' => 'Aquel document es pas disponible',
 'info_documents' => 'Documents',
 'info_echange_message' => 'SPIP permet d\'escambiar de messatges e de constituir de forums privats de discussion entre los participants del sit. Pod&egrave;tz activar o desactivar aquela foncionalitat.',
 'info_ecire_message_prive' => 'Escriure un messatge privat',
@@ -508,6 +510,8 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_sans_titre_2' => 'sens t&iacute;tol',
 'info_selectionner_fichier' => 'Pod&egrave;tz seleccionar un fichi&egrave;r del dorsi&egrave;r @upload@',
 'info_selectionner_fichier_2' => 'Seleccionar un fichi&egrave;r:',
+'info_signature_supprimee' => 'Signatura suprimida',
+'info_signature_supprimee_erreur' => 'Error&nbsp;: aquel c&ograve;de de suppression correspond pas a a cap de signatura',
 'info_site_attente' => 'Sit web en esp&egrave;ra de validacion',
 'info_site_reference' => 'Sit referenciat en linha',
 'info_site_refuse' => 'Sit web refusat',
@@ -670,6 +674,10 @@ e vos tornar connectar al sit.
 'previsualiser' => 'Previsualizar',
 
 
+// R
+'retour' => 'Tornar',
+
+
 // S
 'spip_conforme_dtd' => 'SPIP consid&egrave;ra aquel document coma conf&ograve;rm a son DOCTYPE :',
 'squelette' => 'esqueleta',
@@ -733,7 +741,7 @@ e vos tornar connectar al sit.
 'titre_joindre_document' => 'J&Oacute;NHER UN DOCUMENT',
 'titre_liens_entrants' => 'Ligams intrants',
 'titre_mots_cles' => 'MOTS CLAU',
-'titre_probleme_technique' => 'Atencion: un probl&egrave;ma tecnic (servidor MySQL) empacha d\'accedir a aquela part del sit. Merc&eacute;s de v&ograve;stra indulg&eacute;ncia.',
+'titre_probleme_technique' => 'Atencion: un probl&egrave;ma tecnic (servidor SQL) empacha d\'accedir a aquela part del sit. Merc&eacute;s de v&ograve;stra indulg&eacute;ncia.',
 'titre_publier_document' => 'PUBLICAR UN DOCUMENT DINS AQUELA RUBRICA',
 'titre_statistiques' => 'Estadisticas del sit',
 'titre_titre_document' => 'T&iacute;tol del document:',
@@ -771,7 +779,7 @@ e vos tornar connectar al sit.
 'zbug_inversion_ordre_inexistant' => 'inversion d\'un &ograve;rdre inexistent',
 'zbug_pagination_sans_critere' => '#PAGINATION sens crit&egrave;ri {pagination} o emplegat dins una bocla recursiva',
 'zbug_parametres_inclus_incorrects' => 'Param&egrave;tres d\'inclusion incorr&egrave;ctes',
-'zbug_profile' => '<NEW>Temps de c&agrave;lcul&nbsp;: @time@',
+'zbug_profile' => 'Temps de calcul: @time@',
 'zbug_resultat' => 'resultat',
 'zbug_serveur_indefini' => 'servidor SQL indefinit',
 'zbug_table_inconnue' => 'Taula SQL &laquo; @table@ &raquo; inconeguda',

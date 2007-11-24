@@ -14,16 +14,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'Pas cap de resultat.',
 'avis_chemin_invalide_1' => 'Lo camin qu\'av&egrave;tz causit',
 'avis_chemin_invalide_2' => 'sembla pas valid. Volgatz tornar a la pagina anteriora per verificar las informacions fornidas.',
-'avis_connexion_echec_1' => 'La connexion al servidor MySQL a abocat.',
+'avis_connexion_echec_1' => 'La connexion al servidor SQL a abocat.',
 'avis_connexion_echec_2' => 'Tornatz a la pagina anteriora, e verificatz las informacions qu\'av&egrave;tz fornidas.',
-'avis_connexion_echec_3' => '<b>N.B.</b> Sus plan de servidors, dev&egrave;tz <b>demandar</b> qu\'activen v&ograve;stre acc&egrave;s a la basa MySQL abans de la poder utilizar. Se vos pod&egrave;tz pas connectar, verificatz qu\'ajatz plan realizat aquel procediment.',
+'avis_connexion_echec_3' => '<b>N.B.</b> Sus plan de servidors, dev&egrave;tz <b>demandar</b> qu\'activen v&ograve;stre acc&egrave;s a la basa SQL abans de la poder utilizar. Se vos pod&egrave;tz pas connectar, verificatz qu\'ajatz plan realizat aquel procediment.',
 'avis_connexion_ldap_echec_1' => 'La connexion al servidor LDAP a abocat.',
 'avis_connexion_ldap_echec_2' => 'Tornatz a la pagina anteriora, e verificatz las informacions qu\'av&egrave;tz fornidas. ',
 'avis_connexion_ldap_echec_3' => 'Alternativament, utilizetz pas lo sup&ograve;rt LDAP per importar d\'utilizaires.',
 'avis_conseil_selection_mot_cle' => '<b>Grop important:</b> s\'aconselha f&ograve;rt de seleccionar un mot clau dins aquel grop.',
 'avis_deplacement_rubrique' => 'Atention! Aquela rubrica conten @contient_breves@ br&egrave;vas@scb@: se la despla&ccedil;atz, voldretz ben oscar aquela casa de confirmacion.',
 'avis_destinataire_obligatoire' => 'Dev&egrave;tz indicar un destinatari abans de mandar aquel messatge.',
-'avis_erreur_connexion_mysql' => 'Error de connexion MySQL',
+'avis_erreur_connexion_mysql' => 'Error de connexion SQL',
 'avis_erreur_version_archive' => '<b>Atencion! Lo fichi&egrave;r @archive@ correspond a una autra version d\'SPIP que la qu\'av&egrave;tz installada.</b> Anatz cap a de dificultats grandassas: risca de destruccion de v&ograve;stra basa de donadas, disfoncionaments div&egrave;rses del sit, etc. Validetz pas aquela demanda d\'importacion.<p> Per mai d\'informacions, vejatz
 <A HREF=\'http://www.spip.net/fr_article1489.html\'>
 la documentacion d\'SPIP</a>.',
@@ -41,7 +41,7 @@ la documentacion d\'SPIP</a>.',
 'avis_sites_probleme_syndication' => 'Aqueles sits an encontrat un probl&egrave;ma de sindicacion',
 'avis_sites_syndiques_probleme' => 'Aqueles sits sindicats an pausat un probl&egrave;ma',
 'avis_suppression_base' => 'ATENCION, suprimir las donadas es irreversible',
-'avis_version_mysql' => 'V&ograve;stra version de MySQL (@version_mysql@) permet pas l\'autoreparacion de las taulas de la basa.',
+'avis_version_mysql' => 'V&ograve;stre servidor SQL (@version_mysql@) permet pas l\'autoreparacion de las taulas de la basa.',
 
 
 // B
@@ -59,6 +59,7 @@ la documentacion d\'SPIP</a>.',
 'bouton_checkbox_signature_unique_site' => 'sonque una signatura per sit web',
 'bouton_demande_publication' => 'Demandar la publicacion d\'aqueste article',
 'bouton_desactive_tout' => 'Desactivar tot',
+'bouton_desinstaller' => 'Desinstallar',
 'bouton_effacer_index' => 'Escafar los ind&egrave;xes',
 'bouton_effacer_tout' => 'O escafar tot',
 'bouton_envoi_message_02' => 'MANDAR UN MESSATGE',
@@ -113,7 +114,16 @@ la documentacion d\'SPIP</a>.',
 'cache_mode_non_compresse' => 'Los fichi&egrave;rs de l\'escondedor son registrats en m&ograve;de non comprimit.',
 'cache_modifiable_webmestre' => 'Lo webm&egrave;stre del sit p&ograve;t modificar aqueste param&egrave;tre.',
 'calendrier_synchro' => 'S\'utilizatz un logicial d\'agenda compatible <b>iCal</b>, lo pod&egrave;tz sincronizar amb las informacions d\'aqueste sit.',
+'config_activer_champs' => 'Activar los camps seguents',
+'config_info_logos' => 'Cada element del sit p&ograve;t t&eacute;ner un l&ograve;go, e mai un &laquo;&nbsp;l&ograve;go de subrev&ograve;l&nbsp;&raquo;',
+'config_info_logos_utiliser' => 'Emplegar los l&ograve;gos',
+'config_info_logos_utiliser_non' => 'Emplegar pas los l&ograve;gos',
+'config_info_logos_utiliser_survol' => 'Emplegar los l&ograve;gos de subrev&ograve;l',
+'config_info_logos_utiliser_survol_non' => 'Emplegar pas los l&ograve;gos de subrev&ograve;l',
+'config_info_redirection' => 'En activar aquela opcion, vous poirretz crear d\'articles virtuals, que son de refer&eacute;ncias a d\'articles publicats sus d\'autres sits o f&ograve;ra  SPIP.',
+'config_redirection' => 'Articles virtuals',
 'connexion_ldap' => 'Conexion :',
+'copier_en_local' => 'Copiar en local',
 
 
 // D
@@ -203,6 +213,10 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'icone_creation_groupe_mots' => 'Crear un nov&egrave;l grop de mots',
 'icone_creation_mots_cles' => 'Crear un mot clau n&ograve;u',
 'icone_creer_auteur' => 'Crear un autor n&ograve;u e l\'associar a aquel article',
+'icone_creer_mot_cle' => 'Crear un mot clau n&ograve;u e lo ligar a aquel article',
+'icone_creer_mot_cle_breve' => 'Crear un mot-clau n&ograve;u e lo ligar a aquela br&egrave;va',
+'icone_creer_mot_cle_rubrique' => 'Crear un mot-clau n&ograve;u e lo ligar a aquela rubrica',
+'icone_creer_mot_cle_site' => 'Crear un mot-clau n&ograve;u e lo ligar a aquel sit',
 'icone_creer_rubrique_2' => 'Crear una rubrica n&ograve;va',
 'icone_ecrire_nouvel_article' => 'Las br&egrave;vas contengudas dins aquela rubrica',
 'icone_envoyer_message' => 'Mandar aquel messatge',
@@ -293,16 +307,16 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'info_config_suivi' => 'S\'aquela adrei&ccedil;a correspond a una lista de corri&egrave;r, pod&egrave;tz indicar &ccedil;ai jos l\'adrei&ccedil;a ont los participants al sit se p&ograve;don inscriure. Aquela adrei&ccedil;a p&ograve;t &egrave;stre una URL (per exemple la pagina d\'inscripcion a la lista pel web), o una adrei&ccedil;a e-mail tenent un subj&egrave;cte especific (per exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Vos pod&egrave;tz abonar a la lista de difusion d\'aqueste sit. Alara recebretz per e-mail los anoncis d\'articles e de br&egrave;vas que se prepausa a la publicacion.',
 'info_confirmer_passe' => 'Confirmar aquel mot de santa Clara nov&egrave;l&nbsp;:',
-'info_connexion_base' => 'Segonda estapa: <b>Ensag de connexion a la basa</b>',
+'info_connexion_base' => 'Ensag de connexion a la basa',
 'info_connexion_ldap_ok' => 'La connexion LDAP a capitat.</b><p /> Pod&egrave;tz passar a l\'estapa seguenta.',
-'info_connexion_mysql' => 'Primi&egrave;ra estapa:<b>V&ograve;stra connexion MySQL</b>',
+'info_connexion_mysql' => 'V&ograve;stra connexion SQL',
 'info_connexion_ok' => 'La connexion a capitat.',
 'info_contact' => 'Contacte',
 'info_contenu_articles' => 'Contengut dels articles',
 'info_creation_mots_cles' => 'Creatz e configuratz aic&iacute; los mots clau del sit',
 'info_creation_paragraphe' => '(Per crear de paragrafes, basta que daissetz de linhas vu&egrave;jas.)',
 'info_creation_rubrique' => 'Abans de poder escriure d\'articles,<br /> dev&egrave;tz crear almens una rubrica.<br />',
-'info_creation_tables' => 'Quatrena estapa: <b>Creacion de las taulas de la basa</b>',
+'info_creation_tables' => 'Creacion de las taulas de la basa',
 'info_creer_base' => '<b>Crear</b> una basa de donadas nov&egrave;la:',
 'info_dans_groupe' => 'Dins lo grop&nbsp;:',
 'info_dans_rubrique' => 'Dins la rubrica&nbsp;:',
@@ -311,12 +325,13 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'info_delet_mots_cles' => 'Av&egrave;tz demandat de suprimir lo mot clau
 <b>@titre_mot@</b> (@type_mot@). Aquel mot clau es ligat a
  <b>@texte_lie@</b>. Dev&egrave;tz confirmar aquela decision:',
-'info_derniere_etape' => 'Darri&egrave;ra estapa: Es acabat!',
+'info_derniere_etape' => 'Es acabat!',
 'info_derniere_syndication' => 'La darri&egrave;ra sindicacion d\'aquel sit se fagu&egrave;t lo',
 'info_derniers_articles_publies' => 'V&ograve;stres darri&egrave;rs articles publicats en linha',
 'info_desactiver_forum_public' => 'Desactivar l\'utilizacion dels forums publics. Los forums publics poir&agrave;n &egrave;sser autorizats al cas per cas suls articles; ser&agrave;n pro&iuml;bits sus las rubricas, br&egrave;vas, etc.',
 'info_desactiver_messagerie_personnelle' => 'Pod&egrave;tz activar o desactivar v&ograve;stra messatjari&aacute; personala sus aquel sit.',
 'info_descriptif' => 'Descriptiu&nbsp;:',
+'info_desinstaller_plugin' => 'suprim&iacute;s las donadas et desactiva l\'ajuston ',
 'info_discussion_cours' => 'Discussions en cors',
 'info_ecrire_article' => 'Abans de poder escriure d\'articles, vos cal crear almens una rubrica.',
 'info_email_envoi' => 'Adrei&ccedil;a e-mail de mandad&iacute;s (opcional)',
@@ -371,7 +386,7 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'info_image_process' => 'Volgatz seleccionar lo melhor met&ograve;de de fabricacion de las vinhetas en clicar sus l\'imatge correspondent.',
 'info_image_process2' => '<b>N.B.</b> <i>Se cap d\'imatge apareis pas, aladonc lo servidor qu\'alb&egrave;rga v&ograve;stre sit l\'an pas configurat per utilizar d\'aisinas talas. Se desiratz d\'utilizar aquelas foncions, contactatz lo responsable tecnic e demandatz las extensions &laquo;GD&raquo; o &laquo;Imagick&raquo;.</i>',
 'info_images_auto' => 'Imatges calculats automaticament',
-'info_informations_personnelles' => 'Cinquena estapa: <b>Informacions personalas</b>',
+'info_informations_personnelles' => 'Informacions personalas',
 'info_inscription_automatique' => 'Inscripcion automatica de redactors nov&egrave;ls',
 'info_jeu_caractere' => 'J&ograve;c de caract&egrave;rs del sit',
 'info_jours' => 'jorns',
@@ -389,6 +404,7 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'info_liste_redacteurs_connectes' => 'Ti&egrave;ra dels redactors connectats',
 'info_login_existant' => 'Aquel login ja exist&iacute;s.',
 'info_login_trop_court' => 'Login tr&ograve;p cort.',
+'info_logos' => 'Los l&ograve;gos',
 'info_maximum' => 'maximum:',
 'info_meme_rubrique' => 'Dins la meteissa rubrica',
 'info_message' => 'Messatge del',
@@ -396,7 +412,7 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'info_message_en_redaction' => 'V&ograve;stres messatges en cors de redaccion',
 'info_message_technique' => 'Messatge tecnic:',
 'info_messagerie_interne' => 'Messatjari&aacute; int&egrave;rna',
-'info_mise_a_niveau_base' => 'Mesa a niv&egrave;l de la v&ograve;stra basa MySQL',
+'info_mise_a_niveau_base' => 'Mesa a niv&egrave;l de v&ograve;stra basa SQL',
 'info_mise_a_niveau_base_2' => '{{Atencion!}} Av&egrave;tz installada una version
   dels fichi&egrave;rs SPIP {anteriora} a la que i avi&aacute;
   abans sus aqueste sit: riscatz de p&egrave;rdre v&ograve;stra basa de donadas
@@ -577,6 +593,7 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
 'info_surtitre' => 'Subret&iacute;tol:',
 'info_syndication_integrale_1' => 'V&ograve;stre sit prepausa de fichi&egrave;rs de sindicacion (v&eacute;ser &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
 'info_syndication_integrale_2' => 'Desiratz transmetre l\'integralitat dels articles, o ne difusar pas qu\'un resumit de qualques centenas de caract&egrave;rs&nbsp;?',
+'info_table_prefix' => 'Pod&egrave;tz cambiar lo prefix del nom de las taulas de donadas (aqu&ograve; es indispensable per installar mai d\'un sit dins la meteissa basa de donadas). Aquel prefix s\'esriu en letras minusculas, non accentuadas, e sens espaci.',
 'info_taille_maximale_vignette' => 'Talha maximala de las vinhetas congreadas pel sist&egrave;ma:',
 'info_terminer_installation' => 'Ara pod&egrave;tz acabar la procedura d\'installacion estandard.',
 'info_texte' => 'T&egrave;xt',
@@ -616,11 +633,16 @@ una color indica lor estat:',
 'info_visiteur_2' => 'del sit public',
 'info_visiteurs' => 'Vesitaires',
 'info_visiteurs_02' => 'Vesitaires del sit public',
+'install_adresse_base_hebergeur' => 'Adrei&ccedil;a de la basa de donadas atribuida per l\'albergador',
 'install_echec_annonce' => 'L\'installacion capitar&agrave; mal, o abotir&agrave; a un sit non foncional...',
 'install_extension_mbstring' => 'SPIP fonciona pas amb:',
 'install_extension_php_obligatoire' => 'SPIP exig&iacute;s l\'extension php:',
+'install_login_base_hebergeur' => 'Identificant (login) de connexion atribuit per l\'albergador',
+'install_nom_base_hebergeur' => 'Nom de la basa atribuit per l\'albergador:',
+'install_pass_base_hebergeur' => 'Mot de santa Clara de connexion (password) atribuit per l\'albergador',
 'install_php_version' => 'PHP version @version@ insuffisanta (minimum = @minimum@)',
 'install_select_langue' => 'Seleccionatz una lenga pu&egrave;i clicatz lo boton &laquo;&nbsp;seguent&nbsp;&raquo; per amodar la procedura d\'installacion.',
+'install_table_prefix_hebergeur' => 'Prefix de taula atribuit per l\'albergador:',
 'intem_redacteur' => 'redactor',
 'item_accepter_inscriptions' => 'Acceptar las inscripcions',
 'item_activer_forum_administrateur' => 'Activar lo forum dels administrators',
@@ -750,10 +772,14 @@ una color indica lor estat:',
 
 
 // P
+'pas_de_proxy_pour' => 'Al besonh, indicatz las maquinas o dom&egrave;nis per qual aquel proxy se deu pas aplicar (per exemple&nbsp;: @exemple@)',
 'plugin_etat_developpement' => 'en cors de desvolopament',
 'plugin_etat_experimental' => 'experimental',
 'plugin_etat_stable' => 'estable',
 'plugin_etat_test' => 'a l\'ensag',
+'plugin_impossible_activer' => 'Impossible d\'activar l\'ajuston @plugin@',
+'plugin_necessite_plugin' => 'Demanda l\'ajuston @plugin@ en version @version@ al mens.',
+'plugin_necessite_spip' => 'Demanda SPIP en version @version@ al mens.',
 'plugins_liste' => 'Ti&egrave;ra dels ajustons',
 'protocole_ldap' => 'Version del protoc&ograve;l :',
 
@@ -805,8 +831,9 @@ una color indica lor estat:',
 'texte_breves' => 'Las br&egrave;vas son de t&egrave;xtes corts e simples que permeton de metre en linha l&egrave;u d\'informacions concisas, de gerir
  una revista de premsa, un calendi&egrave;r d\'eveniments...',
 'texte_choix_base_1' => 'Causiss&egrave;tz v&ograve;stra basa:',
-'texte_choix_base_2' => 'Lo servidor MySQL conten mai d\'una basa de donadas.',
+'texte_choix_base_2' => 'Lo servidor SQL conten mai d\'una basa de donadas.',
 'texte_choix_base_3' => '<b>Causiss&egrave;tz</b> &ccedil;ai sota la que v&ograve;stre albergador vos a atribuida:',
+'texte_choix_table_prefix' => 'Prefix de las taulas&nbsp;:',
 'texte_commande_vider_tables_indexation' => 'Utilizatz aquela comanda per vojar las taulas d\'indexacion utilizadas pel cercador integrat a SPIP. Aqu&ograve; permetr&agrave;
  de ganhar d\'espaci disc.',
 'texte_comment_lire_tableau' => 'Lo reng de l\'article,
@@ -820,7 +847,7 @@ qu\'apareis quora la mirga passa sul t&iacute;tol.',
 'texte_config_groupe_mots_cles' => 'Desiratz d\'activar la configuracion avan&ccedil;ada dels mots clau,
  en indicant per exemple que se p&ograve;t seleccionar un mot unenc
  per grop, qu\'un grop es important...?',
-'texte_connexion_mysql' => 'Consultatz las informacions que v&ograve;stre albergador forn&iacute;s: i dev&egrave;tz trobar, se v&ograve;stre albergador sup&ograve;rta MySQL, los c&ograve;des de connexion al servidor MySQL.',
+'texte_connexion_mysql' => 'Consultatz las informacions que v&ograve;stre albergador forn&iacute;s: i dev&egrave;tz trobar los c&ograve;des de connexion al servidor SQL.',
 'texte_contenu_article' => '(Contengut de l\'article en qualques mots.)',
 'texte_contenu_articles' => 'Segon la maqueta que v&ograve;stre sit a adoptada, pod&egrave;tz decidir
  que d\'unes elements dels articles s\'utilizen pas.
@@ -902,10 +929,8 @@ qu\'apareis quora la mirga passa sul t&iacute;tol.',
 'texte_port_annuaire' => '(La valor indicada coma predefinida conven en general.)',
 'texte_presente_plugin' => 'Aquela pagina lista los ajustons disponibles sus lo sit. Pod&egrave;tz activar los ajustons necessaris en marcar la casa correspondenta.',
 'texte_proposer_publication' => 'Quora auretz acabat v&ograve;stre article,<br /> poiretz prepausar que si&aacute; publicat.',
-'texte_proxy' => 'Dins d\'unes cases (intranet, rets protegidas...),
-  se p&ograve;t que calga utilizar un <i>proxy HTTP</i> per at&eacute;nher los sits sindicats.
-  En aquel cas, marcatz &ccedil;ai sota son adrei&ccedil;a, jos la forma
-  <tt><html>http://proxy:8080</html></tt>. En general,
+'texte_proxy' => 'Dins d\'unes cases (intranet, rets protegidas...), los sits distants (documentacion d\'SPIP, sits sindicats, etc.) son pas accessibles qu\'a trav&egrave;rs d\'un <i>proxy HTTP</i>.
+  En aquel cas, marcatz &ccedil;ai sota son adrei&ccedil;a, jos la forma@proxy_en_cours@. En general,
   daissaretz vu&egrave;ja aquela casa.',
 'texte_publication_articles_post_dates' => 'Coss&iacute; SPIP se deu comportar f&agrave;cia als articles que lor
   data de publicacion es fixada a una 
@@ -917,10 +942,10 @@ tornar calcular sonque una pagina, passatz pusl&egrave;u per l\'espaci public e 
 'texte_recuperer_base' => 'Reparar la basa de donadas',
 'texte_reference_mais_redirige' => 'article referenciat dins v&ograve;stre sit SPIP, mas redirigit cap a una autra URL.',
 'texte_referencement_automatique' => '<b>Refer&eacute;nciament automatizat d\'un sit</b><br /> Pod&egrave;tz referenciar l&egrave;u-l&egrave;u un sit web en indicar &ccedil;ai sota l\'adrei&ccedil;a URL desirada, o l\'adrei&ccedil;a de son fichi&egrave;r de sindicacion. SPIP agantar&agrave; automaticament las informacions que concernisson aquel sit (t&iacute;tol, descripcion...).',
-'texte_requetes_echouent' => '<b>Quora d\'unas requistas MySQL abocan
+'texte_requetes_echouent' => '<b>Quora d\'unas requistas SQL abocan
   sistematicament e sens rason aparenta, se p&ograve;t
   qu\'aqu&ograve; venga de la quita basa de donadas.  </b><p />
-  MySQL ten la facultat de reparar sas
+  SQL ten la facultat de reparar sas
   taulas quora un accident las
  a esquintadas. Aic&iacute; pod&egrave;tz ensajar aquela reparacion; se 
   capita pas, servatz una c&ograve;pia de l\'afichatge, que conten
