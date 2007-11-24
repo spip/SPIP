@@ -1,0 +1,23 @@
+[(#REM)
+
+	Presenter les regles du jeu du forum sur abonnement
+	avec un lien vers la connexion / l'inscription / le rappel
+
+]
+
+<div class="formulaire_spip formulaire_forum">
+<form>
+<fieldset>
+<legend class="reponse_formulaire"><:Forum:> <:bouton_radio_modere_abonnement:></legend>
+
+<p><:forum_vous_enregistrer:> <:forum_vous_inscrire:></p>
+
+&#91;<a href="[(#URL_PAGE{login}|parametre_url{url,#SELF})]"><:login:></a>&#93;
+
+[&#91;<a href="(#ENV{inscription})&amp;mode=6forum[(&amp;id_rubrique=(#ENV{id_rubrique})]&amp;focus=nom_inscription" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=340'); return false;"><:login_sinscrire:></a>&#93;]
+
+[&#91;<a href="(#ENV{oubli})" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=340'); return false;"><:login_motpasseoublie:></a>&#93;]
+
+</fieldset>
+</form>
+</div>
