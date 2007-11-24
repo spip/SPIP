@@ -17,6 +17,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@inc_auth_ldap_dist
 function inc_auth_ldap_dist ($login, $pass) {
 
+	if (!spip_connect_ldap())
+		return false;
+
 	#spip_log("ldap $login " . ($pass ? "mdp fourni" : "mdp absent"));
 	// Securite contre un serveur LDAP laxiste
 	if (!$login || !$pass) return array();

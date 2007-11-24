@@ -35,7 +35,15 @@
 <div id='minipres'>
 
 		<h3 class="spip">#NOM_SITE_SPIP<br />
-			<small><:login_acces_prive:></small>
+
+	[(#REM)
+		Est-ce qu'on se connecte a l'espace prive ou pas ?
+	]
+	[(#ENV{url}|=={''}|?{#SET{prive,' '}})]
+	[(#ENV{url}|match{'^ecrire/'}|?{#SET{prive,' '}})]
+	[(#GET{prive}) <small><:login_acces_prive:></small>]
+	[(#GET{prive}|?{'',' '}) <!-- ?? -->]
+	
 		</h3>
 
 		#MENU_LANG_ECRIRE

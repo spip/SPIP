@@ -113,7 +113,8 @@ function inc_auth_dist() {
 		}
 	}
 
-	$where = (is_numeric($connect_id_auteur)) ?
+	$where = (is_numeric($connect_id_auteur)
+	AND $connect_id_auteur>0) ?
 	  "id_auteur=$connect_id_auteur" :
 	  (!$connect_login ? '' : "login=" . sql_quote($connect_login));
 

@@ -48,6 +48,11 @@ function action_logout_dist()
 			}
 		}
 	}
-	redirige_par_entete($url ? $url : generer_url_public('login'));
+
+	// Rediriger en contrant le cache navigateur (Safari3)
+	redirige_par_entete($url
+		? parametre_url($url, 'var_hasard', uniqid(), '&')
+		: generer_url_public('login'));
 }
+
 ?>

@@ -48,6 +48,7 @@ function inc_session_dist($auteur=false)
 function ajouter_session($auteur) {
 	// Si le client a deja une session valide pour son id_auteur
 	// on conserve le meme fichier
+	$auteur['id_auteur'] = intval($auteur['id_auteur']);
 	if (!isset($_COOKIE['spip_session'])
 	OR !preg_match(',^'.$auteur['id_auteur'].'_,', $_COOKIE['spip_session']))
 		$_COOKIE['spip_session'] = $auteur['id_auteur'].'_'.md5(uniqid(rand(),true));
@@ -77,9 +78,10 @@ function ajouter_session($auteur) {
 // http://doc.spip.org/@ecrire_fichier_session
 function ecrire_fichier_session($fichier, $auteur) {
 	$texte = "<"."?php\n";
-	foreach (array('id_auteur', 'nom', 'login', 'email', 'statut', 'lang', 'ip_change', 'hash_env', 'bio', 'pgp', 'nom_site', 'url_site', 'en_ligne') AS $var) {
-		$texte .= '$GLOBALS[\'auteur_session\'][\''.$var.'\'] = '
-			. _q($auteur[$var]).";\n";
+	foreach (array('id_auteur', 'nom', 'login', 'email', 'statut', 'lang', 'ip_change', 'hash_env', 'bio', 'pgp', 'nom_site', 'url_site', 'en_ligne', 'auth', 'session_nom', 'session_email') AS $var) {
+		if (isset($auteur[$var]))
+			$texte .= '$GLOBALS[\'auteur_session\'][\''.$var.'\'] = '
+				. _q($auteur[$var]).";\n";
 	}
 	$texte .= "?".">\n";
 
@@ -89,7 +91,7 @@ function ecrire_fichier_session($fichier, $auteur) {
 //
 // Cette fonction efface toutes les sessions appartenant a l'auteur
 // On en profite pour effacer toutes les sessions creees il y a plus de 48 h
-// Tenir compte de l'ancien format où les noms commencaient par "session_"
+// Tenir compte de l'ancien format ou les noms commencaient par "session_"
 // et du meme coup des repertoires plats
 
 // http://doc.spip.org/@supprimer_sessions
@@ -104,6 +106,9 @@ function supprimer_sessions($id_auteur) {
 				spip_unlink($f);
 		}
 	}
+
+	// forcer le recalcul de la session courante
+	spip_session(true);
 }
 
 //
@@ -154,6 +159,7 @@ function verifier_session($change=false) {
 		unset($_COOKIE['spip_session']);
 		ajouter_session($GLOBALS['auteur_session']);
 	}
+
 	return $GLOBALS['auteur_session']['id_auteur'];
 }
 

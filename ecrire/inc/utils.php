@@ -1207,15 +1207,40 @@ function spip_desinfecte(&$t) {
 // http://doc.spip.org/@verifier_visiteur
 function verifier_visiteur() {
 
+	// Demarrer une session NON AUTHENTIFIEE si on donne son nom
+	// dans un formulaire sans login (ex: #FORMULAIRE_FORUM)
+	// Attention on separe bien session_nom et nom, pour eviter
+	// les melanges entre donnees SQL et variables plus aleatoires
+	if (
+		_request('session_nom')
+		OR _request('session_email')
+	) {
+		@spip_initialisation();
+		$session = charger_fonction('session', 'inc');
+		include_spip('inc/texte');
+		$GLOBALS['auteur_session'] = array (
+			'session_nom' => safehtml(_request('session_nom')),
+			'session_email' => safehtml(_request('session_email')),
+			'id_auteur' => 0,
+			'statut' => '',
+			'auth' => ''
+		);
+		ajouter_session($GLOBALS['auteur_session']);
+		return 0;
+	}
+
+
 	if (isset($_COOKIE['spip_session']) OR
 	(isset($_SERVER['PHP_AUTH_USER'])  AND !$GLOBALS['ignore_auth_http'])) {
 
-		// Rq: pour que cette fonction marche depuis mes_options 
+		// Rq: pour que cette fonction marche depuis mes_options
 		// il faut forcer l'init si ce n'est fait
 		@spip_initialisation();
 
 		$session = charger_fonction('session', 'inc');
-		if ($session()) return $GLOBALS['auteur_session']['statut'];
+		if ($session()) {
+			return $GLOBALS['auteur_session']['statut'];
+		}
 		include_spip('inc/actions');
 		return verifier_php_auth();
 	}
