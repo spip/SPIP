@@ -428,7 +428,7 @@ function echappe_js($t,$class='') {
 }
 // http://doc.spip.org/@protege_js_modeles
 function protege_js_modeles($t) {
-	if (isset($GLOBALS['auteur_session'])){
+	if (isset($GLOBALS['visiteur_session'])){
 		if (!defined('_PROTEGE_JS_MODELES')){
 			include_spip('inc/acces');
 			define('_PROTEGE_JS_MODELES',creer_uniqid());

@@ -530,11 +530,11 @@ function debug_affiche($fonc, $tout, $objet, $affiche)
 // http://doc.spip.org/@debug_debut
 function debug_debut($titre)
 {
-	global $auteur_session;
+	global $visiteur_session;
 	include_spip('inc/headers');
 	include_spip('inc/filtres');
 	http_no_cache();
-	lang_select($auteur_session['lang']);
+	lang_select($visiteur_session['lang']);
 	return _DOCTYPE_ECRIRE .
 	  html_lang_attributes() .
 	  "<head>\n<title>" .

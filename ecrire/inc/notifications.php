@@ -100,7 +100,7 @@ function notifier_publication_article($id_article) {
 			$sujet = _T('info_publie_1', array('nom_site_spip' => $nom_site_spip, 'titre' => $titre));
 			$courr = _T('info_publie_2')."\n\n";
 
-			$nom = $GLOBALS['auteur_session']['nom'];
+			$nom = $GLOBALS['visiteur_session']['nom'];
 			$nom = trim(supprimer_tags(typo($nom)));
 			$courr .= _T('info_publie_01', array('titre' => $titre, 'connect_nom' => $nom))
 				. "\n\n"
@@ -276,7 +276,7 @@ function notifications_forumvalide_dist($quoi, $id_forum) {
 	foreach ($tous as $m) {
 		if ($m = email_valide($m)
 		AND $m != trim($t['email_auteur'])
-		AND $m != $GLOBALS['auteur_session']['email']
+		AND $m != $GLOBALS['visiteur_session']['email']
 		AND !in_array($m, $pasmoi))
 			$destinataires[$m]++;
 	}

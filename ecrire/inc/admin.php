@@ -58,7 +58,7 @@ function inc_admin_dist($script, $titre, $comment='', $anonymous=false)
 function admin_verifie_session($script) {
 
 	include_spip('base/abstract_sql');
-	$pref = sprintf("_%d_",$GLOBALS['auteur_session']['id_auteur']);
+	$pref = sprintf("_%d_",$GLOBALS['visiteur_session']['id_auteur']);
 	$signal = fichier_admin($script, "$script$pref");
 	$valeur = sql_getfetsel('valeur', 'spip_meta', "nom='admin'");
 	if ($valeur === NULL) {
@@ -66,7 +66,7 @@ function admin_verifie_session($script) {
 	} else {
 		if ($valeur != $signal) {
 			if (intval(substr($valeur, strpos($valeur,'_')+1))<>
-			    $GLOBALS['auteur_session']['id_auteur']) {
+			    $GLOBALS['visiteur_session']['id_auteur']) {
 				include_spip('inc/minipres');
 				return minipres(_T('info_travaux_texte'));
 			}
@@ -82,7 +82,7 @@ function dir_admin()
 	if (autoriser('configurer')) {
 		return _DIR_TMP;
 	} else {
-		return  _DIR_TRANSFERT . $GLOBALS['auteur_session']['login'] . '/';
+		return  _DIR_TRANSFERT . $GLOBALS['visiteur_session']['login'] . '/';
 	}
 }
 
@@ -90,7 +90,7 @@ function dir_admin()
 function fichier_admin($action, $pref='admin_') {
 
 	return $pref . 
-	  substr(md5($action.(time() & ~2047).$GLOBALS['auteur_session']['login']), 0, 10);
+	  substr(md5($action.(time() & ~2047).$GLOBALS['visiteur_session']['login']), 0, 10);
 }
 
 // demande la creation d'un repertoire et sort

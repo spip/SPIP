@@ -43,7 +43,7 @@ function balise_LOGIN_PUBLIC_dyn($url, $login) {
 
 // http://doc.spip.org/@login_explicite
 function login_explicite($login, $cible) {
-	global $auteur_session;
+	global $visiteur_session;
 
 	$action = parametre_url(self(), '', '', '&');
 	if ($cible) {
@@ -63,7 +63,7 @@ function login_explicite($login, $cible) {
 		include_spip('inc/autoriser');
 		$loge = autoriser('ecrire');
 	} else {
-		$loge = ($auteur_session['auth'] != '');
+		$loge = ($visiteur_session['auth'] != '');
 	}
 
 	if ($loge) {

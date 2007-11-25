@@ -17,23 +17,23 @@ include_spip('inc/cookie');
 // http://doc.spip.org/@action_logout_dist
 function action_logout_dist()
 {
-	global $auteur_session, $ignore_auth_http;
+	global $visiteur_session, $ignore_auth_http;
 	$logout =_request('logout');
 	$url = _request('url');
-	spip_log("logout $logout $url" . $auteur_session['id_auteur']);
+	spip_log("logout $logout $url" . $visiteur_session['id_auteur']);
 	// cas particulier, logout dans l'espace public
 	if ($logout == 'public' AND !$url)
 		$url = url_de_base();
 
 	// seul le loge peut se deloger (mais id_auteur peut valoir 0 apres une restauration avortee)
-	if (is_numeric($auteur_session['id_auteur'])) {
+	if (is_numeric($visiteur_session['id_auteur'])) {
 		sql_updateq('spip_auteurs', 
 			   array('en_ligne' => 'DATE_SUB(NOW(),INTERVAL 15 MINUTE)'),
-			"id_auteur=" . $auteur_session['id_auteur']);
+			"id_auteur=" . $visiteur_session['id_auteur']);
 	// le logout explicite vaut destruction de toutes les sessions
 		if (isset($_COOKIE['spip_session'])) {
 			$session = charger_fonction('session', 'inc');
-			$session($auteur_session['id_auteur']);
+			$session($visiteur_session['id_auteur']);
 			spip_setcookie('spip_session', $_COOKIE['spip_session'], time()-3600);
 		}
 		if (isset($_SERVER['PHP_AUTH_USER']) AND !$ignore_auth_http) {

@@ -31,7 +31,7 @@ function action_editer_auteur_dist() {
 
 // http://doc.spip.org/@action_legender_auteur_post
 function action_legender_auteur_post($r) {
-	global $auteur_session;
+	global $visiteur_session;
 
 	$bio = _request('bio');
 	$email = trim(_request('email'));
@@ -122,7 +122,7 @@ function action_legender_auteur_post($r) {
 		$auteur['low_sec'] = '';
 	}
 
-	if ($modif_login AND ($auteur['id_auteur']<>$auteur_session['id_auteur'])) {
+	if ($modif_login AND ($auteur['id_auteur']<>$visiteur_session['id_auteur'])) {
 		// supprimer les sessions de cet auteur
 		$session = charger_fonction('session', 'inc');
 		$session($auteur['id_auteur']);
@@ -137,7 +137,7 @@ function action_legender_auteur_post($r) {
 		$auteur['email'] = $email;
 	}
 
-	if ($auteur_session['id_auteur'] == $id_auteur) {
+	if ($visiteur_session['id_auteur'] == $id_auteur) {
 		$auteur['imessage'] = $perso_activer_imessage;
 	}
 
@@ -170,7 +170,7 @@ function action_legender_auteur_post($r) {
 			$auteur['id_auteur'] = $id_auteur = sql_insertq("spip_auteurs", array('nom' => 'temp', 'statut' => $statut));
 
 			// recuperer l'eventuel logo charge avant la creation
-			$id_hack = 0 - $GLOBALS['auteur_session']['id_auteur'];
+			$id_hack = 0 - $GLOBALS['visiteur_session']['id_auteur'];
 			$chercher_logo = charger_fonction('chercher_logo', 'inc');
 			if (list($logo) = $chercher_logo($id_hack, 'id_auteur', 'on'))
 				rename($logo, str_replace($id_hack, $id_auteur, $logo));
@@ -219,17 +219,17 @@ function action_legender_auteur_post($r) {
 	ecrire_acces();
 
 	// .. mettre a jour les sessions de cet auteur
-	$sauve = $GLOBALS['auteur_session'];
+	$sauve = $GLOBALS['visiteur_session'];
 	include_spip('inc/session');
 	foreach(preg_files(_DIR_SESSIONS, '/'.$id_auteur.'_.*\.php') as $session) {
-		$GLOBALS['auteur_session'] = array();
-		include $session; # $GLOBALS['auteur_session'] est alors l'auteur cible
+		$GLOBALS['visiteur_session'] = array();
+		include $session; # $GLOBALS['visiteur_session'] est alors l'auteur cible
 		foreach (array('nom', 'login', 'email', 'statut', 'bio', 'pgp', 'nom_site', 'url_site') AS $var)
 			if (isset($auteur[$var]))
-				$GLOBALS['auteur_session'][$var] = $auteur[$var];
-		ecrire_fichier_session($session, $GLOBALS['auteur_session']);
+				$GLOBALS['visiteur_session'][$var] = $auteur[$var];
+		ecrire_fichier_session($session, $GLOBALS['visiteur_session']);
 	}
-	$GLOBALS['auteur_session'] = $sauve;
+	$GLOBALS['visiteur_session'] = $sauve;
 
 	$echec = $echec ? '&echec=' . join('@@@', $echec) : '';
 

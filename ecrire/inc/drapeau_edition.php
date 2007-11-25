@@ -91,7 +91,7 @@ function qui_edite ($id, $type='article') {
 // http://doc.spip.org/@mention_qui_edite
 function mention_qui_edite ($id, $type='article') {
 	$modif = qui_edite($id, $type);
-	unset($modif[$GLOBALS['auteur_session']['id_auteur']]);
+	unset($modif[$GLOBALS['visiteur_session']['id_auteur']]);
 
 	if ($modif) {
 		$quand = 0;

@@ -25,7 +25,7 @@ function balise_URL_LOGOUT_stat ($args, $filtres) {
 // http://doc.spip.org/@balise_URL_LOGOUT_dyn
 function balise_URL_LOGOUT_dyn($cible) {
 
-	if (!$GLOBALS['auteur_session']['login']) return '';
+	if (!$GLOBALS['visiteur_session']['login']) return '';
 
 	return generer_url_action('logout',"logout=public&url=" . rawurlencode($cible ? $cible : self('&')));
 }

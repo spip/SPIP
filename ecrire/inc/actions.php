@@ -251,10 +251,10 @@ function determine_upload($type='') {
 		$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
 	}
 
-	if (!$GLOBALS['auteur_session']['restreint'])
+	if (!$GLOBALS['visiteur_session']['restreint'])
 		return $repertoire;
 	else
-		return sous_repertoire($repertoire, $GLOBALS['auteur_session']['login']);
+		return sous_repertoire($repertoire, $GLOBALS['visiteur_session']['login']);
 }
 
 //
@@ -284,8 +284,8 @@ function verifier_php_auth() {
 	if (@$_SERVER['PHP_AUTH_USER'] && $_SERVER['PHP_AUTH_PW']
 	&& !@$GLOBALS['ignore_auth_http']) {
 		if ($r = lire_php_auth($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])) {
-		  $GLOBALS['auteur_session'] = $r;
-		  return $GLOBALS['auteur_session']['statut'];
+		  $GLOBALS['visiteur_session'] = $r;
+		  return $GLOBALS['visiteur_session']['statut'];
 		} 
 	}
 	return false;

@@ -402,7 +402,7 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 // http://doc.spip.org/@editer_mot_droits
 function editer_mot_droits($select, $cond)
 {
-	$droit = substr($GLOBALS['auteur_session']['statut'],1);
+	$droit = substr($GLOBALS['visiteur_session']['statut'],1);
 	return sql_select("$select", "spip_groupes_mots", "$droit = 'oui' AND $cond");
 }
 ?>

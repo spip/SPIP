@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function exec_export_all_dist()
 {
 	$rub = intval(_request('id_parent'));
-	$meta = 'status_dump_'  . $GLOBALS['auteur_session']['id_auteur'];
+	$meta = 'status_dump_'  . $GLOBALS['visiteur_session']['id_auteur'];
 
 	if (isset($GLOBALS['meta'][$meta]))
 		exec_export_all_args($rub, $meta);

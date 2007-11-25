@@ -19,7 +19,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *
  */
 
-$GLOBALS['auteur_session'] = ''; # globale decrivant l'auteur
+$GLOBALS['visiteur_session'] = ''; # globale decrivant l'auteur
 $GLOBALS['rejoue_session'] = ''; # globale pour insertion de JS en fin de page
 
 //
@@ -80,7 +80,7 @@ function ecrire_fichier_session($fichier, $auteur) {
 	$texte = "<"."?php\n";
 	foreach (array('id_auteur', 'nom', 'login', 'email', 'statut', 'lang', 'ip_change', 'hash_env', 'bio', 'pgp', 'nom_site', 'url_site', 'en_ligne', 'auth', 'session_nom', 'session_email') AS $var) {
 		if (isset($auteur[$var]))
-			$texte .= '$GLOBALS[\'auteur_session\'][\''.$var.'\'] = '
+			$texte .= '$GLOBALS[\'visiteur_session\'][\''.$var.'\'] = '
 				. _q($auteur[$var]).";\n";
 	}
 	$texte .= "?".">\n";
@@ -113,7 +113,7 @@ function supprimer_sessions($id_auteur) {
 
 //
 // Verifie si le cookie spip_session indique une session valide.
-// Si oui, la decrit dans le tableau $auteur_session et retourne id_auteur
+// Si oui, la decrit dans le tableau $visiteur_session et retourne id_auteur
 // La rejoue si IP change puis accepte le changement si $change=true
 //
 
@@ -136,31 +136,37 @@ function verifier_session($change=false) {
 		// Renouveler la session avec l'alea courant
 		include($fichier_session);
 		spip_unlink($fichier_session);
-		ajouter_session($GLOBALS['auteur_session']);
+		ajouter_session($GLOBALS['visiteur_session']);
 	}
+
+	// Compatibilite ascendante : auteur_session est visiteur_session si
+	// c'est un auteur SPIP authentifie (tandis qu'un visiteur_session peut
+	// n'etre qu'identifie, sans aucune authentification).
+	if ($GLOBALS['visiteur_session']['auth'])
+		$GLOBALS['auteur_session'] = &$GLOBALS['visiteur_session'];
 
 	// Si l'adresse IP change, inc/presentation mettra une balise image
 	// avec un URL de rappel demandant a changer le nom de la session.
 	// Seul celui qui a l'IP d'origine est rejoue
 	// ainsi un eventuel voleur de cookie ne pourrait pas deconnecter
 	// sa victime, mais se ferait deconnecter par elle.
-	if (hash_env() != $GLOBALS['auteur_session']['hash_env']) {
-		if (!$GLOBALS['auteur_session']['ip_change']) {
+	if (hash_env() != $GLOBALS['visiteur_session']['hash_env']) {
+		if (!$GLOBALS['visiteur_session']['ip_change']) {
 			$GLOBALS['rejoue_session'] = rejouer_session();
-			$GLOBALS['auteur_session']['ip_change'] = true;
-			ajouter_session($GLOBALS['auteur_session']);
+			$GLOBALS['visiteur_session']['ip_change'] = true;
+			ajouter_session($GLOBALS['visiteur_session']);
 		} else if ($change) {
 			spip_log("session non rejouee, vol de cookie ?");
 		}
 	} else if ($change) {
 		spip_log("rejoue session $fichier_session ".$_COOKIE['spip_session']);
 		spip_unlink($fichier_session);
-		$GLOBALS['auteur_session']['ip_change'] = false;
+		$GLOBALS['visiteur_session']['ip_change'] = false;
 		unset($_COOKIE['spip_session']);
-		ajouter_session($GLOBALS['auteur_session']);
+		ajouter_session($GLOBALS['visiteur_session']);
 	}
 
-	return $GLOBALS['auteur_session']['id_auteur'];
+	return $GLOBALS['visiteur_session']['id_auteur'];
 }
 
 // Code a inserer par inc/presentation pour rejouer la session

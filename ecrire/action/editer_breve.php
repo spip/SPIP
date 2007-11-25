@@ -158,7 +158,7 @@ function revisions_breves ($id_breve, $c=false) {
 	// une alerte sera donnee aux autres redacteurs sur exec=breves_voir
 	if ($GLOBALS['meta']['articles_modif'] != 'non') {
 		include_spip('inc/drapeau_edition');
-		signale_edition ($id_breve, $GLOBALS['auteur_session'], 'breve');
+		signale_edition ($id_breve, $GLOBALS['visiteur_session'], 'breve');
 	}
 
 	//

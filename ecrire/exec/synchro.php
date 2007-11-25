@@ -88,7 +88,7 @@ function exec_synchro_dist()
 	echo _T('calendrier_synchro');
 	echo '<p>'._T('ical_info_calendrier').'</p>';
 
-	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+	$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
 
 	afficher_liens_calendrier(generer_url_public('ical'),'', _T('ical_texte_public'));
 

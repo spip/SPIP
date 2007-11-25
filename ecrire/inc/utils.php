@@ -1174,7 +1174,7 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 				- substr_count($GLOBALS['meta']['adresse_site'],'/'));
 		}
 	}
-	// s'il y a un cookie ou PHP_AUTH, initialiser auteur_session
+	// s'il y a un cookie ou PHP_AUTH, initialiser visiteur_session
 	if (_FILE_CONNECT) verifier_visiteur();
 
 	# nombre de pixels maxi pour calcul de la vignette avec gd
@@ -1225,10 +1225,10 @@ function verifier_visiteur() {
 		include_spip('inc/texte');
 		foreach($variables_session as $var)
 			if (($a = _request('session_'.$var)) !== null)
-				$GLOBALS['auteur_session']['session_'.$var] = safehtml($a);
-		if (!isset($GLOBALS['auteur_session']['id_auteur']))
-			$GLOBALS['auteur_session']['id_auteur'] = 0;
-		ajouter_session($GLOBALS['auteur_session']);
+				$GLOBALS['visiteur_session']['session_'.$var] = safehtml($a);
+		if (!isset($GLOBALS['visiteur_session']['id_auteur']))
+			$GLOBALS['visiteur_session']['id_auteur'] = 0;
+		ajouter_session($GLOBALS['visiteur_session']);
 		return 0;
 	}
 
@@ -1242,7 +1242,7 @@ function verifier_visiteur() {
 
 		$session = charger_fonction('session', 'inc');
 		if ($session()) {
-			return $GLOBALS['auteur_session']['statut'];
+			return $GLOBALS['visiteur_session']['statut'];
 		}
 		include_spip('inc/actions');
 		return verifier_php_auth();
@@ -1286,8 +1286,8 @@ function spip_session($force = false) {
 	static $session;
 	if ($force OR !isset($session)) {
 		$s = pipeline('definir_session',
-			$GLOBALS['auteur_session']
-			? serialize($GLOBALS['auteur_session'])
+			$GLOBALS['visiteur_session']
+			? serialize($GLOBALS['visiteur_session'])
 				. '_' . @$_COOKIE['spip_session']
 			: ''
 		);

@@ -301,9 +301,9 @@ function export_subdir($rub)
 	include_spip('inc/actions');
 	// determine upload va aussi initialiser l'index "restreint"
 	$dir = determine_upload();
-	if (!$GLOBALS['auteur_session']['restreint'])
+	if (!$GLOBALS['visiteur_session']['restreint'])
 		$dir = _DIR_DUMP;
-	$subdir = 'export_' . $GLOBALS['auteur_session']['id_auteur'] . '_' . intval($rub);
+	$subdir = 'export_' . $GLOBALS['visiteur_session']['id_auteur'] . '_' . intval($rub);
 	return sous_repertoire($dir, $subdir);
 }
 

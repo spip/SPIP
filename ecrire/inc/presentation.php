@@ -778,12 +778,12 @@ function forum_logo($statut)
 
 // http://doc.spip.org/@envoi_link
 function envoi_link($nom_site_spip, $minipres=false) {
-	global $auteur_session, $spip_display, $spip_lang;
+	global $visiteur_session, $spip_display, $spip_lang;
 
 	$couleurs = charger_fonction('couleurs', 'inc');
 	$paramcss = 'ltr='
 	. $GLOBALS['spip_lang_left'] . '&'
-	. $couleurs($auteur_session['prefs']['couleur']);
+	. $couleurs($visiteur_session['prefs']['couleur']);
 
 	// CSS de secours en cas de non fonct de la suivante
 	$res = '<link rel="stylesheet" type="text/css" href="'
@@ -1363,7 +1363,7 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 	$titre = ($type!='syndic'?'titre':'nom_site');
 	$exec = array('article'=>'articles','breve'=>'breves_voir','syndic'=>'sites');
 
-	$where = (($GLOBALS['auteur_session']['statut'] == '0minirezo')
+	$where = (($GLOBALS['visiteur_session']['statut'] == '0minirezo')
 		  ? ''
 		  :  "(statut = 'publie' OR statut = 'prop') AND ") 
 	. "id_rubrique=$id_rubrique AND ($prim != $id)";

@@ -22,7 +22,7 @@ function action_editer_article_dist() {
 	// mais on verifie qu'on a toutes les données qu'il faut.
 	if (!$id_article = intval($arg)) {
 		$id_parent = _request('id_parent');
-		$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
 		if (!($id_parent AND $id_auteur))
 			redirige_par_entete(generer_url_ecrire());
 		if (($id_article = insert_article($id_parent)) > 0)
@@ -80,7 +80,7 @@ function insert_article($id_rubrique) {
 	// ou a defaut celle de la rubrique
 	// Sinon c'est la langue de la rubrique qui est choisie + heritee
 	if ($GLOBALS['meta']['multi_articles'] == 'oui') {
-		lang_select($GLOBALS['auteur_session']['lang']);
+		lang_select($GLOBALS['visiteur_session']['lang']);
 		if (in_array($GLOBALS['spip_lang'],
 		explode(',', $GLOBALS['meta']['langues_multilingue']))) {
 			$lang = $GLOBALS['spip_lang'];
@@ -105,7 +105,7 @@ function insert_article($id_rubrique) {
 
 	// controler si le serveur n'a pas renvoye une erreur
 	if ($id_article > 0) 
-		sql_insertq('spip_auteurs_articles', array('id_auteur' => $GLOBALS['auteur_session']['id_auteur'], 'id_article' => $id_article));;
+		sql_insertq('spip_auteurs_articles', array('id_auteur' => $GLOBALS['visiteur_session']['id_auteur'], 'id_article' => $id_article));;
 
 	return $id_article;
 }
