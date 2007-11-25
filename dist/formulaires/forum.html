@@ -84,13 +84,19 @@ if (window.jQuery)(function($){
 	$.getScript('[(#CHEMIN{javascript/jquery.cookie.js}|url_absolue)]',
 	function(){
 		var a = $.cookie('spip_contenu_formulaire');
+		var saveauto = true;
 		if (a) {
 			$('#formulaire_forum textarea[name=texte]')
 			.val(a);
 			$.cookie('spip_contenu_formulaire', null);
 		}
+		$('#formulaire_forum form')
+		.bind('submit', function() {
+			saveauto = false;
+		});
 		$(window)
 		.bind('unload', function(){
+			if (saveauto)
 			$.cookie('spip_contenu_formulaire',
 				$('#formulaire_forum textarea[name=texte]').val()
 			);
