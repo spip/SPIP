@@ -217,12 +217,16 @@ function calculer_where($v)
 // http://doc.spip.org/@spip_select_as
 function spip_select_as($args)
 {
-	$argsas = "";
+	if (isset($args[-1])) {
+		$join = ' ' . $args[-1];
+		unset($args[-1]);
+	} else $join ='';
+	$res = '';
 	foreach($args as $k => $v) {
-		if (strpos($v, 'JOIN') === false)  $argsas .= ', ';
-		$argsas .= $v . (is_numeric($k) ? '' : " AS `$k`");
+		$res .= ', ' . $v . (is_numeric($k) ? '' : " AS `$k`") . $join;
+		$join = '';
 	}
-	return substr($argsas,2);
+	return substr($res,2);
 }
 
 //
