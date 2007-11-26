@@ -122,7 +122,7 @@ $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic,
 $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 {
 
-	// verifier l'identite des posteurs pour les forums sur abo
+	// exiger l'authentification des posteurs pour les forums sur abo
 	if ($type == "abo") {
 		if (!$GLOBALS["visiteur_session"]['statut']) {
 			return array('formulaires/login_forum_abo',
@@ -135,10 +135,6 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 			);
 		}
 	}
-
-	// Indiquer le nom du visiteur
-	$auteur = $GLOBALS['visiteur_session']['nom'];
-	$email_auteur = $GLOBALS['visiteur_session']['email'];
 
 	// Tableau des valeurs servant au calcul d'une signature de securite.
 	// Elles seront placees en Input Hidden pour que inc/forum_insert
@@ -186,7 +182,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 		$ajouter_groupe = _request('ajouter_groupe');
 
 		if ($afficher_texte != 'non') 
-			$previsu = inclure_previsu($texte, $titre, $email_auteur, $auteur, $url_site, $nom_site, $ajouter_mot);
+			$previsu = inclure_previsu($texte, $titre, $url_site, $nom_site, $ajouter_mot);
 
 		$arg = forum_fichier_tmp(join('', $ids));
 
@@ -223,7 +219,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 }
 
 // http://doc.spip.org/@inclure_previsu
-function inclure_previsu($texte,$titre, $email_auteur, $auteur, $url_site, $nom_site, $ajouter_mot)
+function inclure_previsu($texte,$titre, $url_site, $nom_site, $ajouter_mot)
 {
 	$erreur = $bouton = '';
 	if (strlen($texte) < 10
@@ -251,8 +247,6 @@ function inclure_previsu($texte,$titre, $email_auteur, $auteur, $url_site, $nom_
 		      0,
 		      array(
 			'titre' => safehtml(typo($titre)),
-			'email_auteur' => safehtml($email_auteur),
-			'auteur' => safehtml(typo($auteur)),
 			'texte' => safehtml(propre($texte)),
 			'url_site' => vider_url($url_site),
 			'nom_site' => safehtml(typo($nom_site)),

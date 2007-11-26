@@ -2,7 +2,9 @@
 <legend><:previsualisation:></legend>
 
 [(#CONFIG{forums_titre}|=={oui}|?{
-	<p>[<strong>(#ENV*{titre})</strong>][<em> - (#ENV*{auteur}|supprimer_numero|couper{80})</em>]</p>
+	<p>[<strong>(#ENV*{titre})</strong>][ -
+	<em>(#SESSION*{nom}|typo|sinon{[(#SESSION*{session_nom}|safehtml)]}
+	|supprimer_numero|couper{80})</em>]</p>
 })]
 
 [(#ENV*{texte}|lignes_longues)]

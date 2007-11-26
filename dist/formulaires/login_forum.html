@@ -24,9 +24,9 @@
 	(<a href="[(#URL_PAGE{login}|parametre_url{url,#SELF})]"><:login:></a>)
 	</small></div>
 	<p><label for="session_nom"><:forum_votre_nom:></label>
-	<input type="text" class="forml" name="session_nom" id="session_nom" value="[(#SESSION**{session_nom}|sinon{#SESSION**{nom}}|entites_html)]" size="40" /></p>
+	<input type="text" class="forml" name="session_nom" id="session_nom" value="[(#SESSION**{nom}|sinon{#SESSION**{session_nom}}|entites_html)]" size="40" /></p>
 	<p><label for="session_email"><:forum_votre_email:></label>
-	<input type="text" class="forml" name="session_email" id="session_email" value="[(#SESSION**{session_email}|sinon{#SESSION**{email}}|entites_html)]" size="40" /></p>
+	<input type="text" class="forml" name="session_email" id="session_email" value="[(#SESSION**{email}|sinon{#SESSION**{session_email}}|entites_html)]" size="40" /></p>
 ]
 
 </fieldset>
