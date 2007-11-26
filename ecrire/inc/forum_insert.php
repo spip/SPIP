@@ -193,8 +193,12 @@ function inc_forum_insert_dist($force_statut = NULL) {
 	//
 	include_spip('inc/modifier');
 	// Injecter les bonnes valeurs dans le contexte $c
-	set_request('auteur', $GLOBALS['visiteur_session']['nom']);
-	set_request('email_auteur', $GLOBALS['visiteur_session']['email']);
+	$auteur = sinon($GLOBALS['visiteur_session']['nom'],
+		$GLOBALS['visiteur_session']['session_nom']);
+	$email_auteur = sinon($GLOBALS['visiteur_session']['email'],
+		$GLOBALS['visiteur_session']['session_email']);
+	set_request('auteur', $auteur);
+	set_request('email_auteur', $email);
 	revision_forum($id_message);
 
 	// Notification
