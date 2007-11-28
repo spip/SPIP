@@ -71,17 +71,16 @@ function sql_set_charset($charset,$serveur=''){
 // http://doc.spip.org/@sql_select
 function sql_select (
 	$select = array(), $from = array(), $where = array(),
-	$groupby = '', $orderby = array(), $limit = '', $having = array(),
+	$groupby = array(), $orderby = array(), $limit = '', $having = array(),
 	$serveur='') {
 
 	$f = sql_serveur('select', $serveur);
-
 	return $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur);
 }
 
 // http://doc.spip.org/@sql_countsel
 function sql_countsel($from = array(), $where = array(),
-	$groupby = '', $limit = '', $having = array(),
+		      $groupby = array(), $limit = '', $having = array(),
 	$serveur='') {
   	$f = sql_serveur('countsel', $serveur);
 	return $f($from, $where, $groupby, $limit, $having, $serveur);
@@ -269,7 +268,7 @@ function sql_query($ins, $serveur='') {
 // http://doc.spip.org/@sql_fetsel
 function sql_fetsel(
 	$select = array(), $from = array(), $where = array(),
-	$groupby = '', $orderby = array(), $limit = '',
+	$groupby = array(), $orderby = array(), $limit = '',
 	$having = array(), $serveur='') {
 	return sql_fetch(sql_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur), $serveur);
 }
@@ -277,7 +276,7 @@ function sql_fetsel(
 # Retourne l'unique champ demande dans une requete Select a resultat unique
 // http://doc.spip.org/@sql_getfetsel
 function sql_getfetsel(
-	$select, $from = array(), $where = array(), $groupby = '', 
+		       $select, $from = array(), $where = array(), $groupby = array(), 
 	$orderby = array(), $limit = '', $having = array(), $serveur='') {
 	$r = sql_fetch(sql_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur), $serveur);
 	return $r ? $r[$select] : NULL;
