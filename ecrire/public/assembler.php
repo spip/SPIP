@@ -558,7 +558,7 @@ function recuperer_fond($fond, $contexte=array(), $protect_xml=false, $trim=true
 
 	$texte = "";
 	foreach(is_array($fond) ? $fond : array($fond) as $f){
-		$page = assembler($f, $contexte, $options, $connect);
+		$page = evaluer_fond($f, $contexte, $options, $connect);
 		$texte .= $trim ? rtrim($page['texte']) : $page['texte'];
 	}
 
@@ -673,7 +673,7 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 	$GLOBALS['compt_note'] = 0;
 
 	// Appliquer le modele avec le contexte
-	$page = assembler($fond, $contexte, array(), $connect);
+	$page = evaluer_fond($fond, $contexte, array(), $connect);
 	$retour = trim($page['texte']);
 
 	// Lever un drapeau (global) si le modele utilise #SESSION
