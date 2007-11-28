@@ -36,6 +36,9 @@ include_spip('public/criteres');
 // definition des balises
 include_spip('public/balises');
 
+// Gestion des jointures
+include_spip('public/jointures');
+
 // http://doc.spip.org/@argumenter_inclure
 function argumenter_inclure($struct, $descr, &$boucles, $id_boucle, $echap=true){
 	$l = array();
@@ -303,8 +306,7 @@ function calculer_requete_sql(&$boucle)
 		', # WHERE
 		' . calculer_dump_join($boucle->join)
 		. ', # WHERE pour jointure
-		' . (!$boucle->group ? "''" : 
-		     ('"' . join(", ", $boucle->group)) . '"') .
+		' . ('array(' . join(',',array_map('_q', $boucle->group)) . ')') .
 		', # GROUP
 		array(' .
 			calculer_order($boucle) .
@@ -330,7 +332,7 @@ function calculer_dump_array($a)
 	    " : " . calculer_dump_array($a[3]) .
 	    ")");
   else {
-    foreach($a as $k => $v) $res .= ", " . calculer_dump_array($v);
+    foreach($a as $v) $res .= ", " . calculer_dump_array($v);
     return "\n\t\t\tarray(" . substr($res,2) . ')';
   }
 }

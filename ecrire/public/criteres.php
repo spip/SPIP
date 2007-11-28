@@ -243,14 +243,10 @@ function critere_branche_dist($idb, &$boucles, $crit) {
 	$desc = $boucle->show;
 	//Seulement si necessaire
 	if (!array_key_exists('id_rubrique', $desc['field'])) {
-		$cle = trouver_champ_exterieur('id_rubrique', $boucle->jointures, $boucle);
-		if ($cle)
-			$cle = calculer_jointure($boucle, array($boucle->id_table, $desc), $cle, false);
-	}
+		$cle = trouver_jointure_champ('id_rubrique', $boucle);
+	} else $cle = $boucle->id_table;
 
-	$c = "sql_in('" .
-		($cle ? "L$cle" : $boucle->id_table) .
-		".id_rubrique', calcul_branche($arg), '')";
+	$c = "sql_in('" . $cle . ".id_rubrique', calcul_branche($arg), '')";
 	if ($crit->cond) $c = "($arg ? $c : 1)";
 			
 	if ($not)
@@ -378,8 +374,12 @@ function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 		}
 	// par titre_mot ou type_mot voire d'autres
 		else if (isset($exceptions_des_jointures[$par])) {
-			$order = critere_par_jointure($boucle, $exceptions_des_jointures[$par]);
-			 }
+			list($table, $champ) =  $exceptions_des_jointures[$par];
+			$t = array_search($table, $boucle->from);
+			if (!$t) $t = trouver_jointure_champ($champ, $boucle);
+			if (!$t) erreur_squelette(_T('zbug_info_erreur_squelette'),  "{par ?} BOUCLE$idb");
+			$order = "'" . $t . '.' . $champ . "'";
+		}
 		else if ($par == 'date'
 		AND isset($GLOBALS['table_date'][$boucle->type_requete])) {
 			$m = $GLOBALS['table_date'][$boucle->type_requete];
@@ -409,24 +409,6 @@ function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 	}
 }
 
-// http://doc.spip.org/@critere_par_jointure
-function critere_par_jointure(&$boucle, $join)
-{
-  list($table, $champ) = $join;
-  $t = array_search($table, $boucle->from);
-  if (!$t) {
-	$type = $boucle->type_requete;
-	$desc = $boucle->show;
-	$cle = trouver_champ_exterieur($champ, $boucle->jointures, $boucle);
-
-	if ($cle)
-		$cle = calculer_jointure($boucle, array($desc['table'], $desc), $cle, false);
-	if ($cle) $t = "L$cle"; 
-	else  erreur_squelette(_T('zbug_info_erreur_squelette'),  "{par ?} BOUCLE$idb");
-
-  }
-  return "'" . $t . '.' . $champ . "'";
-}
 
 // {inverse}
 // http://www.spip.net/@inverse
@@ -838,172 +820,6 @@ function trouver_champ($champ, $where)
   }
 }
 
-// deduction automatique d'une chaine de jointures 
-
-// http://doc.spip.org/@calculer_jointure
-function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
-{
-
-  $res = calculer_chaine_jointures($boucle, $depart, $arrivee);
-  if (!$res) return "";
-
-  list($nom,$desc) = $depart;
-  return fabrique_jointures($boucle, $res, $cond, $desc, $nom, $col);
-}
-
-function fabrique_jointures(&$boucle, $res, $cond=false, $desc, $nom='', $col='')
-{
-	static $num=array();
-	$id_table = "";
-	$cpt = &$num[$boucle->descr['nom']][$boucle->id_boucle];
-	foreach($res as $r) {
-		list($d, $a, $j) = $r;
-		if (!$id_table) $id_table = $d;
-		$n = ++$cpt;
-		$boucle->join[$n]= array("'$id_table'","'$j'");
-		$boucle->from[$id_table = "L$n"] = $a[0];    
-	}
-
-
-  // pas besoin de group by 
-  // (cf http://article.gmane.org/gmane.comp.web.spip.devel/30555)
-  // si une seule jointure et sur une table avec primary key formee
-  // de l'index principal et de l'index de jointure (non conditionnel! [6031])
-  // et operateur d'egalite (http://trac.rezo.net/trac/spip/ticket/477)
-
-	if ($pk = ((count($boucle->from) == 2) && !$cond)) {
-		if ($pk = $a[1]['key']['PRIMARY KEY']) {
-			$id_primary = $desc['key']['PRIMARY KEY'];
-			$pk = (preg_match("/^$id_primary, *$col$/", $pk) OR
-			       preg_match("/^$col, *$id_primary$/", $pk));
-		}
-	}
-	
-  // la clause Group by est en conflit avec ORDER BY, a completer
-	if (!$pk) foreach(liste_champs_jointures($nom,$desc) as $id_prim){
-		$id_field = $nom . '.' . $id_prim;
-		if (!in_array($id_field, $boucle->group)) {
-			$boucle->group[] = $id_field;
-			// postgres exige que le champ pour GROUP soit dans le SELECT
-			if (!in_array($id_field, $boucle->select))
-			$boucle->select[] = $id_field;
-		}
-	}
-
-	$boucle->modificateur['lien'] = true;
-	return $n;
-  }
-
-
-// http://doc.spip.org/@liste_champs_jointures
-function liste_champs_jointures($nom,$desc){
-
-	static $nojoin = array('idx','maj','date','statut');
-
-	// les champs declares explicitement pour les jointures
-	if (isset($desc['join'])) return $desc['join'];
-	/*elseif (isset($GLOBALS['tables_principales'][$nom]['join'])) return $GLOBALS['tables_principales'][$nom]['join'];
-	elseif (isset($GLOBALS['tables_auxiliaires'][$nom]['join'])) return $GLOBALS['tables_auxiliaires'][$nom]['join'];*/
-	
-	// sinon la cle primaire
-	if (isset($desc['key']['PRIMARY KEY']))
-		return split_key($desc['key']['PRIMARY KEY']);
-	
-	// ici on se rabat sur les cles secondaires, 
-	// en eliminant celles qui sont pas pertinentes (idx, maj)
-	// si jamais le resultat n'est pas pertinent pour une table donnee,
-	// il faut declarer explicitement le champ 'join' de sa description
-	$join = array();
-	foreach($desc['key'] as $v) $join = split_key($v, $join);
-	foreach($join as $k) if (in_array($k, $nojoin)) unset($join[$k]);
-	return $join;
-}
-
-function split_key($v, $join = array())
-{
-	foreach (preg_split('/,\s*/', $v) as $k) $join[$k] = $k;
-	return $join;
-}
-
-// http://doc.spip.org/@calculer_chaine_jointures
-function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array(), $milieu_prec = false)
-{
-	static $trouver_table;
-	if (!$trouver_table)
-		$trouver_table = charger_fonction('trouver_table', 'base');
-
-	list($dnom,$ddesc) = $depart;
-	list($anom,$adesc) = $arrivee;
-	if (!count($vu))
-		$vu[] = $dnom; // ne pas oublier la table de depart
-
-	$akeys = $adesc['key'];
-	if ($v = $akeys['PRIMARY KEY']) {
-		unset($akeys['PRIMARY KEY']);
-		$akeys = array_merge(preg_split('/,\s*/', $v), $akeys);
-	}
-	if ($keys = liste_champs_jointures($dnom,$ddesc)){
-		$v = array_intersect(array_values($keys), $akeys);
-	}
-	if ($v)
-		return array(array($dnom, $arrivee, array_shift($v)));
-	else    {
-		$new = $vu;
-		foreach($boucle->jointures as $v) {
-			if ($v && (!in_array($v,$vu)) && 
-			    ($def = $trouver_table($v, $boucle->sql_serveur))) {
-				$milieu = array_intersect($ddesc['key'], trouver_cles_table($def['key']));
-				$new[] = $v;
-				foreach ($milieu as $k)
-					if ($k!=$milieu_prec) // ne pas repasser par la meme cle car c'est un chemin inutilement long
-					{
-					  $r = calculer_chaine_jointures($boucle, array($v, $def), $arrivee, $new, $k);
-						if ($r)	{
-						  array_unshift($r, array($dnom, array($def['table'], $def), $k));
-							return $r;
-						}
-					}
-			}
-		}
-	}
-	return array();
-}
-
-// applatit les cles multiples
-
-// http://doc.spip.org/@trouver_cles_table
-function trouver_cles_table($keys)
-{
-  $res =array();
-  foreach ($keys as $v) {
-    if (!strpos($v,","))
-      $res[$v]=1; 
-    else {
-      foreach (split(" *, *", $v) as $k) {
-	$res[$k]=1;
-      }
-    }
-  }
-  return array_keys($res);
-}
-
-// http://doc.spip.org/@trouver_champ_exterieur
-function trouver_champ_exterieur($cle, $joints, &$boucle, $checkarrivee = false)
-{
-  static $trouver_table;
-  if (!$trouver_table)
-		$trouver_table = charger_fonction('trouver_table', 'base');
-
-  foreach($joints as $k => $join) {
-    if ($join && $table = $trouver_table($join, $boucle->sql_serveur)) {
-      if (isset($table['field']) && array_key_exists($cle, $table['field'])
-      	&& ($checkarrivee==false || $checkarrivee==$table['table'])) // si on sait ou on veut arriver, il faut que ca colle
-	return  array($table['table'], $table);
-    }
-
-  }
-  return "";
-}
 
 // determine l'operateur et les operandes
 
