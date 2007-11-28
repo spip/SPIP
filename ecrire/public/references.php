@@ -43,8 +43,9 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 	while (isset($boucles[$idb])) {
 		list ($t, $c) = index_tables_en_pile($idb, $nom_champ, $boucles);
 		if ($t) {
-		  if (!in_array($t, $boucles[$idb]->select))
+		  if (!in_array($t, $boucles[$idb]->select)) {
 		    $boucles[$idb]->select[] = $t;
+		  }
 		  return '$Pile[$SP' . ($i ? "-$i" : "") . '][\'' . $c . '\']';
 		}
 #		spip_log("On remonte vers $i");
@@ -117,17 +118,15 @@ function index_exception(&$boucle, $desc, $nom_champ, $excep)
 		if ($t == NULL) {
 			list($e, $x) = $excep;	#PHP4 affecte de gauche a droite
 			$excep = $x;		#PHP5 de droite a gauche !
+			$j = $trouver_table($e, $boucle->sql_serveur);
+			if (!$j) return array('','');
+			$e = $j['table'];
 			if (!$t = array_search($e, $boucle->from)) {
-				$j = $trouver_table($e, $boucle->sql_serveur);
-				if ($j) {
-					$t = 'J' . count($boucle->from);
-					$boucle->from[$t] = $j['table'];
-					$j = $j['key']['PRIMARY KEY'];
-					$boucle->where[]= array("'='", "'$boucle->id_table." . "$j'", "'$t.$j'");
-				}
+				fabrique_jointures($boucle, array(array($boucle->id_table, array($j['table']), $j['key']['PRIMARY KEY'])));
+				$t = array_search($e, $boucle->from);
 			}
 		}
-	} 
+	}
 	else $t = $boucle->id_table;
 	// demander a SQL de gerer le synonyme
 	// ca permet que excep soit dynamique (Cedric, 2/3/06)
