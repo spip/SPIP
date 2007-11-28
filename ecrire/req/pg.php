@@ -246,7 +246,7 @@ function spip_pg_listdbs() {
 
 // http://doc.spip.org/@spip_pg_select
 function spip_pg_select($select, $from, $where='',
-                           $groupby='', $orderby='', $limit='',
+			$groupby=array(), $orderby='', $limit='',
                            $having='', $serveur=''){
 
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
@@ -300,11 +300,8 @@ function spip_pg_select($select, $from, $where='',
 // http://doc.spip.org/@spip_pg_from
 function spip_pg_from($from, $prefixe)
 {
-	return !$prefixe ? $from :
-		preg_replace('/(\b)spip_/',
-			'\1'.$prefixe.'_', 
-			(!is_array($from) ? $from : spip_pg_select_as($from)));
-
+	if (is_array($from)) $from = spip_pg_select_as($from);
+	return !$prefixe ? $from : preg_replace('/(\b)spip_/','\1'.$prefixe.'_', $from);
 }
 
 // http://doc.spip.org/@spip_pg_orderby
@@ -324,12 +321,12 @@ function spip_pg_orderby($order, $select)
 
 // Conversion a l'arrach' des jointures MySQL en jointures PG
 // A refaire pour tirer parti des possibilites de PG et de MySQL5
+// et pour enlever les repetitions (sans incidence de perf, mais ca fait sale)
 
 // http://doc.spip.org/@spip_pg_groupby
 function spip_pg_groupby($groupby, $from, $select)
 {
-	$join = is_array($from) ? (count($from) > 1) : 
-	  (strpos($from, ","));
+	$join = strpos($from, ",");
 	if ($join OR $groupby) $join = !is_array($select) ? $select : join(", ", $select);
 	if ($join) {
 	  $join = str_replace('DISTINCT ','',$join);
@@ -344,7 +341,7 @@ function spip_pg_groupby($groupby, $from, $select)
 
 	  if (preg_match('/^(.*),\s*$/',$join,$m)) $join=$m[1];
 	}
-	if (is_array($groupby)) $grouby = join(',',$groupby);
+	if (is_array($groupby)) $groupby = join(',',$groupby);
 	if ($join) $groupby = $groupby ? "$groupby, $join" : $join;
 	if (!$groupby) return '';
 
@@ -380,37 +377,41 @@ function spip_pg_frommysql($arg)
 			    'CAST(substring(\1, \'^ *[0-9]+\') as int)',
 			    $res);
 	$res = preg_replace('/UNIX_TIMESTAMP\s*[(]\s*[)]/',
-			    'EXTRACT(\'epoch\' FROM NOW())', $res);
+			    ' EXTRACT(epoch FROM NOW())', $res);
 
 	$res = preg_replace('/UNIX_TIMESTAMP\s*[(]([^)]*)[)]/',
-			    'EXTRACT(\'epoch\' FROM \1)', $res);
+			    ' EXTRACT(epoch FROM \1)', $res);
 
-	$res = preg_replace('/DAYOFMONTH\s*[(]([^(]*([(][^)]*[)][()]*)*)[)]/',
-			    'EXTRACT(\'day\' FROM \1)',
+	$res = preg_replace('/\bDAYOFMONTH\s*[(]([^()]*([(][^)]*[)][()]*)*[^)]*)[)]/',
+			    ' EXTRACT(day FROM \1)',
 			    $res);
 
-	$res = preg_replace('/MONTH\s*[(]([^(]*([(][^)]*[)][()]*)*)[)]/',
-			    'EXTRACT(\'month\' FROM \1)',
+	$res = preg_replace('/\bMONTH\s*[(]([^()]*([(][^)]*[)][()]*)*[^)]*)[)]/',
+			    ' EXTRACT(month FROM \1)',
 			    $res);
 
-	$res = preg_replace('/YEAR\s*[(]([^(]*([(][^)]*[)][()]*)*)[)]/',
-			    'EXTRACT(\'year\' FROM \1)',
+	$res = preg_replace('/\bYEAR\s*[(]([^()]*([(][^)]*[)][()]*)*[^)]*)[)]/',
+			    ' EXTRACT(year FROM \1)',
 			    $res);
 
+	$res = preg_replace('/TO_DAYS\s*[(]([^()]*([(][^)]*[)][()]*)*)[)]/',
+			    ' EXTRACT(day FROM \1 - \'0000-01-01\')',
+			    $res);
+
+	$res = preg_replace("/(EXTRACT[(][^ ]* FROM *)\"([^\"]*)\"/", '\1\'\2\'', $res);
 	$res = preg_replace('/DATE_SUB\s*[(]([^,]*),/', '(\1 -', $res);
 	$res = preg_replace('/DATE_ADD\s*[(]([^,]*),/', '(\1 +', $res);
 	$res = preg_replace('/INTERVAL\s+(\d+\s+\w+)/', 'INTERVAL \'\1\'', $res);
 	$res = preg_replace('/([+<>-]=?)\s*(\'\d+-\d+-\d+\s+\d+:\d+(:\d+)\')/', '\1 timestamp \2', $res);
-	$res = preg_replace('/(\'\d+-\d+-\d+\s+\d+:\d+(:\d+)\')\s*([+<>-]=?)/', 'date \1 \2', $res);
+	$res = preg_replace('/(\'\d+-\d+-\d+\s+\d+:\d+:\d+\')\s*([+<>-]=?)/', 'date \1 \2', $res);
 
 	$res = preg_replace('/([+<>-]=?)\s*(\'\d+-\d+-\d+\')/', '\1 date \2', $res);
 	$res = preg_replace('/(\'\d+-\d+-\d+\')\s*([+<>-]=?)/', 'date \1 \2', $res);
 
 	$res = preg_replace('/(date .\d+)-00-/','\1-01-', $res);
 	$res = preg_replace('/(date .\d+-\d+)-00/','\1-01',$res);
-	$res = preg_replace('/TO_DAYS\s*[(]([^(]*([(][^)]*[)][()]*)*)[)]/',
-			    'date_part(\'day\', \1 - \'0000-01-01\')',
-			    $res);
+	$res = preg_replace("/(EXTRACT[(][^ ]* FROM *)(date *'[^']*' *[+-] *date *'[^']*') *[)]/", '\2', $res);
+	$res = preg_replace("/(EXTRACT[(][^ ]* FROM *)('[^']*')/", '\1 date \2', $res);
 
 	return str_replace('REGEXP', '~', $res);
 }
@@ -482,7 +483,7 @@ function spip_pg_fetch($res, $t='', $serveur='') {
  
 // http://doc.spip.org/@spip_pg_countsel
 function spip_pg_countsel($from = array(), $where = array(),
-			  $groupby='', $limit='', $having = array(), $serveur='')
+			  $groupby=array(), $limit='', $having = array(), $serveur='')
 {
 	$r = spip_pg_select('COUNT(*)', $from, $where,
 			    $groupby, '', $limit, $sousrequete, $having, '','', $serveur);
