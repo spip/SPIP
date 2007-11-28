@@ -284,6 +284,12 @@ function inclure_page($fond, $contexte_inclus, $connect='') {
 	else {
 		$parametrer = charger_fonction('parametrer', 'public');
 		$page = $parametrer($fond, $contexte_inclus, $chemin_cache, $connect);
+		if (isset($page['invalideurs'])
+		AND isset($page['invalideurs']['session']))
+			$GLOBALS['cache_utilise_session'] = ($GLOBALS['cache_utilise_session']?$GLOBALS['cache_utilise_session']:'') . $page['invalideurs']['session'];
+		// Si un modele contenait #SESSION, on note l'info dans $page
+		if (isset($GLOBALS['cache_utilise_session']))
+			$page['invalideurs']['session'] = $GLOBALS['cache_utilise_session'];
 		$lastmodified = time();
 		// et on l'enregistre sur le disque
 		if ($chemin_cache
