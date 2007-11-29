@@ -63,10 +63,11 @@ function analyser_backend($rss, $url_syndic='') {
 	$header, $match))
 		$langue_du_site = $match[3];
 
-	$items = array();
-	if (preg_match_all(',<(item|entry)([:[:space:]][^>]*)?'.
-	'>(.*)</\1>,Uims',$rss,$r, PREG_PATTERN_ORDER))
-		$items = $r[0];
+	// Attention en PCRE 6.7 preg_match_all casse sur un backend avec de gros <content:encoded>
+	$items = preg_split(',<(item|entry)\b.*>,Uims', $rss);
+	array_shift($items);
+	foreach ($items as $k=>$item)
+		$items[$k] = preg_replace(',</(item|entry)\b.*>.*$,UimsS', '', $item);
 
 	//
 	// Analyser chaque <item>...</item> du backend et le transformer en tableau
