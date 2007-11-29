@@ -1324,7 +1324,7 @@ function exec_info_dist() {
 // 'protect_xml' => false,  conserver le \1 du xml-hack
 // http://doc.spip.org/@evaluer_fond
 function evaluer_fond ($fond, $contexte=array(), $options=array(), $connect=null) {
-	charger_fonction('assembler', 'public');
+	include_spip('public/assembler');
 
 	// on est peut etre dans l'espace prive au moment de l'appel
 	if (!isset($GLOBALS['_INC_PUBLIC'])) $GLOBALS['_INC_PUBLIC'] = 0;
