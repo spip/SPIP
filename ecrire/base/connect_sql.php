@@ -135,7 +135,7 @@ function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $pr
 		? $GLOBALS['table_prefix'] : $db;
 	$h = charger_fonction($type, 'req', true);
 	if (!$h) {
-		spip_log("les reqûetes $type ne sont pas fournies");
+		spip_log("les requetes $type ne sont pas fournies");
 		return;
 	}
 	  
