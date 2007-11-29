@@ -595,9 +595,20 @@ function kwote($lisp)
 // http://doc.spip.org/@critere_IN_dist
 function critere_IN_dist ($idb, &$boucles, $crit)
 {
-	static $cpt = 0;
-	list($arg, $op, $val, $col)= calculer_critere_infixe($idb, $boucles, $crit);
 
+	list($arg, $op, $val, $col)= calculer_critere_infixe($idb, $boucles, $crit);
+	$in = critere_IN_cas($idb, $boucles, $crit->not ? 'NOT' : '', $arg, $op, $val, $col);
+//	inserer la condition; exemple: {id_mot ?IN (66, 62, 64)}
+	$boucles[$idb]->where[] = !$crit->cond ? $in :
+	  array("'?'",
+		calculer_argument_precedent($idb, $col, $boucles),
+		$in,
+		"''");
+}
+
+function critere_IN_cas ($idb, &$boucles, $crit2, $arg, $op, $val, $col)
+{
+	static $cpt = 0;
 	$var = '$in' . $cpt++;
 	$x= "\n\t$var = array();";
 	foreach ($val as $k => $v) {
@@ -619,23 +630,17 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 	$boucles[$idb]->in .= $x;
 
 	// inserer la negation (cf !...)
-	if (!$crit->not) {
-			$boucles[$idb]->default_order[] = "'cpt$cpt'";
-			$op = '<>';
-	} else $op = '=';
-
+	if ($crit2==='NOT')
+		$op = '=';
+	else {
+		if (!$crit2)$boucles[$idb]->default_order[] = "'cpt$cpt'";
+		$op = '<>';
+	} 
 
 	$arg = "((sql_quote($var)===\"''\") ? 0 : ('FIELD($arg,' . sql_quote($var) . ')'))";
-	$boucles[$idb]->select[]=  "\" . $arg . \" AS cpt$cpt";
-	$op = array("'$op'", $arg, 0);
-
-//	inserer la condition; exemple: {id_mot ?IN (66, 62, 64)}
-
-	$boucles[$idb]->where[]= (!$crit->cond ? $op :
-	  array("'?'",
-		calculer_argument_precedent($idb, $col, $boucles),
-		$op,
-		"''"));
+	if ($crit2 !== 'COND')
+		$boucles[$idb]->select[]=  "\" . $arg . \" AS cpt$cpt";
+	return array("'$op'", $arg, 0);
 }
 
 
@@ -658,8 +663,13 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit)
 		if (tester_param_date('articles', $col))
 		  $pred = '@$Pile["env"][\'' . $col ."']";
 		else $pred = calculer_argument_precedent($idb, $col, $boucles);
-		$where = array("'?'", $pred, $where,"''");
+		if ($op == '=' AND !$crit->not)
+		  $where = array("'?'", "(is_array($pred))", 
+				 critere_IN_cas ($idb, $boucles, 'COND', $arg, $op, array($pred), $col), 
+				 $where);
+		$where = array("'?'", "!$pred","''", $where);
 	}
+	spip_log("$arg, $op, $val[0], $col " . $crit->not);
 	$boucles[$idb]->where[]= $where;
 }
 

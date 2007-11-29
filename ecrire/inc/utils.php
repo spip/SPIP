@@ -261,7 +261,7 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 
 	$regexp = ',^(' . $c . ')(=.*)?$,';
 	$ajouts = array_flip(explode('|',$c));
-	$u = rawurlencode($v);
+	$u = is_array($v) ? $v : rawurlencode($v);
 	// lire les variables et agir
 	foreach ($url as $n => $val) {
 		if (preg_match($regexp, urldecode($val), $r)) {
