@@ -15,12 +15,16 @@
 </fieldset>]
 
 	<script type="text/javascript" src="#EVAL{_DIR_JAVASCRIPT}md5.js"> </script>
+	[<script type="text/javascript">
+	var alea_actuel="(#ENV{alea_actuel})";
+	var alea_futur="[(#ENV{alea_futur})]";
+	</script>]
 	<form id="login[_(#ENV{login})]"
 		action="[(#ENV{action2})]"
 		method="post"[(#ENV{source}|=={spip}|?{' ',''})
 		onsubmit='if (this.session_password.value) {
-			this.session_password_md5.value = calcMD5("[(#ENV{alea_actuel})]" + this.session_password.value);
-			this.next_session_password_md5.value = calcMD5("[(#ENV{alea_futur})]" + this.session_password.value);
+			this.session_password_md5.value = calcMD5(alea_actuel + this.session_password.value);
+			this.next_session_password_md5.value = calcMD5(alea_futur + this.session_password.value);
 			this.session_password.value = "";
 			return true;
 			}']>
@@ -44,7 +48,8 @@ document.write("<p><:login_login:>&nbsp;<strong>[(#ENV{login_alt})]<" + "/strong
 	<p><label for="session_login"><:login_login2:></label><br />
 	<input type="text" class="forml" name="session_login" id="session_login"[ value="(#ENV{login})"] size="40" /></p>
 </noscript>
-
+]
+	[(#ENV{login}|?{'',' '})<div id='pass_ajax' style='display:none;'>]
 	<p><label[ for="var_login_(#ENV{login})"]><:login_pass2:></label><br />
 	<input type="password" class="forml" name="session_password"[ id="var_login_(#ENV{login})"] value="" size="20" /></p>
 
@@ -52,10 +57,11 @@ document.write("<p><:login_login:>&nbsp;<strong>[(#ENV{login_alt})]<" + "/strong
 	<p><input type="checkbox" name="session_remember" id="session[_(#ENV{login})]" value="oui"[(#ENV*{prefs}|filtre_rester_connecte)checked="checked"]/>
 	<label for="session[_(#ENV{login})]"><:login_rester_identifie:></label></p>
 ]
+	[(#ENV{login}|?{'',' '})</div>]
 	<input type="hidden" name="session_password_md5" value="" />
 	<input type="hidden" name="next_session_password_md5" value="" />
 	<input type="hidden" name="essai_login" value="oui" />
-]	<input type="hidden" name="url" value="[(#ENV{url})]" />
+	<input type="hidden" name="url" value="[(#ENV{url})]" />
 	<p class="spip_bouton"><input type="submit" value="<:bouton_valider:>" /></p>
 	</fieldset>
 	</form>
@@ -73,4 +79,34 @@ document.getElementById('var_login[_(#ENV{login})]').focus();
 	<p class="spip_bouton"><input type="submit" value="<:login_sans_cookiie:>"/></p></div>
 	</fieldset>
 	</form>
+]
+[(#ENV{login}|?{'',' '})
+<script type='text/javascript' src='#URL_PAGE{jquery.js}'></script>
+<script type='text/javascript'>
+var alea_actuel;
+var alea_futur;
+$('#pass_ajax').show().after('<input type="hidden" name="session_login_hidden" id="session_login_hidden" value="" />');
+$('#var_login').blur(function(){
+  $.get('#URL_ACTION{aleer}',
+    {var_login:$(this).attr('value')},
+    function (c) {
+      eval('c = '+c); // JSON	
+      alea_actuel = c.alea_actuel;
+      alea_futur = c.alea_futur;
+			$('input#session_login_hidden').attr('value',c.login);
+    });
+});
+$('form#login').submit(function(){
+	pass = $('input#EVAL{chr(91)}@name=session_password#EVAL{chr(93)}').attr('value');
+	if (pass) {
+		if (alea_actuel!=undefined) {
+			$(this).attr('action','#ENV{pose_cookie}');
+			$('input#EVAL{chr(91)}@name=session_password_md5#EVAL{chr(93)}').attr('value',calcMD5(alea_actuel + pass));
+			$('input#EVAL{chr(91)}@name=next_session_password_md5#EVAL{chr(93)}').attr('value',calcMD5(alea_futur + pass));
+		}
+		// ne jamais laisser le pass circuler en clair
+		$('input#EVAL{chr(91)}@name=session_password#EVAL{chr(93)}').attr('value','');
+	}
+});
+</script>
 ]

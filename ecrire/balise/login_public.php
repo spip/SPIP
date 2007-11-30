@@ -166,6 +166,7 @@ function login_pour_tous($login, $cible, $action) {
 					'action2' => ($login ? $pose_cookie: $action),
 					'erreur' => $erreur,
 					'action' => $action,
+					'pose_cookie' => $pose_cookie,
 					'url' => $cible,
 					'auth_http' => $auth_http,
 					'echec_cookie' => ($echec_cookie ? ' ' : ''),
