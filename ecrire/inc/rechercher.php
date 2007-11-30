@@ -49,7 +49,13 @@ function liste_des_champs() {
 			),
 			'syndic_article' => array(
 				'titre' => 5, 'descriptif' => 1
+			),
+			'signature' => array(
+				'nom_email' => 2, 'ad_email' => 4,
+				'nom_site' => 2, 'url_site' => 4,
+				'message' => 1
 			)
+
 		)
 	);
 }
@@ -170,7 +176,7 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array()) {
 				$a[] = $champ.' '.$methode.' '.$q;
 			}
 		}
-		$requete['WHERE'][] = join(" OR ", $a);
+		if ($a) $requete['WHERE'][] = join(" OR ", $a);
 		$requete['FROM'][] = table_objet_sql($table).' AS t';
 
 		$s = sql_select(
