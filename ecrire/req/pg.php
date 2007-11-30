@@ -457,6 +457,27 @@ function calculer_pg_where($v)
 	}
 }
 
+
+function calculer_pg_expression($expression, $v, $join = 'AND'){
+	if (empty($v))
+		return '';
+	
+	$exp = "\n$expression ";
+	
+	if (!is_array($v)) 
+		$v = array($v);
+	
+	if (strtoupper($expression) === 'WHERE')
+		$v = array_map('spip_pg_frommysql', $v);
+	
+	if (!empty($v)) {
+		if (strtoupper($join) === 'AND')
+			return $exp . join("\n\t$join ", array_map('calculer_pg_where', $v));
+		else
+			return $exp . join($join, $v);
+	}
+}
+
 // http://doc.spip.org/@spip_pg_select_as
 function spip_pg_select_as($args)
 {
@@ -509,7 +530,10 @@ function spip_pg_delete($table, $where='', $serveur='') {
 	$link = $connexion['link'];
 	$db = $connexion['db'];
 	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
-	return spip_pg_trace_query("DELETE FROM $table " . ($where ? (" WHERE " . spip_pg_frommysql($where)) : ''), $serveur);
+	return spip_pg_trace_query(
+			  calculer_pg_expression('DELETE FROM', $table, ',')
+			. calculer_pg_expression('WHERE', $where, 'AND'), 
+			$serveur);
 }
 
 // http://doc.spip.org/@spip_pg_insert
@@ -566,13 +590,16 @@ function spip_pg_update($table, $champs, $where='', $desc='', $serveur='') {
 	$link = $connexion['link'];
 	$db = $connexion['db'];
 	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
-	if ($where) $where = (" WHERE " . spip_pg_frommysql($where));
-	$r = '';
+	$set = array();
 	foreach ($champs as $champ => $val) {
-		$r .= ',' . $champ . '=' . $val; 
+		$set[] = $champ . '=' . $val; 
 	}
 
-	return spip_pg_trace_query("UPDATE $table SET " . substr($r,1) . $where);
+	return spip_pg_trace_query(
+		  calculer_pg_expression('UPDATE', $table, ',')
+		. calculer_pg_expression('SET', $set, ',')
+		. calculer_pg_expression('WHERE', $where, 'AND'), 
+		$serveur);
 }
 
 // idem, mais les valeurs sont des constantes a mettre entre apostrophes
