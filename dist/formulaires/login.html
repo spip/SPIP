@@ -31,11 +31,17 @@
 	<fieldset>
 	<legend><:form_forum_identifiants:></legend>
 		[<p class="reponse_formulaire">(#ENV*{erreur})</p>]
+
+[(#LOGO_AUTEUR||reduire_image{100,80}|inserer_attribut{alt,#ENV{login_alt}}
+|sinon{<span id="logo" class="spip_logos"></span>})]
+
+
 		[<p><label for="var_login"><:login_login2:></label>(#ENV{login}|?{'',' '})<br />
 		<input type="text" class="forml" id="var_login" name="var_login" value="" size="40" /></p>]
 		
 [
-[(#LOGO_AUTEUR||reduire_image{100,80}|inserer_attribut{alt,#ENV{login_alt}})]
+
+
 <input type="hidden" name="session_login_hidden" value="(#ENV{login})" />
 <script type="text/javascript"><!--
 document.write("<p><:login_login:>&nbsp;<strong>[(#ENV{login_alt})]<" + "/strong><br />&#91;<a href='[(#ENV{action2}
@@ -54,8 +60,9 @@ document.write("<p><:login_login:>&nbsp;<strong>[(#ENV{login_alt})]<" + "/strong
 	<input type="password" class="forml" name="session_password"[ id="var_login_(#ENV{login})"] value="" size="20" /></p>
 
 [(#ENV{rester_connecte})
-	<p><input type="checkbox" name="session_remember" id="session[_(#ENV{login})]" value="oui"[(#ENV*{prefs}|filtre_rester_connecte)checked="checked"]/>
-	<label for="session[_(#ENV{login})]"><:login_rester_identifie:></label></p>
+	<p><input type="checkbox" name="session_remember" id="session_remember[_(#ENV{login})]" value="oui"[(#ENV*{prefs}|filtre_rester_connecte)checked="checked"]
+	class="intact" onchange="this.className='';" />
+	<label for="session_remember[_(#ENV{login})]"><:login_rester_identifie:></label></p>
 ]
 	[(#ENV{login}|?{'',' '})</div>]
 	<input type="hidden" name="session_password_md5" value="" />
@@ -87,15 +94,22 @@ var alea_actuel;
 var alea_futur;
 $('#pass_ajax').show().after('<input type="hidden" name="session_login_hidden" id="session_login_hidden" value="" />');
 $('#var_login').blur(function(){
-  $.get('#URL_ACTION{aleer}',
-    {var_login:$(this).attr('value')},
-    function (c) {
-      eval('c = '+c); // JSON	
-      alea_actuel = c.alea_actuel;
-      alea_futur = c.alea_futur;
-			$('input#session_login_hidden').attr('value',c.login);
-			$('input#session').attr('checked',c.cnx=='1'?'checked':'');
-    });
+	$.get('#URL_ACTION{aleer}',
+		{var_login:$(this).attr('value')},
+		function (c) {
+			eval('c = '+c); // JSON
+			if (c) {
+				alea_actuel = c.alea_actuel;
+				alea_futur = c.alea_futur;
+				$('input#session_login_hidden').attr('value',c.login);
+				// indiquer le cnx si on n'y a pas touche
+				$('input#session_remember.intact')
+				.attr('checked',c.cnx=='1'?'checked':'');
+				$('#logo').html(c.logo);
+			} else {
+				$('#logo').html('');
+			}
+	});
 });
 $('form#login').submit(function(){
 	pass = $('input\u005b@name=session_password\u005d').attr('value');
