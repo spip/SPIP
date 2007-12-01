@@ -98,14 +98,14 @@ $('#var_login').blur(function(){
     });
 });
 $('form#login').submit(function(){
-	pass = $('input#EVAL{chr(91)}@name=session_password#EVAL{chr(93)}').attr('value');
+	pass = $('input\u005b@name=session_password\u005d').attr('value');
 	// ne jamais laisser le pass circuler en clair
-	$('input#EVAL{chr(91)}@name=session_password#EVAL{chr(93)}').attr('value','');
+	$('input\u005b@name=session_password\u005d').attr('value','');
 	if (pass) {
 		if (alea_actuel!=undefined) {
 			$(this).attr('action','#ENV{pose_cookie}');
-			$('input#EVAL{chr(91)}@name=session_password_md5#EVAL{chr(93)}').attr('value',calcMD5(alea_actuel + pass));
-			$('input#EVAL{chr(91)}@name=next_session_password_md5#EVAL{chr(93)}').attr('value',calcMD5(alea_futur + pass));
+			$('input\u005b@name=session_password_md5\u005d').attr('value',calcMD5(alea_actuel + pass));
+			$('input\u005b@name=next_session_password_md5\u005d').attr('value',calcMD5(alea_futur + pass));
 		}
 	}
 });
