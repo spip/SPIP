@@ -309,12 +309,17 @@ function critere_collecte_dist($idb,&$boucles, $crit) {
 // http://doc.spip.org/@calculer_critere_arg_dynamique
 function calculer_critere_arg_dynamique($idb, &$boucles, $crit, $suffix='')
 {
+	static $fields = array();
 	$boucle = $boucles[$idb];
 	$arg = calculer_liste($crit, array(), $boucles, $boucle->id_parent);
-	$desc =$boucle->show;
-	if (is_array($desc['field'])){
-		$liste_field = implode(',',array_map('_q',array_keys($desc['field'])));
-		return	"((\$x = preg_replace(\"/\\W/\",'',$arg)) ? ( in_array(\$x,array($liste_field))  ? ('$boucle->id_table.' . \$x$suffix):(\$x$suffix) ) : '')";
+	$var = '$champs_' . $idb;
+	if (!isset($fields[$idb])) {
+		$desc = $boucle->show;
+		$fields[$idb] = implode(',',array_map('_q',array_keys($desc['field'])));
+		$boucles[$idb]->in .= "\n\tstatic $var; $var = array(" . $fields[$idb] .");";
+	}
+	if ($fields[$idb]) {
+		return	"((\$x = preg_replace(\"/\\W/\",'',$arg)) ? ( in_array(\$x, $var)  ? ('$boucle->id_table.' . \$x$suffix):(\$x$suffix) ) : '')";
 	} else {
 		return "((\$x = preg_replace(\"/\\W/\",'',$arg)) ? ('$boucle->id_table.' . \$x$suffix) : '')";
 	}
@@ -340,10 +345,12 @@ function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 	  if ($tri[0]->type != 'texte') {
 	  	// calculer le order dynamique qui verifie les champs
 			$order = calculer_critere_arg_dynamique($idb, $boucles, $tri, $sens);
-			// et ajouter un champ hasard dans le select 
-			//pour supporter 'hasard' comme tri dynamique
+			// et si ce n'est fait, ajouter un champ 'hasard' 
+			// pour supporter 'hasard' comme tri dynamique
 			$par = "rand()";
-			$boucle->select[]= $par . " AS hasard";
+			$parha = $par . " AS hasard";
+			if (!in_array($parha, $boucle->select))
+				$boucle->select[]= $parha;
 	  } else {
 	      $par = array_shift($tri);
 	      $par = $par->texte;
