@@ -550,7 +550,7 @@ function message_erreur_404 ($erreur= "") {
 // fonction permettant de recuperer le resultat du calcul d'un squelette
 // pour une inclusion dans un flux
 // http://doc.spip.org/@recuperer_fond
-function recuperer_fond($fond, $contexte=array(), $protect_xml=false, $trim=true, $connect='') {
+function recuperer_fond($fond, $contexte=array(), $protect_xml=true, $trim=true, $connect='') {
 	$options = array(
 		'protect_xml' => $protect_xml,
 		'trim' => $trim

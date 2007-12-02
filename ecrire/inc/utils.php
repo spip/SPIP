@@ -1346,8 +1346,8 @@ function evaluer_fond ($fond, $contexte=array(), $options=array(), $connect=null
 		ob_end_clean();
 	}
 
-	if (!isset($options['protect_xml'])
-	AND isset($page['entetes']['X-Xml-Hack']))
+	if (isset($page['entetes']['X-Xml-Hack'])
+	AND isset($options['protect_xml']) AND $options['protect_xml'])
 		$page['texte'] = str_replace("<\1?xml", '<'.'?xml', $page['texte']);
 
 	$GLOBALS['_INC_PUBLIC']--;
