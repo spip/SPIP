@@ -36,7 +36,6 @@ function inc_regler_moderation_dist($id_article, $script, $args) {
 
 	$statut_forum = get_forums_publics($id_article);
 	$choix_forum = $GLOBALS['liste_des_forums'];
-	$choix_forum['non'] = _T('info_pas_de_forum');
 	$opt = '';
 	foreach ($choix_forum as $desc => $val) {
 		$opt .= "\n\t<option";
