@@ -378,7 +378,6 @@ dist/vignettes/zip.png -text
 dist/win_width.htc -text
 ecrire/action/acceder_document.php -text
 ecrire/action/activer_plugins.php -text
-ecrire/action/aleer.php -text
 ecrire/action/charger_plugin.php -text
 ecrire/action/configurer.php -text
 ecrire/action/configurer_notifications_forum.php -text
@@ -402,6 +401,7 @@ ecrire/action/export_all.php -text
 ecrire/action/ical.php -text
 ecrire/action/iconifier.php -text
 ecrire/action/index.php -text
+ecrire/action/informer_auteur.php -text
 ecrire/action/instituer_article.php -text
 ecrire/action/instituer_breve.php -text
 ecrire/action/instituer_collaboration.php -text
@@ -625,6 +625,7 @@ ecrire/inc/instituer_auteur.php -text
 ecrire/inc/instituer_breve.php -text
 ecrire/inc/instituer_site.php -text
 ecrire/inc/joindre.php -text
+ecrire/inc/json.php -text
 ecrire/inc/lang_liste.php -text
 ecrire/inc/legender.php -text
 ecrire/inc/lien.php -text
