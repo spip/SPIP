@@ -96,10 +96,8 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	$referencer_traduction = charger_fonction('referencer_traduction', 'inc');
 	$discuter = charger_fonction('discuter', 'inc');
 
-	if ($flag_editable AND ($spip_display != 4)) {
-		$iconifier = charger_fonction('iconifier', 'inc');
-		$icone = $iconifier('id_article', $id_article,'articles', false);
-	} else $icone = '';
+	$iconifier = charger_fonction('iconifier', 'inc');
+	$icone = $iconifier('id_article', $id_article,'articles', false, $flag_editable);
 
 	$boite = pipeline ('boite_infos', array('data' => '',
 		'args' => array(

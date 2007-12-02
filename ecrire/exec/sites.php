@@ -64,8 +64,7 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 	$flag_administrable = autoriser('modifier','site',$id_syndic);
 	$flag_editable = ($flag_administrable OR ($GLOBALS['meta']["proposer_sites"] > 0 AND ($statut == 'prop')));
 
-	if ($id_syndic AND $flag_administrable AND ($spip_display != 4))
-		$iconifier = charger_fonction('iconifier', 'inc');
+	$iconifier = charger_fonction('iconifier', 'inc');
 	if ($flag_editable AND ($statut == 'publie'))
 		$dater = charger_fonction('dater', 'inc');
 	$editer_mot = charger_fonction('editer_mot', 'inc');
@@ -89,7 +88,7 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 			)
 	));
 	echo fin_boite_info(true);
-	echo ($iconifier ? $iconifier('id_syndic', $id_syndic, 'sites', false) :"");
+	echo $iconifier('id_syndic', $id_syndic, 'sites', false, $flag_administrable);
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
 

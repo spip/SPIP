@@ -63,8 +63,7 @@ function exec_breves_voir_args($id_breve, $cherche_mot, $select_groupe)
 			'data'=>''
 		)
 	);
-	if (($spip_display != 4) AND $id_breve>0 AND autoriser('publierdans','rubrique',$id_rubrique))
-		$iconifier = charger_fonction('iconifier', 'inc');
+	$iconifier = charger_fonction('iconifier', 'inc');
 
 	$dater = charger_fonction('dater', 'inc');
 
@@ -95,7 +94,7 @@ function exec_breves_voir_args($id_breve, $cherche_mot, $select_groupe)
 		'data'=>''
 		)
 	);
-	echo ($iconifier ? $iconifier('id_breve', $id_breve, 'breves_voir', false) : "");
+	echo $iconifier('id_breve', $id_breve, 'breves_voir', false, autoriser('publierdans','rubrique',$id_rubrique));
 
 	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',
