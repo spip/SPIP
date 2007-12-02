@@ -57,9 +57,9 @@ div#page { width: 750px; margin: 0 auto; text-align: left; }
 
 div#top { margin: 0; border-bottom: 2px solid #8B6F92; padding-top: 1em; }
 div#top #nom_site_spip, #top a .spip_logos { display: block; float: left; font-weight: bold; font-size: 1.50em; }
-div#top .formulaire_recherche { float: right; width: 30%; background: none; margin: 0; padding: 1em 0; }
+div#top .formulaire_recherche { float: right; width: 160px; background: none; margin: 0; padding: 1em 0; }
 div#top .formulaire_recherche label {}
-div#top .formulaire_recherche input.forml { width: 70%; }
+div#top .formulaire_recherche input.forml { width: 130px; }
 div#top .formulaire_recherche input.bouton { vertical-align: middle; }
 
 div#wrapper { clear: both; float: left; width: 67%; overflow: hidden; }
