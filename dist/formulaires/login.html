@@ -15,16 +15,12 @@
 </fieldset>]
 
 	<script type="text/javascript" src="#EVAL{_DIR_JAVASCRIPT}md5.js"> </script>
-	[<script type="text/javascript">
-	var alea_actuel="(#ENV{alea_actuel})";
-	var alea_futur="[(#ENV{alea_futur})]";
-	</script>]
 	<form id="login[_(#ENV{login})]"
 		action="[(#ENV{action2})]"
 		method="post"[(#ENV{source}|=={spip}|?{' ',''})
 		onsubmit='if (this.session_password.value) {
-			this.session_password_md5.value = calcMD5(alea_actuel + this.session_password.value);
-			this.next_session_password_md5.value = calcMD5(alea_futur + this.session_password.value);
+			this.session_password_md5.value = calcMD5("[(#ENV{alea_actuel})]" + this.session_password.value);
+			this.next_session_password_md5.value = calcMD5("[(#ENV{alea_futur})]" + this.session_password.value);
 			this.session_password.value = "";
 			return true;
 			}']>
@@ -43,16 +39,19 @@
 
 
 <input type="hidden" name="session_login_hidden" value="(#ENV{login})" />
-<script type="text/javascript"><!--
-document.write("<p><:login_login:>&nbsp;<strong>[(#ENV{login_alt})]<" + "/strong><br />&#91;<a href='[(#ENV{action2}
+<p id='login_securise' style='display:none;'><:login_login:>&nbsp;<strong>[(#ENV{login_alt})]</strong><br />&#91;<a href='[(#ENV{action2}
 	|parametre_url{cookie_admin,non}
 	|parametre_url{url,#ENV*{url}}
-	|parametre_url{retour,#ENV*{self}})]'><:login_autre_identifiant:><" + "/a>&#93;</p>")
+	|parametre_url{retour,#ENV*{self}})]'><:login_autre_identifiant:></a>&#93;</p>
+<script type="text/javascript"><!--
+if (l=document.getElementById('login_securise'))	l.style.display='';
 //--></script>
 <noscript>
+	<div id='login_non_securise'>
 	<p class="reponse_formulaire"><:login_non_securise:> <a href="[(#ENV{action})]"><:login_recharger:></a>.</p>
 	<p><label for="session_login"><:login_login2:></label><br />
 	<input type="text" class="forml" name="session_login" id="session_login"[ value="(#ENV{login})"] size="40" /></p>
+	</div>
 </noscript>
 ]
 	[(#ENV{login}|?{'',' '})<div id='pass_ajax' style='display:none;'>]
@@ -72,9 +71,10 @@ document.write("<p><:login_login:>&nbsp;<strong>[(#ENV{login_alt})]<" + "/strong
 	<p class="spip_bouton"><input type="submit" value="<:bouton_valider:>" /></p>
 	</fieldset>
 	</form>
+	[(#REM)
 <script type="text/javascript"><!--
 document.getElementById('var_login[_(#ENV{login})]').focus();
---></script>[
+--></script>][
 	<form action="(#ENV{auth_http})" method="get">[
 	(#ENV{auth_http}|form_hidden)
 	]
@@ -88,7 +88,6 @@ document.getElementById('var_login[_(#ENV{login})]').focus();
 	</form>
 ]
 [(#ENV{login}|?{'',' '})
-<script type='text/javascript' src='#URL_PAGE{jquery.js}'></script>
 <script type='text/javascript'>
 var alea_actuel;
 var alea_futur;
