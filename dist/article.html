@@ -20,7 +20,7 @@ href="[(#URL_PAGE{backend})]<BOUCLE_URLAUTEURS(AUTEURS){id_article}>&amp;id_aute
 	<INCLURE{fond=inc-entete}>
 
 	[(#REM) Contenu principal : contenu de l'article ]
-    <div class="hfeed" id="wrapper">
+    <div class="hfeed" id="conteneur">
     <div class="hentry" id="contenu">
     
         [(#REM) Fil d'Ariane ]
@@ -95,7 +95,7 @@ href="[(#URL_PAGE{backend})]<BOUCLE_URLAUTEURS(AUTEURS){id_article}>&amp;id_aute
         [<p class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:></a></p>]
 
 	</div><!--#contenu-->
-	</div><!--#wrapper-->
+	</div><!--#conteneur-->
 
 
     [(#REM) Menu de navigation laterale ]

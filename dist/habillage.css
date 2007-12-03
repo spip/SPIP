@@ -62,7 +62,7 @@ div#top .formulaire_recherche label {}
 div#top .formulaire_recherche input.forml { width: 130px; }
 div#top .formulaire_recherche input.bouton { vertical-align: middle; }
 
-div#wrapper { clear: both; float: left; width: 67%; overflow: hidden; }
+div#conteneur { clear: both; float: left; width: 67%; overflow: hidden; }
 div#contenu { padding-top: 0.30em; }
 
 div#navigation { float: right; width: 30%; overflow: hidden; }
@@ -78,7 +78,7 @@ div#pied img { vertical-align: bottom; }
 .invisible { position: absolute; top: -3000em; height: 1%; }
 
 /* Affichage pour les petits ecrans (type 400 x 300) */
-@media handheld { div#page, div#wrapper, div#navigation, div#extra { width: auto; } }
+@media handheld { div#page, div#conteneur, div#navigation, div#extra { width: auto; } }
 
 
 /*  ------------------------------------------
