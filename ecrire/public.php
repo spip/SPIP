@@ -26,8 +26,11 @@ if ($GLOBALS['_INC_PUBLIC']>0) {
 		if ($subpage['process_ins'] == 'html'){
 			echo $subpage['texte'];
 		}
-		else
+		else {
+			xml_hack($subpage, true);
 			eval('?' . '>' . $subpage['texte']);
+			// xml_hack($subpage); # sera nettoye apres l'eval() final
+		}
 	
 		// est-ce possible ?
 		if (isset($subpage['lang_select'])
@@ -172,10 +175,6 @@ if ($GLOBALS['_INC_PUBLIC']>0) {
 		$spip_compter_visites = in_array($page['entetes']['X-Spip-Visites'],array('oui','non'))?$page['entetes']['X-Spip-Visites']:$spip_compter_visites;
 		unset($page['entetes']['X-Spip-Visites']);
 	}
-	
-	// 0. xml-hack
-	if ($xml_hack = isset($page['entetes']['X-Xml-Hack']))
-		unset($page['entetes']['X-Xml-Hack']);
 
 	// 1. Cas d'une page contenant uniquement du HTML :
 	if ($page['process_ins'] == 'html') {
@@ -191,18 +190,22 @@ if ($GLOBALS['_INC_PUBLIC']>0) {
 		// envoi des entetes
 		if (!$flag_ob) {
 			foreach($page['entetes'] as $k => $v) @header("$k: $v");
+			xml_hack($page, true);
 			eval('?' . '>' . $page['texte']);
 			$page['texte'] = '';
+			// xml_hack($page); # inutile :(
 		}
 
 		// sinon, inclure_balise_dynamique nous enverra peut-etre
 		// quelques en-tetes de plus (voire qq envoyes directement)
 		else {
 			ob_start(); 
+			xml_hack($page, true);
 			$res = eval('?' . '>' . $page['texte']);
 			$page['texte'] = ob_get_contents(); 
+			xml_hack($page);
 			ob_end_clean();
-			
+
 			foreach($page['entetes'] as $k => $v) @header("$k: $v");
 			// en cas d'erreur lors du eval,
 			// la memoriser dans le tableau des erreurs
@@ -212,6 +215,7 @@ if ($GLOBALS['_INC_PUBLIC']>0) {
 				erreur_squelette(_T('zbug_erreur_execution_page'));
 			}
 		}
+
 	}
 
 	if ($html) $page = analyse_js_ajoutee($page);
@@ -233,10 +237,6 @@ if ($GLOBALS['_INC_PUBLIC']>0) {
 	//
 	// Post-traitements et affichage final
 	//
-
-	// Report du hack pour <?xml (cf. public/compiler.php)
-	if ($xml_hack)
-		$page['texte'] = str_replace("<\1?xml", '<'.'?xml', $page['texte']);
 
 	// (c'est ici qu'on fait var_recherche, tidy, boutons d'admin,
 	// cf. public/assembler.php)
