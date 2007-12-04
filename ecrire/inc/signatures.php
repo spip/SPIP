@@ -19,12 +19,12 @@ function message_de_signature($row)
 }
 
 // http://doc.spip.org/@inc_signatures_dist
-function inc_signatures_dist($script, $id, $debut, $where, $order, $limit='') {
-
+function inc_signatures_dist($script, $id, $debut, $where, $order, $limit='', $type='') {
 	charger_generer_url();
 
 	# filtre de duree (a remplacer par une vraie pagination)
 	#$where .= ($where ? " AND " : "") . "date_time>DATE_SUB(NOW(),INTERVAL 180 DAY)";
+	if ($type == 'interne')   $where = "NOT($where)";
 	if ($id) { 
 		$args = "id_article=$id&";
 		$where .= " AND id_article=$id";
@@ -36,7 +36,6 @@ function inc_signatures_dist($script, $id, $debut, $where, $order, $limit='') {
 		$res = navigation_pagination($t, $nb_aff, generer_url_ecrire($script, $args), false, 'debut');
 	} else $res = '';
 
-
 	$limit = (!$limit AND !$debut) ? '' : (($debut ? "$debut," : "") . $limit);
 
 	$request = sql_select('*', 'spip_signatures', $where, '', $order, $limit);
@@ -44,13 +43,13 @@ function inc_signatures_dist($script, $id, $debut, $where, $order, $limit='') {
 	$res .= '<br />';
 
  	while($row=sql_fetch($request)){
-		$res .= '<br />' . signatures_edit($script, $id, $debut, $row);
+	  $res .= '<br />' . signatures_edit($script, $id, $debut, $row, $type);
 	}
 	return $res;
 }
 
 // http://doc.spip.org/@signatures_edit
-function signatures_edit($script, $id, $debut, $row) {
+function signatures_edit($script, $id, $debut, $row, $type) {
 
 		$id_signature = $row['id_signature'];
 		$id_article = $row['id_article'];
@@ -62,13 +61,15 @@ function signatures_edit($script, $id, $debut, $row) {
 		$statut = $row['statut'];
 		
 		$arg = ($statut=="publie") ? "-$id_signature" : $id_signature;
+
+		$retour = redirige_action_auteur('editer_signatures', $arg, $script, "id_article=$id_article&debut=$debut&type=$type#signature$id_signature");
 		$res = "";
 		
 		if ($statut=="poubelle"){
 			$res .= "<table width='100%' cellpadding='2' cellspacing='0' border='0'><tr><td style='background-color: #ff0000'>";
 		}
 		
-		$res .= "<table width='100%' cellpadding='3' cellspacing='0'><tr><td class='verdana2 toile_foncee' style='color: white;'><b>"
+		$res .= "<table id='signature$id_signature' width='100%' cellpadding='3' cellspacing='0'><tr><td class='verdana2 toile_foncee' style='color: white;'><b>"
  		.  ($nom_site ? "$nom_site / " : "")
 		.  $nom_email
 		.  "</b></td></tr>"
@@ -76,19 +77,24 @@ function signatures_edit($script, $id, $debut, $row) {
 				
 		if ($statut=="publie"){
 			$res .= icone_inline (_T('icone_supprimer_signature'),
-				redirige_action_auteur('editer_signatures', $arg, $script, "id_article=$id&debut=$debut"),
+				$retour,
 				"forum-interne-24.gif", 
 				"supprimer.gif",
 				"right",
 				false);
 		} elseif ($statut=="poubelle"){
 			$res .= icone_inline (_T('icone_valider_signature'),
-				redirige_action_auteur('editer_signatures', $arg, $script, "id_article=$id&debut=$debut"),
+				$retour,
 				"forum-interne-24.gif", 
 				"creer.gif",
 				"right",
 				false);
-		}
+		} else $res .= icone_inline (_L('relancer le signataire'),
+				$retour,
+				"forum-interne-24.gif", 
+				"creer.gif",
+				"right",
+				false);
 		
 		$res .= "<span class='spip_small'>".date_interface($date_time)."</span><br />";
 		if ($statut=="poubelle"){
