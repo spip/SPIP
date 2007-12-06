@@ -79,14 +79,14 @@ function inc_couleurs_dist($choix=NULL)
 	    '&couleur_foncee=' .
 	    substr($couleurs_spip[$choix]['couleur_foncee'],1);
 	} else {
-	  if (is_array($choix)) return $couleurs_spip = $choix;
-		$res = '';
+		if (is_array($choix)) return $couleurs_spip = $choix;
+
 		$evt = '
 onmouseover="changestyle(\'bandeauinterface\');"
 onfocus="changestyle(\'bandeauinterface\');"
 onblur="changestyle(\'bandeauinterface\');"';
 
-		$bloc = '<span id="selecteur_couleur"'. $evt .'>';
+		$bloc = '';
 		foreach ($couleurs_spip as $key => $val) {
 			$bloc .=
 			'<a href="'
@@ -95,16 +95,20 @@ onblur="changestyle(\'bandeauinterface\');"';
 			. ' rel="'.generer_url_public('style_prive','ltr='
 				. $GLOBALS['spip_lang_left'] . '&'
 				. inc_couleurs_dist($key)).'"'
+			  . $evt
 			.'>'
 			. http_img_pack("rien.gif",
 					_T('choix_couleur_interface') . $key,
 					"width='8' height='8' style='margin: 1px; background-color: "	. $val['couleur_claire'] . ";'")
 			. "</a>";
 		}
-		$bloc .= "</span>\n";
 
 		// Ce js permet de changer de couleur sans recharger la page
-		$bloc .= "<script type='text/javascript'><!--
+
+		return  '<span id="selecteur_couleur">'
+		.  $bloc
+		. "</span>\n"
+		. "<script type='text/javascript'><!--
 			$('#selecteur_couleur a')
 			.click(function(){
 				$('head>link#cssprivee')
@@ -118,7 +122,7 @@ onblur="changestyle(\'bandeauinterface\');"';
 			});
 		// --></script>\n";
 
-		return $res . $bloc;
+
 	}
 }
 
