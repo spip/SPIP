@@ -94,58 +94,19 @@ function prepare_selec_statut(nom, type, id, action)
 function changeclass(objet, myClass) {
 	objet.className = myClass;
 }
-function changesurvol(iddiv, myClass) {
-	document.getElementById(iddiv).className = myClass;
-}
-
-function getHeight(obj) {
-	if (obj == "window") {
-		return hauteur_fenetre();
-	}
-	else
-	{
-		obj = document.getElementById(obj);
-		if (obj.offsetHeight) return obj.offsetHeight;
-	}
-}
-function hauteur_fenetre() {
-	var myWidth = 0, myHeight = 0;
-	if( typeof( window.innerWidth ) == 'number' ) {
-		//Non-IE
-		myHeight = window.innerHeight;
-	} else {
-		if( document.documentElement &&
-			( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
-			//IE 6+ in 'standards compliant mode'
-			myHeight = document.documentElement.clientHeight;
-		} else {
-			if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
-				//IE 4 compatible
-				myHeight = document.body.clientHeight;
-			}
-		}
-	}
-	return myHeight;
-}
 
 
 function hauteurFrame(nbCol) {
-	hauteur = hauteur_fenetre() - 40;
-	hauteur = hauteur - getHeight('haut-page');
+	hauteur = $(window).height() - 40;
+	hauteur = hauteur - $('#haut-page').height();
 	
-	if (findObj('brouteur_hierarchie')) hauteur = hauteur - getHeight('brouteur_hierarchie');
-		
-	for (i=0; i<nbCol; i++) {
-		source = document.getElementById("iframe" + i);
-		source.style.height = hauteur + 'px';
-	}
-}
+	if (findObj('brouteur_hierarchie'))
+		hauteur = hauteur - $('#brouteur_hierarchie').height();
 
-function hauteurTextarea() {
-	hauteur = hauteur_fenetre() - 80;
-	
-	source = document.getElementById("text_area");
-	source.style.height = hauteur + 'px';
+	for (i=0; i<nbCol; i++) {
+		$('#iframe' + i)
+		.height(hauteur + 'px');
+	}
 }
 
 function changeVisible(input, id, select, nonselect) {

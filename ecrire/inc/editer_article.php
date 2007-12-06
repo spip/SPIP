@@ -71,6 +71,9 @@ function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='',
 	return generer_action_auteur("editer_article", $id_article, $retour, $form, " method='post'");
 }
 
+
+/*
+// code mort
 // http://doc.spip.org/@editer_article_texte
 function editer_article_texte($texte, $config, $aider, $lang='')
 {
@@ -110,10 +113,15 @@ function editer_article_texte($texte, $config, $aider, $lang='')
 	.  $texte
 	. "</textarea>\n"
 	. (test_espace_prive()
-		? "<script type='text/javascript'><!--\njQuery(hauteurTextarea);\n//--></script>\n"
+		? "<script type='text/javascript'><!--
+		jQuery(function(){
+			jQuery('#text_area')
+			.css('height',(jQuery(window).height()-80)+'px');
+		});\n//--></script>\n"
 		: ''
 	);
 }
+*/
 
 //
 // Gestion des textes trop longs (limitation brouteurs)
