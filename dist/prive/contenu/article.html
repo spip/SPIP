@@ -19,7 +19,7 @@
 <div class='label'><:info_chapeau:></div>
 <div dir='#LANG_DIR' class='#EDIT{chapo} chapo'>#CHAPO</div>
 </div>
-<div class="champ contenu_nom_site[ (#NOM_SITE*|?{'',vide})]">
+<div class="champ contenu_nom_site[ (#NOM_SITE*|sinon{#URL_SITE*}|?{'',vide})]">
 <div class='label'><:lien_voir_en_ligne:></div>
 <div dir='#LANG_DIR' class='#EDIT{hyperlien} nom_site'><a href='#URL_SITE'>#NOM_SITE</a></div>
 </div>
