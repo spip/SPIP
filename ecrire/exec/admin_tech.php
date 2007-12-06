@@ -25,11 +25,15 @@ function exec_admin_tech_dist()
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_admin_tech'), "configuration", "base");
 
+	echo "<br /><br />";
+	echo "<div style='text-align: center'>",
+	  gros_titre(_T('titre_admin_tech'),'',false),
+	  '</div>';
 
 	if ($GLOBALS['connect_toutes_rubriques']) {
 
+		echo barre_onglets("administration", "sauver") . "<br />";
 		echo debut_gauche('',true);
-		echo "<br /><br /><br /><br />";
 		echo debut_boite_info(true);
 		echo  _T('info_gauche_admin_tech');
 		echo fin_boite_info(true);
@@ -41,21 +45,13 @@ function exec_admin_tech_dist()
 			$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
 		}
 		$dir_dump = $repertoire;
-		$onglet = barre_onglets("administration", "sauver") . "<br />";
+
 	} else {
 		echo debut_gauche(true);
 		$dir_dump = determine_upload();
-		$onglet = '';
 	}
 
-	$dir_dump = joli_repertoire($dir_dump);
-
 	echo debut_droite('',true);
-
-	echo "<div style='text-align: center'>",
-	  gros_titre(_T('titre_admin_tech'),'',false),
-	  '</div>',
-	  $onglet;
 
 	//
 	// Sauvegarde de la base
@@ -68,6 +64,8 @@ function exec_admin_tech_dist()
 	 $dir_img = substr(_DIR_IMG,strlen(_DIR_RACINE));
 	else
 	 $dir_img = _DIR_IMG;
+
+	$dir_dump = joli_repertoire($dir_dump);
 
 	$res = 
 	 "\n<p>" .
