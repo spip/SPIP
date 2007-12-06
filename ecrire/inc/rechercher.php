@@ -96,7 +96,7 @@ function liste_des_jointures() {
 // - score pour retourner un score
 // On peut passer les tables, ou une chaine listant les tables souhaitees
 // http://doc.spip.org/@recherche_en_base
-function recherche_en_base($recherche='', $tables=NULL, $options=array()) {
+function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serveur='') {
 	include_spip('base/abstract_sql');
 
 	if (!is_array($tables)) {
@@ -183,10 +183,10 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array()) {
 			$requete['SELECT'], $requete['FROM'], $requete['WHERE'],
 			implode(" ",$requete['GROUPBY']),
 			$requete['ORDERBY'], $requete['LIMIT'],
-			$requete['HAVING']
+			$requete['HAVING'], $serveur
 		);
 
-		while ($t = sql_fetch($s)) {
+		while ($t = sql_fetch($s,$serveur)) {
 			$id = intval($t[$_id_table]);
 			if ($options['toutvoir']
 			OR autoriser('voir', $table, $id)) {
@@ -246,7 +246,7 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array()) {
 			foreach ($joints as $jtable => $jj) {
 				$it = id_table_objet($table);
 				$ij =  id_table_objet($jtable);
-				$s = sql_select("$it,$ij", "spip_${jtable}s_${table}s", sql_in('id_'.${jtable}, array_keys($jj)));
+				$s = sql_select("$it,$ij", "spip_${jtable}s_${table}s", sql_in('id_'.${jtable}, array_keys($jj)), '','','','',$serveur);
 				while ($t = sql_fetch($s)) {
 					$id = $t[$it];
 					$joint = $jj[$t[$ij]];

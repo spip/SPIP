@@ -18,7 +18,7 @@ include_spip('inc/rechercher');
 // Preparer les listes id_article IN (...) pour les parties WHERE
 // et points =  des requetes du moteur de recherche
 // http://doc.spip.org/@inc_prepare_recherche_dist
-function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false) {
+function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, $serveur='') {
 	static $cache = array();
 	static $fcache = array();
 
@@ -53,14 +53,15 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false) 
 				'score' => true,
 				'toutvoir' => true,
 				'jointures' => true
-			));
+				),
+					    $serveur);
 		$points = $points[$x];
 
 		# Pour les forums, unifier par id_thread et forcer statut='publie'
 		if ($x == 'forum' AND $points) {
 			$p2 = array();
-			$s = sql_select("id_thread, id_forum", "spip_forum", "statut='publie' AND ".sql_in('id_forum', array_keys($points)));
-			while ($t = sql_fetch($s))
+			$s = sql_select("id_thread, id_forum", "spip_forum", "statut='publie' AND ".sql_in('id_forum', array_keys($points)), '','','','', $serveur);
+			while ($t = sql_fetch($s, $serveur))
 				$p2[intval($t['id_thread'])]['score']
 					+= $points[intval($t['id_forum'])]['score'];
 			$points = $p2;
@@ -77,13 +78,13 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false) 
 			$select = '';
 			foreach ($listes_ids as $p => $liste_ids)
 				$select .= "+ (case when (".
-					sql_in("$table.$primary", substr($liste_ids, 1))
+			  sql_in("$table.$primary", substr($liste_ids, 1),'',$serveur)
 					.") then $p else 0 end) ";
 
 			$select = $select ? substr($select,1) : '0';
 			$cache[$recherche][$table] = array($select,
 				'('.sql_in("$table.$primary",
-					array_keys($points)).')'
+					   array_keys($points),'',$serveur).')'
 				);
 		}
 
