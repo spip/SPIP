@@ -24,17 +24,18 @@ include_spip('inc/headers');
 function exec_import_all_dist()
 {
 	$archive=_request('archive');
-	if (!strlen($archive)) $archive=_request('archive_perso');
-	$request = @unserialize($GLOBALS['meta']['import_all']);
-
+	if (!strlen($archive)) {
+		$_POST['archive'] = $archive = _request('archive_perso');
+	}
 	if ($archive) {
 		$dir = import_queldir();
 		$_POST['dir'] = $dir;
 		$commentaire = verifier_sauvegarde($dir . $archive);
 		$insert = _request('insertion');
-	} elseif ($archive = isset($GLOBALS['meta']['import_all'])) {
+	} elseif (isset($GLOBALS['meta']['import_all'])) {
 		$request = @unserialize($GLOBALS['meta']['import_all']);
 		$insert = $request['insertion'];
+		$archive = $request['archive'];
 		$commentaire = '';
 	}
 	if ($archive) {

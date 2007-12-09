@@ -29,10 +29,8 @@ function inc_admin_dist($script, $titre, $comment='', $anonymous=false)
 		ecrire_meta($script, serialize($_POST));
 	} 
 
-	if  (!$anonymous) {
-		$res = admin_verifie_session($script);
-		if ($res) return $res;
-	}
+	$res = admin_verifie_session($script,$anonymous);
+	if ($res) return $res;
 	$base = charger_fonction($script, 'base');
 	$base($titre,$reprise);
 	fin_admin($script);
@@ -55,16 +53,16 @@ function inc_admin_dist($script, $titre, $comment='', $anonymous=false)
 // 	c'est que l'operation se passe mal, on la stoppe
 
 // http://doc.spip.org/@admin_verifie_session
-function admin_verifie_session($script) {
+function admin_verifie_session($script, $anonymous=false) {
 
 	include_spip('base/abstract_sql');
 	$pref = sprintf("_%d_",$GLOBALS['visiteur_session']['id_auteur']);
 	$signal = fichier_admin($script, "$script$pref");
 	$valeur = sql_getfetsel('valeur', 'spip_meta', "nom='admin'");
 	if ($valeur === NULL) {
-		ecrire_meta('admin', $signal,'non');
+		ecrire_meta('admin', $signal, 'non');
 	} else {
-		if ($valeur != $signal) {
+		if (!$anonymous AND ($valeur != $signal)) {
 			if (intval(substr($valeur, strpos($valeur,'_')+1))<>
 			    $GLOBALS['visiteur_session']['id_auteur']) {
 				include_spip('inc/minipres');
