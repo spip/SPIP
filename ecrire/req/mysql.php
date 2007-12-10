@@ -412,7 +412,7 @@ function spip_mysql_countsel($from = array(), $where = array(),
 }
 
 // http://doc.spip.org/@spip_mysql_error
-function spip_mysql_error($query='') {
+function spip_mysql_error($query='', $serveur='') {
 	$s = mysql_error();
 	if ($s) spip_log("$s - $query", 'mysql');
 	return $s;
@@ -420,7 +420,7 @@ function spip_mysql_error($query='') {
 
 // A transposer dans les portages
 // http://doc.spip.org/@spip_mysql_errno
-function spip_mysql_errno() {
+function spip_mysql_errno($serveur='') {
 	$s = mysql_errno();
 	// 2006 MySQL server has gone away
 	// 2013 Lost connection to MySQL server during query

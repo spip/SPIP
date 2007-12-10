@@ -171,11 +171,11 @@ function gen_liste_rubriques() {
 		return; // c'etait en cache :-)
 
 	// se restreindre aux rubriques utilisees recemment +secteurs
-	$liste="0";
+	$liste=array(0); //$liste="0";
 	$s = sql_select("id_rubrique", "spip_rubriques", "", "", "id_parent=0 DESC, date DESC", 500);
 	while ($t = sql_fetch($s))
-		$liste .=",".$t['id_rubrique']; 
-	 
+		$liste[] = $t['id_rubrique']; //$liste .=",".$t['id_rubrique']; 
+	$liste = join(',',$liste);
 	$res = sql_select("id_rubrique, titre, id_parent", "spip_rubriques", "id_rubrique IN ($liste)",'', 'id_parent,0+titre,titre');
 
 	// il ne faut pas filtrer le autoriser voir ici car on met le resultat en cache, commun a tout le monde
