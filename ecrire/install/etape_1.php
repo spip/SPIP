@@ -51,7 +51,7 @@ function install_etape_1_dist()
 			. _L("Consultez les informations fournies par votre h&eacute;bergeur : vous devez y trouver le serveur de base de donn&eacute;es qu'il propose et vos identifiants personnels pour vous y connecter.")
 			.'</p>'
 			.'<p>'
-			. _L("SPIP sait utiliser MySQL (le plus r&eacute;pandu) et PostGreSQL (actuellement sans Plugins).")
+			. _L("SPIP sait utiliser MySQL (le plus r&eacute;pandu), PostGreSQL et SQLite (actuellement sans Plugins).")
 			.'</p>'
 			);
 	echo install_connexion_form($db, $login, $pass, $predef, "\n<input type='hidden' name='chmod' value='$chmod' />", 2);
