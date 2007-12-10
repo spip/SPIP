@@ -1084,7 +1084,7 @@ class sqlite_analyse_query {
 	// critere REGEXP non reconnu en sqlite2
 	function corrigerRegexp(){
 		if (($this->sqlite_version == 2) && (strpos($this->query, 'REGEXP')!==false)){
-			$this->query = preg_replace('/([^\s\(]*)(\s*)REGEXP(\s*)([^\s\)]*)/', 'REGEXP_MATCH($1, $4)', $this->query);
+			$this->query = preg_replace('/([^\s\(]*)(\s*)REGEXP(\s*)([^\s\)]*)/', 'REGEXP($4, $1)', $this->query);
 		}
 	}
 	

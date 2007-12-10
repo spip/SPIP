@@ -43,7 +43,8 @@ function _sqlite_init_functions(&$sqlite){
 		'MONTH'			=> array( '_sqlite_func_month'			,1),
 	
 		'RAND'			=> array( '_sqlite_func_rand'			,0), // sinon random() v2.4
-		'REGEXP_MATCH'	=> array( '_sqlite_func_regexp_match'	,2), // critere REGEXP supporte a partir de v3.3.2
+		'REGEXP'		=> array( '_sqlite_func_regexp_match'	,2), // critere REGEXP supporte a partir de v3.3.2
+		//'REGEXP_MATCH'	=> array( '_sqlite_func_regexp_match'	,2), // critere REGEXP supporte a partir de v3.3.2
 		'REGEXP_REPLACE'=> array( '_sqlite_func_regexp_replace'	,3),
 		'RIGHT'			=> array( '_sqlite_func_right'			,2),
 #		'RTRIM'			=> array( 'rtrim'						,1), // present en theorie
@@ -179,7 +180,7 @@ function _sqlite_func_right ($s, $lenght) {
 }
 
 
-function _sqlite_func_regexp_match($quoi, $cherche) {
+function _sqlite_func_regexp_match($cherche, $quoi) {
 	$return = preg_match('%'.$cherche.'%', $quoi);
 	#spip_log("regexp_replace : $quoi, $cherche, $remplace, $return",'debug');
 	return $return;
