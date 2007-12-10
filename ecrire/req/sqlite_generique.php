@@ -835,9 +835,9 @@ function _sqlite_charger_version($version=''){
 			$ok = true;	
 		} else {
 			if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-				$ok = dl('php_sqlite.dll');
+				$ok = @dl('php_sqlite.dll');
 			} else {
-				$ok = dl('sqlite.so');
+				$ok = @dl('sqlite.so');
 			}
 		}
 		if ($ok) $versions[]=2;
@@ -850,9 +850,9 @@ function _sqlite_charger_version($version=''){
 			$ok = true;	
 		} else {	
 			if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-				$ok = dl('php_pdo.dll') && dl('php_pdo_sqlite.dll');
+				$ok = @dl('php_pdo.dll') && @dl('php_pdo_sqlite.dll');
 			} else {
-				$ok = dl('pdo.so') && dl('pdo_sqlite.so');
+				$ok = @dl('pdo.so') && @dl('pdo_sqlite.so');
 			}	
 		}
 		if ($ok) $versions[]=3;
