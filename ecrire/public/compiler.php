@@ -256,8 +256,6 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 	} else {
 
 		$corps = $init . '
-	$connect = ' .
-	sql_quote($boucle->sql_serveur) . ';
 
 	// RESULTATS
 	while ($Pile[$SP] = @sql_fetch($result,"' .
@@ -787,6 +785,9 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 		$boucles[$id]->return = 
 			"function BOUCLE" . strtr($id,"-","_") . $nom .
 			'(&$Cache, &$Pile, &$doublons, &$Numrows, $SP) {' .
+			"\n\n\t\$connect = " .
+			_q($boucles[$id]->sql_serveur) .
+			";" .
 			$req .
 			"\n}\n\n";
 
@@ -823,6 +824,8 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 	  ($connect ? " pour $connect" : '') . ".
 //
 function " . $nom . '($Cache, $Pile, $doublons=array(), $Numrows=array(), $SP=0) {
+	$connect = ' .
+	_q($connect) . ';
 	$page = ' .
 	// ATTENTION, le calcul du l'expression $corps affectera $Cache
 	// c'est pourquoi on l'affecte a cette variable auxiliaire
