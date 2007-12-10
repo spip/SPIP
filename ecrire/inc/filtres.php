@@ -810,7 +810,8 @@ function affdate_base($numdate, $vue, $param = '') {
 		return $journum;
 
 	case 'nom_jour':
-		if (!$mois OR !$jour) return '';
+		if (!($mois = intval($mois)) OR !($jour = intval($jour)))
+			return '';
 		$nom = mktime(1,1,1,$mois,$jour,$annee);
 		$nom = 1+date('w',$nom);
 		$param = $param ? '_'.$param : '';
