@@ -314,7 +314,7 @@ function calcul_branche ($generation) {
 
 // http://doc.spip.org/@calculer_prochain_postdate
 function calculer_prochain_postdate($check= false) {
-
+	include_spip('base/abstract_sql');
 	if ($check) {
 		$postdates = ($GLOBALS['meta']["post_dates"] == "non") ?
 			"AND A.date <= NOW()" : '';
