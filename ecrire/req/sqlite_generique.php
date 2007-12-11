@@ -177,6 +177,7 @@ function spip_sqlite_query($query, $serveur='') {
 /* ordre alphabetique pour les autres */
 
 function spip_sqlite_alter($query, $serveur=''){
+	$query = _sqlite_remplacements_definitions_table($query);
 	return spip_sqlite_query("ALTER ".$query, $serveur);
 }
 
@@ -211,23 +212,9 @@ function spip_sqlite_create($nom, $champs, $cles, $autoinc=false, $temporary=fal
 		$character_set .= " COLLATE ".$GLOBALS['meta']['charset_collation_sql_base'];
 	*/
 
-	// quelques remplacements
-	$num = "\s?(\([0-9]*)\)?";
-	$enum = "\s?(\(.*)\)?";
 	
-	$remplace = array(
-		// pour l'autoincrement, il faut des INTEGER NOT NULL PRIMARY KEY
-		'(big)?int(eger)?'.$num => 'INTEGER',		
-		'enum'.$enum => 'VARCHAR',
-		'binary' => ''
-	);
+	$champs = _sqlite_remplacements_definitions_table($champs);
 
-	$_replace = array();
-	foreach ($remplace as $cle=>$val)
-		$_replace["/$cle/is"] = $val;
-		
-	$champs = preg_replace(array_keys($_replace), $_replace, $champs);
-		
 	foreach($champs as $k => $v) {
 		// je sais pas ce que c'est ca...
 		// puis personne rentre ici vue qe binary->''
@@ -861,15 +848,6 @@ function _sqlite_charger_version($version=''){
 	return $versions;
 }
 
-/*
- * renvoyer la liste des versions sqlite disponibles
- * sur le serveur 
- */
-function spip_versions_sqlite(){
-	return 	_sqlite_charger_version();
-}
-
-
 
 
 /*
@@ -926,6 +904,34 @@ function _sqlite_ref_fonctions(){
 	
 	return $fonctions;
 }
+
+
+
+// $query est une requete ou une liste de champs
+function _sqlite_remplacements_definitions_table($query){
+	// quelques remplacements
+	$num = "\s?(\([0-9]*)\)?";
+	$enum = "\s?(\(.*)\)?";
+	
+	$remplace = array(
+		// pour l'autoincrement, il faut des INTEGER NOT NULL PRIMARY KEY
+		'/(big)?int(eger)?'.$num.'/is' => 'INTEGER',		
+		'/enum'.$enum.'/is' => 'VARCHAR',
+		'/binary/is' => ''
+	);
+
+	return preg_replace(array_keys($remplace), $remplace, $query);
+}
+	
+	
+/*
+ * renvoyer la liste des versions sqlite disponibles
+ * sur le serveur 
+ */
+function spip_versions_sqlite(){
+	return 	_sqlite_charger_version();
+}
+
 
 
 
