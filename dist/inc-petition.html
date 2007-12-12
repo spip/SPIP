@@ -19,7 +19,7 @@
 		</th>
 		<th style='text-align: center'><:message:></th>
 		</tr>
-<BOUCLE_signatures(SIGNATURES) {id_article} {pagination 15} 
+<BOUCLE_signatures(SIGNATURES) {id_article} {pagination #ENV{pagination, 15} }
 	{recherche ?#ENV{cherche_signature}}
 	{!par #ENV{tri}}{par #ENV{tri_inverse}}
 	{!par #ENV{tri,#ENV{tri_inverse}}|?{'',date_time}}>
