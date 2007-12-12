@@ -628,10 +628,8 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	$ip=$row["ip"];
 	$id_auteur=$row["id_auteur"];
 	
-	$deb = "<a id='id$id_forum'></a>";
-
 	if ($spip_display == 4) {
-		$res = "\n<li>$deb".typo($titre)."<br />";
+		$res = "\n<li id='id$id_forum'>".typo($titre)."<br />";
 	} else {
 
 		$titre_boite = '';
@@ -646,9 +644,11 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 			}
 		} 
 
-		$titre_boite .= typo($titre);
+		$titre_boite .= "<a href='#id$id_forum' id='#id$id_forum'>"
+		. typo($titre)
+		. '</a>';
 
-		$res = "$deb<table width='100%' cellpadding='0' cellspacing='0' border='0'><tr>"
+		$res = "<table width='100%' cellpadding='0' cellspacing='0' border='0'><tr>"
 		. afficher_forum_4($compteur_forum, $nb_forum, $i)
 		. "\n<td style='width: 100%' valign='top'>";
 		if ($compteur_forum == 1) 
@@ -703,7 +703,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	if (!$controle_id_article) {
 	  	$tm = rawurlencode($titre);
 		$res .= "\n<div style='text-align: right' class='verdana1'>"
-		  . "<b><a title='" . _T('message') . " $id_forum' href='"
+		  . "<b><a href='"
 		  . generer_url_ecrire("forum_envoi", "statut=$statut&id_parent=$id_forum&titre_message=$tm&script=" . urlencode("$retour?$arg")) . '#formulaire'
 		. "'>"
 		. _T('lien_repondre_message')
