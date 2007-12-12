@@ -10,12 +10,9 @@
  (#ENV{controls}=={PlayButton}|?{#SET{largeur,40},''})][
  (#ENV{controls}=={PositionSlider}|?{#SET{hauteur,25},''})][
  (#ENV{controls}=={PositionSlider}|?{#SET{largeur,#GET{largeur}|moins{40}},''})
-][(#INCLUS|=={embed}|?{[(#ENV{controls,''}|?{'',' '})
+][(#ENV{controls,''}|?{'',' '})
 <div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})]'[
 style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})[width:(#GET{largeur}|max{120})px]']>
-]})
-][(#EXTENSION|match{^(rm|ram|ra)$}|?{' '})
-[(#ENV{controls,''}|?{'',' '})
 	<div>
 	[(#MODELE{emb,controls=ImageWindow,type=audio/x-pn-realaudio-plugin,console=Console#ID_DOCUMENT,nojava=true})]
 	</div>
@@ -23,18 +20,13 @@ style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{alig
 	[(#MODELE{emb,controls=PositionSlider,type=audio/x-pn-realaudio-plugin,console=Console#ID_DOCUMENT,nojava=true})]
 	#SET{done,1}
 ]
-][(#GET{done,0}|?{'',' '})
-[(#INCLUS|=={embed}|?{' '})
 <object width='#GET{largeur}' height='#GET{hauteur}'>
 <param name='movie' value='#URL_DOCUMENT' />
 <param name='src' value='#URL_DOCUMENT' />
 [(#ENV*|env_to_params)]
 <embed src='#URL_DOCUMENT' [(#ENV*|env_to_attributs)] width='#GET{largeur}' height='#GET{hauteur}'></embed></object>
 
-][(#INCLUS|=={image}|?{' '})
-[(#INCLURE{fond=modeles/img}{id_document}{align=#ENV{align}}{embed=oui}{lien=#ENV{lien}}{lien_class=#ENV{lien_class}})]
-]
-][(#INCLUS|=={embed}|?{' '})[(#ENV{controls,''}|?{'',' '})
+[(#ENV{controls,''}|?{'',' '})
 [<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>][<div class='spip_doc_descriptif'>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</div>]</div>
-]]
+]
 </BOUCLE_tous>
