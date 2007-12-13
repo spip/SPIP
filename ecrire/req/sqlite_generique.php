@@ -121,64 +121,121 @@ function spip_sqlite_query($query, $serveur='') {
 #spip_log("spip_sqlite_query() > $query");
 	_sqlite_init();
 	
-	if (!($sqlite = _sqlite_link($serveur)) && (_request('exec')!='install')){
-		spip_log("Aucune connexion sqlite (link)");
-		return false;	
-	}
-
-	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
-	$prefixe = $connexion['prefixe'];
-	$db = $connexion['db'];
-	
-	// corriger la requete au format mysql->sqlite
-	// creer la requete de comptage (sqlite3)
-	$analyse = new sqlite_analyse_query($sqlite, $query, $db, $prefixe);
-	$analyse->creerLesRequetes();
-	$query = $analyse->query; // pas indispensable car $query par &
-	$queryCount = $analyse->queryCount;
-	unset($analyse);
-	
-	$t = !isset($_GET['var_profile']) ? 0 : trace_query_start();
-#echo("<br /><b>spip_sqlite_query() $serveur >></b> $query"); // boum ? pourquoi ?
-	if ($sqlite){
-		if (_sqlite_is_version(3, $sqlite)) {
-			$r = $sqlite->query($query);
-			
-			// comptage : oblige de compter le nombre d'entrees retournees par la requete
-			// aucune autre solution ne donne le nombre attendu :( !
-			// particulierement s'il y a des LIMIT dans la requete.
-			if ($queryCount){
-				if ($r) {
-					$l = $sqlite->query($queryCount);
-					$r->spipSqliteRowCount =  count($l->fetchAll());
-				} else {
-					$r->spipSqliteRowCount = 0;
-				}
-			}
-		} else {
-			$r = sqlite_query($sqlite, $query);
-		}
-	} else {
-		$r = false;	
-	}
-
-#spip_log("spip_sqlite_query() >> $query"); // boum ? pourquoi ?
-	if (!$r){
-		echo "<br /><small>#erreur serveur '$serveur' dans &gt; $query</small><br />";
-		echo "<br />- ".spip_sqlite_error($query, $serveur);
-	}
-	if (!$r && $e = spip_sqlite_errno($serveur))	// Log de l'erreur eventuelle
-		$e .= spip_sqlite_error($query, $serveur); // et du fautif
-
-	return $t ? trace_query_end($query, $t, $r, $e) : $r;
+	$requete = new sqlite_traiter_requete($query, $serveur);
+	$requete->traduire_requete(); // mysql -> sqlite
+	return $requete->executer_requete();
 }
 
 
 /* ordre alphabetique pour les autres */
 
 function spip_sqlite_alter($query, $serveur=''){
+
 	$query = _sqlite_remplacements_definitions_table($query);
-	return spip_sqlite_query("ALTER ".$query, $serveur);
+
+	$requete = new sqlite_traiter_requete("ALTER $query", $serveur);
+	$requete->traduire_requete(); // mysql -> sqlite
+	$query = $requete->query;
+		
+	/* 
+	 * la il faut faire les transformations
+	 * si ALTER TABLE x (DROP|CHANGE) y
+	 * 
+	 * 1) recuperer "ALTER TABLE table "
+	 * 2) spliter les sous requetes (,)
+	 * 3) faire chaque requete independemment
+	 */
+	
+	// 1
+	if (preg_match("/\s*ALTER(\s*IGNORE)?\s*TABLE\s*([^\s]*)\s*/i", $query, $regs)){
+		$debut = $regs[0];
+		$table = $regs[2];
+		$suite = substr($query, strlen($debut));
+	} else {
+		spip_log("SQLite : Probleme de ALTER TABLE mal forme dans $query", 'sqlite');
+		return false;
+	}
+
+	// 2
+	$todo = explode(',', $suite);
+
+	// 3	
+	$resultats = array();
+	foreach ($todo as $do){
+		$do = trim($do);
+		if (!preg_match('/(DROP|CHANGE COLUMN|CHANGE|MODIFY|RENAME TO|ADD COLUMN|ADD)\s*([^\s]*)\s*(.*)?/', $do, $matches)){
+			spip_log("SQLite : Probleme de ALTER TABLE, utilisation non reconnue dans : $query", 'sqlite');
+			return false;				
+		}
+
+		$cle = strtoupper($matches[1]);
+		$colonne_origine = $matches[2];
+		$colonne_destination = '';
+		$def = $matches[3];
+			
+
+		switch($cle){
+			// allez, on simule, on simule !
+			case 'DROP':
+				if (!_sqlite_traiter_alter_table(
+					$table, 
+					'DROP', 
+					$colonne_origine, 
+					'', 
+					'', 
+					$serveur)){
+						return false;		
+				}
+				break;
+			
+			case 'CHANGE COLUMN':
+			case 'CHANGE':
+				// recuperer le nom de la future colonne 
+				$def = trim($def);
+				$colonne_destination = substr($def, 0, strpos($def,' '));
+				$def = substr($def, strlen($colonne_destination)+1);
+				
+				if (!_sqlite_traiter_alter_table(
+					$table, 
+					'CHANGE', 
+					$colonne_origine, 
+					$colonne_destination, 
+					$def, 
+					$serveur)){
+						return false;		
+				}				
+				break;
+				
+			case 'MODIFY':
+				if (!_sqlite_traiter_alter_table(
+					$table, 
+					'CHANGE', 
+					$colonne_origine, 
+					$colonne_origine, // un change sur la meme colonne 
+					$def, 
+					$serveur)){
+						return false;		
+				}	
+				break;
+			
+			// RAS pour ceux la
+			case 'RENAME TO':
+			case 'ADD COLUMN':
+			case 'ADD':
+			default:
+				$requete = new sqlite_traiter_requete("$debut $do", $serveur);
+				if (!$requete->executer_requete()){
+					spip_log("SQLite : Erreur ALTER TABLE (ADD|RENAME) : $query", 'sqlite');
+					return false;
+				}
+				break;
+		}
+		// tout est bon, ouf !
+		spip_log("SQLite ($serveur) : Changements OK : $debut $do");
+	}
+	
+	spip_log("SQLite ($serveur) : fin ALTER TABLE OK !");
+	return true;
 }
 
 
@@ -923,6 +980,120 @@ function _sqlite_remplacements_definitions_table($query){
 	return preg_replace(array_keys($remplace), $remplace, $query);
 }
 	
+
+/*
+ * Gestion des requetes ALTER non reconnues de SQLite :
+ * ALTER TABLE table DROP column
+ * ALTER TABLE table CHANGE [COLUMN] columnA columnB definition
+ * ALTER TABLE table MODIFY column definition
+ * 
+ * (MODIFY transforme en CHANGE columnA columnA) par spip_sqlite_alter()
+ */
+function _sqlite_traiter_alter_table($table, $ordre, $colonne_origine, $colonne_destination='', $def='', $serveur=''){
+	
+	// creer une table temporaire identique
+	$def_origine = sql_showtable($table, $serveur);
+
+	if (!sql_create(
+			$table_tmp = $table.'_tmp', 
+			$def_origine['field'], 
+			$def_origine['key'], 
+			$autoinc=false, 
+			$temporary=true, 
+			$serveur)){
+				spip_log("SQLite : ALTER TABLE table $ordre column :"
+					.' La creation de la table temporaire a echouee','sqlite');
+				return false;
+	}
+	
+	// y copier tous les champs
+	// Aie Aie Aie, risque de timeout ?
+	if (!sql_query("INSERT INTO $table_tmp SELECT * FROM $table")){
+		spip_log("SQLite : ALTER TABLE table $ordre column :"
+				.' La copie de la table d\'origine a echouee','sqlite');
+		return false;					
+	} 
+	
+	// supprimer la table d'origine (gasp, gloups !)
+	if (!sql_query("DROP TABLE $table")){
+		// ouf, ca s'est mal passe ;)
+		spip_log('SQLite : ALTER TABLE table DROP column :'
+				.' La suppression de la table d\'origine a echouee','sqlite');
+		return false;						
+	}
+	
+	// recreer la table d'origine avec les modifications :
+	// - DROP : suppression de la colonne
+	// - CHANGE : modification de la colonne
+	// (foreach pour conserver l'ordre des champs)
+	
+	// field 
+	$fields = array();
+	// pour le INSERT INTO plus loin
+	// stocker la correspondance nouvelles->anciennes colonnes
+	$fields_correspondances = array(); 
+
+	foreach ($def_origine['field'] as $c=>$d){
+		if ($c == $colonne_origine) {
+			// si pas DROP
+			if ($colonne_destination){
+				$fields[$colonne_destination] = $def;
+				$fields_correspondances[$colonne_destination] = $c;
+			}	
+		} else {
+			$fields[$c] = $d;
+			$fields_correspondances[$c] = $c;
+		}
+	}
+	// key
+	$keys = array();
+	foreach ($def_origine['key'] as $c=>$d){
+		if ($d == $colonne_origine) {
+			if ($colonne_destination){ 
+				$keys[$c] = $colonne_destination;
+			}	
+		} else {
+			$keys[$c] = $d;
+		}
+	}
+	
+	$def_destination = array('field'=>$fields, 'key'=>$keys);
+
+	if (!sql_create(
+			$table, 
+			$def_destination['field'], 
+			$def_destination['key'], 
+			$autoinc=false,
+			$temporary=false, 
+			$serveur)){
+				spip_log("SQLite : ALTER TABLE table $ordre column :"
+					.' La creation de la table nouvelle table a echouee','sqlite');
+				// si on arrive la, on est plutot mal barre !
+				return false;
+	}
+	
+
+	// y copier les champs qui vont bien
+	$champs_dest = join(', ', array_keys($fields_correspondances));
+	$champs_ori = join(', ', $fields_correspondances);
+	if (!sql_query("INSERT INTO $table ($champs_dest) SELECT $champs_ori FROM $table_tmp")){
+		spip_log("SQLite : ALTER TABLE table $ordre column :"
+				.' La copie de la table temporaire vers la nouvelle table a echouee','sqlite');
+		return false;						
+	}
+
+
+	// supprimer la table temporaire 
+	if (!sql_query("DROP TABLE $table_tmp")){
+		spip_log("SQLite : ALTER TABLE table $ordre column :"
+				.' La suppression de la table temporaore a echouee','sqlite');
+		return false;						
+	}
+	
+	return true;					
+}
+
+
 	
 /*
  * renvoyer la liste des versions sqlite disponibles
@@ -935,7 +1106,82 @@ function spip_versions_sqlite(){
 
 
 
+/*
+ * Class pour partager les lancements de requete 
+ * pour sql_query() et sql_alter()
+ * 
+ */
+class sqlite_traiter_requete{
+	var $query = ''; // la requete
+	var $queryCount = ''; // la requete pour compter
+	var $serveur = ''; // le serveur
+	var $link = ''; // le link (ressource) sqlite
+	var $prefixe = ''; // le prefixe des tables
+	var $db = ''; // le nom de la base 
+	
+	/* constructeur */
+	function sqlite_traiter_requete($query, $serveur = ''){
+		$this->query = $query;
+		$this->serveur = $serveur;
+		
+		if (!($this->link = _sqlite_link($this->serveur)) && (_request('exec')!='install')){
+			spip_log("Aucune connexion sqlite (link)");
+			return false;	
+		}
 
+		$this->prefixe 	= $GLOBALS['connexions'][$this->serveur ? $this->serveur : 0]['prefixe'];
+		$this->db 		= $GLOBALS['connexions'][$this->serveur ? $this->serveur : 0]['db'];
+	}
+	
+	
+	/* transformer la requete pour sqlite */
+	function traduire_requete(){
+		$analyse = new sqlite_analyse_requete($this->link, $this->query, $this->db, $this->prefixe);
+		// transformer
+		$analyse->creerLesRequetes();
+		// renvoyer
+		$this->query = $analyse->query;
+		$this->queryCount = $analyse->queryCount;
+	}
+	
+	
+	/* lancer la requete $this->requete et faire le tracage si demande */
+	function executer_requete(){
+		$t = !isset($_GET['var_profile']) ? 0 : trace_query_start();
+		#echo("<br /><b>spip_sqlite_query() $serveur >></b> $query"); // boum ? pourquoi ?
+		if ($this->link){
+			if (_sqlite_is_version(3, $this->link)) {
+				$r = $this->link->query($this->query);
+				
+				// comptage : oblige de compter le nombre d'entrees retournees par la requete
+				// aucune autre solution ne donne le nombre attendu :( !
+				// particulierement s'il y a des LIMIT dans la requete.
+				if ($this->queryCount){
+					if ($r) {
+						$l = $this->link->query($this->queryCount);
+						$r->spipSqliteRowCount =  count($l->fetchAll());
+					} else {
+						$r->spipSqliteRowCount = 0;
+					}
+				}
+			} else {
+				$r = sqlite_query($this->link, $this->query);
+			}
+		} else {
+			$r = false;	
+		}
+
+		#spip_log("spip_sqlite_query() >> $query"); // boum ? pourquoi ?
+		if (!$r){
+			echo "<br /><small>#erreur serveur '$this->serveur' dans &gt; $this->query</small><br />";
+			echo "<br />- ".spip_sqlite_error($this->query, $this->serveur);
+		}
+		if (!$r && $e = spip_sqlite_errno($this->serveur))	// Log de l'erreur eventuelle
+			$e .= spip_sqlite_error($this->query, $this->serveur); // et du fautif
+
+		return $t ? trace_query_end($this->query, $t, $r, $e) : $r;		
+	}
+}
 
 
 /*
@@ -945,7 +1191,7 @@ function spip_versions_sqlite(){
  * Du coup, je mets aussi les traitements a faire dedans
  * 
  */
-class sqlite_analyse_query {
+class sqlite_analyse_requete {
 	var $sqlite = ''; 		// la ressource link (ou objet pdo)
 	var $query = ''; 		// la requete
 	var $queryCount = ''; 	// la requete pour comptage des lignes select (sqlite3/PDO)
@@ -958,7 +1204,9 @@ class sqlite_analyse_query {
 	var $codeEchappements = "%@##@%";
 
 
-	function sqlite_analyse_query(&$link, &$query, $db, $prefixe){
+	function sqlite_analyse_requete(&$link, $query, $db, $prefixe){
+
+		
 		$this->sqlite 		= $link;
 		$this->query 		= $query;
 		$this->db 			= $db;
