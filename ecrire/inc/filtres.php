@@ -893,8 +893,8 @@ function affdate_mois_annee($numdate) {
 function affdate_heure($numdate) {
 	$date_array = recup_date($numdate);
 	if (!$date_array) return;
-	list($annee, $mois, $jour)= $date_array;
-	return _T('date_fmt_jour_heure', array('jour' => affdate($numdate), 'heure' =>  heures_minutes($numdate)));
+	list($annee, $mois, $jour, $heures, $minutes, $sec)= $date_array;
+	return _T('date_fmt_jour_heure', array('jour' => affdate($numdate), 'heure' =>  _T('date_fmt_heures_minutes', array('h'=> $heures, 'm'=> $minutes))));
 }
 
 
