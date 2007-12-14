@@ -210,7 +210,7 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 	$pg = function_exists('pg_connect');
 	$mysql = function_exists('mysql_connect');
 	// demander les version dispo de sqlite
-	include_spip("req/sqlite_generique");
+	include_spip('req/sqlite_generique');
 	$versions = spip_versions_sqlite();
 	$sqlite2 = in_array(2, $versions);
 	$sqlite3 = in_array(3, $versions);

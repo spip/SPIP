@@ -61,10 +61,11 @@ function spip_connect($serveur='', $version='') {
 	$type = $GLOBALS['db_ok']['type'];
 	$jeu = 'spip_' . $type .'_functions_' . $version;
 	if (!isset($GLOBALS[$jeu])) {
-		if (!include_spip($type . '_' . $version, 'req'))
+		if (!find_in_path($type . '_' . $version . '.php', 'req/', true)){
 			spip_log("spip_connect: serveur $index version '$version' non defini par $jeu.");
-		// ne plus reessayer 
-		return $connexions[$index][$version] = array();
+			// ne plus reessayer 
+			return $connexions[$index][$version] = array();
+		}
 	}
 	$connexions[$index][$version] = $GLOBALS[$jeu];
 	if ($old) return $connexions[$index];

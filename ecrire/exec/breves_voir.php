@@ -14,7 +14,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/actions');
-include_spip("inc/indexation");
 
 // http://doc.spip.org/@exec_breves_voir_dist
 function exec_breves_voir_dist()

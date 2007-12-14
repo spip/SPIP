@@ -21,12 +21,12 @@ function chercher_module_lang($module, $lang = '') {
 		$lang = '_'.$lang;
 
 	// 1) dans un repertoire nomme lang/ se trouvant sur le chemin
-	if ($f = include_spip('lang/'.$module.$lang, false))
+	if ($f = find_in_path($module.$lang.'.php', 'lang/'))
 		return $f;
 
 	// 2) directement dans le chemin (old style, uniquement pour local)
 	return ($module == 'local')
-		? include_spip($module.$lang, false)
+		? find_in_path('local'.$lang. '.php')
 		: '';
 }
 

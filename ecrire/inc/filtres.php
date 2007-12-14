@@ -14,7 +14,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/charsets');
-// signaler les filtres ayant besoin d'inclue inc/filtres_images
+// signaler les filtres ayant besoin d'inclure inc/filtres_images
 
 $GLOBALS['spip_matrice']['image_valeurs_trans'] = '';
 $GLOBALS['spip_matrice']['image_reduire'] = '';
@@ -71,12 +71,10 @@ function appliquer_filtre($arg, $filtre) {
 	return $f($arg);
 }
 
-// Appliquer un filtre (eventuellement defini dans la matrice) aux donnees
-// et arguments
+// Appliquer un filtre de la matrice
 // http://doc.spip.org/@filtrer
 function filtrer($filtre) {
-	if (isset($GLOBALS['spip_matrice'][$filtre]))
-		include_spip('inc/filtres_images');
+	include_spip('inc/filtres_images');
 
 	$tous = func_get_args();
 	if (substr($filtre,0,6)=='image_')
@@ -303,7 +301,7 @@ function proteger_amp($texte){
 // http://doc.spip.org/@entites_html
 function entites_html($texte, $tout=false) {
 	if (!$texte) return $texte;
-	include_spip("inc/texte");
+	include_spip('inc/texte');
 	$texte = htmlspecialchars(echappe_retour(echappe_html($texte,'',true),'','proteger_amp'));
 	if ($tout)
 		return corriger_toutes_entites_html($texte);
@@ -315,7 +313,6 @@ function entites_html($texte, $tout=false) {
 // http://doc.spip.org/@filtrer_entites
 function filtrer_entites($texte) {
 	if (strpos($texte,'&') === false) return $texte;
-#	include_spip('inc/charsets');
 	// filtrer
 	$texte = html2unicode($texte);
 	// remettre le tout dans le charset cible
@@ -1631,7 +1628,7 @@ function barre_textarea($texte, $rows, $cols, $lang='') {
 		return "<textarea name='texte' rows='$rows' class='forml' cols='$cols'>$texte</textarea>";
 
 	$num_textarea++;
-	include_spip ('inc/barre');
+	include_spip('inc/barre');
 	return afficher_barre("document.getElementById('textarea_$num_textarea')", true, $lang) .
 	  "
 <textarea name='texte' rows='$rows' class='forml' cols='$cols'

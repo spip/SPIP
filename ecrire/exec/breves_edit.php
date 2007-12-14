@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/documents');
-include_spip ('inc/barre');
+include_spip('inc/barre');
 
 // http://doc.spip.org/@exec_breves_edit_dist
 function exec_breves_edit_dist()

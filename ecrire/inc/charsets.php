@@ -42,7 +42,7 @@ function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 	else if ($charset == 'windows-1251') $charset = 'cp1251';
 	else if ($charset == 'windows-1256') $charset = 'cp1256';
 
-	if (include_spip('charsets/'.$charset)) {
+	if (find_in_path($charset . '.php', 'charsets/', true)) {
 		return $charset;
 	} else {
 		spip_log("Erreur: pas de fichier de conversion 'charsets/$charset'");

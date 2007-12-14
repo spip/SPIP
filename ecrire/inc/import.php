@@ -18,10 +18,11 @@ include_spip('base/abstract_sql');
 
 // NB: Ce fichier peut ajouter des tables (old-style)
 // donc il faut l'inclure "en globals"
-if ($f = include_spip('mes_fonctions', false)) {
+if ($f = find_in_path('mes_fonctions.php')) {
 	global $dossier_squelettes;
 	@include_once ($f); 
 }
+
 if (@is_readable(_DIR_TMP."charger_plugins_fonctions.php")){
 	// chargement optimise precompile
 	include_once(_DIR_TMP."charger_plugins_fonctions.php");
