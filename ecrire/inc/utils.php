@@ -56,19 +56,11 @@ function charger_fonction($nom, $dossier='exec', $continue=false) {
 
 
 //
-// une fonction cherchant un fichier dans une liste de repertoires
+// la fonction cherchant un fichier PHP dans le SPIP_PATH
 //
 // http://doc.spip.org/@include_spip
 function include_spip($f, $include = true) {
-	if (!$s = find_in_path($f . '.php')
-		AND (!_EXTENSION_PHP OR !$s = find_in_path($f . '.php3')))
-			return false;
-	// On charge le fichier (sauf si on ne voulait que son chemin)
-	if ($include && $s) {
-		include_once $s;
-	}
-
-	return $s;
+	return find_in_path($f . '.php', '', $include);
 }
 
 // un pipeline est lie a une action et une valeur
