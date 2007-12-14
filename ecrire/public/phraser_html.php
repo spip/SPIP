@@ -25,7 +25,7 @@ define('BALISE_POST_BOUCLE', '</B');
 define('BALISE_ALT_BOUCLE', '<//B');
 
 define('TYPE_RECURSIF', 'boucle');
-define('SPEC_BOUCLE','/\s*\(\s*([^\s)]+)(\s*[^)]*)\)/');
+define('SPEC_BOUCLE','/\s*\(\s*([^\s?)]+)(\s*[^)?]*)([?]?)\)/');
 define('NOM_DE_BOUCLE', "[0-9]+|[-_][-_.a-zA-Z0-9]*");
 # ecriture alambiquee pour rester compatible avec les hexadecimaux des vieux squelettes
 define('NOM_DE_CHAMP', "#((" . NOM_DE_BOUCLE . "):)?(([A-F]*[G-Z_][A-Z_0-9]*)|[A-Z_]+)(\*{0,2})");
@@ -575,11 +575,16 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
                 $milieu = substr($milieu, strlen($match[0]));
 		$type = $match[1];
 		$jointures = trim($match[2]);
+		$table_optionnelle = ($match[3]);
 		if ($jointures) {
 			$result->jointures = preg_split("/\s+/",$jointures);
 			$result->jointures_explicites = $jointures;
 		}
-
+		
+		if ($table_optionnelle){
+			$result->table_optionnelle = true;	
+		}
+		
 		if ($p = strpos($type, ':'))
 		  {
 		    $result->sql_serveur = substr($type,0,$p);

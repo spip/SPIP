@@ -44,6 +44,7 @@ class Boucle {
 	var $avant, $milieu, $apres, $altern;
 	var $lang_select;
 	var $type_requete;
+	var $table_optionnelle = false; # si ? dans <BOUCLE_x(table ?)>
 	var $sql_serveur = '';
 	var $param = array();
 	var $criteres = array();
