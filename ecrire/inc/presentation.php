@@ -644,7 +644,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 			}
 		} 
 
-		$titre_boite .= "<a href='#id$id_forum' id='#id$id_forum'>"
+		$titre_boite .= "<a href='#id$id_forum' id='id$id_forum'>"
 		. typo($titre)
 		. '</a>';
 
