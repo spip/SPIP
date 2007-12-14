@@ -147,10 +147,10 @@ function spip_sqlite_alter($query, $serveur=''){
 	 */
 	
 	// 1
-	if (preg_match("/\s*ALTER(\s*IGNORE)?\s*TABLE\s*([^\s]*)\s*/i", $query, $regs)){
-		$debut = $regs[0];
-		$table = $regs[2];
-		$suite = substr($query, strlen($debut));
+	if (preg_match("/\s*(ALTER(\s*IGNORE)?\s*TABLE\s*([^\s]*))\s*(.*)?/i", $query, $regs)){
+		$debut = $regs[1];
+		$table = $regs[3];
+		$suite = $regs[4];
 	} else {
 		spip_log("SQLite : Probleme de ALTER TABLE mal forme dans $query", 'sqlite');
 		return false;
@@ -163,7 +163,7 @@ function spip_sqlite_alter($query, $serveur=''){
 	$resultats = array();
 	foreach ($todo as $do){
 		$do = trim($do);
-		if (!preg_match('/(DROP|CHANGE COLUMN|CHANGE|MODIFY|RENAME TO|ADD COLUMN|ADD)\s*([^\s]*)\s*(.*)?/', $do, $matches)){
+		if (!preg_match('/(DROP|CHANGE COLUMN|CHANGE|MODIFY|RENAME TO|RENAME|ADD COLUMN|ADD)\s*([^\s]*)\s*(.*)?/', $do, $matches)){
 			spip_log("SQLite : Probleme de ALTER TABLE, utilisation non reconnue dans : $query", 'sqlite');
 			return false;				
 		}
@@ -177,11 +177,11 @@ function spip_sqlite_alter($query, $serveur=''){
 		switch($cle){
 			// allez, on simule, on simule !
 			case 'DROP':
-				if (!_sqlite_traiter_alter_table(
+				if (!_sqlite_modifier_table(
 					$table, 
-					'DROP', 
+					$table, 
 					$colonne_origine, 
-					'', 
+					'', // colonne origine -> rien !
 					'', 
 					$serveur)){
 						return false;		
@@ -195,9 +195,9 @@ function spip_sqlite_alter($query, $serveur=''){
 				$colonne_destination = substr($def, 0, strpos($def,' '));
 				$def = substr($def, strlen($colonne_destination)+1);
 				
-				if (!_sqlite_traiter_alter_table(
+				if (!_sqlite_modifier_table(
 					$table, 
-					'CHANGE', 
+					$table, 
 					$colonne_origine, 
 					$colonne_destination, 
 					$def, 
@@ -207,33 +207,68 @@ function spip_sqlite_alter($query, $serveur=''){
 				break;
 				
 			case 'MODIFY':
-				if (!_sqlite_traiter_alter_table(
+				if (!_sqlite_modifier_table(
 					$table, 
-					'CHANGE', 
+					$table, 
 					$colonne_origine, 
-					$colonne_origine, // un change sur la meme colonne 
+					$colonne_origine, 
 					$def, 
 					$serveur)){
 						return false;		
 				}	
 				break;
 			
-			// RAS pour ceux la
+			// pas geres en sqlite2
+			case 'RENAME':
+					$do = "RENAME TO" . substr($do,6);
 			case 'RENAME TO':
+				if (_sqlite_is_version(3, '', $serveur)){
+					$requete = new sqlite_traiter_requete("$debut $do", $serveur);
+					if (!$requete->executer_requete()){
+						spip_log("SQLite : Erreur ALTER TABLE / RENAME : $query", 'sqlite');
+						return false;
+					}
+				// artillerie lourde pour sqlite2 !
+				} else {
+					$table_dest = trim(substr($do, 9));
+					if (!_sqlite_modifier_table($table, $table_dest, '', '', '', $serveur)){
+						spip_log("SQLite : Erreur ALTER TABLE / RENAME : $query", 'sqlite');
+						return false;		
+					}					
+				}		
+				break;
+				
+			// pas geres en sqlite2
 			case 'ADD COLUMN':
+					$do = "ADD".substr($do, 10);
 			case 'ADD':
 			default:
-				$requete = new sqlite_traiter_requete("$debut $do", $serveur);
-				if (!$requete->executer_requete()){
-					spip_log("SQLite : Erreur ALTER TABLE (ADD|RENAME) : $query", 'sqlite');
-					return false;
-				}
-				break;
+				if (_sqlite_is_version(3, '', $serveur)){
+					$requete = new sqlite_traiter_requete("$debut $do", $serveur);
+					if (!$requete->executer_requete()){
+						spip_log("SQLite : Erreur ALTER TABLE / ADD : $query", 'sqlite');
+						return false;
+					}
+					break;
+				// artillerie lourde pour sqlite2 !
+				} else {
+					if (preg_match('/^(.*)(BEFORE|AFTER)(.*)$/is', $do, $matches)) {
+						$do = $matches[1];
+					}
+					$def = trim(substr($do, 3));
+					$colonne_ajoutee = substr($def, 0, strpos($def,' '));
+					$def = substr($def, strlen($colonne_ajoutee)+1);
+					if (!_sqlite_modifier_table($table, $table, '', $colonne_ajoutee, $def, $serveur)){
+						spip_log("SQLite : Erreur ALTER TABLE / ADD : $query", 'sqlite');
+						return false;		
+					}					
+				}		
+				break;				
 		}
 		// tout est bon, ouf !
 		spip_log("SQLite ($serveur) : Changements OK : $debut $do");
 	}
-	
+
 	spip_log("SQLite ($serveur) : fin ALTER TABLE OK !");
 	return true;
 }
@@ -241,67 +276,9 @@ function spip_sqlite_alter($query, $serveur=''){
 
 // Fonction de creation d'une table SQL nommee $nom
 function spip_sqlite_create($nom, $champs, $cles, $autoinc=false, $temporary=false, $serveur='') {
-
-	$query = $keys = $s = $p = '';
-
-	// certains plugins declarent les tables  (permet leur inclusion dans le dump)
-	// sans les renseigner (laisse le compilo recuperer la description)
-	if (!is_array($champs) || !is_array($cles)) 
-		return;
-
-	// sqlite ne gere pas KEY tout court
-	foreach($cles as $k => $v) {
-		if ($k == "PRIMARY KEY"){
-			$keys .= "$s\n\t\t$k ($v)";
-			$p = $v;
-		}
-		$s = ",";
-	}
-	$s = '';
-	
-	/* a tester ulterieurement
-	 * je ne sais pas a quoi ca sert
-	 *
-	$character_set = "";
-	if (@$GLOBALS['meta']['charset_sql_base'])
-		$character_set .= " CHARACTER SET ".$GLOBALS['meta']['charset_sql_base'];
-	if (@$GLOBALS['meta']['charset_collation_sql_base'])
-		$character_set .= " COLLATE ".$GLOBALS['meta']['charset_collation_sql_base'];
-	*/
-
-	
-	$champs = _sqlite_remplacements_definitions_table($champs);
-
-	foreach($champs as $k => $v) {
-		// je sais pas ce que c'est ca...
-		// puis personne rentre ici vue qe binary->''
-		/*
-		if (preg_match(',([a-z]*\s*(\(\s*[0-9]*\s*\))?(\s*binary)?),i',$v,$defs)){
-			if (preg_match(',(char|text),i',$defs[1]) AND !preg_match(',binary,i',$defs[1]) ){
-				$v = $defs[1] . $character_set . ' ' . substr($v,strlen($defs[1]));
-			}
-		}
-		*/
-		
-		// autoincrement v3.1.3 ?
-		$query .= "$s\n\t\t$k $v";
-			//. (($autoinc && ($p == $k) && preg_match(',\binteger\b,i', $v))? " AUTOINCREMENT": '');
-		$s = ",";
-	}
-
-	/* simuler le IF NOT EXISTS - version 2 */
-	if (_sqlite_is_version(2, '', $serveur)){
-		$a = spip_sqlite_showtable($nom, $serveur); 
-		if ($a) return false;
-	}
-	
-	$temporary = $temporary ? ' TEMPORARY':'';
-	$ifnotexists = _sqlite_is_version(3, '', $serveur) ? ' IF NOT EXISTS':'';// IF NOT EXISTS 
-	$q = "CREATE$temporary TABLE$ifnotexists $nom ($query" . ($keys ? ",$keys" : '') . ")"
-	//. ($character_set?" DEFAULT $character_set":"")
-	."\n";
-
-	return spip_sqlite_query($q, $serveur);
+	$query = _sqlite_requete_create($nom, $champs, $cles, $autoinc, $temporary, $ifnotexists=true, $serveur);
+	if (!$query) return false;
+	return spip_sqlite_query($query, $serveur);
 }
 
 
@@ -403,6 +380,7 @@ function spip_sqlite_explain($query, $serveur=''){
 
 
 function spip_sqlite_fetch($r, $t='', $serveur='') {
+
 	$link = _sqlite_link($serveur);
 	if (!$t) {
 		if (_sqlite_is_version(3, $link)) {
@@ -485,6 +463,7 @@ function spip_sqlite_insert($table, $champs, $valeurs, $desc='', $serveur='') {
 	$db = $connexion['db'];
 
 	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
+
 
 	$t = !isset($_GET['var_profile']) ? 0 : trace_query_start();
 
@@ -656,7 +635,7 @@ function spip_sqlite_showtable($nom_table, $serveur=''){
 
 	$query = 
 			'SELECT sql FROM'
-   			. '(SELECT * FROM sqlite_master UNION ALL'
+   			. ' (SELECT * FROM sqlite_master UNION ALL'
    			. ' SELECT * FROM sqlite_temp_master)'
 			. " WHERE tbl_name LIKE '$nom_table'"
 			. " AND type!='meta' AND sql NOT NULL AND name NOT LIKE 'sqlite_%'"
@@ -908,6 +887,133 @@ function _sqlite_charger_version($version=''){
 
 
 /*
+ * Gestion des requetes ALTER non reconnues de SQLite :
+ * ALTER TABLE table DROP column
+ * ALTER TABLE table CHANGE [COLUMN] columnA columnB definition
+ * ALTER TABLE table MODIFY column definition
+ * 
+ * (MODIFY transforme en CHANGE columnA columnA) par spip_sqlite_alter()
+ * 
+ * 1) creer une table B avec le nouveau format souhaite
+ * 2) copier la table d'origine A vers B
+ * 3) supprimer la table A
+ * 4) renommer la table B en A
+ * 
+ */
+function _sqlite_modifier_table($table_origine, $table_destination, $colonne_origine='', $colonne_destination='', $def_col_destination='', $serveur=''){
+	
+	// si les noms de tables sont differents, pas besoin de table temporaire
+	// on prendra directement le nom de la future table
+	$meme_table = ($table_origine == $table_destination);
+	
+	$def_origine = sql_showtable($table_origine, $serveur);
+	$table_tmp = $table_origine . '_tmp';
+
+	// 1) creer une table temporaire avec les modifications	
+	// - DROP : suppression de la colonne
+	// - CHANGE : modification de la colonne
+	// (foreach pour conserver l'ordre des champs)
+	
+	// field 
+	$fields = array();
+	// pour le INSERT INTO plus loin
+	// stocker la correspondance nouvelles->anciennes colonnes
+	$fields_correspondances = array(); 
+
+	foreach ($def_origine['field'] as $c=>$d){
+		if ($colonne_origine && ($c == $colonne_origine)) {
+			// si pas DROP
+			if ($colonne_destination){
+				$fields[$colonne_destination] = $def_col_destination;
+				$fields_correspondances[$colonne_destination] = $c;
+			}	
+		} else {
+			$fields[$c] = $d;
+			$fields_correspondances[$c] = $c;
+		}
+	}
+	// cas de ADD sqlite2 (ajout du champ en fin de table):
+	if (!$colonne_origine && $colonne_destination){
+			$fields[$colonne_destination] = $def_col_destination;
+	}
+	
+	// key
+	$keys = array();
+	foreach ($def_origine['key'] as $c=>$d){
+		if ($d == $colonne_origine) {
+			if ($colonne_destination){ 
+				$keys[$c] = $colonne_destination;
+			}	
+		} else {
+			$keys[$c] = $d;
+		}
+	}
+	
+	$queries = array();
+	$queries[] = 'BEGIN TRANSACTION';
+	
+	// copier dans destination (si differente de origine), sinon tmp
+	$table_copie = ($meme_table) ? $table_tmp : $table_destination;
+	
+	if ($q = _sqlite_requete_create(
+			$table_copie, 
+			$fields, 
+			$keys, 
+			$autoinc=false,
+			$temporary=false, 
+			$ifnotexists=true,
+			$serveur)){
+		$queries[] = $q;			
+	}
+
+	
+	// 2) y copier les champs qui vont bien
+	$champs_dest = join(', ', array_keys($fields_correspondances));
+	$champs_ori = join(', ', $fields_correspondances);
+	$queries[] = "INSERT INTO $table_copie ($champs_dest) SELECT $champs_ori FROM $table_origine";
+		
+	// 3) supprimer la table d'origine
+	$queries[] = "DROP TABLE $table_origine";
+	
+	// 4) renommer la table temporaire 
+	// avec le nom de la table destination
+	// si necessaire
+	if ($meme_table){
+		if (_sqlite_is_version(3, '', $serveur)){
+			$queries[] = "ALTER TABLE $table_copie RENAME TO $table_destination";
+		} else {
+			$queries[] = _sqlite_requete_create(
+					$table_destination, 
+					$fields, 
+					$keys, 
+					$autoinc=false,
+					$temporary=false, 
+					$ifnotexists=false, // la table existe puisqu'on est dans une transaction
+					$serveur);	
+			$queries[] = "INSERT INTO $table_destination SELECT * FROM $table_copie";		
+			$queries[] = "DROP TABLE $table_copie";
+		}
+	}
+	$queries[] = "COMMIT";
+	
+
+	// il faut les faire une par une car $query = join('; ', $queries).";"; ne fonctionne pas
+	foreach ($queries as $q){
+		$req = new sqlite_traiter_requete($q, $serveur);
+		if (!$req->executer_requete()){	
+			spip_log("SQLite : ALTER TABLE table :" 
+			." Erreur a l'execution de la requete : $q",'sqlite'); 
+			return false;
+		}
+	}
+
+	return true;					
+}
+
+
+
+
+/*
  * Nom des fonctions
  */
 function _sqlite_ref_fonctions(){
@@ -979,103 +1085,75 @@ function _sqlite_remplacements_definitions_table($query){
 
 	return preg_replace(array_keys($remplace), $remplace, $query);
 }
-	
+
 
 /*
- * Gestion des requetes ALTER non reconnues de SQLite :
- * ALTER TABLE table DROP column
- * ALTER TABLE table CHANGE [COLUMN] columnA columnB definition
- * ALTER TABLE table MODIFY column definition
- * 
- * (MODIFY transforme en CHANGE columnA columnA) par spip_sqlite_alter()
- * 
- * 1) creer une table B avec le nouveau format souhaite
- * 2) copier la table d'origine A vers B
- * 3) supprimer la table A
- * 4) renommer la table B en A
- * 
+ * Creer la requete pour la creation d'une table
+ * retourne la requete pour utilisation par sql_create() et sql_alter()
  */
-function _sqlite_traiter_alter_table($table, $ordre, $colonne_origine, $colonne_destination='', $def_col_destination='', $serveur=''){
-	
-	$def_origine = sql_showtable($table, $serveur);
-	$table_tmp = $table . '_tmp';
+function _sqlite_requete_create($nom, $champs, $cles, $autoinc=false, $temporary=false, $_ifnotexists=true, $serveur='') {
+	$query = $keys = $s = $p = '';
 
-	// 1) creer une table temporaire avec les modifications	
-	// - DROP : suppression de la colonne
-	// - CHANGE : modification de la colonne
-	// (foreach pour conserver l'ordre des champs)
-	
-	// field 
-	$fields = array();
-	// pour le INSERT INTO plus loin
-	// stocker la correspondance nouvelles->anciennes colonnes
-	$fields_correspondances = array(); 
+	// certains plugins declarent les tables  (permet leur inclusion dans le dump)
+	// sans les renseigner (laisse le compilo recuperer la description)
+	if (!is_array($champs) || !is_array($cles)) 
+		return;
 
-	foreach ($def_origine['field'] as $c=>$d){
-		if ($c == $colonne_origine) {
-			// si pas DROP
-			if ($colonne_destination){
-				$fields[$colonne_destination] = $def_col_destination;
-				$fields_correspondances[$colonne_destination] = $c;
-			}	
-		} else {
-			$fields[$c] = $d;
-			$fields_correspondances[$c] = $c;
+	// sqlite ne gere pas KEY tout court
+	foreach($cles as $k => $v) {
+		if ($k == "PRIMARY KEY"){
+			$keys .= "$s\n\t\t$k ($v)";
+			$p = $v;
 		}
+		$s = ",";
 	}
-	// key
-	$keys = array();
-	foreach ($def_origine['key'] as $c=>$d){
-		if ($d == $colonne_origine) {
-			if ($colonne_destination){ 
-				$keys[$c] = $colonne_destination;
-			}	
-		} else {
-			$keys[$c] = $d;
-		}
-	}
+	$s = '';
 	
+	/* a tester ulterieurement
+	 * je ne sais pas a quoi ca sert
+	 *
+	$character_set = "";
+	if (@$GLOBALS['meta']['charset_sql_base'])
+		$character_set .= " CHARACTER SET ".$GLOBALS['meta']['charset_sql_base'];
+	if (@$GLOBALS['meta']['charset_collation_sql_base'])
+		$character_set .= " COLLATE ".$GLOBALS['meta']['charset_collation_sql_base'];
+	*/
 
-	if (!sql_create(
-			$table_tmp, 
-			$fields, 
-			$keys, 
-			$autoinc=false,
-			$temporary=false, 
-			$serveur)){
-				spip_log("SQLite : ALTER TABLE table $ordre column :"
-					.' La creation de la table temporaire a echouee','sqlite');
-				// si on arrive la, on est plutot mal barre !
-				return false;
-	}
 	
-	// 2) y copier les champs qui vont bien
-	$champs_dest = join(', ', array_keys($fields_correspondances));
-	$champs_ori = join(', ', $fields_correspondances);
-	if (!sql_query("INSERT INTO $table_tmp ($champs_dest) SELECT $champs_ori FROM $table")){
-		spip_log("SQLite : ALTER TABLE table $ordre column :"
-				.' La copie de la table d\'origine vers la table temporaire a echouee','sqlite');
-		return false;						
-	}
-	
-	
-	// 3) supprimer la table d'origine
-	if (!sql_query("DROP TABLE $table")){
-		spip_log("SQLite : ALTER TABLE table $ordre column :"
-				.' La suppression de la table d\'origine a echouee','sqlite');
-		return false;						
-	}
-	
-	// 4) renommer la table temporaire avec le nom de la table d'origine
-	if (!sql_query("ALTER TABLE $table_tmp RENAME TO $table")){
-		spip_log("SQLite : ALTER TABLE table $ordre column :"
-				.' Le renommage de la table temporaire avec le nom de la table d\'origine a echoue','sqlite');
-		return false;						
-	}
+	$champs = _sqlite_remplacements_definitions_table($champs);
+
+	foreach($champs as $k => $v) {
+		// je sais pas ce que c'est ca...
+		// puis personne rentre ici vue qe binary->''
+		/*
+		if (preg_match(',([a-z]*\s*(\(\s*[0-9]*\s*\))?(\s*binary)?),i',$v,$defs)){
+			if (preg_match(',(char|text),i',$defs[1]) AND !preg_match(',binary,i',$defs[1]) ){
+				$v = $defs[1] . $character_set . ' ' . substr($v,strlen($defs[1]));
+			}
+		}
+		*/
 		
-	return true;					
-}
+		// autoincrement v3.1.3 ?
+		$query .= "$s\n\t\t$k $v";
+			//. (($autoinc && ($p == $k) && preg_match(',\binteger\b,i', $v))? " AUTOINCREMENT": '');
+		$s = ",";
+	}
 
+	/* simuler le IF NOT EXISTS - version 2 */
+	if ($_ifnotexists && _sqlite_is_version(2, '', $serveur)){
+		$a = spip_sqlite_showtable($nom, $serveur); 
+		if ($a) return false;
+	}
+
+	$temporary = $temporary ? ' TEMPORARY':'';
+	$ifnotexists = ($_ifnotexists && _sqlite_is_version(3, '', $serveur)) ? ' IF NOT EXISTS':'';// IF NOT EXISTS 
+	$q = "CREATE$temporary TABLE$ifnotexists $nom ($query" . ($keys ? ",$keys" : '') . ")"
+	//. ($character_set?" DEFAULT $character_set":"")
+	."\n";
+
+	return $q;
+}
+	
 
 	
 /*
@@ -1131,7 +1209,7 @@ class sqlite_traiter_requete{
 	/* lancer la requete $this->requete et faire le tracage si demande */
 	function executer_requete(){
 		$t = !isset($_GET['var_profile']) ? 0 : trace_query_start();
-		#echo("<br /><b>spip_sqlite_query() $serveur >></b> $query"); // boum ? pourquoi ?
+		//echo("<br /><b>executer_requete() $this->serveur >></b> $this->query"); // boum ? pourquoi ?
 		if ($this->link){
 			if (_sqlite_is_version(3, $this->link)) {
 				$r = $this->link->query($this->query);
