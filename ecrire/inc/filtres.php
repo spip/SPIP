@@ -14,44 +14,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/charsets');
-// signaler les filtres ayant besoin d'inclure inc/filtres_images
-
-$GLOBALS['spip_matrice']['image_valeurs_trans'] = '';
-$GLOBALS['spip_matrice']['image_reduire'] = '';
-$GLOBALS['spip_matrice']['image_reduire_par'] = '';
-$GLOBALS['spip_matrice']['image_recadre'] = '';
-$GLOBALS['spip_matrice']['image_alpha'] = '';
-$GLOBALS['spip_matrice']['image_flip_vertical'] = '';
-$GLOBALS['spip_matrice']['image_flip_horizontal'] = '';
-$GLOBALS['spip_matrice']['image_masque'] = '';
-$GLOBALS['spip_matrice']['image_nb'] = '';
-$GLOBALS['spip_matrice']['image_flou'] = '';
-$GLOBALS['spip_matrice']['image_RotateBicubic'] = '';
-$GLOBALS['spip_matrice']['image_rotation'] = '';
-$GLOBALS['spip_matrice']['image_distance_pixel'] = '';
-$GLOBALS['spip_matrice']['image_decal_couleur'] = '';
-$GLOBALS['spip_matrice']['image_gamma'] = '';
-$GLOBALS['spip_matrice']['image_decal_couleur_127'] = '';
-$GLOBALS['spip_matrice']['image_sepia'] = '';
-$GLOBALS['spip_matrice']['image_aplatir'] = '';
-$GLOBALS['spip_matrice']['image_couleur_extraire'] = '';
-$GLOBALS['spip_matrice']['image_select'] = '';
-$GLOBALS['spip_matrice']['image_renforcement'] = '';
-$GLOBALS['spip_matrice']['image_imagick'] = '';
-$GLOBALS['spip_matrice']['image_ramasse_miettes'] = '';
-$GLOBALS['spip_matrice']['image_passe_partout'] = '';
-
-$GLOBALS['spip_matrice']['couleur_dec_to_hex'] ='';
-$GLOBALS['spip_matrice']['couleur_hex_to_dec'] ='';
-$GLOBALS['spip_matrice']['couleur_extreme'] ='';
-$GLOBALS['spip_matrice']['couleur_inverser'] ='';
-$GLOBALS['spip_matrice']['couleur_eclaircir'] ='';
-$GLOBALS['spip_matrice']['couleur_foncer'] ='';
-$GLOBALS['spip_matrice']['couleur_foncer_si_claire'] ='';
-$GLOBALS['spip_matrice']['couleur_eclaircir_si_foncee'] ='';
-$GLOBALS['spip_matrice']['couleur_web'] ='';
-$GLOBALS['spip_matrice']['couleur_4096'] ='';
-$GLOBALS['spip_matrice']['couleur_saturation'] ='';
 
 // http://doc.spip.org/@chercher_filtre
 function chercher_filtre($fonc, $default=NULL) {
@@ -69,20 +31,6 @@ function chercher_filtre($fonc, $default=NULL) {
 function appliquer_filtre($arg, $filtre) {
 	$f = chercher_filtre(preg_replace('/\W/','_', $filtre),'filtre_text_txt_dist');
 	return $f($arg);
-}
-
-// Appliquer un filtre de la matrice
-// http://doc.spip.org/@filtrer
-function filtrer($filtre) {
-	include_spip('inc/filtres_images');
-
-	$tous = func_get_args();
-	if (substr($filtre,0,6)=='image_')
-		return image_filtrer($tous);
-	else{
-		array_shift($tous); # enlever $filtre
-		return call_user_func_array($filtre, $tous);
-	}
 }
 
 function filtre_text_txt_dist($t) {
@@ -139,17 +87,25 @@ function version_svn_courante($dir) {
 // Fonctions graphiques
 //
 
+// charge les fonctions graphiques et applique celle demandee
+// http://doc.spip.org/@filtrer
+function filtrer() {
+	find_in_path('filtres_images.php', 'inc/', true);
+	return image_filtrer(func_get_args());
+}
+
 // fonction generique d'entree des filtres images
 // accepte en entree un texte complet, un img-log (produit par #LOGO_XX),
 // un tag <img ...> complet, ou encore un nom de fichier *local* (passer
 // le filtre |copie_locale si on veut l'appliquer a un document)
-// applique le filtre demande a chacune des occurences
+// applique le filtre demande a chacune des occurrences
 
 // http://doc.spip.org/@image_filtrer
 function image_filtrer($args){
 	$filtre = array_shift($args); # enlever $filtre
 	$texte = array_shift($args);
 	if (!$texte) return;
+
 	// Cas du nom de fichier local
 	if (preg_match(',^('._DIR_IMG .'|'. _DIR_IMG_PACK .'|'. _DIR_VAR .'),', $texte)) {
 		array_unshift($args,"<img src='$texte' />");

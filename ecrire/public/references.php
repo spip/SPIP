@@ -412,10 +412,6 @@ function applique_filtres($p) {
 	if (isset($p->descr['session']))
 		$code = "$code . invalideur_session(\$Cache)";
 
-	// ramasser les images intermediaires inutiles et graver l'image finale
-	if ($p->ramasser_miettes)
-		$code = "filtrer('image_graver',$code)";
-
 	// Securite
 	if ($p->interdire_scripts
 	AND $p->etoile != '**')
@@ -428,15 +424,16 @@ function applique_filtres($p) {
 // http://doc.spip.org/@compose_filtres
 function compose_filtres(&$p, $code) {
 	global $table_criteres_infixes;
+	$image_miette = false;
 	foreach($p->param as $filtre) {
 		$fonc = array_shift($filtre);
 		if ($fonc) {
 			$is_filtre_image = (substr($fonc,0,6)=='image_') AND ($fonc!='image_graver');
-			if ($p->ramasser_miettes AND !$is_filtre_image){
-				// il faut graver maintenant car apres le filtre en cours
-				// on est pas sur d'avoir encore le nom du fichier dans le pipe
-				$code = "filtrer('image_graver',$code)";
-				$p->ramasser_miettes = false;
+			if ($image_miette AND !$is_filtre_image){
+	// il faut graver maintenant car apres le filtre en cours
+	// on est pas sur d'avoir encore le nom du fichier dans le pipe
+				$code = "filtrer('image_graver', $code)";
+				$image_miette = false;
 			}
 			// recuperer les arguments du filtre, les separer par des virgules
 			// *sauf* dans le cas du filtre "?" qui demande un ":"
@@ -448,15 +445,15 @@ function compose_filtres(&$p, $code) {
 			} else
 				$arglist = compose_filtres_args($p, $filtre, ',');
 
-			// le filtre est defini dans la matrice ? il faut alors l'appeler
-			// de maniere indirecte, pour charger au prealable sa definition
-			if (isset($GLOBALS['spip_matrice'][$fonc])) {
-				$code = "filtrer('$fonc',$code$arglist)";
-				if ($is_filtre_image) $p->ramasser_miettes = true;
-			}
 			// est-ce un test ?
-			else if (in_array($fonc, $table_criteres_infixes))
+			if (in_array($fonc, $table_criteres_infixes))
 				$code = "($code $fonc " . substr($arglist,1) . ')';
+
+			elseif ((substr($fonc,0,6)=='image_') OR (substr($fonc,0,8)=='couleur_')){
+				$code = "filtrer('$fonc',$code$arglist)";
+				if ($is_filtre_image) $image_miette = true;
+			}
+
 			// le filtre est defini sous forme de fonction ou de methode
 			// par ex. dans inc_texte, inc_filtres ou mes_fonctions
 			else if ($f = chercher_filtre($fonc)) {
@@ -472,6 +469,10 @@ function compose_filtres(&$p, $code) {
 
 		}
 	}
+	// ramasser les images intermediaires inutiles et graver l'image finale
+	if ($image_miette)
+		$code = "filtrer('image_graver',$code)";
+
 	return $code;
 }
 
