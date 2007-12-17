@@ -68,10 +68,6 @@ function statistiques_csv($id) {
 // http://doc.spip.org/@exec_statistiques_visites_dist
 function exec_statistiques_visites_dist()
 {
-	global $spip_lang_left;
-
-	$accepte_svg = flag_svg();
-
 	$id_article = intval(_request('id_article'));
 	$aff_jours = intval(_request('aff_jours'));
 	if (!$aff_jours) $aff_jours = 105;
@@ -150,16 +146,6 @@ function exec_statistiques_visites_args($id_article, $aff_jours, $origine, $limi
 	echo "</div>";
 	
 	// Par popularite
-	$articles_recents[] = "0";
-	$result = sql_select("id_article", "spip_articles", "statut='publie' AND popularite > 0", "", "date DESC", "10");
-
-	while ($row = sql_fetch($result)) {
-		$articles_recents[] = $row['id_article'];
-	}
-	$articles_recents = join($articles_recents, ",");
-		
-
-	// Par popularite
 	$result = sql_select("id_article, titre, popularite, visites", "spip_articles", "statut='publie' AND popularite > 0", "", "popularite DESC");
 
 	$nombre_articles = sql_count($result);
@@ -190,8 +176,14 @@ function exec_statistiques_visites_args($id_article, $aff_jours, $origine, $limi
 			}
 		}
 		$articles_vus = join($articles_vus, ",");
+		$recents = "";
+		$q = sql_select("id_article", "spip_articles", "statut='publie' AND popularite > 0", "", "date DESC", "10");
+
+		while ($r = sql_fetch($q)) $recents .= ',' . $r['id_article'];
+		if ($recents)
+			$recents = " AND id_article IN (" . substr($recents, 1) . ')';
 			
-		$result_suite = sql_select("id_article, titre, popularite, visites", "spip_articles", "statut='publie' AND id_article IN ($articles_recents) AND id_article NOT IN ($articles_vus)", "", "popularite DESC");
+		$result_suite = sql_select("id_article, titre, popularite, visites", "spip_articles", "statut='publie'$recents AND id_article NOT IN ($articles_vus)", "", "popularite DESC");
 
 		if (sql_count($result_suite) > 0) {
 			echo "</ol><div style='text-align: center'>[...]</div>",$open;
@@ -221,15 +213,15 @@ function exec_statistiques_visites_args($id_article, $aff_jours, $origine, $limi
 	// Par visites depuis le debut
 	$result = sql_select("id_article, titre, popularite, visites", "spip_articles", "statut='publie' AND popularite > 0", "", "visites DESC", "30");
 
-	if (sql_count($result) > 0
-	OR $id_article > 0)
+	$n = sql_count($result);
+	if ($n 	OR $id_article)
 		echo creer_colonne_droite('', true);
 
-	if ($id_article > 0) {
+	if ($id_article) {
 		echo bloc_des_raccourcis(icone_horizontale(_T('icone_retour_article'), generer_url_ecrire("articles","id_article=$id_article"), "article-24.gif","rien.gif", false));
 	}
 
-	if (sql_count($result) > 0) {
+	if ($n) {
 		echo "<br /><div class='iconeoff' style='padding: 5px;'>";
 		echo "<div style='font-size:small;overflow:hidden;' class='verdana1'>";
 		echo typo(_T('info_affichier_visites_articles_plus_visites'));
@@ -243,9 +235,9 @@ function exec_statistiques_visites_args($id_article, $aff_jours, $origine, $limi
 			$numero = $classement[$l_article];
 				
 			if ($l_article == $id_article){
-					echo "\n<li><b>$titre</b></li>";
+				echo "\n<li><b>$titre</b></li>";
 			} else {
-					echo "\n<li><a href='" . generer_url_ecrire("statistiques_visites","id_article=$l_article") . "'\ntitle='"._T('info_popularite_4', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></li>";
+				echo "\n<li><a href='" . generer_url_ecrire("statistiques_visites","id_article=$l_article") . "'\ntitle='"._T('info_popularite_4', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></li>";
 				}
 		}
 		echo "</ol>";
@@ -394,7 +386,7 @@ function statistiques_tous($select, $table, $where, $where2, $groupby, $order, $
 	echo $res;
 
 	// cette ligne donne la moyenne depuis le debut
-	// (desactive au profit de la moeynne "glissante")
+	// (desactive au profit de la moyenne "glissante")
 	# $moyenne =  round($total_absolu / ((date("U")-$date_premier)/(3600*24)));
 
 	echo "<span class='arial1 spip_x-small'>"._T('texte_statistiques_visites')."</span>";
@@ -589,38 +581,9 @@ function stat_log1($agreg, $class, $date_debut, $date_today, $id_article, $large
 	. "</td>" 
 	. "\n<td ".http_style_background("fond-stats.gif")."  valign='bottom'>" . http_img_rien(3, 1, 'trait_bas') ."</td>"
 	. "\n<td>" . http_img_rien(5, 1) ."</td>" 
-	. "\n<td valign='top'><div style='font-size:small;' class='verdana1'>"
-	. "\n<table cellpadding='0' cellspacing='0' border='0'>"
-	. "\n<tr><td style='height: 15' valign='top'>"
-	. "<span class='arial1 spip_x-small'><b>".round($maxgraph)."</b></span>"
-	. "</td></tr>"
-	. "\n<tr><td valign='middle' $class style='$style;height: 25px'>"
-	. round(7*($maxgraph/8))
-	. "</td></tr>"
-	. "\n<tr><td style='height: 25px' valign='middle'>"
-	. "<span class='arial1 spip_x-small'>".round(3*($maxgraph/4))."</span>"
-	. "</td></tr>"
-	. "\n<tr><td valign='middle' $class style='$style;height: 25px'>"
-	. round(5*($maxgraph/8))
-	. "</td></tr>"
-	. "\n<tr><td style='height: 25px' valign='middle'>"
-	. "<span class='arial1 spip_x-small'><b>".round($maxgraph/2)."</b></span>"
-	. "</td></tr>"
-	. "\n<tr><td valign='middle' $class style='$style;height: 25px'>"
-	. round(3*($maxgraph/8))
-	. "</td></tr>"
-	. "\n<tr><td style='height: 25px' valign='middle'>"
-	. "<span class='arial1 spip_x-small'>".round($maxgraph/4)."</span>"
-	. "</td></tr>"
-	. "\n<tr><td valign='middle' $class style='$style;height: 25px'>"
-	. round(1*($maxgraph/8))
-	. "</td></tr>"
-	. "\n<tr><td style='height: 10px' valign='bottom'>"
-	. "<span class='arial1 spip_x-small'><b>0</b></span>"
-	. "</td>" 
-	. "</tr>"
-	. "</table>" 
-	. "</div></td>"  
+	. "\n<td valign='top'>"
+	. statistiques_echelle($maxgraph, $class, $style) 
+	. "</td>"  
 	. "</tr></table>";
 
 	// affichage des noms de mois			
@@ -739,44 +702,51 @@ function statistiques_par_mois($query, $visites_today, $class, $style)
 	. "</td>" .
 		  "\n<td ".http_style_background("fond-stats.gif")." valign='bottom'>" . http_img_rien(3, 1, 'trait_bas') ."</td>"
 	. "\n<td>" . http_img_rien(5, 1) ."</td>"
-	. "\n<td valign='top'><div style='font-size:small;' class='verdana1'>"
-	. "\n<table cellpadding='0' cellspacing='0' border='0'>"
-	. "\n<tr><td style='height: 15' valign='top'>"
-	. "<span class='arial1 spip_x-small'><b>".round($maxgraph)."</b></span>"
-	. "</td></tr>"
-	. "\n<tr><td valign='middle' $class style='$style;height: 25px'>"
-	. round(7*($maxgraph/8))
-	. "</td></tr>"
-	. "\n<tr><td style='height: 25px' valign='middle'>"
-	. "<span class='arial1 spip_x-small'>".round(3*($maxgraph/4))."</span>"
-	. "</td></tr>"
-	. "\n<tr><td valign='middle' $class style='$style;height: 25px'>"
-	. round(5*($maxgraph/8))
-	. "</td></tr>"
-	. "\n<tr><td style='height: 25px' valign='middle'>"
-	. "<span class='arial1 spip_x-small'><b>".round($maxgraph/2)."</b></span>"
-	. "</td></tr>"
-	. "\n<tr><td valign='middle' $class style='$style;height: 25px'>"
-	. round(3*($maxgraph/8))
-	. "</td></tr>"
-	. "\n<tr><td style='height: 25px' valign='middle'>"
-	. "<span class='arial1 spip_x-small'>".round($maxgraph/4)."</span>"
-	. "</td></tr>"
-	. "\n<tr><td valign='middle' $class style='$style;height: 25px'>"
-	. round(1*($maxgraph/8))
-	. "</td></tr>"
-	. "\n<tr><td style='height: 10px' valign='bottom'>"
-	. "<span class='arial1 spip_x-small'><b>0</b></span>"
-	. "</td>"
-	. "</tr></table>"
-	. "</div></td></tr></table>";
-
+	. "\n<td valign='top'>"
+	. statistiques_echelle($maxgraph, $class, $style)
+	. "</td></tr></table>";
  }
+
+function statistiques_echelle($maxgraph, $class, $style)
+{
+  return "<div style='font-size:small;' class='verdana1'>"
+ . "\n<table cellpadding='0' cellspacing='0' border='0'>"
+ . "\n<tr><td style='height: 15' valign='top'>"
+ . "<span class='arial1 spip_x-small'><b>" .round($maxgraph) ."</b></span>"
+ . "</td></tr>"
+ . "\n<tr><td valign='middle' $class style='$style;height: 25px'>"
+ . round(7*($maxgraph/8))
+ . "</td></tr>"
+ . "\n<tr><td style='height: 25px' valign='middle'>"
+ . "<span class='arial1 spip_x-small'>" .round(3*($maxgraph/4)) ."</span>"
+ . "</td></tr>"
+ . "\n<tr><td valign='middle' $class style='$style;height: 25px'>"
+ . round(5*($maxgraph/8))
+ . "</td></tr>"
+ . "\n<tr><td style='height: 25px' valign='middle'>"
+ . "<span class='arial1 spip_x-small'><b>" .round($maxgraph/2) ."</b></span>"
+ . "</td></tr>"
+ . "\n<tr><td valign='middle' $class style='$style;height: 25px'>"
+ . round(3*($maxgraph/8))
+ . "</td></tr>"
+ . "\n<tr><td style='height: 25px' valign='middle'>"
+ . "<span class='arial1 spip_x-small'>" .round($maxgraph/4) ."</span>"
+ . "</td></tr>"
+ . "\n<tr><td valign='middle' $class style='$style;height: 25px'>"
+ . round(1*($maxgraph/8))
+ . "</td></tr>"
+ . "\n<tr><td style='height: 10px' valign='bottom'>"
+ . "<span class='arial1 spip_x-small'><b>0</b></span>"
+ . "</td>"
+ . "</tr>"
+ . "</table></div>";
+}
 	
 function stat_logsvg($aff_jours, $agreg, $date_today, $id_article, $log, $total_absolu, $visites_today) {
 
 	$total_absolu = $total_absolu + $visites_today;
 	$test_agreg = $decal = $jour_prec = $val_prec = $total_loc =0;
+	$n = ((3600*24)*$agreg);
 	foreach ($log as $key => $value) {
 		# quand on atteint aujourd'hui, stop
 		if ($key == $date_today) break; 
@@ -788,17 +758,18 @@ function stat_logsvg($aff_jours, $agreg, $date_today, $id_article, $log, $total_
 			$tab_moyenne[$decal] = $value;
 			// Inserer des jours vides si pas d'entrees	
 			if ($jour_prec > 0) {
-				$ecart = floor(($key-$jour_prec)/((3600*24)*$agreg)-1);
+				$ecart = floor(($key-$jour_prec)/$n-1);
 				for ($i=0; $i < $ecart; $i++){
 					if ($decal == 30) $decal = 0;
 					$decal ++;
 					$tab_moyenne[$decal] = $value;
 					reset($tab_moyenne);
 					$moyenne = 0;
-					while (list(,$val_tab) = each($tab_moyenne))
-						$moyenne += $val_tab;
-					$moyenne = $moyenne / count($tab_moyenne);
-					$moyenne = round($moyenne,2); // Pour affichage harmonieux
+					while (list(,$v) = each($tab_moyenne))
+						$moyenne += $v;
+					$moyenne /= count($tab_moyenne);
+					// Pour affichage harmonieux
+					$moyenne = round($moyenne,2); 
 				}
 			}
 			$total_loc = $total_loc + $value;
@@ -822,5 +793,4 @@ function stat_logsvg($aff_jours, $agreg, $date_today, $id_article, $log, $total_
 
 	return array($moyenne, $val_prec, $res);
 }
-
 ?>
