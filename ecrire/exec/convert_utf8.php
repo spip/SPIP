@@ -29,10 +29,10 @@ function exec_convert_utf8_dist() {
 	$action = _T('utf8_convertir_votre_site');
 
 	// si meta deja la, c'est une reprise apres timeout.
-	if ($GLOBALS['meta']['convert_utf8']) {
-		$base = charger_fonction('convert_utf8', 'base');
-		$base($action, true);
-	} else {
+        if ($GLOBALS['meta']['convert_utf8'] AND $GLOBALS['meta']['admin']) {
+                $admin = charger_fonction('admin', 'inc');
+                echo $admin('convert_utf8', $action, '', true);
+        } else {
 		$charset_orig =	$GLOBALS['meta']['charset'];
 		// tester si le charset d'origine est connu de spip
 		if (!load_charset($charset_orig))
