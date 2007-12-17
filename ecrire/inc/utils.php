@@ -36,12 +36,11 @@ function charger_fonction($nom, $dossier='exec', $continue=false) {
 		die(htmlspecialchars($nom)." pas autorise");
 
 	// passer en minuscules (cf les balises de formulaires)
-	$inc = find_in_path(($d = strtolower($nom) . '.php'), $dossier);
-	if ($inc) {
-		include_once $inc;
-		if (function_exists($f)) return $f;
-		if (function_exists($g)) return $g;
-	}
+	// et inclure le fichier
+	find_in_path(($d = strtolower($nom) . '.php'), $dossier, true /* include */);
+	if (function_exists($f)) return $f;
+	if (function_exists($g)) return $g;
+
 	if ($continue) return false;
 
 	// Echec : message d'erreur
