@@ -89,7 +89,7 @@ function version_svn_courante($dir) {
 
 // charge les fonctions graphiques et applique celle demandee
 // http://doc.spip.org/@filtrer
-function filtrer() {
+function filtrer($filtre) {
 	find_in_path('filtres_images.php', 'inc/', true);
 
 	$tous = func_get_args();
