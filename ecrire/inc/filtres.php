@@ -91,7 +91,14 @@ function version_svn_courante($dir) {
 // http://doc.spip.org/@filtrer
 function filtrer() {
 	find_in_path('filtres_images.php', 'inc/', true);
-	return image_filtrer(func_get_args());
+
+	$tous = func_get_args();
+	if (substr($filtre,0,6)=='image_')
+		return image_filtrer($tous);
+	else{
+		array_shift($tous); # enlever $filtre
+		return call_user_func_array($filtre, $tous);
+	}
 }
 
 // fonction generique d'entree des filtres images
@@ -107,7 +114,7 @@ function image_filtrer($args){
 	if (!$texte) return;
 
 	// Cas du nom de fichier local
-	if (preg_match(',^('._DIR_IMG .'|'. _DIR_IMG_PACK .'|'. _DIR_VAR .'),', $texte)) {
+	if (!preg_match(',<img\s,ims', $texte) && (strpos($texte,'..')===FALSE) && file_exists($texte)) {
 		array_unshift($args,"<img src='$texte' />");
 		return call_user_func_array($filtre, $args);
 	}
