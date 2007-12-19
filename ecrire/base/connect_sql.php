@@ -85,12 +85,10 @@ function spip_connect($serveur='', $version='') {
 			return false;
 		}
 	} else	{
-		$charset = -1;
-		if (($f = $connexions[$index][$version]['select'])
-		&& ($r = $f('valeur','spip_meta', "nom='charset_sql_connexion'",'','','','',$serveur))
-		&& ($f = $connexions[$index][$version]['fetch'])
-		&& ($r = $f($r, NULL,$serveur)))
-			$charset = $r['valeur'] ? $r['valeur'] : -1;
+		if ($connexions[$index]['spip_connect_version']
+		AND $r = sql_getfetsel('valeur', 'spip_meta', "nom='charset_sql_connexion'",'','','','',$serveur))
+			$charset = $r;
+		else $charset = -1;
 	}
 	if ($charset != -1) {
 		$f = $GLOBALS[$jeu]['set_charset'];
