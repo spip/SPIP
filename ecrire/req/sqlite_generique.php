@@ -51,17 +51,17 @@ function req_sqlite_dist($addr, $port, $login, $pass, $db='', $prefixe='', $ldap
 	if (!_sqlite_charger_version($sqlite_version)) {
 		spip_log("Impossible de trouver/charger le module SQLite ($sqlite_version)!");
 		return false;	
-	} 
-	
+	}
+
 	// chargement des constantes
 	// il ne faut pas definir les constantes avant d'avoir charge les modules sqlite
 	$define = "spip_sqlite".$sqlite_version."_constantes";
 	$define();
-		
+	
 	$ok = false;
 	if (!$db){
 		// si installation -> base temporaire tant qu'on ne connait pas son vrai nom
-		if (_request('exec') == 'install'){
+		if (defined('_ECRIRE_INSTALL') && _ECRIRE_INSTALL){
 			// creation d'une base temporaire pour le debut d'install
 			$tmp = _DIR_DB . "_sqlite".$sqlite_version."_install.sqlite";
 			if ($sqlite_version == 3)
@@ -602,7 +602,7 @@ function spip_sqlite_selectdb($db, $serveur='') {
 	// interdire la creation d'une nouvelle base, 
 	// sauf si on est dans l'installation
 	if (!is_file($f = _DIR_DB . $db . '.sqlite')
-		&& _request('exec')!='install')
+		&& (!defined('_ECRIRE_INSTALL') || !_ECRIRE_INSTALL))
 		return false;
 
 	// se connecter a la base indiquee
@@ -1185,7 +1185,7 @@ class sqlite_traiter_requete{
 		$this->query = $query;
 		$this->serveur = $serveur;
 		
-		if (!($this->link = _sqlite_link($this->serveur)) && (_request('exec')!='install')){
+		if (!($this->link = _sqlite_link($this->serveur)) && (!defined('_ECRIRE_INSTALL') || !_ECRIRE_INSTALL)){
 			spip_log("Aucune connexion sqlite (link)");
 			return false;	
 		}
