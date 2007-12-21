@@ -23,7 +23,7 @@
 	{recherche ?#ENV{cherche_signature}}
 	{!par #ENV{tri}}{par #ENV{tri_inverse}}
 	{!par #ENV{tri,#ENV{tri_inverse}}|?{'',date_time}}>
-		<tr>
+		<tr id='id_signature#ID_SIGNATURE'>
 		<td class="signature-date">[(#DATE|affdate_jourcourt)]</td>
 		<td class="signature-nom"><div class="#EDIT{qui}">#NOM</div>[
 		<div class="#EDIT{hyperlien}"><a href="(#URL_SITE)" class="spip_out" style="font-size: small;">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></div>]</td>

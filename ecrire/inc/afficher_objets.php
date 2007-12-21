@@ -28,7 +28,7 @@ function lien_editer_objet($type,$key,$id){
 // http://doc.spip.org/@lien_voir_objet
 function lien_voir_objet($type,$key,$id){
 	if ($type == 'document') return generer_url_document($id);
-	$exec = array('article'=>'articles','breve'=>'breves_voir','rubrique'=>'naviguer','mot'=>'mots_edit');
+	$exec = array('article'=>'articles','breve'=>'breves_voir','rubrique'=>'naviguer','mot'=>'mots_edit', 'signature'=>'controle_petition');
 	$exec = isset($exec[$type])?$exec[$type]:$type . "s";
 	return generer_url_ecrire($exec,"$key=$id");
 }
@@ -89,8 +89,11 @@ function afficher_numero_edit($id, $key, $type,$row=NULL) {
 function afficher_titre_objet($type,$row){
 	if (function_exists($f = "afficher_titre_$type"))
 		return $f($row);
+
 	$titre = isset($row['titre'])?sinon($row['titre'], _T('ecrire:info_sans_titre')):
-	  (isset($row['nom'])?sinon($row['nom'], _T('ecrire:info_sans_titre')):"");
+	(isset($row['nom'])?sinon($row['nom'], _T('ecrire:info_sans_titre')):
+	 (isset($row['nom_email'])?sinon($row['nom_email'], _T('ecrire:info_sans_titre')):
+	  ""));
 	return array(typo(supprime_img($titre,'')),'');
 }
 // http://doc.spip.org/@afficher_titre_site
