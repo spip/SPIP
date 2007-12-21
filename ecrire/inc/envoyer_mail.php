@@ -97,31 +97,44 @@ function inc_envoyer_mail_dist($email, $sujet, $texte, $from = "", $headers = ""
 	if (!email_valide($email)) return false;
 	if ($email == _T('info_mail_fournisseur')) return false; // tres fort
 
-	// Ajouter au besoin le \n final dans les $headers passes en argument
-	if ($headers = trim($headers)) $headers .= "\n";
+	// Fournir si possible un Message-Id: conforme au RFC1036,
+	// sinon SpamAssassin denoncera un MSGID_FROM_MTA_HEADER
 
-	if (!$from) {
-		$email_envoi = $GLOBALS['meta']["email_envoi"];
-		$from = email_valide($email_envoi) ? $email_envoi : $email;
+	$email_envoi = $GLOBALS['meta']["email_envoi"];
+	if (email_valide($email_envoi)) {
+		preg_match('/(@\S+)/', $email_envoi, $domain);
+		$mid = 'Message-Id: <' . time() . '_' . rand() . '_' . md5($email . $text) . $domain[1] . ">\n";
 	} else {
-		// pour les sites qui colle d'office From: serveur-http
-		$headers .= "Reply-To: $from\n";
+		spip_log("Meta email_envoi invalide. Le mail sera probablement vu comme spam."); 
+		$email_envoi = $email;
+		$mid = '';
 	}
-	spip_log("mail ($email): $sujet". ($from ?", from <$from>":''));
+	if (!$from) $from = $email_envoi;  
 
-	$charset = $GLOBALS['meta']['charset'];
-
-	// Ajouter le Content-Type s'il n'y est pas deja
-	if (strpos($headers, "Content-Type: ") === false)
-		$headers .=
-		"MIME-Version: 1.0\n".
-		"Content-Type: text/plain; charset=$charset\n".
-		"Content-Transfer-Encoding: 8bit\n";
+	// ceci est la RegExp NO_REAL_NAME faisant hurler SpamAssassin
+	if (preg_match('/^["\s]*\<?\S+\@\S+\>?\s*$/', $from))
+		$from .= ' (' . str_replace(')','', translitteration($GLOBALS['meta']["nom_site"])) . ')';
 
 	// Et maintenant le champ From:
 	$headers .= "From: $from\n";
 
+       // indispensable pour les sites qui colle d'office From: serveur-http
+	$headers .= "Reply-To: $from\n";
+
+	$charset = $GLOBALS['meta']['charset'];
+
+	// Ajouter le Content-Type et consort s'il n'y est pas deja
+	if (strpos($headers, "Content-Type: ") === false)
+		$headers .=
+		"Content-Type: text/plain; charset=$charset\n".
+		"Content-Transfer-Encoding: 8bit\n" .
+		"MIME-Version: 1.0\n";
+
+	$headers .= $mid;
+
 	// nettoyer les &eacute; &#8217, &emdash; etc...
+	// les 'cliquer ici' etc sont a eviter;  voir:
+	// http://mta.org.ua/spamassassin-2.55/stuff/wiki.CustomRulesets/20050914/rules/french_rules.cf
 	$texte = nettoyer_caracteres_mail($texte);
 	$sujet = nettoyer_caracteres_mail($sujet);
 
@@ -134,6 +147,10 @@ function inc_envoyer_mail_dist($email, $sujet, $texte, $from = "", $headers = ""
 		mb_internal_encoding('utf-8');
 	}
 
+	spip_log("mail $email\n$sujet\n$headers");
+
+	// Ajouter le \n final
+	if ($headers = trim($headers)) $headers .= "\n";
 	if (function_exists('wordwrap'))
 		$texte = wordwrap($texte);
 
