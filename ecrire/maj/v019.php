@@ -12,29 +12,22 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function maj_v019_dist($version_installee, $version_cible)
-{
-	if (1.926 >= $version_installee) {
-		include_spip('maj/v019_pre193');
-		v019_pre193($version_installee, $version_cible);
-	}
-	maj_while($version_installee, $version_cible);
-}
+/*--------------------------------------------------------------------- */
+/*		Nouvelle gestion des MAJ (par tableau)			*/
+/*--------------------------------------------------------------------- */
 
-/*--------------------------------------------------------------------- */
-/*			 Nouvelle gestion des MAJ			*/
-/* ca coincide avec l'état de la 1.9.2, mais c'est un peu retroactif	*/
-/*--------------------------------------------------------------------- */
+// on la fait coincider retroactivement avec l'état de la 1.9.2
+// => l'index numerique entier est la * par 1000 (resultat < SVN c'est ok)
 
 	// FLV est incrustable, la MAJ precedente l'avait oublie
-$GLOBALS['maj'][1][931] = array(
+$GLOBALS['maj'][1931] = array(
 	array('spip_query', "UPDATE spip_types_documents SET `inclus`='embed' WHERE `extension`='flv'")
 	);
 
 	// Ajout de spip_forum.date_thread, et on essaie de le remplir
 	// a coup de table temporaire (est-ce autorise partout... sinon
 	// tant pis, ca ne marchera que pour les forums recemment modifies)
-$GLOBALS['maj'][1][932] = array(
+$GLOBALS['maj'][1932] = array(
 	array('sql_alter', "TABLE spip_forum ADD `date_thread` datetime DEFAULT '0000-00-00 00:00:00' NOT NULL"),
 	array('sql_alter', "TABLE spip_forum ADD INDEX `date_thread` (`date_thread`)"),
 
@@ -53,7 +46,7 @@ function maj_1_934 () {
 	  spip_query("UPDATE spip_documents SET `fichier`=substring(fichier,$n) WHERE `fichier` LIKE " . _q($dir_img . '%'));
 }
 
-$GLOBALS['maj'][1][934] = array(array('maj_1_934'));
+$GLOBALS['maj'][1934] = array(array('maj_1_934'));
 
 function maj_1_935 () {
 	include_spip('inc/texte');
@@ -73,14 +66,14 @@ function maj_1_935 () {
 	}
 }
 
-$GLOBALS['maj'][1][935] = array(
+$GLOBALS['maj'][1935] = array(
 	array('sql_alter', "TABLE spip_documents_articles ADD `vu` ENUM('non', 'oui') DEFAULT 'non' NOT NULL"),
 	array('sql_alter', "TABLE spip_documents_rubriques ADD `vu` ENUM('non', 'oui') DEFAULT 'non' NOT NULL"),
 	array('sql_alter', "TABLE spip_documents_breves ADD `vu` ENUM('non', 'oui') DEFAULT 'non' NOT NULL"),
 	array('maj_1_935')
 	);
 
-$GLOBALS['maj'][1][937] = array(
+$GLOBALS['maj'][1937] = array(
 		// convertir les champs blob des tables spip en champs texte
 	array('convertir_un_champ_blob_en_text',"spip_articles","texte","LONGTEXT"),
 	array('convertir_un_champ_blob_en_text',"spip_articles","extra","LONGTEXT"),
@@ -112,7 +105,7 @@ function maj_1_938 () {
 	}
 }
 
-$GLOBALS['maj'][1][938] = array(
+$GLOBALS['maj'][1938] = array(
 	// Des champs NULL a l'installation
 	// Ajouter un champ extension aux spip_documents, et le
 	// remplir avec les valeurs ad hoc
@@ -131,7 +124,7 @@ $GLOBALS['maj'][1][938] = array(
 	array('sql_alter', "TABLE spip_types_documents ADD PRIMARY KEY (`extension`)"),
 	);
 
-$GLOBALS['maj'][1][939] = array(
+$GLOBALS['maj'][1939] = array(
 	array('sql_alter', "TABLE spip_visites CHANGE `visites` `visites` INT UNSIGNED DEFAULT '0' NOT NULL"),
 	array('sql_alter', "TABLE spip_visites_articles CHANGE `visites` `visites` INT UNSIGNED DEFAULT '0' NOT NULL"),
 	array('sql_alter', "TABLE spip_referers CHANGE `visites` `visites` INT UNSIGNED DEFAULT '0' NOT NULL"),
@@ -140,18 +133,18 @@ $GLOBALS['maj'][1][939] = array(
 	array('sql_alter', "TABLE spip_referers_articles CHANGE `visites` `visites` INT UNSIGNED DEFAULT '0' NOT NULL")
 	);
 
-$GLOBALS['maj'][1][940] = array(
+$GLOBALS['maj'][1940] = array(
 				array('spip_query', "DROP TABLE spip_caches"),
 	);
 
 
-$GLOBALS['maj'][1][941] = array(
+$GLOBALS['maj'][1941] = array(
 	array('spip_query', "UPDATE spip_meta SET `valeur` = '' WHERE `nom`='preview' AND `valeur`='non' "),
 	array('spip_query', "UPDATE spip_meta SET `valeur` = ',0minirezo,1comite,' WHERE `nom`='preview' AND `valeur`='1comite' "),
 	array('spip_query', "UPDATE spip_meta SET `valeur` = ',0minirezo,' WHERE `nom`='preview' AND `valeur`='oui' "),
 	);
 
-$GLOBALS['maj'][1][942] = array(
+$GLOBALS['maj'][1942] = array(
 	array('sql_alter', "TABLE spip_auteurs CHANGE `statut` `statut` varchar(255)  DEFAULT '0' NOT NULL"),
 	array('sql_alter', "TABLE spip_breves CHANGE `statut` `statut` varchar(6)  DEFAULT '0' NOT NULL"),
 	array('sql_alter', "TABLE spip_messages CHANGE `statut` `statut` varchar(6)  DEFAULT '0' NOT NULL"),
@@ -165,7 +158,7 @@ $GLOBALS['maj'][1][942] = array(
 
 
 	// suppression de l'indexation dans la version standard
-$GLOBALS['maj'][1][943] = array(
+$GLOBALS['maj'][1943] = array(
 	array('sql_alter', "TABLE spip_articles DROP KEY `idx`"),
 	array('sql_alter', "TABLE spip_articles DROP `idx`"),
 	array('sql_alter', "TABLE spip_auteurs DROP KEY `idx`"),
@@ -189,13 +182,13 @@ $GLOBALS['maj'][1][943] = array(
 	array('spip_query', "DROP TABLE spip_index_dico"),
 	);
 
-$GLOBALS['maj'][1][944] = array(
+$GLOBALS['maj'][1944] = array(
 				array('sql_alter', "TABLE spip_documents CHANGE `taille` `taille` integer"),
 				array('sql_alter', "TABLE spip_documents CHANGE `largeur` `largeur` integer"),
 				array('sql_alter', "TABLE spip_documents CHANGE `hauteur` `hauteur` integer")
 	);
 
-$GLOBALS['maj'][1][945] = array(
+$GLOBALS['maj'][1945] = array(
   array('sql_alter', "TABLE spip_petitions CHANGE `email_unique` `email_unique` CHAR (3) DEFAULT '' NOT NULL"),
     array('sql_alter', "TABLE spip_petitions CHANGE `site_obli` `site_obli` CHAR (3) DEFAULT '' NOT NULL"),
     array('sql_alter', "TABLE spip_petitions CHANGE `site_unique` `site_unique` CHAR (3) DEFAULT '' NOT NULL"),
@@ -284,7 +277,7 @@ $GLOBALS['maj'][1][945] = array(
   );
 
 
-$GLOBALS['maj'][1][946] = array(
+$GLOBALS['maj'][1946] = array(
     array('sql_alter', "TABLE spip_forum DROP INDEX `id_parent`"),
     array('sql_alter', "TABLE spip_forum DROP INDEX `id_article`"),
     array('sql_alter', "TABLE spip_forum DROP INDEX `id_breve`"),
@@ -296,7 +289,7 @@ $GLOBALS['maj'][1][946] = array(
 	);
 
 
-$GLOBALS['maj'][1][947] = array(
+$GLOBALS['maj'][1947] = array(
 
     array('sql_alter', "TABLE spip_articles DROP INDEX `url_site`"),
     array('sql_alter', "TABLE spip_articles DROP INDEX `date_modif`"),
@@ -304,7 +297,7 @@ $GLOBALS['maj'][1][947] = array(
 	);
 
 	// mauvaise manip
-$GLOBALS['maj'][1][949] = array(
+$GLOBALS['maj'][1949] = array(
 
     array('sql_alter', "TABLE spip_versions DROP INDEX `date`"),
     array('sql_alter', "TABLE spip_versions DROP INDEX `id_auteur`")
@@ -314,9 +307,9 @@ $GLOBALS['maj'][1][949] = array(
 function maj_1_950($installee) {
   // oubli de gerer le prefixe lors l'introduction de l'abstraction
   // => Relancer les MAJ concernees si la version dont on part les avait fait
-	if ($installe >= 1.946) serie_alter('950a', $GLOBALS['maj'][1][946]); 
-	if ($installe >= 1.947) serie_alter('950b', $GLOBALS['maj'][1][947]);
-	if ($installe >= 1.949)	@serie_alter('950c', $GLOBALS['maj'][1][949]); 
+	if ($installe >= 1.946) serie_alter('950a', $GLOBALS['maj'][1946]); 
+	if ($installe >= 1.947) serie_alter('950b', $GLOBALS['maj'][1947]);
+	if ($installe >= 1.949)	@serie_alter('950c', $GLOBALS['maj'][1949]); 
 	global $tables_auxiliaires;
 	include_spip('base/auxiliaires');
 	$v = $tables_auxiliaires[$k='spip_urls'];
@@ -344,13 +337,13 @@ function maj_1_950($installee) {
 
 // Donner a la fonction ci-dessus le numero de version installee
 // AVANT que la mise a jour ait commencee
-$GLOBALS['maj'][1][950] =  array(array('maj_1_950', $GLOBALS['meta']['version_installee'] ));
+$GLOBALS['maj'][1950] =  array(array('maj_1_950', $GLOBALS['meta']['version_installee'] ));
 
 // Erreur dans maj_1_948():
 // // http://trac.rezo.net/trac/spip/changeset/10194
 // // Gestion du verrou SQL par PHP
 
-$GLOBALS['maj'][1][951] = array(
+$GLOBALS['maj'][1951] = array(
 
   array('sql_alter', "TABLE spip_versions CHANGE `id_version` `id_version` bigint(21) DEFAULT 0 NOT NULL")
 	);
@@ -378,18 +371,11 @@ function maj_1_952() {
 	if (!$ok) die('echec sur maj_1_952()'); 
 }
 
-$GLOBALS['maj'][1][952] = array(array('maj_1_952'));
+$GLOBALS['maj'][1952] = array(array('maj_1_952'));
 
-function maj_1_953()
-{
-	global $tables_principales;
-	include_spip('base/create');
-	creer_base_types_doc();
-}
+$GLOBALS['maj'][1953] = array(array('upgrade_types_documents'));
 
-$GLOBALS['maj'][1][953] = array(array('maj_1_953'));
-
-$GLOBALS['maj'][1][954] = array(
+$GLOBALS['maj'][1954] = array(
 
 		//pas de psd en <img> 
   array('spip_query', "UPDATE spip_types_documents SET `inclus`='non' WHERE `extension`='psd'"),
@@ -412,14 +398,14 @@ $GLOBALS['maj'][1][954] = array(
 
 if ($GLOBALS['meta']['version_installee'] > 1.950)
   // 1.950 lisait un bug dans auxiliaires.php corrige a present
-	$GLOBALS['maj'][1][955] = array(
+	$GLOBALS['maj'][1955] = array(
 		  array('sql_alter', "TABLE spip_urls CHANGE `maj` date DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL")
 		  );
 
 // la mise a jour vers 1.938 contient une erreur
 // il faut supprimer l'autoincrement avant de supprimer la PRIMARY KEY
 
-$GLOBALS['maj'][1][938] = array(
+$GLOBALS['maj'][1938] = array(
 
 # creer un champ plus informatif, et son index
 	array('sql_alter', "TABLE spip_documents ADD `extension` VARCHAR(10) DEFAULT ''  NOT NULL "),
@@ -439,18 +425,18 @@ function maj_1_938_catastrophe ()
 }
 
 if ($GLOBALS['meta']['version_installee'] > 1.938)
-	$GLOBALS['maj'][1][956] = array(array('maj_1_938_catastrophe'));
+	$GLOBALS['maj'][1956] = array(array('maj_1_938_catastrophe'));
 
 // PG veut une valeur par defaut a l'insertion
 // http://trac.rezo.net/trac/spip/changeset/10482
 
-$GLOBALS['maj'][1][957] = array(
+$GLOBALS['maj'][1957] = array(
 	array('sql_alter', "TABLE spip_mots CHANGE `id_groupe` `id_groupe` bigint(21) DEFAULT 0 NOT NULL"),
     array('sql_alter', "TABLE spip_documents CHANGE `mode` `mode` ENUM('vignette', 'image', 'document') DEFAULT 'document' NOT NULL")
 	);
 
 // Ce champ est inutile et provoque une erreur a l'insertion qui l'oublie
-$GLOBALS['maj'][1][958] = array(
+$GLOBALS['maj'][1958] = array(
 	array('sql_alter', "TABLE spip_referers_articles DROP date")
 );
 ?>

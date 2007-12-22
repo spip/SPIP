@@ -61,6 +61,7 @@ $tables_documents = array(
 			  'bin' => 'Binary Data',
 			  'blend' => 'Blender',
 			  'c' => 'C source',
+			  'cls' => 'LaTeX Class',
 			  'css' => 'Cascading Style Sheet',
 			  'csv' => 'Comma Separated Values',
 			  'deb' => 'Debian',
@@ -84,6 +85,7 @@ $tables_documents = array(
 			  'sdd' => 'StarOffice',
 			  'sdw' => 'StarOffice',
 			  'sit' => 'Stuffit',
+			  'sty' => 'LaTeX Style Sheet',
 			  'sxc' => 'OpenOffice Calc',
 			  'sxi' => 'OpenOffice Impress',
 			  'sxw' => 'OpenOffice',
@@ -203,8 +205,9 @@ $tables_mime = array(
 		'ott' => 'application/vnd.oasis.opendocument.text-template',
 		'ots' => 'application/vnd.oasis.opendocument.spreadsheet-template',
 		'otp' => 'application/vnd.oasis.opendocument.presentation-template',
-		'otg' => 'application/vnd.oasis.opendocument.graphics-template'
-		
+		'otg' => 'application/vnd.oasis.opendocument.graphics-template',
+		'cls'=>'text/x-tex',
+		'sty'=>'text/x-tex',
 	);
 
 
