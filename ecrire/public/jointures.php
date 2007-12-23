@@ -81,7 +81,10 @@ function liste_champs_jointures($nom,$desc){
 	/*elseif (isset($GLOBALS['tables_principales'][$nom]['join'])) return $GLOBALS['tables_principales'][$nom]['join'];
 	elseif (isset($GLOBALS['tables_auxiliaires'][$nom]['join'])) return $GLOBALS['tables_auxiliaires'][$nom]['join'];*/
 	
-	// sinon la cle primaire
+	// si pas de cle, c'est fichu
+	if (!isset($desc['key'])) return array();
+
+	// si cle primaire, la privilegier
 	if (isset($desc['key']['PRIMARY KEY']))
 		return split_key($desc['key']['PRIMARY KEY']);
 	
@@ -89,8 +92,9 @@ function liste_champs_jointures($nom,$desc){
 	// en eliminant celles qui sont pas pertinentes (idx, maj)
 	// si jamais le resultat n'est pas pertinent pour une table donnee,
 	// il faut declarer explicitement le champ 'join' de sa description
+
 	$join = array();
-	if (is_array($desc['key']))foreach($desc['key'] as $v) $join = split_key($v, $join);
+	foreach($desc['key'] as $v) $join = split_key($v, $join);
 	foreach($join as $k) if (in_array($k, $nojoin)) unset($join[$k]);
 	return $join;
 }
