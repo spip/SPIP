@@ -110,5 +110,32 @@ function verifier_action_auteur($action, $valeur) {
 	return false;
 }
 
+//
+// Des fonctions independantes du visiteur, qui permettent de controler
+// par exemple que l'URL d'un document a la bonne cle de lecture
+//
+
+// Le secret du site doit rester aussi secret que possible, et est eternel
+// On ne doit pas l'exporter
+function secret_du_site() {
+	if (!isset($GLOBALS['meta']['secret_du_site'])
+	OR !strlen($GLOBALS['meta']['secret_du_site'])
+	) {
+		include_spip('inc/acces');
+		ecrire_meta('secret_du_site', creer_uniqid(), 'non');
+	}
+	return $GLOBALS['meta']['secret_du_site'];
+}
+
+// http://doc.spip.org/@calculer_cle_action
+function calculer_cle_action($action) {
+	return md5($action . secret_du_site());
+}
+
+// http://doc.spip.org/@verifier_cle_action
+function verifier_cle_action($action, $cle) {
+	return ($cle == calculer_cle_action($action));
+}
+
 
 ?>
