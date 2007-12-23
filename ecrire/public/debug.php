@@ -410,7 +410,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	// en cas de squelette inclus,  virer le code de l'incluant:
 	// - il contient souvent une Div restreignant la largeur a 3 fois rien
 	// - ca fait 2 headers !
-	ob_end_clean();
+	if (ob_get_length()) ob_end_clean();
 	$self = str_replace("\\'", '&#39;', self());
 	$self = parametre_url($self,'var_mode', 'debug');
 	echo debug_debut($fonc);
