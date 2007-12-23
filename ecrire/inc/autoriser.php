@@ -24,7 +24,8 @@ define('_ADMINS_RESTREINTS', true);
 define('_STATUT_AUTEUR_CREATION', '1comite');
 // statuts associables a des rubriques (separes par des virgules)
 define('_STATUT_AUTEUR_RUBRIQUE', _ADMINS_RESTREINTS ? '0minirezo' : '');
-
+// id du ou des webmestres, '1:5:90' a regler dans mes_options
+define ('_ID_WEBMESTRES', '1');
 
 // surcharge possible de autoriser(), sinon autoriser_dist()
 if (!function_exists('autoriser')) {
