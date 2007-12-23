@@ -574,6 +574,7 @@ function spip_mysql_in($val, $valeurs, $not='', $serveur='') {
 function calcul_mysql_in($val, $valeurs, $not='') {
 	if (is_array($valeurs))
 		$valeurs = join(',', array_map('_q', $valeurs));
+	elseif ($valeurs[0]===',') $valeurs = substr($valeurs,1);
 	if (!strlen(trim($valeurs))) return ($not ? "0=0" : '0=1');
 
 	$n = $i = 0;
