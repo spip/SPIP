@@ -243,6 +243,10 @@ function spip_sqlite_alter($query, $serveur=''){
 					$do = "ADD".substr($do, 10);
 			case 'ADD':
 			default:
+				if (preg_match('/^(.*)(BEFORE|AFTER)(.*)$/is', $do, $matches)) {
+					$do = $matches[1];
+				}
+				
 				if (_sqlite_is_version(3, '', $serveur)){
 					$requete = new sqlite_traiter_requete("$debut $do", $serveur);
 					if (!$requete->executer_requete()){
@@ -252,9 +256,6 @@ function spip_sqlite_alter($query, $serveur=''){
 					break;
 				// artillerie lourde pour sqlite2 !
 				} else {
-					if (preg_match('/^(.*)(BEFORE|AFTER)(.*)$/is', $do, $matches)) {
-						$do = $matches[1];
-					}
 					$def = trim(substr($do, 3));
 					$colonne_ajoutee = substr($def, 0, strpos($def,' '));
 					$def = substr($def, strlen($colonne_ajoutee)+1);
@@ -573,7 +574,7 @@ function spip_sqlite_replace($table, $values, $keys=array(), $serveur='') {
 function spip_sqlite_select($select, $from, $where='', $groupby='', $orderby='', $limit='', $having='', $serveur='') {	
 	// version() n'est pas connu de sqlite
 	$select = str_replace('version()', 'sqlite_version()',$select);
-	
+
 	// recomposer from
 	$from = (!is_array($from) ? $from : _sqlite_calculer_select_as($from));
 	
