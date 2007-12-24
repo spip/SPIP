@@ -17,7 +17,8 @@ function exec_discuter_dist()
 {
 	$debut = _request('debut');
 	$id_article = _request('id_article');
+	$statut = preg_replace('/\W/','',_request('statut')); //secu
 	$discuter = charger_fonction('discuter', 'inc');
-	ajax_retour($discuter($id_article, 'ajax', $debut));
+	ajax_retour($discuter($id_article, $debut, $statut));
 }
 ?>

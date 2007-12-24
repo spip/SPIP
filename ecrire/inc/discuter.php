@@ -47,20 +47,19 @@ function formulaire_discuter($query, $total, $debut, $total_afficher, $script, $
 }
 
 // http://doc.spip.org/@inc_discuter_dist
-function inc_discuter_dist($id_article, $flag, $debut=1)
+function inc_discuter_dist($id_article, $debut=1, $statut='prive')
 {
 	$debut = intval($debut);
 	$id_article = intval($id_article);
+	$where = "id_article=" . sql_quote($id_article) . " AND id_parent=0 AND statut=" . sql_quote($statut);
 
-	$res = sql_countsel('spip_forum', "statut='prive' AND id_article=$id_article AND id_parent=0");
+	if (! ($n = sql_countsel('spip_forum', $where))) return '';
 
-	if ($res) {
-		$total_afficher = 8;
-		$forum = sql_select('*', 'spip_forum', "statut='prive' AND id_article=$id_article AND id_parent=0", '',  "date_heure DESC", "$debut,$total_afficher");
+	$total_afficher = 8;
+	$forum = sql_select('*', 'spip_forum', $where, '',  "date_heure DESC", "$debut,$total_afficher");
 
-		$res = formulaire_discuter($forum, $res, $debut, $total_afficher, 'articles', "id_article=$id_article");
-	} else $res ='';
+	$res = formulaire_discuter($forum, $n, $debut, $total_afficher, 'articles', "id_article=$id_article&statut=$statut");
 
-	return $res ? ajax_action_greffe("forum", '', $res): "";
+	return ajax_action_greffe("forum", '', $res);
 }
 ?>
