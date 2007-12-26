@@ -4,45 +4,31 @@
 [(#REM) Signatures de la petition ]
 <B_signatures>
 <form method='get' action='#SELF'>
-<div id="signatures">
+<div class="formulaire_spip" id="signatures">
 	[(#SELF|form_hidden)]
 	#ANCRE_PAGINATION
 
 	<table summary="<:signatures_petition:>">
 	<caption><h2>#GRAND_TOTAL <:signatures_petition:></h2></caption>
-		<tr>
-		<th style='text-align: center'>
-		  <a href='[(#SELF|parametre_url{tri,date_time}|parametre_url{tri_inverse,''})]#signatures'><:date:></a>
-		</th>
-		<th style='text-align: center'>
-		  <a href='[(#SELF|parametre_url{tri,nom_email}|parametre_url{tri_inverse,''})]#signatures'><:nom:></a>
-		</th>
-		<th style='text-align: center'><:message:></th>
-		</tr>
-<BOUCLE_signatures(SIGNATURES) {id_article} {pagination #ENV{pagination, 15} }
-	{recherche ?#ENV{cherche_signature}}
-	{!par #ENV{tri}}{par #ENV{tri_inverse}}
-	{!par #ENV{tri,#ENV{tri_inverse}}|?{'',date_time}}>
+		<thead>
+			<th class="signature-date"><a href='[(#SELF|parametre_url{tri,date_time}|parametre_url{tri_inverse,''})]#signatures' title="<:lien_trier_date:>"><:date:></a></th>
+			<th class="signature-nom"><a href='[(#SELF|parametre_url{tri,nom_email}|parametre_url{tri_inverse,''})]#signatures' title="<:lien_trier_nom:>"><:nom:></a></th>
+			<th class="signature-message"><:message:></th>
+		</thead>
+		<BOUCLE_signatures(SIGNATURES) {id_article} {pagination #ENV{pagination, 15} } {recherche ?#ENV{cherche_signature}} {!par #ENV{tri}}{par #ENV{tri_inverse}} {!par #ENV{tri,#ENV{tri_inverse}}|?{'',date_time}}>
 		<tr id='id_signature#ID_SIGNATURE'>
-		<td class="signature-date">[(#DATE|affdate_jourcourt)]</td>
-		<td class="signature-nom"><div class="#EDIT{qui}">#NOM</div>[
-		<div class="#EDIT{hyperlien}"><a href="(#URL_SITE)" class="spip_out" style="font-size: small;">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></div>]</td>
-		[<td class="signature-message"><div class="#EDIT{message}">(#MESSAGE|PtoBR)</div></td>]
+			<td class="signature-date">[(#DATE|affdate_jourcourt)]</td>
+			<td class="signature-nom">
+				<strong class="#EDIT{qui}">#NOM</strong>
+				[<br /><small class="#EDIT{hyperlien}"><a href="(#URL_SITE)"[ title="(#NOM_SITE)"] class="spip_out"><:site_web:></a></small>]
+			</td>
+			[<td class="signature-message #EDIT{message}">(#MESSAGE|PtoBR)</td>]
 		</tr>
-</BOUCLE_signatures>
-		<tr>
-		<th style='text-align: center'>
-		  <a href='[(#SELF|parametre_url{tri_inverse,date_time}|parametre_url{tri,''})]#signatures'><:date:></a>
-		</th>
-		<th style='text-align: center'>
-		  <a href='[(#SELF|parametre_url{tri_inverse,nom_email}|parametre_url{tri,''})]#signatures'><:nom:></a>
-		</th>
-		<th style='float: right'>
-			<:info_rechercher:> <input name='cherche_signature' />
-		</th>
-		</tr>
+		</BOUCLE_signatures>
 	</table>
-</div>
+	
 	[<p class="pagination">(#PAGINATION)</p>]
+	<p class="signature_recherche"><:info_rechercher:> <input type="text" class="forml" size="10" name='cherche_signature' /> <input type="image" src="#CHEMIN{rechercher.png}" class="bouton" value="<:info_rechercher:>" /></p>
+</div><!--#signatures-->
 </form>
 </B_signatures>
