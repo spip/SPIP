@@ -248,7 +248,10 @@ function exec_statistiques_visites_args($id_article, $aff_jours, $limit)
 	$where2 = " date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY)";
 	$order = "date";
 
-	statistiques_tous($select, $table, $where, $where2, $groupby, $order, $limit, $total_absolu, $val_popularite, $class, $style, $aff_jours, $classement, $id_article, $liste);
+	$mode = statistiques_mode(self());
+	echo debut_cadre_relief("statistiques-24.gif", true);
+	echo statistiques_tous($select, $table, $where, $where2, $groupby, $order, $total_absolu, $val_popularite, $class, $style, $aff_jours, $classement, $id_article, $liste);
+	echo fin_cadre_relief(true), $mode;
 
 	if ($id_article AND  $n = sql_countsel('spip_signatures', "id_article=$id_article")) {
 
@@ -261,15 +264,17 @@ function exec_statistiques_visites_args($id_article, $aff_jours, $limit)
 		$sgroupby = 'date';
 		$sorder = "date_time";
 
-		statistiques_tous($sselect, $stable, $swhere, $swhere2, $sgroupby, $sorder, 0, $n, 0, $class, $style, $aff_jours);
+		echo debut_cadre_relief("statistiques-24.gif", true);
+		echo statistiques_tous($sselect, $stable, $swhere, $swhere2, $sgroupby, $sorder, $n, 0, $class, $style, $aff_jours);
+		echo fin_cadre_relief(true), $mode;
 
 		echo "<br />", gros_titre(_L('Nombre de signatures par mois'),'', false);
 		echo statistiques_par_mois(sql_select("FROM_UNIXTIME(UNIX_TIMESTAMP(date_time),'%Y-%m') AS date_unix, COUNT(*) AS total_visites", 'spip_signatures',  "id_article=$id_article AND date_time > DATE_SUB(NOW(),INTERVAL 2700 DAY)", 'date_unix', "date_unix"), 0, $class, $style);
 	}
 
-	$res = sql_select("referer, referer_md5, $vis AS vis", $table_ref, $where, "", "vis DESC", $limit);
+	$r = sql_select("referer, referer_md5, $vis AS vis", $table_ref, $where, "", "vis DESC", $limit);
 
-	$res = aff_referers ($res, $limit, generer_url_ecrire('statistiques_visites', ($id_article?"id_article=$id_article&":'').('limit=' . strval($limit+200))));
+	$res = aff_referers ($r, $limit, generer_url_ecrire('statistiques_visites', ($id_article?"id_article=$id_article&":'').('limit=' . strval($limit+200))));
 	if ($res) {
 		echo gros_titre(_T("onglet_origine_visites"),'', false);
 
@@ -281,10 +286,8 @@ function exec_statistiques_visites_args($id_article, $aff_jours, $limit)
 	echo fin_gauche(), fin_page();	
 }
 
-function statistiques_tous($select, $table, $where, $where2, $groupby, $order, $limit, $total_absolu, $val_popularite, $class, $style, $aff_jours, $classement=array(), $id_article=0, $liste=0)
+function statistiques_tous($select, $table, $where, $where2, $groupby, $order, $total_absolu, $val_popularite, $class, $style, $aff_jours, $classement=array(), $id_article=0, $liste=0)
 {
-	$row = sql_fetsel($select, $table, $where, $groupby,  $order, "1");
-	$date_premier = $row[$order];
 	$date_debut = '';
 	$log = array();
 	$result = sql_select($select, $table, "$where AND $where2", $groupby, $order);
@@ -296,7 +299,7 @@ function statistiques_tous($select, $table, $where, $where2, $groupby, $order, $
 
 	// S'il y a au moins cinq minutes de stats :-)
 	if (!count($log)) return;
-	$accepte_svg = flag_svg();
+
 	// les visites du jour
 	$date_today = max(array_keys($log));
 	$visites_today = $log[$date_today];
@@ -339,44 +342,60 @@ function statistiques_tous($select, $table, $where, $where2, $groupby, $order, $
 	}
 	
 	$pour_article = $id_article ? "&id_article=$id_article" : '';
-	
-	echo debut_cadre_relief("statistiques-24.gif", true);
+
+	$zoom = '';
+
+	$row = sql_fetsel($select, $table, $where, $groupby,  $order, "1");
+	$date_premier = $row[$order];
 
 	if ($date_premier < $date_debut)
-		echo http_href(generer_url_ecrire("statistiques_visites","aff_jours=$aff_jours_plus$pour_article"),
+		$zoom= http_href(generer_url_ecrire("statistiques_visites","aff_jours=$aff_jours_plus$pour_article"),
 			 http_img_pack('loupe-moins.gif',
 				       _T('info_zoom'). '-', 
 				       "style='border: 0px; vertical-align: middle;'"),
 			 "&nbsp;");
 	if ( (($date_today - $date_debut) / (24*3600)) > 30)
-		echo http_href(generer_url_ecrire("statistiques_visites","aff_jours=$aff_jours_moins$pour_article"), 
+		$zoom .= http_href(generer_url_ecrire("statistiques_visites","aff_jours=$aff_jours_moins$pour_article"), 
 			 http_img_pack('loupe-plus.gif',
 				       _T('info_zoom'). '+', 
 				       "style='border: 0px; vertical-align: middle;'"),
 			 "&nbsp;");
 
-	if ($accepte_svg) {
+	if (flag_svg()) {
 		list($moyenne,$val_prec, $res) = stat_logsvg($aff_jours, $agreg, $date_today, $id_article, $log, $total_absolu, $visites_today);
 	} else {
 		list($moyenne,$val_prec, $res) = stat_log1($agreg, $class, $date_debut, $date_today, $id_article, $largeur, $log, $max, $maxgraph, $rapport, $style, $val_popularite, $visites_today);
 	}
-	echo $res;
 
 	// cette ligne donne la moyenne depuis le debut
 	// (desactive au profit de la moyenne "glissante")
 	# $moyenne =  round($total_absolu / ((date("U")-$date_premier)/(3600*24)));
 
-	echo "<span class='arial1 spip_x-small'>"._T('texte_statistiques_visites')."</span>";
-	echo "<br /><table cellpadding='0' cellspacing='0' border='0' width='100%'><tr style='width:100%;'>";
-	echo "\n<td valign='top' style='width: 33%; ' class='verdana1'>", _T('info_maximum')." ".$max, "<br />"._T('info_moyenne')." ".round($moyenne), "</td>";
-	echo "\n<td valign='top' style='width: 33%; ' class='verdana1'>";
-	echo '<a href="' . generer_url_ecrire("statistiques_referers","").'" title="'._T('titre_liens_entrants').'">'._T('info_aujourdhui').'</a> '.$visites_today;
-	if ($val_prec > 0) echo '<br /><a href="' . generer_url_ecrire("statistiques_referers","jour=veille").'"  title="'._T('titre_liens_entrants').'">'._T('info_hier').'</a> '.$val_prec;
-	if ($id_article) echo "<br />"._T('info_popularite_5').' '.$val_popularite;
+	$res .= "<span class='arial1 spip_x-small'>"
+	. _T('texte_statistiques_visites')
+	. "</span><br />"
+	. "<table cellpadding='0' cellspacing='0' border='0' width='100%'><tr style='width:100%;'>"
+	. "\n<td valign='top' style='width: 33%; ' class='verdana1'>"
+	. _T('info_maximum')." "
+	. $max . "<br />"
+	. _T('info_moyenne')." "
+	. round($moyenne). "</td>"
+	. "\n<td valign='top' style='width: 33%; ' class='verdana1'>"
+	. '<a href="'
+	. generer_url_ecrire("statistiques_referers","")
+	. '" title="'._T('titre_liens_entrants').'">'
+	. _T('info_aujourdhui')
+	. '</a> '
+	. $visites_today;
 
-	echo "</td>";
-	echo "\n<td valign='top' style='width: 33%; ' class='verdana1'>";
-	echo "<b>"._T('info_total')." ".$total_absolu."</b>";
+	if ($val_prec > 0) $res .= '<br /><a href="' . generer_url_ecrire("statistiques_referers","jour=veille").'"  title="'._T('titre_liens_entrants').'">'._T('info_hier').'</a> '.$val_prec;
+	if ($id_article) $res .= "<br />"._T('info_popularite_5').' '.$val_popularite;
+
+	$res .= "</td>"
+	."\n<td valign='top' style='width: 33%; ' class='verdana1'>"
+	."<b>"
+	._T('info_total')." "
+	.$total_absolu."</b>";
 	
 	if ($id_article) {
 		if ($classement[$id_article] > 0) {
@@ -384,34 +403,37 @@ function statistiques_tous($select, $table, $where, $where2, $groupby, $order, $
 			      $ch = _T('info_classement_1', array('liste' => $liste));
 			else
 			      $ch = _T('info_classement_2', array('liste' => $liste));
-			echo "<br />".$classement[$id_article].$ch;
+			$res .= "<br />".$classement[$id_article].$ch;
 		}
 	} elseif ($table != 'spip_signatures') {
-	  echo "<span class='spip_x-small'><br />"._T('info_popularite_2')." ", ceil($GLOBALS['meta']['popularite_total']), "</span>";
+	  $res .= "<span class='spip_x-small'><br />"
+	._T('info_popularite_2')." " . ceil($GLOBALS['meta']['popularite_total']) . "</span>";
 	}
-	echo "</td></tr></table>";	
+	$res .= "</td></tr></table>";	
 
 ///////////// Affichage par mois
 
 	  if ((count($log) > 60) AND ($table <> 'spip_signatures')) {
-		echo "<br />";
-		echo "<span class='verdana1 spip_small'><b>"._T('info_visites_par_mois')."</b></span>";
+		$res .= "<br />";
+		$res .= "<span class='verdana1 spip_small'><b>"
+	._T('info_visites_par_mois')."</b></span>";
 
-		echo statistiques_par_mois(sql_select("FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%Y-%m') AS date_unix, SUM(visites) AS total_visites", $table,  "$where AND date > DATE_SUB(NOW(),INTERVAL 2700 DAY)", 'date_unix', "date"), $visites_today, $class, $style);
+		$res .= statistiques_par_mois(sql_select("FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%Y-%m') AS date_unix, SUM(visites) AS total_visites", $table,  "$where AND date > DATE_SUB(NOW(),INTERVAL 2700 DAY)", 'date_unix', "date"), $visites_today, $class, $style);
 	}
-
-	echo fin_cadre_relief(true);
+	return $zoom . $res;
+}
 
 // Le bouton pour CSV et pour passer de svg a htm
-	$lui = self();
 
-	if ($accepte_svg) {
-	  $lien = 'non'; $alter = 'HTML';
+function statistiques_mode($lui)
+{
+	if (flag_svg()) {
+		$lien = 'non'; $alter = 'HTML';
 	} else {
-	  $lien = 'oui'; $alter = 'SVG';
+		$lien = 'oui'; $alter = 'SVG';
 	}
 
-	echo "\n<div style='text-align:".$GLOBALS['spip_lang_right'] . ";' class='verdana1 spip_x-small'>"
+	return "\n<div style='text-align:".$GLOBALS['spip_lang_right'] . ";' class='verdana1 spip_x-small'>"
 		. "<a href='". parametre_url($lui, 'var_svg', $lien)."'>$alter</a>" 
 		. " | <a href='"
 	  	. parametre_url($lui, 'format', 'csv')."'>CSV</a>"
