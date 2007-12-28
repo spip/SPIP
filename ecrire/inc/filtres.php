@@ -114,7 +114,8 @@ function image_filtrer($args){
 	if (!$texte) return;
 
 	// Cas du nom de fichier local
-	if (!preg_match(',^/|[<>]|[.][.]/|\s,S', $texte)
+	if ( strpos(substr($texte,strlen(_DIR_RACINE)),'..')===FALSE
+	AND !preg_match(',^/|[<>]|\s,S', $texte)
 	AND file_exists($texte)) {
 		array_unshift($args,"<img src='$texte' />");
 		return call_user_func_array($filtre, $args);
