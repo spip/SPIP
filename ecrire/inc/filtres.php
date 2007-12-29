@@ -565,15 +565,14 @@ function vider_date($letexte) {
 }
 
 // http://doc.spip.org/@recup_heure
-function recup_heure($numdate){
-	if (!$numdate) return '';
+function recup_heure($date){
 
-	if (preg_match('#([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})#', $numdate, $regs)) {
-		$heures = $regs[1];
-		$minutes = $regs[2];
-		$secondes = $regs[3];
-	}
-	return array($heures, $minutes, $secondes);
+	static $d = array(0,0,0);
+	if (!preg_match('#([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})#', $date, $r)) 
+		return $d;
+	
+	array_shift($r);
+	return $r;
 }
 
 // http://doc.spip.org/@heures
