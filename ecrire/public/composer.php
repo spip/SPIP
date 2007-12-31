@@ -471,7 +471,8 @@ function lang_parametres_forum($qs, $lang) {
 
 // http://doc.spip.org/@calculer_select
 function calculer_select ($select = array(), $from = array(), 
-			$where = array(), $join=array(),
+			$from_type = array(),
+      $where = array(), $join=array(),
 			$groupby = array(), $orderby = array(), $limit = '',
 			$having=array(), $table = '', $id = '', $serveur='') {
 
@@ -509,7 +510,7 @@ function calculer_select ($select = array(), $from = array(),
 		OR calculer_jointnul($cle, $select)
 		OR calculer_jointnul($cle, $join)
 		OR calculer_jointnul($cle, $where))
-			$sfrom = "\n\tINNER JOIN " . $from[$cle] . " AS $cle ON $t.$c=$cle.$c" . $sfrom;
+      $sfrom = "\n\t".(isset($from_type[$cle])?$from_type[$cle]:"INNER")." JOIN " . $from[$cle] . " AS $cle ON $t.$c=$cle.$c" . $sfrom;
 		else { unset($join[$k]);}
 		unset($from[$cle]);
 	}
