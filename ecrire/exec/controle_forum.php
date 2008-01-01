@@ -41,7 +41,7 @@ function forum_parent($id_forum) {
 			 'valeur' => $id_article,
 			 'titre' => $titre);
 	  } else {
-	    $ancre = $forum_id_parent ? "forum$forum_id_parent" : '';
+	    $ancre = "forum$id_forum" ;
 	    return array('pref' =>  _T('lien_reponse_article'),
 			 'url' => generer_url_article($id_article,'',$ancre),
 			 'type' => 'id_article',
