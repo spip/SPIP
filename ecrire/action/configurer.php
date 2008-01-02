@@ -36,6 +36,7 @@ function action_configurer_dist() {
 	  	include_spip('inc/rubriques');
 		calculer_langues_rubriques();
 	}
+	if (_request('envoi_now')) cron(0, array('mail' => -1));
 	redirige_par_entete($r);
 }
 
