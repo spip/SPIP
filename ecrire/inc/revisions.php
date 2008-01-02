@@ -419,7 +419,7 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 	
 	list($ms, $sec) = explode(' ', microtime());
 	$date = $sec . substr($ms,1);
-	$datediff = ($sec - mktime(0,0,0,9,1,2007)) * 100000000 + substr($ms,2);
+	$datediff = ($sec - mktime(0,0,0,9,1,2007)) * 1000000 + substr($ms,2, strlen($ms)-4);
 
 	$valeurs = array('id_article' => $id_article,
 			 'id_version' => (0 - $datediff),
