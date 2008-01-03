@@ -85,10 +85,10 @@ function phraser_inclure($texte, $ligne, $result) {
 		$champ->texte = @$match[2];
 		$texte = substr($texte, $p+strlen($match[0]));
 		// on assimile {var=val} a une liste de un argument sans fonction
-		phraser_args($texte,">","",$result,$champ);
+		phraser_args($texte,"/>","",$result,$champ);
 		$champ_ = phraser_arguments_inclure($champ);
 		$champ->param = $champ_->param;
-		$texte = substr($champ->apres,1);
+		$texte = substr($champ->apres, strpos($champ->apres, '>')+1);
 		$champ->apres = "";
 		if (preg_match(',^</INCLU[DR]E>,', $texte)) {	
 			$texte = substr($texte,10);
