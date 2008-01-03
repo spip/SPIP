@@ -34,13 +34,14 @@ function install_etape_4_dist()
 		     : ((strlen($login)<3) ?
 			_T('info_login_trop_court')
 			: ''));
-		if ($echec)
-		echo minipres(
+		if ($echec) {
+			echo minipres(
 			'AUTO',
 			"<h2>$echec</h2>\n".
 			"<p class='resultat'>"._T('avis_connexion_echec_2')."</p>"
-		);
-		exit;
+			);
+			exit;
+		}
 	}
 
 	if (@file_exists(_FILE_CHMOD_TMP))
