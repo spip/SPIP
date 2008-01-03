@@ -172,6 +172,11 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 					array('maxi' => taille_en_octets(_DOC_MAX_SIZE*1024),
 					'actuel' => taille_en_octets($taille))));
 			}
+			if ($mode == 'image') {
+				spip_log ("le format de $fichier ne convient pas pour une image");
+				spip_unlink($fichier);
+				return;
+			}
 		}
 		else { // image
 			if (_IMG_MAX_SIZE > 0
