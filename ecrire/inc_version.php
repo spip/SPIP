@@ -290,7 +290,7 @@ $liste_des_forums = array(
 @umask(0);
 
 // version de la base (= numero SVN de sa derniere modif)
-$spip_version = 10990;
+$spip_version = 11042;
 
 // version de l'interface a la base
 $spip_sql_version = 1;

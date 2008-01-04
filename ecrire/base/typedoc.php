@@ -50,7 +50,8 @@ $tables_sequences = array(
 			  'svg' => 'Scalable Vector Graphics',
 			  'swf' => 'Flash',
 			  'wav' => 'WAV',
-			  'wmv' => 'Windows Media'
+			  'wmv' => 'Windows Media',
+			  '3gp' => '3rd Generation Partnership Project'
 			  );
 
 // Documents varies
@@ -148,6 +149,7 @@ $tables_mime = array(
 		'swf'=>'application/x-shockwave-flash',
 		'wav'=>'audio/x-wav',
 		'wmv'=>'video/x-ms-wmv',
+		'3gp'=>'video/3gpp',
 
 		// Documents varies
 		'ai' =>'application/illustrator',
@@ -215,7 +217,8 @@ $tables_mime = array(
 		'audio/x-mpeg' => 'audio/mpeg',
 		'application/x-ogg' => 'application/ogg',
 		'video/mp4' => 'application/mp4',
-		'video/flv' => 'video/x-flv'
+		'video/flv' => 'video/x-flv',
+		'audio/3gpp' => 'video/3gpp'
 	);
 
 ?>
