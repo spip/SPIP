@@ -61,9 +61,9 @@ function signatures_edit($script, $id, $debut, $row, $type) {
 	$url_site = echapper_tags($row['url_site']);
 	$statut = $row['statut'];
 		
-	$arg = ($statut=="publie") ? "-$id_signature" : $id_signature;
+	$retour_s = redirige_action_auteur('editer_signatures', $id_signature, $script, "id_article=$id_article&debut=$debut&type=$type#signature$id_signature");
+	$retour_a = redirige_action_auteur('editer_signatures', "-$id_signature", $script, "id_article=$id_article&debut=$debut&type=$type#signature$id_signature");
 
-	$retour = redirige_action_auteur('editer_signatures', $arg, $script, "id_article=$id_article&debut=$debut&type=$type#signature$id_signature");
 	$res = "";
 		
 	if ($statut=="poubelle"){
@@ -78,21 +78,21 @@ function signatures_edit($script, $id, $debut, $row, $type) {
 				
 	if  ($statut=="poubelle"){
 			$res .= icone_inline (_T('icone_valider_signature'),
-				$retour,
+				$retour_s,
 				"forum-interne-24.gif", 
 				"creer.gif",
 				"right",
 				false);
 	} else {
 		$res .= icone_inline (_T('icone_supprimer_signature'),
-				$retour,
+				$retour_a,
 				"forum-interne-24.gif", 
 				"supprimer.gif",
 				"right",
 				false);
 		if ($statut<>"publie") {
 			$res .= icone_inline (_L('relancer le signataire'),
-				$retour,
+				$retour_s,
 				"forum-interne-24.gif", 
 				"creer.gif",
 				"right",
