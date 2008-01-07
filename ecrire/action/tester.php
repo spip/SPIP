@@ -45,7 +45,7 @@ function action_tester_dist() {
 				# est bugguee car elle teste les formats en lecture
 				# alors que la valeur deduite sert a identifier
 				# les formats disponibles en ecriture... (cf. inc_logos)
-		
+
 			$gd_formats = Array();
 			if (function_exists('ImageCreateFromJPEG')) {
 				$srcImage = @ImageCreateFromJPEG(_ROOT_IMG_PACK."test.jpg");
@@ -114,7 +114,7 @@ function action_tester_dist() {
 		if ($taille = @getimagesize($dest)) {
 			if ($taille[1] == 10) $netpbm_formats[] = "png";
 		}
-		
+
 
 		if ($netpbm_formats)
 			$netpbm_formats = join(",", $netpbm_formats);
@@ -127,7 +127,7 @@ function action_tester_dist() {
 	if (in_array($arg,array("gd1","gd2","imagick","convert","netpbm"))) {
 		include_spip('inc/filtres');
 		include_spip('inc/filtres_images');
-		//$taille_preview = $GLOBALS['meta']["taille_preview"];
+		$taille_preview = $GLOBALS['meta']["taille_preview"];
 		if ($taille_preview < 10) $taille_preview = 150;
 		$image = image_valeurs_trans(_ROOT_IMG_PACK.'test_image.jpg',"reduire-$taille_preview-$taille_preview",'jpg');
 
