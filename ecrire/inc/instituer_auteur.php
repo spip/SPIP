@@ -71,34 +71,6 @@ function choix_statut_auteur($statut, $id_auteur, $ancre) {
 	null, array('statut' => '?')))
 		return '';
 
-	$autres = "";
-	// Chercher tous les statuts non standards.
-	// Le count(*) ne sert pas, mais en son absence
-	// SQL (enfin, une version de SQL) renvoie un ensemble vide !
-	$q = sql_select("statut, count(*)", 'spip_auteurs', "statut NOT IN (" . sql_quote($GLOBALS['liste_des_statuts']) . ")",  "statut");
-
-	$hstatut = htmlentities($statut);
-	while ($r = sql_fetch($q)) {
-		$nom = htmlentities($r['statut']);
-		$autres .= mySel($nom, $hstatut, _T('info_statut_auteur_autre') . ' ' . $nom);
-	}
-
-	// Calculer le menu
-	$statut_rubrique = str_replace(',', '|', _STATUT_AUTEUR_RUBRIQUE);
-	return "<select name='statut' id='statut' size='1' class='fondl'
-		onchange=\"(this.options[this.selectedIndex].value.match(/^($statut_rubrique)\$/))?jQuery('#$ancre:hidden').slideDown():jQuery('#$ancre:visible').slideUp();\">"
-	. liste_statuts_instituer($statut, $id_auteur) 
-	. $autres
-	. "\n<option" .
-		mySel("5poubelle",$statut) .
-		" class='danger'>&gt; "
-		._T('texte_statut_poubelle') .
-		'</option>'
-	. "</select>\n";
-}
-
-// http://doc.spip.org/@liste_statuts_instituer
-function liste_statuts_instituer($courant, $id_auteur) {
 	$recom = array("info_administrateurs" => _T('item_administrateur_2'),
 		       "info_redacteurs" =>  _T('intem_redacteur'),
 		       "info_visiteurs" => _T('item_visiteur'));
@@ -106,23 +78,46 @@ function liste_statuts_instituer($courant, $id_auteur) {
 	// A-t-on le droit de promouvoir cet auteur comme admin 
 	// et y a-t-il des visiteurs ?
 
-	$droits = array("info_administrateurs" =>
-		       autoriser('modifier', 'auteur', $id_auteur,
-				 null, array('statut' => '0minirezo')),
-		       "info_redacteurs" => true,
-		       "info_visiteurs" => avoir_visiteurs());
-	
+	$droits = $GLOBALS['liste_des_statuts'];
+
+	if (!autoriser('modifier', 'auteur', $id_auteur,
+		       null, array('statut' => '0minirezo')))
+		unset($droits["info_administrateurs"]);
+
+	if (!avoir_visiteurs())
+		unset($droits['info_visiteurs']);
+
 	$menu = '';
-	foreach($GLOBALS['liste_des_statuts'] as $k => $v) {
-		if (isset($recom[$k]) AND $droits[$k])
-			$menu .=  mySel($v, $courant, $recom[$k]);
-
+	foreach($droits as $k => $v) {
+		if (isset($recom[$k]))
+			$menu .=  mySel($v, $statut, $recom[$k]);
 	}
-	// Ajouter l'option "nouveau" si l'auteur n'est pas confirme
-	if ($courant == 'nouveau')
-		$menu .= mySel('nouveau',$courant,_T('info_statut_auteur_a_confirmer'));
 
-	return $menu;
+	// Chercher tous les statuts non permis a present
+	$q = sql_select("statut", 'spip_auteurs', "statut NOT IN ('nouveau'," . sql_quote($droits) . ")",  "statut");
+
+	$hstatut = htmlentities($statut);
+	while ($r = sql_fetch($q)) {
+		$nom = htmlentities($r['statut']);
+		$t = array_search($nom, $GLOBALS['liste_des_statuts']);
+		$t = !$t ? (_T('info_statut_auteur_autre') . ' ' . $nom) : $recom[$t];
+		$menu .= mySel($nom, $hstatut, $t);
+	}
+
+	// Ajouter l'option "nouveau" si l'auteur n'est pas confirme
+	if ($statut == 'nouveau')
+		$menu .= mySel('nouveau',$statut,_T('info_statut_auteur_a_confirmer'));
+
+	$statut_rubrique = str_replace(',', '|', _STATUT_AUTEUR_RUBRIQUE);
+	return "<select name='statut' id='statut' size='1' class='fondl'
+		onchange=\"(this.options[this.selectedIndex].value.match(/^($statut_rubrique)\$/))?jQuery('#$ancre:hidden').slideDown():jQuery('#$ancre:visible').slideUp();\">"
+	. $menu
+	. "\n<option" .
+		mySel("5poubelle",$statut) .
+		" class='danger'>&gt; "
+		._T('texte_statut_poubelle') .
+		'</option>'
+	. "</select>\n";
 }
 
 // http://doc.spip.org/@choix_rubriques_admin_restreint
