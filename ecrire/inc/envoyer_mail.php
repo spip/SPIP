@@ -103,13 +103,13 @@ function inc_envoyer_mail_dist($email, $sujet, $texte, $from = "", $headers = ""
 	$email_envoi = $GLOBALS['meta']["email_envoi"];
 	if (email_valide($email_envoi)) {
 		preg_match('/(@\S+)/', $email_envoi, $domain);
-		$mid = 'Message-Id: <' . time() . '_' . rand() . '_' . md5($email . $text) . $domain[1] . ">\n";
+		$mid = 'Message-Id: <' . time() . '_' . rand() . '_' . md5($email . $texte) . $domain[1] . ">\n";
 	} else {
-		spip_log("Meta email_envoi invalide. Le mail sera probablement vu comme spam."); 
+		spip_log("Meta email_envoi invalide. Le mail sera probablement vu comme spam.");
 		$email_envoi = $email;
 		$mid = '';
 	}
-	if (!$from) $from = $email_envoi;  
+	if (!$from) $from = $email_envoi;
 
 	// ceci est la RegExp NO_REAL_NAME faisant hurler SpamAssassin
 	if (preg_match('/^["\s]*\<?\S+\@\S+\>?\s*$/', $from))

@@ -19,7 +19,7 @@ include_spip('inc/actions');
 spip_connect();
 
 // Ce fichier est inclus lorsqu'on appelle un script de l'espace public
-// avec une variable d'URL nommee confirmer_forum 
+// avec une variable d'URL nommee confirmer_forum
 // Voir commentaires dans balise/formulaire_forum
 
 
@@ -64,7 +64,7 @@ function mots_du_forum($ajouter_mot, $id_message)
 
 
 // http://doc.spip.org/@reduce_strlen
-function reduce_strlen($n, $c) 
+function reduce_strlen($n, $c)
 {
   return $n - strlen($c);
 }
@@ -198,7 +198,7 @@ function inc_forum_insert_dist($force_statut = NULL) {
 	$email_auteur = sinon($GLOBALS['visiteur_session']['email'],
 		$GLOBALS['visiteur_session']['session_email']);
 	set_request('auteur', $auteur);
-	set_request('email_auteur', $email);
+	set_request('email_auteur', $email_auteur);
 	revision_forum($id_message);
 
 	// Notification

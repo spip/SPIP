@@ -35,8 +35,8 @@ function install_etape_sup1_dist()
 		$pass_db  = _INSTALL_PASS_DB;
 
 	$server_db =_request('server_db');
-	if (!$server_d AND  defined('_INSTALL_SERVER_DB'))
-		$server_d = _INSTALL_SERVER_DB;
+	if (!$server_db AND  defined('_INSTALL_SERVER_DB'))
+		$server_db = _INSTALL_SERVER_DB;
 
 	// Ceci indique la base principale (passe en hidden)
 	// pour qu'on la refuse comme choix de base secondaire
@@ -78,7 +78,7 @@ function install_etape_sup1_dist()
 		  _L('La connexion &agrave; la base de donn&eacute;es a &eacute;chou&eacute;.'),
 		  "</b></p>";
 	}
-	
+
 	echo install_fin_html();
 }
 
