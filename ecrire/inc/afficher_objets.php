@@ -42,13 +42,13 @@ function afficher_numero_edit($id, $key, $type,$row=NULL) {
 		if (autoriser('modifier',$type,$id)) {
 			if ($row['statut'] == "publie"){
 			  $s =  "[<a href='". redirige_action_auteur('instituer_syndic',"$id-refuse", _request('exec'), $redirect) . "'><span style='color: black'>"._T('info_bloquer_lien')."</span></a>]";
-			
+
 			}
 			else if ($row['statut'] == "refuse"){
 			  $s =  "[<a href='". redirige_action_auteur('instituer_syndic',"$id-publie", _request('exec'), $redirect) . "'>"._T('info_retablir_lien')."</a>]";
 			}
 			else if ($row['statut'] == "off"
-			AND isset($my_sites[$id_syndic]['miroir']) AND $my_sites[$id_syndic]['miroir'] == 'oui') {
+			AND isset($my_sites[$id]['miroir']) AND $my_sites[$id]['miroir'] == 'oui') {
 				$s = '('._T('syndic_lien_obsolete').')';
 			}
 			else /* 'dispo' ou 'off' (dans le cas ancien site 'miroir') */
@@ -56,11 +56,11 @@ function afficher_numero_edit($id, $key, $type,$row=NULL) {
 			  $s = "[<a href='". redirige_action_auteur('instituer_syndic',"$id-publie", _request('exec'), $redirect) . "'>"._T('info_valider_lien')."</a>]";
 			}
 			return $s;
-		}		
+		}
 	}
-	
+
 	if (!$style) {
-		$style = " class='spip_xx-small' style='float: $spip_lang_right; padding-$spip_lang_left: 4px; color: black; '"; 
+		$style = " class='spip_xx-small' style='float: $spip_lang_right; padding-$spip_lang_left: 4px; color: black; '";
 
 		$numero = _T('info_numero_abbreviation');
 	}
@@ -103,7 +103,7 @@ function afficher_titre_site($row){
 	$s .= $row['nom_site']?typo($row['nom_site']):"("._T('info_sans_titre_2').")";
 	$s2 = "&nbsp;&nbsp; <span class='spip_xx-small'>[<a href='"
 	.$row['url_site']."'>"._T('lien_visite_site')."</a>]</span>";
-	
+
 	return array($s,$s2);
 }
 // http://doc.spip.org/@afficher_titre_auteur
@@ -207,12 +207,12 @@ function afficher_complement_syndic_article($row){
 		$aff = $my_sites[$id_syndic]['nom_site'];
 		if ($my_sites[$id_syndic]['moderation'] == 'oui')
 			$aff = "<i>$aff</i>";
-			
+
 		$s = "<a href='" . generer_url_ecrire("sites","id_syndic=$id_syndic") . "'>$aff</a>";
 
 		return $s;
 	}
-	return "";	
+	return "";
 }
 
 // affichage des liste d'objets
@@ -255,7 +255,7 @@ function afficher_objet_boucle($row, &$tous_id,  $voir_logo, $own)
 	$id_objet = $row[$primary];
 	if (autoriser('voir',$type,$id_objet)){
 		$tous_id[] = $id_objet;
-		
+
 		$date_heure = isset($row['date'])?$row['date']:(isset($row['date_heure'])?$row['date_heure']:"");
 
 		$statut = isset($row['statut'])?$row['statut']:"";
@@ -264,10 +264,10 @@ function afficher_objet_boucle($row, &$tous_id,  $voir_logo, $own)
 		else $lang = $langue_defaut;
 		$lang_dir = lang_dir($lang);
 		$id_rubrique = isset($row['id_rubrique'])?$row['id_rubrique']:0;
-		
+
 		$puce_statut = charger_fonction('puce_statut', 'inc');
 		$vals[] = $puce_statut($id_objet, $statut, $id_rubrique, $type);
-	
+
 		list($titre,$suite) = afficher_titre_objet($type,$row);
 		$s = "\n<div>";
 		if ($voir_logo) {
@@ -287,7 +287,7 @@ function afficher_objet_boucle($row, &$tous_id,  $voir_logo, $own)
 			.  "' "
 			. "title='" . _T('info_numero_abbreviation'). $id_objet
 			. "'>"
-			. $titre 
+			. $titre
 			. "</a>";
 		}
 		$s .= $suite;
@@ -311,16 +311,16 @@ function afficher_objet_boucle($row, &$tous_id,  $voir_logo, $own)
 				."</span>";
 		}
 		$vals[] = $s;
-		
+
 		$s = afficher_complement_objet($type,$row);
 		$vals[] = $s;
-		
+
 		$s = "";
 		if ($affrub && $id_rubrique) {
 			$rub = sql_fetsel("id_rubrique, titre", "spip_rubriques", "id_rubrique=$id_rubrique");
 			$id_rubrique = $rub['id_rubrique'];
 			$s .= "<a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "' style=\"display:block;\">".typo($rub['titre'])."</a>";
-		} else 
+		} else
 		if ($statut){
 			if ($statut != "prop")
 					$s = affdate_jourcourt($date_heure);
@@ -328,7 +328,7 @@ function afficher_objet_boucle($row, &$tous_id,  $voir_logo, $own)
 					$s .= _T('info_a_valider');
 		}
 		$vals[] = $s;
-				
+
 		$vals[] = afficher_numero_edit($id_objet, $primary, $type, $row);
 	}
 	return $vals;
@@ -347,7 +347,7 @@ function inc_afficher_articles_dist($titre, $requete, $formater='') {
 	if (!isset($requete['SELECT'])) {
 		$requete['SELECT'] = "articles.id_article, articles.titre, articles.id_rubrique, articles.statut, articles.date, articles.lang, articles.id_trad, articles.descriptif";
 	}
-	
+
 	if (!isset($requete['GROUP BY'])) $requete['GROUP BY'] = '';
 
 	$cpt = sql_countsel($requete['FROM'], $requete['WHERE'], $requete['GROUP BY']);
@@ -434,12 +434,12 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 
 	if (($GLOBALS['meta']['gerer_trad'] == "oui")) {
 		$url = generer_url_ecrire('memoriser',"hash=$hash&trad=" . (1-$trad));
-		$texte .= 
+		$texte .=
 		 "\n<span style='float: $spip_lang_right;'><a href=\"#\"\nonclick=\"return charger_id_url('$url','$tmp_var');\">"
 		. "<img\nsrc='". _DIR_IMG_PACK . $icone ."' alt='$alt' /></a></span>";
 	}
 	$texte .=  '<b>' . $titre_table  . '</b>';
-	
+
 	$res = debut_cadre('liste',"article-24.gif",'',$bouton = bouton_block_depliable($texte,true,$id_liste))
 	. debut_block_depliable(true,$id_liste)
 	. (($cpt <= $nb_aff) ? ''
@@ -471,7 +471,7 @@ function afficher_articles_trad_boucle($row)
 	$vals[] = $puce_statut($id_article, $statut, $id_rubrique,'article');
 
 	// Le titre (et la langue)
-	
+
 	$langues_art = "";
 	$dates_art = "";
 	$l = "";
@@ -507,43 +507,43 @@ function afficher_articles_trad_boucle($row)
 				$l .= $span_lang;
 			} else {
 				$date = $dates_art[$k];
-				if ($date < $date_ref) 
+				if ($date < $date_ref)
 					$l .= "<a href='" . generer_url_ecrire("articles","id_article=".$langues_art[$k]) . "' class='claire'>$k</a>";
 				else $l .= "<a href='" . generer_url_ecrire("articles","id_article=".$langues_art[$k]) . "' class='foncee'>$k</a>";
-			}			
+			}
 		}
 #				else $l.= "<span class='creer'>$k</span>";
 	}
-			
+
 	if (!$span_lang)
 		$span_lang = "<a href='" . generer_url_ecrire("articles","id_article=$id_article") . "'><span class='lang_base'>$lang</span></a>";
 
 	$vals[] = "\n<div style='text-align: center;'>$span_lang</div>";
-			
+
 
 	$s.= "\n<div style='float: $spip_lang_right; margin-right: -10px;'>$l</div>";
-	
+
 	if (acces_restreint_rubrique($id_rubrique))
 		$s .= http_img_pack("admin-12.gif", _T('titre_image_administrateur'), "width='12' height='12'", _T('titre_image_admin_article'));
 
 	if ($id_article == $id_trad) $titre = "<b>$titre</b>";
-			
+
 	$titre = typo(supprime_img($titre,''));
 
 	if ($afficher_langue AND $lang != $langue_defaut)
 		$titre .= " <span class='spip_xx-small' style='color: #666666'  dir='$lang_dir'>(".traduire_nom_langue($lang).")</span>";
 
-	$s .= "<a href='" 
-	  . generer_url_ecrire("articles","id_article=$id_article") 
+	$s .= "<a href='"
+	  . generer_url_ecrire("articles","id_article=$id_article")
 	  . "' title='" . _T('info_numero_abbreviation'). "$id_article'"
 	  . " dir='$lang_dir' style=\"display:block;\">"
 	  . $titre
 	  . "</a>";
 
 	$vals[] = "\n<div>$s</div>";
-	
+
 	$vals[] = "";
-	
+
 	$largeurs = array(11, 24, '', '1');
 	$styles = array('', 'arial1', 'arial1', '');
 
@@ -573,6 +573,6 @@ function afficher_auteurs_boucle($row, &$tous_id,  $voir_logo, $own){
 		   : '');
 	$vals[] = $w;
 	$vals[] = $p;
-	return $vals;	
+	return $vals;
 }
 ?>
