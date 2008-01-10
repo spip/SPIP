@@ -289,19 +289,18 @@ $liste_des_forums = array(
 // Droits d'acces maximum par defaut
 @umask(0);
 
-// version de la base (= numero SVN de sa derniere modif)
+// version des signatures de fonctions PHP
+// (= numero SVN de leur derniere modif cassant la compatibilite)
+$spip_version_code = 11056;
+// version de la base SQL (= numero SVN de sa derniere modif)
 $spip_version = 11042;
-
 // version de l'interface a la base
 $spip_sql_version = 1;
 
 // version de spip en chaine
-// et en numerique a incrementer sur les evolutions qui cassent la compatibilite descendante
 // 1.xxyy : xx00 versions stables publiees, xxyy versions de dev
 // (ce qui marche pour yy ne marchera pas forcement sur une version plus ancienne)
-// type nouvelles fonctionnalites, deplacement de fonctions ...
 $spip_version_affichee = '1.9.3 dev';
-$spip_version_code = '1.9303';
 
 // ** Securite **
 $visiteur_session = $auteur_session = $connect_statut = $connect_toutes_rubriques =  $hash_recherche = $hash_recherche_strict = $ldap_present ='';
