@@ -117,7 +117,7 @@ function spip_mysql_query($query, $serveur='') {
 
 	if ($e = spip_mysql_errno())	// Log de l'erreur eventuelle
 		$e .= spip_mysql_error($query); // et du fautif
-	return $t ? trace_query_end($query, $t, $r, $e) : $r;
+	return $t ? trace_query_end($query, $t, $r, $e, $serveur) : $r;
 }
 
 // http://doc.spip.org/@spip_mysql_alter
@@ -133,7 +133,7 @@ function spip_mysql_optimize($table, $serveur=''){
 
 // http://doc.spip.org/@spip_mysql_explain
 function spip_mysql_explain($query, $serveur=''){
-	if (strpos($query, 'SELECT') !== 0) return array();
+	if (strpos(ltrim($query), 'SELECT') !== 0) return array();
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
@@ -461,7 +461,7 @@ function spip_mysql_insert($table, $champs, $valeurs, $desc='', $serveur='') {
 	  if ($e = spip_mysql_errno())	// Log de l'erreur eventuelle
 		$e .= spip_mysql_error($query); // et du fautif
 	}
-	return $t ? trace_query_end($query, $t, $r, $e) : $r;
+	return $t ? trace_query_end($query, $t, $r, $e, $serveur) : $r;
 
 	// return $r ? $r : (($r===0) ? -1 : 0); pb avec le multi-base.
 }

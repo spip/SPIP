@@ -664,10 +664,11 @@ function trace_query_start()
 }
 
 // http://doc.spip.org/@trace_query_end
-function trace_query_end($query, $start, $result, $err)
+function trace_query_end($query, $start, $result, $err, $serveur='')
 {
 	global $tableau_des_erreurs;
-	if ($start) trace_query_chrono($start, microtime(), $query, $result);
+	if ($start)
+		trace_query_chrono($start, microtime(), $query, $result, $serveur);
 	if (!($err = sql_errno())) return $result;
 	$err .= ' '.sql_error();
 	if (autoriser('voirstats')) {
@@ -680,7 +681,7 @@ function trace_query_end($query, $start, $result, $err)
 }
 
 // http://doc.spip.org/@trace_query_chrono
-function trace_query_chrono($m1, $m2, $query, $result)
+function trace_query_chrono($m1, $m2, $query, $result, $serveur='')
 {
 	static $tt = 0, $nb=0;
 	global $tableau_des_temps;
@@ -692,7 +693,7 @@ function trace_query_chrono($m1, $m2, $query, $result)
 	$nb++;
 
 	$explain = '';
-	foreach (sql_explain($query) as $k => $v) {
+	foreach (sql_explain($query, $serveur) as $k => $v) {
 		$explain .= "<tr><td>$k</td><td>" .str_replace(';','<br />',$v) ."</td></tr>";
 	}
 	if ($explain) $explain = "<table border='1'>$explain</table>";
