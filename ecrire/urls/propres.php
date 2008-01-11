@@ -137,6 +137,7 @@ function creer_chaine_url($x) {
 function _generer_url_propre($type, $id_objet) {
 	$table = table_objet_sql($type);
 	$col_id = id_table_objet($type);
+	$id_objet = intval($id_objet);
 
 	// Auteurs : on prend le nom
 	if ($type == 'auteur')
