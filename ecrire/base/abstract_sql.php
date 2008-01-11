@@ -62,10 +62,7 @@ function sql_set_charset($charset,$serveur=''){
 // - le crite`re de regroupement (Group by)
 // - le tableau de classement (Order By)
 // - le crite`re de limite (Limit)
-// - une sous-requete e'ventuelle (inutilisee pour le moment. MySQL > 4.1)
 // - le tableau des des post-conditions a remplir (Having)
-// - le nom de la table (pour le message d'erreur e'ventuel)
-// - le nom de la boucle (pour le message d'erreur e'ventuel)
 // - le serveur sollicite (pour retrouver la connexion)
 
 // http://doc.spip.org/@sql_select
@@ -78,6 +75,8 @@ function sql_select (
 	return $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur);
 }
 
+// Comme ci-dessus, mais ramene seulement et tout de suite le nombre de lignes
+// Pas de colonne ni de tri a donner donc.
 // http://doc.spip.org/@sql_countsel
 function sql_countsel($from = array(), $where = array(),
 		      $groupby = array(), $limit = '', $having = array(),
