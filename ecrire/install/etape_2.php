@@ -32,9 +32,13 @@ function install_etape_2_dist()
 		? _INSTALL_SERVER_DB
 		: _request('server_db');
 
+        $name_db =  defined('_INSTALL_NAME_DB')
+		? _INSTALL_NAME_DB
+		: '';
+
 	$chmod = _request('chmod');
 
-	$link = spip_connect_db($adresse_db, 0, $login_db, $pass_db, '', $server_db);
+	$link = spip_connect_db($adresse_db, 0, $login_db, $pass_db, $name_db, $server_db);
 	$GLOBALS['connexions'][$server_db] = $link;
 
 	$GLOBALS['connexions'][$server_db][$GLOBALS['spip_sql_version']]
