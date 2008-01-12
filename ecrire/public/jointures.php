@@ -60,8 +60,7 @@ function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='',
 			$boucle->group[] = $id_field;
 			// postgres exige que le champ pour GROUP soit dans le SELECT
 			if (!in_array($id_field, $boucle->select)) {
-			  		    spip_log("ref $id_field");
-			  $boucle->select[] = $id_field;
+				$boucle->select[] = $id_field;
 			}
 		}
 	}
