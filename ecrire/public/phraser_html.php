@@ -595,9 +595,9 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 
 		if ($soustype == 'sites') $soustype = 'syndication' ; # alias
 		      
-		phraser_args($milieu,">","",$all_res,$result);
+		phraser_args($milieu,"/>","",$all_res,$result);
 		$params = substr($milieu,0,@strpos($milieu,$result->apres));
-		$milieu = substr($result->apres,1);
+		$milieu = $result->apres;
 		$result->apres = "";
 
 		//
@@ -611,7 +611,6 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 			array_unshift($args,
 				      substr($type, strlen(TYPE_RECURSIF)));
 			$result->param = $args;
-#			$milieu = substr($milieu, strpos($milieu, '>')+1);
 		} else {
 			$result->type_requete = $soustype;
 			phraser_criteres($result->param, $result);
@@ -620,16 +619,22 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 		//
 		// Recuperer la fin :
 		//
-		$s = BALISE_FIN_BOUCLE . $id_boucle . ">";
-		$p = strpos($milieu, $s);
-		if ($p === false) {
-			erreur_squelette(_T('zbug_erreur_boucle_syntaxe'),
+		if ($milieu[0] === '/') {
+			$suite = substr($milieu,2);
+			$milieu = '';
+		} else {
+			$milieu = substr($milieu,1);
+			$s = BALISE_FIN_BOUCLE . $id_boucle . ">";
+			$p = strpos($milieu, $s);
+			if ($p === false) {
+				erreur_squelette(_T('zbug_erreur_boucle_syntaxe'),
 					 _T('zbug_erreur_boucle_fermant',
 						array('id'=>$id_boucle)));
-		}
+			}
 
-		$suite = substr($milieu, $p + strlen($s));
-		$milieu = substr($milieu, 0, $p);
+			$suite = substr($milieu, $p + strlen($s));
+			$milieu = substr($milieu, 0, $p);
+		}
 		//
 		// 1. Recuperer la partie conditionnelle apres
 		//

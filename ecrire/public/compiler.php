@@ -267,6 +267,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 	} else {
 
 		$corps = $init . '
+	$SP++;
 
 	// RESULTATS
 	while ($Pile[$SP] = @sql_fetch($result,"' .
@@ -287,8 +288,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 		(!$flag_cpt  ? "" :
 			"\n	\$Numrows['$id_boucle']['compteur_boucle'] = 0;")
 		. '
-	$t0 = "";
-	$SP++;'
+	$t0 = "";'
 		.
 		$corps .
 		"\n	@sql_free(\$result,'" .
