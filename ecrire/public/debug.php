@@ -53,15 +53,16 @@ function affiche_erreurs_page($tableau_des_erreurs, $message='') {
 	$res = '';
 	$i = 1;
 	foreach ($tableau_des_erreurs as $err) {
-		$res .= "<tr><td style='text-align: right'>$i</td><td>"
+		$res .= "<tr><td style='text-align: right'>$i&nbsp;</td><td>"
 		  .join("</td>\n<td>",$err)
 		  ."</td></tr>\n";
 		$i++;
 	}
-	$style = _DIR_RESTREINT ? "position: absolute; top: 90px; left: 10px; width: 200px; z-index: 1000; filter:alpha(opacity=95); -moz-opacity:0.9; opacity: 0.95;" : '';
+	$cols = 1+count($err);
+	$style = _DIR_RESTREINT ? " position: absolute; top: 90px; left: 10px; width: 200px; z-index: 1000; filter:alpha(opacity=95); -moz-opacity:0.9; opacity: 0.95;" : '';
 
-	return "\n<table border='1' id='spip-debug' 
-	style='text-align: left; $style'><tr><th colspan='3'>"
+	return "\n<table id='spip-debug' cellpadding='2'  border='1'
+	style='text-align: left;$style'><tr><th style='text-align: center' colspan='$cols'>"
 	. ($message ? $message : _T('zbug_erreur_squelette'))
 ## aide locale courte a ecrire, avec lien vers une grosse page de documentation
 #		aide('erreur_compilation'),
@@ -71,19 +72,25 @@ function affiche_erreurs_page($tableau_des_erreurs, $message='') {
 }
 
 // http://doc.spip.org/@chrono_requete
-function chrono_requete($tableau_des_temps)
+function chrono_requete($temps)
 {
 	$res = _DIR_RESTREINT ? '' :
 		affiche_erreurs_page($GLOBALS['tableau_des_erreurs']);
 
-	foreach ($tableau_des_temps as $key => $row) {
-		  $t[$key]  = $row[0];
-		  $q[$key] = $row[1];
-		}
-	array_multisort($t, SORT_DESC, $q, $tableau_des_temps);
+	foreach ($temps as $key => $row) {
+		list($dt, $nb, $boucle, $req, $explain, $r) = $row;
+		$t[$key] = $dt;
+		$q[$key] = $nb;
+		$temps[$key] = array("$boucle<br />" . 
+				     _T('zbug_profile', array('time'=> "<br />
+$dt")) .
+				     "<br />Rang: $nb<br />Resultat: $r",
+				     $req,
+				     $explain);
+	}
+	array_multisort($t, SORT_DESC, $q, $temps);
 
-	return $res . affiche_erreurs_page($tableau_des_temps,
-				  _T('zbug_profile', array('time'=>'')));
+	return $res . affiche_erreurs_page($temps, count($temps) . ' ' . _T('icone_statistiques_visites'));
 }
 
 //
@@ -697,12 +704,13 @@ function trace_query_chrono($m1, $m2, $query, $result, $serveur='')
 		$explain .= "<tr><td>$k</td><td>" .str_replace(';','<br />',$v) ."</td></tr>";
 	}
 	if ($explain) $explain = "<table border='1'>$explain</table>";
-	$result = str_replace('Resource id ','',(is_object($result)?get_class($result):$result));
-	$query = preg_replace('/([a-z)`])\s+([A-Z])/', '$1<br />$2',$query);
-	$tableau_des_temps[] = array(sprintf("%3f", $dt), 
-				     sprintf(" %3de", $nb),
-				     $query,
-				     $explain,
-				     $result);
+	if (isset($GLOBALS['debug']['aucasou'])) {
+		list(, $boucle, $serveur) = $GLOBALS['debug']['aucasou'];
+		if ($serveur) $boucle .= " ($serveur)";
+		$boucle = "<b>$boucle</b>";
+	} else $boucle = '<i>hors compilation</i>';
+	$q = preg_replace('/([a-z)`])\s+([A-Z])/', '$1<br />$2',$query);
+	$r = str_replace('Resource id ','',(is_object($result)?get_class($result):$result));
+	$tableau_des_temps[] = array($dt, $nb, $boucle, $q, $explain, $r);
 }
 ?>
