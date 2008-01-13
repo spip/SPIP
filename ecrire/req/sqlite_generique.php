@@ -13,7 +13,7 @@
 // infos :
 // il ne faut pas avoir de PDO::CONSTANTE dans ce fichier sinon php4 se tue !
 // idem, il ne faut pas de $obj->toto()->toto sinon php4 se tue !
-	
+
 # todo : get/set_caracteres ?
 # todo : REPAIR TABLE ?
 
@@ -50,7 +50,7 @@ function req_sqlite_dist($addr, $port, $login, $pass, $db='', $prefixe='', $ldap
 	// charger les modules sqlite au besoin
 	if (!_sqlite_charger_version($sqlite_version)) {
 		spip_log("Impossible de trouver/charger le module SQLite ($sqlite_version)!");
-		return false;	
+		return false;
 	}
 
 	// chargement des constantes
@@ -165,7 +165,7 @@ function spip_sqlite_alter($query, $serveur=''){
 		$do = trim($do);
 		if (!preg_match('/(DROP|CHANGE COLUMN|CHANGE|MODIFY|RENAME TO|RENAME|ADD COLUMN|ADD)\s*([^\s]*)\s*(.*)?/', $do, $matches)){
 			spip_log("SQLite : Probleme de ALTER TABLE, utilisation non reconnue dans : $query", 'sqlite');
-			return false;				
+			return false;
 		}
 
 		$cle = strtoupper($matches[1]);
@@ -184,7 +184,7 @@ function spip_sqlite_alter($query, $serveur=''){
 					'', // colonne origine -> rien !
 					'', 
 					$serveur)){
-						return false;		
+						return false;
 				}
 				break;
 			
@@ -202,8 +202,8 @@ function spip_sqlite_alter($query, $serveur=''){
 					$colonne_destination, 
 					$def, 
 					$serveur)){
-						return false;		
-				}				
+						return false;
+				}
 				break;
 				
 			case 'MODIFY':
@@ -214,8 +214,8 @@ function spip_sqlite_alter($query, $serveur=''){
 					$colonne_origine, 
 					$def, 
 					$serveur)){
-						return false;		
-				}	
+						return false;
+				}
 				break;
 			
 			// pas geres en sqlite2
@@ -233,9 +233,9 @@ function spip_sqlite_alter($query, $serveur=''){
 					$table_dest = trim(substr($do, 9));
 					if (!_sqlite_modifier_table($table, $table_dest, '', '', '', $serveur)){
 						spip_log("SQLite : Erreur ALTER TABLE / RENAME : $query", 'sqlite');
-						return false;		
-					}					
-				}		
+						return false;
+					}
+				}
 				break;
 				
 			// pas geres en sqlite2
@@ -261,10 +261,10 @@ function spip_sqlite_alter($query, $serveur=''){
 					$def = substr($def, strlen($colonne_ajoutee)+1);
 					if (!_sqlite_modifier_table($table, $table, '', $colonne_ajoutee, $def, $serveur)){
 						spip_log("SQLite : Erreur ALTER TABLE / ADD : $query", 'sqlite');
-						return false;		
-					}					
-				}		
-				break;				
+						return false;
+					}
+				}
+				break;
 		}
 		// tout est bon, ouf !
 		spip_log("SQLite ($serveur) : Changements OK : $debut $do");
@@ -398,13 +398,13 @@ function spip_sqlite_fetch($r, $t='', $serveur='') {
 			$t = SPIP_SQLITE2_ASSOC;
 		}
 	}
-		
+
 
 	if (_sqlite_is_version(3, $link)){
 		if ($r) $retour = $r->fetch($t);
 	} elseif ($r) {
 		$retour = sqlite_fetch_array($r, $t);
-	}	
+	}
 	
 	// les version 2 et 3 parfois renvoie des 'table.titre' au lieu de 'titre' tout court ! pff !
 	// suppression de 'table.' pour toutes les cles (c'est un peu violent !)
@@ -1217,7 +1217,6 @@ class sqlite_traiter_requete{
 		if ($this->link){
 			if (_sqlite_is_version(3, $this->link)) {
 				$r = $this->link->query($this->query);
-				
 				// comptage : oblige de compter le nombre d'entrees retournees par la requete
 				// aucune autre solution ne donne le nombre attendu :( !
 				// particulierement s'il y a des LIMIT dans la requete.
@@ -1225,7 +1224,7 @@ class sqlite_traiter_requete{
 					if ($r) {
 						$l = $this->link->query($this->queryCount);
 						$r->spipSqliteRowCount =  count($l->fetchAll());
-					} else {
+					} elseif (is_a($r, 'PDOStatement')) {
 						$r->spipSqliteRowCount = 0;
 					}
 				}
@@ -1236,21 +1235,20 @@ class sqlite_traiter_requete{
 			$r = false;	
 		}
 
-		#spip_log("spip_sqlite_query() >> $query"); // boum ? pourquoi ?
-		if (!$r){
-			echo "<br /><small>#erreur serveur '$this->serveur' dans &gt; $this->query</small><br />";
-			echo "<br />- ".spip_sqlite_error($this->query, $this->serveur);
-		}
+		//if (!$r){
+		//	echo "<br /><small>#erreur serveur '$this->serveur' dans &gt; $this->query</small><br />";
+		//	echo "<br />- ".spip_sqlite_error($this->query, $this->serveur);
+		//}
 		if (!$r && $e = spip_sqlite_errno($this->serveur))	// Log de l'erreur eventuelle
 			$e .= spip_sqlite_error($this->query, $this->serveur); // et du fautif
 
-		return $t ? trace_query_end($this->query, $t, $r, $e, $serveur) : $r;		
+		return $t ? trace_query_end($this->query, $t, $r, $e, $serveur) : $r;
 	}
 }
 
 
 /*
- * Un classe simplement pour un preg_replace_callback avec des parametres 
+ * Une classe simplement pour un preg_replace_callback avec des parametres 
  * dans la fonction appelee que l'on souhaite incrementer (fonction pour proteger les textes)
  * 
  * Du coup, je mets aussi les traitements a faire dedans
@@ -1271,7 +1269,6 @@ class sqlite_analyse_requete {
 
 	function sqlite_analyse_requete(&$link, $query, $db, $prefixe){
 
-		
 		$this->sqlite 		= $link;
 		$this->query 		= $query;
 		$this->db 			= $db;
@@ -1282,19 +1279,8 @@ class sqlite_analyse_requete {
 	}
 
 
-	function debug($texte='', $afficherQuery = true){
-		if ($afficherQuery){
-			if ($this->debug) spip_log("sqlite_analyse_query > $texte >" . $this->query);
-			if ($this->crier) echo "<b>sqlite_analyse_query > $texte ></b> " . $this->query . "<br/>\n";
-		} else {
-			if ($this->debug) spip_log("sqlite_analyse_query > $texte");
-			if ($this->crier) echo "<b>sqlite_analyse_query > $texte </b><br/>\n";			
-		}
-	}
-
 
 	function creerLesRequetes(){
-		#$analyse->debug = $analyse->crier = true;
 		$this->cacherLesTextes();
 		// traitements
 		$this->corrigerTout();
@@ -1309,37 +1295,26 @@ class sqlite_analyse_requete {
 	
 	// enlever le contenu 'texte' des requetes
 	function cacherLesTextes(){
-		$this->debug("protegerLesTextes 1");	
-		
 		// enlever les echappements ''
 		$this->query = str_replace("''", $this->codeEchappements, $this->query);
-		$this->debug("protegerLesTextes 2");
-		
 		// enlever les 'textes'
 		$this->textes = array(); // vider 
 		$this->query = preg_replace_callback("/('[^']*')/", array(&$this, '_remplacerTexteParCode'), $this->query);
-		$this->debug("protegerLesTextes 3");
 	}
 
 
 	// remettre le contenu 'texte' des requetes
 	function afficherLesTextes(){
-		$this->debug("afficherLesTextes 1");
-		
 		// remettre les 'textes'
 		foreach ($this->textes as $cle=>$val){
 			$this->query = str_replace($cle, $val, $this->query);
 		}
-		$this->debug("afficherLesTextes 2");
-		
 		// remettre les echappements ''
 		$this->query = str_replace($this->codeEchappements,"''",$this->query);
-		$this->debug("afficherLesTextes 3");
 	}
-		
+	
 	
 	// les corrections
-	
 	function corrigerTout(){
 		$this->corrigerCreateDatabase();
 		$this->corrigerInsertIgnore();
@@ -1364,18 +1339,16 @@ class sqlite_analyse_requete {
 		if (strpos($this->query, 'CREATE DATABASE')===0){
 			spip_log("Sqlite : requete non executee -> $this->query","sqlite");
 			$this->query = "SELECT 1";	
-		}			
+		}
 	}
 
 
 	// corriger les dates avec INTERVAL
 	function corrigerDate() { 
 		if (strpos($this->query, 'INTERVAL')!==false){
-			$this->debug("corrigerDate 1");
 			$this->query = preg_replace_callback("/DATE_(ADD|SUB).*INTERVAL\s+(\d+)\s+([a-zA-Z]+)\)/U", 
 							array(&$this, '_remplacerDateParTime'), 
 							$this->query);
-			$this->debug("corrigerDate 2");
 		}
 	}
 	
@@ -1383,12 +1356,10 @@ class sqlite_analyse_requete {
 	// FIELD (issu de pg) a tester !
 	function corrigerField(){
 		if (strpos($this->query, 'FIELD')!==false){
-			$this->debug("corrigerField 1");
 			$this->query = preg_replace_callback('/FIELD\s*\(([^\)]*)\)/', 
 							array(&$this, '_remplacerFieldParCase'), 
 							$this->query); 
-			$this->debug("corrigerField 2");
-		}	
+		}
 	}
 
 	
@@ -1450,7 +1421,6 @@ class sqlite_analyse_requete {
 				$this->query .= $suite;
 			}
 		}
-		#$this->debug("Analyse > corrigerZeroAsX() > ");			
 	}
 	
 	
@@ -1490,7 +1460,6 @@ class sqlite_analyse_requete {
 
 	// callback ou l'on sauve le texte qui est cache dans un tableau $this->textes
 	function _remplacerTexteParCode($matches){
-		#$this->debug("Matches ". $matches[1], false);
 		$this->textes[$code = "%@##".count($this->textes)."##@%"] = $matches[1];
 		return $code;	
 	}
