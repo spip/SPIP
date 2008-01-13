@@ -237,11 +237,13 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 	. '<script language="javascript" src=' . find_in_path('javascript/jquery.js') . '></script>'
 	. '<script language="javascript"><!--
 		$(document).ready(function() {
-			if ($("input[@type=hidden][@name=server_db]").attr("value").match("sqlite*")){
-				$("#install_adresse_base_hebergeur").hide();
-				$("#install_login_base_hebergeur").hide();
-				$("#install_pass_base_hebergeur").hide();
-			}			
+			$("input[@type=hidden][@name=server_db]").each(function(){
+				if ($(this).attr("value").match("sqlite*")){
+					$("#install_adresse_base_hebergeur").hide();
+					$("#install_login_base_hebergeur").hide();
+					$("#install_pass_base_hebergeur").hide();
+				}
+			});
 			$("#sql_serveur_db").change(function(){
 				if ($(this).find("option:selected").attr("value").match("sqlite*")){
 					$("#install_adresse_base_hebergeur").hide();
@@ -250,7 +252,7 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 				} else {
 					$("#install_adresse_base_hebergeur").show();
 					$("#install_login_base_hebergeur").show();
-					$("#install_pass_base_hebergeur").show();					
+					$("#install_pass_base_hebergeur").show();
 				}
 			});
 		});
