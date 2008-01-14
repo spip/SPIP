@@ -79,6 +79,7 @@ function affiche_erreurs_page($tableau_des_erreurs, $message='') {
 function chrono_requete($temps)
 {
 	$total = 0;
+	$hors = "<i>" . _L('hors compilation') . "</i>";
 	$t = $q = $n = $d = array();
 	foreach ($temps as $key => $row) {
 		list($dt, $nb, $boucle, $query, $explain, $res) = $row;
@@ -88,8 +89,8 @@ function chrono_requete($temps)
 		$q[$key] = $nb;
 
 		$e = "<tr><th colspan='2' style='text-align:center'>"
-		. $boucle 
-		. '&nbsp;(' . @++$n[$boucle] . ")"
+		. (!$boucle ? $hors :
+		   ($boucle . '&nbsp;(' . @++$n[$boucle] . ")"))
 		. "</th></tr>"
 		.  "<tr><td>Time</td><td>$dt</td></tr>" 
 		.  "<tr><td>Order</td><td>$nb</td></tr>" 
@@ -100,11 +101,11 @@ function chrono_requete($temps)
 			  . str_replace(';','<br />',$v)
 			  . "</td></tr>";
 		}
-
-		$temps[$key] = array($boucle, "<br /><table border='1'>$e</table>", $query);
+		$e = "<br /><table border='1'>$e</table>";
+		$temps[$key] = array($boucle, $e, $query);
 	}
 	array_multisort($t, SORT_DESC, $q, $temps);
-
+	arsort($d);
 	$i = 1;
 	$t = array();
 	foreach($temps as $k => $v) {
@@ -120,16 +121,23 @@ function chrono_requete($temps)
 		$i++;
 	}
 
+	$d[$hors] = $d[''];
+	$n[$hors] = $n[''];
+	$t[$hors] = $t[''];
+	unset($d['']);
 	foreach ($d as $k => $v) {
 		$d[$k] =  $n[$k] . "</td><td>$k</td><td>$v</td><td>"
 		  . join('',$t[$k]);
 	}
 
-	$titre = count($temps) . ' ' . _T('icone_statistiques_visites')
-	  . ' SQL<br />' . _T('zbug_profile', array('time' => $total)) 
+	$titre = '<br />' . count($temps) . ' '
+	  . _T('icone_statistiques_visites')
+	  . ' SQL<br />'
 	  . "<table style='text-align: left; border: 1px solid;'><tr><td>"
 	  . join("</td></tr>\n<tr><td>", $d)
-	  . "</td></tr></table>";
+	  . "</td></tr>\n<tr><td></td><td>" . _T('info_total') . '</td><td>'
+	  . $total
+	  . "</td><td></td></tr></table>";
 
 	return (_DIR_RESTREINT ? '' : affiche_erreurs_page($GLOBALS['tableau_des_erreurs']))
 	. affiche_erreurs_page($temps, $titre);
@@ -745,7 +753,7 @@ function trace_query_chrono($m1, $m2, $query, $result, $serveur='')
 		list(, $boucle, $serveur) = $GLOBALS['debug']['aucasou'];
 		if ($serveur) $boucle .= " ($serveur)";
 		$boucle = "<b>$boucle</b>";
-	} else $boucle = '<i>hors compilation</i>';
+	} else $boucle = '';
 
 	$q = preg_replace('/([a-z)`])\s+([A-Z])/', '$1<br />$2',$query);
 	$e =  sql_explain($query, $serveur);
