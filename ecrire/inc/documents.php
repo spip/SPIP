@@ -14,8 +14,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/actions'); // *action_auteur et determine_upload
 include_spip('inc/date');
-include_spip('base/abstract_sql');
-
 
 // donne le chemin du fichier relatif a _DIR_IMG
 // pour stockage 'tel quel' dans la base de donnees
@@ -55,24 +53,27 @@ function contenu_document($id_document)
 
 // http://doc.spip.org/@generer_url_document_dist
 function generer_url_document_dist($id_document, $args='', $ancre='') {
-	if (intval($id_document) <= 0)
-		return '';
+
+	include_spip('inc/autoriser');
+	if (!autoriser('voir', 'document', $id_document)) return '';
+
 	$row = sql_fetsel("fichier,distant", "spip_documents", "id_document=".sql_quote($id_document));
+
 	if (!$row) return '';
-	// Cette variable de configuration peut etre posee par un plugin
-	// par exemple acces_restreint
-	if ($GLOBALS['meta']["creer_htaccess"] == 'oui'
-	AND $row['distant'] != 'oui') {
-		include_spip('inc/securiser_action');
-		$args .= ($args ? "&" : '')
+
+	$f = $row['fichier'];
+
+	if ($row['distant'] == 'oui') return get_spip_doc($f);
+
+	include_spip('inc/securiser_action');
+
+	return generer_url_action('acceder_document', 
+		$args . ($args ? "&" : '')
 			. 'arg='.$id_document
 			. ($ancre ? "&ancre=$ancre" : '')
-			. '&cle=' . calculer_cle_action($id_document.','.$row['fichier'])
-			. '&file=' . rawurlencode($row['fichier'])
-			;
-		return generer_url_action('acceder_document', $args);
-	} else
-		return get_spip_doc($row['fichier']);
+			. '&cle=' . calculer_cle_action($id_document.','.$f)
+			. '&file=' . rawurlencode($f)
+				  );
 }
 
 //
