@@ -121,23 +121,26 @@ function chrono_requete($temps)
 		$i++;
 	}
 
-	$d[$hors] = $d[''];
-	$n[$hors] = $n[''];
-	$t[$hors] = $t[''];
+	if ($d['']) {
+		$d[$hors] = $d[''];
+		$n[$hors] = $n[''];
+		$t[$hors] = $t[''];
+	}
 	unset($d['']);
 	foreach ($d as $k => $v) {
 		$d[$k] =  $n[$k] . "</td><td>$k</td><td>$v</td><td>"
 		  . join('',$t[$k]);
 	}
 
-	$titre = '<br />' . count($temps) . ' '
-	  . _T('icone_statistiques_visites')
-	  . ' SQL<br />'
+	$titre = '<br />'
+	  . _L('Statistiques des requ&ecirc;tes SQL class&eacute;es par dur&eacute;e')
+	  . '<br />'
 	  . "<table style='text-align: left; border: 1px solid;'><tr><td>"
 	  . join("</td></tr>\n<tr><td>", $d)
-	  . "</td></tr>\n<tr><td></td><td>" . _T('info_total') . '</td><td>'
-	  . $total
-	  . "</td><td></td></tr></table>";
+	  . "</td></tr>\n"
+	  . (_request('var_mode_objet') ? '' : 
+	     ("<tr><td>" .  count($temps) . " </td><td> " . _T('info_total') . '</td><td>' . $total . "</td></td><td></td></tr>"))
+	  . "</table>";
 
 	return (_DIR_RESTREINT ? '' : affiche_erreurs_page($GLOBALS['tableau_des_erreurs']))
 	. affiche_erreurs_page($temps, $titre);
@@ -467,53 +470,33 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	echo debug_debut($fonc);
 
 	if ($var_mode_affiche !== 'validation') {
-		$self = parametre_url($self,'var_mode', 'debug');
 	  foreach ($debug_objets['sourcefile'] as $nom_skel => $sourcefile) {
+		$self2 = parametre_url($self,'var_mode_objet', $nom_skel);
 		echo "<fieldset><legend>",$sourcefile,"&nbsp;: ";
-		echo "\n<a href='$self&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=squelette#$nom_skel'>"._T('squelette')."</a>";
-		echo "\n<a href='$self&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=resultat#$nom_skel'>"._T('zbug_resultat')."</a>";
-		echo "\n<a href='$self&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=code#$nom_skel'>"._T('zbug_code')."</a></legend>";
+		echo "\n<a href='$self2&amp;var_mode_affiche=squelette#$nom_skel'>"._T('squelette')."</a>";
+		echo "\n<a href='$self2&amp;var_mode_affiche=resultat#$nom_skel'>"._T('zbug_resultat')."</a>";
+		echo "\n<a href='$self2&amp;var_mode_affiche=code#$nom_skel'>"._T('zbug_code')."</a>";
+		echo "\n<a href='", 
+		  str_replace('var_mode=','var_profile=', $self), "'>",
+		  _L('calcul')."</a></legend>";
 		echo "\n<span style='display:block;float:$spip_lang_right'>"._T('zbug_profile',array('time'=>$debug_objets['profile'][$sourcefile]))."</span>";
 
 		if (is_array($contexte = $debug_objets['contexte'][$sourcefile]))
 			echo afficher_debug_contexte($contexte);
 
 		$i = 0;
-		$colors = array('#e0e0f0', '#f8f8ff');
 		$res = "";
 		if (is_array($debug_objets['pretty']))
-		foreach ($debug_objets['pretty'] as $nom => $pretty)
+		  foreach ($debug_objets['pretty'] as $nom => $pretty)
 			if (substr($nom, 0, strlen($nom_skel)) == $nom_skel) {
 				$i++;
 				$aff = "&lt;".$pretty."&gt;";
 				if ($var_mode_objet == $nom)
 					$aff = "<b>$aff</b>";
-				$res .= "\n<tr style='background-color: " .
-				  $colors[$i%2] .
-				  "'><td  align='right'>$i</td><td>\n" .
-				  "<a  class='debug_link_boucle' href='" .
-				  $self .
-				  "&amp;var_mode_objet=" .
-				  $nom .
-				  "&amp;var_mode_affiche=boucle#$nom_skel'>" .
-				  _T('zbug_boucle') .
-				  "</a></td><td>\n<a class='debug_link_boucle' href='" .
-				  $self .
-				  "&amp;var_mode_objet=" .
-				  $nom .
-				  "&amp;var_mode_affiche=resultat#$nom_skel'>" .
-				  _T('zbug_resultat') .
-				  "</a></td><td>\n<a class='debug_link_resultat' href='" .
-				  $self .
-				  "&amp;var_mode_objet=" .
-				  $nom .
-				  "&amp;var_mode_affiche=code#$nom_skel'>" .
-				  _T('zbug_code') .
-				  "</a></td><td>\n" .
-				  $aff .
-				  "</td></tr>";
+				$color = $i%2 ? '#e0e0f0' : '#f8f8ff';
+				$res .= debug_affiche_navig($aff, $nom_skel, $color, $self .  "&amp;var_mode_objet=" .  $nom, $i);
 			}
-		if ($res) echo "<table width='100%'>\n$res</table>\n";
+		if ($res) echo "<table width='100%'>\n",$res,"</table>\n";
 		echo "</fieldset>\n";
 	  }
 	  echo "</div>\n<a id='$fonc'></a>\n"; 
@@ -547,6 +530,32 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	}
 	debug_fin();
 	exit;
+}
+
+function debug_affiche_navig($aff, $nom_skel, $color, $self, $i)
+{
+	return "\n<tr style='background-color: " .
+	  $color .
+	  "'><td  align='right'>$i</td><td>\n" .
+	  "<a  class='debug_link_boucle' href='" .
+	  $self .
+	  "&amp;var_mode_affiche=boucle#$nom_skel'>" .
+	  _T('zbug_boucle') .
+	  "</a></td><td>\n<a class='debug_link_boucle' href='" .
+	  $self .
+	  "&amp;var_mode_affiche=resultat#$nom_skel'>" .
+	  _T('zbug_resultat') .
+	  "</a></td><td>\n<a class='debug_link_resultat' href='" .
+	  $self .
+	  "&amp;var_mode_affiche=code#$nom_skel'>" .
+	  _T('zbug_code') .
+	  "</a></td><td>\n<a class='debug_link_resultat' href='" .
+	  str_replace('var_mode=','var_profile=', $self) .
+	  "'>" .
+	  _L('calcul') .
+	  "</a></td><td>\n" .
+	  $aff .
+	  "</td></tr>";
 }
 
 // http://doc.spip.org/@debug_affiche
@@ -743,17 +752,23 @@ function trace_query_chrono($m1, $m2, $query, $result, $serveur='')
 	static $tt = 0, $nb=0;
 	global $tableau_des_temps;
 
+	$x = _request('var_mode_objet');
+	if (isset($GLOBALS['debug']['aucasou'])) {
+		list(, $boucle, $serveur) = $GLOBALS['debug']['aucasou'];
+		if ($x AND !preg_match("/$boucle\$/", $x))
+			return;
+		if ($serveur) $boucle .= " ($serveur)";
+		$boucle = "<b>$boucle</b>";
+	} else {
+		if ($x) return;
+		$boucle = '';
+	}
+
 	list($usec, $sec) = explode(" ", $m1);
 	list($usec2, $sec2) = explode(" ", $m2);
  	$dt = $sec2 + $usec2 - $sec - $usec;
 	$tt += $dt;
 	$nb++;
-
-	if (isset($GLOBALS['debug']['aucasou'])) {
-		list(, $boucle, $serveur) = $GLOBALS['debug']['aucasou'];
-		if ($serveur) $boucle .= " ($serveur)";
-		$boucle = "<b>$boucle</b>";
-	} else $boucle = '';
 
 	$q = preg_replace('/([a-z)`])\s+([A-Z])/', '$1<br />$2',$query);
 	$e =  sql_explain($query, $serveur);
