@@ -188,9 +188,7 @@ function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576,
 	$gz = false;
 
 	// si on a utilise fopen() - passer a la suite
-	if ($fopen) {
-			spip_log('connexion via fopen');
-	} else {
+	if (!$fopen) {
 			// Fin des entetes envoyees par SPIP
 			if($get == 'POST') {
 				list($content_type, $postdata) = $datas;
@@ -281,9 +279,6 @@ function nom_fichier_copie_locale($source, $extension) {
 	. substr(preg_replace(',[^\w-],', '', basename($source)).'-'.$m,0,12)
 	. substr($m,0,4)
 	. ".$extension";
-
-
-	
 }
 
 //
@@ -436,6 +431,19 @@ function recuperer_infos_distantes($source, $max=0, $charger_si_petite_image = t
 }
 
 
+function need_proxy($host)
+{
+	$http_proxy = $GLOBALS['meta']["http_proxy"];
+	$http_noproxy = $GLOBALS['meta']["http_noproxy"];
+
+	$domain = substr($host,strpos($host,'.'));
+
+	return ($http_proxy
+	AND (strpos(" $http_noproxy ", " $host ") === false
+	     AND (strpos(" $http_noproxy ", " $domain ") === false)))
+	? $http_proxy : '';
+}
+
 //
 // Demarre une transaction HTTP (s'arrete a la fin des entetes)
 // retourne un descripteur de fichier
@@ -455,34 +463,24 @@ function init_http($get, $url, $refuse_gz=false, $uri_referer = '') {
 	$query = $t['query'];
 	if (!isset($t['path']) || !($path = $t['path'])) $path = "/";
 
-	$http_proxy = $GLOBALS['meta']["http_proxy"];
-	$http_noproxy = $GLOBALS['meta']["http_noproxy"];
-
-	if (strncmp("http://", $http_proxy,7)!=0
-	    OR (strpos(" $http_noproxy ", " $host ") !== false)
-	    OR (strpos(" $http_noproxy ", ' ' . substr($host,(strpos($host,'.')) . ' ')) !== false))
-		$http_proxy = '';
-	else
-		$via_proxy = " (proxy $http_proxy)";
-
-	spip_log("http $get $url$via_proxy");
+	$http_proxy = need_proxy($host);
 
 	if ($http_proxy) {
+		spip_log("connexion vers $url via $http_proxy");
 		$t2 = @parse_url($http_proxy);
 		$proxy_host = $t2['host'];
 		$proxy_user = $t2['user'];
 		$proxy_pass = $t2['pass'];
 		if (!($proxy_port = $t2['port'])) $proxy_port = 80;
 		$f = @fsockopen($proxy_host, $proxy_port);
-	} else
+		$req = "$get $scheme://$host" . (($port != 80) ? ":$port" : "") . $path . ($query ? "?$query" : "") . " HTTP/1.0\r\n";
+	} else {
 		$f = @fsockopen($scheme_fsock.$host, $port);
-
+		spip_log("connexion vers $url sans proxy");
+		$req = "$get $path" . ($query ? "?$query" : "") . " HTTP/1.0\r\n";
+	}
 	if ($f) {
-		if ($http_proxy)
-			fputs($f, "$get $scheme://$host" . (($port != 80) ? ":$port" : "") . $path . ($query ? "?$query" : "") . " HTTP/1.0\r\n");
-		else
-			fputs($f, "$get $path" . ($query ? "?$query" : "") . " HTTP/1.0\r\n");
-
+		fputs($f, $req);
 		fputs($f, "Host: $host\r\n");
 		fputs($f, "User-Agent: SPIP-".$GLOBALS['spip_version_affichee']." (http://www.spip.net/)\r\n");
 
@@ -505,6 +503,7 @@ function init_http($get, $url, $refuse_gz=false, $uri_referer = '') {
 	// fallback : fopen
 	else if (!$GLOBALS['tester_proxy']) {
 		$f = @fopen($url, "rb");
+		spip_log("connexion vers $url par simple fopen");
 		$fopen = true;
 	}
 	// echec total

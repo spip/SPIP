@@ -83,6 +83,8 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 	$nom_fichier = substr($fichier, 0, strlen($fichier) - 4);
 	$fichier_dest = $nom_fichier;
 	list ($ret["hauteur"],$ret["largeur"]) = taille_image($img);
+	if (!$ret["hauteur"] OR $ret["largeur"]) return false;
+
 	// cas general :
 	// on a un dossier cache commun et un nom de fichier qui varie avec l'effet
 	// cas particulier de reduire :
@@ -117,7 +119,6 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 	$fichier_dest = $cache . $fichier_dest . "." .$terminaison_dest;
 	
 	$GLOBALS["images_calculees"][] =  $fichier_dest;
-	
 	
 	$creer = true;
 	// si recalcul des images demande, recalculer chaque image une fois
@@ -708,10 +709,11 @@ function process_image_reduire($fonction,$img,$taille,$taille_y,$force,$cherche_
 			$image = false;
 		}
 	}
+
 	if (!$image)
 		$image = image_valeurs_trans($img, "reduire-{$taille}-{$taille_y}",$format_sortie,$fonction);
 
-	if (!$image){
+	if (!$image OR !$image['largeur'] OR !$image['hauteur']){
 		spip_log("image_reduire_src:pas de version locale de $img");
 		// on peut resizer en mode html si on dispose des elements
 		if ($srcw = extraire_attribut($img, 'width')
@@ -724,7 +726,7 @@ function process_image_reduire($fonction,$img,$taille,$taille_y,$force,$cherche_
 		return inserer_attribut($img, 'style',
 			"max-width: ${taille}px; max-height: ${taille_y}px");
 	}
-	
+
 	// si l'image est plus petite que la cible retourner une copie cachee de l'image
 	if (($image['largeur']<=$taille)&&($image['hauteur']<=$taille_y)){
 		if ($image['creer']){
@@ -732,7 +734,7 @@ function process_image_reduire($fonction,$img,$taille,$taille_y,$force,$cherche_
 		}
 		return image_ecrire_tag($image,array('src'=>$image['fichier_dest']));
 	}
-	
+
 	if ($image['creer']==false && !$force)
 		return image_ecrire_tag($image,array('src'=>$image['fichier_dest'],'width'=>$image['largeur_dest'],'height'=>$image['hauteur_dest']));
 

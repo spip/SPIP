@@ -75,22 +75,23 @@ function configuration_relayeur_post ($http_proxy, $http_noproxy, $test_proxy, $
 	if (preg_match(',:\*\*\*\*@,', $http_proxy))
 		$http_proxy = $GLOBALS['meta']['http_proxy'];
 
-	$retour_proxy = '';
-	if ($tester_proxy AND $http_proxy) {
-		if (!$test_proxy) {
-			$retour_proxy = _T('info_adresse_non_indiquee');
+	$retour = '';
+
+	if ($tester_proxy AND preg_match(",https?://,", $http_proxy)) {
+		include_spip('inc/distant');
+		$t = parse_url($test_proxy);
+
+		if (!@$t['host']) {
+			$retour = _T('info_adresse_non_indiquee');
 		} else {
 			include_spip('inc/texte'); // pour aide, couper, lang
-			if (strncmp("http://", $http_proxy,7)!=0)
-			  $page = '';
-			else {
-			  include_spip('inc/distant');
-			  $page = recuperer_page($test_proxy, true);
-			}
+			if (!need_proxy($t['host']))
+				$page = "<p>"._L('Cette page ne doit pas passer par le proxy')."</p>\n";
+			$page = recuperer_page($test_proxy, true);
 			if ($page)
-				$retour_proxy = "<p>"._T('info_proxy_ok')."</p>\n<tt>".couper(entites_html($page),300)."</tt>";
-			else
-				$retour_proxy = _T('info_impossible_lire_page', array('test_proxy' => $test_proxy))
+				$retour = "<p>"._T('info_proxy_ok')."</p>\n<tt>".couper(entites_html($page),300)."</tt>";
+			  else
+				$retour = _T('info_impossible_lire_page', array('test_proxy' => $test_proxy))
 				. " <tt>".no_password_proxy_url($http_proxy)."</tt>."
 				. aide('confhttpproxy');
 		}
@@ -101,7 +102,7 @@ function configuration_relayeur_post ($http_proxy, $http_noproxy, $test_proxy, $
 	if ($http_noproxy !== NULL) {
 		ecrire_meta('http_noproxy', $http_noproxy);
 	}
-	return $retour_proxy;
+	return $retour;
 }
 
 // Function glue_url : le pendant de parse_url 
