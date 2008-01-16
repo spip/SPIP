@@ -765,8 +765,14 @@ function balise_SELF_dist($p) {
 //
 // http://doc.spip.org/@balise_CHEMIN_dist
 function balise_CHEMIN_dist($p) {
-	$p->code = interprete_argument_balise(1,$p);
-	$p->code = 'find_in_path(' . $p->code .')';
+	$arg = interprete_argument_balise(1,$p);
+	if (!$arg) {
+		erreur_squelette(_L('Argument manquant dans la balise @balise@', 
+					array('balise' => ' CHEMIN')),
+			$p->bid_boucle);
+		$p->code = "''";
+	} else 
+	  $p->code = 'find_in_path(' . $arg .')';
 
 	#$p->interdire_scripts = true;
 	return $p;
@@ -1022,7 +1028,14 @@ function balise_INCLURE_dist($p) {
 		$p->code = "recuperer_fond('',".$l.", false, " . sql_quote($connect) .")";
 	} else {
 		$n = interprete_argument_balise(1,$p);
-		$p->code = '(($c = find_in_path(' . $n . ')) ? spip_file_get_contents($c) : "")';
+		if (!$n) {
+			erreur_squelette(_L('Argument manquant dans la balise @balise@', 
+					array('balise' => ' CHEMIN')),
+			$p->bid_boucle);
+			$p->code = "''";
+		} else 
+		
+			$p->code = '(($c = find_in_path(' . $n . ')) ? spip_file_get_contents($c) : "")';
 	}
 
 	$p->interdire_scripts = false; // la securite est assuree par recuperer_fond
