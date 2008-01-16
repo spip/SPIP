@@ -1030,7 +1030,7 @@ function balise_INCLURE_dist($p) {
 		$n = interprete_argument_balise(1,$p);
 		if (!$n) {
 			erreur_squelette(_L('Argument manquant dans la balise @balise@', 
-					array('balise' => ' CHEMIN')),
+					array('balise' => ' INCLURE')),
 			$p->bid_boucle);
 			$p->code = "''";
 		} else 

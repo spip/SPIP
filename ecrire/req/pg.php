@@ -269,7 +269,7 @@ function spip_pg_select($select, $from, $where='',
 	    $having = join("\n\tAND ", array_map('calculer_pg_where', $having));
 	}
 	$from =  spip_pg_from($from, $prefixe);
-	$q =  "SELECT ". spip_pg_frommysql($select)
+	$q =  "SELECT ". $select
 	  . (!$from ? '' : "\nFROM $from")
 	  . (!$where ? '' : ("\nWHERE " . (!is_array($where) ? calculer_pg_where($where) : (join("\n\tAND ", array_map('calculer_pg_where', $where))))))
 	  . spip_pg_groupby($groupby, $from, $select)
