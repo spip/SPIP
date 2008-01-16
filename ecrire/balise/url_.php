@@ -40,7 +40,7 @@ function generer_generer_url($type, $p)
 	} else {
 		$s = addslashes($s);
 		if ($type != 'document')
-			return "'./?page=$type&amp;id_$type=' . $_id . '&connect=$s'";
+			return "'./?page=$type&amp;id_$type=' . $_id . '&amp;connect=$s'";
 		else {
 			$u = "quete_meta('adresse_site', '$s')";
 			$f = "$_id . '&amp;file=' . quete_fichier($_id,'$s')";
@@ -99,11 +99,6 @@ function balise_URL_SITE_SPIP_dist($p) {
 // http://doc.spip.org/@balise_URL_PAGE_dist
 function balise_URL_PAGE_dist($p) {
 
-	if ($p->id_boucle && $p->boucles[$p->id_boucle]->sql_serveur) {
-		$p->code = 'generer_url_public("404")';
-		return $p;
-	}
-
 	$p->code = interprete_argument_balise(1,$p);
 	$args = interprete_argument_balise(2,$p);
 	if ($args != "''" && $args!==NULL)
@@ -112,8 +107,17 @@ function balise_URL_PAGE_dist($p) {
 	// autres filtres (???)
 	array_shift($p->param);
 
-	$p->code = 'generer_url_public(' . $p->code .')';
+	if ($p->id_boucle
+	AND $s = $p->boucles[$p->id_boucle]->sql_serveur) {
 
+		if (!$GLOBALS['connexions'][$s]['spip_connect_version']) {
+			$p->code = "404";
+		} else {
+			$p->code .=  ", 'connect=" .  addslashes($s) . "'";
+		}
+	}
+
+	$p->code = 'generer_url_public(' . $p->code .')';
 	#$p->interdire_scripts = true;
 	return $p;
 }
