@@ -413,7 +413,8 @@ function spip_pg_frommysql($arg)
 
 	$res = preg_replace('/(timestamp .\d+)-00-/','\1-01-', $res);
 	$res = preg_replace('/(timestamp .\d+-\d+)-00/','\1-01',$res);
-	$res = preg_replace("/(EXTRACT[(][^ ]* FROM *)(timestamp *'[^']*' *[+-] *timestamp *'[^']*') *[)]/", '\2', $res);
+# correct en theorie mais produit des debordements arithmetiques
+#	$res = preg_replace("/(EXTRACT[(][^ ]* FROM *)(timestamp *'[^']*' *[+-] *timestamp *'[^']*') *[)]/", '\2', $res);
 	$res = preg_replace("/(EXTRACT[(][^ ]* FROM *)('[^']*')/", '\1 timestamp \2', $res);
 
 	return str_replace('REGEXP', '~', $res);

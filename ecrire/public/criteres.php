@@ -712,6 +712,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	$type = $boucle->type_requete;
 	$table = $boucle->id_table;
 	$desc = $boucle->show;
+	$date = array();
 
 	list($fct, $col, $op, $val, $args_sql) =
 	  calculer_critere_infixe_ops($idb, $boucles, $crit);
@@ -736,9 +737,9 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	}
 
 	// Cas particulier : expressions de date
-	else if ($regs = tester_param_date($boucle->type_requete, $col)) {
+	else if ($date = tester_param_date($boucle->type_requete, $col)) {
 		list($col, $table) =
-		calculer_critere_infixe_date($idb, $boucles, $regs);
+		calculer_critere_infixe_date($idb, $boucles, $date);
 	} else {
 		if (@!array_key_exists($col, $desc['field'])) {
 	  	$calculer_critere_externe = 'calculer_critere_externe_init';
@@ -756,12 +757,17 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 			list($nom, $desc) = trouver_champ_exterieur($col, $boucle->jointures, $boucle);
 		}
 	}
-	// Si la colonne SQL est numerique
+	// Si la colonne SQL est numerique ou le critere est une date relative
 	// forcer une conversion pour eviter un erreur au niveau SQL
+
 	if ($op == '=' OR in_array($op, $table_criteres_infixes)) {
-		if (strpos($val[0], 'sql_quote(') === 0
-		AND $desc AND sql_test_int($desc['field'][$col]))
-			$val[0] = 'intval' . substr($val[0],strlen('sql_quote'));
+		if (($desc AND sql_test_int($desc['field'][$col]))
+		    OR ($date AND strpos($date[0], '_relatif'))) {
+			if (strpos($val[0], 'sql_quote(') === 0)
+				$val[0] = 'intval' . substr($val[0],strlen('sql_quote'));
+			elseif (preg_match("/^\"'(-?\d+)'\"$/", $val[0], $r))
+			  $val[0] = $r[1];
+		}
 	}
 	// tag du critere pour permettre aux boucles de modifier leurs requetes par defaut en fonction de ca
 	$boucles[$idb]->modificateur['criteres'][$col] = true;
