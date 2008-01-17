@@ -39,9 +39,15 @@ function filtre_text_txt_dist($t) {
 
 function filtre_text_csv_dist($t)
 {
-	return propre("\n|" .
-		      str_replace(';','|',preg_replace('/\r?\n/', "|\n|",$t))
-		      . "|\n");
+	list($entete, $corps) = preg_split('/\r?\n/',$t,2);
+
+	return propre(
+		"\n|{{" .
+		str_replace(';','}}|{{',$entete) .
+		"}}|" .
+		"\n|" .
+		str_replace(';','|',preg_replace('/\r?\n/', "|\n|",$corps)) .
+		"|\n");
 }
 
 function filtre_audio_x_pn_realaudio($id)
