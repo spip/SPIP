@@ -160,8 +160,8 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 	$return = $boucle->return;
 	$type_boucle = $boucle->type_requete;
 	$primary = $boucle->primary;
-	$constant = preg_match(CODE_MONOTONE,$return);
-
+	$constant = preg_match(CODE_MONOTONE, str_replace("\\'",'', $return));
+ 
 	// Cas {1/3} {1,4} {n-2,1}...
 
 	$flag_cpt = $boucle->mode_partie ||$boucle->cptrows;
@@ -251,9 +251,8 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 	// Fin de parties
 	if ($boucle->mode_partie) $corps .= "\n		}\n";
 
-
 	// si le corps est une constante, ne pas appeler le serveur N fois!
-	if (preg_match(CODE_MONOTONE,$corps, $r)) {
+	if (preg_match(CODE_MONOTONE,str_replace("\\'",'',$corps), $r)) {
 		if (!isset($r[2]) OR (!$r[2])) {
 			if (!$boucle->numrows)
 				return 'return "";';
