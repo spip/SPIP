@@ -560,6 +560,7 @@ function calculer_jointnul($cle, $exp, $equiv='')
 	}
 }
 
+// http://doc.spip.org/@remplacer_jointnul
 function remplacer_jointnul($cle, $exp, $equiv='')
 {
 	if (!is_array($exp)) {

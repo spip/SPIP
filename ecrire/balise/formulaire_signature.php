@@ -261,6 +261,7 @@ function inc_controler_signature_dist($id_article, $nom, $mail, $message, $site,
 	return _T('form_pet_envoi_mail_confirmation');
 }
 
+// http://doc.spip.org/@signature_a_confirmer
 function signature_a_confirmer($id_article, $url_page, $nom, $mail, $site, $url, $msg, $lang, $passw)
 {
 	$row = sql_fetsel('titre,lang', 'spip_articles', "id_article=$id_article");

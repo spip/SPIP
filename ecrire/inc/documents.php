@@ -44,6 +44,7 @@ function get_spip_doc($fichier) {
 
 // Filtre pour #ID_DOCUMENT ou #URL_DOCUMENT
 
+// http://doc.spip.org/@contenu_document
 function contenu_document($arg)
 {
 	if (is_numeric($arg)) {

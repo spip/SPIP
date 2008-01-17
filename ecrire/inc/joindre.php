@@ -44,6 +44,7 @@ function inc_joindre_dist($v) {
 		" method='post' enctype='multipart/form-data' class='form_upload'");
 }
 
+// http://doc.spip.org/@joindre_formulaire
 function joindre_formulaire(&$v) {
 	global $spip_lang_right;
 	$depliable = false;

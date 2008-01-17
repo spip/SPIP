@@ -28,15 +28,18 @@ function chercher_filtre($fonc, $default=NULL) {
 		return $default;
 }
 
+// http://doc.spip.org/@appliquer_filtre
 function appliquer_filtre($arg, $filtre, $default=NULL) {
 	$f = chercher_filtre(preg_replace('/\W/','_', $filtre), $default);
 	return !$f ? '' : $f($arg);
 }
 
+// http://doc.spip.org/@filtre_text_txt_dist
 function filtre_text_txt_dist($t) {
 	return '<pre>' . echapper_tags($t) . '</pre>';
 }
 
+// http://doc.spip.org/@filtre_text_csv_dist
 function filtre_text_csv_dist($t)
 {
 	list($entete, $corps) = preg_split('/\r?\n/',$t,2);
@@ -50,6 +53,7 @@ function filtre_text_csv_dist($t)
 		"|\n");
 }
 
+// http://doc.spip.org/@filtre_audio_x_pn_realaudio
 function filtre_audio_x_pn_realaudio($id)
 {
   return "

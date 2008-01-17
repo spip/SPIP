@@ -635,6 +635,7 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 		"''");
 }
 
+// http://doc.spip.org/@critere_IN_cas
 function critere_IN_cas ($idb, &$boucles, $crit2, $arg, $op, $val, $col)
 {
 	static $cpt = 0;

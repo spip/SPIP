@@ -156,6 +156,7 @@ function convertir_un_champ_blob_en_text($table,$champ,$type){
 // La fonction a appeler dans le tableau global $maj 
 // quand on rajoute des types MIME. cf par exemple la 1.953
 
+// http://doc.spip.org/@upgrade_types_documents
 function upgrade_types_documents() {
 	include_spip('base/create');
 	creer_base_types_doc();
