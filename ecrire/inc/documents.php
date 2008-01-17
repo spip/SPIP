@@ -42,12 +42,17 @@ function get_spip_doc($fichier) {
 		: $fichier;
 }
 
-function contenu_document($id_document)
+// Filtre pour #ID_DOCUMENT ou #URL_DOCUMENT
+
+function contenu_document($arg)
 {
-	$r = sql_fetsel("fichier,distant", "spip_documents", "id_document=".sql_quote($id_document));
-	if (!$r) return '';
-	$f = $r['fichier'];
-	$f = ($r['distant'] =='oui') ? copie_locale($f) : get_spip_doc($f);
+	if (is_numeric($arg)) {
+		$r = sql_fetsel("fichier,distant", "spip_documents", "id_document=".sql_quote($arg));
+		if (!$r) return '';
+		$f = $r['fichier'];
+		$f = ($r['distant'] =='oui') ? copie_locale($f) : get_spip_doc($f);
+	} else if (!$f = copie_locale($arg)) return '';
+
 	return spip_file_get_contents($f);
 }
 
@@ -65,7 +70,7 @@ function generer_url_document_dist($id_document, $args='', $ancre='') {
 
 	// Si droit de voir tous les docs, pas seulement celui-ci
 	// il est inutilement couteux de rajouter une protection
-	if (($row['distant'] == 'oui') OR !autoriser('voir', 'document'))
+	if (($row['distant'] == 'oui') OR autoriser('voir', 'document'))
 		return get_spip_doc($f);
 
 	include_spip('inc/securiser_action');
