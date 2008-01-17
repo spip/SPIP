@@ -63,7 +63,10 @@ function generer_url_document_dist($id_document, $args='', $ancre='') {
 
 	$f = $row['fichier'];
 
-	if ($row['distant'] == 'oui') return get_spip_doc($f);
+	// Si droit de voir tous les docs, pas seulement celui-ci
+	// il est inutilement couteux de rajouter une protection
+	if (($row['distant'] == 'oui') OR !autoriser('voir', 'document'))
+		return get_spip_doc($f);
 
 	include_spip('inc/securiser_action');
 

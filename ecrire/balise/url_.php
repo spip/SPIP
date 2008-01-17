@@ -43,8 +43,9 @@ function generer_generer_url($type, $p)
 			return "'./?page=$type&amp;id_$type=' . $_id . '&amp;connect=$s'";
 		else {
 			$u = "quete_meta('adresse_site', '$s')";
-			$f = "$_id . '&amp;file=' . quete_fichier($_id,'$s')";
-			return "$u . '?action=acceder_document&amp;arg=' .$f";
+			$d = "quete_meta('dir_img', '$s')";
+			$f = "quete_fichier($_id,'$s')";
+			return "$u . '/' .\n\t$d . $f";
 		}
 	}
 }
