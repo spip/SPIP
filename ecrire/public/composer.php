@@ -505,7 +505,7 @@ function calculer_select ($select = array(), $from = array(),
 		OR calculer_jointnul($cle, $join)
 		OR calculer_jointnul($cle, $having)
 		OR calculer_jointnul($cle, $where)) {
-			$sfrom = "\n\t".(isset($from_type[$cle])?$from_type[$cle]:"INNER")." JOIN " . $from[$cle] . " AS $cle USING ($c)" . $sfrom;
+			$sfrom = "\n\t".(isset($from_type[$cle])?$from_type[$cle]:"INNER")." JOIN " . $from[$cle] . " AS $cle ON ($t.$c=$cle.$c)" . $sfrom;
 			$equiv[]= $c;
 		} else { unset($join[$k]);}
 		unset($from[$cle]);
