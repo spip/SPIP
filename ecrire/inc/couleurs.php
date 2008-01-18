@@ -108,7 +108,7 @@ onblur="changestyle(\'bandeauinterface\');"';
 		return  '<span id="selecteur_couleur">'
 		.  $bloc
 		. "</span>\n"
-		. "<script type='text/javascript'><!--
+		. '<script type="text/javascript"><!--' . "
 			$('#selecteur_couleur a')
 			.click(function(){
 				$('head>link#cssprivee')
