@@ -410,12 +410,9 @@ function naviguer_doc ($id, $type = "article", $script, $flag_editable) {
 		$res = "\n<table width='100%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td>&nbsp;</td><td style='text-align: $spip_lang_left;width: 50%;'>\n$res</td></tr></table>";
 	  }
 
-	  $res .= "<script src='"._DIR_JAVASCRIPT."async_upload.js' type='text/javascript'></script>\n";
-    $res .= <<<EOF
-    <script type='text/javascript'>
-    $(".form_upload").async_upload(async_upload_portfolio_documents);
-    </script>
-EOF;
+	  $res .= http_script('',_DIR_JAVASCRIPT."async_upload.js")
+	 . http_script('$(".form_upload").async_upload(async_upload_portfolio_documents);');
+
 	} else $res ='';
 
 	$documenter = charger_fonction('documenter', 'inc');

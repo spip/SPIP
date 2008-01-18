@@ -277,14 +277,11 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 		$ret .= afficher_case_document($doc, $id, $script, $type, $deplier);
 	}
 	$ret .= "</div>";
-  if (test_espace_prive()){
-	  $ret .= "<script src='"._DIR_JAVASCRIPT."async_upload.js' type='text/javascript'></script>\n";
-	  $ret .= <<<EOF
-	    <script type='text/javascript'>
-	    $("form.form_upload").async_upload(async_upload_article_edit)
-	    </script>
-EOF;
-  }
+	if (test_espace_prive()){
+	  spip_log("doc scrip");
+		$ret .= http_script('', _DIR_JAVASCRIPT."async_upload.js")
+		  . http_script('$("form.form_upload").async_upload(async_upload_article_edit)');
+	}
     
 	return $ret;
 }

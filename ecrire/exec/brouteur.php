@@ -111,11 +111,9 @@ function exec_brouteur_dist()
 
 	// fixer la hauteur du brouteur de maniere a remplir l'ecran
 	// nota: code tire du plugin dimensions.js
-	echo "<script type='text/javascript'><!--
-		jQuery('iframe.iframe-brouteur').height(
+	echo http_script("jQuery('iframe.iframe-brouteur').height(
 			Math.max((window.innerHeight || jQuery.boxModel && document.documentElement.clientHeight || document.body.clientHeight || 0)-195,300)
-		);
-	//--></script>\n";
+		);\n");
 	echo fin_page();
 }
 ?>

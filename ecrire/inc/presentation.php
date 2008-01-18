@@ -61,7 +61,7 @@ function afficher_onglets_pages($ordre,$onglets){
 	$onglet_compteur++;
 	return "<div class='boite_onglets' id='boite_onglet_$onglet_compteur'>$res</div>"
 	. (_INTERFACE_ONGLETS ?
-	 "<script type='text/javascript'>$('#boite_onglet_$onglet_compteur').tabs(".($actif?"$actif,":"")."{ fxAutoHeight: true });
+	   http_script("$('#boite_onglet_$onglet_compteur').tabs(".($actif?"$actif,":"")."{ fxAutoHeight: true });
 	 if (!$.browser.safari)
 	 $('ul.tabs-nav li').hover(
 	 	function(){
@@ -70,9 +70,8 @@ function afficher_onglets_pages($ordre,$onglets){
 	 	}
 	 	,
 	 	function(){}
-	 	);
-	 </script>"
-	 :"");
+	 	);")
+	   :"");
 }
 
 // http://doc.spip.org/@debut_cadre

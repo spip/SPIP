@@ -63,15 +63,12 @@ function inc_iconifier_dist($id_objet, $id,  $script, $visible=false, $flag_modi
 			. $res
 			. fin_cadre_relief(true);
 
-		$js = "";
 		if(_request("exec")!="iconifier") {
-			$js .= "<script src='"._DIR_JAVASCRIPT."async_upload.js' type='text/javascript'></script>\n";
-			$js .= <<<EOF
-      <script type='text/javascript'>
-      $("form.form_upload_icon").async_upload(async_upload_icon);
-      </script>
-EOF;
-		}
+		  $js .= http_script(_DIR_JAVASCRIPT . 'async_upload.js')
+		    . http_script('$("form.form_upload_icon").async_upload(async_upload_icon)');
+
+		} else $js = "";
+		spip_log($js);
 		return ajax_action_greffe("iconifier", $id, $res).$js;
 	}
 	else return '';

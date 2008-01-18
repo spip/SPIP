@@ -96,8 +96,7 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal, $largeur, $ima
 
 	$pxdecal = max(15, ceil($largeur/5)) . 'px';
 
-	$ret = "<script type='text/javascript'>
-// http://doc.spip.org/@bandeauHover
+	$ret = http_script("// http://doc.spip.org/@bandeauHover
 	function bandeauHover(r) {
 		if (!$(r).is('.hovered'))
 			$(r)
@@ -110,8 +109,7 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal, $largeur, $ima
 				function(){\$(this).children('.bandeau_rub').show();},
 				function(){\$(this).children('.bandeau_rub').hide();}
 			);
-		};
-	</script>\n";
+		};");
 
 	$ret .= "<div class='pos_r' style='z-index: "
 	. $zdecal . ";' onmouseover=\"bandeauHover(this);\">"

@@ -71,9 +71,6 @@ function bouton_block_depliable($texte,$deplie,$ids=""){
 	else{
 		$cible = "#$bouton_id + div.bloc_depliable";
 	}
-	$extra_js = ($deplie==='incertain')
-		? "\nif (jQuery('$cible').is(':visible')) $('#$bouton_id').addClass('deplie').removeClass('replie');"
-		: '';
 
 	return "<div "
 	  .($bouton_id?"id='$bouton_id' ":"")
@@ -83,11 +80,9 @@ function bouton_block_depliable($texte,$deplie,$ids=""){
 	  	:" onmouseover=\"jQuery(this).depliant('$cible');\""
 	  )
 	  .">$texte</div>"
-	  . (strlen($extra_js)?"<script type='text/javascript'><!--
-	  jQuery(document).ready(function(){ $extra_js
-	  });
-	  //--></script>":"")
-	  ;
+	  .http_script( ($deplie==='incertain')
+			? "jQuery(document).ready(function(){if (jQuery('$cible').is(':visible')) $('#$bouton_id').addClass('deplie').removeClass('replie');});"
+			: '');
 }
 
 //
@@ -188,18 +183,5 @@ ondblclick='storeCaret(this);'");
 	// Hack pour forcer largeur des formo/forml sous Mozilla >= 1.7
 	// meme principe que le behavior win_width.htc pour MSIE
 $GLOBALS['browser_verifForm'] = (preg_match(",mozilla,i", $GLOBALS["browser_name"]) AND $GLOBALS["browser_rev"] >= 1.7) ?  "verifForm();" : "";
-
-// http://doc.spip.org/@http_script
-function http_script($script, $src='', $noscript='') {
-	return '<script type="text/javascript"'
-		. ($src ? " src=\"$src\"" : '')
-		. ">"
-		. (!$script ? '' :
-		   ("<!--\n" . 
-		    preg_replace(',</([^>]*)>,','<\/\1>', $script) .
-		    "\n//-->"))
-		. "</script>\n"
-		. (!$noscript ? '' : "<noscript>\n\t$noscript\n</noscript>\n");
-}
 
 ?>

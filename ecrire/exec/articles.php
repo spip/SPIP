@@ -213,10 +213,8 @@ function articles_documents($type, $id)
 			$res = "\n<table style='float: $spip_lang_right' width='50%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td style='text-align: $spip_lang_left;'>\n$res</td></tr></table>";
 		}
 
-		$res .= "<script src='"._DIR_JAVASCRIPT."async_upload.js' type='text/javascript'></script>
-<script type='text/javascript'>
-$(\"form.form_upload\").async_upload(async_upload_portfolio_documents);
-</script>";
+		$res .= http_script('',_DIR_JAVASCRIPT."async_upload.js")
+		  . http_script('$("form.form_upload").async_upload(async_upload_portfolio_documents);');
 	}
 
 	$documenter = charger_fonction('documenter', 'inc');

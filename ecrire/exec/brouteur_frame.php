@@ -38,16 +38,12 @@ function exec_brouteur_frame_dist() {
 		. (($c = $GLOBALS['meta']['charset']) ? "; charset=$c" : '')
 		. "' />\n"
 		. envoi_link(_T('info_mon_site_spip'))	
-		. '<script type="text/javascript"><!--
-jQuery(function(){
+		. http_script('jQuery(function(){
 	jQuery("a.iframe").click(function(){
 		window.open(this.href,"iframe"+this.rel);
 		return false;
 	});
-});
-	
-//--></script>
-	'
+});')
 		. "</head>\n")
 	."<body>";
 
@@ -58,14 +54,13 @@ jQuery(function(){
 	}
 
 	if ($effacer_suivant == "oui" && $frame < $nb_col) {
-	  echo '<script type="text/javascript">';
+		$res = '';
 		for ($i = $frame+1; $i < $nb_col; $i++) {
-		  echo "\nparent.iframe$i.location.href='", generer_url_ecrire('brouteur_frame',"frame=$i$profile"), "'";
+			$res .= "\nparent.iframe$i.location.href='" . generer_url_ecrire('brouteur_frame',"frame=$i$profile") . "'";
 		}
-	  echo '</script>';
+		echo http_script($res);
 	}
 	echo "\n<div class='arial2'>";
-
 
 	if ($special == "redac") {
 		$result=sql_select("articles.id_article, articles.id_rubrique, articles.titre, articles.statut", "spip_articles AS articles LEFT JOIN spip_auteurs_articles AS lien USING (id_article)", "articles.statut = 'prepa' AND lien.id_auteur = $connect_id_auteur ", " id_article ", " articles.date DESC");

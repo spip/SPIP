@@ -44,15 +44,13 @@ function exec_articles_tous_args($id_rubrique, $aff_art, $sel_lang, $var_ajaxcha
 		pipeline('exec_init',array('args'=>array('exec'=>'articles_tous'),'data'=>''));
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('titre_page_articles_tous'), "accueil", "tout-site");
-		$flux = "";
-		$flux.='<script type="text/javascript"><!--
-var img_deplierhaut = "'._DIR_IMG_PACK.'noeud_plus.gif";
-var img_deplierbas = "'._DIR_IMG_PACK.'noeud_moins.gif";
-//--></script>';
-		$flux .= '<script src="'._DIR_JAVASCRIPT .'dragdrop_interface.js" type="text/javascript"></script>';
-		$flux .= '<script src="'._DIR_JAVASCRIPT .'articles_tous_edite.js" type="text/javascript"></script>';
-		$flux .= '<script src="'._DIR_JAVASCRIPT .'pause.js" type="text/javascript"></script>';
-		echo $flux;
+
+		echo http_script('var img_deplierhaut = "'._DIR_IMG_PACK.'noeud_plus.gif";
+var img_deplierbas = "'._DIR_IMG_PACK.'noeud_moins.gif";');
+
+		echo http_script('', _DIR_JAVASCRIPT .'dragdrop_interface.js');
+		echo http_script('', _DIR_JAVASCRIPT .'articles_tous_edite.js');
+		echo http_script('', _DIR_JAVASCRIPT .'pause.js');
 	
 		echo debut_gauche('', true);
 		echo formulaire_affiche_tous($aff_art, $aff_statut, $sel_lang);
