@@ -197,7 +197,7 @@ function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 		if ($GLOBALS['var_preview'])
 			array_unshift($boucle->where,"\"(aa.statut IN ('publie','prop') OR bb.statut  IN ('publie','prop') OR rr.statut IN ('publie','prive'))\"");
 		else
-			array_unshift($boucle->where,"\"(aa.statut = 'publie' OR bb.statut = 'publie' OR rr.id_rubrique = 'publie')\"");
+			array_unshift($boucle->where,"\"(aa.statut = 'publie' OR bb.statut = 'publie' OR rr.statut = 'publie')\"");
 	}
 
 
