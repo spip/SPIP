@@ -299,7 +299,7 @@ function test_sql_mode_mysql($server_db){
 	$res = sql_select("version() as v",'','','','','','',$server_db);
 	$row = sql_fetch($res,$server_db);
 	if (version_compare($row['v'],'5.0','>='))
-		return "define('_MYSQL_SQL_MODE_TEXT_NOT_NULL',true);\n";
+		return "define('_MYSQL_SET_SQL_MODE',true);\n";
 	return '';
 }
 ?>

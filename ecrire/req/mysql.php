@@ -24,7 +24,9 @@ function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='', $ldap=
 		$db = 'spip';
 	} else {
 		$ok = spip_mysql_selectdb($db);
-		if (defined('_MYSQL_SQL_MODE_TEXT_NOT_NULL'))
+		if (defined('_MYSQL_SET_SQL_MODE') 
+		  OR defined('_MYSQL_SQL_MODE_TEXT_NOT_NULL') // compatibilite
+		  )
 			mysql_query("set sql_mode=''");
 	}
 #	spip_log("Connexion vers $host, base $db, prefixe $prefixe "
