@@ -118,7 +118,8 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 	}
 
 	$ligne_rappel = ($server_db != 'mysql') ? ''
-	: test_rappel_nom_base_mysql($server_db);
+	: (test_rappel_nom_base_mysql($server_db)
+	  .test_sql_mode_mysql($server_db)	);
 
 	$result_ok = @$fquery("SELECT COUNT(*) FROM spip_meta", $server_db);
 	if (!$result_ok) return "<!--\nvielle = $old rappel= $ligne_rappel\n-->";
@@ -293,5 +294,12 @@ function test_rappel_nom_base_mysql($server_db)
 		return "\$GLOBALS['mysql_rappel_nom_base'] = false; ".
 		"/* echec de test_rappel_nom_base_mysql a l'installation. */\n";
 	}
+}
+function test_sql_mode_mysql($server_db){
+	$res = sql_select("version() as v",'','','','','','',$server_db);
+	$row = sql_fetch($res,$server_db);
+	if (version_compare($row['v'],'5.0','>='))
+		return "define('_MYSQL_SQL_MODE_TEXT_NOT_NULL',true);\n";
+	return '';
 }
 ?>
