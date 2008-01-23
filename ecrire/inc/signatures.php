@@ -114,7 +114,7 @@ function signatures_edit($script, $id, $debut, $row, $type) {
 	$res .= '<br />' . message_de_signature($row);
 		
 	if (!$id) {
-			$r = sql_fetsel("titre, id_rubrique, statut", "spip_articles", "id_article=$id_article");
+		if ($r = sql_fetsel("titre, id_rubrique, statut", "spip_articles", "id_article=$id_article")) {
 			$id_rubrique = $r['id_rubrique'];
 			$publie = ($r['statut'] == 'publie');
 			$titre_a = $r['titre'];
@@ -129,6 +129,7 @@ function signatures_edit($script, $id, $debut, $row, $type) {
 			  . "'>"
 			  . typo($titre_a)
 			  . "</a>";
+		}
 	}
 	$res .= "</td></tr></table>";
 		

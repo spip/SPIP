@@ -669,7 +669,7 @@ function traiter_tableau($bloc) {
 		if ($l == 1) {
 		// - <caption> et summary dans la premiere ligne :
 		//   || caption | summary || (|summary est optionnel)
-			if (preg_match(',^\|\|([^|]*)(\|(.*))?\|$,sS', $ligne, $cap)) {
+			if (preg_match(',^\|\|([^|]*)(\|(.*))?$,sS', $ligne, $cap)) {
 				$l = 0;
 				if ($caption = trim($cap[1]))
 					$debut_table .= "<caption>".$caption."</caption>\n";
