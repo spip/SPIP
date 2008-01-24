@@ -63,16 +63,20 @@ function generer_url_document_dist($id_document, $args='', $ancre='') {
 	include_spip('inc/autoriser');
 	if (!autoriser('voir', 'document', $id_document)) return '';
 
-	$row = sql_fetsel("fichier,distant", "spip_documents", "id_document=".sql_quote($id_document));
+	$r = sql_fetsel("fichier,distant", "spip_documents", "id_document=".sql_quote($id_document));
 
-	if (!$row) return '';
+	if (!$r) return '';
 
-	$f = $row['fichier'];
+	$f = $r['fichier'];
+
+	if ($r['distant'] == 'oui') return $f;
 
 	// Si droit de voir tous les docs, pas seulement celui-ci
 	// il est inutilement couteux de rajouter une protection
-	if (($row['distant'] == 'oui') OR autoriser('voir', 'document'))
-		return get_spip_doc($f);
+
+	$r = autoriser('voir', 'document');
+
+	if ($r AND $r !== 'htaccess') return get_spip_doc($f);
 
 	include_spip('inc/securiser_action');
 
@@ -278,7 +282,6 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	}
 	$ret .= "</div>";
 	if (test_espace_prive()){
-	  spip_log("doc scrip");
 		$ret .= http_script('', _DIR_JAVASCRIPT."async_upload.js")
 		  . http_script('$("form.form_upload").async_upload(async_upload_article_edit)');
 	}
