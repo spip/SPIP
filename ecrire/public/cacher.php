@@ -95,20 +95,26 @@ function cache_valide(&$page, $date) {
 
 	if (!$page) return 1;
 
-	// Cache invalide par la meta 'derniere_modif'
-	if ($GLOBALS['derniere_modif_invalide']
-	AND $date < $GLOBALS['meta']['derniere_modif'])
-		return 1;
+	// #CACHE{n,statique} => on n'invalide pas avec derniere_modif
+	// cf. ecrire/public/balises.php, balise_CACHE_dist()
+	if ($page['entetes']['X-Spip-Statique'] !== 'oui') {
 
-	// Apparition d'un nouvel article post-date ?
-	if ($GLOBALS['meta']['post_dates'] == 'non'
-	AND isset($GLOBALS['meta']['date_prochain_postdate'])
-	AND time() > $GLOBALS['meta']['date_prochain_postdate']) {
-		spip_log('Un article post-date invalide le cache');
-		include_spip('inc/rubriques');
-		ecrire_meta('derniere_modif', time());
-		calculer_prochain_postdate();
-		return 1;
+		// Cache invalide par la meta 'derniere_modif'
+		if ($GLOBALS['derniere_modif_invalide']
+		AND $date < $GLOBALS['meta']['derniere_modif'])
+			return 1;
+
+		// Apparition d'un nouvel article post-date ?
+		if ($GLOBALS['meta']['post_dates'] == 'non'
+		AND isset($GLOBALS['meta']['date_prochain_postdate'])
+		AND time() > $GLOBALS['meta']['date_prochain_postdate']) {
+			spip_log('Un article post-date invalide le cache');
+			include_spip('inc/rubriques');
+			ecrire_meta('derniere_modif', time());
+			calculer_prochain_postdate();
+			return 1;
+		}
+
 	}
 
 	// Sinon comparer l'age du fichier a sa duree de cache

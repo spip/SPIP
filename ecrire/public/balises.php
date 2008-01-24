@@ -947,6 +947,10 @@ function balise_HTTP_HEADER_dist($p) {
 // #CACHE{24*3600}
 // parametre(s) supplementaire(s) :
 // #CACHE{24*3600, cache-client} autorise gestion du IF_MODIFIED_SINCE
+// #CACHE{24*3600, statique} ne respecte pas l'invalidation par modif de la base
+//  (mais s'invalide tout de meme a l'expiration du delai)
+//  par defaut cache-client => statique
+//  cf. ecrire/public/cacher.php
 // http://doc.spip.org/@balise_CACHE_dist
 function balise_CACHE_dist($p) {
 	$duree = valeur_numerique($p->param[0][1][0]->texte);
@@ -965,14 +969,24 @@ function balise_CACHE_dist($p) {
 		.'?php header("Pragma: no-cache"); ?'
 		.'>\'';
 
-	// cas #CACHE{360, cache-client}
-	if (isset($p->param[0][2])) {
-		$second = ($p->param[0][2][0]->texte);
-		if ($second == 'cache-client'
-		AND $duree > 0)
+	// recuperer les parametres suivants
+	$i = 1;
+	while (isset($p->param[0][++$i])) {
+		$pa = ($p->param[0][$i][0]->texte);
+
+		if ($pa == 'cache-client'
+		AND $duree > 0) {
 			$p->code .= '.\'<'.'?php header("Cache-Control: max-age='
 				. $duree
 				. '"); ?'.'>\'';
+			// il semble logique, si on cache-client, de ne pas invalider
+			$pa = 'statique';
+		}
+
+		if ($pa == 'statique'
+		AND $duree > 0)
+			$p->code .= '.\'<'.'?php header("X-Spip-Statique: oui"); ?'.'>\'';
+
 	}
 
 	$p->interdire_scripts = false;
