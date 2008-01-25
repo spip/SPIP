@@ -5,7 +5,7 @@
 #SET{separateur,'|'}
 
 [<a href='[(#ENV{url}|parametre_url{#ENV{debut},''})]##ENV{ancre}' class='lien_pagination' rel='nofollow'>(#GET{premiere}|>{1}|?{'...',''})</a> #GET*{separateur}]
-#SET{i,#ENV{page_courante}|moins{#ENV{pas}}
+#SET{i,#ENV{page_courante}|moins{1}}
 [(#GET{i}|>{0}|?{' ',''})[
 	(#SET{item, #GET{i}|moins{1}|mult{#ENV{pas}} })
 	][(#INCLURE{fond=modeles/paginationitem}{num=#GET{i}}{texte='&lt;'}{separateur=#GET*{separateur}}{url=#ENV{url}|parametre_url{#ENV{debut},#GET{item}}|ancre_url{#ENV{ancre}}}{page_courante=#ENV{page_courante}}{derniere=#ENV{derniere}})]
@@ -62,7 +62,7 @@
 	][(#INCLURE{fond=modeles/paginationitem}{num=#GET{i}}{texte=#GET{i}}{separateur=#GET*{separateur}}{url=#ENV{url}|parametre_url{#ENV{debut},#GET{item}}|ancre_url{#ENV{ancre}}}{page_courante=#ENV{page_courante}}{derniere=#GET{derniere}})]
 ]
 
-#SET{i,#ENV{page_courante}|plus{#ENV{pas}}
+#SET{i,#ENV{page_courante}|plus{1}}
 [(#GET{i}|<{#ENV{nombre_pages}}|?{' ',''})[
 	(#SET{item, #GET{i}|moins{1}|mult{#ENV{pas}} })
 	][#GET*{separateur} (#INCLURE{fond=modeles/paginationitem}{num=#GET{i}}{texte='&gt;'}{separateur=''}{url=#ENV{url}|parametre_url{#ENV{debut},#GET{item}}|ancre_url{#ENV{ancre}}}{page_courante=#ENV{page_courante}}{derniere=#ENV{derniere}})]
