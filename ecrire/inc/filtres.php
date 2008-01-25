@@ -73,13 +73,13 @@ function filtre_text_csv_dist($t)
 	}
 	// si premiere colonne vide, le raccourci doit quand meme produire <th...
 	if ($entete[0] == $sep) $entete = ' ' . $entete;
+	if ($corps[strlen($corps)-1] <> "\n") $corps .= "\n";
 	return propre($caption .
 		"\n|{{" .
 		str_replace($sep,'}}|{{',$entete) .
 		"}}|" .
 		"\n|" .
-		str_replace($sep,'|',str_replace("\n", "|\n|",$corps)) .
-		"|\n");
+		str_replace($sep,'|',str_replace("\n", "|\n|",$corps)));
 }
 
 // Incrustation de HTML, si on est capable de le securiser
