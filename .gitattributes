@@ -283,6 +283,9 @@ dist/prive/infos/breve_fonctions.php -text
 dist/prive/infos/rubrique.html -text
 dist/prive/infos/site.html -text
 dist/prive/infos/site_fonctions.php -text
+dist/prive/transmettre/signatures_article.html -text
+dist/prive/transmettre/statistiques.html -text
+dist/prive/transmettre/statistiques_article.html -text
 dist/puce.gif -text
 dist/puce_prive.gif -text
 dist/puce_prive_rtl.gif -text

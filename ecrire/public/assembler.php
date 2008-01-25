@@ -110,6 +110,18 @@ function public_assembler_dist($fond, $connect='') {
 	return assembler_page ($fond, $connect);
 }
 
+// fonction pour l'envoi de fichier
+function envoyer_page($fond, $contexte)
+{
+	$page = inclure_page($fond, $contexte);
+	if (!is_array($page['entetes'])) {
+		include_spip('inc/headers');
+		redirige_par_entete(generer_url_public('404'));
+	}
+	envoyer_entetes($page['entetes']);
+	echo $page['texte'];
+}
+
 // Envoyer les entetes, en retenant ceux qui sont a usage interne
 // et demarrent par X-Spip-...
 function envoyer_entetes($entetes) {
