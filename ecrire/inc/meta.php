@@ -64,6 +64,7 @@ function lire_metas() {
 	}
 	return $GLOBALS['meta'];
 }
+// http://doc.spip.org/@touch_meta
 function touch_meta($antidate){
 	if (!@touch(_FILE_META, $antidate))
 		ecrire_fichier(_FILE_META, serialize(array_merge(array('touch'=>$antidate),$GLOBALS['meta'])));

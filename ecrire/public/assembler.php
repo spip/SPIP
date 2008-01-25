@@ -111,6 +111,7 @@ function public_assembler_dist($fond, $connect='') {
 }
 
 // fonction pour l'envoi de fichier
+// http://doc.spip.org/@envoyer_page
 function envoyer_page($fond, $contexte)
 {
 	$page = inclure_page($fond, $contexte);
@@ -124,6 +125,7 @@ function envoyer_page($fond, $contexte)
 
 // Envoyer les entetes, en retenant ceux qui sont a usage interne
 // et demarrent par X-Spip-...
+// http://doc.spip.org/@envoyer_entetes
 function envoyer_entetes($entetes) {
 	foreach ($entetes as $k => $v)
 	#	if (strncmp($k, 'X-Spip-', 7))
