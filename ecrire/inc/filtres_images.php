@@ -762,7 +762,8 @@ function process_image_reduire($fonction,$img,$taille,$taille_y,$force,$cherche_
 		$logo = $image['fichier'];
 		$date = $image["date_src"];
 		$preview = image_creer_vignette($image, $taille, $taille_y,$process,$force);
-		if ($preview) {
+
+		if ($preview && $preview['fichier']) {
 			$logo = $preview['fichier'];
 			$destWidth = $preview['width'];
 			$destHeight = $preview['height'];
