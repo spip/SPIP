@@ -471,7 +471,11 @@ function init_http($get, $url, $refuse_gz=false, $uri_referer = '') {
 	$host = $t['host'];
 	if ($t['scheme'] == 'http') {
 		$scheme = 'http'; $scheme_fsock='';
-	} else {
+	} elseif ($t['scheme'] == 'https') {
+		$scheme = 'ssl'; $scheme_fsock='ssl://';
+		if (!isset($t['port']) || !($port = $t['port'])) $t['port'] = 443;
+	} 
+	else {
 		$scheme = $t['scheme']; $scheme_fsock=$scheme.'://';
 	}
 	if (!isset($t['port']) || !($port = $t['port'])) $port = 80;
