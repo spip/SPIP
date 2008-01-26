@@ -1310,7 +1310,7 @@ class sqlite_traiter_requete{
 		
 		// Correction des noms de tables FROM
 		// mettre les bons noms de table dans from, update, insert, replace...
-		if (preg_match('/\s(SET|VALUES|WHERE)\s/i', $this->query, $regs)) {
+		if (preg_match('/\s(SET|VALUES|WHERE|DATABASE)\s/i', $this->query, $regs)) {
 			$suite = strstr($this->query, $regs[0]);
 			$this->query = substr($this->query, 0, -strlen($suite));
 		} else $suite ='';
