@@ -66,7 +66,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 			
 			
 		else
-			return '';
+			return array('host' => '');
 	} else
 	for ($cnt = 0; $cnt < sizeof($arr_engines) && !$found; $cnt++)
 	{
