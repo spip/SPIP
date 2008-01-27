@@ -31,6 +31,8 @@ label {}
 .formo { width: 100%; display: block; background-color: #FFF; background-position: center bottom; margin-bottom: 1em; padding: 3px; border: 1px solid #333; behavior: url(win_width.htc); font-size: 1em; font-family: Verdana, Geneva, Sans, sans-serif; }
 
 p.resultat { background-color: #fcaf3e; padding: 0.2em 0.1em; border: 1px solid  #f57900; text-align: center; color: #FFF; font-weight: bold; }
+p.resultat.ok {background-color:#73d216;border-color:#C2EF95;}
+p.resultat.echec {background-color:#d60c0c;border-color:#f57900;}
 
 #etapes { display: block; position: absolute; top: 10px; left: 10px; }
 #etapes span { margin-top: -0.5em; display: block; padding: 12px 14px; margin-bottom: 5px; }

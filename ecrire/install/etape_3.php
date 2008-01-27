@@ -238,7 +238,7 @@ function install_etape_3_dist()
 		$res = install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db, $sel_db, $chmod_db);
 
 		if ($res)
-			$res .= "<p class='resultat'><b>"._T('avis_operation_echec')."</b></p>"._T('texte_operation_echec');
+			$res .= "<p class='resultat echec'><b>"._T('avis_operation_echec')."</b></p>"._T('texte_operation_echec');
 	
 	} else { 
 		$res = '';
@@ -260,7 +260,7 @@ function install_etape_3_dist()
 		$hidden = predef_ou_cache($adresse_db, $login_db, $pass_db, $server_db)
 		  . (defined('_INSTALL_NAME_DB') ? ''
 		     : "\n<input type='hidden' name='sel_db' value='$sel_db' />");
-		$res =  "<p class='resultat'><b>"
+		$res =  "<p class='resultat ok'><b>"
 		. _T('info_base_installee')
 		. "</b></p>"
 		. install_premier_auteur(_request('email'),
