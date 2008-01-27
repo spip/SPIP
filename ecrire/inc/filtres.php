@@ -87,16 +87,18 @@ function filtre_text_csv_dist($t)
 // http://doc.spip.org/@filtre_text_html_dist
 function filtre_text_html_dist($t)
 {
-	if (!preg_match(',<head>(.*?)</head>.*<body[^>]*>(.*)</body>,is', $t, $r))
+	if (!preg_match(',^(.*?)<body[^>]*>(.*)</body>,is', $t, $r))
 		return filtre_text_txt_dist($t);
 
 	list(,$h,$t) = $r;
+
 	$style = '';
 	// recuperer les styles internes
-	if (preg_match_all(',<style>([^>]*)</style>,is', $h, $r, PREG_PATTERN_ORDER))
+	if (preg_match_all(',<style>(.*?)</style>,is', $h, $r, PREG_PATTERN_ORDER))
 		$style =  join("\n",$r[1]);
 	// ... et externes
-	if (preg_match_all(',<link[^>]*text/css[^>]*>,is', $h, $r, PREG_PATTERN_ORDER))
+
+	if (preg_match_all(',<link[^>]+type=.text/css[^>]*>,is', $h, $r, PREG_PATTERN_ORDER))
 		foreach($r[0] as $l) {
 			preg_match("/href='([^']*)'/", str_replace('"',"'",$l), $m);
 			$style .= "\n/* $l */\n"
