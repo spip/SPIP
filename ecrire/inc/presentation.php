@@ -106,7 +106,7 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "", $id="", $
 	."'$style_cadre>";
 
 	if ($spip_display != 1 AND $spip_display != 4 AND strlen($icone) > 1) {
-		$ret .= "\n<div style='position: absolute; top: -16px; $spip_lang_left: 10px;'>";
+		$ret .= "\n<div style='position: absolute; top: -16px; $spip_lang_left: 10px;z-index:100;'>";
 		if ($fonction) {
 			$ret .= "\n<div " . http_style_background($icone, "no-repeat; padding: 0px; margin: 0px") . ">"
 			. http_img_pack($fonction, "", "")
