@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-// http://doc.spip.org/@meme_rubrique
+// http://doc.spip.org/@inc_meme_rubrique_dist
 function inc_meme_rubrique_dist($id_rubrique, $id, $type, $order='date', $limit=NULL, $ajax=false)
 {
 	global $spip_lang_right, $spip_lang_left;
