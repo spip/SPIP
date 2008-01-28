@@ -288,29 +288,53 @@ function calculer_hierarchie($id_rubrique, $exclure_feuille = false) {
 
 // http://doc.spip.org/@calcul_exposer
 function calcul_exposer ($id, $prim, $reference, $parent, $type) {
-	static $exposer;
+	static $exposer = array();
 	static $ref_precedente =-1;
 
 	// Que faut-il exposer ? Tous les elements de $reference
 	// ainsi que leur hierarchie ; on ne fait donc ce calcul
 	// qu'une fois (par squelette) et on conserve le resultat
 	// en static.
-	if ($reference<>$ref_precedente) {
-		$ref_precedente = $reference;
+	if (!isset($exposer[$m=md5(serialize($reference))][$prim])) {
 		$principal = $reference[$type];
+		if (!$principal) { // regarder si un enfant est dans le contexte, auquel cas il expose peut etre le parent courant
+			$enfants = array('id_rubrique'=>array('id_article'),'id_groupe'=>array('id_mot'));
+			if (isset($enfants[$type]))
+				foreach($enfants[$type] as $t)
+					if (isset($reference[$t])) {
+						$type = $t;
+						$principal = $reference[$type];
+						$parent=0;
+						continue;
+					}
+		}
+		$exposer[$m][$type] = array();
 		if ($principal) {
-			$exposer= array($type => array($principal => true));
-			if ($type == 'id_mot')
-				$exposer['id_groupe'][$parent] = true;
+			$exposer[$m][$type][$principal] = true;
+			if ($type == 'id_mot'){
+				if (!$parent) {
+					$parent = sql_fetsel('id_groupe','spip_mots',"id_mot=" . $principal);
+					$parent = $parent['id_groupe'];
+				}
+				if ($parent)
+					$exposer[$m]['id_groupe'][$parent] = true;
+			}
 			else if ($type != 'id_groupe') {
-			  if (!$parent) $parent = $principal;
+			  if (!$parent) {
+			  	if ($type == 'id_rubrique')
+			  		$parent = $principal;
+			  	if ($type == 'id_article') {
+						$parent = sql_fetsel('id_rubrique','spip_articles',"id_article=" . $principal);
+						$parent = $parent['id_rubrique'];
+			  	}
+			  }
 			  $a = split(',',calculer_hierarchie($parent));
-			  foreach($a as $n) $exposer['id_rubrique'][$n] = true;
+			  foreach($a as $n) $exposer[$m]['id_rubrique'][$n] = true;
 			}
 		}
 	}
 	// And the winner is...
-	return isset($exposer[$prim]) ? isset($exposer[$prim][$id]) : '';
+	return isset($exposer[$m][$prim]) ? isset($exposer[$m][$prim][$id]) : '';
 }
 
 // http://doc.spip.org/@lister_objets_avec_logos
