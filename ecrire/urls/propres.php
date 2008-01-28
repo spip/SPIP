@@ -350,12 +350,12 @@ function urls_propres_dist(&$fond, $url) {
 	// Migration depuis anciennes URLs ?
 	if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 		if (preg_match(
-		',(^|/)(article|breve|rubrique|mot|auteur|site)(\.php3?|[0-9]+\.html)'
+		',(^|/)(article|breve|rubrique|mot|auteur|site)(\.php3?|[0-9]+(\.html)?)'
 		.'([?&].*)?$,', $url, $regs)
 		) {
-			$type = $regs[3];
+			$type = $regs[2];
 			$id_table_objet = id_table_objet($type);
-			$id_objet = intval($GLOBALS[$id_table_objet]);
+			$id_objet = intval(_request($id_table_objet));
 		}
 
 		/* Compatibilite urls-page */
@@ -376,9 +376,6 @@ function urls_propres_dist(&$fond, $url) {
 			// recuperer les arguments supplementaires (&debut_xxx=...)
 			$reste = preg_replace('/^&/','?',
 				preg_replace("/[?&]$id_table_objet=$id_objet/",'',$regs[5]));
-			$reste .= preg_replace('/&/','?',
-				preg_replace('/[?&]'.$type.'[=]?'.$id_objet.'/','',
-				substr($url, strpos($url,'?'))));
 			redirige_par_entete("$url_propre$reste");
 		}
 	}
