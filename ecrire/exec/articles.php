@@ -96,6 +96,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	$referencer_traduction = charger_fonction('referencer_traduction', 'inc');
 	$discuter = charger_fonction('discuter', 'inc');
 
+	$meme_rubrique = charger_fonction('meme_rubrique', 'inc');
 	$iconifier = charger_fonction('iconifier', 'inc');
 	$icone = $iconifier('id_article', $id_article,'articles', false, $flag_editable);
 
@@ -115,7 +116,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	  . pipeline('affiche_gauche',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
 	
 	$extra = creer_colonne_droite('', true)
-		. meme_rubrique($id_rubrique, $id_article, 'article')
+		. $meme_rubrique($id_rubrique, $id_article, 'article')
 	  . pipeline('affiche_droite',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''))
 	  . debut_droite('',true);
 

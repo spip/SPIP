@@ -794,8 +794,11 @@ $GLOBALS[\'all_langs\'] = @$GLOBALS[\'meta\'][\'langues_proposees\'];
 	$boucle->id_boucle); 
 	return false;
   }
-'
-
+',
+'meme_rubrique' => '($id_rubrique, $id, $type, $order="date", $limit=NULL, $ajax=false) {
+	$meme_rubrique = charger_fonction("meme_rubrique", "inc");
+	return $meme_rubrique($id_rubrique, $id, $type, $order, $limit, $ajax);
+}'
 ) as $f => $def) {
 	if (!function_exists($f)) {
 		eval("function $f$def");

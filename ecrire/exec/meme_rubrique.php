@@ -26,9 +26,9 @@ function exec_meme_rubrique_args($id, $type, $order)
 		include_spip('inc/minipres');
                 echo minipres();
         } else {
-		include_spip('inc/presentation');
+		$meme_rubrique = charger_fonction('meme_rubrique', 'inc');
 	// on connait pas le vrai 2e arg mais c'est pas dramatique
-		$res = meme_rubrique($id, 0, $type, $order, NULL, true);
+		$res = $meme_rubrique($id, 0, $type, $order, NULL, true);
 		ajax_retour($res);
 	}
 }

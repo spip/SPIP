@@ -65,7 +65,7 @@ function exec_breves_voir_args($id_breve, $cherche_mot, $select_groupe)
 	$iconifier = charger_fonction('iconifier', 'inc');
 
 	$dater = charger_fonction('dater', 'inc');
-
+	$meme_rubrique = charger_fonction('meme_rubrique', 'inc');
 	$editer_mot = charger_fonction('editer_mot', 'inc');
 	if ($champs_extra AND $extra)
 		include_spip('inc/extra');
@@ -102,7 +102,7 @@ function exec_breves_voir_args($id_breve, $cherche_mot, $select_groupe)
 		'data'=>''
 		)
 	);
-	echo meme_rubrique($id_rubrique, $id_breve, 'breve', 'date_heure');
+	echo $meme_rubrique($id_rubrique, $id_breve, 'breve', 'date_heure');
 
 	/* raccourcis ont disparu */
 	echo bloc_des_raccourcis(icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui&id_rubrique=$id_rubrique"), "breve-24.gif","creer.gif", 0));
