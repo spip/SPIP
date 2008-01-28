@@ -1767,7 +1767,7 @@ function filtre_find($array, $val) {
 //
 
 // http://doc.spip.org/@filtre_pagination_dist
-function filtre_pagination_dist($total, $nom, $position, $pas, $liste = true, $modele='', $connect='') {
+function filtre_pagination_dist($total, $nom, $position, $pas, $liste = true, $modele='', $connect='', $env=array()) {
 	static $ancres = array();
 	$bloc_ancre = "";
 	
@@ -1798,6 +1798,8 @@ function filtre_pagination_dist($total, $nom, $position, $pas, $liste = true, $m
 		'ancre' => $ancre,
 		'bloc_ancre' => $bloc_ancre
 	);
+	if (is_array($env))
+		$pagination = array_merge($env,$pagination);
 
 	// Pas de pagination
 	if ($pagination['nombre_pages']<=1)
