@@ -408,6 +408,7 @@ function phraser_criteres($params, &$result) {
 			  $not = "";
 			} else {
 			  preg_match("/^([!]?)([a-zA-Z][a-zA-Z0-9]*)[[:space:]]*(.*)$/ms", $param, $m);
+
 			  $op = $m[2];
 			  $not = $m[1];
 			  if ($m[3]) $v[1][0]->texte = $m[3]; else array_shift($v[1]);
@@ -450,7 +451,7 @@ function phraser_criteres($params, &$result) {
 				$result->modificateur['tout'] = true;
 			elseif (($type == 'hierarchie') && ($param == 'id_rubrique'))
 				{;}
-			else { 
+			else {
 			  // pas d'emplacement statique, faut un dynamique
 			  /// mais il y a 2 cas qui ont les 2 !
 			  if (($param == 'unique') || (preg_match(',^!?doublons *,', $param)))
@@ -465,14 +466,15 @@ function phraser_criteres($params, &$result) {
 			      $result->hash = true;
 			  if (preg_match(',^ *([0-9-]+) *(/) *(.+) *$,', $param, $m)) {
 			    $crit = phraser_critere_infixe($m[1], $m[3],$v, '/', '', '');
-			  } elseif (preg_match(',^(' . CHAMP_SQL_PLUS_FONC . 
+			  } elseif (preg_match(',^([!]?)(' . CHAMP_SQL_PLUS_FONC . 
 					 ')[[:space:]]*(\??)(!?)(<=?|>=?|==?|\b(?:IN|LIKE)\b)(.*)$,is', $param, $m)) {
-			    $a2 = trim($m[7]);
+			    $a2 = trim($m[8]);
 			    if ($a2 AND ($a2[0]=="'" OR $a2[0]=='"') AND ($a2[0]==substr($a2,-1)))
 			      $a2 = substr($a2,1,-1);
-			    $crit = phraser_critere_infixe($m[1], $a2, $v,
-							   (($m[1] == 'lang_select') ? $m[1] : $m[6]),
-							   $m[5], $m[4]);
+			    $crit = phraser_critere_infixe($m[2], $a2, $v,
+							   (($m[2] == 'lang_select') ? $m[2] : $m[7]),
+							   $m[6], $m[5]);
+					$crit->not = $m[1];
 			  } elseif (preg_match("/^([!]?)\s*(" .
 					       CHAMP_SQL_PLUS_FONC .
 					       ")\s*(\??)(.*)$/is", $param, $m)) {
