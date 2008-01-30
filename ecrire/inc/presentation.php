@@ -136,7 +136,7 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "", $id="", $
 // http://doc.spip.org/@fin_cadre
 function fin_cadre($style='') {
 
-	$ret = "</div><div class='nettoyeur'></div>".
+	$ret = "<div class='nettoyeur'></div></div>".
 	"</div>\n";
 
 	/*if ($style != "forum" AND $style != "thread-forum")
