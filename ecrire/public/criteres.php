@@ -745,7 +745,13 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	else if ($date = tester_param_date($boucle->type_requete, $col)) {
 		list($col, $table) =
 		calculer_critere_infixe_date($idb, $boucles, $date);
-	} else {
+	}
+	else if (preg_match('/^(.*)\.(.*)$/', $col, $r)) {
+		  list(,$table, $col) = $r;
+		  $col_alias = $col;
+		  $table = calculer_critere_externe_init($boucle, array($table), $col, $desc, ($crit->cond OR $op !='='), true);
+	}
+	else {
 		if (@!array_key_exists($col, $desc['field'])) {
 	  	$calculer_critere_externe = 'calculer_critere_externe_init';
 			// gestion par les plugins des jointures tordues pas automatiques mais necessaires
@@ -880,6 +886,7 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit)
 	if (count($crit->param) == 0)
 	  { $op = '=';
 	    $col = $val = $crit->op;
+	    if (preg_match('/^(.*)\.(.*)$/', $col, $r)) $val = $r[2];
 	    // Cas special {lang} : aller chercher $GLOBALS['spip_lang']
 	    if ($val == 'lang')
 	      $val = array(kwote('$GLOBALS[\'spip_lang\']'));
