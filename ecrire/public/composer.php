@@ -485,6 +485,7 @@ function lang_parametres_forum($qs, $lang) {
 }
 
 
+// http://doc.spip.org/@match_self
 function match_self($w){
 	if (is_string($w)) return false;
 	if (is_array($w)) {
@@ -494,6 +495,7 @@ function match_self($w){
 	}
 	return false;
 }
+// http://doc.spip.org/@remplace_sous_requete
 function remplace_sous_requete($w,$sousrequete){
 	if (is_array($w)) {
 		if (reset($w)=="SELF") return $sousrequete;
@@ -502,6 +504,7 @@ function remplace_sous_requete($w,$sousrequete){
 	}
 	return $w;
 }
+// http://doc.spip.org/@trouver_sous_requetes
 function trouver_sous_requetes($where){
 	$where_simples = array();
 	$where_sous = array();
