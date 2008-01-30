@@ -96,6 +96,7 @@ class Boucle {
 class Critere {
 	var $op;
 	var $not;
+	var $exclus;
 	var $param = array();
 	var $ligne = 0;
 }

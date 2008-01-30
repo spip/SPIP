@@ -417,6 +417,7 @@ function phraser_criteres($params, &$result) {
 			$crit = new Critere;
 			$crit->op = $op;
 			$crit->not = $not;
+      $crit->exclus ="";
 			$crit->param = $v;
 			$args[] = $crit;
 		  } else {
@@ -429,6 +430,7 @@ function phraser_criteres($params, &$result) {
 		      $crit = new Critere;
 		      $crit->op = '/';
 		      $crit->not = "";
+		      $crit->exclus ="";
 		      $crit->param = array(array($v[1][0]),array($v[1][2]));
 		      $args[] = $crit;
 		    }
@@ -474,7 +476,7 @@ function phraser_criteres($params, &$result) {
 			    $crit = phraser_critere_infixe($m[2], $a2, $v,
 							   (($m[2] == 'lang_select') ? $m[2] : $m[7]),
 							   $m[6], $m[5]);
-					$crit->not = $m[1];
+					$crit->exclus = $m[1];
 			  } elseif (preg_match("/^([!]?)\s*(" .
 					       CHAMP_SQL_PLUS_FONC .
 					       ")\s*(\??)(.*)$/is", $param, $m)) {
