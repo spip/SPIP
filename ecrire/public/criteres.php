@@ -174,9 +174,8 @@ function critere_recherche_dist($idb, &$boucles, $crit) {
 	list($rech_select, $rech_where) = $prepare_recherche('.$quoi.', "'.$boucle->id_table.'", "'.$crit->cond.'","' . $boucle->sql_serveur . '");
 	';
 
-	// Sauf si le critere est conditionnel {recherche ?}
-	if (!$crit->cond)
-		$boucle->hash .= '
+	// le critere est conditionnel {recherche ?} est traite dans prepare_recherche sur le $rech_where
+	$boucle->hash .= '
 	if ($rech_where) ';
 
 	$t = $boucle->id_table . '.' . $boucle->primary;
