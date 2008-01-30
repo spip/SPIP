@@ -108,12 +108,15 @@ function maj_while($installee, $cible)
 			serie_alter($installee, $GLOBALS['maj'][$installee]);
 			$n = time() - $time;
 			spip_log("MAJ vers $installee en $n secondes",'maj');
+			ecrire_meta('version_installee', $installee,'non');
 		} // rien pour SQL
-		ecrire_meta('version_installee', $installee,'non');
 		if ($n >= _UPGRADE_TIME_OUT) {
 			redirige_par_entete(generer_url_ecrire('upgrade', "reinstall=$installee", true));
 		}
 	}
+	// indispensable pour les chgt de versions qui n'écrivent pas en base
+	// tant pis pour la redondance eventuelle avec ci-dessus
+	ecrire_meta('version_installee', $installee,'non');
 }
 
 // Appliquer une serie de chgt qui risquent de partir en timeout
