@@ -62,7 +62,7 @@ function configuration_contenu_forums_dist(){
 
 	. "</table>";
 
-	$res = debut_cadre_trait_couleur("forum-24.gif", true, "", _T('titre_forum'))
+	$res = debut_cadre_trait_couleur("forum-public-24.gif", true, "", _T('titre_forum'))
 	. ajax_action_post('configurer', 'contenu_forums', 'configuration','',$res)
 	. fin_cadre_trait_couleur(true);
 
