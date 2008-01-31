@@ -155,6 +155,7 @@ function export_objets($table, $etape, $cpt, $dir, $archive, $gz, $total, $les_r
 	global $tables_principales;
 
 	$filetable = $dir . $archive . '.part_' . sprintf('%03d',$etape);
+	$temp = $filetable . '.temp' . _EXTENSION_PARTIES;
 	$prim = isset($tables_principales[$table])
 	  ? $tables_principales[$table]['key']["PRIMARY KEY"]
 	  : '';
@@ -162,33 +163,33 @@ function export_objets($table, $etape, $cpt, $dir, $archive, $gz, $total, $les_r
 
 	while (1){ // on ne connait pas le nb de paquets d'avance
 
-		$string = build_while($debut, $table, $prim, $les_rubriques, $les_meres);
 		$cpt++;
-		$debut +=  _EXPORT_TRANCHES_LIMITE;
-		$status_dump = "$gz::$archive::$rub::$etape::$cpt";
-
+		$string = build_while($debut, $table, $prim, $les_rubriques, $les_meres);
 		// attention $string vide ne suffit pas a sortir
 		// car les sauvegardes partielles peuvent parcourir
 		// une table dont la portion qui les concerne sera vide..
 		if ($string) { 
 		// on ecrit dans un fichier generique
 		// puis on le renomme pour avoir une operation atomique 
-			ecrire_fichier ($temp = $filetable . '.temp' . _EXTENSION_PARTIES, $string);
+			ecrire_fichier ($temp, $string);
+			$f = $filetable . sprintf('_%04d',$cpt) . _EXTENSION_PARTIES;
 	// le fichier destination peut deja exister
 	// si on sort d'un timeout entre le rename et le ecrire_meta
-			if (file_exists($f = $filetable . sprintf('_%04d',$cpt) . _EXTENSION_PARTIES)) spip_unlink($f);
+			if (file_exists($f)) spip_unlink($f);
 			rename($temp, $f);
 		}
 		// on se contente d'une ecriture en base pour aller plus vite
 		// a la relecture on en profitera pour mettre le cache a jour
-		ecrire_meta($meta, $status_dump,'non');
+
+		ecrire_meta($meta, $s = "$gz::$archive::$rub::$etape::$cpt",'non');
+		$debut +=  _EXPORT_TRANCHES_LIMITE;
 		if ($debut >= $total) {break;}
 		/* pour tester la robustesse de la reprise sur interruption
 		decommenter ce qui suit,  mais voir aussi echo_flush
 		if ($cpt && 1) {
-		  spip_log("force interrup $status_dump");
+		  spip_log("force interrup $s");
 		  include_spip('inc/headers');
-		  redirige_par_entete("./?exec=export_all&rub=$rub&x=$status_dump");
+		  redirige_par_entete("./?exec=export_all&rub=$rub&x=$s");
 		  } */
 		echo_flush(" $debut");
 	}
@@ -218,7 +219,10 @@ function echo_flush($texte)
 function build_while($debut, $table, $prim, $les_rubriques, $les_meres) {
 	global  $chercher_logo ;
 
-	$result = sql_select('*', $table, '', '', '', "$debut," . _EXPORT_TRANCHES_LIMITE);
+	// sauver par ordre croissant les tables avec cles primaires simples
+	// sinon les sequences PG seront pertubees a la restauration
+	// (a ameliorer)
+	$result = sql_select('*', $table, '', '', $prim, "$debut," . _EXPORT_TRANCHES_LIMITE);
 
 	$string = '';
 	while ($row = sql_fetch($result)) {
