@@ -42,6 +42,15 @@ $spip_visites_articles = array(
 $spip_visites_articles_key = array(
 		"PRIMARY KEY"	=> "date, id_article");
 
+$spip_recherches = array(
+ 		"recherche"	=> "BIGINT UNSIGNED NOT NULL",
+		"id"	=> "INT UNSIGNED NOT NULL",
+ 		"points"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
+		"maj"	=> "TIMESTAMP" );
+
+$spip_recherches_key = array(
+ 		"PRIMARY KEY"	=> "recherche,id");
+
 $spip_referers = array(
 		"referer_md5"	=> "bigint UNSIGNED NOT NULL",
 		"date"		=> "DATE NOT NULL",
@@ -272,6 +281,9 @@ $tables_auxiliaires['spip_mots_documents'] = array(
 $tables_auxiliaires['spip_meta'] = array(
 	'field' => &$spip_meta,
 	'key' => &$spip_meta_key);
+$tables_auxiliaires['spip_recherches'] = array(
+	'field' => &$spip_recherches,
+	'key' => &$spip_recherches_key);
 $tables_auxiliaires['spip_versions'] = array(
 	'field' => &$spip_versions,
 	'key' => &$spip_versions_key);
