@@ -892,8 +892,8 @@ function debut_javascript()
 			unicode_to_javascript(addslashes(html2unicode(_T("confirm_changer_statut")))) . 
 			"';\n") .
 		//plugin needed to fix the select showing through the submenus o IE6  
-    (($browser_name == "MSIE" && $browser_version <= 6) ? http_script('',_DIR_JAVASCRIPT . 'bgiframe.js'):'' ) .
-    http_script('',_DIR_JAVASCRIPT . 'presentation.js');
+    (($browser_name == "MSIE" && $browser_version <= 6) ? http_script('', 'bgiframe.js'):'' ) .
+    http_script('', 'presentation.js');
 }
 
 // Fonctions onglets

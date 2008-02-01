@@ -514,6 +514,7 @@ function http_script($script, $src='', $noscript='') {
 
 	if ($src && !isset($done[$src])){
 		$done[$src] = true;
+		$src = find_in_path($src, _DIR_JAVASCRIPT);
 		$src = " src='$src'";
 	}
 	else $src = '';

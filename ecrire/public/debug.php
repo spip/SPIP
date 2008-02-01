@@ -606,8 +606,7 @@ function debug_debut($titre)
 	  "<meta http-equiv='Content-Type' content='text/html" .
 	  (($c = $GLOBALS['meta']['charset']) ? "; charset=$c" : '') .
 	  "' />\n" .
-	  "\n<script src=\"".generer_url_public('jquery.js')
-	  . "\" type=\"text/javascript\"></script>\n" .
+	  _FILE_JQUERY .
 	  "<link rel='stylesheet' href='".url_absolue(find_in_path('spip_admin.css'))
 	  . "' type='text/css' />" .
 	  "</head>\n<body style='margin:0 10px;'>" .

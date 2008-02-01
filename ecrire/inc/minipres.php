@@ -42,9 +42,10 @@ function install_debut_html($titre = 'AUTO', $onLoad = '') {
 		"<title>".
 		textebrut($titre).
 		"</title>
-		<link rel='stylesheet' href='".find_in_path('minipres.css')."' type='text/css' media='all' />
-		<script type='text/javascript' src='" . _DIR_JAVASCRIPT . "spip_barre.js'></script>\n". // cet appel permet d'assurer un copier-coller du nom du repertoire a creer dans tmp (esj)
-#	"<script type='text/javascript' src='" . _DIR_JAVASCRIPT . "jquery.js'></script>".
+		<link rel='stylesheet' href='".find_in_path('minipres.css').
+		"' type='text/css' media='all' />\n" .
+ // cet appel permet d'assurer un copier-coller du nom du repertoire a creer dans tmp (esj)
+		http_script('',  "spip_barre.js") .
 "</head>
 <body".$onLoad.">
 	<div id='minipres'>

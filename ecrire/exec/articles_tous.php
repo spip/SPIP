@@ -48,9 +48,9 @@ function exec_articles_tous_args($id_rubrique, $aff_art, $sel_lang, $var_ajaxcha
 		echo http_script('var img_deplierhaut = "'._DIR_IMG_PACK.'noeud_plus.gif";
 var img_deplierbas = "'._DIR_IMG_PACK.'noeud_moins.gif";');
 
-		echo http_script('', _DIR_JAVASCRIPT .'dragdrop_interface.js');
-		echo http_script('', _DIR_JAVASCRIPT .'articles_tous_edite.js');
-		echo http_script('', _DIR_JAVASCRIPT .'pause.js');
+		echo http_script('', 'dragdrop_interface.js');
+		echo http_script('', 'articles_tous_edite.js');
+		echo http_script('', 'pause.js');
 	
 		echo debut_gauche('', true);
 		echo formulaire_affiche_tous($aff_art, $aff_statut, $sel_lang);

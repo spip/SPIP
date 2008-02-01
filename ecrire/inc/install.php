@@ -235,7 +235,7 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 			"</b></p><p>"._T('avis_connexion_echec_2')."</p><p style='font-size: small;'>"._T('avis_connexion_echec_3')."</p>")
 			:"")
 			
-	. '<script language="javascript" src=' . find_in_path('javascript/jquery.js') . '></script>'
+	. http_script('',  'jquery.js')
 	. '<script language="javascript"><!--
 		$(document).ready(function() {
 			$("input[@type=hidden][@name=server_db]").each(function(){

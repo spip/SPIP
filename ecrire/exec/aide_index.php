@@ -450,7 +450,7 @@ function exec_aide_index_dist()
 		header("Content-Type: text/html; charset=utf-8");
 		echo _DOCTYPE_AIDE, html_lang_attributes();
 		echo "<head><title>", _T('info_aide_en_ligne'),	"</title>\n";
-		echo http_script("", _DIR_JAVASCRIPT.'jquery.js');
+		echo _FILE_JQUERY;
 
 		if (_request('frame') == 'menu'){
 			help_menu(_request('aide'), $html, $lang);
