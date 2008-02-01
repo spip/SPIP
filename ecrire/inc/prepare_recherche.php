@@ -33,15 +33,15 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 
 
 	$rechercher = false;
-	// Premier passage : chercher eventuel un cache des donnees sur le disque
+
 	if (!isset($cache[$recherche][$table])){
-		$hash = md5($recherche . $table);
-		$res = sql_select('NOW()-maj AS fraicheur','spip_recherches',"recherche=0x$hash OR HEX(recherche)='$hash'",'','fraicheur DESC','0,1','',$serveur);
+		$hash = substr(md5($recherche . $table),0,16);
+		$res = sql_select('NOW()-maj AS fraicheur','spip_recherches',"recherche='$hash'",'','fraicheur DESC','0,1','',$serveur);
 		if ((!$row = sql_fetch($res))
 		 OR ($row['fraicheur']>_DELAI_CACHE_RECHERCHES)){
 		 	$rechercher = true;
 		}
-		$cache[$recherche][$table] = array("points","(recherche=0x$hash OR HEX(recherche)='$hash')");
+		$cache[$recherche][$table] = array("points","(recherche='$hash')");
 	}
 
 	// si on n'a pas encore traite les donnees dans une boucle precedente
@@ -72,13 +72,13 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 		// supprimer les anciens resultats de cette recherche et les resultats trop vieux avec une marge
 		// hash=0x$hash OR HEX(hash)='$hash' permet d'avoir une requete qui marche qu'on soit en mysql <4.1 ou >4.1
 		// il y a des versions ou install de mysql ou il faut l'un ou l'autre selon le hash ... !
-		sql_delete('spip_recherches','(maj<NOW()-'.(_DELAI_CACHE_RECHERCHES+100).") OR (recherche=0x$hash OR HEX(recherche)='$hash')",$serveur);
+		sql_delete('spip_recherches','(maj<NOW()-'.(_DELAI_CACHE_RECHERCHES+100).") OR (recherche='$hash')",$serveur);
 
 		// inserer les resultats dans la table de cache des recherches
 		if (count($points)){
 			$values = "";
 			foreach ($points as $id => $p){
-				$values.= ",(0x$hash,".intval($id).",".intval($p['score']).")";
+				$values.= ",('$hash',".intval($id).",".intval($p['score']).")";
 				if (strlen($values)>16000) { // eviter les debordements de pile sur tres gros resultats
 					sql_insert('spip_recherches',"(recherche,id,points)",substr($values,1),array(),$serveur);
 					$values = "";
