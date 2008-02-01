@@ -12,42 +12,60 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/filtres');
-include_spip('inc/acces');
+if (!defined('_LOGIN_TROP_COURT')) define('_LOGIN_TROP_COURT', 4);
 
 // http://doc.spip.org/@action_editer_auteur_dist
 function action_editer_auteur_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
-
-	if (!preg_match(",^(\d+)$,", $arg, $r)) {
-		$r = "action_editer_auteur_dist $arg pas compris";
-		spip_log($r);
+	$redirect = _request('redirect');
+	
+	if (!preg_match(",^\d+$,", $arg, $r)) {
+		spip_log("action_editer_auteur_dist $arg pas compris");
 	} else {
-		$url = action_legender_auteur_post($r);
-		redirige_par_entete($url);
+		list($id_auteur, $echec) = action_legender_auteur_post(
+			_request('statut'),
+			_request('nom'),
+			_request('email'),
+			_request('bio'),
+			_request('nom_site_auteur'),
+			_request('url_site'),
+			_request('new_login'),
+			_request('new_pass'),
+			_request('new_pass2'),
+			_request('perso_activer_imessage'),
+			_request('pgp'),
+			_request('lier_id_article'),
+			intval(_request('id_parent')),
+			_request('restreintes'),
+			$r[0]);
+
+			if ($echec) {
+		// revenir au formulaire de saisie
+				$ret = !$redirect
+				? '' 
+				: ('&redirect=' . $redirect);
+				spip_log("echec editeur auteur: " . join(' ',$echec));
+				$echec = '&echec=' . join('@@@', $echec);
+				$redirect = generer_url_ecrire('auteur_infos',"id_auteur=$id_auteur$echec$ret",'&');
+			} else {
+			// modif: renvoyer le resultat ou a nouveau le formulaire si erreur
+				if (!$redirect)
+					$redirect = generer_url_ecrire("auteur_infos", "id_auteur=$id_auteur", '&', true);
+				else $redirect = rawurldecode($redirect);
+			}
 	}
+	redirige_par_entete($redirect);
 }
 
 // http://doc.spip.org/@action_legender_auteur_post
-function action_legender_auteur_post($r) {
+function action_legender_auteur_post($statut, $nom, $email, $bio, $nom_site_auteur, $url_site, $new_login, $new_pass, $new_pass2, $perso_activer_imessage, $pgp, $lier_id_article=0, $id_parent=0, $restreintes= NULL, $id_auteur=0) {
 	global $visiteur_session;
-
-	$bio = _request('bio');
-	$email = trim(_request('email'));
-	$new_login = _request('new_login');
-	$new_pass = _request('new_pass');
-	$new_pass2 = _request('new_pass2');
-	$nom_site_auteur = _request('nom_site_auteur');
-	$perso_activer_imessage = _request('perso_activer_imessage');
-	$pgp = _request('pgp');
-	$redirect = _request('redirect');
-	$statut = _request('statut');
-	$url_site = _request('url_site');
+	include_spip('inc/filtres');
+	include_spip('inc/acces');
 
 	$echec = array();
 
-	list($tout, $id_auteur, $ajouter_id_article,$x,$s) = $r;
 //
 // si id_auteur est hors table, c'est une creation sinon une modif
 //
@@ -56,16 +74,6 @@ function action_legender_auteur_post($r) {
 	  }
 	if (!$auteur) {
 		$id_auteur = 0;
-		if ($s) {
-		  if (in_array($s,$GLOBALS['liste_des_statuts']))
-		    $statut = $s;
-		  else {
-		    $statut = $GLOBALS['liste_des_statuts']['info_redacteurs'];
-		    spip_log("action_editer_auteur_dist: statut $s incompris;  $statut s'y susbstitue ");
-		    // statut par defaut
-
-		  }
-		}
 		$auteur = array();
 		$auteur['source'] = 'spip';
 	  }
@@ -78,7 +86,7 @@ function action_legender_auteur_post($r) {
 	AND ($auteur['source'] == 'spip' OR !spip_connect_ldap())
 	AND autoriser('modifier','auteur', $id_auteur, NULL, array('restreintes'=>1))) {
 		if ($new_login) {
-			if (strlen($new_login) < 4)
+			if (strlen($new_login) < _LOGIN_TROP_COURT)
 				$echec[]= 'info_login_trop_court';
 			else {
 				$n = sql_countsel('spip_auteurs', "login=" . sql_quote($new_login) . " AND id_auteur!=$id_auteur AND statut!='5poubelle'");
@@ -132,6 +140,7 @@ function action_legender_auteur_post($r) {
 	// les admins restreints ne peuvent modifier celui des autres admins
 
 	if (autoriser('modifier', 'auteur', $id_auteur, NULL, array('mail'=>1))) {
+		$email = trim($email);
 		if ($email !='' AND !email_valide($email)) 
 			$echec[]= 'info_email_invalide';
 		$auteur['email'] = $email;
@@ -144,7 +153,7 @@ function action_legender_auteur_post($r) {
 	// variables sans probleme
 	$auteur['bio'] = corriger_caracteres($bio);
 	$auteur['pgp'] = corriger_caracteres($pgp);
-	$auteur['nom'] = corriger_caracteres(_request('nom'));
+	$auteur['nom'] = corriger_caracteres($nom);
 	$auteur['nom_site'] = corriger_caracteres($nom_site_auteur); // attention mix avec $nom_site_spip ;(
 	$auteur['url_site'] = vider_url($url_site, false);
 
@@ -180,8 +189,7 @@ function action_legender_auteur_post($r) {
 
 		// Restreindre avant de declarer l'auteur
 		// (section critique sur les droits)
-		$restreintes = _request('restreintes');
-		if ($id_parent = intval(_request('id_parent'))) {
+		if ($id_parent) {
 			if (is_array($restreintes))
 				$restreintes[] = $id_parent;
 			else
@@ -199,7 +207,7 @@ function action_legender_auteur_post($r) {
 	}
 
 	// Lier a un article
-	if ($id_article = intval(_request('lier_id_article'))
+	if (($id_article = intval($lier_id_article))
 	AND autoriser('modifier', 'article', $id_article)) {
 		sql_insertq('spip_auteurs_articles', array('id_article' => $id_article, 'id_auteur' =>$id_auteur));
 	}
@@ -231,24 +239,6 @@ function action_legender_auteur_post($r) {
 	}
 	$GLOBALS['visiteur_session'] = $sauve;
 
-	$echec = $echec ? '&echec=' . join('@@@', $echec) : '';
-
-	$redirect = rawurldecode($redirect);
-
-	if ($echec) {
-		// revenir au formulaire de saisie
-		$ret = !$redirect
-			? '' 
-			: ('&redirect=' . rawurlencode($redirect));
-
-		return generer_url_ecrire('auteur_infos',
-			"id_auteur=$id_auteur$echec$ret",'&');
-	} else {
-		// modif: renvoyer le resultat ou a nouveau le formulaire si erreur
-		if (!$redirect)
-			$redirect = generer_url_ecrire("auteur_infos", "id_auteur=$id_auteur", '&', true);
-
-		return $redirect;
-	}
+	return array($id_auteur, $echec);
 }
 ?>
