@@ -579,7 +579,7 @@ function spip_sqlite_select($select, $from, $where='', $groupby='', $orderby='',
 
 	// recomposer from
 	$from = (!is_array($from) ? $from : _sqlite_calculer_select_as($from));
-	
+
 	$query = 
 		  _sqlite_calculer_expression('SELECT', $select, ', ')
 		. _sqlite_calculer_expression('FROM', $from, ', ')
@@ -590,7 +590,6 @@ function spip_sqlite_select($select, $from, $where='', $groupby='', $orderby='',
 		. ($limit ? "\nLIMIT $limit" : '');
 
 	// Erreur ? C'est du debug de squelette, ou une erreur du serveur
-
 	if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug') {
 		include_spip('public/debug');
 		boucle_debug_requete($query);
@@ -826,10 +825,9 @@ function _sqlite_calculer_select_as($args){
 	} else $join ='';
 	$res = '';
 	foreach($args as $k => $v) {
-		$res .= ', ' . $v . (is_numeric($k) ? '' : " AS '$k'") . $join;
-		$join = '';
+		$res .= ', ' . $v . (is_numeric($k) ? '' : " AS '$k'");
 	}
-	return substr($res,2);
+	return substr($res,2) . $join;
 }
 
 
@@ -1199,6 +1197,8 @@ class sqlite_traiter_requete{
 	var $db = ''; // le nom de la base 
 	var $tracer = false; // doit-on tracer les requetes (var_profile)
 	
+	var $sqlite_version = ''; // Version de sqlite (2 ou 3)
+	
 	// Pour les corrections a effectuer sur les requetes :
 	var $textes = array(); 	// array(code=>'texte') trouvé
 	var $codeEchappements = "%@##@%";
@@ -1214,6 +1214,8 @@ class sqlite_traiter_requete{
 			return false;	
 		}
 
+		$this->sqlite_version =_sqlite_is_version('', $this->link);
+		
 		$this->prefixe 	= $GLOBALS['connexions'][$this->serveur ? $this->serveur : 0]['prefixe'];
 		$this->db 		= $GLOBALS['connexions'][$this->serveur ? $this->serveur : 0]['db'];
 		
@@ -1228,7 +1230,7 @@ class sqlite_traiter_requete{
 		$t = $this->tracer ? trace_query_start(): 0;
 		//echo("<br /><b>executer_requete() $this->serveur >></b> $this->query"); // boum ? pourquoi ?
 		if ($this->link){
-			if (_sqlite_is_version(3, $this->link)) {
+			if ($this->sqlite_version == 3) {
 				$r = $this->link->query($this->query);
 				// comptage : oblige de compter le nombre d'entrees retournees 
 				// par une requete SELECT
