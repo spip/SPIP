@@ -824,8 +824,10 @@ function _sqlite_calculer_select_as($args){
 		unset($args[-1]);
 	} else $join ='';
 	$res = '';
+	// parfois $args est vide et $join existe, il faut donc aussi ajouter $join au return
 	foreach($args as $k => $v) {
-		$res .= ', ' . $v . (is_numeric($k) ? '' : " AS '$k'");
+		$res .= ', ' . $v . (is_numeric($k) ? '' : " AS '$k'") . $join;
+		$join = '';
 	}
 	return substr($res,2) . $join;
 }
