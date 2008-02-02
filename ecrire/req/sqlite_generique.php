@@ -502,6 +502,9 @@ function spip_sqlite_insertq($table, $couples=array(), $desc=array(), $serveur='
 		$couples[$champ]= _sqlite_calculer_cite($val, $fields[$champ]);
 	}
 	
+	// recherche de champs 'timestamp' pour mise a jour auto de ceux-ci
+	$couples = _sqlite_ajouter_champs_timestamp($table, $couples, $desc, $serveur);
+	
 	return spip_sqlite_insert($table, "(".join(',',array_keys($couples)).")", "(".join(',', $couples).")", $desc, $serveur, $requeter);
 }
 
@@ -569,7 +572,12 @@ function spip_sqlite_repair($table, $serveur='',$requeter=true){
 
 
 function spip_sqlite_replace($table, $values, $keys=array(), $serveur='',$requeter=true) {
-	return spip_sqlite_query("REPLACE INTO $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',',array_map('spip_sqlite_quote', $values)) . ')', $serveur);
+	
+	// recherche de champs 'timestamp' pour mise a jour auto de ceux-ci
+	$values = array_map('spip_sqlite_quote', $values);
+	$values = _sqlite_ajouter_champs_timestamp($table, $values, $desc, $serveur);
+	
+	return spip_sqlite_query("REPLACE INTO $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',',$values) . ')', $serveur);
 }
 
 
@@ -597,7 +605,6 @@ function spip_sqlite_select($select, $from, $where='', $groupby='', $orderby='',
 
 	if (!($res = spip_sqlite_query($query, $serveur, $requeter))) {
 		include_spip('public/debug');
-		
 		erreur_requete_boucle(substr($query, 7),
 				      spip_sqlite_errno($serveur),
 				      spip_sqlite_error($query, $serveur) );
@@ -692,6 +699,9 @@ function spip_sqlite_showtable($nom_table, $serveur='',$requeter=true){
 
 
 function spip_sqlite_update($table, $champs, $where='', $desc='', $serveur='',$requeter=true) {
+	// recherche de champs 'timestamp' pour mise a jour auto de ceux-ci
+	$champs = _sqlite_ajouter_champs_timestamp($table, $champs, $desc, $serveur);
+	
 	$set = array();
 	foreach ($champs as $champ => $val)
 		$set[] = $champ . "=$val";
@@ -710,6 +720,10 @@ function spip_sqlite_updateq($table, $champs, $where='', $desc=array(), $serveur
 	if (!$desc) $desc = description_table($table);
 	if (!$desc) die("$table insertion sans description");
 	$fields =  $desc['field'];
+	
+	// recherche de champs 'timestamp' pour mise a jour auto de ceux-ci
+	$champs = _sqlite_ajouter_champs_timestamp($table, $champs, $desc, $serveur);
+	
 	$set = array();
 	foreach ($champs as $champ => $val) {
 		$set[] = $champ . '=' . _sqlite_calculer_cite($val, $fields[$champ]);
@@ -1172,7 +1186,48 @@ function _sqlite_requete_create($nom, $champs, $cles, $autoinc=false, $temporary
 }
 	
 
+
+/*
+ * Retrouver les champs 'timestamp'
+ * pour les ajouter aux 'insert' ou 'replace'
+ * afin de simuler le fonctionnement de mysql 
+ * 
+ * stocke le resultat pour ne pas faire 
+ * de requetes showtable intempestives
+ */
+function _sqlite_ajouter_champs_timestamp($table, $couples, $desc='', $serveur=''){
+	static $tables = array();
 	
+	if (!isset($tables[$table])){
+		
+		if (!$desc){
+			$f = charger_fonction('trouver_table', 'base');
+			$desc = $f($table, $serveur);
+			// si pas de description, on ne fait rien, ou on die() ?
+			if (!$desc) return $couples;
+		}
+		
+		// recherche des champs avec simplement 'TIMESTAMP'
+		// cependant, il faudra peut etre etendre
+		// avec la gestion de DEFAULT et ON UPDATE
+		// mais ceux-ci ne sont pas utilises dans le core
+		$tables[$table] = array();
+		foreach ($desc['field'] as $k=>$v){
+			if (strpos('timestamp', strtolower(ltrim($v)))===0)
+			$tables[$table][] = $k;
+		}
+	}
+	
+	// ajout des champs type 'timestamp' absents
+	foreach ($tables[$table] as $maj){
+		if (!array_key_exists($maj, $couples))
+			$couples[$maj] = "datetime('now')";	
+	}
+	return $couples;
+}
+ 	
+ 	
+
 /*
  * renvoyer la liste des versions sqlite disponibles
  * sur le serveur 
