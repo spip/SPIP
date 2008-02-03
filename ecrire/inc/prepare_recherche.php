@@ -72,7 +72,7 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 		// supprimer les anciens resultats de cette recherche et les resultats trop vieux avec une marge
 		// hash=0x$hash OR HEX(hash)='$hash' permet d'avoir une requete qui marche qu'on soit en mysql <4.1 ou >4.1
 		// il y a des versions ou install de mysql ou il faut l'un ou l'autre selon le hash ... !
-		sql_delete('spip_recherches','(maj<NOW()-'.(_DELAI_CACHE_RECHERCHES+100).") OR (recherche='$hash')",$serveur);
+		sql_delete('spip_recherches','(maj<DATE_SUB(NOW(), INTERVAL '.(_DELAI_CACHE_RECHERCHES+100)." SECOND)) OR (recherche='$hash')",$serveur);
 
 		// inserer les resultats dans la table de cache des recherches
 		if (count($points)){
