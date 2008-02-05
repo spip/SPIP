@@ -274,6 +274,14 @@ $liste_des_statuts = array(
 			"info_statut_site_4" => '5poubelle'
 			);
 
+$liste_des_etats = array(
+			'texte_statut_en_cours_redaction' => 'prepa',
+			'texte_statut_propose_evaluation' => 'prop',
+			'texte_statut_publie' => 'publie',
+			'texte_statut_poubelle' => 'poubelle',
+			'texte_statut_refuse' => 'refuse' 
+			);
+
 $liste_des_forums = array(
 			'bouton_radio_modere_posteriori' => 'pos',
 			'bouton_radio_modere_priori' => 'pri',

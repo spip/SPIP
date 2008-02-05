@@ -26,19 +26,13 @@ function inc_instituer_article_dist($id_article, $statut, $id_rubrique)
 	// cf autorisations dans action/editer_article
 	if (!autoriser('modifier', 'article', $id_article)) return '';
 
-	$liste_statuts = array(
-	  // statut => array(titre,image)
-		'prepa' => array(_T('texte_statut_en_cours_redaction'),''),
-		'prop' => array(_T('texte_statut_propose_evaluation'),''),	
-		'publie' => array(_T('texte_statut_publie'),''),	
-		'poubelle' => array(_T('texte_statut_poubelle'),''),	
-		'refuse' => array(_T('texte_statut_refuse'),'')	
-	);
 	$res = '';
 
+	$etats = $GLOBALS['liste_des_etats'];
+
 	if (!autoriser('publierdans', 'rubrique', $id_rubrique)) {
-		unset($liste_statuts['publie']);
-		unset($liste_statuts['refuse']);
+		unset($etats[array_search('publie', $etats)]);
+		unset($etats[array_search('refuse', $etats)]);
 		if ($statut == 'prepa')
 			$res = supprimer_tags(_T('texte_proposer_publication'));
 	}
@@ -50,36 +44,22 @@ function inc_instituer_article_dist($id_article, $statut, $id_rubrique)
 	  ."<ul>";
 	
 	$href = redirige_action_auteur('instituer_article',$id_article,'articles', "id_article=$id_article");
-	foreach($liste_statuts as $s=>$affiche){
-		$href = parametre_url($href,'statut_nouv',$s);
+
+	foreach($etats as $affiche => $s){
+		$puce = puce_statut($s) . _T($affiche);
 		if ($s==$statut)
-			$res .= "<li class='$s selected'>" . puce_statut($s) . $affiche[0] . '</li>';
-		else
-			$res .= "<li class='$s'><a href='$href' onclick='return confirm(confirm_changer_statut);'>" . puce_statut($s) . $affiche[0] . '</a></li>';
+			$class=' selected';
+		else {
+			$class=''; 
+			$puce = "<a href='"
+			. parametre_url($href,'statut_nouv',$s)
+			. "' onclick='return confirm(confirm_changer_statut);'>$puce</a>";
+		}
+		$res .= "<li class='$s $class'>$puce</li>";
 	}
 
 	$res .= "</ul></li></ul>";
   
 	return $res;
 }
-/*
-// http://doc.spip.org/@demande_publication
-function demande_publication($id_article)
-{
-	return "<br style='clear:both;' />" .
-		debut_cadre_relief('',true) .
-		"<div style='text-align: center'>" .
-		"<b>" ._T('texte_proposer_publication') . "</b>" .
-		aide ("artprop") .
-			redirige_action_auteur('instituer_article', "$id_article-prop",
-			'articles',
-			"id_article=$id_article",
-			("<input type='submit' class='fondo' value=\"" . 
-			    _T('bouton_demande_publication') .
-			    "\" />\n"),
-			"method='post'") .
-		"</div>" .
-		fin_cadre_relief(true);
-}
-*/
 ?>
