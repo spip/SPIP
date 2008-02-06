@@ -271,7 +271,7 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 			? "\n<option value='mysql'>"._L('MySQL')."</option>"
 			: '')
 		. ($pg
-			? "\n<option value='pg'>"._L('PostGreSQL')."</option>"
+			? "\n<option value='pg'>"._L('PostgreSQL')."</option>"
 			: '')
 		. (($sqlite2)
 			? "\n<option value='sqlite2'>"._L('SQLite 2')."</option>"
