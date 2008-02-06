@@ -902,7 +902,7 @@ function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false, 
 		}
 
 		$query .= "$s\n\t\t$k "
-			. (($autoinc && ($prim_name == $k) && preg_match(',\b(big)?int\b,i', $v))
+			. (($autoinc && ($prim_name == $k) && preg_match(',\b(big|small|medium)?int\b,i', $v))
 				? " bigserial"
 			   : mysql2pg_type($v)
 			);
