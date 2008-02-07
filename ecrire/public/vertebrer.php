@@ -140,7 +140,7 @@ function public_vertebrer_dist($desc)
 "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml' xml:lang='#LANG' lang='#LANG' dir='#LANG_DIR'>
 <head>
-<title>[(#NOM_SITE_SPIP|textebrut)] $titre</title>
+<title>[(#NOM_SITE_SPIP|textebrut)] - #ENV{page}</title>
 <INCLURE{fond=inc-head}>
 </head>
 <body class='page_rubrique'><div id='page'>
