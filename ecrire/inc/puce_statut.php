@@ -148,6 +148,7 @@ function puce_statut_article($id, $statut, $id_rubrique, $type='article', $ajax 
 	. '</span>';
 }
 
+
 // http://doc.spip.org/@puce_statut_breve
 function puce_statut_breve($id, $statut, $id_rubrique, $type, $ajax='') {
 	global $lang_objet;
@@ -188,18 +189,41 @@ function puce_statut_breve($id, $statut, $id_rubrique, $type, $ajax='') {
 	OR !_ACTIVER_PUCE_RAPIDE)
 		return $inser_puce;
 
-	$type2 = "statutdecal$type$id";
-	$action = "\nonmouseover=\"montrer('$type2');\"";
+	$titles = array(
+			  "blanche" => _T('texte_statut_en_cours_redaction'),
+			  "orange" => _T('texte_statut_propose_evaluation'),
+			  "verte" => _T('texte_statut_publie'),
+			  "rouge" => _T('texte_statut_refuse'),
+			  "poubelle" => _T('texte_statut_poubelle'));
+			  
+	$clip = 1+ (11*$coord[$statut]);
 
-	return	"<span class='puce_breve' id='$type1' dir='$lang_dir'>"
-		. "<span class='puce_breve_fixe' $action>"
+	if ($ajax){
+		return 	"<span class='puce_breve_fixe'>"
 		. $inser_puce
 		. "</span>"
-		. "<span class='puce_breve_popup' id='$type2'\nonmouseout=\"cacher('$type2');\" style='margin-left: -".((9*$clip)+1)."px;'>\n"
-		. afficher_script_statut($id, $type, -1, $puces[0], 'prop',_T('texte_statut_propose_evaluation'), $action)
-		. afficher_script_statut($id, $type, -10, $puces[1], 'publie',_T('texte_statut_publie'), $action)
-	  	. afficher_script_statut($id, $type, -19, $puces[2], 'refuse',_T('texte_statut_refuse'), $action)
-		.  "</span></span>";
+		. "<span class='puce_breve_popup' id='statutdecal$type$id' style='margin-left: -$clip"."px;'>"
+		. afficher_script_statut($id, $type, -1, $puces[0], 'prop', $titles['orange'], $action)
+		. afficher_script_statut($id, $type, -10, $puces[1], 'publie', $titles['verte'], $action)
+	  	. afficher_script_statut($id, $type, -19, $puces[2], 'refuse', $titles['rouge'], $action)
+		  . "</span>";
+	}
+
+	$nom = "puce_statut_";
+
+	if ((! _SPIP_AJAX) AND $type != 'breve') 
+	  $over ='';
+	else {
+
+	  $action = generer_url_ecrire('puce_statut',"",true);
+	  $action = "if (!this.puce_loaded) { this.puce_loaded = true; prepare_selec_statut('$nom', '$type', $id, '$action'); }";
+	  $over = "\nonmouseover=\"$action\"";
+	}
+
+	return 	"<span class='puce_breve' id='$nom$type$id' dir='$lang_dir'$over>"
+	. $inser_puce
+	. '</span>';
+
 }
 
 // http://doc.spip.org/@puce_statut_site
@@ -284,5 +308,7 @@ function afficher_script_statut($id, $type, $n, $img, $statut, $titre, $act) {
 	$t = supprimer_tags($titre);
 	return "<a href=\"$h\"\ntitle=\"$t\"$act><img src='$i' alt=' '/></a>";
 }
+
+
 
 ?>
