@@ -1002,7 +1002,7 @@ function http_calendrier_navigation($annee, $mois, $jour, $echelle, $partie_cal,
 			    (($annee == $annee_today && $mois == $mois_today && (($type == 'mois')  || ($jour == $jour_today)))
 			     ? "calendrier-opacity" : ""),
 			    '','','',
-			    (" onmouseover=\"findObj_test_forcer('$id',true).style.visibility='visible';\"" ))
+			    (" onmouseover=\"$('#$id').css('visibility','visible').show();\"" ))
 	  . "&nbsp;"
 	  . $args_pred 
 	  . $args_suiv
@@ -1021,9 +1021,8 @@ function http_calendrier_invisible($annee, $mois, $jour, $script, $finurl, $ancr
 {
 	global $spip_lang_right, $spip_lang_left;
 	$gadget = "<div style='position: relative;z-index: 1000;'
-			onmouseover=\"findObj_test_forcer('$id',true).style.visibility='visible';\"
-			onmouseout=\"cacher('$id');\">"
-	  . "<table id='$id' class='calendrier-cadreagenda'"	  . ">\n<tr><td colspan='3' style='text-align:$spip_lang_left;'>";
+			onmouseover=\"$('#$id').show();\" onmouseout=\"$('#$id').hide();\">"
+	  . "<table id='$id' class='calendrier-cadreagenda'>\n<tr><td colspan='3' style='text-align:$spip_lang_left;'>";
 
 	$annee_avant = $annee - 1;
 	$annee_apres = $annee + 1;
