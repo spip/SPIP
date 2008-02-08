@@ -173,7 +173,7 @@ function spip_connect_main($connexion)
 {
 	if ($GLOBALS['spip_connect_version']< 0.1 AND _DIR_RESTREINT){
 		include_spip('inc/headers');
-		redirige_par_entete(generer_url_ecrire('upgrade', 'reinstall=oui', true));
+		redirige_url_ecrire('upgrade', 'reinstall=oui');
 	}
 
 	if (!($f = $connexion['select'])) return false;

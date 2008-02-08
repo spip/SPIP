@@ -24,7 +24,7 @@ function action_editer_article_dist() {
 		$id_parent = _request('id_parent');
 		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
 		if (!($id_parent AND $id_auteur))
-			redirige_par_entete(generer_url_ecrire());
+			redirige_url_ecrire();
 		if (($id_article = insert_article($id_parent)) > 0)
 		
 		# cf. GROS HACK ecrire/inc/getdocument

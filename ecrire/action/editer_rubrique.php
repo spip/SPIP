@@ -22,7 +22,7 @@ function action_editer_rubrique_dist() {
 
 	if (!$id_rubrique = intval($arg)) {
 		if ($arg != 'oui') 
-			redirige_par_entete(generer_url_ecrire());
+			redirige_url_ecrire();
 		$id_rubrique = insert_rubrique(_request('id_parent'));
 	}
 

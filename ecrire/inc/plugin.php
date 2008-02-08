@@ -772,7 +772,7 @@ function verifie_include_plugins() {
 	AND $_SERVER['X-Requested-With'] != 'XMLHttpRequest'){
 		if (@is_readable(_DIR_PLUGINS)) {
 			include_spip('inc/headers');
-			redirige_par_entete(generer_url_ecrire("admin_plugin"));
+			redirige_url_ecrire("admin_plugin");
 		}
 		// plus de repertoire plugin existant, le menu n'existe plus
 		// on fait une mise a jour silencieuse

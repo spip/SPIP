@@ -40,6 +40,6 @@ function install_etape_fin_dist()
 
 	// on l'envoie dans l'espace prive
 
-	redirige_par_entete(generer_url_ecrire('accueil'));	
+	redirige_url_ecrire('accueil');	
 }
 ?>

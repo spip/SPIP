@@ -39,14 +39,15 @@ function exec_import_all_dist()
 		$commentaire = '';
 	}
 	if ($archive) {
-		$action = _T('info_restauration_sauvegarde', 
+	  // il faut changer cette chaine depuis qu'on fait aussi de la fusion
+	  // _T('info_restauration_sauvegarde', 
+		$action = _L($insert
+			     ? 'Insertion de @archive@ dans la base' 
+			     : 'Installation de la sauvegarde @archive@',
 			     array('archive' => $archive));
 		$admin = charger_fonction('admin', 'inc');
 		echo $admin('import_all', $action, $commentaire, !$insert);
-	} else {
-		$f = charger_fonction('accueil');
-		$f();
-	}
+	} else redirige_url_ecrire();
 }
 
 // http://doc.spip.org/@import_queldir

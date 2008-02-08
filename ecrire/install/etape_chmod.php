@@ -136,8 +136,8 @@ function install_etape_chmod_dist()
 
 	} else {
 		if (!_FILE_CONNECT)
-			redirige_par_entete(generer_url_ecrire("install", "etape=1&chmod=".$chmod, true));
-		else	redirige_par_entete(generer_url_ecrire());
+			redirige_url_ecrire("install", "etape=1&chmod=".$chmod);
+		else	redirige_url_ecrire();
 	}
 }
 ?>

@@ -57,7 +57,7 @@ function action_charger_plugin_dist() {
 	{
 		essaie_ajouter_liste_plugins($zip);
 		include_spip('inc/headers');
-		redirige_par_entete(generer_url_ecrire('admin_plugin'));
+		redirige_url_ecrire('admin_plugin');
 	}
 
 	## si ici on n'est pas en POST c'est qu'il y a un loup

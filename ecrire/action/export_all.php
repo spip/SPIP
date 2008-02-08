@@ -34,7 +34,7 @@ function action_export_all_dist()
 		  // rub=$rub sert AUSSI a distinguer cette redirection
 		  // d'avec l'appel initial sinon FireFox croit malin
 		  // d'optimiser la redirection
-		redirige_par_entete(generer_url_ecrire('export_all',"rub=$rub", true));
+		redirige_url_ecrire('export_all',"rub=$rub");
 	} elseif ($quoi=='end') export_all_fin($file, $meta, $rub);
 }
 

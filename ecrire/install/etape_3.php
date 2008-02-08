@@ -250,12 +250,12 @@ function install_etape_3_dist()
 		if (file_exists(_FILE_CONNECT_TMP))
 			include(_FILE_CONNECT_TMP);
 		else
-			redirige_par_entete(generer_url_ecrire('install'));
+			redirige_url_ecrire('install');
 	
 		if (file_exists(_FILE_CHMOD_TMP))
 			include(_FILE_CHMOD_TMP);
 		else
-			redirige_par_entete(generer_url_ecrire('install'));
+			redirige_url_ecrire('install');
 
 		$hidden = predef_ou_cache($adresse_db, $login_db, $pass_db, $server_db)
 		  . (defined('_INSTALL_NAME_DB') ? ''

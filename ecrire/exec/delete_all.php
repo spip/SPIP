@@ -39,7 +39,7 @@ function exec_delete_all_dist()
 			$res = "<ol style='text-align:left'>$res</ol>";
 			$admin = charger_fonction('admin', 'inc');
 			$res = $admin('delete_all', _T('titre_page_delete_all'), $res);
-			if ($res) echo $res; else redirige_par_entete(generer_url_ecrire('install','',true));
+			if ($res) echo $res; else redirige_url_ecrire('install','');
 		}
 	}
 }
