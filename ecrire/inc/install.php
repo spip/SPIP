@@ -159,7 +159,7 @@ function info_progression_etape($en_cours,$phase,$dir){
 	//$en_cours = _request('etape')?_request('etape'):"";
 	$liste = find_all_in_path($dir,$phase.'(([0-9])+|fin)[.]php$');
 	$debut = 1; $etat = "ok";
-	$last = count($liste);
+	$last = count($liste)-1; // ne pas afficher l'etape finale qui dit juste "tout est OK"
 	$texte_etat = array('ok'=>'OK','encours'=>_L('en cours'),'todo'=>_L('&agrave; venir'));
 	
 	$aff_etapes = "<span id='etapes'>";
@@ -168,7 +168,7 @@ function info_progression_etape($en_cours,$phase,$dir){
 			$etat = "encours";
 		}
 		$aff_etapes .= ($debut<$last)
-			? "<span class='$etat'><span>Etape </span><em>$debut</em><span> " . $texte_etat[$etat] . ",<br /></span> </span>"
+			? "<span class='$etat'><span>"._L('Etape')." </span><em>$debut</em><span> " . $texte_etat[$etat] . ",<br /></span> </span>"
 			: '';
 		if ($etat == "encours")
 			$etat = 'todo';
