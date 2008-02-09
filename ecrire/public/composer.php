@@ -584,15 +584,14 @@ function calculer_select ($select = array(), $from = array(),
 	  list($t,$c) = each($from);
 	  reset($from);
 	  $e = '/\b(' . "$t\\." . join("|" . $t . '\.', $equiv) . ')\b/';
-	  if (!( count($equiv) <> 1 OR // a faire sauter un jour
-		 strpos($t, ' ') OR // jointure des le depart cf boucle_doc
+	  if (!(strpos($t, ' ') OR // jointure des le depart cf boucle_doc
 		 calculer_jointnul($t, $select, $e) OR
 		 calculer_jointnul($t, $join, $e) OR
 		 calculer_jointnul($t, $where, $e) OR
 		 calculer_jointnul($t, $having, $e))) {
 	    unset($from[$t]);
 	    // bien garder les espaces pour le strpos ci-dessus
-	    preg_match('/^\s*\w*\s*JOIN\s+(.*?AS\s+(\w+)\s+)ON\s*[(][^.]*[.](\w+)[^)]*[)](.*)$/', $sfrom, $r);
+	    $x = preg_match('/^\s*\w*\s*JOIN\s+(.*?AS\s+(\w+)\s+)ON\s*[(][^.]*[.](\w+)[^)]*[)](.*)$/s', $sfrom, $r);
 	    $sfrom = $r[1].  $r[4];
 	    $e = '/\b' . $t . '\.' . $r[3] .'\b/';
 	    $t = $r[2] . '.' . $r[3];
@@ -600,6 +599,8 @@ function calculer_select ($select = array(), $from = array(),
 	    $join = remplacer_jointnul($t, $join, $e);
 	    $where = remplacer_jointnul($t, $where, $e);
 	    $having = remplacer_jointnul($t, $having, $e);
+	    $groupby = remplacer_jointnul($t, $groupby, $e);
+	    $orderby = remplacer_jointnul($t, $orderby, $e);
 	  }
 	  $from[-1] = $sfrom; 
 	}
