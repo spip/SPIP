@@ -65,7 +65,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 
 	// Pas de "modifier ce..." ? -> donner "acces a l'espace prive"
 	if (!$env)
-		$env['ecrire'] = DIR_RESTREINT_ABS;
+		$env['ecrire'] = _DIR_RESTREINT_ABS;
 
 	$env['action'] = self('&');
 	$env['divclass'] = $float;
@@ -101,8 +101,8 @@ function admin_objet()
 	as $id => $obj) {
 		if (is_int($id)) $id = $obj;
 		$_id_type = id_table_objet($id);
-		if (isset($GLOBALS[$_id_type])) {
-			$id_type = sql_getfetsel($_id_type, table_objet_sql($id), "$_id_type=".intval($GLOBALS[$_id_type]));
+		if ($id_type = $GLOBALS[$_id_type]) {
+			$id_type = sql_getfetsel($_id_type, table_objet_sql($id), "$_id_type=".intval($id_type));
 			if ($id_type) {
 				$env[$_id_type] = $id_type;
 				$g = 'generer_url_ecrire_'.$obj;
