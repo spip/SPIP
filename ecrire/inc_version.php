@@ -43,7 +43,8 @@ define('_ROOT_IMG_PACK', dirname(dirname(__FILE__)) . '/dist/images/');
 define('_ROOT_IMG_ICONES_DIST', dirname(dirname(__FILE__)) . '/dist/vignettes/');
 
 # le nom du repertoire des  bibliotheques JavaScript
-define('_DIR_JAVASCRIPT', 'javascript/');
+define('_JAVASCRIPT', 'javascript/'); // utilisable avec #CHEMIN et find_in_path
+define('_DIR_JAVASCRIPT', (_DIR_RACINE . 'dist/' . _JAVASCRIPT));
 
 # Le nom des 4 repertoires modifiables par les scripts lances par httpd
 # Par defaut ces 4 noms seront suffixes par _DIR_RACINE (cf plus bas)
@@ -297,8 +298,8 @@ $liste_des_forums = array(
 @umask(0);
 
 // version des signatures de fonctions PHP
-// (= numero SVN de leur derniere modif cassant la compatibilite)
-$spip_version_code = 11169;
+// (= numero SVN de leur derniere modif cassant la compatibilite et/ou necessitant un recalcul des squelettes)
+$spip_version_code = 11208;
 // version de la base SQL (= numero SVN de sa derniere modif)
 $spip_version = 11174;
 
