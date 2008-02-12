@@ -62,15 +62,18 @@ function message_oubli($email, $param)
 	  return  _T('pass_erreur_probleme_technique');
 }
 
+// http://doc.spip.org/@balise_FORMULAIRE_OUBLI
 function balise_FORMULAIRE_OUBLI ($p) {
   return calculer_balise_dynamique($p,'FORMULAIRE_OUBLI',array());
 }
 
+// http://doc.spip.org/@balise_FORMULAIRE_OUBLI_stat
 function balise_FORMULAIRE_OUBLI_stat($args, $filtres) {
 
 	return $args;
 }
 
+// http://doc.spip.org/@balise_FORMULAIRE_OUBLI_dyn
 function balise_FORMULAIRE_OUBLI_dyn()
 {
 $p = _request('p');
