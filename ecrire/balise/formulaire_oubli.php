@@ -89,6 +89,7 @@ $message = '';
 		$message = _T('pass_erreur_code_inconnu');
 	else {
 		if ($oubli) {
+			include_spip('inc/acces');
 			$mdpass = md5($oubli);
 			$htpass = generer_htpass($oubli);
 			sql_updateq('spip_auteurs', array('htpass' =>$htpass, 'pass'=>$mdpass, 'alea_actuel'=>'', 'cookie_oubli'=>''), "cookie_oubli=" . sql_quote($p));
