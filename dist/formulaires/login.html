@@ -56,7 +56,9 @@ if (l=document.getElementById('login_securise'))	l.style.display='';
 ]
 	[(#ENV{login}|?{'',' '})<div id='pass_ajax' style='display: none;'>]
 	<p><label[ for="var_login_(#ENV{login})"]><:login_pass2:></label><br />
-	<input type="password" class="forml" name="session_password"[ id="var_login_(#ENV{login})"] value="" size="20" /></p>
+	<input type="password" class="forml" name="session_password"[ id="var_login_(#ENV{login})"] value="" size="20" /><br />
+	&#91;<a href="#URL_PAGE{spip_pass}" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=330'); return false;"><:login_motpasseoublie:></a>&#93;
+	</p>
 
 [(#ENV{rester_connecte})
 	<p><input type="checkbox" name="session_remember" id="session_remember[_(#ENV{login})]" value="oui"[(#ENV*{prefs}|filtre_rester_connecte)checked="checked"]

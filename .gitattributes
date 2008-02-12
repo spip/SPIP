@@ -292,6 +292,7 @@ dist/puce_prive_rtl.gif -text
 dist/puce_rtl.gif -text
 dist/rechercher.png -text
 dist/spip.png -text
+dist/spip_pass.html -text
 dist/spip_style.css -text
 dist/style_prive.html -text
 dist/style_prive_defaut.css -text

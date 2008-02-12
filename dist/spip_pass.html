@@ -1,0 +1,40 @@
+[(#REM)
+	Eviter les boutons d'admin sur la page d'oubli
+]
+#HTTP_HEADER{Content-Type: text/html; charset=#CHARSET}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title><:pass_mot_oublie:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+<meta name="robots" content="none" />
+<meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
+[<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
+<link rel="stylesheet" href="[(#CHEMIN{spip_style.css}|direction_css)]" type="text/css" />
+<link rel="stylesheet" href="[(#CHEMIN{minipres.css}|direction_css)]" type="text/css" />
+
+</head>
+<body class='pass' >
+
+<div id='minipres'>
+
+	<h3 class="spip">#NOM_SITE_SPIP</h3>
+		
+	<div class="formulaire_spip pass">
+		#FORMULAIRE_OUBLI
+	</div>
+	<div style='text-align:#LANG_RIGHT'>
+	<script type="text/javascript"><!--
+	document.write("<a style='color: #e86519' href='")
+	document.write((window.opener) ? "javascript:close()" : "./")
+	document.write("'><:pass_quitter_fenetre:><" + "/a>");
+	//--></script>
+	<noscript>
+		&#91;<a href='./'><:pass_retour_public:></a>&#93;
+	</noscript>
+	</div>
+	
+</div><!--#minipres-->
+
+</body>
+</html>

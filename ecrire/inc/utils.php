@@ -817,12 +817,6 @@ function get_spip_script($default='') {
 function generer_url_public($script='', $args="", $no_entities=false, $rel=false) {
 	// si le script est une action (spip_pass, spip_inscription),
 	// standardiser vers la nouvelle API
-  	// [hack temporaire pour faire fonctionner #URL_PAGE{spip_pass} ]
-
-	if (preg_match(',^spip_(.*),', $script, $regs)) {
-		$args = "action=" . $regs[1]  .($args ? "&$args" :'');
-		$script = "";
-	}
 
 	$action = get_spip_script();
 	if ($script)
