@@ -127,7 +127,7 @@ function spip_xml_aplatit($arbre,$separateur = " "){
 			else
 				$s.="$feuille$separateur";
 		}
-	return substr($s,0,-strlen($separateur));
+	return strlen($separateur)?substr($s,0,-strlen($separateur)):$s;
 }
 
 // http://doc.spip.org/@spip_xml_tagname
