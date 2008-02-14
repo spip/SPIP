@@ -104,9 +104,6 @@ function public_assembler_dist($fond, $connect='') {
 		include_spip('inc/securiser_action');
 		if (($cle == calculer_cle_action($form . $args))
 		 && ($valider = charger_fonction("valider","formulaires/$form/",true))
-		 // charger la langue pour les messages d'erreur et autres
-		 && (include_spip('inc/lang'))
-		 && utiliser_langue_visiteur()
 		 && (count($_POST["erreurs_$form"] = call_user_func_array($valider,unserialize(base64_decode($args))))==0)
 		 && ($modifier = charger_fonction("modifier","formulaires/$form/"))
 		 ) {
