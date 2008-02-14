@@ -2,6 +2,7 @@
 
 
 /* prendre en charge par defaut les balises formulaires simples */
+// http://doc.spip.org/@balise_FORMULAIRE__dist
 function balise_FORMULAIRE__dist($p) {
 	preg_match(",^FORMULAIRE_(.*)?$,", $p->nom_champ, $regs);
 	$form = $regs[1];
@@ -11,6 +12,7 @@ function balise_FORMULAIRE__dist($p) {
 
 
 /* prendre en charge par defaut les balises dynamiques formulaires simples */
+// http://doc.spip.org/@balise_FORMULAIRE__dyn
 function balise_FORMULAIRE__dyn($form)
 {
 	$form = strtolower(substr($form,11));
