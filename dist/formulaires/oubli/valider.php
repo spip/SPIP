@@ -27,6 +27,8 @@ function test_oubli($email)
 // http://doc.spip.org/@message_oubli
 function message_oubli($email, $param)
 {
+	include_spip('inc/filtres'); # pour email_valide()
+
 	if (function_exists('test_oubli'))
 		$f = 'test_oubli';
 	else 
@@ -36,6 +38,7 @@ function message_oubli($email, $param)
 	if (!is_array($declaration))
 		return $declaration;
 
+	include_spip('base/abstract_sql');
 	$res = sql_select("id_auteur,statut,pass", "spip_auteurs", "email =" . sql_quote($declaration['mail']));
 
 	if (!$row = sql_fetch($res)) 
@@ -56,57 +59,33 @@ function message_oubli($email, $param)
 			  _T('pass_mail_passcookie',
 			     array('nom_site_spip' => $nom,
 				   'adresse_site' => url_de_base(),
-				   'sendcookie' => generer_url_public('spip_pass', "$param=$cookie", true)))) )
+				   'sendcookie' => generer_url_public('spip_pass', 
+				   "$param=$cookie&formulaire_action="._request('formulaire_action')
+				   ."&formulaire_action_cle="._request('formulaire_action_cle')
+				   ."&formulaire_action_args="._request('formulaire_action_args')
+				   , true)))) )
 	  return _T('pass_recevoir_mail');
 	else
 	  return  _T('pass_erreur_probleme_technique');
 }
 
-// http://doc.spip.org/@balise_FORMULAIRE_OUBLI
-function balise_FORMULAIRE_OUBLI ($p) {
-  return calculer_balise_dynamique($p,'FORMULAIRE_OUBLI',array());
-}
-
-// http://doc.spip.org/@balise_FORMULAIRE_OUBLI_stat
-function balise_FORMULAIRE_OUBLI_stat($args, $filtres) {
-
-	return $args;
-}
-
-// http://doc.spip.org/@balise_FORMULAIRE_OUBLI_dyn
-function balise_FORMULAIRE_OUBLI_dyn()
-{
-$p = _request('p');
-$oubli = _request('oubli');
-$message = '';
-
-// au 3e appel la variable P est positionnee et oubli = mot passe.
-// au 2e appel, P est vide et oubli vaut le mail a qui envoyer le cookie
-// au 1er appel, P et oubli sont vides
-
- if (!$p) {
-	  if ($oubli) $message = message_oubli($oubli, 'p');
- } else {
-	$res = sql_select("login", "spip_auteurs", "cookie_oubli=" . sql_quote($p) . " AND statut<>'5poubelle' AND pass<>''");
-	if (!$row = sql_fetch($res)) 
-		$message = _T('pass_erreur_code_inconnu');
-	else {
-		if ($oubli) {
-			include_spip('inc/acces');
-			$mdpass = md5($oubli);
-			$htpass = generer_htpass($oubli);
-			sql_updateq('spip_auteurs', array('htpass' =>$htpass, 'pass'=>$mdpass, 'alea_actuel'=>'', 'cookie_oubli'=>''), "cookie_oubli=" . sql_quote($p));
-
-			$login = $row['login'];
-			$message = "<b>" . _T('pass_nouveau_enregistre') . "</b>".
-			"<p>" . _T('pass_rappel_login', array('login' => $login));
-		}
+function formulaires_oubli_valider_dist(){
+	$erreurs = array();
+	$p = _request('p');
+	$oubli= _request('oubli');
+	// au second passage, afficher le message
+	if (!$p && $oubli)
+		$erreurs['message_erreur'] = message_oubli($oubli, 'p');
+	elseif($p) {
+		include_spip('base/abstract_sql');
+		$res = sql_select("login", "spip_auteurs", "cookie_oubli=" . sql_quote($p) . " AND statut<>'5poubelle' AND pass<>''");
+		if (!$row = sql_fetch($res))
+			$erreurs['message_erreur'] = _T('pass_erreur_code_inconnu');
+		elseif (!$oubli)
+			$erreurs['message_erreur'] = ' '; // activer la saisie a nouveau
 	}
- }
- return array('formulaires/oubli', 0, 
-	      array('p' => $p,
-		    'message' => $message,
-		    'action' => self()));
+
+	return $erreurs;
 }
 
 ?>
