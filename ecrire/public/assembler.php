@@ -108,6 +108,9 @@ function public_assembler_dist($fond, $connect='') {
 		 && ($modifier = charger_fonction("modifier","formulaires/$form/"))
 		 ) {
 			$_POST["message_ok_$form"] = call_user_func_array($modifier,unserialize(base64_decode($args)));
+			// modifier peut retourner soit un message, soit un array(editable,message)
+			if (is_array($_POST["message_ok_$form"]))
+				list($_POST["editable_$form"],$_POST["message_ok_$form"]) = $_POST["message_ok_$form"];
 		}
 	}
 

@@ -5,7 +5,9 @@
 // http://doc.spip.org/@balise_FORMULAIRE__dist
 function balise_FORMULAIRE__dist($p) {
 	preg_match(",^FORMULAIRE_(.*)?$,", $p->nom_champ, $regs);
-	$form = $regs[1];
+	if (!strlen($form = $regs[1])){
+		//$form = interprete_argument_balise(1,$p);
+	}
 	
 	return calculer_balise_dynamique($p,"FORMULAIRE_$form",array());
 }
@@ -15,18 +17,28 @@ function balise_FORMULAIRE__dist($p) {
 // http://doc.spip.org/@balise_FORMULAIRE__dyn
 function balise_FORMULAIRE__dyn($form)
 {
-	$form = strtolower(substr($form,11));
-	
 	// recuperer les arguments passes a la balise
 	$args = func_get_args();
-	// en enlevant le premier qui est le nom de la balise et deja recuperer ci-dessus
+
+	// deux moyen d'arriver ici : soit #FORMULAIRE_XX reroute avec 'FORMULAIRE_XX' ajoute en premier arg
+	// soit #FORMULAIRE_{xx}
+	if (substr($form,0,11)=="FORMULAIRE_")
+		$form = strtolower(substr($form,11));
+	else 
+		$form = strtolower($form);	
+		
+	// on enleve le premier qui est le nom de la balise et deja recupere ci-dessus
 	array_shift($args);
+	
+	if (!find_in_path("formulaires/$form"))
+		return '';
 	
 	$erreurs = isset($_POST["erreurs_$form"])?$_POST["erreurs_$form"]:array();
 	$message_ok = isset($_POST["message_ok_$form"])?$_POST["message_ok_$form"]:"";
 	$message_erreur = isset($erreurs['message_erreur'])?$erreurs['message_erreur']:"";
 	$valeurs = array();
-	$editable = (!isset($_POST["erreurs_$form"])) || count($erreurs);
+	$editable = (!isset($_POST["erreurs_$form"])) || count($erreurs) || 
+		(isset($_POST["editable_$form"]) && $_POST["editable_$form"]);
 
 	if ($charger_valeurs = charger_fonction("charger","formulaires/$form/",true))
 		$valeurs = call_user_func_array($charger_valeurs,$args);
