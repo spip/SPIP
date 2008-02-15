@@ -59,9 +59,16 @@ function balise_FORMULAIRE__dyn($form)
 	$action = parametre_url($action,'formulaire_action_cle',''); // nettoyer l'url des champs qui vont etre saisis
 	$action = parametre_url($action,'formulaire_action_args',''); // nettoyer l'url des champs qui vont etre saisis
 
-	return array("formulaires/$form", 0, 
+	$ajaxid = "";
+	if (!$ajax=_request('var_ajax')){
+		include_spip('inc/acces');
+		$ajaxid = substr(md5(creer_uniqid()),0,8);
+	}
+	
+	return array($ajax?"formulaires/$form":"formulaires/formulaire_", 0, 
 		array_merge($valeurs,
 		array(
+			'form' => $form,
 			'action' => $action,
 			'formulaire_args' => base64_encode(serialize($args)),
 			'redirect' => '',
@@ -69,8 +76,8 @@ function balise_FORMULAIRE__dyn($form)
 			'erreurs' => $erreurs,
 			'message_ok' => $message_ok,
 			'message_erreur' => $message_erreur,
-			'form' => $form,
 			'editable' => $editable,
+			'ajaxid' => "id$ajaxid",
 		))
 	);
 }

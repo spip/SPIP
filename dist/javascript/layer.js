@@ -277,6 +277,22 @@ jQuery.fn.animeajax = function(end) {
 		this.prepend(ajax_image_searching);
 }
 
+jQuery.fn.formulaire_dyn_ajax = function(target) {
+	this
+	.not('.noajax')
+	.prepend("<"+"input type='hidden' name='var_ajax' value='1' /"+">")
+	.ajaxForm({"target":'#'+target,
+			"success":
+			function(){
+				$('#'+target).formulaire_dyn_ajax(target);
+			},
+			"beforeSubmit":
+			function(){
+				$('#'+target).animeajax();
+			}
+	});	
+}
+
 // Si Ajax est disponible, cette fonction l'utilise pour envoyer la requete.
 // Si le premier argument n'est pas une url, ce doit etre un formulaire.
 // Le deuxieme argument doit etre l'ID d'un noeud qu'on animera pendant Ajax.

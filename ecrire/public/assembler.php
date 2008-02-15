@@ -100,17 +100,27 @@ function public_assembler_dist($fond, $connect='') {
 	// traiter les formulaires dynamiques simplifies en charger/valider/modifier
 	if (($form = _request('formulaire_action'))
 	 AND ($cle = _request('formulaire_action_cle'))
-	 AND (($args = _request('formulaire_action_args'))!==NULL)) {
-		include_spip('inc/securiser_action');
-		if (($cle == calculer_cle_action($form . $args))
-		 && ($valider = charger_fonction("valider","formulaires/$form/",true))
-		 && (count($_POST["erreurs_$form"] = call_user_func_array($valider,unserialize(base64_decode($args))))==0)
+	 AND (($args = _request('formulaire_action_args'))!==NULL)
+	 AND (include_spip('inc/securiser_action'))
+	 AND ($cle == calculer_cle_action($form . $args))) {
+		$args = unserialize(base64_decode($args));
+		if (($valider = charger_fonction("valider","formulaires/$form/",true))
+		 && (count($_POST["erreurs_$form"] = call_user_func_array($valider,$args))==0)
 		 && ($modifier = charger_fonction("modifier","formulaires/$form/"))
 		 ) {
-			$_POST["message_ok_$form"] = call_user_func_array($modifier,unserialize(base64_decode($args)));
+			$_POST["message_ok_$form"] = call_user_func_array($modifier,$args);
 			// modifier peut retourner soit un message, soit un array(editable,message)
 			if (is_array($_POST["message_ok_$form"]))
 				list($_POST["editable_$form"],$_POST["message_ok_$form"]) = $_POST["message_ok_$form"];
+		}
+		// si le formulaire a ete soumis en ajax, on le renvoie direct !
+		if (_request('var_ajax')){
+			if (find_in_path('formulaire_.php','balise/',true)) {
+				include_spip('inc/actions');
+				array_unshift($args,$form);
+				ajax_retour(inclure_balise_dynamique(call_user_func_array('balise_formulaire__dyn',$args),false));
+				exit;
+			}
 		}
 	}
 
