@@ -1,0 +1,9 @@
+<div id='#ENV{ajaxid}'>
+<INCLURE{fond=formulaires/#ENV{form}}{env}>
+</div>
+<script type='text/javascript' src='#CHEMIN{javascript/layer.js}'></script>
+<script type='text/javascript'>
+$('document').ready(function(){
+	$('div#[(#ENV{ajaxid})] form').formulaire_dyn_ajax('#ENV{ajaxid}');
+});
+</script>
