@@ -284,7 +284,7 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 	.ajaxForm({"target":'#'+target,
 			"success":
 			function(){
-				$('#'+target).formulaire_dyn_ajax(target);
+				$('#'+target+' form').formulaire_dyn_ajax(target);
 			},
 			"beforeSubmit":
 			function(){
