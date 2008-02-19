@@ -54,10 +54,10 @@ function afficher_mois($mois, $attributs, $autre=false){
 }
 
 // http://doc.spip.org/@afficher_annee
-function afficher_annee($annee, $attributs, $debut=null) {
+function afficher_annee($annee, $attributs, $debut=null, $fin=null) {
 
 	if (!isset($debut)) $debut = $annee - 8;
-	$fin = max($annee, date('Y')) + 3;
+	if (!isset($fin)) $fin = max($annee, date('Y')) + 3;
 
 	if ($fin - $debut > 15)
 		return "<input type='text' value='$annee' size='4' $attributs />";
