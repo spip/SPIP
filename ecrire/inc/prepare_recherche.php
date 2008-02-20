@@ -83,14 +83,12 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 					'id' => $id,
 					'points' => $p['score']
 				);
-				//$values.= ",('$hash',".intval($id).",".intval($p['score']).")";
 				if (count($tab_couples)>100) { // eviter les debordements de pile sur tres gros resultats
 					sql_insertq_multi('spip_recherches',$tab_couples,array(),$serveur);
 					$tab_couples = array();
 				}
 			}
 			sql_insertq_multi('spip_recherches',$tab_couples,array(),$serveur);
-			//sql_insert('spip_recherches',"(recherche,id,points)",substr($values,1),array(),$serveur);
 		}
 	}
 
