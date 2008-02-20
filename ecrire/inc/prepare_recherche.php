@@ -76,15 +76,21 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 
 		// inserer les resultats dans la table de cache des recherches
 		if (count($points)){
-			$values = "";
+			$tab_couples = array();
 			foreach ($points as $id => $p){
-				$values.= ",('$hash',".intval($id).",".intval($p['score']).")";
-				if (strlen($values)>16000) { // eviter les debordements de pile sur tres gros resultats
-					sql_insert('spip_recherches',"(recherche,id,points)",substr($values,1),array(),$serveur);
-					$values = "";
+				$tab_couples[] = array(
+					'recherche' => "$hash",
+					'id' => $id,
+					'points' => $p['score']
+				);
+				//$values.= ",('$hash',".intval($id).",".intval($p['score']).")";
+				if (count($tab_couples)>100) { // eviter les debordements de pile sur tres gros resultats
+					sql_insertq_multi('spip_recherches',$tab_couples,array(),$serveur);
+					$tab_couples = array();
 				}
 			}
-			sql_insert('spip_recherches',"(recherche,id,points)",substr($values,1),array(),$serveur);
+			sql_insertq_multi('spip_recherches',$tab_couples,array(),$serveur);
+			//sql_insert('spip_recherches',"(recherche,id,points)",substr($values,1),array(),$serveur);
 		}
 	}
 

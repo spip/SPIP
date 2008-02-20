@@ -82,11 +82,13 @@ $GLOBALS['spip_pg_functions_1'] = array(
 		'in' => 'spip_pg_in',
 		'insert' => 'spip_pg_insert',
 		'insertq' => 'spip_pg_insertq',
+		'insertq_multi' => 'spip_pg_insertq_multi',
 		'listdbs' => 'spip_pg_listdbs',
 		'multi' => 'spip_pg_multi',
 		'query' => 'spip_pg_query',
 		'quote' => 'spip_pg_quote',
 		'replace' => 'spip_pg_replace',
+		'replace_multi' => 'spip_pg_replace_multi',
 		'select' => 'spip_pg_select',
 		'selectdb' => 'spip_pg_selectdb',
 		'set_connect_charset' => 'spip_pg_set_connect_charset',
@@ -610,6 +612,28 @@ function spip_pg_insertq($table, $couples=array(), $desc=array(), $serveur='',$r
 	return spip_pg_insert($table, "(".join(',',array_keys($couples)).")", "(".join(',', $couples).")", $desc, $serveur, $requeter);
 }
 
+
+
+function spip_pg_insertq_multi($table, $tab_couples=array(), $desc=array(), $serveur='',$requeter=true) {
+
+	if (!$desc) $desc = description_table($table);
+	if (!$desc) die("$table insertion sans description");
+	$fields =  isset($desc['field'])?$desc['field']:array();
+	
+	$cles = "(" . join(',',array_keys($tab_couples[0])). ')';
+	$valeurs = array();
+	foreach ($tab_couples as $couples) {
+		foreach ($couples as $champ => $val){
+			$couples[$champ]= spip_pg_cite($val, $fields[$champ]);
+		}
+		$valeurs[] = '(' .join(',', $couples) . ')';
+	}
+	$valeurs = implode(', ',$valeurs);
+	
+	return	spip_pg_insert($table, $cles, $valeurs, $desc, $serveur, $requeter);
+}
+
+
 // http://doc.spip.org/@spip_pg_update
 function spip_pg_update($table, $champs, $where='', $desc='', $serveur='',$requeter=true) {
 
@@ -714,6 +738,18 @@ function spip_pg_replace($table, $values, $desc, $serveur='',$requeter=true) {
 
 	return $couples;
 }
+
+
+function spip_pg_replace_multi($table, $tab_couples, $desc=array(), $serveur='',$requeter=true) {
+	// boucler pour traiter chaque requete independemment
+	foreach ($tab_couples as $couples){
+		$retour = spip_pg_replace($table, $couples, $desc, $serveur,$requeter);
+	}
+	// renvoie le dernier id 
+	return $retour; 
+}
+
+
 
 // Donne la sequence eventuelle associee a une table 
 // Pas extensible pour le moment,
