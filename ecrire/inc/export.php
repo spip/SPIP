@@ -32,25 +32,26 @@ if (@is_readable(_DIR_TMP."charger_plugins_fonctions.php")){
 
 global $EXPORT_tables_noexport;
 
-if (!isset($EXPORT_tables_noexport)){
-	$EXPORT_tables_noexport= array(
-		'spip_caches', // plugin invalideur
-		'spip_index',
-		'spip_index_dico',
-		'spip_referers',
-		'spip_referers_articles',
-		'spip_visites',
-		'spip_visites_articles',
-		'spip_ortho_cache',
-		'spip_ortho_dico',
-		'spip_versions', // le dump des fragments n'est pas robuste
-		'spip_versions_fragments' // le dump des fragments n'est pas robuste
-		);
-	if (!$GLOBALS['connect_toutes_rubriques']){
-		$EXPORT_tables_noexport[]='spip_messages';
-		$EXPORT_tables_noexport[]='spip_auteurs_messages';
-	}
+$EXPORT_tables_noexport= array(
+	'spip_caches', // plugin invalideur
+	'spip_index',
+	'spip_index_dico',
+	'spip_referers',
+	'spip_referers_articles',
+	'spip_visites',
+	'spip_visites_articles',
+	'spip_ortho_cache',
+	'spip_ortho_dico',
+	'spip_versions', // le dump des fragments n'est pas robuste
+	'spip_versions_fragments' // le dump des fragments n'est pas robuste
+	);
+if (!$GLOBALS['connect_toutes_rubriques']){
+	$EXPORT_tables_noexport[]='spip_messages';
+	$EXPORT_tables_noexport[]='spip_auteurs_messages';
 }
+
+//var_dump($EXPORT_tables_noexport);
+$EXPORT_tables_noexport = pipeline('lister_tables_noexport',$EXPORT_tables_noexport);
 
 // construction de la liste des tables pour le dump :
 // toutes les tables principales

@@ -123,10 +123,11 @@ function pipeline($action, $val=null) {
 		verif_plugin($action);
 		spip_log("fonction $fonc absente : pipeline desactive");
 	}
+	
 	// si le flux est une table qui encapsule donnees et autres
 	// on ne ressort du pipe que les donnees
 	// array_key_exists pour php 4.1.0
-	if (is_array($val) && in_array('data', array_keys($val)))
+	if (is_array($val) && isset($val['data']))
 		$val = $val['data'];
 	return $val;
 }
