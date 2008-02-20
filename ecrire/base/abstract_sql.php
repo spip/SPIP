@@ -142,6 +142,7 @@ function sql_insertq($table, $couples=array(), $desc=array(), $serveur='',$reque
 	return $f($table, $couples, $desc, $serveur, $requeter);
 }
 
+// http://doc.spip.org/@sql_insertq_multi
 function sql_insertq_multi($table, $tab_couples=array(), $desc=array(), $serveur='',$requeter=true)
 {
 	$f = sql_serveur('insertq_multi', $serveur);
@@ -180,6 +181,7 @@ function sql_replace($table, $couples, $desc=array(), $serveur='',$requeter=true
 }
 
 
+// http://doc.spip.org/@sql_replace_multi
 function sql_replace_multi($table, $tab_couples, $desc=array(), $serveur='',$requeter=true)
 {
 	$f = sql_serveur('replace_multi', $serveur);
