@@ -44,15 +44,14 @@ function inc_formater_auteur_dist($id_auteur, $row=NULL) {
 		$vals[]= '&nbsp;';
 	else	$vals[]= formater_auteur_mail($row, $id_auteur);
 
-	if ($bio_auteur = attribut_html(propre(couper($row["bio"], 100))))
-		$bio_auteur = " title=\"$bio_auteur\"";
-
 	if (!$nom = typo($row['nom']))
 		$nom = "<span style='color: red'>" . _T('texte_vide') . '</span>';
 
 	$vals[] = "<a href='"
 	. generer_url_ecrire('auteur_infos', "id_auteur=$id_auteur")
-	. "' $bio_auteur>$nom</a>";
+	. "'"
+	. (!$row['bio'] ? '' : (" title=\"" . attribut_html(couper(textebrut($row["bio"]), 200)) ."\""))
+	. ">$nom</a>";
 
 	if ($url_site_auteur = $row["url_site"]) $vals[] =  "<a href='$url_site_auteur'>"._T('info_site_min')."</a>";
 	else $vals[] =  "&nbsp;";
