@@ -16,6 +16,11 @@ include_spip('inc/presentation');
 
 // Constante pour le nombre d'auteurs par page.
 @define('MAX_AUTEURS_PAR_PAGE', 30);
+@define('AUTEURS_MIN_REDAC', "0minirezo,1comite,5poubelle");
+@define('AUTEURS_DEFAUT', '');
+// decommenter cette ligne et commenter la precedente 
+// pour que l'affichage par defaut soit les visiteurs
+#@define('AUTEURS_DEFAUT', '!');
 
 // http://doc.spip.org/@exec_auteurs_dist
 function exec_auteurs_dist()
@@ -24,6 +29,7 @@ function exec_auteurs_dist()
 	$tri = preg_replace('/\W/', '', _request('tri'));
 	if (!$tri) $tri='nom'; 
 	$statut =  _request('statut');
+	if (!$statut)  $statut = AUTEURS_DEFAUT . AUTEURS_MIN_REDAC;
 	$recherche = _request('recherche');
 
 	$result = requete_auteurs($tri, $statut, $recherche);
@@ -62,10 +68,9 @@ function exec_auteurs_dist()
 function bandeau_auteurs($tri, $visiteurs)
 {
 	global $connect_id_auteur,   $connect_statut,   $connect_toutes_rubriques;
-	$ret = "";
 
-	$ret .= debut_gauche("auteurs",true);
-	$ret .= debut_boite_info(true);
+	$ret = debut_gauche("auteurs",true) . debut_boite_info(true);
+
 	if ($visiteurs) 
 		$ret .= "\n<p class='arial1'>"._T('info_gauche_visiteurs_enregistres'). '</p>';
 	else 
@@ -88,9 +93,9 @@ function bandeau_auteurs($tri, $visiteurs)
 
 		if (avoir_visiteurs(true)) {
                         if ($visiteurs)
-				$res .= icone_horizontale (_T('icone_afficher_auteurs'), generer_url_ecrire("auteurs"), "auteur-24.gif", "", false);
+				$res .= icone_horizontale (_T('icone_afficher_auteurs'), generer_url_ecrire("auteurs", "statut=" . AUTEURS_MIN_REDAC), "auteur-24.gif", "", false);
 			else
-				$res .= icone_horizontale (_T('icone_afficher_visiteurs'), generer_url_ecrire("auteurs","statut=!1comite,0minirezo,nouveau"), "auteur-24.gif", "", false);
+				$res .= icone_horizontale (_T('icone_afficher_visiteurs'), generer_url_ecrire("auteurs","statut=!" . AUTEURS_MIN_REDAC), "auteur-24.gif", "", false);
 		}
 		$ret .= bloc_des_raccourcis($res);
 	}
@@ -254,23 +259,13 @@ function auteurs_href($clic, $args='', $att='')
 	return "<a href='$h#$a'$att>$clic</a>";
 }
 
+
+
 // http://doc.spip.org/@requete_auteurs
 function requete_auteurs($tri, $statut, $recherche=NULL)
 {
-  global $connect_statut, $spip_lang, $connect_id_auteur;
+	global $connect_statut, $spip_lang, $connect_id_auteur;
 
-  $in_auteurs = "";
-  if ($recherche){
-		include_spip('inc/rechercher');
-		include_spip('base/abstract_sql');
-		$tables = liste_des_champs();
-		$tables = array('auteur'=>$tables['auteur']);
-		$results = recherche_en_base($recherche, $tables);
-		$in_auteurs = $results['auteur']
-			? sql_in('aut.id_auteur',array_keys($results['auteur']))
-			: '0=1';
-	}
-  
 	//
 	// Construire la requete
 	//
@@ -280,17 +275,12 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 
 	// limiter les statuts affiches
 	if ($connect_statut == '0minirezo') {
-		if (!$statut) {
-			$sql_visible = "aut.statut IN ('0minirezo','1comite','5poubelle')";
-			$visit = false;
-		} else {
-			if ($statut[0]=='!') {
+		if ($statut[0]=='!') {
 			  $statut = substr($statut,1); $not = " NOT";
-			} else $not = '';
-			$statut = preg_replace('/\W+/',"','",$statut); 
-			$sql_visible = "aut.statut$not IN ('$statut')";
-			$visit = statut_min_redac($statut);
-		}
+		} else $not = '';
+		$statut = preg_replace('/\W+/',"','",$statut); 
+		$sql_visible = "aut.statut$not IN ('$statut')";
+		$visit = statut_min_redac($statut);
 	} else {
 		$sql_visible = "(
 			aut.statut = '0minirezo'
@@ -299,8 +289,18 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 		)";
 		$visit = false;
 	}
-	if ($in_auteurs)
-		$sql_visible = "(($sql_visible) AND $in_auteurs)";
+
+	if ($recherche){
+		include_spip('inc/rechercher');
+		$tables = liste_des_champs();
+		$tables = array('auteur'=>$tables['auteur']);
+		$results = recherche_en_base($recherche, $tables);
+		if (!$results['auteur'])
+			return sql_select('1', 'spip_auteurs', '','','','0,0');
+		else $sql_visible = "(($sql_visible) AND "
+		  . sql_in('aut.id_auteur',array_keys($results['auteur']))
+		  . ')';
+	}
 	
 	$sql_sel = '';
 	
@@ -328,8 +328,7 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 	// La requete de base est tres sympa
 	// (pour les visiteurs, ca postule que les messages concernent des articles)
 	
-	$row = sql_select("							aut.id_auteur AS id_auteur,							aut.statut AS statut,								aut.nom_site AS site, aut.nom AS nom,								UPPER(aut.nom) AS unom,							COUNT(lien.id_article) AS compteur							$sql_sel									", "spip_auteurs as aut " . ($visit ?		 			"LEFT JOIN spip_forum AS lien ON aut.id_auteur=lien.id_auteur " :		("LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur	 LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)")), $sql_visible, "aut.statut, aut.nom_site, aut.nom, aut.id_auteur", $sql_order);
-	 return $row;
+	return sql_select("							aut.id_auteur AS id_auteur,							aut.statut AS statut,								aut.nom_site AS site, aut.nom AS nom,								UPPER(aut.nom) AS unom,							COUNT(lien.id_article) AS compteur							$sql_sel									", "spip_auteurs as aut " . ($visit ?		 			"LEFT JOIN spip_forum AS lien ON aut.id_auteur=lien.id_auteur " :		("LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur	 LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)")), $sql_visible, "aut.statut, aut.nom_site, aut.nom, aut.id_auteur", $sql_order);
 }
 
 // http://doc.spip.org/@afficher_n_auteurs
