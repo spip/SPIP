@@ -45,6 +45,7 @@ function exec_auteurs_dist()
 }
 
 
+// http://doc.spip.org/@exec_auteurs_args
 function exec_auteurs_args($statut, $tri, $debut, $recherche=NULL, $trouve='')
 {
 	if ($recherche !=='') {
