@@ -39,8 +39,8 @@ function action_acceder_document_dist() {
 		$where = "documents.fichier=".sql_quote(set_spip_doc($file))
 		. ($arg ? " AND documents.id_document=".intval($arg): '');
 
-		$s = sql_select("documents.id_document, documents.titre, documents.descriptif, documents.distant, documents.fichier, types.mime_type", "spip_documents AS documents LEFT JOIN spip_types_documents AS types ON documents.extension=types.extension",$where);
-		if (!$doc = sql_fetch($s)) {
+		$doc = sql_fetsel("documents.id_document, documents.titre, documents.fichier, types.mime_type", "spip_documents AS documents LEFT JOIN spip_types_documents AS types ON documents.extension=types.extension",$where);
+		if (!$doc) {
 			$status = 404;
 		} else {
 
@@ -85,8 +85,8 @@ function action_acceder_document_dist() {
 		header("Content-Type: ". $doc['mime_type']);
 
 		if (!preg_match(',^image/,', $doc['mime_type'])) {
-			header("Content-Disposition: attachment; filename=\""
-				. basename($file) ."\";");
+			$f = $doc['titre'] ? $doc['titre'] : basename($file);
+			header("Content-Disposition: attachment; filename=\"$f\";");
 			header("Content-Transfer-Encoding: binary");
 		}
 
