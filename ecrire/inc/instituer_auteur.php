@@ -170,13 +170,13 @@ function choix_rubriques_admin_restreint($auteur) {
 	$res = "<p>$phrase</p>\n$menu";
 
 	// Ajouter une rubrique a un administrateur restreint
-	if (autoriser('modifier', 'auteur', $id_auteur, NULL, array('restreintes' => true))) {
+	if (autoriser('modifier', 'auteur', $id_auteur, NULL, array('restreintes' => true))
+	AND $chercher_rubrique = charger_fonction('chercher_rubrique', 'inc')
+	AND $a = $chercher_rubrique(0, 'auteur', false)) {
 
 		$label = $restreint
 			? _T('info_ajouter_rubrique')
 			: _T('info_restreindre_rubrique');
-
-		$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
 
 		$res .= debut_block_depliable(true,"statut$id_auteur")
 		. "\n<div id='ajax_rubrique' class='arial1'><br />\n"
@@ -186,7 +186,7 @@ function choix_rubriques_admin_restreint($auteur) {
 		. "\n<input name='id_auteur' value='"
 		. $id_auteur
 		. "' type='hidden' />"
-		. $chercher_rubrique(0, 'auteur', false)
+		. $a
 		. "</div>\n"
 
 		// onchange = pour le menu

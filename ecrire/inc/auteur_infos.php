@@ -132,7 +132,7 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 
 // Un redacteur n'a pas le droit de modifier son login !
 	if ($edit_login) {
-		$corps .= "<label for='new_login'><b>"._T('item_login')."</b></label>"
+		$corps .= "<label for='new_login'><b>"._T('item_login')."</b></label> "
 		. "<span style='color: red'>("._T('texte_plus_trois_car').")</span> :<br />\n"
 		. "<input type='text' name='new_login' id='new_login' class='formo' value=\"".entites_html($auteur['login'])."\" size='40' /><br />\n";
 	} else {
@@ -142,7 +142,7 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 
 // On ne peut modifier le mot de passe en cas de source externe (par exemple LDAP)
 	if ($edit_pass) {
-		$res = "<label for='new_pass'><b>"._T('entree_nouveau_passe')."</b></label>"
+		$res = "<label for='new_pass'><b>"._T('entree_nouveau_passe')."</b></label> "
 		. "<span style='color: red'>("._T('info_plus_cinq_car').")</span> :<br />\n"
 		. "<input type='password' name='new_pass' id='new_pass' class='formo' value=\"\" size='40' /><br />\n"
 		. "<label for='new_pass2'>" . _T('info_confirmer_passe')."</label><br />\n"
