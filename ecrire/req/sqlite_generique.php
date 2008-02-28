@@ -342,7 +342,6 @@ function spip_sqlite_drop_table($table, $exist='', $serveur='',$requeter=true) {
 
 
 function spip_sqlite_error($query='', $serveur='',$requeter=true) {
-	echo ":: $query<br /><br />";
 	$link  = _sqlite_link($serveur);
 	
 	if (_sqlite_is_version(3, $link)){
