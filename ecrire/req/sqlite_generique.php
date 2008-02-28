@@ -544,7 +544,7 @@ function spip_sqlite_listdbs($serveur='',$requeter=true) {
 
 
 function spip_sqlite_multi ($objet, $lang) {
-	$r = "REGEXP_REPLACE("
+	$r = "PREG_REPLACE("
 	  . $objet
 	  . ",'<multi>.*[\[]"
 	  . $lang
