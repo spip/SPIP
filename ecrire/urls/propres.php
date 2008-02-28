@@ -401,11 +401,15 @@ function urls_propres_dist(&$fond, $url) {
 
 	// Compatilibite avec propres2
 	$url_propre = preg_replace(',\.html$,i', '', $url_propre);
-
+	
 	// Compatibilite avec les anciens marqueurs d'URL propres
-	$url_propre = retirer_marqueurs_url_propre($url_propre);
+	// Tester l'entree telle quelle (avec 'url_libre' des sites ont pu avoir des entrees avec marqueurs dans la table spip_urls)
+	if (!$row = sql_fetsel('id_objet, type, date', 'spip_urls', 'url='._q($url_propre))) {
+		// Sinon enlever les marqueurs eventuels
+		$url_propre = retirer_marqueurs_url_propre($url_propre);
 
-	$row = sql_fetsel('id_objet, type, date', 'spip_urls', 'url='._q($url_propre));
+		$row = sql_fetsel('id_objet, type, date', 'spip_urls', 'url='._q($url_propre));
+	}
 
 	if ($row) {
 		$type = $row['type'];
