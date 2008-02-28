@@ -342,6 +342,7 @@ function spip_sqlite_drop_table($table, $exist='', $serveur='',$requeter=true) {
 
 
 function spip_sqlite_error($query='', $serveur='',$requeter=true) {
+	echo ":: $query<br /><br />";
 	$link  = _sqlite_link($serveur);
 	
 	if (_sqlite_is_version(3, $link)){
@@ -583,10 +584,16 @@ function spip_sqlite_repair($table, $serveur='',$requeter=true){
 
 
 function spip_sqlite_replace($table, $couples, $desc=array(), $serveur='',$requeter=true) {
+	if (!$desc) $desc = description_table($table);
+	if (!$desc) die("$table insertion sans description");
+	$fields =  isset($desc['field'])?$desc['field']:array();
+
+	foreach ($couples as $champ => $val) {
+		$couples[$champ]= _sqlite_calculer_cite($val, $fields[$champ]);
+	}
 	
 	// recherche de champs 'timestamp' pour mise a jour auto de ceux-ci
-	$values = array_map('spip_sqlite_quote', $couples);
-	$values = _sqlite_ajouter_champs_timestamp($table, $couples, '', $serveur);
+	$couples = _sqlite_ajouter_champs_timestamp($table, $couples, $desc, $serveur);
 	
 	return spip_sqlite_query("REPLACE INTO $table (" . join(',',array_keys($couples)) . ') VALUES (' .join(',',$couples) . ')', $serveur);
 }
@@ -1314,7 +1321,7 @@ class sqlite_traiter_requete{
 	// faire le tracage si demande 
 	function executer_requete(){
 		$t = $this->tracer ? trace_query_start(): 0;
-		//echo("<br /><b>executer_requete() $this->serveur >></b> $this->query"); // boum ? pourquoi ?
+//		echo("<br /><b>executer_requete() $this->serveur >></b> $this->query"); // boum ? pourquoi ?
 		if ($this->link){
 			if ($this->sqlite_version == 3) {
 				$r = $this->link->query($this->query);
@@ -1337,7 +1344,6 @@ class sqlite_traiter_requete{
 		} else {
 			$r = false;	
 		}
-
 		if (!$r && $e = spip_sqlite_errno($this->serveur))	// Log de l'erreur eventuelle
 			$e .= spip_sqlite_error($this->query, $this->serveur); // et du fautif
 		
