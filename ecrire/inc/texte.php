@@ -1121,9 +1121,10 @@ function traiter_raccourci_lien_lang($lien, $class, $texte, $hlang, $lang, $bull
 	# Attention, le texte initial est deja echappe mais pas forcement
 	# celui retourne par calculer_url.
 
-	$texte = typo($texte, true, $connect);
-
-	return "<a href=\"$lien\" class=\"$class\"$lang>$texte</a>";
+	return typo('<a href="'.$lien
+		. ($class ? '" class="'.$class : '')
+		. '"'.$lang.'>'
+		. $texte.'</a>', true, $connect);
 }
 
 // Repere dans la partie texte d'un raccourci [texte->...]
