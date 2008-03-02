@@ -42,7 +42,7 @@ function get_spip_doc($fichier) {
 		: $fichier;
 }
 
-// Filtre pour #ID_DOCUMENT ou #URL_DOCUMENT
+// Filtre pour #ID_DOCUMENT ou #FICHIER
 
 // http://doc.spip.org/@contenu_document
 function contenu_document($arg)
