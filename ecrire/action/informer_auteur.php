@@ -28,13 +28,9 @@ function action_informer_auteur_dist() {
 			$prefs = unserialize($row['prefs']);
 			$row['cnx'] = $prefs['cnx'] == 'perma' ? '1' : '0';
 			unset($row['prefs']);
-
-			if ($chercher_logo = charger_fonction('chercher_logo', 'inc')
-			AND list($logo) = $chercher_logo($row['id_auteur'], 'id_auteur', 'on')) {
-				include_spip('inc/filtres');
-				$row['logo'] = reduire_image($logo,100,80);
-			}
-			else $row['logo']='';
+			
+			$page = evaluer_fond('formulaires/logo_auteur', array('id_auteur'=>$row['id_auteur']));
+			$row['logo'] = $page['texte'];
 		}
 		unset($row['id_auteur']);
 

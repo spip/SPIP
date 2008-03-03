@@ -28,9 +28,7 @@
 	<legend><:form_forum_identifiants:></legend>
 		[<p class="reponse_formulaire">(#ENV*{erreur})</p>]
 
-[(#LOGO_AUTEUR||reduire_image{100,80}|inserer_attribut{alt,#ENV{login_alt}}
-|sinon{<span id="spip_logo_auteur" class="spip_logos"></span>})]
-
+		<span id="spip_logo_auteur" class="spip_logos">[(#INCLURE{fond=formulaires/logo_auteur}{id_auteur}|inserer_attribut{alt,#ENV{login_alt}})]</span>
 
 		[<p><label for="var_login"><:login_login2:></label>(#ENV{login}|?{'',' '})<br />
 		<input type="text" class="forml" id="var_login" name="var_login" value="" size="40" /></p>]
@@ -94,37 +92,67 @@ document.getElementById('var_login[_(#ENV{login})]').focus();
 var alea_actuel;
 var alea_futur;
 var login;
-$('#pass_ajax').show().after('<input type="hidden" name="session_login_hidden" id="session_login_hidden" value="" />');
+var informe_auteur_en_cours = false;
+function informe_auteur(c){
+	eval('c = '+c); // JSON
+	if (c) {
+		alea_actuel = c.alea_actuel;
+		alea_futur = c.alea_futur;
+		$('input#session_login_hidden').attr('value',c.login);
+		// indiquer le cnx si on n'y a pas touche
+		$('input#session_remember.intact')
+		.attr('checked',c.cnx=='1'?'checked':'');
+		$('#spip_logo_auteur').html(c.logo);
+	} else {
+		$('#spip_logo_auteur').html('');
+	}
+	informe_auteur_en_cours = false;
+}
+function calcule_md5_pass(pass){
+	$('input\u005b@name=session_password\u005d').attr('value','');
+	$('form#login').attr('action','#ENV{pose_cookie}');
+	$('input\u005b@name=session_password_md5\u005d').attr('value',calcMD5(alea_actuel + pass));
+	$('input\u005b@name=next_session_password_md5\u005d').attr('value',calcMD5(alea_futur + pass));
+}
+$('#boite-login li.pass_ajax').show().parent('ol').after('<input type="hidden" name="session_login_hidden" id="session_login_hidden" value="" />');
 $('#var_login').blur(function(){
 	if (login!=$(this).attr('value')) {
 		login = $(this).attr('value');
-		$.get('#URL_ACTION{informer_auteur}',
-			{var_login:$(this).attr('value')},
-			function (c) {
-				eval('c = '+c); // JSON
-				if (c) {
-					alea_actuel = c.alea_actuel;
-					alea_futur = c.alea_futur;
-					$('input#session_login_hidden').attr('value',c.login);
-					// indiquer le cnx si on n'y a pas touche
-					$('input#session_remember.intact')
-					.attr('checked',c.cnx=='1'?'checked':'');
-					$('#spip_logo_auteur').html(c.logo);
-				} else {
-					$('#spip_logo_auteur').html('');
-				}
-		});
+		informe_auteur_en_cours = true;
+		$.get('#URL_ACTION{informer_auteur}',{var_login:$(this).attr('value')},informe_auteur);
 	}
 });
 $('form#login').submit(function(){
 	pass = $('input\u005b@name=session_password\u005d').attr('value');
 	// ne jamais laisser le pass circuler en clair
-	$('input\u005b@name=session_password\u005d').attr('value','');
 	if (pass) {
-		if (alea_actuel!=undefined) {
-			$(this).attr('action','#ENV{pose_cookie}');
-			$('input\u005b@name=session_password_md5\u005d').attr('value',calcMD5(alea_actuel + pass));
-			$('input\u005b@name=next_session_password_md5\u005d').attr('value',calcMD5(alea_futur + pass));
+		if (alea_actuel)
+			// on a l'alea, on peut lancer le submit apres avoir hashe le pass
+			calcule_md5_pass(pass);
+		else {
+			// on a pas encore l'alea de l'auteur
+			// retrouver les alea de l'auteur qui ne sont pas encore arrives (remplissage auto des champs par le navigateur) !
+			
+			// si l'information est en cours, retenter sa chance
+			if (informe_auteur_en_cours) {
+				setTimeout(function(){$('form#login').submit();},300);
+				return false;
+			}
+
+			// sinon lancer une demande
+			informe_auteur_en_cours = true;
+			$.get('#URL_ACTION{informer_auteur}',{var_login:$('#var_login').attr('value')},function(c) {
+				informe_auteur(c);
+				// le formulaire sera soumis apres reception des info auteur
+				$('form#login').submit();
+			});
+			// ou dans un delai maxi de 5s (pour eviter le blocage a cette etape)
+			// mais sans le pass, ce qui fait retomber sur le scenario de repli du login en 2 passes
+			setTimeout(function(){
+				$('input\u005b@name=session_password\u005d').attr('value','');
+				$('form#login').submit();
+			},3000);
+			return false;
 		}
 	}
 });
