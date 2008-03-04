@@ -114,7 +114,7 @@ function calcule_md5_pass(pass){
 	$('input\u005b@name=session_password_md5\u005d').attr('value',calcMD5(alea_actuel + pass));
 	$('input\u005b@name=next_session_password_md5\u005d').attr('value',calcMD5(alea_futur + pass));
 }
-$('#boite-login li.pass_ajax').show().parent('ol').after('<input type="hidden" name="session_login_hidden" id="session_login_hidden" value="" />');
+$('form#login #pass_ajax').show().after('<input type="hidden" name="session_login_hidden" id="session_login_hidden" value="" />');
 $('#var_login').blur(function(){
 	if (login!=$(this).attr('value')) {
 		login = $(this).attr('value');
