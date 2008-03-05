@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-lb',
 '0_langue' => 'L&euml;tzebuergesch [lb]',
 '0_liste' => 'spip-lb@rezo.net',
-'0_mainteneur' => 'jwander bei pt Punkt lu',
+'0_mainteneur' => 'jim.wanderscheid bei gmail Punkt com',
 
 
 // A

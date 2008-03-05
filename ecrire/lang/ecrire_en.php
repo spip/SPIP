@@ -268,9 +268,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_affichier_visites_articles_plus_visites' => 'Show visits for <b>the most visited articles since the beginning:</b>',
 'info_aide_en_ligne' => 'SPIP Online Help',
 'info_ajout_image' => 'When you add images as attached documents to an article,
-		SPIP can automatically create vignettes (thumbnails) from
-		inserted images. This will allow, for instance, the automated
-		creation of a gallery or a portfolio.',
+  SPIP can automatically create thumbnails from
+  inserted images. This will allow, for instance, the automated
+  creation of a gallery or a portfolio.',
 'info_ajout_participant' => 'The following participant has been added:',
 'info_ajouter_rubrique' => 'Add another section to manage:',
 'info_annonce_nouveautes' => 'Latest news announcements',
@@ -386,7 +386,7 @@ requiring an FTP access to the Web site.',
 'info_gauche_suivi_forum_2' => 'The <i>forums follow-up</i> page is a management tool of your site (not a discussion or editing). It displays all contributions to the forums (both of the public site and of the private area) and allows you to manage these contributions.',
 'info_gauche_visiteurs_enregistres' => 'You will find here the visitors registered
 	in the public area of the site (forums by subscription).',
-'info_generation_miniatures_images' => 'Generating images thumbnails',
+'info_generation_miniatures_images' => 'Generation of thumbnail images',
 'info_gerer_trad' => 'Enable translation links?',
 'info_groupe_important' => 'Important group',
 'info_hebergeur_desactiver_envoi_email' => 'Some hosts disable automated mail sending
@@ -679,8 +679,8 @@ in a colour indicating their status:',
 'item_breve_refusee' => 'NO - News item rejected',
 'item_breve_validee' => 'YES - News item validated',
 'item_choix_administrateurs' => 'administrators',
-'item_choix_generation_miniature' => 'Generate images thumbnails automatically.',
-'item_choix_non_generation_miniature' => 'Do not generate images thumbnails.',
+'item_choix_generation_miniature' => 'Generate thumbnails automatically.',
+'item_choix_non_generation_miniature' => 'Do not generate thumbnails.',
 'item_choix_redacteurs' => 'editors',
 'item_choix_visiteurs' => 'visitors of the public site',
 'item_creer_fichiers_authent' => 'Create .htpasswd files',
