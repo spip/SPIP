@@ -74,6 +74,7 @@ function ajouter_session($auteur) {
 	}
 }
 
+// http://doc.spip.org/@actualiser_sessions
 function actualiser_sessions($auteur){
 	if (!intval($id_auteur = $auteur['id_auteur']))
 		return;
