@@ -48,7 +48,7 @@ function boucle_ARTICLES_dist($id_boucle, &$boucles) {
 	if (!isset($boucle->modificateur['criteres']['statut'])) {
 		if (!$GLOBALS['var_preview']) {
 			if ($GLOBALS['meta']["post_dates"] == 'non')
-				array_unshift($boucle->where,array("'<'", "'$id_table" . ".date'", "'NOW()'"));
+				array_unshift($boucle->where,array("'<='", "'$id_table" . ".date'", "'NOW()'"));
 			array_unshift($boucle->where,array("'='", "'$mstatut'", "'\\'publie\\''"));
 		} else
 			array_unshift($boucle->where,array("'IN'", "'$mstatut'", "'(\\'publie\\',\\'prop\\')'"));
