@@ -85,6 +85,11 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 	list ($ret["hauteur"],$ret["largeur"]) = taille_image($img);
 	if (!($ret["hauteur"] OR $ret["largeur"])) return false;
 
+	$date_src = 0;
+	$date_dest = 0;
+	if (@file_exists($f = $fichier) OR @file_exists($f = "$fichier.src"))
+		$date_src = @filemtime($f);
+
 	// cas general :
 	// on a un dossier cache commun et un nom de fichier qui varie avec l'effet
 	// cas particulier de reduire :
@@ -102,7 +107,7 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 			// on garde la terminaison initiale car image simplement copiee, et on ne change pas son nom
 			$terminaison_dest = $terminaison;
 		else
-			$fichier_dest .= '-'.substr(md5("$fichier-$effet"),0,5);
+			$fichier_dest .= '-'.substr(md5("$fichier-$effet".($date_src?"-$date_src":"")),0,5);
 		$cache = sous_repertoire(_DIR_VAR, $cache);
 		$cache = sous_repertoire($cache, $effet);
 		# cherche un cache existant
@@ -112,7 +117,7 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 			}*/
 	}
 	else 	{
-		$fichier_dest = md5("$fichier-$effet");
+		$fichier_dest = md5("$fichier-$effet".($date_src?"-$date_src":""));
 		$cache = sous_repertoire(_DIR_VAR, $cache);
 	}
 	
@@ -126,16 +131,8 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 		$images_recalcul[$fichier_dest] = true;
 	}
 	else {
-		$date_src = 0;
-		$date_dest = 0;
-		if (@file_exists($f = $fichier) OR @file_exists($f = "$fichier.src"))
-			$date_src = @filemtime($f);
 		if (@file_exists($f = $fichier_dest) OR @file_exists($f = "$fichier_dest.src"))
-			$date_dest = @filemtime($f);
-		# il peut y avoir egalite de date si l'on compare deux .src crees dans la foulee
-		if ( $date_src <= $date_dest ){
 			$creer = false;
-		}
 	}
 	if ($creer) {
 		if (!file_exists($fichier)) {
