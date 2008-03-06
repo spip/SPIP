@@ -103,9 +103,11 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 		$effet = "L{$destWidth}xH$destHeight";
 		$cache = "cache-vignettes";
 		$fichier_dest = basename($fichier_dest);
-		if (($ret['largeur']<=$maxWidth)&&($ret['hauteur']<=$maxHeight))
+		if (($ret['largeur']<=$maxWidth)&&($ret['hauteur']<=$maxHeight)){
 			// on garde la terminaison initiale car image simplement copiee, et on ne change pas son nom
 			$terminaison_dest = $terminaison;
+			$fichier_dest .= "-$date_src";
+		}
 		else
 			$fichier_dest .= '-'.substr(md5("$fichier-$effet".($date_src?"-$date_src":"")),0,5);
 		$cache = sous_repertoire(_DIR_VAR, $cache);
