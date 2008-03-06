@@ -74,6 +74,26 @@ function ajouter_session($auteur) {
 	}
 }
 
+function actualiser_sessions($auteur){
+	if (!intval($id_auteur = $auteur['id_auteur']))
+		return;
+	// .. mettre a jour les sessions de cet auteur
+	$sauve = $GLOBALS['visiteur_session'];
+	include_spip('inc/session');
+	foreach(preg_files(_DIR_SESSIONS, '/'.$id_auteur.'_.*\.php') as $session) {
+		$GLOBALS['visiteur_session'] = array();
+		include $session; # $GLOBALS['visiteur_session'] est alors l'auteur cible
+		foreach (array('id_auteur', 'nom', 'login', 'email', 'statut', 'lang', 'ip_change', 'hash_env', 'bio', 'pgp', 'nom_site', 'url_site', 'en_ligne', 'auth', 'session_nom', 'session_email') AS $var)
+			if (isset($auteur[$var]))
+				$GLOBALS['visiteur_session'][$var] = $auteur[$var];
+		ecrire_fichier_session($session, $GLOBALS['visiteur_session']);
+	}
+	if ($GLOBALS['visiteur_session']['id_auteur'] == $sauve['id_auteur'])
+		verifier_session();
+	else
+		$GLOBALS['visiteur_session']= $sauve;
+	return;
+}
 
 // http://doc.spip.org/@ecrire_fichier_session
 function ecrire_fichier_session($fichier, $auteur) {
