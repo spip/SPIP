@@ -42,13 +42,13 @@ $spip_visites_articles = array(
 $spip_visites_articles_key = array(
 		"PRIMARY KEY"	=> "date, id_article");
 
-$spip_recherches = array(
+$spip_resultats = array(
  		"recherche"	=> "char(16) not null default ''",
 		"id"	=> "INT UNSIGNED NOT NULL",
  		"points"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
 		"maj"	=> "TIMESTAMP" );
 
-$spip_recherches_key = array(
+$spip_resultats_key = array(
 // pas de cle ni index, ca fait des insertions plus rapides et les requetes jointes utilisees en recheche ne sont pas plus lentes ...
 );
 
@@ -282,9 +282,9 @@ $tables_auxiliaires['spip_mots_documents'] = array(
 $tables_auxiliaires['spip_meta'] = array(
 	'field' => &$spip_meta,
 	'key' => &$spip_meta_key);
-$tables_auxiliaires['spip_recherches'] = array(
-	'field' => &$spip_recherches,
-	'key' => &$spip_recherches_key);
+$tables_auxiliaires['spip_resultats'] = array(
+	'field' => &$spip_resultats,
+	'key' => &$spip_resultats_key);
 $tables_auxiliaires['spip_versions'] = array(
 	'field' => &$spip_versions,
 	'key' => &$spip_versions_key);

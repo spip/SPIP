@@ -24,15 +24,6 @@ $GLOBALS['maj'][10990] = array(array('upgrade_types_documents'));
 unset($GLOBALS['maj'][10990]);
 $GLOBALS['maj'][11042] = array(array('upgrade_types_documents'));
 
-function maj_11174() {
-	global $tables_auxiliaires;
-	include_spip('base/auxiliaires');
-	$v = $tables_auxiliaires[$k='spip_recherches'];
-	sql_drop_table('spip_recherches',true); // droppons la table cree en 11172
-	sql_create($k, $v['field'], $v['key'], false, false);
-}
-$GLOBALS['maj'][11174] = array(array('maj_11174'));
-
 
 // Un bug permettait au champ 'upload' d'etre vide, provoquant
 // l'impossibilite de telecharger une image
@@ -40,5 +31,13 @@ $GLOBALS['maj'][11174] = array(array('maj_11174'));
 $GLOBALS['maj'][11171] = array(
 	array('spip_query', "UPDATE spip_types_documents SET upload='oui' WHERE upload IS NULL OR upload!='non'")
 );
+
+function maj_11268() {
+	global $tables_auxiliaires;
+	include_spip('base/auxiliaires');
+	$v = $tables_auxiliaires[$k='spip_resultats'];
+	sql_create($k, $v['field'], $v['key'], false, false);
+}
+$GLOBALS['maj'][11268] = array(array('maj_11268'));
 
 ?>

@@ -14,14 +14,14 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/rechercher');
-@define('_DELAI_CACHE_RECHERCHES',600);
+@define('_DELAI_CACHE_resultats',600);
 
 // Preparer les listes id_article IN (...) pour les parties WHERE
 // et points =  des requetes du moteur de recherche
 // http://doc.spip.org/@inc_prepare_recherche_dist
 function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, $serveur='') {
 	static $cache = array();
-	$delai_fraicheur = min(_DELAI_CACHE_RECHERCHES,time()-$GLOBALS['meta']['derniere_modif']);
+	$delai_fraicheur = min(_DELAI_CACHE_resultats,time()-$GLOBALS['meta']['derniere_modif']);
 
 	// si recherche n'est pas dans le contexte, on va prendre en globals
 	// ca permet de faire des inclure simple.
@@ -37,12 +37,12 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 
 	if (!isset($cache[$recherche][$table])){
 		$hash = substr(md5($recherche . $table),0,16);
-		$res = sql_select('UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(maj) AS fraicheur','spip_recherches',"recherche='$hash'",'','fraicheur DESC','0,1','',$serveur);
+		$res = sql_select('UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(maj) AS fraicheur','spip_resultats',"recherche='$hash'",'','fraicheur DESC','0,1','',$serveur);
 		if ((!$row = sql_fetch($res))
 		 OR ($row['fraicheur']>$delai_fraicheur)){
 		 	$rechercher = true;
 		}
-		$cache[$recherche][$table] = array("recherches.points AS points","recherche='$hash'");
+		$cache[$recherche][$table] = array("resultats.points AS points","recherche='$hash'");
 	}
 
 	// si on n'a pas encore traite les donnees dans une boucle precedente
@@ -72,9 +72,9 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 
 		// supprimer les anciens resultats de cette recherche
 		// et les resultats trop vieux avec une marge
-		sql_delete('spip_recherches','(maj<DATE_SUB(NOW(), INTERVAL '.($delai_fraicheur+100)." SECOND)) OR (recherche='$hash')",$serveur);
+		sql_delete('spip_resultats','(maj<DATE_SUB(NOW(), INTERVAL '.($delai_fraicheur+100)." SECOND)) OR (recherche='$hash')",$serveur);
 
-		// inserer les resultats dans la table de cache des recherches
+		// inserer les resultats dans la table de cache des resultats
 		if (count($points)){
 			$tab_couples = array();
 			foreach ($points as $id => $p){
@@ -84,7 +84,7 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 					'points' => $p['score']
 				);
 			}
-			sql_insertq_multi('spip_recherches',$tab_couples,array(),$serveur);
+			sql_insertq_multi('spip_resultats',$tab_couples,array(),$serveur);
 		}
 	}
 
