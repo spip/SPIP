@@ -194,10 +194,14 @@ function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 				ON r.id_rubrique=rr.id_rubrique
 		";
 
-		if ($GLOBALS['var_preview'])
+		if ($GLOBALS['var_preview']) {
 			array_unshift($boucle->where,"\"(aa.statut IN ('publie','prop') OR bb.statut  IN ('publie','prop') OR rr.statut IN ('publie','prive'))\"");
-		else
-			array_unshift($boucle->where,"\"(aa.statut = 'publie' OR bb.statut = 'publie' OR rr.statut = 'publie')\"");
+		} else {
+			$postdates = ($GLOBALS['meta']['post_dates'] == 'non')
+				? ' AND aa.date<=NOW()'
+				: '';
+			array_unshift($boucle->where,"\"((aa.statut = 'publie'$postdates) OR bb.statut = 'publie' OR rr.statut = 'publie')\"");
+		}
 	}
 
 
