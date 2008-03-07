@@ -31,11 +31,11 @@ function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='',
 	static $num=array();
 	$id_table = "";
 	$cpt = &$num[$boucle->descr['nom']][$boucle->id_boucle];
-	foreach($res as $r) {
+	foreach($res as $cle=>$r) {
 		list($d, $a, $j) = $r;
 		if (!$id_table) $id_table = $d;
 		$n = ++$cpt;
-		$boucle->join[$n]= array("'$id_table'","'$j'");
+		$boucle->join["L$n"]= array("'$id_table'","'$j'");
 		$boucle->from[$id_table = "L$n"] = $a[0];    
 	}
 
@@ -67,7 +67,7 @@ function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='',
 	}
 
 	$boucle->modificateur['lien'] = true;
-	return $n;
+	return "L$n";
   }
 
 
@@ -194,7 +194,7 @@ function trouver_jointure_champ($champ, $boucle)
 		$desc = $boucle->show;
 		$cle = calculer_jointure($boucle, array($desc['id_table'], $desc), $cle, false);
 	}
-	if ($cle) return "L$cle";
+	if ($cle) return $cle;
 	spip_log("trouver_jointure_champ: $champ inconnu");
 	return '';
 }

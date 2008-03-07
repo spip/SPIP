@@ -167,26 +167,22 @@ function critere_recherche_dist($idb, &$boucles, $crit) {
 	else
 		$quoi = '@$Pile[0]["recherche"]';
 
-	// Ne pas executer la requete en cas de hash vide
 	$boucle->hash = '
 	// RECHERCHE
 	$prepare_recherche = charger_fonction(\'prepare_recherche\', \'inc\');
 	list($rech_select, $rech_where) = $prepare_recherche('.$quoi.', "'.$boucle->id_table.'", "'.$crit->cond.'","' . $boucle->sql_serveur . '");
 	';
 
-	// le critere est conditionnel {recherche ?} est traite dans prepare_recherche sur le $rech_where
-	$boucle->hash .= '
-	if ($rech_where) ';
-
 	$t = $boucle->id_table . '.' . $boucle->primary;
 	if (!in_array($t, $boucles[$idb]->select))
 	  $boucle->select[]= $t; # pour postgres, neuneu ici
-	$boucle->select[]= 'recherches.points AS points';
-	$boucle->from=array('recherches'=> 'spip_recherches')+$boucle->from;
-	$boucle->where[]= "'recherches.id=".$boucle->id_table.".".$boucle->primary."'";
+	$boucle->join['recherches']=array("'".$boucle->id_table."'","'id'","'".$boucle->primary."'");
+	$boucle->from['recherches']='spip_recherches';
+	$boucle->select[]= '$rech_select';
+	//$boucle->where[]= "\$rech_where?'recherches.id=".$boucle->id_table.".".$boucle->primary."':''";
 
 	// et la recherche trouve
-	$boucle->where[]= '$rech_where';
+	$boucle->where[]= '$rech_where?$rech_where:\'\'';
 }
 
 // {traduction}
@@ -864,7 +860,7 @@ function calculer_critere_externe_init(&$boucle, $joints, $col, $desc, $eg, $che
 		  }
 		}
 		$cle = calculer_jointure($boucle, array($boucle->id_table, $desc), $cle, $col, $eg);
-		if ($cle) return "L$cle";
+		if ($cle) return $cle;
 	}
 
 	erreur_squelette(_T('zbug_info_erreur_squelette'),

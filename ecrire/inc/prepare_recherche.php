@@ -21,6 +21,7 @@ include_spip('inc/rechercher');
 // http://doc.spip.org/@inc_prepare_recherche_dist
 function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, $serveur='') {
 	static $cache = array();
+	$delai_fraicheur = min(_DELAI_CACHE_RECHERCHES,time()-$GLOBALS['meta']['derniere_modif']);
 
 	// si recherche n'est pas dans le contexte, on va prendre en globals
 	// ca permet de faire des inclure simple.
@@ -29,7 +30,7 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 
 	// traiter le cas {recherche?}
 	if ($cond AND !strlen($recherche))
-		return array("''" /* as points */, /* where */ '1');
+		return array("0 as points" /* as points */, /* where */ '');
 
 
 	$rechercher = false;
@@ -38,10 +39,10 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 		$hash = substr(md5($recherche . $table),0,16);
 		$res = sql_select('UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(maj) AS fraicheur','spip_recherches',"recherche='$hash'",'','fraicheur DESC','0,1','',$serveur);
 		if ((!$row = sql_fetch($res))
-		 OR ($row['fraicheur']>_DELAI_CACHE_RECHERCHES)){
+		 OR ($row['fraicheur']>$delai_fraicheur)){
 		 	$rechercher = true;
 		}
-		$cache[$recherche][$table] = array("points","recherche='$hash'");
+		$cache[$recherche][$table] = array("recherches.points AS points","recherche='$hash'");
 	}
 
 	// si on n'a pas encore traite les donnees dans une boucle precedente
@@ -71,7 +72,7 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 
 		// supprimer les anciens resultats de cette recherche
 		// et les resultats trop vieux avec une marge
-		sql_delete('spip_recherches','(maj<DATE_SUB(NOW(), INTERVAL '.(_DELAI_CACHE_RECHERCHES+100)." SECOND)) OR (recherche='$hash')",$serveur);
+		sql_delete('spip_recherches','(maj<DATE_SUB(NOW(), INTERVAL '.($delai_fraicheur+100)." SECOND)) OR (recherche='$hash')",$serveur);
 
 		// inserer les resultats dans la table de cache des recherches
 		if (count($points)){
