@@ -89,9 +89,9 @@ function ecrire_meta($nom, $valeur, $importable = NULL) {
 	static $touch = true;
 	if (!$nom) return;
 	$GLOBALS['meta'][$nom] = $valeur;
-	$res = spip_query("SELECT impt,valeur FROM spip_meta WHERE nom=" . _q($nom));
-	if (!$res) return; 
 	include_spip('base/abstract_sql');
+	$res = sql_select("impt,valeur","spip_meta","nom=" . sql_quote($nom));
+	if (!$res) return; 
 	$res = sql_fetch($res);
 	// conserver la valeur de impt si existante
 	// et ne pas invalider le cache si affectation a l'identique
@@ -99,14 +99,12 @@ function ecrire_meta($nom, $valeur, $importable = NULL) {
 	// cf effacer pour le double touch
 	$antidate = time() - (_META_CACHE_TIME<<1);
 	if ($touch) {touch_meta($antidate);}
+  $r = array('nom' => $nom, 'valeur' => $valeur);
+  if ($importable) $r['impt'] = $importable;
 	if ($res) {
-		$r = ($importable === NULL) ? ''
-		: (", impt=" .  sql_quote($importable));
-		spip_query("UPDATE spip_meta SET valeur=" . sql_quote($valeur) ."$r WHERE nom=" . sql_quote($nom) );
+		sql_updateq('spip_meta', $r,"nom=" . sql_quote($nom));
 	} else {
-		  $r = array('nom' => $nom, 'valeur' => $valeur);
-		  if ($importable) $r['impt'] = $importable;
-		  sql_insertq('spip_meta', $r);
+		sql_insertq('spip_meta', $r);
 	}
 	if ($touch) {touch_meta($antidate); $touch = false;}
 }
