@@ -345,7 +345,7 @@ function sql_hex($val, $serveur='', $option=true)
 function sql_quote($val, $serveur='', $option=true)
 {
 	$f = sql_serveur('quote', $serveur, true);
-	if (!$f) $f = '_q';
+	if (!is_string($f) OR !$f) $f = '_q';
 	return $f($val);
 }
 
