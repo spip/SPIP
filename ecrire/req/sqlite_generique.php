@@ -145,7 +145,7 @@ function spip_sqlite_alter($query, $serveur='',$requeter=true){
 	 */
 	
 	// 1
-	if (preg_match("/\s*(ALTER(\s*IGNORE)?\s*TABLE\s*([^\s]*))\s*(.*)?/i", $query, $regs)){
+	if (preg_match("/\s*(ALTER(\s*IGNORE)?\s*TABLE\s*([^\s]*))\s*(.*)?/is", $query, $regs)){
 		$debut = $regs[1];
 		$table = $regs[3];
 		$suite = $regs[4];
@@ -162,7 +162,7 @@ function spip_sqlite_alter($query, $serveur='',$requeter=true){
 	foreach ($todo as $do){
 		$do = trim($do);
 		if (!preg_match('/(DROP|CHANGE COLUMN|CHANGE|MODIFY|RENAME TO|RENAME|ADD COLUMN|ADD)\s*([^\s]*)\s*(.*)?/', $do, $matches)){
-			spip_log("SQLite : Probleme de ALTER TABLE, utilisation non reconnue dans : $query", 'sqlite');
+			spip_log("SQLite : Probleme de ALTER TABLE, utilisation non reconnue dans : $do \n(requete d'origine : $query)", 'sqlite');
 			return false;
 		}
 
@@ -1242,6 +1242,7 @@ function _sqlite_ajouter_champs_timestamp($table, $couples, $desc='', $serveur='
 		// avec la gestion de DEFAULT et ON UPDATE
 		// mais ceux-ci ne sont pas utilises dans le core
 		$tables[$table] = array();
+
 		foreach ($desc['field'] as $k=>$v){
 			if (strpos('timestamp', strtolower(ltrim($v)))===0)
 			$tables[$table][] = $k;
