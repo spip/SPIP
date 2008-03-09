@@ -40,4 +40,11 @@ function maj_11268() {
 }
 $GLOBALS['maj'][11268] = array(array('maj_11268'));
 
+
+function maj_11276 () {
+	include_spip('maj/v019');
+	maj_1_938();
+}
+$GLOBALS['maj'][11276] = array(array('maj_11276'));
+
 ?>

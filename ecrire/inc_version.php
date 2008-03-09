@@ -304,7 +304,7 @@ $liste_des_forums = array(
 // (= numero SVN de leur derniere modif cassant la compatibilite et/ou necessitant un recalcul des squelettes)
 $spip_version_code = 11268;
 // version de la base SQL (= numero SVN de sa derniere modif)
-$spip_version = 11268;
+$spip_version = 11276;
 
 // version de l'interface a la base
 $spip_sql_version = 1;

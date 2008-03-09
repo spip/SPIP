@@ -32,7 +32,7 @@ $GLOBALS['maj'][1932] = array(
 	array('sql_alter', "TABLE spip_forum ADD INDEX `date_thread` (`date_thread`)"),
 
 	array('spip_query', "DROP TABLE IF EXISTS spip_tmp"),
-	array('spip_query', "CREATE TEMPORARY TABLE spip_tmp SELECT `id_thread`,MAX(`date_heure`) AS dt FROM spip_forum GROUP BY `id_thread`"),
+	array('spip_query', "CREATE TABLE spip_tmp SELECT `id_thread`,MAX(`date_heure`) AS dt FROM spip_forum GROUP BY `id_thread`"),
 	array('sql_alter', "TABLE spip_tmp ADD INDEX `p` (`id_thread`)"),
 	array('spip_query', "UPDATE spip_forum AS F JOIN spip_tmp AS T ON F.id_thread=T.id_thread SET F.date_thread=T.dt"),
 	array('spip_query', "DROP TABLE spip_tmp"),
@@ -96,12 +96,24 @@ $GLOBALS['maj'][1937] = array(
 
 
 function maj_1_938 () {
-
-	$s = spip_query("SELECT `id_type`,`extension` FROM spip_types_documents");
-	while ($t = sql_fetch($s)) {
-			spip_query("UPDATE spip_documents
-				SET `extension`="._q($t['extension'])
-				." WHERE `id_type`="._q($t['id_type']));
+	$res = sql_select('extension','spip_documents',"extension='' OR extension is NULL");
+	if ($n = sql_count($res)) {
+		$repli = false;
+		// verifier que la colonne id_type est toujours la (update post 1.938)
+		$desc = sql_showtable('spip_documents');
+		if (!$desc OR !isset($desc['field']['id_type']))
+			$repli = true;
+	
+		$s = sql_select('extension'.($repli?'':',id_type'),'spip_types_documents');
+		while ($t = sql_fetch($s)) {
+			if (isset($t['id_type']))
+				spip_query("UPDATE spip_documents	SET `extension`="._q($t['extension'])	." WHERE `id_type`="._q($t['id_type']));
+			else
+				spip_query("UPDATE spip_documents	SET `extension`="._q($t['extension'])	." WHERE fichier LIKE "._q("%." . $t['extension']));
+		}
+		$res = sql_select('extension','spip_documents',"extension='' OR extension is NULL");
+		if ($n = sql_count($res))
+			spip_log("Table spip_documents : Colonne extension incomplete : $n lignes vides");
 	}
 }
 
@@ -413,19 +425,13 @@ $GLOBALS['maj'][1938] = array(
 	array('maj_1_938'),
 # supprimer l'ancien champ et son index
 	array('sql_alter', "TABLE spip_documents DROP INDEX `id_type`, DROP `id_type`"),
+	## supprimer l'autoincrement avant de supprimer la PRIMARY KEY
+	array('sql_alter', "TABLE spip_types_documents CHANGE `id_type` `id_type` BIGINT( 21 ) NOT NULL ") ,
 # le champ id_type devient superflu
 	array('sql_alter', "TABLE spip_types_documents DROP `id_type`"),
 	array('sql_alter', "TABLE spip_types_documents ADD PRIMARY KEY (`extension`)")
 	);
-// pour ceux pour qui c'est trop tard:
-// mais faudrait trouver mieux
-function maj_1_938_catastrophe ()
-{
-	spip_log("Verifier la colonne extension de la table spip_documents; si elle est toujours vide,  repartir d'une sauvegarde 1.9.2");
-}
 
-if ($GLOBALS['meta']['version_installee'] > 1.938)
-	$GLOBALS['maj'][1956] = array(array('maj_1_938_catastrophe'));
 
 // PG veut une valeur par defaut a l'insertion
 // http://trac.rezo.net/trac/spip/changeset/10482
