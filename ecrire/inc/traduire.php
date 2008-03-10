@@ -88,7 +88,7 @@ function inc_traduire_dist($ori, $lang) {
 
 	// modules demandes explicitement
 
-	if (preg_match(",^([a-z0-9/]+):(.*)$,", $ori, $regs)) {
+	if (preg_match(",^([a-z0-9_/]+):(.*)$,", $ori, $regs)) {
 			$modules = explode("/",$regs[1]);
 			$code = $regs[2];
 	} else 	{$modules = array('spip', 'ecrire'); $code = $ori;}
