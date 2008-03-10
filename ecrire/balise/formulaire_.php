@@ -24,7 +24,9 @@ function balise_FORMULAIRE__dist($p) {
 	return calculer_balise_dynamique($p,"FORMULAIRE_$form",array());
 }
 
-
+function protege_valeurs($valeur){
+	return is_string($valeur)?entites_html($valeur):$valeur;
+}
 /* prendre en charge par defaut les balises dynamiques formulaires simples */
 // http://doc.spip.org/@balise_FORMULAIRE__dyn
 function balise_FORMULAIRE__dyn($form)
@@ -87,7 +89,7 @@ function balise_FORMULAIRE__dyn($form)
 	
 	return array($ajax?"formulaires/$form":"formulaires/formulaire_", 0, 
 		array_merge(
-		array_map('entites_html',$valeurs), // proteger les ' et les " dans les champs que l'on va injecter dans les input
+		array_map('protege_valeurs',$valeurs), // proteger les ' et les " dans les champs que l'on va injecter dans les input
 		array(
 			'form' => $form,
 			'action' => $action,
