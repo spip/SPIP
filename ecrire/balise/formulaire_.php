@@ -24,6 +24,7 @@ function balise_FORMULAIRE__dist($p) {
 	return calculer_balise_dynamique($p,"FORMULAIRE_$form",array());
 }
 
+// http://doc.spip.org/@protege_valeurs
 function protege_valeurs($valeur){
 	return is_string($valeur)?entites_html($valeur):$valeur;
 }
