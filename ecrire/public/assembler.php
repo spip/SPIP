@@ -314,6 +314,10 @@ function inclure_page($fond, $contexte_inclus, $connect='') {
 
 	// Une fois le chemin-cache decide, on ajoute la date (et date_redac)
 	// dans le contexte inclus, pour que les criteres {age} etc fonctionnent
+	
+	// ATTENTION : les balises dynamiques passent par la, et l'ajout de la date/heure/seconde rend
+	// tout cache invalide, meme si le reste des arguments est constant
+	// probleme possible de perf ici
 	if (!isset($contexte_inclus['date']))
 		$contexte_inclus['date'] = date('Y-m-d H:i:s');
 	if (!isset($contexte_inclus['date_redac']))
