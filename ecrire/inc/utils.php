@@ -418,11 +418,15 @@ function joli_repertoire($rep) {
 function spip_timer($t='rien') {
 	static $time;
 	$a=time(); $b=microtime();
-
+	// microtime peut contenir les microsecondes et le temps
+	$b=explode(' ',$b);
+	if (count($b)==2) $a = end($b); // plus precis !
+	$b = reset($b);
 	if (isset($time[$t])) {
 		$p = $a + $b - $time[$t];
 		unset($time[$t]);
-		return sprintf("%.2fs", $p);
+		if ($p>0.01)	return sprintf("%.3fs", $p);
+		else					return sprintf("%.1fms", $p*1000);
 	} else
 		$time[$t] = $a + $b;
 }
