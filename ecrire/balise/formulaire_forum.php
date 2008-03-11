@@ -214,6 +214,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 		'nobot' => _request('nobot'),
 		'ajouter_groupe' => $ajouter_groupe,
 		'ajouter_mot' => (is_array($ajouter_mot) ? $ajouter_mot : array($ajouter_mot)),
+		'id_forum' => $id_forum, // passer id_forum au formulaire pour lui permettre d'afficher a quoi l'internaute repond
 
 		));
 }
