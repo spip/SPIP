@@ -222,7 +222,8 @@ function traiter_echap_script_dist($regs) {
 // http://doc.spip.org/@echappe_html
 function echappe_html($letexte, $source='', $no_transform=false,
 $preg='') {
-	if (!strlen($letexte)) return '';
+	if (!is_string($letexte) or !strlen($letexte))
+		return $letexte;
 
 	if (!$preg) $preg = ',<(html|code|cadre|frame|script)'
 			.'(\s[^>]*)?'
@@ -301,11 +302,6 @@ function echappe_retour_modeles($letexte)
 	// Dans l'espace prive, securiser ici
 	if (!_DIR_RESTREINT)
 		$letexte = interdire_scripts($letexte);
-
-	// Reinserer les echappements des modeles 
-
-	if (defined('_PROTEGE_JS_MODELES'))
-		$letexte = echappe_retour($letexte,"javascript"._PROTEGE_JS_MODELES);
 
 	return trim($letexte);
 }
@@ -429,46 +425,65 @@ function echappe_js($t,$class='') {
 // http://doc.spip.org/@protege_js_modeles
 function protege_js_modeles($t) {
 	if (isset($GLOBALS['visiteur_session'])){
-		if (!defined('_PROTEGE_JS_MODELES')){
-			include_spip('inc/acces');
-			define('_PROTEGE_JS_MODELES',creer_uniqid());
-		}
-		if (preg_match_all(',<script.*?($|</script.),isS', $t, $r, PREG_SET_ORDER))
+		if (preg_match_all(',<script.*?($|</script.),isS', $t, $r, PREG_SET_ORDER)){
+			if (!defined('_PROTEGE_JS_MODELES')){
+				include_spip('inc/acces');
+				define('_PROTEGE_JS_MODELES',creer_uniqid());
+			}
 			foreach ($r as $regs)
 				$t = str_replace($regs[0],code_echappement($regs[0],'javascript'._PROTEGE_JS_MODELES),$t);
+		}
+		if (preg_match_all(',<\?php.*?($|\?'.'>),isS', $t, $r, PREG_SET_ORDER)){
+			if (!defined('_PROTEGE_PHP_MODELES')){
+				include_spip('inc/acces');
+				define('_PROTEGE_PHP_MODELES',creer_uniqid());
+			}
+			foreach ($r as $regs)
+				$t = str_replace($regs[0],code_echappement($regs[0],'php'._PROTEGE_PHP_MODELES),$t);
+		}
 	}
 	return $t;
 }
 
 // Securite : empecher l'execution de code PHP, en le transformant en joli code
+// l'espace prive est securise globalement par un appel explicite un interdire_script
+// on desactive l'appel des squelettes tant que la protection globale est la
+// a terme (tout l'espace prive en skel) il faudra mettre $protege_espace_prive = true
 // http://doc.spip.org/@interdire_scripts
-function interdire_scripts($t) {
-
-	// rien ?
-	if (!$t OR !strstr($t, '<')) return $t;
-
-	// echapper les tags asp/php
-	$t = str_replace('<'.'%', '&lt;%', $t);
-
-	// echapper le php
-	$t = str_replace('<'.'?', '&lt;?', $t);
-
-	// echapper le < script language=php >
-	$t = preg_replace(',<(script\b[^>]+\blanguage\b[^\w>]+php\b),UimsS', '&lt;\1', $t);
-
-	// Pour le js, trois modes : parano (-1), prive (0), ok (1)
-	switch($GLOBALS['filtrer_javascript']) {
-		case 0:
-			if (!_DIR_RESTREINT)
-				$t = echappe_js($t,' style="color:red"');
-			break;
-		case -1:
-			$t = echappe_js($t);
-			break;
+function interdire_scripts($t, $protege_espace_prive = false) {
+	if (_DIR_RESTREINT || $protege_espace_prive) {
+	
+		// rien ?
+		if (!$t OR !strstr($t, '<')) return $t;
+	
+		// echapper les tags asp/php
+		$t = str_replace('<'.'%', '&lt;%', $t);
+	
+		// echapper le php
+		$t = str_replace('<'.'?', '&lt;?', $t);
+	
+		// echapper le < script language=php >
+		$t = preg_replace(',<(script\b[^>]+\blanguage\b[^\w>]+php\b),UimsS', '&lt;\1', $t);
+	
+		// Pour le js, trois modes : parano (-1), prive (0), ok (1)
+		switch($GLOBALS['filtrer_javascript']) {
+			case 0:
+				if (!_DIR_RESTREINT)
+					$t = echappe_js($t,' style="color:red"');
+				break;
+			case -1:
+				$t = echappe_js($t);
+				break;
+		}
+	
+		// pas de <base href /> svp !
+		$t = preg_replace(',<(base\s),iS', '&lt;\1', $t);
 	}
-
-	// pas de <base href /> svp !
-	$t = preg_replace(',<(base\s),iS', '&lt;\1', $t);
+	// Reinserer les echappements des modeles 
+	if (defined('_PROTEGE_JS_MODELES'))
+		$t = echappe_retour($t,"javascript"._PROTEGE_JS_MODELES);
+	if (defined('_PROTEGE_PHP_MODELES'))
+		$t = echappe_retour($t,"php"._PROTEGE_PHP_MODELES);
 
 	return $t;
 }
@@ -523,8 +538,10 @@ function typo($letexte, $echapper=true, $connect='') {
 		$letexte = echappe_retour($letexte, 'TYPO');
 
 	// Dans l'espace prive, securiser ici
+	// quand tout l'espace prive sera en skel, supprimer cette ligne et retablir
+	// $protege_espace_prive = true dans interdire_script
 	if (!_DIR_RESTREINT)
-		$letexte = interdire_scripts($letexte);
+		$letexte = interdire_scripts($letexte,true);
 
 	return $letexte;
 }

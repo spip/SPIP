@@ -1,0 +1,4 @@
+<?php
+/* une fonction qui produit du php qui ne sera execute qu'au service final de la page */
+echo executer_balise_dynamique('FORMULAIRE_',array_merge(array('[(#ENV{class}|texte_script)]'),[(#ENV{args}|var_export{true})]),array(),'#ENV{lang}',0);
+?>
