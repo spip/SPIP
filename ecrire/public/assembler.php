@@ -104,8 +104,9 @@ function public_assembler_dist($fond, $connect='') {
 	 AND (include_spip('inc/securiser_action'))
 	 AND ($cle == calculer_cle_action($form . $args))) {
 		$args = unserialize(base64_decode($args));
-		if (($valider = charger_fonction("valider","formulaires/$form/",true))
-		 && (count($_POST["erreurs_$form"] = call_user_func_array($valider,$args))==0)
+		if (
+		 (!($valider = charger_fonction("valider","formulaires/$form/",true))
+		   || (count($_POST["erreurs_$form"] = call_user_func_array($valider,$args))==0))
 		 && ($modifier = charger_fonction("modifier","formulaires/$form/"))
 		 ) {
 			$_POST["message_ok_$form"] = call_user_func_array($modifier,$args);
