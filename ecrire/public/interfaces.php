@@ -81,10 +81,9 @@ class Boucle {
 	var $ligne = 0;
 	var $descr =  array(); # noms des fichiers source et but etc
 
-	var $modificateur = array(); // table pour stocker les modificateurs de boucle tels que tout, plat, fragment ..., utilisable par les plugins egalement
+	var $modificateur = array(); // table pour stocker les modificateurs de boucle tels que tout, plat ..., utilisable par les plugins egalement
 
 	// obsoletes, conserves provisoirement pour compatibilite
-	var $fragment; # definir un fragment de page
 	var $tout = false;
 	var $plat = false;
 	var $lien = false;

@@ -297,26 +297,12 @@ function auto_content_type($page)
 	  }
 }
 
-// http://doc.spip.org/@stop_inclure
-function stop_inclure($fragment) {
-	if ($fragment == _request('var_fragment')) {
-		define('_STOP_INCLURE', 1);
-		#spip_log("fin du fragment $fragment, on arrete d'inclure");
-	}
-}
 // http://doc.spip.org/@inclure_page
 function inclure_page($fond, $contexte_inclus, $connect='') {
 	global $lastmodified;
 	if (!defined('_PAS_DE_PAGE_404'))
 		define('_PAS_DE_PAGE_404',1);
 
-	// Si un fragment est demande et deja obtenu, inutile de continuer a inclure
-	if (defined('_STOP_INCLURE')) {
-		return array(
-		'texte' => '',
-		'process_ins' => 'html'
-		);
-	}
 	$contexte_inclus['fond'] = $fond; // securite, necessaire pour calculer correctement le cache
 
 	// Si on a inclus sans fixer le critere de lang, on prend la langue courante
@@ -441,7 +427,6 @@ function f_tidy ($texte) {
 	if ($xhtml # tidy demande
 	AND $GLOBALS['html'] # verifie que la page avait l'entete text/html
 	AND strlen($texte)
-	AND (_request('var_fragment') === NULL)
 	AND !headers_sent()) {
 		# Compatibilite ascendante
 		if (!is_string($xhtml)) $xhtml ='tidy';

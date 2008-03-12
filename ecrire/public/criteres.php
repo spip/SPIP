@@ -141,17 +141,9 @@ function critere_pagination_dist($idb, &$boucles, $crit) {
 }
 
 // {fragment}
-// provoque le reperage de la boucle dans le squelette pour permettre son extraction
-// dans une requete ajax sur l'url de la page avec &var_fragment=...
-// http://www.spip.net/@fragment
 // http://doc.spip.org/@critere_fragment_dist
+// deprecie, doit on le supprimer ? cela ne concerne vraiment que peu de monde ...
 function critere_fragment_dist($idb, &$boucles, $crit) {
-	if (!($param = $crit->param[0][0]->texte))
-		$param = 'fragment_'.$boucle->descr['nom'].$idb;
-	if ($crit->not)
-		$param = false;
-	$boucle = &$boucles[$idb];
-	$boucle->modificateur['fragment'] = $param;
 }
 
 
