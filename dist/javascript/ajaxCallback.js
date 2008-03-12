@@ -55,3 +55,67 @@ if(!jQuery.load_handlers) {
 	};
 
 }
+
+// animation du bloc cible pour faire patienter
+jQuery.fn.animeajax = function(end) {
+	this.children().css('opacity', 0.5);
+	if (typeof ajax_image_searching != 'undefined')
+		this.prepend(ajax_image_searching);
+	return this; // don't break the chain
+}
+
+// rechargement ajax d'un formulaire dynamique implemente par formulaires/forumlaire_.html
+jQuery.fn.formulaire_dyn_ajax = function(target) {
+	this
+	.not('.noajax')
+	.prepend("<"+"input type='hidden' name='var_ajax' value='1' /"+">")
+	.ajaxForm({"target":'#'+target,
+			"beforeSubmit":
+			function(){
+				$('#'+target).animeajax().addClass('loading');
+			},
+			"success":
+			function(){
+				$('#'+target).removeClass('loading');
+			}
+	})
+	.addClass('.noajax');	// previent qu'on n'ajaxera pas deux fois le meme formulaire en cas de ajaxload
+	return this; // don't break the chain
+}
+
+// rechargement ajax d'une noisette implementee par fond/ajax.html
+// avec mise en cache des url
+var preloaded_urls = {};
+var ajaxbloc_selecteur;
+jQuery.fn.ajaxbloc = function() {
+		var blocfrag = this;
+		var ajax_env = $('input[@name=var_ajax_env]',this).eq(0).attr('value');
+		if (!ajax_env || ajax_env==undefined) return;
+		var ajax_cle = $('input[@name=var_ajax_cle]',this).eq(0).attr('value');
+		if (!ajax_cle || ajax_cle==undefined) return;
+		if (ajaxbloc_selecteur==undefined)
+			ajaxbloc_selecteur = '.pagination a,a.ajax';
+		$(ajaxbloc_selecteur,this).not('.noajax').each(function(){
+			var url = this.href.split('#');
+			url[0] += (url[0].indexOf("?")>0 ? '&':'?')+'var_ajax=1&var_ajax_env='+ajax_env+'&var_ajax_cle='+ajax_cle;
+			if ($(this).is('.preload') && !preloaded_urls[url[0]]) {
+				$.ajax({"url":url[0],"success":function(r){preloaded_urls[url[0]]=r;}});
+			}
+			$(this).click(function(){
+				$(blocfrag).animeajax().addClass('loading');
+				var on_pagination = function(contenu) {
+					preloaded_urls[url[0]] = contenu;
+					$(blocfrag).html(preloaded_urls[url[0]]);
+					$(blocfrag).removeClass('loading');
+					window.location.hash = url[1];
+				}
+				if(preloaded_urls[url[0]]) {
+					on_pagination(preloaded_urls[url[0]]);
+					triggerAjaxLoad(blocfrag);
+				} else {
+					$.ajax({"url":url[0],"success":on_pagination});
+				}
+				return false;
+			});
+		}).addClass('.noajax'); // previent qu'on ajax pas deux fois le meme lien
+};

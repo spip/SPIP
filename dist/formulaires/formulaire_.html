@@ -1,10 +1,8 @@
 <div id='#ENV{ajaxid}'>
 <INCLURE{fond=formulaires/#ENV{form}}{env}>
 </div>
-<script type='text/javascript' src='#CHEMIN{javascript/layer.js}'></script>
-<script type='text/javascript'>if (window.jQuery){
-jQuery('document').ready(function(){
-	jQuery('div#[(#ENV{ajaxid})] form').formulaire_dyn_ajax('#ENV{ajaxid}');
-});
-}
+<script type='text/javascript'>
+var ajaxform_#ENV{ajaxid} = function() {if (window.jQuery) jQuery('div#[(#ENV{ajaxid})] form',this).formulaire_dyn_ajax('#ENV{ajaxid}');}
+jQuery('document').ready(ajaxform_#ENV{ajaxid});
+onAjaxLoad(ajaxform_#ENV{ajaxid});
 </script>
