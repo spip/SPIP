@@ -4,6 +4,7 @@
 config/remove.txt -text
 dist/favicon.ico -text
 dist/feed.png -text
+dist/fond/ajax.html -text
 dist/formulaires/choix_mots.html -text
 dist/formulaires/formulaire_.html -text
 dist/formulaires/login_forum_abo.html -text
