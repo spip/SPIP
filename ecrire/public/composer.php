@@ -251,7 +251,6 @@ function executer_balise_dynamique($nom, $args, $filtres, $lang, $ligne) {
 		else
 			die ("pas de balise dynamique pour #". strtolower($nom)." !");
 	}
-
 	// Y a-t-il une fonction de traitement filtres-arguments ?
 	$f = 'balise_' . $nom . '_stat';
 	if (function_exists($f))
@@ -261,6 +260,18 @@ function executer_balise_dynamique($nom, $args, $filtres, $lang, $ligne) {
 	if (!is_array($r))
 		return $r;
 	else {
+		// verifier que la fonction dyn est la, sinon se replier sur la generique si elle existe
+		if (!function_exists('balise_' . $nom . '_dyn')){
+			// regarder si une fonction generique n'existe pas
+			if (($p = strpos($nom,"_"))
+			&& ($file = find_in_path(strtolower(substr($nom,0,$p+1)) .'.php', 'balise/', true))) {
+				// dans ce cas, on lui injecte en premier arg le nom de la balise qu'on doit traiter
+				array_unshift($r,$nom);
+				$nom = substr($nom,0,$p+1);
+			}
+			else
+				die ("pas de balise dynamique pour #". strtolower($nom)." !");
+		}
 		if (!_DIR_RESTREINT) 
 			$file = _DIR_RESTREINT_ABS . $file;
 		return synthetiser_balise_dynamique($nom, $r, $file, $lang, $ligne);
