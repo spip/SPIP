@@ -153,6 +153,7 @@ function balise_URL_ECRIRE_dist($p) {
 //
 // http://doc.spip.org/@balise_URL_ACTION_AUTEUR_dist
 function balise_URL_ACTION_AUTEUR_dist($p) {
+	$p->descr['session'] = true;
 
 	if ($p->boucles[$p->id_boucle]->sql_serveur) {
 		$p->code = 'generer_url_public("404")';
@@ -162,13 +163,12 @@ function balise_URL_ACTION_AUTEUR_dist($p) {
 	$p->code = interprete_argument_balise(1,$p);
 	$args = interprete_argument_balise(2,$p);
 	if ($args != "''" && $args!==NULL)
-		$p->code .= ".'\",\"'.".$args;
+		$p->code .= ",".$args;
 	$redirect = interprete_argument_balise(3,$p);
 	if ($redirect != "''" && $redirect!==NULL)
-		$p->code .= ".'\",\"'.".$redirect;
+		$p->code .= ",".$redirect;
 
-	$p->code = "'<"."?php echo generer_action_auteur(\"'." . $p->code .".'\"); ?>'";
-
+	$p->code = "generer_action_auteur(" . $p->code . ")";
 	$p->interdire_scripts = false;
 	return $p;
 }
