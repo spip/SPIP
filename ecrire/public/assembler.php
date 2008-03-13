@@ -107,7 +107,7 @@ function public_assembler_dist($fond, $connect='') {
 		if (
 		 (!($valider = charger_fonction("valider","formulaires/$form/",true))
 		   || (count($_POST["erreurs_$form"] = call_user_func_array($valider,$args))==0))
-		 && ($modifier = charger_fonction("modifier","formulaires/$form/"))
+		 && ($modifier = charger_fonction("modifier","formulaires/$form/",true))
 		 ) {
 			$_POST["message_ok_$form"] = call_user_func_array($modifier,$args);
 			// modifier peut retourner soit un message, soit un array(editable,message)
