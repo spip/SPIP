@@ -77,6 +77,7 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 			"success":
 			function(){
 				$('#'+target).removeClass('loading');
+				window.location.hash = target;
 			}
 	})
 	.addClass('.noajax');	// previent qu'on n'ajaxera pas deux fois le meme formulaire en cas de ajaxload
