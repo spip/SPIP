@@ -74,6 +74,9 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 	if ($type == 'groupes_mot') $type = 'groupemots';
 	#if ($type == 'syndic_article') $type = 'syndicarticle';
 
+	if (isset($GLOBALS['autoriser_exception'][$faire][$type][$id])
+	  && autoriser_exception($faire,$type,$id,'verifier')) return true;
+	
 	// Chercher une fonction d'autorisation
 	// Dans l'ordre on va chercher autoriser_type_faire, autoriser_type,
 	// autoriser_faire, autoriser_defaut ; puis les memes avec _dist
@@ -105,6 +108,22 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 	if (_DEBUG_AUTORISER) spip_log("$f($faire,$type,$id,$qui[nom]): ".($a?'OK':'niet'));
 
 	return $a;
+}
+
+// une globale pour aller au plus vite dans la fonction generique ci dessus
+$GLOBALS['autoriser_exception']=array();
+function autoriser_exception($faire,$type,$id,$autoriser=true){
+	// une static innaccessible par url pour verifier que la globale est positionnee a bon escient
+	static $autorisation;
+	if ($autoriser==='verifier')
+			return isset($autorisation[$faire][$type][$id]);
+	if ($autoriser===true)
+		$GLOBALS['autoriser_exception'][$faire][$type][$id] = $autorisation[$faire][$type][$id] = true;
+	if ($autoriser===false) {
+		unset($GLOBALS['autoriser_exception'][$faire][$type][$id]);
+		unset($autorisation[$faire][$type][$id]);
+	}
+	return false;
 }
 
 // Autorisation par defaut : les admins complets OK, les autres non
