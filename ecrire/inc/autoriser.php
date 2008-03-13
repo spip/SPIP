@@ -112,6 +112,7 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 
 // une globale pour aller au plus vite dans la fonction generique ci dessus
 $GLOBALS['autoriser_exception']=array();
+// http://doc.spip.org/@autoriser_exception
 function autoriser_exception($faire,$type,$id,$autoriser=true){
 	// une static innaccessible par url pour verifier que la globale est positionnee a bon escient
 	static $autorisation;
