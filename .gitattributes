@@ -13,6 +13,7 @@ dist/formulaires/logo_auteur.html -text
 dist/formulaires/oubli/charger.php -text
 dist/formulaires/oubli/modifier.php -text
 dist/formulaires/oubli/valider.php -text
+dist/formulaires/recherche/charger.php -text
 dist/icones_barre/agrave-maj.png -text
 dist/icones_barre/blanc.png -text
 dist/icones_barre/eacute-maj.png -text
