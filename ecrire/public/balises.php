@@ -1044,7 +1044,7 @@ function balise_INCLURE_dist($p) {
 	if (isset($_contexte['fond'])) {
 		if (isset($_contexte['ajax'])){
 			$_contexte['fond_ajax'] = preg_replace(",fond,","fond_ajax",$_contexte['fond'],1);
-			$_contexte['fond'] = "\'fond\' => ' . argumenter_squelette('fond/ajax') . '";
+			$_contexte['fond'] = "'fond' => 'fond/ajax_stat'";
 			unset($_contexte['ajax']);
 		}
 		// Critere d'inclusion {env} (et {self} pour compatibilite ascendante)
