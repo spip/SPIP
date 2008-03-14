@@ -75,7 +75,7 @@ function balise_FORMULAIRE__dyn($form)
 	// recuperer la saisie en cours si erreurs
 	foreach(array_keys($valeurs) as $champ){
 		if ($v = _request($champ))
-			$valeurs[$champ] = urldecode($v);
+			$valeurs[$champ] = $v;
 		$action = parametre_url($action,$champ,''); // nettoyer l'url des champs qui vont etre saisis
 	}
 	$action = parametre_url($action,'formulaire_action',''); // nettoyer l'url des champs qui vont etre saisis
