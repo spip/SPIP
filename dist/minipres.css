@@ -94,9 +94,11 @@ p.resultat.echec {background-color:#d60c0c;}
 }
 #infos_etapes li.prochains {
 	background: url(../dist/images/degrade-etapes-clair-left.gif) top left;
+	color: #666666;
 }
 #infos_etapes li.valides {
 	background: url(../dist/images/degrade-etapes-vert-left.gif) top left;
+	color: #128f02;
 }
 #infos_etapes li.erreur {
 	background: url(../dist/images/degrade-etapes-rouge-left.gif) top left;
