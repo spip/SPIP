@@ -162,14 +162,39 @@ function version_svn_courante($dir) {
 //
 // Fonctions graphiques
 //
+// La matrice est necessaire pour ne filtrer _que_ des fonctions definies dans filtres_images
+// et laisser passer les fonctions personnelles baptisees image_...
+$GLOBALS['spip_matrice']['image_valeurs_trans'] = true;
+$GLOBALS['spip_matrice']['image_reduire'] = true;
+$GLOBALS['spip_matrice']['image_reduire_par'] = true;
+$GLOBALS['spip_matrice']['image_recadre'] = true;
+$GLOBALS['spip_matrice']['image_alpha'] = true;
+$GLOBALS['spip_matrice']['image_flip_vertical'] = true;
+$GLOBALS['spip_matrice']['image_flip_horizontal'] = true;
+$GLOBALS['spip_matrice']['image_masque'] = true;
+$GLOBALS['spip_matrice']['image_nb'] = true;
+$GLOBALS['spip_matrice']['image_flou'] = true;
+$GLOBALS['spip_matrice']['image_RotateBicubic'] = true;
+$GLOBALS['spip_matrice']['image_rotation'] = true;
+$GLOBALS['spip_matrice']['image_distance_pixel'] = true;
+$GLOBALS['spip_matrice']['image_decal_couleur'] = true;
+$GLOBALS['spip_matrice']['image_gamma'] = true;
+$GLOBALS['spip_matrice']['image_decal_couleur_127'] = true;
+$GLOBALS['spip_matrice']['image_sepia'] = true;
+$GLOBALS['spip_matrice']['image_aplatir'] = true;
+$GLOBALS['spip_matrice']['image_couleur_extraire'] = true;
+$GLOBALS['spip_matrice']['image_select'] = true;
+$GLOBALS['spip_matrice']['image_renforcement'] = true;
+$GLOBALS['spip_matrice']['image_imagick'] = true;
+$GLOBALS['spip_matrice']['image_ramasse_miettes'] = true;
+$GLOBALS['spip_matrice']['image_passe_partout'] = true;
 
 // charge les fonctions graphiques et applique celle demandee
 // http://doc.spip.org/@filtrer
 function filtrer($filtre) {
 	find_in_path('filtres_images.php', 'inc/', true);
-
 	$tous = func_get_args();
-	if (substr($filtre,0,6)=='image_')
+	if (substr($filtre,0,6)=='image_' && $GLOBALS['spip_matrice']['$filtre'])
 		return image_filtrer($tous);
 	else{
 		array_shift($tous); # enlever $filtre
@@ -1285,8 +1310,6 @@ function extraire_attribut($balise, $attribut, $complet = false) {
 			$attribut);
 		return $balise;
 	}
-
-
 	if (preg_match(
 	',(^.*?<(?:(?>\s*)(?>[\w:]+)(?>(?:=(?:"[^"]*"|\'[^\']*\'|[^\'"]\S*))?))*?)(\s+'
 	.$attribut
@@ -1302,7 +1325,7 @@ function extraire_attribut($balise, $attribut, $complet = false) {
 		} else {
 			$r[4] = trim($r[2]); 
 		}
-		$att = filtrer_entites(str_replace("&#39;", "'", $r[4]));
+		$att = (str_replace("&#39;", "'", $r[4]));
 	}
 	else
 		$att = NULL;
