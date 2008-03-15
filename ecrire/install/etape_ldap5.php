@@ -23,14 +23,13 @@ function install_etape_ldap5_dist()
 
 	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
 
-	echo info_etape(_T('info_ldap_ok'), _T('info_terminer_installation'));
+	echo info_etape(_T('info_ldap_ok'), info_progression_etape(5,'etape_ldap','install/'), _T('info_terminer_installation'));
 
 	echo generer_form_ecrire('install', (
 		"<input type='hidden' name='etape' value='3' />" .
 		"<input type='hidden' name='ldap_present' value='true' />" 
 		. bouton_suivant()));
 
-	echo info_progression_etape(5,'etape_ldap','install/');
 	echo install_fin_html();
 }
 

@@ -162,6 +162,8 @@ function install_propose_ldap()
 function install_premier_auteur($email, $login, $nom, $pass, $hidden)
 {
 	return info_etape(_T('info_informations_personnelles'),
+			info_progression_etape(3,'etape_','install/'),
+
 		     "<b>"._T('texte_informations_personnelles_1')."</b>" .
 			     aide ("install5") .
 			     "<p>" .
@@ -237,8 +239,11 @@ function install_etape_3_dist()
 
 		$res = install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db, $sel_db, $chmod_db);
 
-		if ($res)
+		if ($res) {
+			$res .= info_progression_etape(2,'etape_','install/', true);
+
 			$res .= "<p class='resultat echec'><b>"._T('avis_operation_echec')."</b></p>"._T('texte_operation_echec');
+		}
 	
 	} else { 
 		$res = '';
@@ -274,7 +279,6 @@ function install_etape_3_dist()
 
 	echo install_debut_html();
 	echo $res;
-	echo info_progression_etape(3,'etape_','install/');
 	echo install_fin_html();
 }
 

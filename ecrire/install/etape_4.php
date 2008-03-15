@@ -38,6 +38,7 @@ function install_etape_4_dist()
 			echo minipres(
 			'AUTO',
 			"<h2>$echec</h2>\n".
+			info_progression_etape(3,'etape_','install/', true).
 			"<p class='resultat echec'>"._T('avis_connexion_echec_2')."</p>"
 			);
 			exit;
@@ -53,6 +54,7 @@ function install_etape_4_dist()
 		redirige_url_ecrire('install');
 
 	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
+	echo info_progression_etape(5,'etape_','install/');
 
 	echo info_etape(_T('info_derniere_etape'),
 			_T('info_utilisation_spip')
@@ -110,7 +112,6 @@ function install_etape_4_dist()
 	  . bouton_suivant(_T('login_espace_prive'));
 
 	echo generer_form_ecrire('install', $suite);
-	echo info_progression_etape(4,'etape_','install/');
 	echo install_fin_html();
 }
 

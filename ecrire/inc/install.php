@@ -155,16 +155,30 @@ function bouton_suivant($code = '') {
 }
 
 // http://doc.spip.org/@info_progression_etape
-function info_progression_etape($en_cours,$phase,$dir){
+function info_progression_etape($en_cours,$phase,$dir, $erreur = false){
 	//$en_cours = _request('etape')?_request('etape'):"";
 	$liste = find_all_in_path($dir,$phase.'(([0-9])+|fin)[.]php$');
 	$debut = 1; $etat = "ok";
-	$last = count($liste)-1; // ne pas afficher l'etape finale qui dit juste "tout est OK"
-	$texte_etat = array('ok'=>'OK','encours'=>_L('en cours'),'todo'=>_L('&agrave; venir'));
+	$last = count($liste); 
+//	$texte_etat = array('ok'=>'OK','encours'=>_L('en cours'),'todo'=>_L('&agrave; venir'));
 	
-	$aff_etapes = "<span id='etapes'>";
+	$intitule_etat["etape_"][1] = _L("Connexion &agrave; votre base de donn&eacute;es");
+	$intitule_etat["etape_"][2] = _T('menu_aide_installation_choix_base');
+	$intitule_etat["etape_"][3] = _T('info_informations_personnelles');
+	$intitule_etat["etape_"][4] = _T('info_derniere_etape');
+	
+	$intitule_etat["etape_ldap"][1] = _T('titre_connexion_ldap');
+	$intitule_etat["etape_ldap"][2] = _T('titre_connexion_ldap');
+	$intitule_etat["etape_ldap"][3] = _T('info_chemin_acces_1');
+	$intitule_etat["etape_ldap"][4] = _T('info_reglage_ldap');
+	$intitule_etat["etape_ldap"][5] = _T('info_ldap_ok');
+	
+//	$aff_etapes = "<span id='etapes'>";
+
+	$aff_etapes = "<ul id='infos_etapes'>";
+	
 	foreach($liste as $etape=>$fichier){
-		if ($etape=="$phase$en_cours.php"){
+/*		if ($etape=="$phase$en_cours.php"){
 			$etat = "encours";
 		}
 		$aff_etapes .= ($debut<$last)
@@ -172,9 +186,21 @@ function info_progression_etape($en_cours,$phase,$dir){
 			: '';
 		if ($etat == "encours")
 			$etat = 'todo';
+*/		
+		if ($debut < $last) {
+			if ($debut == $en_cours && $erreur) $class = "erreur";
+			else if ($debut == $en_cours) $class = "encours";
+			else if ($debut > $en_cours) $class = "prochains";
+			else $class = "valides";
+
+			$aff_etapes .= "<li class='$class'>";
+			$aff_etapes .= "<span class='numero_etape'>$debut</span>".$intitule_etat["$phase"][$debut];
+			$aff_etapes .= "</li>";
+		}
 		$debut++;
 	}
-	$aff_etapes .= "<br class='nettoyeur' />&nbsp;</span>\n";
+	$aff_etapes .= "</ul>";
+	$aff_etapes .= "<br class='nettoyeur' /\n";
 	return $aff_etapes;
 }
 
