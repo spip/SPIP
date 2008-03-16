@@ -66,13 +66,13 @@ p.resultat.echec {background-color:#d60c0c;}
 
 #infos_etapes li {
 	float: left; 
-	width: 121px;
-	padding-left: 20px;
+	width: 8em;
+	padding-left: 2.5em;
 	padding-right: 20px;
 	padding-top: 10px;
 	height: 69px;
 	text-align: left;
-	font-size: 12px;
+	font-size: 0.9em;
 	line-height: 1.05em;
 	margin-left: -17px;
 }
