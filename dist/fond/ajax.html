@@ -10,7 +10,7 @@ if (window.jQuery) {
 		.prepend('<div><input type=\'hidden\' name=\'var_ajax_env\' value=\'#GET{env}\' />'
 		+'<input type=\'hidden\' name=\'var_ajax_cle\' value=\'#GET{cle}\' /><\/div>')
 		.ajaxbloc();
-	}
+	};
 	jQuery('document').ready(ajaxbloc_#GET{ajaxid});
 	onAjaxLoad(ajaxbloc_#GET{ajaxid});
 }
