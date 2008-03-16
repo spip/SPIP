@@ -874,6 +874,7 @@ function balise_SESSION_dist($p) {
 //
 // #SESSION_SET{x,y}
 // Ajoute x=y dans la session du visiteur
+// http://doc.spip.org/@balise_SESSION_SET_dist
 function balise_SESSION_SET_dist($p) {
 	$_nom = interprete_argument_balise(1,$p);
 	$_val = interprete_argument_balise(2,$p);
