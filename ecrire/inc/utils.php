@@ -1223,9 +1223,9 @@ function verifier_visiteur() {
 	// dans un formulaire sans login (ex: #FORMULAIRE_FORUM)
 	// Attention on separe bien session_nom et nom, pour eviter
 	// les melanges entre donnees SQL et variables plus aleatoires
-	$variables_session = array('nom', 'email');
-	while (list(,$var) = each($variables_session)) {
-		if (_request('session_'.$var) !== null) {
+	$variables_session = array('session_nom', 'session_email');
+	foreach($variables_session as $var) {
+		if (_request($var) !== null) {
 			$init = true;
 			break;
 		}
@@ -1236,8 +1236,8 @@ function verifier_visiteur() {
 		$session();
 		include_spip('inc/texte');
 		foreach($variables_session as $var)
-			if (($a = _request('session_'.$var)) !== null)
-				$GLOBALS['visiteur_session']['session_'.$var] = safehtml($a);
+			if (($a = _request($var)) !== null)
+				$GLOBALS['visiteur_session'][$var] = safehtml($a);
 		if (!isset($GLOBALS['visiteur_session']['id_auteur']))
 			$GLOBALS['visiteur_session']['id_auteur'] = 0;
 		ajouter_session($GLOBALS['visiteur_session']);
