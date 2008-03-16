@@ -3,9 +3,15 @@
 [(#REM) calculer l'env et la cle pour le contexte du traitement ajax]
 #SET{env,#ENV**|base64_encode}
 #SET{cle,#EVAL{#VAL{'include_spip("inc/securiser_action")?calculer_cle_action("'}|concat{#GET{env},'"):""'}}}
-<script type='text/javascript'>/*<![CDATA[*/
-var ajaxbloc_#GET{ajaxid} = function() {if (window.jQuery) jQuery('div#[(#GET{ajaxid})]').prepend('<div><input type=\'hidden\' name=\'var_ajax_env\' value=\'#GET{env}\' />'
-+'<input type=\'hidden\' name=\'var_ajax_cle\' value=\'#GET{cle}\' /></div>').ajaxbloc();}
-jQuery('document').ready(ajaxbloc_#GET{ajaxid});
-onAjaxLoad(ajaxbloc_#GET{ajaxid});
-/*]]>*/</script>
+<script type='text/javascript'>/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
+if (window.jQuery) {
+	var ajaxbloc_#GET{ajaxid} = function() {
+		jQuery('div#[(#GET{ajaxid})]')
+		.prepend('<div><input type=\'hidden\' name=\'var_ajax_env\' value=\'#GET{env}\' />'
+		+'<input type=\'hidden\' name=\'var_ajax_cle\' value=\'#GET{cle}\' /><\/div>')
+		.ajaxbloc();
+	}
+	jQuery('document').ready(ajaxbloc_#GET{ajaxid});
+	onAjaxLoad(ajaxbloc_#GET{ajaxid});
+}
+/*#EVAL{chr(93)}#EVAL{chr(93)}>*/</script>
