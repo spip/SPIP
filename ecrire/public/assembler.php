@@ -96,7 +96,28 @@ function public_assembler_dist($fond, $connect='') {
 		$forum_insert = charger_fonction('forum_insert', 'inc');
 		redirige_par_entete($forum_insert());
 	}
-
+	
+	// traiter les appels de bloc ajax
+	if (_request('var_ajax')
+	 AND ($args = _request('var_ajax_env'))
+	 AND ($cle = _request('var_ajax_cle')) ){ 
+		 if ((include_spip('inc/securiser_action'))
+		 AND ($cle == calculer_cle_action($args))) {
+			$args = unserialize(base64_decode($args));
+			if ($fond = $args['fond_ajax']){
+				include_spip('public/parametrer');
+				$contexte = calculer_contexte();
+				$contexte = array_merge($contexte,$args);
+				$page = evaluer_fond($fond,$contexte);
+				include_spip('inc/actions');
+				ajax_retour($page['texte']);
+				exit();
+			}
+		}
+		include_spip('inc/actions');
+		ajax_retour('signature ajax incorrecte');
+		exit();
+	}
 	// traiter les formulaires dynamiques simplifies en charger/valider/modifier
 	if (($form = _request('formulaire_action'))
 	 AND ($cle = _request('formulaire_action_cle'))
@@ -123,28 +144,6 @@ function public_assembler_dist($fond, $connect='') {
 				exit;
 			}
 		}
-	}
-	
-	// traiter les appels de bloc ajax
-	if (_request('var_ajax')
-	 AND ($args = _request('var_ajax_env'))
-	 AND ($cle = _request('var_ajax_cle')) ){ 
-		 if ((include_spip('inc/securiser_action'))
-		 AND ($cle == calculer_cle_action($args))) {
-			$args = unserialize(base64_decode($args));
-			if ($fond = $args['fond_ajax']){
-				include_spip('public/parametrer');
-				$contexte = calculer_contexte();
-				$contexte = array_merge($contexte,$args);
-				$page = evaluer_fond($fond,$contexte);
-				include_spip('inc/actions');
-				ajax_retour($page['texte']);
-				exit();
-			}
-		}
-		include_spip('inc/actions');
-		ajax_retour('signature ajax incorrecte');
-		exit();
 	}
 	
 	// si signature de petition, l'enregistrer avant d'afficher la page
