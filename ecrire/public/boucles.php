@@ -234,21 +234,26 @@ function boucle_RUBRIQUES_dist($id_boucle, &$boucles) {
 // http://doc.spip.org/@boucle_HIERARCHIE_dist
 function boucle_HIERARCHIE_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
-	$id_table = $boucle->id_table;
+	$id_table = $boucle->id_table . ".id_rubrique";
 
 // Si la boucle mere est une boucle RUBRIQUES il faut ignorer la feuille
 // sauf en presence du critere {tout} (vu par phraser_html)
 
-	$boucle->hierarchie = '$hierarchie = calculer_hierarchie('
+	$boucle->hierarchie = 'if (!($id_rubrique = intval('
 	. calculer_argument_precedent($boucle->id_boucle, 'id_rubrique', $boucles)
-	. ', '
-	. (isset($boucle->modificateur['tout']) ? 'false' : 'true')
-	. ');';
+	. ")))\n\t\treturn '';\n\t"
+	. '$hierarchie = '
+	. (isset($boucle->modificateur['tout']) ? '",$id_rubrique"' : "''")
+	. ";\n\t"
+	. 'while ($id_rubrique = sql_getfetsel("id_parent","spip_rubriques","id_rubrique=" . $id_rubrique,"","",0, "", $connect)) { 
+		$hierarchie = ",$id_rubrique$hierarchie";
+	}
+	if (!$hierarchie) return "";
+	$hierarchie = substr($hierarchie,1);';
 
-	$prim = $id_table . ".id_rubrique";
-	$boucle->where[]= array("'IN'", "'$prim'", '\'(\'. $hierarchie . \')\'');
+	$boucle->where[]= array("'IN'", "'$id_table'", '"($hierarchie)"');
 
-        $order = "FIELD($id_table" . '.id_rubrique, $hierarchie)';
+        $order = "FIELD($id_table, \$hierarchie)";
 	if ($boucle->default_order[0] != " DESC")
 		$boucle->default_order[] = "\"$order\"";
 	else
