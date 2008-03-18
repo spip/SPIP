@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function exec_demande_mise_a_jour_dist() {
 	include_spip('inc/presentation');
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page();
+	echo $commencer_page('','','','',true,false,false);
 	echo "<br /><br /><h4><span style='color: red'>",	_T('info_message_technique'),"</span><br /> ",
 	_T('info_procedure_maj_version'),
 	"</h4><div>",
