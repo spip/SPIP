@@ -60,9 +60,16 @@ function redirige_formulaire($url, $equiv = '') {
 	if (!_request('var_ajax'))
 		redirige_par_entete($url, $equiv);
 	else {
+		$url = strtr($url, "\n\r", "  ");
+		# en theorie on devrait faire ca tout le temps, mais quand la chaine
+		# commence par ? c'est imperatif, sinon l'url finale n'est pas la bonne
+		if ($url[0]=='?')
+			$url = url_de_base().$url;
+		$url = str_replace('&amp;','&',$url);
 		spip_log("redirige formulaire ajax: $url");		
-		ajax_retour("<script type='javascript'>window.location='$url';</script>",true);
-		exit;
+		return 
+		"<script type='javascript'>window.location='$url';</script>"
+		. http_img_pack('searching.gif','');
 	}
 }
 
