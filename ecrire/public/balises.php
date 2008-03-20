@@ -1318,8 +1318,10 @@ function balise_AIDER_dist($p) {
 // et les hidden de l'url d'action
 // http://doc.spip.org/@balise_ACTION_FORMULAIRE
 function balise_ACTION_FORMULAIRE($p){
-	$_form = "'".addslashes(basename($p->descr['sourcefile'],'.html'))."'";
 	$_url = interprete_argument_balise(1,$p);
+	if (!$_form = interprete_argument_balise(2,$p)){
+		$_form = "'".addslashes(basename($p->descr['sourcefile'],'.html'))."'";
+	}
 	$p->code = "";
 
 	if (strlen($_url))
