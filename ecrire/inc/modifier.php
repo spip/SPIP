@@ -64,6 +64,14 @@ function modifier_contenu($type, $id, $options, $c=false) {
 
 	if (!$champs) return false;
 
+
+	// marquer le fait que l'objet est travaille par toto a telle date
+	if ($GLOBALS['meta']['articles_modif'] != 'non') {
+		include_spip('inc/drapeau_edition');
+		signale_edition ($id, $GLOBALS['visiteur_session'], $type);
+	}
+
+
 	$champs = array_map('sql_quote', $champs);
 
 	// On veut savoir si notre modif va avoir un impact ; en mysql
@@ -77,7 +85,6 @@ function modifier_contenu($type, $id, $options, $c=false) {
 		return false;
 
 	// la modif peut avoir lieu
-	
 
 	// faut-il ajouter date_modif ?
 	if ($options['date_modif'])
@@ -85,12 +92,6 @@ function modifier_contenu($type, $id, $options, $c=false) {
 
 	// allez on commit la modif
 	sql_update("spip_$table_objet", $champs, "$id_table_objet=$id");
-
-	// marquer le fait que l'objet est travaille par toto a telle date
-	if ($GLOBALS['meta']['articles_modif'] != 'non') {
-		include_spip('inc/drapeau_edition');
-		signale_edition ($id, $GLOBALS['visiteur_session'], $type);
-	}
 
 	// Invalider les caches
 	if ($options['invalideur']) {
