@@ -64,7 +64,27 @@ function modifier_contenu($type, $id, $options, $c=false) {
 
 	if (!$champs) return false;
 
-	sql_updateq("spip_$table_objet", $champs, "$id_table_objet=$id");
+	$champs = array_map('sql_quote', $champs);
+
+	// On veut savoir si notre modif va avoir un impact ; en mysql
+	// on pourrait employer mysql_affected_rows() mais pas en multi-base
+	// donc on fait autrement, avec verification prealable
+	$verifier = array();
+	foreach ($champs as $ch => $val)
+		$verifier[] = $ch.'='.$val;
+	$verifier = "$id_table_objet=$id AND NOT (".join(' AND ', $verifier).')';
+	if (!sql_countsel("spip_$table_objet", $verifier))
+		return false;
+
+	// la modif peut avoir lieu
+	
+
+	// faut-il ajouter date_modif ?
+	if ($options['date_modif'])
+		$champs[$options['date_modif']] = 'NOW()';
+
+	// allez on commit la modif
+	sql_update("spip_$table_objet", $champs, "$id_table_objet=$id");
 
 	// marquer le fait que l'objet est travaille par toto a telle date
 	if ($GLOBALS['meta']['articles_modif'] != 'non') {

@@ -132,7 +132,7 @@ function revisions_articles ($id_article, $c=false) {
 		set_request('chapo', $r);
 	}
 
-	$r = modifier_contenu('article', $id_article,
+	modifier_contenu('article', $id_article,
 		array(
 			'champs' => array(
 				'surtitre', 'titre', 'soustitre', 'descriptif',
@@ -140,13 +140,10 @@ function revisions_articles ($id_article, $c=false) {
 			),
 			'nonvide' => array('titre' => _T('info_sans_titre')),
 			'invalideur' => $invalideur,
-			'indexation' => $indexation
+			'indexation' => $indexation,
+			'date_modif' => 'date_modif' // champ a mettre a NOW() s'il y a modif
 		),
 		$c);
-
-	if ($r) {
-		sql_update("spip_articles", array("date_modif" => "NOW()"), "id_article=".sql_quote($id_article));
-	}
 
 	return ''; // pas d'erreur
 }
