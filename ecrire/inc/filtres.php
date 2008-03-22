@@ -198,6 +198,7 @@ $GLOBALS['spip_matrice']['couleur_eclaircir'] = 'inc/filtres_images.php';
 $GLOBALS['spip_matrice']['couleur_foncer'] = 'inc/filtres_images.php';
 $GLOBALS['spip_matrice']['couleur_foncer_si_claire'] = 'inc/filtres_images.php';
 $GLOBALS['spip_matrice']['couleur_eclaircir_si_foncee'] = 'inc/filtres_images.php';
+$GLOBALS['spip_matrice']['couleur_saturation'] = 'inc/filtres_images.php';
 
 // charge les fonctions graphiques et applique celle demandee
 // http://doc.spip.org/@filtrer
