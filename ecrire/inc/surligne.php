@@ -63,7 +63,8 @@ function surligner_mots($page) {
             highlight:'.surlignable',
             nohighlight:'.pas_surlignable'".
             ($surcharge_surligne?",
-            keys:'$surcharge_surligne'":"")."
+            keys:'$surcharge_surligne'":"").",
+            min_length: 3
           })
         });
       </script>
