@@ -37,7 +37,7 @@ function liste_plugin_files(){
 // http://doc.spip.org/@plugin_version_compatible
 function plugin_version_compatible($intervalle,$version){
 	if (!strlen($intervalle)) return true;
-	if (!preg_match(',^[\[\(]([0-9.]*)[;]([0-9]*)[\]\)]$,',$intervalle,$regs)) return false;
+	if (!preg_match(',^[\[\(]([0-9.]*)[;]([0-9.]*)[\]\)]$,',$intervalle,$regs)) return false;
 	$mineure = $regs[1];
 	$majeure = $regs[2];
 	$mineure_inc = $intervalle{0}=="[";
