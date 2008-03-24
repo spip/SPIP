@@ -19,7 +19,7 @@ function action_editer_article_dist() {
 	$arg = $securiser_action();
 
 	// si id_article n'est pas un nombre, c'est une creation 
-	// mais on verifie qu'on a toutes les donn�es qu'il faut.
+	// mais on verifie qu'on a toutes les donnees qu'il faut.
 	if (!$id_article = intval($arg)) {
 		$id_parent = _request('id_parent');
 		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
