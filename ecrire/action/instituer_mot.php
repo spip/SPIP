@@ -41,10 +41,17 @@ function action_instituer_mot_post($r)
 
 	// modifier le contenu via l'API
 	include_spip('inc/modifier');
-	revision_mot($id_mot);
+
+	$c = array();
+	foreach (array(
+		'titre', 'descriptif', 'texte', 'id_groupe', 'type', 'id_groupe'
+	) as $champ)
+		$c[$champ] = _request($champ);
+
+	revision_mot($id_mot, $c);
 	if ($redirect = _request('redirect'))
 		redirige_par_entete(parametre_url(urldecode($redirect),
-						  'id_mot', $id_mot, '&'));
+			'id_mot', $id_mot, '&'));
 
 }
 

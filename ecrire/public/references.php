@@ -42,6 +42,7 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 	// il y a incoherences qu'il vaut mieux eviter
 	while (isset($boucles[$idb])) {
 		list ($t, $c) = index_tables_en_pile($idb, $nom_champ, $boucles);
+
 		if ($t) {
 		  if (!in_array($t, $boucles[$idb]->select)) {
 		    $boucles[$idb]->select[] = $t;
@@ -205,52 +206,6 @@ function calculer_balise($nom, $p) {
 	return $p;
 }
 
-/*
-
-L'appel direct de #ARTICLE_TRADUCTIONS devient #MODELE{article_traductions}
-
-// fonction speciale d'appel a un modele modeles/truc.html pour la balise #TRUC
-// exemples : #TRADUCTIONS, #DOC, #IMG...
-// http://doc.spip.org/@calculer_balise_modele_dist
-function calculer_balise_modele_dist($p){
-	$nom = strtolower($p->nom_champ);
-	$contexte = array();
-
-	if (isset($p->param[0])){
-		while (count($p->param[0])>2){
-			$p->param[]=array($p->param[0][0],array_pop($p->param[0]));
-		}
-	}
-print_r($p->param);
-	$champ = phraser_arguments_inclure($p, true); 
-	// a priori true
-	// si false, le compilo va bloquer sur des syntaxes avec un filtre sans argument qui suit la balise
-	// si true, les arguments simples (sans truc=chose) vont degager
-	$code_contexte = argumenter_inclure($champ, $p->descr, $p->boucles, $p->id_boucle, false);
-
-	// Si le champ existe dans la pile, on le met dans le contexte
-	// (a priori c'est du code mort ; il servait pour #LESAUTEURS dans
-	// le cas spip_syndic_articles)
-	#$code_contexte[] = "'$nom='.".champ_sql($nom, $p);
-
-	// Reserver la cle primaire de la boucle courante
-	if ($primary = $p->boucles[$p->id_boucle]->primary) {
-		$id = champ_sql($primary, $p);
-		$code_contexte[] = "'$primary='.".$id;
-	}
-
-#print_r($code_contexte);
-
-	$p->code = "( ((\$recurs=(isset(\$Pile[0]['recurs'])?\$Pile[0]['recurs']:0))<5)?
-	recuperer_fond('modeles/".$nom."',
-		creer_contexte_de_modele(array(".join(',', $code_contexte).",'recurs='.++\$recurs, \$GLOBALS['spip_lang']))):'')";
-	$p->interdire_scripts = false; // securite assuree par le squelette
-
-print $p->code."\n<hr/>\n";
-
-	return $p;
-}
-*/
 
 //
 // Traduction des balises dynamiques, notamment les "formulaire_*"

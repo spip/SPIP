@@ -16,37 +16,59 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Une fonction generique pour l'API de modification de contenu
 // $options est un array() avec toutes les options
 //
-// Pour l'instant fonctionne pour les types :
-//   article, auteur, document, forum
 // renvoie false si rien n'a ete modifie, true sinon
 //
+// Attention, pour eviter des hacks on interdit les champs
+// (statut, id_secteur, id_rubrique, id_parent),
+// mais la securite doit etre assuree en amont
+//
 // http://doc.spip.org/@modifier_contenu
-function modifier_contenu($type, $id, $options, $c=false) {
+function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 	include_spip('inc/filtres');
 
 	$table_objet = table_objet($type);
 	$id_table_objet = id_table_objet($type);
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	$desc = $trouver_table($table_objet, $serveur);
+
+	// Appels incomplets (sans $c)
+	if (!is_array($c)) {
+		spip_log('erreur appel modifier_contenu('.$type.'), manque $c');
+		return false;
+	}
+
+	// Securite : certaines variables ne sont jamais acceptees ici
+	// car elles ne relevent pas de autoriser(article, modifier) ;
+	// il faut passer par instituer_XX()
+	// TODO: faut-il passer ces variables interdites
+	// dans un fichier de description separe ?
+	unset($c['statut']);
+	unset($c['id_parent']);
+	unset($c['id_rubrique']);
+	unset($c['id_secteur']);
 
 	// Gerer les champs non vides
 	if (is_array($options['nonvide']))
-	foreach ($options['nonvide'] as $champ => $sinon) {
-		if (_request($champ, $c) === '') {
-			$c = set_request($champ, $sinon, $c);
-		}
-	}
+	foreach ($options['nonvide'] as $champ => $sinon)
+		if ($c[$champ] === '')
+			$c[$champ] = $sinon;
 
+
+	// N'accepter que les champs qui existent
+	// TODO: ici aussi on peut valider les contenus
+	// en fonction du type
 	$champs = array();
-	if (is_array($options['champs']))
-	foreach ($options['champs'] as $champ) {
-		$val = _request($champ, $c);
-		if ($val !== NULL)
-			$champs[$champ] = corriger_caracteres($val);
-	}
+	foreach($desc['field'] as $champ => $ignore)
+		if (isset($c[$champ]))
+			$champs[$champ] = $c[$champ];
+
+	// Nettoyer les valeurs
+	$champs = array_map('corriger_caracteres', $champs);
 
 	// recuperer les extras
 	if ($GLOBALS['champs_extra']) {
 		include_spip('inc/extra');
-		if ($extra = extra_update($table_objet, $id, $c))
+		if ($extra = extra_update($table_objet, $id, $champs))
 			$champs['extra'] = $extra;
 	}
 
@@ -80,18 +102,21 @@ function modifier_contenu($type, $id, $options, $c=false) {
 	$verifier = array();
 	foreach ($champs as $ch => $val)
 		$verifier[] = $ch.'='.$val;
+
 	$verifier = "$id_table_objet=$id AND NOT (".join(' AND ', $verifier).')';
-	if (!sql_countsel("spip_$table_objet", $verifier))
+	if (!sql_countsel("spip_$table_objet", $verifier,
+	null,null,null, null, $serveur))
 		return false;
 
 	// la modif peut avoir lieu
 
 	// faut-il ajouter date_modif ?
-	if ($options['date_modif'])
+	if ($options['date_modif']
+	AND !isset($champs[$options['date_modif']]))
 		$champs[$options['date_modif']] = 'NOW()';
 
 	// allez on commit la modif
-	sql_update("spip_$table_objet", $champs, "$id_table_objet=$id");
+	sql_update("spip_$table_objet", $champs, "$id_table_objet=$id", $serveur);
 
 	// Invalider les caches
 	if ($options['invalideur']) {
@@ -149,13 +174,35 @@ function marquer_doublons_documents($champs,$id,$id_table_objet,$table_objet){
 	}
 }
 
+// Enregistre une revision d'article
+// http://doc.spip.org/@revision_article
+function revision_article ($id_article, $c=false) {
+
+	// Si l'article est publie, invalider les caches et demander sa reindexation
+	$t = sql_getfetsel("statut", "spip_articles", "id_article=$id_article");
+	if ($t == 'publie') {
+		$invalideur = "id='id_article/$id_article'";
+		$indexation = true;
+	}
+
+	modifier_contenu('article', $id_article,
+		array(
+			'nonvide' => array('titre' => _T('info_sans_titre')),
+			'invalideur' => $invalideur,
+			'indexation' => $indexation,
+			'date_modif' => 'date_modif' // champ a mettre a NOW() s'il y a modif
+		),
+		$c);
+
+	return ''; // pas d'erreur
+}
+
 // http://doc.spip.org/@revision_document
 function revision_document($id_document, $c=false) {
 
 	return modifier_contenu('document', $id_document,
 		array(
-			'champs' => array('titre', 'descriptif', 'date', 'largeur', 'hauteur')
-			//,'nonvide' => array('titre' => _T('info_sans_titre'))
+			// 'nonvide' => array('titre' => _T('info_sans_titre'))
 		),
 		$c);
 }
@@ -165,7 +212,6 @@ function revision_signature($id_signature, $c=false) {
 
 	return modifier_contenu('signature', $id_signature,
 		array(
-			'champs' => array('nom_email', 'ad_email', 'nom_site', 'url_site', 'message'),
 			'nonvide' => array('nom_email' => _T('info_sans_titre'))
 		),
 		$c);
@@ -177,7 +223,6 @@ function revision_auteur($id_auteur, $c=false) {
 
 	modifier_contenu('auteur', $id_auteur,
 		array(
-			'champs' => array('nom', 'bio', 'pgp', 'nom_site', 'url_site', 'email', 'login'),
 			'nonvide' => array('nom' => _T('ecrire:item_nouvel_auteur'))
 		),
 		$c);
@@ -188,19 +233,16 @@ function revision_auteur($id_auteur, $c=false) {
 function revision_mot($id_mot, $c=false) {
 
 	// regler le groupe
-	if (NULL !== ($id_groupe = _request('id_groupe',$c))
-	OR NULL !== ($type = _request('type',$c))) {
-		$result = sql_select("titre", "spip_groupes_mots", "id_groupe=".sql_quote($id_groupe));
+	if (isset($c['id_groupe']) OR isset($c['type'])) {
+		$result = sql_select("titre", "spip_groupes_mots", "id_groupe=".intval($id_groupe));
 		if ($row = sql_fetch($result))
-			$type = $row['titre'];
+			$c['type'] = $row['titre'];
 		else
-			$type = NULL;
-		$c = set_request('type', $type, $c);
+			unset($c['type']);
 	}
 
 	modifier_contenu('mot', $id_mot,
 		array(
-			'champs' => array('titre', 'descriptif', 'texte', 'id_groupe', 'type'),
 			'nonvide' => array('titre' => _T('info_sans_titre'))
 		),
 		$c);
@@ -210,9 +252,7 @@ function revision_mot($id_mot, $c=false) {
 function revision_petition($id_article, $c=false) {
 
 	modifier_contenu('petition', $id_article,
-		array(
-			'champs' => array('texte')
-		),
+		array(),
 		$c);
 }
 
@@ -243,27 +283,23 @@ function revision_forum($id_forum, $c=false) {
 		$invalideur = '';
 
 	// Supprimer 'http://' tout seul
-	$u = _request('url_site', $c);
-	if ($u !== NULL) {
+	if (isset($c['url_site'])) {
 		include_spip('inc/filtres');
-		$c = set_request('url_site', vider_url($u, false), $c);
+		$c['url_site'] = vider_url($c['url_site'], false);
 	}
 
 	$r = modifier_contenu('forum', $id_forum,
 		array(
-			'champs' => array('titre', 'texte', 'auteur', 'email_auteur', 'nom_site', 'url_site'),
 			'nonvide' => array('titre' => _T('info_sans_titre')),
 			'invalideur' => $invalideur
 		),
 		$c);
 
 
-	// Modification des id_article etc: ce n'est pas autorise en standard
-	// mais ca peut servir pour des crayons ; du coup on teste ici que
-	// la donnee provient bien de $c, pour eviter tout hack lors d'un envoi
-	// normal de forum ; et on deplace tout le thread {sauf les originaux}.
-	if (is_array($c)
-	AND count($cles = array_intersect(array_keys($c),
+	// Modification des id_article etc
+	// (non autorise en standard mais utile pour des crayons)
+	// on deplace tout le thread {sauf les originaux}.
+	if (count($cles = array_intersect(array_keys($c),
 		array('id_article', 'id_rubrique', 'id_syndic', 'id_breve')))
 	) {
 		$thread = sql_fetsel("id_thread", "spip_forum", "id_forum=$id_forum");

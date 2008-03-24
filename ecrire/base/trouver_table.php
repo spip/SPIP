@@ -35,9 +35,12 @@ function base_trouver_table_dist($nom, $serveur='')
 	$nom_sql = $nom;
 	if (preg_match('/\.(.*)$/', $nom, $s))
 		$nom_sql = $s[1];
-	else $nom_sql = $nom;
+	else
+		$nom_sql = $nom;
+
 	$desc = '';
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+
 	// base sous SPIP: gerer les abreviations des noms de table
 	if ($connexion['spip_connect_version']) {
 		include_spip('public/interfaces');
@@ -46,7 +49,7 @@ function base_trouver_table_dist($nom, $serveur='')
 			$nom_sql = 'spip_' . $t;
 			if (!isset($connexion['tables'][$nom_sql])) {
 				include_spip('base/serial');
-				$desc = $tables_principales[$nom_sql];
+				$fdesc = $tables_principales[$nom_sql];
 				$nom = $t;
 			}
 		} else {
@@ -54,18 +57,25 @@ function base_trouver_table_dist($nom, $serveur='')
 			if (isset($tables_auxiliaires['spip_' .$nom])) {
 				$nom_sql = 'spip_' . $nom;
 				if (!isset($connexion['tables'][$nom_sql])) {
-					$desc = $tables_auxiliaires[$nom_sql];
+					$fdesc = $tables_auxiliaires[$nom_sql];
 				}
 			}  # table locale a cote de SPIP, comme non SPIP:
 		}
 	}
+
 	if (!isset($connexion['tables'][$nom_sql])) {
-		if (!$desc) {
+		// La *vraie* base a la priorite
+		if (true /*  !$bdesc OR !$bdesc['field']  */) {
 			$t = ($nom_sql != $nom);
 			$desc = sql_showtable($nom_sql, $t, $serveur);
 			if (!$desc OR !$desc['field']) {
-				spip_log("table inconnue $serveur $nom");
-				return null;
+				if (!$fdesc) {
+					spip_log("table inconnue $serveur $nom");
+					return null;
+				}
+				// on ne sait pas lire la structure de la table :
+				// on retombe sur la description donnee dans les fichiers spip
+				$desc = $fdesc;
 			}
 		}
 		$desc['table']= $nom_sql;
@@ -73,6 +83,7 @@ function base_trouver_table_dist($nom, $serveur='')
 		$desc['connexion']= $serveur;
 		$connexion['tables'][$nom_sql] = $desc;
 	}
+
 	return $connexion['tables'][$nom_sql];
 }
 ?>
