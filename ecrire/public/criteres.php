@@ -571,12 +571,12 @@ function calculer_criteres ($idb, &$boucles) {
 	foreach($boucles[$idb]->criteres as $crit) {
 		$critere = $crit->op;
 		// critere personnalise ?
-		$f = "critere_".$critere;
-		if (!function_exists($f))
-			$f .= '_dist';
-
-		// fonction critere standard ?
-		if (!function_exists($f)) {
+		if (
+		  (!function_exists($f="critere_".strtoupper($boucles[$idb]->id_table)."_".$critere))
+		AND (!function_exists($f=$f."_dist"))
+		AND (!function_exists($f="critere_".$critere))
+		AND (!function_exists($f=$f."_dist"))	) {
+		  // fonction critere standard ?
 		  // double cas particulier repere a l'analyse lexicale
 		  if (($critere == ",") OR ($critere == '/'))
 		    $f = 'calculer_critere_parties';
