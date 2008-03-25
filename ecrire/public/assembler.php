@@ -118,7 +118,7 @@ function public_assembler_dist($fond, $connect='') {
 		ajax_retour('signature ajax incorrecte');
 		exit();
 	}
-	// traiter les formulaires dynamiques simplifies en charger/valider/modifier
+	// traiter les formulaires dynamiques simplifies en charger/verifier/traiter
 	if (($form = _request('formulaire_action'))
 	 AND ($cle = _request('formulaire_action_cle'))
 	 AND (($args = _request('formulaire_action_args'))!==NULL)
@@ -126,12 +126,12 @@ function public_assembler_dist($fond, $connect='') {
 	 AND ($cle == calculer_cle_action($form . $args))) {
 		$args = unserialize(base64_decode($args));
 		if (
-		 (!($valider = charger_fonction("valider","formulaires/$form/",true))
-		   || (count($_POST["erreurs_$form"] = call_user_func_array($valider,$args))==0))
-		 && ($modifier = charger_fonction("modifier","formulaires/$form/",true))
+		 (!($verifier = charger_fonction("verifier","formulaires/$form/",true))
+		   || (count($_POST["erreurs_$form"] = call_user_func_array($verifier,$args))==0))
+		 && ($traiter = charger_fonction("traiter","formulaires/$form/",true))
 		 ) {
-			$_POST["message_ok_$form"] = call_user_func_array($modifier,$args);
-			// modifier peut retourner soit un message, soit un array(editable,message)
+			$_POST["message_ok_$form"] = call_user_func_array($traiter,$args);
+			// traiter peut retourner soit un message, soit un array(editable,message)
 			if (is_array($_POST["message_ok_$form"]))
 				list($_POST["editable_$form"],$_POST["message_ok_$form"]) = $_POST["message_ok_$form"];
 		}

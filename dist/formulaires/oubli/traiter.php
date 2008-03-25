@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // la saisie a ete validee, on peut agir
-function formulaires_oubli_modifier_dist(){
+function formulaires_oubli_traiter_dist(){
 
 	$message = "";
 	if (
