@@ -582,6 +582,7 @@ function calculer_select ($select = array(), $from = array(),
 // si elle est seulement utile a Ln+1 elle meme inutile
 	
 	$sfrom = '';
+	$afrom = array();
 	$equiv = array();
 	$k = count($join);
 	foreach(array_reverse($join,true) as $cledef=>$j) {
@@ -603,16 +604,25 @@ function calculer_select ($select = array(), $from = array(),
 		OR calculer_jointnul($cle, $join)
 		OR calculer_jointnul($cle, $having)
 		OR calculer_jointnul($cle, $where_simples)) {
-			$sfrom = "\n\t".(isset($from_type[$cle])?$from_type[$cle]:"INNER")." JOIN " . $from[$cle] . " AS $cle ON ($cle.$c = $t.$carr)" . $sfrom;
+			//$sfrom = "\n\t".(isset($from_type[$cle])?$from_type[$cle]:"INNER")." JOIN " . $from[$cle] . " AS $cle ON ($cle.$c = $t.$carr)" . $sfrom;
+			$afrom[$t][$cle] = (isset($from_type[$cle])?$from_type[$cle]:"INNER")." JOIN " . $from[$cle] . " AS $cle ON ($cle.$c = $t.$carr)";
+			if (isset($afrom[$cle])){
+				$afrom[$t] = $afrom[$t] + $afrom[$cle];
+				unset($afrom[$cle]);
+			}
 			$equiv[]= $c;
 		} else { unset($join[$cledef]);}
 		unset($from[$cle]);
 		$k--;
 	}
 
-	// Regarder si la table principale ne sert finalement a rien comme dans
-	// <BOUCLE1(ARTICLES){id_mot} />#TOTAL_BOUCLE<//B1>
-	if ($sfrom) {
+	if (count($afrom)) {
+		// Regarder si la table principale ne sert finalement a rien comme dans
+		// <BOUCLE1(ARTICLES){id_mot} />#TOTAL_BOUCLE<//B1>
+		// cette optimisation ne peut s'appliquer dans aucune boucle par defaut de SPIP
+		// en raison de where ajoutes sur le statut ou autre par SPIP lui meme.
+		// on desactive ce morceau de code pour le moment
+		/*
 	  list($t,$c) = each($from);
 	  reset($from);
 	  $e = '/\b(' . "$t\\." . join("|" . $t . '\.', $equiv) . ')\b/';
@@ -634,7 +644,18 @@ function calculer_select ($select = array(), $from = array(),
 	    $groupby = remplacer_jointnul($t, $groupby, $e);
 	    $orderby = remplacer_jointnul($t, $orderby, $e);
 	  }
-	  $from[-1] = $sfrom; 
+	 	// $from[-1] = $sfrom; 
+  	*/
+	  // reinjecter les jointures dans le from, et dans l'ordre qui va bien
+	  $from_synth = array();
+	  foreach($from as $k=>$v){
+	  	$from_synth[$k]=$from[$k];
+	  	if (isset($afrom[$k])) {
+	  		$from_synth["$k@"]= implode(' ',$afrom[$k]);
+	  		unset($afrom[$k]);
+	  	}
+	  }
+	  $from = $from_synth;
 	}
 
 	$GLOBALS['debug']['aucasou'] = array ($table, $id, $serveur);
