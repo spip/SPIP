@@ -25,7 +25,7 @@ $GLOBALS['CHARSET']['html'] = array (
 'ntilde'=>'&#241;', 'ograve'=>'&#242;', 'oacute'=>'&#243;', 'ocirc'=>'&#244;',
 'otilde'=>'&#245;', 'ouml'=>'&#246;', 'divide'=>'&#247;', 'oslash'=>'&#248;',
 'ugrave'=>'&#249;', 'uacute'=>'&#250;', 'ucirc'=>'&#251;', 'uuml'=>'&#252;',
-'yacute'=>'&#253;', 'thorn'=>'&#254;', 'nbsp' => " ", 'thinsp' =>'&#8201;', 'copy' => "(c)",
+'yacute'=>'&#253;', 'thorn'=>'&#254;', 'nbsp' => " ", 'thinsp' =>'&#8201;', 'ensp' =>'&#8194;', 'emsp' =>'&#8195;', 'copy' => "(c)",
 'reg' => "(r)", 'frac14' => "1/4", 'frac12' => "1/2", 'frac34' => "3/4",
 'apos' => "'", 'mdash' => '&#8212;', 'ndash' => '&#8211;', 'hellip' =>'&#8230;',
 'euro' => '&#8364;', 'OElig' => '&#338;', 'oelig' => '&#339;','iexcl' => '&#161;'
