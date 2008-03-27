@@ -551,7 +551,11 @@ function calculer_select ($select = array(), $from = array(),
 
 	$menage = false;
 	foreach($where as $k => $v) { 
-		if (is_array($v)) $v = $v[0];
+		if (is_array($v)){
+			if ((count($v)>=2) && ($v[0]=='REGEXP') && ($v[2]=="'.*'")) $v= false;
+			elseif ((count($v)>=2) && ($v[0]=='LIKE') && ($v[2]=="'%'")) $v= false;
+			elseif ($v[0]) $v = $v[0];
+		}
 		if ((!$v) OR ($v==1) OR ($v=='0=0')) {
 			unset($where[$k]);
 			$menage = true;
@@ -631,8 +635,9 @@ function calculer_select ($select = array(), $from = array(),
 		// ou dans
 		//<BOUCLE8(HIERARCHIE){id_rubrique}{tout}{type='Squelette'}{inverse}{0,1}{lang_select=non} />#TOTAL_BOUCLE<//B8>
 		// qui comporte plusieurs jointures
-		// cette optimisation ne peut s'appliquer dans aucune boucle articles
-		// en raison de where ajoutes sur le statut par SPIP lui meme.
+		// ou dans
+		// <BOUCLE6(ARTICLES){id_mot=2}{statut==.*} />#TOTAL_BOUCLE<//B6>
+		// <BOUCLE7(ARTICLES){id_mot>0}{statut?} />#TOTAL_BOUCLE<//B7>
 		
 	  list($t,$c) = each($from);
 	  reset($from);
