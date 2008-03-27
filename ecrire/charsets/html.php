@@ -18,6 +18,7 @@ $GLOBALS['CHARSET']['html'] = array (
 'Otilde'=>'&#213;', 'Ouml'=>'&#214;', 'times'=>'&#215;', 'Oslash'=>'&#216;',
 'Ugrave'=>'&#217;', 'Uacute'=>'&#218;', 'Ucirc'=>'&#219;', 'Uuml'=>'&#220;',
 'Yacute'=>'&#221;', 'THORN'=>'&#222;', 'szlig'=>'&#223;', 'agrave'=>'&#224;',
+'Scaron'=>'&#352;', 'scaron'=>'&#353;',  'zcaron'=>'&#x17E;', 'Zcaron'=>'&#x17D;',
 'aacute'=>'&#225;', 'acirc'=>'&#226;', 'atilde'=>'&#227;', 'auml'=>'&#228;',
 'aring'=>'&#229;', 'aelig'=>'&#230;', 'ccedil'=>'&#231;', 'egrave'=>'&#232;',
 'eacute'=>'&#233;', 'ecirc'=>'&#234;', 'euml'=>'&#235;', 'igrave'=>'&#236;',
