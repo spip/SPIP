@@ -76,8 +76,9 @@ function maj_base($version_cible = 0) {
 		include_spip('maj/v019_pre193');
 		v019_pre193($version_installee, $version_cible);
 	}
-	if ($version_installee < 2) {
-		$version_installee = $version_installee*1000;
+	if ($version_installee < 2000) {
+		if ($version_installee < 2)
+			$version_installee = $version_installee*1000;
 		include_spip('maj/v019');
 	}
 	if ($cible < 2)
@@ -114,7 +115,7 @@ function maj_while($installee, $cible)
 			redirige_url_ecrire('upgrade', "reinstall=$installee");
 		}
 	}
-	// indispensable pour les chgt de versions qui n'écrivent pas en base
+	// indispensable pour les chgt de versions qui n'ecrivent pas en base
 	// tant pis pour la redondance eventuelle avec ci-dessus
 	ecrire_meta('version_installee', $installee,'non');
 }
