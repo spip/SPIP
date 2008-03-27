@@ -118,6 +118,7 @@ function action_legender_auteur_post($statut, $nom, $email, $bio, $nom_site_aute
 			$echec[]= 'info_passe_trop_court';
 		else {
 			if ($id_auteur OR $source == 'spip') {
+				include_spip('inc/acces');
 				$htpass = generer_htpass($new_pass);
 				$alea_actuel = creer_uniqid();
 				$alea_futur = creer_uniqid();
