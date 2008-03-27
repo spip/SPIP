@@ -99,12 +99,11 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 	// On veut savoir si notre modif va avoir un impact ; en mysql
 	// on pourrait employer mysql_affected_rows() mais pas en multi-base
 	// donc on fait autrement, avec verification prealable
-	$verifier = array("$id_table_objet=$id");
+	$verifier = array();
 	foreach ($champs as $ch => $val)
 		$verifier[] = "($ch IS NULL OR $ch!=$val)";
-
-	if (!sql_countsel("spip_$table_objet", join(' AND ',$verifier),
-	null,null,null, null, $serveur))
+	if (!sql_countsel("spip_$table_objet", "($id_table_objet=$id) AND (" . join(' OR ',$verifier). ")",
+	null,null,null,$serveur))
 		return false;
 
 	// la modif peut avoir lieu
