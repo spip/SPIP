@@ -100,7 +100,7 @@ function balise_FORMULAIRE__dyn($form)
 			'erreurs' => $erreurs,
 			'message_ok' => $message_ok,
 			'message_erreur' => $message_erreur,
-			'editable' => $editable,
+			'editable' => $editable?' ':'',
 			'ajaxid' => "id$ajaxid",
 		))
 	);
