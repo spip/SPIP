@@ -144,9 +144,11 @@ function action_legender_auteur_post($statut, $nom, $email, $bio, $nom_site_aute
 	// les admins restreints ne peuvent modifier celui des autres admins
 	if (autoriser('modifier', 'auteur', $id_auteur, NULL, array('mail'=>1))) {
 		$email = trim($email);
-		if ($email !='' AND !email_valide($email)) 
+		if ($email !='' AND !email_valide($email)) {
 			$echec[]= 'info_email_invalide';
-		$c['email'] = $email;
+		} else {
+			$c['email'] = $email;
+		}
 	}
 
 	if ($visiteur_session['id_auteur'] == $id_auteur)
@@ -168,48 +170,46 @@ function action_legender_auteur_post($statut, $nom, $email, $bio, $nom_site_aute
 		$c['statut'] = $statut;
 
 	// l'entrer dans la base
-	if (!$echec) {
 
-		// Creer l'auteur ?
-		if (!$id_auteur) {
-			$id_auteur = sql_insertq("spip_auteurs", array('statut' => $statut));
+	// Creer l'auteur ?
+	if (!$id_auteur) {
+		$id_auteur = sql_insertq("spip_auteurs", array('statut' => $statut));
 
-			// recuperer l'eventuel logo charge avant la creation
-			$id_hack = 0 - $GLOBALS['visiteur_session']['id_auteur'];
-			$chercher_logo = charger_fonction('chercher_logo', 'inc');
-			if (list($logo) = $chercher_logo($id_hack, 'id_auteur', 'on'))
-				rename($logo, str_replace($id_hack, $id_auteur, $logo));
-			if (list($logo) = $chercher_logo($id_hack, 'id_auteur', 'off'))
-				rename($logo, str_replace($id_hack, $id_auteur, $logo));
-		}
-
-		// Restreindre avant de declarer l'auteur
-		// (section critique sur les droits)
-		if ($id_parent) {
-			if (is_array($restreintes))
-				$restreintes[] = $id_parent;
-			else
-				$restreintes = array($id_parent);
-		}
-		if (is_array($restreintes)
-		AND autoriser('modifier', 'auteur', $id_auteur, NULL, array('restreint'=>$restreintes))) {
-			sql_delete("spip_auteurs_rubriques", "id_auteur=".sql_quote($id_auteur));
-			foreach (array_unique($restreintes) as $id_rub)
-				if ($id_rub = intval($id_rub)) // si '0' on ignore
-					sql_insertq('spip_auteurs_rubriques', array('id_auteur' => $id_auteur, 'id_rubrique'=>$id_rub));
-		}
-
-		include_spip('inc/modifier');
-
-		// Lier a un article
-		if (($id_article = intval($lier_id_article))
-		AND autoriser('modifier', 'article', $id_article)) {
-			sql_insertq('spip_auteurs_articles', array('id_article' => $id_article, 'id_auteur' =>$id_auteur));
-		}
-
-		// Modifier en base (declenche les notifications etc.)
-		instituer_auteur($id_auteur, $c);
+		// recuperer l'eventuel logo charge avant la creation
+		$id_hack = 0 - $GLOBALS['visiteur_session']['id_auteur'];
+		$chercher_logo = charger_fonction('chercher_logo', 'inc');
+		if (list($logo) = $chercher_logo($id_hack, 'id_auteur', 'on'))
+			rename($logo, str_replace($id_hack, $id_auteur, $logo));
+		if (list($logo) = $chercher_logo($id_hack, 'id_auteur', 'off'))
+			rename($logo, str_replace($id_hack, $id_auteur, $logo));
 	}
+
+	// Restreindre avant de declarer l'auteur
+	// (section critique sur les droits)
+	if ($id_parent) {
+		if (is_array($restreintes))
+			$restreintes[] = $id_parent;
+		else
+			$restreintes = array($id_parent);
+	}
+	if (is_array($restreintes)
+	AND autoriser('modifier', 'auteur', $id_auteur, NULL, array('restreint'=>$restreintes))) {
+		sql_delete("spip_auteurs_rubriques", "id_auteur=".sql_quote($id_auteur));
+		foreach (array_unique($restreintes) as $id_rub)
+			if ($id_rub = intval($id_rub)) // si '0' on ignore
+				sql_insertq('spip_auteurs_rubriques', array('id_auteur' => $id_auteur, 'id_rubrique'=>$id_rub));
+	}
+
+	include_spip('inc/modifier');
+
+	// Lier a un article
+	if (($id_article = intval($lier_id_article))
+	AND autoriser('modifier', 'article', $id_article)) {
+		sql_insertq('spip_auteurs_articles', array('id_article' => $id_article, 'id_auteur' =>$id_auteur));
+	}
+
+	// Modifier en base (declenche les notifications etc.)
+	instituer_auteur($id_auteur, $c);
 
 	return array($id_auteur, $echec);
 }
