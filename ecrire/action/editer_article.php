@@ -288,13 +288,13 @@ function trop_longs_articles() {
 
 // Poser un lien de traduction vers un article de reference
 // http://doc.spip.org/@article_referent
-function article_referent ($id_article, $lier_trad) {
+function article_referent ($id_article, $c) {
 
-	if (!$lier_trad = intval($c['lier_trad'])) return;
+	if (!$c = intval($c['lier_trad'])) return;
 
 	// selectionner l'article cible, qui doit etre different de nous-meme,
 	// et quitter s'il n'existe pas
-	$id_lier = sql_getfetsel('id_trad', 'spip_articles', "id_article=$lier_trad AND NOT(id_article=$id_article)");
+	$id_lier = sql_getfetsel('id_trad', 'spip_articles', "id_article=$c AND NOT(id_article=$id_article)");
 
 	if ($id_lier === NULL)
 	{
@@ -307,7 +307,7 @@ function article_referent ($id_article, $lier_trad) {
 	// le nouvel id_trad de ce nouveau groupe et on l'affecte aux deux
 	// articles
 	if ($id_lier == 0) {
-		sql_updateq("spip_articles", array("id_trad" => $lier_trad), "id_article IN ($lier_trad, $id_article)");
+		sql_updateq("spip_articles", array("id_trad" => $c), "id_article IN ($c, $id_article)");
 	}
 	// sinon ajouter notre article dans le groupe
 	else {
