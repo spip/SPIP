@@ -987,28 +987,28 @@ irreversible.</b>',
 <li> the language used in the forms of the public site</li>
 <li> the default language displayed in the private area.</li></ul>',
 'texte_signification' => '<NEW>Dark bars represent cumulative entries (total of sub-sections), light bars represent the number of visits for each section.',
-'texte_sous_titre' => '<NEW>Subtitle',
-'texte_statistiques_visites' => '<NEW>(dark bars:  Sunday / dark curve: average level)',
-'texte_statut_attente_validation' => '<NEW>pending validation',
-'texte_statut_publies' => '<NEW>published online',
-'texte_statut_refuses' => '<NEW>rejected',
-'texte_suppression_fichiers' => '<NEW>Use this command to delete all the files
-in the SPIP cache. This allows you, amongst other things, to force the refreshing of all the pages in case you
-entered important modifications on the graphics or the structure of the site.',
-'texte_sur_titre' => '<NEW>Top title',
+'texte_sous_titre' => 'Undertitel',
+'texte_statistiques_visites' => '(m&ouml;rka staplar:  S&ouml;ndag / m&ouml;rk linje: genomsnittlig niv&aring;)',
+'texte_statut_attente_validation' => 'v&auml;ntar p&aring; godk&auml;nnande',
+'texte_statut_publies' => 'publicerad online',
+'texte_statut_refuses' => 'avvisad',
+'texte_suppression_fichiers' => 'Anv&auml;nd detta kommando f&ouml;r att radera alla filer
+i SPIP\'s cache. Det g&ouml;r det m&ouml;jligt att tvinga fram en uppdatering av alla sidor om du
+gjort viktiga f&ouml;r&auml;ndringar i sajtens utseende eller struktur.',
+'texte_sur_titre' => '&Ouml;vertitel',
 'texte_syndication' => '<NEW>If a site allows it, it is possible to retrieve automatically
 		the list of its latest material. To achieve this, you must activate the syndication. 
 		<blockquote><i>Some hosts disable this function; 
 		in this case, you cannot use the content syndication
 		from your site.</i></blockquote>',
-'texte_table_ok' => '<NEW>: this table is OK.',
-'texte_tables_indexation_vides' => '<NEW>Indexing tables of the engine are empty.',
-'texte_tentative_recuperation' => '<NEW>Repairing attempt',
-'texte_tenter_reparation' => '<NEW>Attempt to repair the database',
+'texte_table_ok' => ': den h&auml;r tabellen &auml;r OK.',
+'texte_tables_indexation_vides' => 'Indextabellerna &auml;r tomma.',
+'texte_tentative_recuperation' => 'Reparationsf&ouml;rs&ouml;k',
+'texte_tenter_reparation' => 'F&ouml;rs&ouml;k att reparera databasen',
 'texte_test_proxy' => '<NEW>To try this proxy, enter here the address of a Web site
 				that you wish to test.',
-'texte_titre_02' => '<NEW>Subject:',
-'texte_titre_obligatoire' => '<NEW><b>Title</b> [Required]',
+'texte_titre_02' => '&Auml;renderad:',
+'texte_titre_obligatoire' => '<b>Titel</b> [Kr&auml;vs]',
 'texte_travail_article' => '<NEW>@nom_auteur_modif@ has worked on this article @date_diff@ minutes ago',
 'texte_travail_collaboratif' => '<NEW>If several editors may often   work on the same article, the system can mark the recently &laquo;opened&raquo; articles in order to avoid simultaneous changes being attempted.
   This option is disabled by default to avoid displaying unnecessary warnings.
