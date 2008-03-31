@@ -121,8 +121,10 @@ function inc_envoyer_mail_dist($email, $sujet, $texte, $from = "", $headers = ""
 	// Et maintenant le champ From:
 	$headers .= "From: $from\n";
 
-       // indispensable pour les sites qui colle d'office From: serveur-http
-	$headers .= "Reply-To: $from\n";
+	// indispensable pour les sites qui colle d'office From: serveur-http
+	// sauf si deja mis par l'envoyeur
+	if (strpos($headers,"Reply-To:")===FALSE)
+		$headers .= "Reply-To: $from\n";
 
 	$charset = $GLOBALS['meta']['charset'];
 
@@ -150,7 +152,7 @@ function inc_envoyer_mail_dist($email, $sujet, $texte, $from = "", $headers = ""
 		mb_internal_encoding('utf-8');
 	}
 
-	spip_log("mail $email\n$sujet\n$headers");
+	spip_log("mail $email\n$sujet\n$headers",'mails');
 
 	// Ajouter le \n final
 	if ($headers = trim($headers)) $headers .= "\n";
