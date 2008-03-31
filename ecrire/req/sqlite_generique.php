@@ -930,14 +930,18 @@ function _sqlite_charger_version($version=''){
 	
 	// version 3
 	if (!$version || $version == 3){
-		$ok = false;
-		if (extension_loaded('pdo') && extension_loaded('pdo_sqlite')){
-			$ok = true;	
-		} else {	
-			if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-				$ok = @dl('php_pdo.dll') && @dl('php_pdo_sqlite.dll');
+		if (!$ok = extension_loaded('pdo')){
+			if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {				
+				$ok = @dl('php_pdo.dll');
 			} else {
-				$ok = @dl('pdo.so') && @dl('pdo_sqlite.so');
+				$ok = @dl('pdo.so');
+			}		
+		}
+		if ($ok && !extension_loaded('pdo_sqlite')){
+			if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+				$ok = @dl('php_pdo_sqlite.dll');
+			} else {
+				$ok = @dl('pdo_sqlite.so');
 			}	
 		}
 		if ($ok) $versions[]=3;
