@@ -76,7 +76,7 @@ function articles_set($id_article) {
 	$err .= instituer_article($id_article, $c);
 
 	// Un lien de trad a prendre en compte
-	$err .= article_referent($id_article, _request('id_trad'));
+	$err .= article_referent($id_article, array('lier_trad' => _request('lier_trad')));
 
 	return $err;
 }
