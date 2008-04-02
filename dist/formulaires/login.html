@@ -72,7 +72,7 @@ if (l=document.getElementById('login_securise'))	l.style.display='';
 	<p class="spip_bouton"><input type="submit" value="<:bouton_valider:>" /></p>
 	</fieldset>
 	</form>
-	[(#REM)
+	[(#ENV{login}|?{' '})
 <script type="text/javascript"><!--
 document.getElementById('var_login[_(#ENV{login})]').focus();
 --></script>][
