@@ -141,7 +141,7 @@ function public_assembler_dist($fond, $connect='') {
 			if (find_in_path('formulaire_.php','balise/',true)) {
 				include_spip('inc/actions');
 				array_unshift($args,$form);
-				ajax_retour(inclure_balise_dynamique(call_user_func_array('balise_formulaire__dyn',$args),false));
+				ajax_retour(inclure_balise_dynamique(call_user_func_array('balise_formulaire__dyn',$args),false),false);
 				exit;
 			}
 		}

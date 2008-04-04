@@ -73,14 +73,15 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 		.ajaxForm({
 			target: target,
 			beforeSubmit: function(){
-				jQuery(target).animeajax().addClass('loading');
+				jQuery(target).addClass('loading').animeajax();
 			},
 			success: function(){
 				jQuery(target).removeClass('loading');
 				window.location.hash = jQuery(target).attr('id');
-			}
+			},
+			iframe: jQuery.browser.msie
 		})
-		.addClass('.noajax') // previent qu'on n'ajaxera pas deux fois le meme formulaire en cas de ajaxload
+		.addClass('noajax') // previent qu'on n'ajaxera pas deux fois le meme formulaire en cas de ajaxload
 	.end();
 	return this; // don't break the chain
 }
@@ -119,5 +120,5 @@ jQuery.fn.ajaxbloc = function() {
 				}
 				return false;
 			});
-		}).addClass('.noajax'); // previent qu'on ajax pas deux fois le meme lien
+		}).addClass('noajax'); // previent qu'on ajax pas deux fois le meme lien
 };
