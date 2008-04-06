@@ -19,7 +19,7 @@ include_spip('base/typedoc');
 include_spip('base/abstract_sql');
 
 
-function creer_ou_upgrader_table($table,$desc,$autoinc,$upgrade=false) {
+function creer_ou_upgrader_table($table,$desc,$autoinc,$upgrade=false,$serveur='') {
 	static $fcreate = null;
 	if (!$fcreate) $fcreate = sql_serveur('create', $serveur);
 
@@ -45,21 +45,21 @@ function creer_base($serveur='') {
 	// pas de panique sur  "already exists" et "duplicate entry" donc.
 
 	foreach($tables_principales as $k => $v)
-		creer_ou_upgrader_table($k,$v,true);
+		creer_ou_upgrader_table($k,$v,true,false,$serveur);
 
 	foreach($tables_auxiliaires as $k => $v)
-		creer_ou_upgrader_table($k,$v,false);
+		creer_ou_upgrader_table($k,$v,false,false,$serveur);
 }
 
 function maj_tables($upgrade_tables=array(),$serveur=''){
 	global $tables_principales, $tables_auxiliaires;
 	foreach($tables_principales as $k => $v)
 		if (($upgrade_tables==$k OR (is_array($upgrade_tables) && in_array($k,$upgrade_tables))))
-			creer_ou_upgrader_table($k,$v,true,true);
+			creer_ou_upgrader_table($k,$v,true,true,$serveur);
 
 	foreach($tables_auxiliaires as $k => $v)
 		if (($upgrade_tables==$k OR (is_array($upgrade_tables) && in_array($k,$upgrade_tables))))
-			creer_ou_upgrader_table($k,$v,false,true);
+			creer_ou_upgrader_table($k,$v,false,true,$serveur);
 }
 
 
