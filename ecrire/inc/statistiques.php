@@ -177,8 +177,8 @@ function aff_referers ($result, $limit, $plus) {
 				$tmp = $buff["path"];
 				if (strlen($buff["query"]) > 0) $tmp .= "?".$buff['query'];
 		
-				if (strlen($tmp) > 30)
-					$tmp = "/".substr($tmp, 0, 27)."...";
+				if (strlen($tmp) > 18)
+					$tmp = "/".substr($tmp, 0, 15)."...";
 				else if (strlen($tmp) > 0)
 					$tmp = "/$tmp";
 			}

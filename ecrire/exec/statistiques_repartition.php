@@ -86,9 +86,9 @@ function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 				if ( $largeur_rouge > 2) 
 					echo bouton_block_depliable("<a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "' style='color: black;' title=\"$descriptif\">$titre</a>","incertain", "stats$id_rubrique");
 				else
-					echo 	"<span class='verdana1'>",
+					echo 	"<div class='verdana1' style='padding-left: 18px; padding-top: 4px; padding-bottom: 3px;'>",
 					  "<a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "' style='color: black;' title=\"$descriptif\">$titre</a>",
-					  "</span>";
+					  "</div>";
 				echo "</td>";
 				
 				
@@ -106,10 +106,10 @@ function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 				echo "\n<tr>";
 				if ($gauche > 0) echo "<td style='width: " .$gauche."px'></td>";
 				echo "\n<td style='border: 0px; white-space: nowrap;'>";
-				echo "<div style='border: 1px solid #999999; background-color: #dddddd; height: 8px; padding: 0px; margin: 0px;'>";
-				if ($visites_abs > 0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' style='vertical-align: top; height: 8px; border: 0px; width: ".$visites_abs."px;' alt= ' '/>";
-				if ($largeur_rouge>0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' class='couleur_cumul' style='vertical-align: top; height: 8px; border: 0px; width: " . $largeur_rouge . "px;' alt=' ' />";
-				if ($largeur_vert>0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' class='couleur_nombre' style='vertical-align: top; width: " . $largeur_vert ."px; height: 8px; border: 0px' alt=' ' />";
+				echo "<div style='border: 1px solid #999999; background-color: #dddddd; height: 12px; padding: 0px; margin: 0px;'>";
+				if ($visites_abs > 0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' style='vertical-align: top; height: 12px; border: 0px; width: ".$visites_abs."px;' alt= ' '/>";
+				if ($largeur_rouge>0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' class='couleur_cumul' style='vertical-align: top; height: 12px; border: 0px; width: " . $largeur_rouge . "px;' alt=' ' />";
+				if ($largeur_vert>0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' class='couleur_nombre' style='vertical-align: top; width: " . $largeur_vert ."px; height: 12px; border: 0px' alt=' ' />";
 				echo "</div>";
 				echo "</td></tr></table>\n";
 				echo "</td></tr></table>";
@@ -168,7 +168,7 @@ function exec_statistiques_repartition_dist()
 	$nombre_vis[0] = 0;
 
 	echo debut_cadre_relief("statistiques-24.gif",true);
-	echo "<div style='border: 1px solid #aaaaaa;'>";
+	echo "<div style='border: 1px solid #aaaaaa; border-bottom: 0px;'>";
 	enfants_aff(0,$taille, $critere);
 	echo "</div><br />",
 	  "<div class='verdana3' style='text-align: left;'>",
