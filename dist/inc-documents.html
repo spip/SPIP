@@ -3,7 +3,7 @@
 	<B_documents_portfolio>
 		<div id="documents_portfolio">
 		<h2><:info_portfolio:></h2>
-	<BOUCLE_documents_portfolio(DOCUMENTS) {id_article ?}
+	<BOUCLE_documents_portfolio(DOCUMENTS) {id_article}
 	{mode=document}
 	{extension IN png,jpg,gif}
 	{par num titre, date}
@@ -26,7 +26,7 @@
 	]
 	<BOUCLE_afficher_document(DOCUMENTS)
 	{id_document}
-	{id_article ?}
+	{id_article}
 	{mode=document}
 	{extension IN png,jpg,gif}>
 	<div class="spip_documents spip_documents_center" id="document_actif">
@@ -41,7 +41,7 @@
 		Si un seul document est joint a l'article, et si le texte est vide,
 		on incruste automatiquement ce document
 	]
-	<BOUCLE_documents_decompte(DOCUMENTS) {id_article ?}
+	<BOUCLE_documents_decompte(DOCUMENTS) {id_article}
 	{mode=document}
 	{doublons}
 	{doublons A}
@@ -57,7 +57,7 @@
 		<h2><:titre_documents_joints:></h2>
 		<ul>
 	<BOUCLE_documents_joints(DOCUMENTS)
-	{id_article ?}
+	{id_article}
 	{!doublons A} {par num titre, date}>[
 		<li>
 		<strong><a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>"
