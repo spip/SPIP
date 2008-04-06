@@ -296,6 +296,7 @@ function balise_distante_interdite($p) {
 // http://doc.spip.org/@champs_traitements
 function champs_traitements ($p) {
 	global $table_des_traitements;
+	static $test_doublons = array();
 
 	if (!isset($table_des_traitements[$p->nom_champ]))
 		return $p->code;
@@ -312,14 +313,26 @@ function champs_traitements ($p) {
 
 	if (!$ps) return $p->code;
 
-	// Si une boucle documents est presente dans le squelette, 
+
+	// Si une boucle DOCUMENTS{doublons} est presente dans le squelette,
+	// ou si in INCLURE contient {doublons}
 	// on insere une fonction de remplissage du tableau des doublons 
 	// dans les filtres propre() ou typo()
 	// (qui traitent les raccourcis <docXX> referencant les docs)
-	if (isset($p->descr['documents'])
-	AND ((strpos($ps,'propre') !== false)
-		OR (strpos($ps,'typo') !== false)))
+	// NB: le test permet d'eviter ce calcul quand on sait qu'il ne servira pas
+	if (!isset($test_doublons[$p->descr['sourcefile']]))
+		$test_doublons[$p->descr['sourcefile']]
+			= preg_match(',([<#]INCLU[RD]E|DOCUMENTS)[^<>]*{doublons,',
+				$p->descr['squelette']);
+
+	if ($test_doublons[$p->descr['sourcefile']]
+	AND (
+		(strpos($ps,'propre') !== false)
+		OR
+		(strpos($ps,'typo') !== false)
+	))
 		$ps = 'traiter_doublons_documents($doublons, '.$ps.')';
+
 
 	// Passer |safehtml sur les boucles "sensibles"
 	// sauf sur les champs dont on est surs

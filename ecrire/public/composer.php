@@ -482,6 +482,27 @@ function calculer_notes() {
 	return $r;
 }
 
+
+// Si un tableau &doublons[articles] est passe en parametre,
+// il faut le nettoyer car il pourrait etre injecte en SQL
+// http://doc.spip.org/@nettoyer_env_doublons
+function nettoyer_env_doublons($envd) {
+	foreach ($envd as $table => $liste) {
+		$n = '';
+		foreach(explode(',',$liste) as $val) {
+			if ($a = intval($val) AND $val === strval($a))
+				$n.= ','.$val;
+		}
+		if (strlen($n))
+			$envd[$table] = $n;
+		else
+			unset($envd[$table]);
+	}
+	return $envd;
+}
+
+
+
 // Ajouter "&lang=..." si la langue de base n'est pas celle du site.
 // Si le 2e parametre n'est pas une chaine, c'est qu'on n'a pas pu
 // determiner la table a la compil, on le fait maintenant.
