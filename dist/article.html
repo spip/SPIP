@@ -51,17 +51,11 @@
 
 
 		[(#REM) Gestion du portfolio et des documents
-			Le critere d'inclusion {doublons} permet d'eviter de lister
-			 les documents deja integres dans la balise # TEXTE
-			Le critere d'incrustation permet d'incruster un document
-			 qui serait unique : on le fait si # TEXTE est vide
 			Le critere {env} permet de passer d'autres arguments de la page
 			 par exemple l'id_document choisi pour un affichage complet
 		]
 		[(#INCLURE{fond=inc-documents}
 			{id_article}
-			{doublons}
-			{incruster=[(#TEXTE**|=={''})]}
 			{env}
 		)]
 
