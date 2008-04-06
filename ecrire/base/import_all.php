@@ -110,6 +110,9 @@ function import_all_fin($request) {
 	effacer_meta('version_archive_restauration');
 	effacer_meta('tag_archive_restauration');
 	effacer_meta('restauration_charset_sql_connexion');
+	effacer_meta('attributs_archive_restauration');
+	effacer_meta('restauration_table_prefix');
+	effacer_meta('vieille_version_installee');
 	if ($request['insertion'] == 'passe2') 
 		sql_drop_table("spip_translate");
 	 

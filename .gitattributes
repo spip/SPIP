@@ -754,6 +754,16 @@ ecrire/maj/v017.php -text
 ecrire/maj/v018.php -text
 ecrire/maj/v019.php -text
 ecrire/maj/v019_pre193.php -text
+ecrire/maj/vieille_base/1917/auxiliaires.php -text
+ecrire/maj/vieille_base/1917/create.php -text
+ecrire/maj/vieille_base/1917/serial.php -text
+ecrire/maj/vieille_base/1917/typedoc.php -text
+ecrire/maj/vieille_base/1927/auxiliaires.php -text
+ecrire/maj/vieille_base/1927/create.php -text
+ecrire/maj/vieille_base/1927/serial.php -text
+ecrire/maj/vieille_base/1927/typedoc.php -text
+ecrire/maj/vieille_base/charger.php -text
+ecrire/maj/vieille_base/create.php -text
 ecrire/prive.php -text
 ecrire/public/index.php -text
 ecrire/public/jointures.php -text
