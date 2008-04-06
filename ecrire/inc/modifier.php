@@ -100,9 +100,10 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 	// On veut savoir si notre modif va avoir un impact ; en mysql
 	// on pourrait employer mysql_affected_rows() mais pas en multi-base
 	// donc on fait autrement, avec verification prealable
+	// On utilise md5 pour eviter la casse (en SQL: 'SPIP'='spip')
 	$verifier = array();
 	foreach ($champs as $ch => $val)
-		$verifier[] = "($ch IS NULL OR $ch!=$val)";
+		$verifier[] = "($ch IS NULL OR MD5($ch)!=".sql_quote(md5($val)).")";
 	if (!sql_countsel($spip_table_objet, "($id_table_objet=$id) AND (" . join(' OR ',$verifier). ")",
 	null,null,null,$serveur))
 		return false;
