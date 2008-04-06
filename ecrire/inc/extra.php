@@ -132,6 +132,7 @@ function extra_form($extra, $type, $ensemble='') {
 
 	// maintenant, on affiche les formulaires pour les champs renseignes dans $extra
 	// et pour les champs proposes
+	$affiche = "<input type='hidden' name='extra' value='1' />\n";
 	reset($champs_proposes);
 	while (list(, $champ) = each($champs_proposes)) {
 		$desc = $champs[$champ];
@@ -157,7 +158,7 @@ function extra_form($extra, $type, $ensemble='') {
 			case "select":
 				$choix = explode(",",$choix);
 				if (!is_array($choix)) {
-					$affiche .= "Pas de choix d&eacute;finis.\n";
+					$affiche .= _L("Pas de choix d&eacute;finis")."\n";
 					break;
 				}
 

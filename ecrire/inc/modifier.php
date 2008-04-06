@@ -66,10 +66,13 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 	// Nettoyer les valeurs
 	$champs = array_map('corriger_caracteres', $champs);
 
-	// recuperer les extras
-	if ($GLOBALS['champs_extra']) {
+	// recuperer les extras (utilise $_POST, un peu sale...
+	// a voir pour le faire marcher avec les crayons)
+	if (isset($desc['field']['extra'])
+	AND isset($_POST['extra'])
+	AND $GLOBALS['champs_extra']) {
 		include_spip('inc/extra');
-		if ($extra = extra_update($table_objet, $id, $champs))
+		if ($extra = extra_update($table_objet, $id, $_POST))
 			$champs['extra'] = $extra;
 	}
 
