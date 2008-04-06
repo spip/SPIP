@@ -390,11 +390,11 @@ function urls_propres_dist(&$fond, $url) {
 		$url = substr($url, strrpos($url, '/') + 1);
 		$url_propre = preg_replace(',[?].*,', '', $url);
 	}
-	// Mode Query-String ?
 
+	// Mode Query-String ?
 	if (!$url_propre
-	AND preg_match(',([?])([^=/?&]+)(&.*)?$,', $GLOBALS['REQUEST_URI'], $r)) {
-		$url_propre = $r[2];
+	AND preg_match(',[?]([^=/?&]+)(&.*)?$,', $GLOBALS['REQUEST_URI'], $r)) {
+		$url_propre = $r[1];
 	}
 
 	if (!$url_propre) return;
@@ -404,11 +404,11 @@ function urls_propres_dist(&$fond, $url) {
 	
 	// Compatibilite avec les anciens marqueurs d'URL propres
 	// Tester l'entree telle quelle (avec 'url_libre' des sites ont pu avoir des entrees avec marqueurs dans la table spip_urls)
-	if (!$row = sql_fetsel('id_objet, type, date', 'spip_urls', 'url='._q($url_propre))) {
+	if (!$row = sql_fetsel('id_objet, type, date', 'spip_urls', 'url='.sql_quote($url_propre))) {
 		// Sinon enlever les marqueurs eventuels
 		$url_propre = retirer_marqueurs_url_propre($url_propre);
 
-		$row = sql_fetsel('id_objet, type, date', 'spip_urls', 'url='._q($url_propre));
+		$row = sql_fetsel('id_objet, type, date', 'spip_urls', 'url='.sql_quote($url_propre));
 	}
 
 	if ($row) {
@@ -416,16 +416,16 @@ function urls_propres_dist(&$fond, $url) {
 
 		// Redirection 301 si l'url est vieux
 		if ($recent = sql_fetsel('url, date', 'spip_urls',
-		'type='._q($row['type']).' AND id_objet='._q($row['id_objet'])
-		.' AND date>'._q($row['date']), '', 'date DESC', 1)) {
+		'type='.sql_quote($row['type']).' AND id_objet='.sql_quote($row['id_objet'])
+		.' AND date>'.sql_quote($row['date']), '', 'date DESC', 1)) {
 			spip_log('Redirige '.$url_propre.' vers '.$recent['url']);
 			include_spip('inc/headers');
 			redirige_par_entete($recent['url']);
 		}
 
-
 		$col_id = id_table_objet($type);
 		$contexte[$col_id] = $row['id_objet'];
+		$fond = $row['type'];
 	}
 
 	if ($fond=='type_urls') {
