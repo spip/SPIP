@@ -37,7 +37,7 @@ $IMPORT_tables_noerase[]='spip_meta';
 // ce qui precede cette balise y est mis.
 // Les balises commencant par <! sont ignorees
 // $abs_pos est globale pour pouvoir etre reinitialisee a la meta
-// status_restauration en cas d'interruption sur TimeOut.
+// restauration_status en cas d'interruption sur TimeOut.
 // Evite au maximum les recopies
 
 // http://doc.spip.org/@xml_fetch_tag
@@ -195,8 +195,8 @@ function import_tables($request, $dir) {
 	}
 
 
-	$abs_pos = (!isset($GLOBALS['meta']["status_restauration"])) ? 0 :
-		$GLOBALS['meta']["status_restauration"];
+	$abs_pos = (!isset($GLOBALS['meta']["restauration_status"])) ? 0 :
+		$GLOBALS['meta']["restauration_status"];
 
 	// au premier appel destruction des tables a restaurer
 	// ou initialisation de la table des translations,
@@ -235,8 +235,8 @@ function import_tables($request, $dir) {
 		if (!$tag) return !($import_ok = true);
 		$version_archive = import_init_meta($tag, $atts, $charset, $request);
 	} else {
-		$version_archive = $GLOBALS['meta']['version_archive_restauration'];
-		$atts = unserialize($GLOBALS['meta']['attributs_archive_restauration']);
+		$version_archive = $GLOBALS['meta']['restauration_version_archive'];
+		$atts = unserialize($GLOBALS['meta']['restauration_attributs_archive']);
 		spip_log("Reprise de l'importation interrompue en $abs_pos");
 		$_fseek = ($gz=='gzread') ? 'gzseek' : 'fseek';
 		$_fseek($file, $abs_pos);
@@ -262,7 +262,7 @@ function import_tables($request, $dir) {
 	while ($table = $fimport($file, $request, $gz, $atts)) {
 	  // memoriser pour pouvoir reprendre en cas d'interrupt,
 	  // mais pas d'ecriture sur fichier, ca ralentit trop
-		ecrire_meta("status_restauration", "$abs_pos",'non');
+		ecrire_meta("restauration_status", "$abs_pos",'non');
 		if ($oldtable != $table) {
 			if (_DEBUG_IMPORT){
 				ecrire_fichier(_DIR_TMP."debug_import.log","----\n".$GLOBALS['debug_import_avant']."\n<<<<\n$table\n>>>>\n".$GLOBALS['debug_import_apres']."\n----\n",false,false);
@@ -299,16 +299,34 @@ function import_tables($request, $dir) {
 		$GLOBALS['connexions'][0]['prefixe'] = $prefixe_source;
 
 		$tables = import_table_choix($request);
+		$tables_recopiees = isset($GLOBALS['meta']['restauration_recopie_tables'])?unserialize($GLOBALS['meta']['restauration_recopie_tables']):array();
+		
 		// recopier les tables l'une sur l'autre
 		// il FAUT recharger les bonnes desc serial/aux avant ...
 		$GLOBALS['tables_principales'] = $GLOBALS['nouvelle_base']['tables_principales'];
 		$GLOBALS['tables_auxiliaires'] = $GLOBALS['nouvelle_base']['tables_auxiliaires'];
+		if (in_array('spip_auteurs',$tables)){
+			$tables = array_diff($tables,array('spip_auteurs'));
+			$tables[] = 'spip_auteurs';
+		}
+		sql_drop_table('spip_test','','-1');
 		foreach ($tables as $table){
-			$res = sql_select('*',$table,'','','','','','-1');
-			while ($row = sql_fetch($res,'-1')){
-				sql_insertq($table,$row);
+			if (!isset($tables_recopiees[$table])) $tables_recopiees[$table] = 0;
+			if ($tables_recopiees[$table]!==-1){
+				affiche_progression_javascript(0,0,$table);
+				while ($res = sql_select('*',$table,'','','',intval($tables_recopiees[$table]).',400','','-1')
+				  AND sql_count($res,'-1')) {
+					while ($row = sql_fetch($res,'-1')){
+						sql_insertq($table,$row);
+						$tables_recopiees[$table]++;
+					}
+					affiche_progression_javascript($tables_recopiees[$table],0,$table);
+					ecrire_meta('restauration_recopie_tables',serialize($tables_recopiees));
+				}
+				sql_drop_table($table,'','-1');
+				$tables_recopiees[$table]=-1;
+				ecrire_meta('restauration_recopie_tables',serialize($tables_recopiees));
 			}
-			sql_drop_table($table,'','-1');
 		}
 	}
 	
@@ -336,9 +354,9 @@ function import_init_meta($tag, $atts, $charset, $request)
 	
 	$version_archive = $atts['version_archive'];
 	$insert = $request['insertion'] ;
-	ecrire_meta('attributs_archive_restauration', serialize($atts),'non');
-	ecrire_meta('version_archive_restauration', $version_archive,'non');
-	ecrire_meta('tag_archive_restauration', $tag,'non');
+	ecrire_meta('restauration_attributs_archive', serialize($atts),'non');
+	ecrire_meta('restauration_version_archive', $version_archive,'non');
+	ecrire_meta('restauration_tag_archive', $tag,'non');
 
 	// trouver le charset de la connexion sql qu'il faut utiliser pour la restauration
 	// ou si le charset de la base est iso-xx

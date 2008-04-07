@@ -15,6 +15,9 @@ include_spip('base/abstract_sql');
 
 function maj_vieille_base_charger_dist($version_cible){
 	$vieilles_bases = array(
+	'1.813'=>'1813',
+	'1.821'=>'1821',
+	'1.915'=>'1915',
 	'1.917'=>'1917',
 	'1.927'=>'1927',
 	);

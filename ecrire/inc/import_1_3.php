@@ -27,10 +27,10 @@ function inc_import_1_3_dist($lecteur, $request, $gz='fread', $atts=array()) {
 		$tables = $init($request);
 		if (!$tables) return  ($import_ok = false);
 		$phpmyadmin = preg_match("{^phpmyadmin::}is",
-			$GLOBALS['meta']['version_archive_restauration'])
+			$GLOBALS['meta']['restauration_version_archive'])
 			? array(array('&quot;','&gt;'),array('"','>'))
 			: false;
-		$fin = '/' . $GLOBALS['meta']['tag_archive_restauration'];
+		$fin = '/' . $GLOBALS['meta']['restauration_tag_archive'];
 	}
 
 	$b = false;
