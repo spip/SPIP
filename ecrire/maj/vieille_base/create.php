@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $serveur_vieille_base =0;
 
-function	spip_create_table($table,$fields,$keys,$autoinc){
+function	spip_create_vieille_table($table,$fields,$keys,$autoinc){
 	static $fcreate = null;
 	$serveur = $GLOBALS['serveur_vieille_base'];
 	if (!$fcreate) $fcreate = sql_serveur('create', $serveur);
@@ -30,25 +30,34 @@ function maj_vieille_base_create_dist($version_cible){
 	$new_prefixe = "XXspip$version";
 	// ici on ecrit la meta dans la table 'officielle'
 	ecrire_meta('restauration_table_prefix',$new_prefixe,'non');
-	ecrire_meta('vieille_version_installee',$version,'non');
+	ecrire_meta('vieille_version_installee',$version_cible,'non');
+	$metas = $GLOBALS['meta'];
 	
-	//$GLOBALS['table_prefix'] = $new_prefixe;
-	//lire_metas();
 	$prefixe_source = $GLOBALS['connexions'][0]['prefixe'];
 	$GLOBALS['serveur_vieille_base'] = 0;
 	$GLOBALS['connexions'][$GLOBALS['serveur_vieille_base']] = $GLOBALS['connexions'][0];
 	$GLOBALS['connexions'][$GLOBALS['serveur_vieille_base']]['prefixe'] = $new_prefixe;
+	lire_metas();
+	
+	if (!isset($GLOBALS['meta']['restauration_table_prefix_source'])) {
 
-	$create = charger_fonction('create',"maj/vieille_base/$version");
-	$create();
+		$create = charger_fonction('create',"maj/vieille_base/$version");
+		$create();
 	
-	// reecrire les metas dans la table provisoire
-	foreach($GLOBALS['meta'] as $k=>$v)
-		ecrire_meta($k,$v);
-	ecrire_meta('restauration_table_prefix_source',$prefixe_source,'non');
+		// reecrire les metas dans la table provisoire
+		foreach($metas as $k=>$v)
+			ecrire_meta($k,$v);
+		ecrire_meta('restauration_table_prefix_source',$prefixe_source,'non');
 	
-	// noter le numero de version installee
-	ecrire_meta('version_installee',$version_cible,'non');
+		// noter le numero de version installee
+		ecrire_meta('version_installee',$version,'non');
+	}
+	
+	if ($version_cible!=$GLOBALS['meta']['version_installee']) {
+		// upgrader jusqu'a la cible
+		include_spip('base/upgrade');
+		maj_base($version_cible);
+	}
 
 }
 

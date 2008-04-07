@@ -25,10 +25,10 @@ function maj_vieille_base_1927_create() {
 	# if ($vu) return; else $vu = true;
 
 	foreach($tables_principales as $k => $v)
-		spip_mysql_create($k, $v['field'], $v['key'], true);
+		spip_create_vieille_table($k, $v['field'], $v['key'], true);
 
 	foreach($tables_auxiliaires as $k => $v)
-		spip_mysql_create($k, $v['field'], $v['key'], false);
+		spip_create_vieille_table($k, $v['field'], $v['key'], false);
 
 	foreach($tables_images as $k => $v)
 		spip_query_db("INSERT IGNORE INTO spip_types_documents (extension, inclus, titre, id_type) VALUES ('$k', 'image', '" .
