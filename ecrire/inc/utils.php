@@ -376,14 +376,16 @@ function _T($texte, $args=array()) {
 		$traduire = charger_fonction('traduire', 'inc');
 	$text = $traduire($texte,$GLOBALS['spip_lang']);
 
-	if (!$text)
+	if (!strlen($text))
 		// pour les chaines non traduites
-		$text =	str_replace('_', ' ',
+		$text = str_replace('_', ' ',
 			 (($n = strpos($texte,':')) === false ? $texte :
 				substr($texte, $n+1)));
 
-	while (list($name, $value) = @each($args))
+	if (is_array($args))
+	foreach ($args as $name => $value)
 		$text = str_replace ("@$name@", $value, $text);
+
 	return $text;
 
 }
@@ -391,8 +393,10 @@ function _T($texte, $args=array()) {
 // chaines en cours de traduction
 // http://doc.spip.org/@_L
 function _L($text, $args=array()) {
-	while (list($name, $value) = @each($args))
+	if (is_array($args))
+	foreach ($args as $name => $value)
 		$text = str_replace ("@$name@", $value, $text);
+
 	if ($GLOBALS['test_i18n'])
 		return "<span style='color:red;'>$text</span>";
 	else

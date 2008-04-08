@@ -82,16 +82,17 @@ function inc_traduire_dist($ori, $lang) {
 
 	static $deja_vu = array();
   
-	if (isset($deja_vu[$lang][$ori])) {
-	      return $deja_vu[$lang][$ori];
+	if (isset($deja_vu[$lang][$ori]))
+		return $deja_vu[$lang][$ori];
+
+	// modules demandes explicitement <xxx/yyy/zzz:code>
+	if (strpos($ori,':')) {
+		list($modules,$code) = explode(':',$ori);
+		$modules = explode('/', $modules);
+	} else {
+		$modules = array('spip', 'ecrire');
+		$code = $ori;
 	}
-
-	// modules demandes explicitement
-
-	if (preg_match(",^([a-z0-9_/]+):(.*)$,", $ori, $regs)) {
-			$modules = explode("/",$regs[1]);
-			$code = $regs[2];
-	} else 	{$modules = array('spip', 'ecrire'); $code = $ori;}
 
 	$text = '';
 	// parcourir tous les modules jusqu'a ce qu'on trouve
@@ -113,10 +114,17 @@ function inc_traduire_dist($ori, $lang) {
 		}
 	}
 
-	// filet pour traduction pas finies 
-	if (($lang<>'fr') AND preg_match(",^<(NEW|MODIF)>,", $text))
-		  $text = inc_traduire_dist($ori, 'fr');
-	$deja_vu[$lang][$code] = $text;
+	// Retour aux sources si la chaine est absente dans la langue cible ;
+	// on essaie d'abord la langue du site, puis a defaut la langue fr
+	if (!strlen($text)
+	AND $lang !== 'fr') {
+		if ($lang !== $GLOBALS['meta']['langue_site'])
+			$text = inc_traduire_dist($ori, $GLOBALS['meta']['langue_site']);
+		else 
+			$text = inc_traduire_dist($ori, 'fr');
+	}
+
+	$deja_vu[$lang][$ori] = $text;
 
 	return $text;
 }
