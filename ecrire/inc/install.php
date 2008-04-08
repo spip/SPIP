@@ -86,17 +86,24 @@ function tester_compatibilite_hebergement() {
 			$err[] = _T('install_php_version', array('version' => $p,  'minimum' => $m));
 	}
 
-	if (!function_exists('mysql_query'))
+	// Il faut une base de donnees tout de meme ...
+	if (!function_exists('mysql_query')
+	AND !function_exists('pg_connect')
+	AND !function_exists('sqlite_open'))
 		$err[] = _T('install_extension_php_obligatoire')
-		. " <a href='http://se.php.net/mysql'>MYSQL</a>";
+		. " <a href='http://www.php.net/mysql'>MYSQL</a>"
+		. "| <a href='http://www.php.net/pgsql'>PostgreSQL</a>"
+		. "| <a href='http://www.php.net/sqlite'>SQLite</a>";
 
+	// et il faut preg
 	if (!function_exists('preg_match_all'))
 		$err[] = _T('install_extension_php_obligatoire')
 		. " <a href='http://se.php.net/pcre'>PCRE</a>";
 
+	// et surtout pas ce mbstring.overload
 	if ($a = @ini_get('mbstring.func_overload'))
 		$err[] = _T('install_extension_mbstring')
-		. "mbstring.func_overload=$a - <a href='http://se.php.net/mb_string'>mb_string</a>.<br /><small>";
+		. "mbstring.func_overload=$a - <a href='http://www.php.net/mb_string'>mb_string</a>.<br /><small>";
 
 	if ($err) {
 			echo "<p class='verdana1 spip_large'><b>"._T('avis_attention').'</b></p><p>'._T('install_echec_annonce')."</p><ul>";
@@ -235,21 +242,33 @@ function fieldset($legend, $champs = array(), $horchamps='') {
 function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 {
 	$pg = function_exists('pg_connect');
-	$mysql = function_exists('mysql_connect');
-	// demander les version dispo de sqlite
-	include_spip('req/sqlite_generique');
-	$versions = spip_versions_sqlite();
-	$sqlite2 = in_array(2, $versions);
-	$sqlite3 = in_array(3, $versions);
 
-	// cacher le formlaire s'il n' a qu'un serveur 
-	// ou si l'installation est predefinie avec un serveur particulier
+	// demander les version dispo de mysql
+	if (include_spip('req/mysql')) {
+		$versions = spip_versions_mysql();
+		$mysql = !!$versions;
+	}
+
+	// demander les version dispo de sqlite
+	if (include_spip('req/sqlite_generique')) {
+		$versions = spip_versions_sqlite();
+		$sqlite2 = in_array(2, $versions);
+		$sqlite3 = in_array(3, $versions);
+	}
+
+	// ne pas cacher le formulaire s'il n'a qu'un serveur :
+	// ca permet de se rendre compte de ce qu'on fait !
+/*
 	if (($pg + $mysql + $sqlite2 + $sqlite3) == 1){
 		if ($mysql) 	$server_db = 'mysql';
 		if ($pg) 		$server_db = 'pg';
 		if ($sqlite2) 	$server_db = 'sqlite2';
 		if ($sqlite3) 	$server_db = 'sqlite3';
-	} elseif ($predef[0]) {
+	} else
+*/
+
+	// le cacher si l'installation est predefinie avec un serveur particulier
+	if ($predef[0]) {
 		$server_db = _INSTALL_SERVER_DB;
 	}
 
