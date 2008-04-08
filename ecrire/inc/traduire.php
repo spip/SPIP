@@ -124,6 +124,10 @@ function inc_traduire_dist($ori, $lang) {
 			$text = inc_traduire_dist($ori, 'fr');
 	}
 
+	// Supprimer la mention <NEW> ou <MODIF>
+	if ($text[0] === '<')
+		$text = str_replace(array('<NEW>', '<MODIF>'), array(), $text);
+
 	$deja_vu[$lang][$ori] = $text;
 
 	return $text;
