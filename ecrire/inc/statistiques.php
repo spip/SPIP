@@ -260,6 +260,7 @@ function aff_referers ($result, $limit, $plus, $serveur='') {
 }
 
 
+// http://doc.spip.org/@aff_statistique_visites_popularite
 function aff_statistique_visites_popularite($serveur){
 	$out = "";
 	// Par popularite
@@ -326,6 +327,7 @@ function aff_statistique_visites_popularite($serveur){
 	return $out;
 }
 
+// http://doc.spip.org/@aff_statistique_visites_par_visites
 function aff_statistique_visites_par_visites($serveur=''){
 	$out = '';
 	// Par visites depuis le debut
