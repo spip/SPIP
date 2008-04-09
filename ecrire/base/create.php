@@ -19,6 +19,7 @@ include_spip('base/typedoc');
 include_spip('base/abstract_sql');
 
 
+// http://doc.spip.org/@creer_ou_upgrader_table
 function creer_ou_upgrader_table($table,$desc,$autoinc,$upgrade=false,$serveur='') {
 	static $fcreate = null;
 	if (!$fcreate) $fcreate = sql_serveur('create', $serveur);
@@ -51,6 +52,7 @@ function creer_base($serveur='') {
 		creer_ou_upgrader_table($k,$v,false,false,$serveur);
 }
 
+// http://doc.spip.org/@maj_tables
 function maj_tables($upgrade_tables=array(),$serveur=''){
 	global $tables_principales, $tables_auxiliaires;
 	foreach($tables_principales as $k => $v)
