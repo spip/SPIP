@@ -1808,18 +1808,21 @@ function filtre_find($array, $val) {
 
 // Filtre et : ($a && $b) 
 // [(#BALISE|=={val}|et{[(#AUTRE|=={val})]) Condition OK ]
+// http://doc.spip.org/@filtre_et
 function filtre_et($a, $b){
 	return ($a && $b)?' ':'';	
 }
 
 // Filtre ou : ($a || $b) 
 // [(#BALISE|=={val}|ou{[(#AUTRE|=={val})]) Condition OK ]	
+// http://doc.spip.org/@filtre_ou
 function filtre_ou($a, $b){
 	return ($a || $b)?' ':'';	
 }
 	
 // Filtre xou : ($a xor $b) 
 // [(#BALISE|=={val}|xou{[(#AUTRE|=={val})]) Condition OK ]	
+// http://doc.spip.org/@filtre_xou
 function filtre_xou($a, $b){
 	return ($a XOR $b)?' ':'';	
 }	

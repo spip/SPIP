@@ -12,6 +12,7 @@
 // elle sera cree en fonction des parametres de php
 // - 3) si l'on peut, on charge le module par la fonction dl()
 //
+// http://doc.spip.org/@inc_charger_php_extension_dist
 function inc_charger_php_extension_dist($module){
 	if (extension_loaded($module)) {
 		return true;
