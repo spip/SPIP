@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@base_db_mysql_dist
 function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='', $ldap='') {
-	load_extension('mysql');
+	charger_php_extension('mysql');
 	if ($port > 0) $host = "$host:$port";
 	$link = mysql_connect($host, $login, $pass, true);
 
@@ -703,62 +703,9 @@ function spip_release_lock($nom) {
 // Renvoie false si on n'a pas les fonctions mysql (pour l'install)
 // http://doc.spip.org/@spip_versions_mysql
 function spip_versions_mysql() {
-	load_extension('mysql');
+	charger_php_extension('mysql');
 	return function_exists('mysql_query');
 }
 
-// Une fonction pour charger dynamiquement mysql.so,
-// adaptee de phpMyAdmin ; c'est mieux si on n'en a pas besoin...
-// http://doc.spip.org/@load_extension
-function load_extension($module) {
-	if (extension_loaded($module)) {
-		return true;
-	}
-
-	// A-t-on le droit de faire un dl() ; si on peut, on memorise la reponse,
-	// lourde a calculer, dans les meta
-	if (!isset($GLOBALS['meta']['dl_allowed'])) {
-		if (!@ini_get('safe_mode') 
-		  && @ini_get('enable_dl')
-		  && @function_exists('dl')) {
-			ob_start();
-			phpinfo(INFO_GENERAL); /* Only general info */
-			$a = strip_tags(ob_get_contents());
-			ob_end_clean();
-			if (preg_match('@Thread Safety[[:space:]]*enabled@', $a)) {
-				if (preg_match('@Server API[[:space:]]*\(CGI\|CLI\)@', $a)) {
-					$GLOBALS['meta']['dl_allowed'] = true;
-				} else {
-					$GLOBALS['meta']['dl_allowed'] = false;
-				}
-			} else {
-				$GLOBALS['meta']['dl_allowed'] = true;
-			}
-		} else {
-			$GLOBALS['meta']['dl_allowed'] = false;
-		}
-
-		// Attention, le ecrire_meta() echouera si on le tente ici ;
-		// donc on ne fait rien, et on attend qu'un prochain ecrire_meta()
-		// se produisant apres cette sequence enregistre sa valeur.
-		#include_spip('inc/meta');
-		#ecrire_meta('dl_allowed', $GLOBALS['meta']['dl_allowed'], 'non');
-	}
-
-	if (!$GLOBALS['meta']['dl_allowed']) {
-		return false;
-	}
-
-	/* Once we require PHP >= 4.3, we might use PHP_SHLIB_SUFFIX here */
-	if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-		$module_file = 'php_' . $module . '.dll';
-	} elseif (PHP_OS=='HP-UX') {
-		$module_file = $module . '.sl';
-	} else {
-		$module_file = $module . '.so';
-	}
-
-	return @dl($module_file);
-}
 
 ?>
