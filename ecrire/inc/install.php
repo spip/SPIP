@@ -169,7 +169,7 @@ function info_progression_etape($en_cours,$phase,$dir, $erreur = false){
 	$last = count($liste); 
 //	$texte_etat = array('ok'=>'OK','encours'=>_L('en cours'),'todo'=>_L('&agrave; venir'));
 	
-	$intitule_etat["etape_"][1] = _L("Connexion &agrave; votre base de donn&eacute;es");
+	$intitule_etat["etape_"][1] = _T('info_connexion_base_donnee');
 	$intitule_etat["etape_"][2] = _T('menu_aide_installation_choix_base');
 	$intitule_etat["etape_"][3] = _T('info_informations_personnelles');
 	$intitule_etat["etape_"][4] = _T('info_derniere_etape');
