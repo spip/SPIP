@@ -1058,6 +1058,8 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	define('_IMG_MAX_SIZE', 0); # poids en ko
 	define('_IMG_MAX_WIDTH', 0); # largeur en pixels
 	define('_IMG_MAX_HEIGHT', 0); # hauteur en pixels
+	
+	define('_COPIE_LOCALE_MAX_SIZE',1048576); // poids en octet
 
 	// Le charset par defaut lors de l'installation
 	define('_DEFAULT_CHARSET', 'utf-8');
