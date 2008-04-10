@@ -31,6 +31,7 @@ if (!defined('_terminaison_urls_propres'))
 
 define ('_debut_urls_propres', './?');
 
+include_once dirname(__FILE__).'/propres.php';
 
 // http://doc.spip.org/@urls_propres_qs_dist
 function urls_propres_qs_dist(&$fond, $url) {
