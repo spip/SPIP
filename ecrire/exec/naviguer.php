@@ -364,7 +364,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 	//////////  Les articles publies
 	/////////////////////////
 
-  $res .= afficher_objets('article',_T('info_tous_articles_presents'), array("WHERE" => "statut='publie' AND id_rubrique=$id_rubrique", 'ORDER BY' => "date DESC"));
+  $res .= afficher_objets('article',_T('info_tous_articles_presents'), array("WHERE" => "statut='publie' AND id_rubrique=$id_rubrique", 'ORDER BY' => "0+titre, titre"));
   $res .= $bouton_article;
 
 	//// Les breves
