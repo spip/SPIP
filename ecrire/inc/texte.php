@@ -563,8 +563,8 @@ function corriger_typo($letexte) {
 	if ($typographie = charger_fonction(lang_typo(), 'typographie')) {
 
 		// Proteger les caracteres typographiques a l'interieur des tags html
-		$protege = "!':;?~%";
-		$illegal = "\x1\x2\x3\x4\x5\x6\x7";
+		$protege = "!':;?~%-";
+		$illegal = "\x1\x2\x3\x4\x5\x6\x7\x8";
 		if (preg_match_all(",</?[a-z!][^<>]*[!':;\?~%][^<>]*>,imsS",
 		$letexte, $regs, PREG_SET_ORDER)) {
 			foreach ($regs as $reg) {
@@ -1133,15 +1133,15 @@ function traiter_raccourci_lien_lang($lien, $class, $texte, $hlang, $lang, $bull
 		$hlang = $lang;
 	$lang = ($hlang ? ' hreflang="'.$hlang.'"' : '') . $bulle;
 
-	# Penser au cas [<imgXX|right>->URL]
 	# ceci s'execute heureusement avant les tableaux et leur "|".
 	# Attention, le texte initial est deja echappe mais pas forcement
 	# celui retourne par calculer_url.
 
-	return '<a href="'.$lien
+	# Penser au cas [<imgXX|right>->URL], qui exige typo('<a>...</a>')
+	return typo('<a href="'.$lien
 		. ($class ? '" class="'.$class : '')
 		. '"'.$lang.'>'
-		. typo($texte, true, $connect).'</a>';
+		. $texte.'</a>', true, $connect);
 }
 
 // Repere dans la partie texte d'un raccourci [texte->...]
