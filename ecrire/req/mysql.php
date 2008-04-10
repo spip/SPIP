@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // fonction pour la premiere connexion a un serveur MySQL
 
-// http://doc.spip.org/@base_db_mysql_dist
+// http://doc.spip.org/@req_mysql_dist
 function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='', $ldap='') {
 	charger_php_extension('mysql');
 	if ($port > 0) $host = "$host:$port";
@@ -222,6 +222,7 @@ function calculer_mysql_where($v)
 	}
 }
 
+// http://doc.spip.org/@calculer_mysql_expression
 function calculer_mysql_expression($expression, $v, $join = 'AND'){
 	if (empty($v))
 		return '';
@@ -504,6 +505,7 @@ function spip_mysql_insertq($table, $couples=array(), $desc=array(), $serveur=''
 }
 
 
+// http://doc.spip.org/@spip_mysql_insertq_multi
 function spip_mysql_insertq_multi($table, $tab_couples=array(), $desc=array(), $serveur='',$requeter=true) {
 
 	if (!$desc) $desc = description_table($table);
@@ -577,6 +579,7 @@ function spip_mysql_replace($table, $couples, $desc=array(), $serveur='',$requet
 }
 
 
+// http://doc.spip.org/@spip_mysql_replace_multi
 function spip_mysql_replace_multi($table, $tab_couples, $desc=array(), $serveur='',$requeter=true) {
 	$cles = "(" . join(',',array_keys($tab_couples[0])). ')';
 	$valeurs = array();
@@ -614,11 +617,13 @@ function spip_mysql_multi ($objet, $lang) {
 	return $retour;
 }
 
+// http://doc.spip.org/@spip_mysql_hex
 function spip_mysql_hex($v)
 {
 	return "0x" . $v;
 }
 
+// http://doc.spip.org/@spip_mysql_quote
 function spip_mysql_quote($v)
 {
 	return _q($v);
@@ -627,6 +632,7 @@ function spip_mysql_quote($v)
 //
 // IN (...) est limite a 255 elements, d'ou cette fonction assistante
 //
+// http://doc.spip.org/@spip_mysql_in
 function spip_mysql_in($val, $valeurs, $not='', $serveur='',$requeter=true) {
 	$n = $i = 0;
 	$in_sql ="";
