@@ -1383,7 +1383,7 @@ class sqlite_traiter_requete{
 				// par une requete SELECT
 				// aucune autre solution ne donne le nombre attendu :( !
 				// particulierement s'il y a des LIMIT dans la requete.
-				if (strpos($this->query,'SELECT')!==false){
+				if (strtoupper(substr(ltrim($this->query),0,6)) == 'SELECT'){
 					if ($r) {
 						$l = $this->link->query($this->query);
 						$r->spipSqliteRowCount =  count($l->fetchAll());
