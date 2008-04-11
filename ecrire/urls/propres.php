@@ -203,11 +203,11 @@ function _generer_url_propre($type, $id_objet) {
 		// On veut chiper une ancienne adresse ?
 		if (
 		// un vieux url
-		$vieux = sql_fetsel('*', 'spip_urls', 'url='._q($set['url']))
+		$vieux = sql_fetsel('*', 'spip_urls', 'url='.sql_quote($set['url']))
 		// l'objet a une url plus recente
 		AND $courant = sql_fetsel('*', 'spip_urls',
-			'type='._q($vieux['type']).' AND id_objet='._q($vieux['id_objet'])
-			.' AND date>'._q($vieux['date']), '', 'date DESC', 1
+			'type='.sql_quote($vieux['type']).' AND id_objet='.sql_quote($vieux['id_objet'])
+			.' AND date>'.sql_quote($vieux['date']), '', 'date DESC', 1
 		)) {
 			if ($modifier_url
 			AND CONFIRMER_MODIFIER_URL
@@ -220,8 +220,8 @@ function _generer_url_propre($type, $id_objet) {
 			}
 
 			// si oui on le chipe
-			sql_updateq('spip_urls', $set, 'url='._q($set['url']));
-			sql_update('spip_urls', array('date' => 'NOW()'), 'url='._q($set['url']));
+			sql_updateq('spip_urls', $set, 'url='.sql_quote($set['url']));
+			sql_update('spip_urls', array('date' => 'NOW()'), 'url='.sql_quote($set['url']));
 		}
 
 		// Sinon
@@ -232,8 +232,8 @@ function _generer_url_propre($type, $id_objet) {
 		// mais se casser avant que ca ne casse.
 		do {
 			$where = "U.type='$type' AND U.id_objet=$id_objet AND url=";
-			if (sql_countsel('spip_urls AS U', $where  ._q($set['url']))) {
-				sql_update('spip_urls AS U', array('date' => 'NOW()'), $where  ._q($set['url']));
+			if (sql_countsel('spip_urls AS U', $where  .sql_quote($set['url']))) {
+				sql_update('spip_urls AS U', array('date' => 'NOW()'), $where  .sql_quote($set['url']));
 				spip_log("reordonne $type $id_objet");
 				return $set['url'];
 			}
@@ -241,15 +241,15 @@ function _generer_url_propre($type, $id_objet) {
 				$set['url'] .= ','.$id_objet;
 				if (strlen($set['url']) > 200)
 					return $url_propre; //serveur out ? retourner au mieux
-				elseif (sql_countsel('spip_urls AS U', $where . _q($set['url']))) {
-					sql_update('spip_urls', array('date' => 'NOW()'), 'url='._q($set['url']));
+				elseif (sql_countsel('spip_urls AS U', $where . sql_quote($set['url']))) {
+					sql_update('spip_urls', array('date' => 'NOW()'), 'url='.sql_quote($set['url']));
 					return $set['url']; 
 				}
 			}
 		} while (@sql_insertq('spip_urls', $set) <= 0);
 	}
 
-	sql_update('spip_urls', array('date' => 'NOW()'), 'url='._q($set['url']));
+	sql_update('spip_urls', array('date' => 'NOW()'), 'url='.sql_quote($set['url']));
 	spip_log("Creation de l'url propre '" . $set['url'] . "' pour $col_id=$id_objet");
 
 	return $set['url'];
