@@ -63,5 +63,10 @@ function maj_11388 () {
 }
 $GLOBALS['maj'][11388] = array(array('maj_11388'));
 
+// reparer spip_mots.type = titre du groupe
+function maj_11431 () {
+	spip_query("UPDATE spip_mots AS a LEFT JOIN spip_groupes_mots AS b ON (a.id_groupe = b.id_groupe) SET a.type=b.titre");
+}
+$GLOBALS['maj'][11431] = array(array('maj_11431'));
 
 ?>
