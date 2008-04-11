@@ -404,8 +404,9 @@ function compose_filtres(&$p, $code) {
 				$code = "filtrer('image_graver', $code)";
 				$image_miette = false;
 			}
+
 			// recuperer les arguments du filtre, les separer par des virgules
-			// *sauf* dans le cas du filtre "?" qui demande un ":"
+			// dans le cas du filtre "?{a,b}", on demande un ":"
 			if ($fonc == '?') {
 				// |?{a,b} *doit* avoir exactement 2 arguments ; on les force
 				if (count($filtre) != 2)
@@ -414,26 +415,51 @@ function compose_filtres(&$p, $code) {
 			} else
 				$arglist = compose_filtres_args($p, $filtre, ',');
 
-			// est-ce un test ?
-			if (in_array($fonc, $table_criteres_infixes))
-				$code = "($code $fonc " . substr($arglist,1) . ')';
+			$arg = substr($arglist,1);
 
-			elseif (isset($GLOBALS['spip_matrice'][$fonc])) {
-				$code = "filtrer('$fonc',$code$arglist)";
-				if ($is_filtre_image) $image_miette = true;
-			}
+			// compiler le filtre
+			switch (true) {
+				// est-ce un test ?
+				case in_array($fonc, $table_criteres_infixes):
+					$code = "($code $fonc $arg)";
+					break;
 
-			// le filtre est defini sous forme de fonction ou de methode
-			// par ex. dans inc_texte, inc_filtres ou mes_fonctions
-			else if ($f = chercher_filtre($fonc)) {
-				$code = "$f($code$arglist)";
-			}
+				// cas de et,ou,non,sinon,xou,xor,and,or,not
+				case ($fonc == 'and') OR ($fonc == 'et'):
+					$code = "((($code) AND ($arg)) ?' ' :'')";
+					break;
+				case ($fonc == 'or') OR ($fonc == 'ou'):
+					$code = "((($code) OR ($arg)) ?' ' :'')";
+					break;
+				case ($fonc == 'xor') OR ($fonc == 'xou'):
+					$code = "((($code) XOR ($arg)) ?' ' :'')";
+					break;
+				case ($fonc == 'sinon'):
+					$code = "((\$a = $code) ? \$a : $arg)";
+					break;
+				case ($fonc == 'not') OR ($fonc == 'non'):
+					$code = "(($code) ?'' :' ')";
+					break;
 
-			// le filtre n'existe pas, on provoque une erreur
-			else {
-				$code .= ".erreur_squelette('"
-				.texte_script(_T('zbug_erreur_filtre', array('filtre'=>$fonc)))
+				default:
+					if (isset($GLOBALS['spip_matrice'][$fonc])) {
+						$code = "filtrer('$fonc',$code$arglist)";
+						if ($is_filtre_image) $image_miette = true;
+					}
+
+					// le filtre est defini sous forme de fonction ou de methode
+					// par ex. dans inc_texte, inc_filtres ou mes_fonctions
+					else if ($f = chercher_filtre($fonc)) {
+						$code = "$f($code$arglist)";
+					}
+
+					// le filtre n'existe pas, on provoque une erreur
+					else {
+						$code .= ".erreur_squelette('"
+						.texte_script(_T('zbug_erreur_filtre', array('filtre'=>$fonc)))
 				."','" . $p->id_boucle . "')";
+					}
+
 			}
 
 		}
