@@ -121,9 +121,9 @@ function action_charger_plugin_dist() {
 		// repertoire parent accessible en ecriture ?
 		if (!@is_dir($dest)
 		OR !@is_writeable($dest)) {
-			$retour = _L("Erreur");
-			$texte = "<p>"._L("Le r&#233;pertoire <code>$dest</code> n'est pas accessible en &#233;criture.")."</p>"
-				. "<p>"._L("Veuillez v&#233;rifier les droits sur ce r&#233;pertoire (et le cr&#233;er le cas &#233;ch&#233;ant), ou installer les fichiers par FTP.").aide('install0')."</p>";
+			$retour = _T("erreur");
+			$texte = "<p>"._T('plugin_erreur_droit1',array('dest'=>$dest))."</p>"
+			  . "<p>"._T('plugin_erreur_droit2').aide('install0')."</p>";
 		}
 		else
 
@@ -149,24 +149,24 @@ function action_charger_plugin_dist() {
 			if (_request('extract')) {
 				$texte = plugin_propre(
 					spip_xml_aplatit($arbre['plugin'][0]['description']));
-				$texte .= '<p>'._L('Le fichier '.$zip.' a &#233;t&#233; d&#233;compact&#233; et install&#233;').'</p>';
-				$texte .= _L("<h2 style='text-align:center;'>Continuez pour l'activer.</h2>");
+				$texte .= '<p>'._T('plugin_zip_installe_finie',array('zip'=>$zip)).'</p>';
+				$texte .= "<h2 style='text-align:center;'>"._T('plugin_zip_active')."</h2>";
 			} else {
-				$texte = '<p>'._L('Le fichier '.$zip.' a &#233;t&#233; t&#233;l&#233;charg&#233;').'</p>';
+                $texte = '<p>'._T('plugin_zip_telecharge',array('zip'=>$zip)).'</p>';
 				$texte .= liste_fichiers_pclzip($status);
-				$texte .= _L("<h2 style='text-align:center;'>Vous pouvez maintenant l'installer.</h2>");
+				$texte .= "<h2 style='text-align:center;'>"._T('plugin_zip_installer')."</h2>";
 				$suite = 'plugins';
 			}
 		}
 
 		// C'est un paquet quelconque
 		else {
-			$retour = _L('Chargement du paquet') . ' '.basename($status['tmpname']);
+		  $retour = _T('plugin_charge_paquet',array('name' => basename($status['tmpname'])));
 
 			if (_request('extract')) {
-				$texte = '<p>'._L('Le fichier '.$zip.' a &#233;t&#233; d&#233;compact&#233; et install&#233; dans le r&#233;pertoire '.$status['dirname']).'</p>';
+			  $texte = '<p>'._T('plugin_zip_installe_rep_finie', array('zip'=>$zip, 'rep'=>$status['dirname'])).'</p>';
 			} else {
-				$texte = "<p>"._L("Le fichier ".$zip.' a &#233;t&#233; t&#233;l&#233;charg&#233;.')."</p>\n";
+                $texte = "<p>"._T('plugin_zip_telecharge',array('zip'=>$zip))."</p>\n";
 				$texte .= liste_fichiers_pclzip($status);
 				$suite = 'lib';
 			}
@@ -176,13 +176,13 @@ function action_charger_plugin_dist() {
 	// fichier absent
 	else if ($status == -1) {
 		$retour = _T('erreur');
-		$texte = _L('erreur : impossible de charger '.$zip);
+		$texte = _T('plugin_erreur_charger', array('zip'=>$zip));
 	}
 
 	// fichier la mais pas bien dezippe
 	else {
 		$retour = _T('erreur');
-		$texte = _L("echec pclzip : erreur ").$status;
+		$texte = _T('plugin_erreur_zip',array('status'=>$status));
 	}
 
 
