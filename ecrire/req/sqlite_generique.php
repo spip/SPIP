@@ -638,6 +638,7 @@ function spip_sqlite_replace_multi($table, $tab_couples, $desc=array(), $serveur
 
 // http://doc.spip.org/@spip_sqlite_select
 function spip_sqlite_select($select, $from, $where='', $groupby='', $orderby='', $limit='', $having='', $serveur='',$requeter=true) {	
+
 	// version() n'est pas connu de sqlite
 	$select = str_replace('version()', 'sqlite_version()',$select);
 
@@ -712,7 +713,7 @@ function spip_sqlite_showbase($match, $serveur='',$requeter=true){
 function spip_sqlite_showtable($nom_table, $serveur='',$requeter=true){
 
 	$query = 
-			'SELECT sql FROM'
+			'SELECT sql, type FROM'
    			. ' (SELECT * FROM sqlite_master UNION ALL'
    			. ' SELECT * FROM sqlite_temp_master)'
 			. " WHERE tbl_name LIKE '$nom_table'"
@@ -723,38 +724,54 @@ function spip_sqlite_showtable($nom_table, $serveur='',$requeter=true){
 	if (!$a) return "";
 	if (!$requeter) return $a;
 	if (!($a = spip_sqlite_fetch($a, null, $serveur))) return "";
-	$a = array_shift($a); 
-	if (!preg_match("/^[^(),]*\((([^()]*(\([^()]*\))?[^()]*)*)\)[^()]*$/", $a, $r))
-		return "";
-	else {
-		$dec = $r[1];
-		if (preg_match("/^(.*?),([^,]*KEY.*)$/s", $dec, $r)) {
-			$namedkeys = $r[2];
+	$vue = ($a['type'] == 'view'); // table | vue
+	
+	// c'est une table
+	// il faut parser le create
+	if (!$vue) {
+		if (!preg_match("/^[^(),]*\((([^()]*(\([^()]*\))?[^()]*)*)\)[^()]*$/", array_shift($a), $r))
+			return "";
+		else {
 			$dec = $r[1];
-		}
-		else 
-			$namedkeys = "";
+			if (preg_match("/^(.*?),([^,]*KEY.*)$/s", $dec, $r)) {
+				$namedkeys = $r[2];
+				$dec = $r[1];
+			}
+			else 
+				$namedkeys = "";
 
-		$fields = array();
-		foreach (explode(",",$dec) as $v) {
-			preg_match("/^\s*([^\s]+)\s+(.*)/",$v,$r);
-			$fields[strtolower($r[1])] = $r[2];
-		}
-		$keys = array();
+			$fields = array();
+			foreach (explode(",",$dec) as $v) {
+				preg_match("/^\s*([^\s]+)\s+(.*)/",$v,$r);
+				$fields[strtolower($r[1])] = $r[2];
+			}
+			$keys = array();
 
-		foreach(preg_split('/\)\s*,?/',$namedkeys) as $v) {
-			if (preg_match("/^\s*([^(]*)\((.*)$/",$v,$r)) {
-				$k = str_replace("`", '', trim($r[1]));
-				$t = strtolower(str_replace("`", '', $r[2]));
-				if ($k && !isset($keys[$k])) $keys[$k] = $t; else $keys[] = $t;
+			foreach(preg_split('/\)\s*,?/',$namedkeys) as $v) {
+				if (preg_match("/^\s*([^(]*)\((.*)$/",$v,$r)) {
+					$k = str_replace("`", '', trim($r[1]));
+					$t = strtolower(str_replace("`", '', $r[2]));
+					if ($k && !isset($keys[$k])) $keys[$k] = $t; else $keys[] = $t;
+				}
 			}
 		}
-		/*
-		 * me demande si les cles servent au compilateur de spip
-		 * car vu que sqlite le gere pas, je sais pas ce que ca donne ...
-		 */
-		return array('field' => $fields, 'key' => $keys);
+	// c'est une vue, on liste les champs disponibles simplement
+	} else {
+		if ($res = sql_fetsel('*',$nom_table,'','','','1','',$serveur)){ // limit 1
+			$fields = array();
+			foreach($res as $c=>$v) $fields[$c]='';
+			$keys = array();		
+		} else {	
+			return "";	
+		}
 	}
+	
+	/*
+	 * me demande si les cles servent au compilateur de spip
+	 * car vu que sqlite le gere pas, je sais pas ce que ca donne ...
+	 */
+	return array('field' => $fields, 'key' => $keys);
+	
 }
 
 
