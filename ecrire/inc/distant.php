@@ -234,8 +234,10 @@ function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576,
 			if ($status >= 300 AND $status < 400 AND $location) {
 				fclose($f);
 				return $location;
-			} else if ($status != 200)
+			} else if ($status != 200){
+				spip_log("ECHEC chargement $url : Status $status");
 				return false;
+			}
 			; # sinon on est content
 		}
 		
