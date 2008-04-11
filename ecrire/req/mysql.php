@@ -377,6 +377,9 @@ function spip_mysql_repair($table, $serveur='',$requeter=true)
 	return spip_mysql_query("REPAIR TABLE $table", $serveur, $requeter);
 }
 
+// Recupere la definition d'une table ou d'une vue MySQL
+// colonnes, indexes, etc.
+// au meme format que la definition des tables de SPIP
 // http://doc.spip.org/@spip_mysql_showtable
 function spip_mysql_showtable($nom_table, $serveur='',$requeter=true)
 {
@@ -384,34 +387,67 @@ function spip_mysql_showtable($nom_table, $serveur='',$requeter=true)
 	if (!$a) return "";
 	if (!$requeter) return $a;
 	if (!mysql_fetch_array($a)) return "";
-	list(,$a) = mysql_fetch_array(spip_mysql_query("SHOW CREATE TABLE $nom_table", $serveur),MYSQL_NUM);
-	if (!preg_match("/^[^(),]*\((([^()]*\([^()]*\)[^()]*)*)\)[^()]*$/", $a, $r))
-		return "";
-	else {
+   	
+	$mysqlres = spip_mysql_query("SHOW CREATE TABLE $nom_table", $serveur);
+	if($mysqlres) {
+	  list(,$a) = mysql_fetch_array($mysqlres ,MYSQL_NUM);
+	  if (preg_match("/^[^(),]*\((([^()]*\([^()]*\)[^()]*)*)\)[^()]*$/", $a, $r)) {
 		$dec = $r[1];
 		if (preg_match("/^(.*?),([^,]*KEY.*)$/s", $dec, $r)) {
-			$namedkeys = $r[2];
-			$dec = $r[1];
+		  $namedkeys = $r[2];
+		  $dec = $r[1];
 		}
 		else 
-			$namedkeys = "";
+		  $namedkeys = "";
 
 		$fields = array();
 		foreach(preg_split("/,\s*`/",$dec) as $v) {
-			preg_match("/^\s*`?([^`]*)`\s*(.*)/",$v,$r);
-			$fields[strtolower($r[1])] = $r[2];
+		  preg_match("/^\s*`?([^`]*)`\s*(.*)/",$v,$r);
+		  $fields[strtolower($r[1])] = $r[2];
 		}
 		$keys = array();
 
 		foreach(preg_split('/\)\s*,?/',$namedkeys) as $v) {
-			if (preg_match("/^\s*([^(]*)\((.*)$/",$v,$r)) {
-				$k = str_replace("`", '', trim($r[1]));
-				$t = strtolower(str_replace("`", '', $r[2]));
-				if ($k && !isset($keys[$k])) $keys[$k] = $t; else $keys[] = $t;
-			}
+		  if (preg_match("/^\s*([^(]*)\((.*)$/",$v,$r)) {
+			$k = str_replace("`", '', trim($r[1]));
+			$t = strtolower(str_replace("`", '', $r[2]));
+			if ($k && !isset($keys[$k])) $keys[$k] = $t; else $keys[] = $t;
+		  }
 		}
+		spip_mysql_free($mysqlres);
 		return array('field' => $fields, 'key' => $keys);
+	  }
 	}
+	$res = spip_mysql_query("SHOW COLUMNS FROM $nom_table", $serveur, $requeter);
+	if($res) {
+	  $nfields = array();
+	  $nkeys = array();
+	  while($val = spip_mysql_fetch($res)) {
+		$nfields[$val["Field"]] = $val['Type'];
+		if($val['Null']=='NO') {
+		  $nfields[$val["Field"]] .= ' NOT NULL'; 
+		}
+		if($val['Default'] === '0' || $val['Default']) {
+		  if(preg_match('/[A-Z_]/',$val['Default'])) {
+			$nfields[$val["Field"]] .= ' DEFAULT '.$val['Default'];		  
+		  } else {
+			$nfields[$val["Field"]] .= " DEFAULT '".$val['Default']."'";		  
+		  }
+		}
+		if($val['Extra'])
+		  $nfields[$val["Field"]] .= ' '.$val['Extra'];
+		if($val['Key'] == 'PRI') {
+		  $nkeys['PRIMARY'] = $val["Field"];
+		} else if($val['Key'] == 'MUL') {
+		  $nkeys['KEY '.$val["Field"]] = $val["Field"];
+		} else if($val['Key'] == 'UNI') {
+		  $nkeys['UNIQUE KEY '.$val["Field"]] = $val["Field"];
+		}
+	  }
+	  spip_mysql_free($res);
+	  return array('field' => $nfields, 'key' => $nkeys);
+	}
+	return "";
 }
 
 //
