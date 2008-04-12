@@ -158,25 +158,34 @@ function insert_syndic($id_rubrique) {
 // http://doc.spip.org/@revisions_sites
 function revisions_sites ($id_syndic, $c=false) {
 
-	include_spip('inc/filtres');
-	include_spip('inc/autoriser');
 	include_spip('inc/rubriques');
 
-	$id_auteur = isset($c['id_auteur']) ? $c['id_auteur'] : NULL;   
-
-	// Ces champs seront pris nom pour nom (_POST[x] => spip_syndic.x)
-	$champs_normaux = array('nom_site', 'url_site', 'descriptif', 'url_syndic', 'syndication');
-
-	// ne pas accepter de titre vide
-	if (_request('nom_site', $c) === '')
-		$c = set_request('nom_site', _T('ecrire:info_sans_titre'), $c);
-
-	$champs = array();
-	foreach ($champs_normaux as $champ) {
-		$val = _request($champ, $c);
-		if ($val !== NULL)
-			$champs[$champ] = corriger_caracteres($val);
+	// champs normaux
+	if ($c === false) {
+		$c = array();
+		foreach (array(
+			'nom_site', 'url_site', 'descriptif', 'url_syndic', 'syndication', 'statut', 'id_parent'
+		) as $champ)
+			if (($a = _request($champ)) !== null)
+				$c[$champ] = $a;
 	}
+
+	// Si le site est publie, invalider les caches et demander sa reindexation
+	$t = sql_getfetsel("statut", "spip_syndic", "id_syndic=$id_syndic");
+	if ($t == 'publie') {
+		$invalideur = "id='id_syndic/$id_syndic'";
+		$indexation = true;
+	}
+	include_spip('inc/modifier');
+
+	modifier_contenu('syndic', $id_syndic,
+		array(
+			'nonvide' => array('nom_site' => _T('info_sans_titre')),
+			'invalideur' => $invalideur,
+			'indexation' => $indexation
+		),
+		$c);
+
 
 	$s = sql_select("statut, id_rubrique, id_secteur", "spip_syndic", "id_syndic=$id_syndic");
 	$row = sql_fetch($s);
@@ -184,11 +193,11 @@ function revisions_sites ($id_syndic, $c=false) {
 	$statut_ancien = $row['statut'];
 	$id_secteur_old = $row['id_secteur'];
 
-	$statut = _request('statut', $c);
+	$statut = $c['statut'];
 
 	if ($statut
 	AND $statut != $statut_ancien
-	AND autoriser('publierdans','rubrique',$id_rubrique, $id_auteur)) {
+	AND autoriser('publierdans','rubrique',$id_rubrique)) {
 		$champs['statut'] = $statut;
 		if ($statut == 'publie') {
 			if ($d = _request('date', $c)) {
@@ -221,41 +230,10 @@ function revisions_sites ($id_syndic, $c=false) {
 		}
 	}
 
-	// recuperer les extras
-	if ($GLOBALS['champs_extra']) {
-		include_spip('inc/extra');
-		if ($extra = extra_update('syndic', $id_syndic, $c))
-			$champs['extra'] = $extra;
-	}
-
 	if (!$champs) return;
 
 	// Enregistrer les modifications
 	sql_updateq('spip_syndic', $champs, "id_syndic=$id_syndic");
-
-	// Envoyer aux plugins
-	include_spip('inc/modifier'); # temporaire pour eviter un bug
-	$champs = pipeline('pre_edition',
-		array(
-			'args' => array(
-				'table' => 'spip_syndic',
-				'id_objet' => $id_syndic
-			),
-			'data' => $champs
-		)
-	);
-
-	// marquer le fait que le site est travaille par toto a telle date
-	// une alerte sera donnee aux autres redacteurs sur exec=sites
-	if ($GLOBALS['meta']['articles_modif'] != 'non') {
-		include_spip('inc/drapeau_edition');
-		signale_edition ($id_syndic, $GLOBALS['visiteur_session'], 'syndic');
-	}
-
-
-	//
-	// Post-modifications
-	//
 
 	// Invalider les caches
 	if ($statut == 'publie') {
@@ -263,18 +241,8 @@ function revisions_sites ($id_syndic, $c=false) {
 		suivre_invalideur("id='id_syndic/$id_syndic'");
 	}
 
+	include_spip('inc/rubriques');
 	calculer_rubriques_if($id_rubrique, $champs, $statut_ancien);
-
-	// Notification ?
-	pipeline('post_edition',
-		array(
-			'args' => array(
-				'table' => 'spip_syndic',
-				'id_objet' => $id_syndic
-			),
-			'data' => $champs
-		)
-	);
 }
 
 

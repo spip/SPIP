@@ -35,7 +35,7 @@ function exec_mots_edit_dist()
 // http://doc.spip.org/@exec_mots_edit_args
 function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='', $titre='', $redirect='', $ajouter_id_article='')
 {
-	global $spip_lang_right, $champs_extra, $connect_statut, $spip_display, $les_notes;
+	global $spip_lang_right, $connect_statut, $spip_display, $les_notes;
 
 	$row = sql_fetsel("*", "spip_mots", "id_mot=$id_mot");
 	if ($row) {
@@ -198,9 +198,15 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 		$res .= $texte;
 		$res .= "</textarea><br />";
 
-		if ($champs_extra) {
+		if ($GLOBALS['champs_extra']) {
 			include_spip('inc/extra');
 			$res .= extra_saisie($extra, 'mots', $id_groupe);
+		}
+
+		// Ajouter le controles md5
+		if (intval($id_mot)) {
+			include_spip('inc/editer');
+			$res .= controles_md5($row);
 		}
 
 		$res .= "<div style='text-align: right'><input type='submit' value='"._T('bouton_enregistrer')."' class='fondo' /></div>";

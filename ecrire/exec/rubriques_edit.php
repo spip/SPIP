@@ -24,7 +24,7 @@ function exec_rubriques_edit_dist()
 // http://doc.spip.org/@exec_rubriques_edit_args
 function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
 {
-	global $connect_toutes_rubriques, $champs_extra, $connect_statut, $spip_lang_right;
+	global $connect_toutes_rubriques, $connect_statut, $spip_lang_right;
 
 	$titre = false;
 
@@ -154,7 +154,14 @@ function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
 		. "</textarea>\n";
 	}
 
-	if ($champs_extra) {
+	// Ajouter le controles md5
+	if (isset($row)) {
+		include_spip('inc/editer');
+		$form .= controles_md5($row);
+	}
+
+
+	if ($GLOBALS['champs_extra']) {
 		include_spip('inc/extra');
 		$form .= extra_saisie($extra, 'rubriques', $id_secteur);
 	}
