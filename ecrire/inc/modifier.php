@@ -72,7 +72,8 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 	AND isset($_POST['extra'])
 	AND $GLOBALS['champs_extra']) {
 		include_spip('inc/extra');
-		if ($extra = extra_update($table_objet, $id, $_POST))
+		$extra = extra_update($table_objet, $id, $_POST);
+		if ($extra !== false)
 			$champs['extra'] = $extra;
 	}
 
