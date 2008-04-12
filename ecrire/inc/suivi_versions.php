@@ -257,12 +257,10 @@ function revision_comparee($id_article, $id_version, $format='diff', $id_diff=NU
 			AND isset($old[$champ])) {
 				// cas particulier : id_rubrique
 				if (in_array($champ, array('id_rubrique'))) {
-					$textes[$champ] = _L("D&#233;plac&#233; de <b>&#171;&nbsp;"
-						. titre_rubrique($old[$champ])
-						. "&nbsp;&#187;</b> vers <b>&#171;&nbsp;"
-						. titre_rubrique($new[$champ])
-						. "&nbsp;&#187;</b>."
-					);
+				  $textes[$champ] = _T('version_deplace_rubrique',
+										 array('from'=> titre_rubrique($old[$champ])
+											   ,'to'=>titre_rubrique($new[$champ]))
+										 );
 				}
 				
 				// champs textuels

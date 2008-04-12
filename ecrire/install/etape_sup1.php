@@ -45,7 +45,7 @@ function install_etape_sup1_dist()
 	if (!$server_d AND  defined('_INSTALL_SERVER_DB'))
 		$server_d = _INSTALL_NAME_DB;
 
-	echo install_debut_html(_L("D&eacute;claration d'une base suppl&eacute;mentaire"));
+	echo install_debut_html(_T('config_titre_base_sup'));
 
 	$link = spip_connect_db($adresse_db, 0, $login_db, $pass_db, '', $server_db);
 	$GLOBALS['connexions'][$server_db][$GLOBALS['spip_sql_version']]
@@ -74,8 +74,7 @@ function install_etape_sup1_dist()
 	} else  {
 		echo info_etape(_T('info_connexion_base'));
 		echo "<p class='resultat'><b>",
-#		  _T('avis_connexion_echec_1'),
-		  _L('La connexion &agrave; la base de donn&eacute;es a &eacute;chou&eacute;.'),
+		  _T('avis_connexion_echec_1'),
 		  "</b></p>";
 	}
 
@@ -86,7 +85,7 @@ function install_etape_sup1_form($hidden, $checked, $bases, $etape)
  {
 	if ($bases) {
 		$bases = "\n<fieldset><legend>"
-		  . _L('Choisissez une base suppl&eacute;mentaire')
+		  . _T('config_titre_base_sup_choix')
 		  . "</legend>\n"
 		  . "<ul>\n<li>"
 		  . join("</li>\n<li>",$bases)
@@ -95,7 +94,7 @@ function install_etape_sup1_form($hidden, $checked, $bases, $etape)
 		$type = " type='radio'" . ($checked ? '' : " checked='checked'");
 
 	} else {
-		$bases = _L("SPIP n'a pas acc&egrave;s &agrave; la liste des bases accessibles") . '<br /><br >';
+		$bases = _T('config_erreur_base_sup') . '<br /><br >';
 		$type = " type='hidden'";
 	}
 
@@ -107,7 +106,7 @@ function install_etape_sup1_form($hidden, $checked, $bases, $etape)
 	  . $type
 	  . " />\n"
 	  . "<label for='nou'><b>"
-	  ._L('indiquer une base sur ce serveur')
+	  ._T('config_choix_base_sup')
 	  ."</b></label></p>\n"
 	  . "\n<input type='text' name='table_new' class='fondl' size='20' /></p></fieldset>\n"
 	  . bouton_suivant()));

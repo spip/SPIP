@@ -312,22 +312,22 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 	. ($server_db
 		? '<input type="hidden" name="server_db" value="'.$server_db.'" />'
 			. (($predef[0])
-				?_L('<b>Serveur de base de donn&eacute;es attribu&eacute; par l\'h&eacute;bergeur</b>')
+			   ?('<b>'._T('install_serveur_hebergeur').'</b>')
 				:'')
 		: ('<fieldset><legend>'
-		._L('Indiquer le type de base de donn&eacute;es :')
+		   ._T('install_select_type_db')
 		. "\n<select name='server_db' id='sql_serveur_db' >"
 		. ($mysql
-			? "\n<option value='mysql'>"._L('MySQL')."</option>"
+			? "\n<option value='mysql'>"._T('install_select_type_mysql')."</option>"
 			: '')
 		. ($pg
-			? "\n<option value='pg'>"._L('PostgreSQL')."</option>"
+			? "\n<option value='pg'>"._T('install_select_type_pgsql')."</option>"
 			: '')
 		. (($sqlite2)
-			? "\n<option value='sqlite2'>"._L('SQLite 2')."</option>"
+			? "\n<option value='sqlite2'>"._T('install_select_type_sqlite2')."</option>"
 			: '')
 		. (($sqlite3)
-			? "\n<option value='sqlite3'>"._L('SQLite 3')."</option>"
+			? "\n<option value='sqlite3'>"._T('install_select_type_sqlite3')."</option>"
 			: '')
 		   . "\n</select></legend></fieldset>")
 	)

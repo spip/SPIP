@@ -57,7 +57,7 @@ function autres_bases()
 
 	if ($tables)
 		$tables = '<br /><br />'
-		  .  _L('Bases suppl&eacute;mentaires d&eacute;j&agrave; interrogeables:')
+		  .  _T('config_info_base_sup_disponibles')
 		  . "<ul>\n<li>"
 		  . join("</li>\n<li>",  $tables)
 		  . "</li>\n</ul>";
@@ -79,7 +79,7 @@ function autres_bases()
 	: ("\n<input type='hidden' name='sel_db' value='" . $sel . "' />\n");
 
 	return "<br ><div style='padding: 10px; border: 1px solid; text-align: left'>" 
-	.  _L("Si vous avez d'autres bases de donn&eacute;es &agrave; interroger &agrave; travers SPIP, avec son serveur SQL ou avec un autre, le formulaire ci-dessous, vous permet de les d&eacute;clarer. Si vous laissez certains champs vides, les identifiants de connexion &agrave; la base principale seront utilis&eacute;s.")
+	  .  _T('config_info_base_sup')
 	  . $tables
 	  .  install_connexion_form(array($adresse_db), array($login_db), array($pass_db), array($server_db), $hidden, 'sup1')
 	  .  "</div>";
