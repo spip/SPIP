@@ -285,6 +285,19 @@ function spip_sqlite_create($nom, $champs, $cles, $autoinc=false, $temporary=fal
 	return spip_sqlite_query($query, $serveur, $requeter);
 }
 
+// Fonction de creation d'une vue SQL nommee $nom
+// http://doc.spip.org/@spip_sqlite_create
+function spip_sqlite_create_view($nom, $query_select, $serveur='',$requeter=true) {
+	if (!$query_select) return false;
+	// vue deja presente
+	if (sql_showtable($nom, false, $serveur)) {
+		spip_log("Echec creation d'une vue sql ($nom) car celle-ci existe deja (serveur:$serveur)");
+		return false;
+	}
+	
+	$query = "CREATE VIEW $nom AS ". $query_select;
+	return spip_sqlite_query($query, $serveur, $requeter);
+}
 
 // en PDO/sqlite3, il faut calculer le count par une requete count(*)
 // pour les resultats de SELECT
@@ -347,6 +360,20 @@ function spip_sqlite_drop_table($table, $exist='', $serveur='',$requeter=true) {
 	}
 	
 	return spip_sqlite_query("DROP TABLE$exist $table", $serveur, $requeter);
+}
+
+// supprime une vue 
+function spip_sqlite_drop_view($view, $exist='', $serveur='',$requeter=true) {
+	if ($exist) $exist =" IF EXISTS";
+	
+	/* simuler le IF EXISTS - version 2 */
+	if ($exist && _sqlite_is_version(2, '', $serveur)){
+		$a = spip_sqlite_showtable($view, $serveur); 
+		if (!$a) return true;
+		$exist = '';
+	}
+	
+	return spip_sqlite_query("DROP VIEW$exist $view", $serveur, $requeter);
 }
 
 
@@ -1126,16 +1153,14 @@ function _sqlite_modifier_table($table_origine, $table_destination, $colonne_ori
 // http://doc.spip.org/@_sqlite_ref_fonctions
 function _sqlite_ref_fonctions(){
 	$fonctions = array(
-	// tests
-		'begin' => 'spip_sqlite_begin',
-		'commit' => 'spip_sqlite_commit',
-		
 		'alter' => 'spip_sqlite_alter',
 		'count' => 'spip_sqlite_count',
 		'countsel' => 'spip_sqlite_countsel',
 		'create' => 'spip_sqlite_create',
+		'create_view' => 'spip_sqlite_create_view',
 		'delete' => 'spip_sqlite_delete',
 		'drop_table' => 'spip_sqlite_drop_table',
+		'drop_view' => 'spip_sqlite_drop_view',
 		'errno' => 'spip_sqlite_errno',
 		'error' => 'spip_sqlite_error',
 		'explain' => 'spip_sqlite_explain',

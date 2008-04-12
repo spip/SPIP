@@ -72,8 +72,10 @@ $GLOBALS['spip_pg_functions_1'] = array(
 		'count' => 'spip_pg_count',
 		'countsel' => 'spip_pg_countsel',
 		'create' => 'spip_pg_create',
+		'create_view' => 'spip_pg_create_view',
 		'delete' => 'spip_pg_delete',
 		'drop_table' => 'spip_pg_drop_table',
+		'drop_view' => 'spip_pg_drop_view',
 		'errno' => 'spip_pg_errno',
 		'error' => 'spip_pg_error',
 		'explain' => 'spip_pg_explain',
@@ -858,6 +860,12 @@ function spip_pg_drop_table($table, $exist='', $serveur='',$requeter=true)
 	return spip_pg_query("DROP TABLE$exist $table", $serveur, $requeter);
 }
 
+// supprime une vue 
+function spip_pg_drop_view($view, $exist='', $serveur='',$requeter=true) {
+	if ($exist) $exist =" IF EXISTS";
+	return spip_pg_query("DROP VIEW$exist $view", $serveur, $requeter);
+}
+
 // http://doc.spip.org/@spip_pg_showbase
 function spip_pg_showbase($match, $serveur='',$requeter=true)
 {
@@ -874,9 +882,10 @@ function spip_pg_showtable($nom_table, $serveur='',$requeter=true)
 	$link = $connexion['link'];
 
 	$res = pg_query($link, "SELECT column_name, column_default, data_type FROM information_schema.columns WHERE table_name ILIKE " . _q($nom_table));
-
 	if (!$res) return false;
-
+	
+	// etrangement, $res peut ne rien contenir, mais arriver ici...
+	// il faut en tenir compte dans le return
 	$fields = array();
 	while($field = pg_fetch_array($res, NULL, PGSQL_NUM)) {
 		$fields[$field[0]] = $field[2] . (!$field[1] ? '' : (" DEFAULT " . $field[1]));
@@ -892,7 +901,8 @@ function spip_pg_showtable($nom_table, $serveur='',$requeter=true)
 			  $r[2];
 		}
 	}
-	return array('field' => $fields, 'key' => $keys);
+
+	return count($fields) ? array('field' => $fields, 'key' => $keys) : false;
 }
 
 // Fonction de creation d'une table SQL nommee $nom
@@ -969,6 +979,23 @@ function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false, 
 	} 
 	return $r;
 }
+
+
+
+// Fonction de creation d'une vue SQL nommee $nom
+// http://doc.spip.org/@spip_sqlite_create
+function spip_pg_create_view($nom, $query_select, $serveur='',$requeter=true) {
+	if (!$query_select) return false;
+	// vue deja presente
+	if (sql_showtable($nom, false, $serveur)) {
+		if ($requeter) spip_log("Echec creation d'une vue sql ($nom) car celle-ci existe deja (serveur:$serveur)");
+		return false;
+	}
+	
+	$query = "CREATE VIEW $nom AS ". $query_select;
+	return spip_pg_query($query, $serveur, $requeter);
+}
+
 
 // http://doc.spip.org/@spip_pg_set_connect_charset
 function spip_pg_set_connect_charset($charset, $serveur='',$requeter=true){

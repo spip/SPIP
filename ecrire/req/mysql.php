@@ -46,8 +46,10 @@ $GLOBALS['spip_mysql_functions_1'] = array(
 		'count' => 'spip_mysql_count',
 		'countsel' => 'spip_mysql_countsel',
 		'create' => 'spip_mysql_create',
+		'create_view' => 'spip_mysql_create_view',
 		'delete' => 'spip_mysql_delete',
 		'drop_table' => 'spip_mysql_drop_table',
+		'drop_view' => 'spip_mysql_drop_view',
 		'errno' => 'spip_mysql_errno',
 		'error' => 'spip_mysql_error',
 		'explain' => 'spip_mysql_explain',
@@ -358,11 +360,33 @@ function spip_mysql_create($nom, $champs, $cles, $autoinc=false, $temporary=fals
 	return spip_mysql_query($q, $serveur);
 }
 
+
+// Fonction de creation d'une vue SQL nommee $nom
+// http://doc.spip.org/@spip_sqlite_create
+function spip_mysql_create_view($nom, $query_select, $serveur='',$requeter=true) {
+	if (!$query_select) return false;
+	// vue deja presente
+	if (sql_showtable($nom, false, $serveur)) {
+		spip_log("Echec creation d'une vue sql ($nom) car celle-ci existe deja (serveur:$serveur)");
+		return false;
+	}
+	
+	$query = "CREATE VIEW $nom AS ". $query_select;
+	return spip_mysql_query($query, $serveur, $requeter);
+}
+
+
 // http://doc.spip.org/@spip_mysql_drop_table
 function spip_mysql_drop_table($table, $exist='', $serveur='',$requeter=true)
 {
 	if ($exist) $exist =" IF EXISTS";
 	return spip_mysql_query("DROP TABLE$exist $table", $serveur, $requeter);
+}
+
+// supprime une vue 
+function spip_mysql_drop_view($view, $exist='', $serveur='',$requeter=true) {
+	if ($exist) $exist =" IF EXISTS";
+	return spip_mysql_query("DROP VIEW$exist $view", $serveur, $requeter);
 }
 
 // http://doc.spip.org/@spip_mysql_showbase
