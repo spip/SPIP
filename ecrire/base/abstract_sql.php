@@ -79,6 +79,7 @@ function sql_select (
 
 // Recupere la syntaxe de la requete select sans l'executer
 // simplement $option = false au lieu de true
+// http://doc.spip.org/@sql_get_select
 function sql_get_select	(
 	$select = array(), $from = array(), $where = array(),
 	$groupby = array(), $orderby = array(), $limit = '', $having = array(),
@@ -223,6 +224,7 @@ function sql_drop_table($table, $exist='', $serveur='', $option=true)
 }
 
 // supprimer une vue sql
+// http://doc.spip.org/@sql_drop_view
 function sql_drop_view($table, $exist='', $serveur='', $option=true)
 {
 	$f = sql_serveur('drop_view', $serveur, $continue = $option==='continue' OR $option===false);
@@ -275,6 +277,7 @@ function sql_create($nom, $champs, $cles=array(), $autoinc=false, $temporary=fal
 // nom : nom de la vue,
 // select_query : une requete select, idealement cree avec $req = sql_select()
 // (en mettant $option du sql_select a false pour recuperer la requete)
+// http://doc.spip.org/@sql_create_view
 function sql_create_view($nom, $select_query, $serveur='', $option=true) {
 	$f = sql_serveur('create_view', $serveur, $continue = $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;

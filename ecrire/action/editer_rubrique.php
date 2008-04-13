@@ -112,6 +112,7 @@ function editer_rubrique_breves($id_rubrique, $id_parent, $c=false)
 }
 
 
+// http://doc.spip.org/@instituer_rubrique
 function instituer_rubrique($id_rubrique, $c) {
 	// traitement de la rubrique parente
 	// interdiction de deplacer vers ou a partir d'une rubrique
