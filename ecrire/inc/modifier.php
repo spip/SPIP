@@ -105,15 +105,15 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 	if ($champs) {
 
 		// la modif peut avoir lieu
-		$champs = array_map('sql_quote', $champs);
+		$champsq = array_map('sql_quote', $champs);
 
 		// faut-il ajouter date_modif ?
 		if ($options['date_modif']
 		AND !isset($champs[$options['date_modif']]))
-			$champs[$options['date_modif']] = 'NOW()';
+			$champsq[$options['date_modif']] = $champs[$options['date_modif']] = 'NOW()';
 
 		// allez on commit la modif
-		sql_update($spip_table_objet, $champs, "$id_table_objet=$id", $serveur);
+		sql_update($spip_table_objet, $champsq, "$id_table_objet=$id", $serveur);
 
 		// Invalider les caches
 		if ($options['invalideur']) {
@@ -127,6 +127,7 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 			marquer_doublons_documents($champs,$id,$id_table_objet,$table_objet,$spip_table_objet);
 
 		// Notifications, gestion des revisions...
+		// en standard, appelle |nouvelle_revision ci-dessous
 		pipeline('post_edition',
 			array(
 				'args' => array(
@@ -141,7 +142,9 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 
 	// S'il y a un conflit, prevenir l'auteur de faire un copier/coller
 	if ($conflits) {
-		$redirect = parametre_url(rawurldecode(_request('redirect')), $id_table_objet, $id);
+		$redirect = url_absolue(
+			parametre_url(rawurldecode(_request('redirect')), $id_table_objet, $id)
+		);
 		signaler_conflits_edition($conflits, $redirect);
 		exit;
 	}
@@ -343,7 +346,7 @@ function revision_forum($id_forum, $c=false) {
 // http://doc.spip.org/@premiere_revision
 function premiere_revision($x) {
 	// Stockage des versions : creer une premiere version si non-existante
-	if  ($GLOBALS['meta']["articles_versions"]=='oui') {
+	if ($GLOBALS['meta']["articles_versions"]=='oui') {
 		include_spip('inc/revisions');
 		$x = enregistrer_premiere_revision($x);
 	}
@@ -354,8 +357,7 @@ function premiere_revision($x) {
 // d'un article apres chaque modification de contenu
 // http://doc.spip.org/@nouvelle_revision
 function nouvelle_revision($x) {
-	// Stockage des versions : creer une premiere version si non-existante
-	if  ($GLOBALS['meta']["articles_versions"]=='oui') {
+	if ($GLOBALS['meta']["articles_versions"]=='oui') {
 		include_spip('inc/revisions');
 		$x = enregistrer_nouvelle_revision($x);
 	}
