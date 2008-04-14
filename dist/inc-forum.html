@@ -1,4 +1,6 @@
-[(#PARAMETRES_FORUM|?) Cette balise (invisible) provoque le recalcul du forum la premiere fois qu'un message est poste (cf. inc/invalideur). ]
+[(#REM) Cette balise (invisible) provoque le recalcul du forum
+la premiere fois qu'un message est poste (cf. inc/invalideur). ]
+[(#PARAMETRES_FORUM|?{''})]
 
 [(#REM) Nombre total de messages ]
 <BOUCLE_decompte(FORUMS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {plat}></BOUCLE_decompte>[<h2>(#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE,''})
@@ -20,7 +22,7 @@
 			<div class="#EDIT{texte} forum-texte">
 				[(#TEXTE|lignes_longues)]
 				[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-				[<p class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_message:></a></p>]
+				[<p class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="noindex nofollow"><:repondre_message:></a></p>]
 			</div>
 		</div>
 
@@ -37,7 +39,7 @@
 					<div class="#EDIT{texte} forum-texte">
 						[(#TEXTE|lignes_longues)]
 						[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-						[<p class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_message:></a></p>]
+						[<p class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="noindex nofollow"><:repondre_message:></a></p>]
 					</div>
 				</div>
 
