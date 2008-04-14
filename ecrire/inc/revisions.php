@@ -573,8 +573,10 @@ function propre_diff($texte) {
 	foreach ($regs as $c => $reg) {
 		$bal = (!$reg[1]) ? $reg[0] : "</$reg[2]>";
 		$texte = str_replace('@@@SPIP_DIFF'.$c.'@@@', $bal, $texte);
-		$GLOBALS['les_notes'] = str_replace('@@@SPIP_DIFF'.$c.'@@@', $$bal, $GLOBALS['les_notes']);
+		$GLOBALS['les_notes'] = str_replace('@@@SPIP_DIFF'.$c.'@@@', $bal, $GLOBALS['les_notes']);
 	}
+
+
 	// quand le dernier tag est ouvrant le refermer ...
 	$reg = end($regs);
 	if (!$reg[1] AND $reg[2]) $texte.="</$reg[2]>";
