@@ -66,6 +66,8 @@ function v019_pre193($version_installee, $version_cible)
 
 		ecrire_meta('index_table', serialize($liste_tables));
 
+## devenu inutile car suppression totale de l'indexation
+/*
 		spip_query("INSERT INTO spip_index (`hash`,`points`,`id_objet`,`id_table`) SELECT `hash`,`points`,`id_article` as id_objet,'1' as id_table FROM spip_index_articles");
 		spip_query("DROP TABLE IF EXISTS spip_index_articles");
 
@@ -92,7 +94,7 @@ function v019_pre193($version_installee, $version_cible)
 
 		spip_query("INSERT INTO spip_index (`hash`,`points`,`id_objet`,`id_table`) SELECT `hash`,`points`,`id_syndic` as id_objet,'9' as `id_table FROM spip_index_syndic");
 		spip_query("DROP TABLE IF EXISTS spip_index_syndic");
-
+*/
 		maj_version(1.905);
 	}
 
