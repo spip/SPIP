@@ -33,7 +33,7 @@ function generer_generer_url($type, $p)
 
 	if ($s = $p->id_boucle) $s = $p->boucles[$s]->sql_serveur;
 
-	if (!$s)
+	if (!$s AND function_exists("generer_url_$type"))
 		return "generer_url_$type($_id)";
 	elseif (!$GLOBALS['connexions'][$s]['spip_connect_version']) {
 		return NULL;
