@@ -160,7 +160,7 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 	if ($spam) {
 		$controle .= "<div style='float:".$GLOBALS['spip_lang_right'].";color:red'>"
 		."("
-		._L('spam') // Marque' comme spam ?
+		._T('spam') // Marque' comme spam ?
 		.")</div>";
 	}
 

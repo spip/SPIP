@@ -102,7 +102,7 @@ function controle_petition_page($id_article, $titre,  $ong, $statut, $corps)
 			$id_article,
 			")</span>";
 		if (!sql_countsel('spip_petitions', "id_article=$id_article"))
-			echo '<br >', _L('petition close');
+			echo '<br >', _T('info_petition_close');
 	}
 	$a = "editer_signature-" . $id_article;
 
@@ -125,8 +125,8 @@ function controle_petition_onglet($id_article, $debut, $type)
 	}
 
 	return debut_onglet()
-	  . onglet(_L('Signatures confirm&eacute;es'), generer_url_ecrire('controle_petition', $argp . $arg . "type=public"), "public", $type=='public', "forum-public-24.gif")
-	.  onglet(_L('Signatures en attente de validation'), generer_url_ecrire('controle_petition', $argi . $arg .  "type=interne"), "interne", $type=='interne', "forum-interne-24.gif")
+	  . onglet(_T('titre_signatures_confirmees'), generer_url_ecrire('controle_petition', $argp . $arg . "type=public"), "public", $type=='public', "forum-public-24.gif")
+	.  onglet(_T('titre_signatures_attente'), generer_url_ecrire('controle_petition', $argi . $arg .  "type=interne"), "interne", $type=='interne', "forum-interne-24.gif")
 	. fin_onglet()
 	. '<br />';
 }

@@ -481,6 +481,7 @@ Merci de votre participation
 'info_panne_site_syndique' => 'Site syndiqu&eacute; en panne',
 'info_pense_bete' => 'PENSE-B&Ecirc;TE',
 'info_petit_ecran' => 'Petit &eacute;cran',
+'info_petition_close' => 'P&eacute;tition close',
 'info_pixels' => 'pixels',
 'info_plusieurs_mots_trouves' => 'Plusieurs mots-cl&eacute;s trouv&eacute;s pour "@cherche_mot@":',
 'info_popularite_5' => 'popularit&eacute;&nbsp;:',
@@ -596,6 +597,7 @@ Merci de votre participation
 
 // M
 'masquer_trad' => 'masquer les traductions',
+'masquer_colonne' => 'Masquer cette colonne',
 'module_fichiers_langues' => 'Fichiers de langue',
 
 
@@ -741,6 +743,8 @@ et vous reconnecter au site.
 'titre_mots_cles' => 'MOTS-CL&Eacute;S',
 'titre_probleme_technique' => 'Attention&nbsp;: un probl&egrave;me technique (serveur SQL) emp&ecirc;che l\'acc&egrave;s &agrave; cette partie du site. Merci de votre compr&eacute;hension.',
 'titre_publier_document' => 'PUBLIER UN DOCUMENT DANS CETTE RUBRIQUE',
+'titre_signatures_attente' => 'Signatures en attente de validation',
+'titre_signatures_confirmees' => 'Signatures confirm&eacute;es',
 'titre_statistiques' => 'Statistiques du site',
 'titre_titre_document' => 'Titre du document&nbsp;:',
 'trad_reference' => '(article de r&eacute;f&eacute;rence)',
@@ -753,18 +757,23 @@ et vous reconnecter au site.
 'upload_limit' => 'Ce fichier est trop gros pour le serveur&nbsp;; la taille maximum autoris&eacute;e en <i>upload</i> est de @max@.',
 'upload_zip_decompacter' => 'd&eacute;compress&eacute; et chaque &eacute;l&eacute;ment qu\'il contient install&eacute; sur le site. Les fichiers qui seront alors install&eacute;s sur le site sont&nbsp;:',
 'upload_zip_telquel' => 'install&eacute; tel quel, en tant qu\'archive compress&eacute;e Zip&nbsp;;',
+'upload_zip_titrer' => 'Dans les deux derniers cas, cocher cette case pour que SPIP nomme chaque &eacute;l&eacute;ment d\'apr&egrave;s le nom du fichier.',
 
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balise B en aval',
+'zbug_balise_sans_argument' => 'Argument manquant dans la balise @balise@',
+'zbug_balise_inexistante' => 'erreur @from@: la balise #@balise@ n\'existe pas',
 'zbug_boucle' => 'boucle',
 'zbug_boucle_recursive_undef' => 'boucle r&eacute;cursive non d&eacute;finie',
+'zbug_calcul' => 'calcul',
 'zbug_champ_hors_boucle' => 'Champ @champ@ hors boucle',
 'zbug_champ_hors_motif' => 'Champ @champ@ hors d\'une boucle de motif @motif@',
 'zbug_code' => 'code',
 'zbug_critere_inconnu' => 'crit&egrave;re inconnu @critere@',
 'zbug_distant_interdit' => 'externe interdit',
 'zbug_doublon_table_sans_index' => 'doublons sur une table sans index',
+'zbug_doublon_table_sans_cle_primaire' => 'doublons sur une table sans clef primaire atomique',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: double d&eacute;finition',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: tag fermant manquant',
 'zbug_erreur_boucle_syntaxe' => 'Syntaxe boucle incorrecte',
@@ -773,6 +782,7 @@ et vous reconnecter au site.
 'zbug_erreur_filtre' => 'Erreur : filtre <b>&laquo; @filtre@ &raquo;</b> non d&eacute;fini',
 'zbug_erreur_meme_parent' => '{meme_parent} ne s\'applique qu\'aux boucles (FORUMS) ou (RUBRIQUES)',
 'zbug_erreur_squelette' => 'Erreur(s) dans le squelette',
+'zbug_hors_compilation' => 'Hors Compilation',
 'zbug_info_erreur_squelette' => 'Erreur sur le site',
 'zbug_inversion_ordre_inexistant' => 'inversion d\'un ordre inexistant',
 'zbug_pagination_sans_critere' => '#PAGINATION sans crit&egrave;re {pagination} ou employ&eacute; dans une boucle recursive',
@@ -780,6 +790,7 @@ et vous reconnecter au site.
 'zbug_profile' => 'Temps de calcul&nbsp;: @time@',
 'zbug_resultat' => 'r&eacute;sultat',
 'zbug_serveur_indefini' => 'serveur SQL ind&eacute;fini',
+'zbug_statistiques' => 'Statistiques des requ&ecirc;tes SQL class&eacute;es par dur&eacute;e',
 'zbug_table_inconnue' => 'Table SQL &laquo; @table@ &raquo; inconnue',
 'zxml_connus_attributs' => 'attributs connus',
 'zxml_de' => 'de',

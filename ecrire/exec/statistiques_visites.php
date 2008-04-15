@@ -187,13 +187,13 @@ function statistiques_signatures($aff_jours, $id_article, $mode, $n, $serveur)
 	  'date_entree',array(),$serveur);
 
 	return "<br />"
-	. gros_titre(_L('Nombre de signatures par jour'),'', false)
+	. gros_titre(_T('titre_page_statistiques_signatures_jour'),'', false)
 	. debut_cadre_relief("statistiques-24.gif", true)
 	. $res
 	. fin_cadre_relief(true)
 	. $mode
 	. "<br />"
-	. gros_titre(_L('Nombre de signatures par mois'),'', false)
+	  . gros_titre(_T('titre_page_statistiques_signatures_mois'),'', false)
 	. statistiques_par_mois($log_mois, 0);
 }
 

@@ -102,7 +102,7 @@ function exec_recherche_dist() {
 				$order = "id_$table";
 				break;
 			default:
-				$titre = _L("Autres");
+				$titre = _T("autres");
 				$order = "id_$table";
 				break;
 			}

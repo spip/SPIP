@@ -22,7 +22,7 @@ function exec_delete_statistiques_dist()
 	} else {
 		include_spip('inc/headers');
 		$admin = charger_fonction('admin', 'inc');
-		$res = $admin('delete_statistiques', _L('Effacer les statistiques')/*_T('titre_page_delete_statistiques')*/, '');
+		$res = $admin('delete_statistiques', _T('bouton_effacer_statistiques'), '');
 		if ($res) echo $res; else redirige_url_ecrire('statistiques_visites','');
 		
 	}

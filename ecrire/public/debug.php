@@ -79,7 +79,7 @@ function affiche_erreurs_page($tableau_des_erreurs, $message='') {
 function chrono_requete($temps)
 {
 	$total = 0;
-	$hors = "<i>" . _L('hors compilation') . "</i>";
+	$hors = "<i>" . _T('zbug_hors_compilation') . "</i>";
 	$t = $q = $n = $d = array();
 	foreach ($temps as $key => $row) {
 		list($dt, $nb, $boucle, $query, $explain, $res) = $row;
@@ -133,7 +133,7 @@ function chrono_requete($temps)
 	}
 
 	$titre = '<br />'
-	  . _L('Statistiques des requ&ecirc;tes SQL class&eacute;es par dur&eacute;e')
+	  . _T('zbug_statistiques')
 	  . '<br />'
 	  . "<table style='text-align: left; border: 1px solid;'><tr><td>"
 	  . join("</td></tr>\n<tr><td>", $d)
@@ -437,7 +437,7 @@ function ancre_texte($texte, $fautifs=array(), $nocpt=false)
 	  . '<tr><th><a onclick="javascript:'
 	  . "\$('.sinumerote').each(function(){ $js }); return false;"
 	  . '" title="'
-	  . _L('Masquer cette colonne')
+	  . _T('masquer_colonne')
 	  . '" >'
 	  . _T('info_numero_abbreviation')
 	  . "</a></th>\n<th style='text-align: center'>"
@@ -478,7 +478,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 		echo "\n<a href='$self2&amp;var_mode_affiche=code#$nom_skel'>"._T('zbug_code')."</a>";
 		echo "\n<a href='", 
 		  str_replace('var_mode=','var_profile=', $self), "'>",
-		  _L('calcul')."</a></legend>";
+		  _T('zbug_calcul')."</a></legend>";
 		echo "\n<span style='display:block;float:$spip_lang_right'>"._T('zbug_profile',array('time'=>$debug_objets['profile'][$sourcefile]))."</span>";
 
 		if (is_array($contexte = $debug_objets['contexte'][$sourcefile]))
@@ -553,7 +553,7 @@ function debug_affiche_navig($aff, $nom_skel, $color, $self, $i)
 	  "</a></td><td>\n<a class='debug_link_resultat' href='" .
 	  str_replace('var_mode=','var_profile=', $self) .
 	  "'>" .
-	  _L('calcul') .
+	  _T('zbug_calcul') .
 	  "</a></td><td>\n" .
 	  $aff .
 	  "</td></tr>";

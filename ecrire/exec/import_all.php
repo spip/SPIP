@@ -41,9 +41,9 @@ function exec_import_all_dist()
 	if ($archive) {
 	  // il faut changer cette chaine depuis qu'on fait aussi de la fusion
 	  // _T('info_restauration_sauvegarde', 
-		$action = _L($insert
-			     ? 'Insertion de @archive@ dans la base' 
-			     : 'Installation de la sauvegarde @archive@',
+		$action = _T($insert
+			     ? 'info_restauration_sauvegarde_insert' 
+			     : 'info_restauration_sauvegarde',
 			     array('archive' => $archive));
 		$admin = charger_fonction('admin', 'inc');
 		echo $admin('import_all', $action, $commentaire, !$insert);
