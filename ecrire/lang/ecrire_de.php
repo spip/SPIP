@@ -821,7 +821,7 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'texte_config_groupe_mots_cles' => 'M&ouml;chten Sie die erweiterten Einstellungen f&uuml;r
  Schlagworte einschalten? Sie k&ouml;nnen dann z.B. die Zuordnungen auf ein Wort
  pro Kategorie begrenzen, eine Kategorie als besonders wichtig definieren etc.',
-'texte_connexion_mysql' => 'Sie erhalten die erforderlichen SQL-Zugangsdaten von Ihrem Provider.',
+'texte_connexion_mysql' => '<MODIF>Sie erhalten die erforderlichen SQL-Zugangsdaten von Ihrem Provider.',
 'texte_contenu_article' => '(Zusammenfassung des Artikels in wenigen Worten.)',
 'texte_contenu_articles' => 'Ja nach Vorlage, die Sie f&uuml;r Ihre Website verwenden, k&ouml;nnen Sie Elemente von Artikeln aktivieren oder abschalten. Bitte bestimmen Sie mit dieser Liste, welche Elemente verf&uuml;gbar sein sollen.',
 'texte_crash_base' => 'Wenn Ihre Datenbank abgest&uuml;rzt ist, k&ouml;nnen Sie eine automatische Reparatur versuchen.',
