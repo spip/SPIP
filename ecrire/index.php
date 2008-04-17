@@ -59,7 +59,8 @@ if (autoriser_sans_cookie($exec)) {
 				),
 				'&'
 			);
-		redirige_par_entete($redirect);
+		echo redirige_formulaire($redirect);
+		exit;
 	}
  }
 

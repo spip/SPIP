@@ -57,7 +57,7 @@ function redirige_par_entete($url, $equiv='') {
 
 // http://doc.spip.org/@redirige_formulaire
 function redirige_formulaire($url, $equiv = '') {
-	if (!_request('var_ajax'))
+	if (!_request('var_ajax') && !_request('var_ajaxcharset'))
 		redirige_par_entete($url, $equiv);
 	else {
 		$url = strtr($url, "\n\r", "  ");
@@ -66,7 +66,8 @@ function redirige_formulaire($url, $equiv = '') {
 		if ($url[0]=='?')
 			$url = url_de_base().$url;
 		$url = str_replace('&amp;','&',$url);
-		spip_log("redirige formulaire ajax: $url");		
+		spip_log("redirige formulaire ajax: $url");
+		include_spip('inc/filtres');	
 		return 
 		"<script type='javascript'>window.location='$url';</script>"
 		. http_img_pack('searching.gif','');
