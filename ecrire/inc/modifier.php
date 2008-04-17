@@ -317,16 +317,18 @@ function revision_forum($id_forum, $c=false) {
 		),
 		$c);
 
+	$t = $t["id_thread"];
+	$cles = array();
+	foreach (array('id_article', 'id_rubrique', 'id_syndic', 'id_breve')
+		 as $k) {
+		if (isset($c[$k])) $cles[$k] = $c[$k];
+	}
 
 	// Modification des id_article etc
 	// (non autorise en standard mais utile pour des crayons)
 	// on deplace tout le thread {sauf les originaux}.
-	if (count($cles = array_intersect(array_keys($c),
-		array('id_article', 'id_rubrique', 'id_syndic', 'id_breve')))
-	) {
-		$thread = sql_fetsel("id_thread", "spip_forum", "id_forum=$id_forum");
-		foreach ($cles as $k)
-			sql_updateq("spip_forum", array("$k" => $c[$k]), "id_thread=".$thread['id_thread']." AND statut!='original'");
+	if ($cles) {
+		sql_updateq("spip_forum", $cles, "id_thread=$t AND statut!='original'");
 		// on n'affecte pas $r, car un deplacement ne change pas l'auteur
 	}
 
@@ -336,7 +338,7 @@ function revision_forum($id_forum, $c=false) {
 	if ($r) {
 		sql_updateq('spip_forum', array('ip'=>($GLOBALS['ip']), 'id_auteur'=>($GLOBALS['visiteur_session']['id_auteur'])),"id_forum=".sql_quote($id_forum));
 
-		sql_update("spip_forum", array("date_thread" => "NOW()"), "id_thread=".$t['id_thread']);
+		sql_update("spip_forum", array("date_thread" => "NOW()"), "id_thread=".$t);
 	}
 }
 
