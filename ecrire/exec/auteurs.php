@@ -292,9 +292,9 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 		if ($statut[0]=='!') {
 			  $statut = substr($statut,1); $not = " NOT";
 		} else $not = '';
+		$visit = !statut_min_redac($statut);
 		$statut = preg_replace('/\W+/',"','",$statut); 
 		$sql_visible = "aut.statut$not IN ('$statut')";
-		$visit = statut_min_redac($statut);
 	} else {
 		$sql_visible = "(
 			aut.statut = '0minirezo'
@@ -305,11 +305,20 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 	}
 
 	$sql_sel = '';
+	$join = $visit ?
+	 ""
+	 : 
+	 (strpos($sql_visible,'art.statut')?("LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur" . " LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)"):"");
 	
 	// tri
 	switch ($tri) {
 	case 'nombre':
+		$sql_sel = "COUNT(lien.id_article) AS compteur";
 		$sql_order = 'compteur DESC, unom';
+		$join = $visit ?
+		 "LEFT JOIN spip_forum AS lien ON aut.id_auteur=lien.id_auteur"
+		 : ("LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur" 
+		. (strpos($sql_visible,'art.statut')?" LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)":""));
 		break;
 	
 	case 'site':
@@ -330,17 +339,15 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 	// La requete de base est tres sympa
 	// (pour les visiteurs, ca postule que les messages concernent des articles)
 	return sql_select(
+			array_diff(
 			array(
 				"aut.id_auteur AS id_auteur",
 				"aut.statut AS statut", 
 				"aut.nom_site AS site", 
 				"aut.nom AS nom", 
 				"UPPER(aut.nom) AS unom", 
-				"COUNT(lien.id_article) AS compteur",
-				$sql_sel),
-			"spip_auteurs AS aut " . ($visit 
-				? "LEFT JOIN spip_forum AS lien ON aut.id_auteur=lien.id_auteur " 
-				: ("LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur	 LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)")), 
+				$sql_sel),array('',null)),
+			"spip_auteurs AS aut $join",
 			$sql_visible . ($recherche 
 				? " AND $recherche" 
 				: ''),
