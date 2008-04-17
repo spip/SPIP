@@ -161,8 +161,8 @@ function install_propose_ldap()
 
 function install_premier_auteur($email, $login, $nom, $pass, $hidden)
 {
-	return info_etape(_T('info_informations_personnelles'),
-			info_progression_etape(3,'etape_','install/'),
+	return info_progression_etape(3,'etape_','install/') .
+		info_etape(_T('info_informations_personnelles'),
 
 		     "<b>"._T('texte_informations_personnelles_1')."</b>" .
 			     aide ("install5") .

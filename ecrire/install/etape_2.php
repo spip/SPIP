@@ -61,9 +61,10 @@ function install_etape_2_dist()
 
 	if (($db_connect=="0") && $link) {
 		echo "<p class='resultat ok'><b>"._T('info_connexion_ok')."</b></p>\n";
+		echo info_progression_etape(2,'etape_','install/');
+
 		echo info_etape(_T('menu_aide_installation_choix_base').aide ("install2"));
 
-		echo info_progression_etape(2,'etape_','install/');
 
 
 		spip_connect_db($adresse_db, 0, $login_db, $pass_db, '',$server_db);
