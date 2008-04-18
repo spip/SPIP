@@ -1033,7 +1033,7 @@ function mysql2pg_type($v)
 		preg_replace("/unsigned/i", '', 	
 		preg_replace("/double/i", 'double precision', 	
 		preg_replace("/tinyint/i", 'int', 	
-		preg_replace("/VARCHAR\(\d+\)\s+BINARY/i", 'bytea', 
+		preg_replace("/VARCHAR\(\d+\)\s+BINARY/i", 'varchar(\1)', 
 		preg_replace("/ENUM *[(][^)]*[)]/i", "varchar(255)",
 					      $v 
 			     )))))))))))));
