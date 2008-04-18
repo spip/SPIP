@@ -64,7 +64,7 @@ $(function(){
     |chercher_rubrique{#ENV{id_rubrique}, #ENV{id_secteur},#ENV**{config}|table_valeur{restreint}})]
 
   	[(#ENV**{config}|table_valeur{articles_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|?{' '})
-    <li class="gauche">
+    <li class="haut">
       <label for="descriptif"><:texte_descriptif_rapide:><em>#AIDER{artdesc}</em></label>
       <textarea name='descriptif' id='descriptif' class='forml' rows='2' cols='40'>[(#ENV**{descriptif}|entites_html)]</textarea>
     </li>]
@@ -109,7 +109,7 @@ $(function(){
 
     </li>]
   	[(#ENV**{config}|table_valeur{articles_ps}|=={non}|?{#ENV**{ps,''},' '}|?{' '})
-    <li class="gauche">
+    <li class="haut">
       <label for="ps"><:info_post_scriptum:></label>
       <textarea name='ps' id='ps' class='forml' rows='5' cols='40'>[(#ENV**{ps}|entites_html)]</textarea>
     </li>]
