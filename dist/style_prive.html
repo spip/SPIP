@@ -48,11 +48,23 @@ body, body * { font-size: 100%;font-family: Verdana, Geneva, Sans, sans-serif; }
 div.table_page { margin-top: 1em; }
 #contenu { font-size: small; }
 
-ul#chemin { font-size: 0.9em; }
-ul#chemin li { list-style: none; float: #GET{left}; }
-ul#chemin,ul#chemin ul,ul#chemin li { margin: 0; padding: 0; }
-ul#chemin ul,ul#chemin li,ul#chemin li span { display: block; float: #GET{left}; margin-#GET{left}: 2px; }
-
+ul#chemin { font-size: 0.9em; overflow: hidden; }
+ul#chemin li em { display: none; }
+ul#chemin li a { color: white; }
+ul#chemin, ul#chemin ul, ul#chemin li { margin: 0; padding: 0;  list-style-type: none;}
+ul#chemin li span {
+	list-style: none;
+	display: block;
+	float: #GET{left}; 
+	white-space: no-wrap;
+	background: url([(#REM|sinon{[(#EVAL{ _DIR_IMG_PACK})]chemin-fond-[(#ENV{ltr})].gif}|image_sepia{666666}|extraire_attribut{src})]) center [(#GET{left})] no-repeat;
+	padding: 2px;
+	padding-#GET{left}: 10px;
+	padding-#GET{right}: 12px;
+	margin-#GET{left}: -5px; 
+}
+ul#chemin li li span { background: url([(#REM|sinon{[(#EVAL{ _DIR_IMG_PACK})]chemin-fond-[(#ENV{ltr})].gif}|image_sepia{#ENV{couleur_foncee,3874b0}}|extraire_attribut{src})]) center [(#GET{left})] no-repeat;}
+ul#chemin .aide {margin-top: 3px;}
 h1 { color: #GET{foncee}; font-size:large; font-family: Arial, Sans, sans-serif; margin: 0.5em 0 0.25em 0; }
 h2 { color: #000; font-size: medium; font-family: Arial, Sans, sans-serif; margin: 0.5em 0 0.25em 0; }
 h3 { color: #666; font-size: medium; font-family: Arial, Sans, sans-serif; margin: 0.5em 0 0.25em 0; }
@@ -72,10 +84,20 @@ td { text-align: #GET{left}; }
 	color: #FFF; 
 	font-size: 11px;
 	font-weight: bold; 
-	padding: 5px;
 }
 .fondf { margin-top: 0px; background-color: #FFF; border-style: solid ; border-width: 1px; border-color: #e86519; color: #e86519; }
 
+
+hr.fin_article_presentation {
+	clear: #GET{right};
+	color: #GET{foncee};
+	background-color: #GET{foncee};
+	border: 0px;
+	height: 1px;
+	margin-left: -5px;
+	margin-right: -5px;
+	
+}
 
 ol.formfx {
 	line-height: auto;
@@ -88,7 +110,7 @@ ol.formfx .commentaire, ol.formfx .commentaire_bas {
 	border: 1px solid #GET{claire};
 	padding: 5px;
 	background-color: #999999;
-	color: #GET{claire};
+	color: #[(#GET{claire}|couleur_eclaircir)];
 }
 ol.formfx .commentaire {
 	border-bottom: 0px;
@@ -96,21 +118,26 @@ ol.formfx .commentaire {
 ol.formfx .commentaire_bas{
 	border-top: 0px;
 }
-
-
+.confirmer_deplacement {
+	margin-#GET{left}: 20px;
+}
+.confirmer_deplacement input {
+	float: #GET{left};
+	margin-#GET{left}: -20px;	
+}
 ol.formfx li.gauche {
 		clear: left;
 		list-style: none;
-		margin-#GET{left}: 100px;
+		margin-#GET{left}: 120px;
 		margin-top: 2px;
 		padding: 0px;
 }
 ol.formfx li.gauche label {
 		clear: #GET{left};
 		float: #GET{left};
-		margin-#GET{left}: -100px;
+		margin-#GET{left}: -120px;
 		display: block;
-		width: 90px;
+		width: 110px;
 		
 		
 		background: url([(#REM|sinon{[(#EVAL{ _DIR_IMG_PACK})]label-fond-gauche-[(#ENV{ltr})].gif}|image_sepia{#ENV{couleur_foncee,3874b0}}|extraire_attribut{src})]) center [(#GET{right})] no-repeat;
@@ -163,13 +190,42 @@ ol.formfx li.haut label {
 		background: url([(#REM|sinon{[(#EVAL{ _DIR_IMG_PACK})]label-fond-haut-[(#ENV{ltr})].gif}|image_sepia{#ENV{couleur_foncee,3874b0}}|extraire_attribut{src})]) bottom [(#GET{left})] no-repeat;
 
 }	
+ol.formfx fieldset {
+	margin-top: 7px;
+	border: 1px solid #GET{foncee};
+	padding-top: 2px;
+	margin-left: 9px;
+	padding: 10px;
+	padding-top: 5px;
+}
+ol.formfx fieldset legend {
+		clear: #GET{left};
+		margin-#GET{left}: -20px;
+		
+		background: url([(#REM|sinon{[(#EVAL{ _DIR_IMG_PACK})]label-fond-haut-[(#ENV{ltr})].gif}|image_sepia{#ENV{couleur_foncee,3874b0}}|extraire_attribut{src})]) bottom [(#GET{left})] no-repeat;
+
+		font-size: 9px;
+		color: white;
+		line-height: 11px;
+		text-transform: uppercase;
+		font-family: verdana, arial, helvetica, sans;
+
+		padding-top: 6px;
+		padding-bottom: 9px;
+		padding-left: 5px;
+		padding-right: 5px;
+		margin-bottom: 0px;
+}
 table.spip_barre {
 	background-color: #GET{claire};
 	padding: 3px;
 	padding-bottom: 0px;
 }
 
-table.spip_barre a img { background: #GET{claire}; padding: 3px; border: 1px outset #GET{claire}; }
+table.spip_barre a img { 
+	background: #GET{claire}; 
+	background: url([(#REM|sinon{[(#EVAL{ _DIR_IMG_PACK})]fond-fondo.gif}|image_sepia{#ENV{couleur_claire,edf3fe}}|extraire_attribut{src})]) center center;
+	padding: 3px; border: 1px outset #GET{claire}; }
 table.spip_barre a:hover img { background: #FFF; border: 1px solid #CC9; }
 table.spip_barre input.barre { width: 99%; background: transparent; border: 0; color: #F57900; }
 

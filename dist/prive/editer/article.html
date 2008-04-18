@@ -1,31 +1,3 @@
-<style type='text/css'>
-/**********************************
-Use: cmxform template Author: Nick Rigby
-http://www.alistapart.com/articles/prettyaccessibleforms
-NB: ca sert a quoi ?
-***********************************/
-.cadre-formulaire form fieldset { margin: 0px; width:100%;border:0;padding:0;clear:both;}
-
-.cadre-formulaire form legend { padding: 0 2px; font-weight: bold; _margin: 0 -7px; /* IE Win */	}
-.cadre-formulaire form label { display: inline-block; /* vertical-align: top; */ }
-.cadre-formulaire form fieldset ol { margin: 0; padding: 0; list-style: none; }
-.cadre-formulaire form fieldset li { margin: 0; padding: 5px; }
-.cadre-formulaire form fieldset li fieldset ul { margin: 0 0 0 203px; padding: 0; }
-.cadre-formulaire form fieldset li fieldset li { width: 160px; padding: .3em 0; padding-right: 10px; }
-.cadre-formulaire form fieldset fieldset { margin: 3px 0 0; background: none; border: 0; }
-.cadre-formulaire form fieldset fieldset legend {	padding: 0 0 5px; font-weight: normal; }
-.cadre-formulaire form fieldset fieldset label {	display: block;	width: auto; }
-.cadre-formulaire form fieldset li fieldset:after { clear: both; } /* safari */
-.cadre-formulaire form em { font-weight: bold; font-style: normal; color: #f00; }
-
-.cadre-formulaire form label { /*width: 120px;*/ width: 190px; padding-right: 10px; } /* Width of labels */
-.cadre-formulaire form fieldset fieldset label { margin-left: 0; }
-
-/*\*//*/ .cadre-formulaire form legend { display: inline-block; } /* IE Mac legend fix */
-
-.cadre-formulaire form fieldset li fieldset li { border: 0; float: left; }
-.cadre-formulaire form fieldset li fieldset li.odd { clear: left; }
-</style>
 <script type="text/javascript"><!--
 /*
 $(function(){
@@ -42,7 +14,6 @@ $(function(){
 
 
 
-<fieldset dir="#LANG_DIR">
   <ol class="formfx">
   	[(#ENV**{config}|table_valeur{articles_surtitre}|=={non}|?{#ENV**{surtitre,''},' '}|?{' '})
     <li class="gauche">
@@ -69,7 +40,7 @@ $(function(){
       <textarea name='descriptif' id='descriptif' class='forml' rows='2' cols='40'>[(#ENV**{descriptif}|entites_html)]</textarea>
     </li>]
   	[(#ENV**{config}|table_valeur{articles_chapeau}|=={non}|?{#ENV**{chapo,''},' '}|?{' '})
-    [<li class='gauche redirection'>(#ENV**{chapo}|match{^=}|?{' '})
+    [<li class='haut redirection'>(#ENV**{chapo}|match{^=}|?{' '})
 			<label for='virtuel'><:info_redirection:></label>
 			<input type='text' name='virtuel' id='virtuel' class='forml' value="[(#ENV**{chapo}|replace{^=,''}|entites_html)]" />
 			<input type='hidden' name='changer_virtuel' value='oui' />
@@ -81,9 +52,8 @@ $(function(){
 		</li>]
 		]
   	[(#ENV**{config}|table_valeur{articles_urlref}|=={non}|?{#ENV**{url_site,#ENV**{nom_site,''}},' '}|?{' '})
-    <li class="haut">
-      <label for="nom_site"><:entree_liens_sites:></label>
-     </li>
+    <fieldset>
+      <legend><:entree_liens_sites:></legend>
     <li class="gauche">
       <label><:info_titre:></label>
       <input type='text' name='nom_site' id='nom_site' class='forml' value="[(#ENV**{nom_site}|entites_html)]" />
@@ -91,7 +61,8 @@ $(function(){
     <li class="gauche">
       <label for="url_site"><:info_url:></label>
       <input type='text' name='url_site' id='url_site' class='forml' value="[(#ENV**{url_site}|entites_html)]" />
-    </li>]
+    </li>
+    </fieldset>]
   	[(#ENV**{config}|table_valeur{articles_texte}|=={non}|?{#ENV**{texte,''},' '}|?{' '})
     <li class="haut">
       <label for="text_area"><:info_texte:><em>#AIDER{arttexte}</em></label>
@@ -121,5 +92,3 @@ $(function(){
 
     })]
 
-
-</fieldset>
