@@ -1881,6 +1881,8 @@ function image_decal_couleur_127 ($coul, $val) {
 function image_sepia($im, $rgb = "896f5e")
 {
 	
+	if (!function_exists("imagecreatetruecolor")) return $im;
+	
 	$couleurs = couleur_hex_to_dec($rgb);
 	$dr= $couleurs["red"];
 	$dv= $couleurs["green"];

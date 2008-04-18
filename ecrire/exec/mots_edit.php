@@ -180,23 +180,31 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 		$descriptif = entites_html($descriptif);
 		$texte = entites_html($texte);
 		
-		$res .= "<label for='titre'><b>"._T('info_titre_mot_cle')."</b></label> "._T('info_obligatoire_02');
-		$res .= aide ("mots");
+		$res .= "<ol class='formfx'>";
+		
+		
+		$res .= "<li class='gauche gauche_obligatoire'>";
+		$res .= "<label for='titre'>"._T('info_titre_mot_cle');
+		$res .= aide ("mots")."</label>";
 
-		$res .= "<br /><input type='text' name='titre' id='titre' class='formo' value=\"$titre_mot\" size='40' $onfocus />";
+		$res .= "<input type='text' name='titre' id='titre' class='formo' value=\"$titre_mot\" size='40' $onfocus /></li>";
 
-		$res .= determine_groupe_mots($table, $id_groupe);
+		$res .= "<li class='gauche'>".determine_groupe_mots($table, $id_groupe)."</li>";
 
 
-		$res .= "<label for='descriptif'><b>"._T('texte_descriptif_rapide')."</b></label><br />";
+		$res .= "<li class='gauche'>";
+		$res .= "<label for='descriptif'>"._T('texte_descriptif_rapide')."</label>";
 		$res .= "<textarea name='descriptif' id='descriptif' class='forml' rows='4' cols='40'>";
 		$res .= $descriptif;
-		$res .= "</textarea><br />\n";
+		$res .= "</textarea>\n";
+		$res .= "</li>";
 
-		$res .= "<label for='texte'><b>"._T('info_texte_explicatif')."</b></label><br />";
-		$res .= "<textarea name='texte' id='texte' rows='8' class='forml' cols='40'>";
+		$res .= "<li class='gauche'>";
+		$res .= "<label for='texte'>"._T('info_texte_explicatif')."</label>";
+		$res .= "<textarea name='texte' id='texte' rows='12' class='forml' cols='40'>";
 		$res .= $texte;
-		$res .= "</textarea><br />";
+		$res .= "</textarea>";
+		$res .= "</li>";
 
 		if ($GLOBALS['champs_extra']) {
 			include_spip('inc/extra');
@@ -208,8 +216,12 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 			include_spip('inc/editer');
 			$res .= controles_md5($row);
 		}
+		
 
 		$res .= "<div style='text-align: right'><input type='submit' value='"._T('bouton_enregistrer')."' class='fondo' /></div>";
+		
+		$res .= "</ol>";
+	
 	
 		$res .= "</div>";
 

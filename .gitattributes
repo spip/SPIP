@@ -126,6 +126,10 @@ dist/images/jauge-jaune.gif -text
 dist/images/jauge-rouge.gif -text
 dist/images/jauge-test-gd.gif -text
 dist/images/jauge-vert.gif -text
+dist/images/label-fond-gauche-left.gif -text
+dist/images/label-fond-gauche-right.gif -text
+dist/images/label-fond-haut-left.gif -text
+dist/images/label-fond-haut-right.gif -text
 dist/images/langues-12.gif -text
 dist/images/langues-24.gif -text
 dist/images/langues-modif-12.gif -text
