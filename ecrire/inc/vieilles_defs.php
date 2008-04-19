@@ -616,6 +616,13 @@ $GLOBALS[\'all_langs\'] = @$GLOBALS[\'meta\'][\'langues_proposees\'];
 
   ',
 
+'spip_mysql_version' => '($serveur=\'\', $option=true) {
+	vieilles_log(\'spip_mysql_version()\');
+    return sql_version($query, $serveur);
+  }
+
+  ',
+
 'spip_sql_errno' => '($serveur=\'\') {
 	vieilles_log(\'spip_sql_errno()\');
     return sql_errno($serveur);
