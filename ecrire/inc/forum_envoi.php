@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/barre');
 
-// http://doc.spip.org/@forum_envoi_affiche
+// http://doc.spip.org/@inc_forum_envoi_dist
 function inc_forum_envoi_dist($id, $id_parent, $script, $statut, $titre_message, $texte, $modif_forum, $nom_site, $url_site) {
 
 	// trouver a quoi on repond
@@ -44,6 +44,7 @@ function inc_forum_envoi_dist($id, $id_parent, $script, $statut, $titre_message,
 	return forum_envoi_form($id, $id_parent, $script, $statut, $titre, $row['texte'] . $corps, $form, $objet, $retour);
 }
 
+// http://doc.spip.org/@forum_envoi_form
 function forum_envoi_form($id, $id_parent, $script, $statut, $titre, $corps, $form, $objet, $args) {
 
 	$cat = intval($id) . '/'
