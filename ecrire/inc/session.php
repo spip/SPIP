@@ -46,9 +46,11 @@ function inc_session_dist($auteur=false)
 
 // http://doc.spip.org/@ajouter_session
 function ajouter_session($auteur) {
-	if (!is_numeric($auteur['id_auteur'])) return false;
 	// Si le client a deja une session valide pour son id_auteur
 	// on conserve le meme fichier
+
+	// Attention un visiteur peut avoir une session et un id=0,
+	// => ne pas melanger les sessions des differents visiteurs
 	$auteur['id_auteur'] = intval($auteur['id_auteur']);
 	if (!isset($_COOKIE['spip_session'])
 	OR !preg_match(',^'.$auteur['id_auteur'].'_,', $_COOKIE['spip_session']))
@@ -93,8 +95,8 @@ function session_get($nom) {
 // mettre a jour les fichiers de session de l'auteur en question.
 // (auteurs identifies seulement)
 // http://doc.spip.org/@actualiser_sessions
-function actualiser_sessions($auteur){
-	if (!is_numeric($auteur['id_auteur']))
+function actualiser_sessions($auteur) {
+	if (!intval($auteur['id_auteur']))
 		return;
 
 	// memoriser l'auteur courant (celui qui modifie la fiche)
@@ -235,11 +237,11 @@ function rejouer_session()
 //
 // http://doc.spip.org/@fichier_session
 function fichier_session($id_session, $alea, $tantpis=false) {
-		
 	$repertoire = _DIR_SESSIONS;
 	if(!@file_exists($repertoire)) {
 		if ($tantpis) return '';
 		$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
+		include_spip('inc/flock');
 		$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
 	}
 	return $repertoire . intval($id_session).'_'.md5($id_session.' '.$alea). '.php';
