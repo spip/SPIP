@@ -106,37 +106,38 @@ function inc_auth_dist() {
 					} */
 				}
 			}
-		} else { if (isset($_SERVER['REMOTE_USER']))
-
-	// Authentification .htaccess old style, car .htaccess semble
-	// souvent definir *aussi* PHP_AUTH_USER et PHP_AUTH_PW
-
-				$connect_login = $_SERVER['REMOTE_USER'];
-		}
+		// Authentification .htaccess old style, car .htaccess semble
+		// souvent definir *aussi* PHP_AUTH_USER et PHP_AUTH_PW
+		} else if (isset($_SERVER['REMOTE_USER']))
+			$connect_login = $_SERVER['REMOTE_USER'];
 	}
 
 	$where = (is_numeric($connect_id_auteur)
 	/*AND $connect_id_auteur>0*/ // reprise lors des restaurations
 	) ?
 	  "id_auteur=$connect_id_auteur" :
-	  (!$connect_login ? '' : "login=" . sql_quote($connect_login));
+	  (!strlen($connect_login) ? '' : "login=" . sql_quote($connect_login));
 
 	// pas authentifie par cookie ni http_auth:
-
-
 	if (!$where) return "inconnu";
 
 	// Trouver les autres infos dans la table auteurs.
 	// le champ 'quand' est utilise par l'agenda
 	$result = sql_select("*, en_ligne AS quand", "spip_auteurs", "$where AND statut!='5poubelle'");
+
 	if (!$row = sql_fetch($result)) {
-		// il n'est PLUS connu. c'est SQL qui est desyncrho
-		auth_areconnecter($connect_login);
-		return -1;
+		// il n'est PLUS connu. c'est SQL qui est desynchro ;
+		// donner un message si on dispose d'un (mauvais) login
+		if (strlen($connect_login)) {
+			auth_areconnecter($connect_login);
+			return -1;
+		}
+		// sinon renvoyer vers le login
+		else
+			return 'inconnu';
 	}
 
 	// Le visiteur est connu
-
 	// Des globales pour tout l'espace prive
 	$connect_id_auteur = $row['id_auteur'];
 	$connect_login = $row['login'];
@@ -150,6 +151,7 @@ function inc_auth_dist() {
 	$r = @unserialize($row['prefs']);
 	$GLOBALS['visiteur_session']['prefs'] =
 	  (@isset($r['couleur'])) ? $r : array('couleur' =>1, 'display'=>0);
+
 	// au cas ou : ne pas memoriser les champs sensibles
 	unset($GLOBALS['visiteur_session']['pass']);
 	unset($GLOBALS['visiteur_session']['htpass']);
