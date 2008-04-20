@@ -37,10 +37,13 @@ function action_editer_rubrique_dist() {
 
 // http://doc.spip.org/@insert_rubrique
 function insert_rubrique($id_parent) {
-	return sql_insertq("spip_rubriques", array(
+	$id_rubrique = sql_insertq("spip_rubriques", array(
 		'titre' => _T('item_nouvelle_rubrique'),
 		id_parent => intval($id_parent),
 		'statut' => 'new'));
+	propager_les_secteurs();
+	calculer_langues_rubriques();
+	return $id_rubrique;
 }
 
 // Enregistrer certaines modifications d'une rubrique
