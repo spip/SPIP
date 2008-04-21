@@ -127,7 +127,8 @@ define('_TRANCHES', 10);
 
 // Controle de la version, sauf si on est deja en train de s'en occuper
 if (!_request('reinstall')
-AND (!_request('var_ajaxcharset'))
+AND !_request('var_ajaxcharset')
+AND isset($GLOBALS['meta']['version_installee'])
 AND ($GLOBALS['spip_version'] != (str_replace(',','.',$GLOBALS['meta']['version_installee']))))
 	$exec = 'demande_mise_a_jour';
 
@@ -173,9 +174,9 @@ AND $l = @unserialize($l)) {
 if ($var_f = _request('transformer_xml')) {
 	set_request('var_url', $exec);
 	$exec = $var_f;
- }
+}
 
-// Trouver la fonction eventuellement surchagee
+// Trouver la fonction eventuellement surchargee
 $var_f = charger_fonction($exec);
 
 // Z'y va
