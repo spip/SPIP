@@ -74,9 +74,12 @@ function balise_FORMULAIRE__dyn($form)
 	$action = self();
 	// recuperer la saisie en cours si erreurs
 	foreach(array_keys($valeurs) as $champ){
-		if (($v = _request($champ))!==NULL)
-			$valeurs[$champ] = $v;
-		$action = parametre_url($action,$champ,''); // nettoyer l'url des champs qui vont etre saisis
+		if (substr($champ,0,1)!=='_'){
+			if (($v = _request($champ))!==NULL)
+				$valeurs[$champ] = $v;
+			$action = parametre_url($action,$champ,''); // nettoyer l'url des champs qui vont etre saisis
+			$valeurs[$champ] = protege_valeurs($valeurs[$champ]); // proteger les ' et les " dans les champs que l'on va injecter dans les input
+		}
 	}
 	$action = parametre_url($action,'formulaire_action',''); // nettoyer l'url des champs qui vont etre saisis
 	$action = parametre_url($action,'formulaire_action_cle',''); // nettoyer l'url des champs qui vont etre saisis
@@ -87,10 +90,10 @@ function balise_FORMULAIRE__dyn($form)
 		include_spip('inc/acces');
 		$ajaxid = substr(md5(creer_uniqid()),0,8);
 	}
-	
+
 	return array($ajax?"formulaires/$form":"formulaires/formulaire_", 0, 
 		array_merge(
-		array_map('protege_valeurs',$valeurs), // proteger les ' et les " dans les champs que l'on va injecter dans les input
+		$valeurs, 
 		array(
 			'form' => $form,
 			'action' => $action,
