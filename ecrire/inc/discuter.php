@@ -42,7 +42,7 @@ function formulaire_discuter($script, $args, $debut, $pas, $ancre, $total, $obje
 }
 
 // http://doc.spip.org/@inc_discuter_dist
-function inc_discuter_dist($id, $script, $objet, $statut='prive', $debut=1, $pas=8)
+function inc_discuter_dist($id, $script, $objet, $statut='prive', $debut=1, $pas=10)
 {
 	$debut = intval($debut);
 	$id = intval($id);
