@@ -92,11 +92,10 @@ function balise_FORMULAIRE__dyn($form)
 	}
 	if (isset($valeurs['_action'])){
 		$securiser_action = charger_fonction('securiser_action','inc');
-		$args = inc_securiser_action_dist(reset($valeurs['_action']),end($valeurs['_action']),'',true);
+		$secu = inc_securiser_action_dist(reset($valeurs['_action']),end($valeurs['_action']),'',true);
 		$valeurs['_hidden'] = (isset($valeurs['_hidden'])?$valeurs['_hidden']:'') .
-		"<input type='hidden' name='arg' value='".$args['arg']."' />"
-		. "<input type='hidden' name='hash' value='".$args['hash']."' />"
-		. "<input type='hidden' name='action' value='".$args['action']."' />";
+		"<input type='hidden' name='arg' value='".$secu['arg']."' />"
+		. "<input type='hidden' name='hash' value='".$secu['hash']."' />";
 	}
 
 	return array($ajax?"formulaires/$form":"formulaires/formulaire_", 0, 

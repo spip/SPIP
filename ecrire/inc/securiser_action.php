@@ -24,7 +24,7 @@ function inc_securiser_action_dist($action='', $arg='', $redirect="", $mode=fals
 	else {
 		$arg = _request('arg');
 		$hash = _request('hash');
-		$action = _request('action');
+		$action = _request('action')?_request('action'):_request('formulaire_action');
 		if ($a = verifier_action_auteur("$action-$arg", $hash))
 			return $arg;
 		include_spip('inc/minipres');

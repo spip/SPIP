@@ -37,10 +37,14 @@ function action_editer_article_dist() {
 	// Enregistre l'envoi dans la BD
 	if ($id_article > 0) $err = articles_set($id_article);
 
-	$redirect = parametre_url(urldecode(_request('redirect')),
-		'id_article', $id_article, '&') . $err;
-
-	redirige_par_entete($redirect);
+	if (_request('redirect')) {
+		$redirect = parametre_url(urldecode(_request('redirect')),
+			'id_article', $id_article, '&') . $err;
+	
+		redirige_par_entete($redirect);
+	}
+	else 
+		return array($id_article,$err);
 }
 
 // Appelle toutes les fonctions de modification d'un article
