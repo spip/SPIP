@@ -53,7 +53,7 @@ $(function(){
 		]
   	[(#ENV**{config}|table_valeur{articles_urlref}|=={non}|?{#ENV**{url_site,#ENV**{nom_site,''}},' '}|?{' '})
     <fieldset>
-      <legend><:entree_liens_sites:></legend>
+      <legend><:entree_liens_sites:></legend><ol>
     <li class="gauche">
       <label><:info_titre:></label>
       <input type='text' name='nom_site' id='nom_site' class='forml' value="[(#ENV**{nom_site}|entites_html)]" />
@@ -61,7 +61,7 @@ $(function(){
     <li class="gauche">
       <label for="url_site"><:info_url:></label>
       <input type='text' name='url_site' id='url_site' class='forml' value="[(#ENV**{url_site}|entites_html)]" />
-    </li>
+    </li></ol>
     </fieldset>]
   	[(#ENV**{config}|table_valeur{articles_texte}|=={non}|?{#ENV**{texte,''},' '}|?{' '})
     <li class="haut">
