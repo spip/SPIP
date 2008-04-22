@@ -134,20 +134,6 @@ function http_ajouter_participants($ze_auteurs, $id_message)
 	return redirige_action_auteur('editer_message', "$id_message,", 'message', "id_message=$id_message", "<div style='text-align: left'>\n$res</div>\n", " method='post'");
 }
 
-// http://doc.spip.org/@http_afficher_forum_perso
-function http_afficher_forum_perso($id_message)
-{
-
-	echo "<br /><br />\n<div class='centered'>";
-	echo icone_inline(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=perso&id=$id_message&script=message"). '#formulaire', "forum-interne-24.gif", "creer.gif");
-	echo  "</div>\n<div style='text-align: left'>";
-
-	$query_forum = sql_select("*", "spip_forum", "statut='perso' AND id_message=$id_message AND id_parent=0", "", "date_heure DESC", "20");
-	echo afficher_forum($query_forum, "message","id_message=$id_message");
-	echo "\n</div>";
-}
-
-
 // http://doc.spip.org/@http_message_avec_participants
 function http_message_avec_participants($id_message, $statut, $forcer_dest, $cherche_auteur, $expediteur='')
 {
@@ -375,10 +361,11 @@ function exec_affiche_message_dist($id_message, $cherche_auteur, $forcer_dest)
 
 	// reponses et bouton poster message
 
-	http_afficher_forum_perso($id_message);
- }
+	$discuter = charger_fonction('discuter', 'inc');
+	echo $discuter($id_message, 'message', 'id_message', "perso");
+  }
 
- echo fin_gauche(), fin_page();
+  echo fin_gauche(), fin_page();
 }
 
 ?>

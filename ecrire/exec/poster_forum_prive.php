@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 
 // http://doc.spip.org/@exec_forum_envoi_dist
-function exec_forum_envoi_dist()
+function exec_poster_forum_prive_dist()
 {
 	forum_envoi(  
 		    intval(_request('id')),
@@ -26,7 +26,8 @@ function exec_forum_envoi_dist()
 		    _request('texte'),
 		    _request('modif_forum'),
 		    _request('nom_site'),
-		    _request('url_site'));
+		    _request('url_site'),
+		    _request('var_ajaxcharset'));
 }
 
 // http://doc.spip.org/@forum_envoi
@@ -39,18 +40,30 @@ function forum_envoi(
 		     $texte,
 		     $modif_forum,
 		     $nom_site,
-		     $url_site)
+		     $url_site,
+		     $ajax)
 {
-	$titre = $script == 'message' ? _T('onglet_messagerie') : _T('titre_cadre_forum_interne');
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('texte_nouveau_message'), "accueil", "accueil");
-	echo debut_gauche('', true);
-	echo debut_droite('', true);
-	echo gros_titre($titre,'', false);
-
-	$forum_envoi = charger_fonction('forum_envoi', 'inc');
-	echo $forum_envoi($id, $id_parent, $script, $statut, $titre_message, $texte, $modif_forum, $nom_site, $url_site),
-	  fin_gauche(), fin_page();
+	if ($modif_forum == 'fin') {
+		include_spip('inc/headers');
+		$script = preg_replace('/\W/','', $script);
+		$objet = preg_replace('/\W/','', $texte);
+		redirige_url_ecrire('discuter', "script=$script&objet=$texte&$texte=$id&statut=$statut");
+	} else {
+		$statut = preg_replace('/\W/','', $statut);
+		$forum_envoi = charger_fonction('forum_envoi', 'inc');
+		$forum_envoi = $forum_envoi($id, $id_parent, $script, $statut, $titre_message, $texte, $modif_forum, $nom_site, $url_site);
+		spip_log("exec_poste,r  $modif_forum $ajax $id $id_parent $script $statut");
+	if ($ajax) {
+		ajax_retour($forum_envoi);
+	} else {
+		$titre = $script == 'message' ? _T('onglet_messagerie') : _T('titre_cadre_forum_interne');
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('texte_nouveau_message'), "accueil", "accueil");
+		echo debut_gauche('', true);
+		echo debut_droite('', true);
+		echo gros_titre($titre,'', false);
+		echo $forum_envoi, fin_gauche(), fin_page();
+	}
+	}
 }
-
 ?>

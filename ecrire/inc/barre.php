@@ -23,13 +23,15 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 		."\" tabindex='1000'\ntitle=\""
 		. $a
 		."\"" 
-		.(test_espace_prive() ? '' :  "\nonmouseover=\"helpline('"
+		  .(test_espace_prive() ? '' :  ("\nonmouseover=\"helpline('"
 		  .addslashes(str_replace('&#39;',"'",$a))
 		  ."',$champhelp)\"\nonmouseout=\"helpline('"
-		  .attribut_html(_T('barre_aide'))
+					 .attribut_html(_T('barre_aide')))
 		  ."', $champhelp)\"")
 		."><img\nsrc='"
-		._DIR_IMG_ICONES_BARRE
+	  // cas horrible de action/poster_forum_prive. cf commentaire dedans
+	  . ((test_espace_prive() AND !_DIR_RACINE AND _request('var_ajaxcharset')) ? '../' : '')
+	  . _DIR_IMG_ICONES_BARRE
 		.$img
 		."' style=\"height: 16px; width: 16px; background-position: center center;\" alt=\"$a\"/></a>";
 }

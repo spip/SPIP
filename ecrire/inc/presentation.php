@@ -703,7 +703,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	  	$tm = rawurlencode($titre);
 		$res .= "\n<div style='text-align: right' class='verdana1'>"
 		  . "<b><a href='"
-		  . generer_url_ecrire("forum_envoi", "statut=$statut&id_parent=$id_forum&titre_message=$tm&script=" . urlencode("$retour?$arg")) . '#formulaire'
+		  . generer_url_ecrire("poster_forum_prive", "statut=$statut&id_parent=$id_forum&titre_message=$tm&script=" . urlencode("$retour?$arg")) . '#formulaire'
 		. "'>"
 		. _T('lien_repondre_message')
 		. "</a></b></div>";
@@ -951,7 +951,7 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $echo=false){
 }
 
 // http://doc.spip.org/@icone_inline
-function icone_inline($texte, $lien, $fond, $fonction="", $align=""){	
+function icone_inline($texte, $lien, $fond, $fonction="", $align="", $ajax=false){	
 	global $spip_display;
 
 	if ($fonction == "supprimer.gif") {
@@ -1000,18 +1000,20 @@ function icone_inline($texte, $lien, $fond, $fonction="", $align=""){
 	else $atts = '';
 	
 	if ($align && $align!='center') $align = "float: $align; ";
-	$icone = ($align=='center'?"<div style='text-align:center;'>":"")
-	. "\n<a style='$align' class='$style'"
+
+	$icone = "<a style='$align' class='$style'"
 	. $atts
+	. (!$ajax ? '' : (' onclick=' . ajax_action_declencheur($lien,$ajax)))
 	. "\nhref='"
 	. $lien
 	. "'>"
 	. $icone
 	. (($spip_display == 3)	? '' : "<span>$texte</span>")
-	. "</a>\n"
-	. ($align=='center'?"</div>":"");
+	  . "</a>\n";
 
-	return $icone;
+	if ($align <> 'center') return $icone;
+	$style = " style='text-align:center;'";
+	return "<div$style>$icone</div>";
 }
 
 // http://doc.spip.org/@icone_horizontale
@@ -1188,7 +1190,7 @@ function creer_colonne_droite($rubrique="", $return= false){
 // http://doc.spip.org/@formulaire_large
 function formulaire_large()
 {
-	return isset($_GET['exec'])?preg_match(',^((articles|breves|rubriques)_edit|forum_envoi),', $_GET['exec']):false;
+	return isset($_GET['exec'])?preg_match(',^((articles|breves|rubriques)_edit|poster_forum_prive),', $_GET['exec']):false;
 }
 
 // http://doc.spip.org/@debut_droite

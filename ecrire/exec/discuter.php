@@ -15,10 +15,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@exec_discuter_dist
 function exec_discuter_dist()
 {
-	$debut = _request('debut');
-	$id_article = _request('id_article');
-	$statut = preg_replace('/\W/','',_request('statut')); //secu
+	$script = preg_replace('/\W/','',_request('script'));
+	$statut = preg_replace('/\W/','',_request('statut'));
+	$objet = preg_replace('/\W/','',_request('objet'));
+	$debut = intval(_request('debut'));
+	$pas = intval(_request('pas'));
+	$id = intval(_request($objet));
 	$discuter = charger_fonction('discuter', 'inc');
-	ajax_retour($discuter($id_article, $debut, $statut));
+	ajax_retour($discuter($id, $script, $objet, $statut, $debut, $pas));
 }
 ?>

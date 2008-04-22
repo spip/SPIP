@@ -22,7 +22,7 @@ function exec_sites_dist()
 }
 
 // http://doc.spip.org/@exec_sites_args
-function exec_sites_args($id_syndic)
+function exec_sites_args($id_syndic, $pas)
 {
 	if (!autoriser('voir','site',$id_syndic)
 	OR (!$row = sql_fetsel("*", "spip_syndic", "id_syndic=$id_syndic"))) {
@@ -173,17 +173,11 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 	  . pipeline('affiche_milieu',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''))
 	  ;
 
-	$onglet_documents = ""
-	  //. articles_documents('article', $id_article)
-	  ;
-	
+	$discuter = charger_fonction('discuter', 'inc');
+	$onglet_discuter = $discuter($id_syndic, 'sites', 'id_syndic');
+	$onglet_documents = "" ;
 	$onglet_interactivite = "";
-	
-	$r = sql_select("*", "spip_forum", "statut='prive' AND id_syndic=$id_syndic AND id_parent=0", "", "date_heure DESC", "20");
-	$onglet_discuter = 
-		icone_inline (_T('icone_poster_message'), generer_url_ecrire('forum_envoi', "id=$id_syndic&statut=prive&script=sites") . '#formulaire', "forum-interne-24.gif", "creer.gif", 'center')
-	 . ($r ? afficher_forum($r, "sites","id_syndic=$id_syndic") : "");
-	
+
 	echo 
 	  "<div class='fiche_objet'>"
 	  . $haut 

@@ -14,29 +14,29 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 
 // http://doc.spip.org/@affiche_navigation_forum
-function affiche_navigation_forum($script, $args, $debut, $i, $pack, $ancre, $query)
+function affiche_navigation_forum($script, $args, $debut, $pas, $ancre, $total, $enplus)
 {
-	$nav = ($i <=0) ? '' : ("<a href='" . generer_url_ecrire($script, $args) ."'>0</a> ... |\n");
+	$tranche = ($debut > $enplus) ? $debut-$enplus : 0;
+	$h = generer_url_ecrire($script, $args);
+	$nav = "<a href='$h'>0</a> ... |\n";
 
 	$e = (_SPIP_AJAX === 1 );
+	for (;$total;$total--){
 
-	$n = sql_count($query);
-
-	for (;$n;$n--){
-
-		if ($i == $pack*floor($i/$pack)) {
-			if ($i == $debut)
-				$nav .= "<span class='spip_medium'><b>$i</b></span> |\n";
+		if ($tranche == $pas*floor($tranche/$pas)) {
+			if ($tranche == $debut)
+				$nav .= "<span class='spip_medium'><b>$tranche</b></span> |\n";
 			else {
-				$h = generer_url_ecrire($script, $args . "&debut=$i");
+				$h = "$args&debut=$tranche";
+				$h = generer_url_ecrire($script, $h);
 				if ($e)	$e = "\nonclick=" . ajax_action_declencheur($h,$ancre);
-				$nav .= "<a href='$h'$e>$i</a> |\n";
+				$nav .= "<a href='$h'$e>$tranche</a> |\n";
 			}
 		}
-		$i ++;
+		$tranche ++;
 	}
 
-	$h = generer_url_ecrire($script, $args . "&debut=$i");
+	$h = generer_url_ecrire($script, $args . "&debut=$tranche");
 
 	if ($e)	$e = "\nonclick=" . ajax_action_declencheur($h,$ancre);
 
