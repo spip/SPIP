@@ -17,6 +17,7 @@ include_spip('inc/presentation');
 
 // http://doc.spip.org/@formulaire_discuter
 
+// http://doc.spip.org/@formulaire_discuter
 function formulaire_discuter($script, $args, $debut, $pas, $ancre, $total, $objet)
 {
 	$nav = '';

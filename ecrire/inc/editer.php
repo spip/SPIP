@@ -41,6 +41,7 @@ function controles_md5($data, $prefixe='ctr_', $format='html'){
 		return $ctr;
 }
 
+// http://doc.spip.org/@controler_contenu
 function controler_contenu($type, $id, $options=array(), $c=false, $serveur='') {
 	include_spip('inc/filtres');
 

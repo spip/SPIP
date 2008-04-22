@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
-// http://doc.spip.org/@exec_forum_envoi_dist
+// http://doc.spip.org/@exec_poster_forum_prive_dist
 function exec_poster_forum_prive_dist()
 {
 	forum_envoi(  
