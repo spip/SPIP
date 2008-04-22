@@ -42,8 +42,12 @@ function securiser_action_auteur($action, $arg, $redirect="", $mode=false, $att=
 	}
 	$hash = _action_auteur("$action-$arg", $id_auteur, $pass, 'alea_ephemere');
 	$r = rawurlencode($redirect);
-	if (!is_string($mode))
-		return generer_url_action($action, "arg=$arg&hash=$hash" . (!$r ? '' : "&redirect=$r"), $mode);
+	if (!is_string($mode)){
+		if ($mode===true)
+			return array('action'=>$action,'arg'=>$arg,'hash'=>$hash);
+		else
+			return generer_url_action($action, "arg=$arg&hash=$hash" . (!$r ? '' : "&redirect=$r"), $mode);
+	}
 
 	$att .=	" style='margin: 0px; border: 0px'";
 	$mode .= (!$r ? '' : "\n\t\t<input name='redirect' type='hidden' value='$r' />") . "

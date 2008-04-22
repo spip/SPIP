@@ -1343,7 +1343,8 @@ function balise_ACTION_FORMULAIRE($p){
 		". '<input type=\'hidden\' name=\'formulaire_action\' value=\'' . $_form . '\' />'"
 		// transmettre les eventuels args de la balise formulaire
 		. ". '<input type=\'hidden\' name=\'formulaire_action_args\' value=\'' . @\$Pile[0]['formulaire_args']. '\' />'"
-		. ". '<input type=\'hidden\' name=\'formulaire_action_cle\' value=\'' . (include_spip('inc/securiser_action')?calculer_cle_action(".$_form." . @\$Pile[0]['formulaire_args'] ):'') . '\' />'";
+		. ". '<input type=\'hidden\' name=\'formulaire_action_cle\' value=\'' . (include_spip('inc/securiser_action')?calculer_cle_action(".$_form." . @\$Pile[0]['formulaire_args'] ):'') . '\' />'"
+		. ". (@\$Pile[0]['_hidden']?@\$Pile[0]['_hidden']:'')";
 	
 	if (strlen($p->code))
 		$p->code = "'<div>'" . $p->code . " . '</div>'";
