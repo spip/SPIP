@@ -2268,6 +2268,7 @@ function filtre_info_plugin_dist($plugin, $type_info) {
 }
 
 
+// http://doc.spip.org/@filtre_cache_static
 function filtre_cache_static($scripts,$type='js'){
 	$nom = "";
 	if (!is_array($scripts) && $scripts) $scripts = array($scripts);
@@ -2308,6 +2309,7 @@ function filtre_cache_static($scripts,$type='js'){
 	return $nom;
 }
 
+// http://doc.spip.org/@f_compacte_head
 function f_compacte_head($flux){
 	$self = url_absolue(self(true));
 	$path = $path = pathinfo($self);

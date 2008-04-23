@@ -514,6 +514,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	return $res;
 }
 
+// http://doc.spip.org/@repondre_forum
 function repondre_forum($id_forum, $titre, $statut, $retour, $clic)
 {
 	$ancre = "poster_forum_prive-$id_forum";
