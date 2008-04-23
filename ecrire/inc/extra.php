@@ -98,7 +98,8 @@ function extra_saisie($extra, $type, $ensemble='') {
 
 // http://doc.spip.org/@extra_form
 function extra_form($extra, $type, $ensemble='') {
-	$extra = @unserialize($extra);
+	if (!is_array($extra))
+		$extra = @unserialize($extra);
 
 	// quels sont les extras de ce type d'objet
 	if (!$champs = $GLOBALS['champs_extra'][$type])

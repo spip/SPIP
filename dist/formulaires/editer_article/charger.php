@@ -59,6 +59,8 @@ function formulaires_editer_article_charger_dist($id_article='new', $id_rubrique
 		include_spip('inc/editer');
 		$contexte['_hidden'] .= controles_md5($row);
 	}
+	if (isset($contexte['extra']))
+		$contexte['extra'] = unserialize($contexte['extra']);
 
 	// preciser que le formulaire doit passer dans un pipeline
 	$contexte['_pipeline'] = array('editer_contenu_objet','args'=>array('type'=>'article','id'=>$id_article,'contexte'=>$contexte));
