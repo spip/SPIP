@@ -89,8 +89,6 @@ function articles_edit($id_article, $id_rubrique, $lier_trad, $id_version, $new,
 	
 	echo debut_cadre_formulaire("", true);
 	echo articles_edit_presentation($new, $row['id_rubrique'], $lier_trad, $row['id_article'], $row['titre'],$config_fonc);
-	/*$editer_article = charger_fonction('editer_article', 'inc');
-	echo $editer_article($new, $id_rubrique, $lier_trad, generer_url_ecrire("articles"), $config_fonc, $row);*/
 	echo fin_cadre_formulaire(true);
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));

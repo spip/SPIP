@@ -139,7 +139,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
 
 	$form = "<ol class='formfx'>";
-	$form .= "<li class='gauche gauche_obligatoire'><label for='titre'>" . _T('info_titre') . "</label>"
+	$form .= "<li class='gauche obligatoire'><label for='titre'>" . _T('info_titre') . "</label>"
 	. "<input type='text' class='formo' name='titre' id='titre' value=\"$titre\" size='40' $onfocus /></li>"
 	 . "<input type='hidden' name='id_rubrique_old' value=\"$id_rubrique\" />"
 	 ."<li class='haut'>"

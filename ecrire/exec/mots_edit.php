@@ -183,7 +183,7 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 		$res .= "<ol class='formfx'>";
 		
 		
-		$res .= "<li class='gauche gauche_obligatoire'>";
+		$res .= "<li class='gauche obligatoire'>";
 		$res .= "<label for='titre'>"._T('info_titre_mot_cle');
 		$res .= aide ("mots")."</label>";
 

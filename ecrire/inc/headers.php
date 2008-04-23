@@ -58,7 +58,7 @@ function redirige_par_entete($url, $equiv='') {
 // http://doc.spip.org/@redirige_formulaire
 function redirige_formulaire($url, $equiv = '') {
 	if (!_request('var_ajax') && !_request('var_ajaxcharset'))
-		redirige_par_entete($url, $equiv);
+		redirige_par_entete(str_replace('&amp;','&',$url), $equiv);
 	else {
 		$url = strtr($url, "\n\r", "  ");
 		# en theorie on devrait faire ca tout le temps, mais quand la chaine

@@ -14,7 +14,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/actions');
 include_spip('inc/editer');
-include_spip('inc/editer_article');
 
 // http://doc.spip.org/@inc_editer_article_dist
 function formulaires_editer_article_charger_dist($id_article='new', $id_rubrique=0, $lier_trad=0, $retour='', $config_fonc='articles_edit_config', $row=array(), $hidden=''){
@@ -34,6 +33,12 @@ function formulaires_editer_article_charger_dist($id_article='new', $id_rubrique
 
 	$contexte = $row;
 	$contexte['config'] = $config = $config_fonc($row);
+	$att_text = " class='formo' "
+	. $GLOBALS['browser_caret']
+	. " rows='"
+	. ($config['lignes'] +15)
+	. "' cols='40'";
+	list($contexte['texte'],$contexte['_texte_trop_long']) = editer_article_recolle($contexte['texte'],$att_text);
 
 	// on veut conserver la langue de l'interface ;
 	// on passe cette donnee sous un autre nom, au cas ou le squelette
@@ -70,4 +75,76 @@ function formulaires_editer_article_charger_dist($id_article='new', $id_rubrique
 	return $contexte;
 }
 
+
+//
+// Gestion des textes trop longs (limitation brouteurs)
+// utile pour les textes > 32ko
+
+// http://doc.spip.org/@coupe_trop_long
+function coupe_trop_long($texte){
+	$aider = charger_fonction('aider', 'inc');
+	if (strlen($texte) > 28*1024) {
+		$texte = str_replace("\r\n","\n",$texte);
+		$pos = strpos($texte, "\n\n", 28*1024);	// coupe para > 28 ko
+		if ($pos > 0 and $pos < 32 * 1024) {
+			$debut = substr($texte, 0, $pos)."\n\n<!--SPIP-->\n";
+			$suite = substr($texte, $pos + 2);
+		} else {
+			$pos = strpos($texte, " ", 28*1024);	// sinon coupe espace
+			if (!($pos > 0 and $pos < 32 * 1024)) {
+				$pos = 28*1024;	// au pire (pas d'espace trouv'e)
+				$decalage = 0; // si y'a pas d'espace, il ne faut pas perdre le caract`ere
+			} else {
+				$decalage = 1;
+			}
+			$debut = substr($texte,0,$pos + $decalage); // Il faut conserver l'espace s'il y en a un
+			$suite = substr($texte,$pos + $decalage);
+		}
+		return (array($debut,$suite));
+	}
+	else
+		return (array($texte,''));
+}
+
+// http://doc.spip.org/@editer_article_recolle
+function editer_article_recolle($texte, $att_text)
+{
+	if ((strlen($texte)<29*1024)
+	 /*OR pas le navigateur qui pose probleme */ )
+	 return array($texte,"");
+	 
+	include_spip('inc/barre');
+	$textes_supplement = "<br /><span style='color: red'>"._T('info_texte_long')."</span>\n";
+	$nombre = 0;
+
+	while (strlen($texte)>29*1024) {
+		$nombre ++;
+		list($texte1,$texte) = coupe_trop_long($texte);
+		$id = "document.getElementById('texte$nombre')";
+		$textes_supplement .= "<br />" . afficher_barre($id) .
+			"<textarea id='texte$nombre' name='texte_plus[$nombre]'$att_text>$texte1</textarea>\n";
+		}
+	return array($texte,$textes_supplement);
+}
+
+
+// Choix par defaut des options de presentation
+// http://doc.spip.org/@articles_edit_config
+function articles_edit_config($row)
+{
+	global $champs_extra, $spip_ecran, $spip_lang, $spip_display;
+
+	$config = $GLOBALS['meta'];
+	$config['lignes'] = ($spip_ecran == "large")? 8 : 5;
+	$config['afficher_barre'] = $spip_display != 4;
+	$config['langue'] = $spip_lang;
+
+	if ($champs_extra) {
+		include_spip('inc/extra');
+		$config['extra'] = true;
+	} else $config['extra'] = false;
+
+	$config['restreint'] = ($row['statut'] == 'publie');
+	return $config;
+}
 ?>

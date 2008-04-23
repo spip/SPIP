@@ -113,7 +113,7 @@ function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
 	
 	$form = "<ol class='formfx'>";
 
-	$form .= "<li class='gauche gauche_obligatoire'><label for='titre'>" . _T('info_titre') ."</label>"
+	$form .= "<li class='gauche obligatoire'><label for='titre'>" . _T('info_titre') ."</label>"
 		.  "<input type='text' class='formo' name='titre' id='titre' value=\"$titre\" size='40' $onfocus /></li>";
 	
 	$form .= "<li>"
