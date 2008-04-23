@@ -48,26 +48,28 @@ function inc_discuter_dist($id, $script, $objet, $statut='prive', $debut=1, $pas
 	$debut = intval($debut);
 	$id = intval($id);
 	if (!$pas) $pas = 10;
-	$ancre = "poster_forum_prive-$id";
+	$ancre = "poster_forum_prive";
 	$clic = _T('icone_poster_message');
 	$logo = ($script == 'forum_admin') ?
 	  "forum-admin-24.gif" : "forum-interne-24.gif";
 	$lien = generer_url_ecrire("poster_forum_prive", "statut=$statut&id=$id&script=$script") ."#formulaire";
-	$lien = icone_inline($clic, $lien, $logo, "creer.gif",'center', $ancre);
+	$res = icone_inline($clic, $lien, $logo, "creer.gif",'center', $ancre);
 
-	$where = (!$objet ? '' : ($objet . "=" . sql_quote($id) . " AND "))
+	$where = ((!$objet OR !$id) ? '' : ($objet . "=" . sql_quote($id) . " AND "))
 	  . "id_parent=0 AND statut=" . sql_quote($statut);
 
 	$n = sql_countsel('spip_forum', $where);
-	if (!$n) return $lien;
 
-	$nav = ($n <= $pas) ? '' :
-	  formulaire_discuter($script, "id=$id&$objet=$id&statut=$statut", $debut, $pas, $ancre, $n, $objet);
+	if ($n) {
 
-	$q = sql_select('*', 'spip_forum', $where, '',  "date_heure DESC", "$debut,$pas");
-	$args = ($objet ? "$objet=$id&" : '') . "statut=$statut";
-	$q = afficher_forum($q, $script,  $args, false);
-	$res = $lien. $nav . $q	. "<br />" . $nav;
+		$nav = ($n <= $pas) ? '' :
+		  formulaire_discuter($script, "id=$id&$objet=$id&statut=$statut", $debut, $pas, $ancre, $n, $objet);
+
+		$q = sql_select('*', 'spip_forum', $where, '',  "date_heure DESC", "$debut,$pas");
+		$args = ($objet ? "$objet=$id&" : '') . "statut=$statut";
+		$q = afficher_forum($q, $script,  $args, false);
+		$res .= $nav . $q	. "<br />" . $nav;
+	}
 	return ajax_action_greffe($ancre, '', $res);
 }
 ?>

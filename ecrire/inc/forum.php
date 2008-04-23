@@ -495,15 +495,8 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 		else $res .= "<b>$nom_site</b>";
 	}
 
-	if (!$controle_id_article) {
-	  	$tm = rawurlencode($titre);
-		$res .= "\n<div style='text-align: right' class='verdana1'>"
-		  . "<b><a href='"
-		  . generer_url_ecrire("poster_forum_prive", "statut=$statut&id_parent=$id_forum&titre_message=$tm&script=" . urlencode("$retour?$arg")) . '#formulaire'
-		. "'>"
-		. _T('lien_repondre_message')
-		. "</a></b></div>";
-	}
+	$res .= $controle_id_article ? '' :
+		repondre_forum($id_forum, $titre, $statut, "$retour?$arg", _T('lien_repondre_message'));
 
 	if ($GLOBALS['meta']["mots_cles_forums"] == "oui")
 		$res .= afficher_forum_mots($id_forum);
@@ -519,6 +512,21 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	} else $res .= "</li>\n";
 
 	return $res;
+}
+
+function repondre_forum($id_forum, $titre, $statut, $retour, $clic)
+{
+	$ancre = "poster_forum_prive-$id_forum";
+	$lien = generer_url_ecrire("poster_forum_prive", "statut=$statut&id_parent=$id_forum&titre_message=" . rawurlencode($titre) . "&script=" . urlencode($retour)) . '#formulaire';
+	$lien = "<div style='text-align: right' class='verdana1'><b><a onclick="
+	  . ajax_action_declencheur($lien, $ancre)
+	. "\nhref='"
+	. $lien
+	. "'>"
+	. $clic
+	  . "</a></b></div>\n";
+
+	return ajax_action_greffe('poster_forum_prive', $id_forum, $lien); 
 }
 
 
