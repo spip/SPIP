@@ -92,7 +92,7 @@ function balise_FORMULAIRE__dyn($form)
 	}
 	if (isset($valeurs['_action'])){
 		$securiser_action = charger_fonction('securiser_action','inc');
-		$secu = inc_securiser_action_dist(reset($valeurs['_action']),end($valeurs['_action']),'',true);
+		$secu = inc_securiser_action_dist(reset($valeurs['_action']),end($valeurs['_action']),'',-1);
 		$valeurs['_hidden'] = (isset($valeurs['_hidden'])?$valeurs['_hidden']:'') .
 		"<input type='hidden' name='arg' value='".$secu['arg']."' />"
 		. "<input type='hidden' name='hash' value='".$secu['hash']."' />";
