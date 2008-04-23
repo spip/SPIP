@@ -88,9 +88,9 @@ function articles_edit($id_article, $id_rubrique, $lier_trad, $id_version, $new,
 	echo debut_droite("",true);
 	
 	echo debut_cadre_formulaire("", true);
-	echo articles_edit_presentation($new, $row['id_rubrique'], $lier_trad, $row['id_article'], $row['titre']);
-	$editer_article = charger_fonction('editer_article', 'inc');
-	echo $editer_article($new, $id_rubrique, $lier_trad, generer_url_ecrire("articles"), $config_fonc, $row);
+	echo articles_edit_presentation($new, $row['id_rubrique'], $lier_trad, $row['id_article'], $row['titre'],$config_fonc);
+	/*$editer_article = charger_fonction('editer_article', 'inc');
+	echo $editer_article($new, $id_rubrique, $lier_trad, generer_url_ecrire("articles"), $config_fonc, $row);*/
 	echo fin_cadre_formulaire(true);
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));
@@ -99,20 +99,24 @@ function articles_edit($id_article, $id_rubrique, $lier_trad, $id_version, $new,
 }
 
 // http://doc.spip.org/@articles_edit_presentation
-function articles_edit_presentation($new, $id_rubrique, $lier_trad, $id_article, $titre)
-{
-	global $spip_lang_right;
+function articles_edit_presentation($new, $id_rubrique, $lier_trad, $id_article, $titre, $config_fonc){
 	$oups = ($lier_trad ?
 	     generer_url_ecrire("articles","id_article=$lier_trad")
 	     : ($new
 		? generer_url_ecrire("naviguer","id_rubrique=$id_rubrique")
 		: generer_url_ecrire("articles","id_article=$id_article")
 		));
-
-	return
-		icone_inline(_T('icone_retour'), $oups, "article-24.gif", "rien.gif",$spip_lang_right) .
-	 	_T('texte_modifier_article') .
-		gros_titre($titre,'',false) . 
-		"<hr class='fin_article_presentation' />\n";
+	$contexte = array(
+	'icone_retour'=>icone_inline(_T('icone_retour'), $oups, "article-24.gif", "rien.gif",$GLOBALS['spip_lang_right']),
+	'redirect'=>generer_url_ecrire("articles"),
+	'titre'=>$titre,
+	'new'=>$new?$new:$id_article,
+	'id_rubrique'=>$id_rubrique,
+	'lier_trad'=>$lier_trad,
+#	'id_article'=>$id_article,
+	'config_fonc'=>$config_fonc
+	);
+	$page = evaluer_fond("prive/editer/article", $contexte, $connect);
+	return $page['texte'];
 }
 ?>

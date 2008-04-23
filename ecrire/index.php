@@ -170,6 +170,11 @@ AND $l = @unserialize($l)) {
 	}
 }
 
+if (_request('var_ajax') OR _request('formulaire_action')){
+	include_spip('public/assembler');
+	traiter_formulaires_dynamiques();
+}
+
 // Passer la main aux outils XML a la demande (meme les redac s'ils veulent).
 if ($var_f = _request('transformer_xml')) {
 	set_request('var_url', $exec);
