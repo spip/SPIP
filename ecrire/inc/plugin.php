@@ -329,7 +329,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 					if (!isset($GLOBALS['spip_pipeline'][$nom])) // creer le pipeline eventuel
 						$GLOBALS['spip_pipeline'][$nom]="";
 					if (strpos($GLOBALS['spip_pipeline'][$nom],"|$prefix$action")===FALSE)
-						$GLOBALS['spip_pipeline'][$nom] .= "|$prefix$action";
+						$GLOBALS['spip_pipeline'][$nom] = preg_replace(",(\|\||$),","|$prefix$action\\1",$GLOBALS['spip_pipeline'][$nom],1);
 					if (isset($pipe['inclure'])){
 						$GLOBALS['spip_matrice']["$prefix$action"] = 
 							"_DIR_PLUGINS$plug/".$pipe['inclure'];
