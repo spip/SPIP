@@ -133,7 +133,7 @@ function public_vertebrer_dist($desc)
 	$tros = vertebrer_sort($field,'_');
 	$titre =  "[(#ENV{page}|image_typo{police=dustismo_bold.ttf,taille=36,couleur=4433bb})]";
 	$distant = !$connexion ? '' : "&amp;connect=$connexion";
-	$skel = "./?page=$surnom$distant&amp;var_mode=debug&amp;var_mode_affiche=squelette#debug_boucle";
+	$skel = "./?page=table:$surnom$distant&amp;var_mode=debug&amp;var_mode_affiche=squelette#debug_boucle";
 	  
 	return
 
