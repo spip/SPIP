@@ -18,7 +18,7 @@ function affiche_navigation_forum($script, $args, $debut, $pas, $ancre, $total, 
 {
 	$tranche = ($debut > $enplus) ? $debut-$enplus : 0;
 	$h = generer_url_ecrire($script, $args);
-	$nav = "<a href='$h'>0</a> ... |\n";
+	$nav = "<a href='$h'> ... </a>|\n";
 
 	$e = (_SPIP_AJAX === 1 );
 	for (;$total;$total--){
