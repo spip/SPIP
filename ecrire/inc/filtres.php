@@ -822,6 +822,35 @@ function date_relative($date, $decalage_maxi=0) {
 }
 
 
+function date_relative_court($date, $decalage_maxi=0) {
+	
+	if (!$date) return;
+	$decal = date("U",strtotime(date('Y-m-d'))-strtotime(date('Y-m-d'),strtotime($date)));
+
+	if ($decalage_maxi AND ($decal > $decalage_maxi OR $decal < 0))
+		return '';
+
+	if ($decal < -24*3600) {
+		$retour = date_relative($date, $decalage_maxi);
+	}
+	elseif ($decal < 0) {
+		$retour = _T("date_demain");
+	}
+	else if ($decal < (3600 * 24) ) {
+		$retour = _T("date_aujourdhui");
+	}
+	else if ($decal < (3600 * 24 *2) ) {
+		$retour = _T("date_hier");
+	}
+	else {
+		$retour = date_relative($date, $decalage_maxi);
+	}
+
+
+
+	return $retour;
+}
+
 // http://doc.spip.org/@affdate_base
 function affdate_base($numdate, $vue, $param = '') { 
 	global $spip_lang;
