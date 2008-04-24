@@ -822,6 +822,7 @@ function date_relative($date, $decalage_maxi=0) {
 }
 
 
+// http://doc.spip.org/@date_relativecourt
 function date_relativecourt($date, $decalage_maxi=0) {
 	
 	if (!$date) return;

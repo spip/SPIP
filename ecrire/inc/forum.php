@@ -508,6 +508,7 @@ function repondre_forum($row, $titre, $statut, $retour, $clic)
 	. "</a></b></div>\n";
 }
 
+// http://doc.spip.org/@afficher_forum_auteur
 function afficher_forum_auteur($row)
 {
 	$titre=$row['titre'];
