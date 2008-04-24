@@ -1127,12 +1127,19 @@ function balise_MODELE_dist($p) {
 	if (!$nom)
 		die("erreur de compilation #MODELE{nom du modele}");
 
+	$nom = "modeles/".$nom;
 	$champ = phraser_arguments_inclure($p, true); 
 
 	// a priori true
 	// si false, le compilo va bloquer sur des syntaxes avec un filtre sans argument qui suit la balise
 	// si true, les arguments simples (sans truc=chose) vont degager
 	$code_contexte = argumenter_inclure($champ, $p->descr, $p->boucles, $p->id_boucle, false);
+	// Gerer ajax
+	if (isset($code_contexte['ajax'])){
+		$code_contexte['fond_ajax'] = "'fond_ajax' => '$nom'";
+		$nom = 'fond/ajax_stat';
+		unset($_contexte['ajax']);
+	}
 
 	// Si le champ existe dans la pile, on le met dans le contexte
 	// (a priori c'est du code mort ; il servait pour #LESAUTEURS dans
@@ -1150,7 +1157,7 @@ function balise_MODELE_dist($p) {
 
 	$connect = $p->boucles[$p->id_boucle]->sql_serveur;
 	$p->code = "( ((\$recurs=(isset(\$Pile[0]['recurs'])?\$Pile[0]['recurs']:0))<5)?
-	recuperer_fond('modeles/".$nom."',
+	recuperer_fond('$nom',
 		creer_contexte_de_modele(array(".join(',', $code_contexte).",'recurs='.(++\$recurs), \$GLOBALS['spip_lang'])), true, " . sql_quote($connect) . "):'')";
 	$p->interdire_scripts = false; // securite assuree par le squelette
 

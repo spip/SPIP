@@ -658,6 +658,8 @@ function creer_contexte_de_modele($args) {
 				$args = explode('=', $val);
 				if (count($args)>=2) // Flashvars=arg1=machin&arg2=truc genere plus de deux args
 					$contexte[trim($args[0])] = substr($val,strlen($args[0])+1);
+				else // notation abregee
+					$contexte[trim($val)] = trim($val);
 			}
 		}
 		else
@@ -682,7 +684,7 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 		list(,$soustype) = each($params);
 		$soustype = strtolower($soustype);
 		if (in_array($soustype,
-		array('left', 'right', 'center'))) {
+		array('left', 'right', 'center', 'ajax'))) {
 			list(,$soustype) = each($params);
 			$soustype = strtolower($soustype);
 		}
@@ -693,6 +695,8 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 				$fond = 'modeles/'.$type;
 				$class = $soustype;
 			}
+			// enlever le sous type des params
+			$params = array_diff($params,array($soustype));
 		}
 	}
 
@@ -739,6 +743,11 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 	// Traiter les parametres
 	// par exemple : <img1|center>, <emb12|autostart=true> ou <doc1|lang=en>
 	$arg_list = creer_contexte_de_modele($params);
+	if (isset($arg_list['ajax']) && $arg_list['ajax']=='ajax'){
+		$contexte['fond_ajax']=$contexte['fond'];
+		$contexte['fond']='fond/ajax';
+		unset($arg_list['ajax']);
+	}
 	$contexte['args'] = $arg_list; // on passe la liste des arguments du modeles dans une variable args
 	$contexte = array_merge($contexte,$arg_list);
 
@@ -752,7 +761,7 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 	$GLOBALS['compt_note'] = 0;
 
 	// Appliquer le modele avec le contexte
-	$page = evaluer_fond($fond, $contexte, array(), $connect);
+	$page = evaluer_fond($contexte['fond'], $contexte, array(), $connect);
 	$retour = trim($page['texte']);
 
 	// Lever un drapeau (global) si le modele utilise #SESSION
