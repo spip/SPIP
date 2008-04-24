@@ -21,7 +21,8 @@ function exec_discuter_dist()
 	$debut = intval(_request('debut'));
 	$pas = intval(_request('pas'));
 	$id = intval(_request($objet));
+	$id_parent = intval(_request('id_parent'));
 	$discuter = charger_fonction('discuter', 'inc');
-	ajax_retour($discuter($id, $script, $objet, $statut, $debut, $pas));
+	ajax_retour($discuter($id, $script, $objet, $statut, $debut, $pas, $id_parent));
 }
 ?>
