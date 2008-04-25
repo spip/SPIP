@@ -254,14 +254,14 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 		foreach($infos as $plug=>$info){
 			if (isset($info['bouton'])){
 				foreach($info['bouton'] as $id=>$conf){
-					$conf['icone'] = "$plug/" . $conf['icone'];
+					$conf['icone'] = find_in_path($conf['icone']);
 					$info['bouton'][$id] = $conf;
 				}
 				$liste_boutons = array_merge($liste_boutons,$info['bouton']);
 			}
 			if (isset($info['onglet'])){
 				foreach($info['onglet'] as $id=>$conf){
-					$conf['icone'] = "$plug/" . $conf['icone'];
+					$conf['icone'] = find_in_path($conf['icone']);
 					$info['onglet'][$id] = $conf;
 				}
 				$liste_onglets = array_merge($liste_onglets,$info['onglet']);
