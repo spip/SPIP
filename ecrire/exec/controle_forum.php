@@ -226,9 +226,8 @@ function exec_controle_forum_args($id_rubrique,	$type,	$debut,	$pas, $recherche)
 	list($from,$where)=critere_statut_controle_forum($type, $id_rubrique, $recherche);
 
 	// Si un id_controle_forum est demande, on adapte le debut
-	if (!$debut_id_forum = intval(_request('debut_id_forum'))
+	if ($debut_id_forum = intval(_request('debut_id_forum'))
 	AND (NULL !== ($d = sql_getfetsel('date_heure', 'spip_forum', "id_forum=$debut_id_forum")))) {
-
 	  $debut = sql_countsel($from, $where . (" AND F.date_heure > '$d'"));
 	}
 
