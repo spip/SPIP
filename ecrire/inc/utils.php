@@ -623,6 +623,22 @@ function creer_chemin() {
 	return $path_a;
 }
 
+
+
+// Cherche une image dans les dossiers images
+// definis par _NOM_IMG_PACK et _DIR_IMG_PACK
+function chemin_image($file){
+	return _DIR_IMG_PACK . $file;
+	#return find_in_path ($file, _NOM_IMG_PACK);
+}
+
+
+// Alias de find_in_path
+function chemin($file, $dirname='', $include=false){
+	return find_in_path ($file, $dirname, $include);
+}
+
+
 //
 // chercher un fichier $file dans le SPIP_PATH
 // si on donne un sous-repertoire en 2e arg optionnel, il FAUT le / final

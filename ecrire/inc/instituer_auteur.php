@@ -152,8 +152,8 @@ function choix_rubriques_admin_restreint($auteur) {
 			. '</li>';
 		}
 		$menu =  "<ul id='liste_rubriques_restreintes' style='list-style-image: url("
-			. _DIR_IMG_PACK
-			. "rubrique-12.gif)'>"
+			. chemin_image("rubrique-12.gif")
+			. ")'>"
 			. $menu
 			. "</ul>\n";
 

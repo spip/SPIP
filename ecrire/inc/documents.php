@@ -375,7 +375,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 			$dist = "\n<div class='verdana1' style='float: $spip_lang_right; text-align: $spip_lang_right;'>";
 
 			// Signaler les documents distants par une icone de trombone
-			$dist .= "\n<img src='"._DIR_IMG_PACK.'attachment.gif'."'\n\talt=\"$fichier\"\n\ttitle=\"$fichier\" />\n";
+			$dist .= "\n<img src='" . chemin_image('attachment.gif') . "'\n\talt=\"$fichier\"\n\ttitle=\"$fichier\" />\n";
 			// Bouton permettant de copier en local le fichier
 			include_spip('inc/tourner');
 			$dist .= bouton_copier_local($document, $type, $id, $id_document, $script);

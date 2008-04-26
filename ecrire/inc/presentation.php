@@ -477,7 +477,7 @@ function afficher_tranches_requete($num_rows, $tmp_var, $url='', $nb_aff = 10, $
 				. '\');"';
 	}
 	$l = htmlentities(_T('lien_tout_afficher'));
-	$texte .= "<a href=\"$script#a$ancre\"$on class='plus'><img\nsrc='". _DIR_IMG_PACK . "plus.gif' title=\"$l\" alt=\"$l\" /></a>";
+	$texte .= "<a href=\"$script#a$ancre\"$on class='plus'><img\nsrc='". chemin_image("plus.gif") . "' title=\"$l\" alt=\"$l\" /></a>";
 
 	$texte .= "</div>\n";
 	return $texte;
@@ -696,7 +696,7 @@ function debut_javascript()
 			? ''
 			: "jQuery.ajax({'url':'$testeur'});") .
 			(_OUTILS_DEVELOPPEURS ?"var _OUTILS_DEVELOPPEURS=true;":"") .
-			"\nvar ajax_image_searching = \n'<div style=\"float: ".$GLOBALS['spip_lang_right'].";\"><img src=\"".url_absolue(_DIR_IMG_PACK."searching.gif")."\" alt=\"\" /></div>';" .
+			"\nvar ajax_image_searching = \n'<div style=\"float: ".$GLOBALS['spip_lang_right'].";\"><img src=\"".url_absolue(chemin_image("searching.gif"))."\" alt=\"\" /></div>';" .
 			"\nvar stat = " . (($GLOBALS['meta']["activer_statistiques"] != 'non') ? 1 : 0) .
 			"\nvar largeur_icone = " .
 			intval(_LARGEUR_ICONES_BANDEAU) .
@@ -950,7 +950,7 @@ function formulaire_recherche($page, $complement=""){
 	} else $onfocus = '';
 
 	$form = '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="recherche" accesskey="r"' . $onfocus . ' />';
-	$form .= "<input type='image' src='"._DIR_IMG_PACK."loupe.png' name='submit' class='submit' alt='"._T('info_rechercher')."' />";
+	$form .= "<input type='image' src='" . chemin_image('loupe.png') . "' name='submit' class='submit' alt='"._T('info_rechercher')."' />";
 	return "<div class='spip_recherche'>".generer_form_ecrire($page, $form . $complement, " method='get'")."</div>";
 }
 
