@@ -115,7 +115,7 @@ if (sql_count($result) > 0) {
 		$id_auteur = $row['id_auteur'];
 		$nom = typo($row["nom"]);
 		$total = $row["total"];
-		echo "<div class='tr_liste'\nonmouseover=\"changeclass(this,'tr_liste_over');\"\nonmouseout=\"changeclass(this,'tr_liste');\"\nstyle='padding: 2px; padding-left: 10px; border-bottom: 1px solid #cccccc;'><div class='verdana1'><img src='" . _DIR_IMG_PACK . "redac-12.gif'\nstyle='border: 0px' alt=' ' /> <a href='" . generer_url_ecrire("auteur_infos","id_auteur=$id_auteur"), "'>",
+		echo "<div class='tr_liste'\nonmouseover=\"changeclass(this,'tr_liste_over');\"\nonmouseout=\"changeclass(this,'tr_liste');\"\nstyle='padding: 2px; padding-left: 10px; border-bottom: 1px solid #cccccc;'><div class='verdana1'><img src='" . chemin_image('redac-12.gif') . "'\nstyle='border: 0px' alt=' ' /> <a href='" . generer_url_ecrire("auteur_infos","id_auteur=$id_auteur"), "'>",
 		  $nom,
 		  "</a> ($total)</div></div>";
 		if ($count == ceil(sql_count($result)/2)) echo "</td><td valign='top' style='width: 50%'>";

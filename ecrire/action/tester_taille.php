@@ -24,7 +24,7 @@ function action_tester_taille_dist() {
 	$max_size_echec = isset($GLOBALS['meta']['max_taille_vignettes_echec'])?$GLOBALS['meta']['max_taille_vignettes_echec']:0;
 	$max_size_test = isset($GLOBALS['meta']['max_taille_vignettes_test'])?$GLOBALS['meta']['max_taille_vignettes_test']:0;
 	$taille = intval(_request('arg'));
-	$file = _DIR_IMG_PACK . 'jauge-vert.gif';
+	$file = chemin_image('jauge-vert.gif');
 	$file_size = 94;
 	
 	if (($s = $taille*$taille)>$max_size){
@@ -48,7 +48,7 @@ function action_tester_taille_dist() {
 			include_spip('inc/documents');
 			$dummy = propre("<doc1>");
 
-			$image_source = _DIR_IMG_PACK."test.png";
+			$image_source = chemin_image("test.png");
 			$res = sql_select("valeur", "spip_meta", "nom='max_taille_vignettes_test'");
 			if ($row = sql_fetch($res))
 				$max_size_test = $row['valeur'];
@@ -72,7 +72,7 @@ function action_tester_taille_dist() {
 			if (!$max_size_echec OR $s < $max_size_echec)
 				ecrire_meta('max_taille_vignettes_echec',$taille*$taille,'non');
 			# image echec
-			$file = _DIR_IMG_PACK . 'jauge-rouge.gif';
+			$file = chemin_image('jauge-rouge.gif');
 			$file_size = 84;
 		}
 	}

@@ -107,9 +107,9 @@ function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 				if ($gauche > 0) echo "<td style='width: " .$gauche."px'></td>";
 				echo "\n<td style='border: 0px; white-space: nowrap;'>";
 				echo "<div style='border: 1px solid #999999; background-color: #dddddd; height: 12px; padding: 0px; margin: 0px;'>";
-				if ($visites_abs > 0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' style='vertical-align: top; height: 12px; border: 0px; width: ".$visites_abs."px;' alt= ' '/>";
-				if ($largeur_rouge>0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' class='couleur_cumul' style='vertical-align: top; height: 12px; border: 0px; width: " . $largeur_rouge . "px;' alt=' ' />";
-				if ($largeur_vert>0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' class='couleur_nombre' style='vertical-align: top; width: " . $largeur_vert ."px; height: 12px; border: 0px' alt=' ' />";
+				if ($visites_abs > 0) echo "<img src='" . chemin_image('rien.gif') . "' style='vertical-align: top; height: 12px; border: 0px; width: ".$visites_abs."px;' alt= ' '/>";
+				if ($largeur_rouge>0) echo "<img src='" . chemin_image('rien.gif') . "' class='couleur_cumul' style='vertical-align: top; height: 12px; border: 0px; width: " . $largeur_rouge . "px;' alt=' ' />";
+				if ($largeur_vert>0) echo "<img src='" . chemin_image('rien.gif') . "' class='couleur_nombre' style='vertical-align: top; width: " . $largeur_vert ."px; height: 12px; border: 0px' alt=' ' />";
 				echo "</div>";
 				echo "</td></tr></table>\n";
 				echo "</td></tr></table>";

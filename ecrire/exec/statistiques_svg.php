@@ -195,10 +195,10 @@ function exec_statistiques_svg_ok($id_article,  $aff_jours, $visites_today, $exp
 
 
 					if ($difference > 0) {	
-						//echo "<img src='" . _DIR_IMG_PACK . "rien.gif' width=$largeur height=1 style='background-color:#333333;' title=$tagtitle>";
-						//echo "<img src='" . _DIR_IMG_PACK . "rien.gif' width=$largeur height=$hauteur_moyenne title=$tagtitle>";
+						//echo "<img src='" . chemin_image('rien.gif') . "' width=$largeur height=1 style='background-color:#333333;' title=$tagtitle>";
+						//echo "<img src='" . chemin_image('rien.gif') . "' width=$largeur height=$hauteur_moyenne title=$tagtitle>";
 					}
-					//echo "<img src='" . _DIR_IMG_PACK . "rien.gif' width=$largeur height=1 style='background-color:black;' title=$tagtitle>";
+					//echo "<img src='" . chemin_image('rien.gif') . "' width=$largeur height=1 style='background-color:black;' title=$tagtitle>";
 					//echo "</td>";
 					$n++;
 				}

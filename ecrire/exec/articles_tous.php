@@ -45,8 +45,8 @@ function exec_articles_tous_args($id_rubrique, $aff_art, $sel_lang, $var_ajaxcha
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('titre_page_articles_tous'), "accueil", "tout-site");
 
-		echo http_script('var img_deplierhaut = "'._DIR_IMG_PACK.'noeud_plus.gif";
-var img_deplierbas = "'._DIR_IMG_PACK.'noeud_moins.gif";');
+		echo http_script('var img_deplierhaut = "'. chemin_image('noeud_plus.gif') .'";
+var img_deplierbas = "'. chemin_image('noeud_moins.gif') . '";');
 
 		echo http_script('', 'dragdrop_interface.js');
 		echo http_script('', 'articles_tous_edite.js');
@@ -333,7 +333,7 @@ function afficher_rubriques_filles(&$article, &$enfant, &$text_article, $id_pare
 		$out .= "<li id='rubrique-$id_rubrique' class='treeItem " .
 			(($id_parent==0)?"sec":"rub") .
 			"'>" .
-			//$lesenfants?'<img src="'._DIR_IMG_PACK.'deplierhaut.gif" class="expandImage" />':'' .
+			//$lesenfants?'<img src="'. chemin_image('deplierhaut.gif') .'" class="expandImage" />':'' .
 		  "<span class='holder icone'> </span><a href='" .
 		   generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") .
 		   "' class='titre'>$titre</a>";
