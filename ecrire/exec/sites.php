@@ -22,7 +22,7 @@ function exec_sites_dist()
 }
 
 // http://doc.spip.org/@exec_sites_args
-function exec_sites_args($id_syndic, $pas)
+function exec_sites_args($id_syndic)
 {
 	if (!autoriser('voir','site',$id_syndic)
 	OR (!$row = sql_fetsel("*", "spip_syndic", "id_syndic=$id_syndic"))) {
