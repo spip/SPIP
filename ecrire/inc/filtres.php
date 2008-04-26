@@ -2310,28 +2310,28 @@ function filtre_cache_static($scripts,$type='js'){
 		  OR (!file_exists($nom))){
 		  	$fichier = "";
 		  	foreach($scripts as $script){
-		  		if (!is_array($script)){
+		  		if (!is_array($script)) {
+		  			$fichier .= "/* $script */\n";
 				  	if ($type=='css')
 				  		$script = url_absolue_css($script);
-		  			lire_fichier($script,$contenu);
-		  			$fichier .= $contenu . "\n";
+		  			lire_fichier($script, $contenu);
 		  		}
 		  		else {
+		  			$fichier .= "/* page: $script[0] $script[1] */\n";
 		  			parse_str($script[1],$contexte);
 		  			$contenu = evaluer_fond($script[0],$contexte);
+		  			$contenu = $contenu['texte'];
 		  			if ($type=='css'){
-							$self = url_absolue(self(true));
-							$path = $path = pathinfo($self);
-							$path = $path['dirname'].'/';
-							// passer les url relatives a la css d'origine en url absolues
-							$contenu = preg_replace(",url\s*\(\s*['\"]?([^'\"/][^:]*)['\"]?\s*\),Uims","url($path\\1)",$contenu);
-		  				
+						$self = url_absolue(self(true));
+						$path = $path = pathinfo($self);
+						$path = $path['dirname'].'/';
+						// passer les url relatives a la css d'origine en url absolues
+						$contenu = preg_replace(",url\s*\(\s*['\"]?([^'\"/][^:]*)['\"]?\s*\),Uims","url($path\\1)",$contenu);
 		  			}
-		  			$fichier .= $contenu['texte'];
 		  		}
+				$f = 'compacte_'.$type;
+	  			$fichier .= $f($contenu) . "\n\n";
 		  	}
-		  	// compacter
-		  	$fichier = compacte($fichier,$type);
 		  	// ecrire
 		  	ecrire_fichier($nom,$fichier);
 		  }
@@ -2341,39 +2341,57 @@ function filtre_cache_static($scripts,$type='js'){
 
 // http://doc.spip.org/@f_compacte_head
 function f_compacte_head($flux){
-	$self = url_absolue(self(true));
-	$path = $path = pathinfo($self);
-	$dir = preg_quote($path['dirname'].'/',',');
+	$url_page = substr(generer_url_public('A'), 0, -1);
+	$dir = preg_quote($url_page,',').'|'.preg_quote(url_absolue($url_page,','));
 
 	// rechercher les js, les agglomerer et les compacter, et mettre le tout dans un cache statique
 	$scripts = array();
-	preg_match_all(",<script\s[^>]*src=['\"]([^'\"]*)['\"][^>]*>\s*</script>,",$flux,$regs,PREG_SET_ORDER);
-	foreach($regs as $script){
-		$src = $script[1];
-		if (preg_match(",(".$dir."|)spip.php[?](page=([^&]*).*)$,",$src,$r)){
-			$src = array($r[3],str_replace('&amp;','&',$r[2]));
+	foreach (extraire_balises($flux,'script') as $s) {
+		if (extraire_attribut($s, 'type') === 'text/javascript'
+		AND $src = extraire_attribut($s, 'src')
+		AND !strlen(strip_tags($s))
+		AND (
+			preg_match(',^('.$dir.')(.*)$,', $src, $r)
+			OR (
+				!preg_match(',(^/|\.\.),', $src)
+				AND @is_readable($src)
+			)
+		)) {
+			if ($r)
+				$scripts[$s] = explode('&',
+					str_replace('&amp;', '&', $r[2]), 2);
+			else
+				$scripts[$s] = $src;
 		}
-		$scripts[$script[0]] = $src;
 	}
 	if ($src = filtre_cache_static($scripts,'js')){
 		$scripts = array_keys($scripts);
-		$flux = str_replace(reset($scripts),"<script type='text/javascript' src='$src'></script>",$flux);
+		$flux = str_replace(reset($scripts),
+			"<script type='text/javascript' src='$src'></script>\n",$flux);
 		$flux = str_replace($scripts,"",$flux);
 	}
 
 	// rechercher les css, les agglomerer et les compacter, par type de media
 	$css = array();
-	preg_match_all(",<link\s[^>]*href=['\"]([^'\"]*)['\"][^>]*>,",$flux,$regs,PREG_SET_ORDER);
-	foreach($regs as $style){
-		if (preg_match(',rel=["\']stylesheet["\'],i',$style[0])) {
-			$m = 0;
-			// regarder si un media est dispo
-			preg_match(',media=["\']([^\'"]*)["\'],i',$style[0],$m);
-			$src = $style[1];
-			if (preg_match(",(".$dir."|)spip.php[?](page=([^&]*).*)$,",$src,$r)){
-				$src = array($r[3],str_replace('&amp;','&',$r[2]));
-			}
-			$css[$m[1]][$style[0]] = $src;
+	foreach (extraire_balises($flux, 'link') as $s) {
+		if (extraire_attribut($s, 'rel') === 'stylesheet'
+		AND (!($type = extraire_attribut($s, 'type'))
+			OR $type == 'text/css')
+		AND !strlen(strip_tags($s))
+		AND $src = extraire_attribut($s, 'href')
+		AND (
+			preg_match(',^('.$dir.')(.*)$,', $src, $r)
+			OR (
+				!preg_match(',(^/|\.\.),', $src)
+				AND @is_readable($src)
+			)
+		)) {
+			$media = strval(extraire_attribut($s, 'media'));
+			if ($r)
+				$css[$media][$s] = explode('&',
+					str_replace('&amp;', '&', $r[2]), 2);
+			else
+				$css[$media][$s] = $src;
 		}
 	}
 
@@ -2383,11 +2401,13 @@ function f_compacte_head($flux){
 		if (count($s)>1 OR is_array(reset($s))){
 			if ($src = filtre_cache_static($s,'css')){
 				$s = array_keys($s);
-				$flux = str_replace(reset($s),"<link rel='stylesheet'".($m?" media='$m'":"")." href='$src' />",$flux);
+				$flux = str_replace(reset($s),
+					"<link rel='stylesheet'".($m?" media='$m'":"")." href='$src' type='text/css' />\n",$flux);
 				$flux = str_replace($s,"",$flux);
 			}
 		}
 	}
+
 	return $flux;
 }
 
