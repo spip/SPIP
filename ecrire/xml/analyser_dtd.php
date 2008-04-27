@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('xml/interfaces');
 
+// http://doc.spip.org/@charger_dtd
 function charger_dtd($grammaire, $avail)
 {
 	spip_timer('dtd');

@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 include_spip('base/abstract_sql');
 
+// http://doc.spip.org/@install_etape_2_dist
 function install_etape_2_dist()
 {
 	$adresse_db = defined('_INSTALL_HOST_DB')
@@ -98,6 +99,7 @@ function install_etape_2_dist()
 // Liste les bases accessibles, 
 // avec une heuristique pour preselectionner la plus probable
 
+// http://doc.spip.org/@install_etape_2_bases
 function install_etape_2_bases($login_db, $server_db)
 {
 	$res =  install_etape_liste_bases($server_db);
@@ -144,6 +146,7 @@ function install_etape_2_bases($login_db, $server_db)
 	return array($checked, $res);
 }
 
+// http://doc.spip.org/@install_etape_2_form
 function install_etape_2_form($hidden, $checked, $res, $etape)
  {
 	return generer_form_ecrire('install', (

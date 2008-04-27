@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@inc_install_1
+// http://doc.spip.org/@install_etape_1_dist
 function install_etape_1_dist()
 {
 	echo install_debut_html();

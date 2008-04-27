@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 
-// http://doc.spip.org/@inc_install_ldap2
+// http://doc.spip.org/@install_etape_ldap2_dist
 function install_etape_ldap2_dist()
 {
 	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');

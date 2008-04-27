@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 include_spip('inc/headers');
 include_spip('base/abstract_sql');
 
+// http://doc.spip.org/@install_bases_sup
 function install_bases_sup($adresse_db, $login_db, $pass_db,  $server_db, $sup_db){
 
 	if (!($GLOBALS['connexions'][$server_db] = spip_connect_db($adresse_db, 0, $login_db, $pass_db, '', $server_db)))
@@ -57,6 +58,7 @@ function install_bases_sup($adresse_db, $login_db, $pass_db,  $server_db, $sup_d
 	return '<div style="background-color: #eeeeee">' . $res . '</div>';
 }
 
+// http://doc.spip.org/@install_etape_sup2_dist
 function install_etape_sup2_dist()
 {
 	$adresse_db = _request('adresse_db');

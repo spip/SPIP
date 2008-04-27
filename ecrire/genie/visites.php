@@ -203,6 +203,7 @@ function calculer_visites($t) {
 //
 // Calcule les stats en plusieurs etapes
 //
+// http://doc.spip.org/@genie_visites_dist
 function genie_visites_dist($t) {
 	$encore = calculer_visites($t);
 

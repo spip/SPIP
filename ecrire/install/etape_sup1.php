@@ -20,6 +20,7 @@ include_spip('install/etape_2');
 // Le serveur n'est pas forcement celui standard
 // mais on se rabat dessus si on n'a pas mieux.
 
+// http://doc.spip.org/@install_etape_sup1_dist
 function install_etape_sup1_dist()
 {
 	$adresse_db = _request('adresse_db');
@@ -81,6 +82,7 @@ function install_etape_sup1_dist()
 	echo install_fin_html();
 }
 
+// http://doc.spip.org/@install_etape_sup1_form
 function install_etape_sup1_form($hidden, $checked, $bases, $etape)
  {
 	if ($bases) {
