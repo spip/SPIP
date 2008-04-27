@@ -163,7 +163,7 @@ function decrire_logo($id_objet, $mode, $id, $width, $height, $img, $titre="", $
 				. ajax_action_auteur("iconifier", "$id-$nom.$format",
 				$script, "$id_objet=$id&type=$id_objet",
 				array(_T('lien_supprimer')),
-				'',"function(r,status) {this.innerHTML = r; \$('.form_upload_icon',this).async_upload(async_upload_icon);}") ."]"
+				'',"function(r,status) {this.innerHTML = r; \$('form.form_upload_icon',this).async_upload(async_upload_icon);}") ."]"
 			: '')
 			. "</div>");
 }
