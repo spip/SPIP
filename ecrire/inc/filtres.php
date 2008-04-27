@@ -2334,6 +2334,8 @@ function filtre_cache_static($scripts,$type='js'){
 		  	}
 		  	// ecrire
 		  	ecrire_fichier($nom,$fichier);
+		  	// ecrire une version .gz pour content-negociation par apache, cf. [11539]
+		  	ecrire_fichier("$nom.gz",$fichier);
 		  }
 	}
 	return $nom;

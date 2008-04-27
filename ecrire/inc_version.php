@@ -423,7 +423,7 @@ AND $flag_ob
 AND strlen(ob_get_contents())==0
 AND !headers_sent()) {
 	if (
-	($GLOBALS['auto_compress']!=false AND $GLOBALS['meta']['auto_compress']=='oui')
+	($GLOBALS['auto_compress']!=false)# AND $GLOBALS['meta']['auto_compress']=='oui')
 	&& function_exists('ob_gzhandler')
 	// special bug de proxy
 	&& !(isset($_SERVER['HTTP_VIA']) AND preg_match(",NetCache|Hasd_proxy,i", $_SERVER['HTTP_VIA']))
