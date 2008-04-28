@@ -67,7 +67,7 @@ function echapper_php_callback($r) {
 	// on enregistre le code a echapper dans dst, et le code echappe dans src
 	if (is_array($r)) {
 		$dst[] = $r[0];
-		return $src[] = ' ___'.md5($r[0]).'___ ';
+		return $src[] = '___'.md5($r[0]).'___';
 	}
 
 	// si on recoit une chaine, on est en mode remplacement
