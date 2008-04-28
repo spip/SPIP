@@ -892,7 +892,8 @@ function " . $nom . '($Cache, $Pile, $doublons=array(), $Numrows=array(), $SP=0)
 	// avant de referencer $Cache
 	$corps . ";
 
-	return analyse_resultat_skel('$nom', \$Cache, \$page);
+	return analyse_resultat_skel(".var_export($nom,true)
+		.", \$Cache, \$page, ".var_export($sourcefile,true).");
 }
 
 ?".">";

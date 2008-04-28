@@ -2123,8 +2123,15 @@ function f_jQuery ($texte) {
 			array("#INSERT_HEAD",_T('double_occurrence')))
 		) . $texte;
 	} else {
-		$texte = "\n<script src=\"".generer_url_public('jquery.js')
-			. "\" type=\"text/javascript\"></script>\n".$texte;
+		foreach (pipeline('jquery_plugins',
+		array(
+			'javascript/jquery.js',
+			'javascript/jquery.form.js',
+			'javascript/ajaxCallback.js'
+		)) as $script)
+			if ($script = find_in_path($script))
+				$x .= "\n<script src=\"$script\" type=\"text/javascript\"></script>\n";
+		$texte = $x.$texte;
 	}
 	return $texte;
 }
@@ -2309,15 +2316,18 @@ function filtre_cache_static($scripts,$type='js'){
 		  (_request('var_mode')=='recalcul')
 		  OR (!file_exists($nom))){
 		  	$fichier = "";
+		  	$comms = array();
+		  	$total = 0;
 		  	foreach($scripts as $script){
 		  		if (!is_array($script)) {
-		  			$fichier .= "/* $script */\n";
+		  			$comm = $script;
 				  	if ($type=='css')
 				  		$script = url_absolue_css($script);
 		  			lire_fichier($script, $contenu);
 		  		}
 		  		else {
-		  			$fichier .= "/* page: $script[0] $script[1] */\n";
+		  			$comm = "page=$script[0]"
+		  				. (strlen($script[1])?"($script[1])":'');
 		  			parse_str($script[1],$contexte);
 		  			$contenu = evaluer_fond($script[0],$contexte);
 		  			$contenu = $contenu['texte'];
@@ -2330,19 +2340,26 @@ function filtre_cache_static($scripts,$type='js'){
 		  			}
 		  		}
 				$f = 'compacte_'.$type;
-	  			$fichier .= $f($contenu) . "\n\n";
+	  			$fichier .= "/* $comm */\n". $f($contenu) . "\n\n";
+				$comms[] = $comm;
+				$total += strlen($contenu);
 		  	}
+			// calcul du % de compactage
+			$pc = intval(1000*strlen($fichier)/$total)/10;
+			$comms = "compact [\n\t".join("\n\t", $comms)."\n] $pc%";
+			$fichier = "/* $comms */\n\n".$fichier;
+
 		  	// ecrire
 		  	ecrire_fichier($nom,$fichier);
 		  	// ecrire une version .gz pour content-negociation par apache, cf. [11539]
 		  	ecrire_fichier("$nom.gz",$fichier);
 		  }
 	}
-	return $nom;
+	return array($nom, "<!-- $comms -->\n");
 }
 
-// http://doc.spip.org/@f_compacte_head
-function f_compacte_head($flux){
+// http://doc.spip.org/@compacte_head
+function compacte_head($flux){
 	$url_page = substr(generer_url_public('A'), 0, -1);
 	$dir = preg_quote($url_page,',').'|'.preg_quote(url_absolue($url_page,','));
 
@@ -2366,10 +2383,11 @@ function f_compacte_head($flux){
 				$scripts[$s] = $src;
 		}
 	}
-	if ($src = filtre_cache_static($scripts,'js')){
+	if (list($src,$comms) = filtre_cache_static($scripts,'js')){
 		$scripts = array_keys($scripts);
 		$flux = str_replace(reset($scripts),
-			"<script type='text/javascript' src='$src'></script>\n",$flux);
+			$comms
+			."<script type='text/javascript' src='$src'></script>\n",$flux);
 		$flux = str_replace($scripts,"",$flux);
 	}
 
@@ -2403,10 +2421,11 @@ function f_compacte_head($flux){
 	foreach($css as $m=>$s){
 		// si plus d'une css pour ce media ou si c'est une css dynamique
 		if (count($s)>1 OR is_array(reset($s))){
-			if ($src = filtre_cache_static($s,'css')){
+			if (list($src,$comms) = filtre_cache_static($s,'css')){
 				$s = array_keys($s);
 				$flux = str_replace(reset($s),
-					"<link rel='stylesheet'".($m?" media='$m'":"")." href='$src' type='text/css' />\n",$flux);
+					$comms
+					."<link rel='stylesheet'".($m?" media='$m'":"")." href='$src' type='text/css' />\n",$flux);
 				$flux = str_replace($s,"",$flux);
 			}
 		}

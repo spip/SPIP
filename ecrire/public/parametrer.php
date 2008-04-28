@@ -58,8 +58,26 @@ function calculer_contexte() {
 	return $contexte;
 }
 
+
+function echapper_php_callback($r) {
+	static $src = array();
+	static $dst = array();
+
+	// si on recoit un tableau, on est en mode echappement
+	// on enregistre le code a echapper dans dst, et le code echappe dans src
+	if (is_array($r)) {
+		$dst[] = $r[0];
+		return $src[] = ' ___'.md5($r[0]).'___ ';
+	}
+
+	// si on recoit une chaine, on est en mode remplacement
+	$r = str_replace($src, $dst, $r);
+	$src = $dst = array(); // raz de la memoire
+	return $r;
+}
+
 // http://doc.spip.org/@analyse_resultat_skel
-function analyse_resultat_skel($nom, $cache, $corps) {
+function analyse_resultat_skel($nom, $cache, $corps, $source='') {
 	$headers = array();
 
 	// Recupere les < ?php header('Xx: y'); ? > pour $page['headers']
@@ -82,8 +100,25 @@ function analyse_resultat_skel($nom, $cache, $corps) {
 		? 'html'
 		: 'php';
 
+	// traiter #FILTRE{} ?
+	if (isset($headers['X-Spip-Filtre'])
+	AND strlen($headers['X-Spip-Filtre'])) {
+		// proteger les <INCLUDE> et tous les morceaux de php
+		if ($process_ins == 'php')
+			$corps = preg_replace_callback(',<[?](\s|php|=).*[?]>,UimsS',
+				echapper_php_callback, $corps);
+		foreach (explode(',', $headers['X-Spip-Filtre']) as $filtre) {
+			$corps = appliquer_filtre($corps, $filtre);
+		}
+		// restaurer les echappements
+		$corps = echapper_php_callback($corps);
+		unset($headers['X-Spip-Filtre']);
+	}
+
+
 	return array('texte' => $corps,
 		'squelette' => $nom,
+		'source' => $source,
 		'process_ins' => $process_ins,
 		'invalideurs' => $cache,
 		'entetes' => $headers,
@@ -244,22 +279,17 @@ function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 		// 2. $fond est passe par reference, pour la meme raison
 		// Bref,  les URL dites propres ont une implementation sale.
 		// Interdit de nettoyer, faut assumer l'histoire.
-		global $contexte;
-		$contexte = calculer_contexte();
+		$GLOBALS['contexte'] = calculer_contexte();
 		if (!$renommer_urls) {
 			// compatibilite < 1.9.3
 			charger_generer_url();
 			if (function_exists('recuperer_parametres_url'))
 				$renommer_urls = 'recuperer_parametres_url';
 		}
-		if ($renommer_urls) {
+		if ($renommer_urls)
 			$renommer_urls($fond, nettoyer_uri());
-			// remettre les globales (bouton "Modifier cet article" etc)
-			foreach ($contexte as $var=>$val) {
-				if (substr($var,0,3) == 'id_') $GLOBALS[$var] = $val;
-			}
-		}
-		$local = $contexte;
+
+		$local = $GLOBALS['contexte'];
 
 		// si le champ chapo commence par '=' c'est une redirection.
 		// avec un eventuel raccourci Spip
@@ -340,14 +370,19 @@ function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 		$GLOBALS['les_notes'] = $notes;
 
 		// spip_log: un joli contexte
-		$info = array();
-		foreach($local as $var => $val)
-			if($val)
-				$info[] = "$var='$val'";
+		$infos = array();
+		foreach (array_filter($local) as $var => $val) {
+			if (is_array($val)) $val = "[".join($val)."]";
+			if (strlen("$val") > 20)
+				$val = substr("$val", 0,17).'..';
+			if (strstr($val,' '))
+				$val = "'$val'";
+			$infos[] = $var.'='.$val;
+		}
 		spip_log("calcul ("
 			.($profile = spip_timer($a))
 			.") [$skel] "
-			. join(', ',$info)
+			. join(', ', $infos)
 			.' ('.strlen($page['texte']).' octets)'
 		);
 		if ($debug)

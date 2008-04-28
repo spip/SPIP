@@ -6,7 +6,7 @@
  *    
  * @author Renato Formato <renatoformato@virgilio.it> 
  *  
- * @version 0.34
+ * @version 0.35
  *
  *  Options
  *  - exact (string, default:"exact") 
@@ -45,6 +45,7 @@
  *   
  */
 
+if (window.jQuery)
 (function($){
   jQuery.fn.SearchHighlight = function(options) {
     var ref = options.debug_referrer || document.referrer;

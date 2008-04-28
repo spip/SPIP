@@ -53,9 +53,12 @@ function surligner_mots($page) {
     if($surcharge_surligne || (preg_match($engine[0],$ref) && preg_match($engine[1],$ref))) { 
       
       //good referrer found or var_recherche is not null
-      $script = "<script type='text/javascript'>
-        jQuery(function(){
-          jQuery(document).SearchHighlight({
+      $script = "
+      <script type='text/javascript' src='".url_absolue(find_in_path('javascript/SearchHighlight.js'))."'></script>
+      <script type='text/javascript'>
+      if (window.jQuery)
+        (function(\$){\$(function(){
+          \$(document).SearchHighlight({
             style_name:'spip_surligne',
             exact:'whole',
             style_name_suffix:false,
@@ -67,14 +70,13 @@ function surligner_mots($page) {
             min_length: 3
           })
         });
+      })(jQuery);
       </script>
       ";
-      if(jquery_chargee($page)) {
-       //add javascript/SearchHighlight.js to the template jquery.js.html
-       $page = ajouter_js_affichage_final($page,"SearchHighlight");
-       //add a script inline into the <head>
-       $page = ajouter_js_affichage_final($page,$script,true);        
-      }
+      // on l'insere juste avant </head>, sinon tout en bas
+       if (is_null($l = strpos($page,'</head>')))
+       	$l = strlen($page);
+       $page = substr_replace($page, $script, $l,0);
       break;
     }
   return $page;
