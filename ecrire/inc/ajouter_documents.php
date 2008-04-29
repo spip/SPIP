@@ -262,13 +262,14 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 			'args' => array(
 				'operation' => 'ajouter_document',
 				'table' => 'spip_documents',
-				'id_objet' => $id
+				'id_objet' => $id,
+				'type_image' => $type_image
 			),
 			'data' => null
 		)
 	);
 
-	return $type_image;
+	return $id ;
 }
 
 // http://doc.spip.org/@verifier_compactes
