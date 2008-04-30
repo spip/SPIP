@@ -59,21 +59,18 @@ function public_stats_dist() {
 	// et ecrire la session
 	if (count($content) < 200) {
 
-	// Identification de l'element
-	// Attention il s'agit bien des $GLOBALS, regles (dans le cas des urls
-	// personnalises), par la carte d'identite de la page... ne pas utiliser
-	// _request() ici !
-		if (isset($GLOBALS['id_article']))
+		// Identification de l'element
+		if (isset($GLOBALS['contexte']['id_article']))
 			$log_type = "article";
-		else if (isset($GLOBALS['id_breve']))
+		else if (isset($GLOBALS['contexte']['id_breve']))
 			$log_type = "breve";
-		else if (isset($GLOBALS['id_rubrique']))
+		else if (isset($GLOBALS['contexte']['id_rubrique']))
 			$log_type = "rubrique";
 		else
 			$log_type = "";
 
 		if ($log_type)
-			$log_type .= "\t" . intval($GLOBALS["id_$log_type"]);
+			$log_type .= "\t" . intval($GLOBALS['contexte']["id_$log_type"]);
 		else    $log_type = "autre\t0";
 
 		$log_type .= "\t" . trim($log_referer);
