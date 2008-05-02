@@ -1,0 +1,46 @@
+<div class='formfx editer_rubrique'>
+	<br class='spacer' />
+	[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+	[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data' class='noajax'>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <input type='hidden' name='id_article' value='#ENV{id_article}' />
+	  <fieldset>
+	  <ol class="formfx">
+	    <li class="gauche obligatoire">
+	      <label for="titre"><:info_titre:><em>#AIDER{arttitre}</em></label>
+	      <input type='text' name='titre' id='titre' class='formo' value="[(#ENV**{titre,#REM|concat{info_nouvel_article}|_T})]"
+				[(#ENV{titre,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{titre})</span>]
+	    </li>
+	
+	    [<li>(#VAL{titre_cadre_interieur_rubrique}|_T|concat{' ',#AIDER{rubrub}}
+	    |chercher_rubrique{#ENV{id_rubrique},'rubrique',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint}})</li>]
+	
+	  	[(#ENV**{config}|table_valeur{rubriques_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|?{' '})
+	    <li class="haut">
+	      <label for="descriptif"><:texte_descriptif_rapide:></label>
+	      <div class='commentaire'><:entree_contenu_rubrique:></div>
+	      <textarea name='descriptif' id='descriptif' class='forml' rows='2' cols='40'>[(#ENV**{descriptif})]</textarea>
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{desctiptif})</span>]
+	    </li>]
+	  	[(#ENV**{config}|table_valeur{rubriques_texte}|=={non}|?{#ENV**{texte,''},' '}|?{' '})
+	    <li class="haut">
+	      <label for="text_area"><:info_texte_explicatif:><em>#AIDER{raccourcis}</em></label>
+	    	[(#ENV**{_texte_trop_long,''})]
+	      <div class="commentaire"><:texte_enrichir_mise_a_jour:><em>#AIDER{raccourcis}</em></div>
+	      <textarea name='texte' id='text_area' class='formo barre_inserer' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[
+	      (#ENV**{browser_caret,''})]>[(#ENV**{texte})]</textarea>
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{texte})</span>]
+	    </li>]
+	  </ol>
+	  </fieldset>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <div style='text-align: right'><input class='fondo' type='submit' value='<:bouton_enregistrer:>' /></div>
+	</form>
+	]
+</div>

@@ -12,6 +12,10 @@ dist/formulaires/editer_article/charger.php -text
 dist/formulaires/editer_article/traiter.php -text
 dist/formulaires/editer_article/verifier.php -text
 dist/formulaires/editer_article_fonctions.php -text
+dist/formulaires/editer_rubrique.html -text
+dist/formulaires/editer_rubrique/charger.php -text
+dist/formulaires/editer_rubrique/traiter.php -text
+dist/formulaires/editer_rubrique/verifier.php -text
 dist/formulaires/formulaire_.html -text
 dist/formulaires/login_forum_abo.html -text
 dist/formulaires/logo_auteur.html -text
@@ -302,6 +306,7 @@ dist/prive/contenu/breve.html -text
 dist/prive/contenu/rubrique.html -text
 dist/prive/contenu/site.html -text
 dist/prive/editer/article.html -text
+dist/prive/editer/rubrique.html -text
 dist/prive/infos/article.html -text
 dist/prive/infos/article_fonctions.php -text
 dist/prive/infos/auteur.html -text

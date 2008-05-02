@@ -1,4 +1,4 @@
-<div class='formfx'>
+<div class='formfx editer_article'>
 	<br class='spacer' />
 	[<p class="formulaire_message">(#ENV*{message_ok})</p>]
 	[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
@@ -29,14 +29,14 @@
 				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{soustitre})</span>]
 	    </li>]
 	
-	    [<li>(#REM|sinon{titre_cadre_interieur_rubrique}|_T|concat{' ',#AIDER{artrub}}
-	    |chercher_rubrique{#ENV{id_rubrique}, #ENV{id_secteur},#ENV**{config}|table_valeur{restreint}})</li>]
+	    [<li>(#VAL{titre_cadre_interieur_rubrique}|_T|concat{' ',#AIDER{artrub}}
+	    |chercher_rubrique{#ENV{id_rubrique},'article',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint}})</li>]
 	
 	  	[(#ENV**{config}|table_valeur{articles_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|?{' '})
 	    <li class="haut">
 	      <label for="descriptif"><:texte_descriptif_rapide:><em>#AIDER{artdesc}</em></label>
 	      <textarea name='descriptif' id='descriptif' class='forml' rows='2' cols='40'>[(#ENV**{descriptif})]</textarea>
-				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{desctiptid})</span>]
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{desctiptif})</span>]
 	    </li>]
 	  	[(#ENV**{config}|table_valeur{articles_chapeau}|=={non}|?{#ENV**{chapo,''},' '}|?{' '})
 	    [<li class='haut redirection'>(#ENV**{chapo}|match{^=}|?{' '})

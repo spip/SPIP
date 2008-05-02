@@ -2448,4 +2448,32 @@ function f_extra_editer_contenu_objet($flux){
 	return $flux;
 }
 
+
+function chercher_rubrique($msg, $id_rubrique, $type, $id_secteur, $restreint){
+	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
+	$opt = $chercher_rubrique($id_rubrique, $type, $restreint);
+
+	if ($id_rubrique == 0) $logo = "racine-site-24.gif";
+	elseif ($id_secteur == $id_rubrique) $logo = "secteur-24.gif";
+	else $logo = "rubrique-24.gif";
+
+	$confirm = "";
+	if ($type=='rubrique') {
+		// si c'est une rubrique-secteur contenant des breves, demander la
+		// confirmation du deplacement
+		$contient_breves = sql_countsel('spip_breves', "id_rubrique=$id_rubrique",'',2);
+	
+		if ($contient_breves > 0) {
+			$scb = ($contient_breves>1? 's':'');
+			$scb = _T('avis_deplacement_rubrique',
+				array('contient_breves' => $contient_breves,
+				      'scb' => $scb));
+			$confirm .= "\n<div class='confirmer_deplacement verdana2'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace' /><label for='confirme-deplace'>" . $scb . "</label></div>\n";
+		} else
+			$confirm .= "<input type='hidden' name='confirme_deplace' value='oui' />\n";
+	}
+	include_spip('inc/presentation');
+	return debut_cadre_couleur($logo, true, "", $msg) . $opt . $confirm .fin_cadre_couleur(true);
+}
+
 ?>
