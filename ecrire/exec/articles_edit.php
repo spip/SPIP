@@ -30,7 +30,8 @@ function exec_articles_edit_dist()
 // http://doc.spip.org/@exec_articles_edit_args
 function exec_articles_edit_args($id_article, $id_rubrique,$lier_trad,  $id_version, $new)
 {
-	$row = article_select($id_article ? $id_article : $new, $id_rubrique,  $lier_trad, $id_version);
+	$article_select = charger_fonction('article_select','inc');
+	$row = $article_select($id_article ? $id_article : $new, $id_rubrique,  $lier_trad, $id_version);
 	$id_rubrique = $row['id_rubrique'];
 
 	if (!$row
