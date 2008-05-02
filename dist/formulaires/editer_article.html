@@ -91,11 +91,8 @@
 	    </li>]
 	  </ol>
 	  </fieldset>
-	  [(#ENV**{config}|table_valeur{extra}|?{
-	
-	    	[(#ENV**{extra}|editer_extra{#ENV{id_secteur}})]
-	
-	  })]
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
 	  <div style='text-align: right'><input class='fondo' type='submit' value='<:bouton_enregistrer:>' /></div>
 	</form>
 	]
