@@ -20,7 +20,7 @@ include_spip('inc/autoriser'); // necessaire si appel de l'espace public
 // id_rubrique = ou veut-on l'installer (pas obligatoire)
 // lier_trad = l'associer a l'article numero $lier_trad
 // new=oui = article a creer si on valide le formulaire
-// http://doc.spip.org/@article_select
+// http://doc.spip.org/@inc_article_select_dist
 function inc_article_select_dist($id_article, $id_rubrique=0, $lier_trad=0, $id_version=0) {
 	global $connect_id_rubrique, $spip_lang; 
 

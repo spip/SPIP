@@ -819,6 +819,7 @@ define('SPIP_BOTH', MYSQL_BOTH);
 define('SPIP_ASSOC', MYSQL_ASSOC);
 define('SPIP_NUM', MYSQL_NUM);
 
+// http://doc.spip.org/@article_select
 function article_select($id_article, $id_rubrique=0, $lier_trad=0, $id_version=0) {
 	$article_select = charger_fonction('article_select','inc');
 	return $article_select($id_article,$id_rubrique,$lier_trad,$id_version);
