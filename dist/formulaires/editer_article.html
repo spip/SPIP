@@ -29,8 +29,8 @@
 				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{soustitre})</span>]
 	    </li>]
 	
-	    [(#REM|sinon{titre_cadre_interieur_rubrique}|_T|concat{' ',#AIDER{artrub}}
-	    |chercher_rubrique{#ENV{id_rubrique}, #ENV{id_secteur},#ENV**{config}|table_valeur{restreint}})]
+	    [<li>(#REM|sinon{titre_cadre_interieur_rubrique}|_T|concat{' ',#AIDER{artrub}}
+	    |chercher_rubrique{#ENV{id_rubrique}, #ENV{id_secteur},#ENV**{config}|table_valeur{restreint}})</li>]
 	
 	  	[(#ENV**{config}|table_valeur{articles_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|?{' '})
 	    <li class="haut">
@@ -52,6 +52,7 @@
 			</li>]
 			]
 	  	[(#ENV**{config}|table_valeur{articles_urlref}|=={non}|?{#ENV**{url_site,#ENV**{nom_site,''}},' '}|?{' '})
+	  	<li>
 	    <fieldset>
 	      <legend><:entree_liens_sites:></legend><ol>
 	    <li class="gauche">
@@ -64,7 +65,7 @@
 	      <input type='text' name='url_site' id='url_site' class='forml' value="[(#ENV**{url_site})]" />
 				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{url_site})</span>]
 	    </li></ol>
-	    </fieldset>]
+	    </fieldset></li>]
 	  	[(#ENV**{config}|table_valeur{articles_texte}|=={non}|?{#ENV**{texte,''},' '}|?{' '})
 	    <li class="haut">
 	      <label for="text_area"><:info_texte:><em>#AIDER{arttexte}</em></label>
