@@ -21,7 +21,7 @@ include_spip('inc/autoriser'); // necessaire si appel de l'espace public
 // lier_trad = l'associer a l'article numero $lier_trad
 // new=oui = article a creer si on valide le formulaire
 // http://doc.spip.org/@article_select
-function article_select($id_article, $id_rubrique=0, $lier_trad=0, $id_version=0) {
+function inc_article_select_dist($id_article, $id_rubrique=0, $lier_trad=0, $id_version=0) {
 	global $connect_id_rubrique, $spip_lang; 
 
 	if (is_numeric($id_article)) {
@@ -50,6 +50,7 @@ function article_select($id_article, $id_rubrique=0, $lier_trad=0, $id_version=0
 		}
 		return $row;
 	}
+
 	// id_article non numerique, c'est une demande de creation.
 	// Si c'est une demande de nouvelle traduction, init specifique
 	if ($lier_trad)
@@ -127,7 +128,6 @@ function article_select_trad($lier_trad) {
 				$row['id_rubrique'] = $row_rub['id_rubrique'];
 		}
 	}
-
 	return $row;
 }
 
