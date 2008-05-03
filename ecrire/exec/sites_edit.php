@@ -74,6 +74,18 @@ function exec_sites_edit_dist()
 	echo debut_droite('', true);
 	echo debut_cadre_formulaire("", true);
 
+	$contexte = array(
+	'icone_retour'=>$new=='oui'?'':icone_inline(_T('icone_retour'), generer_url_ecrire("sites","id_syndic=$id_syndic"), "site-24.gif", "rien.gif",$GLOBALS['spip_lang_right']),
+	'redirect'=>generer_url_ecrire("sites"),
+	'titre'=>$nom_site,
+	'new'=>$new == "oui"?$new:$id_syndic,
+	'id_rubrique'=>$id_rubrique,
+	'config_fonc'=>'sites_edit_config'
+	);
+	$page = evaluer_fond("prive/editer/site", $contexte, $connect);
+	echo $page['texte'];
+
+/*
 	if ($new != 'oui') {
 		echo icone_inline(_T('icone_retour'), generer_url_ecrire("sites","id_syndic=$id_syndic"), 'site-24.gif', "rien.gif", $spip_lang_right);
 	}
@@ -213,8 +225,8 @@ function exec_sites_edit_dist()
 				      generer_url_ecrire('sites'),
 				      $form,
 				      " method='post'"
-				      );
-	
+				      );*/
+
 	echo fin_cadre_formulaire(true);
 	
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'sites_edit','id_syndic'=>$id_syndic),'data'=>''));
