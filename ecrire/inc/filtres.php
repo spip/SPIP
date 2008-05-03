@@ -2362,6 +2362,7 @@ function filtre_cache_static($scripts,$type='js'){
 function compacte_head($flux){
 	$url_page = substr(generer_url_public('A'), 0, -1);
 	$dir = preg_quote($url_page,',').'|'.preg_quote(url_absolue($url_page,','));
+	$url_base = url_de_base();
 
 	// rechercher les js, les agglomerer et les compacter, et mettre le tout dans un cache statique
 	$scripts = array();
@@ -2372,7 +2373,7 @@ function compacte_head($flux){
 		AND (
 			preg_match(',^('.$dir.')(.*)$,', $src, $r)
 			OR (
-				!preg_match(',(^/|\.\.),', $src)
+				!preg_match(',(^/|\.\.),', substr($src,strlen(_DIR_RACINE)))
 				AND @is_readable($src)
 			)
 		)) {
@@ -2400,11 +2401,11 @@ function compacte_head($flux){
 		AND is_null(extraire_attribut($s, 'name')) # css nommee : pas touche
 		AND is_null(extraire_attribut($s, 'id'))   # idem
 		AND !strlen(strip_tags($s))
-		AND $src = extraire_attribut($s, 'href')
+		AND $src = preg_replace(",^$url_base,",_DIR_RACINE,extraire_attribut($s, 'href'))
 		AND (
 			preg_match(',^('.$dir.')(.*)$,', $src, $r)
 			OR (
-				!preg_match(',(^/|\.\.),', $src)
+				!preg_match(',(^/|\.\.),', substr($src,strlen(_DIR_RACINE)))
 				AND @is_readable($src)
 			)
 		)) {
