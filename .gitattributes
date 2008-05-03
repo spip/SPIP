@@ -19,6 +19,11 @@ dist/formulaires/editer_rubrique.html -text
 dist/formulaires/editer_rubrique/charger.php -text
 dist/formulaires/editer_rubrique/traiter.php -text
 dist/formulaires/editer_rubrique/verifier.php -text
+dist/formulaires/editer_site.html -text
+dist/formulaires/editer_site/charger.php -text
+dist/formulaires/editer_site/traiter.php -text
+dist/formulaires/editer_site/verifier.php -text
+dist/formulaires/editer_site_fonctions.php -text
 dist/formulaires/formulaire_.html -text
 dist/formulaires/login_forum_abo.html -text
 dist/formulaires/logo_auteur.html -text
