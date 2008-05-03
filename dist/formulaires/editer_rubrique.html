@@ -12,13 +12,13 @@
 	  <ol class="formfx">
 	    <li class="gauche obligatoire">
 	      <label for="titre"><:info_titre:><em>#AIDER{arttitre}</em></label>
-	      <input type='text' name='titre' id='titre' class='formo' value="[(#ENV**{titre,#REM|concat{info_nouvel_article}|_T})]"
+	      <input type='text' name='titre' id='titre' class='formo' value="[(#ENV**{titre,#REM|concat{titre_nouvelle_rubrique}|_T})]"
 				[(#ENV{titre,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
 				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{titre})</span>]
 	    </li>
 	
 	    [<li>(#VAL{titre_cadre_interieur_rubrique}|_T|concat{' ',#AIDER{rubrub}}
-	    |chercher_rubrique{#ENV{id_rubrique},'rubrique',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint}})</li>]
+	    |chercher_rubrique{#ENV{id_rubrique},#ENV{id_parent},'rubrique',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint}})</li>]
 	
 	  	[(#ENV**{config}|table_valeur{rubriques_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|?{' '})
 	    <li class="haut">

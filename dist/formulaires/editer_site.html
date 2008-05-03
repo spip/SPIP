@@ -32,7 +32,7 @@
 				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{url_site})</span>]
 	    </li>
 	    [<li>(#VAL{titre_cadre_interieur_rubrique}|_T
-	    |chercher_rubrique{#ENV{id_rubrique},'site',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint}})</li>]
+	    |chercher_rubrique{#ENV{id_syndic},#ENV{id_rubrique}|sinon{#ENV{id_parent}},'site',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint}})</li>]
 	    <li class="haut">
 	      <label for="descriptif"><:entree_description_site:></label>
 	      <textarea name='descriptif' id='descriptif' class='forml' rows='2' cols='40'>[(#ENV**{descriptif})]</textarea>

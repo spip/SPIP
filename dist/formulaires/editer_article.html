@@ -30,7 +30,7 @@
 	    </li>]
 	
 	    [<li>(#VAL{titre_cadre_interieur_rubrique}|_T|concat{' ',#AIDER{artrub}}
-	    |chercher_rubrique{#ENV{id_rubrique},'article',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint}})</li>]
+	    |chercher_rubrique{#ENV{id_article},#ENV{id_rubrique},'article',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint}})</li>]
 	
 	  	[(#ENV**{config}|table_valeur{articles_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|?{' '})
 	    <li class="haut">
