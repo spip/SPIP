@@ -23,46 +23,49 @@ function exec_menu_rubriques_dist() {
 	if ($date = intval(_request('date')))
 		header("Last-Modified: ".gmdate("D, d M Y H:i:s", $date)." GMT");
 
-	if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
+	$r = gen_liste_rubriques(); 
+	if (!$r
+	AND isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
 	AND !strstr($_SERVER['SERVER_SOFTWARE'],'IIS/')) {
 		include_spip('inc/headers');
 		header('Content-Type: text/html; charset='. $GLOBALS['meta']['charset']);
 		http_status(304);
-	} else {
+		} else {
 
-	$largeur_t = ($spip_ecran == "large") ? 900 : 650;
-	gen_liste_rubriques(); 
-	$arr_low = extraire_article(0);
+		$largeur_t = ($spip_ecran == "large") ? 900 : 650;
 
-	$total_lignes = $i = sizeof($arr_low);
-	$ret = '';
+		$arr_low = extraire_article(0, $GLOBALS['db_art_cache']);
 
-	if ($i > 0) {
-		$nb_col = min(8,ceil($total_lignes / 30));
-		if ($nb_col <= 1) $nb_col =  ceil($total_lignes / 10);
-		$max_lignes = ceil($total_lignes / $nb_col);
-		$largeur = min(200, ceil($largeur_t / $nb_col)); 
-		$count_lignes = 0;
-		$style = " style='z-index: 0; vertical-align: top;'";
-		$image = " petit-secteur";
-		foreach( $arr_low as $id_rubrique => $titre_rubrique) {
-			if ($count_lignes == $max_lignes) {
-				$count_lignes = 0;
-				$ret .= "</div></td>\n<td$style><div class='bandeau_rubriques'>";
+		$total_lignes = $i = sizeof($arr_low);
+		$ret = '';
+
+		if ($i > 0) {
+			$nb_col = min(8,ceil($total_lignes / 30));
+			if ($nb_col <= 1) $nb_col =  ceil($total_lignes / 10);
+			$max_lignes = ceil($total_lignes / $nb_col);
+			$largeur = min(200, ceil($largeur_t / $nb_col)); 
+			$count_lignes = 0;
+			$style = " style='z-index: 0; vertical-align: top;'";
+			$image = " petit-secteur";
+			foreach( $arr_low as $id_rubrique => $titre_rubrique) {
+				if ($count_lignes == $max_lignes) {
+					$count_lignes = 0;
+
+					$ret .= "</div></td>\n<td$style><div class='bandeau_rubriques'>";
+				}
+				$count_lignes ++;
+				if (autoriser('voir','rubrique',$id_rubrique)){
+				  $ret .= bandeau_rubrique($id_rubrique, $titre_rubrique, $i, $largeur, $image);
+				  $i--;
+				}
 			}
-			$count_lignes ++;
-			if (autoriser('voir','rubrique',$id_rubrique)){
-			  $ret .= bandeau_rubrique($id_rubrique, $titre_rubrique, $i, $largeur, $image);
-			  $i--;
-			}
+
+			$ret = "<table><tr>\n<td$style><div class='bandeau_rubriques'>"
+			  . $ret
+			  . "\n</div></td></tr></table>\n";
 		}
 
-		$ret = "<table><tr>\n<td$style><div class='bandeau_rubriques'>"
-		. $ret
-		. "\n</div></td></tr></table>\n";
-	}
-
-	ajax_retour("<div>&nbsp;</div>" . $ret);
+		ajax_retour("<div>&nbsp;</div>" . $ret);
 	}
 }
 
@@ -87,7 +90,7 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal, $largeur, $ima
 		return "\n<div>$nav</div>";
 	}
 
-	$arr_rub = extraire_article($id_rubrique);
+	$arr_rub = extraire_article($id_rubrique, $GLOBALS['db_art_cache']);
 	$i = sizeof($arr_rub);
 	if (!$i) {
 		$zmax++;
@@ -150,51 +153,50 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal, $largeur, $ima
 }
 
 
-
 // http://doc.spip.org/@extraire_article
-function extraire_article($id_p) {
-	if (array_key_exists($id_p, $GLOBALS['db_art_cache'])) {
-		return $GLOBALS['db_art_cache'][$id_p];
-	} else {
-		return array();
-	}
+function extraire_article($id_p, $t) {
+	return array_key_exists($id_p, $t) ?  $t[$id_p]: array();
 }
 
 // http://doc.spip.org/@gen_liste_rubriques
 function gen_liste_rubriques() {
 
 	// ici, un petit fichier cache ne fait pas de mal
-	if (lire_fichier(_CACHE_RUBRIQUES, $cache)
-	AND list($date,$GLOBALS['db_art_cache']) = @unserialize($cache)
-	AND $date == $GLOBALS['meta']["date_calcul_rubriques"])
-		return; // c'etait en cache :-)
-
+	$last = $GLOBALS['meta']["date_calcul_rubriques"];
+	if (lire_fichier(_CACHE_RUBRIQUES, $cache)) {
+		list($date,$GLOBALS['db_art_cache']) = @unserialize($cache);
+		if ($date == $last) return false; // c'etait en cache :-)
+	}
 	// se restreindre aux rubriques utilisees recemment +secteurs
-	$liste=array(0); //$liste="0";
-	$s = sql_select("id_rubrique", "spip_rubriques", "", "", "id_parent=0 DESC, date DESC", 500);
-	while ($t = sql_fetch($s))
-		$liste[] = $t['id_rubrique']; //$liste .=",".$t['id_rubrique']; 
-	$liste = join(',',$liste);
-	$res = sql_select("id_rubrique, titre, id_parent", "spip_rubriques", "id_rubrique IN ($liste)",'', 'id_parent,0+titre,titre');
 
-	// il ne faut pas filtrer le autoriser voir ici car on met le resultat en cache, commun a tout le monde
+	$where = gen_sql_in("id_rubrique", "spip_rubriques", "", "", "id_parent=0 DESC, date DESC", _CACHE_RUBRIQUES_MAX);
+
+	// puis refaire la requete pour avoir l'ordre alphabetique
+
+	$res = sql_select("id_rubrique, titre, id_parent", "spip_rubriques", $where, '', 'id_parent, 0+titre, titre');
+
+	// il ne faut pas filtrer le autoriser voir ici 
+	// car on met le resultat en cache, commun a tout le monde
 	$GLOBALS['db_art_cache'] = array();
-	if (sql_count($res) > 0) { 
-		while ($row = sql_fetch($res)) {
-			$id = $row['id_rubrique'];
-			$parent = $row['id_parent'];
-			$GLOBALS['db_art_cache'][$parent][$id] = 
-					supprimer_numero(typo(sinon($row['titre'], _T('ecrire:info_sans_titre'))));
-		}
+	while ($r = sql_fetch($res)) {
+		$t = sinon($r['titre'], _T('ecrire:info_sans_titre'));
+		$GLOBALS['db_art_cache'][$r['id_parent']][$r['id_rubrique']] = supprimer_numero(typo($t));
 	}
 
-	// ecrire dans le cache
-	ecrire_fichier(_CACHE_RUBRIQUES,
-		serialize(array(
-			$GLOBALS['meta']["date_calcul_rubriques"],
-			$GLOBALS['db_art_cache']
-		))
-	);
+	$t = array($last, $GLOBALS['db_art_cache']);
+	ecrire_fichier(_CACHE_RUBRIQUES, serialize($t));
+	return true;
 }
 
+// Cette fonction devrait s'integrer dans base/abstract, 
+// car en fait elle palie l'absence de  requete imbriquee dans certains SQL
+
+function gen_sql_in($select, $from = array(), $where = array(),
+		    $groupby = array(), $orderby = array(), $limit = '', $having = array(), $serveur='')
+{
+	$liste = array(); 
+	$res = sql_select($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur); 
+	while ($r = sql_fetch($res)) $liste[] = $r[$select];
+	return !$liste ?  '' : sql_in($select, $liste);
+}
 ?>
