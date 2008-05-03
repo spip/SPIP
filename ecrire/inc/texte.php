@@ -139,13 +139,12 @@ function nettoyer_chapo($chapo){
 // une $source differente ; le script detecte automagiquement si ce qu'on
 // echappe est un div ou un span
 // http://doc.spip.org/@code_echappement
-function code_echappement($rempl, $source='') {
+function code_echappement($rempl, $source='', $no_transform=false) {
 	if (!strlen($rempl)) return '';
 
 	// Tester si on echappe en span ou en div
 	$mode = preg_match(',</?('._BALISES_BLOCS.')[>[:space:]],iS', $rempl) ?
 		'div' : 'span';
-	$nn = ($mode == 'div') ? "\n\n" : '';
 	$return = '';
 
 	// Decouper en morceaux, base64 a des probleme selon la taille de la pile
@@ -153,12 +152,16 @@ function code_echappement($rempl, $source='') {
 	for($i = 0; $i < strlen($rempl); $i += $taille) {
 		// Convertir en base64
 		$base64 = base64_encode(substr($rempl, $i, $taille));
-		$return .=
-			inserer_attribut("<$mode class=\"base64$source\">", 'title', $base64)
-					                ."</$mode>";
+		$return .= inserer_attribut("<$mode class=\"base64$source\">",
+				'title', $base64) ."</$mode>";
 	}
 
-	return $return . $nn;
+	return $return
+		. ((!$no_transform AND $mode == 'div')
+			? "\n\n"
+			: ''
+		);
+;
 }
 
 // Echapper les <html>...</ html>
@@ -244,7 +247,7 @@ $preg='') {
 			$echap = $f($regs);
 
 		$letexte = str_replace($regs[0],
-			code_echappement($echap, $source),
+			code_echappement($echap, $source, $no_transform),
 			$letexte);
 	}
 
