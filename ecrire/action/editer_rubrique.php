@@ -33,6 +33,7 @@ function action_editer_rubrique_dist() {
 			urldecode(_request('redirect')),
 			'id_rubrique', $id_rubrique, '&');
 	
+		include_spip('inc/headers');
 		redirige_par_entete($redirect);
 	}
 	else 

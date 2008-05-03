@@ -42,11 +42,15 @@ function action_editer_breve_dist() {
 		redirige_url_ecrire();
 	}
 
-	// Rediriger le navigateur
-	$redirect = parametre_url(urldecode(_request('redirect')),
-		'id_breve', $id_breve, '&');
-
-	redirige_par_entete($redirect);
+	if (_request('redirect')) {
+		$redirect = parametre_url(urldecode(_request('redirect')),
+			'id_breve', $id_breve, '&');
+		include_spip('inc/headers');
+	
+		redirige_par_entete($redirect);
+	}
+	else 
+		return array($id_breve,'');
 }
 
 // http://doc.spip.org/@insert_breve

@@ -41,6 +41,7 @@ function action_editer_article_dist() {
 		$redirect = parametre_url(urldecode(_request('redirect')),
 			'id_article', $id_article, '&') . $err;
 	
+		include_spip('inc/headers');
 		redirige_par_entete($redirect);
 	}
 	else 
