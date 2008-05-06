@@ -64,7 +64,8 @@ function exec_config_fonctions_dist()
 
 	  $relayeur(_request('retour_proxy')), // Proxy pour syndication & doc
 
-	  ($GLOBALS['auto_compress']?$compresseur():''), // Compression gzip forcee sur le site public
+	  $compresseur(), // Compression http et compactages CSS ou JS
+
 	'';
 
 //
