@@ -51,7 +51,8 @@
 	#MENU_LANG_ECRIRE
 	
 	<div class="formulaire_spip formulaire_login">
-		#LOGIN_PRIVE
+		[(#GET{prive}|?{'',' '}) #LOGIN_PUBLIC]
+		[(#GET{prive}|?{' '}) #LOGIN_PRIVE]
 		<p class="retour">
 		[&#91;<a href="#URL_PAGE{identifiants,focus=nom_inscription}&amp;mode=(#URL_SITE_SPIP|tester_config{1comite})" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=400'); return false;"><:login_sinscrire:></a>&#93;]
 		&#91;<a href="#URL_SITE_SPIP/"><:login_retoursitepublic:></a>&#93;
