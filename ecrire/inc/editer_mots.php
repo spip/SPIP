@@ -14,8 +14,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 include_spip('inc/mots');
 
-// http://doc.spip.org/@inc_editer_mot_dist
-function inc_editer_mot_dist($objet, $id_objet, $cherche_mot, $select_groupe, $flag, $visible = false) {
+// http://doc.spip.org/@inc_editer_mots_dist
+function inc_editer_mots_dist($objet, $id_objet, $cherche_mot, $select_groupe, $flag, $visible = false) {
 
 	if ($GLOBALS['meta']["articles_mots"] == 'non')	return '';
 
@@ -50,7 +50,7 @@ function inc_editer_mot_dist($objet, $id_objet, $cherche_mot, $select_groupe, $f
 
 	if (!$cpt) {
 		if (!$flag) return;
-		$cpt = sql_fetch(editer_mot_droits("COUNT(*) AS n", "$table = 'oui'"));
+		$cpt = sql_fetch(editer_mots_droits("COUNT(*) AS n", "$table = 'oui'"));
 
 		if (!$cpt['n']) return;
 	}
@@ -93,7 +93,7 @@ function inc_editer_mot_dist($objet, $id_objet, $cherche_mot, $select_groupe, $f
 	  . $form
 	  . fin_cadre_enfonce(true);
 
-	return ajax_action_greffe("editer_mot", $id_objet, $res);
+	return ajax_action_greffe("editer_mots", $id_objet, $res);
 }
 
 // http://doc.spip.org/@inserer_mot
@@ -170,7 +170,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 		$cle = http_img_pack('petite-cle.gif', "", "width='23' height='12'");
 		$ret = generer_url_retour($url_base, "$table_id=$id_objet#mots");
 		while ($row = sql_fetch($result)) {
-			$tableau[] = editer_mot_un($row, $cle, $flag_editable, $id_groupes_vus, $flag_tous, $id_objet, $objet, $ret, $table, $table_id, $url_base, $les_mots);
+			$tableau[] = editer_mots_un($row, $cle, $flag_editable, $id_groupes_vus, $flag_tous, $id_objet, $objet, $ret, $table, $table_id, $url_base, $les_mots);
 		}
 	
 		$largeurs = array('25', '', '', '');
@@ -186,7 +186,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 	return $res;
 }
 
-function editer_mot_un($row, $cle, $flag_editable, &$id_groupes_vus, &$flag_tous, $id_objet, $objet, $ret, $table, $table_id, $url_base, $les_mots)
+function editer_mots_un($row, $cle, $flag_editable, &$id_groupes_vus, &$flag_tous, $id_objet, $objet, $ret, $table, $table_id, $url_base, $les_mots)
 {
 	$id_mot = $row['id_mot'];
 	$les_mots[] = $row['id_mot'];
@@ -209,7 +209,7 @@ function editer_mot_un($row, $cle, $flag_editable, &$id_groupes_vus, &$flag_tous
 	if (!$flag_editable)
 		$flag_groupe = false;
 	else {
-		$flag_groupe = sql_fetch(editer_mot_droits('COUNT(*) AS n', "id_groupe = $id_groupe"));
+		$flag_groupe = sql_fetch(editer_mots_droits('COUNT(*) AS n', "id_groupe = $id_groupe"));
 		$flag_groupe = $flag_groupe['n'];
 	}
 	// Changer
@@ -228,7 +228,7 @@ function editer_mot_un($row, $cle, $flag_editable, &$id_groupes_vus, &$flag_tous
 		. "&nbsp;"
 		. http_img_pack('croix-rouge.gif', "X", " class='puce' style='vertical-align: bottom;'");
 
-		$s = ajax_action_auteur('editer_mot', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", array($s,''),"&id_objet=$id_objet&objet=$objet");
+		$s = ajax_action_auteur('editer_mots', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", array($s,''),"&id_objet=$id_objet&objet=$objet");
 	}
 	$vals[] = $s;
 	return $vals;
@@ -259,7 +259,7 @@ function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_
 
 	$t =  _T('bouton_changer');
 
-	return ajax_action_post('editer_mot', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base, "$table_id=$id_objet",$corps, $t, " class='fondo spip_xx-small visible_au_chargement' id='$ancre'", "", "&id_objet=$id_objet&objet=$objet");
+	return ajax_action_post('editer_mots', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base, "$table_id=$id_objet",$corps, $t, " class='fondo spip_xx-small visible_au_chargement' id='$ancre'", "", "&id_objet=$id_objet&objet=$objet");
 }
 
 
@@ -275,17 +275,17 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 	$cond_id_groupes_vus = "0";
 	if ($id_groupes_vus) $cond_id_groupes_vus = join(",",$id_groupes_vus);
 	
-	$nb_groupes = sql_fetch(editer_mot_droits('count(*) AS n', "$table = 'oui' AND obligatoire = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus)"));
+	$nb_groupes = sql_fetch(editer_mots_droits('count(*) AS n', "$table = 'oui' AND obligatoire = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus)"));
 	$nb_groupes = $nb_groupes['n'];
 
 	$res = debut_block_depliable($visible OR ($nb_groupes > 0),"lesmots");
 	if ($flag_tous >= 3) {
 		$res .= "<div style='text-align: right' class='arial1'>"
-		  . ajax_action_auteur('editer_mot', "$id_objet,-1,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", array(_T('info_retirer_mots'),''),"&id_objet=$id_objet&objet=$objet")
+		  . ajax_action_auteur('editer_mots', "$id_objet,-1,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", array(_T('info_retirer_mots'),''),"&id_objet=$id_objet&objet=$objet")
 		. "</div><br />\n";
 	}
 
-	$result = editer_mot_droits("id_groupe,unseul,obligatoire,titre, ".sql_multi ("titre", $spip_lang), "$table = 'oui' AND (unseul != 'oui'  OR (unseul = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus))) ORDER BY multi");
+	$result = editer_mots_droits("id_groupe,unseul,obligatoire,titre, ".sql_multi ("titre", $spip_lang), "$table = 'oui' AND (unseul != 'oui'  OR (unseul = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus))) ORDER BY multi");
 
 	// Afficher un menu par groupe de mots
 	$ajouter ='';
@@ -294,7 +294,7 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 			$id_groupe = $row['id_groupe'];
 			list($corps, $clic) = $menu;
 
-			$ajouter .= ajax_action_post('editer_mot',
+			$ajouter .= ajax_action_post('editer_mots',
 				"$id_objet,,$table,$table_id,$objet",
 				$url_base,
 				"$table_id=$id_objet",
@@ -399,8 +399,8 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 // Il vaudrait mieux rajouter une table des statuts (ou un groupe de mots)
 // et un table de jointure entre ca et la table des groupes de mots.
 
-// http://doc.spip.org/@editer_mot_droits
-function editer_mot_droits($select, $cond)
+// http://doc.spip.org/@editer_mots_droits
+function editer_mots_droits($select, $cond)
 {
 	$droit = substr($GLOBALS['visiteur_session']['statut'],1);
 	return sql_select("$select", "spip_groupes_mots", "$droit = 'oui' AND $cond");

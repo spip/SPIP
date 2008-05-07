@@ -105,7 +105,7 @@ function exec_mots_tous_dist()
 		$groupe = sql_fetsel("COUNT(*) AS n", "spip_mots", "id_groupe=$id_groupe");
 		$groupe = $groupe['n'];
 
-		echo "<div\nid='editer_mot-$id_groupe' style='position: relative;'>";
+		echo "<div\nid='editer_mots-$id_groupe' style='position: relative;'>";
 
 		// Preliminaire: confirmation de suppression d'un mot lie a qqch
 		// (cf fin de afficher_groupe_mots_boucle executee a l'appel precedent)
@@ -126,7 +126,7 @@ function exec_mots_tous_dist()
 			echo "<td>";
 			echo icone_inline(_T('icone_modif_groupe_mots'), generer_url_ecrire("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.gif", "edit.gif", $spip_lang_left);
 			echo "</td>";
-			echo "\n<td id='editer_mot-$id_groupe-supprimer'",
+			echo "\n<td id='editer_mots-$id_groupe-supprimer'",
 			  (!$groupe ? '' : " style='visibility: hidden'"),
 			  ">";
 			echo icone_inline(_T('icone_supprimer_groupe_mots'), redirige_action_auteur('instituer_groupe_mots', "-$id_groupe", "mots_tous"), "groupe-mot-24.gif", "supprimer.gif", $spip_lang_left);
@@ -187,7 +187,7 @@ function confirmer_mot ($conf_mot, $son_groupe, $total)
 	  /* troublant. A refaire avec une visibility
 	 . "<li><b><a href='" 
 	. generer_url_ecrire("mots_tous")
-	. "#editer_mot-$son_groupe"
+	. "#editer_mots-$son_groupe"
 	. "'>"
 	. _T('item_non')
 	. "</a>,</b> "

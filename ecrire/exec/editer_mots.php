@@ -13,14 +13,14 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 
-// http://doc.spip.org/@exec_editer_mot_dist
-function exec_editer_mot_dist()
+// http://doc.spip.org/@exec_editer_mots_dist
+function exec_editer_mots_dist()
 {
-	exec_editer_mot_args(intval(_request('id_objet')), _request('objet'));
+	exec_editer_mots_args(intval(_request('id_objet')), _request('objet'));
 }
 
-// http://doc.spip.org/@exec_editer_mot_args
-function exec_editer_mot_args($id_objet, $objet)
+// http://doc.spip.org/@exec_editer_mots_args
+function exec_editer_mots_args($id_objet, $objet)
 {
 	if (!$id_objet OR !$objet)
 		$droit = false;
@@ -45,8 +45,8 @@ function exec_editer_mot_args($id_objet, $objet)
 
 		$ch = _request('cherche_mot');
 		$id_groupe = _request('select_groupe');
-		$editer_mot = charger_fonction('editer_mot', 'inc');
-		ajax_retour($editer_mot($objet, $id_objet, $ch, $id_groupe, 'ajax')); 
+		$editer_mots = charger_fonction('editer_mots', 'inc');
+		ajax_retour($editer_mots($objet, $id_objet, $ch, $id_groupe, 'ajax')); 
 	}
 }
 ?>

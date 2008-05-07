@@ -120,7 +120,7 @@ function affiche_mots_ressemblant($cherche_mot, $objet, $id_objet, $resultat, $t
 		$descriptif_mot = $row['descriptif'];
 
 		$res .="<li>"
-		.  ajax_action_auteur('editer_mot', "$id_objet,,$table,$table_id,$objet,$id_mot", $url_base, "$table_id=$id_objet", array(typo($titre_mot),' title="' . _T('info_ajouter_mot') .'"'),"&id_objet=$id_objet&objet=$objet") ; 
+		.  ajax_action_auteur('editer_mots', "$id_objet,,$table,$table_id,$objet,$id_mot", $url_base, "$table_id=$id_objet", array(typo($titre_mot),' title="' . _T('info_ajouter_mot') .'"'),"&id_objet=$id_objet&objet=$objet") ; 
 		if (strlen($descriptif_mot)) {
 			$res .= "\n(<span class='spip_xx-small'>".supprimer_tags(propre(couper($descriptif_mot, 100))).")</span><br />\n";
 		}
