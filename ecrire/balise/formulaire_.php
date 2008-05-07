@@ -65,6 +65,8 @@ function balise_FORMULAIRE__dyn($form)
 	}
 	elseif(
 		is_array($valeurs)
+	 && ($keys = array_keys($valeurs))
+	 && (is_numeric(reset($keys)) && is_numeric(end($keys)))
 	 && ((reset($valeurs)===true) OR (reset($valeurs)===false))
 	 && (count($valeurs)==2)) {
 	 $editable = reset($valeurs);
