@@ -164,74 +164,74 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 	$groupes_vus = array();
 	$flag_tous = 0;
 	$result = sql_select("mots.id_mot, mots.titre, mots.descriptif, mots.id_groupe", "spip_mots AS mots, spip_mots_$table AS lien", "lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot", "mots.type, mots.titre", "mots.type, mots.titre");
-	if (sql_count($result) > 0) {
+	if (sql_count($result)) {
 	
 		$tableau= array();
 		$cle = http_img_pack('petite-cle.gif', "", "width='23' height='12'");
 		$ret = generer_url_retour($url_base, "$table_id=$id_objet#mots");
 		while ($row = sql_fetch($result)) {
-
-			$id_mot = $row['id_mot'];
-			$titre_mot = $row['titre'];
-			$descriptif_mot = $row['descriptif'];
-			$id_groupe = $row['id_groupe'];
-
-			$id_groupes_vus[] = $id_groupe;
-			$url = generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=$ret");
-			$vals= array("<a href='$url'>$cle</a>");
-
-			$r = sql_fetsel("titre, unseul", "spip_groupes_mots", "id_groupe = $id_groupe");
-			$unseul = $r['unseul'];
-	// On recupere le typo_mot ici, et non dans le mot-cle lui-meme; sinon bug avec arabe
-			$type_mot = typo($r['titre']);
-
-			if (autoriser('modifier', 'groupemots', $id_groupe))
-				$type_mot = "<a href='" . generer_url_ecrire("mots_type","id_groupe=$id_groupe") . "'>$type_mot</a>";
-
-			if (!$flag_editable)
-				$flag_groupe = false;
-			else {
-			  $flag_groupe = sql_fetch(editer_mot_droits('COUNT(*) AS n', "id_groupe = $id_groupe"));
-			  $flag_groupe = $flag_groupe['n'];
-			}
-			// Changer
-			if ($unseul == "oui" AND $flag_groupe) {
-				$vals[]= formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_id, $objet, $id_objet);
-			} else {
-				$vals[]= "<a href='$url'>".typo($titre_mot)."</a>";
-			}
-
-			$vals[]= $type_mot;
-
-			if ($flag_editable){
-				if ($flag_groupe) {
-					$flag_tous++;
-					$s =  _T('info_retirer_mot')
-					. "&nbsp;"
-					. http_img_pack('croix-rouge.gif', "X", " class='puce' style='vertical-align: bottom;'");
-					$s = ajax_action_auteur('editer_mot', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", array($s,''),"&id_objet=$id_objet&objet=$objet");
-				} else $s = "&nbsp;";
-				$vals[] = $s;
-			} else $vals[]= "";
-
-			$tableau[] = $vals;
-	
-			$les_mots[] = $id_mot;
+			$tableau[] = editer_mot_un($row, $cle, $flag_editable, $id_groupes_vus, $flag_tous, $id_objet, $objet, $ret, $table, $table_id, $url_base, $les_mots);
 		}
 	
 		$largeurs = array('25', '', '', '');
 		$styles = array('arial11', 'arial2', 'arial2', 'arial1');
 
-		$res = "\n<div class='cadre-liste'>"
-		. "\n<table width='100%' cellpadding='3' cellspacing='0' border='0'>"
-		. afficher_liste($largeurs, $tableau, $styles)
-		. "</table></div>";
+		$res = xhtml_table_id_type($tableau, $largeurs, $styles);
+
 	} else $res ='';
 
 	if ($flag_editable)
 	  $res .= formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $table_id, $url_base, $visible, $objet, $flag_tous);
 
 	return $res;
+}
+
+function editer_mot_un($row, $cle, $flag_editable, &$id_groupes_vus, &$flag_tous, $id_objet, $objet, $ret, $table, $table_id, $url_base, $les_mots)
+{
+	$id_mot = $row['id_mot'];
+	$les_mots[] = $row['id_mot'];
+	$titre_mot = $row['titre'];
+	$descriptif_mot = $row['descriptif'];
+	$id_groupe = $row['id_groupe'];
+
+	$id_groupes_vus[] = $id_groupe;
+	$url = generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=$ret");
+	$vals= array("<a href='$url'>$cle</a>");
+
+	$r = sql_fetsel("titre, unseul", "spip_groupes_mots", "id_groupe = $id_groupe");
+	$unseul = $r['unseul'];
+	// On recupere le typo_mot ici, et non dans le mot-cle lui-meme; sinon bug avec arabe
+	$type_mot = typo($r['titre']);
+
+	if (autoriser('modifier', 'groupemots', $id_groupe))
+		$type_mot = "<a href='" . generer_url_ecrire("mots_type","id_groupe=$id_groupe") . "'>$type_mot</a>";
+
+	if (!$flag_editable)
+		$flag_groupe = false;
+	else {
+		$flag_groupe = sql_fetch(editer_mot_droits('COUNT(*) AS n', "id_groupe = $id_groupe"));
+		$flag_groupe = $flag_groupe['n'];
+	}
+	// Changer
+	if ($unseul == "oui" AND $flag_groupe) {
+		$vals[]= formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_id, $objet, $id_objet);
+	} else {
+		$vals[]= "<a href='$url'>".typo($titre_mot)."</a>";
+	}
+
+	$vals[]= $type_mot;
+
+	$s = "&nbsp;";
+	if ($flag_editable AND $flag_groupe) {
+		$flag_tous++;
+		$s =  _T('info_retirer_mot')
+		. "&nbsp;"
+		. http_img_pack('croix-rouge.gif', "X", " class='puce' style='vertical-align: bottom;'");
+
+		$s = ajax_action_auteur('editer_mot', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", array($s,''),"&id_objet=$id_objet&objet=$objet");
+	}
+	$vals[] = $s;
+	return $vals;
 }
 
 // http://doc.spip.org/@formulaire_mot_remplace

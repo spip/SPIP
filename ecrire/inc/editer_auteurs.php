@@ -213,35 +213,37 @@ function afficher_auteurs_objet($type, $id, $flag_editable, $cond_les_auteurs, $
 
 	// charger ici meme si ps d'auteurs
 	// car inc_formater_auteur peut aussi redefinir determiner_non_auteurs qui sert plus loin
-	if (!$formater_auteur = charger_fonction("formater_auteur_$type", 'inc',true))
-		$formater_auteur = charger_fonction('formater_auteur', 'inc');
+	if (!$formater = charger_fonction("formater_auteur_$type", 'inc',true))
+		$formater = charger_fonction('formater_auteur', 'inc');
 
 	if (!sql_count($result)) return '';
 
 	$table = array();
 
-	while ($row = sql_fetch($result)) {
-		$id_auteur = $row['id_auteur'];
-		$vals = $formater_auteur($id_auteur);
+	$retirer = array(_T('lien_retirer_auteur')."&nbsp;". http_img_pack('croix-rouge.gif', "X", " class='puce' style='vertical-align: bottom;'"));
 
-		if ($flag_editable AND ($connect_id_auteur != $id_auteur OR $connect_statut == '0minirezo')) {
-			$vals[] =  ajax_action_auteur('editer_auteurs', "$id,$type,-$id_auteur", $script_edit, "id_{$type}=$id", array(_T('lien_retirer_auteur')."&nbsp;". http_img_pack('croix-rouge.gif', "X", " class='puce' style='vertical-align: bottom;'")),$arg_ajax);
-		} else  $vals[] = "";
-		$table[] = $vals;
+	while ($row = sql_fetch($result)) {
+		$table[] = ajouter_auteur_un($row, $formater, $retirer, $arg_ajax, $flag, $id, $type, $script_edit);
 	}
-	
+
 	$largeurs = array('14', '', '', '', '', '');
 	$styles = array('arial11', 'arial2', 'arial11', 'arial11', 'arial11', 'arial1');
 
-	$t = afficher_liste($largeurs, $table, $styles);
-	if ($spip_display != 4)
-	  $t = $tranches
-	  	. "<table width='100%' cellpadding='3' cellspacing='0' border='0'>"
-	    . $t
-	    . "</table>";
-	return "<div class='cadre-liste'>$t</div>\n";
+	return xhtml_table_id_type($table, $largeurs, $styles, $tranche);
 }
 
+function ajouter_auteur_un($row, $formater, $retirer, $arg_ajax, $flag, $id, $type, $script_edit)
+{
+	global $connect_statut, $connect_id_auteur;
+
+	$id_auteur = $row['id_auteur'];
+	$vals = $formater($id_auteur);
+	$voir = ($flag AND ($connect_id_auteur != $id_auteur OR $connect_statut == '0minirezo'));
+	if ($voir) {
+		$vals[] =  ajax_action_auteur('editer_auteurs', "$id,$type,-$id_auteur", $script_edit, "id_{$type}=$id", $retirer, $arg_ajax);
+	} else  $vals[] = "";
+	return $vals;
+}
 
 // http://doc.spip.org/@ajouter_auteurs_objet
 function ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit, $arg_ajax)

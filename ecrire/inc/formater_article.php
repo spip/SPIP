@@ -21,6 +21,10 @@ function inc_formater_article_dist($row)
 	static $pret = false;
 	static $chercher_logo, $img_admin, $formater_auteur, $nb, $langue_defaut, $afficher_langue, $puce_statut;
 
+	$id_article = $row['id_article'];
+
+	if (!autoriser('voir','article',$id_article)) return '';
+
 	if (!$pret) {
 		$chercher_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
 		if ($chercher_logo) 
@@ -37,8 +41,6 @@ function inc_formater_article_dist($row)
 		$puce_statut = charger_fonction('puce_statut', 'inc');
 		$pret = true;
 	}
-
-	$id_article = $row['id_article'];
 
 	if ($chercher_logo) {
 		if ($logo = $chercher_logo($id_article, 'id_article', 'on')) {
@@ -74,7 +76,7 @@ function inc_formater_article_dist($row)
 	. "</a>"
 	. "</div>";
 	
-	if ($spip_display == 4) return "\n<li>$lien</li>\n";
+	if ($spip_display == 4) return array($lien);
 
 	$puce = $puce_statut($id_article, $statut, $id_rubrique,'article');
 
@@ -92,11 +94,8 @@ function inc_formater_article_dist($row)
 	$num = afficher_numero_edit($id_article, 'id_article', 'article');
 
 	// Afficher le numero (JMB)
-	$largeurs = array(11, '', 80, 100, 50);
-	$styles = array('', 'arial2', 'arial1', 'arial1', 'arial1');
-	$vals = array($puce, $lien, $auteurs, $date, $num);
 
-	return afficher_liste_display_neq4($largeurs, $vals, $styles);
+	return array($puce, $lien, $auteurs, $date, $num);
 }
 
 ?>

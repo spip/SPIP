@@ -60,23 +60,18 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 		$reponse .= "<div><span style='color: red' size='2' face='Verdana, Geneva, helvetica, sans-serif'>"._T('trad_deja_traduit'). "</span></div>";
 
 		// Afficher la liste des traductions
-	$table = !$id_trad ? array() : articles_traduction($id_article, $id_trad);
-
+	$table = array();
+	if ($id_trad) {
+		$result = sql_select("id_article, id_rubrique, titre, lang, statut, id_trad", "spip_articles", "id_trad = $id_trad");
+		while ($row = sql_fetch($result)) {
+			$table[] = articles_traduction($row, $id_article);
+		}
+	}
 		// bloc traductions
 	if (count($table) > 0) {
-
 		$largeurs = array(7, 12, '', 100);
 		$styles = array('', '', 'arial2', 'arial2');
-
-		$t = afficher_liste($largeurs, $table, $styles);
-		if ($spip_display != 4)
-		  $t = "\n<table width='100%' cellpadding='2' cellspacing='0' border='0'>"
-		    . $t
-		    . "</table>\n";
-
-		$liste = debut_cadre('liste','','',_T('trad_article_traduction'))
-		. $t
-		. fin_cadre('liste');
+		$liste = xhtml_table_id_type($table, $largeurs, $styles, '',_T('trad_article_traduction'));
 	} else $liste = '';
 
 	// changer les globales de direction de langue
@@ -143,49 +138,44 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 
 
 // http://doc.spip.org/@articles_traduction
-function articles_traduction($id_article, $id_trad)
+function articles_traduction($row, $id_article)
 {
 	global $connect_toutes_rubriques;
 
-	$result_trad = sql_select("id_article, id_rubrique, titre, lang, statut", "spip_articles", "id_trad = $id_trad");
-	
-	$table= array();
+	$vals = array();
+	$id_rubrique_trad = $row["id_rubrique"];
+	$id_article_trad = $row["id_article"];
+	$id_trad = $row["id_trad"];
+	$titre_trad = $row["titre"];
+	$lang_trad = $row["lang"];
+	$statut_trad = $row["statut"];
+
+	changer_typo($lang_trad);
+	$lang_dir = lang_dir($lang_trad);
+	$titre_trad = "<span dir='$lang_dir'>$titre_trad</span>";
+
 	$puce_statut = charger_fonction('puce_statut', 'inc');
-	while ($row = sql_fetch($result_trad)) {
-		$vals = array();
-		$id_article_trad = $row["id_article"];
-		$id_rubrique_trad = $row["id_rubrique"];
-		$titre_trad = $row["titre"];
-		$lang_trad = $row["lang"];
-		$statut_trad = $row["statut"];
-
-		changer_typo($lang_trad);
-		$lang_dir = lang_dir($lang_trad);
-		$titre_trad = "<span dir='$lang_dir'>$titre_trad</span>";
-
-		$vals[] = $puce_statut($id_article_trad, $statut_trad, $id_rubrique_trad, 'article');
+	$vals[] = $puce_statut($id_article_trad, $statut_trad, $id_rubrique_trad, 'article');
 		
-		if ($id_article_trad == $id_trad) {
+	if ($id_article_trad == $id_trad) {
 			$vals[] = http_img_pack('langues-12.gif', "", " class='lang'");
 			$titre_trad = "<b>$titre_trad</b>";
-		} else {
-		  if (!$connect_toutes_rubriques)
+	} else {
+		if (!$connect_toutes_rubriques)
 			$vals[] = http_img_pack('langues-off-12.gif', "", " class='lang'");
-		  else 
+		else 
 		    $vals[] = ajax_action_auteur("referencer_traduction", "$id_article,$id_trad,$id_article_trad", 'articles', "id_article=$id_article", array(http_img_pack('langues-off-12.gif', _T('trad_reference'), "class='lang'"), ' title="' . _T('trad_reference') . '"'));
-		}
-
-		$s = typo(supprime_img($titre_trad,''));
-		if ($id_article_trad != $id_article) 
-			$s = "<a href='" . generer_url_ecrire("articles","id_article=$id_article_trad") . "'>$s</a>";
-		if ($id_article_trad == $id_trad)
-			$s .= " "._T('trad_reference');
-
-		$vals[] = $s;
-		$vals[] = traduire_nom_langue($lang_trad);
-		$table[] = $vals;
 	}
 
-	return $table;
+	$s = typo(supprime_img($titre_trad,''));
+	if ($id_article_trad != $id_article) 
+			$s = "<a href='" . generer_url_ecrire("articles","id_article=$id_article_trad") . "'>$s</a>";
+	if ($id_article_trad == $id_trad)
+			$s .= " "._T('trad_reference');
+
+	$vals[] = $s;
+	$vals[] = traduire_nom_langue($lang_trad);
+	return $vals;
 }
+
 ?>
