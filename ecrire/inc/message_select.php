@@ -30,7 +30,7 @@ function afficher_messages($titre, $from, $where, &$messages_vus, $afficher_aute
 	}
 
 
-	$tranches =  affiche_tranche_bandeau(&$requete, $tmp_var, false, 'afficher_message_boucles', $afficher_auteurs);
+	$tranches =  affiche_tranche_bandeau($requete, $tmp_var, false, 'afficher_message_boucles', $afficher_auteurs);
 
 	$result = sql_select((isset($requete["SELECT"]) ? $requete["SELECT"] : "*"), $requete['FROM'], $requete['WHERE'], $requete['GROUP BY'], $requete['ORDER BY'], ($deb_aff > 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
 
