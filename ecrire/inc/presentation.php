@@ -419,6 +419,7 @@ function afficher_tranches_requete($num_rows, $tmp_var, $url='', $nb_aff = 10, $
 	return $texte;
 }
 
+// http://doc.spip.org/@affiche_tranche_bandeau
 function affiche_tranche_bandeau($requete, $tmp_var, $force, $skel, $own='')
 {
 	global $spip_display ;
@@ -444,6 +445,7 @@ function affiche_tranche_bandeau($requete, $tmp_var, $force, $skel, $own='')
 	return '';
 }
 
+// http://doc.spip.org/@xhtml_table_id_type
 function xhtml_table_id_type($table, $largeurs, $styles, $tranches = '', $title='', $icone='')
 {
 	global $spip_display, $spip_lang_left;
