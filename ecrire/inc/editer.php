@@ -57,13 +57,18 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 	if (!$row) {
 		if ($select = charger_fonction($type."_select",'inc',true)){
 			$row = $select($id, $id_parent, $lier_trad);
-			if (!$row) return '';
 		}
 		else {
 			$row = sql_fetsel('*',$table_objet_sql,$id_table_objet."=".intval($id));
 		}
 		if (is_numeric($id)) $new = '';
 		else $new = $id;
+		if (!$row) {
+			$trouver_table = charger_fonction('trouver_table','base');
+			if ($desc = base_trouver_table_dist($table_objet))
+				foreach($desc['field'] as $k=>$v)
+					$row[$k]='';
+		}
 	}
 	// Gaffe: sans ceci, on ecrase systematiquement l'article d'origine
 	// (et donc: pas de lien de traduction)
