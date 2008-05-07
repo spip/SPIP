@@ -10,9 +10,7 @@ dist/formulaires/choix_mots.html -text
 dist/formulaires/editer_article.html -text
 dist/formulaires/editer_article.php -text
 dist/formulaires/editer_breve.html -text
-dist/formulaires/editer_breve/charger.php -text
-dist/formulaires/editer_breve/traiter.php -text
-dist/formulaires/editer_breve/verifier.php -text
+dist/formulaires/editer_breve.php -text
 dist/formulaires/editer_rubrique.html -text
 dist/formulaires/editer_rubrique/charger.php -text
 dist/formulaires/editer_rubrique/traiter.php -text
