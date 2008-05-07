@@ -11,7 +11,7 @@
 		<input type='hidden' name='syndication_old' value="#ENV**{syndication}" />
 	  <fieldset>
 	  <ol class="formfx">
-	  	[(#ENV{new}|=={oui}|?{' '})
+	  	[(#ENV{id_syndic}||?{'',' '})
 	  	[(#SESSION{statut}|=={0minirezo}|?{' ',#ENV{config}|table_valeur{proposer_site}|=={oui}|?{' '}})	  
 		  <li><fieldset><legend><img src='#EVAL{_DIR_IMG_PACK}site-24.gif' /></legend><ol><li>
 			<label for='url_auto'><:texte_referencement_automatique:></label>
