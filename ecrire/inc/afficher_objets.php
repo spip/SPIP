@@ -246,6 +246,7 @@ function inc_afficher_objets_dist($type, $titre,$requete,$formater='', $force=fa
 	return $presenter_liste($requete, $skel, $tableau, $arg, $force, $largeurs, $styles, $tmp_var, $titre, icone_table($type));
 }
 
+// http://doc.spip.org/@charger_fonction_logo_if
 function charger_fonction_logo_if()
 {
 	global $spip_display;

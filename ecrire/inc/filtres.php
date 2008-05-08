@@ -2511,6 +2511,7 @@ function barre_typo($id,$lang=''){
 	include_spip('inc/barre');
 	return '<div>' . afficher_barre("document.getElementById('$id')",false,$lang) . '</div>';
 }
+// http://doc.spip.org/@puce_changement_statut
 function puce_changement_statut($id_objet, $statut, $id_rubrique, $type, $ajax=false){
 	$puce_statut = charger_fonction('puce_statut','inc');
 	return $puce_statut($id_objet, $statut, $id_rubrique, $type, $ajax=false);
