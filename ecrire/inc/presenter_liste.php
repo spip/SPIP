@@ -17,13 +17,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Elle renvoie une enumeration HTML de ces lignes formatees, 
 // avec une pagination appelable en Ajax si $idom et $url sont fournis
 
-// http://doc.spip.org/@inc_presenter_liste_dist
-function inc_presenter_liste_dist($requete, $fonc, &$prims, $own, $force, $largeurs, $styles, $idom='', $title='', $icone='', $url='', $cpt=NULL)
+function inc_presenter_liste_dist($requete, $fonc, &$prims, $own, $force, $styles, $idom='', $title='', $icone='', $url='', $cpt=NULL)
 {
 	global $spip_display, $spip_lang_left;
 
 	// $requete est passe par reference, pour modifier l'index LIMIT
-	if ($idom)
+	if ($idom AND $spip_display != 4)
 		$tranches = affiche_tranche_bandeau($requete, $idom, $url, $cpt);
 	else $tranches = '';
 
@@ -40,25 +39,24 @@ function inc_presenter_liste_dist($requete, $fonc, &$prims, $own, $force, $large
 			onmouseover=\"changeclass(this,'tr_liste_over');\"
 			onmouseout=\"changeclass(this,'tr_liste');\"" ;
 
+		$table = '';
 		while ($r = sql_fetch($result)) {
 		  if ($prim) $prims[]= $r[$prim];
 		  if ($vals = $fonc($r, $own)) {
-			reset($largeurs);
 			reset($styles);
 			$res = '';
 			foreach ($vals as $t) {
-				list(, $largeur) = each($largeurs);
-				list(, $style) = each($styles);
+				list(,list($style, $largeur)) = each($styles);
 				if ($largeur) $largeur = " style='width: $largeur" ."px;'";
 				if ($style) $style = " class=\"$style\"";
 				$t = !trim($t) ? "&nbsp;" : lignes_longues($t);
 				$res .= "\n<td$class$style>$t</td>";
 			}
-			$tranches .= "\n<tr class='tr_liste'$evt>$res</tr>";
+			$table .= "\n<tr class='tr_liste'$evt>$res</tr>";
 		  }
 		}
 
-		$tranches = "<table width='100%' cellpadding='2' cellspacing='0' border='0'>$tranches</table>";
+		$tranches .= "<table width='100%' cellpadding='2' cellspacing='0' border='0'>$table</table>";
 	} else {
 		while ($r = sql_fetch($req)) {
 			if ($prim) $prims[]= $r[$prim];
@@ -73,7 +71,7 @@ function inc_presenter_liste_dist($requete, $fonc, &$prims, $own, $force, $large
 	sql_free($result);
 	}
 
-	$id = 't'.substr(md5($title),0,8);
+	$id = 't'.substr(md5(join('',$requete)),0,8);
 	$bouton = !$icone ? '' : bouton_block_depliable($title, true, $id);
 
 	return debut_cadre('liste', $icone, "", $bouton, "", "", false)

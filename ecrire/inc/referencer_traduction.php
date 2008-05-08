@@ -63,11 +63,10 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 
 	if ($id_trad) {
 		$requete = array('SELECT' => "id_article, id_rubrique, titre, lang, statut, id_trad", 'FROM' => "spip_articles", 'WHERE' => "id_trad = $id_trad");
-		$largeurs = array(7, 12, '', 100);
-		$styles = array('', '', 'arial2', 'arial2');
+		$styles = array(array('',7), array('', 12), array('arial2'), array('arial2', 100));
 		$presenter_liste = charger_fonction('presenter_liste', 'inc');
 		$tableau = array();
-		$liste = $presenter_liste($requete, 'articles_traduction', $tableau,  $id_article, false, $largeurs, $styles, '',_T('trad_article_traduction'));
+		$liste = $presenter_liste($requete, 'articles_traduction', $tableau,  $id_article, false, $styles, '',_T('trad_article_traduction'));
 	} else $liste = '';
 
 	// changer les globales de direction de langue

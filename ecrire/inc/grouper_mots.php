@@ -37,13 +37,11 @@ function inc_grouper_mots_dist($id_groupe, $total) {
 	$tableau = array();
 	$occurrences = calculer_liens_mots($id_groupe);
 	if ($connect_statut=="0minirezo") {
-			$largeurs = array('', 100, 130);
-			$styles = array('arial11', 'arial1', 'arial1');
+		$styles = array(array('arial11'), array('arial1', 100), array('arial1', 130));
 	} else {
-			$largeurs = array('', 100);
-			$styles = array('arial11', 'arial1');
+		$styles = array(array('arial11'), array('arial1', 100));
 	}
-	return $presenter_liste($requete, 'afficher_groupe_mots_boucle', $tableau, array($occurrences, $total, $deb_aff), false, $largeurs, $styles, $tmp_var, '', '', $url);
+	return $presenter_liste($requete, 'afficher_groupe_mots_boucle', $tableau, array($occurrences, $total, $deb_aff), false, $styles, $tmp_var, '', '', $url);
 }
 
 // http://doc.spip.org/@afficher_groupe_mots_boucle
