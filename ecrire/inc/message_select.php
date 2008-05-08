@@ -17,8 +17,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@afficher_messages
 function afficher_messages($titre, $from, $where, &$messages_vus, $afficher_auteurs = true, $important = false) {
 
-	$tmp_var = 't_' . substr(md5($where.$from), 0, 4);
-
 	$requete = array('SELECT' => 'messages.id_message, messages.date_heure, messages.date_fin, messages.titre, messages.type, messages.rv', 'FROM' => "spip_messages AS messages$from", 'WHERE' => $where .(!$messages_vus ? '' : ' AND messages.id_message NOT IN ('.join(',', $messages_vus).')'), 'ORDER BY'=> 'date_heure DESC');
 
 	if ($afficher_auteurs) {
@@ -30,18 +28,11 @@ function afficher_messages($titre, $from, $where, &$messages_vus, $afficher_aute
 	}
 
 	$presenter_liste = charger_fonction('presenter_liste', 'inc');
-	$tranches =  affiche_tranche_bandeau($requete, $tmp_var, false, 'afficher_message_boucles', $afficher_auteurs);
-
-	if ($deb_aff > 0)
-		$requete['LIMIT'] = "$deb_aff, $nb_aff" ;
-	else if (empty($requete['LIMIT'])) $requete['LIMIT'] = "99999";
-
-
-#	$result = sql_select((isset($requete["SELECT"]) ? $requete["SELECT"] : "*"), $requete['FROM'], $requete['WHERE'], $requete['GROUP BY'], $requete['ORDER BY'], ($deb_aff > 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
+	$tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);
 
 	// cette variable est passe par reference et recevra les valeurs du champ indique 
 	$les_messages = 'id_message'; 
-	$res = 	$presenter_liste($requete, 'afficher_message_boucles', $les_messages, $afficher_auteur, $important, $largeurs, $styles, $tranches, $titre,  "messagerie-24.gif");
+	$res = 	$presenter_liste($requete, 'afficher_message_boucles', $les_messages, $afficher_auteur, $important, $largeurs, $styles, $tmp_var, $titre,  "messagerie-24.gif");
 	$messages_vus =  array_merge($messages_vus, $les_messages);
 
 	if (!$res) return '';

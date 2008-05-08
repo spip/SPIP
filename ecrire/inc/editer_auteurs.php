@@ -199,23 +199,13 @@ function afficher_auteurs_objet($type, $id, $flag_editable, $cond, $script_edit,
 
 	$presenter_liste = charger_fonction('presenter_liste', 'inc');
 
-	$result = sql_select("id_auteur", $from, $where);
-	$cpt = sql_count($result);
+	$requete = array('SELECT' => "id_auteur", 'FROM' => $from, 'WHERE' => $where);
 	$tmp_var = "editer_auteurs-$id";
-	$nb_aff = floor(1.5 * _TRANCHES);
-	if ($cpt > $nb_aff) {
-		$nb_aff = _TRANCHES; 
-		$tranches = afficher_tranches_requete($cpt, $tmp_var, generer_url_ecrire('editer_auteurs',$arg_ajax), $nb_aff);
-	} else $tranches = '';
-	
-	$deb_aff = _request($tmp_var);
-	$deb_aff = ($deb_aff !== NULL ? intval($deb_aff) : 0);
-	
-	$limit = (($deb_aff < 0) ? '' : "$deb_aff, $nb_aff");
-	$requete = array('SELECT' => "id_auteur", 'FROM' => $from, 'WHERE' => $where, 'LIMIT' => $limit);
+	$url = generer_url_ecrire('editer_auteurs',$arg_ajax);
 
 	// charger ici meme si pas d'auteurs
-	// car inc_formater_auteur peut aussi redefinir determiner_non_auteurs qui sert plus loin
+	// car inc_formater_auteur peut aussi redefinir 
+	// determiner_non_auteurs qui sert plus loin
 	if (!$formater = charger_fonction("formater_auteur_$type", 'inc',true))
 		$formater = charger_fonction('formater_auteur', 'inc');
 
@@ -225,7 +215,7 @@ function afficher_auteurs_objet($type, $id, $flag_editable, $cond, $script_edit,
 	$styles = array('arial11', 'arial2', 'arial11', 'arial11', 'arial11', 'arial1');
 
 	$tableau = array(); // ne sert pas
-	return 	$presenter_liste($requete, 'ajouter_auteur_un', $tableau, array($formater, $retirer, $arg_ajax, $flag_editable, $id, $type, $script_edit), false, $largeurs, $styles, $tranche);
+	return 	$presenter_liste($requete, 'ajouter_auteur_un', $tableau, array($formater, $retirer, $arg_ajax, $flag_editable, $id, $type, $script_edit), false, $largeurs, $styles, $tmp_var, '','', $url);
 }
 
 // http://doc.spip.org/@ajouter_auteur_un

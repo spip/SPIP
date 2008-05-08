@@ -12,9 +12,19 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function inc_presenter_liste_dist($requete, $fonc, &$prims, $own, $force, $largeurs, $styles, $tranches = '', $title='', $icone='')
+// Cette fonction prend un argument un tableau decrivant une requete Select
+// et une fonction formatant chaque ligne du resultat de la requete
+// Elle renvoie une enumeration HTML de ces lignes formatees, 
+// avec une pagination appelable en Ajax si $idom et $url sont fournis
+
+function inc_presenter_liste_dist($requete, $fonc, &$prims, $own, $force, $largeurs, $styles, $idom='', $title='', $icone='', $url='', $cpt=NULL)
 {
 	global $spip_display, $spip_lang_left;
+
+	// $requete est passe par reference, pour modifier l'index LIMIT
+	if ($idom)
+		$tranches = affiche_tranche_bandeau($requete, $idom, $url, $cpt);
+	else $tranches = '';
 
 	$prim = $prims;
 	$prims = array();
@@ -73,29 +83,31 @@ function inc_presenter_liste_dist($requete, $fonc, &$prims, $own, $force, $large
 }
 
 // http://doc.spip.org/@afficher_tranches_requete
-function afficher_tranches_requete($num_rows, $tmp_var, $url='', $nb_aff = 10, $old_arg=NULL) {
+function afficher_tranches_requete($num_rows, $idom, $url='', $nb_aff = 10, $old_arg=NULL) {
 	static $ancre = 0;
 	global $browser_name, $spip_lang_right, $spip_display;
 	if ($old_arg!==NULL){ // eviter de casser la compat des vieux appels $cols_span ayant disparu ...
-		$tmp_var = $url;		$url = $nb_aff; $nb_aff=$old_arg;
+		$idom = $url;		$url = $nb_aff; $nb_aff=$old_arg;
 	}
 
 	$ancre++;
 	$self = self();
 	$ie_style = ($browser_name == "MSIE") ? "height:1%" : '';
+	$style = "style='visibility: hidden; float: $spip_lang_right'";
+	$texte = http_img_pack("searching.gif", "*", "$style id='img_$idom'")
 
-	$texte = "\n<div style='$ie_style;' class='arial1 tranches' id='a$ancre'>";
-	$texte .= navigation_pagination($num_rows, $nb_aff, $url, $onclick=true, $tmp_var);
+	  . "\n<div style='$ie_style;' class='arial1 tranches' id='a$ancre'>"
+	  . navigation_pagination($num_rows, $nb_aff, $url, $onclick=true, $idom);
 
 	$on ='';
-	$script = parametre_url($self, $tmp_var, -1);
+	$script = parametre_url($self, $idom, -1);
 	if ($url) {
 				$on = "\nonclick=\"return charger_id_url('"
 				. $url
 				. "&amp;"
-				. $tmp_var
+				. $idom
 				. "=-1','"
-				. $tmp_var
+				. $idom
 				. '\');"';
 	}
 	$l = htmlentities(_T('lien_tout_afficher'));
@@ -106,28 +118,25 @@ function afficher_tranches_requete($num_rows, $tmp_var, $url='', $nb_aff = 10, $
 }
 
 // http://doc.spip.org/@affiche_tranche_bandeau
-function affiche_tranche_bandeau($requete, $tmp_var, $force, $skel, $own='')
+function affiche_tranche_bandeau(&$requete, $idom, $url='', $cpt=NULL)
 {
-	global $spip_display ;
-	$res = "";
-
 	if (!isset($requete['GROUP BY'])) $requete['GROUP BY'] = '';
 
-	$cpt = sql_countsel($requete['FROM'], $requete['WHERE'], $requete['GROUP BY']);
+	if ($cpt === NULL)
+		$cpt = sql_countsel($requete['FROM'], $requete['WHERE'], $requete['GROUP BY']);
 
-	if (!($cpt OR $force)) return '';
-
+	$deb_aff = intval(_request($idom));
 	$nb_aff = floor(1.5 * _TRANCHES);
 
 	if (isset($requete['LIMIT'])) $cpt = min($requete['LIMIT'], $cpt);
-
-	else if (!($deb_aff = intval(_request($tmp_var))))
-		 $requete['LIMIT'] = $nb_aff;
-
 	if ($cpt > $nb_aff) {
 		$nb_aff = (_TRANCHES); 
-		return afficher_tranches_requete($cpt, $tmp_var, '', $nb_aff);
-	}
-	return '';
+		$res = afficher_tranches_requete($cpt, $idom, $url, $nb_aff);
+	} else $res = '';
+
+	if (!isset($requete['LIMIT']))
+		$requete['LIMIT'] = "$deb_aff, $nb_aff";
+
+	return $res;
 }
 ?>
