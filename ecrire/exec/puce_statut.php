@@ -20,8 +20,10 @@ function exec_puce_statut_dist()
 	$id = intval(_request('id'));
 	$type = _request('type');
 
-	if ($type == 'article') {
-		$s = sql_select("id_rubrique,statut", "spip_articles", "id_article=$id");
+	if (in_array($type,array('article','breve'))) {
+		$table = table_objet_sql($type);
+		$prim = id_table_objet($type);
+		$s = sql_select("id_rubrique,statut", "$table", "$prim=$id");
 		$r = sql_fetch($s);
 		$statut = $r['statut'];
 		$id_rubrique = $r['id_rubrique'];
