@@ -169,7 +169,7 @@ AND $l = @unserialize($l)) {
 	}
 }
 
-if (_request('var_ajax') OR _request('formulaire_action')){
+if (_request('action') OR _request('var_ajax') OR _request('formulaire_action')){
 	include_spip('public/assembler');
 	traiter_formulaires_dynamiques();
 }
