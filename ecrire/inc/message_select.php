@@ -29,7 +29,7 @@ function afficher_messages($titre, $from, $where, &$messages_vus, $afficher_aute
 			$styles = array('arial2', 'arial1', 'arial1');
 	}
 
-
+	$presenter_liste = charger_fonction('presenter_liste', 'inc');
 	$tranches =  affiche_tranche_bandeau($requete, $tmp_var, false, 'afficher_message_boucles', $afficher_auteurs);
 
 	if ($deb_aff > 0)
@@ -41,7 +41,7 @@ function afficher_messages($titre, $from, $where, &$messages_vus, $afficher_aute
 
 	// cette variable est passe par reference et recevra les valeurs du champ indique 
 	$les_messages = 'id_message'; 
-	$res = xhtml_table_id_type($requete, 'afficher_message_boucles', $les_messages, $afficher_auteur, $important, $largeurs, $styles, $tranches, $titre,  "messagerie-24.gif");
+	$res = 	$presenter_liste($requete, 'afficher_message_boucles', $les_messages, $afficher_auteur, $important, $largeurs, $styles, $tranches, $titre,  "messagerie-24.gif");
 	$messages_vus =  array_merge($messages_vus, $les_messages);
 
 	if (!$res) return '';

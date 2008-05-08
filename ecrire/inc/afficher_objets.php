@@ -239,7 +239,7 @@ function inc_afficher_objets_dist($type, $titre,$requete,$formater='', $force=fa
 		$skel = "afficher_objet_boucle";
 		$arg = array($type,id_table_objet($type),$afficher_langue, false, $langue_defaut);
 	}
-	$icone =  icone_table($type);
+	$presenter_liste = charger_fonction('presenter_liste', 'inc');
 	$tranches = affiche_tranche_bandeau($requete, $tmp_var, $force, $skel, $arg);
 	$largeurs = array('7','', '', '', '100', '38');
 	$styles = array('arial11', 'arial11', 'arial1', 'arial1', 'arial1 centered', 'arial1');
@@ -249,7 +249,7 @@ function inc_afficher_objets_dist($type, $titre,$requete,$formater='', $force=fa
 	else if (empty($requete['LIMIT'])) $requete['LIMIT'] = "99999";
 
 	$tableau = array(); // ne sert pas ici
-	return xhtml_table_id_type($requete, $skel, $tableau, $arg, $force, $largeurs, $styles, $tranches, $titre, $icone);
+	return $presenter_liste($requete, $skel, $tableau, $arg, $force, $largeurs, $styles, $tranches, $titre, icone_table($type));
 }
 
 function charger_fonction_logo_if()
@@ -445,15 +445,15 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 	}
 	$texte .=  '<b>' . $titre_table  . '</b>';
 
+	$presenter_liste = charger_fonction('presenter_liste', 'inc');
 	$largeurs = array(11, '', 80, 100, 50);
 	$styles = array('', 'arial2', 'arial1', 'arial1', 'arial1');
-
 	$tableau = array();
 
 	$tranches = ($cpt <= $nb_aff) ? ''
 	  : afficher_tranches_requete($cpt, $tmp_var, generer_url_ecrire('memoriser', "hash=$hash&trad=$trad"), $nb_aff);
 
-	$res = xhtml_table_id_type($requete, $formater, $tableau, array(), false, $largeurs, $styles, $tranches, $texte, "article-24.gif");
+	$res = 	$presenter_liste($requete, $formater, $tableau, array(), false, $largeurs, $styles, $tranches, $texte, "article-24.gif");
 
 	return ajax_action_greffe($tmp_var, '', $res);
 }
