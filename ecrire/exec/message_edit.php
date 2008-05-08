@@ -69,9 +69,9 @@ function exec_message_edit_args($id_message, $new, $dest)
 	echo debut_gauche('', true);
 	
 	if($type == 'normal' AND $dest) {
-		$nom = sql_fetsel("nom, email", "spip_auteurs", "id_auteur=$dest");
-		if (strlen($nom['email']) > 3) {
-			echo icone(_T('info_envoyer_message_prive'), "mailto:".$nom['email'], "envoi-message-24.gif");
+		$email = sql_getfetsel("email", "spip_auteurs", "id_auteur=$dest");
+		if (strlen($email) > 3) {
+			echo icone(_T('info_envoyer_message_prive'), "mailto:".$email, "envoi-message-24.gif");
 		}
 	}
 
@@ -91,11 +91,11 @@ function exec_message_edit_args($id_message, $new, $dest)
 		  $res .="<input type='text' class='formo' name='cherche_auteur' id='cherche_auteur' value='' size='40'/>";
 		}
 	} else {
-		$nom = sql_fetsel("nom", "spip_auteurs", "id_auteur=$dest");
-		$res .="<br /><b>" .
+		$nom = sql_getfetsel("nom", "spip_auteurs", "id_auteur=$dest");
+		$res .= "<br /><b>" .
 		  _T('info_nom_destinataire') .
 		  "</b>&nbsp;:&nbsp;&nbsp; " .
-		  $nom['nom'] .
+		  $nom .
 		  "<br /><br />\n";
 	}
 	$res .= '<br />';
@@ -104,17 +104,20 @@ function exec_message_edit_args($id_message, $new, $dest)
 	// Fixer rendez-vous?
 	//
 	if ($rv == "oui") $fonction = "rv.gif";	else $fonction = "";
-	$res .= debut_cadre_trait_couleur($logo.".gif", true, $fonction, _T('titre_rendez_vous'));
-	$res .= afficher_si_rdv($date_heure, $date_fin, ($rv == "oui")); 
-	$res .= fin_cadre_trait_couleur(true);
 
-	$res .= "\n<p><label for='texte'><b>"._T('info_texte_message_02')."</b></label><br />";
-	$res .= "<textarea name='texte' id='texte' rows='20' class='formo' cols='40'>";
-	$res .= $texte;
-	$res .= "</textarea></p><br />\n";
-
-	$res .= "\n<div style='text-align: right'><input type='submit' value='"._T('bouton_valider')."' class='fondo'/></div>"	
-	. "\n</div>";
+	$res .= debut_cadre_trait_couleur($logo.".gif", true, $fonction, _T('titre_rendez_vous'))
+	  . afficher_si_rdv($date_heure, $date_fin, ($rv == "oui"))
+	  . fin_cadre_trait_couleur(true)
+	  . "\n<p><label for='texte'><b>"
+	  . _T('info_texte_message_02')
+	  . "</b></label><br />"
+	  . "<textarea name='texte' id='texte' rows='20' class='formo' cols='40'>"
+	  . $texte
+	  . "</textarea></p><br />\n"
+	  . "\n<div style='text-align: right'><input type='submit' value='"
+	  . _T('bouton_valider')
+	  . "' class='fondo'/></div>"	
+	  . "\n</div>";
 
 	echo redirige_action_auteur('editer_message', $id_message, 'message',"id_message=$id_message", $res, " method='post'");
 
