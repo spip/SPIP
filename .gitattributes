@@ -11,6 +11,8 @@ dist/formulaires/editer_article.html -text
 dist/formulaires/editer_article.php -text
 dist/formulaires/editer_breve.html -text
 dist/formulaires/editer_breve.php -text
+dist/formulaires/editer_mot.html -text
+dist/formulaires/editer_mot.php -text
 dist/formulaires/editer_rubrique.html -text
 dist/formulaires/editer_rubrique.php -text
 dist/formulaires/editer_site.html -text
@@ -23,6 +25,8 @@ dist/formulaires/oubli/charger.php -text
 dist/formulaires/oubli/traiter.php -text
 dist/formulaires/oubli/verifier.php -text
 dist/formulaires/recherche/charger.php -text
+dist/formulaires/selecteur_groupe_mot.html -text
+dist/formulaires/selecteur_groupe_mot_fonctions.php -text
 dist/icones_barre/agrave-maj.png -text
 dist/icones_barre/blanc.png -text
 dist/icones_barre/eacute-maj.png -text
@@ -307,6 +311,7 @@ dist/prive/contenu/rubrique.html -text
 dist/prive/contenu/site.html -text
 dist/prive/editer/article.html -text
 dist/prive/editer/breve.html -text
+dist/prive/editer/mot.html -text
 dist/prive/editer/rubrique.html -text
 dist/prive/editer/site.html -text
 dist/prive/infos/article.html -text
@@ -451,7 +456,6 @@ ecrire/action/instituer_collaboration.php -text
 ecrire/action/instituer_forum.php -text
 ecrire/action/instituer_groupe_mots.php -text
 ecrire/action/instituer_langue_rubrique.php -text
-ecrire/action/instituer_mot.php -text
 ecrire/action/instituer_rubrique_breves.php -text
 ecrire/action/instituer_syndic.php -text
 ecrire/action/joindre.php -text

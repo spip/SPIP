@@ -37,6 +37,10 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 {
 	global $spip_lang_right, $connect_statut, $spip_display, $les_notes;
 
+	$autoriser_editer = ($new=='oui');
+	$editer = ($new=='oui') OR $autoriser_editer;
+	$ok = false;
+	
 	$row = sql_fetsel("*", "spip_mots", "id_mot=$id_mot");
 	if ($row) {
 		$id_mot = $row['id_mot'];
@@ -46,7 +50,14 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 		$extra = $row['extra'];
 		$id_groupe = $row['id_groupe'];
 		$onfocus ='';
-	 } else {
+		$autoriser_editer = autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe));
+		if (!_request('edit'))
+			$editer = false;
+		else
+			$editer = $autoriser_editer;
+		$ok = true;
+	}
+	else {
 		if (!$new OR !autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe))) {
 			include_spip('inc/minipres');
 			echo minipres(_T('info_mot_sans_groupe'));
@@ -58,7 +69,6 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 				$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 			}
 			$row = sql_countsel('spip_groupes_mots', ($table ? "$table='oui'" : ''));
-
 			if (!$row) {
 		  // cas pathologique: 
 		  // creation d'un mot sans groupe de mots cree auparavant
@@ -71,62 +81,58 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 				include_spip('inc/headers');
 				redirige_par_entete(redirige_action_auteur('instituer_groupe_mots', $table, 'mots_edit', "new=$new&table=$table&table_id=$table_id&ajouter_id_article=$ajouter_id_article$titre$redirect", true));
 			}
+			$ok = true;
 		}
-	 }
-	 if ($row) {
-	 pipeline('exec_init',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
-
-	 $commencer_page = charger_fonction('commencer_page', 'inc');
-	 $out = $commencer_page("&laquo; $titre_mot &raquo;", "naviguer", "mots") . debut_gauche('',true);
-
-
-//////////////////////////////////////////////////////
-// Boite "voir en ligne"
-//
-
-	 if ($id_mot) {
-
-		$out .= debut_boite_info(true);
-		$out .= "\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>" 
-		.  _T('titre_gauche_mots_edit')
-		.  "<br /><span class='spip_xx-large'>"
-		.  $id_mot
-		.  '</span></div>';
-		$out .= voir_en_ligne ('mot', $id_mot, false, 'racine-24.gif', false, false);
-		$out .= fin_boite_info(true);
-
-		// Logos du mot-clef
-		$flag_editable = autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe));
-		$iconifier = charger_fonction('iconifier', 'inc');
-		$out .= $iconifier('id_mot', $id_mot, 'mots_edit', $flag_editable);
-	 }
-
-//
-// Afficher les boutons de creation 
-//
-
-	$res ='';
-
-	if ($id_groupe AND autoriser('modifier','groupemots',$id_groupe)) {
-		$res = icone_horizontale(_T('icone_modif_groupe_mots'), generer_url_ecrire("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.gif", "edit.gif", false)
-		  . icone_horizontale(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit", "new=oui&id_groupe=$id_groupe&redirect=" . generer_url_retour('mots_tous')),  "mot-cle-24.gif",  "creer.gif", false);
 	}
+	if ($ok) {
+		pipeline('exec_init',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
+		
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		$out = $commencer_page("&laquo; $titre_mot &raquo;", "naviguer", "mots") . debut_gauche('',true);
 
+
+		//////////////////////////////////////////////////////
+		// Boite "voir en ligne"
+		//
+
+		if ($id_mot) {
+			$out .= debut_boite_info(true);
+			$out .= "\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>" 
+			.  _T('titre_gauche_mots_edit')
+			.  "<br /><span class='spip_xx-large'>"
+			.  $id_mot
+			.  '</span></div>';
+			$out .= voir_en_ligne ('mot', $id_mot, false, 'racine-24.gif', false, false);
+			$out .= fin_boite_info(true);
+			
+			// Logos du mot-clef
+			$flag_editable = autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe));
+			$iconifier = charger_fonction('iconifier', 'inc');
+			$out .= $iconifier('id_mot', $id_mot, 'mots_edit', $flag_editable);
+		}
+
+		//
+		// Afficher les boutons de creation 
+		//
+
+		$res ='';
+		
+		if ($id_groupe AND autoriser('modifier','groupemots',$id_groupe)) {
+			$res = icone_horizontale(_T('icone_modif_groupe_mots'), generer_url_ecrire("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.gif", "edit.gif", false)
+			  . icone_horizontale(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit", "new=oui&id_groupe=$id_groupe&redirect=" . generer_url_retour('mots_tous')),  "mot-cle-24.gif",  "creer.gif", false);
+		}
 
 	$out .= pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
-
 	$out .= bloc_des_raccourcis($res . icone_horizontale(_T('icone_voir_tous_mots_cles'), generer_url_ecrire("mots_tous",""), "mot-cle-24.gif", "rien.gif", false));
-
-
 	$out .= creer_colonne_droite('',true);
-
 	$out .= pipeline('affiche_droite',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
-
 	$out .= debut_droite('',true);
 
-	$out .= debut_cadre_relief("mot-cle-24.gif",true);
-
-	$out .= icone_inline(_T('icone_retour'), generer_url_ecrire('mots_tous'), "mot-cle-24.gif", "rien.gif",$spip_lang_right);
+	
+	// --- Voir le mot ----
+	
+	$out .= debut_cadre_relief("mot-cle-24.gif",true,'','','mot-voir',$editer?'none':'');
+	$out .= icone_inline(_T('icone_modifier_mot'), generer_url_ecrire('mots_edit',"id_mot=$id_mot&edit=oui"), "mot-cle-24.gif", "rien.gif",$spip_lang_right,false," onclick=\"$('#mot-editer').show();$('#mot-voir').hide();return false;\"");
 	$out .= gros_titre($titre_mot,'',false);
 	$out .= "<div class='nettoyeur'></div>";
 
@@ -172,9 +178,28 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 
 	$out .= pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
 
-	if (autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe))){
+	// --- Editer le mot ----
+	if ($autoriser_editer){
+		$out .= "<div id='mot-editer'".($editer?"":" class='none'").'>';
+		$out .= debut_cadre_formulaire('',true);
+		$contexte = array(
+			'icone_retour'=>icone_inline(_T('icone_retour'),($editer&$redirect)?rawurldecode($redirect): generer_url_ecrire('mots_edit','id_mot='.$id_mot, '&',true), "mot-cle-24.gif", "rien.gif",$GLOBALS['spip_lang_right'],false,($editer&$redirect)?"":" onclick=\"$('#mot-editer').hide();$('#mot-voir').show();return false;\""),
+			'redirect'=>$redirect?rawurldecode($redirect):generer_url_ecrire('mots_edit','id_mot='.$id_mot, '&',true),
+			'titre'=>$titre_mot,
+			'new'=>$new == "oui"?$new:$id_mot,
+			'id_groupe'=>$id_groupe,
+			'config_fonc'=>'mots_edit_config',
+			'ajouter_id_article' => $ajouter_id_article,
+			'table'=>$table,
+			'table_id'=>$table_id
+		);
+		$page = evaluer_fond("prive/editer/mot", $contexte, $connect);
+		$out .= $page['texte'];
+		$out .= fin_cadre_formulaire(true);
+		$out .= '</div>';
+		
 
-		$res = "<div class='serif'>";
+		/*$res = "<div class='serif'>";
 
 		$titre_mot = entites_html($titre_mot);
 		$descriptif = entites_html($descriptif);
@@ -233,16 +258,16 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 
 		$out .= debut_cadre_formulaire('',true)
 			. generer_action_auteur("instituer_mot", $arg, _DIR_RESTREINT_ABS . $redirect, $res, " method='post'")
-			. fin_cadre_formulaire(true);
+			. fin_cadre_formulaire(true);*/
 	}
 
 	echo $out, fin_gauche(), fin_page();
-	 }
+	}
 }
 
 
 // http://doc.spip.org/@determine_groupe_mots
-function determine_groupe_mots($table, $id_groupe) {
+/*function determine_groupe_mots($table, $id_groupe) {
 
 	$q = sql_select('id_groupe, titre', 'spip_groupes_mots', ($table ? "$table='oui'" : ''),'', "titre");
 
@@ -268,5 +293,5 @@ function determine_groupe_mots($table, $id_groupe) {
 	. debut_cadre_relief("groupe-mot-24.gif", true)
 	. $res
 	. fin_cadre_relief(true);
-}
+}*/
 ?>

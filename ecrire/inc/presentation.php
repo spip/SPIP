@@ -702,7 +702,7 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $echo=false){
 }
 
 // http://doc.spip.org/@icone_inline
-function icone_inline($texte, $lien, $fond, $fonction="", $align="", $ajax=false){	
+function icone_inline($texte, $lien, $fond, $fonction="", $align="", $ajax=false, $javascript=''){	
 	global $spip_display;
 
 	if ($fonction == "supprimer.gif") {
@@ -755,6 +755,7 @@ function icone_inline($texte, $lien, $fond, $fonction="", $align="", $ajax=false
 	$icone = "<a style='$align' class='$style'"
 	. $atts
 	. (!$ajax ? '' : (' onclick=' . ajax_action_declencheur($lien,$ajax)))
+	. $javascript
 	. "\nhref='"
 	. $lien
 	. "'>"
