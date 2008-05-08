@@ -34,15 +34,12 @@ function afficher_messages($titre, $from, $where, &$messages_vus, $afficher_aute
 
 	$result = sql_select((isset($requete["SELECT"]) ? $requete["SELECT"] : "*"), $requete['FROM'], $requete['WHERE'], $requete['GROUP BY'], $requete['ORDER BY'], ($deb_aff > 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
 
-	$table = array();
-	while ($row = sql_fetch($result)) {
-		$table[]= afficher_message_boucles($row, $messages_vus, $afficher_auteurs);
-	}
-	sql_free($result);
+	// cette variable est passe par reference et recevra les valeurs du champ indique 
+	$les_messages = 'id_message'; 
+	$res = xhtml_table_id_type($result, 'afficher_message_boucles', $les_messages, $afficher_auteur, $important, $largeurs, $styles, $tranches, $titre,  "messagerie-24.gif");
+	$messages_vus =  array_merge($messages_vus, $les_messages);
 
-	$res = xhtml_table_id_type($table, $largeurs, $styles, $tranches, $titre,  "messagerie-24.gif");
-
-	if (!$important AND !$table) return '';
+	if (!$res) return '';
 	else
 	  return 
 	    (debut_cadre_couleur('',true)
@@ -51,7 +48,7 @@ function afficher_messages($titre, $from, $where, &$messages_vus, $afficher_aute
 }
 
 // http://doc.spip.org/@afficher_message_boucles
-function afficher_message_boucles($row, &$messages_vus, $afficher_auteurs)
+function afficher_message_boucles($row, $afficher_auteurs)
 {
 	global $connect_id_auteur, $spip_lang_left, $spip_lang_rtl;
 
@@ -63,7 +60,6 @@ function afficher_message_boucles($row, &$messages_vus, $afficher_auteurs)
 	$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
 	$type = $row["type"];
 	$rv = $row["rv"];
-	$messages_vus[$id_message] = $id_message;
 
 			//
 			// Titre

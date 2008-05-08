@@ -159,21 +159,17 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 // http://doc.spip.org/@afficher_mots_cles
 function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id, $url_base, $visible)
 {
-	$les_mots = array();
 	$result = sql_select("mots.id_mot, mots.titre, mots.id_groupe", "spip_mots AS mots, spip_mots_$table AS lien", "lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot", "mots.type, mots.titre", "mots.type, mots.titre");
 	if (sql_count($result)) {
 	
-		$tableau= array();
 		$cle = http_img_pack('petite-cle.gif', "", "width='23' height='12'");
 		$ret = generer_url_retour($url_base, "$table_id=$id_objet#mots");
-		while ($row = sql_fetch($result)) {
-			$tableau[] = editer_mots_un($row, $cle, $flag_editable, $id_objet, $objet, $ret, $table, $table_id, $url_base, $les_mots);
-		}
-	
 		$largeurs = array('25', '', '', '');
 		$styles = array('arial11', 'arial2', 'arial2', 'arial1');
 
-		$res = xhtml_table_id_type($tableau, $largeurs, $styles);
+		// cette variable est passe par reference et recevra les valeurs du champ indique 
+		$les_mots = 'id_mot'; 
+		$res = xhtml_table_id_type($result, 'editer_mots_un', $les_mots, array($cle, $flag_editable, $id_objet, $objet, $ret, $table, $table_id, $url_base), false, $largeurs, $styles);
 
 	} else $res ='';
 
@@ -184,11 +180,12 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 }
 
 // http://doc.spip.org/@editer_mots_un
-function editer_mots_un($row, $cle, $flag_editable, $id_objet, $objet, $ret, $table, $table_id, $url_base, &$les_mots)
+function editer_mots_un($row, $own)
 {
+	list ($cle, $flag_editable, $id_objet, $objet, $ret, $table, $table_id, $url_base) = $own;
+
 	$id_mot = $row['id_mot'];
 	$titre_mot = $row['titre'];
-	$les_mots[] = $row['id_mot']; 
 	$id_groupe = $row['id_groupe'];
 
 	$url = generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=$ret");
@@ -291,7 +288,7 @@ function formulaire_mots_cles($id_objet, $les_mots, $table, $table_id, $url_base
 	  (" AND " . sql_in('id_mot', $les_mots, 'NOT'));
 
 	while ($row = sql_fetch($result)) {
-		if ($menu = menu_mots($row, $id_groupes_vus, $cond_mots_vu)) {
+		if ($menu = menu_mots($row, $id_groupes_vus, $cond_mots_vus)) {
 			$id_groupe = $row['id_groupe'];
 			list($corps, $clic) = $menu;
 
