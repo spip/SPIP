@@ -32,11 +32,16 @@ function afficher_messages($titre, $from, $where, &$messages_vus, $afficher_aute
 
 	$tranches =  affiche_tranche_bandeau($requete, $tmp_var, false, 'afficher_message_boucles', $afficher_auteurs);
 
-	$result = sql_select((isset($requete["SELECT"]) ? $requete["SELECT"] : "*"), $requete['FROM'], $requete['WHERE'], $requete['GROUP BY'], $requete['ORDER BY'], ($deb_aff > 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
+	if ($deb_aff > 0)
+		$requete['LIMIT'] = "$deb_aff, $nb_aff" ;
+	else if (empty($requete['LIMIT'])) $requete['LIMIT'] = "99999";
+
+
+#	$result = sql_select((isset($requete["SELECT"]) ? $requete["SELECT"] : "*"), $requete['FROM'], $requete['WHERE'], $requete['GROUP BY'], $requete['ORDER BY'], ($deb_aff > 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
 
 	// cette variable est passe par reference et recevra les valeurs du champ indique 
 	$les_messages = 'id_message'; 
-	$res = xhtml_table_id_type($result, 'afficher_message_boucles', $les_messages, $afficher_auteur, $important, $largeurs, $styles, $tranches, $titre,  "messagerie-24.gif");
+	$res = xhtml_table_id_type($requete, 'afficher_message_boucles', $les_messages, $afficher_auteur, $important, $largeurs, $styles, $tranches, $titre,  "messagerie-24.gif");
 	$messages_vus =  array_merge($messages_vus, $les_messages);
 
 	if (!$res) return '';

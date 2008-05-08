@@ -62,14 +62,11 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 	// Afficher la liste des traductions
 
 	if ($id_trad) {
-		$result = sql_select("id_article, id_rubrique, titre, lang, statut, id_trad", "spip_articles", "id_trad = $id_trad");
-	}
-		// bloc traductions
-	if (sql_count($result)) {
+		$requete = array('SELECT' => "id_article, id_rubrique, titre, lang, statut, id_trad", 'FROM' => "spip_articles", 'WHERE' => "id_trad = $id_trad");
 		$largeurs = array(7, 12, '', 100);
 		$styles = array('', '', 'arial2', 'arial2');
 		$tableau = array();
-		$liste = xhtml_table_id_type($result, 'articles_traduction', $tableau,  $id_article, false, $largeurs, $styles, '',_T('trad_article_traduction'));
+		$liste = xhtml_table_id_type($requete, 'articles_traduction', $tableau,  $id_article, false, $largeurs, $styles, '',_T('trad_article_traduction'));
 	} else $liste = '';
 
 	// changer les globales de direction de langue

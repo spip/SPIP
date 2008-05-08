@@ -159,19 +159,16 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 // http://doc.spip.org/@afficher_mots_cles
 function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id, $url_base, $visible)
 {
-	$result = sql_select("mots.id_mot, mots.titre, mots.id_groupe", "spip_mots AS mots, spip_mots_$table AS lien", "lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot", "mots.type, mots.titre", "mots.type, mots.titre");
-	if (sql_count($result)) {
+	$requete = array('SELECT' => "mots.id_mot, mots.titre, mots.id_groupe", 'FROM' => "spip_mots AS mots, spip_mots_$table AS lien", 'WHERE' => "lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot", 'GROUP BY' => "mots.type, mots.titre",  'ORDER BY' => "mots.type, mots.titre");
 	
-		$cle = http_img_pack('petite-cle.gif', "", "width='23' height='12'");
-		$ret = generer_url_retour($url_base, "$table_id=$id_objet#mots");
-		$largeurs = array('25', '', '', '');
-		$styles = array('arial11', 'arial2', 'arial2', 'arial1');
+	$cle = http_img_pack('petite-cle.gif', "", "width='23' height='12'");
+	$ret = generer_url_retour($url_base, "$table_id=$id_objet#mots");
+	$largeurs = array('25', '', '', '');
+	$styles = array('arial11', 'arial2', 'arial2', 'arial1');
 
-		// cette variable est passe par reference et recevra les valeurs du champ indique 
-		$les_mots = 'id_mot'; 
-		$res = xhtml_table_id_type($result, 'editer_mots_un', $les_mots, array($cle, $flag_editable, $id_objet, $objet, $ret, $table, $table_id, $url_base), false, $largeurs, $styles);
-
-	} else $res ='';
+	// cette variable est passe par reference et recevra les valeurs du champ indique 
+	$les_mots = 'id_mot'; 
+	$res = xhtml_table_id_type($requete, 'editer_mots_un', $les_mots, array($cle, $flag_editable, $id_objet, $objet, $ret, $table, $table_id, $url_base), false, $largeurs, $styles);
 
 	if ($flag_editable)
 	  $res .= formulaire_mots_cles($id_objet, $les_mots, $table, $table_id, $url_base, $visible, $objet);

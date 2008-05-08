@@ -188,16 +188,16 @@ function rechercher_auteurs_objet($cherche_auteur, $ids, $type, $id, $script_edi
 }
 
 // http://doc.spip.org/@afficher_auteurs_objet
-function afficher_auteurs_objet($type, $id, $flag_editable, $cond_les_auteurs, $script_edit, $arg_ajax)
+function afficher_auteurs_objet($type, $id, $flag_editable, $cond, $script_edit, $arg_ajax)
 {
 	global $connect_statut, $connect_id_auteur, $spip_display;
 	
-	$les_auteurs = array();
-	if (!preg_match(',^[a-z]*$,',$type)) return $les_auteurs; 
-
-	$result = determiner_auteurs_objet($type,$id,$cond_les_auteurs);
+	$from = table_jointure('auteur', $type);
+	if (!$from) return '' ; // securite
+	$from = "spip_{$from}";
+	$where = "id_{$type}=".sql_quote($id) . ($cond ? " AND $cond" : '');
+	$result = sql_select("id_auteur", $from, $where);
 	$cpt = sql_count($result);
-
 	$tmp_var = "editer_auteurs-$id";
 	$nb_aff = floor(1.5 * _TRANCHES);
 	if ($cpt > $nb_aff) {
@@ -209,14 +209,12 @@ function afficher_auteurs_objet($type, $id, $flag_editable, $cond_les_auteurs, $
 	$deb_aff = ($deb_aff !== NULL ? intval($deb_aff) : 0);
 	
 	$limit = (($deb_aff < 0) ? '' : "$deb_aff, $nb_aff");
-	$result = determiner_auteurs_objet($type,$id,$cond_les_auteurs,$limit);
+	$requete = array('SELECT' => "id_auteur", 'FROM' => $from, 'WHERE' => $where, 'LIMIT' => $limit);
 
-	// charger ici meme si ps d'auteurs
+	// charger ici meme si pas d'auteurs
 	// car inc_formater_auteur peut aussi redefinir determiner_non_auteurs qui sert plus loin
 	if (!$formater = charger_fonction("formater_auteur_$type", 'inc',true))
 		$formater = charger_fonction('formater_auteur', 'inc');
-
-	if (!sql_count($result)) return '';
 
 	$retirer = array(_T('lien_retirer_auteur')."&nbsp;". http_img_pack('croix-rouge.gif', "X", " class='puce' style='vertical-align: bottom;'"));
 
@@ -224,7 +222,7 @@ function afficher_auteurs_objet($type, $id, $flag_editable, $cond_les_auteurs, $
 	$styles = array('arial11', 'arial2', 'arial11', 'arial11', 'arial11', 'arial1');
 
 	$tableau = array(); // ne sert pas
-	return xhtml_table_id_type($result, 'ajouter_auteur_un', $tableau, array($formater, $retirer, $arg_ajax, $flag, $id, $type, $script_edit), false, $largeurs, $styles, $tranche);
+	return xhtml_table_id_type($requete, 'ajouter_auteur_un', $tableau, array($formater, $retirer, $arg_ajax, $flag, $id, $type, $script_edit), false, $largeurs, $styles, $tranche);
 }
 
 // http://doc.spip.org/@ajouter_auteur_un

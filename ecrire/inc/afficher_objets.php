@@ -244,11 +244,12 @@ function inc_afficher_objets_dist($type, $titre,$requete,$formater='', $force=fa
 	$largeurs = array('7','', '', '', '100', '38');
 	$styles = array('arial11', 'arial11', 'arial1', 'arial1', 'arial1 centered', 'arial1');
 
-	$result = sql_select((isset($requete["SELECT"]) ? $requete["SELECT"] : "*"), $requete['FROM'], $requete['WHERE'], $requete['GROUP BY'], $requete['ORDER BY'], ($deb_aff > 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
-
+	if ($deb_aff > 0)
+		$requete['LIMIT'] = "$deb_aff, $nb_aff" ;
+	else if (empty($requete['LIMIT'])) $requete['LIMIT'] = "99999";
 
 	$tableau = array(); // ne sert pas ici
-	return xhtml_table_id_type($result, $skel, $tableau, $arg, $force, $largeurs, $styles, $tranches, $titre, $icone);
+	return xhtml_table_id_type($requete, $skel, $tableau, $arg, $force, $largeurs, $styles, $tranches, $titre, $icone);
 }
 
 function charger_fonction_logo_if()
@@ -428,7 +429,9 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 	$nb_aff = ($cpt  > floor(1.5 * _TRANCHES)) ? _TRANCHES : floor(1.5 * _TRANCHES) ;
 	$deb_aff = intval(_request($tmp_var));
 
-	$q = sql_select($requete['SELECT'], $requete['FROM'], $requete['WHERE'], $requete['GROUP BY'], $requete['ORDER BY'], ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
+	if ($deb_aff >= 0)
+		$requete['LIMIT'] = "$deb_aff, $nb_aff" ;
+	else if (empty($requete['LIMIT'])) $requete['LIMIT'] = "99999";
 
 	$style = "style='visibility: hidden; float: $spip_lang_right'";
 
@@ -450,7 +453,7 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 	$tranches = ($cpt <= $nb_aff) ? ''
 	  : afficher_tranches_requete($cpt, $tmp_var, generer_url_ecrire('memoriser', "hash=$hash&trad=$trad"), $nb_aff);
 
-	$res = xhtml_table_id_type($q, $formater, $tableau, array(), false, $largeurs, $styles, $tranches, $texte, "article-24.gif");
+	$res = xhtml_table_id_type($requete, $formater, $tableau, array(), false, $largeurs, $styles, $tranches, $texte, "article-24.gif");
 
 	return ajax_action_greffe($tmp_var, '', $res);
 }
