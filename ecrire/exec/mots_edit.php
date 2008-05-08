@@ -172,11 +172,11 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 		$out .= afficher_objets('breve','<b>' . _T('info_breves_liees_mot') . '</b>', array("FROM" => 'spip_breves AS breves, spip_mots_breves AS lien', 'WHERE' => "lien.id_mot=$id_mot AND lien.id_breve=breves.id_breve", 'ORDER BY' => "breves.date_heure DESC"));
 
 		$out .= afficher_objets('site','<b>' . _T('info_sites_lies_mot') . '</b>', array("FROM" => 'spip_syndic AS syndic, spip_mots_syndic AS lien', 'WHERE' => "lien.id_mot=$id_mot AND lien.id_syndic=syndic.id_syndic", 'ORDER BY' => "syndic.nom_site DESC"));
+		
 	}
 
-	$out .= fin_cadre_relief(true);
-
 	$out .= pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
+	$out .= fin_cadre_relief(true);
 
 	// --- Editer le mot ----
 	if ($autoriser_editer){
