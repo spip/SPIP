@@ -131,14 +131,11 @@ jQuery.fn.ajaxbloc = function() {
 	var ajax_env = (""+blocfrag.attr('class')).match(/env-([^ ]+)/);
 	if (!ajax_env || ajax_env==undefined) return;
 	ajax_env = ajax_env[1];
-	var ajax_cle = (""+blocfrag.attr('class')).match(/cle-([^ ]+)/);
-	if (!ajax_cle || ajax_cle==undefined) return;
-	ajax_cle = ajax_cle[1];
 	if (ajaxbloc_selecteur==undefined)
 		ajaxbloc_selecteur = '.pagination a,a.ajax';
 	jQuery(ajaxbloc_selecteur,this).not('.noajax').each(function(){
 		var url = this.href.split('#');
-		url[0] += (url[0].indexOf("?")>0 ? '&':'?')+'var_ajax=1&var_ajax_env='+ajax_env+'&var_ajax_cle='+ajax_cle;
+		url[0] += (url[0].indexOf("?")>0 ? '&':'?')+'var_ajax=1&var_ajax_env='+encodeURIComponent(ajax_env);
 		if (jQuery(this).is('.preload') && !preloaded_urls[url[0]]) {
 			jQuery.ajax({"url":url[0],"success":function(r){preloaded_urls[url[0]]=r;}});
 		}

@@ -83,26 +83,32 @@ function balise_FORMULAIRE__dyn($form)
 			$valeurs[$champ] = protege_valeurs($valeurs[$champ]); // proteger les ' et les " dans les champs que l'on va injecter dans les input
 		}
 	}
-	$action = parametre_url($action,'formulaire_action',''); // nettoyer l'url des champs qui vont etre saisis
-	$action = parametre_url($action,'formulaire_action_cle',''); // nettoyer l'url des champs qui vont etre saisis
-	$action = parametre_url($action,'formulaire_action_args',''); // nettoyer l'url des champs qui vont etre saisis
+
+	// nettoyer l'url
+	$action = parametre_url($action,'formulaire_action','');
+	$action = parametre_url($action,'formulaire_action_args','');
 
 	if (isset($valeurs['_action'])){
 		$securiser_action = charger_fonction('securiser_action','inc');
-		$secu = inc_securiser_action_dist(reset($valeurs['_action']),end($valeurs['_action']),'',-1);
+		$secu = $securiser_action(reset($valeurs['_action']),end($valeurs['_action']),'',-1);
 		$valeurs['_hidden'] = (isset($valeurs['_hidden'])?$valeurs['_hidden']:'') .
 		"<input type='hidden' name='arg' value='".$secu['arg']."' />"
 		. "<input type='hidden' name='hash' value='".$secu['hash']."' />";
 	}
 
+	// ajouter le nom du formulaire dans les $args pour pouvoir le controler
+	// au retour, histoire de ne pas se faire injecter dans un autre formulaire
+	// un contexte signe pour un premier formulaire
+	$args['form'] = $form;
+
 	return array("formulaires/$form",
 		3600,
 		array_merge(
-			$valeurs, 
+			$valeurs,
 			array(
 			'form' => $form,
 			'action' => $action,
-			'formulaire_args' => base64_encode(serialize($args)),
+			'formulaire_args' => encoder_contexte_ajax($args),
 			'id' => isset($valeurs['id'])?$valeurs['id']:'new',
 			'erreurs' => $erreurs,
 			'message_ok' => $message_ok,

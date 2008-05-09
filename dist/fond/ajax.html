@@ -2,9 +2,7 @@
 
 	Traiter les < INCLURE {ajax} >
 
-][(#REM) calculer l'env et la cle pour le contexte du traitement ajax]
-#SET{env,#ENV**|supprimer_debuts|base64_encode}
-#SET{cle,#EVAL{#VAL{'include_spip("inc/securiser_action")?calculer_cle_action("'}|concat{#GET{env},'"):""'}}}
-<div class='ajaxbloc[ env-(#GET{env})][ cle-(#GET{cle})]'>
+]
+<div class='ajaxbloc[ env-(#ENV**|encoder_contexte_ajax)]'>
 <INCLURE{fond=#ENV*{fond_ajax}}{env} />
 </div><!-- ajaxbloc -->

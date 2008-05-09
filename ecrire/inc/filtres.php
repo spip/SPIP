@@ -2516,4 +2516,50 @@ function puce_changement_statut($id_objet, $statut, $id_rubrique, $type, $ajax=f
 	$puce_statut = charger_fonction('puce_statut','inc');
 	return $puce_statut($id_objet, $statut, $id_rubrique, $type, $ajax=false);
 }
+
+// Encoder un contexte pour l'ajax, le signer avec une cle, le crypter
+// avec le secret du site, le gziper si possible...
+// l'entree peut etre serialisee (le #ENV** des fonds ajax et ajax_stat)
+function encoder_contexte_ajax($c) {
+	if (is_string($c)
+	AND !is_null(@unserialize($c)))
+		$c = unserialize($c);
+
+	include_spip("inc/securiser_action");
+	$cle = calculer_cle_action($c);
+	$c = serialize(array($c,$cle));
+	if (function_exists('gzdeflate'))
+		$c = gzdeflate($c);
+	$c = _xor($c);
+	$c = base64_encode($c);
+	return $c;
+}
+
+// la procedure inverse de encoder_contexte_ajax()
+function decoder_contexte_ajax($c) {
+	include_spip("inc/securiser_action");
+
+	$c = @base64_decode($c);
+	$c = _xor($c);
+	if (function_exists('gzinflate'))
+		$c = gzinflate($c);
+	list($env, $cle) = @unserialize($c);
+
+	if ($cle == calculer_cle_action($env))
+		return $env;
+}
+
+// encrypter/decrypter un message
+function _xor($message, $key=null){
+	if (is_null($key))
+		$key = $GLOBALS['meta']['secret_du_site'];
+
+	$keylen = strlen($key);
+	$messagelen = strlen($message);
+	for($i=0; $i<$messagelen; $i++)
+		$message[$i] = ~($message[$i]^$key[$i%$keylen]);
+
+	return $message;
+}
+
 ?>
