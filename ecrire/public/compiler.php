@@ -834,7 +834,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 			if (!function_exists($f)) $f = 'boucle_DEFAUT';
 			if (!function_exists($f)) $f = 'boucle_DEFAUT_dist';
 			$req = $f($id, $boucles);
-		}
+		} else $req = "\n\treturn '';";
 		$boucles[$id]->return = 
 			"function BOUCLE" . strtr($id,"-","_") . $nom .
 			'(&$Cache, &$Pile, &$doublons, &$Numrows, $SP) {' .
