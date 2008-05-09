@@ -89,6 +89,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // a partir de la liste des champs, generer la liste des input
 // http://doc.spip.org/@extra_saisie
 function extra_saisie($extra, $table_objet, $ensemble='') {
+	include_spip('inc/presentation');
 	if ($affiche = extra_form($extra, $table_objet, $ensemble)) {
 		return debut_cadre_enfonce('',true)
 			. $affiche

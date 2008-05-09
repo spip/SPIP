@@ -1,4 +1,8 @@
-[(#REM) calculer l'env et la cle pour le contexte du traitement ajax]
+[(#REM)
+
+	Traiter les # INCLURE {ajax}
+
+][(#REM) calculer l'env et la cle pour le contexte du traitement ajax]
 #SET{env,#ENV**|base64_encode}
 #SET{cle,#EVAL{#VAL{'include_spip("inc/securiser_action")?calculer_cle_action("'}|concat{#GET{env},'"):""'}}}
 [
