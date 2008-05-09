@@ -1,0 +1,51 @@
+/*
+ *
+ * Style des formulaires .formfx
+ * Inspire de http://www.alistapart.com/articles/prettyaccessibleforms
+ * "Prettier Accessible Forms", by Nick Rigby
+ *
+ */
+.formfx form fieldset {
+  margin-bottom: 10px;
+}
+.formfx form legend {
+  padding: 0 2px;
+  font-weight: bold;
+}
+.formfx form label {
+  display: inline-block;
+  line-height: 1.8;
+  vertical-align: top;
+}
+.formfx form fieldset ol {
+  margin: 0;
+  padding: 0;
+}
+.formfx form fieldset li {
+  list-style: none;
+  padding: 5px;
+  margin: 0;
+}
+.formfx form fieldset fieldset {
+  border: none;
+  margin: 3px 0 0;
+}
+.formfx form fieldset fieldset legend {
+  padding: 0 0 5px;
+  font-weight: normal;
+}
+.formfx form fieldset fieldset label {
+  display: block;
+  width: auto;
+}
+.formfx form em {
+  font-weight: bold;
+  font-style: normal;
+  color: #f00;
+}
+.formfx form label {
+  width: 120px; /* Width of labels */
+}
+.formfx form fieldset fieldset label {
+  margin-left: 123px; /* Width plus 3 (html space) */
+}

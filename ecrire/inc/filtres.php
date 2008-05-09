@@ -2313,7 +2313,7 @@ function filtre_cache_static($scripts,$type='js'){
 		$dir = sous_repertoire(_DIR_VAR,'cache-'.$type);
 		$nom = $dir . md5(serialize($scripts)) . ".$type";
 		if (
-		  $GLOBALS['var_mode']=='recalcul'
+		  _request('var_mode')
 		  OR !file_exists($nom)){
 		  	$fichier = "";
 		  	$comms = array();
