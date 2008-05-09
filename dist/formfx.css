@@ -49,3 +49,14 @@
 .formfx form fieldset fieldset label {
   margin-left: 123px; /* Width plus 3 (html space) */
 }
+
+
+/* messages d'erreur */
+.formulaire_erreur {
+  color: red;
+}
+
+/* messages de retour */
+.formulaire_message {
+  color: green;
+}
