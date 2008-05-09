@@ -64,20 +64,47 @@ jQuery.fn.animeajax = function(end) {
 	return this; // don't break the chain
 }
 
-// rechargement ajax d'un formulaire dynamique implemente par formulaires/formulaire_.html
+// s'il n'est pas totalement visible, scroller pour positionner
+// le bloc cible en haut de l'ecran
+jQuery.fn.positionner = function() {
+	var offset = $(this).offset({'scroll':false});
+	var hauteur = parseInt($(this).css('height'));
+	var scrolltop = self['pageYOffset'] ||
+		$.boxModel && document.documentElement[ 'scrollTop' ] ||
+		document.body[ 'scrollTop' ];
+	var h = $(window).height();
+	var scroll=0;
+	if (offset['top'] - 5 <= scrolltop)
+		scroll = offset['top'] - 5;
+	else if (offset['top'] + hauteur - h + 5 > scrolltop)
+		scroll = offset['top'] + hauteur - h + 15;
+	if (scroll)
+		jQuery('html,body')
+		.animate({scrollTop: scroll}, 300);
+
+	// positionner le curseur dans la premiere zone de saisie
+	jQuery(jQuery('*', this).filter('input[@type=text],textarea')[0]).focus();
+}
+
+// rechargement ajax d'un formulaire dynamique implemente par formulaires/xxx.html
 jQuery.fn.formulaire_dyn_ajax = function(target) {
 	if (typeof target == 'undefined') target = this;
 	this
 	.find('form:not(.noajax)')
 		.prepend("<input type='hidden' name='var_ajax' value='form' />")
 		.ajaxForm({
-			target: target,
 			beforeSubmit: function(){
 				jQuery(target).addClass('loading').animeajax();
 			},
-			success: function(){
-				jQuery(target).removeClass('loading');
-				window.location.hash = jQuery(target).attr('id');
+			success: function(c){
+				var d = jQuery('.ajax',
+					jQuery('<div><\/div>').html(c));
+				if (d.length)
+					c = d.html();
+				jQuery(target)
+				.removeClass('loading')
+				.html(c)
+				.positionner();
 			},
 			iframe: jQuery.browser.msie
 		})
@@ -92,9 +119,17 @@ var preloaded_urls = {};
 var ajaxbloc_selecteur;
 jQuery.fn.ajaxbloc = function() {
 		var blocfrag = this;
-		var ajax_env = jQuery('input[@name=var_ajax_env]',this).eq(0).attr('value');
+
+		var on_pagination = function(c) {
+			jQuery(blocfrag)
+			.html(c)
+			.removeClass('loading')
+			.positionner();
+		}
+
+		var ajax_env = (""+this.attr('class')).match(/env-([^ ]+)/)[1];
 		if (!ajax_env || ajax_env==undefined) return;
-		var ajax_cle = jQuery('input[@name=var_ajax_cle]',this).eq(0).attr('value');
+		var ajax_cle = (""+this.attr('class')).match(/cle-([^ ]+)/)[1];
 		if (!ajax_cle || ajax_cle==undefined) return;
 		if (ajaxbloc_selecteur==undefined)
 			ajaxbloc_selecteur = '.pagination a,a.ajax';
@@ -105,20 +140,36 @@ jQuery.fn.ajaxbloc = function() {
 				jQuery.ajax({"url":url[0],"success":function(r){preloaded_urls[url[0]]=r;}});
 			}
 			jQuery(this).click(function(){
-				jQuery(blocfrag).animeajax().addClass('loading');
-				var on_pagination = function(contenu) {
-					preloaded_urls[url[0]] = contenu;
-					jQuery(blocfrag).html(preloaded_urls[url[0]]);
-					jQuery(blocfrag).removeClass('loading');
-					window.location.hash = url[1];
-				}
-				if(preloaded_urls[url[0]]) {
+				jQuery(blocfrag)
+				.animeajax()
+				.addClass('loading');
+				if (preloaded_urls[url[0]]) {
 					on_pagination(preloaded_urls[url[0]]);
-					triggerAjaxLoad(blocfrag);
+					triggerAjaxLoad(document);
 				} else {
-					jQuery.ajax({"url":url[0],"success":on_pagination});
+					jQuery.ajax({
+						url: url[0],
+						success: function(c){
+							on_pagination(c);
+							preloaded_urls[url[0]] = c;
+						}
+					});
 				}
 				return false;
 			});
 		}).addClass('noajax'); // previent qu'on ajax pas deux fois le meme lien
 };
+
+// Ajaxer les formulaires qui le demandent, au demarrage
+jQuery(function() {
+	jQuery('.ajax').formulaire_dyn_ajax();
+	jQuery('.ajaxbloc').ajaxbloc();
+});
+// ... et a chaque fois que le DOM change
+onAjaxLoad(function() {
+	jQuery('.ajax', this)
+	.formulaire_dyn_ajax();
+	jQuery('.ajaxbloc', this)
+	.ajaxbloc();
+});
+
