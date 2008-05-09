@@ -2520,6 +2520,7 @@ function puce_changement_statut($id_objet, $statut, $id_rubrique, $type, $ajax=f
 // Encoder un contexte pour l'ajax, le signer avec une cle, le crypter
 // avec le secret du site, le gziper si possible...
 // l'entree peut etre serialisee (le #ENV** des fonds ajax et ajax_stat)
+// http://doc.spip.org/@encoder_contexte_ajax
 function encoder_contexte_ajax($c) {
 	if (is_string($c)
 	AND !is_null(@unserialize($c)))
@@ -2536,6 +2537,7 @@ function encoder_contexte_ajax($c) {
 }
 
 // la procedure inverse de encoder_contexte_ajax()
+// http://doc.spip.org/@decoder_contexte_ajax
 function decoder_contexte_ajax($c) {
 	include_spip("inc/securiser_action");
 
@@ -2550,6 +2552,7 @@ function decoder_contexte_ajax($c) {
 }
 
 // encrypter/decrypter un message
+// http://doc.spip.org/@_xor
 function _xor($message, $key=null){
 	if (is_null($key))
 		$key = $GLOBALS['meta']['secret_du_site'];
