@@ -127,10 +127,12 @@ jQuery.fn.ajaxbloc = function() {
 			.positionner();
 		}
 
-		var ajax_env = (""+this.attr('class')).match(/env-([^ ]+)/)[1];
+		var ajax_env = (""+this.attr('class')).match(/env-([^ ]+)/);
 		if (!ajax_env || ajax_env==undefined) return;
-		var ajax_cle = (""+this.attr('class')).match(/cle-([^ ]+)/)[1];
+		ajax_env = ajax_env[1];
+		var ajax_cle = (""+this.attr('class')).match(/cle-([^ ]+)/);
 		if (!ajax_cle || ajax_cle==undefined) return;
+		ajax_cle = ajax_cle[1];
 		if (ajaxbloc_selecteur==undefined)
 			ajaxbloc_selecteur = '.pagination a,a.ajax';
 		jQuery(ajaxbloc_selecteur,this).not('.noajax').each(function(){
