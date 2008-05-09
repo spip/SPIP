@@ -711,11 +711,13 @@ function autoriser_sans_cookie($nom)
 // Cette fonction charge le bon inc-urls selon qu'on est dans l'espace
 // public ou prive, la presence d'un (old style) inc-urls.php3, etc.
 // http://doc.spip.org/@charger_generer_url
-function charger_generer_url() {
+function charger_generer_url($prive=NULL) {
 	static $ok;
+	if ($prive===null)
+		$prive = !test_espace_prive();
 
 	// espace prive
-	if (!_DIR_RESTREINT)
+	if ($prive)
 		include_spip('inc/urls');
 
 	// espace public
