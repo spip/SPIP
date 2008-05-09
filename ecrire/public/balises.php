@@ -1314,14 +1314,16 @@ function balise_FOREACH_dist($p) {
 
 // Appelle la fonction autoriser et renvoie ' ' si OK, '' si niet
 // A noter : la priorite des operateurs exige && plutot que AND
-// Par nature cette balise doit etre utilisee dans #CACHE{0} ou dans
-// un contexte lie au profil du visiteur
+// Cette balise cree un cache par session
 // http://doc.spip.org/@balise_AUTORISER_dist
 function balise_AUTORISER_dist($p) {
 	$_code = array();
+	$p->descr['session'] = true; // faire un cache par session
+	
 	$n=1;
 	while ($_v = interprete_argument_balise($n++,$p))
 		$_code[] = $_v;
+	
 	$p->code = '(include_spip("inc/autoriser")&&autoriser(' . join(', ',$_code).')?" ":"")';
 	$p->interdire_scripts = false;
 	return $p;
