@@ -153,7 +153,7 @@ function traiter_formulaires_dynamiques(){
 					$_POST["editable_$form"] = $rev[0];
 					$_POST["message_ok_$form"] = $rev[1];
 				} else
-					$rev = $_POST["message_ok_$form"];
+					$_POST["message_ok_$form"] = $rev;
 			}
 			// si le formulaire a ete soumis en ajax, on le renvoie direct !
 			if (_request('var_ajax')){
