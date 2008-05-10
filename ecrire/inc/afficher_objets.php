@@ -370,20 +370,29 @@ function inc_afficher_articles_dist($titre, $requete, $formater='') {
 	// memorisation des arguments pour gerer l'affichage par tranche
 	// et/ou par langues.
 
-	$hash = substr(md5(serialize($requete) . $GLOBALS['meta']['gerer_trad'] . $titre), 0, 31);
-	$tmp_var = 't' . substr($hash, 0, 7);
 
-	//
-	// Stocke la fonction ajax dans le fichier temp pour exec=memoriser
-	//
+	$hash = sauver_requete($titre, $requete, $formater);
+
+	if (isset($requete['LIMIT'])) $cpt = min($requete['LIMIT'], $cpt);
+	return afficher_articles_trad($titre, $requete, $formater, $hash, $cpt);
+}
+
+//
+// Stocke la fonction ajax dans le fichier temp pour exec=memoriser
+//
+
+function sauver_requete($titre, $requete, $formater)
+{
+	$r = $requete;
+	unset($r['ORDER BY']);
+	$hash = substr(md5(serialize($r) . $GLOBALS['meta']['gerer_trad'] . $titre), 0, 31);
 
 	// on lit l'existant
 	lire_fichier(_DIR_SESSIONS.'ajax_fonctions.txt', $ajax_fonctions);
 	$ajax_fonctions = @unserialize($ajax_fonctions);
 
 	// on ajoute notre fonction
-
-	$v = array(time(), $titre, $requete, $tmp_var, $formater);
+	$v = array(time(), $titre, $requete, $formater);
 	$ajax_fonctions[$hash] = $v;
 
 	// supprime les fonctions trop vieilles
@@ -395,14 +404,15 @@ function inc_afficher_articles_dist($titre, $requete, $formater='') {
 	ecrire_fichier(_DIR_SESSIONS.'ajax_fonctions.txt',
 		serialize($ajax_fonctions));
 
-	if (isset($requete['LIMIT'])) $cpt = min($requete['LIMIT'], $cpt);
-	return afficher_articles_trad($titre, $requete, $formater, $tmp_var, $hash, $cpt);
-}
+	return $hash;
 
+}
 // http://doc.spip.org/@afficher_articles_trad
-function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $hash, $cpt, $trad=0) {
+function afficher_articles_trad($titre_table, $requete, $formater, $hash, $cpt, $trad=0) {
 
 	global $spip_lang_right;
+
+	$tmp_var = 't' . substr($hash, 0, 7);
 
 	if ($trad) {
 		$formater = 'afficher_articles_trad_boucle';
@@ -417,8 +427,12 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 
 	$texte =  '<b>' . $titre_table  . '</b>';
 
+	// Le parametre o sert a empecher le navigateur de reutiliser
+	// un cache de tranche issu d'un autre tri
+
+	$arg = "hash=$hash&o=" . $requete['ORDER BY'];
 	if (($GLOBALS['meta']['gerer_trad'] == "oui")) {
-		$url = generer_url_ecrire('memoriser',"hash=$hash&trad=" . (1-$trad));
+		$url = generer_url_ecrire('memoriser',"$arg&trad=" . (1-$trad));
 		$texte .=
 		"\n<span style='float: $spip_lang_right;'><a href=\"#\""
 		  . generer_onclic_ajax($url, $tmp_var, 0)
@@ -434,7 +448,7 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 	$presenter_liste = charger_fonction('presenter_liste', 'inc');
 	$styles = array(array('', 11), array('arial2','', $url_t), array('arial1', 80), array('arial1', 100, $url_d), array('arial1', 50));
 	$tableau = array();
-	$url = generer_url_ecrire('memoriser', "hash=$hash&trad=$trad");
+	$url = generer_url_ecrire('memoriser', "$arg&trad=$trad");
 	$res = $presenter_liste($requete, $formater, $tableau, array(), false, $styles, $tmp_var, $texte, "article-24.gif", $url, $cpt);
 
 	return ajax_action_greffe($tmp_var, '', $res);
