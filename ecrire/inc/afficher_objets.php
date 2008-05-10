@@ -98,13 +98,14 @@ function afficher_titre_objet($type,$row){
 }
 // http://doc.spip.org/@afficher_titre_site
 function afficher_titre_site($row){
-	$syndication = $row['syndication'];
-	$s = "";
-	$s .= $row['nom_site']?(strlen($row['nom_site'])>1?typo($row['nom_site']):""._T('info_sans_titre_2').""):"("._T('info_sans_titre_2').")";
+	$nom = $row['nom_site'];
+
+	$nom = $nom?(strlen($nom)>1?typo($nom):_T('info_sans_titre_2')):("("._T('info_sans_titre_2').")");
+
 	$s2 = "&nbsp;&nbsp; <span class='spip_xx-small'>[<a href='"
 	.$row['url_site']."'>"._T('lien_visite_site')."</a>]</span>";
 
-	return array($s,$s2);
+	return array($nom,$s2);
 }
 // http://doc.spip.org/@afficher_titre_auteur
 function afficher_titre_auteur($row){
@@ -280,7 +281,7 @@ function afficher_objet_boucle($row, $own)
 		$vals[] = $puce_statut($id_objet, $statut, $id_rubrique, $type);
 
 		list($titre,$suite) = afficher_titre_objet($type,$row);
-		$s = "\n<div>";
+		$flogo = '';
 		if ($chercher_logo) {
 			if ($chercher_logo !== true
 			    OR $chercher_logo = charger_fonction_logo_if())
@@ -288,13 +289,12 @@ function afficher_objet_boucle($row, $own)
 				list($fid, $dir, $nom, $format) = $logo;
 				include_spip('inc/filtres_images');
 				$logo = image_reduire("<img src='$fid' alt='' />", 26, 20);
-
 				if ($logo)
-					$s .= "\n<span style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</span>";
+					$flogo = "\n<span style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</span>";
 			  }
 		}
-		if (strlen($titre)){
-			$s .= "<a href='"
+		if ($titre) {
+			$titre = "<a href='"
 			.  lien_voir_objet($type,$primary,$id_objet)
 			.  "' "
 			. "title='" . _T('info_numero_abbreviation'). $id_objet
@@ -302,9 +302,7 @@ function afficher_objet_boucle($row, $own)
 			. $titre
 			. "</a>";
 		}
-		$s .= $suite;
-		$s .= "</div>";
-		$vals[] = $s;
+		$vals[] = "\n<div>$flogo$titre$suite</div>";
 
 		$s = "";
 		if ($afficher_langue){
@@ -324,8 +322,7 @@ function afficher_objet_boucle($row, $own)
 		}
 		$vals[] = $s;
 
-		$s = afficher_complement_objet($type,$row);
-		$vals[] = $s;
+		$vals[] = afficher_complement_objet($type,$row);
 
 		$s = "";
 		if ($affrub && $id_rubrique) {
@@ -412,9 +409,8 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 		$icone = "langues-off-12.gif";
 		$alt = _T('masquer_trad');
 	} else {
-		if (!$formater) {
+		if (!$formater)
 			$formater = charger_fonction('formater_article', 'inc');
-		}
 		$icone = 'langues-12.gif';
 		$alt = _T('afficher_trad');
 	}
@@ -424,19 +420,40 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 	if (($GLOBALS['meta']['gerer_trad'] == "oui")) {
 		$url = generer_url_ecrire('memoriser',"hash=$hash&trad=" . (1-$trad));
 		$texte .=
-		 "\n<span style='float: $spip_lang_right;'><a href=\"#\"\nonclick=\"return charger_id_url('$url','$tmp_var');\">"
-		  . "<img\nsrc='". chemin_image($icone) ."' alt='$alt' /></a></span>";
-
+		"\n<span style='float: $spip_lang_right;'><a href=\"#\""
+		  . generer_onclic_ajax($url, $tmp_var, 0)
+		  . "><img\nsrc='". chemin_image($icone) ."' alt='$alt' /></a></span>";
 	}
 
+	$url_t = generer_url_ecrire('memoriser',"hash=$hash&by=0%2Btitre,titre");
+	$url_t = afficher_boutons_tri($url_t, $tmp_var);
+
+	$url_d = generer_url_ecrire('memoriser',"hash=$hash&by=date");
+	$url_d = afficher_boutons_tri($url_d, $tmp_var);
 
 	$presenter_liste = charger_fonction('presenter_liste', 'inc');
-	$styles = array(array('', 11), array('arial2',''), array('arial1', 80), array('arial1', 100), array('arial1', 50));
+	$styles = array(array('', 11), array('arial2','', $url_t), array('arial1', 80), array('arial1', 100, $url_d), array('arial1', 50));
 	$tableau = array();
 	$url = generer_url_ecrire('memoriser', "hash=$hash&trad=$trad");
-	$res = 	$presenter_liste($requete, $formater, $tableau, array(), false, $styles, $tmp_var, $texte, "article-24.gif", $url, $cpt);
+	$res = $presenter_liste($requete, $formater, $tableau, array(), false, $styles, $tmp_var, $texte, "article-24.gif", $url, $cpt);
 
 	return ajax_action_greffe($tmp_var, '', $res);
+}
+
+function afficher_boutons_tri($url, $tmp_var)
+{
+	static $monter = '';
+	static $descendre = '';
+
+	if (!$monter) {
+		$monter = http_img_pack('monter-16.png', '<');
+		$descendre = http_img_pack('descendre-16.png', '>');
+	}
+
+	$url_d = generer_onclic_ajax($url ."&amp;order=desc", $tmp_var, 0);
+	$url_a = generer_onclic_ajax($url ."&amp;order=asc", $tmp_var, 0);
+	
+	return "<a href='$url'$url_d>$monter</a><a href='$url'$url_a>$descendre</a>";
 }
 
 // http://doc.spip.org/@afficher_articles_trad_boucle

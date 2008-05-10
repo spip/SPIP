@@ -371,19 +371,22 @@ function navigation_pagination($num_rows, $nb_aff=10, $href=null, $on='', $tmp_v
 			}
 			else {
 				$script = parametre_url($self, $tmp_var, $deb-1);
-				if ($on) {
-					$on = "\nonclick=\"return charger_id_url('"
-					. parametre_url($href, $tmp_var, $deb-1)
-					. "','"
-					. $tmp_var
-					. '\');"';
-				}
+				if ($on) $on = generer_onclic_ajax($href, $tmp_var, $deb-1);
 				$texte .= "<a href=\"$script\"$on>$deb</a>";
 			}
 		}
 	}
 	
 	return $texte;
+}
+
+function generer_onclic_ajax($url, $idom, $val)
+{
+	return "\nonclick=\"return charger_id_url('"
+	  . parametre_url($url, $idom, $val)
+	  . "','"
+	  . $idom
+	  . '\');"';
 }
 
 // http://doc.spip.org/@avoir_visiteurs

@@ -40,24 +40,29 @@ function inc_presenter_liste_dist($requete, $fonc, &$prims, $own, $force, $style
 			onmouseover=\"changeclass(this,'tr_liste_over');\"
 			onmouseout=\"changeclass(this,'tr_liste');\"" ;
 
-		$table = '';
+		$table = $head = '';
+		$th = 0;
 		while ($r = sql_fetch($result)) {
 		  if ($prim) $prims[]= $r[$prim];
 		  if ($vals = $fonc($r, $own)) {
 			reset($styles);
 			$res = '';
 			foreach ($vals as $t) {
-				list(,list($style, $largeur)) = each($styles);
+				list(,list($style, $largeur, $nom)) = each($styles);
 				if ($largeur) $largeur = " style='width: $largeur" ."px;'";
 				if ($style) $style = " class=\"$style\"";
 				$t = !trim($t) ? "&nbsp;" : lignes_longues($t);
 				$res .= "\n<td$class$style>$t</td>";
+				if (!$table) {
+				  $th |= $nom ? 1 : 0;
+				  $head .= "\n<th style='text-align:center'>$nom</th>";
+				}
 			}
 			$table .= "\n<tr class='tr_liste'$evt>$res</tr>";
 		  }
 		}
-
-		$tranches .= "<table width='100%' cellpadding='2' cellspacing='0' border='0'>$table</table>";
+		if (!$th) $head= '';
+		$tranches .= "<table width='100%' cellpadding='2' cellspacing='0' border='0'>$head$table</table>";
 	} else {
 		while ($r = sql_fetch($req)) {
 			if ($prim) $prims[]= $r[$prim];
@@ -94,27 +99,18 @@ function afficher_tranches_requete($num_rows, $idom, $url='', $nb_aff = 10, $old
 	$self = self();
 	$ie_style = ($browser_name == "MSIE") ? "height:1%" : '';
 	$style = "style='visibility: hidden; float: $spip_lang_right'";
-	$texte = http_img_pack("searching.gif", "*", "$style id='img_$idom'")
-
-	  . "\n<div style='$ie_style;' class='arial1 tranches' id='a$ancre'>"
-	  . navigation_pagination($num_rows, $nb_aff, $url, $onclick=true, $idom);
-
-	$on ='';
+	$nav= navigation_pagination($num_rows, $nb_aff, $url, $onclick=true, $idom);
 	$script = parametre_url($self, $idom, -1);
-	if ($url) {
-				$on = "\nonclick=\"return charger_id_url('"
-				. $url
-				. "&amp;"
-				. $idom
-				. "=-1','"
-				. $idom
-				. '\');"';
-	}
 	$l = htmlentities(_T('lien_tout_afficher'));
-	$texte .= "<a href=\"$script#a$ancre\"$on class='plus'><img\nsrc='". chemin_image("plus.gif") . "' title=\"$l\" alt=\"$l\" /></a>";
 
-	$texte .= "</div>\n";
-	return $texte;
+	return http_img_pack("searching.gif", "*", "$style id='img_$idom'")
+	  . "\n<div style='$ie_style;' class='arial1 tranches' id='a$ancre'>"
+	  . $nav
+	  . "<a href='$script#a$ancre' class='plus'"
+	  . (!$url ? '' : generer_onclic_ajax($url, $idom,-1))
+	  . "><img title=\"$l\" alt=\"$l\"\nsrc=\""
+	  . chemin_image("plus.gif")
+	  . "\" /></a></div>\n";
 }
 
 // http://doc.spip.org/@affiche_tranche_bandeau
