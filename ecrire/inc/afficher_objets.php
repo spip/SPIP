@@ -439,13 +439,13 @@ function afficher_articles_trad($titre_table, $requete, $formater, $hash, $cpt, 
 		  . generer_onclic_ajax($url, $tmp_var, 0)
 		  . "><img\nsrc='". chemin_image($icone) ."' alt='$alt' /></a></span>";
 	}
-
+	/* En attendant de trouver le bon graphisme
 	$url_t = generer_url_ecrire('memoriser',"hash=$hash&by=0%2Btitre,titre");
 	$url_t = afficher_boutons_tri($url_t, $tmp_var);
 
 	$url_d = generer_url_ecrire('memoriser',"hash=$hash&by=date");
 	$url_d = afficher_boutons_tri($url_d, $tmp_var);
-
+	*/ $url_t = $url_d = '';
 	$presenter_liste = charger_fonction('presenter_liste', 'inc');
 	$styles = array(array('', 11), array('arial2','', $url_t), array('arial1', 80), array('arial1', 100, $url_d), array('arial1', 50));
 	$tableau = array();
