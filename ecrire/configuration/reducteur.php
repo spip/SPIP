@@ -187,7 +187,7 @@ function afficher_choix_vignette($process) {
 	. "><a href='"
 	. generer_url_ecrire("config_fonctions", "image_process=$process")
 	. "'><img src='"
-	. generer_url_action("tester", "arg=$process")
+	. generer_url_action("tester", "arg=$process&time=".time())
 	. "' alt='$process' /></a><span>$process</span></div>\n";
 
 }
