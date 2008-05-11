@@ -92,11 +92,7 @@ function calculer_inclure($p, $descr, &$boucles, $id_boucle) {
 	}
 
 	$_contexte = argumenter_inclure($p, $descr, $boucles, $id_boucle);
-	if (isset($_contexte['fond']) && isset($_contexte['ajax'])){
-		$_contexte['fond_ajax'] = preg_replace(",fond,","fond_ajax",$_contexte['fond'],1);
-		$_contexte['fond'] = "\'fond\' => ' . argumenter_squelette('fond/ajax') . '";
-		unset($_contexte['ajax']);
-	}
+
 	// Critere d'inclusion {env} (et {self} pour compatibilite ascendante)
 	if ($env = (isset($_contexte['env'])|| isset($_contexte['self']))) {
 		unset($_contexte['env']);
@@ -113,13 +109,27 @@ function calculer_inclure($p, $descr, &$boucles, $id_boucle) {
 		$contexte = "array_merge('.var_export(\$Pile[0],1).',$contexte)";
 	}
 
-	return "\n'<".
-		"?php\n\t\$contexte_inclus = $contexte;"
-		. "\n\tinclude " .
+	$code = "\tinclude " .
 		($fichier ? "\\'$path\\'" : ('_DIR_RESTREINT . "public.php"')).
-		";" .
-		"\n?'." . "'>'";
- }
+		";";
+
+
+	// Gerer ajax
+	if (isset($_contexte['ajax'])) {
+		$code = '// {ajax}
+			echo "<div class=\\\'ajaxbloc env-"
+				.encoder_contexte_ajax($contexte_inclus)
+				."\\\'>\\n";
+			'.$code.'
+			echo "</div><!-- ajaxbloc -->\\n";
+		';
+	}
+
+	return "\n'<".
+		"?php\n\t\$contexte_inclus = $contexte;\n"
+		. $code
+		. "\n?'." . "'>'";
+}
 
 //
 // calculer_boucle() produit le corps PHP d'une boucle Spip. 

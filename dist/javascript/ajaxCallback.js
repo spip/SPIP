@@ -113,7 +113,7 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
   });
 }
 
-// rechargement ajax d'une noisette implementee par fond/ajax.html
+// rechargement ajax d'une noisette implementee par {ajax}
 // avec mise en cache des url
 var preloaded_urls = {};
 var ajaxbloc_selecteur;

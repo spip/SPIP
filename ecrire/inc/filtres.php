@@ -2526,6 +2526,14 @@ function encoder_contexte_ajax($c) {
 	AND !is_null(@unserialize($c)))
 		$c = unserialize($c);
 
+	// supprimer les parametres debut_x
+	// pour que la pagination ajax ne soit pas plantee
+	// si on charge la page &debut_x=1 : car alors en cliquant sur l'item 0,
+	// le debut_x=0 n'existe pas, et on resterait sur 1
+	foreach ($c as $k => $v)
+		if (strpos($k,'debut_') === 0)
+			unset($c[$k]);
+
 	include_spip("inc/securiser_action");
 	$cle = calculer_cle_action($c);
 	$c = serialize(array($c,$cle));
@@ -2544,7 +2552,7 @@ function decoder_contexte_ajax($c) {
 	$c = @base64_decode($c);
 	$c = _xor($c);
 	if (function_exists('gzinflate'))
-		$c = gzinflate($c);
+		$c = @gzinflate($c);
 	list($env, $cle) = @unserialize($c);
 
 	if ($cle == calculer_cle_action($env))
@@ -2555,8 +2563,10 @@ function decoder_contexte_ajax($c) {
 // http://www.php.net/manual/fr/language.operators.bitwise.php#81358
 // http://doc.spip.org/@_xor
 function _xor($message, $key=null){
-	if (is_null($key))
-		$key = $GLOBALS['meta']['secret_du_site'];
+	if (is_null($key)) {
+		include_spip("inc/securiser_action");
+		$key = pack("H*", calculer_cle_action('_xor'));
+	}
 
 	$keylen = strlen($key);
 	$messagelen = strlen($message);
