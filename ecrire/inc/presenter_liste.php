@@ -130,7 +130,7 @@ function affiche_tranche_bandeau(&$requete, $idom, $url='', $cpt=NULL)
 		$res = afficher_tranches_requete($cpt, $idom, $url, $nb_aff);
 	} else $res = '';
 
-	if (!isset($requete['LIMIT']))
+	if (!isset($requete['LIMIT']) AND $deb_aff <> -1)
 		$requete['LIMIT'] = "$deb_aff, $nb_aff";
 
 	return $res;
