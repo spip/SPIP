@@ -110,8 +110,8 @@ abbr.published { border: 0; }
 
 /* Habillage des formulaires
 ---------------------------------------------- */
-input, textarea, select { font-size: 100%; font-family: inherit; }
-.forml, textarea, select { width: 99%; background: #F4F8F8; border: 1px inset #CC9; color: #000; }
+input.text, textarea, select { font-size: 100%; font-family: inherit; }
+input.text, textarea, select { width: 340px; background: #F4F8F8; border: 1px inset #CC9; color: #000; }
 
 /* Formulaires de SPIP */
 .formulaire_spip { background: #EEC; margin-bottom: 2em; padding: 1em; text-align: left; color: #330; }
@@ -141,8 +141,7 @@ fieldset.previsu .spip_bouton input { background: #F57900; border-color: #F57900
 .formulaire_login_forum .spip_logos { float: right; padding-left: 10px; }
 
 /* Choix des mots-clefs */
-ul.choix_mots { float: left; width: 47%; margin: 0; padding: 0; list-style: none; } 
-ul.choix_mots label { display: inline; }
+.formfx form fieldset fieldset ul.choix_mots { margin:0; }
 
 /* Formulaire de recherche */
 .formulaire_recherche { float: right; background: none; margin: 0; padding: 0; }
@@ -183,6 +182,8 @@ ul ul .forum-chapo { background: #D4E8E8; }
 ul ul ul .forum-chapo { background: #E4F0F0; }
 ul ul ul ul .forum-chapo { background: #F4F8F8; border-bottom: 1px dotted #E0E0E0; }
 ul ul ul ul ul .forum-chapo { background: #FFF; }
+
+ul .forum-message.on {border:2px solid #666;background:#eee;}
 
 
 /* Habillage des petitions

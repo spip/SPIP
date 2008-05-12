@@ -714,7 +714,7 @@ function autoriser_sans_cookie($nom)
 function charger_generer_url($prive=NULL) {
 	static $ok;
 	if ($prive===null)
-		$prive = !test_espace_prive();
+		$prive = test_espace_prive();
 
 	// espace prive
 	if ($prive)
