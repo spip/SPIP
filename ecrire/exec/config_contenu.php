@@ -41,36 +41,65 @@ function exec_config_contenu_dist()
 	echo debut_droite('', true);
 
 	$participants = charger_fonction('participants', 'configuration');
+	$contenu_forums = charger_fonction('contenu_forums', 'configuration');
+
 	$redacteurs = charger_fonction('redacteurs', 'configuration');
 	$visiteurs = charger_fonction('visiteurs', 'configuration');
-	$contenu_forums = charger_fonction('contenu_forums', 'configuration');
+
+	$forums_prives = charger_fonction('forums_prives', 'configuration');
+	$messagerie_agenda = charger_fonction('messagerie_agenda', 'configuration');
+
 	$annonces = charger_fonction('annonces', 'configuration');
 	$notifications_forum = charger_fonction('notifications_forum', 'configuration');
-	$administrateurs = charger_fonction('administrateurs', 'configuration');
 
-// Mode de participation aux forums
 
-	echo $participants(), "<br />";
+	/*
+	 * Forums publics
+	 *
+	 */
 
-//
-// Inscriptions de redacteurs et visiteurs depuis le site public
-// (la balise FORMULAIRE_INSCRIPTION sert au deux)
-//
-	echo  $redacteurs(),  $visiteurs(), "<br />";
 
-// Champs actives sur les forums
+	echo "<h3>"._L('Sur le site public')."</h3>\n";
+
+	// Mode de participation aux forums
+	echo $participants();
+
+	// Champs actives sur les forums
 	echo $contenu_forums();
 
-//
-// Activer/desactiver mails automatiques
-//
-	echo  $annonces(), "<br />\n";
+	echo "<br />";
 
+
+	/*
+	 * Inscriptions de redacteurs et visiteurs depuis le site public
+	 * (la balise FORMULAIRE_INSCRIPTION sert au deux)
+	 */
+	echo  $redacteurs(),  $visiteurs(), "<br />";
+
+
+	/*
+	 * Forums prives
+	 *
+	 */
+
+	echo "<h3>"._L('Dans l&#8217;espace priv&#233;')."</h3>\n";
+
+	// Forums prives
+	echo $forums_prives();
+	echo $messagerie_agenda();
+
+	echo "<br />";
+
+
+	/*
+	 * mails automatiques
+	 *
+	 */
+	echo "<h3>"._L('Notifications')."</h3>\n";
+
+	echo  $annonces(), "<br />\n";
 	echo  $notifications_forum(), "<br />\n";
 
-// Activer forum admins
-
-	echo $administrateurs();
 
 //
 // Choix supplementaires proposees par les plugins

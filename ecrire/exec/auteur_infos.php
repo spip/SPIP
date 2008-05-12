@@ -162,8 +162,11 @@ function auteurs_interventions($auteur) {
 
 	echo afficher_objets('article',_T('info_articles_auteur'),  array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien",  "WHERE" => "lien.id_auteur=$id_auteur AND lien.id_article=articles.id_article AND articles.statut IN ($aff_art)",  'ORDER BY' => "articles.date DESC"));
 
-	if ($id_auteur != $connect_id_auteur
-	AND autoriser('ecrire', '', '', $auteur)) {
+	// Messages de l'auteur et discussions en cours
+	if ($GLOBALS['meta']['messagerie_agenda'] != 'non'
+	AND $id_auteur != $connect_id_auteur
+	AND autoriser('ecrire', '', '', $auteur)
+	) {
 		echo "<div class='nettoyeur'>&nbsp;</div>";
 		echo debut_cadre_couleur('', true);
 
@@ -174,7 +177,8 @@ function auteurs_interventions($auteur) {
 		echo afficher_messages('<b>' . _T('info_vos_rendez_vous') . '</b>', ", spip_auteurs_messages AS lien, spip_auteurs_messages AS lien2", "lien.id_auteur=$connect_id_auteur AND lien2.id_auteur = $id_auteur AND statut='publie' AND type='normal' AND rv='oui' AND date_fin > NOW() AND lien.id_message=messages.id_message AND lien2.id_message=messages.id_message", $vus, false, false);
 	
 		echo icone_horizontale(_T('info_envoyer_message_prive'), generer_action_auteur("editer_message","normal/$id_auteur"),
-				  "message.gif","", false);
+			  "message.gif","", false);
+
 		echo fin_cadre_couleur(true);
 	}
 }

@@ -72,7 +72,10 @@ function liste_metas()
 		'adresse_neuf' => '',
 		'jours_neuf' => '',
 		'quoi_de_neuf' => 'non',
-		'forum_prive_admin' => 'non',
+		'forum_prive' => 'oui', # forum global dans l'espace prive
+		'forum_prive_objets' => 'oui', # forum sous chaque article de l'espace prive
+		'forum_prive_admin' => 'non', # forum des administrateurs
+		'messagerie_agenda' => 'oui',
 
 		'articles_versions' => 'non',
 		'activer_statistiques' => 'non',

@@ -79,11 +79,20 @@ function formater_auteur_mail($row, $id_auteur)
 {
 	global $spip_lang_rtl;
 
-	if (!autoriser('modifier', 'auteur', $id_auteur, $row))
-		$href= 'mailto:' . $row['email'];
-	else $href = generer_action_auteur("editer_message","normal/$id_auteur");
-	return "<a href='$href' title=\""
+	if ($row['imessage'] != 'non'
+	AND $GLOBALS['meta']['messagerie_agenda'] != 'non')
+		$href = generer_action_auteur("editer_message","normal/$id_auteur");
+	else if (strlen($row['email'])
+	AND autoriser('voir', 'auteur', $id_auteur))
+		$href = 'mailto:' . $row['email'];
+	else
+		$href = '';
+
+	if ($href)
+		return "<a href='$href' title=\""
 	  .  _T('info_envoyer_message_prive')
 	  . "\" class='message'>&nbsp;</a>";
+	else
+		return '';
 }
 ?>

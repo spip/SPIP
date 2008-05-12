@@ -164,22 +164,25 @@ function installer_gadgets($id_rubrique)
 	. "' class='icone26' onmouseover=\"changestyle('bandeaurecherche'); jQuery('#form_recherche')[0].focus();\" onfocus=\"changestyle('bandeaurecherche');\" onblur=\"changestyle('bandeaurecherche');\">"
 	. http_img_pack("loupe.png", _T('info_rechercher'), "width='26' height='20'")
 	."</a>"
-	. http_img_pack("rien.gif", "", "width='10'")
-	. "<a id='boutonbandeauagenda' href='"
-	. generer_url_ecrire("calendrier","type=semaine")
-	. "' class='icone26' onmouseover=\"changestyle('bandeauagenda');\">"
-	. http_img_pack("cal-rv.png", _T('icone_agenda'), "width='26' height='20'")
-	."</a>"
-	. "<a href='"
-	. generer_url_ecrire("messagerie")
-	. "' class='icone26' onmouseover=\"changestyle('bandeaumessagerie');\" onfocus=\"changestyle('bandeaumessagerie');\" onblur=\"changestyle('bandeaumessagerie');\">"
-	. http_img_pack("cal-messagerie.png", _T('icone_messagerie_personnelle'), "width='26' height='20'")
-	."</a>"
-	. "<a href='"
-	. generer_url_ecrire("synchro")
-	. "' class='icone26' onmouseover=\"changestyle('bandeausynchro');\" onfocus=\"changestyle('bandeausynchro');\" onblur=\"changestyle('bandeausynchro');\">"
-	. http_img_pack("cal-suivi.png", _T('icone_suivi_activite'), "width='26' height='20'")
-	. "</a>";
+
+	. (($GLOBALS['meta']['messagerie_agenda'] != 'non')
+		? http_img_pack("rien.gif", "", "width='10'")
+		. "<a id='boutonbandeauagenda' href='"
+		. generer_url_ecrire("calendrier","type=semaine")
+		. "' class='icone26' onmouseover=\"changestyle('bandeauagenda');\">"
+		. http_img_pack("cal-rv.png", _T('icone_agenda'), "width='26' height='20'")
+		."</a>"
+		. "<a href='"
+		. generer_url_ecrire("messagerie")
+		. "' class='icone26' onmouseover=\"changestyle('bandeaumessagerie');\" onfocus=\"changestyle('bandeaumessagerie');\" onblur=\"changestyle('bandeaumessagerie');\">"
+		. http_img_pack("cal-messagerie.png", _T('icone_messagerie_personnelle'), "width='26' height='20'")
+		."</a>"
+		. "<a href='"
+		. generer_url_ecrire("synchro")
+		. "' class='icone26' onmouseover=\"changestyle('bandeausynchro');\" onfocus=\"changestyle('bandeausynchro');\" onblur=\"changestyle('bandeausynchro');\">"
+		. http_img_pack("cal-suivi.png", _T('icone_suivi_activite'), "width='26' height='20'")
+		. "</a>"
+	: '');
 }
 
 // http://doc.spip.org/@repercuter_gadgets

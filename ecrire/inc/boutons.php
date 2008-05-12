@@ -55,13 +55,21 @@ function definir_barre_boutons() {
 
 	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
 
-	$boutons_admin=array(
-		'accueil' => new Bouton('asuivre-48.png', 'icone_a_suivre'),
-		'naviguer' => new Bouton("documents-48$spip_lang_rtl.png",
-								 'icone_edition_site'),
-		'forum' => new Bouton('messagerie-48.png', 'titre_forum'),
-		'auteurs' => new Bouton('redacteurs-48.png', 'icone_auteurs')
-	);
+	$boutons_admin=array();
+
+	$boutons_admin['accueil'] = new Bouton(
+		'asuivre-48.png', 'icone_a_suivre');
+
+	$boutons_admin['naviguer'] = new Bouton(
+		"documents-48$spip_lang_rtl.png", 'icone_edition_site');
+
+	if ($GLOBALS['meta']['forum_prive'] != 'non')
+		$boutons_admin['forum'] = new Bouton(
+			'messagerie-48.png', 'titre_forum');
+	
+	$boutons_admin['auteurs'] = new Bouton(
+		'redacteurs-48.png', 'icone_auteurs');
+
 
 	if ($GLOBALS['meta']["activer_statistiques"] != 'non'
 	AND autoriser('voirstats')) {
@@ -144,8 +152,15 @@ function definir_barre_boutons() {
 		$sousmenu['controle_petition']=
 			new Bouton("suivi-petition-24.gif", "icone_suivi_pettions");
 
-	if ($sousmenu)
-		$boutons_admin['forum']->sousmenu= $sousmenu;
+	// Si le forum a ete desactive, mais qu'il y a un sous-menu de suivi
+	// des forums ou des petitions, on colle ce suivi sous le menu "a suivre"
+	if ($sousmenu) {
+		if (isset($boutons_admin['forum']))
+			$boutons_admin['forum']->sousmenu= $sousmenu;
+		else
+			$boutons_admin['accueil']->sousmenu= $sousmenu;
+	}
+
 
 
 	// sous menu auteurs
