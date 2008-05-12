@@ -606,8 +606,8 @@ function debug_debut($titre)
 	  "<meta http-equiv='Content-Type' content='text/html" .
 	  (($c = $GLOBALS['meta']['charset']) ? "; charset=$c" : '') .
 	  "' />\n" .
-	  _FILE_JQUERY .
-	  "<link rel='stylesheet' href='".url_absolue(find_in_path('spip_admin.css'))
+	  http_script('', 'jquery.js')
+	  . "<link rel='stylesheet' href='".url_absolue(find_in_path('spip_admin.css'))
 	  . "' type='text/css' />" .
 	  "</head>\n<body style='margin:0 10px;'>" .
 	  "\n<div id='spip-debug' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:10px;right:10px;'><div id='spip-boucles'>\n"; 

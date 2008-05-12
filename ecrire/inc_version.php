@@ -351,8 +351,6 @@ error_reporting(SPIP_ERREUR_REPORT);
 	(_DIR_RACINE  . _NOM_TEMPORAIRES_ACCESSIBLES)
 );
 
-define('_FILE_JQUERY', "\n<script src=\"".generer_url_public('jquery.js')
-       . "\" type=\"text/javascript\"></script>\n");
 
 // chargement des plugins : doit arriver en dernier
 // car dans les plugins on peut inclure inc-version
