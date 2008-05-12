@@ -447,7 +447,7 @@ function exec_accueil_dist()
 	echo debut_droite("", true);
 
 	if ($GLOBALS['meta']["post_dates"] == "non"
-	AND $connect_statut == '0minirezo') {
+	AND $connect_statut == '0minirezo')
 		echo afficher_objets('article',_T('info_article_a_paraitre'), array("WHERE" => "statut='publie' AND date>NOW()", 'ORDER BY' => "date"));
 
 
@@ -458,8 +458,6 @@ function exec_accueil_dist()
 	_T('articles_recents'), array("WHERE" => "statut='publie'" .($GLOBALS['meta']["post_dates"] == "non"
 		? " AND date<NOW()" : ''),
 		'ORDER BY' => "date DESC", 'LIMIT' => '0,4'));
-
-}
 
 //
 // Vos articles en cours 
