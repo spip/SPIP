@@ -282,9 +282,15 @@ select.fondl { padding: 0; }
 #bandeau_couleur { min-height: 20px; padding: 2px 0; max-height: 40px; width: 100%; border-bottom: solid 1px white; background: #GET{claire}; }
 #bandeau_couleur1 .menu-item { width: 230px; text-align: #ENV{ltr}}
 #bandeau_couleur3 .menu-item { width: 150px; text-align: #GET{right}}
-#bandeau_couleur4 .menu-item { width: 68px; margin: 0 5px; text-align: center; }
+#bandeau_couleur4 .menu-item { width: 68px; margin: 0 5px; text-align: #GET{right}; }
+#bandeau_couleur4 .menu-item a {font-weight:normal;}
 #bandeau_couleur5 .menu-item { width: 114px; }
 #bandeau_couleur6 .menu-item { width: 32px; }
+
+#preferences_couleurs,
+#preferences_menu,
+#preferences_ecran {display:inline; padding:0 3px;}
+#preferences_map {display:none;}
 
 /* * Icones et bandeaux */
 
