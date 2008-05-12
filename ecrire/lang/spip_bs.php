@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
 '0_langue' => 'Bosanski [bs]',
 '0_liste' => 'spip-dev@rezo.net',
 '0_mainteneur' => 'nerina corbadzic <muzevira@googlemail.com>',
-
 
 // A
 'access_interface_graphique' => 'Nazad na kompletno graficki interfejs',
@@ -22,8 +23,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Izmijeni ovu kljucnu rijec',
 'admin_modifier_rubrique' => 'Izmijeni ovu rubriku',
 'admin_recalculer' => 'Osvjezi ovu stranicu',
-'alerte_maj_impossible' => '<b>Paznja!</b> Osvjezavanje MySQL baze podataka na verziju @version@ nije uspjelo. Mozda se radi o dozvoli na bazi podataka. Molimo, kontaktirajte vas ISP.',
+'alerte_maj_impossible' => '<b>Paznja!</b> Osvjezavanje SQL baze podataka na verziju @version@ nije uspjelo. Mozda se radi o dozvoli na bazi podataka. Molimo, kontaktirajte vas ISP.',
 'analyse_xml' => 'Obrada XML',
+'articles_recents' => 'Recentni clanci',
 'avis_archive_incorrect' => 'arhiv dokument nije vazeci SPIP dokument',
 'avis_archive_invalide' => 'arhiv dokument nije vazeci',
 'avis_attention' => 'OPREZ!',
@@ -35,9 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_connexion' => 'Greska u konekciji',
 'avis_erreur_cookie' => 'Problem sa cookiem',
 'avis_erreur_fonction_contexte' => 'Greska u programiranju.Ova funkcija se ne treba pozivati u ovom kontekstu.',
-'avis_erreur_mysql' => 'MySQL greska',
+'avis_erreur_mysql' => 'SQL greska',
 'avis_erreur_sauvegarde' => 'Backup greska (@type@ @id_objet@) !',
-
 
 // B
 'barre_a_accent_grave' => 'Unesi veliko A sa grave akcentom',
@@ -69,7 +70,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_telecharger' => 'Download',
 'bouton_valider' => 'Ovjeri',
 
-
 // C
 'cal_apresmidi' => 'posljepodne',
 'cal_jour_entier' => 'cijeli dan',
@@ -79,7 +79,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_semaine' => 'sedmicni kalendar',
 'confirm_changer_statut' => 'Trazili ste izmjenu statusa ovog clanka. Zelite li nastaviti?',
 'correcte' => 'tacno',
-
 
 // D
 'date_aujourdhui' => 'danas',
@@ -176,13 +175,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p /Da bi ste to promijenili, koristite svog FTP klijenta i postavite dozvole pristupa za svaki od direktorija. Procedura je detaljno opisana u uputama za instalaciju.
   <p />Kada izvrsite ovu operaciju, mozete ',
 
-
 // E
 'entree_dimensions' => 'Dimenzije:',
 'entree_titre_document' => 'Naziv dokumenta:',
 'entree_titre_image' => 'Naziv fotografije:',
 'envoi_via_le_site' => 'Poslano putem stranice',
-
 
 // F
 'fichier_introuvable' => 'Dokument @fichier@ nije pronadjen',
@@ -260,7 +257,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_vous_enregistrer' => 'Da bi ste ucestvovali u ovom forumu, morate se prijaviti. Naznacite ispod licni identifikator koji vam je dodjeljen. Ako niste vec registrovani, trebate',
 'forum_vous_inscrire' => 'se upisati.',
 
-
 // I
 'ical_texte_rss_articles' => 'Backend dokument clanaka ove stranice se nalazi na adresi:',
 'ical_texte_rss_articles2' => 'Svakako mozete dobiti backend dokumente za clanke svih rubrika na stanici:',
@@ -275,7 +271,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_brouteur' => 'Brza navigacija',
 'icone_configuration_site' => 'Podesavanje',
 'icone_configurer_site' => 'Podesavanje vase stranice',
-'icone_creer_mot_cle' => 'Kreiraj novu kljucnu rijec i povezi je sa ovim clankom',
 'icone_creer_nouvel_auteur' => 'Kreiraj novog autora',
 'icone_creer_rubrique' => 'Kreiraj rubriku',
 'icone_creer_sous_rubrique' => 'Kreiraj podrubriku',
@@ -482,7 +477,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'infos_vos_pense_bete' => 'Vase biljeske',
 'item_breve_proposee' => 'Predlozena obavjestenja',
 
-
 // L
 'lien_afficher_icones_seuls' => 'Prikazi samo ikone',
 'lien_afficher_texte_icones' => 'Prikazi ikone i tekst',
@@ -505,7 +499,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lien_voir_auteur' => 'Pgledaj ovog autora',
 'login_acces_prive' => 'pristup privatnom prostoru',
 'login_autre_identifiant' => 'konektuj se drugim identifikatorom',
-'login_connexion_refusee' => 'pristup odbijen.',
 'login_cookie_accepte' => 'Podesite vas navigator da prihvata cookie (bar za ovu stranicu).',
 'login_cookie_oblige' => 'Da bi ste se sigurno prijavili na ovu stranicu, morate prihvatiti cookie.',
 'login_deconnexion_ok' => 'Odjavljeni ste.',
@@ -532,14 +525,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'login_test_navigateur' => 'test navigatora/ponovna konekcija',
 'login_verifiez_navigateur' => '(Svakako se uvjerite da vas navigator nije zapamtio vasu lozinku...)',
 
-
 // M
 'module_fichiers_langues' => 'Jezicni dokumenti',
 
-
 // N
 'navigateur_pas_redirige' => 'Ako vas navigator nije preusmjeren, kliknite ovdje da biste nastavili.',
-
 
 // O
 'onglet_affacer_base' => 'Izbrisi bazu',
@@ -560,7 +550,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'onglet_save_restaur_base' => 'Backup/obnova baze podataka',
 'onglet_vider_cache' => 'Isprazni kes',
 'ortho_trop_de_fautes2' => 'Pocnite sa ispravljanjem ociglednih gresaka, zatim pokusajte ponovo.',
-
 
 // P
 'pass_choix_pass' => 'Izaberite vasu novu lozinku:',
@@ -600,14 +589,12 @@ Tamo mozete unijeti novu lozinku i ponovo se prijaviti na stranicu.
 'previsualisation' => 'Pegled',
 'previsualiser' => 'Pokazi pregled',
 
-
 // S
 'squelette' => 'predlozak',
 'squelette_inclus_ligne' => 'ukjucen predlozak, linija',
 'squelette_ligne' => 'predlozak linija',
 'stats_visites_et_popularite' => '@visites@ posjete; popularno: @popularite@',
 'suivant' => 'Naprijed',
-
 
 // T
 'taille_ko' => '@taille@&nbsp;kb',
@@ -650,12 +637,11 @@ Obratite paznu na ovu referencu, ponovo pokusajte nadogradnju i na kraju provjer
 'titre_joindre_document' => 'PRIDRUZI DOKUMENT',
 'titre_liens_entrants' => 'Unosenje linkova',
 'titre_mots_cles' => 'KLJUCNE RIJECI',
-'titre_probleme_technique' => 'Upozorenje: tehnicki problem (MySQL server) sprijecava pristup ovom dijelu stranice. Hvala na razumijevanju.',
+'titre_probleme_technique' => 'Upozorenje: tehnicki problem (SQL server) sprijecava pristup ovom dijelu stranice. Hvala na razumijevanju.',
 'titre_publier_document' => 'OBJAVI DOKUMENT U OVOJ RUBRICI',
 'titre_statistiques' => 'Statistike stranice',
 'titre_titre_document' => 'Naslov dokumenta:',
 'trad_reference' => '(preporuceni clanak)',
-
 
 // U
 'upload_fichier_zip' => 'ZIP dokument',
@@ -664,7 +650,6 @@ Obratite paznu na ovu referencu, ponovo pokusajte nadogradnju i na kraju provjer
 'upload_limit' => 'Ovaj dokument je prevelik za server; dozvoljena maksimalna velicina za <i>upload</i> je @max@.',
 'upload_zip_decompacter' => 'dekompresovan i svaki sadrzani dokument ce biti instaliran na stranicu. Dokumenti koji ce biti instalirani su:',
 'upload_zip_telquel' => 'instaliran kakav jeste, u ZIP formatu;',
-
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: oznaka B kasni u petlji',
@@ -688,8 +673,6 @@ Obratite paznu na ovu referencu, ponovo pokusajte nadogradnju i na kraju provjer
 'zbug_resultat' => 'rezultat',
 'zbug_serveur_indefini' => 'nedefinisan SQL server',
 'zbug_table_inconnue' => 'Nedefinisana SQL  tabela &laquo; @table@ &raquo;'
-
 );
-
 
 ?>

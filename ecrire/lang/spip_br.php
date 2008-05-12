@@ -1,9 +1,11 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
@@ -11,9 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 '0_liste' => 'spip-br@rezo.net',
 '0_mainteneur' => 'Malo Morvan (malomorvan@yahoo.fr)',
 
-
 // A
-'access_interface_graphique' => 'Distrei&ntilde; d\'an etrefas grafek klok',
+'access_interface_graphique' => 'Distrei&ntilde; d\'an etrefas grafek klok', # Gwelloc'h e vije ober gant etrefas evit trei&ntilde; interface; he&ntilde;veldra, grafek zo kalz komprenusoc'h eget kevrega&ntilde;. Dreist-holl e vez komprenet gant an holl hag en implij ema&ntilde; gant kalz a dud
 'access_mode_texte' => 'diskouez ar c\'hetal testenn eeun',
 'admin_debug' => 'debug',
 'admin_modifier_article' => 'Kemm ar pennad-ma&ntilde;',
@@ -27,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'analyse_xml' => 'Dielfenna&ntilde; XML',
 'annuler' => 'Nulla&ntilde;',
 'antispam_champ_vide' => 'Na lakait netra ama&ntilde;&nbsp;:',
+'articles_recents' => 'Pennado&ugrave; nevesha&ntilde;',
 'avis_archive_incorrect' => 'N\'eo ket ar restr-diell ur restr SPIP',
 'avis_archive_invalide' => 'N\'eo ket reizh ar restr diell',
 'avis_attention' => 'DIWALLIT&nbsp;!',
@@ -41,7 +43,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_mysql' => 'Fazi SQL',
 'avis_erreur_sauvegarde' => 'Fazi er savete (@type@ @id_objet@) !',
 'avis_erreur_visiteur' => 'N\'eus ket tu da dizhout al lodenn brevez',
-
 
 // B
 'barre_a_accent_grave' => 'Ouzhpenna&ntilde; un A (pennlizherenn) gant un tired-boud',
@@ -73,7 +74,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_telecharger' => 'Pellkarga&ntilde;',
 'bouton_valider' => 'Kadarnaat',
 
-
 // C
 'cal_apresmidi' => 'goude-kreistez',
 'cal_jour_entier' => 'devezh a-bezh',
@@ -86,7 +86,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'colonne' => 'Bann',
 'confirm_changer_statut' => 'Diwallit, goulennet ho peus ma vo kemmet statud an elfenn-ma&ntilde;. Ha c\'hoant ho peus da genderc\'hel ?',
 'correcte' => 'reizh',
-
 
 // D
 'date_aujourdhui' => 'hiziv',
@@ -200,7 +199,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>Ur wech graet se e c\'helloc\'h ',
 'double_occurrence' => 'Kavet div wech',
 
-
 // E
 'entree_dimensions' => 'Ment&nbsp;:',
 'entree_titre_document' => 'Titl an teuliad&nbsp;:',
@@ -209,7 +207,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'Fazi',
 'erreur_balise_non_fermee' => 'Balizenn ziwezha&ntilde; chomet digor :',
 'erreur_texte' => 'fazi',
-
 
 // F
 'fichier_introuvable' => 'Restr @fichier@ dibosupl da gavout',
@@ -308,7 +305,6 @@ Trugarez da gemer perzh
   Trugarez da skriva&ntilde; ama&ntilde;-dindan an titouro&ugrave; hiniennel a zo bet roet deoc\'h.
   Ma n\'hoc\'h ket enrollet c\'hoazh e rankit ',
 'forum_vous_inscrire' => 'en em enskriva&ntilde;.',
-
 
 // I
 'ical_texte_rss_articles' => 'D\'ar chomlec\'h-ma&ntilde; ema&ntilde; restr &laquo;backend&raquo; ar pennado&ugrave;:',
@@ -534,7 +530,6 @@ Trugarez da gemer perzh
 'infos_vos_pense_bete' => 'Ho notennigo&ugrave;-e&ntilde;vor',
 'item_breve_proposee' => 'Berrskrid bet kinniget',
 
-
 // L
 'lien_afficher_icones_seuls' => 'Diskouez ar skeudennigo&ugrave; hepken',
 'lien_afficher_texte_icones' => 'Diskouez ar skeudennigo&ugrave; hag an destenn',
@@ -586,16 +581,13 @@ Trugarez da gemer perzh
 'login_test_navigateur' => 'taol-arnod merdeer/adkennaska&ntilde;',
 'login_verifiez_navigateur' => '(Gwiriekait memes tra na vefe ket bet dalc\'het so&ntilde;j ouzh ho ker-tremen gant ar merdeer...)',
 
-
 // M
 'masquer_trad' => 'kuzhat an droidigezhio&ugrave;',
 'module_fichiers_langues' => 'Restro&ugrave;-yezh',
 
-
 // N
 'navigateur_pas_redirige' => 'Klikit ama&ntilde; ma ne vez ket adsturiet ho merdeer',
 'numero' => 'Niverenn',
-
 
 // O
 'occurence' => 'Kavadenn',
@@ -617,7 +609,6 @@ Trugarez da gemer perzh
 'onglet_save_restaur_base' => 'Savetei&ntilde;/Resteurel an diaz',
 'onglet_vider_cache' => 'Goullonderi&ntilde; ar memoret',
 'ortho_trop_de_fautes2' => 'Klaskit reizha&ntilde; ar fazio&ugrave; re anat ha klaskit en-dro da c\'houde.',
-
 
 // P
 'pass_choix_pass' => 'Dibabit ho ker-tremen nevez :',
@@ -643,7 +634,7 @@ Kit d\'ar chomlec\'h-ma&ntilde; :
 Neuze e c\'helloc\'h rei&ntilde; ur ger-tremen nevez ha
 kevrea&ntilde; en-dro ouzh al lec\'hienn.
 
-',
+', # Connecter : gwelloc'h eo ober gant kevrea&ntilde; zo muioc'h en implij gant an dud. Kevrea&ntilde; ouzh ar genrouedad hag all.
 'pass_mot_oublie' => 'Ankouaet ar ger-tremen',
 'pass_nouveau_enregistre' => 'Enrollet eo bet ho ker-tremen nevez.',
 'pass_nouveau_pass' => 'Ger-tremen nevez',
@@ -659,10 +650,8 @@ kevrea&ntilde; en-dro ouzh al lec\'hienn.
 'previsualisation' => 'Rakwelet',
 'previsualiser' => 'Rakwelet',
 
-
 // R
 'retour' => 'Distrei&ntilde;',
-
 
 // S
 'spip_conforme_dtd' => 'SPIP a gav dezha&ntilde; e klot an teul-ma&ntilde; gant e DOCTYPE :',
@@ -671,7 +660,6 @@ kevrea&ntilde; en-dro ouzh al lec\'hienn.
 'squelette_ligne' => 'framm, linenn',
 'stats_visites_et_popularite' => '@visites@ gweladenn&nbsp;; brud;&nbsp;: @popularite@',
 'suivant' => 'da heul',
-
 
 // T
 'taille_ko' => '@taille@&nbsp;ke',
@@ -724,10 +712,9 @@ Aliet oc\'h da chom hep kemm tra pe dra keit ha ma n\'oc\'h ket boaz ouzh SPIP.
 'titre_mots_cles' => 'GERIO&Ugrave;-STUR',
 'titre_probleme_technique' => 'Diwallit&nbsp;: abalamour d\'ur gudenn teknikel (servijer SQL), n\'eus ket tu da dizhout lodenn-ma&ntilde; al lec\'hienn. Trugarez da gompren.',
 'titre_publier_document' => 'EMBANN UN TEULIAD ER RUMMAD-MA&Ntilde;',
-'titre_statistiques' => 'Stadego&ugrave; al lec\'hienn',
+'titre_statistiques' => 'Stadego&ugrave; al lec\'hienn', # Stadego&ugrave;, termen skoueriekaet gant TermBret evit Statistiques.
 'titre_titre_document' => 'Titl an teuliad&nbsp;:',
 'trad_reference' => '(pennad-orin)',
-
 
 // U
 'upload_fichier_zip' => 'Restr ZIP',
@@ -736,7 +723,6 @@ Aliet oc\'h da chom hep kemm tra pe dra keit ha ma n\'oc\'h ket boaz ouzh SPIP.
 'upload_limit' => 'Re vras eo ar restr-se evit ar servijer&nbsp;; @max@ eo ar ment brasa&ntilde; aotreet evit an <i>upload</i>.',
 'upload_zip_decompacter' => 'diwaeget, ha pep elfenn enna&ntilde; staliet el lec\'hienn. Ar restro&ugrave; staliet euze war al lec\'hienn a vo&nbsp;:',
 'upload_zip_telquel' => 'staliet evel-henn, da lavaret eo restro&ugrave; gwaeget Zip&nbsp;;',
-
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balizenn B diardraon',
@@ -780,8 +766,6 @@ Aliet oc\'h da chom hep kemm tra pe dra keit ha ma n\'oc\'h ket boaz ouzh SPIP.
 'zxml_valeur_attribut' => 'talvoudegezh ar perzh',
 'zxml_vide_balise' => 'balizenn c\'houllo',
 'zxml_vu' => 'bet gwelet en a-raok'
-
 );
-
 
 ?>

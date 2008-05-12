@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
 '0_langue' => 'svenska [sv]',
 '0_liste' => 'spip-dev@rezo.net',
 '0_mainteneur' => 'spip-dev@rezo.net',
-
 
 // A
 'access_interface_graphique' => 'Tillbaka till det kompletta grafiska gr&auml;nssnittet',
@@ -27,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'analyse_xml' => 'Unders&ouml;k XML',
 'annuler' => 'Avbryt',
 'antispam_champ_vide' => 'Var v&auml;nlig, l&auml;mna f&auml;ltet tomt',
+'articles_recents' => 'De senaste artiklarna',
 'avis_archive_incorrect' => 'Arkivfilen &auml;r inte en godk&auml;nd SPIP-fil',
 'avis_archive_invalide' => 'Arkivfilen &auml;r inte godk&auml;nd',
 'avis_attention' => 'SE UPP!',
@@ -42,11 +44,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_sauvegarde' => 'Fel p&aring; s&auml;kerhetskopian (@type@ @id_objet@)!',
 'avis_erreur_visiteur' => 'Det har uppst&aring;tt ett problem med att g&aring; in i den privata delen',
 
-
 // B
 'barre_a_accent_grave' => 'Skapa ett stort A med bak&aring;tv&auml;nd accent',
 'barre_aide' => 'Anv&auml;nd de typografiska genv&auml;garna f&ouml;r att f&ouml;rb&auml;ttra din layout',
-'barre_aide_rac' => 'Mer information om de typografiska genv&auml;garna',
 'barre_e_accent_aigu' => 'Skapa ett stort E med fram&aring;tv&auml;nd accent',
 'barre_eo' => 'Skapa en gemen oe-ligatur',
 'barre_eo_maj' => 'Skapa en versal EO-ligature',
@@ -74,7 +74,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_telecharger' => 'Ladda upp',
 'bouton_valider' => 'Spara',
 
-
 // C
 'cal_apresmidi' => 'eftermiddag (e.m)',
 'cal_jour_entier' => 'hel dag',
@@ -82,15 +81,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => 'daglig kalendar',
 'cal_par_mois' => 'm&aring;nadsvis kalender',
 'cal_par_semaine' => 'veckovis kalender',
-'calendrier_synchro_prive' => '<NEW><NEW>El calendario siguiente, de uso estrictamente personal, te informa sobre la actividad editorial privada de este sitio (tareas y citas personales, art&iacute;culos y breves propuestas...).',
-'calendrier_synchro_public' => '<NEW><NEW>El siguiente calendario le permite seguir la actividad p&uacute;blica de este sitio (art&iacute;culos y breves publicadas).',
-'calendrier_synchro_sync' => '<NEW><NEW>Sincronizar el archivo <i>iCal</i><br /> (Mozilla Calendar, Apple iCal...)',
 'choix_couleur_interface' => 'F&auml;rg',
 'choix_interface' => 'val av gr&auml;nssnitt',
 'colonne' => 'Kolumn',
 'confirm_changer_statut' => 'Krav p&aring; bekr&auml;ftelse: Du har bett om att &auml;ndra statusen p&aring; den h&auml;r artikeln. Vill du forts&auml;tta?',
 'correcte' => 'r&auml;tt',
-
 
 // D
 'date_aujourdhui' => 'idag',
@@ -197,7 +192,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_repertoires_suivants' => '<b>F&ouml;ljande kataloger saknar skriv-r&auml;ttigheter: <ul>@bad_dirs@.</ul> </b><p>F&ouml;r att &auml;ndra det, anv&auml;nd din FTP-klient f&ouml;r att s&auml;tta korrekta &aring;tkomstr&auml;ttigheter f&ouml;r katalogerna. Proceduren beskrivs i installationsguiden.</p><p>N&auml;r det &auml;r avklarat, kan du ',
 'double_occurrence' => 'Tv&aring; instanser',
 
-
 // E
 'entree_dimensions' => 'Storlek:',
 'entree_titre_document' => 'Titel p&aring; dokumentet:',
@@ -206,7 +200,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'Fel',
 'erreur_balise_non_fermee' => 'Den sista tagen &auml;r inte st&auml;ngd:',
 'erreur_texte' => 'fel',
-
 
 // F
 'fichier_introuvable' => 'Fil som inte kunde hittas: @fichier@',
@@ -306,7 +299,6 @@ Tack f&ouml;r ditt deltagande
  Om du inte &auml;r registrerad, m&aring;ste du  ',
 'forum_vous_inscrire' => 'registrera dig.',
 
-
 // I
 'ical_texte_rss_articles' => 'filen &laquo;backend&raquo; f&ouml;r artiklarna p&aring; den h&auml;r sajten finns p&aring; adressen:',
 'ical_texte_rss_articles2' => 'Dessutom kan du h&auml;mta backendfiler f&ouml;r artiklarna i var och en av sajtens olika avdelningar:',
@@ -319,7 +311,6 @@ Tack f&ouml;r ditt deltagande
 'icone_auteurs' => 'F&ouml;rfattare',
 'icone_breves' => 'Nyheter',
 'icone_brouteur' => 'Snabb-surfning',
-'icone_calendrier_messagerie' => 'Kalender och meddelanden',
 'icone_configuration_site' => 'Konfiguration',
 'icone_configurer_site' => 'Konfigurera din sajt',
 'icone_creer_nouvel_auteur' => 'Skapa en ny f&ouml;rfattare',
@@ -330,19 +321,14 @@ Tack f&ouml;r ditt deltagande
 'icone_doc_rubrique' => 'Bifogade dokument',
 'icone_ecrire_article' => 'Skriv en ny artikel',
 'icone_edition_site' => 'Redigera sajten',
-'icone_etat_traductions' => '&Ouml;vers&auml;ttningarnas tillst&aring;nd',
-'icone_evolution_visites_2' => 'Mest anv&auml;nt',
 'icone_forum_administrateur' => 'Administrat&ouml;rernas forum',
-'icone_forum_interne' => 'Internt forum',
 'icone_forum_suivi' => 'Vidare till forumen',
-'icone_forums_petitions' => 'Forum och namninsamlingar',
 'icone_gestion_langues' => 'Spr&aring;k-hantering',
 'icone_informations_personnelles' => 'Personlig information',
 'icone_interface_complet' => 'Fullst&auml;ndigt gr&auml;nssnitt',
 'icone_interface_simple' => 'F&ouml;renklat gr&auml;nssnitt',
 'icone_maintenance_site' => 'Underh&aring;ll av sajten',
 'icone_messagerie_personnelle' => 'Personligt meddelandesystem',
-'icone_modifier_informations_personnelles' => 'F&ouml;r&auml;ndra dina egna uppgifter',
 'icone_mots_cles' => 'Nyckelord',
 'icone_nouvelle_breve' => 'Skriv en ny nyhet',
 'icone_repartition_actuelle' => 'Visa den nuvarande f&ouml;rdelningen',
@@ -408,7 +394,6 @@ Tack f&ouml;r ditt deltagande
 'info_creer_repertoire' => 'Var god och skapa en katalog som heter:',
 'info_creer_repertoire_2' => 'i under-katalogen <b>@repertoire@</b>, sedan',
 'info_creer_vignette' => 'skapa en tumnagel automatiskt ',
-'info_dans_espace_prive' => '[i den privata delen]',
 'info_deplier' => '&Ouml;ppna',
 'info_descriptif_nombre' => 'beskrivning(ar):',
 'info_description' => 'Bekrivning:',
@@ -424,8 +409,6 @@ Tack f&ouml;r ditt deltagande
 'info_email_invalide' => 'Ogiltigt epost-adress.',
 'info_en_cours_validation' => 'Dina artiklar under arbete',
 'info_en_ligne' => 'Online nu:',
-'info_en_test_1' => '(Test)',
-'info_en_test_2' => '(test)',
 'info_envoyer_message_prive' => 'Skicka ett privat meddelande till f&ouml;rfattaren',
 'info_erreur_requete' => 'Fel i fr&aring;gan:',
 'info_erreur_squelette2' => 'Det finns ingen mall <b>@fichier@</b>...',
@@ -456,14 +439,9 @@ Tack f&ouml;r ditt deltagande
 'info_l_article' => 'artikeln',
 'info_la_breve' => 'nyheten',
 'info_la_rubrique' => 'avdelningen',
-'info_langue_defaut' => 'Standardspr&aring;k',
-'info_langue_interface' => 'Gr&auml;nssnittsspr&aring;k',
 'info_langue_principale' => 'Huvud-spr&aring;k f&ouml;r sajten',
-'info_langues_proposees' => 'F&ouml;reslagna spr&aring;k',
 'info_largeur_vignette' => '@largeur_vignette@ &times; @hauteur_vignette@ pixlar',
 'info_les_auteurs_1' => 'av @les_auteurs@',
-'info_lettre_heures' => 'T',
-'info_lien' => 'l&auml;nk :',
 'info_logo_format_interdit' => 'Endast logotyper i formaten @formats@ &auml;r till&aring;tna.',
 'info_logo_max_poids' => 'Logotypen m&aring;ste vara mindre &auml;n @maxi@ (Din fil &auml;r @actuel@).',
 'info_logo_max_taille' => 'Logotypen m&aring;ste vara mindre &auml;n @maxi@ (din fil &auml;r @actuel@).',
@@ -475,14 +453,13 @@ Tack f&ouml;r ditt deltagande
 'info_mois_courant' => 'I m&aring;naden:',
 'info_mot_cle_ajoute' => 'F&ouml;ljande nyckelord las till',
 'info_multi_herit' => 'F&ouml;rvalt spr&aring;k',
-'info_multi_langues_soulignees' => 'De <u>understrukna spr&aring;ken</u> f&ouml;ljs av en &ouml;vers&auml;ttning av all text i gr&auml;nssnittet. Om du v&auml;ljer dessa spr&aring;k, kommer m&aring;nga delar av den publika delen (datum, formul&auml;r) att &ouml;vers&auml;ttas automatiskt. F&ouml;r de spr&aring;k som inte &auml;r understrukna, kommer de delarna att vara i sajtens huvudspr&aring;k.',
+'info_multi_langues_soulignees' => 'F&ouml;r de <u>understrukna spr&aring;ken</u> tillhandah&aring;ller SPIP en &ouml;vers&auml;ttning av all text i gr&auml;nssnittet. Om du v&auml;ljer dessa spr&aring;k, kommer m&aring;nga delar av den publika delen (datum, formul&auml;r) att &ouml;vers&auml;ttas automatiskt. F&ouml;r de spr&aring;k som inte &auml;r understrukna, kommer de delarna att vara i sajtens huvudspr&aring;k.',
 'info_multilinguisme' => 'Flerspr&aring;kig',
 'info_nom_non_utilisateurs_connectes' => 'Ditt namn visas inte i listan &ouml;ver anslutna anv&auml;ndare.',
 'info_nom_utilisateurs_connectes' => 'Ditt namn visas i listan &ouml;ver anslutna anv&auml;ndare.',
 'info_nombre_en_ligne' => 'Online nu:',
 'info_non_resultat' => 'Inga ressultat f&ouml;r "@cherche_mot@"',
 'info_non_utilisation_messagerie' => 'Du anv&auml;nder inte sajtens initerna meddelande-system',
-'info_nouveau' => '(Nytt)',
 'info_nouveau_message' => 'DU HAR ETT NYTT MEDDELANDE',
 'info_nouveaux_messages' => 'DU HAR @total_messages@ NYA MEDDELANDEN',
 'info_numero_abbreviation' => 'Nr',
@@ -507,12 +484,9 @@ Tack f&ouml;r ditt deltagande
 'info_publie_1' => '[@nom_site_spip@] PUBLICERADE: @titre@',
 'info_publie_2' => 'Publicerad artikel
 -----------------',
-'info_question_referers' => 'Din sajt skall spara <i>refererande l&auml;nkar</i>
-  (externa l&auml;nkar som pekar p&aring; din sajt)&nbsp;?',
 'info_rechercher' => 'S&ouml;k',
 'info_rechercher_02' => 'S&ouml;k:',
 'info_remplacer_vignette' => 'Byt ut standardikonen mot en egen ikon:',
-'info_remplacer_vignette_defaut' => 'Byt ut standardikonen mot en egen bild...',
 'info_retablir_lien' => '&aring;terskapa den h&auml;r l&auml;nken',
 'info_retirer_mot' => 'Radera nyckelordet',
 'info_retirer_mots' => 'Radera alla nyckelord',
@@ -526,7 +500,6 @@ Tack f&ouml;r ditt deltagande
 'info_site_refuse' => 'Webbsajten refuserad',
 'info_sites_referencer' => 'L&auml;nka till en sajt',
 'info_supprimer_vignette' => 'radera ikonen',
-'info_sur_site_public' => '[i den publika delen]',
 'info_symbole_bleu' => 'En <b>bl&aring;</b> symbol visar ett <b>meddelande</b>: ett personligt meddelande.',
 'info_symbole_jaune' => 'En <b>gul</b> symbol visar ett <b>meddelande till alla redakt&ouml;rer</b>: det kan editeras av alla administrat&ouml;rer, och &auml;r synligt f&ouml;r alla redakt&ouml;rer.',
 'info_symbole_vert' => 'En <b>gr&ouml;n</b> symbol visar <b>meddelanden fr&aring;n och till andra anv&auml;ndare</b> p&aring; sajten.',
@@ -535,10 +508,8 @@ Tack f&ouml;r ditt deltagande
 'info_telecharger' => 'Ladda upp fr&aring;n din dator:',
 'info_telecharger_nouveau_logo' => 'Ladda upp en ny logotype:',
 'info_telecharger_ordinateur' => 'Ladda upp fr&aring;n din dator:',
-'info_tous_redacteur' => 'Meddelande till alla redakt&ouml;rer',
 'info_tous_resultats_enregistres' => '[alla resultat &auml;r sparade]',
 'info_tout_afficher' => 'Visa allt',
-'info_tout_site1' => 'artikelns spr&aring;k.',
 'info_travaux_texte' => 'Den h&auml;r websidan &auml;r inte f&auml;rdig. Kom g&auml;rna tilbaka senare...',
 'info_travaux_titre' => 'Sajt i uppbyggnad',
 'info_trop_resultat' => 'F&ouml;r m&aring;nga resultat f&ouml;r "@cherche_mot@"; f&ouml;rs&ouml;ka att avgr&auml;nsa s&ouml;kningen mer.',
@@ -552,16 +523,7 @@ Tack f&ouml;r ditt deltagande
 'info_vos_rendez_vous' => 'Dina framtida m&ouml;ten',
 'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'Din meddelanden',
-'item_administrateur' => 'Administrat&ouml;r',
 'item_breve_proposee' => 'Inl&auml;mnad nyhet',
-'item_efface' => 'raderad',
-'item_gerer_referers' => 'Hantera h&auml;nvisande l&auml;nkar',
-'item_non_gerer_referers' => 'Hantera inte h&auml;nvisande l&auml;nkar',
-'item_non_utiliser_moteur_recherche_forum' => 'Indexera inte forumen',
-'item_premier' => '1:a',
-'item_redacteur' => 'Redakt&ouml;r',
-'item_utiliser_moteur_recherche_forum' => 'Indexera forumen',
-
 
 // L
 'lien_afficher_icones_seuls' => 'Visa bara ikoner',
@@ -570,7 +532,6 @@ Tack f&ouml;r ditt deltagande
 'lien_icones_interface' => 'Gr&auml;nssnittsikonerna kommer fr&aring;n <a href=\'http://jimmac.musichall.cz/\'>Jakub \'Jimmac\' Steiner</a>.',
 'lien_liberer' => 'version',
 'lien_liberer_tous' => 'frig&ouml;r artiklarna',
-'lien_modifer_date' => 'Editera datumet',
 'lien_nouvea_pense_bete' => 'Nytt memo',
 'lien_nouveau_message' => 'NYTT MEDDELANDE',
 'lien_nouvelle_annonce' => 'NYTT MEDDELANDE',
@@ -578,17 +539,13 @@ Tack f&ouml;r ditt deltagande
 'lien_popularite' => 'Popularitet: @popularite@%',
 'lien_racine_site' => 'Sajtens bas',
 'lien_reessayer' => 'F&ouml;rs&ouml;k igen',
-'lien_rendez_vous' => 'Ett citat',
-'lien_rendez_vous_02' => '@total_messages@ citat',
 'lien_repondre_message' => 'Svara p&aring; det h&auml;r meddelandet',
 'lien_supprimer' => 'radera',
-'lien_test_format_image' => 'testa vilka bildformat som den h&auml;r sajten kan anv&auml;nda till ikoner',
 'lien_tout_afficher' => 'Visa alla',
 'lien_visite_site' => 'Bes&ouml;k den h&auml;r sajten',
 'lien_visites' => '@visites@ bes&ouml;kare',
 'lien_voir_auteur' => 'Visa redakt&ouml;ren',
 'ligne' => 'Rad',
-'lnfo_liens' => 'l&auml;nkar:',
 'login' => 'F&ouml;rbindelse',
 'login_acces_prive' => 'Tilltr&auml;de till den privata delen',
 'login_autre_identifiant' => 'anv&auml;nd ett annat id ID',
@@ -598,7 +555,6 @@ Tack f&ouml;r ditt deltagande
 'login_erreur_pass' => 'Felaktigt l&ouml;senord.',
 'login_espace_prive' => 'privat del',
 'login_identifiant_inconnu' => 'loginnamnet "@login@" &auml;r ok&auml;nt.',
-'login_identification' => 'identitet',
 'login_login' => 'Login:',
 'login_login2' => 'Login (loginnamn f&ouml;r sajten):',
 'login_login_pass_incorrect' => '(fel login eller l&ouml;senord).',
@@ -621,33 +577,24 @@ Tack f&ouml;r ditt deltagande
 'login_test_navigateur' => 'testar webbl&auml;sare/&aring;teruppkoppling',
 'login_verifiez_navigateur' => '(Kontrollera att din webbl&auml;sare inte sparade l&ouml;senordet...)',
 
-
 // M
 'masquer_trad' => 'g&ouml;m &ouml;vers&auml;ttningar',
 'module_fichiers_langues' => 'Spr&aring;kfiler',
-
 
 // N
 'navigateur_pas_redirige' => 'Om din webbl&auml;sare inte pekas om, klicka h&auml;r f&ouml;r att forts&auml;tta.',
 'numero' => 'Nummer',
 
-
 // O
 'occurence' => 'Instans',
 'onglet_affacer_base' => 'Radera databasen',
-'onglet_agenda' => 'Kalender',
 'onglet_auteur' => 'Redakt&ouml;ren',
-'onglet_bilan_traductions' => '&ouml;vers&auml;ttningsstatus',
-'onglet_calendrier' => 'Kalender',
 'onglet_contenu_site' => 'Sajtens inneh&aring;ll',
-'onglet_detail_traductions' => 'Artiklar f&ouml;r &ouml;vers&auml;ttning',
 'onglet_evolution_visite_mod' => 'Bes&ouml;ksniv&aring;',
 'onglet_fonctions_avances' => 'Avancerade inst&auml;llningar',
 'onglet_informations_personnelles' => 'Personlig information',
 'onglet_interactivite' => 'Interaktivitet',
-'onglet_langues' => 'Spr&aring;k',
 'onglet_messagerie' => 'Meddelanden',
-'onglet_messagerie_personnelle' => 'Personliga meddelanden',
 'onglet_messages_internes' => 'Interna meddelanden',
 'onglet_messages_publics' => 'Publika meddelanden',
 'onglet_messages_vide' => 'Meddelanden utan text',
@@ -658,7 +605,6 @@ Tack f&ouml;r ditt deltagande
 'onglet_save_restaur_base' => 'Backup/&aring;terst&auml;llande av databas',
 'onglet_vider_cache' => 'T&ouml;m cachen',
 'ortho_trop_de_fautes2' => 'B&ouml;rja genom att r&auml;tta de mest uppenbara misstagen och f&ouml;rs&ouml;k igen.',
-
 
 // P
 'pass_choix_pass' => 'Var v&auml;nlig, v&auml;lj ett nytt l&ouml;senord:',
@@ -704,10 +650,8 @@ och koppla upp dig mot sajten igen.
 'previsualisation' => 'F&ouml;rhandsvisning',
 'previsualiser' => 'visualisera',
 
-
 // R
 'retour' => 'G&aring; tillbaka',
-
 
 // S
 'spip_conforme_dtd' => 'SPIP anser att sidan st&auml;mmer med dess DOCTYPE:',
@@ -717,7 +661,6 @@ och koppla upp dig mot sajten igen.
 'stats_visites_et_popularite' => '@visites@ bes&ouml;k; popularitet: @popularite@',
 'suivant' => 'n&auml;sta',
 
-
 // T
 'taille_ko' => '@taille@&nbsp;kb',
 'taille_mo' => '@taille@&nbsp;Mb',
@@ -725,8 +668,6 @@ och koppla upp dig mot sajten igen.
 'texte_actualite_site_1' => 'N&auml;r du vant dig vid gr&auml;nssnittet, klicka p&aring; &laquo;',
 'texte_actualite_site_2' => 'Fullst&auml;ndigt gr&auml;nssnitt',
 'texte_actualite_site_3' => '&raquo; f&ouml;r att g&ouml;ra fler funktioner tillg&auml;ngliga.',
-'texte_bilan_traductions' => 'I det h&auml;r diagrammet, representerar de gr&ouml;na staplarna &ouml;versatta och uppdaterade artiklar och de r&ouml;da staplarna artiklar som beh&ouml;ver uppdateras.',
-'texte_choix_langue_defaut' => 'V&auml;lj h&auml;r det huvudsakliga spr&aring;ket f&ouml;r sajten och de spr&aring;k som kommer att vara tillg&auml;ngliga f&ouml;r redakt&ouml;rerna.',
 'texte_creation_automatique_vignette' => 'Automatisk generering av miniatyrer &auml;r aktiverat p&aring; den h&auml;r sajten. Om du laddar upp bilder, i formaten @gd_formats@, med det h&auml;r formul&auml;ret, kommer de att kopplas till en miniatyr med maximal storlek @taille_preview@ pixlar.',
 'texte_documents_associes' => 'F&ouml;ljande dokument &auml;r l&auml;nkade till artikeln,
     men de &auml;r inte direkt bifogade
@@ -751,23 +692,12 @@ och koppla upp dig mot sajten igen.
 'texte_inc_meta_1' => 'Ett fel intr&auml;ffade d&aring; systemet skrev <code>@fichier@</code>. Som administrat&ouml;r, var v&auml;nlig,',
 'texte_inc_meta_2' => 'Kontrollera skrivr&auml;ttigheterna',
 'texte_inc_meta_3' => 'i katalogen <code>@repertoire@</code>.',
-'texte_plan_trad' => 'Denna sida visualiserar h&aring;r l&aring;ngt man kommit med &ouml;vers&auml;ttningen per valt spr&aring;k. 
-Sidan visar artiklar d&auml;r &ouml;vers&auml;ttning p&aring;g&aring;r, artiklar vars &ouml;vers&auml;ttning beh&ouml;ver uppdateras och de som &auml;nnu inte &ouml;versatts.',
-'texte_plan_trad_en_cours' => 'Denna symbol visar att &ouml;vers&auml;ttningen av en artikel startat: Det vill s&auml;ga att en &ouml;vers&auml;ttning 
-  startat men &auml;nnu inte &auml;r klar och publicerad. Klicka p&aring; symbolen f&ouml;r att f&aring; tillg&aring;ng till
-  &ouml;vers&auml;ttningen. ',
-'texte_plan_trad_modif' => 'Den h&auml;r symbolen visar att f&ouml;r&auml;ndringarna gjorts i en 
-artikel som redan &ouml;versatts. I detta fall &auml;r det b&auml;st att aktualisera
- &ouml;vers&auml;ttningen med de f&ouml;r&auml;ndringar som gjorts i orginalet.',
-'texte_plan_trad_note' => 'Obs!: bara publicerade artiklar visas p&aring; den h&auml;r sidan.',
 'texte_statut_en_cours_redaction' => 'under redaktion',
 'texte_statut_poubelle' => 'i papperskorgen',
 'texte_statut_propose_evaluation' => 'inl&auml;mnad f&ouml;r godk&auml;nnande',
 'texte_statut_publie' => 'publicerad online',
 'texte_statut_refuse' => 'refuserad',
 'titre_ajouter_mot_cle' => 'L&Auml;GG TILL ETT NYCKELORD:',
-'titre_articles_populaires' => 'De mest popul&auml;ra artiklarna',
-'titre_articles_visites' => 'De mest bes&ouml;kta artiklarna',
 'titre_breve_proposee' => 'Uppladdade nyheter',
 'titre_breve_publiee' => 'Nyheten har publicerats',
 'titre_breve_refusee' => 'Nyheten har refuserats',
@@ -784,14 +714,11 @@ artikel som redan &ouml;versatts. I detta fall &auml;r det b&auml;st att aktuali
 'titre_joindre_document' => 'BIFOGA ETT DOKUMENT',
 'titre_liens_entrants' => 'Inkommande l&auml;nkar',
 'titre_mots_cles' => 'NYCKELORD',
-'titre_page_admin_vider' => 'Tekninskt underh&aring;ll: underh&aring;ll av cachen',
-'titre_page_etat_traductions' => '&Ouml;vers&auml;ttningarnas tillst&aring;nd',
 'titre_probleme_technique' => 'OBS!: ett tekniskt problem (databasservern) f&ouml;rhindrar tillg&aring;ng till den h&auml;r delen. Tack f&ouml;r f&ouml;rst&aring;elsen.',
 'titre_publier_document' => 'PUBLICERA ETT DOKUMENT I DEN H&Auml;R AVDELNINGEN',
 'titre_statistiques' => 'Statistik f&ouml;r sajten',
 'titre_titre_document' => 'Dokumentets titel:',
 'trad_reference' => '(refererad artikel)',
-
 
 // U
 'upload_fichier_zip' => 'ZIP fil',
@@ -800,7 +727,6 @@ artikel som redan &ouml;versatts. I detta fall &auml;r det b&auml;st att aktuali
 'upload_limit' => 'Den h&auml;r filen &auml;r f&ouml;r stor f&ouml;r servern; Den maimala storleken som kan <i>laddas upp</i> &auml;r @max@.',
 'upload_zip_decompacter' => 'uppackad och alla filerna kommer ahh bli installerade p&aring; sajten. De filer som kommer att installeras &auml;r:',
 'upload_zip_telquel' => 'installerad som den &auml;r, som en ZIP-fil;',
-
 
 // Z
 'zbug_balise_b_aval' => ': B taggen f&ouml;r sent i loopen',
@@ -844,8 +770,6 @@ artikel som redan &ouml;versatts. I detta fall &auml;r det b&auml;st att aktuali
 'zxml_valeur_attribut' => 'v&auml;rde f&ouml;r attribut',
 'zxml_vide_balise' => 'tom tagg',
 'zxml_vu' => 'tidigare sedd'
-
 );
-
 
 ?>

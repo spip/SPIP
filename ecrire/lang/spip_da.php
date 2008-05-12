@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-da',
 '0_langue' => 'dansk [da]',
 '0_liste' => 'spip-da@rezo.net',
 '0_mainteneur' => 'abc@dk2net.dk',
-
 
 // A
 'access_interface_graphique' => '<NEW>Retour &agrave; l\'interface graphique compl&egrave;te',
@@ -27,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'analyse_xml' => '<NEW>Analyse XML',
 'annuler' => '<NEW>Annuler',
 'antispam_champ_vide' => '<NEW>Veuillez laisser ce champ vide&nbsp;:',
+'articles_recents' => 'De seneste artikler',
 'avis_archive_incorrect' => 'arkivfilen er ikke en gyldig SPIP fil',
 'avis_archive_invalide' => 'arkivfilen er ikke gyldig',
 'avis_attention' => 'Advarsel!',
@@ -41,7 +43,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_mysql' => '<MODIF>SQL fejl',
 'avis_erreur_sauvegarde' => 'Fejl i sikkerhedskopi (@type@ @id_objet@)!',
 'avis_erreur_visiteur' => '<NEW>Probl&egrave;me d\'acc&egrave;s &agrave; l\'espace priv&eacute;',
-
 
 // B
 'barre_a_accent_grave' => 'Inds&aelig;t et stort A med accent grave',
@@ -73,7 +74,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_telecharger' => 'Hent',
 'bouton_valider' => 'Godkend',
 
-
 // C
 'cal_apresmidi' => '<NEW>apr&egrave;s-midi',
 'cal_jour_entier' => '<NEW>jour entier',
@@ -86,7 +86,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'colonne' => '<NEW>Colonne',
 'confirm_changer_statut' => '<NEW>Attention, vous avez demand&eacute; &agrave; changer le statut de cet &eacute;l&eacute;ment. Souhaitez-vous continuer?',
 'correcte' => '<NEW>correcte',
-
 
 // D
 'date_aujourdhui' => '<NEW>aujourd\'hui',
@@ -202,7 +201,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>N&aring;r du har fuldf&oslash;rt dette, kan du ',
 'double_occurrence' => '<NEW>Double occurrence',
 
-
 // E
 'entree_dimensions' => 'St&oslash;rrelse:',
 'entree_titre_document' => 'Dokumentoverskrift:',
@@ -211,7 +209,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => '<NEW>Erreur',
 'erreur_balise_non_fermee' => '<NEW>derni&egrave;re balise non referm&eacute;e :',
 'erreur_texte' => '<NEW>erreur(s)',
-
 
 // F
 'fichier_introuvable' => '<NEW>Fichier @fichier@ introuvable',
@@ -308,7 +305,6 @@ Tak for din deltagelse
 		personlige adgangsoplysninger, du har f&aring;et tilsendt.
 		Hvis du ikke allerede har tilmeldt dig, skal du g&oslash;re det.',
 'forum_vous_inscrire' => '<MODIF>tilmeld dig </a> f&oslash;rst.',
-
 
 // I
 'ical_texte_rss_articles' => 'Filen "backend" for artiklerne p&aring; dette websted findes p&aring; f&oslash;lgende adresse: ',
@@ -534,7 +530,6 @@ eller kontakt din internetudbyder.</font>',
 'infos_vos_pense_bete' => 'Dine memoer',
 'item_breve_proposee' => 'Nyhed indsendt',
 
-
 // L
 'lien_afficher_icones_seuls' => 'Vis kun piktogrammer',
 'lien_afficher_texte_icones' => 'Vis piktogrammer og tekst',
@@ -588,16 +583,13 @@ eller kontakt din internetudbyder.</font>',
 'login_test_navigateur' => 'test af browser/nyt login',
 'login_verifiez_navigateur' => '(Men kontroller, at din browser ikke har gemt adgangskoden...)',
 
-
 // M
 'masquer_trad' => '<NEW>masquer les traductions',
 'module_fichiers_langues' => 'Sprogfiler',
 
-
 // N
 'navigateur_pas_redirige' => 'Hvis din browser ikke er viderestilt, klik her for at forts&aelig;tte. ',
 'numero' => '<NEW>Num&eacute;ro',
-
 
 // O
 'occurence' => '<NEW>Occurrence',
@@ -619,7 +611,6 @@ eller kontakt din internetudbyder.</font>',
 'onglet_save_restaur_base' => 'Sikkerhedskopi/genindl&aelig;sning af databasen',
 'onglet_vider_cache' => 'T&oslash;m cachen',
 'ortho_trop_de_fautes2' => '<NEW>Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.',
-
 
 // P
 'pass_choix_pass' => 'V&aelig;lg ny adgangskode:',
@@ -658,10 +649,8 @@ og igen f&aring; adgang til webstedet.',
 'previsualisation' => '<NEW>Pr&eacute;visualisation',
 'previsualiser' => '<NEW>Pr&eacute;visualiser',
 
-
 // R
 'retour' => '<NEW>Retour',
-
 
 // S
 'spip_conforme_dtd' => '<NEW>SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE :',
@@ -670,7 +659,6 @@ og igen f&aring; adgang til webstedet.',
 'squelette_ligne' => '<NEW>squelette, ligne',
 'stats_visites_et_popularite' => '@visites@ bes&oslash;g; popularitet: @popularite@',
 'suivant' => '<NEW>suivant',
-
 
 // T
 'taille_ko' => '@taille@&nbsp;kb',
@@ -725,7 +713,6 @@ og igen f&aring; adgang til webstedet.',
 'titre_titre_document' => 'Dokumentoverskrift:',
 'trad_reference' => '(referenceartikel)',
 
-
 // U
 'upload_fichier_zip' => '<NEW>Fichier ZIP',
 'upload_fichier_zip_texte' => '<NEW>Le fichier que vous proposez d\'installer est un fichier Zip.',
@@ -733,7 +720,6 @@ og igen f&aring; adgang til webstedet.',
 'upload_limit' => '<NEW>Ce fichier est trop gros pour le serveur&nbsp;; la taille maximum autoris&eacute;e en <i>upload</i> est de @max@.',
 'upload_zip_decompacter' => '<NEW>d&eacute;compress&eacute; et chaque &eacute;l&eacute;ment qu\'il contient install&eacute; sur le site. Les fichiers qui seront alors install&eacute;s sur le site sont&nbsp;:',
 'upload_zip_telquel' => '<NEW>install&eacute; tel quel, en tant qu\'archive compress&eacute;e Zip&nbsp;;',
-
 
 // Z
 'zbug_balise_b_aval' => '<NEW>&nbsp;: balise B en aval',
@@ -777,8 +763,6 @@ og igen f&aring; adgang til webstedet.',
 'zxml_valeur_attribut' => '<NEW>valeur de l\'attribut',
 'zxml_vide_balise' => '<NEW>balise vide',
 'zxml_vu' => '<NEW>vu auparavant'
-
 );
-
 
 ?>

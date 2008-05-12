@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://www.spip.net/nl_',
 '0_langue' => 'Nederlands [nl]',
 '0_liste' => 'spip-nl@rezo.net',
 '0_mainteneur' => 'spip-nl@teomech.ugent.be',
-
 
 // A
 'access_interface_graphique' => 'Terug naar de volledig grafische interface',
@@ -23,10 +24,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_rubrique' => 'Rubriek wijzigen',
 'admin_recalculer' => 'Pagina vernieuwen',
 'afficher_trad' => 'Vertalingen weergeven',
-'alerte_maj_impossible' => '<b>Waarshuwing&nbsp;!</b> Het updaten van de MySQL-gegevensbank naar versie @version@ is niet mogelijk. Mogelijk is dit te wijten aan onvoldoende schrijfrechten op de gegevensbank. Contacteer hiervoor je provider.',
+'alerte_maj_impossible' => '<b>Waarshuwing&nbsp;!</b> Het updaten van de SQL-gegevensbank naar versie @version@ is niet mogelijk. Misschien wegens een probleem van wijzigingsrecht op de gegevensbank. Gelieve met uw leverancier contact op te nemen.',
 'analyse_xml' => 'XML Analyse',
 'annuler' => 'Annuleren',
 'antispam_champ_vide' => 'Gelieve dit veld leeg te laten&nbsp;:',
+'articles_recents' => 'Meest recente artikels',
 'avis_archive_incorrect' => 'Het bewaarde bestand is geen SPIP-bestand',
 'avis_archive_invalide' => 'Het bewaarde bestand is niet bruikbaar',
 'avis_attention' => 'OPGELET!',
@@ -38,10 +40,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_connexion' => 'Verbinding mislukt',
 'avis_erreur_cookie' => 'Probleem met koekie',
 'avis_erreur_fonction_contexte' => 'Programmafout. Deze functie kan niet worden opgeroepen in deze context.',
-'avis_erreur_mysql' => 'MySQL fout',
+'avis_erreur_mysql' => 'SQL fout',
 'avis_erreur_sauvegarde' => 'Backup fout (@type@ @id_objet@) !',
 'avis_erreur_visiteur' => 'Probleem met toegang tot het private gedeelden.',
-
 
 // B
 'barre_a_accent_grave' => 'Hoofdletter A met accent grave toevoegen',
@@ -73,7 +74,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_telecharger' => 'Opladen',
 'bouton_valider' => 'Goedkeuren',
 
-
 // C
 'cal_apresmidi' => 'namiddag',
 'cal_jour_entier' => 'hele dag',
@@ -86,7 +86,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'colonne' => 'Kolom',
 'confirm_changer_statut' => 'Opgelet. Je hebt gevraagd de status van dit element te wijzigen. Wil je verdergaan ?',
 'correcte' => 'juist',
-
 
 // D
 'date_aujourdhui' => 'vandaag',
@@ -200,16 +199,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>Eenmaal deze wijziging doorgevoerd, kan je ',
 'double_occurrence' => 'Dubbel gebruik',
 
-
 // E
 'entree_dimensions' => 'Afmetingen:',
 'entree_titre_document' => 'Documenttitel:',
 'entree_titre_image' => 'Afbeeldingstitel:',
 'envoi_via_le_site' => 'Verzending via de site',
 'erreur' => 'Fout',
-'erreur_balise_non_fermee' => '<NEW>derni&egrave;re balise non referm&eacute;e :',
+'erreur_balise_non_fermee' => 'laatste bebakent niet opnieuw gesloten :',
 'erreur_texte' => 'Fout(en)',
-
 
 // F
 'fichier_introuvable' => 'Bestand @fichier@ onvindbaar',
@@ -312,7 +309,6 @@ Bedankt voor je deelname
   Als je nog niet geregistreerd bent, dien je ',
 'forum_vous_inscrire' => 'je inschrijven.',
 
-
 // I
 'ical_texte_rss_articles' => 'Het &laquo;backend&raquo; bestand van de artikels bevindt zich op dit adres:',
 'ical_texte_rss_articles2' => 'Je kan eveneens de &laquo;backend&raquo; bestanden bekomen voor de artikels van elke rubriek van deze site:',
@@ -327,7 +323,6 @@ Bedankt voor je deelname
 'icone_brouteur' => 'Snelle navigatie',
 'icone_configuration_site' => 'Configuratie',
 'icone_configurer_site' => 'Je website configureren',
-'icone_creer_mot_cle' => 'Een nieuw trefwoord aanmaken en koppelen aan dit artikel',
 'icone_creer_nouvel_auteur' => 'Een nieuwe auteur aanmaken',
 'icone_creer_rubrique' => 'Een rubriek aanmaken',
 'icone_creer_sous_rubrique' => 'Een subrubriek aanmaken',
@@ -467,7 +462,7 @@ Bedankt voor je deelname
 'info_mois_courant' => 'Gedurende de maand :',
 'info_mot_cle_ajoute' => 'Het volgende trefwoord is toegevoegd aan ',
 'info_multi_herit' => 'Standaardtaal',
-'info_multi_langues_soulignees' => 'Van de <u>onderlijnde talen</u> zijn alle teksten van de interface vertaald.  Als je een van deze talen kiest, worden automatisch heel wat gegevens (data, formulieren) van de publieke site vertaald. Voor de niet-onderlijnde talen zullen deze gegevens in de hoofdtaal van de site verschijnen.',
+'info_multi_langues_soulignees' => 'De <u>onderlijnde talen</u> zijn alle teksten van de interface vertaald.  Als je een van deze talen kiest, worden automatisch heel wat gegevens (data, formulieren) van de publieke site zullen automatisch vertaald worden. Voor de niet-onderlijnde talen zullen deze gegevens in de hoofdtaal van de site verschijnen.',
 'info_multilinguisme' => 'Meertaligheid',
 'info_nom_non_utilisateurs_connectes' => 'Je naam komt niet in de lijst van de redacteuren die online zijn.',
 'info_nom_utilisateurs_connectes' => 'Je naam komt in de lijst van de redacteuren die online zijn.',
@@ -480,6 +475,7 @@ Bedankt voor je deelname
 'info_panne_site_syndique' => 'Gesyndiceerde site is niet bereikbaar',
 'info_pense_bete' => 'MEMO',
 'info_petit_ecran' => 'Klein scherm',
+'info_petition_close' => 'Gesloten petitie',
 'info_pixels' => 'pixels',
 'info_plusieurs_mots_trouves' => 'Meerdere trefwoorden gevonden voor "@cherche_mot@":',
 'info_popularite_5' => 'populariteit:',
@@ -515,7 +511,7 @@ Bedankt voor je deelname
 'info_site_refuse' => 'Website weigerd',
 'info_sites_referencer' => 'Een site koppelen',
 'info_supprimer_vignette' => 'De mini-afbeelding verwijderen',
-'info_symbole_bleu' => '<MODIF>Het <b>blauwe</b> symbool wijst op een <b>memo</b>: ttz een bericht voor persoonlijk gebruik.',
+'info_symbole_bleu' => 'Het <b>blauwe</b> symbool wijst op een <b>memo</b>: dat wil zeggen een bericht voor persoonlijk gebruik.',
 'info_symbole_jaune' => 'Het <b>gele</b> symbool wijst op een <b>aankondiging voor alle redacteurs</b>: te wijzigen door alle beheerders en zichtbaar voor alle redacteurs.',
 'info_symbole_vert' => 'Het <b>groene</b> symbool wijst op <b>uitgewisselde berichten met andere gebruikers</b> van deze site.',
 'info_syndication' => 'nieuwsovername (syndicatie)&nbsp;:',
@@ -540,7 +536,6 @@ Bedankt voor je deelname
 'infos_vos_pense_bete' => 'Je memo\'s',
 'item_breve_proposee' => 'Bericht voorgesteld',
 
-
 // L
 'lien_afficher_icones_seuls' => 'Toon alleen icoontjes',
 'lien_afficher_texte_icones' => 'Toon icoontjes en tekst',
@@ -562,9 +557,9 @@ Bedankt voor je deelname
 'lien_visites' => '@visites@ bezoeken',
 'lien_voir_auteur' => 'Auteur nakijken',
 'ligne' => 'Lijn',
+'login' => 'Aansluiten',
 'login_acces_prive' => 'Toegang tot het private deel',
 'login_autre_identifiant' => 'Verbinden met een andere inlognaam',
-'login_connexion_refusee' => 'Verbinding geweigerd.',
 'login_cookie_accepte' => 'Stel je bladerprogramma zo in dat het koekies aanvaardt (tenminste voor deze site).',
 'login_cookie_oblige' => 'Om jezelf veilig aan te melden, dien je koekies te aanvaarden.',
 'login_deconnexion_ok' => 'Verbinding verbreken.',
@@ -596,19 +591,17 @@ Bedankt voor je deelname
 'login_test_navigateur' => 'Testen van bladerprogramma/opnieuw verbinden',
 'login_verifiez_navigateur' => '(Kijk niettemin na dat je bladerprogramma je paswoord niet heeft onthouden...)',
 
-
 // M
+'masquer_colonne' => '<NEW>Masquer cette colonne',
 'masquer_trad' => 'Vertalingen verbergen',
 'module_fichiers_langues' => 'Taalbestanden',
-
 
 // N
 'navigateur_pas_redirige' => 'Wanneer je bladerprogramma niet doorverwijst, klik dan hier om verder te gaan.',
 'numero' => 'Nummer',
 
-
 // O
-'occurence' => '<NEW>Occurrence',
+'occurence' => 'Toeval',
 'onglet_affacer_base' => 'Database verwijderen',
 'onglet_auteur' => 'Auteur',
 'onglet_contenu_site' => 'Inhoud van de site',
@@ -627,7 +620,6 @@ Bedankt voor je deelname
 'onglet_save_restaur_base' => 'Backup/terugzetten van de databank',
 'onglet_vider_cache' => 'Cache leegmaken',
 'ortho_trop_de_fautes2' => 'Begin met het verbeteren van de meest zichtbare fouten en probeer vervolgens opnieuw.',
-
 
 // P
 'pass_choix_pass' => 'Kies je nieuwe paswoord:',
@@ -672,10 +664,8 @@ opnieuw verbinding maken met de site
 'previsualisation' => 'voorafkijk',
 'previsualiser' => 'Vooraf tonen',
 
-
 // R
 'retour' => 'Terugkeren',
-
 
 // S
 'spip_conforme_dtd' => 'SPIP beschouwt dit document als conform met zijn DOCTYPE :',
@@ -684,7 +674,6 @@ opnieuw verbinding maken met de site
 'squelette_ligne' => 'sjabloon, lijn',
 'stats_visites_et_popularite' => '@visites@ bezoeken; populariteit: @popularite@',
 'suivant' => 'volgende',
-
 
 // T
 'taille_ko' => '@taille@&nbsp;kB',
@@ -709,7 +698,7 @@ opnieuw verbinding maken met de site
   Probeer je',
 'texte_inc_auth_2' => 'Opnieuw verbinden',
 'texte_inc_auth_3' => ', nadat je je bladerprogramma eventueel gesloten en opnieuw herstart hebt.',
-'texte_inc_config' => '<MODIF>De wijzigingen die op deze pagina worden aangebracht,
+'texte_inc_config' => 'De wijzigingen die op deze pagina worden aangebracht,
  be&iuml;nvloeden grondig de werking van de volledige website. We raden
  je aan hier niets aan te wijzigen tot je voldoende bekend
  bent met het functioneren van het SPIP systeem.
@@ -741,12 +730,13 @@ opnieuw verbinding maken met de site
 'titre_joindre_document' => 'Document toevoegen',
 'titre_liens_entrants' => 'Inkomende koppelingen',
 'titre_mots_cles' => 'TREFWOORDEN',
-'titre_probleme_technique' => 'Opgelet: een technisch probleem (MySQL server) verhindert de toegang tot dit deel van de site. Dank voor uw begrip.',
+'titre_probleme_technique' => 'Opgelet&nbsp;: een technisch probleem (SQL server) verhindert de toegang tot dit deel van de site. Dank voor uw begrip.',
 'titre_publier_document' => 'EEN DOCUMENT PUBLICEREN IN DEZE RUBRIEK',
+'titre_signatures_attente' => '<NEW>Signatures en attente de validation',
+'titre_signatures_confirmees' => '<NEW>Signatures confirm&eacute;es',
 'titre_statistiques' => 'Statistieken van de site',
 'titre_titre_document' => 'Titel van het document:',
 'trad_reference' => '(referentie-artikel)',
-
 
 // U
 'upload_fichier_zip' => 'ZIP bestand',
@@ -755,18 +745,22 @@ opnieuw verbinding maken met de site
 'upload_limit' => 'Dit bestand is te groot voor de server&nbsp;; de maximale bestandsgrootte voor <i>upload</i> is @max@.',
 'upload_zip_decompacter' => 'uitgepakt en elk bestand ge&iuml;nstalleerd op de site. De bestanden die op de site komen, zijn&nbsp;:',
 'upload_zip_telquel' => 'ge&iuml;nstalleerd als gezipt (gecomprimeerd) bestand&nbsp;;',
-
+'upload_zip_titrer' => '<NEW>Dans les deux derniers cas, cocher cette case pour que SPIP nomme chaque &eacute;l&eacute;ment d\'apr&egrave;s le nom du fichier.',
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: komende opmaakcode B',
+'zbug_balise_inexistante' => '<NEW>erreur @from@: la balise #@balise@ n\'existe pas',
+'zbug_balise_sans_argument' => '<NEW>Argument manquant dans la balise @balise@',
 'zbug_boucle' => 'lus',
 'zbug_boucle_recursive_undef' => 'niet gedefinieerde wederkerige lus',
+'zbug_calcul' => '<NEW>calcul',
 'zbug_champ_hors_boucle' => 'Veld @champ@ buiten de lus',
 'zbug_champ_hors_motif' => 'Veld @champ@ buiten een lus van motief @motif@',
 'zbug_code' => 'code',
 'zbug_critere_inconnu' => 'criterium onbekend @critere@',
 'zbug_distant_interdit' => 'externe niet toegestaan',
-'zbug_doublon_table_sans_index' => '<NEW>doublons sur une table sans index',
+'zbug_doublon_table_sans_cle_primaire' => '<NEW>doublons sur une table sans clef primaire atomique',
+'zbug_doublon_table_sans_index' => 'doublons op een tafel zonder indexcijfers',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: dubbel gebruik',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: sluitingshaakje ontbreekt',
 'zbug_erreur_boucle_syntaxe' => 'Onjuiste syntaxis van de lus',
@@ -775,6 +769,7 @@ opnieuw verbinding maken met de site
 'zbug_erreur_filtre' => 'Fout : de filter <b>&laquo; @filtre@ &raquo;</b> is niet gedefinieerd',
 'zbug_erreur_meme_parent' => '{meme_parent} is enkel van toepassing op de lussen (FORUMS) en (RUBRIQUES)',
 'zbug_erreur_squelette' => 'Fout(en) in het sjabloon',
+'zbug_hors_compilation' => '<NEW>Hors Compilation',
 'zbug_info_erreur_squelette' => 'Fout op de site',
 'zbug_inversion_ordre_inexistant' => 'Omkering van een ongekende orde',
 'zbug_pagination_sans_critere' => '#PAGINATION sans crit&egrave;re {pagination} ou employ&eacute; dans une boucle recursive',
@@ -782,25 +777,24 @@ opnieuw verbinding maken met de site
 'zbug_profile' => 'Berekeningstijd&nbsp;: @time@',
 'zbug_resultat' => 'resultaat',
 'zbug_serveur_indefini' => 'SQL server niet gedefinieerd',
+'zbug_statistiques' => '<NEW>Statistiques des requ&ecirc;tes SQL class&eacute;es par dur&eacute;e',
 'zbug_table_inconnue' => 'SQL tabel &laquo; @table@ &raquo; onbekend',
 'zxml_connus_attributs' => 'onbekende eigenschappen',
 'zxml_de' => 'van',
 'zxml_inconnu_attribut' => 'onbekende eigenschap',
-'zxml_inconnu_balise' => '<NEW>balise inconnue',
+'zxml_inconnu_balise' => 'onbekend baken',
 'zxml_inconnu_entite' => 'onbekende entiteit',
 'zxml_inconnu_id' => 'onbekende ID',
 'zxml_mais_de' => 'maar van',
-'zxml_non_conforme' => '<NEW>n\'est pas conforme au motif',
+'zxml_non_conforme' => 'is niet in overeenstemming met de reden',
 'zxml_non_fils' => 'is geen zoon van ',
-'zxml_nonvide_balise' => '<NEW>balise non vide',
+'zxml_nonvide_balise' => 'niet leeg baken',
 'zxml_obligatoire_attribut' => 'verplichte eigenschap maar afwezig in',
-'zxml_succession_fils_incorrecte' => '<NEW>succession des fils incorrecte',
-'zxml_survoler' => '<NEW>survoler pour voir les corrects',
+'zxml_succession_fils_incorrecte' => 'incorrecte opeenvolging van de draden',
+'zxml_survoler' => 'vliegen over om juist te zien',
 'zxml_valeur_attribut' => 'waarde van de eigenschap',
-'zxml_vide_balise' => '<NEW>balise vide',
-'zxml_vu' => '<NEW>vu auparavant'
-
+'zxml_vide_balise' => 'leeg baken',
+'zxml_vu' => 'gezien eerst'
 );
-
 
 ?>

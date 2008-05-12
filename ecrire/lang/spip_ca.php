@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
 '0_langue' => 'Catal&agrave; [ca]',
 '0_liste' => ' spip-dev@rezo.net',
 '0_mainteneur' => ' spip-dev@rezo.net',
-
 
 // A
 'access_interface_graphique' => 'Retorn a la interf&iacute;cie gr&agrave;fica completa',
@@ -27,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'analyse_xml' => 'An&agrave;lisi XML',
 'annuler' => 'Anul&middot;lar',
 'antispam_champ_vide' => 'Si us plau, deixeu aquest camp buit:',
+'articles_recents' => 'Els articles m&eacute;s recents',
 'avis_archive_incorrect' => 'el fitxer no &eacute;s pas un fitxer SPIP',
 'avis_archive_invalide' => 'el fitxer no &eacute;s pas v&agrave;lid',
 'avis_attention' => ' ATENCI&Oacute;&nbsp;!',
@@ -41,7 +43,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_mysql' => 'Error SQL',
 'avis_erreur_sauvegarde' => ' Error al desar (@type@ @id_objet@) !',
 'avis_erreur_visiteur' => 'Problema d\'acc&eacute;s a l\'espai privat',
-
 
 // B
 'barre_a_accent_grave' => 'Inserir una A maj&uacute;scula amb accent greu',
@@ -73,7 +74,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_telecharger' => 'Baixar',
 'bouton_valider' => 'Validar',
 
-
 // C
 'cal_apresmidi' => 'tarda',
 'cal_jour_entier' => 'dia sencer',
@@ -81,15 +81,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => 'calendari diari',
 'cal_par_mois' => 'calendari mensual',
 'cal_par_semaine' => 'calendari setmanal',
-'calendrier_synchro_prive' => '<NEW>El calendario siguiente, de uso estrictamente personal, te informa sobre la actividad editorial privada de este sitio (tareas y citas personales, art&iacute;culos y breves propuestas...).',
-'calendrier_synchro_public' => '<NEW>El siguiente calendario le permite seguir la actividad p&uacute;blica de este sitio (art&iacute;culos y breves publicadas).',
-'calendrier_synchro_sync' => '<NEW>Sincronizar el archivo <i>iCal</i><br /> (Mozilla Calendar, Apple iCal...)',
 'choix_couleur_interface' => 'color',
 'choix_interface' => 'elecci&oacute; de la interf&iacute;cie',
 'colonne' => 'Columna',
 'confirm_changer_statut' => 'Atenci&oacute;, heu demanat canviar l\'estat d\'aquest element. Voleu continuar? ',
 'correcte' => 'correcte',
-
 
 // D
 'date_aujourdhui' => 'avui',
@@ -200,7 +196,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>Un cop feta aquesta manipulaci&oacute;, podreu ',
 'double_occurrence' => 'Doble inst&agrave;ncia',
 
-
 // E
 'entree_dimensions' => 'Dimensions:',
 'entree_titre_document' => 'T&iacute;tol del document:',
@@ -209,7 +204,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'Error',
 'erreur_balise_non_fermee' => '&uacute;ltima etiqueta sense tancar:',
 'erreur_texte' => 'error(s)',
-
 
 // F
 'fichier_introuvable' => 'Fitxer @fichier@ introbable',
@@ -309,7 +303,6 @@ Gr&agrave;cies per la participaci&oacute;
 'forum_vous_enregistrer' => 'Per participar al f&ograve;rum, us heu de registrar pr&egrave;viament.
 Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat proporcionat. Si encara no ho heu fet, heu d\'',
 'forum_vous_inscrire' => 'inscriure\'s.',
-
 
 // I
 'ical_texte_rss_articles' => 'El fitxer &laquo;backend&raquo; dels articles d\'aquest lloc es troba a l\'adre&ccedil;a:',
@@ -465,7 +458,7 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'info_mois_courant' => 'Durant aquest mes:',
 'info_mot_cle_ajoute' => 'La paraula clau seg&uuml;ent ha estat afegida',
 'info_multi_herit' => 'Idioma per defecte',
-'info_multi_langues_soulignees' => 'Les <u>lleng&uuml;es subratllades</u> tenen una traducci&oacute; de tots els texts de la interf&iacute;cie. Si seleccioneu aquestes lleng&uuml;es, molts elements del lloc p&uacute;blic (dates, formularis) es traduiran autom&agrave;ticament. En les lleng&uuml;es no subratllades, aquests elements es mostraran en la llengua principal del lloc.',
+'info_multi_langues_soulignees' => 'Les <u>lleng&uuml;es subratllades</u> es beneficien d\'una traducci&oacute; de tots els textos de la interf&iacute;cie. Si seleccioneu aquestes lleng&uuml;es, molts elements del lloc p&uacute;blic (dates, formularis) es traduiran autom&agrave;ticament. En les lleng&uuml;es no subratllades, aquests elements es mostraran en la llengua principal del lloc.',
 'info_multilinguisme' => 'Multiling&uuml;isme',
 'info_nom_non_utilisateurs_connectes' => 'El vostre nom no apareix a la llista d\'usuaris/&agrave;ries connectats/des.',
 'info_nom_utilisateurs_connectes' => 'El vostre nom apareix a la llista dels usuaris connectats.',
@@ -537,7 +530,6 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'infos_vos_pense_bete' => 'Els vostres recordatoris',
 'item_breve_proposee' => 'Breu proposada',
 
-
 // L
 'lien_afficher_icones_seuls' => 'Mostrar nom&eacute;s les icones',
 'lien_afficher_texte_icones' => 'Mostrar les icones i el text',
@@ -587,16 +579,13 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'login_test_navigateur' => 'prova de navegador/tornar a connectar',
 'login_verifiez_navigateur' => '(Verifiqueu no obstant que el vostre navegador no ha memoritzat la contrasenya...)',
 
-
 // M
 'masquer_trad' => 'amagar les traduccions',
 'module_fichiers_langues' => 'Fitxers de llengua',
 
-
 // N
 'navigateur_pas_redirige' => 'Si el vostre navegador no &eacute;s redirigit, cliqueu aqu&iacute; per continuar.',
 'numero' => 'N&uacute;mero',
-
 
 // O
 'occurence' => 'Inst&agrave;ncia',
@@ -618,7 +607,6 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'onglet_save_restaur_base' => 'C&ograve;pia de seguretat/restaurar base de dades',
 'onglet_vider_cache' => 'Buidar la mem&ograve;ria cau',
 'ortho_trop_de_fautes2' => 'Comenceu per corregir les errades m&eacute;s evidents i torneu-ho a provar.',
-
 
 // P
 'pass_choix_pass' => 'Escolliu la vostra nova contrasenya:',
@@ -658,10 +646,8 @@ i tornar-vos a connectar al lloc.
 'previsualisation' => 'Previsualitzaci&oacute;',
 'previsualiser' => 'Previsualitzar',
 
-
 // R
 'retour' => 'Retorn',
-
 
 // S
 'spip_conforme_dtd' => 'SPIP considera aquest document conforme al seu DOCTYPE :',
@@ -670,7 +656,6 @@ i tornar-vos a connectar al lloc.
 'squelette_ligne' => 'esquelet, l&iacute;nia',
 'stats_visites_et_popularite' => '@visites@ visites; popularitat: @popularite@',
 'suivant' => 'seg&uuml;ent',
-
 
 // T
 'taille_ko' => '@taille@&nbsp;kB',
@@ -727,7 +712,6 @@ i tornar-vos a connectar al lloc.
 'titre_titre_document' => 'T&iacute;tol del document:',
 'trad_reference' => '(article de refer&egrave;ncia)',
 
-
 // U
 'upload_fichier_zip' => 'Fitxer ZIP',
 'upload_fichier_zip_texte' => 'El fitxer que voleu instal&middot;lar &eacute;s un fitxer Zip.',
@@ -735,7 +719,6 @@ i tornar-vos a connectar al lloc.
 'upload_limit' => 'El fitxer &eacute;s massa gran pel servidor; la   mida m&agrave;xima autoritzada en <i>upload</i> &eacute;s de @max@.',
 'upload_zip_decompacter' => 'descomprimit i cada element que cont&eacute; instal&middot;lat en el lloc Web. Els fitxers que llavors seran instal&middot;lat en el lloc Web s&oacute;n:',
 'upload_zip_telquel' => 'instal&middot;lat tal qual, com a arxiu comprimit Zip;',
-
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: l\'etiqueta B ha d\'anar abans',
@@ -779,8 +762,6 @@ i tornar-vos a connectar al lloc.
 'zxml_valeur_attribut' => 'valor de l\'atribut',
 'zxml_vide_balise' => 'etiqueta buida',
 'zxml_vu' => 'vist abans'
-
 );
-
 
 ?>

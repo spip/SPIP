@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://www.kyantonius.com/spip',
 '0_langue' => 'Indonesian [id]',
 '0_liste' => 'kyantonius@gmail.com',
 '0_mainteneur' => 'Kemas Antonius (kyantonius@gmail.com)',
-
 
 // A
 'access_interface_graphique' => 'Kembali ke tatap muka grafis lengkap',
@@ -23,10 +24,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_rubrique' => 'Modifikasi bagian ini',
 'admin_recalculer' => 'Perbaharui halaman ini',
 'afficher_trad' => 'tampilkan terjemahan',
-'alerte_maj_impossible' => '<b>Peringatan!</b> Gagal memperbaharui database MySQL ke versi @version@, mungkin karena ada masalah hak akses di database. Silakan hubungi ISP anda.',
+'alerte_maj_impossible' => '<b>Peringatan!</b> Gagal memperbaharui database SQL ke versi @version@, mungkin karena ada masalah hak akses di database. Silakan hubungi ISP anda.',
 'analyse_xml' => 'Pemroresan XML',
 'annuler' => 'Batal',
 'antispam_champ_vide' => 'Mohon biarkan kolom ini kosong:',
+'articles_recents' => 'Artikel-artikel terbaru',
 'avis_archive_incorrect' => 'berkas arsip bukanlah berkas SPIP yang sah',
 'avis_archive_invalide' => 'berkas arsip tidak sah',
 'avis_attention' => 'HATI-HATI!',
@@ -38,10 +40,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_connexion' => 'Kesalahan koneksi',
 'avis_erreur_cookie' => 'masalah cookie',
 'avis_erreur_fonction_contexte' => 'Kesalahan program. Fungsi ini tidak seharusnya berada di konteks ini.',
-'avis_erreur_mysql' => 'kesalahan MySQL',
+'avis_erreur_mysql' => 'kesalahan SQL',
 'avis_erreur_sauvegarde' => 'Kesalahan di backup (@type@ @id_objet@)!',
 'avis_erreur_visiteur' => 'Kesulitan dalam memasuki area pribadi',
-
 
 // B
 'barre_a_accent_grave' => 'Masukkan huruf kapital A dengan aksen ukiran',
@@ -73,7 +74,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_telecharger' => 'Unggah',
 'bouton_valider' => 'Kirim',
 
-
 // C
 'cal_apresmidi' => 'siang (p.m.)',
 'cal_jour_entier' => 'sehari penuh',
@@ -86,7 +86,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'colonne' => 'Kolom',
 'confirm_changer_statut' => 'Konfirmasi dibutuhkan: Anda telah memohon untuk mengganti status artikel ini. Apakah anda ingin menindaklanjutinya?',
 'correcte' => 'benar',
-
 
 // D
 'date_aujourdhui' => 'hari ini',
@@ -203,7 +202,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p />Setelah anda selesai melakukannya, anda dapat ',
 'double_occurrence' => 'Entri ganda',
 
-
 // E
 'entree_dimensions' => 'Ukuran:',
 'entree_titre_document' => 'Judul dokumen:',
@@ -212,7 +210,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'Kesalahan',
 'erreur_balise_non_fermee' => 'tag terakhir tidak ditutup:',
 'erreur_texte' => 'kesalahan',
-
 
 // F
 'fichier_introuvable' => 'Berkas tidak ditemukan: @fichier@',
@@ -312,7 +309,6 @@ Terima kasih atas partisipasi anda!
 		diberikan pada anda. Jika anda belum terdaftar, anda harus',
 'forum_vous_inscrire' => 'mendaftarkan diri.',
 
-
 // I
 'ical_texte_rss_articles' => 'Alamat berkas sindikasi artikel situs adalah:',
 'ical_texte_rss_articles2' => 'Selain itu, anda juga dapat memperoleh berkas sindikasi untuk artikel dari setiap bagian situs:',
@@ -327,7 +323,6 @@ Terima kasih atas partisipasi anda!
 'icone_brouteur' => 'Jelajah cepat',
 'icone_configuration_site' => 'Konfigurasi',
 'icone_configurer_site' => 'Konfigurasi situs anda',
-'icone_creer_mot_cle' => 'Buat sebuah kata kunci baru dan tautkan ia ke artikel ini',
 'icone_creer_nouvel_auteur' => 'Buat seorang penulis baru',
 'icone_creer_rubrique' => 'Buat sebuah bagian',
 'icone_creer_sous_rubrique' => 'Buat sebuah sub bagian',
@@ -436,7 +431,7 @@ Terima kasih atas partisipasi anda!
 'info_grand_ecran' => 'Tampilan besar',
 'info_image_aide' => 'BANTUAN',
 'info_image_process_titre' => 'Bagaimana membuat gambar-gambar kecil',
-'info_impossible_lire_page' => '<B>Kesalahan!</b> Halaman tidak dapat dibaca <tt><html>@test_proxy@</html></tt> melalui proxy <tt>',
+'info_impossible_lire_page' => '<b>Kesalahan!</b> Halaman tidak dapat dibaca <tt><html>@test_proxy@</html></tt> melalui proxy <tt>',
 'info_inclusion_directe' => 'Penambahan langsung:',
 'info_inclusion_vignette' => 'Ikutkan gambar kecil:',
 'info_installation_systeme_publication' => 'Instalasi sistem publikasi ...',
@@ -456,7 +451,6 @@ Terima kasih atas partisipasi anda!
 'info_langue_principale' => 'Bahasa situs utama',
 'info_largeur_vignette' => '@largeur_vignette@ &times; @hauteur_vignette@ pixels',
 'info_les_auteurs_1' => 'oleh @les_auteurs@',
-'info_lettre_heures' => 'H',
 'info_logo_format_interdit' => 'Hanya logo-logo dalam format @formats@ diperbolehkan.',
 'info_logo_max_poids' => 'Logo hendaklan kurang dari @maxi@ (berkas ini @actuel@).',
 'info_logo_max_taille' => 'Logo hendaklah kurang dari @maxi@ (berkas ini @actuel@).',
@@ -513,9 +507,9 @@ Terima kasih atas partisipasi anda!
 'info_site_refuse' => 'Situs web ditolak',
 'info_sites_referencer' => 'Merujuk sebuah situs',
 'info_supprimer_vignette' => 'hapus gambar kecil',
-'info_symbole_bleu' => 'Simbol <B>biru</B> menandakan sebuah <B>memo</B>: yakni sebuah pesan untuk penggunaan pribadi anda.',
-'info_symbole_jaune' => 'Simbol <B>kuning</B> menandakan sebuah <B>pengumuman untuk semua edtor</B>: dapat diedit oleh semua administrator, dan muncul pada semua editor.',
-'info_symbole_vert' => 'Simbol <B>hijau</B> menandakan <B>pesan yang diperoleh dari pengguna lainnya</B> di situs.',
+'info_symbole_bleu' => 'Simbol <b>biru</B> menandakan sebuah <b>memo</B>: yakni sebuah pesan untuk penggunaan pribadi anda.',
+'info_symbole_jaune' => 'Simbol <b>kuning</B> menandakan sebuah <b>pengumuman untuk semua edtor</B>: dapat diedit oleh semua administrator, dan muncul pada semua editor.',
+'info_symbole_vert' => 'Simbol <b>hijau</B> menandakan <b>pesan yang diperoleh dari pengguna lainnya</B> di situs.',
 'info_syndication' => 'sindikasi:',
 'info_syndication_articles' => 'artikel',
 'info_telecharger' => 'Unggah dari komputer anda:',
@@ -536,10 +530,7 @@ Terima kasih atas partisipasi anda!
 'info_vos_rendez_vous' => 'Janji-janji anda yang akan datang',
 'info_zoom' => 'perbesar',
 'infos_vos_pense_bete' => 'Memo anda',
-'item_administrateur' => 'Administrator',
 'item_breve_proposee' => 'Artikel berita dikirim',
-'item_redacteur' => 'Redaktur',
-
 
 // L
 'lien_afficher_icones_seuls' => 'Tampilkan icon saja',
@@ -564,14 +555,12 @@ Terima kasih atas partisipasi anda!
 'ligne' => 'Baris',
 'login_acces_prive' => 'akses ke area pribadi',
 'login_autre_identifiant' => 'gunakan ID lain',
-'login_connexion_refusee' => 'Koneksi ditolak.',
 'login_cookie_accepte' => 'Silakan set browser anda untuk menerimanya (paling tidak untuk situs ini).',
 'login_cookie_oblige' => 'Untuk mengidentifikasi diri anda secara aman, anda harus menerima cookie.',
 'login_deconnexion_ok' => 'Keluar.',
 'login_erreur_pass' => 'Kesalahan kata sandi.',
 'login_espace_prive' => 'area pribadi',
 'login_identifiant_inconnu' => 'Pengidentifikasi "@login@" tidak dikenal.',
-'login_identification' => 'identifikasi',
 'login_login' => 'Log masuk:',
 'login_login2' => 'Log masuk (pengidentifikasi untuk koneksi ke situs):',
 'login_login_pass_incorrect' => '(Log masuk atau kata sandi salah).',
@@ -594,21 +583,17 @@ Terima kasih atas partisipasi anda!
 'login_test_navigateur' => 'mencoba browser/koneksi',
 'login_verifiez_navigateur' => '(Bagaimana pun, verifikasi bahwasanya browser anda tidak menyimpan kata sandi anda...)',
 
-
 // M
 'masquer_trad' => 'sembunyikan terjemahan',
 'module_fichiers_langues' => 'Berkas-berkas bahasa',
-
 
 // N
 'navigateur_pas_redirige' => 'Jika browser anda tidak dialihkan, klik di sini untuk lanjut.',
 'numero' => 'Nomor',
 
-
 // O
 'occurence' => 'peristiwa',
 'onglet_affacer_base' => 'Hapus database',
-'onglet_agenda' => 'Agenda',
 'onglet_auteur' => 'Penulis',
 'onglet_contenu_site' => 'Isi situs',
 'onglet_evolution_visite_mod' => 'Tingkat kunjungan',
@@ -626,7 +611,6 @@ Terima kasih atas partisipasi anda!
 'onglet_save_restaur_base' => 'Backup/pulihkan database',
 'onglet_vider_cache' => 'Kosongkan cache',
 'ortho_trop_de_fautes2' => 'Mulai dari mengkoreksi kesalahan-kesalahan yang paling kentara, kemudian coba lagi.',
-
 
 // P
 'pass_choix_pass' => 'Silakan pilih kata sandi baru anda:',
@@ -672,10 +656,8 @@ dan mengakses situs kembali.
 'previsualisation' => 'Preview',
 'previsualiser' => 'Tampilkan preview',
 
-
 // R
 'retour' => 'Kembali',
-
 
 // S
 'spip_conforme_dtd' => 'SPIP menemukan bahwasanya halaman ini sesuai dengan DOCTYPE-nya:',
@@ -684,7 +666,6 @@ dan mengakses situs kembali.
 'squelette_ligne' => 'templat, baris',
 'stats_visites_et_popularite' => '@visites@ kunjungan; popularitas: @popularite@',
 'suivant' => 'selanjutnya',
-
 
 // T
 'taille_ko' => '@taille@&nbsp;kb',
@@ -699,20 +680,20 @@ dan mengakses situs kembali.
 				Sesuai dengan tampilan situs umum,
 				mereka dapat muncul sebagai lampiran.',
 'texte_erreur_mise_niveau_base' => 'Kesalahan database sewaktu pembaharuan.
-						Gambar <B>@fichier@</B> tidak dapat diteruskan (artikel @id_article@).<p>
+						Gambar <b>@fichier@</B> tidak dapat diteruskan (artikel @id_article@).<p>
 						Perhatikan dengan seksama referensi ini, ulangi prosedur pembaharuan,
 						dan pastikan gambar akhirnya muncul
 						di artikel.',
 'texte_erreur_visiteur' => 'Anda telah mencoba memasuki area pribadi dengan log masuk yang tidak sah.',
 'texte_inc_auth_1' => 'Anda mengidentifikasikan diri anda dengan log masuk
-		<B>@auth_login@</B>, tapi tidak dapat ditemukan di database (lagi). 
+		<b>@auth_login@</B>, tapi tidak dapat ditemukan di database (lagi). 
 		Coba untuk',
 'texte_inc_auth_2' => 'akses kembali',
 'texte_inc_auth_3' => 'keluar, dan
 		buka kembali browser anda jika perlu.',
 'texte_inc_config' => 'Modifikasi yang dibuat di bawah akan mempengaruhi
 	 fungsi situs. Anda dianjurkan untuk tidak melakukannya terkecuali bila anda
-	telah mengenal sistem SPIP dengan baik. <P align="justify"><B>Biasanya,
+	telah mengenal sistem SPIP dengan baik. <P align="justify"><b>Biasanya,
 	pekerjaan ini dapat anda serahkan kepada webmaster yang tentunya
 	lebih paham SPIP daripada anda.</b>',
 'texte_inc_meta_1' => 'Sistem mengalami kesulitan ketika mencoba melakukan penulisan terhadap berkas <code>@fichier@</code>. Sebagai administrator situs, silakan',
@@ -740,12 +721,11 @@ dan mengakses situs kembali.
 'titre_joindre_document' => 'LAMPIRKAN SEBUAH DOKUMEN',
 'titre_liens_entrants' => 'Tautan masuk',
 'titre_mots_cles' => 'KATA-KATA KUNCI',
-'titre_probleme_technique' => 'Peringatan: sebuah permasalahan teknis (server MySQL) telah mengganggu akses ke bagian situs ini.<p>Terima kasih atas pengertian anda.',
+'titre_probleme_technique' => 'Peringatan: sebuah permasalahan teknis (server SQL) telah mengganggu akses ke bagian situs ini.<p>Terima kasih atas pengertian anda.',
 'titre_publier_document' => 'PUBLIKASI DOKUMEN DI BAGIAN INI',
 'titre_statistiques' => 'Statistik situs',
 'titre_titre_document' => 'Judul dokumen:',
 'trad_reference' => '(rujuk artikel)',
-
 
 // U
 'upload_fichier_zip' => 'berkas ZIP',
@@ -754,7 +734,6 @@ dan mengakses situs kembali.
 'upload_limit' => 'Berkas ini terlalu besar untuk server; ukuran maksimum yang diperbolehkan untuk <i>unggah</i> adalah @max@.',
 'upload_zip_decompacter' => 'diekstrak dan setiap berkas yang terdapat di dalamnya akan diinstal di situs. Berkas-berkas yang akan diinstal adalah:',
 'upload_zip_telquel' => 'diinstal seperti apa adanya, sebagai berkas ZIP;',
-
 
 // Z
 'zbug_balise_b_aval' => ': tag B terlambat dalam loop',
@@ -798,8 +777,6 @@ dan mengakses situs kembali.
 'zxml_valeur_attribut' => 'nilai atribut',
 'zxml_vide_balise' => 'tag kosong',
 'zxml_vu' => 'dilihat sebelumnya'
-
 );
-
 
 ?>

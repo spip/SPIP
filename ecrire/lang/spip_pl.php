@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
 '0_langue' => 'Polski [pl]',
 '0_liste' => 'spip-dev@rezo.net',
 '0_mainteneur' => 'd.paszkiewicz@ekstenso.com',
-
 
 // A
 'access_interface_graphique' => 'Powr&oacute;t do pe&#322;nego interfejsu graficznego',
@@ -27,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'analyse_xml' => 'Analiza XML',
 'annuler' => 'Anuluj',
 'antispam_champ_vide' => 'Pozostaw puste:',
+'articles_recents' => 'Najnowsze artyku&#322;y',
 'avis_archive_incorrect' => 'ten plik archiwalny nie nale&#380;y do SPIP',
 'avis_archive_invalide' => 'plik archiwalny jest nieprawid&#322;owy',
 'avis_attention' => 'UWAGA&nbsp;!',
@@ -41,7 +43,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_mysql' => 'B&#322;&#261;d SQL',
 'avis_erreur_sauvegarde' => 'B&#322;&#261;d archiwizacji (@type@ @id_objet@)!',
 'avis_erreur_visiteur' => 'Problem z dost&#281;pem do stron administracyjnych',
-
 
 // B
 'barre_a_accent_grave' => 'Wstaw du&#380;&#261; liter&#281; A z akcentem grave',
@@ -73,7 +74,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_telecharger' => 'Za&#322;aduj',
 'bouton_valider' => 'Zatwierd&#378;',
 
-
 // C
 'cal_apresmidi' => 'popo&#322;udniu',
 'cal_jour_entier' => 'ca&#322;y dzie&#324;',
@@ -81,15 +81,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => 'wg dni',
 'cal_par_mois' => 'wg miesi&#281;cy',
 'cal_par_semaine' => 'wg tygodni',
-'calendrier_synchro_prive' => '<NEW><NEW>El calendario siguiente, de uso estrictamente personal, te informa sobre la actividad editorial privada de este sitio (tareas y citas personales, art&iacute;culos y breves propuestas...).',
-'calendrier_synchro_public' => '<NEW><NEW>El siguiente calendario le permite seguir la actividad p&uacute;blica de este sitio (art&iacute;culos y breves publicadas).',
-'calendrier_synchro_sync' => '<NEW><NEW>Sincronizar el archivo <i>iCal</i><br /> (Mozilla Calendar, Apple iCal...)',
 'choix_couleur_interface' => 'kolor',
 'choix_interface' => 'wyb&oacute;r interfejsu',
 'colonne' => 'Kolumna',
 'confirm_changer_statut' => 'Uwaga, czy na pewno chcesz zmieni&#263; status tego elementu ? Kontynuowa&#263; ?',
 'correcte' => 'poprawna',
-
 
 // D
 'date_aujourdhui' => 'dzi&#347;',
@@ -203,7 +199,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>Kiedy dokonasz koniecznych zmian, b&#281;dziesz m&oacute;g&#322;',
 'double_occurrence' => 'Podw&oacute;jne wyst&#261;pienie',
 
-
 // E
 'entree_dimensions' => 'Rozmiar:',
 'entree_titre_document' => 'Tytu&#322; dokumentu:',
@@ -212,7 +207,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'B&#322;&#261;d',
 'erreur_balise_non_fermee' => 'ostatni znacznik nie jest zamkni&#281;ty :',
 'erreur_texte' => 'b&#322;&#261;d/b&#322;&#281;dy',
-
 
 // F
 'fichier_introuvable' => 'Plik @fichier@ nie odnaleziony',
@@ -316,7 +310,6 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
   o kt&oacute;ry prosimy. Je&#347;li nie jeste&#347; jeszcze zarejstrowany, musisz',
 'forum_vous_inscrire' => 'si&#281; zarejestrowa&#263;.',
 
-
 // I
 'ical_texte_rss_articles' => 'Plik "backend" artyku&#322;&oacute;w tej strony znajduje si&#281; pod adresem:',
 'ical_texte_rss_articles2' => 'Mo&#380;esz r&oacute;wnie&#380; otrzyma&#263; pliki "backend" dla artyku&#322;&oacute;w dla ka&#380;dego z dzia&#322;&oacute;w strony:',
@@ -339,7 +332,6 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'icone_doc_rubrique' => 'Za&#322;&#261;czniki',
 'icone_ecrire_article' => 'Napisz nowy artyku&#322;',
 'icone_edition_site' => 'Edycja',
-'icone_evolution_visites_2' => '',
 'icone_forum_administrateur' => 'Forum administrator&oacute;w',
 'icone_forum_suivi' => 'Kontynuacja forum',
 'icone_gestion_langues' => 'Zarz&#261;dzanie j&#281;zykami',
@@ -544,7 +536,6 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'infos_vos_pense_bete' => 'Twoje notatki',
 'item_breve_proposee' => 'Zaproponowany news',
 
-
 // L
 'lien_afficher_icones_seuls' => 'Pokazuj tylko ikonki',
 'lien_afficher_texte_icones' => 'POkazuj ikonki i tekst',
@@ -596,16 +587,13 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'login_test_navigateur' => 'test przegl&#261;darki/&#322;&#261;cz ponownie',
 'login_verifiez_navigateur' => '(Sprawd&#378; czy Twoja przegl&#261;darka nie zapami&#281;ta&#322;a has&#322;a...)',
 
-
 // M
 'masquer_trad' => 'ukryj tlumaczenia',
 'module_fichiers_langues' => 'Pliki j&#281;zykowe',
 
-
 // N
 'navigateur_pas_redirige' => 'Je&#347;li twoja przegl&#261;darka ci&#281; nie przekierowa&#322;a, kliknij tutaj, &#380;eby kontynuowa&#263;.',
 'numero' => 'Numer',
-
 
 // O
 'occurence' => 'Wyst&#261;pienie',
@@ -627,7 +615,6 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'onglet_save_restaur_base' => 'Backup/zapisywanie bazy danych',
 'onglet_vider_cache' => 'Opr&oacute;&#380;nij cache',
 'ortho_trop_de_fautes2' => 'Zacznij od usuni&#281;cia najbardziej oczywistych b&#322;&#281;d&oacute;w i spr&oacute;buj powt&oacute;rnie.',
-
 
 // P
 'pass_choix_pass' => 'Prosz&#281; wybra&#263; swoje nowe has&#322;o:',
@@ -674,10 +661,8 @@ mo&#380;na ponownie po&#322;&#261;czy&#263; si&#281; ze stron&#261;.
 'previsualisation' => 'Podgl&#261;d',
 'previsualiser' => 'W&#322;&#261;cz podgl&#261;d',
 
-
 // R
 'retour' => 'Powr&oacute;t',
-
 
 // S
 'spip_conforme_dtd' => 'SPIP uznaje ten dokument za zgodny z jego DOCTYPE :',
@@ -686,7 +671,6 @@ mo&#380;na ponownie po&#322;&#261;czy&#263; si&#281; ze stron&#261;.
 'squelette_ligne' => 'szkielet, linia',
 'stats_visites_et_popularite' => '@visites@ odwiedzin; popularno&#347;&#263;: @popularite@',
 'suivant' => 'nast&#281;pny',
-
 
 // T
 'taille_ko' => '@taille@&nbsp;kb',
@@ -746,7 +730,6 @@ a nast&#281;pnie sprawd&#378; czy obrazki pojawiaj&#261; si&#281; zawsze w artyk
 'titre_titre_document' => 'Tytu&#322; dokumentu:',
 'trad_reference' => '(artyku&#322; wzorcowy)',
 
-
 // U
 'upload_fichier_zip' => 'Plik ZIP',
 'upload_fichier_zip_texte' => 'Plik, kt&oacute;ry chcesz zainstalowa&#263; jest plikiem ZIP.',
@@ -754,7 +737,6 @@ a nast&#281;pnie sprawd&#378; czy obrazki pojawiaj&#261; si&#281; zawsze w artyk
 'upload_limit' => 'Ten plik jest zbyt du&#380;y dla serwera&nbsp;;maksymalny rozmiar pliku zapisywanego na serwerze to @max@.',
 'upload_zip_decompacter' => 'zdekompresowany i ka&#380;dy jego element zostanie zainstalowany w serwisie. Pliki, kt&oacute;re zostan&#261; zainstalowane w serwisie to:',
 'upload_zip_telquel' => 'zostan&#261; zainstalowane jako archiwum Zip;',
-
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balise B en aval',
@@ -798,8 +780,6 @@ a nast&#281;pnie sprawd&#378; czy obrazki pojawiaj&#261; si&#281; zawsze w artyk
 'zxml_valeur_attribut' => 'warto&#347;&#263; artybutu',
 'zxml_vide_balise' => 'pusty znacznik',
 'zxml_vu' => 'widziany wcze&#347;niej'
-
 );
-
 
 ?>

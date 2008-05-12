@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
 '0_langue' => '&#268;e&#353;tina [cs]',
 '0_liste' => 'spip-cs@rezo.net',
 '0_mainteneur' => 'otto@pacholik.cz',
-
 
 // A
 'access_interface_graphique' => 'Zp&#283;t do kompletn&iacute;ho grafick&eacute;ho rozhran&iacute;',
@@ -23,9 +24,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_rubrique' => 'Zm&#283;nit sekci',
 'admin_recalculer' => 'Obnovit str&aacute;nku',
 'afficher_trad' => 'vyv&#283;sit p&#345;eklady',
-'alerte_maj_impossible' => '<b>Varov&aacute;n&iacute;!</b> Aktualizace datab&aacute;ze MySQL na verzi @version@ se nezda&#345;ilo. Je mo&#382;n&eacute;, &#382;e je to kv&#367;li probl&eacute;m&#367;m s p&#345;&iacute;stupov&yacute;mi pr&aacute;vy k datab&aacute;zi. Kontaktujte sv&eacute;ho poskytovatele p&#345;ipojen&iacute; k internetu (ISP).',
+'alerte_maj_impossible' => '<b>Varov&aacute;n&iacute;!</b> Aktualizace datab&aacute;ze SQL na verzi @version@ se nezda&#345;ilo. Je mo&#382;n&eacute;, &#382;e je to kv&#367;li probl&eacute;m&#367;m s p&#345;&iacute;stupov&yacute;mi pr&aacute;vy k datab&aacute;zi. Kontaktujte sv&eacute;ho poskytovatele p&#345;ipojen&iacute; k internetu (ISP).',
 'analyse_xml' => 'XML parsov&aacute;n&iacute;',
 'antispam_champ_vide' => 'Tuto polo&#382;ku nechte pros&iacute;m pr&aacute;zdnou:',
+'articles_recents' => 'Ned&aacute;vn&eacute; &#269;l&aacute;nky',
 'avis_archive_incorrect' => 'soubor nen&iacute; platn&yacute;m SPIP archivem',
 'avis_archive_invalide' => 'neplatn&yacute; soubor arch&iacute;vu',
 'avis_attention' => 'POZOR!',
@@ -37,15 +39,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_connexion' => 'Chyba p&#345;i spojen&iacute;',
 'avis_erreur_cookie' => 'Probl&eacute;my se su&#353;enkou :-) (cookie)',
 'avis_erreur_fonction_contexte' => 'Program&aacute;torsk&aacute; chyba. Funkce by nem&#283;la b&yacute;t v tomto kontextu vol&aacute;na.',
-'avis_erreur_mysql' => 'Chyba MySQL',
+'avis_erreur_mysql' => 'Chyba SQL',
 'avis_erreur_sauvegarde' => 'Chyba v z&aacute;lohov&aacute;n&iacute; (@type@ @id_objet@)!',
 'avis_erreur_visiteur' => '<NEW>Probl&egrave;me d\'acc&egrave;s &agrave; l\'espace priv&eacute;',
-
 
 // B
 'barre_a_accent_grave' => 'Zadejte velk&eacute; A s obr&aacute;cenou &#269;&aacute;rkou (`)',
 'barre_aide' => 'Vzhled str&aacute;nek (layout) dola&#271;te pomoc&iacute; typografick&yacute;ch zkratek',
-'barre_aide_rac' => 'Nepou&#382;&iacute;v&aacute; se',
 'barre_e_accent_aigu' => 'Zadejte p&iacute;smeno &Eacute;',
 'barre_eo' => 'Zadejte p&iacute;smeno oe',
 'barre_eo_maj' => 'Zadejte p&iacute;smeno EO',
@@ -73,7 +73,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_telecharger' => 'Odeslat',
 'bouton_valider' => 'Odeslat',
 
-
 // C
 'cal_apresmidi' => 'odpoledne',
 'cal_jour_entier' => 'cel&yacute; den',
@@ -85,7 +84,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'choix_interface' => 'volba rozhran&iacute;',
 'confirm_changer_statut' => 'Je nutn&eacute; potvrzen&iacute; akce: Po&#382;&aacute;dali jste o zm&#283;nu stavu &#269;l&aacute;nku. Chcete pokra&#269;ovat?',
 'correcte' => 'spr&aacute;vn&#283;',
-
 
 // D
 'date_aujourdhui' => 'dnes',
@@ -199,13 +197,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   Podrobn&yacute; popis je v n&aacute;vodu k instalaci.</p>
   <p>Pot&eacute; m&#367;&#382;ete ',
 
-
 // E
 'entree_dimensions' => 'Velikost:',
 'entree_titre_document' => 'N&aacute;zev dokumentu:',
 'entree_titre_image' => 'N&aacute;zev obr&aacute;zku:',
 'envoi_via_le_site' => 'Odeslat pomoc&iacute; webu',
-
 
 // F
 'fichier_introuvable' => 'Nalezen nov&yacute; soubor: @fichier@',
@@ -308,7 +304,6 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
   Nejste-li doposud zaregistrov&aacute;ni, mus&iacute;te ',
 'forum_vous_inscrire' => 'tak u&#269;init nyn&iacute;.',
 
-
 // I
 'ical_texte_rss_articles' => 'Adresa souboru na serveru (backend) &#269;l&aacute;nk&#367; na webu je:',
 'ical_texte_rss_articles2' => 'M&#367;&#382;ete z&iacute;skat i serverov&eacute; soubory k &#269;l&aacute;nk&#367;m z jednotliv&yacute;ch sekc&iacute; webu:',
@@ -321,10 +316,8 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'icone_auteurs' => 'Auto&#345;i',
 'icone_breves' => 'Novinky',
 'icone_brouteur' => 'Rychl&eacute; proch&aacute;zen&iacute;',
-'icone_calendrier_messagerie' => 'Nepou&#382;&iacute;v&aacute; se',
 'icone_configuration_site' => 'Nastaven&iacute;',
 'icone_configurer_site' => 'Nastavte sv&#367;j web',
-'icone_creer_mot_cle' => 'Zadejte nov&eacute; kl&iacute;&#269;ov&eacute; slovo a spojte jej s t&iacute;mto &#269;l&aacute;nkem',
 'icone_creer_nouvel_auteur' => 'Vytvo&#345;it nov&eacute;ho autora',
 'icone_creer_rubrique' => 'Vytvo&#345;it sekci',
 'icone_creer_sous_rubrique' => 'Vytvo&#345;it podsekci',
@@ -333,19 +326,14 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'icone_doc_rubrique' => 'Dokumenty v p&#345;&iacute;loze',
 'icone_ecrire_article' => 'Napsat nov&yacute; &#269;l&aacute;nek',
 'icone_edition_site' => 'Editovat web',
-'icone_etat_traductions' => 'Nepou&#382;&iacute;v&aacute; se',
-'icone_evolution_visites_2' => 'Nepou&#382;&iacute;v&aacute; se',
 'icone_forum_administrateur' => 'Diskusn&iacute; skupina spr&aacute;vc&#367;',
-'icone_forum_interne' => 'Nepou&#382;&iacute;v&aacute; se',
 'icone_forum_suivi' => 'Navazuj&iacute;c&iacute; zpr&aacute;vy diskusn&iacute; skupiny',
-'icone_forums_petitions' => 'Nepou&#382;&iacute;v&aacute; se',
 'icone_gestion_langues' => 'Spr&aacute;va jazyk&#367;',
 'icone_informations_personnelles' => 'Osobn&iacute; &uacute;daje',
 'icone_interface_complet' => '&Uacute;pln&eacute; rozhran&iacute;',
 'icone_interface_simple' => 'Jednoduch&eacute; rozhran&iacute;',
 'icone_maintenance_site' => '&Uacute;dr&#382;ba webu',
 'icone_messagerie_personnelle' => 'Osobn&iacute; zpr&aacute;vy',
-'icone_modifier_informations_personnelles' => 'Nepou&#382;&iacute;v&aacute; se',
 'icone_mots_cles' => 'Kl&iacute;&#269;ov&aacute; slova',
 'icone_nouvelle_breve' => 'Napsat novinku',
 'icone_repartition_actuelle' => 'Zobrazit aktu&aacute;ln&iacute; rozd&#283;len&iacute;',
@@ -411,7 +399,6 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'info_creer_repertoire' => 'Vytvo&#345;te soubor nebo adres&aacute;&#345; s n&aacute;zvem:',
 'info_creer_repertoire_2' => 'v podadres&aacute;&#345;i <b>@repertoire@</b>. Potom',
 'info_creer_vignette' => 'automatick&eacute; vytvo&#345;en&iacute; n&aacute;hledu',
-'info_dans_espace_prive' => 'Nepou&#382;&iacute;v&aacute; se',
 'info_deplier' => 'Rozbalit',
 'info_descriptif_nombre' => 'Popis:',
 'info_description' => 'Popis:',
@@ -426,8 +413,6 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'info_email_invalide' => 'Neplatn&yacute; e-mail.',
 'info_en_cours_validation' => 'Va&#353;e rozpracovan&eacute; &#269;l&aacute;nky',
 'info_en_ligne' => 'Nyn&iacute; online:',
-'info_en_test_1' => 'Nepou&#382;&iacute;v&aacute; se',
-'info_en_test_2' => 'Nepou&#382;&iacute;v&aacute; se',
 'info_envoyer_message_prive' => 'Odeslat soukromou zpr&aacute;vu tomuto autorovi',
 'info_erreur_requete' => 'Chyba p&#345;i datab&aacute;zov&eacute;m dotazu:',
 'info_erreur_squelette2' => 'Neexistuj&iacute;c&iacute; &#353;ablona <b>@fichier@</b>...',
@@ -458,14 +443,9 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'info_l_article' => '&#269;l&aacute;nek',
 'info_la_breve' => 'novinka',
 'info_la_rubrique' => 'sekce',
-'info_langue_defaut' => 'Nepou&#382;&iacute;v&aacute; se',
-'info_langue_interface' => 'Nepou&#382;&iacute;v&aacute; se',
 'info_langue_principale' => 'Hlavn&iacute; jazyk str&aacute;nek',
-'info_langues_proposees' => 'Nepou&#382;&iacute;v&aacute; se',
 'info_largeur_vignette' => '@largeur_vignette@ &times; @hauteur_vignette@ pixel&#367;',
 'info_les_auteurs_1' => 'od @les_auteurs@',
-'info_lettre_heures' => 'Nepou&#382;&iacute;v&aacute; se',
-'info_lien' => 'Nepou&#382;&iacute;v&aacute; se',
 'info_logo_format_interdit' => 'Loga jsou povolena pouze ve form&aacute;tu @formats@.',
 'info_logo_max_poids' => 'Log nesm&iacute; b&yacute;t v&#283;t&#353;&iacute; ne&#382; @maxi@ (tento soubor m&aacute; velikost @actuel@).',
 'info_logo_max_taille' => 'Logo nesm&iacute; b&yacute;t v&#283;t&#353;&iacute; ne&#382; @maxi@ (tento soubor m&aacute; velikost @actuel@).',
@@ -484,7 +464,6 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'info_nombre_en_ligne' => 'Aktu&aacute;ln&#283; online:',
 'info_non_resultat' => '&#377;&aacute;dn&eacute; v&yacute;sledky pro "@cherche_mot@"',
 'info_non_utilisation_messagerie' => 'Nepou&#382;&iacute;v&aacute;te syst&eacute;m pro intern&iacute; zas&iacute;l&aacute;n&iacute; zpr&aacute;v v r&aacute;mci t&#283;chto str&aacute;nek.',
-'info_nouveau' => 'Nepou&#382;&iacute;v&aacute; se',
 'info_nouveau_message' => 'M&Aacute;TE NOVOU ZPR&Aacute;VU',
 'info_nouveaux_messages' => 'M&Aacute;TE CELKEM @total_messages@ NOV&Yacute;CH ZPR&Aacute;V',
 'info_numero_abbreviation' => '&#269;.',
@@ -509,11 +488,9 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'info_publie_1' => '[@nom_site_spip@] ZVE&#344;EJN&#282;NO: @titre@',
 'info_publie_2' => 'Zve&#345;ejn&#283;n&yacute; &#269;l&aacute;nek
 -----------------',
-'info_question_referers' => 'Nepou&#382;&iacute;v&aacute; se',
 'info_rechercher' => 'Naj&iacute;t',
 'info_rechercher_02' => 'Naj&iacute;t:',
 'info_remplacer_vignette' => 'Nahradit standardn&iacute; n&aacute;hled vlastn&iacute;m logem:',
-'info_remplacer_vignette_defaut' => 'Nepou&#382;&iacute;v&aacute; se',
 'info_retablir_lien' => 'obnovit tento odkaz',
 'info_retirer_mot' => 'Odstranit toto kl&iacute;&#269;ov&eacute; slovo',
 'info_retirer_mots' => 'Odstranit v&#353;echna kl&iacute;&#269;ov&aacute; slova',
@@ -525,7 +502,6 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'info_site_refuse' => 'Web byl odm&iacute;tnut',
 'info_sites_referencer' => 'Zadat odkaz na web',
 'info_supprimer_vignette' => 'odstranit n&aacute;hled',
-'info_sur_site_public' => 'Nepou&#382;&iacute;v&aacute; se',
 'info_symbole_bleu' => '<MODIF><b>Modr&yacute;m</b> symbolem je ozna&#269;ena <b>intern&iacute; pozn&aacute;mka</b>, tj. zpr&aacute;va ur&#269;en&aacute; pro osobn&iacute; pot&#345;ebu.',
 'info_symbole_jaune' => '<MODIF><b>&#381;lut&yacute;m</b> symbolem je ozna&#269;ena <b>zpr&aacute;va pro v&#353;echny redaktory</b>: m&#367;&#382;e ji upravovat kter&yacute;koli ze spr&aacute;vc&#367; a zobrazuje se v&#353;em redaktor&#367;m.',
 'info_symbole_vert' => '<MODIF><b>Zelen&yacute;m</b> symbolem jsou ozna&#269;eny <b>zpr&aacute;vy vym&#283;&#328;ovan&eacute; s ostatn&iacute;mi u&#382;ivateli</b> webu.',
@@ -534,10 +510,8 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'info_telecharger' => 'Odeslat z po&#269;&iacute;ta&#269;e:',
 'info_telecharger_nouveau_logo' => 'Odeslat nov&eacute; logo:',
 'info_telecharger_ordinateur' => 'Odeslat z po&#269;&iacute;ta&#269;e:',
-'info_tous_redacteur' => 'Nepou&#382;&iacute;v&aacute; se',
 'info_tous_resultats_enregistres' => '[v&#353;echny v&yacute;sledky jsou zaps&aacute;ny]',
 'info_tout_afficher' => 'Zobrazit v&#353;e',
-'info_tout_site1' => 'Nepou&#382;&iacute;v&aacute; se',
 'info_travaux_texte' => 'Tyto str&aacute;nky nejsou je&#353;t&#283; nastaveny. Nav&#353;tivte je, pros&iacute;m, pozd&#283;ji...',
 'info_travaux_titre' => 'Na webu se pracuje',
 'info_trop_resultat' => 'Pro: "@cherche_mot@" bylo zobrazeno p&#345;&iacute;li&#353; mnoho v&yacute;sledk&#367;. Zadejte podrobn&#283;j&#353;&iacute; krit&eacute;ria pro vyhled&aacute;v&aacute;n&iacute;.',
@@ -551,16 +525,7 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'info_vos_rendez_vous' => 'Va&#353;e budouc&iacute; sch&#367;zky',
 'info_zoom' => 'zv&#283;t&#353;it/zmen&#353;it',
 'infos_vos_pense_bete' => 'Va&#353;e pozn&aacute;mky',
-'item_administrateur' => 'Nepou&#382;&iacute;v&aacute; se',
 'item_breve_proposee' => 'P&#345;edlo&#382;en&eacute; novinky',
-'item_efface' => 'Nepou&#382;&iacute;v&aacute; se',
-'item_gerer_referers' => 'Nepou&#382;&iacute;v&aacute; se',
-'item_non_gerer_referers' => 'Nepou&#382;&iacute;v&aacute; se',
-'item_non_utiliser_moteur_recherche_forum' => 'Nepou&#382;&iacute;v&aacute; se',
-'item_premier' => 'Nepou&#382;&iacute;v&aacute; se',
-'item_redacteur' => 'Nepou&#382;&iacute;v&aacute; se',
-'item_utiliser_moteur_recherche_forum' => 'Nepou&#382;&iacute;v&aacute; se',
-
 
 // L
 'lien_afficher_icones_seuls' => 'Zobrazit pouze ikony',
@@ -569,7 +534,6 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'lien_icones_interface' => 'Ikony rozhran&iacute; jsou od <a href=\'http://jimmac.musichall.cz/\'>Jakuba \'Jimmac\' Steinera</a>.',
 'lien_liberer' => 'verze',
 'lien_liberer_tous' => 'uvolnit tyto &#269;l&aacute;nky',
-'lien_modifer_date' => 'Nepou&#382;&iacute;v&aacute; se',
 'lien_nouvea_pense_bete' => 'NOV&Aacute; POZN&Aacute;MKA',
 'lien_nouveau_message' => 'NOV&Aacute; ZPR&Aacute;VA',
 'lien_nouvelle_annonce' => 'NOV&Eacute; OZN&Aacute;MEN&Iacute;',
@@ -577,26 +541,20 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'lien_popularite' => 'obl&iacute;benost: @popularite@%',
 'lien_racine_site' => 'KO&#344;ENOV&Yacute; ADRES&Aacute;&#344; STR&Aacute;NEK',
 'lien_reessayer' => 'zkusit znovu',
-'lien_rendez_vous' => 'Nepou&#382;&iacute;v&aacute; se',
-'lien_rendez_vous_02' => 'Nepou&#382;&iacute;v&aacute; se',
 'lien_repondre_message' => 'Odpov&#283;d&#283;t na zpr&aacute;vu',
 'lien_supprimer' => 'odstranit',
-'lien_test_format_image' => 'Nepou&#382;&iacute;v&aacute; se',
 'lien_tout_afficher' => 'Zobrazit v&#353;e',
 'lien_visite_site' => 'nav&#353;t&iacute;vit tyto str&aacute;nky',
 'lien_visites' => '@visites@ n&aacute;v&#353;t&#283;v',
 'lien_voir_auteur' => 'Zobrazit autora',
-'lnfo_liens' => 'Nepou&#382;&iacute;v&aacute; se',
 'login_acces_prive' => 'p&#345;&iacute;stup do neve&#345;ejn&eacute; oblasti',
 'login_autre_identifiant' => 'pou&#382;&iacute;t jin&eacute; ID',
-'login_connexion_refusee' => 'Spojen&iacute; odm&iacute;tnuto.',
 'login_cookie_accepte' => 'Nastavte prohl&iacute;&#382;e&#269; tak, aby je p&#345;ij&iacute;mal (alespo&#328; pro tento web).',
 'login_cookie_oblige' => 'Pro bezpe&#269;nou identifikaci mus&iacute; b&yacute;t povoleny soubory cookies.',
 'login_deconnexion_ok' => 'Byli jste odhl&aacute;&#353;eni.',
 'login_erreur_pass' => 'Nespr&aacute;vn&eacute; heslo.',
 'login_espace_prive' => 'neve&#345;ejn&aacute; oblast',
 'login_identifiant_inconnu' => 'Identifikace "@login@" je nezn&aacute;m&aacute;.',
-'login_identification' => 'Nepou&#382;&iacute;v&aacute; se',
 'login_login' => 'P&#345;ihl&aacute;&#353;en&iacute;:',
 'login_login2' => 'P&#345;ihla&#353;ovac&iacute; &uacute;daje (identifikace pro p&#345;ipojen&iacute; k t&#283;mto str&aacute;nk&aacute;m):',
 'login_login_pass_incorrect' => '(Nespr&aacute;vn&eacute; u&#382;ivatelsk&eacute; jm&eacute;no nebo heslo).',
@@ -619,31 +577,22 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'login_test_navigateur' => 'test prohl&iacute;&#382;e&#269;e/opakovan&eacute; p&#345;ipojen&iacute;',
 'login_verifiez_navigateur' => '(P&#345;esv&#283;d&#269;te se v&#353;ak, zda si prohl&iacute;&#382;e&#269; nezapamatoval va&#353;e heslo...)',
 
-
 // M
 'masquer_trad' => 'skr&yacute;t p&#345;eklady',
 'module_fichiers_langues' => 'Jazykov&eacute; soubory',
 
-
 // N
 'navigateur_pas_redirige' => 'Nedojde-li k p&#345;esm&#283;rov&aacute;n&iacute; prohl&iacute;&#382;e&#269;e, klepn&#283;te sem.',
 
-
 // O
 'onglet_affacer_base' => 'Odstranit datab&aacute;zi',
-'onglet_agenda' => 'Nepou&#382;&iacute;v&aacute; se',
 'onglet_auteur' => 'Autor',
-'onglet_bilan_traductions' => 'Nepou&#382;&iacute;v&aacute; se',
-'onglet_calendrier' => 'Nepou&#382;&iacute;v&aacute; se',
 'onglet_contenu_site' => 'Obsah webu',
-'onglet_detail_traductions' => 'Nepou&#382;&iacute;v&aacute; se',
 'onglet_evolution_visite_mod' => '&Uacute;rove&#328; n&aacute;v&#353;t&#283;v',
 'onglet_fonctions_avances' => 'Roz&#353;&iacute;&#345;en&eacute; funkce',
 'onglet_informations_personnelles' => 'Osobn&iacute; &uacute;daje',
 'onglet_interactivite' => 'Interaktivita',
-'onglet_langues' => 'Nepou&#382;&iacute;v&aacute; se',
 'onglet_messagerie' => 'Syst&eacute;m zpr&aacute;v',
-'onglet_messagerie_personnelle' => 'Nepou&#382;&iacute;v&aacute; se',
 'onglet_messages_internes' => 'Intern&iacute; zpr&aacute;vy',
 'onglet_messages_publics' => 'Ve&#345;ejn&eacute; zpr&aacute;vy',
 'onglet_messages_vide' => 'Zpr&aacute;vy bez textu',
@@ -654,7 +603,6 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'onglet_save_restaur_base' => 'Z&aacute;loha/obnova datab&aacute;ze',
 'onglet_vider_cache' => 'Vymazat mezipam&#283;t (cache)',
 'ortho_trop_de_fautes2' => 'Odstra&#328;te chyby patrn&eacute; na prvn&iacute; pohled a zkuste to znovu.',
-
 
 // P
 'pass_choix_pass' => 'Zadejte nov&eacute; heslo:',
@@ -701,14 +649,12 @@ a znovu se ke str&aacute;nk&aacute;m p&#345;ipoj&iacute;te.
 'previsualisation' => 'N&aacute;hled',
 'previsualiser' => 'N&aacute;hled',
 
-
 // S
 'squelette' => '&#353;ablona',
 'squelette_inclus_ligne' => 'vlo&#382;en&aacute; &#353;ablona, &#345;&aacute;dek',
 'squelette_ligne' => '&#353;ablona, &#345;&aacute;dek',
 'stats_visites_et_popularite' => 'po&#269;et n&aacute;v&#353;t&#283;v: @visites@; obl&iacute;benost: @popularite@',
 'suivant' => 'dal&#353;&iacute;',
-
 
 // T
 'taille_ko' => '@taille@&nbsp;kb',
@@ -717,8 +663,6 @@ a znovu se ke str&aacute;nk&aacute;m p&#345;ipoj&iacute;te.
 'texte_actualite_site_1' => 'A&#382; se s rozhran&iacute;m obezn&aacute;m&iacute;te, klepn&#283;te na "',
 'texte_actualite_site_2' => '&uacute;pln&eacute; rozhran&iacute;',
 'texte_actualite_site_3' => '&raquo; ke zp&#345;&iacute;stupn&#283;n&iacute; v&iacute;ce funkc&iacute;.',
-'texte_bilan_traductions' => 'Nepou&#382;&iacute;v&aacute; se',
-'texte_choix_langue_defaut' => 'Nepou&#382;&iacute;v&aacute; se',
 'texte_creation_automatique_vignette' => 'Na t&#283;chto str&aacute;nk&aacute;ch je zapnuta automatick&aacute; tvorba n&aacute;hled&#367; a jejich p&#345;edb&#283;&#382;n&eacute; zobrazen&iacute;. Pokud pomoc&iacute; tohoto formul&aacute;&#345;e nainstalujete obr&aacute;zky ve form&aacute;tu @gd_formats@, budou spojeny s n&aacute;hledem, kter&yacute; m&aacute; maxim&aacute;ln&iacute; velikost @taille_preview@ pixel&#367;.',
 'texte_documents_associes' => 'S &#269;l&aacute;nkem jsou spojeny n&aacute;sleduj&iacute;c&iacute; dokumenty,
     je&#382; v&#353;ak do n&#283;j nejsou p&#345;&iacute;mo
@@ -743,18 +687,12 @@ a znovu se ke str&aacute;nk&aacute;m p&#345;ipoj&iacute;te.
 'texte_inc_meta_1' => 'P&#345;i pokusu o z&aacute;pis do souboru  <code>@fichier@</code> do&#353;lo k syst&eacute;mov&eacute; chyb&#283;. Jako&#382;to spr&aacute;vce webu',
 'texte_inc_meta_2' => 'zkontrolujte opr&aacute;vn&#283;n&iacute; k z&aacute;pisu ',
 'texte_inc_meta_3' => 'do adres&aacute;&#345;e <code>@repertoire@</code>.',
-'texte_plan_trad' => 'Nepou&#382;&iacute;v&aacute; se',
-'texte_plan_trad_en_cours' => 'Nepou&#382;&iacute;v&aacute; se',
-'texte_plan_trad_modif' => 'Nepou&#382;&iacute;v&aacute; se',
-'texte_plan_trad_note' => 'Nepou&#382;&iacute;v&aacute; se',
 'texte_statut_en_cours_redaction' => 'rozpracovan&eacute; &uacute;pravy',
 'texte_statut_poubelle' => 'v ko&#353;i',
 'texte_statut_propose_evaluation' => 'p&#345;edlo&#382;eno ke schv&aacute;len&iacute;',
 'texte_statut_publie' => 'zve&#345;ejn&#283;no online',
 'texte_statut_refuse' => 'odm&iacute;tnuto',
 'titre_ajouter_mot_cle' => 'P&#344;IDAT KL&Iacute;&#268;OV&Eacute; SLOVO:',
-'titre_articles_populaires' => 'Nepou&#382;&iacute;v&aacute; se',
-'titre_articles_visites' => 'Nepou&#382;&iacute;v&aacute; se',
 'titre_breve_proposee' => 'P&#345;edlo&#382;en&aacute; novinka',
 'titre_breve_publiee' => 'Novinka zve&#345;ejn&#283;na',
 'titre_breve_refusee' => 'Novinka zam&iacute;tnuta',
@@ -771,13 +709,11 @@ a znovu se ke str&aacute;nk&aacute;m p&#345;ipoj&iacute;te.
 'titre_joindre_document' => 'P&#344;IPOJIT DOKUMENT',
 'titre_liens_entrants' => 'P&#345;&iacute;choz&iacute; odkazy',
 'titre_mots_cles' => 'KL&Iacute;&#268;OV&Aacute; SLOVA',
-'titre_page_admin_vider' => 'Nepou&#382;&iacute;v&aacute; se',
-'titre_probleme_technique' => 'Varov&aacute;n&iacute;: Z technick&yacute;ch d&#367;vod&#367; (server MySQL) je tato &#269;&aacute;st webu nep&#345;&iacute;stupn&aacute;.<p>D&#283;kujeme v&aacute;m za pochopen&iacute;.',
+'titre_probleme_technique' => 'Varov&aacute;n&iacute;: Z technick&yacute;ch d&#367;vod&#367; (server SQL) je tato &#269;&aacute;st webu nep&#345;&iacute;stupn&aacute;.<p>D&#283;kujeme v&aacute;m za pochopen&iacute;.',
 'titre_publier_document' => 'ZVE&#344;EJNIT DOKUMENT V T&Eacute;TO &#268;&Aacute;STI',
 'titre_statistiques' => 'Statistiky str&aacute;nek',
 'titre_titre_document' => 'N&aacute;zev dokumentu:',
 'trad_reference' => '(referen&#269;n&iacute; &#269;l&aacute;nek)',
-
 
 // U
 'upload_fichier_zip' => 'Komprimovan&yacute; soubor ZIP',
@@ -786,7 +722,6 @@ a znovu se ke str&aacute;nk&aacute;m p&#345;ipoj&iacute;te.
 'upload_limit' => 'Soubor je pro server p&#345;&iacute;li&#353; velk&yacute;. Maxim&aacute;ln&iacute; povolen&aacute; velikost pro <i>odesl&aacute;n&iacute;</i> je @max@.',
 'upload_zip_decompacter' => 'rozbalen&yacute; a ka&#382;d&yacute; ze soubor&#367; v n&#283;m obsa&#382;en&yacute; bude na web nainstalov&aacute;n. Budou nainstalov&aacute;ny tyto soubory:',
 'upload_zip_telquel' => 'nainstalovat tak, jak je, tedy ve form&aacute;tu ZIP;',
-
 
 // Z
 'zbug_balise_b_aval' => ': tag B je p&#345;&iacute;li&#353; pozd&#283; ve smy&#269;ce',
@@ -810,8 +745,6 @@ a znovu se ke str&aacute;nk&aacute;m p&#345;ipoj&iacute;te.
 'zbug_resultat' => 'v&yacute;sledky',
 'zbug_serveur_indefini' => 'Nedefinovan&yacute; server SQL',
 'zbug_table_inconnue' => 'Nezn&aacute;m&aacute; tabulka SQL "@table@"'
-
 );
-
 
 ?>

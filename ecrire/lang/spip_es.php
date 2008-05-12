@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-es',
 '0_langue' => 'espa&ntilde;ol [es]',
 '0_liste' => 'spip-es@rezo.net',
 '0_mainteneur' => 'spip-dev@rezo.net',
-
 
 // A
 'access_interface_graphique' => 'Volver a la interfaz gr&aacute;fica completa',
@@ -27,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'analyse_xml' => 'An&aacute;lisis XML',
 'annuler' => 'Anular',
 'antispam_champ_vide' => 'Por favor, deje este campo vac&iacute;o&nbsp;:',
+'articles_recents' => 'Los art&iacute;culos m&aacute;s recientes',
 'avis_archive_incorrect' => 'El archivo de respaldo no es un archivo SPIP.',
 'avis_archive_invalide' => 'el archivo de respaldo no es v&aacute;lido',
 'avis_attention' => '&iexcl;ATENCI&Oacute;N!',
@@ -41,7 +43,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_mysql' => 'Error SQL',
 'avis_erreur_sauvegarde' => 'Error al hacer la copia de respaldo (@type@ @id_objet@)!',
 'avis_erreur_visiteur' => 'Probleme de acceso al espacio privado',
-
 
 // B
 'barre_a_accent_grave' => 'Insertar una A may&uacute;scula con acento grave',
@@ -73,7 +74,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_telecharger' => 'Subir',
 'bouton_valider' => 'Validar',
 
-
 // C
 'cal_apresmidi' => 'tarde',
 'cal_jour_entier' => 'd&iacute;a entero',
@@ -86,7 +86,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'colonne' => 'Columna',
 'confirm_changer_statut' => 'Cuidado, has pedido cambiar el estado de este elemento. &iquest;Deseas continuar?',
 'correcte' => 'correcta',
-
 
 // D
 'date_aujourdhui' => 'hoy',
@@ -199,7 +198,6 @@ de las carpetas mencionadas. El procedimiento se explica detalladamente en la gu
 <p>Una vez terminado este proceso, podr&aacute;s ',
 'double_occurrence' => 'Doble ocurrencia',
 
-
 // E
 'entree_dimensions' => 'Dimensiones',
 'entree_titre_document' => 'T&iacute;tulo del documento',
@@ -208,7 +206,6 @@ de las carpetas mencionadas. El procedimiento se explica detalladamente en la gu
 'erreur' => 'Error',
 'erreur_balise_non_fermee' => '&uacute;ltima baliza no cerrada:',
 'erreur_texte' => 'error(es)',
-
 
 // F
 'fichier_introuvable' => 'No se encuentra el archivo @fichier@',
@@ -312,7 +309,6 @@ Gracias por tu participaci&oacute;n
 Gracias por indicar a continuaci&oacute;n el identificador personal que se te ha
 suministrado. Si no est&aacute;s inscrito/a, debes',
 'forum_vous_inscrire' => 'inscribirte.',
-
 
 // I
 'ical_texte_rss_articles' => 'El archivo &laquo;backend&raquo; de art&iacute;culos de este sitio se encuentra en la direcci&oacute;n:',
@@ -540,7 +536,6 @@ se puede activar o desactivar .',
 'infos_vos_pense_bete' => 'Tus  recordatorios',
 'item_breve_proposee' => 'Breve propuesta',
 
-
 // L
 'lien_afficher_icones_seuls' => 'Mostrar s&oacute;lo los iconos',
 'lien_afficher_texte_icones' => 'Mostrar iconos y texto',
@@ -590,16 +585,13 @@ se puede activar o desactivar .',
 'login_test_navigateur' => 'prueba de navegador/reconexi&oacute;n',
 'login_verifiez_navigateur' => '(No obstante, comprueba que tu navegador no memoriz&oacute; tu contrase&ntilde;a...)',
 
-
 // M
 'masquer_trad' => 'Ocultar las traducciones',
 'module_fichiers_langues' => 'Archivos de idioma',
 
-
 // N
 'navigateur_pas_redirige' => 'Si tu navegador no te redirige automaticamente, pincha aqu&iacute; para continuar.',
 'numero' => 'N&uacute;mero',
-
 
 // O
 'occurence' => 'Ocurrencia',
@@ -621,7 +613,6 @@ se puede activar o desactivar .',
 'onglet_save_restaur_base' => 'Copia de respaldo y restauraci&oacute;n de la base',
 'onglet_vider_cache' => 'Vaciar la cach&eacute;',
 'ortho_trop_de_fautes2' => 'Comienza por corregir las faltas m&aacute;s evidentes y vuelve a intentarlo.',
-
 
 // P
 'pass_choix_pass' => 'Elije tu nueva contrase&ntilde;a:',
@@ -662,10 +653,8 @@ volver a conectarte al sitio.
 'previsualisation' => 'Previsualizaci&oacute;n',
 'previsualiser' => 'Previsualizar',
 
-
 // R
 'retour' => 'Retorno',
-
 
 // S
 'spip_conforme_dtd' => 'SPIP considera este documento como conforme a su DOCTYPE:',
@@ -674,7 +663,6 @@ volver a conectarte al sitio.
 'squelette_ligne' => 'esqueleto, l&iacute;nea',
 'stats_visites_et_popularite' => '@visites@ visitas; popularidad: @popularite@',
 'suivant' => 'siguiente',
-
 
 // T
 'taille_ko' => '@taille@&nbsp;KB',
@@ -725,7 +713,6 @@ Intenta',
 'titre_titre_document' => 'T&iacute;tulo del documento',
 'trad_reference' => '(art&iacute;culo de referencia)',
 
-
 // U
 'upload_fichier_zip' => 'Archivo ZIP',
 'upload_fichier_zip_texte' => 'El archivo que te propones instalar es un archivo Zip.',
@@ -733,7 +720,6 @@ Intenta',
 'upload_limit' => 'Este archivo es demasiado grande para el servidor; el tama&ntilde;o m&aacute;ximo autorizado en <i>upload</i> es de @max@.',
 'upload_zip_decompacter' => 'descomprimido y cada elemento que contiene instalado en el sitio. Los archivos que se van a instalar en el sitio son:',
 'upload_zip_telquel' => 'instalado tal cual, como archivo Zip comprimido;',
-
 
 // Z
 'zbug_balise_b_aval' => ': balize de bucle B m&aacute;s adelante',
@@ -777,8 +763,6 @@ Intenta',
 'zxml_valeur_attribut' => 'valor del atributo',
 'zxml_vide_balise' => 'baliza vac&iacute;a',
 'zxml_vu' => 'visto antes'
-
 );
-
 
 ?>

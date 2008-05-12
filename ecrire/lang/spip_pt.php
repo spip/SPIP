@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
 '0_langue' => 'portugu&ecirc;s [pt]',
 '0_liste' => 'spip-dev@rezo.net',
 '0_mainteneur' => 'spip-dev@rezo.net',
-
 
 // A
 'access_interface_graphique' => 'Voltar &agrave; interface gr&aacute;fica completa',
@@ -23,10 +24,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_rubrique' => 'Modificar esta rubrica',
 'admin_recalculer' => 'Recompor esta p&aacute;gina',
 'afficher_trad' => '<NEW>afficher les traductions',
-'alerte_maj_impossible' => '<b>Alerta&nbsp;!</b> A actualiza&ccedil;&atilde;o da base MySQL para a vers&atilde;o @version@ &eacute;  imposs&iacute;vel, talvez por causa de um problema de direito de modifica&ccedil;&atilde;o na base de dados. Contactar com o seu servi&ccedil;o de hospedagem.',
+'alerte_maj_impossible' => '<MODIF><b>Alerta&nbsp;!</b> A actualiza&ccedil;&atilde;o da base SQL para a vers&atilde;o @version@ &eacute;  imposs&iacute;vel, talvez por causa de um problema de direito de modifica&ccedil;&atilde;o na base de dados. Contactar com o seu servi&ccedil;o de hospedagem.',
 'analyse_xml' => 'An&aacute;lise XML',
 'annuler' => 'Cancelar',
 'antispam_champ_vide' => '<NEW>Veuillez laisser ce champ vide&nbsp;:',
+'articles_recents' => 'Artigos mais recentes',
 'avis_archive_incorrect' => 'o ficheiro arquivo n&atilde;o &eacute; um ficheiro SPIP',
 'avis_archive_invalide' => 'o ficheiro arquivo n&atilde;o &eacute; v&aacute;lido ',
 'avis_attention' => ' ATEN&Ccedil;&Acirc;O!',
@@ -38,10 +40,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_connexion' => 'Erro de liga&ccedil;&atilde;o ',
 'avis_erreur_cookie' => 'problema de cookie',
 'avis_erreur_fonction_contexte' => 'Erro de programa&ccedil;&atilde;o. N&atilde;o se deve chamar esta fun&ccedil;&atilde;o neste contexto.',
-'avis_erreur_mysql' => 'Erro MySQL',
+'avis_erreur_mysql' => '<MODIF>Erro SQL',
 'avis_erreur_sauvegarde' => 'Erro na salvaguarda  (@type@ @id_objet@) !',
 'avis_erreur_visiteur' => '<NEW>Probl&egrave;me d\'acc&egrave;s &agrave; l\'espace priv&eacute;',
-
 
 // B
 'barre_a_accent_grave' => 'Inserir um A mai&uacute;sculo com acento grave',
@@ -73,7 +74,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_telecharger' => 'Telecarregar',
 'bouton_valider' => 'Validar',
 
-
 // C
 'cal_apresmidi' => 'tarde',
 'cal_jour_entier' => 'dia todo',
@@ -86,7 +86,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'colonne' => '<NEW>Colonne',
 'confirm_changer_statut' => 'Aten&ccedil;&atilde;o, solicitou a altera&ccedil;&atilde;o do estatuto deste elemento. Deseja continuar?',
 'correcte' => '<NEW>correcte',
-
 
 // D
 'date_aujourdhui' => 'hoje',
@@ -200,7 +199,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>Uma vez efectuada esta altera&ccedil;&atilde;o, poder&aacute;',
 'double_occurrence' => '<NEW>Double occurrence',
 
-
 // E
 'entree_dimensions' => 'Dimens&otilde;es&nbsp;:',
 'entree_titre_document' => 'T&iacute;tulo do documento&nbsp;:',
@@ -209,7 +207,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => '<NEW>Erreur',
 'erreur_balise_non_fermee' => '<NEW>derni&egrave;re balise non referm&eacute;e :',
 'erreur_texte' => '<NEW>erreur(s)',
-
 
 // F
 'fichier_introuvable' => 'Ficheiro @fichier@ n&atilde;o localizado',
@@ -311,7 +308,6 @@ Obrigado pela sua participa&ccedil;&atilde;o
   indicar a seguir o identificador pessoal que lhe foi
  fornecido. Se n&atilde;o est&aacute; registado, deve  ',
 'forum_vous_inscrire' => 'inscrever-se.',
-
 
 // I
 'ical_texte_rss_articles' => 'O ficheiro &laquo;backend&raquo; dos artigos deste s&iacute;tio encontra-se neste endere&ccedil;o:',
@@ -467,7 +463,7 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_mois_courant' => 'Durante o m&ecirc;s :',
 'info_mot_cle_ajoute' => 'A seguinte palavra-chave foi acrescentada a',
 'info_multi_herit' => 'L&iacute;ngua por defeito',
-'info_multi_langues_soulignees' => 'As <u>l&iacute;nguas sublinhadas</u> beneficiam de uma tradu&ccedil;&atilde;o de todos os textos da interface. Se seleccionar essas l&iacute;nguas, muitos elementos do s&iacute;tio p&uacute;blico (datas, formul&aacute;rios) ser&atilde;o automaticamente traduzidos. Para as l&iacute;nguas n&atilde;o sublinhadas, esses elementos aparecer&atilde;o na l&iacute;ngua principal do s&iacute;tio.',
+'info_multi_langues_soulignees' => '<MODIF>As <u>l&iacute;nguas sublinhadas</u> beneficiam de uma tradu&ccedil;&atilde;o de todos os textos da interface. Se seleccionar essas l&iacute;nguas, muitos elementos do s&iacute;tio p&uacute;blico (datas, formul&aacute;rios) ser&atilde;o automaticamente traduzidos. Para as l&iacute;nguas n&atilde;o sublinhadas, esses elementos aparecer&atilde;o na l&iacute;ngua principal do s&iacute;tio.',
 'info_multilinguisme' => 'Multilinguismo',
 'info_nom_non_utilisateurs_connectes' => 'O seu nome n&atilde;o aparece na lista dos utilizadores ligados.',
 'info_nom_utilisateurs_connectes' => 'O seu nome aparece na lista dos utilizadores ligados.',
@@ -539,7 +535,6 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'infos_vos_pense_bete' => 'Os seus memorandos',
 'item_breve_proposee' => 'Not&iacute;cia proposta',
 
-
 // L
 'lien_afficher_icones_seuls' => 'Exibir apenas os &iacute;cones',
 'lien_afficher_texte_icones' => 'Exibir &iacute;cones e o texto',
@@ -561,9 +556,9 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'lien_visites' => '@visites@&nbsp;visitas',
 'lien_voir_auteur' => 'Ver este autor',
 'ligne' => '<NEW>Ligne',
+'login' => '<NEW>Connexion',
 'login_acces_prive' => 'acesso ao espa&ccedil;o privado',
 'login_autre_identifiant' => 'ligar-se sob um outro identificador',
-'login_connexion_refusee' => 'Liga&ccedil;&atilde;o recusada',
 'login_cookie_accepte' => 'Favor configurar o seu navegador para que os aceite ( pelo menos para este s&iacute;tio).',
 'login_cookie_oblige' => 'Para se identificar de maneira segura neste s&iacute;tio, deve aceitar os cookies.',
 'login_deconnexion_ok' => 'Liga&ccedil;&atilde;o terminada.',
@@ -592,16 +587,13 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'login_test_navigateur' => 'teste navega&ccedil;&atilde;o/nova liga&ccedil;&atilde;o',
 'login_verifiez_navigateur' => '(Verifique, por&eacute;m, que o seu navegador n&atilde;o memorizou a sua palavra-passe...)',
 
-
 // M
 'masquer_trad' => '<NEW>masquer les traductions',
 'module_fichiers_langues' => 'Ficheiros de l&iacute;ngua',
 
-
 // N
 'navigateur_pas_redirige' => 'Se o seu browser n&atilde;o est&aacute; redireccionado, clique aqui para continuar.',
 'numero' => '<NEW>Num&eacute;ro',
-
 
 // O
 'occurence' => '<NEW>Occurrence',
@@ -623,7 +615,6 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'onglet_save_restaur_base' => 'Salvaguardar/restaurar a base',
 'onglet_vider_cache' => 'Esvaziar a cache',
 'ortho_trop_de_fautes2' => 'Comece por corrigir os erros mais &oacute;bvios e tente novamente.',
-
 
 // P
 'pass_choix_pass' => 'Favor escolher a sua nova palavra-passe',
@@ -668,10 +659,8 @@ Poder&aacute; ent&atilde;o introduzir uma nova palavra-passe
 'previsualisation' => 'Visualiza&ccedil;&atilde;o',
 'previsualiser' => 'Visualizar',
 
-
 // R
 'retour' => '<NEW>Retour',
-
 
 // S
 'spip_conforme_dtd' => '<NEW>SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE :',
@@ -680,7 +669,6 @@ Poder&aacute; ent&atilde;o introduzir uma nova palavra-passe
 'squelette_ligne' => '<NEW>squelette, ligne',
 'stats_visites_et_popularite' => '@visites@ visitas&nbsp;; popularidade&nbsp;: @popularite@',
 'suivant' => 'seguinte',
-
 
 // T
 'taille_ko' => '@taille@&nbsp;kb',
@@ -735,12 +723,11 @@ Poder&aacute; ent&atilde;o introduzir uma nova palavra-passe
 'titre_joindre_document' => 'ANEXAR UM DOCUMENTO',
 'titre_liens_entrants' => 'Links de entrada',
 'titre_mots_cles' => 'PALAVRAS-CHAVE',
-'titre_probleme_technique' => 'Aten&ccedil;&atilde;o&nbsp;: um problema t&eacute;cnico (servidor MySQL) impede o acesso a esta parte do s&iacute;tio. Obrigado pela sua compreens&atilde;o.',
+'titre_probleme_technique' => '<MODIF>Aten&ccedil;&atilde;o&nbsp;: um problema t&eacute;cnico (servidor SQL) impede o acesso a esta parte do s&iacute;tio. Obrigado pela sua compreens&atilde;o.',
 'titre_publier_document' => 'PUBLICAR UM DOCUMENTO NESTA RUBRICA',
 'titre_statistiques' => 'Estat&iacute;sticas do s&iacute;tio',
 'titre_titre_document' => 'T&iacute;tulo do documento&nbsp;:',
 'trad_reference' => '(artigo de refer&ecirc;ncia)',
-
 
 // U
 'upload_fichier_zip' => 'Ficheiro ZIP',
@@ -749,7 +736,6 @@ Poder&aacute; ent&atilde;o introduzir uma nova palavra-passe
 'upload_limit' => 'Este ficheiro &eacute; grande demais para o servidor; o tamanho m&aacute;ximo autorizado para <i>upload</i> &eacute; de @max@.',
 'upload_zip_decompacter' => 'expandido e cada elemento que ele cont&eacute;m gravados no site. Os ficheiros que ser&atilde;o ent&atilde;o gravados s&atilde;o:',
 'upload_zip_telquel' => 'instalado; como ficheiro compactado Zip;',
-
 
 // Z
 'zbug_balise_b_aval' => ': tag B colocada ap&oacute;s BOUCLE',
@@ -793,8 +779,6 @@ Poder&aacute; ent&atilde;o introduzir uma nova palavra-passe
 'zxml_valeur_attribut' => '<NEW>valeur de l\'attribut',
 'zxml_vide_balise' => '<NEW>balise vide',
 'zxml_vu' => '<NEW>vu auparavant'
-
 );
-
 
 ?>

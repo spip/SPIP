@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-es',
 '0_langue' => 'euskara [eu]',
 '0_liste' => 'info@interneteuskadi.org',
 '0_mainteneur' => 'info@interneteuskadi.org',
-
 
 // A
 'access_interface_graphique' => 'Interfaz grafiko osora itzuli',
@@ -22,8 +23,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Gako-hitz hau aldatu',
 'admin_modifier_rubrique' => 'Atal hau aldatu',
 'admin_recalculer' => 'Orrialde hau gaurkotu',
-'alerte_maj_impossible' => 'Erne!MySQL basea ezin da gaurkotu @bertsio@ bertsioan, datu-basea aldatzeko eskubidearazo bat dago, agian. Arren, jarri harremanetan zure ostatu-administratzailearekin.',
+'alerte_maj_impossible' => 'Erne!SQL basea ezin da gaurkotu @bertsio@ bertsioan, datu-basea aldatzeko eskubidearazo bat dago, agian. Arren, jarri harremanetan zure ostatu-administratzailearekin.',
 'analyse_xml' => '<NEW>Analyse XML',
+'articles_recents' => '<NEW>Articles les plus r&eacute;cents',
 'avis_archive_incorrect' => 'Artxibo-fitxategia ez da Spip motakoa.',
 'avis_archive_invalide' => 'artxibo-fitxategia ez da zuzena',
 'avis_attention' => 'Adiegon!',
@@ -35,9 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_connexion' => 'Lokarri-errorea',
 'avis_erreur_cookie' => 'cookie delakoaren arazoa',
 'avis_erreur_fonction_contexte' => 'Programazio-errorea. Testu inguru honetan ez da funtzio hau deitu behar.',
-'avis_erreur_mysql' => 'MySQL errore',
+'avis_erreur_mysql' => 'SQL errore',
 'avis_erreur_sauvegarde' => 'Errorea (@type@@id_objet@) ! babes-kopia egiterakoan. ',
-
 
 // B
 'barre_a_accent_grave' => 'Azentukamutsadun A maiuskula tartekatu',
@@ -69,7 +70,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_telecharger' => 'Igo',
 'bouton_valider' => 'Onartu',
 
-
 // C
 'cal_apresmidi' => 'arratsaldea',
 'cal_jour_entier' => 'egun osoa',
@@ -77,12 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => 'egutegia eguneka',
 'cal_par_mois' => 'egutegia hilabeteka',
 'cal_par_semaine' => 'egutegia asteka',
-'calendrier_synchro_lien' => '<MODIF>iCal artxiboa berreskuratu',
-'calendrier_synchro_prive' => '<MODIF>Hurrengo egutegiak, erabilpen guztiz pertsonalekoa, gune honetako argitaratze-aktibitatepribatuaren berri ematen dizu (zeregin eta hitzordu pertsonalak, proposatutako artikuluaketa berri laburrak...).',
-'calendrier_synchro_public' => '<MODIF>Hurrengo egutegiak gune honetako aktibitatepublikoa jarraitzen uzten dizu (argitaratutako artikuluak eta berri laburrak).',
-'calendrier_synchro_sync' => '<MODIF>iCal fitxategia sinkronizatu(Mozilla Calendar, Apple iCal...)',
 'confirm_changer_statut' => 'Kontuz, osagai honenegoera aldatzea eskatu duzu, jarraitu nahi al duzu?',
-
 
 // D
 'date_aujourdhui' => 'gaur',
@@ -177,13 +172,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  eskubideak arautzeko helburuz.
  <p />Prozedura xehetasunez azaltzen dainstalazio gidanBehin prozedura bukatu ezkero, ahal duzu ',
 
-
 // E
 'entree_dimensions' => 'Dimentsioak',
 'entree_titre_document' => 'Agiriaren izenburua',
 'entree_titre_image' => 'Irudiarenizenburua',
 'envoi_via_le_site' => 'Tokiaren bitartez egindako bidalpena',
-
 
 // F
 'fichier_introuvable' => '@fichier@ aurkitzeko moduan ez dagoen artxiboa',
@@ -261,7 +254,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_vous_enregistrer' => 'Aurretik erregistratzea beharrezkoa da foro honetan parte hartzeko Hornitutako zureidentifikadore pertsonala jarraian adieraztea eskertuko dizugu . Inskribaturk ez bazaudeaurretik inskribatu behar duzu',
 'forum_vous_inscrire' => 'Aurretik inskriba zaitez.',
 
-
 // I
 'ical_texte_rss_articles' => 'Leku honetako artikuluen «backend» delako fitxategiahurrengo helbidean dago:',
 'ical_texte_rss_articles2' => 'Leku honetako artikuluen«backend» delako fitxategia hurrengo helbidean dago:',
@@ -276,7 +268,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_brouteur' => 'Nabigazio bizkorra',
 'icone_configuration_site' => 'Gunearen konfigurazioa',
 'icone_configurer_site' => 'Lekua Konfiguratu',
-'icone_creer_mot_cle' => 'Gako-hitz berri bat eratu eta artikuluhoni elkartu',
 'icone_creer_nouvel_auteur' => 'Egile berri bat eratu',
 'icone_creer_rubrique' => 'Atal bat eratu',
 'icone_creer_sous_rubrique' => 'Azpi-atalberri bat eratu',
@@ -480,7 +471,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'infos_vos_pense_bete' => 'Zure oroigarriak',
 'item_breve_proposee' => 'Proposaturiko berri laburra',
 
-
 // L
 'lien_afficher_icones_seuls' => 'Ikurrak soilik erakutsi',
 'lien_afficher_texte_icones' => 'Ikurrak eta testua erakutsi',
@@ -503,7 +493,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lien_voir_auteur' => 'Egile hau ikusi',
 'login_acces_prive' => 'eremu pribaturakosarbidea',
 'login_autre_identifiant' => 'beste identifikatzaile batekin konektatu',
-'login_connexion_refusee' => 'Konexioa errefusatua.',
 'login_cookie_accepte' => 'Zure nabigatzailea konfiguratu onar ditzan (gune honetarako behintzat).',
 'login_cookie_oblige' => 'Gune honetan segurtasunez identifikatzeko, "cookieak"onartu behar dituzu.',
 'login_deconnexion_ok' => 'Deskonexioa eginda.',
@@ -529,14 +518,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'login_test_navigateur' => 'nabigatzaile proba/berkonexioa',
 'login_verifiez_navigateur' => '(Hala ere,zure nabigatzaileak zure pasahitza memorizatu ez duela egiaztatu...)',
 
-
 // M
 'module_fichiers_langues' => 'Hizkuntza-fitxategiak',
 
-
 // N
 'navigateur_pas_redirige' => 'Zure nabigatzaileak automatikoki berriz eramaten ez bazaitu, klikatu hemen jarraitzeko.',
-
 
 // O
 'onglet_affacer_base' => 'Basea ezabatu',
@@ -557,7 +543,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'onglet_save_restaur_base' => 'Segurtasun kopia sortu eta basea berrezarri',
 'onglet_vider_cache' => 'Cachea hustu',
 'ortho_trop_de_fautes2' => 'Akats nabarienak zuzentzen hasi eta saiatuberriro.',
-
 
 // P
 'pass_choix_pass' => 'kontrazeinu berria aukeratu:',
@@ -586,11 +571,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'previsualisation' => 'Aurrebista',
 'previsualiser' => 'Aurrebistaratu',
 
-
 // S
 'stats_visites_et_popularite' => '@visites@ bisitak; onarpen-maila: @popularite@',
 'suivant' => 'hurrengoa',
-
 
 // T
 'taille_ko' => '@taille@ KB',
@@ -631,12 +614,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_joindre_document' => 'Dokumentu bat erantzi',
 'titre_liens_entrants' => 'Eguneko gehitutako loturak',
 'titre_mots_cles' => 'Gako-hitzak',
-'titre_probleme_technique' => 'ADI EGON: arazotekniko bat dela eta (MySQL zerbitzaria) ezin da tokiaren atal honetara sartu',
+'titre_probleme_technique' => 'ADI EGON: arazotekniko bat dela eta (SQL zerbitzaria) ezin da tokiaren atal honetara sartu',
 'titre_publier_document' => 'Atal honetan dokumentu bat argitaratu',
 'titre_statistiques' => 'Tokiaren estatistikak',
 'titre_titre_document' => 'Dokumentuaren izenburua',
 'trad_reference' => '(erreferentzia artikulua)',
-
 
 // U
 'upload_fichier_zip' => 'ZIP fitxategia',
@@ -645,7 +627,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'upload_limit' => 'Fitxategi hauhandiegia da zerbitzarirako; baimendutako gehienezko tamainia upload-ean@max@-koa da.',
 'upload_zip_decompacter' => 'deskonprimituta eta gunean instalatutadaukan elementu bakoitza. Gunean instalatu egingo diren fitxategiak dira:',
 'upload_zip_telquel' => 'Besterik gabe instalatuta, Zip fitxategi bezala;',
-
 
 // Z
 'zbug_balise_b_aval' => ': B begiztako baliza aurrerago',
@@ -669,8 +650,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'zbug_resultat' => 'emaitza',
 'zbug_serveur_indefini' => 'SQL zerbitzari zehaztugabea',
 'zbug_table_inconnue' => '&laquo;@table@&raquo; SQL taulaezezaguna'
-
 );
-
 
 ?>

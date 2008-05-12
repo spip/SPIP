@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-cpf',
 '0_langue' => 'Kr&eacute;ol r&eacute;nyon&eacute; [cpf]',
 '0_liste' => 'spip-cpf@rezo.net',
 '0_mainteneur' => 'pascale@rezo.net',
-
 
 // A
 'access_interface_graphique' => 'Artoun si lint&egrave;rfas grafik konpl&eacute;',
@@ -23,9 +24,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_rubrique' => 'Sanz rubrik-la',
 'admin_recalculer' => 'Arkalkil pazw&egrave;b-la',
 'afficher_trad' => '<NEW>afficher les traductions',
-'alerte_maj_impossible' => '<b>Tansyon&nbsp;!</b> Larnouv&egrave;lman labazdodn&eacute; MySQL zizka lo v&egrave;rsyon @version@ l&eacute; pa posib, peut-&ecirc;tre &agrave; cause d\'un probl&egrave;me de droit de modification sur la base de donn&eacute;es. Veuillez contacter votre h&eacute;bergeur.',
+'alerte_maj_impossible' => '<b>Tansyon&nbsp;!</b> Larnouv&egrave;lman labazdodn&eacute; SQL zizka lo v&egrave;rsyon @version@ l&eacute; pa posib, peut-&ecirc;tre &agrave; cause d\'un probl&egrave;me de droit de modification sur la base de donn&eacute;es. Veuillez contacter votre h&eacute;bergeur.',
 'analyse_xml' => 'Analiz XML',
 'antispam_champ_vide' => '<NEW>Veuillez laisser ce champ vide&nbsp;:',
+'articles_recents' => 'Bann zartik li l&eacute; nouvo',
 'avis_archive_incorrect' => 'Lo fisy&eacute; arsiv l&eacute; pwinn inn fisy&eacute; SPIP',
 'avis_archive_invalide' => 'Lo fisy&eacute; arsiv i giny pa mars&eacute;',
 'avis_attention' => 'TANSYON PANGAR&nbsp;!',
@@ -41,10 +43,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Ast&egrave;r n&eacute;na inn kanard dann program-la. Fonksyon-la, ou dwa pa ap&egrave;l ali dann kont&egrave;ks-la.
 
 ',
-'avis_erreur_mysql' => 'N&eacute;na inn kanard MySQL',
+'avis_erreur_mysql' => 'N&eacute;na inn kanard SQL',
 'avis_erreur_sauvegarde' => 'Ast&egrave;r n&eacute;na inn kanard &egrave;k la sovgard (@type@ @id_objet@) !',
 'avis_erreur_visiteur' => '<NEW>Probl&egrave;me d\'acc&egrave;s &agrave; l\'espace priv&eacute;',
-
 
 // B
 'barre_a_accent_grave' => 'Pou m&egrave;t in A &egrave;k son laksan grav an mazizkil',
@@ -76,7 +77,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_telecharger' => 'T&eacute;l&eacute;sarz',
 'bouton_valider' => 'Konfirm',
 
-
 // C
 'cal_apresmidi' => 'apr&eacute;midi',
 'cal_jour_entier' => 'jou konpl&eacute;',
@@ -89,7 +89,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'colonne' => '<NEW>Colonne',
 'confirm_changer_statut' => 'Pangar, ou la domann po sanz lo statu z&eacute;l&eacute;man-la. L&eacute; byin sertin y v&eacute; sanz a li ?',
 'correcte' => 'kor&egrave;k',
-
 
 // D
 'date_aujourdhui' => 'zordi',
@@ -209,7 +208,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <p>Kank ou lora fini,i sra kav',
 'double_occurrence' => '<NEW>Double occurrence',
 
-
 // E
 'entree_dimensions' => 'Kouk sa l&eacute; gran&nbsp;:',
 'entree_titre_document' => 'Lo non lo dokiman&nbsp;:',
@@ -218,7 +216,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => '<NEW>Erreur',
 'erreur_balise_non_fermee' => '<NEW>derni&egrave;re balise non referm&eacute;e :',
 'erreur_texte' => '<NEW>erreur(s)',
-
 
 // F
 'fichier_introuvable' => 'Fisy&eacute;-la @fichier@ ni pa kav trouv ali',
@@ -314,7 +311,6 @@ Mersi aou m&egrave;t ansanm isi
 'forum_vous_enregistrer' => 'Pou m&egrave;t ansanm dann forom-la, ifo anrozistr aou. Mersi pou m&egrave;t anba lat&egrave;r nondkod-lidantit&eacute; sak ni la donn aou. Si ou l&eacute; pa anrozistr&eacute;, i dwa',
 'forum_vous_inscrire' => 'inskri a ou </a>.',
 
-
 // I
 'ical_texte_rss_articles' => 'Lo fisy&eacute; &laquo;backend&raquo; pou bann zartik lo sit-la, zot i va trouv ali si ladr&egrave;s-la :',
 'ical_texte_rss_articles2' => 'Ou p&eacute; osi giny bann fisy&eacute; &laquo;backend&raquo; pou tout bann zartik andan ban ribrik si lo sit-la:',
@@ -329,7 +325,6 @@ Mersi aou m&egrave;t ansanm isi
 'icone_brouteur' => 'Bat-kar&eacute; d&eacute;gaz&eacute;',
 'icone_configuration_site' => 'Konfigir lo sit',
 'icone_configurer_site' => 'Konfigir out sitw&egrave;b',
-'icone_creer_mot_cle' => 'Kr&eacute; inn nouvo molakl&eacute; &egrave; gatir ali sanm lartik-la.',
 'icone_creer_nouvel_auteur' => 'Kr&eacute; in nouvo lot&egrave;r ',
 'icone_creer_rubrique' => 'Kr&eacute; inn rubrik',
 'icone_creer_sous_rubrique' => 'Kr&eacute; inn sourubrik ',
@@ -538,7 +533,6 @@ Mersi aou m&egrave;t ansanm isi
 'infos_vos_pense_bete' => 'Out bann gardant&egrave;t',
 'item_breve_proposee' => 'Tit-nouv&egrave;l-la l&eacute; propoz&eacute;',
 
-
 // L
 'lien_afficher_icones_seuls' => 'Afis s&egrave;lman bann zikon',
 'lien_afficher_texte_icones' => 'Afis bann zikon &egrave;k lo t&egrave;ks',
@@ -562,7 +556,6 @@ Mersi aou m&egrave;t ansanm isi
 'ligne' => '<NEW>Ligne',
 'login_acces_prive' => 'laks&eacute; pou l&eacute;spas priv&eacute;',
 'login_autre_identifiant' => 'Akost lo sit &egrave;k inn nouv&egrave;l nondkod',
-'login_connexion_refusee' => 'Lakostaz l&eacute; afront&eacute;.',
 'login_cookie_accepte' => 'Mersi r&egrave;gl a zot navigat&egrave;r pou li as&egrave;pt azot (mwindreman pou sitw&egrave;b-la).',
 'login_cookie_oblige' => 'Pou inn lidantifikasyon sir si lo sit, ou dwa as&eacute;pt&eacute; bann gatomakro.',
 'login_deconnexion_ok' => 'Out d&eacute;falkaz la finn mars&eacute;.',
@@ -591,16 +584,13 @@ dann out navigat&egrave;r &eacute;',
 'login_test_navigateur' => 'test navigat&egrave;r/nouvo lakostaz',
 'login_verifiez_navigateur' => '(Somansa g&eacute;t byin out navigat&egrave;r la pa gardant&egrave;t out modpass...)',
 
-
 // M
 'masquer_trad' => '<NEW>masquer les traductions',
 'module_fichiers_langues' => 'Bann fisy&eacute; lang',
 
-
 // N
 'navigateur_pas_redirige' => 'Si out navigat&egrave;r l&eacute; pa rotourn&eacute;, apiy t&egrave;rla pou kontiny&eacute;.',
 'numero' => '<NEW>Num&eacute;ro',
-
 
 // O
 'occurence' => '<NEW>Occurence',
@@ -622,7 +612,6 @@ dann out navigat&egrave;r &eacute;',
 'onglet_save_restaur_base' => 'Sovgard/rosarz l&eacute;ta labaz',
 'onglet_vider_cache' => 'D&eacute;vid lo kas',
 'ortho_trop_de_fautes2' => 'Koriz avann out grogrinn larlik &egrave;k out grafi, apr&eacute;sa ou sra pou es&egrave;y diksyon&egrave;r-la.',
-
 
 // P
 'pass_choix_pass' => 'Mersi swazi out nouvo modpas :',
@@ -665,7 +654,6 @@ Apr&eacute;sa, ou i poura m&egrave;t in nouvo modpas
 'previsualisation' => 'Po vwar avann komsi l&eacute; an liny',
 'previsualiser' => 'Po vwar avan',
 
-
 // S
 'spip_conforme_dtd' => '<NEW>SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE :',
 'squelette' => 'l&eacute;skel&egrave;t',
@@ -673,7 +661,6 @@ Apr&eacute;sa, ou i poura m&egrave;t in nouvo modpas
 'squelette_ligne' => 'l&eacute;skel&egrave;t, liny',
 'stats_visites_et_popularite' => '@visites@ vizit&nbsp;; popularit&eacute;&nbsp;: @popularite@',
 'suivant' => 'd&egrave;ry&egrave;r',
-
 
 // T
 'taille_ko' => '@taille@&nbsp;ko',
@@ -726,12 +713,11 @@ aou l&egrave;s laz&eacute;styon do bann paz-la pou lo w&egrave;bm&egrave;t prins
 'titre_joindre_document' => 'POU ZWIND INN DOKIMAN',
 'titre_liens_entrants' => 'Bann gatiraz lariv&eacute;',
 'titre_mots_cles' => 'BANN MOLAKL&Eacute;',
-'titre_probleme_technique' => 'Pangar&nbsp;: inn larlik t&egrave;knik (serv&egrave;r MySQL) i d&eacute;fann permisyon lakostaz dan landrwa la. &Eacute;skiz anou.',
+'titre_probleme_technique' => 'Pangar&nbsp;: inn larlik t&egrave;knik (serv&egrave;r SQL) i d&eacute;fann permisyon lakostaz dan landrwa la. &Eacute;skiz anou.',
 'titre_publier_document' => 'PUBLIY INN DOKIMAN DANN RUBRIK-LA',
 'titre_statistiques' => 'Sifkl&eacute; lo sitw&egrave;b',
 'titre_titre_document' => 'Lo non dokiman-la&nbsp;:',
 'trad_reference' => '(Lartik-p&eacute;i de r&eacute;f&eacute;rans)',
-
 
 // U
 'upload_fichier_zip' => 'Fisy&eacute; ZIP',
@@ -740,7 +726,6 @@ aou l&egrave;s laz&eacute;styon do bann paz-la pou lo w&egrave;bm&egrave;t prins
 'upload_limit' => 'Fisy&eacute;-l li l&eacute; tro gro pou lo s&egrave;rv&egrave;r&nbsp;; pli gran tay l&eacute; posib <i>upload</i> sa l&eacute; @max@.',
 'upload_zip_decompacter' => 'd&eacute;kopres&eacute; &eacute; sakinn z&eacute;l&eacute;man ali sr&eacute; pou instal&eacute; si lo sit. Tout bann fisy&eacute; pou instal i sra lor&nbsp;:',
 'upload_zip_telquel' => 'instal&eacute; komsa kom in larsiv kopres&eacute; Zip&nbsp;;',
-
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: baliz B anl&egrave;r',
@@ -783,8 +768,6 @@ aou l&egrave;s laz&eacute;styon do bann paz-la pou lo w&egrave;bm&egrave;t prins
 'zxml_valeur_attribut' => '<NEW>valeur de l\'attribut',
 'zxml_vide_balise' => '<NEW>balise vide',
 'zxml_vu' => '<NEW>vu auparavant'
-
 );
-
 
 ?>

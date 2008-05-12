@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-eo',
 '0_langue' => 'Esperanto [eo]',
 '0_liste' => 'spip-eo@rezo.net',
 '0_mainteneur' => 'MHSautet@aol.com',
-
 
 // A
 'access_interface_graphique' => 'Reen al kompleta grafika interfaco',
@@ -27,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'analyse_xml' => 'XML analizo',
 'annuler' => 'Nuligi',
 'antispam_champ_vide' => 'Bonvolu forlasi tiun tajpujon malplena&nbsp;:',
+'articles_recents' => 'La plej fre&#349;aj artikoloj',
 'avis_archive_incorrect' => 'Tiu arkivo ne estas SPIP-dosiero',
 'avis_archive_invalide' => 'Tiu arkiva dosiero ne validas',
 'avis_attention' => 'ATENTU&nbsp;!',
@@ -41,7 +43,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_mysql' => 'SQL-eraro',
 'avis_erreur_sauvegarde' => 'Konservo-eraro (@type@ @id_objet@)! ',
 'avis_erreur_visiteur' => 'Alir-problemo al la privata spaco',
-
 
 // B
 'barre_a_accent_grave' => 'Entajpi malakut-akcentan &#265;efliteran A',
@@ -73,7 +74,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_telecharger' => 'Al&#349;uti',
 'bouton_valider' => 'Validigi',
 
-
 // C
 'cal_apresmidi' => 'posttagmezo',
 'cal_jour_entier' => 'tuta tago',
@@ -86,7 +86,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'colonne' => 'Kolumno',
 'confirm_changer_statut' => 'Atentu, vi petis por &#349;an&#285;i la statuton de tiu elemento. &#264;u vi deziras da&#365;rigi ?',
 'correcte' => 'korekta',
-
 
 // D
 'date_aujourdhui' => 'hodia&#365;',
@@ -201,7 +200,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <p />Post tio, vi povos ',
 'double_occurrence' => 'Duobla trafo',
 
-
 // E
 'entree_dimensions' => 'Dimensioj&nbsp;:',
 'entree_titre_document' => 'Titolo de la dokumento&nbsp;:',
@@ -210,7 +208,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'Eraro',
 'erreur_balise_non_fermee' => 'lasta ne fermita marko :',
 'erreur_texte' => 'eraro(j)',
-
 
 // F
 'fichier_introuvable' => 'Netrovebla dosiero @fichier@ ',
@@ -311,7 +308,6 @@ Dankon pro via partopreno
   indiki &#265;i-sube la personan ensalutilon kiu estis
   sendita al vi. Se vi ne estas registrita, vi devas',
 'forum_vous_inscrire' => 'registri&#285;i.',
-
 
 // I
 'ical_texte_rss_articles' => 'La abondosiero (backend-dosiero) de la artikoloj de tiu retejo troveblas &#265;e la retadreso :',
@@ -539,7 +535,6 @@ Dankon pro via partopreno
 'infos_vos_pense_bete' => 'Viaj memorigiloj',
 'item_breve_proposee' => 'Proponita fulm-informo',
 
-
 // L
 'lien_afficher_icones_seuls' => 'Afi&#349;i nur la piktogramojn',
 'lien_afficher_texte_icones' => 'Afi&#349;i la piktogramojn kaj la tekston',
@@ -592,16 +587,13 @@ Dankon pro via partopreno
 'login_test_navigateur' => 'testo retumilo/rekonekti&#285;o',
 'login_verifiez_navigateur' => '(Kontrolu tamen ke via retumilo ne memoras pri via pasvorto...)',
 
-
 // M
 'masquer_trad' => 'ka&#349;i la tradukojn',
 'module_fichiers_langues' => 'Dosieroj de lingvo',
 
-
 // N
 'navigateur_pas_redirige' => 'Se via retumilo ne redirekti&#285;as, da&#365;rigu musklakante &#265;i tie.',
 'numero' => 'Numero',
-
 
 // O
 'occurence' => 'Trafo',
@@ -623,7 +615,6 @@ Dankon pro via partopreno
 'onglet_save_restaur_base' => 'Savkopii/resta&#365;ri la datenbazon',
 'onglet_vider_cache' => 'Malplenigi la staplon',
 'ortho_trop_de_fautes2' => 'Bonvolu korekti la plej evidentajn erarojn kaj poste reprovu.',
-
 
 // P
 'pass_choix_pass' => 'Bonvolu elekti vian novan pasvorton:',
@@ -670,10 +661,8 @@ kaj ensaluti.
 'previsualisation' => 'Anta&#365;rigardo',
 'previsualiser' => 'Anta&#365;rigardi',
 
-
 // R
 'retour' => 'Reen',
-
 
 // S
 'spip_conforme_dtd' => 'SPIP konsideras tiun dokumenton konforma al sia DOCTYPE :',
@@ -682,7 +671,6 @@ kaj ensaluti.
 'squelette_ligne' => 'skeleto, linio',
 'stats_visites_et_popularite' => '@visites@ vizitoj&nbsp;; populareco&nbsp;: @popularite@',
 'suivant' => 'sekvanta',
-
 
 // T
 'taille_ko' => '@taille@&nbsp;kb',
@@ -744,7 +732,6 @@ sub la respondeco de la &#265;efa retejestro .</b>',
 'titre_titre_document' => 'Titolo de la dokumento&nbsp;:',
 'trad_reference' => '(referenca artikolo)',
 
-
 // U
 'upload_fichier_zip' => 'ZIP-Dosiero (densigita)',
 'upload_fichier_zip_texte' => 'La dosiero, kiun vi proponas instali estas densigita dosiero (zip).',
@@ -752,7 +739,6 @@ sub la respondeco de la &#265;efa retejestro .</b>',
 'upload_limit' => 'Tiu dosiero estas tro granda por la servilo&nbsp;; la maksimuma grandeco permesata en <i>upload</i> estas @max@.',
 'upload_zip_decompacter' => 'maldensigita kaj &#265;iu elemento, kiun &#285;i enhavas estas instalita &#265;e la retejo. La dosieroj kiuj estos sekve instalitaj &#265;e la retejo estas&nbsp;:',
 'upload_zip_telquel' => 'instalita tia, kia &#285;i estas, kiel densigita Zip-arkivo&nbsp;;',
-
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: posta B marko',
@@ -796,8 +782,6 @@ sub la respondeco de la &#265;efa retejestro .</b>',
 'zxml_valeur_attribut' => 'atributa valoro',
 'zxml_vide_balise' => 'malplena marko',
 'zxml_vu' => 'anta&#365;e vidita'
-
 );
-
 
 ?>
