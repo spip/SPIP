@@ -1,81 +1,43 @@
+#CACHE{0}
 #HTTP_HEADER{"Cache-Control: no-store, no-cache, must-revalidate"}
 #HTTP_HEADER{"Pragma: no-cache"}
 
-[(#ENV{echec_cookie})
-<fieldset class="reponse_formulaire">
-<legend><:avis_erreur_cookie:></legend>
-<p><:login_cookie_oblige:></p>
-<p><:login_cookie_accepte:></p>
-</fieldset>]
-
-[(#ENV{echec_visiteur})
-<fieldset class="reponse_formulaire">
-<legend><:avis_erreur_visiteur:></legend>
-<p><:texte_erreur_visiteur:></p>
-</fieldset>]
-
-	<script type="text/javascript" src="#EVAL{_DIR_JAVASCRIPT}md5.js"> </script>
-	<form id="login[_(#ENV{login})]"
-		action="[(#ENV{action2})]"
-		method="post"[(#ENV{source}|=={spip}|?{' ',''})
-		onsubmit='if (this.session_password.value) {
-			this.session_password_md5.value = calcMD5("[(#ENV{alea_actuel})]" + this.session_password.value);
-			this.next_session_password_md5.value = calcMD5("[(#ENV{alea_futur})]" + this.session_password.value);
-			this.session_password.value = "";
-			return true;
-			}']>
-	<fieldset>
-	<legend><:form_forum_identifiants:></legend>
-		[<p class="reponse_formulaire">(#ENV*{erreur})</p>]
-
-		<span id="spip_logo_auteur">[(#INCLURE{fond=formulaires/logo_auteur}{id_auteur}|inserer_attribut{alt,#ENV{login_alt}})]</span>
-
-		[<p><label for="var_login"><:login_login2:></label>(#ENV{login}|?{'',' '})<br />
-		<input type="text" class="forml" id="var_login" name="var_login" value="" size="40" /></p>]
-		
-[
-
-
-<input type="hidden" name="session_login_hidden" value="(#ENV{login})" />
-<p id='login_securise' style='display: none;'><:login_login:>&nbsp;<strong>[(#ENV{login_alt})]</strong><br />&#91;<a href='[(#ENV{action2}
-	|parametre_url{cookie_admin,non}
-	|parametre_url{url,#ENV*{url}}
-	|parametre_url{retour,#ENV*{self}})]'><:login_autre_identifiant:></a>&#93;</p>
-<script type="text/javascript"><!--
-if (l=document.getElementById('login_securise'))	l.style.display='';
-//--></script>
-<noscript>
-	<div id='login_non_securise'>
-	<p class="reponse_formulaire"><:login_non_securise:> <a href="[(#ENV{action})]"><:login_recharger:></a>.</p>
-	<p><label for="session_login"><:login_login2:></label><br />
-	<input type="text" class="forml" name="session_login" id="session_login"[ value="(#ENV{login})"] size="40" /></p>
-	</div>
-</noscript>
-]
-	[(#ENV{login}|?{'',' '})<div id='pass_ajax' style='display: none;'>]
-	<p><label[ for="var_login_(#ENV{login})"]><:login_pass2:></label><br />
-	<input type="password" class="forml" name="session_password"[ id="var_login_(#ENV{login})"] value="" size="20" /><br />
-	&#91;<a href="#URL_PAGE{spip_pass}" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=330'); return false;"><:login_motpasseoublie:></a>&#93;
-	</p>
-
-[(#ENV{rester_connecte})
-	<p><input type="checkbox" name="session_remember" id="session_remember[_(#ENV{login})]" value="oui"[(#ENV*{prefs}|filtre_rester_connecte)checked="checked"]
-	class="intact" onchange="this.className='';" />
-	<label for="session_remember[_(#ENV{login})]"><:login_rester_identifie:></label></p>
-]
-	[(#ENV{login}|?{'',' '})</div>]
-	<input type="hidden" name="session_password_md5" value="" />
-	<input type="hidden" name="next_session_password_md5" value="" />
-	<input type="hidden" name="essai_login" value="oui" />
-	<input type="hidden" name="url" value="[(#ENV{url})]" />
-	<input type="hidden" name="url_echec" value="[(#SELF)]" />
-	<p class="spip_bouton"><input type="submit" value="<:bouton_valider:>" /></p>
-	</fieldset>
+<div class='formulaire_spip formulaire_login formfx'>
+	<br class='spacer' />
+	[<p class="formulaire_message">(#ENV**{_deja_loge})</p>]
+	[<p class="formulaire_message">(#ENV**{message_ok})</p>]
+	[<p class='formulaire_erreur'>(#ENV**{message_erreur})</p>]
+	[(#ENV{editable})
+	<form id='formulaire_login' method='post' action='#ENV{action}' enctype='multipart/form-data'>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <fieldset><legend><:form_forum_identifiants:></legend>
+			<span id="spip_logo_auteur">#ENV*{_logo,''}</span>
+		  <ol class="formfx">
+		    <li class="editer_login obligatoire">
+		      <label for="var_login"><:login_login2:></label>
+		      <input class='text' type='text' name='var_login' id='var_login' class='forml' value="[(#ENV**{var_login})]" size='40' />
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{var_login})</span>]
+		    </li>
+		    <li class="editer_password obligatoire">
+		      <label for="password"><:login_pass2:></label>
+		      <input class='password' type='password' name='password' id='password' value="" size='40' />
+					<em id='pass_securise'[(#ENV{_alea_actuel}|?{'',' '})style='display:none;']><img src='#EVAL{_DIR_IMG_PACK}securise.gif' width='16' height='16' alt='<:login_securise:>' /></em>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{password})</span>]
+					<span class='details'>&#91;<a href="#URL_PAGE{spip_pass}" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=330'); return false;"><:login_motpasseoublie:></a>&#93;</span>
+		    </li>
+				[(#ENV{rester_connecte})
+					<li><input class='checkbox' type="checkbox" name="session_remember" id="session_remember" value="oui" [(#ENV**{cnx}|?{' '})checked="checked"]
+					class="intact" onchange="this.className='';" />
+					<label class='nofx' for="session_remember"><:login_rester_identifie:></label></li>
+				]
+			</ol>
+			<p class="spip_bouton"><input type="submit" value="<:bouton_valider:>" /></p>
+		</fieldset>
 	</form>
-	
-<script type="text/javascript"><!--
-if (l=document.getElementById('var_login[_(#ENV{login})]')) l.focus();
---></script>[
+	]
+	[(#REM) en cas d'absence de cookie, on represente le formulaire alternatif 
 	<form action="(#ENV{auth_http})" method="get">[
 	(#ENV{auth_http}|form_hidden)
 	]
@@ -87,44 +49,48 @@ if (l=document.getElementById('var_login[_(#ENV{login})]')) l.focus();
 	<p class="spip_bouton"><input type="submit" value="<:login_sans_cookiie:>"/></p></div>
 	</fieldset>
 	</form>
-]
-[(#ENV{login}|?{'',' '})
+	]
+</div>
+[(#REM) javascript qui gere la securite du login en evitant de faire circuler le pass en clair]
+<script type="text/javascript" src="#EVAL{_DIR_JAVASCRIPT}md5.js"></script>
 <script type='text/javascript'>
-var alea_actuel;
-var alea_futur;
-var login;
+var alea_actuel='#ENV{_alea_actuel,''}';
+var alea_futur='#ENV{_alea_futur,''}';
+var login='#ENV{var_login,''}';
 var informe_auteur_en_cours = false;
 function informe_auteur(c){
 	eval('c = '+c); // JSON
 	if (c) {
 		alea_actuel = c.alea_actuel;
 		alea_futur = c.alea_futur;
-		$('input#session_login_hidden').attr('value',c.login);
+		jQuery('input#session_login_hidden').attr('value',c.login);
 		// indiquer le cnx si on n'y a pas touche
-		$('input#session_remember.intact')
+		jQuery('input#session_remember.intact')
 		.attr('checked',c.cnx=='1'?'checked':'');
-		$('#spip_logo_auteur').html(c.logo);
+		jQuery('#spip_logo_auteur').html(c.logo);
+		jQuery('#pass_securise').show();
 	} else {
-		$('#spip_logo_auteur').html('');
+		jQuery('#spip_logo_auteur').html('');
 	}
 	informe_auteur_en_cours = false;
 }
 function calcule_md5_pass(pass){
-	$('input\u005b@name=session_password\u005d').attr('value','');
-	$('form#login').attr('action','#ENV{pose_cookie}');
-	$('input\u005b@name=session_password_md5\u005d').attr('value',calcMD5(alea_actuel + pass));
-	$('input\u005b@name=next_session_password_md5\u005d').attr('value',calcMD5(alea_futur + pass));
-}
-$('form#login #pass_ajax').show().after('<input type="hidden" name="session_login_hidden" id="session_login_hidden" value="" />');
-$('#var_login').blur(function(){
-	if (login!=$(this).attr('value')) {
-		login = $(this).attr('value');
-		informe_auteur_en_cours = true;
-		$.get('#URL_ACTION{informer_auteur}',{var_login:$(this).attr('value')},informe_auteur);
+	if (alea_actuel) {
+		jQuery('input[@name=password]').attr('value','');
+		jQuery('input[@name=session_password_md5]').attr('value',calcMD5(alea_actuel + pass));
+		jQuery('input[@name=next_session_password_md5]').attr('value',calcMD5(alea_futur + pass));
 	}
-});
-$('form#login').submit(function(){
-	pass = $('input\u005b@name=session_password\u005d').attr('value');
+}
+function actualise_auteur(){
+	if (login!=jQuery('#var_login').attr('value')) {
+		login = jQuery('#var_login').attr('value');
+		informe_auteur_en_cours = true;
+		$.get('#URL_ACTION{informer_auteur}',{var_login:login},informe_auteur);
+	}
+}
+jQuery('#var_login').change(function(){actualise_auteur();});
+jQuery('form#formulaire_login').submit(function(){
+	pass = jQuery('input[@name=password]').attr('value');
 	// ne jamais laisser le pass circuler en clair
 	if (pass) {
 		if (alea_actuel)
@@ -136,26 +102,23 @@ $('form#login').submit(function(){
 			
 			// si l'information est en cours, retenter sa chance
 			if (informe_auteur_en_cours) {
-				setTimeout(function(){$('form#login').submit();},300);
+				setTimeout(function(){jQuery('form#formulaire_login').submit();},300);
 				return false;
 			}
 
 			// sinon lancer une demande
 			informe_auteur_en_cours = true;
-			$.get('#URL_ACTION{informer_auteur}',{var_login:$('#var_login').attr('value')},function(c) {
+			$.get('#URL_ACTION{informer_auteur}',{var_login:jQuery('#var_login').attr('value')},function(c) {
 				informe_auteur(c);
 				// le formulaire sera soumis apres reception des info auteur
-				$('form#login').submit();
+				jQuery('form#formulaire_login').submit();
 			});
 			// ou dans un delai maxi de 5s (pour eviter le blocage a cette etape)
-			// mais sans le pass, ce qui fait retomber sur le scenario de repli du login en 2 passes
 			setTimeout(function(){
-				$('input\u005b@name=session_password\u005d').attr('value','');
-				$('form#login').submit();
-			},3000);
+				jQuery('form#formulaire_login').submit();
+			},5000);
 			return false;
 		}
 	}
 });
 </script>
-]

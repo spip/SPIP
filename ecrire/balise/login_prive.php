@@ -35,6 +35,11 @@ function balise_LOGIN_PRIVE_stat ($args, $filtres) {
 
 // http://doc.spip.org/@balise_LOGIN_PRIVE_dyn
 function balise_LOGIN_PRIVE_dyn($login, $cible) {
-	return login_explicite($login, $cible);
+	include_spip('balise/formulaire_');
+	if (!$url 		# pas d'url passee en filtre ou dans le contexte
+	AND !$url = _request('url') # ni d'url passee par l'utilisateur
+	)
+		$url = generer_url_ecrire('accueil','',true);
+	return balise_FORMULAIRE__dyn('login',$url,$login,true);
 }
 ?>

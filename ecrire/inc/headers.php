@@ -31,6 +31,7 @@ function redirige_par_entete($url, $equiv='') {
 
 	if (!$equiv OR (strncmp("Apache", $_SERVER['SERVER_SOFTWARE'],6)==0)) {
 		@header("Location: " . $url);
+		$equiv="";
 	} else {
 		@header("Refresh: 0; url=" . $url);
 		$equiv = "<meta http-equiv='Refresh' content='0; url=$url'>";
@@ -57,7 +58,10 @@ function redirige_par_entete($url, $equiv='') {
 
 // http://doc.spip.org/@redirige_formulaire
 function redirige_formulaire($url, $equiv = '') {
-	if (!_request('var_ajax') && !_request('var_ajaxcharset'))
+	if (!_request('var_ajax') 
+	  && !_request('var_ajaxcharset')
+		&& !headers_sent() 
+		&& !$_GET['var_mode'])
 		redirige_par_entete(str_replace('&amp;','&',$url), $equiv);
 	else {
 		$url = strtr($url, "\n\r", "  ");
