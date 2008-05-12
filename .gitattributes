@@ -501,7 +501,6 @@ ecrire/charsets/mathml.php -text
 ecrire/charsets/translit.php -text
 ecrire/charsets/translitcomplexe.php -text
 ecrire/configuration/accueil.php -text
-ecrire/configuration/administrateurs.php -text
 ecrire/configuration/annonces.php -text
 ecrire/configuration/articles.php -text
 ecrire/configuration/avertisseur.php -text
