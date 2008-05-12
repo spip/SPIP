@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('base/abstract_sql');
 
 
+// http://doc.spip.org/@inc_identifier_login_dist
 function inc_identifier_login_dist($session_login, $session_password, $session_md5pass="", $session_md5next="", $session_remember=''){
 
 	$auteur = verifier_login($session_login, $session_password, $session_md5pass, $session_md5next);
@@ -55,6 +56,7 @@ function inc_identifier_login_dist($session_login, $session_password, $session_m
 	return $auteur;
 }
 
+// http://doc.spip.org/@verifier_login
 function verifier_login($session_login, $session_password, $session_md5pass="", $session_md5next=""){
 	if (!spip_connect()) {
 		include_spip('inc/minipres');
@@ -80,6 +82,7 @@ function verifier_login($session_login, $session_password, $session_md5pass="", 
 }
 
 
+// http://doc.spip.org/@informer_login
 function informer_login($login){
 	$row =  sql_fetsel('id_auteur,login,alea_actuel,alea_futur,prefs,source', 'spip_auteurs', "login=" . sql_quote($login));
 	// Retrouver ceux qui signent de leur nom ou email
