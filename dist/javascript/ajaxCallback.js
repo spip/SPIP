@@ -119,7 +119,7 @@ var preloaded_urls = {};
 var ajaxbloc_selecteur;
 jQuery.fn.ajaxbloc = function() {
   return this.each(function() {
-  $('div.ajaxbloc',this).ajaxbloc(); // traiter les enfants d'abord
+  jQuery('div.ajaxbloc',this).ajaxbloc(); // traiter les enfants d'abord
 	var blocfrag = jQuery(this);
 
 	var on_pagination = function(c) {
