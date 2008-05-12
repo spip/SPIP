@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'accueil_site' => 'H&#596;ntogbo',
 'articles' => 'Wekpa l&#603;&#770;',
 'articles_auteur' => 'Ny&#596;wlant&#596; &eacute; l&#596; sin wekpa l&#603;&#770;',
 'articles_populaires' => 'wekpa l&#603;&#770;  &ecirc; to bi t&ugrave;n y&eacute;',
-'articles_recents' => 'wekpa g&ugrave;dog&ugrave;dot&#596;n l&#603;&#770;  ',
 'articles_rubrique' => 'wekpa &#598;i&#598;&#603; &eacute; l&#596; t&#596;n',
 'aucun_article' => 'wekpa &#598;e&#772;&#772;  do gesi &eacute; l&#596; ji a ',
 'aucun_auteur' => 'Ny&#596;wlant&#596; &#598;e&#772;&#772;  do  gesi &eacute; l&#596; ji a ',
@@ -21,15 +22,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'autres_groupes_mots_clefs' => 'Xota b&#603; dokp&#596; l&#603;&#770; ',
 'autres_sites' => 'Gblogbloji &#598;e&#772;&#772; vo l&#603;&#770;',
 
-
 // B
 'bonjour' => 'kwab&#596;   ',
 'breves' => 'Xogb&egrave; kl&eacute;wun',
 
-
 // C
 'commenter_site' => 'wl&#596;k&agrave;nn&uacute; xo l&#603;&#770;',
-
 
 // D
 'date' => 'Azan',
@@ -39,7 +37,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_commentaires' => '&#598;&#603;tit&#603; g&ugrave;dog&ugrave;dot&#596;n',
 'derniers_messages_forum' => 'wh&#603;n g&ugrave;dog&ugrave;dot&#596;n ye&#772; &#598;&#596;dotoji',
 
-
 // E
 'edition_mode_texte' => 'winwlanm&#603;',
 'en_reponse' => '&#598;ogb&egrave;yiyi m&#603; nu &nbsp;:',
@@ -47,18 +44,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'envoyer_message' => 'S&#603; w&#603;n do ',
 'espace_prive' => 't&#603;nkandovo',
 
-
 // F
 'forum' => 'Kpl&eacute;kpl&eacute; ',
-
 
 // H
 'hierarchie_site' => 'Tito gblogbloji &#596; t&#596;n',
 
-
 // J
 'jours' => 'Azan l&#603;&#770;',
-
 
 // M
 'meme_auteur' => 'Ny&#596;wlant&#596; &#598;okpo &#596;',
@@ -70,7 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'mots_clefs' => 'xo&#769;ta&#769; l&#603;&#770;',
 'mots_clefs_meme_groupe' => 'xo&#769;ta&#769; akpa &#598;okpo&#769; &#596; l&#603;&#770; t&#596;n',
 
-
 // N
 'navigation' => 'nuk&eacute;j&eacute;k&eacute;j&eacute;',
 'nom' => 'nyi&#769;k&#596;',
@@ -78,7 +70,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nouveautes_web' => 'Nu y&#596;y&#596; l&#603;&#770;  e &#598;o at&#603; &#596; ji&#769; &#596;',
 'nouveaux_articles' => 'W&eacute;kpa y&#596;y&#596; l&#603;&#770;',
 'nouvelles_breves' => 'w&#603;n kl&eacute;wun l&#603;&#770;',
-
 
 // P
 'page_precedente' => 'W&eacute;kpa e wai',
@@ -90,7 +81,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'poster_message' => 's&#603; w&#603;n do',
 'proposer_site' => 'Nu mi do gblogbloji&#769; &#598;&eacute; &#596;  Mi&#768; siwu z&eacute; g&#596; na&#769; akpa &eacute; l&#596; ',
 
-
 // R
 'repondre_article' => '&#598;o&#768; sin nu w&eacute;kpa e l&#596;',
 'repondre_breve' => '&#598;o&#768; sin nu xo&#769; klewun &eacute; l&#596;',
@@ -99,7 +89,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'retour_debut_forums' => 'k&#596;l&#603; s&#596; yi&#768;  kpl&eacute;kpl&eacute; sin bib&#603;',
 'rubrique' => 'Akpa ',
 'rubriques' => 'Akpa l&#603;',
-
 
 // S
 'signatures_petition' => 'al&#596;dowemam&#603; l&#603;',
@@ -111,18 +100,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'syndiquer_rubrique' => 'Ze&#770; aceji do akpa &eacute; l&#596; ji&#769;',
 'syndiquer_site' => 'ac&eacute;ji&#769;ni&#769;n&#596;',
 
-
 // T
 'texte_lettre_information' => 'Xojlawema&#769; gblogbloji &#596; t&#596;n &#598;i&egrave;',
 'texte_lettre_information_2' => 'Xojlawema&#769; &eacute; l&#596;&#596; n&#596; cian w&eacute;kpa kpodo&#769; xo&#769; klewun &#598;&#596;&#768;dotoji&#769; xoxo l&#603;&#770;',
-
 
 // V
 'ver_imprimer' => 'Zin wema',
 'voir_en_ligne' => 'kp&#596;n Gblogbloji',
 'voir_squelette' => 'S&#603; titom&#603; wema &eacute;l&#596; t&#596;n do '
-
 );
-
 
 ?>

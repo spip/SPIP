@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'accueil_site' => 'Prima pagin&#259;',
 'articles' => 'Articole',
 'articles_auteur' => 'Articole de acela&#351;i autor',
 'articles_populaires' => 'Cele mai populare articole',
-'articles_recents' => 'Cele mai recente articole',
 'articles_rubrique' => 'Articolele acestei rubrici',
 'aucun_article' => 'Nu exist&#259; nici un articol la aceast&#259; adres&#259;',
 'aucun_auteur' => 'Nu exist&#259; nici un autor la aceast&#259; adres&#259;',
@@ -22,15 +23,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'autres_groupes_mots_clefs' => 'Alte grupuri de cuvinte-cheie',
 'autres_sites' => 'Alte site-uri',
 
-
 // B
 'bonjour' => 'Bun&#259; ziua',
 'breves' => '&#350;tiri',
 
-
 // C
 'commenter_site' => 'Comenta&#355;i acest site',
-
 
 // D
 'date' => 'Data',
@@ -40,7 +38,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_commentaires' => 'Ultimele comentarii',
 'derniers_messages_forum' => 'Ultimele mesaje publicate &icirc;n forum-uri',
 
-
 // E
 'edition_mode_texte' => 'Editare &icirc;n mod text a',
 'en_reponse' => 'R&#259;spuns la&nbsp;:',
@@ -48,18 +45,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'envoyer_message' => 'Trimite&#355;i un mesaj',
 'espace_prive' => 'Sec&#355;iunea protejat&#259;',
 
-
 // F
 'forum' => 'Forum',
-
 
 // H
 'hierarchie_site' => 'Ierarhia site-ului',
 
-
 // J
 'jours' => 'zile',
-
 
 // M
 'meme_auteur' => 'De acela&#351;i autor',
@@ -71,7 +64,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'mots_clefs' => 'Cuvinte-cheie',
 'mots_clefs_meme_groupe' => 'Cuvinte-cheie &icirc;n acela&#351;i grup',
 
-
 // N
 'navigation' => 'Navigare',
 'nom' => 'Nume',
@@ -79,7 +71,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nouveautes_web' => 'Nout&#259;&#355;i pe Web',
 'nouveaux_articles' => 'Articole noi',
 'nouvelles_breves' => '&#350;tiri noi',
-
 
 // P
 'page_precedente' => 'pagina anterioar&#259;',
@@ -91,7 +82,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'poster_message' => 'Trimite&#355;i un mesaj',
 'proposer_site' => 'Pute&#355;i propune un site de ad&#259;ugat &icirc;n aceast&#259; rubric&#259;&nbsp;:',
 
-
 // R
 'repondre_article' => 'R&#259;spunde&#355;i la acest articol',
 'repondre_breve' => 'R&#259;spunde&#355;i la acest&#259; &#351;tire',
@@ -100,7 +90,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'retour_debut_forums' => '&Icirc;napoi la &icirc;nceputul forum-urilor',
 'rubrique' => 'Rubric&#259;',
 'rubriques' => 'Rubrici',
-
 
 // S
 'signatures_petition' => 'Semn&#259;turi',
@@ -113,18 +102,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'syndiquer_rubrique' => 'Sindicaliza&#355;i aceast&#259; rubric&#259;',
 'syndiquer_site' => 'Sindicaliza&#355;i &icirc;ntregul site',
 
-
 // T
 'texte_lettre_information' => 'Iat&#259; scrisoarea de informa&#355;ii a site-ului',
 'texte_lettre_information_2' => 'Aceast&#259; scrisoare con&#355;ine lista articolelor &#351;i &#351;tirilor publicate de la',
-
 
 // V
 'ver_imprimer' => 'Versiunea imprimabil&#259;',
 'voir_en_ligne' => 'Vede&#355;i &icirc;n direct',
 'voir_squelette' => 'vede&#355;i scheletul acestei pagini'
-
 );
-
 
 ?>

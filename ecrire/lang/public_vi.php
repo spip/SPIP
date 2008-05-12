@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'accueil_site' => 'Trang nh&agrave;',
 'articles' => 'B&agrave;i',
 'articles_auteur' => 'B&agrave;i v&#7903; c&#7911;a t&aacute;c gi&#7843; n&agrave;y',
 'articles_populaires' => 'Nh&#7919;ng b&agrave;i &#273;&#432;&#7907;c chu&#7897;ng nh&#7845;t',
-'articles_recents' => 'Nh&#7919;ng b&agrave;i m&#7899;i nh&#7845;t',
 'articles_rubrique' => 'B&agrave;i v&#7903; c&#7911;a &#273;&#7873; m&#7909;c n&agrave;y',
 'aucun_article' => 'Kh&ocirc;ng c&oacute; b&agrave;i t&#7841;i &#273;&#7883;a ch&igrave; n&agrave;y  ',
 'aucun_auteur' => 'Kh&ocirc;ng c&oacute; t&aacute;c gi&#7843; t&#7841;i &#273;&#7883;a ch&igrave; n&agrave;y',
@@ -21,15 +22,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'autres_groupes_mots_clefs' => 'Nh&#7919;ng nh&oacute;m t&#7915; then ch&#7889;t kh&aacute;c ',
 'autres_sites' => 'Nh&#7919;ng trang Web kh&aacute;c',
 
-
 // B
 'bonjour' => 'Th&acirc;n ch&agrave;o',
 'breves' => 'Tin ng&#7855;n',
 
-
 // C
 'commenter_site' => 'Ph&ecirc; b&igrave;nh trang Web n&agrave;y',
-
 
 // D
 'date' => 'Ng&agrave;y',
@@ -39,7 +37,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_commentaires' => 'C&aacute;c g&oacute;p &yacute; m&#7899;i nh&#7845;t',
 'derniers_messages_forum' => 'Trao &#273;&#7893;i m&#7899;i nh&#7845;t hi&#7879;n trong di&#7877;n &#273;&agrave;n',
 
-
 // E
 'edition_mode_texte' => 'v&#259;n b&#7843;n th&#432;&#7901;ng',
 'en_reponse' => 'Tr&#7843; l&#7901;i cho&nbsp;:',
@@ -47,18 +44,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'envoyer_message' => 'G&#7917;i th&#432; t&iacute;n m&#7899;i',
 'espace_prive' => 'M&#7841;ng c&aacute; nh&acirc;n',
 
-
 // F
 'forum' => 'Di&#7877;n &#273;&agrave;n',
-
 
 // H
 'hierarchie_site' => 'C&#7845;u tr&uacute;c th&#7913; b&#7853;c c&#7911;a trang web',
 
-
 // J
 'jours' => 'ng&agrave;y',
-
 
 // M
 'meme_auteur' => 'C&ugrave;ng t&aacute;c gi&#7843;',
@@ -70,7 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'mots_clefs' => 'T&#7915; then ch&#7889;t',
 'mots_clefs_meme_groupe' => 'T&#7915; then ch&#7889;t c&ugrave;ng nh&ograve;m  ',
 
-
 // N
 'navigation' => '&#272;i&#7873;u h&#432;&#7899;ng',
 'nom' => 'T&ecirc;n',
@@ -78,7 +70,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nouveautes_web' => 'Nh&#7919;ng &#273;i&#7873;u m&#7899;i tr&ecirc;n trang web',
 'nouveaux_articles' => 'B&agrave;i m&#7899;i',
 'nouvelles_breves' => 'Tin ng&#7855;n m&#7899;i',
-
 
 // P
 'page_precedente' => 'trang tr&#432;&#7899;c',
@@ -90,7 +81,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'poster_message' => '&#272;&#7875; &#273;&#259;ng tin',
 'proposer_site' => 'B&#7841;n c&oacute; th&#7875; &#273;&#7873; ngh&#7883; th&ecirc;m m&#7897;t trang web v&agrave;o ph&#7847;n n&agrave;y:',
 
-
 // R
 'repondre_article' => 'Tr&#7843; l&#7901;i b&agrave;i n&agrave;y',
 'repondre_breve' => 'Tr&#7843; l&#7901;i tin ng&#7855;n n&agrave;y',
@@ -99,7 +89,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'retour_debut_forums' => 'Tr&#7903; v&#7873; trang &#273;&#7847;u c&#7911;a di&#7877;n &#273;&agrave;n',
 'rubrique' => '&ETH;&#7873; M&#7909;c',
 'rubriques' => '&ETH;&#7873; M&#7909;c',
-
 
 // S
 'signatures_petition' => 'Ch&#7919; k&yacute;',
@@ -111,17 +100,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'syndiquer_rubrique' => 'Ph&#7893; bi&#7871;n &#273;&#7873; m&#7909;c n&agrave;y',
 'syndiquer_site' => 'Ph&#7893; bi&#7871;n tr&#7885;n trang web',
 
-
 // T
 'texte_lettre_information' => '&#272;&acirc;y l&agrave; b&#7843;n tin c&#7911;a trang web',
 'texte_lettre_information_2' => 'T&oacute;m t&#7855;t c&aacute;c b&agrave;i v&#7903; v&agrave; tin ng&#7855;n &#273;&atilde; ph&aacute;t h&agrave;nh t&#7915; ',
 
-
 // V
 'ver_imprimer' => 'Ki&#7875;u d&#7875; in',
 'voir_en_ligne' => 'Xem online'
-
 );
-
 
 ?>

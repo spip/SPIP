@@ -10,13 +10,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'articles' => 'Articles',
 'articles_auteur' => 'Articles de cet auteur',
 'articles_populaires' => 'Articles les plus populaires',
-'articles_recents' => 'Articles les plus r&eacute;cents',
 'articles_rubrique' => 'Articles de cette rubrique',
-'aucune_breve' => 'Il n\'y a pas de br&egrave;ve &agrave; cette adresse',
-'aucune_rubrique' => 'Il n\'y a pas de rubrique &agrave; cette adresse',
 'aucun_article' => 'Il n\'y a pas d\'article &agrave; cette adresse',
 'aucun_auteur' => 'Il n\'y a pas d\'auteur &agrave; cette adresse',
 'aucun_site' => 'Il n\'y a pas de site &agrave; cette adresse',
+'aucune_breve' => 'Il n\'y a pas de br&egrave;ve &agrave; cette adresse',
+'aucune_rubrique' => 'Il n\'y a pas de rubrique &agrave; cette adresse',
 'autres' => 'Autres',
 'autres_breves' => 'Autres br&egrave;ves',
 'autres_groupes_mots_clefs' => 'Autres groupes de mots-cl&eacute;s',
@@ -31,17 +30,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date' => 'Date',
+'dernier_ajout' => 'Dernier ajout',
 'dernieres_breves' => 'Derni&egrave;res br&egrave;ves',
 'derniers_articles' => 'Derniers articles',
 'derniers_commentaires' => 'Derniers commentaires',
 'derniers_messages_forum' => 'Derniers messages publi&eacute;s dans les forums',
-'dernier_ajout' => 'Dernier ajout',
 
 // E
 'edition_mode_texte' => '&Eacute;dition en mode texte de',
-'envoyer_message' => 'Envoyer un message',
 'en_reponse' => 'En r&eacute;ponse &agrave;&nbsp;:',
 'en_resume' => 'En r&eacute;sum&eacute;',
+'envoyer_message' => 'Envoyer un message',
 'espace_prive' => 'Espace priv&eacute;',
 
 // F
@@ -57,9 +56,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lien_connecter' => 'Se connecter',
 
 // M
-'memes_auteurs' => 'Des m&ecirc;mes auteurs',
 'meme_auteur' => 'Du m&ecirc;me auteur',
 'meme_rubrique' => 'Dans la m&ecirc;me rubrique',
+'memes_auteurs' => 'Des m&ecirc;mes auteurs',
 'message' => 'Message',
 'messages_forum' => 'Messages de forum',
 'messages_recents' => 'Messages de forums les plus r&eacute;cents',
@@ -77,8 +76,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // P
 'page_precedente' => 'page pr&eacute;c&eacute;dente',
 'page_suivante' => 'page suivante',
-'participer_site' => 'Vous pouvez participer &agrave; la vie de ce site et proposer vos propres articles en vous inscrivant ci-dessous. Vous recevrez imm&eacute;diatement un email vous indiquant vos codes d\'acc&egrave;s &agrave; l\'espace priv&eacute; du site.',
 'par_auteur' => 'par ',
+'participer_site' => 'Vous pouvez participer &agrave; la vie de ce site et proposer vos propres articles en vous inscrivant ci-dessous. Vous recevrez imm&eacute;diatement un email vous indiquant vos codes d\'acc&egrave;s &agrave; l\'espace priv&eacute; du site.',
 'plan_site' => 'Plan du site',
 'popularite' => 'Popularit&eacute;',
 'poster_message' => 'Poster un message',
@@ -95,8 +94,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // S
 'signatures_petition' => 'Signatures',
-'sites_web' => 'Sites Web',
 'site_realise_avec_spip' => 'Site r&eacute;alis&eacute; avec SPIP',
+'sites_web' => 'Sites Web',
 'sous_rubriques' => 'Sous-rubriques',
 'spam' => 'Spam',
 'suite' => 'suite',

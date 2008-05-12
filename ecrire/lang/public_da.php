@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'accueil_site' => 'Hjemmeside',
 'articles' => 'Artikler',
 'articles_auteur' => 'Denne forfatters artikler',
 'articles_populaires' => 'De mest l&aelig;ste artikler',
-'articles_recents' => 'De seneste artikler',
 'articles_rubrique' => 'Dette omr&aring;des artikler',
 'aucun_article' => 'Der er ingen artikel p&aring; denne adresse',
 'aucun_auteur' => 'Der er ingen forfatter p&aring; denne adresse',
@@ -21,15 +22,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'autres_groupes_mots_clefs' => 'Andre grupper af n&oslash;gleord',
 'autres_sites' => 'Andre websteder',
 
-
 // B
 'bonjour' => 'Hej',
 'breves' => 'Nyheder',
 
-
 // C
 'commenter_site' => 'Kommentar til dette websted',
-
 
 // D
 'date' => 'Dato',
@@ -39,7 +37,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_commentaires' => 'Seneste kommentarer',
 'derniers_messages_forum' => 'Seneste indl&aelig;g offentliggjort i forummer',
 
-
 // E
 'edition_mode_texte' => 'Tekstudgave',
 'en_reponse' => 'Svaradresse:',
@@ -47,18 +44,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'envoyer_message' => 'Lav indl&aelig;g',
 'espace_prive' => 'Privat omr&aring;de',
 
-
 // F
 'forum' => 'Forum',
-
 
 // H
 'hierarchie_site' => 'Webstedets struktur',
 
-
 // J
 'jours' => 'dage',
-
 
 // M
 'meme_auteur' => 'Af samme forfatter',
@@ -70,7 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'mots_clefs' => 'N&oslash;gleord',
 'mots_clefs_meme_groupe' => 'N&oslash;gleord i samme gruppe',
 
-
 // N
 'navigation' => 'Navigering',
 'nom' => 'Navn',
@@ -78,7 +70,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nouveautes_web' => 'Hvad nyt p&aring; Internettet',
 'nouveaux_articles' => 'Nye artikler',
 'nouvelles_breves' => 'Nyheder',
-
 
 // P
 'page_precedente' => 'foreg&aring;ende side',
@@ -89,7 +80,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'popularite' => 'Popularitet',
 'poster_message' => 'Indl&aelig;g',
 
-
 // R
 'repondre_article' => 'Lav et svar til denne artikel',
 'repondre_breve' => 'Lav et svar p&aring; denne nyhed',
@@ -98,7 +88,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'retour_debut_forums' => 'Tilbage til starten p&aring; forummet',
 'rubrique' => 'Afsnit',
 'rubriques' => 'Afsnit',
-
 
 // S
 'signatures_petition' => 'Underskrifter',
@@ -110,18 +99,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'syndiquer_rubrique' => 'Syndiker dette afsnit',
 'syndiquer_site' => 'Syndiker hele webstedet',
 
-
 // T
 'texte_lettre_information' => 'Her er webstedets nyhedsbrev',
 'texte_lettre_information_2' => 'Dette brev opsummerer artikler og nyheder offentlliggjort siden',
-
 
 // V
 'ver_imprimer' => 'Printbar version',
 'voir_en_ligne' => 'Se online',
 'voir_squelette' => 'Hent skabelonen til denne side'
-
 );
-
 
 ?>

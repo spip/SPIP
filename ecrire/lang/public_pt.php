@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'accueil_site' => 'P&aacute;gina de abertura do s&iacute;tio',
 'articles' => 'Artigos',
 'articles_auteur' => 'Artigos deste autor',
 'articles_populaires' => 'Artigos mais populares',
-'articles_recents' => 'Artigos mais recentes',
 'articles_rubrique' => 'Artigos desta rubrica',
 'aucun_article' => 'Nenhum artigo neste endere&ccedil;o',
 'aucun_auteur' => 'Nenhum autor neste endere&ccedil;o',
@@ -21,15 +22,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'autres_groupes_mots_clefs' => 'Outros grupos de palavras-chave',
 'autres_sites' => 'Outros s&iacute;tios',
 
-
 // B
 'bonjour' => 'Bom dia',
 'breves' => 'Not&iacute;cias',
 
-
 // C
 'commenter_site' => 'Comentar este s&iacute;tio',
-
 
 // D
 'date' => 'Data',
@@ -39,7 +37,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_commentaires' => '&Uacute;ltimos coment&aacute;rios',
 'derniers_messages_forum' => '&Uacute;ltimas mensagens publicadas nos f&oacute;runs',
 
-
 // E
 'edition_mode_texte' => 'Edi&ccedil;&atilde;o em modo texto de',
 'en_reponse' => 'Em resposta a&nbsp;:',
@@ -47,18 +44,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'envoyer_message' => 'Enviar uma mensagem',
 'espace_prive' => 'Espa&ccedil;o privado',
 
-
 // F
 'forum' => 'F&oacute;rum',
-
 
 // H
 'hierarchie_site' => 'Hierarquia do s&iacute;tio',
 
-
 // J
 'jours' => 'dias',
-
 
 // M
 'meme_auteur' => 'Do mesmo autor',
@@ -70,7 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'mots_clefs' => 'Palavras-chave',
 'mots_clefs_meme_groupe' => 'Palavras-chave no mesmo grupo',
 
-
 // N
 'navigation' => 'Navega&ccedil;&atilde;o',
 'nom' => 'Nome',
@@ -78,7 +70,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nouveautes_web' => 'Novidades na Web',
 'nouveaux_articles' => 'Novos artigos',
 'nouvelles_breves' => 'Novas not&iacute;cias',
-
 
 // P
 'page_precedente' => 'p&aacute;gina anterior',
@@ -90,7 +81,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'poster_message' => 'Enviar uma mensagem',
 'proposer_site' => 'Voc&ecirc; pode propor um s&iacute;tio a adicionar a esta rubrica&nbsp;:',
 
-
 // R
 'repondre_article' => 'Responder a este artigo',
 'repondre_breve' => 'Responder a esta not&iacute;cia',
@@ -99,7 +89,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'retour_debut_forums' => 'Regresso ao in&iacute;cio dos f&oacute;runs',
 'rubrique' => 'Rubrica',
 'rubriques' => 'Rubricas',
-
 
 // S
 'signatures_petition' => 'Assinaturas',
@@ -111,18 +100,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'syndiquer_rubrique' => 'Vincular esta rubrica',
 'syndiquer_site' => 'Vincular todo o s&iacute;tio',
 
-
 // T
 'texte_lettre_information' => 'Eis a carta de informa&ccedil;&atilde;o do s&iacute;tio',
 'texte_lettre_information_2' => 'Esta carta recenseia os artigos e as not&iacute;cias publicados desde',
-
 
 // V
 'ver_imprimer' => 'Vers&atilde;o para imprimir',
 'voir_en_ligne' => 'Ver em linha',
 'voir_squelette' => 'importar o esqueleto desta p&aacute;gina'
-
 );
-
 
 ?>

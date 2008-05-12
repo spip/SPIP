@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'accueil_site' => 'Hlavn&iacute; strana',
 'articles' => '&#268;l&aacute;nky',
 'articles_auteur' => '&#268;l&aacute;nky tohoto autora',
 'articles_populaires' => 'Nej&#269;ten&#283;j&#353;&iacute; &#269;l&aacute;nky',
-'articles_recents' => 'Ned&aacute;vn&eacute; &#269;l&aacute;nky',
 'articles_rubrique' => '&#268;l&aacute;nky v t&eacute;to rubrice',
 'aucun_article' => 'Na t&eacute;to adrese nen&iacute; &#382;&aacute;dn&yacute; &#269;l&aacute;nek',
 'aucun_auteur' => 'Na t&eacute;to adrese nen&iacute; &#382;&aacute;dn&yacute; autor',
@@ -21,15 +22,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'autres_groupes_mots_clefs' => 'Dal&#353;&iacute; skupiny kl&iacute;&#269;ov&yacute;ch slov',
 'autres_sites' => 'Dal&#353;&iacute; odkazy',
 
-
 // B
 'bonjour' => 'Dobr&yacute; den',
 'breves' => 'Novinky',
 
-
 // C
 'commenter_site' => 'Koment&aacute;&#345; k tomuto odkazu',
-
 
 // D
 'date' => 'Datum',
@@ -39,7 +37,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_commentaires' => 'Posledn&iacute; koment&aacute;&#345;e',
 'derniers_messages_forum' => 'Posledn&iacute; p&#345;&iacute;sp&#283;vky v diskusn&iacute;ch f&oacute;rech',
 
-
 // E
 'edition_mode_texte' => 'Textov&yacute; re&#382;im',
 'en_reponse' => 'Odpov&#283;&#271; na:',
@@ -47,18 +44,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'envoyer_message' => 'Odeslat zpr&aacute;vu',
 'espace_prive' => 'Vstup pro autory',
 
-
 // F
 'forum' => 'F&oacute;rum',
-
 
 // H
 'hierarchie_site' => 'Struktura str&aacute;nek',
 
-
 // J
 'jours' => 'dn&#367;',
-
 
 // M
 'meme_auteur' => 'Od stejn&eacute;ho autora',
@@ -70,7 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'mots_clefs' => 'Kl&iacute;&#269;ov&aacute; slova',
 'mots_clefs_meme_groupe' => 'Kl&iacute;&#269;ov&aacute; slova ve stejn&eacute; skupin&#283;',
 
-
 // N
 'navigation' => 'Navigace',
 'nom' => 'Jm&eacute;no',
@@ -79,18 +71,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nouveaux_articles' => 'Nov&eacute; &#269;l&aacute;nky',
 'nouvelles_breves' => 'Nov&eacute; novinky',
 
-
 // P
 'page_precedente' => 'p&#345;edchoz&iacute; strana',
 'page_suivante' => 'dal&#353;&iacute; strana',
 'par_auteur' => 'napsal(a)',
 'participer_site' => 'M&#367;&#382;ete se aktivn&#283; zapojit a napsat n&#283;jak&yacute; &#269;l&aacute;nek pro tento web - zaregistrujte se n&iacute;&#382;e. Okam&#382;it&#283; obdr&#382;&iacute;te e-mail s p&#345;&iacute;stupov&yacute;mi k&oacute;dy do &#269;&aacute;sti pro autory.',
-'plan_du_site' => 'Mapa str&aacute;nek',
 'plan_site' => 'Mapa str&aacute;nek',
 'popularite' => 'Popularita',
 'poster_message' => 'Napsat zpr&aacute;vu',
 'proposer_site' => 'M&#367;&#382;ete navrhnout odkaz, kter&yacute; m&aacute; b&yacute;t za&#345;azen do t&eacute;to rubriky:',
-
 
 // R
 'repondre_article' => 'Reagovat na tento &#269;l&aacute;nek',
@@ -100,7 +89,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'retour_debut_forums' => 'Zp&#283;t na za&#269;&aacute;tek diskusn&iacute;ch f&oacute;r',
 'rubrique' => 'Rubrika',
 'rubriques' => 'Rubriky',
-
 
 // S
 'signatures_petition' => 'Podpisy',
@@ -112,18 +100,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'syndiquer_rubrique' => 'Zahrnout tuto rubriku',
 'syndiquer_site' => 'Zahrnout cel&yacute; web',
 
-
 // T
 'texte_lettre_information' => 'Zde je zpravodaj tohoto webu',
 'texte_lettre_information_2' => 'Tento soupis sumarizuje &#269;l&aacute;nky a novinky publikovan&eacute; od ',
-
 
 // V
 'ver_imprimer' => 'Verze pro tisk',
 'voir_en_ligne' => 'Pod&iacute;vejte se online',
 'voir_squelette' => 'Zobrazit &#353;ablonu t&eacute;to str&aacute;nky'
-
 );
-
 
 ?>
