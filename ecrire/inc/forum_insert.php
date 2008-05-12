@@ -107,7 +107,7 @@ function inc_forum_insert_dist($force_statut = NULL) {
 	# retour a calculer (cf. inc-formulaire_forum)
 	if ($retour_forum == '!') {
 		// on calcule a priori l'adresse de retour {en cas d'echec du POST}
-		charger_generer_url();
+		charger_generer_url(_DIR_RACINE !== '');
 		if ($id_forum)
 			$retour_forum = generer_url_forum($id_forum);
 		elseif ($id_article)
