@@ -61,10 +61,9 @@ function inc_formater_article_dist($row, $own='')
 	. "<a href='"
 	. generer_url_ecrire("articles","id_article=$id_article")
 	. "'"
-	. " title='" . _T('info_numero_abbreviation'). "$id_article"
 	. (!$descriptif ? '' : 
-	     (':'.attribut_html(typo($descriptif)).'"'))
-	. "' dir='$lang_dir'>"
+	     (' title="'.attribut_html(typo($descriptif)).'"'))
+	. " dir='$lang_dir'>"
 	. (!$logo ? '' :
 	   ("<span style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>" . $logo . "</span>"))
 	. (acces_restreint_rubrique($id_rubrique) ? $img_admin : '')
