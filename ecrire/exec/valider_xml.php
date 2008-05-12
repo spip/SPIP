@@ -80,7 +80,7 @@ function valider_xml_ok($url, $req_ext)
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	$debut = $commencer_page($titre);
-	$jq = http_script("", generer_url_public('jquery.js'));
+	$jq = http_script("", 'jquery.js');
 	
 	echo str_replace('<head>', "<head>$jq", $debut);
 	$onfocus = '<input type="text" size="70" value="' .$url_aff .'" name="var_url" id="var_url" onfocus="'.$onfocus . '" />';
