@@ -1225,6 +1225,7 @@ function traiter_poesie($letexte)
 }
 
 // callback pour la fonction traiter_raccourci_liens()
+// http://doc.spip.org/@autoliens_callback
 function autoliens_callback($r) {
 	if (strlen($r[1])) {
 		$l = preg_replace(',^http:/*,', '', $r[1], 1, $c);
@@ -1242,6 +1243,7 @@ function autoliens_callback($r) {
 }
 
 // extraire les liens ecrits en mode texte brut
+// http://doc.spip.org/@traiter_raccourci_liens
 function traiter_raccourci_liens($texte) {
 	return preg_replace_callback(
 	',\[[^\[\]]*->.*?\]|<[^<>]*>|((http:|www\.)[^"\'\s\[\]]+),S',
@@ -1250,6 +1252,7 @@ function traiter_raccourci_liens($texte) {
 }
 
 // Harmonise les retours chariots et mange les paragraphes html
+// http://doc.spip.org/@traiter_retours_chariots
 function traiter_retours_chariots($letexte) {
 	$letexte = preg_replace(",\r\n?,S", "\n", $letexte);
 	$letexte = preg_replace(",<p[>[:space:]],iS", "\n\n\\0", $letexte);
