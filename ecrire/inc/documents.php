@@ -153,7 +153,10 @@ function document_et_vignette($document, $url, $portfolio=false) {
 				$image = image_pattern($vignette);
 			} else {
 				include_spip('inc/filtres');
-				$image = filtrer('image_reduire', get_spip_doc($vignette['fichier']), 120, 110, false, true);
+				$loc = get_spip_doc($vignette['fichier']);
+				$image = filtrer('image_reduire', $loc, 120, 110, false, true);
+				if ($loc == $image)
+					$image = image_pattern($vignette);
 			}
 	}
 	else if (in_array($extension,
