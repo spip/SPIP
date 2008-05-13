@@ -768,7 +768,6 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 
 
 // L
-'les_deux' => 'les deux',
 'lien_ajout_destinataire' => 'Ajouter ce destinataire',
 'lien_ajouter_auteur' => 'Ajouter cet auteur',
 'lien_ajouter_participant' => 'Ajouter un participant',
@@ -1210,6 +1209,7 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 
 
 // U
+'upload_zip_conserver' => 'Conserver l&#8217;archive apr&#232;s extraction',
 'utf8_convert_attendez' => 'Attendez quelques instants et rechargez cette page.',
 'utf8_convert_avertissement' => 'Vous vous appr&ecirc;tez &agrave; convertir le contenu de votre base de donn&eacute;es (articles, br&egrave;ves, etc) du jeu de caract&egrave;res <b>@orig@</b> vers le jeu de caract&egrave;res <b>@charset@</b>.',
 'utf8_convert_backup' => 'N\'oubliez pas de faire auparavant une sauvegarde compl&egrave;te de votre site. Vous devrez aussi v&eacute;rifier que vos squelettes et fichiers de langue sont compatibles @charset@.',

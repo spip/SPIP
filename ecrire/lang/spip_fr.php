@@ -742,7 +742,7 @@ et vous reconnecter au site.
 'upload_limit' => 'Ce fichier est trop gros pour le serveur&nbsp;; la taille maximum autoris&eacute;e en <i>upload</i> est de @max@.',
 'upload_zip_decompacter' => 'd&eacute;compress&eacute; et chaque &eacute;l&eacute;ment qu\'il contient install&eacute; sur le site. Les fichiers qui seront alors install&eacute;s sur le site sont&nbsp;:',
 'upload_zip_telquel' => 'install&eacute; tel quel, en tant qu\'archive compress&eacute;e Zip&nbsp;;',
-'upload_zip_titrer' => 'Dans les deux derniers cas, cocher cette case pour que SPIP nomme chaque &eacute;l&eacute;ment d\'apr&egrave;s le nom du fichier.',
+'upload_zip_titrer' => 'Titrer selon le nom des fichiers',
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balise B en aval',
