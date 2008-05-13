@@ -46,19 +46,37 @@ function hide_obj(obj) {
 
 // deplier un ou plusieurs blocs
 jQuery.fn.showother = function(cible) {
-	if (this.is('.replie')) {
-		this.addClass('deplie').removeClass('replie');
-		jQuery(cible)/*.show()*/.slideDown('fast').addClass('blocdeplie').removeClass('blocreplie');
+	var me = this;
+	if (me.is('.replie')) {
+		me.addClass('deplie').removeClass('replie');
+		jQuery(cible)
+		.slideDown('fast',
+			function(){
+				jQuery(me)
+				.addClass('blocdeplie')
+				.removeClass('blocreplie')
+				.removeClass('togglewait');
+			}
+		);
 	}
 	return this;
 }
 
 // replier un ou plusieurs blocs
 jQuery.fn.hideother = function(cible) {
-	if (!this.is('.replie')){
-		this.addClass('replie').removeClass('deplie');
-		jQuery(cible)/*.hide()*/.slideUp('fast').removeClass('blocdeplie').addClass('blocreplie');
-	}
+	var me = this;
+	if (!me.is('.replie')){
+		me.addClass('replie').removeClass('deplie');
+		jQuery(cible)
+		.slideUp('fast',
+			function(){
+				jQuery(me)
+				.addClass('blocreplie')
+				.removeClass('blocdeplie')
+				.removeClass('togglewait');
+			}
+		);
+}
 	return this;
 }
 
@@ -71,9 +89,9 @@ jQuery.fn.toggleother = function(cible) {
 }
 
 // deplier/replier en hover
-// on le fait subtilement : on attend 350ms avant de deplier, periode
+// on le fait subtilement : on attend 400ms avant de deplier, periode
 // durant laquelle, si la souris  sort du controle, on annule le depliement
-// idem au repliement, mais avec une periode plus longue (1000s)
+// idem au repliement, mais avec une periode plus longue (700ms)
 // Cette fonction est appelee a chaque hover d'un bloc depliable
 // la premiere fois, elle initialise le fonctionnement du bloc ; ensuite
 // elle ne fait plus rien
@@ -89,11 +107,10 @@ jQuery.fn.depliant = function(cible) {
 
 		// effectuer le premier hover
 		.addClass('hover')
-		.addClass('hoverwait');
+		.addClass('togglewait');
 		var t = setTimeout(function(){
-			me
-			.toggleother(cible)
-			.removeClass('hoverwait');
+			me.toggleother(cible);
+			t = null;
 		},
 			me.is('.deplie') ? timer : timed
 		);
@@ -101,22 +118,34 @@ jQuery.fn.depliant = function(cible) {
 		me
 		// programmer les futurs hover
 		.hover(function(e){
-			me.addClass('hover')
-			.addClass('hoverwait');
-			if (t) { clearTimeout(t); t = null; }
-			t = setTimeout(function(){
-				me.toggleother(cible)
-				.removeClass('hoverwait');
-				},
-				me.is('.deplie') ? timer : timed
-			);
+			me
+			.addClass('hover');
+			if (!me.is('.deplie')) {
+				me.addClass('togglewait');
+				if (t) { clearTimeout(t); t = null; }
+				t = setTimeout(function(){
+					me.toggleother(cible);
+					t = null;
+					},
+					me.is('.deplie') ? timer : timed
+				);
+			}
 		}
 		, function(e){
 			if (t) { clearTimeout(t); t = null; }
-			jQuery(this)
-			.removeClass('hover')
-			.removeClass('hoverwait');
-		});
+			me
+			.removeClass('hover');
+		})
+
+		// gerer le triangle clicable
+		.find("a.titremancre")
+			.click(function(){
+				if (me.is('.togglewait') || t) return false;
+				me
+				.toggleother(cible);
+			})
+		.end();
+
 	}
 	return this;
 }
