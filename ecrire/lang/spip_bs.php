@@ -644,12 +644,7 @@ Obratite paznu na ovu referencu, ponovo pokusajte nadogradnju i na kraju provjer
 'trad_reference' => '(preporuceni clanak)',
 
 // U
-'upload_fichier_zip' => 'ZIP dokument',
-'upload_fichier_zip_texte' => 'Dokument koji predlazete za upload, je ZIP dokument.',
-'upload_fichier_zip_texte2' => 'Ovaj dokument moze biti:',
 'upload_limit' => 'Ovaj dokument je prevelik za server; dozvoljena maksimalna velicina za <i>upload</i> je @max@.',
-'upload_zip_decompacter' => 'dekompresovan i svaki sadrzani dokument ce biti instaliran na stranicu. Dokumenti koji ce biti instalirani su:',
-'upload_zip_telquel' => 'instaliran kakav jeste, u ZIP formatu;',
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: oznaka B kasni u petlji',

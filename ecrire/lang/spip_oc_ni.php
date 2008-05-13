@@ -726,12 +726,7 @@ e vos tornar connectar au sit.
 'trad_reference' => '(article de referen&ccedil;a)',
 
 // U
-'upload_fichier_zip' => 'Fichier ZIP',
-'upload_fichier_zip_texte' => 'Lo fichier que prepausatz d\'installar es un fichier ZIP.',
-'upload_fichier_zip_texte2' => 'Aqu&egrave;u fichier p&ograve;u &egrave;stre&nbsp;:',
 'upload_limit' => 'Aqu&egrave;u fichier es tr&ograve;p gr&ograve;s per lo servidor; la talha maximala autorisada en <i>upload</i> es de @max@.',
-'upload_zip_decompacter' => 'descomprimit e cada element que conten installat sus lo sit. Alora lu fichiers que ser&agrave;n installats sus lo sit son&nbsp;:',
-'upload_zip_telquel' => 'installat tau quau, coma archiu comprimit Zip;',
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balisa B en aval',

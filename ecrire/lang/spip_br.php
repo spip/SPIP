@@ -717,12 +717,7 @@ Aliet oc\'h da chom hep kemm tra pe dra keit ha ma n\'oc\'h ket boaz ouzh SPIP.
 'trad_reference' => '(pennad-orin)',
 
 // U
-'upload_fichier_zip' => 'Restr ZIP',
-'upload_fichier_zip_texte' => 'Ur restr Zip eo ar restr a ginnigit stalia&ntilde;.',
-'upload_fichier_zip_texte2' => 'Gallout a ra hennezh beza&ntilde;&nbsp;:',
 'upload_limit' => 'Re vras eo ar restr-se evit ar servijer&nbsp;; @max@ eo ar ment brasa&ntilde; aotreet evit an <i>upload</i>.',
-'upload_zip_decompacter' => 'diwaeget, ha pep elfenn enna&ntilde; staliet el lec\'hienn. Ar restro&ugrave; staliet euze war al lec\'hienn a vo&nbsp;:',
-'upload_zip_telquel' => 'staliet evel-henn, da lavaret eo restro&ugrave; gwaeget Zip&nbsp;;',
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balizenn B diardraon',

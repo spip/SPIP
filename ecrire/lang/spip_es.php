@@ -714,12 +714,7 @@ Intenta',
 'trad_reference' => '(art&iacute;culo de referencia)',
 
 // U
-'upload_fichier_zip' => 'Archivo ZIP',
-'upload_fichier_zip_texte' => 'El archivo que te propones instalar es un archivo Zip.',
-'upload_fichier_zip_texte2' => 'Este archivo puede ser:',
 'upload_limit' => 'Este archivo es demasiado grande para el servidor; el tama&ntilde;o m&aacute;ximo autorizado en <i>upload</i> es de @max@.',
-'upload_zip_decompacter' => 'descomprimido y cada elemento que contiene instalado en el sitio. Los archivos que se van a instalar en el sitio son:',
-'upload_zip_telquel' => 'instalado tal cual, como archivo Zip comprimido;',
 
 // Z
 'zbug_balise_b_aval' => ': balize de bucle B m&aacute;s adelante',

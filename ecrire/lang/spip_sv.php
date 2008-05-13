@@ -721,12 +721,7 @@ och koppla upp dig mot sajten igen.
 'trad_reference' => '(refererad artikel)',
 
 // U
-'upload_fichier_zip' => 'ZIP fil',
-'upload_fichier_zip_texte' => 'Filen du f&ouml;rs&ouml;ker installera &auml;r en ZIP-fil.',
-'upload_fichier_zip_texte2' => 'Den h&auml;r filen kan:',
 'upload_limit' => 'Den h&auml;r filen &auml;r f&ouml;r stor f&ouml;r servern; Den maimala storleken som kan <i>laddas upp</i> &auml;r @max@.',
-'upload_zip_decompacter' => 'uppackad och alla filerna kommer ahh bli installerade p&aring; sajten. De filer som kommer att installeras &auml;r:',
-'upload_zip_telquel' => 'installerad som den &auml;r, som en ZIP-fil;',
 
 // Z
 'zbug_balise_b_aval' => ': B taggen f&ouml;r sent i loopen',

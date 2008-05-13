@@ -733,12 +733,7 @@ sub la respondeco de la &#265;efa retejestro .</b>',
 'trad_reference' => '(referenca artikolo)',
 
 // U
-'upload_fichier_zip' => 'ZIP-Dosiero (densigita)',
-'upload_fichier_zip_texte' => 'La dosiero, kiun vi proponas instali estas densigita dosiero (zip).',
-'upload_fichier_zip_texte2' => 'Tiu dosiero povas esti&nbsp;:',
 'upload_limit' => 'Tiu dosiero estas tro granda por la servilo&nbsp;; la maksimuma grandeco permesata en <i>upload</i> estas @max@.',
-'upload_zip_decompacter' => 'maldensigita kaj &#265;iu elemento, kiun &#285;i enhavas estas instalita &#265;e la retejo. La dosieroj kiuj estos sekve instalitaj &#265;e la retejo estas&nbsp;:',
-'upload_zip_telquel' => 'instalita tia, kia &#285;i estas, kiel densigita Zip-arkivo&nbsp;;',
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: posta B marko',

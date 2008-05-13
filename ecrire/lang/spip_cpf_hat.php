@@ -726,12 +726,7 @@ l&egrave;s plit&ograve; jestyon paj sa-yo pou w&egrave;bm&egrave;t prensipal sou
 'trad_reference' => '(atik pou referans)',
 
 // U
-'upload_fichier_zip' => 'Fichye ZIP',
-'upload_fichier_zip_texte' => 'Fichye sak w ap pwopoze instale se yon fichye Zip.',
-'upload_fichier_zip_texte2' => 'Fichye se pet&egrave;t&nbsp;:',
 'upload_limit' => 'Fichye a se two gwo pou serv&egrave;r la &nbsp;; pli gran tay posib pou <i>upload</i>se @max@.',
-'upload_zip_decompacter' => 'dekonprese ek chak eleman li ka kontni se instale sou sit-la. Fichye yo ke instale sou sit-la se &nbsp;:',
-'upload_zip_telquel' => 'te enstale komsa kom achiv koprese Zip&nbsp;;',
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: baliz B anba',

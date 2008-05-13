@@ -698,12 +698,7 @@ N&#7871;u b&#7841;n &#273;em v&agrave;o nh&#7919;ng h&igrave;nh &#7843;nh trong 
 'trad_reference' => '(b&agrave;i n&#7889;i k&#7871;t)',
 
 // U
-'upload_fichier_zip' => 'H&#7891; s&#417; ZIP',
-'upload_fichier_zip_texte' => 'H&#7891; s&#417; b&#7841;n t&iacute;nh thi&#7871;t tr&iacute; l&agrave; h&#7891; s&#417; ZIP.',
-'upload_fichier_zip_texte2' => 'H&#7891; s&#417; n&agrave;y c&oacute; th&#7875;:',
 'upload_limit' => 'H&#7891; s&#417; n&agrave;y qu&aacute; to cho server; kh&#7893; l&#7899;n nh&#7845;t cho ph&eacute;p <i>&#273;em l&ecirc;n</i> l&agrave; @max@.',
-'upload_zip_decompacter' => '&#273;&#432;&#7907;c m&#7903; ra v&agrave; h&#7891; s&#417; trong &#273;&oacute; s&#7869; &#273;&#432;&#7907;c thi&#7871;t tr&iacute; v&agrave;o trang web. C&aacute;c h&#7891; s&#417; s&#7869; &#273;&#432;&#7907;c thi&#7871;t tr&iacute; l&agrave;:',
-'upload_zip_telquel' => 'thi&#7871;t tr&iacute; y nguy&ecirc;n, h&#7891; s&#417; ZIP;',
 
 // Z
 'zbug_balise_b_aval' => ': B tag too late in loop',

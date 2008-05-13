@@ -731,12 +731,7 @@ a nast&#281;pnie sprawd&#378; czy obrazki pojawiaj&#261; si&#281; zawsze w artyk
 'trad_reference' => '(artyku&#322; wzorcowy)',
 
 // U
-'upload_fichier_zip' => 'Plik ZIP',
-'upload_fichier_zip_texte' => 'Plik, kt&oacute;ry chcesz zainstalowa&#263; jest plikiem ZIP.',
-'upload_fichier_zip_texte2' => 'Ten plik mo&#380;e by&#263;&nbsp;:',
 'upload_limit' => 'Ten plik jest zbyt du&#380;y dla serwera&nbsp;;maksymalny rozmiar pliku zapisywanego na serwerze to @max@.',
-'upload_zip_decompacter' => 'zdekompresowany i ka&#380;dy jego element zostanie zainstalowany w serwisie. Pliki, kt&oacute;re zostan&#261; zainstalowane w serwisie to:',
-'upload_zip_telquel' => 'zostan&#261; zainstalowane jako archiwum Zip;',
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balise B en aval',

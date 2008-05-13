@@ -683,12 +683,7 @@ Pr&oacute;b&aacute;ljon',
 'trad_reference' => '(eredeti cikk)',
 
 // U
-'upload_fichier_zip' => 'ZIP tipus&uacute; f&aacute;jl',
-'upload_fichier_zip_texte' => 'ZIP tipus&uacute; az a f&aacute;jl, amit akar telep&iacute;teni.',
-'upload_fichier_zip_texte2' => 'Ez a f&aacute;jl lehet :',
 'upload_limit' => 'Ez a f&aacute;jl t&uacute;l nagy a szervernek; a m&aacute;ximalis <i>felt&ouml;lt&eacute;si</i> m&eacute;ret @max@.',
-'upload_zip_decompacter' => 'kit&ouml;m&ouml;ritve, &eacute;s az &ouml;sszes eleme a honlapra telep&iacute;tve. A honlapra telep&iacute;tett f&aacute;jlok a k&ouml;vetkez&#337;k lesznek :',
-'upload_zip_telquel' => 'Egymag&aacute;ban telep&iacute;tve, mint ZIP t&ouml;m&ouml;r&iacute;tett &aacute;ll&oacute;m&aacute;ny;',
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: B jelz&#337; ut&aacute;n',

@@ -720,12 +720,7 @@ aou l&egrave;s laz&eacute;styon do bann paz-la pou lo w&egrave;bm&egrave;t prins
 'trad_reference' => '(Lartik-p&eacute;i de r&eacute;f&eacute;rans)',
 
 // U
-'upload_fichier_zip' => 'Fisy&eacute; ZIP',
-'upload_fichier_zip_texte' => 'Fisy&eacute;-l&agrave; sak ou v&eacute; instal&eacute; l&eacute; inn fisy&eacute; Zip.',
-'upload_fichier_zip_texte2' => 'Fisy&eacute;-la l&eacute; pit&egrave;t&nbsp;:',
 'upload_limit' => 'Fisy&eacute;-l li l&eacute; tro gro pou lo s&egrave;rv&egrave;r&nbsp;; pli gran tay l&eacute; posib <i>upload</i> sa l&eacute; @max@.',
-'upload_zip_decompacter' => 'd&eacute;kopres&eacute; &eacute; sakinn z&eacute;l&eacute;man ali sr&eacute; pou instal&eacute; si lo sit. Tout bann fisy&eacute; pou instal i sra lor&nbsp;:',
-'upload_zip_telquel' => 'instal&eacute; komsa kom in larsiv kopres&eacute; Zip&nbsp;;',
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: baliz B anl&egrave;r',

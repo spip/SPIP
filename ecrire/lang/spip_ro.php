@@ -722,12 +722,7 @@ Ve&#355;i putea dup&#259; aceea alege o nou&#259; parol&#259; &#351;i ve&#355;i 
 'trad_reference' => '(articol de referin&#355;&#259;)',
 
 // U
-'upload_fichier_zip' => 'Fi&#351;ier ZIP',
-'upload_fichier_zip_texte' => 'Fi&#351;ierul pe care propune&#355;i spre instalare este un fi&#351;ier ZIP.',
-'upload_fichier_zip_texte2' => 'Acest fi&#351;ier poate fi&nbsp;:',
 'upload_limit' => 'Acest fi&#351;ier este prea mare pentru server&nbsp;; talia maximal&#259; autorizat&#259; &icirc;n directorul <i>upload</i> este de @max@.',
-'upload_zip_decompacter' => 'decomprimat &#351;i fiecare element con&#355;inut instalat pe site. Fi&#351;ierele care vor fi instalate pe site sunt&nbsp;:',
-'upload_zip_telquel' => 'instalat ca atare, ca arhiv&#259; comprimat&#259; ZIP&nbsp;;',
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: element B &icirc;nainte',
