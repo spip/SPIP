@@ -6,6 +6,12 @@
 	[<p class="formulaire_message">(#ENV**{_deja_loge})</p>]
 	[<p class="formulaire_message">(#ENV**{message_ok})</p>]
 	[<p class='formulaire_erreur'>(#ENV**{message_erreur})</p>]
+
+	[(#ENV{echec_cookie})<fieldset class='formulaire_erreur'>
+	<h2><:avis_erreur_cookie:></h2>
+	<p><:login_cookie_oblige:><br /><:login_cookie_accepte:></p>
+	</fieldset>]
+
 	[(#ENV{editable})
 	<form id='formulaire_login' method='post' action='#ENV{action}' enctype='multipart/form-data'>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
@@ -22,13 +28,11 @@
 		    <li class="editer_password obligatoire">
 		      <label for="password"><:login_pass2:></label>
 		      <input class='password' type='password' name='password' id='password' value="" size='40' />
-					<em id='pass_securise'[(#ENV{_alea_actuel}|?{'',' '})style='display:none;']><img src='#EVAL{_DIR_IMG_PACK}securise.gif' width='16' height='16' alt='<:login_securise:>' /></em>
 					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{password})</span>]
 					<span class='details'>&#91;<a href="#URL_PAGE{spip_pass}" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=330'); return false;"><:login_motpasseoublie:></a>&#93;</span>
 		    </li>
 				[(#ENV{rester_connecte})
-					<li><input class='checkbox' type="checkbox" name="session_remember" id="session_remember" value="oui" [(#ENV**{cnx}|?{' '})checked="checked"]
-					class="intact" onchange="this.className='';" />
+					<li><input class='checkbox' type="checkbox" name="session_remember" id="session_remember" value="oui" [(#ENV**{cnx}|?{' '})checked="checked"] onchange="jQuery(this).addClass('modifie');" />
 					<label class='nofx' for="session_remember"><:login_rester_identifie:></label></li>
 				]
 			</ol>
@@ -58,20 +62,19 @@ var alea_futur='#ENV{_alea_futur,''}';
 var login='#ENV{var_login,''}';
 var informe_auteur_en_cours = false;
 function informe_auteur(c){
+	informe_auteur_en_cours = false;
 	eval('c = '+c); // JSON
 	if (c) {
 		alea_actuel = c.alea_actuel;
 		alea_futur = c.alea_futur;
-		jQuery('input#session_login_hidden').attr('value',c.login);
 		// indiquer le cnx si on n'y a pas touche
-		jQuery('input#session_remember.intact')
-		.attr('checked',c.cnx=='1'?'checked':'');
+		jQuery('input#session_remember:not(.modifie)')
+		.attr('checked',(c.cnx=='1')?'checked':'');
 		jQuery('#spip_logo_auteur').html(c.logo);
-		jQuery('#pass_securise').show();
 	} else {
 		jQuery('#spip_logo_auteur').html('');
+		alea_actuel = '';
 	}
-	informe_auteur_en_cours = false;
 }
 function calcule_md5_pass(pass){
 	if (alea_actuel) {
@@ -81,41 +84,40 @@ function calcule_md5_pass(pass){
 	}
 }
 function actualise_auteur(){
-	if (login!=jQuery('#var_login').attr('value')) {
-		login = jQuery('#var_login').attr('value');
+	if (login != jQuery('#var_login').attr('value')) {
 		informe_auteur_en_cours = true;
+		login = jQuery('#var_login').attr('value');
 		$.get('#URL_ACTION{informer_auteur}',{var_login:login},informe_auteur);
 	}
 }
-jQuery('#var_login').change(function(){actualise_auteur();});
+jQuery('#password').after("<em id='pass_securise'><img src='#EVAL{_DIR_IMG_PACK}securise.gif' width='16' height='16' alt='<:login_securise:>' title='<:login_securise:>' \/><\/em>");
+
+jQuery('#var_login').change(actualise_auteur);
+
 jQuery('form#formulaire_login').submit(function(){
+	actualise_auteur();
 	pass = jQuery('input[@name=password]').attr('value');
 	// ne jamais laisser le pass circuler en clair
 	if (pass) {
-		if (alea_actuel)
-			// on a l'alea, on peut lancer le submit apres avoir hashe le pass
-			calcule_md5_pass(pass);
-		else {
-			// on a pas encore l'alea de l'auteur
-			// retrouver les alea de l'auteur qui ne sont pas encore arrives (remplissage auto des champs par le navigateur) !
-			
-			// si l'information est en cours, retenter sa chance
-			if (informe_auteur_en_cours) {
-				setTimeout(function(){jQuery('form#formulaire_login').submit();},300);
-				return false;
-			}
-
-			// sinon lancer une demande
-			informe_auteur_en_cours = true;
-			$.get('#URL_ACTION{informer_auteur}',{var_login:jQuery('#var_login').attr('value')},function(c) {
-				informe_auteur(c);
-				// le formulaire sera soumis apres reception des info auteur
-				jQuery('form#formulaire_login').submit();
-			});
-			// ou dans un delai maxi de 5s (pour eviter le blocage a cette etape)
+		// si l'information est en cours, retenter sa chance
+		if (informe_auteur_en_cours) {
 			setTimeout(function(){
 				jQuery('form#formulaire_login').submit();
-			},5000);
+			}, 1000);
+			return false;
+		}
+
+		// Si on a l'alea, on peut lancer le submit apres avoir hashe le pass
+		if (alea_actuel) {
+			calcule_md5_pass(pass);
+		}
+		// sinon c'est que l'auteur n'existe pas
+		else {
+			var alert = jQuery("<div class='formulaire_erreur'>"
+				+ (<:login_identifiant_inconnu|_q:>.replace(/@login@/, login))
+				+ "<\/div>")
+				.appendTo(jQuery("#var_login").parent());
+			setTimeout(function() {alert.slideUp();}, 3000);
 			return false;
 		}
 	}

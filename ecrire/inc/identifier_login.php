@@ -97,7 +97,7 @@ function informer_login($login){
 		}
 		unset($row['source']);
 		$prefs = unserialize($row['prefs']);
-		$row['cnx'] = $prefs['cnx'] == 'perma' ? '1' : '0';
+		$row['cnx'] = ($prefs['cnx'] == 'perma') ? '1' : '0';
 		unset($row['prefs']);
 		
 		$page = evaluer_fond('formulaires/logo_auteur', array('id_auteur'=>$row['id_auteur']));
