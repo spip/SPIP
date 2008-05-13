@@ -1,9 +1,11 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'activer_plugin' => 'Aktivigi la kromprogramon',
@@ -14,9 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'Neniu rezulto.',
 'avis_chemin_invalide_1' => 'La alirvojo, kiun vi elektis, ',
 'avis_chemin_invalide_2' => 'ne &#349;ajnas ta&#365;gi. Bonvolu reveni al la anta&#365;a pa&#285;o kaj kontroli la entajpitajn datenojn.',
-'avis_connexion_echec_1' => 'Konekti&#285;o al SQL-servilo malsukcesis.',
+'avis_connexion_echec_1' => '<MODIF>Konekti&#285;o al SQL-servilo malsukcesis.',
 'avis_connexion_echec_2' => 'Revenu al la anta&#365;a pa&#285;o, kaj kontrolu entajpitajn datenojn.',
-'avis_connexion_echec_3' => '<b>N.B.</b> &#264;e multaj serviloj, vi devas <b>peti</b> aktivigon de via aliro al SQL-datenbazo anta&#365; ol uzi &#285;in. Se vi ne povas konekti&#285;i, kontrolu ke vi ja faris tiun demar&#349;on.',
+'avis_connexion_echec_3' => '<MODIF><b>N.B.</b> &#264;e multaj serviloj, vi devas <b>peti</b> aktivigon de via aliro al SQL-datenbazo anta&#365; ol uzi &#285;in. Se vi ne povas konekti&#285;i, kontrolu ke vi ja faris tiun demar&#349;on.',
 'avis_connexion_ldap_echec_1' => 'Konekti&#285;o al LDAP-servilo malsukcesis.',
 'avis_connexion_ldap_echec_2' => 'Revenu al la anta&#365;a pa&#285;o, kaj kontrolu la entajpitajn datenojn. ',
 'avis_connexion_ldap_echec_3' => 'Eventuale, provu ne uzi LDAP-materialon por importi uzantojn.',
@@ -47,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_sites_syndiques_probleme' => 'Tiuj abonligitaj retejoj okazigis problemon',
 'avis_suppression_base' => 'ATENTU, forvi&#349;o de datenoj estas definitiva',
 'avis_version_mysql' => 'Via SQL-versio (@version_mysql@) ne ebligas memriparon de datenbazaj tabeloj.',
-
 
 // B
 'bouton_acces_ldap' => 'Aldoni aliron al LDAP',
@@ -109,7 +110,6 @@ forvi&#349;i ilin poste).',
 'bouton_vider_cache' => 'Malplenigi la staplon',
 'bouton_voir_message' => 'Anta&#365;rigardi anta&#365; ol validigi la mesa&#285;on',
 
-
 // C
 'cache_mode_compresse' => 'Dosieroj de la staplo estas registritaj la&#365; densigita modo.',
 'cache_mode_non_compresse' => 'La dosieroj de staplo estas registritaj la&#365; ne-densigita modo.',
@@ -126,7 +126,6 @@ forvi&#349;i ilin poste).',
 'connexion_ldap' => 'Konekti&#285;o :',
 'copier_en_local' => 'Kopii en lokan komputilon',
 
-
 // D
 'date_mot_heures' => 'horoj',
 'diff_para_ajoute' => 'Paragrafo aldonita',
@@ -136,7 +135,6 @@ forvi&#349;i ilin poste).',
 'diff_texte_deplace' => 'Teksto translokita',
 'diff_texte_supprime' => 'Teksto forvi&#349;ita',
 'double_clic_inserer_doc' => 'Dufoje musklaku por enigi tiun rapidligilon en la tekston',
-
 
 // E
 'email' => 'retpo&#349;tadreso',
@@ -184,10 +182,8 @@ forvi&#349;i ilin poste).',
 'erreur_plugin_tag_plugin_absent' => '&lt;kromprogramo&gt; mankas en tiu difina dosiero',
 'erreur_plugin_version_manquant' => 'Kromprogramo-versio mankas',
 
-
 // F
 'forum_info_original' => 'originala',
-
 
 // I
 'ical_info1' => 'Tiu pa&#285;o prezentas plurajn metodojn por da&#365;re ricevi informojn pri la vivo de tiu retejo.',
@@ -531,7 +527,7 @@ postulas disponi je FTP-alirrajto al la retejo.',
 'info_reglage_ldap' => 'Opcioj: <b>Agordo de la LDAP-el&#349;uto</b>',
 'info_renvoi_article' => '<b>Alidirektigo.</b> Tiu artikolo alidirektas al la pa&#285;o:',
 'info_reserve_admin' => 'Nur la mastrumantoj povas modifi tiun &#265;i adreson.',
-'info_restauration_sauvegarde' => 'Resta&#365;ro de la savkopio @archive@',
+'info_restauration_sauvegarde' => '<MODIF>Resta&#365;ro de la savkopio @archive@',
 'info_restreindre_rubrique' => 'Limigi la mastrumadon al la rubriko:',
 'info_resultat_recherche' => 'Ser&#265;o-rezultoj:',
 'info_rubriques' => 'Rubrikoj',
@@ -706,13 +702,10 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'item_utiliser_syndication' => 'Uzi la a&#365;tomatan abonrilaton',
 'item_visiteur' => 'vizitanto',
 
-
 // J
 'jour_non_connu_nc' => 'ne konata',
 
-
 // L
-'les_deux' => 'amba&#365;',
 'lien_ajout_destinataire' => 'Aldoni tiun adresaton',
 'lien_ajouter_auteur' => 'Aldoni tiun a&#365;toron',
 'lien_ajouter_participant' => 'Aldoni partoprenanton',
@@ -746,7 +739,6 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'logo_standard_rubrique' => 'LA&#364;NORMA VINJETO DE RUBRIKOJ',
 'logo_survol' => 'VINJETO POR FLUGRIGARDO',
 
-
 // M
 'menu_aide_installation_choix_base' => 'Elekto de via datenbazo',
 'module_fichier_langue' => 'Lingva dosiero',
@@ -755,7 +747,6 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'module_texte_explicatif' => 'Vi povas inkludi la jenajn rapid-klakeblojn en la skeletojn de via publika retejo. Ili estos a&#365;tomate tradukitaj en la diversajn lingvojn, kiuj havas specifan lingvan dosieron.',
 'module_texte_traduction' => 'La lingva dosiero &laquo;&nbsp;@module@&nbsp;&raquo; disponeblas en&nbsp;:',
 'mois_non_connu' => 'nekonata',
-
 
 // O
 'onglet_repartition_actuelle' => 'nun',
@@ -773,7 +764,6 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'ortho_verif_impossible' => 'La sistemo ne povas kontroli la ortografion de tiu teksto.',
 'ortho_verifier' => 'Kontrolu la ortografion',
 
-
 // P
 'pas_de_proxy_pour' => 'La&#365;bezone, indiku komputilojn a&#365; domajnojn por kiuj tiu prokurservilo ne devas apliki&#285;i (ekzemple&nbsp;: @exemple@)',
 'plugin_etat_developpement' => 'disvolvata',
@@ -786,10 +776,8 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'plugins_liste' => 'Listo de kromprogramoj',
 'protocole_ldap' => 'Protokolversio :',
 
-
 // R
 'repertoire_plugins' => 'Dosierujo&nbsp;:',
-
 
 // S
 'sauvegarde_fusionner' => 'Kunfandi la nunan bazon kaj la savkopion',
@@ -804,7 +792,6 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'syndic_option_resume_non' => 'la kompleta enhavo de la artikoloj (HTML-formate)',
 'syndic_option_resume_oui' => 'simpla resumo (tekt-formate)',
 'syndic_options' => 'Abon-agordoj&nbsp;:',
-
 
 // T
 'taille_cache_image' => 'La bildoj a&#365;tomate komputitaj de SPIP (vijnetoj de dokumentoj, titoloj prezentitaj la&#365; grafika formo, matematikaj funkcioj la&#365; TeX-formato...) okupas en dosierujo @dir@ spacon je @taille@.',
@@ -856,7 +843,7 @@ NUR por retejo starigita per la sama versio de SPIP. Nepre ne "&nbsp;malplenigu 
 'texte_config_groupe_mots_cles' => '&#264;u vi deziras aktivigi la plendetalan konfiguron de la &#349;losilvortoj,
    indikante ekzemple ke oni povas elekti po unu vorton en grupo,
    ke iu grupo estu grava... ?',
-'texte_connexion_mysql' => 'Konsultu la informojn donitajn de via retgastiganto&nbsp;: en ili, vi trovos la ensalutilojn necesajn por konekti&#285;i al la SQL-servilo.',
+'texte_connexion_mysql' => '<MODIF>Konsultu la informojn donitajn de via retgastiganto&nbsp;: en ili, vi trovos la ensalutilojn necesajn por konekti&#285;i al la SQL-servilo.',
 'texte_contenu_article' => '(Kelkvorta enhavo-priskribo de la artikolo.)',
 'texte_contenu_articles' => 'La&#365; la modelo adoptita por via retejo, vi povas decidi
   ke certaj elementoj de la artikoloj ne estu uzataj.
@@ -1107,8 +1094,12 @@ faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
 'trad_lier' => 'Tiu artikolo estas traduko de la artikolo numero&nbsp;:',
 'trad_new' => 'Skribi novan tradukon de tiu artikolo',
 
-
 // U
+'upload_fichier_zip' => 'ZIP-Dosiero (densigita)',
+'upload_fichier_zip_texte' => 'La dosiero, kiun vi proponas instali estas densigita dosiero (zip).',
+'upload_fichier_zip_texte2' => 'Tiu dosiero povas esti&nbsp;:',
+'upload_zip_decompacter' => 'maldensigita kaj &#265;iu elemento, kiun &#285;i enhavas estas instalita &#265;e la retejo. La dosieroj kiuj estos sekve instalitaj &#265;e la retejo estas&nbsp;:',
+'upload_zip_telquel' => 'instalita tia, kia &#285;i estas, kiel densigita Zip-arkivo&nbsp;;',
 'utf8_convert_attendez' => 'Atendu kelkajn momentojn kaj refre&#349;igu tiun pa&#285;on.',
 'utf8_convert_avertissement' => 'Vi estas konvertonta la enhavon de via datenbazo (artikoloj, fulm-informoj, ktp...) kun la litertiparo <b>@orig@</b> al la litertiparo <b>@charset@</b>.',
 'utf8_convert_backup' => 'Anta&#365;e, ne forgesu fari kompletan savkopion de via retejo. Vi devos anka&#365; kontroli, ke viaj skeletoj kaj lingvaj dosieroj kungruas kun @charset@.',
@@ -1119,12 +1110,9 @@ faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
 'utf8_convert_verifier' => 'Vi devas nun malplenigi la staplon, kaj kontroli ke &#265;io bonas &#265;e la publikaj pa&#285;oj de la retejo. Kaze de grava problemo, savkopio de viaj datenoj estas farita (je la SQL-formato) en la dosierujo @rep@.',
 'utf8_convertir_votre_site' => 'Konverti vian retejon en utf-8',
 
-
 // V
 'version' => 'Versio&nbsp;:',
 'version_initiale' => 'Komenca versio'
-
 );
-
 
 ?>

@@ -1,9 +1,11 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'aide_non_disponible' => 'On line delakoaren laguntza-atal hau prestatzeke dago hizkuntza honetan.',
@@ -12,16 +14,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'Ez dago emaitzarik.',
 'avis_chemin_invalide_1' => 'Aukeratutako bideak',
 'avis_chemin_invalide_2' => 'ez dirudi egokia. Itzul zaitezaurreko orrialdera eta egiazta itzazu sartutako informazioak.',
-'avis_connexion_echec_1' => 'MySQL zerbitzariarekiko lokarriak huts egin du.',
+'avis_connexion_echec_1' => '<MODIF>SQL zerbitzariarekiko lokarriak huts egin du.',
 'avis_connexion_echec_2' => 'Itzul zaitez aurreko orrialdera eta egiazta itzazu sartutako informazioak.',
-'avis_connexion_echec_3' => '<MODIF>ADI: Zerbitzari askotan, erabili ahal izan aurretikMySQL baserako sarreraren aktibatzea eskatu behar da. Ezin baduzu konektatu, egiaztaezazu tramite hori bete duzula.',
+'avis_connexion_echec_3' => '<MODIF>ADI: Zerbitzari askotan, erabili ahal izan aurretikSQL baserako sarreraren aktibatzea eskatu behar da. Ezin baduzu konektatu, egiaztaezazu tramite hori bete duzula.',
 'avis_connexion_ldap_echec_1' => 'LDAPzerbitzariarekiko lokarriak huts egin du',
 'avis_connexion_ldap_echec_2' => 'Itzul zaitezaurreko orrialdera eta egiazta itzazu sartutako informazioak.',
 'avis_connexion_ldap_echec_3' => 'Horren ordez, erabiltzaileak inportatzeko ez erabiliLDAP euskarria.',
 'avis_conseil_selection_mot_cle' => 'Talde garrantzitsua: taldehonetatik gako-hitz bat aukeratzea aholkatzen da.',
 'avis_deplacement_rubrique' => 'ADI EGON!. Atal honek (@contient_breves@)breve@scb@.Mugitzen baduzu, eraginezazu baieztapen-kutxatila hau.',
 'avis_destinataire_obligatoire' => 'Mezu hau igorriaurretik jasotzailea zehaztu behar duzu.',
-'avis_erreur_connexion_mysql' => 'MySQLlokarri-errorea',
+'avis_erreur_connexion_mysql' => 'SQLlokarri-errorea',
 'avis_erreur_version_archive' => '<MODIF>¡ADI! @archive@ fitxategia besteSPIP bertsio bati dagokio, instalatutakoaren desberdina. Arazo larriak edukitzekoarriskuan zaude: Zure datu-basearen suntsiketa, lekuaren zenbait disfuntzio, eta abar. Ezbaliozkotu inportazio hau.Informazio gehiago edukitzeko ikus SPIP dokumentazioa (oraindik frantsesez) .',
 'avis_espace_interdit' => '<MODIF>Gune helezinaSPIP instalaturik dago jadanik.',
 'avis_lecture_noms_bases_1' => 'Instalazio-programakez du lortu instalaturik dauden datu-baseen izenak irakurtzea.',
@@ -36,8 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_sites_probleme_syndication' => 'Leku hauek sindikazio-arazo bat dute',
 'avis_sites_syndiques_probleme' => 'Sindikatutako leku hauek arazoak dituzte',
 'avis_suppression_base' => 'KONTUZ, dataezabapena itzulezina da!',
-'avis_version_mysql' => 'Zure(@version_mysql@) MySQLbertsioak ez du uzten basean bertan taulen auto-konponketa.',
-
+'avis_version_mysql' => 'Zure(@version_mysql@) SQLbertsioak ez du uzten basean bertan taulen auto-konponketa.',
 
 // B
 'bouton_acces_ldap' => 'LDAP >> -rako sarrera erantsi ',
@@ -94,13 +95,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_vider_cache' => 'Cachea hustu',
 'bouton_voir_message' => 'Mezua ikusi bidalibaino lehen',
 
-
 // C
 'cache_mode_compresse' => '<MODIF>Cacheko fitxategiak modu konprimituangorde dira.',
 'cache_mode_non_compresse' => '<MODIF>Cacheko fitxategiak ez diragorde modu konprimituan.',
 'cache_modifiable_webmestre' => '<MODIF>Parametruhauek tokiaren administratzaileak aldatu ahal ditu.',
 'calendrier_synchro' => 'Agenda-software bateragarri bat erabiltzen baduzuiCal, leku honen gaurkotasun-editorialarekinsinkronizatu dezakezu.',
-
 
 // D
 'date_mot_heures' => 'orduak',
@@ -111,7 +110,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_deplace' => 'Mugitua izan den textua',
 'diff_texte_supprime' => 'Testuaezabatua',
 'double_clic_inserer_doc' => '<MODIF>Double-cliquez pour ins&eacute;rer ce raccourci dans le texte',
-
 
 // E
 'email' => 'posta elektronikoa',
@@ -152,7 +150,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_obligatoire' => '<b>Izenburua</b> [Derrigorrezko]<br />',
 'entree_url' => 'Zure lekuaren (URL) helbidea',
 
-
 // I
 'ical_info1' => 'Lekuarenbizitzarekin harremanetan egoteko dauden zenbait modu orrialde honetan aurkeztendira.',
 'ical_info2' => 'Teknika guzti hauen buruzko informazio gehiago lortzeko,hurrengo SPIP dokumentazioa kontsulta dezakezu.',
@@ -174,6 +171,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creation_groupe_mots' => 'Hitz talde berri bateratu',
 'icone_creation_mots_cles' => 'Gako-hitz berri bat eratu',
 'icone_creer_auteur' => 'Egile berri bat eratu eta artikulu honi elkartu',
+'icone_creer_mot_cle' => 'Gako-hitz berri bat eratu eta artikuluhoni elkartu',
 'icone_creer_rubrique_2' => 'Atal berribat eratu',
 'icone_ecrire_nouvel_article' => 'Atal honen berri laburrak',
 'icone_envoyer_message' => 'Mezua igorri',
@@ -266,7 +264,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_confirmer_passe' => 'Pasahitz berria baieztatu:',
 'info_connexion_base' => 'Bigarren etapa: basera konektatzeko saialdia ',
 'info_connexion_ldap_ok' => '<MODIF>LDAP konexioak funtzionatu egin du.Hurrengo etapa edo ekinaldira pasa zaitezke.',
-'info_connexion_mysql' => 'Lehenengoetapa: Zure MySQL konexioa',
+'info_connexion_mysql' => 'Lehenengoetapa: Zure SQL konexioa',
 'info_connexion_ok' => 'Konexioa ondo dabil',
 'info_contact' => 'Kontaktua',
 'info_contenu_articles' => 'Artikuluen edukia',
@@ -362,7 +360,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_message_en_redaction' => 'Idaztekobidean dauden zure mezuak',
 'info_message_technique' => 'Mezu teknikoa',
 'info_messagerie_interne' => 'Barne mezularitza',
-'info_mise_a_niveau_base' => 'ZureMySQL basearen eguneratzea',
+'info_mise_a_niveau_base' => 'ZureSQL basearen eguneratzea',
 'info_mise_a_niveau_base_2' => '<MODIF>{{Kontuz!}} Lehendikgune honetan aurkitzen zen SPIP fitxategien {lehenagoko} bertsio bat instalatuduzu: zure datu-basea galdua izateko arriskuan dago eta zure guneak ez dugehiago funtzionatuko.{{SPIP fitxategiak berrinstalatu.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Foro publikoenfuntzionamendua',
 'info_modifier_breve' => 'Berri laburra aldatu',
@@ -619,10 +617,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'item_utiliser_syndication' => 'Sindikazio automatikoa erabili',
 'item_visiteur' => 'bisitaria',
 
-
 // J
 'jour_non_connu_nc' => 'e.e.',
-
 
 // L
 'lien_ajout_destinataire' => 'Jasotzaile hau erantsi',
@@ -657,7 +653,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'logo_standard_rubrique' => '<MODIF>ATALEN LOGO ESTANDARRA',
 'logo_survol' => '<MODIF>LOGOA BEGIRATUAGATIK',
 
-
 // M
 'menu_aide_installation_choix_base' => '<MODIF>Zure basearenaukera',
 'module_fichier_langue' => 'Hizkuntza-fitxategia',
@@ -666,7 +661,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'module_texte_explicatif' => '<MODIF>Hurrengo lasterbideak txerta ditzakezu zure gune publikoko eskeletoetan. Automatikokihizkuntza-fitxategi bat existitzen denentzako hizkuntza desberdinetara itzuliko dira.',
 'module_texte_traduction' => '« @module@ » hizkuntza artxiboaikusgai dago hemen:',
 'mois_non_connu' => 'ezezagun',
-
 
 // O
 'onglet_repartition_actuelle' => 'gaur egun',
@@ -684,7 +678,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ortho_verif_impossible' => '<MODIF>Sistemak ezin dutestu honetako ortografia egiaztatu.',
 'ortho_verifier' => 'Ortografia zuzendu',
 
-
 // S
 'statut_admin_restreint' => '<MODIF>(admin mugatua)',
 'syndic_choix_moderation' => '<NEW>Que faire des prochains liens en provenance de ce site&nbsp;?',
@@ -693,7 +686,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'syndic_option_miroir' => '<NEW>les bloquer automatiquement',
 'syndic_option_oubli' => '<NEW>les effacer (apr&egrave;s @mois@&nbsp;mois)',
 'syndic_options' => '<NEW>Options de syndication&nbsp;:',
-
 
 // T
 'taille_cache_image' => '<MODIF>Les images calcul&eacute;es automatiquement par SPIP (vignettes des documents, titres pr&eacute;sent&eacute;s sous forme graphique, fonctions math&eacute;matiques au format TeX...) occupent dans le r&eacute;pertoire @dir@ un total de @taille@.',
@@ -728,7 +720,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_compte_element' => '@count@ osagai',
 'texte_compte_elements' => '@count@osagai',
 'texte_config_groupe_mots_cles' => '<MODIF>Gako-hitzen konfigurazio aurreratuaaktibatu nahi duzu, adibidez talde bakoitzean hitz bakar bat hautatu ahal dela,talde bat garrantzitsua dela,... adieraziz?',
-'texte_connexion_mysql' => '<MODIF>Zure ostapen zuzkitzaileakemandako informazioak kontsultatu : zure ostapen zuzkitzaileak MySQL jasaten badu, hemenaurkitu beharko zenituzke MySQL zerbitzarirako konexio-kodeak.',
+'texte_connexion_mysql' => '<MODIF>Zure ostapen zuzkitzaileakemandako informazioak kontsultatu : zure ostapen zuzkitzaileak SQL jasaten badu, hemenaurkitu beharko zenituzke SQL zerbitzarirako konexio-kodeak.',
 'texte_contenu_article' => '(Artikuluaren edukia hitz gutxitan)',
 'texte_contenu_articles' => 'Zure tokiarendiseinuaren arabera, hemen erabili behar diren osagaiak aukera ditzakezu',
 'texte_crash_base' => 'Baseak arazo bat baldin badauka, hemen konpontzen saiadaiteke',
@@ -784,7 +776,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_recuperer_base' => 'Datuen Basea konpondu',
 'texte_reference_mais_redirige' => 'Zure tokianerreferentziatutako artikulua eta beste URL batengana berzuzenduta.',
 'texte_referencement_automatique' => 'Leku bat automatikoki erreferentzia egiteaLeku baten URL-a edo lekuaren "backend" artxiboaren helbidea, SPIP automatikokiargibideak (izenburua, azalpena....) berreskuratuko ditu.',
-'texte_requetes_echouent' => '<MODIF>MySQL eskaera batzuk sistematikoki huts egiten dutenean eta badirudi ez dagoelaarrazoirik,posible da datu basea bera huts egiten ari dela. MySQL-k gaitasun bat daukabere taulak konpontzeko istripu baten erruz hondatuak izan direnean. Hemenkonponketa hau egiten saia zaitezke; huts eginez gero, gorde emaitzaren kopia bat,posible baita huts egitearen aztarnak izatea... Arazoa berriro gertatzen baldin bada, zureostatu-sariaren hornitzailearekin kontaktuan jarri.',
+'texte_requetes_echouent' => '<MODIF>SQL eskaera batzuk sistematikoki huts egiten dutenean eta badirudi ez dagoelaarrazoirik,posible da datu basea bera huts egiten ari dela. SQL-k gaitasun bat daukabere taulak konpontzeko istripu baten erruz hondatuak izan direnean. Hemenkonponketa hau egiten saia zaitezke; huts eginez gero, gorde emaitzaren kopia bat,posible baita huts egitearen aztarnak izatea... Arazoa berriro gertatzen baldin bada, zureostatu-sariaren hornitzailearekin kontaktuan jarri.',
 'texte_restaurer_base' => 'Ziurtasunkopiaren edukia berreskuratu',
 'texte_restaurer_sauvegarde' => 'Aukera honekinlehenago egindako ziurtasun kopia bat berrezarri ahal duzu. Hau egin ahal izateko,ziurtasun kopia daukan fitxeroa ecrire/data/ direktorioan egon behar da. Kontuz ibilifuntzionalitate honekin: aldaketak edo galtze tenporalak atzeraezinak dira.',
 'texte_sauvegarde' => 'Basean ziurtasun kopia bat sortu.',
@@ -897,11 +889,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'trad_lier' => 'Artikulu hau artikuluaren itzulpena da',
 'trad_new' => 'Artikulu honen itzulpen berria idatzi',
 
+// U
+'upload_fichier_zip' => 'ZIP fitxategia',
+'upload_fichier_zip_texte' => 'Instalatzea proposatzen den fitxategia Zip fitxategi bat da.',
+'upload_fichier_zip_texte2' => 'Fitxategi hau izan ahal da:',
+'upload_zip_decompacter' => 'deskonprimituta eta gunean instalatutadaukan elementu bakoitza. Gunean instalatu egingo diren fitxategiak dira:',
+'upload_zip_telquel' => 'Besterik gabe instalatuta, Zip fitxategi bezala;',
 
 // V
 'version_initiale' => 'Hasierako bertsioioa'
-
 );
-
 
 ?>

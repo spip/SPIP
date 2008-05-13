@@ -1,9 +1,11 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'activer_plugin' => 'Activar el connector',
@@ -48,7 +50,6 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'avis_sites_syndiques_probleme' => 'Aquests llocs sindicats donen un problema ',
 'avis_suppression_base' => 'ATENCI&Oacute;, la supressi&oacute; de dades &eacute;s irreversible.',
 'avis_version_mysql' => 'La vostra versi&oacute; de SQL (@version_mysql@) no permet l\'auto reparaci&oacute; de les taules de la base de dades.',
-
 
 // B
 'bouton_acces_ldap' => 'Afegir l\'acc&eacute;s a LDAP',
@@ -114,7 +115,6 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'bouton_vider_cache' => 'Buidar la mem&ograve;ria cau',
 'bouton_voir_message' => 'Veure el missatge abans de ser validat ',
 
-
 // C
 'cache_mode_compresse' => 'Els fitxers de la mem&ograve;ria cau s&oacute;n desats en mode comprimit.',
 'cache_mode_non_compresse' => 'Els fitxers de la mem&ograve;ria cau s&oacute;n desats en mode no comprimit.',
@@ -137,7 +137,6 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'connexion_ldap' => 'Connexi&oacute;:',
 'copier_en_local' => 'Copiar en local',
 
-
 // D
 'date_mot_heures' => 'hores',
 'diff_para_ajoute' => 'Par&agrave;graf afegit',
@@ -147,7 +146,6 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'diff_texte_deplace' => 'Text despla&ccedil;at',
 'diff_texte_supprime' => 'Text suprimit',
 'double_clic_inserer_doc' => 'Feu un doble clic per inserir aquesta drecera en el text',
-
 
 // E
 'email' => 'correu electr&ograve;nic',
@@ -197,10 +195,8 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'erreur_plugin_tag_plugin_absent' => 'falta el &lt;connector&gt; al fitxer de definici&oacute;',
 'erreur_plugin_version_manquant' => 'Falta la versi&oacute; del connector',
 
-
 // F
 'forum_info_original' => 'original',
-
 
 // I
 'ical_info1' => 'Aquesta p&agrave;gina mostra diferents maneres per estar en contacte amb la vida d\'aquest lloc.',
@@ -318,6 +314,10 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_classement_2' => '<sup>n</sup> a la @liste@',
 'info_code_acces' => 'No oblideu els vostres codis d\'acc&eacute;s!',
 'info_comment_lire_tableau' => 'Com llegir aquest quadre',
+'info_compresseur_activer' => 'Activar la compressi&oacute;',
+'info_compresseur_desactiver' => 'Desactivar la compressi&oacute;',
+'info_compresseur_texte' => 'Si el vostre servidor no comprimeix autom&agrave;ticament les p&agrave;gines html per enviar-les als internautes, podeu provar for&ccedil;ar aquesta compressi&oacute; per disminuir el pes de les p&agrave;gines baixades. <b>Atenci&oacute;</b>: aix&ograve; pot reduir considerablement la velocitat d\'alguns servidors. ',
+'info_compresseur_titre' => 'Optimitzacions i compressi&oacute;',
 'info_config_suivi' => 'Si aquesta adre&ccedil;a correspon a una llista de correu, podeu indicar m&eacute;s avall l\'adre&ccedil;a a la que els participants es poden registrar. Aquesta adre&ccedil;a pot ser una URL (per exemple la p&agrave;gina de registre a la llista per la Web), o un correu electr&ograve;nic amb un assumpte espec&iacute;fic: <tt>@adresse_suivi@?assumpte=subscriure\'s</tt>):',
 'info_config_suivi_explication' => 'Us podeu subscriure a la llista de correu d\'aquest lloc. Si ho feu, rebreu per correu electr&ograve;nic els anuncis dels articles i de les breus que es proposen per ser publicats.',
 'info_confirmer_passe' => 'Confirmar la nova contrasenya:',
@@ -728,13 +728,10 @@ amb un color que indica el seu estat:',
 'item_utiliser_syndication' => 'Utilitzar la sindicaci&oacute; autom&agrave;tica',
 'item_visiteur' => 'visitant',
 
-
 // J
 'jour_non_connu_nc' => 'n.c.',
 
-
 // L
-'les_deux' => 'els dos',
 'lien_ajout_destinataire' => 'Afegir aquest destinatari',
 'lien_ajouter_auteur' => 'Afegir aquest autor',
 'lien_ajouter_participant' => 'Afegir un participant',
@@ -768,7 +765,6 @@ amb un color que indica el seu estat:',
 'logo_standard_rubrique' => 'LOGOTIP EST&Agrave;NDARD DE LES SECCIONS',
 'logo_survol' => 'Logotip canviant',
 
-
 // M
 'menu_aide_installation_choix_base' => 'Trieu la vostra base de dades',
 'module_fichier_langue' => 'Fitxer de llengua',
@@ -777,7 +773,6 @@ amb un color que indica el seu estat:',
 'module_texte_explicatif' => 'Podeu inserir els recursos seg&uuml;ents a les plantilles del vostre lloc p&uacute;blic. Es traduiran autom&agrave;ticament a les diferents lleng&uuml;es per les que existeix un fitxer de llengua.',
 'module_texte_traduction' => 'El fitxer de llengua &laquo;&nbsp;@module@&nbsp;&raquo; es troba disponible a:',
 'mois_non_connu' => 'desconegut',
-
 
 // O
 'onglet_declarer_une_autre_base' => 'Declarar una altre base',
@@ -795,7 +790,6 @@ amb un color que indica el seu estat:',
 'ortho_trop_de_fautes' => 'Atenci&oacute;: el vostre text cont&eacute; massa errades, no es suggereix cap correci&oacute; per tal de no sobrecarregar el sistema.',
 'ortho_verif_impossible' => 'El sistema no pot verificar l\'ortografia d\'aquest text.',
 'ortho_verifier' => 'Verificar l\'ortografia',
-
 
 // P
 'page_pas_proxy' => 'Aquesta p&agrave;gina no ha de passar pel proxy',
@@ -847,10 +841,8 @@ amb un color que indica el seu estat:',
 'plugins_vue_liste' => 'Llista',
 'protocole_ldap' => 'Versi&oacute; del protocol:',
 
-
 // R
 'repertoire_plugins' => 'Directori:',
-
 
 // S
 'sauvegarde_fusionner' => 'Fusionar la base actual i la de seguretat',
@@ -866,7 +858,6 @@ amb un color que indica el seu estat:',
 'syndic_option_resume_non' => 'el contingut complet dels articles (en format HTML)',
 'syndic_option_resume_oui' => 'un simple resum (en format text)',
 'syndic_options' => 'Opcions de sindicaci&oacute;:',
-
 
 // T
 'taille_cache_image' => 'Les imatges calculades autom&agrave;ticament per SPIP (miniatures dels documents, t&iacute;tols presentats en forma gr&agrave;fica, funci&oacute;n matem&agrave;tiques en format TeX...) ocupen en el directori @dir@ un total de @taille@.',
@@ -1119,8 +1110,12 @@ el que pot provocar un lleuger alentiment de la vostra pr&ograve;pia web.',
 'trad_lier' => 'Aquest article &eacute;s una traducci&oacute; de l\'article n&uacute;mero:',
 'trad_new' => 'Escriure una nova traducci&oacute; d\'aquest article',
 
-
 // U
+'upload_fichier_zip' => 'Fitxer ZIP',
+'upload_fichier_zip_texte' => 'El fitxer que voleu instal&middot;lar &eacute;s un fitxer Zip.',
+'upload_fichier_zip_texte2' => 'El fitxer pot ser:',
+'upload_zip_decompacter' => 'descomprimit i cada element que cont&eacute; instal&middot;lat en el lloc Web. Els fitxers que llavors seran instal&middot;lat en el lloc Web s&oacute;n:',
+'upload_zip_telquel' => 'instal&middot;lat tal qual, com a arxiu comprimit Zip;',
 'utf8_convert_attendez' => 'Espereu-vos uns instants i recarregueu aquesta p&agrave;gina. ',
 'utf8_convert_avertissement' => 'Us prepareu per convertir el contingut de la vostra base de dades (articles, breus, etc) del joc de car&agrave;cter <b>@orig@</b> cap al joc de car&agrave;cters <b>@charset@</b>.',
 'utf8_convert_backup' => 'No oblideu fer abans una c&ograve;pia de seguretat sencera del vostre lloc Web. Haureu tamb&eacute; de verificar que les vostre plantilles i fitxers de llengua s&oacute;n compatibles @charset@.',
@@ -1131,13 +1126,10 @@ el que pot provocar un lleuger alentiment de la vostra pr&ograve;pia web.',
 'utf8_convert_verifier' => 'Ara heu de buidar la mem&ograve;ria cau, i verificar que tot &eacute;s correcte a les p&agrave;gines publicades del vostre lloc Web. En cas que tingueu problemes, s\'ha fet una c&ograve;pia de seguretat de les vostres dades (en format SQL) dins del directori @rep@.',
 'utf8_convertir_votre_site' => 'Convertir el vostre lloc Web a utf-8',
 
-
 // V
 'version' => 'Versi&oacute;:',
 'version_deplace_rubrique' => 'Despla&ccedil;ament de <b>&laquo;&nbsp;@from@&nbsp;&raquo;</b> cap a <b>&laquo;&nbsp;@to@&nbsp;&raquo;</b>.',
 'version_initiale' => 'Versi&oacute; inicial'
-
 );
-
 
 ?>

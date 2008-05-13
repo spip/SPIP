@@ -1,9 +1,11 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'activer_plugin' => 'Aktifkan plugin',
@@ -14,16 +16,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'Tidak ditemukan hasil apa-apa.',
 'avis_chemin_invalide_1' => 'Path yang telah anda pilih',
 'avis_chemin_invalide_2' => 'sepertinya tidak benar. Silakan kembali ke halaman sebelumnya dan verifikasi informasi yang diberikan.',
-'avis_connexion_echec_1' => 'Koneksi ke server MySQL gagal.',
+'avis_connexion_echec_1' => '<MODIF>Koneksi ke server SQL gagal.',
 'avis_connexion_echec_2' => 'Kembali ke halaman sebelumnya, dan verifikasi informasi yang anda telah berikan.',
-'avis_connexion_echec_3' => '<b>Catatan:</b> Pada sejumlah server, anda harus <b>memohon</b> aktivasi akses ke database MySQL sebelum anda dapat menggunakannya. Jika anda tidak berhasil mengakses database anda, pastikan anda telah mengajukan permohonan ini.',
+'avis_connexion_echec_3' => '<MODIF><b>Catatan:</b> Pada sejumlah server, anda harus <b>memohon</b> aktivasi akses ke database SQL sebelum anda dapat menggunakannya. Jika anda tidak berhasil mengakses database anda, pastikan anda telah mengajukan permohonan ini.',
 'avis_connexion_ldap_echec_1' => 'Koneksi ke server LDAP gagal.',
 'avis_connexion_ldap_echec_2' => 'Kembali ke halaman sebelumnya, dan verifikasi informasi yang anda telah berikan.',
 'avis_connexion_ldap_echec_3' => 'Alternatif lainnya, jangan gunakan dukungan LDAP untuk mengimpor pengguna.',
 'avis_conseil_selection_mot_cle' => '<b>Kelompok penting:</b> Sangat dianjurkan untuk memilih sebuah kata kunci untuk kelompok ini.',
 'avis_deplacement_rubrique' => 'Peringatan! Bagian ini mengandung @contient_breves@ berita@scb@: jika anda memindahkannya, silakan cek kotak ini untuk konfirmasi.',
 'avis_destinataire_obligatoire' => 'Anda harus memilih satu orang penerima sebelum mengirimkan pesan ini.',
-'avis_erreur_connexion_mysql' => 'Kesalahan koneksi MySQL',
+'avis_erreur_connexion_mysql' => 'Kesalahan koneksi SQL',
 'avis_erreur_version_archive' => '<b>Peringatan! Berkas @archive@ berkaitan dengan
     sebuah versi SPIP yang lain dengan yang anda
     miliki.</b> Anda akan mengalami sejumlah
@@ -47,8 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_sites_probleme_syndication' => 'Situs-situs ini mengalami gangguan sindikasi',
 'avis_sites_syndiques_probleme' => 'Situs-situs tersindikasi ini menimbulkan sebuah permasalahan',
 'avis_suppression_base' => 'PERINGATAN, data yang dihapus tidak dapat dikembalikan lagi',
-'avis_version_mysql' => 'Versi MySQL anda (@version_mysql@) tidak mengizinkan perbaikan otomatis tabel-tabel database.',
-
+'avis_version_mysql' => 'Versi SQL anda (@version_mysql@) tidak mengizinkan perbaikan otomatis tabel-tabel database.',
 
 // B
 'bouton_acces_ldap' => 'Tambah sebuah akses ke LDAP >>',
@@ -113,7 +114,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_vider_cache' => 'Kosongkan cache',
 'bouton_voir_message' => 'Lihat pesan sebelum divalidasi',
 
-
 // C
 'cache_mode_compresse' => 'Berkas-berkas cache disimpan dalam bentuk kompresi.',
 'cache_mode_non_compresse' => 'Berkas-berkas cache ditulis dalam bentuk tidak terkompresi.',
@@ -121,7 +121,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'calendrier_synchro' => 'Jika anda menggunakan aplikasi kalender yang kompatibel dengan <b>iCal</b>, anda dapat mensinkronisasikannya dengan informasi situs ini.',
 'connexion_ldap' => 'Koneksi:',
 'copier_en_local' => 'Kopi ke situs lokal',
-
 
 // D
 'date_mot_heures' => 'H',
@@ -132,7 +131,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_deplace' => 'Teks yang dipindahkan',
 'diff_texte_supprime' => 'Teks yang dihapus',
 'double_clic_inserer_doc' => 'Klik ganda untuk memasukkan jalan pintas ini ke dalam teks',
-
 
 // E
 'email' => 'e-mail',
@@ -145,7 +143,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_base_donnee_2' => '(Sering kali, alamat ini sesuai dengan alamat situs anda, kadangkala ia berkaitan dengan nama &laquo;localhost&raquo;, dan bisa juga dibiarkan tidak terisi sama sekali.)',
 'entree_biographie' => 'Biografi singkat dalam beberapa kata.',
 'entree_breve_publiee' => 'Apakah artikel berita ini akan dipublikasikan?',
-'entree_chemin_acces' => '<B>Isi</B> path:',
+'entree_chemin_acces' => '<b>Isi</B> path:',
 'entree_cle_pgp' => 'Kunci PGP anda',
 'entree_contenu_rubrique' => '(Isi bagian dalam beberapa kata.)',
 'entree_description_site' => 'Deskripsi situs',
@@ -153,7 +151,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_informations_connexion_ldap' => 'Silakan isi formulir ini dengan informasi koneksi LDAP. Anda akan memperoleh informasi yang diminta melalui administrator jaringan atau sistem anda.',
 'entree_infos_perso' => 'Siapa anda?',
 'entree_interieur_rubrique' => 'Dalam bagian:',
-'entree_liens_sites' => '<B>Tautan web</B> (referensi, situs yang dapat dikunjungi...)',
+'entree_liens_sites' => '<b>Tautan web</B> (referensi, situs yang dapat dikunjungi...)',
 'entree_login' => 'Log masuk anda',
 'entree_login_connexion_1' => 'Log masuk koneksi',
 'entree_login_connexion_2' => '(Kadang kala sesuai dengan log masuk akses FTP anda dan bisa jadi juga dibiarkan tidak terisi)',
@@ -170,7 +168,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_port_annuaire' => 'Nomor port direktori',
 'entree_signature' => 'Tanda tangan',
 'entree_texte_breve' => 'Teks artikel berita',
-'entree_titre_obligatoire' => '<B>Judul</b> [Dibutuhkan]<BR>',
+'entree_titre_obligatoire' => '<b>Judul</b> [Dibutuhkan]<BR>',
 'entree_url' => 'URL situs anda',
 'erreur_plugin_fichier_absent' => 'Berkas hilang',
 'erreur_plugin_fichier_def_absent' => 'Berkas definisi hilang',
@@ -180,10 +178,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; hilang dalam berkas definisi',
 'erreur_plugin_version_manquant' => 'Versi plugin yang hilang',
 
-
 // F
 'forum_info_original' => 'asli',
-
 
 // I
 'ical_info1' => 'Halaman ini memberikan sejumlah metode untuk mengetahui dan berhubungan dengan aktivitas situs ini.',
@@ -208,6 +204,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creation_groupe_mots' => 'Buat sebuah kelompok kata kunci baru',
 'icone_creation_mots_cles' => 'Buat sebuah kata kunci baru',
 'icone_creer_auteur' => 'Buat seorang penulis baru dan asosiasikan dia dengan artikel ini',
+'icone_creer_mot_cle' => 'Buat sebuah kata kunci baru dan tautkan ia ke artikel ini',
 'icone_creer_rubrique_2' => 'Buat sebuah bagian baru',
 'icone_ecrire_nouvel_article' => 'Berita dalam bagian ini',
 'icone_envoyer_message' => 'Kirim pesan ini',
@@ -238,7 +235,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_1_site' => '1 situs',
 'info_activer_cookie' => 'Anda apat mengaktifkan <b>cookie administrasi</b>, yang memperbolehkan anda
  untuk berpindah-pindah dengan mudah antara situs umum dan area pribadi.',
-'info_activer_forum_public' => '<I>Untuk mengaktifkan forum-forum umum, silakan pilih mode moderasi standar forum-forum tersebut:</I>',
+'info_activer_forum_public' => '<i>Untuk mengaktifkan forum-forum umum, silakan pilih mode moderasi standar forum-forum tersebut:</I>',
 'info_admin_gere_rubriques' => 'Administrator ini mengelola bagian-bagian berikut:',
 'info_admin_gere_toutes_rubriques' => 'Administrator ini mengelola <b>semua bagian</b>.',
 'info_administrateur' => 'Administrator',
@@ -291,9 +288,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_changer_nom_groupe' => 'Ganti nama kelompok ini:',
 'info_chapeau' => 'Dek',
 'info_chapeau_2' => 'Introduksi:',
-'info_chemin_acces_1' => 'Pilihan: <B>Path akses dalam direktori</b>',
+'info_chemin_acces_1' => 'Pilihan: <b>Path akses dalam direktori</b>',
 'info_chemin_acces_2' => 'Mulai sekarang, anda harus mengkonfigurasi path akses ke informasi direktori. Informasi ini penting untuk membaca profil pengguna yang disimpan dalam direktori.',
-'info_chemin_acces_annuaire' => 'Pilihan: <B>Path akses dalam direktori</B>',
+'info_chemin_acces_annuaire' => 'Pilihan: <b>Path akses dalam direktori</B>',
 'info_choix_base' => 'Langkah ketiga:',
 'info_classement_1' => '&nbsp;dari @liste@',
 'info_classement_2' => '&nbsp;dari @liste@',
@@ -302,25 +299,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_config_suivi' => 'Jika alamat ini berkaitan dengan suatu daftar surat, anda dapat mengindikasikan di bawah alamat di mana pengunjung situs dapat mendaftarkan diri. Alamat ini dapat berupa URL (sebagai contoh halaman registrasi daftar surat melalui web), atau alamat e-mail dengan subyek yang spesifik (contoh: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Anda dapat berlangganan daftar surat situs ini. Anda akan menerima melalui e-mail secara otomatis, pengumuman-pengumuman yang berkenaan dengan artikel-artikel dan berita-berita yang dikirim untuk publikasi.',
 'info_confirmer_passe' => 'Konfirmasi kata sandi baru:',
-'info_connexion_base' => 'Langkah kedua: <B>Percobaan untuk koneksi ke database</B>',
+'info_connexion_base' => 'Langkah kedua: <b>Percobaan untuk koneksi ke database</B>',
 'info_connexion_ldap_ok' => 'Koneksi LDAP anda berhasil.</b><p /> Anda dapat meneruskan ke langkah selanjutnya.',
-'info_connexion_mysql' => 'Langkah pertama: <B>Koneksi MySQL anda</b>',
+'info_connexion_mysql' => 'Langkah pertama: <b>Koneksi SQL anda</b>',
 'info_connexion_ok' => 'Koneksi berhasil.',
 'info_contact' => 'Kontak',
 'info_contenu_articles' => 'Isi artikel',
 'info_creation_mots_cles' => 'Buat dan konfigurasi kata-kata kunci situs di sini',
 'info_creation_paragraphe' => '(Untuk membuat paragraf, anda cukup meninggalkan baris-baris kosong.)',
 'info_creation_rubrique' => 'Sebelum bisa menulis artikel,<BR> anda harus membuat paling tidak satu bagian.<BR>',
-'info_creation_tables' => 'Langkah keempat: <B>Pembuatan tabel-tabel database</b>',
-'info_creer_base' => '<B>Buat</b> sebuah database baru:',
+'info_creation_tables' => 'Langkah keempat: <b>Pembuatan tabel-tabel database</b>',
+'info_creer_base' => '<b>Buat</b> sebuah database baru:',
 'info_dans_groupe' => 'Dalam kelompok:',
 'info_dans_rubrique' => 'Dalam bagian:',
 'info_date_publication_anterieure' => 'Tanggal publikasi sebelumnya:',
 'info_date_referencement' => 'TANGGAL REFERENSI SITUS INI:',
 'info_delet_mots_cles' => 'Anda memohon penghapusan kata kunci
-<B>@titre_mot@</b> (@type_mot@). Kata kunci ini ditautkan ke
+<b>@titre_mot@</b> (@type_mot@). Kata kunci ini ditautkan ke
 <b>@texte_lie@</b>Anda harus mengkonfirmasi keputusan ini:',
-'info_derniere_etape' => 'Langkah terakhir: <B>Selesai!',
+'info_derniere_etape' => 'Langkah terakhir: <b>Selesai!',
 'info_derniere_syndication' => 'Sindikasi terakhir situs ini dijalankan pada',
 'info_derniers_articles_publies' => 'Artikel-artikel terakhir anda yang dipublikasi',
 'info_desactiver_forum_public' => 'Non aktifkan penggunaan forum
@@ -363,9 +360,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gauche_messagerie' => 'Sistem pesan mengizinkan anda bertukar pesan dengan sesama editor, untuk menyimpan memo (untuk keperluan pribadi anda) atau untuk menampilkan pengumuman di halaman depan area pribadi (jika anda seorang administrator).',
 'info_gauche_numero_auteur' => 'NOMOR PENULIS:',
 'info_gauche_numero_breve' => 'NOMOR ARTIKEL BERITA',
-'info_gauche_statistiques_referers' => 'Halaman ini menampilkan daftar <I>pereferensi</I>, yakni situs-situs yang memuat tautan ke situs anda, hanya untuk kemarin dan hari ini: sesungguhnya daftar ini diperbaharui setiap 24 jam.',
-'info_gauche_suivi_forum' => 'Halaman <I>tindak lanjut forum</i> adalah alat bantu pengelola situs anda (bukan area diskusi atau pengeditan). Halaman ini menampilkan semua kontribusi forum umum artikel ini dan mengizinkan anda untuk mengelola kontribusi-kontribusi ini.',
-'info_gauche_suivi_forum_2' => 'Halaman <I>tindak lanjut forum</i> adalah alat bantu pengelola situs anda (bukan area diskusi atau pengeditan). Halaman ini menampilkan semua kontribusi forum umum artikel ini dan mengizinkan anda untuk mengelola kontribusi-kontribusi ini.',
+'info_gauche_statistiques_referers' => 'Halaman ini menampilkan daftar <i>pereferensi</I>, yakni situs-situs yang memuat tautan ke situs anda, hanya untuk kemarin dan hari ini: sesungguhnya daftar ini diperbaharui setiap 24 jam.',
+'info_gauche_suivi_forum' => 'Halaman <i>tindak lanjut forum</i> adalah alat bantu pengelola situs anda (bukan area diskusi atau pengeditan). Halaman ini menampilkan semua kontribusi forum umum artikel ini dan mengizinkan anda untuk mengelola kontribusi-kontribusi ini.',
+'info_gauche_suivi_forum_2' => 'Halaman <i>tindak lanjut forum</i> adalah alat bantu pengelola situs anda (bukan area diskusi atau pengeditan). Halaman ini menampilkan semua kontribusi forum umum artikel ini dan mengizinkan anda untuk mengelola kontribusi-kontribusi ini.',
 'info_gauche_visiteurs_enregistres' => 'Anda akan menemukan di sini para pengunjung
 	terdaftar di area umum situs (forum-forum berlangganan).',
 'info_generation_miniatures_images' => 'Membuat gambar-gambar kecil',
@@ -387,7 +384,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_image_process' => 'Pilih metode terbaik untuk membuat gambar kecil dengan mengklik gambar yang terkait.',
 'info_image_process2' => '<b>Catatan:</b> <i>Jika anda tidak dapat melihat gambar, berarti server anda tidak dikonfigurasi untuk menggunakan peralatan yang ada. Jika anda ingin menggunakan fitur-fitur ini, hubungi bagian teknis penyedia hosting anda dan minta ekstensi &laquo;GD&raquo; atau &laquo;Imagick&raquo; diinstal.</i>',
 'info_images_auto' => 'Gambar secara otomatis dikalkulasi',
-'info_informations_personnelles' => 'Langkah kelima: <B>Informasi pribadi</B>',
+'info_informations_personnelles' => 'Langkah kelima: <b>Informasi pribadi</B>',
 'info_inscription_automatique' => 'Registrasi otomatis editor-editor baru',
 'info_jeu_caractere' => 'Set karakter situs',
 'info_jours' => 'hari',
@@ -412,7 +409,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_message_en_redaction' => 'Pesan-pesan anda dalam proses',
 'info_message_technique' => 'Pesan teknis:',
 'info_messagerie_interne' => 'Sistem pesan internal',
-'info_mise_a_niveau_base' => 'Pembaharuan database MySQL',
+'info_mise_a_niveau_base' => 'Pembaharuan database SQL',
 'info_mise_a_niveau_base_2' => '{{Peringatan!}} Anda telah menginstal berkas SPIP
   {yang lebih tua} daripada berkas yang terdapat sebelumnya
   di situs ini: database anda terancam hilang dan situs anda
@@ -527,10 +524,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_redirection' => 'Pengalihan tujuan',
 'info_referencer_doc_distant' => 'Referensi dokumen di internet:',
 'info_refuses' => 'Artikel anda ditolak',
-'info_reglage_ldap' => 'Pilihan: <B>Menyesuaikan impor LDAP</b>',
-'info_renvoi_article' => '<B>Pengalihan tujuan.</B> Artikel ini mengarah pada halaman:',
+'info_reglage_ldap' => 'Pilihan: <b>Menyesuaikan impor LDAP</b>',
+'info_renvoi_article' => '<b>Pengalihan tujuan.</B> Artikel ini mengarah pada halaman:',
 'info_reserve_admin' => 'Hanya administrator yang dapat memodifikasi alamat ini.',
-'info_restauration_sauvegarde' => 'memulihkan backup @archive@',
+'info_restauration_sauvegarde' => '<MODIF>memulihkan backup @archive@',
 'info_restreindre_rubrique' => 'Batasi manajemen ke bagian:',
 'info_resultat_recherche' => 'Hasil-hasil pencarian:',
 'info_rubriques' => 'Bagian',
@@ -701,13 +698,10 @@ dalam warna yang menunjukkan statusnya:',
 'item_utiliser_syndication' => 'Gunakan sindikasi terotomasi',
 'item_visiteur' => 'pengunjung',
 
-
 // J
 'jour_non_connu_nc' => 'tidak dikenal',
 
-
 // L
-'les_deux' => 'kedua-duanya',
 'lien_ajout_destinataire' => 'Tambahkan penerima ini',
 'lien_ajouter_auteur' => 'Tambahkan penulis ini',
 'lien_ajouter_participant' => 'Tambahkan seorang peserta',
@@ -741,7 +735,6 @@ dalam warna yang menunjukkan statusnya:',
 'logo_standard_rubrique' => 'LOGO STANDAR UNTUK BAGIAN',
 'logo_survol' => 'LOGO SAMARAN',
 
-
 // M
 'menu_aide_installation_choix_base' => 'Pilih database anda',
 'module_fichier_langue' => 'Berkas bahasa',
@@ -750,7 +743,6 @@ dalam warna yang menunjukkan statusnya:',
 'module_texte_explicatif' => 'Anda dapat memasukkan jalan-jalan pintas berikut ke dalam templat situs anda. Mereka akan diterjemahkan secara otomatis dalam berbagai bahasa bila berkas bahasanya telah tersedia.',
 'module_texte_traduction' => 'Berkas bahasa &laquo;&nbsp;@module@&nbsp;&raquo; tersedia di:',
 'mois_non_connu' => 'tidak dikenal',
-
 
 // O
 'onglet_repartition_actuelle' => 'sekarang',
@@ -768,7 +760,6 @@ dalam warna yang menunjukkan statusnya:',
 'ortho_verif_impossible' => 'Sistem tidak dapat memeriksa ejaan dari teks ini.',
 'ortho_verifier' => 'Pemeriksaan ejaan',
 
-
 // P
 'plugin_etat_developpement' => 'dalam pengembangan',
 'plugin_etat_experimental' => 'eksperimental',
@@ -777,10 +768,8 @@ dalam warna yang menunjukkan statusnya:',
 'plugins_liste' => 'Daftar plugin',
 'protocole_ldap' => 'Versi protokol:',
 
-
 // R
 'repertoire_plugins' => 'Directori:',
-
 
 // S
 'sauvegarde_fusionner' => 'Gabung database sekarang dengan backup',
@@ -795,7 +784,6 @@ dalam warna yang menunjukkan statusnya:',
 'syndic_option_resume_non' => 'isi penuh dari artikel (format HTML)',
 'syndic_option_resume_oui' => 'sekedar ringkasan (format teks)',
 'syndic_options' => 'Opsi sindikasi:',
-
 
 // T
 'taille_cache_image' => 'Gambar-gambar dikalkulasi secara otomatis oleh SPIP (gambar kecil, judul yang ditransformasi ke dalam grafik, formula matematika dalam format Tex, dll.) dengan jumlah keseluruhan @taille@ di direktori @dir@ .',
@@ -826,8 +814,8 @@ menginstal kembali SPIP untuk membuat database baru dan akses administrator pert
 'texte_breves' => 'Berita adalah teks singkat dan sederhana yang mengizinkan
 	publikasi online informasi, ulasan-ulasan, peristiwa-peristiwa.....',
 'texte_choix_base_1' => 'Pilih database anda:',
-'texte_choix_base_2' => 'Server MySQL berisikan sejumlah database.',
-'texte_choix_base_3' => '<B>Pilih</B> di bawah salah satu yang diberikan hosting anda kepada anda:',
+'texte_choix_base_2' => 'Server SQL berisikan sejumlah database.',
+'texte_choix_base_3' => '<b>Pilih</B> di bawah salah satu yang diberikan hosting anda kepada anda:',
 'texte_choix_table_prefix' => 'Prefiks untuk tabel:',
 'texte_commande_vider_tables_indexation' => 'Gunakan perintah ini untuk mengosongkan tabel terindeksasi
 			yang digunakan oleh mesin pencari SPIP. Ini akan memberi anda
@@ -844,7 +832,7 @@ menginstal kembali SPIP untuk membuat database baru dan akses administrator pert
 'texte_config_groupe_mots_cles' => 'Apakah anda ingin menaktifkan konfigurasi lanjutan kelompok kata kunci,
 			dengan menspesifikasi, sebagai contoh sebuah kata unik per kelompok
 			dapat dipilih, yang menurut kelompok tersebut penting...?',
-'texte_connexion_mysql' => 'Merujuk kepada informasi yang diberikan hosting anda kepada anda: mereka seharusnya memberikan anda, jika hosting anda mendukung MySQL, kode koneksi ke server MySQL.',
+'texte_connexion_mysql' => '<MODIF>Merujuk kepada informasi yang diberikan hosting anda kepada anda: mereka seharusnya memberikan anda, jika hosting anda mendukung SQL, kode koneksi ke server SQL.',
 'texte_contenu_article' => '(Isi artikel dalam beberapa kata.)',
 'texte_contenu_articles' => 'Berdasarkan tampilan yang dipilih untuk situs anda, anda dapat memilih
   sejumlah elemen artikel tidak digunakan.
@@ -927,7 +915,7 @@ menginstal kembali SPIP untuk membuat database baru dan akses administrator pert
 'texte_presente_plugin' => 'Halaman ini menampilkan daftar plugin yang tersedia di situs. Aktifkan plugin yang anda butuhkan dengan memberi tanda di kotak yang bersangkutan.',
 'texte_proposer_publication' => 'Ketika artikel anda selesai ditulis,<br> anda dapat mengirimkannya untuk publikasi.',
 'texte_proxy' => 'Dalam beberapa kasus (intranet, jaringan pribadi...),
-		<I>proxy HTTP</i> perlu digunakan untuk menjangkau situs-situs tersindikasi.
+		<i>proxy HTTP</i> perlu digunakan untuk menjangkau situs-situs tersindikasi.
 		Kalau memang ada proxy, masukkan alamat di bawah,
 		<tt><html>http://proxy:8080</html></tt>. Pada umumnya,
 		anda akan membiarkan kotak ini kosong.',
@@ -941,10 +929,10 @@ memperbaharui satu halaman, anda sebaiknya melakukannya dari area umum dan gunak
 'texte_recuperer_base' => 'Perbaiki database',
 'texte_reference_mais_redirige' => 'artikel referensi di situs SPIP anda, tapi mengarah ke URL lain.',
 'texte_referencement_automatique' => '<b>Referensi situs terotomasi</b><br>Anda dapat mereferensi sebuah situs web secara cepat dengan memberikan di bawah URL yang dimaksud, atau alamat berkas sindikasinya. SPIP secara otomatis akan mengambil informasi yang berkaitan dengan situs tersebut (judul, deskripsi...).',
-'texte_requetes_echouent' => '<b>Wetika sejumlah query MySQL gagal
+'texte_requetes_echouent' => '<b>Wetika sejumlah query SQL gagal
   secara sistematis dan tanpa alasan yang jelas, bisa jadi
   permasalahannya adalah database itu sendiri.</b><p />
-  MySQL memiliki fitur yang dapat memperbaiki tabel-tabelnya
+  SQL memiliki fitur yang dapat memperbaiki tabel-tabelnya
   ketika mereka secara tidak sengaja menjadi rusak.
   Di sini, anda dapat mencoba melakukan perbaikan tersebut;
   jika gagal, anda sebaiknya menyimpan salinan dari tampilan
@@ -990,7 +978,7 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'texte_test_proxy' => 'Untuk mencoba proxy ini, masukkan alamat sebuah situs web di sini
 				yang ingin anda tes.',
 'texte_titre_02' => 'Subyek:',
-'texte_titre_obligatoire' => '<B>Judul</b> [Dibutuhkan]',
+'texte_titre_obligatoire' => '<b>Judul</b> [Dibutuhkan]',
 'texte_travail_article' => '@nom_auteur_modif@ telah bekerja di artikel ini @date_diff@ menit yang lalu',
 'texte_travail_collaboratif' => 'Jika beberapa editor sering bekerja sama dalam artikel yang sama, sistem dapat menandai artikel-artikel yang saat itu sedang &laquo;dibuka&raquo; guna menghindari konflik saat diedit.
   Opsi ini dinonaktifkan secara standar untuk menghindri pesan-pesan peringatan yang tidak perlu.',
@@ -1012,7 +1000,7 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'titre_cadre_forum_interne' => 'Forum intern',
 'titre_cadre_interieur_rubrique' => 'Dalam bagian',
 'titre_cadre_numero_auteur' => 'NOMOR PENULIS',
-'titre_cadre_signature_obligatoire' => '<B>Tanda tangan</B> [Dibutuhkan]<BR>',
+'titre_cadre_signature_obligatoire' => '<b>Tanda tangan</B> [Dibutuhkan]<BR>',
 'titre_config_fonctions' => 'Konfigurasi situs',
 'titre_config_groupe_mots_cles' => 'Konfigurasi kelompok kata kunci',
 'titre_configuration' => 'Konfigurasi situs',
@@ -1083,8 +1071,12 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'trad_lier' => 'Artikel ini adalah terjemahan dari artikel nomor:',
 'trad_new' => 'Tulis terjemahan baru untuk artikel ini',
 
-
 // U
+'upload_fichier_zip' => 'berkas ZIP',
+'upload_fichier_zip_texte' => 'Berkas yang hendak anda instal adalah berkas ZIP.',
+'upload_fichier_zip_texte2' => 'Berkas ini bisa jadu:',
+'upload_zip_decompacter' => 'diekstrak dan setiap berkas yang terdapat di dalamnya akan diinstal di situs. Berkas-berkas yang akan diinstal adalah:',
+'upload_zip_telquel' => 'diinstal seperti apa adanya, sebagai berkas ZIP;',
 'utf8_convert_attendez' => 'Tunggu beberapa saat dan perbaharui halaman ini.',
 'utf8_convert_avertissement' => 'Anda akan mengubah isi database anda (artikel, berita, dll) dari set karakter <b>@orig@</b> ke set karakter <b>@charset@</b>.',
 'utf8_convert_backup' => 'Jangan lupa membuat backup lengkap situs anda terlebih dahulu. Anda juga perlu memeriksa bahawa templat dan bahasa anda kompatibel dengan @charset@.',
@@ -1095,12 +1087,9 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'utf8_convert_verifier' => 'Anda sekarang harus mengosongkan cache situs dan periksa apakah semuanya baik-baik saja di halaman-halaman umum situs. Jika anda mengalami sebuah permasalahan besar, sebuah backup data asli anda (dalam format SQL) telah dibuat di direktori @rep@.',
 'utf8_convertir_votre_site' => 'Ubah situs anda ke utf-8',
 
-
 // V
 'version' => 'Versi:',
 'version_initiale' => 'Versi awal'
-
 );
-
 
 ?>

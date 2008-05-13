@@ -1,9 +1,11 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'aide_non_disponible' => 'Denne del af online-hj&aelig;lpen er endnu ikke tilg&aelig;ngelig p&aring; dansk.',
@@ -12,16 +14,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'Ingen resultater fundet.',
 'avis_chemin_invalide_1' => 'Den sti som du har valgt',
 'avis_chemin_invalide_2' => 'ser ikke ud til at v&aelig;re gyldig. G&aring; tilbage til sidste side og kontroller de oplysninger, du har indtastet.',
-'avis_connexion_echec_1' => 'Ingen forbindelse til MySQL-serveren',
+'avis_connexion_echec_1' => '<MODIF>Ingen forbindelse til SQL-serveren',
 'avis_connexion_echec_2' => 'G&aring; tilbage til sidste side og kontroller de oplysninger, du har indtastet',
-'avis_connexion_echec_3' => '<b>NB:</b> P&aring; mange servere skal du <b>anmode om</b> at f&aring; &aring;bnet adgang til en MySQL-database, f&oslash;r du kan bruge den. Hvis du ikke kan etablere en forbindelse, s&aring; kontroller venligst at du har indgivet denne anmodning.',
+'avis_connexion_echec_3' => '<MODIF><b>NB:</b> P&aring; mange servere skal du <b>anmode om</b> at f&aring; &aring;bnet adgang til en SQL-database, f&oslash;r du kan bruge den. Hvis du ikke kan etablere en forbindelse, s&aring; kontroller venligst at du har indgivet denne anmodning.',
 'avis_connexion_ldap_echec_1' => 'Ingen forbindelse til LDAP-serveren',
 'avis_connexion_ldap_echec_2' => 'G&aring; tilbage til sidste side og kontroller de oplysninger, du har indtastet.',
 'avis_connexion_ldap_echec_3' => 'Alternativt kan du v&aelig;lge ikke at benytte LDAP til at importere brugere.',
 'avis_conseil_selection_mot_cle' => '<b>Vigtig gruppe:</b> Det anbefales kraftigt at v&aelig;lge et n&oslash;gleord til denne gruppe.',
 'avis_deplacement_rubrique' => 'Advarsel! Dette afsnit indeholder @contient_breves@ nyheder@scb@: Hvis du vil flytte den, s&aring; afkryds venligst her for at bekr&aelig;fte.',
 'avis_destinataire_obligatoire' => 'Du skal v&aelig;lge en modtager, f&oslash;r du kan sende meddelelsen.',
-'avis_erreur_connexion_mysql' => 'Fejl i forbindelse til MySQL',
+'avis_erreur_connexion_mysql' => 'Fejl i forbindelse til SQL',
 'avis_erreur_version_archive' => ' <b>Advarsel! Filen @archive@ h&oslash;rer til 
     en anden version af SPIP end den du har
     installeret.</b> Du risikerer store
@@ -44,8 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_sites_probleme_syndication' => 'Disse websteder har problemer med syndikering',
 'avis_sites_syndiques_probleme' => 'Disse syndikerede sider giver problemer',
 'avis_suppression_base' => 'ADVARSEL, sletning kan ikke omg&oslash;res',
-'avis_version_mysql' => 'Din version af MySQL (@version_mysql@) tillader ikke automatisk reparation af tabeller.',
-
+'avis_version_mysql' => 'Din version af SQL (@version_mysql@) tillader ikke automatisk reparation af tabeller.',
 
 // B
 'bouton_acces_ldap' => 'Tilf&oslash;j adgang til LDAP >>',
@@ -104,13 +105,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_vider_cache' => 'T&oslash;m cache',
 'bouton_voir_message' => 'Vis indl&aelig;g f&oslash;r godkendelse',
 
-
 // C
 'cache_mode_compresse' => '<NEW>The cache files are saved in compressed mode.',
 'cache_mode_non_compresse' => '<NEW>The cache files are written in uncompressed mode.',
 'cache_modifiable_webmestre' => '<NEW>These parameters can be modified by the webmaster.',
 'calendrier_synchro' => 'Hvis du benytter en kalenderapplikation, der er kompatibel med <b>iCal</b>, kan du synkronisere med information p&aring; dette websted.',
-
 
 // D
 'date_mot_heures' => 'timer',
@@ -120,7 +119,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_ajoute' => '<NEW>Added text',
 'diff_texte_deplace' => '<NEW>Moved text',
 'diff_texte_supprime' => '<NEW>Deleted text',
-
 
 // E
 'email' => 'e-mail',
@@ -161,7 +159,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_obligatoire' => '<b>Titel</b> [Skal oplyses]<br />',
 'entree_url' => 'Dit websteds URL',
 
-
 // I
 'ical_info1' => 'Denne side viser flere m&aring;der til at f&oslash;lge med i aktiviteter p&aring; dette websted.',
 'ical_info2' => 'For mere information, bes&oslash;g <a href="http://www.spip.net/fr_suivi">SPIP dokumentation</a>.',
@@ -183,6 +180,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creation_groupe_mots' => 'Opret ny n&oslash;gleordsgruppe',
 'icone_creation_mots_cles' => 'Opret nyt n&oslash;gleord',
 'icone_creer_auteur' => 'Opret ny forfatter og tilknyt til denne artikel',
+'icone_creer_mot_cle' => 'Opret nyt n&oslash;gleord og tilknyt til denne artikel',
 'icone_creer_rubrique_2' => 'Opret nyt afsnit',
 'icone_ecrire_nouvel_article' => 'Nye indl&aelig;g i dette afsnit',
 'icone_envoyer_message' => 'Send denne meddelelse',
@@ -277,7 +275,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_confirmer_passe' => 'Bekr&aelig;ft ny adgangskode:',
 'info_connexion_base' => 'Andet skrift: <b>Fors&oslash;g p&aring; opkobling til databasen</b>',
 'info_connexion_ldap_ok' => '<b>Din LDAP-opkobling lykkedes.</b><p> Du kan g&aring; til n&aelig;ste skridt.',
-'info_connexion_mysql' => 'F&oslash;rste skridt: <b>Din MySQL opkobling</b>',
+'info_connexion_mysql' => 'F&oslash;rste skridt: <b>Din SQL opkobling</b>',
 'info_connexion_ok' => 'Opkoblingen lykkedes.',
 'info_contact' => 'Kontakt',
 'info_contenu_articles' => 'Artiklens bestanddele',
@@ -376,7 +374,7 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_message_en_redaction' => 'Dine meddelelser under redaktion',
 'info_message_technique' => 'Teknisk meddelelse:',
 'info_messagerie_interne' => 'Interne meddelelser',
-'info_mise_a_niveau_base' => 'MySQL databaseopgradering',
+'info_mise_a_niveau_base' => 'SQL databaseopgradering',
 'info_mise_a_niveau_base_2' => '{{Advarsel!}} Du har installeret en version af SPIP-filer, der er &aelig;ldre end dem, der var p&aring; webstedet i forvejen. Du risikerer at miste databasen og webstedet vil ikke fungere ordentligt mere.<br />{{Geninstraller SPIP-filerne.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Standard funktionsm&aring;de for offentlige forummer',
 'info_modifier_breve' => 'Ret nyhed:',
@@ -479,7 +477,7 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_reglage_ldap' => 'Muligheder: <b>Konfigurere LDAP underst&oslash;ttelse</b>',
 'info_renvoi_article' => '<b>Viderestilling.</b> Denne artikel henviser til siden:',
 'info_reserve_admin' => 'Kun administratorer kan &aelig;ndre denne adresse.',
-'info_restauration_sauvegarde' => 'Genindl&aelig;sning af sikkerhedskopi @archive@',
+'info_restauration_sauvegarde' => '<MODIF>Genindl&aelig;sning af sikkerhedskopi @archive@',
 'info_restreindre_rubrique' => 'Begr&aelig;ns administrationsrettigheder til dette afsnit:',
 'info_resultat_recherche' => 'S&oslash;geresultater:',
 'info_rubriques' => 'Afsnit',
@@ -639,10 +637,8 @@ i en farve, der angiver deres status:',
 'item_utiliser_syndication' => 'Benyt automatisk syndikering',
 'item_visiteur' => 'bes&oslash;gende',
 
-
 // J
 'jour_non_connu_nc' => '&nbsp;',
-
 
 // L
 'lien_ajout_destinataire' => 'Tilf&oslash;j denne modtager',
@@ -677,7 +673,6 @@ i en farve, der angiver deres status:',
 'logo_standard_rubrique' => 'STANDARDLOGO TIL AFSNIT',
 'logo_survol' => 'PEGEF&Oslash;LSOMT LOGO',
 
-
 // M
 'menu_aide_installation_choix_base' => 'Valg af database',
 'module_fichier_langue' => 'Sprogfil',
@@ -686,7 +681,6 @@ i en farve, der angiver deres status:',
 'module_texte_explicatif' => 'Du kan inds&aelig;tte f&oslash;lgende genveje i dit websteds skabeloner. De vil automatisk blive oversat til de forskellige sprog, som der findes sprogfiler til.',
 'module_texte_traduction' => 'Sprogfilen &laquo;&nbsp;@module@&nbsp;&raquo; findes p&aring;:',
 'mois_non_connu' => 'ukendt',
-
 
 // O
 'onglet_repartition_actuelle' => 'nu',
@@ -704,10 +698,8 @@ i en farve, der angiver deres status:',
 'ortho_verif_impossible' => '<NEW>The system cannot check the spelling of this text.',
 'ortho_verifier' => '<NEW>Spell check',
 
-
 // S
 'statut_admin_restreint' => '(begr&aelig;nset admin)',
-
 
 // T
 'taille_cache_infinie' => '<NEW>This site does not have any fixed limit for the size of the <code>CACHE/</code> directory.',
@@ -739,7 +731,7 @@ i en farve, der angiver deres status:',
 'texte_auteurs' => 'FORFATTERNE',
 'texte_breves' => 'Nyheder er korte og enkle tekster der muligg&oslash;r online offentligg&oslash;relse af pr&aelig;cis information, administration af presseanmeldelser, arrangementskalender...',
 'texte_choix_base_1' => 'V&aelig;lg database:',
-'texte_choix_base_2' => 'MySQL server indeholder et antal databaser.',
+'texte_choix_base_2' => 'SQL server indeholder et antal databaser.',
 'texte_choix_base_3' => '<b>V&aelig;lg</b> v&aelig;lg nedenfor den database, som webhotellet har tildelt dig:',
 'texte_commande_vider_tables_indexation' => 'Brug denne kommando til at t&oslash;mme de indekstabeller, som benyttes af SPIP\'s indbyggede s&oslash;gefunktion.
 			Derved kan du spare diskplads.',
@@ -752,7 +744,7 @@ i en farve, der angiver deres status:',
 'texte_compte_elements' => '@count@ elementer',
 'texte_config_groupe_mots_cles' => '&Oslash;nsker du at aktivere den avancerede konfiguration af n&oslash;gleordsgrupper, ved f.eks. at specificere
 			 at et entydigt ord pr. gruppe kan v&aelig;lges, at en gruppe er vigtig...?',
-'texte_connexion_mysql' => 'Sl&aring; op i de oplysninger, som dit webhotel har stillet til r&aring;dighed: Hvis webhotellet underst&oslash;tter MySQL, b&oslash;r det indeholde oplysninger om opkobling.',
+'texte_connexion_mysql' => '<MODIF>Sl&aring; op i de oplysninger, som dit webhotel har stillet til r&aring;dighed: Hvis webhotellet underst&oslash;tter SQL, b&oslash;r det indeholde oplysninger om opkobling.',
 'texte_contenu_article' => '(Artiklens indhold med f&aring; ord.)',
 'texte_contenu_articles' => 'Med udgangspunkt i det layout du har valgt til dit websted, kan du v&aelig;lge at nogle artikelelementer ikke skal benyttes.
 		Benyt f&oslash;lgende liste til at bestemme, hvilke elementer der skal v&aelig;re til r&aring;dighed.',
@@ -830,8 +822,8 @@ i en farve, der angiver deres status:',
 'texte_referencement_automatique' => '<b>Automatiserede webstedshenvisninger</b><br />
 		Du kan hurtigt henvise til et websted ved nedenfor at angive dens URL eller adressen p&aring; dens datakilde. 
 		SPIP vil automatisk indhente oplysninger om webstedet (titel, beskrivelse...).',
-'texte_requetes_echouent' => '<b>N&aring;r nogle MySQL foresp&oslash;rgsler systematisk og uden tilsyneladende grund g&aring;r galt, er det muligt at fejlen ligger i selve databasen.</b>
-		<p>MySQL har en funktion, der reparerer dens tabeller, hvis de er blevet &oslash;delagt ved et uheld. 
+'texte_requetes_echouent' => '<b>N&aring;r nogle SQL foresp&oslash;rgsler systematisk og uden tilsyneladende grund g&aring;r galt, er det muligt at fejlen ligger i selve databasen.</b>
+		<p>SQL har en funktion, der reparerer dens tabeller, hvis de er blevet &oslash;delagt ved et uheld. 
 		Her kan du fors&oslash;ge at igangs&aelig;tte denne reparationsfunktion; 
 		hvis den g&aring;r galt, b&oslash;r du beholde en kopi af sk&aelig;rmbilledet, 
 		som m&aring;ske kan indeholde antydninger af, hvad der er galt....
@@ -972,11 +964,15 @@ i en farve, der angiver deres status:',
 'trad_lier' => 'Denne artikel er en overs&aelig;ttelse af artikel nummer&nbsp;:',
 'trad_new' => 'Lav en ny overs&aelig;ttelse af denne artikel',
 
+// U
+'upload_fichier_zip' => '<NEW>Fichier ZIP',
+'upload_fichier_zip_texte' => '<NEW>Le fichier que vous proposez d\'installer est un fichier Zip.',
+'upload_fichier_zip_texte2' => '<NEW>Ce fichier peut &ecirc;tre&nbsp;:',
+'upload_zip_decompacter' => '<NEW>d&eacute;compress&eacute; et chaque &eacute;l&eacute;ment qu\'il contient install&eacute; sur le site. Les fichiers qui seront alors install&eacute;s sur le site sont&nbsp;:',
+'upload_zip_telquel' => '<NEW>install&eacute; tel quel, en tant qu\'archive compress&eacute;e Zip&nbsp;;',
 
 // V
 'version_initiale' => '<NEW>Initial version'
-
 );
-
 
 ?>

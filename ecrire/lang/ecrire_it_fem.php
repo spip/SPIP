@@ -1,9 +1,11 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'activer_plugin' => 'Attiva il plugin',
@@ -47,7 +49,6 @@ Verifica l\'indirizzo del file per la syndication di (<b>@url_syndic@</b>) e pro
 'avis_sites_syndiques_probleme' => 'Si sono verificati alcuni problemi nella syndication di questi siti',
 'avis_suppression_base' => 'ATTENZIONE, la cancellazione dei dati &egrave; irreversibile',
 'avis_version_mysql' => 'La versione di SQL installata (@version_mysql@)non permette la correzione automatica delle tabelle.',
-
 
 // B
 'bouton_acces_ldap' => 'Aggiungi l\'accesso a LDAP',
@@ -114,7 +115,6 @@ cancellarli successivamente).',
 'bouton_vider_cache' => 'Svuota la cache',
 'bouton_voir_message' => 'Anteprima messaggio',
 
-
 // C
 'cache_mode_compresse' => 'I file di cache sono salvati in modalit&agrave; compressa.',
 'cache_mode_non_compresse' => 'I file di cache sono salvati in modalit&agrave; non compressa.',
@@ -137,7 +137,6 @@ cancellarli successivamente).',
 'connexion_ldap' => 'Connessione:',
 'copier_en_local' => 'Copia in locale',
 
-
 // D
 'date_mot_heures' => 'ore',
 'diff_para_ajoute' => 'paragrafo aggiunto',
@@ -147,7 +146,6 @@ cancellarli successivamente).',
 'diff_texte_deplace' => 'Testo spostato',
 'diff_texte_supprime' => 'Testo cancellato',
 'double_clic_inserer_doc' => 'Doppio clic qui per inserire la scorciatoia nel testo',
-
 
 // E
 'email' => 'email',
@@ -196,10 +194,8 @@ Se non conosci queste informazioni, richiedile all\'amministratrice del sistema 
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; mancante nel file di definizione',
 'erreur_plugin_version_manquant' => 'Versione del plugin mancante',
 
-
 // F
 'forum_info_original' => 'originale',
-
 
 // I
 'ical_info1' => 'Questa pagina elenca diversi metodi per rimanere in contatto con le varie attivit&agrave; del sito.',
@@ -741,13 +737,10 @@ Le traduzioni sono associate all\'originale,
 'item_utiliser_syndication' => 'Attiva la syndication automatica',
 'item_visiteur' => 'visitatore',
 
-
 // J
 'jour_non_connu_nc' => 'n.c.',
 
-
 // L
-'les_deux' => 'entrambi',
 'lien_ajout_destinataire' => 'Aggiungi il destinatario',
 'lien_ajouter_auteur' => 'Aggiungi questa autrice',
 'lien_ajouter_participant' => 'Aggiungi una partecipante',
@@ -781,7 +774,6 @@ Le traduzioni sono associate all\'originale,
 'logo_standard_rubrique' => 'LOGO STANDARD DELLE RUBRICHE',
 'logo_survol' => 'LOGO ROLLOVER',
 
-
 // M
 'menu_aide_installation_choix_base' => 'Scegliere il database',
 'module_fichier_langue' => 'File lingua',
@@ -790,7 +782,6 @@ Le traduzioni sono associate all\'originale,
 'module_texte_explicatif' => '&Egrave; possibile inserire le scorciatoie nel modello di layout del proprio sito pubblico. Queste verranno tradotte automaticamente nelle diverse lingue (se esiste gi&agrave; un file lingua).',
 'module_texte_traduction' => 'Il file lingua &laquo;@module@&raquo; &egrave; disponibile in:',
 'mois_non_connu' => 'sconosciuto',
-
 
 // O
 'onglet_declarer_une_autre_base' => '<NEW><NEW>D&eacute;clarer une autre base',
@@ -808,7 +799,6 @@ Le traduzioni sono associate all\'originale,
 'ortho_trop_de_fautes' => 'Attenzione: il testo contiene troppi errori, non &egrave; stato fornito alcun suggerimento di correzione per evitare di sovraccaricare il sistema.',
 'ortho_verif_impossible' => 'Il sistema non pu&ograve; controllare l\'ortografia di questo testo.',
 'ortho_verifier' => 'Controllare l\'ortografia',
-
 
 // P
 'pas_de_proxy_pour' => 'Se necessario, indicare i server o i domini per i quali non si deve applicare questo proxy (per esempio: @exemple@)',
@@ -859,10 +849,8 @@ Le traduzioni sono associate all\'originale,
 'plugins_vue_liste' => '<NEW><NEW>Liste',
 'protocole_ldap' => 'Versione del protocollo:',
 
-
 // R
 'repertoire_plugins' => 'Cartella:',
-
 
 // S
 'sauvegarde_fusionner' => 'Unire il database attuale con la copia di backup',
@@ -878,7 +866,6 @@ Le traduzioni sono associate all\'originale,
 'syndic_option_resume_non' => 'il contenuto completo degli articoli (in formato HTML)',
 'syndic_option_resume_oui' => 'un semplice riassunto (in formato testo)',
 'syndic_options' => 'Opzioni per la syndication:',
-
 
 // T
 'taille_cache_image' => 'Le immagini elaborate automaticamente da SPIP (icone dei documenti, titoli in formato grafico, funzioni matematiche in formato TeX...) occupano nella cartella @dir@ in tutto @taille@.',
@@ -1163,8 +1150,12 @@ in tal caso si pu&ograve; verificare un leggero rallentamento del tuo sito.',
 'trad_lier' => 'Questo articolo &egrave; una traduzione dell\'articolo numero:',
 'trad_new' => 'Scrivere una nuova traduzione dell\'articolo',
 
-
 // U
+'upload_fichier_zip' => 'File ZIP',
+'upload_fichier_zip_texte' => 'Il file proposto &egrave; un file ZIP.',
+'upload_fichier_zip_texte2' => 'Questo file pu&ograve; essere:',
+'upload_zip_decompacter' => 'decompresso e ogni elemento installato nel sito. I file che saranno installati nel sito sono:',
+'upload_zip_telquel' => 'installato cos&igrave; com\'&egrave; in quanto archivio compresso Zip;',
 'utf8_convert_attendez' => 'Attendi qualche secondo e aggiorna la pagina.',
 'utf8_convert_avertissement' => 'Stai per convertire il contenuto del proprio database (articoli, brevi, ecc.) dal set di caratteri <b>@orig@</b> al set di caratteri <b>@charset@</b>.',
 'utf8_convert_backup' => 'Non dimenticare di fare prima un backup completo del sito. Inoltre si deve verificare che i modelli e i file lingua sono compatibili @charset@.',
@@ -1175,13 +1166,10 @@ in tal caso si pu&ograve; verificare un leggero rallentamento del tuo sito.',
 'utf8_convert_verifier' => 'Ora &egrave; necessario svuotale la cache e verificare che non vi siano problemi sulle pagine pubbliche del sito. In caso di problemi gravi &egrave; stato effettuato un backup dei dati (in formato SQL) nella cartella @rep@.',
 'utf8_convertir_votre_site' => 'Convertire il sito in UTF-8',
 
-
 // V
 'version' => 'Versione:',
 'version_deplace_rubrique' => '<NEW><NEW>D&#233;plac&#233; de <b>&#171;&nbsp;@from@&nbsp;&#187;</b> vers <b>&#171;&nbsp;@to@&nbsp;&#187;</b>.',
 'version_initiale' => 'Versione iniziale'
-
 );
-
 
 ?>

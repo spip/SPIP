@@ -1,9 +1,11 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'activer_plugin' => 'Plugin aktiv&aacute;l&aacute;sa',
@@ -14,16 +16,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'Nincs eredm&eacute;ny.',
 'avis_chemin_invalide_1' => 'Az &Ouml;n &aacute;ltal v&aacute;lasztott el&eacute;r&eacute;si &uacute;t',
 'avis_chemin_invalide_2' => 'nem t&#369;nik &eacute;rv&eacute;nyesnek. Menjen az el&ouml;z&#337; oldalra &eacute;s ellen&#337;rizze a be&iacute;rt adatokat.',
-'avis_connexion_echec_1' => 'A MySQL szerverhez val&oacute; csatlakoz&aacute;s sikertelen.',
+'avis_connexion_echec_1' => '<MODIF>A SQL szerverhez val&oacute; csatlakoz&aacute;s sikertelen.',
 'avis_connexion_echec_2' => 'Menjen az el&ouml;z&#337; oldalra, &eacute;s ellen&#337;rizze a be&iacute;rt adatokat.',
-'avis_connexion_echec_3' => '<b>Megjegyz&eacute;s:</b> Sok szerver eset&eacute;n, <b>k&eacute;rni kell</b> a MySQL adatb&aacute;zishoz val&oacute; hozz&aacute;f&eacute;r&eacute;s aktv&aacute;l&aacute;s&aacute;t, miel&#337;bb haszn&aacute;lhassa. Amennyiben nem tud csatlakozni, ellen&#337;rizze, ha ez az elj&aacute;r&aacute;s megt&ouml;rt&eacute;nt-e.',
+'avis_connexion_echec_3' => '<MODIF><b>Megjegyz&eacute;s:</b> Sok szerver eset&eacute;n, <b>k&eacute;rni kell</b> a SQL adatb&aacute;zishoz val&oacute; hozz&aacute;f&eacute;r&eacute;s aktv&aacute;l&aacute;s&aacute;t, miel&#337;bb haszn&aacute;lhassa. Amennyiben nem tud csatlakozni, ellen&#337;rizze, ha ez az elj&aacute;r&aacute;s megt&ouml;rt&eacute;nt-e.',
 'avis_connexion_ldap_echec_1' => 'Az LDAP szerverhez val&oacute; csatlakoz&aacute;s sikertelen.',
 'avis_connexion_ldap_echec_2' => 'Menjen az el&ouml;z&#337; oldalra, &eacute;s ellen&#337;rizze a be&iacute;rt adatokat.',
 'avis_connexion_ldap_echec_3' => 'Alternat&iacute;v m&oacute;don, ne haszn&aacute;lja az LDAP t&aacute;mogat&aacute;st felhaszn&aacute;l&oacute;k import&aacute;l&aacute;s&aacute;ra.',
 'avis_conseil_selection_mot_cle' => '<b>Fontos csoport&nbsp;:</b> Er&#337;sen tan&aacute;csoljuk, hogy kulcs sz&oacute;t v&aacute;lasszon abban a csoportban.',
 'avis_deplacement_rubrique' => 'Vigy&aacute;zat&nbsp;! Ez a rovat @contient_breves@ h&iacute;rt tartalmaz&nbsp;: ha &aacute;t akarja helyezni, ezt a meger&#337;s&iacute;t&eacute;si jel&ouml;l&#337;kock&aacute;t kell jel&ouml;lni.',
 'avis_destinataire_obligatoire' => 'Egy c&iacute;mzettet kell jel&ouml;lni miel&#337;bb elk&uuml;ldi ezt az &uuml;zenetet.',
-'avis_erreur_connexion_mysql' => 'MySQL-es csatlakoz&aacute;si hiba',
+'avis_erreur_connexion_mysql' => 'SQL-es csatlakoz&aacute;si hiba',
 'avis_erreur_version_archive' => '<b>Vigy&aacute;zat! A @archive@ f&aacute;jl az itt telep&iacute;tett SPIP
     egy m&aacute;sik verzi&oacute;nak felel meg
     </b> &Oacute;ri&aacute;si neh&eacute;zs&eacute;gek el&#337;tt &aacute;ll:
@@ -45,8 +47,7 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.',
 'avis_sites_probleme_syndication' => 'Azok a honlap szindik&aacute;l&aacute;si probl&eacute;m&aacute;val &uuml;tk&ouml;ztek',
 'avis_sites_syndiques_probleme' => 'Azok a szindik&aacute;lt honlapok valami probl&eacute;m&aacute;t okoztak',
 'avis_suppression_base' => 'VIGY&Aacute;ZAT, az adatok t&ouml;rl&eacute;se visszavonhatatlan',
-'avis_version_mysql' => 'Ez a MySQL verzi&oacute; (@version_mysql@) nem teszi lehet&#337;v&eacute; a adatb&aacute;zis t&aacute;blai &ouml;njav&iacute;t&aacute;s&aacute;t.',
-
+'avis_version_mysql' => 'Ez a SQL verzi&oacute; (@version_mysql@) nem teszi lehet&#337;v&eacute; a adatb&aacute;zis t&aacute;blai &ouml;njav&iacute;t&aacute;s&aacute;t.',
 
 // B
 'bouton_acces_ldap' => 'Hozz&aacute;tenni az LDAP hozz&aacute;f&eacute;r&eacute;st >>',
@@ -108,13 +109,11 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.',
 'bouton_vider_cache' => 'A "cache" &uuml;r&iacute;t&eacute;se',
 'bouton_voir_message' => 'N&eacute;zni az &uuml;zenetet j&oacute;v&aacute;hagy&aacute;s el&#337;tt',
 
-
 // C
 'cache_mode_compresse' => 'A "cache" f&aacute;jlai t&ouml;m&ouml;r&iacute;tett form&aacute;ban vannak felv&eacute;ve.',
 'cache_mode_non_compresse' => 'A "cache" f&aacute;jlai nem t&ouml;m&ouml;r&iacute;tett form&aacute;ban vannak felv&eacute;ve.',
 'cache_modifiable_webmestre' => 'Ezt a param&eacute;tert a honlap gazd&aacute;ja m&oacute;dos&iacute;thatja.',
 'calendrier_synchro' => 'Amennyiben egy <b>iCal</b>-val kompatibilis szoftvert haszn&aacute;l, lehet szinkroniz&aacute;lni e honlap inform&aacute;ci&oacute;ival.',
-
 
 // D
 'date_mot_heures' => '&oacute;r&aacute;k',
@@ -125,7 +124,6 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.',
 'diff_texte_deplace' => 'Sz&ouml;veg &aacute;thelyezve',
 'diff_texte_supprime' => 'Sz&ouml;veg t&ouml;r&ouml;lve',
 'double_clic_inserer_doc' => 'Dupla kattint&aacute;ssal besz&uacute;rhatja a gyorshivatkoz&aacute;st a sz&ouml;vegbe.',
-
 
 // E
 'email' => 'email',
@@ -174,7 +172,6 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.',
 'erreur_plugin_tag_plugin_absent' => 'hi&aacute;nyz&oacute; &lt;plugin&gt; a defini&aacute;l&oacute; f&aacute;jlban',
 'erreur_plugin_version_manquant' => 'Hi&aacute;nyz&oacute; plugin verzi&oacute;',
 
-
 // I
 'ical_info1' => 'Ez az oldal t&ouml;bb m&oacute;dszert mutat ahhoz, hogy maradjon kapcsolatban e honlap &eacute;let&eacute;vel.',
 'ical_info2' => 'Azokr&oacute;l a technik&aacute;kr&oacute;l t&ouml;v&aacute;bbi inform&aacute;ci&oacute;k olvashat&oacute;k ide <a href="http://www.spip.net/fr_suivi">az SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.',
@@ -197,6 +194,7 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.',
 'icone_creation_groupe_mots' => '&Uacute;j sz&oacute;csoport l&eacute;trehoz&aacute;sa',
 'icone_creation_mots_cles' => '&Uacute;j kulcssz&oacute; l&eacute;trehoz&aacute;sa',
 'icone_creer_auteur' => '&Uacute;j szerz&#337; l&eacute;trehoz&aacute;sa, &eacute;s hozz&aacute;rendel&eacute;se ehhez a cikkekhez',
+'icone_creer_mot_cle' => '&Uacute;j kulcssz&oacute; l&eacute;trehoz&aacute;sa &eacute;s hozz&aacute;rendel&eacute;se ehhez a cikkhez',
 'icone_creer_rubrique_2' => '&Uacute;j rovat l&eacute;trehoz&aacute;sa',
 'icone_ecrire_nouvel_article' => 'E rovatban szerepl&#337; h&iacute;rek',
 'icone_envoyer_message' => '&Uuml;zenet k&uuml;ld&eacute;se',
@@ -292,7 +290,7 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.',
 'info_confirmer_passe' => 'Az &uacute;j jelsz&oacute; er&#337;s&iacute;tse meg :',
 'info_connexion_base' => 'M&aacute;sodik l&eacute;p&eacute;s : <b>Adatb&aacute;zishoz val&oacute; csatlakoz&aacute;si pr&oacute;ba</b>',
 'info_connexion_ldap_ok' => 'Az LDAP csatlakoz&aacute;s sikeres lett.</b><p /> L&eacute;phet tov&aacute;bb a k&ouml;vetkez&#337;re.',
-'info_connexion_mysql' => 'Els&#337; l&eacute;p&eacute;s : <b>Az &Ouml;n MySQL csatlakoz&aacute;sa</b>',
+'info_connexion_mysql' => 'Els&#337; l&eacute;p&eacute;s : <b>Az &Ouml;n SQL csatlakoz&aacute;sa</b>',
 'info_connexion_ok' => 'A csatlakoz&aacute;s sikeres.',
 'info_contact' => 'Kontakt',
 'info_contenu_articles' => 'Cikkek tartalma',
@@ -394,7 +392,7 @@ a t&ouml;r&ouml;lt szerz&#337;k pedig kuk&aacute;val vannak jel&ouml;lve.',
 'info_message_en_redaction' => 'Az &Ouml;n szerkeszt&eacute;s alatti &uuml;zenetei',
 'info_message_technique' => 'M&#369;szaki &uuml;zenet :',
 'info_messagerie_interne' => 'Bels&#337; levelez&eacute;s',
-'info_mise_a_niveau_base' => 'A MySQL adatb&aacute;zisa naprak&eacute;sz t&eacute;tele',
+'info_mise_a_niveau_base' => 'A SQL adatb&aacute;zisa naprak&eacute;sz t&eacute;tele',
 'info_mise_a_niveau_base_2' => '{{Vigy&aacute;zat!}} Az SPIP f&aacute;jlait egyik {el&ouml;z&#337;} v&aacute;ltozatot telep&iacute;tett fel, mint ami ezel&#337;tt volt ezen a t&aacute;rhelyen: az adatb&aacute;zis veszhet, &eacute;s a honlap t&ouml;bbet nem fog m&#369;k&ouml;dni.<br />{{Telep&iacute;tse &uacute;jra az SPIP f&aacute;jlait.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Nyilv&aacute;nos f&oacute;rumok alap&eacute;rtelmezett m&#369;k&ouml;d&eacute;si m&oacute;dszere',
 'info_modifier_breve' => 'A h&iacute;r m&oacute;dos&iacute;t&aacute;sa :',
@@ -499,7 +497,7 @@ a felhaszn&aacute;l&oacute;k automatikus emailt kapnak,
 'info_reglage_ldap' => 'Opci&oacute;k: <b>LDAP import&aacute;l&aacute;s be&aacute;ll&iacute;t&aacute;sa</b>',
 'info_renvoi_article' => '<b>&Aacute;tir&aacute;ny&iacute;t&aacute;s.</b> Ez a cikk erre az oldalra hivatkozik:',
 'info_reserve_admin' => 'Csak az adminisztr&aacute;tork m&oacute;dos&iacute;thatj&aacute;k ezt a c&iacute;met.',
-'info_restauration_sauvegarde' => 'A @archive@ nev&#369; ment&eacute;s resztaur&aacute;l&aacute;sa',
+'info_restauration_sauvegarde' => '<MODIF>A @archive@ nev&#369; ment&eacute;s resztaur&aacute;l&aacute;sa',
 'info_restreindre_rubrique' => 'Korl&aacute;tozni a kezel&eacute;st a k&ouml;vetkez&#337; rubrik&aacute;ra :',
 'info_resultat_recherche' => 'Keres&eacute;s eredm&eacute;nyei :',
 'info_rubriques' => 'Rovatok',
@@ -668,10 +666,8 @@ ami &aacute;llapot&aacute;t jelzi&nbsp;:',
 'item_utiliser_syndication' => 'Automatikus szindik&aacute;l&aacute;s haszn&aacute;lata',
 'item_visiteur' => 'vend&eacute;g',
 
-
 // J
 'jour_non_connu_nc' => 'n&eacute;vtelen',
-
 
 // L
 'lien_ajout_destinataire' => 'A c&iacute;mzett hozz&aacute;ad&aacute;sa',
@@ -706,7 +702,6 @@ ami &aacute;llapot&aacute;t jelzi&nbsp;:',
 'logo_standard_rubrique' => 'A ROVATOK SZABV&Aacute;NYOS LOGOJA',
 'logo_survol' => 'LEBEG&#336; LOGO',
 
-
 // M
 'menu_aide_installation_choix_base' => 'Adatb&aacute;zis kiv&aacute;laszt&aacute;sa',
 'module_fichier_langue' => 'Nyelvi f&aacute;jl',
@@ -715,7 +710,6 @@ ami &aacute;llapot&aacute;t jelzi&nbsp;:',
 'module_texte_explicatif' => 'A k&ouml;vetkez&#337; r&ouml;vid&iacute;t&eacute;sek besz&uacute;rhat&oacute;k a nyilv&aacute;nos honlap csontv&aacute;zaiba. Automatikusan lesznek leford&iacute;tva, amennyiben l&eacute;tezik egy nyelvi f&aacute;jl.',
 'module_texte_traduction' => 'A &laquo;&nbsp;@module@&nbsp;&raquo; nyelvi f&aacute;jl l&eacute;tezik&nbsp;:',
 'mois_non_connu' => 'ismeretlen',
-
 
 // O
 'onglet_repartition_actuelle' => 'jelenleg',
@@ -733,7 +727,6 @@ ami &aacute;llapot&aacute;t jelzi&nbsp;:',
 'ortho_verif_impossible' => 'A rendszer nem tudja ellen&#337;rizni e sz&ouml;veg helyes&iacute;r&aacute;s&aacute;t.',
 'ortho_verifier' => 'Helyes&iacute;r&aacute;s ellen&#337;rz&eacute;s ind&iacute;t&aacute;sa',
 
-
 // P
 'plugin_etat_developpement' => 'Fejleszt&eacute;s alatt',
 'plugin_etat_experimental' => 'kis&eacute;rlet jelleg&#369;',
@@ -741,10 +734,8 @@ ami &aacute;llapot&aacute;t jelzi&nbsp;:',
 'plugin_etat_test' => 'tesztel&eacute;s alatt',
 'plugins_liste' => 'plugin lista',
 
-
 // R
 'repertoire_plugins' => 'Mappa&nbsp;:',
-
 
 // S
 'statut_admin_restreint' => '(korl&aacute;tolt admin)',
@@ -757,7 +748,6 @@ ami &aacute;llapot&aacute;t jelzi&nbsp;:',
 'syndic_option_resume_non' => 'a cikkek teljes tartalm&aacute;t (HTML form&aacute;tumban)',
 'syndic_option_resume_oui' => 'egy egyszer&#369; &ouml;sszefoglal&aacute;s (sz&ouml;veges form&aacute;tumban)',
 'syndic_options' => 'Szindik&aacute;l&aacute;si opci&oacute;k&nbsp;:',
-
 
 // T
 'taille_cache_image' => 'Az SPIP &aacute;ltal kalkul&aacute;lt k&eacute;pek (dok. b&eacute;lyegk&eacute;pei, grafikusan megjelen&#337; c&iacute;mek, TeX formatum&uacute; matek f&uuml;ggv&eacute;nyek...) @taille@ m&eacute;ret&#369; helyet foglalnak a @dir@ nev&#369; mapp&aacute;ban.',
@@ -786,7 +776,7 @@ SPIP &uacute;jrat&eacute;l&eacute;p&iacute;t&eacute;s&eacute;t egy &uacute;jabb 
 'texte_auteurs' => 'A SZERZ&#336;',
 'texte_breves' => 'A h&iacute;rek olyan r&ouml;vid &eacute;s egyszer&#369; sz&ouml;vegek, melyeknek seg&iacute;ts&eacute;g&eacute;vel lehet gyorsan publik&aacute;lni r&ouml;vid inform&aacute;ci&oacute;kat, napszeml&eacute;t, esem&eacute;nynapt&aacute;rt...',
 'texte_choix_base_1' => 'V&aacute;lassza az adatb&aacute;zist :',
-'texte_choix_base_2' => 'A MySQL szerver t&ouml;bb adatb&aacute;zist tartalmaz.',
+'texte_choix_base_2' => 'A SQL szerver t&ouml;bb adatb&aacute;zist tartalmaz.',
 'texte_choix_base_3' => '<b>Jel&ouml;lje</b> azt, amit az &Ouml;n Web szolgaltat&oacute;ja adta:',
 'texte_commande_vider_tables_indexation' => 'Ezt a parancsot haszn&aacute;lja a haszn&aacute;lt index&aacute;l&aacute;si t&aacute;bl&aacute;k t&ouml;rl&eacute;s&eacute;re, melyeket haszn&aacute;l az SPIP bels&#337; keres&#337; motorja. Ett&oacute;l t&aacute;rhelyet lehet visszanyerni.',
 'texte_comment_lire_tableau' => 'A n&eacute;pszer&#369;s&eacute;g szerinti
@@ -799,7 +789,7 @@ SPIP &uacute;jrat&eacute;l&eacute;p&iacute;t&eacute;s&eacute;t egy &uacute;jabb 
 'texte_compte_elements' => '@count@ darab',
 'texte_config_groupe_mots_cles' => 'Kiv&aacute;nja-e aktiv&aacute;lni a kulcsszavak b&#337;v&iacute;tett konfigur&aacute;l&aacute;s&aacute;t,
   p&eacute;ld&aacute;ul jelezve azt, hogy egyetlen sz&oacute; v&aacute;lasztaht&oacute; egy csoportban, vagy fontos egy csoport... ?',
-'texte_connexion_mysql' => 'Ellen&#337;rizze a Web szolg&aacute;ltat&oacute;ja &aacute;ltal adott inform&aacute;ci&oacute;kat&nbsp;: tal&aacute;lhat&oacute; az, ha fut MySQL, illetve annak csatlakoz&aacute;si param&eacute;terei.',
+'texte_connexion_mysql' => '<MODIF>Ellen&#337;rizze a Web szolg&aacute;ltat&oacute;ja &aacute;ltal adott inform&aacute;ci&oacute;kat&nbsp;: tal&aacute;lhat&oacute; az, ha fut SQL, illetve annak csatlakoz&aacute;si param&eacute;terei.',
 'texte_contenu_article' => '(Cikk tartalma n&eacute;h&aacute;ny sz&oacute;ban.)',
 'texte_contenu_articles' => 'A honlap fel&eacute;p&iacute;t&eacute;se alapj&aacute;n, &uacute;gy d&ouml;ntheti,
   hogy a cikkek bizonyos elemei nincsenek kihaszn&aacute;lva.
@@ -884,9 +874,9 @@ szeretne friss&iacute;teni, akkor menjen ink&aacute;bb a nyilv&aacute;nos r&eacu
 'texte_recuperer_base' => 'Adatb&aacute;zis jav&iacute;t&aacute;sa',
 'texte_reference_mais_redirige' => 'a cikke fel van v&eacute;ve az &Ouml;n SPIP honlapj&aacute;n, de &aacute;t lett ir&aacute;ny&iacute;tva egy m&aacute;sik URL fel&eacute;.',
 'texte_referencement_automatique' => '<b>egy honlap automatikus felv&eacute;tele</b><br />Gyorsan felvehet egy honlapot, ha lejjebb jelzi a kiv&aacute;nt URL-t, vagy a backend f&aacute;jl c&iacute;m&eacute;t. SPIP automatikusan fogja megszerezni az erre vonatkoz&oacute; inform&aacute;ci&oacute;kat (neve, le&iacute;r&aacute;sa...).',
-'texte_requetes_echouent' => '<b>Ha bizonyos MySQL lek&eacute;rdez&eacute;sek rendszeresen &eacute;s oktalanul hib&aacute;sak,
+'texte_requetes_echouent' => '<b>Ha bizonyos SQL lek&eacute;rdez&eacute;sek rendszeresen &eacute;s oktalanul hib&aacute;sak,
  lehets&eacute;ges, hogy maga az adatb&aacute;zis az  oka.</b><p />
-  MySQL ad lehet&#337;s&eacute;get a t&aacute;bl&aacute;k jav&iacute;t&aacute;s&aacute;ra, ha v&eacute;letlen&uuml;l lett s&eacute;r&uuml;lved.
+  SQL ad lehet&#337;s&eacute;get a t&aacute;bl&aacute;k jav&iacute;t&aacute;s&aacute;ra, ha v&eacute;letlen&uuml;l lett s&eacute;r&uuml;lved.
   Itt lehet jav&iacute;t&aacute;st kezdem&eacute;nyezni&nbsp;;
   Kudarc eset&eacute;n, tartson m&aacute;solatot a k&eacute;perny&#337;r&#337;l,
   ami tal&aacute;n nyomokat tartalmaz...<p />
@@ -1026,8 +1016,12 @@ dans le cache SPIP. Ez p&eacute;ld&aacute;ul er&ouml;ltethet az &ouml;sszes olda
 'trad_lier' => 'Ez a cikk egy ford&iacute;t&aacute;s err&#337;l a cikkr&#337;l&nbsp;:',
 'trad_new' => '&Iacute;rni egy &uacute;jabb ford&iacute;t&aacute;st err&#337;l a cikkr&#337;l',
 
-
 // U
+'upload_fichier_zip' => 'ZIP tipus&uacute; f&aacute;jl',
+'upload_fichier_zip_texte' => 'ZIP tipus&uacute; az a f&aacute;jl, amit akar telep&iacute;teni.',
+'upload_fichier_zip_texte2' => 'Ez a f&aacute;jl lehet :',
+'upload_zip_decompacter' => 'kit&ouml;m&ouml;ritve, &eacute;s az &ouml;sszes eleme a honlapra telep&iacute;tve. A honlapra telep&iacute;tett f&aacute;jlok a k&ouml;vetkez&#337;k lesznek :',
+'upload_zip_telquel' => 'Egymag&aacute;ban telep&iacute;tve, mint ZIP t&ouml;m&ouml;r&iacute;tett &aacute;ll&oacute;m&aacute;ny;',
 'utf8_convert_attendez' => 'V&aacute;rjon egy kicsit, majd t&ouml;ltse &uacute;jra az oldalt.',
 'utf8_convert_avertissement' => 'Most az adatb&aacute;zis tartalm&aacute;t (cikkek, h&iacute;rek, stb.) k&eacute;sz&uuml;l konvert&aacute;lni az eredeti <b>@orig@</b> karaktert&aacute;bl&aacute;b&oacute;l a <b>@charset@</b> karaktert&aacute;bla fel&eacute;.',
 'utf8_convert_backup' => 'Ne felejtse el&#337;sz&ouml;r teljesen megmenteni a honlapj&aacute;t. Azt is ellen&#337;rizze, hogy a szkiptjei &eacute;s a nyelvi f&aacute;jlok is @charset@ kompatibilis. Egy&eacute;bk&eacute;nt a m&oacute;dos&iacute;t&aacute;sok k&ouml;vet&eacute;se, ha aktiv&aacute;lt, k&aacute;rosodni fog.',
@@ -1038,12 +1032,9 @@ dans le cache SPIP. Ez p&eacute;ld&aacute;ul er&ouml;ltethet az &ouml;sszes olda
 'utf8_convert_verifier' => 'Most &uuml;r&iacute;tse a cache-t, &eacute;s ellen&#337;rizze, hogy minden rendben van a publikus lapokon. Nagyobb problema eset&eacute;re egy adatment&eacute;s (SQL form&aacute;tumban) megt&ouml;rt&eacute;nt a @rep@ n. mapp&aacute;ban.',
 'utf8_convertir_votre_site' => 'utf-8 karaktert&aacute;bl&aacute;ba konvert&aacute;lodjon a honlapja',
 
-
 // V
 'version' => 'Verzi&oacute;&nbsp;:',
 'version_initiale' => 'Eredeti verzi&oacute;'
-
 );
-
 
 ?>

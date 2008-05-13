@@ -1,9 +1,11 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'activer_plugin' => 'Activar el plugin',
@@ -14,9 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'Ning&uacute;n resultado.',
 'avis_chemin_invalide_1' => 'El camino escogido',
 'avis_chemin_invalide_2' => 'no parece v&aacute;lido. Regresa a la p&aacute;gina precedente y comprueba las informaciones procuradas.',
-'avis_connexion_echec_1' => 'Fall&oacute; la conexi&oacute;n al servidor SQL.',
+'avis_connexion_echec_1' => '<MODIF>Fall&oacute; la conexi&oacute;n al servidor SQL.',
 'avis_connexion_echec_2' => 'Regresa a la p&aacute;gina precedente y verifica las informaciones procuradas.',
-'avis_connexion_echec_3' => '<b>OjO:</b> En muchos servidores, es necesario <b>pedir</b> la activaci&oacute;n del acceso a la base SQL antes de poder usarla. Si no puedes conectarte, verifica que hiciste dicho tr&aacute;mite.',
+'avis_connexion_echec_3' => '<MODIF><b>OjO:</b> En muchos servidores, es necesario <b>pedir</b> la activaci&oacute;n del acceso a la base SQL antes de poder usarla. Si no puedes conectarte, verifica que hiciste dicho tr&aacute;mite.',
 'avis_connexion_ldap_echec_1' => 'La conexi&oacute;n al servidor LDAP ha fallado.',
 'avis_connexion_ldap_echec_2' => 'Regresa a la p&aacute;gina anterior y comprueba las informaciones procuradas.',
 'avis_connexion_ldap_echec_3' => 'Alternativamente, no utilices el soporte LDAP para importar usuarios y usuarias.',
@@ -41,7 +43,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_sites_syndiques_probleme' => 'Estos sitios sindicados tienen problemas',
 'avis_suppression_base' => '&iexcl;ATENCI&Oacute;N, la supresi&oacute;n de datos es irreversible!',
 'avis_version_mysql' => 'Tu servidor SQL (@version_mysql@) no permite la auto-reparaci&oacute;n de tablas en la base.',
-
 
 // B
 'bouton_acces_ldap' => 'A&ntilde;adir un acceso LDAP',
@@ -101,7 +102,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_vider_cache' => 'Vaciar la cach&eacute;',
 'bouton_voir_message' => 'Ver el mensaje antes de enviarlo',
 
-
 // C
 'cache_mode_compresse' => 'Los archivos de cach&eacute; se almacenan en modo comprimido.',
 'cache_mode_non_compresse' => 'Los archivos de cach&eacute; se almacenan en modo no comprimido.',
@@ -118,7 +118,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'connexion_ldap' => 'Conexi&oacute;n:',
 'copier_en_local' => 'Copiar en local',
 
-
 // D
 'date_mot_heures' => 'horas',
 'diff_para_ajoute' => 'P&aacute;rrafo a&ntilde;adido',
@@ -128,7 +127,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_deplace' => 'Texto desplazado',
 'diff_texte_supprime' => 'Texto suprimido',
 'double_clic_inserer_doc' => 'Haga doble clic para insertar este atajo en el texto',
-
 
 // E
 'email' => 'correo electr&oacute;nico',
@@ -176,10 +174,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_tag_plugin_absent' => 'Falta el &lt;plugin&gt; en el archivo de  definici&oacute;n',
 'erreur_plugin_version_manquant' => 'Falta la versi&oacute;n del plugin',
 
-
 // F
 'forum_info_original' => 'original',
-
 
 // I
 'ical_info1' => 'En esta p&aacute;gina se presentan diferentes maneras de quedar en contacto con la vida del sitio.',
@@ -504,7 +500,7 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_reglage_ldap' => 'Opciones: <b>Ajustes de la importaci&oacute;n LDAP</b>',
 'info_renvoi_article' => '<b>Redirecci&oacute;n.</b> Este art&iacute;culo reenv&iacute;a a la p&aacute;gina:',
 'info_reserve_admin' => 'S&oacute;lo el equipo de administraci&oacute;n puede modificar esta direcci&oacute;n',
-'info_restauration_sauvegarde' => 'Restauraci&oacute;n de la copia de respaldo @archive@',
+'info_restauration_sauvegarde' => '<MODIF>Restauraci&oacute;n de la copia de respaldo @archive@',
 'info_restreindre_rubrique' => 'Limitar la gesti&oacute;n a la secci&oacute;n...',
 'info_resultat_recherche' => 'Resultados de la b&uacute;squeda:',
 'info_rubriques' => 'Secciones',
@@ -679,13 +675,10 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'item_utiliser_syndication' => 'Utilizar la sindicaci&oacute;n autom&aacute;tica',
 'item_visiteur' => 'visitante',
 
-
 // J
 'jour_non_connu_nc' => 'n.c.',
 
-
 // L
-'les_deux' => 'los dos',
 'lien_ajout_destinataire' => 'A&ntilde;adir este destinatario o destinataria',
 'lien_ajouter_auteur' => 'A&ntilde;adir esta autor/a',
 'lien_ajouter_participant' => 'A&ntilde;adir un/una participante',
@@ -719,7 +712,6 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'logo_standard_rubrique' => 'Logotipo est&aacute;ndar de las secciones...',
 'logo_survol' => 'Logotipo paso del rat&oacute;n...',
 
-
 // M
 'menu_aide_installation_choix_base' => 'Elegir tu base',
 'module_fichier_langue' => 'Archivo de idioma',
@@ -728,7 +720,6 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'module_texte_explicatif' => 'Puedes insertar los atajos siguientes en los esqueletos de tu sitio p&uacute;blico. Ser&aacute;n traducidos autom&aacute;ticamente en los diferentes idiomas para los cuales existe un archivo de idioma.',
 'module_texte_traduction' => 'El archivo de idioma &laquo;&nbsp;@module@&nbsp;&raquo; est&aacute; disponible en:',
 'mois_non_connu' => 'desconocido',
-
 
 // O
 'onglet_repartition_actuelle' => 'actualmente',
@@ -746,7 +737,6 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'ortho_verif_impossible' => 'El sistema no puede comprobar la ortograf&iacute;a de este texto.',
 'ortho_verifier' => 'Revisar la ortograf&iacute;a',
 
-
 // P
 'pas_de_proxy_pour' => 'Si fuera el caso, indica los servidores o  dominios para los cuales este proxy no debe aplicarse. (por ejemplo: @exemple@)',
 'plugin_etat_developpement' => 'en desarrollo',
@@ -759,10 +749,8 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'plugins_liste' => 'Lista de plugins',
 'protocole_ldap' => 'Versi&oacute;n del protocolo:',
 
-
 // R
 'repertoire_plugins' => 'Carpeta:',
-
 
 // S
 'sauvegarde_fusionner' => 'Fusionar la base actual y el respaldo',
@@ -777,7 +765,6 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'syndic_option_resume_non' => 'el contenido completo de los art&iacute;culos (en formato HTML)',
 'syndic_option_resume_oui' => 'un simple resumen (en formato texto)',
 'syndic_options' => 'Opciones de sindicaci&oacute;n:',
-
 
 // T
 'taille_cache_image' => 'Las im&aacute;genes calculadas autom&aacute;ticamente por SPIP (miniaturas de documentos, t&iacute;tulos presentados en forma gr&aacute;fica, f&oacute;rmulas matem&aacute;ticas en formato TeX...) ocupan en el directorio @dir@ un total de @taille@.',
@@ -813,7 +800,7 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'texte_compte_element' => '@count@ elemento',
 'texte_compte_elements' => '@count@ elementos',
 'texte_config_groupe_mots_cles' => '&iquest;Deseas activar la configuraci&oacute;n avanzada de las palabras clave, indicando, por ejemplo, que se puede seleccionar s&oacute;lo una palabra por grupo, que un grupo importante, ...?',
-'texte_connexion_mysql' => 'Consulta las informaciones facilitadas por tu  hospedaje: ah&iacute; deber&iacute;as encontrar los c&oacute;digos de conexi&oacute;n al servidor SQL.',
+'texte_connexion_mysql' => '<MODIF>Consulta las informaciones facilitadas por tu  hospedaje: ah&iacute; deber&iacute;as encontrar los c&oacute;digos de conexi&oacute;n al servidor SQL.',
 'texte_contenu_article' => '(Contenido del art&iacute;culo en pocas palabras)',
 'texte_contenu_articles' => 'Seg&uacute;n el dise&ntilde;o de tu sitio, puedes seleccionar aqu&iacute; los elementos a utilizar.',
 'texte_crash_base' => 'Si la base tiene un problema, se puede intentar aqu&iacute; de repararla.',
@@ -1016,8 +1003,12 @@ t&iacute;tulos y las descripciones de los art&iacute;culos. <br />- Un segundo m
 'trad_lier' => 'Este art&iacute;culo es una traducci&oacute;n del art&iacute;culo n&uacute;mero:',
 'trad_new' => 'Escribir una nueva traducci&oacute;n de este art&iacute;culo',
 
-
 // U
+'upload_fichier_zip' => 'Archivo ZIP',
+'upload_fichier_zip_texte' => 'El archivo que te propones instalar es un archivo Zip.',
+'upload_fichier_zip_texte2' => 'Este archivo puede ser:',
+'upload_zip_decompacter' => 'descomprimido y cada elemento que contiene instalado en el sitio. Los archivos que se van a instalar en el sitio son:',
+'upload_zip_telquel' => 'instalado tal cual, como archivo Zip comprimido;',
 'utf8_convert_attendez' => 'Espera unos instantes y vuelve a cargar esta p&aacute;gina.',
 'utf8_convert_avertissement' => 'Te aprontas a convertir el contenido de tu base de datos (art&iacute;culos, breves, etc) del juego de caracteres <b>@orig@</b> hacia el juego de caracteres <b>@charset@</b>.',
 'utf8_convert_backup' => 'No te olvides de hacer primero un respaldo completo de tu sitio Tambi&eacute;n conviene verificar que tus esqueletos y archivos de idioma son compatibles @charset@.',
@@ -1028,12 +1019,9 @@ t&iacute;tulos y las descripciones de los art&iacute;culos. <br />- Un segundo m
 'utf8_convert_verifier' => 'Ahora debes ir a vaciar la cache y verificar que todo funciona bien en las p&aacute;ginas p&uacute;blicas del sitio. En caso de grabes problemas, un respaldo de los datos fue realizada (al formato SQL) en la carpeta @rep@.',
 'utf8_convertir_votre_site' => 'Convertir tu sitio en utf-8',
 
-
 // V
 'version' => 'Versi&oacute;n:',
 'version_initiale' => 'Versi&oacute;n inicial'
-
 );
-
 
 ?>

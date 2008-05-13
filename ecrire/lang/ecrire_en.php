@@ -1,9 +1,11 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'activer_plugin' => 'Activate plugin',
@@ -48,7 +50,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_sites_syndiques_probleme' => 'These syndicated sites generated a problem',
 'avis_suppression_base' => 'WARNING, data deletion is irreversible',
 'avis_version_mysql' => 'Your version of SQL (@version_mysql@) does not allow auto repair of the database tables.',
-
 
 // B
 'bouton_acces_ldap' => 'Add an access to LDAP >>',
@@ -115,7 +116,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_vider_cache' => 'Empty the cache',
 'bouton_voir_message' => 'Preview message before validating',
 
-
 // C
 'cache_mode_compresse' => 'The cache files are saved in compressed mode.',
 'cache_mode_non_compresse' => 'The cache files are written in uncompressed mode.',
@@ -138,7 +138,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'connexion_ldap' => 'Connection:',
 'copier_en_local' => 'Copy to local site',
 
-
 // D
 'date_mot_heures' => 'H',
 'diff_para_ajoute' => 'Added paragraph',
@@ -148,7 +147,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_deplace' => 'Moved text',
 'diff_texte_supprime' => 'Deleted text',
 'double_clic_inserer_doc' => 'Double-click to insert this shortcut in the text',
-
 
 // E
 'email' => 'e-mail',
@@ -196,10 +194,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; missing in the definition file',
 'erreur_plugin_version_manquant' => 'Missing version of the plugin',
 
-
 // F
 'forum_info_original' => 'original',
-
 
 // I
 'ical_info1' => 'This page presents you with several methods to keep in contact with this site\'s activity.',
@@ -320,6 +316,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_2' => '&nbsp;out of @liste@',
 'info_code_acces' => 'Do not forget your own access codes!',
 'info_comment_lire_tableau' => 'How to read this graphic',
+'info_compresseur_activer' => 'Enable compression',
+'info_compresseur_desactiver' => 'Disable compression',
+'info_compresseur_texte' => 'If your server does not automatically compress HTML pages when sending them, you can attempt to force the compression in order to reduce the size of the pages transmitted.<b>Warning</b>: this can have a noticeable adverse effect on the performance of some servers, ',
+'info_compresseur_titre' => 'Optimisations and compression',
 'info_config_suivi' => 'If this address corresponds to a mailing list, you can indicate below the address where the site\'s participants can register. This address could be a URL (for instance the page of the list registration via the web), or an e-mail address with a specific subject (for instance: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'You can subscribe to the mailing-list of this site. You will receive then, by automated electronic mail, the announcements concerning articles and news items submitted for publication.',
 'info_confirmer_passe' => 'Confirm new password:',
@@ -751,13 +751,10 @@ in a colour indicating their status:',
 'item_utiliser_syndication' => 'Use automated syndication',
 'item_visiteur' => 'visitor',
 
-
 // J
 'jour_non_connu_nc' => 'unknown',
 
-
 // L
-'les_deux' => 'both',
 'lien_ajout_destinataire' => 'Add this recipient',
 'lien_ajouter_auteur' => 'Add this author',
 'lien_ajouter_participant' => 'Add a participant',
@@ -791,7 +788,6 @@ in a colour indicating their status:',
 'logo_standard_rubrique' => 'STANDARD LOGO FOR SECTIONS',
 'logo_survol' => 'HOVERING LOGO',
 
-
 // M
 'menu_aide_installation_choix_base' => 'Choosing your database',
 'module_fichier_langue' => 'Language file',
@@ -800,7 +796,6 @@ in a colour indicating their status:',
 'module_texte_explicatif' => 'You can insert the following shortcuts in you site\'s templates. They will be automatically translated in the various languages for which there is a language file.',
 'module_texte_traduction' => 'The language file &laquo;&nbsp;@module@&nbsp;&raquo; is available in:',
 'mois_non_connu' => 'unknown',
-
 
 // O
 'onglet_declarer_une_autre_base' => 'Declare another database',
@@ -818,7 +813,6 @@ in a colour indicating their status:',
 'ortho_trop_de_fautes' => 'Your text contains too many mistakes! In order to avoid overloading the system, no corrections have been suggested.',
 'ortho_verif_impossible' => 'The system cannot check the spelling of this text.',
 'ortho_verifier' => 'Spell check',
-
 
 // P
 'page_pas_proxy' => 'This page shouldn\'t go through the proxy',
@@ -870,10 +864,8 @@ in a colour indicating their status:',
 'plugins_vue_liste' => 'List',
 'protocole_ldap' => 'Protocol version:',
 
-
 // R
 'repertoire_plugins' => 'Directory:',
-
 
 // S
 'sauvegarde_fusionner' => 'Merge the current database with the backup',
@@ -889,7 +881,6 @@ in a colour indicating their status:',
 'syndic_option_resume_non' => 'the full content of the articles (HTML format)',
 'syndic_option_resume_oui' => 'just a summary (text format)',
 'syndic_options' => 'Syndication options:',
-
 
 // T
 'taille_cache_image' => 'The images calculated automatically by SPIP (thumbnails, titles transformed into graphics, mathematical formulae in TeX format, etc.) take up a total of @taille@ in the @dir@ directory.',
@@ -1190,8 +1181,13 @@ you can perform searches on sites and
 'trad_lier' => 'This article is a translation of article number:',
 'trad_new' => 'Write a new translation of this article',
 
-
 // U
+'upload_fichier_zip' => 'ZIP file',
+'upload_fichier_zip_texte' => 'The file you are intending to install is a ZIP file.',
+'upload_fichier_zip_texte2' => 'This file can be:',
+'upload_zip_decompacter' => 'decompressed and each file it contains will be installed on the site. The files which will be installed are:',
+'upload_zip_telquel' => 'installed as is, as a ZIP file;',
+'upload_zip_titrer' => '<MODIF>In the two latter cases, tick this box for SPIP to name each element after the filename.',
 'utf8_convert_attendez' => 'Wait a few seconds and then reload this page.',
 'utf8_convert_avertissement' => 'You are about to convert the contents of your database (articles, news items, etc) from the character set <b>@orig@</b> to the character set <b>@charset@</b>.',
 'utf8_convert_backup' => 'Don\'t forget to first make a complete backup of your site. You need also to check that your templates and language files are compatible with @charset@.',
@@ -1202,13 +1198,10 @@ you can perform searches on sites and
 'utf8_convert_verifier' => 'You now need to empty the site cache and then check if all is well on the public pages of the site. If you are stuck with a major problem, a backup of your original data (in SQL format) has been made in the @rep@ directory.',
 'utf8_convertir_votre_site' => 'Convert your site to utf-8',
 
-
 // V
 'version' => 'Version:',
 'version_deplace_rubrique' => 'Moved from <b>&laquo;&nbsp;@from@&nbsp;&raquo;</b> to <b>&laquo;&nbsp;@to@&nbsp;&raquo;</b>.',
 'version_initiale' => 'Initial version'
-
 );
-
 
 ?>

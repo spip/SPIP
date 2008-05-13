@@ -1,9 +1,11 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'aide_non_disponible' => 'Aquela part de l\'ajua en linha es pas encara disponibla per aquesta lenga.',
@@ -12,16 +14,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'Pas ges de resultat.',
 'avis_chemin_invalide_1' => 'Lo chamin qu\'av&egrave;tz chausit',
 'avis_chemin_invalide_2' => 'sembla pas valid. Volhatz tornar v&egrave;rs la pagina anteriora per verificar las informacions fornias.',
-'avis_connexion_echec_1' => 'La connexion au servior MySQL a mal capitat.',
+'avis_connexion_echec_1' => '<MODIF>La connexion au servior SQL a mal capitat.',
 'avis_connexion_echec_2' => 'Tornatz v&egrave;rs la pagina anteriora, e verificatz las informacions qu\'av&egrave;tz fornias.',
-'avis_connexion_echec_3' => '<b>N.B.</b> Sus ben de serviors, dev&egrave;tz <b>demandar</b> qu\'activen v&ograve;stre acc&egrave;s v&egrave;rs la basa MySQL avans de la poer utilizar. Se vos po&egrave;tz pas connectar, verificatz qu\'aiatz ben realizat aquel procediment.',
+'avis_connexion_echec_3' => '<MODIF><b>N.B.</b> Sus ben de serviors, dev&egrave;tz <b>demandar</b> qu\'activen v&ograve;stre acc&egrave;s v&egrave;rs la basa SQL avans de la poer utilizar. Se vos po&egrave;tz pas connectar, verificatz qu\'aiatz ben realizat aquel procediment.',
 'avis_connexion_ldap_echec_1' => 'La connexion au servior LDAP a mal capitat.',
 'avis_connexion_ldap_echec_2' => 'Tornatz a la pagina anteriora, e verificatz las informacions qu\'av&egrave;tz fornias. ',
 'avis_connexion_ldap_echec_3' => 'Alternativament, utilizetz pas lo sup&ograve;rt LDAP per importar d\'utilizaires.',
 'avis_conseil_selection_mot_cle' => '<b>Grop important:</b> s\'aconselha f&ograve;rt de seleccionar un mot clau dins aquel grop.',
 'avis_deplacement_rubrique' => 'Atention! Aquela rubrica conten @contient_breves@ br&egrave;vas@scb@: se la despla&ccedil;atz, voudretz ben oschar aquela casa de confirmacion.',
 'avis_destinataire_obligatoire' => 'Dev&egrave;tz indicar un destinatari avans de mandar aquel messatge.',
-'avis_erreur_connexion_mysql' => 'Error de connexion MySQL',
+'avis_erreur_connexion_mysql' => 'Error de connexion SQL',
 'avis_erreur_version_archive' => '<b>Atencion! Lo fichier @archive@ corresp&ograve;nd amb una autra version d\'SPIP qu\'aquela qu\'av&egrave;tz installaa.</b> Anatz v&egrave;rs de dificultats grandassas: risca de destruccion de v&ograve;stra basa de donaas, disfoncionaments div&egrave;rses dau sit, etc. Validetz pas aquela demanda d\'importacion.<p> Per mai d\'informacions, ve&egrave;tz
 <A HREF=\'http://www.spip.net/fr_article1489.html\'>
 la documentacion d\'SPIP</a>.',
@@ -38,8 +40,7 @@ la documentacion d\'SPIP</a>.',
 'avis_sites_probleme_syndication' => 'Aqueles sits an rescontrat un probl&egrave;ma de sindicacion',
 'avis_sites_syndiques_probleme' => 'Aqueles sits sindicats an pausat un probl&egrave;ma',
 'avis_suppression_base' => 'ATENCION, suprimir las donaas es irreversible',
-'avis_version_mysql' => 'V&ograve;stra version de MySQL (@version_mysql@) permet pas l\'autoreparacion de las taulas de la basa.',
-
+'avis_version_mysql' => 'V&ograve;stra version de SQL (@version_mysql@) permet pas l\'autoreparacion de las taulas de la basa.',
 
 // B
 'bouton_acces_ldap' => 'Apondre l\'acc&egrave;s a LDAP >>',
@@ -102,13 +103,11 @@ la documentacion d\'SPIP</a>.',
 'bouton_vider_cache' => 'Voidar l\'escondeor',
 'bouton_voir_message' => 'Veire aqueu messatge avans de lo validar',
 
-
 // C
 'cache_mode_compresse' => 'Los fichiers de l\'escondeor son registrats en m&ograve;de comprimit.',
 'cache_mode_non_compresse' => 'Los fichiers de l\'escondeor son registrats en m&ograve;de non comprimit.',
 'cache_modifiable_webmestre' => 'Lo webm&egrave;stre dau sit p&ograve;t modificar aquestes param&egrave;tres.',
 'calendrier_synchro' => 'S\'utilizatz un logicial d\'agenda compatible <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), lo po&egrave;tz sincronizar amb l\'actualitat dau sit.',
-
 
 // D
 'date_mot_heures' => 'oras',
@@ -119,7 +118,6 @@ la documentacion d\'SPIP</a>.',
 'diff_texte_deplace' => 'T&egrave;xt apondut',
 'diff_texte_supprime' => 'T&egrave;xt suprimit',
 'double_clic_inserer_doc' => 'Besclicatz per inserir aquela acorcha dins lo t&egrave;xt.',
-
 
 // E
 'email' => 'e-mail',
@@ -162,7 +160,6 @@ L\'administrator dau sist&egrave;ma o de la ret vos deu poer fornir
 'entree_titre_obligatoire' => '<b>T&iacute;tol</b> [Obligat&ograve;ri]<br />',
 'entree_url' => 'L\'adrei&ccedil;a (URL) de v&ograve;stre sit',
 
-
 // I
 'ical_info1' => 'Aquela pagina m&ograve;stra de met&ograve;des diferents per restar en contacte amb la vida d\'aquel sit.',
 'ical_info2' => 'Per tenir mai d\'informacions sobre aquelas tecnicas, esitetz pas de consultar <a href="http://www.spip.net/fr_suivi">la documentacion d\'SPIP</a>.',
@@ -184,6 +181,7 @@ L\'administrator dau sist&egrave;ma o de la ret vos deu poer fornir
 'icone_creation_groupe_mots' => 'Crear un nov&egrave;l grop de mots',
 'icone_creation_mots_cles' => 'Crear un mot clau n&ograve;u',
 'icone_creer_auteur' => 'Crear un autor n&ograve;u e l\'associar a aquel article',
+'icone_creer_mot_cle' => 'Crear un mot clau n&ograve;u e lo liar a aquel article',
 'icone_creer_rubrique_2' => 'Crear una rubrica n&ograve;va',
 'icone_ecrire_nouvel_article' => 'Las br&egrave;vas contenguas dins aquela rubrica',
 'icone_envoyer_message' => 'Mandar aquel messatge',
@@ -276,7 +274,7 @@ L\'administrator dau sist&egrave;ma o de la ret vos deu poer fornir
 'info_confirmer_passe' => 'Confirmar aquel mot de santa Clara nov&egrave;l:',
 'info_connexion_base' => 'Segonda estapa: <b>Assai de connexion a la basa</b>',
 'info_connexion_ldap_ok' => 'La connexion LDAP a abotit.</b><p> Po&egrave;tz passar a l\'estapa seguenta.',
-'info_connexion_mysql' => 'Primiera estapa:<b>V&ograve;stra connexion MySQL</b>',
+'info_connexion_mysql' => 'Primiera estapa:<b>V&ograve;stra connexion SQL</b>',
 'info_connexion_ok' => 'La connexion a abotit.',
 'info_contact' => 'Contacte',
 'info_contenu_articles' => 'Contengut dels articles',
@@ -377,7 +375,7 @@ L\'administrator dau sist&egrave;ma o de la ret vos deu poer fornir
 'info_message_en_redaction' => 'V&ograve;stres messatges en cors de redaccion',
 'info_message_technique' => 'Messatge tecnic:',
 'info_messagerie_interne' => 'Messatjari&aacute; int&egrave;rna',
-'info_mise_a_niveau_base' => 'Mesa a niv&egrave;u de v&ograve;stra basa MySQL',
+'info_mise_a_niveau_base' => 'Mesa a niv&egrave;u de v&ograve;stra basa SQL',
 'info_mise_a_niveau_base_2' => '{{Atencion!}} Av&egrave;tz installaa una version
   dels fichiers SPIP {anteriora} a la que i avi&aacute;
   avans sobre aquest sit: riscatz de p&egrave;rdre v&ograve;stra basa de donaas
@@ -488,7 +486,7 @@ Quauques auberjaors autorizan pas l\'enviament d\'e-mails dempuei lors serviors:
 'info_reglage_ldap' => 'Opcions: <b>Reglatge de l\'importacion LDAP</b>',
 'info_renvoi_article' => '<b>Redireccion.</b> Aquel article remanda a la pagina:',
 'info_reserve_admin' => 'Mas los administrators p&ograve;on modificar aquela adrei&ccedil;a.',
-'info_restauration_sauvegarde' => 'restauracion de la sauvagarda @archive@',
+'info_restauration_sauvegarde' => '<MODIF>restauracion de la sauvagarda @archive@',
 'info_restreindre_rubrique' => 'Restr&eacute;nher la gestion a la rubrica:',
 'info_resultat_recherche' => 'Resultats de la c&egrave;rcha:',
 'info_rubriques' => 'Rubricas',
@@ -651,10 +649,8 @@ una color indica lor estat:',
 'item_utiliser_syndication' => 'Utilizar la sindicacion automatica',
 'item_visiteur' => 'vesitaire',
 
-
 // J
 'jour_non_connu_nc' => 'n.c.',
-
 
 // L
 'lien_ajout_destinataire' => 'Apondre aqueu destinatari',
@@ -689,7 +685,6 @@ una color indica lor estat:',
 'logo_standard_rubrique' => 'L&Ograve;GO ESTANDARD DE LAS RUBRICAS',
 'logo_survol' => 'L&Ograve;GO PER LO SOBREV&Ograve;U',
 
-
 // M
 'menu_aide_installation_choix_base' => 'Chausia de v&ograve;stra basa',
 'module_fichier_langue' => 'Fichier de lenga',
@@ -698,7 +693,6 @@ una color indica lor estat:',
 'module_texte_explicatif' => 'Po&egrave;tz inserir las acorchas seguentas dins las esqueletas de v&ograve;stre sit public. Se revirar&agrave;n automaticament  dins las diferentas lengas per las qualas exist&iacute;s un fichier de lenga.',
 'module_texte_traduction' => 'Lo fichier de lenga &laquo;@module@&raquo; es disponible en:',
 'mois_non_connu' => 'non conegut',
-
 
 // O
 'onglet_repartition_actuelle' => 'd\'aquesta passa',
@@ -716,7 +710,6 @@ una color indica lor estat:',
 'ortho_verif_impossible' => 'Lo sist&egrave;ma p&ograve;t pas verificar l\'ortografia d\'aquest t&egrave;xt.',
 'ortho_verifier' => 'Verificar l\'ortografia',
 
-
 // S
 'statut_admin_restreint' => '(admin. restrench)',
 'syndic_choix_moderation' => 'Que se p&ograve;t far amb los liams venents que provenon d\'aquel sit?',
@@ -725,7 +718,6 @@ una color indica lor estat:',
 'syndic_option_miroir' => 'los blocar sus lo c&ograve;p',
 'syndic_option_oubli' => 'los esfa&ccedil;ar (apr&egrave;s @mois@&nbsp;mois)',
 'syndic_options' => 'Opcions de sindicacion:',
-
 
 // T
 'taille_cache_image' => 'Los imatges qu\'SPIP a calculat automaticament (vinhetas dels documents, t&iacute;tols presentats en forma grafica, foncions matematicas en format TeX...) ocupan dins lo repert&ograve;ri @dir@ un totau de @taille@.',
@@ -756,7 +748,7 @@ Eissublietz pas tanpauc de recuperar l\'integralitat dau repert&ograve;ri <i>IMG
 'texte_breves' => 'Las br&egrave;vas son de t&egrave;xtes corts e simples que permeton de metre en linha l&egrave;u d\'informacions concisas, de gerir
  una revista de premsa, un chalendier d\'eveniments...',
 'texte_choix_base_1' => 'Chausiss&egrave;tz v&ograve;stra basa:',
-'texte_choix_base_2' => 'Lo servior MySQL conten mai d\'una basa de donaas.',
+'texte_choix_base_2' => 'Lo servior SQL conten mai d\'una basa de donaas.',
 'texte_choix_base_3' => '<b>Chausiss&egrave;tz</b> &ccedil;ai sos aquela que v&ograve;stre auberjaor vos a atribu&iuml;a:',
 'texte_commande_vider_tables_indexation' => 'Utilizatz aquela comanda per voidar las taulas d\'indexacion utilizaas per lo cerchaor integrat a SPIP. Aqu&ograve; permetr&agrave;
  de ganhar d\'espaci disc.',
@@ -771,7 +763,7 @@ qu\'apareis quand la rata passa sus lo t&iacute;tol.',
 'texte_config_groupe_mots_cles' => 'Desiratz, vos, d\'activar la configuracion avan&ccedil;aa dels mots clau,
  en indicant per exemple que se p&ograve;t seleccionar un mot unenc
  per grop, qu\'un grop es important...?',
-'texte_connexion_mysql' => 'Consultatz las informacions que v&ograve;stre auberjaor forn&iacute;s: i dev&egrave;tz trobar, se v&ograve;stre auberjaor sup&ograve;rta MySQL, los c&ograve;des de connexion au servior MySQL.',
+'texte_connexion_mysql' => '<MODIF>Consultatz las informacions que v&ograve;stre auberjaor forn&iacute;s: i dev&egrave;tz trobar, se v&ograve;stre auberjaor sup&ograve;rta SQL, los c&ograve;des de connexion au servior SQL.',
 'texte_contenu_article' => '(Contengut de l\'article en quauques mots.)',
 'texte_contenu_articles' => 'Segon la maqueta que v&ograve;stre sit a adoptaa, po&egrave;tz decidir
  que quauques elements dels articles s\'utilizen pas.
@@ -872,10 +864,10 @@ tornar calcular mas qu\'una pagina, passatz pusl&egrave;u per l\'espaci public e
 'texte_recuperer_base' => 'Reparar la basa de donaas',
 'texte_reference_mais_redirige' => 'article referenciat dins v&ograve;stre sit SPIP, mas redirigit v&egrave;rs una autra URL.',
 'texte_referencement_automatique' => '<b>Referenciament automatizat d\'un sit</b><br /> Po&egrave;tz referenciar l&egrave;u-l&egrave;u un sit web en indicar &ccedil;ai sos l\'adrei&ccedil;a URL desiraa, o l\'adrei&ccedil;a de son fichier backend. SPIP agantar&agrave; automaticament las informacions que concernisson aqueu sit (t&iacute;tol, descripcion...).',
-'texte_requetes_echouent' => '<b>Quand quauques requistas MySQL capitan mau
+'texte_requetes_echouent' => '<b>Quand quauques requistas SQL capitan mau
   sistematicament e sensa rason aparenta, se p&ograve;t
   qu\'aqu&ograve; vena ben de la basa de donaas.  </b><p>
-  MySQL ten la facultat de reparar sas
+  SQL ten la facultat de reparar sas
   taulas quand un accident las
  a gastaas. Aic&iacute; po&egrave;tz assaiar aquela reparacion;
   s\'abot&iacute;s pas, servatz una c&ograve;pia de l\'afichatge, que conten
@@ -1028,11 +1020,15 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura dau sit.',
 'trad_lier' => 'Aquest article es una reviraa de l\'article num&egrave;ro:',
 'trad_new' => 'Escriure una reviraa nov&egrave;la d\'aquest article',
 
+// U
+'upload_fichier_zip' => 'Fichier ZIP',
+'upload_fichier_zip_texte' => 'Lo fichier que prepausatz d\'installar es un fichier Zip.',
+'upload_fichier_zip_texte2' => 'Aqueu fichier p&ograve;t &egrave;sser:',
+'upload_zip_decompacter' => 'descomprimit e chasque element que conten installat sus lo sit. Aladonc los fichiers que ser&agrave;n installats sus lo sit son:',
+'upload_zip_telquel' => 'installat tau coma es, coma archiu comprimit Zip;',
 
 // V
 'version_initiale' => 'Version iniciala'
-
 );
-
 
 ?>
