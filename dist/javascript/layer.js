@@ -91,29 +91,28 @@ jQuery.fn.toggleother = function(cible) {
 // deplier/replier en hover
 // on le fait subtilement : on attend 400ms avant de deplier, periode
 // durant laquelle, si la souris  sort du controle, on annule le depliement
-// idem au repliement, mais avec une periode plus longue (700ms)
+// le repliement ne fonctionne qu'au clic
 // Cette fonction est appelee a chaque hover d'un bloc depliable
 // la premiere fois, elle initialise le fonctionnement du bloc ; ensuite
 // elle ne fait plus rien
 jQuery.fn.depliant = function(cible) {
 	// premier passage
 	if (!this.is('.depliant')) {
-		var timed = 400;
-		var timer = 700;
+		var time = 400;
 
 		var me = this;
 		this
-		.addClass('depliant')
+		.addClass('depliant');
 
 		// effectuer le premier hover
-		.addClass('hover')
-		.addClass('togglewait');
-		var t = setTimeout(function(){
-			me.toggleother(cible);
-			t = null;
-		},
-			me.is('.deplie') ? timer : timed
-		);
+		if (!me.is('.deplie')) {
+			me.addClass('hover')
+			.addClass('togglewait');
+			var t = setTimeout(function(){
+				me.toggleother(cible);
+				t = null;
+			}, time);
+		}
 
 		me
 		// programmer les futurs hover
@@ -126,9 +125,7 @@ jQuery.fn.depliant = function(cible) {
 				t = setTimeout(function(){
 					me.toggleother(cible);
 					t = null;
-					},
-					me.is('.deplie') ? timer : timed
-				);
+					}, time);
 			}
 		}
 		, function(e){
