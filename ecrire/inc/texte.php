@@ -1224,6 +1224,35 @@ function traiter_poesie($letexte)
 	return $letexte;
 }
 
+// callback pour la fonction traiter_raccourci_liens()
+function autoliens_callback($r) {
+	if (strlen($r[1])) {
+		$l = preg_replace(',^http:/*,', '', $r[1]);
+		if (preg_match(
+		'/^(?:[^\W_]((?:[^\W_]|-){0,61}[^\W_])?\.)+[a-zA-Z]{2,6}\b/S', $l))
+			return inserer_attribut(expanser_liens('[->http://'.$l.']'),
+				'rel', 'nofollow');
+	}
+	return $r[0];
+}
+
+// extraire les liens ecrits en mode texte brut
+function traiter_raccourci_liens($texte) {
+	return preg_replace_callback(
+	',\[[^\[\]]*->.*?\]|<[^<>]*>|((http:|www\.)[^"\'\s\[\]]+),S',
+	'autoliens_callback', $texte);
+	return $texte;
+}
+
+// Harmonise les retours chariots et mange les paragraphes html
+function traiter_retours_chariots($letexte) {
+	$letexte = preg_replace(",\r\n?,S", "\n", $letexte);
+	$letexte = preg_replace(",<p[>[:space:]],iS", "\n\n\\0", $letexte);
+	$letexte = preg_replace(",</p[>[:space:]],iS", "\\0\n\n", $letexte);
+	return $letexte;
+}
+
+
 // Nettoie un texte, traite les raccourcis autre qu'URL, la typo, etc.
 // http://doc.spip.org/@traiter_raccourcis
 function traiter_raccourcis($letexte) {
@@ -1231,19 +1260,7 @@ function traiter_raccourcis($letexte) {
 	// Appeler les fonctions de pre_traitement
 	$letexte = pipeline('pre_propre', $letexte);
 
-	$letexte = traiter_poesie($letexte);
-
-	// Harmoniser les retours chariot
-	$letexte = preg_replace(",\r\n?,S", "\n", $letexte);
-
-	// Recuperer les paragraphes HTML
-
-	$letexte = preg_replace(",<p[>[:space:]],iS", "\n\n\\0", $letexte);
-	$letexte = preg_replace(",</p[>[:space:]],iS", "\\0\n\n", $letexte);
-
-	$letexte = traiter_raccourci_glossaire($letexte);
-	$letexte = traiter_raccourci_ancre($letexte);
-
+	// Gerer les notes (ne passe pas dans le pipeline)
 	list($letexte, $mes_notes) = traite_raccourci_notes($letexte);
 
 	// A present on introduit des attributs class_spip*

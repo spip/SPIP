@@ -229,7 +229,9 @@ $spip_pipeline = array(
 	'nettoyer_raccourcis_typo' => '',
 	'pre_boucle' => '',
 	'post_boucle' => '',
-	'pre_propre' => '|extraire_multi',
+	'pre_propre' => '|extraire_multi|traiter_poesie|traiter_retours_chariots
+		|traiter_raccourci_liens|traiter_raccourci_glossaire
+		|traiter_raccourci_ancre',
 	'post_propre' => '',
 	'pre_typo' => '|extraire_multi',
 	'post_typo' => '|quote_amp',

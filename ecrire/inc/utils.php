@@ -76,15 +76,16 @@ function include_spip($f, $include = true) {
 
 // appel unitaire d'une fonction du pipeline
 // utilisee dans le script pipeline precompile
+// on passe $val par reference pour limiter les allocations memoire
 // http://doc.spip.org/@minipipe
-function minipipe($fonc,$val){
+function minipipe($fonc,&$val){
 
 	// fonction
 	if (function_exists($fonc))
 		$val = call_user_func($fonc, $val);
 
 	// Class::Methode
-	else if (preg_match("/^(\w*)::(\w*)$/", $fonc, $regs)
+	else if (preg_match("/^(\w*)::(\w*)$/S", $fonc, $regs)
 	AND $methode = array($regs[1], $regs[2])
 	AND is_callable($methode))
 		$val = call_user_func($methode, $val);

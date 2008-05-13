@@ -373,6 +373,7 @@ function pipeline_precompile(){
 		$pipe = array_filter(explode('|',$pipeline));
 		// Eclater le pipeline en filtres et appliquer chaque filtre
 		foreach ($pipe as $fonc) {
+			$fonc = trim($fonc);
 			$s_call .= '$val = minipipe(\''.$fonc.'\', $val);'."\n";
 			if (isset($spip_matrice[$fonc])){
 				$file = $spip_matrice[$fonc];
