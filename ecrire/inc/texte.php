@@ -1227,11 +1227,16 @@ function traiter_poesie($letexte)
 // callback pour la fonction traiter_raccourci_liens()
 function autoliens_callback($r) {
 	if (strlen($r[1])) {
-		$l = preg_replace(',^http:/*,', '', $r[1]);
+		$l = preg_replace(',^http:/*,', '', $r[1], 1, $c);
 		if (preg_match(
-		'/^(?:[^\W_]((?:[^\W_]|-){0,61}[^\W_])?\.)+[a-zA-Z]{2,6}\b/S', $l))
-			return inserer_attribut(expanser_liens('[->http://'.$l.']'),
+		'/^(?:[^\W_]((?:[^\W_]|-){0,61}[^\W_])?\.)+[a-zA-Z]{2,6}\b/S', $l)) {
+			$l = inserer_attribut(expanser_liens('[->http://'.$l.']'),
 				'rel', 'nofollow');
+			// si le texte ne contanait pas le 'http:' on le supprime aussi
+			if (!$c)
+				$l = str_replace('>http://', '>', $l);
+			return $l;
+		}
 	}
 	return $r[0];
 }
