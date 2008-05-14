@@ -58,6 +58,12 @@ function balise_FORMULAIRE__dyn($form)
 	$valeurs = array();
 	if ($charger_valeurs = charger_fonction("charger","formulaires/$form/",true))
 		$valeurs = call_user_func_array($charger_valeurs,$args);
+	$valeurs = pipeline(
+		'formulaire_charger',
+		array(
+			'args'=>array('form'=>$form,'args'=>$args),
+			'data'=>$valeurs)
+	);
 	if ($valeurs===false) {
 		// pas de saisie
 		$editable = false;
