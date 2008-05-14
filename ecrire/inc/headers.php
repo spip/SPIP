@@ -17,8 +17,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // en evitant les attaques par la redirection (souvent indique par 1 $_GET)
 
 // http://doc.spip.org/@redirige_par_entete
-function redirige_par_entete($url, $equiv='') {
-
+function redirige_par_entete($url, $equiv='', $status = 302) {
+	if (!in_array($status,array(301,302)))
+		$status = 302;
+	
 	$url = strtr($url, "\n\r", "  ");
 	# en theorie on devrait faire ca tout le temps, mais quand la chaine
 	# commence par ? c'est imperatif, sinon l'url finale n'est pas la bonne
@@ -29,7 +31,7 @@ function redirige_par_entete($url, $equiv='') {
 		$url = parametre_url($url, 'transformer_xml', $x, '&');
 	// Il n'y a que sous Apache que setcookie puis redirection fonctionne
 
-	if (!$equiv OR (strncmp("Apache", $_SERVER['SERVER_SOFTWARE'],6)==0)) {
+	if (!$equiv OR (strncmp("Apache", $_SERVER['SERVER_SOFTWARE'],6)==0) OR defined('_SERVER_APACHE')) {
 		@header("Location: " . $url);
 		$equiv="";
 	} else {
@@ -37,21 +39,23 @@ function redirige_par_entete($url, $equiv='') {
 		$equiv = "<meta http-equiv='Refresh' content='0; url=$url'>";
 	}
 	include_spip('inc/lang');
+	if ($status!=302)
+		http_status($status);
 	echo '<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">',"\n",
 	  html_lang_attributes(),'
 <head>',
 	  $equiv,'
-<title>HTTP 302</title>
+<title>HTTP '.$status.'</title>
 </head>
 <body>
-<h1>HTTP 302</h1>
+<h1>HTTP '.$status.'</h1>
 <a href="',
 	  quote_amp($url),
 	  '">',
 	  _T('navigateur_pas_redirige'),
 	  '</a></body></html>';
 
-	spip_log("redirige: $url");
+	spip_log("redirige $status: $url");
 
 	exit;
 }
