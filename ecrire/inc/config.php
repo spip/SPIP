@@ -83,6 +83,7 @@ function liste_metas()
 
 		'documents_article' => 'non',
 		'documents_rubrique' => 'non',
+		'documents_date' => 'non',
 		'syndication_integrale' => 'oui',
 		'charset' => _DEFAULT_CHARSET,
 		'dir_img' => substr(_DIR_IMG,strlen(_DIR_RACINE)),

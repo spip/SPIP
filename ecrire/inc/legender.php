@@ -89,7 +89,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	  "<input type='text' name='titre_document' id='titre_document$id_document' class='formo' value=\"".entites_html($titre).
 	  "\" size='40'	onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /><br />\n" .
 	  date_formulaire_legender($date, $id_document) .
-	  "<br />\n<label for='descriptif_document$id_document'><b>".
+	  "<label for='descriptif_document$id_document'><b>".
 	  _T('info_description_2').
 	  "</b></label><br />\n" .
 	  "<textarea name='descriptif_document' id='descriptif_document$id_document' rows='4' class='formo' cols='*' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">" .
@@ -231,6 +231,7 @@ function formulaire_taille($document) {
 
 // http://doc.spip.org/@date_formulaire_legender
 function date_formulaire_legender($date, $id_document) {
+	$documents_date = $GLOBALS['meta']["documents_date"];
 
 	if (preg_match(",([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}),", $date, $regs)){
 		$mois = $regs[2];
@@ -239,13 +240,18 @@ function date_formulaire_legender($date, $id_document) {
 		$heure = $regs[4];
 		$minute = $regs[5];
 	}
-	return  "<b>"._T('info_mise_en_ligne')."</b><br />\n" .
-		afficher_jour($jour, "name='jour_doc' id='jour_doc$id_document' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"") .
-		afficher_mois($mois, "name='mois_doc' id='mois_doc$id_document' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"") .
-		afficher_annee($annee, "name='annee_doc' id='annee_doc$id_document' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\"") .
-		afficher_heure($heure, "name='heure_doc' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\"") . 
-		afficher_minute($minute, "name='minute_doc' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\"") . 
-		"<br />\n";
+	if ($documents_date != "oui") $style = " style='display: none;'";
+	
+		return  "<div $style><b>"._T('info_mise_en_ligne')."</b><br />\n" .
+			afficher_jour($jour, "name='jour_doc' id='jour_doc$id_document' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"") .
+			afficher_mois($mois, "name='mois_doc' id='mois_doc$id_document' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"") .
+			afficher_annee($annee, "name='annee_doc' id='annee_doc$id_document' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\"") .
+			"<br />".
+			afficher_heure($heure, "name='heure_doc' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\"") . 
+			" : ".
+			afficher_minute($minute, "name='minute_doc' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\"") . 
+			"<br /><br /></div>\n";
+
 }
 
 ?>
