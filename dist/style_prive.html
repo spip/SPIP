@@ -10,7 +10,7 @@
 	ATTENTION: il faut absolument le charset sinon Firefox croit que
 	c'est du text/html !
 ]
-#CACHE{3600*100,cache-client}
+#CACHE{3600*100*0,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
@@ -150,12 +150,14 @@ ol.formfx li.gauche {
 	margin: 0px;
 	margin-top: 2px;
 	padding: 0px;
-	padding-#GET{left}: 120px;
+	margin-left: 120px;
 }
 ol.formfx li.gauche label {
-	position: absolute;
-	top: 0px;
-	#GET{left}: 0px;
+//	position: absolute;
+//	top: 0px;
+//	#GET{left}: 0px;
+	float: left;
+	margin-left: -120px;
 	
 	display: block;
 	width: 110px;
@@ -178,10 +180,6 @@ ol.formfx li.gauche.obligatoire label {
 		color: white;
 }
 ol.formfx li.gauche input, ol.formfx li.gauche textarea {
-}
-ol.formfx li.gauche select {
-	position:relative;
-	top:-1.9em;
 }
 ol.formfx li.obligatoire input {
 	font-weight: bold;
