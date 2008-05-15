@@ -94,6 +94,7 @@ function analyse_resultat_skel($nom, $cache, $corps, $source='') {
 		$headers[$j] = $r[3];
 	}
 
+	// S'agit-il d'un resultat constant ou contenant du code php
 	$process_ins = (
 		strpos($corps,'<'.'?') === false
 		OR strpos(str_replace('<'.'?xml', '', $corps),'<'.'?') === false
@@ -115,7 +116,6 @@ function analyse_resultat_skel($nom, $cache, $corps, $source='') {
 		$corps = echapper_php_callback($corps);
 		unset($headers['X-Spip-Filtre']);
 	}
-
 
 	return array('texte' => $corps,
 		'squelette' => $nom,

@@ -104,6 +104,9 @@ function calculer_inclure($p, $descr, &$boucles, $id_boucle) {
 		$_contexte['doublons'] = "\\'doublons\\' => '.var_export(\$doublons,true).'";
 	}
 
+	if ($ajax = isset($_contexte['ajax']))
+		unset($_contexte['ajax']);
+
 	$contexte = 'array(' . join(",\n\t", $_contexte) .')';
 	if ($env) {
 		$contexte = "array_merge('.var_export(\$Pile[0],1).',$contexte)";
@@ -113,21 +116,20 @@ function calculer_inclure($p, $descr, &$boucles, $id_boucle) {
 		($fichier ? "\\'$path\\'" : ('_DIR_RESTREINT . "public.php"')).
 		";";
 
-
 	// Gerer ajax
-	if (isset($_contexte['ajax'])) {
-		$code = '// {ajax}
-			include_spip("inc/filtres");
-			echo "<div class=\\\'ajaxbloc env-"
-				.encoder_contexte_ajax($contexte_inclus)
-				."\\\'>\\n";
-			'.$code.'
-			echo "</div><!-- ajaxbloc -->\\n";
-		';
+	if ($ajax) {
+		$code = '	echo "<div class=\\\'ajaxbloc env-\'
+			. eval(\'return encoder_contexte_ajax('.$contexte.');\')
+			. \'\\\'>\\n";'
+			."\n"
+			.$code
+			."\n"
+			.'	echo "</div><!-- ajaxbloc -->\\n";';
 	}
 
+
 	return "\n'<".
-		"?php\n\t\$contexte_inclus = $contexte;\n"
+		"?php\n\t".'$contexte_inclus = '.$contexte.";\n"
 		. $code
 		. "\n?'." . "'>'";
 }
