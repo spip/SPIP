@@ -10,7 +10,7 @@
 	ATTENTION: il faut absolument le charset sinon Firefox croit que
 	c'est du text/html !
 ]
-#CACHE{3600*100*0,cache-client}
+#CACHE{3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
@@ -176,7 +176,7 @@ ol.formfx li.gauche label {
 	padding-right: 5px;
 }
 ol.formfx li.gauche.obligatoire label {
-		background: url([(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|image_sepia{#555555}|extraire_attribut{src})]) center [(#GET{right})] no-repeat;
+		background: url([(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|image_sepia{[(#GET{foncee}|couleur_foncer)]}|extraire_attribut{src})]) center [(#GET{right})] no-repeat;
 		color: white;
 }
 ol.formfx li.gauche input, ol.formfx li.gauche textarea {
@@ -213,7 +213,7 @@ ol.formfx li.haut label {
 
 }
 ol.formfx li.haut.obligatoire label {
-		background: url([(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_sepia{#666666}|extraire_attribut{src})]) bottom [(#GET{left})] no-repeat;
+		background: url([(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_sepia{[(#GET{foncee}|couleur_foncer)]}|extraire_attribut{src})]) bottom [(#GET{left})] no-repeat;
 		color: white;
 }
 ol.formfx fieldset {
