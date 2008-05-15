@@ -153,29 +153,31 @@ ol.formfx li.gauche {
 	padding-#GET{left}: 120px;
 }
 ol.formfx li.gauche label {
-		margin-#GET{left}: -120px;
-		display: block;
-		width: 110px;
-		
-		background: url([(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|image_sepia{#ENV{couleur_claire,3874b0}}|extraire_attribut{src})]) center [(#GET{right})] no-repeat;
+	position: absolute;
+	top: 0px;
+	#GET{left}: 0px;
+	
+	display: block;
+	width: 110px;
+	
+	background: url([(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|image_sepia{#ENV{couleur_claire,3874b0}}|extraire_attribut{src})]) center [(#GET{right})] no-repeat;
 
-		font-size: 9px;
-		color: #[(#GET{foncee}|couleur_foncer)];
-		line-height: 11px;
-		text-transform: uppercase;
-		font-family: verdana, arial, helvetica, sans;
+	font-size: 9px;
+	color: #[(#GET{foncee}|couleur_foncer)];
+	line-height: 11px;
+	text-transform: uppercase;
+	font-family: verdana, arial, helvetica, sans;
 
-		padding-top: 5px;
-		padding-bottom: 5px;
-		padding-left: 5px;
-		padding-right: 5px;
-	}
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
 ol.formfx li.gauche.obligatoire label {
 		background: url([(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|image_sepia{#555555}|extraire_attribut{src})]) center [(#GET{right})] no-repeat;
 		color: white;
 }
 ol.formfx li.gauche input, ol.formfx li.gauche textarea {
-	margin-top: -1.9em;
 }
 ol.formfx li.gauche select {
 	position:relative;
@@ -195,6 +197,7 @@ ol.formfx li.haut {
 
 ol.formfx li.haut label {
 		font-size: 9px;
+		display: -moz-inline-box;
 		display: inline-block;
 		color: white;
 		line-height: 11px;
@@ -218,7 +221,7 @@ ol.formfx li.haut.obligatoire label {
 ol.formfx fieldset {
 	margin-top: 7px;
 	border: 1px solid #GET{foncee};
-	padding-top: 2px;
+	padding-top: 0px;
 	padding: 10px;
 	padding-top: 5px;
 }
@@ -233,7 +236,7 @@ ol.formfx fieldset legend {
 		font-family: verdana, arial, helvetica, sans;
 
 		padding-top: 6px;
-		padding-bottom: 9px;
+		padding-bottom: 10px;
 		padding-left: 5px;
 		padding-right: 5px;
 		margin-bottom: 0px;
