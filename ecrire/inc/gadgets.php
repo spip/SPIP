@@ -116,12 +116,12 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 	$decal = 0;
 	$decal = $decal + 150;
 
-	$bandeau .= "\n<div id='bandeauinterface' class='bandeau bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>";
+	$bandeau .= "\n<div id='bandeauinterface' class='bandeau bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right; white-space: nowrap;'>";
 	
 	// couleurs
-	$couleurs = charger_fonction('couleurs', 'inc');
-	$bandeau .= "<div id='preferences_couleurs' title='" . attribut_html(_T('titre_changer_couleur_interface')) . "'>";
-	$bandeau .= $couleurs() . "</div>";
+//	$couleurs = charger_fonction('couleurs', 'inc');
+//	$bandeau .= "<div id='preferences_couleurs' title='" . attribut_html(_T('titre_changer_couleur_interface')) . "'>";
+//	$bandeau .= $couleurs() . "</div>";
 
 	// menu
 	$bandeau .= "\n<div id='preferences_map'><map name='map_layout' id='map_layout'>"
