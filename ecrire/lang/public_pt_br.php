@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'N&atilde;o h&aacute; nenhum site neste endere&ccedil;o',
 'aucune_breve' => 'N&atilde;o h&aacute; nenhuma nota neste endere&ccedil;o',
 'aucune_rubrique' => 'N&atilde;o h&aacute; nenhuma se&ccedil;&atilde;o neste endere&ccedil;o',
+'autres' => 'Outros',
 'autres_breves' => 'Outras notas',
 'autres_groupes_mots_clefs' => 'Outros grupos de palavras-chave',
 'autres_sites' => 'Outros sites',
@@ -52,6 +53,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // J
 'jours' => 'dias',
+
+// L
+'lien_connecter' => 'Conectar-se',
 
 // M
 'meme_auteur' => 'Do mesmo autor',
@@ -95,6 +99,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'site_realise_avec_spip' => 'Site realizado com SPIP',
 'sites_web' => 'Websites',
 'sous_rubriques' => 'Subse&ccedil;&otilde;es',
+'spam' => 'Spam',
 'suite' => 'a seguir',
 'sur_web' => 'Na web',
 'syndiquer_rubrique' => 'Sindicar esta se&ccedil;&atilde;o',
