@@ -62,9 +62,9 @@ div.table_page { margin-top: 1em; }
 #chemin { font-size: 0.9em; overflow: hidden;}
 #chemin li em { display: none; }
 #chemin li a { color: white; }
-#chemin, #chemin ul, #chemin li, #chemin li span { display: block; float: #GET{left}; margin: 0; padding: 0; margin-top: 0px; padding-top: 0px; list-style-type: none;}
-#chemin li span {	white-space: no-wrap;	background: url([(#REM|sinon{[(#EVAL{ _DIR_IMG_PACK})]chemin-fond-[(#ENV{ltr})].gif}|image_sepia{666666}|extraire_attribut{src})]) center [(#GET{left})] no-repeat;	padding: 2px;	padding-#GET{left}: 10px;	padding-#GET{right}: 12px;	margin-#GET{left}: -5px; }
-#chemin li li span { display: block; margin-top: 0px; background: url([(#REM|sinon{[(#EVAL{ _DIR_IMG_PACK})]chemin-fond-[(#ENV{ltr})].gif}|image_sepia{#ENV{couleur_foncee,3874b0}}|extraire_attribut{src})]) center [(#GET{left})] no-repeat;}
+#chemin, #chemin ul, #chemin li, #chemin li .bloc { display: block; float: #GET{left}; margin: 0; padding: 0; margin-top: 0px; padding-top: 0px; list-style-type: none;}
+#chemin li .bloc {	white-space: no-wrap;	background: url([(#REM|sinon{[(#EVAL{ _DIR_IMG_PACK})]chemin-fond-[(#ENV{ltr})].gif}|image_sepia{666666}|extraire_attribut{src})]) center [(#GET{left})] no-repeat;	padding: 2px;	padding-#GET{left}: 10px;	padding-#GET{right}: 12px;	margin-#GET{left}: -5px; }
+#chemin li li .bloc { display: block; margin-top: 0px; background: url([(#REM|sinon{[(#EVAL{ _DIR_IMG_PACK})]chemin-fond-[(#ENV{ltr})].gif}|image_sepia{#ENV{couleur_foncee,3874b0}}|extraire_attribut{src})]) center [(#GET{left})] no-repeat;}
 #chemin .aide {margin-top: 3px; margin-bottom: 15px;}
 
 h1 { color: #GET{foncee}; font-size:large; font-family: Arial, Sans, sans-serif; margin: 0.5em 0 0.25em 0; }
