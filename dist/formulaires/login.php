@@ -56,7 +56,8 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null){
 	// si on en a le droit, et sauf si on y est deja
 	verifier_visiteur();
 	$editable = false;
-	if (_request('var_erreur') OR !isset($GLOBALS['visiteur_session']['id_auteur']))
+	if (_request('var_erreur')
+	OR !$GLOBALS['visiteur_session']['id_auteur'])
 		$editable = true;
 
 	if ($prive) {
