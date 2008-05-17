@@ -52,6 +52,7 @@ function inc_documenter_dist(
 	return ajax_action_greffe("documenter", "$s$doc", $res);
 }
 
+// http://doc.spip.org/@rows_as_array
 function rows_as_array($select, $from, $where='', $groupby='', $orderby='')
 {
 	$q = sql_select($select, $from, $where, $groupby, $orderby);
@@ -60,6 +61,7 @@ function rows_as_array($select, $from, $where='', $groupby='', $orderby='')
 	return $res;
 }
 
+// http://doc.spip.org/@documenter_bloc
 function documenter_bloc($id, $res, $s, $script, $ancre, $tous, $type)
 {
 	if ($tous) {
@@ -78,6 +80,7 @@ function documenter_bloc($id, $res, $s, $script, $ancre, $tous, $type)
 		. fin_cadre();
 }
 
+// http://doc.spip.org/@documenter_boucle
 function documenter_boucle($documents, $type, $ancre, &$tous_autorise, $appelant)
 {
 	charger_generer_url();
