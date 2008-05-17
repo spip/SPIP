@@ -22,31 +22,64 @@ function inc_documenter_dist(
 	$type = "article",	# article ou rubrique ?
 	$ancre = 'portfolio',	# album d'images ou de documents ?
 	$ignore_flag = false,	# IGNORE, remplace par autoriser(modifier,document)
-	$couleur='',		# couleur des cases du tableau
+	$couleur='',		# IGNORE couleur des cases du tableau
 	$appelant =''		# pour le rappel (cf plugin)
 ) {
-	$table = 'spip_documents_' . $type . 's';
-	if (!id_table_objet($table)) {
-			spip_log("documenter: $type table inconnue");
-			$type = 'article';
-			$table = 'spip_documents_' . $type . 's';
-	}
-	$prim = 'id_' . $type;
 	if (is_int($doc)) {
-		if ($ancre == 'portfolio') {
-		  $lies = sql_select("D.id_document, D.id_vignette, D.extension, D.titre,  D.date,  D.descriptif,  D.fichier,  D.taille, D.largeur,  D.hauteur,  D.mode,  D.distant, l.vu, l." .$prim, "spip_documents AS D, $table AS l", "l.$prim=$doc AND l.id_document=D.id_document AND D.mode='document' AND D.extension IN ('gif', 'jpg', 'png')",'',  "0+D.titre, D.date");
-		} else {
-		  $lies = sql_select("D.id_document, D.id_vignette, D.extension, D.titre,  D.date,  D.descriptif,  D.fichier,  D.taille, D.largeur,  D.hauteur,  D.mode,  D.distant, l.vu,l." . $prim, "spip_documents AS D, $table AS l", "l.$prim=$doc AND l.id_document=D.id_document AND D.mode='document' AND D.extension NOT IN ('gif', 'jpg', 'png')",'', "0+D.titre, D.date");
+		$table = 'spip_documents_' . $type . 's';
+		if (!id_table_objet($table)) {
+				spip_log("documenter: $type table inconnue");
+				$type = 'article';
+				$table = 'spip_documents_' . $type . 's';
 		}
+		$prim = 'id_' . $type;
+		$img = ($ancre == 'portfolio') ? '' : " NOT";
+		$select = "D.id_document, D.id_vignette, D.extension, D.titre,  D.date,  D.descriptif,  D.fichier,  D.taille, D.largeur,  D.hauteur,  D.mode,  D.distant, L.vu, L." .$prim;
+		$from = "spip_documents AS D LEFT JOIN $table AS L ON  L.id_document=D.id_document"; 
+		$where = "L.$prim=$doc AND D.mode='document' AND D.extension $img IN ('gif', 'jpg', 'png')";
+		$order = "0+D.titre, D.date";
+		$docs = rows_as_array($select, $from, $where, '', $order);
+	} else $docs = $doc;
 
-		$documents = array();
-		while ($document = sql_fetch($lies))
-			$documents[] = $document;
-	} else
-		$documents = $doc;
+	if (!$docs) return '';
 
-	if (!$documents) return '';
+	$tous = (count($docs) > 3);
+	$res = documenter_boucle($docs, $type, $ancre, $tous, $appelant);
+	$s = ($ancre =='documents' ? '': '-');
 
+	if (is_int($doc))
+		$res = documenter_bloc($doc, $res, $s, $script, $ancre, $tous, $type);
+	return ajax_action_greffe("documenter", "$s$doc", $res);
+}
+
+function rows_as_array($select, $from, $where='', $groupby='', $orderby='')
+{
+	$q = sql_select($select, $from, $where, $groupby, $orderby);
+	$res = array();
+	while ($r = sql_fetch($q)) $res[] = $r;
+	return $res;
+}
+
+function documenter_bloc($id, $res, $s, $script, $ancre, $tous, $type)
+{
+	if ($tous) {
+		$tous = "<div class='lien_tout_supprimer'>"
+			. ajax_action_auteur('documenter', "$s$id/$type", $script, "id_$type=$id&s=$s&type=$type",array(_T('lien_tout_supprimer')))
+			. "</div>\n";
+	} else $tous = '';
+
+	$bouton = bouton_block_depliable(majuscules(_T("info_$ancre")),true,"portfolio_$ancre");
+
+	return debut_cadre("$ancre","","",$bouton)
+		. debut_block_depliable(true,"portfolio_$ancre")
+		. $tous
+		. $res
+		. fin_block()
+		. fin_cadre();
+}
+
+function documenter_boucle($documents, $type, $ancre, &$tous_autorise, $appelant)
+{
 	charger_generer_url();
 	// la derniere case d'une rangee
 	$bord_droit = ($ancre == 'portfolio' ? 2 : 1);
@@ -66,8 +99,6 @@ function inc_documenter_dist(
 
 	$show_docs = explode(',', _request('show_docs'));
 
-	$tous_autorises = true;
-
 	foreach ($documents as $document) {
 		$id_document = $document['id_document'];
 
@@ -77,20 +108,17 @@ function inc_documenter_dist(
 		  // ref a $exec inutilise en standard
 		  $script = $appelant ? $appelant : $GLOBALS['exec'];
 
-		$vu = ($document['vu']=='oui') ? ' vu':'';
-
-		$deplier = in_array($id_document, $show_docs);
-
 		if (!$case)
 			$res .= "<tr>";
 
 		$flag = autoriser('modifier', 'document', $id_document);
 		$tous_autorises &= $flag;
+		$vu = ($document['vu']=='oui') ? ' vu':'';
 
 		$res .= "\n<td  class='document$vu'>"
 		.  $tourner($id_document, $document, $script, $flag, $type)
 		. (!$flag  ? '' :
-		   $legender($id_document, $document, $script, $type, $document["id_$type"], $ancre, $deplier))
+		   $legender($id_document, $document, $script, $type, $document["id_$type"], $ancre, in_array($id_document, $show_docs)))
 		. (!isset($document['info']) ? '' :
 		       ("<div class='verdana1'>".$document['info']."</div>"))
 		. "</td>\n";
@@ -108,26 +136,8 @@ function inc_documenter_dist(
 		$res .= "</tr>";
 	}
 
-	$s = ($ancre =='documents' ? '': '-');
-	$head = $pied = "";
-	if (is_int($doc)) {
-		$bouton = bouton_block_depliable(majuscules(_T("info_$ancre")),true,"portfolio_$ancre");
-		$head = debut_cadre("$ancre","","",$bouton);
-		if (count($documents) > 3
-		AND $tous_autorises) {
-			$head .= "<div class='lien_tout_supprimer'>"
-			. ajax_action_auteur('documenter', "$s$doc/$type", $script, "id_$type=$doc&s=$s&type=$type",array(_T('lien_tout_supprimer')))
-			. "</div>\n";
-		}
-		$head .= debut_block_depliable(true,"portfolio_$ancre");
-		$pied = fin_block().fin_cadre();
-	}
-
-	$res = $head
-	. "\n<table width='100%' cellspacing='0' cellpadding='4'>"
+	return "\n<table width='100%' cellspacing='0' cellpadding='4'>"
 	. $res
-	. "</table>"
-	. $pied;
-
-	return ajax_action_greffe("documenter", "$s$doc", $res);
+	. "</table>";
 }
+?>
