@@ -735,7 +735,13 @@ and connect again to the site.
 'trad_reference' => '(reference article)',
 
 // U
+'upload_fichier_zip' => 'Zip file',
+'upload_fichier_zip_texte' => 'The file you are installing is a zip file.',
+'upload_fichier_zip_texte2' => 'This file can be:',
 'upload_limit' => 'This file is too big for the server; the maximum size allowed for <i>upload</i> is @max@.',
+'upload_zip_decompacter' => 'unpacked, and each element it contains can be installed separately on the site. These files are:',
+'upload_zip_telquel' => 'installed as it is, as a zip archive;',
+'upload_zip_titrer' => 'Add titles according to the filenames',
 
 // Z
 'zbug_balise_b_aval' => ': B tag too late in loop',

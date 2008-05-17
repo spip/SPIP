@@ -733,7 +733,13 @@ e reconectar co web.
 'trad_reference' => '(artigo de referencia)',
 
 // U
+'upload_fichier_zip' => 'Arquivo ZIP',
+'upload_fichier_zip_texte' => 'O ficheiro que prop&oacute;n instalar &eacute; un arquivo Zip.',
+'upload_fichier_zip_texte2' => 'Este ficheiro pode ser&nbsp;:',
 'upload_limit' => 'Este ficheiro &eacute; demasiado grande para o servidor&nbsp;; o tama&ntilde;o m&aacute;ximo autorizado en <i>upload</i> &eacute; de @max@.',
+'upload_zip_decompacter' => 'descomprido e cada elemento que conte&ntilde;a instalado no web. Os ficheiros que ser&aacute;n,   daquela, instalados no web son&nbsp;:',
+'upload_zip_telquel' => 'instalado tal cal, en tanto que arquivo comprido Zip&nbsp;;',
+'upload_zip_titrer' => 'Titulalos consonte o nome dos ficheiros',
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: baliza B en aval',

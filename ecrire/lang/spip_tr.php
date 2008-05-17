@@ -720,7 +720,13 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'trad_reference' => '(referans makale)',
 
 // U
+'upload_fichier_zip' => 'ZIP dosyas&#305;',
+'upload_fichier_zip_texte' => 'Kurulmas&#305;n&#305; &ouml;nerdi&#287;iniz dosya bir zip dosyas&#305;.',
+'upload_fichier_zip_texte2' => 'Bu dosya&nbsp;:',
 'upload_limit' => 'Bu dosya sunucuya g&ouml;re fazla b&uuml;y&uuml;k&nbsp;; y&uuml;klenmesine izin verilen en b&uuml;y&uuml;k dosya : <i>@max@</i>.',
+'upload_zip_decompacter' => 'a&ccedil;&#305;labilir ve i&ccedil;erdi&#287;i her eleman siteye kurulabilir. Bu durumda siteye kurulacak dosyalar &#351;unlard&#305;r&nbsp;:',
+'upload_zip_telquel' => 'oldu&#287;u gibi, s&#305;k&#305;&#351;t&#305;r&#305;lm&#305;&#351; zip ar&#351;iv dosyas&#305; olarak kurulabilir&nbsp;;',
+'upload_zip_titrer' => 'Dosya isimlerine g&ouml;re ba&#351;l&#305;k ver',
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: B etiketinde sorun var',
