@@ -19,11 +19,10 @@ RewriteEngine On
 ################ CONFIGURATION ######################
 
 ### Configuration sous-repertoire
-# Si votre site est dans un sous-repertoire, preciser ci-dessous
-# le nom du sous-repertoire, et supprimer le '#'
-# Chez certains hebergeurs il faut indiquer "RewriteBase /"
+# Chez la plupart des hebergeurs il faut indiquer "RewriteBase /"
+# sinon modifiez cette ligne
 
-#RewriteBase /sous/repertoire/
+RewriteBase /
 
 
 # SPIP version 'php' - si vous avez d'anciennes adresses en '.php[3]',
