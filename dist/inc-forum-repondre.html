@@ -1,6 +1,0 @@
-[(#ENV{id_forum}|=={-1}|?{'',' '})
-[<p class="repondre"><a class='ajax' onclick="$('#formulaire_forum').remove();" href="[(#SELF|parametre_url{id_forum,'-1'})#formulaire_forum]" rel="noindex nofollow">(#ENV*{reponse})</a></p>]
-]
-[(#ENV{id_forum}|=={-1}|?{' '})
-<div class='ajax'>#FORMULAIRE_FORUM</div>
-]
