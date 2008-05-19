@@ -988,7 +988,7 @@ function calculer_critere_infixe_date($idb, &$boucles, $regs)
 	global $table_date; 
 	$boucle = $boucles[$idb];
 	list(,$col, $rel, $suite) = $regs;
-	$date_orig = $pred = $table_date[$boucle->type_requete];
+	$date_orig = $pred = isset($table_date[$boucle->type_requete])?$table_date[$boucle->type_requete]:'date';
 	if ($suite) {
 	# Recherche de l'existence du champ date_xxxx,
 	# si oui choisir ce champ, sinon choisir xxxx
