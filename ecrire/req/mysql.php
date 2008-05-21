@@ -462,7 +462,7 @@ function spip_mysql_showtable($nom_table, $serveur='',$requeter=true)
 		if($val['Extra'])
 		  $nfields[$val["Field"]] .= ' '.$val['Extra'];
 		if($val['Key'] == 'PRI') {
-		  $nkeys['PRIMARY'] = $val["Field"];
+		  $nkeys['PRIMARY KEY'] = $val["Field"];
 		} else if($val['Key'] == 'MUL') {
 		  $nkeys['KEY '.$val["Field"]] = $val["Field"];
 		} else if($val['Key'] == 'UNI') {
