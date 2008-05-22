@@ -200,6 +200,7 @@ function inc_auth_dist() {
 	return ''; // i.e. pas de pb.
 }
 
+// http://doc.spip.org/@auth_trace
 function auth_trace($row, $date='NOW()')
 {
 	// Indiquer la connexion. A la minute pres ca suffit.
