@@ -59,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_lien' => 'Omzetten naar [hypertekst verwijzing->http://...]',
 'barre_lien_input' => 'Gelieve hier het adres van de koppeling op te geven. Je kan naar een webpagina verwijzen onder de vorm http://www.mijnsite.com ofwel het nummer van een artikel van deze site invullen.',
 'barre_note' => 'Omzetten naar een [[Voetnoot]]',
+'barre_paragraphe' => 'Een paragraaf cre&euml;ren',
 'barre_quote' => '<quote>een bericht citeren</quote>',
 'bouton_ajouter_document' => 'EEN DOCUMENT TOEVOEGEN',
 'bouton_ajouter_image' => 'EEN AFBEELDING TOEVOEGEN',

@@ -59,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_lien' => '[Hipermetin ba&#287;lant&#305;s&#305;na->http://...] d&ouml;n&uuml;&#351;t&uuml;r',
 'barre_lien_input' => 'L&uuml;tfen ba&#287;lant&#305;n&#305;z&#305;n adresini girin (adresi http://www.adresim.com veya bu sitede bulunan bir metnin numaras&#305; &#351;eklinde girebilirsiniz).',
 'barre_note' => '[[Sayfa sonu notuna]] d&ouml;n&uuml;&#351;t&uuml;r',
+'barre_paragraphe' => 'Bir paragraf olu&#351;tur',
 'barre_quote' => '<quote>Bir iletiden al&#305;nt&#305; yap</quote>',
 'bouton_ajouter_document' => 'BELGE EKLE',
 'bouton_ajouter_image' => 'RES&#304;M EKLE',
