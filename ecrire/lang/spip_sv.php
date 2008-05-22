@@ -725,15 +725,6 @@ och koppla upp dig mot sajten igen.
 'titre_titre_document' => 'Dokumentets titel:',
 'trad_reference' => '(refererad artikel)',
 
-// U
-'upload_fichier_zip' => 'Zip-fil',
-'upload_fichier_zip_texte' => 'Filen du laddar upp &auml;r en zip-fil',
-'upload_fichier_zip_texte2' => 'Den h&auml;r filen kan:',
-'upload_limit' => 'Den h&auml;r filen &auml;r f&ouml;r stor f&ouml;r servern; Den maimala storleken som kan <i>laddas upp</i> &auml;r @max@.',
-'upload_zip_decompacter' => 'packas upp, och alla delar den inneh&aring;ller kan installeras separat p&aring; sajten. filerna &auml;r:',
-'upload_zip_telquel' => 'installerad som den &auml;r, som en zip-fil;',
-'upload_zip_titrer' => 'L&auml;gg till titlar efter vad filerna kallas',
-
 // Z
 'zbug_balise_b_aval' => ': B taggen f&ouml;r sent i loopen',
 'zbug_balise_inexistante' => '<NEW>error @from@: the #@balise@ tag does not exist',

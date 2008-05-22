@@ -670,9 +670,6 @@ N&uacute; mi n&aacute; &#598;&oacute; m&#596; n&#596;t&#603;n gblogbloj&iacute; 
 'titre_titre_document' => 'x&oacute;t&aacute; we&#780;m&agrave; t&#596;n &nbsp;:',
 'trad_reference' => '(w&eacute;kp&aacute; j&#596; w&eacute;kp&aacute;)',
 
-// U
-'upload_limit' => 'gb&egrave;t&aacute; &#596; kl&oacute; &#598;&iacute;n @max@.',
-
 // Z
 'zbug_balise_b_aval' => '&nbsp;:D&ograve;gb&oacute; B &#598;&ograve; f&igrave;f&oacute;m&#603;',
 'zbug_boucle' => 'F&iacute;f&oacute;m&#603; b&igrave;b&#603;m&#603;',

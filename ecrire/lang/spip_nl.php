@@ -739,15 +739,6 @@ opnieuw verbinding maken met de site
 'titre_titre_document' => 'Titel van het document:',
 'trad_reference' => '(referentie-artikel)',
 
-// U
-'upload_fichier_zip' => 'Bestand ZIP',
-'upload_fichier_zip_texte' => 'Het bestand dat u voorstelt om te plaatsen is een bestand Zip.',
-'upload_fichier_zip_texte2' => 'Dit bestand misschien&nbsp;:',
-'upload_limit' => 'Dit bestand is te groot voor de server&nbsp;; de maximale bestandsgrootte voor <i>upload</i> is @max@.',
-'upload_zip_decompacter' => 'afsamengeperst en elk element dat hij ge&iuml;nstalleerda op de plaats bevat. De bestanden die dan op de plaats zullen ge&iuml;nstalleerde worden zijn&nbsp;:',
-'upload_zip_telquel' => 'als zodanig geplaatst, als samengeperst archief Zip&nbsp;;',
-'upload_zip_titrer' => 'Volgens de naam bestanden betitelen',
-
 // Z
 'zbug_balise_b_aval' => '&nbsp;: komende opmaakcode B',
 'zbug_balise_inexistante' => 'fout @from@: het baken #@balise@ bestaat niet',

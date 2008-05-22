@@ -724,9 +724,6 @@ funzionamento del sito. Non intervenire finch&eacute; non conosci bene i meccani
 'titre_titre_document' => 'Titolo del documento:',
 'trad_reference' => '(articolo di riferimento)',
 
-// U
-'upload_limit' => 'Questo file &egrave; troppo grande per il server; la dimensione massima consentita per gli <i>upload</i> &egrave; di @max@.',
-
 // Z
 'zbug_balise_b_aval' => ': ciclo B deve precedere ciclo BOUCLE',
 'zbug_boucle' => 'ciclo',

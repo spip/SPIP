@@ -703,9 +703,6 @@ Versicht',
 'titre_titre_document' => 'Titel vum Dokument:',
 'trad_reference' => '(Referenz-Artikel)',
 
-// U
-'upload_limit' => 'D&euml;se Fichier ass ze grouss fir de Server; d&eacute;i maximal Gr&eacute;isst fir <i>eropzelueden</i> ass @max@.',
-
 // Z
 'zbug_balise_b_aval' => ': B-Tag dr&euml;nner',
 'zbug_boucle' => '-eidel-',

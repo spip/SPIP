@@ -682,9 +682,6 @@ Pr&oacute;b&aacute;ljon',
 'titre_titre_document' => 'Dokumentum c&iacute;me&nbsp;:',
 'trad_reference' => '(eredeti cikk)',
 
-// U
-'upload_limit' => 'Ez a f&aacute;jl t&uacute;l nagy a szervernek; a m&aacute;ximalis <i>felt&ouml;lt&eacute;si</i> m&eacute;ret @max@.',
-
 // Z
 'zbug_balise_b_aval' => '&nbsp;: B jelz&#337; ut&aacute;n',
 'zbug_boucle' => 'folyamat',

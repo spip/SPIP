@@ -713,9 +713,6 @@ og igen f&aring; adgang til webstedet.',
 'titre_titre_document' => 'Dokumentoverskrift:',
 'trad_reference' => '(referenceartikel)',
 
-// U
-'upload_limit' => '<NEW>Ce fichier est trop gros pour le serveur&nbsp;; la taille maximum autoris&eacute;e en <i>upload</i> est de @max@.',
-
 // Z
 'zbug_balise_b_aval' => '<NEW>&nbsp;: balise B en aval',
 'zbug_boucle' => '<NEW>boucle',

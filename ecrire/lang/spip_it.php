@@ -728,15 +728,6 @@ funzionamento del sito. Non intervenire finch&eacute; non conosci bene i meccani
 'titre_titre_document' => 'Titolo del documento:',
 'trad_reference' => '(articolo di riferimento)',
 
-// U
-'upload_fichier_zip' => 'File ZIP',
-'upload_fichier_zip_texte' => 'Il file che tentate di installare &egrave; un file Zip.',
-'upload_fichier_zip_texte2' => 'Questo file pu&ograve; essere:',
-'upload_limit' => 'Questo file &egrave; troppo grande per il server; la dimensione massima consentita per gli <i>upload</i> &egrave; di @max@.',
-'upload_zip_decompacter' => 'estratto ed ogni elemento in esso contenuto verr&agrave; installato sul sito. I file che verranno installati sul sito sono quindi:',
-'upload_zip_telquel' => 'installato cos&igrave; com\'&egrave;, come archivio compresso Zip;',
-'upload_zip_titrer' => 'Dare i titoli in base al nome dei file',
-
 // Z
 'zbug_balise_b_aval' => ': ciclo B deve precedere ciclo BOUCLE',
 'zbug_balise_inexistante' => 'errore @from@: il tag #@balise@ non esiste ',

@@ -725,9 +725,6 @@ l&egrave;s plit&ograve; jestyon paj sa-yo pou w&egrave;bm&egrave;t prensipal sou
 'titre_titre_document' => 'Kouman rele dokiman a&nbsp;:',
 'trad_reference' => '(atik pou referans)',
 
-// U
-'upload_limit' => 'Fichye a se two gwo pou serv&egrave;r la &nbsp;; pli gran tay posib pou <i>upload</i>se @max@.',
-
 // Z
 'zbug_balise_b_aval' => '&nbsp;: baliz B anba',
 'zbug_boucle' => 'boukle',

@@ -715,9 +715,6 @@ a znovu se ke str&aacute;nk&aacute;m p&#345;ipoj&iacute;te.
 'titre_titre_document' => 'N&aacute;zev dokumentu:',
 'trad_reference' => '(referen&#269;n&iacute; &#269;l&aacute;nek)',
 
-// U
-'upload_limit' => 'Soubor je pro server p&#345;&iacute;li&#353; velk&yacute;. Maxim&aacute;ln&iacute; povolen&aacute; velikost pro <i>odesl&aacute;n&iacute;</i> je @max@.',
-
 // Z
 'zbug_balise_b_aval' => ': tag B je p&#345;&iacute;li&#353; pozd&#283; ve smy&#269;ce',
 'zbug_boucle' => 'smy&#269;ka',

@@ -709,15 +709,6 @@ Tente se',
 'titre_titre_document' => 'T&iacute;tulo do documento:',
 'trad_reference' => '(mat&eacute;ria de refer&ecirc;ncia)',
 
-// U
-'upload_fichier_zip' => 'Arquivo ZIP',
-'upload_fichier_zip_texte' => 'O arquivo que voc&ecirc; prop&otilde;e instalar &eacute; um arquivo Zip.',
-'upload_fichier_zip_texte2' => 'Este arquivo pode ser:',
-'upload_limit' => 'Este arquivo &eacute; grande demais para o servidor; o tamanho m&aacute;ximo autorizado para <i>upload</i> &eacute; de @max@.',
-'upload_zip_decompacter' => 'descomprimido e cada elemento nele contido gravado no site. Os arquivos que ser&atilde;o, deste modo, gravados no site, s&atilde;o:',
-'upload_zip_telquel' => 'gravado tal qual, como um arquivo comprimido Zip;',
-'upload_zip_titrer' => 'Titular de acordo com o nome dos arquivos',
-
 // Z
 'zbug_balise_b_aval' => ': tag B colocada ap&oacute;s BOUCLE',
 'zbug_balise_inexistante' => 'erro @from@: a tag #@balise@ n&atilde;o existe',

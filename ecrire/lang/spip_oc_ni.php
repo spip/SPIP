@@ -725,9 +725,6 @@ e vos tornar connectar au sit.
 'titre_titre_document' => 'Titre dau document&nbsp;:',
 'trad_reference' => '(article de referen&ccedil;a)',
 
-// U
-'upload_limit' => 'Aqu&egrave;u fichier es tr&ograve;p gr&ograve;s per lo servidor; la talha maximala autorisada en <i>upload</i> es de @max@.',
-
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balisa B en aval',
 'zbug_boucle' => 'bloca',

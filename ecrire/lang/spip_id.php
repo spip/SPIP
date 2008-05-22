@@ -727,9 +727,6 @@ dan mengakses situs kembali.
 'titre_titre_document' => 'Judul dokumen:',
 'trad_reference' => '(rujuk artikel)',
 
-// U
-'upload_limit' => 'Berkas ini terlalu besar untuk server; ukuran maksimum yang diperbolehkan untuk <i>unggah</i> adalah @max@.',
-
 // Z
 'zbug_balise_b_aval' => ': tag B terlambat dalam loop',
 'zbug_boucle' => 'loop',

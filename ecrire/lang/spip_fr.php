@@ -736,15 +736,6 @@ et vous reconnecter au site.
 'titre_titre_document' => 'Titre du document&nbsp;:',
 'trad_reference' => '(article de r&eacute;f&eacute;rence)',
 
-// U
-'upload_fichier_zip' => 'Fichier ZIP',
-'upload_fichier_zip_texte' => 'Le fichier que vous proposez d\'installer est un fichier Zip.',
-'upload_fichier_zip_texte2' => 'Ce fichier peut &ecirc;tre&nbsp;:',
-'upload_limit' => 'Ce fichier est trop gros pour le serveur&nbsp;; la taille maximum autoris&eacute;e en <i>upload</i> est de @max@.',
-'upload_zip_decompacter' => 'd&eacute;compress&eacute; et chaque &eacute;l&eacute;ment qu\'il contient install&eacute; sur le site. Les fichiers qui seront alors install&eacute;s sur le site sont&nbsp;:',
-'upload_zip_telquel' => 'install&eacute; tel quel, en tant qu\'archive compress&eacute;e Zip&nbsp;;',
-'upload_zip_titrer' => 'Titrer selon le nom des fichiers',
-
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balise B en aval',
 'zbug_balise_inexistante' => 'erreur @from@: la balise #@balise@ n\'existe pas',

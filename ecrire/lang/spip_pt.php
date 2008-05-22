@@ -729,9 +729,6 @@ Poder&aacute; ent&atilde;o introduzir uma nova palavra-passe
 'titre_titre_document' => 'T&iacute;tulo do documento&nbsp;:',
 'trad_reference' => '(artigo de refer&ecirc;ncia)',
 
-// U
-'upload_limit' => 'Este ficheiro &eacute; grande demais para o servidor; o tamanho m&aacute;ximo autorizado para <i>upload</i> &eacute; de @max@.',
-
 // Z
 'zbug_balise_b_aval' => ': tag B colocada ap&oacute;s BOUCLE',
 'zbug_boucle' => 'la&ccedil;o',

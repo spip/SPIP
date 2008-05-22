@@ -643,9 +643,6 @@ Obratite paznu na ovu referencu, ponovo pokusajte nadogradnju i na kraju provjer
 'titre_titre_document' => 'Naslov dokumenta:',
 'trad_reference' => '(preporuceni clanak)',
 
-// U
-'upload_limit' => 'Ovaj dokument je prevelik za server; dozvoljena maksimalna velicina za <i>upload</i> je @max@.',
-
 // Z
 'zbug_balise_b_aval' => '&nbsp;: oznaka B kasni u petlji',
 'zbug_boucle' => 'petlja',
