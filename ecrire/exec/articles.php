@@ -290,10 +290,6 @@ function bouton_modifier_articles($id_article, $id_rubrique, $flag_modif, $mode,
 // http://doc.spip.org/@afficher_corps_articles
 function afficher_corps_articles($id_article, $virtuel, $row)
 {
-  global $champs_extra, $les_notes, $lang_objet;
-
-  //$lang_dir = lang_dir($lang_objet);
-
 	$res = '';
 	if ($row['statut'] == 'prop')
 		$res .= "<p class='article_prop'>"._T('text_article_propose_publication')."</p>";

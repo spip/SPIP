@@ -368,10 +368,12 @@ function extra_affichage($extra, $table_objet) {
 			.interdire_scripts($contenu)."<br /></div>\n";
 	}
 
-	if ($affiche)
+	if ($affiche) {
+		include_spip('inc/presentation');
 		return debut_cadre_enfonce('',true)
 			. $affiche
 			. fin_cadre_enfonce(true);
+	}
 }
 
 // s'il y a mise a jour des extras, mixer les champs modifies
