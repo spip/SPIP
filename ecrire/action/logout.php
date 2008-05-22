@@ -20,16 +20,14 @@ function action_logout_dist()
 	global $visiteur_session, $ignore_auth_http;
 	$logout =_request('logout');
 	$url = _request('url');
-	spip_log("logout $logout $url" . $visiteur_session['id_auteur']);
 	// cas particulier, logout dans l'espace public
 	if ($logout == 'public' AND !$url)
 		$url = url_de_base();
 
 	// seul le loge peut se deloger (mais id_auteur peut valoir 0 apres une restauration avortee)
 	if (is_numeric($visiteur_session['id_auteur'])) {
-		sql_updateq('spip_auteurs', 
-			   array('en_ligne' => 'DATE_SUB(NOW(),INTERVAL 15 MINUTE)'),
-			"id_auteur=" . $visiteur_session['id_auteur']);
+		include_spip('inc/auth');
+		auth_trace($visiteur_session, '0000-00-00 00:00:00');
 	// le logout explicite vaut destruction de toutes les sessions
 		if (isset($_COOKIE['spip_session'])) {
 			$session = charger_fonction('session', 'inc');

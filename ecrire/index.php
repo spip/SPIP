@@ -36,21 +36,20 @@ if (autoriser_sans_cookie($exec)) {
 	$auth = charger_fonction('auth', 'inc');
 	$var_auth = $auth();
 
-	if (!autoriser('ecrire')) {
-		// Erreur SQL ?
-		if ($var_auth===-1) exit(); // un message d'erreur a deja ete envoye
-
-		// Sinon rediriger vers la page de login
-		include_spip('inc/headers');
-		$redirect = generer_url_public('login',
+	if ($var_auth) {
+		// Si chaine, message d'erreur SQL a afficher
+		// autrement rediriger vers la page de login
+		if (!is_string($var_auth)) {
+			include_spip('inc/headers');
+			$redirect = generer_url_public('login',
 			"url=" . rawurlencode(str_replace('/./', '/',
 				(_DIR_RESTREINT ? "" : _DIR_RESTREINT_ABS)
 				. str_replace('&amp;', '&', self()))), '&');
 
 		// un echec au "bonjour" (login initial) quand le statut est
 		// inconnu signale sans doute un probleme de cookies
-		if (isset($_GET['bonjour']))
-			$redirect = parametre_url($redirect,
+			if (isset($_GET['bonjour']))
+				$redirect = parametre_url($redirect,
 				'var_erreur',
 				(!isset($GLOBALS['visiteur_session']['statut'])
 					? 'cookie'
@@ -58,7 +57,9 @@ if (autoriser_sans_cookie($exec)) {
 				),
 				'&'
 			);
-		echo redirige_formulaire($redirect);
+			$var_auth = redirige_formulaire($redirect);
+		}
+		echo $var_auth;
 		exit;
 	}
  }
