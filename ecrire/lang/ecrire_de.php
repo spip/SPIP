@@ -1083,6 +1083,7 @@ Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf
 'upload_fichier_zip' => 'ZIP-Datei',
 'upload_fichier_zip_texte' => 'Sie m&ouml;chsten eine ZIP-Datei installieren.',
 'upload_fichier_zip_texte2' => 'SPIP kann:',
+'upload_limit' => 'Datei zu gross zum Hochladen. Maximale <i>upload</i>-Gr&ouml;sse: @max@.',
 'upload_zip_conserver' => 'Archiv nach Entpacken beibehalten',
 'upload_zip_decompacter' => 'Das ZIP-Archiv auspacken. Diese Dateien werden dann auf dem Server installiert:',
 'upload_zip_telquel' => 'Das ZIP-Archiv als eine Archivdatei installieren.',

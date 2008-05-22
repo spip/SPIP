@@ -1074,6 +1074,7 @@ neste caso, voc&ecirc; n&atilde;o poder&aacute; usar a sindica&ccedil;&atilde;o 
 'upload_fichier_zip' => 'Arquivo ZIP',
 'upload_fichier_zip_texte' => 'O arquivo que voc&ecirc; prop&ocirc;s instalar &eacute; um arquivo Zip.',
 'upload_fichier_zip_texte2' => 'Este arquivo pode ser:',
+'upload_limit' => 'Este arquivo &eacute; grande demais para o servidor; o tamanho m&aacute;ximo autorizado para <i>upload</i> &eacute; de @max@.',
 'upload_zip_conserver' => 'Manter o arquivo ap&oacute;s extra&ccedil;&atilde;o',
 'upload_zip_decompacter' => 'expandido e cada elemento que ele cont&eacute;m gravados no site. Os arquivos que ser&atilde;o ent&atilde;o gravados s&atilde;o:',
 'upload_zip_telquel' => 'instalado; como arquivo compactado Zip;',

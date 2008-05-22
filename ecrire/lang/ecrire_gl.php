@@ -1179,6 +1179,7 @@ e ser&aacute; visible para todo o equipo de redacci&oacute;n. Use os anuncios s&
 'upload_fichier_zip' => 'Arquivo ZIP',
 'upload_fichier_zip_texte' => 'O ficheiro que pretende instalar &eacute; un arquivo Zip.',
 'upload_fichier_zip_texte2' => 'Este ficheiro pode ser&nbsp;:',
+'upload_limit' => 'Este ficheiro &eacute; demasiado grande para o servidor&nbsp;; o tama&ntilde;o m&aacute;ximo autorizado en <i>upload</i> &eacute; de @max@.',
 'upload_zip_conserver' => 'Conservar o arquivo tras a extracci&oacute;n',
 'upload_zip_decompacter' => 'descompr&iacute;mase e cada elemento que conte&ntilde;a que sexa instalado no web. Os ficheiros que ser&aacute;n instalados son&nbsp;:',
 'upload_zip_telquel' => 'instalado tal cal, dado que &eacute; un arquivo comprimido Zip&nbsp;;',

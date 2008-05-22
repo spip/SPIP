@@ -964,13 +964,6 @@ i en farve, der angiver deres status:',
 'trad_lier' => 'Denne artikel er en overs&aelig;ttelse af artikel nummer&nbsp;:',
 'trad_new' => 'Lav en ny overs&aelig;ttelse af denne artikel',
 
-// U
-'upload_fichier_zip' => '<NEW>Fichier ZIP',
-'upload_fichier_zip_texte' => '<NEW>Le fichier que vous proposez d\'installer est un fichier Zip.',
-'upload_fichier_zip_texte2' => '<NEW>Ce fichier peut &ecirc;tre&nbsp;:',
-'upload_zip_decompacter' => '<NEW>d&eacute;compress&eacute; et chaque &eacute;l&eacute;ment qu\'il contient install&eacute; sur le site. Les fichiers qui seront alors install&eacute;s sur le site sont&nbsp;:',
-'upload_zip_telquel' => '<NEW>install&eacute; tel quel, en tant qu\'archive compress&eacute;e Zip&nbsp;;',
-
 // V
 'version_initiale' => '<NEW>Initial version'
 );

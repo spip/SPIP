@@ -932,6 +932,7 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'upload_fichier_zip' => 'ZIP dokument',
 'upload_fichier_zip_texte' => 'Dokument koji predlazete za upload, je ZIP dokument.',
 'upload_fichier_zip_texte2' => 'Ovaj dokument moze biti:',
+'upload_limit' => 'Ovaj dokument je prevelik za server; dozvoljena maksimalna velicina za <i>upload</i> je @max@.',
 'upload_zip_decompacter' => 'dekompresovan i svaki sadrzani dokument ce biti instaliran na stranicu. Dokumenti koji ce biti instalirani su:',
 'upload_zip_telquel' => 'instaliran kakav jeste, u ZIP formatu;',
 'utf8_convert_attendez' => '<NEW>Attendez quelques instants et rechargez cette page.',

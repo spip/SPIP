@@ -1094,6 +1094,7 @@ ao SPIP pesquisar igualmente no texto dos
 'upload_fichier_zip' => 'Ficheiro ZIP',
 'upload_fichier_zip_texte' => 'O ficheiro que prop&ocirc;s instalar &eacute; um ficheiro Zip.',
 'upload_fichier_zip_texte2' => 'Este ficheiro pode ser:',
+'upload_limit' => 'Este ficheiro &eacute; grande demais para o servidor; o tamanho m&aacute;ximo autorizado para <i>upload</i> &eacute; de @max@.',
 'upload_zip_decompacter' => 'expandido e cada elemento que ele cont&eacute;m gravados no site. Os ficheiros que ser&atilde;o ent&atilde;o gravados s&atilde;o:',
 'upload_zip_telquel' => 'instalado; como ficheiro compactado Zip;',
 'utf8_convert_attendez' => '<NEW>Attendez quelques instants et rechargez cette page.',
