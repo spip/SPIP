@@ -212,7 +212,6 @@ function autoriser_site_modifier_dist($faire, $type, $id, $qui, $opt) {
 		AND autoriser('voir','rubrique',$t['id_rubrique'])
 		AND ($t['statut'] == 'prop'
 			OR autoriser('modifier', 'rubrique', $t['id_rubrique'])
-			)
 		)
 	);
 }
