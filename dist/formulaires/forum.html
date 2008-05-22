@@ -60,7 +60,7 @@
 	<small><:info_creation_paragraphe:></small>
 	[(#ENV**{config}|table_valeur{afficher_barre}|
 		?{#VAL{texte}|barre_typo{#LANG}})]
-	<textarea name='texte' id='texte' rows='12'>[(#ENV{texte})]</textarea>
+	<textarea name='texte' id='texte' rows='12' cols='48'>[(#ENV{texte})]</textarea>
 	[<div class='erreur'>(#ENV**{erreurs}|table_valeur{texte})</div>]
 	</li>
 })]
