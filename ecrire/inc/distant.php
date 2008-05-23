@@ -180,9 +180,9 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false,
 		$url = recuperer_lapage($url, $munge_charset, $get, $taille_max, $datas, $boundary, $refuser_gz, $date_verif, $uri_referer);
 		if (!$url) return false;
 		if (is_array($url)) {
-			list($headers,  $result) = $url;
+			list($headers, $result) = $url;
 			return ($get_headers ? $headers."\n" : '').$result;
-		}
+		} else spip_log("recuperer page recommence sur $url");
 	}
 }
 
@@ -210,9 +210,10 @@ function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576,
 			fclose($f);
 			return false;
 		}
-		if (!is_array($headers)) {
+		if (!is_array($headers)) { // cas Location 
 			fclose($f);
-			return $headers ; // cas Location ou Modified.
+			include_spip('inc/filtres');
+			return suivre_lien($url, $headers);
 		}
 		$headers = join('', $headers);
 	}
@@ -284,25 +285,25 @@ function recuperer_entetes($f, $date_verif='')
 	}
 	$status = intval($r[1]);
 	$headers = array();
+	$not_modif = false;
 	while ($s = trim(fgets($f, 16384))) {
 		$headers[]= $s."\n";
-		if (preg_match(',^Location: (.*),i', $s, $r)) {
-			include_spip('inc/filtres');
-			$location = suivre_lien($url, $r[1]);
+		preg_match(',^([^:]*): *(.*)$,i', $s, $r);
+		list(,$d, $v) = $r;
+		if ($d == 'Location' AND $status >= 300 AND $status < 400) {
+			$location = $v;
 		}
-		if ($date_verif AND preg_match(',^Last-Modified: (.*),', $s, $r)) {
-			if(strtotime($date_verif)>=strtotime($r[1])) {
+		elseif ($date_verif AND ($d == 'Last-Modified')) {
+			if (strtotime($date_verif)>=strtotime($r[1])) {
 				//Cas ou la page distante n'a pas bouge depuis
 				//la derniere visite
-				return $status;
+				$not_modif = true;
 			}
 		}
 	}
-	if ($status >= 300 AND $status < 400 AND $location) {
-		return $location;
-	} else if ($status != 200){
-		return $status;
-	}
+
+	if ($location) return $location;
+	if ($status != 200 or $not_modif) return $status;
 	return $headers;
 }
 
@@ -511,17 +512,32 @@ function init_http($method, $url, $refuse_gz=false, $referer = '', $datas="", $v
 	$t = @parse_url($url);
 	$host = $t['host'];
 	if ($t['scheme'] == 'http') {
-		$scheme = 'http'; $scheme_fsock='';
+		$scheme = 'http'; $noproxy = '';
 	} elseif ($t['scheme'] == 'https') {
-		$scheme = 'ssl'; $scheme_fsock='ssl://';
+		$scheme = 'ssl'; $noproxy = 'ssl://';
 		if (!isset($t['port']) || !($port = $t['port'])) $t['port'] = 443;
 	} 
 	else {
-		$scheme = $t['scheme']; $scheme_fsock=$scheme.'://';
+		$scheme = $t['scheme']; $noproxy = $scheme.'://';
 	}
 	if (!isset($t['port']) || !($port = $t['port'])) $port = 80;
 	if (!isset($t['path']) || !($path = $t['path'])) $path = "/";
 	if ($t['query']) $path .= "?" .$t['query'];
+
+	$f = lance_requete($method, $scheme, $host, $path, $port, $noproxy, $refuse_gz, $referer, $datas, $vers);
+	if (!$f) {
+	  // fallback : fopen
+		if (!$GLOBALS['tester_proxy']) {
+			$f = @fopen($url, "rb");
+			spip_log("connexion vers $url par simple fopen");
+			$fopen = true;
+		} else $f = false;// echec total
+	}
+
+	return array($f, $fopen);
+}
+
+function lance_requete($method, $scheme, $host, $path, $port, $noproxy, $refuse_gz=false, $referer = '', $datas="", $vers="HTTP/1.0") {
 
 	$http_proxy = need_proxy($host);
 
@@ -533,37 +549,27 @@ function init_http($method, $url, $refuse_gz=false, $referer = '', $datas="", $v
 		$first_host = $t2['host'];
 		if (!($port = $t2['port'])) $port = 80;
 
-	} else $first_host = $scheme_fsock.$host;
+	} else $first_host = $noproxy.$host;
+
 	$f = @fsockopen($first_host, $port);
 	spip_log("Recuperer $path sur $first_host:$port par $f");
-	if ($f) {
-		$site = $GLOBALS['meta']["adresse_site"];
+	if (!$f) return false;
 
-		$req = "$method $path $vers\r\n"
-		. "Host: $host\r\n"
-		. "User-Agent: SPIP-".$GLOBALS['spip_version_affichee']." (http://www.spip.net/)\r\n"
-		. ($refuse_gz ? '' : "Accept-Encoding: gzip\r\n")
-		. (!$site ? '' : "Referer: $site/$referer\r\n")
-		. (!$proxy_user ? '' :
-		    ("Proxy-Authorization: Basic "
-		     . base64_encode($proxy_user . ":" . $proxy_pass) . "\r\n"));
+	$site = $GLOBALS['meta']["adresse_site"];
 
-#		spip_log("Requete\n$req");
-		fputs($f, $req);
-		fputs($f, $datas ? $datas : "\r\n");
-	}
-	// fallback : fopen
-	else if (!$GLOBALS['tester_proxy']) {
-		$f = @fopen($url, "rb");
-		spip_log("connexion vers $url par simple fopen");
-		$fopen = true;
-	}
-	// echec total
-	else {
-		$f = false;
-	}
+	$req = "$method $path $vers\r\n"
+	. "Host: $host\r\n"
+	. "User-Agent: SPIP-".$GLOBALS['spip_version_affichee']." (http://www.spip.net/)\r\n"
+	. ($refuse_gz ? '' : "Accept-Encoding: gzip\r\n")
+	. (!$site ? '' : "Referer: $site/$referer\r\n")
+	. (!$proxy_user ? '' :
+	    ("Proxy-Authorization: Basic "
+	     . base64_encode($proxy_user . ":" . $proxy_pass) . "\r\n"));
 
-	return array($f, $fopen);
+#	spip_log("Requete\n$req");
+	fputs($f, $req);
+	fputs($f, $datas ? $datas : "\r\n");
+	return $f;
 }
 
 ?>
