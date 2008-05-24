@@ -254,14 +254,14 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 		foreach($infos as $plug=>$info){
 			if (isset($info['bouton'])){
 				foreach($info['bouton'] as $id=>$conf){
-					$conf['icone'] = find_in_path($conf['icone']);
+					$conf['icone'] = substr(find_in_path($conf['icone']),strlen(_DIR_RACINE));
 					$info['bouton'][$id] = $conf;
 				}
 				$liste_boutons = array_merge($liste_boutons,$info['bouton']);
 			}
 			if (isset($info['onglet'])){
 				foreach($info['onglet'] as $id=>$conf){
-					$conf['icone'] = find_in_path($conf['icone']);
+					$conf['icone'] = substr(find_in_path($conf['icone']),strlen(_DIR_RACINE));
 					$info['onglet'][$id] = $conf;
 				}
 				$liste_onglets = array_merge($liste_onglets,$info['onglet']);
@@ -269,7 +269,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 		}
 	}
 
-	// generer les fichier 
+	// generer les fichier
 	// charger_plugins_options.php
 	// charger_plugins_fonctions.php
 	foreach(array('options','fonctions') as $charge){
@@ -331,7 +331,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 					if (strpos($GLOBALS['spip_pipeline'][$nom],"|$prefix$action")===FALSE)
 						$GLOBALS['spip_pipeline'][$nom] = preg_replace(",(\|\||$),","|$prefix$action\\1",$GLOBALS['spip_pipeline'][$nom],1);
 					if (isset($pipe['inclure'])){
-						$GLOBALS['spip_matrice']["$prefix$action"] = 
+						$GLOBALS['spip_matrice']["$prefix$action"] =
 							"_DIR_PLUGINS$plug/".$pipe['inclure'];
 					}
 				}
@@ -363,7 +363,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 function pipeline_precompile(){
 	global $spip_pipeline, $spip_matrice;
 	$liste_fichier_verif = array();
-	
+
 	$start_file = "<"."?php\nif (defined('_ECRIRE_INC_VERSION')) {\n";
 	$end_file = "}\n?".">";
 	$content = "";
@@ -415,7 +415,7 @@ function liste_plugin_inactifs(){
 }
 
 // mise a jour du meta en fonction de l'etat du repertoire
-// Les  ecrire_meta() doivent en principe aussi initialiser la valeur a vide 
+// Les  ecrire_meta() doivent en principe aussi initialiser la valeur a vide
 // si elle n'existe pas
 // risque de pb en php5 a cause du typage ou de null (verifier dans la doc php)
 // http://doc.spip.org/@verif_plugin
@@ -461,7 +461,7 @@ function spip_plugin_install($action,$prefix,$version_cible){
 			break;
 	}
 }
-	
+
 // http://doc.spip.org/@desinstalle_un_plugin
 function desinstalle_un_plugin($plug,$infos){
 	// faire les include qui vont bien
@@ -480,7 +480,7 @@ function desinstalle_un_plugin($plug,$infos){
 		$ok = spip_plugin_install('test',$infos['prefix'],$infos['version_base']);
 		return $ok;
 	}
-	
+
 	return false;
 }
 
@@ -603,7 +603,7 @@ function plugin_get_infos($plug, $force_reload=false){
 				$ret['necessite'] = $arbre['necessite'];
 				$ret['utilise'] = $arbre['utilise'];
 				$ret['path'] = $arbre['path'];
-				
+
 				// recuperer les boutons et onglets si necessaire
 				spip_xml_match_nodes(",^(bouton|onglet)\s,",$arbre,$les_boutons);
 				if (is_array($les_boutons) && count($les_boutons)){
@@ -626,7 +626,7 @@ function plugin_get_infos($plug, $force_reload=false){
 						}
 					}
 				}
-				
+
 				if ($t=@filemtime($f)){
 					$ret['filemtime'] = $t;
 					$plugin_xml_cache[$plug]=$ret;
@@ -738,7 +738,7 @@ function plugin_verifie_conformite($plug,&$arbre){
 				$path[] = $att;
 			}
 		}
-		else 
+		else
 			$path = array(array('dir'=>'')); // initialiser par defaut
 		$arbre['path'] = $path;
 	}
@@ -877,7 +877,7 @@ function affiche_bloc_plugin($plug_file, $info) {
 	// bouton de desinstallation
 	if (plugin_est_installe($plug_file)){
 		$action = generer_action_auteur('desinstaller_plugin',$plug_file,generer_url_ecrire('admin_plugin'));
-		$infotech[] = "<a href='$action' 
+		$infotech[] = "<a href='$action'
 		onclick='return confirm(\""._T('bouton_desinstaller')
 		." ".basename($plug_file)." ?\\n"._T('info_desinstaller_plugin')."\")'
 		title=\""._T('info_desinstaller_plugin')."\">"

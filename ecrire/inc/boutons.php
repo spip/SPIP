@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define('_LARGEUR_ICONES_BANDEAU', 
+define('_LARGEUR_ICONES_BANDEAU',
        ((@$GLOBALS['spip_display'] == 3) ? 60 : 80)
        + ((@$GLOBALS['spip_ecran'] == 'large') ? 30 : 0)
        + (($GLOBALS['connect_toutes_rubriques']) ? 0 : 30));
@@ -66,7 +66,7 @@ function definir_barre_boutons() {
 	if ($GLOBALS['meta']['forum_prive'] != 'non')
 		$boutons_admin['forum'] = new Bouton(
 			'messagerie-48.png', 'titre_forum');
-	
+
 	$boutons_admin['auteurs'] = new Bouton(
 		'redacteurs-48.png', 'icone_auteurs');
 
@@ -167,8 +167,8 @@ function definir_barre_boutons() {
 
 	$sousmenu=array();
 
-	if (avoir_visiteurs(true)) 
-		$sousmenu['auteurs'] = 
+	if (avoir_visiteurs(true))
+		$sousmenu['auteurs'] =
 			new Bouton("fiche-perso.png", 'icone_afficher_visiteurs', null, "statut=!1comite,0minirezo,nouveau");
 
 	$sousmenu['auteur_infos']=
@@ -194,7 +194,7 @@ function definir_barre_boutons() {
 
 		$boutons_admin['statistiques_visites']->sousmenu= $sousmenu;
 	}
-	
+
 	// sous menu configuration
 	$sousmenu = array();
 	if (autoriser('configurer', 'lang')) {
@@ -204,7 +204,7 @@ function definir_barre_boutons() {
 	}
 
 	if (autoriser('sauvegarder')) {
-		$sousmenu['admin_tech']= 
+		$sousmenu['admin_tech']=
 			new Bouton("base-24.gif", "icone_maintenance_site");
 	}
 	if (autoriser('configurer', 'admin_vider')) {
@@ -223,7 +223,7 @@ function definir_barre_boutons() {
 		$boutons_admin['configuration']->sousmenu= $sousmenu;
 
 	} // fin si admin
-	
+
 	// ajouter les boutons issus des plugin via plugin.xml
 	if (function_exists('boutons_plugins')){
 		$liste_boutons_plugins = boutons_plugins();
@@ -231,17 +231,20 @@ function definir_barre_boutons() {
 			if (autoriser('bouton',$id)){
 				if (($parent = $infos['parent']) && isset($boutons_admin[$parent]))
 					$boutons_admin[$parent]->sousmenu[$id]= new Bouton(
-					  _DIR_PLUGINS . $infos['icone'],  // icone
+					  _DIR_RACINE . $infos['icone'],  // icone
 					  $infos['titre'],	// titre
 					  $infos['url']?$infos['url']:null,
 					  $infos['args']?$infos['args']:null
 					  );
-				if (!$parent)
-					$boutons_admin[$id] = new Bouton(
-					  _DIR_PLUGINS . $infos['icone'],  // icone
+				if (!$parent) {
+					$boutons_admin = array_slice($boutons_admin,0,-3,true)
+					+array($id=> new Bouton(
+					  _DIR_RACINE . $infos['icone'],  // icone
 					  $infos['titre'],	// titre
-					  $infos['url']?generer_url_ecrire($infos['url'],$infos['args']?$infos['args']:''):null	
-					  );
+					  $infos['url']?generer_url_ecrire($infos['url'],$infos['args']?$infos['args']:''):null
+					  ))
+					+ array_slice($boutons_admin,-3,3,true);
+				}
 			}
 		}
 	}
@@ -387,9 +390,9 @@ function definir_barre_onglets($script) {
 				&& $parent == $script
 				&& autoriser('onglet',$id)) {
 					$onglets[$id] = new Bouton(
-					  _DIR_PLUGINS . $infos['icone'],  // icone
+					  _DIR_RACINE . $infos['icone'],  // icone
 					  $infos['titre'],	// titre
-					  $infos['url']?generer_url_ecrire($infos['url'],$infos['args']?$infos['args']:''):null	
+					  $infos['url']?generer_url_ecrire($infos['url'],$infos['args']?$infos['args']:''):null
 					  );
 			}
 		}
@@ -432,7 +435,7 @@ function bandeau_principal($rubrique, $sous_rubrique, $largeur)
 {
 	$res = '';
 	$decal = 0;
-	//cherche les espacement pour determiner leur largeur 
+	//cherche les espacement pour determiner leur largeur
   $num_espacements = 0;
   foreach($GLOBALS['boutons_admin'] as $page => $detail) {
 	 if ($page=='espacement') $num_espacements++;
@@ -477,7 +480,7 @@ function icone_bandeau_principal($detail, $lien, $rubrique_icone = "vide", $rubr
 	if ($spip_display == 3){
 		$title = " title=\"$texte\"";
 	}
-	
+
 	if (!$menu_accesskey = intval($menu_accesskey)) $menu_accesskey = 1;
 	if ($menu_accesskey < 10) {
 		$accesskey = " accesskey='$menu_accesskey'";
@@ -504,8 +507,8 @@ function icone_bandeau_principal($detail, $lien, $rubrique_icone = "vide", $rubr
 		$texte = "<span class='icon_fond'><span".http_style_background($detail->icone)."></span></span>".($spip_display == 3 ? '' :  "<span>$texte</span>");
 	} else {
 		$class = 'cellule-texte';
-	}  
-		
+	}
+
 	return "<li style='width: "
 	. _LARGEUR_ICONES_BANDEAU
 	. "px' class='$class boutons_admin'><a$accesskey$a_href$class_select$title onfocus=\"$(this).parent().siblings('li').find('.bandeau_sec').hide();\" onkeypress=\"$(this).siblings('.bandeau_sec').show();\">"
@@ -531,8 +534,8 @@ function bandeau_principal2($sousmenu,$rubrique, $sous_rubrique, $largeur, $deca
 		} else {
 			$class = "invisible_au_chargement";
 		}
-    
-    
+
+
 		if($sousmenu) {
 			//offset is not necessary when javascript is active. It can be usefull when js is disabled
       $offset = (int)round($decal-$coeff_decalage*max(0,($decal+count($sousmenu)*$largitem_moy-$largeur_maxi_menu)));
@@ -552,8 +555,8 @@ function bandeau_principal2($sousmenu,$rubrique, $sous_rubrique, $largeur, $deca
 						$res .= "<li class='separateur'></li>\n";
 					}
 				} else {
-				  list($html,$largitem) = icone_bandeau_secondaire (_T($sousdetail->libelle), 
-				    bandeau_creer_url($sousdetail->url?$sousdetail->url:$souspage, $sousdetail->urlArg), 
+				  list($html,$largitem) = icone_bandeau_secondaire (_T($sousdetail->libelle),
+				    bandeau_creer_url($sousdetail->url?$sousdetail->url:$souspage, $sousdetail->urlArg),
 				    $sousdetail->icone, $souspage, $sous_rubrique
 				  );
 				  $res .= $html;
@@ -564,7 +567,7 @@ function bandeau_principal2($sousmenu,$rubrique, $sous_rubrique, $largeur, $deca
 			$res .= "</ul></div>\n";
 			$res = "<div class='bandeau_sec h-list' style='width:{$max_width}px;'><ul>".$res;
 		}
-		
+
 	return $res;
 }
 
@@ -589,7 +592,7 @@ function bandeau_double_rangee($rubrique, $sous_rubrique, $largeur)
   . "function(){jQuery(this).removeClass('sfhover')}\n"
   . ");\n"
   . "boutons_admin.one('mouseover',decaleSousMenu);\n"
-  . "// --></script>\n"; 
+  . "// --></script>\n";
 }
 
 
@@ -622,7 +625,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 		//$texte .= aide($aide);
 	}
 	if ($spip_display != 3 AND strlen($texte)>16) $largeur += 20;
-	
+
 	if (!$menu_accesskey = intval($menu_accesskey)) $menu_accesskey = 1;
 	if ($menu_accesskey < 10) {
 		$accesskey = " accesskey='$menu_accesskey'";
