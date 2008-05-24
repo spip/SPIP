@@ -57,9 +57,9 @@ function exec_auteurs_args($statut, $tri, $debut, $recherche=NULL, $trouve='')
 		$recherche = auteurs_tranches(afficher_n_auteurs($auteurs), $debut, $lettre, $tri, $statut, MAX_AUTEURS_PAR_PAGE, $nombre_auteurs);
 	}
 
-	if (_request('var_ajaxcharset'))
+	if (_AJAX) {
 		ajax_retour($recherche); //ecrire en id='auteurs' ci-dessous
-	else {
+	} else {
 
 		pipeline('exec_init',array('args'=>array('exec'=>'auteurs'),'data'=>''));
 		// Chaine indiquant le mode de tri est obsolète depuis Ajax

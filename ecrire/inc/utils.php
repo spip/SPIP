@@ -199,18 +199,16 @@ function _request($var, $c=false) {
 	elseif (isset($_POST[$var])) $a = $_POST[$var];
 	else return NULL;
 
-	// temporaire: si on est en ajax et en POST tout a ete encode
+	// Si on est en ajax et en POST tout a ete encode
 	// via encodeURIComponent, il faut donc repasser
-	// dans le charset local.... on le connait grace
-	// a la variable var_ajaxcharset ajoutee dans layer.js
-
-	if (isset($_POST['var_ajaxcharset'])
+	// dans le charset local...
+	if (_AJAX
 	AND isset($GLOBALS['meta']['charset'])
-	AND $GLOBALS['meta']['charset'] != $_POST['var_ajaxcharset']
+	AND $GLOBALS['meta']['charset'] != 'utf-8'
 	AND is_string($a)
 	AND preg_match(',[\x80-\xFF],', $a)) {
 		include_spip('inc/charsets');
-		return importer_charset($a, $_POST['var_ajaxcharset']);
+		return importer_charset($a, 'utf-8');
 	}
 
 	return $a;
@@ -1169,9 +1167,17 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 		recuperer_cookies_spip($GLOBALS['cookie_prefix']);
 	}
 
+	// Le navigateur accepte-t-il l'ajax ?
 	define('_SPIP_AJAX',  (!isset($_COOKIE['spip_accepte_ajax']))
 		? 1
 	       : (($_COOKIE['spip_accepte_ajax'] != -1) ? 1 : 0));
+
+	// La requete est-elle en ajax ?
+	define('_AJAX',
+		isset($_SERVER['HTTP_X_REQUESTED_WITH']) # ajax jQuery
+		OR @$_REQUEST['var_ajax_redir'] # redirection 302 apres ajax jQuery
+		OR @$_REQUEST['var_ajaxcharset'] # compat ascendante pour plugins
+	);
 
 	//
 	// Capacites php (en fonction de la version)

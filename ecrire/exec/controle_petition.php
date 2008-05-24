@@ -67,11 +67,11 @@ function exec_controle_petition_args($id_article, $type, $debut, $id_signature)
 			 15,
 			 $type);
 
-		if (_request('var_ajaxcharset'))
+		if (_AJAX) {
 			ajax_retour($r);
-		else {
-		  $ong = controle_petition_onglet($id_article, $debut, $type);
-		  controle_petition_page($id_article, $titre, $ong, $statut, $r);
+		} else {
+			$ong = controle_petition_onglet($id_article, $debut, $type);
+			controle_petition_page($id_article, $titre, $ong, $statut, $r);
 		}
 	}
 }

@@ -205,13 +205,7 @@ function repercuter_gadgets($id_rubrique) {
 
 	if (!_SPIP_AJAX) return '';
 
-	// ne sert ici qu'a caracteriser l'asynchronisme de ces scripts,
-	// afin de les ignorer lors des scripts speciaux (restauration etc).
-	$ajax = "\\x26var_ajaxcharset=utf8" ;
-
-	// Il faudrait etendre generer_url_ecrire pour qu'il produise ces URL
-
-	// comme on cache fortement ce menu, 
+	// comme on cache fortement ce menu,
 	// son url change en fonction de sa date de modif
 	$toutsite = "./?exec=menu_rubriques$ajax\\x26date=" .  $GLOBALS['meta']['date_calcul_rubriques'];
 	

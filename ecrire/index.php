@@ -127,7 +127,7 @@ define('_TRANCHES', 10);
 
 // Controle de la version, sauf si on est deja en train de s'en occuper
 if (!$reinstall=='oui'
-AND !_request('var_ajaxcharset')
+AND !_AJAX
 AND isset($GLOBALS['meta']['version_installee'])
 AND ($GLOBALS['spip_version'] != (str_replace(',','.',$GLOBALS['meta']['version_installee']))))
 	$exec = 'demande_mise_a_jour';
@@ -139,7 +139,7 @@ AND ($GLOBALS['spip_version'] != (str_replace(',','.',$GLOBALS['meta']['version_
 // sinon c'est qu'elle a ete interrompue et il faut la reprendre
 
 elseif (isset($GLOBALS['meta']["admin"])) {
-	if (_request('var_ajaxcharset') OR !isset($_COOKIE['spip_admin']))
+	if (_AJAX OR !isset($_COOKIE['spip_admin']))
 		die(_T('info_travaux_texte'));
 	if (preg_match('/^(.*)_(\d+)_/', $GLOBALS['meta']["admin"], $l)) {
 		list(,$var_f,$n) = $l;

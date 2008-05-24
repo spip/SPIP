@@ -29,6 +29,10 @@ function redirige_par_entete($url, $equiv='', $status = 302) {
 
 	if ($x = _request('transformer_xml'))
 		$url = parametre_url($url, 'transformer_xml', $x, '&');
+
+	if (_AJAX)
+		$url = parametre_url($url, 'var_ajax_redir', 1, '&');
+
 	// Il n'y a que sous Apache que setcookie puis redirection fonctionne
 
 	if (!$equiv OR (strncmp("Apache", $_SERVER['SERVER_SOFTWARE'],6)==0) OR defined('_SERVER_APACHE')) {
@@ -62,12 +66,11 @@ function redirige_par_entete($url, $equiv='', $status = 302) {
 
 // http://doc.spip.org/@redirige_formulaire
 function redirige_formulaire($url, $equiv = '') {
-	if (!_request('var_ajax') 
-	  && !_request('var_ajaxcharset')
-		&& !headers_sent() 
-		&& !$_GET['var_mode'])
+	if (!_AJAX
+	&& !headers_sent() 
+	&& !$_GET['var_mode']) {
 		redirige_par_entete(str_replace('&amp;','&',$url), $equiv);
-	else {
+	} else {
 		$url = strtr($url, "\n\r", "  ");
 		# en theorie on devrait faire ca tout le temps, mais quand la chaine
 		# commence par ? c'est imperatif, sinon l'url finale n'est pas la bonne

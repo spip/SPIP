@@ -104,7 +104,6 @@ function async_upload_article_edit(res,s,jForm){
 function async_upload_icon(res,s,jForm) {
   res = iframeHandler(res,jForm);
   if(!res) return true;
-
   res.find(">div").each(function(){
     var cont = jQuery("#"+this.id);
     verifForm(cont.html(jQuery(this).html()));

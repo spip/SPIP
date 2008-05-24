@@ -245,7 +245,7 @@ function exec_controle_forum_args($id_rubrique,	$type,	$debut,	$pas, $recherche)
 	$mess = affiche_navigation_forum('controle_forum', $args . $type, $debut, $pas, $ancre, $n, $enplus)
 	. affiche_tranche_forum($debut, $limitdeb, $pas, $query);
 
-	if (_request('var_ajaxcharset')) {
+	if (_AJAX) {
 		ajax_retour($mess);
 	} else {
 

@@ -516,13 +516,13 @@ function debut_javascript()
 	// on installe egalement un <noscript></noscript> qui charge une image qui
 	// pose un cookie valant -1
 
-	$testeur = generer_url_ecrire('test_ajax', 'var_ajaxcharset=utf-8&js=1');
+	$testeur = str_replace('&amp;', '\\x26', generer_url_ecrire('test_ajax', 'js=1'));
 
 	if (_SPIP_AJAX AND !defined('_TESTER_NOSCRIPT')) {
 	  // pour le pied de page (deja defini si on est validation XML)
 		define('_TESTER_NOSCRIPT',
 			"<noscript>\n<div style='display:none;'><img src='"
-		        . generer_url_ecrire('test_ajax', 'var_ajaxcharset=utf-8&js=-1')
+		        . generer_url_ecrire('test_ajax', 'js=-1')
 		        . "' width='1' height='1' alt='' /></div></noscript>\n"); 
 	}
 

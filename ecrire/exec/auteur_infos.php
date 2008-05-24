@@ -59,14 +59,6 @@ function auteur_infos_ok($auteur, $id_auteur, $echec, $new, $redirect)
 	$auteur_infos = charger_fonction('auteur_infos', 'inc');
 	$fiche = $auteur_infos($auteur, $new, $echec, _request('edit'), intval(_request('lier_id_article')), $redirect);
 
-/*	// Si on est appele en ajax, on renvoie la fiche
-	if (_request('var_ajaxcharset')) {
-		ajax_retour($fiche);
-	}
-	
-	// Sinon on la met en page
-	else {
-*/
 		// Entete
 		if ($connect_id_auteur == $id_auteur) {
 			$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -127,7 +119,6 @@ function auteur_infos_ok($auteur, $id_auteur, $echec, $new, $redirect)
 		echo fin_cadre_relief(true);
 		echo auteurs_interventions($auteur);
 		echo fin_gauche(), fin_page();
-/*	} */
 
 }
 
