@@ -48,7 +48,7 @@ function inc_documenter_dist(
 	$s = ($ancre =='documents' ? '': '-');
 
 	if (is_int($doc))
-		$res = documenter_bloc($doc, $res, $s, $script, $ancre, $tous, $type);
+		$res = documenter_bloc($doc, $res, $s, $appelant, $ancre, $tous, $type);
 	return ajax_action_greffe("documenter", "$s$doc", $res);
 }
 
@@ -81,7 +81,7 @@ function documenter_bloc($id, $res, $s, $script, $ancre, $tous, $type)
 }
 
 // http://doc.spip.org/@documenter_boucle
-function documenter_boucle($documents, $type, $ancre, &$tous_autorise, $appelant)
+function documenter_boucle($documents, $type, $ancre, &$tous_autorises, $appelant)
 {
 	charger_generer_url();
 	// la derniere case d'une rangee

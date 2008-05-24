@@ -26,7 +26,7 @@ function inc_joindre_dist($v) {
 
 	$res = joindre_formulaire($v);
 
-	if ($v['cadre']) {
+	if (!empty($v['cadre'])) {
 		$debut_cadre = 'debut_cadre_'.$v['cadre'];
 		$fin_cadre = 'fin_cadre_'.$v['cadre'];
 		$res = $debut_cadre($v['icone'], true, $v['fonction'], $v['titre'])

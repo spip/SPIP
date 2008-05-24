@@ -191,6 +191,7 @@ function vignette_formulaire_legender($id_document, $document, $script, $type, $
 			'type' => $type,
 			'ancre' => $ancre,
 			'id_document' => $id_document,
+			'titre' => '',
 			'iframe_script' => $iframe_redirect
 			))
 		: $supprimer

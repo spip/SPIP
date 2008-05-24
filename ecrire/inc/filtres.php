@@ -2133,6 +2133,7 @@ function f_jQuery ($texte) {
 			array("#INSERT_HEAD",_T('double_occurrence')))
 		) . $texte;
 	} else {
+		$x = '';
 		foreach (pipeline('jquery_plugins',
 		array(
 			'javascript/jquery.js',

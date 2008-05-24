@@ -26,7 +26,7 @@ include_spip('inc/presentation');
 
 // http://doc.spip.org/@bandeau_gadgets
 function bandeau_gadgets($largeur, $options, $id_rubrique) {
-	global $connect_id_auteur, $spip_lang_left, $spip_lang_right, $spip_ecran;
+  global $connect_id_auteur, $spip_lang_rtl, $spip_lang, $spip_lang_left, $spip_lang_right, $spip_ecran;
 
 	$bandeau = "<div id='bandeau-gadgets'>".
 	"\n<div style='width:{$largeur}px' class='centered'>\n<div style='position: relative; z-index: 1000; height:1%'>"
@@ -207,11 +207,11 @@ function repercuter_gadgets($id_rubrique) {
 
 	// comme on cache fortement ce menu,
 	// son url change en fonction de sa date de modif
-	$toutsite = "./?exec=menu_rubriques$ajax\\x26date=" .  $GLOBALS['meta']['date_calcul_rubriques'];
+	$toutsite = "./?exec=menu_rubriques\\x26date=" .  $GLOBALS['meta']['date_calcul_rubriques'];
 	
-	$navrapide = "./?exec=menu_navigation$ajax\\x26id_rubrique=$id_rubrique";
+	$navrapide = "./?exec=menu_navigation\\x26id_rubrique=$id_rubrique";
 
-	$agenda = "./?exec=menu_agenda$ajax";
+	$agenda = "./?exec=menu_agenda";
 
 	return
 

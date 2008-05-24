@@ -544,7 +544,8 @@ function autoriser_chargerftp_dist($faire, $type, $id, $qui, $opt) {
 // http://doc.spip.org/@autoriser_document_voir_dist
 function autoriser_document_voir_dist($faire, $type, $id, $qui, $opt) {
 
-	if ($GLOBALS['meta']["creer_htaccess"] != 'oui')
+	if (isset($GLOBALS['meta']["creer_htaccess"])
+	AND $GLOBALS['meta']["creer_htaccess"] != 'oui')
 		return true;
 
 	if ((!is_numeric($id)) OR $id < 0) return false;
