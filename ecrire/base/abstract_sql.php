@@ -343,7 +343,10 @@ function sql_fetsel(
 	$select = array(), $from = array(), $where = array(),
 	$groupby = array(), $orderby = array(), $limit = '',
 	$having = array(), $serveur='', $option=true) {
-	return sql_fetch(sql_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, $option!==false), $serveur, $option!==false);
+	$r = sql_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, $option!==false);
+	$r2 = sql_fetch($r, $serveur, $option!==false);
+	sql_free($r, $serveur, $option!==false);
+	return $r2;
 }
 
 # Retourne l'unique champ demande dans une requete Select a resultat unique
@@ -351,7 +354,7 @@ function sql_fetsel(
 function sql_getfetsel(
 		       $select, $from = array(), $where = array(), $groupby = array(), 
 	$orderby = array(), $limit = '', $having = array(), $serveur='', $option=true) {
-	$r = sql_fetch(sql_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, $option!==false), $serveur, $option!==false);
+	$r = sql_fetsel($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, $option!==false);
 	return $r ? $r[$select] : NULL;
 }
 
