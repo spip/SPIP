@@ -337,10 +337,9 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 	$prim = 'id_' . $type;
 
 	charger_generer_url();
-	$res = sql_select("docs.id_document, docs.id_vignette,docs.extension,docs.titre,docs.descriptif,docs.fichier,docs.largeur,docs.hauteur,docs.taille,docs.mode,docs.distant, docs.date, L.vu", "spip_documents AS docs JOIN $table AS L ON L.id_document=docs.id_document", "L.$prim=".sql_quote($id)." AND L.id_document=".sql_quote($id_document));
+	$document = sql_fetsel("docs.id_document, docs.id_vignette,docs.extension,docs.titre,docs.descriptif,docs.fichier,docs.largeur,docs.hauteur,docs.taille,docs.mode,docs.distant, docs.date, L.vu", "spip_documents AS docs JOIN $table AS L ON L.id_document=docs.id_document", "L.$prim=".sql_quote($id)." AND L.id_document=".sql_quote($id_document));
 
-	if (!$document = sql_fetch($res)) return "";
-	//$document = sql_fetsel("*", "spip_documents", "id_document = " . intval($id_document));
+	if (!$document) return "";
 
 	$id_vignette = $document['id_vignette'];
 	$extension = $document['extension'];
@@ -359,8 +358,8 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 
 	$cadre = strlen($titre) ? $titre : basename($fichier);
 
-	$result = sql_select("titre,inclus", "spip_types_documents", "extension=".sql_quote($extension));
-	if ($letype = sql_fetch($result)) {
+	$letype = sql_fetsel("titre,inclus", "spip_types_documents", "extension=".sql_quote($extension));
+	if ($letype) {
 		$type_inclus = $letype['inclus'];
 		$type_titre = $letype['titre'];
 	}

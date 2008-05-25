@@ -96,8 +96,8 @@ function inc_article_select_dist($id_article, $id_rubrique=0, $lier_trad=0, $id_
 // http://doc.spip.org/@article_select_trad
 function article_select_trad($lier_trad) {
 	// Recuperer les donnees de l'article original
-	$result = sql_select("*", "spip_articles", "id_article=$lier_trad");
-	if ($row = sql_fetch($result)) {
+	$row = sql_fetsel("*", "spip_articles", "id_article=$lier_trad");
+	if ($row) {
 		$row['titre'] = filtrer_entites(_T('info_nouvelle_traduction')).' '.$row["titre"];
 		$id_rubrique = $row['id_rubrique'];
 	}

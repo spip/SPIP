@@ -33,7 +33,7 @@ function inc_formater_auteur_dist($id_auteur, $row=NULL) {
 	$id_auteur = intval($id_auteur);
 
 	if ($row===NULL)
-	  $row = sql_fetch(sql_select("*, (en_ligne<DATE_SUB(NOW(),INTERVAL 15 DAY)) AS parti", "spip_auteurs", "id_auteur=$id_auteur"));
+	  $row = sql_fetsel("*, (en_ligne<DATE_SUB(NOW(),INTERVAL 15 DAY)) AS parti", "spip_auteurs", "id_auteur=$id_auteur");
 
 	$vals = array();
 

@@ -265,9 +265,8 @@ function determine_upload($type='') {
 function lire_php_auth($user, $pw) {
 
 	include_spip('base/abstract_sql');
-	$row = sql_select("*", "spip_auteurs", "login=" . sql_quote($user));
+	$row = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($user));
 
-	$row = sql_fetch($row);
 	if ($row AND $row['source'] != 'ldap')
 		return ($row['pass'] == md5($row['alea_actuel'] . $pw)) ? $row : false;
 	elseif (spip_connect_ldap()) {

@@ -80,9 +80,9 @@ function ajouter_fragments($id_article, $id_version, $fragments) {
 	foreach ($fragments as $id_fragment => $texte) {
 		$nouveau = true;
 		// Recuperer la version la plus recente
-		$result = sql_select("compress, fragment, version_min, version_max", "spip_versions_fragments", "id_article=$id_article AND id_fragment=$id_fragment AND version_min<=$id_version", "", "version_min DESC", "1");
+		$row = sql_fetsel("compress, fragment, version_min, version_max", "spip_versions_fragments", "id_article=$id_article AND id_fragment=$id_fragment AND version_min<=$id_version", "", "version_min DESC", "1");
 
-		if ($row = sql_fetch($result)) {
+		if ($row) {
 			$fragment = $row['fragment'];
 			$version_min = $row['version_min'];
 			if ($row['compress'] > 0) $fragment = @gzuncompress($fragment);
@@ -449,12 +449,12 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 	// Determiner le numero du prochain fragment
 	$next = sql_fetsel("id_fragment", "spip_versions_fragments", "id_article=$id_article", "", "id_fragment DESC", "1");
 
-	// Examiner la derniere version
-	$result = sql_select("id_version, champs, id_auteur, date, permanent", "spip_versions", "id_article=$id_article AND id_version > 0", '', "id_version DESC", "1"); // le champ id_auteur est un varchar dans cette table
-
 	$onlylock = '';
 
-	if ($row = sql_fetch($result)) {
+	// Examiner la derniere version
+	$row = sql_fetsel("id_version, champs, id_auteur, date, permanent", "spip_versions", "id_article=$id_article AND id_version > 0", '', "id_version DESC", "1"); // le champ id_auteur est un varchar dans cette table
+
+	if ($row) {
 		$id_version = $row['id_version'];
 		$paras_old = recuperer_fragments($id_article, $id_version);
 		$champs_old = $row['champs'];
@@ -609,8 +609,8 @@ function enregistrer_premiere_revision($x) {
 
 		if (!sql_countsel('spip_versions',"id_article=$id_article")) {
 			$select = join(", ", $champs);
-			$query = sql_select("$select, date, date_modif", "spip_articles", "id_article=$id_article");
-			$champs_originaux = sql_fetch($query);
+			$champs_originaux = sql_fetsel("$select, date, date_modif", "spip_articles", "id_article=$id_article");
+			
 			// Si le titre est vide, c'est qu'on vient de creer l'article
 			if ($champs_originaux['titre'] != '') {
 				$date_modif = $champs_originaux['date_modif'];

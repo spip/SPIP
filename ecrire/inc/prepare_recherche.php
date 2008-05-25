@@ -37,9 +37,8 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 
 	if (!isset($cache[$recherche][$table])){
 		$hash = substr(md5($recherche . $table),0,16);
-		$res = sql_select('UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(maj) AS fraicheur','spip_resultats',"recherche='$hash'",'','fraicheur DESC','0,1','',$serveur);
-		if ((!$row = sql_fetch($res))
-		 OR ($row['fraicheur']>$delai_fraicheur)){
+		$row = sql_fetsel('UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(maj) AS fraicheur','spip_resultats',"recherche='$hash'",'','fraicheur DESC','0,1','',$serveur);
+		if (!$row OR ($row['fraicheur']>$delai_fraicheur)){
 		 	$rechercher = true;
 		}
 		$cache[$recherche][$table] = array("resultats.points AS points","recherche='$hash'");

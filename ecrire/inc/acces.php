@@ -87,14 +87,10 @@ function low_sec($id_auteur) {
 		}
 	}
 	else {
-		$result = sql_select("*", "spip_auteurs", "id_auteur = $id_auteur");
-
-		if ($row = sql_fetch($result)) {
-			$low_sec = $row["low_sec"];
-			if (!$low_sec) {
-				$low_sec = creer_pass_aleatoire();
-				sql_updateq("spip_auteurs", array("low_sec" => $low_sec), "id_auteur = $id_auteur");
-			}
+		$low_sec = sql_getfetsel("low_sec", "spip_auteurs", "id_auteur = $id_auteur");
+		if (!$low_sec) {
+			$low_sec = creer_pass_aleatoire();
+			sql_updateq("spip_auteurs", array("low_sec" => $low_sec), "id_auteur = $id_auteur");
 		}
 	}
 	return $low_sec;

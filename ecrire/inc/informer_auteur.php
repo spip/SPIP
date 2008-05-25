@@ -22,22 +22,22 @@ function inc_informer_auteur_dist($id)
 	include_spip('inc/presentation');
 	include_spip('inc/formater_auteur');
 
-	$res = sql_select("*", "spip_auteurs", "id_auteur = $id");
-	if ($row = sql_fetch($res)) {
-			$nom = typo(extraire_multi($row["nom"]));
-			$bio = propre($row["bio"]);
-			$mail = formater_auteur_mail($row, $id);
-			$nb = sql_fetsel("COUNT(*) AS n", "spip_auteurs_articles", "id_auteur=$id");
-			if ($nb['n'] > 1)
-			$nb = $nb['n']."&nbsp;"._T('info_article_2');
-			else if($nb['n'] == 1)
-			$nb = "1&nbsp;"._T('info_article');
-			else $nb = "&nbsp;";
+	$row = sql_fetsel("*", "spip_auteurs", "id_auteur = $id");
+	if ($row) {
+		$nom = typo(extraire_multi($row["nom"]));
+		$bio = propre($row["bio"]);
+		$mail = formater_auteur_mail($row, $id);
+		$nb = sql_fetsel("COUNT(*) AS n", "spip_auteurs_articles", "id_auteur=$id");
+		if ($nb['n'] > 1)
+		  $nb = $nb['n']."&nbsp;"._T('info_article_2');
+		else if($nb['n'] == 1)
+		  $nb = "1&nbsp;"._T('info_article');
+		else $nb = "&nbsp;";
 	} else {
-			$nom = "<span style='color:red'>"
+		$nom = "<span style='color:red'>"
 			. _T('texte_vide')
 			. '</span>';
-			$bio = $mail = $nb = '';
+		$bio = $mail = $nb = '';
 	}
 	$res = '';
 	if ($spip_display != 1 AND $spip_display!=4 AND $GLOBALS['meta']['image_process'] != "non") {

@@ -37,8 +37,8 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	} else
 	// retour d'Ajax
 	if ($id_document) {
-		$res = sql_select("*", "spip_documents", "id_document = " . intval($id_document));
-		$document = sql_fetch($res);
+		$document = sql_fetsel("*", "spip_documents", "id_document = " . intval($id_document));
+
 		$document['vu'] = sql_getfetsel("vu", $table, "$prim=" . intval($id) ." AND id_document=".intval($id_document));
 
 		if (!$document['vu']) $document['vu'] = 'non';
