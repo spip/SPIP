@@ -113,8 +113,7 @@ function message_inscription($mail, $nom, $mode, $id=0) {
 	if (is_string($declaration))
 		return  $declaration;
 
-	$row = sql_select("statut, id_auteur, login, email", "spip_auteurs", "email=" . sql_quote($declaration['email']));
-	$row = sql_fetch($row);
+	$row = sql_fetsel("statut, id_auteur, login, email", "spip_auteurs", "email=" . sql_quote($declaration['email']));
 
 	if (!$row) 
 		// il n'existe pas, creer les identifiants  

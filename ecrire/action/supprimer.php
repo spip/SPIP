@@ -77,8 +77,8 @@ function action_supprimer_rubrique($r)
 // http://doc.spip.org/@supprimer_document_et_vignette
 function supprimer_document_et_vignette($arg)
 {
-	$result = sql_select("id_vignette, fichier", "spip_documents", "id_document=$arg");
-	if ($row = sql_fetch($result)) {
+	$row = sql_fetsel("id_vignette, fichier", "spip_documents", "id_document=$arg");
+	if ($row) {
 		spip_unlink(get_spip_doc($row['fichier']));
 		sql_delete("spip_documents", "id_document=$arg");
 		sql_updateq("spip_documents", array("id_vignette" => 0), "id_vignette=$arg");
@@ -87,11 +87,9 @@ function supprimer_document_et_vignette($arg)
 		sql_delete("spip_documents_breves", "id_document=$arg");
 		$id_vignette = $row['id_vignette'];
 		if ($id_vignette > 0) {
-			$result = sql_select("fichier", "spip_documents	", "id_document=$id_vignette");
+			$f = sql_getfetsel("fichier", "spip_documents	", "id_document=$id_vignette");
 
-			if ($row = sql_fetch($result)) {
-				spip_unlink(get_spip_doc($row['fichier']));
-			}
+			if ($f) spip_unlink(get_spip_doc($f));
 			sql_delete("spip_documents", "id_document=$id_vignette");
 			sql_delete("spip_documents_articles", "id_document=$id_vignette");
 			sql_delete("spip_documents_rubriques", "id_document=$id_vignette");

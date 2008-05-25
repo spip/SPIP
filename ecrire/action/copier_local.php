@@ -38,8 +38,7 @@ function action_copier_local_dist() {
 function action_copier_local_post($id_document) {
 
 	// Il faut la source du document pour le copier
-	$s = sql_select("fichier, descriptif", "spip_documents", "id_document=$id_document");
-	$row = sql_fetch($s);
+	$ow = sql_fetsel("fichier, descriptif", "spip_documents", "id_document=$id_document");
 	$source = $row['fichier'];
 
 	include_spip('inc/distant'); // pour 'copie_locale'
