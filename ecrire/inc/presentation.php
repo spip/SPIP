@@ -1008,8 +1008,15 @@ function debloquer_article($arg, $texte) {
 //
 
 // http://doc.spip.org/@afficher_hierarchie
-function afficher_hierarchie($id_rubrique) {
-	global $spip_lang_left;
+function afficher_hierarchie($id_parent, $message='',$id_objet=0,$type='',$id_secteur=0,$restreint='') {
+	global $spip_lang_left,$spip_lang_right;
+
+	$out = "";
+	$nav = "";
+ 	if ($id_objet) {
+ 		$nav = chercher_rubrique($message,$id_objet, $id_parent, $type, $id_secteur, $restreint,true);
+ 		$nav = $nav ?"<div class='none'>$nav</div>":"";
+ 	}
 
 	$parents = '';
 	$style1 = "$spip_lang_left center no-repeat; padding-$spip_lang_left: 15px";
@@ -1017,6 +1024,7 @@ function afficher_hierarchie($id_rubrique) {
 	$tag = "a";
 	$on = ' on';
 
+	$id_rubrique = $id_parent;
 	while ($id_rubrique) {
 
 		$res = sql_fetsel("id_parent, titre, lang", "spip_rubriques", "id_rubrique=".intval($id_rubrique));
@@ -1043,7 +1051,8 @@ function afficher_hierarchie($id_rubrique) {
 		$on = '';
 	}
 
-	return "\n<ul id='chemin' class='verdana3' dir='".lang_dir()."'" 
+	$out .=  $nav
+		. "\n<ul id='chemin' class='verdana3' dir='".lang_dir()."'" 
 	  //. http_style_background("racine-site-12.gif", $style1)
 	  . "><li><span class='bloc'><$tag class='racine$on'" 
 		. ($tag=='a'?" href='". generer_url_ecrire("naviguer","id_rubrique=$id_rubrique")."'":"")
@@ -1051,7 +1060,12 @@ function afficher_hierarchie($id_rubrique) {
  	  . "</span>"
 	  . $parents
  	  . aide ("rubhier")
- 	  . "</li></ul>";
+ 	  . "</li></ul>"
+ 	  . ($nav?
+ 	    "&nbsp;<a href='#' onclick=\"$(this).prev().prev().toggle('fast');return false;\" class='verdana2'>"
+ 	    . _T('bouton_changer') ."</a>"
+ 	    :"");
+ 	return $out;
 }
 
 // http://doc.spip.org/@enfant_rub

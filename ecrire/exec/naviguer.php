@@ -59,8 +59,10 @@ function exec_naviguer_args($id_rubrique, $cherche_mot, $select_groupe)
 		   $id_rubrique);
 
 	echo debut_grand_cadre(true);
-	if ($id_rubrique  > 0) echo afficher_hierarchie($id_parent);
+	if ($id_rubrique  > 0) 
+		echo afficher_hierarchie($id_parent,_T('titre_cadre_interieur_rubrique'),$id_rubrique,'rubrique',$id_secteur,(!$GLOBALS['connect_toutes_rubriques']));
 	else $titre = _T('info_racine_site').": ". $GLOBALS['meta']["nom_site"];
+	
 	echo fin_grand_cadre(true);
 
 	echo debut_gauche('', true);
@@ -114,8 +116,7 @@ function naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $n_
 	$afficher_contenu_objet = charger_fonction('afficher_contenu_objet', 'inc');
 
 	$onglet_proprietes = 
-		afficher_rubrique_rubrique($id_rubrique, $id_parent, $id_secteur, $connect_toutes_rubriques)
-		. $editer_mots
+		$editer_mots
 		. langue_naviguer($id_rubrique, $id_parent, $flag_editable)
 		. pipeline('affiche_milieu',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''))
 	;
@@ -478,30 +479,4 @@ function bouton_supprimer_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_edi
 	return "";
 }
 
-// http://doc.spip.org/@afficher_rubrique_rubrique
-function afficher_rubrique_rubrique($id_rubrique, $id_parent, $id_secteur, $connect_toutes_rubriques)
-{
-	if (!_INTERFACE_ONGLETS) return "";
-	global $spip_lang_right;
-	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
-	$aider = charger_fonction('aider', 'inc');
-
-	$form = $chercher_rubrique($id_parent, 'rubrique', !$connect_toutes_rubriques, $id_rubrique);
-	if (strpos($form,'<select')!==false) {
-		$form .= "<div style='text-align: $spip_lang_right;'>"
-			. '<input class="fondo" type="submit" value="'._T('bouton_choisir').'"/>'
-			. "</div>";
-	}
-
-	$msg = _T('titre_cadre_interieur_rubrique') .
-	  ((preg_match('/^<input[^>]*hidden[^<]*$/', $form)) ? '' : $aider("rubrub"));
-
-	$form = generer_action_auteur("editer_rubrique", $id_rubrique, generer_url_ecrire('naviguer'), $form, " method='post' class='submit_plongeur'");
-
-	if ($id_parent == 0) $logo = "racine-site-24.gif";
-	elseif ($id_secteur == $id_parent) $logo = "secteur-24.gif";
-	else $logo = "rubrique-24.gif";
-
-	return debut_cadre_couleur($logo, true, "", $msg) . $form .fin_cadre_couleur(true);
-}
 ?>

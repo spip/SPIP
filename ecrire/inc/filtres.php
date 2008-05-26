@@ -2491,9 +2491,12 @@ function f_extra_editer_contenu_objet($flux){
 
 
 // http://doc.spip.org/@chercher_rubrique
-function chercher_rubrique($msg,$id, $id_parent, $type, $id_secteur, $restreint){
+function chercher_rubrique($msg,$id, $id_parent, $type, $id_secteur, $restreint,$actionable = false){
+	global $spip_lang_right;
+	if (!autoriser('modifier', $type, $id))
+		return "";
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
-	$opt = $chercher_rubrique($id_parent, $type, $restreint);
+	$form = $chercher_rubrique($id_parent, $type, $restreint);
 
 	if ($id_parent == 0) $logo = "racine-site-24.gif";
 	elseif ($id_secteur == $id_parent) $logo = "secteur-24.gif";
@@ -2514,8 +2517,18 @@ function chercher_rubrique($msg,$id, $id_parent, $type, $id_secteur, $restreint)
 		} else
 			$confirm .= "<input type='hidden' name='confirme_deplace' value='oui' />\n";
 	}
+	$form .= $confirm;
+	if ($actionable){
+		if (strpos($form,'<select')!==false) {
+			$form .= "<div style='text-align: $spip_lang_right;'>"
+				. '<input class="fondo" type="submit" value="'._T('bouton_choisir').'"/>'
+				. "</div>";
+		}
+		$form = "<input type='hidden' name='editer_$type' value='oui' />\n" . $form;
+		$form = generer_action_auteur("editer_$type", $id, _DIR_RESTREINT_ABS . self(), $form, " method='post' class='submit_plongeur'");	
+	}
 	include_spip('inc/presentation');
-	return debut_cadre_couleur($logo, true, "", $msg) . $opt . $confirm .fin_cadre_couleur(true);
+	return debut_cadre_couleur($logo, true, "", $msg) . $form .fin_cadre_couleur(true);
 }
 
 // http://doc.spip.org/@barre_typo
