@@ -344,6 +344,7 @@ function sql_fetsel(
 	$groupby = array(), $orderby = array(), $limit = '',
 	$having = array(), $serveur='', $option=true) {
 	$r = sql_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, $option!==false);
+	if (!$r) return NULL;
 	$r2 = sql_fetch($r, $serveur, $option!==false);
 	sql_free($r, $serveur, $option!==false);
 	return $r2;
