@@ -53,9 +53,9 @@ function exec_statistiques_visites_args($id_article, $aff_jours, $limit,$serveur
 	$titre = $pourarticle = "";
 
 	if ($id_article){
-		$result = sql_select("titre, visites, popularite", "spip_articles", "statut='publie' AND id_article=$id_article",'','','','',$serveur);
+		$row = sql_fetsel("titre, visites, popularite", "spip_articles", "statut='publie' AND id_article=$id_article",'','','','',$serveur);
 
-		if ($row = sql_fetch($result,$serveur)) {
+		if ($row) {
 			$titre = typo($row['titre']);
 			$total_absolu = $row['visites'];
 			$val_popularite = round($row['popularite']);

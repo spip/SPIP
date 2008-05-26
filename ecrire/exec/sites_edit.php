@@ -19,9 +19,9 @@ function exec_sites_edit_dist()
 	global $connect_statut, $connect_id_rubrique, $spip_lang_right;
 
 	$id_syndic = intval(_request('id_syndic'));
-	$result = sql_select("*", "spip_syndic", "id_syndic=$id_syndic");
+	$row = sql_fetsel("*", "spip_syndic", "id_syndic=$id_syndic");
 
-	if ($row = sql_fetch($result)) {
+	if ($row) {
 		$id_syndic = $row["id_syndic"];
 		$id_rubrique = $row["id_rubrique"];
 		$nom_site = $row["nom_site"];

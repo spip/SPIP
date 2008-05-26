@@ -75,10 +75,9 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 		spip_log("syndic_a_jour doit etre appelee par Cron. Cf. " .
 			 "http://trac.rezo.net/trac/spip/changeset/10294",
 			 'vieilles_defs');
-	$result = sql_select("*", "spip_syndic", "id_syndic=$now_id_syndic");
+	$row = sql_fetsel("*", "spip_syndic", "id_syndic=$now_id_syndic");
 
-	if (!$row = sql_fetch($result))
-		return;
+	if (!$row) return;
 
 	$url_syndic = $row['url_syndic'];
 	$url_site = $row['url_site'];

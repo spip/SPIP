@@ -16,9 +16,7 @@ include_spip('inc/presentation');
 
 // http://doc.spip.org/@enfants
 function enfants($id_parent, $critere){
-	global $nombre_vis;
-
-	global $nombre_abs;
+	global $nombre_vis, $nombre_abs;
 
 	$result = sql_select("id_rubrique", "spip_rubriques", "id_parent=$id_parent");
 
@@ -27,16 +25,12 @@ function enfants($id_parent, $critere){
 	while($row = sql_fetch($result)) {
 		$id_rubrique = $row['id_rubrique'];
 
-		$result2 = sql_select("SUM(".$critere.") AS cnt", "spip_articles", "id_rubrique=$id_rubrique");
+		$row2 = sql_fetsel("SUM(".$critere.") AS cnt", "spip_articles", "id_rubrique=$id_rubrique");
 
-		$visites = 0;
-		if ($row2 = sql_fetch($result2)) {
-			$visites = $row2['cnt'];
-		}
+		$visites = !$row2 ? 0 : $row2['cnt'];
 		$nombre_abs[$id_rubrique] = $visites;
 		$nombre_vis[$id_rubrique] = $visites;
-		$nombre += $visites;
-		$nombre += enfants($id_rubrique, $critere);
+		$nombre += $visites + enfants($id_rubrique, $critere);
 	}
 	if (!isset($nombre_vis[$id_parent])) $nombre_vis[$id_parent]=0;
 	$nombre_vis[$id_parent] += $nombre;

@@ -114,9 +114,9 @@ function exec_brouteur_frame_dist() {
 	else {
 	  if ($id_rubrique !== "" AND autoriser('voir','rubrique',$id_rubrique)) {
 
-		$result = sql_select("id_rubrique, titre, id_parent", "spip_rubriques", "id_rubrique=$id_rubrique",'', '0+titre,titre');
+		$row = sql_fetsel("id_rubrique, titre, id_parent", "spip_rubriques", "id_rubrique=$id_rubrique",'', '0+titre,titre');
 
-		if ($row=sql_fetch($result)){
+		if ($row){
 			$titre = typo($row['titre']);
 			$id_parent=$row['id_parent'];
 			

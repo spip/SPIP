@@ -39,12 +39,12 @@ function exec_brouteur_dist()
 	echo "\n<div>&nbsp;</div>";
 
 	echo debut_grand_cadre(true);
-
+	$dest = array();
 	if ($id_rubrique) {
 		$j = $nb_col;
 		while ($id_rubrique > 0) {
-			$result=sql_select("id_parent", "spip_rubriques", "id_rubrique=$id_rubrique");
-			if ($row=sql_fetch($result)){
+			$row = sql_fetsel("id_parent", "spip_rubriques", "id_rubrique=$id_rubrique");
+			if ($row){
 				$j--;
 				$dest[$j] = $id_rubrique;
 				$id_rubrique =$row['id_parent'];
@@ -60,18 +60,15 @@ function exec_brouteur_dist()
 
 		if ($dest[0] > 0 AND $dest[$nb_col-2]) {
 			
-			$la_rubrique = $dest[0];
+			$la_rubrique = intval($dest[0]);
 			
-			$result = sql_select("id_parent", "spip_rubriques", "id_rubrique ='$la_rubrique'");
-			if ($row = sql_fetch($result)) {
-				$la_rubrique =$row['id_parent'];
-			}
-			
+			$row = sql_fetsel("id_parent", "spip_rubriques", "id_rubrique=$la_rubrique");
+			if ($row) $la_rubrique = $row['id_parent'];
 			$compteur = 0;
 			$ret = '';
 			while ($la_rubrique > 0) {
-				$result = sql_select("titre, id_parent", "spip_rubriques", "id_rubrique ='$la_rubrique'");
-				if ($row = sql_fetch($result)) {
+				$row = sql_fetsel("titre, id_parent", "spip_rubriques", "id_rubrique ='$la_rubrique'");
+				if ($row) {
 					$compteur++;
 					$titre = typo($row['titre']);
 					$lien = $dest[$nb_col-$compteur-1];
