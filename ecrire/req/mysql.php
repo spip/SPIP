@@ -492,8 +492,10 @@ function spip_mysql_countsel($from = array(), $where = array(),
 {
 	$r = spip_mysql_select('COUNT(*)', $from, $where,$groupby, '', $limit,
 			$having, $serveur, $requeter);
-	if ($r && $requeter) list($r) = mysql_fetch_array($r, MYSQL_NUM);
-	return $r;
+	if (!$r OR !$requeter) return $r;
+	list($c) = mysql_fetch_array($r, MYSQL_NUM);
+	mysql_free_result($r);
+	return $c;
 }
 
 // http://doc.spip.org/@spip_mysql_error

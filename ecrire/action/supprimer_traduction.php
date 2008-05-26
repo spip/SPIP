@@ -30,9 +30,9 @@ function action_supprimer_traduction_post($r)
 	// Si l'ancien groupe ne comporte plus qu'un seul article
 	// mettre a zero.
 
-	$cpt = sql_fetsel("COUNT(*) AS n", "spip_articles", "id_trad=" . $r[2]);
+	$cpt = sql_countsel("spip_articles", "id_trad=" . $r[2]);
 
-	if ($cpt['n'] == 1)
+	if ($cpt == 1)
 		sql_updateq("spip_articles", array("id_trad" => 0), "id_trad=" . $r[2]);
 }
 ?>
