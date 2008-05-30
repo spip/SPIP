@@ -394,7 +394,7 @@ OR _request('action') == 'test_dirs')) {
 	// Si on peut installer, on lance illico
 	if (test_espace_prive()) {
 		include_spip('inc/headers');
-		redirige_par_entete(generer_url_ecrire("install"));
+		redirige_url_ecrire("install");
 	} else {
 	// Si on est dans le site public, dire que qq s'en occupe
 		include_spip('inc/minipres');
