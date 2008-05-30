@@ -1,4 +1,4 @@
- <?php
+<?php
 
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
