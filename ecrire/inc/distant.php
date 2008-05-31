@@ -24,7 +24,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@copie_locale
 function copie_locale($source, $mode='auto') {
 
-	// si c'est la protection de soi-meme 
+	// si c'est la protection de soi-meme
 	$reg = ',' . $GLOBALS['meta']['adresse_site']
 	  . "/?spip.php[?]action=acceder_document.*file=(.*)$,";
 
@@ -106,7 +106,7 @@ function prepare_donnees_post($donnees, $boundary = '') {
 	      $boundary = substr(md5(rand().'spip'), 0, 8);
 	    }
 	  }
-	
+
 		if($boundary) {
 			// fabrique une chaine HTTP pour un POST avec boundary
 			$entete = "Content-Type: multipart/form-data; boundary=$boundary\r\n";
@@ -154,7 +154,7 @@ function prepare_donnees_post($donnees, $boundary = '') {
 // boundary, pour forcer l'envoi par cette methode
 // et refuser_gz pour forcer le refus de la compression (cas des serveurs orthographiques)
 // date_verif, un timestamp unix pour arreter la recuperation si la page distante n'a pas ete modifiee depuis une date donnee
-// uri_referer, preciser un referer different 
+// uri_referer, preciser un referer different
 // http://doc.spip.org/@recuperer_page
 function recuperer_page($url, $munge_charset=false, $get_headers=false,
 	$taille_max = 1048576, $datas='', $boundary='', $refuser_gz = false,
@@ -199,9 +199,9 @@ function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576,
 		return false;
 	}
 
-	// Sauf en fopen, envoyer le flux d'entree 
+	// Sauf en fopen, envoyer le flux d'entree
 	// et recuperer les en-tetes de reponses
-	if ($fopen) 
+	if ($fopen)
 		$headers = '';
 	else {
 		$headers = recuperer_entetes($f, $date_verif);
@@ -210,7 +210,7 @@ function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576,
 			fclose($f);
 			return false;
 		}
-		if (!is_array($headers)) { // cas Location 
+		if (!is_array($headers)) { // cas Location
 			fclose($f);
 			include_spip('inc/filtres');
 			return suivre_lien($url, $headers);
@@ -290,7 +290,7 @@ function recuperer_entetes($f, $date_verif='')
 		$headers[]= $s."\n";
 		preg_match(',^([^:]*): *(.*)$,i', $s, $r);
 		list(,$d, $v) = $r;
-		if ($d == 'Location' AND $status >= 300 AND $status < 400) {
+		if (strtolower(trim($d)) == 'location' AND $status >= 300 AND $status < 400) {
 			$location = $v;
 		}
 		elseif ($date_verif AND ($d == 'Last-Modified')) {
@@ -478,7 +478,7 @@ function recuperer_infos_distantes($source, $max=0, $charger_si_petite_image = t
 	if ($mime_type == 'text/html') {
 		include_spip('inc/filtres');
 		$page = recuperer_page($source, true, false, 1024*1024);
-		if(preg_match(',<title>(.*?)</title>,ims', $page, $regs)) 
+		if(preg_match(',<title>(.*?)</title>,ims', $page, $regs))
 			$a['titre'] = corriger_caracteres(trim($regs[1]));
 			if (!$a['taille']) $a['taille'] = strlen($page); # a peu pres
 	}
@@ -516,7 +516,7 @@ function init_http($method, $url, $refuse_gz=false, $referer = '', $datas="", $v
 	} elseif ($t['scheme'] == 'https') {
 		$scheme = 'ssl'; $noproxy = 'ssl://';
 		if (!isset($t['port']) || !($port = $t['port'])) $t['port'] = 443;
-	} 
+	}
 	else {
 		$scheme = $t['scheme']; $noproxy = $scheme.'://';
 	}
