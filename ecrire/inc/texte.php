@@ -1000,7 +1000,7 @@ function paragrapher($letexte, $forcer=true) {
 		$letexte = preg_replace(',\s*(</p\b.*>),UiS'.$u, '\1',$letexte);
 
 		// Supprimer les <p xx></p> vides
-		$letexte = preg_replace(',<p\b.*></p>\s*,iS'.$u, '',
+		$letexte = preg_replace(',<p\b[^<>]*></p>\s*,iS'.$u, '',
 			$letexte);
 
 		// Renommer les paragraphes normaux
