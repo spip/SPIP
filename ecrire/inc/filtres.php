@@ -322,6 +322,7 @@ function taille_image($img) {
 	}
 	// ne jamais operer directement sur une image distante pour des raisons de perfo
 	// la copie locale a toutes les chances d'etre la ou de resservir
+	include_spip('inc/distant');
 	$logo = _DIR_RACINE . copie_locale($logo);
 	
 	// pour essayer de limiter les lectures disque
