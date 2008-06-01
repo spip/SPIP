@@ -138,12 +138,13 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serve
 	if (preg_quote($recherche, '/') == $recherche
 	OR (@preg_match($preg,'')===FALSE) ) {
 		$methode = 'LIKE';
+		$u = $GLOBALS['meta']['pcre_u'];
 		$q = sql_quote(
 			"%"
-			. preg_replace(",\s+,","%",str_replace(array('%','_'), array('\%', '\_'), trim($recherche)))
+			. preg_replace(",\s+,".$u, "%", str_replace(array('%','_'), array('\%', '\_'), trim($recherche)))
 			. "%"
 		);
-		$preg = '/'.preg_replace(",\s+,",".+",trim($recherche)).'/' . $options['preg_flags'];
+		$preg = '/'.preg_replace(",\s+,".$u, ".+", trim($recherche)).'/' . $options['preg_flags'];
 	} else {
 		$methode = 'REGEXP';
 		$q = sql_quote($recherche);

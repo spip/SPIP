@@ -38,7 +38,7 @@ function analyser_backend($rss, $url_syndic='') {
 	}
 
 	// supprimer les commentaires
-	$rss = preg_replace(',<!--\s+.*\s-->,Ums', '', $rss);
+	$rss = preg_replace(',<!--.*-->,Ums', '', $rss);
 
 	// simplifier le backend, en supprimant les espaces de nommage type "dc:"
 	$rss = preg_replace(',<(/?)(dc):,i', '<\1', $rss);
