@@ -34,16 +34,17 @@ function action_logout_dist()
 			$session($visiteur_session['id_auteur']);
 			spip_setcookie('spip_session', $_COOKIE['spip_session'], time()-3600);
 		}
-		if (isset($_SERVER['PHP_AUTH_USER']) AND !$ignore_auth_http) {
+		// si authentification http, et que la personne est loge,
+		// pour se deconnecter, il faut proposer un nouveau formulaire de connexion http
+		if (isset($_SERVER['PHP_AUTH_USER']) AND !$ignore_auth_http AND $GLOBALS['auth_can_disconnect']) {
 			include_spip('inc/actions');
-			if (verifier_php_auth()) {
 			  ask_php_auth(_T('login_deconnexion_ok'),
 				       _T('login_verifiez_navigateur'),
 				       _T('login_retour_public'),
 				       	"redirect=". _DIR_RESTREINT_ABS, 
 				       _T('login_test_navigateur'),
 				       true);
-			}
+			
 		}
 	}
 
