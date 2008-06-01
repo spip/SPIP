@@ -21,7 +21,7 @@ function balise_LOGIN_PRIVE ($p) {
 # retourner:
 # 1. l'url collectee ci-dessus (args0) ou donnee en premier parametre (args1) 
 #    #LOGIN_PRIVE{#URL_ECRIRE}
-# 2. un eventuel parametre (args2) indiquent le login, et permettant une ecriture
+# 2. un eventuel parametre (args2) indiquant le login et permettant une ecriture
 #    <boucle(AUTEURS)>[(#LOGIN_PRIVE{#URL_ECRIRE, #LOGIN})]
 
 // http://doc.spip.org/@balise_LOGIN_PRIVE_stat

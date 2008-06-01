@@ -21,7 +21,7 @@ function balise_LOGIN_PUBLIC ($p, $nom='LOGIN_PUBLIC') {
 # retourner:
 # 1. l'url collectee ci-dessus (args0) ou donnee en premier parametre (args1) 
 #    #LOGIN_PUBLIC{#SELF}
-# 2. un eventuel parametre (args2) indiquent le login, et permettant une ecriture
+# 2. un eventuel parametre (args2) indiquant le login et permettant une ecriture
 #    <boucle(AUTEURS)>[(#LOGIN_PUBLIC{#SELF, #LOGIN})]
 
 // http://doc.spip.org/@balise_LOGIN_PUBLIC_stat
