@@ -18,7 +18,7 @@
 	    </li>
 	
 	    [<li>(#VAL{titre_cadre_interieur_rubrique}|_T|concat{' ',#AIDER{rubrub}}
-	    |chercher_rubrique{#ENV{id_rubrique},#ENV{id_parent},'rubrique',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint}})</li>]
+	    |chercher_rubrique{[(#ENV{id_rubrique}|intval)],#ENV{id_parent},'rubrique',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint}})</li>]
 	
 	  	[(#ENV**{config}|table_valeur{rubriques_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|?{' '})
 	    <li class="gauche">
