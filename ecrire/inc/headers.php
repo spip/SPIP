@@ -68,7 +68,8 @@ function redirige_par_entete($url, $equiv='', $status = 302) {
 function redirige_formulaire($url, $equiv = '') {
 	if (!_AJAX
 	&& !headers_sent() 
-	&& !$_GET['var_mode']) {
+	&& !$_GET['var_mode']
+	&& !_request('var_ajax')) {
 		redirige_par_entete(str_replace('&amp;','&',$url), $equiv);
 	} else {
 		$url = strtr($url, "\n\r", "  ");
@@ -80,7 +81,7 @@ function redirige_formulaire($url, $equiv = '') {
 		spip_log("redirige formulaire ajax: $url");
 		include_spip('inc/filtres');	
 		return 
-		"<script type='javascript'>window.location='$url';</script>"
+		"<script type='javascript'>window.location.replace('$url');</script>"
 		. http_img_pack('searching.gif','');
 	}
 }
