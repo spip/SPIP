@@ -127,11 +127,13 @@ function pipeline($action, $val=null) {
 		verif_plugin($action);
 		spip_log("fonction $fonc absente : pipeline desactive");
 	}
-	
+
 	// si le flux est une table qui encapsule donnees et autres
 	// on ne ressort du pipe que les donnees
 	// array_key_exists pour php 4.1.0
-	if (is_array($val) && isset($val['data']))
+	if (is_array($val)
+	  AND count($val)==2
+	  AND (isset($val['data']) OR in_array('data',array_keys($val))))
 		$val = $val['data'];
 	return $val;
 }
@@ -535,7 +537,7 @@ function http_script($script, $src='', $noscript='') {
 	}
 	else $src = '';
 	if ($script)
-		$script = ("<!--\n" . 
+		$script = ("<!--\n" .
 		preg_replace(',</([^>]*)>,','<\/\1>', $script) .
 		"\n//-->\n");
 	if ($noscript)
@@ -938,7 +940,7 @@ function generer_url_action($script, $args="", $no_entities=false ,$rel = false)
 	if ($redirect = parametre_url($url,'redirect')){
 		// si jamais l'url d'action contient un redirect=ecrire/...
 		// supprimer ce ecrire/ si on y est deja puisqu'on ne le quitte pas
-		if (test_espace_prive() 
+		if (test_espace_prive()
 		  AND substr($redirect,0,strlen(_DIR_RESTREINT_ABS))==_DIR_RESTREINT_ABS)
 			$redirect = './'.substr($redirect,strlen(_DIR_RESTREINT_ABS));
 			$url = parametre_url($url,'redirect',$redirect);
@@ -1103,7 +1105,7 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	define('_IMG_MAX_SIZE', 0); # poids en ko
 	define('_IMG_MAX_WIDTH', 0); # largeur en pixels
 	define('_IMG_MAX_HEIGHT', 0); # hauteur en pixels
-	
+
 	define('_COPIE_LOCALE_MAX_SIZE',1048576); // poids en octet
 
 	// Le charset par defaut lors de l'installation
@@ -1437,10 +1439,10 @@ function charger_php_extension($module) {
 	} else {
 		$charger_php_extension = charger_fonction('charger_php_extension','inc');
 		return $charger_php_extension($module);
-	}		
+	}
 }
-	
-	
+
+
 /*
  * Bloc de compatibilite : quasiment tous les plugins utilisent ces fonctions
  * desormais depreciees ; plutot que d'obliger tout le monde a charger
