@@ -82,4 +82,16 @@ function maj_11431 () {
 }
 $GLOBALS['maj'][11431] = array(array('maj_11431'));
 
+// reparer spip_types_documents.id_type 
+// qui est parfois encore present
+function maj_11778 () {
+	// si presence id_type
+	$s = sql_showtable('spip_types_documents');
+	if (isset($s['field']['id_type'])) {
+		sql_alter('TABLE spip_types_documents CHANGE id_type id_type BIGINT(21) NOT NULL');
+		sql_alter('TABLE spip_types_documents DROP id_type');
+		sql_alter('TABLE spip_types_documents ADD PRIMARY KEY (extension)');
+	}
+}
+$GLOBALS['maj'][11778] = array(array('maj_11778'));
 ?>
