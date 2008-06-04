@@ -23,8 +23,10 @@ function action_editer_article_dist() {
 	if (!$id_article = intval($arg)) {
 		$id_parent = _request('id_parent');
 		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
-		if (!($id_parent AND $id_auteur))
+		if (!($id_parent AND $id_auteur)) {
+			include_spip('inc/headers');
 			redirige_url_ecrire();
+		}
 		if (($id_article = insert_article($id_parent)) > 0)
 		
 		# cf. GROS HACK ecrire/inc/getdocument
