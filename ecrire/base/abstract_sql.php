@@ -355,8 +355,12 @@ function sql_fetsel(
 function sql_getfetsel(
 		       $select, $from = array(), $where = array(), $groupby = array(), 
 	$orderby = array(), $limit = '', $having = array(), $serveur='', $option=true) {
+	if (preg_match('/\s+as\s+(\w+)$/i', $select, $c)) $id = $c[1];
+	elseif (!preg_match('/\W/', $select)) $id = $select;
+	else {$id = 'n'; $select .= ' AS n';}
 	$r = sql_fetsel($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, $option!==false);
-	return $r ? $r[$select] : NULL;
+	if (!$r) return NULL;
+	return $r[$id]; 
 }
 
 // http://doc.spip.org/@sql_version
