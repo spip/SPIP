@@ -190,25 +190,33 @@ function action_charger_plugin_dist() {
 
 	$texte = "<div style='text-align:$spip_lang_left;'>$texte</div>\n";
 
+	$redirect = rawurldecode(_request('redirect'));
+	if($redirect == 'ecrire/'){
+		$redirect_annul = generer_url_ecrire('admin_plugin');
+		$redirect_form = 'admin_plugin&'.$type.'='.preg_replace(',^[^/]+/|/$,', '', $status['dirname']);
+	}
+	else{
+		$redirect_annul = $redirect;
+		$redirect_form = preg_replace(',^.*exec\=,', '', rawurldecode($redir));
+		$redirect_action = $redirect_form;
+	}
 	echo minipres($retour." ",
 		$suite
 			? redirige_action_auteur(_request('action'),
 				$suite,
-				'',
+				$redirect_action,
 				'',
 					form_hidden('?url_zip_plugin='.$zip.'&extract=oui')
 					.$texte
 					."<a class='suivant' href='"
-						.generer_url_ecrire('admin_plugin')
-					."'>Annuler</a>"
+						.$redirect_annul
+					."'>"._T('bouton_annuler')."</a>"
 				.bouton_suivant(),
 				"\nmethod='post'")
-			: generer_form_ecrire('admin_plugin&'.$type.'='.
-				preg_replace(',^[^/]+/|/$,', '', $status['dirname']),
+			: generer_form_ecrire($redirect_form,
 				$texte . bouton_suivant())
 	);
 	exit;
-
 
 	// 0 = rien, pas charge
 	// liste de fichiers = retour gagnant
