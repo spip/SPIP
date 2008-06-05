@@ -23,6 +23,7 @@ function exec_articles_forum_dist()
 				 intval(_request('enplus')));
 }
 
+// http://doc.spip.org/@exec_articles_forum_args
 function exec_articles_forum_args($id_article, $debut, $pas, $enplus)
 {
 	if (!autoriser('modererforum', 'article', $id_article)) {
