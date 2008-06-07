@@ -317,7 +317,9 @@ $spip_forum = array(
 
 $spip_forum_key = array(
 		"PRIMARY KEY"	=> "id_forum",
-		"KEY id_message"	=> "id_message",
+		"KEY id_auteur"	=> "id_auteur",
+		"KEY id_parent"	=> "id_parent",
+		"KEY id_thread"	=> "id_thread",
 		"KEY optimal" => "statut,id_parent,id_article,date_heure,id_breve,id_syndic,id_rubrique");
 
 $spip_forum_join = array(
