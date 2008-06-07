@@ -97,11 +97,13 @@ $GLOBALS['maj'][11778] = array(array('maj_11778'));
 
 // Optimisation des forums
 function maj_11790 () {
-	sql_alter('TABLE spip_forum DROP id_message');
+	sql_alter('TABLE spip_forum DROP INDEX id_message id_message');
 	sql_alter('TABLE spip_forum ADD INDEX id_parent (id_parent)');
 	sql_alter('TABLE spip_forum ADD INDEX id_auteur (id_auteur)');
 	sql_alter('TABLE spip_forum ADD INDEX id_thread (id_thread)');
 }
 
 $GLOBALS['maj'][11790] = array(array('maj_11790'));
+
+
 ?>
