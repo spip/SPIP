@@ -19,7 +19,7 @@ function dofxform(){
         labelSpan.style.width = labelWidth;
         labelSpan.innerHTML = labelContent;
     this.style.display = '-moz-inline-box';
-    this.innerHTML = null;
+    this.innerHTML = "";
     this.appendChild( labelSpan );
   } ).end();
   
