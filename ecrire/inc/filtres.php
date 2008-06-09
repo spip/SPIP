@@ -2504,7 +2504,8 @@ function f_extra_editer_contenu_objet($flux){
 // http://doc.spip.org/@chercher_rubrique
 function chercher_rubrique($msg,$id, $id_parent, $type, $id_secteur, $restreint,$actionable = false){
 	global $spip_lang_right;
-	if (!autoriser('modifier', $type, $id))
+	include_spip('inc/autoriser');
+	if (intval($id) && !autoriser('modifier', $type, $id))
 		return "";
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
 	$form = $chercher_rubrique($id_parent, $type, $restreint);
