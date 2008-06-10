@@ -1,4 +1,4 @@
-#HTTP_HEADER{Content-type: text/calendar}
+#HTTP_HEADER{Content-Type: text/calendar}
 BEGIN:VCALENDAR
 CALSCALE:GREGORIAN
 PRODID: SPIP http://www.spip.net
@@ -15,9 +15,7 @@ DTEND:[(#DATE|date_ical{60})]
 CATEGORIES:<:articles|filtrer_ical:>
 URL:[(#URL_ARTICLE|url_absolue)]
 STATUS:CONFIRMED
-END:VEVENT
-</BOUCLE_articles>
-<BOUCLE_breves(BREVES){par date}{inverse}{0,100}>
+END:VEVENT</BOUCLE_articles><BOUCLE_breves(BREVES){par date}{inverse}{0,100}>
 BEGIN:VEVENT
 SUMMARY:[(#TITRE|filtrer_ical)] [[(#NOM_SITE_SPIP|filtrer_ical)]]
 UID:breve#ID_BREVE @ [(#URL_SITE_SPIP|filtrer_ical)]

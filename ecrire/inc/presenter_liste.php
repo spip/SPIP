@@ -99,7 +99,7 @@ function afficher_tranches_requete($num_rows, $idom, $url='', $nb_aff = 10, $old
 	$self = self();
 	$ie_style = ($browser_name == "MSIE") ? "height:1%" : '';
 	$style = "style='visibility: hidden; float: $spip_lang_right'";
-	$nav= navigation_pagination($num_rows, $nb_aff, $url, $onclick=true, $idom);
+	$nav= navigation_pagination($num_rows, $nb_aff, $url, _request('idom'), $idom, true);
 	$script = parametre_url($self, $idom, -1);
 	$l = htmlentities(_T('lien_tout_afficher'));
 

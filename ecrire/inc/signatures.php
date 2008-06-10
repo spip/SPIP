@@ -19,21 +19,17 @@ function message_de_signature($row)
 }
 
 // http://doc.spip.org/@inc_signatures_dist
-function inc_signatures_dist($script, $id, $debut, $where, $order, $limit='', $type='') {
+function inc_signatures_dist($script, $id, $debut, $pas, $where, $order, $limit='', $type='') {
 	charger_generer_url();
 
-	# filtre de duree (a remplacer par une vraie pagination)
-	#$where .= ($where ? " AND " : "") . "date_time>DATE_SUB(NOW(),INTERVAL 180 DAY)";
-	if ($type == 'interne')   $where = "NOT($where)";
 	if ($id) { 
 		$args = "id_article=$id&";
-		$where .= " AND id_article=$id";
 	}
 	else $args = "";
 
 	$t = sql_countsel("spip_signatures", $where);
-	if ($t > ($nb_aff = floor(1.5*_TRANCHES))) {
-		$res = navigation_pagination($t, $nb_aff, generer_url_ecrire($script, $args), false, 'debut');
+	if ($t > $pas) {
+		$res = navigation_pagination($t, $pas, generer_url_ecrire($script, $args), $debut, 'debut', false);
 	} else $res = '';
 
 	$limit = (!$limit AND !$debut) ? '' : (($debut ? "$debut," : "") . $limit);

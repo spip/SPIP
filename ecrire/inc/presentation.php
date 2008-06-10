@@ -337,11 +337,11 @@ function afficher_objets($type, $titre_table,$requete,$formater='',$force=false)
 }
 
 // http://doc.spip.org/@navigation_pagination
-function navigation_pagination($num_rows, $nb_aff=10, $href=null, $on='', $tmp_var=null) {
+function navigation_pagination($num_rows, $nb_aff=10, $href=null, $debut, $tmp_var=null, $on='') {
 
 	$texte = '';
-	$self = self();
-	$deb_aff = isset($tmp_var) ? intval(_request($tmp_var)) : 0;
+	$self = parametre_url(self(), 'date', '');
+	$deb_aff = intval($debut);
 
 	for ($i = 0; $i < $num_rows; $i += $nb_aff){
 		$deb = $i + 1;
