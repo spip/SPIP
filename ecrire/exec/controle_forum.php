@@ -247,9 +247,9 @@ function exec_controle_forum_args($id_rubrique, $type, $debut, $pas, $enplus, $r
 
 	$select = sql_select($query['SELECT'], $query['FROM'], $query['WHERE'], $query['GROUP BY'], $query['ORDER BY'], $query['LIMIT']);
 	
+	$res = '';
 	while ($row = sql_fetch($select)) 
 		$res .= controle_forum_boucle($row);
-
 	$res =  "<br />$nav<br />$res<br />$nav";	
 
 	if (_AJAX) {

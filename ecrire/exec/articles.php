@@ -45,7 +45,7 @@ function exec_articles_args($id_article)
 		echo $commencer_page("&laquo; ". $row['titre'] ." &raquo;", "naviguer", "articles", $row['id_rubrique']);
 
 		echo debut_grand_cadre(true),
-			afficher_hierarchie($row['id_rubrique'],_T('titre_cadre_interieur_rubrique'),$id_article,'article',$id_secteur,($row['statut'] == 'publie')),
+			afficher_hierarchie($row['id_rubrique'],_T('titre_cadre_interieur_rubrique'),$id_article,'article',$row['id_secteur'],($row['statut'] == 'publie')),
 			fin_grand_cadre(true),
 			$res,
 			fin_page();
