@@ -391,6 +391,7 @@ function maxgraph($max) {
 	}
 }
 
+// http://doc.spip.org/@statistiques_jour_et_mois
 function statistiques_jour_et_mois($id_article, $select, $table, $where, $duree, $order, $count, $serveur, $total, $popularite, $liste='', $classement=array(), $script='')
 {
 	$where2 = $duree ? "$order > DATE_SUB(NOW(),INTERVAL $duree DAY)": '';
@@ -526,6 +527,7 @@ function statistiques_tous($log, $date_premier, $last, $total_absolu, $val_popul
 	return $res;
 }
 
+// http://doc.spip.org/@statistiques_zoom
 function statistiques_zoom($id_article, $largeur_abs, $date_premier, $date_debut, $date_today)
 {
 	if ($largeur_abs > 1) {
@@ -606,6 +608,7 @@ function stat_log1($log, $agreg, $date_today, $largeur, $rapport, $script) {
 	return array($moyenne, $val_prec, $res);
 }
 
+// http://doc.spip.org/@statistiques_href
 function statistiques_href($jour, $moyenne, $script, $value='')
 {
 	$ce_jour=date("Y-m-d", $jour);
@@ -617,6 +620,7 @@ function statistiques_href($jour, $moyenne, $script, $value='')
 	return attribut_html(supprimer_tags($title));
 }
 
+// http://doc.spip.org/@statistiques_vides
 function statistiques_vides($prec, $largeur, $rapport, $moyenne, $script)
 {
 	$hauteur_moyenne = round($moyenne*$rapport)-1;
@@ -631,6 +635,7 @@ function statistiques_vides($prec, $largeur, $rapport, $moyenne, $script)
 	return "<a href='$script' title='$title'>$res</a>";
 }
 
+// http://doc.spip.org/@statistiques_hauteur
 function statistiques_hauteur($res, $id_article, $largeur, $maxgraph, $moyenne, $rapport, $val_popularite, $visites_today)
 {
 	$hauteur = round($visites_today * $rapport) - 1;
