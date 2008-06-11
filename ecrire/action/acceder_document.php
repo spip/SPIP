@@ -86,6 +86,7 @@ function action_acceder_document_dist() {
 
 		if (!preg_match(',^image/,', $doc['mime_type'])) {
 			$f = $doc['titre'] ? $doc['titre'] : basename($file);
+			header('Content-Type: application/octet-stream');
 			header("Content-Disposition: attachment; filename=\"$f\";");
 			header("Content-Transfer-Encoding: binary");
 		}
