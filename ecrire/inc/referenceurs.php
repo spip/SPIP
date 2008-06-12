@@ -3,7 +3,7 @@
 //
 // Afficher les referers d'un article (ou du site)
 //
-// http://doc.spip.org/@aff_referers
+// http://doc.spip.org/@inc_referenceurs_dist
 function inc_referenceurs_dist ($jour, $limit, $serveur='') {
 	global $spip_lang_right, $source_vignettes;
 
