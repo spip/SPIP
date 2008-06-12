@@ -2558,7 +2558,7 @@ function puce_changement_statut($id_objet, $statut, $id_rubrique, $type, $ajax=f
 // avec le secret du site, le gziper si possible...
 // l'entree peut etre serialisee (le #ENV** des fonds ajax et ajax_stat)
 // http://doc.spip.org/@encoder_contexte_ajax
-function encoder_contexte_ajax($c) {
+function encoder_contexte_ajax($c,$form='') {
 	if (is_string($c)
 	AND !is_null(@unserialize($c)))
 		$c = unserialize($c);
@@ -2572,7 +2572,7 @@ function encoder_contexte_ajax($c) {
 			unset($c[$k]);
 
 	include_spip("inc/securiser_action");
-	$cle = calculer_cle_action($c);
+	$cle = calculer_cle_action($form.(is_array($c)?serialize($c):$c));
 	$c = serialize(array($c,$cle));
 	if (function_exists('gzdeflate'))
 		$c = gzdeflate($c);
@@ -2583,7 +2583,7 @@ function encoder_contexte_ajax($c) {
 
 // la procedure inverse de encoder_contexte_ajax()
 // http://doc.spip.org/@decoder_contexte_ajax
-function decoder_contexte_ajax($c) {
+function decoder_contexte_ajax($c,$form='') {
 	include_spip("inc/securiser_action");
 
 	$c = @base64_decode($c);
@@ -2592,7 +2592,7 @@ function decoder_contexte_ajax($c) {
 		$c = @gzinflate($c);
 	list($env, $cle) = @unserialize($c);
 
-	if ($cle == calculer_cle_action($env))
+	if ($cle == calculer_cle_action($form.(is_array($env)?serialize($env):$env)))
 		return $env;
 }
 

@@ -102,11 +102,6 @@ function balise_FORMULAIRE__dyn($form)
 		. "<input type='hidden' name='hash' value='".$secu['hash']."' />";
 	}
 
-	// ajouter le nom du formulaire dans les $args pour pouvoir le controler
-	// au retour, histoire de ne pas se faire injecter dans un autre formulaire
-	// un contexte signe pour un premier formulaire
-	$args['form'] = $form;
-
 	return array("formulaires/$form",
 		3600,
 		array_merge(
@@ -114,7 +109,7 @@ function balise_FORMULAIRE__dyn($form)
 			array(
 			'form' => $form,
 			'action' => $action,
-			'formulaire_args' => encoder_contexte_ajax($args),
+			'formulaire_args' => encoder_contexte_ajax($args,$form),
 			'id' => isset($valeurs['id'])?$valeurs['id']:'new',
 			'erreurs' => $erreurs,
 			'message_ok' => $message_ok,
