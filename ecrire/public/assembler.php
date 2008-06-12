@@ -78,6 +78,7 @@ function init_var_mode(){
 function traiter_formulaires_dynamiques(){
 	static $done = false;
 	if (!$done) {
+		$done = true;
 		if ($action = _request('action')) {
 			define('_ESPACE_PRIVE', true);
 			include_spip('base/abstract_sql'); // chargement systematique pour les actions
@@ -175,7 +176,6 @@ function traiter_formulaires_dynamiques(){
 				exit;
 			}
 		}
-		$done = true;
 	}
 }
 
@@ -430,6 +430,7 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 		// delais a l'ancienne, c'est pratiquement mort
 		$d = isset($GLOBALS['delais']) ? $GLOBALS['delais'] : NULL;
 		$GLOBALS['delais'] = $delainc;
+		$GLOBALS['_INC_PUBLIC']++;
 		$page = inclure_page($fond, $contexte_inclus);
 		$GLOBALS['delais'] = $d;
 
@@ -456,12 +457,14 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 				xml_hack($page);
 				ob_end_clean();
 		}
-		if (isset($contexte_inclus['_pipeline'])
-		 && is_array($contexte_inclus['_pipeline'])
-		 && isset($GLOBALS['spip_pipeline'][reset($contexte_inclus['_pipeline'])])){
-			$texte = pipeline(reset($contexte_inclus['_pipeline']),array(
+		// attention $contexte_inclus a pu changer pendant l'eval ci dessus
+		// on se refere a $page['contexte'] a la place
+		if (isset($page['contexte']['_pipeline'])
+		 && is_array($page['contexte']['_pipeline'])
+		 && isset($GLOBALS['spip_pipeline'][reset($page['contexte']['_pipeline'])])){
+			$texte = pipeline(reset($page['contexte']['_pipeline']),array(
 			  'data'=>$texte,
-			  'args'=>end($contexte_inclus['_pipeline'])));
+			  'args'=>end($page['contexte']['_pipeline'])));
 		}
 	}
 
