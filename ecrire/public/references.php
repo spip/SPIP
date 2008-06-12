@@ -424,7 +424,7 @@ function compose_filtres(&$p, $code) {
 					$code = "($code $fonc $arg)";
 					break;
 
-				// cas de et,ou,non,sinon,xou,xor,and,or,not
+				// cas de et,ou,oui,non,sinon,xou,xor,and,or,not,yes
 				case ($fonc == 'and') OR ($fonc == 'et'):
 					$code = "((($code) AND ($arg)) ?' ' :'')";
 					break;
@@ -439,6 +439,9 @@ function compose_filtres(&$p, $code) {
 					break;
 				case ($fonc == 'not') OR ($fonc == 'non'):
 					$code = "(($code) ?'' :' ')";
+					break;
+				case ($fonc == 'yes') OR ($fonc == 'oui'):
+					$code = "(($code) ?' ' :'')";
 					break;
 
 				default:
