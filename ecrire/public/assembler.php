@@ -127,7 +127,7 @@ function traiter_formulaires_dynamiques(){
 			}
 			else {
 				include_spip('inc/actions');
-				ajax_retour('signature ajax incorrecte 1');
+				ajax_retour('signature ajax bloc incorrecte');
 			}
 			exit();
 		}
@@ -136,7 +136,7 @@ function traiter_formulaires_dynamiques(){
 		if ($form = _request('formulaire_action')
 		AND $args = _request('formulaire_action_args')) {
 			include_spip('inc/filtres');
-			if ($args = decoder_contexte_ajax($args,$form)) {
+			if (($args = decoder_contexte_ajax($args,$form))!==false) {
 				$verifier = charger_fonction("verifier","formulaires/$form/",true);
 				$_POST["erreurs_$form"] = pipeline(
 				  'formulaire_verifier',
@@ -172,7 +172,7 @@ function traiter_formulaires_dynamiques(){
 				}
 			} else {
 				include_spip('inc/actions');
-				ajax_retour('signature ajax incorrecte 2');
+				ajax_retour('signature ajax form incorrecte');
 				exit;
 			}
 		}
