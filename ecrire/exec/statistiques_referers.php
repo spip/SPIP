@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-include_spip('inc/statistiques');
 
 // http://doc.spip.org/@exec_statistiques_referers_dist
 function exec_statistiques_referers_dist()
@@ -30,11 +29,8 @@ function exec_statistiques_referers_dist()
 	if ($limit == 0) $limit = 100;
 	if ($jour<>'veille') $jour='jour';
 
-	$result = sql_select("referer_md5, referer, SUM(visites_$jour) AS vis", "spip_referers", "visites_$jour>0 ", "referer", "vis DESC", $limit);
-
-	$res = "<br /><div style='font-size:small;' class='verdana1'>"
-	. aff_referers ($result, $limit, generer_url_ecrire('statistiques_referers', ("jour=$jour&limit=" . strval($limit+200))))
-	. "</div><br />";
+	$referenceurs = charger_fonction('referenceurs', 'inc');
+	$res = $referenceurs ($jour, $limit);
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 
@@ -53,7 +49,7 @@ function exec_statistiques_referers_dist()
 
 	echo barre_onglets("stat_referers", $jour);
 
-	echo $res;
+	echo "<br /><div style='font-size:small;' class='verdana1'>", $res, "</div><br />";
 
 	echo fin_gauche(), fin_page();
 	}

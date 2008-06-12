@@ -64,7 +64,7 @@ function inc_presenter_liste_dist($requete, $fonc, &$prims, $own, $force, $style
 		if (!$th) $head= '';
 		$tranches .= "<table width='100%' cellpadding='2' cellspacing='0' border='0'>$head$table</table>";
 	} else {
-		while ($r = sql_fetch($req)) {
+		while ($r = sql_fetch($result)) {
 			if ($prim) $prims[]= $r[$prim];
 			if ($t = $fonc($r, $own)) {
 			  	$tranches = '<li>' . join('</li><li>', $t) . '</li>';
