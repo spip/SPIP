@@ -150,15 +150,15 @@ function statistiques_jour_et_mois($id_article, $select, $table, $where, $duree,
 {
 	$where2 = $duree ? "$order > DATE_SUB(NOW(),INTERVAL $duree DAY)": '';
 	if ($where) $where2 = $where2 ?  "$where2 AND $where" : $where;
-
-	$log = statistiques_collecte_date($select, "(ROUND(UNIX_TIMESTAMP($order) / (24*3600)) *  (24*3600))", $table, $where2, $serveur);
+	$interval = 3600*24;
+	$log = statistiques_collecte_date($select, "(ROUND(UNIX_TIMESTAMP($order) / $interval) *  $interval)", $table, $where2, $serveur);
 
 	if (!$log) return array('','');
 
 	$d = sql_getfetsel("UNIX_TIMESTAMP($order) AS d", $table, $where, '', $order, 1,'',$serveur);
 	$last = 0;
 	$res = debut_cadre_relief("statistiques-24.gif", true)
-	  . statistiques_tous($log,$d, $last, $total, $popularite, $duree, $classement, $id_article, $liste, $script)
+	  . statistiques_tous($log,$d, $last, $total, $popularite, $duree, $interval, $classement, $id_article, $liste, $script)
 	. fin_cadre_relief(true)
 	. statistiques_mode($table);
 	
@@ -190,33 +190,19 @@ function statistiques_collecte_date($count, $date, $table, $where, $serveur)
 // Appelee S'il y a au moins cinq minutes de stats :-)
 
 // http://doc.spip.org/@statistiques_tous
-function statistiques_tous($log, $date_premier, $last, $total_absolu, $val_popularite, $aff_jours, $classement, $id_article=0, $liste=0, $script='')
+function statistiques_tous($log, $date_premier, $last, $total_absolu, $val_popularite, $aff_jours, $interval, $classement, $id_article=0, $liste=0, $script='')
 {
 	$r = array_keys($log);
 	$date_today = max($r);
 	$date_debut = min($r);
-
-	// les visites du jour ... sauf s'il n'y en a pas :
-
-	if (time()-$date_today>3600*24) {
-		$last=0;
-	} else {
-		$last = $log[$date_today];
-	}
-	
-	$nb_jours = floor(($date_today-$date_debut)/(3600*24));
+	$last = (time()-$date_today>$interval) ? 0 : $log[$date_today];
 	$max = max($log);
 	$maxgraph = maxgraph($max);
 	$rapport = 200 / $maxgraph;
-
-	if (count($log) < 420) $largeur = floor(450 / ($nb_jours+1));
-	if ($largeur < 1) {
-		$largeur = 1;
-		$agreg = ceil(count($log) / 420);	
-	} else {
-		$agreg = 1;
-		if ($largeur > 50) $largeur = 50;
-	}
+	$agreg = ceil(count($log) / 420);
+	$largeur = ($agreg > 1) ? 1 :
+	  floor(450 / (1+floor(($date_today-$date_debut)/$interval)));
+	if ($largeur > 50) $largeur = 50; elseif ($largeur < 1) $largeur = 1;
 
 	// La version SVG n'est disponible que pour les visites
 	if (flag_svg() AND !$script) {
@@ -224,7 +210,7 @@ function statistiques_tous($log, $date_premier, $last, $total_absolu, $val_popul
 	} else {
 		list($moyenne,$val_prec, $res) = stat_log1($log, $agreg, $date_today, $largeur, $rapport, $script);
 		$res = statistiques_hauteur($res, $id_article, $largeur, $maxgraph, $moyenne, $rapport, $val_popularite, $last)
-		  . statistiques_nom_des_mois($date_debut, $date_today, ($largeur / (24*3600*$agreg)));
+		  . statistiques_nom_des_mois($date_debut, $date_today, ($largeur / ($interval*$agreg)));
 
 	}
 	$x = (!$aff_jours) ? 1 : (420/ $aff_jours);
