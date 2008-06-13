@@ -126,7 +126,7 @@ function exec_statistiques_visites_args($id_article, $aff_jours, $limit,$serveur
 	$select = "visites";
 	$order = "date";
 
-	list($res, $mois) = statistiques_jour_et_mois($id_article, $select, $table, $where, $aff_jours ? $aff_jours : 105, $order, "SUM(visites)", $serveur, $total_absolu, $val_popularite,  $classement,  $liste);
+	list($res, $mois) = statistiques_jour_et_mois($id_article, $select, $table, $where, $aff_jours ? $aff_jours : 105, $order, "SUM(visites)", $serveur, 3600*24, $total_absolu, $val_popularite,  $classement,  $liste);
 
 	echo $res;
 	if ($mois) {
