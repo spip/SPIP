@@ -2374,6 +2374,7 @@ function couleur_saturation($couleur, $val) {
 
 
 
+// http://doc.spip.org/@couleur_rgb2hsv
 function couleur_rgb2hsv ($R,$G,$B) {
 	$var_R = ( $R / 255 ) ;                    //Where RGB values = 0 Ã· 255
 	$var_G = ( $G / 255 );
@@ -2415,6 +2416,7 @@ function couleur_rgb2hsv ($R,$G,$B) {
 }
 
 
+// http://doc.spip.org/@couleur_hsv2rgb
 function couleur_hsv2rgb ($H,$S,$V) {
 	
 	if ( $S == 0 )                       //HSV values = 0 Ã· 1
@@ -2452,6 +2454,7 @@ function couleur_hsv2rgb ($H,$S,$V) {
 }
 
 
+// http://doc.spip.org/@couleur_rgb2hsl
 function couleur_rgb2hsl ($R,$G,$B) {
 	$var_R = ( $R / 255 ) ;                    //Where RGB values = 0 Ã· 255
 	$var_G = ( $G / 255 );
@@ -2493,6 +2496,7 @@ function couleur_rgb2hsl ($R,$G,$B) {
 }
 
 
+// http://doc.spip.org/@hue_2_rgb
 function hue_2_rgb( $v1, $v2, $vH ) {
    if ( $vH < 0 ) $vH += 1;
    if ( $vH > 1 ) $vH -= 1;
@@ -2502,6 +2506,7 @@ function hue_2_rgb( $v1, $v2, $vH ) {
    return ( $v1 );
 }
 
+// http://doc.spip.org/@couleur_hsl2rgb
 function couleur_hsl2rgb ($H,$S,$L) {
 	
 	if ( $S == 0 )                       //HSV values = 0 Ã· 1
