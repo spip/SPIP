@@ -1,16 +1,11 @@
 <div class="formulaire_spip formulaire_ecrire_auteur formfx" id="formulaire_ecrire_auteur#ENV{id}">
 
-[<p class="erreur">(#ENV*{mailko})</p>]
-[<p class="erreur">(#ENV*{sujetko})</p>]
-[<p class="erreur">(#ENV*{texteko})</p>]
-
 [<fieldset class="reponse_formulaire">
     <legend><:envoyer_message:></legend>
     <p>(#ENV*{mailenvoye})</p>
 </fieldset>]
 
 [(#ENV**{mailenvoye}|?{'',' '})
-
     <form action="#SELF#formulaire_ecrire_auteur#ENV{id}" method="post">
 
         [(#REM) Previsualisation... ]
@@ -34,14 +29,17 @@
             
             <ul class="formfx">
                 <li>
+                    [<p class="erreur">(#ENV*{mailko})</p>]
                     <label for="email_message_auteur#ENV{id}"><:form_pet_votre_email:></label>
                     <input type="text" class="forml" name="email_message_auteur#ENV{id}" id="email_message_auteur#ENV{id}" value="#ENV{mail}" size="30" />
                 </li>
                 <li>
+                    [<p class="erreur">(#ENV*{sujetko})</p>]
                     <label for="sujet_message_auteur#ENV{id}"><:form_prop_sujet:></label>
                     <input type="text" class="forml" name="sujet_message_auteur#ENV{id}" id="sujet_message_auteur#ENV{id}" value="#ENV{sujet}" size="30" />
                 </li>
                 <li>
+                    [<p class="erreur">(#ENV*{texteko})</p>]
                     <label for="texte_message_auteur#ENV{id}"><:info_texte_message:></label>
                     <textarea class="forml" name="texte_message_auteur#ENV{id}" id="texte_message_auteur#ENV{id}" rows="10" cols="40">#ENV{texte}</textarea>
                 </li>
