@@ -109,7 +109,7 @@ function analyse_resultat_skel($nom, $cache, $corps, $source='') {
 		if ($process_ins == 'php')
 			$corps = preg_replace_callback(',<[?](\s|php|=).*[?]>,UimsS',
 				echapper_php_callback, $corps);
-		foreach (explode(',', $headers['X-Spip-Filtre']) as $filtre) {
+		foreach (explode('|', $headers['X-Spip-Filtre']) as $filtre) {
 			$corps = appliquer_filtre($corps, $filtre);
 		}
 		// restaurer les echappements
