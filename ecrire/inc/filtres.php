@@ -2347,7 +2347,7 @@ function filtre_cache_static($scripts,$type='js'){
 		  			lire_fichier($script, $contenu);
 		  		}
 		  		else {
-		  			$comm = "page=$script[0]"
+		  			$comm = _SPIP_PAGE . "=$script[0]"
 		  				. (strlen($script[1])?"($script[1])":'');
 		  			parse_str($script[1],$contexte);
 		  			$contenu = evaluer_fond($script[0],$contexte);

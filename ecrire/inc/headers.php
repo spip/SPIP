@@ -81,7 +81,7 @@ function redirige_formulaire($url, $equiv = '') {
 		spip_log("redirige formulaire ajax: $url");
 		include_spip('inc/filtres');	
 		return 
-		"<script type='javascript'>window.location.replace('$url');</script>"
+		"<script type='javascript'>window.location='$url';</script>"
 		. http_img_pack('searching.gif','');
 	}
 }
