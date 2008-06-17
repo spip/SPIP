@@ -48,6 +48,11 @@ function copie_locale($source, $mode='auto') {
 		OR $mode=='force') {
 			$contenu = recuperer_page($source,false,false,_COPIE_LOCALE_MAX_SIZE);
 			if (!$contenu) return false;
+			if (preg_match(',[.](jpg|gif|png)$,i',$local) 
+			  AND strlen($contenu)>_COPIE_LOCALE_MAX_SIZE){
+			  spip_log ('ERREUR copie locale image '._DIR_RACINE.$local.' superieure a  '._COPIE_LOCALE_MAX_SIZE);
+			  return false;
+			}
 			ecrire_fichier(_DIR_RACINE.$local, $contenu);
 			spip_log ('ecrire copie locale '._DIR_RACINE.$local);
 			
