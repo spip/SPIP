@@ -1513,18 +1513,28 @@ function resolve_path($url) {
 // http://doc.spip.org/@suivre_lien
 function suivre_lien($url, $lien) {
 	# lien absolu ? ok
-	if (preg_match(',^([a-z0-9]+://|mailto:|javascript:),iS', $lien))
+	if (preg_match(',^(mailto|javascript):,iS', $lien))
 		return $lien;
+	if (preg_match(',^([a-z0-9]+://.*?)(/.*),iS', $lien, $r))
+		return $r[1].resolve_path($r[2]);
 
 	# lien relatif, il faut verifier l'url de base
-	if (preg_match(',^(.*?://[^/]+)(/.*?/?)?[^/]*$,S', $url, $regs)) {
+	if (preg_match(',^(.*?://[^/]+)(/.*?/?)?([^/#]*)(#.*)?$,S', $url, $regs)) {
 		$debut = $regs[1];
-		$dir = $regs[2];
+		$dir = !strlen($regs[2]) ? '/' : $regs[2];
+		$mot = $regs[3];
+		$hash = $regs[4];
 	}
-	if (substr($lien,0,1) == '/')
-		return $debut . resolve_path($lien);
-	else
-		return $debut . resolve_path($dir.$lien);
+	switch (substr($lien,0,1)) {
+		case '/':
+			return $debut . resolve_path($lien);
+		case '#':
+			return $debut . resolve_path($dir.$mot.$lien);
+		case '':
+			return $debut . resolve_path($dir.$mot.$hash);
+		default:
+			return $debut . resolve_path($dir.$lien);
+	}
 }
 
 // un filtre pour transformer les URLs relatives en URLs absolues ;
