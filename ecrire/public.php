@@ -209,6 +209,7 @@ else {
 	//
 	// Post-traitements et affichage final
 	//
+	page_base_href($page['texte']);
 
 	// (c'est ici qu'on fait var_recherche, tidy, boutons d'admin,
 	// cf. public/assembler.php)

@@ -457,6 +457,7 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 				xml_hack($page);
 				ob_end_clean();
 		}
+		page_base_href($texte);
 		// attention $contexte_inclus a pu changer pendant l'eval ci dessus
 		// on se refere a $page['contexte'] a la place
 		if (isset($page['contexte']['_pipeline'])
@@ -770,4 +771,21 @@ function xml_hack(&$page, $echap = false) {
 		$page['texte'] = str_replace("<\1?xml", '<'.'?xml', $page['texte']);
 }
 
+function page_base_href(&$texte){
+	if (defined('_SET_HTML_BASE') 
+	  AND $GLOBALS['profondeur_url']>0){
+		if (strpos($texte,'<base')===false){
+			include_spip('inc/filtres');
+			// ajouter un base qui reglera tous les liens relatifs
+			$base = url_absolue('./');
+			$texte = str_replace('<head>','<head><base href="'.$base.'" />',$texte);
+			// gerer le probleme des ancres
+			$base = $_SERVER['REQUEST_URI'];
+			if (strpos($texte,"href='#")!==false)
+				$texte = str_replace("href='#","href='$base#",$texte);
+			if (strpos($page['texte'],"href=\"#")!==false)
+				$texte = str_replace("href=\"#","href=\"$base#",$texte);
+		}
+	}
+}
 ?>
