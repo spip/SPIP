@@ -144,6 +144,9 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serve
 			. preg_replace(",\s+,".$u, "%", str_replace(array('%','_'), array('\%', '\_'), trim($recherche)))
 			. "%"
 		);
+		// eviter les parentheses qui interferent avec pcre par la suite (dans le preg_patch_all) s'il y a des reponses
+		$recherche = str_replace(array('(',')'),array('\(','\)'),$recherche);
+		
 		$preg = '/'.preg_replace(",\s+,".$u, ".+", trim($recherche)).'/' . $options['preg_flags'];
 	} else {
 		$methode = 'REGEXP';
