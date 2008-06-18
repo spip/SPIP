@@ -106,7 +106,8 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serve
 		AND $tables != '') {
 			$toutes = array();
 			foreach(explode(',', $tables) as $t)
-				$toutes[$t] = $liste[$t];
+				if (isset($liste[$t]))
+					$toutes[$t] = $liste[$t];
 			$tables = $toutes;
 			unset($toutes);
 		} else
@@ -129,7 +130,7 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serve
 
 	$results = array();
 
-	if (!strlen($recherche))
+	if (!strlen($recherche) OR !count($tables))
 		return array();
 
 	$preg = '/'.str_replace('/', '\\/', $recherche).'/' . $options['preg_flags'];
