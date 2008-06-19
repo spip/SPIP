@@ -772,18 +772,23 @@ function xml_hack(&$page, $echap = false) {
 }
 
 function page_base_href(&$texte){
-	if (defined('_SET_HTML_BASE') 
-	  AND $GLOBALS['profondeur_url']>0){
-		if (strpos($texte,'<base')===false){
-			include_spip('inc/filtres');
+	if (defined('_SET_HTML_BASE')
+	AND _SET_HTML_BASE
+	AND $GLOBALS['html']
+	AND $GLOBALS['profondeur_url']>0){
+		list($head, $body) = explode('</head>', $texte, 1);
+		if (strpos($head, '<base')===false){
+			include_spip('inc/filtres_mini');
 			// ajouter un base qui reglera tous les liens relatifs
 			$base = url_absolue('./');
-			$texte = str_replace('<head>','<head><base href="'.$base.'" />',$texte);
-			// gerer le probleme des ancres
+			if (($pos = strpos($head, '<head>')) !== false)
+				$head = substr_replace($head, "\n<base href=\"$base\" />", $pos+6, 0);
+			$texte = $head . (isset($body) ? '</head>'.$body : '');
+			// gerer les ancres
 			$base = $_SERVER['REQUEST_URI'];
 			if (strpos($texte,"href='#")!==false)
 				$texte = str_replace("href='#","href='$base#",$texte);
-			if (strpos($page['texte'],"href=\"#")!==false)
+			if (strpos($texte, "href=\"#")!==false)
 				$texte = str_replace("href=\"#","href=\"$base#",$texte);
 		}
 	}
