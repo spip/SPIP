@@ -63,8 +63,23 @@ div.table_page { margin-top: 1em; }
 #chemin li em { display: none; }
 #chemin li a { color: white; }
 #chemin, #chemin ul, #chemin li, #chemin li .bloc { display: block; float: #GET{left}; margin: 0; padding: 0; margin-top: 0px; padding-top: 0px; list-style-type: none;}
-#chemin li .bloc {	white-space: nowrap;	background: url([(#REM|sinon{[(#EVAL{ _DIR_IMG_PACK})]chemin-fond-[(#ENV{ltr})].gif}|image_sepia{666666}|extraire_attribut{src})]) center [(#GET{left})] no-repeat;	padding: 2px;	padding-#GET{left}: 10px;	padding-#GET{right}: 12px;	margin-#GET{left}: -5px; }
-#chemin li li .bloc { display: block; margin-top: 0px; background: url([(#REM|sinon{[(#EVAL{ _DIR_IMG_PACK})]chemin-fond-[(#ENV{ltr})].gif}|image_sepia{#ENV{couleur_foncee,3874b0}}|extraire_attribut{src})]) center [(#GET{left})] no-repeat;}
+#chemin li .bloc {	
+	white-space: nowrap;	
+	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee}|couleur_foncer)], center [(#GET{left})] no-repeat })]
+	padding: 2px;	
+	padding-#GET{left}: 10px;	
+	padding-#GET{right}: 12px;	
+	margin-#GET{left}: -5px;
+}
+#chemin li .bloc:hover {
+	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee}|couleur_foncer|couleur_foncer)], center [(#GET{left})] no-repeat })]
+}
+
+#chemin li li .bloc { 
+	display: block; 
+	margin-top: 0px; 
+	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee})], center [(#GET{left})] no-repeat })]
+}
 #chemin .aide {margin-top: 3px; margin-bottom: 15px;}
 
 h1 { color: #GET{foncee}; font-size:large; font-family: Arial, Sans, sans-serif; margin: 0.5em 0 0.25em 0; }
@@ -79,13 +94,18 @@ td { text-align: #GET{left}; }
 .fondl { margin-top: 0px; padding: 3px; background-color: #e4e4e4; border: 1px solid #GET{claire}; background-position: center bottom; float: none; font-size: 11px; }
 .fondo { 
 	margin-top: 0px; 
-	background-color: #GET{foncee}; 
-	background: url([(#REM|sinon{[(#EVAL{ _DIR_IMG_PACK})]fond-fondo.gif}|image_sepia{#ENV{couleur_foncee,3874b0}}|extraire_attribut{src})]) center center;
+	[(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|image_bg{[(#ENV{couleur_foncee})], center center })]
 	border: 1px outset #GET{claire};
 	float: none; 
 	color: #FFF; 
 	font-size: 11px;
 	font-weight: bold; 
+}
+input[type="submit"] {
+	[(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|image_bg{[(#ENV{couleur_foncee}|couleur_foncer)], center center })]
+	border: 1px outset [(#GET{couleur_foncee}|couleur_foncer)];
+	font-weight: bold;
+	margin-top: 3px;
 }
 .fondf { margin-top: 0px; background-color: #FFF; border-style: solid ; border-width: 1px; border-color: #e86519; color: #e86519; }
 
@@ -153,16 +173,14 @@ ol.formfx li.gauche {
 	margin-left: 120px;
 }
 ol.formfx li.gauche label {
-//	position: absolute;
-//	top: 0px;
-//	#GET{left}: 0px;
 	float: left;
 	margin-left: -120px;
 	
 	display: block;
 	width: 110px;
 	
-	background: url([(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|image_sepia{#ENV{couleur_claire,3874b0}}|extraire_attribut{src})]) center [(#GET{right})] no-repeat;
+	
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|image_bg{#ENV{couleur_claire,3874b0}, center [(#GET{right})] no-repeat })]
 
 	font-size: 9px;
 	color: #[(#GET{foncee}|couleur_foncer)];
@@ -176,8 +194,8 @@ ol.formfx li.gauche label {
 	padding-right: 5px;
 }
 ol.formfx li.gauche.obligatoire label {
-		background: url([(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|image_sepia{[(#GET{foncee}|couleur_foncer)]}|extraire_attribut{src})]) center [(#GET{right})] no-repeat;
-		color: white;
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-gauche-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee}|couleur_foncer)], center [(#GET{right})] no-repeat })]
+	color: white;
 }
 ol.formfx li.gauche input, ol.formfx li.gauche textarea {
 }
@@ -208,12 +226,14 @@ ol.formfx li.haut label {
 		padding-bottom: 9px;
 		padding-left: 5px;
 		padding-right: 5px;
-		background: url([(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_sepia{#ENV{couleur_claire,3874b0}}|extraire_attribut{src})]) bottom [(#GET{left})] no-repeat;
+
+		[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_claire})], bottom [(#GET{left})] no-repeat })]
+
 		color: #[(#GET{foncee}|couleur_foncer)];
 
 }
 ol.formfx li.haut.obligatoire label {
-		background: url([(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_sepia{[(#GET{foncee}|couleur_foncer)]}|extraire_attribut{src})]) bottom [(#GET{left})] no-repeat;
+		[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee}|couleur_foncer)], bottom [(#GET{left})] no-repeat })]
 		color: white;
 }
 ol.formfx fieldset {
@@ -224,8 +244,8 @@ ol.formfx fieldset {
 	padding-top: 5px;
 }
 ol.formfx fieldset legend {
-		
-		background: url([(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_sepia{#ENV{couleur_foncee,3874b0}}|extraire_attribut{src})]) bottom [(#GET{left})] no-repeat;
+
+		[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee})], bottom [(#GET{left})] no-repeat })]
 
 		font-size: 9px;
 		color: white;
@@ -248,8 +268,8 @@ table.spip_barre {
 }
 
 table.spip_barre a img { 
-	background: #GET{claire}; 
-	background: url([(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|image_sepia{#ENV{couleur_claire,edf3fe}}|extraire_attribut{src})]) center center;
+	[(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|image_bg{[(#ENV{couleur_claire})], center center })]
+
 	padding: 3px; border: 1px outset #GET{claire}; }
 table.spip_barre a:hover img { background: #FFF; border: 1px solid #CC9; }
 table.spip_barre input.barre { width: 99%; background: transparent; border: 0; color: #F57900; }
@@ -422,7 +442,7 @@ a.cellule-h-texte:hover { text-decoration: none; color: #000; border-#GET{right}
 div.onglet { font-family: Verdana, Arial, Sans, sans-serif; font-size: 11px; font-weight: bold; border: 1px solid #GET{foncee}; margin-#GET{right}: 3px; padding: 5px; background-color: #FFF; }
 div.onglet a { color: #GET{foncee}; }
 div.onglet_on { font-family: Verdana, Arial, Sans, sans-serif; font-size: 11px; font-weight: bold; border: 1px solid #GET{foncee}; margin-#GET{right}: 3px; padding: 5px; background-color: #GET{claire}; }
-div.onglet_on a, div.onglet_on a:hover { color: #GET{claire}; text-decoration: none; }
+div.onglet_on a, div.onglet_on a:hover { color: #GET{claire}; color: #GET{foncee}; text-decoration: none; }
 div.onglet_off { font-family: Verdana, Arial, Sans, sans-serif; font-size: 11px; font-weight: bold; border: 1px solid #GET{foncee}; margin-#GET{right}: 3px; padding: 5px; background-color: #GET{foncee}; color: #FFF; }
 
 .reliefblanc { background-image: url(#EVAL{ _DIR_IMG_PACK}wrapper.php?file=barre-blanc.gif); }

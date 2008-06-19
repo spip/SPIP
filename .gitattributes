@@ -345,6 +345,7 @@ dist/spip_pass.html -text
 dist/spip_style.css -text
 dist/style_prive.html -text
 dist/style_prive_defaut.css -text
+dist/style_prive_fonctions.php -text
 dist/style_prive_ie.html -text
 dist/style_svg.html -text
 dist/style_vieilles_def.html -text
