@@ -771,6 +771,7 @@ function xml_hack(&$page, $echap = false) {
 		$page['texte'] = str_replace("<\1?xml", '<'.'?xml', $page['texte']);
 }
 
+// http://doc.spip.org/@page_base_href
 function page_base_href(&$texte){
 	if (defined('_SET_HTML_BASE')
 	AND _SET_HTML_BASE
