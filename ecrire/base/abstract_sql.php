@@ -357,7 +357,7 @@ function sql_fetsel_cache(
 	$groupby = array(), $orderby = array(), $limit = '',
 	$having = array(), $serveur='', $option=true) {
 	static $cache_fetsel=array();
-	$req = sql_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, false);
+	$req = sql_get_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur);
 	if ($option==false) return $req;
 	$k = md5($req);
 	if (isset($cache_fetsel[$k])) return $cache_fetsel[$k];
