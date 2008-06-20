@@ -36,11 +36,11 @@ function inc_formater_auteur_dist($id_auteur, $row=NULL) {
 	  $row = sql_fetsel("*, (en_ligne<DATE_SUB(NOW(),INTERVAL 15 DAY)) AS parti", "spip_auteurs", "id_auteur=$id_auteur");
 
 	$vals = array();
-
-	$href = generer_url_ecrire("auteurs","statut=" . $row['statut']);
+	$statut = $row['statut'];
+	$href = generer_url_ecrire("auteurs","statut=$statut");
 	$vals[] = "<a href='$href'>" . bonhomme_statut($row) . '</a>';
 
-	if (($id_auteur == $connect_id_auteur) OR $row['parti'])
+	if (($id_auteur == $connect_id_auteur) OR $row['parti'] OR !in_array($statut, array('0minirezo', '1comite')))
 		$vals[]= '&nbsp;';
 	else	$vals[]= formater_auteur_mail($row, $id_auteur);
 
@@ -57,7 +57,7 @@ function inc_formater_auteur_dist($id_auteur, $row=NULL) {
 	else $vals[] =  "&nbsp;";
 
 	if (autoriser('modifier', 'auteur', $id_auteur, $row)) {
-	  $cpt = sql_countsel("spip_auteurs_articles AS lien, spip_articles AS articles", "lien.id_auteur=$id_auteur AND articles.id_article=lien.id_article AND articles.statut IN " . ($connect_statut == "0minirezo" ? "('prepa', 'prop', 'publie', 'refuse')" : "('prop', 'publie')"), "lien.id_auteur");
+	  $cpt = sql_countsel("spip_auteurs_articles AS lien, spip_articles AS articles", "lien.id_auteur=$id_auteur AND articles.id_article=lien.id_article AND articles.statut IN " . ($connect_statut == "0minirezo" ? "('prepa', 'prop', 'publie', 'refuse')" : "('prop', 'publie')"));
 	  $t = _T('info_article_2');
 	  $t1 = _T('info_1_article'); 
 	} else {
