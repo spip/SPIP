@@ -92,7 +92,7 @@ RewriteRule ^[^/\.]+(\.html)?$		spip.php?page=type_urls [QSA,E=url_propre:$0,L]
 # dans ecrire/mes_options.php
 # (fichier associe : ecrire/urls/arbo.php)
 
-RewriteRule ^[^\.]+$            spip.php?page=type_urls [QSA,E=url_propre:$0,L]
+RewriteRule ^[^\.]+(\.html)?$           spip.php?page=type_urls [QSA,E=url_propre:$0,L]
 
 # Fin URLs "arbo"
 ###
