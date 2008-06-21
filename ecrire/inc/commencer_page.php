@@ -250,20 +250,20 @@ function alertes_auteur($id_auteur) {
 // http://doc.spip.org/@auteurs_recemment_connectes
 function auteurs_recemment_connectes($id_auteur)
 {	
-	$res = '';
-	$result = sql_select("*", "spip_auteurs",  "id_auteur!=" .intval($id_auteur) . " AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE)");
+	$result = sql_select("*", "spip_auteurs",  "id_auteur!=" .intval($id_auteur) .  " AND statut IN ('1comite', '0minirezo') AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE)");
 
-	if (sql_count($result)) {
-		$formater_auteur = charger_fonction('formater_auteur', 'inc');
-		$res = "<b>"._T('info_en_ligne'). "&nbsp;</b>";
-		while ($row = sql_fetch($result)) {
-			list($s, $mail, $nom, $w, $p) = $formater_auteur($row['id_auteur']);
-			$res .= "$mail&nbsp;$nom, ";
-		}
-		$res = substr($res,0,-2);
+	if (!sql_count($result)) return '';
+	$formater_auteur = charger_fonction('formater_auteur', 'inc');
+	$res = '';
+	while ($row = sql_fetch($result)) {
+		$mail = formater_auteur_mail($row, $row['id_auteur']);
+		$res .= "$mail&nbsp;" . typo($row['nom']) . ", ";
 	}
 
-	return $res ? "<div class='messages' style='color:#666;'>$res</div>" : '';
+	return "<div class='messages' style='color:#666;'>" .
+	  "<b>"._T('info_en_ligne'). "&nbsp;</b>" .
+	  substr($res,0,-2) .
+	  "</div>";
 }
 
 
