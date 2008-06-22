@@ -195,12 +195,13 @@ function _generer_url_propre($type, $id_objet) {
 			$champ_titre = 'titre';
 			
 		// parent
-		$champ_parent = tester_variable('url_arbo_parents',
-			array(
+		$champ_parent = (isset($GLOBALS['url_arbo_parents']) AND !isset($_REQUEST['url_arbo_parents']))?
+			$GLOBALS['url_arbo_parents']
+			:array(
 			  'article'=>array('id_rubrique','rubrique'),
 			  'rubrique'=>array('id_parent','rubrique'),
 			  'breve'=>array('id_rubrique','rubrique'),
-			  'site'=>array('id_rubrique','rubrique')));
+			  'site'=>array('id_rubrique','rubrique'));
 		$sel_parent = isset($champ_parent[$type])?", O.".reset($champ_parent[$type]).' as parent':'';
 	
 		//  Recuperer une URL propre correspondant a l'objet.
