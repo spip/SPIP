@@ -26,8 +26,9 @@ function inc_meta_dist()
 	if ((_request('exec')!=='install' OR !test_espace_prive())
 	AND $new = jeune_fichier(_FILE_META, _META_CACHE_TIME)
 #   AND (@filemtime(_FILE_META) > @filemtime(_DIR_RESTREINT . '.svn/entries'))
-	AND lire_fichier(_FILE_META, $meta))
-		$GLOBALS['meta'] = @unserialize($meta);
+	AND $meta = @join('', file(_FILE_META))
+	AND $meta = @unserialize($meta))
+		$GLOBALS['meta'] = $meta;
 	if (isset($GLOBALS['meta']['touch']) && ($GLOBALS['meta']['touch']<time()-_META_CACHE_TIME))
 		unset($GLOBALS['meta']);
 	// sinon lire en base
