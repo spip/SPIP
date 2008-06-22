@@ -577,11 +577,12 @@ function liste_rubriques_auteur($id_auteur, $raz=false) {
 	if ($raz) unset($restreint[$id_auteur]);
 	elseif (isset($restreint[$id_auteur])) return $restreint[$id_auteur];
 
-	$q = sql_select("id_rubrique", "spip_auteurs_rubriques", "id_auteur=$id_auteur AND id_rubrique!=0");
-
+	$where = "id_auteur=$id_auteur AND id_rubrique!=0";
+	$table =  "spip_auteurs_rubriques";
 	// Recurrence sur les sous-rubriques
 	$rubriques = array();
-	while ($q AND sql_count($q)) {
+	while (true) {
+		$q = sql_select("id_rubrique", $table, $where);
 		$r = array();
 		while ($row = sql_fetch($q)) {
 			$id_rubrique = $row['id_rubrique'];
@@ -590,7 +591,9 @@ function liste_rubriques_auteur($id_auteur, $raz=false) {
 
 		// Fin de la recurrence : $rubriques est complet
 		if (!$r) break;
-		$q = sql_select('id_rubrique', 'spip_rubriques', "id_parent IN (".join(',',$r).") AND id_rubrique NOT IN (".join(',',$r).")");
+		$table = 'spip_rubriques';
+		$where = sql_in('id_parent', $r) . ' AND ' . 
+		  sql_in('id_rubrique', $r, 'NOT');
 	}
 
 	// Affecter l'auteur session le cas echeant

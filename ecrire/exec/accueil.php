@@ -282,8 +282,7 @@ function etat_base_accueil()
 	global $spip_display, $spip_lang_left, $connect_id_rubrique;
 
 	$where = count($connect_id_rubrique)
-		? ' id_rubrique IN ('.join(',', $connect_id_rubrique).')'
-		: '';
+	? sql_in('id_rubrique', $connect_id_rubrique)	: '';
 
 	$res = '';
 
@@ -351,7 +350,7 @@ function etat_base_accueil()
 		$res .= "</ul>";
 	}
 
-	$q = sql_select('COUNT(*) AS cnt, statut', 'spip_forum', "statut IN ('publie', 'prop')", 'statut', '','', "COUNT(*)<>0");
+	$q = sql_select('COUNT(*) AS cnt, statut', 'spip_forum', sql_in('statut', array('publie', 'prop')), 'statut', '','', "COUNT(*)<>0");
 
 	$cpt = array();
 	$cpt2 = array();
@@ -393,7 +392,7 @@ function accueil_liste_participants()
 {
 	global $spip_lang_left;
 
-	$q = sql_select("COUNT(*) AS cnt, statut", 'spip_auteurs', "statut IN (".  sql_quote($GLOBALS['liste_des_statuts']) . ")", 'statut', '','', "COUNT(*)<>0");
+	$q = sql_select("COUNT(*) AS cnt, statut", 'spip_auteurs', sql_in("statut", $GLOBALS['liste_des_statuts']), 'statut', '','', "COUNT(*)<>0");
 
 	$cpt = array();
 	while($row=sql_fetch($q)) $cpt[$row['statut']] = $row['cnt']; 
