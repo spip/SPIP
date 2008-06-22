@@ -26,7 +26,7 @@ function inc_meta_dist()
 	if ((_request('exec')!=='install' OR !test_espace_prive())
 	AND $new = jeune_fichier(_FILE_META, _META_CACHE_TIME)
 #   AND (@filemtime(_FILE_META) > @filemtime(_DIR_RESTREINT . '.svn/entries'))
-	AND $meta = @join('', file(_FILE_META))
+	AND $meta = spip_file_get_contents(_FILE_META)
 	AND $meta = @unserialize($meta))
 		$GLOBALS['meta'] = $meta;
 	if (isset($GLOBALS['meta']['touch']) && ($GLOBALS['meta']['touch']<time()-_META_CACHE_TIME))
