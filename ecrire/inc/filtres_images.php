@@ -2540,6 +2540,8 @@ function couleur_hsl2rgb ($H,$S,$L) {
 
 // http://doc.spip.org/@printWordWrapped
 function printWordWrapped($image, $top, $left, $maxWidth, $font, $couleur, $text, $textSize, $align="left", $hauteur_ligne = 0) {
+	static $memps = array();
+
 	// imageftbbox exige un float, et settype aime le double pour php < 4.2.0
 	settype($textSize, 'double');
 
@@ -2557,17 +2559,17 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $couleur, $text
 	AND function_exists("imagepstext")) {
 		// Traitement specifique pour polices PostScript (experimental)
 		$textSizePs = round(1.32 * $textSize);
-		if ($GLOBALS["font"]["$font"]) {
-			$fontps = $GLOBALS["font"]["$font"];
-		}
-		else  {
+		if (!$fontps = $memps["$font"]) {
 			$fontps = imagepsloadfont($font);
 			// Est-ce qu'il faut reencoder? Pas testable proprement, alors... 
 			// imagepsencodefont($fontps,find_in_path('polices/standard.enc'));
-			$GLOBALS["font"]["$font"] = $fontps;
+			$memps["$font"] = $fontps;
 		}
 	}
-	$words = explode(' ', strip_tags($text)); // split the text into an array of single words
+
+	$text = str_replace(array('~'), array(' '), $text);
+
+	$words = explode(' ', $text); // split the text into an array of single words
 	if ($hauteur_ligne == 0) 	$lineHeight = floor($textSize * 1.3);
 	else $lineHeight = $hauteur_ligne;
 
@@ -2595,14 +2597,12 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $couleur, $text
 	// Deux passes pour recuperer, d'abord, largeur_ligne
 	// necessaire pour alignement right et center
 	foreach ($lines as $line) {
-		$line = preg_replace("/~/", " ", $line);
 		$dimensions = imageftbbox($textSize, 0, $font, $line, array());
 		$largeur_ligne = $dimensions[2] - $dimensions[0];
 		if ($largeur_ligne > $largeur_max) $largeur_max = $largeur_ligne;
 	}
 
-	foreach ($lines as $line) {
-		$line = preg_replace("/~/", " ", $line);
+	foreach ($lines as $i => $line) {
 		$dimensions = imageftbbox($textSize, 0, $font, $line, array());
 		$largeur_ligne = $dimensions[2] - $dimensions[0];
 		if ($align == "right") $left_pos = $largeur_max - $largeur_ligne;
@@ -2615,11 +2615,8 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $couleur, $text
 			imagepstext ($image, "$line", $fontps, $textSizePs, $black, $grey2, $left + $left_pos, $top + $lineHeight * $i, 0, 0, 0, 16);
 		}
 		else imagefttext($image, $textSize, 0, $left + $left_pos, $top + $lineHeight * $i, $black, $font, trim($line), array());
-
-
-		$i++;
 	}
-	$retour["height"] = $height + round(0.3 * $hauteur_ligne);
+	$retour["height"] = $height;# + round(0.3 * $hauteur_ligne);
 	$retour["width"] = $largeur_max;
                  
 	return $retour;
@@ -2662,7 +2659,7 @@ function produire_image_typo() {
 	$text = str_replace("&nbsp;", "~", $texte);	
 	$text = preg_replace(",(\r|\n)+,ms", " ", $text);
 	include_spip('inc/charsets');
-	$text = html2unicode($text);
+	$text = html2unicode(strip_tags($text));
 	if (strlen($text) == 0) return "";
 
 	$taille = $variable["taille"];
@@ -2715,7 +2712,7 @@ function produire_image_typo() {
 		$largeur_reelle = $retour["width"];
 		$espace = $retour["espace"];
 		imagedestroy($imgbidon);
-		
+
 		$im = imageCreateTrueColor($largeur_reelle-$espace+(2*$padding), $hauteur+5+(2*$padding));
 		imagealphablending ($im, FALSE );
 		imagesavealpha ( $im, TRUE );
@@ -2723,12 +2720,9 @@ function produire_image_typo() {
 		// Creation de quelques couleurs
 		
 		$grey2 = imagecolorallocatealpha($im, hexdec("0x{".substr($couleur, 0,2)."}"), hexdec("0x{".substr($couleur, 2,2)."}"), hexdec("0x{".substr($couleur, 4,2)."}"), 127);
-		ImageFilledRectangle ($im,0,0,$largeur+(2*$padding),$hauteur+5+(2*$padding),$grey2);
+		ImageFilledRectangle ($im,0,0,$largeur_reelle+(2*$padding),$hauteur+5+(2*$padding),$grey2);
 		
-		// Le texte � dessiner
-		// Remplacez le chemin par votre propre chemin de police
-		//global $text;
-				
+		// Le texte a dessiner
 		printWordWrapped($im, $taille+5+$padding, $padding, $largeur, $font, $couleur, $text, $taille, $align, $hauteur_ligne);
 		
 		
