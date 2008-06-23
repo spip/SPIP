@@ -36,13 +36,12 @@ function executer_une_syndication() {
 
 	// On va tenter un site 'sus' ou 'off' de plus de 24h, et le passer en 'off'
 	// s'il echoue
-	$where = "syndication IN ('sus','off')
+	$where = sql_in("syndication", array('sus','off')) . "
 	AND statut='publie'
 	AND date_syndic < DATE_SUB(NOW(), INTERVAL
 	"._PERIODE_SYNDICATION_SUSPENDUE." MINUTE)";
-	$row = sql_fetsel("id_syndic", "spip_syndic", $where, '', "date_syndic", "1");
-	if ($row) {
-		$id_syndic = $row["id_syndic"];
+	$id_syndic = sql_getfetsel("id_syndic", "spip_syndic", $where, '', "date_syndic", "1");
+	if ($id_syndic) {
 		$res1 = syndic_a_jour($id_syndic, 'off');
 	} else $res1 = true;
 
@@ -50,10 +49,9 @@ function executer_une_syndication() {
 	$where = "syndication='oui'
 	AND statut='publie'
 	AND date_syndic < DATE_SUB(NOW(), INTERVAL "._PERIODE_SYNDICATION." MINUTE)";
-	$row = sql_fetsel("id_syndic", "spip_syndic", $where, '', "date_syndic", "1");
+	$id_syndic = sql_getfetsel("id_syndic", "spip_syndic", $where, '', "date_syndic", "1");
 
-	if ($row) {
-		$id_syndic = $row["id_syndic"];
+	if ($id_syndic) {
 		$res2 = syndic_a_jour($id_syndic, 'sus');
 	} else $res2 = true;
 
@@ -109,14 +107,14 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 
 	// moderation automatique des liens qui sont sortis du feed
 	if (count($faits) > 0) {
-		$faits = join(",", $faits);
+		$faits = sql_in("id_syndic_article", $faits, 'NOT');
 		if ($row['miroir'] == 'oui') {
-		  sql_update('spip_syndic_articles', array('statut'=>"'off'", 'maj'=>'maj'), "id_syndic=$now_id_syndic AND NOT (id_syndic_article IN ($faits))");
+			sql_update('spip_syndic_articles', array('statut'=>"'off'", 'maj'=>'maj'), "id_syndic=$now_id_syndic AND $faits");
 		}
 	// suppression apres 2 mois des liens qui sont sortis du feed
 		if ($row['oubli'] == 'oui') {
 
-			sql_delete('spip_syndic_articles', "id_syndic=$now_id_syndic AND maj < DATE_SUB(NOW(), INTERVAL 2 MONTH) AND date < DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOT (id_syndic_article IN ($faits))");
+			sql_delete('spip_syndic_articles', "id_syndic=$now_id_syndic AND maj < DATE_SUB(NOW(), INTERVAL 2 MONTH) AND date < DATE_SUB(NOW(), INTERVAL 2 MONTH) AND $faits");
 		}
 	}
 
