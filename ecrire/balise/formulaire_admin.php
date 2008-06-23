@@ -141,12 +141,12 @@ function admin_preview($id, $id_type)
 	include_spip('inc/autoriser');
 	if (!autoriser('previsualiser')) return '';
 
-	$notpub = "(statut IN ('prop', 'prive'))";
+	$notpub = sql_in("statut", array('prop', 'prive'));
 
 	if  ($id == 'article' AND $GLOBALS['meta']['post_dates'] != 'oui')
-		$notpub = "($notpub OR (statut='publie' AND date>NOW()))";
+		$notpub .= " OR (statut='publie' AND date>NOW())";
 
-	return sql_fetsel('1', table_objet_sql($id), id_table_objet($id)."=".$id_type." AND $notpub");
+	return sql_fetsel('1', table_objet_sql($id), id_table_objet($id)."=".$id_type." AND ($notpub)");
 }
 
 //
