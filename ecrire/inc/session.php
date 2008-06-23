@@ -33,7 +33,7 @@ $GLOBALS['rejoue_session'] = ''; # globale pour insertion de JS en fin de page
 function inc_session_dist($auteur=false)
 {
 	if (is_numeric($auteur))
-		return supprimer_sessions($auteur);
+		return supprimer_sessions($auteur, $auteur > 0);
 	else if (is_array($auteur))
 		return ajouter_session($auteur);
 	else
@@ -147,16 +147,22 @@ function ecrire_fichier_session($fichier, $auteur) {
 // et du meme coup des repertoires plats
 
 // http://doc.spip.org/@supprimer_sessions
-function supprimer_sessions($id_auteur) {
+function supprimer_sessions($id_auteur, $toutes=true) {
 
-	$dir = opendir(_DIR_SESSIONS);
-	$t = time()  - (48 * 3600);
-	while(($f = readdir($dir)) !== false) {
-		if (preg_match(",^\D*(\d+)_\w{32}\.php[3]?$,", $f, $regs)){
-			$f = _DIR_SESSIONS . $f;
-			if (($regs[1] == $id_auteur) OR ($t > filemtime($f)))
-				spip_unlink($f);
+	if ($toutes) {
+		$dir = opendir(_DIR_SESSIONS);
+		$t = time()  - (48 * 3600);
+		while(($f = readdir($dir)) !== false) {
+			if (preg_match(",^\D*(\d+)_\w{32}\.php[3]?$,", $f, $regs)){
+				$f = _DIR_SESSIONS . $f;
+				if (($regs[1] == $id_auteur) OR ($t > filemtime($f)))
+					spip_unlink($f);
+			}
 		}
+	}
+	else {
+		verifier_session();
+		spip_unlink(fichier_session($_COOKIE['spip_session'], $GLOBALS['meta']['alea_ephemere'], true));
 	}
 
 	// forcer le recalcul de la session courante
