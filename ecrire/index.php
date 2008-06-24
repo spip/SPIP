@@ -42,7 +42,7 @@ if (autoriser_sans_cookie($exec)) {
 		if (!is_string($var_auth)) {
 			include_spip('inc/headers');
 			$redirect = generer_url_public('login',
-			"url=" . rawurlencode(str_replace('&amp;', '&', self())), '&');
+			"url=" . rawurlencode(self('&',true)), '&');
 
 		// un echec au "bonjour" (login initial) quand le statut est
 		// inconnu signale sans doute un probleme de cookies
