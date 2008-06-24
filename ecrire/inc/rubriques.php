@@ -307,6 +307,7 @@ function calcul_branche ($generation) {
 	}
 }
 
+// http://doc.spip.org/@calcul_branche_in
 function calcul_branche_in ($generation, $table='', $not='') {
 	if (!$generation) return ($not ? '0=1' : '0=0');
 	$branche = $generation;
