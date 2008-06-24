@@ -49,7 +49,7 @@ function exec_rechercher_args($id, $type, $exclus, $rac, $do)
 
 	if ($exclus) {
 		include_spip('inc/rubriques');
-		$where_exclus = " AND id_rubrique NOT IN (".calcul_branche($exclus).")";
+		$where_exclus = ' AND ' . calcul_branche_in($exclus, '',  'NOT');
 	} else	$where_exclus = '';
 
 	$res = sql_select("id_rubrique, id_parent, titre", "spip_rubriques", "$where_id$where_exclus");
