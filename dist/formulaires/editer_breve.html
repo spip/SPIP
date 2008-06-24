@@ -17,7 +17,7 @@
 	    </li>
 
 	 	[<li class="editer_parent[ (#ENV**{erreurs}|table_valeur{id_rubrique}|oui)erreur]">
-			<label for="titreparent"><:entree_interieur_rubrique:> très longue et puissante</label>
+			<label for="titreparent"><:entree_interieur_rubrique:></label>
 			<em class='aide'>#AIDER{brevesrub}</em>
 			(#VAL|chercher_rubrique{#ENV{id_breve},#ENV{id_rubrique}|sinon{#ENV{id_parent}},'breve',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint},0,form_simple})
 	    </li>]
