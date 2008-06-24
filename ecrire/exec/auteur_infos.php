@@ -57,7 +57,8 @@ function auteur_infos_ok($auteur, $id_auteur, $echec, $new, $redirect)
 	global $connect_id_auteur;
 
 	$auteur_infos = charger_fonction('auteur_infos', 'inc');
-	$fiche = $auteur_infos($auteur, $new, $echec, _request('edit'), intval(_request('lier_id_article')), $redirect);
+	$fiche = $auteur_infos($auteur, $new, $echec, _request('edit'), intval(_request('lier_id_article')), $redirect, 'infos');
+	$form_auteur = $auteur_infos($auteur, $new, $echec, _request('edit'), intval(_request('lier_id_article')), $redirect, 'edit');
 
 		// Entete
 		if ($connect_id_auteur == $id_auteur) {
@@ -100,7 +101,7 @@ function auteur_infos_ok($auteur, $id_auteur, $echec, $new, $redirect)
 			      );
 		echo debut_droite('', true);
 
-		echo debut_cadre_relief("redacteurs-24.gif", true);
+		echo debut_cadre_relief("redacteurs-24.gif", true,'','','auteur-voir');
 
 		// $fiche est vide si on demande par exemple
 		// a creer un auteur alors que c'est interdit
@@ -117,6 +118,16 @@ function auteur_infos_ok($auteur, $id_auteur, $echec, $new, $redirect)
 				    'data'=>''));
 		
 		echo fin_cadre_relief(true);
+
+		// afficher le formulaire d'edition apres le cadre d'info
+		// pour pouvoir afficher soit les infos, soit ce formulaire (qui a deja son cadre)
+		if ($fiche)
+			echo debut_cadre_formulaire("",true,true),
+				$form_auteur,
+				fin_cadre_formulaire(true);
+			#echo $form_auteur;
+				
+		
 		echo auteurs_interventions($auteur);
 		echo fin_gauche(), fin_page();
 
@@ -147,10 +158,10 @@ function auteurs_interventions($auteur) {
 
 	include_spip('inc/message_select');
 
-	if (autoriser('voir', 'article')) $aff_art = array('prepa','prop','publie','refuse');
-	else if ($connect_id_auteur == $id_auteur) $aff_art = array('prepa','prop','publie');
-	else $aff_art = array('prop','publie');
-	$aff_art = sql_in('articles.statut', $aff_art);
+	if (autoriser('voir', 'article')) $aff_art = array('prepa','prop','publie','refuse'); 
+	else if ($connect_id_auteur == $id_auteur) $aff_art = array('prepa','prop','publie'); 
+	else $aff_art = array('prop','publie'); 
+	$aff_art = sql_in('articles.statut', $aff_art); 
 	echo afficher_objets('article',_T('info_articles_auteur'),  array('FROM' => "spip_articles AS articles LEFT JOIN spip_auteurs_articles AS lien ON lien.id_article=articles.id_article ",  "WHERE" => "lien.id_auteur=$id_auteur AND $aff_art",  'ORDER BY' => "articles.date DESC"));
 
 	// Messages de l'auteur et discussions en cours

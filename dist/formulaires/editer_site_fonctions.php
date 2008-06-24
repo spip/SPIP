@@ -23,7 +23,7 @@ function saisie_url_syndic($url_syndic,$name='url_syndic',$id='url_syndic'){
 		}
 		$res .= "</select>\n";
 	} else {
-		$res .= "<input type='text' class='formo' name='$name' id='$id' value=\"$url_syndic\" size='40' />\n";
+		$res .= "<input type='text' class='text' name='$name' id='$id' value=\"$url_syndic\" size='40' />\n";
 	}
 	return $res;
 }

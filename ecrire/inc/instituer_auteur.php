@@ -32,7 +32,7 @@ function inc_instituer_auteur_dist($auteur) {
 	} else
 		$statut = $auteur['statut'];
 
-	$ancre = "instituer_auteur-" . intval($id_auteur);
+	$ancre =  uniqid("instituer_auteur-" . intval($id_auteur).'-');
 
 	$menu = choix_statut_auteur($statut, $id_auteur, "$ancre-aff");
 

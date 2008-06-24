@@ -8,6 +8,8 @@ dist/formfx.css -text
 dist/formulaires/choix_mots.html -text
 dist/formulaires/editer_article.html -text
 dist/formulaires/editer_article.php -text
+dist/formulaires/editer_auteur.html -text
+dist/formulaires/editer_auteur.php -text
 dist/formulaires/editer_breve.html -text
 dist/formulaires/editer_breve.php -text
 dist/formulaires/editer_mot.html -text
@@ -130,6 +132,7 @@ dist/images/fond-calendrier.gif -text
 dist/images/fond-fondo.gif -text
 dist/images/fond-gris-anim.gif -text
 dist/images/fond-stats.gif -text
+dist/images/formulaire-editer.jpg -text
 dist/images/forum-admin-24.gif -text
 dist/images/forum-droite.gif -text
 dist/images/forum-droite_rtl.gif -text
@@ -319,6 +322,7 @@ dist/prive/contenu/breve.html -text
 dist/prive/contenu/rubrique.html -text
 dist/prive/contenu/site.html -text
 dist/prive/editer/article.html -text
+dist/prive/editer/auteur.html -text
 dist/prive/editer/breve.html -text
 dist/prive/editer/mot.html -text
 dist/prive/editer/rubrique.html -text

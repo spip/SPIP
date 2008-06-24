@@ -19,8 +19,8 @@ function action_editer_auteur_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 	$redirect = _request('redirect');
-	
-	if (!preg_match(",^\d+$,", $arg, $r)) {
+	// ni id, ni nouveau ?
+	if (!preg_match(",^\d+$,", $arg, $r) AND $arg!='oui') {
 		spip_log("action_editer_auteur_dist $arg pas compris");
 	} else {
 		list($id_auteur, $echec) = action_legender_auteur_post(
@@ -55,7 +55,12 @@ function action_editer_auteur_dist() {
 				else $redirect = rawurldecode($redirect);
 			}
 	}
-	redirige_par_entete($redirect);
+	if ($redirect) {
+		include_spip('inc/headers');
+		redirige_par_entete($redirect);
+	} else {
+		return array($id_auteur,'');
+	}
 }
 
 // http://doc.spip.org/@action_legender_auteur_post
