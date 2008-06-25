@@ -451,6 +451,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 		perdue et votre site ne fonctionnera plus.<br />{{R&eacute;installez les
 		fichiers de SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Mode de fonctionnement par d&eacute;faut des forums publics',
+'info_modifier_auteur' => 'Modifier l\'auteur :',
 'info_modifier_breve' => 'Modifier la br&egrave;ve :',
 'info_modifier_mot' => 'Modifier le mot-cl&eacute; :',
 'info_modifier_rubrique' => 'Modifier la rubrique :',
