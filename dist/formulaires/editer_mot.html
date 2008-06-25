@@ -12,8 +12,8 @@
 	    <li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
 			<label for="titre"><:info_titre_mot_cle:></label>
 			<em class="aide">#AIDER{mots}</em>
-			<input type='text' name='titre' id='titre' class='text' value="[(#ENV**{titre,#VAL{texte_nouveau_mot}|_T})]"
 			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{titre})</span>]
+			<input type='text' name='titre' id='titre' class='text' value="[(#ENV**{titre,#VAL{texte_nouveau_mot}|_T})]"
 			[(#ENV{titre,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
 	    </li>	
 	    <li class="editer_groupe_mot obligatoire[ (#ENV**{erreurs}|table_valeur{id_groupe}|oui)erreur]">
