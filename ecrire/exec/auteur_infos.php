@@ -122,10 +122,7 @@ function auteur_infos_ok($auteur, $id_auteur, $echec, $new, $redirect)
 		// afficher le formulaire d'edition apres le cadre d'info
 		// pour pouvoir afficher soit les infos, soit ce formulaire (qui a deja son cadre)
 		if ($fiche)
-			echo debut_cadre_formulaire("",true,true),
-				$form_auteur,
-				fin_cadre_formulaire(true);
-			#echo $form_auteur;
+			echo $form_auteur;
 				
 		
 		echo auteurs_interventions($auteur);

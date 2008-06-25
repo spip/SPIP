@@ -108,7 +108,6 @@ function breves_edit_ok($row, $id_breve, $id_rubrique, $new)
 	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''));
 	echo debut_droite('', true);
-	echo debut_cadre_formulaire("", true,true);
 
 	$contexte = array(
 	'icone_retour'=>$new=='oui'?'':icone_inline(_T('icone_retour'), generer_url_ecrire("breves_voir","id_breve=$id_breve"), "breve-24.gif", "rien.gif",$GLOBALS['spip_lang_right']),
@@ -121,7 +120,6 @@ function breves_edit_ok($row, $id_breve, $id_rubrique, $new)
 	$page = evaluer_fond("prive/editer/breve", $contexte, $connect);
 	echo $page['texte'];
 
-	echo fin_cadre_formulaire(true);
 	echo fin_gauche(), fin_page();
 
 }

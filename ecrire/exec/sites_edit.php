@@ -72,7 +72,6 @@ function exec_sites_edit_dist()
 	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'sites_edit','id_syndic'=>$id_syndic),'data'=>''));	  
 	echo debut_droite('', true);
-	echo debut_cadre_formulaire("", true,true);
 
 	$contexte = array(
 	'icone_retour'=>$new=='oui'?'':icone_inline(_T('icone_retour'), generer_url_ecrire("sites","id_syndic=$id_syndic"), "site-24.gif", "rien.gif",$GLOBALS['spip_lang_right']),
@@ -226,8 +225,6 @@ function exec_sites_edit_dist()
 				      $form,
 				      " method='post'"
 				      );*/
-
-	echo fin_cadre_formulaire(true);
 	
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'sites_edit','id_syndic'=>$id_syndic),'data'=>''));
 

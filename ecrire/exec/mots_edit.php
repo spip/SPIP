@@ -181,7 +181,6 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 	// --- Editer le mot ----
 	if ($autoriser_editer){
 		$out .= "<div id='mot-editer'".($editer?"":" class='none'").'>';
-		$out .= debut_cadre_formulaire('',true,true);
 		$contexte = array(
 			'icone_retour'=>icone_inline(_T('icone_retour'),($editer&$redirect)?rawurldecode($redirect): generer_url_ecrire('mots_edit','id_mot='.$id_mot, '&',true), "mot-cle-24.gif", "rien.gif",$GLOBALS['spip_lang_right'],false,($editer&$redirect)?"":" onclick=\"$('#mot-editer').hide();$('#mot-voir').show();return false;\""),
 			'redirect'=>$redirect?rawurldecode($redirect):generer_url_ecrire('mots_edit','id_mot='.$id_mot, '&',true),
@@ -195,7 +194,6 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 		);
 		$page = evaluer_fond("prive/editer/mot", $contexte, $connect);
 		$out .= $page['texte'];
-		$out .= fin_cadre_formulaire(true);
 		$out .= '</div>';
 		
 

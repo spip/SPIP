@@ -79,8 +79,6 @@ function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
 	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'rubriques_edit','id_rubrique'=>$id_rubrique),'data'=>''));	  
 	echo debut_droite('', true);
-	
-	echo debut_cadre_formulaire("", true,true);
 
 	$contexte = array(
 	'icone_retour'=>icone_inline(_T('icone_retour'), generer_url_ecrire("naviguer","id_rubrique=$id_rubrique"), $ze_logo, "rien.gif",$GLOBALS['spip_lang_right']),
@@ -92,7 +90,6 @@ function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
 	);
 	$page = evaluer_fond("prive/editer/rubrique", $contexte, $connect);
 	echo $page['texte'];
-	echo fin_cadre_formulaire(true);
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'rubriques_edit','id_rubrique'=>$id_rubrique),'data'=>''));	  
 
