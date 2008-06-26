@@ -2,7 +2,7 @@
 [(#REM) pour IE qui sinon se perd dans l'ajax !, ne pas retirer]<br class='spacer' />
 
 [(#ENV{login_forum_abo})
-<INCLURE{fond=formulaires/login_forum_abo}{inscription}{oubli}>
+<INCLURE{fond=formulaires/login_forum_abo}{env} />
 ]
 [(#ENV{editable})
 
@@ -77,7 +77,7 @@
 	</ol></fieldset>
 })]
 
-	<INCLURE{fond=formulaires/login_forum} />
+	<INCLURE{fond=formulaires/login_forum}{env} />
 
 	[(#REM) Piege a robots spammeurs ]
 	<p style="display: none;"><label for="nobot"><:antispam_champ_vide:></label>
