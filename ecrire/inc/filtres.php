@@ -1695,6 +1695,7 @@ function valeur_numerique($expr) {
 	return intval($a);
 }
 
+// http://doc.spip.org/@regledetrois
 function regledetrois($a,$b,$c)
 {
   return round($a*$b/$c);
