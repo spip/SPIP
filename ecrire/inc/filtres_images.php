@@ -150,7 +150,6 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 	if (!function_exists($f)) return false;
 	$ret["fonction_imagecreatefrom"] = $f;
 	$ret["fichier"] = $fichier;
-	$ret["fonction_imagecreatefrom"] = "imagecreatefrom".$term_fonction;
 	$ret["fonction_image"] = "image_image".$terminaison_dest;
 	$ret["fichier_dest"] = $fichier_dest;
 	$ret["format_source"] = $terminaison;

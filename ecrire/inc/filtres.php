@@ -1695,6 +1695,11 @@ function valeur_numerique($expr) {
 	return intval($a);
 }
 
+function regledetrois($a,$b,$c)
+{
+  return round($a*$b/$c);
+}
+
 // Fournit la suite de Input-Hidden correspondant aux parametres de
 // l'URL donnee en argument
 // http://doc.spip.org/@form_hidden

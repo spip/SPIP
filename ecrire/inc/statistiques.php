@@ -558,37 +558,8 @@ function statistiques_par_mois($entrees, $visites_today, $script){
 // http://doc.spip.org/@statistiques_echelle
 function statistiques_echelle($maxgraph)
 {
-  return "<div class='verdana1 spip_x-small'>"
- . "\n<table cellpadding='0' cellspacing='0' border='0'>"
- . "\n<tr><td style='height: 15' valign='top'>"
- . "<span class='arial1 spip_x-small'><b>" .round($maxgraph) ."</b></span>"
- . "</td></tr>"
- . "\n<tr><td valign='middle'  class='arial1 spip_x-small' style='color: #a0a0a0;height: 25px'>"
- . round(7*($maxgraph/8))
- . "</td></tr>"
- . "\n<tr><td style='height: 25px' valign='middle'>"
- . "<span class='arial1 spip_x-small'>" .round(3*($maxgraph/4)) ."</span>"
- . "</td></tr>"
- . "\n<tr><td valign='middle'  class='arial1 spip_x-small' style='color: #a0a0a0;height: 25px'>"
- . round(5*($maxgraph/8))
- . "</td></tr>"
- . "\n<tr><td style='height: 25px' valign='middle'>"
- . "<span class='arial1 spip_x-small'><b>" .round($maxgraph/2) ."</b></span>"
- . "</td></tr>"
- . "\n<tr><td valign='middle'  class='arial1 spip_x-small' style='color: #a0a0a0;height: 25px'>"
- . round(3*($maxgraph/8))
- . "</td></tr>"
- . "\n<tr><td style='height: 25px' valign='middle'>"
- . "<span class='arial1 spip_x-small'>" .round($maxgraph/4) ."</span>"
- . "</td></tr>"
- . "\n<tr><td valign='middle'  class='arial1 spip_x-small' style='color: #a0a0a0;height: 25px'>"
- . round(1*($maxgraph/8))
- . "</td></tr>"
- . "\n<tr><td style='height: 10px' valign='bottom'>"
- . "<span class='arial1 spip_x-small'><b>0</b></span>"
- . "</td>"
- . "</tr>"
- . "</table></div>";
+  include_spip('public/assembler');
+  return recuperer_fond('prive/stats/echelle', array('echelle' => $maxgraph));
 }
 	
 // http://doc.spip.org/@stat_logsvg
