@@ -26,7 +26,7 @@
 	  	[(#ENV**{config}|table_valeur{rubriques_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|?{' '})
 	    <li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
 			<label for="descriptif"><:texte_descriptif_rapide:></label>
-			<div class='commentaire'><:entree_contenu_rubrique:></div>
+			<div class='explication'><:entree_contenu_rubrique:></div>
 			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{desctiptif})</span>]
 			<textarea name='descriptif' id='descriptif' rows='2' cols='40'>[(#ENV**{descriptif})]</textarea>
 	    </li>]
@@ -36,7 +36,7 @@
 			<em class="aide">#AIDER{raccourcis}</em>
 			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{texte})</span>]
 			[(#ENV**{_texte_trop_long,''})]
-			<div class="commentaire"><:texte_enrichir_mise_a_jour:><em>#AIDER{raccourcis}</em></div>
+			<div class="explication"><:texte_enrichir_mise_a_jour:><em>#AIDER{raccourcis}</em></div>
 			<textarea name='texte' id='text_area' class='barre_inserer' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[
 			(#ENV**{browser_caret,''})]>[(#ENV**{texte})]</textarea>
 	    </li>]

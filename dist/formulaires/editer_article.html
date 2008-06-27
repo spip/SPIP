@@ -52,7 +52,7 @@
 				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{virtuel})</span>]
 				<input type='text' name='virtuel' id='virtuel' class='text' value="[(#ENV**{chapo}|replace{^=,''})]" />
 				<input type='hidden' name='changer_virtuel' value='oui' />
-				<p class='commentaire'><:texte_article_virtuel_reference:></p>
+				<p class='explication'><:texte_article_virtuel_reference:></p>
 		</li>]
 		[<li class="editer_chapo[ (#ENV**{erreurs}|table_valeur{chapo}|oui)erreur]">(#ENV**{chapo}|match{^=}|non)
 			<label for="chapo"><:info_chapeau:></label>
@@ -68,7 +68,7 @@
 			<em class="aide">#AIDER{arttexte}</em>
 			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{texte})</span>]
 			[(#ENV**{_texte_trop_long,''})]
-			<div class="commentaire"><:texte_enrichir_mise_a_jour:><em>#AIDER{raccourcis}</em></div>
+			<div class="explication"><:texte_enrichir_mise_a_jour:><em>#AIDER{raccourcis}</em></div>
 			[(#ENV**{config}|table_valeur{afficher_barre}|?{#VAL{text_area}|barre_typo{#LANG}})]
 			<textarea name='texte' id='text_area' class='barre_inserer'[
 			(#ENV**{browser_caret,''})]>[(#ENV**{texte})]</textarea>
