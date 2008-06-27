@@ -541,8 +541,10 @@ function spip_pg_countsel($from = array(), $where = array(),
 {
 	$c = !$groupby ? '*' : ('DISTINCT ' . (is_string($groupby) ? $groupby : join(',', $groupby)));
 	$r = spip_pg_select("COUNT($c)", $from, $where,'', '', $limit, $having, $serveur, $requeter);
-	if ($r && $requeter) list($r) = pg_fetch_array($r, NULL, PGSQL_NUM);
-	return $r;
+	if (!$requeter) return $r;
+	if (!$r) return 0;
+	list($c) = pg_fetch_array($r, NULL, PGSQL_NUM);
+	return $c;
 }
 
 // http://doc.spip.org/@spip_pg_count
