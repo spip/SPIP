@@ -383,6 +383,7 @@ function corriger_extension($ext) {
 // Cherche dans la base le type-mime du tableau representant le document
 // et corrige le nom du fichier ; retourne array(extension, nom corrige)
 // s'il ne trouve pas, retourne '' et le nom inchange
+// http://doc.spip.org/@fixer_extension_document
 function fixer_extension_document($doc) {
 	$extension = '';
 	$name = $doc['name'];
