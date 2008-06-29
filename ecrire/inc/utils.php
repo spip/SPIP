@@ -361,8 +361,8 @@ function self($amp = '&amp;', $root = false) {
 	if ($amp != '&amp;')
 		$url = str_replace('&amp;', $amp, $url);
 
-	// Si c'est vide, donner './'
-	$url = preg_replace(',^$,', './', $url);
+	// Si ca demarre par ? ou vide, donner './'
+	$url = preg_replace(',^([?].*)$,', './\1', $url);
 
 	return $url;
 }
