@@ -3,7 +3,7 @@
 	[<p class="formulaire_message">(#ENV*{message_ok})</p>]
 	[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
-	<form method='post' action='#ENV{action}' enctype='multipart/form-data' class='noajax'>
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data' class='noajax'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
@@ -25,7 +25,7 @@
 	    <li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
 			<label for="descriptif"><:texte_descriptif_rapide:></label>
 			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{desctiptif})</span>]
-			<textarea name='descriptif' id='descriptif' rows='4'>[(#ENV**{descriptif})]</textarea>
+			<textarea name='descriptif' id='descriptif' rows='4' cols='40'>[(#ENV**{descriptif})]</textarea>
 	    </li>
 	    <li class="editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
 			<label for="text_area"><:info_texte_explicatif:></label>
@@ -33,13 +33,13 @@
 			[(#ENV**{_texte_trop_long,''})]
 			<div class="explication"><:texte_enrichir_mise_a_jour:><em>#AIDER{raccourcis}</em></div>
 			[(#ENV**{config}|table_valeur{afficher_barre}|?{#VAL{text_area}|barre_typo{#LANG}})]
-			<textarea name='texte' id='text_area' class='barre_inserer' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]'[
+			<textarea name='texte' id='text_area' class='barre_inserer' cols='40' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]'[
 			(#ENV**{browser_caret,''})]>[(#ENV**{texte})]</textarea>
 	    </li>
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
 	  <p class="boutons"><input class='submit' type='submit' value='<:bouton_enregistrer:>' /></p>
-	</form>
+	</div></form>
 	]
 </div>

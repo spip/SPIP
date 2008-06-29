@@ -49,7 +49,7 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 	if ($editer&$redirect) {
 		$retour = rawurldecode($redirect);
 	} elseif ($id_auteur){
-		$retour = generer_url_ecrire('auteur_infos','id_auteur='.$id_auteur, '&',true);
+		$retour = generer_url_ecrire('auteur_infos','id_auteur='.$id_auteur, false, true);
 	} else {
 		$retour = "";
 	}

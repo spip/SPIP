@@ -3,7 +3,7 @@
 	[<p class="formulaire_message">(#ENV*{message_ok})</p>]
 	[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
-	<form method='post' action='#ENV{action}' enctype='multipart/form-data' class='noajax'>
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data' class='noajax'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
@@ -18,7 +18,7 @@
 	    </li>
 	
 	 	[<li class="editer_parent[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]">
-			<label for="titreparent"><:titre_cadre_interieur_rubrique:></label>
+			<label for="id_parent"><:titre_cadre_interieur_rubrique:></label>
 			<em class="aide">#AIDER{rubrub}</em>
 			(#VAL|chercher_rubrique{[(#ENV{id_rubrique}|intval)],#ENV{id_parent},'rubrique',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint},0,form_simple})
 	    </li>]
@@ -44,6 +44,6 @@
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
 	  <p class="boutons"><input class='submit' type='submit' value='<:bouton_enregistrer:>' /></p>
-	</form>
+	</div></form>
 	]
 </div>

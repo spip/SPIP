@@ -2428,6 +2428,8 @@ function chercher_rubrique($msg,$id, $id_parent, $type, $id_secteur, $restreint,
 	include_spip('inc/autoriser');
 	if (intval($id) && !autoriser('modifier', $type, $id))
 		return "";
+	if (!sql_countsel('spip_rubriques'))
+		return "";
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
 	$form = $chercher_rubrique($id_parent, $type, $restreint);
 

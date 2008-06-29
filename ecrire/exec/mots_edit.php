@@ -182,8 +182,8 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 	if ($autoriser_editer){
 		$out .= "<div id='mot-editer'".($editer?"":" class='none'").'>';
 		$contexte = array(
-			'icone_retour'=>icone_inline(_T('icone_retour'),($editer&$redirect)?rawurldecode($redirect): generer_url_ecrire('mots_edit','id_mot='.$id_mot, '&',true), "mot-cle-24.gif", "rien.gif",$GLOBALS['spip_lang_right'],false,($editer&$redirect)?"":" onclick=\"$('#mot-editer').hide();$('#mot-voir').show();return false;\""),
-			'redirect'=>$redirect?rawurldecode($redirect):generer_url_ecrire('mots_edit','id_mot='.$id_mot, '&',true),
+			'icone_retour'=>icone_inline(_T('icone_retour'),($editer&$redirect)?rawurldecode($redirect): generer_url_ecrire('mots_edit','id_mot='.$id_mot,false,true), "mot-cle-24.gif", "rien.gif",$GLOBALS['spip_lang_right'],false,($editer&$redirect)?"":" onclick=\"$('#mot-editer').hide();$('#mot-voir').show();return false;\""),
+			'redirect'=>$redirect?rawurldecode($redirect):generer_url_ecrire('mots_edit','id_mot='.$id_mot,'&',true),
 			'titre'=>$titre_mot,
 			'new'=>$new == "oui"?$new:$id_mot,
 			'id_groupe'=>$id_groupe,
