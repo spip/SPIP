@@ -393,6 +393,7 @@ function generer_onclic_ajax($url, $idom, $val)
 // http://doc.spip.org/@avoir_visiteurs
 function avoir_visiteurs($past=false) {
 	if ($GLOBALS['meta']["forums_publics"] == 'abo') return true;
+	if ($GLOBALS['meta']["accepter_visiteurs"] <> 'non') return true;
 	if (sql_countsel('spip_articles', "accepter_forum='abo'"))return true;
 	if (!$past) return false;
 	return sql_countsel('spip_auteurs',  "statut NOT IN ('0minirezo','1comite', 'nouveau', '5poubelle')");
