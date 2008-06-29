@@ -26,8 +26,8 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 
 	$id_auteur = intval($auteur['id_auteur']);
 
-	if (!autoriser('modifier', 'auteur', $id_auteur) OR $quoi=='infos') {
-		if ($quoi!='edit'){
+	if ((!$auth = autoriser('modifier', 'auteur', $id_auteur)) OR $quoi=='infos') {
+		if ($quoi!='edit' AND $auth){
 			// Formulaire de statut
 			// Calculer le bloc de statut (modifiable ou non selon)
 			$instituer_auteur = charger_fonction('instituer_auteur', 'inc');
@@ -44,10 +44,18 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 	
 	// Elaborer le formulaire
 	$corps = "<div id='auteur_infos_edit'>\n";
-	//$corps .= debut_cadre_formulaire("",true);
-		//. debut_cadre_formulaire('fiche-perso-24.gif',true, "", _T("icone_informations_personnelles"));
+
+	$editer = ($new=='oui');
+	if ($editer&$redirect) {
+		$retour = rawurldecode($redirect);
+	} elseif ($id_auteur){
+		$retour = generer_url_ecrire('auteur_infos','id_auteur='.$id_auteur, '&',true);
+	} else {
+		$retour = "";
+	}
+	
 	$contexte = array(
-		'icone_retour'=>icone_inline(_T('icone_retour'),($editer&$redirect)?rawurldecode($redirect): generer_url_ecrire('auteur_infos','id_auteur='.$id_auteur, '&',true), "auteur-24.gif", "rien.gif",$GLOBALS['spip_lang_right'],false,($editer&$redirect)?"":" onclick=\"jQuery('#auteur_infos_edit').hide();jQuery('#auteur-voir').show();return false;\""),
+		'icone_retour'=>($retour)?icone_inline(_T('icone_retour'),$retour,"auteur-24.gif","rien.gif",$GLOBALS['spip_lang_right'],false,($editer&$redirect)?"":" onclick=\"jQuery('#auteur_infos_edit').hide();jQuery('#auteur-voir').show();return false;\""):"",
 		'redirect'=>$redirect?rawurldecode($redirect):generer_url_ecrire('auteur_infos','id_auteur='.$id_auteur, '&',true),
 		'titre'=>($auteur['nom']?$auteur['nom']:_T('nouvel_auteur')),
 		'new'=>$new == "oui"?$new:$id_auteur,
