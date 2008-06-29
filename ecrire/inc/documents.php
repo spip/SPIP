@@ -492,16 +492,21 @@ function lister_les_documents_orphelins() {
 		ON d.id_document=b.id_document
 	LEFT JOIN spip_documents_rubriques AS r
 		ON d.id_document=r.id_document
+	LEFT JOIN spip_documents_forum AS f
+		ON d.id_document=f.id_document
 	LEFT JOIN spip_articles AS aa
 		ON aa.id_article=a.id_article
 	LEFT JOIN spip_breves AS bb
 		ON bb.id_breve=b.id_breve
 	LEFT JOIN spip_rubriques AS rr
 		ON rr.id_rubrique=r.id_rubrique
+	LEFT JOIN spip_forum AS ff
+		ON ff.id_forum=f.id_forum
 	",
 	"(a.id_article IS NULL OR aa.id_article IS NULL)
 	AND (b.id_breve IS NULL OR bb.id_breve IS NULL)
 	AND (r.id_rubrique IS NULL OR rr.id_rubrique IS NULL)
+	AND (f.id_forum IS NULL OR ff.id_forum IS NULL)
 	");
 
 	$orphelins = array();

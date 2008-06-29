@@ -243,7 +243,10 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 		if ($id_lien AND $id
 		AND preg_match('/^[a-z0-9_]+$/i', $type_lien) # securite
 		) {
-			sql_insertq("spip_documents_".$type_lien."s",
+			$table = ($type_lien == 'forum')
+				? 'spip_documents_forum'
+				: 'spip_documents_'.$type_lien.'s';
+			sql_insertq($table,
 				    array('id_document' => $id,
 					  'id_'.$type_lien => $id_lien));
 		} else spip_log("Pb d'insertion $id_lien $type_lien");
@@ -361,6 +364,7 @@ function traite_svg($file)
 // (a passer dans ecrire/base/typedoc)
 // A noter : une extension 'pdf ' passe dans la requete de controle
 // mysql> SELECT * FROM spip_types_documents WHERE extension="pdf ";
+// fonction plus ou moins obsolete depuis [->@fixer_extension_document]
 // http://doc.spip.org/@corriger_extension
 function corriger_extension($ext) {
 	$ext = preg_replace(',[^a-z0-9],', '', $ext);
@@ -374,6 +378,27 @@ function corriger_extension($ext) {
 	default:
 		return $ext;
 	}
+}
+
+// Cherche dans la base le type-mime du tableau representant le document
+// et corrige le nom du fichier ; retourne array(extension, nom corrige)
+// s'il ne trouve pas, retourne '' et le nom inchange
+function fixer_extension_document($doc) {
+	$extension = '';
+	$name = $doc['name'];
+	if ($t = sql_fetsel("extension", "spip_types_documents",
+	"mime_type=" . sql_quote($doc['type']))) {
+		$extension = $t['extension'];
+		$name = preg_replace(',[.][^.]*$,', '', $doc['name']).'.'.$extension;
+	}
+	else if (preg_match(',[.]([^.]+)$,', $name, $r)
+	AND $t = sql_fetsel("extension", "spip_types_documents",
+	"extension=" . sql_quote(strtolower($r[1])))) {
+		$extension = $t['extension'];
+		$name = preg_replace(',[.][^.]*$,', '', $doc['name']).'.'.$extension;
+	}
+
+	return array($extension,$name);
 }
 
 // Afficher un formulaire de choix: decompacter et/ou garder tel quel

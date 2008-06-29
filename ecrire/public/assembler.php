@@ -194,16 +194,6 @@ function public_assembler_dist($fond, $connect='') {
 		$l = lang_select($_GET['lang']);
 	}
 
-	// Si envoi pour un forum, enregistrer puis rediriger
-	// old style, ne devrait plus etre utilise, sauf sur de vieux formulaires de forum !
-	// doit disparaitre pour raison de securite
-	/*if (isset($_POST['confirmer_forum'])
-	OR (isset($_POST['ajouter_mot']) AND $GLOBALS['afficher_texte']=='non')) {
-		include_spip('inc/headers');
-		$forum_insert = charger_fonction('forum_insert', 'inc');
-		redirige_par_entete($forum_insert());
-	}*/
-	
 	traiter_formulaires_dynamiques();
 	
 	// si signature de petition, l'enregistrer avant d'afficher la page

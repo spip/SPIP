@@ -4,6 +4,7 @@
 [(#ENV{login_forum_abo})
 <INCLURE{fond=formulaires/login_forum_abo}{env} />
 ]
+
 [(#ENV{editable})
 
 	[<form action="#ENV{url}#formulaire_forum" method="post" class='noajax'><div>
@@ -22,7 +23,7 @@
 	(#ENV*{erreurs}|table_valeur{previsu})
 	</div></form>]
 
-<form action="#ENV{url}#formulaire_forum" method="post" class='ajax'><div>
+<form action="#ENV{url}#formulaire_forum" method="post" class='ajax' enctype='multipart/form-data'><div>
 [(#ACTION_FORMULAIRE{#ENV{url_post}})]
 [<input type="hidden" name="arg" value="(#ENV{arg})" />]
 [<input type="hidden" name="hash" value="(#ENV{hash})" />]
@@ -76,6 +77,37 @@
 	<input class='text' type="text" name="url_site" id="url_site" style="text-align: left;" dir="ltr" size="40" value="[(#ENV{url_site})]" /></li>
 	</ol></fieldset>
 })]
+
+[
+	<fieldset>
+	<legend>Ajouter un document</legend><ol>
+	<li>
+	<input type="hidden" name="cle_ajouter_document" value="(#ENV{cle_ajouter_document})" />
+	[<div id="ajouter_document_up">(#ENV{ajouter_document})
+	<input type='checkbox' name='suprimer_document_ajoute' id='supprimer_document_ajoute'>
+	<label for="supprimer_document_ajoute"><:lien_supprimer:></label>
+	</div>]
+	<div>
+	[<label for="ajouter_document">(#ENV{formats_documents_forum}|join{', '})</label>]
+	<input class='file' type="file" name="ajouter_document" id="ajouter_document"[
+	accept="(#ENV{formats_documents_forum}|join{'|'})"] />
+	</div>
+
+	<script type='text/javascript'>
+	jQuery('#ajouter_document_up')
+	.next()
+		.hide()
+	.prev()
+	.find(':checkbox')
+	.bind('change', function(){
+		jQuery('#ajouter_document_up').hide().next().show();
+	})
+	;
+	</script>
+	[<div class='erreur'>(#ENV**{erreurs}|table_valeur{document_forum})</div>]
+	</li>
+	</ol></fieldset>
+]
 
 	<INCLURE{fond=formulaires/login_forum}{env} />
 
