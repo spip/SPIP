@@ -465,7 +465,7 @@ function tester_rubrique_vide($id_rubrique) {
 	if (sql_countsel('spip_syndic', "id_rubrique=$id_rubrique AND (statut='publie' OR statut='prop')"))
 		return false;
 
-	if (sql_countsel('spip_documents_rubriques', "id_rubrique=$id_rubrique"))
+	if (sql_countsel('spip_documents_liens', "id_rubrique=$id_rubrique"))
 		return false;
 
 	return true;

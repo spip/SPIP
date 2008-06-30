@@ -24,13 +24,6 @@ include_spip('inc/date');
 // http://doc.spip.org/@inc_legender_dist
 function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre, $deplier=false) {
 
-	$table = 'spip_documents_' . $type . 's';
-	if (!id_table_objet($table)) {
-		spip_log("legender: $type table inconnue");
-		$type = 'article';
-		$table = 'spip_documents_' . $type . 's';
-	}
-	$prim = 'id_' . $type;
 	// premier appel
 	if ($document) {
 		$flag = $deplier;
@@ -39,7 +32,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	if ($id_document) {
 		$document = sql_fetsel("*", "spip_documents", "id_document = " . intval($id_document));
 
-		$document['vu'] = sql_getfetsel("vu", $table, "$prim=" . intval($id) ." AND id_document=".intval($id_document));
+		$document['vu'] = sql_getfetsel("vu", 'spip_documents_liens', "id_$type=" . intval($id) ." AND id_document=".intval($id_document));
 
 		if (!$document['vu']) $document['vu'] = 'non';
 		$flag = 'ajax';

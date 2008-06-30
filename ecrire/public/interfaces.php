@@ -227,7 +227,7 @@ global $tables_jointures;
 
 $tables_jointures['spip_articles'][]= 'mots_articles';
 $tables_jointures['spip_articles']['id_auteur']= 'auteurs_articles';
-$tables_jointures['spip_articles'][]= 'documents_articles';
+$tables_jointures['spip_articles'][]= 'documents_liens';
 $tables_jointures['spip_articles'][]= 'mots';
 $tables_jointures['spip_articles'][]= 'signatures';
 $tables_jointures['spip_articles'][]= 'petitions';
@@ -235,23 +235,20 @@ $tables_jointures['spip_articles'][]= 'petitions';
 $tables_jointures['spip_auteurs'][]= 'auteurs_articles';
 
 $tables_jointures['spip_breves'][]= 'mots_breves';
-$tables_jointures['spip_breves'][]= 'documents_breves';
+$tables_jointures['spip_breves'][]= 'documents_liens';
 $tables_jointures['spip_breves'][]= 'mots';
 
-$tables_jointures['spip_documents'][]= 'documents_articles';
-$tables_jointures['spip_documents'][]= 'documents_rubriques';
-$tables_jointures['spip_documents'][]= 'documents_breves';
-$tables_jointures['spip_documents'][]= 'documents_forum';
+$tables_jointures['spip_documents'][]= 'documents_liens';
 $tables_jointures['spip_documents'][]= 'mots_documents';
 $tables_jointures['spip_documents'][]= 'types_documents';
 $tables_jointures['spip_documents'][]= 'mots';
 
 $tables_jointures['spip_forum'][]= 'mots_forum';
 $tables_jointures['spip_forum'][]= 'mots';
-$tables_jointures['spip_forum'][]= 'documents_forum';
+$tables_jointures['spip_forum'][]= 'documents_liens';
 
 $tables_jointures['spip_rubriques'][]= 'mots_rubriques';
-$tables_jointures['spip_rubriques'][]= 'documents_rubriques';
+$tables_jointures['spip_rubriques'][]= 'documents_liens';
 $tables_jointures['spip_rubriques'][]= 'mots';
 
 $tables_jointures['spip_syndic'][]= 'mots_syndic';

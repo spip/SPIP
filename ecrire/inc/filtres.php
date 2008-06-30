@@ -1989,7 +1989,7 @@ function match($texte, $expression, $modif="UimsS") {
 }
 
 // filtre replace pour faire des operations avec expression reguliere
-// [(#TEXTE|replace{^ceci$,cela,Uims})]
+// [(#TEXTE|replace{^ceci$,cela,UimsS})]
 // http://doc.spip.org/@replace
 function replace($texte, $expression, $replace='', $modif="UimsS") {
 	$expression=str_replace("\/","/", $expression);

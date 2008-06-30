@@ -73,8 +73,10 @@ function insere_2_init($request) {
 	$t[]= 'spip_mots_syndic';
 	$t[]= 'spip_mots_forum';
 	$t[]= 'spip_mots_documents';
-	$t[]= 'spip_documents_articles';
+	$t[]= 'spip_documents_articles';  # spip_documents_liens ??
 	$t[]= 'spip_documents_rubriques';
+	## il en manque ici (spip_documents_breves etc)
+	$t[]= 'spip_documents_liens';
 
 	return $t;
 }

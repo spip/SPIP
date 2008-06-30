@@ -243,10 +243,7 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 		if ($id_lien AND $id
 		AND preg_match('/^[a-z0-9_]+$/i', $type_lien) # securite
 		) {
-			$table = ($type_lien == 'forum')
-				? 'spip_documents_forum'
-				: 'spip_documents_'.$type_lien.'s';
-			sql_insertq($table,
+			sql_insertq('spip_documents_liens',
 				    array('id_document' => $id,
 					  'id_'.$type_lien => $id_lien));
 		} else spip_log("Pb d'insertion $id_lien $type_lien");

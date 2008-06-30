@@ -145,12 +145,12 @@ function optimiser_base_disparus($attente = 86400) {
 	# les liens des documents qui sont dans une id_rubrique inexistante
 	# (meme remarque)
 	$res = sql_select("documents_rubriques.id_rubrique AS id",
-		      "spip_documents_rubriques AS documents_rubriques
+		      "spip_documents_liens AS documents_rubriques
 		        LEFT JOIN spip_rubriques AS rubriques
 		          ON documents_rubriques.id_rubrique=rubriques.id_rubrique",
 			"rubriques.id_rubrique IS NULL");
 
-	$n+= optimiser_sansref('spip_documents_rubriques', 'id_rubrique', $res);
+	$n+= optimiser_sansref('spip_documents_liens', 'id_rubrique', $res);
 
 	# les liens des mots affectes a une id_rubrique inexistante
 	$res = sql_select("mots_rubriques.id_rubrique AS id",
@@ -178,12 +178,12 @@ function optimiser_base_disparus($attente = 86400) {
 
 	# les liens de documents d'articles effaces
 	$res = sql_select("documents_articles.id_article AS id",
-		      "spip_documents_articles AS documents_articles
+		      "spip_documents_liens AS documents_articles
 		        LEFT JOIN spip_articles AS articles
 		          ON documents_articles.id_article=articles.id_article",
 			"articles.id_article IS NULL");
 
-	$n+= optimiser_sansref('spip_documents_articles', 'id_article', $res);
+	$n+= optimiser_sansref('spip_documents_liens', 'id_article', $res);
 
 	# les liens de mots affectes a des articles effaces
 	$res = sql_select("mots_articles.id_article AS id",
@@ -213,12 +213,12 @@ function optimiser_base_disparus($attente = 86400) {
 
 	# les liens de documents sur des breves effacees
 	$res = sql_select("documents_breves.id_breve AS id",
-		      "spip_documents_breves AS documents_breves
+		      "spip_documents_liens AS documents_breves
 		        LEFT JOIN spip_breves AS breves
 		          ON documents_breves.id_breve=breves.id_breve",
 			"breves.id_breve IS NULL");
 
-	$n+= optimiser_sansref('spip_documents_breves', 'id_breve', $res);
+	$n+= optimiser_sansref('spip_documents_liens', 'id_breve', $res);
 
 	# les liens de mots affectes a des breves effacees
 	$res = sql_select("mots_breves.id_breve AS id",

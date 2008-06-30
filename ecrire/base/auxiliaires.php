@@ -100,7 +100,21 @@ $spip_auteurs_messages_key = array(
 		"PRIMARY KEY"	=> "id_auteur, id_message",
 		"KEY id_message"	=> "id_message");
 
+$spip_documents_liens = array(
+		"id_document"	=> "bigint(21) DEFAULT '0' NOT NULL",
+		"id_article"	=> "bigint(21) NULL",
+		"id_breve"	=> "bigint(21) NULL",
+		"id_rubrique"	=> "bigint(21) NULL",
+		"id_auteur"	=> "bigint(21) NULL",
+		"id_forum"	=> "bigint(21) NULL",
+		"vu"	=> "ENUM('non', 'oui') DEFAULT 'non' NOT NULL");
 
+$spip_documents_liens_key = array(
+		"PRIMARY KEY"		=> "id_document,id_article,id_breve,id_rubrique,id_auteur,id_forum",
+		"KEY id_document"	=> "id_document");
+
+
+/*
 $spip_documents_articles = array(
 		"id_document"	=> "bigint(21) DEFAULT '0' NOT NULL",
 		"id_article"	=> "bigint(21) DEFAULT '0' NOT NULL",
@@ -136,6 +150,7 @@ $spip_documents_forum = array(
 $spip_documents_forum_key = array(
 		"PRIMARY KEY"		=> "id_forum, id_document",
 		"KEY id_document"	=> "id_document");
+*/
 
 $spip_mots_articles = array(
 		"id_mot"	=> "bigint(21) DEFAULT '0' NOT NULL",
@@ -261,6 +276,10 @@ $tables_auxiliaires['spip_auteurs_rubriques'] = array(
 $tables_auxiliaires['spip_auteurs_messages'] = array(
 	'field' => &$spip_auteurs_messages,
 	'key' => &$spip_auteurs_messages_key);
+$tables_auxiliaires['spip_documents_liens'] = array(
+	'field' => &$spip_documents_liens,
+	'key' => &$spip_documents_liens_key);
+/*
 $tables_auxiliaires['spip_documents_articles'] = array(
 	'field' => &$spip_documents_articles,
 	'key' => &$spip_documents_articles_key);
@@ -273,6 +292,7 @@ $tables_auxiliaires['spip_documents_breves'] = array(
 $tables_auxiliaires['spip_documents_forum'] = array(
 	'field' => &$spip_documents_forum,
 	'key' => &$spip_documents_forum_key);
+*/
 $tables_auxiliaires['spip_mots_articles'] = array(
 	'field' => &$spip_mots_articles,
 	'key' => &$spip_mots_articles_key);

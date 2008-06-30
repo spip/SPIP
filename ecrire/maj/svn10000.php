@@ -107,5 +107,30 @@ $GLOBALS['maj'][11790] = array(array('maj_11790'));
 
 $GLOBALS['maj'][11794] = array(); // ajout de spip_documents_forum
 
+// Reunir en une seule table les liens de documents
+//  spip_documents_articles et spip_documents_forum
+function maj_11911 () {
+	foreach (array('article', 'breve', 'rubrique', 'auteur', 'forum') as $l) {
+		if ($s = sql_select('*', 'spip_documents_'.$l.'s')
+		OR $s = sql_select('*', 'spip_documents_'.$l)) {
+			$tampon = array();
+			while ($t = sql_fetch($s)) {
+				$keys = '('.join(',',array_keys($t)).')';
+				$tampon[] = '('.join(',', array_map('sql_quote', $t)).')';
+				if (count($tampon)>100) {
+					sql_insert('spip_documents_liens', $keys, join(',', $tampon));
+					$tampon = array();
+				}
+			}
+			if (count($tampon)) {
+				sql_insert('spip_documents_liens', $keys, join(',', $tampon));
+			}
+		}
+	}
+}
+$GLOBALS['maj'][11911] = array(array('maj_11911'));
+
+// penser a ajouter ici destruction des tables spip_documents_articles etc
+// une fois qu'on aura valide la procedure d'upgrade ci-dessus
 
 ?>

@@ -82,18 +82,14 @@ function supprimer_document_et_vignette($arg)
 		spip_unlink(get_spip_doc($row['fichier']));
 		sql_delete("spip_documents", "id_document=$arg");
 		sql_updateq("spip_documents", array("id_vignette" => 0), "id_vignette=$arg");
-		sql_delete("spip_documents_articles", "id_document=$arg");
-		sql_delete("spip_documents_rubriques", "id_document=$arg");
-		sql_delete("spip_documents_breves", "id_document=$arg");
+		sql_delete("spip_documents_liens", "id_document=$arg");
 		$id_vignette = $row['id_vignette'];
 		if ($id_vignette > 0) {
 			$f = sql_getfetsel("fichier", "spip_documents	", "id_document=$id_vignette");
 
 			if ($f) spip_unlink(get_spip_doc($f));
 			sql_delete("spip_documents", "id_document=$id_vignette");
-			sql_delete("spip_documents_articles", "id_document=$id_vignette");
-			sql_delete("spip_documents_rubriques", "id_document=$id_vignette");
-			sql_delete("spip_documents_breves", "id_document=$id_vignette");
+			sql_delete("spip_documents_liens", "id_document=$id_vignette");
 		}
 	}
 }
