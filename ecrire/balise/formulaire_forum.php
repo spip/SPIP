@@ -104,11 +104,12 @@ function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
 	$titre = supprimer_numero($titre['titre']);
 
 	// Sur quelle adresse va-t-on "boucler" pour la previsualisation ?
+	// si vide : self()
 	if ($script = $filtres[0])
 		$script = preg_match(',[.]php3?$,', $script) ?
 			$script : generer_url_public($script);
 	else
-		$script = self(); # sur soi-meme
+		$script = ''; # sur soi-meme
 
 	return
 		array($titre, $table, $type, $script,
