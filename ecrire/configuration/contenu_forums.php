@@ -25,6 +25,7 @@ function configuration_contenu_forums_dist(){
 	$forums_titre = $GLOBALS['meta']["forums_titre"];
 	$forums_texte = $GLOBALS['meta']["forums_texte"];
 	$forums_urlref = $GLOBALS['meta']["forums_urlref"];
+	$forums_afficher_barre = $GLOBALS['meta']["forums_afficher_barre"];
 
 	$res = "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">"
 
@@ -50,7 +51,15 @@ function configuration_contenu_forums_dist(){
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ")
 	. "</td></tr>\n"
 
-
+	. "<tr>"
+	. "<td align='$spip_lang_left' class='verdana2'>"
+	. _L('- avec sa barre d\'outil ?')
+	. "</td>"
+	. "<td align='$spip_lang_left' class='verdana2'>"
+	. afficher_choix('forums_afficher_barre', $forums_afficher_barre,
+		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ")
+	. "</td></tr>\n"
+	
 	. "<tr>"
 	. "<td align='$spip_lang_left' class='verdana2'>"
 	. _T('info_urlref')
