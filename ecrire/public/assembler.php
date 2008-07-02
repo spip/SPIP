@@ -80,7 +80,6 @@ function traiter_formulaires_dynamiques(){
 	if (!$done) {
 		$done = true;
 		if ($action = _request('action')) {
-			define('_ESPACE_PRIVE', true);
 			include_spip('base/abstract_sql'); // chargement systematique pour les actions
 			include_spip('inc/autoriser'); // chargement systematique pour les actions
 			include_spip('inc/headers');
