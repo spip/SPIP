@@ -610,6 +610,30 @@ function autoriser_modifierurl_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('modifier', $type, $id, $qui, $opt);
 }
 
+function autoriser_rubrique_editermots_dist($faire,$quoi,$id,$qui,$opts){
+	// par defaut, on verifie juste que le champ de droit passe en opts colle bien
+	$droit = substr($GLOBALS['visiteur_session']['statut'],1);
+	if (!isset($opts['groupe_champs'][$droit])){
+		if (!$id_groupe = $opts['id_groupe'])
+			return false;
+		include_spip('base/abstract_sql');
+		$droit = sql_getfetsel($droit, "spip_groupes_mots", "id_groupe=".intval($id_groupe));		
+	}
+	else
+		$droit = $opts['groupe_champs'][$droit];
+	
+	if ($droit=='oui') return true;
+	return false;
+}
+function autoriser_article_editermots_dist($faire,$quoi,$id,$qui,$opts){
+	return autoriser_rubrique_editermots_dist($faire,'rubrique',0,$qui,$opts);
+}
+function autoriser_breve_editermots_dist($faire,$quoi,$id,$qui,$opts){
+	return autoriser_rubrique_editermots_dist($faire,'rubrique',0,$qui,$opts);
+}
+function autoriser_syndic_editermots_dist($faire,$quoi,$id,$qui,$opts){
+	return autoriser_rubrique_editermots_dist($faire,'rubrique',0,$qui,$opts);
+}
 
 // Deux fonctions sans surprise pour permettre les tests
 // Dire toujours OK
