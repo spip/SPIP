@@ -101,14 +101,14 @@ function balise_FORMULAIRE__dyn($form)
 	// recuperer la saisie en cours si erreurs
 	// seulement si c'est ce formulaire qui est poste
 	// ou si on le demande explicitement par le parametre _forcer_request = true
-	if ($je_suis_poste || (isset($valeurs['_forcer_request']) && $valeurs['_forcer_request'])) {
-		foreach(array_keys($valeurs) as $champ){
-			if (substr($champ,0,1)!=='_'){
-				if (($v = _request($champ))!==NULL)
-					$valeurs[$champ] = $v;
-				$action = parametre_url($action,$champ,''); // nettoyer l'url des champs qui vont etre saisis
-				$valeurs[$champ] = protege_valeurs($valeurs[$champ]); // proteger les ' et les " dans les champs que l'on va injecter dans les input
+	foreach(array_keys($valeurs) as $champ){
+		if (substr($champ,0,1)!=='_'){
+			if ($je_suis_poste || (isset($valeurs['_forcer_request']) && $valeurs['_forcer_request'])) {
+						if (($v = _request($champ))!==NULL)
+							$valeurs[$champ] = $v;
 			}
+			$action = parametre_url($action,$champ,''); // nettoyer l'url des champs qui vont etre saisis
+			$valeurs[$champ] = protege_valeurs($valeurs[$champ]); // proteger les ' et les " dans les champs que l'on va injecter dans les input
 		}
 	}
 
