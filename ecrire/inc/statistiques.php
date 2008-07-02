@@ -203,15 +203,10 @@ function statistiques_tous($log, $date_premier, $last, $total_absolu, $val_popul
 	  floor(450 / (1+floor(($date_today-$date_debut)/$interval)));
 	if ($largeur > 50) $largeur = 50; elseif ($largeur < 1) $largeur = 1;
 
-	// La version SVG n'est disponible que pour les visites
-	if (flag_svg() AND !$script) {
-		list($moyenne,$val_prec, $res) = stat_logsvg($aff_jours, $agreg, $date_today, $id_article, $log, $total_absolu, $last);
-	} else {
-		list($moyenne,$val_prec, $res) = stat_log1($log, $agreg, $date_today, $largeur, $rapport, $interval, $script);
-		$res = statistiques_hauteur($res, $id_article, $largeur, $maxgraph, $moyenne, $rapport, $val_popularite, $last)
-		  . statistiques_nom_des_mois($date_debut, $date_today, ($largeur / ($interval*$agreg)));
+	list($moyenne,$val_prec, $res) = stat_log1($log, $agreg, $date_today, $largeur, $rapport, $interval, $script);
+	$res = statistiques_hauteur($res, $id_article, $largeur, $maxgraph, $moyenne, $rapport, $val_popularite, $last)
+	  . statistiques_nom_des_mois($date_debut, $date_today, ($largeur / ($interval*$agreg)));
 
-	}
 	$x = (!$aff_jours) ? 1 : (420/ $aff_jours);
 	$res = statistiques_zoom($id_article, $x, $date_premier, $date_debut, $date_today) . $res;
 
@@ -561,59 +556,6 @@ function statistiques_echelle($maxgraph)
   include_spip('public/assembler');
   return recuperer_fond('prive/stats/echelle', array('echelle' => $maxgraph));
 }
-	
-// http://doc.spip.org/@stat_logsvg
-function stat_logsvg($aff_jours, $agreg, $date_today, $id_article, $log, &$total_absolu, $visites_today) {
-
-	$total_absolu = $total_absolu + $visites_today;
-	$test_agreg = $decal = $jour_prec = $val_prec = $total_loc =0;
-	$n = ((3600*24)*$agreg);
-	foreach ($log as $key => $value) {
-		# quand on atteint aujourd'hui, stop
-		if ($key == $date_today) break; 
-		$test_agreg ++;
-		if ($test_agreg == $agreg) {	
-			$test_agreg = 0;
-			if ($decal == 30) $decal = 0;
-			$decal ++;
-			$tab_moyenne[$decal] = $value;
-			// Inserer des jours vides si pas d'entrees	
-			if ($jour_prec > 0) {
-				$ecart = floor(($key-$jour_prec)/$n-1);
-				for ($i=0; $i < $ecart; $i++){
-					if ($decal == 30) $decal = 0;
-					$decal ++;
-					$tab_moyenne[$decal] = $value;
-					reset($tab_moyenne);
-					$moyenne = 0;
-					while (list(,$v) = each($tab_moyenne))
-						$moyenne += $v;
-					$moyenne /= count($tab_moyenne);
-					// Pour affichage harmonieux
-					$moyenne = round($moyenne,2); 
-				}
-			}
-			$total_loc = $total_loc + $value;
-			reset($tab_moyenne);
-
-			$moyenne = 0;
-			while (list(,$val_tab) = each($tab_moyenne))
-				$moyenne += $val_tab;
-			$moyenne = $moyenne / count($tab_moyenne);
-			$moyenne = round($moyenne,2); // Pour affichage harmonieux
-			$jour_prec = $key;
-			$val_prec = $value;
-		}
-	}
-
-	$res = "\n<div>"
-	. "<object data='" . generer_url_ecrire('statistiques_svg',"id_article=$id_article&aff_jours=$aff_jours") . "' width='450' height='310' type='image/svg+xml'>"
-	. "<embed src='" . generer_url_ecrire('statistiques_svg',"id_article=$id_article&aff_jours=$aff_jours") . "' width='450' height='310' type='image/svg+xml' />"
-	. "</object>"
-	. "\n</div>";
-
-	return array($moyenne, $val_prec, $res);
-}
 
 // http://doc.spip.org/@statistiques_moyenne
 function statistiques_moyenne($tab)
@@ -665,19 +607,12 @@ function statistiques_forums($aff_jours, $id_article, $serveur)
 // http://doc.spip.org/@statistiques_mode
 function statistiques_mode($table)
 {
-	if (flag_svg()) {
-		$lien = 'non'; $alter = 'HTML';
-	} else {
-		$lien = 'oui'; $alter = 'SVG';
-	}
 
 	$lui = self();
 	$csv = parametre_url(parametre_url($lui, 'table', $table), 'format', 'csv');
 
 	return "\n<div style='text-align:".$GLOBALS['spip_lang_right'] . ";' class='verdana1 spip_x-small'>"
-		. "<a href='". parametre_url($lui, 'var_svg', $lien)."'>"
-		. $alter
-		. "</a> | <a href='"
+		. "<a href='"
 		. $csv
 	  	. "'>CSV</a>"
 		. "</div>\n";

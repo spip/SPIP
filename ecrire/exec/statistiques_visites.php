@@ -21,9 +21,6 @@ function exec_statistiques_visites_dist()
 	$id_article = intval(_request('id_article'));
 	$aff_jours = intval(_request('aff_jours'));
 	
-	// enregistrer *maintenant* le cookie
-	flag_svg();
-
 	// nombre de referers a afficher
 	$limit = intval(_request('limit'));
 	if ($limit == 0) $limit = 100;
