@@ -493,11 +493,11 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	}
 	// Si propose, cadre jaune
 	else if ($statut=="prop") {
-		$style = " style='border: 1px solid yellow; padding: 5px;'>";
+		$style = " style='border: 1px solid yellow; padding: 5px;'";
 	}
 	// Si original, cadre vert
 	else if ($statut=="original") {
-		$style = " style='border: 1px solid green; padding: 5px;'>";
+		$style = " style='border: 1px solid green; padding: 5px;'";
 	} else $style = '';
 
 	$res .= "<table$style width='100%' cellpadding='5' cellspacing='0'>\n<tr><td>"
