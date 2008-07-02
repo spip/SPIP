@@ -19,8 +19,17 @@ include_spip('inc/statistiques');
 function exec_statistiques_visites_dist()
 {
 	$id_article = intval(_request('id_article'));
-	$aff_jours = intval(_request('aff_jours'));
-	
+	$type = _request('type');
+	if (!preg_match('/^\w+$/', $type)) $type = 'day';
+	$duree = intval(_request('duree'));
+	if (!$duree) $duree = 105;
+	$interval = intval(_request('interval'));
+	if (!$interval) {
+	  if ($type == 'day')
+	    $interval = 3600*24;
+	  else $interval = 3600;
+	}
+
 	// nombre de referers a afficher
 	$limit = intval(_request('limit'));
 	if ($limit == 0) $limit = 100;
@@ -30,7 +39,7 @@ function exec_statistiques_visites_dist()
 		echo minipres();
 	} else {
 		if (_request('format') != 'csv')
-			exec_statistiques_visites_args($id_article, $aff_jours, $limit);
+			exec_statistiques_visites_args($id_article, $duree, $interval, $type, $limit);
 		else {
 			include_spip('public/assembler');
 			$t = str_replace('spip_', '', _request('table'));
@@ -45,7 +54,7 @@ function exec_statistiques_visites_dist()
 }
 
 // http://doc.spip.org/@exec_statistiques_visites_args
-function exec_statistiques_visites_args($id_article, $aff_jours, $limit,$serveur='')
+function exec_statistiques_visites_args($id_article, $duree, $interval, $type, $limit,$serveur='')
 {
 	$titre = $pourarticle = "";
 
@@ -114,6 +123,7 @@ function exec_statistiques_visites_args($id_article, $aff_jours, $limit,$serveur
 			$table = "spip_visites_articles";
 			$table_ref = "spip_referers_articles";
 			$where = "id_article=$id_article";
+			  
 	} else {
 			$table = "spip_visites";
 			$table_ref = "spip_referers";
@@ -123,7 +133,7 @@ function exec_statistiques_visites_args($id_article, $aff_jours, $limit,$serveur
 	$select = "visites";
 	$order = "date";
 
-	list($res, $mois) = statistiques_jour_et_mois($id_article, $select, $table, $where, $aff_jours ? $aff_jours : 105, $order, "SUM(visites)", $serveur, 3600*24, $total_absolu, $val_popularite,  $classement,  $liste);
+	list($res, $mois) = statistiques_jour_et_mois($id_article, $select, $table, $where, $order, "SUM(visites)", $serveur, $type, $duree, $interval, $total_absolu, $val_popularite,  $classement,  $liste);
 
 	echo $res;
 	if ($mois) {
@@ -134,8 +144,8 @@ function exec_statistiques_visites_args($id_article, $aff_jours, $limit,$serveur
 	}
 
 	if ($id_article) {
-		echo statistiques_signatures($aff_jours, $id_article, $serveur);
-		echo statistiques_forums($aff_jours, $id_article, $serveur);
+		echo statistiques_signatures($duree, $interval, $type, $id_article, $serveur);
+		echo statistiques_forums($duree, $interval, $type, $id_article, $serveur);
 	}
 
 	$referenceurs = charger_fonction('referenceurs', 'inc');
