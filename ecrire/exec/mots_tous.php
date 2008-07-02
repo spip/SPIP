@@ -32,9 +32,20 @@ function exec_mots_tous_dist()
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
 
 	if (autoriser('creer','groupemots')  AND !$conf_mot){
-		$res = icone_horizontale(_T('icone_creation_groupe_mots'), generer_url_ecrire("mots_type","new=oui"), "groupe-mot-24.gif", "creer.gif",false);
+		$out = "";
+		$result = sql_select("*, ".sql_multi ("titre", "$spip_lang"), "spip_groupes_mots", "", "", "multi");
+		while ($row_groupes = sql_fetch($result)) {
+			$id_groupe = $row_groupes['id_groupe'];
+			$titre_groupe = typo($row_groupes['titre']);		
+			$out .= "<li><a href='#mots_tous-$id_groupe' onclick='$(\"div.mots_tous\").hide().filter(\"#mots_tous-$id_groupe\").show();return false;'>$titre_groupe</a></li>";
+		}
+		if (strlen($out))
+			$out = "
+			<ul class='raccourcis_rapides'>".$out."</ul>
+			<a href='#' onclick='$(\"div.mots_tous\").show();return false;'>"._T('icone_voir_tous_mots_cles')."</a>";
 
-		echo bloc_des_raccourcis($res);
+		$res = icone_horizontale(_T('icone_creation_groupe_mots'), generer_url_ecrire("mots_type","new=oui"), "groupe-mot-24.gif", "creer.gif",false);
+		echo bloc_des_raccourcis($res . $out);
 	}
 
 
@@ -67,7 +78,7 @@ function exec_mots_tous_dist()
 		$acces_forum = $row_groupes['forum'];
 
 		// Afficher le titre du groupe
-		echo "<a id='mots_tous-$id_groupe'></a>";
+		echo "<div id='mots_tous-$id_groupe' class='mots_tous'>";
 
 		echo debut_cadre_enfonce("groupe-mot-24.gif", true, '', $titre_groupe);
 		// Affichage des options du groupe (types d'elements, permissions...)
@@ -134,6 +145,7 @@ function exec_mots_tous_dist()
 		}	
 
 		echo fin_cadre_enfonce(true);
+		echo "</div>";
 	}
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
