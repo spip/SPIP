@@ -277,6 +277,7 @@ function revision_mot($id_mot, $c=false) {
 		$c);
 }
 
+// http://doc.spip.org/@revision_groupe_mot
 function revision_groupe_mot($id_groupe, $c=false) {
 
 	modifier_contenu('groupe_mot', $id_groupe,

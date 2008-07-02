@@ -610,6 +610,7 @@ function autoriser_modifierurl_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('modifier', $type, $id, $qui, $opt);
 }
 
+// http://doc.spip.org/@autoriser_rubrique_editermots_dist
 function autoriser_rubrique_editermots_dist($faire,$quoi,$id,$qui,$opts){
 	// par defaut, on verifie juste que le champ de droit passe en opts colle bien
 	$droit = substr($GLOBALS['visiteur_session']['statut'],1);
@@ -625,12 +626,15 @@ function autoriser_rubrique_editermots_dist($faire,$quoi,$id,$qui,$opts){
 	if ($droit=='oui') return true;
 	return false;
 }
+// http://doc.spip.org/@autoriser_article_editermots_dist
 function autoriser_article_editermots_dist($faire,$quoi,$id,$qui,$opts){
 	return autoriser_rubrique_editermots_dist($faire,'rubrique',0,$qui,$opts);
 }
+// http://doc.spip.org/@autoriser_breve_editermots_dist
 function autoriser_breve_editermots_dist($faire,$quoi,$id,$qui,$opts){
 	return autoriser_rubrique_editermots_dist($faire,'rubrique',0,$qui,$opts);
 }
+// http://doc.spip.org/@autoriser_syndic_editermots_dist
 function autoriser_syndic_editermots_dist($faire,$quoi,$id,$qui,$opts){
 	return autoriser_rubrique_editermots_dist($faire,'rubrique',0,$qui,$opts);
 }
