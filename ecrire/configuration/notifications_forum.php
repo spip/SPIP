@@ -40,7 +40,7 @@ function configuration_notifications_forum_dist()
 	  . $res 
 	  . "</div>\n";
 
-	$res = debut_cadre_trait_couleur("", true, "", _T('info_envoi_forum'))
+	$res = debut_cadre_trait_couleur("mail-forum-24.gif", true, "", _T('info_envoi_forum'))
 	. ajax_action_post('configurer_notifications_forum', 0, 'config_contenu','',$res) 
 	. fin_cadre_trait_couleur(true);
 
