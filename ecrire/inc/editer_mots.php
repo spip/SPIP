@@ -51,7 +51,7 @@ function inc_editer_mots_dist($objet, $id_objet, $cherche_mot, $select_groupe, $
 	if (!$cpt) {
 		if (!$flag) return;
 		$droit = substr($GLOBALS['visiteur_session']['statut'],1);
-		$cpt = sql_getfetsel("COUNT(*)", 'spip_groupes_mots', "$droit = 'oui' AND $table = 'oui'");
+		$cpt = sql_countsel('spip_groupes_mots', "$droit = 'oui' AND $table = 'oui'");
 
 		if (!$cpt) return;
 	}
@@ -268,9 +268,8 @@ function formulaire_mots_cles($id_objet, $les_mots, $table, $table_id, $url_base
 	} else {
 		$cond_id_groupes_vus = '';
 	}
-
-	$nb_groupes = sql_fetch(editer_mots_droits('count(*) AS n', "tables REGEXP '(^|,)$table($|,)' AND obligatoire = 'oui'$cond_id_groupes_vus"));
-	$nb_groupes = $nb_groupes['n'];
+	$droit = substr($GLOBALS['visiteur_session']['statut'],1);
+	$nb_groupes = sql_countsel("spip_groupes_mots", "$droit = 'oui' AND obligatoire = 'oui' AND tables REGEXP '(^|,)$table($|,)' $cond_id_groupes_vus");
 
 	$res = debut_block_depliable($visible OR ($nb_groupes > 0),"lesmots");
 	if ($flag_tous AND count($les_mots)>= 3) {
