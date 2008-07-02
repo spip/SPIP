@@ -277,6 +277,15 @@ function revision_mot($id_mot, $c=false) {
 		$c);
 }
 
+function revision_groupe_mot($id_groupe, $c=false) {
+
+	modifier_contenu('groupe_mot', $id_groupe,
+		array(
+			'nonvide' => array('titre' => _T('info_sans_titre'))
+		),
+		$c);
+}
+
 // http://doc.spip.org/@revision_petition
 function revision_petition($id_article, $c=false) {
 

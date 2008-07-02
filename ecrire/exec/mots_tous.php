@@ -61,10 +61,7 @@ function exec_mots_tous_dist()
 		$texte = $row_groupes['texte'];
 		$unseul = $row_groupes['unseul'];
 		$obligatoire = $row_groupes['obligatoire'];
-		$articles = $row_groupes['articles'];
-		$breves = $row_groupes['breves'];
-		$rubriques = $row_groupes['rubriques'];
-		$syndic = $row_groupes['syndic'];
+		$tables = $row_groupes['tables'];
 		$acces_minirezo = $row_groupes['minirezo'];
 		$acces_comite = $row_groupes['comite'];
 		$acces_forum = $row_groupes['forum'];
@@ -75,10 +72,11 @@ function exec_mots_tous_dist()
 		echo debut_cadre_enfonce("groupe-mot-24.gif", true, '', $titre_groupe);
 		// Affichage des options du groupe (types d'elements, permissions...)
 		$res = '';
-		if ($articles == "oui") $res .= "> "._T('info_articles_2')." &nbsp;&nbsp;";
-		if ($breves == "oui") $res .= "> "._T('info_breves_02')." &nbsp;&nbsp;";
-		if ($rubriques == "oui") $res .= "> "._T('info_rubriques')." &nbsp;&nbsp;";
-		if ($syndic == "oui") $res .= "> "._T('icone_sites_references')." &nbsp;&nbsp;";
+		$tables = explode(',',$tables);
+		
+		$libelles = array('articles'=>'info_articles_2','breves'=>'info_breves_02','rubriques'=>'info_rubriques','syndic'=>'icone_sites_references');
+		foreach($tables as $table)
+			$res .= "> " . _T(isset($libelles[$table])?$libelles[$table]:"info_$table") . " &nbsp;&nbsp;";
 
 		if ($unseul == "oui" OR $obligatoire == "oui") $res .= "<br />";
 		if ($unseul == "oui") $res .= "> "._T('info_un_mot')." &nbsp;&nbsp;";

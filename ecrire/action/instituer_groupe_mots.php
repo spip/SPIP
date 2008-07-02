@@ -27,54 +27,15 @@ function action_instituer_groupe_mots_dist()
 	} else action_instituer_groupe_mots_post($r[1]);
 }
 
-
 // http://doc.spip.org/@action_instituer_groupe_mots_post
 function action_instituer_groupe_mots_post($id_groupe)
 {
-	$acces_comite = _request('acces_comite');
-	$acces_forum = _request('acces_forum');
-	$acces_minirezo = _request('acces_minirezo');
-	$articles = _request('articles');
-	$breves = _request('breves');
-	$change_type = _request('change_type');
-	$descriptif = _request('descriptif');
-	$obligatoire = _request('obligatoire');
-	$rubriques = _request('rubriques');
-	$syndic = _request('syndic');
-	$texte = _request('texte');
-	$unseul = _request('unseul');
-
 	if ($id_groupe < 0){
 		sql_delete("spip_groupes_mots", "id_groupe=" . (0- $id_groupe));
-	} else {
-		$change_type = (corriger_caracteres($change_type));
-		$texte = (corriger_caracteres($texte));
-		$descriptif = (corriger_caracteres($descriptif));
-
-		if ($id_groupe) {	// modif groupe
-			sql_updateq("spip_mots", array("type" => $change_type), "id_groupe=$id_groupe");
-
-			sql_updateq("spip_groupes_mots", array("titre" =>$change_type,"texte"=>$texte,"descriptif"=>$descriptif,"unseul"=>$unseul,"obligatoire"=>$obligatoire,"articles"=>$articles,"breves"=>$breves,"rubriques"=>$rubriques,"syndic"=>$syndic,"minirezo"=>$acces_minirezo,"comite"=>$acces_comite,"forum"=>$acces_forum), "id_groupe=$id_groupe");
-
-		} else {	//spip_log("creation groupe");
-		  sql_insertq('spip_groupes_mots', array(
-			'titre' => $change_type,
-			'texte' => $texte,
-			'descriptif' => $descriptif,
-			'unseul' => $unseul,
-			'obligatoire' => $obligatoire,
-			'articles' => $articles,
-			'breves' => $breves,
-			'rubriques' => $rubriques,
-			'syndic' => $syndic,
-			'minirezo' => $acces_minirezo,
-			'comite' => $acces_comite,
-			'forum' => $acces_forum
-			));
-		}
 	}
+	else
+		spip_log('appel deprecie, rien a faire ici (voir action/edite_groupe_mot)');
 }
-
 
 // http://doc.spip.org/@action_instituer_groupe_mots_get
 function action_instituer_groupe_mots_get($table)
@@ -84,16 +45,13 @@ function action_instituer_groupe_mots_get($table)
 		'titre' => $titre,
 		'unseul' => 'non',
 		'obligatoire' => 'non',
-		'articles' =>  (($table=='articles') ? 'oui' : 'non'),
-		'breves' => (($table=='breves') ? 'oui' : 'non'),
-		'rubriques' => (($table=='rubriques') ? 'oui' : 'non'),
-		'syndic' =>  (($table=='syndic') ? 'oui' : 'non'),
+		'tables'=>$table,
 		'minirezo' =>  'oui',
 		'comite' =>  'non',
 		'forum' => 'non')) ;
 
-        redirige_par_entete(parametre_url(urldecode(_request('redirect')),
-					  'id_groupe', $id_groupe, '&'));
+  redirige_par_entete(parametre_url(urldecode(_request('redirect')),
+		  'id_groupe', $id_groupe, '&'));
 }
 
 ?>

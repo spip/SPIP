@@ -268,7 +268,7 @@ function formulaire_mots_cles($id_objet, $les_mots, $table, $table_id, $url_base
 		$cond_id_groupes_vus = '';
 	}
 
-	$nb_groupes = sql_fetch(editer_mots_droits('count(*) AS n', "$table = 'oui' AND obligatoire = 'oui'$cond_id_groupes_vus"));
+	$nb_groupes = sql_fetch(editer_mots_droits('count(*) AS n', "table REGEXP '(^|,)$table($|,)' AND obligatoire = 'oui'$cond_id_groupes_vus"));
 	$nb_groupes = $nb_groupes['n'];
 
 	$res = debut_block_depliable($visible OR ($nb_groupes > 0),"lesmots");

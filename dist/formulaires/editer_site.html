@@ -17,7 +17,7 @@
 	  	[(#SESSION{statut}|=={0minirezo}|?{' ',#ENV{config}|table_valeur{proposer_site}|=={oui}|oui})	  
 		  <li class="editer_referencement_automatise">
 			  <fieldset>
-				  <legend><img src='#EVAL{_DIR_IMG_PACK}site-24.gif' alt="" /></legend>
+				  <h3 class='legend'><img src='#EVAL{_DIR_IMG_PACK}site-24.gif' alt="" /></h3>
 				  <ul>
 					  <li class="editer_url_auto[ (#ENV**{erreurs}|table_valeur{url_auto}|oui)erreur]">
 						<label for='url_auto'><:texte_referencement_automatique:></label>
@@ -54,15 +54,15 @@
 	    [(#ENV**{config}|table_valeur{activer_syndic}|=={non}|?{'',' '})
 	    <li class="editer_syndications">
 			<fieldset>
-				<legend><img src='#CHEMIN{feed.png}' alt="<:info_syndication:>" /></legend>
+				<h3 class='legend'><img src='#CHEMIN{feed.png}' alt="<:info_syndication:>" /></h3>
 				<ul>
 					<li class="editer_syndication">
 						<em class="aide">#AIDER{rubsyn}</em>
-						<div class="champ">
+						<div class="choix">
 							<input type='radio' class="radio" name='syndication' value='non' id='syndication_non'[ (#ENV{syndication}|=={non}|?{'checked="checked"'})] />
 							<label for='syndication_non'><:bouton_radio_non_syndication:></label>
 						</div>
-						<div class="champ">
+						<div class="choix">
 							<input type='radio' class="radio" name='syndication' value='oui' id='syndication_oui'[ (#ENV{syndication}|=={oui}|?{'checked="checked"'})] />
 							<label for='syndication_oui'><:bouton_radio_syndication:></label>
 						</div>

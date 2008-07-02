@@ -217,6 +217,7 @@ function table_objet($type) {
 		'emb' => 'documents',
 		'forum' => 'forums', # hum hum redevient spip_forum par table_objet_sql mais casse par un bete "spip_".table_objet()
 		'groupe_mots' => 'groupes_mots', # hum
+		'groupe_mot' => 'groupes_mots', # hum
 		'groupe' => 'groupes_mots', # hum (EXPOSE)
 		'message' => 'messages',
 		'mot' => 'mots',

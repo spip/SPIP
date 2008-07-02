@@ -37,8 +37,11 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 {
 	global $spip_lang_right, $connect_statut, $spip_display, $les_notes;
 
-	$autoriser_editer = ($new=='oui');
-	$editer = ($new=='oui') OR $autoriser_editer;
+	$autoriser_editer = $editer = false;
+	if ($new=='oui')
+		$autoriser_editer = true;
+	if (($new=='oui') OR $autoriser_editer)
+		$editer = true;
 	$ok = false;
 	
 	$row = sql_fetsel("*", "spip_mots", "id_mot=$id_mot");
@@ -68,7 +71,10 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 				$titre_mot = filtrer_entites(_T('texte_nouveau_mot'));
 				$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 			}
-			$row = sql_countsel('spip_groupes_mots', ($table ? "$table='oui'" : ''));
+			$row = sql_countsel('spip_groupes_mots', 
+			($table ? "tables REGEXP '(^|,)$table($|,)'" : '')
+			//($table ? "$table='oui'" : '')
+			);
 			if (!$row) {
 		  // cas pathologique: 
 		  // creation d'un mot sans groupe de mots cree auparavant
@@ -195,101 +201,11 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 		$page = evaluer_fond("prive/editer/mot", $contexte, $connect);
 		$out .= $page['texte'];
 		$out .= '</div>';
-		
 
-		/*$res = "<div class='serif'>";
-
-		$titre_mot = entites_html($titre_mot);
-		$descriptif = entites_html($descriptif);
-		$texte = entites_html($texte);
-		
-		$res .= "<ol class='formfx'>";
-		
-		
-		$res .= "<li class='gauche obligatoire'>";
-		$res .= "<label for='titre'>"._T('info_titre_mot_cle');
-		$res .= aide ("mots")."</label>";
-
-		$res .= "<input type='text' name='titre' id='titre' class='formo' value=\"$titre_mot\" size='40' $onfocus /></li>";
-
-		$res .= "<li class='gauche'>".determine_groupe_mots($table, $id_groupe)."</li>";
-
-
-		$res .= "<li class='gauche'>";
-		$res .= "<label for='descriptif'>"._T('texte_descriptif_rapide')."</label>";
-		$res .= "<textarea name='descriptif' id='descriptif' class='forml' rows='4' cols='40'>";
-		$res .= $descriptif;
-		$res .= "</textarea>\n";
-		$res .= "</li>";
-
-		$res .= "<li class='gauche'>";
-		$res .= "<label for='texte'>"._T('info_texte_explicatif')."</label>";
-		$res .= "<textarea name='texte' id='texte' rows='12' class='forml' cols='40'>";
-		$res .= $texte;
-		$res .= "</textarea>";
-		$res .= "</li>";
-
-		if ($GLOBALS['champs_extra']) {
-			include_spip('inc/extra');
-			$res .= extra_saisie($extra, 'mots', $id_groupe);
-		}
-
-		// Ajouter le controles md5
-		if (intval($id_mot)) {
-			include_spip('inc/editer');
-			$res .= controles_md5($row);
-		}
-		
-
-		$res .= "<div style='text-align: right'><input type='submit' value='"._T('bouton_enregistrer')."' class='fondo' /></div>";
-		
-		$res .= "</ol>";
-	
-	
-		$res .= "</div>";
-
-		if (!$redirect)
-			$redirect = generer_url_ecrire('mots_edit','id_mot='.$id_mot, '&',true);
-		else
-			$redirect = rawurldecode($redirect);
-		$arg = !$table ? $id_mot : "$id_mot,$ajouter_id_article,$table,$table_id";
-
-		$out .= debut_cadre_formulaire('',true)
-			. generer_action_auteur("instituer_mot", $arg, _DIR_RESTREINT_ABS . $redirect, $res, " method='post'")
-			. fin_cadre_formulaire(true);*/
 	}
 
 	echo $out, fin_gauche(), fin_page();
 	}
 }
 
-
-// http://doc.spip.org/@determine_groupe_mots
-/*function determine_groupe_mots($table, $id_groupe) {
-
-	$q = sql_select('id_groupe, titre', 'spip_groupes_mots', ($table ? "$table='oui'" : ''),'', "titre");
-
-	if (sql_count($q)>1) {
-
-		$res = " &nbsp; <select name='id_groupe' id='id_groupe' class='fondl'>\n";
-		while ($row = sql_fetch($q)){
-			$groupe = $row['id_groupe'];
-			$titre_groupe = texte_backend(supprimer_tags(typo($row['titre'])));
-			$res .=  "<option".mySel($groupe, $id_groupe).">$titre_groupe</option>\n";
-		}			
-		$res .=  "</select>";
-	} else {
-	  // pas de menu si un seul groupe 
-	  // (et on est sur qu'il y en a un grace au redirect preventif)
-		$row = sql_fetch($q);
-		$res = $row['titre']
-		. "<br /><input type='hidden' name='id_groupe' id='id_groupe' value='".$row['id_groupe']."' />";
-	}
-
-	return _T('info_dans_groupe')
-	. aide("motsgroupes")
-	. debut_cadre_relief("groupe-mot-24.gif", true)
-	. $res
-	. fin_cadre_relief(true);
-}*/
 ?>

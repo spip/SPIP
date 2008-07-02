@@ -1683,7 +1683,7 @@ ondblclick='storeCaret(this);'>$texte</textarea>";
 // prend ' ' comme representant de vrai et '' de faux
 
 // http://doc.spip.org/@in_any
-function in_any($val, $vals, $def) {
+function in_any($val, $vals, $def='') {
   return (!is_array($vals) ? $def : (in_array($val, $vals) ? ' ' : ''));
 }
 
@@ -2398,6 +2398,15 @@ function compacte_head_css($flux) {
 
 // Cette fonction verifie les reglages du site et traite le compactage
 // des css et/ou js d'un <head>
+// un fichier .gz est cree pour chaque, qui peut etre utilise par apache
+// et lui eviter de recompresser a chaque hit, avec les directives suivantes :
+//<IfModule mod_gzip.c>
+//mod_gzip_on                   Yes
+//mod_gzip_can_negotiate        Yes
+//mod_gzip_static_suffix        .gz
+//AddEncoding              gzip .gz
+//mod_gzip_item_include         file       \.(js|css)$
+//</IfModule>
 // http://doc.spip.org/@compacte_head
 function compacte_head($flux){
 	if ($GLOBALS['meta']['auto_compress_css'] == 'oui')

@@ -12,7 +12,7 @@
 	  [<input type='hidden' name='lier_id_article' value='(#ENV{lier_id_article})' />]
 	  [<input type='hidden' name='redirect' value='(#ENV**{redirect})' />]
 	  <fieldset>
-	  <legend><:icone_informations_personnelles:></legend>
+	  <h3 class='legend'><:icone_informations_personnelles:></h3>
 	  <ul>
 	    <li class="editer_nom obligatoire[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
 			<label for="nom"><:titre_cadre_signature_obligatoire:></label>
@@ -54,7 +54,7 @@
 		]		
 	  	<li class='editer_liens_sites'>
 			<fieldset>
-			<legend><:info_site_web:></legend>
+			<h3 class='legend'><:info_site_web:></h3>
 			<ul>
 				<li class="editer_nom_site[ (#ENV**{erreurs}|table_valeur{nom_site_auteur}|oui)erreur]">
 					<label for="nom_site_auteur"><:entree_nom_site:></label>
@@ -103,7 +103,7 @@
 		]
 		<li class='editer_identification'>
 			<fieldset>
-				<legend><:Identification:></legend>
+				<h3 class='legend'><:entree_identifiants_connexion:></h3>
 				[(#REM) Avertissement en cas de modifs de ses propres donnees ]
 				[(#GET{edit_login}|or{#GET{edit_pass}}|and{#GET{connecte}}|oui)
 					<em class='attention'><:texte_login_precaution:></em>
@@ -146,17 +146,17 @@
 		]
 		<li class='editer_redacteurs_connectes'>
 			<fieldset>
-			<legend><:info_liste_redacteurs_connectes:></legend>
+			<h3 class='legend'><:info_liste_redacteurs_connectes:></h3>
 				<p class='explication'><:texte_auteur_messagerie:></p>
 				<ul>
 					<li class="editer_perso_activer_imessage">
-						<div class="champ">
+						<div class="choix">
 							<input type='radio' class='radio' name='perso_activer_imessage' value='oui' [(#ENV{imessage}|!={non}|oui) checked='checked'] id='perso_activer_imessage_on' />
 							<label for='perso_activer_imessage_on'>
 								<:bouton_radio_apparaitre_liste_redacteurs_connectes:>
 							</label>
 						</div>
-						<div class="champ">
+						<div class="choix">
 							<input type='radio' class='radio' name='perso_activer_imessage' value='non' [(#ENV{imessage}|=={non}|oui) checked='checked'] id='perso_activer_imessage_off' />
 							<label for='perso_activer_imessage_off'>
 								<:bouton_radio_non_apparaitre_liste_redacteurs_connectes:>
