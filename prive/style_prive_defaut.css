@@ -28,5 +28,5 @@ a.icone26:hover { text-decoration: none; }
 a.icone26 img { vertical-align: middle; }
 
 
-.puce_article .puce_article_popup, .puce_breve .puce_breve_popup { visibility: hidden; }
-.puce_article.on .puce_article_popup, .puce_breve.on .puce_breve_popup  { visibility: visible; }
+.puce_article .puce_article_popup, .puce_breve .puce_breve_popup, .puce_site .puce_site_popup { visibility: hidden; }
+.puce_article.on .puce_article_popup, .puce_breve.on .puce_breve_popup, .puce_site.on .puce_site_popup  { visibility: visible; }
