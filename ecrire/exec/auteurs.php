@@ -41,7 +41,7 @@ function exec_auteurs_dist()
 			$recherche =  sql_in('aut.id_auteur', array_keys($recherche['auteur']));
 		else $recherche = '';
 	}
-	exec_auteurs_args($statut, $tri, $debut, $recherche, formulaire_recherche("auteurs"));
+	exec_auteurs_args($statut, $tri, $debut, $recherche, formulaire_recherche("auteurs",(($s=_request('statut'))?"<input type='hidden' name='statut' value='$s' />":"")));
 }
 
 
