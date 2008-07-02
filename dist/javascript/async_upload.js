@@ -32,14 +32,8 @@ var iframeHandler = function(data,jForm,success) {
           var zip_form = jQuery("<div class='upload_message'>").append(res.html());
           zip_form
           .find("form")
-            .ajaxForm({
-              beforeSubmit:function(data){
-                jForm.before(jQuery("<div class='upload_message' style='height:1%'>").append(ajax_image_searching)[0]);
-                data.push({name:"iframe",value:"iframe"});
-              },
-              success:function(res,s) {
-                success(res,s,jForm);
-              }
+            .async_upload(function(res,s){
+              success(res,s,jForm);
             });
           jForm.after(zip_form[0]);
           return false;  
