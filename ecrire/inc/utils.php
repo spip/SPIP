@@ -569,6 +569,7 @@ function _chemin($dir_path=NULL){
 		$path = defined('_SPIP_PATH') ? _SPIP_PATH :
 			_DIR_RACINE.':'.
 			_DIR_RACINE.'dist/:'.
+			_DIR_RACINE.'prive/:'.
 			_DIR_RESTREINT.':';
 		// Ajouter squelettes/
 		if (@is_dir(_DIR_RACINE.'squelettes'))
