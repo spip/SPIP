@@ -113,7 +113,7 @@ function inclure_previsu($texte,$titre, $url_site, $nom_site, $ajouter_mot, $doc
 	// (sinon on ne peut pas faire <cadre>...</cadre> dans les forums)
 	return preg_replace("@<(/?)form\b@ism",
 			    '<\1div',
-		inclure_balise_dynamique(array('formulaires/forum_previsu',
+		inclure_balise_dynamique(array('formulaires/inc-forum_previsu',
 		      0,
 		      array(
 			'titre' => safehtml(typo($titre)),

@@ -2,7 +2,7 @@
 [(#REM) pour IE qui sinon se perd dans l'ajax !, ne pas retirer]<br class='spacer' />
 
 [(#ENV{login_forum_abo})
-<INCLURE{fond=formulaires/login_forum_abo}{env} />
+<INCLURE{fond=formulaires/inc-login_forum_abo}{env} />
 ]
 
 [(#ENV{editable})
@@ -19,7 +19,7 @@
 	<input type='hidden' name='url_site' value="#ENV{url_site}" />
 	<input type='hidden' name='nom_site' value="#ENV{nom_site}" />
 	[<input type="hidden" name="id_forum" value="(#ENV*{id_forum})" />]
-	[(#INCLURE{fond=formulaires/forum_ajouter_mot}{ajouter_mot})]
+	[(#INCLURE{fond=formulaires/inc-forum_ajouter_mot}{ajouter_mot})]
 	(#ENV*{erreurs}|table_valeur{previsu})
 	</div></form>]
 
@@ -44,7 +44,7 @@
 
 	<fieldset>
 	<legend><:form_pet_message_commentaire:></legend><ul>
-	[<li>(#INCLURE{fond=formulaires/forum_bloc_choix_mots}{table=#ENV*{table}}{ajouter_mot})</li>]
+	[<li>(#INCLURE{fond=formulaires/inc-forum_bloc_choix_mots}{table=#ENV*{table}}{ajouter_mot})</li>]
 
 [(#CONFIG{forums_titre}|=={oui}|?{
 	<li class='saisie_titre[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]'><label for="titre"><:forum_titre:></label>
@@ -110,7 +110,7 @@
 	</ul></fieldset>
 ]
 
-	<INCLURE{fond=formulaires/login_forum}{env} />
+	<INCLURE{fond=formulaires/inc-login_forum}{env} />
 
 	[(#REM) Piege a robots spammeurs ]
 	<p style="display: none;"><label for="nobot"><:antispam_champ_vide:></label>
