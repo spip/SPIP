@@ -1,8 +1,7 @@
 /* ----------------------------------------------------------- */
 /* Feuilles de styles des squelettes par defaut pour SPIP 1.9  */
 /* ----------------------------------------------------------- */
-
-
+/*@import url(formfx.css);*/
 
 /*  ------------------------------------------
 /* 	Typographie generale (style transversaux)
@@ -106,52 +105,6 @@ abbr.published { border: 0; }
 #documents_portfolio a.on .spip_logos { border-color: #8B6F92; }
 #document_actif { margin: 1em auto; }
 #document_actif img { padding: 4px; border: 1px solid #DDD; }
-
-
-/* Habillage des formulaires
----------------------------------------------- */
-input.text, textarea, select { font-size: 100%; font-family: inherit; }
-input.text, textarea, select { width: 340px; background: #F4F8F8; border: 1px inset #CC9; color: #000; }
-
-/* Formulaires de SPIP */
-.formulaire_spip { background: #EEC; margin-bottom: 2em; padding: 1em; text-align: left; color: #330; }
-.formulaire_spip fieldset { margin: 0; margin-bottom: 1em; padding: 0; border: 0; border-top: 1px solid #CC9; }
-.formulaire_spip legend { margin: 0; padding: 0; padding-right: 0.50em; color: #330; font-weight: bold; } /* preciser la couleur des legend pour IE/Win */
-.formulaire_spip label { display: block; font-size: 0.90em; }
-.formulaire_spip input.forml { width: 50%; }
-.formulaire_spip textarea { margin-bottom: 1em; }
-
-/* Boutons */
-.spip_bouton { text-align: right; }
-.spip_bouton input { float: right; }
-
-/* Reponse du formulaire */
-.reponse_formulaire { font-weight: bold; }
-.reponse_formulaire, .reponse_formulaire legend { color: #F57900; } /* preciser la couleur des legend pour IE/Win */
-fieldset.reponse_formulaire { border-color: #F57900; font-weight: normal; }
-.spip_surligne {} /*Cf.: spip_style.css*/
-
-/* Previsualisation du message */
-fieldset.previsu { padding: 1em; border: 2px solid #F57900; }
-fieldset.previsu legend { padding: 0 .4em; color: #F57900; font-weight: bold; }
-fieldset.previsu .spip_bouton input { background: #F57900; border-color: #F57900; color: #FFF; }
-
-/* Formulaire de login au forum */
-.formulaire_login_forum .forml {}
-.formulaire_login_forum .spip_logos { float: right; padding-left: 10px; }
-
-/* Choix des mots-clefs */
-.formfx form fieldset fieldset ul.choix_mots { margin:0; }
-
-/* Formulaire de recherche */
-.formulaire_recherche { float: right; background: none; margin: 0; padding: 0; }
-.formulaire_recherche label { display: inline; font-size: 1em; }
-.formulaire_recherche input.forml { width: 12em; }
-.formulaire_recherche input.bouton { vertical-align: middle; }
-
-/* Menu langues */
-.menu_langues { background: none; margin: 0; padding: 1em 0; vertical-align: top; }
-.formulaire_menu_lang { background: none; margin: 0; padding: 1em 0; }
 
 
 /* Habillage des forums

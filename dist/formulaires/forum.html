@@ -43,45 +43,47 @@
 [(#ENV**{afficher_texte}|choixsiegal{'non', '',' '})
 
 	<fieldset>
-	<legend><:form_pet_message_commentaire:></legend><ol>
+	<legend><:form_pet_message_commentaire:></legend><ul>
 	[<li>(#INCLURE{fond=formulaires/forum_bloc_choix_mots}{table=#ENV*{table}}{ajouter_mot})</li>]
 
 [(#CONFIG{forums_titre}|=={oui}|?{
-	<li class='text'><label for="titre"><:forum_titre:></label>
+	<li class='saisie_titre[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]'><label for="titre"><:forum_titre:></label>
+	[<span class='erreur'>(#ENV**{erreurs}|table_valeur{titre})</span>]
 	<input class='text' type="text" name="titre" id="titre"[ value="(#ENV{titre})"] size="40" />
-	[<div class='erreur'>(#ENV**{erreurs}|table_valeur{titre})</div>]
 	</li>
 ,
 	<input type="hidden" name="titre" id="titre"[ value="(#ENV{titre})"] />
 })]
 
 [(#CONFIG{forums_texte}|=={oui}|?{
-	<li class='textarea'>
-	<label for='texte' style='width:100%'><:forum_texte|typo:></label>
-	<small><:info_creation_paragraphe:></small>
+	<li class='saisie_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]'>
+	<label for='texte'><:forum_texte|typo:></label>
+	[<span class='erreur'>(#ENV**{erreurs}|table_valeur{texte})</span>]
+	<p class='explication'><:info_creation_paragraphe:></p>
 	[(#ENV**{config}|table_valeur{afficher_barre}|
 		?{#VAL{texte}|barre_typo{#LANG}})]
 	<textarea name='texte' id='texte' rows='12' cols='48'>[(#ENV{texte})]</textarea>
-	[<div class='erreur'>(#ENV**{erreurs}|table_valeur{texte})</div>]
 	</li>
 })]
-	</ol></fieldset>
+	</ul></fieldset>
 
 [(#CONFIG{forums_urlref}|=={oui}|?{
 	<fieldset>
-	<legend><:forum_lien_hyper:></legend><ol>
-	<li><:forum_page_url:></li>
-	<li><label for="nom_site"><:forum_titre:></label>
+	<legend><:forum_lien_hyper:></legend><p class='explication'><:forum_page_url:></p>
+	<ul>
+	<li class='saisie_nom_site[ (#ENV**{erreurs}|table_valeur{nom_site}|oui)erreur]'><label for="nom_site"><:forum_titre:></label>
+	[<span class='erreur'>(#ENV**{erreurs}|table_valeur{nom_site})</span>]
 	<input class='text' type="text" name="nom_site" id="nom_site" size="40" value="[(#ENV{nom_site})]" /></li>
-	<li><label for="url_site"><:forum_url:></label>
+	<li class='saisie_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]'><label for="url_site"><:forum_url:></label>
 	<input class='text' type="text" name="url_site" id="url_site" style="text-align: left;" dir="ltr" size="40" value="[(#ENV{url_site})]" /></li>
-	</ol></fieldset>
+	</ul></fieldset>
 })]
 
 [
 	<fieldset>
-	<legend>Ajouter un document</legend><ol>
-	<li>
+	<legend>Ajouter un document</legend><ul>
+	<li class='saisie_document_forum[ (#ENV**{erreurs}|table_valeur{document_forum}|oui)erreur]'>
+	[<span class='erreur'>(#ENV**{erreurs}|table_valeur{document_forum})</div>]
 	<input type="hidden" name="cle_ajouter_document" value="(#ENV{cle_ajouter_document})" />
 	[<div id="ajouter_document_up">(#ENV{ajouter_document})
 	<input type='checkbox' name='suprimer_document_ajoute' id='supprimer_document_ajoute'>
@@ -104,9 +106,8 @@
 	})
 	;
 	</script>
-	[<div class='erreur'>(#ENV**{erreurs}|table_valeur{document_forum})</div>]
 	</li>
-	</ol></fieldset>
+	</ul></fieldset>
 ]
 
 	<INCLURE{fond=formulaires/login_forum}{env} />
@@ -115,7 +116,7 @@
 	<p style="display: none;"><label for="nobot"><:antispam_champ_vide:></label>
 	<input type="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" /></p>
 
-	<p class="spip_bouton"><input type="submit" value="<:forum_voir_avant:>" /></p>
+	<p class="boutons"><input type="submit" value="<:forum_voir_avant:>" /></p>
 ]
 </div>
 </form>
