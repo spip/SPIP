@@ -28,6 +28,7 @@ function exec_auteur_infos_dist() {
 // http://doc.spip.org/@exec_auteur_infos_args
 function exec_auteur_infos_args($id_auteur, $nom, $new, $echec='', $redirect='')
 {
+	global $connect_id_auteur;
 	pipeline('exec_init',
 		array('args' => array(
 			'exec'=> 'auteur_infos',
@@ -48,86 +49,81 @@ function exec_auteur_infos_args($id_auteur, $nom, $new, $echec='', $redirect='')
 	if (!$auteur AND !$new AND !$echec) {
 		include_spip('inc/minipres');
 		echo minipres(_T('public:aucun_auteur'));
-	} else auteur_infos_ok($auteur, $id_auteur, $echec, $new, $redirect);
+	} else {
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		if ($connect_id_auteur == $id_auteur) {
+			echo $commencer_page($auteur['nom'], "auteurs", "perso");
+		} else {
+			echo $commencer_page($auteur['nom'],"auteurs","redacteurs");
+		}
+		echo "<br /><br /><br />";
+		echo debut_gauche('', true);
+		auteur_infos_ok($auteur, $id_auteur, $echec, $new, $redirect);
+		echo auteurs_interventions($auteur);
+		echo fin_gauche(), fin_page();
+	}
 }
 
 // http://doc.spip.org/@auteur_infos_ok
 function auteur_infos_ok($auteur, $id_auteur, $echec, $new, $redirect)
 {
-	global $connect_id_auteur;
-
 	$auteur_infos = charger_fonction('auteur_infos', 'inc');
 	$fiche = $auteur_infos($auteur, $new, $echec, _request('edit'), intval(_request('lier_id_article')), $redirect, 'infos');
-	$form_auteur = $auteur_infos($auteur, $new, $echec, _request('edit'), intval(_request('lier_id_article')), $redirect, 'edit');
+	if ($fiche) 
+		$form_auteur = $auteur_infos($auteur, $new, $echec, _request('edit'), intval(_request('lier_id_article')), $redirect, 'edit');
+	else $form_auteur = '';
 
-		// Entete
-		if ($connect_id_auteur == $id_auteur) {
-			$commencer_page = charger_fonction('commencer_page', 'inc');
-			echo $commencer_page($auteur['nom'], "auteurs", "perso");
-		} else {
-			$commencer_page = charger_fonction('commencer_page', 'inc');
-			echo $commencer_page($auteur['nom'],"auteurs","redacteurs");
-		}
-		echo "<br /><br /><br />";
+	echo cadre_auteur_infos($id_auteur, $auteur);
 
-		echo debut_gauche('', true);
-
-		echo cadre_auteur_infos($id_auteur, $auteur);
-
-		echo pipeline('affiche_gauche',
+	echo pipeline('affiche_gauche',
 			array('args' => array (
 				'exec'=>'auteur_infos',
 				'id_auteur'=>$id_auteur),
 			'data'=>'')
-		);
+		      );
 
-		// Interface de logo
-		$iconifier = charger_fonction('iconifier', 'inc');
+	// Interface de logo
+	$iconifier = charger_fonction('iconifier', 'inc');
 
-		if ($id_auteur > 0)
-			echo $iconifier('id_auteur', $id_auteur, 'auteur_infos', false, autoriser('modifier', 'auteur', $id_auteur));
+	if ($id_auteur > 0)
+		echo $iconifier('id_auteur', $id_auteur, 'auteur_infos', false, autoriser('modifier', 'auteur', $id_auteur));
 		// nouvel auteur : le hack classique
-		else if ($fiche)
-			echo $iconifier('id_auteur',
+	else if ($fiche)
+		echo $iconifier('id_auteur',
 			0 - $GLOBALS['visiteur_session']['id_auteur'],
 			'auteur_infos');
 
-		echo creer_colonne_droite('', true);
-		echo pipeline('affiche_droite',
+	echo creer_colonne_droite('', true);
+	echo pipeline('affiche_droite',
 			      array('args' => array(
 						    'exec'=>'auteur_infos',
 						    'id_auteur'=>$id_auteur),
 				    'data'=>'')
 			      );
-		echo debut_droite('', true);
+	echo debut_droite('', true);
 
-		echo debut_cadre_relief("redacteurs-24.gif", true,'','','auteur-voir');
+	echo debut_cadre_relief("redacteurs-24.gif", true,'','','auteur-voir');
 
-		// $fiche est vide si on demande par exemple
-		// a creer un auteur alors que c'est interdit
-		if ($fiche) {
-			echo $fiche;
-		} else {
-			echo gros_titre(_T('info_acces_interdit'),'', false);
-		}
+	// $fiche est vide si on demande par exemple
+	// a creer un auteur alors que c'est interdit
+	if ($fiche) {
+		echo $fiche;
+	} else {
+		echo gros_titre(_T('info_acces_interdit'),'', false);
+	}
 
-		echo pipeline('affiche_milieu',
+	echo pipeline('affiche_milieu',
 			      array('args' => array(
 						    'exec'=>'auteur_infos',
 						    'id_auteur'=>$id_auteur),
 				    'data'=>''));
 		
-		echo fin_cadre_relief(true);
+	echo fin_cadre_relief(true);
 
-		// afficher le formulaire d'edition apres le cadre d'info
-		// pour pouvoir afficher soit les infos, soit ce formulaire (qui a deja son cadre)
-		if ($fiche)
-			echo $form_auteur;
-				
-		
-		echo auteurs_interventions($auteur);
-		echo fin_gauche(), fin_page();
-
+	// afficher le formulaire d'edition apres le cadre d'info
+	// pour pouvoir afficher soit les infos, 
+	//  soit ce formulaire (qui a deja son cadre)
+	echo $form_auteur;
 }
 
 // http://doc.spip.org/@cadre_auteur_infos
