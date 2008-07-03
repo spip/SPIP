@@ -198,8 +198,8 @@ function public_assembler_dist($fond, $connect='') {
 	// si signature de petition, l'enregistrer avant d'afficher la page
 	// afin que celle-ci contienne la signature
 	if (isset($_GET['var_confirm'])) {
-		include_spip('balise/formulaire_signature');
-		reponse_confirmation($_GET['var_confirm']);
+		$reponse_confirmation = charger_fonction('reponse_confirmation','formulaires/signature');
+		$reponse_confirmation($_GET['var_confirm']);
 	}
 	
 	init_var_mode();
