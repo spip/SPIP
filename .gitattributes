@@ -13,6 +13,7 @@ dist/formulaires/inc-forum_ajouter_mot.html -text
 dist/formulaires/inc-forum_bloc_choix_mots.html -text
 dist/formulaires/inc-login_forum_abo.html -text
 dist/formulaires/inc-logo_auteur.html -text
+dist/formulaires/inscription.php -text
 dist/formulaires/mot_de_passe.html -text
 dist/formulaires/mot_de_passe.php -text
 dist/formulaires/oubli.php -text

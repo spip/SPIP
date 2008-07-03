@@ -2,7 +2,7 @@
 [<p class="formulaire_message">(#ENV*{message_ok})</p>]
 [<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
 [(#ENV{editable})
-<form method="post" action="#ENV{self}#formulaire_site">
+<form method="post" action="#ENV{action}">
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<fieldset>
 	<legend><:info_site:></legend>
