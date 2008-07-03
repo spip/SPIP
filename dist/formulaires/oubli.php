@@ -12,6 +12,12 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// chargement des valeurs par defaut des champs du formulaire
+function formulaires_oubli_charger_dist(){
+	$valeurs = array('oubli'=>'');
+	return $valeurs;
+}
+
 // http://doc.spip.org/@message_oubli
 function message_oubli($email, $param)
 {
@@ -51,6 +57,44 @@ function formulaires_oubli_traiter_dist(){
 
 	$message = message_oubli(_request('oubli'),'p');
 	return $message;
+}
+
+
+// fonction qu'on peut redefinir pour filtrer les adresses mail 
+// http://doc.spip.org/@test_oubli
+function test_oubli_dist($email)
+{
+	include_spip('inc/filtres'); # pour email_valide()
+	if (!email_valide($email) ) 
+		return _T('pass_erreur_non_valide', array('email_oubli' => htmlspecialchars($email)));
+	return array('mail' => $email);
+}
+
+function formulaires_oubli_verifier_dist(){
+	$erreurs = array();
+
+	$email = _request('oubli');
+	if (function_exists('test_oubli'))
+		$f = 'test_oubli';
+	else 
+		$f = 'test_oubli_dist';
+	$declaration = $f($email);
+
+	if (!is_array($declaration))
+		$erreurs['oubli'] = $declaration;
+	else {
+
+		include_spip('base/abstract_sql');
+		$res = sql_select("id_auteur,statut,pass", "spip_auteurs", "email =" . sql_quote($declaration['mail']));
+	
+		if (!$row = sql_fetch($res)) 
+			$erreurs['oubli'] = _T('pass_erreur_non_enregistre', array('email_oubli' => htmlspecialchars($email)));
+	
+		if ($row['statut'] == '5poubelle' OR $row['pass'] == '')
+			$erreurs['oubli'] =  _T('pass_erreur_acces_refuse');
+	}
+
+	return $erreurs;
 }
 
 ?>
