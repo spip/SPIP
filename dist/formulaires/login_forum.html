@@ -9,9 +9,7 @@
 	Pour les forums sur abonnement, un squelette specifique presente les regles
 
 ]
-
 <fieldset><legend><:forum_qui_etes_vous:></legend>
-
 [(#SESSION{auth}|?{' '})
 	<div style="float:#LANG_RIGHT;"><small>
 	(<a href="#URL_LOGOUT"><:icone_deconnecter:></a>)
@@ -22,13 +20,18 @@
 ]
 
 [(#SESSION{auth}|?{'',' '})
-<div style="float:#LANG_RIGHT;"><small>
+	<div style="float:#LANG_RIGHT;"><small>
 	(<a href="[(#URL_PAGE{login}|parametre_url{url,#SELF})]"><:login:></a>)
 	</small></div>
-	<p><label for="session_nom"><:forum_votre_nom:></label>
-	<input type="text" class="forml" name="session_nom" id="session_nom" value="[(#SESSION**{nom}|sinon{#SESSION**{session_nom}}|entites_html)]" size="40" /></p>
-	<p><label for="session_email"><:forum_votre_email:></label>
-	<input type="text" class="forml" name="session_email" id="session_email" value="[(#SESSION**{email}|sinon{#SESSION**{session_email}}|entites_html)]" size="40" /></p>
+	<ul>
+		<li class='saisie_session_nom'>
+			<label for="session_nom"><:forum_votre_nom:></label>
+			<input type="text" class="text" name="session_nom" id="session_nom" value="[(#SESSION**{nom}|sinon{#SESSION**{session_nom}}|entites_html)]" size="40" />
+		</li>
+		<li class='saisie_session_email'>
+			<label for="session_email"><:forum_votre_email:></label>
+			<input type="text" class="text" name="session_email" id="session_email" value="[(#SESSION**{email}|sinon{#SESSION**{session_email}}|entites_html)]" size="40" />
+		</li>
+	</ul>
 ]
-
 </fieldset>
