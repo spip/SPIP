@@ -4,7 +4,6 @@
 config/remove.txt -text
 dist/favicon.ico -text
 dist/feed.png -text
-dist/formfx.css -text
 dist/formulaires/choix_mots.html -text
 dist/formulaires/forum/charger.php -text
 dist/formulaires/forum/traiter.php -text
@@ -45,6 +44,7 @@ dist/puce.gif -text
 dist/puce_rtl.gif -text
 dist/rechercher.png -text
 dist/spip.png -text
+dist/spip_formulaires.css -text
 dist/spip_pass.html -text
 dist/win_width.htc -text
 ecrire/action/acceder_document.php -text

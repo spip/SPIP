@@ -1,7 +1,7 @@
 /* ----------------------------------------------------------- */
 /* Feuilles de styles des squelettes par defaut pour SPIP 1.9  */
 /* ----------------------------------------------------------- */
-/*@import url(formfx.css);*/
+@import url(spip_formulaires.css);
 
 /*  ------------------------------------------
 /* 	Typographie generale (style transversaux)
