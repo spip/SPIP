@@ -245,7 +245,7 @@ function spip_sqlite_alter($query, $serveur='',$requeter=true){
 					$do = "ADD".substr($do, 10);
 			case 'ADD':
 			default:
-				if (preg_match('/^(.*)(BEFORE|AFTER)(.*)$/is', $do, $matches)) {
+				if (preg_match('/^(.*)(BEFORE|AFTER|FIRST)(.*)$/is', $do, $matches)) {
 					$do = $matches[1];
 				}
 				
@@ -473,7 +473,9 @@ function spip_sqlite_fetch($r, $t='', $serveur='',$requeter=true) {
 
 
 // http://doc.spip.org/@spip_sqlite_free
-function spip_sqlite_free($r, $serveur='',$requeter=true) {
+function spip_sqlite_free(&$r, $serveur='',$requeter=true) {
+	unset($r);
+	return true;
 	//return sqlite_free_result($r);
 }
 
@@ -1218,7 +1220,8 @@ function _sqlite_remplacements_definitions_table($query){
 		// pour l'autoincrement, il faut des INTEGER NOT NULL PRIMARY KEY
 		'/(big|small|medium)?int(eger)?'.$num.'/is' => 'INTEGER',		
 		'/enum'.$enum.'/is' => 'VARCHAR',
-		'/binary/is' => ''
+		'/binary/is' => '',
+		'/auto_increment/is' => ''
 	);
 
 	return preg_replace(array_keys($remplace), $remplace, $query);
@@ -1402,7 +1405,7 @@ class sqlite_traiter_requete{
 // http://doc.spip.org/@executer_requete
 	function executer_requete(){
 		$t = $this->tracer ? trace_query_start(): 0;
-//		echo("<br /><b>executer_requete() $this->serveur >></b> $this->query"); // boum ? pourquoi ?
+		# spip_log("requete: $this->serveur >> $this->query",'query'); // boum ? pourquoi ?
 		if ($this->link){
 			if ($this->sqlite_version == 3) {
 				$r = $this->link->query($this->query);
