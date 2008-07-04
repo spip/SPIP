@@ -83,6 +83,7 @@ function effacer_meta($nom) {
 	$antidate = time() - (_META_CACHE_TIME<<4);
 	if ($touch) {touch_meta($antidate);}
 	sql_delete("spip_meta", "nom='$nom'");
+	unset($GLOBALS['meta'][$nom]);
 	if ($touch) {touch_meta($antidate); $touch = false;}
 }
 
