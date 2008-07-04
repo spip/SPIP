@@ -139,47 +139,71 @@ function liste_plugin_valides($liste_plug,&$infos, $force = false){
 	foreach($liste_plug as $plug)
 		$infos[$plug] = plugin_get_infos($plug,$force);
 
-	if (is_array($liste_plug)){
+	// creer une premiere liste non ordonnee mais qui ne retient
+	// que les plugins valides, et dans leur derniere version en cas de doublon
+	$liste_non_classee = array();
+	foreach($liste_plug as $k=>$plug) {
+		if (!isset($infos[$plug]['erreur'])) {
+			$version = isset($infos[$plug]['version'])?$infos[$plug]['version']:NULL;
+			if (isset($liste_non_classee[$p=strtoupper($infos[$plug]['prefix'])])){
+				// prendre le plus recent
+				if (version_compare($version,$liste_non_classee[$p]['version'],'>'))
+					unset($liste_non_classee[$p]);
+				else{
+					continue;
+				}
+			}
+			$liste_non_classee[$p] = array(
+				'nom' => $infos[$plug]['nom'],
+				'etat' => $infos[$plug]['etat'],
+				'dir'=>$plug,
+				'version'=>isset($infos[$plug]['version'])?$infos[$plug]['version']:NULL
+			);
+		}
+	}
+
+	if (is_array($liste_non_classee)){
 		// construire une liste ordonnee des plugins
 		$count = 0;
-		while ($c=count($liste_plug) AND $c!=$count){ // tant qu'il reste des plugins a classer, et qu'on ne stagne pas
-			#echo "tour::";var_dump($liste_plug);
+		while ($c=count($liste_non_classee) AND $c!=$count){ // tant qu'il reste des plugins a classer, et qu'on ne stagne pas
+			#echo "tour::";var_dump($liste_non_classee);
 			$count = $c;
-			foreach($liste_plug as $k=>$plug) {
-				if (isset($infos[$plug]['erreur'])) {
-					unset($liste_plug[$k]);
-				} else {
-					$version = isset($infos[$plug]['version'])?$infos[$plug]['version']:NULL;
-					if (isset($liste[$p=strtoupper($infos[$plug]['prefix'])])){
-						// prendre le plus recent
-						if (version_compare($version,$liste[$p]['version'],'>'))
-							unset($liste[$p]);
-						else{
-							unset($liste_plug[$k]);
-							continue;
-						}
-					}
-					if (!erreur_necessite($infos[$plug]['necessite'], $liste)) {
-						$liste[$p] = array(
-							'nom' => $infos[$plug]['nom'],
-							'etat' => $infos[$plug]['etat'],
-							'dir'=>$plug,
-							'version'=>isset($infos[$plug]['version'])?$infos[$plug]['version']:NULL
-						);
-						unset($liste_plug[$k]);
-					}
+			foreach($liste_non_classee as $p=>$resume) {
+				$plug = $resume['dir'];
+				// si des plugins sont necessaire, on ne peut inserer qu'apres eux
+				$necessite_ok = !erreur_necessite($infos[$plug]['necessite'], $liste);
+				// si des plugins sont utiles, on ne peut inserer qu'apres eux, 
+				// sauf si ils sont de toute facon absents de la liste
+				$utilise_ok = true;
+				if (!erreur_necessite($infos[$plug]['utilise'], $liste_non_classee))
+					$utilise_ok = !erreur_necessite($infos[$plug]['utilise'], $liste);
+				if ($necessite_ok AND $utilise_ok){
+					$liste[$p] = $liste_non_classee[$p];
+					unset($liste_non_classee[$p]);
 				}
 			}
 		}
-		if (count($liste_plug)) {
+		if (count($liste_non_classee)) {
 			include_spip('inc/lang');
 			utiliser_langue_visiteur();
 			$erreurs = "";
-			foreach($liste_plug as $plug){
-				$necessite = erreur_necessite($infos[$plug]['necessite'], $liste);
-				$erreurs .= "<li>" . _T('plugin_impossible_activer',
-					array('plugin' => $plug)
-				)."</li>";
+			foreach($liste_non_classee as $p=>$resume){
+				$plug = $resume['dir'];
+				if ($n = erreur_necessite($infos[$plug]['necessite'], $liste)){
+					$erreurs .= "<li>" . _T('plugin_impossible_activer',
+						array('plugin' => $plug)
+					)."</li>";
+					$necessite .= $n;
+				}
+				else {
+					// dependance circulaire, ou utilise qu'on peut ignorer ?
+					// dans le doute on fait une erreur quand meme
+					// plutot que d'inserer silencieusement et de risquer un bug sournois latent
+					$necessite .= erreur_necessite($infos[$plug]['utilise'], $liste);
+					$erreurs .= "<li>" . _T('plugin_impossible_activer',
+						array('plugin' => $plug)
+					)."</li>";
+				}
 			}
 			ecrire_meta('plugin_erreur_activation',
 				"<ul>$erreurs</ul>$necessite");
