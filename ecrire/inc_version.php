@@ -18,7 +18,7 @@ define("_ECRIRE_INC_VERSION", "1");
 error_reporting(E_ALL ^ E_NOTICE);
 # compatibilite anciennes versions
 # si vous n'avez aucun fichier .php3, redefinissez a ""
-# ca fera foncer find_in_path
+# ne concerne que le fichier mes_options.php3
 define('_EXTENSION_PHP', '.php3');
 #define('_EXTENSION_PHP', '');
 
