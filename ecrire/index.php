@@ -127,7 +127,7 @@ define('_TRANCHES', 10);
 if (!$reinstall=='oui'
 AND !_AJAX
 AND isset($GLOBALS['meta']['version_installee'])
-AND ($GLOBALS['spip_version'] != (str_replace(',','.',$GLOBALS['meta']['version_installee']))))
+AND ($GLOBALS['spip_version_base'] != (str_replace(',','.',$GLOBALS['meta']['version_installee']))))
 	$exec = 'demande_mise_a_jour';
 
 // Quand une action d'administration est en cours (meta "admin"),

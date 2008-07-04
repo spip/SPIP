@@ -18,7 +18,7 @@ include_spip('inc/headers');
 // http://doc.spip.org/@exec_upgrade_dist
 function exec_upgrade_dist() {
 
-	global $spip_version;
+	global $spip_version_base;
 	if (!_FILE_CONNECT)
 		redirige_url_ecrire("install");
 
@@ -46,7 +46,7 @@ function exec_upgrade_dist() {
 
 	// Erreur downgrade
 	// (cas de double installation de fichiers SPIP sur une meme base)
-	if ($spip_version < $GLOBALS['meta']['version_installee'])
+	if ($spip_version_base < $GLOBALS['meta']['version_installee'])
 		$commentaire = _T('info_mise_a_niveau_base_2');
 	// Commentaire standard upgrade
 	else $commentaire = _T('texte_mise_a_niveau_base_1');

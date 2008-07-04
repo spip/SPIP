@@ -88,7 +88,7 @@ function erreur_necessite($n, $liste) {
 		// Necessite SPIP version x ?
 		if ($id=='SPIP') {
 			if (!plugin_version_compatible($need['version'],
-			$GLOBALS['spip_version_code'])) {
+			$GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'])) {
 				$msg .= "<li>"
 				._T('plugin_necessite_spip',
 				array('version' => $need['version'])
@@ -307,7 +307,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 					$prefix = strtoupper(preg_replace(',\W,','_',$info['prefix']));
 					$splugs .= "define('_DIR_PLUGIN_$prefix',_DIR_PLUGINS.'$plug/');\n";
 					foreach($info['path'] as $chemin){
-						if (!isset($chemin['version']) OR plugin_version_compatible($chemin['version'],$GLOBALS['spip_version_code'])){
+						if (!isset($chemin['version']) OR plugin_version_compatible($chemin['version'],$GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'])){
 							if (isset($chemin['type']))
 								$splugs .= "if (".(($chemin['type']=='public')?"":"!")."_DIR_RESTREINT) ";
 							$dir = $chemin['dir'];
