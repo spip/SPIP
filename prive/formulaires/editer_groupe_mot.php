@@ -18,7 +18,7 @@ include_spip('inc/editer');
 function formulaires_editer_groupe_mot_charger_dist($id_groupe='new',$retour='', $config_fonc='groupes_mots_edit_config', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('groupe_mot',$id_groupe,0,'',$retour,$config_fonc,$row,$hidden);
 
-	$valeurs['tables'] = explode(',',$valeurs['tables']);
+	$valeurs['tables_liees'] = explode(',',$valeurs['tables_liees']);
 	return $valeurs;
 }
 

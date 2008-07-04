@@ -21,37 +21,13 @@ function exec_mots_type_dist()
 
 	if (!$id_groupe) {
 	  $type = $titre = filtrer_entites(_T('titre_nouveau_groupe'));
-	  $onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
-	  $ancien_type = '';
-	  $unseul = 'non';
-	  $obligatoire = 'non';
-	  $articles = 'oui';
-	  $breves = 'oui';
-	  $rubriques = 'non';
-	  $syndic = 'oui';
-	  $acces_minirezo = 'oui';
-	  $acces_comite = 'oui';
-	  $acces_forum = 'non';
 	  $row = array();
 	} else {
-
-		$row = sql_fetsel("*", "spip_groupes_mots", "id_groupe=$id_groupe");
+		$row = sql_fetsel("id_groupe,titre", "spip_groupes_mots", "id_groupe=$id_groupe");
 		if ($row) {
 			$id_groupe = $row['id_groupe'];
 			$type = $row['titre'];
 			$titre = typo($type);
-			$descriptif = $row['descriptif'];
-			$texte = $row['texte'];
-			$unseul = $row['unseul'];
-			$obligatoire = $row['obligatoire'];
-			$articles = $row['articles'];
-			$breves = $row['breves'];
-			$rubriques = $row['rubriques'];
-			$syndic = $row['syndic'];
-			$acces_minirezo = $row['minirezo'];
-			$acces_comite = $row['comite'];
-			$acces_forum = $row['forum'];
-			$onfocus ="";
 		}
 	}
 

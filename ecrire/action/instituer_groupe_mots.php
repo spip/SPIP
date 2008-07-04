@@ -45,7 +45,7 @@ function action_instituer_groupe_mots_get($table)
 		'titre' => $titre,
 		'unseul' => 'non',
 		'obligatoire' => 'non',
-		'tables'=>$table,
+		'tables_liees'=>$table,
 		'minirezo' =>  'oui',
 		'comite' =>  'non',
 		'forum' => 'non')) ;

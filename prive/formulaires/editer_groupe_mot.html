@@ -32,12 +32,12 @@
 	    </li>
 	    <li>
 	      <fieldset><h3 class='legend'><:info_mots_cles_association:></h3><ul><li>
-	    	<div class='choix'><input type='checkbox' name='tables&#91;&#93;' value='articles'[(#VAL{articles}|in_any{#ENV{tables}}|oui)checked="checked"] id='articles' /><label for='articles'><:item_mots_cles_association_articles:></label></div>
+	    	<div class='choix'><input type='checkbox' name='tables_liees&#91;&#93;' value='articles'[(#VAL{articles}|in_any{#ENV{tables_liees}}|oui)checked="checked"] id='articles' /><label for='articles'><:item_mots_cles_association_articles:></label></div>
 	    	[(#ENV{config}|table_valeur{activer_breves}|=={oui}|oui)
-	    	<div class='choix'><input type='checkbox' name='tables&#91;&#93;' value='breves'[(#VAL{breves}|in_array{#ENV{tables}}|oui)checked="checked"] id='breves' /><label for='breves'><:item_mots_cles_association_breves:></label></div>
+	    	<div class='choix'><input type='checkbox' name='tables_liees&#91;&#93;' value='breves'[(#VAL{breves}|in_array{#ENV{tables_liees}}|oui)checked="checked"] id='breves' /><label for='breves'><:item_mots_cles_association_breves:></label></div>
 	    	]
-	    	<div class='choix'><input type='checkbox' name='tables&#91;&#93;' value='rubriques'[(#VAL{rubriques}|in_array{#ENV{tables}}|oui)checked="checked"] id='rubriques' /><label for='rubriques'><:item_mots_cles_association_rubriques:></label></div>
-	    	<div class='choix'><input type='checkbox' name='tables&#91;&#93;' value='syndic'[(#VAL{syndic}|in_array{#ENV{tables}}|oui)checked="checked"] id='syndic' /><label for='syndic'><:item_mots_cles_association_sites:></label></div>
+	    	<div class='choix'><input type='checkbox' name='tables_liees&#91;&#93;' value='rubriques'[(#VAL{rubriques}|in_array{#ENV{tables_liees}}|oui)checked="checked"] id='rubriques' /><label for='rubriques'><:item_mots_cles_association_rubriques:></label></div>
+	    	<div class='choix'><input type='checkbox' name='tables_liees&#91;&#93;' value='syndic'[(#VAL{syndic}|in_array{#ENV{tables_liees}}|oui)checked="checked"] id='syndic' /><label for='syndic'><:item_mots_cles_association_sites:></label></div>
 	    	<!--choix_tables-->
 	    	</li></ul></fieldset>
 	    	[(#ENV{config}|table_valeur{config_precise_groupes}|=={oui}|ou{#ENV{unseul}|=={oui}}|ou{#ENV{obligatoire}|=={oui}}|oui)
