@@ -80,35 +80,35 @@ function aff_statistique_visites_popularite($serveur, $id_article, &$classement,
 
 // http://doc.spip.org/@aff_statistique_visites_par_visites
 function aff_statistique_visites_par_visites($serveur='', $id_article=0, $classement= array()) {
-	$out = '';
+	$res = array();
 	// Par visites depuis le debut
 	$result = sql_select("id_article, titre, popularite, visites", "spip_articles", "statut='publie' AND popularite > 0", "", "visites DESC", "30",'',$serveur);
 
-	$n = sql_count($result,$serveur);
-	if ($n) {
-		$out .= "<br /><div class='iconeoff' style='padding: 5px;'>";
-		$out .= "<div style='overflow:hidden;' class='verdana1 spip_x-small'>";
-		$out .= typo(_T('info_affichier_visites_articles_plus_visites'));
-		$out .= "<ol style='padding-left:40px; font-size:x-small;color:#666666;'>";
-
-		while ($row = sql_fetch($result,$serveur)) {
-			$titre = typo(supprime_img($row['titre'],''));
-			$l_article = $row['id_article'];
-			$visites = $row['visites'];
-			$popularite = round($row['popularite']);
-			$numero = $classement[$l_article];
+	while ($row = sql_fetch($result,$serveur)) {
+		$titre = typo(supprime_img($row['titre'],''));
+		$l_article = $row['id_article'];
 				
-			if ($l_article == $id_article){
-				$out .= "\n<li><b>$titre</b></li>";
-			} else {
-				$out .= "\n<li><a href='" . generer_url_ecrire("statistiques_visites","id_article=$l_article") . "'\ntitle='"._T('info_popularite_4', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></li>";
-				}
+		if ($l_article == $id_article){
+			$out = "<b>$titre</b>";
+		} else {
+			$t = _T('info_popularite_4',
+				array('popularite' => round($row['popularite']), 'visites' =>  $row['visites']));
+			$h = generer_url_ecrire("statistiques_visites","id_article=$l_article");
+			$out = "<a href='$h'\ntitle='$t'>$titre</a>";
 		}
-		$out .= "</ol>";
-		$out .= "</div>";
-		$out .= "</div>";
+		$res[]= "<td style='text-align: right; vertical-align: top'>"
+			. $classement[$l_article]
+			. ". </td><td>$out</td>";
 	}
-	return $out;
+	
+	if (!$res) return '';
+	
+	return "<br /><div class='iconeoff' style='padding: 5px;'>"
+	  . "<div style='overflow:hidden;' class='verdana1 spip_x-small'>"
+	  . typo(_T('info_affichier_visites_articles_plus_visites'))
+	  . "<table style='padding-left:40px; font-size:x-small;color:#666666;'><tr>"
+	  . join('</tr><tr>', $res)
+	  . '</tr></table></div></div>';
 }
 
 // http://doc.spip.org/@http_img_rien
