@@ -16,7 +16,7 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 // http://doc.spip.org/@inc_editer_article_dist
-function formulaires_editer_rubrique_charger_dist($id_rubrique='new', $id_parent=0, $lier_trad=0, $retour='', $config_fonc='rubriques_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_rubrique_charger_dist($id_rubrique='new', $id_parent=0, $retour='', $lier_trad=0, $config_fonc='rubriques_edit_config', $row=array(), $hidden=''){
 	return formulaires_editer_objet_charger('rubrique',$id_rubrique,$id_parent,$lier_trad,$retour,$config_fonc,$row,$hidden);
 }
 
@@ -33,13 +33,13 @@ function rubriques_edit_config($row)
 	return $config;
 }
 
-function formulaires_editer_rubrique_verifier_dist($id_rubrique='new', $id_parent=0, $lier_trad=0, $retour='', $config_fonc='rubriques_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_rubrique_verifier_dist($id_rubrique='new', $id_parent=0, $retour='', $lier_trad=0, $config_fonc='rubriques_edit_config', $row=array(), $hidden=''){
 
 	$erreurs = formulaires_editer_objet_verifier('rubrique',$id_rubrique,array('titre'));
 	return $erreurs;
 }
 
-function formulaires_editer_rubrique_traiter_dist($id_rubrique='new', $id_parent=0, $lier_trad=0, $retour='', $config_fonc='rubriques_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_rubrique_traiter_dist($id_rubrique='new', $id_parent=0, $retour='', $lier_trad=0, $config_fonc='rubriques_edit_config', $row=array(), $hidden=''){
 	return formulaires_editer_objet_traiter('rubrique',$id_rubrique,$id_parent,$lier_trad,$retour,$config_fonc,$row,$hidden);
 }
 

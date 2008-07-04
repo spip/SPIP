@@ -16,7 +16,7 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 // http://doc.spip.org/@inc_editer_mot_dist
-function formulaires_editer_mot_charger_dist($id_mot='new', $id_groupe=0, $ajouter_id_article=0, $table='', $table_id=0, $retour='', $config_fonc='mots_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_mot_charger_dist($id_mot='new', $id_groupe=0, $retour='', $ajouter_id_article=0, $table='', $table_id=0, $config_fonc='mots_edit_config', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('mot',$id_mot,$id_groupe,'',$retour,$config_fonc,$row,$hidden);
 	$valeurs['table'] = $table;
 	return $valeurs;
@@ -37,14 +37,14 @@ function mots_edit_config($row)
 	return $config;
 }
 
-function formulaires_editer_mot_verifier_dist($id_mot='new', $id_groupe=0, $ajouter_id_article=0, $table='', $table_id=0, $retour='', $config_fonc='mots_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_mot_verifier_dist($id_mot='new', $id_groupe=0, $retour='', $ajouter_id_article=0, $table='', $table_id=0, $config_fonc='mots_edit_config', $row=array(), $hidden=''){
 
 	$erreurs = formulaires_editer_objet_verifier('mot',$id_mot,array('titre'));
 	return $erreurs;
 }
 
 // http://doc.spip.org/@inc_editer_mot_dist
-function formulaires_editer_mot_traiter_dist($id_mot='new', $id_groupe=0, $ajouter_id_article=0, $table='', $table_id=0, $retour='', $config_fonc='mots_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_mot_traiter_dist($id_mot='new', $id_groupe=0, $retour='', $ajouter_id_article=0, $table='', $table_id=0, $config_fonc='mots_edit_config', $row=array(), $hidden=''){
 	$message = '';
 	set_request('redirect','');
 	$action_editer = charger_fonction("editer_mot",'action');
