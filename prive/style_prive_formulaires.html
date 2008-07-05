@@ -10,7 +10,7 @@
 	ATTENTION: il faut absolument le charset sinon Firefox croit que
 	c'est du text/html !
 ]
-#CACHE{3600*100,cache-client}
+#CACHE{0*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
@@ -63,14 +63,14 @@
 }
 .formulaire_spip li {
 	margin: 0;
-	padding: 10px 10px 10px 10px;
+	padding: 10px 10px 0px 10px;
 	padding-#GET{left}:130px;
 	clear:both;
 	overflow:auto;
 }
 .formulaire_spip li fieldset li {
 	border:0; 
-	padding: 5px 10px 5px 10px;
+	padding: 10px 10px 0px 10px;
 	background-color: #[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];
 }
 
@@ -99,10 +99,12 @@
 
 /* intitules (label) */
 
-.formulaire_spip li {
+.formulaire_spip li,
+li.gauche {
 	padding-#GET{left}: 10px;
 }
 
+li.haut,
 .formulaire_spip li.editer_titre,
 .formulaire_spip li.editer_groupe_mot,
 .formulaire_spip li.editer_nom_site,
@@ -119,7 +121,9 @@
 	padding-#GET{left}: 130px;
 
 }
-.formulaire_spip label {
+.formulaire_spip label,
+li.haut label
+{
 		font-size: 80%;
 		display: -moz-inline-box;
 		display: inline-block;
@@ -145,6 +149,7 @@
 	color: white;
 }
 
+li.gauche label,
 .formulaire_spip li.editer_titre label,
 .formulaire_spip li.editer_groupe_mot label,
 .formulaire_spip li.editer_nom_site label,
@@ -181,6 +186,8 @@
 
 .formulaire_spip li.editer_parent, 
 .formulaire_spip li.editer_groupe_mot {
+	margin-top: 10px;
+	padding-bottom: 10px;
 	background-color: [#(#GET{claire}|couleur_eclaircir)];
 }
 .formulaire_spip li.editer_parent label,
@@ -221,7 +228,9 @@
 	border:0;
 }
 .formulaire_spip li fieldset {
-	margin: -10px;
+	margin-left: -10px;
+	margin-right: -10px;
+	padding-bottom: 10px;
 	border-top: 1px solid #GET{foncee};
 	background-color: #[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];
 }
