@@ -29,8 +29,8 @@ function action_acceder_document_dist() {
 	$arg = rawurldecode(_request('arg'));
 
 	$status = $dcc = false;
-	if (strpos($file,'../') !== false
-	OR preg_match(',^\w+://,', $file)) {
+	if (strpos($f,'../') !== false
+	OR preg_match(',^\w+://,', $f)) {
 		$status = 403;
 	}
 	else if (!file_exists($file) OR !is_readable($file)) {
@@ -59,8 +59,12 @@ function action_acceder_document_dist() {
 			// en controlant la cle passee en argument
 			//
 			include_spip('inc/securiser_action');
-			if (_request('cle') != calculer_cle_action($doc['id_document'].','.$f))
+			$cle = _request('cle');
+			$x = calculer_cle_action($doc['id_document'].','.$f);
+			if ($cle != $x) {
+				spip_log("acces interdit $x <> $cle");
 				$status = 403;
+			}
 		}
 	}
 
