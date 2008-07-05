@@ -255,25 +255,23 @@ function autoriser_document_modifier_dist($faire, $type, $id, $qui, $opt){
 		return true;
 
 	if (!isset($m[$id])) {
+		$vu = false;
 		$interdit = false;
-		$vu = true;
-		include_spip('public/interfaces');
-		$jointures = array_diff(
-			$GLOBALS['tables_jointures']['spip_documents'],
-			array('types_documents', 'mots')
-		);
-		foreach($jointures as $j) {
-			$type = preg_replace(',s?_?documents?_?|s$,', '', $j);
-			$id_table = id_table_objet($type);
-			$s = sql_select("$id_table", "spip_$j", "id_document=".sql_quote($id));
-			while ($t = sql_fetch($s)) {
-				spip_log($t);
-				if (autoriser('modifier', $type, $t[$id_table], $qui, $opt)) {
-					$vu = true;
-				}
-				else {
-					$interdit = true;
-					break 2;
+
+		$s = sql_select("*", "spip_documents_liens", "id_document=".sql_quote($id));
+		while ($t = sql_fetch($s)) {
+			// chercher la cle non vide
+			foreach ($t as $k=>$val) {
+				if ($val
+				AND $k != 'id_document'
+				AND substr($k,0,3) == 'id_') {
+					if (autoriser('modifier', substr($k,3), $val, $qui, $opt)) {
+						$vu = true;
+					}
+					else {
+						$interdit = true;
+						break 2;
+					}
 				}
 			}
 		}
