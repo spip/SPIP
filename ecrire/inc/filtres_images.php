@@ -2568,9 +2568,14 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $couleur, $text
 		}
 	}
 
-	$text = str_replace(array('~'), array(' '), $text);
+	// split the text into an array of single words
+	$words = explode(' ', $text);
 
-	$words = explode(' ', $text); // split the text into an array of single words
+	// les espaces
+	foreach($words as $k=>$v)
+		$words[$k] = str_replace(array('~'), array(' '), $v);
+
+
 	if ($hauteur_ligne == 0) 	$lineHeight = floor($textSize * 1.3);
 	else $lineHeight = $hauteur_ligne;
 
