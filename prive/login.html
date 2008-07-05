@@ -55,7 +55,7 @@ jQuery(function(){ jQuery('input#var_login').focus(); });
 		Est-ce qu'on se connecte a l'espace prive ou pas ?
 	]
 	[(#ENV{url}|=={''}|?{#SET{prive,' '}})]
-	[(#ENV{url}|match{'^ecrire/'}|?{#SET{prive,' '}})]
+	[(#ENV{url}|match{^#EVAL{_DIR_RESTREINT_ABS}}|?{#SET{prive,' '}})]
 	[(#GET{prive}) <small><:login_acces_prive:></small>]
 	
 	</h3>
