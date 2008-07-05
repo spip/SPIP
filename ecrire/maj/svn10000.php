@@ -107,9 +107,30 @@ $GLOBALS['maj'][11790] = array(array('maj_11790'));
 
 $GLOBALS['maj'][11794] = array(); // ajout de spip_documents_forum
 
+
+
+$GLOBALS['maj'][11961] = array(
+array('sql_alter',"TABLE spip_groupes_mots CHANGE `tables` tables_liees text DEFAULT '' NOT NULL AFTER obligatoire"), // si tables a ete cree on le renomme
+array('sql_alter',"TABLE spip_groupes_mots ADD tables_liees text DEFAULT '' NOT NULL AFTER obligatoire"), // sinon on l'ajoute
+array('sql_update','spip_groupes_mots',array('tables_liees'=>"''"),"articles REGEXP '.*'"), // si le champ articles est encore la, on reinit la conversion
+array('sql_update','spip_groupes_mots',array('tables_liees'=>"concat(tables_liees,'articles,')"),"articles='oui'"), // sinon ces 4 requetes ne feront rien
+array('sql_update','spip_groupes_mots',array('tables_liees'=>"concat(tables_liees,'breves,')"),"breves='oui'"),
+array('sql_update','spip_groupes_mots',array('tables_liees'=>"concat(tables_liees,'rubriques,')"),"rubriques='oui'"),
+array('sql_update','spip_groupes_mots',array('tables_liees'=>"concat(tables_liees,'syndic,')"),"syndic='oui'"),
+);
+
+
+
 // Reunir en une seule table les liens de documents
 //  spip_documents_articles et spip_documents_forum
-function maj_11911 () {
+function maj_11974 () {
+	// Creer spip_documents_liens
+	global $tables_auxiliaires;
+	include_spip('base/auxiliaires');
+	$v = $tables_auxiliaires[$k='spip_documents_liens'];
+	sql_create($k, $v['field'], $v['key'], false, false);
+
+	// Recopier les donnees
 	foreach (array('article', 'breve', 'rubrique', 'auteur', 'forum') as $l) {
 		if ($s = sql_select('*', 'spip_documents_'.$l.'s')
 		OR $s = sql_select('*', 'spip_documents_'.$l)) {
@@ -128,23 +149,19 @@ function maj_11911 () {
 		}
 	}
 }
-$GLOBALS['maj'][11911] = array(array('maj_11911'));
+$GLOBALS['maj'][11974] = array(array('maj_11974'));
+
+
+
+
+
+
 
 // penser a ajouter ici destruction des tables spip_documents_articles etc
-// une fois qu'on aura valide la procedure d'upgrade ci-dessus
+// une fois qu'on aura valide la procedure d'upgrade 11974
 
-
-$GLOBALS['maj'][11961] = array(
-array('sql_alter',"TABLE spip_groupes_mots CHANGE `tables` tables_liees text DEFAULT '' NOT NULL AFTER obligatoire"), // si tables a ete cree on le renomme
-array('sql_alter',"TABLE spip_groupes_mots ADD tables_liees text DEFAULT '' NOT NULL AFTER obligatoire"), // sinon on l'ajoute
-array('sql_update','spip_groupes_mots',array('tables_liees'=>"''"),"articles REGEXP '.*'"), // si le champ articles est encore la, on reinit la conversion
-array('sql_update','spip_groupes_mots',array('tables_liees'=>"concat(tables_liees,'articles,')"),"articles='oui'"), // sinon ces 4 requetes ne feront rien
-array('sql_update','spip_groupes_mots',array('tables_liees'=>"concat(tables_liees,'breves,')"),"breves='oui'"),
-array('sql_update','spip_groupes_mots',array('tables_liees'=>"concat(tables_liees,'rubriques,')"),"rubriques='oui'"),
-array('sql_update','spip_groupes_mots',array('tables_liees'=>"concat(tables_liees,'syndic,')"),"syndic='oui'"),
-);
 
 // penser a ajouter ici destruction des champs articles breves rubriques et syndic
-// une fois qu'on aura valide la procedure d'upgrade ci-dessus
+// une fois qu'on aura valide la procedure d'upgrade 11961
 
 ?>
