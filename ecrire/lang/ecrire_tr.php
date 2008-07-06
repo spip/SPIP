@@ -42,7 +42,7 @@ Bu ithal istemini onaylamay&#305;n.
 'avis_operation_impossible' => 'Olanaks&#305;z i&#351;lem',
 'avis_probleme_archive' => '@archive@ dosyas&#305;n&#305; okurken sorun &ccedil;&#305;kt&#305;',
 'avis_site_introuvable' => 'Site bulunamad&#305;',
-'avis_site_syndique_probleme' => 'Dikkat : bu site ile payla&#351;&#305;mda sorun &ccedil;&#305;kt&#305;&nbsp;; sistem ge&ccedil;ici bir s&uuml;re i&ccedil;in durduruldu. Bu sitenin payla&#351;&#305;m dosyas&#305;n&#305;n adresini kontrol edin (<b>@url_syndic@</b>) ve bilgileri almay&#305; yeniden deneyin.',
+'avis_site_syndique_probleme' => '<MODIF>Dikkat : bu site ile payla&#351;&#305;mda sorun &ccedil;&#305;kt&#305;&nbsp;; sistem ge&ccedil;ici bir s&uuml;re i&ccedil;in durduruldu. Bu sitenin payla&#351;&#305;m dosyas&#305;n&#305;n adresini kontrol edin (<b>@url_syndic@</b>) ve bilgileri almay&#305; yeniden deneyin.',
 'avis_sites_probleme_syndication' => 'Bu siteler payla&#351;&#305;m i&#351;leminde sorunla kar&#351;&#305;la&#351;t&#305;',
 'avis_sites_syndiques_probleme' => 'Haber payla&#351;&#305;ml&#305; &#351;u sitelerde sorun &ccedil;&#305;kt&#305;',
 'avis_suppression_base' => 'D&#304;KKAT, verileri silme i&#351;lemi geri al&#305;namaz',

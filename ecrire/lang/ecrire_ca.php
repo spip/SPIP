@@ -45,7 +45,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'avis_operation_impossible' => 'Operaci&oacute; impossible',
 'avis_probleme_archive' => 'Problema de lectura del fitxer @archive@',
 'avis_site_introuvable' => 'Lloc il&middot;localitzable',
-'avis_site_syndique_probleme' => 'Atenci&oacute;: la sindicaci&oacute; d\'aquest lloc troba un problema&nbsp;; el sistema queda de moment interromput. Verifiqueu l\'adre&ccedil;a del fitxer de sindicaci&oacute; d\'aquest lloc (<b>@url_syndic@</b>), i intenteu una nova recuperaci&oacute; de les informacions.',
+'avis_site_syndique_probleme' => 'Atenci&oacute;: la sindicaci&oacute; d\'aquest lloc s\'ha trobat amb un problema&nbsp;; per tant, el sistema queda temporalment interromput. Verifiqueu l\'adre&ccedil;a del fitxer de sindicaci&oacute; d\'aquest lloc (<b>@url_syndic@</b>), i intenteu una nova recuperaci&oacute; de les informacions.',
 'avis_sites_probleme_syndication' => 'Aquests llocs han trobat un problema de sindicaci&oacute;',
 'avis_sites_syndiques_probleme' => 'Aquests llocs sindicats donen un problema ',
 'avis_suppression_base' => 'ATENCI&Oacute;, la supressi&oacute; de dades &eacute;s irreversible.',
