@@ -158,23 +158,7 @@ function legender_auteur_voir($auteur) {
 		$h = generer_url_ecrire("auteur_infos","id_auteur=$id_auteur&edit=oui");
 		$h = "<a\nhref='$h'>$clic</a>";
 		$res .= icone_inline($clic, $h, "redacteurs-24.gif", "edit.gif", $spip_lang_right);
-/*
-		$res .= http_script("
-		var intitule_bouton = ".sql_quote($retour).";
-		jQuery('#bouton_modifier_auteur a')
-		.click(function() {
-			jQuery('#auteur_infos_edit')
-			.toggle();
-			jQuery('#auteur_infos_voir')
-			.toggle();
-			jQuery('#bouton_modifier_auteur > a > span')
-			.each(function(){
-				var tmp = jQuery(this).html();
-				jQuery(this).html(intitule_bouton);
-				intitule_bouton = tmp;
-			});
-			return false;
-		});");*/
+
 		$res .= http_script("
 		var intitule_bouton = ".sql_quote($retour).";
 		jQuery('#bouton_modifier_auteur a')
