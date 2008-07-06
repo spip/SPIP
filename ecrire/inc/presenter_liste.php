@@ -12,6 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+define('_TRANCHES', 10);
+
 // Cette fonction prend un argument un tableau decrivant une requete Select
 // et une fonction formatant chaque ligne du resultat de la requete
 // Elle renvoie une enumeration HTML de ces lignes formatees, 
@@ -24,7 +26,7 @@ function inc_presenter_liste_dist($requete, $fonc, &$prims, $own, $force, $style
 
 	// $requete est passe par reference, pour modifier l'index LIMIT
 	if ($idom AND $spip_display != 4)
-		$tranches = affiche_tranche_bandeau($requete, $idom, $url, $cpt);
+		$tranches = affiche_tranche_bandeau($requete, $idom, $url, $cpt, _TRANCHES);
 	else $tranches = '';
 
 	$prim = $prims;
@@ -99,7 +101,7 @@ function afficher_tranches_requete($num_rows, $idom, $url='', $nb_aff = 10, $old
 	$self = self();
 	$ie_style = ($browser_name == "MSIE") ? "height:1%" : '';
 	$style = "style='visibility: hidden; float: $spip_lang_right'";
-	$nav= navigation_pagination($num_rows, $nb_aff, $url, _request('idom'), $idom, true);
+	$nav= navigation_pagination($num_rows, $nb_aff, $url, _request($idom), $idom, true);
 	$script = parametre_url($self, $idom, -1);
 	$l = htmlentities(_T('lien_tout_afficher'));
 
@@ -114,7 +116,7 @@ function afficher_tranches_requete($num_rows, $idom, $url='', $nb_aff = 10, $old
 }
 
 // http://doc.spip.org/@affiche_tranche_bandeau
-function affiche_tranche_bandeau(&$requete, $idom, $url='', $cpt=NULL)
+function affiche_tranche_bandeau(&$requete, $idom, $url='', $cpt=NULL, $pas=10)
 {
 	if (!isset($requete['GROUP BY'])) $requete['GROUP BY'] = '';
 
@@ -122,11 +124,12 @@ function affiche_tranche_bandeau(&$requete, $idom, $url='', $cpt=NULL)
 		$cpt = sql_countsel($requete['FROM'], $requete['WHERE'], $requete['GROUP BY']);
 
 	$deb_aff = intval(_request($idom));
-	$nb_aff = floor(1.5 * _TRANCHES);
+	$nb_aff = $pas + ($pas>>1);
 
 	if (isset($requete['LIMIT'])) $cpt = min($requete['LIMIT'], $cpt);
+
 	if ($cpt > $nb_aff) {
-		$nb_aff = (_TRANCHES); 
+		$nb_aff = $pas;
 		$res = afficher_tranches_requete($cpt, $idom, $url, $nb_aff);
 	} else $res = '';
 

@@ -19,7 +19,7 @@ function message_de_signature($row)
 }
 
 // http://doc.spip.org/@inc_signatures_dist
-function inc_signatures_dist($script, $id, $debut, $pas, $where, $order, $limit='', $type='') {
+function inc_signatures_dist($script, $id, $debut, $pas, $where, $order, $type='') {
 	charger_generer_url();
 
 	if ($id) { 
@@ -32,7 +32,7 @@ function inc_signatures_dist($script, $id, $debut, $pas, $where, $order, $limit=
 		$res = navigation_pagination($t, $pas, generer_url_ecrire($script, $args), $debut, 'debut', false);
 	} else $res = '';
 
-	$limit = (!$limit AND !$debut) ? '' : (($debut ? "$debut," : "") . $limit);
+	$limit = (!$pas AND !$debut) ? '' : (($debut ? "$debut," : "") . $pas);
 
 	$request = sql_select('*', 'spip_signatures', $where, '', $order, $limit);
 

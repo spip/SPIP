@@ -117,8 +117,6 @@ if (isset($_COOKIE['spip_lang_ecrire'])) {
 
 utiliser_langue_visiteur(); 
 
-define('_TRANCHES', 10);
-
 //
 // Gestion d'une page normale de l'espace prive
 //
