@@ -401,8 +401,10 @@ function ancre_texte($texte, $fautifs=array(), $nocpt=false)
 			  '<\1>\2</\1><br />' . "\n" . '<\1>\3</\1>',
 			  $s);
 
+
 	$tableau = explode("<br />", $s);
-	$format = "<tr id='L%d'><td><a class='sinumerote' style='text-align: right; background-color: white;visibility: " . ($nocpt ? 'hidden' : 'visible') . ";%s' href='#T%s' title=\"%s\">%0" . strval(@strlen(count($tableau))). "d</a></td><td style='padding-left:10px'>%s</td></tr>\n";
+
+	$format = "<span style='float:left;display:block;width:50px;height:1px'><a id='L%d' style='background-color: white; visibility: " . ($nocpt ? 'hidden' : 'visible') . ";%s' href='#T%s' title=\"%s\">%0" . strval(@strlen(count($tableau))). "d</a></span> %s<br />\n";
 
 	$format10=str_replace('white','lightgrey',$format);
 	$formaterr="color: red;";
@@ -431,20 +433,16 @@ function ancre_texte($texte, $fautifs=array(), $nocpt=false)
 	  $res .= sprintf((($i%10) ? $format :$format10), $i, $bg, $indexmesg, $err, $i, $ligne);
 	  $i++;
 	}
-	$js = "this.style.visibility=this.style.visibility=='visible'?'hidden' : 'visible'";
 
-	return "\n<table id='T$ancre' style='border: 0px;'>\n"
-	  . '<tr><th><a onclick="javascript:'
-	  . "\$('.sinumerote').each(function(){ $js }); return false;"
+	return "<div id='T$ancre'>"
+	.'<div onclick="javascript:'
+	  . "\$(this).parent().find('a').toggle();"
 	  . '" title="'
 	  . _T('masquer_colonne')
 	  . '" >'
 	  . _T('info_numero_abbreviation')
-	  . "</a></th>\n<th style='text-align: center'>"
-	  . _T('info_texte')
-	  . "</th></tr>"
-	  . $res
-	  . "</table>";
+	  . "</div>
+	".$res."</div>\n";
 }
 
 // l'environnement graphique du debuggueur 
