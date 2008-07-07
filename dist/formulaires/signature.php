@@ -14,46 +14,50 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function formulaires_signature_charger_dist($id_article, $petition, $texte, $site_obli, $message) {
 	$valeurs = array(
-		'nom_email'=>'',
-		'adresse_email'=>'',
+		'id_article' => $id_article,
+		'session_nom' => sinon($GLOBALS['visiteur_session']['session_nom'],
+			$GLOBALS['visiteur_session']['nom']),
+		'session_email'=> sinon($GLOBALS['visiteur_session']['session_email'],
+			$GLOBALS['visiteur_session']['email']),
 		'signature_nom_site'=>'',
 		'signature_url_site'=>'http://',
 		'_texte'=>$petition,
 		'_message'=>$message,
 		'message'=>'',
+		'site_obli' => $site_obli,
 		'debut_signatures'=>'' // pour le nettoyer de l'url d'action !
 		);
 
-	if ($c=_request('var_confirm')) {
-		// on ne passe pas directement le message mais uniquement le pass de confirm
-		// cela permet de conserver le message en cache quelques instants
-		// et se premunir contre le double clic
-		return array(false,array('_confirm'=>$c));
+	if ($c = _request('var_confirm')) {
+		$valeurs['_confirm'] = $c;
+		return array(false /* pas editable */, $valeurs);
 	}
-	
-	return $valeurs;
+	else
+		return $valeurs;
 }
-function affiche_reponse_confirmation($confirm){
+function affiche_reponse_confirmation($confirm) {
 	$reponse_confirmation = charger_fonction('reponse_confirmation','formulaires/signature/');
-	return $reponse_confirmation();  # calculee plus tot: assembler.php
+	return $reponse_confirmation($confirm);  # calculee plus tot: assembler.php
 }
 
 function formulaires_signature_verifier_dist($id_article, $petition, $texte, $site_obli, $message) {
 	$erreurs = array();
-	$oblis = array('nom_email','adresse_email');
+	$oblis = array('session_email','session_email');
+
 	if ($site_obli){
 		$oblis[] = 'signature_nom_site';
 		$oblis[] = 'signature_url_site';
+		set_request('signature_url_site', vider_url(_request('signature_url_site')));
 	}
 	foreach ($oblis as $obli)
 		if (!_request($obli))
 			$erreurs[$obli] = _T('info_obligatoire');
 	
-	if ($nom = _request('nom_email') AND strlen($nom) < 2)
+	if ($nom = _request('session_nom') AND strlen($nom) < 2)
 		$erreurs['nom_email'] =  _T('form_indiquer_nom');
 
 	include_spip('inc/filtres');
-	if (($mail=_request('adresse_email')) == _T('info_mail_fournisseur'))
+	if (($mail=_request('session_email')) == _T('info_mail_fournisseur'))
 		$erreurs['adresse_email'] = _T('form_indiquer');
 	elseif ($mail AND !email_valide($mail)) 
 		$erreurs['adresse_email'] = _T('form_email_non_valide');
@@ -115,7 +119,7 @@ function formulaires_signature_traiter_dist($id_article, $petition, $texte, $sit
 	if (spip_connect()) {
 		$controler_signature = charger_fonction('controler_signature', 'inc');
 		$reponse = $controler_signature($id_article,
-		_request('nom_email'), _request('adresse_email'),
+		_request('session_nom'), _request('session_email'),
 		_request('message'), _request('signature_nom_site'),
 		_request('signature_url_site'), _request('url_page'));
 	}
@@ -131,11 +135,18 @@ function formulaires_signature_traiter_dist($id_article, $petition, $texte, $sit
 // Le controle d'unicite du mail ou du site (si requis) refait ici correspond
 // au cas de mails de demande de confirmation laisses sans reponse
 
-// http://doc.spip.org/@reponse_confirmation
+// http://doc.spip.org/@reponse_confirmation_dist
 function formulaires_signature_reponse_confirmation_dist($var_confirm = '') {
+	static $confirm = null;
 
-	static $confirm = '';
-	if (!$var_confirm) return $confirm;
+	// reponse mise en cache dans la session ?
+	$code_message = 'signature_message_'.strval($var_confirm);
+	if (isset($GLOBALS['visiteur_session'][$code_message]))
+		return $GLOBALS['visiteur_session'][$code_message];
+
+	// reponse deja calculee depuis public/assembler.php
+	if (isset($confirm))
+		return $confirm;
 
 	if ($var_confirm == 'publie' OR $var_confirm == 'poubelle')
 		return '';
@@ -205,6 +216,10 @@ function formulaires_signature_reponse_confirmation_dist($var_confirm = '') {
 		include_spip('inc/invalideur');
 		suivre_invalideur("id='varia/pet$id_article'");
 	}
+
+	// Conserver la reponse dans la session du visiteur
+	if ($confirm)
+		session_set($code_message, $confirm);
 }
 
 //
@@ -268,6 +283,8 @@ function signature_a_confirmer($id_article, $url_page, $nom, $mail, $site, $url,
 		       'url_site' => $url, 
 		       'url' => $url_page,
 		       'message' => $msg));
+
+spip_log($r);
 
 	$titre = _T('form_pet_confirmation')." ". $titre;
 	$envoyer_mail = charger_fonction('envoyer_mail','inc');

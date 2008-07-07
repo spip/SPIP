@@ -13,7 +13,11 @@
 		<thead>
 			<th class="signature-date"><a href='[(#SELF|parametre_url{tri,date_time}|parametre_url{tri_inverse,''})]#signatures' title="<:lien_trier_date:>"><:date:></a></th>
 			<th class="signature-nom"><a href='[(#SELF|parametre_url{tri,nom_email}|parametre_url{tri_inverse,''})]#signatures' title="<:lien_trier_nom:>"><:nom:></a></th>
+
+			[(#REM) Afficher la colonne des messages si autorises ]
+			<BOUCLE_petition(PETITIONS){id_article}{message=oui}>
 			<th class="signature-message"><:message:></th>
+			</BOUCLE_petition>
 		</thead>
 		<BOUCLE_signatures(SIGNATURES) {id_article} {pagination #ENV{pagination, 15} } {recherche ?#ENV{cherche_signature}} {!par #ENV{tri}}{par #ENV{tri_inverse}} {!par #ENV{tri,#ENV{tri_inverse}}|?{'',date_time}}>
 		<tr id='id_signature#ID_SIGNATURE'>
@@ -28,7 +32,11 @@
 	</table>
 	
 	[<p class="pagination">(#PAGINATION)</p>]
+
+	[(#REM) Afficher un moteur de recherche si plus de 30 signatures]
+	[(#_signatures:GRAND_TOTAL|>{30}|oui)
 	<p class="signature_recherche"><:info_rechercher:> <input type="text" class="forml" size="10" name='cherche_signature' /> <input type="image" src="#CHEMIN{rechercher.png}" class="bouton" value="<:info_rechercher:>" /></p>
+	]
 </div><!--#signatures-->
 </form>
 </B_signatures>

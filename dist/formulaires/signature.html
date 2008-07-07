@@ -1,11 +1,12 @@
 <div class="formulaire_spip formulaire_signature ajax" id="sp#ENV{id_article}">
+
 [<p class="formulaire_message">(#ENV*{message_ok,#ENV*{_confirm}|affiche_reponse_confirmation})</p>]
 [<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
 [(#ENV{editable})
 <form method="post" action="#ENV{action}">
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<fieldset>
-	<input type="hidden" name="url_page" value="#URL_SITE_SPIP/#SELF" />
+	<input type="hidden" name="url_page" value="[(#SELF|url_absolue)]" />
 	[<fieldset>
 		<legend><:info_descriptif:></legend>
 		<div class='explication'>(#ENV*{_texte}|propre)</div>
@@ -13,15 +14,15 @@
 	<fieldset>
 		<legend><:form_forum_identifiants:></legend>
 		<ul>
-      <li class='saisie_nom_email[ (#ENV*{erreurs}|table_valeur{nom_email}|oui)erreur]'>
-          <label for="nom_email"><:form_pet_votre_nom:></label>
-						[<span class="erreur">(#ENV*{erreurs}|table_valeur{nom_email})</span>]
-          <input type="text" class="text" name="nom_email" id="nom_email" value="#ENV{nom_email}" size="30" />
+      <li class='saisie_nom_email[ (#ENV*{erreurs}|table_valeur{session_nom}|oui)erreur] obligatoire'>
+          <label for="session_nom"><:form_pet_votre_nom:></label>
+						[<span class="erreur">(#ENV*{erreurs}|table_valeur{session_nom})</span>]
+          <input type="text" class="text" name="session_nom" id="session_nom" value="#ENV{session_nom}" size="30" />
       </li>
-      <li class='saisie_adresse_email[ (#ENV*{erreurs}|table_valeur{adresse_email}|oui)erreur]'>
-          <label for="adresse_email"><:form_pet_votre_email:></label>
-						[<span class="erreur">(#ENV*{erreurs}|table_valeur{adresse_email})</span>]
-          <input type="text" class="text" name="adresse_email" id="adresse_email" value="#ENV{adresse_email}" size="30" />
+      <li class='saisie_adresse_email[ (#ENV*{erreurs}|table_valeur{session_email}|oui)erreur] obligatoire'>
+          <label for="session_email"><:form_pet_votre_email:></label>
+						[<span class="erreur">(#ENV*{erreurs}|table_valeur{session_email})</span>]
+          <input type="text" class="text" name="session_email" id="session_email" value="#ENV{session_email}" size="30" />
       </li>
 		</ul>
 	</fieldset>
@@ -29,12 +30,12 @@
 		<legend><:info_lien_hypertexte:></legend>
 		[<p class='explication'>(#ENV{site_obli})<:form_pet_votre_site:></p>]
 		<ul>
-		  <li class='saisie_signature_nom_site[ (#ENV*{erreurs}|table_valeur{signature_nom_site}|oui)erreur]'>
+		  <li class='saisie_signature_nom_site[ (#ENV*{erreurs}|table_valeur{signature_nom_site}|oui)erreur][(#ENV{site_obli})obligatoire]'>
 		      <label for="signature_nom_site"><:form_pet_nom_site2:></label>
 					[<span class="erreur">(#ENV*{erreurs}|table_valeur{signature_nom_site})</span>]
 		      <input type="text" class="text" name="signature_nom_site" id="signature_nom_site" value="#ENV{signature_nom_site}" size="30" />
 		  </li>
-		  <li class='saisie_signature_url_site[ (#ENV*{erreurs}|table_valeur{signature_url_site}|oui)erreur]'>
+		  <li class='saisie_signature_url_site[ (#ENV*{erreurs}|table_valeur{signature_url_site}|oui)erreur][(#ENV{site_obli})obligatoire]'>
 		      <label for="signature_url_site"><:form_pet_adresse_site:></label>
 					[<span class="erreur">(#ENV*{erreurs}|table_valeur{signature_url_site})</span>]
 		      <input type="text" class="text" name="signature_url_site" id="signature_url_site" value="#ENV{signature_url_site}" size="30" />
