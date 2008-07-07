@@ -13,6 +13,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@base_auxiliaires
 function base_auxiliaires(&$tables_auxiliaires){
 $spip_petitions = array(
 		"id_article"	=> "bigint(21) DEFAULT '0' NOT NULL",
