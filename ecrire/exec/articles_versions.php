@@ -23,7 +23,7 @@ function exec_articles_versions_dist()
 // http://doc.spip.org/@exec_articles_versions_args
 function exec_articles_versions_args($id_article, $id_version, $id_diff)
 {
-	global $les_notes, $champs_extra, $spip_lang_left, $spip_lang_right;
+	global $les_notes, $spip_lang_left, $spip_lang_right;
 
 	if (!autoriser('voirrevisions', 'article', $id_article) 
 	OR !$row = sql_fetsel("*", "spip_articles", "id_article=".sql_quote($id_article))){
@@ -245,7 +245,8 @@ echo "</ul>\n";
 //
 
 if ($id_version) {
-	echo "\n\n<div style='text-align: justify;'>";
+	
+	$revision = "";
 
 	// pour l'affichage du virtuel
 
@@ -254,37 +255,48 @@ if ($id_version) {
 	}
 	
 	if ($virtuel) {
-		echo debut_boite_info(true);
-		echo _T('info_renvoi_article'),
+		$revision .= debut_boite_info(true);
+		$revision .= _T('info_renvoi_article').
 			propre("<span style='text-align: center'> [->$virtuel]</span>");
-		echo fin_boite_info(true);
+		$revision .= fin_boite_info(true);
 	}
 	else {
-		echo "<div  dir='$lang_dir'><b>";
-		echo justifier(propre_diff($chapo));
-		echo "</b></div>\n\n";
+		$revision .= "<div  dir='$lang_dir'><b>";
+		$revision .= justifier(propre_diff($chapo));
+		$revision .= "</b></div>\n\n";
 	
-		echo "<div  dir='$lang_dir'>";
-		echo justifier(propre_diff($texte));
-		echo "</div>";
+		$revision .= "<div  dir='$lang_dir'>";
+		$revision .= justifier(propre_diff($texte));
+		$revision .= "</div>";
 	
 		if ($ps) {
-			echo debut_cadre_enfonce('',true);
-			echo "<div  dir='$lang_dir' class='verdana1 spip_small'>", justifier("<b>"._T('info_ps')."</b> ".propre_diff($ps)), "</div>";
-			echo fin_cadre_enfonce(true);
+			$revision .= debut_cadre_enfonce('',true);
+			$revision .= "<div  dir='$lang_dir' class='verdana1 spip_small'>" . justifier("<b>"._T('info_ps')."</b> ".propre_diff($ps)) ."</div>";
+			$revision .= fin_cadre_enfonce(true);
 		}
 	
 		if ($les_notes) {
-			echo debut_cadre_relief('', true);
-			echo "<div  dir='$lang_dir'><span class='spip_xx-small'>", justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes), "</span></div>";
-			echo fin_cadre_relief(true);
+			$revision .= debut_cadre_relief('', true);
+			$revision .= "<div  dir='$lang_dir'><span class='spip_xx-small'>" . justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes) . "</span></div>";
+			$revision .= fin_cadre_relief(true);
 		}
-	
-		if ($champs_extra AND $extra) {
-			include_spip('inc/extra');
-			echo extra_affichage($extra, "articles");
-		}
+		
+		$contexte = array('id'=>$id_article,'id_rubrique'=>$id_rubrique);
+		// permettre aux plugin de faire des modifs ou des ajouts
+		$revision = pipeline('afficher_revision_objet',
+			array(
+				'args'=>array(
+					'type'=>'article',
+					'id_objet'=>$id_article,
+					'contexte'=>$contexte,
+					'id_version'=>$id_version
+				),
+				'data'=> $revision
+			)
+		);
+		
 	}
+	echo "\n\n<div style='text-align: justify;'>$revision</div>";
 }
 
 echo fin_cadre_relief(true);

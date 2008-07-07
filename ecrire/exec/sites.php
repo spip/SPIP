@@ -71,8 +71,6 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 	$editer_mots = charger_fonction('editer_mots', 'inc');
 	if ($flag_administrable)
 		$instituer_site = charger_fonction('instituer_site','inc');
-	if ($GLOBALS['champs_extra'] AND $extra)
-		include_spip('inc/extra');
 	$afficher_contenu_objet = charger_fonction('afficher_contenu_objet', 'inc');
 
 	echo debut_grand_cadre(true);
@@ -156,8 +154,6 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 			
 			: choix_feed($id_syndic, $id_rubrique, $nom_site, $row))
 		. (_INTERFACE_ONGLETS?"":($flag_administrable ? options_moderation($row) : ""))
-
-		. (($GLOBALS['champs_extra'] AND $extra) ? extra_affichage($extra, "sites") : "")
 
 	  ;
 

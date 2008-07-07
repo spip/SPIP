@@ -15,15 +15,17 @@
 // http://doc.spip.org/@inc_afficher_contenu_objet_dist
 function inc_afficher_contenu_objet_dist($type, $id, $id_rubrique){	
 	include_spip('public/assembler');
-	if ($GLOBALS['champs_extra'])
-		include_spip('inc/extra');
-	$contexte = array('id'=>$id,'champs_extra'=>$GLOBALS['champs_extra']?1:0,'id_rubrique'=>$id_rubrique);
+	$contexte = array('id'=>$id,'id_rubrique'=>$id_rubrique);
 	
 	// permettre aux plugin de faire des modifs ou des ajouts
 	$contenu_objet = pipeline('afficher_contenu_objet',
 		array(
-			'data'=> recuperer_fond("prive/contenu/$type",$contexte),
-			'args'=>array('type'=>$type,'id'=>$id)
+			'args'=>array(
+				'type'=>$type,
+				'id_objet'=>$id,
+				'contexte'=>$contexte
+			),
+			'data'=> recuperer_fond("prive/contenu/$type",$contexte)
 		)
 	);
 	

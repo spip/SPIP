@@ -140,10 +140,6 @@ $mysql_rappel_nom_base = true;
 // faut-il afficher en rouge les chaines non traduites ?
 $test_i18n = false;
 
-// gestion des extras (voir inc_extra pour plus d'informations)
-$champs_extra = false;
-$champs_extra_proposes = false;
-
 // faut-il ignorer l'authentification par auth http/remote_user ?
 $ignore_auth_http = false;
 $ignore_remote_user = true; # methode obsolete et risquee
@@ -249,7 +245,8 @@ $spip_pipeline = array(
 	'autoriser' => '',
 	'notifications' => '',
 	'afficher_contenu_objet' => '',
-	'editer_contenu_objet' => '|f_extra_editer_contenu_objet',
+	'afficher_revision_objet'=>'',
+	'editer_contenu_objet' => '',
 	'creer_chaine_url' => '|creer_chaine_url',
 	'rechercher_liste_des_champs' => '' # inc/recherche; pas stabilise !
 );

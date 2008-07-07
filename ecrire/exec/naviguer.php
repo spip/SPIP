@@ -31,7 +31,7 @@ function exec_naviguer_args($id_rubrique, $cherche_mot, $select_groupe)
 		$ze_logo = "racine-site-24.gif";
 		$row = array();
 	} else {
-		$row = sql_fetsel('id_parent, id_secteur, titre, statut, extra,  lang, descriptif, texte', 'spip_rubriques', "id_rubrique=$id_rubrique");
+		$row = sql_fetsel('id_parent, id_secteur, titre, statut, lang, descriptif, texte', 'spip_rubriques', "id_rubrique=$id_rubrique");
 
 		if (!$row OR !autoriser('voir','rubrique',$id_rubrique)) {
 			include_spip('inc/minipres');
@@ -97,19 +97,14 @@ function exec_naviguer_args($id_rubrique, $cherche_mot, $select_groupe)
 		$editer_mots = $editer_mots('rubrique', $id_rubrique,  $cherche_mot,  $select_groupe, $flag_editable, true);
 	} else $editer_mots = '';
 
-	if (isset($row['extra']) && $row['extra']) {
-		include_spip('inc/extra');
-		$extra = extra_affichage($extra, "rubriques");
-	} else $extra = "";
-
-	echo naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $n_forums, $editer_mots, $flag_editable, $boucles, $extra),
+	echo naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $n_forums, $editer_mots, $flag_editable, $boucles),
 	  fin_gauche(),
 	  fin_page();
 	}
 }
 
 // http://doc.spip.org/@naviguer_droite
-function naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $n_forums, $editer_mots, $flag_editable, $boucles, $extra)
+function naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $n_forums, $editer_mots, $flag_editable, $boucles)
 {
 	global $spip_lang_right, $connect_toutes_rubriques;
 
@@ -121,8 +116,8 @@ function naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $n_
 		. pipeline('affiche_milieu',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''))
 	;
 
-	$onglet_contenu = $extra
-		. $afficher_contenu_objet('rubrique', $id_rubrique,$id_rubrique)
+	$onglet_contenu = 
+		$afficher_contenu_objet('rubrique', $id_rubrique,$id_rubrique)
 		. (_INTERFACE_ONGLETS? $boucles:"");
 
 	$onglet_enfants = 

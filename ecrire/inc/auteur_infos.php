@@ -177,47 +177,41 @@ function legender_auteur_voir($auteur) {
 		'',false);
 
 	$res .= "<div class='nettoyeur'></div>";
-	$res .= "<div id='auteur_infos_voir'>";
 
+	$contenu_auteur = "";
 	if (strlen($auteur['email']))
-		$res .= "<div>"._T('email_2')
+		$contenu_auteur .= "<div>"._T('email_2')
 			." <b><a href='mailto:".htmlspecialchars($auteur['email'])."'>"
 			.$auteur['email']."</a></b></div>";
 
 	if ($auteur['url_site']) {
 		if (!$auteur['nom_site'])
 			$auteur['nom_site'] = _T('info_site');
-		$res .= propre(_T('info_site_2')." [{{".$auteur['nom_site']."}}->".$auteur['url_site']."]");
+		$contenu_auteur .= propre(_T('info_site_2')." [{{".$auteur['nom_site']."}}->".$auteur['url_site']."]");
 	}
 
 	if (strlen($auteur['bio'])) {
-		$res .= propre("<quote>".$auteur['bio']."</quote>");
+		$contenu_auteur .= propre("<quote>".$auteur['bio']."</quote>");
 	}
 
 	if (strlen($auteur['pgp'])) {
-		$res .= propre("PGP: <cadre>".$auteur['pgp']."</cadre>");
+		$contenu_auteur .= propre("PGP: <cadre>".$auteur['pgp']."</cadre>");
 	}
 
-	// Ajouter le controles md5
-	if ($id_auteur) {
-		include_spip('inc/editer');
-		// ici je prefere construire la liste des champs a controler md5
-		// eviter de balancer des choses privees et sensibles comme md5(passw)
-		$ctr = array();
-		foreach (array('nom','bio','pgp','email','nom_site','url_site')
-		as $k)
-			$ctr[$k] = $auteur[$k];
-		$res .= controles_md5($ctr);
-		// le redirect est necessaire pour le controle d'erreur
-		$res .= "<input type='hidden' name='redirect' value='".rawurlencode(_DIR_RESTREINT_ABS.self('&'))."' />\n";
-	}
+	$contexte = array('id'=>$id_auteur);
+	// permettre aux plugin de faire des modifs ou des ajouts
+	$contenu_auteur = pipeline('afficher_contenu_objet',
+		array(
+			'args'=>array(
+				'type'=>'auteur',
+				'id_objet'=>$id_auteur,
+				'contexte'=>$contexte
+			),
+			'data'=> $contenu_auteur
+		)
+	);
 
-	if ($GLOBALS['champs_extra'] AND $auteur['extra']) {
-		include_spip('inc/extra');
-		$res .= extra_affichage($auteur['extra'], 'auteurs');
-	}
-
-	$res .= "</div>\n";
+	$res .= "<div id='auteur_infos_voir'>$contenu_auteur</div>\n";
 
 	return $res;
 

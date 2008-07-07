@@ -638,48 +638,6 @@ function balise_GRAND_TOTAL_dist($p) {
 	return $p;
 }
 
-
-// #EXTRA
-// [(#EXTRA|extra{isbn})]
-// ou [(#EXTRA|isbn)] (ce dernier applique les filtres definis dans mes_options)
-// Champs extra
-// Non documentes, en voie d'obsolescence, cf. ecrire/inc/extra
-// http://doc.spip.org/@balise_EXTRA_dist
-function balise_EXTRA_dist ($p) {
-	$_extra = champ_sql('extra', $p);
-	$p->code = $_extra;
-
-	// Gerer la notation [(#EXTRA|isbn)]
-	if ($p->fonctions) {
-		list($champ,) = $p->fonctions[0];
-		include_spip('inc/extra');
-		$type_extra = $p->type_requete;
-
-		// ci-dessus est sans doute un peu buggue : si on invoque #EXTRA
-		// depuis un sous-objet sans champ extra d'un objet a champ extra,
-		// on aura le type_extra du sous-objet (!)
-		if (extra_champ_valide($type_extra, $champ)) {
-			array_shift($p->fonctions);
-			array_shift($p->param);
-			// Appliquer les filtres definis par le webmestre
-			$p->code = 'extra('.$p->code.', "'.$champ.'")';
-
-			$filtres = extra_filtres($type_extra, $champ);
-			if ($filtres) foreach ($filtres as $f)
-				$p->code = "$f($p->code)";
-		} else {
-			if (!function_exists($champ)) {
-				spip_log("erreur champ extra |$champ");
-				array_shift($p->fonctions);
-				array_shift($p->param);
-			}
-		}
-	}
-
-	#$p->interdire_scripts = true;
-	return $p;
-}
-
 //
 // Parametres de reponse a un forum
 //
