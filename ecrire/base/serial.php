@@ -13,7 +13,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
+function base_serial(&$tables_principales){
 $spip_articles = array(
 		"id_article"	=> "bigint(21) NOT NULL",
 		"surtitre"	=> "text DEFAULT '' NOT NULL",
@@ -353,9 +353,6 @@ $spip_signatures_join = array(
 		"id_signature"=>"id_signature",
 		"id_article"=>"id_article");
 
-
-global $tables_principales;
-
 /// Attention: mes_fonctions peut avoir deja defini cette variable
 /// il faut donc rajouter, mais pas reinitialiser
 
@@ -385,5 +382,11 @@ $tables_principales['spip_forum'] =
 	array('field' => &$spip_forum,	'key' => &$spip_forum_key, 'join' => &$spip_forum_join);
 $tables_principales['spip_signatures'] =
 	array('field' => &$spip_signatures, 'key' => &$spip_signatures_key, 'join' => &$spip_signatures_join);
+	
+	$tables_principales = pipeline('declarer_tables_principales',$tables_principales);
+}
+
+global $tables_principales;
+base_serial($tables_principales);
 
 ?>

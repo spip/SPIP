@@ -13,6 +13,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function base_auxiliaires(&$tables_principales){
 $spip_petitions = array(
 		"id_article"	=> "bigint(21) DEFAULT '0' NOT NULL",
 		"email_unique"	=> "CHAR (3) DEFAULT '' NOT NULL",
@@ -249,8 +250,6 @@ $spip_urls_key = array(
 	"PRIMARY KEY"		=> "url",
 	"KEY type"		=> "type, id_objet");
 
-global $tables_auxiliaires;
-
 $tables_auxiliaires['spip_petitions'] = array(
 	'field' => &$spip_petitions,
 	'key' => &$spip_petitions_key
@@ -326,4 +325,10 @@ $tables_auxiliaires['spip_versions_fragments'] = array(
 $tables_auxiliaires['spip_urls'] = array(
 	'field' => &$spip_urls,
 	'key' => &$spip_urls_key);
+	
+	$tables_auxiliaires = pipeline('declarer_tables_auxiliaires',$tables_auxiliaires);
+}
+
+global $tables_auxiliaires;
+base_auxiliaires($tables_auxiliaires);
 ?>
