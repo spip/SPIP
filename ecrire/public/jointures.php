@@ -156,7 +156,7 @@ function split_key($v, $join = array())
 }
 
 // http://doc.spip.org/@calculer_chaine_jointures
-function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array(), $milieu_exclus = array(), $directe = false)
+function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array(), $milieu_exclus = array(), $max_liens = 5)
 {
 	static $trouver_table;
 	if (!$trouver_table)
@@ -175,18 +175,20 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array(), $mi
 		unset($akeys['PRIMARY KEY']);
 		$akeys = array_merge(preg_split('/,\s*/', $v), $akeys);
 	}
-	// enlever les cles de depart exclues par l'appel
+	// enlever les cles d'arrivee exclues par l'appel
 	$akeys = array_diff($akeys,$milieu_exclus);
 
 
-	// cles candidates a l'arrivee
+	// cles candidates au depart
 	$keys = liste_champs_jointures($dnom,$ddesc);
-	// enlever les cles d'arrivee exclues par l'appel
+	// enlever les cles dde depart exclues par l'appel
 	$keys = array_diff($keys,$milieu_exclus);
 	
+	$v = false;
 	if ($keys){
 		$v = array_intersect(array_values($keys), $akeys);
 	}
+
 	if ($v)
 		return array(array($dnom, array($adesc['table'],$adesc), array_shift($v)));
 
@@ -218,7 +220,7 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array(), $mi
 		}
 	}
 	// si l'on voulait une jointure direct, c'est rate !
-	if ($directe) return array();
+	if ($max_liens<=1) return array();
 	
 	// sinon essayer de passer par une autre table
 	$new = $vu;
@@ -230,14 +232,17 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array(), $mi
 			$test_cles = $milieu_exclus;
 			$new[] = $v;
 			$max_iter = 50; // securite
-			while (count($jointure_directe_possible = calculer_chaine_jointures($boucle,$depart,array($v, $def),$vu,$test_cles,true))
+			while (count($jointure_directe_possible = calculer_chaine_jointures($boucle,$depart,array($v, $def),$vu,$test_cles,1))
 			  AND $max_iter--) {
 				$jointure_directe_possible = reset($jointure_directe_possible);
 				$milieu = end($jointure_directe_possible);
-				$test_cles[] = $milieu;
+				if (is_string($milieu))
+					$test_cles[] = $milieu;
+				else
+					$test_cles = array_merge($test_cles,$milieu);
 				// essayer de rejoindre l'arrivee a partir de cette etape intermediaire
 				// sans repasser par la meme cle milieu
-			  $r = calculer_chaine_jointures($boucle, array($v, $def), $arrivee, $new, $milieu);
+			  $r = calculer_chaine_jointures($boucle, array($v, $def), $arrivee, $new, $milieu,$max_liens-1);
 				if ($r)	{
 				  array_unshift($r, $jointure_directe_possible);
 					return $r;
