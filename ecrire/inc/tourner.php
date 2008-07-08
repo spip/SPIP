@@ -28,7 +28,7 @@ function inc_tourner_dist($id_document, $document, $script, $flag, $type)
 
 	$prim = 'id_' . $type;
 	// si pas de doc le hash sera inutilisable
-	$id = intval(sql_getfetsel($prim, 'spip_documents_liens', "id_document = " . intval($id_document)));
+	$id = intval(sql_getfetsel('id_objet', 'spip_documents_liens', "objet=".sql_quote($type)." AND id_document = " . intval($id_document)));
 
 	$titre = $document['titre'];
 	$id_vignette = $document['id_vignette'];

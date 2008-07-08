@@ -135,7 +135,7 @@ function controle_forum_boucle($row) {
 
 
 	$documents = array();
-	if ($s = sql_select('doc.fichier AS fichier', 'spip_documents AS doc, spip_documents_liens AS lien', 'doc.id_document=lien.id_document AND lien.id_forum='.$id_forum))
+	if ($s = sql_select('doc.fichier AS fichier', 'spip_documents AS doc, spip_documents_liens AS lien', 'doc.id_document=lien.id_document AND lien.id_objet='.intval($id_forum)." AND objet='forum'"))
 	while ($t = sql_fetch($s)) {
 		include_spip('inc/documents');
 		$documents[] = "<a href='".get_spip_doc($t['fichier'])."'>".basename($t['fichier'])."</a>";

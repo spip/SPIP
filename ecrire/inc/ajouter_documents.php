@@ -245,7 +245,8 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 		) {
 			sql_insertq('spip_documents_liens',
 				    array('id_document' => $id,
-					  'id_'.$type_lien => $id_lien));
+					  'id_objet' => $id_lien,
+					  'objet' => $type_lien));
 		} else spip_log("Pb d'insertion $id_lien $type_lien");
 
 		if ($id_document) {

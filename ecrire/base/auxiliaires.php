@@ -104,17 +104,13 @@ $spip_auteurs_messages_key = array(
 
 $spip_documents_liens = array(
 		"id_document"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"id_article"	=> "bigint(21) NULL",
-		"id_breve"	=> "bigint(21) NULL",
-		"id_rubrique"	=> "bigint(21) NULL",
-		"id_auteur"	=> "bigint(21) NULL",
-		"id_forum"	=> "bigint(21) NULL",
+		"id_objet"	=> "bigint(21) DEFAULT '0' NOT NULL",
+		"objet"	=> "VARCHAR (25) DEFAULT '' NOT NULL",
 		"vu"	=> "ENUM('non', 'oui') DEFAULT 'non' NOT NULL");
 
 $spip_documents_liens_key = array(
-		"PRIMARY KEY"		=> "id_document,id_article,id_breve,id_rubrique,id_auteur,id_forum",
+		"PRIMARY KEY"		=> "id_document,id_objet,objet",
 		"KEY id_document"	=> "id_document");
-
 
 /*
 $spip_documents_articles = array(

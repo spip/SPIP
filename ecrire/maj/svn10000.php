@@ -123,7 +123,7 @@ array('sql_update','spip_groupes_mots',array('tables_liees'=>"concat(tables_liee
 
 // Reunir en une seule table les liens de documents
 //  spip_documents_articles et spip_documents_forum
-function maj_11974 () {
+function maj_12008 () {
 	// Creer spip_documents_liens
 	global $tables_auxiliaires;
 	include_spip('base/auxiliaires');
@@ -136,6 +136,10 @@ function maj_11974 () {
 		OR $s = sql_select('*', 'spip_documents_'.$l)) {
 			$tampon = array();
 			while ($t = sql_fetch($s)) {
+				// transformer id_xx=N en (id_objet=N, objet=xx)
+				$t['id_objet'] = $t["id_$l"];
+				$t['objet'] = $l;
+				unset($t["id_$l"]);
 				$keys = '('.join(',',array_keys($t)).')';
 				$tampon[] = '('.join(',', array_map('sql_quote', $t)).')';
 				if (count($tampon)>100) {
@@ -149,16 +153,29 @@ function maj_11974 () {
 		}
 	}
 }
-$GLOBALS['maj'][11974] = array(array('maj_11974'));
 
-
-
-
-
+$GLOBALS['maj'][12008] = array(
+//array('sql_drop_table',"spip_documents_liens"), // tant pis pour ceux qui ont joue a 11974
+array('sql_alter',"TABLE spip_documents_liens DROP PRIMARY KEY"),
+array('sql_alter',"TABLE spip_documents_liens ADD id_objet bigint(21) DEFAULT '0' NOT NULL AFTER id_document"),
+array('sql_alter',"TABLE spip_documents_liens ADD objet VARCHAR (25) DEFAULT '' NOT NULL AFTER id_objet"),
+array('sql_update','spip_documents_liens',array('id_objet'=>"id_article",'objet'=>"'article'"),"id_article IS NOT NULL AND id_article>0"),
+array('sql_update','spip_documents_liens',array('id_objet'=>"id_rubrique",'objet'=>"'rubrique'"),"id_rubrique IS NOT NULL AND id_rubrique>0"),
+array('sql_update','spip_documents_liens',array('id_objet'=>"id_breve",'objet'=>"'breve'"),"id_breve IS NOT NULL AND id_breve>0"),
+array('sql_update','spip_documents_liens',array('id_objet'=>"id_auteur",'objet'=>"'auteur'"),"id_auteur IS NOT NULL AND id_auteur>0"),
+array('sql_update','spip_documents_liens',array('id_objet'=>"id_forum",'objet'=>"'forum'"),"id_forum IS NOT NULL AND id_forum>0"),
+array('sql_alter',"TABLE spip_documents_liens ADD PRIMARY KEY  (id_document,id_objet,objet)"),
+array('sql_alter',"TABLE spip_documents_liens DROP id_article"),
+array('sql_alter',"TABLE spip_documents_liens DROP id_rubrique"),
+array('sql_alter',"TABLE spip_documents_liens DROP id_breve"),
+array('sql_alter',"TABLE spip_documents_liens DROP id_auteur"),
+array('sql_alter',"TABLE spip_documents_liens DROP id_forum"),
+array('maj_12008'),
+);
 
 
 // penser a ajouter ici destruction des tables spip_documents_articles etc
-// une fois qu'on aura valide la procedure d'upgrade 11974
+// une fois qu'on aura valide la procedure d'upgrade 12008
 
 
 // penser a ajouter ici destruction des champs articles breves rubriques et syndic
