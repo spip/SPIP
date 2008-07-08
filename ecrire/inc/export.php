@@ -324,7 +324,7 @@ function export_entete()
 $GLOBALS['meta']['charset']."\"?".">\n" .
 "<SPIP 
 	version=\"" . $GLOBALS['spip_version_affichee'] . "\" 
-	version_base=\"" . $GLOBALS['spip_version'] . "\" 
+	version_base=\"" . $GLOBALS['spip_version_base'] . "\" 
 	version_archive=\"" . $GLOBALS['version_archive'] . "\"
 	adresse_site=\"" .  $GLOBALS['meta']["adresse_site"] . "\"
 	dir_img=\"" . _DIR_IMG . "\"
