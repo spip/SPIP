@@ -14,6 +14,39 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // deduction automatique d'une chaine de jointures 
 
+/**
+ * decomposer un champ id_article en (id_objet,objet,'article') si necessaire
+ *
+ * @param string $champ
+ * @return array ou string
+ */
+
+function decompose_champ_id_objet($champ){
+	if (($champ!=='id_objet') AND preg_match(',^id_([a-z_]+)$,',$champ,$regs)){
+		return array('id_objet','objet',$regs[1]);
+	}
+	return $champ;
+}
+
+/**
+ * mapping d'un champ d'une jointure en deux champs id_objet,objet si necessaire
+ *
+ * @param string $champ
+ * @param array $desc
+ * @return array
+ */
+function trouver_champs_decomposes($champ,$desc){
+	if (array_key_exists($champ,$desc['field']))
+		return array($champ);
+	if (is_array($decompose=decompose_champ_id_objet($champ))){
+		array_pop($decompose);
+		if (count(array_intersect($decompose,array_keys($desc['field'])))==count($decompose))
+			return $decompose;
+	}
+	return array($champ);
+}
+
+
 // http://doc.spip.org/@calculer_jointure
 function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
 {
@@ -35,7 +68,18 @@ function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='',
 		list($d, $a, $j) = $r;
 		if (!$id_table) $id_table = $d;
 		$n = ++$cpt;
-		$boucle->join["L$n"]= array("'$id_table'","'$j'");
+		if (is_array($j)){ // c'est un lien sur un champ du type id_objet,objet,'article'
+			list($j1,$j2,$obj,$type) = $j;
+			// trouver de quel cote est (id_objet,objet)
+			if ($j1=="id_$obj")
+				$obj = "$id_table.$obj";
+			else
+				$obj = "L$n.$obj";
+			$boucle->where[] = array("'='","'$obj'","sql_quote('$type')");
+			$boucle->join["L$n"]= array("'$id_table'","'$j2'","'$j1'");
+		}
+		else
+			$boucle->join["L$n"]= array("'$id_table'","'$j'");
 		$boucle->from[$id_table = "L$n"] = $a[0];    
 	}
 
@@ -49,6 +93,7 @@ function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='',
 	if ($pk = ((count($boucle->from) == 2) && !$cond)) {
 		if ($pk = $a[1]['key']['PRIMARY KEY']) {
 			$id_primary = $desc['key']['PRIMARY KEY'];
+			if (is_array($col)) $col = implode(', *',$col); // cas id_objet, objet
 			$pk = (preg_match("/^$id_primary, *$col$/", $pk) OR
 			       preg_match("/^$col, *$id_primary$/", $pk));
 		}
@@ -111,11 +156,14 @@ function split_key($v, $join = array())
 }
 
 // http://doc.spip.org/@calculer_chaine_jointures
-function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array(), $milieu_prec = false)
+function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array(), $milieu_exclus = array(), $directe = false)
 {
 	static $trouver_table;
 	if (!$trouver_table)
 		$trouver_table = charger_fonction('trouver_table', 'base');
+		
+	if (is_string($milieu_exclus))
+		$milieu_exclus = array($milieu_exclus);
 
 	list($dnom,$ddesc) = $depart;
 	list($anom,$adesc) = $arrivee;
@@ -127,28 +175,71 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array(), $mi
 		unset($akeys['PRIMARY KEY']);
 		$akeys = array_merge(preg_split('/,\s*/', $v), $akeys);
 	}
+	// enlever les cles de depart exclues par l'appel
+	$akeys = array_diff($akeys,$milieu_exclus);
 
-	if ($keys = liste_champs_jointures($dnom,$ddesc)){
+
+	// cles candidates a l'arrivee
+	$keys = liste_champs_jointures($dnom,$ddesc);
+	// enlever les cles d'arrivee exclues par l'appel
+	$keys = array_diff($keys,$milieu_exclus);
+	
+	if ($keys){
 		$v = array_intersect(array_values($keys), $akeys);
 	}
 	if ($v)
 		return array(array($dnom, $arrivee, array_shift($v)));
-	else    {
-		$new = $vu;
-		foreach($boucle->jointures as $v) {
-			if ($v && (!in_array($v,$vu)) && 
-			    ($def = $trouver_table($v, $boucle->sql_serveur))) {
-				$milieu = array_intersect($ddesc['key'], trouver_cles_table($def['key']));
-				$new[] = $v;
-				foreach ($milieu as $k)
-					if ($k!=$milieu_prec) // ne pas repasser par la meme cle car c'est un chemin inutilement long
-					{
-					  $r = calculer_chaine_jointures($boucle, array($v, $def), $arrivee, $new, $k);
-						if ($r)	{
-						  array_unshift($r, array($dnom, array($def['table'], $def), $k));
-							return $r;
-						}
-					}
+
+	// regarder si l'on a (id_objet,objet) au depart et si on peut le mapper sur un id_xx
+	if (count(array_intersect(array('id_objet','objet'),$keys))==2){
+		// regarder si l'une des cles d'arrivee peut se decomposer en 
+		// id_objet,objet
+		// si oui on la prend
+		foreach($akeys as $key){
+			if (is_array($v = decompose_champ_id_objet($key))){
+				$objet = array_shift($v);// objet,'article'
+				array_unshift($v,$key); // id_article,objet,'article'
+				array_unshift($v,$objet); // id_objet,id_article,objet,'article'
+				return array(array($dnom, $arrivee, $v));
+			}
+		}
+	}
+	else {
+		// regarder si l'une des cles de depart peut se decomposer en 
+		// id_objet,objet a l'arrivee
+		// si oui on la prend
+		foreach($keys as $key){
+			if (count($v = trouver_champs_decomposes($key,$adesc))>1){
+				if (count($v)==count(array_intersect($v, $akeys)))
+					$v = decompose_champ_id_objet($key); // id_objet,objet,'article'
+					array_unshift($v,$key); // id_article,id_objet,objet,'article'
+					return array(array($dnom, $arrivee, $v));
+			}
+		}
+	}
+	// si l'on voulait une jointure direct, c'est rate !
+	if ($directe) return array();
+	
+	// sinon essayer de passer par une autre table
+	$new = $vu;
+	foreach($boucle->jointures as $v) {
+		if ($v && (!in_array($v,$vu)) && 
+		    ($def = $trouver_table($v, $boucle->sql_serveur))) {
+			// ne pas tester les cles qui sont exclues a l'appel
+			// ie la cle de la jointure precedente
+			$test_cles = $milieu_exclus;
+			$new[] = $v;
+			while ($jointure_directe_possible = calculer_chaine_jointures($boucle,$depart,array($v, $def),$vu,$test_cles,true)) {
+				$jointure_directe_possible = reset($jointure_directe_possible);
+				$milieu = end($jointure_directe_possible);
+				$test_cles[] = $milieu;
+				// essayer de rejoindre l'arrivee a partir de cette etape intermediaire
+				// sans repasser par la meme cle milieu
+			  $r = calculer_chaine_jointures($boucle, array($v, $def), $arrivee, $new, $milieu);
+				if ($r)	{
+				  array_unshift($r, $jointure_directe_possible);
+					return $r;
+				}
 			}
 		}
 	}
@@ -180,12 +271,27 @@ function trouver_champ_exterieur($cle, $joints, &$boucle, $checkarrivee = false)
 	if (!$trouver_table)
 		$trouver_table = charger_fonction('trouver_table', 'base');
 
+	// support de la recherche multi champ
+	if (!is_array($cle))
+		$cle = array($cle);
 	foreach($joints as $k => $join) {
 	  if ($join && $table = $trouver_table($join, $boucle->sql_serveur)) {
-	    if (isset($table['field']) && array_key_exists($cle, $table['field'])
-		&& ($checkarrivee==false || $checkarrivee==$table['table'])) // si on sait ou on veut arriver, il faut que ca colle
+	    if (isset($table['field']) 
+	    	// verifier que toutes les cles cherchees sont la
+			  AND (count(array_intersect($cle, array_keys($table['field'])))==count($cle))
+			  // si on sait ou on veut arriver, il faut que ca colle
+			  AND ($checkarrivee==false || $checkarrivee==$table['table']))
 	      return  array($table['table'], $table);
 	  }
+	}
+	// une cle id_xx peut etre implementee par un couple (id_objet,objet)
+	foreach($cle as $k=>$c) {
+		if (is_array($decompose = decompose_champ_id_objet($c))){
+			unset($cle[$k]);
+			$cle[] = array_shift($decompose); // id_objet
+			$cle[] = array_shift($decompose); // objet
+			return trouver_champ_exterieur($cle,$joints,$boucle,$checkarrivee);
+		}
 	}
 	return "";
 }
