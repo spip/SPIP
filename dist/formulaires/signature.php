@@ -259,7 +259,7 @@ function inc_controler_signature_dist($id_article, $nom, $mail, $message, $site,
 				'nom_site' => $site,
 				'url_site' => $url_site
 				));
-	return _T('form_pet_envoi_mail_confirmation');
+	return _T('form_pet_envoi_mail_confirmation',array('email'=>$mail));
 }
 
 // http://doc.spip.org/@signature_a_confirmer
