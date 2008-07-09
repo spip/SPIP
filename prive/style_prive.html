@@ -10,7 +10,7 @@
 	ATTENTION: il faut absolument le charset sinon Firefox croit que
 	c'est du text/html !
 ]
-#CACHE{3600*100,cache-client}
+#CACHE{0*3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
@@ -113,7 +113,7 @@ select.fondl { padding: 0; }
 .h-list { display: table}
 .h-list ul { display: table-row; list-style: none; margin: 0; padding: 0; }
 .h-list li { display: table-cell; margin: 0; padding: 0; }
-.h-list ul>li .menu-item { width: auto !important}
+#bandeau-principal .h-list ul>li .menu-item { width: auto !important}
 
 .vcentered li { vertical-align:middle}
 .#GET{left}ed { margin: 0 auto 0 0; }
@@ -126,6 +126,7 @@ select.fondl { padding: 0; }
 #bandeau-principal { padding-top: 5px; border-bottom: 1px solid #000; position: relative; z-index: 90; background: #FFF; }
 #bandeau-principal .h-list .menu-item { margin: 0 auto}
 
+#bandeau-principal a {cursor:hand;}
 #bandeau-principal a .icon_fond { width: 48px; height: 48px; background: #GET{claire}; margin: auto; }
 #bandeau-principal a.selection .icon_fond { width: 48px; margin:auto }
 #bandeau-principal a:hover span.icon_fond { background:url(#EVAL{ _DIR_IMG_PACK}fond-gris-anim.gif); width: 48px; height: 48px; margin: auto; }
@@ -493,8 +494,8 @@ a.ical { background: url(#EVAL{ _DIR_IMG_PACK}wrapper.php?file=synchro-24.gif) n
 
 /* Titre d'une boite */
 .titrem { font-weight: bold; }
-div.titrem { display: block; padding-top: 6px; padding-bottom: 4px; background-repeat: no-repeat;position:relative;padding-[(#GET{left})]:16px;}
-div.titrem a.titremancre {padding:15px 0 0 16px;background-position: [(#GET{left})] top;background-repeat: no-repeat; position:absolute;[(#GET{left})]:0;}
+div.titrem { display: block; padding-top: 6px; padding-bottom: 4px; background-repeat: no-repeat;padding-[(#GET{left})]:16px;}
+div.titrem a.titremancre {padding:15px 0 0 16px;background-position: [(#GET{left})] top;background-repeat: no-repeat; position:relative;float:[(#GET{left})];margin-[(#GET{left})]:-16px;}
 
 .cadre-couleur-foncee .titrem { background-color: #GET{foncee};color: #FFF; }
 .cadre-couleur-foncee .cadre_padding .titrem {color: #000; }
