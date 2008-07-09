@@ -250,9 +250,9 @@ table.spip_barre input.barre { width: 99%; background: transparent; border: 0; c
 
 /* Formulaire de recherche */
 #formulaire_recherche { float: right; background: none; margin: 0; padding: 0; }
-#formulaire_recherche label { display: inline; font-size: 1em; }
-#formulaire_recherche input.text { width: 12em; }
-#formulaire_recherche input.bouton { vertical-align: middle; }
+#formulaire_recherche label { display: none; font-size: 1em; float:none;vertical-align:middle;}
+#formulaire_recherche input.text { width: 10em;background:#fff url(rechercher.png) no-repeat left center;padding-left:30px; }
+#formulaire_recherche input.bouton { vertical-align: top;background:none;border:1px solid #999;height:1.7em; }
 
 
 /* formulaire site */
