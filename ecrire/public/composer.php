@@ -180,7 +180,7 @@ function calcule_logo($type, $onoff, $id, $id_rubrique, $flag_fichier) {
 function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 	// Si un descriptif est envoye, on l'utilise directement
 	if (strlen($descriptif))
-		return $descriptif;
+		return propre($descriptif,$connect);
 
 	// Prendre un extrait dans la bonne langue
 	$texte = extraire_multi($texte);
@@ -195,14 +195,21 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 			$zone = substr($zone, $deb + 7);
 		$intro .= $zone;
 	}
-	$texte = nettoyer_raccourcis_typo($intro ? $intro : $texte, $connect);
+	$texte = $intro ? $intro : $texte;
+	
+	// On ne *PEUT* pas couper simplement ici car c'est du texte brut, qui inclus raccourcis et modeles
+	// un simple <articlexx> peut etre ensuite transforme en 1000 lignes ...
+	// par ailleurs le nettoyage des raccourcis ne tient pas compte des surcharges
+	// et enrichissement de propre
+	// couper doit se faire apres propre
+	//$texte = nettoyer_raccourcis_typo($intro ? $intro : $texte, $connect);	
+	
+	$texte = propre($texte,$connect);
 
-	// On coupe
 	@define('_INTRODUCTION_SUITE', '&nbsp;(...)');
 	$texte = couper($texte, $longueur, _INTRODUCTION_SUITE);
 
-	// on nettoie un peu car ce sera traite par traiter_raccourcis()
-	return preg_replace(',([|]\s*)+,S', '; ', $texte);
+	return $texte;
 }
 
 //
