@@ -1366,7 +1366,8 @@ function traite_raccourci_notes($letexte)
 			if ($marqueur_notes) // quand il y a plusieurs series
 								 // de notes sur une meme page
 				$mn = $marqueur_notes.'-';
-			$ancre = $mn.rawurlencode($num_note);
+			// pas de '%' dans les attributs name
+			$ancre = $mn.str_replace('%','_',rawurlencode($num_note));
 
 			// ne mettre qu'une ancre par appel de note (XHTML)
 			if (!$notes_vues[$ancre]++)
