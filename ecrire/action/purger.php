@@ -41,7 +41,7 @@ function action_purger_dist()
 		break;
 
 	case 'vignettes':
-		purger_repertoire(_DIR_VAR);
+		purger_repertoire(_DIR_VAR,array('subdir'=>true));
 		supprime_invalideurs();
 		purger_repertoire(_DIR_CACHE);
 		break;
