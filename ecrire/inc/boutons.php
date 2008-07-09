@@ -588,10 +588,19 @@ function bandeau_double_rangee($rubrique, $sous_rubrique, $largeur)
   . '<script type="text/javascript"><!--'
   . "\nvar boutons_admin = jQuery('#bandeau-principal li.boutons_admin');\n"
   . "if(jQuery.browser.msie) boutons_admin.hover(\n"
-  . "function(){jQuery(this).addClass('sfhover')},\n"
-  . "function(){jQuery(this).removeClass('sfhover')}\n"
+  . "function(){jQuery(this).addClass('sfhover');change_menu_lang(false);},\n"
+  . "function(){jQuery(this).removeClass('sfhover');change_menu_lang(true);}\n"
   . ");\n"
   . "boutons_admin.one('mouseover',decaleSousMenu);\n"
+  . "function change_menu_lang(show){
+  if (show) {jQuery('#menu_langues0').show().siblings('input.lang_ecrire').hide();}
+  else {
+  	if (!jQuery('#menu_langues0').siblings('input.lang_ecrire').length){
+  	jQuery('#menu_langues0').before('<input type=\"text\" name=\"dummy\" class=\"lang_ecrire\" value=\"\" />');
+  	}
+  	jQuery('#menu_langues0').hide().siblings('input.lang_ecrire').attr('value',jQuery('#menu_langues0 option').eq(jQuery('#menu_langues0').get(0).selectedIndex).html()).show();
+  }
+  }"
   . "// --></script>\n";
 }
 
