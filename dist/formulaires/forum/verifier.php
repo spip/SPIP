@@ -27,7 +27,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour){
 	// portant la cle du formulaire ; et ses metadonnees avec
 	if (!isset($GLOBALS['visiteur_session']['tmp_forum_document']))
 		session_set('tmp_forum_document',
-		sous_repertoire(_DIR_TMP,'documents_forum').md5(uniqid()));
+		sous_repertoire(_DIR_TMP,'documents_forum').md5(uniqid(rand())));
 	$tmp = $GLOBALS['visiteur_session']['tmp_forum_document'];
 	$doc = &$_FILES['ajouter_document'];
 	if (isset($_FILES['ajouter_document'])
