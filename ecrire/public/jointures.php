@@ -306,7 +306,7 @@ function trouver_champ_exterieur($cle, $joints, &$boucle, $checkarrivee = false)
 }
 
 // http://doc.spip.org/@trouver_jointure_champ
-function trouver_jointure_champ($champ, $boucle)
+function trouver_jointure_champ($champ, &$boucle)
 {
 	$cle = trouver_champ_exterieur($champ, $boucle->jointures, $boucle);
 	if ($cle) {
