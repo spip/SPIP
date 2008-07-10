@@ -28,14 +28,14 @@ function action_documenter_dist()
 // http://doc.spip.org/@action_documenter_post
 function action_documenter_post($r)
 {
-  list($x, $sign, $id, $type, $vignette, $suite) = $r;
+  list(, $sign, $id, $type, $vignette, $suite) = $r;
 
 	if ($vignette) {
 		// on ne supprime pas, on dissocie
 		// supprimer_document_et_vignette($vignette);
 		// on dissocie, mais si le doc est utilise dans le texte, il sera reassocie ..., donc condition sur vu !
 		sql_delete("spip_documents_liens",
-			"id_objet=".intval($id)."objet=".sql_quote($type)." AND id_document=".sql_quote($vignette)." AND (vu='non' OR vu IS NULL)");
+			"id_objet=".intval($id)." AND objet=".sql_quote($type)." AND id_document=".sql_quote($vignette)." AND (vu='non' OR vu IS NULL)");
 		// Cas de destruction de la vignette seulement
 		if ($suite)
 			sql_updateq("spip_documents", array('id_vignette' => 0), "id_document=$suite");
