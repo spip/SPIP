@@ -33,8 +33,8 @@ function exec_suivi_revisions_dist()
 	echo debut_gauche('', true);
 
 	if (autoriser('voir', 'article'))
-	  $req_where = "('prepa','prop','publie')"; 
-	else $req_where = "('prop','publie')"; 
+	  $req_where = sql_in('articles.statut', array('prepa','prop','publie')); 
+	else $req_where = sql_in('articles.statut', array('prop','publie')); 
 
 	echo debut_cadre_relief('', true);
 
@@ -60,7 +60,7 @@ function exec_suivi_revisions_dist()
 
 		if ($id_rubrique == $id_secteur)  echo "\n<li><b>$titre</b>";
 		else {
-		  if (sql_countsel('spip_versions AS versions, spip_articles AS articles', "versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.id_secteur=$id_rubrique AND articles.statut IN $req_where"))
+		  if (sql_countsel('spip_versions AS versions LEFT JOIN spip_articles AS articles ON versions.id_article = articles.id_article', "versions.id_version > 1 AND articles.id_secteur=$id_rubrique AND $req_where"))
 		    echo "\n<li><a href='" . generer_url_ecrire("suivi_revisions","id_secteur=$id_rubrique") . "'>$titre</a></li>";
 		}
 	}
@@ -69,7 +69,7 @@ function exec_suivi_revisions_dist()
 
 		if ($lang == $lang_choisie)  echo "\n<li><b>$titre</b></li>";
 		else {
-			$n = sql_countsel('spip_versions AS versions, spip_articles AS articles', "versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.lang='$lang' AND articles.statut IN $req_where");
+			$n = sql_countsel('spip_versions AS versions LEFT JOIN spip_articles AS articles ON versions.id_article = articles.id_article', "versions.id_version > 1 AND articles.lang='$lang' AND $req_where");
 			if ($n) echo "\n<li><a href='" . generer_url_ecrire("suivi_revisions","lang_choisie=$lang") . "'>$titre</a></li>";
 		}
 	}

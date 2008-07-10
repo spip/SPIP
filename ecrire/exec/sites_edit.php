@@ -32,7 +32,7 @@ function exec_sites_edit_dist()
 		$nom_site = '';
 		if (!$id_rubrique) {
 			$in = !$connect_id_rubrique ? ''
-			  : (' id_rubrique IN (' . join(',', $connect_id_rubrique) . ')');
+			  : sql_in('id_rubrique', $connect_id_rubrique);
 			$id_rubrique = sql_getfetsel('id_rubrique', 'spip_rubriques', $in, '',  'id_rubrique DESC',  1);
 		}
 		if (!autoriser('creersitedans','rubrique',$id_rubrique )){

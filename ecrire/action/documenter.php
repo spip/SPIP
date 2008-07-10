@@ -58,17 +58,16 @@ function action_documenter_post($r)
 			supprimer_documents(array($vignette));
 	}
 	else {
-		if ($sign)
-			$x = sql_select("docs.id_document", "spip_documents AS docs, spip_documents_liens AS l", "l.id_objet=".intval($id)." AND l.objet=".sql_quote($type)." AND l.id_document=docs.id_document AND docs.mode='document' AND docs.extension IN ('gif', 'jpg', 'png')");
-		else
-			$x = sql_select("docs.id_document", "spip_documents AS docs, spip_documents_liens AS l", "l.id_objet=".intval($id)." AND l.objet=".sql_quote($type)." AND l.id_document=docs.id_document AND docs.mode='document'  AND docs.extension NOT IN ('gif', 'jpg', 'png')");
+		// supprimer_document_et_vignette($r['id_document']);
+		// on dissocie, mais si le doc est utilise dans le texte,
+		// il sera reassocie ..., donc condition sur vu !
+		// Attention a ne pas detruire toutes les references au doc
+		// il peut etre partage ==> retester id_objet
 
-		while ($r = sql_fetch($x)) {
-			// supprimer_document_et_vignette($r['id_document']);
-			// on dissocie, mais si le doc est utilise dans le texte,
-			// il sera reassocie ..., donc condition sur vu !
-			sql_delete("spip_documents_liens", "id_objet=".intval($id)." AND objet=".sql_quote($type)."  AND id_document=".$r['id_document']." AND (vu='non' OR vu IS NULL)");
-		}
+		$obj = "id_objet=".intval($id)." AND objet=".sql_quote($type);
+		$typdoc = sql_in('extension', array('gif', 'jpg', 'png'), $sign  ? '' : 'NOT');
+
+		sql_delete("spip_documents_liens", "$obj AND (vu='non' OR vu IS NULL) AND " . sql_in('id_document', array_map('array_shift', sql_allfetsel("docs.id_document", "spip_documents AS docs LEFT JOIN spip_documents_liens AS l ON l.id_document=docs.id_document", "$obj AND docs.mode='document' AND $typdoc")))) ;
 	}
 	if ($type == 'rubrique') {
 		include_spip('inc/rubriques');
