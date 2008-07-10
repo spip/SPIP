@@ -32,7 +32,7 @@ function inc_documenter_dist(
 		$from = "spip_documents AS D LEFT JOIN spip_documents_liens AS L ON  L.id_document=D.id_document"; 
 		$where = "L.id_objet=$doc AND L.objet='$type' AND D.mode='document' AND D.extension $img IN ('gif', 'jpg', 'png')";
 		$order = "0+D.titre, D.date";
-		$docs = rows_as_array($select, $from, $where, '', $order);
+		$docs = sql_allfetsel($select, $from, $where, '', $order);
 		$opt = array('objet'=>$type, 'id_objet' => $doc);
 	} else {
 		$docs = $doc;
@@ -48,15 +48,6 @@ function inc_documenter_dist(
 	if (is_int($doc))
 		$res = documenter_bloc($doc, $res, $s, $appelant, $ancre, $tous, $type);
 	return ajax_action_greffe("documenter", "$s$doc", $res);
-}
-
-// http://doc.spip.org/@rows_as_array
-function rows_as_array($select, $from, $where='', $groupby='', $orderby='')
-{
-	$q = sql_select($select, $from, $where, $groupby, $orderby);
-	$res = array();
-	while ($r = sql_fetch($q)) $res[] = $r;
-	return $res;
 }
 
 // http://doc.spip.org/@documenter_bloc

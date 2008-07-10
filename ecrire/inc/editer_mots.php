@@ -199,9 +199,9 @@ function editer_mots_un($row, $own)
 	$retire = $unseul = '';
 
 	if ($flag_editable) {
-		$r = sql_fetch(editer_mots_droits('unseul', "id_groupe = $id_groupe"));
+		$r = editer_mots_droits('unseul', "id_groupe = $id_groupe");
 		if ($r) {
-			$unseul = ($r['unseul'] == 'oui');
+			$unseul = ($r[0]['unseul'] == 'oui');
 			$r =  _T('info_retirer_mot')
 			  . "&nbsp;"
 			  . http_img_pack('croix-rouge.gif', "X", " class='puce' style='vertical-align: bottom;'");
@@ -278,14 +278,15 @@ function formulaire_mots_cles($id_objet, $les_mots, $table, $table_id, $url_base
 		. "</div><br />\n";
 	}
 
-	$result = editer_mots_droits("id_groupe,unseul,obligatoire,titre, ".sql_multi ("titre", $spip_lang), "tables_liees REGEXP '(^|,)$table($|,)' AND (unseul != 'oui'  OR (unseul = 'oui'$cond_id_groupes_vus)) ORDER BY multi");
+	$where = "tables_liees REGEXP '(^|,)$table($|,)' AND (unseul != 'oui'  OR (unseul = 'oui'$cond_id_groupes_vus))";
+	$select = "id_groupe,unseul,obligatoire,titre, ".sql_multi ("titre", $spip_lang);
 
 	// Afficher un menu par groupe de mots non vu
 	$ajouter ='';
 	$cond_mots_vus = !$les_mots ? '' :
 	  (" AND " . sql_in('id_mot', $les_mots, 'NOT'));
 
-	while ($row = sql_fetch($result)) {
+	foreach(editer_mots_droits($select, $where,'multi') as $row) {
 		if ($menu = menu_mots($row, $id_groupes_vus, $cond_mots_vus)) {
 			$id_groupe = $row['id_groupe'];
 			list($corps, $clic) = $menu;
@@ -398,9 +399,9 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 // et un table de jointure entre ca et la table des groupes de mots.
 
 // http://doc.spip.org/@editer_mots_droits
-function editer_mots_droits($select, $cond)
+function editer_mots_droits($select, $cond, $order=NULL)
 {
 	$droit = substr($GLOBALS['visiteur_session']['statut'],1);
-	return sql_select("$select,$droit", "spip_groupes_mots", "$droit = 'oui' AND $cond");
+	return sql_allfetsel("$select,$droit", "spip_groupes_mots", "$droit = 'oui' AND $cond", NULL, $order);
 }
 ?>

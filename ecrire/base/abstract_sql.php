@@ -350,6 +350,18 @@ function sql_fetsel(
 	return $r2;
 }
 
+// Retourne le tableau de toutes les lignes d'une requete Select
+function sql_allfetsel(
+	$select = array(), $from = array(), $where = array(),
+	$groupby = array(), $orderby = array(), $limit = '',
+	$having = array(), $serveur='', $option=true) {
+	$q = sql_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, $option!==false);
+	if (!$q) return array();
+	$res = array();
+	while ($r = sql_fetch($q)) $res[] = $r;
+	sql_free($q, $serveur, $option!==false);
+	return $res;
+}
 
 # Retourne l'unique champ demande dans une requete Select a resultat unique
 // http://doc.spip.org/@sql_getfetsel
