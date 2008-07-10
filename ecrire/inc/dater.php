@@ -20,7 +20,7 @@ include_spip('inc/date');
 // http://doc.spip.org/@inc_dater_dist
 function inc_dater_dist($id, $flag, $statut, $type, $script, $date, $date_redac='')
 {
-	global $spip_lang_left, $spip_lang_right;
+	global $spip_lang_left, $spip_lang_right, $debut_date_publication;
 
 	if (preg_match("/([0-9]{4})-([0-9]{2})-([0-9]{2})( ([0-9]{2}):([0-9]{2}))?/", $date_redac, $regs)) {
 		$annee_redac = $regs[1];
@@ -56,9 +56,9 @@ onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
 		. aide('artdate');
 
 		$masque = 
-		  afficher_jour($jour, "name='jour' id='jour' $js", true)
+		  afficher_jour($jour, "name='jour' id='jour' $js", true) 
 		. afficher_mois($mois, "name='mois' id='mois' $js", true)
-		. afficher_annee($annee, "name='annee' id='annee' $js")
+		. afficher_annee($annee, "name='annee' id='annee' $js", $debut_date_publication)
 		. (($type != 'article')
 		   ? ''
 		   : (' - '
