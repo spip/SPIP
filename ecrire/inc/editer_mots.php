@@ -343,7 +343,7 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 	$titre = textebrut(typo($row['titre']));
 	$titre_groupe = entites_html($titre);
 	$unseul = $row['unseul'] == 'oui';
-	$obligatoire = $row['obligatoire']=='oui' AND !in_array($id_groupe, $id_groupes_vus);
+	$obligatoire = ($row['obligatoire']=='oui' AND !in_array($id_groupe, $id_groupes_vus));
 
 	$res = '';
 	$ancre = "valider_groupe_$id_groupe"; 
