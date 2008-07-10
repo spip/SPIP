@@ -65,22 +65,25 @@ function liste_des_champs() {
 // en ne regardant que le titre ou le nom
 // http://doc.spip.org/@liste_des_jointures
 function liste_des_jointures() {
-	return array(
-		'article' => array(
-			'auteur' => array('nom' => 10),
-			'mot' => array('titre' => 3),
-			'document' => array('titre' => 2, 'descriptif' => 1)
-		),
-		'breve' => array(
-			'mot' => array('titre' => 3),
-			'document' => array('titre' => 2, 'descriptif' => 1)
-		),
-		'rubrique' => array(
-			'mot' => array('titre' => 3),
-			'document' => array('titre' => 2, 'descriptif' => 1)
-		),
-		'documents' => array(
-			'mot' => array('titre' => 3)
+	return 
+	pipeline('rechercher_liste_des_jointures',
+			array(
+			'article' => array(
+				'auteur' => array('nom' => 10),
+				'mot' => array('titre' => 3),
+				'document' => array('titre' => 2, 'descriptif' => 1)
+			),
+			'breve' => array(
+				'mot' => array('titre' => 3),
+				'document' => array('titre' => 2, 'descriptif' => 1)
+			),
+			'rubrique' => array(
+				'mot' => array('titre' => 3),
+				'document' => array('titre' => 2, 'descriptif' => 1)
+			),
+			'documents' => array(
+				'mot' => array('titre' => 3)
+			)
 		)
 	);
 }
@@ -132,6 +135,8 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serve
 
 	if (!strlen($recherche) OR !count($tables))
 		return array();
+	include_spip('inc/charsets');
+	$recherche = translitteration($recherche);
 
 	$preg = '/'.str_replace('/', '\\/', $recherche).'/' . $options['preg_flags'];
 	// Si la chaine est inactive, on va utiliser LIKE pour aller plus vite
@@ -208,8 +213,8 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serve
 					$champ = end($champ);
 					if ($n = 
 						($options['score'] || $options['matches'])
-						? preg_match_all($preg, $t[$champ], $regs, PREG_SET_ORDER)
-						: preg_match($preg, $t[$champ])
+						? preg_match_all($preg, translitteration_rapide($t[$champ]), $regs, PREG_SET_ORDER)
+						: preg_match($preg, translitteration_rapide($t[$champ]))
 					) {
 						$vu = true;
 
