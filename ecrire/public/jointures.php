@@ -115,6 +115,7 @@ function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='',
 // condition suffisante pour qu'un Group-By ne soit pas necessaire
 // A ameliorer, notamment voir si calculer_select ne pourrait pas la reutiliser
 // lorsqu'on sait si le critere conditionnel est finalement present
+// http://doc.spip.org/@nogroupby_if
 function nogroupby_if($depart, $arrivee, $id_primary, $col)
 {
 	$pk = $arrivee['key']['PRIMARY KEY'];

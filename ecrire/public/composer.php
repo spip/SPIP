@@ -727,6 +727,7 @@ function calculer_jointnul($cle, $exp, $equiv='')
 	}
 }
 
+// http://doc.spip.org/@reinjecte_joint
 function reinjecte_joint($afrom, $from)
 {
 	  $from_synth = array();
