@@ -198,9 +198,9 @@ function afficher_transferer_upload($texte_upload, $dir)
 		}
 	else {  return
 		"\n<div style='color: #505050;'>"
-		."<label for='chemin'>" . _T('info_selectionner_fichier', $doc)
+		."<label for='cheminupload'>" . _T('info_selectionner_fichier', $doc)
 		."</label>&nbsp;:<br />\n" .
-		"\n<select name='chemin' id='chemin' size='1' class='fondl' style='width:100%;overflow:hidden;'>"
+		"\n<select name='chemin' id='cheminupload' size='1' class='fondl' style='width:100%;overflow:hidden;'>"
 		. "<option value=''>&gt;&gt;</option>"
 		. $texte_upload .
 		"\n</select>" .
