@@ -141,127 +141,129 @@ function maxgraph($max) {
 	}
 }
 
-// http://doc.spip.org/@statistiques_jour_et_mois
-function statistiques_jour_et_mois($id_article, $select, $table, $where, $order, $count, $serveur, $type, $duree, $interval, $total, $popularite, $liste='', $classement=array(), $script='')
+function cadre_stat($stats, $table)
 {
-	$where2 = $duree ? "$order > DATE_SUB(NOW(),INTERVAL $duree $type)": '';
-	if ($where) $where2 = $where2 ?  "$where2 AND $where" : $where;
-	$log = statistiques_collecte_date($select, "(ROUND(UNIX_TIMESTAMP($order) / $interval) *  $interval)", $table, $where2, $serveur);
-
-	if (!$log) return array('','');
-
-	$d = sql_getfetsel("UNIX_TIMESTAMP($order) AS d", $table, $where, '', $order, 1,'',$serveur);
-	$last = 0;
-	$res = debut_cadre_relief("statistiques-24.gif", true)
-	  . statistiques_tous($log,$d, $last, $total, $popularite, $duree, $interval, $classement, $id_article, $liste, $script)
+	if (!$stats) return '';
+	return debut_cadre_relief("statistiques-24.gif", true)
+	.  join('', $stats)
 	. fin_cadre_relief(true)
 	. statistiques_mode($table);
-	
-	if (count($log) < 20) return array($res,  '');
-
-	$mois = statistiques_collecte_date($count,
-		"FROM_UNIXTIME(UNIX_TIMESTAMP($order),'%Y-%m')", 
-		$table,
-		"$order > DATE_SUB(NOW(),INTERVAL 2700 DAY)"
-		. ($where ? " AND $where" : ''),
-		$serveur);
-
-	// rajouter les visites du jour
-	@$mois[date("Y-m",time())] += $last;
-
-	return array($res, statistiques_par_mois($mois, $script));
 }
 
 // http://doc.spip.org/@statistiques_collecte_date
 function statistiques_collecte_date($count, $date, $table, $where, $serveur)
 {
-	$result = sql_select("$count AS n, $date AS d", $table, $where, 'd', 'd', '','', $serveur);
+	$result = sql_select("$count AS n, $date AS d", $table, $where, 'd', '', '','', $serveur);
 	$log = array();
-
-	while ($r = sql_fetch($result,$serveur)) {
-		if ($r['d'] AND  isset($log[$r['d']]))
-			$log[$r['d']] += $r['n'];
-		else	$log[$r['d']] = $r['n'];
-	}
+ 
+	while ($r = sql_fetch($result,$serveur)) $log[$r['d']] = $r['n'];
 	return $log;
 }
 
-// Appelee S'il y a au moins cinq minutes de stats :-)
-
 // http://doc.spip.org/@statistiques_tous
-function statistiques_tous($log, $date_premier, $last, $total_absolu, $val_popularite, $duree, $interval, $classement, $id_article=0, $liste=0, $script='')
+function statistiques_tous($log, $id_article, $table, $where, $order, $serveur, $duree, $interval, $total, $popularite, $liste='', $classement=array(), $script='')
 {
 	$r = array_keys($log);
-	$date_today = max($r);
+	$date_fin = max($r);
 	$date_debut = min($r);
-	$last = (time()-$date_today>$interval) ? 0 : $log[$date_today];
+	$date_premier = sql_getfetsel("UNIX_TIMESTAMP($order) AS d", $table, $where, '', $order, 1,'',$serveur);
+	$last = (time()-$date_fin>$interval) ? 0 : $log[$date_fin];
 	$max = max($log);
 	$maxgraph = maxgraph($max);
 	$rapport = 200 / $maxgraph;
 	$agreg = ceil(count($log) / 420);
-	$largeur = ($agreg > 1) ? 1 :
-	  floor(450 / (1+floor(($date_today-$date_debut)/$interval)));
+	$x = ceil(($date_fin-$date_debut)/$interval);
+	$largeur = ($agreg > 1) ? 1 : (!$x ? 420 :  floor(420 / $x));
+
 	if ($largeur > 50) $largeur = 50; elseif ($largeur < 1) $largeur = 1;
 
-	list($moyenne,$val_prec, $res) = stat_log1($log, $agreg, $date_today, $largeur, $rapport, $interval, $script);
-	$res = statistiques_hauteur($res, $id_article, $largeur, $maxgraph, $moyenne, $rapport, $val_popularite, $last)
-	  . statistiques_nom_des_mois($date_debut, $date_today, ($largeur / ($interval*$agreg)));
+	list($moyenne,$prec, $res) = stat_log1($log, $agreg, $date_fin, $largeur, $rapport, $interval, $script);
 
-	$x = (!$duree) ? 1 : (420/ $duree);
-	$res = statistiques_zoom($id_article, $x, $date_premier, $date_debut, $date_today) . $res;
+	$stats = "\n<table cellpadding='0' cellspacing='0' border='0'><tr>" .
+	  "\n<td ".http_style_background("fond-stats.gif").">"
+	. "\n<table cellpadding='0' cellspacing='0' border='0' class='bottom'><tr>"
+	. "\n<td style='background-color: black'>" . http_img_rien(1, 200) . "</td>"
+	. $res
+	  . (!$liste ? '' : // prevision que pour les visites
+	     statistiques_prevision($id_article, $largeur, $moyenne, $rapport, $popularite, $last))
+	. "\n<td style='background-color: black'>"
+	. http_img_rien(1, 1) ."</td>"
+	. "</tr></table>"
+	. "</td>\n<td "
+	. http_style_background("fond-stats.gif")."  valign='bottom'>"
+	. http_img_rien(3, 1, 'trait_bas') ."</td>"
+	. "\n<td>" . http_img_rien(5, 1) ."</td>" 
+	. "\n<td valign='top'>"
+	. statistiques_echelle($maxgraph) 
+	. "</td>"  
+	. "</tr></table>";
 
-	// cette ligne donne la moyenne depuis le debut
-	// (desactive au profit de la moyenne "glissante")
-	# $moyenne =  round($total_absolu / ((date("U")-$date_premier)/(3600*24)));
-	$res .= "<span class='arial1 spip_x-small'>"
+	if  ($interval <> (24*3600)) {
+	  $legend = '';
+	} else {
+	  
+	  $legend = statistiques_nom_des_mois($date_debut, $date_fin, $largeur, $interval,$agreg)
+	. "<span class='arial1 spip_x-small'>"
 	. _T('texte_statistiques_visites')
 	. "</span><br />"
 	. "<table cellpadding='0' cellspacing='0' border='0' width='100%'><tr style='width:100%;'>"
+	. statistiques_resume($max, $moyenne, $last, $prec, $popularite)
 	. "\n<td valign='top' style='width: 33%; ' class='verdana1'>"
+	. "<b>"
+	. _T('info_total')." "
+	. $total."</b>"
+	. (!$liste ? '' : 
+	   statistiques_classement($id_article, $classement, $liste))
+	. "</td></tr></table>";	
+	}
+	$x = (!$duree) ? 1 : (420/ $duree);
+	$zoom = statistiques_zoom($id_article, $x, $date_premier, $date_debut, $date_fin);
+	return array($zoom, $stats, $mark, $legend);
+}
+
+function statistiques_resume($max, $moyenne, $last, $prec, $popularite)
+{
+	return  "\n<td valign='top' style='width: 33%; ' class='verdana1'>"
 	. _T('info_maximum')." "
 	. $max . "<br />"
 	. _T('info_moyenne')." "
 	. round($moyenne). "</td>"
 	. "\n<td valign='top' style='width: 33%; ' class='verdana1'>"
 	. '<a href="'
-	. generer_url_ecrire("statistiques_referers","")
+	. generer_url_ecrire("statistiques_referers")
 	. '" title="'._T('titre_liens_entrants').'">'
 	. _T('info_aujourdhui')
 	. '</a> '
-	. $last;
+	. $last
+	. (($prec <= 0) ? 0 :
+	     ('<br /><a href="' 
+	      . generer_url_ecrire("statistiques_referers","jour=veille")
+	      .'"  title="'._T('titre_liens_entrants').'">'
+	      ._T('info_hier').'</a> '.$prec))
+	. (!$popularite ? '' :
+	   ("<br />"._T('info_popularite_5').' '.$popularite))
+	.  "</td>";
+}
 
-	if ($val_prec > 0)
-		$res .= '<br /><a href="' . generer_url_ecrire("statistiques_referers","jour=veille").'"  title="'._T('titre_liens_entrants').'">'._T('info_hier').'</a> '.$val_prec;
-	if ($id_article AND $val_popularite)
-		$res .= "<br />"._T('info_popularite_5').' '.$val_popularite;
-
-	$res .= "</td>"
-	. "\n<td valign='top' style='width: 33%; ' class='verdana1'>"
-	. "<b>"
-	. _T('info_total')." "
-	. $total_absolu."</b>";
-	
-	if ($id_article AND $liste) {
+function statistiques_classement($id_article, $classement, $liste)
+{
+	if ($id_article) {
 		if ($classement[$id_article] > 0) {
 			if ($classement[$id_article] == 1)
 			      $ch = _T('info_classement_1', array('liste' => $liste));
 			else
 			      $ch = _T('info_classement_2', array('liste' => $liste));
-			$res .= "<br />".$classement[$id_article].$ch;
+			return "<br />".$classement[$id_article].$ch;
 		}
-	} elseif ($liste) {// i.e; pas 'spip_signatures'
-		$res .= "<span class='spip_x-small'><br />"
+	  } else
+		return "<span class='spip_x-small'><br />"
 		  ._T('info_popularite_2')." "
 		  . ceil($GLOBALS['meta']['popularite_total'])
 		  . "</span>";
-	}
-	$res .= "</td></tr></table>";	
-
-	return $res;
 }
 
 // http://doc.spip.org/@statistiques_zoom
-function statistiques_zoom($id_article, $largeur_abs, $date_premier, $date_debut, $date_today)
+function statistiques_zoom($id_article, $largeur_abs, $date_premier, $date_debut, $date_fin)
 {
 	if ($largeur_abs > 1) {
 		$inc = ceil($largeur_abs / 5);
@@ -289,7 +291,7 @@ function statistiques_zoom($id_article, $largeur_abs, $date_premier, $date_debut
 				       _T('info_zoom'). '-', 
 				       "style='border: 0px; vertical-align: middle;'"),
 			 "&nbsp;");
-	if ( (($date_today - $date_debut) / (24*3600)) > 30)
+	if ( (($date_fin - $date_debut) / (24*3600)) > 30)
 		$zoom .= http_href(generer_url_ecrire("statistiques_visites","duree=$duree_moins$pour_article"), 
 			 http_img_pack('loupe-plus.gif',
 				       _T('info_zoom'). '+', 
@@ -299,12 +301,13 @@ function statistiques_zoom($id_article, $largeur_abs, $date_premier, $date_debut
 	return $zoom;
 }
 
-// Presentation graphique (rq: on n'affiche pas le jour courant)
+// Presentation graphique 
+// (rq: on n'affiche pas le jour courant, c'est a la charge de la prevision)
 // http://doc.spip.org/@stat_log1
 function stat_log1($log, $agreg, $date_today, $largeur, $rapport, $interval, $script) {
 	$res = '';
 	$rien = http_img_rien($largeur, 1, 'trait_bas', '');
-	$test_agreg = $decal = $jour_prec = $val_prec = $moyenne = 0;
+	$test_agreg = $decal = $date_prec = $val_prec = $moyenne = 0;
 	foreach ($log as $key => $value) {
 		if ($key == $date_today) break; 
 		$test_agreg ++;
@@ -314,22 +317,22 @@ function stat_log1($log, $agreg, $date_today, $largeur, $rapport, $interval, $sc
 		$decal ++;
 		$evol[$decal] = $value;
 		// Inserer des jours vides si pas d'entrees	
-		if ($jour_prec > 0) {
-			$ecart = (($key-$jour_prec)/$agreg)-$interval;
+		if ($date_prec > 0) {
+			$ecart = (($key-$date_prec)/$agreg)-$interval;
 			for ($i=$interval; $i <= $ecart; $i+=$interval){
 				if ($decal == 30) $decal = 0;
 				$decal ++;
 				$evol[$decal] = $value;
 				$m = statistiques_moyenne($evol);
-				$m = statistiques_vides($jour_prec+$i, $largeur, $rapport, $m, $script);
+				$m = statistiques_vides($date_prec+$i, $largeur, $rapport, $m, $script);
 				$res .= "\n<td style='width: ${largeur}px'>$m</td>";
 			}
 		}
 		$moyenne = round(statistiques_moyenne($evol),2);
 		$hauteur = round($value * $rapport) - 1;
-		$m = ($hauteur <= 0) ? '' : statistiques_jour($key, $value, $largeur, $moyenne, $hauteur, $rapport, $script);
+		$m = ($hauteur <= 0) ? '' : statistiques_jour($key, $value, $largeur, $moyenne, $hauteur, $rapport, (date("w",$key) == "0"), $script);
 		$res .= "\n<td style='width: ${largeur}px'>$m$rien</td>\n";
-		$jour_prec = $key;
+		$date_prec = $key;
 		$val_prec = $value;
 	}
 	return array($moyenne, $val_prec, $res);
@@ -338,12 +341,12 @@ function stat_log1($log, $agreg, $date_today, $largeur, $rapport, $interval, $sc
 // http://doc.spip.org/@statistiques_href
 function statistiques_href($jour, $moyenne, $script, $value='')
 {
-	$ce_jour=date("Y-m-d", $jour);
-	$title = nom_jour($ce_jour).' '.affdate_jourcourt($ce_jour)
-	  . ($script ? '' : (" | "
-				._T('info_visites')." $value | "
-				._T('info_moyenne')." "
-			     . round($moyenne,2)));
+	$ce_jour=date("Y-m-d H:i:s", $jour);
+	$title = nom_jour($ce_jour)
+	  . ($script ? affdate_heure($ce_jour) :
+	     (affdate_court($ce_jour)  .' '.
+	      (" | " ._T('info_visites')." $value | " ._T('info_moyenne')." "
+	       . round($moyenne,2))));
 	return attribut_html(supprimer_tags($title));
 }
 
@@ -362,8 +365,8 @@ function statistiques_vides($prec, $largeur, $rapport, $moyenne, $script)
 	return "<a href='$script' title='$title'>$res</a>";
 }
 
-// http://doc.spip.org/@statistiques_hauteur
-function statistiques_hauteur($res, $id_article, $largeur, $maxgraph, $moyenne, $rapport, $val_popularite, $visites_today)
+
+function statistiques_prevision($id_article, $largeur, $moyenne, $rapport, $val_popularite, $visites_today)
 {
 	$hauteur = round($visites_today * $rapport) - 1;
 	// $total_absolu = $total_absolu + $visites_today;
@@ -388,67 +391,47 @@ function statistiques_hauteur($res, $id_article, $largeur, $maxgraph, $moyenne, 
 	// et afficher la ligne de base
 	$res .= http_img_rien($largeur, 1, 'trait_bas')
 	. "</td>";
-	
-	return "\n<table cellpadding='0' cellspacing='0' border='0'><tr>" .
-	  "\n<td ".http_style_background("fond-stats.gif").">"
-	. "\n<table cellpadding='0' cellspacing='0' border='0' class='bottom'><tr>"
-	. "\n<td style='background-color: black'>" . http_img_rien(1, 200) . "</td>"
-	. $res 
 
-	. "\n<td style='background-color: black'>" .http_img_rien(1, 1) ."</td>"
-	. "</tr></table>"
-	. "</td>" 
-	. "\n<td ".http_style_background("fond-stats.gif")."  valign='bottom'>" . http_img_rien(3, 1, 'trait_bas') ."</td>"
-	. "\n<td>" . http_img_rien(5, 1) ."</td>" 
-	. "\n<td valign='top'>"
-	. statistiques_echelle($maxgraph) 
-	. "</td>"  
-	. "</tr></table>";
+	return $res;
 }
+
+// Dimanche en couleur foncee
 // http://doc.spip.org/@statistiques_jour
-function statistiques_jour($key, $value, $largeur, $moyenne, $hauteur, $rapport, $script) 
+function statistiques_jour($key, $value, $largeur, $moyenne, $hauteur, $rapport, $dimanche, $script) 
 {
 	$hauteur_moyenne = round($moyenne * $rapport) - 1;
 	$title= statistiques_href($key, $moyenne, $script, $value);
 	$tagtitle = $script ? '' : $title;
+	$couleur = $dimanche ? "couleur_dimanche" :  "couleur_jour";
 	if ($hauteur_moyenne > $hauteur) {
 		$difference = ($hauteur_moyenne - $hauteur) -1;
+
 		$res = http_img_rien($largeur, 1,'trait_moyen',$tagtitle)
 		. http_img_rien($largeur, $difference, '', $tagtitle)
-		. http_img_rien($largeur,1, "trait_haut", $tagtitle);
-		if (date("w",$key) == "0") // Dimanche en couleur foncee
-$res .= http_img_rien($largeur, $hauteur, "couleur_dimanche", $tagtitle);
-		else
-		  $res .= http_img_rien($largeur,$hauteur, "couleur_jour", $tagtitle);
+		. http_img_rien($largeur, 1, "trait_haut", $tagtitle)
+		. http_img_rien($largeur, $hauteur, $couleur, $tagtitle);
 	} else if ($hauteur_moyenne < $hauteur) {
 		$difference = ($hauteur - $hauteur_moyenne) -1;
-		$res = http_img_rien($largeur,1,"trait_haut", $tagtitle);
-		if (date("w",$key) == "0") // Dimanche en couleur foncee
-		  $couleur =  'couleur_dimanche';
-		else
-		  $couleur = 'couleur_jour';
-		$res .= http_img_rien($largeur, $difference, $couleur, $tagtitle)
+		$res = http_img_rien($largeur,1,"trait_haut", $tagtitle)
+		. http_img_rien($largeur, $difference, $couleur, $tagtitle)
 		. http_img_rien($largeur,1,"trait_moyen", $tagtitle)
 		. http_img_rien($largeur, $hauteur_moyenne, $couleur, $tagtitle);
 	} else {
-		  $res = http_img_rien($largeur, 1, "trait_haut", $tagtitle);
-		  if (date("w",$key) == "0") // Dimanche en couleur foncee
-		    $res .= http_img_rien($largeur, $hauteur, "couleur_dimanche", $tagtitle);
-		  else
-		    $res .= http_img_rien($largeur,$hauteur, "couleur_jour", $tagtitle);
+		$res = http_img_rien($largeur, 1, "trait_haut", $tagtitle)
+		. http_img_rien($largeur, $hauteur, $couleur, $tagtitle);
 	}
 	if (!$script) return $res;
 	return "<a href='$script&amp;date=$key' title='$title'>$res</a>";
 }
 
 // http://doc.spip.org/@statistiques_nom_des_mois
-function statistiques_nom_des_mois($date_debut, $date_today, $largeur)
+function statistiques_nom_des_mois($date_debut, $date_today, $largeur, $pas, $agreg)
 {
 	global $spip_lang_left;
 
 	$res = '';
+	$largeur /= ($pas*$agreg);
 	$gauche_prec = -50;
-	$pas =  (24*3600);
 	for ($jour = $date_debut; $jour <= $date_today; $jour += $pas) {
 		if (date("d", $jour) == "1") {
 			$newy = (date("m", $jour) == 1);
@@ -478,11 +461,7 @@ function statistiques_par_mois($entrees, $script){
 	$decal = 0;
 	$tab_moyenne = array();
 
-	$table = ''
-	. "\n<table cellpadding='0' cellspacing='0' border='0'><tr>" .
-		  "\n<td ".http_style_background("fond-stats.gif").">"
-	. "\n<table cellpadding='0' cellspacing='0' border='0' class='bottom'><tr>"
-	. "\n<td class='trait_bas'>" . http_img_rien(1, 200) ."</td>";
+	$table = '';
 			
 	while (list($key, $value) = each($entrees)) {
 		$mois = affdate_mois_annee($key);
@@ -536,15 +515,22 @@ function statistiques_par_mois($entrees, $script){
 		  ."</td>\n";
 	}
 	
-	return $table
-	. "\n<td style='background-color: black'>" . http_img_rien(1, 1) . "</td>"
+	return
+	  "\n<table cellpadding='0' cellspacing='0' border='0'><tr>"
+	.  "\n<td ".http_style_background("fond-stats.gif").">"
+	. "\n<table cellpadding='0' cellspacing='0' border='0' class='bottom'><tr>"
+	. "\n<td class='trait_bas'>" . http_img_rien(1, 200) ."</td>" 
+	.  $table
+	. "\n<td style='background-color: black'>" . http_img_rien(1, 1)
+	. "</td>"
 	. "</tr></table></td>"
 	. "\n<td ".http_style_background("fond-stats.gif")." valign='bottom'>"
 	. http_img_rien(3, 1, 'trait_bas') ."</td>"
 	. "\n<td>" . http_img_rien(5, 1) ."</td>"
 	. "\n<td valign='top'>"
 	. statistiques_echelle($maxgraph)
-	. "</td></tr></table>";
+	. "</td></tr></table>"
+;
  }
 
 // http://doc.spip.org/@statistiques_echelle
@@ -567,36 +553,69 @@ function statistiques_moyenne($tab)
 // http://doc.spip.org/@statistiques_signatures
 function statistiques_signatures($duree, $interval, $type, $id_article, $serveur)
 {
-	$total = sql_countsel("spip_signatures", "id_article=$id_article");
+	$where = "id_article=$id_article";
+	$total = sql_countsel("spip_signatures", $where);
 	if (!$total) return '';
-	$script = generer_url_ecrire('controle_petition', "id_article=$id_article");
-	list($res, $mois) = statistiques_jour_et_mois($id_article, "COUNT(*)", "spip_signatures", "id_article=$id_article", "date_time", "COUNT(*)", $serveur, $type, $duree, $interval, $total, 0, '', array(), $script);
 
-	return "<br />$duree $interval"
-	. gros_titre(_T('titre_page_statistiques_signatures_jour'),'', false)
+	$order = 'date_time';
+	if ($duree) 
+		$where .= "$order > DATE_SUB(NOW(),INTERVAL $duree $type)";
+
+	$log = statistiques_collecte_date('COUNT(*)', "(FLOOR(UNIX_TIMESTAMP($order) / $interval) *  $interval)", 'spip_signatures', $where, $serveur);
+
+	if (count($log) > 1) {
+
+		$script = generer_url_ecrire('controle_petition', "id_article=$id_article");
+		$res = statistiques_tous($log, $id_article, "spip_signatures", "id_article=$id_article", "date_time", $serveur, $duree, $interval, $total, 0, '', array(), $script);
+		$res = gros_titre(_T('titre_page_statistiques_signatures_jour'),'', false) . cadre_stat($res, 'spip_signatures');
+	} else $res = '';
+
+	$mois = statistiques_collecte_date( "COUNT(*)",
+		"FROM_UNIXTIME(UNIX_TIMESTAMP(date_time),'%Y-%m')", 
+		"spip_signatures",
+		"date_time > DATE_SUB(NOW(),INTERVAL 2700 DAY)"
+		. (" AND id_article=$id_article"),
+		$serveur);
+
+	return "<br />"
 	. $res
 	. (!$mois ? '' : (
 	  "<br />"
 	. gros_titre(_T('titre_page_statistiques_signatures_mois'),'', false)
-	. $mois));
+	. statistiques_par_mois($mois, $script)));
 }
 
-// http://doc.spip.org/@statistiques_forums
-function statistiques_forums($duree, $interval, $type, $id_article, $serveur)
-{
+// Stats sur les forums à partir de la date de publi de l'article,
+// (moins une marge pour les forums internes)
 
-	$total = sql_countsel("spip_forum", "id_article=$id_article");
+// http://doc.spip.org/@statistiques_forums
+function statistiques_forums($cond, $id_article, $serveur)
+{
+	$where = "id_article=$id_article ". ($cond ? "AND $cond" : '');
+	$total = sql_countsel("spip_forum", $where);
 	if (!$total) return '';
+	$order = 'date_heure';
+	$interval = 24 * 3600;
+	$oldscore = 420;
+	while ($interval >= 1) {
+		$log = statistiques_collecte_date('COUNT(*)', "(FLOOR(UNIX_TIMESTAMP($order) / $interval) *  $interval)", 'spip_forum', $where, $serveur);
+		if (count($log) > 3) break;
+		$oldlog = $log;
+		$oldinterval = $interval;
+		$interval /= ($interval>3600) ?  24 : 60;
+	}
+	if (count($log) > 20) {
+	  $interval = $oldinterval;
+	  $log = $oldlog;
+	}
 	$script = generer_url_ecrire('articles_forum', "id_article=$id_article");
-	list($res, $mois) = statistiques_jour_et_mois($id_article, "COUNT(*)", "spip_forum", "id_article=$id_article", "date_heure", "COUNT(*)", $serveur, $type, $duree, $interval, $total, 0, '', array(), $script);
+	$date = sql_getfetsel('UNIX_TIMESTAMP(date)', 'spip_articles', $where);
+	$back = 10*ceil((time()-$date) / 3600);
+	$jour = statistiques_tous($log, $id_article, "spip_forum", $where, "date_heure", $serveur, $back, $interval, $total, 0, '', array(), $script);
 
 	return "<br />"
-	. gros_titre(_L('Messages de forum par jour'),'', false)
-	. $res
-	. (!$mois ? '' : (
-	  "<br />"
-	. gros_titre(_L('Messages de forum par mois'),'', false)
-	. $mois));
+	. gros_titre(_L('Messages de forum'),'', false)
+	  . cadre_stat($jour, 'spip_forum');
 }
 
 // Le bouton pour CSV 

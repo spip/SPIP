@@ -130,22 +130,32 @@ function exec_statistiques_visites_args($id_article, $duree, $interval, $type, $
 			$where = "";
 	}
 
-	$select = "visites";
 	$order = "date";
 
-	list($res, $mois) = statistiques_jour_et_mois($id_article, $select, $table, $where, $order, "SUM(visites)", $serveur, $type, $duree, $interval, $total_absolu, $val_popularite,  $classement,  $liste);
+	$where2 = $duree ? "$order > DATE_SUB(NOW(),INTERVAL $duree $type)": '';
+	if ($where) $where2 = $where2 ?  "$where2 AND $where" : $where;
+	$log = statistiques_collecte_date('visites', "(FLOOR(UNIX_TIMESTAMP($order) / $interval) *  $interval)", $table, $where2, $serveur);
 
-	echo $res;
-	if ($mois) {
+	if ($log)
+		echo cadre_stat(statistiques_tous($log, $id_article, $table, $where, $order, $serveur, $duree, $interval, $total_absolu, $val_popularite,  $classement,  $liste), $table);
+
+	$mois = statistiques_collecte_date("SUM(visites)",
+		"FROM_UNIXTIME(UNIX_TIMESTAMP($order),'%Y-%m')", 
+		$table,
+		"$order > DATE_SUB(NOW(),INTERVAL 2700 DAY)"
+		. ($where ? " AND $where" : ''),
+		$serveur);
+
+	if (count($mois)>1)  {
 		echo "<br /><span class='verdana1 spip_small'><b>",
-			  _T('info_visites_par_mois'),
-			  "</b></span>",
-			  $mois;
+			_T('info_visites_par_mois'),
+			"</b></span>",
+			statistiques_par_mois($mois, $script);
 	}
 
 	if ($id_article) {
 		echo statistiques_signatures($duree, $interval, $type, $id_article, $serveur);
-		echo statistiques_forums($duree, $interval, $type, $id_article, $serveur);
+		echo statistiques_forums("statut='prop'", $id_article, $serveur);
 	}
 
 	$referenceurs = charger_fonction('referenceurs', 'inc');
