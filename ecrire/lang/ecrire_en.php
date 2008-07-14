@@ -448,6 +448,7 @@ requiring an FTP access to the Web site.',
   and your site will not work properly anymore.<br />{{Reinstall
   SPIP files.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Default operation mode of public forums',
+'info_modifier_auteur' => 'Edit author details:',
 'info_modifier_breve' => 'Modify the news item:',
 'info_modifier_mot' => 'Edit the keyword:',
 'info_modifier_rubrique' => 'Modify the section:',

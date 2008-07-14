@@ -444,6 +444,7 @@ De publieke forums kunnen per artikel toegestaan worden
  beschadigd te worden waardoor je site niet meer zal
  functioneren.<br />{{Herinstalleer de SPIP-bestanden.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Standaardwerkwijze van de publieke forums',
+'info_modifier_auteur' => 'De auteur wijzigen :',
 'info_modifier_breve' => 'Bericht wijzigen :',
 'info_modifier_mot' => 'Het sleutelwoord wijzigen :',
 'info_modifier_rubrique' => 'De rubriek wijzigen:',
