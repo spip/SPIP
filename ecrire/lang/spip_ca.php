@@ -232,7 +232,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_pet_confirmation' => 'Confirmeu la vostra signatura:',
 'form_pet_deja_enregistre' => 'Aquest lloc ja est&agrave; registrat.',
 'form_pet_deja_signe' => 'Ja heu signat aquest text.',
-'form_pet_envoi_mail_confirmation' => 'Us acabem d\'enviar un correu electr&ograve;nic de confirmaci&oacute;. Heu d\'anar a l\'adre&ccedil;a Web  que s\'hi esmenta per validar la vostra signatura. ',
+'form_pet_envoi_mail_confirmation' => '<MODIF>Us acabem d\'enviar un correu electr&ograve;nic de confirmaci&oacute;. Heu d\'anar a l\'adre&ccedil;a Web  que s\'hi esmenta per validar la vostra signatura. ',
 'form_pet_mail_confirmation' => 'Bon dia,
 
 Heu sol&middot;licitat signar la petici&oacute;:

@@ -208,7 +208,7 @@ dau sit "@nom_site_spip@" (@adresse_site@):',
 'form_pet_confirmation' => 'Volhatz confirmar v&ograve;stra signatura:',
 'form_pet_deja_enregistre' => 'Ja queu sit es registrat',
 'form_pet_deja_signe' => 'Avetz ja signat queu text.',
-'form_pet_envoi_mail_confirmation' => 'Aura recebretz un e-mail de confirmacion. Per validar v&ograve;stra signatura, chau vesitar l\'adrei&ccedil;a web men&ccedil;onada per queste corrier.',
+'form_pet_envoi_mail_confirmation' => '<MODIF>Aura recebretz un e-mail de confirmacion. Per validar v&ograve;stra signatura, chau vesitar l\'adrei&ccedil;a web men&ccedil;onada per queste corrier.',
 'form_pet_mail_confirmation' => 'Bonjorn,
 
 avetz demandat de signar la peticion:

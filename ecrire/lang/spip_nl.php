@@ -236,7 +236,7 @@ de website "@nom_site_spip@" (@adresse_login@) :',
 'form_pet_confirmation' => 'Gelieve je handtekening te bevestigen :',
 'form_pet_deja_enregistre' => 'Deze website is reeds geregistreerd',
 'form_pet_deja_signe' => 'Je hebt deze tekst al ondertekend.',
-'form_pet_envoi_mail_confirmation' => 'Een e-mail ter bevestiging is verzonden. Om je identiteit te bekrachtigen, dien je het webadres te bezoeken dat in de e-mail is vermeld.',
+'form_pet_envoi_mail_confirmation' => '<MODIF>Een e-mail ter bevestiging is verzonden. Om je identiteit te bekrachtigen, dien je het webadres te bezoeken dat in de e-mail is vermeld.',
 'form_pet_mail_confirmation' => 'Hallo,
 
 Je hebt gevraagd om deze petitie te ondertekenen :

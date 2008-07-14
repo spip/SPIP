@@ -236,7 +236,7 @@ the site "@nom_site_spip@" (@adresse_login@):',
 'form_pet_confirmation' => 'Please confirm your signature:',
 'form_pet_deja_enregistre' => 'This site is already registered',
 'form_pet_deja_signe' => 'You have already signed this text.',
-'form_pet_envoi_mail_confirmation' => 'A confirmation e-mail has just been sent to you. You should visit the URL mentioned in this mail to validate your signature.',
+'form_pet_envoi_mail_confirmation' => '<MODIF>A confirmation e-mail has just been sent to you. You should visit the URL mentioned in this mail to validate your signature.',
 'form_pet_mail_confirmation' => 'Hello,
 
 You asked to sign the petition:

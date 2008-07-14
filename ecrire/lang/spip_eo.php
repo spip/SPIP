@@ -233,7 +233,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_pet_confirmation' => 'Bonvolu konfirmi vian subskribon:',
 'form_pet_deja_enregistre' => 'Tiu retejo estas jam registrita',
 'form_pet_deja_signe' => 'Vi jam subskribis tiun tekston.',
-'form_pet_envoi_mail_confirmation' => 'Retmesa&#285;o estis &#309;us sendita al vi. Vi devas aliri la retadreson menciitan en tiu mesa&#285;o por validigi vian subskribon.',
+'form_pet_envoi_mail_confirmation' => '<MODIF>Retmesa&#285;o estis &#309;us sendita al vi. Vi devas aliri la retadreson menciitan en tiu mesa&#285;o por validigi vian subskribon.',
 'form_pet_mail_confirmation' => 'Saluton,
 
 Vi petis subskribi la petskribon:

@@ -234,7 +234,7 @@ serwisie "@nom_site_spip@" (@adresse_login@):',
 'form_pet_confirmation' => 'Prosz&#281; potwierdzi&#263; sw&oacute;j podpis:',
 'form_pet_deja_enregistre' => 'Ta strona jest ju&#380; zarejestrowana',
 'form_pet_deja_signe' => 'Ju&#380; podpisa&#322;e&#347; ten tekst.',
-'form_pet_envoi_mail_confirmation' => 'E-mail potwierdzaj&#261;cy zosta&#322; w&#322;a&#347;nie do Ciebie wys&#322;any. Odwied&#378; URL wymienione w mailu, aby zatwierdzi&#263; sw&oacute;j podpis.',
+'form_pet_envoi_mail_confirmation' => '<MODIF>E-mail potwierdzaj&#261;cy zosta&#322; w&#322;a&#347;nie do Ciebie wys&#322;any. Odwied&#378; URL wymienione w mailu, aby zatwierdzi&#263; sw&oacute;j podpis.',
 'form_pet_mail_confirmation' => 'Witamy,
 
 Zg&#322;osi&#322;e&#347; ch&#281;&#263; podpisania petycji:

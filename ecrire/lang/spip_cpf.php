@@ -241,7 +241,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_pet_confirmation' => 'Mersi konfirm t&egrave;rla out sinyatir :',
 'form_pet_deja_enregistre' => 'Sitw&egrave;b-la l&eacute; d&eacute;za anrozistr&eacute;',
 'form_pet_deja_signe' => 'Ou la d&eacute;za finn siny&eacute; lo t&egrave;ks-la.',
-'form_pet_envoi_mail_confirmation' => 'Inn lim&egrave;l pou konfirm&eacute; la finn d&egrave;t anvway&eacute; aou. Li donn aou inn ladr&egrave;s sitw&egrave;b. L&eacute; n&eacute;s&eacute;s&egrave;r ou sava bat-kar&eacute; sir lo sit-la pou konfirm vr&eacute;man out sinyatir.',
+'form_pet_envoi_mail_confirmation' => '<MODIF>Inn lim&egrave;l pou konfirm&eacute; la finn d&egrave;t anvway&eacute; aou. Li donn aou inn ladr&egrave;s sitw&egrave;b. L&eacute; n&eacute;s&eacute;s&egrave;r ou sava bat-kar&eacute; sir lo sit-la pou konfirm vr&eacute;man out sinyatir.',
 'form_pet_mail_confirmation' => 'Ot&eacute;,
 
 Ou la domman siny&eacute; lo filsinyatir-la :

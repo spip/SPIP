@@ -234,7 +234,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_pet_confirmation' => 'K&eacute;rj&uuml;k, er&#337;s&iacute;tse meg al&aacute;&iacute;r&aacute;s&aacute;t:',
 'form_pet_deja_enregistre' => 'Ezt a honlapot m&aacute;r regisztr&aacute;lt&aacute;k',
 'form_pet_deja_signe' => 'M&aacute;r al&aacute;&iacute;rta ezt a sz&ouml;veget.',
-'form_pet_envoi_mail_confirmation' => 'A meger&#337;s&iacute;t&#337; e-mailt elk&uuml;ldt&uuml;k. Al&aacute;&iacute;r&aacute;s&aacute;nak hiteles&iacute;t&eacute;s&eacute;hez l&aacute;togassa meg a benne tal&aacute;lhat&oacute; c&iacute;met.',
+'form_pet_envoi_mail_confirmation' => '<MODIF>A meger&#337;s&iacute;t&#337; e-mailt elk&uuml;ldt&uuml;k. Al&aacute;&iacute;r&aacute;s&aacute;nak hiteles&iacute;t&eacute;s&eacute;hez l&aacute;togassa meg a benne tal&aacute;lhat&oacute; c&iacute;met.',
 'form_pet_mail_confirmation' => 'J&oacute; napot!
 
 K&eacute;rte, hogy al&aacute;&iacute;rhassa ezt a petici&oacute;t:

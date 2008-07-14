@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_recalculer' => 'Atualizar esta p&aacute;gina',
 'afficher_trad' => 'exibir as tradu&ccedil;&otilde;es',
 'alerte_maj_impossible' => 'Aten&ccedil;&atilde;o! A atualiza&ccedil;&atilde;o da base de dados SQL para a vers&atilde;o @version@ n&atilde;o &eacute; poss&iacute;vel, provavelmente por problema de direitos de edi&ccedil;&atilde;o na base de dados. Por favor, contate o seu provedor de hospedagem.',
+'alerte_modif_info_concourante' => 'ATEN&Ccedil;&Atilde;O: Esta informa&ccedil;&atilde;o foi alterada por outra pessoa. O valor atual &eacute;:',
 'analyse_xml' => 'Analisar XML',
 'annuler' => 'Cancelar',
 'antispam_champ_vide' => 'Deixe, por favor, este campo vazio:',
@@ -231,7 +232,7 @@ Verifique se as mai&uacute;sculas e min&uacute;suculas destes diret&oacute;rios 
 'form_pet_confirmation' => 'Por favor, confirme a sua assinatura:',
 'form_pet_deja_enregistre' => 'Este site j&aacute; est&aacute; cadastrado',
 'form_pet_deja_signe' => 'Voc&ecirc; j&aacute; assinou este texto.',
-'form_pet_envoi_mail_confirmation' => 'Um e-mail de confirma&ccedil;&atilde;o acabou de lhe ser enviado. Voc&ecirc; dever&aacute; visitar o endere&ccedil;o web mencionado na mensagem para validar a sua assinatura.',
+'form_pet_envoi_mail_confirmation' => '<MODIF>Um e-mail de confirma&ccedil;&atilde;o acabou de lhe ser enviado. Voc&ecirc; dever&aacute; visitar o endere&ccedil;o web mencionado na mensagem para validar a sua assinatura.',
 'form_pet_mail_confirmation' => 'Bom dia,
 
 Voc&ecirc; pediu para assinar a peti&ccedil;&atilde;o:
@@ -466,6 +467,7 @@ Obrigado por participar
 'info_nouveau_message' => 'VOC&Ecirc; TEM UMA NOVA MENSAGEM',
 'info_nouveaux_messages' => 'VOC&Ecirc; TEM @total_messages@ MENSAGENS NOVAS',
 'info_numero_abbreviation' => 'N&deg;&nbsp;',
+'info_obligatoire' => 'Esta informa&ccedil;&atilde;o &eacute; obrigat&oacute;ria',
 'info_panne_site_syndique' => 'Site sindicado com problemas',
 'info_pense_bete' => 'LEMBRETE',
 'info_petit_ecran' => 'Baixa resolu&ccedil;&atilde;o',

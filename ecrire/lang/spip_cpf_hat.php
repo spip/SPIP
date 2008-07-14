@@ -234,7 +234,7 @@ sit "@nom_site_spip@" (@adresse_login@) :',
 'form_pet_confirmation' => 'M&egrave;si konfime siyati ou :',
 'form_pet_deja_enregistre' => 'Sit-la se deja enskri',
 'form_pet_deja_signe' => 'W te deja sinye t&egrave;ks-la.',
-'form_pet_envoi_mail_confirmation' => 'Yon lim&egrave;l pou konfine te fin voye a w. F&ograve;k w vizite ladr&egrave;s w&egrave;b te done nan lim&egrave;l pou w konfime siyati ou.',
+'form_pet_envoi_mail_confirmation' => '<MODIF>Yon lim&egrave;l pou konfine te fin voye a w. F&ograve;k w vizite ladr&egrave;s w&egrave;b te done nan lim&egrave;l pou w konfime siyati ou.',
 'form_pet_mail_confirmation' => '<MODIF>Bonjou,
 
 W la domman m&egrave;t siyati nan petisyon-nan :

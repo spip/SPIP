@@ -231,7 +231,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_pet_confirmation' => 'L&uuml;tfen imzan&#305;z&#305; onaylay&#305;n&#305;z :',
 'form_pet_deja_enregistre' => 'Bu site zaten kay&#305;tl&#305;',
 'form_pet_deja_signe' => 'Bu metni zaten imzalam&#305;&#351;s&#305;n&#305;z.',
-'form_pet_envoi_mail_confirmation' => '&#350;u anda size bir teyid e-postas&#305; g&ouml;nderilmi&#351; bulunuyor. &#304;mzan&#305;z&#305; teyid etmek &uuml;zere bu e-postada ad&#305; ge&ccedil;en Web adresini ziyaret etmeniz gerekiyor.',
+'form_pet_envoi_mail_confirmation' => '<MODIF>&#350;u anda size bir teyid e-postas&#305; g&ouml;nderilmi&#351; bulunuyor. &#304;mzan&#305;z&#305; teyid etmek &uuml;zere bu e-postada ad&#305; ge&ccedil;en Web adresini ziyaret etmeniz gerekiyor.',
 'form_pet_mail_confirmation' => 'Merhaba,
 
 Bir dilek&ccedil;e imzalamak istediniz :
