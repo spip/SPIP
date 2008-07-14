@@ -19,8 +19,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function generer_url_ecrire_article($id, $suite='', $ancre='', $statut='', $connect='') {
 	$a = "id_article=" . intval($id);
 	if (!$statut) {
-		$statut = sql_fetsel('statut', 'spip_articles', $a,'','','','',$connect);
-		$statut = $statut['statut'];
+		$statut = sql_getfetsel('statut', 'spip_articles', $a,'','','','',$connect);
 	}
 	if ($suite) $a .= "&$suite";
 	if ($statut == 'publie') {
@@ -33,8 +32,7 @@ function generer_url_ecrire_article($id, $suite='', $ancre='', $statut='', $conn
 function generer_url_ecrire_rubrique($id, $suite='', $ancre='', $statut='', $connect='') {
 	$a = "id_rubrique=" . intval($id);
 	if (!$statut) {
-		$statut = sql_fetsel('statut', 'spip_rubriques', $a,'','','','',$connect);
-		$statut = $statut['statut'];
+		$statut = sql_getfetsel('statut', 'spip_rubriques', $a,'','','','',$connect);
 	}
 	if ($suite) $a .= "&$suite";
 	if ($statut == 'publie') {
@@ -47,8 +45,7 @@ function generer_url_ecrire_rubrique($id, $suite='', $ancre='', $statut='', $con
 function generer_url_ecrire_breve($id, $suite='', $ancre='', $statut='', $connect='') {
 	$a = "id_breve=" . intval($id);
 	if (!$statut) {
-		$statut = sql_fetsel('statut', 'spip_breves', $a,'','','','',$connect);
-		$statut = $statut['statut'];
+		$statut = sql_getfetsel('statut', 'spip_breves', $a,'','','','',$connect);
 	}
 	if ($suite) $a .= "&$suite";
 	if ($statut == 'publie') {
@@ -90,9 +87,15 @@ function generer_url_ecrire_auteur($id, $suite='', $ancre='', $statut='', $conne
 // http://doc.spip.org/@generer_url_ecrire_forum
 function generer_url_ecrire_forum($id, $suite='', $ancre='', $statut='', $connect='') {
 	$a = "id_forum=" . intval($id);
-	if ($suite) $a .= "&$suite"; 
-	if (strlen($ancre)) $a .= "&ancre=" . $ancre;
-	return generer_url_action('redirect', $a);
+	if (!$statut) {
+		$statut = sql_getfetsel('statut', 'spip_forum', $a,'','','','',$connect);
+	}
+	if ($suite) $a .= "&$suite";
+	if ($statut == 'publie') {
+		if (strlen($ancre)) $a .= "&ancre=" . $ancre;
+		return generer_url_action('redirect', $a);
+	}  else return generer_url_ecrire('controle_forum', "debut_id_forum=$id");
+
 }
 
 // http://doc.spip.org/@generer_url_ecrire_document
