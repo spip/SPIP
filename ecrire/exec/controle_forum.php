@@ -165,7 +165,7 @@ function controle_forum_boucle($row) {
 			break;
 	}
 
-	$controle .= "<table width='100%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td style='width: 100%' valign='top'><table width='100%' cellpadding='5' cellspacing='0'>\n<tr><td class='serif'><span class='arial2'>" .
+	$controle .= "<div>" .
 	  date_interface($forum_date_heure) .
 	  "</span>";
 	if ($forum_email_auteur) {
@@ -182,7 +182,7 @@ function controle_forum_boucle($row) {
 
 	$suite = "\n<br />$avant<b>$pref
 	<a href='$url'>$titre</a></b>"  
-	. "<div style='overflow:hidden'>".justifier(propre($forum_texte))."</div>";
+	. "<div>".justifier(propre($forum_texte))."</div>";
 
 	if (strlen($forum_url_site) > 10 AND strlen($forum_nom_site) > 3)
 		$suite .= "\n<div style='text-align: left' class='serif'><b><a href='$forum_url_site'>$forum_nom_site</a></b></div>";
@@ -202,8 +202,7 @@ function controle_forum_boucle($row) {
 
 	$controle .= $documents;
 
-	$controle .= "</td></tr></table>";
-	$controle .= "</td></tr></table>\n";
+	$controle .= "</div>\n";
 
 	$controle .= "</div>".fin_cadre_thread_forum(true);
 	return $controle;
