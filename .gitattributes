@@ -30,7 +30,6 @@ dist/inc-petition.html -text
 dist/inc-pied.html -text
 dist/inc-rss-item.html -text
 dist/inc-rubriques.html -text
-dist/javascript/formfx.js -text
 dist/modeles/article_mots.html -text
 dist/modeles/article_traductions.html -text
 dist/modeles/foreach.html -text

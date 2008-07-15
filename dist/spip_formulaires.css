@@ -171,11 +171,13 @@ fieldset.reponse_formulaire { border-color: #F57900; font-weight: normal; }
 }
 .formulaire_spip li.erreur .erreur,
 .formulaire_spip em.attention,
-.formulaire_spip .formulaire_erreur{
+.formulaire_spip .formulaire_erreur {
 	color: #C30;
 	font-weight: bold;
+	display:block;
+	margin-bottom:0.5em;
 }
-.formulaire_spip .formulaire_erreur{
+.formulaire_spip .formulaire_erreur {
 	display:block;
 	margin-left:0.5em;
 }
