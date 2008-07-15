@@ -748,10 +748,30 @@ function traiter_tableau($bloc) {
 
 	// maintenant qu'on a toutes les cellules
 	// on prepare une liste de rowspan par defaut, a partir
-	// du nombre de colonnes dans la premiere ligne
-	$rowspans = array();
-	for ($i=0; $i<count($lignes[0]); $i++)
-		$rowspans[] = 1;
+	// du nombre de colonnes dans la premiere ligne.
+	// Reperer egalement les colonnes numeriques pour les cadrer a droite
+	$rowspans = $numeric = array();
+	$n = count($lignes[0]);
+	$k = count($lignes);
+	for ($i=0; $i<$n; $i++) $rowspans[] = 1;
+	for($i=0;$i<$n;$i++) {
+	  $align = true;
+	  for ($j=0;$j<$k;$j++) {
+	    $cell = $lignes[$j][$i];
+	    if (!preg_match('/[{<]/',$cell[0])) {
+		if (!preg_match('/^\s*\d+([.,]?)\d*\s*$/', $cell, $r))
+		  { $align = ''; break;}
+		else if ($r[1]) $align = $r[1];
+	      }
+	  }
+	  $numeric[$i] = !$align ? '' :
+	    (" style='text-align: " .
+	     // http://www.w3.org/TR/REC-CSS2/tables.html#column-alignment
+	     // specifie text-align: "," pour cadrer le long de la virgule
+	     // mais les navigateurs ne l'implementent pas ou mal
+	     (/* $align !== true ?"\"$align\"" : */ 'right') .
+	     "'");
+	}
 
 	// et on parcourt le tableau a l'envers pour ramasser les
 	// colspan et rowspan en passant
@@ -763,33 +783,31 @@ function traiter_tableau($bloc) {
 		$ligne='';
 
 		for($c=count($cols)-1; $c>=0; $c--) {
-			$attr='';
-			if($cols[$c]=='<') {
+			$attr= $numeric[$c]; 
+			$cell = $cols[$c];
+			if($cell=='<') {
 			  $colspan++;
 
-			} elseif($cols[$c]=='^') {
+			} elseif($cell=='^') {
 			  $rowspans[$c]++;
 
 			} else {
 			  if($colspan>1) {
-				$attr.= " colspan='$colspan'";
+				$attr .= " colspan='$colspan'";
 				$colspan=1;
 			  }
 			  if($rowspans[$c]>1) {
 				$attr.= " rowspan='$rowspans[$c]'";
 				$rowspans[$c]=1;
 			  }
-			  $ligne= "\n<td".$attr.'>'.$cols[$c].'</td>'.$ligne;
+			  $ligne= "\n<td".$attr.'>'.$cell.'</td>'.$ligne;
 			}
-			$numeric &= (preg_match('/[{<]/',$cols[$c][0]) || is_numeric($cols[$c]));
 		}
 
 		// ligne complete
 		$class = 'row_'.alterner($l+1, 'even', 'odd');
 		$html = "<tr class=\"$class\">" . $ligne . "</tr>\n".$html;
 	}
-	if ($numeric) 
-		$html = str_replace("\n<td", "\n<td style='text-align: right'", $html);
 	return "\n\n<table".$GLOBALS['class_spip_plus'].$summary.">\n"
 		. $debut_table
 		. "<tbody>\n"
