@@ -449,12 +449,15 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 		page_base_href($texte);
 		// attention $contexte_inclus a pu changer pendant l'eval ci dessus
 		// on se refere a $page['contexte'] a la place
-		if (isset($page['contexte']['_pipeline'])
-		 && is_array($page['contexte']['_pipeline'])
-		 && isset($GLOBALS['spip_pipeline'][reset($page['contexte']['_pipeline'])])){
-			$texte = pipeline(reset($page['contexte']['_pipeline']),array(
-			  'data'=>$texte,
-			  'args'=>end($page['contexte']['_pipeline'])));
+		if (isset($page['contexte']['_pipeline'])) {
+			$pipe = is_array($page['contexte']['_pipeline'])?reset($page['contexte']['_pipeline']):$page['contexte']['_pipeline'];
+			$contexte = is_array($page['contexte']['_pipeline'])?end($page['contexte']['_pipeline']):array();
+			$contexte = array_merge($contexte,$page['contexte']);
+			unset($contexte['_pipeline']); // par precaution, meme si le risque de boucle infinie est a priori nul
+			if (isset($GLOBALS['spip_pipeline'][$pipe]))
+				$texte = pipeline($pipe,array(
+				  'data'=>$texte,
+				  'args'=>$contexte));
 		}
 	}
 
