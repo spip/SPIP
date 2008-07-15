@@ -111,7 +111,6 @@ function auteur_infos_ok($auteur, $id_auteur, $echec, $new, $redirect)
 	} else {
 		echo gros_titre(_T('info_acces_interdit'),'', false);
 	}
-
 	echo pipeline('affiche_milieu',
 			      array('args' => array(
 						    'exec'=>'auteur_infos',

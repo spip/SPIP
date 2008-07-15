@@ -101,7 +101,7 @@ function breves_edit_ok($row, $id_breve, $id_rubrique, $new)
 	echo debut_droite('', true);
 
 	$contexte = array(
-	'icone_retour'=>$new=='oui'?'':icone_inline(_T('icone_retour'), generer_url_ecrire("breves_voir","id_breve=$id_breve"), "breve-24.gif", "rien.gif",$GLOBALS['spip_lang_right']),
+	'icone_retour'=>$new=='oui'?'':icone_inline(_T('icone_retour'), generer_url_ecrire("breves_voir","id_breve=$id_breve"), "breve-24.gif", "rien.gif",$GLOBALS['spip_lang_left']),
 	'redirect'=>generer_url_ecrire("breves_voir"),
 	'titre'=>$titre,
 	'new'=>$new == "oui"?$new:$id_breve,
