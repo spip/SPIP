@@ -178,6 +178,7 @@ function document_et_vignette($document, $url, $portfolio=false) {
 			} else {
 				$image = filtrer('image_reduire',	$image,	-1,-1,false, true);
 			}
+			$image = inserer_attribut($image, "class", "miniature_document");
 		}
 	} else {
 		$image = '';
@@ -185,7 +186,7 @@ function document_et_vignette($document, $url, $portfolio=false) {
 
 	if (!$image) {
 		list($fichier, $largeur, $hauteur) = vignette_par_defaut($extension);
-		$image = "<img src='$fichier'\n\theight='$hauteur' width='$largeur' alt=' ' />";
+		$image = "<img src='$fichier'\n\theight='$hauteur' style='' width='$largeur' alt=' ' />";
 	} else $image = inserer_attribut($image, 'alt', ' ');
 
 	if (!$url)
