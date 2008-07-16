@@ -1471,10 +1471,9 @@ function tester_config($id, $mode='') {
 function url_rss_forum($param) {
 	if (preg_match(',.*(id_.*?)=([0-9]+),S', $param, $regs)) {
 		include_spip('inc/acces');
-		$regs[1] = str_replace('id_forum', 'id_thread', $regs[1]);
-		$arg = $regs[1].'-'.$regs[2];
-		$cle = afficher_low_sec(0, "rss forum $arg");
-		return generer_url_action('rss', "op=forum&args=$arg&cle=$cle");
+		list(,$k,$v) = $regs;
+		$k = str_replace('id_forum', 'id_thread', $k);
+		return generer_url_low_sec('forum', array($k => $v));
 	}
 }
 

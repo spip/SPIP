@@ -110,22 +110,20 @@ function exec_synchro_dist()
 
 	echo "<p>"._T("ical_texte_rss_articles2")."</p>";
 
-	$result = sql_select("id_rubrique, titre", "spip_rubriques", 'id_parent=0','', '0+titre,titre');
+	$bouton = http_img_pack( 'feed.png', 'RSS', '');
 
-	$h = http_img_pack( 'feed.png', 'RSS', '');
-	if (sql_count($result) > 0) {
-		echo "\n<ul>";
+	$result = sql_allfetsel("id_rubrique, titre", "spip_rubriques", 'id_parent=0','', '0+titre,titre');
 
-		while($row=sql_fetch($result)){
-			$id_rubrique=$row['id_rubrique'];
-			$titre_rubrique = typo($row['titre']);
-			$titre = htmlspecialchars($titre_rubrique);
+	$res = '';
+	foreach($result as $row){
+		$h = generer_url_public('backend', "id_rubrique=" . $row['id_rubrique']);
+		$titre_rubrique = typo($row['titre']);
+		$titre = htmlspecialchars($titre_rubrique);
 			
-			echo "\n<li><a href='" . generer_url_public('backend', "id_rubrique=$id_rubrique") . "' title=\"$titre\">$h&nbsp; $titre_rubrique</a></li>";
-		}
-		echo "\n</ul>";
+		$res .= "\n<li><a href='$h' title=\"$titre\">$bouton&nbsp; $titre_rubrique</a></li>";
 	}
 	
+	if ($res) echo "\n<ul>", $res, "\n</ul>";
 	
 	if ($GLOBALS['meta']['activer_breves'] == "oui") {
 		
@@ -135,7 +133,7 @@ function exec_synchro_dist()
 		  "' title=\"",
 		  _T('ical_lien_rss_breves'),
 		  "\">",
-		  $h,
+		  $bouton,
 		  '&nbsp; ' . _T('ical_lien_rss_breves'), 
 		  "</a></li></ul>";
 		
