@@ -320,10 +320,15 @@ function champs_traitements ($p) {
 	// dans les filtres propre() ou typo()
 	// (qui traitent les raccourcis <docXX> referencant les docs)
 	// NB: le test permet d'eviter ce calcul quand on sait qu'il ne servira pas
+	// un test plus complexe que la simple presence de {doublons ne peut etre realise par preg_match
+	// mais necessite de parser le squelette
+	// ex : <BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {extension IN jpg,gif,png}{largeur>=200}{hauteur>120} {par num titre, date} {doublons}>
+	// peut etre faut il inserer ici la fonction betement, dans le compilateur lever un flag si elle est effectivement necessaire
+	// et in fine, remplacer dansle squelette calcule 'traiter_doublons_documents' par 'ne_pas_traiter_doublons_documents' si elle n'est pas utile ?
 	if (!isset($test_doublons[$p->descr['sourcefile']]))
 		$test_doublons[$p->descr['sourcefile']]
-			= preg_match(',([<#]INCLU[RD]E|DOCUMENTS)[^<>]*{doublons,',
-				$p->descr['squelette']);
+			= (strpos($p->descr['squelette'],'{doublons')!==false);
+			#preg_match(',([<#]INCLU[RD]E|DOCUMENTS)([^<>]*?{[^}]*})*{doublons,',$p->descr['squelette']);
 
 	if ($test_doublons[$p->descr['sourcefile']]
 	AND (
