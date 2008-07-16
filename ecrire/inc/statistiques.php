@@ -199,24 +199,32 @@ function statistiques_tous($log, $id_article, $table, $where, $order, $serveur, 
 	. "</td>"  
 	. "</tr></table>";
 
-	if  ($interval <> (24*3600)) {
-	  $legend = '';
+	$total = "<b>" .  _T('info_total') ." " . $total."</b>";
+
+	if  ($liste) {
+		$liste = statistiques_classement($id_article, $classement, $liste);
+		$legend = statistiques_nom_des_mois($date_debut, $date_fin, $largeur, $interval,$agreg)
+		  . "<span class='arial1 spip_x-small'>"
+		  . _T('texte_statistiques_visites')
+		  . "</span><br />";
+		$resume =  statistiques_resume($max, $moyenne, $last, $prec, $popularite);
 	} else {
-	  
-	  $legend = statistiques_nom_des_mois($date_debut, $date_fin, $largeur, $interval,$agreg)
-	. "<span class='arial1 spip_x-small'>"
-	. _T('texte_statistiques_visites')
-	. "</span><br />"
-	. "<table cellpadding='0' cellspacing='0' border='0' width='100%'><tr style='width:100%;'>"
-	. statistiques_resume($max, $moyenne, $last, $prec, $popularite)
-	. "\n<td valign='top' style='width: 33%; ' class='verdana1'>"
-	. "<b>"
-	. _T('info_total')." "
-	. $total."</b>"
-	. (!$liste ? '' : 
-	   statistiques_classement($id_article, $classement, $liste))
-	. "</td></tr></table>";	
+	  $legend = "<table width='100%'><tr><td width='50%'>" .
+	    affdate_heure(date("Y-m-d H:i:s", $date_debut)) .
+	    "</td><td width='50%' align='right'>" . 
+	    affdate_heure(date("Y-m-d H:i:s", $date_fin)) .
+	    '</td></tr></table>';
+	  $resume = '';
 	}
+	  
+	$legend .=
+	  "<table cellpadding='0' cellspacing='0' border='0' width='100%'><tr style='width:100%;'>"
+	. $resume
+	. "\n<td valign='top' style='width: 33%; ' class='verdana1'>"
+	. $total
+	. $liste
+	. "</td></tr></table>";	
+
 	$x = (!$duree) ? 1 : (420/ $duree);
 	$zoom = statistiques_zoom($id_article, $x, $date_premier, $date_debut, $date_fin);
 	return array($zoom, $stats, $mark, $legend);
@@ -555,7 +563,7 @@ function statistiques_moyenne($tab)
 
 
 // http://doc.spip.org/@statistiques_signatures
-function statistiques_signatures($duree, $interval, $type, $id_article, $serveur)
+function statistiques_signatures_dist($duree, $interval, $type, $id_article, $serveur)
 {
 	$where = "id_article=$id_article";
 	$total = sql_countsel("spip_signatures", $where);
@@ -589,13 +597,10 @@ function statistiques_signatures($duree, $interval, $type, $id_article, $serveur
 	. statistiques_par_mois($mois, $script)));
 }
 
-// Stats sur les forums à partir de la date de publi de l'article,
-// (moins une marge pour les forums internes)
-
 // http://doc.spip.org/@statistiques_forums
-function statistiques_forums($cond, $id_article, $serveur)
+function statistiques_forums_dist($duree, $interval, $type, $id_article, $serveur)
 {
-	$where = "id_article=$id_article ". ($cond ? "AND $cond" : '');
+	$where = "id_article=$id_article AND statut='publie'";
 	$total = sql_countsel("spip_forum", $where);
 	if (!$total) return '';
 	$order = 'date_heure';
