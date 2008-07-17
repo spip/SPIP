@@ -43,7 +43,7 @@ DTSTART:[(#DATE|date_ical)]
 CATEGORIES:<:icone_a_suivre|filtrer_ical:>
 URL:[(#URL_ECRIRE{accueil})]
 END:VTODO</B_breve>
-<BOUCLE_message_rv(messages auteurs_messages){lang_select=non}{par date_heure}{inverse}{statut="publie"}{rv=oui}{destinataire=#ID_AUTEUR}>
+<BOUCLE_message_rv(messages auteurs_messages){lang_select=non}{par date_heure}{inverse}{statut="publie"}{rv=oui}{auteurs_messages.id_auteur=#ID_AUTEUR}>
 BEGIN:VEVENT
 SUMMARY:[(#TITRE|filtrer_ical)]
 DESCRIPTION:[(#TEXTE|filtrer_ical)]
@@ -75,7 +75,7 @@ DTSTART:[(#DATE_HEURE|date_ical)]
 CATEGORIES:<:info_pense_bete|filtrer_ical:>
 URL:[(#URL_ECRIRE{message, id_message=#ID_MESSAGE})]
 END:VTODO</BOUCLE_message_pb>
-<BOUCLE_message_n(messages auteurs_messages){lang_select=non}{par date_heure}{inverse}{statut="publie"}{rv!=oui}{vu=non}{type=normal}{destinataire=#ID_AUTEUR}>
+<BOUCLE_message_n(messages auteurs_messages){lang_select=non}{par date_heure}{inverse}{statut="publie"}{rv!=oui}{vu=non}{type=normal}{auteurs_messages.id_auteur=#ID_AUTEUR}>
 BEGIN:VTODO
 SUMMARY:<BOUCLE_message_n_f(FORUMS){lang_select=non}
 	{id_message}{statut=perso}{plat}{!par date}{0,1}
