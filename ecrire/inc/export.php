@@ -34,15 +34,11 @@ global $EXPORT_tables_noexport;
 
 $EXPORT_tables_noexport= array(
 	'spip_caches', // plugin invalideur
-	'spip_index',
-	'spip_index_dico',
 	'spip_resultats', // resultats de recherche ... c'est un cache !
 	'spip_referers',
 	'spip_referers_articles',
 	'spip_visites',
 	'spip_visites_articles',
-	'spip_ortho_cache',
-	'spip_ortho_dico',
 	'spip_versions', // le dump des fragments n'est pas robuste
 	'spip_versions_fragments' // le dump des fragments n'est pas robuste
 	);
