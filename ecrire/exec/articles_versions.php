@@ -168,39 +168,32 @@ function exec_articles_versions_args($id_article, $id_version, $id_diff)
 // Affichage des versions
 //
 
-
 	$result = sql_select("id_version, titre_version, date, id_auteur",
 		"spip_versions",
 		"id_article=".sql_quote($id_article)." AND  id_version>0",
 		"", "id_version DESC");
 
-	$zap = sql_count($result);
-
-	if (!$zap) return; 
-
 	echo debut_cadre_relief('', true);
-// s'il y en a trop on en zappe (pagination a la va-vite)
-	$zap = ($zap > 50);
-	$zaps = '<li>...</li>';
-	$zapn = 0;
 
-	echo "<ul class='verdana3'>";
+	$zapn = 0;
+	$lignes = array();
+	$points = '...';
+	$tranches = 10;
 	while ($row = sql_fetch($result)) {
 
-	// points de pagination
-		if ($zap
-		    AND $zapn++>10
-		    AND abs($id_version - $row['id_version']) > 20) {
-			echo $zaps;
-			$zaps = '';
-			if ($id_version > $row['id_version']) {
-				echo '<li>...</li>';
-				break;
+		$res = '';
+		// s'il y en a trop on zappe a partir de la 10e
+		// et on s'arrete juste apres celle cherchee
+		if ($zapn++ > $tranches
+		AND abs($id_version - $row['id_version']) > $tranches<<1) {
+			if ($points) {
+				$lignes[]= $points;
+				$points = '';
 			}
+			if ($id_version > $row['id_version']) break;
 			continue;
 		}
 
-		echo "<li>\n";
 		$date = affdate_heure($row['date']);
 		$version_aff = $row['id_version'];
 		$titre_version = typo($row['titre_version']);
@@ -208,37 +201,37 @@ function exec_articles_versions_args($id_article, $id_version, $id_diff)
 		if ($version_aff != $id_version) {
 			$lien = parametre_url(self(), 'id_version', $version_aff);
 			$lien = parametre_url($lien, 'id_diff', '');
-			echo "<a href='".($lien.'#diff')."' title=\""._T('info_historique_affiche')."\">$titre_aff</a>";
+			$res .= "<a href='".($lien.'#diff')."' title=\""._T('info_historique_affiche')."\">$titre_aff</a>";
 		} else {
-			echo "<b>$titre_aff</b>";
+			$res .= "<b>$titre_aff</b>";
 		}
 
-		if (isset($row['id_auteur'])) {
-			if (is_numeric($row['id_auteur'])
-			AND $t = sql_fetsel('nom', 'spip_auteurs', "id_auteur=" . intval($row['id_auteur']))) {
-				echo " (".typo($t['nom']).")";
+		if (is_numeric($row['id_auteur'])
+		AND $t = sql_getfetsel('nom', 'spip_auteurs', "id_auteur=" . intval($row['id_auteur']))) {
+				$res .= " (".typo($t).")";
 			} else {
-				echo " (".$row['id_auteur'].")"; #IP edition anonyme
-			}
+				$res .= " (".$row['id_auteur'].")"; #IP edition anonyme
 		}
 		
-	if ($version_aff != $id_version) {
-		echo " <span class='verdana2'>";
-		if ($version_aff == $id_diff) {
-			echo "<b>("._T('info_historique_comparaison').")</b>";
-		}
-		else {
+		if ($version_aff != $id_version) {
+		  $res .= " <span class='verdana2'>";
+		  if ($version_aff == $id_diff) {
+			$res .= "<b>("._T('info_historique_comparaison').")</b>";
+		  } else {
 			$lien = parametre_url(self(), 'id_version', $id_version);
 			$lien = parametre_url($lien, 'id_diff', $version_aff);
-			echo "(<a href='".($lien.'#diff').
+			$res .= "(<a href='".($lien.'#diff').
 			"'>"._T('info_historique_comparaison')."</a>)";
+		  }
+		$res .= "</span>";
 		}
-		echo "</span>";
-		}
-	echo "</li>\n";
-}
-echo "</ul>\n";
-
+		$lignes[]= $res;
+	}
+	if ($lignes) {
+		echo "<ul class='verdana3'><li>\n";
+		echo join("\n</li><li>\n", $lignes);
+		echo "</li></ul>\n";
+	}
 
 //////////////////////////////////////////////////////
 // Corps de la version affichee
