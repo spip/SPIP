@@ -27,7 +27,7 @@ function inc_msiefix_dist($texte) {
 	if (strpos($texte, 'jquery.js')
 	AND strpos($texte, '.png')
 	AND true /* ... autres tests si on veut affiner ... */
-	AND lire_fichier(_DIR_RACINE.'dist/javascript/jquery.ifixpng.js', $ifixpng)
+	AND lire_fichier(_DIR_RACINE.'prive/javascript/jquery.ifixpng.js', $ifixpng)
 	) {
 		$texte .=
 "<script type='text/javascript'><!--
@@ -48,7 +48,7 @@ onAjaxLoad(fixie);
 
 // http://doc.spip.org/@presentation_msiefix
 function presentation_msiefix() {
-	lire_fichier(_DIR_RACINE.'dist/javascript/jquery.ifixpng.js', $ifixpng);
+	lire_fichier(_DIR_RACINE.'prive/javascript/jquery.ifixpng.js', $ifixpng);
 	return "<script type='text/javascript'><!--
 	try { document.execCommand('BackgroundImageCache', false, true); } catch(err) {};
 	if (window.jQuery && jQuery.browser.msie) {
