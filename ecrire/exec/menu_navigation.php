@@ -23,48 +23,54 @@ function exec_menu_navigation_dist() {
 	$gadget = '<div style="width: 300px;">';
 
 	$vos_articles = sql_select("articles.id_article, articles.id_rubrique, articles.titre, articles.statut", "spip_articles AS articles, spip_auteurs_articles AS lien", "articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa'", "articles.date", "articles.date DESC", "5");
-
-	if (sql_count($vos_articles) > 0) {
-			$t = _T('info_en_cours_validation');
-			$gadget .= debut_cadre('bandeau-rubriques',"article-24.gif",'',afficher_plus(generer_url_ecrire("articles_page")).$t)
-			. "\n<div class='plan-articles'>\n";
-			while($row = sql_fetch($vos_articles)) {
-				$id_article = $row['id_article'];
-				$titre = typo(sinon($row['titre'], _T('ecrire:info_sans_titre')));
-				$statut = $row['statut'];
-				$gadget .= "<a class='$statut spip_xx-small' href='" . generer_url_ecrire("articles","id_article=$id_article") . "'>$titre</a>\n";
-			}
-			$gadget .= "</div>";
-			$gadget .= fin_cadre('bandeau-rubriques');
+	$vos = '';
+	while($row = sql_fetch($vos_articles)) {
+		$id_article = $row['id_article'];
+		$titre = typo(sinon($row['titre'], _T('ecrire:info_sans_titre')));
+		$statut = $row['statut'];
+		$h = generer_url_ecrire("articles","id_article=$id_article");
+		$vos .= "<a class='$statut spip_xx-small' href='$h'>$titre</a>\n";
+	}
+	if ($vos) {
+		$t = _T('info_en_cours_validation');
+		$gadget .= debut_cadre('bandeau-rubriques',"article-24.gif",'',afficher_plus(generer_url_ecrire("articles_page")).$t)
+		. "\n<div class='plan-articles'>\n"
+		. $vos
+		. "</div>"
+		. fin_cadre('bandeau-rubriques');
 	}
 	
 	$vos_articles = sql_select("id_article, id_rubrique, titre, statut", "spip_articles", "statut='prop'", "date", "date DESC", "5");
-	if (sql_count($vos_articles) > 0) {
-			$gadget .= debut_cadre('bandeau-rubriques',"article-24.gif",'',afficher_plus(generer_url_ecrire())._T('info_articles_proposes'));
-			$gadget .= "<div class='plan-articles'>";
-			while($row = sql_fetch($vos_articles)) {
-				$id_article = $row['id_article'];
-				$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
-				$statut = $row['statut'];
-				$gadget .= "<a class='$statut' href='" . generer_url_ecrire("articles","id_article=$id_article") . "'>$titre</a>";
-			}
-			$gadget .= "</div>";
-			$gadget .= fin_cadre('bandeau-rubriques');
+	$vos = '';
+	while($row = sql_fetch($vos_articles)) {
+		$id_article = $row['id_article'];
+		$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
+		$statut = $row['statut'];
+		$h = generer_url_ecrire("articles","id_article=$id_article");
+		$vos .= "<a class='$statut' href='$h'>$titre</a>";
+	}
+	if ($vos) {
+		$gadget .= debut_cadre('bandeau-rubriques',"article-24.gif",'',afficher_plus(generer_url_ecrire())._T('info_articles_proposes'))
+		. "<div class='plan-articles'>"
+		. $vos
+		. "</div>"
+		. fin_cadre('bandeau-rubriques');
 	}
 
 	$vos_articles = sql_select("id_breve,titre,statut", "spip_breves", "statut='prop'", "date_heure", "date_heure DESC", "5");
-	if (sql_count($vos_articles) > 0) {
-			$gadget .= debut_cadre('bandeau-rubriques',"breve-24.gif",'',afficher_plus(generer_url_ecrire("breves"))._T('info_breves_valider'));
-			$gadget .= "<div class='plan-articles'>";
-			while($row = sql_fetch($vos_articles)) {
-				$id_breve = $row['id_breve'];
-				$titre = typo(sinon($row['titre'], _T('ecrire:info_sans_titre')));
-				$statut = $row['statut'];
-	
-				$gadget .= "<a class='$statut spip_xx-small' href='" . generer_url_ecrire("breves_voir","id_breve=$id_breve") . "'>$titre</a>";
-			}
-			$gadget .= "</div>";
-			$gadget .= fin_cadre('bandeau-rubriques');
+	$vos = '';
+	while($row = sql_fetch($vos_articles)) {
+		$id_breve = $row['id_breve'];
+		$titre = typo(sinon($row['titre'], _T('ecrire:info_sans_titre')));
+		$statut = $row['statut'];
+		$vos .= "<a class='$statut spip_xx-small' href='" . generer_url_ecrire("breves_voir","id_breve=$id_breve") . "'>$titre</a>";
+	}
+	if ($vos) {
+		$gadget .= debut_cadre('bandeau-rubriques',"breve-24.gif",'',afficher_plus(generer_url_ecrire("breves"))._T('info_breves_valider'))
+		. "<div class='plan-articles'>"
+		. $vos
+		. "</div>"
+		. fin_cadre('bandeau-rubriques');
 	}
 
 	$une_rubrique = sql_getfetsel('id_rubrique', 'spip_rubriques', '','','', 1);
