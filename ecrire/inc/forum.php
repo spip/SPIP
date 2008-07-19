@@ -396,34 +396,38 @@ function enregistre_et_modifie_forum($id_forum, $c=false) {
 //
 
 // http://doc.spip.org/@afficher_forum
-function afficher_forum($request, $retour, $arg, $controle_id_article = false) {
+function afficher_forum($query, $retour, $arg, $controle_id_article = false) {
 	global $spip_display;
 	static $compteur_forum = 0;
 	static $nb_forum = array();
 	static $thread = array();
 
+	$request = sql_allfetsel($query['SELECT'], $query['FROM'], $query['WHERE'], $query['GROUP BY'], $query['ORDER BY'], $query['LIMIT']);
 	$compteur_forum++;
-	$nb_forum[$compteur_forum] = sql_count($request);
+	$nb_forum[$compteur_forum] = count($request);
 	$thread[$compteur_forum] = 1;
 	
 	$res = '';
 
- 	while($row = sql_fetch($request)) {
+	foreach($request as  $row) {
 		$statut=$row['statut'];
 		$id_parent=$row['id_parent'];
 		if (($controle_id_article) ? ($statut!="perso") :
 			(($statut=="prive" OR $statut=="privrac" OR $statut=="privadm" OR $statut=="perso")
 			 OR ($statut=="publie" AND $id_parent > 0))) {
 
+			$query = array('SELECT' => "*", 
+				'FROM' => "spip_forum",
+				'WHERE' => "id_parent='" . $row['id_forum'] . "'" . ($controle_id_article ? '':" AND statut<>'off'"),
+				'ORDER BY' => "date_heure");
+
 			$bloc = afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_forum, $thread, $retour, $arg)
-			. afficher_forum(sql_select("*", "spip_forum", "id_parent='" . $row['id_forum'] . "'" . ($controle_id_article ? '':" AND statut<>'off'") . "", "", "date_heure"), $retour, $arg, $controle_id_article);
+			. afficher_forum($query, $retour, $arg, $controle_id_article);
 
 			$res .= ajax_action_greffe('poster_forum_prive', $row['id_forum'], $bloc); 
 		}
 		$thread[$compteur_forum]++;
 	}
-
-	sql_free($request);
 	$compteur_forum--;
 	if ($spip_display == 4 AND $res) $res = "<ul>$res</ul>";	
 	return $res;
