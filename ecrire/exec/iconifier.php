@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-include_spip('inc/editer_auteurs'); #pour determiner_auteurs_objet()
 
 // http://doc.spip.org/@exec_iconifier_dist
 function exec_iconifier_dist()
@@ -39,8 +38,10 @@ function exec_iconifier_args($id, $type, $script)
 			$table=substr($type, 3) . (($type == 'id_syndic') ? '' : 's');
 			$row = sql_fetsel("id_rubrique, statut", "spip_$table", "$type=$id");
 			$droit = autoriser('publierdans','rubrique',$row['id_rubrique']);
-			if (!$droit AND  ($row['statut'] == 'prepa' OR $row['statut'] == 'prop' OR $row['statut'] == 'poubelle'))
-			  $droit = sql_count(determiner_auteurs_objet('article',$id, "id_auteur=$connect_id_auteur"));
+			if (!$droit AND  ($row['statut'] == 'prepa' OR $row['statut'] == 'prop' OR $row['statut'] == 'poubelle')) {
+			  $jointure = table_jointure('auteur', 'article');
+			  $droit = sql_fetsel("id_auteur", "spip_$jointure", "id_article=".sql_quote($id) . " AND id_auteur=$connect_id_auteur",'','', $limit);
+			}
 		}
 	}
 

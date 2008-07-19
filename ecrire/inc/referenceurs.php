@@ -11,16 +11,16 @@ function inc_referenceurs_dist ($script, $args, $select, $table, $where, $groupb
 	$nbvisites = array();
 	$aff = '';
 	$unseul = preg_match('/id_article=/', $args);
-	$plus = generer_url_ecrire($script, $args . "&limit=" . strval($limit+200));
+	$args .= ($args ? '&' : '') . "limit=" . strval($limit+200);
+	$plus = generer_url_ecrire($script, $args);
 
 	$result = sql_select("referer_md5, referer, $select AS vis", $table, $where, $groupby, "vis DESC", $limit,'',$serveur);
-
 	while ($row = sql_fetch($result,$serveur)) {
 		$referermd5 = $row['referer_md5'];
 		$referer = interdire_scripts($row['referer']);
 		$visites = $row['vis'];
 		$tmp = "";
-		
+		$limit--;
 		$buff = stats_show_keywords($referer, $referer);
 		
 		if ($buff["host"]) {
@@ -113,7 +113,7 @@ function inc_referenceurs_dist ($script, $args, $select, $table, $where, $groupb
 		if ($aff) $aff = "<ul class='referers'>$aff</ul>";
 
 		// Le lien pour en afficher "plus"
-		if ($plus AND (sql_count($result,$serveur) == $limit)) {
+		if ($plus AND !$limit) {
 			$aff .= "<div style='text-align:right;'><b><a href='$plus'>+++</a></b></div>";
 		}
 	}
