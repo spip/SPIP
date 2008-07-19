@@ -127,6 +127,8 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 
 //
 // Insere un article syndique (renvoie true si l'article est nouveau)
+// en  verifiant qu'on ne vient pas de l'ecrire avec
+// un autre item du meme feed qui aurait le meme link
 //
 // http://doc.spip.org/@inserer_article_syndique
 function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $url_syndic, $resume, $documents, &$faits) {
@@ -135,29 +137,25 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 	// sur une URL de plus de 255 qui exloserait la base de donnees
 	$le_lien = substr($data['url'], 0,255);
 
-	// Chercher les liens de meme cle
-	$s = sql_select("id_syndic_article,titre", "spip_syndic_articles", "url=" . sql_quote($le_lien) . " AND id_syndic=$now_id_syndic", "", "maj DESC");
+// Chercher les liens de meme cle
+// S'il y a plusieurs liens qui repondent, il faut choisir le plus proche
+// (ie meme titre et pas deja fait), le mettre a jour et ignorer les autres
 
-	// S'il y a plusieurs liens qui repondent, il faut choisir le plus proche
-	// (ie meme titre et pas deja fait), le mettre a jour et ignorer les autres
-	if (sql_count($s) > 1) {
-		while ($a = sql_fetch($s))
-			if ($a['titre'] == $data['titre']
-			AND !in_array($a['id_syndic_article'], $faits)) {
-				$id_syndic_article = $a['id_syndic_article'];
-				break;
-			}
+	$n = 0;
+	$s = sql_select("id_syndic_article,titre", "spip_syndic_articles", "url=" . sql_quote($le_lien) . " AND id_syndic=$now_id_syndic AND " . sql_in('id_syndic_article', $faits, 'NOT'), "", "maj DESC");
+	while ($a = sql_fetch($s)) {
+		$id =  $a['id_syndic_article'];
+		if ($a['titre'] == $data['titre']) {
+			$id_syndic_article = $id;
+			break;
+		}
+		$n++;
 	}
-
-	// Sinon, s'il y en a un, on verifie qu'on ne vient pas de l'ecrire avec
-	// un autre item du meme feed qui aurait le meme link
-	else if ($a = sql_fetch($s)
-	AND !in_array($a['id_syndic_article'], $faits)) {
-		$id_syndic_article = $a['id_syndic_article'];
-	} 
-
+	// S'il y en avait qu'un, le prendre quel que soit le titre
+	if ($n == 1)
+		$id_syndic_article = $id;
 	// Si l'article n'existe pas, on le cree
-	if (!isset($id_syndic_article)) {
+	elseif (!isset($id_syndic_article)) {
 		$ajout = $id_syndic_article = sql_insertq('spip_syndic_articles',
 				array('id_syndic' => $now_id_syndic,
 				'url' => $le_lien,
@@ -166,7 +164,7 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 		if (!$ajout) return;
 	}
 	$faits[] = $id_syndic_article;
-
+	spip_log("syndic $ajout $lien faits: " . join(',',$faits));
 	// Descriptif, en mode resume ou mode 'full text'
 	// on prend en priorite data['descriptif'] si on est en mode resume,
 	// et data['content'] si on est en mode "full syndication"
