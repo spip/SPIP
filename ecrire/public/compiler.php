@@ -309,7 +309,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 			$id_boucle .
 			"']['total'] = " .
 			(!$boucle->select ? 
-			 ('array_shift(sql_fetch($result,\'' . $boucle->sql_serveur . "')") :
+			 ('array_shift(sql_fetch($result,\'' . $boucle->sql_serveur . "'))") :
 			 ("@sql_count(\$result,'") .
 			 $boucle->sql_serveur .
 			 "')").
