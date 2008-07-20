@@ -314,12 +314,15 @@ function import_tables($request, $dir) {
 			if (!isset($tables_recopiees[$table])) $tables_recopiees[$table] = 0;
 			if ($tables_recopiees[$table]!==-1){
 				affiche_progression_javascript(0,0,$table);
-				while ($res = sql_select('*',$table,'','','',intval($tables_recopiees[$table]).',400','','-1')
-				  AND sql_count($res,'-1')) {
+				while (true) {
+					$n = intval($tables_recopiees[$table]);
+					$res = sql_select('*',$table,'','','',"$n,400",'','-1');
 					while ($row = sql_fetch($res,'-1')){
 						sql_insertq($table,$row);
 						$tables_recopiees[$table]++;
 					}
+					if ($n == $tables_recopiees[$table])
+						break;
 					affiche_progression_javascript($tables_recopiees[$table],0,$table);
 					ecrire_meta('restauration_recopie_tables',serialize($tables_recopiees));
 				}
