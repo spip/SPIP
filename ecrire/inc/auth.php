@@ -27,7 +27,7 @@ function acces_restreint_rubrique($id_rubrique) {
 // http://doc.spip.org/@auteurs_article
 function auteurs_article($id_article, $cond='')
 {
-	return sql_select("id_auteur", "spip_auteurs_articles", "id_article=$id_article". ($cond ? " AND $cond" : ''));
+	return sql_allfetsel("id_auteur", "spip_auteurs_articles", "id_article=$id_article". ($cond ? " AND $cond" : ''));
 }
 
 // http://doc.spip.org/@auteurs_autorises

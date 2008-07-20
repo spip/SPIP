@@ -79,13 +79,11 @@ function inc_formater_article_dist($row, $own='')
 
 	$puce = $puce_statut($id_article, $statut, $id_rubrique,'article');
 
-	$result = auteurs_article($id_article);
-	$auteurs = array();
-	while ($r = sql_fetch($result)) {
-		list($s, $mail, $nom, $w, $p) = $formater_auteur($r['id_auteur']);
-		$auteurs[]= "$mail&nbsp;$nom";
+	$auteurs = auteurs_article($id_article); 
+	foreach ($auteurs as $k => $r) {
+		list(, $mail, $nom,,) = $formater_auteur($r['id_auteur']);
+		$auteurs[$k]= "$mail&nbsp;$nom";
 	}
-	$auteurs = join('<br />', $auteurs);
 
 	$date = affdate_jourcourt($date);
 	if (!$date) $date = '&nbsp;';
@@ -94,7 +92,7 @@ function inc_formater_article_dist($row, $own='')
 
 	// Afficher le numero (JMB)
 
-	return array($puce, $lien, $auteurs, $date, $num);
+	return array($puce, $lien, join('<br />', $auteurs), $date, $num);
 }
 
 ?>
