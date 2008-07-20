@@ -307,9 +307,13 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 		   (!$boucle->numrows ? '' :
 		    ( "\n	\$Numrows['" .
 			$id_boucle .
-			"']['total'] = @sql_count(\$result,'" .
-			$boucle->sql_serveur .
-		      "');"))) .
+			"']['total'] = " .
+			(!$boucle->select ? 
+			 ('array_shift(sql_fetch($result,\'' . $boucle->sql_serveur . "')") :
+			 ("@sql_count(\$result,'") .
+			 $boucle->sql_serveur .
+			 "')").
+		      ";"))) .
 		(!$flag_cpt  ? "" :
 			"\n	\$Numrows['$id_boucle']['compteur_boucle'] = 0;")
 		. '
@@ -330,8 +334,7 @@ function calculer_requete_sql(&$boucle)
 		"\n\n	// REQUETE
 	\$result = calculer_select(\n\t\tarray(\"" . 
 		# En absence de champ c'est un decompte : 
-	  	# prendre une constante pour avoir qqch
-		(!$boucle->select ? 1 :
+		(!$boucle->select ? 'count(*)' :
 		 join("\",\n\t\t\"", $boucle->select)) .
 		'"), # SELECT
 		' . calculer_from($boucle) .
