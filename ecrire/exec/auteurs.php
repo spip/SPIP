@@ -49,11 +49,10 @@ function exec_auteurs_dist()
 function exec_auteurs_args($statut, $tri, $debut, $recherche=NULL, $trouve='')
 {
 	if ($recherche !=='') {
-		$result = requete_auteurs($tri, $statut, $recherche);
-		$nombre_auteurs = sql_count($result);
-		if ($debut > $nombre_auteurs-1)
-			$debut = max(0,$nombre_auteurs-1);
-		list($auteurs, $lettre)= lettres_d_auteurs($result, $debut, MAX_AUTEURS_PAR_PAGE, $tri);
+		list($auteurs, $lettre, $nombre_auteurs, $debut) =
+		  lettres_d_auteurs(requete_auteurs($tri, $statut, $recherche), $debut, MAX_AUTEURS_PAR_PAGE, $tri);
+
+
 		$recherche = auteurs_tranches(afficher_n_auteurs($auteurs), $debut, $lettre, $tri, $statut, MAX_AUTEURS_PAR_PAGE, $nombre_auteurs);
 	}
 
@@ -138,27 +137,28 @@ function statut_min_redac($statut)
 function lettres_d_auteurs($query, $debut, $max_par_page, $tri)
 {
 	$auteurs = $lettre = array();
-	$lettres_nombre_auteurs =0;
+	$lettres_nombre_auteurs = 0;
 	$lettre_prec ="";
-	$i = 0;
+	$nombre_auteurs = 0;
+	$query = sql_select($query['SELECT'], $query['FROM'], $query['WHERE'], $query['GROUP BY'], $query['ORDER BY']);
+
 	while ($auteur = sql_fetch($query)) {
-		if ($i>=$debut AND $i<$debut+$max_par_page) {
+		if ($nombre_auteurs>=$debut AND $nombre_auteurs<$debut+$max_par_page) {
 			$auteur['restreint'] = sql_countsel("spip_auteurs_rubriques", "id_auteur=".$auteur['id_auteur']);
 			
 			$auteurs[] = $auteur;
 		}
-		$i++;
 
 		if ($tri == 'nom') {
 			$premiere_lettre = strtoupper(spip_substr(extraire_multi($auteur['nom']),0,1));
-			if ($premiere_lettre != $lettre_prec) {
-				$lettre[$premiere_lettre] = $lettres_nombre_auteurs;
+			if ($premiere_lettre != $lettre_prec) { 
+				$lettre[$premiere_lettre] = $nombre_auteurs;
 			}
-			$lettres_nombre_auteurs ++;
 			$lettre_prec = $premiere_lettre;
 		}
+		$nombre_auteurs++;
 	}
-	return array($auteurs, $lettre);
+	return array($auteurs, $lettre, $nombre_auteurs, $debut);
 }
 
 // http://doc.spip.org/@auteurs_tranches
@@ -337,7 +337,7 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 	//
 	// La requete de base est tres sympa
 	// (pour les visiteurs, ca postule que les messages concernent des articles)
-	return sql_select(
+	return array('SELECT' =>
 			array_diff(
 			array(
 				"aut.id_auteur AS id_auteur",
@@ -346,12 +346,12 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 				"aut.nom AS nom", 
 				"UPPER(aut.nom) AS unom", 
 				$sql_sel),array('',null)),
-			"spip_auteurs AS aut $join",
-			$sql_visible . ($recherche 
+		     'FROM' => "spip_auteurs AS aut $join",
+		     'WHERE' => $sql_visible . ($recherche 
 				? " AND $recherche" 
 				: ''),
-			"aut.statut, aut.nom_site, aut.nom, aut.id_auteur", 
-			$sql_order);
+		     'GROUP BY' => "aut.statut, aut.nom_site, aut.nom, aut.id_auteur", 
+		     'ORDER BY' => $sql_order);
 }
 
 // http://doc.spip.org/@afficher_n_auteurs
