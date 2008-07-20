@@ -118,6 +118,7 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 // Retourne les auteurs attaches a l'objet $id de type $type
 // ou rien s'il y en a trop
 
+// http://doc.spip.org/@determiner_auteurs_objet
 function determiner_auteurs_objet($type, $id, $cond='', $limit=200)
 {
 	if (!preg_match(',^[a-z]*$,',$type)) return array();
