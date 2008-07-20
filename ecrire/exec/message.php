@@ -113,20 +113,22 @@ function http_auteurs_ressemblants($cherche_auteur, $id_message)
 // http://doc.spip.org/@http_ajouter_participants
 function http_ajouter_participants($ze_auteurs, $id_message)
 {	
+	include_spip('inc/editer_auteurs');
 	$cond = auteurs_autorises($ze_auteurs, "messagerie<>'non'");
-	$count = sql_countsel('spip_auteurs', $cond);
-	if (!$count) return '';
+	$all = objet_auteur_select($cond);
+	if (!$all) return '';
+
 	$res = "<span class='verdana1 spip_small'><b><label for='id_message'>" .
 	  _T('bouton_ajouter_participant') ."</label> &nbsp; </b></span>\n" .
 	  "<input type='hidden' name='id_message' id='id_message' value=\"$id_message\" />";
 
-	if ($count > 50) {
+	if (is_numeric($all)) {
 		$res .=  "\n<input type='text' name='cherche_auteur' id='cherche_auteur' class='fondl' value='' size='20' />";
 		$res .=  "\n<input type='submit' value='"._T('bouton_chercher')."' class='fondo' />";
 	} else {
-		include_spip('inc/editer_auteurs');
+
 		$res .=  "<select name='nouv_auteur' id='nouv_auteur' size='1' style='width: 150px' class='fondl'>"
-		. objet_auteur_select(sql_select('*', 'spip_auteurs', $cond, '', "statut, nom"))
+		. $all
 		.  "</select>"
 		.  "<input type='submit' value='"._T('bouton_ajouter')."' class='fondo' />";
 	}
@@ -155,7 +157,6 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $che
 	$total_dest = count($result);
 
 	if ($total_dest > 0) {
-		$ze_auteurs = array();
 		$ifond = 0;
 		$res = '';
 		$formater_auteur = charger_fonction('formater_auteur', 'inc');
@@ -174,7 +175,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $che
 			  . "\n<td align='right' class='lien'>"
 			  . (($id_auteur == $connect_id_auteur) ?  "&nbsp;" : ("[<a href='" . redirige_action_auteur("editer_message","$id_message/-$id_auteur", 'message', "id_message=$id_message") . "'>$t</a>]")) .  "</td></tr>\n";
 			$result[$k] = $id_auteur;
-			
+		
 		}
 		echo
 			debut_block_depliable(true,"auteurs"),
@@ -185,7 +186,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $che
 	}
 
 	if ($statut == 'redac' OR $forcer_dest)
-		echo http_ajouter_participants($ze_auteurs, $id_message);
+		echo http_ajouter_participants($result, $id_message);
 	else {
 		echo
 		  debut_block_depliable(true,"ajouter_auteur"),

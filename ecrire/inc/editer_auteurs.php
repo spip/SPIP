@@ -29,12 +29,10 @@ function inc_editer_auteurs_dist($type, $id, $flag, $cherche_auteur, $ids, $titr
 	else 
 		$arg_ajax.= "&titre=".urlencode($titre_boite);
 
-
-	$cond_les_auteurs = "";
-	$aff_les_auteurs = afficher_auteurs_objet($type, $id, $flag, $cond_les_auteurs, $script_edit_objet, $arg_ajax);
+	$aff_les_auteurs = afficher_auteurs_objet($type, $id, $flag, '', $script_edit_objet, $arg_ajax);
 	
 	if ($flag) {
-		$futurs = ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit_objet, $arg_ajax);
+		$futurs = ajouter_auteurs_objet($type, $id, '',$script_edit_objet, $arg_ajax);
 	} else $futurs = '';
 
 	$ldap = isset($GLOBALS['meta']['ldap_statut_import']) ?
@@ -128,14 +126,13 @@ function determiner_auteurs_objet($type, $id, $cond='', $limit=200)
 	$cond = "id_{$type}=".sql_quote($id) . ($cond ? " AND $cond" : '');
 	if (sql_countsel($jointure, $cond) > $limit)
 	  return array();
-	else return sql_allfetsel("id_auteur", $jointure, $cond);
+	else return array_map('array_shift', sql_allfetsel("id_auteur", $jointure, $cond));
 }
 
 // http://doc.spip.org/@determiner_non_auteurs
-function determiner_non_auteurs($type, $id, $auteurs, $order)
+function determiner_non_auteurs($type, $id, $auteurs)
 {
-	$cond = auteurs_autorises(determiner_auteurs_objet($type, $id, $auteurs));
-	return sql_select('*', 'spip_auteurs', $cond, '', $order);
+	return auteurs_autorises(determiner_auteurs_objet($type, $id, $auteurs));
 }
 
 // http://doc.spip.org/@rechercher_auteurs_objet
@@ -233,20 +230,20 @@ function ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit, $arg_
 	if (!$determiner_non_auteurs = charger_fonction('determiner_non_auteurs_'.$type,'inc',true))
 		$determiner_non_auteurs = 'determiner_non_auteurs';
 
-	$query = $determiner_non_auteurs($type, $id, $cond_les_auteurs, "statut, nom");
-	if (!$num = sql_count($query)) return '';
+	$cond = $determiner_non_auteurs($type, $id, $cond_les_auteurs);
+	$all = objet_auteur_select($cond);
+	if (!$all) return '';
+
 	$js = "findObj_forcer('valider_ajouter_auteur').style.visibility='visible';";
 
 	$text = "<span class='verdana1'><label for='nouv_auteur'><b>"
 	. _T('titre_cadre_ajouter_auteur')
 	. "</b></label></span>\n";
 
-	if ($num <= _SPIP_SELECT_MIN_AUTEURS){
-		$sel = "$text<select name='nouv_auteur' id='nouv_auteur' size='1' style='width:150px;' class='fondl' onchange=\"$js\">" .
-		   objet_auteur_select($query) .
-		   "</select>";
+	if (!is_numeric($all)) {
+		$sel = "$text<select name='nouv_auteur' id='nouv_auteur' size='1' style='width:150px;' class='fondl' onchange=\"$js\">$all</select>";
 		$clic = _T('bouton_ajouter');
-	} else if  ((_SPIP_AJAX < 1) OR ($num >= _SPIP_SELECT_MAX_AUTEURS)) {
+	} else if  ((_SPIP_AJAX < 1) OR ($all >= _SPIP_SELECT_MAX_AUTEURS)) {
 		  $sel = "$text <input type='text' name='cherche_auteur' id='nouv_auteur' onclick=\"$js\" class='fondl' value='' size='20' />";
 		  $clic = _T('bouton_chercher');
 	} else {
@@ -258,11 +255,15 @@ function ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit, $arg_
 }
 
 // http://doc.spip.org/@objet_auteur_select
-function objet_auteur_select($result)
+function objet_auteur_select($cond)
 {
+	$count = sql_countsel('spip_auteurs', $cond);
+	if (!$count) return '';
+	if ($count > _SPIP_SELECT_MIN_AUTEURS) return $count;
 	$statut_old = $premiere_old = $res = '';
 	$t = 'info_administrateurs';
-	while ($row = sql_fetch($result)) {
+	$result = sql_allfetsel('*', 'spip_auteurs', $cond, '', "statut, nom");
+	foreach ($result as $row) {
 		$id_auteur = $row["id_auteur"];
 		$nom = $row["nom"];
 		$email = $row["email"];
