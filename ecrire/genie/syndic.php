@@ -164,7 +164,7 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 		if (!$ajout) return;
 	}
 	$faits[] = $id_syndic_article;
-	spip_log("syndic $ajout $lien faits: " . join(',',$faits));
+
 	// Descriptif, en mode resume ou mode 'full text'
 	// on prend en priorite data['descriptif'] si on est en mode resume,
 	// et data['content'] si on est en mode "full syndication"
