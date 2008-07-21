@@ -182,7 +182,7 @@ function info_progression_etape($en_cours,$phase,$dir, $erreur = false){
 	
 //	$aff_etapes = "<span id='etapes'>";
 
-	$aff_etapes = "<ul id='infos_etapes'>";
+	$aff_etapes = "<ol id='infos_etapes'>";
 	
 	foreach($liste as $etape=>$fichier){
 /*		if ($etape=="$phase$en_cours.php"){
@@ -200,13 +200,13 @@ function info_progression_etape($en_cours,$phase,$dir, $erreur = false){
 			else if ($debut > $en_cours) $class = "prochains";
 			else $class = "valides";
 
-			$aff_etapes .= "<li class='$class'>";
+			$aff_etapes .= "<li class='$class'><div class='fond'>";
 			$aff_etapes .= "<span class='numero_etape'>$debut</span>".$intitule_etat["$phase"][$debut];
-			$aff_etapes .= "</li>";
+			$aff_etapes .= "</div></li>";
 		}
 		$debut++;
 	}
-	$aff_etapes .= "</ul>";
+	$aff_etapes .= "</ol>";
 	$aff_etapes .= "<br class='nettoyeur' /\n";
 	return $aff_etapes;
 }
