@@ -104,9 +104,13 @@ function async_upload_icon(res,s,jForm) {
 
 function async_upload_portfolio_documents(res,s,jForm){
   res = iframeHandler(res,jForm,async_upload_portfolio_documents);
+
   if(!res) return true;
 
+  // on dirait que ca passe mieux sur Safari avec un setTimeout cf #1408
+  setTimeout(function() {
   res.find(">div").each(function(){
+    // this.id = documenter--id_article ou documenter-id_article
     var cont = jQuery("#"+this.id);
     var self = jQuery(this);
     if(!cont.size()) {
@@ -116,5 +120,6 @@ function async_upload_portfolio_documents(res,s,jForm){
     verifForm(cont.html(self.html()));
     jQuery("form.form_upload",cont).async_upload(async_upload_portfolio_documents);
   });
+  }, 50);
   return true;             
 }
