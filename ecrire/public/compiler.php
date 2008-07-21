@@ -353,7 +353,8 @@ function calculer_requete_sql(&$boucle)
 
 function calculer_dec($nom, $val)
 {
-  return "\n\t" .(strpos($val, '$') ? '' : 'static ') . $nom . ' = ' . $val . ';';
+  $dyn = (strpos($val, '$') !== false OR strpos($val, 'sql_') !== false);
+  return "\n\t" . ($dyn ? '' : 'static ') . $nom . ' = ' . $val . ';';
 }
 
 // http://doc.spip.org/@calculer_dump_array
