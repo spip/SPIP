@@ -53,7 +53,7 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 	} else {
 		$retour = "";
 	}
-	
+
 	$contexte = array(
 		'icone_retour'=>($retour)?icone_inline(_T('icone_retour'),$retour,"auteur-24.gif","rien.gif",$GLOBALS['spip_lang_left'],false,($editer&$redirect)?"":" onclick=\"jQuery('#auteur_infos_edit').hide();jQuery('#auteur-voir').show();return false;\""):"",
 		'redirect'=>$redirect?rawurldecode($redirect):generer_url_ecrire('auteur_infos','id_auteur='.$id_auteur, '&',true),
@@ -61,6 +61,7 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 		'new'=>$new == "oui"?$new:$id_auteur,
 		'config_fonc'=>'auteurs_edit_config',
 		'lier_id_article' => $id_article,
+		'auteur' => $auteur
 	);
 	$page = evaluer_fond("prive/editer/auteur", $contexte, $connect);
 	$corps .= $page['texte'];
