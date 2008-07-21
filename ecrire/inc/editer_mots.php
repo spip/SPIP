@@ -143,14 +143,6 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 		}
 		else $res .= affiche_mots_ressemblant($cherche_mot, $objet, $id_objet, $resultat, $table, $table_id, $url_base);
 
-/*		if (autoriser('modifier','groupemots',$id_groupe)) {
-			$titre = rawurlencode($cherche_mot);
-			$res .= "<div style='width: 200px;'>";
-			$res .= icone_horizontale(_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&id_groupe=$id_groupe&ajouter_id_article=$id_objet&table=$table&table_id=$table_id&titre=$titre&redirect=" . generer_url_retour($url_base, "$table_id=$id_objet")), "mot-cle-24.gif", "creer.gif", false);
-			$res .= "</div> ";
-		}
-*/
-
 		$res .= fin_boite_info(true) . "<br />";
 	  }
 	}
@@ -313,14 +305,15 @@ function formulaire_mots_cles($id_objet, $les_mots, $table, $table_id, $url_base
 	// Creer un nouveau mot ?
 	if (autoriser('modifier','groupemots')) {
 		$titre = _request('cherche_mot')
-			? "&titre=".rawurlencode(_request('cherche_mot')) : '';
-		$titre = _T('icone_creer_mot_cle');
+			? "&titre=".rawurlencode(_request('cherche_mot'))
+				. "&id_groupe=".intval(_request('select_groupe'))
+			: '';
 		$titres = array(
 			'articles'=>'icone_creer_mot_cle',
 			'breves'=>'icone_creer_mot_cle_breve',
 			'rubriques'=>'icone_creer_mot_cle_rubrique',
 			'sites'=>'icone_creer_mot_cle_site'			);
-		$bouton_ajouter = icone_horizontale_display(isset($titres[$table])?_T($titres[$table]):_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&table_id=$table_id&redirect=" . generer_url_retour($url_base, "$table_id=$id_objet")), "mot-cle-24.gif", "creer.gif", false)
+		$bouton_ajouter = icone_horizontale_display(isset($titres[$table])?_T($titres[$table]):_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&table_id=$table_id$titre&redirect=" . generer_url_retour($url_base, "$table_id=$id_objet")), "mot-cle-24.gif", "creer.gif", false)
 		. "\n";
 	} else $bouton_ajouter = '';
 
