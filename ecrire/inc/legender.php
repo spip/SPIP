@@ -68,8 +68,9 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	if ($document['largeur'] OR $document['hauteur'])
 	  $contenu .= _T('info_largeur_vignette',
 		     array('largeur_vignette' => $document['largeur'],
-			   'hauteur_vignette' => $document['hauteur']));
-	else
+			   'hauteur_vignette' => $document['hauteur']))
+			 . ' &mdash; ';
+
 	  $contenu .= taille_en_octets($document['taille']);
 
 	if ($date AND ($GLOBALS['meta']["documents_date"] == 'oui'))
