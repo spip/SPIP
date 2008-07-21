@@ -79,7 +79,8 @@ function async_upload_article_edit(res,s,jForm){
 	        .show("slow",function(){
 	            var anim = jQuery(this).css("height","");
 	            //bug explorer-opera-safari
-	            if(!jQuery.browser.mozilla) anim.css('width', this.orig.width-2);
+	            if(!jQuery.browser.mozilla)
+	              anim.css('width', jQuery(this).width()-2);
 	            a = jQuery(anim).find("img[@onclick]")
 	            if (a.length) a.get(0).onclick();
 	        })
