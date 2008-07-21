@@ -242,7 +242,12 @@ function argumenter_squelette($v) {
 
 	if (!is_array($v))
 		return "'" . texte_script($v) . "'";
-	else  return 'array(' . join(", ", array_map('argumenter_squelette', $v)) . ')';
+	else {
+		$out = array();
+		foreach($v as $k=>$val) 
+			$out [] = argumenter_squelette($k) . '=>' . argumenter_squelette($val);
+	  return 'array(' . join(", ", $out) . ')';
+	}
 }
 
 // verifier leurs arguments et filtres, et calculer le code a inclure
