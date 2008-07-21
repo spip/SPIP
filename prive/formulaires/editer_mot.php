@@ -68,4 +68,18 @@ function formulaires_editer_mot_traiter_dist($id_mot='new', $id_groupe=0, $retou
 }
 
 
+// http://doc.spip.org/@ajouter_nouveau_mot
+function ajouter_nouveau_mot($id_groupe, $table, $table_id, $id_mot, $id)
+{
+	if (un_seul_mot_dans_groupe($id_groupe)) {
+		sql_delete("spip_mots_$table", "$table_id=$id AND " . sql_in("id_mot", array_map('array_shift', sql_allfetsel("id_mot", "spip_mots", "id_groupe = $id_groupe"))));
+	}
+	sql_insertq("spip_mots_$table", array("id_mot" => $id_mot, $table_id => $id));
+}
+
+// http://doc.spip.org/@un_seul_mot_dans_groupe
+function un_seul_mot_dans_groupe($id_groupe)
+{
+	return sql_countsel('spip_groupes_mots', "id_groupe=$id_groupe AND unseul='oui'");
+}
 ?>
