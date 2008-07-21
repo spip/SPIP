@@ -351,6 +351,7 @@ function calculer_requete_sql(&$boucle)
 	  . '$result = calculer_select($select, $from, $type, $where, $join, $groupby, $orderby, $limit, $having, $table, $id, $connect);';
 }
 
+// http://doc.spip.org/@calculer_dec
 function calculer_dec($nom, $val)
 {
   $dyn = (strpos($val, '$') !== false OR strpos($val, 'sql_') !== false);

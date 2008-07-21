@@ -830,6 +830,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 // Ne pas appliquer sql_quote lors de la compilation,
 // car on ne connait pas le serveur SQL, donc s'il faut \' ou ''
 
+// http://doc.spip.org/@primary_doublee
 function primary_doublee($decompose, $table)
 {
 	$e1 = reset($decompose);
