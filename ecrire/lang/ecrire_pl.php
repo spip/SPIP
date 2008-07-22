@@ -471,7 +471,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_numero_article' => 'ARTYKU&#321; NUMER&nbsp;:',
 'info_obligatoire_02' => '[Obowi&#261;zkowo]',
 'info_option_accepter_visiteurs' => 'Zaakceptuj zapisy czytelnik&oacute;w Twojej strony',
-'info_option_email' => 'Kiedy odwiedzaj&#261;cy stron&#281; zostawi&#261; na forum wiadomo&#347;&#263;
+'info_option_email' => '<MODIF>Kiedy odwiedzaj&#261;cy stron&#281; zostawi&#261; na forum wiadomo&#347;&#263;
   zwi&#261;zan&#261; z artyku&#322;em, autorzy artyku&#322;u mog&#261; zosta&#263;
   poinformowani o tym przez e-mail. Czy chcesz zastosowa&#263; t&#281; opcj&#281;?',
 'info_option_faire_suivre' => 'Przes&#322;a&#263; wiadomo&#347;ci tego forum do autor&oacute;w artyku&#322;&oacute;w',
@@ -882,7 +882,7 @@ multimedi&oacute;w, itd.) do artyku&#322;&oacute;w b&#261;d&#378; dzia&#322;&oac
 'texte_effacer_donnees_indexation' => 'Wyma&#380; dane pochodz&#261;ce z indeksowania',
 'texte_en_cours_validation' => 'Nast&#281;puj&#261;ce artyku&#322;y i newsy zosta&#322;y zatwierdzone do publikacji. Nie wahaj si&#281; wyrazi&#263; swoj&#261; opini&#281; na do&#322;&#261;czonych do nich forach.',
 'texte_enrichir_mise_a_jour' => 'Mo&#380;esz wzbogaci&#263; uk&#322;ad Twojego tekstu &laquo;&nbsp;skr&oacute;tami typograficznymi&nbsp;&raquo;.',
-'texte_fichier_authent' => '<b>Czy SPIP ma stworzy&#263; specjalne pliki <tt>.htpasswd</tt>
+'texte_fichier_authent' => '<MODIF><b>Czy SPIP ma stworzy&#263; specjalne pliki <tt>.htpasswd</tt>
   i <tt>.htpasswd-admin</tt> w katalogu @dossier@ ?</b><p />
   Te pliki mog&#261; s&#322;u&#380;y&#263; jako ograniczenie dost&#281;pu dla autor&oacute;w
   i administrator&oacute;w do innych cz&#281;&#347;ci Twojego serwisu
@@ -983,7 +983,7 @@ od&#347;wie&#380;y&#263; tylko jedn&#261; stron&#281;, zr&oacute;b to z obszaru 
 'texte_suppression_fichiers' => 'U&#380;ywaj tego polecenia gdy chcesz usun&#261;&#263; wszystkie pliki zapisane
  w cache SPIP. Pozwoli to na od&#347;wie&#380;enie wszystkich stron, je&#347;li dokonali&#347;ci powa&#380;niejszych modyfikacji w uk&#322;adzie graficznym lub strukturze strony.',
 'texte_sur_titre' => 'Nadtytu&#322;',
-'texte_syndication' => 'Je&#347;li dany serwis na to pozwala, jest mo&#380;liwo&#347;&#263; wyci&#261;gni&#281;cia z niego 
+'texte_syndication' => '<MODIF>Je&#347;li dany serwis na to pozwala, jest mo&#380;liwo&#347;&#263; wyci&#261;gni&#281;cia z niego 
   listy news&oacute;w. Aby skorzysta&#263; z tej funkcji musisz w&#322;&#261;czy&#263; <i>syndykacj&#281; ?</i>. 
   <blockquote><i>Niekt&oacute;re serwery maj&#261; tak&#261; mo&#380;liwo&#347;&#263; wy&#322;&#261;czon&#261;&nbsp;; 
   w&oacute;wczas nie mo&#380;esz u&#380;ywa&#263; syndykacji przy u&#380;yciu swojej strony.</i></blockquote>',
@@ -1004,7 +1004,7 @@ od&#347;wie&#380;y&#263; tylko jedn&#261; stron&#281;, zr&oacute;b to z obszaru 
   w celu wyeliminowania niepotrzebnych komunikat&oacute;w.',
 'texte_trop_resultats_auteurs' => 'Zbyt du&#380;o rezultat&oacute;w dla "@cherche_auteur@" ; spr&oacute;buj sprecyzowa&#263; kryteria wyszukiwania.',
 'texte_unpack' => '&#347;ci&#261;ganie najnowszej wersji',
-'texte_utilisation_moteur_syndiques' => 'Je&#347;li korzystasz z wyszukiwarki zintegrowanej ze    SPIP, mo&#380;esz dokonywa&#263; przeszukiwania
+'texte_utilisation_moteur_syndiques' => '<MODIF>Je&#347;li korzystasz z wyszukiwarki zintegrowanej ze    SPIP, mo&#380;esz dokonywa&#263; przeszukiwania
     do&#322;&#261;czonych artyku&#322;&oacute;w na dwa sposoby.
     <br />- Najprostszy
     polega na wyszukiwaniu jedynie

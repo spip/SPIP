@@ -455,7 +455,7 @@ postulas disponi je FTP-alirrajto al la retejo.',
 'info_numero_article' => 'ARTIKOLO NUMERO&nbsp;:',
 'info_obligatoire_02' => '[Deviga]',
 'info_option_accepter_visiteurs' => 'Permesi registri&#285;ojn de vizitantoj el la publika spaco',
-'info_option_email' => 'Kiam vizitanto de la retejo sendas novan mesa&#285;on en la forumon
+'info_option_email' => '<MODIF>Kiam vizitanto de la retejo sendas novan mesa&#285;on en la forumon
  ligitan kun artikolo, eblas retpo&#349;te sciigi pri tiu mesa&#285;o al la a&#365;toroj de la artikolo. &#264;u vi deziras uzi tiun eblecon&nbsp;?',
 'info_option_faire_suivre' => 'Plusendi la mesa&#285;ojn de la forumoj al la a&#365;toroj de la artikoloj',
 'info_option_ne_pas_accepter_visiteurs' => 'Rifuzi registri&#285;on de vizitantoj',
@@ -867,7 +867,7 @@ NUR por retejo starigita per la sama versio de SPIP. Nepre ne "&nbsp;malplenigu 
 'texte_effacer_donnees_indexation' => 'Forvi&#349;i la indeksajn datenojn',
 'texte_en_cours_validation' => 'La artikoloj kaj fulm-informoj &#265;i-subaj estas proponitaj por publikigo. Ne hezitu doni vian opinion pere de la forumoj, kiuj estas kunligitaj al ili.',
 'texte_enrichir_mise_a_jour' => 'Vi povas pliri&#265;igi la enpa&#285;igon de via teksto uzante &laquo;&nbsp;tipografiajn rapidklavojn&nbsp;&raquo;.',
-'texte_fichier_authent' => '<b>&#264;u SPIP kreu la specialajn dosierojn <tt>.htpasswd</tt>   kaj <tt>.htpasswd-admin</tt> en dosierujo @dossier@ ?</b><p>
+'texte_fichier_authent' => '<MODIF><b>&#264;u SPIP kreu la specialajn dosierojn <tt>.htpasswd</tt>   kaj <tt>.htpasswd-admin</tt> en dosierujo @dossier@ ?</b><p>
   Tiuj dosieroj ebligas limigi la alirrajton de a&#365;toroj
   kaj administrantoj en aliaj lokoj de via retejo
   (ekzemple, ekstera statistik-programo).<p>
@@ -973,7 +973,7 @@ vian retgastiganton.<p>',
 en la SPIP-staplo. Tio ebligas ekzemple devigi la sistemon rekalkuli &#265;iujn pa&#285;ojn, se vi
 faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
 'texte_sur_titre' => 'Surtitolo',
-'texte_syndication' => 'Eblas elpreni a&#365;tomate la liston de nova&#309;oj de iu retejo,
+'texte_syndication' => '<MODIF>Eblas elpreni a&#365;tomate la liston de nova&#309;oj de iu retejo,
   se tiu retejo tion permesas. Por tio, vi devas aktivigi la abonrilaton.
   <blockquote><i>Iuj retgastigantoj malaktivigas tiun funkcion&nbsp;;
   tiukaze vi ne povas abonligi la enhavon
@@ -995,7 +995,7 @@ faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
   averto-mesa&#285;ojn.',
 'texte_trop_resultats_auteurs' => 'Tro da rezultoj por "@cherche_auteur@" ; bonvolu fajnigi la ser&#265;okriteriojn.',
 'texte_unpack' => 'El&#349;uto de la lasta versio',
-'texte_utilisation_moteur_syndiques' => 'Kiam vi uzas la SPIP-internan ser&#265;ilon,
+'texte_utilisation_moteur_syndiques' => '<MODIF>Kiam vi uzas la SPIP-internan ser&#265;ilon,
     vi povas fari ser&#265;procezojn &#265;e retejoj abonligigitaj la&#365; du malsamaj manieroj.
     <br /><img src=\'puce.gif\'> Plej simple
     estas ser&#265;i nur en la titoloj

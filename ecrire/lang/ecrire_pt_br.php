@@ -309,8 +309,6 @@ Estas informa&ccedil;&otilde;es dever&atilde;o ser fornecidas pelo administrador
 'info_classement_2' => '<sup><u>a</u></sup> em @liste@',
 'info_code_acces' => 'N&atilde;o se esque&ccedil;a dos seus c&oacute;digos de acesso!',
 'info_comment_lire_tableau' => 'Como ler esta tabela',
-'info_compresseur_activer' => 'Ativar a compress&atilde;o',
-'info_compresseur_desactiver' => 'Desativar a compress&atilde;o',
 'info_compresseur_texte' => 'Se o seu servidor n&atilde;o comprime automaticamente as p&aacute;ginas html para envi&aacute;-las aos internautas, voc&ecirc; pode tentar for&ccedil;ar esta compress&atilde;o diminuindo o peso das p&aacute;ginas transferidas. <b>Aten&ccedil;&atilde;o</b>: isto pode retardar consideravelmente alguns servidores.',
 'info_compresseur_titre' => 'Otimiza&ccedil;&otilde;es e compress&atilde;o',
 'info_config_suivi' => 'Se este endere&ccedil;o corresponde a uma mailing-list, voc&ecirc; pode informar abaixo o endere&ccedil;o onde os participantes do site podem se inscrever. Este endere&ccedil;o pode ser um URL (por exemplo a p&aacute;gina de inscri&ccedil;&atilde;o na lista pela Web), ou um endere&ccedil;o de e-mail dotado de um assunto espec&iacute;fico (par exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):',
@@ -461,7 +459,7 @@ Os idiomas j&aacute; utilizados no site (no topo da lista) n&atilde;o podem ser 
 'info_numero_article' => 'MAT&Eacute;RIA N&Uacute;MERO:',
 'info_obligatoire_02' => '[Obrigat&oacute;rio]',
 'info_option_accepter_visiteurs' => 'Aceitar a inscri&ccedil;&atilde;o de visitantes do site p&uacute;blico',
-'info_option_email' => 'Sempre que um visitante postar uma nova mensagem no f&oacute;rum associado a uma mat&eacute;ria, os autores da mat&eacute;ria podem ser avisados dessa mensagem por e-mail. Voc&ecirc; quer usar esta op&ccedil;&atilde;o?',
+'info_option_email' => '<MODIF>Sempre que um visitante postar uma nova mensagem no f&oacute;rum associado a uma mat&eacute;ria, os autores da mat&eacute;ria podem ser avisados dessa mensagem por e-mail. Voc&ecirc; quer usar esta op&ccedil;&atilde;o?',
 'info_option_faire_suivre' => 'Encaminhar as mensagens dos f&oacute;runs aos autores das mat&eacute;rias',
 'info_option_ne_pas_accepter_visiteurs' => 'Recusar a inscri&ccedil;&atilde;o dos visitantes',
 'info_option_ne_pas_faire_suivre' => 'N&atilde;o encaminhar as mensagens dos f&oacute;runs',
@@ -900,7 +898,7 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'texte_effacer_statistiques' => 'Apagar as estat&iacute;sticas',
 'texte_en_cours_validation' => 'As mat&eacute;rias e notas abaixo est&atilde;o propostas para publica&ccedil;&atilde;o. N&atilde;o hesite a dar a sua opini&atilde;o sobre as mesmas nos f&oacute;runs anexos.',
 'texte_enrichir_mise_a_jour' => 'Voc&ecirc; pode enriquecer a diagrama&ccedil;&atilde;o do seu texto usando &laquo;atalhos tipogr&aacute;ficos&raquo;.',
-'texte_fichier_authent' => '<b>O SPIP pode criar os arquivos especiais  <tt>.htpasswd</tt> e <tt>.htpasswd-admin</tt> no diret&oacute;rio @dossier@?</b><p />
+'texte_fichier_authent' => '<MODIF><b>O SPIP pode criar os arquivos especiais  <tt>.htpasswd</tt> e <tt>.htpasswd-admin</tt> no diret&oacute;rio @dossier@?</b><p />
 Estes arquivos podem servir para restringir o acesso aos autores e administradores em outras &aacute;reas do seu site (programas externos de estat&iacute;sticas, por exemplo).<p />
 Se eles n&atilde;o forem &uacute;teis, voc&ecirc; poder&aacute; deixar esta op&ccedil;&atilde;o com o seu valor padr&atilde;o (sem criar os arquivos).',
 'texte_informations_personnelles_1' => 'O sistema vai criar agora um acesso personalizado ao site.',
@@ -968,7 +966,7 @@ Seja cuidadoso com esta funcionalidade: <b>as perdas eventuais causadas pela mod
 'texte_statut_refuses' => 'recusados',
 'texte_suppression_fichiers' => 'Use este comando para excluir todos os arquivos que constam do cache do SPIP. Isto permite, por exemplo, for&ccedil;ar a reconstru&ccedil;&atilde;o de todas as p&aacute;ginas, caso voc&ecirc; tenha feito altera&ccedil;&otilde;es importantes no layout ou na estrutura do site.',
 'texte_sur_titre' => 'Sobret&iacute;tulo',
-'texte_syndication' => '&Eacute; poss&iacute;vel recuperar automaticamente, desde que o site o permita, a lista das suas novidades. Para isso, voc&ecirc; dever&aacute; ativar a sindica&ccedil;&atilde;o.
+'texte_syndication' => '<MODIF>&Eacute; poss&iacute;vel recuperar automaticamente, desde que o site o permita, a lista das suas novidades. Para isso, voc&ecirc; dever&aacute; ativar a sindica&ccedil;&atilde;o.
   <blockquote><i>Alguns servi&ccedil;os de hospedagem desativam esta funcionalidade;
 neste caso, voc&ecirc; n&atilde;o poder&aacute; usar a sindica&ccedil;&atilde;o de conte&uacute;do no seu site.</i></blockquote>',
 'texte_table_ok' => ': esta tabela est&aacute; OK.',
@@ -982,7 +980,7 @@ neste caso, voc&ecirc; n&atilde;o poder&aacute; usar a sindica&ccedil;&atilde;o 
 'texte_travail_collaboratif' => 'Se &eacute; frequente acontecer de mais de um redator trabalhar em uma mesma mat&eacute;ria, o sistema pode exibir as mat&eacute;rias recentemente &laquo;abertas&raquo;, de modo a evitar modifica&ccedil;&otilde;es concorrentes.Esta op&ccedil;&atilde;o est&aacute; desativada por padr&atilde;o para evitar a exibi&ccedil;&atilde;o de mensagens de aviso intempestivas.',
 'texte_trop_resultats_auteurs' => 'Demasiados resultados para "@cherche_auteur@"; por favor, refine a pesquisa.',
 'texte_unpack' => 'transfer&ecirc;ncia da &uacute;ltima vers&atilde;o',
-'texte_utilisation_moteur_syndiques' => 'Ao utilizar o motor de busca integrado ao SPIP, voc&ecirc; poder&aacute; efetuar buscas nos sites e nas mat&eacute;rias sindicadas de dois modos diferentes.<br />- A mais simples consiste em procurar unicamente nos t&iacute;tulos e nas descri&ccedil;&otilde;es das mat&eacute;rias.<br />- O outro m&eacute;todo, muito mais potente, permite ao SPIP procurar no texto dos sites referenciados. Se voc&ecirc; referenciar um site, o SPIP ir&aacute; efetuar a busca no texto do site.',
+'texte_utilisation_moteur_syndiques' => '<MODIF>Ao utilizar o motor de busca integrado ao SPIP, voc&ecirc; poder&aacute; efetuar buscas nos sites e nas mat&eacute;rias sindicadas de dois modos diferentes.<br />- A mais simples consiste em procurar unicamente nos t&iacute;tulos e nas descri&ccedil;&otilde;es das mat&eacute;rias.<br />- O outro m&eacute;todo, muito mais potente, permite ao SPIP procurar no texto dos sites referenciados. Se voc&ecirc; referenciar um site, o SPIP ir&aacute; efetuar a busca no texto do site.',
 'texte_utilisation_moteur_syndiques_2' => 'Este m&eacute;todo obriga o SPIP a visitar regularmente os sites referenciados, o que pode provocar um ligeiro retardamento do seu pr&oacute;prio site.',
 'texte_vide' => 'vazia',
 'texte_vider_cache' => 'Esvaziar o cache',

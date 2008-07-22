@@ -304,8 +304,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_2' => 'pe @liste@',
 'info_code_acces' => 'Nu uita&#355;i propriile dumeavoastr&#259; coduri de acces&nbsp;!',
 'info_comment_lire_tableau' => 'Cum se cite&#351;te acest tablou',
-'info_compresseur_activer' => 'Activa&#355;i compresia',
-'info_compresseur_desactiver' => 'Dezactiva&#355;i compresia',
 'info_compresseur_texte' => 'Dac&#259; server-ul dumneavoastr&#259; nu comprim&#259; &icirc;n mod automat paginile html c&acirc;nd acestea sunt trimise pe internet, pute&#355;i &icirc;ncerca s&#259; for&#355;a&#355;i aceast&#259; compresie  pentru a diminua m&#259;rimea paginilor &icirc;nc&#259;rcate. <b>Aten&#355;ie</b> : aceast&#259; opera&#355;ie poate &icirc;ncetini considerabil anumite servere.',
 'info_compresseur_titre' => 'Optimiz&#259;ri &#351;i compresie',
 'info_config_suivi' => 'Dac&#259; aceast&#259; adres&#259; corespunde unei liste de email-uri, pute&#355;i indica mai jos adresa la care participan&#355;ii la site se pot &icirc;nscrie. Aceast&#259; adres&#259; poate fi un URL (de exemplu adresa paginii de &icirc;nsriere la list&#259; pe Web) sau o adres&#259; de email dotat&#259; cu un subiect specific (de exemplu: <tt>@adresse_suivi@?subject=subscribe</tt>):',
@@ -464,7 +462,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_numero_article' => 'ARTICOL NUM&#258;RUL&nbsp;:',
 'info_obligatoire_02' => '[Obligatorie]',
 'info_option_accepter_visiteurs' => 'Accepta&#355;i &icirc;nscrierea vizitatorilor site-ului public',
-'info_option_email' => 'Atunci c&acirc;nd un vizitator trimite un mesaj nou &icirc;ntr-un forum
+'info_option_email' => '<MODIF>Atunci c&acirc;nd un vizitator trimite un mesaj nou &icirc;ntr-un forum
   asociat unui articol, autorii articolului pot fi
   preveni&#355;i de acest mesaj prin-un email. Dori&#355;i s&#259; activa&#355;i aceast&#259; op&#355;iune&nbsp;?',
 'info_option_faire_suivre' => 'Face&#355;i ca mesajele forum-urilor s&#259; fie trimise autorilor articolelor',
@@ -932,7 +930,7 @@ reinstalare a SPIP pentru a recrea o nou&#259; baz&#259; de date c&acirc;t &#351
 'texte_effacer_statistiques' => '&#350;terge&#355;i statisticile',
 'texte_en_cours_validation' => 'Articolele &#351;i &#351;tirile de mai jos sunt propuse pentru publicare. Nu ezita&#355;i s&#259; v&#259; exprima&#355;i p&#259;rerea folosind forum-urile care le sunt ata&#351;ate.',
 'texte_enrichir_mise_a_jour' => 'Pute&#355;i &icirc;mbog&#259;&#355;i aranjarea &icirc;n pagin&#259; a textului dumneavoastr&#259; prin folosirea &laquo;&nbsp;scurt&#259;turilor tipografice&nbsp;&raquo;.',
-'texte_fichier_authent' => 'Trebuie ca SPIP s&#259; creeze fi&#351;ierele speciale <tt>.htpasswd</tt>
+'texte_fichier_authent' => '<MODIF>Trebuie ca SPIP s&#259; creeze fi&#351;ierele speciale <tt>.htpasswd</tt>
   &#351;i <tt>.htpasswd-admin</tt> &icirc;n directorul @dossier@ ?
   Aceste fi&#351;iere v&#259; pot servi pentru a rest&acirc;nge accesul autorilor &#351;i administratorilor &icirc;n alte locuri ale site-ului dumneavoastr&#259;
   (programe externe de statistici, de exemplu).
@@ -1024,7 +1022,7 @@ reinstalare a SPIP pentru a recrea o nou&#259; baz&#259; de date c&acirc;t &#351
 'texte_suppression_fichiers' => 'Utiliza&#355;i aceast&#259; comand&#259; pentru a &#351;terge toate fi&#351;ierele prezente &icirc;n tamponul SPIP. Aceasta permite, de exemplu, for&#355;area unui recalcul al tuturor paginilor dac&#259; a&#355;i f&#259;cut modific&#259;ri importante de grafic&#259; sau structur&#259; a site-ului
 avez fait des modifications importantes de graphisme ou de structure du site.',
 'texte_sur_titre' => 'Supra-titlu',
-'texte_syndication' => 'Este posibil&#259; recuperarea &icirc;m mod automat, pentru site-urile de Web care o permit, 
+'texte_syndication' => '<MODIF>Este posibil&#259; recuperarea &icirc;m mod automat, pentru site-urile de Web care o permit, 
   a listei nout&#259;&#355;ilor lor. Pentru aceasta trebuie s&#259; activa&#355;i sindicalizarea. 
   <blockquote><i>Anumi&#355;i furnizori dezactiveaz&#259; aceast&#259; func&#355;ionalitate&nbsp;;
   &icirc;n acest caz, nu ve&#355;i putea folosi sindicalizarea con&#355;inutului &icirc;n site-ul dumneavoastr&#259;.</i></blockquote>',
@@ -1045,7 +1043,7 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
   pentru a evita afi&#351;area de mesaje intempensive de avertisment.',
 'texte_trop_resultats_auteurs' => 'Prea multe rezultate pentru "@cherche_auteur@" ; v&#259; rug&#259;m s&#259; rafina&#355;i termenii c&#259;ut&#259;rii.',
 'texte_unpack' => 'desc&#259;rcarea ultimei versiuni',
-'texte_utilisation_moteur_syndiques' => 'Atunci c&acirc;nd folosi&#355;i motorul de c&#259;utare integrat
+'texte_utilisation_moteur_syndiques' => '<MODIF>Atunci c&acirc;nd folosi&#355;i motorul de c&#259;utare integrat
 &icirc;n SPIP, pute&#355;i efectua c&#259;utari &icirc;n articolele &#351;i site-urile sindicalizate cu dou&#259; metode diferite
  - Prima &#351;i cea mai simpl&#259; consist&#259; &icirc;n c&#259;utarea doar &icirc;n titlurile &#351;i descrierile articolelor.
   - A doua metod&#259;, mult mai puternic&#259;, permite lui SPIP s&#259; caute deasemenea &icirc;n textul site-urilor referen&#355;iate. C&acirc;nd referen&#355;iati un site, SPIP va efectua c&#259;utarea &icirc;n chiar textul site-ului respectiv.',

@@ -430,7 +430,7 @@ L\'administrator dau sist&egrave;ma &ograve; de la ret vos deu poder fornir
 'info_numero_article' => 'ARTICLE N&Uacute;MERO:',
 'info_obligatoire_02' => '[Obligat&ograve;ri]',
 'info_option_accepter_visiteurs' => 'Acceptar l\'inscripcion dei vesitaires dau sit public',
-'info_option_email' => 'Quora un vesitaire dau sit manda un messatge n&ograve;u au forum
+'info_option_email' => '<MODIF>Quora un vesitaire dau sit manda un messatge n&ograve;u au forum
  associat a un article, se\'n p&ograve;u avisar lu autors
  de l\'article per e-mail. Desiratz d\'utilizar aquela opcion?',
 'info_option_faire_suivre' => 'Faire s&egrave;gre lu messatges dei forums ai autors dei articles',
@@ -817,7 +817,7 @@ qu\'apareisse quora la rateta passa sus lo t&iacute;tol.',
 'texte_effacer_donnees_indexation' => 'Esfa&ccedil;ar li donadas d\'indexacion',
 'texte_en_cours_validation' => 'Si prepaua de publicar lu articles e br&egrave;vas &ccedil;ai sota. Non esitetz de donar lo v&ograve;stre vejaire gaug ai forums que i son estacats.',
 'texte_enrichir_mise_a_jour' => 'Pod&egrave;tz enriquir la compaginacion dau v&ograve;stre t&egrave;xt en utilizant d\'"acorchas tipografiqui".',
-'texte_fichier_authent' => '<b>Deu crear, SPIP, de fichiers especiaus  <tt>.htpasswd</tt>
+'texte_fichier_authent' => '<MODIF><b>Deu crear, SPIP, de fichiers especiaus  <tt>.htpasswd</tt>
   e <tt>.htpasswd-admin</tt> dins lo repert&ograve;ri @dossier@?</b><p>
   Aquelu fichiers vos p&ograve;don servir per restr&eacute;nher l\'acc&egrave;s ai autors
   e administrators en d\'autres luecs dins lo v&ograve;stre sit
@@ -931,7 +931,7 @@ dins lo repert&ograve;ri @dossier@.
 dins l\'escondedor SPIP. Aqu&ograve; permete per exemple de for&ccedil;ar un calcul n&ograve;u de toti li p&agrave;ginas
 s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.',
 'texte_sur_titre' => 'Sobret&iacute;tol',
-'texte_syndication' => 'Si p&ograve;u recuperar automaticament, quora un sit web o permete, 
+'texte_syndication' => '<MODIF>Si p&ograve;u recuperar automaticament, quora un sit web o permete, 
   la tiera dei novetats. Per aqu&ograve; far, vos cau activar la sindicacion. 
   <blockquote><i>D\'unu aubergadors non activan aquela foncionalitat; 
   en aqueu cas, non porretz utilizar la sindicacion de contengut

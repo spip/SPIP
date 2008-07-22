@@ -300,8 +300,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_2' => '<sup>o</sup> sobre @liste@',
 'info_code_acces' => '&iexcl;No olvides tus c&oacute;digos de acceso!',
 'info_comment_lire_tableau' => 'Como leer este cuadro',
-'info_compresseur_activer' => 'Activar la compresi&oacute;n',
-'info_compresseur_desactiver' => 'Desactivar la compresi&oacute;n',
 'info_compresseur_texte' => 'Si tu servidor no comprime autom&aacute;ticamente las p&aacute;ginas html para enviarlas a los internautas, puedes intentar forzar la compresi&oacute;n para disminuir el tama&ntilde;o de las p&aacute;ginas enviadas. <b>Atenci&oacute;n:</b> esto puede ralentizar considerablemente ciertos servidores.',
 'info_compresseur_titre' => 'Optimizaciones y compresi&oacute;n',
 'info_config_suivi' => 'Si esta direcci&oacute;n corresponde a una lista de correo, puedes indicar aqu&iacute; abajo la direcci&oacute;n en la cual los participantes al sitio pueden inscribirse. Esta direcci&oacute;n puede ser una URL (por ejemplo la p&aacute;gina de inscripci&oacute;n a la lista por la web), o una direcci&oacute;n e-mail con un asunto espec&iacute;fico (por ejemplo: <tt>@direccion_abonar@?subject=subscribe</tt>):',
@@ -453,7 +451,7 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_numero_article' => 'Art&iacute;culo:',
 'info_obligatoire_02' => '[Obligatorio]',
 'info_option_accepter_visiteurs' => 'Aceptar la inscripci&oacute;n de los visitantes del sitio p&uacute;blico',
-'info_option_email' => 'Cuando se deposita una nueva contribuci&oacute;n a un foro asociado a un art&iacute;culo, se lo puede notificar por correo electr&oacute;nico a los autores y autoras del art&iacute;culo. &iquest;Deseas utilizar esta opci&oacute;n?',
+'info_option_email' => '<MODIF>Cuando se deposita una nueva contribuci&oacute;n a un foro asociado a un art&iacute;culo, se lo puede notificar por correo electr&oacute;nico a los autores y autoras del art&iacute;culo. &iquest;Deseas utilizar esta opci&oacute;n?',
 'info_option_faire_suivre' => 'Enviar los mensajes de los foros a los autores y autoras de art&iacute;culos',
 'info_option_ne_pas_accepter_visiteurs' => 'Rehusar la inscripci&oacute;n de visitantes',
 'info_option_ne_pas_faire_suivre' => 'No enviar los mensajes de los foros',
@@ -896,7 +894,7 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'texte_effacer_statistiques' => 'Borrar las estad&iacute;sticas',
 'texte_en_cours_validation' => 'Los art&iacute;culos y notas breves mostradas m&aacute;s adelante, est&aacute;n propuestas para la publicaci&oacute;n. No dudes en dar tu opini&oacute;n mediante los foros adjuntos.',
 'texte_enrichir_mise_a_jour' => 'Puedes enriquecer el formato de tu texto utilizando "atajos tipogr&aacute;ficos"',
-'texte_fichier_authent' => '<b>&iquest;Debe SPIP crear los archivos especiales <tt>.htpasswd</tt>
+'texte_fichier_authent' => '<MODIF><b>&iquest;Debe SPIP crear los archivos especiales <tt>.htpasswd</tt>
  y <tt>.htpasswd-admin</tt> en la carpeta @dossier@?</b><p />
 Estos archivos pueden servir para restringir el acceso a las autoras y administradores en otros lugares de tu sitio (programa externo de estad&iacute;sticas, por ejemplo).<p>
 Si no le ves utilidad, puedes dejar esta opci&oacute;n con su valor por omisi&oacute;n (no crear los archivos).',
@@ -973,7 +971,7 @@ Prudencia con esta funcionalidad: <b>las modificaciones o p&eacute;rdidas eventu
 'texte_statut_refuses' => 'Rechazados',
 'texte_suppression_fichiers' => 'Utiliza esta operaci&oacute;n para suprimir todos los archivos presentes en la cach&eacute; de SPIP. Esto permite, por ejemplo, forzar la actualizaci&oacute;n de todas las p&aacute;ginas si se hicieron importantes modificaciones gr&aacute;ficas o de estructura del sitio.',
 'texte_sur_titre' => 'Antet&iacute;tulo',
-'texte_syndication' => 'Es posible recuperar autom&aacute;ticamente, cuando un sitio Web lo permite, la lista de novedades. Para ello, debes activar la sindicaci&oacute;n.
+'texte_syndication' => '<MODIF>Es posible recuperar autom&aacute;ticamente, cuando un sitio Web lo permite, la lista de novedades. Para ello, debes activar la sindicaci&oacute;n.
 <blockquote><i>Algunos proveedores de hospedaje desactivan esta funcionalidad; en ese caso, no podr&aacute;s utilizar la sindicaci&oacute;n de contenido desde tu sitio.</i></blockquote>',
 'texte_table_ok' => ': esta tabla est&aacute; bien.',
 'texte_tables_indexation_vides' => 'Las tablas del motor de indexaci&oacute;n est&aacute;n vac&iacute;as.',
@@ -987,7 +985,7 @@ Prudencia con esta funcionalidad: <b>las modificaciones o p&eacute;rdidas eventu
  Esta opci&oacute;n est&aacute; desactivada por omisi&oacute;n para evitar mostrar mensajes de advertencia intempestivos.',
 'texte_trop_resultats_auteurs' => 'Demasiados resultados para la b&uacute;squeda de "@cherche_auteur@". Precise los criterios.',
 'texte_unpack' => 'Descarga de la &uacute;ltima versi&oacute;n',
-'texte_utilisation_moteur_syndiques' => 'Cuando utilizas el motor de b&uacute;squeda integrado
+'texte_utilisation_moteur_syndiques' => '<MODIF>Cuando utilizas el motor de b&uacute;squeda integrado
     en SPIP, puedes efectuar las b&uacute;squedas sobre los sitios y
     los art&iacute;culos sindicados de dos maneras 
     diferentes. <br />- La m&aacute;s

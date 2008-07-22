@@ -303,8 +303,6 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'info_classement_2' => '. an @liste@',
 'info_code_acces' => 'Vergiesst &auml;r Login-Informatiounen n&euml;t!',
 'info_comment_lire_tableau' => 'W&eacute;i een d&euml;s Tabell liesen soll',
-'info_compresseur_activer' => 'Kompressioun aschalten',
-'info_compresseur_desactiver' => 'Kompressioun ausschalten',
 'info_compresseur_texte' => 'Wann &auml;re Server d\'HTML-S&auml;iten n&euml;t automat&euml;sch komprim&eacute;iert, k&euml;nnt dir prob&eacute;ieren eng Kompressioun ze forc&eacute;ieren. <b>Opgepasst</b>: dat kann verschidde Serveren m&eacute;i lues maachen.',
 'info_compresseur_titre' => 'Optimisatioun a Compressioun',
 'info_config_suivi' => 'Wann d&euml;s Adress eng Mailing-L&euml;scht ass, da k&euml;nnt dier hei d\'Adress uginn wou d\'Matarbechter vun d&euml;sem Site sech aschreiwen k&euml;nnen. D&euml;s Adress kann eng URL sinn (z.B. d\'Internets&auml;it wou een s&euml;ch aschreiwen kann), oder eng Email-Adress mat engem extra Sujet (z.B.: <tt>@adresse_suivi@?subject=subscribe</tt>):',
@@ -454,7 +452,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'info_numero_article' => 'ARTIKEL NUMMER:',
 'info_obligatoire_02' => '[Obligatoresch]',
 'info_option_accepter_visiteurs' => 'D\'Aschreiwung vu Visiteuren unhuelen',
-'info_option_email' => 'Wann e Visiteur vum Site e neie Message an de Forum vun engem Artikel sch&eacute;ckt kennen d\'Auteuren vum Artikel via Email Bescheed kr&eacute;ien. W&euml;llt dir d&euml;s Optioun benotzen?',
+'info_option_email' => '<MODIF>Wann e Visiteur vum Site e neie Message an de Forum vun engem Artikel sch&eacute;ckt kennen d\'Auteuren vum Artikel via Email Bescheed kr&eacute;ien. W&euml;llt dir d&euml;s Optioun benotzen?',
 'info_option_faire_suivre' => 'D\'Messagen vun de Forum\'en un d\'Auteuren vun den Artikelen sch&eacute;cken',
 'info_option_ne_pas_accepter_visiteurs' => 'D\'Aschreiwung vu Visiteuren refus&eacute;ieren',
 'info_option_ne_pas_faire_suivre' => 'D\'Messagen vun de Forum\'en n&euml;t sch&eacute;cken',
@@ -894,7 +892,7 @@ Benotzt d\'L&euml;scht hei dr&euml;nner fir unzegin w&eacute;i eng Elementer e k
 'texte_effacer_statistiques' => 'Statistik l&auml;schen',
 'texte_en_cours_validation' => 'D&euml;s Artikelen a Kuerzmeldungen sinn fir d\'Publikatioun propos&eacute;iert. Gidd &auml;ren Avis am Forum deen dozou geheiert.',
 'texte_enrichir_mise_a_jour' => 'Dir k&euml;nnt de Layout verbesseren mat "typographeschen Ofkiirzungen".',
-'texte_fichier_authent' => '<b>Soll SPIP d&eacute;i speziell Fichier\'en <tt>.htpasswd</tt> an <tt>.htpasswd-admin</tt> am Dossier @dossier@ maachen?</b><p />
+'texte_fichier_authent' => '<MODIF><b>Soll SPIP d&eacute;i speziell Fichier\'en <tt>.htpasswd</tt> an <tt>.htpasswd-admin</tt> am Dossier @dossier@ maachen?</b><p />
 D&euml;s Fichier\'en k&euml;nnen den Zougang vun den Auteuren an den Administrateuren op verschidden Deeler vum Site kontroll&eacute;ieren (externen Statistik-Programm z.B.).<p />
 Wann dir dat n&euml;t braucht, da loosst d&euml;s Optioun op sengem Default (Fichier\'en n&euml;t maachen).',
 'texte_informations_personnelles_1' => 'De System g&euml;t Iech elo e personnalis&eacute;ierten Zougang zum Site.',
@@ -961,7 +959,7 @@ Passt op mat d&euml;ser Prozedur: <b>d\'&Auml;nnerungen k&euml;nnen n&euml;t r&e
 'texte_statut_refuses' => 'refus&eacute;iert',
 'texte_suppression_fichiers' => 'Benotzt d&euml;s Prozedur fir all d\'Fichier\'en aus dem Cache ze l&auml;schen. Sou k&euml;nnt dir z.B. all d\'S&auml;iten nei berechnen, wann dir  grouss &Auml;nnerungen um Layout oder der Struktur vum Site gemaach hutt.',
 'texte_sur_titre' => 'Iwwertitel',
-'texte_syndication' => 'Et ass m&eacute;iglech, wann den Site &euml;t erlaabt, automatesch d\'L&euml;scht vun sengen Neiegkeeten ze kr&eacute;ien. Schalt duerfir d\'Syndicatioun an.
+'texte_syndication' => '<MODIF>Et ass m&eacute;iglech, wann den Site &euml;t erlaabt, automatesch d\'L&euml;scht vun sengen Neiegkeeten ze kr&eacute;ien. Schalt duerfir d\'Syndicatioun an.
   <blockquote><i>Verschidden Provideren verh&euml;nneren d&euml;s Prozedur; an deem Fall k&euml;nnt dir d\'Syndicatioun n&euml;t op &auml;rem Site  benotzen.</i></blockquote>',
 'texte_table_ok' => ': des Tafel ass OK.',
 'texte_tables_indexation_vides' => 'Den Index vum Sich-Motor ass eidel.',
@@ -975,7 +973,7 @@ Passt op mat d&euml;ser Prozedur: <b>d\'&Auml;nnerungen k&euml;nnen n&euml;t r&e
 D&euml;s Optioun ass par d&eacute;faut ausgeschalt fir n&euml;t andauernd Warnungen ze weisen.',
 'texte_trop_resultats_auteurs' => 'Ze vill Resultater fir "@cherche_auteur@"; verbessert &auml;r Sich.',
 'texte_unpack' => 'l&auml;scht Versioun downlueden',
-'texte_utilisation_moteur_syndiques' => 'Wann d&euml;r deen integr&eacute;ierten Sich-Motor benotzt, k&euml;nnt dir d\'Sichen op Siten a syndiqu&eacute;iert Artikelen op zwou Man&eacute;ieren maachen.<br />- D&eacute;i einfachst ass n&euml;mmen am Titel an an der Beschreiwung vun den Artikelen ze sichen.<br />- Eng aner, besser Method, erlaabt SPIP och am Text vun den Siten ze sichen. Wann dir een Site referenz&eacute;iert, da sicht SPIP och am Text vun deem Site.',
+'texte_utilisation_moteur_syndiques' => '<MODIF>Wann d&euml;r deen integr&eacute;ierten Sich-Motor benotzt, k&euml;nnt dir d\'Sichen op Siten a syndiqu&eacute;iert Artikelen op zwou Man&eacute;ieren maachen.<br />- D&eacute;i einfachst ass n&euml;mmen am Titel an an der Beschreiwung vun den Artikelen ze sichen.<br />- Eng aner, besser Method, erlaabt SPIP och am Text vun den Siten ze sichen. Wann dir een Site referenz&eacute;iert, da sicht SPIP och am Text vun deem Site.',
 'texte_utilisation_moteur_syndiques_2' => 'D&euml;s Method forc&eacute;iert SPIP regelm&eacute;isseg d&eacute;i referenz&eacute;iert Siten ze besichen, wat risk&eacute;iert dass &auml;ren Site e b&euml;sschen m&eacute;i lues g&euml;tt.',
 'texte_vide' => 'eidel',
 'texte_vider_cache' => 'De Cache l&auml;schen',

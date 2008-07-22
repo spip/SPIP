@@ -314,8 +314,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_2' => '<sup>a</sup> en @liste@',
 'info_code_acces' => 'Non esquezas os teus c&oacute;digos de acceso!',
 'info_comment_lire_tableau' => 'C&oacute;mo interpretar este cadro',
-'info_compresseur_activer' => 'Activar a compresi&oacute;n',
-'info_compresseur_desactiver' => 'Desactivar a compresi&oacute;n',
 'info_compresseur_texte' => 'No caso de que o seu servidor non comprima automaticamente as p&aacute;xinas html para enviarllas aos internautas, pode probar a forzar esta compresi&oacute;n para diminu&iacute;r o peso das p&aacute;xinas para descarga. <b>Alerta</b> : isto pode ralentizar considerablemente certos servidores.',
 'info_compresseur_titre' => 'Optimizaci&oacute;n e compresi&oacute;n',
 'info_config_suivi' => 'Se este enderezo corresponde &aacute; unha lista de correo, vostede pode indicar aqu&iacute; abaixo o enderezo co cal os participantes no web se poden inscribir. Este enderezo pode ser un URL (por exemplo a p&aacute;xina de inscrici&oacute;n &aacute; lista via web), ou un enderezo de correo electr&oacute;nico dotado dun asunto espec&iacute;fico (por exemplo: <tt>@adresse_suivi@?subject=subscribirse</tt>):',
@@ -444,6 +442,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   e o seu web xa non funcionar&amp;oacute;.<br />{{Reinstale os
   ficheiros de SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Configuraci&oacute;n por defecto dos foros p&uacute;blicos',
+'info_modifier_auteur' => 'Modificar o autor:',
 'info_modifier_breve' => 'Modificar a breve:',
 'info_modifier_mot' => 'Modificar a palabra clave :',
 'info_modifier_rubrique' => 'Modificar o tema:',
@@ -482,7 +481,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_numero_article' => 'ARTIGO N&Uacute;MERO:',
 'info_obligatoire_02' => '[Obrigatorio]',
 'info_option_accepter_visiteurs' => 'Aceptar a inscrici&oacute;n de visitantes do web p&uacute;blico',
-'info_option_email' => 'Cando unha visita env&iacute;a unha nova mensaxe no foro
+'info_option_email' => '<MODIF>Cando unha visita env&iacute;a unha nova mensaxe no foro
   vencellado a un artigo, a persoa responsable do artigo pode recibir
   aviso desta mensaxe por correo-e. Quere empregar esta opci&oacute;n?',
 'info_option_faire_suivre' => 'Enviar aviso das mensaxes dos foros &aacute;s persoas responsabeis dos artigos',
@@ -956,7 +955,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'texte_effacer_statistiques' => 'Borrar as estat&iacute;sticas',
 'texte_en_cours_validation' => 'Estes artigos e as breves de aqu&iacute; embaixo foron propostos para a s&uacute;a publicaci&oacute;n. Non dubide en deixar un aviso nos foros que levan engadidos.',
 'texte_enrichir_mise_a_jour' => 'P&oacute;dese mellorar a presentaci&oacute;n do texto empregando os &laquo;atallos tipogr&aacute;ficos&raquo;.',
-'texte_fichier_authent' => '<b>SPIP ten que crear os ficheiros especiais <tt>.htpasswd</tt>
+'texte_fichier_authent' => '<MODIF><b>SPIP ten que crear os ficheiros especiais <tt>.htpasswd</tt>
   e <tt>.htpasswd-admin</tt> no directorio @dossier@?</b><p />
   Estes ficheiros p&oacute;denlle servir para restrinxir o acceso, tanto aos autores
   coma aos administradores a outras partes do seu web (ao programa
@@ -1056,7 +1055,7 @@ e ser&aacute; visible para todo o equipo de redacci&oacute;n. Use os anuncios s&
   na cach&eacute; do Spip. Isto permite, por exemplo, forzar un novo c&aacute;lculo de todas as p&aacute;xinas cando se fagan
   grandes cambios gr&aacute;ficos ou de estrutura do web.',
 'texte_sur_titre' => 'Sobret&iacute;tulo',
-'texte_syndication' => 'P&oacute;dese recuperar automaticamente, e sempre que o sitio web o permita, 
+'texte_syndication' => '<MODIF>P&oacute;dese recuperar automaticamente, e sempre que o sitio web o permita, 
   a s&uacute;a lista de novidades. Para isto, ten que activar a afiliaci&oacute;n.
   <blockquote><i>Alg&uacute;ns aloxadores desactivan esta funcionalidade;
   nese caso, non poder&aacute; empregar a afiliaci&oacute;n de contido
@@ -1076,7 +1075,7 @@ e ser&aacute; visible para todo o equipo de redacci&oacute;n. Use os anuncios s&
   desactivada por defecto para evitar mostrar mensaxes de aviso intempestivas.',
 'texte_trop_resultats_auteurs' => 'Resultados de m&aacute;is para "@cherche_auteur@"; por favor, afine a procura.',
 'texte_unpack' => 'descarga da &uacute;ltima versi&oacute;n',
-'texte_utilisation_moteur_syndiques' => 'Cando emprega o motor de procura integrado
+'texte_utilisation_moteur_syndiques' => '<MODIF>Cando emprega o motor de procura integrado
   no SPIP, pode efectuar as procuras nos webs e nos artigos afiliados
   de dous xeitos diferentes.
   <br />-  O m&aacute;is

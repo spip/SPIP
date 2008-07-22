@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'activer_plugin' => 'Activate plugin',
+'affichage' => 'Display',
 'aide_non_disponible' => 'This part of the online help is not yet available in the present language.',
 'auteur' => 'Author:',
 'avis_acces_interdit' => 'Access forbidden.',
@@ -298,6 +299,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_auteurs_trouves' => 'Authors found',
 'info_authentification_externe' => 'External authentication',
 'info_avertissement' => 'Warning',
+'info_barre_outils' => 'with its toolbar?',
 'info_base_installee' => 'The structure of your database is installed.',
 'info_base_restauration' => 'Restoration of the database in progress.',
 'info_bloquer' => 'block',
@@ -317,13 +319,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_2' => '&nbsp;out of @liste@',
 'info_code_acces' => 'Do not forget your own access codes!',
 'info_comment_lire_tableau' => 'How to read this graphic',
-'info_compresseur_activer' => 'Enable compression',
-'info_compresseur_desactiver' => 'Disable compression',
+'info_compresseur_gzip' => 'It is advisable to first check if the service provider systematically compresses PHP scripts. To do this you can, for example, use the following service: @testgzip@',
 'info_compresseur_texte' => 'If your server does not automatically compress HTML pages when sending them, you can attempt to force the compression in order to reduce the size of the pages transmitted.<b>Warning</b>: this can have a noticeable adverse effect on the performance of some servers, ',
 'info_compresseur_titre' => 'Optimisations and compression',
+'info_config_forums_prive' => 'In the editing area of the site several differnt kinds of forum may be activated:',
+'info_config_forums_prive_admin' => 'A forum reserved for site administrators:',
+'info_config_forums_prive_global' => 'A global forum, open to all the authors:',
+'info_config_forums_prive_objets' => 'A forum attached to each article, news item, referenced site, etc.:',
 'info_config_suivi' => 'If this address corresponds to a mailing list, you can indicate below the address where the site\'s participants can register. This address could be a URL (for instance the page of the list registration via the web), or an e-mail address with a specific subject (for instance: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'You can subscribe to the mailing-list of this site. You will receive then, by automated electronic mail, the announcements concerning articles and news items submitted for publication.',
 'info_confirmer_passe' => 'Confirm new password:',
+'info_conflit_edition_avis_non_sauvegarde' => 'Caution: the following fields have been modified elsewhere. Your changes to these fields have therefore not been saved.',
+'info_conflit_edition_differences' => 'Differences:',
+'info_conflit_edition_version_enregistree' => 'Saved version:',
+'info_conflit_edition_votre_version' => 'Your version:',
 'info_connexion_base' => 'Trying to connect to database',
 'info_connexion_base_donnee' => 'Connection to your database',
 'info_connexion_ldap_ok' => 'Your LDAP connection succeeded.</b><p /> You can go to the next step.',
@@ -487,9 +496,7 @@ requiring an FTP access to the Web site.',
 'info_numero_article' => 'ARTICLE NUMBER:',
 'info_obligatoire_02' => '[Required]',
 'info_option_accepter_visiteurs' => 'Allow visitors registration from the public site',
-'info_option_email' => 'When a site visitor posts a message to the forum
-		associated with an article, the article\'s authors can be
-		informed of this message by e-mail. Do you wish to use this option?',
+'info_option_email' => 'When a visitor posts a message to the forum associated with an article, the article\'s authors can be informed of this message by email. Indicate for each type of forum if this option should be activated.',
 'info_option_faire_suivre' => 'Forward forums messages to articles authors',
 'info_option_ne_pas_accepter_visiteurs' => 'Refuse visitor registration',
 'info_option_ne_pas_faire_suivre' => 'Do not forward forums messages',
@@ -961,7 +968,7 @@ reinstall SPIP in order to recreate a new database and the first administrator\'
 'texte_effacer_statistiques' => 'Delete the statistics',
 'texte_en_cours_validation' => 'The following articles and news are submitted for publication. Do not hesitate to give your opinion through the forums attached to them.',
 'texte_enrichir_mise_a_jour' => 'You can enrich the layout of your text by using &laquo;typographical shortcuts&raquo;.',
-'texte_fichier_authent' => '<b>Should SPIP create the <tt>.htpasswd</tt>
+'texte_fichier_authent' => '<MODIF><b>Should SPIP create the <tt>.htpasswd</tt>
   and <tt>.htpasswd-admin</tt> files in the directory @dossier@?</b><p />
   These files can be used to restrict access to authors
   and administrators in other parts of your site
@@ -1067,7 +1074,7 @@ irreversible.</b>',
 in the SPIP cache. This allows you, amongst other things, to force the refreshing of all the pages in case you
 entered important modifications on the graphics or the structure of the site.',
 'texte_sur_titre' => 'Top title',
-'texte_syndication' => 'If a site allows it, it is possible to retrieve automatically
+'texte_syndication' => '<MODIF>If a site allows it, it is possible to retrieve automatically
 		the list of its latest material. To achieve this, you must activate the syndication. 
 		<blockquote><i>Some hosts disable this function; 
 		in this case, you cannot use the content syndication
@@ -1086,7 +1093,7 @@ entered important modifications on the graphics or the structure of the site.',
   messages.',
 'texte_trop_resultats_auteurs' => 'Too many results for "@cherche_auteur@"; please refine the search.',
 'texte_unpack' => 'downloading the latest version',
-'texte_utilisation_moteur_syndiques' => 'When you use SPIP\'s integrated search engine, 
+'texte_utilisation_moteur_syndiques' => '<MODIF>When you use SPIP\'s integrated search engine, 
 you can perform searches on sites and
  articles syndicated in two different ways. <br />- The simplest
  way is to search only in the

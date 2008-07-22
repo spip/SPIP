@@ -448,7 +448,7 @@ pa mache m&egrave;m.<br />{{F&ograve;k w instal ank&ograve;
 'info_numero_article' => 'ATIK NIMEWO&nbsp;:',
 'info_obligatoire_02' => '[N&eacute;s&egrave;s&egrave;]',
 'info_option_accepter_visiteurs' => 'Asepte vizit&egrave; yo enskri y sou sit piblik',
-'info_option_email' => 'Kan yon vizit&egrave; ap voye yon nouvo mesaj nan fowom sou yon atik
+'info_option_email' => '<MODIF>Kan yon vizit&egrave; ap voye yon nouvo mesaj nan fowom sou yon atik
 se posib al&egrave;t tout lot&egrave; atik la
 ak yon lim&egrave;l. W vle itilize opsyon nan&nbsp;?',
 'info_option_faire_suivre' => 'Voye mesaj yo nan fowom yo pou lot&egrave; sa-yo tout atik ki komant&eacute;',
@@ -842,7 +842,7 @@ lenstalasyon SPIP pou w kreye yon l&ograve;t nouvo baz ak son promy&eacute; laks
 'texte_effacer_donnees_indexation' => 'Efase tout don&eacute; pou lendeksasyon',
 'texte_en_cours_validation' => 'Atik ak tinouv&egrave;l isit anba, zot se pwopoze pou f&egrave; par&egrave;t. Ezit pa bay lavi aw nan fowom jwen.',
 'texte_enrichir_mise_a_jour' => 'W kapab rann lasp&eacute; lapaj pli rich ak &laquo;&nbsp;tichemen tipografik&nbsp;&raquo;.',
-'texte_fichier_authent' => '<b>F&ograve;k SPIP kreye fichye yo espesyal <tt>.htpasswd</tt>
+'texte_fichier_authent' => '<MODIF><b>F&ograve;k SPIP kreye fichye yo espesyal <tt>.htpasswd</tt>
   ak <tt>.htpasswd-admin</tt> nan rep&egrave;twar @dossier@ ?</b><p />
   Fichye sa-yo p&egrave;m&egrave; w limite laks&eacute; lot&egrave; ak komand&egrave; nan k&egrave;k l&ograve;t katye sit-la
   (pwogwam lestatistik, pa egsanp).<p />
@@ -946,7 +946,7 @@ W kapab esey issit yon aranjman&nbsp;;
 Bagay-la p&eacute;m&egrave;, pa egsanp, f&ograve;se rekalkil tout paj sa-yo, apr&eacute; plizy&egrave; gro chanjman nan grafism osnon lastrikti sit aou.
 ',
 'texte_sur_titre' => 'Sir-tit',
-'texte_syndication' => 'Kank sitweb-la li p&egrave;m&egrave; bagay-sa-a, se posib pran otomatikman lis tout nouv&egrave;lt&eacute; ali. 
+'texte_syndication' => '<MODIF>Kank sitweb-la li p&egrave;m&egrave; bagay-sa-a, se posib pran otomatikman lis tout nouv&egrave;lt&eacute; ali. 
 F&ograve;k w aktive sendikasyon an. 
   <blockquote><i>Tansyon k&egrave;k z&eacute;b&egrave;rj&egrave;, zot ka d&eacute;zaktiv fonksyonalit&eacute;-a&nbsp;; 
   akoz bagay-la, inposib pran sendikasyon-an depi sit aou

@@ -453,7 +453,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_numero_article' => 'NOMOR ARTIKEL:',
 'info_obligatoire_02' => '[Dibutuhkan]',
 'info_option_accepter_visiteurs' => 'Izinkan registrasi pengunjung dari situs umum',
-'info_option_email' => 'Ketika seorang pengunjung situs mengirimkan sebuah pesan ke forum
+'info_option_email' => '<MODIF>Ketika seorang pengunjung situs mengirimkan sebuah pesan ke forum
 		yang terasosiasi dengan sebuah artikel, penulis artikel akan diinformasikan
 		melalui e-mail. Anda ingin menggunakan opsi ini?',
 'info_option_faire_suivre' => 'Teruskan pesan forum ke penulis artikel',
@@ -855,7 +855,7 @@ menginstal kembali SPIP untuk membuat database baru dan akses administrator pert
 'texte_effacer_donnees_indexation' => 'Hapus data terindeksasi',
 'texte_en_cours_validation' => 'Artikel-artikel dan berita-berita berikut dikirim untuk publikasi. Jangan segan-segan memberikan opini anda melalui forum yang terlampir di dalamnya.',
 'texte_enrichir_mise_a_jour' => 'Anda dapat memperkaya tampilan teks anda dengan menggunakan &laquo;jalan pintas typografis&raquo;.',
-'texte_fichier_authent' => '<b>Haruskah SPIP membuat berkas <tt>.htpasswd</tt>
+'texte_fichier_authent' => '<MODIF><b>Haruskah SPIP membuat berkas <tt>.htpasswd</tt>
   dan <tt>.htpasswd-admin</tt> dalam direktori @dossier@?</b><p />
   Berkas-berkas ini dapat digunakan untuk membatasi akses penulis
   dan administrator di bagian lain situs anda
@@ -966,7 +966,7 @@ dapat dipulihkan kembali.</b>',
 dalam cache SPIP. Ini mengizinkan anda, antara lain, untuk memaksa semua halaman diperbaharui jika
 anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'texte_sur_titre' => 'Judul atas',
-'texte_syndication' => 'Jika sebuah situs mengizinkannya, daftar isi terbaru dari situs tersebut
+'texte_syndication' => '<MODIF>Jika sebuah situs mengizinkannya, daftar isi terbaru dari situs tersebut
   dapat diambil secara otomatis. Untuk melakukannya, anda harus mengaktifkan sindikasi.
   <blockquote><i>Sejumlah hosting menonaktifkan fungsi ini; 
   dalam hal ini, anda tidak dapat menggunakan sindikasi isi
@@ -984,7 +984,7 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
   Opsi ini dinonaktifkan secara standar untuk menghindri pesan-pesan peringatan yang tidak perlu.',
 'texte_trop_resultats_auteurs' => 'Terlalu banyak hasil untuk "@cherche_auteur@"; silakan perbaiki pencarian anda.',
 'texte_unpack' => 'mengunduh versi terakhir',
-'texte_utilisation_moteur_syndiques' => 'Ketika anda menggunakan mesin pencari SPIP, anda dapat melakukan pencarian di situs dan artikel yang tersindikasi dala dua cara yang berbeda. <br>- Cara termudah adalah mencari hanya di judul dan deskripsi artikel. <br>- Kedua, cara yang lebih bagus, selain di atas juga mencari dalam teks situs-situs referensi. Jika anda mereferensi sebuah situs, SPIP akan melakukan pencarian di teks situs tersebut.',
+'texte_utilisation_moteur_syndiques' => '<MODIF>Ketika anda menggunakan mesin pencari SPIP, anda dapat melakukan pencarian di situs dan artikel yang tersindikasi dala dua cara yang berbeda. <br>- Cara termudah adalah mencari hanya di judul dan deskripsi artikel. <br>- Kedua, cara yang lebih bagus, selain di atas juga mencari dalam teks situs-situs referensi. Jika anda mereferensi sebuah situs, SPIP akan melakukan pencarian di teks situs tersebut.',
 'texte_utilisation_moteur_syndiques_2' => 'Metode ini memaksa SPIP untuk mengunjungi situs-situs referensi secara teratur, yang mungkin dapat menurunkan kinerja situs anda.',
 'texte_vide' => 'kosong',
 'texte_vider_cache' => 'Kosongkan cache',

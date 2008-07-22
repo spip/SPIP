@@ -419,7 +419,7 @@ L\'administrator deu sist&egrave;ma o de l\'arret que\'vs deu poder hornir
 'info_numero_article' => 'ARTICLE NUM&Egrave;RO:',
 'info_obligatoire_02' => '[Obligat&ograve;ri]',
 'info_option_accepter_visiteurs' => 'Acceptar l\'inscripcion deus vesitaires deu sit public',
-'info_option_email' => 'Quan un vesitaire deu sit e manda un messatge nau au forum
+'info_option_email' => '<MODIF>Quan un vesitaire deu sit e manda un messatge nau au forum
  associat a un article, que se\'n p&ograve;t avisar los autors
  de l\'article per e-mail. E desiratz d\'utilizar aquera opcion?',
 'info_option_faire_suivre' => 'Har seguir los messatges deus forums aus autors deus articles',
@@ -787,7 +787,7 @@ qu\'apareish quan la murga e passa suu t&iacute;tol.',
 'texte_effacer_donnees_indexation' => 'Esfa&ccedil;ar las dadas d\'indexacion',
 'texte_en_cours_validation' => 'Que\'s perpausa de publicar los articles e br&egrave;vas &ccedil;a devath. N\'esitetz pas de dar la v&ograve;sta id&egrave;a gr&agrave;cias aus forums qui i son estacats.',
 'texte_enrichir_mise_a_jour' => 'Que podetz enriquir la compaginacion deu v&ograve;ste t&egrave;xt en utilizar "acorcidas tipograficas".',
-'texte_fichier_authent' => '<b>E deu crear, SPIP, fichi&egrave;rs especiaus  <tt>.htpasswd</tt>
+'texte_fichier_authent' => '<MODIF><b>E deu crear, SPIP, fichi&egrave;rs especiaus  <tt>.htpasswd</tt>
   e <tt>.htpasswd-admin</tt> dens lo repert&ograve;ri @dossier@?</b><p>
   Aqueths fichi&egrave;rs que\'vs p&ograve;den servir t&agrave; restr&eacute;nher l\'acc&egrave;s aus autors
   e administrators alhors dens lo v&ograve;ste sit
@@ -897,7 +897,7 @@ dens lo repert&ograve;ri @dossier@.
 dens l\'esconeder SPIP. Aqu&ograve; que permet per exemple de for&ccedil;ar un calcul nau de totas las paginas
 s\'avetz modificat de b&egrave;th pro lo grafisme o l\'estructura deu sit.',
 'texte_sur_titre' => 'Subert&iacute;tol',
-'texte_syndication' => 'Que\'s p&ograve;t recuperar automaticament, quora un sit web o permet, 
+'texte_syndication' => '<MODIF>Que\'s p&ograve;t recuperar automaticament, quora un sit web o permet, 
   la t&egrave;ra de las soas nautats. T&agrave; har aqu&ograve;, que\'vs cau activar la sindicacion. 
   <blockquote><i>Daubuns aubergaders n\'activan pas aquera foncionalitat; 
   en aqueth cas, non poiratz pas utilizar la sindicacion de contengut
@@ -920,7 +920,7 @@ s\'avetz modificat de b&egrave;th pro lo grafisme o l\'estructura deu sit.',
   intempestius.',
 'texte_trop_resultats_auteurs' => 'Tr&ograve;p de resultats ent&agrave; "@cherche_auteur@" ; volhatz afinar la c&egrave;rca.',
 'texte_unpack' => 'telecargament de la darr&egrave;ra version',
-'texte_utilisation_moteur_syndiques' => 'Quora utilizatz lo cercader integrat 
+'texte_utilisation_moteur_syndiques' => '<MODIF>Quora utilizatz lo cercader integrat 
     a SPIP, que podetz har las c&egrave;rcas suus sits e
     articles sindicats de duas man&egrave;ras
     diferentas. <br /><img src=\'puce.gif\'> La mei

@@ -467,7 +467,7 @@ la finn d&egrave;t publy&eacute;).',
 'info_numero_article' => 'LARTIK NIM&Eacute;RO&nbsp;:',
 'info_obligatoire_02' => '[Obligatwar]',
 'info_option_accepter_visiteurs' => 'As&egrave;pt bann vizit&egrave;r i inskri azot si lo sit piblik',
-'info_option_email' => 'Kank inn vizit&egrave;r i m&egrave;t inn mod&eacute;kri dann forom sou inn lartik
+'info_option_email' => '<MODIF>Kank inn vizit&egrave;r i m&egrave;t inn mod&eacute;kri dann forom sou inn lartik
 bann lot&egrave;r i p&eacute; kon&egrave;t a li
 sanm inn lim&egrave;l. Indik t&egrave;rla si ou v&eacute; anserv lopsyon-la&nbsp;?',
 'info_option_faire_suivre' => 'Pou f&eacute; swiv bann mod&eacute;kri lo forom a tout bann lot&egrave;r bann zartik',
@@ -849,7 +849,7 @@ z&eacute;l&eacute;man miltim&eacute;dia, tousala...). Bann fisy&eacute;-la, ou p
 'texte_effacer_donnees_indexation' => 'D&eacute;gr&egrave;n tout bann don&eacute; pou lind&eacute;ksasyon',
 'texte_en_cours_validation' => 'Bann zartik &egrave;k bann rubrik anba-la, l&eacute; pr&eacute;zant&eacute; pou lapiblikasyon. &Eacute;zit pas donn ani out manyirdvwar dann bann forom i bord azot.',
 'texte_enrichir_mise_a_jour' => 'Pou rannd pli ris lamanyir out sit l&eacute; mi an paz, i p&eacute; anserv &laquo;&nbsp;bann r&eacute;diyon linprimri&nbsp;&raquo;.',
-'texte_fichier_authent' => '<b>Pr&eacute;siz byin si out sist&egrave;m SPIP li dwa kr&eacute; bann fisy&eacute; sp&eacute;sifik <tt>.htpasswd</tt>
+'texte_fichier_authent' => '<MODIF><b>Pr&eacute;siz byin si out sist&egrave;m SPIP li dwa kr&eacute; bann fisy&eacute; sp&eacute;sifik <tt>.htpasswd</tt>
 &eacute; <tt>.htpasswd-admin</tt> dann r&eacute;pertwar @dossier@ ?</b><p>
 Fisy&eacute;-la, li p&eacute; &egrave;d aou pou limit laks&eacute; d&eacute;sertinn lot&egrave;r ou minm bann komand&egrave;r sir s&egrave;rtin kwinn out sit
 (pa &eacute;gsanp : zot i sra pa kav lir lo program-d&eacute;or pou sifkl&eacute; bann vizit).<p>
@@ -931,7 +931,7 @@ Inn ti p&eacute;d pr&eacute;kosyon l&eacute; n&eacute;s&eacute;s&egrave;r &egrav
 'texte_statut_refuses' => 'arfiz&eacute;',
 'texte_suppression_fichiers' => 'Anserv lakomand-la pou d&eacute;gr&egrave;n tout bann fisy&eacute; sir lo kas SPIP. Sa l&eacute; itil, pa &eacute;gsanp, pou fors larkalkil do tout bann pazw&egrave;b si lo sit, kank ou la f&eacute; bann sanzman inportan dann grafism ou dann lastriktir lo sit.',
 'texte_sur_titre' => 'Sirtitr',
-'texte_syndication' => 'L&eacute; posib r&eacute;kup&egrave;r la list bann nouvelt&eacute; otomatikman, sir d&eacute;sertin sit : ifo pou sa-la f&eacute; zw&eacute; lasindikasyon 
+'texte_syndication' => '<MODIF>L&eacute; posib r&eacute;kup&egrave;r la list bann nouvelt&eacute; otomatikman, sir d&eacute;sertin sit : ifo pou sa-la f&eacute; zw&eacute; lasindikasyon 
 <blockquote><i>N&eacute;na d&eacute;sertin z&eacute;berz&egrave;r sak i d&eacute;gr&egrave;n lafonksyon-la&nbsp;; 
 dann ka-la ou sra pa pou itiliz lasindikasyon d-kontnu
 dopwi out pro sit sa-minm.</i></blockquote>',
@@ -947,7 +947,7 @@ dopwi out pro sit sa-minm.</i></blockquote>',
 M&eacute; v&egrave;y byin, lopsyon-la, li l&eacute; pa aktiv&eacute; otomatikman pou anp&egrave;s lafisaz inn lavizman abizif.',
 'texte_trop_resultats_auteurs' => 'N&eacute;na trod r&eacute;zilta pou "@cherche_auteur@" ; mersi kadr my&eacute; lo rodaz.',
 'texte_unpack' => 't&eacute;l&eacute;zarzman dla derny&egrave;r versyon',
-'texte_utilisation_moteur_syndiques' => 'Kank ou i anserv lo rod&egrave;r SPIP, ou p&eacute; f&egrave;r bann rodaz sir tout bann sit &egrave;k out bann zartik sindik&eacute;. N&eacute;na plisy&egrave;r manyir dif&eacute;ran. <br /><img src=\'puce.gif\'> Pli sinp l&eacute; rod s&eacute;lman dann lo titr ou dann lad&eacute;skrisyon out bann zartik. <br />-
+'texte_utilisation_moteur_syndiques' => '<MODIF>Kank ou i anserv lo rod&egrave;r SPIP, ou p&eacute; f&egrave;r bann rodaz sir tout bann sit &egrave;k out bann zartik sindik&eacute;. N&eacute;na plisy&egrave;r manyir dif&eacute;ran. <br /><img src=\'puce.gif\'> Pli sinp l&eacute; rod s&eacute;lman dann lo titr ou dann lad&eacute;skrisyon out bann zartik. <br />-
 Inn d&eacute;zi&egrave;m m&eacute;tod, pli pwisan, li perm&egrave; a SPIP rod osi dann kor lo t&egrave;ks tout out bann sit r&eacute;f&eacute;rans&eacute;&nbsp;. Si ou
  la r&eacute;f&eacute;rans inn sitw&egrave;b, SPIP i sava rod dann t&egrave;ks sa-minm.',
 'texte_utilisation_moteur_syndiques_2' => '&Egrave;k m&eacute;tod-la, SPIP l&eacute; obliz&eacute; d-vizit&eacute;

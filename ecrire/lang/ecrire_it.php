@@ -316,8 +316,6 @@ immagini inserite. Ci&ograve; permette ad esempio di creare in automatico una ga
 'info_classement_2' => '<sup>o</sup> su @liste@',
 'info_code_acces' => 'Non dimenticare i tuoi codici d\'accesso!',
 'info_comment_lire_tableau' => 'Come leggere questa tabella',
-'info_compresseur_activer' => 'Attivare la compressione',
-'info_compresseur_desactiver' => 'Disattivare la compressione',
 'info_compresseur_texte' => 'Se il proprio server non comprime automaticamente le pagine HTML per inviarle ai visitatori, &egrave; possibile tentare di forzare la compressione per diminuire il peso delle pagine da scaricare. <b>Attenzione</b>: ci&ograve; pu&ograve; rallentare notevolmente alcuni server.',
 'info_compresseur_titre' => 'Ottimizzazione e compressione',
 'info_config_suivi' => 'Se questo indirizzo corrisponde a una mailing-list, &egrave; possibile indicare qui sotto l\'indirizzo al quale i partecipanti del sito possono iscriversi. Questo indirizzo pu&ograve; essere una URL (per esempio la pagina di iscrizione via Web alla lista), oppure un indirizzo email che contiene un Oggetto specifico (per esempio: <tt>@adresse_suivi@?subject=subscribe</tt>):',
@@ -481,7 +479,7 @@ le informazioni contenute nel database sono probabilmente andate perse.<br />{{R
 'info_numero_article' => 'ARTICOLO NUMERO:',
 'info_obligatoire_02' => '[Obbligatorio]',
 'info_option_accepter_visiteurs' => 'Accetta l\'iscrizione di utenti del sito pubblico',
-'info_option_email' => 'Quando un visitatore del sito inserisce un nuovo messaggio nel forum
+'info_option_email' => '<MODIF>Quando un visitatore del sito inserisce un nuovo messaggio nel forum
 associato a un articolo, gli autori di quest\'ultimo possono essere
 avvertiti via email. Desideri utilizzare quest\'opzione?',
 'info_option_faire_suivre' => 'Segnala i nuovi messaggi',
@@ -950,7 +948,7 @@ Serviti dell\'elenco qui sotto per indicare quali elementi rendere disponibili.'
 'texte_effacer_statistiques' => 'Cancellare le statistiche',
 'texte_en_cours_validation' => 'Gli articoli e le brevi elencati in questo riquadro sono proposti per la pubblicazione. Non esitare ad esprimere il tuo punto di vista utilizzando i forum che seguono ogni articolo o breve.',
 'texte_enrichir_mise_a_jour' => 'Puoi arricchire la formattazione del testo utilizzando le &laquo;scorciatoie tipografiche&raquo;',
-'texte_fichier_authent' => '<b>SPIP deve creare i file speciali <tt>.htpasswd</tt>
+'texte_fichier_authent' => '<MODIF><b>SPIP deve creare i file speciali <tt>.htpasswd</tt>
 e <tt>.htpasswd-admin</tt> nella cartella @dossier@?</b><p>
  Questi file possono servire a limitare l\'accesso agli autori
 e agli amministratori in particolari aree del sito
@@ -1043,7 +1041,7 @@ Attenzione: <b>le modifiche o la perdita eventuale di dati sono irreversibili.</
 'texte_suppression_fichiers' => 'Utilizza questo commando per cancellare tutti i file presenti nella
 cache di SPIP. Ci&ograve; permette ad esempio di forzare la rigenerazione di tutte le pagine se hai fatto delle importanti modifiche di grafica o di struttura del sito.',
 'texte_sur_titre' => 'Occhiello',
-'texte_syndication' => 'Quando un sito Web lo permette, &egrave; possibile recuperarne automaticamente
+'texte_syndication' => '<MODIF>Quando un sito Web lo permette, &egrave; possibile recuperarne automaticamente
 la lista delle novit&agrave;. A tal fine &egrave; necessario attivare la syndication.
 
 <blockquote><i>Alcuni webmaster disattivano questa funzionalit&agrave;; 
@@ -1065,7 +1063,7 @@ Questa opzione &egrave; disattivata di default
 per evitare di generare messaggi d\'avvertimento intempestivi.',
 'texte_trop_resultats_auteurs' => 'Troppi risultati per "@cherche_auteur@"; restringi la ricerca.',
 'texte_unpack' => 'scarica l\'ultima versione',
-'texte_utilisation_moteur_syndiques' => 'Quando utilizzi il motore di ricerca integrato di SPIP,
+'texte_utilisation_moteur_syndiques' => '<MODIF>Quando utilizzi il motore di ricerca integrato di SPIP,
 puoi effettuare le ricerche sui siti e
 gli articoli in syndication
 in due modalit&agrave; diverse. <br />- La pi&ugrave; semplice
