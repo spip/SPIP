@@ -543,10 +543,15 @@ function autoriser_document_voir_dist($faire, $type, $id, $qui, $opt) {
 	if (in_array($qui['statut'], array('0minirezo', '1comite')))
 		return 'htaccess';
 
-	foreach(array('article','rubrique','breve','forum') as $objet){
-		$table_sql = table_objet_sql($objet);
-		$id_table = id_table_objet($objet);
-		if (sql_countsel('spip_documents_liens AS rel, '.$table_sql.' AS o', "rel.id_objet = o.$id_table AND rel.objet='$objet' AND o.statut = 'publie' AND rel.id_document = $id") > 0)
+	if ($liens = sql_allfetsel('objet,id_objet', 'spip_documents_liens', 'id_document='.intval($id)))
+	foreach ($liens as $l) {
+		$table_sql = table_objet_sql($l['objet']);
+		$id_table = id_table_objet($l['objet']);
+		if (sql_countsel($table_sql, "$id_table = ". intval($l['id_objet'])
+		. (in_array($l['objet'], array('article', 'rubrique', 'breve'))
+			? " AND statut = 'publie'"
+			: '')
+		) > 0)
 			return 'htaccess';
 	}
 	return false;
