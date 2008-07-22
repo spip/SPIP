@@ -3,7 +3,7 @@
 [<p class="formulaire_message">(#ENV*{message_ok,#ENV*{_confirm}|affiche_reponse_confirmation})</p>]
 [<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
 [(#ENV{editable})
-<form method="post" action="#ENV{action}">
+<form method="post" action="#ENV{action}#sp#ENV{id_article}">
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<fieldset>
 	<input type="hidden" name="url_page" value="[(#SELF|url_absolue)]" />
