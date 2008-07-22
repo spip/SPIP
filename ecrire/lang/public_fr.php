@@ -46,12 +46,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'espace_prive' => 'Espace priv&eacute;',
 
 // F
-'forum' => 'Forum',
 'formats_acceptes' => 'Formats accept&#233;s : @formats@.',
+'forum' => 'Forum',
+
 // H
 'hierarchie_site' => 'Hi&eacute;rarchie du site',
-
-// I
 
 // J
 'jours' => 'jours',
