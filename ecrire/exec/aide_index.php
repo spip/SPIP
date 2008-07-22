@@ -237,6 +237,7 @@ function help_img($regs) {
 	}
 }
 
+// http://doc.spip.org/@help_img_cache
 function help_img_cache($img, $ext)
 {
 	header("Content-Type: image/$ext");
@@ -322,6 +323,7 @@ function activer_article(id) {
 
 // Analyse de la structure de l'aide demandee
 
+// http://doc.spip.org/@help_menu_rubrique
 function help_menu_rubrique($html)
 {
 	global $spip_lang;
