@@ -36,7 +36,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour){
 		// verifier si on possede la cle (ie on est autorise a poster)
 		// (sinon tant pis) ; cf. charger.php pour la definition de la cle
 		if (_request('cle_ajouter_document') != calculer_cle_action($a = "ajouter-document-$id_article-$id_breve-$id_forum-$id_rubrique-$id_syndic")) {
-			$erreurs['document_forum'] = _L('Documents interdits dans le forum');
+			$erreurs['document_forum'] = _T('documents_interdits_forum');
 			unset($_FILES['ajouter_document']);
 		} else {
 			include_spip('inc/ajouter_documents');
@@ -46,12 +46,12 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour){
 			if (!in_array($extension, $acceptes)) {
 				if (!$formats = join(', ',$acceptes))
 					$formats = _L('aucun');
-				$erreurs['document_forum'] = _L('Formats accept&#233;s : @formats@.', array('formats' => $formats));
+				$erreurs['document_forum'] = _T('formats_acceptes', array('formats' => $formats));
 			}
 			else {
 				include_spip('inc/getdocument');
 				if (!deplacer_fichier_upload($doc['tmp_name'], $tmp.'.bin'))
-					$erreurs['document_forum'] = _L('Impossible de copier le document');
+					$erreurs['document_forum'] = _T('copie_document_impossible');
 
 #		else if (...)
 #		verifier le type_document autorise
@@ -92,7 +92,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour){
 	if (strlen($titre=_request('titre')) < 3
 	AND $GLOBALS['meta']['forums_titre'] == 'oui')
 		$erreurs['titre'] = _T('forum_attention_trois_caracteres');
-	
+
 	if (!count($erreurs) AND !_request('confirmer_previsu_forum')){
 		if ($afficher_texte != 'non') {
 			$previsu = inclure_previsu($texte, $titre, _request('url_site'), _request('nom_site'), _request('ajouter_mot'), $doc);

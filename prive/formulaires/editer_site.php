@@ -50,7 +50,7 @@ function formulaires_editer_site_verifier_dist($id_syndic='new', $id_rubrique=0,
 			$erreurs['message_erreur'] = ' '; # provoquer la resaisie de controle
 		}
 		else{
-			$erreurs['url_auto'] = _L('Site introuvable');
+			$erreurs['url_auto'] = _T('avis_site_introuvable');
 		}
 	}
 	else

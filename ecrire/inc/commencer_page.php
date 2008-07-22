@@ -24,7 +24,7 @@ function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubri
 	include_spip('inc/headers');
 
 	http_no_cache();
-   
+
 	return init_entete($titre, $id_rubrique, $minipres)
 	. init_body($rubrique, $sous_rubrique, $id_rubrique,$menu)
 	. "<div id='page' class='$spip_ecran'>"
@@ -32,7 +32,7 @@ function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubri
 	. auteurs_recemment_connectes($connect_id_auteur);
 }
 
-// envoi du doctype et du <head><title>...</head> 
+// envoi du doctype et du <head><title>...</head>
 // http://doc.spip.org/@init_entete
 function init_entete($titre='', $id_rubrique=0, $minipres=false) {
 	include_spip('inc/gadgets');
@@ -125,7 +125,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
     . (($spip_ecran == "large") ? 300 : 110)
     . "px; overflow: hidden;'>"
 		. "<a href='"
-		. generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur") 
+		. generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur")
 		. "' class='icone26' title=\""
 		. entites_html(_T('icone_informations_personnelles'))
 		. '">'
@@ -163,10 +163,10 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 
 
 		//. $couleurs()
-//		. "<a href='#' onmouseover=\"changestyle('bandeauinterface');\" title=\"$i\" onfocus=\"changestyle('bandeauinterface');\" onblur=\"changestyle('bandeauinterface');\">" 
-//		. _L('Affichage')
+//		. "<a href='#' onmouseover=\"changestyle('bandeauinterface');\" title=\"$i\" onfocus=\"changestyle('bandeauinterface');\" onblur=\"changestyle('bandeauinterface');\">"
+//		. _T('affichage')
 //		. "</a>";
-		
+
 		$res .= "</div></li>";
 
 		// choix de la langue
@@ -191,10 +191,10 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 
 		// <div> pour la barre des gadgets
 		// (elements invisibles qui s'ouvrent sous la barre precedente)
-	
+
 		$res .= bandeau_gadgets($largeur, true, $id_rubrique);
 	} // fin bandeau colore
-	$res .= "</div>" 
+	$res .= "</div>"
 	  . "</div>\n";
 	return $res;
 }
@@ -249,7 +249,7 @@ function alertes_auteur($id_auteur) {
 
 // http://doc.spip.org/@auteurs_recemment_connectes
 function auteurs_recemment_connectes($id_auteur)
-{	
+{
 	$result = sql_allfetsel("*", "spip_auteurs",  "id_auteur!=" .intval($id_auteur) .  " AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE) AND " . sql_in('statut', array('1comite', '0minirezo')));
 
 	if (!$result) return '';

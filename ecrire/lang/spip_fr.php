@@ -200,6 +200,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'double_occurrence' => 'Double occurrence',
 
 // E
+'en_cours' => 'en cours',
 'entree_dimensions' => 'Dimensions&nbsp;:',
 'entree_titre_document' => 'Titre du document&nbsp;:',
 'entree_titre_image' => 'Titre de l\'image&nbsp;:',
@@ -207,6 +208,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'Erreur',
 'erreur_balise_non_fermee' => 'derni&egrave;re balise non referm&eacute;e :',
 'erreur_texte' => 'erreur(s)',
+'etape' => '&Eacute;tape';
 
 // F
 'fichier_introuvable' => 'Fichier @fichier@ introuvable',
@@ -695,7 +697,7 @@ et vous reconnecter au site.
 		toujours dans les articles.',
 'texte_erreur_visiteur' => 'Vous avez tent&eacute; d\'acc&eacute;der &agrave; l\'espace priv&eacute; avec un login qui ne le permet pas.',
 'texte_inc_auth_1' => 'Vous &ecirc;tes identifi&eacute; sous le
-		login <b>@auth_login@</b>, mais celui-ci n\'existe pas/plus dans la base. 
+		login <b>@auth_login@</b>, mais celui-ci n\'existe pas/plus dans la base.
 		Essayez de vous',
 'texte_inc_auth_2' => 'reconnecter',
 'texte_inc_auth_3' => ', apr&egrave;s avoir &eacute;ventuellement quitt&eacute; puis
@@ -736,6 +738,7 @@ et vous reconnecter au site.
 'titre_signatures_confirmees' => 'Signatures confirm&eacute;es',
 'titre_statistiques' => 'Statistiques du site',
 'titre_titre_document' => 'Titre du document&nbsp;:',
+'todo' => '&agrave; venir',
 'trad_reference' => '(article de r&eacute;f&eacute;rence)',
 
 // Z
