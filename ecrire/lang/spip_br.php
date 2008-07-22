@@ -682,7 +682,7 @@ kevrea&ntilde; en-dro ouzh al lec\'hienn.
   Notennit an dave-se, klaksit en-dro nevesaaat, 
   ha gwiriit e vez diskouezet ar skeudenno&ugrave; er pennado&ugrave;.',
 'texte_erreur_visiteur' => 'Klasket ho peus tizhout al lodenn brevez gant un anv-implijer direizh.',
-'texte_inc_auth_1' => 'Enrollet oc\'h dindan al login
+'texte_inc_auth_1' => '<MODIF>Enrollet oc\'h dindan al login
  <b>@auth_login@</b>, met n\'eus ket ouzh hennezh (ken) en diaz-titouro&ugrave;.
   Klaskit ',
 'texte_inc_auth_2' => 'adkennaska&ntilde;',

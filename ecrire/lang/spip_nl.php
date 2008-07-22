@@ -236,7 +236,7 @@ de website "@nom_site_spip@" (@adresse_login@) :',
 'form_pet_confirmation' => 'Gelieve je handtekening te bevestigen :',
 'form_pet_deja_enregistre' => 'Deze website is reeds geregistreerd',
 'form_pet_deja_signe' => 'Je hebt deze tekst al ondertekend.',
-'form_pet_envoi_mail_confirmation' => '<MODIF>Een e-mail ter bevestiging is verzonden. Om je identiteit te bekrachtigen, dien je het webadres te bezoeken dat in de e-mail is vermeld.',
+'form_pet_envoi_mail_confirmation' => 'Een elektronische bevestigingspost is zojuist naar @email@ verzonden. U zult het Web adres moeten bezoeken dat in deze post wordt vermeld om uw handtekening te valideren.',
 'form_pet_mail_confirmation' => 'Hallo,
 
 Je hebt gevraagd om deze petitie te ondertekenen :
@@ -696,7 +696,7 @@ opnieuw verbinding maken met de site
  van de afbeelding. Kijk vervolgens na of de afbeeldingen
  correct verschijnen in het artikel.',
 'texte_erreur_visiteur' => 'U probeerde toegang te krijgen tot het priv&eacute;-gedeelte met een login die hiervoor geen machtiging heeft.',
-'texte_inc_auth_1' => 'U bent aangemeld als
+'texte_inc_auth_1' => '<MODIF>U bent aangemeld als
   <b>@auth_login@</b>, maar deze naam komt niet (meer) voor in de databank. 
   Probeer je',
 'texte_inc_auth_2' => 'Opnieuw verbinden',

@@ -642,7 +642,7 @@ e vos tornar connectar au sit.
   Notatz ben aquela refer&eacute;ncia, tornatz assaiar la mesa a
  niv&egrave;u, e verificatz pi que lu imatges aparegan
  encara dins lu articles.',
-'texte_inc_auth_1' => 'Siatz identificat/ada coma
+'texte_inc_auth_1' => '<MODIF>Siatz identificat/ada coma
    <b>@auth_login@</b>, mas aqueu login non existisse &ograve; existisse pus dins la basa.
   Assaiatz de vos',
 'texte_inc_auth_2' => 'tornar connectar',

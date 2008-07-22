@@ -688,7 +688,7 @@ Ve&#355;i putea dup&#259; aceea alege o nou&#259; parol&#259; &#351;i ve&#355;i 
   Nota&#355;i aceast&#259; referin&#355;&#259;, re-&icirc;ncerca&#355;i o actualizare &#351;i verifica&#355;i dac&#259; imaginile apar
   &icirc;n articole.',
 'texte_erreur_visiteur' => 'A&#355;i &icirc;ncercat s&#259; accesa&#355;i sec&#355;iunea protejat&#259; cu un nume de utilizator f&#259;r&#259; drepturi.',
-'texte_inc_auth_1' => 'V-a&#355;i identificat cu
+'texte_inc_auth_1' => '<MODIF>V-a&#355;i identificat cu
   login <b>@auth_login@</b>, dar acesta nu (mai) exist&#259; &icirc;n baza de date.
   &Icirc;ncerca&#355;i s&#259;',
 'texte_inc_auth_2' => 'v&#259; reconecta&#355;i',

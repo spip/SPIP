@@ -683,7 +683,7 @@ e vos tornar connectar au sit.
 'texte_erreur_mise_niveau_base' => 'Error de basa de donadas pendent la mesa &agrave; niv&egrave;u. L\'imatge <b>@fichier@</b> es pas passat (article @id_article@).
   Notatz ben aquela referen&ccedil;a, tornatz ensajar la mesa &agrave; niv&egrave;u, e verificatz pi que lu imatges apar&eacute;isson encara dins lu articles.',
 'texte_erreur_visiteur' => 'Av&egrave;tz provat d\'acc&egrave;dre &agrave; l\'espaci privat m\'un identificant que lo permete pas.',
-'texte_inc_auth_1' => 'Si&egrave;tz identificat/ada coma
+'texte_inc_auth_1' => '<MODIF>Si&egrave;tz identificat/ada coma
    <b>@auth_login@</b>, ma aqueu login existisse pas &ograve; pas plus mai dins la basa.
   Temptatz de vos',
 'texte_inc_auth_2' => 'tornar connectar',

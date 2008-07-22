@@ -690,7 +690,7 @@ Prendi nota di questo riferimento, ritenta l\'aggiornamento,
 e verifica che le immagini si vedano ancora
 negli articoli.',
 'texte_erreur_visiteur' => 'Si &egrave; tentato di entrare nell\'area riservata con un login non valido.',
-'texte_inc_auth_1' => 'Sei identificato con il
+'texte_inc_auth_1' => '<MODIF>Sei identificato con il
 login <b>@auth_login@</b>, ma non esiste pi&ugrave; nel database. 
 Prova a ',
 'texte_inc_auth_2' => 'collegarti nuovamente',

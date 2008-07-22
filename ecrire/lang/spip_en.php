@@ -202,6 +202,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'double_occurrence' => 'Two instances',
 
 // E
+'en_cours' => 'processing',
 'entree_dimensions' => 'Size:',
 'entree_titre_document' => 'Document title:',
 'entree_titre_image' => 'Image title:',
@@ -209,6 +210,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'Error',
 'erreur_balise_non_fermee' => 'last tag not closed:',
 'erreur_texte' => 'error(s)',
+'etape' => 'Stage',
 
 // F
 'fichier_introuvable' => 'File not found: @fichier@',
@@ -236,7 +238,7 @@ the site "@nom_site_spip@" (@adresse_login@):',
 'form_pet_confirmation' => 'Please confirm your signature:',
 'form_pet_deja_enregistre' => 'This site is already registered',
 'form_pet_deja_signe' => 'You have already signed this text.',
-'form_pet_envoi_mail_confirmation' => '<MODIF>A confirmation e-mail has just been sent to you. You should visit the URL mentioned in this mail to validate your signature.',
+'form_pet_envoi_mail_confirmation' => 'A confirmation email has just been sent to  @email@. You should visit the URL given in this email to validate your signature.',
 'form_pet_mail_confirmation' => 'Hello,
 
 You asked to sign the petition:
@@ -694,7 +696,7 @@ and connect again to the site.
       in the articles.',
 'texte_erreur_visiteur' => 'You have tried to enter the private area using a login which does not permit this.',
 'texte_inc_auth_1' => 'You identified yourself with the login
-  <b>@auth_login@</b>, but it does not exist in the database (anymore). 
+  <b>@auth_login@</b>, but it does not exist in the database (anymore).
   Try to',
 'texte_inc_auth_2' => 'reconnect',
 'texte_inc_auth_3' => 'having quit then
@@ -735,6 +737,7 @@ and connect again to the site.
 'titre_signatures_confirmees' => 'Confirmed signatures',
 'titre_statistiques' => 'Site statistics',
 'titre_titre_document' => 'Document title:',
+'todo' => 'to come',
 'trad_reference' => '(reference article)',
 
 // Z

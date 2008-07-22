@@ -685,7 +685,7 @@ dan mengakses situs kembali.
 						dan pastikan gambar akhirnya muncul
 						di artikel.',
 'texte_erreur_visiteur' => 'Anda telah mencoba memasuki area pribadi dengan log masuk yang tidak sah.',
-'texte_inc_auth_1' => 'Anda mengidentifikasikan diri anda dengan log masuk
+'texte_inc_auth_1' => '<MODIF>Anda mengidentifikasikan diri anda dengan log masuk
 		<b>@auth_login@</B>, tapi tidak dapat ditemukan di database (lagi). 
 		Coba untuk',
 'texte_inc_auth_2' => 'akses kembali',

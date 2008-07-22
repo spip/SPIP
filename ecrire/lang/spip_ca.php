@@ -232,7 +232,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_pet_confirmation' => 'Confirmeu la vostra signatura:',
 'form_pet_deja_enregistre' => 'Aquest lloc ja est&agrave; registrat.',
 'form_pet_deja_signe' => 'Ja heu signat aquest text.',
-'form_pet_envoi_mail_confirmation' => '<MODIF>Us acabem d\'enviar un correu electr&ograve;nic de confirmaci&oacute;. Heu d\'anar a l\'adre&ccedil;a Web  que s\'hi esmenta per validar la vostra signatura. ',
+'form_pet_envoi_mail_confirmation' => 'Us acabem d\'enviar un correu electr&ograve;nic de confirmaci&oacute; a @email@. Heu d\'anar a l\'adre&ccedil;a Web que s\'hi esmenta per validar la vostra signatura. ',
 'form_pet_mail_confirmation' => 'Bon dia,
 
 Heu sol&middot;licitat signar la petici&oacute;:
@@ -677,7 +677,7 @@ i tornar-vos a connectar al lloc.
  l\'actualitzaci&oacute; i, finalment, verifiqueu que les imatges
  apareixen sempre als articles.',
 'texte_erreur_visiteur' => 'Heu intentat accedir a l\'espai privat amb un login que no li permet.',
-'texte_inc_auth_1' => 'Us heu identificat amb el login
+'texte_inc_auth_1' => '<MODIF>Us heu identificat amb el login
  (nom d\'usuari/&agrave;ria) <b>@auth_login@</b>, per&ograve; aquest no existeix a la base de dades.
   Proveu de ',
 'texte_inc_auth_2' => 'reconnectar',

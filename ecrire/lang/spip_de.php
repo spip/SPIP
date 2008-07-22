@@ -234,7 +234,7 @@ Verzeichnisse zu setzen.Die Installationsanleitung erl&auml;utert die Details da
 'form_pet_confirmation' => 'Bitte best&auml;tigen Sie Ihre Unterschrift:',
 'form_pet_deja_enregistre' => 'Diese Website wurde bereits erfasst',
 'form_pet_deja_signe' => 'Sie haben diesen Text bereits unterschrieben.',
-'form_pet_envoi_mail_confirmation' => '<MODIF>Eine E-mail mit den Daten zum Best&auml;tigen wurde Ihnen zugeschickt. Sie m&uuml;ssen die dort angegebene WWW-Seite &ouml;ffnen, um Ihre Unterschrift zu best&auml;tigen.',
+'form_pet_envoi_mail_confirmation' => 'Eine E-mail mit den Daten zum Best&auml;tigen wurde an @email@ geschickt. Sie m&uuml;ssen die dort angegebene WWW-Seite &ouml;ffnen, um Ihre Unterschrift zu best&auml;tigen.',
 'form_pet_mail_confirmation' => 'Hallo,
 
 Sie m&ouml;chten diese Petition unterzeichnen:
@@ -670,7 +670,7 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
  Bitte notieren Sie diesen Hinweis, starten Sie die Aktualisierung erneut und pr&uuml;fen Sie, ob die Bilder
  in den Artikeln angezeigt werden.',
 'texte_erreur_visiteur' => 'Sie haben versucht, sich mit einer Identit&auml;t einzuloggen, die dazu nicht berechtigt.',
-'texte_inc_auth_1' => 'Sie sind angemeldet als <b>@auth_login@</b>, aber diese ID existiert nicht bzw. nicht mehr in der Datenbank.
+'texte_inc_auth_1' => '<MODIF>Sie sind angemeldet als <b>@auth_login@</b>, aber diese ID existiert nicht bzw. nicht mehr in der Datenbank.
  Versuchen Sie,',
 'texte_inc_auth_2' => 'sich erneut anzumelden',
 'texte_inc_auth_3' => ', nachdem Sie u.U. Ihren Webbrowser neu gestartet haben.',

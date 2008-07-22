@@ -235,7 +235,7 @@ en el sitio "@nom_site_spip@" (@adresse_login@):',
 'form_pet_confirmation' => 'Ratifica tu firma: ',
 'form_pet_deja_enregistre' => 'Este sitio ya est&aacute; registrado',
 'form_pet_deja_signe' => 'Ya has firmado este texto.',
-'form_pet_envoi_mail_confirmation' => '<MODIF>Acabamos de enviar un correo electr&oacute;nico de confirmaci&oacute;n. Tienes que visitar la direcci&oacute;n Web mencionada en este mensaje para validar tu firma.',
+'form_pet_envoi_mail_confirmation' => 'Acabamos de enviar un correo electr&oacute;nico de confirmaci&oacute;n a @email@. Tienes que visitar la direcci&oacute;n Web mencionada en ese mensaje para validar tu firma.',
 'form_pet_mail_confirmation' => 'Hola,
 
 Has solicitado firmar la petici&oacute;n:
@@ -682,7 +682,7 @@ volver a conectarte al sitio.
 La imagen <b>@fichier@</b> no ha pasado (art&iacute;culo @id_article@).
 Tome nota de esta referencia, reintente la actualizaci&oacute;n y verifique que las im&aacute;genes aparecen en los art&iacute;culos.',
 'texte_erreur_visiteur' => 'Has intentado entrar al espacio privado con un identificador que no lo permite.',
-'texte_inc_auth_1' => 'Te identificaste con el login  <b>@auth_login@</b>, pero &eacute;ste no existe en la base.
+'texte_inc_auth_1' => '<MODIF>Te identificaste con el login  <b>@auth_login@</b>, pero &eacute;ste no existe en la base.
 Intenta',
 'texte_inc_auth_2' => 'reconectarte',
 'texte_inc_auth_3' => ', eventualmente despu&eacute;s de cerrar y reiniciar tu navegador.',

@@ -672,7 +672,7 @@ Dir k&euml;nnt do e neit Passwuert agin an Iech um Site umelden.
 D\'Bild <b>@fichier@</b> ass n&euml;t duerchgaang (Artikel @id_article@).
 Not&eacute;iert d&euml;s Referenz, prob&eacute;iert nach eng K&eacute;ier, a kontroll&eacute;iert op d\'Biller an den Artikelen gewisen ginn.',
 'texte_erreur_visiteur' => 'Dir hutt prob&eacute;iert mat engem n&euml;t erlaabten Login an de privaten Deel ze go&euml;n.',
-'texte_inc_auth_1' => 'Dir sidd identifi&eacute;iert als <b>@auth_login@</b>, awer deen Login g&euml;t &euml;t n&euml;t m&eacute;i an der Datebank.
+'texte_inc_auth_1' => '<MODIF>Dir sidd identifi&eacute;iert als <b>@auth_login@</b>, awer deen Login g&euml;t &euml;t n&euml;t m&eacute;i an der Datebank.
 Versicht',
 'texte_inc_auth_2' => 'Iech unzemelden',
 'texte_inc_auth_3' => ', eventuell nodeem der &auml;re Browser nei gestart hutt.',
