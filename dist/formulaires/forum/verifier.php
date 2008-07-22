@@ -44,8 +44,9 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour){
 			$acceptes = array_map('trim', explode(',',$GLOBALS['meta']['formats_documents_forum']));
 
 			if (!in_array($extension, $acceptes)) {
+				# normalement on n'arrive pas ici : pas d'upload si aucun format
 				if (!$formats = join(', ',$acceptes))
-					$formats = _L('aucun');
+					$formats = '-'; //_L('aucun');
 				$erreurs['document_forum'] = _T('formats_acceptes', array('formats' => $formats));
 			}
 			else {
