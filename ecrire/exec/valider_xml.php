@@ -36,30 +36,31 @@ function valider_xml_ok($url, $req_ext)
 		include_spip('public/debug');
 		include_spip('inc/distant');
 		if (is_dir($url)) {
-			if (substr($url,-1,1) !== '/') $url .='/';
+			$dir = (substr($url,-1,1) === '/') ? $url : "$url/";
 			$ext = (!$req_ext) ? 'php' : $req_ext;
-			$files = preg_files($url,  $ext . '$',200,false);
+			$files = preg_files($dir,  $ext . '$',200,false);
 			if (!$files AND !$req_ext) {
 				$ext = 'html';
-				$files = preg_files($url, "$ext$", 200,false);
+				$files = preg_files($dir, "$ext$", 200,false);
 			}
 			if ($files)
 				$res = valider_dir($files, $ext, $url);
 			else $res = _T('texte_vide');
-			$bandeau = $url . '*' . $ext;
+			$bandeau = $dir . '*' . $ext;
 		} else {
-			@list($server, $script) = preg_split('/[?]/', $url);
-			if (((!$server) OR ($server == './') 
-			    OR strpos($server, url_de_base()) === 0)
-			    AND preg_match('/^exec=(\w+)$/', $script, $r)) {
-				  $url = $r[1];
-			}
+			if (preg_match('/^([^?]*)[?]([0-9a-z_]+)=(.*)$/', $url, $r)) {
+				list(,$server, $dir, $script) = $r;
+				if (((!$server) OR ($server == './') 
+				    OR strpos($server, url_de_base()) === 0)
+				    AND is_dir($dir))
+				  $url = $script;
+			} else $dir = 'exec'; 
 			$transformer_xml = charger_fonction('valider', 'xml');
 			$onfocus = "this.value='" . addslashes($url) . "';";
 			unset($GLOBALS['xhtml_error']);
 			if (preg_match(',^[a-z][0-9a-z_]*$,i', $url)) {
-				$texte = $transformer_xml(charger_fonction($url, 'exec'), true);
-				$url_aff = generer_url_ecrire($url);
+				$texte = $transformer_xml(charger_fonction($url, $dir), true);
+				$url_aff = valider_pseudo_url($dir, $script);
 			} else {
 				$texte = $transformer_xml(recuperer_page($url));
 				$url_aff = entites_html($url);
@@ -179,8 +180,17 @@ function valider_script($transformer_xml, $f, $dir)
 			} else $res = strlen($page2);
 		}
 	}
-	return array($res, $script,
-		     generer_url_ecrire($script, $appel, false, true));
+
+	$appel = valider_pseudo_url($dir, $script, $appel);
+	return array($res, $script, $appel);
+}
+
+function valider_pseudo_url($dir, $script, $args='')
+{
+	return  ($dir == 'exec')
+	? generer_url_ecrire($script, $args, false, true)
+	: ("./?$dir=$script" . ($args ? "&$args" : ''));
+
 }
 
 // http://doc.spip.org/@valider_skel
