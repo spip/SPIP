@@ -292,7 +292,6 @@ ecrire/inc/import_0_0.php -text
 ecrire/inc/import_1_2.php -text
 ecrire/inc/import_1_3.php -text
 ecrire/inc/import_insere.php -text
-ecrire/inc/indenter_xml.php -text
 ecrire/inc/index.php -text
 ecrire/inc/informer.php -text
 ecrire/inc/informer_auteur.php -text
@@ -334,7 +333,6 @@ ecrire/inc/syndic.php -text
 ecrire/inc/tourner.php -text
 ecrire/inc/traduire.php -text
 ecrire/inc/utils.php -text
-ecrire/inc/valider_xml.php -text
 ecrire/inc/vieilles_defs.php -text
 ecrire/inc/virtualiser.php -text
 ecrire/inc/xml.php -text
@@ -445,8 +443,10 @@ ecrire/urls/index.php -text
 ecrire/urls/page.php -text
 ecrire/urls/propres_qs.php -text
 ecrire/xml/analyser_dtd.php -text
+ecrire/xml/indenter.php -text
 ecrire/xml/index.php -text
 ecrire/xml/interfaces.php -text
+ecrire/xml/valider.php -text
 /inc-public.php3 -text
 /index.php -text
 local/remove.txt -text

@@ -508,8 +508,8 @@ function debug_dumpfile ($texte, $fonc, $type) {
 			$titre = 'zbug_' . $titre;
 			$texte = ancre_texte($texte, array('',''));
 		} else {
-		  $sax = charger_fonction('valider_xml', 'inc');
-		  $res = $sax($texte);
+		  $valider = charger_fonction('valider', 'xml');
+		  $res = $valider($texte);
 		  list($texte, $err) = emboite_texte($res, $fonc, $self);
 			if ($err === false)
 				$err = _T('impossible');

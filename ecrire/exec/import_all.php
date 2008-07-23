@@ -47,8 +47,10 @@ function exec_import_all_dist()
 			     array('archive' => $archive));
 		$admin = charger_fonction('admin', 'inc');
 		echo $admin('import_all', $action, $commentaire, !$insert);
-	} else {
-		// on ne sait pas quoi importer, il faut sortir de la !
+	}
+	// on ne sait pas quoi importer, il faut sortir de la
+	// sauf s'il s'agit du validateur (a ameliorer)
+	elseif (_request('exec') <> 'valider_xml')  {
 		include_spip('base/import_all');
 		import_all_fin(array());
 		include_spip('inc/import');
