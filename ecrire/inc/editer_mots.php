@@ -155,7 +155,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 	$requete = array('SELECT' => "mots.id_mot, mots.titre, mots.id_groupe", 'FROM' => "spip_mots AS mots, spip_mots_$table AS lien", 'WHERE' => "lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot", 'GROUP BY' => "mots.type, mots.titre",  'ORDER BY' => "mots.type, mots.titre");
 	
 	$cle = http_img_pack('petite-cle.gif', "", "width='23' height='12'");
-	$ret = generer_url_retour($url_base, "$table_id=$id_objet#mots");
+	$ret = generer_url_retour($url_base, "$table_id=$id_objet#editer_mots-$id_objet");
 	$styles = array(array('arial11',25), array('arial2'), array('arial2'), array('arial1'));
 
 	$presenter_liste = charger_fonction('presenter_liste', 'inc');
