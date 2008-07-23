@@ -179,7 +179,7 @@ function valider_idref(&$own, $nom, $ligne, $col)
 		. $col;
 }
 
-// http://doc.spip.org/@inc_valider_passe2_dist
+// http://doc.spip.org/@xml_valider_passe2_dist
 function xml_valider_passe2_dist(&$own)
 {
 	if (!$own->err) {
@@ -334,7 +334,7 @@ function phraserTout($phraseur, $data)
  var $fratrie = array();
 }
 
-// http://doc.spip.org/@inc_valider_xml_dist
+// http://doc.spip.org/@xml_valider_dist
 function xml_valider_dist($page, $apply=false)
 {
 	spip_timer('valider');

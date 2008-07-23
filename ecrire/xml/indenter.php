@@ -51,7 +51,7 @@ function phraserTout($phraseur, $data)
  var $dtc = NULL;
 }
 
-// http://doc.spip.org/@inc_indenter_xml_dist
+// http://doc.spip.org/@xml_indenter_dist
 function xml_indenter_dist($page, $apply=false)
 {
 	$sax = charger_fonction('sax', 'xml');

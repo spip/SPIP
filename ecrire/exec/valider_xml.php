@@ -185,6 +185,7 @@ function valider_script($transformer_xml, $f, $dir)
 	return array($res, $script, $appel);
 }
 
+// http://doc.spip.org/@valider_pseudo_url
 function valider_pseudo_url($dir, $script, $args='')
 {
 	return  ($dir == 'exec')
