@@ -204,8 +204,18 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 	// et enrichissement de propre
 	// couper doit se faire apres propre
 	//$texte = nettoyer_raccourcis_typo($intro ? $intro : $texte, $connect);	
-	
+
+	// ne pas tenir compte des notes ;
+	// bug introduit en http://trac.rezo.net/trac/spip/changeset/12025
+	$mem = array($GLOBALS['les_notes'], $GLOBALS['compt_note'], $GLOBALS['marqueur_notes']);
+
+
 	$texte = propre($texte,$connect);
+
+
+	// restituer les notes comme elles etaient avant d'appeler propre()
+	list($GLOBALS['les_notes'], $GLOBALS['compt_note'], $GLOBALS['marqueur_notes']) = $mem;
+
 
 	@define('_INTRODUCTION_SUITE', '&nbsp;(...)');
 	$texte = couper($texte, $longueur, _INTRODUCTION_SUITE);
