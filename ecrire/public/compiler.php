@@ -187,7 +187,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 	$type_boucle = $boucle->type_requete;
 	$primary = $boucle->primary;
 	$constant = preg_match(CODE_MONOTONE, str_replace("\\'",'', $return));
- 
+
 	// Cas {1/3} {1,4} {n-2,1}...
 
 	$flag_cpt = $boucle->mode_partie ||$boucle->cptrows;
@@ -281,7 +281,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 	if (preg_match(CODE_MONOTONE,str_replace("\\'",'',$corps), $r)) {
 		if (!isset($r[2]) OR (!$r[2])) {
 			if (!$boucle->numrows)
-				return 'return "";';
+				return "\n\t\$t0 = '';";
 			else
 				$corps = "";
 		} else {
@@ -302,32 +302,37 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 		  $fin ;
 	}
 
-	return ($boucle->mode_partie ? 
-		   calculer_parties($boucles, $id_boucle) :
-		   (!$boucle->numrows ? '' :
-		    ( "\n	\$Numrows['" .
-			$id_boucle .
-			"']['total'] = " .
-			(!$boucle->select ? 
-			 ('array_shift(sql_fetch($result,\'' . $boucle->sql_serveur . "'))") :
-			 ("@sql_count(\$result,'") .
-			 $boucle->sql_serveur .
-			 "')").
-		      ";"))) .
+	$count = '';
+	if (!$boucle->select) {
+		if (!$boucle->numrows OR $boucle->limit OR $boucle_mode_partie)
+			$count = '1';
+		else $count = 'count(*)';
+		$boucles[$id_boucle]->select[]= $count; 
+	}
+	$sql_args = '$result, ' . _q($boucle->sql_serveur);
+	if ($boucle->numrows) {
+
+		if ($count == 'count(*)')
+			$count = "array_shift(sql_fetch($sql_args))";
+		else $count = "sql_count($sql_args)";
+		$count = "\n\t\$Numrows['$id_boucle']['total'] = @intval($count);";
+	}
+	
+	return (!$boucle->mode_partie ? $count : calculer_parties($boucles, $id_boucle)) .
 		(!$flag_cpt  ? "" :
 			"\n	\$Numrows['$id_boucle']['compteur_boucle'] = 0;")
 		. '
 	$t0 = "";'
 		.
 		$corps .
-		"\n	@sql_free(\$result,'" .
-		$boucle->sql_serveur . "');";
+		"\n	@sql_free($sql_args);";
 }
 
 
 // http://doc.spip.org/@calculer_requete_sql
 function calculer_requete_sql(&$boucle)
 {
+	if (!$boucle->select) return ""; // l'optimiseur a fait fort
 	return ($boucle->hierarchie ? "\n\t$boucle->hierarchie" : '')
 		. $boucle->in 
 		. $boucle->hash 
@@ -337,9 +342,7 @@ function calculer_requete_sql(&$boucle)
 	  . calculer_dec('$from',  calculer_from($boucle))
 	  . calculer_dec('$type', calculer_from_type($boucle))
 	  . calculer_dec('$groupby', "array(" . join(',',array_map('_q', $boucle->group)) . ")")
-	  . calculer_dec('$select', 'array("'
-	. (!$boucle->select ? 'count(*)' : join("\",\n\t\t\"", $boucle->select))
-			 .  "\")")
+	  . calculer_dec('$select', 'array("' . join("\",\n\t\t\"", $boucle->select).  "\")")
 	  . calculer_dec('$orderby', 'array(' . calculer_order($boucle) .	")")
 	  . calculer_dec('$where', calculer_dump_array($boucle->where))
 	  . calculer_dec('$join', calculer_dump_join($boucle->join))
