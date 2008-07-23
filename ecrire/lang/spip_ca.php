@@ -199,6 +199,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'double_occurrence' => 'Doble inst&agrave;ncia',
 
 // E
+'en_cours' => 'en curs',
 'entree_dimensions' => 'Dimensions:',
 'entree_titre_document' => 'T&iacute;tol del document:',
 'entree_titre_image' => 'T&iacute;tol de la imatge:',
@@ -206,6 +207,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'Error',
 'erreur_balise_non_fermee' => '&uacute;ltima etiqueta sense tancar:',
 'erreur_texte' => 'error(s)',
+'etape' => 'Etapa',
 
 // F
 'fichier_introuvable' => 'Fitxer @fichier@ introbable',
@@ -677,8 +679,7 @@ i tornar-vos a connectar al lloc.
  l\'actualitzaci&oacute; i, finalment, verifiqueu que les imatges
  apareixen sempre als articles.',
 'texte_erreur_visiteur' => 'Heu intentat accedir a l\'espai privat amb un login que no li permet.',
-'texte_inc_auth_1' => '<MODIF>Us heu identificat amb el login
- (nom d\'usuari/&agrave;ria) <b>@auth_login@</b>, per&ograve; aquest no existeix a la base de dades.
+'texte_inc_auth_1' => 'Us heu identificat amb el nom d\'usuari <b>@auth_login@</b>, per&ograve; aquest no existeix/ja no existeix a la base de dades.
   Proveu de ',
 'texte_inc_auth_2' => 'reconnectar',
 'texte_inc_auth_3' => ', despr&eacute;s de tancar i tornar a arrencar el vostre ordinador.',
@@ -717,6 +718,7 @@ i tornar-vos a connectar al lloc.
 'titre_signatures_confirmees' => 'Signatures confirmades',
 'titre_statistiques' => 'Estadistiques de la p&agrave;gina',
 'titre_titre_document' => 'T&iacute;tol del document:',
+'todo' => 'pr&ograve;ximament  ',
 'trad_reference' => '(article de refer&egrave;ncia)',
 
 // Z

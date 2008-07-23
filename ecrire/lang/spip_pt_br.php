@@ -200,6 +200,7 @@ Verifique se as mai&uacute;sculas e min&uacute;suculas destes diret&oacute;rios 
 'double_occurrence' => 'Duplica&ccedil;&atilde;o',
 
 // E
+'en_cours' => 'em curso',
 'entree_dimensions' => 'Dimens&otilde;es:',
 'entree_titre_document' => 'T&iacute;tulo do documento:',
 'entree_titre_image' => 'T&iacute;tulo da imagem:',
@@ -207,6 +208,7 @@ Verifique se as mai&uacute;sculas e min&uacute;suculas destes diret&oacute;rios 
 'erreur' => 'Erro',
 'erreur_balise_non_fermee' => '&Uacute;ltima tag em aberto:',
 'erreur_texte' => 'erro(s)',
+'etape' => 'Etapa',
 
 // F
 'fichier_introuvable' => 'Arquivo @fichier@ n&atilde;o encontrado',
@@ -232,7 +234,7 @@ Verifique se as mai&uacute;sculas e min&uacute;suculas destes diret&oacute;rios 
 'form_pet_confirmation' => 'Por favor, confirme a sua assinatura:',
 'form_pet_deja_enregistre' => 'Este site j&aacute; est&aacute; cadastrado',
 'form_pet_deja_signe' => 'Voc&ecirc; j&aacute; assinou este texto.',
-'form_pet_envoi_mail_confirmation' => '<MODIF>Um e-mail de confirma&ccedil;&atilde;o acabou de lhe ser enviado. Voc&ecirc; dever&aacute; visitar o endere&ccedil;o web mencionado na mensagem para validar a sua assinatura.',
+'form_pet_envoi_mail_confirmation' => 'Um e-mail de confirma&ccedil;&atilde;o acabou de ser enviado para @email@. Voc&ecirc; dever&aacute; visitar o endere&ccedil;o web mencionado na mensagem para validar a sua assinatura.',
 'form_pet_mail_confirmation' => 'Bom dia,
 
 Voc&ecirc; pediu para assinar a peti&ccedil;&atilde;o:
@@ -674,7 +676,7 @@ mas eles n&atilde;o foram inseridos diretamente. Dependendo da elabora&ccedil;&a
 A imagem <b>@fichier@</b> n&atilde;o passou (mat&eacute;ria @id_article@).
 Anote esta refer&ecirc;ncia, tente novamente a atualiza&ccedil;&atilde;o e, finalmente, verifique se as imagens aparecem nas mat&eacute;rias.',
 'texte_erreur_visiteur' => 'Voc&ecirc; tentou acessar o espa&ccedil;o restrito com um login que n&atilde;o tem a permiss&atilde;o necess&aacute;ria.',
-'texte_inc_auth_1' => '<MODIF>Voc&ecirc; se identificou com o login <b>@auth_login@</b>, mas ele n&atilde;o consta (mais) na base.
+'texte_inc_auth_1' => 'Voc&ecirc; se identificou com o login <b>@auth_login@</b>, mas ele n&atilde;o consta (mais) na base.
 Tente se',
 'texte_inc_auth_2' => 'reconectar',
 'texte_inc_auth_3' => ', ap&oacute;s ter eventualmente sa&iacute;do e reiniciado o seu navegador.',
@@ -710,6 +712,7 @@ Tente se',
 'titre_signatures_confirmees' => 'Assinaturas confirmadas',
 'titre_statistiques' => 'Estat&iacute;sticas do site',
 'titre_titre_document' => 'T&iacute;tulo do documento:',
+'todo' => 'breve',
 'trad_reference' => '(mat&eacute;ria de refer&ecirc;ncia)',
 
 // Z

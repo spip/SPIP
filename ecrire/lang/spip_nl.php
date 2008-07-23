@@ -202,6 +202,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'double_occurrence' => 'Dubbel gebruik',
 
 // E
+'en_cours' => 'in koers',
 'entree_dimensions' => 'Afmetingen:',
 'entree_titre_document' => 'Documenttitel:',
 'entree_titre_image' => 'Afbeeldingstitel:',
@@ -209,6 +210,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'Fout',
 'erreur_balise_non_fermee' => 'laatste bebakent niet opnieuw gesloten :',
 'erreur_texte' => 'Fout(en)',
+'etape' => 'Etappe',
 
 // F
 'fichier_introuvable' => 'Bestand @fichier@ onvindbaar',
@@ -696,9 +698,9 @@ opnieuw verbinding maken met de site
  van de afbeelding. Kijk vervolgens na of de afbeeldingen
  correct verschijnen in het artikel.',
 'texte_erreur_visiteur' => 'U probeerde toegang te krijgen tot het priv&eacute;-gedeelte met een login die hiervoor geen machtiging heeft.',
-'texte_inc_auth_1' => '<MODIF>U bent aangemeld als
+'texte_inc_auth_1' => 'U bent aangemeld als
   <b>@auth_login@</b>, maar deze naam komt niet (meer) voor in de databank. 
-  Probeer je',
+  Probeert van u',
 'texte_inc_auth_2' => 'Opnieuw verbinden',
 'texte_inc_auth_3' => ', nadat je je bladerprogramma eventueel gesloten en opnieuw herstart hebt.',
 'texte_inc_config' => 'De wijzigingen die op deze pagina worden aangebracht,
@@ -739,6 +741,7 @@ opnieuw verbinding maken met de site
 'titre_signatures_confirmees' => 'Bevestigde handtekeningen',
 'titre_statistiques' => 'Statistieken van de site',
 'titre_titre_document' => 'Titel van het document:',
+'todo' => 'om te komen',
 'trad_reference' => '(referentie-artikel)',
 
 // Z

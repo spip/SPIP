@@ -201,6 +201,7 @@ de las carpetas mencionadas. El procedimiento se explica detalladamente en la gu
 'double_occurrence' => 'Doble ocurrencia',
 
 // E
+'en_cours' => 'en curso',
 'entree_dimensions' => 'Dimensiones',
 'entree_titre_document' => 'T&iacute;tulo del documento',
 'entree_titre_image' => 'T&iacute;tulo de la imagen',
@@ -208,6 +209,7 @@ de las carpetas mencionadas. El procedimiento se explica detalladamente en la gu
 'erreur' => 'Error',
 'erreur_balise_non_fermee' => '&uacute;ltima baliza no cerrada:',
 'erreur_texte' => 'error(es)',
+'etape' => 'Etapa',
 
 // F
 'fichier_introuvable' => 'No se encuentra el archivo @fichier@',
@@ -682,7 +684,8 @@ volver a conectarte al sitio.
 La imagen <b>@fichier@</b> no ha pasado (art&iacute;culo @id_article@).
 Tome nota de esta referencia, reintente la actualizaci&oacute;n y verifique que las im&aacute;genes aparecen en los art&iacute;culos.',
 'texte_erreur_visiteur' => 'Has intentado entrar al espacio privado con un identificador que no lo permite.',
-'texte_inc_auth_1' => '<MODIF>Te identificaste con el login  <b>@auth_login@</b>, pero &eacute;ste no existe en la base.
+'texte_inc_auth_1' => 'Te identificaste con el
+ login  <b>@auth_login@</b>, pero &eacute;ste no existe (ya) en la base.
 Intenta',
 'texte_inc_auth_2' => 'reconectarte',
 'texte_inc_auth_3' => ', eventualmente despu&eacute;s de cerrar y reiniciar tu navegador.',
@@ -718,6 +721,7 @@ Intenta',
 'titre_signatures_confirmees' => 'Firmas confirmadas',
 'titre_statistiques' => 'Estad&iacute;sticas del sitio',
 'titre_titre_document' => 'T&iacute;tulo del documento',
+'todo' => 'a continuaci&oacute;n',
 'trad_reference' => '(art&iacute;culo de referencia)',
 
 // Z
