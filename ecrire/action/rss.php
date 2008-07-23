@@ -15,10 +15,60 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/acces');
 include_spip('inc/texte'); // utile pour l'espace public, deja fait sinon
 
-// mais d'abord un tri par date (inverse)
-// http://doc.spip.org/@trier_par_date
-function trier_par_date($a, $b) {
-	return ($a['date'] < $b['date']);
+// On recoit un op (operation) + args (arguments)
+// + id (id_auteur) + cle (low_sec(id_auteur, "op args"))
+// On verifie que la cle correspond
+// On cree ensuite le RSS correspondant a l'operation
+
+// Pour memoire, la forme des URLs : 
+// 1.8: spip_rss.php?op=forums&args=page-public&id=4&cle=047b4183&lang=fr
+// 1.9: spip.php?action=rss&op=forums&args=page-public&id=4&cle=047b4183&lang=fr
+// ou encore spip.php?action=rss&op=a-suivre&id=5&cle=5731e121&lang=fr
+
+// http://doc.spip.org/@action_rss_dist
+function action_rss_dist()
+{
+	$op  = _request('op');
+	$args = _request('args');
+	$cle = _request('cle');
+	$id = _request('id');
+	$lang = _request('lang');
+
+	spip_timer('rss');
+
+	$f = charger_fonction(str_replace('-', '_', $op), 'rss');
+	if (!$f OR !verifier_low_sec($id, $cle, "rss $op $args")) {
+		$f = 'rss_erreur';
+	} else {
+		charger_generer_url();
+		lang_select($lang);
+	}
+	list($title, $rss, $url) = $f($args);
+	$title = "[".$GLOBALS['meta']['nom_site']."] RSS ". $title;
+
+	header('Content-Type: text/xml; charset='.$GLOBALS['meta']['charset']);
+	echo '<'.'?xml version="1.0" encoding="'.$GLOBALS['meta']['charset'].'"?'.">\n", '
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:thr="http://purl.org/syndication/thread/1.0">
+<channel xml:lang="'.texte_backend($GLOBALS['spip_lang']).'">
+	<title>'.texte_backend($title).'</title>
+	<link>'.texte_backend(url_absolue($url)).'</link>
+	<description></description>
+	<language>'.texte_backend($GLOBALS['spip_lang']).'</language>
+	', xml_rss($rss), '</channel>
+</rss>
+';
+
+	spip_log("spip_rss s'applique sur '$op $args pour $id' en " . spip_timer('rss'));
+}
+
+function rss_split_args($args)
+{
+	$a = array();
+	foreach (split(':', $args) as $bout) {
+		list($var, $val) = split('-', $bout, 2);
+		$a[$var] = $val;
+	}
+	return $a;
 }
 
 //
@@ -29,6 +79,7 @@ function trier_par_date($a, $b) {
 // http://doc.spip.org/@rss_suivi_versions
 function rss_suivi_versions($a) {
 	include_spip('inc/suivi_versions');
+	$a = rss_split_args($a);
 	return  afficher_suivi_versions (0, $a['id_secteur'], $a['id_auteur'], $a['lang_choisie'], true, true);
 
 }
@@ -37,7 +88,6 @@ function rss_suivi_versions($a) {
 // http://doc.spip.org/@rss_suivi_forums
 function rss_suivi_forums($a, $from, $where, $lien_moderation=false) {
 	$rss = array();
-
 	$result_forum = sql_select('*', $from, $where,'', "date_heure DESC", 20);
 
 	while ($t = sql_fetch($result_forum)) {
@@ -112,15 +162,6 @@ function rss_suivi_messagerie($a) {
 	return $rss;
 }
 
-// Suivi de la page "a suivre" : articles, breves, sites proposes et publies
-// http://doc.spip.org/@rss_a_suivre
-function rss_a_suivre($a) {
-	$rss_articles = rss_articles("statut = 'prop'");
-	$rss_breves = rss_breves("statut = 'prop'");
-	$rss_sites = rss_sites("statut = 'prop'");
-
-	return array_merge($rss_articles, $rss_breves, $rss_sites);
-}
 
 // http://doc.spip.org/@rss_articles
 function rss_articles($critere) {
@@ -181,138 +222,103 @@ function rss_sites($critere) {
 	return $rss;
 }
 
-// On recoit un op (operation) + args (arguments)
-// + id (id_auteur) + cle (low_sec(id_auteur, "op args"))
-// On verifie que la cle correspond
-// On cree ensuite le RSS correspondant a l'operation
 
-
-// http://doc.spip.org/@action_rss_dist
-function action_rss_dist()
+# forum public
+function rss_forum($a)
 {
-	$args = _request('args');
-	$cle = _request('cle');
-	$fmt = _request('fmt');
-	$id = _request('id');
-	$lang = _request('lang');
-	$op  = _request('op');
-	$a = array();
-
-	charger_generer_url();
-
-//
-// Verifier la securite du lien et decoder les arguments
-//
-
-// Pour memoire, la forme des URLs : 
-// 1.8: spip_rss.php?op=forums&args=page-public&id=4&cle=047b4183&lang=fr
-// 1.9: spip.php?action=rss&op=forums&args=page-public&id=4&cle=047b4183&lang=fr
-// ou encore spip.php?action=rss&op=a-suivre&id=5&cle=5731e121&lang=fr
-
-	spip_timer('rss');
-	if (!verifier_low_sec($id, $cle, "rss $op $args")) {
-		$op = 'erreur securite';
-	} else {
-		foreach (split(':', $args) as $bout) {
-			list($var, $val) = split('-', $bout, 2);
-			$a[$var] = $val;
-		}
-		lang_select($lang);
+	$a = rss_split_args($a);
+	include_spip('inc/forum');
+	if ($id = intval($a['id_article'])) {
+		$critere = "statut='publie' AND id_article=$id";
+		$title = sql_getfetsel('titre', "spip_articles", "id_article=$id");
+		$url = generer_url_article($id);
 	}
-
-//
-// Choisir la fonction de calcul du RSS
-//
-
-	switch($op) {
-	# forum public
-	case 'forum':
-		include_spip('inc/forum');
-		if ($id = intval($a['id_article'])) {
-			$critere = "statut='publie' AND id_article=$id";
-			$title = sql_getfetsel('titre', "spip_articles", "id_article=$id");
-			$url = generer_url_article($id);
-		}
-		else if ($id = intval($a['id_syndic'])) {
-			$critere = "statut='publie' AND id_syndic=$id";
-			$title = sql_getfetsel("nom_site", "spip_syndic", "id_syndic=$id");
-			$url = generer_url_site($id);
-		}
-		else if ($id = intval($a['id_breve'])) {
-			$critere = "statut='publie' AND id_breve=$id";
-			$title = sql_getfetsel('titre', "spip_articles", "id_article=$id");
-			$url = generer_url_breve($id);
-		}
-		else if ($id = intval($a['id_rubrique'])) {
-			$critere = "statut='publie' AND id_rubrique=$id";
-			$title = sql_getfetsel('titre', "spip_articles", "id_article=$id");
-			$url = generer_url_rubrique($id);
-		}
-		else if ($id = intval($a['id_thread'])) {
-			$critere = "statut='publie' AND id_thread=$id";
-			$title = sql_getfetsel('titre', "spip_articles", "id_article=$id");
-			$url = generer_url_forum($id);
-		}
-		if ($id) $rss = rss_suivi_forums($a, "spip_forum", $critere, false);
-
-		$title .=  ' (' . _T("ecrire:titre_page_forum_suivi") .')';
-		break;
-	# suivi prive des forums
-	case 'forums':
-		include_spip('inc/forum');
-		list($f,$w) = critere_statut_controle_forum($a['page']);
-		$rss = rss_suivi_forums($a, $f, $w, true);
-		$title = _T("ecrire:titre_page_forum_suivi")." (".$a['page'].")";
-		$url = generer_url_ecrire('controle_forum', 'type='.$a['page']);
-		break;
-	# revisions des articles
-	case 'revisions':
-		$rss = rss_suivi_versions($a);
-		$title = _T("icone_suivi_revisions");
-		$url = "";
-		foreach (array('id_secteur', 'id_auteur', 'lang_choisie') as $var)
-			if ($a[$var]) $url.= $var.'='.$a[$var] . '&';
-		$url = generer_url_ecrire('suivi_revisions', $url);
-		break;
-	# messagerie privee
-	case 'messagerie':
-		$rss = rss_suivi_messagerie($a);
-		$title = _T("icone_messagerie_personnelle");
-		$url = generer_url_ecrire('messagerie');
-		break;
-	# a suivre
-	case 'a-suivre':
-		$rss = rss_a_suivre($a);
-		$title = _T("icone_a_suivre");
-		$url = _DIR_RESTREINT_ABS;
-		break;
-	case 'erreur securite':
-		$rss = array(array('title' => _T('login_erreur_pass')));
-		$title = _T('login_erreur_pass');
-		$url = '';
-		break;
-	default:
-		$rss = array(array('title' => _T('forum_titre_erreur')));
-		$title = _T('forum_titre_erreur');
-		$url = '';
-		break;
+	else if ($id = intval($a['id_syndic'])) {
+		$critere = "statut='publie' AND id_syndic=$id";
+		$title = sql_getfetsel("nom_site", "spip_syndic", "id_syndic=$id");
+		$url = generer_url_site($id);
 	}
+	else if ($id = intval($a['id_breve'])) {
+		$critere = "statut='publie' AND id_breve=$id";
+		$title = sql_getfetsel('titre', "spip_articles", "id_article=$id");
+		$url = generer_url_breve($id);
+	}
+	else if ($id = intval($a['id_rubrique'])) {
+		$critere = "statut='publie' AND id_rubrique=$id";
+		$title = sql_getfetsel('titre', "spip_articles", "id_article=$id");
+		$url = generer_url_rubrique($id);
+	}
+	else if ($id = intval($a['id_thread'])) {
+		$critere = "statut='publie' AND id_thread=$id";
+		$title = sql_getfetsel('titre', "spip_articles", "id_article=$id");
+		$url = generer_url_forum($id);
+	}
+	if ($id) $rss = rss_suivi_forums($a, "spip_forum", $critere, false);
 
-	$title = "[".$GLOBALS['meta']['nom_site']."] RSS ". $title;
+	$title .=  ' (' . _T("ecrire:titre_page_forum_suivi") .')';
+	return array($title, $rss, $url);
+}
 
-	header('Content-Type: text/xml; charset='.$GLOBALS['meta']['charset']);
-	echo '<'.'?xml version="1.0" encoding="'.$GLOBALS['meta']['charset'].'"?'.">\n", '
-<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:thr="http://purl.org/syndication/thread/1.0">
-<channel xml:lang="'.texte_backend($GLOBALS['spip_lang']).'">
-	<title>'.texte_backend($intro['title']).'</title>
-	<link>'.texte_backend(url_absolue($url)).'</link>
-	<description></description>
-	<language>'.texte_backend($GLOBALS['spip_lang']).'</language>
-	', xml_rss($rss), '</channel>
-</rss>
-';
+# suivi prive des forums
+function  rss_forums($a)
+{
+	$a = rss_split_args($a);
+	include_spip('inc/forum');
+	list($f,$w) = critere_statut_controle_forum($a['page']);
+	$rss = rss_suivi_forums($a, $f, $w, true);
+	$title = _T("ecrire:titre_page_forum_suivi")." (".$a['page'].")";
+	$url = generer_url_ecrire('controle_forum', 'type='.$a['page']);
+	return array($title, $rss, $url);
+}
 
-	spip_log("spip_rss s'applique sur '$op $args pour $id' en " . spip_timer('rss'));
+# revisions des articles
+function  rss_revisions($a)
+{
+	$a = rss_split_args($a);
+	$rss = rss_suivi_versions($a);
+	$title = _T("icone_suivi_revisions");
+	$url = "";
+	foreach (array('id_secteur', 'id_auteur', 'lang_choisie') as $var)
+		if ($a[$var]) $url.= $var.'='.$a[$var] . '&';
+	$url = generer_url_ecrire('suivi_revisions', $url);
+	return array($title, $rss, $url);
+}
+
+# messagerie privee
+function  rss_messagerie($a)
+{
+	$a = rss_split_args($a);
+	$rss = rss_suivi_messagerie($a);
+	$title = _T("icone_messagerie_personnelle");
+	$url = generer_url_ecrire('messagerie');
+	return array($title, $rss, $url);
+}
+
+// Suivi de la page "a suivre" : articles, breves, sites proposes et publies
+// http://doc.spip.org/@rss_a_suivre
+function rss_a_suivre($a) {
+	$rss_articles = rss_articles("statut = 'prop'");
+	$rss_breves = rss_breves("statut = 'prop'");
+	$rss_sites = rss_sites("statut = 'prop'");
+
+	$rss = array_merge($rss_articles, $rss_breves, $rss_sites);
+	$title = _T("icone_a_suivre");
+	$url = _DIR_RESTREINT_ABS;
+	return array($title, $rss, $url);
+}
+
+function  rss_erreur($a)
+{
+	$rss = array(array('title' => _T('login_erreur_pass')));
+	$title = _T('login_erreur_pass');
+	$url = '';
+	return array($title, $rss, $url);
+}
+
+// d'abord un tri par date (inverse)
+// http://doc.spip.org/@trier_par_date
+function trier_par_date($a, $b) {
+	return ($a['date'] < $b['date']);
 }
 
 // http://doc.spip.org/@xml_rss
