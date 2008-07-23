@@ -83,7 +83,8 @@ function action_editer_mots_post($r)
 			$a = substr($redirect,$p);
 			$redirect = substr($redirect,0,$p);
 		} else $a='';
-		$redirect .= "&cherche_mot=$cherche_mot&select_groupe=$select_groupe$a";
+		$redirect .= "&cherche_mot=".urlencode($cherche_mot)
+			."&select_groupe=$select_groupe$a";
 	}
 	redirige_par_entete($redirect);
 }
