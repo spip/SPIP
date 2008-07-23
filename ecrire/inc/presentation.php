@@ -1267,28 +1267,11 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af =
 
 }
 
-//
-// Creer un bouton qui renvoie vers la bonne url spip_rss
 // http://doc.spip.org/@bouton_spip_rss
-function bouton_spip_rss($op, $args, $fmt='rss') {
+function bouton_spip_rss($op, $args) {
 
 	include_spip('inc/acces');
 	$url = generer_url_low_sec($op, $args, $GLOBALS['connect_id_auteur'], $GLOBALS['spip_lang']);
-	switch($fmt) {
-		case 'ical':
-			$url = preg_replace(',^.*?://,', 'webcal://', $url)
-			  . "&amp;fmt=ical";
-			$button = 'iCal';
-			break;
-		case 'atom':
-			$button = 'atom';
-			break;
-		case 'rss':
-		default:
-			$button = 'RSS';
-			break;
-	}
-	$img = http_img_pack('feed.png', $button, '', 'RSS');
-	return "<a href='$url'>$img</a>";
+	return "<a href='$url'>" . http_img_pack('feed.png', 'RSS', '', 'RSS') . "</a>";
 }
 ?>
