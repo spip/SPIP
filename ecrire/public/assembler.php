@@ -74,6 +74,7 @@ function init_var_mode(){
 	}
 }
 
+// http://doc.spip.org/@refuser_traiter_formulaire_ajax
 function refuser_traiter_formulaire_ajax(){
 	if ($v=_request('var_ajax')
 	  AND $v=='form'
