@@ -73,6 +73,19 @@ $GLOBALS['maj'][1935] = array(
 	array('maj_1_935')
 	);
 
+
+// http://doc.spip.org/@convertir_un_champ_blob_en_text
+function convertir_un_champ_blob_en_text($table,$champ,$type){
+	$res = spip_query("SHOW FULL COLUMNS FROM $table LIKE '$champ'");
+	if ($row = sql_fetch($res)){
+		if (strtolower($row['Type'])!=strtolower($type)) {
+			$default = $row['Default']?(" DEFAULT ".sql_quote($row['Default'])):"";
+			$notnull = ($row['Null']=='YES')?"":" NOT NULL";
+			sql_alter("TABLE $table CHANGE $champ $champ $type $default $notnull");
+		}
+	}
+}
+
 $GLOBALS['maj'][1937] = array(
 		// convertir les champs blob des tables spip en champs texte
 	array('convertir_un_champ_blob_en_text',"spip_articles","texte","LONGTEXT"),
