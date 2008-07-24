@@ -318,7 +318,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_2' => '<sup>de</sup> @liste@',
 'info_code_acces' => 'Vergeet je eigen toegangscode niet!',
 'info_comment_lire_tableau' => 'Hoe lees je deze tabel',
-'info_compresseur_gzip' => '<NEW><b>N.&nbsp;B.&nbsp;:</b> Il est recommand&#233; de v&#233;rifier au pr&#233;alable si l\'h&#233;bergeur compresse d&#233;j&#224; syst&#233;matiquement les scripts php&nbsp;; pour cela, vous pouvez par exemple utiliser le service suivant&nbsp;: @testgzip@',
+'info_compresseur_gzip' => '<b>N.&nbsp;B.&nbsp;:</b> Hij wordt aanbevolen om eerst te controleren of leverancier de scripts php&nbsp; reeds systematisch samenperst; daarvoor, kunt u bijvoorbeeld de volgende dienst gebruiken&nbsp;: @testgzip@',
 'info_compresseur_texte' => 'Als uw server de bladzijdes HTML niet automatisch samendrukt om ze te verzenden naar de internauten, kunt u deze samendrukking proberen te forceren om het gewicht van de gedownloade bladzijdes te verminderen. <b>Aandacht</b>: dat kan bepaalde servers aanzienlijk vertragen.',
 'info_compresseur_titre' => 'Optimaliseringen en samendrukking',
 'info_config_forums_prive' => 'In de particuliere ruimte van de site, kunt u verschillende soorten forums activeren&nbsp;:',
@@ -356,7 +356,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_derniers_articles_publies' => 'Je meest recente online artikels',
 'info_desactiver_forum_public' => 'Het gebruik van de publieke forums desactiveren.
 De publieke forums kunnen per artikel toegestaan worden
-;Ze worden niet toegestaan op de rubrieken en berichten, enz.',
+; Ze worden niet toegestaan op de rubrieken en berichten, enz.',
 'info_desactiver_messagerie_personnelle' => 'Je kan het interne berichtensysteem op deze site aan- of uitzetten.',
 'info_descriptif' => 'Beschrijving:',
 'info_desinstaller_plugin' => 'schaft de gegevens af en d&eacute;sactive plugin',
@@ -412,7 +412,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_historique_activer' => 'Activeren van het opvolgen van de revisies',
 'info_historique_affiche' => 'Deze versie weergeven',
 'info_historique_comparaison' => 'vergelijking',
-'info_historique_desactiver' => 'Desactiveren van het opvolgen van de revisies',
+'info_historique_desactiver' => 'Het opvolgen van de revisies desactiveren',
 'info_historique_lien' => 'De geschiedenis van de wijzigingen weergeven',
 'info_historique_texte' => 'Met de opvolging van de revisies is het mogelijk de geschiedenis van alle wijzigingen aan een artikel bij te houden, en de verschillende tussen opeenvolgende versies weer te geven.',
 'info_historique_titre' => 'Opvolging van de revisies',
@@ -747,14 +747,14 @@ een kleur geeft hun status aan&nbsp;:',
 'item_non_autoriser_selectionner_date_en_ligne' => 'De datum van de documenten kunnen manueel niet veranderen',
 'item_non_autoriser_syndication_integrale' => 'Enkel een samenvatting verspreiden',
 'item_non_bloquer_liens_syndiques' => 'Koppelingen komende van de syndicatie niet blokkeren',
-'item_non_compresseur' => '<NEW>D&#233;sactiver la compression',
-'item_non_config_forums_prive_global' => '<NEW>D&#233;sactiver le forum des r&#233;dacteurs',
-'item_non_config_forums_prive_objets' => '<NEW>D&#233;sactiver ces forums',
+'item_non_compresseur' => 'De samendrukking desactiveren',
+'item_non_config_forums_prive_global' => 'Het forum van de redacteuren desactiveren',
+'item_non_config_forums_prive_objets' => 'Deze forums desactiveren',
 'item_non_creer_fichiers_authent' => 'Deze bestanden niet aanmaken',
 'item_non_gerer_annuaire_site_web' => 'Adresboek van websites desactiveren',
 'item_non_gerer_statistiques' => 'Geen statistieken aanmaken',
 'item_non_limiter_recherche' => 'De zoekopdracht uitbreiden naar de inhoud van de gerefereerde sites',
-'item_non_messagerie_agenda' => '<NEW>D&#233;sactiver la messagerie et l&#8217;agenda',
+'item_non_messagerie_agenda' => 'De besteldienst en de agenda desactiveren',
 'item_non_publier_articles' => 'Artikels niet vrijgeven voor de vastgelegde datum van publicatie',
 'item_non_utiliser_breves' => 'Geen gebruik maken van nieuwsberichten',
 'item_non_utiliser_config_groupe_mots_cles' => 'Geavanceerde configuratie van groepen trefwoorden niet gebruiken',
@@ -821,14 +821,14 @@ een kleur geeft hun status aan&nbsp;:',
 'mois_non_connu' => 'Onbekend',
 
 // O
-'onglet_contenu' => '<NEW>Contenu',
+'onglet_contenu' => 'Inhoud',
 'onglet_declarer_une_autre_base' => 'Een andere basis verklaren',
-'onglet_discuter' => '<NEW>Discuter',
-'onglet_documents' => '<NEW>Documents',
-'onglet_interactivite' => '<NEW>Interactivit&eacute;',
-'onglet_proprietes' => '<NEW>Propri&eacute;t&eacute;s',
+'onglet_discuter' => 'Discussi&euml;ren',
+'onglet_documents' => 'Documenten',
+'onglet_interactivite' => 'Interactiviteit',
+'onglet_proprietes' => 'Eigendommen',
 'onglet_repartition_actuelle' => 'nu',
-'onglet_sous_rubriques' => '<NEW>Sous-rubriques',
+'onglet_sous_rubriques' => 'Onder-rubrieken',
 'ortho_ajouter_ce_mot' => 'Dit woord aan het woordenboek toevoegen',
 'ortho_aucune_suggestion' => 'Voor dit woord hebben we geen enkele suggestie gevonden.',
 'ortho_avis_privacy' => 'Een spellingcontrole is toegevoegd aan SPIP. Vooraleer deze functie te activeren, raden we je aan de volgende paragraaf aandachtig te lezen&nbsp;:',
@@ -955,19 +955,19 @@ inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je d
  het aantal bezoeken dat het artikel op een dag zal
  krijgen als huidige ritme van raadpleging wordt
  aangehouden.',
-'texte_compacter_avertissement' => '<NEW>Attention &#224; ne pas activer ces options durant le d&#233;veloppement de votre site : les &#233;l&#233;ments compact&#233;s perdent toute lisibilit&#233;.',
-'texte_compacter_script_css' => '<NEW>SPIP peut compacter les scripts javascript et les feuilles de style CSS, pour les enregistrer dans des fichiers statiques ; cela acc&#233;l&#232;re l\'affichage du site.',
+'texte_compacter_avertissement' => 'De aandacht om niet deze opties tijdens de ontwikkeling van uw site te activeren: de compact elementen verliezen elke leesbaarheid.',
+'texte_compacter_script_css' => 'SPIP kan compact de javascript scripts en de CSS stijl bladen, om ze te registreren in statische bestanden; dat versnelt de display van de site.',
 'texte_compresse_ou_non' => '(deze kan gecomprimeerd worden of niet)',
-'texte_compresseur_page' => '<NEW>SPIP peut compresser automatiquement chaque page qu\'il envoie aux
-visiteurs du site. Ce r&#233;glage permet d\'optimiser la bande passante (le
-site est plus rapide derri&#232;re une liaison &#224; faible d&#233;bit), mais
-demande plus de puissance au serveur.',
+'texte_compresseur_page' => 'SPIP kan elke bladzijde automatisch samenpersen die hij naar
+ bezoekers van de site verzendt. Dit regelen maakt het mogelijk om de drukke reep te optimaliseren (de
+ site is sneller achter een verbinding aan gering debiet), maar
+ vraagt meer macht aan de server.',
 'texte_compte_element' => '@count@ element',
 'texte_compte_elements' => '@count@ elements',
 'texte_config_groupe_mots_cles' => 'Wilt u de geavanceerde configuratie van de sleutelwoorden activeren,
    door mede te delen bijvoorbeeld dat men een enig woord
  kan selecteren   per groep, dat een groep belangrijk is...&nbsp;?',
-'texte_conflit_edition_correction' => '<NEW>Veuillez contr&#244;ler ci-dessous les diff&#233;rences entre les deux versions du texte&nbsp;; vous pouvez aussi copier vos modifications, puis recommencer.',
+'texte_conflit_edition_correction' => 'Gelieve de verschillen tussen beide versies van de tekst&nbsp; hieronder te controleren; u kunt eveneens uw wijzigingen kopi&euml;ren, vervolgens opnieuw beginnen.',
 'texte_connexion_mysql' => 'Raadpleegt de inlichtingen die door uw leverancier&nbsp; worden verstrekt: u moet er de basisserver van gegevens vinden die men voorstelt en uw persoonlijke identificaties om u erop aan te sluiten.',
 'texte_contenu_article' => '(Inhoud van het artikel in enkele woorden.)',
 'texte_contenu_articles' => 'Naargelang de opmaak van je website kan je beslissen sommige elementen van artikels
@@ -991,15 +991,15 @@ artikel of afzonderlijk getoond worden.<p />',
 'texte_effacer_statistiques' => 'De statistieken uitwissen',
 'texte_en_cours_validation' => 'De artikels en berichten hieronder werden voorgesteld voor publicatie. Aarzel niet om je mening te geven via de forums die er op volgen.',
 'texte_enrichir_mise_a_jour' => 'De opmaak van een tekst kan gebeuren met behulp van de zogeheten &laquo;typografische snelkoppelingen&raquo;.',
-'texte_fichier_authent' => '<MODIF><b>Moet SPIP speciale <tt>.htpasswd</tt>
+'texte_fichier_authent' => '<b>SPIP moet hij de speciale  <tt>.htpasswd</tt>
   en <tt>.htpasswd-admin</tt> bestanden aanmaken in de map @dossier@ ?</b><p />
  Deze bestanden zijn nuttig om de toegang tot andere delen
  van je website (zoals een extern programma voor
  statistieken, bijvoorbeeld) te beperken voor de auteurs en
  beheerders.<p />
- Als je dat soort externe programma\'s niet in gebruik
- hebt, kan je optie op haar standaardwaarde (geen
- bestanden aanmaken) laten staan.',
+Als u geen nut ervan hebt, kunt u deze keuze
+ laten  aan zijn waarde per gebrek (niet een oprichting
+  bestanden).',
 'texte_informations_personnelles_1' => 'Nu zal het systeem een persoonlijke toegang tot de site voor u cre&euml;ren.',
 'texte_informations_personnelles_2' => '(Nota : als het herinstallatie betreft,  en je toegangscode blijkt nog steeds te werken, kan je',
 'texte_introductif_article' => '(Inleidende tekst op het artikel.)',
@@ -1020,7 +1020,7 @@ artikel of afzonderlijk getoond worden.<p />',
 'texte_login_precaution' => 'Opgelet! Met deze login ben je momenteel aangemeld.
  Gebruik dit formulier met de nodige voorzichtigheid...',
 'texte_message_edit' => 'Opgelet: dit bericht kan door elke beheerder van de site gewijzigd worden en is zichtbaar voor elke redacteur. Maak enkel gebruik van deze aankondigingen om belangrijk nieuws in verband met de site kenbaar te maken.',
-'texte_messagerie_agenda' => '<NEW>Une messagerie permet aux r&#233;dacteurs du site de communiquer entre eux directement dans l&#8217;espace priv&#233; du site. Elle est associ&#233;e &#224; un agenda.',
+'texte_messagerie_agenda' => 'Een besteldienst laat de redacteuren van de site toe om tussen hen direct in de particuliere ruimte van de plaats mee te delen. Zij wordt verenigd met een agenda.',
 'texte_messages_publics' => 'Publieke berichten van dit artikel :',
 'texte_mise_a_niveau_base_1' => 'Je hebt zonet de SPIP bestanden vernieuwd. Nu dien je
  eveneens de databank te updaten.',
@@ -1091,7 +1091,7 @@ artikel of afzonderlijk getoond worden.<p />',
 Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de structuur van de site hebt veranderd.
  De nieuwste pagina\'s worden dan getoond en de buffer wordt opnieuw opgebouwd.',
 'texte_sur_titre' => 'opschrift',
-'texte_syndication' => '<MODIF>Het is mogelijk om van een site automatisch een lijst met
+'texte_syndication' => 'Het is mogelijk om van een site automatisch een lijst met
  nieuws, als de website het toelaat, binnen te halen.
  Hiervoor dien je de syndicatie (nieuwsovername) te
  activeren. <blockquote><i>Sommige hostingproviders laten
@@ -1115,15 +1115,15 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
  scherm verschijnen.',
 'texte_trop_resultats_auteurs' => 'Teveel resultaten voor "@cherche_auteur@" ; gelieve de zoekopdracht te verfijnen.',
 'texte_unpack' => 'binnenhalen van de laatste versie',
-'texte_utilisation_moteur_syndiques' => '<MODIF>Wanneer u de ge&iuml;ntegreerdeb de zoekmotor van
+'texte_utilisation_moteur_syndiques' => 'Wanneer u de ge&iuml;ntegreerdeb de zoekmotor van
  SPIP, kunt u het onderzoek naar de site en
  instellen    de georganiseerde artikelen op twee wijze
-    verschillend. <br />- De meest eenvoudige
- manier bestaat erin om alleen te zoeken in titels en
+    verschillend. <br />- De meest
+ eenvoudige manier bestaat erin om alleen te zoeken in titels en
  beschrijvingen van de artikels. <br />-
  Een andere methode is veel krachtiger en laat
- eveneens toe op de tekst van de gekoppelde sites te zoeken&nbsp;.
- Als je een site hebt gekoppeld, zal SPIP de zoekopdracht
+ eveneens toe op de tekst van de gekoppelde sites te zoeken&nbsp;. Als je
+ een site hebt gekoppeld, zal SPIP de zoekopdracht
  uitbreiden tot de tekst van deze site zelf.',
 'texte_utilisation_moteur_syndiques_2' => 'Deze methode verplicht SPIP om de gekoppelde
  site regelmatig te bezoeken, wat een kleine
@@ -1143,16 +1143,16 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'titre_cadre_interieur_rubrique' => 'In de rubriek',
 'titre_cadre_numero_auteur' => 'AUTEUR NUMMER',
 'titre_cadre_signature_obligatoire' => '<b>Handtekening</b> [Verplicht]<br />',
-'titre_compacter_script_css' => '<NEW>Compactage des scripts et CSS',
-'titre_compresser_flux_http' => '<NEW>Compression du flux HTTP',
-'titre_config_contenu_notifications' => '<NEW>Notifications',
-'titre_config_contenu_prive' => '<NEW>Dans l&#8217;espace priv&#233;',
-'titre_config_contenu_public' => '<NEW>Sur le site public',
+'titre_compacter_script_css' => 'Verdichting van de scripts en CSS',
+'titre_compresser_flux_http' => 'Samendrukking van de HTTP stroom',
+'titre_config_contenu_notifications' => 'Kennisgevingen',
+'titre_config_contenu_prive' => 'In de particuliere ruimte',
+'titre_config_contenu_public' => 'Op de openbare site',
 'titre_config_fonctions' => 'Configuratie van de site',
-'titre_config_forums_prive' => '<NEW>Forums de l&#8217;espace priv&#233;',
+'titre_config_forums_prive' => 'Forums van de particuliere ruimte',
 'titre_config_groupe_mots_cles' => 'Configuratie van de groepen trefwoorden',
 'titre_configuration' => 'Configuratie van de site',
-'titre_conflit_edition' => '<NEW>Conflit lors de l\'&#233;dition',
+'titre_conflit_edition' => 'Conflict bij de uitgave',
 'titre_connexion_ldap' => 'Opties: <b>Je LDAP-verbinding</b>',
 'titre_dernier_article_syndique' => 'Meest recente gesyndiceerde artikels',
 'titre_documents_joints' => 'Bijlagen',
@@ -1165,7 +1165,7 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'titre_langue_rubrique' => 'TAAL VAN DE RUBRIEK',
 'titre_langue_trad_article' => 'TAAL EN VERTALINGEN VAN HET ARTIKEL',
 'titre_les_articles' => 'ARTIKELS',
-'titre_messagerie_agenda' => '<NEW>Messagerie et agenda',
+'titre_messagerie_agenda' => 'Besteldienst en agenda',
 'titre_mots_cles_dans_forum' => 'Trefwoorden in de forums van de publieke site',
 'titre_mots_tous' => 'Trefwoorden',
 'titre_naviguer_dans_le_site' => 'Bezoek de site...',
@@ -1197,7 +1197,7 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'titre_page_recherche' => 'Zoekresultaat voor @recherche@ ',
 'titre_page_sites_tous' => 'De referentiesites',
 'titre_page_statistiques' => 'Statistieken per rubriek',
-'titre_page_statistiques_messages_forum' => '<NEW>Messages de forum',
+'titre_page_statistiques_messages_forum' => 'Berichten van forum',
 'titre_page_statistiques_referers' => 'Statistieken (per referer)',
 'titre_page_statistiques_signatures_jour' => 'Aantal handtekeningen per dag',
 'titre_page_statistiques_signatures_mois' => 'Aantal handtekeningen per maand',
