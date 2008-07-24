@@ -95,7 +95,7 @@ function action_legender_auteur_post($statut, $nom, $email, $bio, $nom_site_aute
 			if (strlen($new_login) < _LOGIN_TROP_COURT)
 				$echec[]= 'info_login_trop_court';
 			else {
-				$n = sql_countsel('spip_auteurs', "login=" . sql_quote($new_login) . " AND id_auteur!=$id_auteur AND statut!='5poubelle'");
+				$n = sql_countsel('spip_auteurs', "login=" . sql_quote($new_login) . " AND id_auteur!=".sql_quote($id_auteur)." AND statut!='5poubelle'");
 				if ($n)
 					$echec[]= 'info_login_existant';
 				else if ($new_login != $auteur['login']) {
