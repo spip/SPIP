@@ -51,13 +51,12 @@ table.spip {} /*Cf.: spip_style.css*/
 /*  ------------------------------------------ */
 body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 
-#page { width: 58em; margin: 0 auto; text-align: left; }
+#page { position: relative; width: 58em; margin: 0 auto; text-align: left; }
 
-#top { margin: 0; padding-top: 1em; border-bottom: 1px solid #8B6F92; }
-#top a { display: block; float: left; width: 67%; }
+#top { width: 58em; margin: 0; padding-top: 1em; border-bottom: 1px solid #8B6F92; }
 #top #nom_site_spip, #top a .spip_logos { font-size: 2em; font-family: Georgia, Times, serif; }
-#top #formulaire_recherche { float: right; width: 30%; text-align: right; }
-#top #formulaire_recherche input.text { margin-bottom: 0.30em; width: 12em; text-align: left; }
+#top #formulaire_recherche { position: absolute; right: 0; top: 1em; text-align: right; }
+#top #formulaire_recherche input.text { width: 12em; text-align: left; }
 
 #conteneur { clear: both; float: left; width: 67%; overflow: hidden; }
 #contenu { padding-top: 0.30em; }
@@ -179,7 +178,7 @@ ul .forum-message.on {border:2px solid #666;background:#eee;}
 
 /* Listes d'articles et extraits introductifs */
 .articles ul li { clear: both; padding: 0.40em 0.20em; }
-.articles ul li h3 { margin: 0 0 0.30em 0; }
+.articles ul li h3 { margin: 0.30em 0; }
 .articles .spip_logos { float: right; clear: right; margin: 0 0 4px 16px; }
 .articles ul li .enclosures { float: right; text-align: right; max-width: 60%; margin: 0; }
 .articles ul li .introduction { margin-top: 0.30em; line-height: 1.40em; }
