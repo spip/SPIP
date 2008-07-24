@@ -462,7 +462,7 @@ function statistiques_nom_des_mois($date_debut, $date_today, $largeur, $pas, $ag
 }
 
 // http://doc.spip.org/@statistiques_par_mois
-function statistiques_par_mois($entrees, $script){
+function statistiques_par_mois($entrees, $script, $table=''){
 
 	$maxgraph = maxgraph(max($entrees));
 	$rapport = 200/$maxgraph;
@@ -472,7 +472,7 @@ function statistiques_par_mois($entrees, $script){
 	$decal = 0;
 	$tab_moyenne = array();
 
-	$table = '';
+	$all = '';
 
 	while (list($key, $value) = each($entrees)) {
 		$mois = affdate_mois_annee($key);
@@ -520,7 +520,7 @@ function statistiques_par_mois($entrees, $script){
 		}
 		if ($script)
 			$res = "<a href='$script&amp;date=$key' title='$title'>$res</a>";
-		$table .= "\n<td style='width: ${largeur}px'>"
+		$all .= "\n<td style='width: ${largeur}px'>"
 		  . $res
 		  . http_img_rien($largeur,1,'trait_bas', $tagtitle)
 		  ."</td>\n";
@@ -531,7 +531,7 @@ function statistiques_par_mois($entrees, $script){
 	.  "\n<td ".http_style_background("fond-stats.gif").">"
 	. "\n<table cellpadding='0' cellspacing='0' border='0' class='bottom'><tr>"
 	. "\n<td class='trait_bas'>" . http_img_rien(1, 200) ."</td>"
-	.  $table
+	.  $all
 	. "\n<td style='background-color: black'>" . http_img_rien(1, 1)
 	. "</td>"
 	. "</tr></table></td>"
@@ -541,6 +541,7 @@ function statistiques_par_mois($entrees, $script){
 	. "\n<td valign='top'>"
 	. statistiques_echelle($maxgraph)
 	. "</td></tr></table>"
+	. (!$table ? '' : statistiques_mode($table))
 ;
  }
 
@@ -593,7 +594,7 @@ function statistiques_signatures_dist($duree, $interval, $type, $id_article, $se
 	. (!$mois ? '' : (
 	  "<br />"
 	. gros_titre(_T('titre_page_statistiques_signatures_mois'),'', false)
-	. statistiques_par_mois($mois, $script)));
+	. statistiques_par_mois($mois, $script, $res ? '' : "spip_signatures")));
 }
 
 // http://doc.spip.org/@statistiques_forums_dist
@@ -633,7 +634,7 @@ function statistiques_mode($table)
 {
 	$csv = parametre_url(parametre_url(self(), 'table', $table), 'format', 'csv');
 
-	return "\n<div style='text-align:".$GLOBALS['spip_lang_right'] . ";' class='verdana1 spip_x-small'>"
+	return "\n<div style='text-align:".$GLOBALS['spip_lang_left'] . ";' class='verdana1 spip_x-small'>"
 		. "<a href='"
 		. $csv
 	  	. "'>CSV</a>"
