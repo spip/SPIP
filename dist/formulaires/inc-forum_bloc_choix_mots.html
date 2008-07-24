@@ -2,7 +2,7 @@
 <BOUCLE_G(GROUPES_MOTS)	{tables_liees==#GET{table}}>
 [(#ID_GROUPE|in_any{#ENV**{ajouter_groupe},' '})
 	<fieldset>
-	<p class='legend'><:mots_clefs:> : #TITRE</p>
+	<legend><:mots_clefs:> : #TITRE</legend>
 		<INCLURE{fond=formulaires/inc-choix_mots}{id_groupe}{ajouter_mot}{unseul}>
 	</fieldset>
 ]</BOUCLE_G>
