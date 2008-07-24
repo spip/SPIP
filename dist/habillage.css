@@ -7,12 +7,14 @@
 /* 	Typographie generale (style transversaux)
 /*  ------------------------------------------ */
 html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-de-polices-en-CSS */
-body { font-size: 0.80em; font-family: "Trebuchet MS", Helvetica, sans-serif; color: #333; }
+body { font-size: 0.8125em; font-family: "Trebuchet MS", Helvetica, sans-serif; color: #333; }
 
 /* Titraille / Intertitres */
-h1 { margin: 0; padding: 0; font-size: 1.50em; font-weight: bold; color: #000; }
-h2 { margin: 0; padding: 0.20em 0.40em; background: #8B6F92; font-size: 1.20em; font-weight: bold; }
-h2, h2 a, h2 a:hover { color: #EEE; }
+h1,h2,h3,h4,h5,h6 { margin: 0; padding: 0; font-weight: normal; font-size: 1em; font-family: Georgia, Times, serif; }
+h1 { font-size: 1.70em; color: #000; }
+h2 { font-size: 1.40em; font-weight: normal; font-family: Georgia, Times, serif; }
+h2, h2 a, h2 a:hover { color: #000033; }
+h3 { font-size: 1.30em; font-weight: bold; }
 h3.spip {} /*Cf.: spip_style.css*/
 
 /* Divers */
@@ -49,19 +51,22 @@ table.spip {} /*Cf.: spip_style.css*/
 /*  ------------------------------------------ */
 body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 
-div#page { width: 780px; margin: 0 auto; text-align: left; }
+#page { width: 58em; margin: 0 auto; text-align: left; }
 
-div#top { width: 780px; margin: 0; padding-top: 1em; border-bottom: 2px solid #8B6F92; }
-div#top #nom_site_spip, #top a .spip_logos { display: block; float: left; font-weight: bold; font-size: 1.50em; }
+#top { margin: 0; padding-top: 1em; border-bottom: 1px solid #8B6F92; }
+#top a { display: block; float: left; width: 67%; }
+#top #nom_site_spip, #top a .spip_logos { font-size: 2em; font-family: Georgia, Times, serif; }
+#top #formulaire_recherche { float: right; width: 30%; text-align: right; }
+#top #formulaire_recherche input.text { margin-bottom: 0.30em; width: 12em; text-align: left; }
 
-div#conteneur { clear: both; float: left; width: 67%; overflow: hidden; }
-div#contenu { padding-top: 0.30em; }
+#conteneur { clear: both; float: left; width: 67%; overflow: hidden; }
+#contenu { padding-top: 0.30em; }
 
-div#navigation { float: right; width: 30%; overflow: hidden; }
-div#extra { float: right; clear: right; width: 30%; overflow: hidden; }
+#navigation { float: right; width: 30%; margin-top: 1em; overflow: hidden; }
+#extra { float: right; clear: right; width: 30%; margin-top: 1em; overflow: hidden; }
 
-div#pied { clear: both; width: 100%; margin: 0; padding: 0.40em 0; border-top: 1px solid #8B6F92; text-align: center; font-size: 0.90em; }
-div#pied img { vertical-align: bottom; }
+#pied { clear: both; width: 100%; margin: 0; padding: 0.40em 0; border-top: 1px solid #8B6F92; text-align: center; font-size: 0.92em; }
+#pied img { vertical-align: bottom; }
 
 /* Espaceur de blocs */
 .nettoyeur { clear: both; height: 0; margin: 0; padding: 0; border: 0; line-height: 1px; font-size: 1px; }
@@ -70,7 +75,7 @@ div#pied img { vertical-align: bottom; }
 .invisible { position: absolute; top: -3000em; height: 1%; }
 
 /* Affichage pour les petits ecrans (type 400 x 300) */
-@media handheld { div#page, div#conteneur, div#navigation, div#extra { width: auto; } }
+@media handheld { #page, #conteneur, #navigation, #extra { width: auto; } }
 
 
 /*  ------------------------------------------
@@ -80,7 +85,7 @@ div#pied img { vertical-align: bottom; }
 #hierarchie { clear: both; margin-bottom: 2em; font-size: 0.90em; }
 #hierarchie, #hierarchie a { color: #666; }
 
-.surtitre, .soustitre { font-size: 0.90em; color: #999; }
+.surtitre, .soustitre { font-size: 0.90em; color: #666; text-transform: uppercase; letter-spacing: 0.1em; }
 
 .cartouche { margin-bottom: 2em; }
 .cartouche .spip_logos { float: right; margin-left: 16px; margin-bottom: 4px; }
@@ -159,9 +164,9 @@ ul .forum-message.on {border:2px solid #666;background:#eee;}
 /* Habillage general des menus de navigation */
 .menu { clear: both; margin-bottom: 2em; text-align: left; }
 .menu p { margin: 0.20em 0; padding: 0.20em 0.10em; }
-.menu ul { margin: 0; padding: 0; list-style: none; }
-.menu ul li { margin: 0.20em 0; padding: 0.20em; border-bottom: 1px solid #DDD; }
-.menu ul li ul { margin-left: 1em; }
+.menu ul { margin: 0; padding: 0; list-style: none; border-bottom: 1px solid #DDD; }
+.menu ul li { margin: 0.20em 0; padding: 0.20em; border-top: 1px solid #DDD; }
+.menu ul li ul { margin-left: 1em; border: 0; }
 .menu ul li li { padding: 0; border: 0; }
 
 /* Pagination */
@@ -169,11 +174,12 @@ ul .forum-message.on {border:2px solid #666;background:#eee;}
 .pagination .on { font-weight: bold; color: #666; }
 
 /* Rubriques */
+.rubriques ul { border: 0; }
 .rubriques ul li { background: #EEE; border: 0; }
 
 /* Listes d'articles et extraits introductifs */
 .articles ul li { clear: both; padding: 0.40em 0.20em; }
-.articles ul li h3 { margin: 0.40em 0; padding: 0; }
+.articles ul li h3 { margin: 0 0 0.30em 0; }
 .articles .spip_logos { float: right; clear: right; margin: 0 0 4px 16px; }
 .articles ul li .enclosures { float: right; text-align: right; max-width: 60%; margin: 0; }
 .articles ul li .introduction { margin-top: 0.30em; line-height: 1.40em; }

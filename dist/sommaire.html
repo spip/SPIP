@@ -19,7 +19,7 @@
 	<div class="hfeed" id="conteneur">
 	<div id="contenu">
 		
-		<div class="cartouche">
+		<div class="cartouche invisible">
 			<h1 class="invisible">#NOM_SITE_SPIP</h1>
 		</div>
 		
@@ -60,7 +60,6 @@
 		<B_forums_liens>
 		<div class="menu">
 			<h2><:derniers_commentaires:></h2>
-			<p><:messages_recents:></p>
 			<ul>
 				<BOUCLE_forums_liens(FORUMS) {plat} {par date}{inverse} {0,8}>
 				<li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_FORUM"[ title="(#TITRE|couper{60}|texte_backend)"]>[(#TEXTE|couper{80})]</a></li>
