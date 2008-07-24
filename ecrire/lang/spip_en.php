@@ -364,7 +364,7 @@ Thank you for your participation!
 'icone_tous_articles' => 'All your articles',
 'icone_tous_auteur' => 'All the authors',
 'icone_valider_message' => 'Validate this message',
-'icone_visiter_site' => 'Visit the site',
+'icone_visiter_site' => 'Visit',
 'icone_voir_en_ligne' => 'View online',
 'image_tourner_180' => 'Rotate 180&deg;',
 'image_tourner_droite' => 'Rotate 90&deg; right',
