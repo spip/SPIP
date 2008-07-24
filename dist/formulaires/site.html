@@ -10,17 +10,17 @@
 		<ul>
 			<li class='saisie_nom_site obligatoire[ (#ENV*{erreurs}|table_valeur{nom_site}|oui)erreur]'>
 				<label for="nom_site"><:form_prop_nom_site:></label>
-				[<span class="erreur">(#ENV*{erreurs}|table_valeur{nom_site})</span>]
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{nom_site})</span>]
 				<input type="text" class="text" name="nom_site" id="nom_site" value="#ENV{nom_site}" size="30" />
 			</li>
 			<li class='saisie_url_site[ (#ENV*{erreurs}|table_valeur{url_site}|oui)erreur]'>
 				<label for="url_site"><:form_prop_url_site:></label>
-				[<span class="erreur">(#ENV*{erreurs}|table_valeur{url_site})</span>]
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{url_site})</span>]
 				<input type="text" class="text" name="url_site" id="url_site" value="#ENV{url_site}" size="30" />
 			</li>
 			<li class='saisie_description_site[ (#ENV*{erreurs}|table_valeur{description_site}|oui)erreur]'>
 				<label for="description_site"><:form_prop_description:></label>
-				[<span class="erreur">(#ENV*{erreurs}|table_valeur{description_site})</span>]
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{description_site})</span>]
 				<textarea name="description_site" id="description_site" rows="6" cols="60">#ENV{description_site}</textarea>
 			</li>
 		</ul>

@@ -14,12 +14,12 @@
 		<ul>
 			<li class='saisie_nom_inscription obligatoire[ (#ENV*{erreurs}|table_valeur{nom_inscription}|oui)erreur]'>
 				<label for="nom_inscription"><:form_pet_votre_nom:></label>
-				[<span class="erreur">(#ENV*{erreurs}|table_valeur{nom_inscription})</span>]
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{nom_inscription})</span>]
 				<input type="text" class="text" name="nom_inscription" id="nom_inscription" value="#ENV{nom_inscription}" size="30" />
 			</li>
 			<li class='saisie_mail_inscription obligatoire[ (#ENV*{erreurs}|table_valeur{mail_inscription}|oui)erreur]'>
 				<label for="mail_inscription"><:form_pet_votre_email:></label>
-				[<span class="erreur">(#ENV*{erreurs}|table_valeur{mail_inscription})</span>]
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{mail_inscription})</span>]
 				<input type="text" class="text" name="mail_inscription" id="mail_inscription" value="#ENV{mail_inscription}" size="30" />
 			</li>
 		</ul>
