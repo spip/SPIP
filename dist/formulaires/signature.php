@@ -289,6 +289,10 @@ function signature_a_confirmer($id_article, $url_page, $nom, $mail, $site, $url,
 		AND strlen($GLOBALS['visiteur_session']['session_email'])
 		)
 	) {
+		// Si on est en ajax on demande a reposter sans ajax, car il faut
+		// recharger toute la page pour afficher la signature
+		refuser_traiter_formulaire_ajax();
+
 		$statut = 'publie';
 		// invalider le cache !
 		include_spip('inc/invalideur');
@@ -297,11 +301,7 @@ function signature_a_confirmer($id_article, $url_page, $nom, $mail, $site, $url,
 		// message de reussite : en ajax, preciser qu'il faut recharger la page
 		// pour voir le resultat
 		return
-			_T('form_pet_signature_validee')
-			. (_AJAX
-				? "<br />"._T('ecrire:info_recharger_page')
-				: ''
-			);
+			_T('form_pet_signature_validee');
 	}
 
 
