@@ -92,26 +92,36 @@ jQuery.fn.positionner = function() {
 jQuery.fn.formulaire_dyn_ajax = function(target) {
   return this.each(function() {
 	var cible = target || this;
-	jQuery('form:not(.noajax)', this)
-	.prepend("<input type='hidden' name='var_ajax' value='form' />")
-	.ajaxForm({
-		beforeSubmit: function(){
-			jQuery(cible).addClass('loading').animeajax();
-		},
-		success: function(c){
-			var d = jQuery('div.ajax',
-				jQuery('<div><\/div>').html(c));
-			if (d.length)
-				c = d.html();
-			jQuery(cible)
-			.removeClass('loading')
-			.html(c)
-			.positionner();
-		},
-		iframe: jQuery.browser.msie
-	})
-	.addClass('noajax') // previent qu'on n'ajaxera pas deux fois le meme formulaire en cas de ajaxload
-	;
+		jQuery('form:not(.noajax)', this).each(function(){
+		var leform = this;
+		jQuery(this).prepend("<input type='hidden' name='var_ajax' value='form' />")
+		.ajaxForm({
+			beforeSubmit: function(){
+				jQuery(cible).addClass('loading').animeajax();
+			},
+			success: function(c){
+				if (c=='noajax'){
+					// le serveur ne veut pas traiter ce formulaire en ajax
+					// on resubmit sans ajax
+					jQuery("input[@name=var_ajax]",leform).remove();
+					jQuery(leform).ajaxFormUnbind().submit();
+				}
+				else {
+					var d = jQuery('div.ajax',
+						jQuery('<div><\/div>').html(c));
+					if (d.length)
+						c = d.html();
+					jQuery(cible)
+					.removeClass('loading')
+					.html(c)
+					.positionner();
+				}
+			},
+			iframe: jQuery.browser.msie
+		})
+		.addClass('noajax') // previent qu'on n'ajaxera pas deux fois le meme formulaire en cas de ajaxload
+		;
+		});
   });
 }
 

@@ -74,6 +74,21 @@ function init_var_mode(){
 	}
 }
 
+function refuser_traiter_formulaire_ajax(){
+	if ($v=_request('var_ajax')
+	  AND $v=='form'
+		AND $form = _request('formulaire_action')
+		AND $args = _request('formulaire_action_args')
+		AND decoder_contexte_ajax($args,$form)!==false) {
+		// on est bien dans le contexte de traitement d'un formulaire en ajax
+		// mais traiter ne veut pas
+		// on le dit a la page qui va resumbit
+		// sans ajax
+		include_spip('inc/actions');
+		ajax_retour('noajax',false);
+		exit;
+	}
+}
 // http://doc.spip.org/@traiter_formulaires_dynamiques
 function traiter_formulaires_dynamiques(){
 	static $done = false;
