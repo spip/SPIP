@@ -38,6 +38,7 @@ dist/polices/dustismo.ttf -text
 dist/polices/dustismo_bold.ttf -text
 dist/puce.gif -text
 dist/puce_rtl.gif -text
+dist/rechercher.gif -text
 dist/rechercher.png -text
 dist/spip.png -text
 dist/spip_formulaires.css -text
