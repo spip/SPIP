@@ -308,21 +308,21 @@ function sql_errno($serveur='', $option=true) {
 
 // http://doc.spip.org/@sql_explain
 function sql_explain($q, $serveur='', $option=true) {
-	$f = sql_serveur('explain', $serveur, true, $continue = $option==='continue' OR $option===false);
+	$f = sql_serveur('explain', $serveur, $continue = $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
 	return @function_exists($f) ? $f($q, $serveur, $option!==false) : false;
 }
 
 // http://doc.spip.org/@sql_optimize
 function sql_optimize($q, $serveur='', $option=true) {
-	$f = sql_serveur('optimize', $serveur, true, $continue = $option==='continue' OR $option===false);
+	$f = sql_serveur('optimize', $serveur, $continue = $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
 	return @function_exists($f) ? $f($q, $serveur, $option!==false) : false;
 }
 
 // http://doc.spip.org/@sql_repair
 function sql_repair($q, $serveur='', $option=true) {
-	$f = sql_serveur('repair', $serveur, true, $continue = $option==='continue' OR $option===false);
+	$f = sql_serveur('repair', $serveur, $continue = $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
 	return @function_exists($f) ? $f($q, $serveur, $option!==false) : false;
 }
