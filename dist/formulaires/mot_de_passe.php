@@ -36,12 +36,12 @@ function formulaires_mot_de_passe_charger_dist($id_auteur=null){
 
 	if ($id_auteur){
 		$valeurs['id_auteur'] = $id_auteur; // a toutes fins utiles pour le formulaire
-		return $valeurs;
 	}
 	else {
 		$valeurs['_hidden'] = _T('pass_erreur_code_inconnu');
-		return false; // pas de saisie
+		$valeurs['editable'] =  false; // pas de saisie
 	}
+	return $valeurs;
 }
 
 /**

@@ -78,21 +78,18 @@ function balise_FORMULAIRE__dyn($form)
 			'args'=>array('form'=>$form,'args'=>$args),
 			'data'=>$valeurs)
 	);
-	if ($valeurs===false) {
-		// pas de saisie
-		$editable = false;
-		$valeurs = array();
+	// reperer les valeurs particulieres editable, message_ok et message_erreur
+	if (isset($valeurs['editable'])){
+		$editable = $valeurs['editable'];
+		unset($valeurs['editable']);
 	}
-	elseif(
-		is_array($valeurs)
-	 && ($keys = array_keys($valeurs))
-	 && (is_numeric(reset($keys)) && is_numeric(end($keys)))
-	 && ((reset($valeurs)===true) OR (reset($valeurs)===false))
-	 && (count($valeurs)==2)) {
-	 $editable = reset($valeurs);
-	 $valeurs = end($valeurs);
+	foreach(array('message_ok','message_erreur') as $k){
+		if (isset($valeurs[$k])){
+			if (!$je_suis_poste) $$k = $valeurs[$k];
+			unset($valeurs[$k]);
+		}
 	}
-
+	
 	$action = self();
 	// recuperer la saisie en cours si erreurs
 	// seulement si c'est ce formulaire qui est poste

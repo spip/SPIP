@@ -30,10 +30,9 @@ function formulaires_signature_charger_dist($id_article, $petition, $texte, $sit
 
 	if ($c = _request('var_confirm')) {
 		$valeurs['_confirm'] = $c;
-		return array(false /* pas editable */, $valeurs);
+		$valeurs['editable'] = false;
 	}
-	else
-		return $valeurs;
+	return $valeurs;
 }
 function affiche_reponse_confirmation($confirm) {
 	$reponse_confirmation = charger_fonction('reponse_confirmation','formulaires/signature/');
