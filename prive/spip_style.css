@@ -1,28 +1,26 @@
-/* SPIP-STYLE                                              version 1.9  */
+/* SPIP-STYLE                                                           */
 /* Cette feuille contient les styles associes au code genere par SPIP.  */
 /* Ces styles sont indispensables et doivent necessairement etre        */
 /* definis pour le bon fonctionnement de vos squelettes.                */
 
 
 /* Intertitre */
-h3.spip { text-align: center; margin-top: 2em; margin-bottom: 1.4em; font-size: 1.15em; font-weight: bold;font-family: Georgia, Times, serif; }
-hr.spip { margin: 2em auto; border-style: solid; }
+h3.spip { text-align: center; margin-top: 2em; margin-bottom: 1.4em; font-size: 1.15em; font-weight: bold; font-family: Georgia, Times, serif; }
+hr.spip { margin: 2em auto; }
 
 /* Listes SPIP */
-.spip_puce { list-style-position: outside; }
 ul.spip {}
 ol.spip { list-style: decimal; }
 li.spip {}
 
 /* Citations, code et poesie */
-.spip_serif { font-family: Georgia, Times, serif; }
-blockquote.spip { margin: 1em 3em; padding-left: 1em; border-left: 0.40em solid; }
-blockquote.spip_poesie { margin: 2em 3em; padding-left: 1em; border-left: 0.10em solid; font-family: Garamond, Georgia, Times, serif; }
+blockquote.spip { margin: 2em 0; padding-left: 1em; border-left: 0.30em solid; }
+blockquote.spip_poesie { margin: 2em 0; padding-left: 1em; border-left: 1px solid; font-family: Garamond, Georgia, Times, serif; }
 blockquote.spip_poesie div { text-indent: -3em; margin-left: 3em; }
 
 .spip_code, .spip_cadre { font-family: "Courier New", Courier, mono; color: #009; }
 .spip_cadre { width: 99%; background-color: #F4F8F8; border: 1px inset; }
-div.spip_code, .spip_cadre { margin-bottom: 1em; }
+div.spip_code, .spip_cadre { margin-bottom: 1em;  }
 
 .spip_surligne { background: #FF6; }
 
@@ -43,19 +41,13 @@ img, .spip_logos { margin: 0; padding: 0; border: 0; }
 .spip_documents_center { display: block; clear: both; width: 100%; margin: 1em auto; }
 .spip_documents_left { float: left; margin-right: 15px; margin-bottom: 5px; }
 .spip_documents_right { float: right; margin-left: 15px; margin-bottom: 5px; }
-.spip_doc_titre { font-weight: bold; font-size: 0.90em; margin-right: auto; margin-left: auto; }
-.spip_doc_descriptif { clear: both; font-size: 0.90em; margin-right: auto; margin-left: auto; }
+.spip_doc_titre { margin-right: auto; margin-left: auto; font-weight: bold; font-size: 0.90em; }
+.spip_doc_descriptif { clear: both; margin-right: auto; margin-left: auto; font-size: 0.90em; }
 
 /* modeles par defaut */
-.spip_modele { float: right; display: block; border: 1px dotted; width: 180px; }
+.spip_modele { float: right; display: block; padding: 1em; border: 1px solid; width: 180px; }
 
-/* Barre de raccourcis typographiques */
-table.spip_barre { width: 100%; }
-table.spip_barre a img { background: #FDA; padding: 3px; border: 1px outset #CC9; }
-table.spip_barre a:hover img { background: #FFF; border: 1px solid #CC9; }
-table.spip_barre input.barre { width: 99%; background: transparent; border: 0; color: #F57900; }
-
-/* * Couleurs des liens de SPIP */
+/* Couleurs des liens de SPIP */
 a.spip_note {} /* liens vers notes de bas de page */
 a.spip_ancre {} /* liens internes a la page */
 a.spip_in { color: #900; } /* liens internes */
