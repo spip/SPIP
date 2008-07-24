@@ -1,25 +1,23 @@
-<div class="formulaire_spip formulaire_oubli">[
-(#ENV*{message_erreur})
-][
-(#ENV*{message_ok})
-][
-(#ENV*{editable}|?{' '})
-
+<div class="formulaire_spip formulaire_oubli">
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[(#ENV*{editable}|?{' '})
 <form id="oubli_form" action="[(#ENV{action})]" method="post">
 	[(#REM) activer le traitement auto et dispatch sur charger/verifier/traiter]
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<fieldset>
-	<legend><:pass_nouveau_pass:></legend><ul>
-  <li class="saisie_oubli obligatoire[ (#ENV*{erreurs}|table_valeur{oubli}|oui)erreur]">
-    <label for="oubli"><:form_pet_votre_email:></label>
-		[<span class='erreur'>(#ENV**{erreurs}|table_valeur{oubli})</span>]
-    <input type='text' name='oubli' id='oubli' value="#ENV**{oubli}" />
-  </li>
-	</ul></fieldset>
+		<legend><:pass_nouveau_pass:></legend>
+		<ul>
+			<li class="saisie_oubli obligatoire[ (#ENV*{erreurs}|table_valeur{oubli}|oui)erreur]">
+				<label for="oubli"><:form_pet_votre_email:></label>
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{oubli})</span>]
+				<input type='text' name='oubli' id='oubli' value="#ENV**{oubli}" />
+			</li>
+		</ul>
+	</fieldset>
 	[(#REM) Piege a robots spammeurs ]
-	<p style="display: none;"><label for="nobot"><:antispam_champ_vide:></label>
-	<input type="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" /></p>
-	<p class="boutons"><input type="submit" value="<:pass_ok:>" /></p>
+	<p style="display: none;"><label for="nobot"><:antispam_champ_vide:></label><input type="text" class="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" /></p>
+	<p class="boutons"><input type="submit" class="submit" value="<:pass_ok:>" /></p>
 </form>
 <script type='text/javascript'>/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
  document.getElementById('oubli').focus()
