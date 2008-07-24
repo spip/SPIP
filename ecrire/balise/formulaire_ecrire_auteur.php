@@ -28,26 +28,25 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_stat($args, $filtres) {
 	include_spip('inc/filtres');
 
 	// Pas d'id_auteur ni d'id_article ? Erreur de squelette
-	if (!$args[0] AND !$args[1])
+	$id = intval($args[1]);
+	if (!$args[0] AND !$id)
 		return erreur_squelette(
 			_T('zbug_champ_hors_motif',
 				array ('champ' => '#FORMULAIRE_ECRIRE_AUTEUR',
 					'motif' => 'AUTEURS/ARTICLES')), '');
 
-	// Si on est dans un contexte article, sortir tous les mails des auteurs
-	// de l'article
-	if (!$args[0] AND $args[1]) {
-		unset ($args[2]);
-		$s = sql_select('email',
-					  array('auteurs' => 'spip_auteurs',
-						'L' => 'spip_auteurs_articles'),
-					  array('auteurs.id_auteur=L.id_auteur',
-						'L.id_article='.intval($args[1])));
-		while ($row = sql_fetch($s)) {
-			if ($row['email'] AND email_valide($row['email']))
-				$args[2].= ','.$row['email'];
+	// Si on est dans un contexte article, 
+	// sortir tous les mails des auteurs de l'article
+	if (!$args[0] AND $id) {
+		$r = '';
+		$s = sql_allfetsel('email',
+				   'spip_auteurs AS A LEFT JOIN spip_auteurs_articles AS L ON A.id_auteur=L.id_auteur',
+				   "A.email != '' AND L.id_article=$id");
+		foreach($s as $row) {
+			if (email_valide($row['email']))
+				$r .= ','.$row['email'];
 		}
-		$args[2] = substr($args[2], 1);
+		$args[2] = substr($r, 1);
 	}
 
 	// On ne peut pas ecrire a un auteur dont le mail n'est pas valide
