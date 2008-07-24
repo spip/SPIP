@@ -86,23 +86,21 @@ function rss_suivi_versions($a) {
 
 // Suivi des forums
 // http://doc.spip.org/@rss_suivi_forums
-function rss_suivi_forums($a, $from, $where, $lien_moderation=false) {
-	$rss = array();
-	$result_forum = sql_select('*', $from, $where,'', "date_heure DESC", 20);
+function rss_suivi_forums($page, $from, $where, $lien_moderation=false) {
 
-	while ($t = sql_fetch($result_forum)) {
+	$rss = sql_allfetsel('*', $from, $where,'', "date_heure DESC", 20);
+
+	foreach ($rss as $k => $t) {
 		$item = array();
 		$item['title'] = typo($t['titre']);
-		if ($a['page'] == 'public'
-		AND $t['statut']<>'publie'
-		)
+		if ($page == 'public' AND $t['statut']<>'publie')
 			$item['title'] .= ' ('.$t['statut'].')';
 		$item['date'] = $t['date_heure'];
 		$item['author'] = typo($t['auteur']);
 		$item['email'] = $t['email_auteur'];
 
 		if ($lien_moderation)
-		  $item['url'] = generer_url_ecrire('controle_forum', 'type='.$a['page'] .'&debut_id_forum='.$t['id_forum']);
+		  $item['url'] = generer_url_ecrire('controle_forum', 'type='.$page .'&debut_id_forum='.$t['id_forum']);
 		else
 			$item['url'] = generer_url_forum($t['id_forum']);
 
@@ -115,9 +113,8 @@ function rss_suivi_forums($a, $from, $where, $lien_moderation=false) {
 		if ($t['nom_site'] OR vider_url($t['url_site']))
 			$item['description'] .= propre("\n- [".$t['nom_site']."->".$t['url_site']."]<br />");
 
-		$rss[] = $item;
+		$rss[$k] = $item;
 	}
-
 	return $rss;
 }
 
@@ -223,10 +220,9 @@ function rss_sites($critere) {
 }
 
 
-function rss_signatures($critere) {
-	$rss = array();
-	$s = sql_select("S.id_article AS id_article, A.titre AS titre, S.date_time AS date, S.nom_email AS nom, S.ad_email AS email, S.message AS texte, S.url_site AS chapo", "spip_signatures AS S LEFT JOIN spip_articles AS A ON S.id_article=A.id_article", "S.statut='publie'", "", "date DESC", "50");
-	while ($t = sql_fetch($s)) {
+function rss_signatures($a) {
+	$rss = sql_allfetsel("S.id_article AS id_article, A.titre AS titre, S.date_time AS date, S.nom_email AS nom, S.ad_email AS email, S.message AS texte, S.url_site AS chapo", "spip_signatures AS S LEFT JOIN spip_articles AS A ON S.id_article=A.id_article", "S.statut='publie'", "", "date DESC", "50");
+	foreach ($rss as $k => $t) {
 		$item = array(
 			'title' => typo($t['titre']),
 			'date' => $t['date'],
@@ -235,7 +231,7 @@ function rss_signatures($critere) {
 			'description' => propre(couper("{{".$t['chapo']."}}\n\n".$t['texte'],300)),
 			'url' => generer_url_article($t['id_article']));
 
-		$rss[] = $item;
+		$rss[$k] = $item;
 	}
 	return array('(' . _T('titre_suivi_petition') . ')',
 		     $rss,
@@ -246,34 +242,33 @@ function rss_signatures($critere) {
 function rss_forum($a)
 {
 	$a = rss_split_args($a);
+	$page = $a['page'];
 	include_spip('inc/forum');
 	if ($id = intval($a['id_article'])) {
-		$critere = "statut='publie' AND id_article=$id";
+		$rss = rss_suivi_forums($page, "spip_forum", "statut='publie' AND id_article=$id", false);
 		$title = sql_getfetsel('titre', "spip_articles", "id_article=$id");
 		$url = generer_url_article($id);
 	}
 	else if ($id = intval($a['id_syndic'])) {
-		$critere = "statut='publie' AND id_syndic=$id";
+		$rss = rss_suivi_forums($page, "spip_forum", "statut='publie' AND id_syndic=$id", false);
 		$title = sql_getfetsel("nom_site", "spip_syndic", "id_syndic=$id");
 		$url = generer_url_site($id);
 	}
 	else if ($id = intval($a['id_breve'])) {
-		$critere = "statut='publie' AND id_breve=$id";
-		$title = sql_getfetsel('titre', "spip_articles", "id_article=$id");
+		$rss = rss_suivi_forums($page, "spip_forum", "statut='publie' AND id_breve=$id", false);
+		$title = sql_getfetsel('titre', "spip_breves", "id_breve=$id");
 		$url = generer_url_breve($id);
 	}
 	else if ($id = intval($a['id_rubrique'])) {
-		$critere = "statut='publie' AND id_rubrique=$id";
-		$title = sql_getfetsel('titre', "spip_articles", "id_article=$id");
+		$rss = rss_suivi_forums($page, "spip_forum", "statut='publie' AND id_rubrique=$id", false);
+		$title = sql_getfetsel('titre', "spip_rubrique", "id_rubrique=$id");
 		$url = generer_url_rubrique($id);
 	}
 	else if ($id = intval($a['id_thread'])) {
-		$critere = "statut='publie' AND id_thread=$id";
-		$title = sql_getfetsel('titre', "spip_articles", "id_article=$id");
+		$rss = rss_suivi_forums($page, "spip_forum", "statut='publie' AND id_thread=$id", false);
+		$title = sql_getfetsel('titre', "spip_forum", "id_forum=$id");
 		$url = generer_url_forum($id);
-	}
-	if ($id) $rss = rss_suivi_forums($a, "spip_forum", $critere, false);
-
+	} else { $rss = array(); $url = $titre = '';}
 	$title .=  ' (' . _T("ecrire:titre_page_forum_suivi") .')';
 	return array($title, $rss, $url);
 }
@@ -282,11 +277,12 @@ function rss_forum($a)
 function  rss_forums($a)
 {
 	$a = rss_split_args($a);
+	$page = $a['page'];
 	include_spip('inc/forum');
-	list($f,$w) = critere_statut_controle_forum($a['page']);
-	$rss = rss_suivi_forums($a, $f, $w, true);
-	$title = _T("ecrire:titre_page_forum_suivi")." (".$a['page'].")";
-	$url = generer_url_ecrire('controle_forum', 'type='.$a['page']);
+	list($f,$w) = critere_statut_controle_forum($page);
+	$rss = rss_suivi_forums($page, $f, $w, true);
+	$title = _T("ecrire:titre_page_forum_suivi")." (".$page.")";
+	$url = generer_url_ecrire('controle_forum', 'type='.$page);
 	return array($title, $rss, $url);
 }
 
