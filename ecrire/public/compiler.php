@@ -305,7 +305,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 
 	$count = '';
 	if (!$boucle->select) {
-		if (!$boucle->numrows OR $boucle->limit OR $boucle_mode_partie)
+		if (!$boucle->numrows OR $boucle->limit OR $boucle_mode_partie OR $boucle->group)
 			$count = '1';
 		else $count = 'count(*)';
 		$boucles[$id_boucle]->select[]= $count; 
