@@ -62,7 +62,7 @@ function spip_connect($serveur='', $version='') {
 	$jeu = 'spip_' . $type .'_functions_' . $version;
 	if (!isset($GLOBALS[$jeu])) {
 		if (!find_in_path($type . '_' . $version . '.php', 'req/', true)){
-			spip_log("spip_connect: serveur $index version '$version' non defini par $jeu.");
+		  spip_log("spip_connect: serveur $index version '$version' non defini pour '$type'");
 			// ne plus reessayer 
 			return $connexions[$index][$version] = array();
 		}
