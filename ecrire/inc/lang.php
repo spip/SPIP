@@ -133,8 +133,7 @@ function select_langues($nom_select, $change, $options)
 	static $cpt = 0;
 	$id = "menu_langues" . $cpt++;
 	return
-		(test_espace_prive() ? ''
-		: "<label for='$id'>"._T('info_langues')."</label> ")
+		"<label for='$id'>"._T('info_langues')."</label> "
 		. "<select name='$nom_select' id='$id' "
 	  . ((!test_espace_prive()) ?
 	     ("class='forml menu_langues'") :
