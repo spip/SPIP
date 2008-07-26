@@ -131,7 +131,10 @@ function menu_langues($nom_select) {
 function select_langues($nom_select, $change, $options)
 {
 	static $cpt = 0;
-	return "<select name='$nom_select' id='menu_langues" . $cpt++ . "' "
+	$id = "menu_langues" . $cpt++;
+	return 
+		"<label for='$id'>"._T('info_langues')."</label> "
+		. "<select name='$nom_select' id='$id' "
 	  . ((!test_espace_prive()) ?
 	     ("class='forml menu_langues'") :
 	     (($nom_select == 'var_lang_ecrire')  ?

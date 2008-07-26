@@ -55,11 +55,6 @@ function install_etape_1_dist()
 			'<p>'
 					. _T('texte_connexion_mysql')
 			.'</p>'
-			.'<p>'
-			. _T('install_types_db_connus')
-			// Passer l'avertissement SQLIte en  commentaire, on pourra facilement le supprimer par la suite sans changer les traductions.
-			. "<br /><small>(". _T('install_types_db_connus_avertissement') .')</small>'
-			.'</p>'
 			);
 	echo install_connexion_form($db, $login, $pass, $predef, "\n<input type='hidden' name='chmod' value='$chmod' />", 2);
 	echo install_fin_html();

@@ -317,6 +317,11 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 		: ('<fieldset><legend>'
 		   ._T('install_select_type_db')
 		. "</legend>"
+			.'<label for="sql_serveur_db">'
+			. _T('install_types_db_connus')
+			// Passer l'avertissement SQLIte en  commentaire, on pourra facilement le supprimer par la suite sans changer les traductions.
+			. "<br /><small>(". _T('install_types_db_connus_avertissement') .')</small>'
+			.'</label>'		
 		. "\n<div style='text-align: center;'><select name='server_db' id='sql_serveur_db' >"
 		. ($mysql
 			? "\n<option value='mysql'>"._T('install_select_type_mysql')."</option>"
