@@ -358,8 +358,20 @@ function calculer_requete_sql(&$boucle)
 // http://doc.spip.org/@calculer_dec
 function calculer_dec($nom, $val)
 {
-  $dyn = (strpos($val, '$') !== false OR strpos($val, 'sql_') !== false);
-  return "\n\t" . ($dyn ? '' : 'static ') . $nom . ' = ' . $val . ';';
+	$static = "static ";
+  if (
+    strpos($val, '$') !== false 
+    OR strpos($val, 'sql_') !== false
+    OR (
+    	$test = str_replace(array("array(",'\"',"\'"),array("","",""),$val) // supprimer les array( et les echappements de guillemets
+    	AND strpos($test,"(")!==FALSE // si pas de parenthese ouvrante, pas de fonction, on peut sortir
+    	AND $test = preg_replace(",'[^']*',UimsS","",$test) // supprimer les chaines qui peuvent contenir des fonctions SQL qui ne genent pas
+    	AND preg_match(",\w+\s*\(,UimsS",$test,$regs) // tester la presence de fonctions restantes
+    )
+    ){
+    $static = "";
+  }
+  return "\n\t" . $static . $nom . ' = ' . $val . ';';
 }
 
 // http://doc.spip.org/@calculer_dump_array
