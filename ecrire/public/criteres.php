@@ -250,7 +250,8 @@ function critere_branche_dist($idb, &$boucles, $crit) {
 		$cle = trouver_jointure_champ('id_rubrique', $boucle);
 	} else $cle = $boucle->id_table;
 
-	$c = "calcul_branche_in($arg, '$cle'" . ($not ? ", 'NOT'" : '') . ')';
+	$c = "sql_in('$cle" . ".id_rubrique', calcul_branche_in($arg)"
+	  . ($not ? ", 'NOT'" : '') . ")";
 	$boucle->where[]= !$crit->cond ? $c :
 	  ("($arg ? $c : " . ($not ? "'0=1'" : "'1=1'") .')');
 }

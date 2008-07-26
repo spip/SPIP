@@ -308,19 +308,12 @@ function calcul_branche ($generation) {
 }
 
 // http://doc.spip.org/@calcul_branche_in
-function calcul_branche_in ($generation, $table='', $not='') {
-	if (!$generation) return ($not ? '0=1' : '0=0');
-	$branche = $generation;
-	while (1) {
-		$q = sql_select('id_rubrique', 'spip_rubriques', sql_in('id_parent', $generation));
-		$generation = '';
-		while ($r = sql_fetch($q)) 
-			$generation .= ',' .$r['id_rubrique'];
-		if (!$generation) break;
-		$branche .= $generation;
+function calcul_branche_in ($id) {
+	$branche = $id;
+	while ($id = sql_allfetsel('id_rubrique', 'spip_rubriques', sql_in('id_parent', $id))) {
+		$branche .= ',' . join(',', array_map('array_shift', $id));
 	}
-	$cle = (!$table ? '' : ($table . '.')) . "id_rubrique";
-	return sql_in($cle, $branche, $not);
+	return $branche;
 }
 
 // Appelee lorsqu'un (ou plusieurs) article post-date arrive a terme 
