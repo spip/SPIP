@@ -16,10 +16,12 @@ input, textarea, select { font-size: 100%; font-family: inherit; }
 
 /* Lignes */
 .formulaire_spip ul { margin: 0; padding: 0; list-style: none; }
-.formulaire_spip ul li { clear: both; margin: 0; padding: .5em 0; }
+.formulaire_spip ul li { clear: both; margin: 0; padding: 0.5em 0; }
+
+input.text { width: 15em; }
 
 /* Explications */
-.formulaire_spip .explication { margin: .5em 0; color: #444; }
+.formulaire_spip .explication { margin: 0.5em 0; color: #444; }
 
 /* Labels */
 .formulaire_spip label { text-align: left; color: #444; font-weight: bold; /* for IE */ position: relative; display: block; }
@@ -28,7 +30,7 @@ input, textarea, select { font-size: 100%; font-family: inherit; }
 /* Boutons */
 .formulaire_spip .boutons { clear: both; margin: 0; padding: 0; text-align: right; }
 .formulaire_spip .boutons input { margin-left: 1em; }
-.formulaire_spip .boutons input, input.submit { background-color: #8B6F92; border-color: #8B6F92; padding: 0 .5em; font-weight: normal; color: #FFF; }
+.formulaire_spip .boutons input, input.submit { background-color: #8B6F92; border-color: #8B6F92; padding: 0 0.5em; font-weight: normal; color: #FFF; }
 
 
 /* Reponses previsu et erreurs
@@ -40,7 +42,7 @@ input, textarea, select { font-size: 100%; font-family: inherit; }
 
 /* Previsualisation du message */
 fieldset.previsu { margin-bottom: 2em; padding: 1em; border: 2px dashed #F57900; }
-fieldset.previsu legend { padding: 0 5px; color: #F57900; font-weight: bold; }
+fieldset.previsu legend { padding: 0 0.5em; color: #F57900; font-weight: bold; }
 fieldset.previsu li { padding: 3px; border: none; }
 fieldset.previsu .boutons input { background-color: #F57900; border-color: #F57900; color: #FFF; }
 
