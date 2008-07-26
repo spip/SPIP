@@ -2,44 +2,44 @@
 #HTTP_HEADER{"Pragma: no-cache"}
 
 <div class='formulaire_spip formulaire_login'>
-	<br class='spacer' />
-	[<p class="formulaire_message">(#ENV**{_deja_loge})</p>]
-	[<p class="formulaire_message">(#ENV**{message_ok})</p>]
-	[<p class='formulaire_erreur'>(#ENV**{message_erreur})</p>]
+	[(#REM) pour IE qui sinon se perd dans l'ajax !, ne pas retirer]<br class='bugajaxie' />
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{_deja_loge})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV**{message_erreur})</p>]
 
-	[(#ENV{echec_cookie})<fieldset class='formulaire_erreur'>
-	<h2><:avis_erreur_cookie:></h2>
-	<p><:login_cookie_oblige:><br /><:login_cookie_accepte:></p>
+	[(#ENV{echec_cookie})
+	<fieldset class='formulaire_erreur'>
+		<h2><:avis_erreur_cookie:></h2>
+		<p class="erreur_message"><:login_cookie_oblige:><br /><:login_cookie_accepte:></p>
 	</fieldset>]
 
 	[(#ENV{editable})
 	<form id='formulaire_login' method='post' action='#ENV{action}' enctype='multipart/form-data'>
-		[(#REM) declarer les hidden qui declencheront le service du formulaire 
-		parametre : url d'action ]
-		#ACTION_FORMULAIRE{#ENV{action}}
-	  <fieldset><legend><:form_forum_identifiants:></legend>
-			<span id="spip_logo_auteur">#ENV*{_logo,''}</span>
-		  <ul>
-		    <li class="editer_login obligatoire">
-		      <label for="var_login"><:login_login2:></label>
-		      <input class='text forml' type='text' name='var_login' id='var_login' value="[(#ENV**{var_login})]" size='40' />
-					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{var_login})</span>]
-		    </li>
-		    <li class="editer_password obligatoire">
-		      <label for="password"><:login_pass2:></label>
-		      <input class='password' type='password' name='password' id='password' value="" size='40' />
-					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{password})</span>]
-					<span class='details'>&#91;<a href="#URL_PAGE{spip_pass}" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=330'); return false;"><:login_motpasseoublie:></a>&#93;</span>
-		    </li>
-				[(#ENV{rester_connecte})
-					<li class="editer_session">
-					    <input class='checkbox' type="checkbox" name="session_remember" id="session_remember" value="oui" [(#ENV**{cnx}|?{' '})checked="checked"] onchange="jQuery(this).addClass('modifie');" />
-					    <label class='nofx' for="session_remember"><:login_rester_identifie:></label>
-			        </li>
-				]
-			</ul>
-			<p class="spip_bouton"><input type="submit" value="<:bouton_valider:>" /></p>
-		</fieldset>
+	[(#REM) declarer les hidden qui declencheront le service du formulaire parametre : url d'action ]
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<fieldset>
+		<legend><:form_forum_identifiants:></legend>
+		<span id="spip_logo_auteur">#ENV*{_logo,''}</span>
+		<ul>
+			<li class="editer_login obligatoire">
+				<label for="var_login"><:login_login2:></label>
+				<input class='text forml' type='text' name='var_login' id='var_login' value="[(#ENV**{var_login})]" size='40' />
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{var_login})</span>]
+			</li>
+			<li class="editer_password obligatoire">
+				<label for="password"><:login_pass2:></label>
+				<input class='password' type='password' name='password' id='password' value="" size='40' />
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{password})</span>]
+				<span class='details'>&#91;<a href="#URL_PAGE{spip_pass}" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=330'); return false;"><:login_motpasseoublie:></a>&#93;</span>
+			</li>
+			[(#ENV{rester_connecte})
+			<li class="editer_session">
+				<input class='checkbox' type="checkbox" name="session_remember" id="session_remember" value="oui" [(#ENV**{cnx}|?{' '})checked="checked"] onchange="jQuery(this).addClass('modifie');" />
+				<label class='nofx' for="session_remember"><:login_rester_identifie:></label>
+			</li>]
+		</ul>
+	</fieldset>
+	<p class="boutons"><input type="submit" value="<:bouton_valider:>" /></p>
 	</form>
 	]
 	[(#REM) en cas d'absence de cookie, on represente le formulaire alternatif ]
@@ -47,11 +47,13 @@
 	(#ENV{auth_http}|form_hidden)
 	]
 	<fieldset>
-	<legend><:login_sans_cookiie:></legend>
-	<div><:login_preferez_refuser:>
-	<input type="hidden" name="essai_auth_http" value="oui"/>
-	[<input type="hidden" name="url" value="(#ENV{url})"/>]
-	<p class="spip_bouton"><input type="submit" value="<:login_sans_cookiie:>"/></p></div>
+		<legend><:login_sans_cookiie:></legend>
+		<div>
+			<:login_preferez_refuser:>
+			<input type="hidden" name="essai_auth_http" value="oui"/>
+			[<input type="hidden" name="url" value="(#ENV{url})"/>]
+			<p class="boutons"><input type="submit" value="<:login_sans_cookiie:>"/></p>
+		</div>
 	</fieldset>
 	</form>
 	]

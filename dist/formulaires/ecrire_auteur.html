@@ -4,8 +4,7 @@
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 [(#ENV{editable})
 <form method='post' action='#ENV{action}#formulaire_ecrire_auteur#ENV{id}' enctype='multipart/form-data'>
-	[(#REM) declarer les hidden qui declencheront le service du formulaire
-	parametre : url d'action ]
+	[(#REM) declarer les hidden qui declencheront le service du formulaire parametre : url d'action ]
 	#ACTION_FORMULAIRE{#ENV{action}}
 	[(#REM) Previsualisation... ]
 	[(#ENV*{erreurs}|table_valeur{previsu}|oui)

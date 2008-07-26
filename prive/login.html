@@ -33,11 +33,11 @@
 	.forml,input { font-size: 1.0em; }
 	#var_lang_ecrire {font-size:0.8em;}
 	p .forml { width: 20em; font-family: inherit; }
-	.spip_bouton input { float: #LANG_RIGHT; }
+	.boutons input { float: #LANG_RIGHT; }
 	.reponse_formulaire { font-weight: bold; color: red; }
 	a { color: #e86519; text-decoration: none; }
-	.retour { text-align: center;font-size:0.8em; }
-	formulaire_login.retour { font-size:1em; }
+	.retour { clear: both; text-align: center; font-size: 0.8em; }
+	formulaire_login.retour { font-size: 1em; }
 -->
 </style>
 [(#REM|f_jQuery)]
@@ -49,16 +49,15 @@ jQuery(function(){ jQuery('input#var_login').focus(); });
 
 <div id='minipres'>
 
-	<h3 class="spip">#NOM_SITE_SPIP<br />
+	<h1 class="spip">#NOM_SITE_SPIP</h1>
 	
 	[(#REM)
 		Est-ce qu'on se connecte a l'espace prive ou pas ?
 	]
 	[(#ENV{url}|=={''}|?{#SET{prive,' '}})]
 	[(#ENV{url}|match{^#EVAL{_DIR_RESTREINT_ABS}}|?{#SET{prive,' '}})]
-	[(#GET{prive}) <small><:login_acces_prive:></small>]
+	[(#GET{prive}) <h3 class="spip"><:login_acces_prive:></h3>]
 	
-	</h3>
 	
 	#MENU_LANG_ECRIRE
 	
