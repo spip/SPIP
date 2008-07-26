@@ -760,8 +760,10 @@ prive/modeles/text.html -text
 prive/modeles/video.html -text
 prive/puce_prive.gif -text
 prive/puce_prive_rtl.gif -text
+prive/spip_glossaire.gif -text
 prive/spip_out.gif -text
 prive/spip_style.css -text
+prive/spip_url.gif -text
 prive/stats/echelle.html -text
 prive/style_prive.html -text
 prive/style_prive_defaut.css -text
