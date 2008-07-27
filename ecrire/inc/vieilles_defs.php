@@ -74,7 +74,7 @@ array(
 
 	// Version new style, surchargeable
 	# cas speciaux
-	if ($r[3] == \'index\') return include_spip(\'inc/indexation\');
+	if ($r[3] == \'index\') return false; // inc/indexation
 	if ($r[3] == \'db_mysql\') return include_spip(\'base/db_mysql\');
 	if ($r[3] == \'connect\') { spip_connect(); return; }
 

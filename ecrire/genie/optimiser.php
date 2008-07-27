@@ -30,14 +30,7 @@ function genie_optimiser_dist($t) {
 // heure de reference pour le garbage collector = 24h auparavant
 // http://doc.spip.org/@optimiser_base
 function optimiser_base($attente = 86400) {
-
 	optimiser_base_disparus($attente);
-
-	// optimisation a passer dans le plugin indexation
-	include_spip('inc/indexation');
-	if (function_exists('optimiser_base_indexation')) {
-		optimiser_base_indexation();
-	}
 }
 
 
