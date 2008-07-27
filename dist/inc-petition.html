@@ -3,7 +3,7 @@
 
 [(#REM) Signatures de la petition ]
 <B_signatures>
-<div class="formulaire_spip" id="signatures">
+<div id="signatures">
 <form method='get' action='#SELF'>
 	[(#SELF|form_hidden)]
 	#ANCRE_PAGINATION
@@ -18,13 +18,10 @@
 			<th class="signature-message"><:message:></th>
 			</BOUCLE_signature-message-th>
 		</thead>
-		<BOUCLE_signatures(SIGNATURES) {id_article} {pagination #ENV{pagination, 15} } {recherche ?#ENV{cherche_signature}} {!par #ENV{tri}}{par #ENV{tri_inverse}} {!par #ENV{tri,#ENV{tri_inverse}}|?{'',date_time}}>
+		<BOUCLE_signatures(SIGNATURES) {id_article} {pagination #ENV{pagination, 15} } {recherche ?#ENV{recherche_signatures}} {!par #ENV{tri}}{par #ENV{tri_inverse}} {!par #ENV{tri,#ENV{tri_inverse}}|?{'',date_time}}>
 		<tr id='id_signature#ID_SIGNATURE'>
 			<td class="signature-date">[(#DATE|affdate_jourcourt)]</td>
-			<td class="signature-nom">
-				<strong class="#EDIT{qui}">#NOM</strong>
-				[<small class="#EDIT{hyperlien}"><a href="(#URL_SITE)"[ title="(#NOM_SITE)"] class="spip_out"><:site_web:></a></small>]
-			</td>
+			<td class="signature-nom"><strong class="#EDIT{qui}">#NOM</strong>[ <small class="#EDIT{hyperlien}"><a href="(#URL_SITE)"[ title="(#NOM_SITE)"] class="spip_out"><:site_web:></a></small>]</td>
 			[(#REM) Afficher la colonne des messages si autorises ]
 			<BOUCLE_signature-message-td(PETITIONS){id_article}{message=oui}> </BOUCLE_signature-message-td>
 			<td class="signature-message #EDIT{message}">[(#MESSAGE|PtoBR)]</td>
@@ -37,7 +34,7 @@
 
 	[(#REM) Afficher un moteur de recherche si plus de 30 signatures]
 	[(#_signatures:GRAND_TOTAL|>{30}|oui)
-	<p class="signature_recherche"><:info_rechercher:> <input type="text" class="forml" size="10" name='cherche_signature' /> <input type="image" src="#CHEMIN{rechercher.png}" class="bouton" value="<:info_rechercher:>" /></p>
+	<div class="formulaire_spip formulaire_recherche" id="formulaire_recherche_signatures"><label for="recherche_signatures"><:info_rechercher:></label> <input type="text" class="text" size="10" name="recherche_signatures" id="recherche_signatures" /> <input type="submit" class="submit" value="<:info_rechercher:>" /></div>
 	]
 </form>
 </div><!--#signatures-->

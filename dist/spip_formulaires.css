@@ -72,12 +72,12 @@ table.spip_barre a img { background: #FDA; padding: 3px; border: 1px outset #CC9
 table.spip_barre a:hover img { background: #FFF; border: 1px solid #CC9; }
 table.spip_barre input.barre { width: 99%; background: transparent; border: 0; color: #F57900; }
 
-/* Formulaire de recherche */
-#formulaire_recherche { margin: 0; padding: 0; background: none; }
-#formulaire_recherche * { display: inline; vertical-align: middle; }
-#formulaire_recherche label { display: none; }
-#formulaire_recherche input.text { padding-left: 25px; background: #fff url(rechercher.gif) no-repeat left center; }
-#formulaire_recherche input.submit {}
+/* Formulaires de recherche (site / petitions) */
+.formulaire_recherche { margin: 0; padding: 0; background: none; }
+.formulaire_recherche * { display: inline; vertical-align: middle; }
+.formulaire_recherche label { display: none; }
+.formulaire_recherche input.text { padding-left: 25px; background: #fff url(rechercher.gif) no-repeat left center; }
+.formulaire_recherche input.submit {}
 
 .spip_surligne {} /*Cf.: spip_style.css*/
 
