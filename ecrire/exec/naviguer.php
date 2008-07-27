@@ -108,16 +108,26 @@ function naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $n_
 {
 	global $spip_lang_right, $connect_toutes_rubriques;
 
-	$afficher_contenu_objet = charger_fonction('afficher_contenu_objet', 'inc');
-
 	$onglet_proprietes =
 		$editer_mots
 		. langue_naviguer($id_rubrique, $id_parent, $flag_editable)
 		. pipeline('affiche_milieu',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''))
 	;
 
-	$onglet_contenu =
-		$afficher_contenu_objet('rubrique', $id_rubrique,$id_rubrique)
+	$type = 'rubrique';
+	include_spip('public/assembler');
+	$contexte = array('id'=>$id_rubrique,'id_rubrique'=>$id_rubrique);
+	$fond = recuperer_fond("prive/contenu/$type",$contexte);
+	// permettre aux plugin de faire des modifs ou des ajouts
+	$fond = pipeline('afficher_contenu_objet',
+			array(
+			'args'=>array(
+				'type'=>$type,
+				'id_objet'=>$id_rubrique,
+				'contexte'=>$contexte),
+			'data'=> $fond));
+	
+	$onglet_contenu = "<div id='wysiwyg'>$fond</div>"
 		. (_INTERFACE_ONGLETS? $boucles:"");
 
 	$onglet_enfants =
