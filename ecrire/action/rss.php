@@ -43,21 +43,7 @@ function action_rss_dist()
 		charger_generer_url();
 		lang_select($lang);
 	}
-	list($title, $rss, $url) = $f($args);
-	$title = "[".$GLOBALS['meta']['nom_site']."] RSS ". $title;
-
-	header('Content-Type: text/xml; charset='.$GLOBALS['meta']['charset']);
-	echo '<'.'?xml version="1.0" encoding="'.$GLOBALS['meta']['charset'].'"?'.">\n", '
-<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:thr="http://purl.org/syndication/thread/1.0">
-<channel xml:lang="'.texte_backend($GLOBALS['spip_lang']).'">
-	<title>'.texte_backend($title).'</title>
-	<link>'.texte_backend(url_absolue($url)).'</link>
-	<description></description>
-	<language>'.texte_backend($GLOBALS['spip_lang']).'</language>
-	', xml_rss($rss), '</channel>
-</rss>
-';
-
+	xml_rss($f($args));
 	spip_log("spip_rss s'applique sur '$op $args pour $id' en " . spip_timer('rss'));
 }
 
@@ -101,7 +87,7 @@ function rss_suivi_forums($page, $from, $where, $lien_moderation=false) {
 		$item['email'] = $t['email_auteur'];
 
 		if ($lien_moderation)
-		  $item['url'] = generer_url_ecrire('controle_forum', 'type='.$page .'&debut_id_forum='.$t['id_forum']);
+			$item['url'] = generer_url_ecrire('controle_forum', 'type='.$page .'&debut_id_forum='.$t['id_forum']);
 		else
 			$item['url'] = generer_url_forum($t['id_forum']);
 
@@ -120,9 +106,11 @@ function rss_suivi_forums($page, $from, $where, $lien_moderation=false) {
 }
 
 // Suivi de la messagerie privee
-// http://doc.spip.org/@rss_suivi_messagerie
-function rss_suivi_messagerie($a) {
-	$rss = array();
+// http://doc.spip.org/@rss_messagerie
+function  rss_messagerie($a)
+{
+	$a = rss_split_args($a);
+	$rss = $messages_vus = array();
 
 	// 1. les messages
 	$s = sql_select("*", "spip_messages AS messages, spip_auteurs_messages AS lien", "lien.id_auteur=".$a['id_auteur']." AND lien.id_message=messages.id_message ", " messages.id_message ", " messages.date_heure DESC");
@@ -143,7 +131,7 @@ function rss_suivi_messagerie($a) {
 
 	// 2. les reponses aux messages
 	if ($messages_vus) {
-		$s = sql_select("*", "spip_forum", "id_message	IN (".join(',', $messages_vus).")", "", "date_heure DESC", "10");
+		$s = sql_select("*", "spip_forum", sql_in('id_message', $messages_vus), "", "date_heure DESC", "10");
 
 		while ($t = sql_fetch($s)) {
 			$item = array(
@@ -157,16 +145,17 @@ function rss_suivi_messagerie($a) {
 		}
 	}
 
-	return $rss;
+	$title = _T("icone_messagerie_personnelle");
+	$url = generer_url_ecrire('messagerie');
+	return array($title, $rss, $url);
 }
 
 
 // http://doc.spip.org/@rss_articles
 function rss_articles($critere) {
-	$rss = array();
-	$s = sql_select("*", "spip_articles", "$critere", "", "date DESC", "10");
-	while ($t = sql_fetch($s)) {
-		$auteur = sql_fetsel("	auteurs.nom AS nom, auteurs.email AS email	", "spip_auteurs AS auteurs, spip_auteurs_articles AS lien	", "lien.id_article=".$t['id_article']." AND lien.id_auteur = auteurs.id_auteur");
+	$rss = sql_allfetsel("*", "spip_articles", $critere, "", "date DESC", "10");
+	foreach ($rss as $k => $t) {
+		$auteur = sql_fetsel("auteurs.nom AS nom, auteurs.email AS email", "spip_auteurs AS auteurs LEFT JOIN spip_auteurs_articles AS lien ON lien.id_auteur = auteurs.id_auteur", "lien.id_article=".$t['id_article']);
 		$item = array(
 			'title' => typo($t['titre']),
 			'date' => $t['date'],
@@ -177,7 +166,7 @@ function rss_articles($critere) {
 		if ($t['statut'] == 'prop')
 		  $item['title'] = _T('info_article_propose').' : '.$item['title'];
 
-		$rss[] = $item;
+		$rss[$k] = $item;
 	}
 	return $rss;
 }
@@ -185,9 +174,8 @@ function rss_articles($critere) {
 
 // http://doc.spip.org/@rss_breves
 function rss_breves($critere) {
-	$rss = array();
-	$s = sql_select("*", "spip_breves", "$critere", "", "date_heure DESC", "10");
-	while ($t = sql_fetch($s)) {
+	$rss = sql_allfetsel("*", "spip_breves", $critere, "", "date_heure DESC", "10");
+	foreach ($rss as $k =>$t) {
 		$item = array(
 			'title' => typo($t['titre']),
 			'date' => $t['date_heure'],
@@ -196,7 +184,7 @@ function rss_breves($critere) {
 		if ($t['statut'] == 'prop')
 			$item['title'] = _T('titre_breve_proposee').' : '.$item['title'];
 
-		$rss[] = $item;
+		$rss[$k] = $item;
 	}
 	return $rss;
 }
@@ -204,9 +192,8 @@ function rss_breves($critere) {
 
 // http://doc.spip.org/@rss_sites
 function rss_sites($critere) {
-	$rss = array();
-	$s = sql_select("*", "spip_syndic", "$critere", "", "date DESC", "10");
-	while ($t = sql_fetch($s)) {
+	$rss = sql_allfetsel("*", "spip_syndic", $critere, "", "date DESC", "10");
+	foreach ($rss  as $k => $t) {
 		$item = array(
 			'title' => typo($t['titre']." ".$t['url_site']),
 			'date' => $t['date'],
@@ -215,7 +202,7 @@ function rss_sites($critere) {
 		if ($t['statut'] == 'prop')
 			$item['title'] = _T('info_site_attente').' : '.$item['title'];
 
-		$rss[] = $item;
+		$rss[$k] = $item;
 	}
 	return $rss;
 }
@@ -304,16 +291,6 @@ function  rss_revisions($a)
 	return array($title, $rss, $url);
 }
 
-# messagerie privee
-// http://doc.spip.org/@rss_messagerie
-function  rss_messagerie($a)
-{
-	$a = rss_split_args($a);
-	$rss = rss_suivi_messagerie($a);
-	$title = _T("icone_messagerie_personnelle");
-	$url = generer_url_ecrire('messagerie');
-	return array($title, $rss, $url);
-}
 
 // Suivi de la page "a suivre" : articles, breves, sites proposes et publies
 // http://doc.spip.org/@rss_a_suivre
@@ -344,7 +321,10 @@ function trier_par_date($a, $b) {
 }
 
 // http://doc.spip.org/@xml_rss
-function xml_rss($rss) {
+function xml_rss($trio) {
+	list($title, $rss, $url) = $trio;
+	$title = "[".$GLOBALS['meta']['nom_site']."] RSS ". $title;
+
 	$u = '';
 	if (is_array($rss)) {
 		usort($rss, 'trier_par_date');
@@ -377,6 +357,22 @@ function xml_rss($rss) {
 ';
 		}
 	}
-	return $u;
+	header('Content-Type: text/xml; charset='.$GLOBALS['meta']['charset']);
+#	header('Content-Type: text/plain; charset='.$GLOBALS['meta']['charset']);
+	echo '<',
+	  '?xml version="1.0" encoding="'.
+	  $GLOBALS['meta']['charset'],
+	  '" ?',
+	  '>
+
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:thr="http://purl.org/syndication/thread/1.0">
+<channel xml:lang="'.texte_backend($GLOBALS['spip_lang']).'">
+	<title>'.texte_backend($title).'</title>
+	<link>'.texte_backend(url_absolue($url)).'</link>
+	<description></description>
+	<language>'.texte_backend($GLOBALS['spip_lang']).'</language>
+	'. $u . '</channel>
+</rss>
+';
 }
 ?>
