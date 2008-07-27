@@ -3,8 +3,8 @@
 
 [(#REM) Signatures de la petition ]
 <B_signatures>
-<form method='get' action='#SELF'>
 <div class="formulaire_spip" id="signatures">
+<form method='get' action='#SELF'>
 	[(#SELF|form_hidden)]
 	#ANCRE_PAGINATION
 
@@ -13,20 +13,22 @@
 		<thead>
 			<th class="signature-date"><a href='[(#SELF|parametre_url{tri,date_time}|parametre_url{tri_inverse,''})]#signatures' title="<:lien_trier_date:>"><:date:></a></th>
 			<th class="signature-nom"><a href='[(#SELF|parametre_url{tri,nom_email}|parametre_url{tri_inverse,''})]#signatures' title="<:lien_trier_nom:>"><:nom:></a></th>
-
 			[(#REM) Afficher la colonne des messages si autorises ]
-			<BOUCLE_petition(PETITIONS){id_article}{message=oui}>
+			<BOUCLE_signature-message-th(PETITIONS){id_article}{message=oui}>
 			<th class="signature-message"><:message:></th>
-			</BOUCLE_petition>
+			</BOUCLE_signature-message-th>
 		</thead>
 		<BOUCLE_signatures(SIGNATURES) {id_article} {pagination #ENV{pagination, 15} } {recherche ?#ENV{cherche_signature}} {!par #ENV{tri}}{par #ENV{tri_inverse}} {!par #ENV{tri,#ENV{tri_inverse}}|?{'',date_time}}>
 		<tr id='id_signature#ID_SIGNATURE'>
 			<td class="signature-date">[(#DATE|affdate_jourcourt)]</td>
 			<td class="signature-nom">
 				<strong class="#EDIT{qui}">#NOM</strong>
-				[<br /><small class="#EDIT{hyperlien}"><a href="(#URL_SITE)"[ title="(#NOM_SITE)"] class="spip_out"><:site_web:></a></small>]
+				[<small class="#EDIT{hyperlien}"><a href="(#URL_SITE)"[ title="(#NOM_SITE)"] class="spip_out"><:site_web:></a></small>]
 			</td>
-			[<td class="signature-message #EDIT{message}">(#MESSAGE|PtoBR)</td>]
+			[(#REM) Afficher la colonne des messages si autorises ]
+			<BOUCLE_signature-message-td(PETITIONS){id_article}{message=oui}> </BOUCLE_signature-message-td>
+			<td class="signature-message #EDIT{message}">[(#MESSAGE|PtoBR)]</td>
+			</B_signature-message-td>
 		</tr>
 		</BOUCLE_signatures>
 	</table>
@@ -37,6 +39,6 @@
 	[(#_signatures:GRAND_TOTAL|>{30}|oui)
 	<p class="signature_recherche"><:info_rechercher:> <input type="text" class="forml" size="10" name='cherche_signature' /> <input type="image" src="#CHEMIN{rechercher.png}" class="bouton" value="<:info_rechercher:>" /></p>
 	]
-</div><!--#signatures-->
 </form>
+</div><!--#signatures-->
 </B_signatures>
