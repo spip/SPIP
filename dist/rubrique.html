@@ -107,7 +107,7 @@ href="[(#URL_PAGE{backend})]<BOUCLE_URLMOT(MOTS){id_rubrique}>&amp;id_mot[]=#ID_
             <h2><:breves:></h2>
             <ul>
                 <BOUCLE_breves(BREVES) {id_rubrique} {par date}{inverse} {pagination 5}>
-                <li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_BREVE">#TITRE</a></li>
+                <li>[(#DATE|affdate_jourcourt) &ndash; ]<a href="#URL_BREVE">#TITRE</a></li>
                 </BOUCLE_breves>
             </ul>
             [<p class="pagination">(#PAGINATION)</p>]
