@@ -16,6 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 global $array_server;
 
 // fonction de declaration du connecteur, utilisee a la place de config/array.php
+// http://doc.spip.org/@req_pour_connect_dist
 function req_pour_connect_dist() {
 	if (!defined("_ECRIRE_INC_VERSION")) return;
 	$GLOBALS['spip_connect_version'] = 0.1;

@@ -1150,6 +1150,7 @@ function tester_param_date($type, $col)
 
 
 /* le critere {tableau ...} des boucles for:TABLEAU */
+// http://doc.spip.org/@critere_TABLEAU_tableau_dist
 function critere_TABLEAU_tableau_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	if (isset($crit->param[0])){
