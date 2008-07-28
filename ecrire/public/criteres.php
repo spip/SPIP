@@ -1147,15 +1147,4 @@ function tester_param_date($type, $col)
 	else return false;
 }
 
-
-
-/* le critere {tableau ...} des boucles for:TABLEAU */
-// http://doc.spip.org/@critere_TABLEAU_tableau_dist
-function critere_TABLEAU_tableau_dist($idb, &$boucles, $crit) {
-	$boucle = &$boucles[$idb];
-	if (isset($crit->param[0])){
-		$table = calculer_liste($crit->param[0], array(), $boucles, $boucle->id_parent);
-		$boucle->having[]=array("'tableau'",$table);
-	}
-}
 ?>

@@ -49,11 +49,9 @@ function spip_connect($serveur='', $version='') {
 			if (is_readable($f)) {
 				include($f);
 			}
-			elseif ($g = charger_fonction($serveur."_connect",'req',true)) {
-				$g();
-			}
+			elseif($serveur AND !$install)
+			  find_in_path("$serveur.php",'connect/',true);
 		}
-		
 		if (!isset($GLOBALS['db_ok'])) {
 		  // fera mieux la prochaine fois
 			if ($install) return false; 
