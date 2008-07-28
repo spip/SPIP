@@ -322,7 +322,7 @@ function spip_sqlite_count($r, $serveur='',$requeter=true) {
 
 
 // http://doc.spip.org/@spip_sqlite_countsel
-function spip_sqlite_countsel($from = array(), $where = array(), $groupby = '', $limit = '', $sousrequete = '', $having = array(), $serveur='',$requeter=true) {
+function spip_sqlite_countsel($from = array(), $where = array(), $groupby = '', $having = array(), $serveur='',$requeter=true) {
 	$c = !$groupby ? '*' : ('DISTINCT ' . (is_string($groupby) ? $groupby : join(',', $groupby)));
 	$r = spip_sqlite_select("COUNT($c)", $from, $where,'', '', $limit,
 			$having, $serveur, $requeter);
