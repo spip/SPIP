@@ -2404,7 +2404,7 @@ function chercher_rubrique($msg,$id, $id_parent, $type, $id_secteur, $restreint,
 	if (!sql_countsel('spip_rubriques'))
 		return "";
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
-	$form = $chercher_rubrique($id_parent, $type, $restreint);
+	$form = $chercher_rubrique($id_parent, $type, $restreint, ($type=='rubrique')?$id:0);
 
 	if ($id_parent == 0) $logo = "racine-site-24.gif";
 	elseif ($id_secteur == $id_parent) $logo = "secteur-24.gif";

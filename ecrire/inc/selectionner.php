@@ -73,13 +73,10 @@ function construire_selectionner_hierarchie($idom, $liste, $racine, $url, $name,
 	. "<a id='$idom6' style='visibility: hidden;'"
 	. ($url_init ?  "\nhref='$url_init'" : '')
 	. "></a>"
-	. "<table width='100%' cellpadding='0' cellspacing='0'><tr>"
-	. "<td style='vertical-align: bottom;'>\n"
-	. $racine
-	. "</td>\n<td>"
-	. http_img_pack("searching.gif", "*", "style='visibility: hidden;' id='$idom5'")
-	. "</td><td style='text-align: $spip_lang_right'>"
-	. "<input style='width: 100px;' type='search' id='$idom1'"
+	. "<div class='recherche_rapide_parent'>"
+	. http_img_pack("searching.gif", "*", "style='visibility: hidden;float:$spip_lang_right' id='$idom5'")
+	. ""
+	. "<input style='width: 100px;float:$spip_lang_right;' type='search' id='$idom1'"
 	  // eliminer Return car il provoque la soumission (balise unique)
 	  // ce serait encore mieux de ne le faire que s'il y a encore plusieurs
 	  // resultats retournes par la recherche
@@ -104,7 +101,9 @@ function construire_selectionner_hierarchie($idom, $liste, $racine, $url, $name,
 	. $idom6
 	. "')\"" 
 	. " />"
-	. "\n</td></tr></table><div id='"
+	. "\n</div>"
+	. ($racine?"<div>$racine</div>":"")
+	. "<div id='"
 	.  $idom2
 	.  "'><div id='$idom4'"
 	. " class='arial1'>" 

@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define('_SPIP_SELECT_RUBRIQUES', 20); /* mettre 100000 pour desactiver ajax */
+define('_SPIP_SELECT_RUBRIQUES', 10); /* mettre 100000 pour desactiver ajax */
 
 //
 // Selecteur de rubriques pour l'espace prive
