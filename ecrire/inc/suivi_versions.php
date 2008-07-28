@@ -102,11 +102,11 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 						$revisions .= $titre_bouton;
 				} else {
 					$item = array(
-						'title' => $titre,
+						'titre' => $titre,
 						'url' => generer_url_ecrire("articles_versions","id_article=$id_article&id_version=$id_version"),
 						'date' => $date,
-						'author' => $nom,
-						'email' => $email
+						'nom' => $nom,
+						'email_auteur' => $email
 					);
 				}
 	
@@ -129,7 +129,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 								$revisions .= $aff;
 								$revisions .= "</blockquote>";
 							} else
-								$item['description'] = $aff;
+								$item['texte'] = $aff;
 						}
 					}
 					if (!$rss) $revisions .= fin_block();
