@@ -85,7 +85,7 @@ body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 #hierarchie { clear: both; margin-bottom: 2em; font-size: 0.90em; }
 #hierarchie, #hierarchie a { color: #666; }
 
-.surtitre, .soustitre { font-size: 0.90em; color: #666; text-transform: uppercase; letter-spacing: 0.1em; }
+.surtitre, .soustitre { font-size: 0.90em; color: #666; text-transform: uppercase; letter-spacing: 0.10em; }
 
 .cartouche { margin-bottom: 2em; }
 .cartouche .spip_logos { float: right; margin-left: 16px; margin-bottom: 4px; }
@@ -144,7 +144,7 @@ ul ul ul ul ul .forum-chapo { background: #FFF; }
 #signatures { clear: both; margin: 0 0 2em 0; padding: 0; background: none; }
 #signatures table { width: 100%; margin: 1em 0 0 0; }
 #signatures thead { text-align: center; color: #555; }
-#signatures td { padding: 0.50em; border: 2px solid #fefefe; vertical-align: top; }
+#signatures td { padding: 0.50em; border: 2px solid #FEFEFE; vertical-align: top; }
 #signatures td.signature-date { background: #E4F0F0; text-align: center; white-space: nowrap; }
 #signatures td.signature-nom { background: #ECF4F4; text-align: center; }
 #signatures td.signature-nom small { display: block; }
