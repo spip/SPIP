@@ -307,12 +307,28 @@ function calcul_branche ($generation) {
 	}
 }
 
+// Calcul d'une branche
+// (liste des id_rubrique contenues dans une rubrique donnee)
+// pour le critere {branche}
 // http://doc.spip.org/@calcul_branche_in
-function calcul_branche_in ($id) {
+function calcul_branche_in($id) {
+
+	// normaliser $id qui a pu arriver comme un array
+	$id = is_array($id)
+		? join(',', array_map('sql_quote', $id))
+		: $id;
+
+	// Notre branche commence par la rubrique de depart
 	$branche = $id;
-	while ($id = sql_allfetsel('id_rubrique', 'spip_rubriques', sql_in('id_parent', $id))) {
-		$branche .= ',' . ($id = join(',', array_map('array_shift', $id)));
+
+	// On ajoute une generation (les filles de la generation precedente)
+	// jusqu'a epuisement
+	while ($filles = sql_allfetsel('id_rubrique', 'spip_rubriques',
+	sql_in('id_parent', $id))) {
+		$id = join(',', array_map('array_shift', $filles));
+		$branche .= ',' . $id;
 	}
+
 	return $branche;
 }
 
