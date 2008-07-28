@@ -84,15 +84,7 @@ echo fin_cadre_relief(true);
 
 // Afficher le lien RSS
 
-$op = 'messagerie';
-$args = array(
-	'id_auteur' => $connect_id_auteur
-);
-echo "<div style='text-align: "
-	. $GLOBALS['spip_lang_right']
-	. ";'>"
-	. bouton_spip_rss($op, $args)
-	."</div>";
+echo bouton_spip_rss('messagerie', array('id_auteur' => $connect_id_auteur));
 
 
 
