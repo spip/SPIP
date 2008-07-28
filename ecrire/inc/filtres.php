@@ -2414,7 +2414,7 @@ function chercher_rubrique($msg,$id, $id_parent, $type, $id_secteur, $restreint,
 	if ($type=='rubrique') {
 		// si c'est une rubrique-secteur contenant des breves, demander la
 		// confirmation du deplacement
-		$contient_breves = sql_countsel('spip_breves', "id_rubrique=$id",'',2);
+		$contient_breves = sql_countsel('spip_breves', "id_rubrique=$id");
 	
 		if ($contient_breves > 0) {
 			$scb = ($contient_breves>1? 's':'');

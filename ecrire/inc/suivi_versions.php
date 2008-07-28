@@ -174,7 +174,8 @@ function revisions_entete_boite($court, $debut, $id_secteur, $lang, $nb_aff, $re
 		$titre_table = afficher_plus(generer_url_ecrire("suivi_revisions"))
 		. $titre_table;
 
-	$total = sql_countsel($req_from, $req_where, '', "0, 149");
+	$total = sql_countsel($req_from, $req_where);
+	if ($total >= 150) $total = 149;
 	$id_liste = 't'.substr(md5("$req_where 149"),0,8);
 	$bouton = bouton_block_depliable($titre_table,true,$id_liste);
 	$revisions = debut_cadre('liste',"historique-24.gif",'',$bouton)
