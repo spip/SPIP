@@ -8,7 +8,7 @@
 	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV**{message_erreur})</p>]
 
 	[(#ENV{echec_cookie})
-	<fieldset class='formulaire_erreur'>
+	<fieldset class='reponse_formulaire reponse_formulaire_erreur'>
 		<h2><:avis_erreur_cookie:></h2>
 		<p class="erreur_message"><:login_cookie_oblige:><br /><:login_cookie_accepte:></p>
 	</fieldset>]
@@ -23,23 +23,23 @@
 		<ul>
 			<li class="editer_login obligatoire">
 				<label for="var_login"><:login_login2:></label>
-				<input class='text forml' type='text' name='var_login' id='var_login' value="[(#ENV**{var_login})]" size='40' />
+				<input type='text' class='text' name='var_login' id='var_login' value="[(#ENV**{var_login})]" size='40' />
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{var_login})</span>]
 			</li>
 			<li class="editer_password obligatoire">
 				<label for="password"><:login_pass2:></label>
-				<input class='password' type='password' name='password' id='password' value="" size='40' />
+				<input type='password' class='password' name='password' id='password' value="" size='40' />
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{password})</span>]
 				<span class='details'>&#91;<a href="#URL_PAGE{spip_pass}" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=330'); return false;"><:login_motpasseoublie:></a>&#93;</span>
 			</li>
 			[(#ENV{rester_connecte})
 			<li class="editer_session">
-				<input class='checkbox' type="checkbox" name="session_remember" id="session_remember" value="oui" [(#ENV**{cnx}|?{' '})checked="checked"] onchange="jQuery(this).addClass('modifie');" />
+				<input type="checkbox" class="checkbox" name="session_remember" id="session_remember" value="oui" [(#ENV**{cnx}|?{' '})checked="checked"] onchange="jQuery(this).addClass('modifie');" />
 				<label class='nofx' for="session_remember"><:login_rester_identifie:></label>
 			</li>]
 		</ul>
 	</fieldset>
-	<p class="boutons"><input type="submit" value="<:bouton_valider:>" /></p>
+	<p class="boutons"><input type="submit" class="submit" value="<:bouton_valider:>" /></p>
 	</form>
 	]
 	[(#REM) en cas d'absence de cookie, on represente le formulaire alternatif ]
@@ -48,12 +48,10 @@
 	]
 	<fieldset>
 		<legend><:login_sans_cookiie:></legend>
-		<div>
-			<:login_preferez_refuser:>
-			<input type="hidden" name="essai_auth_http" value="oui"/>
-			[<input type="hidden" name="url" value="(#ENV{url})"/>]
-			<p class="boutons"><input type="submit" value="<:login_sans_cookiie:>"/></p>
-		</div>
+		<:login_preferez_refuser:>
+		<input type="hidden" name="essai_auth_http" value="oui"/>
+		[<input type="hidden" name="url" value="(#ENV{url})"/>]
+		<p class="boutons"><input type="submit" class="submit" value="<:login_sans_cookiie:>"/></p>
 	</fieldset>
 	</form>
 	]
