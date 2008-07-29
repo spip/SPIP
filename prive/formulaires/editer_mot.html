@@ -1,5 +1,5 @@
 <div class='formulaire_spip formulaire_editer formulaire_editer_mot formulaire_editer_mot-#ENV{id_mot,nouveau}'>
-	<!-- <br class='spacer' /> -->
+	<!-- <br class='bugajaxie' /> -->
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
@@ -12,24 +12,24 @@
 	    <li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
 			<label for="titre"><:info_titre_mot_cle:></label>
 			<em class="aide">#AIDER{mots}</em>
-			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{titre})</span>]
-			<input type='text' name='titre' id='titre' class='text' value="[(#ENV**{titre,<:texte_nouveau_mot:>})]"
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>]
+			<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre,<:texte_nouveau_mot:>})]"
 			[(#ENV{titre}|strlen|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
 	    </li>	
 	    <li class="editer_groupe_mot obligatoire[ (#ENV**{erreurs}|table_valeur{id_groupe}|oui)erreur]">
 			<label for="id_groupe"><:info_dans_groupe:></label>
 			<em class="aide">#AIDER{motsgroupes}</em>
-			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{id_groupe})</span>]
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_groupe})</span>]
 			[(#INCLURE{fond=formulaires/selecteur_groupe_mot}{id_groupe=#ENV{id_groupe}}{table=#ENV{table,''}}{name=id_groupe}{id=id_groupe})]
 	    </li>
 	    <li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
 			<label for="descriptif"><:texte_descriptif_rapide:></label>
-			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{descriptif})</span>]
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>]
 			<textarea name='descriptif' id='descriptif' rows='4' cols='40'>[(#ENV**{descriptif})]</textarea>
 	    </li>
 	    <li class="editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
 			<label for="text_area"><:info_texte_explicatif:></label>
-			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{texte})</span>]
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>]
 			[(#ENV**{_texte_trop_long,''})]
 			<div class="explication"><:texte_enrichir_mise_a_jour:><em>#AIDER{raccourcis}</em></div>
 			[(#ENV**{config}|table_valeur{afficher_barre}|?{#VAL{text_area}|barre_typo{#LANG}})]
@@ -39,7 +39,7 @@
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
-	  <p class="boutons"><input class='submit' type='submit' value='<:bouton_enregistrer:>' /></p>
+	  <p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>
 	]
 </div>
