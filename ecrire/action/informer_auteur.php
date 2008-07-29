@@ -23,6 +23,7 @@ function action_informer_auteur_dist() {
 		$row = informer_login($login);
 		unset($row['id_auteur']);
 	}
+	header('Cache-Control: max-age=0, must-revalidate');
 	echo json_export($row);
 }
 
