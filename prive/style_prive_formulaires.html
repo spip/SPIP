@@ -187,7 +187,7 @@ li.extra label,
 	padding-bottom: 5px;
 	padding-#GET{left}: 5px;
 	padding-#GET{right}: 15px;
-	position:relative; /* IE6 */
+	position: relative; /* IE6 */
 	display:inline;
 
 }
@@ -199,8 +199,7 @@ li.extra label,
 	background-color: [#(#GET{claire}|couleur_eclaircir)];
 }
 .formulaire_spip li.editer_parent label,
-.formulaire_spip li fieldset legend, 
-.formulaire_spip li fieldset h3.legend {
+.formulaire_spip li fieldset legend {
 	display: -moz-inline-box;
 	display: inline-block;
 	margin: 0px;
@@ -217,11 +216,7 @@ li.extra label,
 	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee})], bottom [(#GET{left})] no-repeat })]
 
 }
-.formulaire_spip li fieldset legend, 
-.formulaire_spip li fieldset h3.legend {
-	margin-top: 10px;
-	margin-left: 10px;
-}
+.formulaire_spip li fieldset legend { margin-top: 10px; margin-left: 10px; }
 
 
 .formulaire_spip li p {
