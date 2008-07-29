@@ -12,17 +12,17 @@
 		[<input type='hidden' name='logo' value='(#ENV**{logo,''})' />]
 		[<input type='hidden' name='format_logo' value='(#ENV**{format_logo,''})' />]
 
-	  <ul>
-	  	[(#ENV{id_syndic}|non)
-	  	[(#SESSION{statut}|=={0minirezo}|?{' ',#ENV{config}|table_valeur{proposer_site}|=={oui}|oui})	  
-		  <li class="editer_referencement_automatise">
+		<ul>
+		[(#ENV{id_syndic}|non)
+		[(#SESSION{statut}|=={0minirezo}|?{' ',#ENV{config}|table_valeur{proposer_site}|=={oui}|oui})
+			<li class="editer_referencement_automatise">
 			  <fieldset>
 				  <h3 class='legend'><img src='#EVAL{_DIR_IMG_PACK}site-24.gif' alt="" /></h3>
 				  <ul>
 					  <li class="editer_url_auto[ (#ENV**{erreurs}|table_valeur{url_auto}|oui)erreur]">
 						<label for='url_auto'><:texte_referencement_automatique:></label>
 						[<span class='erreur'>(#ENV**{erreurs}|table_valeur{url_auto})</span>]
-						<input type="text" name="url_auto" id="url_auto" class='text' size='40' value="http://" />
+						<input type="text" name="url_auto" id="url_auto" class='text' size='40' value="[(#ENV{url_site}|sinon{http://})]" />
 					  </li>
 				  </ul>
 				  <p class="boutons"><input class='submit' type='submit' value='<:bouton_ajouter:>' /></p>
@@ -55,12 +55,13 @@
 	    [(#ENV**{config}|table_valeur{activer_syndic}|=={non}|?{'',' '})
 	    <li class="editer_syndications">
 			<fieldset>
-				<h3 class='legend'><img src='#CHEMIN{feed.png}' alt="<:info_syndication:>" /></h3>
+				<h3 class='legend'><img src='#CHEMIN{feed.png}' alt="<:info_syndication:>" />
+				<:bouton_radio_syndication:>
+				#AIDER{rubsyn}</h3>
 				<ul>
 					<li class="editer_syndication">
-						<em class="aide">#AIDER{rubsyn}</em>
 						<div class="choix">
-							<input type='radio' class="radio" name='syndication' value='non' id='syndication_non'[ (#ENV{syndication}|=={non}|?{'checked="checked"'})] />
+							<input type='radio' class="radio" name='syndication' value='non' id='syndication_non'[ (#ENV{syndication}|=={oui}|?{'','checked="checked"'})] />
 							<label for='syndication_non'><:bouton_radio_non_syndication:></label>
 						</div>
 						<div class="choix">
