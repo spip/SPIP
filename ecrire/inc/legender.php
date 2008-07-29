@@ -53,7 +53,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 		$supp = 'doc-24.gif';
 		$label = _T('entree_titre_document');
 		$taille = formulaire_taille($document);
-		$vignette = vignette_formulaire_legender($id_document, $document, $script, $type, $id, $ancre);
+		$vignette = "<div style='margin-bottom: 10px;'>".vignette_formulaire_legender($id_document, $document, $script, $type, $id, $ancre)."</div>";
 	}
 
 	$entete = basename($document['fichier']);
@@ -78,20 +78,20 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 
 	include_spip('inc/editer');
 	$corps = (!$contenu ? '' :
-	   "<div class='verdana1' style='text-align: center;'>$contenu</div>") .
-	  "<label for='titre_document$id_document'><b>$label</b></label><br />\n" .
+	   "<div class='verdana1' style='text-align: center; margin-bottom: 10px;'>$contenu</div>") .
+	  "<div class='formulaire_spip'><ul><li><label for='titre_document$id_document'><b>$label</b></label>\n" .
 
 	  "<input type='text' name='titre_document' id='titre_document$id_document' class='formo' value=\"".entites_html($titre).
-	  "\" size='40'	onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /><br />\n"
+	  "\" size='40'	onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /></li>\n"
 	  . (($GLOBALS['meta']["documents_date"] == 'oui')
-	  	? date_formulaire_legender($date, $id_document)
+	  	? "<li>".date_formulaire_legender($date, $id_document)."</li>"
 	  	:'' )
-	  . "<label for='descriptif_document$id_document'><b>".
+	  . "<li><label for='descriptif_document$id_document'><b>".
 	  _T('info_description_2').
-	  "</b></label><br />\n" .
+	  "</b></label>\n" .
 	  "<textarea name='descriptif_document' id='descriptif_document$id_document' rows='4' class='formo' cols='*' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">" .
 	    entites_html($descriptif) .
-	  "</textarea>\n" .
+	  "</textarea></li></ul></div>\n" .
 	  $taille
 	  
 	  .controles_md5($document);
@@ -108,13 +108,13 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 		$corps = ajax_action_post("legender", $id_document, $script, "show_docs=$id_document&id_$type=$id#legender-$id_document", $corps, _T('bouton_enregistrer'), $att_bouton, $att_span, "&id_document=$id_document&id=$id&type=$type&ancre=$ancre")
 		  . "<br class='nettoyeur' />";
 	else {
-		$corps = "<div>"
+		$corps = "<div class='boutons'>"
 		       . $corps 
 		       . "<span"
 		       . $att_span
 		       . "><input type='submit' class='fondo' value='"
 		       . _T('bouton_enregistrer')
-		       ."' /></span><br class='nettoyeur' /></div>";
+		       ."' /></span></div>";
 		$redirect = parametre_url($script,'show_docs',$id_document,'&');
 		$redirect = parametre_url($redirect,"id_$type",$id,'&');
 		$redirect = parametre_url($redirect,"id_$type",$id,'&');

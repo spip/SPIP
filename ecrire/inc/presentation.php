@@ -535,7 +535,7 @@ function debut_javascript()
 			? ''
 			: "jQuery.ajax({'url':'$testeur'});") .
 			(_OUTILS_DEVELOPPEURS ?"var _OUTILS_DEVELOPPEURS=true;":"") .
-			"\nvar ajax_image_searching = \n'<div style=\"float: ".$GLOBALS['spip_lang_right'].";\"><img src=\"".url_absolue(chemin_image("searching.gif"))."\" alt=\"\" /></div>';" .
+			"\nvar ajax_image_searching = \n'<div style=\"text-align: ".$GLOBALS['spip_lang_right'].";\"><img src=\"".url_absolue(chemin_image("searching.gif"))."\" alt=\"\" /></div>';" .
 			"\nvar stat = " . (($GLOBALS['meta']["activer_statistiques"] != 'non') ? 1 : 0) .
 			"\nvar largeur_icone = " .
 			intval(_LARGEUR_ICONES_BANDEAU) .
