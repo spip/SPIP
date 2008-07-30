@@ -236,26 +236,6 @@ li.extra label,
 	padding-bottom: 10px;
 	border-top: 1px solid #GET{foncee};
 }
-/* champ des radio/checkbox
-*  on annule les decalages de label/champs
-*  lorsqu'ils sont inclus dans une class .champ
-*
-*  La liste par defaut est verticale
-*  pour l'avoir horizontale, il faut specifier :
-*  .formulaire_spip .formulaire_editer .editer_qqc .champ{display:inline;}
-*/
-.formulaire_spip .choix label{
-	float:none; 
-	display:inline;
-	margin-#GET{left}: 5px; 
-	font-weight:normal; 
-	text-transform: none;
-	font-size: 1em;
-	background: none;
-	padding: 0px;
-}
-.formulaire_spip .choix input.radio,
-.formulaire_spip .choix input.checkbox {width:auto;}
 
 /* icone d'aide */
 .formulaire_spip li em.aide {
@@ -294,6 +274,32 @@ li.extra label,
 	font-weight: bold;
 }
 
+/* champ des radio/checkbox
+*  on annule les decalages de label/champs
+*  lorsqu'ils sont inclus dans une class .champ
+*
+*  La liste par defaut est verticale
+*  pour l'avoir horizontale, il faut specifier :
+*  .formulaire_spip .formulaire_editer .editer_qqc .champ{display:inline;}
+*/
+.formulaire_spip li.editer_parent .choix {
+	padding-left: 40px;
+}
+.formulaire_spip li.editer_parent .choix label,
+.formulaire_spip .choix label{
+	float:none; 
+	display:inline;
+	margin-#GET{left}: 5px; 
+	font-weight:normal; 
+	text-transform: none;
+	font-size: 1em;
+	background: none;
+	padding: 0px;
+	color: #666666;
+}
+.formulaire_spip .choix input.radio,
+.formulaire_spip .choix input.checkbox {width:auto;}
+
 
 /* erreur */
 .formulaire_spip li.erreur input.text,
@@ -319,7 +325,6 @@ li.extra label,
 }
 /* Remarques importantes */
 .formulaire_spip em.attention { display: block; margin: 0.5em; font-weight: normal; }
-
 
 
 
