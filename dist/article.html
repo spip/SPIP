@@ -32,7 +32,7 @@
 				[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
             </div>
 
-            <p><small><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr>[, <:par_auteur:> (#LESAUTEURS)]</small></p>
+            <p><small><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr>[, <:par_auteur:> (#LESAUTEURS)][ (<:texte_date_publication_anterieure:> (#DATE_REDAC|affdate)).]</small></p>
 
             [(#REM) Inclure le modele des liens de traductions ]
             #MODELE{article_traductions}
