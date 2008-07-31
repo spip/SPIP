@@ -79,7 +79,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	include_spip('inc/editer');
 	$corps = (!$contenu ? '' :
 	   "<div class='verdana1' style='text-align: center; margin-bottom: 10px;'>$contenu</div>") .
-	  "<div class='formulaire_spip'><ul><li><label for='titre_document$id_document'><b>$label</b></label>\n" .
+	  "<div class='formulaire_spip formulaire_spip_compact'><ul><li><label for='titre_document$id_document'><b>$label</b></label>\n" .
 
 	  "<input type='text' name='titre_document' id='titre_document$id_document' class='formo' value=\"".entites_html($titre).
 	  "\" size='40'	onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /></li>\n"
