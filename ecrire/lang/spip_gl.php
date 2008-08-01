@@ -202,6 +202,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'double_occurrence' => 'Dobre ocorrencia',
 
 // E
+'en_cours' => 'en curso',
 'entree_dimensions' => 'Dimensi&oacute;ns:',
 'entree_titre_document' => 'T&iacute;tulo do documento:',
 'entree_titre_image' => 'T&iacute;tulo da imaxe:',
@@ -209,6 +210,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'Erro',
 'erreur_balise_non_fermee' => 'a &uacute;ltima baliza non foi pechada :',
 'erreur_texte' => 'erro(s)',
+'etape' => 'Etapa',
 
 // F
 'fichier_introuvable' => 'O ficheiro @fichier@ non foi atopado',
@@ -692,7 +694,7 @@ e reconectar co web.
   e finalmente verifique que as imaxes aparecen sempre
   nos artigos.',
 'texte_erreur_visiteur' => 'Vostede tentou de acceder ao espazo privado cun identificador que non llo permite',
-'texte_inc_auth_1' => '<MODIF>Identificouse co
+'texte_inc_auth_1' => 'Identificouse co
   identificador <b>@auth_login@</b>, mais este non existe na base de datos.
   Probe',
 'texte_inc_auth_2' => 'reconectar',
@@ -733,6 +735,7 @@ e reconectar co web.
 'titre_signatures_confirmees' => 'Sinaturas confirmadas',
 'titre_statistiques' => 'Estat&iacute;sticas do web',
 'titre_titre_document' => 'T&iacute;tulo do documento:',
+'todo' => 'pr&oacute;ximos',
 'trad_reference' => '(artigo de referencia)',
 
 // Z
