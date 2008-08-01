@@ -169,34 +169,28 @@ function quete_rubrique_fond($contexte) {
 # retourne le chapeau d'un article, et seulement s'il est publie
 
 // http://doc.spip.org/@quete_chapo
-function quete_chapo($id_article) {
-	$chapo= sql_fetsel('chapo', 'spip_articles', array("id_article=".intval($id_article), "statut='publie'"));
-	return $chapo['chapo'];
+function quete_chapo($id_article, $connect) {
+	return sql_getfetsel('chapo', 'spip_articles', array("id_article=".intval($id_article), "statut='publie'"), '','','','',$connect);
 }
 
 # retourne le parent d'une rubrique
 
 // http://doc.spip.org/@quete_parent
-function quete_parent($id_rubrique) {
+function quete_parent($id_rubrique, $connect='') {
 	if (!$id_rubrique = intval($id_rubrique))
 		return 0;
 
-	$id_parent = sql_fetsel('id_parent, lang','spip_rubriques',"id_rubrique=" . $id_rubrique);
-
-	if ($id_parent['id_parent']!=$id_rubrique)
-		return intval($id_parent['id_parent']);
-	else
-		spip_log("erreur: la rubrique $id_rubrique est son propre parent");
+	return intval(sql_getfetsel('id_parent','spip_rubriques',"id_rubrique=" . $id_rubrique, '','','','',$connect));
 }
 
 # retourne la profondeur d'une rubrique
 
 // http://doc.spip.org/@quete_profondeur
-function quete_profondeur($id) {
+function quete_profondeur($id, $connect='') {
 	$n = 0;
 	while ($id) {
 		$n++;
-		$id = quete_parent($id);
+		$id = quete_parent($id, $connect);
 	}
 	return $n;
 }
@@ -204,8 +198,8 @@ function quete_profondeur($id) {
 # retourne la rubrique d'un article
 
 // http://doc.spip.org/@quete_rubrique
-function quete_rubrique($id_article) {
-	return sql_getfetsel('id_rubrique', 'spip_articles',"id_article=" . intval($id_article));
+function quete_rubrique($id_article, $serveur) {
+	return sql_getfetsel('id_rubrique', 'spip_articles',"id_article=" . intval($id_article),	'',array(), '', '', $serveur);
 }
 
 # retourne le fichier d'un document
@@ -297,7 +291,7 @@ function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 		// si le raccourci a un titre il sera pris comme corps du 302
 		if ($fond == 'article'
 		AND $id_article = intval($local['id_article'])) {
-			$m = quete_chapo($id_article);
+			$m = quete_chapo($id_article, $connect);
 			if ($m[0]=='=') {
 				include_spip('inc/texte');
 				// les navigateurs pataugent si l'URL est vide
