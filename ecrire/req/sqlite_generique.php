@@ -1213,8 +1213,8 @@ function _sqlite_ref_fonctions(){
 // http://doc.spip.org/@_sqlite_remplacements_definitions_table
 function _sqlite_remplacements_definitions_table($query){
 	// quelques remplacements
-	$num = "\s?(\([0-9]*)\)?";
-	$enum = "\s?(\(.*)\)?";
+	$num = "(\s*\([0-9]*\))?";
+	$enum = "(\s*\([^\)]*\))?";
 	
 	$remplace = array(
 		// pour l'autoincrement, il faut des INTEGER NOT NULL PRIMARY KEY
