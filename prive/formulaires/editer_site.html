@@ -12,8 +12,16 @@
 		[<input type='hidden' name='logo' value='(#ENV**{logo,''})' />]
 		[<input type='hidden' name='format_logo' value='(#ENV**{format_logo,''})' />]
 
+
+		[<!-- Le logo auto-detecte -->
+		<div style='height:1px;'>(#ENV**{logo}|image_reduire{180,999}|inserer_attribut{style,
+			position: relative;
+			#LANG_LEFT: -220px;
+			top: -60px;
+		})</div>]
+
 		<ul>
-		[(#ENV{id_syndic}|non)
+		[(#ENV{id_syndic}|sinon{#ENV{url_site}}|non)
 		[(#SESSION{statut}|=={0minirezo}|?{' ',#ENV{config}|table_valeur{proposer_site}|=={oui}|oui})
 			<li class="editer_referencement_automatise">
 			  <fieldset>
