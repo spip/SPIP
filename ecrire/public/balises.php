@@ -295,6 +295,7 @@ function calculer_balise_expose($p, $on, $off)
 	$key = $p->boucles[$b]->primary; 
 	$type = $p->boucles[$p->id_boucle]->primary; 
 	$desc = $p->boucles[$b]->show;
+	$connect = sql_quote($p->boucles[$b]->sql_serveur);
 
 	if (!$key) {
 		erreur_squelette(_T('zbug_champ_hors_boucle', array('champ' => '#EXPOSER')), $b);
@@ -311,7 +312,7 @@ function calculer_balise_expose($p, $on, $off)
 		$parent = index_pile($p->id_boucle, 'id_groupe', $p->boucles, $b);
 	} else $parent = "''";
 		  
-	$p->code = "(calcul_exposer($c, '$type', \$Pile[0], $parent, '$key') ? $on : $off)";
+	$p->code = "(calcul_exposer($c, '$type', \$Pile[0], $parent, '$key', $connect) ? $on : $off)";
 
 	$p->interdire_scripts = false;
 	return $p;

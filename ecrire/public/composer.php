@@ -308,29 +308,8 @@ function executer_balise_dynamique($nom, $args, $filtres, $lang, $ligne) {
 
 # NB : a l'exception des fonctions pour les balises dynamiques
 
-// http://doc.spip.org/@calculer_hierarchie
-function calculer_hierarchie($id_rubrique, $exclure_feuille = false) {
-
-	if (!$id_rubrique = intval($id_rubrique))
-		return '0';
-
-	$hierarchie = array();
-
-	if (!$exclure_feuille)
-		$hierarchie[] = $id_rubrique;
-
-	while ($id_rubrique = quete_parent($id_rubrique))
-		array_unshift($hierarchie, $id_rubrique);
-
-	if (count($hierarchie))
-		return join(',', $hierarchie);
-	else
-		return '0';
-}
-
-
 // http://doc.spip.org/@calcul_exposer
-function calcul_exposer ($id, $prim, $reference, $parent, $type) {
+function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
 	static $exposer = array();
 	static $ref_precedente =-1;
 
@@ -352,11 +331,12 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type) {
 					}
 		}
 		$exposer[$m][$type] = array();
+		$parent = intval($parent);
 		if ($principal) {
 			$exposer[$m][$type][$principal] = true;
 			if ($type == 'id_mot'){
 				if (!$parent) {
-					$parent = sql_fetsel('id_groupe','spip_mots',"id_mot=" . $principal);
+					$parent = sql_fetsel('id_groupe','spip_mots',"id_mot=" . $principal, '','','','',$connect);
 					$parent = $parent['id_groupe'];
 				}
 				if ($parent)
@@ -367,12 +347,12 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type) {
 			  	if ($type == 'id_rubrique')
 			  		$parent = $principal;
 			  	if ($type == 'id_article') {
-						$parent = sql_fetsel('id_rubrique','spip_articles',"id_article=" . $principal);
+						$parent = sql_fetsel('id_rubrique','spip_articles',"id_article=" . $principal, '','','','',$connect);
 						$parent = $parent['id_rubrique'];
 			  	}
 			  }
-			  $a = split(',',calculer_hierarchie($parent));
-			  foreach($a as $n) $exposer[$m]['id_rubrique'][$n] = true;
+			  do { $exposer[$m]['id_rubrique'][$parent] = true; }
+			  while ($parent = quete_parent($parent, $connect));
 			}
 		}
 	}
