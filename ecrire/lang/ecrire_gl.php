@@ -1064,6 +1064,7 @@ e ser&aacute; visible para todo o equipo de redacci&oacute;n. Use os anuncios s&
 'texte_recuperer_base' => 'Reparar a base de datos',
 'texte_reference_mais_redirige' => 'artigo referido no seu web SPIP, mais redirixido cara a outro URL.',
 'texte_referencement_automatique' => '<b>Referencia automatizada dun web</b><br />Pode referir rapidamente un  web ao indicar aqu&iacute; embaixo o enderezo URL desexado, ou o enderezo do seu ficheiro de afiliaci&oacute;n. SPIP recuperar&aacute; automaticamente as informaci&oacute;ns concernintes a este lugar (t&iacute;tulo, descrici&oacute;n...).',
+'texte_referencement_automatique_verifier' => 'Comprobe os datos fornecidos por <tt>@url@</tt> antes de rexistralos.',
 'texte_requetes_echouent' => '<b>Cando algunhas petici&oacute;ns SQL fallan
  sistematicamente e sen raz&oacute;n aparente, &eacute; posible
  que a causa sexa a propia base de datos.</b><p>
