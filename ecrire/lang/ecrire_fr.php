@@ -710,6 +710,7 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'install_types_db_connus' => 'SPIP sait utiliser <b>MySQL</b> (le plus r&eacute;pandu), <b>PostgreSQL</b> et <b>SQLite</b>.',
 'install_types_db_connus_avertissement' => 'Attention&nbsp;: plusieurs plugins ne fonctionnent qu\'avec MySQL',
 'intem_redacteur' => 'r&eacute;dacteur',
+'intitule_licence' => 'Licence',
 'item_accepter_inscriptions' => 'Accepter les inscriptions',
 'item_activer_forum_administrateur' => 'Activer le forum des administrateurs',
 'item_activer_messages_avertissement' => 'Activer les messages d\'avertissement',
@@ -778,7 +779,6 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'item_utiliser_mots_cles' => 'Utiliser les mots-cl&eacute;s',
 'item_utiliser_syndication' => 'Utiliser la syndication automatique',
 'item_visiteur' => 'visiteur',
-'intitule_licence' => 'Licence',
 
 // J
 'jour_non_connu_nc' => 'n.c.',
@@ -1071,6 +1071,7 @@ recalculer une seule page, passez plut&ocirc;t par l\'espace public et utilisez-
 'texte_recuperer_base' => 'R&eacute;parer la base de donn&eacute;es',
 'texte_reference_mais_redirige' => 'article r&eacute;f&eacute;renc&eacute; dans votre site SPIP, mais redirig&eacute; vers une autre URL.',
 'texte_referencement_automatique' => '<b>R&eacute;f&eacute;rencement automatis&eacute; d\'un site</b><br />Vous pouvez r&eacute;f&eacute;rencer rapidement un site Web en indiquant ci-dessous l\'adresse URL d&eacute;sir&eacute;e, ou l\'adresse de son fichier de syndication. SPIP va r&eacute;cup&eacute;rer automatiquement les informations concernant ce site (titre, description...).',
+'texte_referencement_automatique_verifier' => 'Veuillez v&eacute;rifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.',
 'texte_requetes_echouent' => '<b>Lorsque certaines requ&ecirc;tes SQL &eacute;chouent
   syst&eacute;matiquement et sans raison apparente, il est possible
   que ce soit &agrave; cause de la base de donn&eacute;es

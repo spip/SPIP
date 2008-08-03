@@ -1064,6 +1064,7 @@ to refresh only one page, you would rather do it from the public area and use th
 'texte_recuperer_base' => 'Repair the database',
 'texte_reference_mais_redirige' => 'referenced article in your SPIP site, but redirected to another URL.',
 'texte_referencement_automatique' => '<b>Automated site referencing</b><br />You can reference a Web site quickly by indicating below the desired URL, or the address of its syndication file. SPIP will automatically retrieve the site\'s information (title, description...).',
+'texte_referencement_automatique_verifier' => 'Please, verify the information provided by <tt>@url@</tt> before saving.',
 'texte_requetes_echouent' => '<b>When some SQL queries fail
   systematically, without apparent reason, it is possible
   that the database itself
