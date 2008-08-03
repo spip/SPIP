@@ -1628,7 +1628,7 @@ function extraire_balise($texte, $tag='a') {
 	}
 
 	if (preg_match(
-	",<$tag\b[^>]*(/>|>.*</$tag>|>),UimsS",
+	",<$tag\b[^>]*(/>|>.*</$tag\b[^>]*>|>),UimsS",
 	$texte, $regs))
 		return $regs[0];
 }
@@ -1645,7 +1645,7 @@ function extraire_balises($texte, $tag='a') {
 	}
 
 	if (preg_match_all(
-	",<${tag}\b[^>]*(/>|>.*</${tag}>|>),UimsS",
+	",<${tag}\b[^>]*(/>|>.*</${tag}\b[^>]*>|>),UimsS",
 	$texte, $regs, PREG_PATTERN_ORDER))
 		return $regs[0];
 	else
@@ -1799,6 +1799,22 @@ function filtre_pagination_dist($total, $nom, $position, $pas, $liste = true, $m
 	return recuperer_fond("modeles/pagination$modele", $pagination, true, $connect);
 }
 
+// passer les url relatives a la css d'origine en url absolues
+// http://doc.spip.org/@urls_absolues_css
+function urls_absolues_css($contenu, $path=null) {
+	if (!isset($path)) {
+		$self = url_absolue(self(true));
+		$path = $path = pathinfo($self);
+		$path = $path['dirname'].'/';
+	}
+
+	return preg_replace_callback(
+		",url\s*\(\s*['\"]?([^'\"/][^:]*)['\"]?\s*\),Uims",
+		create_function('$x',
+			'return "url(".suivre_lien("'.$path.'",$x[1]).")";'
+		), $contenu);
+}
+
 // recuperere le chemin d'une css existante et :
 // 1. regarde si une css inversee droite-gauche existe dans le meme repertoire
 // 2. sinon la cree (ou la recree) dans _DIR_VAR/cache_css/
@@ -1873,10 +1889,9 @@ function direction_css ($css, $voulue='') {
 		$src_direction_css[] = str_replace($import_css,$css_direction,$regs[0][$k]);
 	}
 	$contenu = str_replace($src,$src_direction_css,$contenu);
-	
-	// passer les url relatives a la css d'origine en url absolues
-	$contenu = preg_replace(",url\s*\(\s*['\"]?([^'\"/][^:]*)['\"]?\s*\),UimsS",
-		"url($path\\1)",$contenu);
+
+	$contenu = urls_absolues_css($contenu);
+
 	// virer les fausses url absolues que l'on a mis dans les import
 	if (count($src_faux_abs))
 		$contenu = str_replace(array_keys($src_faux_abs),$src_faux_abs,$contenu);
@@ -1894,8 +1909,7 @@ function url_absolue_css ($css) {
 	if (!preg_match(',\.css$,i', $css, $r)) return $css;
 
 	$url_absolue_css = url_absolue($css);
-	$path = dirname($url_absolue_css)."/"; // pour mettre sur les images
-	
+
 	$f = basename($css,'.css');
 	$f = sous_repertoire (_DIR_VAR, 'cache-css') 
 		. preg_replace(",(.*?)(_rtl|_ltr)?$,","\\1-urlabs-" . substr(md5("$css-urlabs"), 0,4) . "\\2",$f) 
@@ -1917,8 +1931,7 @@ function url_absolue_css ($css) {
 		return $css;
 
 	// passer les url relatives a la css d'origine en url absolues
-	$contenu = preg_replace(",url\s*\(\s*['\"]?([^'\"/][^:]*)['\"]?\s*\),UimsS",
-		"url($path\\1)",$contenu);
+	$contenu = urls_absolues_css($contenu, dirname($url_absolue_css)."/");
 
 	// ecrire la css
 	if (!ecrire_fichier($f, $contenu))
@@ -2253,20 +2266,15 @@ function filtre_cache_static($scripts,$type='js'){
 		  			parse_str($script[1],$contexte);
 		  			$contenu = evaluer_fond($script[0],$contexte);
 		  			$contenu = $contenu['texte'];
-		  			if ($type=='css'){
-						$self = url_absolue(self(true));
-						$path = $path = pathinfo($self);
-						$path = $path['dirname'].'/';
-						// passer les url relatives a la css d'origine en url absolues
-						$contenu = preg_replace(",url\s*\(\s*['\"]?([^'\"/][^:]*)['\"]?\s*\),Uims",
-							"url($path\\1)",$contenu);
-		  			}
+		  			if ($type=='css')
+						$contenu = urls_absolues_css($contenu);
 		  		}
 				$f = 'compacte_'.$type;
 	  			$fichier .= "/* $comm */\n". $f($contenu) . "\n\n";
 				$comms[] = $comm;
 				$total += strlen($contenu);
 		  	}
+
 			// calcul du % de compactage
 			$pc = intval(1000*strlen($fichier)/$total)/10;
 			$comms = "compact [\n\t".join("\n\t", $comms)."\n] $pc%";
@@ -2278,7 +2286,9 @@ function filtre_cache_static($scripts,$type='js'){
 		  	ecrire_fichier("$nom.gz",$fichier);
 		  }
 	}
-	return array($nom, "<!-- $comms -->\n");
+
+	// Le commentaire detaille n'apparait qu'au recalcul, pour debug
+	return array($nom, $comms ? "<!-- $comms -->\n" : '');
 }
 
 
