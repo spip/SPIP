@@ -46,7 +46,7 @@ function balise_FORMULAIRE__dyn($form)
 		return '';
 
 	// tester si ce formulaire vient d'etre poste (memes arguments)
-	// pour ne pas confondre 2 #FORMULAIRES_XX identiques
+	// pour ne pas confondre 2 #FORMULAIRES_XX identiques sur une meme page
 	$je_suis_poste = false;
 	if ($post_form = _request('formulaire_action')
 	AND $post_args = _request('formulaire_action_args')) {
@@ -63,11 +63,16 @@ function balise_FORMULAIRE__dyn($form)
 
 	// si le formulaire vient d'etre poste, on recupere les erreurs
 	if ($je_suis_poste){
-		$erreurs = isset($_POST["erreurs_$form"])?$_POST["erreurs_$form"]:array();
-		$message_ok = isset($_POST["message_ok_$form"])?$_POST["message_ok_$form"]:"";
+		$post = traiter_formulaires_dynamiques(true);
+		$erreurs = isset($post["erreurs_$form"])?$post["erreurs_$form"]:array();
+		$message_ok = "";
+		if (isset($post["message_ok_$form"]))
+			$message_ok = $post["message_ok_$form"];
+		elseif(isset($erreurs['message_ok']))
+			$message_ok = $erreurs["message_ok"];
 		$message_erreur = isset($erreurs['message_erreur'])?$erreurs['message_erreur']:"";
-		$editable = (!isset($_POST["erreurs_$form"])) || count($erreurs) || 
-			(isset($_POST["editable_$form"]) && $_POST["editable_$form"]);
+		$editable = (!isset($post["erreurs_$form"])) || count($erreurs) || 
+			(isset($post["editable_$form"]) && $post["editable_$form"]);
 	}
 
 	if ($charger_valeurs = charger_fonction("charger","formulaires/$form/",true))
