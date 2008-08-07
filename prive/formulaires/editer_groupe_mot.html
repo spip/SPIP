@@ -1,7 +1,7 @@
 <div class='formulaire_spip formulaire_editer formulaire_editer_groupe_mot formulaire_editer_groupe_mot-#ENV{id_groupe_mot,nouveau}'>
 	<!-- <br class='bugajaxie' /> -->
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
-	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
@@ -9,49 +9,49 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 	  <input type='hidden' name='id_groupe_mot' value='#ENV{id_groupe_mot}' />
 	  <ul>
-	    <li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
-			<label for="titre"><:info_changer_nom_groupe:></label>
-			<em class="aide">#AIDER{motsgroupes}</em>
+	    <li class='editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]'>
+			<label for='titre'><:info_changer_nom_groupe:></label>
+			<em class='aide'>#AIDER{motsgroupes}</em>
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>]
-			<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre,#VAL{titre_nouveau_groupe}|_T|filtrer_entites})]"
+			<input type='text' class='text' name='titre' id='titre' value='[(#ENV**{titre,#VAL{titre_nouveau_groupe}|_T|filtrer_entites})]'
 			[(#ENV{titre,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
 	    </li>	
-	    <li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
-			<label for="descriptif"><:texte_descriptif_rapide:></label>
+	    <li class='editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]'>
+			<label for='descriptif'><:texte_descriptif_rapide:></label>
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>]
 			<textarea name='descriptif' id='descriptif' rows='4' cols='40'>[(#ENV**{descriptif})]</textarea>
 	    </li>
-	    <li class="editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
-			<label for="text_area"><:info_texte_explicatif:></label>
+	    <li class='editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]'>
+			<label for='text_area'><:info_texte_explicatif:></label>
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>]
 			[(#ENV**{_texte_trop_long,''})]
-			<div class="explication"><:texte_enrichir_mise_a_jour:><em>#AIDER{raccourcis}</em></div>
+			<div class='explication'><:texte_enrichir_mise_a_jour:><em>#AIDER{raccourcis}</em></div>
 			[(#ENV**{config}|table_valeur{afficher_barre}|?{#VAL{text_area}|barre_typo{#LANG}})]
 			<textarea name='texte' id='text_area' class='barre_inserer' cols='40' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]'[
 			(#ENV**{browser_caret,''})]>[(#ENV**{texte})]</textarea>
 	    </li>
 	    <li>
 	      <fieldset><legend><:info_mots_cles_association:></legend><ul><li>
-	    	<div class='choix'><input type='checkbox' class='checkbox' name='tables_liees&#91;&#93;' value='articles'[(#VAL{articles}|in_any{#ENV{tables_liees}}|oui)checked="checked"] id='articles' /><label for='articles'><:item_mots_cles_association_articles:></label></div>
+	    	<div class='choix'><input type='checkbox' class='checkbox' name='tables_liees&#91;&#93;' value='articles'[(#VAL{articles}|in_any{#ENV{tables_liees}})checked='checked'] id='articles' /><label for='articles'><:item_mots_cles_association_articles:></label></div>
 	    	[(#ENV{config}|table_valeur{activer_breves}|=={oui}|oui)
-	    	<div class='choix'><input type='checkbox' class='checkbox' name='tables_liees&#91;&#93;' value='breves'[(#VAL{breves}|in_array{#ENV{tables_liees}}|oui)checked="checked"] id='breves' /><label for='breves'><:item_mots_cles_association_breves:></label></div>
+	    	<div class='choix'><input type='checkbox' class='checkbox' name='tables_liees&#91;&#93;' value='breves'[(#VAL{breves}|in_any{#ENV{tables_liees}})checked='checked'] id='breves' /><label for='breves'><:item_mots_cles_association_breves:></label></div>
 	    	]
-	    	<div class='choix'><input type='checkbox' class='checkbox' name='tables_liees&#91;&#93;' value='rubriques'[(#VAL{rubriques}|in_array{#ENV{tables_liees}}|oui)checked="checked"] id='rubriques' /><label for='rubriques'><:item_mots_cles_association_rubriques:></label></div>
-	    	<div class='choix'><input type='checkbox' class='checkbox' name='tables_liees&#91;&#93;' value='syndic'[(#VAL{syndic}|in_array{#ENV{tables_liees}}|oui)checked="checked"] id='syndic' /><label for='syndic'><:item_mots_cles_association_sites:></label></div>
+	    	<div class='choix'><input type='checkbox' class='checkbox' name='tables_liees&#91;&#93;' value='rubriques'[(#VAL{rubriques}|in_any{#ENV{tables_liees}})checked='checked'] id='rubriques' /><label for='rubriques'><:item_mots_cles_association_rubriques:></label></div>
+	    	<div class='choix'><input type='checkbox' class='checkbox' name='tables_liees&#91;&#93;' value='syndic'[(#VAL{syndic}|in_any{#ENV{tables_liees}})checked='checked'] id='syndic' /><label for='syndic'><:item_mots_cles_association_sites:></label></div>
 	    	<!--choix_tables-->
 	    	</li></ul></fieldset>
 	    	[(#ENV{config}|table_valeur{config_precise_groupes}|=={oui}|ou{#ENV{unseul}|=={oui}}|ou{#ENV{obligatoire}|=={oui}}|oui)
 	    	<fieldset><ul><li>
-	    	<div class='choix'><input type='checkbox' class='checkbox' name='unseul' value='oui'[(#ENV{unseul}|=={oui}|oui)checked="checked"] id='unseul' /><label for='unseul'><:info_selection_un_seul_mot_cle:></label></div>
-	    	<div class='choix'><input type='checkbox' class='checkbox' name='obligatoire' value='oui'[(#ENV{obligatoire}|=={oui}|oui)checked="checked"] id='obligatoire' /><label for='obligatoire'><:avis_conseil_selection_mot_cle:></label></div>
+	    	<div class='choix'><input type='checkbox' class='checkbox' name='unseul' value='oui'[(#ENV{unseul}|=={oui}|oui)checked='checked'] id='unseul' /><label for='unseul'><:info_selection_un_seul_mot_cle:></label></div>
+	    	<div class='choix'><input type='checkbox' class='checkbox' name='obligatoire' value='oui'[(#ENV{obligatoire}|=={oui}|oui)checked='checked'] id='obligatoire' /><label for='obligatoire'><:avis_conseil_selection_mot_cle:></label></div>
     		</li></ul></fieldset>
     		]
 				<fieldset><legend><:info_qui_attribue_mot_cle:></legend><ul><li>
-	    	<div class='choix'><input type='checkbox' class='checkbox' name='acces_minirezo' value='oui'[(#ENV{minirezo}|=={oui}|oui)checked="checked"] id='acces_minirezo' /><label for='acces_minirezo'><:bouton_checkbox_qui_attribue_mot_cle_administrateurs:></label></div>
-	    	<div class='choix'><input type='checkbox' class='checkbox' name='acces_comite' value='oui'[(#ENV{comite}|=={oui}|oui)checked="checked"] id='acces_comite' /><label for='acces_comite'><:bouton_checkbox_qui_attribue_mot_cle_redacteurs:></label></div>
+	    	<div class='choix'><input type='checkbox' class='checkbox' name='acces_minirezo' value='oui'[(#ENV{minirezo}|=={oui}|oui)checked='checked'] id='acces_minirezo' /><label for='acces_minirezo'><:bouton_checkbox_qui_attribue_mot_cle_administrateurs:></label></div>
+	    	<div class='choix'><input type='checkbox' class='checkbox' name='acces_comite' value='oui'[(#ENV{comite}|=={oui}|oui)checked='checked'] id='acces_comite' /><label for='acces_comite'><:bouton_checkbox_qui_attribue_mot_cle_redacteurs:></label></div>
 				[(#ENV{config}|table_valeur{forums_publics}|=={non}|non)
 					[(#ENV{config}|table_valeur{mots_cles_forums}|=={oui}|ou{#ENV{forum}|=={oui}}|oui)
-	    		<div class='choix'><input type='checkbox' class='checkbox' name='acces_forum' value='oui'[(#ENV{forum}|=={oui}|oui)checked="checked"] id='acces_forum' /><label for='acces_comite'><:bouton_checkbox_qui_attribue_mot_cle_visiteurs:></label></div>
+	    		<div class='choix'><input type='checkbox' class='checkbox' name='acces_forum' value='oui'[(#ENV{forum}|=={oui}|oui)checked='checked'] id='acces_forum' /><label for='acces_comite'><:bouton_checkbox_qui_attribue_mot_cle_visiteurs:></label></div>
 					]
 				]
 				<!--choix_acces-->
@@ -60,7 +60,7 @@
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
-	  <p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	  <p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>
 	]
 </div>

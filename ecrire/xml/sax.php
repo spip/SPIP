@@ -17,25 +17,21 @@ include_spip('inc/charsets');
 include_spip('xml/interfaces');
 
 // http://doc.spip.org/@xml_debutElement
-function xml_debutElement($parser, $name, $attrs)
+function xml_debutElement($phraseur, $name, $attrs)
 {
-	global $phraseur_xml;
-	$depth = &$phraseur_xml->depth;
-	$contenu = &$phraseur_xml->contenu;
-	$ouvrant = &$phraseur_xml->ouvrant;
-	$reperes = &$phraseur_xml->reperes;
+	$depth = $phraseur->depth;
 
-	$t = isset($ouvrant[$depth]) ? $ouvrant[$depth] : ' ';
+	$t = isset($phraseur->ouvrant[$depth]) ? $phraseur->ouvrant[$depth] : ' ';
 	// espace initial signifie: deja integree au resultat
 	if ($t[0] != ' ')
 	  {
-	    $phraseur_xml->res .= '<' . $t . '>';
-	    $ouvrant[$depth] = ' ' . $t;
+	    $phraseur->res .= '<' . $t . '>';
+	    $phraseur->ouvrant[$depth] = ' ' . $t;
 	  }
-	$t = $contenu[$depth];
+	$t = $phraseur->contenu[$depth];
 	// n'indenter que s'il y a un separateur avant
-	$phraseur_xml->res .= ereg_replace("[\n\t ]+$",  "\n$depth", $t);
-	$contenu[$depth] = "";
+	$phraseur->res .= preg_replace("/[\n\t ]+$/",  "\n$depth", $t);
+	$phraseur->contenu[$depth] = "";
 	$att = '';
 	$sep = ' ';
 	foreach ($attrs as $k => $v) {
@@ -46,28 +42,23 @@ function xml_debutElement($parser, $name, $attrs)
 	    . $delim;
 	  $sep = "\n $depth";
 	}
-	$depth .= '  ';
-	$contenu[$depth] = "";
-	$ouvrant[$depth] = $name . $att;
-	$reperes[$depth] = xml_get_current_line_number($parser);
+	$phraseur->depth .= '  ';
+	$phraseur->contenu[$phraseur->depth] = "";
+	$phraseur->ouvrant[$phraseur->depth] = $name . $att;
+	$phraseur->reperes[$phraseur->depth] = xml_get_current_line_number($phraseur->sax);
 }
 
 // http://doc.spip.org/@xml_finElement
-function xml_finElement($parser, $name, $fusion_bal=false)
+function xml_finElement($phraseur, $name, $fusion_bal=false)
 {
-	global $phraseur_xml;
-	$depth = &$phraseur_xml->depth;
-	$contenu = &$phraseur_xml->contenu;
-	$ouvrant = &$phraseur_xml->ouvrant;
-
-	$ouv = $ouvrant[$depth];
+	$ouv = $phraseur->ouvrant[$phraseur->depth];
 
 	if ($ouv[0] != ' ')
-	  $ouvrant[$depth] = ' ' . $ouv;
+		$phraseur->ouvrant[$phraseur->depth] = ' ' . $ouv;
 	else $ouv= "";
-	$t = $contenu[$depth];
-	$depth = substr($depth, 2);
-	$t = ereg_replace("[\n\t ]+$", "\n" . $depth, $t);
+	$t = $phraseur->contenu[$phraseur->depth];
+	$phraseur->depth = substr($phraseur->depth, 2);
+	$t = preg_replace("/[\n\t ]+$/", "\n" . $phraseur->depth, $t);
 
   // fusion <balise></balise> en <balise />.
   // ATTENTION,  certains clients http croient que fusion ==> pas d'atttributs
@@ -76,93 +67,83 @@ function xml_finElement($parser, $name, $fusion_bal=false)
   // (param fusion_bal)
 
 	if ($t || (($ouv != $name) AND !$fusion_bal))
-	  $phraseur_xml->res .= ($ouv ? ('<' . $ouv . '>') : '') . $t . "</" . $name . ">";
+	  $phraseur->res .= ($ouv ? ('<' . $ouv . '>') : '') . $t . "</" . $name . ">";
 	else
-	  $phraseur_xml->res .= ($ouv ? ('<' . $ouv  . ' />') : ("</" .  $name . ">"));
+	  $phraseur->res .= ($ouv ? ('<' . $ouv  . ' />') : ("</" .  $name . ">"));
 }
 
 // http://doc.spip.org/@xml_textElement
-function xml_textElement($parser, $data)
+function xml_textElement($phraseur, $data)
 {
-	global $phraseur_xml;
-
-	$depth = &$phraseur_xml->depth;
-	$contenu = &$phraseur_xml->contenu;
-	$contenu[$depth] .= preg_match('/^script/',$phraseur_xml->ouvrant[$depth])
+	$depth = $phraseur->depth;
+	$phraseur->contenu[$depth] .= preg_match('/^script/',$phraseur->ouvrant[$depth])
 	  ? $data
 	  : entites_html($data);
 }
 
 // http://doc.spip.org/@xml_PiElement
-function xml_PiElement($parser, $target, $data)
+function xml_PiElement($phraseur, $target, $data)
 {
-	global $phraseur_xml;
-	$depth = &$phraseur_xml->depth;
-	$contenu = &$phraseur_xml->contenu;
+	$depth = $phraseur->depth;
+
 	if (strtolower($target) != "php")
-	  $contenu[$depth] .= $data;
+	  $phraseur->contenu[$depth] .= $data;
 	else {
 		ob_start();
 		eval($data);
 		$data = ob_get_contents();
 		ob_end_clean();
-		$contenu[$depth] .= $data;
+		$phraseur->contenu[$depth] .= $data;
 	}
 }
 
 
 // http://doc.spip.org/@xml_defautElement
-function xml_defautElement($parser, $data)
+function xml_defautElement($phraseur, $data)
 {
-	global $phraseur_xml;
-	$depth = &$phraseur_xml->depth;
-	$contenu = &$phraseur_xml->contenu;
+	$depth = $phraseur->depth;
 
-	if (!isset($contenu[$depth])) $contenu[$depth]='';
-	$contenu[$depth] .= $data;
+	if (!isset($phraseur->contenu[$depth])) $phraseur->contenu[$depth]='';
+	$phraseur->contenu[$depth] .= $data;
 }
 
 // http://doc.spip.org/@xml_parsestring
 function xml_parsestring($phraseur, $data)
 {
-	global $phraseur_xml;
-	$phraseur_xml->contenu[$phraseur_xml->depth] ='';
+	$phraseur->contenu[$phraseur->depth] ='';
 
-	if (!xml_parse($phraseur, $data, true)) {
+	if (!xml_parse($phraseur->sax, $data, true)) {
 	  // ne pas commencer le message par un "<" (cf xml_sax_dist)
-	  $phraseur_xml->err = array(
-	    xml_error_string(xml_get_error_code($phraseur)) .
+	  $phraseur->err = array(
+	    xml_error_string(xml_get_error_code($phraseur->sax)) .
 		  coordonnees_erreur($phraseur) . "<br />\n" .
-		  (!$phraseur_xml->depth ? '' :
+		  (!$phraseur->depth ? '' :
 		   (
 		    _T('erreur_balise_non_fermee') .
 		    " <tt>" .
-		    $phraseur_xml->ouvrant[$phraseur_xml->depth] .
+		    $prhaseur->ouvrant[$phraseur->depth] .
 		    "</tt> " .
 		    _T('ligne') .
-		    $phraseur_xml->reperes[$phraseur_xml->depth] .
+		    $phraseur->reperes[$phraseur->depth] .
 		    " <br />\n" )));
 	}
 }
 
 // http://doc.spip.org/@coordonnees_erreur
-function coordonnees_erreur($xml_parser)
+function coordonnees_erreur($phraseur)
 {
-  global $xml_entete_length;
-  return
-    ' ' .
-	xml_get_current_line_number($xml_parser) + $xml_entete_length.
-    ' ' .
-	xml_get_current_column_number($xml_parser);
+	$entete_length = substr_count($phraseur->entete,"\n");
+	return ' ' .
+		xml_get_current_line_number($phraseur->sax) + $entete_length.
+		' ' .
+		xml_get_current_column_number($phraseur->sax);
 }
 
 // http://doc.spip.org/@xml_sax_dist
-function xml_sax_dist($page, $apply=false)
+function xml_sax_dist($page, $apply=false, $phraseur=NULL)
 {
-	global $phraseur_xml;
-
-	// init par defaut si pas fait (espace public)
-	if (!isset($GLOBALS['phraseur_xml'])) {
+	// init par defaut si pas fait (compatibilite Tidy espace public)
+	if (!$phraseur) {
 		$indenter_xml = charger_fonction('indenter', 'xml');
 		return $indenter_xml($page, $apply);
 	}
@@ -170,21 +151,19 @@ function xml_sax_dist($page, $apply=false)
 	$xml_parser = xml_parser_create($GLOBALS['meta']['charset']);
 
 	xml_set_element_handler($xml_parser,
-			array($phraseur_xml, "debutElement"),
-			array($phraseur_xml, "finElement"));
+			array($phraseur, "debutElement"),
+			array($phraseur, "finElement"));
 
 	xml_set_character_data_handler($xml_parser,
-				       array($phraseur_xml, "textElement"));
+				       array($phraseur, "textElement"));
 
 	xml_set_processing_instruction_handler($xml_parser,
-				       array($phraseur_xml, 'PiElement'));
+				       array($phraseur, 'PiElement'));
 
 	xml_set_default_handler($xml_parser,
-				array($phraseur_xml, "defautElement"));
+				array($phraseur, "defautElement"));
 
 	xml_parser_set_option($xml_parser, XML_OPTION_CASE_FOLDING, false);
-
-	unset($GLOBALS['xhtml_error']);
 
 	if ($apply) {
 		ob_start();
@@ -198,20 +177,15 @@ function xml_sax_dist($page, $apply=false)
 	}
 
 	// charger la DTD et transcoder les entites,
-	// et escamoter le doctype que sax mange en php 5
-	list($entete,$page) = sax_bug($page);
+	// et escamoter le doctype que sax mange en php5 mais pas en  php4
+	list($entete,$page, $dtc) = sax_bug($page);
 
-	$GLOBALS['xml_entete_length'] = substr_count($entete,"\n");
-
-	$res = $phraseur_xml->phraserTout($xml_parser, $page);
-
+	$phraseur->sax = $xml_parser;
+	$phraseur->entete = $entete;
+	$phraseur->page = $page;
+	$phraseur->dtc = $dtc;
+	$phraseur->phraserTout($xml_parser, $page);
 	xml_parser_free($xml_parser);
-
-	if ($res[0] == '<') return $entete . $res;
-
-	$GLOBALS['xhtml_error'] = $res;
-
-	return $entete . $page;
 }
 
 // SAX ne dit pas si une Entite est dans un attribut ou non.
@@ -224,7 +198,7 @@ function xml_sax_dist($page, $apply=false)
 // http://doc.spip.org/@sax_bug
 function sax_bug($data)
 {
-	global  $phraseur_xml;
+	static $dtd = array(); # cache bien utile pour le validateur en boucle
 
 	$r = analyser_doctype($data);
 
@@ -238,23 +212,28 @@ function sax_bug($data)
 
 	$file = _DIR_CACHE_XML . preg_replace('/[^\w.]/','_', $rotlvl) . '.gz';
 
-	if (lire_fichier($file, $r)) {
-			$phraseur_xml->dtc = unserialize($r);
-	} else {
-		include_spip('xml/analyser_dtd');
-		$phraseur_xml->dtc = charger_dtd($grammaire, $avail);
-		if (($avail == 'PUBLIC' ) AND $phraseur_xml->dtc)
-			ecrire_fichier($file, serialize($phraseur_xml->dtc), true);
+	if (isset($dtd[$file]))
+		$dtc = $dtd[$file];
+	else {
+		if (lire_fichier($file, $r)) {
+			$dtc = unserialize($r);
+		} else {
+			include_spip('xml/analyser_dtd');
+			$dtc = charger_dtd($grammaire, $avail);
+			if (($avail == 'PUBLIC' ) AND $dtc)
+				ecrire_fichier($file, serialize($dtc), true);
+		}
+		$dtd[$file] = $dtc;
 	}
 
 	// l'entete contient eventuellement < ? xml... ? >, le Doctype, 
 	// et des commentaires autour d'eux
 	$entete = ltrim(substr($data,0,$len));
 
-	if ($phraseur_xml->dtc) {
+	if ($dtc) {
 		$trans = array();
 		
-		foreach($phraseur_xml->dtc->entites as $k => $v) {
+		foreach($dtc->entites as $k => $v) {
 			if (!strpos(" amp lt gt quot ", $k))
 			    $trans["&$k;"] = $v;
 		}
@@ -262,7 +241,7 @@ function sax_bug($data)
 	} else {
 		$data = html2unicode(substr($data,$len), true);
 	}
-	return array($entete,unicode2charset($data));
+	return array($entete,unicode2charset($data), $dtc);
 }
 
 // http://doc.spip.org/@analyser_doctype

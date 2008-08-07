@@ -276,7 +276,7 @@ function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 		// Interdit de nettoyer, faut assumer l'histoire.
 		$GLOBALS['contexte'] = calculer_contexte();
 		if (!$renommer_urls) {
-			// compatibilite < 1.9.3
+			// compatibilite <= 1.9.2
 			charger_generer_url();
 			if (function_exists('recuperer_parametres_url'))
 				$renommer_urls = 'recuperer_parametres_url';
@@ -326,11 +326,6 @@ function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 	list($skel,$mime_type, $gram, $sourcefile) =
 		$styliser($fond, $id_rubrique_fond, $GLOBALS['spip_lang'], $connect);
 
-	// calcul du nom du squelette
-	$fonc = $mime_type
-	. (!$connect ?  '' : preg_replace('/\W/',"_", $connect)) . '_'
-	. md5($GLOBALS['spip_version_code'].' * '.$skel);
-
 	$debug = (isset($GLOBALS['var_mode']) && ($GLOBALS['var_mode'] == 'debug'));
 	// sauver le nom de l'eventuel squelette en cours d'execution
 	// (recursion possible a cause des modeles)
@@ -340,15 +335,17 @@ function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 	// charger le squelette en specifiant les langages cibles et source
 	// au cas il faudrait le compiler (source posterieure au resultat)
 
-	if (!function_exists($fonc)) {
+	$fonc = calculer_nom_fonction_squel($skel, $mime_type, $connect);
 
-		$composer = charger_fonction('composer', 'public');
+	if (!function_exists($fonc)) {
 
 		if ($debug) {
 			$GLOBALS['debug_objets']['contexte'][$sourcefile] = $local;
 			$GLOBALS['debug_objets']['courant'] = $fonc;
 		}
-		$fonc = $composer($skel, $fonc, $gram, $sourcefile, $connect);
+		$composer = charger_fonction('composer', 'public');
+		if (!$composer($skel, $fonc, $gram, $sourcefile, $connect))
+			$fonc = false;
 	}
 
 	// Appliquer le squelette compile' sur le contexte.
@@ -374,15 +371,17 @@ function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 				$val = "'$val'";
 			$infos[] = $var.'='.$val;
 		}
-		spip_log("calcul ("
-			.($profile = spip_timer($a))
-			.") [$skel] "
+		$profile = spip_timer($a);
+		spip_log("calcul ($profile) [$skel] "
 			. join(', ', $infos)
-			.' ('.strlen($page['texte']).' octets)'
-		);
-		if ($debug)
-			$GLOBALS['debug_objets']['profile'][$sourcefile] = $profile;
+			.' ('.strlen($page['texte']).' octets)');
 
+		if ($debug) {
+			include_spip('public/debug');
+			debug_dumpfile (strlen($page['texte'])?$page['texte']:" ", $fonc, 'resultat');
+			$GLOBALS['debug_objets']['courant'] = $courant;
+			$GLOBALS['debug_objets']['profile'][$sourcefile] = $profile;
+		}
 		// Si #CACHE{} n'etait pas la, le mettre a $delais
 		if (!isset($page['entetes']['X-Spip-Cache']))
 			$page['entetes']['X-Spip-Cache'] = isset($GLOBALS['delais'])?$GLOBALS['delais']:36000;
@@ -390,11 +389,6 @@ function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 	} else
 		$page = array();
 
-	if ($debug) {
-		include_spip('public/debug');
-		debug_dumpfile (strlen($page['texte'])?$page['texte']:" ", $fonc, 'resultat');
-		$GLOBALS['debug_objets']['courant'] = $courant;
-	}
 	$page['contexte'] = $local;
 
 	if ($select) lang_select();
@@ -408,4 +402,11 @@ function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 	return $page;
 }
 
+// calcul du nom du squelette
+function calculer_nom_fonction_squel($skel, $mime_type='html', $connect='')
+{
+	return $mime_type
+	. (!$connect ?  '' : preg_replace('/\W/',"_", $connect)) . '_'
+	. md5($GLOBALS['spip_version_code'] . ' * ' . $skel);
+}
 ?>
