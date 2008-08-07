@@ -67,8 +67,7 @@ function redirige_par_entete($url, $equiv='', $status = 302) {
 // http://doc.spip.org/@redirige_formulaire
 function redirige_formulaire($url, $equiv = '') {
 	if (!_AJAX
-	&& !headers_sent() 
-	&& !$_GET['var_mode']
+	&& !headers_sent()
 	&& !_request('var_ajax')) {
 		redirige_par_entete(str_replace('&amp;','&',$url), $equiv);
 	} else {
