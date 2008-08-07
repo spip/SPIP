@@ -66,7 +66,6 @@ function rss_split_args($args)
 // http://doc.spip.org/@rss_suivi_versions
 function rss_suivi_versions($a) {
 	include_spip('inc/suivi_versions');
-	$a = rss_split_args($a);
 	return  afficher_suivi_versions (0, $a['id_secteur'], $a['id_auteur'], $a['lang_choisie'], true, true);
 
 }
