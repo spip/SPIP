@@ -31,7 +31,7 @@ include_spip('public/interfaces');
 # Toutefois pour 2. et 3. preferer la technique de la surcharge
 
 // http://doc.spip.org/@public_composer_dist
-function public_composer_dist($squelette, $nom, $gram, $source, $connect) {
+function public_composer_dist($squelette, $nom, $gram, $source, $connect='') {
 
 	$phpfile = sous_repertoire(_DIR_SKELS,'',false,true) . $nom . '.php';
 
@@ -41,14 +41,12 @@ function public_composer_dist($squelette, $nom, $gram, $source, $connect) {
 	array('critique' => 'oui', 'phpcheck' => 'oui')))
 		eval('?'.'>'.$contenu);
 #	spip_log($contenu, 'comp')
-	if (@file_exists($fonc = $squelette . '_fonctions'.'.php')
-	OR @file_exists($fonc = $squelette . '_fonctions'.'.php3')) {
+	if (@file_exists($fonc = $squelette . '_fonctions'.'.php'))
 		include_once $fonc;
-	}
 
 	// tester si le eval ci-dessus a mis le squelette en memoire
 
-	if (function_exists($nom)) return $nom;
+	if (function_exists($nom)) return $contenu;
 
 	// charger le source, si possible, et compiler 
 	if (lire_fichier ($source, $skel)) {
@@ -66,7 +64,7 @@ function public_composer_dist($squelette, $nom, $gram, $source, $connect) {
 		eval('?'.'>'.$skel_code);
 		if (function_exists($nom)) {
 			ecrire_fichier ($phpfile, $skel_code);
-			return $nom;
+			return $skel_code;
 		} else {
 			erreur_squelette(_T('zbug_erreur_compilation'), $source);
 		}

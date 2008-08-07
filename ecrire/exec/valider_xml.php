@@ -97,14 +97,11 @@ function valider_xml_ok($url, $req_ext)
 function valider_resultats($res, $ext)
 {
 	foreach($res as $k => $l) {
-		$n = preg_match_all(",(.*?)(\d+)(\D+(\d+)<br />),",
+		$n = intval(preg_match_all(",(.*?)(\d+)(\D+(\d+)<br />),",
 			$l[3],
-			$regs,
-			PREG_SET_ORDER);
-		if ($n = intval($n)) {
-			$x = trim(substr(textebrut($l[3]),0,16)) .'  ...';
-		} else $x = '';
-		$res[$k][3] = $x;
+			$r,
+			PREG_SET_ORDER));
+		$res[$k][3] = !$n ? '' : ($r[0][1] . ($n==1? '': '  ...'));
 		$res[$k][4] = $l[0];
 		$res[$k][0] = $n;
 	}
@@ -122,7 +119,7 @@ function valider_resultats($res, $ext)
 
 		$h = (strpos($ext,'php') ===false)
 		? ($appel . '&var_mode=debug&var_mode_affiche=validation')
-		  : generer_url_ecrire('valider_xml', "var_url=" . urlencode($appel));
+		: generer_url_ecrire('valider_xml', "var_url=" . urlencode($appel));
 		
 		$table .= "<tr class='$class'>"
 		. "<td style='text-align: right'>$nb</td>"
@@ -139,7 +136,6 @@ function valider_resultats($res, $ext)
 	  . "</th><th>"
 	  . _T('message')
 	  . "</th><th>Page</th><th>args"
-
 	  . "</th></tr>"
 	  . $table
 	  . "</table>";
@@ -171,7 +167,6 @@ function valider_script($transformer_xml, $f, $dir)
 		if (!$g = charger_fonction($script . '_args', $dir, true)) {
 			$res = 0 - $res;
 		} else {
-			unset($GLOBALS['xhtml_error']);
 			$args = array(1, 'id_article', 1);
 			$page2 = $transformer_xml($f=$g, $args);
 			$appel = 'id_article=1&type=id_article&id=1';
@@ -191,32 +186,75 @@ function valider_pseudo_url($dir, $script, $args='')
 	return  ($dir == 'exec')
 	? generer_url_ecrire($script, $args, false, true)
 	: ("./?$dir=$script" . ($args ? "&$args" : ''));
-
 }
 
+// On essaye de valider tout squelette meme sans Doctype
+// a moins qu'un Content-Type dise clairement que ce n'est pas du XML
+// Il faudrait fournir une autre DTD que XHTML si le Content-Type y aide.
+// (en particulier les RSS; voir si tous les agregateurs acceptent le DOCTYPE)
 // http://doc.spip.org/@valider_skel
-function valider_skel($transformer_xml, $f, $dir)
+function valider_skel($transformer_xml, $file, $dir)
 {
-	if (!lire_fichier ($f, $skel)) return array('/', '/', $f,''); 
-	if (!strpos($skel, 'DOCTYPE')) return array('/', 'DOCTYPE?', $f,''); 
-	$compiler = charger_fonction('compiler', 'public');
-	$skel_code = $compiler($skel, 'tmp', 'html', $f);
-	preg_match_all('/(\S*)[$]Pile[[]0[]][[].(\w+).[]]/', $skel_code, $r, PREG_SET_ORDER);
-	$contexte= array();
-	foreach($r as $v) {
-		$val = strpos($v[1],'intval') === false
-		  ? 'article'
-		  : 1;
-		if (!isset($contexte[$v[2]]) OR $val==1)
-			$contexte[$v[2]] =  $val;
+	if (!lire_fichier ($file, $skel)) return array('/', '/', $file,''); 
+	if (!strpos($skel, 'DOCTYPE')) {
+		preg_match(",Content[-]Type: *\w+/(\S)+,", $skel, $r);
+		if ($r[1] === 'css' OR $r[1] === 'plain')
+			return array('/', 'DOCTYPE?', $file,'');
 	}
+	include_spip('public/parametrer'); // pour la fct suivante
+	$skel_nom = calculer_nom_fonction_squel($skel);
+	include_spip('public/assembler'); // pour recuperer_fond
+	$composer = charger_fonction('composer', 'public', 'html', $file);
+	$skel_code = $composer($skel, $skel_nom, 'html', $file);
+	$contexte = valider_contexte($skel_code, $file);
+	$page = $skel_nom(array('cache'=>''), array($contexte));
+	$page = $transformer_xml($page['texte']);
 	$url = '';
-	unset($contexte['lang']);
 	foreach($contexte as $k => $v) $url .= '&' . $k . '=' . $v;
-	$skel = basename($f,'.html');
-	$url = generer_url_public($skel, substr($url,1));
-	$page = $transformer_xml(recuperer_page($url));
-	return array(strlen($page), $skel, $url);
+	// URL a l'ouest pour les squelettes internes, a revoir.
+	$script = basename($file,'.html');
+	$url = generer_url_public($script, substr($url,1));
+	return array(strlen($page), $script, $url);
+}
+
+// Analyser le code pour construire un contexte plausible complet
+// i.e. ce qui est fourni par $Pile[0]
+// en eliminant les exceptions venant surtout des Inclure
+// Il faudrait trouver une typologie pour generer un contexte parfait:
+// actuellement ca produit parfois des erreurs SQL a l'appel de $skel_nom
+function valider_contexte($code, $file)
+{
+	static $exceptions = array('action', 'browser_caret', 'doublons', 'lang');
+	preg_match_all('/(\S*)[$]Pile[[]0[]][[].(\w+).[]]/', $code, $r, PREG_SET_ORDER);
+	$args = array();
+
+	// evacuer les repetitions et les faux parametres
+	foreach($r as $v) {
+		list(,$f, $nom) = $v;
+		if (!in_array($nom, $exceptions))
+			@$args[$nom] .= $f;
+	}
+	$contexte= array(); // etudier l'ajout de:
+	// 'lang' => $GLOBALS['spip_lang'],
+	// 'date' => date('Y-m-d H:i:s'));
+	foreach ($args as $nom => $f) {
+		if (strpos($f,'intval') === false)
+		  $val = 'id_article';
+		else {
+		  // on suppose que arg numerique => primary-key d'une table
+		  // chercher laquelle et prendre un numero existant
+		  $val = 0;
+		  $type = (strpos($nom, 'id_') === 0)  ? substr($nom,3) : $nom;
+		  $trouver_table = charger_fonction('trouver_table', 'base');
+		  $table = $trouver_table(table_objet_sql($type));
+		  if ($table)
+		    $val = @sql_getfetsel($nom, $table['table'], '', '','',"0,1");
+		    // porte de sortie si ca marche pas, 
+		  if (!$val) $val = 1; 
+		}
+		$contexte[$nom] =  $val;
+	}
+	return $contexte;
 }
 
 // http://doc.spip.org/@valider_dir
@@ -226,11 +264,15 @@ function valider_dir($files, $ext, $dir)
 	$transformer_xml = charger_fonction('valider', 'xml');
 	$valideur = $ext=='html' ? 'valider_skel' : 'valider_script';
 	foreach($files as $f) {
-		spip_log("valider $f");
+  spip_log("val $f");
+		spip_timer('valider');
 		unset($GLOBALS['xhtml_error']);
 		$val = $valideur($transformer_xml, $f, $dir);
 		$val[]= isset($GLOBALS['xhtml_error']) ? $GLOBALS['xhtml_error'] : '';
 		$res[]= $val;
+		spip_log("validation de $f: ($val[0] octets) en "
+			 . spip_timer('valider'), 
+			 'valider');
 	}
 	return valider_resultats($res, $ext);
 }
