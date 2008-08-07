@@ -23,6 +23,10 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour){
 
 	$erreurs = array();
 
+	// desactiver id_rubrique si un id_article ou autre existe dans le contexte
+	if ($id_article OR $id_breve OR $id_forum OR $id_syndic)
+		$id_rubrique = 0;
+
 	// stocker un eventuel document dans un espace temporaire
 	// portant la cle du formulaire ; et ses metadonnees avec
 	if (!isset($GLOBALS['visiteur_session']['tmp_forum_document']))
@@ -36,7 +40,12 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour){
 		// verifier si on possede la cle (ie on est autorise a poster)
 		// (sinon tant pis) ; cf. charger.php pour la definition de la cle
 		if (_request('cle_ajouter_document') != calculer_cle_action($a = "ajouter-document-$id_article-$id_breve-$id_forum-$id_rubrique-$id_syndic")) {
-			$erreurs['document_forum'] = _T('documents_interdits_forum');
+			$erreurs['document_forum'] = _T('public:documents_interdits_forum')
+				. "ajouter-document-$id_article-$id_breve-$id_forum-$id_rubrique-$id_syndic"
+				.", "
+				._request('cle_ajouter_document')
+			
+			;
 			unset($_FILES['ajouter_document']);
 		} else {
 			include_spip('inc/ajouter_documents');
