@@ -222,6 +222,7 @@ function valider_skel($transformer_xml, $file, $dir)
 // en eliminant les exceptions venant surtout des Inclure
 // Il faudrait trouver une typologie pour generer un contexte parfait:
 // actuellement ca produit parfois des erreurs SQL a l'appel de $skel_nom
+// http://doc.spip.org/@valider_contexte
 function valider_contexte($code, $file)
 {
 	static $exceptions = array('action', 'browser_caret', 'doublons', 'lang');

@@ -403,6 +403,7 @@ function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 }
 
 // calcul du nom du squelette
+// http://doc.spip.org/@calculer_nom_fonction_squel
 function calculer_nom_fonction_squel($skel, $mime_type='html', $connect='')
 {
 	return $mime_type
