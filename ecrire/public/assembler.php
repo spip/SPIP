@@ -174,7 +174,7 @@ function traiter_formulaires_dynamiques($get=false){
 					// traiter peut retourner soit un message, soit un array(editable,message)
 					if (is_array($rev)) {
 						$post["editable_$form"] = reset($rev);
-						$post["message_ok_$form"] = end($rev[1]);
+						$post["message_ok_$form"] = end($rev);
 					} else
 						$post["message_ok_$form"] = $rev;
 				}
