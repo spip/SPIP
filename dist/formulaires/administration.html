@@ -1,6 +1,6 @@
  <div[ class="(#ENV{divclass,spip-admin-bloc})"] dir="#LANG_DIR">[
 	<a href="(#ENV{analyser})" class="spip-admin-boutons"
-		id="analyser"><:analyse_xml:>[(#ENV{xhtml_error}|?{' *',''})]</a>][
+		id="analyser"><:analyse_xml:>[ ((#ENV{xhtml_error}))]</a>][
 	<a href="[(#ENV{voir_article})]" class="spip-admin-boutons"
 		id="voir_article"><:admin_modifier_article:>
 			((#ENV{id_article}))</a>][
