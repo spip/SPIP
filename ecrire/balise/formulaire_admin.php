@@ -35,7 +35,7 @@ function balise_FORMULAIRE_ADMIN_stat($args, $filtres) {
 # Le debuger transmet donc ses donnees, et cette balise y retrouve son petit.
 
 // http://doc.spip.org/@balise_FORMULAIRE_ADMIN_dyn
-function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
+function balise_FORMULAIRE_ADMIN_dyn($float='', $debug=array()) {
 
 	global $var_preview, $use_cache;
 	static $dejafait = false;
@@ -67,20 +67,16 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	if (!$env)
 		$env['ecrire'] = _DIR_RESTREINT_ABS;
 
-	$env['action'] = self('&');
 	$env['divclass'] = $float;
 	$env['lang'] = admin_lang();
 	$env['calcul'] = (_request('var_mode') ? 'recalcul' : 'calcul');
-
-	if (!$var_preview AND admin_debug())
-		$env['debug'] = $debug;
-
+	$env['debug'] = $var_preview ? "" : admin_debug();		
+	$env['analyser'] = (!$env['debug']) ? '' : admin_valider();
 	if (!$use_cache)
 		$env['use_cache'] = ' *';
-	if ($analyser = (!$env['debug'] ? '' : admin_valider()))
-		$env['analyser'] = $analyser;
-	if (isset($GLOBALS['xhtml_error']) AND $GLOBALS['xhtml_error']) {
-		$env['xhtml_error'] = count($GLOBALS['xhtml_error']);
+		
+	if (isset($debug['validation'])) {
+		$env['xhtml_error'] = $debug['validation'];
 	}
 
 	return array('formulaires/administration', 0, $env);

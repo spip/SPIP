@@ -27,10 +27,8 @@ function validerElement($phraseur, $name, $attrs)
 			$p = isset($this->dtc->elements[$name]);
 		}
 		if (!$p) {
-			$this->err[]= " <b>$name</b> "
-			  . _T('zxml_inconnu_balise')
-			  . ' '
-			  .  coordonnees_erreur($this);
+			coordonnees_erreur($this," <b>$name</b> "
+				     . _T('zxml_inconnu_balise'));
 			return; 
 		}
 	}
@@ -53,14 +51,13 @@ function validerElement($phraseur, $name, $attrs)
 		}
 		if (!$p) {
 	          $bons_peres = @join ('</b>, <b>', $this->dtc->peres[$name]);
-	          $this->err[]= " <b>$name</b> "
+		  coordonnees_erreur($this, " <b>$name</b> "
 	            . _T('zxml_non_fils')
 	            . ' <b>'
 	            .  $pere
 	            . '</b>'
 	            . (!$bons_peres ? ''
-	               : ('<p style="font-size: 80%"> '._T('zxml_mais_de').' <b>'. $bons_peres . '</b></p>'))
-		    .  coordonnees_erreur($this);
+	               : ('<p style="font-size: 80%"> '._T('zxml_mais_de').' <b>'. $bons_peres . '</b></p>')));
 		} else if ($this->dtc->regles[$pere][0]=='/') {
 		  $this->fratrie[substr($depth,2)].= "$name ";
 		}
@@ -73,11 +70,10 @@ function validerElement($phraseur, $name, $attrs)
 	if (isset($this->dtc->attributs[$name])) {
 		  foreach ($this->dtc->attributs[$name] as $n => $v)
 		    { if (($v[1] == '#REQUIRED') AND (!isset($attrs[$n])))
-			$this->err[]= " <b>$n</b>"
+			coordonnees_erreur($this, " <b>$n</b>"
 			  . '&nbsp;:&nbsp;'
 			  . _T('zxml_obligatoire_attribut')
-			  . " <b>$name</b>"
-			  .  coordonnees_erreur($this);
+			  . " <b>$name</b>");
 		    }
 	}
 }
@@ -99,13 +95,11 @@ function validerAttribut($phraseur, $name, $val, $bal)
 		    $bons .
 		    "'";
 		$bons .= " style='font-weight: bold'";
-
-		$this->err[]= " <b>$name</b> "
+		coordonnees_erreur($this, " <b>$name</b> "
 		. _T('zxml_inconnu_attribut').' '._T('zxml_de')
 		. " <a$bons>$bal</a> ("
 		. _T('zxml_survoler')
-		. ")"
-		.  coordonnees_erreur($this);
+		. ")");
 	} else{
 		$type =  $a[$name][0];
 		if (!preg_match('/^\w+$/', $type))
@@ -121,14 +115,13 @@ function validerAttribut_ID($phraseur, $name, $val, $bal)
 {
 	if (isset($this->ids[$val])) {
 		list($l,$c) = $this->ids[$val];
-		$this->err[]= " <p><b>$val</b> "
+		coordonnees_erreur($this, " <p><b>$val</b> "
 		      . _T('zxml_valeur_attribut')
 		      . " <b>$name</b> "
 		      . _T('zxml_de')
 		      . " <b>$bal</b> "
 		      . _T('zxml_vu')
-		      . " (L$l,C$c)"
-		      .  coordonnees_erreur($this);
+		      . " (L$l,C$c)");
 	} else {
 		$this->valider_motif($phraseur, $name, $val, $bal, _REGEXP_ID);
 		$this->ids[$val] = array(xml_get_current_line_number($phraseur), xml_get_current_column_number($phraseur));
@@ -151,15 +144,14 @@ function validerAttribut_IDREFS($phraseur, $name, $val, $bal)
 function valider_motif($phraseur, $name, $val, $bal, $motif)
 {
 	if (!preg_match($motif, $val)) {
-		$this->err[]= " <p><b>$val</b> "
+		coordonnees_erreur($this, "<b>$val</b> "
 		. _T('zxml_valeur_attribut')
 		. " <b>$name</b> "
 		. _T('zxml_de')
 		. " <b>$bal</b> "
 		. _T('zxml_non_conforme')
 		. "</p><p>"
-		. "<b>" . $motif . "</b></p>"
-		.  coordonnees_erreur($this);
+		. "<b>" . $motif . "</b>");
 	}
 }
 
@@ -167,12 +159,7 @@ function valider_motif($phraseur, $name, $val, $bal, $motif)
 function valider_idref($nom, $ligne, $col)
 {
 	if (!isset($this->ids[$nom]))
-		$this->err[]= " <p><b>$nom</b> "
-		. _T('zxml_inconnu_id')
-		. " "
-		. $ligne
-		. " "
-		. $col;
+		$this->err[]= array(" <p><b>$nom</b> " . _T('zxml_inconnu_id'), $ligne, $col);
 }
 
 // http://doc.spip.org/@valider_passe2
@@ -220,27 +207,25 @@ function finElement($phraseur, $name)
 	// controler que les balises devant etre vides le sont 
 	if ($vide) {
 		if ($n <> ($k + $c))
-			$this->err[]= " <p><b>$name</b> "
-			. _T('zxml_nonvide_balise')
-			.  coordonnees_erreur($this);
+			coordonnees_erreur($this, " <p><b>$name</b> "
+					   . _T('zxml_nonvide_balise'));
 	// pour les regles PCDATA ou iteration de disjonction, tout est fait
 	} elseif ($regle AND ($regle != '*')) {
 		if ($regle == '+') {
 		    // iteration de disjonction non vide: 1 balise au -
 			if ($n == $k) {
-				$this->err[]= " <p>\n<b>$name</b> "
-				  . _T('zxml_vide_balise')
-				  .  coordonnees_erreur($this);
+				coordonnees_erreur($this, "<p>\n<b>$name</b> "
+				  . _T('zxml_vide_balise'));
 			}
 		} else {
 			$f = $this->fratrie[substr($depth,2)];
 			if (!preg_match($regle, $f))
-				$this->err[]= " <p>\n<b>$name</b> "
+				coordonnees_erreur($this,
+				" <p>\n<b>$name</b> "
 				  .  _T('zxml_succession_fils_incorrecte')
 				  . '&nbsp;: <b>'
 				  . $f
-				  . '</b>'
-				  .  coordonnees_erreur($this);
+				  . '</b>');
 		}
 
 	}
@@ -255,9 +240,9 @@ function textElement($phraseur, $data)
 		$d = $this->ouvrant[$d];
 		preg_match('/^\s*(\S+)/', $d, $m);
 		if ($this->dtc->pcdata[$m[1]]) {
-			$this->err[]= " <p><b>". $m[1] . "</b> "
+			coordonnees_erreur($this, " <p><b>". $m[1] . "</b> "
 			. _T('zxml_nonvide_balise') // message a affiner
-			.  coordonnees_erreur($this);
+			);
 		}
 	}
 	xml_textElement($this, $data);
@@ -282,10 +267,10 @@ function defautElement($phraseur, $data)
 		foreach ($r as $m) {
 			list($t,$e) = $m;
 			if (!isset($this->dtc->entites[$e]))
-				$this->err[]= " <b>$e</b> "
+				coordonnees_erreur($this, " <b>$e</b> "
 				  . _T('zxml_inconnu_entite')
 				  . ' '
-				  .  coordonnees_erreur($this);
+				  );
 		}
 
 	xml_defautElement($this, $data);
@@ -297,8 +282,7 @@ function phraserTout($phraseur, $data)
 	xml_parsestring($this, $data);
 
 	if (!$this->dtc OR preg_match(',^' . _MESSAGE_DOCTYPE . ',', $data)) {
-		$GLOBALS['xhtml_error'] .= 'DOCTYPE ? 0 0<br />';
-		$this->err[]= ('DOCTYPE ? 0 0<br />');
+		$this->err[]= array('DOCTYPE ?', 0, 0);
 	} else {
 		$this->valider_passe2($this);
 	}
@@ -323,14 +307,16 @@ function phraserTout($phraseur, $data)
 
 }
 
+// Retourne un tableau formee de la page analysee et du tableau des erreurs,
+// ce dernier ayant comme entrees des sous-tableaux [message, ligne, colonne]
+
 // http://doc.spip.org/@xml_valider_dist
 function xml_valider_dist($page, $apply=false)
 {
 	$sax = charger_fonction('sax', 'xml');
 	$f = new ValidateurXML();
 	$sax($page, $apply, $f);
-	if (!$f->err) return $f->entete . $f->res;
-	$GLOBALS['xhtml_error'] = join('<br />', $f->err) . '<br />';
-	return $f->entete . $f->page;
+	$page = $f->err ? $f->page : $f->res;
+	return array($f->entete . $page, $f->err);
 }
 ?>
