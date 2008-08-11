@@ -35,7 +35,7 @@ function balise_FORMULAIRE_ADMIN_stat($args, $filtres) {
 # Le debuger transmet donc ses donnees, et cette balise y retrouve son petit.
 
 // http://doc.spip.org/@balise_FORMULAIRE_ADMIN_dyn
-function balise_FORMULAIRE_ADMIN_dyn($float='', $debug=array()) {
+function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 
 	global $var_preview, $use_cache;
 	static $dejafait = false;
