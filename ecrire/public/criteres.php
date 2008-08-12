@@ -383,10 +383,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 	// par titre_mot ou type_mot voire d'autres
 		else if (isset($exceptions_des_jointures[$par])) {
 			list($table, $champ) =  $exceptions_des_jointures[$par];
-			$t = array_search($table, $boucle->from);
-			if (!$t) $t = trouver_jointure_champ($champ, $boucle);
-			if (!$t) erreur_squelette(_T('zbug_info_erreur_squelette'),  "{par ?} BOUCLE$idb");
-			$order = "'" . $t . '.' . $champ . "'";
+			$order = critere_par_joint($table, $champ, $boucle, $idb);
 		}
 		else if ($par == 'date'
 		AND isset($GLOBALS['table_date'][$boucle->type_requete])) {
@@ -394,7 +391,18 @@ function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 			$order = "'".$boucle->id_table ."." . $m . "'";
 		}
 		// par champ. Verifier qu'ils sont presents.
-		else {
+		elseif (preg_match("/^(.*)\.(.*)$/", $par, $r)) {
+		  // cas du tri sur champ de jointure explicite
+			$t = array_search($r[1], $boucle->from);
+			if (!$t) {
+				$t = trouver_champ_exterieur($r[2], array($r[1]), $boucle);
+				$t = array_search(@$t[0], $boucle->from);
+			}
+			if (!$t) {
+				erreur_squelette(_T('zbug_info_erreur_squelette'),  "{par $par } BOUCLE$idb");
+				$order = '';
+			} else 	$order = "'" . $t . '.' . $r[2] . "'";
+		} else {
 			$desc = $boucle->show;
 			if ($desc['field'][$par])
 				$par = $boucle->id_table.".".$par;
@@ -423,6 +431,13 @@ function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 	}
 }
 
+function critere_par_joint($table, $champ, &$boucle, $idb)
+{
+	$t = array_search($table, $boucle->from);
+	if (!$t) $t = trouver_jointure_champ($champ, $boucle);
+	if (!$t) erreur_squelette(_T('zbug_info_erreur_squelette'),  "{par ?} BOUCLE$idb");
+	return "'" . $t . '.' . $champ . "'";
+}
 
 // {inverse}
 // http://www.spip.net/@inverse
