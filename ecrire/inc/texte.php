@@ -1267,7 +1267,8 @@ function autoliens_callback($r) {
 // http://doc.spip.org/@traiter_raccourci_liens
 function traiter_raccourci_liens($texte) {
 	return preg_replace_callback(
-	';\[[^\[\]]*->.*?\]|<a\b.*?</a>|((?:https?:/|www\.)[^"\'\s\[\]\}\)<>]*);Si',
+	';\[[^\[\]]*(?:<-|->).*?\]|<a\b.*?</a>|<.*?>|'
+	.'((?:https?:/|www\.)[^"\'\s\[\]\}\)<>]*);Si',
 	'autoliens_callback', $texte);
 	return $texte;
 }
