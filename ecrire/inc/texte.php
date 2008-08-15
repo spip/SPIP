@@ -1249,7 +1249,7 @@ function autoliens_callback($r) {
 		if (preg_match(
 		'/^(?:[^\W_]((?:[^\W_]|-){0,61}[^\W_,])?\.)+[a-z]{2,6}\b/Si', $l)) {
 			// supprimer les ponctuations a la fin d'une URL
-			preg_match('/^(.*?)([,.;?])$/', $l, $k);
+			preg_match('/^(.*?)([,.;?]?)$/', $l, $k);
 			$l = inserer_attribut(
 				expanser_liens('[->'.$protocol.'://'.$k[1].']'),
 			'rel', 'nofollow')
