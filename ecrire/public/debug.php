@@ -700,9 +700,9 @@ function count_occ($regs)
 {
 	$encore = array();
 	foreach($regs as $r) {
-		if (isset($encore[$r[1]]))
-			$encore[$r[1]]++;
-		else $encore[$r[1]] = 1;
+		if (isset($encore[$r[0]]))
+			$encore[$r[0]]++;
+		else $encore[$r[0]] = 1;
 	}
 	return $encore;
 }

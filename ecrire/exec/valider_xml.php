@@ -54,7 +54,7 @@ function valider_xml_ok($url, $req_ext)
 				    OR strpos($server, url_de_base()) === 0)
 				    AND is_dir($dir))
 				  $url = $script;
-			} else $dir = 'exec'; 
+			} else { $dir = 'exec'; $script = $url;}
 			$transformer_xml = charger_fonction('valider', 'xml');
 			$onfocus = "this.value='" . addslashes($url) . "';";
 			if (preg_match(',^[a-z][0-9a-z_]*$,i', $url)) {
@@ -117,7 +117,7 @@ function valider_resultats($res, $ext)
 		$table .= "<tr class='$class'>"
 		. "<td style='text-align: right'>$nb</td>"
 		. "<td style='text-align: right$color'>$texte</td>"
-#		. "<td style='text-align: right'>$temps</td>"
+		. "<td style='text-align: right'>$temps</td>"
 		. "<td style='text-align: left'>$err</td>"
 		. "<td>$script</td>"
 		. "<td><a href='$h'>$appel</a></td>";
@@ -127,8 +127,8 @@ function valider_resultats($res, $ext)
 	  . _T('erreur_texte')
 	  . "</th><th>" 
 	  . _T('taille_octets', array('taille' => ' '))
-#	  . "</th><th>"
-#	  . _T('zbug_profile', array('time' =>''))
+	  . "</th><th>"
+	  . _T('zbug_profile', array('time' =>''))
 	  . "</th><th>"
 	  . _T('message')
 	  . "</th><th>Page</th><th>args"
@@ -144,7 +144,7 @@ function valider_script($transformer_xml, $f, $dir)
 
 	$script = basename($f, '.php');
 	if ($script == $GLOBALS['exec'] OR $script=='index')
-		return array('/', $script,''); 
+		return array('/', 0, '', $script,''); 
 
 	$f = charger_fonction($script, $dir, true);
 	if(!$f) return false;
@@ -261,9 +261,9 @@ function valider_dir($files, $ext, $dir)
 	$transformer_xml = charger_fonction('valider', 'xml');
 	$valideur = $ext=='html' ? 'valider_skel' : 'valider_script';
 	foreach($files as $f) {
-		spip_timer('valider');
+		spip_timer($f);
 		$val = $valideur($transformer_xml, $f, $dir);
-		$n = spip_timer('valider'); 
+		$n = spip_timer($f); 
 		$val[]= $n;
 		spip_log("validation de $f en $n secondes");
 		$res[]= $val;
