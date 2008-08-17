@@ -274,7 +274,7 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 
 	// le cacher si l'installation est predefinie avec un serveur particulier
 	if ($predef[0]) {
-		$server_db = _INSTALL_SERVER_DB;
+		$server_db = $predef[0];
 	}
 
 	return generer_form_ecrire('install', (
@@ -286,7 +286,7 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 			:"")
 
 	. http_script('',  'jquery.js')
-	. '<script language="javascript"><!--
+	. http_script('
 		$(document).ready(function() {
 			$("input[@type=hidden][@name=server_db]").each(function(){
 				if ($(this).attr("value").match("sqlite*")){
@@ -306,8 +306,7 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 					$("#install_pass_base_hebergeur").show();
 				}
 			});
-		});
-		// --></script>'
+		});')
 
 	. ($server_db
 		? '<input type="hidden" name="server_db" value="'.$server_db.'" />'
