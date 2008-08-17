@@ -43,8 +43,8 @@ function install_etape_sup1_dist()
 	// pour qu'on la refuse comme choix de base secondaire
 
 	$sel_db =_request('sel_db');
-	if (!$server_d AND  defined('_INSTALL_SERVER_DB'))
-		$server_d = _INSTALL_NAME_DB;
+	if (!$sel_db AND  defined('_INSTALL_NAME_DB'))
+		$sel_db = _INSTALL_NAME_DB;
 
 	echo install_debut_html(_T('config_titre_base_sup'));
 

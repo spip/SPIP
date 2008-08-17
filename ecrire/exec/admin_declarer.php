@@ -24,7 +24,7 @@ function exec_admin_declarer_dist()
 	} else {
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('titre_page_admin_effacer'), "configuration", "base");
+	echo $commencer_page(_T('titre_admin_tech'), "configuration", "base");
 
 	echo "\n<br /><br />";
 	echo gros_titre(_T('titre_admin_effacer'),'',false);
