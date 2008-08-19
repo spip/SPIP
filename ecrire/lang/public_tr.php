@@ -29,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'Bu siteye yorum ekle',
+'copie_document_impossible' => 'Belgeyi kopyalamak olanaks&#305;z',
 
 // D
 'date' => 'Tarih',
@@ -37,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Son eklenen makaleler',
 'derniers_commentaires' => 'Son eklenen yorumlar',
 'derniers_messages_forum' => 'Forumlarda yay&#305;nlanan son mesajlar',
+'documents_interdits_forum' => 'Forumda yasak olan belgeler',
 
 // E
 'edition_mode_texte' => 'Metin &#351;eklinde de&#287;i&#351;tir',
@@ -46,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'espace_prive' => '&Ouml;zel alan',
 
 // F
+'formats_acceptes' => 'Kab&ucirc;l edilen bi&ccedil;emler : @formats@.',
 'forum' => 'Forum',
 
 // H
