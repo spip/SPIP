@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_recalculer' => 'Bu sayfay&#305; yeniden olu&#351;tur',
 'afficher_trad' => '&ccedil;evirileri listele',
 'alerte_maj_impossible' => '<b>Dikkat&nbsp;!</b> SQL veri taban&#305;n&#305;n @version@ s&uuml;r&uuml;m&uuml;ne g&uuml;ncellenmesi imkans&#305;z. Sorun veritaban&#305; de&#287;i&#351;tirme haklar&#305;ndan kaynaklan&#305;yor olabilir, l&uuml;tfen sitenizi bar&#305;nd&#305;ran &#351;irkete ba&#351;vurunuz.',
+'alerte_modif_info_concourante' => 'D&#304;KKAT: Bu bilgi ba&#351;ka bir yerde de&#287;i&#351;tirildi. G&uuml;ncel de&#287;eri &nbsp;:',
 'analyse_xml' => 'XML analizi',
 'annuler' => '&#304;ptal et',
 'antispam_champ_vide' => 'L&uuml;tfen bu alan&#305; bo&#351; b&#305;rak&#305;n&#305;z&nbsp;:',
@@ -199,6 +200,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'double_occurrence' => '&Ccedil;ift tekrar ',
 
 // E
+'en_cours' => 'i&#351;lenmekte',
 'entree_dimensions' => 'Boyutlar&nbsp;:',
 'entree_titre_document' => 'Belge ba&#351;l&#305;&#287;&#305;&nbsp;:',
 'entree_titre_image' => 'Resim ba&#351;l&#305;&#287;&#305;&nbsp;:',
@@ -206,6 +208,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'Hata',
 'erreur_balise_non_fermee' => 'son etiket kapat&#305;lmam&#305;&#351; :',
 'erreur_texte' => 'hata(lar)',
+'etape' => 'A&#351;ama',
 
 // F
 'fichier_introuvable' => '@fichier@ dosyas&#305; bulunamad&#305;',
@@ -231,7 +234,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_pet_confirmation' => 'L&uuml;tfen imzan&#305;z&#305; onaylay&#305;n&#305;z :',
 'form_pet_deja_enregistre' => 'Bu site zaten kay&#305;tl&#305;',
 'form_pet_deja_signe' => 'Bu metni zaten imzalam&#305;&#351;s&#305;n&#305;z.',
-'form_pet_envoi_mail_confirmation' => '<MODIF>&#350;u anda size bir teyid e-postas&#305; g&ouml;nderilmi&#351; bulunuyor. &#304;mzan&#305;z&#305; teyid etmek &uuml;zere bu e-postada ad&#305; ge&ccedil;en Web adresini ziyaret etmeniz gerekiyor.',
+'form_pet_envoi_mail_confirmation' => '&#350;u anda @email@ adresine bir do&#287;rulama e-postas&#305; g&ouml;nderildi. &#304;mzan&#305;z&#305; do&#287;rulamak i&ccedil;in bu iletide belirtilen web adresini ziyaret etmelisiniz.',
 'form_pet_mail_confirmation' => 'Merhaba,
 
 Bir dilek&ccedil;e imzalamak istediniz :
@@ -472,6 +475,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'info_nouveau_message' => 'YEN&#304; B&#304;R &#304;LET&#304;N&#304;Z VAR',
 'info_nouveaux_messages' => '@total_messages@ YEN&#304; MESAJINIZ VAR',
 'info_numero_abbreviation' => 'N&deg;&nbsp;',
+'info_obligatoire' => 'Bu bilgi zorunludur.',
 'info_panne_site_syndique' => 'Payla&#351;&#305;ml&#305; sitede ar&#305;za var',
 'info_pense_bete' => 'HATIRLATMA',
 'info_petit_ecran' => 'K&uuml;&ccedil;&uuml;k ekran',
@@ -683,7 +687,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
     sonradan belge eki olarak g&ouml;r&uuml;lebilir.',
 'texte_erreur_mise_niveau_base' => 'G&uuml;ncelleme s&#305;ras&#305;nda veritaban&#305; hatas&#305;. @fichier@ resmi ula&#351;mad&#305; (@id_article@ makalesi). Bu referans&#305; kaydedip g&uuml;ncelemeyi tekrar deneyiniz ve resimlerin makalelerde g&ouml;r&uuml;ld&uuml;&#287;&uuml;nden emin olunuz. ',
 'texte_erreur_visiteur' => '&Ouml;zel alana, giri&#351;e izin vermeyen bir kullan&#305;c&#305; ismiyle eri&#351;meyi denediniz.',
-'texte_inc_auth_1' => '<MODIF><b>@auth_login@</b> kullan&#305;c&#305; ismini girdiniz ancak veritaban&#305;nda bu kullan&#305;c&#305; ismi yok / art&#305;k yok.  &#350;unu deneyiniz :',
+'texte_inc_auth_1' => '<b>@auth_login@</b> kullan&#305;c&#305; ismini girdiniz ancak veritaban&#305;nda bu kullan&#305;c&#305; ismi yok/art&#305;k yok. L&uuml;tfen &#351;unu deneyiniz',
 'texte_inc_auth_2' => 'gezgininizi kapat&#305;p tekrar &ccedil;al&#305;&#351;t&#305;r&#305;n&#305;z ve ',
 'texte_inc_auth_3' => 'tekrar ba&#287;lan&#305;n&#305;z.',
 'texte_inc_config' => 'Bu sayfalarda yap&#305;lan de&#287;i&#351;iklikler sitenizin i&#351;leyi&#351;i &uuml;zerinde b&uuml;y&uuml;k &ouml;l&ccedil;&uuml;de etkilidir. SPIP sisteminin i&#351;leyi&#351;ine a&#351;ina olmad&#305;&#287;&#305;n&#305;z s&uuml;rece m&uuml;dahale etmemenizi &ouml;neririz.  <br /><br /><b>Daha genel bir ifadeyle s&ouml;ylemek gerekirse bu sayfalarla ilgilenme i&#351;ini sitenin A&#287; Y&ouml;neticisi\'ne b&#305;rakman&#305;z&#305; &ouml;zellikle &ouml;neririz.</b>',
@@ -718,6 +722,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'titre_signatures_confirmees' => 'Onaylanm&#305;&#351; imzalar',
 'titre_statistiques' => 'Site istatistikleri',
 'titre_titre_document' => 'Belge ba&#351;l&#305;&#287;&#305;&nbsp;:',
+'todo' => 'gelecek',
 'trad_reference' => '(referans makale)',
 
 // Z
