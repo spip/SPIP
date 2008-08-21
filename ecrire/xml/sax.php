@@ -208,7 +208,6 @@ function sax_bug($data)
 	}
 
 	list($doctype, $topelement, $avail, $grammaire, $rotlvl, $len) = $r;
-
 	$file = _DIR_CACHE_XML . preg_replace('/[^\w.]/','_', $rotlvl) . '.gz';
 
 	if (isset($dtd[$file]))
@@ -243,13 +242,24 @@ function sax_bug($data)
 	return array($entete,unicode2charset($data), $dtc);
 }
 
+// Reperer le Doctype et le decomposer selon:
+// http://www.freebsd.org/doc/fr_FR.ISO8859-1/books/fdp-primer/sgml-primer-doctype-declaration.html
+// Si pas de Doctype et premiere balise = RSS prendre la doctype RSS 0.91:
+// les autres formats RSS n'ont pas de DTD,
+// mais un XML Schema que SPIP ne fait pas encore lire.
 // http://doc.spip.org/@analyser_doctype
 function analyser_doctype($data)
 {
-
-	if (!preg_match(_REGEXP_DOCTYPE, $data, $page))
-		return array();
-
+	if (!preg_match(_REGEXP_DOCTYPE, $data, $page)) {
+		if (!preg_match(_REGEXP_XML_RSS, $data, $page))
+			return array();
+		else return array('',
+				  'rss',
+				  'PUBLIC', 
+				  _DOCTYPE_RSS,
+				  'rss-0.91.dtd',
+				  strlen($page[1]));
+	}
 	list($doctype,$pi,$co,$pico, $topelement, $avail,$suite) = $page;
 
 	if (!preg_match('/^"([^"]*)"\s*(.*)$/', $suite, $r))
@@ -269,6 +279,6 @@ function analyser_doctype($data)
 		$grammaire = $r[1];
 	}
 
-	return array(substr($doctype,strlen($pico)), $topelement, $avail, $grammaire, $rotlvl, strlen($page[0]));
+	return array(substr($doctype,strlen($pico)), $topelement, $avail, $grammaire, $rotlvl, strlen($doctype));
 }
 ?>
