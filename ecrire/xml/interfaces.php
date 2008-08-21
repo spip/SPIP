@@ -15,6 +15,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 define('_REGEXP_DOCTYPE',
 	'/^((<\001?[?][^>]*>)*\s*(<!--.*?-->)*)*<!DOCTYPE\s+(\w+)\s+(\w+)\s*([^>]*)>\s*/');
 
+define('_REGEXP_XML_RSS', '/^([^<]*<[?]xml[^>]*>\s*)<rss/');
+
 define('_MESSAGE_DOCTYPE', '<!-- SPIP CORRIGE -->');
 
 define('_SUB_REGEXP_SYMBOL', '[A-Za-z_][\w_:.-]*');
@@ -35,6 +37,8 @@ define('_REGEXP_ENTITY_DECL', '/^<!ENTITY\s+(%?)\s*(' .
        		')\s*(--.*?--)?("([^"]*)")?\s*>\s*(.*)$/s');
 
 define('_REGEXP_INCLUDE_USE', '/^<!\[\s*%\s*([^;]*);\s*\[\s*(.*)$/s');
+
+define('_DOCTYPE_RSS', 'http://www.rssboard.org/rss-0.91.dtd');
 
 // Document Type Compilation
 
