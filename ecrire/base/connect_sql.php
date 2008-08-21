@@ -61,6 +61,9 @@ function spip_connect($serveur='', $version='') {
 		}
 		$connexions[$index] = $GLOBALS['db_ok'];
 	}
+	// si la connexion a deja ete tentee mais a echoue, le dire!
+	if (!$connexions[$index]) return false;
+	
 	// la connexion a reussi ou etait deja faite.
 	// chargement de la version du jeu de fonctions
 	// si pas dans le fichier par defaut

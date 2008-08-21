@@ -25,7 +25,7 @@
         <div class="cartouche">
             [(#LOGO_BREVE||image_reduire{200,200})]
             <h1 class="#EDIT{titre}">#TITRE</h1>
-            <p><small>[(#DATE|nom_jour) ][(#DATE|affdate)]</small></p>
+            <p><small><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr></small></p>
         </div>
         
         [<div class="#EDIT{texte} texte">(#TEXTE)</div>]
