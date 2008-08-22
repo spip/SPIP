@@ -1,6 +1,5 @@
 * text=auto !eol
 /INSTALL.txt -text
-/UPGRADE.txt -text
 config/remove.txt -text
 dist/favicon.ico -text
 dist/feed.png -text
@@ -447,7 +446,6 @@ ecrire/xml/indenter.php -text
 ecrire/xml/index.php -text
 ecrire/xml/interfaces.php -text
 ecrire/xml/valider.php -text
-/inc-public.php3 -text
 /index.php -text
 local/remove.txt -text
 prive/contenu/article.html -text
