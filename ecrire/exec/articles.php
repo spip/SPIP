@@ -290,11 +290,14 @@ function bouton_modifier_articles($id_article, $id_rubrique, $flag_modif, $mode,
 function afficher_corps_articles($id_article, $virtuel, $row)
 {
 	$res = '';
-	if ($row['statut'] == 'prop')
-		$res .= "<p class='article_prop'>"._T('text_article_propose_publication')."</p>";
+	if ($row['statut'] == 'prop') {
+		$res .= "<p class='article_prop'>"._T('text_article_propose_publication');
 
 		if ($GLOBALS['meta']['forum_prive_objets'] != 'non')
-			$res .= "<p class='article_prop'>"._T('text_article_propose_publication_forum')."</p>";
+			$res .= ' '._T('text_article_propose_publication_forum');
+
+		$res.= ."</p>";
+	}
 
 	if ($virtuel) {
 		$res .= debut_boite_info(true)
