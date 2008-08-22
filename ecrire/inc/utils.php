@@ -79,7 +79,6 @@ function include_spip($f, $include = true) {
 // on passe $val par reference pour limiter les allocations memoire
 // http://doc.spip.org/@minipipe
 function minipipe($fonc,&$val){
-
 	// fonction
 	if (function_exists($fonc))
 		$val = call_user_func($fonc, $val);
