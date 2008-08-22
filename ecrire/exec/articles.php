@@ -296,7 +296,7 @@ function afficher_corps_articles($id_article, $virtuel, $row)
 		if ($GLOBALS['meta']['forum_prive_objets'] != 'non')
 			$res .= ' '._T('text_article_propose_publication_forum');
 
-		$res.= ."</p>";
+		$res.= "</p>";
 	}
 
 	if ($virtuel) {
