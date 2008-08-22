@@ -792,7 +792,7 @@ sanm in koul&egrave;r i pr&eacute;siz son l&eacute;ta&nbsp;:',
 'taille_cache_octets' => 'Lo ty lo CACHE li l&eacute; ast&egrave;r de @octets@.',
 'taille_cache_vide' => 'Lo kas l&eacute; vid.',
 'taille_repertoire_cache' => 'Tay lo r&eacute;pertwar kas',
-'text_article_propose_publication' => 'Lartik-la l&eacute; propoz&eacute; pou lapiblikasyon. &Eacute;zit pa donn out many&egrave;r vwar dann forom lartik-la (anba lapaz).',
+'text_article_propose_publication' => '<MODIF>Lartik-la l&eacute; propoz&eacute; pou lapiblikasyon. &Eacute;zit pa donn out many&egrave;r vwar dann forom lartik-la (anba lapaz).',
 'texte_acces_ldap_anonyme_1' => 'N&eacute;na d&eacute;sertin serv&egrave;r LDAP i afront tout bann laks&eacute; anonim. Dan ka-la, l&eacute; n&eacute;s&eacute;ser indik inn promy&eacute; lidentifian pou laks&eacute;. Apr&eacute;sa s&egrave;lman, ou i sra kav rod bann zinformasyon dan karn&eacute;. Souvandfwa pwatan, ou poura l&egrave;s bann karo-la vid. ',
 'texte_admin_effacer_01' => 'Komand-la i d&eacute;gr&egrave;n <i>tout</i> lo kontnu la bazdodn&eacute;,
 <i>tout</i> minm bann laks&egrave; lot&egrave;r &egrave;k komand&egrave;r. Si ou i anserv ali, i sra n&eacute;s&eacute;s&egrave;r f&eacute; zw&eacute; inn nouv&egrave;l 
@@ -847,7 +847,7 @@ z&eacute;l&eacute;man miltim&eacute;dia, tousala...). Bann fisy&eacute;-la, ou p
 'texte_documents_joints_2' => 'R&eacute;glaz-la i afront pa d-m&egrave;t bann zimaz dann bann zartik.',
 'texte_effacer_base' => 'D&eacute;gr&egrave;n bazdodn&eacute; SPIP',
 'texte_effacer_donnees_indexation' => 'D&eacute;gr&egrave;n tout bann don&eacute; pou lind&eacute;ksasyon',
-'texte_en_cours_validation' => 'Bann zartik &egrave;k bann rubrik anba-la, l&eacute; pr&eacute;zant&eacute; pou lapiblikasyon. &Eacute;zit pas donn ani out manyirdvwar dann bann forom i bord azot.',
+'texte_en_cours_validation' => '<MODIF>Bann zartik &egrave;k bann rubrik anba-la, l&eacute; pr&eacute;zant&eacute; pou lapiblikasyon. &Eacute;zit pas donn ani out manyirdvwar dann bann forom i bord azot.',
 'texte_enrichir_mise_a_jour' => 'Pou rannd pli ris lamanyir out sit l&eacute; mi an paz, i p&eacute; anserv &laquo;&nbsp;bann r&eacute;diyon linprimri&nbsp;&raquo;.',
 'texte_fichier_authent' => '<MODIF><b>Pr&eacute;siz byin si out sist&egrave;m SPIP li dwa kr&eacute; bann fisy&eacute; sp&eacute;sifik <tt>.htpasswd</tt>
 &eacute; <tt>.htpasswd-admin</tt> dann r&eacute;pertwar @dossier@ ?</b><p>

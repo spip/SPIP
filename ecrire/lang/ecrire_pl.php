@@ -818,7 +818,7 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 'taille_cache_octets' => 'W tym momencie wielko&#347;&#263; cache to: @octets@.',
 'taille_cache_vide' => 'Cache jest pusty.',
 'taille_repertoire_cache' => 'Wielko&#347;&#263; katalogu cache',
-'text_article_propose_publication' => 'Artyku&#322; zatwierdzony do publikacji. Nie wahaj si&#281; wyrazi&#263; swoj&#261; opini&#281; przez forum dotycz&#261;ce tego artyku&#322;u (na dole strony).',
+'text_article_propose_publication' => '<MODIF>Artyku&#322; zatwierdzony do publikacji. Nie wahaj si&#281; wyrazi&#263; swoj&#261; opini&#281; przez forum dotycz&#261;ce tego artyku&#322;u (na dole strony).',
 'texte_acces_ldap_anonyme_1' => 'Niekt&oacute;re serwery LDAP nie akceptuj&#261; dost&#281;pu anonimowego. W tym przypadku nale&#380;y poda&#263; indentyfikator dost&#281;pu, aby m&oacute;c przeszukiwa&#263; katalog. Niemniej, w wi&#281;kszo&#347;ci przypadk&oacute;w poni&#380;sze pola powinny pozosta&#263; puste.',
 'texte_admin_effacer_01' => 'Ta komenda usuwa <i>ca&#322;&#261;</i> zawarto&#347;&#263; bazy danych,
 w&#322;&#261;cznie z <i>wszystkimi</i> parametrami dost&#281;pu dla redaktor&oacute;w i administartor&oacute;w. Po jej zastosowaniu powiniene&#347;
@@ -880,7 +880,7 @@ multimedi&oacute;w, itd.) do artyku&#322;&oacute;w b&#261;d&#378; dzia&#322;&oac
 'texte_documents_joints_2' => 'Te ustawienia nie przeszkadzaj&#261; we wstawianiu obrazk&oacute;w bezpo&#347;rednio do artyku&#322;&oacute;w.',
 'texte_effacer_base' => 'Usu&#324; baz&#281; danych SPIP',
 'texte_effacer_donnees_indexation' => 'Wyma&#380; dane pochodz&#261;ce z indeksowania',
-'texte_en_cours_validation' => 'Nast&#281;puj&#261;ce artyku&#322;y i newsy zosta&#322;y zatwierdzone do publikacji. Nie wahaj si&#281; wyrazi&#263; swoj&#261; opini&#281; na do&#322;&#261;czonych do nich forach.',
+'texte_en_cours_validation' => '<MODIF>Nast&#281;puj&#261;ce artyku&#322;y i newsy zosta&#322;y zatwierdzone do publikacji. Nie wahaj si&#281; wyrazi&#263; swoj&#261; opini&#281; na do&#322;&#261;czonych do nich forach.',
 'texte_enrichir_mise_a_jour' => 'Mo&#380;esz wzbogaci&#263; uk&#322;ad Twojego tekstu &laquo;&nbsp;skr&oacute;tami typograficznymi&nbsp;&raquo;.',
 'texte_fichier_authent' => '<MODIF><b>Czy SPIP ma stworzy&#263; specjalne pliki <tt>.htpasswd</tt>
   i <tt>.htpasswd-admin</tt> w katalogu @dossier@ ?</b><p />

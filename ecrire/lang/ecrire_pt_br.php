@@ -883,7 +883,7 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'taille_cache_octets' => 'O tamanho do cache &eacute; atualmente de  @octets@.',
 'taille_cache_vide' => 'O cache est&aacute; vazio.',
 'taille_repertoire_cache' => 'Tamanho do diret&oacute;rio cache',
-'text_article_propose_publication' => 'Mat&eacute;ria proposta para publica&ccedil;&atilde;o. N&atilde;o deixe de contribuir no f&oacute;rum anexado &agrave; mat&eacute;ria (no p&eacute; da p&aacute;gina).',
+'text_article_propose_publication' => '<MODIF>Mat&eacute;ria proposta para publica&ccedil;&atilde;o. N&atilde;o deixe de contribuir no f&oacute;rum anexado &agrave; mat&eacute;ria (no p&eacute; da p&aacute;gina).',
 'texte_acces_ldap_anonyme_1' => 'Alguns servidores LDAP n&atilde;o aceitam nenhum acesso an&ocirc;nimo. Neste caso, &eacute; necess&aacute;rio especificar um identificador de acesso inicial de modo a poder, em seguida, pesquisar as informa&ccedil;&otilde;es no diret&oacute;rio. Na maior parte dos casos, entretanto, os campos a seguir poder&atilde;o ser deixados em branco.',
 'texte_admin_effacer_01' => 'Este comando apaga <i>todo</i> o conte&uacute;do da base de dados,incluindo <i>todos</i> os acessos dos redatores e administradores. Ap&oacute;s execut&aacute;-lo, voc&ecirc; dever&aacute; reinstalar o SPIP para recriar uma nova base de dados bem como um acesso inicial de administrador.',
 'texte_admin_effacer_stats' => 'Este comando apaga todos os dados ligados &agrave;s estat&iacute;sticas de visita&ccedil;&atilde;o do site, incluindo a popularidade das mat&eacute;rias.',
@@ -932,7 +932,7 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'texte_effacer_base' => 'Apagar a base de dados do SPIP',
 'texte_effacer_donnees_indexation' => 'Apagar os dados de indexa&ccedil;&atilde;o',
 'texte_effacer_statistiques' => 'Apagar as estat&iacute;sticas',
-'texte_en_cours_validation' => 'As mat&eacute;rias e notas abaixo est&atilde;o propostas para publica&ccedil;&atilde;o. N&atilde;o hesite a dar a sua opini&atilde;o sobre as mesmas nos f&oacute;runs anexos.',
+'texte_en_cours_validation' => '<MODIF>As mat&eacute;rias e notas abaixo est&atilde;o propostas para publica&ccedil;&atilde;o. N&atilde;o hesite a dar a sua opini&atilde;o sobre as mesmas nos f&oacute;runs anexos.',
 'texte_enrichir_mise_a_jour' => 'Voc&ecirc; pode enriquecer a diagrama&ccedil;&atilde;o do seu texto usando &laquo;atalhos tipogr&aacute;ficos&raquo;.',
 'texte_fichier_authent' => '<b>O SPIP pode criar os arquivos especiais  <tt>.htpasswd</tt> e <tt>.htpasswd-admin</tt> no diret&oacute;rio @dossier@?</b><p />
 Estes arquivos podem servir para restringir o acesso aos autores e administradores em outras &aacute;reas do seu site (programas externos de estat&iacute;sticas, por exemplo).<p />

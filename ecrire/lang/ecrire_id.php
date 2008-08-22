@@ -792,7 +792,7 @@ dalam warna yang menunjukkan statusnya:',
 'taille_cache_octets' => 'Ukuran cache sekarang adalah @octets@.',
 'taille_cache_vide' => 'Cache kosong.',
 'taille_repertoire_cache' => 'Ukuran cache saat ini',
-'text_article_propose_publication' => 'Artikel yang dikirimkan untuk publikasi. Jangan segan-segan memberikan opini anda melalui forum yang yang terlampir di artikel ini (di bagian bawah halaman).',
+'text_article_propose_publication' => '<MODIF>Artikel yang dikirimkan untuk publikasi. Jangan segan-segan memberikan opini anda melalui forum yang yang terlampir di artikel ini (di bagian bawah halaman).',
 'texte_acces_ldap_anonyme_1' => 'Sejumlah server LDAP tidak mengizinkan akses anonim. Dalam hal ini anda harus memberikan satu pengidentifikasi akses awal agar bisa mencari informasi dalam direktori setelahnya. Walaupun demikian, dalam banyak kasus kolom-kolom berikut dapat dibiarkan kosong tidak terisi.',
 'texte_admin_effacer_01' => 'Perintah ini menghapus <i>semua</i> isi database,
 termasuk <i>semua</i> parameter akses untuk editor dan administrator. Setelah mengeksekusinya, anda sebaiknya
@@ -853,7 +853,7 @@ menginstal kembali SPIP untuk membuat database baru dan akses administrator pert
 'texte_documents_joints_2' => 'Pengaturan ini tidak menghentikan penambahan gambar secara langsung dalam artikel.',
 'texte_effacer_base' => 'Hapus database SPIP',
 'texte_effacer_donnees_indexation' => 'Hapus data terindeksasi',
-'texte_en_cours_validation' => 'Artikel-artikel dan berita-berita berikut dikirim untuk publikasi. Jangan segan-segan memberikan opini anda melalui forum yang terlampir di dalamnya.',
+'texte_en_cours_validation' => '<MODIF>Artikel-artikel dan berita-berita berikut dikirim untuk publikasi. Jangan segan-segan memberikan opini anda melalui forum yang terlampir di dalamnya.',
 'texte_enrichir_mise_a_jour' => 'Anda dapat memperkaya tampilan teks anda dengan menggunakan &laquo;jalan pintas typografis&raquo;.',
 'texte_fichier_authent' => '<MODIF><b>Haruskah SPIP membuat berkas <tt>.htpasswd</tt>
   dan <tt>.htpasswd-admin</tt> dalam direktori @dossier@?</b><p />

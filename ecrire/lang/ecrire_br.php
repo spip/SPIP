@@ -887,7 +887,7 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'taille_cache_octets' => '@octets@ eo ment ar memoret.',
 'taille_cache_vide' => 'Goullo eo ar memoret.',
 'taille_repertoire_cache' => 'Ment teul ar memoret',
-'text_article_propose_publication' => 'Pennad kinniget evit an embann. Gallout a rit rei&ntilde; ho ali er forom e-trao&ntilde; ar bajenn.',
+'text_article_propose_publication' => '<MODIF>Pennad kinniget evit an embann. Gallout a rit rei&ntilde; ho ali er forom e-trao&ntilde; ar bajenn.',
 'texte_acces_ldap_anonyme_1' => 'Gant servijerien LDAP \'zo ne vez aotreet da zen dont-tre disanv. Neuze e vo ret deoc\'h rei&ntilde; un anv-dont-tre a-raok gallout klask titouro&ugrave; er roll dud. E darn vrasa&ntilde; eus an degouezhio&ugrave; e c\'helloc\'h koulskoude lezel an tachenno&ugrave;-se goullo.',
 'texte_admin_effacer_01' => 'Gant se e tiverkoc\'h <i>PEP TRA</i> en ho tiaz titouro&ugrave;,
 da lavaret eo <i>an holl</i> aotreo&ugrave; evit ar merourien hag ar skridaozerien. Goude beza&ntilde; bet graet se e rankoc\'h
@@ -944,7 +944,7 @@ Ar re-se a c\'hell beza&ntilde; listennet er pennad, pe e-kichen.<p />',
 'texte_effacer_base' => 'Diverka&ntilde; diaz-titouro&ugrave; SPIP',
 'texte_effacer_donnees_indexation' => 'Diverka&ntilde; ar roado&ugrave;-listenna&ntilde;',
 'texte_effacer_statistiques' => 'Diverka&ntilde; ar statistiko&ugrave;',
-'texte_en_cours_validation' => 'Kinniget eo ar pennado&ugrave; ha berrskrido&ugrave; ama&ntilde;-dindan d\'an embann. Gallout a rit rei&ntilde; ho ali er foromo&ugrave; stag outo.',
+'texte_en_cours_validation' => '<MODIF>Kinniget eo ar pennado&ugrave; ha berrskrido&ugrave; ama&ntilde;-dindan d\'an embann. Gallout a rit rei&ntilde; ho ali er foromo&ugrave; stag outo.',
 'texte_enrichir_mise_a_jour' => 'Gallout a rit bravaat kinnig ho testenn oc\'h implijout &laquo;&nbsp;berradenno&ugrave;-lizherenna&ntilde;&nbsp;&raquo;.',
 'texte_fichier_authent' => '<MODIF><b>Ha rankout a ra SPIP kroui&ntilde; ar restro&ugrave; ispisial <tt>.htpasswd</tt>
   ha <tt>.htpasswd-admin</tt> en teul @dossier@ ?</b><p />

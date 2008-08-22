@@ -707,7 +707,7 @@ i en farve, der angiver deres status:',
 'taille_cache_octets' => '<NEW>The size of the cache is currently @octets@.',
 'taille_cache_vide' => '<NEW>The cache is empty.',
 'taille_repertoire_cache' => '<NEW>Current size of the cache',
-'text_article_propose_publication' => 'Artiklen er sendt til offentligg&oslash;relse. Hold dig ikke tilbage fra at give din mening til kende gennem det forum, der er tilknyttet artiklen (nederst p&aring; siden).',
+'text_article_propose_publication' => '<MODIF>Artiklen er sendt til offentligg&oslash;relse. Hold dig ikke tilbage fra at give din mening til kende gennem det forum, der er tilknyttet artiklen (nederst p&aring; siden).',
 'texte_acces_ldap_anonyme_1' => 'Nogle LDAP-servere tillader ikke anonym adgang. I s&aring; fald m&aring; du angive en brugeridentifikation for senere at kunne s&oslash;ge efter information i kataloget. Men i de fleste tilf&aelig;lde kan du lade de f&oslash;lgende felter st&aring; tomme.',
 'texte_admin_effacer_01' => 'Denne kommando sletter <i>hele</i> indholdet i databasen,
 	herunder <i>hele</i> ops&aelig;tningen for redakt&oslash;rer og administratorer. N&aring;r du har udf&oslash;rt den, b&oslash;r du 
@@ -761,7 +761,7 @@ i en farve, der angiver deres status:',
 'texte_documents_joints_2' => 'Denne konfiguration hindrer ikke inds&aelig;ttelse af billeder direkte i dokumenter.',
 'texte_effacer_base' => 'Slet SPIP databasen',
 'texte_effacer_donnees_indexation' => 'Slet indekseringsdata',
-'texte_en_cours_validation' => 'F&oslash;lgende artikler og nyheder er foresl&aring;et offentliggjort. T&oslash;v ikke med at give din mening til kende via de fora, som er knyttet til artiklerne.',
+'texte_en_cours_validation' => '<MODIF>F&oslash;lgende artikler og nyheder er foresl&aring;et offentliggjort. T&oslash;v ikke med at give din mening til kende via de fora, som er knyttet til artiklerne.',
 'texte_enrichir_mise_a_jour' => 'Du kan forbedre layoutet af teksten ved at benytte &laquo;typografiske koder&raquo;.',
 'texte_fichier_authent' => '<MODIF><b>Skal SPIP oprette specielle <tt>.htpasswd</tt>
 		og <tt>.htpasswd-admin</tt> filer i kataloget @dossier@?</b><p>
