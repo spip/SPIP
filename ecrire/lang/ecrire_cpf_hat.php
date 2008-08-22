@@ -780,7 +780,7 @@ nan yon koul&egrave; ki bay lestati ali&nbsp;:',
 'taille_cache_octets' => 'Tay pou kach se aster @octets@.',
 'taille_cache_vide' => 'Kach-la se vid.',
 'taille_repertoire_cache' => 'Latay r&eacute;pertwar kach',
-'text_article_propose_publication' => 'Atik ki pwopoze pou f&eacute; par&egrave;t. Ezit pas bay lavi aou nan fowom ki jwen atik-la (anba lapaj).',
+'text_article_propose_publication' => '<MODIF>Atik ki pwopoze pou f&eacute; par&egrave;t. Ezit pas bay lavi aou nan fowom ki jwen atik-la (anba lapaj).',
 'texte_acces_ldap_anonyme_1' => 'K&egrave;k s&egrave;v&egrave; LDAP y ki pa aksepte laks&eacute; anonim.Al&ograve;, f&ograve;k pweziz&eacute;l yon lidentifian pou lo promye aks&eacute; akoz apr&egrave;sa posib cheche tout enf&ograve; masyon w ka vle nan laniy&eacute;. Men souvan, genyen posib w kenbe tout chan la vid.',
 'texte_admin_effacer_01' => 'Komand la li efase <i>tout</i> kontni antye nan labazdone,
 ak <i>tout</i> aks&eacute; r&eacute;dakt&egrave; ak koman&egrave; yo. Si w te f&eacute; mache ali, f&ograve;k w enstal&eacute;  yon l&ograve;t fwa lapros&eacute;di
@@ -840,7 +840,7 @@ lenstalasyon SPIP pou w kreye yon l&ograve;t nouvo baz ak son promy&eacute; laks
 'texte_documents_joints_2' => 'R&egrave;glaj-la ka pa enpeche bay zot limaj nan atik dir&eacute;kman.',
 'texte_effacer_base' => 'Efase labazdon&eacute; SPIP',
 'texte_effacer_donnees_indexation' => 'Efase tout don&eacute; pou lendeksasyon',
-'texte_en_cours_validation' => 'Atik ak tinouv&egrave;l isit anba, zot se pwopoze pou f&egrave; par&egrave;t. Ezit pa bay lavi aw nan fowom jwen.',
+'texte_en_cours_validation' => '<MODIF>Atik ak tinouv&egrave;l isit anba, zot se pwopoze pou f&egrave; par&egrave;t. Ezit pa bay lavi aw nan fowom jwen.',
 'texte_enrichir_mise_a_jour' => 'W kapab rann lasp&eacute; lapaj pli rich ak &laquo;&nbsp;tichemen tipografik&nbsp;&raquo;.',
 'texte_fichier_authent' => '<MODIF><b>F&ograve;k SPIP kreye fichye yo espesyal <tt>.htpasswd</tt>
   ak <tt>.htpasswd-admin</tt> nan rep&egrave;twar @dossier@ ?</b><p />

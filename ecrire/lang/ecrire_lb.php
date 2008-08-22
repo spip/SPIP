@@ -844,7 +844,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'taille_cache_octets' => 'D\'Gr&eacute;isst vum Cache ass elo @octets@.',
 'taille_cache_vide' => 'De Cache ass eidel.',
 'taille_repertoire_cache' => 'Gr&eacute;isst vum Cache-Dossier',
-'text_article_propose_publication' => 'Fir d\'Publikatioun propos&eacute;ierten Artikel. Gidd &auml;ren Avis iwwer de Forum vun d&euml;sem Artikel (&euml;nnen op der S&auml;it).',
+'text_article_propose_publication' => '<MODIF>Fir d\'Publikatioun propos&eacute;ierten Artikel. Gidd &auml;ren Avis iwwer de Forum vun d&euml;sem Artikel (&euml;nnen op der S&auml;it).',
 'texte_acces_ldap_anonyme_1' => 'Verschidden LDAP-Serveren erlaben keen anonymen Zougang. An deem Fall musst dir en initialen Zougang uginn fir Informatiounen am Annuaire k&euml;nnen ze sichen. An deenen meeschten F&auml;ll k&euml;nnt d&euml;r d&euml;s Felder eidel loossen.',
 'texte_admin_effacer_01' => 'D&euml;s Prozedur l&auml;scht <i>alles</i> aus der Datebank, och <i>all</i> Zoug&auml;ng vun de Redakteren an Administrateuren. Duerno musst dir SPIP nei install&eacute;ieren fir eng nei Datebank an den &eacute;ischten Administrateur-Zougang derb&auml;i ze setzen.',
 'texte_admin_effacer_stats' => 'D&euml;s Prozedur l&auml;scht d\'Statistik an d\'Popularit&eacute;it vun den Artikele vun &auml;rem Site.',
@@ -890,7 +890,7 @@ Benotzt d\'L&euml;scht hei dr&euml;nner fir unzegin w&eacute;i eng Elementer e k
 'texte_effacer_base' => 'D\'SPIP-Datebank l&auml;schen',
 'texte_effacer_donnees_indexation' => 'Den Index l&auml;schen',
 'texte_effacer_statistiques' => 'Statistik l&auml;schen',
-'texte_en_cours_validation' => 'D&euml;s Artikelen a Kuerzmeldungen sinn fir d\'Publikatioun propos&eacute;iert. Gidd &auml;ren Avis am Forum deen dozou geheiert.',
+'texte_en_cours_validation' => '<MODIF>D&euml;s Artikelen a Kuerzmeldungen sinn fir d\'Publikatioun propos&eacute;iert. Gidd &auml;ren Avis am Forum deen dozou geheiert.',
 'texte_enrichir_mise_a_jour' => 'Dir k&euml;nnt de Layout verbesseren mat "typographeschen Ofkiirzungen".',
 'texte_fichier_authent' => '<MODIF><b>Soll SPIP d&eacute;i speziell Fichier\'en <tt>.htpasswd</tt> an <tt>.htpasswd-admin</tt> am Dossier @dossier@ maachen?</b><p />
 D&euml;s Fichier\'en k&euml;nnen den Zougang vun den Auteuren an den Administrateuren op verschidden Deeler vum Site kontroll&eacute;ieren (externen Statistik-Programm z.B.).<p />

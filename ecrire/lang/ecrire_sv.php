@@ -915,7 +915,7 @@ med en f&auml;rg som visar deras status:',
 'taille_cache_octets' => '<NEW>The size of the cache is currently @octets@.',
 'taille_cache_vide' => 'Cachen &auml;r tom.',
 'taille_repertoire_cache' => '<NEW>Current size of the cache',
-'text_article_propose_publication' => 'Artikel inl&auml;mnad f&ouml;r publicering. tveka inte att s&auml;ga din mening i forumet l&auml;ngst ned p&aring; sidan.',
+'text_article_propose_publication' => '<MODIF>Artikel inl&auml;mnad f&ouml;r publicering. tveka inte att s&auml;ga din mening i forumet l&auml;ngst ned p&aring; sidan.',
 'texte_acces_ldap_anonyme_1' => '<NEW>Some LDAP servers do not allow any anonymous access. In this case you must indicate an initial access identifier to be able to search for information in the directory afterwards. However, in most cases the following fields can be left empty.',
 'texte_admin_effacer_01' => 'Detta kommando raderar <i>all</i> information i databasen,
 inklusive <i>alla</i> uppgifter om anv&auml;ndare. Efter att du anv&auml;nt det, m&aring;ste du 
@@ -986,7 +986,7 @@ installera om SPIP f&ouml;r att skapa en ny databas och den f&ouml;rsta administ
 'texte_effacer_base' => '<NEW>Delete the SPIP database',
 'texte_effacer_donnees_indexation' => '<NEW>Delete indexing data',
 'texte_effacer_statistiques' => '<NEW>Delete the statistics',
-'texte_en_cours_validation' => '<NEW>The following articles and news are submitted for publication. Do not hesitate to give your opinion through the forums attached to them.',
+'texte_en_cours_validation' => '<MODIF>The following articles and news are submitted for publication. Do not hesitate to give your opinion through the forums attached to them.',
 'texte_enrichir_mise_a_jour' => '<NEW>You can enrich the layout of your text by using &laquo;typographical shortcuts&raquo;.',
 'texte_fichier_authent' => '<MODIF><b>Should SPIP create the <tt>.htpasswd</tt>
   and <tt>.htpasswd-admin</tt> files in the directory @dossier@?</b><p />

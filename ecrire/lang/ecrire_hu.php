@@ -756,7 +756,7 @@ ami &aacute;llapot&aacute;t jelzi&nbsp;:',
 'taille_cache_octets' => 'A cache m&eacute;rete jelenleg @octets@.',
 'taille_cache_vide' => 'A cache &uuml;res.',
 'taille_repertoire_cache' => 'Cache mappa m&eacute;rete',
-'text_article_propose_publication' => 'Publik&aacute;l&aacute;sra javasolt cikk. Ne habozzon hozz&aacute;sz&oacute;lni a cikkhez k&ouml;t&ouml;tt f&oacute;rum seg&iacute;ts&eacute;g&eacute;vel (az oldal v&eacute;g&eacute;n).',
+'text_article_propose_publication' => '<MODIF>Publik&aacute;l&aacute;sra javasolt cikk. Ne habozzon hozz&aacute;sz&oacute;lni a cikkhez k&ouml;t&ouml;tt f&oacute;rum seg&iacute;ts&eacute;g&eacute;vel (az oldal v&eacute;g&eacute;n).',
 'texte_acces_ldap_anonyme_1' => 'Bizonyos LDAP szerverek nem fogadj&aacute;k el a n&eacute;vtelen hozz&aacute;f&eacute;r&eacute;st. Ilyen esetben egy azonos&iacute;t&oacute;t kell jelezni ahhoz, hogy lehessen keresni adatokat a c&iacute;mt&aacute;rban. Legt&ouml;bb esetben azonban, a k&ouml;vetkez&#337; mez&#337;k &uuml;resen maradhatnak.',
 'texte_admin_effacer_01' => 'Ez a parancs az adatb&aacute;zis <i>eg&eacute;sz</i> tartalm&aacute;t t&ouml;rli,
 bele &eacute;rtve az <i>&ouml;sszes</i> szerz&#337;i, illetve adminisztr&aacute;tori hozz&aacute;f&eacute;r&eacute;st. Miut&aacute;n futtata, akkor ind&iacute;tani kell az
@@ -810,7 +810,7 @@ SPIP &uacute;jrat&eacute;l&eacute;p&iacute;t&eacute;s&eacute;t egy &uacute;jabb 
 'texte_documents_joints_2' => 'Ez a be&aacute;ll&iacute;t&aacute;s nem akad&aacute;lyozza a k&ouml;zvetlen k&eacute;pbesz&#369;r&aacute;st a cikkekbe.',
 'texte_effacer_base' => 'Az SPIP adatb&aacute;zisa t&ouml;rl&eacute;se',
 'texte_effacer_donnees_indexation' => 'Az index&aacute;l&aacute;si adatok t&ouml;rl&eacute;se',
-'texte_en_cours_validation' => 'Az al&aacute;bbi h&iacute;reket &eacute;s cikkeket javasolt&aacute;k publik&aacute;l&aacute;sra. Sz&oacute;ljon hozz&aacute; a hozz&aacute;juk csatolt f&oacute;rumokban.',
+'texte_en_cours_validation' => '<MODIF>Az al&aacute;bbi h&iacute;reket &eacute;s cikkeket javasolt&aacute;k publik&aacute;l&aacute;sra. Sz&oacute;ljon hozz&aacute; a hozz&aacute;juk csatolt f&oacute;rumokban.',
 'texte_enrichir_mise_a_jour' => 'A szerkeszt&eacute;st lehet sz&eacute;p&iacute;teni a &laquo;&nbsp;nyomdai jelek&nbsp;&raquo; seg&iacute;ts&eacute;g&eacute;vel.',
 'texte_fichier_authent' => '<MODIF><b>SPIP-nek kell-e l&eacute;trehoznia sp&eacute;ci&aacute;lis <tt>.htpasswd</tt>
   &eacute;s <tt>.htpasswd-admin</tt> f&aacute;jlokat a @dossier@ mapp&aacute;ban?</b><p />
