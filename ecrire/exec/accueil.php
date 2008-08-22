@@ -81,7 +81,11 @@ function encours_accueil()
 
 	return 
 	"<div style='position:relative;display:inline;'>" 
-	. debut_cadre_couleur_foncee("",true, "", _T('texte_en_cours_validation'))
+	. debut_cadre_couleur_foncee("",true, "", _T('texte_en_cours_validation')
+		. (($GLOBALS['meta']['forum_prive_objets'] != 'non')
+			? _T('texte_en_cours_validation_forum')
+			: '' )
+		)
 	. $res
 	. bouton_spip_rss('a-suivre')
 	. fin_cadre_couleur_foncee(true)

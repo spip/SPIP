@@ -293,6 +293,9 @@ function afficher_corps_articles($id_article, $virtuel, $row)
 	if ($row['statut'] == 'prop')
 		$res .= "<p class='article_prop'>"._T('text_article_propose_publication')."</p>";
 
+		if ($GLOBALS['meta']['forum_prive_objets'] != 'non')
+			$res .= "<p class='article_prop'>"._T('text_article_propose_publication_forum')."</p>";
+
 	if ($virtuel) {
 		$res .= debut_boite_info(true)
 		.  "\n<div style='text-align: center'>"
