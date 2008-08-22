@@ -297,7 +297,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 		$res .= debut_cadre_couleur('',true);
 		$res .= "<div class='verdana2' style='color: black;'><b>"._T('texte_en_cours_validation')
 		. (($GLOBALS['meta']['forum_prive_objets'] != 'non')
-			? _T('texte_en_cours_validation_forum')
+			? ' '._T('texte_en_cours_validation_forum')
 			: '' )
 		. "</b></div>";
 
