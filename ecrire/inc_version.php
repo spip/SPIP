@@ -108,11 +108,12 @@ $filtrer_javascript = 0;
 // PS: dans les forums, petitions, flux syndiques... c'est *toujours* securise
 
 // Type d'URLs
-// 'page': spip.php?article123 [c'est la valeur par defaut pour SPIP 1.9]
+// 'page': spip.php?article123 [c'est la valeur par defaut pour SPIP 2.0]
 // 'html': article123.html
-// 'propres': Titre-de-l-article <http://lab.spip.net/spikini/UrlsPropres>
+// 'propres': Titre-de-l-article
 // 'propres2' : Titre-de-l-article.html (base sur 'propres')
-$type_urls = 'page';
+// 'arbo' : /article/Titre
+$type_urls = 'page'; // 'page' => surcharge possible par configuration
 
 #la premiere date dans le menu deroulant de date de publication
 # null: automatiquement (affiche les 8 dernieres annees)
