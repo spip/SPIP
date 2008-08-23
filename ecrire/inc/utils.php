@@ -762,10 +762,10 @@ function test_valeur_serveur($truc) {
 // http://doc.spip.org/@url_de_base
 function url_de_base() {
 
-	static $url;
+	static $url = array();
 
-	if ($url)
-		return $url;
+	if (isset($url[$GLOBALS['profondeur_url']]))
+		return $url[$GLOBALS['profondeur_url']];
 
 	// cas particulier des sites filtres par un proxy entrant
 	// cf. http://trac.rezo.net/trac/spip/ticket/401
@@ -800,9 +800,9 @@ function url_de_base() {
 	list($myself) = explode('?', $myself);
 
 	# supprimer n sous-repertoires
-	$url = join('/', array_slice(explode('/', $myself), 0, -1-$GLOBALS['profondeur_url'])).'/';
+	$url[$GLOBALS['profondeur_url']] = join('/', array_slice(explode('/', $myself), 0, -1-$GLOBALS['profondeur_url'])).'/';
 
-	return $url;
+	return $url[$GLOBALS['profondeur_url']];
 }
 
 
