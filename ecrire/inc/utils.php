@@ -1039,7 +1039,7 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 
 	static $too_late = 0;
 	if ($too_late++) return;
-
+	
 	define('_DIR_IMG', $pa);
 	define('_DIR_LOGOS', $pa);
 	define('_DIR_IMG_ICONES', _DIR_LOGOS . "icones/");
