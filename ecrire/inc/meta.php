@@ -94,7 +94,7 @@ function ecrire_meta($nom, $valeur, $importable = NULL) {
 	if (!$nom) return;
 	$GLOBALS['meta'][$nom] = $valeur;
 	include_spip('base/abstract_sql');
-	$res = sql_select("impt,valeur","spip_meta","nom=" . sql_quote($nom),'','','','','','continue');
+	$res = sql_select("*","spip_meta","nom=" . sql_quote($nom),'','','','','','continue');
 	if (!$res) return; 
 	$res = sql_fetch($res);
 	// conserver la valeur de impt si existante

@@ -2487,7 +2487,7 @@ function encoder_contexte_ajax($c,$form='') {
 	include_spip("inc/securiser_action");
 	$cle = calculer_cle_action($form.(is_array($c)?serialize($c):$c));
 	$c = serialize(array($c,$cle));
-	if (function_exists('gzdeflate'))
+	if (function_exists('gzdeflate') && function_exists('gzinflate'))
 		$c = gzdeflate($c);
 	$c = _xor($c);
 	$c = base64_encode($c);
@@ -2501,7 +2501,7 @@ function decoder_contexte_ajax($c,$form='') {
 
 	$c = @base64_decode($c);
 	$c = _xor($c);
-	if (function_exists('gzinflate'))
+	if (function_exists('gzdeflate') && function_exists('gzinflate'))
 		$c = @gzinflate($c);
 	list($env, $cle) = @unserialize($c);
 

@@ -129,6 +129,7 @@ function secret_du_site() {
 	) {
 		include_spip('inc/acces');
 		ecrire_meta('secret_du_site', creer_uniqid(), 'non');
+		lire_metas(); // au cas ou ecrire_meta() ne fonctionne pas
 	}
 	return $GLOBALS['meta']['secret_du_site'];
 }
