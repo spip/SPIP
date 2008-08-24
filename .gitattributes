@@ -760,6 +760,16 @@ prive/modeles/text.html -text
 prive/modeles/video.html -text
 prive/puce_prive.gif -text
 prive/puce_prive_rtl.gif -text
+prive/rss/a_suivre.html -text
+prive/rss/forum_article.html -text
+prive/rss/forum_breve.html -text
+prive/rss/forum_rubrique.html -text
+prive/rss/forum_syndic.html -text
+prive/rss/forum_thread.html -text
+prive/rss/forums.html -text
+prive/rss/messagerie.html -text
+prive/rss/revisions.html -text
+prive/rss/signatures.html -text
 prive/spip_glossaire.gif -text
 prive/spip_out.gif -text
 prive/spip_style.css -text

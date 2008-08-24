@@ -433,6 +433,8 @@ function corriger_caracteres ($texte) {
 // http://doc.spip.org/@texte_backend
 function texte_backend($texte) {
 
+	static $apostrophe = array("&#8217;", "'"); # n'allouer qu'une fois
+
 	// si on a des liens ou des images, les passer en absolu
 	$texte = liens_absolus($texte);
 
@@ -458,10 +460,10 @@ function texte_backend($texte) {
 		$texte = str_replace(chr(159), '&#159;', $texte);
 	}
 
-	// nettoyer l'apostrophe curly qui semble poser probleme a certains rss-readers
-	$texte = str_replace("&#8217;","'",$texte);
-
-	return $texte;
+	// l'apostrophe curly pose probleme a certains lecteure de RSS
+	// et le caractere apostrophe alourdit les squelettes avec PHP
+	// ==> on les remplace par l'entite HTML
+	return str_replace($apostrophe,'&#39;', $texte);
 }
 
 // Enleve le numero des titres numerotes ("1. Titre" -> "Titre")

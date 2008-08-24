@@ -43,7 +43,7 @@ function titre_rubrique($id_rubrique) {
 
 
 // http://doc.spip.org/@afficher_suivi_versions
-function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = false, $lang = "", $court = false, $rss = false) {
+function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = false, $lang = "", $court = false) {
 	
 	changer_typo($lang);
 	$lang_dir = lang_dir($lang);
@@ -91,30 +91,18 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 					$email = '';
 				}
 
-				if ($rss) {
-					$items[] = array(
-						'texte' => revisions_diff ($id_article, $id_version),
-						'titre' => $titre,
-						'url' => generer_url_ecrire("articles_versions","id_article=$id_article&id_version=$id_version"),
-						'date' => $date,
-						'nom' => $nom,
-						'email_auteur' => $email
-					);
-				} else {
-					$aff = revisions_bouton($id_article, $id_auteur, $id_version, $titre, $statut, $date, $lang_dir, $nom);
-					if (!$court) {
+				$aff = revisions_bouton($id_article, $id_auteur, $id_version, $titre, $statut, $date, $lang_dir, $nom);
+				if (!$court) {
 						$bouton_id = "b$id_version-$id_article-$id_auteur";
 						$aff = bouton_block_depliable($aff,false,$bouton_id)
 						  . debut_block_depliable(false,$bouton_id)
 						  . revisions_diff ($id_article, $id_version, $court)
 						  . fin_block();
-					}
-					$revisions .= "\n<div class='tr_liste' style='padding: 5px; border-top: 1px solid #aaaaaa;'>$aff</div>";
 				}
+				$revisions .= "\n<div class='tr_liste' style='padding: 5px; border-top: 1px solid #aaaaaa;'>$aff</div>";
 			}
 	}
-	if ($rss) return $items;
-	elseif (!$revisions) return '';
+	if (!$revisions) return '';
 	else return 
 	  revisions_entete_boite($court, $debut, $id_secteur, $lang, $nb_aff, $req_from, $req_where, $uniq_auteur)
 	  . $revisions
