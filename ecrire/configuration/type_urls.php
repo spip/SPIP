@@ -30,8 +30,9 @@ function configuration_type_urls_dist()
 		'html' => '<em>html</em> &mdash; <tt>article12.html</tt>',
 		'arbo' => '<em>arbo</em> &mdash; <tt>/article/Titre</tt>',
 		'standard' => '<em>standard</em> &mdash; <tt>article.php3?id_article=12</tt>',
-		'propres' => '<em>propres</em> &mdash; <tt>Titre-de-l-article</tt>',
-		'propres2' => '<em>propres2</em> &mdash; <tt>Titre-de-l-article.html</tt>',
+		'propres' => '<em>propres</em> &mdash; <tt>Titre-de-l-article</tt>, <tt>-Rubrique-</tt>',
+		'libres' => '<em>libres</em> &mdash; <tt>Titre-de-l-article</tt>, <tt>Rubrique</tt>',
+		'propres2' => '<em>propres2</em> &mdash; <tt>Titre-de-l-article.html</tt>, <tt>-Rubrique-.html</tt>',
 		'propres_qs' => '<em>propres_qs</em> &mdash; <tt>?Titre-de-l-article</tt>'
 	);
 
