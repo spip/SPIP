@@ -89,86 +89,9 @@ function configuration_compresseur_dist()
 		. fin_cadre_relief(true);
 
 
-/*
--- Compression du flux HTTP --
-
-SPIP peut compresser automatiquement chaque page qu'il envoie aux
-visiteurs du site. Ce réglage permet d'optimiser la bande passante (le
-site est plus rapide derrière une liaison à faible débit), mais
-demande plus de puissance au serveur. (Pour plus de détails, cf.
-[->http://www.php.net/ob_gzhandler].)
-
-Voulez-vous activer la compression du flux HTTP ?
-
-() oui
-(x) non
 
 
-
-
--- Traitement du HTML --
-
-(TODO, avec tidy)
-
-La commande "tidy" permet d'éliminer tous les espaces superflus des
-pages HTML produites, de façon à limiter la taille en octets du
-contenu envoyé. Elle offre aussi la possibilité de nettoyer le code
-HTML de manière à garantir qu'il est strictement conforme au standard
-XHTML 1.0.
-
-A noter : avec des squelettes conformes, SPIP produit du code conforme
-sans qu'il soit nécessaire de faire appel à tidy. De plus, ces deux
-options demandent un peu de puissance au serveur.
-
-Voulez-vous supprimer les espaces superflus des pages HTML ?
-
-() oui
-(x) non
-
-Souhaitez-vous faire appel à tidy garantir la conformité du code HTML ?
-
-() oui
-(x) non
-
-
-
--- Compactage des scripts et css --
-
-SPIP peut compacter les scripts javascript et les feuilles de style
-CSS, pour les enregistrer dans des fichiers statiques ; cela accélère
-grandement l'affichage, au détriment toutefois de la lisibilité du
-code. De plus, certains scripts ou CSS peuvent s'avérer incompatibles
-avec ce traitement (le cas échéant, vous pourrez les désactiver
-individuellement).
-
-Compacter les scripts ?
-() oui
-(x) non
-
-Compacter les feuilles de style ?
-() oui
-(x) non
-
-
-[si oui :]
-SPIP a compacté les scripts et feuilles de style suivants. Si certains
-ne doivent pas être compactés, veuillez le signaler ci-dessous :
-
-page=jquery.js []
-plugins/thickbox/thickbox.js []
-squelettes/toto.css [x]
-...
-
-(Note: seuls les scripts rencontrés dans la journée qui précède sont
-mémorisés, ainsi que ceux qui sont interdits.)
-
-../..
-
-*/
-
-
-
-	$res = debut_cadre_trait_couleur("", true, "",
+	$res = '<br />'.debut_cadre_trait_couleur("", true, "",
 		_T('info_compresseur_titre'))
 	.  ajax_action_post('configurer', 'compresseur', 'config_fonctions', '', $res)
 	.  fin_cadre_trait_couleur(true);
