@@ -16,8 +16,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  // Ce fichier calcule une page en executant un squelette.
 //
 
-include_spip('base/abstract_sql');
 include_spip('inc/lang');
+include_spip('inc/acces');
 
 // NB: Ce fichier peut initialiser $dossier_squelettes (old-style)
 // donc il faut l'inclure "en globals"

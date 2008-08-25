@@ -1,4 +1,6 @@
-#HTTP_HEADER{Content-Type: text/xml; charset=#CHARSET}<?xml version="1.0" encoding="#CHARSET" ?>
+#HTTP_HEADER{Content-Type: text/xml; charset=#CHARSET}#CACHE{900}<BOUCLE0(AUTEURS){tout}{id_auteur=#ENV{id}}{lang_select}><?php
+if ([(#ID_AUTEUR|verifier_low_sec{#ENV{cle}, #ENV{op}, #ENV{args}}|?{1,0})]) {
+?><?xml version="1.0" encoding="#CHARSET" ?>
 
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:thr="http://purl.org/syndication/thread/1.0">
 <channel xml:lang="#LANG">
@@ -48,4 +50,9 @@ rsort($rss);
 echo join('',$rss);
 ?>
 </channel>
-</rss>
+</rss><?php
+} else {
+include_spip('inc/minipres'); 
+echo minipres();
+}?></BOUCLE0>
+
