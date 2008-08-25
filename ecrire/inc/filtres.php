@@ -1475,12 +1475,10 @@ function tester_config($id, $mode='') {
 // ca retourne un url de suivi du thread y (que le thread existe ou non)
 // http://doc.spip.org/@url_rss_forum
 function url_rss_forum($param) {
-	if (preg_match(',.*(id_.*?)=([0-9]+),S', $param, $regs)) {
-		include_spip('inc/acces');
-		list(,$k,$v) = $regs;
-		$k = str_replace('id_forum', 'id_thread', $k);
-		return generer_url_low_sec('forum', array($k => $v));
-	}
+	if (!preg_match(',.*(id_(\w*?))=([0-9]+),S', $param, $regs)) return '';
+	list(,$k,$t,$v) = $regs;
+	if ($t == 'forum') $k = 'id_' . ($t = 'thread');
+	return generer_url_public("rss_forum_$t", array('op'=>$t, $k => $v));
 }
 
 //

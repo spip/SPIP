@@ -39,6 +39,11 @@ dist/puce.gif -text
 dist/puce_rtl.gif -text
 dist/rechercher.gif -text
 dist/rechercher.png -text
+dist/rss_forum_article.html -text
+dist/rss_forum_breve.html -text
+dist/rss_forum_rubrique.html -text
+dist/rss_forum_syndic.html -text
+dist/rss_forum_thread.html -text
 dist/spip.png -text
 dist/spip_formulaires.css -text
 dist/spip_pass.html -text
@@ -761,11 +766,6 @@ prive/modeles/video.html -text
 prive/puce_prive.gif -text
 prive/puce_prive_rtl.gif -text
 prive/rss/a_suivre.html -text
-prive/rss/forum_article.html -text
-prive/rss/forum_breve.html -text
-prive/rss/forum_rubrique.html -text
-prive/rss/forum_syndic.html -text
-prive/rss/forum_thread.html -text
 prive/rss/forums.html -text
 prive/rss/messagerie.html -text
 prive/rss/revisions.html -text

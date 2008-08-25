@@ -50,8 +50,9 @@ function action_rss_dist()
 	if ($contexte) {
 		$f = evaluer_fond ('', $contexte);
 		echo $f['texte'];
-		spip_log("spip_rss s'applique sur '$op $args pour $id' en " . spip_timer('rss'));
-	} else 	spip_log("spip_rss sur '$op $args pour $id' incorrect");
+		$message ="spip_rss s'applique sur " . $contexte['fond'] . " et $args pour $id";
+	} else 	$message = ("spip_rss sur '$op $args pour $id' incorrect");
+	spip_log("$message (" . spip_timer('rss') .')');
 	exit;
 }
 
@@ -74,31 +75,31 @@ function  rss_revisions($a)
 	include_spip('inc/suivi_versions');
 	return $a;
 }
-// suivi prive des forums publics (pas le contraire, hein...)
-// Revoir les URL a terme pour que l'index "fond" soit bon des le depart
+// suivi public des forums publics 
+// Ne sert plus qu'a la compatibilite, c'est du squelette public a present
 // http://doc.spip.org/@rss_forum
 function rss_forum($a)
 {
 	if ($id = intval($a['id_article'])) {
-		$a['fond'] = 'prive/rss/forum_article';
+		$a['fond'] = 'dist/rss_forum_article';
 	}
 	else if ($id = intval($a['id_syndic'])) {
-		$a['fond'] = 'prive/rss/forum_syndic';
+		$a['fond'] = 'dist/rss_forum_syndic';
 	}
 	else if ($id = intval($a['id_breve'])) {
-		$a['fond'] = 'prive/rss/forum_breve';
+		$a['fond'] = 'dist/rss_forum_breve';
 	}
 	else if ($id = intval($a['id_rubrique'])) {
-		$a['fond'] = 'prive/rss/forum_rubrique';
+		$a['fond'] = 'dist/rss_forum_rubrique';
 	}
 	else if ($id = intval($a['id_thread'])) {
-		$a['fond'] = 'prive/rss/forum_thread';
+		$a['fond'] = 'dist/rss_forum_thread';
 	} else { $a ='';}
 
 	return $a;
 }
 
-# suivi prive des forums prives
+# suivi prive de tous les forums
 // http://doc.spip.org/@rss_forums
 function  rss_forums($a)
 {
