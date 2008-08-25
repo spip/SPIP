@@ -17,7 +17,7 @@ include_spip('public/debug');
 // http://doc.spip.org/@exec_valider_xml_dist
 function exec_valider_xml_dist()
 {
-	if (!autoriser('ecrire')) {
+	if (!autoriser('sauvegarder')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else valider_xml_ok(_request('var_url'), _request('ext'));
