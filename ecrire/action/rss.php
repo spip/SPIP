@@ -36,7 +36,6 @@ function action_rss_dist()
 
 	spip_timer('rss');
 	if (verifier_low_sec($id, $cle, "rss $op $args")) {
-		charger_generer_url();
 		lang_select($lang);
 		$op = str_replace('-', '_', $op);
 		$contexte = array('fond' => 'prive/rss/' . $op);
@@ -48,9 +47,9 @@ function action_rss_dist()
 		if ($f) $contexte = $f($contexte);
 	} else $contexte = '';
 	if ($contexte) {
-		$f = evaluer_fond ('', $contexte);
-		echo $f['texte'];
-		$message ="spip_rss s'applique sur " . $contexte['fond'] . " et $args pour $id";
+		$r = evaluer_fond ('', $contexte);
+		echo $r['texte'];
+		$message ="spip_rss s'applique sur " . $contexte['fond'] . " et $args pour $id par $f";
 	} else 	$message = ("spip_rss sur '$op $args pour $id' incorrect");
 	spip_log("$message (" . spip_timer('rss') .')');
 	exit;
@@ -59,7 +58,7 @@ function action_rss_dist()
 // Dans quelques cas le contexte doit etre revu
 // Il faudrait les eliminer, et gerer la compatibilite autrement
 
-# revisions des articles
+# Compatibilite des anciens liens, inutile pour les nouveaux.
 // http://doc.spip.org/@rss_revisions
 function  rss_revisions($a)
 {
@@ -68,9 +67,9 @@ function  rss_revisions($a)
 		unset($a['langue_choisie']);
 	}
 	if (isset($a['id_auteur'])) {
-		$a['statut'] = array('prepa','prop','publie'); 
+	  $a['statut'] = 'prepa';
 	} else {
-		$a['statut'] = array('prop','publie');
+	  $a['statut'] = '';
 	}
 	include_spip('inc/suivi_versions');
 	return $a;
