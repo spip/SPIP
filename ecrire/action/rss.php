@@ -81,25 +81,26 @@ function  rss_revisions($a)
 function rss_forum($a)
 {
 	if ($id = intval($a['id_article'])) {
-		$a['fond'] = 'dist/rss_forum_article';
+		$a['fond'] = 'rss_forum_article';
 	}
 	else if ($id = intval($a['id_syndic'])) {
-		$a['fond'] = 'dist/rss_forum_syndic';
+		$a['fond'] = 'rss_forum_syndic';
 	}
 	else if ($id = intval($a['id_breve'])) {
-		$a['fond'] = 'dist/rss_forum_breve';
+		$a['fond'] = 'rss_forum_breve';
 	}
 	else if ($id = intval($a['id_rubrique'])) {
-		$a['fond'] = 'dist/rss_forum_rubrique';
+		$a['fond'] = 'rss_forum_rubrique';
 	}
 	else if ($id = intval($a['id_thread'])) {
-		$a['fond'] = 'dist/rss_forum_thread';
+		$a['fond'] = 'rss_forum_thread';
 	} else { $a ='';}
 
 	return $a;
 }
 
 # suivi prive de tous les forums
+// Ne sert plus qu'a la compatibilite, cf les squeletes forums_$page a present
 // http://doc.spip.org/@rss_forums
 function  rss_forums($a)
 {

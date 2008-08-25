@@ -767,6 +767,11 @@ prive/puce_prive.gif -text
 prive/puce_prive_rtl.gif -text
 prive/rss/a_suivre.html -text
 prive/rss/forums.html -text
+prive/rss/forums_interne.html -text
+prive/rss/forums_prop.html -text
+prive/rss/forums_public.html -text
+prive/rss/forums_spam.html -text
+prive/rss/forums_vide.html -text
 prive/rss/messagerie.html -text
 prive/rss/revisions.html -text
 prive/rss/signatures.html -text
