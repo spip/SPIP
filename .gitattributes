@@ -1,7 +1,6 @@
 * text=auto !eol
 /INSTALL.txt -text
 config/remove.txt -text
-dist/favicon.ico -text
 dist/feed.png -text
 dist/formulaires/ecrire_auteur.php -text
 dist/formulaires/forum/charger.php -text
@@ -39,6 +38,7 @@ dist/puce.gif -text
 dist/puce_rtl.gif -text
 dist/rechercher.gif -text
 dist/rechercher.png -text
+dist/spip.ico -text
 dist/spip.png -text
 dist/spip_formulaires.css -text
 dist/spip_pass.html -text
