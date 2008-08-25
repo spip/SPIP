@@ -10,7 +10,7 @@
 <BOUCLE_A(ARTICLES){!par date}{statut=prop}{0,10}>
 $rss['[(#DATE|date_ical)]'] .= '
 	<item>
-		<title><:info_article_propose:> : [(#TITRE|texte_backend)]</title>
+		<title><:info_article_propose|texte_backend:> : [(#TITRE|texte_backend)]</title>
 		<link>[(#URL_ECRIRE{articles, id_article=#ID_ARTICLE}|url_absolue|texte_backend)]</link>
 		<guid isPermaLink="true">[(#URL_ECRIRE{articles, id_article=#ID_ARTICLE}|url_absolue|texte_backend)]</guid>
 		<dc:date>[(#DATE|date_iso)]</dc:date>
@@ -23,7 +23,7 @@ $rss['[(#DATE|date_ical)]'] .= '
 <BOUCLE_B(BREVES){!par date}{statut=prop}{0,10}>
 $rss['[(#DATE|date_ical)]'] .= '
 	<item>
-		<title><:titre_breve_proposee:> : [(#TITRE|texte_backend)]</title>
+		<title><:titre_breve_proposee|texte_backend:> : [(#TITRE|texte_backend)]</title>
 		<link>[(#URL_ECRIRE{breves_voir, id_breve=#ID_BREVE}|url_absolue|texte_backend)]</link>
 		<guid isPermaLink="true">[(#URL_ECRIRE{breves_voir, id_breve=#ID_BREVE}|url_absolue|texte_backend)]</guid>
 		<dc:date>[(#DATE|date_iso)]</dc:date>
@@ -35,7 +35,7 @@ $rss['[(#DATE|date_ical)]'] .= '
 <BOUCLE_S(SYNDIC){!par date}{statut=prop}{0,10}>
 $rss['[(#DATE|date_ical)]'] .= '
 	<item>
-		<title><:info_site_attente:> : [(#TITRE|texte_backend)]</title>
+		<title><:info_site_attente|texte_backend:> : [(#TITRE|texte_backend)]</title>
 		<link>[(#URL_ECRIRE{sites, id_syndic=#ID_SYNDIC}|url_absolue|texte_backend)]</link>
 		<guid isPermaLink="true">[(#URL_ECRIRE{sites, id_syndic=#ID_SYNDIC}|url_absolue|texte_backend)]</guid>
 		<dc:date>[(#DATE|date_iso)]</dc:date>
