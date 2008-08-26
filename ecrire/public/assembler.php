@@ -785,7 +785,7 @@ function xml_hack(&$page, $echap = false) {
 function page_base_href(&$texte){
 	if (!defined('_SET_HTML_BASE'))
 		define('_SET_HTML_BASE',
-			$GLOBALS['meta']['type_urls'] == 'arbo');
+			$GLOBALS['profondeur_url'] >= 1);
 
 	if (_SET_HTML_BASE
 	AND $GLOBALS['html']
