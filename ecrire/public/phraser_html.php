@@ -33,7 +33,7 @@ define('CHAMP_ETENDU', '/\[([^]\[]*)\(' . NOM_DE_CHAMP . '([^[)]*\)[^]\[]*)\]/S'
 
 define('BALISE_INCLURE','/<INCLU[DR]E[[:space:]]*(\(([^)]*)\))?/S');
 define('BALISE_POLYGLOTTE',',<multi>(.*)</multi>,Uims');
-define('BALISE_IDIOMES',',<:(([a-z0-9_]+):)?([a-z0-9_]+)({([^\|]*)})?((\|.*)?:>),iS');
+define('BALISE_IDIOMES',',<:(([a-z0-9_]+):)?([a-z0-9_]+)({([^\|=>]*=[^\|>]*)})?((\|[^>]*)?:>),iS');
 
 define('SQL_ARGS', '(\([^)]*\))');
 define('CHAMP_SQL_PLUS_FONC', '`?([A-Z_][A-Z_0-9.]*)' . SQL_ARGS . '?`?');
@@ -154,9 +154,11 @@ function phraser_idiomes($texte,$ligne,$result) {
 		$texte = substr($texte,$p+strlen($match[0]));
 		// Stocker les arguments de la balise de traduction
 		$args=array();
-		foreach (explode(',',$match[5]) as $val) {
+		$vals=explode(',',$match[5]);
+		foreach ($vals as $val) {
 			$arg=explode('=',$val);
-			$args[$arg[0]]=phraser_champs($arg[1], 0, $_arg);	
+			if ($arg[0])
+				$args[$arg[0]]=phraser_champs($arg[1], 0, $_arg);	
 		}
 		$champ->arg=$args;
 		$champ->nom_champ = strtolower($match[3]);
