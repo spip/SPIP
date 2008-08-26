@@ -32,6 +32,8 @@ define('NOM_DE_CHAMP', "#((" . NOM_DE_BOUCLE . "):)?(([A-F]*[G-Z_][A-Z_0-9]*)|[A
 define('CHAMP_ETENDU', '/\[([^]\[]*)\(' . NOM_DE_CHAMP . '([^[)]*\)[^]\[]*)\]/S');
 
 define('BALISE_INCLURE','/<INCLU[DR]E[[:space:]]*(\(([^)]*)\))?/S');
+define('BALISE_POLYGLOTTE',',<multi>(.*)</multi>,Uims');
+define('BALISE_IDIOMES',',<:(([a-z0-9_]+):)?([a-z0-9_]+)({([^}]*)})?((\|[^:>]*)?:>),iS');
 
 define('SQL_ARGS', '(\([^)]*\))');
 define('CHAMP_SQL_PLUS_FONC', '`?([A-Z_][A-Z_0-9.]*)' . SQL_ARGS . '?`?');
@@ -99,7 +101,7 @@ function phraser_inclure($texte, $ligne, $result) {
 // http://doc.spip.org/@phraser_polyglotte
 function phraser_polyglotte($texte,$ligne, $result) {
 
-	if (preg_match_all(",<multi>(.*)</multi>,Uims", $texte, $m, PREG_SET_ORDER))
+	if (preg_match_all(BALISE_POLYGLOTTE, $texte, $m, PREG_SET_ORDER))
 	foreach ($m as $match) {
 		$p = strpos($texte, $match[0]);
 		$debut = substr($texte, 0, $p);
@@ -140,8 +142,8 @@ function phraser_polyglotte($texte,$ligne, $result) {
 // http://doc.spip.org/@phraser_idiomes
 function phraser_idiomes($texte,$ligne,$result) {
 
-	// Reperer les balises de traduction <:toto:>
-	while (preg_match(",<:(([a-z0-9_]+):)?([a-z0-9_]+)((\|[^:>]*)?:>),iS", $texte, $match)) {
+	// Reperer les balises de traduction <:module:chaine{argument1=texte,argument2=#BALISE}|filtre1{texte,#BALISE}|filtre2:>
+	while (preg_match(BALISE_IDIOMES, $texte, $match)) {
 		$p = strpos($texte, $match[0]);
 		$debut = substr($texte, 0, $p);
 		if ($p) $result = phraser_champs($debut, $ligne, $result);
@@ -150,10 +152,17 @@ function phraser_idiomes($texte,$ligne,$result) {
 		$champ->ligne = $ligne;
 		$ligne += substr_count($match[0], "\n");
 		$texte = substr($texte,$p+strlen($match[0]));
+		// Stocker les arguments de la balise de traduction
+		$args=array();
+		foreach (explode(',',$match[5]) as $val) {
+			$arg=explode('=',$val);
+			$args[$arg[0]]=phraser_champs($arg[1], 0, $_arg);	
+		}
+		$champ->arg=$args;
 		$champ->nom_champ = strtolower($match[3]);
 		$champ->module = $match[2] ? $match[2] : 'public/spip/ecrire';
 		// pas d'imbrication pour les filtres sur langue
-		phraser_args(@$match[5], ":", '', array(), $champ);
+		phraser_args(@$match[7], ":", '', array(), $champ);
 		$result[] = $champ;
 	}
 	if ($texte!=="")  $result = phraser_champs($texte,$ligne,$result);
