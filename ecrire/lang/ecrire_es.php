@@ -877,7 +877,8 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'taille_cache_octets' => 'El tama&ntilde;o de la cache es actualmente de @octets@.',
 'taille_cache_vide' => 'La cache est&aacute; vac&iacute;a.',
 'taille_repertoire_cache' => 'Tama&ntilde;o de la carpeta cache',
-'text_article_propose_publication' => '<MODIF>Art&iacute;culo propuesto a la publicaci&oacute;n.<br /> No dudes en dar tu opini&oacute;n en el foro aferente, que se encuentra m&aacute;s adelante en esta p&aacute;gina.',
+'text_article_propose_publication' => 'Art&iacute;culo propuesto para su publicaci&oacute;n.',
+'text_article_propose_publication_forum' => 'Expresa tu opini&oacute;n mediante el foro adjunto al art&iacute;culo (en la parte inferior de la p&aacute;gina).',
 'texte_acces_ldap_anonyme_1' => 'Algunos servidores LDAP no aceptan accesos an&oacute;nimos. En ese caso debes especificar un identificador de acceso inicial para poder luego buscar informaciones en el directorio. En la mayor&iacute;a de los casos los campos siguientes pueden estar vac&iacute;os.',
 'texte_admin_effacer_01' => 'Este comando borra <i>TODO</i> el contenido de la base de datos, redactoras y administradores inclu&iacute;dos. Despu&eacute;s de ejecutarlo tendr&aacute;s que volver a instalar SPIP, creando una nueva base al igual que un primer acceso de administraci&oacute;n.',
 'texte_admin_effacer_stats' => 'Esta orden borra todos los datos ligados con las estad&iacute;sticas de visitas al sitio, incluyendo la popularidad de los art&iacute;culos.',
@@ -932,7 +933,8 @@ requiere m&aacute;s potencia del servidor.',
 'texte_effacer_base' => 'Borrar la base de datos SPIP',
 'texte_effacer_donnees_indexation' => 'Borrar los datos de indexaci&oacute;n',
 'texte_effacer_statistiques' => 'Borrar las estad&iacute;sticas',
-'texte_en_cours_validation' => '<MODIF>Los art&iacute;culos y notas breves mostradas m&aacute;s adelante, est&aacute;n propuestas para la publicaci&oacute;n. No dudes en dar tu opini&oacute;n mediante los foros adjuntos.',
+'texte_en_cours_validation' => 'Los art&iacute;culos y notas breves mostradas m&aacute;s adelante est&aacute;n propuestas para su publicaci&oacute;n.',
+'texte_en_cours_validation_forum' => 'No dudes en dar tu opini&oacute;n mediante los foros adjuntos.',
 'texte_enrichir_mise_a_jour' => 'Puedes enriquecer el formato de tu texto utilizando "atajos tipogr&aacute;ficos"',
 'texte_fichier_authent' => '<b>&iquest;Debe SPIP crear los archivos especiales <tt>.htpasswd</tt>
  y <tt>.htpasswd-admin</tt> en la carpeta @dossier@?</b><p />
@@ -1028,6 +1030,8 @@ Prudencia con esta funcionalidad: <b>las modificaciones o p&eacute;rdidas eventu
 'texte_travail_collaboratif' => 'Es frecuente que varios redactores y redactoras trabajen sobre el mismo art&iacute;culo, el sistema puede mostrar los art&iacute;culos recientemente &laquo;abiertos&raquo; para  evitar las modificaciones simult&aacute;neas.
  Esta opci&oacute;n est&aacute; desactivada por omisi&oacute;n para evitar mostrar mensajes de advertencia intempestivos.',
 'texte_trop_resultats_auteurs' => 'Demasiados resultados para la b&uacute;squeda de "@cherche_auteur@". Precise los criterios.',
+'texte_type_urls' => 'Abajo puedes elegir el modo de calcular la direcci&oacute;n de las p&aacute;ginas.',
+'texte_type_urls_attention' => 'Atenci&oacute;n, este ajuste s&oacute;lo funcionar&aacute; si el fichero @htaccess@ est&aacute; correctamente instalado en la ra&iacute;z del sitio web.',
 'texte_unpack' => 'Descarga de la &uacute;ltima versi&oacute;n',
 'texte_utilisation_moteur_syndiques' => 'Cuando utilizas el motor de b&uacute;squeda integrado
     en SPIP, puedes efectuar las b&uacute;squedas sobre los sitios y
@@ -1123,6 +1127,7 @@ t&iacute;tulos y las descripciones de los art&iacute;culos. <br />- Un segundo m
 'titre_sites_tous' => 'Los sitios referenciados',
 'titre_suivi_petition' => 'Gesti&oacute;n de las peticiones',
 'titre_syndication' => 'Sindicaci&oacute;n de sitios',
+'titre_type_urls' => 'Tipo de direcciones URL',
 'tls_ldap' => 'Transport Layer Security:',
 'tout_dossier_upload' => 'Toda la carpeta @upload@',
 'trad_article_inexistant' => 'No hay ning&uacute;n art&iacute;culo con ese n&uacute;mero.',

@@ -921,7 +921,8 @@ in a colour indicating their status:',
 'taille_cache_octets' => 'The size of the cache is currently @octets@.',
 'taille_cache_vide' => 'The cache is empty.',
 'taille_repertoire_cache' => 'Current size of the cache',
-'text_article_propose_publication' => '<MODIF>Article submitted for publication. Do not hesitate to give your opinion through the forum attached to this article (at the bottom of the page).',
+'text_article_propose_publication' => 'Article submitted for publication.',
+'text_article_propose_publication_forum' => 'You can comment on this article by using the attached forum (at the bottom of the page).',
 'texte_acces_ldap_anonyme_1' => 'Some LDAP servers do not allow any anonymous access. In this case you must indicate an initial access identifier to be able to search for information in the directory afterwards. However, in most cases the following fields can be left empty.',
 'texte_admin_effacer_01' => 'This command deletes <i>all</i> the content of the database,
 including <i>all</i> the access parameters for editors and administrators. After executing it, you should
@@ -992,7 +993,8 @@ reinstall SPIP in order to recreate a new database and the first administrator\'
 'texte_effacer_base' => 'Delete the SPIP database',
 'texte_effacer_donnees_indexation' => 'Delete indexing data',
 'texte_effacer_statistiques' => 'Delete the statistics',
-'texte_en_cours_validation' => '<MODIF>The following articles and news are submitted for publication. Do not hesitate to give your opinion through the forums attached to them.',
+'texte_en_cours_validation' => 'The following articles and news are submitted for publication.',
+'texte_en_cours_validation_forum' => 'You can give your comments by using the forums which are attached to them.',
 'texte_enrichir_mise_a_jour' => 'You can enrich the layout of your text by using &laquo;typographical shortcuts&raquo;.',
 'texte_fichier_authent' => '<b>Should SPIP create the <tt>.htpasswd</tt>
   and <tt>.htpasswd-admin</tt> files in the directory @dossier@?</b><p />
@@ -1120,6 +1122,8 @@ entered important modifications on the graphics or the structure of the site.',
   This option is disabled by default to avoid displaying unnecessary warnings.
   messages.',
 'texte_trop_resultats_auteurs' => 'Too many results for "@cherche_auteur@"; please refine the search.',
+'texte_type_urls' => 'You can choose, below, the calculation mode of the pages URLs.',
+'texte_type_urls_attention' => 'Warning, this setting will only work if the file @htaccess@ is correctly installed at the site\'s root.',
 'texte_unpack' => 'downloading the latest version',
 'texte_utilisation_moteur_syndiques' => 'When you use SPIP\'s integrated search engine, 
 you can perform searches on sites and
@@ -1219,6 +1223,7 @@ you can perform searches on sites and
 'titre_sites_tous' => 'Referenced sites',
 'titre_suivi_petition' => 'Petitions follow-up',
 'titre_syndication' => 'Sites syndication',
+'titre_type_urls' => 'Type of URL addresses',
 'tls_ldap' => 'Transport Layer Security :',
 'tout_dossier_upload' => 'The whole @upload@ directory',
 'trad_article_inexistant' => 'There is no article with this number',
