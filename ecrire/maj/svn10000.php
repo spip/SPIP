@@ -173,11 +173,21 @@ array('maj_12008'),
 );
 
 
-// penser a ajouter ici destruction des tables spip_documents_articles etc
-// une fois qu'on aura valide la procedure d'upgrade 12008
+// destruction des tables spip_documents_articles etc, cf. 12008
+$GLOBALS['maj'][12009] = array(
+array('sql_drop_table',"spip_documents_articles"),
+array('sql_drop_table',"spip_documents_breves"),
+array('sql_drop_table',"spip_documents_rubriques"),
+array('sql_drop_table',"spip_documents_auteurs"), # plugin #FORMULAIRE_UPLOAD
+array('sql_drop_table',"spip_documents_syndic") # plugin podcast_client
+);
 
-
-// penser a ajouter ici destruction des champs articles breves rubriques et syndic
-// une fois qu'on aura valide la procedure d'upgrade 11961
+// destruction des champs articles breves rubriques et syndic, cf. 11961
+$GLOBALS['maj'][12010] = array(
+array('sql_alter',"TABLE spip_groupes_mots DROP articles"),
+array('sql_alter',"TABLE spip_groupes_mots DROP breves"),
+array('sql_alter',"TABLE spip_groupes_mots DROP rubriques"),
+array('sql_alter',"TABLE spip_groupes_mots DROP syndic"),
+);
 
 ?>
