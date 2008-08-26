@@ -100,6 +100,7 @@ function low_sec($id_auteur) {
 // cas particulier du statut pour compatibilite ancien suivi_revisions
 // http://doc.spip.org/@generer_url_low_sec
 
+// http://doc.spip.org/@generer_url_low_sec
 function generer_url_low_sec($action, $args, $id_auteur=0, $lang='')
 {
 	$a = '';
