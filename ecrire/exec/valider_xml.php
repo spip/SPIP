@@ -17,7 +17,7 @@ include_spip('public/debug');
 // http://doc.spip.org/@exec_valider_xml_dist
 function exec_valider_xml_dist()
 {
-	if (!autoriser('ecrire')) {
+	if (!autoriser('sauvegarder')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else valider_xml_ok(_request('var_url'), _request('ext'));
@@ -204,12 +204,10 @@ function valider_skel($transformer_xml, $file, $dir)
 	list($texte, $err) = $transformer_xml($page['texte']);
 	$res = strlen($texte);
 	$script = basename($file,'.html');
-	$url = '';
 	// pas de validation solitaire pour les squelettes internes, a revoir.
 	if (substr_count($dir, '/') <= 1) {
-		foreach($contexte as $k => $v) $url .= '&' . $k . '=' . $v;
-		$url = generer_url_public($script, substr($url,1));
-	}
+		$url = generer_url_public($script, $contexte);
+	} else 	$url = '';
 	return array(count($err), $res, $err, $script, $url);
 }
 

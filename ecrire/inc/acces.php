@@ -96,30 +96,34 @@ function low_sec($id_auteur) {
 	return $low_sec;
 }
 
+// Inclure les arguments significatifs pour le hachage
+// cas particulier du statut pour compatibilite ancien suivi_revisions
 // http://doc.spip.org/@generer_url_low_sec
-function generer_url_low_sec($action, $args, $id_auteur=0, $lang='') {
+
+function generer_url_low_sec($action, $args, $id_auteur=0, $lang='')
+{
 	$a = '';
+	$b = "op=$action&id=$id_auteur" . (!$lang ? '' : "&lang=$lang");
 	if (is_array($args)) {
 		foreach ($args as $val => $var)
-			if ($var) $a .= ':' . $val.'-'.$var;
+			if ($var) {
+				if ($val<>'statut') $a .= ':' . $val.'-'.$var;
+				$b .= '&' . $val.'='.$var;
+			}
 		$a = substr($a,1);
 	}
-	$cle = afficher_low_sec($id_auteur, "rss $action $a");
-	return generer_url_action('rss',
-		"op=$action&cle=$cle"
-		. (!$a ? '' : "&args=$a")
-		. (!$id_auteur ? '' : "&id=$id_auteur")
-		. (!$lang ? '' : "&lang=$lang"));
+	$cle = afficher_low_sec($id_auteur, $action, $a);
+	return generer_url_public("rss", "$b&cle=$cle&args=$a");
 }
 
 // http://doc.spip.org/@afficher_low_sec
-function afficher_low_sec ($id_auteur, $action='') {
-	return substr(md5($action.low_sec($id_auteur)),0,8);
+function afficher_low_sec ($id_auteur, $action='', $args='') {
+	return substr(md5($action.$args.low_sec($id_auteur)),0,8);
 }
 
 // http://doc.spip.org/@verifier_low_sec
-function verifier_low_sec ($id_auteur, $cle, $action='') {
-	return ($cle == afficher_low_sec($id_auteur, $action));
+function verifier_low_sec ($id_auteur, $cle, $action='', $args='') {
+	return ($cle == afficher_low_sec($id_auteur, $action, $args));
 }
 
 // http://doc.spip.org/@effacer_low_sec

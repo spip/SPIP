@@ -74,6 +74,8 @@ function exec_articles_forum_args($id_article, $date, $debut, $pas, $enplus)
 // http://doc.spip.org/@articles_forum_cadres
 function articles_forum_cadres($id_rubrique, $id_article, $titre, $script, $args)
 {
+	global $spip_lang_right, $spip_lang_left;
+
 	echo debut_grand_cadre(true);
 
 	echo afficher_hierarchie($id_rubrique);
@@ -84,12 +86,15 @@ function articles_forum_cadres($id_rubrique, $id_article, $titre, $script, $args
 
 	echo debut_boite_info(true);
 
-	echo "<p style='text-align: left; ' class='verdana1 spip_x-small'>",
+	echo "<p style='text-align: $spip_lang_left; ' class='verdana1 spip_x-small'>",
 	  _T('info_gauche_suivi_forum'),
 	  aide ("suiviforum"),
 	  "</p>";
 
-	echo bouton_spip_rss('forum', array('id_article' => $id_article));
+	$img = http_img_pack('feed.png', 'RSS', '', 'RSS');
+	$url = generer_url_public('rss_forum_article', "id_article=$id_article");
+
+	echo "<div style='text-align: $spip_lang_right;'><a href='$url'>$img</a></div>";
 
 	echo fin_boite_info(true);
 
