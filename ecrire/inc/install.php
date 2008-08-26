@@ -224,7 +224,11 @@ function fieldset($legend, $champs = array(), $horchamps='') {
 			foreach($contenu['alternatives'] as $valeur => $label) {
 				$fieldset .= "<input type='radio' name='".$nom .
 				"' id='$nom-$valeur' value='$valeur'"
-				  .(($valeur==$contenu['valeur'])?"\nchecked='checked'":'')."/>\n";
+				  .(($valeur==$contenu['valeur'])?"\nchecked='checked'":'')
+				  .(preg_match(',^(pass|login),', $nom)
+				  	?"\nautocomplete='off'"
+				  	:'')
+				  ."/>\n";
 				$fieldset .= "<label for='$nom-$valeur'>".$label."</label>\n";
 			}
 			$fieldset .= "<br />\n";
