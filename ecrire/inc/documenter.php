@@ -75,7 +75,6 @@ function documenter_bloc($id, $res, $s, $script, $ancre, $tous, $type)
 // http://doc.spip.org/@documenter_boucle
 function documenter_boucle($documents, $type, $ancre, &$tous_autorises, $appelant, $opt=array())
 {
-	charger_generer_url();
 	// la derniere case d'une rangee
 	$bord_droit = ($ancre == 'portfolio' ? 2 : 1);
 	$case = 0;

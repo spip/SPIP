@@ -19,7 +19,6 @@ function exec_breves_dist()
 {
 	global  $spip_lang_left, $spip_lang_right;
 
-	charger_generer_url();
  	pipeline('exec_init',array('args'=>array('exec'=>'breves'),'data'=>''));
 	
 	$commencer_page = charger_fonction('commencer_page', 'inc');

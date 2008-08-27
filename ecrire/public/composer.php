@@ -404,9 +404,9 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 	if ($id_vignette) {
 		$vignette = sql_fetsel('fichier','spip_documents',("id_document = $id_vignette"), '','','','',$connect);
 		if (@file_exists(get_spip_doc($vignette['fichier'])))
-			$logo = generer_url_document($id_vignette);
+		  $logo = generer_url_entite($id_vignette, 'document');
 	} else if ($mode == 'vignette') {
-		$logo = generer_url_document($id_document);
+		$logo = generer_url_entite($id_vignette, 'document');
 		if (!@file_exists($logo))
 			$logo = '';
 	}

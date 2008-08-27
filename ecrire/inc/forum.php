@@ -319,7 +319,7 @@ function racine_forum($id_forum){
 	// On ne devrait jamais arriver ici, mais prevoir des cas de forums
 	// poses sur autre chose que les objets prevus...
 	spip_log("erreur racine_forum $id_forum");
-	return false;
+	return array();
 } 
 
 
@@ -327,32 +327,36 @@ function racine_forum($id_forum){
 function parent_forum($id_forum) {
 	if (!$id_forum = intval($id_forum)) return;
 	$row = sql_fetsel("id_parent, id_rubrique, id_article, id_breve, id_syndic", "spip_forum", "id_forum=".$id_forum);
-	if($row) {
-		if($row['id_parent']) return array('forum', $row['id_parent']);
-		if($row['id_rubrique']) return array('rubrique', $row['id_rubrique']);
-		if($row['id_article']) return array('article', $row['id_article']);
-		if($row['id_breve']) return array('breve', $row['id_breve']);
-		if($row['id_syndic']) return array('site', $row['id_syndic']);
-	}
+	if(!$row) return array();
+	if($row['id_parent']) return array('forum', $row['id_parent']);
+	if($row['id_article']) return array('article', $row['id_article']);
+	if($row['id_breve']) return array('breve', $row['id_breve']);
+	if($row['id_rubrique']) return array('rubrique', $row['id_rubrique']);
+	if($row['id_syndic']) return array('site', $row['id_syndic']);
 } 
 
 
 // http://doc.spip.org/@generer_url_forum_dist
 function generer_url_forum_dist($id_forum, $args='', $ancre='') {
-	if (!$id_forum) return '';
-	list($type, $id, $id_thread) = racine_forum($id_forum);
-	if (!$ancre) $ancre = "forum$id_forum";
-	if (function_exists($f = 'generer_url_'.$type))
-		return $f($id, $args, $ancre);
+	if ($id_forum = intval($id_forum)) {
+		list($type, $id,) = racine_forum($id_forum);
+		if ($type) {
+			if (!$ancre) $ancre = "forum$id_forum";
+			return generer_url_entite($id, $type, $args, $ancre);
+		}
+	}
+	return '';
 }
 
 
 // http://doc.spip.org/@generer_url_forum_parent
 function generer_url_forum_parent($id_forum) {
-	if (!$id_forum = intval($id_forum)) return;
-	list($type, $id) = parent_forum($id_forum);
-	if (function_exists($f = 'generer_url_'.$type))
-		return $f($id);
+	if ($id_forum = intval($id_forum)) {
+		list($type, $id) = parent_forum($id_forum);
+		if ($type)
+			return generer_url_entite($id, $type);
+	}
+	return '';
 } 
 
 

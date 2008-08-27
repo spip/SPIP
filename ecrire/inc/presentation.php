@@ -1276,9 +1276,11 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af =
 	else
 		return '';
 
-	return
-		$inline ? icone_inline($message, generer_url_action('redirect', "id_$type=$id&var_mode=$en_ligne"), $image, "rien.gif", $GLOBALS['spip_lang_left'])		:
-		icone_horizontale($message, generer_url_action('redirect', "id_$type=$id&var_mode=$en_ligne"), $image, "rien.gif",$af);
+	$h = generer_url_entite($id, $type, "var_mode=$en_ligne", '', false);
+
+	return $inline  
+	  ? icone_inline($message, $h, $image, "rien.gif", $GLOBALS['spip_lang_left'])
+	: icone_horizontale($message, $h, $image, "rien.gif",$af);
 
 }
 

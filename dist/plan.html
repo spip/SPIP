@@ -72,9 +72,9 @@
         <B_sites>
         <h3><:sites_web:></h3>
         <ul>
-            <BOUCLE_sites(SITES) {id_secteur} {par nom_site}>
-            <li><a href="[(#ID_SYNDIC|generer_url_site)]">#NOM_SITE</a></li>
-            </BOUCLE_sites>
+            <BOUCLE_sites(SITES) {id_secteur} {par nom_site}><li>
+		<a href="[(#ID_SYNDIC|generer_url_entite{site})]">#NOM_SITE</a>
+	    </li></BOUCLE_sites>
         </ul>
         </B_sites>
         

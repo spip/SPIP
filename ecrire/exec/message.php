@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-include_spip('base/abstract_sql');
 include_spip('inc/mots');
 
 // http://doc.spip.org/@exec_message_dist
@@ -41,7 +40,6 @@ function exec_message_args($id_message, $forcer_dest, $cherche_auteur)
 			include_spip('inc/headers');
 			redirige_par_entete(redirige_action_auteur("editer_message","$id_message/:$connect_id_auteur", 'message', "id_message=$id_message", true));
 		}
-		charger_generer_url();
 		exec_affiche_message_dist($id_message, $cherche_auteur, $forcer_dest);
 	}
 }

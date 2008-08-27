@@ -20,11 +20,9 @@ que vous pourriez avoir mis dans ce fichier) ; si votre site est en
 "sous-repertoire", vous devrez aussi editer la ligne "RewriteBase" ce fichier.
 Les URLs definies seront alors redirigees vers les fichiers de SPIP.
 
-Definissez ensuite dans ecrire/mes_options.php :
-	< ?php $type_urls = 'html'; ? >
+Dans les pages de configuration, choisissez 'html' comme type d'url
 
 SPIP calculera alors ses liens sous la forme "article123.html".
-
 
 Note : si le fichier htaccess.txt se revele trop "puissant", car trop
 generique, et conduit a des problemes (en lien par exemple avec d'autres
@@ -34,50 +32,31 @@ pouvez l'editer pour ne conserver que la partie concernant les URLS 'html'.
 */
 
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
-if (!function_exists('generer_url_article')) { // si la place n'est pas prise
 
-// http://doc.spip.org/@generer_url_article
-function generer_url_article($id_article, $args='', $ancre='') {
-	return "article$id_article.html" . ($args ? "?$args" : '') . ($ancre ? "#$ancre" : '');
+function _generer_url_html($type, $id, $args='', $ancre='') {
+
+	if ($type == 'forum') {
+		include_spip('inc/forum');
+		return generer_url_forum_dist($id, $args, $ancre);
+	}
+
+	if ($type == 'document') {
+		include_spip('inc/documents');
+		return generer_url_document_dist($id, $args, $ancre);
+	}
+
+	return $type . $id . '.html' . ($args ? "?$args" : '') .($ancre ? "#$ancre" : '');
 }
-
-// http://doc.spip.org/@generer_url_rubrique
-function generer_url_rubrique($id_rubrique, $args='', $ancre='') {
-	return "rubrique$id_rubrique.html" . ($args ? "?$args" : '') . ($ancre ? "#$ancre" : '');
-}
-
-// http://doc.spip.org/@generer_url_breve
-function generer_url_breve($id_breve, $args='', $ancre='') {
-	return "breve$id_breve.html" . ($args ? "?$args" : '') .($ancre ? "#$ancre" : '');
-}
-
-// http://doc.spip.org/@generer_url_mot
-function generer_url_mot($id_mot, $args='', $ancre='') {
-	return "mot$id_mot.html" . ($args ? "?$args" : '') .($ancre ? "#$ancre" : '');
-}
-
-// http://doc.spip.org/@generer_url_site
-function generer_url_site($id_syndic, $args='', $ancre='') {
-	return "site$id_syndic.html" . ($args ? "?$args" : '') .($ancre ? "#$ancre" : '');
-}
-
-// http://doc.spip.org/@generer_url_auteur
-function generer_url_auteur($id_auteur, $args='', $ancre='') {
-	return "auteur$id_auteur.html" . ($args ? "?$args" : '') .($ancre ? "#$ancre" : '');
-}
-
-// http://doc.spip.org/@generer_url_document
-function generer_url_document($id_document, $args='', $ancre='') {
-	include_spip('inc/documents');
-	return generer_url_document_dist($id_document, $args, $ancre);
-}
-
 
 // retrouver les parametres d'une URL dite "html"
 // http://doc.spip.org/@urls_html_dist
-function urls_html_dist(&$fond, $url) {
+function urls_html_dist(&$entite, $i, $args='', $ancre='') {
 	global $contexte;
 
+	if (is_numeric($i))
+		return _generer_url_html($entite, $i, $args, $ancre);
+
+	$url = $i;
 
 	/*
 	 * Le bloc qui suit sert a faciliter les transitions depuis
@@ -92,27 +71,16 @@ function urls_html_dist(&$fond, $url) {
 		(isset($_ENV['url_propre']) ?
 			$_ENV['url_propre'] :
 			'');
-	if ($url_propre AND preg_match(',^(article|breve|rubrique|mot|auteur|site|type_urls)$,', $fond)) {
+	if ($url_propre AND preg_match(',^(article|breve|rubrique|mot|auteur|site|type_urls)$,', $entite)) {
 		$url_propre = (preg_replace('/^[_+-]{0,2}(.*?)[_+-]{0,2}(\.html)?$/',
 			'$1', $url_propre));
 		$r = sql_fetsel("id_objet,type", "spip_urls", "url=" . _q($url_propre));
 		if ($r) {
-			$fond = ($r['type'] == 'syndic') ?  'site' : $r['type'];
-			$contexte[id_table_objet($fond)] = $r['id_objet'];
+			$entite = ($r['type'] == 'syndic') ?  'site' : $r['type'];
+			$contexte[id_table_objet($entite)] = $r['id_objet'];
 		}
 	}
 	/* Fin du bloc compatibilite url-propres */
 }
 
-
-//
-// URLs des forums
-//
-
-// http://doc.spip.org/@generer_url_forum
-function generer_url_forum($id_forum, $args='', $ancre='') {
-	include_spip('inc/forum');
-	return generer_url_forum_dist($id_forum, $args, $ancre);
-}
- }
 ?>

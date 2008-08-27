@@ -715,28 +715,41 @@ function autoriser_sans_cookie($nom)
   return in_array($nom, $autsanscookie);
 }
 
-// Cette fonction charge le bon fichier d'urls selon qu'on est dans l'espace
-// public ou prive
-// http://doc.spip.org/@charger_generer_url
-function charger_generer_url($prive=NULL) {
-	static $ok;
-	if ($prive===null)
-		$prive = test_espace_prive();
+// Fonction codant et decodant les URLS des objets SQL mis en page par SPIP
+// $id = numero de la cle primaire si nombre, URL a decoder si pas numerique
+// $entite = surnom de la table SQL (donne acces au nom de cle primaire)
+// $args = query_string a placer apres cle=$id&....
+// $ancre = ancre a mettre a la fin de l'URL a produire
+// $prive = vrai s'il faut produire l'URL d'edition, celle de lecture sinon
+// $type = fichier dans le repertoire ecrire/urls determinant l'apparence
 
-	// espace prive
-	if ($prive)
+function generer_url_entite($id='', $entite='', $args='', $ancre='', $prive=NULL, $type=NULL)
+{
+	if ($prive === NULL) $prive = test_espace_prive();
+
+	if ($prive) {
 		include_spip('inc/urls');
-
-	// espace public
-	else {
-		if ($ok++) return; # fichier deja charge
-
-		if ($GLOBALS['type_urls'] == 'page'
-		AND $GLOBALS['meta']['type_urls'])
-			$GLOBALS['type_urls'] = $GLOBALS['meta']['type_urls'];
-
-		include_spip('urls/'.$GLOBALS['type_urls']);
+		$f = 'generer_url_ecrire_' . $entite;
+		return !function_exists($f) ? '' : $f($id, $args, $ancre);
+	} else {
+		if ($type === NULL) {
+			$type = ($GLOBALS['type_urls'] === 'page'
+				AND $GLOBALS['meta']['type_urls'])
+			?  $GLOBALS['meta']['type_urls']
+			:  $GLOBALS['type_urls']; // pour SPIP <2
+		}
+		$f = charger_fonction($type, 'urls', true); 
+		// si $entite='', on veut la fonction de passage URL ==> id
+		if (!$entite) return $f; 
+		// sinon on veut effectuer le passage id ==> URL
+		$res = !$f ? '' : $f($entite, $id, $args, $ancre);
+		if ($res) return $res;
+		// compat SPIP < 2 : generer_url non generique, juste les std
+		if (function_exists($f = 'generer_url_' . $entite))
+			return $f($id, $args, $ancre);
 	}
+	spip_log("generer_url_entite: entite $entite inconnue dans $type");
+	return '';
 }
 
 // Sur certains serveurs, la valeur 'Off' tient lieu de false dans certaines

@@ -11,14 +11,10 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
-if (!function_exists('generer_url_article')) { // si la place n'est pas prise
-
 
 // TODO: une interface permettant de verifier qu'on veut effectivment modifier
 // une adresse existante
 define('CONFIRMER_MODIFIER_URL', false);
-
-include_spip('base/abstract_sql');
 
 /*
 
@@ -30,18 +26,17 @@ que vous pourriez avoir mis dans ce fichier) ; si votre site est en
 "sous-repertoire", vous devrez aussi editer la ligne "RewriteBase" ce fichier.
 Les URLs definies seront alors redirigees vers les fichiers de SPIP.
 
-Definissez ensuite dans ecrire/mes_options.php :
-	< ?php $type_urls = 'propres'; ? >
-SPIP calculera alors ses liens sous la forme "Mon-titre-d-article".
+Dans les pages de configuration, choisissez 'propres' comme type d'url
 
-Variante 'propres2' :
-	< ?php $type_urls = 'propres2'; ? >
-ajoutera '.html' aux adresses generees : "Mon-titre-d-article.html"
+SPIP calculera alors ses liens sous la forme
+	"Mon-titre-d-article".
+
+La variante 'propres2' ajoutera '.html' aux adresses generees : 
+	"Mon-titre-d-article.html"
 
 Variante 'qs' (experimentale) : ce systeme fonctionne en "Query-String",
 c'est-a-dire sans utilisation de .htaccess ; les adresses sont de la forme
-"/?Mon-titre-d-article"
-	< ?php $type_urls = 'qs'; ? >
+	"/?Mon-titre-d-article"
 */
 
 define ('_terminaison_urls_propres', '');
@@ -137,10 +132,15 @@ function creer_chaine_url($x) {
 }
 
 
-// http://doc.spip.org/@_generer_url_propre
-function _generer_url_propre($type, $id_objet) {
-	$table = table_objet_sql($type);
-	$col_id = id_table_objet($type);
+// Trouver l'URL associee a la n-ieme cle primaire d'une table SQL
+
+function declarer_url_propre($type, $id_objet) {
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	$desc = $trouver_table(table_objet($type));
+	$table = $desc['table'];
+	$col_id =  @$desc['key']["PRIMARY KEY"];
+	if (!$col_id) return false; // Quand $type ne reference pas une table
+
 	$id_objet = intval($id_objet);
 
 	// Auteurs : on prend le nom
@@ -151,22 +151,21 @@ function _generer_url_propre($type, $id_objet) {
 	else
 		$champ_titre = 'titre';
 
-
 	//  Recuperer une URL propre correspondant a l'objet.
 	$row = sql_fetsel("U.url, U.date, O.$champ_titre", "$table AS O LEFT JOIN spip_urls AS U ON (U.type='$type' AND U.id_objet=O.$col_id)", "O.$col_id=$id_objet", '', 'U.date DESC', 1);
 
-	if (!$row) return ""; # objet inexistant
+	if (!$row) return ""; # Quand $id_objet n'est pas un numero connu
 
 	$url_propre = $row['url'];
 
-
 	// Se contenter de cette URL si elle existe ;
-	// sauf si on invoque action=redirect avec droit de modifier l'url
-	$modifier_url = (
-		_request('action') == 'redirect'
-		AND autoriser('modifierurl', $type, $id_objet)
-	);
+	// sauf si on invoque par "voir en ligne" avec droit de modifier l'url
 
+	$modifier_url = (_request('var_mode') == 'calcul');
+	if ($modifier_url) {
+		include_spip('inc/autoriser');
+		$modifier_url = autoriser('modifierurl', $type, $id_objet);
+	}
 	if ($url_propre AND !$modifier_url)
 		return $url_propre;
 
@@ -259,8 +258,17 @@ function _generer_url_propre($type, $id_objet) {
 	return $set['url'];
 }
 
-// http://doc.spip.org/@_generer_url_complete
-function _generer_url_complete($type, $id, $args='', $ancre='') {
+function _generer_url_propre($type, $id, $args='', $ancre='') {
+
+	if ($type == 'forum') {
+		include_spip('inc/forum');
+		return generer_url_forum_dist($id, $args, $ancre);
+	}
+
+	if ($type == 'document') {
+		include_spip('inc/documents');
+		return generer_url_document_dist($id, $args, $ancre);
+	}
 
 	// Mode compatibilite pour conserver la distinction -Rubrique-
 	if (_MARQUEUR_URL) {
@@ -272,7 +280,11 @@ function _generer_url_complete($type, $id, $args='', $ancre='') {
 	// fin
 
 	// Mode propre
-	if ($propre = _generer_url_propre($type, $id)) {
+	$propre = declarer_url_propre($type, $id);
+
+	if ($propre === false) return ''; // objet inconnu. raccourci ? 
+
+	if ($propre) {
 		$url = _debut_urls_propres
 			. $marqueur1
 			. $propre
@@ -281,10 +293,10 @@ function _generer_url_complete($type, $id, $args='', $ancre='') {
 
 		// Repositionne l'URL par rapport a la racine du site (#GLOBALS)
 		$url = str_repeat('../', $GLOBALS['profondeur_url']).$url;
-	}
+	} else {
 
-	// propre ne veut pas !
-	else {
+	// objet connu mais sans possibilite d'URL lisible, revenir au defaut
+
 		if ($type == 'site')
 			$id_type = 'id_syndic';
 		else
@@ -303,52 +315,16 @@ function _generer_url_complete($type, $id, $args='', $ancre='') {
 	return $url;
 }
 
-// http://doc.spip.org/@generer_url_article
-function generer_url_article($id_article, $args='', $ancre='') {
-	return _generer_url_complete('article', $id_article, $args, $ancre);
-}
-
-// http://doc.spip.org/@generer_url_rubrique
-function generer_url_rubrique($id_rubrique, $args='', $ancre='') {
-	return _generer_url_complete('rubrique', $id_rubrique, $args, $ancre);
-}
-
-// http://doc.spip.org/@generer_url_breve
-function generer_url_breve($id_breve, $args='', $ancre='') {
-	return _generer_url_complete('breve', $id_breve, $args, $ancre);
-}
-
-// http://doc.spip.org/@generer_url_forum
-function generer_url_forum($id_forum, $args='', $ancre='') {
-	include_spip('inc/forum');
-	return generer_url_forum_dist($id_forum, $args, $ancre);
-}
-
-// http://doc.spip.org/@generer_url_mot
-function generer_url_mot($id_mot, $args='', $ancre='') {
-	return _generer_url_complete('mot', $id_mot, $args, $ancre);
-}
-
-// http://doc.spip.org/@generer_url_auteur
-function generer_url_auteur($id_auteur, $args='', $ancre='') {
-	return _generer_url_complete('auteur', $id_auteur, $args, $ancre);
-}
-
-// http://doc.spip.org/@generer_url_site
-function generer_url_site($id_syndic, $args='', $ancre='') {
-	return _generer_url_complete('site', $id_syndic, $args, $ancre);
-}
-
-// http://doc.spip.org/@generer_url_document
-function generer_url_document($id_document, $args='', $ancre='') {
-	include_spip('inc/documents');
-	return generer_url_document_dist($id_document, $args, $ancre);
-}
-
 // retrouve le fond et les parametres d'une URL propre
+// ou produit une URL propre si on donne un parametre
 // http://doc.spip.org/@urls_propres_dist
-function urls_propres_dist(&$fond, $url) {
+function urls_propres_dist(&$entite, $i, $args='', $ancre='') {
 	global $contexte;
+
+	if (is_numeric($i))
+		return _generer_url_propre($entite, $i, $args, $ancre);
+
+	$url = $i;
 	$id_objet = $type = 0;
 
 	// Migration depuis anciennes URLs ?
@@ -371,8 +347,7 @@ function urls_propres_dist(&$fond, $url) {
 		}
 	}
 	if ($id_objet) {
-		$func = "generer_url_$type";
-		$url_propre = $func($id_objet);
+		$url_propre = generer_url_entite($id_objet, $type, $args, $ancre);
 		if (strlen($url_propre)
 		AND !strstr($url,$url_propre)) {
 			include_spip('inc/headers');
@@ -429,17 +404,16 @@ function urls_propres_dist(&$fond, $url) {
 
 		$col_id = id_table_objet($type);
 		$contexte[$col_id] = $row['id_objet'];
-		$fond = $row['type'];
+		$entite = $row['type'];
 	}
 
-	if ($fond=='type_urls') {
+	if ($entite=='type_urls') {
 		if ($type)
-			$fond =  ($type == 'syndic') ?  'site' : $type;
+			$entite =  ($type == 'syndic') ?  'site' : $type;
 		else {
-			$fond = '404';
+			$entite = '404';
 			$contexte['erreur'] = ''; // qu'afficher ici ?  l'url n'existe pas... on ne sait plus dire de quel type d'objet il s'agit
 		}
 	}
 }
-} // function_exists
 ?>

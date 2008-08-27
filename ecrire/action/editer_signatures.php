@@ -44,9 +44,8 @@ function action_editer_signatures_post($r)
 			include_spip('balise/formulaire_signature');
 			include_spip('inc/texte');
 			
-			charger_generer_url();
 			$id_article = $row['id_article'];
-			$url = $GLOBALS['meta']['adresse_site'] . '/' . generer_url_article($id_article);
+			$url = $GLOBALS['meta']['adresse_site'] . '/' . generer_url_entite($id_article, 'article');
 			if (signature_a_confirmer($id_article, $url, $row['nom_email'], $row['ad_email'], $row['nom_site'], $row['url_site'], $row['message'], $row['lang'], $row['statut']))
 				sql_update("spip_signatures", array("date_time" => 'NOW()'), "id_signature=$id");
 			$id = 0;
@@ -57,8 +56,7 @@ function action_editer_signatures_post($r)
 	// Invalider les pages ayant trait aux petitions
 	if ($id) {
 		include_spip('inc/invalideur');
-		$id_article = sql_fetsel("id_article", "spip_signatures", "id_signature=$id");
-		$id_article = $id_article['id_article'];
+		$id_article = sql_getfetsel("id_article", "spip_signatures", "id_signature=$id");
 		suivre_invalideur("id='varia/pet$id_article'");
 	}
 

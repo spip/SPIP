@@ -14,7 +14,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/layer');
 include_spip('inc/texte'); // inclut inc_filtre 
-charger_generer_url();
 
 //  Typographie generale des calendriers de 3 type: jour/semaine/mois(ou plus)
 
@@ -1351,6 +1350,7 @@ function quete_calendrier_jour($annee,$mois,$jour) {
 
 // http://doc.spip.org/@quete_calendrier_interval
 function quete_calendrier_interval($limites) {
+	include_spip('inc/urls');
 	list($avant, $apres) = $limites;
 	$evt = array();
 	quete_calendrier_interval_articles($avant, $apres, $evt);
@@ -1369,7 +1369,7 @@ function  quete_calendrier_interval_forums($limites, &$evenements) {
 		if (autoriser('voir','forum',$id))
 			$evenements[$amj][]=
 			array(
-				'URL' => generer_url_forum($id),
+				'URL' => generer_url_entite('forum', $id),
 				'CATEGORIES' => 'calendrier-couleur7',
 				'SUMMARY' => $row['titre'],
 				'DTSTART' => date_ical($row['date_heure']));
