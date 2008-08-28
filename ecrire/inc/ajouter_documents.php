@@ -257,7 +257,9 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 
 		// Appliquer l'exif orientation
 		// http://trac.rezo.net/trac/spip/ticket/1494
-		if ($mode == 'document'
+		if (defined('_TOURNER_SELON_EXIF')
+		AND _TOURNER_SELON_EXIF
+		AND $mode == 'document'
 		AND $a['distant'] == 'non'
 		AND $a['extension'] == 'jpg') {
 			include_spip('action/tourner');
