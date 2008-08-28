@@ -75,8 +75,8 @@ function exec_sites_edit_dist()
 	'id_rubrique'=>$id_rubrique,
 	'config_fonc'=>'sites_edit_config'
 	);
-	$page = evaluer_fond("prive/editer/site", $contexte, $connect);
-	echo $page['texte'];
+
+	echo recuperer_fond("prive/editer/site", $contexte, true, $connect);
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'sites_edit','id_syndic'=>$id_syndic),'data'=>''));
 	echo fin_gauche(), fin_page();

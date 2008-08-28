@@ -108,8 +108,8 @@ function articles_edit($id_article, $id_rubrique, $lier_trad, $id_version, $new,
 		? $row
 		: null
 	);
-	$page = evaluer_fond("prive/editer/article", $contexte, $connect);
-	echo $page['texte'];
+
+	echo recuperer_fond("prive/editer/article", $contexte, true, $connect);
 	
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));
 

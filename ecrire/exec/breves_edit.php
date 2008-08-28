@@ -108,8 +108,8 @@ function breves_edit_ok($row, $id_breve, $id_rubrique, $new)
 	'id_rubrique'=>$id_rubrique,
 	'config_fonc'=>'breves_edit_config'
 	);
-	$page = evaluer_fond("prive/editer/breve", $contexte, $connect);
-	echo $page['texte'];
+
+	echo recuperer_fond("prive/editer/breve", $contexte, true, $connect);
 
 	echo fin_gauche(), fin_page();
 

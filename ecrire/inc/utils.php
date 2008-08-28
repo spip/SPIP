@@ -723,7 +723,6 @@ function autoriser_sans_cookie($nom)
 // $prive = vrai s'il faut produire l'URL d'edition, celle de lecture sinon
 // $type = fichier dans le repertoire ecrire/urls determinant l'apparence
 
-// http://doc.spip.org/@generer_url_entite
 function generer_url_entite($id='', $entite='', $args='', $ancre='', $prive=NULL, $type=NULL)
 {
 	if ($prive === NULL) $prive = test_espace_prive();
@@ -1407,43 +1406,18 @@ function exec_info_dist() {
 }
 
 // La fonction de base de SPIP : un squelette + un contexte => une page
-// on recupere le resultat sous la forme d'une $page['texte', 'headers'...]
-// options :
-// 'protect_xml' => false,  conserver le \1 du xml-hack
-// http://doc.spip.org/@evaluer_fond
-function evaluer_fond ($fond, $contexte=array(), $connect=null) {
+// http://doc.spip.org/@recuperer_fond
+function recuperer_fond($fond, $contexte=array(), $trim=true, $connect='') {
+
+	$texte = "";
 	include_spip('public/assembler');
-
-	// on est peut etre dans l'espace prive au moment de l'appel
-	if (!isset($GLOBALS['_INC_PUBLIC'])) $GLOBALS['_INC_PUBLIC'] = 0;
-	$GLOBALS['_INC_PUBLIC']++;
-
-	if (isset($contexte['fond'])
-	AND $fond === '')
-		$fond = $contexte['fond'];
-
-	$page = inclure_page($fond, $contexte, $connect);
-	// Lever un drapeau (global) si le fond utilise #SESSION
-	// a destination de public/parametrer
-	if (isset($page['invalideurs'])
-	AND isset($page['invalideurs']['session']))
-		$GLOBALS['cache_utilise_session'] = $page['invalideurs']['session'];
-	if ($GLOBALS['flag_ob'] AND ($page['process_ins'] != 'html')) {
-		ob_start();
-		xml_hack($page, true);
-		eval('?' . '>' . $page['texte']);
-		$page['texte'] = ob_get_contents();
-		xml_hack($page);
-		$page['process_ins'] = 'html';
-		ob_end_clean();
+	foreach(is_array($fond) ? $fond : array($fond) as $f){
+		$page = evaluer_fond($f, $contexte, $connect);
+		$texte .= $trim ? rtrim($page['texte']) : $page['texte'];
 	}
-	page_base_href($page['texte']);
-	
-	$GLOBALS['_INC_PUBLIC']--;
 
-	return $page;
+	return $trim ? ltrim($texte) : $texte;
 }
-
 
 // Charger dynamiquement une extension php
 // http://doc.spip.org/@charger_php_extension

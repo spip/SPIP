@@ -354,7 +354,6 @@ function assembler_page ($fond, $connect='') {
 // Bref,  les URL dites propres ont une implementation sale.
 // Interdit de nettoyer, faut assumer l'histoire.
 
-// http://doc.spip.org/@assembler_contexte
 function assembler_contexte(&$fond)
 {
 	$GLOBALS['contexte'] = calculer_contexte();
@@ -805,6 +804,40 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 	$compteur--;
 	return $retour;
 }
+
+// Un inclure_page qui marche aussi pour l'espace prive 
+// http://doc.spip.org/@evaluer_fond
+function evaluer_fond ($fond, $contexte=array(), $connect=null) {
+
+	if (!isset($GLOBALS['_INC_PUBLIC'])) $GLOBALS['_INC_PUBLIC'] = 0;
+	$GLOBALS['_INC_PUBLIC']++;
+
+	if (isset($contexte['fond'])
+	AND $fond === '')
+		$fond = $contexte['fond'];
+
+	$page = inclure_page($fond, $contexte, $connect);
+	// Lever un drapeau (global) si le fond utilise #SESSION
+	// a destination de public/parametrer
+	if (isset($page['invalideurs'])
+	AND isset($page['invalideurs']['session']))
+		$GLOBALS['cache_utilise_session'] = $page['invalideurs']['session'];
+	if ($GLOBALS['flag_ob'] AND ($page['process_ins'] != 'html')) {
+		ob_start();
+		xml_hack($page, true);
+		eval('?' . '>' . $page['texte']);
+		$page['texte'] = ob_get_contents();
+		xml_hack($page);
+		$page['process_ins'] = 'html';
+		ob_end_clean();
+	}
+	page_base_href($page['texte']);
+	
+	$GLOBALS['_INC_PUBLIC']--;
+
+	return $page;
+}
+
 
 // Appeler avant et apres chaque eval()
 // http://doc.spip.org/@xml_hack

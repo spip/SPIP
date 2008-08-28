@@ -210,8 +210,8 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 			'table'=>$table,
 			'table_id'=>$table_id
 		);
-		$page = evaluer_fond("prive/editer/mot", $contexte, $connect);
-		$out .= $page['texte'];
+
+		$out .= recuperer_fond("prive/editer/mot", $contexte, $connect);
 		$out .= '</div>';
 
 	}
