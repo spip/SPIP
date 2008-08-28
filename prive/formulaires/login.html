@@ -78,11 +78,13 @@ function informe_auteur(c){
 		// indiquer le cnx si on n'y a pas touche
 		jQuery('input#session_remember:not(.modifie)')
 		.attr('checked',(c.cnx=='1')?'checked':'');
-		jQuery('#spip_logo_auteur').html(c.logo);
 	} else {
-		jQuery('#spip_logo_auteur').html('');
 		alea_actuel = '';
 	}
+	if (c.logo)
+		jQuery('#spip_logo_auteur').html(c.logo);
+	else
+		jQuery('#spip_logo_auteur').html('');
 	affiche_login_secure();
 }
 function calcule_md5_pass(pass){
