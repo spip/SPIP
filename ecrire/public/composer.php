@@ -107,6 +107,7 @@ function invalideur_session(&$Cache, $code=NULL) {
 // pour une inclusion dans un flux, un modele etc
 // http://doc.spip.org/@recuperer_fond
 
+// http://doc.spip.org/@recuperer_fond
 function recuperer_fond($fond, $contexte=array(), $trim=true, $connect='') {
 
 	$texte = "";

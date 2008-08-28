@@ -23,7 +23,7 @@ define ('_debut_urls_page', get_spip_script('./').'?');
 #######
 
 
-// http://doc.spip.org/@composer_url_page
+// http://doc.spip.org/@_generer_url_page
 function _generer_url_page($page,$id, $args='', $ancre='') {
 
 	if ($type == 'forum') {

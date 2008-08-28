@@ -33,6 +33,7 @@ pouvez l'editer pour ne conserver que la partie concernant les URLS 'html'.
 
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 
+// http://doc.spip.org/@_generer_url_html
 function _generer_url_html($type, $id, $args='', $ancre='') {
 
 	if ($type == 'forum') {

@@ -137,6 +137,7 @@ function creer_chaine_url($x) {
 
 // Trouver l'URL associee a la n-ieme cle primaire d'une table SQL
 
+// http://doc.spip.org/@declarer_url_propre
 function declarer_url_propre($type, $id_objet) {
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table(table_objet($type));
@@ -261,6 +262,7 @@ function declarer_url_propre($type, $id_objet) {
 	return $set['url'];
 }
 
+// http://doc.spip.org/@_generer_url_propre
 function _generer_url_propre($type, $id, $args='', $ancre='') {
 
 	if ($type == 'forum') {

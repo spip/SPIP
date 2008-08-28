@@ -723,6 +723,7 @@ function autoriser_sans_cookie($nom)
 // $prive = vrai s'il faut produire l'URL d'edition, celle de lecture sinon
 // $type = fichier dans le repertoire ecrire/urls determinant l'apparence
 
+// http://doc.spip.org/@generer_url_entite
 function generer_url_entite($id='', $entite='', $args='', $ancre='', $prive=NULL, $type=NULL)
 {
 	if ($prive === NULL) $prive = test_espace_prive();

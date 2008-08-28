@@ -139,7 +139,7 @@ function creer_chaine_url($x) {
 }
 }
 
-// http://doc.spip.org/@_generer_url_arbo
+// http://doc.spip.org/@declarer_url_arbo_rec
 function declarer_url_arbo_rec($url,$type,$parent,$type_parent){
 	if (is_null($parent)){
 		return $url;
@@ -156,6 +156,7 @@ function declarer_url_arbo_rec($url,$type,$parent,$type_parent){
 	}
 }
 
+// http://doc.spip.org/@declarer_url_arbo
 function declarer_url_arbo($type, $id_objet) {
 	static $urls=array();
 	
@@ -297,7 +298,7 @@ function declarer_url_arbo($type, $id_objet) {
 	return declarer_url_arbo_rec($urls[$type][$id_objet]['url'],$type,$urls[$type][$id_objet]['parent'],$urls[$type][$id_objet]['type_parent']);
 }
 
-// http://doc.spip.org/@_generer_url_complete
+// http://doc.spip.org/@_generer_url_arbo
 function _generer_url_arbo($type, $id, $args='', $ancre='') {
 
 	if ($type == 'forum') {
