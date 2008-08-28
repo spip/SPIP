@@ -10,22 +10,18 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
-
-// http://doc.spip.org/@action_informer_auteur_dist
-function action_informer_auteur_dist() {
-	include_spip('base/abstract_sql');
-	include_spip('inc/json');
-
-	$row = array();
-	if ($login=_request('var_login')){
-		include_spip('inc/identifier_login');
-		$row = informer_login($login);
+// Filtre ad hoc pour le formulaire de login:
+// le parametre var_login n'est pas dans le contexte pour optimiser le cache
+// il faut aller le chercher a la main
+function informer_auteur($bof)
+{
+  	include_spip('inc/json');
+	include_spip('inc/identifier_login');
+	$row = informer_login(_request('var_login'));
+	if (is_array($row))
 		unset($row['id_auteur']);
-	}
-	header('Cache-Control: max-age=0, must-revalidate');
-	echo json_export($row);
+	else $row = array();
+	return json_export($row);
 }
-
 
 ?>
