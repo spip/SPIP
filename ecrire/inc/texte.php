@@ -1357,11 +1357,11 @@ function traiter_raccourcis($letexte) {
 // http://doc.spip.org/@traite_raccourci_notes
 function traite_raccourci_notes($letexte)
 {
-	global $compt_note,  $marqueur_notes, $les_notes;
+	global $compt_note,  $marqueur_notes, $les_notes, $notes_vues;
 	global $ouvre_ref, $ferme_ref, $ouvre_note, $ferme_note; #static ok
-	static $notes_vues = NULL;
+	static $init = 0;
 
-	if ($notes_vues === NULL) {
+	if (!$init++) {
 		$ouvre_ref = tester_variable('ouvre_ref', '&nbsp;[');
 		$ferme_ref = tester_variable('ferme_ref', ']');
 		$ouvre_note = tester_variable('ouvre_note', '[');

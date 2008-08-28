@@ -205,14 +205,14 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 
 	// ne pas tenir compte des notes ;
 	// bug introduit en http://trac.rezo.net/trac/spip/changeset/12025
-	$mem = array($GLOBALS['les_notes'], $GLOBALS['compt_note'], $GLOBALS['marqueur_notes']);
+	$mem = array($GLOBALS['les_notes'], $GLOBALS['compt_note'], $GLOBALS['marqueur_notes'], $GLOBALS['notes_vues']);
 
 
 	$texte = propre($texte,$connect);
 
 
 	// restituer les notes comme elles etaient avant d'appeler propre()
-	list($GLOBALS['les_notes'], $GLOBALS['compt_note'], $GLOBALS['marqueur_notes']) = $mem;
+	list($GLOBALS['les_notes'], $GLOBALS['compt_note'], $GLOBALS['marqueur_notes'], $GLOBALS['notes_vues']) = $mem;
 
 
 	@define('_INTRODUCTION_SUITE', '&nbsp;(...)');
