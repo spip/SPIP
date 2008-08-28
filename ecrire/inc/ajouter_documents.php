@@ -254,6 +254,18 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 
 		} else  $id_document = $id;
 
+
+		// Appliquer l'exif orientation
+		// http://trac.rezo.net/trac/spip/ticket/1494
+		if (defined('_TOURNER_SELON_EXIF')
+		AND _TOURNER_SELON_EXIF
+		AND $mode == 'document'
+		AND $a['distant'] == 'non'
+		AND $a['extension'] == 'jpg') {
+			include_spip('action/tourner');
+			tourner_selon_exif_orientation($id_document, $fichier);
+		}
+
 	}
 	// pour que le retour vers ecrire/ active le bon doc.
 	$documents_actifs[$fichier] = $id_document;
