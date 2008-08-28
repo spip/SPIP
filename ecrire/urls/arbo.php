@@ -74,6 +74,7 @@ define ('_url_arbo_minuscules',1);
 define('_MARQUEUR_URL', false);
 
 
+if (!function_exists('creer_chaine_url')) {
 // Pipeline pour creation d'une adresse : il recoit l'url propose par le
 // precedent, un tableau indiquant le titre de l'objet, son type, son id,
 // et doit donner en retour une chaine d'url, sans se soucier de la
@@ -135,6 +136,7 @@ function creer_chaine_url($x) {
 	$x['data'] = ((_urls_arbo_sans_type OR $objet['type']=='rubrique')?'':$objet['type'].'/').$url;
 
 	return $x;
+}
 }
 
 // http://doc.spip.org/@_generer_url_arbo
