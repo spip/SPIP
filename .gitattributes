@@ -72,7 +72,6 @@ ecrire/action/editer_rubrique.php -text
 ecrire/action/editer_signatures.php -text
 ecrire/action/editer_site.php -text
 ecrire/action/export_all.php -text
-ecrire/action/ical.php -text
 ecrire/action/iconifier.php -text
 ecrire/action/index.php -text
 ecrire/action/informer_auteur.php -text
