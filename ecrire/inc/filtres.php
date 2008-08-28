@@ -648,6 +648,13 @@ function antispam($texte) {
 	return preg_replace("/@/", " $masque ", $texte);
 }
 
+function securiser_acces($id_auteur, $cle, $dir, $op='', $args='')
+{
+	include_spip('inc/acces');
+	if ($op) $dir .= " $op $args";
+	return verifier_low_sec($id_auteur, $cle, $dir);
+}
+
 // sinon{texte, rien} : affiche "rien" si la chaine est vide,
 // affiche la chaine si non vide ;
 // attention c'est compile directement dans inc/references

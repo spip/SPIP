@@ -1,6 +1,6 @@
 <BOUCLE0(AUTEURS){tout}{id_auteur}{lang_select}><?php
 include_spip('inc/acces');
-if ('#ENV{arg}' === '[(#ID_AUTEUR|afficher_low_sec{ical})]') {
+if ([(#ID_AUTEUR|securiser_acces{#ENV{arg},ical})]) {
 ?>#HTTP_HEADER{Content-Type: text/calendar}
 #CACHE{0}
 BEGIN:VCALENDAR
