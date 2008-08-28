@@ -736,17 +736,11 @@ function icone_horizontale_display($texte, $lien, $fond = "", $fonction = "", $a
 // Fonction standard pour le pipeline 'boite_infos'
 // http://doc.spip.org/@f_boite_infos
 function f_boite_infos($flux) {
-	$boite = $flux['data'];
 	$args = $flux['args'];
 	$type = $args['type'];
-	$id = $args['id'];
-	$row = $args['row'];
-
 	unset($args['row']);
-	include_spip('public/assembler');
-	$boite .= recuperer_fond("prive/infos/$type",$args);
-
-	$flux['data'] = $boite;
+	$res = evaluer_fond("prive/infos/$type",$args);
+	$flux['data'] .= rtrim($res['texte']);
 	return $flux;
 }
 

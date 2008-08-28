@@ -98,7 +98,6 @@ function traiter_formulaires_dynamiques($get=false){
 	if (!$done) {
 		$done = true;
 		if ($action = _request('action')) {
-			include_spip('base/abstract_sql'); // chargement systematique pour les actions
 			include_spip('inc/autoriser'); // chargement systematique pour les actions
 			include_spip('inc/headers');
 			if (($v=_request('var_ajax'))
@@ -133,20 +132,16 @@ function traiter_formulaires_dynamiques($get=false){
 		AND $v !== 'form'
 		AND $args = _request('var_ajax_env')) {
 			include_spip('inc/filtres');
+			include_spip('inc/actions');
 			if ($args = decoder_contexte_ajax($args)
 			AND $fond = $args['fond']) {
-				include_spip('public/parametrer');
 				$contexte = calculer_contexte();
 				$contexte = array_merge($args, $contexte);
 				$page = evaluer_fond($fond,$contexte);
-				include_spip('inc/actions');
-				ajax_retour($page['texte']);
-			}
-			else {
-				include_spip('inc/actions');
-				ajax_retour('signature ajax bloc incorrecte');
-			}
-			exit();
+				$texte = $page['texte'];
+			} else $texte = _L('signature ajax bloc incorrecte');
+			ajax_retour($texte);
+			exit;
 		}
 
 		// traiter les formulaires dynamniques charger/verifier/traiter
@@ -251,6 +246,8 @@ function envoyer_entetes($entetes) {
 
 //
 // calcule la page et les entetes
+// determine le contexte donne par l'URL (en tenant compte des reecritures) 
+// grace a la fonction de passage d'URL a id (reciproque dans urls/*php)
 //
 // http://doc.spip.org/@assembler_page
 function assembler_page ($fond, $connect='') {
@@ -302,12 +299,13 @@ function assembler_page ($fond, $connect='') {
 		// sinon analyser le contexte & calculer la page
 		else {
 			$parametrer = charger_fonction('parametrer', 'public');
-			$page = $parametrer($fond, '', $chemin_cache, $connect);
+			assembler_contexte($fond);
+			$page = $parametrer($fond, $GLOBALS['contexte'], $chemin_cache, $connect);
 
 			// Ajouter les scripts avant de mettre en cache
 			$page['insert_js_fichier'] = pipeline("insert_js",array("type" => "fichier","data" => array()));
 			$page['insert_js_inline'] = pipeline("insert_js",array("type" => "inline","data" => array()));
-
+			
 			// Stocker le cache sur le disque
 			if ($chemin_cache)
 				$cacher(NULL, $use_cache, $chemin_cache, $page, $lastmodified);
@@ -348,6 +346,55 @@ function assembler_page ($fond, $connect='') {
 
 	return $page;
 }
+
+// ATTENTION, gestion des URLs transformee par le htaccess
+// en appelant la fonction $renommee_urls
+// 1. $contexte est global car cette fonction le modifie.
+// 2. $fond est passe par reference, pour la meme raison
+// Bref,  les URL dites propres ont une implementation sale.
+// Interdit de nettoyer, faut assumer l'histoire.
+
+function assembler_contexte(&$fond)
+{
+	$GLOBALS['contexte'] = calculer_contexte();
+	$renommer_urls = generer_url_entite();
+	if (!$renommer_urls) {
+			// compatibilite <= 1.9.2
+			if (function_exists('recuperer_parametres_url'))
+				$renommer_urls = 'recuperer_parametres_url';
+	}
+	if ($renommer_urls) $renommer_urls($fond, nettoyer_uri());
+}
+
+//
+// Contexte : lors du calcul d'une page spip etablit le contexte a partir
+// des variables $_GET et $_POST, et leur ajoute la date
+// Note : pour hacker le contexte depuis le fichier d'appel (page.php),
+// il est recommande de modifier $_GET['toto'] (meme si la page est
+// appelee avec la methode POST).
+//
+// http://doc.spip.org/@calculer_contexte
+function calculer_contexte() {
+
+	include_spip('inc/filtres'); // pour normaliser_date
+	$contexte = array();
+	foreach($_GET as $var => $val) {
+		if (strpos($var, 'var_') !== 0)
+			$contexte[$var] = $val;
+	}
+	foreach($_POST as $var => $val) {
+		if (strpos($var, 'var_') !== 0)
+			$contexte[$var] = $val;
+	}
+
+	if (($a = _request('date')) !== null)
+		$contexte['date'] = $contexte['date_redac'] = normaliser_date($a);
+	else
+		$contexte['date'] = $contexte['date_redac'] = date("Y-m-d H:i:s");
+
+	return $contexte;
+}
+
 
 //
 // 2 fonctions pour compatibilite arriere. Sont probablement superflues
@@ -601,20 +648,6 @@ function message_erreur_404 ($erreur= "") {
 	return $page;
 }
 
-// fonction permettant de recuperer le resultat du calcul d'un squelette
-// pour une inclusion dans un flux
-// http://doc.spip.org/@recuperer_fond
-function recuperer_fond($fond, $contexte=array(), $trim=true, $connect='') {
-	$options = array('trim' => $trim);
-
-	$texte = "";
-	foreach(is_array($fond) ? $fond : array($fond) as $f){
-		$page = evaluer_fond($f, $contexte, $options, $connect);
-		$texte .= $trim ? rtrim($page['texte']) : $page['texte'];
-	}
-
-	return $trim ? ltrim($texte) : $texte;
-}
 
 // temporairement ici : a mettre dans le futur inc/modeles
 // creer_contexte_de_modele('left', 'autostart=true', ...) renvoie un array()
@@ -729,7 +762,7 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 	$GLOBALS['compt_note'] = 0;
 
 	// Appliquer le modele avec le contexte
-	$page = evaluer_fond($contexte['fond'], $contexte, array(), $connect);
+	$page = evaluer_fond($contexte['fond'], $contexte, $connect);
 	$retour = trim($page['texte']);
 
 	// Lever un drapeau (global) si le modele utilise #SESSION

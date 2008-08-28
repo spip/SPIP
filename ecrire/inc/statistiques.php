@@ -548,8 +548,8 @@ function statistiques_par_mois($entrees, $script, $table=''){
 // http://doc.spip.org/@statistiques_echelle
 function statistiques_echelle($maxgraph)
 {
-  include_spip('public/assembler');
-  return recuperer_fond('prive/stats/echelle', array('echelle' => $maxgraph));
+  $res = evaluer_fond('prive/stats/echelle', array('echelle' => $maxgraph));
+  return rtrim($res['texte']);
 }
 
 // http://doc.spip.org/@statistiques_moyenne

@@ -1410,7 +1410,7 @@ function exec_info_dist() {
 // options :
 // 'protect_xml' => false,  conserver le \1 du xml-hack
 // http://doc.spip.org/@evaluer_fond
-function evaluer_fond ($fond, $contexte=array(), $options=array(), $connect=null) {
+function evaluer_fond ($fond, $contexte=array(), $connect=null) {
 	include_spip('public/assembler');
 
 	// on est peut etre dans l'espace prive au moment de l'appel

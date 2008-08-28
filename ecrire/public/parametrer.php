@@ -29,33 +29,6 @@ if (@is_readable(_DIR_TMP."charger_plugins_fonctions.php")){
 	include_once(_DIR_TMP."charger_plugins_fonctions.php");
 }
 
-//
-// Contexte : lors du calcul d'une page spip etablit le contexte a partir
-// des variables $_GET et $_POST, et leur ajoute la date
-// Note : pour hacker le contexte depuis le fichier d'appel (page.php),
-// il est recommande de modifier $_GET['toto'] (meme si la page est
-// appelee avec la methode POST).
-//
-// http://doc.spip.org/@calculer_contexte
-function calculer_contexte() {
-	$contexte = array();
-	foreach($_GET as $var => $val) {
-		if (strpos($var, 'var_') !== 0)
-			$contexte[$var] = $val;
-	}
-	foreach($_POST as $var => $val) {
-		if (strpos($var, 'var_') !== 0)
-			$contexte[$var] = $val;
-	}
-
-	if (($a = _request('date')) !== null)
-		$contexte['date'] = $contexte['date_redac'] = normaliser_date($a);
-	else
-		$contexte['date'] = $contexte['date_redac'] = date("Y-m-d H:i:s");
-
-	return $contexte;
-}
-
 
 // http://doc.spip.org/@echapper_php_callback
 function echapper_php_callback($r) {
@@ -241,11 +214,9 @@ function quete_meta($nom, $serveur) {
 			     '','','','',$serveur);
 }
 
-
-# Determine les parametres d'URL (hors reecriture) et consorts
-# En deduit un contexte disant si la page est une redirection ou 
-# exige un squelette deductible de $fond et du contexte de langue.
-# Applique alors le squelette sur le contexte et le nom du cache.
+# Determine le squelette indique par $fond et l'applique sur 
+# le contexte,  le nom du cache et le serveur
+# en ayant evacue au prealable le cas de la redirection
 # Retourne un tableau ainsi construit
 # 'texte' => la page calculee
 # 'process_ins' => 'html' ou 'php' si presence d'un '< ?php'
@@ -257,62 +228,22 @@ function quete_meta($nom, $serveur) {
 # En cas d'erreur process_ins est absent et texte est un tableau de 2 chaines
 
 // http://doc.spip.org/@public_parametrer_dist
-function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
-	// verifier que la fonction assembler est bien chargee (cf. #608)
-	$assembler = charger_fonction('assembler', 'public');
+function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 	// charger la fonction de passage d'URL a id et reciproquement
-	$renommer_urls = generer_url_entite();
 	// distinguer le premier appel des appels par inclusion
-	if (!is_array($local)) {
-		include_spip('inc/filtres'); // pour normaliser_date
 
-		// ATTENTION, gestion des URLs transformee par le htaccess
-		// en appelant la fonction $renommee_urls
-		// 1. $contexte est global car cette fonction le modifie.
-		// 2. $fond est passe par reference, pour la meme raison
-		// Bref,  les URL dites propres ont une implementation sale.
-		// Interdit de nettoyer, faut assumer l'histoire.
-		$GLOBALS['contexte'] = calculer_contexte();
-		if (!$renommer_urls) {
-			// compatibilite <= 1.9.2
-			if (function_exists('recuperer_parametres_url'))
-				$renommer_urls = 'recuperer_parametres_url';
-		}
-		if ($renommer_urls)
-			$renommer_urls($fond, nettoyer_uri());
-
-		$local = $GLOBALS['contexte'];
-
-		// si le champ chapo commence par '=' c'est une redirection.
-		// avec un eventuel raccourci Spip
-		// si le raccourci a un titre il sera pris comme corps du 302
-		if ($fond == 'article'
-		AND $id_article = intval($local['id_article'])) {
-			$m = quete_chapo($id_article, $connect);
-			if ($m[0]=='=') {
-				include_spip('inc/texte');
-				// les navigateurs pataugent si l'URL est vide
-				if ($url = chapo_redirige(substr($m,1), true))
-					return array('texte' => "<"
-				. "?php header('Location: "
-				. texte_script(str_replace('&amp;', '&', $url))
-				. "'); echo '"
-				.  addslashes($m[1])
-				. "'?" . ">",
-					'process_ins' => 'php');
-			}
-		}
-	}
+	$page = tester_redirection($fond, $contexte, $connect);
+	if ($page) return $page;
 
 	// Choisir entre $fond-dist.html, $fond=7.html, etc?
 	$id_rubrique_fond = 0;
 	// Chercher le fond qui va servir de squelette
-	if ($r = quete_rubrique_fond($local))
+	if ($r = quete_rubrique_fond($contexte))
 		list($id_rubrique_fond, $lang) = $r;
 
 	// Si inc-urls ou un appel dynamique veut fixer la langue, la recuperer
-	if (isset($local['lang']))
-		$lang = $local['lang'];
+	if (isset($contexte['lang']))
+		$lang = $contexte['lang'];
 
 	if (!isset($lang))
 		$lang = $GLOBALS['meta']['langue_site'];
@@ -337,7 +268,7 @@ function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 	if (!function_exists($fonc)) {
 
 		if ($debug) {
-			$GLOBALS['debug_objets']['contexte'][$sourcefile] = $local;
+			$GLOBALS['debug_objets']['contexte'][$sourcefile] = $contexte;
 			$GLOBALS['debug_objets']['courant'] = $fonc;
 		}
 		$composer = charger_fonction('composer', 'public');
@@ -352,7 +283,7 @@ function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 		spip_timer($a = 'calcul page '.rand(0,1000));
 		$notes = calculer_notes(); // conserver les notes...
 
-		$page = $fonc(array('cache' => $cache), array($local));
+		$page = $fonc(array('cache' => $cache), array($contexte));
 
 		// ... et les retablir
 		if ($n = calculer_notes()) spip_log("notes ignorees par $fonc: $n");
@@ -360,7 +291,7 @@ function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 
 		// spip_log: un joli contexte
 		$infos = array();
-		foreach (array_filter($local) as $var => $val) {
+		foreach (array_filter($contexte) as $var => $val) {
 			if (is_array($val)) $val = "[".join($val)."]";
 			if (strlen("$val") > 20)
 				$val = substr("$val", 0,17).'..';
@@ -386,7 +317,7 @@ function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 	} else
 		$page = array();
 
-	$page['contexte'] = $local;
+	$page['contexte'] = $contexte;
 
 	if ($select) lang_select();
 
@@ -407,4 +338,30 @@ function calculer_nom_fonction_squel($skel, $mime_type='html', $connect='')
 	. (!$connect ?  '' : preg_replace('/\W/',"_", $connect)) . '_'
 	. md5($GLOBALS['spip_version_code'] . ' * ' . $skel);
 }
+
+// si le champ chapo commence par '=' c'est une redirection.
+// avec un eventuel raccourci Spip
+// si le raccourci a un titre il sera pris comme corps du 302
+
+function tester_redirection($fond, $contexte, $connect)
+{
+	if ($fond == 'article'
+	AND $id_article = intval($contexte['id_article'])) {
+		$m = quete_chapo($id_article, $connect);
+		if ($m[0]=='=') {
+			include_spip('inc/texte');
+			// les navigateurs pataugent si l'URL est vide
+			if ($url = chapo_redirige(substr($m,1), true))
+				return array('texte' => "<"
+				. "?php header('Location: "
+				. texte_script(str_replace('&amp;', '&', $url))
+				. "'); echo '"
+				.  addslashes($m[1])
+				. "'?" . ">",
+					'process_ins' => 'php');
+		}
+	}
+	return false;
+}
+
 ?>
