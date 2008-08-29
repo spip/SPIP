@@ -34,7 +34,7 @@ function inc_msiefix_dist($texte) {
 if (window.jQuery && jQuery.browser.msie) {
 $ifixpng
 
-jQuery.ifixpng('".str_repeat('../', $GLOBALS['profondeur_url'])."rien.gif');
+jQuery.ifixpng('rien.gif');
 var fixie = function(){jQuery('img').ifixpng();}
 fixie();
 onAjaxLoad(fixie);
@@ -53,7 +53,7 @@ function presentation_msiefix() {
 	try { document.execCommand('BackgroundImageCache', false, true); } catch(err) {};
 	if (window.jQuery && jQuery.browser.msie) {
 $ifixpng
-		jQuery.ifixpng('".str_repeat('../', $GLOBALS['profondeur_url'])."rien.gif');
+		jQuery.ifixpng('rien.gif');
 		jQuery('img,#bandeau-principal .icon_fond span').ifixpng();
 	}
 	// --></script>";
