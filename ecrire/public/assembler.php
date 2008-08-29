@@ -354,6 +354,7 @@ function assembler_page ($fond, $connect='') {
 // Bref,  les URL dites propres ont une implementation sale.
 // Interdit de nettoyer, faut assumer l'histoire.
 
+// http://doc.spip.org/@assembler_contexte
 function assembler_contexte(&$fond)
 {
 	$GLOBALS['contexte'] = calculer_contexte();
