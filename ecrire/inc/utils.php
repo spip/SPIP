@@ -934,19 +934,10 @@ function generer_form_public($script, $corps, $atts='') {
 // http://doc.spip.org/@generer_url_action
 function generer_url_action($script, $args="", $no_entities=false ,$rel = false) {
 
-	// si script=redirect, on veut basculer vers le public !
-  // et aussi le cas particulier RSS qu'il fautdrait evacuer
-	if ($script=='redirect' OR $script=='rss') {
-		return  generer_url_public('',
-				  "action=$script" .($args ? "&$args" : ''),
-				  $no_entities,$rel);
-	}
-	// sinon, on reste ou on est
-	$url = _DIR_RACINE
-		? generer_url_ecrire()
-		: generer_url_public();
+	$url = _DIR_RACINE  ? generer_url_ecrire() :  generer_url_public();
 	$url = parametre_url($url,'action',$script);
 	if ($args) $url .= quote_amp('&'.$args);
+
 	if ($redirect = parametre_url($url,'redirect')){
 		// si jamais l'url d'action contient un redirect=ecrire/...
 		// supprimer ce ecrire/ si on y est deja puisqu'on ne le quitte pas
