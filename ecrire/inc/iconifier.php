@@ -136,11 +136,12 @@ function indiquer_logo($titre, $id_objet, $mode, $id, $script, $iframe_script) {
 		$afficher;
 
 	$type = type_du_logo($id_objet);
-	return generer_action_auteur('iconifier',
+	return redirige_action_post('iconifier',
 		"$id+$type$mode$id",
-		generer_url_ecrire($script, "$id_objet=$id", true), 
+		$script,
+		"$id_objet=$id",
 		$iframe_script.$afficher,
-		" method='post' enctype='multipart/form-data' class='form_upload_icon'");
+		"enctype='multipart/form-data' class='form_upload_icon'");
 }
 
 // http://doc.spip.org/@decrire_logo

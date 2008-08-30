@@ -202,7 +202,7 @@ function action_charger_plugin_dist() {
 	}
 	echo minipres($retour." ",
 		$suite
-			? redirige_action_auteur(_request('action'),
+			? redirige_action_post(_request('action'),
 				$suite,
 				$redirect_action,
 				'',
@@ -211,8 +211,7 @@ function action_charger_plugin_dist() {
 					."<a class='suivant' href='"
 						.$redirect_annul
 					."'>"._T('bouton_annuler')."</a>"
-				.bouton_suivant(),
-				"\nmethod='post'")
+				.bouton_suivant())
 			: generer_form_ecrire($redirect_form,
 				$texte . bouton_suivant())
 	);

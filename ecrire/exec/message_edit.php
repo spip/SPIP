@@ -119,7 +119,7 @@ function exec_message_edit_args($id_message, $new, $dest)
 	  . "' class='fondo'/></div>"	
 	  . "\n</div>";
 
-	echo redirige_action_auteur('editer_message', $id_message, 'message',"id_message=$id_message", $res, " method='post'");
+	echo redirige_action_post('editer_message', $id_message, 'message',"id_message=$id_message", $res);
 
 	echo fin_gauche(), fin_page();
 	}

@@ -145,12 +145,11 @@ function interface_plugins_auto($retour) {
 		.  "' class='fondo' />\n"
 		.  "</div>\n";
 
-	$res = redirige_action_auteur('charger_plugin',
+	$res = redirige_action_post('charger_plugin',
 				'', // arg = 'plugins' / 'lib', a priori
 				'',
 				'',
-				$res,
-				"\nmethod='post'");
+				$res);
 
 
 	$res .= afficher_liste_listes_plugins();
@@ -499,13 +498,12 @@ function bouton_telechargement_plugin($url, $rep) {
 			is_dir(_DIR_RACINE . 'lib'):
 			(_DIR_PLUGINS_AUTO AND @is_dir(_DIR_PLUGINS_AUTO))
 		)
-		$bouton = redirige_action_auteur('charger_plugin',
+		$bouton = redirige_action_post('charger_plugin',
 			$rep, // arg = 'lib' ou 'plugins'
 			'',
 			'',
 			"<input type='hidden' name='url_zip_plugin' value='$url' />"
-			."<input type='submit' name='ok' value='"._T('bouton_telecharger')."' />",
-			"\nmethod='post'");
+			."<input type='submit' name='ok' value='"._T('bouton_telecharger')."' />");
 
 	return _T('plugin_info_telecharger',array('url'=>$url,'rep'=>$rep.'/')).$bouton;
 

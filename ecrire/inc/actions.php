@@ -28,6 +28,10 @@ function redirige_action_auteur($action, $arg, $ret, $gra='', $mode=false, $atts
 	return generer_action_auteur($action, $arg, $r, $mode, $atts);
 }
 
+function redirige_action_post($action, $arg, $ret, $gra, $corps, $att='') {
+	return redirige_action_auteur($action, $arg, $ret, $gra, $corps, $att . " method='post'");
+}
+
 // Retourne un formulaire d'execution de $action sur $id,
 // revenant a l'envoyeur $script d'arguments $args.
 // Utilise Ajax si dispo, en ecrivant le resultat dans le innerHTML du noeud
@@ -50,12 +54,11 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 
 		// Methode traditionnelle
 		if (_SPIP_AJAX !== 1) {
-			return redirige_action_auteur($action,
+			return redirige_action_post($action,
 				$id,
 				$script,
 				"$args#$ancre",
-				$corps,
-				"\nmethod='post'");
+				$corps);
 		}
 
 		// Methode Ajax
@@ -63,12 +66,12 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 			if ($args AND !$args_ajax) $args_ajax = "&$args";
 			if ($GLOBALS['var_profile'])
 				$args_ajax .= '&var_profile=1';
-			return redirige_action_auteur($action,
+			return redirige_action_post($action,
 				$id,
 				$action,
 				"script=$script$args_ajax",
 				$corps,
-				(" method='post'\nonsubmit="
+				(" onsubmit="
 				 . ajax_action_declencheur('this', $ancre, $fct_ajax)));
 				 
 		}
@@ -138,24 +141,22 @@ function ajax_action_post($action, $arg, $retour, $gra, $corps, $clic='', $atts_
 	  . "</span></div>";
 
 	if (_SPIP_AJAX !== 1) {
-	  return redirige_action_auteur($action, $arg, $retour,
+		return redirige_action_post($action, $arg, $retour,
 					($gra . '#' . $ancre),
-				        $corps ,
-					"\nmethod='post'");
+				        $corps);
 	} else { 
 
 		if ($gra AND !$args_ajax) $args_ajax = "&$gra";
 		if (isset($GLOBALS['var_profile']))
 			$args_ajax .= '&var_profile=1';
 
-		return redirige_action_auteur($action,
+		return redirige_action_post($action,
 			$arg,
 			$action,
 			"script=$retour$args_ajax",
-			$corps ,
-			" method='post' onsubmit=" . ajax_action_declencheur('this', $ancre));
+			$corps,
+			" onsubmit=" . ajax_action_declencheur('this', $ancre));
 	}
-
 }
 
 //

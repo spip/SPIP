@@ -103,22 +103,20 @@ function exec_admin_vider_dist()
 		}
 
 		echo ' (', _T('cache_modifiable_webmestre'),')</p>', 
-		  redirige_action_auteur('purger', 'cache', "admin_vider", '',
+			redirige_action_post('purger', 'cache', "admin_vider", '',
 					 "\n<div style='text-align: right'><input class='fondo' type='submit' value=\"" .
 			 str_replace('"', '&quot;', _T('bouton_vider_cache')) .
-					 "\" /></div>",
-					 " method='post'");
+					 "\" /></div>");
 		echo fin_cadre_relief(true);
 
 		echo debut_cadre_relief("image-24.gif", true, "", _T('info_images_auto'));
 
 		echo afficher_taille_cache_vignettes();
 
-		echo redirige_action_auteur('purger', 'vignettes', "admin_vider",'',
+		echo redirige_action_post('purger', 'vignettes', "admin_vider",'',
 					    "\n<div style='text-align: right'><input class='fondo' type='submit' value=\"" .
 					    str_replace('"', '&quot;', _T('bouton_vider_cache')) .
-					    "\" /></div>",
-					    " method='post'");
+					    "\" /></div>");
 
 		echo fin_cadre_relief(true);
 
