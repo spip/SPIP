@@ -32,9 +32,10 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 			// Calculer le bloc de statut (modifiable ou non selon)
 			$instituer_auteur = charger_fonction('instituer_auteur', 'inc');
 			$bloc_statut = $instituer_auteur($auteur);
-			
-			$bloc_statut .= "<div style='text-align: right'><input type='submit' value='"._T('bouton_enregistrer')."' class='fondo' /></div>";
-			$bloc_statut =  generer_action_auteur('editer_auteur', $id_auteur, $redirect, $bloc_statut, ' method="post"');
+			if ($bloc_statut) {
+				$bloc_statut .= "<div style='text-align: right'><input type='submit' value='"._T('bouton_enregistrer')."' class='fondo' /></div>";
+				$bloc_statut =  generer_action_auteur('editer_auteur', $id_auteur, $redirect, $bloc_statut, ' method="post"');
+			}
 		} else {
 			$bloc_statut = "";
 		}
