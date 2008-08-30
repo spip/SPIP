@@ -28,6 +28,7 @@ function redirige_action_auteur($action, $arg, $ret, $gra='', $mode=false, $atts
 	return generer_action_auteur($action, $arg, $r, $mode, $atts);
 }
 
+// http://doc.spip.org/@redirige_action_post
 function redirige_action_post($action, $arg, $ret, $gra, $corps, $att='') {
 	return redirige_action_auteur($action, $arg, $ret, $gra, $corps, $att . " method='post'");
 }
