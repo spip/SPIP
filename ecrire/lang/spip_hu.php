@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_recalculer' => 'Oldal friss&iacute;t&eacute;se',
 'afficher_trad' => 'ford&iacute;t&aacute;sok megjelen&iacute;t&eacute;se',
 'alerte_maj_impossible' => '<b>Hiba&nbsp;!</b> A SQL adatb&aacute;zis friss&iacute;t&eacute;se a @version@ verzi&oacute; fel&eacute; nem lehts&eacute;ges, tal&aacute;n adatb&aacute;zishoz val&oacute; m&oacute;dos&iacute;t&aacute;si jogosults&aacute;g miatt. Ilyenkor a t&aacute;rhely adminisztr&aacute;tor&aacute;hoz kell fordulni.',
+'alerte_modif_info_concourante' => '<NEW>ATTENTION : Cette information a &eacute;t&eacute; modifi&eacute; par ailleurs. La valeur actuelle est&nbsp;:',
 'analyse_xml' => 'XML elemz&eacute;s',
 'annuler' => 'M&eacute;gsem',
 'antispam_champ_vide' => 'K&eacute;rj&uuml;k, hagyja &uuml;resen ezt a mez&#337;t:',
@@ -194,13 +195,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   Ellen&#337;rizze, hogy a fenti mapp&aacute;k nagy-, &eacute;s kisbet&#369;i megfelelnek annak, ami feljebb megjelent
   ; ha m&eacute;gsem, FTP szoftver&eacute;vel nevezze &aacute;t a mapp&aacute;kat.
   <p />Ha megt&ouml;rt&eacute;nt ez a m&#369;velet, tudni fog',
-'dirs_repertoires_suivants' => '<b>A k&ouml;vetkez&#337; mapp&aacute;kra nincs &iacute;r&aacute;si jogosults&aacute;ga&nbsp;: <ul>@bad_dirs@.</ul> </b>
+'dirs_repertoires_suivants' => '<MODIF><b>A k&ouml;vetkez&#337; mapp&aacute;kra nincs &iacute;r&aacute;si jogosults&aacute;ga&nbsp;: <ul>@bad_dirs@.</ul> </b>
   <p />Annak jav&iacute;t&aacute;s&aacute;ra, haszn&aacute;lja az FTP kliens&eacute;t ahhoz, hogy be&aacute;ll&iacute;tsa minden mapp&aacute; hozz&aacute;f&eacute;r&eacute;si jogait
   Az elj&aacute;r&aacute;s r&eacute;szletesen van magyar&aacute;zva a telep&iacute;t&eacute;si k&eacute;zik&ouml;nyvben.
   <p />A megt&ouml;rt&eacute;nt ez a m&#369;velet, tudni fogja',
 'double_occurrence' => 'K&eacute;t el&#337;fordul&aacute;s',
 
 // E
+'en_cours' => '<NEW>en cours',
 'entree_dimensions' => 'M&eacute;ret&nbsp;:',
 'entree_titre_document' => 'Dokumentum c&iacute;me&nbsp;:',
 'entree_titre_image' => 'K&eacute;p c&iacute;me&nbsp;:',
@@ -208,6 +210,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'Hiba',
 'erreur_balise_non_fermee' => 'az utols&oacute; tag nincs lez&aacute;rva:',
 'erreur_texte' => 'hiba',
+'etape' => '<NEW>&Eacute;tape',
 
 // F
 'fichier_introuvable' => 'A(z) @fichier@ f&aacute;jl nem tal&aacute;lhat&oacute;',
@@ -422,7 +425,7 @@ amit kapott. Amennyiben nincs regisztr&aacute;lva, akkor',
 'info_erreur_requete' => 'Hiba a lek&eacute;rdez&eacute;sben :',
 'info_erreur_squelette2' => 'Egyetlen csontv&aacute;z (template) <b>@fichier@</b> sem &aacute;ll rendelkez&eacute;sre...',
 'info_erreur_systeme' => 'Rendszer hiba (errno @errsys@)',
-'info_erreur_systeme2' => 'A merevlemez tal&aacute;n tele van, vagy megs&eacute;r&uuml;lt az adatb&aacute;zis. <br />
+'info_erreur_systeme2' => '<MODIF>A merevlemez tal&aacute;n tele van, vagy megs&eacute;r&uuml;lt az adatb&aacute;zis. <br />
  <font color=\'red\'>prob&aacute;ljon <a href=\'@script@\'>jav&iacute;tani az adatb&aacute;zis</a>,
  vagy keresse fel a rendszergazd&aacute;t.</font>',
 'info_fini' => 'K&eacute;szen van !',
@@ -431,7 +434,7 @@ amit kapott. Amennyiben nincs regisztr&aacute;lva, akkor',
 'info_grand_ecran' => 'Nagy k&eacute;perny&#337;',
 'info_image_aide' => 'S&Uacute;G&Oacute;',
 'info_image_process_titre' => 'B&eacute;lyegk&eacute;pek k&eacute;sz&iacute;t&eacute;si m&oacute;dszer',
-'info_impossible_lire_page' => '<b>Hiba !</b> Az opdal nem olvashat&oacute;  <tt><html>@test_proxy@</html></tt> a proxyn kereszt&uuml;l <tt>',
+'info_impossible_lire_page' => '<MODIF><b>Hiba !</b> Az opdal nem olvashat&oacute;  <tt><html>@test_proxy@</html></tt> a proxyn kereszt&uuml;l <tt>',
 'info_inclusion_directe' => 'K&ouml;zvetlen besz&uacute;r&aacute;s&nbsp;:',
 'info_inclusion_vignette' => 'B&eacute;lyegk&eacute;p besz&uacute;r&aacute;sa&nbsp;:',
 'info_installation_systeme_publication' => 'A publik&aacute;l&aacute;si rendszer telep&iacute;t&eacute;se...',
@@ -462,7 +465,7 @@ amit kapott. Amennyiben nincs regisztr&aacute;lva, akkor',
 'info_mois_courant' => 'A h&oacute;nap folyam&aacute;n :',
 'info_mot_cle_ajoute' => 'A k&ouml;vetkez&#337; kulcssz&oacute; nem lett hozz&aacute;t&eacute;ve',
 'info_multi_herit' => 'Alap&eacute;rtelmezett nyelv',
-'info_multi_langues_soulignees' => 'Az <u>al&aacute;huzott nyelveknek</u> van ford&iacute;t&aacute;sa a fel&uuml;let &ouml;sszes sz&ouml;veg&eacute;re. Ha ezeket jel&ouml;li ki, akkor a nyilv&aacute;nos honlap sz&aacute;mos elemei (d&aacute;tumok, &#369;rlapok) lesznek automatikusan leford&iacute;tva. A nem al&aacute;h&uacute;zott nyelvekre pedig azok az elemek a honlap alapnyelv&eacute;n fognak megjelenni.',
+'info_multi_langues_soulignees' => '<MODIF>Az <u>al&aacute;huzott nyelveknek</u> van ford&iacute;t&aacute;sa a fel&uuml;let &ouml;sszes sz&ouml;veg&eacute;re. Ha ezeket jel&ouml;li ki, akkor a nyilv&aacute;nos honlap sz&aacute;mos elemei (d&aacute;tumok, &#369;rlapok) lesznek automatikusan leford&iacute;tva. A nem al&aacute;h&uacute;zott nyelvekre pedig azok az elemek a honlap alapnyelv&eacute;n fognak megjelenni.',
 'info_multilinguisme' => 'T&ouml;bbnyelv&#369;s&eacute;g',
 'info_nom_non_utilisateurs_connectes' => 'Az &Ouml;n neve nem szerepel a jelenleg csatlakozott felhaszn&aacute;l&oacute;k list&aacute;j&aacute;ban',
 'info_nom_utilisateurs_connectes' => 'Az &Ouml;n neve szerepel a jelenleg csatlakozott felhaszn&aacute;l&oacute;k list&aacute;j&aacute;ban.',
@@ -472,6 +475,7 @@ amit kapott. Amennyiben nincs regisztr&aacute;lva, akkor',
 'info_nouveau_message' => '&Ouml;NNEK &Uacute;J &Uuml;ZENETE VAN',
 'info_nouveaux_messages' => '&Ouml;NNEK @total_messages@ &Uacute;J &Uuml;ZENETE VAN',
 'info_numero_abbreviation' => 'sz.&nbsp;',
+'info_obligatoire' => '<NEW>Cette information est obligatoire',
 'info_panne_site_syndique' => 'Hib&aacute;s szindik&aacute;lt honlap',
 'info_pense_bete' => 'EML&Eacute;KEZTET?',
 'info_petit_ecran' => 'Kisebb k&eacute;perny?',
@@ -510,9 +514,9 @@ amit kapott. Amennyiben nincs regisztr&aacute;lva, akkor',
 'info_site_refuse' => 'Elutas&iacute;tott honlap',
 'info_sites_referencer' => 'Honlap felv&eacute;tele',
 'info_supprimer_vignette' => 'a b&eacute;lyegk&eacute;p t&ouml;rl&eacute;se',
-'info_symbole_bleu' => 'A <b>k&eacute;k</b> jel <b>eml&eacute;keztet&#337;t</b> jelez: vagyis egy szem&eacute;lyes jelleg&#369; &uuml;zenetet.',
-'info_symbole_jaune' => 'A <b>s&aacute;rga</b> jel <b>minden szerz&#337;nek sz&oacute;l&oacute; h&iacute;rt</b> jelez&nbsp;: minden adminisztr&aacute;tor m&oacute;dos&iacute;thatja, &eacute;s minden szerz&#337; l&aacute;thatja.',
-'info_symbole_vert' => 'A <b>z&ouml;ld</b> jel a honlap <b>t&ouml;bbi felhaszn&aacute;l&oacute;ival cser&eacute;lt &uuml;zeneteket</b> jelzi.',
+'info_symbole_bleu' => '<MODIF>A <b>k&eacute;k</b> jel <b>eml&eacute;keztet&#337;t</b> jelez: vagyis egy szem&eacute;lyes jelleg&#369; &uuml;zenetet.',
+'info_symbole_jaune' => '<MODIF>A <b>s&aacute;rga</b> jel <b>minden szerz&#337;nek sz&oacute;l&oacute; h&iacute;rt</b> jelez&nbsp;: minden adminisztr&aacute;tor m&oacute;dos&iacute;thatja, &eacute;s minden szerz&#337; l&aacute;thatja.',
+'info_symbole_vert' => '<MODIF>A <b>z&ouml;ld</b> jel a honlap <b>t&ouml;bbi felhaszn&aacute;l&oacute;ival cser&eacute;lt &uuml;zeneteket</b> jelzi.',
 'info_syndication' => 'szindik&aacute;l&aacute;s :',
 'info_syndication_articles' => 'cikk(ek)',
 'info_telecharger' => 'Felt&ouml;lt&eacute;s a g&eacute;p&eacute;r&#337;l&nbsp;:',
@@ -680,7 +684,7 @@ Akkor &uacute;jabb jelsz&oacute;t tud be&iacute;rni
     de nem lettek k&ouml;zvetlen&uuml;l
    besz&uacute;rva. A nyilv&aacute;nos r&eacute;sz oldalbe&aacute;ll&iacute;t&aacute;sa szerint,
   csatolt dokumentumok form&aacute;ban jelenhetnek meg.',
-'texte_erreur_mise_niveau_base' => 'Adatb&aacute;zis hiba verzi&oacute;friss&iacute;t&eacute;skor.
+'texte_erreur_mise_niveau_base' => '<MODIF>Adatb&aacute;zis hiba verzi&oacute;friss&iacute;t&eacute;skor.
   A <b>@fichier@</b> k&eacute;p nem ment &aacute;t (@id_article@ cikk).
  Jegyezze meg ezt a nevet, pr&oacute;bl&aacute;ja &uacute;jra a friss&iacute;t&eacute;st, &eacute;s v&eacute;g&uuml;l ellen&#337;rizze, hogy a k&eacute;pek mindig jelennek meg a cikkekben.',
 'texte_erreur_visiteur' => 'Olyan azonos&iacute;t&oacute;val pr&oacute;b&aacute;lt hozz&aacute;f&eacute;rni a priv&aacute;t z&oacute;n&aacute;hoz, aminek ehhez nincs jogosults&aacute;ga.',
@@ -690,7 +694,7 @@ Pr&oacute;b&aacute;ljon',
 'texte_inc_auth_2' => '&uacute;jra csatlakozni',
 'texte_inc_auth_3' => ', miut&aacute;n esetleg bez&aacute;rta &eacute;s 
 &uacute;jraind&iacute;totta a b&ouml;ng&eacute;sz&#337;j&eacute;t.',
-'texte_inc_config' => 'Az ezeken az oldalokon v&eacute;gzett m&oacute;dos&iacute;t&aacute;sok jelent&#337;sen befoly&aacute;solj&aacute;k a
+'texte_inc_config' => '<MODIF>Az ezeken az oldalokon v&eacute;gzett m&oacute;dos&iacute;t&aacute;sok jelent&#337;sen befoly&aacute;solj&aacute;k a
  honlap m&#369;k&ouml;d&eacute;s&eacute;t. Javasoljuk, hogy ne  avatkozzon bele, amig &Ouml;n nem j&aacute;r&aacute;tos
  az SPIP m&#369;k&ouml;d&eacute;s&eacute;ben. <br /><br /><b>&Aacute;ltal&aacute;ban nagyon tan&aacute;csos b&iacute;zni ezeket az oldalakat
  a honlap f&#337; webmester&eacute;re.</b>',
@@ -719,12 +723,13 @@ Pr&oacute;b&aacute;ljon',
 'titre_joindre_document' => 'DOKUMENTUM CSATOL&Aacute;SA',
 'titre_liens_entrants' => 'Bej&ouml;v&#337; linkek',
 'titre_mots_cles' => 'KULCSSZAVAK',
-'titre_probleme_technique' => 'Vigy&aacute;zat&nbsp;: m&#369;szaki hiba (SQL szerver) miatt nincs hozz&aacute;f&eacute;r&eacute;s erre a r&eacute;szre. Meg&eacute;rt&eacute;s&eacute;t k&ouml;sz&ouml;nj&uuml;k.',
+'titre_probleme_technique' => '<MODIF>Vigy&aacute;zat&nbsp;: m&#369;szaki hiba (SQL szerver) miatt nincs hozz&aacute;f&eacute;r&eacute;s erre a r&eacute;szre. Meg&eacute;rt&eacute;s&eacute;t k&ouml;sz&ouml;nj&uuml;k.',
 'titre_publier_document' => 'DOKUMENTUM PUBLIK&Aacute;L&Aacute;SA ABBAN A ROVATBAN',
 'titre_signatures_attente' => '&Eacute;rv&eacute;nyes&iacute;t&eacute;sre v&aacute;rakoz&oacute; al&aacute;&iacute;r&aacute;sok',
 'titre_signatures_confirmees' => '&Eacute;rv&eacute;nyes&iacute;tett al&aacute;&iacute;r&aacute;sok',
 'titre_statistiques' => 'A honlap statisztikai',
 'titre_titre_document' => 'Dokumentum c&iacute;me&nbsp;:',
+'todo' => '<NEW>&agrave; venir',
 'trad_reference' => '(eredeti cikk)',
 
 // Z
