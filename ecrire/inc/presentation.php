@@ -992,14 +992,14 @@ function info_copyright() {
 // http://doc.spip.org/@debloquer_article
 function debloquer_article($arg, $texte) {
 
-	// cas d'un article pas liberable : on esst sur sa page d'edition
+	// cas d'un article pas liberable : on est sur sa page d'edition
 	if (_request('exec') == 'articles_edit'
 	AND $arg == _request('id_article'))
 		return '';
 
-	$lien = parametre_url(self(), 'debloquer_article', $arg, '&');
+	$lien = parametre_url(self(), 'debloquer_article', '', '&');
 	return "<a href='" .
-	  generer_action_auteur('instituer_collaboration',$arg, _DIR_RESTREINT_ABS . $lien) .
+	  generer_action_auteur('instituer_collaboration', $arg, _DIR_RESTREINT_ABS . $lien) .
 	  "' title=\"" .
 	  attribut_html($texte) .
 	  "\">"
