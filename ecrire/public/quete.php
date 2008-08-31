@@ -18,6 +18,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 # NB : a l'exception des fonctions pour les balises dynamiques
 
+include_spip('base/abstract_sql');
+
 # retourne le chapeau d'un article, et seulement s'il est publie
 
 // http://doc.spip.org/@quete_chapo

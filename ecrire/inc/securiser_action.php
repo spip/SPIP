@@ -33,6 +33,8 @@ function inc_securiser_action_dist($action='', $arg='', $redirect="", $mode=fals
 	}
 }
 
+// Attention: PHP applique urldecode sur $_GET mais pas sur $_POST
+// cf http://fr.php.net/urldecode#48481
 // http://doc.spip.org/@securiser_action_auteur
 function securiser_action_auteur($action, $arg, $redirect="", $mode=false, $att='')
 {
@@ -41,8 +43,8 @@ function securiser_action_auteur($action, $arg, $redirect="", $mode=false, $att=
 		list($id_auteur, $pass) =  caracteriser_auteur();
 	}
 	$hash = _action_auteur("$action-$arg", $id_auteur, $pass, 'alea_ephemere');
-	$r = rawurlencode($redirect);
 	if (!is_string($mode)){
+		$r = rawurlencode($redirect);
 		if ($mode===-1)
 			return array('action'=>$action,'arg'=>$arg,'hash'=>$hash);
 		else
@@ -50,7 +52,9 @@ function securiser_action_auteur($action, $arg, $redirect="", $mode=false, $att=
 	}
 
 	$att .=	" style='margin: 0px; border: 0px'";
-	$mode .= (!$r ? '' : "\n\t\t<input name='redirect' type='hidden' value='$r' />") . "
+	if ($redirect)
+		$redirect = "\n\t\t<input name='redirect' type='hidden' value='". str_replace("'", '&#39;', $redirect) ."' />";
+	$mode .= $redirect . "
 <input name='hash' type='hidden' value='$hash' />
 <input name='arg' type='hidden' value='$arg' />";
 

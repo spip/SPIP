@@ -41,7 +41,7 @@ function exec_articles_forum_args($id_article, $date, $debut, $pas, $enplus)
 	if (!$pas) $pas = 5;
 	$nav = affiche_navigation_forum($query, "articles_forum", "id_article=$id_article", $debut, $pas, $enplus, $date);
 
-	$res = afficher_forum($query, '', '', $id_article);
+	$res = afficher_forum($query, '', '', $id_article, 'articles_forum', "id_article=$id_article");
 	$res =  "<br />$nav<br />$res<br />$nav";	
 
 	if (_AJAX) {

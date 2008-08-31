@@ -90,77 +90,43 @@ function refuser_traiter_formulaire_ajax(){
 		exit;
 	}
 }
+
+// au 1er appel, traite les formulaires dynamiques charger/verifier/traiter
+// au 2e se sachant 2e, retourne les messages et erreurs stockes au 1er
+// Le 1er renvoie True si il faut faire exit a la sortie
+
 // http://doc.spip.org/@traiter_formulaires_dynamiques
 function traiter_formulaires_dynamiques($get=false){
 	static $post = array();
 	static $done = false;
-	if ($get) return $post; // retourner a la demande les messages et erreurs stockes en debut de hit
-	if (!$done) {
-		$done = true;
-		if ($action = _request('action')) {
-			include_spip('inc/autoriser'); // chargement systematique pour les actions
-			include_spip('inc/headers');
-			if (($v=_request('var_ajax'))
-			 AND ($v!=='form')
-			 AND ($args = _request('var_ajax_env'))
-			 AND ($url = _request('redirect'))){
-				$url = parametre_url($url,'var_ajax',$v,'&');
-				$url = parametre_url($url,'var_ajax_env',$args,'&');
-				set_request('redirect',$url);
-			}
-			$var_f = charger_fonction($action, 'action');
-			$var_f();
-			if ($GLOBALS['redirect']
-			OR $GLOBALS['redirect'] = _request('redirect')){
-				$url = urldecode($GLOBALS['redirect']);
-				if (($v=_request('var_ajax'))
-				 AND ($v!=='form')
-				 AND ($args = _request('var_ajax_env'))) {
-					$url = parametre_url($url,'var_ajax',$v,'&');	
-					$url = parametre_url($url,'var_ajax_env',$args,'&');	
-				}
-				redirige_par_entete($url);
-			}
-			if (!headers_sent()
-			AND !ob_get_length())
-				http_status(204); // No Content
-			exit;
-		}
 
-		// traiter les appels de bloc ajax (ex: pagination)
-		if ($v = _request('var_ajax')
-		AND $v !== 'form'
-		AND $args = _request('var_ajax_env')) {
-			include_spip('inc/filtres');
-			include_spip('inc/actions');
-			if ($args = decoder_contexte_ajax($args)
-			AND $fond = $args['fond']) {
-				$contexte = calculer_contexte();
-				$contexte = array_merge($args, $contexte);
-				$page = evaluer_fond($fond,$contexte);
-				$texte = $page['texte'];
-			} else $texte = _L('signature ajax bloc incorrecte');
-			ajax_retour($texte);
-			exit;
-		}
+	if ($get) return $post; 
+	if ($done) return false;
+	$done = true;
 
-		// traiter les formulaires dynamniques charger/verifier/traiter
-		if ($form = _request('formulaire_action')
-		AND $args = _request('formulaire_action_args')) {
-			include_spip('inc/filtres');
-			if (($args = decoder_contexte_ajax($args,$form))!==false) {
-				$verifier = charger_fonction("verifier","formulaires/$form/",true);
-				$post["erreurs_$form"] = pipeline(
+	if (!($form = _request('formulaire_action')
+	AND $args = _request('formulaire_action_args')))
+		return false;
+
+	include_spip('inc/filtres');
+	if (($args = decoder_contexte_ajax($args,$form))===false) {
+		include_spip('inc/actions');
+		ajax_retour('signature ajax form incorrecte');
+		return true;
+	} else {
+		$verifier = charger_fonction("verifier","formulaires/$form/",true);
+		$post["erreurs_$form"] = pipeline(
 				  'formulaire_verifier',
 					array(
 						'args'=>array('form'=>$form,'args'=>$args),
 						'data'=>$verifier?call_user_func_array($verifier,$args):array())
 					);
-				if ((count($post["erreurs_$form"])==0)){
-					$rev = "";
-					if ($traiter = charger_fonction("traiter","formulaires/$form/",true))
-						$rev = call_user_func_array($traiter,$args);
-					$rev = pipeline(
+		if ((count($post["erreurs_$form"])==0)){
+			$rev = "";
+			if ($traiter = charger_fonction("traiter","formulaires/$form/",true))
+				$rev = call_user_func_array($traiter,$args);
+
+			$rev = pipeline(
 				  'formulaire_traiter',
 					array(
 						'args'=>array('form'=>$form,'args'=>$args),
@@ -173,52 +139,16 @@ function traiter_formulaires_dynamiques($get=false){
 					} else
 						$post["message_ok_$form"] = $rev;
 				}
-				// si le formulaire a ete soumis en ajax, on le renvoie direct !
-				if (_request('var_ajax')){
-					if (find_in_path('formulaire_.php','balise/',true)) {
-						include_spip('inc/actions');
-						array_unshift($args,$form);
-						ajax_retour(inclure_balise_dynamique(call_user_func_array('balise_formulaire__dyn',$args),false),false);
-						exit;
-					}
-				}
-			} else {
+		// si le formulaire a ete soumis en ajax, on le renvoie direct !
+		if (_request('var_ajax')){
+			if (find_in_path('formulaire_.php','balise/',true)) {
 				include_spip('inc/actions');
-				ajax_retour('signature ajax form incorrecte');
-				exit;
+				array_unshift($args,$form);
+				ajax_retour(inclure_balise_dynamique(call_user_func_array('balise_formulaire__dyn',$args),false),false);
+				return true;
 			}
 		}
 	}
-}
-
-// fonction principale declenchant tout le service
-// elle-meme ne fait que traiter les cas particuliers, puis passe la main.
-// http://doc.spip.org/@public_assembler_dist
-function public_assembler_dist($fond, $connect='') {
-	  global $forcer_lang, $ignore_auth_http;
-
-	// multilinguisme
-	if ($forcer_lang AND ($forcer_lang!=='non') AND !_request('action')) {
-		include_spip('inc/lang');
-		verifier_lang_url();
-	}
-	if ($l = isset($_GET['lang'])) {
-		$l = lang_select($_GET['lang']);
-	}
-
-	traiter_formulaires_dynamiques();
-	
-	// si signature de petition, l'enregistrer avant d'afficher la page
-	// afin que celle-ci contienne la signature
-	if (isset($_GET['var_confirm'])) {
-		$reponse_confirmation = charger_fonction('reponse_confirmation','formulaires/signature');
-		$reponse_confirmation($_GET['var_confirm']);
-	}
-	
-	init_var_mode();
-	
-	if ($l) lang_select();
-	return assembler_page ($fond, $connect);
 }
 
 // fonction pour l'envoi de fichier
@@ -249,10 +179,21 @@ function envoyer_entetes($entetes) {
 // determine le contexte donne par l'URL (en tenant compte des reecritures) 
 // grace a la fonction de passage d'URL a id (reciproque dans urls/*php)
 //
-// http://doc.spip.org/@assembler_page
-function assembler_page ($fond, $connect='') {
-	global $flag_preserver,$lastmodified,
-		$use_cache;
+
+function assembler($fond, $connect='', $lang='') {
+
+	global $flag_preserver,$lastmodified, $use_cache;
+
+	// si signature de petition, l'enregistrer avant d'afficher la page
+	// afin que celle-ci contienne la signature
+	if (isset($_GET['var_confirm'])) {
+		$reponse_confirmation = charger_fonction('reponse_confirmation','formulaires/signature');
+		$reponse_confirmation($_GET['var_confirm']);
+	}
+	
+	init_var_mode();
+	
+	if ($lang) lang_select();
 
 	// Cette fonction est utilisee deux fois
 	$cacher = charger_fonction('cacher', 'public');

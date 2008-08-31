@@ -911,7 +911,7 @@ function affiche_bloc_plugin($plug_file, $info) {
 
 	// bouton de desinstallation
 	if (plugin_est_installe($plug_file)){
-		$action = generer_action_auteur('desinstaller_plugin',$plug_file,generer_url_ecrire('admin_plugin'));
+		$action = redirige_action_auteur('desinstaller_plugin',$plug_file,'admin_plugin');
 		$infotech[] = "<a href='$action'
 		onclick='return confirm(\""._T('bouton_desinstaller')
 		." ".basename($plug_file)." ?\\n"._T('info_desinstaller_plugin')."\")'
