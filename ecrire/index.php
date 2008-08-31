@@ -166,11 +166,21 @@ AND $l = @unserialize($l)) {
 	}
 }
 
-if (_request('formulaire_action') AND _request('formulaire_action_args')) {
-	include_spip('public/assembler');
-	if (traiter_formulaires_dynamiques()) exit;
- }
-
+if (_request('action') OR _request('var_ajax') OR _request('formulaire_action')){
+	// Charger l'aiguilleur qui va mettre sur la bonne voie les traitements derogatoires
+	include_spip('public/aiguiller');
+	if (
+		// cas des appels actions ?action=xxx qui peuvent etre executees dans ecrire/
+		// les urls crees par generer_url_action sont par defaut toujours dans le public
+		traiter_appels_actions()
+	OR
+		// cas des hits ajax sur les inclusions ajax
+		traiter_appels_inclusions_ajax()
+	 OR 
+	 	// cas des formulaires charger/verifier/traiter
+	  traiter_formulaires_dynamiques())
+	  exit; // le hit est fini !
+}
 
 // Passer la main aux outils XML a la demande (meme les redac s'ils veulent).
 if ($var_f = _request('transformer_xml')) {

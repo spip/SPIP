@@ -106,65 +106,21 @@ else {
 
 	$lang = !isset($_GET['lang']) ? '' : lang_select($_GET['lang']);
 
-	if ($ajax = _request('var_ajax'))
-		$ajax_env = ($ajax==='form') ? '' : _request('var_ajax_env');
-	else $ajax_env = '';
-
-	// cas de l'appel qui renvoie une redirection (302) ou rien (204)
-
-	if ($action = _request('action')) {
-		include_spip('inc/autoriser');
-		include_spip('inc/headers');
-		$url = _request('redirect');
-		// pas de urldecode:
-		// - en GET, PHP le fait automatiquement
-		// - en POST, SPIP n'a pas fait d'urlencode
-		if ($ajax_env AND $url) {
-			$url = parametre_url($url,'var_ajax',$ajax,'&');
-			$url = parametre_url($url,'var_ajax_env',$ajax_env,'&');
-			set_request('redirect', $url);
-		}
-		$var_f = charger_fonction($action, 'action');
-		$var_f();
-		if (isset($GLOBALS['redirect'])
-		OR $GLOBALS['redirect'] = _request('redirect')) {
-			// pour les Ajax qui refabriquent le redirect
-			// (il y en a ?)
-			if ($ajax_env AND ($GLOBALS['redirect'] !== $url)) {
-				$GLOBALS['redirect'] = parametre_url($GLOBALS['redirect'],'var_ajax',$ajax,'&');	
-				$GLOBALS['redirect'] = parametre_url($url,'var_ajax_env',$ajax_env,'&');	
-			}
-			redirige_par_entete($GLOBALS['redirect']);
-		}
-		if (!headers_sent()
-			AND !ob_get_length())
-				http_status(204); // No Content
-		exit;
-	}
+	// Charger l'aiguilleur qui va mettre sur la bonne voie les traitements derogatoires
+	include_spip('public/aiguiller');
+	if (
+		// cas des appels actions ?action=xxx
+		traiter_appels_actions()
+	OR
+		// cas des hits ajax sur les inclusions ajax
+		traiter_appels_inclusions_ajax()
+	 OR 
+	 	// cas des formulaires charger/verifier/traiter
+	  traiter_formulaires_dynamiques())
+	  exit; // le hit est fini !
 
 	// Il y a du texte a produire, charger le metteur en page
 	include_spip('public/assembler');
-
-	// traiter les appels de bloc ajax (ex: pagination)
-
-	if ($ajax_env) {
-		include_spip('inc/filtres');
-		include_spip('inc/actions');
-		if ($args = decoder_contexte_ajax($ajax_env)
-		AND $fond = $args['fond']) {
-				$contexte = calculer_contexte();
-				$contexte = array_merge($args, $contexte);
-				$page = evaluer_fond($fond,$contexte);
-				$texte = $page['texte'];
-		} else $texte = _L('signature ajax bloc incorrecte');
-		ajax_retour($texte);
-		exit;
-	}
-
-	// cas des formulaires charger/verifier/traiter
-
-	if (traiter_formulaires_dynamiques()) exit;
-
 	$page = assembler($fond, _request('connect'), $lang);
 
 	if (isset($page['status'])) {
