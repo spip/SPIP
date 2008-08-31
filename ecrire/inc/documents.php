@@ -267,7 +267,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	/// Ajouter nouveau document
 	$bouton = !_INTERFACE_DOCUMENTS
 		? majuscules(_T('bouton_ajouter_document')).aide("ins_doc")
-		: (_L('Ajouter une image ou&nbsp;un&nbsp;document')).aide("ins_doc");
+		: (_T('bouton_ajouter_image_document')).aide("ins_doc");
 
 	$ret .= "<div id='documents'></div>\n<div id='portfolio'></div>\n";
 	if (_INTERFACE_DOCUMENTS

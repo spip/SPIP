@@ -160,15 +160,17 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	// Changement de mode image/document
 	//
 	define('_INTERFACE_DOCUMENTS', false);
+	define('_BOUTON_MODE_IMAGE', true);
 	if (_INTERFACE_DOCUMENTS) {
 	if ($script == 'articles_edit'
+	AND _BOUTON_MODE_IMAGE
 	AND in_array($document['extension'], array('jpg', 'gif', 'png'))) {
 		if ($document['mode'] == 'image') {
-			$texte = _L('Ins&#233;rer cette image dans le portfolio');
+			$texte = _T('upload_info_mode_document');
 			$mode = 'document';
 			$logo = 'doc-24.gif';
 		} else {
-			$texte = _L('Retirer cette image du portfolio');
+			$texte = _T('upload_info_mode_image');
 			$mode = 'image';
 			$logo = 'image-24.gif';
 		}
