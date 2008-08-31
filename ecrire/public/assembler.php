@@ -103,6 +103,7 @@ function envoyer_entetes($entetes) {
 // grace a la fonction de passage d'URL a id (reciproque dans urls/*php)
 //
 
+// http://doc.spip.org/@assembler
 function assembler($fond, $connect='', $lang='') {
 
 	global $flag_preserver,$lastmodified, $use_cache;
