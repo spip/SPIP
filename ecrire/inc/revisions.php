@@ -430,16 +430,17 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 	sql_insertq('spip_versions',  $valeurs);
 
 	// Eviter les validations entremelees en s'endormant s'il existe
-	// une version <0 plus recente mais pas plus vieille que 30s
+	// une version <0 plus recente mais pas plus vieille que 10s
 	// Une <0 encore plus vieille est une operation avortee,
 	// on passe outre (vaut mieux archiver mal que pas du tout).
 	// Pour tester:
+	// 0. mettre le delai a 30
 	// 1. decommenter le premier sleep(15)
 	// 2. enregistrer une modif
 	// 3. recommenter le premier sleep(15), decommenter le second.
 	// 4. enregistrer une autre modif dans les 15 secondes
 # 	  sleep(15);
-	$delai = $sec-30;
+	$delai = $sec-10;
 	while (sql_countsel('spip_versions', "id_article=$id_article AND id_version < 0 AND 0.0+titre_version < $date AND 0.0+titre_version > $delai")) {
 		spip_log("version $id_article :insertion en cours avant $date ($delai)");
 		sleep(1);
