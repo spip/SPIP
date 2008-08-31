@@ -41,6 +41,8 @@ function inc_documenter_dist(
 
 	if (!$docs) return '';
 
+	// On passe &$tous dans la boucle pour verifier si on a bien
+	// le droit de supprimer tous les documents
 	$tous = (count($docs) > 3);
 	$res = documenter_boucle($docs, $type, $ancre, $tous, $appelant, $opt);
 	$s = ($ancre =='documents' ? '': '-');
@@ -55,10 +57,10 @@ function documenter_bloc($id, $res, $s, $script, $ancre, $tous, $type)
 {
 	// seulement s'il y a au moins un document dedans
 	if (!$res) return "";
-	
+
 	if ($tous) {
 		$tous = "<div class='lien_tout_supprimer'>"
-			. ajax_action_auteur('documenter', "$s$id/$type", $script, "id_$type=$id&s=$s&type=$type",array(_T('lien_tout_supprimer')))
+			. ajax_action_auteur('documenter', "$s$id/$type", $appelant ? $appelant : _request('exec'), "id_$type=$id&s=$s&type=$type",array(_T('lien_tout_supprimer')))
 			. "</div>\n";
 	} else $tous = '';
 
