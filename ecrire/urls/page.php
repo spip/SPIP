@@ -24,7 +24,7 @@ define ('_debut_urls_page', get_spip_script('./').'?');
 
 
 // http://doc.spip.org/@_generer_url_page
-function _generer_url_page($page,$id, $args='', $ancre='') {
+function _generer_url_page($type,$id, $args='', $ancre='') {
 
 	if ($type == 'forum') {
 		include_spip('inc/forum');
@@ -36,7 +36,7 @@ function _generer_url_page($page,$id, $args='', $ancre='') {
 		return generer_url_document_dist($id, $args, $ancre);
 	}
 
-	$url = _debut_urls_page . $page . _separateur_urls_page
+	$url = _debut_urls_page . $type . _separateur_urls_page
 	  . $id . _terminaison_urls_page;
 
 	if ($args) $args = strpos($url,'?') ? "&$args" : "?$args";
