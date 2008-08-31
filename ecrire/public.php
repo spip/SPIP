@@ -115,9 +115,6 @@ else {
 	if ($action = _request('action')) {
 		include_spip('inc/autoriser');
 		include_spip('inc/headers');
-		spip_log("je vais appliquer $action et revenir a \n".
-			 $_GET['redirect'] . " ou " .
-			 $_POST['redirect'] );
 		$url = _request('redirect');
 		// pas de urldecode:
 		// - en GET, PHP le fait automatiquement
@@ -129,7 +126,6 @@ else {
 		}
 		$var_f = charger_fonction($action, 'action');
 		$var_f();
-		spip_log("revenir a $url");
 		if (isset($GLOBALS['redirect'])
 		OR $GLOBALS['redirect'] = _request('redirect')) {
 			// pour les Ajax qui refabriquent le redirect
