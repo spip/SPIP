@@ -2131,13 +2131,13 @@ function image_aplatir($im, $format='jpg', $coul='000000', $qualite=NULL)
 			if (function_exists('imagecolormatch'))
 				@imagecolormatch($im_, $im);
 			// produire le resultat
-			$image["fonction_image"]($im, "$dest");
+			image_gd_output($im, $image, $qualite);
 		}
-		image_gd_output($im_, $image, $qualite);
+		else
+			image_gd_output($im_, $image, $qualite);
 		imagedestroy($im_);
 		imagedestroy($im);
 	}
-
 	return image_ecrire_tag($image,array('src'=>$dest));
 }
 // A partir d'une image,
