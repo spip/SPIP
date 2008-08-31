@@ -1,0 +1,1 @@
+<?php include_spip('inc/suivi_versions'); ?>
