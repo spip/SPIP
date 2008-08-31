@@ -1247,6 +1247,8 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'trad_new' => '&Eacute;crire une nouvelle traduction de cet article',
 
 // U
+'upload_info_mode_document' => 'D&#233;poser cette image dans le portfolio',
+'upload_info_mode_image' => 'Retirer cette image du portfolio',
 'upload_fichier_zip' => 'Fichier ZIP',
 'upload_fichier_zip_texte' => 'Le fichier que vous proposez d\'installer est un fichier Zip.',
 'upload_fichier_zip_texte2' => 'Ce fichier peut &ecirc;tre&nbsp;:',

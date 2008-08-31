@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/charsets');	# pour le nom de fichier
 include_spip('inc/documents');
 
-// Effacer un doc et sa vignette, ou une rubrique
+// Effacer une rubrique
 // http://doc.spip.org/@action_supprimer_dist
 function action_supprimer_dist() {
 
@@ -31,17 +31,6 @@ function action_supprimer_dist() {
 		spip_log("action supprimer $arg incompris");
 }
 
-// Ne pas confondre cette fonction avec celle au pluriel ci-dessous
-
-// http://doc.spip.org/@action_supprimer_document
-function action_supprimer_document($arg) {
-	list(,,$id_document,, $type, $id) = $arg;
-	supprimer_document_et_vignette($id_document);
-	if (strpos($type,'rubrique') !== 'false') {
-		include_spip('inc/rubriques');
-		depublier_branche_rubrique_if($id);
-	}
-}
 
 // http://doc.spip.org/@action_supprimer_rubrique
 function action_supprimer_rubrique($r)
@@ -74,23 +63,4 @@ function action_supprimer_rubrique($r)
 	suivre_invalideur("id='id_rubrique/$id_rubrique'");
 }
 
-// http://doc.spip.org/@supprimer_document_et_vignette
-function supprimer_document_et_vignette($arg)
-{
-	$row = sql_fetsel("id_vignette, fichier", "spip_documents", "id_document=$arg");
-	if ($row) {
-		spip_unlink(get_spip_doc($row['fichier']));
-		sql_delete("spip_documents", "id_document=$arg");
-		sql_updateq("spip_documents", array("id_vignette" => 0), "id_vignette=$arg");
-		sql_delete("spip_documents_liens", "id_document=$arg");
-		$id_vignette = $row['id_vignette'];
-		if ($id_vignette > 0) {
-			$f = sql_getfetsel("fichier", "spip_documents	", "id_document=$id_vignette");
-
-			if ($f) spip_unlink(get_spip_doc($f));
-			sql_delete("spip_documents", "id_document=$id_vignette");
-			sql_delete("spip_documents_liens", "id_document=$id_vignette");
-		}
-	}
-}
 ?>
