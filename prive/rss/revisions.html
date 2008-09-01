@@ -9,9 +9,9 @@ if (
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:thr="http://purl.org/syndication/thread/1.0">
 <channel xml:lang="[(#ENV{lang}|texte_backend)]">
 	<title>[&#91;(#NOM_SITE_SPIP|texte_backend)&#93;] RSS (<:icone_suivi_revisions|texte_backend:>)</title>
-	<link>[(#URL_ECRIRE{suivi_revisions, [id_secteur=(#ENV{id_secteur})&][id_auteur=(#ENV{id_auteur})&][langue_choisie=(#ENV{lang_choisie})&]}|url_absolue|texte_backend)]</link>
+	<link>[(#URL_ECRIRE{suivi_revisions, [id_secteur=(#ENV{id_secteur})&][id_auteur=(#ENV{id_auteur})&][lang_choisie=(#ENV{lang})]}|url_absolue|texte_backend)]</link>
 	<description></description>
-	<language>[(#ENV{lang_choisie}|texte_backend)]</language>
+	<language>[(#ENV{lang}|texte_backend)]</language>
 <BOUCLE_RSS(versions articles){id_version >1}{statut IN prop, publie, #ENV{statut, prop}}{!par date}{0,10}{lang ?}{id_secteur ?}{id_auteur ?}>
 	<item>
 		<title>[(#TITRE|texte_backend)]</title>
