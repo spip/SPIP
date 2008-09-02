@@ -23,7 +23,7 @@ function generer_action_auteur($action, $arg, $redirect="", $mode=false, $att=''
 // http://doc.spip.org/@redirige_action_auteur
 function redirige_action_auteur($action, $arg, $ret, $gra='', $mode=false, $atts='') {
 
-	$r = generer_url_ecrire($ret, $gra, true, _DIR_RESTREINT_ABS);
+	$r = _DIR_RESTREINT . generer_url_ecrire($ret, $gra, true, true);
 
 	return generer_action_auteur($action, $arg, $r, $mode, $atts);
 }

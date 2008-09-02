@@ -2460,7 +2460,7 @@ function chercher_rubrique($msg,$id, $id_parent, $type, $id_secteur, $restreint,
 				. "</div>";
 		}
 		$form = "<input type='hidden' name='editer_$type' value='oui' />\n" . $form;
-		$form = generer_action_auteur("editer_$type", $id, _DIR_RESTREINT_ABS . self(), $form, " method='post' class='submit_plongeur'");	
+		$form = generer_action_auteur("editer_$type", $id, self(), $form, " method='post' class='submit_plongeur'");	
 	}
 
 	if ($retour_sans_cadre)

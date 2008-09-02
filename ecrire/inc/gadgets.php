@@ -125,9 +125,9 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 
 	// menu
 	$bandeau .= "\n<div id='preferences_map'><map name='map_layout' id='map_layout'>"
-		. lien_change_var (self(), 'set_disp', 1, '1,0,18,15', _T('lien_afficher_texte_seul'))
-		. lien_change_var (self(), 'set_disp', 2, '19,0,40,15', _T('lien_afficher_texte_icones'))
-		. lien_change_var (self(), 'set_disp', 3, '41,0,59,15', _T('lien_afficher_icones_seuls'))
+		. lien_change_var (generer_url_action('preferer',"set_disp=1&redirect=".urlencode(self())),'','', '1,0,18,15', _T('lien_afficher_texte_seul'))
+		. lien_change_var (generer_url_action('preferer',"set_disp=2&redirect=".urlencode(self())),'','', '19,0,40,15', _T('lien_afficher_texte_icones'))
+		. lien_change_var (generer_url_action('preferer',"set_disp=3&redirect=".urlencode(self())),'','', '41,0,59,15', _T('lien_afficher_icones_seuls'))
 		. "\n</map></div>";
 	$bandeau .= "<div id='preferences_menu'>"
 		. http_img_pack("choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".gif", _T('choix_interface'), " style='vertical-align: middle' width='59' height='15' usemap='#map_layout'")
@@ -135,9 +135,9 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 		. "</div>";
 	// ecran
 	if ($spip_ecran == "large") 
-			$bandeau .= "<div id='preferences_ecran'><a href='".parametre_url(self(),'set_ecran', 'etroit')."' class='lien_sous'>"._T('info_petit_ecran')."</a>/<b>"._T('info_grand_ecran')."</b></div>";
+			$bandeau .= "<div id='preferences_ecran'><a href='".generer_url_action('preferer',"set_ecran=etroit&redirect=".urlencode(self()))."' class='lien_sous'>"._T('info_petit_ecran')."</a>/<b>"._T('info_grand_ecran')."</b></div>";
 	else
-			$bandeau .= "<div id='preferences_ecran'><b>"._T('info_petit_ecran')."</b>/<a href='".parametre_url(self(),'set_ecran', 'large')."' class='lien_sous'>"._T('info_grand_ecran')."</a></div>";
+			$bandeau .= "<div id='preferences_ecran'><b>"._T('info_petit_ecran')."</b>/<a href='".generer_url_action('preferer',"set_ecran=large&redirect=".urlencode(self()))."' class='lien_sous'>"._T('info_grand_ecran')."</a></div>";
 	$bandeau .= "</div>";
 
 

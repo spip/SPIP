@@ -62,39 +62,6 @@ if (autoriser_sans_cookie($exec)) {
 	}
  }
 
-//
-// Preferences de presentation
-//
-
-$prefs_mod = false;
-
-if (isset($_GET['set_couleur'])) {
-	$GLOBALS['visiteur_session']['prefs']['couleur'] = intval($_GET['set_couleur']);
-	$prefs_mod = true;
-}
-if (isset($_GET['set_disp'])) {
-	$GLOBALS['visiteur_session']['prefs']['display'] = intval($_GET['set_disp']);
-	$prefs_mod = true;
-}
-if ($prefs_mod AND !$var_auth) {
-	sql_updateq('spip_auteurs', array('prefs' => serialize($GLOBALS['visiteur_session']['prefs'])), "id_auteur=" .intval($GLOBALS['visiteur_session']['id_auteur']));
-
-	// Si modif des couleurs en ajax, stop ici
-	if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') exit;
-}
-
-// compatibilite ascendante
-$GLOBALS['spip_display'] = isset($GLOBALS['visiteur_session']['prefs']['display'])
-	? $GLOBALS['visiteur_session']['prefs']['display']
-	: 0;
-
-if (isset($_GET['set_ecran'])) {
-	// Poser un cookie,
-	// car ce reglage depend plus du navigateur que de l'utilisateur
-	$GLOBALS['spip_ecran'] = $_GET['set_ecran'];
-	spip_setcookie('spip_ecran', $GLOBALS['spip_ecran'], time() + 365 * 24 * 3600);
- } else $GLOBALS['spip_ecran'] = isset($_COOKIE['spip_ecran']) ? $_COOKIE['spip_ecran'] : "etroit";
-
 // initialiser a la langue par defaut
 include_spip('inc/lang');
 
@@ -115,7 +82,22 @@ if (isset($_COOKIE['spip_lang_ecrire'])) {
 	}
 }
 
-utiliser_langue_visiteur(); 
+utiliser_langue_visiteur();
+
+if (_request('action') OR _request('var_ajax') OR _request('formulaire_action')){
+	// Charger l'aiguilleur qui va mettre sur la bonne voie les traitements derogatoires
+	include_spip('public/aiguiller');
+	if (
+		// cas des appels actions ?action=xxx
+		traiter_appels_actions()
+	 OR
+		// cas des hits ajax sur les inclusions ajax
+		traiter_appels_inclusions_ajax()
+	 OR 
+	 	// cas des formulaires charger/verifier/traiter
+	  traiter_formulaires_dynamiques())
+	  exit; // le hit est fini !
+}
 
 //
 // Gestion d'une page normale de l'espace prive
@@ -166,17 +148,11 @@ AND $l = @unserialize($l)) {
 	}
 }
 
-if (_request('action') OR _request('var_ajax') OR _request('formulaire_action')){
-	// Charger l'aiguilleur qui va mettre sur la bonne voie les traitements derogatoires
-	include_spip('public/aiguiller');
-	if (
-		// cas des hits ajax sur les inclusions ajax
-		traiter_appels_inclusions_ajax()
-	 OR 
-	 	// cas des formulaires charger/verifier/traiter
-	  traiter_formulaires_dynamiques())
-	  exit; // le hit est fini !
-}
+// compatibilite ascendante
+$GLOBALS['spip_display'] = isset($GLOBALS['visiteur_session']['prefs']['display'])
+	? $GLOBALS['visiteur_session']['prefs']['display']
+	: 0;
+$GLOBALS['spip_ecran'] = isset($_COOKIE['spip_ecran']) ? $_COOKIE['spip_ecran'] : "etroit";
 
 // Passer la main aux outils XML a la demande (meme les redac s'ils veulent).
 if ($var_f = _request('transformer_xml')) {
