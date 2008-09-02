@@ -17,13 +17,33 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function traiter_appels_actions(){
 	// cas de l'appel qui renvoie une redirection (302) ou rien (204)
 	if ($action = _request('action')) {
+		include_spip('base/abstract_sql'); // chargement systematique pour les actions
 		include_spip('inc/autoriser');
 		include_spip('inc/headers');
-		$url = _request('redirect');
+		// si l'action est provoque par un hit {ajax}
+		// il faut transmettre l'env ajax au redirect
+		// on le met avant dans la query string au cas ou l'action fait elle meme sa redirection
+		if (($v=_request('var_ajax'))
+		  AND ($v!=='form')
+		  AND ($args = _request('var_ajax_env'))
+		  AND ($url = _request('redirect'))){
+			$url = parametre_url($url,'var_ajax',$v,'&');
+			$url = parametre_url($url,'var_ajax_env',$args,'&');
+			set_request('redirect',$url);
+		}		
 		$var_f = charger_fonction($action, 'action');
 		$var_f();
 		if (isset($GLOBALS['redirect'])
 		OR $GLOBALS['redirect'] = _request('redirect')) {
+			$url = urldecode($GLOBALS['redirect']);
+			// si l'action est provoque par un hit {ajax}
+			// il faut transmettre l'env ajax au redirect qui a pu etre defini par l'action
+			if (($v=_request('var_ajax'))
+			  AND ($v!=='form')
+			  AND ($args = _request('var_ajax_env'))) {
+				$url = parametre_url($url,'var_ajax',$v,'&');   
+				$url = parametre_url($url,'var_ajax_env',$args,'&');   
+			}
 			redirige_par_entete($GLOBALS['redirect']);
 		}
 		if (!headers_sent()
