@@ -87,10 +87,11 @@ onfocus="changestyle(\'bandeauinterface\');"
 onblur="changestyle(\'bandeauinterface\');"';
 
 		$bloc = '';
+		$ret = self();
 		foreach ($couleurs_spip as $key => $val) {
 			$bloc .=
 			'<a href="'
-				. generer_url_action('preferer',"set_couleur=$key&redirect=".urlencode(self()))
+			  . generer_action_auteur('preferer',"couleur:$key",$ret)
 				. '"'
 			. ' rel="'.generer_url_public('style_prive','ltr='
 				. $GLOBALS['spip_lang_left'] . '&'
