@@ -315,10 +315,16 @@ function ancre_url($url, $ancre) {
 }
 
 //
-// pour calcul du nom du fichier cache et autres
+// pour le nom du cache, les types_urls et self
 //
 // http://doc.spip.org/@nettoyer_uri
-function nettoyer_uri() {
+function nettoyer_uri()
+{
+	static $done = false;
+	static $propre = '';
+	if ($done) return $propre;
+	$done = true;
+
 	$uri1 = $GLOBALS['REQUEST_URI'];
 	do {
 		$uri = $uri1;
@@ -327,7 +333,7 @@ function nettoyer_uri() {
 			'\1', $uri);
 	} while ($uri<>$uri1);
 
-	return preg_replace(',[?&]$,', '', $uri1);
+	return $propre = (preg_replace(',[?&]$,', '', $uri1));
 }
 
 //
