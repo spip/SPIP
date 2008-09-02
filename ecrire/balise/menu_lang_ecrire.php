@@ -53,7 +53,7 @@ function menu_lang_pour_tous($nom, $default) {
 		return '';
 
 	# lien a partir de /
-	$cible = parametre_url(self('&', /* racine */ true), 'lang' , '', '&');
+	$cible = parametre_url(self(), 'lang' , '', '&');
 	$post = generer_url_action('converser', 'redirect='. rawurlencode($cible), '&');
 
 	return array('formulaires/menu_lang',
