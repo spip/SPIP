@@ -44,7 +44,12 @@ function suivre_lien($url, $lien) {
 		return $lien;
 	if (preg_match(',^([a-z0-9]+://.*?)(/.*),iS', $lien, $r))
 		return $r[1].resolve_path($r[2]);
-
+	
+	# L'url site spip est un lien absolu aussi
+	if ($lien == $GLOBALS['meta']['adresse_site']){
+		return $lien;
+	}
+	
 	# lien relatif, il faut verifier l'url de base
 	if (preg_match(',^(.*?://[^/]+)(/.*?/?)?([^/#]*)(#.*)?$,S', $url, $regs)) {
 		$debut = $regs[1];
