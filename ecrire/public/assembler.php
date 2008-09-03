@@ -719,8 +719,13 @@ function xml_hack(&$page, $echap = false) {
 // http://doc.spip.org/@page_base_href
 function page_base_href(&$texte){
 	if (!defined('_SET_HTML_BASE'))
+		// si la profondeur est superieure a 1
+		// est que ce n'est pas une url page ni une url action
+		// activer par defaut
 		define('_SET_HTML_BASE',
-			$GLOBALS['profondeur_url'] >= 1);
+			$GLOBALS['profondeur_url'] >= 1
+			AND !_request(_SPIP_PAGE)
+			AND !_request('action'));
 
 	if (_SET_HTML_BASE
 	AND $GLOBALS['html']
