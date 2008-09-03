@@ -3,11 +3,11 @@ if ([(#ID_AUTEUR|securiser_acces{#ENV{cle},rss,#ENV{op}, #ENV{args}}|?{1,0})]) {
 ?><?xml version="1.0" encoding="#CHARSET" ?>
 
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:thr="http://purl.org/syndication/thread/1.0">
-<channel xml:lang="[(#ENV{lang}|texte_backend)]">
+<channel xml:lang="[(#LANG|texte_backend)]">
 	<title>[&#91;(#NOM_SITE_SPIP|texte_backend)&#93; ]RSS <:ecrire:titre_page_forum_suivi:> (#ENV{page})</title>
 	<link>[(#URL_ECRIRE{controle_forum, type=#ENV{page}}|url_absolue|texte_backend)]</link>
 	<description></description>
-	<language>[(#ENV{lang}|texte_backend)]</language>
+	<language>[(#LANG|texte_backend)]</language>
 	<BOUCLE_RSS(FORUMS){statut IN prive,privoff,privac, privadm}{texte!=""}{tout}>
 	<item>
 		<title>[(#TITRE|texte_backend)][ ((#STATUT|=={publie}|?{'', #STATUT}))]</title>
