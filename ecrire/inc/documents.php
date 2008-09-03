@@ -228,7 +228,8 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	$joindre = charger_fonction('joindre', 'inc');
 
 	define('_INTERFACE_DOCUMENTS', false);
-	if (!_INTERFACE_DOCUMENTS) {
+	if (!_INTERFACE_DOCUMENTS
+	OR $GLOBALS['meta']["documents_$type"]=='non') {
 
 	// Ajouter nouvelle image
 	$ret = "<div id='images'>\n" 
@@ -270,9 +271,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 		: (_T('bouton_ajouter_image_document')).aide("ins_doc");
 
 	$ret .= "<div id='documents'></div>\n<div id='portfolio'></div>\n";
-	if (_INTERFACE_DOCUMENTS
-	OR !isset($GLOBALS['meta']["documents_$type"])
-	OR $GLOBALS['meta']["documents_$type"]!='non') {
+	if ($GLOBALS['meta']["documents_$type"]!='non') {
 		$ret .= $joindre(array(
 			'cadre' => _INTERFACE_DOCUMENTS ? 'relief' : 'enfonce',
 			'icone' => 'doc-24.gif',

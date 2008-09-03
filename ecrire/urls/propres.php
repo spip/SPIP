@@ -139,6 +139,9 @@ function creer_chaine_url($x) {
 
 // http://doc.spip.org/@declarer_url_propre
 function declarer_url_propre($type, $id_objet) {
+
+var_dump($type);
+
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table(table_objet($type));
 	$table = $desc['table'];
