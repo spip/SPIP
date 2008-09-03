@@ -2548,6 +2548,7 @@ function couleur_hsl2rgb ($H,$S,$L) {
 // Fonctions pour l'arabe
 
 
+// http://doc.spip.org/@rtl_mb_ord
 function rtl_mb_ord($char){
 
 	if (($c = ord($char)) < 216) return $c;
@@ -2562,6 +2563,7 @@ function rtl_mb_ord($char){
 
 
 
+// http://doc.spip.org/@rtl_reverse
 function rtl_reverse($mot, $rtl_global) {
 
 	$ponctuations = array("«","»", "“", "”", ",", ".", " ", ":", ";", "(", ")", "،", "؟", "?", "!", " ");
@@ -2613,6 +2615,7 @@ function rtl_reverse($mot, $rtl_global) {
 
 
 
+// http://doc.spip.org/@rtl_visuel
 function rtl_visuel($texte, $rtl_global) {
 	// hebreu + arabe: 54928 => 56767
 	// hebreu + presentation A: 15707294 => 15710140
