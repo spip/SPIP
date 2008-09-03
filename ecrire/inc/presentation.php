@@ -1280,7 +1280,7 @@ function bouton_spip_rss($op, $args=array(), $lang='') {
 
 	global $spip_lang_right, $spip_lang;
 	include_spip('inc/acces');
-	$url = generer_url_low_sec($op, $args, $GLOBALS['connect_id_auteur'], $lang ? $lang : $spip_lang);
+	$url = generer_url_low_sec($op, $args, $GLOBALS['connect_id_auteur'], $lang);
 	$img = http_img_pack('feed.png', 'RSS', '', 'RSS');
 	return "<div style='text-align: $spip_lang_right;'><a href='$url'>$img</a></div>";
 }
