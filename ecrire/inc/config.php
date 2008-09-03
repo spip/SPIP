@@ -173,7 +173,7 @@ function afficher_choix($nom, $valeur_actuelle, $valeurs, $sep = "<br />") {
 function appliquer_modifs_config() {
 
 	if (($i = _request('adresse_site'))!==NULL){
-		if (!strlen($i)) {$GLOBALS['profondeur_url']=0;$i = url_de_base();}
+		if (!strlen($i)) {$GLOBALS['profondeur_url']=_DIR_RESTREINT?0:1;$i = url_de_base();}
 		$_POST['adresse_site'] = preg_replace(",/?\s*$,", "", $i);
 	}
 
