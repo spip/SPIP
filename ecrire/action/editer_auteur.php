@@ -40,7 +40,7 @@ function action_editer_auteur_dist() {
 			_request('restreintes'),
 			$r[0]);
 
-			if ($echec) {
+			if ($echec AND $redirect) {
 		// revenir au formulaire de saisie
 				$ret = !$redirect
 				? '' 
@@ -48,11 +48,6 @@ function action_editer_auteur_dist() {
 				spip_log("echec editeur auteur: " . join(' ',$echec));
 				$echec = '&echec=' . join('@@@', $echec);
 				$redirect = generer_url_ecrire('auteur_infos',"id_auteur=$id_auteur$echec$ret",'&');
-			} else {
-			// modif: renvoyer le resultat ou a nouveau le formulaire si erreur
-				if (!$redirect)
-					$redirect = generer_url_ecrire("auteur_infos", "id_auteur=$id_auteur", '&', true);
-				else $redirect = rawurldecode($redirect);
 			}
 	}
 	if ($redirect) {
@@ -147,7 +142,7 @@ function action_legender_auteur_post($statut, $nom, $email, $bio, $nom_site_aute
 
 	// Seuls les admins peuvent modifier le mail
 	// les admins restreints ne peuvent modifier celui des autres admins
-	if (autoriser('modifier', 'auteur', $id_auteur, NULL, array('mail'=>1))) {
+	if ($email!==null AND autoriser('modifier', 'auteur', $id_auteur, NULL, array('mail'=>1))) {
 		$email = trim($email);
 		if ($email !='' AND !email_valide($email)) {
 			$echec[]= 'info_email_invalide';
@@ -213,9 +208,40 @@ function action_legender_auteur_post($statut, $nom, $email, $bio, $nom_site_aute
 		sql_insertq('spip_auteurs_articles', array('id_article' => $id_article, 'id_auteur' =>$id_auteur));
 	}
 
-	// Modifier en base (declenche les notifications etc.)
-	instituer_auteur($id_auteur, $c);
+	// Envoyer aux plugins
+	$champs = pipeline('pre_edition',
+		array(
+			'args' => array(
+				'table' => 'spip_auteurs',
+				'id_objet' => $id_auteur
+			),
+			'data' => $c
+		)
+	);
 
+	include_spip('inc/modifier');
+	revision_auteur($id_auteur, $champs);
+	
+	// Invalider les caches
+	include_spip('inc/invalideur');
+	suivre_invalideur("id='id_auteur/$id_auteur'");
+	
+	// Pipeline
+	pipeline('post_edition',
+		array(
+			'args' => array(
+				'table' => 'spip_auteurs',
+				'id_objet' => $id_auteur
+			),
+			'data' => $champs
+		)
+	);
+
+	// Notifications
+	if ($notifications = charger_fonction('notifications', 'inc')) {
+		$notifications('editerauteur', $id_auteur, $champs);
+	}
+	
 	return array($id_auteur, $echec);
 }
 
@@ -224,11 +250,53 @@ function action_legender_auteur_post($statut, $nom, $email, $bio, $nom_site_aute
 function instituer_auteur($id_auteur, $c) {
 	if (!$id_auteur=intval($id_auteur))
 		return false;
-
+	$champs = array();
+	
+	$statut =	$statut_ancien = sql_getfetsel('statut','spip_auteurs','id_auteur='.intval($id_auteur));
+	
 	if (isset($c['statut']))
-		sql_updateq('spip_auteurs', array('statut' => $c['statut']), 'id_auteur='.$id_auteur);
+		$statut = $champs['statut'] = $c['statut'];
+	
+	// Envoyer aux plugins
+	$champs = pipeline('pre_edition',
+		array(
+			'args' => array(
+				'table' => 'spip_auteurs',
+				'id_objet' => $id_auteur
+			),
+			'data' => $champs
+		)
+	);
 
+	if (!count($champs)) return;
+	sql_updateq('spip_auteurs', $champs , 'id_auteur='.$id_auteur);
+	include_spip('inc/modifier');
 	revision_auteur($id_auteur, $c);
+	
+	// Invalider les caches
+	include_spip('inc/invalideur');
+	suivre_invalideur("id='id_auteur/$id_auteur'");
+	
+	// Pipeline
+	pipeline('post_edition',
+		array(
+			'args' => array(
+				'table' => 'spip_auteurs',
+				'id_objet' => $id_auteur
+			),
+			'data' => $champs
+		)
+	);
+
+	// Notifications
+	if ($notifications = charger_fonction('notifications', 'inc')) {
+		$notifications('instituerauteur', $id_auteur,
+			array('statut' => $statut, 'statut_ancien' => $statut_ancien)
+		);
+	}
+
+	return ''; // pas d'erreur
+
 }
 
 ?>
