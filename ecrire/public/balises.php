@@ -491,11 +491,10 @@ function balise_LESAUTEURS_dist ($p) {
 		$connect = !$p->id_boucle ? '' 
 		  : $p->boucles[$p->id_boucle]->sql_serveur;
 
-		$p->code = "recuperer_fond(
-			'modeles/lesauteurs',
+		$p->code = "recuperer_fond('modeles/lesauteurs',
 			array('id_article' => ".champ_sql('id_article', $p)
 			."), array('trim'=>true), "
-			. sql_quote($connect)
+			. _q($connect)
 			.")";
 		$p->interdire_scripts = false; // securite apposee par recuperer_fond()
 	}
@@ -1117,7 +1116,6 @@ function balise_MODELE_dist($p) {
 	if (!$nom)
 		die("erreur de compilation #MODELE{nom du modele}");
 
-	$nom = "modeles/".$nom;
 	$champ = phraser_arguments_inclure($p, true); 
 
 	// a priori true
@@ -1141,7 +1139,7 @@ function balise_MODELE_dist($p) {
 
 	$connect = $p->boucles[$p->id_boucle]->sql_serveur;
 	$p->code = "( ((\$recurs=(isset(\$Pile[0]['recurs'])?\$Pile[0]['recurs']:0))<5)?
-	recuperer_fond('$nom', array(".join(',', $_contexte).",'recurs='.(++\$recurs), \$GLOBALS['spip_lang']), array('trim'=>true, 'modele'=>true), " . _q($connect) . "):'')";
+	recuperer_fond('modeles/$nom', \$l = array(".join(',', $_contexte).",'recurs='.(++\$recurs), \$GLOBALS['spip_lang']), array('trim'=>true, 'modele'=>true), " . _q($connect) . "):'')";
 	$p->interdire_scripts = false; // securite assuree par le squelette
 
 	// Gerer ajax
