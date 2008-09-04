@@ -429,7 +429,7 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 
 	$type = strtolower($type);
 
-	$fond = 'modeles/'.$type;
+	$fond = $class = '';
 
 	$params = array_filter(explode('|', $params));
 	if ($params) {
@@ -442,9 +442,9 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 		}
 
 		if (preg_match(',^[a-z0-9_]+$,', $soustype)) {
-			$fond = 'modeles/'.$type.'_'.$soustype;
-			if (!find_in_path($fond.'.html')) {
-				$fond = 'modeles/'.$type;
+			$fond =  $type.'_'.$soustype;
+			if (!find_in_path('modeles/'. $fond.'.html')) {
+				$fond = '';
 				$class = $soustype;
 			}
 			// enlever le sous type des params
@@ -454,15 +454,18 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 
 	// en cas d'echec : si l'objet demande a une url, on cree un petit encadre
 	// avec un lien vers l'objet ; sinon on passe la main au suivant
-	if (!find_in_path($fond.'.html')) {
-		if (!$lien)
-			$lien = calculer_url("$type$id", '', 'tout', $connect);
-		if (strpos($lien[1],'spip_url') !== false)
-			return false;
-		else
-			return '<a href="'.$lien[0].'" class="spip_modele'
+	if (!$fond) {
+		$fond = 'modeles/'.$type;
+		if (!find_in_path($fond.'.html')) {
+			if (!$lien)
+				$lien = calculer_url("$type$id", '', 'tout', $connect);
+			if (strpos($lien[1],'spip_url') !== false)
+				return false;
+			else
+				return '<a href="'.$lien[0].'" class="spip_modele'
 				. ($class ? " $class" : '')
 				. '">'.sinon($lien[2], _T('ecrire:info_sans_titre'))."</a>";
+		}
 	}
 
 
@@ -508,14 +511,7 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 	$GLOBALS['compt_note'] = 0;
 
 	// Appliquer le modele avec le contexte
-	$page = recuperer_fond($fond, $contexte, array('raw' => true));
-	$retour = $page['texte'];
-
-	// Lever un drapeau (global) si le modele utilise #SESSION
-	// a destination de public/parametrer
-	if (isset($page['invalideurs'])
-	AND isset($page['invalideurs']['session']))
-		$GLOBALS['cache_utilise_session'] = $page['invalideurs']['session'];
+	$retour = recuperer_fond($fond, $contexte);
 
 	// On restitue les globales de notes telles qu'elles etaient avant l'appel
 	// du modele. Si le modele n'a pas affiche ses notes, tant pis (elles *doivent*
@@ -536,19 +532,11 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 	} else if ($lien)
 		$retour = "<a href='".$lien[0]."' class='".$lien[1]."'>".$retour."</a>";
 
-	// Gerer ajax
-	if (isset($arg_list['ajax'])
-	AND $arg_list['ajax']=='ajax'
-	AND strlen($retour)) {
-		$retour = "<div class='ajaxbloc env-"
-			. encoder_contexte_ajax($contexte)
-			. "'>\n"
-			. $retour
-			. "</div><!-- ajaxbloc -->\n";
-	}
-
 	$compteur--;
-	return $retour;
+
+	return  (isset($arg_list['ajax'])AND $arg_list['ajax']=='ajax')
+	? encoder_contexte_ajax($contexte,'',$retour)
+	: $retour; 
 }
 
 // Un inclure_page qui marche aussi pour l'espace prive

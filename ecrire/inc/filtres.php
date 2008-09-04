@@ -2486,7 +2486,7 @@ function puce_changement_statut($id_objet, $statut, $id_rubrique, $type, $ajax=f
 // avec le secret du site, le gziper si possible...
 // l'entree peut etre serialisee (le #ENV** des fonds ajax et ajax_stat)
 // http://doc.spip.org/@encoder_contexte_ajax
-function encoder_contexte_ajax($c,$form='') {
+function encoder_contexte_ajax($c,$form='', $emboite=NULL) {
 	if (is_string($c)
 	AND !is_null(@unserialize($c)))
 		$c = unserialize($c);
@@ -2506,7 +2506,9 @@ function encoder_contexte_ajax($c,$form='') {
 		$c = gzdeflate($c);
 	$c = _xor($c);
 	$c = base64_encode($c);
-	return $c;
+	if ($emboite === NULL) return $c;
+	return !trim($emboite) ? '' :  
+	"<div class='ajaxbloc env-$c'>\n$emboite</div><!-- ajaxbloc -->\n";
 }
 
 // la procedure inverse de encoder_contexte_ajax()

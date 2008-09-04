@@ -1061,18 +1061,12 @@ function balise_INCLURE_dist($p) {
 		$connect = !$id_boucle ? '' 
 		  : $p->boucles[$id_boucle]->sql_serveur;
 
-		$p->code = "((\$p = evaluer_fond('', \$l = ".$l. ", " . _q($connect) .")) ? \$p['texte'] : '')";
+		$page = '$p = evaluer_fond("", $l = ' . $l. ", " . _q($connect) .')';
+		$retour = !isset($_contexte['ajax']) ? 
+		  "\$p['texte']" :
+		  'encoder_contexte_ajax($l,"",$p["texte"])';
 
-		// Gerer ajax
-		if (isset($_contexte['ajax'])) {
-			$p->code = '( // {ajax}
-				(strlen(trim($t = '.$p->code.')))
-				? "<div class=\'ajaxbloc env-"
-					.encoder_contexte_ajax($l)
-					."\'>\\n".$t."</div><!-- ajaxbloc -->\\n"
-				: ""
-			)';
-		}
+		$p->code = "(!($page) ? '' :\n\t$retour)";
 
 	} else {
 		$n = interprete_argument_balise(1,$p);
@@ -1138,20 +1132,16 @@ function balise_MODELE_dist($p) {
 	}
 
 	$connect = $p->boucles[$p->id_boucle]->sql_serveur;
-	$p->code = "( ((\$recurs=(isset(\$Pile[0]['recurs'])?\$Pile[0]['recurs']:0))<5)?
-	recuperer_fond('modeles/$nom', \$l = array(".join(',', $_contexte).",'recurs='.(++\$recurs), \$GLOBALS['spip_lang']), array('trim'=>true, 'modele'=>true), " . _q($connect) . "):'')";
-	$p->interdire_scripts = false; // securite assuree par le squelette
 
-	// Gerer ajax
-	if (isset($_contexte['ajax'])) {
-		$p->code = '( // {ajax}
-			strlen(trim($t = '.$p->code.'))
-			? "<div class=\'ajaxbloc env-"
-				.encoder_contexte_ajax($l)
-				."\'>\\n".$t."</div><!-- ajaxbloc -->\\n"
-			: ""
-		)';
-	}
+	$page = "\$p = recuperer_fond('modeles/$nom', \$l = array(".join(',', $_contexte).",'recurs='.(++\$recurs), \$GLOBALS['spip_lang']), array('trim'=>true, 'modele'=>true), " . _q($connect) . ")";
+
+	$retour = !isset($_contexte['ajax']) ? 
+		  '$p' :
+		  'encoder_contexte_ajax($l,"",$p)';
+
+	$p->code = "(((\$recurs=(isset(\$Pile[0]['recurs'])?\$Pile[0]['recurs']:0))>=5)? '' : (!($page) ? '' :\n\t$retour))";
+
+	$p->interdire_scripts = false; // securite assuree par le squelette
 
 	return $p;
 }
