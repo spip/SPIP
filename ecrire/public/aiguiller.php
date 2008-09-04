@@ -147,6 +147,7 @@ function traiter_formulaires_dynamiques($get=false){
 		if (_request('var_ajax')){
 			if (find_in_path('formulaire_.php','balise/',true)) {
 				include_spip('inc/actions');
+				include_spip('public/assembler');
 				array_unshift($args,$form);
 				ajax_retour(inclure_balise_dynamique(call_user_func_array('balise_formulaire__dyn',$args),false),false);
 				return true; // on a fini le hit
