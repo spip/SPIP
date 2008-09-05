@@ -86,7 +86,7 @@ function traiter_appels_inclusions_ajax(){
 			$contexte = calculer_contexte();
 			$contexte = array_merge($args, $contexte);
 			$page = recuperer_fond($fond,$contexte,array('trim'=>false));
-			$texte = $page['texte'];
+			$texte = $page;
 		}
 		else 
 			$texte = _L('signature ajax bloc incorrecte');
