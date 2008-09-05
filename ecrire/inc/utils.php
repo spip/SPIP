@@ -132,7 +132,7 @@ function pipeline($action, $val=null) {
 	// array_key_exists pour php 4.1.0
 	if (is_array($val)
 	  AND count($val)==2
-	  AND (isset($val['data']) OR in_array('data',array_keys($val))))
+	  AND (array_key_exists('data',$val)))
 		$val = $val['data'];
 	return $val;
 }
@@ -928,7 +928,10 @@ function generer_form_ecrire($script, $corps, $atts='', $submit='') {
 
 // http://doc.spip.org/@generer_form_action
 function generer_form_action($script, $corps, $atts='') {
-	return "\n<form action='" . (_DIR_RACINE  ? generer_url_ecrire() :  generer_url_public()) .
+	// si l'on est dans l'espace prive, on garde dans l'url
+	// l'exec a l'origine de l'action, qui permet de savoir si il est necessaire
+	// ou non de proceder a l'authentification (cas typique de l'install par exemple)
+	return "\n<form action='" . (_DIR_RACINE  ? generer_url_ecrire(_request('exec')) :  generer_url_public()) .
 	  "'" .
 	  $atts .
 	  ">\n" .
@@ -940,15 +943,15 @@ function generer_form_action($script, $corps, $atts='') {
 
 // http://doc.spip.org/@generer_url_action
 function generer_url_action($script, $args="", $no_entities=false ,$rel = false) {
-	$url = _DIR_RACINE  ? generer_url_ecrire() :  generer_url_public();
+	// si l'on est dans l'espace prive, on garde dans l'url
+	// l'exec a l'origine de l'action, qui permet de savoir si il est necessaire
+	// ou non de proceder a l'authentification (cas typique de l'install par exemple)
+	$url = _DIR_RACINE  ? generer_url_ecrire(_request('exec')) :  generer_url_public();
 	$url = parametre_url($url,'action',$script);
 	if ($args) $url .= quote_amp('&'.$args);
 	
 	if ($no_entities) $url = str_replace('&amp;','&',$url);
 	return $url;
-	return  generer_url_public('',
-	                        "action=$script" .($args ? "&$args" : ''),
-	                        $no_entities);
 }
 
 
