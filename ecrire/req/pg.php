@@ -389,6 +389,9 @@ function spip_pg_frommysql($arg)
 	$res = preg_replace('/\bconv[(]([^,]*)[^)]*[)]/i',
 			    'CAST(substring(\1, \'^ *[0-9]+\') as int)',
 			    $res);
+
+	$res = preg_replace('/FROM_UNIXTIME/i', 'ABSTIME', $res);
+
 	$res = preg_replace('/UNIX_TIMESTAMP\s*[(]\s*[)]/',
 			    ' EXTRACT(epoch FROM NOW())', $res);
 
