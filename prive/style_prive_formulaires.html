@@ -1,3 +1,4 @@
+#CACHE{0}
 [(#REM)
 
 	Ce squelette definit les styles de l'espace prive
@@ -93,6 +94,7 @@
 .formulaire_spip textarea {
 	width: 93.6%;
 	padding: 10px;
+	overflow: auto;
 }
 .formulaire_spip input.submit, 
 .formulaire_spip input.reset, 
@@ -179,8 +181,6 @@ li.extra label,
 .formulaire_spip li.editer_new_pass2 label,
 .formulaire_spip li.editer_statut label
 {
-	display: block;
-
 	width: 100px;
 
 	float: #GET{left};
@@ -226,7 +226,12 @@ li.extra label,
 	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee})], bottom [(#GET{left})] no-repeat })]
 
 }
-.formulaire_spip li fieldset legend { margin-top: 10px; margin-left: 10px; }
+.formulaire_spip li fieldset legend {
+	clear: both;
+	
+	margin-top: 10px; 
+	margin-#GET{left}: 10px; 
+}
 
 
 .formulaire_spip li p {
@@ -239,8 +244,10 @@ li.extra label,
 	margin:0;
 	padding:0 0 0px 0;
 	border:0;
+	position: relative;
 }
 .formulaire_spip li fieldset {
+	position: relative;
 	margin-left: -10px;
 	margin-right: -10px;
 	padding-bottom: 10px;
@@ -251,10 +258,10 @@ li.extra label,
 .formulaire_spip li em.aide {
 	display: -moz-inline-box;
 	display: inline-block;
-	margin-#GET{left}:-28px; 
-	margin-top: 4px;
+	margin-#GET{left}: -28px; 
+	padding-top: 6px;
 	height: 12px;
-	vertical-align: center;
+	vertical-align: top;
 }
 
 .formulaire_spip li.editer_titre em.aide,
@@ -335,9 +342,6 @@ li.extra label,
 }
 /* Remarques importantes */
 .formulaire_spip em.attention { display: block; margin: 0.5em; font-weight: normal; }
-
-
-
 
 /*
  * Cas particuliers
