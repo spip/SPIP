@@ -470,10 +470,10 @@ function envoi_link($nom_site_spip, $minipres=false) {
 	// CSS espace prive : la vraie
 	. '<link rel="stylesheet" type="text/css" href="'
 	. generer_url_public('style_prive', $paramcss) .'" />' . "\n"
-  . "<!--[if lt IE 8]>\n"
-  . '<link rel="stylesheet" type="text/css" href="'
-  . generer_url_public('style_prive_ie', $paramcss) .'" />' . "\n"
-  . "<![endif]-->\n"
+	. "<!--[if lt IE 8]>\n"
+	. '<link rel="stylesheet" type="text/css" href="'
+	. generer_url_public('style_prive_ie', $paramcss) .'" />' . "\n"
+	. "<![endif]-->\n"
 
 	// CSS optionelle minipres
 	. ($minipres?'<link rel="stylesheet" type="text/css" href="'
@@ -498,6 +498,10 @@ function envoi_link($nom_site_spip, $minipres=false) {
 	$res .= '<link rel="shortcut icon" href="'
 	. url_absolue($favicon)
 	. "\" type='image/x-icon' />\n";
+	
+	$res .= "<!--[if lt IE 8]>
+		<script src='http://ie7-js.googlecode.com/svn/version/2.0(beta3)/IE8.js' type='text/javascript'></script>
+		<![endif]-->";
 
 	$js = debut_javascript();
 
