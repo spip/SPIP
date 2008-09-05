@@ -406,7 +406,9 @@ function urls_arbo_dist(&$entite, $i, $args='', $ancre='') {
 		$url_propre = $r[1];
 	}
 
-	if (!$url_propre) return;
+	if (!$url_propre) return; // qu'est-ce qu'il veut ???
+	
+	include_spip('base/abstract_sql'); // chercher dans la table des URLS
 
 	// Compatilibite avec propres2
 	$url_propre = preg_replace(',\.html$,i', '', $url_propre);
