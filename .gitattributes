@@ -3,9 +3,7 @@
 config/remove.txt -text
 dist/feed.png -text
 dist/formulaires/ecrire_auteur.php -text
-dist/formulaires/forum/charger.php -text
-dist/formulaires/forum/traiter.php -text
-dist/formulaires/forum/verifier.php -text
+dist/formulaires/forum.php -text
 dist/formulaires/inc-choix_mots.html -text
 dist/formulaires/inc-forum_ajouter_mot.html -text
 dist/formulaires/inc-forum_bloc_choix_mots.html -text
