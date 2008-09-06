@@ -21,9 +21,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@assembler
 function assembler($fond, $connect='') {
 
-	global $flag_preserver,$lastmodified, $use_cache;
+	global $flag_preserver,$lastmodified, $use_cache, $contexte;
 
-	$GLOBALS['contexte'] = calculer_contexte();
+	$contexte = calculer_contexte();
 	// Cette fonction est utilisee deux fois
 	$cacher = charger_fonction('cacher', 'public');
 	// Garnir ces quatre parametres avec les infos sur le cache
@@ -65,10 +65,21 @@ function assembler($fond, $connect='') {
 		if (!$use_cache)  {
 		// Informer les boutons d'admin du contexte
 		// (fourni par assembler_contexte lors de la mise en cache)
-			$GLOBALS['contexte'] = $page['contexte'];
+			$contexte = $page['contexte'];
 		}
-		// sinon analyser le contexte & calculer la page
+		// sinon rajouter les dates dans le contexte
+		// lui rajouter les parametres implcites des URLs symboliques
+		// et calculer la page
 		else {
+			include_spip('inc/filtres'); // pour normaliser_date
+
+			if (!isset($contexte['date']))
+				$contexte['date'] = date("Y-m-d H:i:s");
+			else $contexte['date'] = normaliser_date($contexte['date']);
+
+			if (!isset($contexte['date_redac']))
+				$contexte['date_redac'] = date("Y-m-d H:i:s");
+			else $contexte['date_redac'] = normaliser_date($contexte['date_redac']);
 			assembler_contexte($fond);
 			$parametrer = charger_fonction('parametrer', 'public');
 			$page = $parametrer($fond, $GLOBALS['contexte'], $chemin_cache, $connect);
@@ -139,7 +150,7 @@ function assembler_contexte(&$fond)
 
 //
 // Contexte : lors du calcul d'une page spip etablit le contexte a partir
-// des variables $_GET et $_POST, et leur ajoute la date
+// des variables $_GET et $_POST, purgees des fausses variables var_*
 // Note : pour hacker le contexte depuis le fichier d'appel (page.php),
 // il est recommande de modifier $_GET['toto'] (meme si la page est
 // appelee avec la methode POST).
@@ -194,25 +205,9 @@ function inclure_page($fond, $contexte, $connect='') {
 	// Si use_cache vaut 0, la page a ete tiree du cache et se trouve dans $page
 	if (!$use_cache) {
 		$lastmodified = max($lastmodified, $lastinclude);
-	}
-	// sinon on la calcule et on ajoute la date (et date_redac)
-	// dans le contexte, pour que les criteres {age} etc fonctionnent
-	// ATTENTION : les balises dynamiques passent par la, 
-	// l'ajout de la date/heure/seconde rend tout cache invalide,
-	// meme si le reste des arguments est constant
-	// probleme possible de perf ici
-	else {
-		include_spip('inc/filtres'); // pour normaliser_date
-		if (isset($contexte['date']))
-			$contexte['date'] = normaliser_date($contexte['date']);
-		else	$contexte['date'] = date("Y-m-d H:i:s");
-
-		if (!isset($contexte['date_redac']))
-			$contexte['date_redac'] = $contexte['date'];
-		else $contexte['date_redac'] = normaliser_date($contexte['date_redac']);
+	} else {
 		$parametrer = charger_fonction('parametrer', 'public');
 		$page = $parametrer($fond, $contexte, $chemin_cache, $connect);
-
 		$lastmodified = time();
 		// et on l'enregistre sur le disque
 		if ($chemin_cache
