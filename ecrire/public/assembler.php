@@ -589,7 +589,7 @@ function page_base_href(&$texte){
 		// activer par defaut
 		define('_SET_HTML_BASE',
 			$GLOBALS['profondeur_url'] >= 1
-			AND !_request(_SPIP_PAGE)
+			AND _request(_SPIP_PAGE) !== 'login'
 			AND !_request('action'));
 
 	if (_SET_HTML_BASE
