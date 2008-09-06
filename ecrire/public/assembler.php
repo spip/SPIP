@@ -167,6 +167,9 @@ function calculer_contexte() {
 		if (strpos($var, 'var_') !== 0)
 			$contexte[$var] = $val;
 	}
+
+	$contexte['var_uri'] = nettoyer_uri();
+
 	return $contexte;
 }
 
