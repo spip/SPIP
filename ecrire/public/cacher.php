@@ -20,36 +20,38 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@generer_nom_fichier_cache
 function generer_nom_fichier_cache($contexte) {
 
-	$fichier_requete = '';
-	foreach ($contexte as $var=>$val)
-		$fichier_requete .= '&'.$var.'='
-		. (is_array($val) ? var_export($val,true) : strval($val));
+	$uri = preg_replace('/[?].*$/', '', 
+		preg_replace(',\.[a-zA-Z0-9]*,', '',
+			     str_replace('/', '_', $GLOBALS['REQUEST_URI'])));
 
-	$fichier_cache = preg_replace(',^/+,', '', $fichier_requete);
-	$fichier_cache = preg_replace(',\.[a-zA-Z0-9]*,', '', $fichier_cache);
-	$fichier_cache = preg_replace(',&[^&]+=([^&]+),', '&\1', $fichier_cache);
-	$fichier_cache = rawurlencode(strtr($fichier_cache, '/&-', '--_'));
-	if (strlen($fichier_cache) > 24)
-		$fichier_cache = substr(preg_replace('/([a-zA-Z]{1,3})[^-]*-/',
-		'\1-', $fichier_cache), -22);
+	$cache = '';
+	foreach ($contexte as $val)
+		$cache .= '-' . str_replace('-', '_', 
+		     (is_array($val) ? var_export($val,true) : strval($val)));
 
-	// Pour la page d'accueil
-	if (!$fichier_cache)
-		$fichier_cache = 'INDEX-';
+	$cache = rawurlencode($cache);
+
+	// Pour la page d'accueil et les url reduites a page=type_url
+
+	if (strlen($cache) <= 10) $cache .= '-' . $uri;
+
+	if (strlen($cache) > 24)
+		$cache = preg_replace('/([a-zA-Z]{1,3})[^-_]*[-_]/', '\1-', $cache);
+	$cache = substr($cache, 0, 24);
 
 	// Morceau de md5 selon HOST, $dossier_squelettes, $fond et $marqueur
 	// permet de changer de chemin_cache si l'on change l'un de ces elements
 	// donc, par exemple, de gerer differents dossiers de squelettes
 	// en parallele, ou de la "personnalisation" via un marqueur (dont la
 	// composition est totalement libre...)
-	$md_cache = md5(
-		$fichier_requete . ' '
+	$md_cache = md5($uri . ' '
 		. $_SERVER['HTTP_HOST'] . ' '
 		. $GLOBALS['fond'] . ' '
 		. $GLOBALS['dossier_squelettes'] . ' '
 		. (isset($GLOBALS['marqueur']) ?  $GLOBALS['marqueur'] : '')
 	);
-	$fichier_cache .= '.'.substr($md_cache, 1, 8);
+
+	$cache .= '-'.substr($md_cache, 1, 32-strlen($cache));
 
 	// Sous-repertoires 0...9a..f ; ne pas prendre la base _DIR_CACHE
 	$rep = _DIR_CACHE;
@@ -60,7 +62,7 @@ function generer_nom_fichier_cache($contexte) {
 	}
 	$subdir = sous_repertoire($rep, substr($md_cache, 0, 1), true,true);
 
-	return $subdir.$fichier_cache;
+	return $subdir.$cache;
 }
 
 // Faut-il compresser ce cache ? A partir de 16ko ca vaut le coup

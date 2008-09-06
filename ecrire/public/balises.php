@@ -103,7 +103,6 @@ function balise_DATE_dist ($p) {
 #	if ($d === "@\$Pile[0]['date']")
 #		$d = "isset(\$Pile[0]['date']) ? $d : time()";
 	$p->code = "normaliser_date($d)";
-	spip_log("balise_DATE retourne $d");
 	return $p;
 }
 
