@@ -77,6 +77,7 @@ $GLOBALS['codes_langues'] = array(
 	'gn' => "Guarani",
 	'gu' => "Gujarati",
 	'ha' => "Hausa",
+	'hbo' => "Ancient Hebrew", // hebreu classique ou biblique
 	'he' => "&#1506;&#1489;&#1512;&#1497;&#1514;",
 	'hi' => "&#2361;&#2367;&#2306;&#2342;&#2368;",
 	'hr' => "hrvatski",
