@@ -24,11 +24,16 @@ function assembler($fond, $connect='') {
 	global $flag_preserver,$lastmodified, $use_cache, $contexte;
 
 	$contexte = calculer_contexte();
+	$page = preg_replace('/[?].*$/', '', 
+		preg_replace(',\.[a-zA-Z0-9]*,', '',
+		str_replace('/', '_', $GLOBALS['REQUEST_URI'])));
+
 	// Cette fonction est utilisee deux fois
 	$cacher = charger_fonction('cacher', 'public');
-	// Garnir ces quatre parametres avec les infos sur le cache
-	// Si un resultat est retourne, c'est un message d'impossibilite
+	// Les quatre derniers parametres sont modifes par la fonction:
+	// emplacement, validite, et, s'il est valide, contenu & age
 	$res = $cacher($GLOBALS['contexte'], $use_cache, $chemin_cache, $page, $lastmodified);
+	// Si un resultat est retourne, c'est un message d'impossibilite
 	if ($res) {return array('texte' => $res);}
 
 	if (!$chemin_cache || !$lastmodified) $lastmodified = time();
@@ -191,16 +196,15 @@ function inclure_page($fond, $contexte, $connect='') {
 
 	global $lastmodified;
 
-	// pour calculer correctement le nom du cache
-	$contexte['fond'] = $fond; 
-	$cacher = charger_fonction('cacher', 'public');
-	// Garnir ces quatre parametres avec les infos sur le cache :
-	// emplacement, validite, et, s'il est valide, contenu & age
-	$res = $cacher($contexte, $use_cache, $chemin_cache, $page, $lastinclude);
 	// enlever le fond de contexte inclus car sinon il prend la main
 	// dans les sous inclusions -> boucle infinie d'inclusion identique
 	unset($contexte['fond']);
-
+	// mais le donner pour le calcul du cache
+	$page = $fond; 
+	$cacher = charger_fonction('cacher', 'public');
+	// Les quatre derniers parametres sont modifes par la fonction:
+	// emplacement, validite, et, s'il est valide, contenu & age
+	$res = $cacher($contexte, $use_cache, $chemin_cache, $page, $lastinclude);
 	if ($res) {return array('texte' => $res);}
 
 	// Si use_cache vaut 0, la page a ete tiree du cache et se trouve dans $page
