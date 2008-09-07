@@ -80,10 +80,23 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 	if (!$code) // squelette inconnu ou faux
 		$page = array();
 	else {
-	// Appeler la fonction principale du squelette 
+	// Preparer l'appel de la fonction principale du squelette 
+
 		list($fonc) = $code;
 		spip_timer($a = 'calcul page '.rand(0,1000));
 		$notes = calculer_notes(); // conserver les notes...
+
+		// Rajouter d'office ces deux parametres
+		// (mais vaudrait mieux que le compilateur sache le simuler
+		// car ca interdit l'usage de criteres conditionnels dessus).
+		if (!isset($contexte['date']))
+			$contexte['date'] = date("Y-m-d H:i:s");
+		else $contexte['date'] = normaliser_date($contexte['date']);
+
+		if (!isset($contexte['date_redac']))
+			$contexte['date_redac'] = date("Y-m-d H:i:s");
+		else $contexte['date_redac'] = normaliser_date($contexte['date_redac']);
+
 	// Passer le nom du cache pour produire sa destruction automatique
 		$page = $fonc(array('cache' => $cache), array($contexte));
 
