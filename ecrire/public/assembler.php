@@ -25,8 +25,7 @@ function assembler($fond, $connect='') {
 
 	$contexte = calculer_contexte();
 	$page = preg_replace('/[?].*$/', '', 
-		preg_replace(',\.[a-zA-Z0-9]*,', '',
-		str_replace('/', '_', $GLOBALS['REQUEST_URI'])));
+		preg_replace(',\.[a-zA-Z0-9]*$,', '', $GLOBALS['REQUEST_URI']));
 
 	// Cette fonction est utilisee deux fois
 	$cacher = charger_fonction('cacher', 'public');
@@ -173,11 +172,8 @@ function calculer_contexte() {
 			$contexte[$var] = $val;
 	}
 
-	$contexte['var_uri'] = nettoyer_uri();
-
 	return $contexte;
 }
-
 
 //
 // 2 fonctions pour compatibilite arriere. Sont probablement superflues

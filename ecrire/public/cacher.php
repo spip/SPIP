@@ -27,9 +27,11 @@ function generer_nom_fichier_cache($contexte, $page) {
 
 	// Pour la page d'accueil et les url reduites a page=type_url
 
-	if (strlen($cache) <= 10) $cache .= '-' . $page;
+	if (strlen($cache) <= 10)
+		$cache .= '-' . $page;
+	else $cache = substr($cache,1);
 
-	$cache = rawurlencode($cache);
+	$cache = str_replace('/', '_', rawurlencode($cache));
 
 	if (strlen($cache) > 24) {
 		$cache = preg_replace('/([a-zA-Z]{1,3})[^-_]*[-_]/', '\1-', $cache);
