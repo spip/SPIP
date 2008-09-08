@@ -21,7 +21,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function generer_nom_fichier_cache($contexte, $page) {
 
 	$cache = $page . '-';
-	foreach ($contexte as $val) {
+	foreach ($contexte as $var=>$val) {
 		$val = is_array($val) ? var_export($val,true) : strval($val);
 		$cache .= str_replace('-', '_', $val) . '-' ;
 	}
@@ -39,6 +39,7 @@ function generer_nom_fichier_cache($contexte, $page) {
 	// en parallele, ou de la "personnalisation" via un marqueur (dont la
 	// composition est totalement libre...)
 	$md_cache = md5($page . ' '
+		. var_export($contexte,true)
 		. $_SERVER['HTTP_HOST'] . ' '
 		. $GLOBALS['dossier_squelettes'] . ' '
 		. (isset($GLOBALS['marqueur']) ?  $GLOBALS['marqueur'] : '')
