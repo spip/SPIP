@@ -20,16 +20,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@generer_nom_fichier_cache
 function generer_nom_fichier_cache($contexte, $page) {
 
-	$cache = '';
-	foreach ($contexte as $val)
-		$cache .= '-' . str_replace('-', '_', 
-		     (is_array($val) ? var_export($val,true) : strval($val)));
-
-	// Pour la page d'accueil et les url reduites a page=type_url
-
-	if (strlen($cache) <= 10)
-		$cache .= '-' . $page;
-	else $cache = substr($cache,1);
+	$cache = $page . '-';
+	foreach ($contexte as $val) {
+		$val = is_array($val) ? var_export($val,true) : strval($val);
+		$cache .= str_replace('-', '_', $val) . '-' ;
+	}
 
 	$cache = str_replace('/', '_', rawurlencode($cache));
 
