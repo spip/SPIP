@@ -22,6 +22,7 @@ function formulaires_recherche_charger_dist($lien_filtre = NULL,$lien_arg = NULL
 
 	return 
 		array(
+			'action' => '', # action ne sert pas dans ce formulaire
 			'lien' => ($lien ? $lien : generer_url_public('recherche')),
 			'recherche' => _request('recherche'),
 			'lang' => $lang

@@ -17,14 +17,9 @@
 	il faudra certainement redessiner toute la page pour afficher le nouveau
 	forum
 
-][<form action="#ENV{url}#formulaire_forum" method="post" class="noajax">
+][<form action="#ENV{action}#formulaire_forum" method="post" class="noajax">
 	<div>
-	[(#ACTION_FORMULAIRE{#ENV{url_post}})]
-	[<input type="hidden" name="arg" value="(#ENV{arg})" />]
-	[<input type="hidden" name="hash" value="(#ENV{hash})" />]
-	[<input type="hidden" name="verif_(#ENV{hash})" value="ok" />]
-	[<input type="hidden" name="afficher_texte" value="(#ENV{afficher_texte})" />]
-	[<input type="hidden" name="retour_forum" value="(#ENV*{retour_forum})" />]
+	[(#ACTION_FORMULAIRE{#ENV{action}})]
 	<input type='hidden' name='titre' value="#ENV{titre}" />
 	<input type='hidden' name='texte' value="#ENV{texte}" />
 	<input type='hidden' name='url_site' value="#ENV{url_site}" />
@@ -36,13 +31,8 @@
 </form>]
 
 
-<form action="#ENV{url}#formulaire_forum" method="post" enctype='multipart/form-data'><div>
-[(#ACTION_FORMULAIRE{#ENV{url_post}})]
-[<input type="hidden" name="arg" value="(#ENV{arg})" />]
-[<input type="hidden" name="hash" value="(#ENV{hash})" />]
-[<input type="hidden" name="verif_(#ENV{hash})" value="ok" />]
-[<input type="hidden" name="afficher_texte" value="(#ENV{afficher_texte})" />]
-[<input type="hidden" name="retour_forum" value="(#ENV*{retour_forum})" />]
+<form action="#ENV{action}#formulaire_forum" method="post" enctype='multipart/form-data'><div>
+[(#ACTION_FORMULAIRE{#ENV{action}})]
 [<input type="hidden" name="id_forum" value="(#ENV*{id_forum})" />]
 [<fieldset>
 	<legend><:bouton_radio_modere_priori:></legend>
