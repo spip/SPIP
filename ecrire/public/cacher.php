@@ -189,7 +189,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 
 	// Cas ignorant le cache car completement dynamique
 	if ($_SERVER['REQUEST_METHOD'] == 'POST'
-	OR (@substr($contexte['fond'],0,8)=='modeles/') 
+	OR (substr($page,0,8)=='modeles/') 
 	OR (_request('connect'))
 // Mode auteur authentifie appelant de ecrire/ : il ne faut rien lire du cache
 // et n'y ecrire que la compilation des squelettes (pas les pages produites)
