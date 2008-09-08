@@ -248,18 +248,18 @@ function langue_naviguer($id_rubrique, $id_parent, $flag_editable)
 			$langue_rubrique = $langue_parent;
 
 		$res .= debut_cadre_enfonce('langues-24.gif', true);
-		$res .= bouton_block_depliable(_T('titre_langue_rubrique')."&nbsp; (".traduire_nom_langue($langue_rubrique).")",false,'languesrubrique');
+		#$res .= bouton_block_depliable(_T('titre_langue_rubrique')."&nbsp; (".traduire_nom_langue($langue_rubrique).")",false,'languesrubrique');
 
-		$res .= debut_block_depliable(false,'languesrubrique');
-		$res .= "<div class='verdana2' style='text-align: center;'>";
+		#$res .= debut_block_depliable(false,'languesrubrique');
+		$res .= "<div class='langue'>";
 		if ($menu = liste_options_langues('changer_lang', $langue_rubrique, $langue_parent)) {
 			$lien = redirige_action_auteur('instituer_langue_rubrique', "$id_rubrique-$id_parent","naviguer","id_rubrique=$id_rubrique");
 			$lien = ("\nonchange=\"document.location.href='$lien" .
 				 "&amp;changer_lang='+this.options[this.selectedIndex].value\"");
-			$res .= select_langues('changer_lang', $lien, $menu);
+			$res .= select_langues('changer_lang', $lien, $menu, _T('titre_langue_rubrique'));
 		}
 		$res .=  "</div>\n";
-		$res .=  fin_block();
+		#$res .=  fin_block();
 		$res .=  fin_cadre_enfonce(true);
 	}
 	return $res;
