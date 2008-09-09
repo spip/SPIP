@@ -19,9 +19,9 @@ function configuration_redacteurs_dist()
 {
 	$res = "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">"
 	. "\n<tr><td class='verdana2'>"
-	. "<blockquote><p><i>"
+#	. "<blockquote><p><i>"
 	. _T('info_question_inscription_nouveaux_redacteurs')
-	. "</i></p></blockquote>"
+#	. "</i></p></blockquote>"
 	. "</td></tr>"
 	. "\n<tr><td align='center' class='verdana2'>"
 	. afficher_choix('accepter_inscriptions', $GLOBALS['meta']["accepter_inscriptions"],

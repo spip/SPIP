@@ -34,7 +34,7 @@
 
 	[(#REM) Afficher un moteur de recherche si plus de 30 signatures]
 	[(#_signatures:GRAND_TOTAL|>{30}|oui)
-	<div class="formulaire_spip formulaire_recherche" id="formulaire_recherche_signatures"><label for="recherche_signatures"><:info_rechercher:></label> <input type="text" class="text" size="10" name="recherche_signatures" id="recherche_signatures" /> <input type="submit" class="submit" value="<:info_rechercher:>" /></div>
+	<div class="formulaire_spip formulaire_recherche" id="formulaire_recherche_signatures"><label for="recherche_signatures"><:info_rechercher:></label> <input type="text" class="text" size="10" name="recherche_signatures" id="recherche_signatures" style='font-style: italic;' value=" <:entree_signature:>"/> <input type="submit" class="submit" value="<:info_rechercher:>" /></div>
 	]
 </form>
 </div><!--#signatures-->
