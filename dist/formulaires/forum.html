@@ -92,8 +92,8 @@
 	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{document_forum})</span>]
 	<input type="hidden" name="cle_ajouter_document" value="(#ENV{cle_ajouter_document})" />
 	[<div id="ajouter_document_up">(#ENV{ajouter_document})
-	<input type='checkbox' name='supprimer_document_ajoute' id='supprimer_document_ajoute' />
-	<label for="supprimer_document_ajoute"><:lien_supprimer:></label>
+	<label for="supprimer_document_ajoute"><input type='checkbox' name='supprimer_document_ajoute' id='supprimer_document_ajoute' />
+	<:lien_supprimer:></label>
 	</div>]
 	<div>
 	[<label for="ajouter_document">(#ENV{formats_documents_forum}|join{', '})</label>]
