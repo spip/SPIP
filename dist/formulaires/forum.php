@@ -247,7 +247,7 @@ function forum_documents_acceptes()
 	$formats = trim($GLOBALS['meta']['formats_documents_forum']);
 	if (!$formats) return array();
 	if ($formats !== '*') 
-		$formats = preg_split('/[^a-zA-Z0-9/+_]+', $formats);
+		$formats = array_filter(preg_split(',[^a-zA-Z0-9/+_],', $formats));
 	else {
 		include_spip('base/typedoc');
 		$formats =  array_keys($GLOBALS['tables_mime']);
