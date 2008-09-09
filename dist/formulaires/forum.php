@@ -83,9 +83,9 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour) {
 
 	// l'ajout de documents est-il autorise ?
 	// cf. verifier.php
-	if ($formats_documents_forum = array_filter(array_map('trim', explode(',',$GLOBALS['meta']['formats_documents_forum'])))){
+	if ($formats = forum_documents_acceptes()) {
 		include_spip('inc/securiser_action');
-		$cle_ajouter_document = calculer_cle_action($a = 'ajouter-document-'.join('-',array_map('intval',$ids)));
+		$cle_ajouter_document = calculer_cle_action('ajouter-document-'.join('-',array_map('intval',$ids)));
 	}
 
 	return array(
@@ -99,7 +99,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour) {
 		'_hidden' => $script_hidden, # pour les variables hidden
 		'url_site' => "http://",
 		'cle_ajouter_document' => $cle_ajouter_document,
-		'formats_documents_forum' => $formats_documents_forum,
+		'formats_documents_forum' => $formats,
 		'ajouter_document' => $_FILES['ajouter_document']['name'],
 		'nobot' => _request('nobot'),
 		'ajouter_groupe' => $ajouter_groupe,
@@ -179,7 +179,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour){
 		} else {
 			include_spip('inc/ajouter_documents');
 			list($extension,$doc['name']) = fixer_extension_document($doc);
-			$acceptes = array_map('trim', explode(',',$GLOBALS['meta']['formats_documents_forum']));
+			$acceptes = forum_documents_acceptes();
 
 			if (!in_array($extension, $acceptes)) {
 				# normalement on n'arrive pas ici : pas d'upload si aucun format
@@ -209,7 +209,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour){
 	}
 	// restaurer le document uploade au tour precedent
 	else if (file_exists($tmp.'.bin')) {
-		if (_request('suprimer_document_ajoute')) {
+		if (_request('supprimer_document_ajoute')) {
 			spip_unlink($tmp.'.bin');
 			spip_unlink($tmp.'.txt');
 		} else if (lire_fichier($tmp.'.txt', $meta))
@@ -242,6 +242,19 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour){
 	return $erreurs;
 }
 
+function forum_documents_acceptes()
+{
+	$formats = trim($GLOBALS['meta']['formats_documents_forum']);
+	if (!$formats) return array();
+	if ($formats !== '*') 
+		$formats = preg_split('/[^a-zA-Z0-9/+_]+', $formats);
+	else {
+		include_spip('base/typedoc');
+		$formats =  array_keys($GLOBALS['tables_mime']);
+	}
+	sort($formats);
+	return $formats;
+}
 
 // http://doc.spip.org/@inclure_previsu
 function inclure_previsu($texte,$titre, $url_site, $nom_site, $ajouter_mot, $doc)
