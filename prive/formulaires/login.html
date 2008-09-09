@@ -63,6 +63,7 @@ var alea_actuel='#ENV{_alea_actuel}';
 var alea_futur='#ENV{_alea_futur}';
 var login='#ENV{var_login,''}';
 var informe_auteur_en_cours = false;
+var attente_informe = 0;
 function affiche_login_secure() {
 	if (alea_actuel)
 		jQuery('#pass_securise').show();
@@ -114,7 +115,10 @@ jQuery('form#formulaire_login').submit(function(){
 	// ne pas laisser le pass d'un auteur "auth=spip" circuler en clair
 	if (pass) {
 		// si l'information est en cours, retenter sa chance
-		if (informe_auteur_en_cours) {
+		// pas plus de 5 fois (si profondeur_url fausse, la requete d'information echoue et ne repond jamais)
+		if (informe_auteur_en_cours && (attente_informe<5)) { 
+			attente_informe++;
+			jQuery('form#formulaire_login').animeajax().find('p.boutons input').before(attente_informe); // montrer qu'il se passe quelque chose
 			setTimeout(function(){
 				jQuery('form#formulaire_login').submit();
 			}, 1000);
