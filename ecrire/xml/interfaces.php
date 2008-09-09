@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 define('_REGEXP_DOCTYPE',
 	'/^((<\001?[?][^>]*>)*\s*(<!--.*?-->)*)*<!DOCTYPE\s+(\w+)\s+(\w+)\s*([^>]*)>\s*/');
 
-define('_REGEXP_XML_RSS', '/^([^<]*<[?]xml[^>]*>\s*)<rss/');
+define('_REGEXP_XML_RSS', '/^(\s*(<[?][^x>][^>]*>\s*)?<[?]xml[^>]*>\s*)<rss/');
 
 define('_MESSAGE_DOCTYPE', '<!-- SPIP CORRIGE -->');
 
