@@ -10,14 +10,17 @@
 	  <input type='hidden' name='id_auteur' value='#ENV{id_auteur}' />
 	  [<input type='hidden' name='lier_id_article' value='(#ENV{lier_id_article})' />]
 	  [<input type='hidden' name='redirect' value='(#ENV**{redirect})' />]
-	  <fieldset>
 	  <ul>
-	    <li class="editer_nom obligatoire[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
-			<label for="nom"><:titre_cadre_signature_obligatoire:></label>
-			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom})</span>]
-			<p class='explication'><:entree_nom_pseudo:></p>
-			<input type='text' class='text' name='nom' id='nom' value="[(#ENV**{nom,#VAL{ecrire:item_nouvel_auteur}|_T})]"
-			[(#ENV{nom,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
+	    <li class="editer_nom obligatoire[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur] editer_type_input">
+	    	<div class="label">
+				<label for="nom"><:titre_cadre_signature_obligatoire:></label>
+			</div>
+			<div class="edition">
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom})</span>]
+				<p class='explication'><:entree_nom_pseudo:></p>
+				<input type='text' class='text' name='nom' id='nom' value="[(#ENV**{nom,#VAL{ecrire:item_nouvel_auteur}|_T})]"
+				[(#ENV{nom,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
+			</div>
 	    </li>
 	    [(#REM)
 	    	Modification de l'email
@@ -27,42 +30,62 @@
 		[(#AUTORISER{modifier,auteur,#ENV{id_auteur},#NULL,#ARRAY{email,?}}|non)
 		  #SET{disable,disabled='disabled'}
 		]
-	    <li class="editer_email[ (#ENV**{erreurs}|table_valeur{email}|oui)erreur]">
-			<label for="email"><:entree_adresse_email:></label>
-			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email})</span>]
-			[(#GET{disable}|oui) <p class='explication'><:info_reserve_admin:></p>]
-			<input type='text' class='text[ (#GET{disable}|oui)disabled]' name='email' id='email' value="[(#ENV**{email})]" #GET{disable}/>
+	    <li class="editer_email[ (#ENV**{erreurs}|table_valeur{email}|oui)erreur] editer_type_input">
+	    	<div class="label">
+				<label for="email"><:entree_adresse_email:></label>
+			</div>
+			<div class="edition">
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email})</span>]
+				[(#GET{disable}|oui) <p class='explication'><:info_reserve_admin:></p>]
+				<input type='text' class='text[ (#GET{disable}|oui)disabled]' name='email' id='email' value="[(#ENV**{email})]" #GET{disable}/>
+			</div>
 	    </li>
-	    <li class="editer_bio[ (#ENV**{erreurs}|table_valeur{bio}|oui)erreur]">
-			<label for="bio"><:entree_infos_perso:></label>
-			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{bio})</span>]
-			<p class="explication"><:entree_biographie:></p>
-			<textarea name='bio' id='bio' rows='4' cols='40'>[(#ENV**{bio})]</textarea>
+	    <li class="editer_bio[ (#ENV**{erreurs}|table_valeur{bio}|oui)erreur] editer_type_textarea">
+	    	<div class="label">
+				<label for="bio"><:entree_infos_perso:></label>
+			</div>
+			<div class="edition">
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{bio})</span>]
+				<p class="explication"><:entree_biographie:></p>
+				<textarea name='bio' id='bio' rows='4' cols='40'>[(#ENV**{bio})]</textarea>
+			</div>
 	    </li>
 	    [(#REM)
 	    	Cle PGP
 		]		  
-	    <li class="editer_pgp[ (#ENV**{erreurs}|table_valeur{pgp}|oui)erreur]">
-			<label for="pgp"><:entree_cle_pgp:></label>
-			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{pgp})</span>]
-			<textarea name='pgp' id='pgp' rows='4' cols='40'>[(#ENV**{pgp})]</textarea>
+	    <li class="editer_pgp[ (#ENV**{erreurs}|table_valeur{pgp}|oui)erreur] editer_type_textarea">
+	    	<div class="label">
+				<label for="pgp"><:entree_cle_pgp:></label>
+			</div>
+			<div class="edition">
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{pgp})</span>]
+				<textarea name='pgp' id='pgp' rows='4' cols='40'>[(#ENV**{pgp})]</textarea>
+			</div>
 	    </li>
 	    [(#REM)
 	    	Site ouaib : nom et url
 		]		
-	  	<li class='editer_liens_sites'>
+	  	<li class='editer_liens_sites editer_type_fieldset'>
 			<fieldset>
-			<legend><:info_site_web:></legend>
+			<h3 class="legend"><:info_site_web:></h3>
 			<ul>
-				<li class="editer_nom_site[ (#ENV**{erreurs}|table_valeur{nom_site_auteur}|oui)erreur]">
-					<label for="nom_site_auteur"><:entree_nom_site:></label>
+				<li class="editer_nom_site[ (#ENV**{erreurs}|table_valeur{nom_site_auteur}|oui)erreur] editer_type_input">
+					<div class="label">
+						<label for="nom_site_auteur"><:entree_nom_site:></label>
+					</div>
+					<div class="edition">
 					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_site_auteur})</span>]
 					<input type='text' class='text' name='nom_site_auteur' id='nom_site_auteur' value="[(#ENV**{nom_site})]" />
+					</div>
 				</li>
-				<li class="editer_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]">
-					<label for="url_site"><:entree_url:></label>
-					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_site})</span>]
-					<input type='text' class='text' name='url_site' id='url_site' value="[(#ENV**{url_site})]" />
+				<li class="editer_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur] editer_type_input">
+					<div class="label">
+						<label for="url_site"><:entree_url:></label>
+					</div>
+					<div class="edition">
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_site})</span>]
+						<input type='text' class='text' name='url_site' id='url_site' value="[(#ENV**{url_site})]" />
+					</div>
 				</li>
 			</ul>
 			</fieldset>
@@ -99,40 +122,55 @@
 				#SET{edit_pass,0}
 				#SET{ok,1}
 		]
-		<li class='editer_identification'>
+		<li class='editer_identification editer_type_fieldset'>
 			<fieldset>
-				<legend><:entree_identifiants_connexion:></legend>
+				<h3 class="legend"><:entree_identifiants_connexion:></h3>
 				[(#REM) Avertissement en cas de modifs de ses propres donnees ]
 				[(#GET{edit_login}|or{#GET{edit_pass}}|and{#GET{connecte}}|oui)
 					<em class='attention'><:texte_login_precaution:></em>
 				]
 				<ul>
 				[(#REM) Un redacteur n'a pas le droit de modifier son login ! ]
-				<li class='editer_new_login[ (#ENV**{erreurs}|table_valeur{login}|oui)erreur]'>
+				<li class='editer_new_login[ (#ENV**{erreurs}|table_valeur{login}|oui)erreur] editer_type_input'>
 					[(#GET{edit_login}|oui)
-						<label for='new_login'><:item_login:></label>
-						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{login})</span>]
-						<p class='explication'>(<:texte_plus_trois_car:>)</p>
-						<input autocomplete="off" type='text' class='text' name='new_login' id='new_login' value="[(#ENV**{login})]" />
-
+						<div class="label">
+							<label for='new_login'><:item_login:></label>
+						</div>
+						<div class="edition">
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{login})</span>]
+							<p class='explication'>(<:texte_plus_trois_car:>)</p>
+							<input autocomplete="off" type='text' class='text' name='new_login' id='new_login' value="[(#ENV**{login})]" />
+						</div>
 					]
 					[(#GET{edit_login}|non)
-						<label for='login'><:item_login:></label>
-						<p class='explication'>(<:info_non_modifiable:>)</p>
-						<input type='text' class='text' disabled='disabled' name='login' id='login' value="[(#ENV**{login})]" />
+						<div class="label">
+							<label for='login'><:item_login:></label>
+						</div>
+						<div class="edition">
+							<p class='explication'>(<:info_non_modifiable:>)</p>
+							<input type='text' class='text' disabled='disabled' name='login' id='login' value="[(#ENV**{login})]" />
+						</div>
 					]				
 				</li>
 				[(#GET{edit_pass}|oui)
-					<li class='editer_new_pass[ (#ENV**{erreurs}|table_valeur{new_pass}|oui)erreur]'>
-						<label for='new_pass'><:entree_nouveau_passe:></label>
-						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{new_pass})</span>]
-						<p class='explication'>(<:info_plus_cinq_car:>)</p>
-						<input type='password' autocomplete="off" class='password' name='new_pass' id='new_pass' value="" />
+					<li class='editer_new_pass[ (#ENV**{erreurs}|table_valeur{new_pass}|oui)erreur] editer_type_input'>
+						<div class="label">
+							<label for='new_pass'><:entree_nouveau_passe:></label>
+						</div>
+						<div class="edition">
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{new_pass})</span>]
+							<p class='explication'>(<:info_plus_cinq_car:>)</p>
+							<input type='password' autocomplete="off" class='password' name='new_pass' id='new_pass' value="" />
+						</div>
 					</li>
-					<li class='editer_new_pass2'>
-						<label for='new_pass2'><:info_confirmer_passe:></label>
-						<input type='password' autocomplete="off" class='password' name='new_pass2' id='new_pass2' value="" />
-						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{new_pass2})</span>]
+					<li class='editer_new_pass2 editer_type_input'>
+						<div class="label">
+							<label for='new_pass2'><:info_confirmer_passe:></label>
+						</div>
+						<div class="edition">
+							<input type='password' autocomplete="off" class='password' name='new_pass2' id='new_pass2' value="" />
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{new_pass2})</span>]
+						</div>
 					</li>			
 				]
 				</ul>			
@@ -142,12 +180,12 @@
 		[(#REM)
 			Apparaitre connecte ?
 		]
-		<li class='editer_redacteurs_connectes'>
+		<li class='editer_redacteurs_connectes editer_type_fieldset'>
 			<fieldset>
-				<legend><:info_liste_redacteurs_connectes:></legend>
+				<h3 class="legend"><:info_liste_redacteurs_connectes:></h3>
 				<p class='explication'><:texte_auteur_messagerie:></p>
 				<ul>
-					<li class="editer_perso_activer_imessage">
+					<li class="editer_perso_activer_imessage editer_type_choix">
 						<div class="choix">
 							<input type='radio' class='radio' name='perso_activer_imessage' value='oui' [(#ENV{imessage}|!={non}|oui) checked='checked'] id='perso_activer_imessage_on' />
 							<label for='perso_activer_imessage_on'><:bouton_radio_apparaitre_liste_redacteurs_connectes:></label>
@@ -177,7 +215,6 @@
 	  	[(#REM) Et on met un hidden...]
 		[(#ENV{id_auteur}|non) <input type='hidden' name='statut' value='#EVAL{_STATUT_AUTEUR_CREATION}' />]
 
-	</fieldset>
 
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
