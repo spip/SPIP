@@ -28,6 +28,7 @@ function action_purger_dist()
 		supprime_invalideurs();
 		spip_unlink(_CACHE_RUBRIQUES);
 		purger_repertoire(_DIR_CACHE);
+		purger_repertoire(_DIR_AIDE);
 		break;
 
 	case 'squelettes':
