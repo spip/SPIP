@@ -762,7 +762,7 @@ function traiter_tableau($bloc) {
 	  for ($j=0;$j<$k;$j++) {
 	    $cell = trim($lignes[$j][$i]);
 	    if (($cell !== '<') AND $cell[0] !== '{') {
-		if (!preg_match('/^\s*\d+([.,]?)\d*\s*$/', $cell, $r))
+		if (!preg_match('/^\d+([.,]?)\d*$/', $cell, $r))
 		  { $align = ''; break;}
 		else if ($r[1]) $align = $r[1];
 	      }
@@ -792,7 +792,7 @@ function traiter_tableau($bloc) {
 			  $colspan++;
 
 			} elseif($cell=='^') {
-			  $rowspans[$l-1][$c]++;
+			  $rowspans[$l-1][$c]+=$rowspans[$l][$c];
 
 			} else {
 			  if($colspan>1) {
