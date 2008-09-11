@@ -12,33 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// Calcul des raccourcis
-// Idealement generer_url_entite delegue au jeu 'type_urls' qui les gere
-// Par souci de compatibilite on teste toujours l'existence des fonctions
-// generer_url_<RACCOURCI> et generer_url_<RACCOURCI>_dist
-
-// http://doc.spip.org/@inc_lien_dist
-function inc_lien_dist($type,$id,$args,$ancre,$texte='',$pour='url',$connect='') {
-	if ($connect) {
-		$id_type = ($type != 'site') ? "id_$type" : 'id_syndic';
-		$res = get_spip_script('./')
-		. "?"._SPIP_PAGE."=$type&$id_type=$id&connect=$connect"
-		. (!$args ? '' : "&$args");
-	} else {
-		$g = 'generer_url_' . $type;
-		if (function_exists($g) OR function_exists($g .= '_dist')) 
-			$g = $g($id, $args, $ancre);
-		else $g = false;
-		if (!$g) $g = generer_url_entite($id, $type, $args, $ancre);
-		if (!$g) return false;
-		$res = $g;
-	}
-	if ($pour == 'url') return array($res);
-	$g = 'calculer_url_' . $type;
-	if (!(function_exists($g) OR function_exists($g .= '_dist')))
-		return array($res);
-	return $g($id, $texte, $res, $connect);
-}
+include_spip('base/abstract_sql');
 
 // http://doc.spip.org/@calculer_url_article_dist
 function calculer_url_article_dist($id, $texte='', $lien='', $connect='') {

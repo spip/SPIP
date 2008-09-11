@@ -625,7 +625,8 @@ function typer_raccourci ($lien) {
 }
 
 // Cherche un lien du type [->raccourci 123]
-// associe a une fonction generer_url_raccourci()
+// associe a une fonction generer_url_raccourci() definie explicitement 
+// ou implicitement par le jeu de type_urls courant.
 //
 // Valeur retournee selon le parametre $pour:
 // 'tout' : tableau [U,C,T,L] (vise <a href="U" class='C' hreflang='L'>T</a>)
@@ -633,18 +634,20 @@ function typer_raccourci ($lien) {
 // 'url':   seulement U  (i.e. generer_url_RACCOURCI)
 
 // http://doc.spip.org/@calculer_url
-function calculer_url ($ref, $texte='', $pour='url', $connect='') {
-	include_spip('base/abstract_sql');
+function calculer_url ($ref, $texte='', $pour='url', $connect=NULL) {
 	if ($match = typer_raccourci($ref)) {
-		@list($f,,$id,,$args,,$ancre) = $match;
-		$lien = charger_fonction('lien', 'inc', true);
-		if ($lien) {
-			$r = $lien($f,$id,$args,$ancre,$texte,$pour,$connect);
-			if ($r)
-			  return ($pour=='tout') ? $r : 
-				(($pour=='url') ? $r[0] :$r[2]);
+		@list($type,,$id,,$args,,$ancre) = $match;
+		$r = generer_url_entite($id,$type,$args,$ancre,$connect);
+		if ($r) {
+			if ($pour === 'url') return array($r);
+			include_spip('inc/lien');
+			$g = 'calculer_url_' . $type;
+			if (!(function_exists($g) OR function_exists($g .= '_dist')))
+			  return array($r);
+			$r = $g($id, $texte, $r, $connect);
+			return ($pour=='tout') ? $r : $r[2];
 		}
-		spip_log("raccourci indefini $f");
+		spip_log("raccourci indefini $type");
 	}
 	if (preg_match(",^\s*(http:?/?/?|mailto:?)\s*$,iS", $ref))
 		return ($pour != 'tout') ? '' : array('','','','');

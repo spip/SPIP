@@ -730,30 +730,39 @@ function autoriser_sans_cookie($nom)
 // $type = fichier dans le repertoire ecrire/urls determinant l'apparence
 
 // http://doc.spip.org/@generer_url_entite
-function generer_url_entite($id='', $entite='', $args='', $ancre='', $prive=NULL, $type=NULL)
+function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NULL, $type=NULL)
 {
-	if ($prive === NULL) $prive = test_espace_prive();
+	if ($public === NULL) $public = !test_espace_prive();
 
-	if ($prive) {
+	if (!$public) {
 		include_spip('inc/urls');
 		$f = 'generer_url_ecrire_' . $entite;
 		return !function_exists($f) ? '' : $f($id, $args, $ancre);
 	} else {
-		if ($type === NULL) {
-			$type = ($GLOBALS['type_urls'] === 'page'
-				AND $GLOBALS['meta']['type_urls'])
-			?  $GLOBALS['meta']['type_urls']
-			:  $GLOBALS['type_urls']; // pour SPIP <2
-		}
-		$f = charger_fonction($type, 'urls', true); 
+		if (is_string($public)) {
+			$id_type = ($entite !== 'site') ? "id_$entite" : 'id_syndic';
+			return get_spip_script('./')
+			  . "?"._SPIP_PAGE."=$entite&$id_type=$id&connect=$public"
+			  . (!$args ? '' : "&$args")
+			  . (!$ancre ? '' : "#$ancre");
+		} else {
+			if ($type === NULL) {
+				$type = ($GLOBALS['type_urls'] === 'page'
+					AND $GLOBALS['meta']['type_urls'])
+				?  $GLOBALS['meta']['type_urls']
+				:  $GLOBALS['type_urls']; // pour SPIP <2
+			}
+			$f = charger_fonction($type, 'urls', true); 
 		// si $entite='', on veut la fonction de passage URL ==> id
-		if (!$entite) return $f; 
+			if (!$entite) return $f; 
 		// sinon on veut effectuer le passage id ==> URL
-		$res = !$f ? '' : $f($entite, $id, $args, $ancre);
-		if ($res) return $res;
-		// compat SPIP < 2 : generer_url non generique, juste les std
-		if (function_exists($f = 'generer_url_' . $entite))
-			return $f($id, $args, $ancre);
+			$res = !$f ? '' : $f($entite, $id, $args, $ancre);
+			if ($res) return $res;
+		// Sinon c'est un raccourci ou compat SPIP < 2
+			if (function_exists($f = 'generer_url_' . $entite)
+			OR function_exists($f .= '_dist'))
+				return $f($id, $args, $ancre);
+		}
 	}
 	spip_log("generer_url_entite: entite $entite inconnue dans $type");
 	return '';
