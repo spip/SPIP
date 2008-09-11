@@ -753,12 +753,12 @@ function traiter_tableau($bloc) {
 	$rowspans = $numeric = array();
 	$n = count($lignes[0]);
 	$k = count($lignes);
-	for ($i=0; $i<$n; $i++) $rowspans[] = 1;
 	for($i=0;$i<$n;$i++) {
 	  $align = true;
+	  for ($j=0;$j<$k;$j++) $rowspans[$j][$i] = 1;
 	  for ($j=0;$j<$k;$j++) {
-	    $cell = $lignes[$j][$i];
-	    if (!preg_match('/[{<]/',$cell[0])) {
+	    $cell = trim($lignes[$j][$i]);
+	    if (($cell !== '<') AND $cell[0] !== '{') {
 		if (!preg_match('/^\s*\d+([.,]?)\d*\s*$/', $cell, $r))
 		  { $align = ''; break;}
 		else if ($r[1]) $align = $r[1];
@@ -784,29 +784,28 @@ function traiter_tableau($bloc) {
 
 		for($c=count($cols)-1; $c>=0; $c--) {
 			$attr= $numeric[$c]; 
-			$cell = $cols[$c];
+			$cell = trim($cols[$c]);
 			if($cell=='<') {
 			  $colspan++;
 
 			} elseif($cell=='^') {
-			  $rowspans[$c]++;
+			  $rowspans[$l-1][$c]++;
 
 			} else {
 			  if($colspan>1) {
 				$attr .= " colspan='$colspan'";
 				$colspan=1;
 			  }
-			  if($rowspans[$c]>1) {
-				$attr.= " rowspan='$rowspans[$c]'";
-				$rowspans[$c]=1;
+			  if(($x=$rowspans[$l][$c])>1) {
+				$attr.= " rowspan='$x'";
 			  }
-			  $ligne= "\n<td".$attr.'>'.$cell.'</td>'.$ligne;
+			  $ligne= "\n<td".$attr.'>'.$cols[$c].'</td>'.$ligne;
 			}
 		}
 
 		// ligne complete
-		$class = 'row_'.alterner($l+1, 'even', 'odd');
-		$html = "<tr class=\"$class\">" . $ligne . "</tr>\n".$html;
+		$class = alterner($l+1, 'even', 'odd');
+		$html = "<tr class='row_$class'>$ligne</tr>\n$html";
 	}
 	return "\n\n<table".$GLOBALS['class_spip_plus'].$summary.">\n"
 		. $debut_table
