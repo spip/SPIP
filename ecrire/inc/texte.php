@@ -753,12 +753,12 @@ function traiter_tableau($bloc) {
 	$rowspans = $numeric = array();
 	$n = count($lignes[0]);
 	$k = count($lignes);
-	for ($i=0; $i<$n; $i++) $rowspans[] = 1;
 	for($i=0;$i<$n;$i++) {
 	  $align = true;
+	  for ($j=0;$j<$k;$j++) $rowspans[$j][$i] = 1;
 	  for ($j=0;$j<$k;$j++) {
-	    $cell = $lignes[$j][$i];
-	    if (!preg_match('/[{<]/',$cell[0])) {
+	    $cell = trim($lignes[$j][$i]);
+	    if (($cell !== '<') AND $cell[0] !== '{') {
 		if (!preg_match('/^\s*\d+([.,]?)\d*\s*$/', $cell, $r))
 		  { $align = ''; break;}
 		else if ($r[1]) $align = $r[1];
