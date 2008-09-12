@@ -46,7 +46,8 @@ function exec_sites_args($id_syndic)
 // http://doc.spip.org/@afficher_site
 function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 
-	global $spip_lang_left,  $spip_lang_right, $spip_display;
+	global $spip_lang_left,  
+$spip_lang_right;
 
 	$cherche_mot = _request('cherche_mot');
 	$select_groupe = _request('select_groupe');
@@ -208,6 +209,9 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 
 // http://doc.spip.org/@options_moderation
 function options_moderation($row) {
+
+	global $spip_lang_left;
+
 	if ($row['syndication'] == 'non') return '';
 
 	$id_syndic = $row['id_syndic'];
@@ -274,6 +278,8 @@ function options_moderation($row) {
 // http://doc.spip.org/@choix_feed
 function choix_feed($id_syndic, $id_rubrique, $nom_site, $row) {
 
+	global $spip_lang_left, $spip_lang_right;
+
 	if (!preg_match(',^\s*select: (.*),', $row['url_syndic'], $regs))
 		return '';
 
@@ -314,8 +320,10 @@ function choix_feed($id_syndic, $id_rubrique, $nom_site, $row) {
 // http://doc.spip.org/@afficher_site_rubrique
 function afficher_site_rubrique($id_syndic, $id_rubrique, $id_secteur)
 {
-	if (!_INTERFACE_ONGLETS) return "";
 	global $spip_lang_right;
+
+	if (!_INTERFACE_ONGLETS) return "";
+
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
 
 	$form = $chercher_rubrique($id_rubrique, 'site', false);

@@ -72,8 +72,9 @@ function exec_menu_rubriques_dist() {
 
 // http://doc.spip.org/@bandeau_rubrique
 function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal, $largeur, $image='') {
-	global $spip_ecran, $spip_display;
-	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
+
+	global $spip_lang_left;
+
 	static $zmax = 6;
 
 	$nav = "<a href='"

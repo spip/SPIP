@@ -184,7 +184,6 @@ function rechercher_auteurs_objet($cherche_auteur, $ids, $type, $id, $script_edi
 // http://doc.spip.org/@afficher_auteurs_objet
 function afficher_auteurs_objet($type, $id, $flag_editable, $cond, $script_edit, $arg_ajax)
 {
-	global $connect_statut, $connect_id_auteur, $spip_display;
 	
 	$from = table_jointure('auteur', $type);
 	if (!$from) return '' ; // securite

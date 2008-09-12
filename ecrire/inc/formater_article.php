@@ -17,7 +17,7 @@ include_spip('inc/afficher_objets');
 // http://doc.spip.org/@inc_formater_article_dist
 function inc_formater_article_dist($row, $own='')
 {
-	global $options, $spip_lang_right, $spip_display;
+	global $spip_lang_right, $spip_display;
 	static $pret = false;
 	static $chercher_logo, $img_admin, $formater_auteur, $nb, $langue_defaut, $afficher_langue, $puce_statut;
 

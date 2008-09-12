@@ -55,7 +55,7 @@ function exec_articles_args($id_article)
 // http://doc.spip.org/@articles_affiche
 function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot,  $select_groupe, $trad_err, $debut_forum=0, $statut_forum='prive')
 {
-	global $spip_display, $spip_lang_left, $spip_lang_right, $connect_id_auteur,$dir_lang;
+	global $spip_lang_right, $dir_lang;
 
 	$id_rubrique = $row['id_rubrique'];
 	$id_secteur = $row['id_secteur'];
