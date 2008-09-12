@@ -686,8 +686,8 @@ function choixsiegal($a1,$a2,$v,$f) {
 
 // http://doc.spip.org/@normaliser_date
 function normaliser_date($date) {
+	$date = vider_date($date);
 	if ($date) {
-		$date = vider_date($date);
 		if (preg_match("/^[0-9]{8,10}$/", $date))
 			$date = date("Y-m-d H:i:s", $date);
 		if (preg_match("#^([12][0-9]{3})([-/]00)?( [-0-9:]+)?$#", $date, $regs))
@@ -702,8 +702,8 @@ function normaliser_date($date) {
 
 // http://doc.spip.org/@vider_date
 function vider_date($letexte) {
-	if (strncmp("0000-00-00", $letexte,10)==0) return;
-	if (strncmp("1970-01-01", $letexte,10)==0) return;	// eviter le bug GMT-1
+	if (strncmp("0000-00-00", $letexte,10)==0) return '';
+	if (strncmp("1970-01-01", $letexte,10)==0) return '';	// eviter le bug GMT-1
 	return $letexte;
 }
 
