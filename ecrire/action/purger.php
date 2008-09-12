@@ -29,6 +29,8 @@ function action_purger_dist()
 		spip_unlink(_CACHE_RUBRIQUES);
 		purger_repertoire(_DIR_CACHE);
 		purger_repertoire(_DIR_AIDE);
+		purger_repertoire(_DIR_VAR.'cache-css');
+		purger_repertoire(_DIR_VAR.'cache-js');
 		break;
 
 	case 'squelettes':
