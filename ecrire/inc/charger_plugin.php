@@ -187,7 +187,7 @@ function chargeur_charger_zip($quoi = array())
 	# destination finale des fichiers
 	switch($quoi['arg']) {
 		case 'lib':
-			$quoi['dest'] = 'lib/';
+			$quoi['dest'] = _DIR_RACINE.'lib/';
 			break;
 		case 'plugins':
 			$quoi['dest'] = _DIR_PLUGINS_AUTO;

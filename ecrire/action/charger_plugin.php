@@ -111,7 +111,7 @@ function action_charger_plugin_dist() {
 			$dest = _DIR_PLUGINS_AUTO;
 		} else {
 			$type = 'lib';
-			$dest = 'lib/';
+			$dest = _DIR_RACINE.'lib/';
 		}
 
 		// Fixer son emplacement d&#233;finitif
@@ -148,7 +148,7 @@ function action_charger_plugin_dist() {
 
 			if (_request('extract')) {
 				$texte = plugin_propre(
-					spip_xml_aplatit($arbre['plugin'][0]['description']));
+				spip_xml_aplatit($arbre['plugin'][0]['description']));
 				$texte .= '<p>'._T('plugin_zip_installe_finie',array('zip'=>$zip)).'</p>';
 				$texte .= "<h2 style='text-align:center;'>"._T('plugin_zip_active')."</h2>";
 			} else {
