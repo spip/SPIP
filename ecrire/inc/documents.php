@@ -227,7 +227,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 
 	$joindre = charger_fonction('joindre', 'inc');
 
-	define('_INTERFACE_DOCUMENTS', false);
+	define('_INTERFACE_DOCUMENTS', true);
 	if (!_INTERFACE_DOCUMENTS
 	OR $GLOBALS['meta']["documents_$type"]=='non') {
 
