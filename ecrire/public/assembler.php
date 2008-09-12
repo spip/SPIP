@@ -241,13 +241,13 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 		// on se refere a $page['contexte'] a la place
 		if (isset($page['contexte']['_pipeline'])) {
 			$pipe = is_array($page['contexte']['_pipeline'])?reset($page['contexte']['_pipeline']):$page['contexte']['_pipeline'];
-			$contexte = is_array($page['contexte']['_pipeline'])?end($page['contexte']['_pipeline']):array();
-			$contexte = array_merge($page['contexte'], $contexte);
-			unset($contexte['_pipeline']); // par precaution, meme si le risque de boucle infinie est a priori nul
+			$args = is_array($page['contexte']['_pipeline'])?end($page['contexte']['_pipeline']):array();
+			$args['contexte'] = $page['contexte'];
+			unset($args['contexte']['_pipeline']); // par precaution, meme si le risque de boucle infinie est a priori nul
 			if (isset($GLOBALS['spip_pipeline'][$pipe]))
 				$texte = pipeline($pipe,array(
 				  'data'=>$texte,
-				  'args'=>$contexte));
+				  'args'=>$args));
 		}
 	}
 
