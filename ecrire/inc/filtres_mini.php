@@ -42,7 +42,7 @@ function suivre_lien($url, $lien) {
 	# lien absolu ? ok
 	if (preg_match(',^(mailto|javascript):,iS', $lien))
 		return $lien;
-	if (preg_match(',^([a-z0-9]+://.*?)(/.*),iS', $lien, $r))
+	if (preg_match(',^([a-z0-9]+://.*?)(/.*)?$,iS', $lien, $r))
 		return $r[1].resolve_path($r[2]);
 	
 	# L'url site spip est un lien absolu aussi
