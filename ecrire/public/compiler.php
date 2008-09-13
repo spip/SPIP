@@ -550,6 +550,9 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='') {
 	  join(" ,\n$tab", $codes) . "))";
 }
 
+define('_REGEXP_COND_VIDE_NONVIDE',"/^[(](.*)[?]\s*''\s*:\s*('[^']+')\s*[)]$/");
+define('_REGEXP_COND_NONVIDE_VIDE',"/^[(](.*)[?]\s*('[^']+')\s*:\s*''\s*[)]$/");
+
 // http://doc.spip.org/@compile_cas
 function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
         $codes = array();
@@ -661,9 +664,15 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 				$descr, $boucles, $id_boucle);
 			$apres = calculer_liste($p->apres,
 				$descr, $boucles, $id_boucle);
-			if (($avant != "''" OR $apres != "''") AND $code[0]!= "'")
-				$code = "strval($code)";
 			$altern = "''";
+			// Si la valeur est destinee a une concatenation
+			// forcer la conversion en une chaine
+			// si ce n'en est pas une explicitement
+			if (($avant != "''" OR $apres != "''")
+			AND $code[0]!= "'"
+			AND !preg_match(_REGEXP_COND_VIDE_NONVIDE, $code)
+			AND !preg_match(_REGEXP_COND_NONVIDE_VIDE, $code))
+				$code = "strval($code)";
 			break;
 
 		default: 
@@ -671,27 +680,44 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 		} // switch
 
 		if ($code != "''") {
-			if ($avant == "''")
-				$avant = '';
-			if ($apres == "''")
-				$apres = '';
-			if ($avant||$apres||($altern!="''")) {
-				$t = '$t' . $descr['niv'];
-				$res = (!$avant ? "" : "$avant . ") . 
-					$t .
-					(!$apres ? "" : " . $apres");
-				$code = "(($t = $code)!=='' ?\n\t$tab($res) :\n\t$tab$altern)";
-			}
-
-		}
-		if ($code != "''")
+			$code = compile_retour($code, $avant, $apres, $altern, $tab, $descr['niv']);
 			$codes[]= (($mode == 'validation') ?
 				"array(" . $p->ligne . ", '$commentaire', $code)"
 				: (($mode == 'code') ?
 				"\n// $commentaire\n$code" :
 				$code));
+		}
 	} // foreach
 	return $codes;
+}
+
+// production d'une expression conditionnelle ((v=EXP) ? (p . v .s) : a)
+// mais si EXP est de la forme (t ? 'C' : '') on produit (t ? (p . C . s) : a)
+// de meme si EXP est de la forme (t ? '' : 'C')
+
+function compile_retour($code, $avant, $apres, $altern, $tab, $n)
+{
+	if ($avant == "''") $avant = '';
+	if ($apres == "''") $apres = '';
+	if (!$avant AND !$apres AND ($altern==="''")) return $code;
+
+	if (preg_match(_REGEXP_COND_VIDE_NONVIDE,$code, $r)) {
+		$t = $r[2];
+		$cond =  '!' . $r[1];
+	} else if  (preg_match(_REGEXP_COND_NONVIDE_VIDE,$code, $r)) {
+		$t = $r[2];
+		$cond = $r[1];
+	} else {
+		$t = '$t' . $n;
+		$cond = "($t = $code)!==''";
+	}
+
+	$res = (!$avant ? "" : "$avant . ") . 
+		$t .
+		(!$apres ? "" : " . $apres");
+
+	if ($res !== $t) $res = "($res)";
+	return "($cond ?\n\t$tab$res :\n\t$tab$altern)";
 }
 
 
