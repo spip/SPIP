@@ -1447,7 +1447,7 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 
 	$texte = "";
 	$pages = array();
-	if (!$fond AND isset($contexte['fond']) AND $contexte['fond'])
+	if (isset($contexte['fond']))
 		$fond = $contexte['fond'];
 
 	// Si on a inclus sans fixer le critere de lang, on prend la langue courante
