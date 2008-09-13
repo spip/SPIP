@@ -11,108 +11,71 @@
 	  <ul>
 	  
 	  	[(#ENV**{config}|table_valeur{articles_surtitre}|=={non}|?{#ENV**{surtitre,''},' '}|oui)
-	    <li class="editer_surtitre[ (#ENV**{erreurs}|table_valeur{surtitre}|oui)erreur] editer_type_input">
-	    	<div class="label">
-				<label for="surtitre"><:texte_sur_titre:><em class="aide">#AIDER{arttitre}</em></label>
-			</div>
-			<div class="edition">
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{surtitre})</span>]
-				<input type='text' class='text' name='surtitre' id='surtitre' value="[(#ENV**{surtitre})]" />
-			</div>
+	    <li class="editer_surtitre[ (#ENV**{erreurs}|table_valeur{surtitre}|oui)erreur]">
+		<label for="surtitre"><:texte_sur_titre:><em class="aide">#AIDER{arttitre}</em></label>[
+		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{surtitre})</span>
+		]<input type='text' class='text' name='surtitre' id='surtitre' value="[(#ENV**{surtitre})]" />
 	    </li>]
-	    <li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur] editer_type_input">
-			<div class="label">    
-		    	<label for="titre"><:info_titre:><em class="aide">#AIDER{arttitre}</em></label>
-		    </div>
-	    	<div class="edition">
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>]
-				<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre,#REM|concat{info_nouvel_article}|_T})]"
-				[(#ENV{titre,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
-			</div>
+	    <li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
+	    	<label for="titre"><:info_titre:><em class="aide">#AIDER{arttitre}</em></label>[
+		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
+		]<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre,#REM|concat{info_nouvel_article}|_T})]"
+		[(#ENV{titre,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
 	    </li>
 	  	[(#ENV**{config}|table_valeur{articles_soustitre}|=={non}|?{#ENV**{soustitre,''},' '}|oui)
-	    <li class="editer_soustitre[ (#ENV**{erreurs}|table_valeur{soustitre}|oui)erreur] editer_type_input">
-	    	<div class="label">
-			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{soustitre})</span>]
-				<label for="soustitre"><:texte_sous_titre:><em class="aide">#AIDER{arttitre}</em></label>
-			</div>
-			<div class="edition">
-				<input type='text' class='text' name='soustitre' id='soustitre' value="[(#ENV**{soustitre})]" />
-			</div>
+	    <li class="editer_soustitre[ (#ENV**{erreurs}|table_valeur{soustitre}|oui)erreur]">
+		<label for="soustitre"><:texte_sous_titre:><em class="aide">#AIDER{arttitre}</em></label>[
+		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{soustitre})</span>
+		]<input type='text' class='text' name='soustitre' id='soustitre' value="[(#ENV**{soustitre})]" />
 	    </li>]
-
-	 	[<li class="editer_parent[ (#ENV**{erreurs}|table_valeur{id_rubrique}|oui)erreur] editer_type_textarea">
-	 		<div class="label">
-				<label for="id_parent"><:titre_cadre_interieur_rubrique:><em class="aide">#AIDER{artrub}</em></label>
-			</div>
-			<div class="edition">
+	[<li class="editer_parent[ (#ENV**{erreurs}|table_valeur{id_rubrique}|oui)erreur]">
+		<label for="id_parent"><:titre_cadre_interieur_rubrique:><em class="aide">#AIDER{artrub}</em></label>
 				(#VAL|chercher_rubrique{#ENV{id_article},#ENV{id_rubrique},'article',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint},0,form_simple})
-			</div>
 	    </li>]
 		
 	  	[(#ENV**{config}|table_valeur{articles_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|oui)
-	    <li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur] editer_type_textarea">
-	    	<div class="label">
-				<label for="descriptif"><:texte_descriptif_rapide:><em class="aide">#AIDER{artdesc}</em></label>
-			</div>
-			<div class="edition">
-				<textarea name='descriptif' id='descriptif' rows='2' cols='40'>[(#ENV**{descriptif})]</textarea>
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{desctiptif})</span>]
-			</div>
+	    <li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
+		<label for="descriptif"><:texte_descriptif_rapide:><em class="aide">#AIDER{artdesc}</em></label>[
+		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{desctiptif})</span>
+		]<textarea name='descriptif' id='descriptif' rows='2' cols='40'>[(#ENV**{descriptif})]</textarea>
 	    </li>]
 	  	[(#ENV**{config}|table_valeur{articles_chapeau}|=={non}|?{#ENV**{chapo,''},' '}|oui)
-	    [<li class='editer_virtuel[ (#ENV**{erreurs}|table_valeur{virtuel}|oui)erreur] editer_type_input'>(#ENV**{chapo}|match{^=}|oui)
-			<div class="label">
-				<label for='virtuel'><:info_redirection:><em class="aide">#AIDER{artvirt}</em></label>
-			</div>
-			<div class="edition">
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{virtuel})</span>]
-				<input type='text' class='text' name='virtuel' id='virtuel' value="[(#ENV**{chapo}|replace{^=,''})]" />
-				<input type='hidden' name='changer_virtuel' value='oui' />
-				<p class='explication'><:texte_article_virtuel_reference:></p>
-			</div>
+	    [<li class='editer_virtuel[ (#ENV**{erreurs}|table_valeur{virtuel}|oui)erreur]'>(#ENV**{chapo}|match{^=}|oui)
+		<label for='virtuel'><:info_redirection:><em class="aide">#AIDER{artvirt}</em></label>[
+		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{virtuel})</span>
+		]<input type='text' class='text' name='virtuel' id='virtuel' value="[(#ENV**{chapo}|replace{^=,''})]" />
+		<input type='hidden' name='changer_virtuel' value='oui' />
+		<p class='explication'><:texte_article_virtuel_reference:></p>
 		</li>]
-		[<li class="editer_chapo[ (#ENV**{erreurs}|table_valeur{chapo}|oui)erreur] editer_type_textarea">(#ENV**{chapo}|match{^=}|non)
-			<div class="label">
-				<label for="chapo"><:info_chapeau:><em class="aide">#AIDER{arttitre}</em></label>
-			</div>
-			<div class="edition">
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{chapo})</span>]
-				<textarea name='chapo' id='chapo'[ rows='(#ENV**{config}|table_valeur{lignes})'] cols='40'>[(#ENV**{chapo})]</textarea>
-			</div>
+		[<li class="editer_chapo[ (#ENV**{erreurs}|table_valeur{chapo}|oui)erreur]">(#ENV**{chapo}|match{^=}|non)
+			<label for="chapo"><:info_chapeau:><em class="aide">#AIDER{arttitre}</em></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{chapo})</span>
+			]<textarea name='chapo' id='chapo'[ rows='(#ENV**{config}|table_valeur{lignes})'] cols='40'>[(#ENV**{chapo})]</textarea>
 		</li>]
 			]
 
 	  	[(#ENV**{config}|table_valeur{articles_texte}|=={non}|?{#ENV**{texte,''},' '}|oui)
-	    <li class="editer_texte obligatoire[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur] editer_type_textarea">
-	    	<div class="label">
-				<label for="text_area"><:info_texte:><em class="aide">#AIDER{arttexte}</em></label>
-			</div>
-			<div class="edition">
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>]
-				[(#ENV**{_texte_trop_long,''})]
+	    <li class="editer_texte obligatoire[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
+			<label for="text_area"><:info_texte:><em class="aide">#AIDER{arttexte}</em></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>
+			][(#ENV**{_texte_trop_long,''})]
 				<div class="explication"><:texte_enrichir_mise_a_jour:><em>#AIDER{raccourcis}</em></div>
 				[(#ENV**{config}|table_valeur{afficher_barre}|?{#VAL{text_area}|barre_typo{#LANGUE}})]
 				<textarea name='texte' id='text_area' class='barre_inserer' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[
 				(#ENV**{browser_caret,''})]>[(#ENV**{texte})]</textarea>
 				
 				<script type='text/javascript'><!--
-				jQuery(function(){
+				jQuery('document').ready(function(){
 				jQuery('#text_area')
 				.height((jQuery(window).height()-80)+'px');
 				});
 				//--></script>
-			</div>
 	    </li>]
 	  	[(#ENV**{config}|table_valeur{articles_ps}|=={non}|?{#ENV**{ps,''},' '}|oui)
-	    <li class="editer_ps[ (#ENV**{erreurs}|table_valeur{ps}|oui)erreur] editer_type_textarea">
-	    	<div class="label">
-				<label for="ps"><:info_post_scriptum:></label>
-			</div>
-			<div class="edition">
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ps})</span>]
-				<textarea name='ps' id='ps' rows='5' cols='40'>[(#ENV**{ps})]</textarea>
-			</div>
+	    <li class="editer_ps[ (#ENV**{erreurs}|table_valeur{ps}|oui)erreur]">
+			<label for="ps"><:info_post_scriptum:></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ps})</span>
+			]<textarea name='ps' id='ps' rows='5' cols='40'>[(#ENV**{ps})]</textarea>
 	    </li>]
 
 	  	[(#ENV**{config}|table_valeur{articles_urlref}|=={non}|?{#ENV**{url_site,#ENV**{nom_site,''}},' '}|oui)
@@ -120,23 +83,15 @@
 			<fieldset>
 				<h3 class="legend"><:entree_liens_sites:></h3>
 				<ul>
-				<li class="editer_nom_site[ (#ENV**{erreurs}|table_valeur{nom_site}|oui)erreur] editer_type_input">
-					<div class="label">
-						<label for="nom_site"><:info_titre:></label>
-					</div>
-					<div class="edition">
-						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_site})</span>]
-						<input type='text' class='text' name='nom_site' id='nom_site' value="[(#ENV**{nom_site})]" />
-					</div>
+				<li class="editer_nom_site[ (#ENV**{erreurs}|table_valeur{nom_site}|oui)erreur]">
+					<label for="nom_site"><:info_titre:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_site})</span>
+					]<input type='text' class='text' name='nom_site' id='nom_site' value="[(#ENV**{nom_site})]" />
 				</li>
-				<li class="editer_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur] editer_type_input">
-					<div class="label">
-						<label for="url_site"><:info_url:></label>
-					</div>
-					<div class="edition">
-						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_site})</span>]
-						<input type='text' class='text' name='url_site' id='url_site' value="[(#ENV**{url_site})]" />
-					</div>
+				<li class="editer_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]">
+					<label for="url_site"><:info_url:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_site})</span>
+					]<input type='text' class='text' name='url_site' id='url_site' value="[(#ENV**{url_site})]" />
 				</li>
 				</ul>
 			</fieldset>
