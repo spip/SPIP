@@ -131,8 +131,13 @@ function critere_pagination_dist($idb, &$boucles, $crit) {
 
 	// definition de la taille de la page
 	$pas = !isset($crit->param[0][0]) ? "''" : calculer_liste(array($crit->param[0][0]), array(), $boucles, $boucles[$idb]->id_parent);
+	if (!preg_match("/^'([^']*)'$/", $pas, $r)) {
+		$pas = "((\$a = intval($pas)) ? \$a : 10)";
+	} else {
+		$r = intval($r[1]);
+		$pas = strval($r ? $r : 10);
+	}
 	$debut = !isset($crit->param[0][1]) ? "'$idb'" : calculer_liste(array($crit->param[0][1]), array(), $boucles, $boucles[$idb]->id_parent);
-	$pas = ($pas== "''") ? '10' : "((\$a = intval($pas)) ? \$a : 10)";
 
 	$boucle = &$boucles[$idb];
 	$boucle->mode_partie = 'p+';
