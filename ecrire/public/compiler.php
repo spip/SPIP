@@ -665,11 +665,12 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 			$apres = calculer_liste($p->apres,
 				$descr, $boucles, $id_boucle);
 			$altern = "''";
-			// Si la valeur est destinee a une concatenation
-			// forcer la conversion en une chaine
-			// si ce n'en est pas une explicitement
+			// Si la valeur est destinee a une comparaison a ''
+			// forcer la conversion en une chaine par strval
+			// si ca peut etre autre chose qu'une chaine
 			if (($avant != "''" OR $apres != "''")
 			AND $code[0]!= "'"
+			AND (strpos($code,'interdire_scripts') !== 0)
 			AND !preg_match(_REGEXP_COND_VIDE_NONVIDE, $code)
 			AND !preg_match(_REGEXP_COND_NONVIDE_VIDE, $code))
 				$code = "strval($code)";

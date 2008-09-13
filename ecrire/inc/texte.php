@@ -460,6 +460,7 @@ function protege_js_modeles($t) {
 // a terme (tout l'espace prive en skel) il faudra mettre $protege_espace_prive = true
 // http://doc.spip.org/@interdire_scripts
 function interdire_scripts($t, $protege_espace_prive = false) {
+	$t = strval($t);
 	if (_DIR_RESTREINT || $protege_espace_prive) {
 	
 		// rien ?
