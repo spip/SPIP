@@ -670,7 +670,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 			// si ca peut etre autre chose qu'une chaine
 			if (($avant != "''" OR $apres != "''")
 			AND $code[0]!= "'"
-			AND (strpos($code,'interdire_scripts') !== 0)
+#			AND (strpos($code,'interdire_scripts') !== 0)
 			AND !preg_match(_REGEXP_COND_VIDE_NONVIDE, $code)
 			AND !preg_match(_REGEXP_COND_NONVIDE_VIDE, $code))
 				$code = "strval($code)";
