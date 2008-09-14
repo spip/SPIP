@@ -79,17 +79,17 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	include_spip('inc/editer');
 	$corps = (!$contenu ? '' :
 	   "<div class='verdana1' style='text-align: center; margin-bottom: 10px;'>$contenu</div>") .
-	  "<div class='formulaire_spip formulaire_spip_compact'><ul><li><label for='titre_document$id_document'><b>$label</b></label>\n" .
+	  "<div class='formulaire_spip formulaire_spip_compact'><ul><li class='editer_titre'><label for='titre_document$id_document'>$label</label>\n" .
 
-	  "<input type='text' name='titre_document' id='titre_document$id_document' class='formo' value=\"".entites_html($titre).
+	  "<input type='text' name='titre_document' id='titre_document$id_document' class='text' value=\"".entites_html($titre).
 	  "\" size='40'	onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /></li>\n"
 	  . (($GLOBALS['meta']["documents_date"] == 'oui')
-	  	? "<li>".date_formulaire_legender($date, $id_document)."</li>"
+	  	? "<li class='editer_date'>".date_formulaire_legender($date, $id_document)."</li>"
 	  	:'' )
-	  . "<li><label for='descriptif_document$id_document'><b>".
+	  . "<li class='editer_descriptif'><label for='descriptif_document$id_document'><b>".
 	  _T('info_description_2').
 	  "</b></label>\n" .
-	  "<textarea name='descriptif_document' id='descriptif_document$id_document' rows='4' class='formo' cols='*' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">" .
+	  "<textarea name='descriptif_document' id='descriptif_document$id_document' rows='4' class='textarea' cols='*' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">" .
 	    entites_html($descriptif) .
 	  "</textarea></li></ul></div>\n" .
 	  $taille
