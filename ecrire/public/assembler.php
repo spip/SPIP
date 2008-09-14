@@ -573,7 +573,7 @@ function page_base_href(&$texte){
 		// est que ce n'est pas une url page ni une url action
 		// activer par defaut
 		define('_SET_HTML_BASE',
-			$GLOBALS['profondeur_url'] >= 1
+			$GLOBALS['profondeur_url'] >= (_DIR_RESTREINT?1:2)
 			AND _request(_SPIP_PAGE) !== 'login'
 			AND !_request('action'));
 
