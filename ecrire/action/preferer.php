@@ -26,18 +26,19 @@ function action_preferer_dist() {
 	if (!preg_match(",^(.+):(.+)$,", $arg, $r))
 		spip_log("action_preferer_dist: $arg pas compris");
 	else {
-	$prefs_mod = intval($GLOBALS['visiteur_session']['id_auteur']);
+	$prefs_mod = false;
 
 	list(, $op, $val) = $r;
 	if ($op == 'couleur') {
 		$GLOBALS['visiteur_session']['prefs']['couleur'] = $val;
-		$prefs_mod &= 1;
+		$prefs_mod = true;
 	}
 	elseif ($op == 'display') {
 		$GLOBALS['visiteur_session']['prefs']['display'] = $val;
-		$prefs_mod &= 1;
+		$prefs_mod = true;
 	}
-	if ($prefs_mod)
+
+	if ($prefs_mod AND intval($GLOBALS['visiteur_session']['id_auteur']))
 		sql_updateq('spip_auteurs', array('prefs' => serialize($GLOBALS['visiteur_session']['prefs'])), "id_auteur=" .intval($GLOBALS['visiteur_session']['id_auteur']));
 	
 	if ($op == 'spip_ecran') {
