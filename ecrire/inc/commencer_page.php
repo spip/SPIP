@@ -134,7 +134,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 		// choix de la langue
 		if ($i = menu_langues('var_lang_ecrire')) {
 			$res .= "<li id='bandeau_couleur5' class='bandeau_couleur'><div class='menu-item'>"
-			. $i
+			. (_request('var_menu_lang')?$i:"<a href='".parametre_url(self(),'var_menu_lang','oui')."'>"._T('info_langues')."</a>")
 			. "</div></li>";
 		}
 
