@@ -2030,7 +2030,8 @@ function image_renforcement($im, $k=0.5)
 // pour le format png, $qualite correspond au nombre de couleur dans la palette ou si 0 a une image truecolor (defaut truecolor)
 // attention, seul 128 est supporte en l'etat (production d'images avec palette reduite pas satisfaisante)
 // http://doc.spip.org/@image_aplatir
-function image_aplatir($im, $format='jpg', $coul='000000', $qualite=NULL)
+// 3/ $transparence a "true" permet de conserver la transparence (utile pour conversion GIF)
+function image_aplatir($im, $format='jpg', $coul='000000', $qualite=NULL, $transparence=false)
 {
 	if ($qualite===NULL){
 		if ($format=='jpg') $qualite=_IMG_GD_QUALITE;
@@ -2038,7 +2039,7 @@ function image_aplatir($im, $format='jpg', $coul='000000', $qualite=NULL)
 		else $qualite=128;
 	}
 	$fonction = array('image_aplatir', func_get_args());
-	$image = image_valeurs_trans($im, "aplatir-$format-$coul-$qualite", $format, $fonction);
+	$image = image_valeurs_trans($im, "aplatir-$format-$coul-$qualite-$transparence", $format, $fonction);
 
 	if (!$image) return("");
 
@@ -2072,11 +2073,16 @@ function image_aplatir($im, $format='jpg', $coul='000000', $qualite=NULL)
 			$im = $im_;
 		}
 		// allouer la couleur de fond
-		$color_t = ImageColorAllocate( $im_, $dr, $dv, $db);
+		if ($transparence) 	$color_t = ImageColorAllocateAlpha( $im_, $dr, $dv, $db, 127);
+		else 	$color_t = ImageColorAllocate( $im_, $dr, $dv, $db);
+
 		imagefill ($im_, 0, 0, $color_t);
 
 		//??
 		//$dist = abs($trait);
+		
+		$transp_x = false;
+		
 		for ($x = 0; $x < $x_i; $x++) {
 			for ($y=0; $y < $y_i; $y++) {
 			
@@ -2097,20 +2103,28 @@ function image_aplatir($im, $format='jpg', $coul='000000', $qualite=NULL)
 					$r = $dr;
 					$g = $dv;
 					$b = $db;
+					
+					$transp_x = $x; // Memoriser un point transparent
+					$transp_y = $y;
+					
 				} else {
 					$r = round($a * $r + $dr * (1-$a));
 					$g = round($a * $g + $dv * (1-$a));
 					$b = round($a * $b + $db * (1-$a));
 				}
-						
-				$color = ImageColorAllocate( $im_, $r, $g, $b);
+				$a = (1-$a) *127;
+				$color = ImageColorAllocateAlpha( $im_, $r, $g, $b, $a);
 				imagesetpixel ($im_, $x, $y, $color);	
 			}
 		}
 		// passer en palette si besoin
 		if ($format=='gif' OR ($format=='png' AND $qualite!==0)){
 			// creer l'image finale a palette (on recycle l'image initiale)			
+
+
 			@imagetruecolortopalette($im,true,$qualite);
+
+
 			//$im = imagecreate($x_i, $y_i);
 			// copier l'image true color vers la palette
 			imagecopy($im, $im_, 0, 0, 0, 0, $x_i, $y_i);
@@ -2118,6 +2132,13 @@ function image_aplatir($im, $format='jpg', $coul='000000', $qualite=NULL)
 			// si la fonction est disponible (php>=4.3)
 			if (function_exists('imagecolormatch'))
 				@imagecolormatch($im_, $im);
+				
+			if ($format=='gif' && $transparence && $transp_x) {	
+				$color_t = ImagecolorAt( $im, $transp_x, $transp_y);
+				if ($format == "gif" && $transparence) @imagecolortransparent($im, $color_t);
+			}
+				
+				
 			// produire le resultat
 			image_gd_output($im, $image, $qualite);
 		}
