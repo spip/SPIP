@@ -61,14 +61,14 @@ function exec_auteurs_args($statut, $tri, $debut, $recherche=NULL, $trouve='')
 	} else {
 
 		pipeline('exec_init',array('args'=>array('exec'=>'auteurs'),'data'=>''));
-		// Chaine indiquant le mode de tri est obsolète depuis Ajax
+
+		$visiteurs = !statut_min_redac($statut);
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('info_auteurs_par_tri',
-					array('partri' => '')) .
-				     "($statut)",
+		echo $commencer_page(
+			$visiteurs ? _T('info_visiteurs') :  _T('info_auteurs'),
 				     "auteurs","redacteurs");
 
-		echo bandeau_auteurs($tri, !statut_min_redac($statut));
+		echo bandeau_auteurs($tri, $visiteurs);
 
 		echo  $trouve, "<br class='nettoyeur' />";
 
@@ -362,11 +362,7 @@ function afficher_n_auteurs($auteurs) {
 	foreach ($auteurs as $row) {
 
 		list($s, $mail, $nom, $w, $p) = $formater_auteur($row['id_auteur']);
-		if ($w) {
-		  if (preg_match(',^([^>]*>)[^<]*(.*)$,', $w,$r)) {
-		    $w = $r[1] . substr($row['site'],0,20) . $r[2];
-		  }
-		}
+
 		$res .= "\n<tr class='tr_liste'>"
 		. "\n<td>"
 		. $s
