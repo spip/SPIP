@@ -134,7 +134,10 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 		// choix de la langue
 		if ($i = menu_langues('var_lang_ecrire')) {
 			$res .= "<li id='bandeau_couleur5' class='bandeau_couleur'><div class='menu-item'>"
-			. (_request('lang')?$i:"<a href='".parametre_url(self(),'lang',$GLOBALS['spip_lang'])."'>"._T('info_langues')."</a>")
+			. (_request('lang')?$i:"<a href='".parametre_url(self(),'lang',$GLOBALS['spip_lang'])
+			."' title='".attribut_html(_T('info_langues'))."'>"
+			. traduire_nom_langue($GLOBALS['spip_lang'])
+			."</a>")
 			. "</div></li>";
 		}
 
