@@ -79,7 +79,7 @@ function action_poster_forum_prive_post($r)
 	   set_request('statut', $statut);
 	   set_request('script', $script);
 
-	   include('ecrire/index.php');
+	   include(_DIR_RESTREINT.'index.php');
 	   exit;
 	}
 }
