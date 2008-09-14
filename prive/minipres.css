@@ -80,8 +80,8 @@ p.resultat.echec { background-color: #d60c0c; }
 .page_login .formulaire_menu_lang input.submit { display: inline; }
 .page_login .formulaire_login { clear: both; text-align: left; font-size: 0.80em; }
 .page_login .formulaire_login fieldset { margin: 0; padding: 0; border: 1px solid #BABDB6; padding: 1em; font-size: 1em; }
-.page_login .formulaire_login fieldset .spip_logos { float: right; padding-left: 10px; }
-.page_login .formulaire_login fieldset ul { float: left; width: 75%; margin: 0; padding: 0; list-style: none; }
+.page_login .formulaire_login fieldset .spip_logos { float: right; padding-left: 5px; }
+.page_login .formulaire_login fieldset ul { float: left; width: 70%; margin: 0; padding: 0; list-style: none; }
 .page_login .formulaire_login fieldset ul li { margin: 0; padding: 0.50em 0; }
 .page_login .formulaire_login fieldset ul li label,
 .page_login .formulaire_login fieldset ul li .erreur_message,
