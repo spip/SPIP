@@ -745,6 +745,7 @@ prive/javascript/articles_tous_edite.js -text
 prive/javascript/async_upload.js -text
 prive/javascript/bgiframe.js -text
 prive/javascript/dragdrop_interface.js -text
+prive/javascript/gadgets.js -text
 prive/javascript/jquery.cookie.js -text
 prive/javascript/jquery.form.js -text
 prive/javascript/jquery.ifixpng.js -text

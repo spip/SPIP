@@ -559,7 +559,8 @@ function debut_javascript()
 			"';\n") .
 		//plugin needed to fix the select showing through the submenus o IE6
     (($browser_name == "MSIE" && $browser_version <= 6) ? http_script('', 'bgiframe.js'):'' ) .
-    http_script('', 'presentation.js');
+    http_script('', 'presentation.js') . 
+    http_script('', 'gadgets.js');
 }
 
 // Fonctions onglets

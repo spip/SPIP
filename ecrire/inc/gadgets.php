@@ -209,56 +209,15 @@ function repercuter_gadgets($id_rubrique) {
 	// comme on cache fortement ce menu,
 	// son url change en fonction de sa date de modif
 	$toutsite = "./?exec=menu_rubriques\\x26date=" .  $GLOBALS['meta']['date_calcul_rubriques'];
-	
 	$navrapide = "./?exec=menu_navigation\\x26id_rubrique=$id_rubrique";
-
 	$agenda = "./?exec=menu_agenda";
 
 	return
+	
+	 "\ninit_gadgets('$toutsite','$navrapide','$agenda','"
+	 .str_replace('</', '<\\/', addslashes(strtr(gadget_messagerie(),"\n\r","  ")))
+	 ."');\n";
 
-	 "
-	jQuery('#boutonbandeautoutsite')
-	.one('mouseover',function(event){
-		if ((event.altKey || event.metaKey) != true) {
-			changestyle('bandeautoutsite');
-			jQuery('#gadget-rubriques')
-			.load('$toutsite');
-		} else { window.open('$toutsite\\x26transformer_xml=valider_xml'); }
-	})
-	.one('focus', function(){jQuery(this).mouseover();});"
-
-	."
-	jQuery('#boutonbandeaunavrapide')
-	.one('mouseover',function(event){
-		if ((event.altKey || event.metaKey) != true) {
-			changestyle('bandeaunavrapide');
-			jQuery('#gadget-navigation')
-			.load('$navrapide');
-		} else { window.open('$navrapide\\x26transformer_xml=valider_xml'); }
-	})
-	.one('focus', function(){jQuery(this).mouseover();});"
-
-	."
-	jQuery('#boutonbandeauagenda')
-	.one('mouseover',function(event){
-		if ((event.altKey || event.metaKey) != true) {
-			changestyle('bandeauagenda');
-			jQuery('#gadget-agenda')
-			.load('$agenda');
-		} else { window.open('$agenda\\x26transformer_xml=valider_xml'); }
-	})
-	.one('focus', function(){jQuery(this).mouseover();});"
-
-	."
-	jQuery('#gadget-messagerie')
-	.html('".str_replace('</', '<\\/', addslashes(strtr(gadget_messagerie(),"\n\r","  ")))."');
-	"
-
-	// la case de recherche s'efface la premiere fois qu'on la clique
-	."
-	jQuery('#form_recherche')
-	.one('click',function(){this.value='';});
-	";
 }
 
 ?>
