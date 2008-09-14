@@ -2061,12 +2061,12 @@ function image_aplatir($im, $format='jpg', $coul='000000', $qualite=NULL, $trans
 		$im = @$image["fonction_imagecreatefrom"]($im);
 		imagepalettetotruecolor($im);
 		$im_ = imagecreatetruecolor($x_i, $y_i);
-		@imagealphablending($im_, false); 
-		@imagesavealpha($im_,true); 
 		if ($image["format_source"] == "gif" AND function_exists('ImageCopyResampled')) { 
 			// Si un GIF est transparent, 
 			// fabriquer un PNG transparent  
 			// Conserver la transparence 
+			@imagealphablending($im_, false); 
+			@imagesavealpha($im_,true); 
 			if (function_exists("imageAntiAlias")) imageAntiAlias($im_,true); 
 			@ImageCopyResampled($im_, $im, 0, 0, 0, 0, $x_i, $y_i, $x_i, $y_i);
 			imagedestroy($im);
@@ -2074,7 +2074,11 @@ function image_aplatir($im, $format='jpg', $coul='000000', $qualite=NULL, $trans
 		}
 		
 		// allouer la couleur de fond
-		if ($transparence) $color_t = imagecolorallocatealpha( $im_, $dr, $dv, $db, 127);
+		if ($transparence) {
+			@imagealphablending($im_, false); 
+			@imagesavealpha($im_,true); 
+			$color_t = imagecolorallocatealpha( $im_, $dr, $dv, $db, 127);
+		}
 		else $color_t = ImageColorAllocate( $im_, $dr, $dv, $db);
 		
 		imagefill ($im_, 0, 0, $color_t);
