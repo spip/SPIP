@@ -106,16 +106,11 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "", $id="", $
 	."'$style_cadre>";
 
 	if ($spip_display != 1 AND $spip_display != 4 AND strlen($icone) > 1) {
-		$ret .= "\n<div style='position: absolute; top: -16px; $spip_lang_left: 10px;z-index:1;'>";
 		if ($fonction) {
-			$ret .= "\n<div " . http_style_background($icone, "no-repeat; padding: 0px; margin: 0px") . ">"
-			. http_img_pack($fonction, "", "")
-			. "</div>";
+			
+			$ret .= http_img_pack("$fonction", "", " class='cadre-icone' ".http_style_background($icone, "no-repeat; padding: 0px; margin: 0px"));
 		}
-		else $ret .=  http_img_pack("$icone", "", "");
-		$ret .= "</div>";
-
-		$style_cadre = " style='position: relative; top: 15px; margin-bottom: 14px;'";
+		else $ret .=  http_img_pack("$icone", "", " class='cadre-icone'");
 	}
 
 	if (strlen($titre) > 0) {
