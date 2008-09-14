@@ -164,7 +164,7 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 			return;
 	}
 
-	$lien = _DIR_RESTREINT . generer_url_ecrire($script, $args, true, true) . "#id$id_forum";
+	$lien =  generer_url_ecrire($script, $args, true, true) . "#id$id_forum";
 	$boutons ='';
 	if ($suppression)
 	  $boutons .= icone_inline(_T('icone_supprimer_message'), generer_action_auteur('instituer_forum',"$id_forum-$suppression", $lien),
@@ -177,7 +177,7 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 			"creer.gif", 'right', 'non');
 
 	if ($valider_repondre) {
-	  $dblret = rawurlencode($lien);
+	  $dblret = rawurlencode(_DIR_RESTREINT_ABS . $lien);
 	  $boutons .= icone_inline(_T('icone_valider_message') . " &amp; " .   _T('lien_repondre_message'), generer_action_auteur('instituer_forum',"$id_forum-$valider", _DIR_RACINE . generer_url_public('forum', "$ref&id_forum=$id_forum&retour=$dblret", true, true)),
 			     $logo,
 			     "creer.gif", 'right', 'non');
