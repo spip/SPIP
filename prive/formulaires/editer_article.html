@@ -79,7 +79,7 @@
 	    </li>]
 
 	  	[(#ENV**{config}|table_valeur{articles_urlref}|=={non}|?{#ENV**{url_site,#ENV**{nom_site,''}},' '}|oui)
-	  	<li class="editer_liens_sites editer_type_fieldset">
+	  	<li class="editer_liens_sites fieldset">
 			<fieldset>
 				<h3 class="legend"><:entree_liens_sites:></h3>
 				<ul>

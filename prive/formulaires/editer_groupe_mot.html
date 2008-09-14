@@ -29,7 +29,7 @@
 				<textarea name='texte' id='text_area' class='barre_inserer' cols='40' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]'[
 				(#ENV**{browser_caret,''})]>[(#ENV**{texte})]</textarea>
 	    </li>
-	    <li class="editer_type_fieldset">
+	    <li class="fieldset">
 	      <fieldset><h3 class="legend"><:info_mots_cles_association:></h3>
 	      <ul><li class="editer_groupe_mots_associer">
 	    	<div class='choix'><input type='checkbox' class='checkbox' name='tables_liees&#91;&#93;' value='articles'[(#VAL{articles}|in_any{#ENV{tables_liees}})checked='checked'] id='articles' /><label for='articles'><:item_mots_cles_association_articles:></label></div>
