@@ -129,6 +129,7 @@ function naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $n_
 	$onglet_contenu = "<div id='wysiwyg'>$fond</div>"
 		. (_INTERFACE_ONGLETS? $boucles:"");
 
+	include_spip('inc/presenter_enfants');
 	$onglet_enfants =
 	  afficher_enfant_rub($id_rubrique, false, true)
 	  .(_INTERFACE_ONGLETS?"":
