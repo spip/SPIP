@@ -427,7 +427,7 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 		}
 
 		if (preg_match(',^[a-z0-9_]+$,', $soustype)) {
-			$fond =  $type.'_'.$soustype;
+			$fond = $type.'_'.$soustype;
 			if (!find_in_path('modeles/'. $fond.'.html')) {
 				$fond = '';
 				$class = $soustype;
@@ -440,8 +440,8 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 	// en cas d'echec : si l'objet demande a une url, on cree un petit encadre
 	// avec un lien vers l'objet ; sinon on passe la main au suivant
 	if (!$fond) {
-		$fond = 'modeles/'.$type;
-		if (!find_in_path($fond.'.html')) {
+		$fond = $type;
+		if (!find_in_path('modeles/'.$fond.'.html')) {
 			if (!$lien)
 				$lien = calculer_url("$type$id", '', 'tout', $connect);
 			if (strpos($lien[1],'spip_url') !== false)
@@ -457,7 +457,7 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 	// Creer le contexte
 	$contexte = array( 
 		'lang' => $GLOBALS['spip_lang'], 
-		'fond' => $fond, 
+		'fond' => 'modeles/'.$fond,
 		'dir_racine' => _DIR_RACINE # eviter de mixer un cache racine et un cache ecrire (meme si pour l'instant les modeles ne sont pas caches, le resultat etant different il faut que le contexte en tienne compte 
 	); 
 	// Le numero du modele est mis dans l'environnement
