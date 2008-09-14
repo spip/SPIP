@@ -398,7 +398,7 @@ if (@is_readable(_DIR_TMP."charger_plugins_options.php")){
 }
 
 if (!defined('_OUTILS_DEVELOPPEURS'))
-	define('_OUTILS_DEVELOPPEURS',true);
+	define('_OUTILS_DEVELOPPEURS',false);
 
 // charger systematiquement inc/autoriser dans l'espace restreint
 if (test_espace_prive())
