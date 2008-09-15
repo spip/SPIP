@@ -3,18 +3,18 @@ body { border: 0; }
 
 /* * Icones et bandeaux */
 /* Da cenacellare
-#bandeau-principal { background-color: #FFF; margin: 0; padding: 0; border-bottom: 1px solid #000; }
-.bandeau-icones { background-color: #FFF; margin: 0; padding: 0; padding-bottom: 2px; padding-top: 4px; } */
-/* .bandeau_sec .gauche { margin-top: 0; padding: 2px; padding-top: 0; background-color: #FFF; border-bottom: 1px solid #000; border-left: 1px solid #000; border-right: 1px solid #000; z-index: 100; } */
+#bandeau-principal { background-color: #fff; margin: 0; padding: 0; border-bottom: 1px solid #000; }
+.bandeau-icones { background-color: #fff; margin: 0; padding: 0; padding-bottom: 2px; padding-top: 4px; } */
+/* .bandeau_sec .gauche { margin-top: 0; padding: 2px; padding-top: 0; background-color: #fff; border-bottom: 1px solid #000; border-left: 1px solid #000; border-right: 1px solid #000; z-index: 100; } */
 /* .bandeau-icones .separateur { vertical-align: middle; height: 100%; width: 11px; margin: 0; padding: 0; background-position: 5px 0px; } */
 
 a.lien_sous { color: #666; }
 a.lien_sous:hover { color: #000; }
 
-div.bandeau_rubriques { background-color: #EEE; border: 1px solid #555; }
-a.bandeau_rub { width: 120px; display: block; background-repeat: no-repeat; padding: 2px; border-bottom: 1px solid #CCC; font-size: 10px; text-decoration: none; color: #666; }
-a.bandeau_rub:hover { background-color: #FFF; background-repeat: no-repeat; color: #333; text-decoration: none; }
-div.bandeau_rub { position: absolute; top: 4px; background-color: #EEE; padding: 0; border: 1px solid #555; visibility: hidden; }
+div.bandeau_rubriques { background-color: #eee; border: 1px solid #555; }
+a.bandeau_rub { width: 120px; display: block; background-repeat: no-repeat; padding: 2px; border-bottom: 1px solid #ccc; font-size: 10px; text-decoration: none; color: #666; }
+a.bandeau_rub:hover { background-color: #fff; background-repeat: no-repeat; color: #333; text-decoration: none; }
+div.bandeau_rub { position: absolute; top: 4px; background-color: #eee; padding: 0; border: 1px solid #555; visibility: hidden; }
 
 div.pos_r { position: relative; }
 
