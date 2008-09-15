@@ -102,7 +102,7 @@ function balise_DATE_dist ($p) {
 	$d = champ_sql('date', $p);
 #	if ($d === "@\$Pile[0]['date']")
 #		$d = "isset(\$Pile[0]['date']) ? $d : time()";
-	$p->code = "normaliser_date($d)";
+	$p->code = $d;
 	return $p;
 }
 
@@ -113,7 +113,7 @@ function balise_DATE_REDAC_dist ($p) {
 	$d = champ_sql('date_redac', $p);
 #	if ($d === "@\$Pile[0]['date_redac']")
 #		$d = "isset(\$Pile[0]['date_redac']) ? $d : time()";
-	$p->code = "normaliser_date($d)";
+	$p->code = $d;
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -122,8 +122,7 @@ function balise_DATE_REDAC_dist ($p) {
 // http://www.spip.net/fr_article1971.html
 // http://doc.spip.org/@balise_DATE_MODIF_dist
 function balise_DATE_MODIF_dist ($p) {
-	$_date = champ_sql('date_modif', $p);
-	$p->code = "$_date";
+	$p->code = champ_sql('date_modif', $p);
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -133,8 +132,8 @@ function balise_DATE_MODIF_dist ($p) {
 // http://doc.spip.org/@balise_DATE_NOUVEAUTES_dist
 function balise_DATE_NOUVEAUTES_dist($p) {
 	$p->code = "((\$GLOBALS['meta']['quoi_de_neuf'] == 'oui'
-	AND @file_exists(_DIR_TMP . 'mail.lock')) ?
-	normaliser_date(@filemtime(_DIR_TMP . 'mail.lock')) :
+	AND @is_readable(_DIR_TMP . 'mail.lock')) ?
+	@filemtime(_DIR_TMP . 'mail.lock') :
 	\"'0000-00-00'\")";
 	$p->interdire_scripts = false;
 	return $p;
