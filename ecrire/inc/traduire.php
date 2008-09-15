@@ -52,7 +52,6 @@ function charger_langue($lang, $module = 'spip') {
 			#spip_log("module de langue : ${module}_$l.php");
 		}
 	}
-	$GLOBALS[$GLOBALS['idx_lang']] = pipeline('charger_langue',array('args'=>array('module'=>$module,'lang'=>$lang),'data'=>$GLOBALS[$GLOBALS['idx_lang']]));
 }
 
 //
