@@ -49,7 +49,7 @@ function formulaires_editer_site_verifier_dist($id_syndic='new', $id_rubrique=0,
 			foreach($auto as $k=>$v){
 				set_request($k,$v);
 			}
-			$erreurs['message_erreur'] =
+			$erreurs['message_ok'] =
 			_T('texte_referencement_automatique_verifier', array('url' => $u));
 		}
 		else{
