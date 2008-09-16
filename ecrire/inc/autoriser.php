@@ -508,8 +508,11 @@ function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 	}
 
 	// Un admin complet fait ce qu'elle veut
-	return
-		true;
+	// sauf se degrader
+	if ($id == $qui['id_auteur'] && $opt['statut'])
+		return false;
+	else
+		return true;
 }
 
 
