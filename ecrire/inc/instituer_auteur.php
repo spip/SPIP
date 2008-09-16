@@ -27,7 +27,7 @@ include_spip('inc/autoriser');
 // http://doc.spip.org/@inc_instituer_auteur_dist
 function inc_instituer_auteur_dist($auteur, $modif = true) {
 
-	if (!$id_auteur = $auteur['id_auteur']) {
+	if (!$id_auteur = intval($auteur['id_auteur'])) {
 		$statut = _STATUT_AUTEUR_CREATION;
 	} else
 		$statut = $auteur['statut'];
