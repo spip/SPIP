@@ -536,7 +536,7 @@ Quauques auberjadors autorizan pas l\'enviament d\'e-mails dempuei lors servidor
 'info_sites_trouves_dans_texte' => 'Sits trobats (dins lo text)',
 'info_sous_titre' => 'Sost&iacute;tol:',
 'info_statut_administrateur' => 'Administrator',
-'info_statut_auteur' => 'Estatut de quel autor:',
+'info_statut_auteur' => '<MODIF>Estatut de quel autor:',
 'info_statut_efface' => 'Esfa&ccedil;at',
 'info_statut_redacteur' => 'Redactor',
 'info_statut_site_1' => 'Queu sit es:',

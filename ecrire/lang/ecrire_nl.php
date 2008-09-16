@@ -626,7 +626,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_sites_trouves_dans_texte' => 'Gevonden sites (in de tekst)',
 'info_sous_titre' => 'Ondertitel:',
 'info_statut_administrateur' => 'Administrator',
-'info_statut_auteur' => 'Status van deze auteur :',
+'info_statut_auteur' => '<MODIF>Status van deze auteur :',
 'info_statut_auteur_a_confirmer' => 'Inschrijving bevestigen',
 'info_statut_auteur_autre' => 'Andere status&nbsp;:',
 'info_statut_efface' => 'Uitgewist',
