@@ -39,6 +39,12 @@ function action_editer_auteur_dist() {
 			intval(_request('id_parent')),
 			_request('restreintes'),
 			$r[0]);
+		if (_request('statut')){
+			instituer_auteur($id_auteur,
+			  array('statut'=>_request('statut'),'id_parent'=>intval(_request('id_parent')),'restreintes'=>_request('restreintes'))
+			  );
+		}
+
 
 			if ($echec AND $redirect) {
 		// revenir au formulaire de saisie
@@ -184,22 +190,6 @@ function action_legender_auteur_post($statut, $nom, $email, $bio, $nom_site_aute
 			rename($logo, str_replace($id_hack, $id_auteur, $logo));
 	}
 
-	// Restreindre avant de declarer l'auteur
-	// (section critique sur les droits)
-	if ($id_parent) {
-		if (is_array($restreintes))
-			$restreintes[] = $id_parent;
-		else
-			$restreintes = array($id_parent);
-	}
-	if (is_array($restreintes)
-	AND autoriser('modifier', 'auteur', $id_auteur, NULL, array('restreint'=>$restreintes))) {
-		sql_delete("spip_auteurs_rubriques", "id_auteur=".sql_quote($id_auteur));
-		foreach (array_unique($restreintes) as $id_rub)
-			if ($id_rub = intval($id_rub)) // si '0' on ignore
-				sql_insertq('spip_auteurs_rubriques', array('id_auteur' => $id_auteur, 'id_rubrique'=>$id_rub));
-	}
-
 	include_spip('inc/modifier');
 
 	// Lier a un article
@@ -256,6 +246,15 @@ function instituer_auteur($id_auteur, $c) {
 	
 	if (isset($c['statut']))
 		$statut = $champs['statut'] = $c['statut'];
+
+	// Restreindre avant de declarer l'auteur
+	// (section critique sur les droits)
+	if ($c['id_parent']) {
+		if (is_array($c['restreintes']))
+			$c['restreintes'][] = $c['id_parent'];
+		else
+			$c['restreintes'] = array($c['id_parent']);
+	}
 	
 	// Envoyer aux plugins
 	$champs = pipeline('pre_edition',
@@ -267,11 +266,19 @@ function instituer_auteur($id_auteur, $c) {
 			'data' => $champs
 		)
 	);
+	
+	if (is_array($c['restreintes'])
+	AND autoriser('modifier', 'auteur', $id_auteur, NULL, array('restreint'=>$c['restreintes']))) {
+		sql_delete("spip_auteurs_rubriques", "id_auteur=".sql_quote($id_auteur));
+		foreach (array_unique($c['restreintes']) as $id_rub)
+			if ($id_rub = intval($id_rub)) // si '0' on ignore
+				sql_insertq('spip_auteurs_rubriques', array('id_auteur' => $id_auteur, 'id_rubrique'=>$id_rub));
+	}
 
 	if (!count($champs)) return;
 	sql_updateq('spip_auteurs', $champs , 'id_auteur='.$id_auteur);
 	include_spip('inc/modifier');
-	revision_auteur($id_auteur, $c);
+	sql_updateq('spip_auteurs',$champs,'id_auteur='.$id_auteur);
 	
 	// Invalider les caches
 	include_spip('inc/invalideur');

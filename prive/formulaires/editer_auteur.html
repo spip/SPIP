@@ -49,6 +49,7 @@
 	    [(#REM)
 	    	Site ouaib : nom et url
 		]		
+		[<li class='editer_statut'>(#ENV**{config}|table_valeur{auteur}|instituer_auteur_ici)</li>]
 	  	<li class='editer_liens_sites fieldset'>
 			<fieldset>
 			<h3 class="legend"><:info_site_web:></h3>
@@ -158,24 +159,7 @@
 				</ul>
 			</fieldset>
 		</li>
-
-		[(#REM)
-			Changement de statut ?
-
-			Il ne peut y en avoir qu'un par page, sinon
-			- 1) l'affichage du plongeur ne se fait que sur le premier instituer
-			     (se corrige en metant uniqid() sur $ancre de inc/instituer_auteur)
-			- 2) la fonction js findObj() utilisee pour ajouter une rubrique restreinte
-			     retourne toujours le premier instituer... (pas trouve la correction)
-		]
-		[(#REM) Du coup, on commente celui-ci...
-		[<li class='editer_statut'>(#ENV**{config}|table_valeur{auteur}|instituer_auteur_ici)</li>]
-		]
 	  </ul>
-	  	[(#REM) Et on met un hidden...]
-		[(#ENV{id_auteur}|intval|non) <input type='hidden' name='statut' value='#EVAL{_STATUT_AUTEUR_CREATION}' />]
-
-
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
 	  <p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>

@@ -32,13 +32,13 @@ function inc_instituer_auteur_dist($auteur) {
 	} else
 		$statut = $auteur['statut'];
 
-	$ancre =  uniqid("instituer_auteur-" . intval($id_auteur).'-');
+	$ancre =  "instituer_auteur-" . intval($id_auteur);
 
 	$menu = choix_statut_auteur($statut, $id_auteur, "$ancre-aff");
 
 	if (!$menu) return '';
 
-	$res = "<b>" . _T('info_statut_auteur')."</b> " . $menu;
+	$res = "<label>" . _T('info_statut_auteur')."</label> " . $menu;
 
 	// Prepare le bloc des rubriques pour les admins eventuellement restreints ;
 	// si l'auteur n'est pas '0minirezo', on le cache, pour pouvoir le reveler
@@ -48,17 +48,11 @@ function inc_instituer_auteur_dist($auteur) {
 		: " style='display: none'";
 
 	if ($menu_restreints = choix_rubriques_admin_restreint($auteur))
-		$res .= "<div id='$ancre-aff'$vis>"
+		$res .= "<div class='instituer_auteur' id='$ancre-aff'$vis>"
 			. $menu_restreints
 			. "</div>";
 
-	return debut_cadre_relief('',true)
-		. "<div id='"
-		. $ancre
-		. "'>"
-		. $res 
-		. '</div>'
-		. fin_cadre_relief(true);
+	return $res;
 }
 
 
@@ -109,7 +103,7 @@ function choix_statut_auteur($statut, $id_auteur, $ancre) {
 		$menu .= mySel('nouveau',$statut,_T('info_statut_auteur_a_confirmer'));
 
 	$statut_rubrique = str_replace(',', '|', _STATUT_AUTEUR_RUBRIQUE);
-	return "<select name='statut' id='statut' size='1' class='fondl'
+	return "<select class='select' name='statut' id='statut' size='1' class='fondl'
 		onchange=\"(this.options[this.selectedIndex].value.match(/^($statut_rubrique)\$/))?jQuery('#$ancre:hidden').slideDown():jQuery('#$ancre:visible').slideUp();\">"
 	. $menu
 	. "\n<option" .
@@ -178,10 +172,10 @@ function choix_rubriques_admin_restreint($auteur) {
 			: _T('info_restreindre_rubrique');
 
 		$res .= debut_block_depliable(true,"statut$id_auteur")
-		. "\n<div id='ajax_rubrique' class='arial1'><br />\n"
+		. "\n<div id='ajax_rubrique' class='arial1'>\n"
 		. "<b>"
 		. $label 
-		. "</b><br />"
+		. "</b>"
 		. "\n<input name='id_auteur' value='"
 		. $id_auteur
 		. "' type='hidden' />"
