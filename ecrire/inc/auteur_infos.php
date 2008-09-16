@@ -31,17 +31,12 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 	  OR $quoi=='infos') {
 		if ($quoi!='edit' AND $auth){
 			// Formulaire de statut
-			// Calculer le bloc de statut (modifiable ou non selon)
+			// Calculer le bloc de statut (non modifiable)
 			// il n'est pas possible d'avoir 2 blocs de statut modifiables dans la meme page
 			// car le plonguer de rubrique repose sur son unicite -> a reecrire
-			/*
 			$instituer_auteur = charger_fonction('instituer_auteur', 'inc');
-			$bloc_statut = $instituer_auteur($auteur);
-			if ($bloc_statut) {
-				$bloc_statut .= "<div style='text-align: right'><input type='submit' value='"._T('bouton_enregistrer')."' class='fondo' /></div>";
-				$bloc_statut =  generer_action_auteur('instituer_auteur', $id_auteur, self(), $bloc_statut, ' method="post"');
-			}
-			*/
+			$bloc_statut = $instituer_auteur($auteur, false);
+			$bloc_statut = $bloc_statut? "<div class='statut'>$bloc_statut</div>":$bloc_statut;
 		} else {
 			$bloc_statut = "";
 		}
