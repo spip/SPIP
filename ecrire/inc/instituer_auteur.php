@@ -55,6 +55,7 @@ function inc_instituer_auteur_dist($auteur, $modif = true) {
 	return $res;
 }
 
+// http://doc.spip.org/@traduire_statut_auteur
 function traduire_statut_auteur($statut){
 	$recom = array("info_administrateurs" => _T('item_administrateur_2'),
 		       "info_redacteurs" =>  _T('intem_redacteur'),
@@ -126,6 +127,7 @@ function choix_statut_auteur($statut, $id_auteur, $ancre) {
 	. "</select>\n";
 }
 
+// http://doc.spip.org/@afficher_rubriques_admin_restreintes
 function afficher_rubriques_admin_restreintes($auteur, $modif = true){
 	global $spip_lang;
 
