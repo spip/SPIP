@@ -657,7 +657,7 @@ and connect again to the site.
 'pass_nouveau_pass' => 'New password',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Forgetting password',
-'pass_quitter_fenetre' => 'Quit this window',
+'pass_quitter_fenetre' => 'Close this window',
 'pass_rappel_login' => 'Reminder: your identifier (login) is "@login@".',
 'pass_recevoir_mail' => 'You will receive an e-mail explaining how you can retrieve your access to the site.',
 'pass_retour_public' => 'Back to the public site',
