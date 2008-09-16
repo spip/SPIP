@@ -38,10 +38,10 @@ function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $
 	// login trop court ou existant
 	if ($p = _request('new_login')){
 		if (strlen($p) < _LOGIN_TROP_COURT) {
-			$erreurs['new_login'] = _T('info_login_trop_court');
+			$erreurs['login'] = _T('info_login_trop_court');
 			$erreurs['message_erreur'] .= _T('info_login_trop_court');
 		} elseif (sql_countsel('spip_auteurs', "login=" . sql_quote($p) . " AND id_auteur!=$id_auteur AND statut!='5poubelle'")) {
-			$erreurs['new_login']= 'info_login_existant';
+			$erreurs['new_login']= _T('info_login_existant');
 			$erreurs['message_erreur'] .= _T('info_login_existant');
 		}
 	}
