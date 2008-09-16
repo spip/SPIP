@@ -26,7 +26,9 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 
 	$id_auteur = intval($auteur['id_auteur']);
 
-	if ((!$auth = autoriser('modifier', 'auteur', $id_auteur)) OR $quoi=='infos') {
+	if (
+	  	(!$auth = autoriser('modifier', 'auteur', $id_auteur,null,array('statut'=>$auteur['statut']))) 
+	  OR $quoi=='infos') {
 		if ($quoi!='edit' AND $auth){
 			// Formulaire de statut
 			// Calculer le bloc de statut (modifiable ou non selon)
