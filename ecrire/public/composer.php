@@ -496,7 +496,14 @@ function calculer_select ($select = array(), $from = array(),
 		if ($sous[0]=='SELF') {
 			// c'est une sous requete identique a elle meme sous la forme (SELF,$select,$where)
 			array_push($where_simples,$sous[2]);
-			$where[$k] = remplace_sous_requete($w,"(".calculer_select($sous[1],$from,$from_type,array($sous[2],'0=0'),$join,array(),array(),'',$having,$table,$id,$serveur,false).")");
+			$where[$k] = remplace_sous_requete($w,"(".calculer_select(
+			$sous[1],
+			$from,
+			$from_type,
+			array($sous[2],'0=0'), // pour accepter une string et forcer a faire le menage car on a surement simplifie select et where
+			$join,
+			array(),array(),'',
+			$having,$table,$id,$serveur,false).")");
 		}
 		if ($sous[0]=='SUBSELECT') {
 			// c'est une sous requete explicite sous la forme identique a sql_select : (SUBSELECT,$select,$from,$where,$groupby,$orderby,$limit,$having)
@@ -505,7 +512,7 @@ function calculer_select ($select = array(), $from = array(),
 			$sous[1], # select
 			$sous[2], #from
 			array(), #from_type
-			$sous[3]?$sous[3]:array(), #where
+			$sous[3]?(is_array($sous[3])?$sous[3]:array($sous[3])):array(), #where, qui peut etre de la forme string comme dans sql_select
 			array(), #join
 			$sous[4]?$sous[4]:array(), #groupby
 			$sous[5]?$sous[5]:array(), #orderby
@@ -516,7 +523,6 @@ function calculer_select ($select = array(), $from = array(),
 		}
 		array_pop($where_simples);
 	}
-	//var_dump($where);
 
 	foreach($having as $k => $v) { 
 		if ((!$v) OR ($v==1) OR ($v=='0=0')) {
