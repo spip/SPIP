@@ -434,7 +434,7 @@ function nettoyer_env_doublons($envd) {
 function match_self($w){
 	if (is_string($w)) return false;
 	if (is_array($w)) {
-		if (reset($w)=="SELF") return $w;
+		if (in_array(reset($w),array("SELF","SUBSELECT"))) return $w;
 		foreach($w as $sw)
 			if ($m=match_self($sw)) return $m;
 	}
@@ -443,7 +443,7 @@ function match_self($w){
 // http://doc.spip.org/@remplace_sous_requete
 function remplace_sous_requete($w,$sousrequete){
 	if (is_array($w)) {
-		if (reset($w)=="SELF") return $sousrequete;
+		if (in_array(reset($w),array("SELF","SUBSELECT"))) return $sousrequete;
 		foreach($w as $k=>$sw)
 			$w[$k] = remplace_sous_requete($sw,$sousrequete);
 	}
@@ -493,8 +493,27 @@ function calculer_select ($select = array(), $from = array(),
 		$menage = true;
 		// on recupere la sous requete 
 		$sous = match_self($w);
-		array_push($where_simples,$sous[2]);
-		$where[$k] = remplace_sous_requete($w,"(".calculer_select($sous[1],$from,$from_type,array($sous[2],'0=0'),$join,array(),array(),'',$having,$table,$id,$serveur,false).")");
+		if ($sous[0]=='SELF') {
+			// c'est une sous requete identique a elle meme sous la forme (SELF,$select,$where)
+			array_push($where_simples,$sous[2]);
+			$where[$k] = remplace_sous_requete($w,"(".calculer_select($sous[1],$from,$from_type,array($sous[2],'0=0'),$join,array(),array(),'',$having,$table,$id,$serveur,false).")");
+		}
+		if ($sous[0]=='SUBSELECT') {
+			// c'est une sous requete explicite sous la forme identique a sql_select : (SUBSELECT,$select,$from,$where,$groupby,$orderby,$limit,$having)
+			array_push($where_simples,$sous[3]); // est-ce utile dans ce cas ?
+			$where[$k] = remplace_sous_requete($w,"(".calculer_select(
+			$sous[1], # select
+			$sous[2], #from
+			array(), #from_type
+			$sous[3]?$sous[3]:array(), #where
+			array(), #join
+			$sous[4]?$sous[4]:array(), #groupby
+			$sous[5]?$sous[5]:array(), #orderby
+			$sous[6], #limit
+			$sous[7]?$sous[7]:array(), #having
+			$table,$id,$serveur,false
+			).")");
+		}
 		array_pop($where_simples);
 	}
 	//var_dump($where);
