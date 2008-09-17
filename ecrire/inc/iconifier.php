@@ -141,7 +141,7 @@ function indiquer_logo($titre, $id_objet, $mode, $id, $script, $iframe_script) {
 		$script,
 		"$id_objet=$id",
 		$iframe_script.$afficher,
-		"enctype='multipart/form-data' class='form_upload_icon'");
+		" enctype='multipart/form-data' class='form_upload_icon'");
 }
 
 // http://doc.spip.org/@decrire_logo
