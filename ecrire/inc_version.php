@@ -324,7 +324,7 @@ $liste_des_authentifications = array(
 
 // numero de branche, utilise par les plugins 
 // pour specifier les versions de SPIP necessaire
-$spip_version_branche = "2.0.0 dev";
+$spip_version_branche = "2.0 beta2";
 // version des signatures de fonctions PHP
 // (= numero SVN de leur derniere modif cassant la compatibilite et/ou necessitant un recalcul des squelettes)
 $spip_version_code = 12691;
