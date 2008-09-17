@@ -128,7 +128,7 @@ function action_tester_dist() {
 		include_spip('inc/filtres');
 		include_spip('inc/filtres_images');
 		$taille_preview = 150;
-		$image = image_valeurs_trans(_ROOT_IMG_PACK.'test_image.jpg',"reduire-$taille_preview-$taille_preview",'jpg');
+		$image = image_valeurs_trans(_DIR_IMG_PACK.'test_image.jpg',"reduire-$taille_preview-$taille_preview",'jpg');
 
 		$image['fichier_dest']=_DIR_VAR."test_$arg";
 		if ($preview = image_creer_vignette($image, $taille_preview, $taille_preview, $arg, true)
