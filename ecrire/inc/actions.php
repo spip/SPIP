@@ -30,7 +30,8 @@ function redirige_action_auteur($action, $arg, $ret, $gra='', $mode=false, $atts
 
 // http://doc.spip.org/@redirige_action_post
 function redirige_action_post($action, $arg, $ret, $gra, $corps, $att='') {
-	return redirige_action_auteur($action, $arg, $ret, $gra, $corps, $att . " method='post'");
+	$r = _DIR_RESTREINT . generer_url_ecrire($ret, $gra, false, true);
+	return generer_action_auteur($action, $arg, $r, $corps, $att . " method='post'");
 }
 
 // Retourne un formulaire d'execution de $action sur $id,
