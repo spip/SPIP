@@ -1065,11 +1065,11 @@ function balise_INCLURE_dist($p) {
 
 		$page = $p->etoile
 		  ? "evaluer_fond('', \$l = $_l, $_connect)"
-		  : "recuperer_fond('',\$l =  $_l, array('raw'=>true), $_connect)";
+		  : "recuperer_fond('',\$l =  $_l, array(), $_connect)";
 
 		$retour = !isset($_contexte['ajax']) ? 
-		  "\$p['texte']" :
-		  'encoder_contexte_ajax($l,"",$p["texte"])';
+		  "\$p" :
+		  'encoder_contexte_ajax($l,"",$p)';
 
 		$p->code = "(!(\$p = $page) ? '' :\n\t$retour)";
 
