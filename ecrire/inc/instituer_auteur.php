@@ -48,7 +48,9 @@ function inc_instituer_auteur_dist($auteur, $modif = true) {
 		: " style='display: none'";
 
 	if ($menu_restreints = choix_rubriques_admin_restreint($auteur, $modif))
-		$res .= "<div class='instituer_auteur' id='$ancre-aff'$vis>"
+		$res .= "<div class='instituer_auteur' "
+		  . ($modif?"id='$ancre-aff'":'') // seul le bloc en modification necessite un id
+		  . "$vis>"
 			. $menu_restreints
 			. "</div>";
 
