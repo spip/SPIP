@@ -124,11 +124,11 @@ function puce_statut_article($id, $statut, $id_rubrique, $type='article', $ajax 
 		. $inser_puce
 		. "</span>"
 		. "<span class='puce_article_popup' id='statutdecal$type$id' style='margin-left: -$clip"."px;'>"
-		  . afficher_script_statut($id, $type, -1, 'puce-blanche.gif', 'prepa', $titles['blanche'], $action)
-		  . afficher_script_statut($id, $type, -12, 'puce-orange.gif', 'prop', $titles['orange'], $action)
-		  . afficher_script_statut($id, $type, -23, 'puce-verte.gif', 'publie', $titles['verte'], $action)
-		  . afficher_script_statut($id, $type, -34, 'puce-rouge.gif', 'refuse', $titles['rouge'], $action)
-		  . afficher_script_statut($id, $type, -45, 'puce-poubelle.gif', 'poubelle', $titles['poubelle'], $action)
+		  . afficher_script_statut($id, $type, -1, 'puce-blanche.gif', 'prepa', $titles['blanche'])
+		  . afficher_script_statut($id, $type, -12, 'puce-orange.gif', 'prop', $titles['orange'])
+		  . afficher_script_statut($id, $type, -23, 'puce-verte.gif', 'publie', $titles['verte'])
+		  . afficher_script_statut($id, $type, -34, 'puce-rouge.gif', 'refuse', $titles['rouge'])
+		  . afficher_script_statut($id, $type, -45, 'puce-poubelle.gif', 'poubelle', $titles['poubelle'])
 		  . "</span>";
 	}
 
@@ -139,7 +139,7 @@ function puce_statut_article($id, $statut, $id_rubrique, $type='article', $ajax 
 	else {
 
 	  $action = generer_url_ecrire('puce_statut',"",true);
-	  $action = "if (!this.puce_loaded) { this.puce_loaded = true; prepare_selec_statut('$nom', '$type', $id, '$action'); }";
+	  $action = "if (!this.puce_loaded) { this.puce_loaded = true; prepare_selec_statut('$nom', '$type', '$id', '$action'); }";
 	  $over = "\nonmouseover=\"$action\"";
 	}
 
@@ -207,9 +207,9 @@ function puce_statut_breve($id, $statut, $id_rubrique, $type, $ajax='') {
 		. $inser_puce
 		. "</span>"
 		. "<span class='puce_breve_popup' id='statutdecal$type$id' style='margin-left: -$clip"."px;'>"
-		. afficher_script_statut($id, $type, -1, $puces[0], 'prop', $titles['orange'], $action)
-		. afficher_script_statut($id, $type, -10, $puces[1], 'publie', $titles['verte'], $action)
-	  	. afficher_script_statut($id, $type, -19, $puces[2], 'refuse', $titles['rouge'], $action)
+		. afficher_script_statut($id, $type, -1, $puces[0], 'prop', $titles['orange'])
+		. afficher_script_statut($id, $type, -10, $puces[1], 'publie', $titles['verte'])
+	  	. afficher_script_statut($id, $type, -19, $puces[2], 'refuse', $titles['rouge'])
 		  . "</span>";
 	}
 
@@ -220,7 +220,7 @@ function puce_statut_breve($id, $statut, $id_rubrique, $type, $ajax='') {
 	else {
 
 	  $action = generer_url_ecrire('puce_statut',"",true);
-	  $action = "if (!this.puce_loaded) { this.puce_loaded = true; prepare_selec_statut('$nom', '$type', $id, '$action'); }";
+	  $action = "if (!this.puce_loaded) { this.puce_loaded = true; prepare_selec_statut('$nom', '$type', '$id', '$action'); }";
 	  $over = "\nonmouseover=\"$action\"";
 	}
 
@@ -290,9 +290,9 @@ function puce_statut_site($id, $statut, $id_rubrique, $type, $ajax=''){
 		. $inser_puce
 		. "</span>"
 		. "<span class='puce_site_popup' id='statutdecal$type$id' style='margin-left: -$clip"."px;'>"
-		. afficher_script_statut($id, $type, -1, $puces[0], 'prop', $titles['orange'], $action)
-		. afficher_script_statut($id, $type, -10, $puces[1], 'publie', $titles['verte'], $action)
-	  	. afficher_script_statut($id, $type, -19, $puces[2], 'refuse', $titles['rouge'], $action)
+		. afficher_script_statut($id, $type, -1, $puces[0], 'prop', $titles['orange'])
+		. afficher_script_statut($id, $type, -10, $puces[1], 'publie', $titles['verte'])
+	  	. afficher_script_statut($id, $type, -19, $puces[2], 'refuse', $titles['rouge'])
 		  . "</span>";
 	}
 
@@ -302,7 +302,7 @@ function puce_statut_site($id, $statut, $id_rubrique, $type, $ajax=''){
 	  $over ='';
 	else {
 	  $action = generer_url_ecrire('puce_statut',"",true);
-	  $action = "if (!this.puce_loaded) { this.puce_loaded = true; prepare_selec_statut('$nom', '$type', $id, '$action'); }";
+	  $action = "if (!this.puce_loaded) { this.puce_loaded = true; prepare_selec_statut('$nom', '$type', '$id', '$action'); }";
 	  $over = "\nonmouseover=\"$action\"";
 	}
 
@@ -358,7 +358,7 @@ function puce_statut($statut, $atts='') {
 }
 
 // http://doc.spip.org/@afficher_script_statut
-function afficher_script_statut($id, $type, $n, $img, $statut, $titre, $act) {
+function afficher_script_statut($id, $type, $n, $img, $statut, $titre, $act='') {
 	$i = http_wrapper($img);
 	$h = generer_action_auteur("instituer_$type","$id-$statut");
 	$h = "javascript:selec_statut('$id', '$type', $n, '$i', '$h');";
