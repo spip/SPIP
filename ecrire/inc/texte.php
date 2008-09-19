@@ -637,13 +637,7 @@ function typer_raccourci ($lien) {
 function calculer_url ($ref, $texte='', $pour='url', $connect='') {
 	if ($match = typer_raccourci($ref)) {
 		@list($type,,$id,,$args,,$ancre) = $match;
-		$r = generer_url_entite($id,$type,$args,$ancre,
-					$connect ? $connect : NULL);
-		if (!$r) {
-			$g = 'generer_url_' . $type;
-			if (function_exists($g) OR function_exists($g .= '_dist'))
-				$r = $g($id,$type,$args,$ancre,$connect);
-		}
+		$r = generer_url_entite($id,$type,$args,$ancre,	$connect ? $connect : NULL);
 		if ($r) {
 			if ($pour === 'url') return $r;
 			include_spip('inc/lien');
@@ -653,7 +647,6 @@ function calculer_url ($ref, $texte='', $pour='url', $connect='') {
 			else $r = $g($id, $texte, $r, $connect);
 			return ($pour=='tout') ? $r : $r[2];
 		}
-		spip_log("raccourci indefini $type");
 	}
 	if (preg_match(",^\s*(http:?/?/?|mailto:?)\s*$,iS", $ref))
 		return ($pour != 'tout') ? '' : array('','','','');
