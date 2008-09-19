@@ -92,7 +92,7 @@ function notifier_publication_article($id_article) {
 
 			$l = lang_select($row['lang']);
 
-			$url = url_absolue(suivre_lien(_DIR_RACINE,generer_url_entite($id_article, 'article')));
+			$url = generer_url_entite_absolue($id_article, 'article');
 
 			$titre = nettoyer_titre_email($row['titre']);
 
