@@ -768,6 +768,14 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 	return '';
 }
 
+function generer_url_entite_absolue($id='', $entite='', $args='', $ancre='', $connect=NULL)
+{
+	if (!$connect) $connect = true;
+	$h = generer_url_entite($id, $entite, $args, $ancre, $connect);
+	if (!preg_match(',^\w+:,', $h)) $h = url_absolue(_DIR_RACINE . $h);
+	return  $h;
+}
+
 // Sur certains serveurs, la valeur 'Off' tient lieu de false dans certaines
 // variables d'environnement comme $_SERVER[HTTPS] ou ini_get(register_globals)
 // http://doc.spip.org/@test_valeur_serveur
