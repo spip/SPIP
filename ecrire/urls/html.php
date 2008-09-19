@@ -51,7 +51,7 @@ function _generer_url_html($type, $id, $args='', $ancre='') {
 
 // retrouver les parametres d'une URL dite "html"
 // http://doc.spip.org/@urls_html_dist
-function urls_html_dist(&$entite, $i, $args='', $ancre='') {
+function urls_html_dist($i, &$entite, $args='', $ancre='') {
 	global $contexte;
 
 	if (is_numeric($i))

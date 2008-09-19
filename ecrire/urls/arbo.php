@@ -346,7 +346,7 @@ function _generer_url_arbo($type, $id, $args='', $ancre='') {
 
 
 // http://doc.spip.org/@urls_arbo_dist
-function urls_arbo_dist(&$entite, $i, $args='', $ancre='') {
+function urls_arbo_dist($i, &$entite, $args='', $ancre='') {
 	global $contexte;
 
 	if (is_numeric($i))

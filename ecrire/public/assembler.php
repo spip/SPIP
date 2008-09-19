@@ -70,7 +70,7 @@ function assembler($fond, $connect='') {
 		// si la page est prise dans le cache
 		if (!$use_cache)  {
 		// Informer les boutons d'admin du contexte
-		// (fourni par assembler_contexte lors de la mise en cache)
+		// (fourni par $renommer ci-dessous lors de la mise en cache)
 			$contexte = $page['contexte'];
 		}
 		// ATTENTION, gestion des URLs transformee par le htaccess
@@ -81,12 +81,11 @@ function assembler($fond, $connect='') {
 		// et calculer la page
 		else {
 			$renommer = generer_url_entite();
-			if (!$renommer) {
+			if ($renommer)
+				$renommer(nettoyer_uri(), $fond);
+			elseif (function_exists('recuperer_parametres_url'))
 				// compatibilite <= 1.9.2
-				if (function_exists('recuperer_parametres_url'))
-					$renommer = 'recuperer_parametres_url';
-			}
-			if ($renommer)	$renommer($fond, nettoyer_uri());
+				recuperer_parametres_url($fond,  nettoyer_uri());
 			$parametrer = charger_fonction('parametrer', 'public');
 			$page = $parametrer($fond, $GLOBALS['contexte'], $chemin_cache, $connect);
 
