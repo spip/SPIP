@@ -26,7 +26,7 @@ if (!defined('_terminaison_urls_propres'))
 // http://doc.spip.org/@urls_propres2_dist
 function urls_propres2_dist($i, &$entite, $args='', $ancre='') {
 	$f = charger_fonction('propres', 'urls');
-	return $f($entite, $i, $args, $ancre);
+	return $f($i, $entite, $args, $ancre);
 }
 
 ?>
