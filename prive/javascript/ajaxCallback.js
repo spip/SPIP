@@ -41,7 +41,7 @@ if(!jQuery.load_handlers) {
 	
 	jQuery.ajax = function(type) {
 		//If called by _load exit now because the callback has already been set
-		if (jQuery.ajax.caller==jQuery.fn._load) return jQuery._ajax( type);
+		if (jQuery.ajax.caller==jQuery.fn._load) return jQuery._ACBajax( type);
 			var orig_complete = type.complete || function() {};
 			type.complete = function(res,status) {
 				// Do not fire OnAjaxLoad if the dataType is not html
@@ -128,6 +128,20 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
   });
 }
 
+// permettre d'utiliser onclick='return confirm('etes vous sur?');' sur un lien ajax
+var ajax_confirm=true;
+var ajax_confirm_date=0;
+var spip_confirm = window.confirm;
+function _confirm(message){
+	ajax_confirm = spip_confirm(message);
+	if (!ajax_confirm) {
+		var d = new Date();
+		ajax_confirm_date = d.getTime();
+	}
+	return ajax_confirm;
+}
+window.confirm = _confirm;
+
 // rechargement ajax d'une noisette implementee par {ajax}
 // avec mise en cache des url
 var preloaded_urls = {};
@@ -156,6 +170,14 @@ jQuery.fn.ajaxbloc = function() {
 			jQuery.ajax({"url":url[0],"success":function(r){preloaded_urls[url[0]]=r;}});
 		}
 		jQuery(this).click(function(){
+			if (!ajax_confirm) {
+				// on rearme pour le prochain clic
+				ajax_confirm=true;
+				var d = new Date();
+				// seule une annulation par confirm() dans les 2 secondes precedentes est prise en compte
+				if ((d.getTime()-ajax_confirm_date)<=2)
+					return false;
+			}
 			jQuery(blocfrag)
 			.animeajax()
 			.addClass('loading');
