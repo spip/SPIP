@@ -1461,18 +1461,23 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 	if (isset($contexte['fond']))
 		$fond = $contexte['fond'];
 
-	// Si on a inclus sans fixer le critere de lang, on prend la langue courante
-	if (!isset($contexte['lang']))
-		$contexte['lang'] = $GLOBALS['spip_lang'];
-
-	if ($contexte['lang'] != $GLOBALS['meta']['langue_site']) {
-		$lang_select = lang_select($contexte['lang']);
-	} else $lang_select ='';
+	$lang_select = '';
+	if (!isset($options['etoile']) OR !$options['etoile']){
+		// Si on a inclus sans fixer le critere de lang, on prend la langue courante
+		if (!isset($contexte['lang']))
+			$contexte['lang'] = $GLOBALS['spip_lang'];
+	
+		if ($contexte['lang'] != $GLOBALS['meta']['langue_site']) {
+			$lang_select = lang_select($contexte['lang']);
+		}
+	}
 
 	@$GLOBALS['_INC_PUBLIC']++;
 
 	foreach(is_array($fond) ? $fond : array($fond) as $f){
 		$page = evaluer_fond($f, $contexte, $connect);
+		if (isset($options['ajax'])AND $options['ajax'])
+			$page['texte'] = encoder_contexte_ajax($contexte,'',$page['texte']);
 		if (isset($options['raw']) AND $options['raw'])
 			$pages[] = $page;
 		else
