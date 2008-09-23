@@ -67,7 +67,7 @@ function balise_URL__dist($p) {
 			$code = generer_generer_url($nom, $p);
 			if ($code === NULL) return NULL;
 		}
-		$p->code = $code;
+		$p->code = "vider_url($code)";
 		$p->interdire_scripts = false;
 		return $p;
 	}
@@ -78,9 +78,22 @@ function balise_URL_ARTICLE_dist($p) {
 
 	// Cas particulier des boucles (SYNDIC_ARTICLES)
 	if ($p->type_requete == 'syndic_articles') {
-		$p->code = champ_sql('url', $p);
-	} else  $p->code = generer_generer_url('article', $p);
+		$code = champ_sql('url', $p);
+	} else  $code = generer_generer_url('article', $p);
 
+	$p->code = "vider_url($code)";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+function balise_URL_SITE_dist($p)
+{
+	$code = champ_sql('url_site', $p);
+	if (strpos($code, '@$Pile[0]') !== false) {
+		$code = generer_generer_url('site', $p);
+		if ($code === NULL) return NULL;
+	} else $code = "calculer_url($code,'','url', \$connect)";
+	$p->code = $code;
 	$p->interdire_scripts = false;
 	return $p;
 }
