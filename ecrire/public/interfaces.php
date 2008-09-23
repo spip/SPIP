@@ -347,6 +347,7 @@ foreach(array('TITRE','DESCRIPTIF','SOURCE') as $balise)
 			'tables_jointures'=>$tables_jointures,
 			'exceptions_des_jointures'=>$exceptions_des_jointures,
 			'table_des_traitements'=>$table_des_traitements,
+			'table_titre'=>$table_titre,
 			));
 	if ($interfaces){
 			$table_des_tables = $interfaces['table_des_tables'];
@@ -355,6 +356,7 @@ foreach(array('TITRE','DESCRIPTIF','SOURCE') as $balise)
 			$tables_jointures = $interfaces['tables_jointures'];
 			$exceptions_des_jointures = $interfaces['exceptions_des_jointures'];
 			$table_des_traitements = $interfaces['table_des_traitements'];
+			$table_titre = $interfaces['table_titre'];
 	}
 }
 
