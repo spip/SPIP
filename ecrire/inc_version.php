@@ -169,6 +169,9 @@ $quota_cache = 10;
 # aide en ligne
 $home_server = 'http://www.spip.net';
 $help_server = $home_server . '/aide';
+# glossaire pour raccourci [?X]. Aussi: [?X#G] et definir glossaire_G
+$url_glossaire_externe =  "http://@lang@.wikipedia.org/wiki/%s";
+
 # TeX
 $tex_server = 'http://math.spip.org/tex.php';
 # MathML (pas pour l'instant: manque un bon convertisseur)
@@ -284,6 +287,7 @@ $table_des_tables = array();
 $tables_auxiliaires = array();
 $table_primary = array();
 $table_date = array();
+$table_titre = array();
 $tables_jointures = array();
 
 // Liste des statuts. 
@@ -324,6 +328,7 @@ $liste_des_authentifications = array(
 
 // numero de branche, utilise par les plugins 
 // pour specifier les versions de SPIP necessaire
+// il faut s'en tenir a un nombre de decimales fixe ex : 2.0.0, 2.0.0-dev, 2.0.0-beta, 2.0.0-beta2 
 $spip_version_branche = "2.0.0 dev";
 // version des signatures de fonctions PHP
 // (= numero SVN de leur derniere modif cassant la compatibilite et/ou necessitant un recalcul des squelettes)
