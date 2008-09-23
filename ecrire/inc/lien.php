@@ -213,6 +213,12 @@ function chapo_redirigetil($chapo) { return $chapo && $chapo[0] == '=';}
 
 // http://doc.spip.org/@calculer_url
 function calculer_url ($ref, $texte='', $pour='url', $connect='') {
+	$r = traiter_lien_implicite($ref, $texte, $pour, $connect);
+	return $r ? $r : traiter_lien_explicite($ref, $texte, $pour, $connect);
+}
+
+function traiter_lien_implicite ($ref, $texte='', $pour='url', $connect='')
+{
 	if ($match = typer_raccourci($ref)) {
 		@list($type,,$id,,$args,,$ancre) = $match;
 # attention dans le cas des sites le lien doit pointer non pas sur
@@ -225,6 +231,11 @@ function calculer_url ($ref, $texte='', $pour='url', $connect='') {
 			? $url
 			: calculer_url_lien($type, $id, $url, $texte, $pour, $connect);
 	}
+	return false;
+}
+
+function traiter_lien_explicite ($ref, $texte='', $pour='url', $connect='')
+{
 	if (preg_match(",^\s*(http:?/?/?|mailto:?)\s*$,iS", $ref))
 		return ($pour != 'tout') ? '' : array('','','','');
 
@@ -351,7 +362,21 @@ function traiter_modeles($texte, $doublons=false, $echap='', $connect='') {
 				$texte .= preg_replace(',[|][^|=]*,s',' ',$params);
 			# version normale
 			else {
-				$modele = inclure_modele($type, $id, $params, $lien, $connect);
+				$modele = inclure_modele($type, $id, $params, $lien);
+				// en cas d'echec, 
+				// si l'objet demande a une url, 
+				// creer un petit encadre vers elle
+				if ($modele === false) {
+					if (!$lien)
+						$lien = traiter_lien_implicite("$type$id", '', 'tout', $connect);
+					if ($lien)
+						$modele = '<a href="'
+						  .$lien[0]
+						  .'" class="spip_modele'
+						  . '">'
+						  .sinon($lien[2], _T('ecrire:info_sans_titre'))
+						  ."</a>";
+				}
 
 				// le remplacer dans le texte
 				if ($modele !== false) {
