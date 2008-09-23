@@ -217,6 +217,7 @@ function calculer_url ($ref, $texte='', $pour='url', $connect='') {
 		@list($type,,$id,,$args,,$ancre) = $match;
 # attention dans le cas des sites le lien doit pointer non pas sur
 # la page locale du site, mais directement sur le site lui-meme
+		spip_log("curl $type,,$id,,$args,,$ancre) = $match");
 		if ($type == 'site')
 			$url = sql_getfetsel('url_site', 'spip_syndic', "id_syndic=$id",'','','','',$connect);
 		else $url = generer_url_entite($id,$type,$args,$ancre,	$connect ? $connect : NULL);
@@ -292,12 +293,11 @@ function calculer_url_lien($type, $id, $url, $texte, $pour, $connect)
 		if ($r AND !$texte) {
 			$texte = supprimer_numero($r['titre']);
 			if (!$texte) $texte = $r['surnom'];
-			if (!$texte) $texte = $id;
 			$lang = $r['lang'];
 		}
 		$style = 'spip_in';
 	} else $style =  'spip_out';
-
+	if (!$texte) $texte = _T($type) . " $id";
 	return ($pour=='titre') ? $texte : array($url, $style, $texte, $lang);
 }
 
