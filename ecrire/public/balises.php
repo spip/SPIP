@@ -820,7 +820,6 @@ function balise_CONFIG_dist($p) {
 		return balise_ENV_dist($p, '$GLOBALS["meta"]');
 }
 
-// http://doc.spip.org/@balise_CONNECT_dist
 function balise_CONNECT_dist($p) {
 	$p->code = '($connect ? $connect : NULL)';
 	$p->interdire_scripts = false;
@@ -1070,15 +1069,12 @@ function balise_INCLURE_dist($p) {
 
 		$_connect = _q(!$id_boucle ? '' : $p->boucles[$id_boucle]->sql_serveur);
 
-		$page = $p->etoile
-		  ? "evaluer_fond('', \$l = $_l, $_connect)"
-		  : "recuperer_fond('',\$l =  $_l, array(), $_connect)";
-
-		$retour = !isset($_contexte['ajax']) ? 
-		  "\$p" :
-		  'encoder_contexte_ajax($l,"",$p)';
-
-		$p->code = "(!(\$p = $page) ? '' :\n\t$retour)";
+		$_options = array();
+		if (isset($_contexte['ajax'])) $_options[] = "'ajax'=>true";
+		if ($p->etoile) $_options[] = "'etoile'=>true";
+		$_options = "array(" . join(',',$_options) . ")";
+		
+		$p->code = "recuperer_fond('',\$l =  $_l, $_options, $_connect)";
 
 	} else {
 		$n = interprete_argument_balise(1,$p);
@@ -1145,13 +1141,11 @@ function balise_MODELE_dist($p) {
 
 	$connect = $p->boucles[$p->id_boucle]->sql_serveur;
 
-	$page = "\$p = recuperer_fond('modeles/$nom', \$l = array(".join(',', $_contexte).",'recurs='.(++\$recurs), \$GLOBALS['spip_lang']), array('trim'=>true, 'modele'=>true), " . _q($connect) . ")";
+	$page = "\$p = recuperer_fond('modeles/$nom', \$l = array(".join(',', $_contexte).",'recurs='.(++\$recurs), \$GLOBALS['spip_lang']), array('trim'=>true, 'modele'=>true"
+	. (isset($_contexte['ajax'])?", 'ajax'=>true":'')
+	. "), " . _q($connect) . ")";
 
-	$retour = !isset($_contexte['ajax']) ? 
-		  '$p' :
-		  'encoder_contexte_ajax($l,"",$p)';
-
-	$p->code = "(((\$recurs=(isset(\$Pile[0]['recurs'])?\$Pile[0]['recurs']:0))>=5)? '' : (!($page) ? '' :\n\t$retour))";
+	$p->code = "(((\$recurs=(isset(\$Pile[0]['recurs'])?\$Pile[0]['recurs']:0))>=5)? '' : $page)";
 
 	$p->interdire_scripts = false; // securite assuree par le squelette
 
