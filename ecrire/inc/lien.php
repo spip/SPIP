@@ -217,7 +217,6 @@ function calculer_url ($ref, $texte='', $pour='url', $connect='') {
 		@list($type,,$id,,$args,,$ancre) = $match;
 # attention dans le cas des sites le lien doit pointer non pas sur
 # la page locale du site, mais directement sur le site lui-meme
-		spip_log("curl $type,,$id,,$args,,$ancre) = $match");
 		if ($type == 'site')
 			$url = sql_getfetsel('url_site', 'spip_syndic', "id_syndic=$id",'','','','',$connect);
 		else $url = generer_url_entite($id,$type,$args,$ancre,	$connect ? $connect : NULL);
@@ -399,12 +398,12 @@ define('_RACCOURCI_GLOSSAIRE', "|\[\?+\s*([^][<>]+)\]|S");
 // http://doc.spip.org/@traiter_raccourci_glossaire
 function traiter_raccourci_glossaire($letexte)
 {
-	if (!preg_match_all(_RACCOURCI_GLOSSAIRE, $letexte, $m, PREG_SET_ORDER))
+	if (!preg_match_all(_RACCOURCI_GLOSSAIRE, $letexte, $matches, PREG_SET_ORDER))
 		return $letexte;
 
 	include_spip('inc/charsets');
 
-	foreach ($m as $regs) {
+	foreach ($matches as $regs) {
 		// Eviter les cas particulier genre "[?!?]"
 		// et isoler le lexeme a gloser de ses accessoires
 		// (#:url du glossaire, | bulle d'aide, {} lang)
@@ -415,8 +414,9 @@ function traiter_raccourci_glossaire($letexte)
 
 			$terme = unicode2charset(charset2unicode($terme), 'utf-8');
 			
-			if ($r[4] AND function_exists($f = 'glossaire_' . $r[4]))
-				$glose = $f($terme);
+			preg_match('/^(.*?)(\d*)$/', $r[4], $m);
+			if ($m AND function_exists($f = 'glossaire_' . $m[1]))
+					$glose = $f($terme, $m[2]);
 			else $glose  = glossaire_std($terme);
 			$ref = traiter_raccourci_lien_lang($glose, 'spip_glossaire', $terme, $hlang, '', $bulle);
 			$letexte = str_replace($regs[0], $ref, $letexte);
