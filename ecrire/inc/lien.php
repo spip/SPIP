@@ -217,6 +217,7 @@ function calculer_url ($ref, $texte='', $pour='url', $connect='') {
 	return $r ? $r : traiter_lien_explicite($ref, $texte, $pour, $connect);
 }
 
+// http://doc.spip.org/@traiter_lien_implicite
 function traiter_lien_implicite ($ref, $texte='', $pour='url', $connect='')
 {
 	if ($match = typer_raccourci($ref)) {
@@ -234,6 +235,7 @@ function traiter_lien_implicite ($ref, $texte='', $pour='url', $connect='')
 	return false;
 }
 
+// http://doc.spip.org/@traiter_lien_explicite
 function traiter_lien_explicite ($ref, $texte='', $pour='url', $connect='')
 {
 	if (preg_match(",^\s*(http:?/?/?|mailto:?)\s*$,iS", $ref))
@@ -290,6 +292,7 @@ function typer_raccourci ($lien) {
 	return $match;
 }
 
+// http://doc.spip.org/@calculer_url_lien
 function calculer_url_lien($type, $id, $url, $texte, $pour, $connect)
 {
 	$trouver_table = charger_fonction('trouver_table', 'base');
@@ -450,6 +453,7 @@ function traiter_raccourci_glossaire($letexte)
 	return $letexte;
 }
 
+// http://doc.spip.org/@glossaire_std
 function glossaire_std($terme)
 {
 	global $url_glossaire_externe;

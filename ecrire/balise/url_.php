@@ -86,6 +86,7 @@ function balise_URL_ARTICLE_dist($p) {
 	return $p;
 }
 
+// http://doc.spip.org/@balise_URL_SITE_dist
 function balise_URL_SITE_dist($p)
 {
 	$code = champ_sql('url_site', $p);
