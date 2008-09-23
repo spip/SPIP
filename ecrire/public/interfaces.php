@@ -216,6 +216,7 @@ $table_titre['forums']= "titre, '' AS lang";
 $table_titre['messages']= "titre, '' AS lang";
 $table_titre['auteurs']= "nom AS titre, '' AS lang";
 $table_titre['site']= "nom_site AS titre, '' AS lang";
+$table_titre['syndic']= "nom_site AS titre, '' AS lang";
 $table_titre['documents']= "titre, fichier AS surnom, '' AS lang";
 
 $table_date['articles']='date';
@@ -318,16 +319,7 @@ $table_des_traitements['TAGS'][]= '%s';
 $table_des_traitements['TEXTE'][]= _TRAITEMENT_RACCOURCIS;
 $table_des_traitements['TITRE'][]= _TRAITEMENT_TYPO;
 $table_des_traitements['TYPE'][]= _TRAITEMENT_TYPO;
-$table_des_traitements['URL_ARTICLE'][]= 'vider_url(%s)';
-$table_des_traitements['URL_BREVE'][]= 'vider_url(%s)';
-$table_des_traitements['URL_DOCUMENT'][]= 'vider_url(%s)';
-$table_des_traitements['URL_FORUM'][]= 'vider_url(%s)';
-$table_des_traitements['URL_MOT'][]= 'vider_url(%s)';
-$table_des_traitements['URL_RUBRIQUE'][]= 'vider_url(%s)';
 $table_des_traitements['DESCRIPTIF_SITE_SPIP'][]= _TRAITEMENT_RACCOURCIS;
-$table_des_traitements['URL_SITE'][]= 'calculer_url(%s,"","url",$connect)';
-$table_des_traitements['URL_SOURCE'][]= 'vider_url(%s)';
-$table_des_traitements['URL_SYNDIC'][]= 'vider_url(%s)';
 $table_des_traitements['ENV'][]= 'entites_html(%s,true)';
 
 
