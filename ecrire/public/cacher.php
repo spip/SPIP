@@ -96,7 +96,7 @@ function gunzip_page(&$page) {
 /// http://doc.spip.org/@cache_valide
 function cache_valide(&$page, $date) {
 
-	if (defined('_NO_CACHE')) return _NO_CACHE;
+	if (defined('_NO_CACHE')) return (_NO_CACHE==0 AND !$page)?1:_NO_CACHE;
 	if (!$page) return 1;
 
 	// #CACHE{n,statique} => on n'invalide pas avec derniere_modif
