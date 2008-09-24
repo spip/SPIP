@@ -67,7 +67,6 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 	);
 
 	$corps .= recuperer_fond("prive/editer/auteur", $contexte);
-	//$corps .= fin_cadre_formulaire(true);
 	$corps .= '</div>';
 
 	// ajouter les infos, si l'on ne demande pas simplement le formulaire d'edition
