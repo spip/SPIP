@@ -159,11 +159,10 @@ function declarer_url_propre($type, $id_objet) {
 	// Se contenter de cette URL si elle existe ;
 	// sauf si on invoque par "voir en ligne" avec droit de modifier l'url
 
+	// l'autorisation est verifiee apres avoir calcule la nouvelle url propre
+	// car si elle ne change pas, cela ne sert a rien de verifier les autorisations
+	// qui requetent en base
 	$modifier_url = (_request('var_mode') == 'calcul');
-	if ($modifier_url) {
-		include_spip('inc/autoriser');
-		$modifier_url = autoriser('modifierurl', $type, $id_objet);
-	}
 	if ($url_propre AND !$modifier_url)
 		return $url_propre;
 
@@ -186,6 +185,12 @@ function declarer_url_propre($type, $id_objet) {
 	// Pas de changement d'url
 	if ($url == $url_propre)
 		return $url_propre;
+
+	// verifier l'autorisation, maintenant qu'on est sur qu'on va agir
+	if ($modifier_url) {
+		include_spip('inc/autoriser');
+		$modifier_url = autoriser('modifierurl', $type, $id_objet);
+	}
 
 	// Verifier si l'utilisateur veut effectivement changer l'URL
 	if ($modifier_url
