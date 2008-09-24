@@ -29,7 +29,7 @@ function exec_articles_tous_args($id_rubrique, $aff_art, $sel_lang)
 
 	changer_typo(); // pour definir la direction de la langue
 	if (!is_array($aff_art)) $aff_art = array('prop','publie');
-	list($enfant, $first_couche, $last_couche) = arbo_articles_tous();
+	$enfant = arbo_articles_tous();
 
 	$flag_trad = (($GLOBALS['meta']['multi_rubriques'] == 'oui' 
 		OR $GLOBALS['meta']['multi_articles'] == 'oui') 
@@ -60,7 +60,7 @@ var img_deplierbas = "'. chemin_image('noeud_moins.gif') . '";');
 		echo debut_droite('', true);
 
 		if ($enfant AND $browser_layer)
-		  echo couche_formulaire_tous($first_couche, $last_couche);
+		  echo couche_formulaire_tous();
 
 		$out = "<textarea cols='1' rows='1' id='deplacements' style='display:none;' name='deplacements'></textarea>"
 		  . "\n<div id='apply' style='display:none;text-align:$spip_lang_right'><input type='submit' class='fondo' value='"._T('bouton_changer')."' /></div>";
@@ -80,32 +80,20 @@ var img_deplierbas = "'. chemin_image('noeud_moins.gif') . '";');
 	}
 }
 
-// Voir inc_layer pour les 2 globales utilisees
-
 // http://doc.spip.org/@arbo_articles_tous
 function arbo_articles_tous()
 {
-	global $numero_block, $compteur_block;
 
 	$enfant = array();
 	$result = sql_select("id_rubrique, titre, id_parent", "spip_rubriques", '','', '0+titre,titre');
-	$first_couche = 0;
 	while ($row = sql_fetch($result)) {
 		$id_rubrique = $row['id_rubrique'];
 		if (autoriser('voir','rubrique',$id_rubrique)){
 			$id_parent = $row['id_parent'];
 			$enfant[$id_parent][$id_rubrique] = typo($row['titre']);
-			$nom_block = "rubrique$id_rubrique";
-			if (!isset($numero_block[$nom_block])){
-				$compteur_block++;
-				$numero_block[$nom_block] = $compteur_block;
-	
-				if (!$first_couche) $first_couche = $compteur_block;
-			}
 		}
 	}
-	$last_couche = $first_couche ? $compteur_block : 0;
-	return array($enfant, $first_couche, $last_couche);
+	return $enfant;
 }
 
 // http://doc.spip.org/@texte_articles_tous
@@ -277,7 +265,7 @@ function formulaire_affiche_tous($aff_art, $aff_statut,$sel_lang)
 }
 
 // http://doc.spip.org/@couche_formulaire_tous
-function couche_formulaire_tous($first_couche, $last_couche)
+function couche_formulaire_tous()
 {
 	return "<div>&nbsp;</div>"
 	. "<b class='verdana3'>"
