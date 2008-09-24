@@ -78,8 +78,10 @@ function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='',
 				$obj = "$id_table.$obj";
 			else
 				$obj = "L$n.$obj";
-			$boucle->where[] = array("'='","'$obj'","sql_quote('$type')");
-			$boucle->join["L$n"]= array("'$id_table'","'$j2'","'$j1'");
+			// le where complementaire est envoye dans la jointure pour pouvoir etre elimine avec la jointure
+			// en cas d'optimisation
+			//$boucle->where[] = array("'='","'$obj'","sql_quote('$type')");
+			$boucle->join["L$n"]= array("'$id_table'","'$j2'","'$j1'","'$obj='.sql_quote('$type')");
 		}
 		else
 			$boucle->join["L$n"]= array("'$id_table'","'$j'");
