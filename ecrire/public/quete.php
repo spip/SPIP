@@ -27,15 +27,37 @@ function quete_chapo($id_article, $connect) {
 	return sql_getfetsel('chapo', 'spip_articles', array("id_article=".intval($id_article), "statut='publie'"), '','','','',$connect);
 }
 
-# retourne le parent d'une rubrique
+function quete_parent_lang($table,$id,$connect=''){
+	static $cache_quete = array();
+	
+	if (!isset($cache_quete[$connect][$table][$id])
+	AND in_array($table,array('spip_rubriques','spip_articles','spip_syndic','spip_breves'))){
+		$select = ($table=='spip_rubriques'?'id_parent':'id_rubrique');
+		$select .= in_array($table,array('spip_rubriques','spip_articles','spip_breves'))?", lang":"";
+		$_id = id_table_objet(objet_type($table));
+		$cache_quete[$connect][$table][$id] = sql_fetsel($select, $table,"$_id=".intval($id),'','','','',$connect);
+	}
+	return $cache_quete[$connect][$table][$id];
+}
 
+
+# retourne le parent d'une rubrique
 // http://doc.spip.org/@quete_parent
 function quete_parent($id_rubrique, $connect='') {
 	if (!$id_rubrique = intval($id_rubrique))
 		return 0;
-
-	return intval(sql_getfetsel('id_parent','spip_rubriques',"id_rubrique=" . $id_rubrique, '','','','',$connect));
+	$id_parent = quete_parent_lang('spip_rubriques',$id_rubrique,$connect);
+	return $id_parent['id_parent'];
 }
+
+# retourne la rubrique d'un article
+
+// http://doc.spip.org/@quete_rubrique
+function quete_rubrique($id_article, $serveur) {
+	$id_parent = quete_parent_lang('spip_articles',$id_article,$serveur);
+	return $id_parent['id_rubrique'];
+}
+
 
 # retourne la profondeur d'une rubrique
 
@@ -91,12 +113,6 @@ function quete_meta($nom, $serveur) {
 			     '','','','',$serveur);
 }
 
-# retourne la rubrique d'un article
-
-// http://doc.spip.org/@quete_rubrique
-function quete_rubrique($id_article, $serveur) {
-	return sql_getfetsel('id_rubrique', 'spip_articles',"id_article=" . intval($id_article),	'',array(), '', '', $serveur);
-}
 
 // http://doc.spip.org/@calcul_exposer
 function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {

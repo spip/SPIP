@@ -154,14 +154,14 @@ function quete_rubrique_fond($contexte) {
 
 	if (isset($contexte['id_rubrique'])
 	AND $id = intval($contexte['id_rubrique'])
-	AND $row = sql_fetsel('id_parent, lang', 'spip_rubriques',"id_rubrique=$id")) {
+	AND $row = quete_parent_lang('spip_rubriques',$id)) {
 		$lang = isset($row['lang']) ? $row['lang'] : '';
 		return array ($id, $lang);
 	}
 
 	if (isset($contexte['id_breve'])
 	AND $id = intval($contexte['id_breve'])
-	AND $row = sql_fetsel('id_rubrique, lang', 'spip_breves', "id_breve=$id")
+	AND $row = quete_parent_lang('spip_breves',$id)
 	AND $id_rubrique_fond = $row['id_rubrique']) {
 		$lang = isset($row['lang']) ? $row['lang'] : '';
 		return array($id_rubrique_fond, $lang);
@@ -169,16 +169,16 @@ function quete_rubrique_fond($contexte) {
 
 	if (isset($contexte['id_syndic'])
 	AND $id = intval($contexte['id_syndic'])
-	AND $row = sql_fetsel('id_rubrique', 'spip_syndic', "id_syndic=$id")
+	AND $row = quete_parent_lang('spip_syndic',$id)
 	AND $id_rubrique_fond = $row['id_rubrique']
-	AND $row = sql_fetsel('id_parent, lang', 'spip_rubriques', "id_rubrique=$id_rubrique_fond")) {
+	AND $row = quete_parent_lang('spip_rubriques',$id_rubrique_fond)) {
 		$lang = isset($row['lang']) ? $row['lang'] : '';
 		return array($id_rubrique_fond, $lang);
 	}
 
 	if (isset($contexte['id_article'])
 	AND $id = intval($contexte['id_article'])
-	AND $row = sql_fetsel('id_rubrique, lang', 'spip_articles', "id_article=$id")
+	AND $row = quete_parent_lang('spip_articles',$id)
 	AND $id_rubrique_fond = $row['id_rubrique']) {
 		$lang = isset($row['lang']) ? $row['lang'] : '';
 		return array($id_rubrique_fond, $lang);

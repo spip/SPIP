@@ -80,11 +80,23 @@ function gunzip_page(&$page) {
 		$page['texte'] = gzuncompress($page['texte']);
 }
 
-// gestion des delais d'expiration du cache
-// $page passee par reference pour accelerer
-// http://doc.spip.org/@cache_valide
+/**
+ * gestion des delais d'expiration du cache...
+ * $page passee par reference pour accelerer
+ * 
+ * La fonction retourne 
+ * 1 si il faut mettre le cache a jour
+ * 0 si le cache est valide
+ * -1 si il faut calculer sans stocker en cache
+ *
+ * @param array $page
+ * @param int $date
+ * @return -1/0/1
+ */
+/// http://doc.spip.org/@cache_valide
 function cache_valide(&$page, $date) {
 
+	if (defined('_NO_CACHE')) return _NO_CACHE;
 	if (!$page) return 1;
 
 	// #CACHE{n,statique} => on n'invalide pas avec derniere_modif
