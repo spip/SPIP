@@ -295,24 +295,28 @@ function init_var_mode(){
 				$GLOBALS['var_mode'] = $_GET['var_mode'];
 		
 			// preview et debug necessitent une autorisation
-			else if ($_GET['var_mode'] == 'preview'
-			OR $_GET['var_mode'] == 'debug') {
+			else if (in_array($_GET['var_mode'],array('preview','debug','blocs'))) {
 				include_spip('inc/autoriser');
 				if (autoriser(
 					($_GET['var_mode'] == 'preview')
 						? 'previsualiser'
 						: 'debug'
 				)) {
-					// preview ?
-					if ($_GET['var_mode'] == 'preview') {
-						// forcer le compilo et ignorer les caches existants
-						$GLOBALS['var_mode'] = 'recalcul';
-						// truquer les boucles et ne pas enregistrer de cache
-						$GLOBALS['var_preview'] = true;
-					}
-					// seul cas ici: 'debug'
-					else { 
-						$GLOBALS['var_mode'] = $_GET['var_mode'];
+					switch($_GET['var_mode']){
+						case 'preview':
+							// forcer le compilo et ignorer les caches existants
+							$GLOBALS['var_mode'] = 'recalcul';
+							// truquer les boucles et ne pas enregistrer de cache
+							$GLOBALS['var_preview'] = true;
+							break;
+						case 'blocs':
+							// forcer le compilo et ignorer les caches existants
+							$GLOBALS['var_mode'] = 'calcul';
+							$GLOBALS['var_noisettes'] = true;
+							break;
+						default :
+							$GLOBALS['var_mode'] = $_GET['var_mode'];
+							break;
 					}
 					spip_log($GLOBALS['visiteur_session']['nom']
 						. " ".$GLOBALS['var_mode']);

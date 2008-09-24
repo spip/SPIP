@@ -1479,6 +1479,9 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 		$page = evaluer_fond($f, $contexte, $connect);
 		if (isset($options['ajax'])AND $options['ajax'])
 			$page['texte'] = encoder_contexte_ajax($contexte,'',$page['texte']);
+			
+		if ($GLOBALS['var_noisettes'])
+			$page['texte'] = "<fieldset class='blocs'><legend>".$page['sourcefile']."</legend>".$page['texte']."</fieldset>";
 		if (isset($options['raw']) AND $options['raw'])
 			$pages[] = $page;
 		else
