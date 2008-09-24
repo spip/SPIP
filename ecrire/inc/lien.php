@@ -28,31 +28,62 @@ include_spip('base/abstract_sql');
 define('_RACCOURCI_LIEN', ",\[([^][]*?([[]\w*[]][^][]*)*)->(>?)([^]]*)\],msS");
 
 // http://doc.spip.org/@expanser_liens
-function expanser_liens($letexte, $connect='')
+function expanser_liens($texte, $connect='')
 {
-	$letexte = pipeline('pre_liens', $letexte);
+	$texte = pipeline('pre_liens', $texte);
 
 	$inserts = array();
-	if (preg_match_all(_RACCOURCI_LIEN, $letexte, $matches, PREG_SET_ORDER)) {
+	if (preg_match_all(_RACCOURCI_LIEN, $texte, $regs, PREG_SET_ORDER)) {
 		$i = 0;
-		foreach ($matches as $regs) {
-			$n = count($regs);
-			list($texte, $bulle, $hlang) = traiter_raccourci_lien_atts($regs[1]);
-			list ($lien, $class, $texte, $lang) =
-			  calculer_url($regs[$n-1], $texte, 'tout', $connect);
-			$inserts[++$i] = traiter_raccourci_lien_lang($lien, $class, $texte, $hlang, $lang, $bulle, $connect);
+		foreach ($regs as $reg) {
+			list($titre, $bulle, $hlang) = traiter_raccourci_lien_atts($reg[1]);
+			list ($lien, $class, $titre, $lang) =
+			  calculer_url($reg[count($reg)-1], $titre, 'tout', $connect);
+			$inserts[++$i] = traiter_raccourci_lien_lang($lien, $class, $titre, $hlang, $lang, $bulle, $connect);
 
-			$letexte = str_replace($regs[0], "@@SPIP_ECHAPPE_LIEN_$i@@",
-				$letexte);
+			$texte = str_replace($reg[0], "@@SPIP_ECHAPPE_LIEN_$i@@",
+				$texte);
 		}
 	}
 
-	$letexte = corriger_typo(traiter_modeles($letexte, false, false, $connect));
+	$texte = corriger_typo(traiter_modeles($texte, false, false, $connect));
 	foreach ($inserts as $i => $insert) {
-		$letexte = str_replace("@@SPIP_ECHAPPE_LIEN_$i@@", $insert, $letexte);
+		$texte = str_replace("@@SPIP_ECHAPPE_LIEN_$i@@", $insert, $texte);
 	}
-	return $letexte;
+	return $texte;
 }
+
+// Meme analyse mais pour eliminer les liens
+// et ne laisser que leur titre, a expliciter si ce n'est fait
+// http://doc.spip.org/@nettoyer_raccourcis_typo
+function nettoyer_raccourcis_typo($texte, $connect='')
+{
+	$texte = pipeline('nettoyer_raccourcis_typo',$texte);
+
+	if (preg_match_all(_RACCOURCI_LIEN, $texte, $regs, PREG_SET_ORDER))
+		foreach ($regs as $reg) {
+			list ($titre,,)= traiter_raccourci_lien_atts($reg[1]);
+			if (!$titre) {
+				$match = typer_raccourci($reg[count($reg)-1]);
+				@list($type,,$id,,,,) = $match;
+				$titre = traiter_raccourci_titre($type, $id, '', '', 'titre', $connect);
+			}
+			$titre = corriger_typo(supprimer_tags($titre));
+			$texte = str_replace($reg[0], $titre, $texte);
+		}
+
+	// supprimer les notes
+	$texte = preg_replace(",[[][[]([^]]|[]][^]])*[]][]],UimsS","",$texte);
+
+	// supprimer les codes typos
+	$texte = str_replace(array('}','{'), '', $texte);
+
+	// supprimer les tableaux
+	$texte = preg_replace(",(^|\r)\|.*\|\r,s", "\r", $texte);
+
+	return $texte;
+}
+
 
 // http://doc.spip.org/@traiter_raccourci_lien_lang
 function traiter_raccourci_lien_lang($lien, $class, $texte, $hlang, $lang, $bulle, $connect='')
@@ -152,29 +183,6 @@ function traiter_raccourci_liens($texte) {
 	return $texte;
 }
 
-// http://doc.spip.org/@nettoyer_raccourcis_typo
-function nettoyer_raccourcis_typo($texte, $connect=''){
-	$texte = pipeline('nettoyer_raccourcis_typo',$texte);
-	// remplacer les liens
-	if (preg_match_all(',[[]([^][]*)->(>?)([^][]*)[]],S', $texte, $regs, PREG_SET_ORDER))
-		foreach ($regs as $reg) {
-			list ($titre,,)= traiter_raccourci_lien_atts($reg[1]);
-			$titre = calculer_url($reg[3], $titre, 'titre', $connect);
-			$titre = corriger_typo(supprimer_tags($titre));
-			$texte = str_replace($reg[0], $titre, $texte);
-		}
-
-	// supprimer les notes
-	$texte = preg_replace(",[[][[]([^]]|[]][^]])*[]][]],UimsS","",$texte);
-
-	// supprimer les codes typos
-	$texte = str_replace(array('}','{'), '', $texte);
-
-	// supprimer les tableaux
-	$texte = preg_replace(",(^|\r)\|.*\|\r,s", "\r", $texte);
-	return $texte;
-}
-
 // Fonction pour les champs chapo commencant par =,  redirection qui peut etre:
 // 1. un raccourci Spip habituel (premier If) [texte->TYPEnnn]
 // 2. un ultra raccourci TYPEnnn voire nnn (article) (deuxieme If)
@@ -217,6 +225,7 @@ function calculer_url ($ref, $texte='', $pour='url', $connect='') {
 	return $r ? $r : traiter_lien_explicite($ref, $texte, $pour, $connect);
 }
 
+// http://doc.spip.org/@traiter_lien_implicite
 function traiter_lien_implicite ($ref, $texte='', $pour='url', $connect='')
 {
 	if ($match = typer_raccourci($ref)) {
@@ -229,11 +238,12 @@ function traiter_lien_implicite ($ref, $texte='', $pour='url', $connect='')
 		if ($url) 
 			return ($pour === 'url')
 			? $url
-			: calculer_url_lien($type, $id, $url, $texte, $pour, $connect);
+			: traiter_raccourci_titre($type, $id, $url, $texte, $pour, $connect);
 	}
 	return false;
 }
 
+// http://doc.spip.org/@traiter_lien_explicite
 function traiter_lien_explicite ($ref, $texte='', $pour='url', $connect='')
 {
 	if (preg_match(",^\s*(http:?/?/?|mailto:?)\s*$,iS", $ref))
@@ -290,7 +300,7 @@ function typer_raccourci ($lien) {
 	return $match;
 }
 
-function calculer_url_lien($type, $id, $url, $texte, $pour, $connect)
+function traiter_raccourci_titre($type, $id, $url, $texte, $pour, $connect)
 {
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table(table_objet($type));
@@ -450,6 +460,7 @@ function traiter_raccourci_glossaire($letexte)
 	return $letexte;
 }
 
+// http://doc.spip.org/@glossaire_std
 function glossaire_std($terme)
 {
 	global $url_glossaire_externe;
