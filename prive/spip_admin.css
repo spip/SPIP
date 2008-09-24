@@ -25,5 +25,5 @@ a:active.spip-admin-boutons { background-color: #ccc; border-bottom: 2px solid #
 .spip-env legend { background-color: #fff; border: solid 1px #f00; padding: 1px 1em; font-weight: bold; }
 .spip-env fieldset div { max-height: 10em; overflow: auto; }
 fieldset.blocs {
-border:1px dashed #999 !important;
+border:1px dashed blue !important;
 }
