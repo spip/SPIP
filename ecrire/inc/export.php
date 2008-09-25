@@ -284,6 +284,25 @@ function export_select($row, $les_rubriques, $les_meres) {
 		}
 		return false;
 	}
+	if (isset($row['id_objet']) AND isset($row['objet'])) {
+		if ($row['objet'] == 'article') {
+			if (in_array($row['id_objet'], $articles)) {
+				if (isset($row['id_document']))
+					$documents[]= $row['id_document'];
+				return true;
+			}
+			return false;
+		}
+		if ($row['objet'] == 'rubrique') {
+			if (in_array($row['id_objet'], $les_rubriques)) {
+				if (isset($row['id_document']))
+					$documents[]=$row['id_document'];
+				return true;
+			}
+			return false;
+		}
+	}
+
 	if (isset($row['id_document']) AND $row['id_document']) {
 		return array_search($row['id_document'], $documents);
 	}
