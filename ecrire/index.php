@@ -35,27 +35,31 @@ if (autoriser_sans_cookie($exec)) {
 } else {
 	$auth = charger_fonction('auth', 'inc');
 	$var_auth = $auth();
-
-	if ($var_auth) {
-		// Si chaine, message d'erreur SQL a afficher
-		// autrement rediriger vers la page de login
-		if (!is_string($var_auth)) {
-			include_spip('inc/headers');
-			$redirect = generer_url_public('login',
-			"url=" . rawurlencode(self('&',true)), '&');
-
-		// un echec au "bonjour" (login initial) quand le statut est
-		// inconnu signale sans doute un probleme de cookies
-			if (isset($_GET['bonjour']))
-				$redirect = parametre_url($redirect,
-				'var_erreur',
-				(!isset($GLOBALS['visiteur_session']['statut'])
-					? 'cookie'
-					: 'statut'
-				),
-				'&'
-			);
-			$var_auth = redirige_formulaire($redirect);
+	if ($var_auth) { 
+		include_spip('inc/minipres');
+		include_spip('inc/headers');
+		// pas authentifie. Pourquoi ?
+		if (is_string($var_auth)) {
+			// redirection vers une page d'authentification
+			// on ne revient pas de cette fonction 
+			// sauf si pb de header 
+			$var_auth = redirige_formulaire($var_auth);
+		} elseif (is_int($var_auth)) {
+			// erreur SQL a afficher
+			$var_auth = minipres(_T('info_travaux_titre'), _T('titre_probleme_technique'). "<p><tt>".sql_errno()." ".sql_error()."</tt></p>");
+		} elseif (@$var_auth['statut']) {
+			// un simple visiteur n'a pas acces a l'espace prive
+			$var_auth = _T('avis_erreur_visiteur');
+		} else {
+			// auteur en fin de droits ...
+			$h = generer_url_public('', "action=logout&amp;logout=prive");
+			$var_auth = minipres(_T('avis_erreur_connexion'), 
+					"<br /><br /><p>"
+					. _T('texte_inc_auth_1', array('auth_login' => $var_auth['nom']))
+					. " <a href='$h'>"
+					.  _T('texte_inc_auth_2')
+					. "</a>"
+					. _T('texte_inc_auth_3'));
 		}
 		echo $var_auth;
 		exit;
