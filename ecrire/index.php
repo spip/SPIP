@@ -49,13 +49,13 @@ if (autoriser_sans_cookie($exec)) {
 			$var_auth = minipres(_T('info_travaux_titre'), _T('titre_probleme_technique'). "<p><tt>".sql_errno()." ".sql_error()."</tt></p>");
 		} elseif (@$var_auth['statut']) {
 			// un simple visiteur n'a pas acces a l'espace prive
-			$var_auth = _T('avis_erreur_visiteur');
+			$var_auth = minipres(_T('avis_erreur_connexion'),_T('avis_erreur_visiteur'));
 		} else {
 			// auteur en fin de droits ...
-			$h = generer_url_public('', "action=logout&amp;logout=prive");
+			$h = $var_auth['site'];
 			$var_auth = minipres(_T('avis_erreur_connexion'), 
 					"<br /><br /><p>"
-					. _T('texte_inc_auth_1', array('auth_login' => $var_auth['nom']))
+					. _T('texte_inc_auth_1', array('auth_login' => $var_auth['login']))
 					. " <a href='$h'>"
 					.  _T('texte_inc_auth_2')
 					. "</a>"
