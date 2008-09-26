@@ -561,7 +561,7 @@ function page_base_href(&$texte){
 			$GLOBALS['profondeur_url'] >= (_DIR_RESTREINT?1:2)
 			AND _request(_SPIP_PAGE) !== 'login'
 			AND !_request('action')
-			AND !(preg_match(',^/~[^/]*/$,',$_SERVER['REQUEST_URI']) AND $GLOBALS['profondeur_url']==1));
+			AND !(preg_match(',^/~[^/]*/,',$_SERVER['REQUEST_URI']) AND $GLOBALS['profondeur_url']==1));
 
 	if (_SET_HTML_BASE
 	AND $GLOBALS['html']
