@@ -261,7 +261,7 @@ function autoriser_document_modifier_dist($faire, $type, $id, $qui, $opt){
 
 		$s = sql_select("id_objet,objet", "spip_documents_liens", "id_document=".sql_quote($id));
 		while ($t = sql_fetch($s)) {
-			if (autoriser('modifier', $row['objet'], $row['id_objet'], $qui, $opt)) {
+			if (autoriser('modifier', $t['objet'], $t['id_objet'], $qui, $opt)) {
 				$vu = true;
 			}
 			else {
