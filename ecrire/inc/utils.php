@@ -956,11 +956,13 @@ function generer_form_action($script, $corps, $atts='') {
 }
 
 // http://doc.spip.org/@generer_url_action
-function generer_url_action($script, $args="", $no_entities=false ,$rel = false) {
+function generer_url_action($script, $args="", $no_entities=false , $public = false) {
 	// si l'on est dans l'espace prive, on garde dans l'url
 	// l'exec a l'origine de l'action, qui permet de savoir si il est necessaire
 	// ou non de proceder a l'authentification (cas typique de l'install par exemple)
-	$url = _DIR_RACINE  ? generer_url_ecrire(_request('exec')) :  generer_url_public();
+	$url = (_DIR_RACINE  AND !$public)
+	  ? generer_url_ecrire(_request('exec'))
+	  :  generer_url_public();
 	$url = parametre_url($url,'action',$script);
 	if ($args) $url .= quote_amp('&'.$args);
 	
