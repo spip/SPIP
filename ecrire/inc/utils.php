@@ -810,17 +810,6 @@ function url_de_base() {
 	if (isset($url[$GLOBALS['profondeur_url']]))
 		return $url[$GLOBALS['profondeur_url']];
 
-	// cas particulier des sites filtres par un proxy entrant
-	// cf. http://trac.rezo.net/trac/spip/ticket/401
-	// le forwarded_host peut prendre plusieurs valeurs separees par des virgules
-	// chez ovh notamment
-	if (isset($_SERVER['HTTP_X_FORWARDED_HOST'])){
-		$server = explode(',',$_SERVER['HTTP_X_FORWARDED_HOST']);
-		$server = trim(reset($server));
-	}
-	else
-		$server = $_SERVER['HTTP_HOST'];
-
 	$http = (
 		(isset($_SERVER["SCRIPT_URI"]) AND
 			substr($_SERVER["SCRIPT_URI"],0,5) == 'https')
@@ -837,7 +826,8 @@ function url_de_base() {
 			AND !strpos($_SERVER['REQUEST_URI'], '?'))
 				$GLOBALS['REQUEST_URI'] .= '?'.$_SERVER['QUERY_STRING'];
 		}
-	}	$myself = $http.'://'.$server.$GLOBALS['REQUEST_URI'];
+	}
+	$myself = $http.'://'.$_SERVER['HTTP_HOST'].$GLOBALS['REQUEST_URI'];
 
 	# supprimer la chaine de GET
 	list($myself) = explode('?', $myself);
