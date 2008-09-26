@@ -36,7 +36,7 @@ function inc_securiser_action_dist($action='', $arg='', $redirect="", $mode=fals
 // Attention: PHP applique urldecode sur $_GET mais pas sur $_POST
 // cf http://fr.php.net/urldecode#48481
 // http://doc.spip.org/@securiser_action_auteur
-function securiser_action_auteur($action, $arg, $redirect="", $mode=false, $att)
+function securiser_action_auteur($action, $arg, $redirect="", $mode=false, $att='')
 {
 	static $id_auteur=0, $pass;
 	if (!$id_auteur) {
