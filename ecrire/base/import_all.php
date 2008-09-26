@@ -44,6 +44,9 @@ function base_import_all_dist($titre='', $reprise=false)
 	if (!$reprise) import_all_debut();
 
 	$request = unserialize($GLOBALS['meta']['import_all']);
+
+	$archive = $request['dir'] . 
+	($request['archive'] ? $request['archive'] : $request['archive_perso']);
 	// au rappel, on commence (voire on continue)
 	@ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
 
@@ -57,7 +60,7 @@ function base_import_all_dist($titre='', $reprise=false)
 
 	echo debut_droite('', true);
 	
-	$res = import_all_milieu($request);
+	$res = import_all_milieu($request, $archive);
 
 	if (!$res AND $request['insertion'] == 'on') {
 			$request['insertion'] = 'passe2';
@@ -66,9 +69,9 @@ function base_import_all_dist($titre='', $reprise=false)
 				$request['url_site'] .= '/';
 			ecrire_meta("import_all", serialize($request),'non');
 			import_all_debut();
-			$res = import_all_milieu($request);
+			$res = import_all_milieu($request, $archive);
 	}
- 
+
 	echo $res, "</body></html>\n";
 
 	if ($charset = $GLOBALS['meta']['charset_restauration']) {
@@ -79,12 +82,13 @@ function base_import_all_dist($titre='', $reprise=false)
 	import_all_fin($request);
 	include_spip('inc/rubriques');
 	calculer_rubriques();
-
 	if (!$res) ecrire_acces();	// Mise a jour du fichier htpasswd
+	// revenir a l'accueil pour finir
+	affiche_progression_javascript('100 %', 0);
 }
 
 // http://doc.spip.org/@import_all_milieu
-function import_all_milieu($request)
+function import_all_milieu($request, $archive)
 {
 	global $trans;
 	if ($request['insertion'] == 'passe2') {
@@ -92,7 +96,7 @@ function import_all_milieu($request)
 		$trans = translate_init($request);
 	} else $trans = array();
 
-	return import_tables($request, $request['dir']);
+	return import_tables($request, $archive);
 }
 
 // http://doc.spip.org/@import_all_debut
