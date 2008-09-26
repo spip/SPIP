@@ -181,7 +181,7 @@ function detruit_restaurateur()
 }
 
 // http://doc.spip.org/@import_tables
-function import_tables($request, $dir) {
+function import_tables($request, $archive) {
 	global $import_ok, $abs_pos,  $affiche_progression_pourcent;
 
 	// regarder si on est pas en train d'importer dans une copie des tables
@@ -193,7 +193,6 @@ function import_tables($request, $dir) {
 		// recharger les metas
 		lire_metas();
 	}
-
 
 	$abs_pos = (!isset($GLOBALS['meta']["restauration_status"])) ? 0 :
 		$GLOBALS['meta']["restauration_status"];
@@ -213,8 +212,6 @@ function import_tables($request, $dir) {
 		$request['init'] = (!$abs_pos) ? 'import_init_tables' : 'import_table_choix';
 		$request['boucle'] = 'import_replace';
 	}
-
-	$archive = $dir . ($request['archive'] ? $request['archive'] : $request['archive_perso']);
 
 	if (strncmp(".gz", substr($archive,-3),3)==0) {
 			$size = false;
@@ -252,13 +249,15 @@ function import_tables($request, $dir) {
 		ecrire_fichier(_DIR_TMP."debug_import.log","#####".date('Y-m-d H:i:s')."\n",false,false);
 	$fimport = import_charge_version($version_archive);
 
-	import_affiche_javascript($taille);
+	if ($request['insertion'] !== 'passe2')
+		import_affiche_javascript($taille);
 
 	if (function_exists('ob_flush')) @ob_flush();
 	flush();
 	$oldtable ='';
 	$cpt = 0;
 	$pos = $abs_pos;
+
 	while ($table = $fimport($file, $request, $gz, $atts)) {
 	  // memoriser pour pouvoir reprendre en cas d'interrupt,
 	  // mais pas d'ecriture sur fichier, ca ralentit trop
@@ -277,14 +276,11 @@ function import_tables($request, $dir) {
 		$cpt++;
 	}
 	spip_log("$cpt entrees");
+	spip_log("fin de l'archive, statut: " .($import_ok ? 'ok' : 'alert'));
 
 	if (!$import_ok) 
-	  $res =  _T('avis_archive_invalide') . ' ' .
+	  return  _T('avis_archive_invalide') . ' ' .
 	    _T('taille_octets', array('taille' => $pos)) ;
-	else {
-		$res = '';
-		affiche_progression_javascript('100 %', $size);
-	}
 	
 	if ($GLOBALS['spip_version_base'] != (str_replace(',','.',$GLOBALS['meta']['version_installee']))){
 		include_spip('base/upgrade');
@@ -333,30 +329,31 @@ function import_tables($request, $dir) {
 		}
 	}
 	
-
-	return $res ;
+	return '' ;
 }
 
 // http://doc.spip.org/@import_init_meta
 function import_init_meta($tag, $atts, $charset, $request)
 {
+	$version_archive = $atts['version_archive'];
 	$version_base = $atts['version_base'];
-	if (version_compare($version_base,$GLOBALS['spip_version_base'],'<')
-	 && !isset($GLOBALS['meta']['restauration_table_prefix'])
-	 && ($request['insertion']!='on')
-	 && ($request['insertion']!='passe2')){
-		// effacer les tables ici
-		$init = $request['init'];
-		$init($request);
+	$insert = $request['insertion'] ;
 
+	$old = (version_compare($version_base,$GLOBALS['spip_version_base'],'<')
+		&& !isset($GLOBALS['meta']['restauration_table_prefix']));
+
+	if ($old OR $insert) {
+		$init = $request['init'];
+		spip_log("import_init_meta lance $init");
+		$init($request);
+	}
+	if ($old) {
 		// creer une base avec les tables dans l'ancienne version
 		// et changer de contexte
 		$creer_base_anterieure = charger_fonction('create','maj/vieille_base');
 		$creer_base_anterieure($version_base);
 	}
 	
-	$version_archive = $atts['version_archive'];
-	$insert = $request['insertion'] ;
 	ecrire_meta('restauration_attributs_archive', serialize($atts),'non');
 	ecrire_meta('restauration_version_archive', $version_archive,'non');
 	ecrire_meta('restauration_tag_archive', $tag,'non');
@@ -400,18 +397,14 @@ function import_affiche_javascript($taille)
 	echo debut_boite_alerte(),
 	  "<span style='color: black;' class='verdana1 spip_large'><b>",  _T('info_base_restauration'),  "</b></span>",
 	  generer_form_ecrire('', $t, " style='text-align: center' name='progression' id='progression' method='get' "),
-	  fin_boite_alerte(),
-	  "<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"",
-	  self(),
-	  "\";',",
-	  $max_time,
-	  ");</script>\n";
+	  fin_boite_alerte();
 }
 
 
 
 // http://doc.spip.org/@affiche_progression_javascript
 function affiche_progression_javascript($abs_pos,$size, $table="") {
+
 	include_spip('inc/charsets');
 	echo "\n<script type='text/javascript'><!--\n";
 
@@ -499,6 +492,8 @@ function import_table_choix($request)
 			# que des liens
 			array_unshift($tables_for_dump,$link_table);
 	}
+	spip_log(count($tables_for_dump) 
+		 . " tables importees " . join(', ', $tables_for_dump));
 	return $tables_for_dump;
 }	
 ?>

@@ -34,10 +34,15 @@ function exec_import_all_dist()
 		$insert = _request('insertion');
 	} elseif (isset($GLOBALS['meta']['import_all'])) {
 		$request = @unserialize($GLOBALS['meta']['import_all']);
-		$insert = $request['insertion'];
-		$archive = $request['archive'];
-		$commentaire = '';
+		// Tester si l'archive est toujous la:
+		// ca sert pour forcer a sortir d'une restauration inachevee
+		if (is_readable($request['dir'] . $request['archive'])) {
+			$archive = $request['archive'];
+			$insert = $request['insertion'];
+			$commentaire = '';
+		}
 	}
+
 	if ($archive) {
 	  // il faut changer cette chaine depuis qu'on fait aussi de la fusion
 	  // _T('info_restauration_sauvegarde', 
