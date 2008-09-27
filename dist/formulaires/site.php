@@ -51,6 +51,7 @@ function formulaires_site_traiter_dist($id_rubrique){
 		'nom_site' => $nom,
 		'url_site' => $url,
 		'id_rubrique' => $id_rubrique,
+		'id_secteur' => sql_getfetsel('id_secteur','spip_rubriques','id_rubrique='.sql_quote($id_rubrique)),
 		'descriptif' => $desc,
 		'date' => 'NOW()',
 		'date_syndic' => 'NOW()',
