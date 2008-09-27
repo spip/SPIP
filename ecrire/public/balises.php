@@ -852,7 +852,7 @@ function balise_SESSION_dist($p) {
 function balise_SESSION_SET_dist($p) {
 	$_nom = interprete_argument_balise(1,$p);
 	$_val = interprete_argument_balise(2,$p);
-	$p->code = 'session_set('.$_nom.','.$_val.')';
+	$p->code = '(include_spip("inc/session") AND session_set('.$_nom.','.$_val.'))';
 
 	$p->interdire_scripts = false;
 
