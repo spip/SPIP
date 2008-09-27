@@ -209,6 +209,8 @@ function formulaires_signature_reponse_confirmation_dist($var_confirm = '') {
 			$confirm = _T('form_pet_site_deja_enregistre');
 	}
 
+	include_spip('inc/session');
+
 	if (!$confirm) {
 		$confirm = _T('form_pet_signature_validee');
 

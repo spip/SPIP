@@ -158,6 +158,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour){
 
 	// stocker un eventuel document dans un espace temporaire
 	// portant la cle du formulaire ; et ses metadonnees avec
+	include_spip('inc/session');
 	if (!isset($GLOBALS['visiteur_session']['tmp_forum_document']))
 		session_set('tmp_forum_document',
 		sous_repertoire(_DIR_TMP,'documents_forum').md5(uniqid(rand())));
