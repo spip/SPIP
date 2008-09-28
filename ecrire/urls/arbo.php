@@ -356,8 +356,8 @@ function urls_arbo_dist($i, &$entite, $args='', $ancre='') {
 	if (is_numeric($i))
 		return _generer_url_arbo($entite, $i, $args, $ancre);
 
-	$url = $i;
-  
+  	$url = rtrim($i,"/");
+
 	$id_objet = $type = 0;
 
 	// Migration depuis anciennes URLs ?
