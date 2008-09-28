@@ -579,6 +579,9 @@ function corriger_typo($letexte) {
 //
 // Tableaux
 //
+
+define('_RACCOURCI_TH_SPAN', '\s*(:?{{[^{}]+}}\s*)?|<');
+
 // http://doc.spip.org/@traiter_tableau
 function traiter_tableau($bloc) {
 
@@ -590,6 +593,8 @@ function traiter_tableau($bloc) {
 	$numeric = true;
 
 	// Traiter chaque ligne
+	$reg_line1 = ',^(\|(' . _RACCOURCI_TH_SPAN . '))+$,sS';
+	$reg_line_all = ',^'  . _RACCOURCI_TH_SPAN . '$,sS';
 	foreach ($regs[1] as $ligne) {
 		$l ++;
 
@@ -605,8 +610,7 @@ function traiter_tableau($bloc) {
 			}
 		// - <thead> sous la forme |{{titre}}|{{titre}}|
 		//   Attention thead oblige a avoir tbody
-			else if (preg_match(',^(\|([[:space:]]*(:?{{[^}]+}}[[:space:]]*)?|<))+$,sS',
-				$ligne, $thead)) {
+			else if (preg_match($reg_line1,	$ligne, $thead)) {
 			  	preg_match_all("/\|([^|]*)/S", $ligne, $cols);
 				$ligne='';$cols= $cols[1];
 				$colspan=1;
@@ -656,7 +660,7 @@ function traiter_tableau($bloc) {
 	  for ($j=0;$j<$k;$j++) $rowspans[$j][$i] = 1;
 	  for ($j=0;$j<$k;$j++) {
 	    $cell = trim($lignes[$j][$i]);
-	    if (($cell !== '<') AND $cell[0] !== '{') {
+	    if (preg_match($reg_line_all, $cell)) {
 		if (!preg_match('/^\d+([.,]?)\d*$/', $cell, $r))
 		  { $align = ''; break;}
 		else if ($r[1]) $align = $r[1];
