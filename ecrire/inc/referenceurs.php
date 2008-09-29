@@ -75,7 +75,7 @@ function inc_referenceurs_dist ($script, $args, $select, $table, $where, $groupb
 				$ret .= "\n<a href=\"http://".$lesurls[$numero]."\"><img src=\"$source_vignettes".rawurlencode($lesurls[$numero])."\"\nstyle=\"float: $spip_lang_right; margin-bottom: 3px; margin-left: 3px;\" alt='' /></a>";
 
 			$bouton = "";
-			if ($visites > 5) $bouton .= "<span style='color: red'>$visites "._T('info_visites')."</span> ";
+			if ($visites > 5) $bouton .= "<span class='visites'>$visites "._T('info_visites')."</span> ";
 			else if ($visites > 1) $bouton .= "$visites "._T('info_visites')." ";
 			else $bouton .= "<span style='color: #999999'>$visites "._T('info_visite')."</span> ";
 
