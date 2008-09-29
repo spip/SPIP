@@ -86,9 +86,9 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	  . (($GLOBALS['meta']["documents_date"] == 'oui')
 	  	? "<li class='editer_date'>".date_formulaire_legender($date, $id_document)."</li>"
 	  	:'' )
-	  . "<li class='editer_descriptif'><label for='descriptif_document$id_document'><b>".
+	  . "<li class='editer_descriptif'><label for='descriptif_document$id_document'>".
 	  _T('info_description_2').
-	  "</b></label>\n" .
+	  "</label>\n" .
 	  "<textarea name='descriptif_document' id='descriptif_document$id_document' rows='4' class='textarea' cols='*' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">" .
 	    entites_html($descriptif) .
 	  "</textarea></li></ul></div>\n" .
@@ -261,7 +261,7 @@ function formulaire_taille($document) {
 		// ou tous les formats qui s'affichent en embed
 		OR $type_inclus == "embed"
 	)) {
-		return "\n<br /><label for='largeur_document$id_document'><b>"._T('entree_dimensions')."</b></label><br />\n" .
+		return "\n<br /><label for='largeur_document$id_document'>"._T('entree_dimensions')."</label><br />\n" .
 		  "<input type='text' name='largeur_document' id='largeur_document$id_document' class='fondl spip_xx-small' value=\"".$document['largeur']."\" size='5' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" />" .
 		  " &times; <input type='text' name='hauteur_document' id='hauteur_document$id_document' class='fondl spip_xx-small' value=\"".$document['hauteur']."\" size='5' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /> "._T('info_pixels');
 	}
@@ -278,7 +278,7 @@ function date_formulaire_legender($date, $id_document) {
 		$minute = $regs[5];
 	}
 
-	return  "<div><b>"._T('info_mise_en_ligne')."</b><br />\n" .
+	return  "<div>"._T('info_mise_en_ligne')."<br />\n" .
 		afficher_jour($jour, "name='jour_doc' id='jour_doc$id_document' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"") .
 		afficher_mois($mois, "name='mois_doc' id='mois_doc$id_document' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"") .
 		afficher_annee($annee, "name='annee_doc' id='annee_doc$id_document' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\"") .
