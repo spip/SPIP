@@ -14,9 +14,10 @@
 	</fieldset>]
 
 	[(#ENV{editable})
-	<form id='formulaire_login' method='post' action='#ENV{action}' enctype='multipart/form-data'>
-	[(#REM) declarer les hidden qui declencheront le service du formulaire parametre : url d'action ]
-	#ACTION_FORMULAIRE{#ENV{action}}
+	[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+	[<form id='formulaire_login' method='post' action='(#ENV{action})' enctype='multipart/form-data'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}]
 	<fieldset>
 		<legend><:form_forum_identifiants:></legend>
 		<span id="spip_logo_auteur">#ENV*{_logo,''}</span>
@@ -38,9 +39,9 @@
 				<label class='nofx' for="session_remember"><:login_rester_identifie:></label>
 			</li>]
 		</ul>
-	</fieldset>
-	<p class="boutons"><input type="submit" class="submit" value="<:bouton_valider:>" /></p>
-	</form>
+	</fieldset>[
+	  <p class="boutons"><input type="submit" class="submit" value="<:bouton_valider:>" /></p>
+(#ENV{action}|?{' ',''})</div></form>]
 	]
 	[(#REM) en cas d'absence de cookie, on represente le formulaire alternatif ]
 	[<form action="(#ENV{auth_http})" method="get">[
@@ -53,7 +54,7 @@
 		[<input type="hidden" name="url" value="(#ENV{url})"/>]
 		<p class="boutons"><input type="submit" class="submit" value="<:login_sans_cookiie:>"/></p>
 	</fieldset>
-	</form>
+
 	]
 </div>
 [(#REM) javascript qui gere la securite du login en evitant de faire circuler le pass en clair]
