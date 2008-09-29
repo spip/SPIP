@@ -3,10 +3,10 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
-	[(#REM) declarer les hidden qui declencheront le service du formulaire
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
-	[<form method='post' action='(#ENV{action})' enctype='multipart/form-data'><div>
-		#ACTION_FORMULAIRE{#ENV{action}}]
+		#ACTION_FORMULAIRE{#ENV{action}}
 	  <input type='hidden' name='id_mot' value='#ENV{id_mot}' />
 	  <ul>
 	    <li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
@@ -35,8 +35,9 @@
 				(#ENV**{browser_caret,''})]>[(#ENV**{texte})]</textarea>
 	    </li>
 	  </ul>
-	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]<!--extra-->[
-	  <p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
-(#ENV{action}|?{' ',''})</div></form>]
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
 	]
 </div>
