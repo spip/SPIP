@@ -27,6 +27,7 @@ function spip_xml_load($fichier, $strict=true, $clean=true, $taille_max = 104857
 	return count($arbre)?$arbre:false;
 }
 
+@define ('_SPIP_XML_TAG_SPLIT',"{<([^:>][^>]*?)>}sS");
 // http://doc.spip.org/@spip_xml_parse
 function spip_xml_parse(&$texte, $strict=true, $clean=true, $profondeur = -1){
 	$out = array();
@@ -45,7 +46,7 @@ function spip_xml_parse(&$texte, $strict=true, $clean=true, $profondeur = -1){
   $txt = $texte;
 
 	// tant qu'il y a des tags
-	$chars = preg_split("{<([^>]*?)>}sS",$txt,2,PREG_SPLIT_DELIM_CAPTURE);
+	$chars = preg_split(_SPIP_XML_TAG_SPLIT,$txt,2,PREG_SPLIT_DELIM_CAPTURE);
 	while(count($chars)>=2){
 		// tag ouvrant
 		//$chars = preg_split("{<([^>]*?)>}s",$txt,2,PREG_SPLIT_DELIM_CAPTURE);
@@ -97,7 +98,7 @@ function spip_xml_parse(&$texte, $strict=true, $clean=true, $profondeur = -1){
 			else
 				$out[$tag][]=spip_xml_parse($content, $strict, $clean, $profondeur-1);
 		}
-		$chars = preg_split("{<([^>]*?)>}sS",$txt,2,PREG_SPLIT_DELIM_CAPTURE);
+		$chars = preg_split(_SPIP_XML_TAG_SPLIT,$txt,2,PREG_SPLIT_DELIM_CAPTURE);
 	}
 	if (count($out)&&(strlen(trim($txt))==0))
 		return $out;
