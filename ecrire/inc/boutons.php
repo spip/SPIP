@@ -225,8 +225,8 @@ function definir_barre_boutons() {
 	} // fin si admin
 
 	// ajouter les boutons issus des plugin via plugin.xml
-	if (function_exists('boutons_plugins')){
-		$liste_boutons_plugins = boutons_plugins();
+	if (function_exists('boutons_plugins')
+	  AND is_array($liste_boutons_plugins = boutons_plugins())){
 		foreach($liste_boutons_plugins as $id => $infos){
 			if (autoriser('bouton',$id)){
 				if (($parent = $infos['parent']) && isset($boutons_admin[$parent]))

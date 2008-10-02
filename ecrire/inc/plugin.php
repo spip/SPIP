@@ -132,8 +132,9 @@ function erreur_necessite($n, $liste) {
 
 
 // http://doc.spip.org/@liste_plugin_valides
-function liste_plugin_valides($liste_plug,&$infos, $force = false){
+function liste_plugin_valides($liste_plug, $force = false){
 	$liste = array();
+	$ordre = array();
 	$infos = array();
 
 	foreach($liste_plug as $plug)
@@ -179,6 +180,7 @@ function liste_plugin_valides($liste_plug,&$infos, $force = false){
 					$utilise_ok = !erreur_necessite($infos[$plug]['utilise'], $liste);
 				if ($necessite_ok AND $utilise_ok){
 					$liste[$p] = $liste_non_classee[$p];
+					$ordre[] = $plug;
 					unset($liste_non_classee[$p]);
 				}
 			}
@@ -209,7 +211,7 @@ function liste_plugin_valides($liste_plug,&$infos, $force = false){
 				"<ul>$erreurs</ul>$necessite");
 		}
 	}
-	return $liste;
+	return array($liste,$ordre,$infos);
 }
 
 //  A utiliser pour initialiser ma variable globale $plugin
@@ -221,7 +223,7 @@ function liste_plugin_actifs(){
   		return $t;
   	else{ // compatibilite pre 1.9.2, mettre a jour la meta
   		$t = explode(",",$meta_plugin);
-  		$liste = liste_plugin_valides($t,$infos);
+  		list($liste,$ordre,$infos) = liste_plugin_valides($t);
 			ecrire_meta('plugin',serialize($liste));
 			return $liste;
   	}
@@ -259,7 +261,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	}
 
 	// recharger le xml des plugins a activer
-	$plugin_valides = liste_plugin_valides($plugin,$infos,true);
+	list($plugin_valides,$ordre,$infos) = liste_plugin_valides($plugin,true);
 
 	ecrire_meta('plugin',serialize($plugin_valides));
 	$plugin_header_info = array();
@@ -275,7 +277,8 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 		// construire tableaux de boutons et onglets
 		$liste_boutons = array();
 		$liste_onglets = array();
-		foreach($infos as $plug=>$info){
+		foreach($ordre as $plug){
+			$info = $infos[$plug];
 			if (isset($info['bouton'])){
 				foreach($info['bouton'] as $id=>$conf){
 					$conf['icone'] = substr(find_in_path($conf['icone']),strlen(_DIR_RACINE));
@@ -300,7 +303,8 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 		$s = "error_reporting(SPIP_ERREUR_REPORT_INCLUDE_PLUGINS);\n";
 		$splugs = "";
 		if (is_array($infos)){
-			foreach($infos as $plug=>$info){
+			foreach($ordre as $plug){
+				$info = $infos[$plug];
 				// definir le plugin, donc le path avant l'include du fichier options
 				// permet de faire des include_spip pour attraper un inc_ du plugin
 				if ($charge=='options'){
@@ -340,7 +344,8 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 		// $GLOBALS['spip_pipeline']
 		// $GLOBALS['spip_matrice']
 		$liste_boutons = array();
-		foreach($infos as $plug=>$info){
+		foreach($ordre as $plug){
+			$info = $infos[$plug];
 			$prefix = "";
 			$prefix = $info['prefix']."_";
 			if (isset($info['pipeline']) AND is_array($info['pipeline'])){
@@ -645,7 +650,7 @@ function plugin_get_infos($plug, $force_reload=false){
 							$val = reset($val);
 							if(is_array($val)){
 								$ret[$type][$id]['parent'] = isset($bouton['parent'])?$bouton['parent']:'';
-								$ret[$type][$id]['titre'] = isset($val['titre'])?trim(end($val['titre'])):'';
+								$ret[$type][$id]['titre'] = isset($val['titre'])?trim(spip_xml_aplatit($val['titre'])):'';
 								$ret[$type][$id]['icone'] = isset($val['icone'])?trim(end($val['icone'])):'';
 								$ret[$type][$id]['url'] = isset($val['url'])?trim(end($val['url'])):'';
 								$ret[$type][$id]['args'] = isset($val['args'])?trim(end($val['args'])):'';
