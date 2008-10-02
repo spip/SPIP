@@ -506,8 +506,8 @@ function typo($letexte, $echapper=true, $connect='') {
 	//
 	// Installer les modeles, notamment images et documents ;
 	//
-	// NOTE : propre() l'a deja fait
-	// sauf pour les textes renvoyes par calculer_url()
+	// NOTE : propre() ne passe pas par ici mais directement par corriger_typo
+	// cf. inc/lien
 
 	$letexte = traiter_modeles($mem = $letexte, false, $echapper ? 'TYPO' : '', $connect);
 	if ($letexte != $mem) $echapper = true;
