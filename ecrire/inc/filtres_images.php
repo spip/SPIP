@@ -90,8 +90,8 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 	elseif (@file_exists($f = "$fichier.src")
 		AND lire_fichier($f,$valeurs)
 		AND $valeurs=unserialize($valeurs)) {
-		$ret["hauteur"] = $valeurs["hauteur"];
-		$ret["largeur"] = $valeurs["largeur"];
+		$ret["hauteur"] = $valeurs["hauteur_dest"];
+		$ret["largeur"] = $valeurs["largeur_dest"];
 		$date_src = $valeurs["date"];
 	}
 
