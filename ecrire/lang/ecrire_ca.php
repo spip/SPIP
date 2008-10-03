@@ -607,7 +607,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_sites_trouves_dans_texte' => 'Llocs trobats (en el text)',
 'info_sous_titre' => 'Subt&iacute;tol:',
 'info_statut_administrateur' => 'Administrador',
-'info_statut_auteur' => '<MODIF>Estat d\'aquest autor:',
+'info_statut_auteur' => 'Estatus d\'aquest autor:',
 'info_statut_auteur_a_confirmer' => 'Inscripci&oacute; per confirmar',
 'info_statut_auteur_autre' => 'Un altre estat:',
 'info_statut_efface' => 'Suprimit',

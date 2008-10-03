@@ -62,8 +62,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_note' => 'Trasformare in [[Nota a fondo pagina]]',
 'barre_paragraphe' => 'Crea un paragrafo',
 'barre_quote' => '<quote>Citare un messaggio</quote>',
-'bouton_ajouter_document' => '<MODIF>AGGIUNGI UN DOCUMENTO',
-'bouton_ajouter_image' => '<MODIF>AGGIUNGI UN\'IMMAGINE',
+'bouton_ajouter_document' => 'Aggiungi un documento',
+'bouton_ajouter_image' => 'Aggiungi un\'immagine',
+'bouton_ajouter_image_document' => 'Aggiungi un\'immagine o&nbsp;un&nbsp;documento',
 'bouton_changer' => 'Cambia',
 'bouton_chercher' => 'Cerca',
 'bouton_choisir' => 'Scegli',
@@ -202,6 +203,7 @@ di ciascuna di queste cartelle. La procedura &egrave; spiegata in dettaglio nell
 'double_occurrence' => 'Doppia occorrenza',
 
 // E
+'en_cours' => 'in corso',
 'entree_dimensions' => 'Dimensioni:',
 'entree_titre_document' => 'Titolo del documento:',
 'entree_titre_image' => 'Titolo dell\'immagine:',
@@ -209,6 +211,7 @@ di ciascuna di queste cartelle. La procedura &egrave; spiegata in dettaglio nell
 'erreur' => 'Errore',
 'erreur_balise_non_fermee' => 'ultimo tag non chiuso:',
 'erreur_texte' => 'errore/i',
+'etape' => 'Fase',
 
 // F
 'fichier_introuvable' => 'File @fichier@ non trovato',
@@ -236,7 +239,7 @@ di ciascuna di queste cartelle. La procedura &egrave; spiegata in dettaglio nell
 'form_pet_confirmation' => 'Conferma l\'adesione:',
 'form_pet_deja_enregistre' => 'Questo sito &egrave; gi&agrave; registrato',
 'form_pet_deja_signe' => 'Hai gi&agrave; firmato questo testo.',
-'form_pet_envoi_mail_confirmation' => '<MODIF>Ti &egrave; stato appena inviato un messaggio di posta elettronica. Dovrai visitare l\'indirizzo web che appare nel messaggio per confermare la tua adesione.',
+'form_pet_envoi_mail_confirmation' => 'Ti &egrave; stato appena inviato un messaggio di posta elettronica all\'indirizzo @email@. Dovrai visitare l\'indirizzo web che appare nel messaggio per confermare la tua adesione.',
 'form_pet_mail_confirmation' => 'Salve,
 
 Hai richiesto di firmare la petizione:
@@ -690,8 +693,8 @@ Prendi nota di questo riferimento, ritenta l\'aggiornamento,
 e verifica che le immagini si vedano ancora
 negli articoli.',
 'texte_erreur_visiteur' => 'Si &egrave; tentato di entrare nell\'area riservata con un login non valido.',
-'texte_inc_auth_1' => '<MODIF>Sei identificato con il
-login <b>@auth_login@</b>, ma non esiste pi&ugrave; nel database. 
+'texte_inc_auth_1' => 'Sei identificato con il
+login <b>@auth_login@</b>, ma nel database non esiste. 
 Prova a ',
 'texte_inc_auth_2' => 'collegarti nuovamente',
 'texte_inc_auth_3' => ', dopo aver eventualmente effettuato un logout e 
@@ -729,6 +732,7 @@ funzionamento del sito. Non intervenire finch&eacute; non conosci bene i meccani
 'titre_signatures_confirmees' => 'Firme confermate',
 'titre_statistiques' => 'Statistiche del sito',
 'titre_titre_document' => 'Titolo del documento:',
+'todo' => 'prossimo',
 'trad_reference' => '(articolo di riferimento)',
 
 // Z
