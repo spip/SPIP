@@ -23,15 +23,28 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // le compilateur produit  FROM $r['table'] AS $r['id_table']
 // Cette fonction intervient a la compilation, 
 // mais aussi pour la balise contextuelle EXPOSE.
+// l'ensemble des descriptions de table d'un serveur est stocke dans un fichier cache/sql_dec.txt
+// par soucis de performance
+// un appel avec $nom vide est une demande explicite de vidange du cache des descriptions
 
 // http://doc.spip.org/@base_trouver_table_dist
-function base_trouver_table_dist($nom, $serveur='')
-{
+function base_trouver_table_dist($nom, $serveur=''){
+	static $nom_cache_desc_sql=array();
 	global $tables_principales, $tables_auxiliaires, $table_des_tables;
-
+	
 	if (!spip_connect($serveur)
-	OR !preg_match('/^[a-zA-Z0-9._-]+/',$nom))
+	OR !preg_match('/^[a-zA-Z0-9._-]*/',$nom))
 		return null;
+	if (!isset($nom_cache_desc_sql[$serveur]))
+		$nom_cache_desc_sql[$serveur] = _DIR_CACHE . 'sql_desc' . ($serveur ? '_'.md5($serveur):'') . '.txt';
+
+	// un appel avec $nom vide est une demande explicite de vidange du cache des descriptions
+	if (!$nom){
+		spip_unlink($nom_cache_desc_sql[$serveur]);
+		$connexion['tables'] = array();
+		return null;
+	}
+
 	$nom_sql = $nom;
 	if (preg_match('/\.(.*)$/', $nom, $s))
 		$nom_sql = $s[1];
@@ -62,7 +75,19 @@ function base_trouver_table_dist($nom, $serveur='')
 		}
 	}
 
+	// si c'est la premiere table qu'on cherche
+	// et si on est pas explicitement en recalcul
+	// on essaye de recharger le cache des decriptions de ce serveur
+	// dans le fichier cache
+	if (!isset($connexion['tables'][$nom_sql])
+	  AND $GLOBALS['var_mode']!=='recalcul'
+	  AND (!isset($connexion['tables']) OR !$connexion['tables'])) {
+		if (lire_fichier($nom_cache_desc_sql[$serveur],$desc_cache)
+		  AND $desc_cache=unserialize($desc_cache))
+		  $connexion['tables'] = $desc_cache;
+	}
 	if (!isset($connexion['tables'][$nom_sql])) {
+		
 		// La *vraie* base a la priorite
 		if (true /*  !$bdesc OR !$bdesc['field']  */) {
 			$t = ($nom_sql != $nom);
@@ -80,9 +105,10 @@ function base_trouver_table_dist($nom, $serveur='')
 		$desc['table']= $nom_sql;
 		$desc['id_table']= $nom;
 		$desc['connexion']= $serveur;
-		$desc['titre'] = isset($GLOBALS['table_titre'][$nom])
-		? $GLOBALS['table_titre'][$nom] : '';
 		$connexion['tables'][$nom_sql] = $desc;
+		// une nouvelle table a ete descrite
+		// mettons donc a jour le cache des descriptions de ce serveur
+		ecrire_fichier($nom_cache_desc_sql[$serveur],serialize($connexion['tables']));
 	}
 
 	return $connexion['tables'][$nom_sql];
