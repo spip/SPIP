@@ -148,8 +148,8 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 		// _INTERFACE_DOCUMENTS
 		// Si mode == 'choix', fixer le mode image/document
 		// en fonction de la taille de l'image
-		// valeur par defaut 300px de large
-		define('_LARGEUR_MODE_IMAGE', 300);
+		// valeur par defaut 450px de large
+		define('_LARGEUR_MODE_IMAGE', 450);
 		if ($mode == 'choix') {
 			if (in_array($type_image, array('gif', 'png', 'jpg'))
 			AND $largeur > 0
