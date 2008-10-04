@@ -69,11 +69,12 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 		else {
 			$row = sql_fetsel('*',$table_objet_sql,$id_table_objet."=".intval($id));
 		}
-		if (!$row) {
+		if ($new OR !$row) {
 			$trouver_table = charger_fonction('trouver_table','base');
 			if ($desc = $trouver_table($table_objet))
 				foreach($desc['field'] as $k=>$v)
-					$row[$k]='';
+					if (!isset($row[$k]))
+						$row[$k]='';
 		}
 
 		// Ajouter les controles md5 si l'article existe
