@@ -5,13 +5,12 @@
 
 
 /* Intertitre */
-h3.spip { text-align: center; margin-top: 2em; margin-bottom: 1.4em; font-size: 1.15em; font-weight: bold; font-family: Georgia, Times, serif; }
+h3.spip { text-align: center; margin-top: 2em; margin-bottom: 1.4em; font-size: 1.15em; font-weight: bold; }
 hr.spip { margin: 2em auto; }
 
 /* Listes SPIP */
 ul.spip {}
 ol.spip { list-style: decimal; }
-li.spip {}
 
 /* Citations, code et poesie */
 blockquote.spip { margin: 2em 0; padding-left: 1em; border-left: 0.30em solid; }
