@@ -73,6 +73,9 @@ table.spip_barre a img { background: #FDA; padding: 3px; border: 1px outset #CC9
 table.spip_barre a:hover img { background: #FFF; border: 1px solid #CC9; }
 table.spip_barre input.barre { width: 99%; background: transparent; border: 0; color: #F57900; }
 
+/* Formulaire de forum */
+.formulaire_forum .saisie_titre input.text { width: 99%; }
+
 /* Selection des langues */
 .formulaire_menu_lang { margin: 0; padding: 0; background: none; }
 
