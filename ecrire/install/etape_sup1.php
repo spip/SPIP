@@ -110,7 +110,7 @@ function install_etape_sup1_form($hidden, $checked, $bases, $etape)
 	  . "<label for='nou'><b>"
 	  ._T('config_choix_base_sup')
 	  ."</b></label></p>\n"
-	  . "\n<input type='text' name='table_new' class='fondl' size='20' /></p></fieldset>\n"
+	  . "\n<input type='text' name='table_new' class='text' size='20' /></p></fieldset>\n"
 	  . bouton_suivant()));
 }
 ?>

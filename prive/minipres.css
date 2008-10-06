@@ -1,10 +1,10 @@
 /* Correction des styles par defaut
 ---------------------------------------------- */
 html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-de-polices-en-CSS/ */
-body { font: 1em sans-serif; color: #2e3436; }
+body { font: .9em sans-serif; color: #2e3436; }
 input, textarea, select { font-size: 100%; font-family: inherit; }
 
-h1 { margin: 1em 0 1em 0; font-size: 1.2em; font-weigth: bold; color: #5c3566; }
+h1 { margin: 1em auto; font-size: 1.2em; font-weigth: bold; color: #5c3566; text-align: center; }
 h2 { margin: 0.80em 0 0.80em 0; font-size: 1.1em; font-weigth: normal; }
 
 img, .spip_logos { margin: 0; padding: 0; border: 0; }
@@ -22,27 +22,29 @@ body { background: #babdb6 url(images/minipres-gris.png) no-repeat scroll 97% 10
 
 /* Habillage (en vrac)
 ---------------------------------------------- */
-fieldset, .fieldset { text-align: left; padding: 0; border: 0; margin-top: 1em; font-size: 0.90em; }
-legend { font-weight: bold; font-size: 1.1em; color: #000; } /* Preciser la couleur des legend pour IE/Win */
+fieldset, .fieldset { text-align: left; padding: 0; border: 0; margin-top: 1em; font-size: .95em; }
+legend { font-weight: bold; font-size: 1em; color: #333; } /* Preciser la couleur des legend pour IE/Win */
 label {}
 
 .reponse_formulaire, .erreur_message { font-weight: bold; color: red; }
 
-body.minipres fieldset, body.minipres .fieldset  { border: 1px solid #ccc; padding: 10px; font-family: helvetica, arial, sans; }
+body.minipres fieldset, body.minipres .fieldset  { border: 1px solid #ccc; padding: 1em; }
 
-#minipres { width: 40em; background: #fff repeat; margin: 1em auto; padding: 1em; border: 1px solid #888; text-align: center; }
+#minipres { width: 38em; background: #fff repeat; margin: 1em auto; padding: 1em; border: 1px solid #888; }
 
 .pass #minipres { width: 90%; }
 
-.petit-centre { font-family: Verdana, Geneva, Sans, sans-serif; font-size: 1em; }
-.petit-centre p { text-align: center; }
+.petit-centre { font-size: .8em; text-align: center; }
+.petit-centre p { width: 300px; margin: auto; }
 
 .suivant { display: block; margin-top: 1em; text-align: right; }
 
 .toile_foncee { background: #777; }
 
-.fondl { background-color: #eee; background-position: center bottom; padding: 3px; border: 1px solid #333; font-size: 0.90em; font-family: Verdana, Geneva, Sans, sans-serif; }
-.formo { width: 100%; display: block; background-color: #fff; background-position: center bottom; margin-bottom: 1em; padding: 3px; border: 1px solid #333; behavior: url(win_width.htc); font-size: 1em; font-family: Verdana, Geneva, Sans, sans-serif; }
+#minipres label { color: #333; }
+.fondl { /*background-color: #eee; background-position: center bottom; padding: 3px; border: 1px solid #333; font-size: 0.90em;*/ }
+.formo, input.text, input.password { width: 50%; display: block; background-color: #f8f8f9; background-position: center bottom; margin-bottom: 1em; padding: 3px; border: 1px inset #333; behavior: url(win_width.htc); }
+.formo, input.text, input.password, select { font-size: 1.1em; }
 
 p.resultat { background-color: #fcaf3e; padding: 0.20em 0.10em; text-align: center; color: #fff; font-weight: bold; }
 p.resultat.ok { background-color: #73d216; }
@@ -58,7 +60,7 @@ p.resultat.echec { background-color: #d60c0c; }
 
 #infos_etapes { height: 63px; overflow: hidden; margin: 0; padding: 0; padding-left: 10px; background: #dbdbdb url(../prive/images/degrade-etapes-clair-left.gif) no-repeat right top; text-align: left; font-family: helvetica, arial, sans; list-style: none; }
 #infos_etapes li { float: left; margin-left: -28px; padding-left: 29px; background: url(../prive/images/degrade-etapes-clair-left.gif) no-repeat left top; color: #555; text-align: left; font-size: 0.85em; line-height: 1.05em; }
-#infos_etapes li .fond { width: 9em; height: 69px; padding-right: 2em; padding-top: 10px; background: url(../prive/images/degrade-etapes-clair-left.gif) no-repeat -30px top; }
+#infos_etapes li .fond { width: 8em; height: 69px; padding-right: 2em; padding-top: 10px; background: url(../prive/images/degrade-etapes-clair-left.gif) no-repeat -30px top; }
 #infos_etapes li span.numero_etape { float: left; display: block; height: 50px; margin-left: -10px; padding: 7px 3px 0 3px; font-weight: bold; font-size: 3em; }
 #infos_etapes li.on { background-image: url(../prive/images/degrade-etapes-vert-left.gif); color: #fff; font-weight: bold; }
 #infos_etapes li.on .fond { background-color: #88f560; background-image:  url(../prive/images/degrade-etapes-vert-left.gif); }
@@ -67,12 +69,12 @@ p.resultat.echec { background-color: #d60c0c; }
 /* Page de login
 ---------------------------------------------- */
 .page_login { text-align: center; }
-.page_login #minipres { width: 25em; }
-.page_login .formulaire_menu_lang { float: right; font-size: 0.80em; }
+.page_login #minipres { width: 28em; }
+.page_login .formulaire_menu_lang { float: right; font-size: .9em; }
 .page_login .formulaire_menu_lang label { display: none; }
 .page_login .formulaire_menu_lang select { display: inline; }
 .page_login .formulaire_menu_lang input.submit { display: inline; }
-.page_login .formulaire_login { clear: both; text-align: left; font-size: 0.80em; }
+.page_login .formulaire_login { clear: both; text-align: left; font-size: .9em; }
 .page_login .formulaire_login fieldset { margin: 0; padding: 0; border: 1px solid #babdb6; padding: 1em; font-size: 1em; }
 .page_login .formulaire_login fieldset .spip_logos { float: right; padding-left: 5px; }
 .page_login .formulaire_login fieldset ul { float: left; width: 70%; margin: 0; padding: 0; list-style: none; }
@@ -82,9 +84,15 @@ p.resultat.echec { background-color: #d60c0c; }
 .page_login .formulaire_login fieldset ul li .details { display: block; width: auto; }
 .page_login .formulaire_login fieldset ul li label.nofx { display: inline; }
 .page_login .formulaire_login fieldset ul li input.text,
-.page_login .formulaire_login fieldset ul li input.password { width: 11em; }
+.page_login .formulaire_login fieldset ul li input.password { width: 11em; margin: 0; display: inline; }
 .page_login .boutons { text-align: right; }
-.page_login .retour { clear: both; text-align: center; font-size: 0.80em; }
+.page_login .retour { clear: both; text-align: center; font-size: .9em; }
+
+
+/* Oublie du mot de passe
+---------------------------------------------- */
+body.pass #minipres {}
+body.pass .formulaire_spip { background: none; border: none; margin: 0; padding: 0; }
 
 
 /* Couleurs des liens

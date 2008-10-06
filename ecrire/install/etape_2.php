@@ -159,7 +159,7 @@ function install_etape_2_form($hidden, $checked, $res, $etape)
 		. "\n<input name=\"choix_db\" value=\"new_spip\" type='radio' id='nou'"
 		. ($checked  ? '' : " checked='checked'")
 		. " />\n<label for='nou'>"._T('info_creer_base')."</label></p>\n<p>"
-		. "\n<input type='text' name='table_new' class='fondl' value=\"spip\" size='20' /></p></fieldset>\n"
+		. "\n<input type='text' name='table_new' class='text' value=\"spip\" size='20' /></p></fieldset>\n"
 	)
 
 	. ((defined('_INSTALL_TABLE_PREFIX')
@@ -167,7 +167,7 @@ function install_etape_2_form($hidden, $checked, $res, $etape)
 		? '<h3>'._T('install_table_prefix_hebergeur').'  <tt>'.$GLOBALS['table_prefix'].'</tt>'.'</h3>'
 		: "<fieldset><legend>"._T('texte_choix_table_prefix')."</legend>\n"
 	. "<p><label for='table_prefix'>"._T('info_table_prefix')."</label></p><p>"
-	. "\n<input type='text' id='tprefix' name='tprefix' class='fondl' value='"
+	. "\n<input type='text' id='tprefix' name='tprefix' class='text' value='"
 		. 'spip' # valeur par defaut
 		. "' size='20' /></p></fieldset>"
 	)
