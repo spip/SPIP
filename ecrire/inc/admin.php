@@ -66,6 +66,7 @@ function admin_verifie_session($script, $anonymous=false) {
 			if (intval(substr($valeur, strpos($valeur,'_')+1))<>
 			    $GLOBALS['visiteur_session']['id_auteur']) {
 				include_spip('inc/minipres');
+				spip_log("refus de lancer $script, priorite a $valeur");
 				return minipres(_T('info_travaux_texte'));
 			}
 		}

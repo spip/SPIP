@@ -85,6 +85,42 @@ function inc_auth_dist() {
 	return $n ? $n : 1;
 }
 
+// fonction appliquee par ecrire/index sur le resultat de la precedente
+// en cas de refus de connexion.
+// Retourne un message a afficher ou redirige illico.
+
+function auth_echec($raison)
+{
+	include_spip('inc/minipres');
+	include_spip('inc/headers');
+	// pas authentifie. Pourquoi ?
+	if (is_string($raison)) {
+		// redirection vers une page d'authentification
+		// on ne revient pas de cette fonction 
+		// sauf si pb de header 
+		$raison = redirige_formulaire($raison);
+	} elseif (is_int($raison)) {
+		// erreur SQL a afficher
+		$raison = minipres(_T('info_travaux_titre'), _T('titre_probleme_technique'). "<p><tt>".sql_errno()." ".sql_error()."</tt></p>");
+	} elseif (@$raison['statut']) {
+		// un simple visiteur n'a pas acces a l'espace prive
+		spip_log("connexion refusee a " . @$raison['id_auteur']);
+		$raison = minipres(_T('avis_erreur_connexion'),_T('avis_erreur_visiteur'));
+	} else {
+		// auteur en fin de droits ...
+		$h = $raison['site'];
+		$raison = minipres(_T('avis_erreur_connexion'), 
+				"<br /><br /><p>"
+				. _T('texte_inc_auth_1',
+				array('auth_login' => $raison['login']))
+				. " <a href='$h'>"
+				.  _T('texte_inc_auth_2')
+				. "</a>"
+				. _T('texte_inc_auth_3'));
+	}
+	return $raison;
+}
+
 // Retourne la description d'un authentifie par cookie ou http_auth
 // Et affecte la globale $connect_login
 
