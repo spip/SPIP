@@ -36,32 +36,7 @@ if (autoriser_sans_cookie($exec)) {
 	$auth = charger_fonction('auth', 'inc');
 	$var_auth = $auth();
 	if ($var_auth) { 
-		include_spip('inc/minipres');
-		include_spip('inc/headers');
-		// pas authentifie. Pourquoi ?
-		if (is_string($var_auth)) {
-			// redirection vers une page d'authentification
-			// on ne revient pas de cette fonction 
-			// sauf si pb de header 
-			$var_auth = redirige_formulaire($var_auth);
-		} elseif (is_int($var_auth)) {
-			// erreur SQL a afficher
-			$var_auth = minipres(_T('info_travaux_titre'), _T('titre_probleme_technique'). "<p><tt>".sql_errno()." ".sql_error()."</tt></p>");
-		} elseif (@$var_auth['statut']) {
-			// un simple visiteur n'a pas acces a l'espace prive
-			$var_auth = minipres(_T('avis_erreur_connexion'),_T('avis_erreur_visiteur'));
-		} else {
-			// auteur en fin de droits ...
-			$h = $var_auth['site'];
-			$var_auth = minipres(_T('avis_erreur_connexion'), 
-					"<br /><br /><p>"
-					. _T('texte_inc_auth_1', array('auth_login' => $var_auth['login']))
-					. " <a href='$h'>"
-					.  _T('texte_inc_auth_2')
-					. "</a>"
-					. _T('texte_inc_auth_3'));
-		}
-		echo $var_auth;
+		echo auth_echec($var_auth);
 		exit;
 	}
  }
@@ -103,9 +78,15 @@ AND ($GLOBALS['spip_version_base'] != (str_replace(',','.',$GLOBALS['meta']['ver
 // sinon c'est qu'elle a ete interrompue et il faut la reprendre
 
 elseif (isset($GLOBALS['meta']["admin"])) {
-	if (_AJAX OR !isset($_COOKIE['spip_admin']))
+	$n = preg_match('/^(.*)_(\d+)_/', $GLOBALS['meta']["admin"], $l);
+	if (_AJAX OR !isset($_COOKIE['spip_admin'])) {
+		spip_log("Quand la meta admin vaut " .
+			 $GLOBALS['meta']["admin"] .
+			 " seul un admin peut se connecter et sans AJAX." .
+			 " En cas de probleme, detruire cette meta.");
 		die(_T('info_travaux_texte'));
-	if (preg_match('/^(.*)_(\d+)_/', $GLOBALS['meta']["admin"], $l)) {
+	}
+	if ($n) {
 		list(,$var_f,$n) = $l;
 		if ($var_f != $exec) {
 			spip_log("Le script $var_f lance par $n se substitue a $exec");
