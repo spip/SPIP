@@ -14,8 +14,8 @@
 
 /*
 
-Ce jeu d'URLs est une variation de inc-urls-propres, qui ajoute
-le suffixe '.html' aux adresses ;
+Ce jeu d'URLs est une variation de inc-urls-propres mais les urls 
+de differents types ne sont PAS distinguees par des marqueurs (_,-,+, etc.) ;
 
 */
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
