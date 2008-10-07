@@ -1175,6 +1175,61 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 
 	// Remplir $GLOBALS avec $_GET et $_POST
 	spip_register_globals();
+	
+	// appliquer le cookie_prefix
+	if ($GLOBALS['cookie_prefix'] != 'spip') {
+		include_spip('inc/cookie');
+		recuperer_cookies_spip($GLOBALS['cookie_prefix']);
+	}
+
+	//
+	// Capacites php (en fonction de la version)
+	//
+	$GLOBALS['flag_gz'] = function_exists("gzencode"); #php 4.0.4
+	$GLOBALS['flag_ob'] = (function_exists("ob_start")
+		&& function_exists("ini_get")
+		&& !strstr(@ini_get('disable_functions'), 'ob_'));
+	$GLOBALS['flag_sapi_name'] = function_exists("php_sapi_name");
+	$GLOBALS['flag_get_cfg_var'] = (@get_cfg_var('error_reporting') != "");
+	$GLOBALS['flag_upload'] = (!$GLOBALS['flag_get_cfg_var'] ||
+		(get_cfg_var('upload_max_filesize') > 0));
+
+
+	// Compatibilite avec serveurs ne fournissant pas $REQUEST_URI
+	if (isset($_SERVER['REQUEST_URI'])) {
+		$GLOBALS['REQUEST_URI'] = $_SERVER['REQUEST_URI'];
+	} else {
+		$GLOBALS['REQUEST_URI'] = $_SERVER['PHP_SELF'];
+		if ($_SERVER['QUERY_STRING']
+		AND !strpos($_SERVER['REQUEST_URI'], '?'))
+			$GLOBALS['REQUEST_URI'] .= '?'.$_SERVER['QUERY_STRING'];
+	}
+
+	// Duree de validite de l'alea pour les cookies et ce qui s'ensuit.
+	define('_RENOUVELLE_ALEA', 12 * 3600);
+
+	// charger les meta si possible et renouveller l'alea au besoin
+	// charge aussi effacer_meta et ecrire_meta
+	$inc_meta = charger_fonction('meta', 'inc');
+	$inc_meta();
+
+	// nombre de repertoires depuis la racine
+	// on compare a l'adresse donnee en meta ; si celle-ci est fausse
+	// le calcul est faux. Meilleure idee ??
+	if (!_DIR_RESTREINT)
+		$GLOBALS['profondeur_url'] = 1;
+	else {
+		$uri = isset($_SERVER['REQUEST_URI']) ? explode('?', $_SERVER['REQUEST_URI']) : '';
+		if (!$uri OR  !isset($GLOBALS['meta']['adresse_site']))
+			$GLOBALS['profondeur_url'] = 0;
+		else {
+			$GLOBALS['profondeur_url'] = max(0, 1+
+				substr_count($uri[0], '/')
+				- substr_count($GLOBALS['meta']['adresse_site'],'/'));
+		}
+	}
+	// s'il y a un cookie ou PHP_AUTH, initialiser visiteur_session
+	if (_FILE_CONNECT) verifier_visiteur();
 
 }
 
@@ -1233,61 +1288,6 @@ function spip_initialisation_suite() {
 	       preg_match(',IIS|thttpd,',$_SERVER['SERVER_SOFTWARE']) ?
 	       'index.php' : '');
 
-
-	// appliquer le cookie_prefix
-	if ($GLOBALS['cookie_prefix'] != 'spip') {
-		include_spip('inc/cookie');
-		recuperer_cookies_spip($GLOBALS['cookie_prefix']);
-	}
-
-	//
-	// Capacites php (en fonction de la version)
-	//
-	$GLOBALS['flag_gz'] = function_exists("gzencode"); #php 4.0.4
-	$GLOBALS['flag_ob'] = (function_exists("ob_start")
-		&& function_exists("ini_get")
-		&& !strstr(@ini_get('disable_functions'), 'ob_'));
-	$GLOBALS['flag_sapi_name'] = function_exists("php_sapi_name");
-	$GLOBALS['flag_get_cfg_var'] = (@get_cfg_var('error_reporting') != "");
-	$GLOBALS['flag_upload'] = (!$GLOBALS['flag_get_cfg_var'] ||
-		(get_cfg_var('upload_max_filesize') > 0));
-
-
-	// Compatibilite avec serveurs ne fournissant pas $REQUEST_URI
-	if (isset($_SERVER['REQUEST_URI'])) {
-		$GLOBALS['REQUEST_URI'] = $_SERVER['REQUEST_URI'];
-	} else {
-		$GLOBALS['REQUEST_URI'] = $_SERVER['PHP_SELF'];
-		if ($_SERVER['QUERY_STRING']
-		AND !strpos($_SERVER['REQUEST_URI'], '?'))
-			$GLOBALS['REQUEST_URI'] .= '?'.$_SERVER['QUERY_STRING'];
-	}
-
-	// Duree de validite de l'alea pour les cookies et ce qui s'ensuit.
-	define('_RENOUVELLE_ALEA', 12 * 3600);
-
-	// charger les meta si possible et renouveller l'alea au besoin
-	// charge aussi effacer_meta et ecrire_meta
-	$inc_meta = charger_fonction('meta', 'inc');
-	$inc_meta();
-
-	// nombre de repertoires depuis la racine
-	// on compare a l'adresse donnee en meta ; si celle-ci est fausse
-	// le calcul est faux. Meilleure idee ??
-	if (!_DIR_RESTREINT)
-		$GLOBALS['profondeur_url'] = 1;
-	else {
-		$uri = isset($_SERVER['REQUEST_URI']) ? explode('?', $_SERVER['REQUEST_URI']) : '';
-		if (!$uri OR  !isset($GLOBALS['meta']['adresse_site']))
-			$GLOBALS['profondeur_url'] = 0;
-		else {
-			$GLOBALS['profondeur_url'] = max(0, 1+
-				substr_count($uri[0], '/')
-				- substr_count($GLOBALS['meta']['adresse_site'],'/'));
-		}
-	}
-	// s'il y a un cookie ou PHP_AUTH, initialiser visiteur_session
-	if (_FILE_CONNECT) verifier_visiteur();
 
 	// Gestion AJAX sauf pour le mode oo (et en espace prive)
 
@@ -1359,7 +1359,7 @@ function verifier_visiteur() {
 	}
 	if (isset($init)) {
 		@spip_initialisation_core();
-		@spip_initialisation_suite();
+		#@spip_initialisation_suite();
 		$session = charger_fonction('session', 'inc');
 		$session();
 		include_spip('inc/texte');
@@ -1381,7 +1381,7 @@ function verifier_visiteur() {
 		// mais on risque de perturber des plugins en initialisant trop tot
 		// certaines constantes
 		@spip_initialisation_core();
-		@spip_initialisation_suite();
+		#@spip_initialisation_suite();
 
 		$session = charger_fonction('session', 'inc');
 		if ($session()) {
