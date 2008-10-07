@@ -68,6 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Aldatu',
 'bouton_chercher' => 'Bilatu',
 'bouton_choisir' => 'Aukeratu',
+'bouton_download' => 'Telekargatu',
 'bouton_enregistrer' => 'Grabatu',
 'bouton_radio_desactiver_messagerie_interne' => 'Barne mezularitza desaktibatu',
 'bouton_radio_envoi_annonces' => 'Iragarki editorialak igorri ',

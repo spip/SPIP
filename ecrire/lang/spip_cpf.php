@@ -72,6 +72,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Sanz',
 'bouton_chercher' => 'Rod',
 'bouton_choisir' => 'Swazi',
+'bouton_download' => '<NEW>T&eacute;l&eacute;charger',
 'bouton_enregistrer' => 'Anrozistr&eacute;',
 'bouton_radio_desactiver_messagerie_interne' => 'D&eacute;gr&egrave;n lakazmod&eacute;kri',
 'bouton_radio_envoi_annonces' => 'Anvwa bann zanons l&eacute;ditoryal. ',
