@@ -1044,6 +1044,19 @@ function spip_register_globals() {
 }
 
 /**
+ * Fonction d'initialisation groupee pour compatibilite ascendante
+ *
+ * @param string $pi
+ * @param string $pa
+ * @param string $ti
+ * @param string $ta
+ */
+function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
+	spip_initialisation_core($pi,$pa,$ti,$ta);
+	spip_initialisation_suite();
+}
+
+/**
  * Fonction d'initialisation, appellee dans inc_version ou mes_options
  * Elle definit les repertoires et fichiers non partageables
  * et indique dans $test_dirs ceux devant etre accessibles en ecriture
@@ -1057,7 +1070,7 @@ function spip_register_globals() {
  * @param string $ti
  * @param string $ta
  */
-function spip_core_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
+function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	static $too_late = 0;
 	if ($too_late++) return;
 	
@@ -1170,7 +1183,7 @@ function spip_core_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
  * par les plugins
  *
  */
-function spip_initialisation() {
+function spip_initialisation_suite() {
 	static $too_late = 0;
 	if ($too_late++) return;
 
@@ -1345,8 +1358,8 @@ function verifier_visiteur() {
 		}
 	}
 	if (isset($init)) {
-		@spip_core_initialisation();
-		@spip_initialisation();
+		@spip_initialisation_core();
+		@spip_initialisation_suite();
 		$session = charger_fonction('session', 'inc');
 		$session();
 		include_spip('inc/texte');
@@ -1367,8 +1380,8 @@ function verifier_visiteur() {
 		// il faut forcer l'init si ce n'est fait
 		// mais on risque de perturber des plugins en initialisant trop tot
 		// certaines constantes
-		@spip_core_initialisation();
-		@spip_initialisation();
+		@spip_initialisation_core();
+		@spip_initialisation_suite();
 
 		$session = charger_fonction('session', 'inc');
 		if ($session()) {
