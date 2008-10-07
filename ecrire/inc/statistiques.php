@@ -431,8 +431,16 @@ function statistiques_jour($key, $value, $largeur, $moyenne, $hauteur, $rapport,
 		$res = http_img_rien($largeur, 1, "trait_haut", $tagtitle)
 		. http_img_rien($largeur, $hauteur, $couleur, $tagtitle);
 	}
-	if (!$script) return $res;
-	return "<a href='$script&amp;date=$key' title='$title'>$res</a>";
+	if ($script)
+		$script .= "&amp;date=$key";
+	else  {
+		$y = date("Y", $key);
+		$m = date("m", $key);
+		$d = date("d", $key);
+		$script = generer_url_ecrire('calendrier', 
+				"type=semaine&annee=$y&mois=$m&jour=$d");
+	} 
+	return "<a href='$script' title='$title'>$res</a>";
 }
 
 // http://doc.spip.org/@statistiques_nom_des_mois
