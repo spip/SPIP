@@ -366,7 +366,7 @@ define('SPIP_ERREUR_REPORT',E_ALL ^ E_NOTICE);
 define('SPIP_ERREUR_REPORT_INCLUDE_PLUGINS',0);
 error_reporting(SPIP_ERREUR_REPORT);
 
-//
+// Initialisations critiques non surchargeables par les plugins
 // INITIALISER LES REPERTOIRES NON PARTAGEABLES ET LES CONSTANTES
 // (charge aussi inc/flock)
 //
@@ -374,7 +374,7 @@ error_reporting(SPIP_ERREUR_REPORT);
 // ou a defini certaines des constantes que cette fonction doit definir
 // ===> on execute en neutralisant les messages d'erreur
 
-@spip_initialisation(
+@spip_core_initialisation(
 	(_DIR_RACINE  . _NOM_PERMANENTS_INACCESSIBLES),
 	(_DIR_RACINE  . _NOM_PERMANENTS_ACCESSIBLES),
 	(_DIR_RACINE  . _NOM_TEMPORAIRES_INACCESSIBLES),
@@ -391,6 +391,7 @@ if (@is_readable(_DIR_TMP."charger_plugins_options.php")){
 	// chargement optimise precompile
 	include_once(_DIR_TMP."charger_plugins_options.php");
 } else {
+	@spip_initialisation();
 	include_spip('inc/plugin');
 	// generer les fichiers php precompiles
 	// de chargement des plugins et des pipelines
@@ -401,6 +402,8 @@ if (@is_readable(_DIR_TMP."charger_plugins_options.php")){
 			spip_log("generation de charger_plugins_options.php impossible; pipeline desactives");
 	}
 }
+// Initialisations non critiques surchargeables par les plugins
+@spip_initialisation();
 
 if (!defined('_OUTILS_DEVELOPPEURS'))
 	define('_OUTILS_DEVELOPPEURS',false);
