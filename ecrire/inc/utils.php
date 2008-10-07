@@ -1043,18 +1043,21 @@ function spip_register_globals() {
 
 }
 
-
-// Fonction d'initialisation, appellee dans inc_version ou mes_options
-// Elle definit les repertoires et fichiers non partageables
-// et indique dans $test_dirs ceux devant etre accessibles en ecriture
-// mais ne touche pas a cette variable si elle est deja definie
-// afin que mes_options.php puisse en specifier d'autres.
-// Elle definit ensuite les noms des fichiers et les droits.
-// Puis simule un register_global=on securise.
-
-// http://doc.spip.org/@spip_initialisation
-function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
-
+/**
+ * Fonction d'initialisation, appellee dans inc_version ou mes_options
+ * Elle definit les repertoires et fichiers non partageables
+ * et indique dans $test_dirs ceux devant etre accessibles en ecriture
+ * mais ne touche pas a cette variable si elle est deja definie
+ * afin que mes_options.php puisse en specifier d'autres.
+ * Elle definit ensuite les noms des fichiers et les droits.
+ * Puis simule un register_global=on securise.
+ *
+ * @param string $pi
+ * @param string $pa
+ * @param string $ti
+ * @param string $ta
+ */
+function spip_core_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	static $too_late = 0;
 	if ($too_late++) return;
 	
@@ -1116,6 +1119,60 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 		else
 			define('_SPIP_CHMOD', 0777);
 	}
+	
+	// le nom du repertoire plugins/
+	define('_DIR_PLUGINS', _DIR_RACINE . "plugins/");
+
+	// Sommes-nous dans l'empire du Mal ?
+	// (ou sous le signe du Pingouin, ascendant GNU ?)
+	if (strpos($_SERVER['SERVER_SOFTWARE'], '(Win') !== false){
+		define ('_OS_SERVEUR', 'windows');
+		define('_SPIP_LOCK_MODE',1); // utiliser le flock php
+	}
+	else {
+		define ('_OS_SERVEUR', '');
+		define('_SPIP_LOCK_MODE',1); // utiliser le flock php
+		#define('_SPIP_LOCK_MODE',2); // utiliser le nfslock de spip mais link() est tres souvent interdite
+	}
+		
+	//
+	// Module de lecture/ecriture/suppression de fichiers utilisant flock()
+	// (non surchargeable en l'etat ; attention si on utilise include_spip()
+	// pour le rendre surchargeable, on va provoquer un reecriture
+	// systematique du noyau ou une baisse de perfs => a etudier)
+	include_once _DIR_RESTREINT . 'inc/flock.php';
+
+	// *********** traiter les variables ************
+
+	//
+	// Securite
+	//
+
+	// Ne pas se faire manger par un bug php qui accepte ?GLOBALS[truc]=toto
+	if (isset($_REQUEST['GLOBALS'])) die();
+	// nettoyer les magic quotes \' et les caracteres nuls %00
+	spip_desinfecte($_GET);
+	spip_desinfecte($_POST);
+	spip_desinfecte($_COOKIE);
+	spip_desinfecte($_REQUEST);
+	spip_desinfecte($GLOBALS);
+
+	// Par ailleurs on ne veut pas de magic_quotes au cours de l'execution
+	@set_magic_quotes_runtime(0);
+
+	// Remplir $GLOBALS avec $_GET et $_POST
+	spip_register_globals();
+
+}
+
+/**
+ * Complements d'initialisation non critiques pouvant etre realises
+ * par les plugins
+ *
+ */
+function spip_initialisation() {
+	static $too_late = 0;
+	if ($too_late++) return;
 
 	// la taille maxi des logos (0 : pas de limite)
 	define('_LOGO_MAX_SIZE', 0); # poids en ko
@@ -1163,29 +1220,6 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	       preg_match(',IIS|thttpd,',$_SERVER['SERVER_SOFTWARE']) ?
 	       'index.php' : '');
 
-	// le nom du repertoire plugins/
-	define('_DIR_PLUGINS', _DIR_RACINE . "plugins/");
-
-	// *********** traiter les variables ************
-
-	//
-	// Securite
-	//
-
-	// Ne pas se faire manger par un bug php qui accepte ?GLOBALS[truc]=toto
-	if (isset($_REQUEST['GLOBALS'])) die();
-	// nettoyer les magic quotes \' et les caracteres nuls %00
-	spip_desinfecte($_GET);
-	spip_desinfecte($_POST);
-	spip_desinfecte($_COOKIE);
-	spip_desinfecte($_REQUEST);
-	spip_desinfecte($GLOBALS);
-
-	// Par ailleurs on ne veut pas de magic_quotes au cours de l'execution
-	@set_magic_quotes_runtime(0);
-
-	// Remplir $GLOBALS avec $_GET et $_POST
-	spip_register_globals();
 
 	// appliquer le cookie_prefix
 	if ($GLOBALS['cookie_prefix'] != 'spip') {
@@ -1206,18 +1240,6 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 		(get_cfg_var('upload_max_filesize') > 0));
 
 
-	// Sommes-nous dans l'empire du Mal ?
-	// (ou sous le signe du Pingouin, ascendant GNU ?)
-	if (strpos($_SERVER['SERVER_SOFTWARE'], '(Win') !== false){
-		define ('_OS_SERVEUR', 'windows');
-		define('_SPIP_LOCK_MODE',1); // utiliser le flock php
-	}
-	else {
-		define ('_OS_SERVEUR', '');
-		define('_SPIP_LOCK_MODE',1); // utiliser le flock php
-		#define('_SPIP_LOCK_MODE',2); // utiliser le nfslock de spip mais link() est tres souvent interdite
-	}
-
 	// Compatibilite avec serveurs ne fournissant pas $REQUEST_URI
 	if (isset($_SERVER['REQUEST_URI'])) {
 		$GLOBALS['REQUEST_URI'] = $_SERVER['REQUEST_URI'];
@@ -1227,13 +1249,6 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 		AND !strpos($_SERVER['REQUEST_URI'], '?'))
 			$GLOBALS['REQUEST_URI'] .= '?'.$_SERVER['QUERY_STRING'];
 	}
-
-	//
-	// Module de lecture/ecriture/suppression de fichiers utilisant flock()
-	// (non surchargeable en l'etat ; attention si on utilise include_spip()
-	// pour le rendre surchargeable, on va provoquer un reecriture
-	// systematique du noyau ou une baisse de perfs => a etudier)
-	include_once _DIR_RESTREINT . 'inc/flock.php';
 
 	// Duree de validite de l'alea pour les cookies et ce qui s'ensuit.
 	define('_RENOUVELLE_ALEA', 12 * 3600);
@@ -1330,6 +1345,7 @@ function verifier_visiteur() {
 		}
 	}
 	if (isset($init)) {
+		@spip_core_initialisation();
 		@spip_initialisation();
 		$session = charger_fonction('session', 'inc');
 		$session();
@@ -1349,6 +1365,9 @@ function verifier_visiteur() {
 
 		// Rq: pour que cette fonction marche depuis mes_options
 		// il faut forcer l'init si ce n'est fait
+		// mais on risque de perturber des plugins en initialisant trop tot
+		// certaines constantes
+		@spip_core_initialisation();
 		@spip_initialisation();
 
 		$session = charger_fonction('session', 'inc');
