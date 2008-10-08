@@ -131,7 +131,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	$s = ($ancre =='documents' ? '': '-');
 
 	if (preg_match('/_edit$/', $script)) {
-		$action = redirige_action_auteur('documenter', "$s$id/$type/$id_document", $script, "id_$type=$id&type=$type&s=$s#$ancre");
+		$action = ajax_action_auteur('documenter', "$s$id/$type/$id_document", $script, "id_$type=$id&type=$type&s=$s#$ancre", array($texte), '', 'function() {jQuery(this).remove()}');
 	}
 	else {
 		if (test_espace_prive())
