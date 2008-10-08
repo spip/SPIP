@@ -178,13 +178,7 @@ function email_notification_forum ($t, $email) {
 	{
 		$url = generer_url_ecrire('forum_admin').'#id'.$id_forum;
 	} else {
-		if ($t['id_article'])
-			$url = generer_url_entite($t['id_article'], 'article','', 'id'.$id_forum);
-		else if ($t['id_breve'])
-			$url = generer_url_entite($t['id_breve'], 'breve', '', 'id'.$id_forum);
-		else if ($t['id_syndic'])
-			$url = generer_url_entite($t['id_syndic'], 'site', '', '#id'.$id_forum);
-
+		$url = generer_url_entite($id_forum, 'forum');
 	}
 	if (!$url) {
 		spip_log("forum $id_forum sans referent");
