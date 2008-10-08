@@ -678,21 +678,18 @@ function critere_IN_cas ($idb, &$boucles, $crit2, $arg, $op, $val, $col)
 		  $x .= "\n\tif (!(is_array(\$a = ($v))))\n\t\t$var" ."[]= \$a;\n\telse $var = array_merge($var, \$a);";
 		}
 	}
-
+	
 	$boucles[$idb]->in .= $x;
-
-	// inserer la negation (cf !...)
-	if ($crit2==='NOT')
-		$op = '=';
-	else {
-		if (!$crit2)$boucles[$idb]->default_order[] = "'cpt$cpt'";
-		$op = '<>';
-	} 
-
-	$arg = "((sql_quote($var)===\"''\") ? 0 : ('FIELD($arg,' . sql_quote($var) . ')'))";
-	if ($crit2 !== 'COND')
-		$boucles[$idb]->select[]=  "\" . $arg . \" AS cpt$cpt";
-	return array("'$op'", $arg, 0);
+	
+	// inserer le tri par defaut selon les ordres du IN ... 
+	// avec une ecriture de type FIELD qui degrade les performances (du meme ordre qu'un rexgexp)
+	// et que l'on limite donc strictement aux cas necessaires :
+	// si ce n'est pas un !IN, et si il n'y a pas d'autre order dans la boucle
+	if (!$crit2){
+		$boucles[$idb]->default_order[] = "((sql_quote($var)===\"''\") ? 0 : ('FIELD($arg,' . sql_quote($var) . ')'))";
+	}
+	
+	return "sql_in('$arg',sql_quote($var)".($crit2=='NOT'?",'NOT'":"").")";
 }
 
 
