@@ -162,7 +162,7 @@ function declarer_url_propre($type, $id_objet) {
 	// l'autorisation est verifiee apres avoir calcule la nouvelle url propre
 	// car si elle ne change pas, cela ne sert a rien de verifier les autorisations
 	// qui requetent en base
-	$modifier_url = (_request('var_mode') == 'calcul');
+	$modifier_url = $GLOBALS['var_urls'];
 	if ($url_propre AND !$modifier_url)
 		return $url_propre;
 

@@ -300,14 +300,16 @@ function init_var_mode(){
 		$GLOBALS['var_mode'] = false;
 		$GLOBALS['var_preview'] = false;
 		$GLOBALS['var_images'] = false;
+		$GLOBALS['var_noisettes'] = false;
+		$GLOBALS['var_urls'] = false;
 		if (isset($_GET['var_mode'])) {
 			// tout le monde peut calcul/recalcul
 			if ($_GET['var_mode'] == 'calcul'
 			OR $_GET['var_mode'] == 'recalcul')
 				$GLOBALS['var_mode'] = $_GET['var_mode'];
 		
-			// preview et debug necessitent une autorisation
-			else if (in_array($_GET['var_mode'],array('preview','debug','blocs'))) {
+			// preview, debug, blocs, urls et images necessitent une autorisation
+			else if (in_array($_GET['var_mode'],array('preview','debug','blocs','urls','images'))) {
 				include_spip('inc/autoriser');
 				if (autoriser(
 					($_GET['var_mode'] == 'preview')
@@ -325,6 +327,17 @@ function init_var_mode(){
 							// forcer le compilo et ignorer les caches existants
 							$GLOBALS['var_mode'] = 'calcul';
 							$GLOBALS['var_noisettes'] = true;
+							break;
+						case 'urls':
+							// forcer le compilo et ignorer les caches existants
+							$GLOBALS['var_mode'] = 'calcul';
+							$GLOBALS['var_urls'] = true;
+							break;
+						case 'images':
+							// forcer le compilo et ignorer les caches existants
+							$GLOBALS['var_mode'] = 'calcul';
+							// indiquer qu'on doit recalculer les images
+							$GLOBALS['var_images'] = true;
 							break;
 						default :
 							$GLOBALS['var_mode'] = $_GET['var_mode'];
@@ -345,12 +358,6 @@ function init_var_mode(){
 					}
 					// sinon tant pis
 				}
-			}
-			else if ($_GET['var_mode'] == 'images'){
-				// forcer le compilo et ignorer les caches existants
-				$GLOBALS['var_mode'] = 'calcul';
-				// indiquer qu'on doit recalculer les images
-				$GLOBALS['var_images'] = true;
 			}
 		}		
 		$done = true;
