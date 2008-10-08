@@ -234,13 +234,15 @@ function image_filtrer($args){
 	$texte = array_shift($args);
 	if (!$texte) return;
 	find_in_path('filtres_images.php','inc/', true);
-
+	statut_effacer_images_temporaires(true); // activer la suppression des images temporaires car le compilo finit la chaine par un image_graver
 	// Cas du nom de fichier local
 	if ( strpos(substr($texte,strlen(_DIR_RACINE)),'..')===FALSE
 	AND !preg_match(',^/|[<>]|\s,S', $texte)
 	AND file_exists(preg_replace(',[?].*$,','',$texte))) {
 		array_unshift($args,"<img src='$texte' />");
-		return call_user_func_array($filtre, $args);
+		$res = call_user_func_array($filtre, $args);
+		statut_effacer_images_temporaires(false); // desactiver pour les appels hors compilo
+		return $res;
 	}
 
 	// Cas general : trier toutes les images, avec eventuellement leur <span>
@@ -280,7 +282,7 @@ function image_filtrer($args){
 			}
 		}
 	}
-
+	statut_effacer_images_temporaires(false); // desactiver pour les appels hors compilo
 	return $texte;
 }
 
