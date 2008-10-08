@@ -203,7 +203,8 @@ function action_legender_auteur_post($statut, $nom, $email, $bio, $nom_site_aute
 		array(
 			'args' => array(
 				'table' => 'spip_auteurs',
-				'id_objet' => $id_auteur
+				'id_objet' => $id_auteur,
+				'action'=>'modifier',
 			),
 			'data' => $c
 		)
@@ -261,7 +262,8 @@ function instituer_auteur($id_auteur, $c) {
 		array(
 			'args' => array(
 				'table' => 'spip_auteurs',
-				'id_objet' => $id_auteur
+				'id_objet' => $id_auteur,
+				'action' => 'instituer',
 			),
 			'data' => $champs
 		)

@@ -82,6 +82,7 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 				'id_objet' => $id,
 				'champs' => $options['champs'],
 				'serveur' => $serveur,
+				'action' => 'modifier'
 			),
 			'data' => $champs
 		)
