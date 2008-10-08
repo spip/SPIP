@@ -74,9 +74,12 @@ function boucle_AUTEURS_dist($id_boucle, &$boucles) {
 			fabrique_jointures($boucle, array(
 				array($id_table, array('spip_auteurs_articles'), 'id_auteur'),
 							  array('', array('spip_articles'), 'id_article')), true, $boucle->show, $id_table);
-			$t = array_search('spip_articles', $boucle->from) . '.statut';
-			array_unshift($boucle->where,array("'='", "'$t'", "'\\'publie\\''"));
-			
+			$t = array_search('spip_articles', $boucle->from);
+			array_unshift($boucle->where,
+				array("'='", "'$t.statut'", "'\\'publie\\''"));
+			if ($GLOBALS['meta']['post_dates'] == 'non')
+				array_unshift($boucle->where,
+					array("'<='", "'$t.date'", "'NOW()'"));
 		}
 		// pas d'auteurs poubellises
 		array_unshift($boucle->where,array("'!='", "'$mstatut'", "'\\'5poubelle\\''"));
@@ -179,10 +182,15 @@ function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 		# a refaire plus proprement
 
 		## la boucle par defaut ignore les documents de forum
+		$postdates = ($GLOBALS['meta']['post_dates'] == 'non')
+				? " AND aa.date < NOW()"
+				: '';
+
+
 		$boucle->from[$id_table] = "spip_documents LEFT JOIN spip_documents_liens AS l
 			ON $id_table.id_document=l.id_document
 			LEFT JOIN spip_articles AS aa
-				ON (l.id_objet=aa.id_article AND l.objet=\'article\')
+				ON (l.id_objet=aa.id_article AND l.objet=\'article\'$postdates)
 			LEFT JOIN spip_breves AS bb
 				ON (l.id_objet=bb.id_breve AND l.objet=\'breve\')
 			LEFT JOIN spip_rubriques AS rr
