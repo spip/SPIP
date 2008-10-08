@@ -382,8 +382,8 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 	$ret = "";
 	if ($mode == 'document') {
 
-		$ret .= "<a id='document$id_document' name='document$id_document'></a>\n";
-		$ret .= debut_cadre_enfonce("doc-24.gif", true, "", lignes_longues(typo($cadre),20));
+		$ret .= debut_cadre_enfonce("doc-24.gif", true, "", lignes_longues(typo($cadre),20), "document$id_document");
+		$ret .= "<a name='document$id_document'></a>\n";
 
 		if ($distant == 'oui') {
 			$dist = "\n<div class='verdana1' style='float: $spip_lang_right; text-align: $spip_lang_right;'>";
@@ -451,7 +451,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 	// Afficher une image inserable dans l'article
 	//
 	
-		$ret .= debut_cadre_relief("image-24.gif", true, "", lignes_longues(typo($cadre),20));
+	  $ret .= debut_cadre_relief("image-24.gif", true, "", lignes_longues(typo($cadre),20), "document$id_document");
 
 		//
 		// Afficher un apercu (pour les images)
