@@ -266,6 +266,7 @@ $spip_pipeline = array(
 	'creer_chaine_url' => '|creer_chaine_url',
 	'rechercher_liste_des_champs' => '',
 	'rechercher_liste_des_jointures' => '',
+	'recuperer_fond' => '',
 	'trig_propager_les_secteurs' => '',
 );
 
