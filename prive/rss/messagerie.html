@@ -14,27 +14,27 @@ if ([(#ID_AUTEUR|securiser_acces{#ENV{cle},rss, #ENV{op}, #ENV{args}}|?{1,0})]) 
 <BOUCLE_RSS(messages auteurs){!par date_heure}{!doublons M}{0,10}>
 $rss['[(#DATE_HEURE|date_ical)]'] .= '
 	<item>
-		<title>[(#TITRE|texte_backend)]</title>
-		<link>[(#URL_ECRIRE{message, id_message=#ID_MESSAGE}|url_absolue|texte_backend)]</link>
-		<guid isPermaLink="true">[(#URL_ECRIRE{message, id_message=#ID_MESSAGE}|url_absolue|texte_backend)]</guid>
+		<title>[(#TITRE|texte_backendq)]</title>
+		<link>[(#URL_ECRIRE{message, id_message=#ID_MESSAGE}|url_absolue|texte_backendq)]</link>
+		<guid isPermaLink="true">[(#URL_ECRIRE{message, id_message=#ID_MESSAGE}|url_absolue|texte_backendq)]</guid>
 		<dc:date>[(#DATE_HEURE|date_iso)]</dc:date>
 		<dc:format>text/html</dc:format>
-		[<dc:language>(#LANG|texte_backend)</dc:language>]
-		<dc:creator>[(#NOM|texte_backend)][ &lt;(#EMAIL|texte_backend)&gt;]</dc:creator>
-		<description>[(#TEXTE|texte_backend)]</description>
+		[<dc:language>(#LANG|texte_backendq)</dc:language>]
+		<dc:creator>[(#NOM|texte_backendq)][ &lt;(#EMAIL|texte_backendq)&gt;]</dc:creator>
+		<description>[(#TEXTE|texte_backendq)]</description>
 	</item>';
 </BOUCLE_RSS>
 <BOUCLE_RSS2(FORUMS){!par date_heure}{!doublons F}{tout}{statut=perso} >
 $rss['[(#DATE_HEURE|date_ical)]'] .= '
 	<item>
-		<title>[(#TITRE|texte_backend)]</title>
-		<link>[(#URL_ECRIRE{message, id_message=#ID_MESSAGE}|url_absolue|texte_backend)]#id#ID_FORUM</link>
-		<guid isPermaLink="true">[(#URL_ECRIRE{message, id_message=#ID_MESSAGE}|url_absolue|texte_backend)]#id#ID_FORUM</guid>
+		<title>[(#TITRE|texte_backendq)]</title>
+		<link>[(#URL_ECRIRE{message, id_message=#ID_MESSAGE}|url_absolue|texte_backendq)]#id#ID_FORUM</link>
+		<guid isPermaLink="true">[(#URL_ECRIRE{message, id_message=#ID_MESSAGE}|url_absolue|texte_backendq)]#id#ID_FORUM</guid>
 		<dc:date>[(#DATE_HEURE|date_iso)]</dc:date>
 		<dc:format>text/html</dc:format>
-		[<dc:language>(#LANG|texte_backend)</dc:language>]
-		<dc:creator>[(#NOM|texte_backend)][ &lt;(#EMAIL|texte_backend)&gt;]</dc:creator>
-		<description>[(#TEXTE|texte_backend)]</description>
+		[<dc:language>(#LANG|texte_backendq)</dc:language>]
+		<dc:creator>[(#NOM|texte_backendq)][ &lt;(#EMAIL|texte_backendq)&gt;]</dc:creator>
+		<description>[(#TEXTE|texte_backendq)]</description>
 	</item>';
 </BOUCLE_RSS2>
 rsort($rss);

@@ -439,8 +439,6 @@ function corriger_caracteres ($texte) {
 }
 
 // Encode du HTML pour transmission XML
-// A noter : ce filtre assure la securite des ' a l'instar de |texte_script
-// mais pas de la meme maniere (&#39; vs \' )
 // http://doc.spip.org/@texte_backend
 function texte_backend($texte) {
 
@@ -474,7 +472,13 @@ function texte_backend($texte) {
 	// l'apostrophe curly pose probleme a certains lecteure de RSS
 	// et le caractere apostrophe alourdit les squelettes avec PHP
 	// ==> on les remplace par l'entite HTML
-	return str_replace($apostrophe,'&#39;', $texte);
+	return str_replace($apostrophe, "'", $texte);
+}
+
+// Comme ci-dessus, mais avec addslashes final pour squelettes avec PHP (rss)
+
+function texte_backendq($texte) {
+	return addslashes(texte_backend($texte));
 }
 
 // Enleve le numero des titres numerotes ("1. Titre" -> "Titre")
