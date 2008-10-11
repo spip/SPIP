@@ -1073,6 +1073,9 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	static $too_late = 0;
 	if ($too_late++) return;
+
+	// Le charset par defaut lors de l'installation
+	define('_DEFAULT_CHARSET', 'utf-8');
 	
 	define('_DIR_IMG', $pa);
 	define('_DIR_LOGOS', $pa);
@@ -1254,9 +1257,6 @@ function spip_initialisation_suite() {
 	define('_IMG_MAX_HEIGHT', 0); # hauteur en pixels
 
 	define('_COPIE_LOCALE_MAX_SIZE',2097152); // poids en octet
-
-	// Le charset par defaut lors de l'installation
-	define('_DEFAULT_CHARSET', 'utf-8');
 
 	// qq chaines standard
 	define('_ACCESS_FILE_NAME', '.htaccess');
