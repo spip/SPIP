@@ -59,7 +59,7 @@ function formulaires_ecrire_auteur_traiter_dist($id_auteur, $id_article, $mail){
 				"X-Originating-IP: ".$GLOBALS['ip']);
 	$message = _T("form_prop_message_envoye");
 
-	return _T("form_prop_message_envoye");
+	return array('message_ok'=>$message);
 }
 
 ?>

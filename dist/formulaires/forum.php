@@ -287,10 +287,8 @@ function formulaires_forum_traiter_dist() {
 
 	$forum_insert = charger_fonction('forum_insert', 'inc');
 
-	$redirect = $forum_insert();
-
-	include_spip('inc/headers');
-	return redirige_formulaire($redirect);
+	list($redirect,$id_forum) = $forum_insert();
+	return array('redirect'=>$redirect,'id_forum'=>$id_forum);
 }
 
 
