@@ -16,18 +16,19 @@ include_spip('base/abstract_sql');
 // http://doc.spip.org/@formulaires_editer_objet_traiter
 function formulaires_editer_objet_traiter($type, $id='new', $id_parent=0, $lier_trad=0, $retour='', $config_fonc='articles_edit_config', $row=array(), $hidden=''){
 
-	$message = "";
+	$res = array();
 	$action_editer = charger_fonction("editer_$type",'action');
 	list($id,$err) = $action_editer();
+	$id_table_objet = id_table_objet($type);
+	$res[$id_table_objet] = $id;
 	if ($err){
-		$message .= $err;
+		$res['message_erreur'] =$err;
 	}
 	elseif ($retour) {
-		include_spip('inc/headers');
-		$id_table_objet = id_table_objet($type);
-		$message .= redirige_formulaire(parametre_url($retour,$id_table_objet,$id));
+		$res['message_ok'] = ""; // il faudrait faire mieux que cela !
+		$res['redirect'] = parametre_url($retour,$id_table_objet,$id);
 	}
-	return $message;
+	return $res;
 }
 
 // http://doc.spip.org/@formulaires_editer_objet_verifier

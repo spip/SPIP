@@ -123,7 +123,7 @@ function formulaires_signature_traiter_dist($id_article, $petition, $texte, $sit
 		_request('signature_url_site'), _request('url_page'));
 	}
 
-	return $reponse;
+	return array('message_ok'=>$reponse);
 }
 
 // Retour a l'ecran du lien de confirmation d'une signature de petition.

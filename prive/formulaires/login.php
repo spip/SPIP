@@ -176,7 +176,7 @@ function formulaires_login_verifier_dist($cible="",$login="",$prive=null){
 }
 
 function formulaires_login_traiter_dist($cible="",$login="",$prive=null){
-	$message = '';	
+	$res = array();
 	// Si on se connecte dans l'espace prive, 
 	// ajouter "bonjour" (repere a peu pres les cookies desactives)
 	if (is_null($prive) ? is_url_prive($cible) : $prive) {
@@ -204,14 +204,14 @@ function formulaires_login_traiter_dist($cible="",$login="",$prive=null){
 	 AND ($cible!=self())) {
 		if (!headers_sent() AND !$_GET['var_mode']) {
 			include_spip('inc/headers');
-			$message .= redirige_formulaire($cible);
+			$res['redirect'] = $cible;
 		} else {
-			$message .= "<a href='$cible'>" .
+			$res['message_ok'] .= "<a href='$cible'>" .
 			  _T('login_par_ici') .
 			  "</a>";
 		}
 	}
-	return $message;
+	return $res;
 }
 
 
