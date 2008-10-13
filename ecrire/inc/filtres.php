@@ -316,11 +316,14 @@ function image_typo() {
 //
 // http://doc.spip.org/@taille_image
 function taille_image($img) {
+
 	static $largeur_img =array(), $hauteur_img= array();
 	$srcWidth = 0;
 	$srcHeight = 0;
 
 	$logo = extraire_attribut($img,'src');
+	if (strpos($logo, "?") > 0) $logo = substr($logo, 0, strpos($logo, "?"));
+
 	if (!$logo) $logo = $img;
 	else {
 		$srcWidth = extraire_attribut($img,'width');
