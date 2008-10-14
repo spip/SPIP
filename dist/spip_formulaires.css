@@ -11,7 +11,7 @@ input, textarea, select { font-size: 100%; font-family: inherit; }
 
 /* Fieldset */
 .formulaire_spip fieldset { clear: both; margin: 0 0 1em 0; padding: 0; border: 0; }
-.formulaire_spip fieldset legend { margin: 0; padding: 0; font-size: 1.20em; font-weight: bold; color: #993; } /* Preciser la couleur des legend pour IE/Win */
+.formulaire_spip fieldset legend { margin: 0; padding: 0; font-size: 1.20em; font-weight: bold; color: #330; } /* Preciser la couleur des legend pour IE/Win */
 .formulaire_spip fieldset fieldset { margin-top: 1em; }
 .formulaire_spip fieldset fieldset legend { font-size: 1em; font-weight: normal; }
 
@@ -72,6 +72,9 @@ table.spip_barre { width: 100%; }
 table.spip_barre a img { background: #FDA; padding: 3px; border: 1px outset #CC9; }
 table.spip_barre a:hover img { background: #FFF; border: 1px solid #CC9; }
 table.spip_barre input.barre { width: 99%; background: transparent; border: 0; color: #F57900; }
+
+/* Formulaire de forum */
+.formulaire_forum .saisie_titre input.text { width: 99%; }
 
 /* Selection des langues */
 .formulaire_menu_lang { margin: 0; padding: 0; background: none; }

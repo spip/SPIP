@@ -45,7 +45,7 @@ function inc_referenceurs_dist ($script, $args, $select, $table, $where, $groupb
 			}
 
 			if ($tmp) {
-			  $lesreferers[$numero][] = "<a href='".quote_amp($referer)."'><b>".quote_amp(urldecode($tmp))."</b></a>" . (($visites > 1)?" ($visites)":""). ($unseul ? '' : referes($referermd5));
+			  $lesreferers[$numero][] = "<a href='".quote_amp($referer)."'>".quote_amp(urldecode($tmp))."</a>" . (($visites > 1)?" ($visites)":""). ($unseul ? '' : referes($referermd5));
 			} else {
 				if (!isset($lesliensracine[$numero])) $lesliensracine[$numero]=0;
 				$lesliensracine[$numero] += $visites;
@@ -75,9 +75,9 @@ function inc_referenceurs_dist ($script, $args, $select, $table, $where, $groupb
 				$ret .= "\n<a href=\"http://".$lesurls[$numero]."\"><img src=\"$source_vignettes".rawurlencode($lesurls[$numero])."\"\nstyle=\"float: $spip_lang_right; margin-bottom: 3px; margin-left: 3px;\" alt='' /></a>";
 
 			$bouton = "";
-			if ($visites > 5) $bouton .= "<span style='color: red'>$visites "._T('info_visites')."</span> ";
-			else if ($visites > 1) $bouton .= "$visites "._T('info_visites')." ";
-			else $bouton .= "<span style='color: #999999'>$visites "._T('info_visite')."</span> ";
+			if ($visites > 5) $bouton .= "<span class='visites visites3'>$visites "._T('info_visites')."</span> ";
+			else if ($visites > 1) $bouton .= "<span class='visites visites2'>$visites "._T('info_visites')."</span> ";
+			else $bouton .= "<span class='visites visites1'>$visites "._T('info_visite')."</span> ";
 
 			if ($dom == "(email)") {
 				$aff .= $ret . $bouton . "<b>".$dom."</b>";
