@@ -316,16 +316,21 @@ function image_typo() {
 //
 // http://doc.spip.org/@taille_image
 function taille_image($img) {
+
 	static $largeur_img =array(), $hauteur_img= array();
 	$srcWidth = 0;
 	$srcHeight = 0;
 
 	$logo = extraire_attribut($img,'src');
+
 	if (!$logo) $logo = $img;
 	else {
 		$srcWidth = extraire_attribut($img,'width');
 		$srcHeight = extraire_attribut($img,'height');
 	}
+	if (($p=strpos($logo,'?'))!==FALSE)
+		$logo=substr($logo,0,$p);
+
 	// ne jamais operer directement sur une image distante pour des raisons de perfo
 	// la copie locale a toutes les chances d'etre la ou de resservir
 	if (preg_match(';^(\w{3,7}://);', $logo)){
