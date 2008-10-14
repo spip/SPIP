@@ -10,10 +10,10 @@ html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-d
 body { font-size: 0.8125em; font-family: "Luxi sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", sans-serif; color: #333; }
 
 /* Titraille / Intertitres */
-h1,h2,h3,h4,h5,h6,.formulaire_recherche label { margin: 0; padding: 0; font-weight: normal; font-size: 1em; font-family: Georgia, Times, serif; }
+h1,h2,h3,h4,h5,h6 { margin: 0; padding: 0; font-weight: normal; font-size: 1em; font-family: Georgia, Times, serif; }
 h1 { font-size: 1.70em; color: #000; }
-h2,.formulaire_recherche label { font-size: 1.40em; font-weight: normal; }
-h2, h2 a, h2 a:hover,.formulaire_recherche label { color: #000033; }
+h2 { font-size: 1.40em; font-weight: normal; }
+h2, h2 a, h2 a:hover { color: #000033; }
 h3 { font-size: 1.20em; font-weight: bold; }
 h3.spip {} /*Cf.: spip_style.css*/
 
@@ -169,6 +169,8 @@ ul ul ul ul ul .forum-chapo { background: #FFF; }
 /* Rubriques */
 .rubriques ul { border: 0; }
 .rubriques ul li { background: #EEE; border: 0; }
+
+.formulaire_recherche { margin-bottom: 2em; } /*Cf.: spip_formulaires.css*/
 
 /* Listes d'articles et extraits introductifs */
 .articles ul li { clear: both; padding: 0.40em 0.20em; }

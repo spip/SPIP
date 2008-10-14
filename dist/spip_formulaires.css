@@ -83,8 +83,8 @@ table.spip_barre input.barre { width: 99%; background: transparent; border: 0; c
 .formulaire_recherche { margin: 0; padding: 0; background: none; }
 .formulaire_recherche * { display: inline; vertical-align: middle; }
 .formulaire_recherche label {}
-.formulaire_recherche input.text { padding-left: 25px; background: url(rechercher.gif) no-repeat left center; }
-.formulaire_recherche input.submit { float: right; }
+.formulaire_recherche input.text { width: 10em; padding-left: 25px; background: url(rechercher.gif) no-repeat left center; }
+.formulaire_recherche input.submit {}
 
 .spip_surligne {} /*Cf.: spip_style.css*/
 
