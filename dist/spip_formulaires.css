@@ -11,7 +11,7 @@ input, textarea, select { font-size: 100%; font-family: inherit; }
 
 /* Fieldset */
 .formulaire_spip fieldset { clear: both; margin: 0 0 1em 0; padding: 0; border: 0; }
-.formulaire_spip fieldset legend { margin: 0; padding: 0; font-size: 1.20em; font-weight: bold; color: #330; } /* Preciser la couleur des legend pour IE/Win */
+.formulaire_spip fieldset legend { margin: 0; padding: 0; font-size: 1.10em; font-weight: bold; color: #330; } /* Preciser la couleur des legend pour IE/Win */
 .formulaire_spip fieldset fieldset { margin-top: 1em; }
 .formulaire_spip fieldset fieldset legend { font-size: 1em; font-weight: normal; }
 
@@ -34,7 +34,7 @@ input, textarea, select { font-size: 100%; font-family: inherit; }
 /* Boutons */
 .formulaire_spip .boutons { clear: both; margin: 0; padding: 0; text-align: right; }
 .formulaire_spip .boutons input { margin-left: 1em; }
-.formulaire_spip .boutons input, input.submit { background-color: #8B6F92; border-color: #8B6F92; padding: 0 1em; font-weight: normal; color: #FFF; }
+.formulaire_spip .boutons input, input.submit { background-color: #8B6F92; border-color: #8B6F92; font-weight: normal; color: #FFF; }
 
 
 /* Reponses, previsu et erreurs
@@ -42,7 +42,7 @@ input, textarea, select { font-size: 100%; font-family: inherit; }
 
 /* Champs obligatoires */
 .formulaire_spip li.obligatoire {}
-.formulaire_spip li.obligatoire label { /*font-weight: bold; color: #000;*/ }
+.formulaire_spip li.obligatoire label {}
 
 /* Previsualisation du message */
 fieldset.previsu { margin-bottom: 2em; padding: 1em; border: 2px dashed #F57900; }
