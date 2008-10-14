@@ -13,6 +13,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 include_spip('inc/filtres');
 
+function protege_champ($texte){
+	$texte = entites_html($texte);
+	$texte = str_replace("'","&#39;",$texte);
+	return $texte;
+}
+
 /* prendre en charge par defaut les balises formulaires simples */
 // http://doc.spip.org/@balise_FORMULAIRE__dist
 function balise_FORMULAIRE__dist($p) {
@@ -112,7 +118,7 @@ function balise_FORMULAIRE__dyn($form)
 				$action = parametre_url($action,$champ,''); // nettoyer l'url des champs qui vont etre saisis
 			// proteger les ' et les " dans les champs que l'on va injecter
 			if (is_string($valeurs[$champ]))
-				$valeurs[$champ] = entites_html($valeurs[$champ]);
+				$valeurs[$champ] = protege_champ($valeurs[$champ]);
 		}
 	}
 
