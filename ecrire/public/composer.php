@@ -237,7 +237,7 @@ function calcule_logo($type, $onoff, $id, $id_rubrique, $flag_fichier) {
 				// on retourne une url du type IMG/artonXX?timestamp
 				// qui permet de distinguer le changement de logo
 				// et placer un expire sur le dossier IMG/
-				return array ($on[0].($on[4]?"?$on[4]":"") , ($off ? $off[0] . ($off[4]?"?$off[4]":"") : ''));
+				return array ($on[0] , ($off ? $off[0] : ''));
 			}
 		}
 		else if ($id_rubrique) {
