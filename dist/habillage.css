@@ -10,10 +10,10 @@ html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-d
 body { font-size: 0.8125em; font-family: "Luxi sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", sans-serif; color: #333; }
 
 /* Titraille / Intertitres */
-h1,h2,h3,h4,h5,h6 { margin: 0; padding: 0; font-weight: normal; font-size: 1em; font-family: Georgia, Times, serif; }
+h1,h2,h3,h4,h5,h6,.formulaire_recherche label { margin: 0; padding: 0; font-weight: normal; font-size: 1em; font-family: Georgia, Times, serif; }
 h1 { font-size: 1.70em; color: #000; }
-h2 { font-size: 1.40em; font-weight: normal; }
-h2, h2 a, h2 a:hover { color: #000033; }
+h2,.formulaire_recherche label { font-size: 1.40em; font-weight: normal; }
+h2, h2 a, h2 a:hover,.formulaire_recherche label { color: #000033; }
 h3 { font-size: 1.20em; font-weight: bold; }
 h3.spip {} /*Cf.: spip_style.css*/
 
@@ -55,8 +55,6 @@ body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 #entete { width: 58em; margin: 0; padding-top: 1em; border-bottom: 2px solid #8B6F92; }
 #entete a img.spip_logos { vertical-align: bottom; line-height: 1em; }
 #entete #nom_site_spip { font-size: 2.2em; font-family: Georgia, Times, serif; font-weight: normal; }
-#entete #formulaire_recherche { position: absolute; right: 0; top: 1em; text-align: right; } /*Cf.: spip_formulaires.css*/
-#entete #formulaire_recherche input.text { width: 10em; text-align: left; } /*Cf.: spip_formulaires.css*/
 
 #conteneur { clear: both; float: left; width: 67%; overflow: hidden; }
 #contenu { padding-top: 0.30em; }
