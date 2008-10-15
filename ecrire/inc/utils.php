@@ -1377,8 +1377,7 @@ function verifier_visiteur() {
 		return 0;
 	}
 
-
-	if (isset($_COOKIE['spip_session']) OR
+	if (isset($_COOKIE['spip_session']) OR isset($_COOKIE[$GLOBALS['cookie_prefix'].'_session']) OR
 	(isset($_SERVER['PHP_AUTH_USER'])  AND !$GLOBALS['ignore_auth_http'])) {
 
 		// Rq: pour que cette fonction marche depuis mes_options
@@ -1394,6 +1393,7 @@ function verifier_visiteur() {
 		#@spip_initialisation_suite();
 
 		$session = charger_fonction('session', 'inc');
+//var_dump($GLOBALS['visiteur_session']['id_auteur']);
 		if ($session()) {
 			return $GLOBALS['visiteur_session']['statut'];
 		}
