@@ -1358,7 +1358,12 @@ function verifier_visiteur() {
 		}
 	}
 	if (isset($init)) {
-		@spip_initialisation_core();
+		@spip_initialisation_core(
+			(_DIR_RACINE  . _NOM_PERMANENTS_INACCESSIBLES),
+			(_DIR_RACINE  . _NOM_PERMANENTS_ACCESSIBLES),
+			(_DIR_RACINE  . _NOM_TEMPORAIRES_INACCESSIBLES),
+			(_DIR_RACINE  . _NOM_TEMPORAIRES_ACCESSIBLES)
+		);
 		#@spip_initialisation_suite();
 		$session = charger_fonction('session', 'inc');
 		$session();
@@ -1380,7 +1385,12 @@ function verifier_visiteur() {
 		// il faut forcer l'init si ce n'est fait
 		// mais on risque de perturber des plugins en initialisant trop tot
 		// certaines constantes
-		@spip_initialisation_core();
+		@spip_initialisation_core(
+			(_DIR_RACINE  . _NOM_PERMANENTS_INACCESSIBLES),
+			(_DIR_RACINE  . _NOM_PERMANENTS_ACCESSIBLES),
+			(_DIR_RACINE  . _NOM_TEMPORAIRES_INACCESSIBLES),
+			(_DIR_RACINE  . _NOM_TEMPORAIRES_ACCESSIBLES)
+		);
 		#@spip_initialisation_suite();
 
 		$session = charger_fonction('session', 'inc');
