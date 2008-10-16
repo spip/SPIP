@@ -59,11 +59,15 @@ p.resultat.echec { background-color: #d60c0c; }
 #etapes span.todo { background: url(images/etape-todo.gif) center no-repeat; }
 
 #infos_etapes { height: 63px; overflow: hidden; margin: 0; padding: 0; padding-left: 10px; background: #dbdbdb url(../prive/images/degrade-etapes-clair-left.gif) no-repeat right top; text-align: left; font-family: helvetica, arial, sans; list-style: none; }
-#infos_etapes li { float: left; margin-left: -28px; padding-left: 29px; background: url(../prive/images/degrade-etapes-clair-left.gif) no-repeat left top; color: #555; text-align: left; font-size: 0.85em; line-height: 1.05em; }
-#infos_etapes li .fond { width: 8em; height: 69px; padding-right: 2em; padding-top: 10px; background: url(../prive/images/degrade-etapes-clair-left.gif) no-repeat -30px top; }
+#infos_etapes li { float: left; margin-left: -28px; padding-left: 29px; background: url(../prive/images/degrade-etapes-fonce-left.gif) no-repeat left top; color: #555; text-align: left; font-size: 0.85em; line-height: 1.05em; }
+#infos_etapes li .fond { width: 8.9em; height: 69px; padding-right: 2em; padding-top: 10px; background: url(../prive/images/degrade-etapes-fonce-left.gif) no-repeat -30px top; }
 #infos_etapes li span.numero_etape { float: left; display: block; height: 50px; margin-left: -10px; padding: 7px 3px 0 3px; font-weight: bold; font-size: 3em; }
 #infos_etapes li.on { background-image: url(../prive/images/degrade-etapes-vert-left.gif); color: #fff; font-weight: bold; }
 #infos_etapes li.on .fond { background-color: #88f560; background-image:  url(../prive/images/degrade-etapes-vert-left.gif); }
+#infos_etapes li.erreur { background: url(../prive/images/degrade-etapes-rouge-left.gif) no-repeat left top; }
+#infos_etapes li.erreur .fond { background: url(../prive/images/degrade-etapes-rouge-left.gif) no-repeat -30px top; }
+#infos_etapes li.prochains { background: url(../prive/images/degrade-etapes-clair-left.gif) no-repeat left top; }
+#infos_etapes li.prochains .fond { background: url(../prive/images/degrade-etapes-clair-left.gif) no-repeat -30px top; }
 
 
 /* Page de login
