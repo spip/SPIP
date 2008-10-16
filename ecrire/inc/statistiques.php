@@ -14,51 +14,34 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@aff_statistique_visites_popularite
 function aff_statistique_visites_popularite($serveur, $id_article, &$classement, &$liste){
-	$out = "";
+
 	// Par popularite
 	$result = sql_select("id_article, titre, popularite, visites", "spip_articles", "statut='publie' AND popularite > 0", "", "popularite DESC",'','',$serveur);
 	$out = '';
 	while ($row = sql_fetch($result,$serveur)) {
-			$titre = typo(supprime_img($row['titre'],''));
-			$l_article = $row['id_article'];
-			$visites = $row['visites'];
-			$popularite = round($row['popularite']);
-			$liste++;
-			$classement[$l_article] = $liste;
+		$l_article = $row['id_article'];
+		$liste++;
+		$classement[$l_article] = $liste;
 
-			if ($liste <= 30) {
-				$articles_vus[] = $l_article;
-
-				if ($l_article == $id_article){
-					$out .= "\n<li><b>$titre</b></li>";
-				} else {
-					$out .= "\n<li><a href='" . generer_url_ecrire("statistiques_visites","id_article=$l_article") . "' title='"._T('info_popularite', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></li>";
-				}
-			}
+		if ($liste <= 30) {
+			$articles_vus[] = $l_article;
+			$out .= statistiques_populaires($row, $id_article);
+		}
 	}
 	$recents = array();
 	$q = sql_select("id_article", "spip_articles", "statut='publie' AND popularite > 0", "", "date DESC", "10",'',$serveur);
 	while ($r = sql_fetch($q,$serveur))
-			if (!in_array($r['id_article'], $articles_vus))
-				$recents[]= $r['id_article'];
+		if (!in_array($r['id_article'], $articles_vus))
+			$recents[]= $r['id_article'];
 
 	if ($recents) {
-			$result = sql_select("id_article, titre, popularite, visites", "spip_articles", "statut='publie' AND " . sql_in('id_article', $recents), "", "popularite DESC",'','',$serveur);
+		$result = sql_select("id_article, titre, popularite, visites", "spip_articles", "statut='publie' AND " . sql_in('id_article', $recents), "", "popularite DESC",'','',$serveur);
 
-			$out .= "</ol><div style='text-align: center'>[...]</div>" . "<ol style='padding-left:40px; font-size:x-small;color:#666666;'>";
-			while ($row = sql_fetch($result,$serveur)) {
-				$titre = typo(supprime_img($row['titre'], ''));
-				$l_article = $row['id_article'];
-				$visites = $row['visites'];
-				$popularite = round($row['popularite']);
-				$numero = $classement[$l_article];
-
-				if ($l_article == $id_article){
-					$out .= "\n<li><b>$titre</b></li>";
-				} else {
-					$out .= "\n<li><a href='" . generer_url_ecrire("statistiques_visites","id_article=$l_article") . "' title='"._T('info_popularite_3', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></li>";
-				}
-			}
+		$out .= "</ol><div style='text-align: center'>[...]</div>" .
+		"<ol style='padding-left:40px; font-size:x-small;color:#666666;'>";
+		while ($row = sql_fetch($result,$serveur)) {
+			$out .= statistiques_populaires($row, $id_article);
+		}
 	}
 
 	return !$out ? '' : (
@@ -75,6 +58,20 @@ function aff_statistique_visites_popularite($serveur, $id_article, &$classement,
 
 		."</div>"
 		."</div>");
+}
+
+function statistiques_populaires($row, $id_article)
+{
+	$titre = typo(supprime_img($row['titre'], ''));
+	$l_article = $row['id_article'];
+
+	if ($l_article == $id_article){
+		$out .= "\n<li><b>$titre</b></li>";
+	} else {
+		$visites = $row['visites'];
+		$popularite = round($row['popularite']);
+		return "\n<li><a href='" . generer_url_ecrire("statistiques_visites","id_article=$l_article") . "' title='"._T('info_popularite_3', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></li>";
+	}
 }
 
 // http://doc.spip.org/@aff_statistique_visites_par_visites
@@ -582,9 +579,8 @@ function statistiques_signatures_dist($duree, $interval, $type, $id_article, $se
 
 	$log = statistiques_collecte_date('COUNT(*)', "(FLOOR(UNIX_TIMESTAMP($order) / $interval) *  $interval)", 'spip_signatures', $where, $serveur);
 
+	$script = generer_url_ecrire('controle_petition', "id_article=$id_article");
 	if (count($log) > 1) {
-
-		$script = generer_url_ecrire('controle_petition', "id_article=$id_article");
 		$res = statistiques_tous($log, $id_article, "spip_signatures", "id_article=$id_article", "date_time", $serveur, $duree, $interval, $total, 0, '', array(), $script);
 		$res = gros_titre(_T('titre_page_statistiques_signatures_jour'),'', false) . cadre_stat($res, 'spip_signatures');
 	} else $res = '';
