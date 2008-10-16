@@ -185,15 +185,6 @@ function info_progression_etape($en_cours,$phase,$dir, $erreur = false){
 	$aff_etapes = "<ul id='infos_etapes'>";
 
 	foreach($liste as $etape=>$fichier){
-/*		if ($etape=="$phase$en_cours.php"){
-			$etat = "encours";
-		}
-		$aff_etapes .= ($debut<$last)
-			? "<span class='$etat'><span>"._T('etape')." </span><em>$debut</em><span> " . $texte_etat[$etat] . ",<br /></span> </span>"
-			: '';
-		if ($etat == "encours")
-			$etat = 'todo';
-*/
 		if ($debut < $last) {
 			if ($debut == $en_cours && $erreur) $class = "on erreur";
 			else if ($debut == $en_cours) $class = "on";
