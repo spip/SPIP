@@ -62,7 +62,9 @@ function lire_metas() {
 		while ($row = sql_fetch($result))
 			$GLOBALS['meta'][$row['nom']] = $row['valeur'];
 
-		if (!$GLOBALS['meta']['charset'])
+		if (!$GLOBALS['meta']['charset']
+		  OR $GLOBALS['meta']['charset']=='_DEFAULT_CHARSET' // hum, correction d'un bug ayant abime quelques install
+		)
 			ecrire_meta('charset', _DEFAULT_CHARSET);
 	}
 	return $GLOBALS['meta'];
