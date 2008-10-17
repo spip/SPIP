@@ -790,8 +790,7 @@ function generer_url_entite_absolue($id='', $entite='', $args='', $ancre='', $co
 // http://doc.spip.org/@test_valeur_serveur
 function test_valeur_serveur($truc) {
 	if (!$truc) return false;
-	if (strtolower($truc) == 'off') return false;
-	return true;
+	return (strtolower($truc) !== 'off');
 }
 
 //
@@ -973,76 +972,6 @@ function generer_url_action($script, $args="", $no_entities=false , $public = fa
 }
 
 
-// Dirty hack contre le register_globals a 'Off' (PHP 4.1.x)
-// A remplacer (bientot ?) par une gestion propre des variables admissibles ;-)
-// NB: c'est une fonction de maniere a ne pas pourrir $GLOBALS
-// http://doc.spip.org/@spip_register_globals
-function spip_register_globals() {
-
-	define('_FEED_GLOBALS', false); // si ca marche on simplifiera tout ca
-
-	// Liste des variables dont on refuse qu'elles puissent provenir du client
-	$refuse_gpc = array (
-		# inc-public
-		'fond', 'delais' /*,
-
-		# ecrire/inc_auth (ceux-ci sont bien verifies dans $_SERVER)
-		'REMOTE_USER',
-		'PHP_AUTH_USER', 'PHP_AUTH_PW'
-		*/
-	);
-
-	// Liste des variables (contexte) dont on refuse qu'elles soient cookie
-	// (histoire que personne ne vienne fausser le cache)
-	$refuse_c = array (
-		# inc-calcul
-		'id_parent', 'id_rubrique', 'id_article',
-		'id_auteur', 'id_breve', 'id_forum', 'id_secteur',
-		'id_syndic', 'id_syndic_article', 'id_mot', 'id_groupe',
-		'id_document', 'date', 'lang'
-	);
-
-	// Si les variables sont passees en global par le serveur, il faut
-	// faire quelques verifications de base
-	if (test_valeur_serveur(@ini_get('register_globals'))) {
-		foreach ($refuse_gpc as $var) {
-			if (isset($GLOBALS[$var])) {
-				if (
-				// demande par le client
-				$_REQUEST[$var] !== NULL
-				// et pas modifie par les fichiers d'appel
-				AND $GLOBALS[$var] == $_REQUEST[$var]
-				) // Alors on ne sait pas si c'est un hack
-					die ("register_globals: $var interdite");
-			}
-		}
-		foreach ($refuse_c as $var) {
-			if (isset($GLOBALS[$var])) {
-				if (
-				isset ($_COOKIE[$var])
-				AND $_COOKIE[$var] == $GLOBALS[$var]
-				)
-					define ('spip_interdire_cache', true);
-			}
-		}
-	}
-
-	// sinon il faut les passer nous-memes, a l'exception des interdites.
-	// (A changer en une liste des variables admissibles...)
-	else if (_FEED_GLOBALS) {
-		foreach (array('_SERVER', '_COOKIE', '_POST', '_GET') as $_table) {
-			foreach ($GLOBALS[$_table] as $var => $val) {
-				if (!isset($GLOBALS[$var]) # indispensable securite
-				AND isset($GLOBALS[$_table][$var])
-				AND ($_table == '_SERVER' OR !in_array($var, $refuse_gpc))
-				AND ($_table <> '_COOKIE' OR !in_array($var, $refuse_c)))
-					$GLOBALS[$var] = $val;
-			}
-		}
-	}
-
-}
-
 /**
  * Fonction d'initialisation groupee pour compatibilite ascendante
  *
@@ -1176,9 +1105,15 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	// Par ailleurs on ne veut pas de magic_quotes au cours de l'execution
 	@set_magic_quotes_runtime(0);
 
-	// Remplir $GLOBALS avec $_GET et $_POST
-	spip_register_globals();
-	
+	// Si les variables sont passees en global par le serveur,
+	// ou si on veut la compatibilite php3
+	// il faut faire quelques verifications de base
+	if ($x = test_valeur_serveur(@ini_get('register_globals'))
+	OR  _FEED_GLOBALS) {
+		include_spip('inc/php3');
+		spip_register_globals($x);
+	}
+
 	// appliquer le cookie_prefix
 	if ($GLOBALS['cookie_prefix'] != 'spip') {
 		include_spip('inc/cookie');
