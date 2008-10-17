@@ -902,7 +902,11 @@ ondblclick=\'storeCaret(this);\'>$texte</textarea>";
 	{ return generer_url_entite($id,"auteur", $args, $ancre);}',
 
  'charger_generer_url' => '($prive=NULL) {
-	generer_url_entite("", "", "", "", !$prive);}'
+	generer_url_entite("", "", "", "", !$prive);}',
+
+ 'tester_variable' => '($n, $v) {
+	if (!isset($GLOBALS[$n])) $GLOBALS[$n] = $v;
+	return $GLOBALS[$n];}'
 
 ) as $f => $def) {
 	if (!function_exists($f)) {
