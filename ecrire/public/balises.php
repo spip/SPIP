@@ -958,7 +958,7 @@ function balise_FILTRE_dist($p) {
 			$args[] = interprete_argument_balise($i+1,$p);
 		$p->code = '\'<'
 			.'?php header("X-Spip-Filtre: \'.'
-				.join('.', $args)
+				.join('.\'|\'.', $args)
 			. " . '\"); ?'.'>'";
 
 		$p->interdire_scripts = false;
@@ -1027,6 +1027,10 @@ function balise_CACHE_dist($p) {
 function balise_INSERT_HEAD_dist($p) {
 	$p->code = "pipeline('insert_head','<!-- insert_head -->')";
 	$p->interdire_scripts = false;
+	$p->code = '\'<'
+		.'?php header("X-Spip-Filtre: \'.'
+			.'\'compacte_head\''
+		. " . '\"); ?'.'>'";
 	return $p;
 }
 
