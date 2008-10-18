@@ -56,27 +56,21 @@ define('_RACCOURCI_LIEN', "/\[([^][]*?([[]\w*[]][^][]*)*)->(>?)([^]]*)\]/msS");
 function expanser_liens($texte, $connect='')
 {
 	$texte = pipeline('pre_liens', $texte);
-	$lien = charger_fonction('lien', 'inc');
-	$inserts = array();
+	$inserts = $regs = array();
 	if (preg_match_all(_RACCOURCI_LIEN, $texte, $regs, PREG_SET_ORDER)) {
-		$i = 0;
-		foreach ($regs as $reg) {
+		$lien = charger_fonction('lien', 'inc');
+		foreach ($regs as $k => $reg) {
 			list($titre, $bulle, $hlang) = traiter_raccourci_lien_atts($reg[1]);
-			$ref = $reg[count($reg)-1];
-			$r = traiter_lien_implicite($ref, $titre, 'tout', $connect);
-			if (!$r) $r = traiter_lien_explicite($ref, $titre, 'tout', $connect);
-			$inserts[++$i] = $lien($r['url'], $r['titre'], @$r['class'], $bulle, $hlang);
-
-			$texte = str_replace($reg[0], "@@SPIP_ECHAPPE_LIEN_$i@@",
-				$texte);
+			$inserts[$k] = '@@SPIP_ECHAPPE_LIEN_' . $k . '@@';
+			$texte = str_replace($reg[0], $inserts[$k], $texte);
+			$r = calculer_url($reg[count($reg)-1], $titre, 'tout', $connect);
+			$regs[$k] = $lien($r['url'], $r['titre'], @$r['class'], $bulle, $hlang);
 		}
 	}
 
 	$texte = traiter_modeles($texte, false, false, $connect);
-	$texte = corriger_typo($texte);
-	foreach ($inserts as $i => $insert) {
-		$texte = str_replace("@@SPIP_ECHAPPE_LIEN_$i@@", $insert, $texte);
-	}
+ 	$texte = corriger_typo($texte);
+	$texte = str_replace($inserts, $regs, $texte);
 	return $texte;
 }
 
@@ -173,10 +167,12 @@ function traiter_autoliens($r) {
 	if (!preg_match(_EXTRAIRE_DOMAINE, $l)) return $tout;
 	// supprimer les ponctuations a la fin d'une URL
 	preg_match('/^(.*?)([,.;?]?)$/', $l, $k);
-	$l = expanser_liens('[->'.$protocol.'://'.$k[1].']');
-	$l = inserer_attribut($l, 'rel', 'nofollow') . $k[2];
+	$r = traiter_lien_explicite($protocol.'://'.$k[1], '', 'tout');
+	$lien = charger_fonction('lien', 'inc');
+	$r = $lien($r['url'], $r['titre']);
+	$r = inserer_attribut($r, 'rel', 'nofollow') . $k[2];
 	// si l'orignal ne contenait pas le 'http:' on le supprime du clic
-	return $m ? $l : str_replace('>http://', '>', $l);
+	return $m ? $r : str_replace('>http://', '>', $r);
 }
 
 define('_EXTRAIRE_LIENS', ',' . '\[[^\[\]]*(?:<-|->).*?\]' . '|<a\b.*?</a\b' . '|<.*?>' . '|((?:https?:/|www\.)[^"\'\s\[\]\}\)<>]*)' .',imsS');
