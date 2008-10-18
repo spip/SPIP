@@ -191,13 +191,15 @@ function action_charger_plugin_dist() {
 	$texte = "<div style='text-align:$spip_lang_left;'>$texte</div>\n";
 
 	$redirect = rawurldecode(_request('redirect'));
-	if($redirect == 'ecrire/'){
+	// par defaut on revient sur la page admin_plugin
+	if($redirect == _DIR_RESTREINT OR $redirect == "./"){
 		$redirect_annul = generer_url_ecrire('admin_plugin');
 		$redirect_form = 'admin_plugin&'.$type.'='.preg_replace(',^[^/]+/|/$,', '', $status['dirname']);
+		$redirect_action = '';
 	}
 	else{
 		$redirect_annul = $redirect;
-		$redirect_form = preg_replace(',^.*exec\=,', '', rawurldecode($redir));
+		$redirect_form = preg_replace(',^.*exec\=,', '', $redirect);
 		$redirect_action = $redirect_form;
 	}
 	echo minipres($retour." ",
@@ -212,8 +214,7 @@ function action_charger_plugin_dist() {
 						.$redirect_annul
 					."'>"._T('bouton_annuler')."</a>"
 				.bouton_suivant())
-			: generer_form_ecrire($redirect_form,
-				$texte . bouton_suivant())
+			: generer_form_ecrire($redirect_form, $texte . bouton_suivant())
 	);
 	exit;
 
