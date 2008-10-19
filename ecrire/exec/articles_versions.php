@@ -39,7 +39,7 @@ function exec_articles_versions_args($id_article, $id_version, $id_diff)
 	// recuperer les donnees actuelles de l'article
 	$id_article = $row["id_article"];
 	$id_rubrique = $row["id_rubrique"];
-	$titre_defaut = $titre = $row["titre"];
+	$titre = $row["titre"];
 	$surtitre = $row["surtitre"];
 	$soustitre = $row["soustitre"];
 	$descriptif = $row["descriptif"];
@@ -48,14 +48,7 @@ function exec_articles_versions_args($id_article, $id_version, $id_diff)
 	$ps = $row["ps"];
 	$nom_site = $row["nom_site"];
 	$url_site = $row["url_site"];
-	$date = $row["date"];
 	$statut_article = $row["statut"];
-	$maj = $row["maj"];
-	$date_redac = $row["date_redac"];
-	$visites = $row["visites"];
-	$referers = $row["referers"];
-	$extra = $row["extra"];
-	$id_trad = $row["id_trad"];
 	$lang = $row["lang"];
 
 	// Afficher le debut de la page (y compris rubrique)
