@@ -36,7 +36,7 @@ function base_trouver_table_dist($nom, $serveur=''){
 	OR !preg_match('/^[a-zA-Z0-9._-]*/',$nom))
 		return null;
 	if (!isset($nom_cache_desc_sql[$serveur]))
-		$nom_cache_desc_sql[$serveur] = _DIR_CACHE . 'sql_desc' . ($serveur ? '_'.md5($serveur):'') . '.txt';
+		$nom_cache_desc_sql[$serveur] = _DIR_TMP . 'sql_desc' . ($serveur ? '_'.md5($serveur):'') . '.txt';
 
 	// un appel avec $nom vide est une demande explicite de vidange du cache des descriptions
 	if (!$nom){
