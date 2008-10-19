@@ -5,119 +5,102 @@
 //
 
 // http://doc.spip.org/@inc_referenceurs_dist
-function inc_referenceurs_dist ($script, $args, $select, $table, $where, $groupby, $limit, $serveur='') {
-	global $spip_lang_right, $source_vignettes;
+function inc_referenceurs_dist ($id_article, $select, $table, $where, $groupby, $limit, $serveur='') {
 
-	$nbvisites = array();
-	$aff = '';
-	$unseul = preg_match('/id_article=/', $args);
-	$args .= ($args ? '&' : '') . "limit=" . strval($limit+200);
-	$plus = generer_url_ecrire($script, $args);
+	$nbvisites = $lescriteres = array();
 
 	$result = sql_select("referer_md5, referer, $select AS vis", $table, $where, $groupby, "vis DESC", $limit,'',$serveur);
 	while ($row = sql_fetch($result,$serveur)) {
-		$referermd5 = $row['referer_md5'];
 		$referer = interdire_scripts($row['referer']);
-		$visites = $row['vis'];
-		$tmp = "";
-		$limit--;
 		$buff = stats_show_keywords($referer, $referer);
 		
 		if ($buff["host"]) {
-			$numero = substr(md5($buff["hostname"]),0,8);
-			if (!isset($nbvisites[$numero])) $nbvisites[$numero]=0;
-			
+			$numero = $buff["hostname"];
+			$visites = $row['vis'];
+			$referermd5 = $row['referer_md5'];
+			$lesreferermd5[$numero] = $referermd5;
+			$lesliens[$numero] = $referer;
+			$lesurls[$numero] = $buff["host"];
+			if (!isset($nbvisites[$numero]))
+				$nbvisites[$numero] = $visites;
 			$nbvisites[$numero] += $visites;
+			if (!isset($lesreferers[$numero]))
+				$lesreferers[$numero] = array();
+			if (!isset($lesliensracine[$numero]))
+				$lesliensracine[$numero]=0;
 
-			if (isset($buff["keywords"]) AND strlen($buff["keywords"]) > 0) {
-				$criteres = substr(md5($buff["keywords"]),0,8);
-				if (!isset($lescriteres[$numero][$criteres]))
-					$tmp = " &laquo;&nbsp;".$buff["keywords"]."&nbsp;&raquo;";
-				$lescriteres[$numero][$criteres] = true;
+			if (isset($buff["keywords"])
+			AND  $c = $buff["keywords"]) {
+				if (!isset($lescriteres[$numero][$c])) {
+					$lescriteres[$numero][$c] = true;
+					$tmp= " &laquo;&nbsp;$c&nbsp;&raquo;";
+				} else 	$tmp = "";
 			} else {
 				$tmp = $buff["path"];
-				if (strlen($buff["query"]) > 0) $tmp .= "?".$buff['query'];
-		
+				if ($buff["query"])
+					$tmp .= "?".$buff['query'];
 				if (strlen($tmp) > 18)
 					$tmp = "/".substr($tmp, 0, 15)."...";
 				else if (strlen($tmp) > 0)
 					$tmp = "/$tmp";
 			}
-
 			if ($tmp) {
-			  $lesreferers[$numero][] = "<a href='".quote_amp($referer)."'>".quote_amp(urldecode($tmp))."</a>" . (($visites > 1)?" ($visites)":""). ($unseul ? '' : referes($referermd5));
-			} else {
-				if (!isset($lesliensracine[$numero])) $lesliensracine[$numero]=0;
-				$lesliensracine[$numero] += $visites;
-			}
-			$lesdomaines[$numero] = $buff["hostname"];
-			$lesreferermd5[$numero] = $referermd5;
-			$lesurls[$numero] = $buff["host"];
-			$lesliens[$numero] = $referer;
+				$lesreferers[$numero][] = "<a href='".quote_amp($referer)."'>".quote_amp(urldecode($tmp))."</a>" . (($visites > 1)?" ($visites)":""). ($id_article ? '' : referes($referermd5));
+			} else $lesliensracine[$numero] += $visites;
 		}
 	}
 	
-	if (count($nbvisites) > 0) {
-		arsort($nbvisites);
+	if (!count($nbvisites)) return array();
+	arsort($nbvisites);
+	return referers_group($nbvisites, $id_article, $lesliensracine, $lesreferermd5, $lesreferers, $lesurls);
+}
 
-		$aff = '';
-		for (reset($nbvisites); $numero = key($nbvisites); next($nbvisites)) {
-			$dom =  $lesdomaines[$numero];
-			$referermd5 = $lesreferermd5[$numero];
-			if (!$dom) next;
+function referers_group($nbvisites, $id_article, $lesliensracine, $lesreferermd5, $lesreferers, $lesurls)
+{
+	global $spip_lang_right, $source_vignettes;
+	$vign = ((strlen($source_vignettes) > 0) && 
+		 $GLOBALS['meta']["activer_captures_referers"]!='non');
+	$aff = array();
+	foreach($nbvisites as $numero => $visites) {
+		if (!$numero) next;
+		$referermd5 = $lesreferermd5[$numero];
+		$bouton = $ret = "";
 
-			$visites = pos($nbvisites);
-			$ret = "\n<li>";
+		if ($vign)
+			$ret = "\n<a href=\"http://".$lesurls[$numero]."\"><img src=\"$source_vignettes".rawurlencode($lesurls[$numero])."\"\nstyle=\"float: $spip_lang_right; margin-bottom: 3px; margin-left: 3px;\" alt='' /></a>";
 
-			if (
-			  (strlen($source_vignettes) > 0) && 
-			  $GLOBALS['meta']["activer_captures_referers"]!='non')
-				$ret .= "\n<a href=\"http://".$lesurls[$numero]."\"><img src=\"$source_vignettes".rawurlencode($lesurls[$numero])."\"\nstyle=\"float: $spip_lang_right; margin-bottom: 3px; margin-left: 3px;\" alt='' /></a>";
+		if ($visites > 5) $bouton .= "<span class='visites visites3'>$visites "._T('info_visites')."</span> ";
+		else if ($visites > 1) $bouton .= "<span class='visites visites2'>$visites "._T('info_visites')."</span> ";
+		else $bouton .= "<span class='visites visites1'>$visites "._T('info_visite')."</span> ";
 
-			$bouton = "";
-			if ($visites > 5) $bouton .= "<span class='visites visites3'>$visites "._T('info_visites')."</span> ";
-			else if ($visites > 1) $bouton .= "<span class='visites visites2'>$visites "._T('info_visites')."</span> ";
-			else $bouton .= "<span class='visites visites1'>$visites "._T('info_visite')."</span> ";
-
-			if ($dom == "(email)") {
-				$aff .= $ret . $bouton . "<b>".$dom."</b>";
+		if ($numero == "(email)") {
+			$ret .=  $bouton . "<b>".$numero."</b>";
+		} else {
+			$n = count($lesreferers[$numero]);
+			if (($n > 1) || ($n > 0 && substr(supprimer_tags($lesreferers[$numero][0]),0,1) != '/')) {
+				$rac = $lesliensracine[$numero];
+				$bouton .= "<a href='http://".quote_amp($lesurls[$numero])."' style='font-weight: bold;'>".$numero."</a>"
+				  . (!$rac ? '': (" <span class='spip_x-small'>(" . $rac .")</span>"));
+				 $ret .= bouton_block_depliable($bouton,false)
+				  . debut_block_depliable(false)
+				  . "\n<ul><li>"
+				  . join ("</li><li>",$lesreferers[$numero])
+				  . "</li></ul>"
+				  . fin_block();
 			} else {
-			  $n = isset($lesreferers[$numero]) ? count($lesreferers[$numero]) : 0;
-			  if (($n > 1) || ($n > 0 && substr(supprimer_tags($lesreferers[$numero][0]),0,1) != '/')) {
-					$rac = isset($lesliensracine[$numero]);
-					$bouton .= "<a href='http://".quote_amp($lesurls[$numero])."' style='font-weight: bold;'>".$dom."</a>"
-					  . (!$rac ? '': (" <span class='spip_x-small'>(" . $lesliensracine[$numero] .")</span>"));
-					$aff .= $ret . bouton_block_depliable($bouton,false)
-					  . debut_block_depliable(false)
-					  . "\n<ul><li>"
-					  . join ("</li><li>",$lesreferers[$numero])
-					  . "</li></ul>"
-					  . fin_block();
-				} else {
-					$aff .= $ret . $bouton;
-					$lien = $n ? $lesreferers[$numero][0] : '';
-					if (preg_match(",^(<a [^>]+>)([^ ]*)( \([0-9]+\))?,i", $lien, $regs)) {
-						$lien = quote_amp($regs[1]).$dom.$regs[2];
-						if (!strpos($lien, '</a>')) $lien .= '</a>';
-					} else
-						$lien = "<a href='http://".$dom."'>".$dom."</a>";
-					$aff .= "<b>".quote_amp($lien)."</b>"
-					  . ($unseul ? '' : referes($referermd5));
-				}
+				$ret .= $bouton;
+				$lien = $n ? $lesreferers[$numero][0] : '';
+				if (preg_match(",^(<a [^>]+>)([^ ]*)( \([0-9]+\))?,i", $lien, $regs)) {
+					$lien = quote_amp($regs[1]).$numero.$regs[2];
+					if (!strpos($lien, '</a>')) $lien .= '</a>';
+				} else
+					$lien = "<a href='http://".$numero."'>".$numero."</a>";
+				$ret .= "<b>".quote_amp($lien)."</b>"
+				  . ($id_article ? '' : referes($referermd5));
 			}
-			$aff .= "</li>\n";
 		}
-
-		if (preg_match(",</ul>\s*<ul style='font-size:small;'>\s*$,",$aff,$r))
-		  $aff = substr($aff,0,(0-strlen($r[0])));
-		if ($aff) $aff = "<ul class='referers'>$aff</ul>";
-
-		// Le lien pour en afficher "plus"
-		if ($plus AND !$limit) {
-			$aff .= "<div style='text-align:right;'><b><a href='$plus'>+++</a></b></div>";
-		}
+		$aff[]= $ret;
 	}
-
 	return $aff;
 }
 
@@ -146,13 +129,13 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 	static $arr_engines = '';
 	static $url_site;
 
-	if (!$arr_engines) {
+	if (!is_array($arr_engines)) {
 		// Charger les moteurs de recherche
 		$arr_engines = stats_load_engines();
 
 		// initialiser la recherche interne
 		$url_site = $GLOBALS['meta']['adresse_site'];
-		$url_site = preg_replace(",^((https?|ftp)://)?(www\.)?,", "", strtolower($url_site));
+		$url_site = preg_replace(",^((https?|ftp):?/?/?)?(www\.)?,", "", strtolower($url_site));
 	}
 
 	if ($url = @parse_url( $kw_referer )) {
@@ -168,7 +151,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 	$found = false;
 	
 	if (!empty($url_site)) {
-	if (strpos('-'.$kw_referer, preg_replace(",^(https?:?/?/?)?(www\.)?,", "",$url_site))!==false) {
+	if (strpos('-'.$kw_referer, $url_site)!==false) {
 		if (preg_match(",(s|search|r|recherche)=([^&]+),i", $kw_referer, $regs))
 			$keywords = urldecode($regs[2]);
 			

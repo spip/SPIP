@@ -160,7 +160,7 @@ function exec_statistiques_visites_args($id_article, $duree, $interval, $type, $
 		echo "<br /><span class='verdana1 spip_small'><b>",
 			_T('info_visites_par_mois'),
 			"</b></span>",
-			statistiques_par_mois($mois, $script);
+			statistiques_par_mois($mois, '');
 	}
 
 	if ($id_article) {
@@ -171,12 +171,29 @@ function exec_statistiques_visites_args($id_article, $duree, $interval, $type, $
 	}
 
 	$referenceurs = charger_fonction('referenceurs', 'inc');
-	$res = $referenceurs ('statistiques_visites', ($id_article?"id_article=$id_article" : ''), "visites", $table_ref, $where, '', $limit);
+	$res = $referenceurs($id_article, "visites", $table_ref, $where, '', $limit);
 
 	if ($res) {
-		echo gros_titre(_T("onglet_origine_visites"),'', false);
+
+		// Le lien pour en afficher "plus"
+		$args = ($id_article?"id_article=$id_article&" : '') . "limit=" . strval($limit+200);
+		$n =  count($res);
+		$plus = generer_url_ecrire('statistiques_visites', $args);
+		if ($plus) {
+			$plus = ($limit == $n)
+			? "<div style='text-align:right;'><b><a href='$plus'>+++</a></b></div>"
+			: '';
+		}
+		$titre = _T("onglet_origine_visites")
+		. " ($n " 
+		. ($n == 1 ?  _T('info_site') :  _T('info_sites'))
+		  . ")";
+		echo '<br />', gros_titre($titre,'', false);
 		echo "<div style='overflow:hidden;' class='verdana1 spip_small'><br />";
-		echo $res;
+		echo "<ul class='referers'><li>";
+		echo join("</li><li>\n",$res);
+		echo "</li></ul>";
+		echo $plus;
 		echo "<br /></div>";	
 	}
 
