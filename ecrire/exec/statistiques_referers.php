@@ -30,26 +30,46 @@ function exec_statistiques_referers_dist()
 	if ($jour<>'veille') $jour='jour';
 
 	$referenceurs = charger_fonction('referenceurs', 'inc');
-	$res = $referenceurs ('statistiques_referers', "jour=$jour", "SUM(visites_$jour)", 'spip_referers', "visites_$jour>0", "referer", $limit);
+	$res = $referenceurs (0, "SUM(visites_$jour)", 'spip_referers', "visites_$jour>0", "referer", $limit);
+
+	$n =  count($res);
+	$args = "jour=$jour@limit=" . strval($limit+200);
+	$plus = generer_url_ecrire('statistiques_visites', $args);
+
+	if ($plus) {
+		$plus = ($limit == $n)
+		? "<div style='text-align:right;'><b><a href='$plus'>+++</a></b></div>"
+		: '';
+	}
+
+	$titre = _T('titre_liens_entrants')
+		. " ($n " 
+		. ($n <= 1 ?  _T('info_site') :  _T('info_sites'))
+		. ")";
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 
 	echo $commencer_page(_T('titre_page_statistiques_referers'), "statistiques_visites", "referers");
-	echo "<br /><br /><br />";
 
-	echo gros_titre(_T('titre_liens_entrants'),'', false);
+	echo "<br /><br /><br />";
+	echo gros_titre($titre,'', false);
 	echo debut_gauche('', true);
 	echo debut_boite_info(true);
-
-	echo "<p style='font-size:small; text-align:left;' class='verdana1'>"._T('info_gauche_statistiques_referers')."</p>";
-
+	echo "<p style='font-size:small; text-align:left;' class='verdana1'>";
+	echo _T('info_gauche_statistiques_referers');
+	echo "</p>";
 	echo fin_boite_info(true);
-
 	echo debut_droite('', true);
-
 	echo barre_onglets("stat_referers", $jour);
 
-	echo "<br /><div style='font-size:small;' class='verdana1'>", $res, "</div><br />";
+	if ($res) {
+		echo "<br /><div style='font-size:small;' class='verdana1'>";
+		echo "<ul class='referers'><li>";
+		echo join("</li><li>\n", $res);
+		echo "</li></ul>";
+		echo $plus;
+	}
+	echo "</div><br />";
 
 	echo fin_gauche(), fin_page();
 	}
