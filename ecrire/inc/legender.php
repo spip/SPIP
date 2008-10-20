@@ -60,7 +60,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 		legender_suppression($id, $id_document, $ancre, $s, $script, $supp, $type);
 
 	if ($script == 'articles_edit')
-		$corps .= legender_image_doc($document, $id_document, $id, $type, $s, $ancre);
+		$corps .= legender_image_doc($document, $id_document, $id, $type, $s, $script, $ancre);
 
 	$corps = block_parfois_visible("legender-aff-$id_document", legender_entete($document), $corps, "text-align:center;", $flag);
 
@@ -179,7 +179,7 @@ function legender_corps($ancre, $flag, $id, $id_document, $script, $type, $docum
 //
 // Changement de mode image/document
 //
-function legender_image_doc($document, $id_document, $id, $type, $s, $ancre)
+function legender_image_doc($document, $id_document, $id, $type, $s, $script, $ancre)
 {
 	define('_INTERFACE_DOCUMENTS', false);
 	define('_BOUTON_MODE_IMAGE', true);
