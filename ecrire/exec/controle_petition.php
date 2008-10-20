@@ -89,44 +89,44 @@ function exec_controle_petition_args($id_article, $type, $date, $debut, $id_sign
 // http://doc.spip.org/@controle_petition_page
 function controle_petition_page($id_article, $titre,  $ong, $statut, $corps)
 {
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('titre_page_controle_petition'), "forum", "suivi-petition");
-	echo debut_gauche('', true);
-
-	echo "<br /><br /><br /><br /><br />";
-
 	if ($id_article) {
-		$res = icone_horizontale(_T('icone_statistiques_visites'), generer_url_ecrire("statistiques_visites","id_article=$id_article"), "statistiques-24.gif","rien.gif", false);
+		$a =  generer_url_ecrire("statistiques_visites","id_article=$id_article");
+		$rac = "<br /><br /><br /><br /><br />" .
+		bloc_des_raccourcis(icone_horizontale(_T('icone_statistiques_visites'),$a, "statistiques-24.gif","rien.gif", false));
 
-		echo bloc_des_raccourcis($res);
-	}
-
-	echo debut_droite('', true);
-  
-	echo gros_titre(_T('titre_suivi_petition'),'', false);
-
-	echo $ong; 
-
-	echo bouton_spip_rss('signatures');
-
-	if ($id_article) {
-		$h = generer_url_entite($id_article,'article');
-		echo  "<a href='",
-			$h,
-			"'>",
-			typo($titre),
-			"</a>",
-			" <span class='arial1'>(",
-			_T('info_numero_abbreviation'),
-			$id_article,
+		$titre = "<a href='" .
+			generer_url_entite($id_article,'article') .
+			"'>" .
+			typo($titre) .
+			"</a>" .
+			" <span class='arial1'>(" .
+			_T('info_numero_abbreviation') .
+			$id_article .
 			")</span>";
+
 		if (!sql_countsel('spip_petitions', "id_article=$id_article"))
-			echo '<br >', _T('info_petition_close');
+			$titre .= '<br >' . _T('info_petition_close');
+
+		$args = array('id_article' => $id_article);
+	} else  {
+		$args = array();
+		$rac = $titre = '';
 	}
-	$a = "editer_signature-" . $id_article;
 
-	echo  "<br /><br /><div id='", $a, "' class='serif2'>", $corps, "</div>";
+	$head = _T('titre_page_controle_petition');
+	$idom = "editer_signature-" . $id_article;
+	$commencer_page = charger_fonction('commencer_page', 'inc');
 
+	echo $commencer_page($head, "forum", "suivi-petition");
+	echo debut_gauche('', true);
+	echo $rac;
+	echo debut_droite('', true);
+	echo gros_titre(_T('titre_suivi_petition'),'', false);
+	echo $ong; 
+	echo bouton_spip_rss('signatures', $args);
+	echo $titre;
+	echo  "<br /><br />";
+	echo "<div id='", $idom, "' class='serif2'>", $corps, "</div>";
 	echo fin_gauche(), fin_page();
 }
 
