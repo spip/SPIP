@@ -644,6 +644,8 @@ function plugin_get_infos($plug, $force_reload=false){
 				$ret['necessite'] = $arbre['necessite'];
 				$ret['utilise'] = $arbre['utilise'];
 				$ret['path'] = $arbre['path'];
+				if (isset($arbre['noisette']))
+					$ret['noisette'] = $arbre['noisette'];
 
 				// recuperer les boutons et onglets si necessaire
 				spip_xml_match_nodes(",^(bouton|onglet)\s,",$arbre,$les_boutons);
@@ -772,7 +774,6 @@ function plugin_verifie_conformite($plug,&$arbre){
 				$utilise[] = $att;
 			}
 		}
-		
 		$arbre['utilise'] = $utilise;
 		$path = array();
 		if (spip_xml_match_nodes(',^chemin,',$arbre,$paths)){
@@ -784,6 +785,16 @@ function plugin_verifie_conformite($plug,&$arbre){
 		else
 			$path = array(array('dir'=>'')); // initialiser par defaut
 		$arbre['path'] = $path;
+		// exposer les noisettes
+		if (isset($arbre['noisette'])){
+			foreach($arbre['noisette'] as $k=>$nut){
+				$nut = preg_replace(',[.]html$,uims','',trim($nut));
+				$arbre['noisette'][$k] = $nut;
+				if (!@is_readable(_DIR_PLUGINS."$plug/$nut.html"))
+  				if (!$silence)
+						$arbre['erreur'][] = _T('erreur_plugin_fichier_absent')." : $nut";
+			}
+		}
 	}
 }
 // http://doc.spip.org/@plugin_pipeline_props
