@@ -25,7 +25,7 @@ function action_acceder_document_dist() {
 
 	// $file exige pour eviter le scan id_document par id_document
 	$f = rawurldecode(_request('file'));
-	$file = _NOM_PERMANENTS_ACCESSIBLES.$f;
+	$file = get_spip_doc($f);
 	$arg = rawurldecode(_request('arg'));
 
 	$status = $dcc = false;
