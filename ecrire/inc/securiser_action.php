@@ -17,10 +17,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // - sans argument: verifie la securite et retourne _request('arg'), ou exit.
 
 // http://doc.spip.org/@inc_securiser_action_dist
-function inc_securiser_action_dist($action='', $arg='', $redirect="", $mode=false, $att='')
+function inc_securiser_action_dist($action='', $arg='', $redirect="", $mode=false, $att='', $public=fase)
 {
 	if ($action)
-		return securiser_action_auteur($action, $arg, $redirect, $mode, $att);
+		return securiser_action_auteur($action, $arg, $redirect, $mode, $att, $public);
 	else {
 		$arg = _request('arg');
 		$hash = _request('hash');
@@ -36,7 +36,7 @@ function inc_securiser_action_dist($action='', $arg='', $redirect="", $mode=fals
 // Attention: PHP applique urldecode sur $_GET mais pas sur $_POST
 // cf http://fr.php.net/urldecode#48481
 // http://doc.spip.org/@securiser_action_auteur
-function securiser_action_auteur($action, $arg, $redirect="", $mode=false, $att='')
+function securiser_action_auteur($action, $arg, $redirect="", $mode=false, $att='', $public=false)
 {
 	static $id_auteur=0, $pass;
 	if (!$id_auteur) {
@@ -58,7 +58,7 @@ function securiser_action_auteur($action, $arg, $redirect="", $mode=false, $att=
 <input name='hash' type='hidden' value='$hash' />
 <input name='arg' type='hidden' value='$arg' />";
 
-	return generer_form_action($action, $mode, $att);
+	return generer_form_action($action, $mode, $att, $public);
 }
 
 // http://doc.spip.org/@caracteriser_auteur
