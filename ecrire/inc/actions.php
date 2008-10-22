@@ -14,10 +14,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 // http://doc.spip.org/@generer_action_auteur
-function generer_action_auteur($action, $arg, $redirect="", $mode=false, $att='')
+function generer_action_auteur($action, $arg, $redirect="", $mode=false, $att='', $public=false)
 {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	return $securiser_action($action, $arg, $redirect, $mode, $att);
+	return $securiser_action($action, $arg, $redirect, $mode, $att, $public);
 }
 
 // http://doc.spip.org/@redirige_action_auteur
