@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // - sans argument: verifie la securite et retourne _request('arg'), ou exit.
 
 // http://doc.spip.org/@inc_securiser_action_dist
-function inc_securiser_action_dist($action='', $arg='', $redirect="", $mode=false, $att='', $public=fase)
+function inc_securiser_action_dist($action='', $arg='', $redirect="", $mode=false, $att='', $public=false)
 {
 	if ($action)
 		return securiser_action_auteur($action, $arg, $redirect, $mode, $att, $public);
