@@ -470,9 +470,11 @@ $GLOBALS[\'all_langs\'] = @$GLOBALS[\'meta\'][\'langues_proposees\'];
 
 'envoyer_mail' => '($email, $sujet, $texte, $from = "", $headers = "") {
 	vieilles_log(\'envoyer_mail()\');
-
-	$envoyer_mail = charger_fonction(\'envoyer_mail\',\'inc\');
-	return $envoyer_mail($email,$sujet,$texte,$from,$headers);
+	define(\'_FUNCTION_ENVOYER_MAIL\', charger_fonction(\'envoyer_mail\', \'inc\'));
+	$args = func_get_args();
+	if (_FUNCTION_ENVOYER_MAIL){
+		return call_user_func_array(_FUNCTION_ENVOYER_MAIL, $args);
+	}
 }
 
 
