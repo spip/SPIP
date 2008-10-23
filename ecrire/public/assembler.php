@@ -26,8 +26,8 @@ function assembler($fond, $connect='') {
 	$contexte = calculer_contexte();
 
 	$page = $fond .
-		preg_replace('/[?].*$/', '', 
-		preg_replace(',\.[a-zA-Z0-9]*$,', '', $GLOBALS['REQUEST_URI']));
+		preg_replace(',\.[a-zA-Z0-9]*$,', '', 
+		preg_replace('/[?].*$/', '', $GLOBALS['REQUEST_URI']));
 
 	// Cette fonction est utilisee deux fois
 	$cacher = charger_fonction('cacher', 'public');
