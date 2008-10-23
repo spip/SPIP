@@ -23,7 +23,19 @@ function action_export_all_dist()
 
 	@list($quoi, $gz, $archive, $rub, $version) = split(',', $arg);
 	$meta = "status_dump_$rub_"  . $GLOBALS['visiteur_session']['id_auteur'];
-
+	$tables = _request('export');
+	// en mode partiel, commencer par les articles et les rubriques
+	// pour savoir quelles parties des autres tables sont a sauver
+	if ($rub) {
+			if ($t = array_search('spip_rubriques', $tables)) {
+				unset($tables[$t]);
+				array_unshift($tables, 'spip_rubriques');
+			}
+			if ($t = array_search('spip_articles', $tables)) {
+				unset($tables[$t]);
+				array_unshift($tables, 'spip_articles');
+			}
+	}
 	// determine upload va aussi initialiser l'index "restreint"
 	$maindir = determine_upload();
 	if (!$GLOBALS['visiteur_session']['restreint'])
@@ -35,7 +47,8 @@ function action_export_all_dist()
 	if ($quoi =='start'){
 		// creer l'en tete du fichier et retourner dans l'espace prive
 		ecrire_fichier($file, export_entete($version),false);
-		ecrire_meta($meta, "$gz::$archive::$rub::1::0",'non');
+		$v = serialize(array($gz, $archive, $rub, $tables, 1, 0));
+		ecrire_meta($meta, $v, 'non');
 		include_spip('inc/headers');
 		  // rub=$rub sert AUSSI a distinguer cette redirection
 		  // d'avec l'appel initial sinon FireFox croit malin
@@ -107,7 +120,6 @@ function export_all_fin($file, $meta, $rub)
 			  "</a></p>";
 						
 			// afficher la liste des tables qu'on a sauvegarde
-			$tables_sauvegardees = array_keys($tables_sauvegardees);
 			sort($tables_sauvegardees);
 			$n = floor(count($tables_sauvegardees)/2);
 			$corps .= "<div style='width:49%;float:left;'><ul><li>" . join('</li><li>', array_slice($tables_sauvegardees,0,$n)) . "</li></ul></div>"

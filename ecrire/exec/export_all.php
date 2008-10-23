@@ -63,21 +63,8 @@ function exec_export_all_dist()
 	if (!isset($GLOBALS['meta'][$meta]))
 		exec_export_all_args($rub, _request('gz'));
 	else {
-		list($tables,) = export_all_list_tables();
-	// en mode partiel, commencer par les articles et les rubriques
-	// pour savoir quelles parties des autres tables sont a sauver
-		if ($rub) {
-			if ($t = array_search('spip_rubriques', $tables)) {
-				unset($tables[$t]);
-				array_unshift($tables, 'spip_rubriques');
-			}
-			if ($t = array_search('spip_articles', $tables)) {
-				unset($tables[$t]);
-				array_unshift($tables, 'spip_articles');
-			}
-		}
 		$export = charger_fonction('export', 'inc');
-		$export($meta, $tables);
+		$export($meta);
 	} 	
 }
 
@@ -94,8 +81,21 @@ function exec_export_all_args($rub, $gz)
 	if ($archive) {
 		$archive .= '.xml' . $gz;
 		include_spip('inc/headers');
-		redirige_par_entete(generer_action_auteur("export_all", "start,$gz,$archive,$rub," .  _VERSION_ARCHIVE, '', true, true));
-	} else {
+		list($tables,) = export_all_list_tables();
+		$res = liste_tables_en_base('export', $tables);
+		$clic =  _T('bouton_valider');
+		$res = "\n<ol style='text-align:left'><li>\n" .
+			join("</li>\n<li>", $res) .
+			"</li></ol>\n<input type='submit' value='$clic' />";
+
+		$arg = "start,$gz,$archive,$rub," .  _VERSION_ARCHIVE;
+		$timeout = 'document.getElementById("form_export").submit()';
+		$corps =  http_script("window.setTimeout('$timeout', 60000)")
+		. generer_action_auteur('export_all', $arg, '', $res,  " method='post' id='form_export'", true);
+		include_spip('inc/minipres');
+		echo minipres(_T('info_sauvegarde'), $corps);
+
+	} else { // appel direct sans passer par le formulaire !
 		$f = charger_fonction('accueil');
 		$f();
 	}
@@ -162,4 +162,29 @@ function export_all_list_tables()
 	return array($tables_for_dump, $tables_for_link);
 }
 
+// Fabrique la liste a cocher des tables presentes
+
+function liste_tables_en_base($name, $check)
+{
+	$p = '/^' . $GLOBALS['table_prefix'] . '/';
+	$res = $check;
+	foreach(sql_alltable() as $t) {
+		$t = preg_replace($p, 'spip', $t);
+		if (!in_array($t, $check)) $res[]= $t;
+	}
+
+	foreach ($res as $k => $t) {
+
+		$c = "type='checkbox'"
+		. (in_array($t, $check) ? " checked='checked'" : '');
+
+		$res[$k] = "<input $c value='$t' id='$name_$t' name='$name"
+			. "[]' />\n"
+			. $t
+			. " ("
+			.  sql_countsel($t)
+	  		. ")";
+	}
+	return $res;
+}
 ?>
