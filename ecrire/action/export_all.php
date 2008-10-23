@@ -24,18 +24,6 @@ function action_export_all_dist()
 	@list($quoi, $gz, $archive, $rub, $version) = split(',', $arg);
 	$meta = "status_dump_$rub_"  . $GLOBALS['visiteur_session']['id_auteur'];
 	$tables = _request('export');
-	// en mode partiel, commencer par les articles et les rubriques
-	// pour savoir quelles parties des autres tables sont a sauver
-	if ($rub) {
-			if ($t = array_search('spip_rubriques', $tables)) {
-				unset($tables[$t]);
-				array_unshift($tables, 'spip_rubriques');
-			}
-			if ($t = array_search('spip_articles', $tables)) {
-				unset($tables[$t]);
-				array_unshift($tables, 'spip_articles');
-			}
-	}
 	// determine upload va aussi initialiser l'index "restreint"
 	$maindir = determine_upload();
 	if (!$GLOBALS['visiteur_session']['restreint'])
@@ -45,6 +33,18 @@ function action_export_all_dist()
 
 	utiliser_langue_visiteur();
 	if ($quoi =='start'){
+	// en mode partiel, commencer par les articles et les rubriques
+	// pour savoir quelles parties des autres tables sont a sauver
+		if ($rub) {
+			if ($t = array_search('spip_rubriques', $tables)) {
+				unset($tables[$t]);
+				array_unshift($tables, 'spip_rubriques');
+			}
+			if ($t = array_search('spip_articles', $tables)) {
+				unset($tables[$t]);
+				array_unshift($tables, 'spip_articles');
+			}
+		}
 		// creer l'en tete du fichier et retourner dans l'espace prive
 		ecrire_fichier($file, export_entete($version),false);
 		$v = serialize(array($gz, $archive, $rub, $tables, 1, 0));
