@@ -38,6 +38,7 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 	// fond demande dans l'url par page=xxxx ?
 	else if (isset($_GET[_SPIP_PAGE])) {
 		$fond = $_GET[_SPIP_PAGE];
+
 		// Securite
 		if (strstr($fond, '/')) {
 			include_spip('inc/minipres');
@@ -102,7 +103,7 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 
 	// Il y a du texte a produire, charger le metteur en page
 	include_spip('public/assembler');
-	$page = assembler($fond, _request('connect'), $lang);
+	$page = assembler($fond, _request('connect'));
 
 	if (isset($page['status'])) {
 		include_spip('inc/headers');

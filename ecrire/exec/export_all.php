@@ -11,167 +11,180 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-@ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
+
+define('_VERSION_ARCHIVE', '1.3');
+
+include_spip('base/serial');
+include_spip('base/auxiliaires');
+include_spip('public/interfaces'); // pour table_jointures
+
+// NB: Ce fichier peut ajouter des tables (old-style)
+// donc il faut l'inclure "en globals"
+if ($f = find_in_path('mes_fonctions.php')) {
+	global $dossier_squelettes;
+	@include_once ($f); 
+}
+
+if (@is_readable(_DIR_TMP."charger_plugins_fonctions.php")){
+	// chargement optimise precompile
+	include_once(_DIR_TMP."charger_plugins_fonctions.php");
+}
+
+// par defaut tout est exporte sauf les tables ci-dessous
+
+global $EXPORT_tables_noexport;
+
+$EXPORT_tables_noexport= array(
+	'spip_caches', // plugin invalideur
+	'spip_resultats', // resultats de recherche ... c'est un cache !
+	'spip_referers',
+	'spip_referers_articles',
+	'spip_visites',
+	'spip_visites_articles',
+	'spip_versions', // le dump des fragments n'est pas robuste
+	'spip_versions_fragments' // le dump des fragments n'est pas robuste
+	);
+
+if (!$GLOBALS['connect_toutes_rubriques']){
+	$EXPORT_tables_noexport[]='spip_messages';
+	$EXPORT_tables_noexport[]='spip_auteurs_messages';
+}
+
+//var_dump($EXPORT_tables_noexport);
+$EXPORT_tables_noexport = pipeline('lister_tables_noexport',$EXPORT_tables_noexport);
+
 
 // http://doc.spip.org/@exec_export_all_dist
 function exec_export_all_dist()
 {
 	$rub = intval(_request('id_parent'));
-	$meta = 'status_dump_'  . $GLOBALS['visiteur_session']['id_auteur'];
+	$meta = "status_dump_$rub_"  . $GLOBALS['visiteur_session']['id_auteur'];
 
-	if (isset($GLOBALS['meta'][$meta]))
-		exec_export_all_args($rub, $meta);
+	if (!isset($GLOBALS['meta'][$meta]))
+		echo exec_export_all_args($rub, _request('gz'));
 	else {
-		$gz = _request('gz') ? '.gz' : '';
-		$archive = $gz 
-		?  _request('znom_sauvegarde') 
-		:  _request('nom_sauvegarde');
-		if ($archive === '') $archive = 'dump';
-		if ($archive) {
-			$archive .= '.xml' . $gz;
-
-		// creer l'en tete du fichier a partir de l'espace public
-		// creer aussi la meta
-			include_spip('inc/headers');
-			redirige_par_entete(generer_action_auteur("export_all", "start,$gz,$archive,$rub", '', true, true));
-		} else {
-			$f = charger_fonction('accueil');
-			$f();
-		} 
-	}
+		$export = charger_fonction('export', 'inc');
+		$export($meta);
+	} 	
 }
 
-// http://doc.spip.org/@exec_export_all_args
-function exec_export_all_args($rub, $meta)
+// L'en tete du fichier doit etre cree a partir de l'espace public
+// Ici on construit la liste des tables pour confirmation.
+// Envoi automatique en cas d'inaction (sauf si appel incorrect $nom=NULL)
+
+function exec_export_all_args($rub, $gz)
 {
-	include_spip('inc/actions');
-	include_spip('inc/export');
-	include_spip('base/abstract_sql');
-	include_spip('inc/acces');
+	$gz = $gz ? '.gz' : '';
+	$nom = $gz 
+	?  _request('znom_sauvegarde') 
+	:  _request('nom_sauvegarde');
+	if ($nom === '') $nom = 'dump';
+	$archive = $nom . '.xml' . $gz;
+	list($tables,) = export_all_list_tables();
+	$res = controle_tables_en_base('export', $tables, $rub);
+	$clic =  _T('bouton_valider');
+	$res = "\n<ol style='text-align:left'><li>\n" .
+			join("</li>\n<li>", $res) .
+			"</li></ol>\n<input type='submit' value='$clic' />";
 
-	$start = false;
-	list($gz, $archive, $rub, $etape_actuelle, $sous_etape) = 
-		explode("::",$GLOBALS['meta'][$meta]);
-	$dir =  export_subdir($rub);
-	$file = $dir . $archive;
-	$metatable = $meta . '_tables';
-	$redirect = generer_url_ecrire("export_all");
-
-	if (!$etape_actuelle AND !$sous_etape) {
-		$l = preg_files($file .  ".part_[0-9]+_[0-9]+");
-		if ($l) {
-			spip_log("menage d'une sauvegarde inachevee: " . join(',', $l));
-			foreach($l as $dummy)spip_unlink($dummy);
-		}
-		$start = true; //  utilise pour faire un premier hit moitie moins long
-		$tables_sauvegardees = array();
-	} else 	$tables_sauvegardees = isset($GLOBALS['meta'][$metatable])?unserialize($GLOBALS['meta'][$metatable]):array();
-
-	list($tables_for_dump,) = export_all_list_tables();
-	
-	// en mode partiel, commencer par les articles et les rubriques
-	// pour savoir quelles parties des autres tables sont a sauver
-	if ($rub) {
-		if ($t = array_search('spip_rubriques', $tables_for_dump)) {
-			unset($tables_for_dump[$t]);
-			array_unshift($tables_for_dump, 'spip_rubriques');
-		}
-		if ($t = array_search('spip_articles', $tables_for_dump)) {
-			unset($tables_for_dump[$t]);
-			array_unshift($tables_for_dump, 'spip_articles');
-		}
-	}
-	  
-	// concatenation des fichiers crees a l'appel precedent
-	ramasse_parties($dir, $archive);
-	$all = count($tables_for_dump);
-	if ($etape_actuelle > $all){ 
-	  // l'appel precedent avait fini le boulot. mettre l'en-pied.
-		ecrire_fichier($file, export_enpied(),false,false);
-		include_spip('inc/headers');
-		redirige_par_entete(generer_action_auteur("export_all","end,$gz,$archive,$rub",'',true));
-	}
-
+	$arg = "start,$gz,$archive,$rub," .  _VERSION_ARCHIVE;
+	$id = 'form_export';
+	$att = " method='post' id='$id'";
+	$timeout = 'if (manuel) document.getElementById(manuel).submit()';
+	$corps = (($nom !== NULL)
+	? http_script("manuel= '$id'; window.setTimeout('$timeout', 60000);")
+	: '')
+	. generer_action_auteur('export_all', $arg, '', $res,  $att, true);
 	include_spip('inc/minipres');
-	echo_flush( install_debut_html(_T('info_sauvegarde') . " ($all)"));
-
-	if (!($timeout = ini_get('max_execution_time')*1000));
-	$timeout = 30000; // parions sur une valeur tellement courante ...
-	// le premier hit est moitie moins long car seulement une phase d'ecriture de morceaux
-	// sans ramassage
-	// sinon grosse ecriture au 1er hit, puis gros rammassage au deuxieme avec petite ecriture,... ca oscille
-	if ($start) $timeout = round($timeout/2);
-	// script de rechargement auto sur timeout
-	echo_flush("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".$redirect."\";',$timeout);</script>\n");
-
-	echo_flush( "<div style='text-align: left'>\n");
-	$etape = 1;
-
-	// Les sauvegardes partielles prennent le temps d'indiquer les logos
-	// Instancier une fois pour toutes, car on va boucler un max.
-	// On complete jusqu'au secteur pour resituer dans l'arborescence)
-	if ($rub) {
-		$GLOBALS['chercher_logo'] = charger_fonction('chercher_logo', 'inc',true);
-		$les_rubriques = complete_fils(array($rub));
-		$les_meres  = complete_secteurs(array($rub));
-	} else {
-		$GLOBALS['chercher_logo'] = false;
-		$les_rubriques = $les_meres = '';
-	}
-
-	foreach($tables_for_dump as $table){
-		if ($etape_actuelle <= $etape) {
-		  $r = sql_countsel($table);
-		  echo_flush( "\n<br /><strong>".$etape. '. '. $table."</strong> ");
-		  if (!$r) echo_flush( _T('texte_vide'));
-		  else
-		    export_objets($table, $etape, $sous_etape,$dir, $archive, $gz, $r, $les_rubriques, $les_meres, $rub, $meta);
-		  $sous_etape = 0;
-		  // on utilise l'index comme ca c'est pas grave si on ecrit plusieurs fois la meme
-		  $tables_sauvegardees[$table] = 1;
-		  ecrire_meta($metatable, serialize($tables_sauvegardees),'non');
-		}
-		$etape++;
-		$status_dump = "$gz::$archive::$rub::" . $etape . "::0";
-		ecrire_meta($meta, $status_dump,'non');
-	}
-	echo_flush( "</div>\n");
-	// si Javascript est dispo, anticiper le Time-out
-	echo_flush ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"$redirect\";',0);</script>\n");
-	echo_flush(install_fin_html());
+	return minipres(_T('info_sauvegarde'), $corps);
 }
 
+// construction de la liste des tables pour le dump :
+// toutes les tables principales
+// + toutes les tables auxiliaires hors relations
+// + les tables relations dont les deux tables liees sont dans la liste
 
-// http://doc.spip.org/@complete_secteurs
-function complete_secteurs($les_rubriques)
+// http://doc.spip.org/@export_all_list_tables
+function export_all_list_tables()
 {
-	$res = array();
-	foreach($les_rubriques as $r) {
-		do {
-			$r = sql_getfetsel("id_parent", "spip_rubriques", "id_rubrique=$r");
-			if ($r) {
-				if ((isset($les_rubriques[$r])) OR isset($res[$r]))
-					$r = false;
-				else  $res[$r] = $r;
+	$tables_for_dump = array();
+	$tables_pointees = array();
+	global $EXPORT_tables_noexport;
+	global $tables_principales;
+	global $tables_auxiliaires;
+	global $tables_jointures;
+
+// on construit un index des tables de liens
+// pour les ajouter SI les deux tables qu'ils connectent sont sauvegardees
+	$tables_for_link = array();
+	foreach($tables_jointures as $table => $liste_relations)
+		if (is_array($liste_relations))
+		{
+			$nom = $table;
+			if (!isset($tables_auxiliaires[$nom])&&!isset($tables_principales[$nom]))
+				$nom = "spip_$table";
+			if (isset($tables_auxiliaires[$nom])||isset($tables_principales[$nom])){
+				foreach($liste_relations as $link_table){
+					if (isset($tables_auxiliaires[$link_table])/*||isset($tables_principales[$link_table])*/){
+						$tables_for_link[$link_table][] = $nom;
+					}
+					else if (isset($tables_auxiliaires["spip_$link_table"])/*||isset($tables_principales["spip_$link_table"])*/){
+						$tables_for_link["spip_$link_table"][] = $nom;
+					}
+				}
 			}
-		} while ($r);
+		}
+	
+	$liste_tables = array_merge(array_keys($tables_principales),array_keys($tables_auxiliaires));
+	foreach($liste_tables as $table){
+	  //		$name = preg_replace("{^spip_}","",$table);
+	  if (		!isset($tables_pointees[$table]) 
+	  		&&	!in_array($table,$EXPORT_tables_noexport) 
+	  		&&	!isset($tables_for_link[$table])){
+			$tables_for_dump[] = $table;
+			$tables_pointees[$table] = 1;
+		}
+	}
+	foreach ($tables_for_link as $link_table =>$liste){
+		$connecte = true;
+		foreach($liste as $connect_table)
+			if (!in_array($connect_table,$tables_for_dump))
+				$connecte = false;
+		if ($connecte)
+			# on ajoute les liaisons en premier
+			# si une restauration est interrompue,
+			# cela se verra mieux si il manque des objets
+			# que des liens
+			array_unshift($tables_for_dump,$link_table);
+	}
+	return array($tables_for_dump, $tables_for_link);
+}
+
+// Fabrique la liste a cocher des tables presentes
+
+function controle_tables_en_base($name, $check, $rub)
+{
+	$p = '/^' . $GLOBALS['table_prefix'] . '/';
+	$res = $check;
+	foreach(sql_alltable() as $t) {
+		$t = preg_replace($p, 'spip', $t);
+		if (!in_array($t, $check)) $res[]= $t;
+	}
+
+	$rub = $rub ? " <= "  : '';
+	foreach ($res as $k => $t) {
+
+		$c = "type='checkbox'"
+		. (in_array($t, $check) ? " checked='checked'" : '')
+		. " onclick='manuel=false'";
+
+		$res[$k] = "<input $c value='$t' id='$name_$t' name='$name"
+			. "[]' />\n"
+			. $t
+			. " ($rub"
+			.  sql_countsel($t)
+	  		. ")";
 	}
 	return $res;
-}
-
-// http://doc.spip.org/@complete_fils
-function complete_fils($rubriques)
-{
-	$r = $rubriques;
-	do {
-		$q = sql_select("id_rubrique", "spip_rubriques", "id_parent IN (".join(',',$r).")");
-		$r = array();
-		while ($row = sql_fetch($q)) {
-			$r[]= $rubriques[] = $row['id_rubrique'];
-		}
-	} while ($r);
-
-
-	return $rubriques;
 }
 ?>
