@@ -48,7 +48,7 @@ function boucle_ARTICLES_dist($id_boucle, &$boucles) {
 	if (!isset($boucle->modificateur['criteres']['statut'])) {
 		if (!$GLOBALS['var_preview']) {
 			if ($GLOBALS['meta']["post_dates"] == 'non')
-				array_unshift($boucle->where,array("'<='", "'$id_table" . ".date'", "'NOW()'"));
+				array_unshift($boucle->where,array("'<'", "'$id_table" . ".date'", "sql_quote(quete_date_postdates())"));
 			array_unshift($boucle->where,array("'='", "'$mstatut'", "'\\'publie\\''"));
 		} else
 			array_unshift($boucle->where,array("'IN'", "'$mstatut'", "'(\\'publie\\',\\'prop\\')'"));
@@ -79,7 +79,7 @@ function boucle_AUTEURS_dist($id_boucle, &$boucles) {
 				array("'='", "'$t.statut'", "'\\'publie\\''"));
 			if ($GLOBALS['meta']['post_dates'] == 'non')
 				array_unshift($boucle->where,
-					array("'<='", "'$t.date'", "'NOW()'"));
+					array("'<='", "'$t.date'", "sql_quote(quete_date_postdates())"));
 		}
 		// pas d'auteurs poubellises
 		array_unshift($boucle->where,array("'!='", "'$mstatut'", "'\\'5poubelle\\''"));
@@ -182,29 +182,24 @@ function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 		# a refaire plus proprement
 
 		## la boucle par defaut ignore les documents de forum
-		$postdates = ($GLOBALS['meta']['post_dates'] == 'non')
-				? " AND aa.date < NOW()"
-				: '';
-
-
 		$boucle->from[$id_table] = "spip_documents LEFT JOIN spip_documents_liens AS l
 			ON $id_table.id_document=l.id_document
 			LEFT JOIN spip_articles AS aa
-				ON (l.id_objet=aa.id_article AND l.objet=\'article\'$postdates)
+				ON (l.id_objet=aa.id_article AND l.objet=\"article\")
 			LEFT JOIN spip_breves AS bb
-				ON (l.id_objet=bb.id_breve AND l.objet=\'breve\')
+				ON (l.id_objet=bb.id_breve AND l.objet=\"breve\")
 			LEFT JOIN spip_rubriques AS rr
-				ON (l.id_objet=rr.id_rubrique AND l.objet=\'rubrique\')
+				ON (l.id_objet=rr.id_rubrique AND l.objet=\"rubrique\")
 		";
 		$boucle->group[] = "$id_table.id_document";
 		
 		if ($GLOBALS['var_preview']) {
-			array_unshift($boucle->where,"\"(aa.statut IN ('publie','prop') OR bb.statut  IN ('publie','prop') OR rr.statut IN ('publie','prive'))\"");
+			array_unshift($boucle->where,"'(aa.statut IN (\"publie\",\"prop\") OR bb.statut  IN (\"publie\",\"prop\") OR rr.statut IN (\"publie\",\"prive\"))'");
 		} else {
 			$postdates = ($GLOBALS['meta']['post_dates'] == 'non')
-				? ' AND aa.date<=NOW()'
+				? ' AND aa.date<=\'.sql_quote(quete_date_postdates()).\''
 				: '';
-			array_unshift($boucle->where,"\"((aa.statut = 'publie'$postdates) OR bb.statut = 'publie' OR rr.statut = 'publie')\"");
+			array_unshift($boucle->where,"'((aa.statut = \"publie\"$postdates) OR bb.statut = \"publie\" OR rr.statut = \"publie\")'");
 		}
 	}
 
