@@ -52,11 +52,11 @@ body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 
 #page { position: relative; width: 58em; margin: 0 auto; text-align: left; }
 
-#entete { width: 58em; margin: 0; padding-top: 1em; border-bottom: 2px solid #8B6F92; }
+#entete { width: 58em; margin: 0; padding-top: 1.60em; border-bottom: 2px solid #8B6F92; }
 #entete a.accueil { display: block; width: 67%; }
 #entete a.accueil img.spip_logos { vertical-align: bottom; line-height: 1em; }
 #entete a.accueil #nom_site_spip { vertical-align: bottom; font-size: 2.2em; font-family: Georgia, Times, serif; font-weight: normal; }
-#entete .formulaire_menu_lang { position: absolute; right: 0; top: 1em; display: block; width: 30%; } /*Cf.: spip_formulaires.css*/
+#entete .formulaire_menu_lang { position: absolute; right: 0; top: 0.90em; display: block; width: 30%; } /*Cf.: spip_formulaires.css*/
 
 #conteneur { clear: both; float: left; width: 67%; overflow: hidden; }
 #contenu { padding-top: 0.30em; }
