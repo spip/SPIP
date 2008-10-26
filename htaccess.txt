@@ -64,7 +64,7 @@ RewriteRule "." - [skip=100]
 
 ###
 # Compatibilite avec les URLS "html" (pour transition sympa)
-# voir fichier ecrire/urls/html.php3
+# voir fichier ecrire/urls/html.php
 RewriteRule ^rubrique([0-9]+)(\.html)?$	spip.php?page=rubrique&id_rubrique=$1 [QSA,L]
 RewriteRule ^article([0-9]+)(\.html)?$	spip.php?page=article&id_article=$1 [QSA,L]
 RewriteRule ^breve([0-9]+)(\.html)?$	spip.php?page=breve&id_breve=$1 [QSA,L]
