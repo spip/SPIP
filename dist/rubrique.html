@@ -19,7 +19,7 @@ href="[(#URL_PAGE{backend})]<BOUCLE_URLMOT(MOTS){id_rubrique}>&amp;id_mot[]=#ID_
 <div id="page">
 
 	[(#REM) Entete de la page + titre du site ]
-	<INCLURE{fond=inc-entete}>
+	<INCLURE{fond=inc-entete}{id_rubrique}>
 
 	[(#REM) Contenu principal : contenu de la rubrique ]
     <div id="conteneur">
