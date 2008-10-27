@@ -21,37 +21,33 @@ function inc_editer_mots_dist($objet, $id_objet, $cherche_mot, $select_groupe, $
 
 	$visible = ($visible OR $cherche_mot OR ($flag === 'ajax'));
 
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	$nom = table_objet($objet);
+	$desc = $trouver_table($nom);
+        $table = $desc['table'];
+        $table_id =  @$desc['key']["PRIMARY KEY"];
 	if ($objet == 'article') {
-		$table_id = 'id_article';
-		$table = 'articles';
 		$url_base = "articles";
 	}
 	else if ($objet == 'breve') {
-		$table_id = 'id_breve';
-		$table = 'breves';
 		$url_base = "breves_voir";
 	}
 	else if ($objet == 'rubrique') {
-		$table_id = 'id_rubrique';
-		$table = 'rubriques';
 		$url_base = "naviguer";
 	}
-
 	else {
 		if ($objet != 'syndic') 
 			spip_log("erreur dans formulaire_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag)");
 		// continuer avec des valeurs par defaut pour le validateur
-		$table_id = 'id_syndic';
-		$table = 'syndic';
 		$url_base = "sites";
 	}
 
-	$cpt = sql_countsel("spip_mots AS mots, spip_mots_$table AS lien", "lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot");
+	$cpt = sql_countsel("spip_mots AS M LEFT JOIN spip_mots_$nom AS L ON L.$table_id=$id_objet AND M.id_mot=L.id_mot");
 
 	if (!$cpt) {
 		if (!$flag) return;
 		$droit = substr($GLOBALS['visiteur_session']['statut'],1);
-		$cpt = sql_countsel('spip_groupes_mots', "$droit = 'oui' AND tables_liees REGEXP '(^|,)$table($|,)'");
+		$cpt = sql_countsel('spip_groupes_mots', "$droit = 'oui' AND tables_liees REGEXP '(^|,)$nom($|,)'");
 
 		if (!$cpt) return;
 	}
@@ -64,7 +60,7 @@ function inc_editer_mots_dist($objet, $id_objet, $cherche_mot, $select_groupe, $
 	$reponse = '';
 	$modifier = false;
 	if ($flag AND $cherche_mot) {
-		list($reponse, $nouveaux_mots) = recherche_mot_cle($cherche_mot, $select_groupe, $objet, $id_objet, $table, $table_id, $url_base);
+		list($reponse, $nouveaux_mots) = recherche_mot_cle($cherche_mot, $select_groupe, $objet, $id_objet, $nom, $table_id, $url_base);
 		foreach($nouveaux_mots as $nouv_mot) {
 			if ($nouv_mot!='x') {
 				$modifier |= inserer_mot("spip_mots_$table", $table_id, $id_objet, $nouv_mot);
@@ -74,7 +70,7 @@ function inc_editer_mots_dist($objet, $id_objet, $cherche_mot, $select_groupe, $
 			pipeline('post_edition',
 				array(
 					'args' => array(
-					'table' => 'spip_'.$table,
+					'table' => $table,
 					'id_objet' => $id_objet
 					),
 				'data' => null
@@ -83,7 +79,7 @@ function inc_editer_mots_dist($objet, $id_objet, $cherche_mot, $select_groupe, $
 		}
 	}
 
-	$form = afficher_mots_cles($flag, $objet, $id_objet, $table, $table_id, $url_base, $visible);
+	$form = afficher_mots_cles($flag, $objet, $id_objet, $nom, $table_id, $url_base, $visible);
 
 	// Envoyer titre + div-id + formulaire + fin
 	$bouton = _T('titre_mots_cles').aide ("artmots");
