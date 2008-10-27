@@ -180,7 +180,7 @@ function controle_forum_boucle($row, $args) {
 		}
 	}
 
-	return 	"\n<div><br /><a id='id$id_forum'></a></div>" .
+	return 	"\n<div><br /><a id='forum$id_forum'></a></div>" .
 	  debut_cadre_thread_forum("", true, "", typo($forum_titre)) .
 	  "<div$style>" .
 	  date_interface($forum_date_heure) .
