@@ -87,10 +87,8 @@ function legender_suppression($id, $id_document, $ancre, $s, $script, $supp, $ty
 	// sans doute a revoir car le document serait alors peut-etre orphelin
 
 	if ($id <= 0) return '';
-	// si plusieurs liens sur le doc, pas de bouton de suppression
-	if (sql_countsel('spip_documents_liens', 'id_document='.$id_document) > 1)
-		return '';
 
+	// la fonction 'supprimer_document' ne fait que de-associer si un document est utilise par ailleurs
 	$texte = _T('icone_supprimer_document');
 
 	if (preg_match('/_edit$/', $script)) {

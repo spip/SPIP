@@ -93,6 +93,7 @@ ecrire/action/referencer_traduction.php -text
 ecrire/action/regler_moderation.php -text
 ecrire/action/reorganiser.php -text
 ecrire/action/supprimer.php -text
+ecrire/action/supprimer_document.php -text
 ecrire/action/supprimer_traduction.php -text
 ecrire/action/tester.php -text
 ecrire/action/tester_taille.php -text
