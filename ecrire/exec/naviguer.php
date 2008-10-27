@@ -94,7 +94,7 @@ function exec_naviguer_args($id_rubrique, $cherche_mot, $select_groupe)
 
 	if ($id_rubrique > 0) {
 		$editer_mots = charger_fonction('editer_mots', 'inc');
-		$editer_mots = $editer_mots('rubrique', $id_rubrique,  $cherche_mot,  $select_groupe, $flag_editable, true);
+		$editer_mots = $editer_mots('rubrique', $id_rubrique,  $cherche_mot,  $select_groupe, $flag_editable, true, 'naviguer');
 	} else $editer_mots = '';
 
 	echo naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $n_forums, $editer_mots, $flag_editable, $boucles),
