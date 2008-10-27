@@ -31,11 +31,7 @@ function action_dater_post($r)
 	$type = $r[2];
 	$id = $r[1];
 	if (!isset($_REQUEST['avec_redac'])) {
-
-		$date = format_mysql_date(_request('annee'), _request('mois'), _request('jour'), _request('heure'), _request('minute'));
-		if ($type == 'article')
-			sql_updateq("spip_articles", array("date" => $date), "id_article=$r[1]");
-		else action_dater_breve_syndic($id, $type);
+		dater_table($id, $type);
 	} else {
 		if (_request('avec_redac') == 'non')
 			$annee_redac = $mois_redac = $jour_redac = $heure_redac = $minute_redac = 0;
@@ -69,20 +65,21 @@ function action_dater_post($r)
 	}
 }
 
-// Breves et Syndications ne sont pas post-datables
-
-// http://doc.spip.org/@action_dater_breve_syndic
-function action_dater_breve_syndic($id, $type)
+function dater_table($id, $type)
 {
-	if (_request('jour')) {
-		$annee = _request('annee');
-		$mois = _request('mois');
-		$jour = _request('jour');
-		if ($annee == "0000") $mois = "00";
-		if ($mois == "00") $jour = "00";
-		if ($type == 'breve')
-		  sql_updateq("spip_breves", array("date_heure" => "$annee-$mois-$jour"), "id_breve=$id");
-		else sql_updateq("spip_syndic", array("date" => "$annee-$mois-$jour"), "id_syndic=$id");
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	$nom = table_objet($type);
+	$desc = $trouver_table($nom);
+        $table = $desc['table'];
+        $col_id =  @$desc['key']["PRIMARY KEY"];
+	if (!$table OR !$col_id) {
+		spip_log("action_dater: table $type ?");
+		return;
 	}
+	include_spip('public/interfaces');
+	$champ = @$GLOBALS['table_date'][$nom];
+	if (!$champ) $champ = 'date';
+	$date = format_mysql_date(_request('annee'), _request('mois'), _request('jour'), _request('heure'), _request('minute'));
+	sql_updateq($table, array($champ => $date), "$col_id=$id");
 }
 ?>
