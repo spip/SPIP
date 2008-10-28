@@ -878,13 +878,9 @@ function image_alpha($im, $alpha = 63)
 		imagedestroy($im2);
 	}
 	
-	$class = $image["class"];
-	if (strlen($class) > 1) $tags=" class='$class'";
-	$tags = "$tags alt='".$image["alt"]."'";
-	$style = $image["style"];
-	if (strlen($style) > 1) $tags="$tags style='$style'";
+
+	return image_ecrire_tag($image,array('src'=>$dest));
 	
-	return "<img src='$dest'$tags />";
 }
 
 // http://doc.spip.org/@image_recadre
@@ -892,6 +888,7 @@ function image_recadre($im,$width,$height,$position='center', $background_color=
 {
 	$fonction = array('image_recadre', func_get_args());
 	$image = image_valeurs_trans($im, "recadre-$width-$height-$position-$background_color",false,$fonction);
+	
 	if (!$image) return("");
 	
 	$x_i = $image["largeur"];
