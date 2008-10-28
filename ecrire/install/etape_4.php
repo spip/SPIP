@@ -55,7 +55,7 @@ function install_etape_4_dist()
 		redirige_url_ecrire('install');
 
 	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
-	echo info_progression_etape(5,'etape_','install/');
+	echo info_progression_etape(4,'etape_','install/');
 
 	echo info_etape(_T('info_derniere_etape'),
 			_T('info_utilisation_spip')
