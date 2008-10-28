@@ -39,7 +39,7 @@ function exec_charger_plugin_descr_args($url_plugin) {
 		echo propre('<h3><multi>'
 			.sinon($item['titre'], $liste[$url_plugin][0]).'</multi></h3>'
 			.'<multi>'.$item['descriptif'].'</multi>'
-			.$item['lesauteurs']. ' '
+			.'<p>'.$item['lesauteurs']. '</p> '
 			. ($item['tags']
 				? "<p>".join(' &mdash; ',$item['tags'])."</p>\n"
 				:'')
