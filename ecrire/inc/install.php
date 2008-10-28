@@ -169,20 +169,20 @@ function info_progression_etape($en_cours,$phase,$dir, $erreur = false){
 	$last = count($liste);
 //	$texte_etat = array('ok'=>'OK','encours'=>_T('en_cours'),'todo'=>_T('todo'));
 
-	$intitule_etat["etape_"][1] = _T('info_connexion_base_donnee');
-	$intitule_etat["etape_"][2] = _T('menu_aide_installation_choix_base');
-	$intitule_etat["etape_"][3] = _T('info_informations_personnelles');
-	$intitule_etat["etape_"][4] = _T('info_derniere_etape');
+	$intitule_etat["etape_"][1] = typo(_T('info_connexion_base_donnee'));
+	$intitule_etat["etape_"][2] = typo(_T('menu_aide_installation_choix_base'));
+	$intitule_etat["etape_"][3] = typo(_T('info_informations_personnelles'));
+	$intitule_etat["etape_"][4] = typo(_T('info_derniere_etape'));
 
-	$intitule_etat["etape_ldap"][1] = _T('titre_connexion_ldap');
-	$intitule_etat["etape_ldap"][2] = _T('titre_connexion_ldap');
-	$intitule_etat["etape_ldap"][3] = _T('info_chemin_acces_1');
-	$intitule_etat["etape_ldap"][4] = _T('info_reglage_ldap');
-	$intitule_etat["etape_ldap"][5] = _T('info_ldap_ok');
+	$intitule_etat["etape_ldap"][1] = typo(_T('titre_connexion_ldap'));
+	$intitule_etat["etape_ldap"][2] = typo(_T('titre_connexion_ldap'));
+	$intitule_etat["etape_ldap"][3] = typo(_T('info_chemin_acces_1'));
+	$intitule_etat["etape_ldap"][4] = typo(_T('info_reglage_ldap'));
+	$intitule_etat["etape_ldap"][5] = typo(_T('info_ldap_ok'));
 
 //	$aff_etapes = "<span id='etapes'>";
 
-	$aff_etapes = "<ul id='infos_etapes'>";
+	$aff_etapes = "<ul id='infos_etapes' class='infos_$phase$en_cours'>";
 
 	foreach($liste as $etape=>$fichier){
 		if ($debut < $last) {
