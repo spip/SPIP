@@ -189,7 +189,14 @@ function import_tables($request, $archive) {
 		$charger = charger_fonction('charger','maj/vieille_base');
 		$charger($GLOBALS['meta']['vieille_version_installee']);
 		$GLOBALS['serveur_vieille_base'] = 0;
+		$prefix = $GLOBALS['connexions'][$GLOBALS['serveur_vieille_base']]['prefixe'];
 		$GLOBALS['connexions'][$GLOBALS['serveur_vieille_base']]['prefixe'] = $GLOBALS['meta']['restauration_table_prefix'];
+		// verifier qu'une table meta existe bien
+		// sinon c'est une restauration anterieure echouee
+		if (!sql_getfetsel('valeur','spip_meta','','','','0,1')){
+				$GLOBALS['connexions'][$GLOBALS['serveur_vieille_base']]['prefixe'] = $prefix;
+				return;
+		}
 		// recharger les metas
 		lire_metas();
 	}
@@ -283,6 +290,16 @@ function import_tables($request, $archive) {
 	    _T('taille_octets', array('taille' => $pos)) ;
 	
 	if ($GLOBALS['spip_version_base'] != (str_replace(',','.',$GLOBALS['meta']['version_installee']))){
+		// il FAUT recharger les bonnes desc serial/aux avant ...
+		include_spip('base/serial');
+		$GLOBALS['tables_principales']=array();
+		base_serial($GLOBALS['tables_principales']);
+		include_spip('base/auxiliaires');
+		$GLOBALS['tables_auxiliaires']=array();
+		base_auxiliaires($GLOBALS['tables_auxiliaires']);
+		$GLOBALS['tables_jointures']=array();
+		include_spip('public/interfaces');
+		declarer_interfaces();
 		include_spip('base/upgrade');
 		maj_base(); // upgrade jusqu'a la version courante
 	}
@@ -293,42 +310,65 @@ function import_tables($request, $archive) {
 		$GLOBALS['connexions']['-1'] = $GLOBALS['connexions'][0];
 		// rebasculer le serveur sur les bonnes tables pour finir proprement
 		$GLOBALS['connexions'][0]['prefixe'] = $prefixe_source;
+		// et relire les meta de la bonne base
+		lire_metas();
 
-		$tables = import_table_choix($request);
+
 		$tables_recopiees = isset($GLOBALS['meta']['restauration_recopie_tables'])?unserialize($GLOBALS['meta']['restauration_recopie_tables']):array();
-		
+		spip_log("charge tables_recopiees ".serialize($tables_recopiees),'dbdump');
+
 		// recopier les tables l'une sur l'autre
 		// il FAUT recharger les bonnes desc serial/aux avant ...
-		$GLOBALS['tables_principales'] = $GLOBALS['nouvelle_base']['tables_principales'];
-		$GLOBALS['tables_auxiliaires'] = $GLOBALS['nouvelle_base']['tables_auxiliaires'];
+		include_spip('base/serial');
+		$GLOBALS['tables_principales']=array();
+		base_serial($GLOBALS['tables_principales']);
+		include_spip('base/auxiliaires');
+		$GLOBALS['tables_auxiliaires']=array();
+		base_auxiliaires($GLOBALS['tables_auxiliaires']);
+		$GLOBALS['tables_jointures']=array();
+		include_spip('public/interfaces');
+		declarer_interfaces();
+		
+		// puis relister les tables a importer
+		$tables = import_table_choix($request);
+#		var_dump($tables);die();
+
 		if (in_array('spip_auteurs',$tables)){
 			$tables = array_diff($tables,array('spip_auteurs'));
 			$tables[] = 'spip_auteurs';
 		}
+		if (in_array('spip_meta',$tables)){
+			$tables = array_diff($tables,array('spip_meta'));
+			$tables[] = 'spip_meta';
+		}
 		sql_drop_table('spip_test','','-1');
 		foreach ($tables as $table){
-			if (!isset($tables_recopiees[$table])) $tables_recopiees[$table] = 0;
-			if ($tables_recopiees[$table]!==-1){
-				affiche_progression_javascript(0,0,$table);
-				while (true) {
-					$n = intval($tables_recopiees[$table]);
-					$res = sql_select('*',$table,'','','',"$n,400",'','-1');
-					while ($row = sql_fetch($res,'-1')){
-						sql_insertq($table,$row);
-						$tables_recopiees[$table]++;
+			if (sql_showtable($table,false,-1)){
+				if (!isset($tables_recopiees[$table])) $tables_recopiees[$table] = 0;
+				if ($tables_recopiees[$table]!==-1){
+					affiche_progression_javascript(0,0,$table);
+					while (true) {
+						$n = intval($tables_recopiees[$table]);
+						$res = sql_select('*',$table,'','','',"$n,400",'','-1');
+						while ($row = sql_fetch($res,'-1')){
+							sql_insertq($table,$row);
+							$tables_recopiees[$table]++;
+						}
+						if ($n == $tables_recopiees[$table])
+							break;
+						spip_log("recopie $table ".$tables_recopiees[$table],'dbdump');
+						affiche_progression_javascript($tables_recopiees[$table],0,$table);
+						ecrire_meta('restauration_recopie_tables',serialize($tables_recopiees));
 					}
-					if ($n == $tables_recopiees[$table])
-						break;
-					affiche_progression_javascript($tables_recopiees[$table],0,$table);
+					sql_drop_table($table,'','-1');
+					spip_log("drop $table",'dbdump');
+					$tables_recopiees[$table]=-1;
 					ecrire_meta('restauration_recopie_tables',serialize($tables_recopiees));
+					spip_log("tables_recopiees ".serialize($tables_recopiees),'dbdump');
 				}
-				sql_drop_table($table,'','-1');
-				$tables_recopiees[$table]=-1;
-				ecrire_meta('restauration_recopie_tables',serialize($tables_recopiees));
 			}
 		}
 	}
-	
 	return '' ;
 }
 
@@ -342,16 +382,16 @@ function import_init_meta($tag, $atts, $charset, $request)
 	$old = (version_compare($version_base,$GLOBALS['spip_version_base'],'<')
 		&& !isset($GLOBALS['meta']['restauration_table_prefix']));
 
-	if ($old OR $insert) {
-		$init = $request['init'];
-		spip_log("import_init_meta lance $init");
-		$init($request);
-	}
 	if ($old) {
 		// creer une base avec les tables dans l'ancienne version
 		// et changer de contexte
 		$creer_base_anterieure = charger_fonction('create','maj/vieille_base');
 		$creer_base_anterieure($version_base);
+	}
+	if ($old OR $insert) {
+		$init = $request['init'];
+		spip_log("import_init_meta lance $init");
+		$init($request);
 	}
 	
 	ecrire_meta('restauration_attributs_archive', serialize($atts),'non');
