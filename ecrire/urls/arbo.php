@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 
+define('URLS_ARBO_EXEMPLE', '/article/Titre');
 
 // TODO: une interface permettant de verifier qu'on veut effectivment modifier
 // une adresse existante

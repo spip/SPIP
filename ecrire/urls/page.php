@@ -12,6 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 
+define('URLS_PAGE_EXEMPLE', 'spip.php?article12');
+
 ####### modifications possibles dans ecrire/mes_options
 # on peut indiquer '.html' pour faire joli
 define ('_terminaison_urls_page', '');
