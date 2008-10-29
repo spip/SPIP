@@ -1,6 +1,5 @@
 <?php
 
-
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
@@ -11,14 +10,14 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 
 /*
-
 Ce jeu d'URLs est une variation de inc-urls-propres mais les urls 
 de differents types ne sont PAS distinguees par des marqueurs (_,-,+, etc.) ;
-
 */
-if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
+
+define('URLS_LIBRES_EXEMPLE', 'Titre-de-l-article Rubrique');
 
 if (!defined('_MARQUEUR_URL'))
 	define('_MARQUEUR_URL', false);

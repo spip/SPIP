@@ -1,6 +1,5 @@
 <?php
 
-
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
@@ -11,9 +10,9 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 
 /*
-
 Ce jeu d'URLs est une variante de inc-urls-propres, qui ajoute
 le prefixe './?' aux adresses, ce qui permet de l'utiliser en
 mode "Query-String", sans .htaccess ;
@@ -23,9 +22,10 @@ mode "Query-String", sans .htaccess ;
 Attention : le mode 'propres_qs' est moins fonctionnel que le mode 'propres' ou
 'propres2'. Si vous pouvez utiliser le .htaccess, ces deux derniers modes sont
 preferables au mode 'propres_qs'.
-
 */
-if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
+
+define('URLS_PROPRES_QS_EXEMPLE', '?Titre-de-l-article');
+
 if (!defined('_terminaison_urls_propres'))
 	define ('_terminaison_urls_propres', '');
 
