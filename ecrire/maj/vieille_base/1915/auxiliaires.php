@@ -325,4 +325,54 @@ $tables_auxiliaires['spip_ortho_cache'] = array(
 $tables_auxiliaires['spip_ortho_dico'] = array(
 	'field' => &$spip_ortho_dico,
 	'key' => &$spip_ortho_dico_key);
+
+
+//
+// tableau des tables de jointures
+// Ex: gestion du critere {id_mot} dans la boucle(ARTICLES)
+
+global $tables_jointures;
+
+$tables_jointures['spip_articles'][]= 'mots_articles';
+$tables_jointures['spip_articles'][]= 'auteurs_articles';
+$tables_jointures['spip_articles'][]= 'documents_articles';
+$tables_jointures['spip_articles'][]= 'mots';
+$tables_jointures['spip_articles'][]= 'signatures';
+
+$tables_jointures['spip_auteurs'][]= 'auteurs_articles';
+$tables_jointures['spip_auteurs'][]= 'mots';
+
+$tables_jointures['spip_breves'][]= 'mots_breves';
+$tables_jointures['spip_breves'][]= 'documents_breves';
+$tables_jointures['spip_breves'][]= 'mots';
+
+$tables_jointures['spip_documents'][]= 'documents_articles';
+$tables_jointures['spip_documents'][]= 'documents_rubriques';
+$tables_jointures['spip_documents'][]= 'documents_breves';
+$tables_jointures['spip_documents'][]= 'mots_documents';
+$tables_jointures['spip_documents'][]= 'types_documents';
+$tables_jointures['spip_documents'][]= 'mots';
+
+$tables_jointures['spip_forum'][]= 'mots_forum';
+$tables_jointures['spip_forum'][]= 'mots';
+
+$tables_jointures['spip_rubriques'][]= 'mots_rubriques';
+$tables_jointures['spip_rubriques'][]= 'documents_rubriques';
+$tables_jointures['spip_rubriques'][]= 'mots';
+
+$tables_jointures['spip_syndic'][]= 'mots_syndic';
+$tables_jointures['spip_syndic'][]= 'mots';
+
+$tables_jointures['spip_syndic_articles'][]= 'syndic';
+$tables_jointures['spip_syndic_articles'][]= 'mots';
+
+$tables_jointures['spip_mots'][]= 'mots_articles';
+$tables_jointures['spip_mots'][]= 'mots_breves';
+$tables_jointures['spip_mots'][]= 'mots_forum';
+$tables_jointures['spip_mots'][]= 'mots_rubriques';
+$tables_jointures['spip_mots'][]= 'mots_syndic';
+$tables_jointures['spip_mots'][]= 'mots_documents';
+
+$tables_jointures['spip_groupes_mots'][]= 'mots';
+	
 ?>
