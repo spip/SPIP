@@ -21,11 +21,10 @@ function inc_editer_mots_dist($objet, $id_objet, $cherche_mot, $select_groupe, $
 
 	$visible = ($visible OR $cherche_mot OR ($flag === 'ajax'));
 
-	$trouver_table = charger_fonction('trouver_table', 'base');
 	$nom = table_objet($objet);
-	$desc = $trouver_table($nom);
-        $table = $desc['table'];
-        $table_id =  @$desc['key']["PRIMARY KEY"];
+	$table = table_objet_sql($objet);
+    $table_id = id_table_objet($objet);
+	
 
 	$cpt = sql_countsel("spip_mots AS M LEFT JOIN spip_mots_$nom AS L ON L.$table_id=$id_objet AND M.id_mot=L.id_mot");
 
