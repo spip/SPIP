@@ -129,45 +129,89 @@ function exec_admin_tech_dist()
 	// restaurer est equivalent a detruire, ou pas (cas des restaurations partielles, a affiner ?)
 	if (autoriser('detruire')) {
 	
-		$liste_dump = preg_files(_DIR_DUMP,'\.xml(\.gz)?$',50,false);
-		$selected = end($liste_dump);
-		$liste = ""; 
-		$fichier_defaut = "";
-		$i = 0;
-		foreach($liste_dump as $k=>$f){
-		  $i++;
-		  $class = 'row_'.alterner($i, 'even', 'odd');
-		  $liste .= liste_sauvegardes($k, $f, $class, $selected);
-		  $fichier_defaut = $f;
+		echo debut_cadre_trait_couleur('',true,'', _T('texte_restaurer_base'),'restaurer');
+		echo admin_sauvegardes($dir_dump, _request('tri'));
+		echo fin_cadre_trait_couleur(true);
+
+		//
+		// Lien vers la reparation
+		//
+
+		if (!_request('reinstall') AND version_compare(sql_version(),'3.23.14','>=')) {
+			$res = "\n<p style='text-align: justify;'>".
+				_T('texte_crash_base') .
+				"\n</p>";
+	
+			echo 
+				debut_cadre_trait_couleur('',true,'',_T('texte_recuperer_base'),'reparer'),
+				generer_form_ecrire('admin_repair', $res, '', _T('bouton_tenter_recuperation')),
+				fin_cadre_trait_couleur(true);
 		}
-		$fichier_defaut = basename($f);
-		$class = 'row_'.alterner($i+1, 'even', 'odd');
-		$liste = "<br /><br /><table class='spip'>"
-		.  $liste
+	}
+	echo "<br />";
+
+	echo fin_gauche(), fin_page();
+	}
+}
+
+function admin_sauvegardes($dir_dump, $tri)
+{
+	$liste_dump = preg_files(_DIR_DUMP,'\.xml(\.gz)?$',50,false);
+	$selected = end($liste_dump);
+	$n = strlen(_DIR_DUMP);
+	$tl = $tt = $td = array(); 
+	$f = "";
+	$i = 0;
+	foreach($liste_dump as $fichier){
+		$i++;
+		$d = filemtime($fichier);
+		$t = filesize($fichier);
+		$s = ($fichier==$selected);
+		$class = 'row_'.alterner($i, 'even', 'odd');
+		$fichier = substr($fichier, $n);
+		$tl[]= liste_sauvegardes($i, $fichier, $class, $s, $d, $t);
+		$td[] = $d;
+		$tt[] = $t;
+	}
+	if ($tri == 'taille')
+		array_multisort($tt, SORT_ASC, $tl);
+	elseif ($tri == 'date')
+		array_multisort($td, SORT_ASC, $tl);
+	$fichier_defaut = $f ? basename($f) : str_replace(array("@stamp@","@nom_site@"),array("",""),_SPIP_DUMP);
+
+	$self = self();
+	$class = 'row_'.alterner($i+1, 'even', 'odd');
+	$liste = "<br /><br /><table class='spip' id='sauvegardes'><tr>"
+		. '<th></th><th><a href="'
+		. parametre_url($self, 'tri', 'nom')
+		. '#sauvegardes">'
+		. _T('info_nom')
+	  	. '</a></th><th><a href="'
+		. parametre_url($self, 'tri', 'taille')
+		. '#sauvegardes">'
+		. _T('taille_octets', array('taille' => ''))
+	 	. '</th><th><a href="'
+		. parametre_url($self, 'tri', 'date')
+		. '#sauvegardes">'
+		. _T('public:date')
+		. '</a></th></tr>'
+		.  join('',$tl)
 		. "\n<tr class='$class'><td><input type='radio' name='archive' id='archive' value='' /></td><td  colspan='3'>"
 		. "\n<span class='spip_x-small'><input type='text' name='archive_perso' id='archive_perso' value='$fichier_defaut' size='55' /></span></td></tr>"
 		. '</table>';
 
-		if ($flag_gz) {
-			$fichier_defaut = str_replace(array("@stamp@","@nom_site@"),array("",""),_SPIP_DUMP) . '.gz';
-			$texte_compresse = _T('texte_compresse_ou_non')."&nbsp;";
-		} else {
-			$fichier_defaut = str_replace(array("@stamp@","@nom_site@"),array("",""),_SPIP_DUMP);
-			$texte_compresse = _T('texte_non_compresse')."&nbsp;";
-		}
+	if ($flag_gz)
+		$texte = _T('texte_compresse_ou_non')."&nbsp;";
+	else 	$texte = _T('texte_non_compresse')."&nbsp;";
 
-		echo debut_cadre_trait_couleur('',true,'',
-			_T('texte_restaurer_base'),'restaurer');
-
-		$res = "\n<p style='text-align: justify;'> " .
+	$res = "\n<p style='text-align: justify;'> " .
 		_T('texte_restaurer_sauvegarde', array('dossier' => '<i>'.$dir_dump.'</i>')) .
 		  '</p>' .
-		_T('entree_nom_fichier', array('texte_compresse' => $texte_compresse)) .
+		_T('entree_nom_fichier', array('texte_compresse' => $texte)) .
 		$liste  ;
 
-		// restauration partielle / fusion
-		$res .=
-		  debut_cadre_enfonce('',true) .
+	// restauration partielle / fusion
+	$res .= debut_cadre_enfonce('',true) .
 		"\n<div>" .
 		 "<input name='insertion' id='insertion' type='checkbox' />&nbsp; <label for='insertion'>". 
 		  _T('sauvegarde_fusionner') .
@@ -182,49 +226,23 @@ function exec_admin_tech_dist()
 		  '</div>' .
 		  fin_cadre_enfonce(true);
 
-		echo generer_form_ecrire('import_all', $res, '', _T('bouton_restaurer_base'));
-
-		echo fin_cadre_trait_couleur(true);
-
-	}
-
-	//
-	// Lien vers la reparation
-	//
-
-	if (autoriser('detruire') AND !_request('reinstall')) {
-		if (version_compare(sql_version(),'3.23.14','>=')) {
-			$res = "\n<p style='text-align: justify;'>".
-				_T('texte_crash_base') .
-				"\n</p>";
-	
-			echo 
-				debut_cadre_trait_couleur('',true,'',_T('texte_recuperer_base'),'reparer'),
-				generer_form_ecrire('admin_repair', $res, '', _T('bouton_tenter_recuperation')),
-				fin_cadre_trait_couleur(true);
-		}
-	}
-
-	echo "<br />";
-
-	echo fin_gauche(), fin_page();
-	}
+	return generer_form_ecrire('import_all', $res, '', _T('bouton_restaurer_base'));
 }
 
+
 // http://doc.spip.org/@liste_sauvegardes
-function liste_sauvegardes($key, $fichier, $class, $selected)
+function liste_sauvegardes($key, $fichier, $class, $selected, $date, $taille)
 {
-	$affiche_fichier = substr($fichier,strlen(_DIR_DUMP));
 	return "\n<tr class='$class'><td><input type='radio' name='archive' value='"
-		. $affiche_fichier
+		. $fichier
 		. "' id='dump_$key' "
-		.  (($fichier==$selected)?"checked='checked' ":"")
+		. ($selected?"checked='checked' ":"")
 		. "/></td><td>\n<label for='dump_$key'>"
-		.   $file = str_replace('/', ' / ', $affiche_fichier)
+		. str_replace('/', ' / ', $fichier)
 		. "</label></td><td style='text-align: right'>"
-		. taille_en_octets(filesize($fichier))
+		. taille_en_octets($taille)
 		. '</td><td>'
-		. affdate_heure(date('Y-m-d H:i:s',filemtime($fichier)))
+		. affdate_heure(date('Y-m-d H:i:s',$date))
 		. '</td></tr>';
 }
 
