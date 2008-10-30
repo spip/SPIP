@@ -859,7 +859,7 @@ function image_alpha($im, $alpha = 63)
 			for ($y = 0; $y < $y_i; $y++) {
 				$rgb = ImageColorAt($im2, $x, $y);
 				
-				if (function_exists(imagecolorallocatealpha)) {
+				if (function_exists('imagecolorallocatealpha')) {
 					$a = ($rgb >> 24) & 0xFF;
 					$r = ($rgb >> 16) & 0xFF;
 					$g = ($rgb >> 8) & 0xFF;
