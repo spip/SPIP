@@ -90,8 +90,10 @@ function inc_forum_insert_dist($force_statut = NULL) {
 	$reqret = rawurldecode(_request('retour_forum'));
 	$retour = ($reqret !== '!') ? $reqret : forum_insert_nopost($id_forum, $id_article, $id_breve, $id_syndic, $id_rubrique);
 
-	$statut = forum_insert_statut($statut, $id_article, $retour, $forcer_statut);
-	$c = array();
+	$c = array('statut'=>'off');
+	foreach(array('id_article','id_breve','id_rubrique','id_syndic') as $k)
+		if ($$k)
+			$c[$k] = $$k;
 	foreach (array(
 		'titre', 'texte', 'nom_site', 'url_site'
 	) as $champ)
@@ -101,8 +103,17 @@ function inc_forum_insert_dist($force_statut = NULL) {
 		$GLOBALS['visiteur_session']['session_nom']);
 	$c['email_auteur'] = sinon($GLOBALS['visiteur_session']['email'],
 		$GLOBALS['visiteur_session']['session_email']);
+		
+	$c = pipeline('pre_edition',array(
+		'args'=>array(
+				'table' => 'spip_forum',
+				'id_objet' => $id_forum,
+				'action'=>'instituer'
+		),
+		'data'=>forum_insert_statut($c, $retour, $force_statut)
+	));
 
-	$id_message = forum_insert_base($c, $id_forum, $id_article, $id_breve, $id_syndic, $id_rubrique, $statut, $retour);
+	$id_message = forum_insert_base($c, $id_forum, $id_article, $id_breve, $id_syndic, $id_rubrique, $c['statut'], $retour);
 
 	if (!$id_message) return array($retour,0); // echec
 
@@ -128,11 +139,9 @@ function forum_insert_base($c, $id_forum, $id_article, $id_breve, $id_syndic, $i
 	$afficher_texte = (_request('afficher_texte') <> 'non');
 	$ajouter_mot = _request('ajouter_mot');
 
-	// Antispam : si 'nobot' a ete renseigne, ca ne peut etre qu'un bot
-	if (strlen(_request('nobot'))) {
-		tracer_erreur_forum('champ interdit (nobot) rempli');
+	// si le statut est vide, c'est qu'on ne veut pas de ce presume spam !
+	if (!$statut)
 		return false;
-	}
 
 	//  Si forum avec previsu sans bon hash de securite, echec silencieux
 	if ($afficher_texte AND forum_insert_noprevisu()) {
@@ -239,19 +248,27 @@ function forum_insert_noprevisu()
 }
 
 // http://doc.spip.org/@forum_insert_statut
-function forum_insert_statut($statut, $id_article, $retour, $forcer_statut=NULL)
+function forum_insert_statut($champs, $retour, $forcer_statut=NULL)
 {
-	$statut = controler_forum($id_article);
+	$statut = controler_forum($champs['id_article']);
 
 	// Ne pas autoriser d'envoi hacke si forum sur abonnement
 	if ($statut == 'abo') {
 		controler_forum_abo($retour); // demandera une auth http
 	}
+	
+	if ($forcer_statut !== NULL)
+		$champs['statut'] = $forcer_statut;
+	else
+		$champs['statut'] = ($statut == 'non') ? 'off' : (($statut == 'pri') ? 'prop' :	'publie');
+		
+	// Antispam basique : si 'nobot' a ete renseigne, ca ne peut etre qu'un bot
+	if (strlen(_request('nobot'))) {
+		tracer_erreur_forum('champ interdit (nobot) rempli');
+		$champs['statut']=false;
+	}
 
-	if ($force_statut !== NULL) return $force_statut;
-
-	return ($statut == 'non') ? 'off' : (($statut == 'pri') ? 'prop' :
-						'publie');
+	return $champs;
 }
 
 ?>
