@@ -17,7 +17,6 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_admin_tech_dist
 function exec_admin_tech_dist()
 {
-	global $flag_gz, $spip_lang_right;
 	if (!autoriser('sauvegarder')){
 		include_spip('inc/minipres');
 		echo minipres();
@@ -90,8 +89,6 @@ function exec_admin_tech_dist()
 	$nom = "\n<input name='nom_sauvegarde' id='nom_sauvegarde' size='40' value='$file' />";
 	$znom = "\n<input name='znom_sauvegarde' id='znom_sauvegarde' size='40' value='$file' />";
 	
-	if ($flag_gz) {
-	
 	$res .= 
 	  _T('texte_admin_tech_03') .
 	  "\n<ul>" .
@@ -105,18 +102,8 @@ function exec_admin_tech_dist()
 	  _T('bouton_radio_sauvegarde_non_compressee',  array('fichier'=>'')) .
 	  '</label><br /><b>' .
 	  $dir_dump .
-	  "</b>$nom<b>.xml</b></li></ul>\n";
-	}
-	else {
-	  $res .= "\n<p><label for='gz'>" .
-	    _T('texte_sauvegarde_compressee' .
-	       array('fichier'=>'<br /><b>' . $dir_dump . "</b>$nom<b>.xml</b>")) .
-	       "</label>" .
-	    "\n<input type='hidden' name='gz' id='gz' value='0' /></p>";
-	}
-
-
-	$res .= "\n<input type='hidden' name='reinstall' value='non' />";
+	  "</b>$nom<b>.xml</b></li></ul>\n"
+	  . "\n<input type='hidden' name='reinstall' value='non' />";
  
 	echo 
  		generer_form_ecrire('export_all', $res, '', _T('texte_sauvegarde_base')),
@@ -181,7 +168,8 @@ function admin_sauvegardes($dir_dump, $tri)
 
 	$self = self();
 	$class = 'row_'.alterner($i+1, 'even', 'odd');
-	$liste = "<br /><br /><table class='spip' id='sauvegardes'><tr>"
+	$head = !$tl ? '' : (
+		"<tr>"
 		. '<th></th><th><a href="'
 		. parametre_url($self, 'tri', 'nom')
 		. '#sauvegardes">'
@@ -194,21 +182,24 @@ function admin_sauvegardes($dir_dump, $tri)
 		. parametre_url($self, 'tri', 'date')
 		. '#sauvegardes">'
 		. _T('public:date')
-		. '</a></th></tr>'
+		. '</a></th></tr>');
+	  
+	$texte = _T('texte_compresse_ou_non')."&nbsp;";
+
+	$h = _T('texte_restaurer_sauvegarde', array('dossier' => '<i>'.$dir_dump.'</i>'));
+
+	$res = "\n<p style='text-align: justify;'> "
+		. $h
+		.  '</p>'
+		. _T('entree_nom_fichier', array('texte_compresse' => $texte))
+
+		. "<br /><br /><table class='spip' id='sauvegardes'>"
+		. $head
 		.  join('',$tl)
 		. "\n<tr class='$class'><td><input type='radio' name='archive' id='archive' value='' /></td><td  colspan='3'>"
 		. "\n<span class='spip_x-small'><input type='text' name='archive_perso' id='archive_perso' value='$fichier_defaut' size='55' /></span></td></tr>"
 		. '</table>';
 
-	if ($flag_gz)
-		$texte = _T('texte_compresse_ou_non')."&nbsp;";
-	else 	$texte = _T('texte_non_compresse')."&nbsp;";
-
-	$res = "\n<p style='text-align: justify;'> " .
-		_T('texte_restaurer_sauvegarde', array('dossier' => '<i>'.$dir_dump.'</i>')) .
-		  '</p>' .
-		_T('entree_nom_fichier', array('texte_compresse' => $texte)) .
-		$liste  ;
 
 	// restauration partielle / fusion
 	$res .= debut_cadre_enfonce('',true) .
