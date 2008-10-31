@@ -15,7 +15,7 @@ include_spip('inc/actions');
 include_spip('inc/mots');
 
 // http://doc.spip.org/@inc_editer_mots_dist
-function inc_editer_mots_dist($objet, $id_objet, $cherche_mot, $select_groupe, $flag, $visible = false) {
+function inc_editer_mots_dist($objet, $id_objet, $cherche_mot, $select_groupe, $flag, $visible = false, $url_base='') {
 
 	if ($GLOBALS['meta']["articles_mots"] == 'non')	return '';
 
@@ -25,23 +25,8 @@ function inc_editer_mots_dist($objet, $id_objet, $cherche_mot, $select_groupe, $
 	$nom = table_objet($objet);
 	$desc = $trouver_table($nom);
 	$table = $desc['table']; 
-    $table_id =  @$desc['key']["PRIMARY KEY"];
+	$table_id =  @$desc['key']["PRIMARY KEY"];
 	
-	if ($objet == 'article') {
-		$url_base = "articles";
-	}
-	else if ($objet == 'breve') {
-		$url_base = "breves_voir";
-	}
-	else if ($objet == 'rubrique') {
-		$url_base = "naviguer";
-	}
-	else {
-		if ($objet != 'syndic') 
-			spip_log("erreur dans formulaire_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag)");
-		// continuer avec des valeurs par defaut pour le validateur
-		$url_base = "sites";
-	}
 
 	$cpt = sql_countsel("spip_mots AS M LEFT JOIN spip_mots_$nom AS L ON L.$table_id=$id_objet AND M.id_mot=L.id_mot");
 
@@ -108,17 +93,18 @@ function inserer_mot($table, $table_id, $id_objet, $id_mot)
 // http://doc.spip.org/@recherche_mot_cle
 function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table, $table_id, $url_base)
 {
-	if ($table == 'articles') $ou = _T('info_l_article');
-	else if ($table == 'breves') $ou = _T('info_la_breve');
-	else if ($table == 'rubriques') $ou = _T('info_la_rubrique');
+	$ou = _T('info_mot_cle_ajoute') . ' ';
+	if ($table == 'articles') $ou .= _T('info_l_article');
+	else if ($table == 'breves') $ou .= _T('info_la_breve');
+	else if ($table == 'rubriques') $ou .= _T('info_la_rubrique');
 
 	$result = sql_select("id_mot, titre", "spip_mots", "id_groupe=" . sql_quote($id_groupe));
 
 	$table_mots = array();
 	$table_ids = array();
 	while ($row = sql_fetch($result)) {
-			$table_ids[] = $row['id_mot'];
-			$table_mots[] = $row['titre'];
+		$table_ids[] = $row['id_mot'];
+		$table_mots[] = $row['titre'];
 	}
 
 	$nouveaux_mots = array();
@@ -132,11 +118,14 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 			$res .= "<b>"._T('info_non_resultat', array('cherche_mot' => htmlspecialchars($cherche_mot)))."</b><br />";
 		}
 		else if (count($resultat) == 1) {
-			$nouveaux_mots[] = $resultat[0];
-			$row = sql_fetsel("titre", "spip_mots", "id_mot=$resultat[0]");
-			$res .= "<b>"._T('info_mot_cle_ajoute')." $ou : </b><br />\n<ul>";
-			$res .= "\n<li><span class='verdana1 spip_small'><b><span class='spip_medium'>".typo($row['titre'])."</span></b></span></li>";
-			$res .= "\n</ul>";
+			$n = $resultat[0];
+			$nouveaux_mots[] = $n;
+			$t = sql_getfetsel("titre", "spip_mots", "id_mot=$n");
+			$res .= "<b>"
+			. $ou
+			. ": </b><br />\n<ul><li><span class='verdana1 spip_small'><b><span class='spip_medium'>"
+			. typo($t)
+			. "</span></b></span></li></ul>";
 		}
 		else $res .= affiche_mots_ressemblant($cherche_mot, $objet, $id_objet, $resultat, $table, $table_id, $url_base);
 
