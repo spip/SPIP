@@ -1,12 +1,12 @@
 /*  ------------------------------------------
 /*  Habillage des formulaires
 /*  ------------------------------------------ */
-input, textarea, select { font-size: 100%; font-family: inherit; }
+input, select, textarea { font-size: 100%; font-family: inherit; }
 
 
 /* Structure generale des formulaires
 ----------------------------------------------- */
-.formulaire_spip { clear: both; margin-bottom: 2em; padding: 1em; border: 0; text-align: left; font-size: 1em; }
+.formulaire_spip { clear: both; margin-bottom: 2em; padding: 0; border: 0; text-align: left; font-size: 1em; }
 .formulaire_spip form { margin: 0; padding: 0; } /* Bug IE/Win */
 
 /* Fieldset */
@@ -28,8 +28,8 @@ input, textarea, select { font-size: 100%; font-family: inherit; }
 .formulaire_spip li p { margin-top: 0; margin-bottom: 0; }
 
 /* Champs de saisie */
-.formulaire_spip input.text { width: 15em; }
-.formulaire_spip textarea { width: 99%; }
+.formulaire_spip input.text { width: 15em; border: 1px inset; }
+.formulaire_spip textarea { width: 99%; border: 1px inset; }
 .formulaire_spip select { width: 99%; }
 
 /* Boutons */
