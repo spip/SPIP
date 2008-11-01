@@ -46,18 +46,19 @@
 [(#ENV**{afficher_texte}|choixsiegal{'non', '',' '})
 
 	<fieldset>
-	<legend><:form_pet_message_commentaire:></legend><ul>
+	<legend><:form_pet_message_commentaire:></legend>[
+	(#CONFIG{forums_titre}|!={non}|non)
+		<input type="hidden" name="titre" id="titre"[ value="(#ENV{titre})"] />
+	]<ul>
 	[<li class='saisie_mots_forum'>(#INCLURE{fond=formulaires/inc-forum_bloc_choix_mots}{table=#ENV*{table}}{ajouter_mot})</li>]
 
-[(#CONFIG{forums_titre}|!={non}|?{
+[(#CONFIG{forums_titre}|!={non}|oui)
 	<li class='saisie_titre[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]'>
 		<label for="titre"><:forum_titre:></label>
 		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>]
 		<input type="text" class="text" name="titre" id="titre"[ value="(#ENV{titre})"] size="60" />
 	</li>
-,
-	<input type="hidden" name="titre" id="titre"[ value="(#ENV{titre})"] />
-})]
+]
 
 [(#CONFIG{forums_texte}|!={non}|?{
 	<li class='saisie_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]'>
