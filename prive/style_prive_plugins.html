@@ -26,7 +26,7 @@ h2.titrem { display: block; padding-top: 6px; padding-bottom: 4px; background-re
 
 /* listes */
 .liste_items {list-style:none;margin:1em 0;padding:0;border-top:1px solid #ddd;clear:both;}
-.liste_items li.item {border-bottom:1px solid #ddd;padding:0.4em 0; font-size: 10px;overflow:hidden;clear:both;}
+.liste_items li.item {border-bottom:1px solid #ddd;padding:0.4em 0; font-size: 11px;overflow:hidden;clear:both;}
 .liste_items li.item:hover {background-color:[#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];}
 .liste_items li.court:hover {background-color:#eee;}
 .liste_items li.item.on {background-color:[#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];font-weight:normal;}
@@ -39,5 +39,14 @@ h2.titrem { display: block; padding-top: 6px; padding-bottom: 4px; background-re
 #navigation .pagination,#extra .pagination {font-size:9px;}
 
 .clicable {cursor:hand;cursor:pointer;}
+
+/* menus */
+/* listes */
+ul.menu {list-style:none;margin:1em 0;padding:0;border-top:1px solid #ddd;clear:both;}
+ul.menu li {border-bottom:1px solid #ddd;pdding:0; font-size: 10px;overflow:hidden;clear:both;}
+ul.menu li ul {margin:0;padding:0;margin-#GET{left}:11px;}
+ul.menu li a,ul.menu li strong.on {display:block;padding:0.4em 0;}
+ul.menu li a:hover {background-color:[#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];}
+ul.menu li .on {background-color:[#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];}
 
 [(#INCLURE{fond=#VAL{prive/}|tous_les_fonds{/style_prive_plugin_}}{couleur_claire}{couleur_foncee}{lang}{ltr})]
