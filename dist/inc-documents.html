@@ -1,80 +1,56 @@
-
-	[(#REM) Portfolio : album d'images ]
-	<B_documents_portfolio>
-		<div id="documents_portfolio">
-		<h2><:info_portfolio:></h2>
-	<BOUCLE_documents_portfolio(DOCUMENTS) {id_article}
-	{mode=document}
-	{extension IN png,jpg,gif}
-	{par num titre, date}
-	{doublons}
-	{vu=non}>[
-		<a href="(#URL_DOCUMENT)" type="#MIME_TYPE"
-		onclick="location.href='[(#URL_ARTICLE
-			|parametre_url{id_document,#ID_DOCUMENT}
-			)]#documents_portfolio';return false;"[
-		class="(#EXPOSER)"][
-		title="(#TITRE|couper{80}|texte_backend)"]>[(#FICHIER
-			|image_reduire{0,60}
-			|inserer_attribut{class,spip_logos}
-			|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})]</a>
+[(#REM) Portfolio : album d'images ]
+<B_documents_portfolio>
+<div id="documents_portfolio">
+	<h2><:info_portfolio:></h2>
+	<BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {mode=document}{extension IN png,jpg,gif} {par num titre, date}{doublons}{vu=non}>[
+	<a href="(#URL_DOCUMENT)" type="#MIME_TYPE" onclick="location.href='[(#URL_ARTICLE
+		|parametre_url{id_document,#ID_DOCUMENT}
+		)]#documents_portfolio';return false;"[ class="(#EXPOSER)"][ title="(#TITRE|couper{80}|texte_backend)"]>[(#FICHIER
+		|image_reduire{0,100}
+		|inserer_attribut{class,spip_logos}
+		|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})]</a>
 	]</BOUCLE_documents_portfolio>
-		</div>
-	</B_documents_portfolio>
+</div>
+</B_documents_portfolio>
 
-	[(#REM)
-		Afficher en grand le document demande dans l'URL
-	]
-	<BOUCLE_afficher_document(DOCUMENTS)
-	{id_document}
-	{id_article}
-	{mode=document}
-	{extension IN png,jpg,gif}>
-	<div class="spip_documents spip_documents_center" id="document_actif">
-		[(#EMBED_DOCUMENT|image_reduire{500,0})]
-		[<div class="#EDIT{titre} spip_doc_titre">(#TITRE)</div>]
-		[<div class="#EDIT{descriptif} spip_doc_descriptif">(#DESCRIPTIF)</div>]
-		</div>
-	</BOUCLE_afficher_document>
+[(#REM)
+	Afficher en grand le document demande dans l'URL
+]
+<BOUCLE_afficher_document(DOCUMENTS) {id_document}{id_article} {mode=document}{extension IN png,jpg,gif}>
+<div class="spip_documents spip_documents_center" id="document_actif">
+	[(#EMBED_DOCUMENT|image_reduire{500,0})]
+	[<div class="#EDIT{titre} spip_doc_titre">(#TITRE)</div>]
+	[<div class="#EDIT{descriptif} spip_doc_descriptif">(#DESCRIPTIF)</div>]
+</div>
+</BOUCLE_afficher_document>
 
 
-	[(#REM)
-		Si un seul document est joint a l'article, et si le texte est vide,
-		on incruste automatiquement ce document
-	]
-	<BOUCLE_documents_decompte(DOCUMENTS spip_documents_liens articles)
-	{id_article}
-	{mode=document}
-	{texte=''}
-	{extension !IN gif,jpg,png}
-	{vu=non}
-	>[(#TOTAL_BOUCLE|=={1}
-		|?{[(#INCLURE{fond=modeles/emb}{id_document}
-		|trim)]})]</BOUCLE_documents_decompte>
+[(#REM)
+	Si un seul document est joint a l'article, et si le texte est vide,
+	on incruste automatiquement ce document
+]
+<BOUCLE_documents_decompte(DOCUMENTS spip_documents_liens articles) {id_article} {mode=document}{texte=''}{extension !IN gif,jpg,png} {vu=non}>
+[(#TOTAL_BOUCLE|=={1}
+	|?{[(#INCLURE{fond=modeles/emb}{id_document}
+	|trim)]})]</BOUCLE_documents_decompte>
 
 
-	[(#REM)
-		Sinon, liste des autres documents joints
-	]
-	<B_documents_joints>
-		<div class="menu" id="documents_joints">
-		<h2><:titre_documents_joints:></h2>
-		<ul>
-	<BOUCLE_documents_joints(DOCUMENTS)
-	{id_article}
-	{extension !IN gif,jpg,png}
-	{vu=non}
-	{par num titre, date}>[
+[(#REM)
+	Sinon, liste des autres documents joints
+]
+<B_documents_joints>
+	<div class="menu" id="documents_joints">
+	<h2><:titre_documents_joints:></h2>
+	<ul>
+		<BOUCLE_documents_joints(DOCUMENTS) {id_article} {extension !IN gif,jpg,png} {vu=non}{par num titre, date}>[
 		<li>
-		<strong><a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>"
-			type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a></strong>
-		<small>(<span>#TYPE_DOCUMENT[ &ndash;
-			(#TAILLE|taille_en_octets)]</span>)</small>
-		#DESCRIPTIF
+			<strong><a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a></strong>
+			<small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>
+			#DESCRIPTIF
 		]</li>
-	</BOUCLE_documents_joints>
-		</ul>
-		</div>
-	</B_documents_joints>
+		</BOUCLE_documents_joints>
+	</ul>
+	</div>
+</B_documents_joints>
 
-	<//B_documents_decompte>
+<//B_documents_decompte>
