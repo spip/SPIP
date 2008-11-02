@@ -20,7 +20,7 @@
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
+if(!defined("_PLUGINS_POUR_CETTE_VERSION")) define ("_PLUGINS_POUR_CETTE_VERSION", "http://plugins.spip.net/rss-+-selection-2-+");
 
 include_spip('inc/plugin');
 
@@ -475,6 +475,13 @@ function liste_plugins_distants($desc = false) {
 	);*/
 
 	if (is_array($flux = @unserialize($GLOBALS['meta']['syndic_plug']))) {
+	
+		if (!$flux[_PLUGINS_POUR_CETTE_VERSION]) {
+			$flux[_PLUGINS_POUR_CETTE_VERSION] = 26;
+			essaie_ajouter_liste_plugins(_PLUGINS_POUR_CETTE_VERSION);
+		}
+
+
 		foreach ($flux as $url => $c) {
 			if (file_exists($cache=_DIR_TMP.'syndic_plug_'.md5($url).'.xml')
 			AND lire_fichier($cache, $rss))
