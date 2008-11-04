@@ -28,26 +28,11 @@ function exec_controle_petition_dist()
 // http://doc.spip.org/@exec_controle_petition_args
 function exec_controle_petition_args($id_article, $type, $date, $debut, $id_signature, $pas=0)
 {
-	if (!preg_match('/^\w+$/',$type)) $type = 'public';
-	$statut='new';
-	$where = '';
 	if ($id_signature) {
 		$id_article = sql_getfetsel("id_article", "spip_signatures", "id_signature=$id_signature");
-		if ($id_article)
-			$where = '(id_signature=' . sql_quote($id_signature) . ') AND ';
-	}
-	if ($id_article) {
-		$row = sql_fetsel("titre,statut", "spip_articles", "id_article=$id_article");
-		if (!$row) {
-			$id_article = 0;
-			$titre = '';
-		} else {
-			$titre = $row['titre'];
-			$statut = $row['statut'];	
-		}
-	} else 	$titre = '    '; // ok.
-
-	if (!$titre) {
+		$where = '(id_signature=' . sql_quote($id_signature) . ') AND ';
+	} else 	$where = '';
+	if ($id_article AND !($titre = sql_getfetsel("titre", "spip_articles", "id_article=$id_article"))) {
 		include_spip('inc/minipres');
                 echo minipres(_T('public:aucun_article'));
 	} elseif (!(
@@ -60,12 +45,6 @@ function exec_controle_petition_args($id_article, $type, $date, $debut, $id_sign
 		include_spip('inc/minipres'); 
 		echo minipres();}
 	else {
-		$where .= "(statut='publie' OR statut='poubelle')";
-		if ($type == 'interne')   $where = "NOT($where)";
-		if ($id_article) $where .= " AND id_article=$id_article";
-		$order = "date_time DESC";
-		if (!$pas) $pas = 15;
-		$signatures = charger_fonction('signatures', 'inc');
 		if ($date) {
 			include_spip('inc/forum');
 			$query = array('SELECT' => 'UNIX_TIMESTAMP(date_time) AS d',
@@ -74,20 +53,32 @@ function exec_controle_petition_args($id_article, $type, $date, $debut, $id_sign
 					'ORDER BY' => $order);
 			$debut = navigation_trouve_date($date, 'd', $pas, $query);
 		}
-
-		$r = $signatures('controle_petition', $id_article, $debut, $pas, $where, $order, $type);
-
+		if (!preg_match('/^\w+$/',$type)) $type = 'public';
+		if ($id_article) $where .= "id_article=$id_article AND ";
+		$res = controle_petition_args($id_article, $type, $debut, $titre, $where, $pas);
 		if (_AJAX) {
-			ajax_retour($r);
+			ajax_retour($res);
 		} else {
-			$ong = controle_petition_onglet($id_article, $debut, $type);
-			controle_petition_page($id_article, $titre, $ong, $statut, $r);
+		  $ong = controle_petition_onglet($id_article, $debut, $type);
+		  controle_petition_page($id_article, $titre, $ong, $res);
 		}
 	}
 }
 
+function controle_petition_args($id_article, $type, $debut, $titre, $where, $pas=0)
+{
+	$extrait = "(statut='publie' OR statut='poubelle')";
+	if ($type == 'interne') $extrait = "NOT($extrait)";
+	$where .= $extrait;
+	$order = "date_time DESC";
+	if (!$pas) $pas = 15;
+	$signatures = charger_fonction('signatures', 'inc');
+
+	return $signatures('controle_petition', $id_article, $debut, $pas, $where, $order, $type);
+}
+
 // http://doc.spip.org/@controle_petition_page
-function controle_petition_page($id_article, $titre,  $ong, $statut, $corps)
+function controle_petition_page($id_article, $titre,  $ong, $corps)
 {
 	if ($id_article) {
 		$a =  generer_url_ecrire("statistiques_visites","id_article=$id_article");
@@ -131,9 +122,9 @@ function controle_petition_page($id_article, $titre,  $ong, $statut, $corps)
 }
 
 // http://doc.spip.org/@controle_petition_onglet
-function controle_petition_onglet($id_article, $debut, $type)
+function controle_petition_onglet($id_article, $debut, $type, $arg='')
 {
-	$arg = ($id_article ? "id_article=$id_article&" :'');
+	$arg .= ($id_article ? "id_article=$id_article&" :'');
 	$arg2 = ($debut ? "debut=$debut&" : '');
 	if ($type=='public') {
 	  $argp = $arg2;
