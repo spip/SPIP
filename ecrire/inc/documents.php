@@ -82,13 +82,14 @@ function generer_url_document_dist($id_document, $args='', $ancre='') {
 
 	include_spip('inc/securiser_action');
 
+	// cette action doit etre publique !
 	return generer_url_action('acceder_document', 
 		$args . ($args ? "&" : '')
 			. 'arg='.$id_document
 			. ($ancre ? "&ancre=$ancre" : '')
 			. '&cle=' . calculer_cle_action($id_document.','.$f)
 			. '&file=' . rawurlencode($f)
-				  );
+			,false,true);
 }
 
 //
