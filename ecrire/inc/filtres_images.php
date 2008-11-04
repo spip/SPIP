@@ -58,8 +58,6 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 	if (strlen($img)==0) return false;
 	
 	$source = trim(extraire_attribut($img, 'src'));
-	if (($p=strpos($source,'?'))!==FALSE)
-		$source=substr($source,0,$p);
 	if (strlen($source) < 1){
 		$source = $img;
 		$img = "<img src='$source' />";
@@ -70,7 +68,11 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 		include_spip('inc/distant');
 		$fichier = _DIR_RACINE . copie_locale($source);
 		if (!$fichier) return "";
-	} else 	$fichier = $source;
+	}	else {
+		// enlever le timestamp eventuel
+		$source=preg_replace(',[?][0-9]+$,','',$source);
+		$fichier = $source;
+	}
 
 	$terminaison_dest = "";
 	if (preg_match(",^(?>.*)(?<=\.(gif|jpg|png)),", $fichier, $regs)) {
