@@ -5,10 +5,10 @@
 	<BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {mode=document}{extension IN png,jpg,gif} {par num titre, date}{doublons}{vu=non}>[
 	<a href="(#URL_DOCUMENT)" type="#MIME_TYPE" onclick="location.href='[(#URL_ARTICLE
 		|parametre_url{id_document,#ID_DOCUMENT}
-		)]#documents_portfolio';return false;"[ class="(#EXPOSER)"][ title="(#TITRE|couper{80}|texte_backend)"]>[(#FICHIER
+		)]#documents_portfolio';return false;"[ class="(#EXPOSER)"][ title="(#TITRE|attribut_html|couper{80})"]>[(#FICHIER
 		|image_reduire{0,100}
 		|inserer_attribut{class,spip_logos}
-		|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})]</a>
+		|inserer_attribut{alt,[(#TITRE|attribut_html|couper{80})]})]</a>
 	]</BOUCLE_documents_portfolio>
 </div>
 </B_documents_portfolio>
