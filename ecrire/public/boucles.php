@@ -144,7 +144,9 @@ function boucle_SIGNATURES_dist($id_boucle, &$boucles) {
 	$mstatut = $id_table .'.statut';
 
 	// Restreindre aux elements publies
-	if (!$boucle->modificateur['criteres']['statut']) {
+	if (!isset($boucle->modificateur['criteres']['statut'])
+	AND !isset($boucle->modificateur['tout'])) {
+
 		array_unshift($boucle->where,array("'='", "'$mstatut'", "'\\'publie\\''"));
 	}
 	return calculer_boucle($id_boucle, $boucles); 
