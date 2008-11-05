@@ -2,7 +2,7 @@
 	Un cache plus court, pour la boucle syndic_articles
 ]#CACHE{3600}
 <BOUCLE_rubrique_principal(RUBRIQUES) {id_rubrique}>
-<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
 <title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
@@ -10,9 +10,7 @@
 <INCLURE{fond=inc-head}>
 [(#REM) Lien vers le flux RSS de la rubrique ]
 <link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
-<link rel="alternate" type="application/rss+xml" 
-	title="<:titre_page_mots_tous:>" 
-href="[(#URL_PAGE{backend})]<BOUCLE_URLMOT(MOTS){id_rubrique}>&amp;id_mot[]=#ID_MOT</BOUCLE_URLMOT>" />
+<link rel="alternate" type="application/rss+xml" title="<:titre_page_mots_tous:>" href="[(#URL_PAGE{backend})]<BOUCLE_URLMOT(MOTS){id_rubrique}>&amp;id_mot[]=#ID_MOT</BOUCLE_URLMOT>" />
 </head>
 
 <body class="page_rubrique">

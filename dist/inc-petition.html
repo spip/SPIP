@@ -21,7 +21,7 @@
 		<BOUCLE_signatures(SIGNATURES) {id_article} {pagination #ENV{pagination, 15} } {recherche ?#ENV{recherche_signatures}} {!par #ENV{tri}}{par #ENV{tri_inverse}} {!par #ENV{tri,#ENV{tri_inverse}}|?{'',date_time}}>
 		<tr id='id_signature#ID_SIGNATURE'>
 			<td class="signature-date">[(#DATE|affdate_jourcourt)]</td>
-			<td class="signature-nom"><strong class="#EDIT{qui}">#NOM</strong>[ <small class="#EDIT{hyperlien}"><a href="(#URL_SITE)"[ title="(#NOM_SITE)"] class="spip_out"><:site_web:></a></small>]</td>
+			<td class="signature-nom"><strong class="#EDIT{qui}">#NOM</strong>[ <small class="#EDIT{hyperlien}"><a href="(#URL_SITE)"[ title="(#NOM_SITE|attribut_html|couper{80})"] class="spip_out"><:site_web:></a></small>]</td>
 			[(#REM) Afficher la colonne des messages si autorises ]
 			<BOUCLE_signature-message-td(PETITIONS){id_article}{message=oui}> </BOUCLE_signature-message-td>
 			<td class="signature-message #EDIT{message}">[(#MESSAGE|PtoBR)]</td>
