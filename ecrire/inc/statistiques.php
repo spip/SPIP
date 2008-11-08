@@ -138,13 +138,13 @@ function maxgraph($max) {
 }
 
 // http://doc.spip.org/@cadre_stat
-function cadre_stat($stats, $table)
+function cadre_stat($stats, $table, $id_article)
 {
 	if (!$stats) return '';
 	return debut_cadre_relief("statistiques-24.gif", true)
-	.  join('', $stats)
+	. join('', $stats)
 	. fin_cadre_relief(true)
-	. statistiques_mode($table);
+	. statistiques_mode($table, $id_article);
 }
 
 // http://doc.spip.org/@statistiques_collecte_date
@@ -467,7 +467,7 @@ function statistiques_nom_des_mois($date_debut, $date_today, $largeur, $pas, $ag
 }
 
 // http://doc.spip.org/@statistiques_par_mois
-function statistiques_par_mois($entrees, $script, $table=''){
+function statistiques_par_mois($entrees, $script){
 
 	$maxgraph = maxgraph(max($entrees));
 	$rapport = 200/$maxgraph;
@@ -545,9 +545,7 @@ function statistiques_par_mois($entrees, $script, $table=''){
 	. "\n<td>" . http_img_rien(5, 1) ."</td>"
 	. "\n<td valign='top'>"
 	. statistiques_echelle($maxgraph)
-	. "</td></tr></table>"
-	. (!$table ? '' : statistiques_mode($table))
-;
+	. "</td></tr></table>";
  }
 
 // http://doc.spip.org/@statistiques_echelle
@@ -575,14 +573,14 @@ function statistiques_signatures_dist($duree, $interval, $type, $id_article, $se
 
 	$order = 'date_time';
 	if ($duree)
-		$where .= "$order > DATE_SUB(NOW(),INTERVAL $duree $type)";
+		$where .= " AND $order > DATE_SUB(NOW(),INTERVAL $duree $type)";
 
 	$log = statistiques_collecte_date('COUNT(*)', "(FLOOR(UNIX_TIMESTAMP($order) / $interval) *  $interval)", 'spip_signatures', $where, $serveur);
 
 	$script = generer_url_ecrire('controle_petition', "id_article=$id_article");
 	if (count($log) > 1) {
 		$res = statistiques_tous($log, $id_article, "spip_signatures", "id_article=$id_article", "date_time", $serveur, $duree, $interval, $total, 0, '', array(), $script);
-		$res = gros_titre(_T('titre_page_statistiques_signatures_jour'),'', false) . cadre_stat($res, 'spip_signatures');
+		$res = gros_titre(_T('titre_page_statistiques_signatures_jour'),'', false) . cadre_stat($res, 'spip_signatures', $id_article);
 	} else $res = '';
 
 	$mois = statistiques_collecte_date( "COUNT(*)",
@@ -597,7 +595,9 @@ function statistiques_signatures_dist($duree, $interval, $type, $id_article, $se
 	. (!$mois ? '' : (
 	  "<br />"
 	. gros_titre(_T('titre_page_statistiques_signatures_mois'),'', false)
-	. statistiques_par_mois($mois, $script, $res ? '' : "spip_signatures")));
+	. statistiques_par_mois($mois, $script)))
+	. ($res ? '' : statistiques_mode("spip_signatures", $id_article))
+;
 }
 
 // http://doc.spip.org/@statistiques_forums_dist
@@ -628,20 +628,25 @@ function statistiques_forums_dist($duree, $interval, $type, $id_article, $serveu
 
 	return "<br />"
 	. gros_titre(_T('titre_page_statistiques_messages_forum'),'', false)
-	  . cadre_stat($jour, 'spip_forum');
+	  . cadre_stat($jour, 'spip_forum', $id_article);
 }
 
 // Le bouton pour CSV
 
 // http://doc.spip.org/@statistiques_mode
-function statistiques_mode($table)
+function statistiques_mode($table, $id=0)
 {
-	$csv = parametre_url(parametre_url(self(), 'table', $table), 'format', 'csv');
-
-	return "\n<div style='text-align:".$GLOBALS['spip_lang_left'] . ";' class='verdana1 spip_x-small'>"
-		. "<a href='"
-		. $csv
-	  	. "'>CSV</a>"
-		. "</div>\n";
+	global $spip_lang_left;
+	$t = str_replace('spip_', '', $table);
+	$fond = (strstr($t, 'visites') ? 'statistiques' : $t);
+	$args = array();
+	if ($id) {
+		$fond .= "_article"; 
+		$args['id_article'] = $id;
+	}
+	include_spip('inc/acces');
+	$args = param_low_sec($fond, $args, '', 'transmettre');
+	$url = generer_url_public('transmettre', $args);
+	return "<a style='float: $spip_lang_left;' href='$url'>CSV</a>";
 }
 ?>
