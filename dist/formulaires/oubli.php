@@ -21,19 +21,11 @@ function formulaires_oubli_charger_dist(){
 // http://doc.spip.org/@message_oubli
 function message_oubli($email, $param)
 {
-	if (function_exists('test_oubli'))
-		$f = 'test_oubli';
-	else 
-		$f = 'test_oubli_dist';
-	$declaration = $f($email);
-
-	if (is_array($declaration)
-	  AND $res = sql_select("id_auteur,statut,pass", "spip_auteurs", "email =" . sql_quote($declaration['mail']))
-	  AND $row = sql_fetch($res)
-	  ) {
+	$r = formulaires_oubli_mail($email);
+	if (is_array($r) AND $r[1]) {
 		include_spip('inc/acces'); # pour creer_uniqid
 		$cookie = creer_uniqid();
-		sql_updateq("spip_auteurs", array("cookie_oubli" => $cookie), "id_auteur=" . $row['id_auteur']);
+		sql_updateq("spip_auteurs", array("cookie_oubli" => $cookie), "id_auteur=" . $r[1]['id_auteur']);
 	
 		$nom = $GLOBALS['meta']["nom_site"];
 		$envoyer_mail = charger_fonction('envoyer_mail','inc');
@@ -49,7 +41,7 @@ function message_oubli($email, $param)
 		else
 		  return  _T('pass_erreur_probleme_technique');
 	}
-  return  _T('pass_erreur_probleme_technique');
+	return  _T('pass_erreur_probleme_technique');
 }
 
 // la saisie a ete validee, on peut agir
@@ -74,6 +66,24 @@ function formulaires_oubli_verifier_dist(){
 	$erreurs = array();
 
 	$email = _request('oubli');
+
+	$r = formulaires_oubli_mail($email);
+
+	if (!is_array($r))
+		$erreurs['oubli'] = $r;
+	else {
+		if (!$r[1]) 
+			$erreurs['oubli'] = _T('pass_erreur_non_enregistre', array('email_oubli' => htmlspecialchars($email)));
+	
+		elseif ($r[1]['statut'] == '5poubelle' OR $r[1]['pass'] == '')
+			$erreurs['oubli'] =  _T('pass_erreur_acces_refuse');
+	}
+
+	return $erreurs;
+}
+
+function formulaires_oubli_mail($email)
+{
 	if (function_exists('test_oubli'))
 		$f = 'test_oubli';
 	else 
@@ -81,20 +91,10 @@ function formulaires_oubli_verifier_dist(){
 	$declaration = $f($email);
 
 	if (!is_array($declaration))
-		$erreurs['oubli'] = $declaration;
+		return $declaration;
 	else {
-
 		include_spip('base/abstract_sql');
-		$res = sql_select("id_auteur,statut,pass", "spip_auteurs", "email =" . sql_quote($declaration['mail']));
-	
-		if (!$row = sql_fetch($res)) 
-			$erreurs['oubli'] = _T('pass_erreur_non_enregistre', array('email_oubli' => htmlspecialchars($email)));
-	
-		if ($row['statut'] == '5poubelle' OR $row['pass'] == '')
-			$erreurs['oubli'] =  _T('pass_erreur_acces_refuse');
+		return array($declaration, sql_fetsel("id_auteur,statut,pass", "spip_auteurs", "email =" . sql_quote($declaration['mail'])));
 	}
-
-	return $erreurs;
 }
-
 ?>
