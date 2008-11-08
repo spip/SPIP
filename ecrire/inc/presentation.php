@@ -1126,7 +1126,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af =
 			$en_ligne = 'calcul';
 			break;
 	case 'auteur':
-			$n = sql_countsel('spip_auteurs_articles AS lien, spip_articles AS articles', "lien.id_auteur=".sql_quote($id)." AND lien.id_article=articles.id_article AND articles.statut='publie'");
+			$n = sql_fetsel('A.id_article', 'spip_auteurs_articles AS L LEFT JOIN spip_articles AS A ON L.id_article=A.id_article', "A.statut='publie' AND L.id_auteur=".sql_quote($id));
 			if ($n) $en_ligne = 'calcul';
 			else $en_ligne = 'preview';
 			break;
