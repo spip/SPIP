@@ -179,7 +179,7 @@ function definir_barre_boutons() {
 	// sous menu statistiques
 	if (isset($boutons_admin['statistiques_visites'])) {
 		$sousmenu=array(
-			'espacement' => null,
+			//'espacement' => null,// les espacements debloquent si on a des icones sur 2 lignes
 			'statistiques_repartition' =>
 				new Bouton("rubrique-24.gif", "icone_repartition_visites")
 		);
@@ -200,7 +200,7 @@ function definir_barre_boutons() {
 	if (autoriser('configurer', 'lang')) {
 		$sousmenu['config_lang'] =
 			new Bouton("langues-24.gif", "icone_gestion_langues");
-		$sousmenu['espacement'] = null;
+		//$sousmenu['espacement'] = null; // les espacements debloquent si on a des icones sur 2 lignes
 	}
 
 	if (autoriser('sauvegarder')) {
@@ -552,7 +552,7 @@ function bandeau_principal2($sousmenu,$rubrique, $sous_rubrique, $largeur, $deca
 				$largitem = 0;
 				if($souspage=='espacement') {
 					if ($width>0){
-						$res .= "<li class='separateur'></li>\n";
+						$res .= "<li class='separateur' style='width:20px;'></li>\n";
 					}
 				} else {
 				  list($html,$largitem) = icone_bandeau_secondaire (_T($sousdetail->libelle),
