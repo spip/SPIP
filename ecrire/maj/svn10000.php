@@ -191,4 +191,11 @@ array('sql_alter',"TABLE spip_groupes_mots DROP rubriques"),
 array('sql_alter',"TABLE spip_groupes_mots DROP syndic"),
 );
 
+function maj_13135 () {
+	include_spip('inc/rubriques');
+	calculer_prochain_postdate();
+}
+
+$GLOBALS['maj'][13135] = array(array('maj_13135'));
+
 ?>
