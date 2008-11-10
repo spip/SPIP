@@ -279,14 +279,14 @@ function controler_contenu($type, $id, $options=array(), $c=false, $serveur='') 
 	if (!$champs) return false;
 
 	// Verifier si les mises a jour sont pertinentes, datees, en conflit etc
-	$conflits = controler_md5($champs, $_POST, $type, $id, $serveur);
+	$conflits = controler_md5($champs, $_POST, $type, $id, $serveur, $options['prefix']?$options['prefix']:'ctrl_');
 	return $conflits;
 }
 
 // Controle la liste des md5 envoyes, supprime les inchanges,
 // signale les modifies depuis telle date
 // http://doc.spip.org/@controler_md5
-function controler_md5(&$champs, $ctr, $type, $id, $serveur) {
+function controler_md5(&$champs, $ctr, $type, $id, $serveur, $prefix = 'ctrl_') {
 	$table_objet = table_objet($type);
 	$spip_table_objet = table_objet_sql($type);
 	$id_table_objet = id_table_objet($type);
@@ -295,7 +295,7 @@ function controler_md5(&$champs, $ctr, $type, $id, $serveur) {
 	// On elimine les donnees non modifiees par le formulaire (mais
 	// potentiellement modifiees entre temps par un autre utilisateur)
 	foreach ($champs as $key => $val) {
-		if ($m = _request('ctr_'.$key)) {
+		if ($m = $ctr[$prefix.$key]) {
 			if ($m == md5($val))
 				unset ($champs[$key]);
 		}
@@ -318,17 +318,17 @@ function controler_md5(&$champs, $ctr, $type, $id, $serveur) {
 	// genere a partir de donnees modifiees dans l'intervalle ; ici
 	// on compare a ce qui est dans la base, et on bloque en cas
 	// de conflit.
-	$ctr = $ctrq = $conflits = array();
+	$ctrh = $ctrq = $conflits = array();
 	foreach (array_keys($champs) as $key) {
-		if ($m = _request('ctr_'.$key)) {
-			$ctr[$key] = $m;
+		if ($m = $ctr[$prefix.$key]) {
+			$ctrh[$key] = $m;
 			$ctrq[] = $key;
 			$ctrq[] = "md5($key) AS ctrq_$key";
 		}
 	}
 	if ($ctrq) {
 		$ctrq = sql_fetsel($ctrq, $spip_table_objet, "$id_table_objet=$id", $serveur);
-		foreach ($ctr as $key => $m) {
+		foreach ($ctrh as $key => $m) {
 			if ($m != $ctrq['ctrq_'.$key]
 			AND $champs[$key] !== $ctrq[$key]
 			AND $ctrq['ctrq_'.$key] !== null) {
