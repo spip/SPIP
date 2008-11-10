@@ -30,13 +30,14 @@ function _sqlite_init_functions(&$sqlite){
 		'DATE_FORMAT'	=> array( '_sqlite_func_strftime'		,2),
 		'DAYOFMONTH'	=> array( '_sqlite_func_dayofmonth'		,1),
 		
+		'EXP'			=> array( 'exp'							,1),//exponentielle
 		'FIND_IN_SET'	=> array( '_sqlite_func_find_in_set'	,2),
 
 		'IF'			=> array( '_sqlite_func_if' 			,3),
 		'INSERT'		=> array( '_sqlite_func_insert'			,4),		
 		'INSTR'			=> array( '_sqlite_func_instr'			,2),
 
-		'LEAST'			=> array( '_sqlite_func_least'			,3), // nb d'arguments ?
+		'LEAST'			=> array( '_sqlite_func_least'			,3),
 		'LEFT'			=> array( '_sqlite_func_left'			,2),
 #		'LENGTH'		=> array( 'strlen'						,1), // present v1.0.4
 #		'LOWER'			=> array( 'strtolower'					,1), // present v2.4
@@ -57,6 +58,7 @@ function _sqlite_init_functions(&$sqlite){
 #		'RTRIM'			=> array( 'rtrim'						,1), // present en theorie
 
 		'SETTYPE'		=> array( 'settype'						,2), // CAST present en v3.2.3
+		'SQRT'			=> array( 'sqrt'						,1), 
 		'SUBSTRING'		=> array( 'substr'						,3), 
 		
 		'TO_DAYS'		=> array( '_sqlite_func_to_days'		,1),
