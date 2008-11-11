@@ -16,6 +16,7 @@ define('_VERSION_ARCHIVE', '1.3');
 
 include_spip('base/serial');
 include_spip('base/auxiliaires');
+include_spip('inc/presentation');
 include_spip('public/interfaces'); // pour table_jointures
 
 // NB: Ce fichier peut ajouter des tables (old-style)
@@ -81,13 +82,19 @@ function exec_export_all_args($rub, $gz)
 	if ($nom === '') $nom = 'dump';
 	$archive = $nom . '.xml' . $gz;
 	list($tables,) = export_all_list_tables();
-	$res = controle_tables_en_base('export', $tables, $rub);
 	$clic =  _T('bouton_valider');
+	$plie = _T('install_tables_base');
+	$res = controle_tables_en_base('export', $tables, $rub);
 	$res = "\n<ol style='text-align:left'><li>\n" .
 			join("</li>\n<li>", $res) .
-			"</li></ol>\n<input type='submit' value='$clic' />";
+			"</li></ol>\n";
 
-	$arg = "start,$gz,$archive,$rub," .  _VERSION_ARCHIVE;
+	$res = block_parfois_visible('export_tables', $plie, $res, '', false)
+	. "<div style='text-align: center;'><input type='submit' value='"
+	. $clic
+	. "' /></div>";
+
+  	$arg = "start,$gz,$archive,$rub," .  _VERSION_ARCHIVE;
 	$id = 'form_export';
 	$att = " method='post' id='$id'";
 	$timeout = 'if (manuel) document.getElementById(manuel).submit()';
@@ -95,8 +102,12 @@ function exec_export_all_args($rub, $gz)
 	? http_script("manuel= '$id'; window.setTimeout('$timeout', 60000);")
 	: '')
 	. generer_action_auteur('export_all', $arg, '', $res,  $att, true);
+	include_spip('inc/presentation');
+	$r = envoi_link('spip', true);
+	$r =  f_jQuery($r);
 	include_spip('inc/minipres');
-	return minipres(_T('info_sauvegarde'), $corps);
+	$res = minipres(_T('info_sauvegarde'), $corps);
+	return str_replace('</head>', $r . '</head>', $res);
 }
 
 // construction de la liste des tables pour le dump :
