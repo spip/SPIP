@@ -20,7 +20,6 @@
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-if(!defined("_PLUGINS_POUR_CETTE_VERSION")) define ("_PLUGINS_POUR_CETTE_VERSION", "http://plugins.spip.net/rss-+-selection-2-+");
 
 include_spip('inc/plugin');
 
@@ -50,8 +49,6 @@ function formulaire_charger_plugin($retour='') {
 		if (!$auto)
 			$auto = interface_plugins_auto($retour);
 
-		$auto = "<br />"
-		  . debut_cadre_enfonce('', true, '', _T('plugin_titre_automatique')).$auto.fin_cadre_enfonce(true);
 	}
 
 	$message = _T('plugin_info_automatique_ftp',array('rep'=>joli_repertoire(_DIR_PLUGINS)));
@@ -59,6 +56,7 @@ function formulaire_charger_plugin($retour='') {
 		$message .= " &mdash; "._T('plugin_info_automatique_creer');
 
 	return debut_cadre_trait_couleur("spip-pack-24.png", true, "", _T('plugin_titre_automatique_ajouter'))
+		. "<h3>"._T('plugin_titre_automatique')."</h3>"
 		. "<p>".$message."</p>\n"
 		. $auto
 		. fin_cadre_trait_couleur(true);
@@ -69,23 +67,60 @@ function formulaire_charger_plugin($retour='') {
 // http://doc.spip.org/@interface_plugins_auto
 function interface_plugins_auto($retour) {
 
-	$res = "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
+	$res = "<div class='verdana2'>";
 
 	if ($retour) {
-		$res .= "<tr><td class='verdana2'>";
-		$res .= $retour;
-		$res .= "</td></tr>\n";
+		$res .= "<div>$retour</div>\n";
 	}
-
-	$res .= "<tr><td class='verdana2'>";
 
 	$liste = liste_plugins_distants();
 
+	$message .= '<div class="explication">'._T('plugin_zip_adresse')
+  . '<br />'._T('plugin_info_automatique_exemples').'<ul class="spip">';
+	
+	$les_urls = array('http://plugins.spip.net/rss-+-selection-2-+','http://www.spip-contrib.net/spip.php?page=rss_plugins_spip_2');
+	if (isset($GLOBALS['chargeur_urls_rss']) AND is_array($GLOBALS['chargeur_urls_rss']))
+		$les_urls = array_merge($les_urls,$GLOBALS['chargeur_urls_rss']);
+	foreach($les_urls as $url)
+		$message .= "<li><a href='$url' onclick=\"jQuery('#url_zip_plugin2').attr('value',jQuery(this).html()).focus();return false;\">"
+		.$url
+		."</a></li>";
+	$message .= "</ul></div>";
+	
+	$form = "";
+	$form .= "<ul><li class='editer_url_zip_plugin2 obligatoire'>";
+
+	$form .= "<label for='url_zip_plugin2'>"._T('plugin_zip_adresse_champ')."</label>";
+	$form .= $message;
+	$form .= "
+	<input type='text' id='url_zip_plugin2' name='url_zip_plugin2' value='' size='40' />";
+	$form .= "</li></ul>";
+	$form .=	"<div class='boutons' id='loadrss'><input type='submit' value='"
+		. _T('bouton_valider')
+		.  "'/>\n"
+		.  "</div>\n";
+	$form = redirige_action_post('charger_plugin',
+				'', // arg = 'plugins' / 'lib', a priori
+				'',
+				'',
+				$form);
+	
+	$res .= "<div class='formulaire_spip formulaire_editer'>";
+
+	$res .= $form;
+	$res .= "</div>\n";
+	
+
+	$res .= "</div>\n";
+
+	$res .= afficher_liste_listes_plugins();
+	
 	if ($liste) {
 	  $res .= '<p>'._T('plugin_info_automatique_select',array('rep'=>joli_repertoire(_DIR_PLUGINS_AUTO))).'</p>';
 
 		$menu = array();
 		$compte = 0;
+
 		foreach ($liste as $url => $info) {
 			$compte += 1;
 			$titre = $info[0];
@@ -101,69 +136,43 @@ function interface_plugins_auto($retour) {
 		}
 		ksort($menu);
 
-		$res .= "<div id='liste_plug' class='cadre-trait-couleur'>\n";
-# <select name='url_zip_plugin' id='url_zip_plugin'>
-#			."<option>"._T('bouton_choisir')."</option>"
-			$res .= join("\n",$menu);
-#			."\n</select></p>\n";
-		$res .= "</div>\n";
+		$form = "<div id='liste_plug' class='cadre-trait-couleur'>\n";
+		$form .= join("\n",$menu);
+		$form .= "</div>\n";
 
-		$res .= "\n<div id='desc'></div>\n";
-
-
-
-		$res .= _T("plugin_info_automatique_ou");
-	}
-
-	$res .= '<p>'._T('plugin_zip_adresse').'</p>';
-
-	$res .= '<p>'._T('plugin_info_automatique_exemples')
-	.'</p><ul>';
+		$form .= "\n<div id='desc'></div>\n";
 	
-	$les_urls = array('http://files.spip.org/spip-zone/paquets.rss.xml.gz','http://www.spip-contrib.net/spip.php?page=rss_plugins_spip_2','http://plugins.spip.net/rss-+-selection-2-+');
-	if (isset($GLOBALS['chargeur_urls_rss']) AND is_array($GLOBALS['chargeur_urls_rss']))
-		$les_urls = array_merge($les_urls,$GLOBALS['chargeur_urls_rss']);
-	foreach($les_urls as $url)
-		$res .= "<li><a href='#' onclick=\"jQuery('#url_zip_plugin2').attr('value',jQuery(this).html()).focus();return false;\">"
-		.$url
-		."</a></li>";
-	$res .= "</ul>";
+		$form .=	"<div id='bouton_charger_plugin' class='boutons'><input type='submit' value='"
+			. _T('bouton_valider')
+			.  "' class='fondo' "
+			.  "/>\n"
+			.  "</div>\n";
+		
+		$res .= 
+				"<h3>"._T('plugins_compte',array('count' => count($menu)))."</h3>"
+				. "<div class='formulaire_spip'>"
+				
+				//debut_cadre_enfonce('', true, '', '')
+				. redirige_action_post('charger_plugin',
+					'', // arg = 'plugins' / 'lib', a priori
+					'',
+					'',
+					$form)
+				// . fin_cadre_enfonce(true)
+				//	. "<div class='nettoyeur'></div>";
+				. "</div>";
 
-	$res .= '<label>'._T('plugin_zip_adresse_champ');
-	$res .= "<br />
-	<input type='radio' id='antiradio' name='url_zip_plugin' value='' /></label>
-	<input type='text' id='url_zip_plugin2' name='url_zip_plugin2' value='' size='50' />\n";
-
-	$res .= http_script("
-	// charger en ajax le descriptif si on click une div
-	jQuery('#liste_plug .desc_plug').click(function(e) {
-		jQuery('#desc').load('".generer_url_ecrire('charger_plugin_descr', 'url=', '\\x26')."'+jQuery('input', this).attr('value'));
-	});
-	// deselectionner un bouton radio si on change l'url
-	jQuery('#url_zip_plugin2').bind('change', function() {
-		jQuery('#antiradio').attr('checked','on');
-		jQuery('#desc').html('');
-	});
-	jQuery('#antiradio').hide();
-	");
-
-
-	$res .= "</td></tr>";
-	$res .= "</table>\n"
-		. "<div style='float:".$GLOBALS['spip_lang_right'].";'><input type='submit' value='"
-		. _T('bouton_valider')
-		.  "' class='fondo' />\n"
-		.  "</div>\n";
-
-	$res = redirige_action_post('charger_plugin',
-				'', // arg = 'plugins' / 'lib', a priori
-				'',
-				'',
-				$res);
-
-
-	$res .= afficher_liste_listes_plugins();
-
+		$res .= http_script("
+		// charger en ajax le descriptif si on click une div
+		jQuery('#bouton_charger_plugin').hide();
+		jQuery('#liste_plug .desc_plug').click(function(e) {
+			jQuery('#desc').animeajax().load('".generer_url_ecrire('charger_plugin_descr', 'url=', '\\x26')."'+jQuery('input', this).attr('value'),function(){
+			jQuery('#bouton_charger_plugin').show();
+			});
+		});
+		");
+			
+	}
 	return $res;
 }
 
@@ -461,27 +470,9 @@ function chercher_enclosures_zip($rss, $desc = '') {
 function liste_plugins_distants($desc = false) {
 	// TODO une liste multilingue a telecharger
 	$liste = array();
-	/*$liste = array(
-		'http://files.spip.org/spip-zone/crayons.zip' =>
-			array('Les Crayons', 'http://www.spip-contrib.net/Les-Crayons'),
-		'http://files.spip.org/spip-zone/forms_et_tables_1_9_1.zip' =>
-			array('Forms &amp; tables', 'http://www.spip-contrib.net/Forms'),
-		'http://files.spip.org/spip-zone/autorite.zip' =>
-			array('Autorit&#233;', 'http://www.spip-contrib.net/-Autorite-'),
-		'http://files.spip.org/spip-zone/cfg.zip' =>
-			array('CFG, outil de configuration', 'http://www.spip-contrib.net/cfg-references'),
-		'http://files.spip.org/spip-zone/ortho.zip' =>
-			array('Correcteur d\'orthographe')
-	);*/
 
 	if (is_array($flux = @unserialize($GLOBALS['meta']['syndic_plug']))) {
 	
-		if (!$flux[_PLUGINS_POUR_CETTE_VERSION]) {
-			$flux[_PLUGINS_POUR_CETTE_VERSION] = 26;
-			essaie_ajouter_liste_plugins(_PLUGINS_POUR_CETTE_VERSION);
-		}
-
-
 		foreach ($flux as $url => $c) {
 			if (file_exists($cache=_DIR_TMP.'syndic_plug_'.md5($url).'.xml')
 			AND lire_fichier($cache, $rss))
@@ -498,17 +489,17 @@ function afficher_liste_listes_plugins() {
 		return '';
 
 	if (count($flux)){
-		$ret = '<p>'._T('plugin_info_automatique_liste').'</p><ul>';
+		$ret = '<h3>'._T('plugin_info_automatique_liste').'</h3><ul class="spip">';
 			//$ret .= '<li>'._T('plugin_info_automatique_liste_officielle').'</li>';
 		foreach ($flux as $url => $c) {
-			$a = '<a href="'.parametre_url(
-				generer_action_auteur('charger_plugin', 'supprimer_flux'),'supprimer_flux', $url).'">x</a>';
+			$a = '[<a href="'.parametre_url(
+				generer_action_auteur('charger_plugin', 'supprimer_flux'),'supprimer_flux', $url).'">'._T('lien_supprimer').'</a>]';
 			$ret .= '<li>'.inserer_attribut(PtoBR(propre("[->$url]")),'title',$url).' ('._T('plugins_compte',array('count' => $c)).') '.$a.'</li>';
 		}
 		$ret .= '</ul>';
 	
-		$ret .= '<a href="'.parametre_url(
-										  generer_action_auteur('charger_plugin', 'update_flux'),'update_flux', 'oui').'">'._T('plugin_info_automatique_liste_update').'</a>';
+		$ret .= '<div style="text-align:'.$GLOBALS['spip_lang_right'].'"><a href="'.parametre_url(
+										  generer_action_auteur('charger_plugin', 'update_flux'),'update_flux', 'oui').'">'._T('plugin_info_automatique_liste_update').'</a></div>';
 	}
 
 	return $ret;
