@@ -164,8 +164,7 @@ function spip_pg_alter($query, $serveur='',$requeter=true) {
 		$o=(false!==strpos($do,"("));
 		$f=(false!==strpos($do,")"));
 		if ($o AND !$f) $ouverte=true;
-		elseif (!$o AND $f) $ouverte=false;
-		elseif ($o AND $f) $ouverte=false;
+		elseif ($f) $ouverte=false;
 		if (!$ouverte) $i++;
 	}
 	$todo=$todo2;
