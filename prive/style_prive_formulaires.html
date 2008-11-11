@@ -87,6 +87,7 @@
 	font-size:10px;
 	background-color: #dddddd;
 }
+.formulaire_spip .explication a {color:[#(#GET{foncee}|couleur_foncer)];}
 /* Remarques importantes */
 .formulaire_spip em.attention { display: block; margin: 0.5em; font-weight: normal; }
 
@@ -479,4 +480,16 @@ input[type="submit"] {
 	padding: 3px;
 	font-weight: bold;
 	color: white;
+}
+
+.formulaire_spip ul.spip {
+	margin:10px 0;
+	margin-#GET{left}: 10px;
+	list-style-type: disc;
+	list-style-position: outside;
+}
+.formulaire_spip ul.spip li {
+	margin-#GET{left}: 10px;
+	padding: 0;
+	overflow:visible;
 }

@@ -109,7 +109,7 @@ function exec_admin_plugin_dist($retour='') {
 				OR in_array($f, $lcpa)
 				OR in_array($f, $plugins_interessants))
 					$lcpaffiche[] = $f;
-			if (count($lcpaffiche)<10 && !$format) $format = 'liste';
+			if (count($lcpaffiche)<10 AND !$format) $format = 'liste';
 			$lien_format = $format!='liste' ?
 			  ("<a href='".parametre_url(self(),'format','liste')."'>"._T('plugins_vue_liste')."</a>")
 			  :("<a href='".parametre_url(self(),'format','arbre')."'>"._T('plugins_vue_hierarchie')."</a>");
@@ -119,6 +119,7 @@ function exec_admin_plugin_dist($retour='') {
 				. affiche_les_plugins($lcpaffiche, $lcpa, $format);
 
 		} else {
+			if (count($lpf)<10 AND !$format) $format = 'liste';
 			$lien_format = $format!='liste' ?
 			  ("<a href='".parametre_url(self(),'format','liste')."'>"._T('plugins_vue_liste')."</a>")
 			  :("<a href='".parametre_url(self(),'format','arbre')."'>"._T('plugins_vue_hierarchie')."</a>");
