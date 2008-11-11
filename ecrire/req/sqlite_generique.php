@@ -156,14 +156,20 @@ function spip_sqlite_alter($query, $serveur='',$requeter=true){
 	// ou revoir l'api de sql_alter en creant un 
 	// sql_alter_table($table,array($actions));
 	$todo = explode(',', $suite);
+
 	// on remet les morceaux dechires ensembles... que c'est laid !
 	$todo2 = array(); $i=0;
+	$ouverte = false;
 	while ($do = array_shift($todo)) {
 		$todo2[$i] = isset($todo2[$i]) ? $todo2[$i] . "," . $do : $do;
-		if (false===strpos($do,"(") OR (false!==strpos($do,")")))
-			$i++;
+		$o=(false!==strpos($do,"("));
+		$f=(false!==strpos($do,")"));
+		if ($o AND !$f) $ouverte=true;
+		elseif (!$o AND $f) $ouverte=false;
+		elseif ($o AND $f) $ouverte=false;
+		if (!$ouverte) $i++;
 	}
-
+	
 	// 3	
 	$resultats = array();
 	foreach ($todo2 as $do){
@@ -181,7 +187,7 @@ function spip_sqlite_alter($query, $serveur='',$requeter=true){
 		$colonne_destination = '';
 		$def = $matches[3];
 		$def = _sqlite_remplacements_definitions_table($def);
-			
+		
 		switch($cle){
 			// suppression d'un index
 			case 'DROP INDEX':
@@ -399,7 +405,9 @@ function spip_sqlite_create_index($nom, $table, $champs, $serveur='', $requeter=
 		 $champs = array($champs);
 	}
 	$query = "CREATE INDEX $nom ON $table (" . join(',',$champs) . ")";
-	if (spip_sqlite_query($query, $serveur, $requeter))
+	$res = spip_sqlite_query($query, $serveur, $requeter);
+	if (!$requeter) return $res;
+	if ($res)
 		return true;
 	else
 		return false;
@@ -1251,12 +1259,13 @@ function _sqlite_modifier_table($table, $colonne, $opt=array(), $serveur=''){
 	foreach ($def_origine['key'] as $c=>$d){
 		$c = str_replace($colonne_origine,$colonne_destination,$c);
 		$d = str_replace($colonne_origine,$colonne_destination,$d);
-		$keys[$c] = $d;
+		// seulement si on ne supprime pas la colonne !
+		if ($d)
+			$keys[$c] = $d;
 	}
 
 	// autres keys, on merge
 	$keys = array_merge($keys,$opt['key']);
-
 	$queries = array();
 	$queries[] = 'BEGIN TRANSACTION';
 	

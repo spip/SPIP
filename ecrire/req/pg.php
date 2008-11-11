@@ -144,19 +144,46 @@ function spip_pg_query($query, $serveur='',$requeter=true)
 // Alter en PG ne traite pas les index
 // http://doc.spip.org/@spip_pg_alter
 function spip_pg_alter($query, $serveur='',$requeter=true) {
+	// il faudrait une regexp pour eviter de spliter ADD PRIMARY KEY (colA, colB)
+	// tout en cassant en deux alter distincts "ADD PRIMARY KEY (colA, colB), ADD INDEX (chose)"... 
+	// ou revoir l'api de sql_alter en creant un 
+	// sql_alter_table($table,array($actions));
+	if (!preg_match("/\s*((\s*IGNORE)?\s*TABLE\s*([^\s]*))\s*(.*)?/is", $query, $regs)){
+		spip_log("$query mal comprise", 'pg');	
+		return false;
+	}
+	$debut = $regs[1];
+	$table = $regs[3];
+	$suite = $regs[4];
+	$todo = explode(',', $suite);
+	// on remet les morceaux dechires ensembles... que c'est laid !
+	$todo2 = array(); $i=0;
+	$ouverte = false;
+	while ($do = array_shift($todo)) {
+		$todo2[$i] = isset($todo2[$i]) ? $todo2[$i] . "," . $do : $do;
+		$o=(false!==strpos($do,"("));
+		$f=(false!==strpos($do,")"));
+		if ($o AND !$f) $ouverte=true;
+		elseif (!$o AND $f) $ouverte=false;
+		elseif ($o AND $f) $ouverte=false;
+		if (!$ouverte) $i++;
+	}
+	$todo=$todo2;
+	$query = $debut.' '.array_shift($todo);
 
-	if (!preg_match('/^\s*(IGNORE\s*)?TABLE\s+(\w+)\s+(ADD|DROP|CHANGE)\s*([^,]*)(.*)$/is', $query, $r)) {
+	if (!preg_match('/^\s*(IGNORE\s*)?TABLE\s+(\w+)\s+(ADD|DROP|CHANGE|MODIFY|RENAME)\s*(.*)$/is', $query, $r)) {
 	  spip_log("$query incompris", 'pg');
 	} else {
 	  if ($r[1]) spip_log("j'ignore IGNORE dans $query", 'pg');
 	  $f = 'spip_pg_alter_' . strtolower($r[3]);
 	  if (function_exists($f))
-	    $f($r[2], $r[4], $serveur);
+	    $f($r[2], $r[4], $serveur, $requeter);
 	  else spip_log("$query non prevu", 'pg');
 	}
 	// Alter a plusieurs args. Faudrait optimiser.
-	if ($r[5])
-	  spip_pg_alter("TABLE " . $r[2] . substr($r[5],1));
+	if ($todo)
+	  spip_pg_alter("TABLE $table " . join(',',$todo));
+
 }
 	      
 // http://doc.spip.org/@spip_pg_alter_change
@@ -186,28 +213,58 @@ function spip_pg_alter_change($table, $arg, $serveur='',$requeter=true)
 
 // http://doc.spip.org/@spip_pg_alter_add
 function spip_pg_alter_add($table, $arg, $serveur='',$requeter=true) {
-	if (!preg_match('/^(INDEX|KEY|PRIMARY\s+KEY|)\s*(.*)$/', $arg, $r)) {
+	if (!preg_match('/^(COLUMN|INDEX|KEY|PRIMARY\s+KEY|)\s*(.*)$/', $arg, $r)) {
 		spip_log("alter add $arg  incompris", 'pg');
 		return NULL;
 	}
-	if (!$r[1]) {
+	if (!$r[1] OR $r[1]=='COLUMN') {
 		preg_match('/`?(\w+)`?(.*)/',$r[2], $m);
-		return spip_pg_query("ALTER TABLE $table ADD " . $m[1] . ' ' . mysql2pg_type($m[2]),  $serveur);
+		if (preg_match('/^(.*)(BEFORE|AFTER|FIRST)(.*)$/is', $m[2], $n)) {
+			$m[2]=$n[1];
+		}
+		return spip_pg_query("ALTER TABLE $table ADD " . $m[1] . ' ' . mysql2pg_type($m[2]),  $serveur, $requeter);
 	} elseif ($r[1][0] == 'P') {
-		preg_match('/\(`?(\w+)`?\)/',$r[2], $m);
-		return spip_pg_query("ALTER TABLE $table ADD CONSTRAINT $table" .'_pkey PRIMARY KEY (' . $m[1] . ')', $serveur);
+		// la primary peut etre sur plusieurs champs
+		$r[2] = trim(str_replace('`','',$r[2]));
+		$m = ($r[2][0]=='(') ? substr($r[2],1,-1) : $r[2];
+		return spip_pg_query("ALTER TABLE $table ADD CONSTRAINT $table" .'_pkey PRIMARY KEY (' . $m . ')', $serveur, $requeter);
 	} else {
-		preg_match('/`?(\w+)`?\s*(\([^)]*\))/',$r[2], $m);
-		return spip_pg_query("CREATE INDEX " . $table . '_' . $m[1] . " ON $table " . str_replace("`","",$m[2]),  $serveur);
+		preg_match('/([^\s,]*)\s*(.*)?/',$r[2], $m);
+		// peut etre "(colonne)" ou "nom_index (colonnes)"
+		// bug potentiel si qqn met "(colonne, colonne)"
+		//
+		// nom_index (colonnes)
+		if ($m[2]) {
+			$colonnes = substr($m[2],1,-1);
+			$nom_index = $m[1];
+		}
+		else {
+			// (colonne)
+			if ($m[1][0] == "(") {
+				$colonnes = substr($m[1],1,-1);
+				if (false!==strpos(",",$colonnes)) {
+					spip_log("PG : Erreur, impossible de creer un index sur plusieurs colonnes"
+						." sans qu'il ait de nom ($table, ($colonnes))", 'pg');	
+					break;
+				} else {
+					$nom_index = $colonnes;
+				}
+			}
+			// nom_index
+			else {
+				$nom_index = $colonnes = $m[1];
+			}
+		}
+		return spip_pg_create_index($nom_index, $table, $colonnes, $serveur, $requeter);
 	}
 }
 
 // http://doc.spip.org/@spip_pg_alter_drop
 function spip_pg_alter_drop($table, $arg, $serveur='',$requeter=true) {
-	if (!preg_match('/^(INDEX|KEY|PRIMARY\s+KEY|)\s*`?(\w*)`?/', $arg, $r))
+	if (!preg_match('/^(COLUMN|INDEX|KEY|PRIMARY\s+KEY|)\s*`?(\w*)`?/', $arg, $r))
 	  spip_log("alter drop: $arg  incompris", 'pg');
 	else {
-	    if (!$r[1])
+	    if (!$r[1] OR $r[1]=='COLUMN')
 	      return spip_pg_query("ALTER TABLE $table DROP " . $r[2],  $serveur);
 	    elseif ($r[1][0] == 'P')
 	      return spip_pg_query("ALTER TABLE $table DROP CONSTRAINT $table" . '_pkey', $serveur);
@@ -216,6 +273,68 @@ function spip_pg_alter_drop($table, $arg, $serveur='',$requeter=true) {
 	    }
 	}
 }
+
+function spip_pg_alter_modify($table, $arg, $serveur='',$requeter=true) {
+	if (!preg_match('/^`?(\w+)`?\s+(.*)$/',$arg, $r)) {
+		spip_log("alter modify: $arg  incompris", 'pg');
+	} else {
+		return spip_pg_alter_change($table, $r[1].' '.$arg, $serveur='',$requeter=true);
+	}
+}
+
+// attention (en pg) : 
+// - alter table A rename to X = changer le nom de la table
+// - alter table A rename X to Y = changer le nom de la colonne X en Y 
+// pour l'instant, traiter simplement RENAME TO X
+function spip_pg_alter_rename($table, $arg, $serveur='',$requeter=true) {
+	$rename="";
+	// si TO, mais pas au debut
+	if (!stripos($arg,'TO ')){
+		$rename=$arg;
+	}
+	elseif (preg_match('/^(TO)\s*`?(\w*)`?/', $arg, $r)) {
+		$rename=$r[2];
+	} else {
+		spip_log("alter rename: $arg  incompris", 'pg');
+	}
+	return $rename?spip_pg_query("ALTER TABLE $table RENAME TO $rename"):false;
+}
+
+
+/**
+ * Fonction de creation d'un INDEX
+ * 
+ * @param string $nom : nom de l'index
+ * @param string $table : table sql de l'index
+ * @param string/array $champs : liste de champs sur lesquels s'applique l'index
+ * @param string $serveur : nom de la connexion sql utilisee
+ * @param bool $requeter : true pour executer la requete ou false pour retourner le texte de la requete
+ * 
+ * @return bool ou requete
+ */
+function spip_pg_create_index($nom, $table, $champs, $serveur='', $requeter=true) {
+	if (!($nom OR $table OR $champs)) {
+		spip_log("Champ manquant pour creer un index pg ($nom, $table, (".@join(',',$champs)."))","pg");
+		return false;
+	}
+	
+	$nom = str_replace("`","",$nom);
+	$champs = str_replace("`","",$champs);
+	
+	// PG ne differentie pas noms des index en fonction des tables
+	// il faut donc creer des noms uniques d'index pour une base pg
+	$nom = $table.'_'.$nom;
+	// enlever d'eventuelles parentheses deja presentes sur champs
+	if (!is_array($champs)){
+		 if ($champs[0]=="(") $champs = substr($champs,1,-1);
+		 $champs = array($champs);
+	}
+	$query = "CREATE INDEX $nom ON $table (" . join(',',$champs) . ")";
+	$res = spip_pg_query($query, $serveur, $requeter);
+	if (!$requeter) return $query;
+	return $res;
+}
+
 
 // http://doc.spip.org/@spip_pg_explain
 function spip_pg_explain($query, $serveur='',$requeter=true){
@@ -861,7 +980,9 @@ function spip_pg_errno($serveur='',$requeter=true) {
 function spip_pg_drop_table($table, $exist='', $serveur='',$requeter=true)
 {
 	if ($exist) $exist =" IF EXISTS";
-	return spip_pg_query("DROP TABLE$exist $table", $serveur, $requeter);
+	if (spip_pg_query("DROP TABLE$exist $table", $serveur, $requeter))
+		return true;
+	else return false;
 }
 
 // supprime une vue 
@@ -899,11 +1020,9 @@ function spip_pg_showtable($nom_table, $serveur='',$requeter=true)
 	$res = pg_query($link, "SELECT indexdef FROM pg_indexes WHERE tablename ILIKE " . _q($nom_table));
 	$keys = array();
 	while($index = pg_fetch_array($res, NULL, PGSQL_NUM)) {
-		if (preg_match('/CREATE\s+(UNIQUE\s+)?INDEX.*\((.*)\)$/',
-			       $index[0],$r)) {
-			$index = split(',', $r[2]);
-			$keys[($r[1] ? "PRIMARY KEY" : ("KEY " . $index[0]))] = 
-			  $r[2];
+		if (preg_match('/CREATE\s+(UNIQUE\s+)?INDEX\s([^\s]+).*\((.*)\)$/', $index[0],$r)) {
+			$nom = str_replace($nom_table.'_','',$r[2]);
+			$keys[($r[1] ? "PRIMARY KEY" : ("KEY " . $nom))] = $r[3];
 		}
 	}
 
@@ -961,7 +1080,7 @@ function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false, 
 		}
 
 		$query .= "$s\n\t\t$k "
-			. (($autoinc && ($prim_name == $k) && preg_match(',\b(big|small|medium)?int\b,i', $v))
+			. (($autoinc && ($prim_name == $k) && preg_match(',\b(big|small|medium|tiny)?int\b,i', $v))
 				? " bigserial"
 			   : mysql2pg_type($v)
 			);
@@ -975,6 +1094,7 @@ function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false, 
 	($character_set?" DEFAULT $character_set":"")
 	."\n";
 
+	if (!$requeter) return $q;
 	$r = @pg_query($link, $q);
 
 	if (!$r)
@@ -1026,7 +1146,12 @@ function spip_pg_multi ($objet, $lang) {
 // http://doc.spip.org/@mysql2pg_type
 function mysql2pg_type($v)
 {
-  return     preg_replace('/bigint\s*[(]\s*\d+\s*[)]/i', 'bigint', 
+  return     
+  		preg_replace('/auto_increment/i', '', // non reconnu
+  		preg_replace('/bigint/i', 'bigint', 
+  		preg_replace('/mediumint/i', 'mediumint', 
+  		preg_replace('/smallint/i', 'smallint', 
+		preg_replace("/tinyint/i", 'int',
 		preg_replace('/int\s*[(]\s*\d+\s*[)]/i', 'int', 
 		preg_replace("/longtext/i", 'text',
 		str_replace("mediumtext", 'text',
@@ -1035,12 +1160,11 @@ function mysql2pg_type($v)
 		str_replace("0000-00-00",'0000-01-01',
 		preg_replace("/datetime/i", 'timestamp',
 		preg_replace("/unsigned/i", '', 	
-		preg_replace("/double/i", 'double precision', 	
-		preg_replace("/tinyint/i", 'int', 	
+		preg_replace("/double/i", 'double precision', 	 	
 		preg_replace('/VARCHAR\((\d+)\)\s+BINARY/i', 'varchar(\1)', 
 		preg_replace("/ENUM *[(][^)]*[)]/i", "varchar(255)",
 					      $v 
-			     )))))))))))));
+			     ))))))))))))))));
 }
 
 // Renvoie false si on n'a pas les fonctions pg (pour l'install)
