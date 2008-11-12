@@ -27,6 +27,11 @@ input, select, textarea { font-size: 100%; font-family: inherit; }
 .formulaire_spip label { display: block; text-align: left; color: #444; font-weight: bold; /* pour IE/Win */ position: relative;  }
 .formulaire_spip li p { margin-top: 0; margin-bottom: 0; }
 
+.formulaire_spip .choix label{display:inline;font-weight:normal;}
+.formulaire_spip .choix input.radio,
+.formulaire_spip .choix input.checkbox {width:auto;}
+
+
 /* Champs de saisie */
 .formulaire_spip input.text { width: 15em; border: 1px inset; }
 .formulaire_spip textarea { width: 99%; border: 1px inset; }
@@ -94,3 +99,8 @@ ul.choix_mots li { clear: none; float: left; display: block; width: 30%; padding
 ul.choix_mots li label { display: inline; font-weight: normal; }
 
 .formulaire_spip .bugajaxie { display: none; } /* Bug IE/Win */
+
+/* Formulaire de login dans une page */
+.formulaire_login ul li {clear:left;}
+.formulaire_login .editer_password .details {display:block;}
+.formulaire_login #spip_logo_auteur {float:right;}
