@@ -280,17 +280,9 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 		foreach($ordre as $plug){
 			$info = $infos[$plug];
 			if (isset($info['bouton'])){
-				foreach($info['bouton'] as $id=>$conf){
-					$conf['icone'] = substr(find_in_path($conf['icone']),strlen(_DIR_RACINE));
-					$info['bouton'][$id] = $conf;
-				}
 				$liste_boutons = array_merge($liste_boutons,$info['bouton']);
 			}
 			if (isset($info['onglet'])){
-				foreach($info['onglet'] as $id=>$conf){
-					$conf['icone'] = substr(find_in_path($conf['icone']),strlen(_DIR_RACINE));
-					$info['onglet'][$id] = $conf;
-				}
 				$liste_onglets = array_merge($liste_onglets,$info['onglet']);
 			}
 		}

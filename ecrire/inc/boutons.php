@@ -232,7 +232,7 @@ function definir_barre_boutons() {
 			if (autoriser('bouton',$id)){
 				if (($parent = $infos['parent']) && isset($boutons_admin[$parent]))
 					$boutons_admin[$parent]->sousmenu[$id]= new Bouton(
-					  _DIR_RACINE . $infos['icone'],  // icone
+					  find_in_path($infos['icone']),  // icone
 					  $infos['titre'],	// titre
 					  $infos['url']?$infos['url']:null,
 					  $infos['args']?$infos['args']:null
@@ -240,7 +240,7 @@ function definir_barre_boutons() {
 				if (!$parent) {
 					$boutons_admin = array_slice($boutons_admin,0,-3,true)
 					+array($id=> new Bouton(
-					  _DIR_RACINE . $infos['icone'],  // icone
+					  find_in_path($infos['icone']),  // icone
 					  $infos['titre'],	// titre
 					  $infos['url']?generer_url_ecrire($infos['url'],$infos['args']?$infos['args']:''):null
 					  ))
@@ -391,7 +391,7 @@ function definir_barre_onglets($script) {
 				&& $parent == $script
 				&& autoriser('onglet',$id)) {
 					$onglets[$id] = new Bouton(
-					  _DIR_RACINE . $infos['icone'],  // icone
+					  find_in_path($infos['icone']),  // icone
 					  $infos['titre'],	// titre
 					  $infos['url']?generer_url_ecrire($infos['url'],$infos['args']?$infos['args']:''):null
 					  );
