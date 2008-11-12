@@ -151,7 +151,7 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serve
 			. "%"
 		);
 		// eviter les parentheses qui interferent avec pcre par la suite (dans le preg_patch_all) s'il y a des reponses
-		$recherche = str_replace(array('(',')'),array('\(','\)'),$recherche);
+		$recherche = str_replace(array('(',')','?'),array('\(','\)', '[?]'),$recherche);
 		
 		$preg = '/'.preg_replace(",\s+,".$u, ".+", trim($recherche)).'/' . $options['preg_flags'];
 	} else {
