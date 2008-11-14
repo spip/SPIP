@@ -26,8 +26,9 @@ function exec_controle_petition_dist()
 }
 
 // http://doc.spip.org/@exec_controle_petition_args
-function exec_controle_petition_args($id_article, $type, $date, $debut, $id_signature, $pas=0)
+function exec_controle_petition_args($id_article, $type, $date, $debut, $id_signature, $pas=NULL)
 {
+	if (!$pas) $pas = 10;
 	if ($id_signature) {
 		$id_article = sql_getfetsel("id_article", "spip_signatures", "id_signature=$id_signature");
 		$where = '(id_signature=' . sql_quote($id_signature) . ') AND ';
@@ -65,13 +66,12 @@ function exec_controle_petition_args($id_article, $type, $date, $debut, $id_sign
 	}
 }
 
-function controle_petition_args($id_article, $type, $debut, $titre, $where, $pas=0)
+function controle_petition_args($id_article, $type, $debut, $titre, $where, $pas=10)
 {
 	$extrait = "(statut='publie' OR statut='poubelle')";
 	if ($type == 'interne') $extrait = "NOT($extrait)";
 	$where .= $extrait;
 	$order = "date_time DESC";
-	if (!$pas) $pas = 15;
 	$signatures = charger_fonction('signatures', 'inc');
 
 	return $signatures('controle_petition', $id_article, $debut, $pas, $where, $order, $type);
