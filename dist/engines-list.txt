@@ -99,7 +99,7 @@ www\.excite\.fr
 
 [AOL France]
 (query|q|r)=
-(.*)recherche\.aol\.fr
+(.*)recherchet?\.aol\.fr
 
 [AOLsearch]
 query=
@@ -214,6 +214,14 @@ find\.copernic\.com
 qry_str=
 \.seek\.fr
 
+[Orange, le moteur]
+rdata=
+www\.lemoteur\.fr
+
+[alOt]
+q=
+search\.alot\.com
+
 #
 # Dmoz
 #
@@ -236,6 +244,18 @@ search\.bluewin\.ch
 [EO]
 q=
 www\.eo\.st
+
+[HooSeek]
+recherche=
+(www\.)?hooseek\.com
+
+[Lost]
+x_query=
+(www\.)?lo\.st
+
+[Babylon]
+q=
+search\.babylon\.com
 
 #
 # Services de mail
