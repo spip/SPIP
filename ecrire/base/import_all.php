@@ -102,6 +102,7 @@ function import_all_milieu($request, $archive)
 // http://doc.spip.org/@import_all_debut
 function import_all_debut() {
 	ecrire_meta("restauration_status", "0",'non');
+	ecrire_meta("restauration_status_copie", "0",'non');
 }
 
 // http://doc.spip.org/@import_all_fin
@@ -118,6 +119,7 @@ function import_all_fin($request) {
 	effacer_meta('restauration_table_prefix');
 	effacer_meta('restauration_table_prefix_source');
 	effacer_meta('vieille_version_installee');
+	effacer_meta('restauration_status_tables');
 	effacer_meta('restauration_recopie_tables');
 	if ($request['insertion'] == 'passe2') 
 		sql_drop_table("spip_translate");

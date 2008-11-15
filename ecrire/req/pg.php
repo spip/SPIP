@@ -111,7 +111,7 @@ function spip_pg_trace_query($query, $serveur='')
 	$db = $connexion['db'];
 
 	$t = !isset($_GET['var_profile']) ? 0 : trace_query_start();
-	$r = pg_query($link, $query);
+	$r = spip_pg_query_simple($link, $query);
 
 	if ($e = spip_pg_errno())	// Log de l'erreur eventuelle
 		$e .= spip_pg_error($query); // et du fautif
@@ -134,13 +134,58 @@ function spip_pg_query($query, $serveur='',$requeter=true)
 		$query = substr($query, 0, -strlen($suite));
 	} else $suite ='';
 	$query = preg_replace('/([,\s])spip_/', '\1'.$prefixe.'_', $query) . $suite;
-	
+
 	// renvoyer la requete inerte si demandee
 	if (!$requeter) return $query;
 
 	return spip_pg_trace_query($query, $serveur);
 }
 
+function spip_pg_query_simple($link, $query){
+	#spip_log(var_export($query,true), 'pg_queries');
+	return pg_query($link, $query);
+}
+
+/*
+ * Retrouver les champs 'timestamp'
+ * pour les ajouter aux 'insert' ou 'replace'
+ * afin de simuler le fonctionnement de mysql 
+ * 
+ * stocke le resultat pour ne pas faire 
+ * de requetes showtable intempestives
+ */
+function spip_pg_ajouter_champs_timestamp($table, $couples, $desc='', $serveur=''){
+	static $tables = array();
+	
+	if (!isset($tables[$table])){
+		
+		if (!$desc){
+			$f = charger_fonction('trouver_table', 'base');
+			$desc = $f($table, $serveur);
+			// si pas de description, on ne fait rien, ou on die() ?
+			if (!$desc) return $couples;
+		}
+		
+		// recherche des champs avec simplement 'TIMESTAMP'
+		// cependant, il faudra peut etre etendre
+		// avec la gestion de DEFAULT et ON UPDATE
+		// mais ceux-ci ne sont pas utilises dans le core
+		$tables[$table] = array();
+		foreach ($desc['field'] as $k=>$v){
+			if (strpos(strtolower(ltrim($v)), 'timestamp')===0)
+			$tables[$table][] = $k;
+		}
+	}
+	
+	// ajout des champs type 'timestamp' absents
+	foreach ($tables[$table] as $maj){
+		if (!array_key_exists($maj, $couples))
+			$couples[$maj] = "NOW()";	
+	}
+	return $couples;
+}
+ 	
+	
 // Alter en PG ne traite pas les index
 // http://doc.spip.org/@spip_pg_alter
 function spip_pg_alter($query, $serveur='',$requeter=true) {
@@ -347,7 +392,7 @@ function spip_pg_explain($query, $serveur='',$requeter=true){
 	} else $suite ='';
 	$query = 'EXPLAIN ' . preg_replace('/([,\s])spip_/', '\1'.$prefixe.'_', $query) . $suite;
 
-	$r = pg_query($link,$query);
+	$r = spip_pg_query_simple($link,$query);
 	if (!$requeter) return $r;
 	return spip_pg_fetch($r, NULL, $serveur);
 }
@@ -369,7 +414,7 @@ function spip_pg_selectdb($db, $serveur='',$requeter=true) {
 
 // http://doc.spip.org/@spip_pg_listdbs
 function spip_pg_listdbs() {
-	return pg_query("select * from pg_database");
+	return spip_pg_query_simple("select * from pg_database");
 }
 
 // http://doc.spip.org/@spip_pg_select
@@ -512,7 +557,12 @@ function spip_pg_frommysql($arg)
 
 	$res = preg_replace('/UNIX_TIMESTAMP\s*[(]\s*[)]/',
 			    ' EXTRACT(epoch FROM NOW())', $res);
-
+	
+	// la fonction md5(integer) n'est pas connu en pg
+	// il faut donc forcer les types en text (cas de md5(id_article))
+	$res = preg_replace('/md5\s*[(]([^)]*)[)]/i',
+			    'MD5(CAST(\1 AS text))', $res);
+											
 	$res = preg_replace('/UNIX_TIMESTAMP\s*[(]([^)]*)[)]/',
 			    ' EXTRACT(epoch FROM \1)', $res);
 
@@ -713,7 +763,7 @@ function spip_pg_insert($table, $champs, $valeurs, $desc=array(), $serveur='',$r
 	$ins = (strlen($champs)<3)
 	  ? " DEFAULT VALUES"
 	  : "$champs VALUES $valeurs";
-	$r = pg_query($link, $q="INSERT INTO $table $ins $ret");
+	$r = spip_pg_query_simple($link, $q="INSERT INTO $table $ins $ret");
 #	spip_log($q);
 	if ($r) {
 		if (!$ret) return 0;
@@ -732,11 +782,14 @@ function spip_pg_insertq($table, $couples=array(), $desc=array(), $serveur='',$r
 	if (!$desc) $desc = description_table($table);
 	if (!$desc) die("$table insertion sans description");
 	$fields =  $desc['field'];
-		
+	
 	foreach ($couples as $champ => $val) {
 		$couples[$champ]=  spip_pg_cite($val, $fields[$champ]);
 	}
 
+	// recherche de champs 'timestamp' pour mise a jour auto de ceux-ci
+	$couples = spip_pg_ajouter_champs_timestamp($table, $couples, $desc, $serveur);
+	
 	return spip_pg_insert($table, "(".join(',',array_keys($couples)).")", "(".join(',', $couples).")", $desc, $serveur, $requeter);
 }
 
@@ -749,12 +802,19 @@ function spip_pg_insertq_multi($table, $tab_couples=array(), $desc=array(), $ser
 	if (!$desc) die("$table insertion sans description");
 	$fields =  isset($desc['field'])?$desc['field']:array();
 	
-	$cles = "(" . join(',',array_keys($tab_couples[0])). ')';
+	// recherche de champs 'timestamp' pour mise a jour auto de ceux-ci
+	// une premiere fois pour ajouter maj dans les cles
+	$les_cles = spip_pg_ajouter_champs_timestamp($table, $tab_couples[0], $desc, $serveur);
+	
+	$cles = "(" . join(',',array_keys($les_cles)). ')';
 	$valeurs = array();
 	foreach ($tab_couples as $couples) {
 		foreach ($couples as $champ => $val){
 			$couples[$champ]= spip_pg_cite($val, $fields[$champ]);
 		}
+		// recherche de champs 'timestamp' pour mise a jour auto de ceux-ci
+		$couples = spip_pg_ajouter_champs_timestamp($table, $couples, $desc, $serveur);
+		
 		$valeurs[] = '(' .join(',', $couples) . ')';
 	}
 	$valeurs = implode(', ',$valeurs);
@@ -764,16 +824,20 @@ function spip_pg_insertq_multi($table, $tab_couples=array(), $desc=array(), $ser
 
 
 // http://doc.spip.org/@spip_pg_update
-function spip_pg_update($table, $champs, $where='', $desc='', $serveur='',$requeter=true) {
+function spip_pg_update($table, $couples, $where='', $desc='', $serveur='',$requeter=true) {
 
-	if (!$champs) return;
+	if (!$couples) return;
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
 	$db = $connexion['db'];
 	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
+
+	// recherche de champs 'timestamp' pour mise a jour auto de ceux-ci
+	$couples = spip_pg_ajouter_champs_timestamp($table, $couples, $desc, $serveur);
+
 	$set = array();
-	foreach ($champs as $champ => $val) {
+	foreach ($couples as $champ => $val) {
 		$set[] = $champ . '=' . $val; 
 	}
 
@@ -790,21 +854,20 @@ function spip_pg_update($table, $champs, $where='', $desc='', $serveur='',$reque
 // idem, mais les valeurs sont des constantes a mettre entre apostrophes
 // sauf les expressions de date lorsqu'il s'agit de fonctions SQL (NOW etc)
 // http://doc.spip.org/@spip_pg_updateq
-function spip_pg_updateq($table, $champs, $where='', $desc=array(), $serveur='',$requeter=true) {
-	if (!$champs) return;
+function spip_pg_updateq($table, $couples, $where='', $desc=array(), $serveur='',$requeter=true) {
+	if (!$couples) return;
 	if (!$desc) $desc = description_table($table);
 	$fields = $desc['field'];
-	foreach ($champs as $k => $val) {
-		$champs[$k] = spip_pg_cite($val, $fields[$k]);
+	foreach ($couples as $k => $val) {
+		$couples[$k] = spip_pg_cite($val, $fields[$k]);
 	}
 
-	return spip_pg_update($table, $champs, $where, $desc, $serveur, $requeter);
+	return spip_pg_update($table, $couples, $where, $desc, $serveur, $requeter);
 }
 
 
 // http://doc.spip.org/@spip_pg_replace
 function spip_pg_replace($table, $values, $desc, $serveur='',$requeter=true) {
-
 	if (!$values) {spip_log("replace vide $table"); return 0;}
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$prefixe = $connexion['prefixe'];
@@ -824,6 +887,9 @@ function spip_pg_replace($table, $values, $desc, $serveur='',$requeter=true) {
 		else $prims[$k]= "$k=$v";
 	}
 
+	// recherche de champs 'timestamp' pour mise a jour auto de ceux-ci
+	$values = spip_pg_ajouter_champs_timestamp($table, $values, $desc, $serveur);
+	
 	$where = join(' AND ', $prims);
 	if (!$where) {
 		return spip_pg_insert($table, "(".join(',',array_keys($values)).")", "(".join(',', $values).")", $desc, $serveur);
@@ -837,7 +903,7 @@ function spip_pg_replace($table, $values, $desc, $serveur='',$requeter=true) {
 	}
 
 	if ($couples) {
-	  $couples = pg_query($link, $q = "UPDATE $table SET $couples WHERE $where");
+	  $couples = spip_pg_query_simple($link, $q = "UPDATE $table SET $couples WHERE $where");
 #	  spip_log($q);
 	  if (!$couples) {
 	    $n = spip_pg_errno();
@@ -850,7 +916,7 @@ function spip_pg_replace($table, $values, $desc, $serveur='',$requeter=true) {
 		$ret = !$seq ? '' :
 		  (" RETURNING nextval('$seq') < $prim");
 
-		$couples = pg_query($link, $q = "INSERT INTO $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',', $values) . ")$ret");
+		$couples = spip_pg_query_simple($link, $q = "INSERT INTO $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',', $values) . ")$ret");
 	    if (!$couples) {
 	      $n = spip_pg_errno();
 	      $m = spip_pg_error($q);
@@ -997,7 +1063,7 @@ function spip_pg_showbase($match, $serveur='',$requeter=true)
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$link = $connexion['link'];
 	  
-	return pg_query($link, "SELECT tablename FROM pg_tables WHERE tablename ILIKE '$match'");
+	return spip_pg_query_simple($link, "SELECT tablename FROM pg_tables WHERE tablename ILIKE '$match'");
 }
 
 // http://doc.spip.org/@spip_pg_showtable
@@ -1006,7 +1072,7 @@ function spip_pg_showtable($nom_table, $serveur='',$requeter=true)
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$link = $connexion['link'];
 
-	$res = pg_query($link, "SELECT column_name, column_default, data_type FROM information_schema.columns WHERE table_name ILIKE " . _q($nom_table));
+	$res = spip_pg_query_simple($link, "SELECT column_name, column_default, data_type FROM information_schema.columns WHERE table_name ILIKE " . _q($nom_table));
 	if (!$res) return false;
 	
 	// etrangement, $res peut ne rien contenir, mais arriver ici...
@@ -1016,7 +1082,7 @@ function spip_pg_showtable($nom_table, $serveur='',$requeter=true)
 		$fields[$field[0]] = $field[2] . (!$field[1] ? '' : (" DEFAULT " . $field[1]));
 	}
 
-	$res = pg_query($link, "SELECT indexdef FROM pg_indexes WHERE tablename ILIKE " . _q($nom_table));
+	$res = spip_pg_query_simple($link, "SELECT indexdef FROM pg_indexes WHERE tablename ILIKE " . _q($nom_table));
 	$keys = array();
 	while($index = pg_fetch_array($res, NULL, PGSQL_NUM)) {
 		if (preg_match('/CREATE\s+(UNIQUE\s+)?INDEX\s([^\s]+).*\((.*)\)$/', $index[0],$r)) {

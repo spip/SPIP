@@ -20,13 +20,16 @@ function maj_vieille_base_charger_dist($version_cible){
 	'1.915'=>'1915',
 	'1.917'=>'1917',
 	'1.927'=>'1927',
+	'10000'=>'10000',
+	'12000'=>'13000',
 	);
 	$version = false;
 	foreach($vieilles_bases as $v=>$n){
 		if (!$version OR version_compare($v,$version_cible,'<'))
 			$version = $n;
 	}
-	
+
+	/*
 	include_spip('base/serial');
 	include_spip('base/auxiliaires');
 	$GLOBALS['nouvelle_base']['tables_principales'] = $GLOBALS['tables_principales'];
