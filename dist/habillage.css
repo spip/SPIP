@@ -46,7 +46,7 @@ blockquote.spip_poesie {} /*Cf.: spip_style.css*/
 address {}
 
 /* Tableaux */
-table.spip {} /*Cf.: spip_style.css*/
+table.spip { max-width: 99%} /*Cf.: spip_style.css*/
 
 /* Logos, documents et images */
 img { margin: 0; padding: 0; border: 0; }
