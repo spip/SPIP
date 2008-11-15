@@ -141,6 +141,48 @@ function spip_pg_query($query, $serveur='',$requeter=true)
 	return spip_pg_trace_query($query, $serveur);
 }
 
+
+
+/*
+ * Retrouver les champs 'timestamp'
+ * pour les ajouter aux 'insert' ou 'replace'
+ * afin de simuler le fonctionnement de mysql 
+ * 
+ * stocke le resultat pour ne pas faire 
+ * de requetes showtable intempestives
+ */
+function pg_ajouter_champs_timestamp($table, $couples, $desc='', $serveur=''){
+	static $tables = array();
+	
+	if (!isset($tables[$table])){
+		
+		if (!$desc){
+			$f = charger_fonction('trouver_table', 'base');
+			$desc = $f($table, $serveur);
+			// si pas de description, on ne fait rien, ou on die() ?
+			if (!$desc) return $couples;
+		}
+		
+		// recherche des champs avec simplement 'TIMESTAMP'
+		// cependant, il faudra peut etre etendre
+		// avec la gestion de DEFAULT et ON UPDATE
+		// mais ceux-ci ne sont pas utilises dans le core
+		$tables[$table] = array();
+		foreach ($desc['field'] as $k=>$v){
+			if (strpos(strtolower(ltrim($v)), 'timestamp')===0)
+			$tables[$table][] = $k;
+		}
+	}
+	
+	// ajout des champs type 'timestamp' absents
+	foreach ($tables[$table] as $maj){
+		if (!array_key_exists($maj, $couples))
+			$couples[$maj] = "NOW()";	
+	}
+	return $couples;
+}
+ 	
+	
 // Alter en PG ne traite pas les index
 // http://doc.spip.org/@spip_pg_alter
 function spip_pg_alter($query, $serveur='',$requeter=true) {
@@ -742,6 +784,9 @@ function spip_pg_insertq($table, $couples=array(), $desc=array(), $serveur='',$r
 		$couples[$champ]=  spip_pg_cite($val, $fields[$champ]);
 	}
 
+	// recherche de champs 'timestamp' pour mise a jour auto de ceux-ci
+	$couples = pg_ajouter_champs_timestamp($table, $couples, $desc, $serveur);
+	
 	return spip_pg_insert($table, "(".join(',',array_keys($couples)).")", "(".join(',', $couples).")", $desc, $serveur, $requeter);
 }
 
@@ -754,12 +799,19 @@ function spip_pg_insertq_multi($table, $tab_couples=array(), $desc=array(), $ser
 	if (!$desc) die("$table insertion sans description");
 	$fields =  isset($desc['field'])?$desc['field']:array();
 	
-	$cles = "(" . join(',',array_keys($tab_couples[0])). ')';
+	// recherche de champs 'timestamp' pour mise a jour auto de ceux-ci
+	// une premiere fois pour ajouter maj dans les cles
+	$les_cles = pg_ajouter_champs_timestamp($table, $tab_couples[0], $desc, $serveur);
+	
+	$cles = "(" . join(',',array_keys($les_cles)). ')';
 	$valeurs = array();
 	foreach ($tab_couples as $couples) {
 		foreach ($couples as $champ => $val){
 			$couples[$champ]= spip_pg_cite($val, $fields[$champ]);
 		}
+		// recherche de champs 'timestamp' pour mise a jour auto de ceux-ci
+		$couples = pg_ajouter_champs_timestamp($table, $couples, $desc, $serveur);
+		
 		$valeurs[] = '(' .join(',', $couples) . ')';
 	}
 	$valeurs = implode(', ',$valeurs);
@@ -769,16 +821,20 @@ function spip_pg_insertq_multi($table, $tab_couples=array(), $desc=array(), $ser
 
 
 // http://doc.spip.org/@spip_pg_update
-function spip_pg_update($table, $champs, $where='', $desc='', $serveur='',$requeter=true) {
+function spip_pg_update($table, $couples, $where='', $desc='', $serveur='',$requeter=true) {
 
-	if (!$champs) return;
+	if (!$couples) return;
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
 	$db = $connexion['db'];
 	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
+
+	// recherche de champs 'timestamp' pour mise a jour auto de ceux-ci
+	$couples = pg_ajouter_champs_timestamp($table, $couples, $desc, $serveur);
+
 	$set = array();
-	foreach ($champs as $champ => $val) {
+	foreach ($couples as $champ => $val) {
 		$set[] = $champ . '=' . $val; 
 	}
 
@@ -795,15 +851,15 @@ function spip_pg_update($table, $champs, $where='', $desc='', $serveur='',$reque
 // idem, mais les valeurs sont des constantes a mettre entre apostrophes
 // sauf les expressions de date lorsqu'il s'agit de fonctions SQL (NOW etc)
 // http://doc.spip.org/@spip_pg_updateq
-function spip_pg_updateq($table, $champs, $where='', $desc=array(), $serveur='',$requeter=true) {
-	if (!$champs) return;
+function spip_pg_updateq($table, $couples, $where='', $desc=array(), $serveur='',$requeter=true) {
+	if (!$couples) return;
 	if (!$desc) $desc = description_table($table);
 	$fields = $desc['field'];
-	foreach ($champs as $k => $val) {
-		$champs[$k] = spip_pg_cite($val, $fields[$k]);
+	foreach ($couples as $k => $val) {
+		$couples[$k] = spip_pg_cite($val, $fields[$k]);
 	}
 
-	return spip_pg_update($table, $champs, $where, $desc, $serveur, $requeter);
+	return spip_pg_update($table, $couples, $where, $desc, $serveur, $requeter);
 }
 
 
@@ -829,6 +885,9 @@ function spip_pg_replace($table, $values, $desc, $serveur='',$requeter=true) {
 		else $prims[$k]= "$k=$v";
 	}
 
+	// recherche de champs 'timestamp' pour mise a jour auto de ceux-ci
+	$values = pg_ajouter_champs_timestamp($table, $values, $desc, $serveur);
+	
 	$where = join(' AND ', $prims);
 	if (!$where) {
 		return spip_pg_insert($table, "(".join(',',array_keys($values)).")", "(".join(',', $values).")", $desc, $serveur);
