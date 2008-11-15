@@ -212,12 +212,12 @@ function vignette_formulaire_legender($id_document, $document, $script, $type, $
 	$texte = _T('info_supprimer_vignette');
 
 	$s = ($ancre =='documents' ? '': '-');
-	if (preg_match('/_edit$/', $script)) {
+	if (preg_match('/_edit$/', $script)) { 
 		$iframe_redirect = generer_url_ecrire("documents_colonne","id=$id&type=$type",true);
 		$action = redirige_action_auteur('documenter', "$s$id/$type/$id_vignette", $script, "id_$type=$id&show_docs=$id_document#$ancre");
 	} else {
 		$iframe_redirect = generer_url_ecrire("documenter","id_$type=$id&type=$type",true);
-		$f = $id_vignette ? "/$id_document" : '';
+		$f = (!$s AND $id_vignette) ? "/$id_document" : '';
 		$action = ajax_action_auteur('documenter', "$s$id/$type/$id_vignette$f", $script, "id_$type=$id&type=$type&s=$s&show_docs=$id_document#$ancre", array($texte),'',"function(r,noeud) {noeud.innerHTML = r; \$('form.form_upload',noeud).async_upload(async_upload_portfolio_documents);}");
 	}
 
