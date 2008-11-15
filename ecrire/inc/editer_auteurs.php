@@ -104,10 +104,11 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 		. $res;
 	}
 
-	$bouton = bouton_block_depliable($titre_boite,$flag ?($flag === 'ajax'):-1,"auteurs$type");
+	$idom = "auteurs_$type_$id";
+	$bouton = bouton_block_depliable($titre_boite,$flag ?($flag === 'ajax'):-1,$idom);
 	$res = debut_cadre_enfonce("auteur-24.gif", true, "", $bouton)
 	. $reponse
-	. debut_block_depliable($flag === 'ajax',"auteurs$type")
+	. debut_block_depliable($flag === 'ajax',$idom)
 	. $res
 	. fin_block()
 	. fin_cadre_enfonce(true);
@@ -234,8 +235,8 @@ function ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit, $arg_
 	$cond = $determiner_non_auteurs($type, $id, $cond_les_auteurs);
 	$all = objet_auteur_select($cond);
 	if (!$all) return '';
-
-	$js = "findObj_forcer('valider_ajouter_auteur').style.visibility='visible';";
+	$idom = "ajouter_auteur_$type_$id";
+	$js = "findObj_forcer('$idom').style.visibility='visible';";
 
 	$text = "<span class='verdana1'><label for='nouv_auteur'><b>"
 	. _T('titre_cadre_ajouter_auteur')
@@ -252,7 +253,7 @@ function ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit, $arg_
 	    $clic = _T('bouton_ajouter');
 	}
 
-	return ajax_action_post('editer_auteurs', "$id,$type", $script_edit, "id_{$type}=$id", $sel, $clic, "class='fondo visible_au_chargement' id='valider_ajouter_auteur'", "", $arg_ajax);
+	return ajax_action_post('editer_auteurs', "$id,$type", $script_edit, "id_{$type}=$id", $sel, $clic, "class='fondo visible_au_chargement' id='$idom'", "", $arg_ajax);
 }
 
 // http://doc.spip.org/@objet_auteur_select
