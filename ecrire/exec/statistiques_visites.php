@@ -143,12 +143,17 @@ function exec_statistiques_visites_args($id_article, $duree, $interval, $type, $
 	}
   echo cadre_stat($res, $table, $id_article);
 
+  /*
+  Il faudra optimiser les requetes de ces stats car c'est vraiment trop horrible :
+  plusieurs secondes d'attente sur un site comme contrib.
+  par ailleurs, l'affichage presente des defauts : cf http://trac.rezo.net/trac/spip/ticket/1598
 	if ($id_article) {
 		$signatures = charger_fonction('signatures', 'statistiques');
 		echo $signatures($duree, $interval, $type, $id_article, $serveur);
 		$forums = charger_fonction('forums', 'statistiques');
 		echo $forums($duree, $interval, $type, $id_article, $serveur);
 	}
+	*/
 
 	$referenceurs = charger_fonction('referenceurs', 'inc');
 	$res = $referenceurs($id_article, "visites", $table_ref, $where, '', $limit);
