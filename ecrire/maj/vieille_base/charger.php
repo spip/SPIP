@@ -33,7 +33,7 @@ function maj_vieille_base_charger_dist($version_cible){
 	include_spip('base/serial');
 	include_spip('base/auxiliaires');
 	$GLOBALS['nouvelle_base']['tables_principales'] = $GLOBALS['tables_principales'];
-	$GLOBALS['nouvelle_base']['tables_auxiliaires'] = $GLOBALS['tables_auxiliaires'];
+	$GLOBALS['nouvelle_base']['tables_auxiliaires'] = $GLOBALS['tables_auxiliaires'];*/
 
 	unset($GLOBALS['tables_principales']);
 	unset($GLOBALS['tables_auxiliaires']);
