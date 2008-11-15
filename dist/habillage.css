@@ -199,14 +199,3 @@ ul ul ul ul ul .forum-chapo { background: #FFF; }
 ---------------------------------------------- */
 a { color: #604A7F; text-decoration: none; }
 a:focus,a:hover { color: #F57900; text-decoration: underline; }
-
-
-
-/* ------------------------------------------
-/* Autres supports
-/* ------------------------------------------ */
-
-/* Affichage pour les petits ecrans (type 400 x 300) */
-@media handheld, only screen and (max-device-width: 481px), only and (max-device-width: 400px), only and (max-width: 400px) {
-div#page, div#conteneur, div#navigation, div#extra { width: auto; }
-}
