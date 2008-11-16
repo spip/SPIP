@@ -2,6 +2,7 @@
 [(#REM) pour IE qui sinon se perd dans l'ajax !, ne pas retirer]<br class='bugajaxie' />
 
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
 [(#ENV{login_forum_abo})
 <INCLURE{fond=formulaires/inc-login_forum_abo}{env} />
