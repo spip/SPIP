@@ -23,15 +23,20 @@ function inc_petitionner_dist($id_article, $script, $args, $ajax=false)
 
 	$petition = sql_fetsel("*", "spip_petitions", "id_article=$id_article");
 
-	$res = petitionner_choisir($petition);
+	if (!autoriser('modererpetition', 'article', $id_article))
+		return petitionner_decompte($id_article, $petition);
+
+	$choix = petitionner_choisir($petition);
 
 	if ($petition) {
-		$res .= petitionner_decompte($id_article, $petition)
-		. petitionner_params($petition)
-		. petitionner_message($petition);
-		$class = '';
+			$res = $choix
+			. petitionner_decompte($id_article, $petition)
+			. petitionner_params($petition)
+			. petitionner_message($petition);
+			$class = '';
 	} else {
-		$class = $ajax ? '' : ' visible_au_chargement';
+			$res = $choix;
+			$class = $ajax ? '' : ' visible_au_chargement';
 	}
 
 	$atts = " class='fondo spip_xx-small$class' style='float: $spip_lang_right;' id='valider_petition'";

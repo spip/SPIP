@@ -231,15 +231,12 @@ function boites_de_config_articles($id_article)
 		$regler = $regler_moderation($id_article,"articles","id_article=$id_article") . '<br />';
 	}
 
-	if (autoriser('modererpetition', 'article', $id_article)) {
-		$petitionner = charger_fonction('petitionner', 'inc');
-		$petition = $petitionner($id_article,"articles","id_article=$id_article");
-	}
+	$petitionner = charger_fonction('petitionner', 'inc');
+	$petition = $petitionner($id_article,"articles","id_article=$id_article");
 
 	$masque = $regler . $petition;
 
-	if (!$masque)
-		return '';
+	if (!$masque) return '';
 
 	$invite = "<b>"
 	. _T('bouton_forum_petition')

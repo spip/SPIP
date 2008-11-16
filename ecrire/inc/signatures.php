@@ -55,55 +55,49 @@ function signatures_edit($script, $id, $debut, $row, $type) {
 	$nom_site = typo(echapper_tags($row['nom_site']));
 	$url_site = echapper_tags($row['url_site']);
 	$statut = $row['statut'];
-		
-	$retour_s = redirige_action_auteur('editer_signatures', $id_signature, $script, "id_article=$id_article&debut=$debut&type=$type#signature$id_signature");
-	$retour_a = redirige_action_auteur('editer_signatures', "-$id_signature", $script, "id_article=$id_article&debut=$debut&type=$type#signature$id_signature");
 
-	$res = "";
-		
-	if ($statut=="poubelle"){
-			$res .= "<table width='100%' cellpadding='2' cellspacing='0' border='0'><tr><td style='background-color: #ff0000'>";
-		}
-		
-	$res .= "<table id='signature$id_signature' width='100%' cellpadding='3' cellspacing='0'>\n<tr><td class='verdana2 toile_foncee' style='color: white;'><b>"
- 		.  ($nom_site ? "$nom_site / " : "")
-		.  $nom_email
-		.  "</b></td></tr>"
-		.  "\n<tr><td style='background-color: #ffffff' class='serif'>";
-				
-	if  ($statut=="poubelle"){
-			$res .= icone_inline (_T('icone_valider_signature'),
+	$res = !autoriser('modererpetition', 'article', $id_article) ? '' : true;
+
+	if ($res) {
+		$retour_s = redirige_action_auteur('editer_signatures', $id_signature, $script, "id_article=$id_article&debut=$debut&type=$type#signature$id_signature");
+		$retour_a = redirige_action_auteur('editer_signatures', "-$id_signature", $script, "id_article=$id_article&debut=$debut&type=$type#signature$id_signature");
+
+		$res = '';
+		if  ($statut=="poubelle"){
+			$res = icone_inline (_T('icone_valider_signature'),
 				$retour_s,
 				"forum-interne-24.gif", 
 				"creer.gif",
 				"right",
 				false);
-	} else {
-		$res .= icone_inline (_T('icone_supprimer_signature'),
+		} else {
+			$res = icone_inline (_T('icone_supprimer_signature'),
 				$retour_a,
 				"forum-interne-24.gif", 
 				"supprimer.gif",
 				"right",
 				false);
-		if ($statut<>"publie") {
-			$res .= icone_inline (_T('icone_relancer_signataire'),
+			if ($statut<>"publie") {
+				$res .= icone_inline (_T('icone_relancer_signataire'),
 				$retour_s,
 				"forum-interne-24.gif", 
 				"creer.gif",
 				"right",
 				false);
+			}
 		}
 	}
+
 	$res .= "<span class='spip_small'>".date_interface($date_time)."</span><br />\n";
 	if ($statut=="poubelle"){
-			$res .= "<span class='spip_x-small' style='color: red;'>"._T('info_message_efface')."</span><br />\n";
+		$res .= "<span class='spip_x-small' style='color: red;'>"._T('info_message_efface')."</span><br />\n";
 	}
 	if (strlen($url_site)>6) {
 			if (!$nom_site) $nom_site = _T('info_site');
 			$res .= "<span class='spip_x-small'>"._T('info_site_web')."</span> <a href='$url_site'>$nom_site</a><br />\n";
 		}
 	if (strlen($ad_email)>0){
-	  $res .= "<span class='spip_x-small'>"._T('info_adresse_email')."</span> <a href='mailto:" . attribut_html($ad_email) . "'>$ad_email</a><br />\n";
+		$res .= "<span class='spip_x-small'>"._T('info_adresse_email')."</span> <a href='mailto:" . attribut_html($ad_email) . "'>$ad_email</a><br />\n";
 	}
 
 	$res .= message_de_signature($row);
@@ -124,10 +118,20 @@ function signatures_edit($script, $id, $debut, $row, $type) {
 			. " </a>";
 		}
 	}
-	$res .= "</td></tr></table>\n";
+
 		
-	if ($statut=="poubelle"){
-			$res .= "</td></tr></table>";
+	$res = "<table id='signature$id_signature' width='100%' cellpadding='3' cellspacing='0'>\n<tr><td class='verdana2 toile_foncee' style='color: white;'><b>"
+ 		.  ($nom_site ? "$nom_site / " : "")
+		.  $nom_email
+		.  "</b></td></tr>"
+		.  "\n<tr><td style='background-color: #ffffff' class='serif'>"
+		. $res
+		. "</td></tr></table>\n";
+		
+	if ($statut=="poubelle") {
+			$res = "<table width='100%' cellpadding='2' cellspacing='0' border='0'><tr><td style='background-color: #ff0000'>"
+			. $res
+			. "</td></tr></table>";
 	}
 
 	return $res;
