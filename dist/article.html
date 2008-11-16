@@ -1,4 +1,4 @@
-<BOUCLE_article_principal(ARTICLES) {id_article}>
+<BOUCLE_principale(ARTICLES) {id_article}>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
@@ -48,7 +48,7 @@
 
 		[(#REM) Gestion du portfolio et des documents
 			Le critere {env} permet de passer d'autres arguments de la page
-			 par exemple l'id_document choisi pour un affichage complet
+			par exemple l'id_document choisi pour un affichage complet
 		]
 		[(#INCLURE{fond=inc-documents}{id_article}{env})]
 
@@ -105,4 +105,4 @@
 </div><!--#page-->
 </body>
 </html>
-</BOUCLE_article_principal>
+</BOUCLE_principale>

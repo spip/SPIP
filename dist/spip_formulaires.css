@@ -92,7 +92,7 @@ table.spip_barre input.barre { width: 99%; background: transparent; border: 0; }
 .formulaire_recherche input.text { width: 10em; padding-left: 25px; background: #FFF url(rechercher.gif) no-repeat left center; }
 .formulaire_recherche input.submit {}
 
-.spip_surligne {} /*Cf.: spip_style.css*/
+.spip_surligne {} /* Cf.: spip_style.css */
 
 /* Choix des mots-clefs */
 ul.choix_mots { display: block; margin: 0; padding: 0; list-style: none; }

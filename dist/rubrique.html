@@ -1,7 +1,7 @@
 [(#REM)
 	Un cache plus court, pour la boucle syndic_articles
 ]#CACHE{3600}
-<BOUCLE_rubrique_principal(RUBRIQUES) {id_rubrique}>
+<BOUCLE_principale(RUBRIQUES) {id_rubrique}>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
@@ -117,7 +117,8 @@
             <h2><:sur_web:></h2>
             <ul>
                 <BOUCLE_sites(SITES) {id_rubrique} {par nom_site}>
-                <li><a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]">#NOM_SITE</a>
+                <li>
+					<a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]">#NOM_SITE</a>
                     <B_syndic>
                     <ul>
                         <BOUCLE_syndic(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {0,3}>
@@ -172,4 +173,4 @@
 </div><!--#page-->
 </body>
 </html>
-</BOUCLE_rubrique_principal>
+</BOUCLE_principale>
