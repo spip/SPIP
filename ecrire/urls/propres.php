@@ -334,7 +334,10 @@ function urls_propres_dist($i, &$entite, $args='', $ancre='') {
 	$id_objet = $type = 0;
 
 	// Migration depuis anciennes URLs ?
-	if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+	if (
+		// traiter les injections du type domaine.org/spip.php/cestnimportequoi/ou/encore/plus/rubrique23
+	  $GLOBALS['profondeur_url']<=0
+	  AND $_SERVER['REQUEST_METHOD'] != 'POST') {
 		if (preg_match(
 		',(^|/)(article|breve|rubrique|mot|auteur|site)(\.php3?|[0-9]+(\.html)?)'
 		.'([?&].*)?$,', $url, $regs)
@@ -372,7 +375,12 @@ function urls_propres_dist($i, &$entite, $args='', $ancre='') {
 	elseif (isset($_ENV['url_propre']))
 		$url_propre = $_ENV['url_propre'];
 	else {
-		$url = substr($url, strrpos($url, '/') + 1);
+		// ne prendre que le segment d'url qui correspond, en fonction de la profondeur calculee
+		$url = ltrim($url,'/');
+		$url = explode('/',$url);
+		while (count($url)>$GLOBALS['profondeur_url']+1)
+			array_shift($url);
+		$url = implode('/',$url);
 		$url_propre = preg_replace(',[?].*,', '', $url);
 	}
 
@@ -383,6 +391,15 @@ function urls_propres_dist($i, &$entite, $args='', $ancre='') {
 	}
 
 	if (!$url_propre) return; // qu'est-ce qu'il veut ???
+	
+	// gerer le cas de retour depuis des urls arbos
+	// mais si url arbo ne trouve pas, on veut une 404 par securite
+	if ($GLOBALS['profondeur_url']>0){
+		$entite = 'type_urls';
+		$urls_anciennes = charger_fonction('arbo','urls');
+		$urls_anciennes($url_propre,$entite);
+		return;
+	}
 	
 	include_spip('base/abstract_sql'); // chercher dans la table des URLS
 
