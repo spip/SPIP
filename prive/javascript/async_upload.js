@@ -66,8 +66,12 @@ function async_upload_article_edit(res,s,jForm){
 	      find(">div[@class]")
 	      .addClass("documents_added")
 	      .css("display","none");
-	      if (jForm.find("input[@name='arg']").val().search("/0/image")!=-1)
+	      if (jForm.find("input[@name='arg']").val().search("/0/image")!=-1){
 	        cont = jQuery("#liste_images");
+	        // cas de l'interface document unifiee
+	        if (!cont.length)
+		        cont = jQuery("#liste_documents");
+	      }
 	      else
 	        cont = jQuery("#liste_documents");
 	      cont
