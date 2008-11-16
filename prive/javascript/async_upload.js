@@ -57,9 +57,9 @@ function async_upload_article_edit(res,s,jForm){
       if(!res) return true;
       var cont;
       //verify if a new document or a customized vignette
-      var anchor = jQuery(res.find(">a:first[@id^=document]"));
-			if(jQuery("#"+anchor.attr('id')).size()) {
-				cont = jQuery("#"+anchor.attr('id')).next().next().html(anchor.next().next().html());
+      var bloc = jQuery(res.find(">div:first[@id^=document]"));
+			if(jQuery("#"+bloc.attr('id')).size()) {
+				cont = jQuery("#"+bloc.attr('id')).html(bloc.html());
 			} else {
 	      //add a class to new documents
 	      res.
