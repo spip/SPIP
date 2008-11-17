@@ -1766,7 +1766,14 @@ function image_rotation($im, $angle, $crop=false)
 				imagick_writeimage( $handle, $dest);
 				$effectuer_gd = false;
 			}
-		} 
+		}
+		elseif(is_callable(array('Imagick','rotateImage'))){
+			$imagick = new Imagick();
+			$imagick->readImage($im);
+			$imagick->rotateImage(new ImagickPixel('#ffffff'), $angle);
+			$imagick->writeImage($dest);
+			$effectuer_gd = false;
+		}
 		if ($effectuer_gd) {
 			// Creation de l'image en deux temps
 			// de facon a conserver les GIF transparents
