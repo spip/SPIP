@@ -27,8 +27,6 @@ function genie_syndic_dist($t) {
 // http://doc.spip.org/@executer_une_syndication
 function executer_une_syndication() {
 
-	spip_connect();
-
 	## valeurs modifiables dans mes_options
 	## attention il est tres mal vu de prendre une periode < 20 minutes
 	define('_PERIODE_SYNDICATION', 2*60);

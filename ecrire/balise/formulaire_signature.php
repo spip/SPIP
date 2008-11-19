@@ -17,13 +17,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 //
 
 include_spip('base/abstract_sql');
-spip_connect();
 
 // Contexte necessaire lors de la compilation
 
 // Il *faut* demander petition, meme si on ne s'en sert pas dans l'affichage,
-// car on doit obtenir la jointure avec sql_petitions pour verifier si
-// une petition est attachee a l'article
+// car on doit obtenir la jointure avec la table des petitions pour verifier 
+// si une petition est attachee a l'article.
 
 // http://doc.spip.org/@balise_FORMULAIRE_SIGNATURE
 function balise_FORMULAIRE_SIGNATURE ($p) {
@@ -57,5 +56,4 @@ function balise_FORMULAIRE_SIGNATURE_stat($args, $filtres) {
 		return $args;
 	}
 }
-
 ?>
