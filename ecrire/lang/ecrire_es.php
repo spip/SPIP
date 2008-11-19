@@ -856,6 +856,7 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'repertoire_plugins' => 'Carpeta:',
 
 // S
+'sans_heure' => 'sin hora',
 'sauvegarde_fusionner' => 'Fusionar la base actual y el respaldo',
 'sauvegarde_fusionner_depublier' => 'Despublicar los objetos fusionados',
 'sauvegarde_url_origine' => 'Eventualemente, URL del sitio de origen:',

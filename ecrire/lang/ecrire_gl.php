@@ -897,6 +897,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'repertoire_plugins' => 'Repertorio&nbsp;:',
 
 // S
+'sans_heure' => 'sen hora',
 'sauvegarde_fusionner' => 'Fusionar a base de datos actual e a copia de seguridade',
 'sauvegarde_fusionner_depublier' => 'Despublicar os obxectos fusionados',
 'sauvegarde_url_origine' => 'Eventualemente, URL do web de orixe :',

@@ -900,6 +900,7 @@ in a colour indicating their status:',
 'repertoire_plugins' => 'Directory:',
 
 // S
+'sans_heure' => 'time unspecified',
 'sauvegarde_fusionner' => 'Merge the current database with the backup',
 'sauvegarde_fusionner_depublier' => 'Unpublish the merged objects',
 'sauvegarde_url_origine' => 'If necessary, the URL of the source site:',
