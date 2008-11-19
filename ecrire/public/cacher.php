@@ -96,6 +96,7 @@ function gunzip_page(&$page) {
 /// http://doc.spip.org/@cache_valide
 function cache_valide(&$page, $date) {
 
+	if (isset($GLOBALS['var_nocache']) AND $GLOBALS['var_nocache']) return -1;
 	if (defined('_NO_CACHE')) return (_NO_CACHE==0 AND !$page)?1:_NO_CACHE;
 	if (!$page) return 1;
 
@@ -269,8 +270,8 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 			return;
 		}
 	} else {
-		$use_cache = 1; // fichier cache absent : provoque le calcul
 		$page = array();
+		$use_cache = cache_valide($page,0); // fichier cache absent : provoque le calcul
 	}
 
 	// Si pas valide mais pas de connexion a la base, le garder quand meme
