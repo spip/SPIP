@@ -114,20 +114,11 @@ function construire_selectionner_hierarchie($idom, $liste, $racine, $url, $name,
 // http://doc.spip.org/@mini_hier
 function mini_hier ($id_rubrique) {
 	
-	$id_parent = $id_rubrique;
 	$liste = $id_rubrique;
-	while ($id_parent = mini_hierarchie_rub ($id_parent)) {
-		$liste = $id_parent.",".$liste;
-	}
-	$liste = "0,".$liste;
-	return explode(',',$liste);
-}
-
-
-// http://doc.spip.org/@mini_hierarchie_rub
-function mini_hierarchie_rub ($id_rubrique) {
-	$row = sql_fetsel("id_parent", "spip_rubriques", "id_rubrique = " . intval($id_rubrique));
-	return $row["id_parent"];
+	$id_rubrique = intval($id_rubrique);
+	while ($id_rubrique = sql_getfetsel("id_parent", "spip_rubriques", "id_rubrique = " . $id_rubrique))
+		$liste = $id_rubrique . ",$liste";
+	return explode(',',"0,$liste");
 }
 
 ?>
