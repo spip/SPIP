@@ -41,7 +41,15 @@ $GLOBALS['maj'][1932] = array(
 
 // Retrait de _DIR_IMG dans le champ fichier de la table des doc
 function maj_1_934 () {
-	  $dir_img = substr(_DIR_IMG,strlen(_DIR_RACINE));
+		// attention, en cas de mutualisation _DIR_IMG contient quelque chose comme sites/urldusite/IMG/
+  	// essayons en ne prenant que le dernier segment
+  	$dir_img = basename(_DIR_IMG).'/';
+	  $res = spip_query("SELECT fichier FROM spip_documents WHERE fichier LIKE " . _q($dir_img . '%') . " LIMIT 0,1");
+	  if (!$row = spip_fetch_array($res)){
+	  	//Êsinon on essaye avec le chemin complet
+			// il faut donc verifier qu'on a bien le bon nom de repertoire
+		  $dir_img = substr(_DIR_IMG,strlen(_DIR_RACINE));
+	  }
 	  $n = strlen($dir_img) + 1;
 	  spip_query("UPDATE spip_documents SET `fichier`=substring(fichier,$n) WHERE `fichier` LIKE " . _q($dir_img . '%'));
 }
