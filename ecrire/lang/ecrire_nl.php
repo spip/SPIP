@@ -898,6 +898,7 @@ een kleur geeft hun status aan&nbsp;:',
 'repertoire_plugins' => 'Map&nbsp;:',
 
 // S
+'sans_heure' => 'zonder huur',
 'sauvegarde_fusionner' => 'De huidige basis en de bescherming fusioneren',
 'sauvegarde_fusionner_depublier' => 'De gefusioneerde onderwerpen depubliceren',
 'sauvegarde_url_origine' => 'Eventueel URL van de site van oorsprong:',

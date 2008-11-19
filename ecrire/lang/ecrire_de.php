@@ -858,6 +858,7 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'repertoire_plugins' => 'Verzeichnis:',
 
 // S
+'sans_heure' => 'Ohne Zeit',
 'sauvegarde_fusionner' => 'Aktuelle Datenbank und Sicherungskopie zusammenf&uuml;hren',
 'sauvegarde_fusionner_depublier' => 'Zusammengef&uuml;hrte Objekte offline stellen',
 'sauvegarde_url_origine' => 'Wenn gew&uuml;nscht URL der Quelle:',
