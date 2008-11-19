@@ -24,7 +24,7 @@ div.spip_code, .spip_cadre { margin-bottom: 1em;  }
 .spip_surligne { background: #FF6; }
 
 /* Tableaux */
-table.spip { margin-right: auto; margin-left: auto; margin-bottom: 1em; border-collapse: collapse; border-spacing: 0; line-height: normal; }
+table.spip { max-width: 99%; margin-right: auto; margin-left: auto; margin-bottom: 1em; border-collapse: collapse; border-spacing: 0; line-height: normal; }
 table.spip caption { caption-side: top; /* bottom pas pris en compte par IE */ text-align: center; margin-right: auto; margin-left: auto; font-weight: bold; }
 table.spip tr.row_first { background: #FFC; }
 table.spip tr.row_odd { background: #EEE; }
