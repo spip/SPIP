@@ -485,62 +485,64 @@ function urls_arbo_dist($i, &$entite, $args='', $ancre='') {
 		$url_propre = preg_replace('{('
 		  .implode('|',array_map('preg_quote',$t)).')$}i', '', $url_propre);
 
-	$synonymes_types = url_arbo_type('');
-	$types_parents = array();
+	if (strlen($url_propre) AND !preg_match(',^[^/]*[.]php,',$url_propre)){
+		$synonymes_types = url_arbo_type('');
+		$types_parents = array();
+		
+		// recuperer tous les objets de larbo xxx/article/yyy/mot/zzzz
+		$url_arbo = explode('/',$url_propre);
+		while (count($url_arbo)>0){
+			$url_propre = array_pop($url_arbo);
+			if (count($url_arbo))
+				$type = array_pop($url_arbo);
+			else
+				$type=null;
+			$typesyn = isset($synonymes_types[$type])?$synonymes_types[$type]:$type;
+			// Compatibilite avec les anciens marqueurs d'URL propres
+			// Tester l'entree telle quelle (avec 'url_libre' des sites ont pu avoir des entrees avec marqueurs dans la table spip_urls)
+			if (is_null($type)
+			  OR !$row=sql_fetsel('id_objet, type, date', 'spip_urls',array('url='.sql_quote("$typesyn/$url_propre")))) {
+			  if (!is_null($type))
+					array_push($url_arbo,$type);
+				$row = sql_fetsel('id_objet, type, date', 'spip_urls',array('url='.sql_quote($url_propre)));
+			}
+			if ($row) {
+				$type = $row['type'];
+		
+				// Redirection 301 si l'url est vieux
+				/*if ($recent = sql_fetsel('url, date', 'spip_urls',
+				'type='.sql_quote($row['type']).' AND id_objet='.sql_quote($row['id_objet'])
+				.' AND date>'.sql_quote($row['date']), '', 'date DESC', 1)) {
+					spip_log('Redirige '.$url_propre.' vers '.$recent['url']);
+					include_spip('inc/headers');
+					redirige_par_entete($recent['url']);
+				}*/
+		
+				$col_id = id_table_objet($type);
+				if (!isset($contexte[$col_id])) // n'affecter que la premiere fois un parent de type id_rubrique
+					$contexte[$col_id] = $row['id_objet'];
+				if (!$entite 
+					OR !in_array($type,$types_parents))
+					$entite = $type;
 	
-	// recuperer tous les objets de larbo xxx/article/yyy/mot/zzzz
-	$url_arbo = explode('/',$url_propre);
-	while (count($url_arbo)>0){
-		$url_propre = array_pop($url_arbo);
-		if (count($url_arbo))
-			$type = array_pop($url_arbo);
-		else
-			$type=null;
-		$typesyn = isset($synonymes_types[$type])?$synonymes_types[$type]:$type;
-		// Compatibilite avec les anciens marqueurs d'URL propres
-		// Tester l'entree telle quelle (avec 'url_libre' des sites ont pu avoir des entrees avec marqueurs dans la table spip_urls)
-		if (is_null($type)
-		  OR !$row=sql_fetsel('id_objet, type, date', 'spip_urls',array('url='.sql_quote("$typesyn/$url_propre")))) {
-		  if (!is_null($type))
-				array_push($url_arbo,$type);
-			$row = sql_fetsel('id_objet, type, date', 'spip_urls',array('url='.sql_quote($url_propre)));
-		}
-		if ($row) {
-			$type = $row['type'];
-	
-			// Redirection 301 si l'url est vieux
-			/*if ($recent = sql_fetsel('url, date', 'spip_urls',
-			'type='.sql_quote($row['type']).' AND id_objet='.sql_quote($row['id_objet'])
-			.' AND date>'.sql_quote($row['date']), '', 'date DESC', 1)) {
-				spip_log('Redirige '.$url_propre.' vers '.$recent['url']);
+				if ($p = url_arbo_parent($type))
+					$types_parents[]=end($p);
+			}
+			else {
+				// un segment est inconnu
+				// on genere une 404 comme il faut
 				include_spip('inc/headers');
-				redirige_par_entete($recent['url']);
-			}*/
-	
-			$col_id = id_table_objet($type);
-			if (!isset($contexte[$col_id])) // n'affecter que la premiere fois un parent de type id_rubrique
-				$contexte[$col_id] = $row['id_objet'];
-			if (!$entite 
-				OR !in_array($type,$types_parents))
-				$entite = $type;
-
-			if ($p = url_arbo_parent($type))
-				$types_parents[]=end($p);
+				http_status('404');
+				$entite = '404';
+				return;
+			}
 		}
-		else {
-			// un segment est inconnu
-			// on genere une 404 comme il faut
-			include_spip('inc/headers');
-			http_status('404');
-			$entite = '404';
-			return;
-		}
-	}
 
-	// gerer le retour depuis des urls propres
-	if ($entite=='type_urls' AND $GLOBALS['profondeur_url']<=0){
-		$urls_anciennes = charger_fonction('propres','urls');
-		$urls_anciennes($url_propre,$entite);
+		// gerer le retour depuis des urls propres
+		if ($entite=='type_urls' AND $GLOBALS['profondeur_url']<=0){
+			$urls_anciennes = charger_fonction('propres','urls');
+			$urls_anciennes($url_propre,$entite);
+		}
 	}
 	if ($entite=='type_urls') {
 		if ($type)
