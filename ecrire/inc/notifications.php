@@ -157,11 +157,7 @@ function email_notification_forum ($t, $email) {
 	$url = '';
 	$id_forum = $t['id_forum'];
 
-	if ($t['statut'] == 'prop') # forum modere
-	{
-		$url = generer_url_ecrire('controle_forum', "debut_id_forum=".$id_forum);
-	}
-	else if ($t['statut'] == 'prive') # forum prive
+	if ($t['statut'] == 'prive') # forum prive
 	{
 		if ($t['id_article'])
 			$url = generer_url_ecrire('articles', 'id_article='.$t['id_article']).'#id'.$id_forum;
@@ -177,9 +173,16 @@ function email_notification_forum ($t, $email) {
 	else if ($t['statut'] == 'privadm') # forum des admins
 	{
 		$url = generer_url_ecrire('forum_admin').'#id'.$id_forum;
-	} else {
+	}
+	else if ($t['statut'] == 'publie') # forum publie
+	{
 		$url = generer_url_entite($id_forum, 'forum');
 	}
+	else #  forum modere, spam, poubelle direct ....
+	{
+		$url = generer_url_ecrire('controle_forum', "debut_id_forum=".$id_forum);
+	}
+	
 	if (!$url) {
 		spip_log("forum $id_forum sans referent");
 		$url = './';
