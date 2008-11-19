@@ -44,7 +44,7 @@ h1 { font-size: 1.27em; font-weight: bold; }
 
 .texte { line-height: 1.40em; }
 
-.ps, .notes, #documents_portfolio, #documents_joints { margin-top: 1.40em; padding-top: 0.20em; border-top: 2pt solid #CCC; font-size: 0.82em; }
+.ps, .notes, #documents_portfolio, #documents_joints { clear: both; margin-top: 1.40em; padding-top: 0.20em; border-top: 2pt solid #CCC; font-size: 0.82em; }
 .ps h2, .notes h2, #documents_joints h2 { font-weight: bold; clear: both; }
 
 /*  Citations, tableaux, etc...
