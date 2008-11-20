@@ -218,7 +218,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	// quatre versions possibles : gzip ou non, session ou non
 	$chemin_cache = generer_nom_fichier_cache($contexte, $page);
 
-	if (@file_exists(_DIR_CACHE . ($f = $chemin_cache))
+	if (@file_exists(_DIR_CACHE . ($f = $g = $chemin_cache))
 	OR (@file_exists(_DIR_CACHE . ($f = $chemin_cache.'-'.spip_session())))
 	) {
 		$lastmodified = @filemtime(_DIR_CACHE . $f);
@@ -250,7 +250,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	) {
 		supprimer_fichier(_DIR_CACHE . $f);
 		if (in_array($GLOBALS['var_mode'], array('calcul', 'recalcul')))
-			array_map('supprimer_fichier', preg_files(_DIR_CACHE . $f));
+			array_map('supprimer_fichier', preg_files(_DIR_CACHE . $g));
 	}
 
 	// $delais par defaut (pour toutes les pages sans #CACHE{})
