@@ -330,7 +330,17 @@ function import_tables($request, $archive) {
 		declarer_interfaces();
 		
 		// puis relister les tables a importer
-		$tables = import_table_choix($request);
+		// et les vider si besoin, au moment du premier passage ici
+		// (et seulement si ce n'est pas une fusion, comment le dit-on ?)
+		$initialisation_copie = (!isset($GLOBALS['meta']["restauration_status_copie"])) ? 0 :
+			$GLOBALS['meta']["restauration_status_copie"];
+
+		if (!$initialisation_copie) {
+			// vide et liste les tables
+			$tables = import_init_tables($request);
+			ecrire_meta("restauration_status_copie", "ok",'non');
+		} else
+			$tables = import_table_choix($request);
 #		var_dump($tables);die();
 
 		if (in_array('spip_auteurs',$tables)){
@@ -351,7 +361,8 @@ function import_tables($request, $archive) {
 						$n = intval($tables_recopiees[$table]);
 						$res = sql_select('*',$table,'','','',"$n,400",'','-1');
 						while ($row = sql_fetch($res,'-1')){
-							sql_insertq($table,$row);
+							array_walk($row,'sql_quote');
+							sql_replace($table,$row);
 							$tables_recopiees[$table]++;
 						}
 						if ($n == $tables_recopiees[$table])
@@ -369,6 +380,7 @@ function import_tables($request, $archive) {
 			}
 		}
 	}
+	#die();
 	return '' ;
 }
 
@@ -393,7 +405,7 @@ function import_init_meta($tag, $atts, $charset, $request)
 		spip_log("import_init_meta lance $init");
 		$init($request);
 	}
-	
+
 	ecrire_meta('restauration_attributs_archive', serialize($atts),'non');
 	ecrire_meta('restauration_version_archive', $version_archive,'non');
 	ecrire_meta('restauration_tag_archive', $tag,'non');
