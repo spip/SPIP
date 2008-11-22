@@ -109,35 +109,30 @@ function mots_ressemblants($mot, $table_mots, $table_ids='') {
 // http://doc.spip.org/@affiche_mots_ressemblant
 function affiche_mots_ressemblant($cherche_mot, $objet, $id_objet, $resultat, $table, $table_id, $url_base)
 {
-	$les_mots = join(',', $resultat);
-	$result = sql_select("*", "spip_mots", "id_mot IN ($les_mots)", "", "titre", "17");
+	$les_mots = sql_in('id_mot', $resultat);
+	$res = sql_allfetsel("*", "spip_mots", $les_mots, "", "titre", "17");
 
-	$res ="<ul>\n";
-	while ($row = sql_fetch($result)) {
+	foreach ($res as $k => $row) {
 		$id_mot = $row['id_mot'];
-		$titre_mot = $row['titre'];
-		$type_mot = typo($row['type']);
-		$descriptif_mot = $row['descriptif'];
+		$titre = $row['titre'];
+		$type = typo($row['type']);
+		$descriptif = $row['descriptif'];
 
-		$res .="<li>"
-		.  ajax_action_auteur('editer_mots', "$id_objet,,$table,$table_id,$objet,$id_mot", $url_base, "$table_id=$id_objet", array(typo($titre_mot),' title="' . _T('info_ajouter_mot') .'"'),"&id_objet=$id_objet&objet=$objet") ; 
-		if (strlen($descriptif_mot)) {
-			$res .= "\n(<span class='spip_xx-small'>".supprimer_tags(propre(couper($descriptif_mot, 100))).")</span><br />\n";
-		}
-		$res .="</li>\n";
+		$res[$k]= ajax_action_auteur('editer_mots', "$id_objet,,$table,$table_id,$objet,$id_mot", $url_base, "$table_id=$id_objet", array(typo($titre),' title="' . _T('info_ajouter_mot') .'"'),"&id_objet=$id_objet&objet=$objet") .
+		  (!$descriptif ? '' : ("\n(<span class='spip_xx-small'>".supprimer_tags(couper(propre($descriptif), 100)).")</span><br />\n"));
+
 	}
-	$res .= "</ul>";
 
-	if (count($resultat) > 17)
-		$res2 .="<br /><strong>" ._T('info_trop_resultat', array('cherche_mot' => $cherche_mot)) ."</strong><br />\n";
-				
-	$res2 = (strlen($type_mot)
-		? "<strong>$type_mot</strong>&nbsp;: "
+	$res2 = ($type
+		? "<strong>$type</strong>&nbsp;: "
 		: '' )
 		. _T('info_plusieurs_mots_trouves', array('cherche_mot' => $cherche_mot))
 		."<br />";
 
-	return $res2 . $res;
+	if (count($resultat) > 17)
+		$res2 .= "<br /><strong>" ._T('info_trop_resultat', array('cherche_mot' => $cherche_mot)) ."</strong><br />\n";
+
+	return $res2 . '<ul><li>' . join("</li>\n<li>", $res) . '</li></ul>';
 }
 
 ?>
