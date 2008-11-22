@@ -123,7 +123,17 @@ function index_exception(&$boucle, $desc, $nom_champ, $excep)
 			if (!$j) return array('','');
 			$e = $j['table'];
 			if (!$t = array_search($e, $boucle->from)) {
-				fabrique_jointures($boucle, array(array($boucle->id_table, array($j['table']), $j['key']['PRIMARY KEY'])));
+				$k = $j['key']['PRIMARY KEY'];
+				if (strpos($k,',')) {
+					$l = (preg_split('/\s*,\s*/', $k));
+					$k = $desc['key']['PRIMARY KEY'];
+					if (!in_array($k, $l)) {
+						spip_log("jointure impossible $e " . join(',', $l));
+						return array('','');
+					}
+				}
+				$k = array($boucle->id_table, array($e), $k);
+				fabrique_jointures($boucle, array($k));
 				$t = array_search($e, $boucle->from);
 			}
 		}
