@@ -295,8 +295,7 @@ function objet_auteur_select($cond)
 function selecteur_auteur_ajax($type, $id, $js, $text)
 {
 	include_spip('inc/chercher_rubrique');
-	$url = generer_url_ecrire('selectionner_auteur',"id_article=$id");
-
+	$url = generer_url_ecrire('selectionner_auteur',"id_article=$id&type=$type");
 	return $text . construire_selecteur($url, $js, 'selection_auteur', 'nouv_auteur', ' type="hidden"');
 }
 ?>
