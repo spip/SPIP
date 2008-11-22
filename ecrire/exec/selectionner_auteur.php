@@ -18,8 +18,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function exec_selectionner_auteur_dist()
 {
   	$id = intval(_request('id_article'));
-
+	$type = _request('type');
+	if (!preg_match(',^[a-z_]+$,',$type)) $type = 'article';
 	$selectionner_auteur = charger_fonction('selectionner_auteur', 'inc');
-	ajax_retour($selectionner_auteur($id));
+	ajax_retour($selectionner_auteur($id, $type));
 }
 ?>
