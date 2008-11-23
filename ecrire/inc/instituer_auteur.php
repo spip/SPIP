@@ -102,11 +102,13 @@ function choix_statut_auteur($statut, $id_auteur, $ancre) {
 			$menu .=  mySel($v, $statut, $k);
 	}
 
-	// Chercher tous les statuts non permis a present
-	$q = sql_select("statut", 'spip_auteurs', "statut NOT IN ('nouveau'," . sql_quote($droits) . ")",  "statut");
+	// Chercher les statuts non standards
+	$l = $GLOBALS['liste_des_statuts'];
+	$l[]= 'nouveau';
+	$q = sql_allfetsel("statut", 'spip_auteurs', sql_in('statut', $l, 'NOT'), "statut");
 
 	$hstatut = htmlentities($statut);
-	while ($r = sql_fetch($q)) {
+	foreach ($q as $r) {
 		$nom = htmlentities($r['statut']);
 		$t = traduire_statut_auteur($nom);
 		$t = !$t ? (_T('info_statut_auteur_autre') . ' ' . $nom) : $t;
