@@ -595,6 +595,7 @@ function bandeau_double_rangee($rubrique, $sous_rubrique, $largeur)
   . "boutons_admin.one('mouseover',decaleSousMenu);\n"
   . "function change_menu_lang(show){
   if (show) {jQuery('#menu_langues0').show().siblings('input.lang_ecrire').hide();}
+  if(!jQuery('#menu_langues0').length) return;
   else {
   	if (!jQuery('#menu_langues0').siblings('input.lang_ecrire').length){
   	jQuery('#menu_langues0').before('<input type=\"text\" name=\"dummy\" class=\"lang_ecrire\" value=\"\" />');
