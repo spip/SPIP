@@ -425,13 +425,15 @@ function parametres_css_prive(){
 	
 	$v = "&v=".$GLOBALS['spip_version_code'];
 
+	$p = "&p=".substr(md5($GLOBALS['meta']['plugins_installes']),0,4);
+	
 	$c = (is_array($visiteur_session)
 	AND is_array($visiteur_session['prefs']))
 		? $visiteur_session['prefs']['couleur']
 		: 1;
 
 	$couleurs = charger_fonction('couleurs', 'inc');
-	return 'ltr=' . $GLOBALS['spip_lang_left'] . '&'. $couleurs($c) .$v . $ie ;
+	return 'ltr=' . $GLOBALS['spip_lang_left'] . '&'. $couleurs($c) . $v . $p . $ie ;
 }
 
 
