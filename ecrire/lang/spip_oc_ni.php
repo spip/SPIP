@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_recalculer' => 'Tornar calcular la p&agrave;gina',
 'afficher_trad' => 'afichar li reviradas',
 'alerte_maj_impossible' => '<b>Al&egrave;rta!</b> Es impossible d\'actualisar la basa SQL v&egrave;rs la version @version@; bessai li a un problema relatiu au drech de modificar la basa de donadas. Vorgatz contactar lo voastre aubergador.',
+'alerte_modif_info_concourante' => '<NEW>ATTENTION : Cette information a &eacute;t&eacute; modifi&eacute; par ailleurs. La valeur actuelle est&nbsp;:',
 'analyse_xml' => 'Analisa XML',
 'annuler' => 'Anular',
 'antispam_champ_vide' => 'Vorgatz laissar aquel camp vu&egrave;i:',
@@ -59,9 +60,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_lien' => 'Transformar en [ligam ipert&egrave;xt->http://...]',
 'barre_lien_input' => 'Vorgatz indicar l\'adre&ccedil;a dau voastre ligam (pod&egrave;tz indicar una adre&ccedil;a web sota la forma http://www.lomieusit.com &ograve; simplament indicar lo n&uacute;mero d\'un article d\'aqueu sit).',
 'barre_note' => 'Transformar en [[N&ograve;ta de bas de p&agrave;gina]]',
+'barre_paragraphe' => '<NEW>Cr&#233;er un paragraphe',
 'barre_quote' => '<quote>Citar un messatge</quote>',
-'bouton_ajouter_document' => '<MODIF>AJUSTAR UN DOCUMENT',
-'bouton_ajouter_image' => '<MODIF>AJUSTAR UN IMATGE',
+'bouton_ajouter_document' => 'Ajustar un document',
+'bouton_ajouter_image' => 'Ajustar un imatge',
+'bouton_ajouter_image_document' => '<NEW>Ajouter une image ou&nbsp;un&nbsp;document',
 'bouton_changer' => 'Cambiar',
 'bouton_chercher' => 'Cercar',
 'bouton_choisir' => 'Chausir',
@@ -201,6 +204,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'double_occurrence' => 'Dobla ocurr&eacute;n&ccedil;a',
 
 // E
+'en_cours' => '<NEW>en cours',
 'entree_dimensions' => 'Dimensions:',
 'entree_titre_document' => 'Titre dau document:',
 'entree_titre_image' => 'Titre de l\'imatge:',
@@ -208,6 +212,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'Error',
 'erreur_balise_non_fermee' => 'darri&egrave;ra balisa non tapada :',
 'erreur_texte' => 'error(s)',
+'etape' => '<NEW>&Eacute;tape',
 
 // F
 'fichier_introuvable' => 'Fichier @fichier@ introuvable',
@@ -235,7 +240,7 @@ dau sit "@nom_site_spip@" (@adresse_site@) :',
 'form_pet_confirmation' => 'Vorgatz confirmar la voastra signatura :',
 'form_pet_deja_enregistre' => 'Aqueu sit es ja registrat',
 'form_pet_deja_signe' => 'Av&egrave;tz ja signat aqueu t&egrave;xt.',
-'form_pet_envoi_mail_confirmation' => '<MODIF>Anatz recebre un corrier electronic de confirmacion. Per validar la voastra signatura, cau visitar l\'adre&ccedil;a web mencionada per aquest corrier.',
+'form_pet_envoi_mail_confirmation' => 'A&uuml;ra recebretz un corrier electronic de confirmacion sus @email@. Per validar la voastra signatura, cau visitar l\'adre&ccedil;a web mencionada per aquest corrier.',
 'form_pet_mail_confirmation' => 'Boanjorn,
 
 Av&egrave;tz demandat de signar la peticion:
@@ -473,9 +478,11 @@ Merc&eacute; de la voastra participacion
 'info_nouveau_message' => 'AV&Egrave;TZ UN MESSATGE NOV&Egrave;U',
 'info_nouveaux_messages' => 'AV&Egrave;TZ @total_messages@ MESSATGES N&Ograve;US',
 'info_numero_abbreviation' => 'N&deg;&nbsp;',
+'info_obligatoire' => '<NEW>Cette information est obligatoire',
 'info_panne_site_syndique' => 'Sit sindicat en pana',
 'info_pense_bete' => 'N&Ograve;TA DE RENEMBRAN&Ccedil;A ',
 'info_petit_ecran' => 'Pichon ecran',
+'info_petition_close' => '<NEW>P&eacute;tition close',
 'info_pixels' => 'pix&egrave;us',
 'info_plusieurs_mots_trouves' => 'Mantun m&ograve;ts claus trobats per "@cherche_mot@":',
 'info_popularite_5' => 'popularitat:',
@@ -588,6 +595,7 @@ Merc&eacute; de la voastra participacion
 'login_verifiez_navigateur' => '(verificatz pura que lo voastre navigador a pas conservat lo m&ograve;t de santa Clara en mem&ograve;ria...)',
 
 // M
+'masquer_colonne' => '<NEW>Masquer cette colonne',
 'masquer_trad' => 'Escondre li reviradas',
 'module_fichiers_langues' => 'Fichiers de langa',
 
@@ -684,7 +692,7 @@ e vos tornar connectar au sit.
 'texte_erreur_mise_niveau_base' => 'Error de basa de donadas pendent la mesa &agrave; niv&egrave;u. L\'imatge <b>@fichier@</b> es pas passat (article @id_article@).
   Notatz ben aquela referen&ccedil;a, tornatz ensajar la mesa &agrave; niv&egrave;u, e verificatz pi que lu imatges apar&eacute;isson encara dins lu articles.',
 'texte_erreur_visiteur' => 'Av&egrave;tz provat d\'acc&egrave;dre &agrave; l\'espaci privat m\'un identificant que lo permete pas.',
-'texte_inc_auth_1' => '<MODIF>Si&egrave;tz identificat/ada coma
+'texte_inc_auth_1' => 'Si&egrave;tz identificat/ada coma
    <b>@auth_login@</b>, ma aqueu login existisse pas &ograve; pas plus mai dins la basa.
   Temptatz de vos',
 'texte_inc_auth_2' => 'tornar connectar',
@@ -722,19 +730,26 @@ e vos tornar connectar au sit.
 'titre_mots_cles' => 'M&Ograve;TS CLAUS',
 'titre_probleme_technique' => 'Atencion&nbsp;: un problema tecnic (servidor SQL) empacha d\'accedir &agrave;-n-aquela part dau sit. Merc&eacute; de la voastra indulgen&ccedil;a.',
 'titre_publier_document' => 'PUBLICAR UN DOCUMENT DINS AQUELA RUBRICA',
+'titre_signatures_attente' => '<NEW>Signatures en attente de validation',
+'titre_signatures_confirmees' => '<NEW>Signatures confirm&eacute;es',
 'titre_statistiques' => 'Estatisticas dau sit',
 'titre_titre_document' => 'Titre dau document&nbsp;:',
+'todo' => '<NEW>&agrave; venir',
 'trad_reference' => '(article de referen&ccedil;a)',
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balisa B en aval',
+'zbug_balise_inexistante' => '<NEW>erreur @from@: la balise #@balise@ n\'existe pas',
+'zbug_balise_sans_argument' => '<NEW>Argument manquant dans la balise @balise@',
 'zbug_boucle' => 'bloca',
 'zbug_boucle_recursive_undef' => 'bloca recursiva non definida',
+'zbug_calcul' => '<NEW>calcul',
 'zbug_champ_hors_boucle' => 'Camp @champ@ f&ograve;ra bloca',
 'zbug_champ_hors_motif' => 'Camp @champ@ en def&ograve;ra d\'una bloca de motiu @motif@',
 'zbug_code' => 'c&ograve;de',
 'zbug_critere_inconnu' => 'crit&egrave;ri esconoissut @critere@',
 'zbug_distant_interdit' => 'ext&egrave;rne pro&iuml;bit',
+'zbug_doublon_table_sans_cle_primaire' => '<NEW>doublons sur une table sans clef primaire atomique',
 'zbug_doublon_table_sans_index' => 'doblons sus una taula sensa ind&egrave;x',
 'zbug_erreur_boucle_double' => 'BLOCA@id@: definicion dobla',
 'zbug_erreur_boucle_fermant' => 'BLOCA@id@: lo tag barrador manca',
@@ -744,6 +759,7 @@ e vos tornar connectar au sit.
 'zbug_erreur_filtre' => 'Error: filtre <b>&laquo; @filtre@ &raquo;</b> non definit',
 'zbug_erreur_meme_parent' => '{meme_parent} s\'aplica unicament ai blocas (FORUMS) &ograve; (RUBRIQUES)',
 'zbug_erreur_squelette' => 'Error(s) dins l\'esqueleta',
+'zbug_hors_compilation' => '<NEW>Hors Compilation',
 'zbug_info_erreur_squelette' => 'Error sobre lo sit',
 'zbug_inversion_ordre_inexistant' => 'inversion d\'un &ograve;rdre inexistent',
 'zbug_pagination_sans_critere' => '#PAGINATION sensa crit&egrave;ri {pagination} &ograve; emplegat dins una bocla recursiva',
@@ -751,6 +767,7 @@ e vos tornar connectar au sit.
 'zbug_profile' => 'Temps de calcul&nbsp;: @time@',
 'zbug_resultat' => 'resultat',
 'zbug_serveur_indefini' => 'servidor SQL endefinit',
+'zbug_statistiques' => '<NEW>Statistiques des requ&ecirc;tes SQL class&eacute;es par dur&eacute;e',
 'zbug_table_inconnue' => 'Taula SQL &laquo; @table@ &raquo; esconoissuda',
 'zxml_connus_attributs' => 'atributs conoissuts',
 'zxml_de' => 'de',
