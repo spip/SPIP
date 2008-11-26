@@ -1,3 +1,8 @@
 <BOUCLE_ext(DOCUMENTS types_documents) {id_document} {tout}>[(#INCLURE
 {fond=modeles/[(#MIME_TYPE|substr{0,[(#MIME_TYPE|strpos{/})]})]}{id=#ID_DOCUMENT}{env}
-)]</BOUCLE_ext>
+)]
+<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>[
+<dt class='#EDIT{titre} spip_doc_titre'[ style='width:(#GET{width}|min{350}|max{120})px;']><strong>(#TITRE)</strong></dt>][
+<dd class='#EDIT{descriptif} spip_doc_descriptif'[ style='width:(#GET{width}|min{350}|max{120})px;']>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</dd>]
+</dl>
+</BOUCLE_ext>
