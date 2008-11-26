@@ -139,13 +139,10 @@ $tables_mime = array(
 		'aiff'=>'audio/x-aiff',
 		'asf'=>'video/x-ms-asf',
 		'avi'=>'video/x-msvideo',
-<<<<<<< .courant
-=======
 		'anx'=>'application/annodex',
 		'axa'=>'audio/annodex',
 		'axv'=>'video/annodex',
 		'flac' => 'audio/x-flac',
->>>>>>> .fusion-droit.r13268
 		'flv' => 'video/x-flv',
 		'mid'=>'audio/midi',
 		'mka' => 'audio/mka',
