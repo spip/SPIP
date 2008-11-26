@@ -775,7 +775,14 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 	if (!function_exists($f = 'generer_url_' . $entite)) {
 		if (!function_exists($f .= '_dist')) $f = '';
 	}
-	if ($f) return $f($id, $args, $ancre);
+	if ($f) {
+		$url = $f($id, $args, $ancre);
+		if (strlen($args))
+			$url .= strstr('?', $url)
+				? '&amp;'.$args
+				: '?'.$args;
+		return $url;
+	}
 	// On a ete gentil mais la ....
 	spip_log("generer_url_entite: entite $entite ($f) inconnue $type");
 	return '';
