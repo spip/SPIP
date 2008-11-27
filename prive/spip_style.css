@@ -49,7 +49,7 @@ img, .spip_logos { margin: 0; padding: 0; border: 0; }
 /* Couleurs des liens de SPIP */
 a.spip_note {} /* liens vers notes de bas de page */
 a.spip_ancre {} /* liens internes a la page */
-a.spip_in { color: #900; } /* liens internes */
+a.spip_in {} /* liens internes */
 a.spip_mail { color: #900; }
 a.spip_mail:before { content: "\002709"; } /* liens vers un email */
 a.spip_out { color: #009; } /* liens sortants */
