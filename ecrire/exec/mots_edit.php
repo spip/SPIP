@@ -111,7 +111,7 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 			$flag_editable = autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe));
 			$iconifier = charger_fonction('iconifier', 'inc');
 			$out .= $iconifier('id_mot', $id_mot, 'mots_edit', $flag_editable);
-		}
+		} else $flag_editable = false;
 
 		//
 		// Afficher les boutons de creation 
@@ -124,42 +124,43 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 			  . icone_horizontale(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit", "new=oui&id_groupe=$id_groupe&redirect=" . generer_url_retour('mots_tous')),  "mot-cle-24.gif",  "creer.gif", false);
 		}
 
-	$out .= pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
-	$out .= bloc_des_raccourcis($res . icone_horizontale(_T('icone_voir_tous_mots_cles'), generer_url_ecrire("mots_tous",""), "mot-cle-24.gif", "rien.gif", false));
-	$out .= creer_colonne_droite('',true);
-	$out .= pipeline('affiche_droite',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
-	$out .= debut_droite('',true);
+	$out .= pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''))
+	.  bloc_des_raccourcis($res . icone_horizontale(_T('icone_voir_tous_mots_cles'), generer_url_ecrire("mots_tous",""), "mot-cle-24.gif", "rien.gif", false))
+	.  creer_colonne_droite('',true)
+	.  pipeline('affiche_droite',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''))
+	.  debut_droite('',true);
 
 	
 	// --- Voir le mot ----
 	
 	$out .= debut_cadre_relief("mot-cle-24.gif",true,'','','mot-voir',$editer?'none':'');
-	$out .= icone_inline(_T('icone_modifier_mot'), generer_url_ecrire('mots_edit',"id_mot=$id_mot&edit=oui"), "mot-cle-24.gif", "rien.gif",$spip_lang_right,false," onclick=\"$('#mot-editer').show();$('#mot-voir').hide();return false;\"");
+	if ($flag_editable)
+		$out .= icone_inline(_T('icone_modifier_mot'), generer_url_ecrire('mots_edit',"id_mot=$id_mot&edit=oui"), "mot-cle-24.gif", "rien.gif",$spip_lang_right,false," onclick=\"$('#mot-editer').show();$('#mot-voir').hide();return false;\"");
 	$out .= gros_titre(sinon($titre_mot,_T('texte_nouveau_mot')),'',false);
 	$out .= "<div class='nettoyeur'></div>";
 	
 	$contenu_mot = "";
 
 	if ($descriptif) {
-		$contenu_mot .= "<div style='border: 1px dashed #aaaaaa; ' class='verdana1 spip_small'>";
-		$contenu_mot .= "<b>" . _T('info_descriptif') . "</b> ";
-		$contenu_mot .= propre($descriptif);
-		$contenu_mot .= "&nbsp; ";
-		$contenu_mot .= "</div>";
+		$contenu_mot .= "<div style='border: 1px dashed #aaaaaa; ' class='verdana1 spip_small'>"
+		. "<b>" . _T('info_descriptif') . "</b> "
+		. propre($descriptif)
+		. "&nbsp; "
+		. "</div>";
 	}
 
 	if (strlen($texte)>0){
-		$contenu_mot .= "<p class='verdana1 spip_small'>";
-		$contenu_mot .= propre($texte);
-		$contenu_mot .= "</p>";
+		$contenu_mot .= "<p class='verdana1 spip_small'>"
+		. propre($texte)
+		. "</p>";
 	}
 
 	if ($les_notes) {
-		$contenu_mot .= debut_cadre_relief('',true);
-		$contenu_mot .= "<div dir='" . lang_dir() ."' class='arial11'>";
-		$contenu_mot .= justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes);
-		$contenu_mot .= "</div>";
-		$contenu_mot .= fin_cadre_relief(true);
+		$contenu_mot .= debut_cadre_relief('',true)
+		. "<div dir='" . lang_dir() ."' class='arial11'>"
+		. justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes)
+		. "</div>"
+		. fin_cadre_relief(true);
 	}
 	
 	$contexte = array('id'=>$id_mot);
@@ -183,20 +184,21 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 		else
 			$aff_articles = "'prop','publie'";
 
-		$out .= afficher_objets('rubrique','<b>' . _T('info_rubriques_liees_mot') . '</b>', array("FROM" => 'spip_rubriques AS rubrique, spip_mots_rubriques AS lien', 'WHERE' => "lien.id_mot=$id_mot AND lien.id_rubrique=rubrique.id_rubrique", 'ORDER BY' => "rubrique.titre"));
+		$out .= afficher_objets('rubrique','<b>' . _T('info_rubriques_liees_mot') . '</b>', array("FROM" => 'spip_rubriques AS rubrique LEFT JOIN spip_mots_rubriques AS lien ON lien.id_rubrique=rubrique.id_rubrique', 'WHERE' => "lien.id_mot=$id_mot", 'ORDER BY' => "rubrique.titre"));
 
-		$out .= afficher_objets('article',_T('info_articles_lies_mot'),	array('FROM' => "spip_articles AS articles, spip_mots_articles AS lien", 'WHERE' => "lien.id_mot=$id_mot AND lien.id_article=articles.id_article AND articles.statut IN ($aff_articles)", 'ORDER BY' => "articles.date DESC"));
+		$out .= afficher_objets('article',_T('info_articles_lies_mot'), array('FROM' => "spip_articles AS articles LEFT JOIN spip_mots_articles AS lien ON lien.id_article=articles.id_article", 'WHERE' => "lien.id_mot=$id_mot AND articles.statut IN ($aff_articles)", 'ORDER BY' => "articles.date DESC"));
 
-		$out .= afficher_objets('breve','<b>' . _T('info_breves_liees_mot') . '</b>', array("FROM" => 'spip_breves AS breves, spip_mots_breves AS lien', 'WHERE' => "lien.id_mot=$id_mot AND lien.id_breve=breves.id_breve", 'ORDER BY' => "breves.date_heure DESC"));
+		$out .= afficher_objets('breve','<b>' . _T('info_breves_liees_mot') . '</b>', array("FROM" => 'spip_breves AS breves LEFT JOIN spip_mots_breves AS lien ON lien.id_breve=breves.id_breve', 'WHERE' => "lien.id_mot=$id_mot", 'ORDER BY' => "breves.date_heure DESC"));
 
-		$out .= afficher_objets('site','<b>' . _T('info_sites_lies_mot') . '</b>', array("FROM" => 'spip_syndic AS syndic, spip_mots_syndic AS lien', 'WHERE' => "lien.id_mot=$id_mot AND lien.id_syndic=syndic.id_syndic", 'ORDER BY' => "syndic.nom_site DESC"));
+		$out .= afficher_objets('site','<b>' . _T('info_sites_lies_mot') . '</b>', array("FROM" => 'spip_syndic AS syndic LEFT JOIN spip_mots_syndic AS lien ON lien.id_syndic=syndic.id_syndic', 'WHERE' => "lien.id_mot=$id_mot", 'ORDER BY' => "syndic.nom_site DESC"));
 		
 	}
 
-	$out .= pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
-	$out .= fin_cadre_relief(true);
+	$out .= pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''))
+	. fin_cadre_relief(true);
 
 	// --- Editer le mot ----
+
 	if ($autoriser_editer){
 		$out .= "<div id='mot-editer'".($editer?"":" class='none'").'>';
 		$contexte = array(
