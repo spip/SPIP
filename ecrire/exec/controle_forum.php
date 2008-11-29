@@ -170,14 +170,6 @@ function controle_forum_boucle($row, $args) {
 	if (strlen($forum_url_site) > 10 AND strlen($forum_nom_site) > 3)
 		$suite .= "\n<div style='text-align: left' class='serif'><b><a href='$forum_url_site'>$forum_nom_site</a></b></div>";
 
-	if ($GLOBALS['meta']["mots_cles_forums"] == "oui") {
-		$mots = sql_allfetsel("titre, type", "spip_mots AS M LEFT JOIN spip_mots_forum AS L ON L.id_mot=M.id_mot",  "L.id_forum=" . intval($id_forum));
-		foreach ($mots as $k => $r) {
-			$mots[$k] = propre($r['titre']) . ' '
-			  . propre('<b>' . $r['type'] . ' :</b>');
-		}
-	}
-
 	return 	"\n<div><br /><a id='forum$id_forum'></a></div>" .
 	  debut_cadre_thread_forum("", true, "", typo($forum_titre)) .
 	  "<div$style>" .
@@ -185,7 +177,7 @@ function controle_forum_boucle($row, $args) {
 	  safehtml("<span class='arial2'> / <b>$forum_auteur</b></span>") .
 	  boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur, "$type=$valeur", $forum_ip, 'controle_forum', $args) .
 	  safehtml(lignes_longues($suite)) .
-	  join("\n", $mots) .
+	  afficher_forum_mots($id_forum) .
 	  join(', ', $documents) .
 	  "<div class='nettoyeur'></div></div>".
 	  fin_cadre_thread_forum(true);
