@@ -13,7 +13,7 @@ body { font-size: 0.8125em; font-family: "Luxi sans", "Lucida Grande", Lucida, "
 h1,h2,h3,h4,h5,h6 { margin: 0; padding: 0; font-weight: normal; font-size: 1em; font-family: Georgia, Times, serif; }
 h1 { font-size: 1.70em; color: #000; }
 h2 { font-size: 1.40em; font-weight: normal; }
-h2, h2 a, h2 a:focus, h2 a:hover { color: #003; }
+h2, h2 a, h2 a:focus, h2 a:hover, h2 a:active { color: #003; }
 h3 { font-size: 1.20em; font-weight: bold; }
 h3.spip {} /* Cf.: spip_style.css */
 hr.spip {} /* Cf.: spip_style.css */
@@ -116,7 +116,8 @@ abbr.published { border: 0; }
 #documents_portfolio .spip_logos { margin: 6px 3px 0 3px; border: 4px solid #DDD; }
 #documents_portfolio a.on .spip_logos { border-color: #F57900; }
 #documents_portfolio a:focus .spip_logos,
-#documents_portfolio a:hover .spip_logos { border-color: #8B6F92; }
+#documents_portfolio a:hover .spip_logos,
+#documents_portfolio a:active .spip_logos { border-color: #8B6F92; }
 #document_actif { margin: 1em auto; }
 #document_actif img {}
 
