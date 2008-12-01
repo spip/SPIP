@@ -238,10 +238,10 @@ function formulaire_mots_cles($id_objet, $les_mots, $table, $table_id, $url_base
 	global  $spip_lang, $spip_lang_right;
 
 	$flag_tous = 1;
+	$id_groupes_vus = array();
 	$droit = substr($GLOBALS['visiteur_session']['statut'],1);
 	if ($les_mots) {
 		$cond_mots_vus = sql_in('id_mot', $les_mots);
-		$id_groupes_vus = array();
 		$q = sql_select("M.id_groupe, G.$droit", "spip_mots AS M LEFT JOIN spip_groupes_mots AS G ON M.id_groupe=G.id_groupe", $cond_mots_vus, "M.id_groupe");
 		while($r = sql_fetch($q)) {
 			$id_groupes_vus[]= $r['id_groupe'];
