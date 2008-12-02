@@ -469,6 +469,21 @@ function safehtml($t) {
 // Typographie generale
 // avec protection prealable des balises HTML et SPIP
 
+function echapper_faux_tags($letexte){
+	if (strpos($letexte,'<')===false AND strpos($letexte,'>')===false)
+		return $letexte;
+  $textMatches = preg_split (',(</?[a-z!][^<>]*>),', $letexte, null, PREG_SPLIT_DELIM_CAPTURE);
+
+  $letexte = "";
+  while (count($textMatches)) {
+  	// un texte a echapper
+  	$letexte .= str_replace(array("<",">"),array('&lt;','&gt;'),array_shift($textMatches));
+  	// un tag html qui a servit a faite le split
+ 		$letexte .= array_shift($textMatches);
+  }
+  return $letexte;	
+}
+
 // http://doc.spip.org/@typo
 function typo($letexte, $echapper=true, $connect='') {
 
@@ -490,6 +505,7 @@ function typo($letexte, $echapper=true, $connect='') {
 	unset($mem);
 
 	$letexte = corriger_typo($letexte);
+	$letexte = echapper_faux_tags($letexte);
 
 	// reintegrer les echappements
 	if ($echapper)
