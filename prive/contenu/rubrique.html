@@ -1,13 +1,13 @@
 <BOUCLE_afficher_contenu(RUBRIQUES){id_rubrique=#ENV{id}}{statut?}>
-<div class="champ contenu_titre[ (#TITRE*|?{'',vide})]">
+<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
 <div class='label'><:info_titre:></div>
 <div dir='#LANG_DIR' class='#EDIT{titre} titre'>#TITRE</div>
 </div>
-<div class="champ contenu_descriptif[ (#DESCRIPTIF*|?{'',vide})]">
+<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
 <div class='label'><:info_descriptif:></div>
 <div dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>#DESCRIPTIF</div>
 </div>
-<div class="champ contenu_texte[ (#TEXTE*|?{'',vide})]">
+<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
 <div class='label'><:info_texte:></div>
 <div dir='#LANG_DIR' class='#EDIT{texte} texte'>#TEXTE</div>
 </div>
