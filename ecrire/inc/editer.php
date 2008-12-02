@@ -112,7 +112,7 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 		unset($contexte['lang']);
 	}
 
-	$contexte['browser_caret']=$GLOBALS['browser_caret'];
+	$contexte['_browser_caret']=$GLOBALS['browser_caret'];
 
 	$contexte['_hidden'] = "<input type='hidden' name='editer_$type' value='oui' />\n" .
 		 (!$lier_trad ? '' :
