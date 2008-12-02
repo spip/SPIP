@@ -32,7 +32,7 @@
 				]<div class="explication"><:texte_enrichir_mise_a_jour:><em>#AIDER{raccourcis}</em></div>
 				[(#ENV**{config}|table_valeur{afficher_barre}|?{#VAL{text_area}|barre_typo{#LANG}})]
 				<textarea name='texte' id='text_area' class='barre_inserer' cols='40' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]'[
-				(#ENV**{browser_caret,''})]>[(#ENV**{texte})]</textarea>
+				(#ENV**{_browser_caret,''})]>[(#ENV**{texte})]</textarea>
 	    </li>
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
