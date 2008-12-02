@@ -450,7 +450,7 @@ function compose_filtres(&$p, $code) {
 					$code = "((($code) XOR ($arg)) ?' ' :'')";
 					break;
 				case ($fonc == 'sinon'):
-					$code = "((\$a = $code) ? \$a : $arg)";
+					$code = "(strlen(\$a = $code) ? \$a : $arg)";
 					break;
 				case ($fonc == 'not') OR ($fonc == 'non'):
 					$code = "(($code) ?'' :' ')";
