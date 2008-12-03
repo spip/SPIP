@@ -117,8 +117,6 @@ abbr.published { border: 0; }
 #documents_portfolio a.on .spip_logos { border-color: #F57900; }
 #documents_portfolio a:focus .spip_logos,
 #documents_portfolio a:hover .spip_logos { border-color: #8B6F92; }
-#document_actif { margin: 1em auto; }
-#document_actif img {}
 
 
 /* Habillage des forums
