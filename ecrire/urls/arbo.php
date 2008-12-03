@@ -530,10 +530,12 @@ function urls_arbo_dist($i, &$entite, $args='', $ancre='') {
 			}
 			else {
 				// un segment est inconnu
-				// on genere une 404 comme il faut
-				include_spip('inc/headers');
-				http_status('404');
-				$entite = '404';
+				if ($entite=='type_urls') {
+					// on genere une 404 comme il faut si on ne sait pas ou aller
+					include_spip('inc/headers');
+					http_status('404');
+					$entite = '404';
+				}
 				return;
 			}
 		}
