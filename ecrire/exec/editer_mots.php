@@ -22,6 +22,7 @@ function exec_editer_mots_dist()
 // http://doc.spip.org/@exec_editer_mots_args
 function exec_editer_mots_args($id_objet, $objet)
 {
+	$base="";
 	if (!$id_objet OR !$objet)
 		$droit = false;
 	elseif ($GLOBALS['connect_toutes_rubriques']) // pour eviter SQL
@@ -37,6 +38,9 @@ function exec_editer_mots_args($id_objet, $objet)
 			$droit = sql_select("id_rubrique", "spip_syndic", "id_syndic=".sql_quote($id_objet));
 		$droit = autoriser('publierdans','rubrique',$droit['id_rubrique']);
 	}
+	$bases = array('article'=>'articles','breve'=>'breves_voir','rubrique'=>'naviguer','syndic'=>'sites');
+	if (isset($bases[$objet]))
+		$base = $bases[$objet];
 
 	if (!$droit) {
 		include_spip('inc/minipres');
@@ -46,7 +50,7 @@ function exec_editer_mots_args($id_objet, $objet)
 		$ch = _request('cherche_mot');
 		$id_groupe = _request('select_groupe');
 		$editer_mots = charger_fonction('editer_mots', 'inc');
-		ajax_retour($editer_mots($objet, $id_objet, $ch, $id_groupe, 'ajax')); 
+		ajax_retour($editer_mots($objet, $id_objet, $ch, $id_groupe, 'ajax',false,$base)); 
 	}
 }
 ?>
