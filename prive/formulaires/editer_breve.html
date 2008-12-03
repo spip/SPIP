@@ -47,6 +47,7 @@
 	    	</fieldset>
 	    </li>
 	    
+	    [(#SESSION{statut}|=={0minirezo}|oui)
 	    <li class="fieldset">
 			<fieldset>
 			<ul>
@@ -60,7 +61,8 @@
 			</li>
 			</ul>
 			</fieldset>
-		</li>
+			</li>
+			]
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
