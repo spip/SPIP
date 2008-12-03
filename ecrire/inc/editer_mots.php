@@ -146,22 +146,23 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 }
 
 // http://doc.spip.org/@afficher_mots_cles
-function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id, $url_base)
+function afficher_mots_cles($flag, $objet, $id_objet, $table, $table_id, $url)
 {
-	$requete = array('SELECT' => "mots.id_mot, mots.titre, mots.id_groupe", 'FROM' => "spip_mots AS mots, spip_mots_$table AS lien", 'WHERE' => "lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot", 'GROUP BY' => "mots.type, mots.titre",  'ORDER BY' => "mots.type, mots.titre");
+	$q = array('SELECT' => "M.id_mot, M.titre, M.id_groupe", 'FROM' => "spip_mots AS M LEFT JOIN spip_mots_$table AS L ON M.id_mot=L.id_mot", 'WHERE' => "L.$table_id=$id_objet", 'ORDER BY' => "M.type, M.titre");
 	
 	$cle = http_img_pack('petite-cle.gif', "", "width='23' height='12'");
-	$ret = generer_url_retour($url_base, "$table_id=$id_objet#editer_mots-$id_objet");
+	$ret = generer_url_retour($url, "$table_id=$id_objet#editer_mots-$id_objet");
 	$styles = array(array('arial11',25), array('arial2'), array('arial2'), array('arial1'));
 
 	$presenter_liste = charger_fonction('presenter_liste', 'inc');
 
 	// cette variable est passee par reference
 	// pour recevoir les valeurs du champ indique 
-	$les_mots = 'id_mot'; 
-	$res = 	$presenter_liste($requete, 'editer_mots_un', $les_mots, array($cle, $flag_editable, $id_objet, $objet, $ret, $table, $table_id, $url_base), false, $styles);
+	$mots = 'id_mot'; 
+	$a=array($cle,$flag,$id_objet, $objet, $ret, $table, $table_id, $url);
+	$res = $presenter_liste($q, 'editer_mots_un', $mots, $a, false, $styles);
 
-	return array($res, $les_mots);
+	return array($res, $mots);
 }
 
 // http://doc.spip.org/@editer_mots_un
@@ -208,15 +209,13 @@ function editer_mots_un($row, $own)
 // http://doc.spip.org/@formulaire_mot_remplace
 function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_id, $objet, $id_objet)
 {
-	$result = sql_select("id_mot, titre", "spip_mots", "id_groupe = $id_groupe", "", "titre");
+	$res = sql_allfetsel("id_mot, titre", "spip_mots", "id_groupe = $id_groupe", "", "titre");
 
-	$s = '';
-
-	while ($row_autres = sql_fetch($result)) {
-		$id = $row_autres['id_mot'];
-		$le_titre_mot = supprimer_tags(typo($row_autres['titre']));
+	foreach($res as $k => $row) {
+		$id = $row['id_mot'];
+		$titre = supprimer_tags(typo($row['titre']));
 		$selected = ($id == $id_mot) ? " selected='selected'" : "";
-		$s .= "\n<option value='$id'$selected> $le_titre_mot</option>";
+		$res[$k]= "<option value='$id'$selected> $titre</option>";
 	}
 
 	$ancre = "valider_groupe_$id_groupe"; 
@@ -225,7 +224,7 @@ function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_
 
 	$corps = "\n<select name='nouv_mot' id='nouv_mot$id_groupe' onchange=\"$jscript1\""
 	. " class='fondl spip_xx-small' style='width:90px;'>"
-	. $s
+	. join("\n", $res)
 	. "</select>\n&nbsp;" ;
 
 	$t =  _T('bouton_changer');
@@ -241,10 +240,9 @@ function formulaire_mots_cles($id_objet, $les_mots, $table, $table_id, $url_base
 	$id_groupes_vus = array();
 	$droit = substr($GLOBALS['visiteur_session']['statut'],1);
 	if ($les_mots) {
-		$cond_mots_vus = sql_in('id_mot', $les_mots);
-		$q = sql_select("M.id_groupe, G.$droit", "spip_mots AS M LEFT JOIN spip_groupes_mots AS G ON M.id_groupe=G.id_groupe", $cond_mots_vus, "M.id_groupe");
-		while($r = sql_fetch($q)) {
-			$id_groupes_vus[]= $r['id_groupe'];
+		$id_groupes_vus = sql_allfetsel("M.id_groupe, G.$droit", "spip_mots AS M LEFT JOIN spip_groupes_mots AS G ON M.id_groupe=G.id_groupe", sql_in('id_mot', $les_mots), "M.id_groupe");
+		foreach($id_groupes_vus as $k => $r) {
+			$id_groupes_vus[$k]= $r['id_groupe'];
 			$flag_tous &= ($r[$droit] === 'oui');
 		}
 		$cond_id_groupes_vus = (" AND " . sql_in('id_groupe', $id_groupes_vus, 'NOT'));
@@ -334,11 +332,9 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 	$unseul = $row['unseul'] == 'oui';
 	$obligatoire = ($row['obligatoire']=='oui' AND !in_array($id_groupe, $id_groupes_vus));
 
-	$res = '';
-	$ancre = "valider_groupe_$id_groupe"; 
-
 	// forcer le recalcul du noeud car on est en Ajax
 	$rand = rand(0,10000); # pour antifocus & ajax
+	$ancre = "valider_groupe_$id_groupe"; 
 	$jscript1 = "findObj_forcer('$ancre').style.visibility='visible';";
 	$jscript2 = "if(!antifocus_mots['$rand-$id_groupe']){this.value='';antifocus_mots['$rand-$id_groupe']=true;}";
 
@@ -346,40 +342,38 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 		$jscript = "onfocus=\"$jscript1 $jscript2\"";
 
 		if ($obligatoire)
-			$res .= "<input type='text' name='cherche_mot' id='cherche_mot$id_groupe' class='fondl' style='width: 180px; background-color:#E86519;' value=\"$titre_groupe\" size='20' $jscript />";
+			$res = "<input type='text' name='cherche_mot' id='cherche_mot$id_groupe' class='fondl' style='width: 180px; background-color:#E86519;' value=\"$titre_groupe\" size='20' $jscript />";
 		else if ($unseul)
-			$res .= "<input type='text' name='cherche_mot' id='cherche_mot$id_groupe' class='fondl' style='width: 180px; background-color:#cccccc;' value=\"$titre_groupe\" size='20' $jscript />";
+			$res = "<input type='text' name='cherche_mot' id='cherche_mot$id_groupe' class='fondl' style='width: 180px; background-color:#cccccc;' value=\"$titre_groupe\" size='20' $jscript />";
 		else
-			$res .= "<input type='text' name='cherche_mot' id='cherche_mot$id_groupe'  class='fondl' style='width: 180px; ' value=\"$titre_groupe\" size='20' $jscript />";
+			$res = "<input type='text' name='cherche_mot' id='cherche_mot$id_groupe'  class='fondl' style='width: 180px; ' value=\"$titre_groupe\" size='20' $jscript />";
 
 		$res .= "<input type='hidden' name='select_groupe'  value='$id_groupe' />&nbsp;";
 		return array($res, _T('bouton_chercher')); 
 	} else {
-
-		$jscript = "onchange=\"$jscript1\"";
-	  
 		if ($obligatoire)
-			$res .= "<select name='nouv_mot' id='nouv_mot$id_groupe' size='1' style='width: 180px; background-color:#E86519;' class='fondl' $jscript>";
-		else if ($unseul)
-			$res .= "<select name='nouv_mot' id='nouv_mot$id_groupe' size='1' style='width: 180px; background-color:#cccccc;' class='fondl' $jscript>";
-		else
-			$res .= "<select name='nouv_mot' id='nouv_mot$id_groupe' size='1' style='width: 180px; ' class='fondl' $jscript>";
+			$style = 'width: 180px; background-color:#E86519;';
+		elseif ($unseul)
+			$style = 'width: 180px; background-color:#cccccc;';
+		else	$style = 'width: 180px;';
 
-		$res .= "\n<option value='x' style='font-variant: small-caps;'>$titre</option>";
+		$q = sql_allfetsel("id_mot, type, titre", "spip_mots", "id_groupe =$id_groupe " . $les_mots, "", "titre");
 
-		$result = sql_select("id_mot, type, titre", "spip_mots", "id_groupe =$id_groupe " . $les_mots, "", "titre");
-
-
-		while($row = sql_fetch($result)) {
-			$res .= "\n<option value='" .$row['id_mot'] .
+		foreach($q as $k => $r) {
+			$q[$k] = "<option value='" .$r['id_mot'] .
 				"'>&nbsp;&nbsp;&nbsp;" .
-				textebrut(typo($row['titre'])) .
+				textebrut(typo($r['titre'])) .
 				"</option>";
 		}
-		$res .= "</select>&nbsp;";
+		$res = "<select name='nouv_mot' id='nouv_mot$id_groupe' size='1' class='fondl' style='$style' onchange=\"$jscript1\">"
+		. "\n<option value='x' style='font-variant: small-caps;'>"
+		. $titre
+		. "</option>\n"
+		.  join("\n", $q)
+		.  "</select>&nbsp;";
+
 		return array($res, _T('bouton_choisir'));
 	}
-
 }
 
 // Fonction verifiant que l'auteur a le droit de modifier un groupe de mots.
