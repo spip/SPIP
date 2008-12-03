@@ -298,9 +298,9 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 
 	//// Documents associes
 	$res = sql_select("D.id_document", "spip_documents AS D LEFT JOIN spip_documents_liens AS T ON T.id_document=D.id_document", "T.id_objet=" . intval($id) . " AND T.objet=" . sql_quote($type)
-	. (!_INTERFACE_DOCUMENTS
-		? " AND D.mode='document'"
-		: " AND D.mode IN ('image','document')"
+	. ((!_INTERFACE_DOCUMENTS OR $GLOBALS['meta']["documents_$type"]=='non')
+		? " AND D.mode='document'"	
+    	: " AND D.mode IN ('image','document')"
 	), "", "D.mode, D.id_document");
 
 	while($row = sql_fetch($res))
