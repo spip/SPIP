@@ -98,6 +98,10 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 		$t['nom'] = 'nouvelle_install';
 		$t['valeur'] = 1;
 		@sql_insertq('spip_meta', $t, '', $server_db);
+		// positionner la langue par defaut du site si un cookie de lang a ete mis
+		if (isset($_COOKIE['spip_lang_ecrire'])){
+			@sql_insertq('spip_meta', array('nom'=>'langue_site','valeur'=>$_COOKIE['spip_lang_ecrire']), '', $server_db);
+		}
 	} else {
 
 	  // pour recreer les tables disparues au besoin
