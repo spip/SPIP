@@ -199,7 +199,6 @@ function maj_13135 () {
 $GLOBALS['maj'][13135] = array(array('maj_13135'));
 
 // Type flac: http://flac.sourceforge.net
-unset($GLOBALS['maj'][12011]);
-$GLOBALS['maj'][13269] = array(array('upgrade_types_documents'));
+$GLOBALS['maj'][13333] = array(array('upgrade_types_documents'));
 
 ?>
