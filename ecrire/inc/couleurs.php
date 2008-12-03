@@ -15,11 +15,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Appelee sans argument, cette fonction retourne un menu de couleurs
 // Avec un argument numerique, elle retourne les parametres d'URL 
 // pour les feuilles de style calculees (cf commencer_page et svg)
-// Avec un argument de type tableau, elle remplace le tableau par defaut
-// par celui donne en argument
+// Avec un argument de type tableau, soit elle remplace le tableau par defaut
+// par celui donne en argument, soit, avec le second parametre
+// a true, elle complete le tableau par celui donne en premier argument.
 
 // http://doc.spip.org/@inc_couleurs_dist
-function inc_couleurs_dist($choix=NULL)
+function inc_couleurs_dist($choix=NULL, $ajouter=false)
 {
 	static $couleurs_spip = array(
 // Vert
@@ -79,7 +80,13 @@ function inc_couleurs_dist($choix=NULL)
 	    '&couleur_foncee=' .
 	    substr($couleurs_spip[$choix]['couleur_foncee'],1);
 	} else {
-		if (is_array($choix)) return $couleurs_spip = $choix;
+		if (is_array($choix)) {
+			if ($ajouter) {
+				return $couleurs_spip = array_merge($couleurs_spip, $choix);
+			} else {
+				return $couleurs_spip = $choix;
+			}
+		}
 
 		$evt = '
 onmouseover="changestyle(\'bandeauinterface\');"
