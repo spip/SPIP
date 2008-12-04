@@ -14,7 +14,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@aff_statistique_visites_popularite
 function aff_statistique_visites_popularite($serveur, $id_article, &$classement, &$liste){
-
 	// Par popularite
 	$result = sql_select("id_article, titre, popularite, visites", "spip_articles", "statut='publie' AND popularite > 0", "", "popularite DESC",'','',$serveur);
 	$out = '';
@@ -25,7 +24,7 @@ function aff_statistique_visites_popularite($serveur, $id_article, &$classement,
 
 		if ($liste <= 30) {
 			$articles_vus[] = $l_article;
-			$out .= statistiques_populaires($row, $id_article);
+			$out .= statistiques_populaires($row, $id_article, $liste);
 		}
 	}
 	$recents = array();
@@ -37,10 +36,11 @@ function aff_statistique_visites_popularite($serveur, $id_article, &$classement,
 	if ($recents) {
 		$result = sql_select("id_article, titre, popularite, visites", "spip_articles", "statut='publie' AND " . sql_in('id_article', $recents), "", "popularite DESC",'','',$serveur);
 
-		$out .= "</ol><div style='text-align: center'>[...]</div>" .
-		"<ol style='padding-left:40px; font-size:x-small;color:#666666;'>";
+		$out .= "</table><div style='text-align: center'>[...]</div>" .
+		"<table style='border-spacing: 1px; font-size:x-small;color:#666666;'>";
 		while ($row = sql_fetch($result,$serveur)) {
-			$out .= statistiques_populaires($row, $id_article);
+			$l_article = $row["id_article"];
+			$out .= statistiques_populaires($row, $id_article, $classement[$l_article]);
 		}
 	}
 
@@ -49,10 +49,10 @@ function aff_statistique_visites_popularite($serveur, $id_article, &$classement,
 		."<div class='iconeoff' style='padding: 5px'>\n"
 		."<div class='verdana1 spip_x-small'>"
 		.typo(_T('info_visites_plus_populaires'))
-		."<ol style='padding-left:40px; font-size:x-small;color:#666666;'>"
+		."<table style='border-spacing: 1px; font-size:x-small;color:#666666;'>"
 		.$out
 
-		."</ol>"
+		."</table>"
 
 		."<b>"._T('info_comment_lire_tableau')."</b><br />"._T('texte_comment_lire_tableau')
 
@@ -60,17 +60,17 @@ function aff_statistique_visites_popularite($serveur, $id_article, &$classement,
 		."</div>");
 }
 
-function statistiques_populaires($row, $id_article)
+function statistiques_populaires($row, $id_article, $classement)
 {
 	$titre = typo(supprime_img($row['titre'], ''));
 	$l_article = $row['id_article'];
 
 	if ($l_article == $id_article){
-		$out .= "\n<li><b>$titre</b></li>";
+		return "\n<tr><td style='width: 40px; text-align: right; vertical-align: top;'>$classement.</td><td><b>$titre</b></td></tr>";
 	} else {
 		$visites = $row['visites'];
 		$popularite = round($row['popularite']);
-		return "\n<li><a href='" . generer_url_ecrire("statistiques_visites","id_article=$l_article") . "' title='"._T('info_popularite_3', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></li>";
+		return "\n<tr><td style='width: 40px; text-align: right; vertical-align: top;'>$classement.</td><td><a href='" . generer_url_ecrire("statistiques_visites","id_article=$l_article") . "' title='"._T('info_popularite_3', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></td></tr>";
 	}
 }
 
@@ -92,7 +92,7 @@ function aff_statistique_visites_par_visites($serveur='', $id_article=0, $classe
 			$h = generer_url_ecrire("statistiques_visites","id_article=$l_article");
 			$out = "<a href='$h'\ntitle='$t'>$titre</a>";
 		}
-		$res[]= "<td style='text-align: right; vertical-align: top'>"
+		$res[]= "<td style='width: 40px; text-align: right; vertical-align: top;'>"
 			. $classement[$l_article]
 			. ". </td><td>$out</td>";
 	}
@@ -102,7 +102,7 @@ function aff_statistique_visites_par_visites($serveur='', $id_article=0, $classe
 	return "<br /><div class='iconeoff' style='padding: 5px;'>"
 	  . "<div style='overflow:hidden;' class='verdana1 spip_x-small'>"
 	  . typo(_T('info_affichier_visites_articles_plus_visites'))
-	  . "<table style='padding-left:40px; font-size:x-small;color:#666666;'><tr>"
+	  . "<table style='border-spacing: 1px; font-size:x-small;color:#666666;'><tr>"
 	  . join('</tr><tr>', $res)
 	  . '</tr></table></div></div>';
 }
