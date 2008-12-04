@@ -36,8 +36,8 @@ function aff_statistique_visites_popularite($serveur, $id_article, &$classement,
 	if ($recents) {
 		$result = sql_select("id_article, titre, popularite, visites", "spip_articles", "statut='publie' AND " . sql_in('id_article', $recents), "", "popularite DESC",'','',$serveur);
 
-		$out .= "</table><div style='text-align: center'>[...]</div>" .
-		"<table style='border-spacing: 1px; font-size:x-small;color:#666666;'>";
+		$out .= "</ul><div style='text-align: center'>[...]</div>" .
+		"<ul class='classement'>";
 		while ($row = sql_fetch($result,$serveur)) {
 			$l_article = $row["id_article"];
 			$out .= statistiques_populaires($row, $id_article, $classement[$l_article]);
@@ -49,10 +49,10 @@ function aff_statistique_visites_popularite($serveur, $id_article, &$classement,
 		."<div class='iconeoff' style='padding: 5px'>\n"
 		."<div class='verdana1 spip_x-small'>"
 		.typo(_T('info_visites_plus_populaires'))
-		."<table style='border-spacing: 1px; font-size:x-small;color:#666666;'>"
+		."<ul class='classement'>"
 		.$out
 
-		."</table>"
+		."</ul>"
 
 		."<b>"._T('info_comment_lire_tableau')."</b><br />"._T('texte_comment_lire_tableau')
 
@@ -66,17 +66,17 @@ function statistiques_populaires($row, $id_article, $classement)
 	$l_article = $row['id_article'];
 
 	if ($l_article == $id_article){
-		return "\n<tr><td style='width: 40px; text-align: right; vertical-align: top;'>$classement.</td><td><b>$titre</b></td></tr>";
+		return "<li class='on'><em>$classement.</em>$titre</li>";
 	} else {
 		$visites = $row['visites'];
 		$popularite = round($row['popularite']);
-		return "\n<tr><td style='width: 40px; text-align: right; vertical-align: top;'>$classement.</td><td><a href='" . generer_url_ecrire("statistiques_visites","id_article=$l_article") . "' title='"._T('info_popularite_3', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></td></tr>";
+		return "<li><em>$classement.</em><a href='" . generer_url_ecrire("statistiques_visites","id_article=$l_article") . "' title='"._T('info_popularite_3', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></li>";
 	}
 }
 
 // http://doc.spip.org/@aff_statistique_visites_par_visites
 function aff_statistique_visites_par_visites($serveur='', $id_article=0, $classement= array()) {
-	$res = array();
+	$res = "";
 	// Par visites depuis le debut
 	$result = sql_select("id_article, titre, popularite, visites", "spip_articles", "statut='publie' AND popularite > 0", "", "visites DESC", "30",'',$serveur);
 
@@ -85,16 +85,18 @@ function aff_statistique_visites_par_visites($serveur='', $id_article=0, $classe
 		$l_article = $row['id_article'];
 
 		if ($l_article == $id_article){
-			$out = "<b>$titre</b>";
+			$res.= "<li class='on'><em>"
+			. $classement[$l_article]
+			. ".</em>$titre</li>";
 		} else {
 			$t = _T('info_popularite_4',
 				array('popularite' => round($row['popularite']), 'visites' =>  $row['visites']));
 			$h = generer_url_ecrire("statistiques_visites","id_article=$l_article");
 			$out = "<a href='$h'\ntitle='$t'>$titre</a>";
+			$res.= "<li><em>"
+				. $classement[$l_article]
+				. ".</em>$out</li>";
 		}
-		$res[]= "<td style='width: 40px; text-align: right; vertical-align: top;'>"
-			. $classement[$l_article]
-			. ". </td><td>$out</td>";
 	}
 
 	if (!$res) return '';
@@ -102,9 +104,9 @@ function aff_statistique_visites_par_visites($serveur='', $id_article=0, $classe
 	return "<br /><div class='iconeoff' style='padding: 5px;'>"
 	  . "<div style='overflow:hidden;' class='verdana1 spip_x-small'>"
 	  . typo(_T('info_affichier_visites_articles_plus_visites'))
-	  . "<table style='border-spacing: 1px; font-size:x-small;color:#666666;'><tr>"
-	  . join('</tr><tr>', $res)
-	  . '</tr></table></div></div>';
+	  . "<ul class='classement'>"
+	  . $res
+	  . '</ul></div></div>';
 }
 
 // http://doc.spip.org/@http_img_rien
