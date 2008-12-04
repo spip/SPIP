@@ -93,7 +93,7 @@ function interface_plugins_auto($retour) {
 	$form .= "<label for='url_zip_plugin2'>"._T('plugin_zip_adresse_champ')."</label>";
 	$form .= $message;
 	$form .= "
-	<input type='text' id='url_zip_plugin2' name='url_zip_plugin2' value='' size='40' />";
+	<input type='text' class='text' id='url_zip_plugin2' name='url_zip_plugin2' value='' size='40' />";
 	$form .= "</li></ul>";
 	$form .=	"<div class='boutons' id='loadrss'><input type='submit' value='"
 		. _T('bouton_valider')
