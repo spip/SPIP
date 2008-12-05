@@ -161,7 +161,9 @@ jQuery.fn.depliant_clicancre = function(cible) {
 //
 
 function slide_horizontal (couche, slide, align, depart, etape ) {
+
 	var obj = findObj_forcer(couche);
+	
 	if (!obj) return;
 	if (!etape) {
 		if (align == 'left') depart = obj.scrollLeft;
@@ -222,7 +224,7 @@ function aff_selection_provisoire(id, racine, url, col, sens,informer,event)
     charger_id_url(url.href,
 		   racine + '_col_' + (col+1),
 		   function() {
-		     slide_horizontal(racine + 'principal', ((col-1)*150), sens);
+		     slide_horizontal(racine + '_principal', ((col-1)*150), sens);
 		     aff_selection (id, racine + "_selection", informer);
 		   },
 		   event);
