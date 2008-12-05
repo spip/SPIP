@@ -187,7 +187,7 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 	if (!$id_document) return '';
 	if ($doubdoc) $doublons["documents"] .= ','.$id_document;
 
-	if (!($row = sql_fetsel('extension, id_vignette, fichier, mode', 'spip_documents', ("id_document = $id_document"),'','','','',$connect))) {
+	if (!($row = sql_fetsel('titre, descriptif, extension, id_vignette, fichier, mode', 'spip_documents', ("id_document = $id_document"),'','','','',$connect))) {
 		// pas de document. Ne devrait pas arriver
 		spip_log("Erreur du compilateur doc $id_document inconnu");
 		return ''; 
@@ -195,15 +195,20 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 
 	$extension = $row['extension'];
 	$id_vignette = $row['id_vignette'];
+	$descriptif = $row['descriptif'];
 	$fichier = $row['fichier'];
 	$mode = $row['mode'];
+	$titre = $row['titre'];
 	$logo = '';
 
-	// Y a t il une vignette personnalisee ?
-	// Ca va echouer si c'est en mode distant. A revoir.
 	if ($id_vignette) {
-		$vignette = sql_fetsel('fichier','spip_documents',("id_document = $id_vignette"), '','','','',$connect);
-		if (@file_exists(get_spip_doc($vignette['fichier'])))
+		$vignette = quete_fichier($id_vignette, $connect);
+		if ($connect) {
+			$site = quete_meta('adresse_site', $connect);
+			$dir = quete_meta('dir_img', $connect);
+			$logo = "$site/$dir$vignette";
+		}
+		elseif (@file_exists(get_spip_doc($vignette)))
 		  $logo = generer_url_entite($id_vignette, 'document');
 	} else if ($mode == 'vignette') {
 		$logo = generer_url_entite($id_vignette, 'document');
@@ -264,11 +269,14 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 	if ($align)
 		$logo = inserer_attribut($logo, 'align', $align);
 
-	if ($lien) {
-		$mime = sql_getfetsel('mime_type','spip_types_documents', "extension = " . sql_quote($extension));
-		$logo = "<a href='$lien' type='$mime'>$logo</a>";
-	}
-	return $logo;
+	if (!$lien) return $logo;
+
+	$mime = sql_getfetsel('mime_type','spip_types_documents', "extension = " . sql_quote($extension));
+
+	if ($titre OR $descriptif)
+		$titre = " title='" . attribut_html("$titre\n$descriptif") . "'";
+
+	return "<a href='$lien' type='$mime'$titre>$logo</a>";
 }
 
 // Ajouter "&lang=..." si la langue du forum n'est pas celle du site.

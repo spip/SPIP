@@ -577,8 +577,11 @@ function debug_affiche($fonc, $tout, $objet, $affiche)
 	if ($affiche == 'resultat') {
 		$res .= "<legend>" .$tout['pretty'][$objet] ."</legend>";
 		$req = $tout['requete'][$objet];
-		if (function_exists('traite_query'))
-		  $req = traite_query($req,'',$GLOBALS['table_prefix']);
+		if (function_exists('traite_query')) {
+		  $c = _request('connect');
+		  $c = $GLOBALS['connexions'][$c ? $c : 0]['prefixe'];
+		  $req = traite_query($req,'', $c);
+		}
 		$res .= ancre_texte($req, array(), true);
 		foreach ($quoi as $view) 
 			if ($view) $res .= "\n<br /><fieldset>" .interdire_scripts($view) ."</fieldset>";
@@ -725,7 +728,6 @@ function trace_query_start()
 		include_spip('inc/autoriser');
 		// gare au bouclage sur calcul de droits au premier appel
 		// A fortiori quand on demande une trace
-		$trace = !isset($_GET['var_profile']);
 		$trace = isset($_GET['var_profile']) AND (autoriser('debug'));
 	}
 	return  $trace ?  microtime() : 0;
