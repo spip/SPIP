@@ -187,7 +187,7 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 	if (!$id_document) return '';
 	if ($doubdoc) $doublons["documents"] .= ','.$id_document;
 
-	if (!($row = sql_fetsel('titre, descriptif, extension, id_vignette, fichier, mode', 'spip_documents', ("id_document = $id_document"),'','','','',$connect))) {
+	if (!($row = sql_fetsel('titre, taille, extension, id_vignette, fichier, mode', 'spip_documents', ("id_document = $id_document"),'','','','',$connect))) {
 		// pas de document. Ne devrait pas arriver
 		spip_log("Erreur du compilateur doc $id_document inconnu");
 		return ''; 
@@ -195,10 +195,10 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 
 	$extension = $row['extension'];
 	$id_vignette = $row['id_vignette'];
-	$descriptif = $row['descriptif'];
 	$fichier = $row['fichier'];
 	$mode = $row['mode'];
 	$titre = $row['titre'];
+	$taille = $row['taille'];
 	$logo = '';
 
 	if ($id_vignette) {
@@ -273,9 +273,9 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 
 	$mime = sql_getfetsel('mime_type','spip_types_documents', "extension = " . sql_quote($extension));
 
-	if ($titre OR $descriptif)
-		$titre = " title='" . attribut_html("$titre\n$descriptif") . "'";
-
+	$taille = _T('taille_octets', array('taille' => $taille));
+	$titre = couper("$mime $taille -- $titre", 80);
+	$titre = " title='" . attribut_html($titre) . "'";
 	return "<a href='$lien' type='$mime'$titre>$logo</a>";
 }
 
