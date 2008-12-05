@@ -493,7 +493,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 		
 		$ret .= fin_cadre_relief(true);
 	}
-	return $ret;
+	return "<div>$ret</div>"; // on encapsule chaque document dans un container pour permettre son remplacement en ajax
 }
 
 // Etablit la liste des documents orphelins, c'est-a-dire qui ne sont lies

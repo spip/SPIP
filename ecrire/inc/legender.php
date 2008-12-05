@@ -201,7 +201,7 @@ function legender_image_doc($document, $id_document, $id, $type, $s, $script, $a
 				: "new=oui"
 			) . "&type=$type&s=$s#$ancre");
 
-	return icone_horizontale($texte, $action, $logo, '', false);
+	return icone_horizontale($texte, $action, $logo, '', false," onclick=\"jQuery('#document$id_document').parent().animeajax().load(this.href+'&afficher_case=$id-$type-$script&var_noajax=1');return false;\"");
 }
 
 
