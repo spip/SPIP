@@ -460,6 +460,7 @@ function charger_node_url(myUrl, Field, jjscript, img, event)
 					if (img) img.style.visibility = "hidden";
 					url_chargee[myUrl] = r;
 					retour_id_url(Field, jjscript);
+					slide_horizontal($(Field).children().attr("id")+'_principal', $(Field).width() , $(Field).css("text-align"));
 						    },
 				event);
 		return false;
@@ -476,12 +477,13 @@ function charger_node_url_si_vide(url, noeud, gifanime, jjscript,event) {
 
 	if  (noeud.style.display !='none') {
 		noeud.style.display='none';}
-	else {if (noeud.innerHTML != "") {
-		noeud.style.visibility = "visible";
-		noeud.style.display = "block";
-	} else {
-		charger_node_url(url, noeud,'',gifanime,event);
-	      }
+	else {
+		if (noeud.innerHTML != "") {
+			noeud.style.visibility = "visible";
+			noeud.style.display = "block";
+		} else {
+			charger_node_url(url, noeud,'',gifanime,event);
+		}
 	}
   return false;
 }
