@@ -30,7 +30,7 @@
 				<label for="password"><:login_pass2:></label>
 				<input type='password' class='password' name='password' id='password' value="" size='40' />
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{password})</span>]
-				<span class='details'>&#91;<a href="#URL_PAGE{spip_pass}" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=330'); return false;"><:login_motpasseoublie:></a>&#93;</span>
+				<span class='details'>&#91;<a href="#URL_PAGE{spip_pass}" id='spip_pass'><:login_motpasseoublie:></a>&#93;</span>
 			</li>
 			[(#ENV{rester_connecte})
 			<li class="editer_session"><div class='choix'>
