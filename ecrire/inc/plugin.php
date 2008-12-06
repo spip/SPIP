@@ -194,21 +194,20 @@ function liste_plugin_valides($liste_plug, $force = false){
 				if ($n = erreur_necessite($infos[$plug]['necessite'], $liste)){
 					$erreurs .= "<li>" . _T('plugin_impossible_activer',
 						array('plugin' => $plug)
-					)."</li>";
-					$necessite .= $n;
+					)."$n</li>";
 				}
 				else {
 					// dependance circulaire, ou utilise qu'on peut ignorer ?
 					// dans le doute on fait une erreur quand meme
 					// plutot que d'inserer silencieusement et de risquer un bug sournois latent
-					$necessite .= erreur_necessite($infos[$plug]['utilise'], $liste);
+					$necessite = erreur_necessite($infos[$plug]['utilise'], $liste);
 					$erreurs .= "<li>" . _T('plugin_impossible_activer',
 						array('plugin' => $plug)
-					)."</li>";
+					)."$necessite</li>";
 				}
 			}
 			ecrire_meta('plugin_erreur_activation',
-				"<ul>$erreurs</ul>$necessite");
+				"<ul>$erreurs</ul>");
 		}
 	}
 	return array($liste,$ordre,$infos);
