@@ -369,6 +369,7 @@ ecrire/lang/ecrire_my.php -text
 ecrire/lang/ecrire_ru.php -text
 ecrire/lang/ecrire_sv.php -text
 ecrire/lang/index.php -text
+ecrire/lang/public_ast.php -text
 ecrire/lang/public_br.php -text
 ecrire/lang/public_bs.php -text
 ecrire/lang/public_cs.php -text
