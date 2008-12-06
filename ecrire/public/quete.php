@@ -271,10 +271,11 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 
 	if (!$lien) return $logo;
 
-	$mime = sql_getfetsel('mime_type','spip_types_documents', "extension = " . sql_quote($extension));
+	$type_document = sql_getfetsel('titre','spip_types_documents', "extension = " . sql_quote($extension));
 
-	$taille = _T('taille_octets', array('taille' => $taille));
-	$titre = couper("$mime $taille -- $titre", 80);
+	$taille = taille_en_octets($taille);
+	$titre = strlen($titre)?" - ".supprimer_tags(typo($titre)):"";
+	$titre = couper("$type_document - $taille$titre", 80);
 	$titre = " title='" . attribut_html($titre) . "'";
 	return "<a href='$lien' type='$mime'$titre>$logo</a>";
 }
