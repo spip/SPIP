@@ -864,6 +864,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'repertoire_plugins' => 'Direktorioa&nbsp;:',
 
 // S
+'sans_heure' => '<NEW>sans heure',
 'sauvegarde_fusionner' => '<NEW>Fusionner la base actuelle et la sauvegarde',
 'sauvegarde_fusionner_depublier' => '<NEW>D&eacute;publier les objets fusionn&eacute;s',
 'sauvegarde_url_origine' => 'Beharrez, jatorrizko gunearen URLa :',

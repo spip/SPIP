@@ -48,7 +48,7 @@ om import.<p>F&ouml;r mer information se <A HREF=\'http://www.spip.net/en_articl
 'avis_sites_probleme_syndication' => 'Dessa sajter har ett syndikeringsproblem',
 'avis_sites_syndiques_probleme' => 'Det har uppst&aring;tt ett problem med syndikeringen av sajterna',
 'avis_suppression_base' => 'OBS! Radering av data &auml;r permanent och kan inte g&ouml;ras ogjord.',
-'avis_version_mysql' => 'Din version av MySql (@mysql_version@) st&ouml;der inte automatisk reparation av databas-tabeller.',
+'avis_version_mysql' => 'Din version av MySql (@version_mysql@) st&ouml;der inte automatisk reparation av databas-tabeller.',
 
 // B
 'bouton_acces_ldap' => 'L&auml;gg till en LDAP-katalog >>',
@@ -117,7 +117,7 @@ om import.<p>F&ouml;r mer information se <A HREF=\'http://www.spip.net/en_articl
 'config_activer_champs' => 'Aktivera f&ouml;ljande f&auml;lt',
 'config_choix_base_sup' => 'Ge namnet p&aring; en databas p&aring; servern',
 'config_erreur_base_sup' => 'SPIP har inte tillg&aring;ng till de existerande databaserna',
-'config_info_base_sup' => '<NEW>If you need to query other databases using SPIP, whether on the same SQL server or elsewhere, use the form below to declare them. If you leave some fields empty, then the connection details to the main database will be used.',
+'config_info_base_sup' => '<NEW>Si vous avez d\'autres bases de donn&eacute;es &agrave; interroger &agrave; travers SPIP, avec son serveur SQL ou avec un autre, le formulaire ci-dessous, vous permet de les d&eacute;clarer. Si vous laissez certains champs vides, les identifiants de connexion &agrave; la base principale seront utilis&eacute;s.',
 'config_info_base_sup_disponibles' => 'Ytterligare databaser dit databasfr&aring;gor kan skickas:',
 'config_info_logos' => 'Alla objekt p&aring; sajten kan kan ha sin egen logotype och dessutom en "mouseover" logotype',
 'config_info_logos_utiliser' => 'Anv&auml;nd logotyper',
@@ -164,7 +164,7 @@ om import.<p>F&ouml;r mer information se <A HREF=\'http://www.spip.net/en_articl
 'entree_login' => 'Dina anv&auml;ndaruppgifter',
 'entree_login_connexion_1' => 'Anv&auml;ndarupgifter f&ouml;r anslutningen',
 'entree_login_connexion_2' => '(&Auml;r ibland samma som l&ouml;senordet f&ouml;r FTP-&aring;tkomst och ibland kan det l&auml;mnas tomt)',
-'entree_login_ldap' => '<NEW>Initial LDAP login',
+'entree_login_ldap' => '<NEW>Login LDAP initial',
 'entree_mot_passe' => 'Ditt l&ouml;senord',
 'entree_mot_passe_1' => 'L&ouml;senord f&ouml;r anslutningen',
 'entree_mot_passe_2' => '(&Auml;r ibland samma som l&ouml;senordet f&ouml;r FTP-&aring;tkomst och ibland kan det l&auml;mnas tomt)',
@@ -307,26 +307,26 @@ om import.<p>F&ouml;r mer information se <A HREF=\'http://www.spip.net/en_articl
 'info_chemin_acces_2' => 'Fr&aring;n och med nu m&aring;ste du konfigurera s&ouml;kv&auml;gen till katalogen information. Det &auml;r n&ouml;dv&auml;ndigt f&ouml;r att kunna l&auml;sa anv&auml;ndarprofilerna som &auml;r sparade i katalogen.',
 'info_chemin_acces_annuaire' => 'Inst&auml;llningar: <b>S&ouml;kv&auml;g i katalogen</b>',
 'info_choix_base' => 'Tredje steget:',
-'info_classement_1' => '<NEW>&nbsp;out of @liste@',
-'info_classement_2' => '<NEW>&nbsp;out of @liste@',
+'info_classement_1' => '<NEW><sup>er</sup> sur @liste@',
+'info_classement_2' => '<NEW><sup>e</sup> sur @liste@',
 'info_code_acces' => 'Gl&ouml;m inte ditt eget l&ouml;senord!',
 'info_comment_lire_tableau' => 'Hur tolkar man den h&auml;r bilden',
-'info_compresseur_gzip' => '<NEW>It is advisable to first check if the service provider systematically compresses PHP scripts. To do this you can, for example, use the following service: @testgzip@',
-'info_compresseur_texte' => '<NEW>If your server does not automatically compress HTML pages when sending them, you can attempt to force the compression in order to reduce the size of the pages transmitted.<b>Warning</b>: this can have a noticeable adverse effect on the performance of some servers, ',
+'info_compresseur_gzip' => '<NEW><b>N.&nbsp;B.&nbsp;:</b> Il est recommand&#233; de v&#233;rifier au pr&#233;alable si l\'h&#233;bergeur compresse d&#233;j&#224; syst&#233;matiquement les scripts php&nbsp;; pour cela, vous pouvez par exemple utiliser le service suivant&nbsp;: @testgzip@',
+'info_compresseur_texte' => '<NEW>Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages t&eacute;l&eacute;charg&eacute;es. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.',
 'info_compresseur_titre' => 'Optimering och komprimering',
-'info_config_forums_prive' => '<NEW>In the editing area of the site several differnt kinds of forum may be activated:',
-'info_config_forums_prive_admin' => '<NEW>A forum reserved for site administrators:',
-'info_config_forums_prive_global' => '<NEW>A global forum, open to all the authors:',
-'info_config_forums_prive_objets' => '<NEW>A forum attached to each article, news item, referenced site, etc.:',
+'info_config_forums_prive' => '<NEW>Dans l&#8217;espace priv&#233; du site, vous pouvez activer plusieurs types de forums&nbsp;:',
+'info_config_forums_prive_admin' => '<NEW>Un forum r&#233;serv&#233; aux administrateurs du site&nbsp;:',
+'info_config_forums_prive_global' => '<NEW>Un forum global, ouvert &#224; tous les r&#233;dacteurs&nbsp;:',
+'info_config_forums_prive_objets' => '<NEW>Un forum sous chaque article, br&#232;ve, site r&#233;f&#233;renc&#233;, etc.&nbsp;:',
 'info_config_suivi' => 'Om den h&auml;r adressen &auml;r en mailing lista, kan du under adressen visa var man kan registrera sig. Det kan vara en URL (till exempel en webbsida d&auml;r man kan registrera sig), eller en e-postadress med en speciell &auml;renderad (till exempel: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Du kan anm&auml;la dig till sajtens nyhetsbrev. Du kommer d&aring; att automatiskt f&aring; meddelanden om artiklar och nyheter som laddats upp f&ouml;r publicering.',
 'info_confirmer_passe' => 'Bekr&auml;fta ditt nya l&ouml;senord:',
-'info_conflit_edition_avis_non_sauvegarde' => '<NEW>Caution: the following fields have been modified elsewhere. Your changes to these fields have therefore not been saved.',
-'info_conflit_edition_differences' => '<NEW>Differences:',
-'info_conflit_edition_version_enregistree' => '<NEW>Saved version:',
-'info_conflit_edition_votre_version' => '<NEW>Your version:',
+'info_conflit_edition_avis_non_sauvegarde' => '<NEW>Attention, les champs suivants ont &#233;t&#233; modifi&#233;s par ailleurs. Vos modifications sur ces champs n\'ont donc pas &#233;t&#233; enregistr&#233;es.',
+'info_conflit_edition_differences' => '<NEW>Diff&#233;rences&nbsp;:',
+'info_conflit_edition_version_enregistree' => '<NEW>La version enregistr&#233;e&nbsp;:',
+'info_conflit_edition_votre_version' => '<NEW>Votre version&nbsp;:',
 'info_connexion_base' => 'F&ouml;rs&ouml;ker att ansluta till databasen',
-'info_connexion_base_donnee' => '<NEW>Connection to your database',
+'info_connexion_base_donnee' => '<NEW>Connexion &agrave; votre base de donn&eacute;es',
 'info_connexion_ldap_ok' => 'Din f&ouml;rbindelse till LDAP-servern lyckades.</b><p /> Du kan g&aring; vidare till n&auml;sta steg.',
 'info_connexion_mysql' => 'Din databasf&ouml;rbindelse',
 'info_connexion_ok' => 'F&ouml;rbindelsen lyckades.',
@@ -371,32 +371,32 @@ om import.<p>F&ouml;r mer information se <A HREF=\'http://www.spip.net/en_articl
   aktiviteterna, kan SPIP skicka medddelanden via e-post, exempelvis till en maillista f&ouml;r redakt&ouml;rer,
   ang&aring;ende publiceringar och godk&auml;nnanden.',
 'info_fichiers_authent' => 'L&ouml;senordsfil ".htpasswd"',
-'info_fonctionnement_forum' => '<NEW>Forum operation:',
+'info_fonctionnement_forum' => '<NEW>Fonctionnement du forum&nbsp;:',
 'info_forum_administrateur' => 'Administrat&ouml;rernas forum',
 'info_forum_interne' => 'Internt forum',
 'info_forum_ouvert' => 'I sajtens privata del &auml;r ett forum &ouml;ppet f&ouml;r alla
   redakt&ouml;rer. Nedan kan du aktivera ett
   extra forum reserverat f&ouml;r administrat&ouml;rerna.',
 'info_forum_statistiques' => 'Bes&ouml;ksstatistik',
-'info_forums_abo_invites' => '<NEW>Your site contains forums by subscription; visitors may register for them on the public site.',
+'info_forums_abo_invites' => '<NEW>Votre site comporte des forums sur abonnement&nbsp;; les visiteurs sont donc invit&eacute;s &agrave; s\'enregistrer sur le site public.',
 'info_gauche_admin_effacer' => '<b>Endast administrat&ouml;rer har tillg&aring;ng till denna sida.</b><p /> Den ger tillg&aring;ng till tekniska underh&aring;llsrutiner av olika slag. En del av dem kommer, om de anv&auml;nds, att kr&auml;va FTP-tillg&aring;ng till Webservern f&ouml;r autentifiering.',
-'info_gauche_admin_tech' => '<NEW><b>Only administrators have access to this page.</b><p /> It provides access to various
-maintenance tasks. Some of them give rise to a specific authentication process
-requiring an FTP access to the Web site.',
-'info_gauche_admin_vider' => '<NEW><b>Only administrators have access to this page.</b><p /> It provides access to various
-maintenance tasks. Some of them give rise to a specific authentication process
-requiring an FTP access to the Web site.',
+'info_gauche_admin_tech' => '<NEW><b>Cette page est uniquement accessible aux responsables du site.</b><p /> Elle donne acc&egrave;s aux diff&eacute;rentes
+fonctions de maintenance technique. Certaines d\'entre elles donnent lieu &agrave; un processus d\'authentification sp&eacute;cifique, qui
+exige d\'avoir un acc&egrave;s FTP au site Web.',
+'info_gauche_admin_vider' => '<NEW><b>Cette page est uniquement accessible aux responsables du site.</b><p /> Elle donne acc&egrave;s aux diff&eacute;rentes
+fonctions de maintenance technique. Certaines d\'entre elles donnent lieu &agrave; un processus d\'authentification sp&eacute;cifique, qui
+exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_gauche_auteurs' => 'H&auml;r hittar du alla redakt&ouml;rer p&aring; sajten.
  Status p&aring; var och en av dem visas av f&auml;rgen p&aring; ikonen (administrat&ouml;r = gr&ouml;n; redakt&ouml;r = gul).',
 'info_gauche_auteurs_exterieurs' => 'Externa redakt&ouml;rer utan beh&ouml;righet p&aring; sajten, visas med en bl&aring; ikon; raderade redakt&ouml;rer med en soptunna.',
-'info_gauche_messagerie' => '<NEW>Messaging allows you to exchange messages amongst editors, to preserve memos (for your personal use) or to display announcements on the homepage of the private area (if you are an administrator).',
+'info_gauche_messagerie' => '<NEW>La messagerie vous permet d\'&eacute;changer des messages entre r&eacute;dacteurs, de conserver des pense-b&ecirc;tes (pour votre usage personnel) ou d\'afficher des annonces sur la page d\'accueil de l\'espace priv&eacute; (si vous &ecirc;tes administrateur).',
 'info_gauche_numero_auteur' => 'REDAKT&Ouml;R NUMMER:',
 'info_gauche_numero_breve' => 'NYHET NUMMER',
-'info_gauche_statistiques_referers' => '<NEW>This page displays the list of <i>referrers</i>, i.e. the sites containing links to your own site, only for yesteday and today: actually this list is initialised every 24 hours.',
+'info_gauche_statistiques_referers' => '<NEW>Cette page pr&eacute;sente la liste des <i>referers</i>, c\'est-&agrave;-dire des sites contenant des liens menant vers votre propre site, uniquement pour hier et aujourd\'hui&nbsp;; cette liste est remise &agrave; z&eacute;ro toutes les 24 heures.',
 'info_gauche_suivi_forum' => 'Sidna f&ouml;r<i>forumuppf&ouml;ljning</i> &auml;r ett administrationsverktyg f&ouml;r din sajt (inte en diskussions- eller redigeringsida). Den visar alla bidrag till det publika forum som h&ouml;r till artikeln och d&auml;r kan du hantera bidragen contributions.',
-'info_gauche_suivi_forum_2' => '<NEW>The <i>forums follow-up</i> page is a management tool of your site (not a discussion or editing). It displays all contributions to the forums (both of the public site and of the private area) and allows you to manage these contributions.',
-'info_gauche_visiteurs_enregistres' => '<NEW>You will find here the visitors registered
-	in the public area of the site (forums by subscription).',
+'info_gauche_suivi_forum_2' => '<NEW>La page de <i>suivi des forums</i> est un outil de gestion de votre site (et non un espace de discussion ou de r&eacute;daction). Elle affiche toutes les contributions des forums du site, aussi bien celles du site public que de l\'espace priv&eacute; et vous permet de g&eacute;rer ces contributions.',
+'info_gauche_visiteurs_enregistres' => '<NEW>Vous trouverez ici les visiteurs enregistr&eacute;s
+	dans l\'espace public du site (forums sur abonnement).',
 'info_generation_miniatures_images' => 'Skapande av tumnagelbilder.',
 'info_gerer_trad' => 'Aktivera &ouml;vers&auml;ttningsl&auml;nkar?',
 'info_groupe_important' => 'Viktig grupp',
@@ -415,14 +415,14 @@ funktioner hos SPIP inte anv&auml;ndas.',
 'info_identification_publique' => 'Din publika identitet...',
 'info_image_process' => 'V&auml;lj den b&auml;sta metoden f&ouml;r att skapa miniatyrer genom att klicka p&aring; motsvarande bild.',
 'info_image_process2' => '<b>OBS!.</b> <i>Om du inte kan se n&aring;gon bild, s&aring; &auml;r din server inte konfigurerad f&ouml;r att anv&auml;nda s&aring;dana verktyg. Om du vill anv&auml;nda dessa finesser s&aring; kontakta din leverant&ouml;rs tekniska support och be dem installera ut&ouml;kningarna f&ouml;r &laquo;GD&raquo; eller &laquo;Imagick&raquo;.</i>',
-'info_images_auto' => '<NEW>Images automatically calculated',
+'info_images_auto' => '<NEW>Images calcul&eacute;es automatiquement',
 'info_informations_personnelles' => 'Personlig information',
 'info_inscription_automatique' => 'Automatisk registreing av nya redakt&ouml;rer',
 'info_jeu_caractere' => 'Sajtens teckenupps&auml;ttning',
 'info_jours' => 'dagar',
 'info_laisser_champs_vides' => 'L&auml;mna dessa f&auml;lt tomma)',
 'info_langues' => 'Sajtens spr&aring;k',
-'info_ldap_ok' => '<NEW>LDAP authentication is installed.',
+'info_ldap_ok' => '<NEW>L\'authentification LDAP est install&eacute;e.',
 'info_lien_hypertexte' => 'Hyperl&auml;nk:',
 'info_liens_syndiques_1' => 'syndikerade l&auml;nkar',
 'info_liens_syndiques_2' => 'i v&auml;ntan p&aring; validering.',
@@ -476,8 +476,8 @@ funktioner hos SPIP inte anv&auml;ndas.',
 'info_nombre_rubriques' => '@nb_rubriques@ avdelningar,',
 'info_nombre_sites' => '@nb_sites@ sajter,',
 'info_non_deplacer' => 'Flytta inte...',
-'info_non_envoi_annonce_dernieres_nouveautes' => '<NEW>SPIP can send the site\'s latest news announcements regularly.
-		(recently published articles and news).',
+'info_non_envoi_annonce_dernieres_nouveautes' => '<NEW>SPIP peut envoyer, r&eacute;guli&egrave;rement, l\'annonce des derni&egrave;res nouveaut&eacute;s du site
+		(articles et br&egrave;ves r&eacute;cemment publi&eacute;s).',
 'info_non_envoi_liste_nouveautes' => 'Skicka inte listan med senaste nyheterna',
 'info_non_modifiable' => 'kan inte f&ouml;r&auml;ndras',
 'info_non_suppression_mot_cle' => 'Jag vill inte radera nyckelordet.',
@@ -521,8 +521,8 @@ funktioner hos SPIP inte anv&auml;ndas.',
 'info_preview_admin' => 'Endast administrat&ouml;rer har tillg&aring;ng till f&ouml;rhandsvisning',
 'info_preview_comite' => 'Alla redakt&ouml;rer har tillg&aring;ng till f&ouml;rhandsvisning',
 'info_preview_desactive' => 'F&ouml;rhandsvisning &auml;r avaktiverad',
-'info_preview_texte' => '<NEW>It is possible to preview the site as if all articles and news items (which have at least the status "submitted") were already published. Should this preview mode be restricted to administrators, open to all authors, or disabled completely?',
-'info_principaux_correspondants' => '<NEW>Your main correspondents',
+'info_preview_texte' => '<NEW>Il est possible de pr&eacute;visualiser le site comme si tous les articles et les br&egrave;ves (ayant au moins le statut &laquo;&nbsp;propos&eacute;&nbsp;&raquo;) &eacute;taient publi&eacute;s. Cette possibilit&eacute; doit-elle &ecirc;tre ouverte aux administrateurs seulement, &agrave; tous les r&eacute;dacteurs, ou &agrave; personne&nbsp;?',
+'info_principaux_correspondants' => '<NEW>Vos principaux correspondants',
 'info_procedez_par_etape' => 'Var v&auml;nlig, forts&auml;tt steg f&ouml;r steg',
 'info_procedure_maj_version' => 'Uppdateringsproceduren skall k&ouml;ras f&ouml;r att
  anpassa databasen till den nya versionen av SPIP.',
@@ -535,21 +535,21 @@ funktioner hos SPIP inte anv&auml;ndas.',
 'info_question_activer_compactage_js' => 'Vill du aktivera komprimering av  Javascript filer?',
 'info_question_activer_compresseur' => 'Vill du aktivera komprimering av HTTP trafiken?',
 'info_question_gerer_statistiques' => 'Skall din sajt hantera bes&ouml;ksstatistik?',
-'info_question_inscription_nouveaux_redacteurs' => '<NEW>Do you wish to allow the new editors to register
- from the public site? If you agree to this, visitors will be able to  register
-  using an automatic form, and then access the private area to
-  tender their own articles. <blockquote><i>During the registration process,
-  users receive an automatic email
-  giving them their access code to the private area. Some
-  service providers disallow the sending of email from their
-  servers: in that case, automated registration cannot be
-  implemented.',
+'info_question_inscription_nouveaux_redacteurs' => '<NEW>Acceptez-vous les inscriptions de nouveaux r&eacute;dacteurs &agrave;
+  partir du site public&nbsp;? Si vous acceptez, les visiteurs pourront s\'inscrire
+  depuis un formulaire automatis&eacute; et acc&eacute;deront alors &agrave; l\'espace priv&eacute; pour
+  proposer leurs propres articles. <blockquote><i>Lors de la phase d\'inscription,
+  les utilisateurs re&ccedil;oivent un courrier &eacute;lectronique automatique
+  leur fournissant leurs codes d\'acc&egrave;s au site priv&eacute;. Certains
+  h&eacute;bergeurs d&eacute;sactivent l\'envoi de mails depuis leurs
+  serveurs&nbsp;: dans ce cas, l\'inscription automatique est
+  impossible.',
 'info_question_mots_cles' => 'Vill du anv&auml;nsda nyckelord i din sajt?',
 'info_question_proposer_site' => 'Vem kan f&ouml;resl&aring; l&auml;nkar till sajter?',
 'info_question_utilisation_moteur_recherche' => 'Vill du anv&auml;nda SPIP&#381;s integrerade s&ouml;kfunktion?
  (Att st&auml;nga av den &ouml;kar systemets prestanda.)',
-'info_question_vignettes_referer' => '<NEW>When you consult the statistics, you can see a preview of the originating sites of the visits. ',
-'info_question_vignettes_referer_non' => '<NEW>Do not show the screenshots of the originating sites',
+'info_question_vignettes_referer' => '<NEW>Lorsque vous consultez les statistiques, vous pouvez visualiser des aper&ccedil;us des sites d\'origine des visites',
+'info_question_vignettes_referer_non' => '<NEW>Ne pas afficher les captures des sites d\'origine des visites',
 'info_question_vignettes_referer_oui' => 'Visa sk&auml;rmbilder av l&auml;nkande sajter',
 'info_question_visiteur_ajout_document_forum' => '<MODIF>Do you wish to authorise visitors to attach documenst (images, sound files, ...) to their forum messages?',
 'info_question_visiteur_ajout_document_forum_format' => '<MODIF>If so, give below the list of extensions for the file types which are to be authorised (e.g. gif, jpg, png, mp3).',
@@ -597,7 +597,7 @@ funktioner hos SPIP inte anv&auml;ndas.',
 'info_sauvegarde_reussi_02' => 'Databasen har sparats i @archive@. Du kan',
 'info_sauvegarde_reussi_03' => '&Aring;terv&auml;nd till administrationen',
 'info_sauvegarde_reussi_04' => 'p&aring; din sajt.',
-'info_sauvegarde_rubrique_reussi' => '<NEW>The tables of the @titre@ section have been saved to @archive@. You can',
+'info_sauvegarde_rubrique_reussi' => '<NEW>Les tables de la rubrique @titre@ ont &eacute;t&eacute; sauvegard&eacute;e dans @archive@. Vous pouvez',
 'info_sauvegarde_rubriques' => 'S&auml;kerhetskopiera avdelningarna',
 'info_sauvegarde_signatures' => 'S&auml;kerhetskopiera namininsamlingarnas underskrifter',
 'info_sauvegarde_sites_references' => 's&auml;kerhetskopiera l&auml;nkade sajter',
@@ -632,14 +632,14 @@ funktioner hos SPIP inte anv&auml;ndas.',
 'info_statut_site_3' => 'Inskickad',
 'info_statut_site_4' => 'I papperskorgen',
 'info_statut_utilisateurs_1' => 'Startinst&auml;llningar f&ouml;r importerade anv&auml;ndare',
-'info_statut_utilisateurs_2' => '<NEW>Choose the status that is attributed to the persons present in the LDAP directory when they connect for the first time. Later, you can modify this value for each author on a case by case basis.',
+'info_statut_utilisateurs_2' => '<NEW>Choisissez le statut qui est attribu&eacute; aux personnes pr&eacute;sentes dans l\'annuaire LDAP lorsqu\'elles se connectent pour la premi&egrave;re fois. Vous pourrez par la suite modifier cette valeur pour chaque auteur au cas par cas.',
 'info_suivi_activite' => 'F&ouml;lj upp aktiviteten p&aring; sajten',
 'info_supprimer_mot' => 'Radera nyckelordet',
 'info_surtitre' => '&Ouml;vertitel:',
 'info_syndication_integrale_1' => 'Din sajt publiceras RSS-filer f&ouml;r syndikering (Se &#147;<a href="@url@">@titre@</a>&#148;).',
 'info_syndication_integrale_2' => 'Vill du skicka hela artiklar eller bara en sammanfattning p&aring; ett par hundra tecken?',
 'info_table_prefix' => 'Det &auml;r m&ouml;jligt att byta prefix i databastabellernas namn. (Du beh&ouml;ver g&ouml;ra det om di installerar flera sajter i samma databas). Prefixet m&aring;ste skrivas utan accenter, med versaler utan mellanslag.',
-'info_taille_maximale_images' => '<NEW>SPIP is going to test the maximum size of image (in millions of pixels) which it can treat.<br /> Images bigger than this will not be reduced.',
+'info_taille_maximale_images' => '<NEW>SPIP va tester la taille maximale des images qu\'il peut traiter (en millions de pixels).<br /> Les images plus grandes ne seront pas r&eacute;duites.',
 'info_taille_maximale_vignette' => 'Maximal storlek p&aring; miniatyrer som skapats av systemet:',
 'info_terminer_installation' => 'Du kan nu avsluta installationsprocessen.',
 'info_texte' => 'Text',
@@ -680,7 +680,7 @@ med en f&auml;rg som visar deras status:',
 'info_visiteurs' => 'Bes&ouml;kare',
 'info_visiteurs_02' => 'Be&ouml;kare p&aring; den publika delen',
 'install_adresse_base_hebergeur' => 'Databasadress tillhandah&aring;llen av webbhotellet',
-'install_base_ok' => '<NEW>The base @base@ was identified',
+'install_base_ok' => '<NEW>La base @base@ a &eacute;t&eacute; reconnue',
 'install_echec_annonce' => 'Den h&auml;r installationen kommer f&ouml;rmodligen inte att fungera, alternativt resulterar den i en sajt med reducerad funktionalitet ...',
 'install_extension_mbstring' => 'SPIP fungerar inte med:',
 'install_extension_php_obligatoire' => 'SPIP kr&auml;ver ett till&auml;gg till php:',
@@ -695,11 +695,11 @@ med en f&auml;rg som visar deras status:',
 'install_select_type_pgsql' => 'PostgreSQL',
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
-'install_serveur_hebergeur' => '<NEW>Database server attributed by the service provider',
-'install_table_prefix_hebergeur' => '<NEW>Table prefix attributed by the service provider:',
+'install_serveur_hebergeur' => '<NEW>Serveur de base de donn&eacute;es attribu&eacute; par l\'h&eacute;bergeur',
+'install_table_prefix_hebergeur' => '<NEW>Pr&eacute;fixe de table attribu&eacute; par l\'h&eacute;bergeur&nbsp;:',
 'install_tables_base' => 'Databasens tabeller',
-'install_types_db_connus' => '<NEW>SPIP can use <b>MySQL</b> (the most common), <b>PostgreSQL</b> and <b>SQLite</b>.',
-'install_types_db_connus_avertissement' => '<NEW>N.B.: some plugins only function with MySQL',
+'install_types_db_connus' => '<NEW>SPIP sait utiliser <b>MySQL</b> (le plus r&eacute;pandu), <b>PostgreSQL</b> et <b>SQLite</b>.',
+'install_types_db_connus_avertissement' => '<NEW>Attention&nbsp;: plusieurs plugins ne fonctionnent qu\'avec MySQL',
 'intem_redacteur' => 'redakt&ouml;r',
 'intitule_licence' => 'Licens',
 'item_accepter_inscriptions' => 'Till&aring;t registreringar',
@@ -787,7 +787,7 @@ med en f&auml;rg som visar deras status:',
 'lien_reponse_breve' => 'Skriv ett svar p&aring; nyheten',
 'lien_reponse_breve_2' => 'Skriv ett svar p&aring; nyheten',
 'lien_reponse_rubrique' => 'Skriv ett svar till avdelningen',
-'lien_reponse_site_reference' => '<NEW>Reply to the referenced site:',
+'lien_reponse_site_reference' => '<NEW>R&eacute;ponse au site r&eacute;f&eacute;renc&eacute; :',
 'lien_retirer_auteur' => 'Ta bort redakt&ouml;ren',
 'lien_retrait_particpant' => 'ta bort deltagaren',
 'lien_site' => 'sajt',
@@ -813,9 +813,9 @@ med en f&auml;rg som visar deras status:',
 'module_fichier_langue' => 'Spr&aring;kfiler',
 'module_raccourci' => 'Genv&auml;g',
 'module_texte_affiche' => 'Visad text',
-'module_texte_explicatif' => '<NEW>You can insert the following shortcuts in you site\'s templates. They will be automatically translated in the various languages for which there is a language file.',
+'module_texte_explicatif' => '<NEW>Vous pouvez ins&eacute;rer les raccourcis suivants dans les squelettes de votre site public. Ils seront automatiquement traduits dans les diff&eacute;rentes langues pour lesquelles il existe un fichier de langue.',
 'module_texte_traduction' => 'Spr&aring;kfilen &laquo;&nbsp;@module@&nbsp;&raquo; finns i:',
-'mois_non_connu' => '<NEW>unknown',
+'mois_non_connu' => '<NEW>non connu',
 
 // O
 'onglet_contenu' => 'Inneh&aring;ll',
@@ -825,109 +825,109 @@ med en f&auml;rg som visar deras status:',
 'onglet_interactivite' => 'Interaktivitet',
 'onglet_proprietes' => 'Egenskaper',
 'onglet_repartition_actuelle' => 'nu',
-'onglet_sous_rubriques' => '<NEW>Sub-sections',
+'onglet_sous_rubriques' => '<NEW>Sous-rubriques',
 'ortho_ajouter_ce_mot' => 'L&auml;gg till ordet i ordlistan',
 'ortho_aucune_suggestion' => 'Inget annat f&ouml;rslag finns f&ouml;r det h&auml;r ordet.',
 'ortho_avis_privacy' => 'Spip inneh&aring;ller en r&auml;ttstavningsfunktion. Innan du anv&auml;nder den skall du l&auml;sa f&ouml;ljande mening noggrant:',
 'ortho_avis_privacy2' => 'F&ouml;r att kontrollera stavningen av en text, kommer Spip att skicka en lista med orden till en extern "r&auml;ttstavningsserver", som personer i Spip-gemenskapen st&auml;llt till ditt f&ouml;rfogande. Orden blandas om innan de skickas f&ouml;r att skydda inneh&aring;llet till viss del. Om du &auml;r orolig &ouml;ver detta, aktivera inte r&auml;ttstavningen (och ta bort din information fr&aring;n webben).',
-'ortho_ce_mot_connu' => '<NEW>This word is in the site\'s dictionary.',
-'ortho_dico_absent' => '<NEW>No dictionary was found for this language',
-'ortho_mode_demploi' => '<NEW>Urecognised words have been highlighted in red. Click on these words to see suggested corrections.',
-'ortho_mots_a_corriger' => '<NEW>words to correct',
-'ortho_orthographe' => '<NEW>Spelling',
-'ortho_supprimer_ce_mot' => '<NEW>Remove this word from the dictionary',
-'ortho_trop_de_fautes' => '<NEW>Your text contains too many mistakes! In order to avoid overloading the system, no corrections have been suggested.',
-'ortho_verif_impossible' => '<NEW>The system cannot check the spelling of this text.',
-'ortho_verifier' => '<NEW>Spell check',
+'ortho_ce_mot_connu' => '<NEW>Ce mot fait partie du dictionnaire du site.',
+'ortho_dico_absent' => '<NEW>Aucun dictionnaire n\'a &eacute;t&eacute; trouv&eacute; pour cette langue',
+'ortho_mode_demploi' => '<NEW>Les mots non reconnus sont surlign&eacute;s en rouge. Vous pouvez cliquer sur chaque mot pour afficher des suggestions de correction.',
+'ortho_mots_a_corriger' => '<NEW>mots &agrave; corriger',
+'ortho_orthographe' => '<NEW>Orthographe',
+'ortho_supprimer_ce_mot' => '<NEW>Enlever ce mot du dictionnaire',
+'ortho_trop_de_fautes' => '<NEW>Attention&nbsp;: votre texte contient trop de fautes, aucune correction n\'est sugg&eacute;r&eacute;e afin de ne pas surcharger le syst&egrave;me.',
+'ortho_verif_impossible' => '<NEW>Le syst&egrave;me ne peut pas v&eacute;rifier l\'orthographe de ce texte.',
+'ortho_verifier' => '<NEW>V&eacute;rifier l\'orthographe',
 
 // P
-'page_pas_proxy' => '<NEW>This page shouldn\'t go through the proxy',
-'pas_de_proxy_pour' => '<NEW>If necessary, indicate for which machines or domains this proxy should not apply (for example: @exemple@)',
-'plugin_charge_paquet' => '<NEW>Loading the archive file @name@',
-'plugin_erreur_charger' => '<NEW>error: impossible to load @zip@',
-'plugin_erreur_droit1' => '<NEW>The directory <code>@dest@</code> cannot be written to.',
-'plugin_erreur_droit2' => '<NEW>Please check the write permissions for this directory (and create the directory if necessary). Alternatively, install the files by FTP.',
-'plugin_erreur_zip' => '<NEW>pclzip failure: error @status@',
+'page_pas_proxy' => '<NEW>Cette page ne doit pas passer par le proxy',
+'pas_de_proxy_pour' => '<NEW>Au besoin, indiquez les machines ou domaines pour lesquels ce proxy ne doit pas s\'appliquer (par exemple&nbsp;: @exemple@)',
+'plugin_charge_paquet' => '<NEW>Chargement du paquet @name@',
+'plugin_erreur_charger' => '<NEW>erreur&nbsp;: impossible de charger @zip@',
+'plugin_erreur_droit1' => '<NEW>Le r&#233;pertoire <code>@dest@</code> n\'est pas accessible en &#233;criture.',
+'plugin_erreur_droit2' => '<NEW>Veuillez v&#233;rifier les droits sur ce r&#233;pertoire (et le cr&#233;er le cas &#233;ch&#233;ant), ou installer les fichiers par FTP.',
+'plugin_erreur_zip' => '<NEW>echec pclzip&nbsp;: erreur @status@',
 'plugin_etat_developpement' => 'Under utveckling',
 'plugin_etat_experimental' => 'exprimentell',
 'plugin_etat_stable' => 'Stabil',
 'plugin_etat_test' => 'under test',
 'plugin_impossible_activer' => 'Om&ouml;jligt att aktivera pluginen @plugin@',
-'plugin_info_automatique1' => '<NEW>If you wish to authorise the automatic installation of plugins, please:',
-'plugin_info_automatique2' => '<NEW>Create a directory <code>@rep@</code>&nbsp;;',
-'plugin_info_automatique3' => '<NEW>Check that the server has the permissions to write in this directory.',
-'plugin_info_automatique_creer' => '<NEW>to create at the root of the website.',
-'plugin_info_automatique_exemples' => '<NEW>examples:',
-'plugin_info_automatique_ftp' => '<NEW>You may install plugins by FTP in the  <tt>@rep@</tt> directory',
-'plugin_info_automatique_lib' => '<NEW>Some plugins require to be able to load files into the <code>lib/</code> directory. This directory should be created, if necessary, at the root of the website.',
-'plugin_info_automatique_liste' => '<NEW>Your plugins lists:',
-'plugin_info_automatique_liste_officielle' => '<NEW>official plugins',
-'plugin_info_automatique_liste_update' => '<NEW>Update the lists',
-'plugin_info_automatique_ou' => '<NEW>or...',
-'plugin_info_automatique_select' => '<NEW>Select a plugin below: SPIP will load it and will install it in the <code>@rep@</code> directory. If the plugin already exists, it will be updated.',
-'plugin_info_telecharger' => '<NEW>load from @url@ and install to @rep@',
-'plugin_librairies_installees' => '<NEW>Installed libraries',
-'plugin_necessite_lib' => '<NEW>This plugin requires the library @lib@',
+'plugin_info_automatique1' => '<NEW>Si vous souhaitez autoriser l\'installation automatique des plugins, veuillez&nbsp;:',
+'plugin_info_automatique2' => '<NEW>cr&#233;er un r&#233;pertoire <code>@rep@</code>&nbsp;;',
+'plugin_info_automatique3' => '<NEW>v&#233;rifier que le serveur est autoris&#233; &#224; &#233;crire dans ce r&#233;pertoire.',
+'plugin_info_automatique_creer' => '<NEW>&#224; cr&#233;er &#224; la racine du site.',
+'plugin_info_automatique_exemples' => '<NEW>exemples&nbsp;:',
+'plugin_info_automatique_ftp' => '<NEW>Vous pouvez installer des plugins, par FTP, dans le r&#233;pertoire <tt>@rep@</tt>',
+'plugin_info_automatique_lib' => '<NEW>Certains plugins demandent aussi &#224; pouvoir t&#233;l&#233;charger des fichiers dans le r&#233;pertoire <code>lib/</code>, &#224; cr&#233;er le cas &#233;ch&#233;ant &#224; la racine du site.',
+'plugin_info_automatique_liste' => '<NEW>Vos listes de plugins&nbsp;:',
+'plugin_info_automatique_liste_officielle' => '<NEW>les plugins officiels',
+'plugin_info_automatique_liste_update' => '<NEW>Mettre &#224; jour les listes',
+'plugin_info_automatique_ou' => '<NEW>ou...',
+'plugin_info_automatique_select' => '<NEW>S&#233;lectionnez ci-dessous un plugin&nbsp;: SPIP le t&#233;l&#233;chargera et l\'installera dans le r&#233;pertoire <code>@rep@</code>&nbsp;; si ce plugin existe d&#233;j&#224;, il sera mis &#224; jour.',
+'plugin_info_telecharger' => '<NEW>&#224; t&#233;l&#233;charger depuis @url@ et &#224; installer dans @rep@',
+'plugin_librairies_installees' => '<NEW>Librairies install&#233;es',
+'plugin_necessite_lib' => '<NEW>Ce plugin n&#233;cessite la librairie @lib@',
 'plugin_necessite_plugin' => 'Version @version@ eller nyare av pluginen @plugin@ kr&auml;vs.',
-'plugin_necessite_spip' => '<NEW>SPIP version @version@ or newer is required.',
+'plugin_necessite_spip' => '<NEW>N&eacute;cessite SPIP en version @version@ minimum.',
 'plugin_source' => '<NEW>source:&nbsp;',
-'plugin_titre_automatique' => '<NEW>Automatic installation',
-'plugin_titre_automatique_ajouter' => '<NEW>Add plugins',
+'plugin_titre_automatique' => '<NEW>Installation automatique',
+'plugin_titre_automatique_ajouter' => '<NEW>Ajouter des plugins',
 'plugin_zip_active' => 'Forts&auml;tt f&ouml;r att aktivera',
-'plugin_zip_adresse' => '<NEW>Below, give the address of a zip file of a plugin to be loaded, or else the address of a list of plugins.',
-'plugin_zip_adresse_champ' => '<NEW>Address of the plugin or of the list&nbsp;',
-'plugin_zip_content' => '<NEW>It contains the following files(@taille@),<br />ready to be installed in the <code>@rep@</code> directory',
+'plugin_zip_adresse' => '<NEW>indiquez ci-dessous l\'adresse d\'un fichier zip de plugin &#224; t&#233;l&#233;charger, ou encore l\'adresse d\'une liste de plugins.',
+'plugin_zip_adresse_champ' => '<NEW>Adresse du plugin ou de la liste&nbsp;',
+'plugin_zip_content' => '<NEW>Il contient les fichiers suivants (@taille@),<br />pr&#234;ts &#224; installer dans le r&#233;pertoire <code>@rep@</code>',
 'plugin_zip_installe_finie' => 'Filen @zip@ har packats upp och installerats.',
 'plugin_zip_installe_rep_finie' => 'Filen @zip@ har packats upp och installerats i katalogen @rep@',
 'plugin_zip_installer' => 'Du kan installera nu.',
-'plugin_zip_telecharge' => '<NEW>The file @zip@ has been loaded',
+'plugin_zip_telecharge' => '<NEW>Le fichier @zip@ a &#233;t&#233; t&#233;l&#233;charg&#233;',
 'plugins_actifs' => '@count@ aktiva plugins.',
 'plugins_compte' => '@count@ plugins',
 'plugins_disponibles' => '@count@ tillg&auml;ngliga plugins.',
 'plugins_erreur' => 'Fel i f&ouml;ljande plugin: @plugins@',
 'plugins_liste' => 'Lista &ouml;ver plugins',
-'plugins_vue_hierarchie' => '<NEW>Hierarchy',
-'plugins_vue_liste' => '<NEW>List',
-'protocole_ldap' => '<NEW>Protocol version:',
+'plugins_vue_hierarchie' => '<NEW>Hi&eacute;rarchie',
+'plugins_vue_liste' => '<NEW>Liste',
+'protocole_ldap' => '<NEW>Version du protocole :',
 
 // R
-'repertoire_plugins' => '<NEW>Directory:',
+'repertoire_plugins' => '<NEW>R&eacute;pertoire&nbsp;:',
 
 // S
-'sans_heure' => '<NEW>time unspecified',
-'sauvegarde_fusionner' => '<NEW>Merge the current database with the backup',
-'sauvegarde_fusionner_depublier' => '<NEW>Unpublish the merged objects',
-'sauvegarde_url_origine' => '<NEW>If necessary, the URL of the source site:',
-'statut_admin_restreint' => '<NEW>(restricted admin)',
-'syndic_choix_moderation' => '<NEW>What should be done with the next links from this site?',
-'syndic_choix_oublier' => '<NEW>What should be done with links which are no longer present in the syndication file?',
-'syndic_choix_resume' => '<NEW>Some sites offer the full text of their articles. When the full text is available, do you wish to syndicate:',
+'sans_heure' => '<NEW>sans heure',
+'sauvegarde_fusionner' => '<NEW>Fusionner la base actuelle et la sauvegarde',
+'sauvegarde_fusionner_depublier' => '<NEW>D&eacute;publier les objets fusionn&eacute;s',
+'sauvegarde_url_origine' => '<NEW>Eventuellement, URL du site d\'origine :',
+'statut_admin_restreint' => '<NEW>(admin restreint)',
+'syndic_choix_moderation' => '<NEW>Que faire des prochains liens en provenance de ce site&nbsp;?',
+'syndic_choix_oublier' => '<NEW>Que faire des liens qui ne figurent plus dans le fichier de syndication&nbsp;?',
+'syndic_choix_resume' => '<NEW>Certains sites diffusent le texte complet des articles. Lorsque celui-ci est disponible souhaitez-vous syndiquer&nbsp;:',
 'syndic_lien_obsolete' => 'Trasig l&auml;nk',
-'syndic_option_miroir' => '<NEW>block them automatically',
-'syndic_option_oubli' => '<NEW>delete them (after @mois@&nbsp;months)',
+'syndic_option_miroir' => '<NEW>les bloquer automatiquement',
+'syndic_option_oubli' => '<NEW>les effacer (apr&egrave;s @mois@&nbsp;mois)',
 'syndic_option_resume_non' => 'det fullst&auml;ndiga inneh&aring;llet i artiklarna (i HTML-format)',
 'syndic_option_resume_oui' => 'en enkel sammanfattning (i text-format)',
 'syndic_options' => 'Alternativ f&ouml;r syndikering&nbsp;:',
 
 // T
-'taille_cache_image' => '<NEW>The images calculated automatically by SPIP (thumbnails, titles transformed into graphics, mathematical formulae in TeX format, etc.) take up a total of @taille@ in the @dir@ directory.',
-'taille_cache_infinie' => '<NEW>This site does not have any fixed limit for the size of the cache directory.',
-'taille_cache_maxi' => '<NEW>SPIP is trying to limit the size of the cache directory to approximately <b>@octets@</b> of data.',
-'taille_cache_octets' => '<NEW>The size of the cache is currently @octets@.',
+'taille_cache_image' => '<NEW>Les images calcul&eacute;es automatiquement par SPIP (vignettes des documents, titres pr&eacute;sent&eacute;s sous forme graphique, fonctions math&eacute;matiques au format TeX...) occupent dans le r&eacute;pertoire @dir@ un total de @taille@.',
+'taille_cache_infinie' => '<NEW>Ce site ne pr&eacute;voit pas de limitation de taille du r&eacute;pertoire du cache.',
+'taille_cache_maxi' => '<NEW>SPIP essaie de limiter la taille du r&eacute;pertoire du cache de ce site &agrave; environ <b>@octets@</b> de donn&eacute;es.',
+'taille_cache_octets' => '<NEW>La taille du cache est actuellement de @octets@.',
 'taille_cache_vide' => 'Cachen &auml;r tom.',
-'taille_repertoire_cache' => '<NEW>Current size of the cache',
+'taille_repertoire_cache' => '<NEW>Taille du r&eacute;pertoire cache',
 'text_article_propose_publication' => '<MODIF>Artikel inl&auml;mnad f&ouml;r publicering. tveka inte att s&auml;ga din mening i forumet l&auml;ngst ned p&aring; sidan.',
-'text_article_propose_publication_forum' => '<NEW>You can comment on this article by using the attached forum (at the bottom of the page).',
-'texte_acces_ldap_anonyme_1' => '<NEW>Some LDAP servers do not allow any anonymous access. In this case you must indicate an initial access identifier to be able to search for information in the directory afterwards. However, in most cases the following fields can be left empty.',
+'text_article_propose_publication_forum' => '<NEW>N\'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce au forum attach&eacute; &agrave; cet article (en bas de page).',
+'texte_acces_ldap_anonyme_1' => '<NEW>Certains serveurs LDAP n\'acceptent aucun acc&egrave;s anonyme. Dans ce cas il faut sp&eacute;cifier un identifiant d\'acc&egrave;s initial afin de pouvoir ensuite rechercher des informations dans l\'annuaire. Dans la plupart des cas n&eacute;anmoins, les champs suivants pourront &ecirc;tre laiss&eacute;s vides.',
 'texte_admin_effacer_01' => 'Detta kommando raderar <i>all</i> information i databasen,
 inklusive <i>alla</i> uppgifter om anv&auml;ndare. Efter att du anv&auml;nt det, m&aring;ste du 
 installera om SPIP f&ouml;r att skapa en ny databas och den f&ouml;rsta administrat&ouml;ren.',
-'texte_admin_effacer_stats' => '<NEW>This command deletes all data linked to the statistics of visits to the site, including the relative popularity of articles.',
-'texte_admin_tech_01' => '<NEW>This option allows you to save the content of the database in a file stored in the directory @dossier@. Also, remember to retrieve the whole @img@, directory, which contains the images and the documents used in the articles and sections.',
-'texte_admin_tech_02' => '<NEW>Warning: this backup can ONLY be restored in a site installed under the same version of SPIP. You should certainly not "empty the database" and expect to re-install the backup after the upgrade... For more information refer to <a href=\'http://www.spip.net/en_article2428.html\'>SPIP documentation</a>.',
+'texte_admin_effacer_stats' => '<NEW>Cette commande efface toutes les donn&eacute;es li&eacute;es aux statistiques de visite du site, y compris la popularit&eacute; des articles.',
+'texte_admin_tech_01' => '<NEW>Cette option vous permet de sauvegarder le contenu de la base dans un fichier qui sera stock&eacute; dans le r&eacute;pertoire @dossier@. N\'oubliez pas &eacute;galement de r&eacute;cup&eacute;rer l\'int&eacute;gralit&eacute; du r&eacute;pertoire @img@, qui contient les images et les documents utilis&eacute;s dans les articles et les rubriques.',
+'texte_admin_tech_02' => '<NEW>Attention: cette sauvegarde ne pourra &ecirc;tre restaur&eacute;e QUE dans un site install&eacute; sous la m&ecirc;me version de SPIP. Il ne faut donc surtout pas &laquo;&nbsp;vider la base&nbsp;&raquo; en esp&eacute;rant r&eacute;installer la sauvegarde apr&egrave;s une mise &agrave; jour... Consultez <a href="http://www.spip.net/fr_article1489.html">la documentation de SPIP</a>.',
 'texte_admin_tech_03' => 'Du kan v&auml;lja att spara filen i komprimerad form f&ouml;r att 
  snabba upp &ouml;verf&ouml;ringen till din dator eller till en backupserver och spara lite diskutrymme.',
-'texte_admin_tech_04' => '<NEW>In order to merge with another database, you can restrict the backup to one section: ',
+'texte_admin_tech_04' => '<NEW>Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde &agrave; la rubrique: ',
 'texte_adresse_annuaire_1' => '( Om din katalog &auml;r installerad p&aring; samma dator som din websajt, &auml;r det troligen &laquo;localhost&raquo;.)',
 'texte_ajout_auteur' => 'F&ouml;ljande redakt&ouml;r lades till artikeln:',
 'texte_annuaire_ldap_1' => 'Om du har tillg&aring;ng till en LDAP-katalog kan du anv&auml;nda den f&ouml;r att importera anv&auml;ndare till SPIP.',
@@ -935,19 +935,19 @@ installera om SPIP f&ouml;r att skapa en ny databas och den f&ouml;rsta administ
 'texte_article_virtuel' => 'Virtuell artikel',
 'texte_article_virtuel_reference' => '<b>Virtuell Artikel:</b> l&auml;nkad artikel i din SPIP site, men ompekad till en annan URL. F&ouml;r att ta bort ompekningen, radera denna URL.',
 'texte_aucun_resultat_auteur' => 'Inga resultat f&ouml;r "@cherche_auteur@".',
-'texte_auteur_messagerie' => '<NEW>This site can continuously monitor the list of connected editors, which allows you to exchange messages in real time. You can decide not to appear in this list (you are then, "invisible" for the other users).',
-'texte_auteur_messagerie_1' => '<NEW>This site allows the exchange of messages and the creation of private discussion forums between participants to the site. You can decide not to participate to this exchange.',
+'texte_auteur_messagerie' => '<NEW>Ce site peut vous indiquer en permanence la liste des r&eacute;dacteurs connect&eacute;s, ce qui vous permet d\'&eacute;changer des messages en direct. Vous pouvez d&eacute;cider de ne pas appara&icirc;tre dans cette liste (vous &ecirc;tes &laquo;&nbsp;invisible&nbsp;&raquo; pour les autres utilisateurs).',
+'texte_auteur_messagerie_1' => '<NEW>Ce site permet l\'&eacute;change de messages et la constitution de forums de discussion priv&eacute;s entre les participants du site. Vous pouvez d&eacute;cider de ne pas participer &agrave; ces &eacute;changes.',
 'texte_auteurs' => 'REDAKT&Ouml;RERNA',
-'texte_breves' => '<NEW>News are short and simple texts which allow
-	the publication online of concise information, the management of
-	a press review, a calendar of events...',
+'texte_breves' => '<NEW>Les br&egrave;ves sont des textes courts et simples permettant de
+	mettre en ligne rapidement des informations concises, de g&eacute;rer
+	une revue de presse, un calendrier d\'&eacute;v&eacute;nements...',
 'texte_choix_base_1' => 'V&auml;lj din databas:',
 'texte_choix_base_2' => 'Databasservern inneh&aring;ller flera databaser.',
 'texte_choix_base_3' => '<b>V&auml;lj</b> den som din leverant&ouml;r har gett dig:',
 'texte_choix_table_prefix' => 'Prefix f&ouml;r tabeller:',
-'texte_commande_vider_tables_indexation' => '<NEW>Use this command to empty the indexing tables used
-			by the search engine integrated to SPIP. It will allow you
-			to save some disk space.',
+'texte_commande_vider_tables_indexation' => '<NEW>Utilisez cette commande afin de vider les tables d\'indexation utilis&eacute;es
+			par le moteur de recherche int&eacute;gr&eacute; &agrave; SPIP. Cela vous permettra
+			de gagner de l\'espace disque.',
 'texte_comment_lire_tableau' => 'Artikeln rank i
   popularitetsklassificeringen visas i 
   marginalen; artikelns popularitet (en uppskattning av
@@ -955,42 +955,45 @@ installera om SPIP f&ouml;r att skapa en ny databas och den f&ouml;rsta administ
   trafikm&auml;ngden uppr&auml;tth&aring;lls) och antal bes&ouml;k
   sedan starten visas i bubblan som 
   dyker upp n&auml;r muspekaren h&aring;lls &ouml;ver titeln.',
-'texte_compacter_avertissement' => '<NEW>Be careful not to activate these options during the development of your site: compressed elements become difficult to read and debug.',
-'texte_compacter_script_css' => '<NEW>SPIP can compact Javascript files and CSS stylesheets and save them as static files. This accelerates the display of the site.',
+'texte_compacter_avertissement' => '<NEW>Attention &#224; ne pas activer ces options durant le d&#233;veloppement de votre site : les &#233;l&#233;ments compact&#233;s perdent toute lisibilit&#233;.',
+'texte_compacter_script_css' => '<NEW>SPIP peut compacter les scripts javascript et les feuilles de style CSS, pour les enregistrer dans des fichiers statiques ; cela acc&#233;l&#232;re l\'affichage du site.',
 'texte_compresse_ou_non' => '(Den kan vara komprimerad eller inte.)',
-'texte_compresseur_page' => '<NEW>SPIP can automatically compress each page that it sends. This option reduces the bandwidth used, making the site faster for lower speed connections), but it does require more resources from the server.',
+'texte_compresseur_page' => '<NEW>SPIP peut compresser automatiquement chaque page qu\'il envoie aux
+visiteurs du site. Ce r&#233;glage permet d\'optimiser la bande passante (le
+site est plus rapide derri&#232;re une liaison &#224; faible d&#233;bit), mais
+demande plus de puissance au serveur.',
 'texte_compte_element' => '@count@ objekt',
 'texte_compte_elements' => '@count@ element',
-'texte_config_groupe_mots_cles' => '<NEW>Do you wish to activate the advanced configuration of keyword groups,
-   by specifying, for instance that a unique word
- per group could be selected, that a group is important...?',
-'texte_conflit_edition_correction' => '<NEW>Please check check below the differences between the two versions. You can thus copy your changes and re-begin.',
+'texte_config_groupe_mots_cles' => '<NEW>Souhaitez-vous activer la configuration avanc&eacute;e des mots-cl&eacute;s,
+   en indiquant par exemple qu\'on peut s&eacute;lectionner un mot unique
+   par groupe, qu\'un groupe est important...&nbsp;?',
+'texte_conflit_edition_correction' => '<NEW>Veuillez contr&#244;ler ci-dessous les diff&#233;rences entre les deux versions du texte&nbsp;; vous pouvez aussi copier vos modifications, puis recommencer.',
 'texte_connexion_mysql' => '<MODIF>Consult the information provided by your service provider. It should contain the connection codes for the SQL server.',
-'texte_contenu_article' => '<NEW>(Content of the article in a few words.)',
-'texte_contenu_articles' => '<NEW>Based on the layout chosen for your site, you can decide
-		that some articles elements are not to be used.
-		Use the following list to choose which elements should be available.',
-'texte_crash_base' => '<NEW>If your database
-			crashed, you can try to repair it
-			automatically.',
-'texte_creer_rubrique' => '<NEW>Before being able to write articles,<br /> you must create a section.',
-'texte_date_creation_article' => '<NEW>DATE OF ARTICLE CREATION:',
-'texte_date_publication_anterieure' => '<NEW>Date of earlier publishing:',
-'texte_date_publication_anterieure_nonaffichee' => '<NEW>Hide date of earlier publishing.',
-'texte_date_publication_article' => '<NEW>DATE OF ONLINE PUBLICATION:',
-'texte_descriptif_petition' => '<NEW>Petition description',
-'texte_descriptif_rapide' => '<NEW>Brief description',
-'texte_documents_joints' => '<NEW>You can allow the addition of documents (office files, images,
- multimedia, etc.) to articles and/or sections. These files
- could then be referenced in
- the article or displayed separately.<p />',
-'texte_documents_joints_2' => '<NEW>This setting does not stop the insertion of images directly in the articles.',
-'texte_effacer_base' => '<NEW>Delete the SPIP database',
-'texte_effacer_donnees_indexation' => '<NEW>Delete indexing data',
-'texte_effacer_statistiques' => '<NEW>Delete the statistics',
+'texte_contenu_article' => '<NEW>(Contenu de l\'article en quelques mots.)',
+'texte_contenu_articles' => '<NEW>Selon la maquette adopt&eacute;e pour votre site, vous pouvez d&eacute;cider
+		que certains &eacute;l&eacute;ments des articles ne sont pas utilis&eacute;s.
+		Utilisez la liste ci-dessous pour indiquer quels &eacute;l&eacute;ments sont disponibles.',
+'texte_crash_base' => '<NEW>Si votre base de donn&eacute;es a
+			crash&eacute;, vous pouvez tenter une r&eacute;paration
+			automatique.',
+'texte_creer_rubrique' => '<NEW>Avant de pouvoir &eacute;crire des articles,<br /> vous devez cr&eacute;er une rubrique.',
+'texte_date_creation_article' => '<NEW>DATE DE CR&Eacute;ATION DE L\'ARTICLE&nbsp;:',
+'texte_date_publication_anterieure' => '<NEW>Date de r&eacute;daction ant&eacute;rieure&nbsp;:',
+'texte_date_publication_anterieure_nonaffichee' => '<NEW>Ne pas afficher de date de r&eacute;daction ant&eacute;rieure.',
+'texte_date_publication_article' => '<NEW>DATE DE PUBLICATION EN LIGNE&nbsp;:',
+'texte_descriptif_petition' => '<NEW>Descriptif de la p&eacute;tition',
+'texte_descriptif_rapide' => '<NEW>Descriptif rapide',
+'texte_documents_joints' => '<NEW>Vous pouvez autoriser l\'ajout de documents (fichiers bureautiques, images,
+ multim&eacute;dia, etc.) aux articles et/ou aux rubriques. Ces fichiers
+ peuvent ensuite &ecirc;tre r&eacute;f&eacute;renc&eacute;s dans
+ l\'article, ou affich&eacute;s s&eacute;par&eacute;ment.<p />',
+'texte_documents_joints_2' => '<NEW>Ce r&eacute;glage n\'emp&ecirc;che pas l\'insertion d\'images directement dans les articles.',
+'texte_effacer_base' => '<NEW>Effacer la base de donn&eacute;es SPIP',
+'texte_effacer_donnees_indexation' => '<NEW>Effacer les donn&eacute;es d\'indexation',
+'texte_effacer_statistiques' => '<NEW>Effacer les statistiques',
 'texte_en_cours_validation' => '<MODIF>The following articles and news are submitted for publication. Do not hesitate to give your opinion through the forums attached to them.',
-'texte_en_cours_validation_forum' => '<NEW>You can give your comments by using the forums which are attached to them.',
-'texte_enrichir_mise_a_jour' => '<NEW>You can enrich the layout of your text by using &laquo;typographical shortcuts&raquo;.',
+'texte_en_cours_validation_forum' => '<NEW>N\'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce aux forums qui leur sont attach&eacute;s.',
+'texte_enrichir_mise_a_jour' => '<NEW>Vous pouvez enrichir la mise en page de votre texte en utilisant des &laquo;&nbsp;raccourcis typographiques&nbsp;&raquo;.',
 'texte_fichier_authent' => '<MODIF><b>Should SPIP create the <tt>.htpasswd</tt>
   and <tt>.htpasswd-admin</tt> files in the directory @dossier@?</b><p />
   These files can be used to restrict access to authors
@@ -999,29 +1002,29 @@ installera om SPIP f&ouml;r att skapa en ny databas och den f&ouml;rsta administ
   If you have no need of such files, you can leave this option
   with its default value (no files 
   creation).',
-'texte_informations_personnelles_1' => '<NEW>The system will provide you now with a custom access to the site.',
-'texte_informations_personnelles_2' => '<NEW>(Note: if it is a reinstallation, and your access is still working, you can',
-'texte_introductif_article' => '<NEW>(Introductory Text to the article.)',
-'texte_jeu_caractere' => '<NEW>You are advised to use the universal alphabet (<tt>utf-8</tt>) on your site. This will make it possible to display text in any language. No modern browsers have any difficulty with this character set.',
-'texte_jeu_caractere_2' => '<NEW>N.B. This setting will not convert text which has already been saved in the database.',
+'texte_informations_personnelles_1' => '<NEW>Le syst&egrave;me va maintenant vous cr&eacute;er un acc&egrave;s personnalis&eacute; au site.',
+'texte_informations_personnelles_2' => '<NEW>(Note : s\'il s\'agit d\'une r&eacute;installation, et que votre acc&egrave;s marche toujours, vous pouvez',
+'texte_introductif_article' => '<NEW>(Texte introductif de l\'article.)',
+'texte_jeu_caractere' => '<NEW>Il est conseill&eacute; d\'employer, sur votre site, l\'alphabet universel (<tt>utf-8</tt>)&nbsp;: celui-ci permet l\'affichage de textes dans toutes les langues, et ne pose plus de probl&egrave;mes de compatibilit&eacute; avec les navigateurs modernes.',
+'texte_jeu_caractere_2' => '<NEW>Attention : ce r&eacute;glage ne provoque pas la conversion des textes d&eacute;j&agrave; enregistr&eacute;s dans la base de donn&eacute;es.',
 'texte_jeu_caractere_3' => 'Din sajt anv&auml;nder f&ouml;ljande teckenupps&auml;ttning:',
-'texte_jeu_caractere_4' => '<NEW>If that does not correspond to the situation you have with your data (for example, after restoring your database from a backup), or if <em>you are setting up this site</em> and wish to use a different character set, please indicate the character set here:',
-'texte_jeu_caractere_conversion' => '<NEW>Note: You can decide to convert all the texts (articles, news items, forums, etc.) of your site once and for all to the character set <tt>utf-8</tt>. To do this, go to the <a href="@url@">UTF-8 conversion page</a>.',
-'texte_lien_hypertexte' => '<NEW>(If your message refers to an article published on the Web, or to a page providing more information, please enter here the title of the page and its URL.)',
-'texte_liens_sites_syndiques' => '<NEW>Links emanating from syndicated sites could
-			be blocked beforehand; the following
-			setting show the default setting of
-			syndicated sites after their creation. It
-			is, then, possible anyway to
-			block each link individually, or to
-			choose, for each site, to block the links coming
-			from any particular site.',
-'texte_login_ldap_1' => '<NEW>(Keep empty for anonymous access or enter complete path, for instance &laquo;<tt>uid=smith, ou=users, dc=my-domain, dc=com</tt>&raquo;.)',
-'texte_login_precaution' => '<NEW>Warning! This is the login with which you are connected now.
-	Use this form with caution...',
-'texte_message_edit' => '<NEW>Warning: this message can be modified by all the site administrators, and it appears to all editors. Use the announcements only to stress important events in the site\'s life.',
-'texte_messagerie_agenda' => '<NEW>A messaging system allows the authors of the site to communicate directly in the editing area of the site. It is linked to a calendar.',
-'texte_messages_publics' => '<NEW>Public Messages of the article:',
+'texte_jeu_caractere_4' => '<NEW>Si cela ne correspond pas &agrave; la r&eacute;alit&eacute; de vos donn&eacute;es (suite, par exemple, &agrave; une restauration de base de donn&eacute;es), ou si <em>vous d&eacute;marrez ce site</em> et souhaitez partir sur un autre jeu de caract&egrave;res, veuillez indiquer ce dernier ici&nbsp;:',
+'texte_jeu_caractere_conversion' => '<NEW>Note&nbsp;: vous pouvez d&eacute;cider de convertir une fois pour toutes l\'ensemble des textes de votre site (articles, br&egrave;ves, forums, etc.) vers l\'alphabet <tt>utf-8</tt>, en vous rendant sur <a href="@url@">la page de conversion vers l\'utf-8</a>.',
+'texte_lien_hypertexte' => '<NEW>(Si votre message se r&eacute;f&egrave;re &agrave; un article publi&eacute; sur le Web, ou &agrave; une page fournissant plus d\'informations, veuillez indiquer ci-apr&egrave;s le titre de la page et son adresse URL.)',
+'texte_liens_sites_syndiques' => '<NEW>Les liens issus des sites syndiqu&eacute;s peuvent
+			&ecirc;tre bloqu&eacute;s a priori&nbsp;; le r&eacute;glage
+			ci-dessous indique le r&eacute;glage par d&eacute;faut des
+			sites syndiqu&eacute;s apr&egrave;s leur cr&eacute;ation. Il
+			est ensuite possible, de toutes fa&ccedil;ons, de
+			d&eacute;bloquer chaque lien individuellement, ou de
+			choisir, site par site, de bloquer les liens &agrave; venir
+			de tel ou tel site.',
+'texte_login_ldap_1' => '<NEW>(Laisser vide pour un acc&egrave;s anonyme, ou entrer le chemin complet, par exemple &laquo;&nbsp;<tt>uid=dupont, ou=users, dc=mon-domaine, dc=com</tt>&nbsp;&raquo;.)',
+'texte_login_precaution' => '<NEW>Attention&nbsp;! Ceci est le login sous lequel vous &ecirc;tes connect&eacute; actuellement.
+	Utilisez ce formulaire avec pr&eacute;caution...',
+'texte_message_edit' => '<NEW>Attention&nbsp;: ce message peut &ecirc;tre modifi&eacute; par tous les administrateurs du site, et est visible par tous les r&eacute;dacteurs. N\'utilisez les annonces que pour exposer des &eacute;v&eacute;nements importants de la vie du site.',
+'texte_messagerie_agenda' => '<NEW>Une messagerie permet aux r&#233;dacteurs du site de communiquer entre eux directement dans l&#8217;espace priv&#233; du site. Elle est associ&#233;e &#224; un agenda.',
+'texte_messages_publics' => '<NEW>Messages publics de l\'article :',
 'texte_mise_a_niveau_base_1' => 'Du har just uppdaterat filerna i SPIP.
  Nu m&aring;ste du uppgradera sajtens databas.',
 'texte_modifier_article' => 'Redigera artikeln:',
@@ -1031,10 +1034,10 @@ installera om SPIP f&ouml;r att skapa en ny databas och den f&ouml;rsta administ
   det normala s&auml;ttet (fr&aring;n gr&auml;nssnittet i SPIP ) automatiskt
   indexeras igen: d&auml;rf&ouml;r &auml;r kommandot bara anv&auml;ndbart i speciella omst&auml;ndigheter.',
 'texte_moteur_recherche_non_active' => 'S&ouml;kfunktionen &auml;r inte aktiverad.',
-'texte_mots_cles' => '<NEW>Keywords allow you to create topical links between your articles
-  irrespective of their section location. That way you can
-  enrich the navigation of your site or even use these properties
-  to customise the articles in your templates.',
+'texte_mots_cles' => '<NEW>Les mots-cl&eacute;s permettent de cr&eacute;er des liens th&eacute;matiques entre vos articles
+		ind&eacute;pendamment de leur placement dans des rubriques. Vous pouvez ainsi
+		enrichir la navigation de votre site, voire utiliser ces propri&eacute;t&eacute;s
+		pour personnaliser la pr&eacute;sentation des articles dans vos squelettes.',
 'texte_mots_cles_dans_forum' => 'Vill du till&aring;ta bes&ouml;kare att v&auml;lja nyckelord i de publika forumen? (Varning: Detta kan vara sv&aring;rt att anv&auml;nda p&aring; r&auml;tt s&auml;tt.)',
 'texte_multilinguisme' => 'Om du vill hantera artiklar p&aring; flera spr&aring;k, med en avancerad navigering, kan du l&auml;gga till en option f&ouml;r spr&aring;kval i artiklar och avdelningar, i enlighet med sajtens struktur.',
 'texte_multilinguisme_trad' => 'Dessutom kan du aktivera ett system f&ouml;r l&auml;nkhantering av de olika &ouml;vers&auml;ttningarna av en artikel.',
@@ -1043,52 +1046,51 @@ installera om SPIP f&ouml;r att skapa en ny databas och den f&ouml;rsta administ
 'texte_nouveau_message' => 'Nytt meddelande',
 'texte_nouveau_mot' => 'Nytt nyckelord',
 'texte_nouvelle_version_spip_1' => 'Du har installerat en ny version av SPIP.',
-'texte_nouvelle_version_spip_2' => '<NEW>This new version requires a more thorough update than usual. If you are the webmaster of this site, please delete the file @connect@ and restart the installation in order to update your database connection parameters. <p />(NB.: if you have forgotten your connection parameters, take a look at the file @connect@ before deleting it!)',
-'texte_operation_echec' => '<NEW>Go back to the previous page, select another database or create a new one. Verify the information provided by your host.',
+'texte_nouvelle_version_spip_2' => '<NEW>Cette nouvelle version n&eacute;cessite une mise &agrave; jour plus compl&egrave;te qu\'&agrave; l\'accoutum&eacute;e. Si vous &ecirc;tes webmestre du site, veuillez effacer le fichier @connect@ et reprendre l\'installation afin de mettre &agrave; jour vos param&egrave;tres de connexion &agrave; la base de donn&eacute;es.<p /> (NB.&nbsp;: si vous avez oubli&eacute; vos param&egrave;tres de connexion, jetez un &#339;il au fichier @connect@ avant de le supprimer...)',
+'texte_operation_echec' => '<NEW>Retournez &agrave; la page pr&eacute;c&eacute;dente, s&eacute;lectionnez une autre base ou cr&eacute;ez-en une nouvelle. V&eacute;rifiez les informations fournies par votre h&eacute;bergeur.',
 'texte_plus_trois_car' => 'mer &auml;n tre tecken',
 'texte_plusieurs_articles' => 'Flera redakt&ouml;rer hittades f&ouml;r  "@cherche_auteur@":',
-'texte_port_annuaire' => '<NEW>(Default value is generally suitable.)',
-'texte_presente_plugin' => '<NEW>This page lists the available plugins on the site. Activate the plugins you require by ticking the corresponding box.',
-'texte_proposer_publication' => '<NEW>When your article is finished,<br /> you can submit it for publication.',
-'texte_proxy' => '<NEW>In some cases (intranet, protected networks), it is necessary to use an <i>HTTP proxy</i> to reach exterior sites (SPIP documentation, syndicated sites, etc.). If this is the case, enter its address below, in the form @proxy_en_cours@. In most cases you can leave this box empty.',
-'texte_publication_articles_post_dates' => '<NEW>Which behaviour should SPIP adopt concerning articles which
-		publication have been set to
-		a future date?',
-'texte_rappel_selection_champs' => '<NEW>[Remember to select this field correctly.]',
+'texte_port_annuaire' => '<NEW>(La valeur indiqu&eacute;e par d&eacute;faut convient g&eacute;n&eacute;ralement.)',
+'texte_presente_plugin' => '<NEW>Cette page liste les plugins disponibles sur le site. Vous pouvez activer les plugins n&eacute;cessaires en cochant la case correspondante.',
+'texte_proposer_publication' => '<NEW>Lorsque votre article est termin&eacute;,<br /> vous pouvez proposer sa publication.',
+'texte_proxy' => '<NEW>Dans certains cas (intranet, r&eacute;seaux prot&eacute;g&eacute;s), les sites distants (documentation de SPIP, sites syndiqu&eacute;s, etc.) ne sont accessibles qu\'&agrave; travers un <i>proxy HTTP</i>. Le cas &eacute;ch&eacute;ant, indiquez ci-dessous son adresse, sous la forme @proxy_en_cours@. En g&eacute;n&eacute;ral, vous laisserez cette case vide.',
+'texte_publication_articles_post_dates' => '<NEW>Quel comportement SPIP doit-il adopter face aux articles dont la
+		date de publication a &eacute;t&eacute; fix&eacute;e &agrave; une
+		&eacute;ch&eacute;ance future&nbsp;?',
+'texte_rappel_selection_champs' => '<NEW>[N\'oubliez pas de s&eacute;lectionner correctement ce champ.]',
 'texte_recalcul_page' => 'Om du vill uppdatera
 enbart en sida, &auml;r det b&auml;st att g&ouml;ra det fr&aring;n den publika delen genom att klicka p&aring; &laquo; Ladda om sidan &raquo;.',
-'texte_recapitiule_liste_documents' => '<NEW>This page sums up the list of documents that you have placed in the sections. To modify each document\'s information, follow the link to its section\'s page.',
+'texte_recapitiule_liste_documents' => '<NEW>Cette page r&eacute;capitule la liste des documents que vous avez plac&eacute;s dans les rubriques. Pour modifier les informations de chaque document, suivez le lien vers la page de sa rubrique.',
 'texte_recuperer_base' => 'Reparera databasen',
-'texte_reference_mais_redirige' => '<NEW>referenced article in your SPIP site, but redirected to another URL.',
-'texte_referencement_automatique' => '<NEW><b>Automated site referencing</b><br />You can reference a Web site quickly by indicating below the desired URL, or the address of its syndication file. SPIP will automatically retrieve the site\'s information (title, description...).',
-'texte_referencement_automatique_verifier' => '<NEW>Please, verify the information provided by <tt>@url@</tt> before saving.',
-'texte_requetes_echouent' => '<NEW><b>When some SQL queries fail
-  systematically, without apparent reason, it is possible
-  that the database itself
-  is the culprit.</b><p />
-  SQL has a feature for repairing tables
-  which have been accidentally corrupted.
-  Here, you can try to execute this repair; in
-  the event of failure, you should keep a copy of the display, which might contain
-  clues to where the problem lies.<p />
-  If the problem persists, contact your 
-  service provider.<p />',
+'texte_reference_mais_redirige' => '<NEW>article r&eacute;f&eacute;renc&eacute; dans votre site SPIP, mais redirig&eacute; vers une autre URL.',
+'texte_referencement_automatique' => '<NEW><b>R&eacute;f&eacute;rencement automatis&eacute; d\'un site</b><br />Vous pouvez r&eacute;f&eacute;rencer rapidement un site Web en indiquant ci-dessous l\'adresse URL d&eacute;sir&eacute;e, ou l\'adresse de son fichier de syndication. SPIP va r&eacute;cup&eacute;rer automatiquement les informations concernant ce site (titre, description...).',
+'texte_referencement_automatique_verifier' => '<NEW>Veuillez v&eacute;rifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.',
+'texte_requetes_echouent' => '<NEW><b>Lorsque certaines requ&ecirc;tes SQL &eacute;chouent
+  syst&eacute;matiquement et sans raison apparente, il est possible
+  que ce soit &agrave; cause de la base de donn&eacute;es
+  elle-m&ecirc;me.</b><p />
+  Votre serveur SQL dispose d\'une facult&eacute; de r&eacute;paration de ses
+  tables lorsqu\'elles ont &eacute;t&eacute; endommag&eacute;es par
+  accident. Vous pouvez ici tenter cette r&eacute;paration&nbsp;; en
+  cas d\'&eacute;chec, conservez une copie de l\'affichage, qui contient
+  peut-&ecirc;tre des indices de ce qui ne va pas...<p />
+  Si le probl&egrave;me persiste, prenez contact avec votre
+  h&eacute;bergeur.<p />',
 'texte_restaurer_base' => '&Aring;terst&auml;ll inneh&aring;llet i databasens backup',
-'texte_restaurer_sauvegarde' => '<NEW>This option allows you to restore a previous
-backup of the database. To achieve this, the file containing the backup should have been
-stored in the directory @dossier@.
-Be cautious with this feature: <b>Any potential modifications or losses are
-irreversible.</b>',
+'texte_restaurer_sauvegarde' => '<NEW>Cette option vous permet de restaurer une sauvegarde pr&eacute;c&eacute;demment
+		effectu&eacute;e de la base. A cet effet, le fichier contenant la sauvegarde doit avoir &eacute;t&eacute;
+		plac&eacute; dans le r&eacute;pertoire @dossier@.
+		Soyez prudent avec cette fonctionnalit&eacute;&nbsp;: <b>les modifications, pertes &eacute;ventuelles, sont
+		irr&eacute;versibles.</b>',
 'texte_sauvegarde' => 'S&auml;kerhetskopiera inneh&aring;llet i databasen',
 'texte_sauvegarde_base' => 'S&auml;kerhetskopiera databasen',
 'texte_sauvegarde_compressee' => 'S&auml;kerhetskopian kommer att sparas okomprimerad i filen @fichier@.',
-'texte_selection_langue_principale' => '<NEW>You can select below the "main language" of the site. This does not mean you can only write articles in the selected language, but determines
-
-<ul><li> the default format of the dates on the public site</li>
-<li> the nature of the typographical engine which will be used by SPIP for the text rendering;</li>
-<li> the language used in the forms of the public site</li>
-<li> the default language displayed in the private area.</li></ul>',
-'texte_signification' => '<NEW>Dark bars represent cumulative entries (total of sub-sections), light bars represent the number of visits for each section.',
+'texte_selection_langue_principale' => '<NEW>Vous pouvez s&eacute;lectionner ci-dessous la &laquo;&nbsp;langue principale&nbsp;&raquo; du site. Ce choix ne vous oblige - heureusement&nbsp;! - pas &agrave; &eacute;crire vos articles dans la langue s&eacute;lectionn&eacute;e, mais permet de d&eacute;terminer&nbsp;:
+	<ul><li> le format par d&eacute;faut des dates sur le site public&nbsp;;</li>
+	<li> la nature du moteur typographique que SPIP doit utiliser pour le rendu des textes&nbsp;;</li>
+	<li> la langue utilis&eacute;e dans les formulaires du site public&nbsp;;</li>
+	<li> la langue pr&eacute;sent&eacute;e par d&eacute;faut dans l\'espace priv&eacute;.</li></ul>',
+'texte_signification' => '<NEW>Les barres fonc&eacute;es repr&eacute;sentent les entr&eacute;es cumul&eacute;es (total des sous-rubriques), les barres claires le nombre de visites pour chaque rubrique.',
 'texte_sous_titre' => 'Undertitel',
 'texte_statistiques_visites' => '(m&ouml;rka staplar:  S&ouml;ndag / m&ouml;rk linje: genomsnittlig niv&aring;)',
 'texte_statut_attente_validation' => 'v&auml;ntar p&aring; godk&auml;nnande',
@@ -1107,18 +1109,22 @@ gjort viktiga f&ouml;r&auml;ndringar i sajtens utseende eller struktur.',
 'texte_tables_indexation_vides' => 'Indextabellerna &auml;r tomma.',
 'texte_tentative_recuperation' => 'Reparationsf&ouml;rs&ouml;k',
 'texte_tenter_reparation' => 'F&ouml;rs&ouml;k att reparera databasen',
-'texte_test_proxy' => '<NEW>To try this proxy, enter here the address of a Web site
-				that you wish to test.',
+'texte_test_proxy' => '<NEW>Pour faire un essai de ce proxy, indiquez ici l\'adresse d\'un site Web
+				que vous souhaitez tester.',
 'texte_titre_02' => '&Auml;renderad:',
 'texte_titre_obligatoire' => '<b>Titel</b> [Kr&auml;vs]',
 'texte_travail_article' => '@nom_auteur_modif@ arbetade med den h&auml;r artikeln f&ouml;r @date_diff@ minuter sedan',
-'texte_travail_collaboratif' => '<NEW>If several editors may often   work on the same article, the system can mark the recently &laquo;opened&raquo; articles in order to avoid simultaneous changes being attempted.
-  This option is disabled by default to avoid displaying unnecessary warnings.
-  messages.',
+'texte_travail_collaboratif' => '<NEW>S\'il est fr&eacute;quent que plusieurs r&eacute;dacteurs
+		travaillent sur le m&ecirc;me article, le syst&egrave;me
+		peut afficher les articles r&eacute;cemment &laquo;&nbsp;ouverts&nbsp;&raquo;
+		afin d\'&eacute;viter les modifications simultan&eacute;es.
+		Cette option est d&eacute;sactiv&eacute;e par d&eacute;faut
+		afin d\'&eacute;viter d\'afficher des messages d\'avertissement
+		intempestifs.',
 'texte_trop_resultats_auteurs' => 'F&ouml;r m&aring;nga resultat f&ouml;r "@cherche_auteur@"; Var v&auml;nlig att smalna av fr&aring;gan.',
-'texte_type_urls' => '<NEW>You can choose, below, the calculation mode of the pages URLs.',
-'texte_type_urls_attention' => '<NEW>Warning, this setting will only work if the file @htaccess@ is correctly installed at the site\'s root.',
-'texte_unpack' => '<NEW>downloading the latest version',
+'texte_type_urls' => '<NEW>Vous pouvez choisir ci-dessous le mode de calcul de l\'adresse des pages.',
+'texte_type_urls_attention' => '<NEW>Attention ce r&eacute;glage ne fonctionnera que si le fichier @htaccess@ est correctement install&eacute; &agrave; la racine du site.',
+'texte_unpack' => '<NEW>t&eacute;l&eacute;chargement de la derni&egrave;re version',
 'texte_utilisation_moteur_syndiques' => '<MODIF>When you use SPIP\'s integrated search engine, 
 you can perform searches on sites and
  articles syndicated in two different ways. <br />- The simplest
@@ -1129,7 +1135,10 @@ you can perform searches on sites and
  of the referenced sites. If you
  reference a site, SPIP will perform
  the search in the site\'s text itself.',
-'texte_utilisation_moteur_syndiques_2' => '<NEW>This method forces SPIP to visit the referenced sites regularly, which could cause a drop in the performance of your own site.',
+'texte_utilisation_moteur_syndiques_2' => '<NEW>Cette m&eacute;thode oblige SPIP &agrave; visiter
+				r&eacute;guli&egrave;rement les sites r&eacute;f&eacute;renc&eacute;s,
+				ce qui peut provoquer un l&eacute;ger ralentissement de votre propre
+				site.',
 'texte_vide' => 'tom',
 'texte_vider_cache' => 't&ouml;m cachen',
 'titre_admin_effacer' => 'Tekniskt underh&aring;ll',
@@ -1145,21 +1154,21 @@ you can perform searches on sites and
 'titre_cadre_interieur_rubrique' => 'I Avdelningen',
 'titre_cadre_numero_auteur' => 'Redakt&ouml;r nummer',
 'titre_cadre_signature_obligatoire' => '<b>Signatur</b> [kr&auml;vs]<br />',
-'titre_compacter_script_css' => '<NEW>Compression of scripts and CSS',
-'titre_compresser_flux_http' => '<NEW>Compression of HTTP data',
+'titre_compacter_script_css' => '<NEW>Compactage des scripts et CSS',
+'titre_compresser_flux_http' => '<NEW>Compression du flux HTTP',
 'titre_config_contenu_notifications' => '<NEW>Notifications',
-'titre_config_contenu_prive' => '<NEW>In the editing area',
-'titre_config_contenu_public' => '<NEW>On the public site',
+'titre_config_contenu_prive' => '<NEW>Dans l&#8217;espace priv&#233;',
+'titre_config_contenu_public' => '<NEW>Sur le site public',
 'titre_config_fonctions' => 'Sajtens konfiguration',
-'titre_config_forums_prive' => '<NEW>Forums in the editing area',
+'titre_config_forums_prive' => '<NEW>Forums de l&#8217;espace priv&#233;',
 'titre_config_groupe_mots_cles' => 'Konfigurera nyckelordsgrupper',
 'titre_configuration' => 'Sajtens konfiguration',
-'titre_conflit_edition' => '<NEW>Conflict while editing',
+'titre_conflit_edition' => '<NEW>Conflit lors de l\'&#233;dition',
 'titre_connexion_ldap' => 'Optioner: <b>Din LDAP koppling</b>',
 'titre_dernier_article_syndique' => 'Senaste syndikerade artiklar',
 'titre_documents_joints' => 'Bifogade dokument',
 'titre_evolution_visite' => 'Bes&ouml;ksniv&aring;',
-'titre_forum_suivi' => '<NEW>Forums follow-up',
+'titre_forum_suivi' => '<NEW>Suivi des forums',
 'titre_gauche_mots_edit' => 'NYCKELORDSNUMMER:',
 'titre_groupe_mots' => 'NYCKELORDSGRUPP:',
 'titre_langue_article' => 'ARTIKELNS SPR&Aring;K',
@@ -1167,7 +1176,7 @@ you can perform searches on sites and
 'titre_langue_rubrique' => 'AVDELNINGENS SPR&Aring;K',
 'titre_langue_trad_article' => 'ARTIKESPR&Aring;K OCH &Ouml;VERS&Auml;TTNINGAR',
 'titre_les_articles' => 'ARTIKLAR',
-'titre_messagerie_agenda' => '<NEW>Messaging system and calendar',
+'titre_messagerie_agenda' => '<NEW>Messagerie et agenda',
 'titre_mots_cles_dans_forum' => 'Nyckelord i de publika forumen',
 'titre_mots_tous' => 'Nyckelord',
 'titre_naviguer_dans_le_site' => 'Navigera i sajten...',
@@ -1186,38 +1195,38 @@ you can perform searches on sites and
 'titre_page_config_contenu' => 'Sajtens inst&auml;llningar',
 'titre_page_config_fonctions' => 'Sajtens inst&auml;llningare',
 'titre_page_configuration' => 'Sajtens inst&auml;llningar',
-'titre_page_controle_petition' => '<NEW>Petitions follow-up',
+'titre_page_controle_petition' => '<NEW>Suivi des p&eacute;titions',
 'titre_page_delete_all' => 'total och o&aring;terkallelig radering',
 'titre_page_documents_liste' => 'Bifogade dokument',
 'titre_page_forum' => 'Administrat&ouml;rernas forum',
 'titre_page_forum_envoi' => 'S&auml;nd ett meddelande',
-'titre_page_forum_suivi' => '<NEW>Forums follow-up',
+'titre_page_forum_suivi' => '<NEW>Suivi des forums',
 'titre_page_index' => 'Din privata del',
-'titre_page_message_edit' => '<NEW>Write a message',
-'titre_page_messagerie' => '<NEW>Your messaging',
-'titre_page_mots_tous' => '<NEW>Keywords',
+'titre_page_message_edit' => '<NEW>R&eacute;diger un message',
+'titre_page_messagerie' => '<NEW>Votre messagerie',
+'titre_page_mots_tous' => '<NEW>Mots-cl&eacute;s',
 'titre_page_recherche' => 'S&ouml;kresultat @recherche@',
 'titre_page_sites_tous' => 'Refererade webbplatser',
 'titre_page_statistiques' => 'Statistik uppdelat p&aring; avdelning',
-'titre_page_statistiques_messages_forum' => '<NEW>Forum messages',
+'titre_page_statistiques_messages_forum' => '<NEW>Messages de forum',
 'titre_page_statistiques_referers' => 'Statistik (inkommande l&auml;nkar)',
-'titre_page_statistiques_signatures_jour' => '<NEW>Signatures count by day',
-'titre_page_statistiques_signatures_mois' => '<NEW>Signatures count by month',
+'titre_page_statistiques_signatures_jour' => '<NEW>Nombre de signatures par jour',
+'titre_page_statistiques_signatures_mois' => '<NEW>Nombre de signatures par mois',
 'titre_page_statistiques_visites' => 'Bes&ouml;ksstatistik',
 'titre_page_upgrade' => 'Uppgradera SPIP',
 'titre_publication_articles_post_dates' => 'Tidsstyrd publicering av artiklar',
-'titre_referencement_sites' => '<NEW>Sites referencing and syndication',
+'titre_referencement_sites' => '<NEW>R&eacute;f&eacute;rencement de sites et syndication',
 'titre_referencer_site' => 'Referera webbplatsen:',
 'titre_rendez_vous' => 'M&Ouml;TEN:',
 'titre_reparation' => 'Reparera',
 'titre_site_numero' => 'WEBBPLATS NUMMER',
-'titre_sites_proposes' => '<NEW>Submitted sites',
+'titre_sites_proposes' => '<NEW>Les sites propos&eacute;s',
 'titre_sites_references_rubrique' => 'Refererade webbplatser i den h&auml;r avdelningen',
-'titre_sites_syndiques' => '<NEW>Syndicated sites',
+'titre_sites_syndiques' => '<NEW>Les sites syndiqu&eacute;s',
 'titre_sites_tous' => 'Refererade webbplatser',
 'titre_suivi_petition' => 'Uppf&ouml;ljning av namninasamlingar',
-'titre_syndication' => '<NEW>Sites syndication',
-'titre_type_urls' => '<NEW>Type of URL addresses',
+'titre_syndication' => '<NEW>Syndication de sites',
+'titre_type_urls' => '<NEW>Type d\'adresses URL',
 'tls_ldap' => '<NEW>Transport Layer Security :',
 'tout_dossier_upload' => 'Hela @upload@-katalogen',
 'trad_article_inexistant' => 'Det finns ingen artikel med det h&auml;r numret',
@@ -1231,10 +1240,10 @@ you can perform searches on sites and
 'upload_fichier_zip' => 'ZIP fil',
 'upload_fichier_zip_texte' => 'Filen du f&ouml;rs&ouml;ker installera &auml;r en ZIP-fil.',
 'upload_fichier_zip_texte2' => 'Den h&auml;r filen kan:',
-'upload_info_mode_document' => '<NEW>Place this image in the portfolio',
-'upload_info_mode_image' => '<NEW>Remove this image from the portfolio',
+'upload_info_mode_document' => '<NEW>D&#233;poser cette image dans le portfolio',
+'upload_info_mode_image' => '<NEW>Retirer cette image du portfolio',
 'upload_limit' => 'Den h&auml;r filen &auml;r f&ouml;r stor f&ouml;r servern; Den maimala storleken som kan <i>laddas upp</i> &auml;r @max@.',
-'upload_zip_conserver' => '<NEW>Keep the archive file after extracting its contents',
+'upload_zip_conserver' => '<NEW>Conserver l&#8217;archive apr&#232;s extraction',
 'upload_zip_decompacter' => 'uppackad och alla filerna kommer ahh bli installerade p&aring; sajten. De filer som kommer att installeras &auml;r:',
 'upload_zip_telquel' => 'installerad som den &auml;r, som en ZIP-fil;',
 'upload_zip_titrer' => 'L&auml;gg till titlar efter vad filerna kallas',
@@ -1250,7 +1259,7 @@ you can perform searches on sites and
 
 // V
 'version' => 'Version:',
-'version_deplace_rubrique' => '<NEW>Moved from <b>&laquo;&nbsp;@from@&nbsp;&raquo;</b> to <b>&laquo;&nbsp;@to@&nbsp;&raquo;</b>.',
+'version_deplace_rubrique' => '<NEW>D&#233;plac&#233; de <b>&#171;&nbsp;@from@&nbsp;&#187;</b> vers <b>&#171;&nbsp;@to@&nbsp;&#187;</b>.',
 'version_initiale' => 'Utg&aring;ngsversion'
 );
 
