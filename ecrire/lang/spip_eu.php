@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_archive_incorrect' => 'Artxibo-fitxategia ez da Spip motakoa.',
 'avis_archive_invalide' => 'artxibo-fitxategia ez da zuzena',
 'avis_attention' => 'Adi egon!',
-'avis_champ_incorrect_type_objet' => '(@name@) eremu-izena ez da zuzena(@type@)objektu motarentzat',
+'avis_champ_incorrect_type_objet' => '(@name@) eremu-izena ez da zuzena(@type@) objektu motarentzat',
 'avis_colonne_inexistante' => 'Ez dago @col@ zutaberik',
 'avis_echec_syndication_01' => 'Sindikazioak huts egin du: adierazitako "backend" delakoa ulertezina da edo ez du artikulurik proposatzen.',
 'avis_echec_syndication_02' => 'Sindikazioak huts egin du: leku honen "backend" delakora iristea ezinezkoa da.',
@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_lien_input' => 'Zure lotura-helbidea adierazi. http://www.lekuhori.org/karpeta/ motako Web helbide bat adierazi dezakezu, edo gune honen artikulu baten zenbakia adieraztea ere balio du.',
 'barre_note' => '[[Orrialde-oinaren oharra]] -an eraldatu',
 'barre_paragraphe' => 'Pargrafo bat sortu',
-'barre_quote' => 'Mezu bat aipatu',
+'barre_quote' => '<quote>Mezu bat aipatu</quote>',
 'bouton_ajouter_document' => 'Dokumentu bat erantsi',
 'bouton_ajouter_image' => 'Irudi bat erantsi',
 'bouton_ajouter_image_document' => 'Irudi bat edo dokumentu bat erantsi',
@@ -75,7 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_annonces' => 'Iragarkirik ez igorri',
 'bouton_radio_non_envoi_liste_nouveautes' => 'Berrikuntzen zerrenda ez igorri',
 'bouton_recharger_page' => 'Orrialde hau berriz kargatu',
-'bouton_telecharger' => 'Igo',
+'bouton_telecharger' => 'Telekargatu',
 'bouton_valider' => 'Onartu',
 
 // C
