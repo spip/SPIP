@@ -31,29 +31,30 @@ function exec_auteurs_dist()
 	if (!$statut)  $statut = AUTEURS_DEFAUT . AUTEURS_MIN_REDAC;
 	$debut = intval(_request('debut'));
 
-	$res = '+';
-	if ($recherche = _request('recherche')) {
+	$recherche = NULL;
+	if ($cherche = _request('recherche')) {
 		include_spip('inc/rechercher');
 		$tables = liste_des_champs();
 		$tables = array('auteur'=>$tables['auteur']);
-		$recherche = recherche_en_base($recherche, $tables,array('toutvoir'=>true));
+		$recherche = recherche_en_base($cherche, $tables,array('toutvoir'=>true));
 		if ($recherche['auteur'])
-			$recherche =  sql_in('aut.id_auteur', array_keys($recherche['auteur']));
-		else $recherche = '';
+			$recherche = sql_in('aut.id_auteur', array_keys($recherche['auteur']));
+		else {$recherche = NULL; $cherche = '';}
 	}
-	exec_auteurs_args($statut, $tri, $debut, $recherche, formulaire_recherche("auteurs",(($s=_request('statut'))?"<input type='hidden' name='statut' value='$s' />":"")));
+	$form = formulaire_recherche("auteurs",(($s=_request('statut'))?"<input type='hidden' name='statut' value='$s' />":""));
+	exec_auteurs_args($statut, $tri, $debut, $recherche,$form, $cherche);
 }
 
 
 // http://doc.spip.org/@exec_auteurs_args
-function exec_auteurs_args($statut, $tri, $debut, $recherche=NULL, $trouve='')
+function exec_auteurs_args($statut, $tri, $debut, $recherche=NULL, $trouve='', $cherche='')
 {
 	if ($recherche !=='') {
 		list($auteurs, $lettre, $nombre_auteurs, $debut) =
 		  lettres_d_auteurs(requete_auteurs($tri, $statut, $recherche), $debut, MAX_AUTEURS_PAR_PAGE, $tri);
 
 
-		$recherche = auteurs_tranches(afficher_n_auteurs($auteurs), $debut, $lettre, $tri, $statut, MAX_AUTEURS_PAR_PAGE, $nombre_auteurs);
+		$recherche = auteurs_tranches(afficher_n_auteurs($auteurs), $debut, $lettre, $tri, $statut, MAX_AUTEURS_PAR_PAGE, $nombre_auteurs,$cherche);
 	}
 
 	if (_AJAX) {
@@ -162,11 +163,13 @@ function lettres_d_auteurs($query, $debut, $max_par_page, $tri)
 }
 
 // http://doc.spip.org/@auteurs_tranches
-function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_page, $nombre_auteurs)
+function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_page, $nombre_auteurs, $cherche='')
 {
 	global $spip_lang_right;
 
-	$arg = $statut ? ("&statut=" .urlencode($statut)) : '';
+	$arg = ($statut ? ("&statut=" .urlencode($statut)) : '')
+	   .  ($cherche ? ("&recherche=" . urlencode($cherche)) : '');
+
 	$res ="\n<tr class='titrem'>"
 	. "\n<th style='width: 20px'>";
 
