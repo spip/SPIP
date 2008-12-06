@@ -216,29 +216,34 @@ function _q ($a) {
 // Nommage bizarre des tables d'objets
 // http://doc.spip.org/@table_objet
 function table_objet($type) {
-	static $surnoms = array(
-		'article' => 'articles',
-		'auteur' => 'auteurs',
-		'breve' => 'breves',
-		'document' => 'documents',
-		'doc' => 'documents', # pour les modeles
-		'img' => 'documents',
-		'emb' => 'documents',
-		'forum' => 'forums', # hum hum redevient spip_forum par table_objet_sql mais casse par un bete "spip_".table_objet()
-		'groupe_mots' => 'groupes_mots', # hum
-		'groupe_mot' => 'groupes_mots', # hum
-		'groupe' => 'groupes_mots', # hum (EXPOSE)
-		'message' => 'messages',
-		'mot' => 'mots',
-		'petition' => 'petitions',
-		'rubrique' => 'rubriques',
-		'signature' => 'signatures',
-		'syndic' => 'syndic',
-		'site' => 'syndic', # hum hum
-		'syndic_article' => 'syndic_articles',
-		'type_document' => 'types_documents', # hum
-		'extension' => 'types_documents' # hum
-	);
+	static $surnoms = null;
+	if (!$surnoms){
+		// passer dans un pipeline qui permet aux plugins de declarer leurs exceptions
+		$surnoms = pipeline('declarer_tables_objets_surnoms',
+			array(
+				'article' => 'articles',
+				'auteur' => 'auteurs',
+				'breve' => 'breves',
+				'document' => 'documents',
+				'doc' => 'documents', # pour les modeles
+				'img' => 'documents',
+				'emb' => 'documents',
+				'forum' => 'forums', # hum hum redevient spip_forum par table_objet_sql mais casse par un bete "spip_".table_objet()
+				'groupe_mots' => 'groupes_mots', # hum
+				'groupe_mot' => 'groupes_mots', # hum
+				'groupe' => 'groupes_mots', # hum (EXPOSE)
+				'message' => 'messages',
+				'mot' => 'mots',
+				'petition' => 'petitions',
+				'rubrique' => 'rubriques',
+				'signature' => 'signatures',
+				'syndic' => 'syndic',
+				'site' => 'syndic', # hum hum
+				'syndic_article' => 'syndic_articles',
+				'type_document' => 'types_documents', # hum
+				'extension' => 'types_documents' # hum
+			));
+	}
 	return isset($surnoms[$type])
 		? $surnoms[$type]
 		: preg_replace(',ss$,', 's', $type."s");
