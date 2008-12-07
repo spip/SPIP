@@ -42,7 +42,6 @@ dist/rss_forum_thread.html -text
 dist/spip.ico -text
 dist/spip.png -text
 dist/spip_formulaires.css -text
-dist/spip_pass.html -text
 dist/win_width.htc -text
 ecrire/action/acceder_document.php -text
 ecrire/action/activer_plugins.php -text
@@ -797,6 +796,7 @@ prive/rss/messagerie.html -text
 prive/rss/revisions.html -text
 prive/rss/signatures.html -text
 prive/rss_fonctions.php -text
+prive/spip_pass.html -text
 prive/spip_style.css -text
 prive/stats/echelle.html -text
 prive/style_prive.html -text
