@@ -279,14 +279,15 @@ function controler_contenu($type, $id, $options=array(), $c=false, $serveur='') 
 	if (!$champs) return false;
 
 	// Verifier si les mises a jour sont pertinentes, datees, en conflit etc
-	$conflits = controler_md5($champs, $_POST, $type, $id, $serveur, $options['prefix']?$options['prefix']:'ctrl_');
+	$conflits = controler_md5($champs, $_POST, $type, $id, $serveur, $options['prefix']?$options['prefix']:'ctr_');
+
 	return $conflits;
 }
 
 // Controle la liste des md5 envoyes, supprime les inchanges,
 // signale les modifies depuis telle date
 // http://doc.spip.org/@controler_md5
-function controler_md5(&$champs, $ctr, $type, $id, $serveur, $prefix = 'ctrl_') {
+function controler_md5(&$champs, $ctr, $type, $id, $serveur, $prefix = 'ctr_') {
 	$table_objet = table_objet($type);
 	$spip_table_objet = table_objet_sql($type);
 	$id_table_objet = id_table_objet($type);
