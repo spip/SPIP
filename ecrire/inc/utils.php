@@ -1276,27 +1276,31 @@ function spip_initialisation_suite() {
 	# les configurations limitees en memoire ont un seuil plutot vers 1MPixel
 	define('_IMG_GD_MAX_PIXELS', (isset($GLOBALS['meta']['max_taille_vignettes'])&&$GLOBALS['meta']['max_taille_vignettes']<5500000)?$GLOBALS['meta']['max_taille_vignettes']:0);
 	define('_IMG_GD_QUALITE', 85);
-	
-	if (test_espace_prive()){
-		@define('_MEMORY_LIMIT_MIN',10); // en Mo
+
+	@define('_MEMORY_LIMIT_MIN',10); // en Mo
+	// si on est dans l'espace prive et si le besoin est superieur a 8Mo (qui est vraiment le standard)
+	// on verifie que la memoire est suffisante pour le compactage css+js pour eviter la page blanche
+	// il y aura d'autres problemes et l'utilisateur n'ira pas tres loin, mais ce sera plus comprehensible qu'une page blanche
+	if (test_espace_prive() AND _MEMORY_LIMIT_MIN>8){
 		if ($memory = trim(ini_get('memory_limit'))){
 			$unit = strtolower(substr($memory,strlen($memory/1),1));
 			switch($unit) {
-	        // Le modifieur 'G' est disponible depuis PHP 5.1.0
-	        case 'g': $memory *= 1024;
-	        case 'm': $memory *= 1024;
-	        case 'k': $memory *= 1024;
-	    }
-	    if ($memory<_MEMORY_LIMIT_MIN*1024*1024){
-	    	ini_set('memory_limit',$m=_MEMORY_LIMIT_MIN.'M');
-	    	if (trim(ini_get('memory_limit'))!=$m){
-					defined('_INTERDIRE_COMPACTE_HEAD_ECRIRE',true); // evite une page blanche car on ne saura pas calculer la css dans ce hit
-	    	}
-	    }
+				// Le modifieur 'G' est disponible depuis PHP 5.1.0
+				case 'g': $memory *= 1024;
+				case 'm': $memory *= 1024;
+				case 'k': $memory *= 1024;
+			}
+			if ($memory<_MEMORY_LIMIT_MIN*1024*1024){
+				ini_set('memory_limit',$m=_MEMORY_LIMIT_MIN.'M');
+				if (trim(ini_get('memory_limit'))!=$m){
+					define('_INTERDIRE_COMPACTE_HEAD_ECRIRE',true); // evite une page blanche car on ne saura pas calculer la css dans ce hit
+				}
+			}
 		}
 		else
-			defined('_INTERDIRE_COMPACTE_HEAD_ECRIRE',true); // evite une page blanche car on ne saura pas calculer la css dans ce hit
+			define('_INTERDIRE_COMPACTE_HEAD_ECRIRE',true); // evite une page blanche car on ne saura pas calculer la css dans ce hit
 	}
+	
 	init_var_mode();
 }
 
