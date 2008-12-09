@@ -9,7 +9,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-include_spip('inc/filtres_images');
+include_spip('inc/filtres_images_mini');
 
 // Transforme l'image en PNG transparent
 // alpha = 0: aucune transparence

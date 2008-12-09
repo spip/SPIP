@@ -44,7 +44,7 @@ function enfant_rub($collection){
 			if ($voir_logo) {
 				if ($logo = $chercher_logo($id_rubrique, 'id_rubrique', 'on')) {
 					list($fid, $dir, $nom, $format) = $logo;
-					include_spip('inc/filtres_images');
+					include_spip('inc/filtres_images_mini');
 					$logo = image_reduire("<img src='$fid' alt='' />", 48, 36);
 					if ($logo)
 						$logo =  "\n<div style='$voir_logo'>$logo</div>";

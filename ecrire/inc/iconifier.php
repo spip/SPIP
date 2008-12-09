@@ -148,7 +148,7 @@ function indiquer_logo($titre, $id_objet, $mode, $id, $script, $iframe_script) {
 function decrire_logo($id_objet, $mode, $id, $width, $height, $img, $titre="", $script="", $flag_modif=true) {
 
 	list($fid, $dir, $nom, $format) = $img;
-	include_spip('inc/filtres_images');
+	include_spip('inc/filtres_images_mini');
 	$res = image_reduire("<img src='$fid' alt='' class='miniature_logo' />", $width, $height);
 
 	if ($res)

@@ -45,7 +45,7 @@ function inc_formater_article_dist($row, $own='')
 	if ($chercher_logo) {
 		if ($logo = $chercher_logo($id_article, 'id_article', 'on')) {
 			list($fid, $dir, $nom, $format) = $logo;
-			include_spip('inc/filtres_images');
+			include_spip('inc/filtres_images_mini');
 			$logo = image_reduire("<img src='$fid' alt='' />", 26, 20);
 		}
 	} else $logo ='';

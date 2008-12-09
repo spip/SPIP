@@ -886,7 +886,7 @@ function affiche_bloc_plugin($plug_file, $info) {
 	$s .= "<div class='detailplugin verdana2'>";
 
 	if (isset($info['icon'])) {
-		include_spip("inc/filtres_images");
+		include_spip("inc/filtres_images_mini");
 		$s.= "<div  style='float:$spip_lang_right;'>".image_reduire(_DIR_PLUGINS.$plug_file.'/'.trim($info['icon']), 64)."</div>";
 
 	}

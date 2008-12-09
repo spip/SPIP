@@ -169,26 +169,26 @@ $GLOBALS['spip_matrice']['image_valeurs_trans'] = true;
 $GLOBALS['spip_matrice']['image_graver'] = true;
 $GLOBALS['spip_matrice']['image_reduire'] = true;
 $GLOBALS['spip_matrice']['image_reduire_par'] = true;
-$GLOBALS['spip_matrice']['image_recadre'] = 'inc/filtres_images_etendus.php';
-$GLOBALS['spip_matrice']['image_alpha'] = 'inc/filtres_images_etendus.php';
-$GLOBALS['spip_matrice']['image_flip_vertical'] = 'inc/filtres_images_etendus.php';
-$GLOBALS['spip_matrice']['image_flip_horizontal'] = 'inc/filtres_images_etendus.php';
-$GLOBALS['spip_matrice']['image_masque'] = 'inc/filtres_images_etendus.php';
-$GLOBALS['spip_matrice']['image_nb'] = 'inc/filtres_images_etendus.php';
-$GLOBALS['spip_matrice']['image_flou'] = 'inc/filtres_images_etendus.php';
-$GLOBALS['spip_matrice']['image_RotateBicubic'] = 'inc/filtres_images_etendus.php';
-$GLOBALS['spip_matrice']['image_rotation'] = 'inc/filtres_images_etendus.php';
-$GLOBALS['spip_matrice']['image_distance_pixel'] = 'inc/filtres_images_etendus.php';
-$GLOBALS['spip_matrice']['image_decal_couleur'] = 'inc/filtres_images_etendus.php';
-$GLOBALS['spip_matrice']['image_gamma'] = 'inc/filtres_images_etendus.php';
-$GLOBALS['spip_matrice']['image_decal_couleur_127'] = 'inc/filtres_images_etendus.php';
-$GLOBALS['spip_matrice']['image_sepia'] = 'inc/filtres_images_etendus.php';
-$GLOBALS['spip_matrice']['image_aplatir'] = 'inc/filtres_images_etendus.php';
-$GLOBALS['spip_matrice']['image_format'] = 'inc/filtres_images_etendus.php';
-$GLOBALS['spip_matrice']['image_couleur_extraire'] = 'inc/filtres_images_etendus.php';
+$GLOBALS['spip_matrice']['image_recadre'] = 'inc/filtres_images.php';
+$GLOBALS['spip_matrice']['image_alpha'] = 'inc/filtres_images.php';
+$GLOBALS['spip_matrice']['image_flip_vertical'] = 'inc/filtres_images.php';
+$GLOBALS['spip_matrice']['image_flip_horizontal'] = 'inc/filtres_images.php';
+$GLOBALS['spip_matrice']['image_masque'] = 'inc/filtres_images.php';
+$GLOBALS['spip_matrice']['image_nb'] = 'inc/filtres_images.php';
+$GLOBALS['spip_matrice']['image_flou'] = 'inc/filtres_images.php';
+$GLOBALS['spip_matrice']['image_RotateBicubic'] = 'inc/filtres_images.php';
+$GLOBALS['spip_matrice']['image_rotation'] = 'inc/filtres_images.php';
+$GLOBALS['spip_matrice']['image_distance_pixel'] = 'inc/filtres_images.php';
+$GLOBALS['spip_matrice']['image_decal_couleur'] = 'inc/filtres_images.php';
+$GLOBALS['spip_matrice']['image_gamma'] = 'inc/filtres_images.php';
+$GLOBALS['spip_matrice']['image_decal_couleur_127'] = 'inc/filtres_images.php';
+$GLOBALS['spip_matrice']['image_sepia'] = 'inc/filtres_images.php';
+$GLOBALS['spip_matrice']['image_aplatir'] = 'inc/filtres_images.php';
+$GLOBALS['spip_matrice']['image_format'] = 'inc/filtres_images.php';
+$GLOBALS['spip_matrice']['image_couleur_extraire'] = 'inc/filtres_images.php';
 $GLOBALS['spip_matrice']['image_select'] = true;
-$GLOBALS['spip_matrice']['image_renforcement'] = 'inc/filtres_images_etendus.php';
-$GLOBALS['spip_matrice']['image_imagick'] = 'inc/filtres_images_etendus.php';
+$GLOBALS['spip_matrice']['image_renforcement'] = 'inc/filtres_images.php';
+$GLOBALS['spip_matrice']['image_imagick'] = 'inc/filtres_images.php';
 $GLOBALS['spip_matrice']['image_ramasse_miettes'] = true;
 $GLOBALS['spip_matrice']['image_passe_partout'] = true;
 
@@ -233,7 +233,7 @@ function image_filtrer($args){
 	$filtre = array_shift($args); # enlever $filtre
 	$texte = array_shift($args);
 	if (!strlen($texte)) return;
-	find_in_path('filtres_images.php','inc/', true);
+	find_in_path('filtres_images_mini.php','inc/', true);
 	statut_effacer_images_temporaires(true); // activer la suppression des images temporaires car le compilo finit la chaine par un image_graver
 	// Cas du nom de fichier local
 	if ( strpos(substr($texte,strlen(_DIR_RACINE)),'..')===FALSE
