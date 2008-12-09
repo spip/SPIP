@@ -44,7 +44,7 @@ function inc_informer_auteur_dist($id)
 		$chercher_logo = charger_fonction('chercher_logo', 'inc');
 		if ($res = $chercher_logo($id, 'id_auteur', 'on'))  {
 			list($fid, $dir, $n, $format) = $res;
-			include_spip('inc/filtres_images');
+			include_spip('inc/filtres_images_mini');
 			$res = image_reduire("<img src='$fid' alt='' />", 100, 48);
 			if ($res)
 				$res =  "<div style='float: $spip_lang_right; margin-$spip_lang_right: -5px; margin-top: -5px;'>$res</div>";
