@@ -249,7 +249,6 @@ ecrire/inc/gadgets.php -text
 ecrire/inc/grouper_mots.php -text
 ecrire/inc/headers.php -text
 ecrire/inc/iconifier.php -text
-ecrire/inc/identifier_login.php -text
 ecrire/inc/import_0_0.php -text
 ecrire/inc/import_1_2.php -text
 ecrire/inc/import_1_3.php -text

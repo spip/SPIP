@@ -14,8 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Authentifie et retourne la ligne SQL decrivant l'utilisateur si ok
 
-// http://doc.spip.org/@inc_auth_spip_dist
-function inc_auth_spip_dist ($login, $pass, $md5pass="", $md5next="") {
+function auth_spip_dist ($login, $pass, $md5pass="", $md5next="") {
 
   // si envoi non crypte, crypter maintenant
 	if (!$md5pass AND $pass) {

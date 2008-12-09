@@ -67,12 +67,16 @@ function ajouter_session($auteur) {
 		exit;
 	} else {
 		include_spip('inc/cookie');
+		$duree = _RENOUVELLE_ALEA *
+		  (!isset($auth['cookie'])
+		  	? 20 : (is_numeric($auth['cookie'])
+				? $auth['cookie'] : 2));
 		spip_setcookie(
 			'spip_session',
 			$_COOKIE['spip_session'],
-			time() + 20 * _RENOUVELLE_ALEA
+			time() + $duree
 			);
-		spip_log("ajoute session $fichier_session");
+		spip_log("ajoute session $fichier_session cookie $duree");
 		return $_COOKIE['spip_session'];
 	}
 }
