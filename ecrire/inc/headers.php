@@ -70,10 +70,13 @@ function redirige_par_entete($url, $equiv='', $status = 302) {
 // http://doc.spip.org/@redirige_formulaire
 function redirige_formulaire($url, $equiv = '') {
 	if (!_AJAX
-	&& !headers_sent()
-	&& !_request('var_ajax')) {
+	AND !headers_sent()
+	AND !_request('var_ajax')) {
 		redirige_par_entete(str_replace('&amp;','&',$url), $equiv);
 	} else {
+		// ne pas laisser passer n'importe quoi dans l'url
+		$url = str_replace(array('<','"'),array('&lt;','&quot;'),$url);
+
 		$url = strtr($url, "\n\r", "  ");
 		# en theorie on devrait faire ca tout le temps, mais quand la chaine
 		# commence par ? c'est imperatif, sinon l'url finale n'est pas la bonne
@@ -83,7 +86,8 @@ function redirige_formulaire($url, $equiv = '') {
 		spip_log("redirige formulaire ajax: $url");
 		include_spip('inc/filtres');
 		return
-		"<script type='text/javascript'>window.location='$url';</script>"
+		// ie poste les formulaires dans une iframe, il faut donc rediriger son parent
+		"<script type='text/javascript'>if (parent.window){parent.window.document.location.replace(\"$url\");} else {document.location.replace(\"$url\");}</script>"
 		. http_img_pack('searching.gif','')
 		. '<br />'
 		. '<a href="'.quote_amp($url).'">'._T('navigateur_pas_redirige').'</a>';
