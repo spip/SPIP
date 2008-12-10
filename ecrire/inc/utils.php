@@ -147,7 +147,7 @@ function spip_log($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 	$logname = ($logname===NULL ? _FILE_LOG : $logname);
 	if (!isset($compteur[$logname])) $compteur[$logname] = 0;
 	if (($logname != 'maj') AND
-	    ( $compteur[$logname]++ > 100 || !$nombre_de_logs || !$taille_des_logs))
+	    ( $compteur[$logname]++ > _MAX_LOG || !$nombre_de_logs || !$taille_des_logs))
 		return;
 
 	$logfile = ($logdir===NULL ? _DIR_LOG : $logdir)
@@ -1052,6 +1052,8 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	define('_FILE_LOG', 'spip');
 	define('_FILE_LOG_SUFFIX', '.log');
 
+	define('_MAX_LOG', 100);
+
 	if (!isset($GLOBALS['test_dirs']))
 	  // Pas $pi car il est bon de le mettre hors ecriture apres intstall
 	  // il sera rajoute automatiquement si besoin a l'etape 2 de l'install
@@ -1435,7 +1437,7 @@ function verifier_visiteur() {
 				$GLOBALS['visiteur_session'][$var] = safehtml($a);
 		if (!isset($GLOBALS['visiteur_session']['id_auteur']))
 			$GLOBALS['visiteur_session']['id_auteur'] = 0;
-		ajouter_session($GLOBALS['visiteur_session']);
+		$session($GLOBALS['visiteur_session']);
 		return 0;
 	}
 
