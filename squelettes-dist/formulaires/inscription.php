@@ -12,8 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-if (!defined('_LOGIN_TROP_COURT')) define('_LOGIN_TROP_COURT', 4);
-
 function formulaires_inscription_charger_dist($mode, $focus, $id=0) {
 	$valeurs = array('nom_inscription'=>'','mail_inscription'=>'', 'id'=>$id);
 	if ($mode=='1comite')
