@@ -49,7 +49,7 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 		// le cas se presente a cause des RewriteRule d'Apache
 		// qui permettent d'ajouter un argument dans la QueryString
 		// mais pas d'en retirer un en conservant les autres.
-		if ($_GET['action'] === $fond)
+		if (isset($_GET['action']) AND $_GET['action'] === $fond)
 			unset($_GET['action']);
 	# sinon, fond par defaut
 	} else {
