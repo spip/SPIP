@@ -42,8 +42,8 @@ function action_editer_site_dist() {
 		revisions_sites($id_syndic);
 	
 	// Envoi normal depuis le formulaire de creation d'un site
-	} else if (!strlen(vider_url(_request('url_auto')))) {
-		if (strlen(vider_url(_request('url_site')))
+	} 
+	elseif (strlen(vider_url(_request('url_site')))
 		AND strlen(_request('nom_site'))) {
 			set_request('reload', 'oui');
 			$id_syndic = insert_syndic(_request('id_parent'));
@@ -52,10 +52,6 @@ function action_editer_site_dist() {
 			 AND $format_logo = _request('format_logo'))
 				@rename($logo,
 				_DIR_IMG . 'siteon'.$id_syndic.'.'.$format_logo);
-		} else {
-			include_spip('inc/headers');
-			return array(0,redirige_formulaire(generer_url_ecrire('sites_edit', 'id_rubrique='._request('id_parent'),'&')));
-		}
 	}
 	// Erreur
 	else {
