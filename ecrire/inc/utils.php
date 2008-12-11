@@ -259,7 +259,7 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 	$a = array_shift($url);
 	if (!$a) $a= './';
 
-	$regexp = ',^(' . str_replace('[]','\[\]',$c) . ')(=.*)?$,';
+	$regexp = ',^(' . str_replace('[]','\[\]',$c) . '[[]?[]]?)(=.*)?$,';
 	$ajouts = array_flip(explode('|',$c));
 	$u = is_array($v) ? $v : rawurlencode($v);
 	// lire les variables et agir
@@ -272,8 +272,8 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 			elseif (!$v) {
 				unset($url[$n]);
 			}
-			// ajout ; dans le cas d'un tableau ne rien faire, dans
-			// le cas d'une variable nrmale remplacer au meme endroit dans l'url
+	// Ajout. Pour une variable, remplacer au meme endroit,
+	// pour un tableau ce sera fait dans la prochaine boucle
 			elseif (substr($r[1],-2) != '[]') {
 				$url[$n] = $r[1].'='.$u;
 				unset($ajouts[$r[1]]);
