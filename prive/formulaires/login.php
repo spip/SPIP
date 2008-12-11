@@ -44,7 +44,7 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null)
 	// si on en a le droit, et sauf si on y est deja
 
 	if (!$valeurs['editable'] AND $loge) {
-		if ($cible == self())
+		if (!strlen($cible) OR $cible == self())
 			$valeurs['editable'] = false;
 		else {
 			include_spip('inc/headers');
