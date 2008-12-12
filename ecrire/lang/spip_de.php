@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_recalculer' => 'Seite aus Cache l&ouml;schen',
 'afficher_trad' => '&Uuml;bersetzungen anzeigen',
 'alerte_maj_impossible' => '<b>Achtung!</b> Ihre SQL Datenbank konnte nicht auf die Version @version@ umgestellt werden. M&ouml;glicherweise gibt es ein Problem mit den Zugriffsrechten. Bitte setzen Sie sich mit Ihrem Webspace-Provider in Verbindung.',
-'alerte_modif_info_concourante' => '<MODIF>Achtung - diese Information wurde auf anderem Weg modifiziert. Der aktuelle Wert lautet:',
+'alerte_modif_info_concourante' => 'Achtung - diese Information wurde auf anderem Weg modifiziert. Der aktuelle Wert lautet:',
 'analyse_xml' => 'XML-Analyse',
 'annuler' => 'Abbrechen',
 'antispam_champ_vide' => 'Bitte lassen Sie dieses Feld leer:',
@@ -75,7 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_annonces' => 'Keine Ank&uuml;ndigungen verschicken',
 'bouton_radio_non_envoi_liste_nouveautes' => 'Keine Liste der Neuigkeiten verschicken',
 'bouton_recharger_page' => 'Seite neu laden',
-'bouton_telecharger' => 'hochladen',
+'bouton_telecharger' => 'Herunterladen',
 'bouton_valider' => 'Best&auml;tigen',
 
 // C
