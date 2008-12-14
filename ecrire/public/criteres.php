@@ -819,10 +819,14 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 			  $val[0] = $r[1];
 		}
 	}
-	// tag du critere pour permettre aux boucles de modifier leurs requetes par defaut en fonction de ca
-	$boucles[$idb]->modificateur['criteres'][$col] = true;
-	if ($col_alias!=$col)
-		$boucles[$idb]->modificateur['criteres'][$col_alias] = true;
+	// Indicateur pour permettre aux fonctionx boucle_X de modifier 
+	// leurs requetes par defaut, notamment le champ statut
+	// Ne pas confondre champs de la table principale et des jointures
+	if ($table === $boucle->id_table) {
+		$boucles[$idb]->modificateur['criteres'][$col] = true;
+		if ($col_alias!=$col)
+			$boucles[$idb]->modificateur['criteres'][$col_alias] = true;
+	}
 	
 	// ajout pour le cas special d'une condition sur le champ statut:
 	// il faut alors interdire a la fonction de boucle
