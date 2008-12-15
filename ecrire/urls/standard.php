@@ -60,7 +60,7 @@ function recuperer_parametres_url(&$fond, $url) {
 	global $contexte;
 
 	// traiter les injections du type domaine.org/spip.php/cestnimportequoi/ou/encore/plus/rubrique23
-	if ($GLOBALS['profondeur_url']>0){
+	if ($GLOBALS['profondeur_url']>0 AND $fond=='sommaire'){
 		$fond = '404';
 	}
 
