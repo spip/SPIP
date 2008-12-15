@@ -188,7 +188,11 @@ function traiter_formulaires_dynamiques($get=false){
 				include_spip('inc/actions');
 				include_spip('public/assembler');
 				array_unshift($args,$form);
-				ajax_retour(inclure_balise_dynamique(call_user_func_array('balise_formulaire__dyn',$args),false),false);
+				$retour = inclure_balise_dynamique(call_user_func_array('balise_formulaire__dyn',$args),false);
+				// on ajoute un br en display none en tete du retour ajax pour regler un bug dans IE6/7
+				// sans cela le formulaire n'est pas actif apres le hit ajax
+				$retour = "<br class='bugajaxie' style='display:none;'/>".$retour;
+				ajax_retour($retour,false);
 				return true; // on a fini le hit
 			}
 		}
