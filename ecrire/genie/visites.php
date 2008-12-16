@@ -122,7 +122,7 @@ function calculer_visites($t) {
 		
 					$ref = $noref = array();
 					foreach($liste as $id) {
-						if (isset($referers_a[$id]))
+						if (isset($referers_a[$date][$id]))
 							$ref[]= $id ;
 						else $noref[]=$id;
 					}
