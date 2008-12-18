@@ -779,7 +779,7 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 	if ($f) {
 		$url = $f($id, $args, $ancre);
 		if (strlen($args))
-			$url .= strstr('?', $url)
+			$url .= strstr($url, '?')
 				? '&amp;'.$args
 				: '?'.$args;
 		return $url;
