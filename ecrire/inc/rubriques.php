@@ -316,10 +316,9 @@ function calcul_branche ($generation) {
 // http://doc.spip.org/@calcul_branche_in
 function calcul_branche_in($id) {
 
-	// normaliser $id qui a pu arriver comme un array
-	$id = is_array($id)
-		? join(',', array_map('sql_quote', $id))
-		: $id;
+	// normaliser $id qui a pu arriver comme un array, comme un entier, ou comme une chaine NN,NN,NN
+	if (!is_array($id)) $id = explode(',',$id);
+	$id = join(',', array_map('intval', $id));
 
 	// Notre branche commence par la rubrique de depart
 	$branche = $id;
