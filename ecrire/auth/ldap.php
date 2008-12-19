@@ -84,8 +84,10 @@ function auth_ldap_inserer($dn, $statut)
 	$result = @ldap_read($ldap_link, $dn, "objectClass=*", array("uid", "cn", "mail", "description"));
 		
 	// Si ça ne marche pas, essayer avec le samaccountname
-	if (!$result)
+	if (!$result) {
 		$result = @ldap_read($ldap_link, $dn, "objectClass=*", array("samaccountname", "cn", "mail", "description"));
+		$uid = 'samaccountname';
+	} else  $uid = 'uid';
 
 	if (!$result) return array();
 
@@ -97,7 +99,7 @@ function auth_ldap_inserer($dn, $statut)
 		if (is_array($val)) {
 				if (!$nom) $nom = $val['cn'][0];
 				if (!$email) $email = $val['mail'][0];
-				if (!$login) $login = $val['uid'][0];
+				if (!$login) $login = $val[$uid][0];
 				if (!$bio) $bio = $val['description'][0];
 		}
 	}
