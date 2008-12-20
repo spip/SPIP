@@ -708,7 +708,7 @@ function find_all_in_path($dir,$pattern, $recurs=false){
 	foreach (creer_chemin() as $d) {
 		$f = $d.$dir;
 		if (@is_dir($f)){
-			$liste = preg_files($f,$pattern,$maxfiles-count($liste_fichiers),$recurs);
+			$liste = preg_files($f,$pattern,$maxfiles-count($liste_fichiers),$recurs===true?array():$recurs);
 			foreach($liste as $chemin){
 				$nom = basename($chemin);
 				// ne prendre que les fichiers pas deja trouves
