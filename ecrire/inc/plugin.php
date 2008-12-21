@@ -26,6 +26,7 @@ include_spip('inc/texte');
 function liste_plugin_files($dir_plugins=_DIR_PLUGINS){
 	static $plugin_files=array();
 	if (!count($plugin_files[$dir_plugins])){
+		$plugin_files[$dir_plugins] = array();
 		foreach (preg_files($dir_plugins, '/plugin[.]xml$') as $plugin) {
 			$plugin_files[$dir_plugins][]=substr(dirname($plugin), strlen($dir_plugins));
 		}
