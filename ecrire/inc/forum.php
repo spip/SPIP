@@ -593,6 +593,7 @@ function afficher_forum_mots($id_forum)
 		  . propre($r['titre']);
 	}
 
+	if (!$mots) return '';
 	return ("\n<ul><li>" . join("</li>\n<li>", $mots) . "</li></ul>\n");
 }
 
