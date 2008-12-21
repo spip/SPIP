@@ -181,7 +181,7 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
 
 // fonction appelee par la balise #LOGO_DOCUMENT
 // http://doc.spip.org/@calcule_logo_document
-function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier, $lien, $align, $params, $connect='') {
+function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier, $lien, $align, $params='', $connect='') {
 	include_spip('inc/documents');
 
 	if (!$id_document) return '';
@@ -197,10 +197,37 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 	$id_vignette = $row['id_vignette'];
 	$fichier = $row['fichier'];
 	$mode = $row['mode'];
-	$titre = $row['titre'];
-	$taille = $row['taille'];
-	$logo = '';
 
+	// taille maximum [(#LOGO_DOCUMENT{300,52})]
+	if (preg_match('/{\s*(\d+),\s*(\d+)\s*}/', $params, $r)) {
+		$x = intval($r[1]);
+		$y = intval($r[2]);
+	} else $x = $y = 0;
+
+	$logo = img_logo_document($fichier, $extension, $id_vignette, $mode, $x, $y, $connect);
+
+	// flag_fichier : seul le fichier est demande
+	if ($flag_fichier)
+		return set_spip_doc(extraire_attribut($logo, 'src'));
+
+	// Calculer le code html complet (cf. calcule_logo)
+	$logo = inserer_attribut($logo, 'alt', '');
+	$logo = inserer_attribut($logo, 'class', 'spip_logos');
+	if ($align) $logo = inserer_attribut($logo, 'align', $align);
+
+	$titre = supprimer_tags(typo($row['titre']));
+	$taille = taille_en_octets($row['taille']);
+
+	$type = sql_fetsel('titre, mime_type','spip_types_documents', "extension = " . sql_quote($extension));
+
+	$mime = $type['mime_type'];
+	$titre = $type['titre'] . " - $taille" . ($titre ? " - $titre" : "");
+	$titre = attribut_html(couper($titre, 80));
+	return "<a href='$lien' type='$mime' title='$titre'>$logo</a>";
+}
+
+function img_logo_document($fichier, $extension, $id_vignette, $mode, $x, $y, $connect='')
+{
 	if ($id_vignette) {
 		$vignette = quete_fichier($id_vignette, $connect);
 		if ($connect) {
@@ -209,24 +236,15 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 			$logo = "$site/$dir$vignette";
 		}
 		elseif (@file_exists(get_spip_doc($vignette)))
-		  $logo = generer_url_entite($id_vignette, 'document');
+			$logo = generer_url_entite($id_vignette, 'document');
 	} else if ($mode == 'vignette') {
 		$logo = generer_url_entite($id_vignette, 'document');
-		if (!@file_exists($logo))
-			$logo = '';
-	}
+		if (!@file_exists($logo)) $logo = '';
+	} else $logo = '';
 
-	// taille maximum [(#LOGO_DOCUMENT{300,52})]
-	if ($params
-	AND preg_match('/{\s*(\d+),\s*(\d+)\s*}/', $params, $r)) {
-		$x = intval($r[1]);
-		$y = intval($r[2]);
-	}
 
 	if ($logo AND @file_exists($logo)) {
-		if ($x OR $y)
-			$logo = reduire_image($logo, $x, $y);
-		else {
+		if (!$x AND !$y) {
 			$size = @getimagesize($logo);
 			$logo = "<img src='$logo' ".$size[3]." />";
 		}
@@ -256,30 +274,8 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 	}
 
 	// Reduire si une taille precise est demandee
-	if ($x OR $y)
-		$logo = reduire_image($logo, $x, $y);
-
-	// flag_fichier : seul le fichier est demande
-	if ($flag_fichier)
-		return set_spip_doc(extraire_attribut($logo, 'src'));
-
-	// Calculer le code html complet (cf. calcule_logo)
-	$logo = inserer_attribut($logo, 'alt', '');
-	$logo = inserer_attribut($logo, 'class', 'spip_logos');
-	if ($align)
-		$logo = inserer_attribut($logo, 'align', $align);
-
-	if (!$lien) return $logo;
-
-	$type_document = sql_getfetsel('titre','spip_types_documents', "extension = " . sql_quote($extension));
-
-	$taille = taille_en_octets($taille);
-	$titre = strlen($titre)?" - ".supprimer_tags(typo($titre)):"";
-	$titre = couper("$type_document - $taille$titre", 80);
-	$titre = " title='" . attribut_html($titre) . "'";
-	return "<a href='$lien' type='$mime'$titre>$logo</a>";
+	return ($x OR $y) ? reduire_image($logo, $x, $y) : $logo;
 }
-
 // Ajouter "&lang=..." si la langue du forum n'est pas celle du site.
 // Si le 2e parametre n'est pas une chaine, c'est qu'on n'a pas pu
 // determiner la table a la compil, on le fait maintenant.
