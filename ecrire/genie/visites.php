@@ -84,6 +84,9 @@ function calculer_visites($t) {
 	if (!count($visites))
 		return;
 
+	include_spip('genie/popularites');
+	list($a,$b) = genie_popularite_constantes(24*3600);
+
 	// Maintenant on dispose de plusieurs tableaux qu'il faut ventiler dans
 	// les tables spip_visites, spip_visites_articles, spip_referers
 	// et spip_referers_articles ; attention a affecter tout ca a la bonne
@@ -95,24 +98,21 @@ function calculer_visites($t) {
 			if (!sql_countsel('spip_visites', "date='$date'"))
 				sql_insertq('spip_visites',
 					array('date' => $date, 'visites' => $visites[$date]));
-			else sql_update('spip_visites', array('visites' => "visites+".intval($visites[$date])), "date='$date'");
+			else 
+				sql_update('spip_visites', array('visites' => "visites+".intval($visites[$date])), "date='$date'");
 		
 			// 2. les visites des articles 
 			if ($visites_a[$date]) {
 				$ar = array();	# tableau num -> liste des articles ayant num visites
 				foreach($visites_a[$date] as $id_article => $n) {
-				  if (!sql_countsel('spip_visites_articles',
+					if (!sql_countsel('spip_visites_articles',
 						 "id_article=$id_article AND date='$date'")){
-					sql_insertq('spip_visites_articles',
-							array('id_article' => $id_article,
-							      'visites' => $n,
-							      'date' => $date));
-					sql_update('spip_articles',
-						     array('visites' => "visites+" . ($n + (isset($referers_a[$date][$id_article]) ? 1 : 0)),
-							   'popularite' => $n,
-							   'maj' => 'maj'),
-						     "id_article=$id_article");
-					} else $ar[$n][] = $id_article;
+						sql_insertq('spip_visites_articles',
+								array('id_article' => $id_article,
+								      'visites' => 0,
+								      'date' => $date));
+					}
+					$ar[$n][] = $id_article;
 				}
 				foreach ($ar as $n => $liste) {
 					$tous = sql_in('id_article', $liste);
@@ -126,17 +126,19 @@ function calculer_visites($t) {
 							$ref[]= $id ;
 						else $noref[]=$id;
 					}
-					if ($noref)
+					// il faudrait ponderer la popularite ajoutee ($n) par son anciennete eventuelle
+					// sur le modele de ce que fait genie/popularites
+					if (count($noref))
 						sql_update('spip_articles',
 							array('visites' => "visites+$n",
-							 'popularite' => "popularite+$n",
+							 'popularite' => "popularite+".round($n*$b,2),
 							 'maj' => 'maj'),
 							sql_in('id_article',$noref));
 							   
-					if ($ref)
+					if (count($ref))
 						sql_update('spip_articles',
 							   array('visites' => "visites+".($n+1),
-							 'popularite' => "popularite+$n",
+							 'popularite' => "popularite+".round($n*$b,2),
 							 'maj' => 'maj'),
 							sql_in('id_article',$ref));
 							   
