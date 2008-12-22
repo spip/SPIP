@@ -33,21 +33,24 @@ function exec_calendrier_dist()
   else {
 	$titre = _T('titre_page_calendrier',
 		    array('nom_mois' => nom_mois($date), 'annee' => annee($date)));
-	  }
+	$type = 'mois';
+  }
   $ancre = 'calendrier-1';
-
-  $r = http_calendrier_init('', $type, '','',generer_url_ecrire('calendrier', ($type ? "type=$type" : '')) . "#$ancre");
+  $time = array(_request('jour'), _request('mois'), _request('annee'));
+  $r = generer_url_ecrire('calendrier', "type=$type") . "#$ancre";
+  $r = http_calendrier_init($time, $type, _request('echelle'), _request('partie_cal'), $r);
 
   if (_AJAX) {
     ajax_retour($r);
   } else {
-	  $commencer_page = charger_fonction('commencer_page', 'inc');
-	  echo $commencer_page($titre, "accueil", "calendrier");
-		echo barre_onglets("calendrier", "calendrier"); // ne produit rien par defaut, mais est utilisee par le plugin agenda
-	  echo debut_grand_cadre(true);
-	  echo "\n<div>&nbsp;</div>\n<div id='", $ancre, "'>",$r,'</div>';
-	  echo fin_grand_cadre(true);
-	  echo fin_page();
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page($titre, "accueil", "calendrier");
+  // ne produit rien par defaut, mais est utilisee par le plugin agenda
+	echo barre_onglets("calendrier", "calendrier"); 
+	echo debut_grand_cadre(true);
+	echo "\n<div>&nbsp;</div>\n<div id='", $ancre, "'>",$r,'</div>';
+	echo fin_grand_cadre(true);
+	echo fin_page();
   }
 }
 
