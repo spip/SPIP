@@ -302,7 +302,6 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 // http://doc.spip.org/@exec_affiche_message_dist
 function exec_affiche_message_dist($id_message, $cherche_auteur, $forcer_dest)
 {
-  global $echelle, $partie_cal;
   $row = sql_fetsel("*", "spip_messages", "id_message=$id_message");
   if ($row) {
 	$id_message = $row['id_message'];
@@ -348,7 +347,7 @@ function exec_affiche_message_dist($id_message, $cherche_auteur, $forcer_dest)
 		echo creer_colonne_droite('', true);	
 
 		echo http_calendrier_ics_titre($lannee,$lemois,$lejour,generer_url_ecrire('calendrier'));
-		echo http_calendrier_ics($lannee,$lemois, $lejour, $echelle, $partie_cal, 90, array($sh, $ah));
+		echo http_calendrier_ics($lannee,$lemois, $lejour, '', '', 90, array($sh, $ah));
 	}
 
 	echo debut_droite('', true);
