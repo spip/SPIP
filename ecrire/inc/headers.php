@@ -35,6 +35,9 @@ function redirige_par_entete($url, $equiv='', $status = 302) {
 		
 	// ne pas laisser passer n'importe quoi dans l'url
 	$url = str_replace(array('<','"'),array('&lt;','&quot;'),$url);
+	// interdire les url inline avec le pseudo-protocole data:
+	if (preg_match(",data:,i",$url) AND preg_match("/base64\s*/i",$url))
+		$url ="./";
 
 	// Il n'y a que sous Apache que setcookie puis redirection fonctionne
 
