@@ -1,4 +1,5 @@
 2.0.1 -> 2.0.2
+- deux bugs au login (13529)
 - refuser les urls avec le pseudo protocole data (13521) 
 - bonne année (13520) 
 - Unifier la mise en page dans les 3 onglets de gestion des langues (13519)
