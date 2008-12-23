@@ -234,10 +234,15 @@ function retrouver_login($login)
 		exit;
 	}
 	$l = sql_quote($login);
-	return sql_fetsel('id_auteur,login,alea_actuel,alea_futur,prefs,source,login', 'spip_auteurs',
+	if ($r = sql_fetsel('id_auteur,login,alea_actuel,alea_futur,prefs,source,login', 'spip_auteurs',
 			"statut<>'5poubelle' AND (" .
 			"pass<>'' OR source<>'spip') AND (" . 
-			"login=$l OR (login<>'' AND (nom=$l OR email=$l)))");
+			"login=$l)"))
+		return $r;
+	else return sql_fetsel('id_auteur,login,alea_actuel,alea_futur,prefs,source,login', 'spip_auteurs',
+			"statut<>'5poubelle' AND (" .
+			"pass<>'' OR source<>'spip') AND (" . 
+			"login<>'' AND (nom=$l OR email=$l))");
 }
 
 // Essayer les differentes sources d'authenfication dans l'ordre specifie.
