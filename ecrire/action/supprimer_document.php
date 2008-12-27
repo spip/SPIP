@@ -25,7 +25,7 @@ function action_supprimer_document_dist($id_document) {
 
 	// Si c'est un document ayant une vignette, supprimer aussi la vignette
 	if ($doc['id_vignette']) {
-		supprimer_document($doc['id_vignette']);
+		action_supprimer_document_dist($doc['id_vignette']);
 		sql_delete('spip_documents_liens', 'id_document='.$doc['id_vignette']);
 	}
 
