@@ -225,13 +225,14 @@ function verifier_htaccess($rep) {
 function gerer_htaccess() {
 	// Cette variable de configuration peut etre posee par un plugin
 	// par exemple acces_restreint
-	$GLOBALS['meta']['creer_htaccess'];
-	$r = sql_select('extension', 'spip_types_documents');
-	while ($e = sql_fetch($r)) {
+	$f = ($GLOBALS['meta']['creer_htaccess'] === 'oui');
+	$dirs = sql_allfetsel('extension', 'spip_types_documents');
+	$dirs[] = array('extension' => 'distant');
+	foreach($dirs as $e) {
 		if (is_dir($dir = _DIR_IMG . $e['extension'])) {
-			if ($GLOBALS['meta']['creer_htaccess'] == 'oui')
+			if ($f)
 				verifier_htaccess($dir);
-			else spip_unlink("$dir/" . _ACCESS_FILE_NAME);
+			else spip_unlink($dir . '/' . _ACCESS_FILE_NAME);
 		}
 	}
 	return $GLOBALS['meta']['creer_htaccess'];
