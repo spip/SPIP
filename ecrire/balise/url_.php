@@ -31,6 +31,11 @@ function generer_generer_url($type, $p)
 
 	if (!$_id) $_id = champ_sql('id_' . $type, $p);
 
+	return generer_generer_url_arg($type, $p, $_id);
+}
+	
+function generer_generer_url_arg($type, $p, $_id)
+{
 	$s = $p->id_boucle;
 
 	if ($s !== '' AND $s = $p->boucles[$s]->sql_serveur) {
