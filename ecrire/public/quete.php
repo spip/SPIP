@@ -160,8 +160,7 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
 				$exposer[$m][$type][$principal] = true;
 				if ($type == 'id_mot'){
 					if (!$parent) {
-						$parent = sql_fetsel('id_groupe','spip_mots',"id_mot=" . $principal, '','','','',$connect);
-						$parent = $parent['id_groupe'];
+						$parent = sql_getfetsel('id_groupe','spip_mots',"id_mot=" . $principal, '','','','',$connect);
 					}
 					if ($parent)
 						$exposer[$m]['id_groupe'][$parent] = true;
@@ -171,8 +170,7 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
 				  	if ($type == 'id_rubrique')
 				  		$parent = $principal;
 				  	if ($type == 'id_article') {
-							$parent = sql_fetsel('id_rubrique','spip_articles',"id_article=" . $principal, '','','','',$connect);
-							$parent = $parent['id_rubrique'];
+						$parent = quete_rubrique($principal,$connect);
 				  	}
 				  }
 				  do { $exposer[$m]['id_rubrique'][$parent] = true; }
@@ -198,7 +196,7 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 	include_spip('inc/documents');
 	$logo = vignette_logo_document($row['id_vignette'], $connect);
 	if (!$logo AND $row['mode'] == 'vignette') {
-		$logo = generer_url_entite($id_document, 'document');
+		$logo = generer_url_entite($id_document, 'document','','', $connect ? $connect : NULL);
 	}
 	// flag_fichier : seul le fichier est demande
 	if ($flag_fichier) {
