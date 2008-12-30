@@ -30,7 +30,23 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null)
 			$login = $regs[1];
 	} 
 
-	$valeurs = informer_login($login);
+	$row = informer_login($login);
+
+	// Construire l'environnement du squelette
+	// Ne pas proposer de "rester connecte quelques jours"
+	// si la duree de l'alea est inferieure a 12 h (valeur par defaut)
+		
+	$valeurs = array(
+		'var_login' => $login,
+		'editable' => !$row,
+		'cnx' => $row['cnx'],
+		'auth_http' => login_auth_http(),
+		'rester_connecte' => ((_RENOUVELLE_ALEA < 12*3600)? '' : ' '),
+		'_logo' => $row['logo'],
+		'_alea_actuel' => isset($row['alea_actuel'])?$row['alea_actuel']:'',
+		'_alea_futur' => isset($row['alea_futur'])?$row['alea_futur']:'',
+		'_hidden' => '<input type="hidden" name="session_password_md5" value="" /><input type="hidden" name="next_session_password_md5" value="" />'
+		);
 
 	if ($erreur OR !$GLOBALS['visiteur_session']['id_auteur'])
 		$valeurs['editable'] = true;
@@ -63,42 +79,29 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null)
 	return $valeurs;
 }
 
-// Construire l'environnement du squelette
+// Cette fonction sert a 2 squelettes: login et informer_auteur
+// Ce dernier transmet le tableau ci-dessous a la fonction JS informer_auteur
+// Il est invoque par la fonction JS actualise_auteur via la globale JS
+// page_auteur=#URL_PAGE{informer_auteur} dans le squelette login
+// N'y aurait-il pas plus simple ?
 
 // http://doc.spip.org/@informer_login
 function informer_login($login){
-	$row = $logo = $cnx = '';
-	if ($login) {
-		$row = retrouver_login($login);
-		// desactiver le hash md5 si pas auteur spip ?
-		if ($row) {
-			if ($row['source']!=='spip'){
-				$row['alea_actuel']='';
-				$row['alea_futur']='';
-			}
-			$prefs = unserialize($row['prefs']);
-			$cnx = ($prefs['cnx'] == 'perma') ? '1' : '0';
-			unset($row['prefs']);
-			unset($row['source']);		
-			$logo = recuperer_fond('formulaires/inc-logo_auteur', $row);
-			verifier_visiteur();
-		}
+	if (!$login) return array();
+	$row = retrouver_login($login);
+	if (!$row) return array();
+	// desactiver le hash md5 si pas auteur spip ?
+	if ($row['source']!=='spip'){
+		$row['alea_actuel']= '';
+		$row['alea_futur']= '';
 	}
-
-	// Ne pas proposer de "rester connecte quelques jours"
-	// si la duree de l'alea est inferieure a 12 h (valeur par defaut)
-		
-	return array(
-		'var_login' => $login,
-		'editable' => !$row,
-		'cnx' => $cnx,
-		'auth_http' => login_auth_http(),
-		'rester_connecte' => ((_RENOUVELLE_ALEA < 12*3600)? '' : ' '),
-		'_logo' => $logo,
-		'_alea_actuel' => isset($row['alea_actuel'])?$row['alea_actuel']:'',
-		'_alea_futur' => isset($row['alea_futur'])?$row['alea_futur']:'',
-		'_hidden' => '<input type="hidden" name="session_password_md5" value="" /><input type="hidden" name="next_session_password_md5" value="" />'
-		);
+	$prefs = unserialize($row['prefs']);
+	$row['cnx'] = ($prefs['cnx'] == 'perma') ? '1' : '0';
+	$row['logo'] = recuperer_fond('formulaires/inc-logo_auteur', $row);
+	unset($row['prefs']);
+	unset($row['source']);		
+	verifier_visiteur();
+	return $row;
 }
 
 // Gerer le cas ou un utilisateur ne souhaite pas de cookie
@@ -239,6 +242,10 @@ function retrouver_login($login)
 			"pass<>'' OR source<>'spip') AND (" . 
 			"login=$l)"))
 		return $r;
+	// Si pas d'auteur avec ce login
+	// regarder s'il a saisi son nom ou son mail.
+	// Ne pas fusionner avec la requete precedente
+	// car un nom peut etre homonyme d'un autre login
 	else return sql_fetsel('id_auteur,login,alea_actuel,alea_futur,prefs,source,login', 'spip_auteurs',
 			"statut<>'5poubelle' AND (" .
 			"pass<>'' OR source<>'spip') AND (" . 
