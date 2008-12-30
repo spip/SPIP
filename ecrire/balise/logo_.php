@@ -39,7 +39,8 @@ function balise_LOGO__dist ($p) {
 	}
 
 	// analyser les faux filtres
-	$flag_fichier = $align = $lien = $params = '';
+	$flag_fichier = 0;
+	$align = $lien = $params = '';
 
 	if (is_array($p->fonctions)) {
 		foreach($p->fonctions as $couple) {
@@ -60,7 +61,7 @@ function balise_LOGO__dist ($p) {
 					if ($r === 1)
 						$lien = true;
 					elseif ($r === 2)
-						$flag_fichier = 1;
+						$flag_fichier = -1;
 					else	$lien = $nom;
 					break;
 				}
@@ -71,9 +72,7 @@ function balise_LOGO__dist ($p) {
 	if (!$flag_fichier) {
 		if ($lien == true) {
 			include_spip('balise/url_');
-			$lien = '($lien = '
-			  . generer_generer_url_arg($type_objet, $p, $_id_objet)
-			  . ') ? $lien : ""';
+			$lien = generer_generer_url_arg($type_objet, $p, $_id_objet);
 
 		} else if ($lien) {
 			$lien = "'".texte_script(trim($lien))."'";
@@ -93,31 +92,55 @@ function balise_LOGO__dist ($p) {
 	if (!$lien) $lien = "''";
 	$connect = $p->id_boucle ?$p->boucles[$p->id_boucle]->sql_serveur :'';
 	if ($type_objet == 'document') {
-		$p->code = "calcule_logo_document($_id_objet, '" .
-			$p->descr['documents'] .
-			'\', $doublons, '. intval($flag_fichier).", $lien, '"
-		  	. $align . "','" .
-			// #LOGO_DOCUMENT{x,y} donne la taille maxi
-			texte_script($params)
-			."'," . _q($connect) .")";
+		if (preg_match('/{\s*(\d+),\s*(\d+)\s*}/', $params, $r)) {
+			$x = intval($r[1]);
+			$y = intval($r[2]);
+		} else $x = $y = 0;
+
+		$qconnect = _q($connect);
+		if ($flag_fichier)
+			$code = "quete_logo_file(quete_document($_id_objet, $qconnect), $qconnect)";
+		else
+			$code = "quete_logo_document(quete_document($_id_objet, $qconnect), $lien, '$align', $x, $y, $qconnect)";
+		// (x=non-faux ? y : '') pour affecter x en retournant y
+		if ($p->descr['documents'])
+		  $code = '(($doublons["documents"] .= ",". '
+		    . $_id_objet
+		    . ") ? $code : '')";
 	}
 	elseif ($connect) {
-		$p->code = "''";
+		$code = "''";
 		spip_log("Les logos distants ne sont pas prevus");
 	} else {
-		$p->code = "affiche_logos(calcule_logo('$id_objet', '" .
+		$code = "quete_logo('$id_objet', '" .
 			(($suite_logo == '_SURVOL') ? 'off' : 
 			(($suite_logo == '_NORMAL') ? 'on' : 'ON')) .
 			"', $_id_objet," .
 			(($suite_logo == '_RUBRIQUE') ? 
 			champ_sql("id_rubrique", $p) :
 			(($type_objet == 'rubrique') ? "quete_parent($_id_objet)" : "''")) .
-			",  '$flag_fichier'), $lien, '". $align . "')";
-	}
+			", " . intval($flag_fichier) . ")";
 
+		if (!$flag_fichier) {
+		  $code = "\n((!is_array(\$l = $code)) ? '':\n (" .
+		     '"<img class=\"spip_logos\" alt=\"\"' .
+		    ($align ? " align=\"$align\"" : '')
+		    . ' src=\"$l[0]\"" . $l[3] .  ($l[1] ? " onmouseover=\"this.src=\'$l[1]\'\" onmouseout=\"this.src=\'$l[0]\'\"" : "") . \' />\'))';
+
+		  $code = ($lien==="''") ? $code :
+			  ('\'<a href="\' .' . $lien . ' . \'"> \' . ' . $code . " . '</a>'");
+		}
+	}
+	$p->code = $code;
 	$p->interdire_scripts = false;
 	return $p;
 }
+
+
+// Pour les documents comme pour les logos, le filtre |fichier donne
+// le chemin du fichier apres 'IMG/' ;  peut-etre pas d'une purete
+// remarquable, mais a conserver pour compatibilite ascendante.
+// -> http://www.spip.net/fr_article901.html
 
 function logo_faux_filtres($nom)
 {
