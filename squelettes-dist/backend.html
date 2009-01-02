@@ -14,10 +14,10 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 
 [	<image>
 		<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
-		<url>(#LOGO_SITE_SPIP||image_reduire{144,400}|extraire_attribut{src}|url_absolue|texte_backend)</url>
+		<url>(#LOGO_SITE_SPIP|image_reduire{144,400}|extraire_attribut{src}|url_absolue|texte_backend)</url>
 		<link>#URL_SITE_SPIP/</link>
-		[<height>(#LOGO_SITE_SPIP||image_reduire{144,400}|extraire_attribut{height})</height>]
-		[<width>(#LOGO_SITE_SPIP||image_reduire{144,400}|extraire_attribut{width})</width>]
+		[<height>(#LOGO_SITE_SPIP|image_reduire{144,400}|extraire_attribut{height})</height>]
+		[<width>(#LOGO_SITE_SPIP|image_reduire{144,400}|extraire_attribut{width})</width>]
 	</image>
 ]
 

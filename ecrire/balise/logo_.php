@@ -38,39 +38,61 @@ function balise_LOGO__dist ($p) {
 		$_id_objet = champ_sql($id_objet, $p);
 	}
 
-	// analyser les faux filtres
-	$fichier = 0;
-	$align = $lien = $params = '';
+	$fichier = ($p->etoile === '**') ? -1 : 0;
+	$lien = ($p->etoile === '*') ? ' ' : '';
+	$coord = array();
+	$align = $params = '';
 
-	if (is_array($p->fonctions)) {
-		foreach($p->fonctions as $couple) {
-			$nom = trim($couple[0]);
-
-			// double || signifie "on passe aux vrais filtres"
-			if ($nom == '') {
-				if ($couple[1]) {
-					$params = $couple[1]; // recuperer #LOGO_DOCUMENT{20,30}
-					array_shift($p->param);
-				} else break;
-			} else {
-				array_shift($p->param);
-				$r = logo_faux_filtres($nom);
-				if ($r === 0)
-					$align = $nom;
-				else {
-					if ($r === 2)
-						$fichier = -1;
-					elseif ($r === 1)
-						$lien = ' ';
-					else	$lien = $nom;
-					break;
-				}
-			}
+	if ($p->param AND !$p->param[0][0]) {
+		$params = array_shift($p->param);
+		array_shift($params);
+		foreach($params as $a) {
+			if ($a[0]->type === 'texte') {
+				$n = $a[0]->texte;
+				if (is_numeric($n))
+					$coord[]= $n;
+				else $align = $n;
+			} else $lien = $a[0];
 		}
 	}
 
+	$x = !$coord  ? 0 : intval(array_shift($coord));
+	$y = !$coord  ? 0 : intval(array_shift($coord));
+	
+	// Bloc de compatibilite SPIP <= 2.0
+	// Ne pas chercher a comprendre.
+	foreach($p->fonctions as $couple) {
+		$nom = trim($couple[0]);
+		if ($nom == '')  break;
+		$r = logo_faux_filtres($nom);
+		if ($r === 0) {
+			$align = $nom;
+			array_shift($p->param);
+			spip_log('filtre de logo obsolete', 'vieilles_defs');
+		} else {
+			if ($r === 2) {
+				$fichier = -1;
+				array_shift($p->param);
+				spip_log('filtre de logo obsolete', 'vieilles_defs');
+			} elseif ($r === 1) {
+				$lien = ' ';
+				array_shift($p->param);
+				spip_log('filtre de logo obsolete', 'vieilles_defs');
+			} elseif (ltrim($nom[0])=='#') {
+				array_shift($p->param);
+				$lien = $nom;
+				// le cas else est la seule incompatibilite
+				spip_log('filtre de logo obsolete', 'vieilles_defs');
+			}
+			break;
+		}
+	}
+	// Fin du bloc
+
 	if ($lien) {
-		if (preg_match(",^[^#]*#([A-Za-z_]+),", $lien, $r)) {
+		if (!is_string($lien))
+			$lien = calculer_champ($lien);
+		elseif (preg_match(",^[^#]*#([A-Za-z_]+),", $lien, $r)) {
 			$c = new Champ();
 			$c->nom_champ = $r[1];
 			$c->id_boucle = $p->id_boucle;
@@ -85,11 +107,6 @@ function balise_LOGO__dist ($p) {
 
 	$connect = $p->id_boucle ?$p->boucles[$p->id_boucle]->sql_serveur :'';
 	if ($type == 'document') {
-		if (preg_match('/{\s*(\d+),\s*(\d+)\s*}/', $params, $r)) {
-			$x = intval($r[1]);
-			$y = intval($r[2]);
-		} else $x = $y = 0;
-
 		$qconnect = _q($connect);
 		if ($fichier)
 			$code = "quete_logo_file(quete_document($_id_objet, $qconnect), $qconnect)";
@@ -126,16 +143,20 @@ function logo_survol($id_objet, $_id_objet, $type, $align, $fichier, $lien, $p, 
 
 	$code = "\n((!is_array(\$l = $code)) ? '':\n (" .
 		     '"<img class=\"spip_logos\" alt=\"\"' .
-		    ($align ? " align=\"$align\"" : '')
+		    ($align ? " align=\\\"$align\\\"" : '')
 		    . ' src=\"$l[0]\"" . $l[3] .  ($l[1] ? " onmouseover=\"this.src=\'$l[1]\'\" onmouseout=\"this.src=\'$l[0]\'\"" : "") . \' />\'))';
 
 	if (!$lien) return $code;
 
 	return ('\'<a href="\' .' . $lien . ' . \'"> \' . ' . $code . " . '</a>'");
 
-}// Pour les documents comme pour les logos, le filtre |fichier donne
-// le chemin du fichier apres 'IMG/' ;  peut-etre pas d'une purete
-// remarquable, mais a conserver pour compatibilite ascendante.
+}
+
+// Les pseudos filtres |fichier et |lien pour les balises LOGO_XXX
+// donnent le chemin du fichier et son URL.
+// Ecritures obsolete remplacees par ** et *: LOGO_XXX** et LOGO_XXX*
+// Conservees pour compatibilite ascendante mais ne plus utiliser
+// Idem pour le positionnement.
 // -> http://www.spip.net/fr_article901.html
 
 function logo_faux_filtres($nom)
