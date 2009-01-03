@@ -10,20 +10,18 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-//
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Ces commentaires vont etre substitue's en mode recherche
-// voir les champs SURLIGNE dans inc-index-squel
+// voir balise_DEBUT_SURLIGNE et balise_FIN_SURLIGNE
 
 define("MARQUEUR_SURLIGNE",  'debut_surligneconditionnel');
 define("MARQUEUR_FSURLIGNE", 'finde_surligneconditionnel');
 
 
 // http://doc.spip.org/@surligner_mots
-function surligner_mots($page) {
-  $surlignejs_engines = array(
+function surligner_mots($page, $surcharge_surligne='') {
+  	$surlignejs_engines = array(
       array(",".str_replace(array("/","."),array("\/","\."),$GLOBALS['meta']['adresse_site']).",i", ",recherche=([^&]+),i"), //SPIP
       array(",^http://(www\.)?google\.,i", ",q=([^&]+),i"),                            // Google
       array(",^http://(www\.)?search\.yahoo\.,i", ",p=([^&]+),i"),                     // Yahoo
@@ -41,7 +39,7 @@ function surligner_mots($page) {
     
   $ref = $_SERVER['HTTP_REFERER'];
   //avoid a js injection
-  if($surcharge_surligne=_request("var_recherche")) {
+  if($surcharge_surligne) {
     $surcharge_surligne = preg_replace(",(?<!\\\\)((?:(?>\\\\){2})*)('),","$1\\\\$2",$surcharge_surligne);
     $surcharge_surligne = str_replace("\\","\\\\",$surcharge_surligne);
     if($GLOBALS['meta']['charset']=='utf-8') {

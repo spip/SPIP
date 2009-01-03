@@ -268,12 +268,11 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 // Traiter var_recherche ou le referrer pour surligner les mots
 // http://doc.spip.org/@f_surligne
 function f_surligne ($texte) {
-	if ($GLOBALS['html']
-	AND (isset($_SERVER['HTTP_REFERER']) OR isset($_GET['var_recherche']))) {
-		include_spip('inc/surligne');
-		$texte = surligner_mots($texte);
-	}
-	return $texte;
+	if (!$GLOBALS['html']) return $texte;
+	$rech = _request('var_recherche');
+	if (!$rech AND !isset($_SERVER['HTTP_REFERER'])) return $texte;
+	include_spip('inc/surligne');
+	return surligner_mots($texte, $rech);
 }
 
 // Valider/indenter a la demande.
