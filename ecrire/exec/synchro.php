@@ -56,7 +56,9 @@ function exec_synchro_dist()
 
 	echo _T('ical_info1').'<br /><br />';
 
-	echo _T('ical_info2');
+	echo _T('ical_info2', array('spipnet' => $GLOBALS['home_server']
+					. '/' .  $GLOBALS['spip_lang']
+					. '_suivi'));
 
 	echo "</div>";
 
