@@ -1,0 +1,54 @@
+/**************************************************************************/
+/*  SPIP, Systeme de publication pour l'internet                          */
+/*                                                                        */
+/*  Copyright (c) 2001-2009                                               */
+/*  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James */
+/*                                                                        */
+/*  Ce programme est un logiciel libre distribue sous licence GNU/GPL.    */
+/*  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.  */ 
+\**************************************************************************/
+
+a {text-decoration: none; }
+A:Hover {text-decoration: underline;}
+
+.article-inactif {
+		float: '.$GLOBALS['spip_lang_left'].';
+		text-align: '.$GLOBALS['spip_lang_left'].';
+		width: 80%;
+		background: ' . "url(" . chemin_image('triangle'.$GLOBALS['spip_lang_rtl'].'.gif') . ') ' . $GLOBALS['spip_lang_left'].' center no-repeat;
+		margin: 2px;
+		padding: 0px;
+		padding-'.$GLOBALS['spip_lang_left'].': 20px;
+		font-family: Arial, Sans, sans-serif;
+		font-size: 12px;
+}
+
+.article-actif {
+		float: '.$GLOBALS['spip_lang_right'].';
+		text-align: '.$GLOBALS['spip_lang_right'].';
+		width: 80%;
+		background: ' . "url(" .  chemin_image('triangle'.$GLOBALS['spip_lang_rtl'].'.gif') . ') ' . $GLOBALS['spip_lang_right'].' center no-repeat;
+		margin: 4px;
+		padding: 0px;
+		padding-'.$GLOBALS['spip_lang_right'].': 20px;
+		font-family: Arial, Sans, sans-serif;
+		font-size: 12px;
+		font-weight: bold;
+		color: black;
+}
+
+.article-actif:hover {
+		text-decoration: none;
+}
+.rubrique {
+		width: 90%;
+		margin: 0px;
+		margin-top: 6px;
+		margin-bottom: 4px;
+		padding: 4px;
+		font-family: Trebuchet MS, Arial, Sans, sans-serif;
+		font-size: 14px;
+		font-weight: bold;
+		color: black;
+		background-color: #EEEECC;
+}
