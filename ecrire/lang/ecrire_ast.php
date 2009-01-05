@@ -82,8 +82,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_afficher' => 'Amosar',
 'bouton_radio_apparaitre_liste_redacteurs_connectes' => 'Apaecer na llista de redactores coneutaos',
 'bouton_radio_articles_futurs' => 's&oacute;lo pa los art&iacute;culos futuros (ensin actuar so la base de datos).',
-'bouton_radio_articles_tous' => 'pa toos los art&iacute;culos ensin esceici&oacute;n.',
-'bouton_radio_articles_tous_sauf_forum_desactive' => 'pa toos los art&iacute;culos, menos los que tengan el foru desactiv&aacute;u.',
+'bouton_radio_articles_tous' => 'pa tolos art&iacute;culos ensin esceici&oacute;n.',
+'bouton_radio_articles_tous_sauf_forum_desactive' => 'pa tolos art&iacute;culos, menos los que tengan el foru desactiv&aacute;u.',
 'bouton_radio_desactiver_messagerie' => 'Desactivar la mensaxer&iacute;a',
 'bouton_radio_enregistrement_obligatoire' => 'Rexistru obligatoriu (los usuarios
   tienen que abonase coles sos se&ntilde;es d\'e-mail enantes
@@ -203,7 +203,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // I
 'ical_info1' => 'N\'esta p&aacute;xina ufrense delles maneres de tar en contautu cola activid&aacute; d\'esti sitiu.',
 'ical_info2' => 'Pa saber m&aacute;s no tocante a toes estes t&eacute;cniques, puedes consultar <a href="http://www.spip.net/fr_suivi">la documentaci&oacute;n de SPIP</a>.',
-'ical_info_calendrier' => 'Tienes dos axendes a la to disposici&oacute;n. La primera ye el plan del sitiu que anuncia toos los art&iacute;culos espublizaos. La segunda conti&eacute;n los anuncios editoriales y tambi&eacute;n los tos caberos mensaxes privaos: esta ye una axenda privada gracies a una clave personal, que puedes modificar en tou momentu anovando la to contrase&ntilde;a.',
+'ical_info_calendrier' => 'Tienes dos axendes a la to disposici&oacute;n. La primera ye el plan del sitiu que anuncia tolos art&iacute;culos espublizaos. La segunda conti&eacute;n los anuncios editoriales y tambi&eacute;n los tos caberos mensaxes privaos: esta ye una axenda privada gracies a una clave personal, que pues modificar en tou momentu anovando la to contrase&ntilde;a.',
 'ical_lien_rss_breves' => 'Sindicaci&oacute;n de les breves del sitiu',
 'ical_methode_http' => 'Descarga',
 'ical_methode_webcal' => 'Sincronizaci&oacute;n (webcal://)',
@@ -252,7 +252,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_supprimer_signature' => 'Desaniciar esta robla',
 'icone_valider_signature' => 'Validar esta robla',
 'icone_voir_sites_references' => 'Ver los sitios referenciaos',
-'icone_voir_tous_mots_cles' => 'Ver toes les pallabres-clave',
+'icone_voir_tous_mots_cles' => 'Ver toles pallabres-clave',
 'image_administrer_rubrique' => 'Puedes alministrar esta estaya',
 'info_1_article' => '1 art&iacute;culu',
 'info_1_breve' => '1 breve',
@@ -262,7 +262,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_activer_forum_public' => '<i>Pa activar los foros p&uacute;blicos, has d\'escoyer el tipu
  de moderaci&oacute;n por omisi&oacute;n:</i>',
 'info_admin_gere_rubriques' => 'Esti alministrador xestiona les estayes siguientes:',
-'info_admin_gere_toutes_rubriques' => 'Esti alministrador xestiona <b>toes les estayes</b>.',
+'info_admin_gere_toutes_rubriques' => 'Esti alministrador xestiona <b>toles estayes</b>.',
 'info_administrateur' => 'Xesti&oacute;n',
 'info_administrateur_1' => 'Xesti&oacute;n',
 'info_administrateur_2' => 'de la web (<i>&uacute;salo con cuid&aacute;u</i>)',
@@ -327,7 +327,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_compresseur_titre' => 'Ig&uuml;es y compresi&oacute;n',
 'info_config_forums_prive' => 'Nel espaciu priv&aacute;u del sitiu, puedes activar dellos tipos de foros:',
 'info_config_forums_prive_admin' => 'Un foru acut&aacute;u pa los alministradores del sitiu:',
-'info_config_forums_prive_global' => 'Un foru global, abiertu a toos los redactores:',
+'info_config_forums_prive_global' => 'Un foru global, abiertu pa tolos redactores:',
 'info_config_forums_prive_objets' => 'Un foru pa cada art&iacute;culu, breve, sitiu referenci&aacute;u, etc.:',
 'info_config_suivi' => 'Si estes se&ntilde;es corresponden a una llista de corr&eacute;u, pues indicar embaxo les se&ntilde;es nes que pueden apuntase los participantes nel sitiu. Estes se&ntilde;es puen ser una URL (por exemplu la p&aacute;xina d\'inscripci&oacute;n a la llista na Rede), o unes se&ntilde;es d\'email con un asuntu espec&iacute;ficu (por exemplu: <tt>@se&ntilde;es_llista@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Puedes soscribite a la llista de corr&eacute;u d\'esti sitiu. D\'esti mou recibir&aacute;s per corr&eacute;u electr&oacute;nicu los anuncios d\'art&iacute;culos y de breves propuestos pa espublizar.',
@@ -386,8 +386,8 @@ con <b>@texte_lie@</b> debes confirmar esta decisi&oacute;n:',
 'info_fonctionnement_forum' => 'Funcionamientu del foru:',
 'info_forum_administrateur' => 'foru de los alministradores',
 'info_forum_interne' => 'foru internu',
-'info_forum_ouvert' => 'Nel espaciu priv&aacute;u del sitiu, hai un foru abiertu a toos
-  los redactores rexistr&aacute;os. Equ&iacute; embaxo puedes activar un
+'info_forum_ouvert' => 'Nel espaciu priv&aacute;u del sitiu, hai un foru abiertu a tolos
+  redactores rexistr&aacute;os. Equ&iacute; embaxo puedes activar un
   foru suplementariu, acut&aacute;u s&oacute;lo pa los alministradores.',
 'info_forum_statistiques' => 'Estad&iacute;stiques de les visites',
 'info_forums_abo_invites' => 'Esti sitiu tien foros pa abonaos; poro a los visiteurs se-yos encamienta que se rexistren nel sitiu p&uacute;blicu.',
@@ -563,7 +563,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.',
 'info_question_vignettes_referer_non' => 'Nun amosar les captures de los sitios d\'orixe de les visites',
 'info_question_vignettes_referer_oui' => 'Amosar captures de los sitios d\'orixe de les visites',
 'info_question_visiteur_ajout_document_forum' => 'Si qui&eacute;s autorizar que los visitantes amesten documentos (im&aacute;xenes, sones...) nos sos mensaxes del foru, indica embaxo la llista d\'estensiones de documentu permit&iacute;es nos foros (p. ex: gif, jpg, png, mp3).',
-'info_question_visiteur_ajout_document_forum_format' => 'Si qui&eacute;s autorizar toos los tipos de documentu que SPIP considera fiables, pon un asteriscu. Pa nun autorizar na, d&eacute;xalo en blancu,',
+'info_question_visiteur_ajout_document_forum_format' => 'Si qui&eacute;s autorizar tolos tipos de documentu que SPIP considera fiables, pon un asteriscu. Pa nun autorizar na, d&eacute;xalo en blancu,',
 'info_qui_attribue_mot_cle' => 'Les pallabres d\'esti grupu puen conse&ntilde;ase por:',
 'info_racine_site' => 'Raiz del sitiu',
 'info_recharger_page' => 'Ties que recargar esta p&aacute;xina nunos instantes.',
@@ -661,10 +661,10 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.',
 'info_titre' => 'T&iacute;tulu:',
 'info_titre_mot_cle' => 'Nome o t&iacute;tulu de la pallabra clave',
 'info_total' => 'total:',
-'info_tous_articles_en_redaction' => 'Toos los art&iacute;culos en cursu de redaici&oacute;n',
-'info_tous_articles_presents' => 'Toos los art&iacute;culos espublizaos nesta estaya',
-'info_tous_les' => 'toos los:',
-'info_tous_redacteurs' => 'Anuncios pa toos los redactores',
+'info_tous_articles_en_redaction' => 'Tolos art&iacute;culos en cursu de redaici&oacute;n',
+'info_tous_articles_presents' => 'Tolos art&iacute;culos espublizaos nesta estaya',
+'info_tous_les' => 'tolos:',
+'info_tous_redacteurs' => 'Anuncios pa tolos redactores',
 'info_tout_site' => 'Tou el sitiu',
 'info_tout_site2' => 'L\'art&iacute;culu nun ta traduc&iacute;u a esta llingua.',
 'info_tout_site3' => 'L\'art&iacute;culu ta traduc&iacute;u a esta llingua, pero despu&eacute;s amest&aacute;ronse modificaciones a l\'art&iacute;culu de referencia. La traducci&oacute;n tien que ponese al d&iacute;a.',
@@ -981,9 +981,9 @@ requier m&aacute;s potencia del sirvidor.',
 'texte_conflit_edition_correction' => 'Compreba embaxo les diferencies ente les dos versiones del testu; tambi&eacute;n pues copiar los tos camb&eacute;os y, de sigu&iacute;o, volver a entamar',
 'texte_connexion_mysql' => 'Consulta la informaci&oacute;n que te dieren nel to agospiamientu web: ties que atopar el sirvidor de base datos que te ufre y los c&oacute;digos de identificaci&oacute;n pa conectate.',
 'texte_contenu_article' => '(Conten&iacute;u de l\'art&iacute;culu en delles pallabres.)',
-'texte_contenu_articles' => '<NEW>Selon la maquette adopt&eacute;e pour votre site, vous pouvez d&eacute;cider
-		que certains &eacute;l&eacute;ments des articles ne sont pas utilis&eacute;s.
-		Utilisez la liste ci-dessous pour indiquer quels &eacute;l&eacute;ments sont disponibles.',
+'texte_contenu_articles' => 'Seg&uacute;n la maquetaci&oacute;n que uses pal to sitiu, seique decidas
+  que dellos elementos de los art&iacute;culos nun van utilizase.
+  Usa la llista d\'embaxo pa indicar los elementos que van tar disponibles.',
 'texte_crash_base' => 'Si la to base de datos ta
    ca&iacute;da, pues tentar una reparaci&oacute;n
    autom&aacute;tica.',
@@ -999,12 +999,12 @@ requier m&aacute;s potencia del sirvidor.',
  puen referenciase llu&eacute;u nel
  art&iacute;culu, o amosase aparte.<p />',
 'texte_documents_joints_2' => 'Esti axuste nun torga l\'inxertu d\'imaxes direutamente nos art&iacute;culos.',
-'texte_effacer_base' => '<NEW>Effacer la base de donn&eacute;es SPIP',
-'texte_effacer_donnees_indexation' => '<NEW>Effacer les donn&eacute;es d\'indexation',
-'texte_effacer_statistiques' => '<NEW>Effacer les statistiques',
+'texte_effacer_base' => 'Desaniciar la base de datos SPIP',
+'texte_effacer_donnees_indexation' => 'Desaniciar los datos d\'indexaci&oacute;n',
+'texte_effacer_statistiques' => 'Desaniciar les estad&iacute;stiques',
 'texte_en_cours_validation' => 'Los art&iacute;culos y breves d\'embaxo tan propuestos pa espublizase.',
-'texte_en_cours_validation_forum' => '<NEW>N\'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce aux forums qui leur sont attach&eacute;s.',
-'texte_enrichir_mise_a_jour' => '<NEW>Vous pouvez enrichir la mise en page de votre texte en utilisant des &laquo;&nbsp;raccourcis typographiques&nbsp;&raquo;.',
+'texte_en_cours_validation_forum' => 'Encament&aacute;moste que opines usando los foros que tien xun&iacute;os.',
+'texte_enrichir_mise_a_jour' => 'Pues arriquecer la paxinaci&oacute;n del testu utilizando los &laquo;atayos tipogr&aacute;ficos&raquo;.',
 'texte_fichier_authent' => '<b>&iquest;Ti&eacute;n SPIP que crear los ficheros especiales <tt>.htpasswd</tt>
   y <tt>.htpasswd-admin</tt> na carpeta @dossier@?</b><p />
   Estes ficheros pueden sirvite pa torgar l\'accesu, tanto de los autores
@@ -1013,129 +1013,129 @@ requier m&aacute;s potencia del sirvidor.',
   Si nun vas utilizalo, puedes dexar esta opci&oacute;n
  col so valor predetermin&aacute;u (nun crear
  esos ficheros).',
-'texte_informations_personnelles_1' => '<NEW>Le syst&egrave;me va maintenant vous cr&eacute;er un acc&egrave;s personnalis&eacute; au site.',
-'texte_informations_personnelles_2' => '<NEW>(Note : s\'il s\'agit d\'une r&eacute;installation, et que votre acc&egrave;s marche toujours, vous pouvez',
-'texte_introductif_article' => '<NEW>(Texte introductif de l\'article.)',
-'texte_jeu_caractere' => '<NEW>Il est conseill&eacute; d\'employer, sur votre site, l\'alphabet universel (<tt>utf-8</tt>)&nbsp;: celui-ci permet l\'affichage de textes dans toutes les langues, et ne pose plus de probl&egrave;mes de compatibilit&eacute; avec les navigateurs modernes.',
-'texte_jeu_caractere_2' => '<NEW>Attention : ce r&eacute;glage ne provoque pas la conversion des textes d&eacute;j&agrave; enregistr&eacute;s dans la base de donn&eacute;es.',
-'texte_jeu_caractere_3' => '<NEW>Votre site est actuellement install&eacute; dans le jeu de caract&egrave;res&nbsp;:',
-'texte_jeu_caractere_4' => '<NEW>Si cela ne correspond pas &agrave; la r&eacute;alit&eacute; de vos donn&eacute;es (suite, par exemple, &agrave; une restauration de base de donn&eacute;es), ou si <em>vous d&eacute;marrez ce site</em> et souhaitez partir sur un autre jeu de caract&egrave;res, veuillez indiquer ce dernier ici&nbsp;:',
-'texte_jeu_caractere_conversion' => '<NEW>Note&nbsp;: vous pouvez d&eacute;cider de convertir une fois pour toutes l\'ensemble des textes de votre site (articles, br&egrave;ves, forums, etc.) vers l\'alphabet <tt>utf-8</tt>, en vous rendant sur <a href="@url@">la page de conversion vers l\'utf-8</a>.',
-'texte_lien_hypertexte' => '<NEW>(Si votre message se r&eacute;f&egrave;re &agrave; un article publi&eacute; sur le Web, ou &agrave; une page fournissant plus d\'informations, veuillez indiquer ci-apr&egrave;s le titre de la page et son adresse URL.)',
-'texte_liens_sites_syndiques' => '<NEW>Les liens issus des sites syndiqu&eacute;s peuvent
-			&ecirc;tre bloqu&eacute;s a priori&nbsp;; le r&eacute;glage
-			ci-dessous indique le r&eacute;glage par d&eacute;faut des
-			sites syndiqu&eacute;s apr&egrave;s leur cr&eacute;ation. Il
-			est ensuite possible, de toutes fa&ccedil;ons, de
-			d&eacute;bloquer chaque lien individuellement, ou de
-			choisir, site par site, de bloquer les liens &agrave; venir
-			de tel ou tel site.',
-'texte_login_ldap_1' => '<NEW>(Laisser vide pour un acc&egrave;s anonyme, ou entrer le chemin complet, par exemple &laquo;&nbsp;<tt>uid=dupont, ou=users, dc=mon-domaine, dc=com</tt>&nbsp;&raquo;.)',
-'texte_login_precaution' => '<NEW>Attention&nbsp;! Ceci est le login sous lequel vous &ecirc;tes connect&eacute; actuellement.
-	Utilisez ce formulaire avec pr&eacute;caution...',
-'texte_message_edit' => '<NEW>Attention&nbsp;: ce message peut &ecirc;tre modifi&eacute; par tous les administrateurs du site, et est visible par tous les r&eacute;dacteurs. N\'utilisez les annonces que pour exposer des &eacute;v&eacute;nements importants de la vie du site.',
-'texte_messagerie_agenda' => '<NEW>Une messagerie permet aux r&#233;dacteurs du site de communiquer entre eux directement dans l&#8217;espace priv&#233; du site. Elle est associ&#233;e &#224; un agenda.',
-'texte_messages_publics' => '<NEW>Messages publics de l\'article :',
-'texte_mise_a_niveau_base_1' => '<NEW>Vous venez de mettre &agrave; jour les fichiers SPIP.
-	Il faut maintenant mettre &agrave; niveau la base de donn&eacute;es
-	du site.',
-'texte_modifier_article' => '<NEW>Modifier l\'article :',
-'texte_moteur_recherche_active' => '<NEW><b>Le moteur de recherche est activ&eacute;.</b> Utilisez cette commande
-		si vous souhaitez proc&eacute;der &agrave; une r&eacute;indexation rapide (apr&egrave;s restauration
-		d\'une sauvegarde par exemple). Notez que les documents modifi&eacute;s de
-		fa&ccedil;on normale (depuis l\'interface SPIP) sont automatiquement
-		r&eacute;index&eacute;s&nbsp;: cette commande n\'est donc utile que de fa&ccedil;on exceptionnelle.',
-'texte_moteur_recherche_non_active' => '<NEW>Le moteur de recherche n\'est pas activ&eacute;.',
-'texte_mots_cles' => '<NEW>Les mots-cl&eacute;s permettent de cr&eacute;er des liens th&eacute;matiques entre vos articles
-		ind&eacute;pendamment de leur placement dans des rubriques. Vous pouvez ainsi
-		enrichir la navigation de votre site, voire utiliser ces propri&eacute;t&eacute;s
-		pour personnaliser la pr&eacute;sentation des articles dans vos squelettes.',
-'texte_mots_cles_dans_forum' => '<NEW>Souhaitez-vous permettre l\'utilisation de mots-cl&eacute;s s&eacute;lectionnables par les visiteurs dans les forums du site public&nbsp;? (Attention&nbsp;: cette option est relativement complexe &agrave; utiliser correctement.)',
-'texte_multilinguisme' => '<NEW>Si vous souhaitez g&eacute;rer des articles en plusieurs langues, avec une navigation complexe, vous pouvez ajouter un menu de s&eacute;lection de langue sur les articles et/ou sur les rubriques, en fonction de l\'organisation de votre site.',
-'texte_multilinguisme_trad' => '<NEW>Vous pouvez &eacute;galement activer un syst&egrave;me de gestion de liens entre les diff&eacute;rentes traductions d\'un article.',
-'texte_non_compresse' => '<NEW><i>non compress&eacute;</i> (votre serveur ne supportant pas cette fonctionnalit&eacute;)',
-'texte_non_fonction_referencement' => '<NEW>Vous pouvez pr&eacute;f&eacute;rer ne pas utiliser cette fonction automatique, et indiquer vous-m&ecirc;me les &eacute;l&eacute;ments concernant ce site...',
+'texte_informations_personnelles_1' => 'Agora el sistema va create un accesu personaliz&aacute;u al sitiu.',
+'texte_informations_personnelles_2' => '(Nota: si esto ye una reinstalaci&oacute;n, y el to accesu siempre funciona, pues',
+'texte_introductif_article' => '(Testu d\'introducci&oacute;n de l\'art&iacute;culu.)',
+'texte_jeu_caractere' => 'Encami&eacute;ntase emplegar, pal to sitiu, l\'alfabetu universal (<tt>utf-8</tt>): esti permite amosar los testos en toes les lling&uuml;es, y ya nun da problemes de compatibilid&aacute; colos &ntilde;avegadores modernos.',
+'texte_jeu_caractere_2' => 'Atenci&oacute;n: esti axuste nun provoca la conversi&oacute;n de los testos que ya tean grabaos na base de datos.',
+'texte_jeu_caractere_3' => 'Esti sitiu ta instal&aacute;u actualmente col xuegu de carauteres:',
+'texte_jeu_caractere_4' => 'Si esto nun concasa cola realid&aacute; de los datos (siguir, por exemplu, tres d\'una restauraci&oacute;n de la base de datos), o si <em>tas arrancando esti sitiu</em> y quies entamar con otru xuegu de carauteres, conse&ntilde;a esti darr&eacute;u:',
+'texte_jeu_caractere_conversion' => 'Nota: pues querer convertir d\'una vez por toes el conxuntu de testos d\'esti sitiu (art&iacute;culos, breves, foros, etc.) a l\'alfabetu <tt>utf-8</tt>, entrando na <a href="@url@">p&aacute;xina de conversi&oacute;n a l\'utf-8</a>.',
+'texte_lien_hypertexte' => '(Si el to mensaxe refierse a un art&iacute;culu espubliz&aacute;u na Web, o a una p&aacute;xina que ufre m&aacute;s informaci&oacute;n, indica de sigu&iacute;o el t&iacute;tulu de la p&aacute;xina y les se&ntilde;es URL.)',
+'texte_liens_sites_syndiques' => 'Los enllaces surd&iacute;os de los sitios sindicaos
+   puen bloquiase a priori; l\'axuste de
+   m&aacute;s embaxo indica l\'axuste por omisi&oacute;n de
+   los sitios sindicaos tres de crease. Llueu
+   ye posible, sicas&iacute;, desbloquiar cada
+   enllaz individualmente, o escoyer, sitiu
+   por sitiu, si bloquiar los enllaces que
+   vengan de tal o cual sitiu.',
+'texte_login_ldap_1' => '(Dexar vac&iacute;o pa un accesu an&oacute;nimu, o conse&ntilde;ar el cam&iacute;n ensembre, por exemplu &laquo;<tt>uid=dupont, ou=users, dc=mio-dominiu, dc=com</tt>&nbsp;&raquo;.)',
+'texte_login_precaution' => '&iexcl;Atenci&oacute;n! Esti ye l\'usuariu col que tas coneutau actualmente.
+ Utiliza esti formulariu con procuru...',
+'texte_message_edit' => 'Atenci&oacute;n: esti mensaxe pue camudase por tolos alministradores del sitiu, y ye visible pa tolos redactores. Nun uses les anuncies m&aacute;s que pa amosar les activid&aacute;es importantes pa la vida del sitiu.',
+'texte_messagerie_agenda' => 'Una mensaxer&iacute;a permite-yos a los redactores del sitiu comunicase direutamente ente ellos nel espaciu privau del sitiu. La mensaxer&iacute;a va asociada con una axenda.',
+'texte_messages_publics' => 'Mensaxes p&uacute;blicos de l\'art&iacute;culu:',
+'texte_mise_a_niveau_base_1' => 'Tas acabante de poner al d&iacute;a los archivos de SPIP.
+ Agora fai falta actualizar la base de datos
+ del sitiu.',
+'texte_modifier_article' => 'Iguar l\'art&iacute;culu:',
+'texte_moteur_recherche_active' => '<b>El motor de restolar ta activ&aacute;u.</b> Utiliza esta orde
+  si quies entamar una reindexaci&oacute;n r&aacute;pida (tres la restauraci&oacute;n d\'una
+  copia de segurid&aacute; por exemplu). Atalanta que los documentos modificaos
+  de mou normal (dende la interfaz SPIP) reindexense autom&aacute;ticamente:
+  esta orde, poro, nun ye afayadiza sinon de mou esceicional.',
+'texte_moteur_recherche_non_active' => 'El motor de restolar nun ta activ&aacute;u.',
+'texte_mots_cles' => 'Les pallabres-clave permiten crear enllaces tem&aacute;ticos ente art&iacute;culos
+  independientemente del so allugamientu nes estayes. D\'esti mou pues
+  arriquecer la &ntilde;avegacion pol sitiu, y utilizar estes propied&aacute;es
+  pa personalizar la presentaci&oacute;n de los art&iacute;culos nes tos cadarmes.',
+'texte_mots_cles_dans_forum' => '&iquest;Qui&eacute;s permitir l\'usu de pallabres-clave seleicionables polos visitantes nos foros del sitiu p&uacute;blicu? (Atenci&oacute;n: esta opci&oacute;n ye relativamente abegoso utilizala correutamente.)',
+'texte_multilinguisme' => 'Si qui&eacute;s xuestionar art&iacute;culos en delles lling&uuml;es, con una &ntilde;avegaci&oacute;n complexa, pues amestar un men&uacute; de seleici&oacute;n de llingua nos articulos y/o nes estayes, al aldu de la organizaci&oacute;n del sitiu.',
+'texte_multilinguisme_trad' => 'Igualmente pues activar un sistema de xesti&oacute;n de enllaces ente les distintes traducciones d\'un art&iacute;culu.',
+'texte_non_compresse' => '<i>non comprim&iacute;u</i> (el to sirvidor nun soporta esta carauter&iacute;stica)',
+'texte_non_fonction_referencement' => 'Seique prefieras nun usar esta funci&oacute;n autom&aacute;tica, y remanar t&uacute; mesmu los elementos tocantes a esti sitiu...',
 'texte_nouveau_message' => 'Mensaxe nuevu',
 'texte_nouveau_mot' => 'Pallabra nueva',
 'texte_nouvelle_version_spip_1' => 'Vienes d\'instalar una versi&oacute;n nueva de SPIP.',
 'texte_nouvelle_version_spip_2' => 'Esta nueva versi&oacute;n necesita una actualizaci&oacute;n m&aacute;s completa que la de vezu. Si yes el webmaster del sitiu, has d\'esborrar l\'archivu @connect@ y reentamar la instalaci&oacute;n pa actualizar los tos par&aacute;metros de conex&oacute;n a la base de datos.<p /> (NB.: si escaeciste los tos par&aacute;metros de conex&oacute;n, echa-y una g&uuml;eyada a l\'archivu @connect@ enantes de desanicialu...)',
-'texte_operation_echec' => '<NEW>Retournez &agrave; la page pr&eacute;c&eacute;dente, s&eacute;lectionnez une autre base ou cr&eacute;ez-en une nouvelle. V&eacute;rifiez les informations fournies par votre h&eacute;bergeur.',
-'texte_plus_trois_car' => '<NEW>plus de 3 caract&egrave;res',
-'texte_plusieurs_articles' => '<NEW>Plusieurs auteurs trouv&eacute;s pour "@cherche_auteur@":',
-'texte_port_annuaire' => '<NEW>(La valeur indiqu&eacute;e par d&eacute;faut convient g&eacute;n&eacute;ralement.)',
-'texte_presente_plugin' => '<NEW>Cette page liste les plugins disponibles sur le site. Vous pouvez activer les plugins n&eacute;cessaires en cochant la case correspondante.',
-'texte_proposer_publication' => '<NEW>Lorsque votre article est termin&eacute;,<br /> vous pouvez proposer sa publication.',
-'texte_proxy' => '<NEW>Dans certains cas (intranet, r&eacute;seaux prot&eacute;g&eacute;s), les sites distants (documentation de SPIP, sites syndiqu&eacute;s, etc.) ne sont accessibles qu\'&agrave; travers un <i>proxy HTTP</i>. Le cas &eacute;ch&eacute;ant, indiquez ci-dessous son adresse, sous la forme @proxy_en_cours@. En g&eacute;n&eacute;ral, vous laisserez cette case vide.',
-'texte_publication_articles_post_dates' => '<NEW>Quel comportement SPIP doit-il adopter face aux articles dont la
-		date de publication a &eacute;t&eacute; fix&eacute;e &agrave; une
-		&eacute;ch&eacute;ance future&nbsp;?',
-'texte_rappel_selection_champs' => '<NEW>[N\'oubliez pas de s&eacute;lectionner correctement ce champ.]',
-'texte_recalcul_page' => '<NEW>Si vous voulez
-recalculer une seule page, passez plut&ocirc;t par l\'espace public et utilisez-y le bouton &laquo; recalculer &raquo;.',
-'texte_recapitiule_liste_documents' => '<NEW>Cette page r&eacute;capitule la liste des documents que vous avez plac&eacute;s dans les rubriques. Pour modifier les informations de chaque document, suivez le lien vers la page de sa rubrique.',
-'texte_recuperer_base' => '<NEW>R&eacute;parer la base de donn&eacute;es',
-'texte_reference_mais_redirige' => '<NEW>article r&eacute;f&eacute;renc&eacute; dans votre site SPIP, mais redirig&eacute; vers une autre URL.',
-'texte_referencement_automatique' => '<NEW><b>R&eacute;f&eacute;rencement automatis&eacute; d\'un site</b><br />Vous pouvez r&eacute;f&eacute;rencer rapidement un site Web en indiquant ci-dessous l\'adresse URL d&eacute;sir&eacute;e, ou l\'adresse de son fichier de syndication. SPIP va r&eacute;cup&eacute;rer automatiquement les informations concernant ce site (titre, description...).',
-'texte_referencement_automatique_verifier' => '<NEW>Veuillez v&eacute;rifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.',
-'texte_requetes_echouent' => '<NEW><b>Lorsque certaines requ&ecirc;tes SQL &eacute;chouent
-  syst&eacute;matiquement et sans raison apparente, il est possible
-  que ce soit &agrave; cause de la base de donn&eacute;es
-  elle-m&ecirc;me.</b><p />
-  Votre serveur SQL dispose d\'une facult&eacute; de r&eacute;paration de ses
-  tables lorsqu\'elles ont &eacute;t&eacute; endommag&eacute;es par
-  accident. Vous pouvez ici tenter cette r&eacute;paration&nbsp;; en
-  cas d\'&eacute;chec, conservez une copie de l\'affichage, qui contient
-  peut-&ecirc;tre des indices de ce qui ne va pas...<p />
-  Si le probl&egrave;me persiste, prenez contact avec votre
-  h&eacute;bergeur.<p />',
+'texte_operation_echec' => 'Torna a la p&aacute;xina precedente, seleiciona otra base o crea una nueva. Compreba la informaci&oacute;n ufrida pol to agospiamientu web.',
+'texte_plus_trois_car' => 'm&aacute;s de 3 carauteres',
+'texte_plusieurs_articles' => 'Alcontr&aacute;ronse dellos autores pa "@cherche_auteur@":',
+'texte_port_annuaire' => '(El valor indic&aacute;u por omisi&oacute;n convi&eacute;n polo xeneral.)',
+'texte_presente_plugin' => 'Esta p&aacute;xina llista los plugins disponibles nel sitiu. Pues activar los plugins necesarios marcando el cuadru correspondiente.',
+'texte_proposer_publication' => 'Cuando tea termin&aacute;u l\'art&iacute;culu,<br /> pues proponelu pa espublizar.',
+'texte_proxy' => 'En ciertos casos (intranet, redes protex&iacute;es), los sitios esternos (documentaci&oacute;n de SPIP, sitios sindicaos, etc.) nun son accesibles m&aacute;s que al travi&eacute;s d\'un <i>proxy HTTP</i>. Si ye\'l casu, conse&ntilde;a embaxo les se&ntilde;es, na forma @proxy_en_cours@. En xeneral, esti cuadru d&eacute;xase vac&iacute;u.',
+'texte_publication_articles_post_dates' => '&iquest;C&oacute;mo tien que comportase SPIP colos art&iacute;culos nos que la
+  fecha d\'espublizamientu ta conse&ntilde;ada pa otru
+  momentu futuru?',
+'texte_rappel_selection_champs' => '[Nun escaezas seleicionar correutamente esti campu.]',
+'texte_recalcul_page' => 'Si quies
+recalcular una sola p&aacute;xina, pasa meyor pel espaciu p&uacute;blicu y calca nel bot&oacute;n &laquo;recalcular&raquo;.',
+'texte_recapitiule_liste_documents' => 'Esta p&aacute;xina recapitula la llista de documentos que tienes allug&aacute;os nes estayes. Pa iguar la informaci&oacute;n de ca&uacute;n de los documentos, sigui l\'enllaz a la p&aacute;xina de la so estaya.',
+'texte_recuperer_base' => 'Iguar la base de datos',
+'texte_reference_mais_redirige' => 'art&iacute;culu referenci&aacute;u nel to sitiu SPIP, pero redirix&iacute;u a otra URL.',
+'texte_referencement_automatique' => '<b>Referenciamientu automatiz&aacute;u d\'un sitiu</b><br />Pues referenciar r&aacute;pidamente un sitiu Web conse&ntilde;ando embaxo les se&ntilde;es URL dese&aacute;es, o les se&ntilde;es del so archivu de sindicaci&oacute;n. SPIP va recuperar autom&aacute;ticamente la informaci&oacute;n tocante a esti sitiu (t&iacute;tulu, descripci&oacute;n...).',
+'texte_referencement_automatique_verifier' => 'Has de verificar la informaci&oacute;n ufrida por <tt>@url@</tt> enantes de grabar.',
+'texte_requetes_echouent' => '<b>Cuando ciertes consultes SQL fallen
+  sistem&aacute;ticamente y ensin raz&oacute;n aparente, ye
+  posible que sea por cuenta de la mesma base
+  de datos.</b><p />
+  El sirvidor SQL ti&eacute;n la posibilid&aacute; d\'iguar les sos
+  tables cuando estes tan da&ntilde;&aacute;es por
+  accidente. Equ&iacute; pues tentar esta reparaci&oacute;n; en
+  casu de fallu, guarda una copia del mensaxe, que tendr&aacute;,
+  seique, indices de lo que nun funciona...<p />
+  Si el problema persistiere, ponte en contautu col to
+  agospiador.<p />',
 'texte_restaurer_base' => 'Restaurar el conten&iacute;u d\'una copia de segurid&aacute; de la base',
-'texte_restaurer_sauvegarde' => '<NEW>Cette option vous permet de restaurer une sauvegarde pr&eacute;c&eacute;demment
-		effectu&eacute;e de la base. A cet effet, le fichier contenant la sauvegarde doit avoir &eacute;t&eacute;
-		plac&eacute; dans le r&eacute;pertoire @dossier@.
-		Soyez prudent avec cette fonctionnalit&eacute;&nbsp;: <b>les modifications, pertes &eacute;ventuelles, sont
-		irr&eacute;versibles.</b>',
-'texte_sauvegarde' => '<NEW>Sauvegarder le contenu de la base',
-'texte_sauvegarde_base' => '<NEW>Sauvegarder la base',
-'texte_sauvegarde_compressee' => '<NEW>La sauvegarde sera faite dans le fichier non compress&eacute; @fichier@.',
-'texte_selection_langue_principale' => '<NEW>Vous pouvez s&eacute;lectionner ci-dessous la &laquo;&nbsp;langue principale&nbsp;&raquo; du site. Ce choix ne vous oblige - heureusement&nbsp;! - pas &agrave; &eacute;crire vos articles dans la langue s&eacute;lectionn&eacute;e, mais permet de d&eacute;terminer&nbsp;:
-	<ul><li> le format par d&eacute;faut des dates sur le site public&nbsp;;</li>
-	<li> la nature du moteur typographique que SPIP doit utiliser pour le rendu des textes&nbsp;;</li>
-	<li> la langue utilis&eacute;e dans les formulaires du site public&nbsp;;</li>
-	<li> la langue pr&eacute;sent&eacute;e par d&eacute;faut dans l\'espace priv&eacute;.</li></ul>',
-'texte_signification' => '<NEW>Les barres fonc&eacute;es repr&eacute;sentent les entr&eacute;es cumul&eacute;es (total des sous-rubriques), les barres claires le nombre de visites pour chaque rubrique.',
-'texte_sous_titre' => '<NEW>Sous-titre',
+'texte_restaurer_sauvegarde' => 'Esta opci&oacute;n te permite restaurar una copia de segurid&aacute; de la base
+  fecha anteriormente. Pa facer esto, l\'archivu que conti&eacute;n la copia de segurid&aacute; ti&eacute;n que tar
+  allug&aacute;u nel direutoriu @dossier@.
+  Ten prudencia con esta funcionalid&aacute;: <b>les modificaciones, y perdes si ye\'l casu, son
+  irreversibles.</b>',
+'texte_sauvegarde' => 'Facer copia de segurid&aacute; del conten&iacute;u de la base',
+'texte_sauvegarde_base' => 'Facer copia de segurid&aacute; de la base',
+'texte_sauvegarde_compressee' => 'La copia de segurid&aacute; va facese nel archivu non comprim&iacute;u @fichier@.',
+'texte_selection_langue_principale' => 'M&aacute;s embaxo pues seleicionar la &laquo;llingua principal&raquo; del sitiu. Esti axuste nun te obliga - &iexcl;por suerte! - a escribir los art&iacute;culos na llingua seleicionada, sinon que permite afitar:
+ <ul><li> el formatu por omisi&oacute;n de les feches pal sitiu p&uacute;blicu;</li>
+ <li> la natura del motor tipogr&aacute;ficu que SPIP tien que utilizar pa representar los testos;</li>
+ <li> la llingua utilizada nos formularios del sitiu p&uacute;blicu;</li>
+ <li> la llingua por omisi&oacute;n pa presentar l\'espaciu priv&aacute;u.</li></ul>',
+'texte_signification' => 'Les barres escures representen les entr&aacute;es acumul&aacute;es (total de les sub-estayes), les barres clares el n&uacute;mberu de visites pa cada estaya.',
+'texte_sous_titre' => 'Subt&iacute;tulu',
 'texte_statistiques_visites' => '(barres prietes:  domingu / curva prieta: evoluci&oacute;n de la media)',
 'texte_statut_attente_validation' => 'esperando validaci&oacute;n',
 'texte_statut_publies' => 'espublizaos en llinia',
 'texte_statut_refuses' => 'refug&aacute;os',
-'texte_suppression_fichiers' => '<NEW>Utilisez cette commande afin de supprimer tous les fichiers pr&eacute;sents
-dans le cache SPIP. Cela permet par exemple de forcer un recalcul de toutes les pages si vous
-avez fait des modifications importantes de graphisme ou de structure du site.',
-'texte_sur_titre' => '<NEW>Sur-titre',
+'texte_suppression_fichiers' => 'Utilza esta orde pa desaniciar tolos archivos presentes
+na cach&eacute; de SPIP. Esto permite por exemplu forzar un rec&aacute;lculu de toes les p&aacute;xines si
+vienes de facer camb&eacute;os importantes nel grafismu o na estructura del sitiu.',
+'texte_sur_titre' => 'Antet&iacute;tulu',
 'texte_syndication' => 'Ye posible recuperar automaticamente, cuando un sitiu web lo permite,
   la llista de les noved&aacute;es. Para esto, hai que activar la sindicaci&oacute;n.
   <blockquote><i>Dellos agospiadores web desactiven esta funci&oacute;n;
   si ye\'l casu, nun vas poder usar la sindicaci&oacute;n de conten&iacute;os
   dende\'l to sitiu web.</i></blockquote>',
 'texte_table_ok' => ': esta tabla ta bi&eacute;n.',
-'texte_tables_indexation_vides' => '<NEW>Les tables d\'indexation du moteur sont vides.',
+'texte_tables_indexation_vides' => 'Les tables d\'indexaci&oacute;n del motor tan vac&iacute;es.',
 'texte_tentative_recuperation' => 'Intentu d\'igua',
 'texte_tenter_reparation' => 'Tentar una reparaci&oacute;n de la base de datos',
 'texte_test_proxy' => 'Pa facer una preba d\'esti proxy, conse&ntilde;a equ&iacute; les se&ntilde;es d\'un sitiu Web
     que quieras prebar.',
 'texte_titre_02' => 'T&iacute;tulu:',
-'texte_titre_obligatoire' => '<NEW><b>Titre</b> [Obligatoire]',
-'texte_travail_article' => '<NEW>@nom_auteur_modif@ a travaill&eacute; sur cet article il y a @date_diff@ minutes',
-'texte_travail_collaboratif' => '<NEW>S\'il est fr&eacute;quent que plusieurs r&eacute;dacteurs
-		travaillent sur le m&ecirc;me article, le syst&egrave;me
-		peut afficher les articles r&eacute;cemment &laquo;&nbsp;ouverts&nbsp;&raquo;
-		afin d\'&eacute;viter les modifications simultan&eacute;es.
-		Cette option est d&eacute;sactiv&eacute;e par d&eacute;faut
-		afin d\'&eacute;viter d\'afficher des messages d\'avertissement
-		intempestifs.',
-'texte_trop_resultats_auteurs' => '<NEW>Trop de r&eacute;sultats pour "@cherche_auteur@" ; veuillez affiner la recherche.',
-'texte_type_urls' => '<NEW>Vous pouvez choisir ci-dessous le mode de calcul de l\'adresse des pages.',
-'texte_type_urls_attention' => '<NEW>Attention ce r&eacute;glage ne fonctionnera que si le fichier @htaccess@ est correctement install&eacute; &agrave; la racine du site.',
+'texte_titre_obligatoire' => '<b>T&iacute;tulu</b> [Obligatorio]',
+'texte_travail_article' => '@nom_auteur_modif@ trabay&oacute; nesti art&iacute;culu hai @date_diff@ minutos',
+'texte_travail_collaboratif' => 'Si ye frecuente que dellos redactores
+  trabayen nel mesmu art&iacute;culu, el sistema
+  pue amosar los art&iacute;culos &laquo;abiertos&raquo; recientemente
+  a la fin d\'evitar modificaciones simult&aacute;nees.
+  Esta opci&oacute;n ta desactivada por omisi&oacute;n
+  pa evitar l\'apaici&oacute;n de mensaxes d\'avisu
+  intempestivos.',
+'texte_trop_resultats_auteurs' => 'Abondos resultaos pa "@cherche_auteur@" ; has d\'afinar la gueta.',
+'texte_type_urls' => 'Embaxo pues escoyer el mou de c&aacute;lculu de les se&ntilde;es de les p&aacute;xines.',
+'texte_type_urls_attention' => 'Atenci&oacute;n esti axuste nun funcionar&aacute; m&aacute;s que si l\'archivu @htaccess@ ta correutamente instal&aacute;u na raiz del sitiu.',
 'texte_unpack' => 'descarga de la versi&oacute;n cabera',
 'texte_utilisation_moteur_syndiques' => 'Cuando uses el motor de restolar integr&aacute;u en
   SPIP, puedes facer les guetes nos sitios webs y
@@ -1148,10 +1148,10 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
   referenciaos. Si referencies
   un sitiu web, SPIP va restolar tami&eacute;n ente\'l
   testu d\'esi sitiu web.',
-'texte_utilisation_moteur_syndiques_2' => '<NEW>Cette m&eacute;thode oblige SPIP &agrave; visiter
-				r&eacute;guli&egrave;rement les sites r&eacute;f&eacute;renc&eacute;s,
-				ce qui peut provoquer un l&eacute;ger ralentissement de votre propre
-				site.',
+'texte_utilisation_moteur_syndiques_2' => 'Esti m&eacute;todu obliga a que SPIP visite
+    regularmente los sitios referenciaos,
+    lo que pue provocar una lixera lentit&uacute; del propiu
+    sitiu.',
 'texte_vide' => 'vac&iacute;u',
 'texte_vider_cache' => 'Vaciar la cach&eacute;',
 'titre_admin_effacer' => 'Mantenimientu t&eacute;cnicu',
@@ -1167,7 +1167,7 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_cadre_interieur_rubrique' => 'Dientro de la estaya',
 'titre_cadre_numero_auteur' => 'AUTOR N&Uacute;MBERU',
 'titre_cadre_signature_obligatoire' => '<b>Robla</b> [Obligatoria]<br />',
-'titre_compacter_script_css' => '<NEW>Compactage des scripts et CSS',
+'titre_compacter_script_css' => 'Compautaci&oacute;n de los scripts y CSS',
 'titre_compresser_flux_http' => 'Compresi&oacute;n del fluxu HTTP',
 'titre_config_contenu_notifications' => 'Notificaciones',
 'titre_config_contenu_prive' => 'Nel espaciu priv&aacute;u',
@@ -1227,7 +1227,7 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_page_statistiques_signatures_mois' => 'N&uacute;mberu de robles por mes',
 'titre_page_statistiques_visites' => 'Estad&iacute;stiques de les visites',
 'titre_page_upgrade' => 'Actualizaci&oacute;n de SPIP',
-'titre_publication_articles_post_dates' => '<NEW>Publication des articles post-dat&eacute;s',
+'titre_publication_articles_post_dates' => 'Publicaci&oacute;n d\'art&iacute;culos con fecha posterior',
 'titre_referencement_sites' => 'Referenciaci&oacute;n de sitios y sindicaci&oacute;n',
 'titre_referencer_site' => 'Referenciar el sitiu:',
 'titre_rendez_vous' => 'CITES:',
@@ -1237,13 +1237,13 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_sites_references_rubrique' => 'Los sitios referenciaos na estaya',
 'titre_sites_syndiques' => 'Los sitios sindicaos',
 'titre_sites_tous' => 'Los sitios referenciaos',
-'titre_suivi_petition' => '<NEW>Suivi des p&eacute;titions',
+'titre_suivi_petition' => 'Siguimientu de les solicitudes',
 'titre_syndication' => 'Sindicaci&oacute;n de sitios',
 'titre_type_urls' => 'Tipu de se&ntilde;es URL',
 'tls_ldap' => 'Transport Layer Security (TLS):',
 'tout_dossier_upload' => 'Tou el direutoriu @upload@',
 'trad_article_inexistant' => 'Nun hay deng&uacute;n art&iacute;culu con esi n&uacute;mberu.',
-'trad_article_traduction' => 'Toes les versiones d\'esti art&iacute;culu:',
+'trad_article_traduction' => 'Toles versiones d\'esti art&iacute;culu:',
 'trad_deja_traduit' => 'Fallu: nun ye posible rellacionar esti art&iacute;culu col n&uacute;mberu pid&iacute;u. ',
 'trad_delier' => 'Ya nun enllazar esti art&iacute;culu coles sos traduciones ',
 'trad_lier' => 'Esti art&iacute;culu ye una traduci&oacute;n del art&iacute;culu n&uacute;mberu:',
@@ -1253,8 +1253,8 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'upload_fichier_zip' => 'Archivu ZIP',
 'upload_fichier_zip_texte' => 'L\'archivu que quies instalar ye un archivu Zip.',
 'upload_fichier_zip_texte2' => 'Esti archivu puede ser:',
-'upload_info_mode_document' => '<NEW>D&#233;poser cette image dans le portfolio',
-'upload_info_mode_image' => '<NEW>Retirer cette image du portfolio',
+'upload_info_mode_document' => 'Dexar esta imaxe nel maletu',
+'upload_info_mode_image' => 'Desaniciar esta imaxe del maletu',
 'upload_limit' => 'Esti archivu ye demasiao grande pal sirvidor; el mayor tama&ntilde;u de <i>subida</i> autorizao ye de @max@.',
 'upload_zip_conserver' => 'Conservar l’archivu tres de la estraici&oacute;n',
 'upload_zip_decompacter' => 'descomprim&iacute;u y ca&uacute;n de los elementos que contien instalarase nel sitiu. Los archivos que van instalase nel sitiu son:',
