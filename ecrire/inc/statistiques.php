@@ -531,7 +531,7 @@ function statistiques_par_mois($entrees, $script){
 			$y = annee($key);
 			$m = mois($key);
 			$href = generer_url_ecrire('calendrier', "type=mois&annee=$y&mois=$m&jour=1");
-		} else $href = "$scirpt&amp;date=$key";
+		} else $href = "$script&amp;date=$key";
 
 		$all .= "\n<td style='width: ${largeur}px'><a href='"
 		.  $href
